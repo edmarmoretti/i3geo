@@ -38,10 +38,11 @@ function busca()
 				for (j=0;j<retorno.data.geonames[i].lugares.length; j++)
 				{
 					ins += "<tr><td style='text-align:left'>"
-					ins += retorno.data.geonames[i].lugares[j].nome;
+					var nm = retorno.data.geonames[i].lugares[j].nome;
+					ins += nm;
 					var wkt = retorno.data.geonames[i].lugares[j].limite
 					var gid = retorno.data.geonames[i].lugares[j].gid
-					ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'>zoom</td></tr>"
+					ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'>zoom</td></tr>"
 				}
 			}
 			ins += "</table>"
@@ -89,15 +90,15 @@ function mostraxy(wkt)
 	box.style.left = xyMin[0]+"px"
 	
 }
-function zoom(wkt,layer,gid)
+function zoom(wkt,layer,gid,nm)
 {
-    var adicionaCamada = function(layer,gid)
+    var adicionaCamada = function(layer,gid,nm)
     {
 	 	var s = "&tema="+layer
 	 	s += "&servico=http://mapas.mma.gov.br/webservices/geonameswms.php?gid="+gid+"&";
 	 	s += "&nome=default"
-	 	s += "&proj=EPSG:4291&formato=image/png&nomecamada="+layer
-	 	s += "&suportasld=nao&versao=1.1.0";
+	 	s += "&proj=EPSG:4291&formato=image/png&nomecamada="+nm+" - "+layer
+	 	s += "&suportasld=nao&versao=1.1.0"
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adicionatemawms&g_sid="+g_sid+s;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -128,7 +129,7 @@ function zoom(wkt,layer,gid)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"mudaExtensao",adicionaCamada(layer,gid));
+	cp.call(p,"mudaExtensao",adicionaCamada(layer,gid,nm));
 	
 }
 function sortNumber(a,b)
