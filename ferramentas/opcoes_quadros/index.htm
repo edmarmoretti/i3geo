@@ -1,0 +1,40 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui/build/button/assets/button.css">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body>
+<div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.rebobinaf()" >
+  <input id=botao1 size=10  type=button value="Limpa"/><br>
+</div><br>
+<div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.filmeanimaf();window.parent.janima=0">
+  <input  id=botao2 size=10 type=button value="Roda"/>
+</div>
+	<table class=lista2 width="90%"> 
+		<tr>  
+			<td>Tempo:</td>
+			<td><input  style="cursor:text" size=4 class=digitar type='text' id=tempoanima value='450' /></td>
+		</tr>
+		<tr>	
+			<td>N. de quadros:</td>
+			<td><input  style="cursor:text" size=4 class=digitar type='text' id=nquadros value='' onchange="window.parent.gerafilmef(this.value)"/></td>
+		</tr>
+	</table>
+</body>
+<script type="text/javascript" src="../../pacotes/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/element/element-beta.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/button/button-beta.js"></script>
+<script>
+YAHOO.example.init = function ()
+{
+	function onPushButtonsMarkupReady()
+	{
+		new YAHOO.widget.Button("botao1");
+		new YAHOO.widget.Button("botao2");
+	}
+	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+}()
+</script>
+</html>

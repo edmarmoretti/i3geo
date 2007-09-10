@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Marked J Function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Jmulti {spatstat}"><tr><td>Jmulti {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Marked J Function</h2>
+
+
+<h3>Description</h3>
+
+<p>
+For a marked point pattern, 
+estimate the multitype <i>J</i> function
+summarising dependence between the
+points in subset <code>I</code>
+and those in subset <i>J</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  Jmulti(X, I, J, eps=NULL, r=NULL, breaks=NULL, ..., disjoint=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The observed point pattern, 
+from which an estimate of the multitype distance distribution function
+<i>JIJ(r)</i> will be computed.
+It must be a marked point pattern.
+See under Details.
+</td></tr>
+<tr valign="top"><td><code>I</code></td>
+<td>
+Subset of points of <code>X</code> from which distances are
+measured. 
+</td></tr>
+<tr valign="top"><td><code>J</code></td>
+<td>
+Subset of points in <code>X</code> to which distances are measured.
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+A positive number.
+The pixel resolution of the discrete approximation to Euclidean
+distance (see <code><a href="Jest.html">Jest</a></code>). There is a sensible default.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+numeric vector. The values of the argument <i>r</i>
+at which the distribution function
+<i>JIJ(r)</i> should be evaluated.
+There is a sensible default.
+First-time users are strongly advised not to specify this argument.
+See below for important conditions on <i>r</i>.
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+An alternative to the argument <code>r</code>.
+Not normally invoked by the user. See the <B>Details</B> section.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+<tr valign="top"><td><code>disjoint</code></td>
+<td>
+Optional flag indicating whether
+the subsets <code>I</code> and <code>J</code> are disjoint.
+If missing, this value will be computed by inspecting the
+vectors <code>I</code> and <code>J</code></td></tr>
+</table>
+<p>
+.</p>
+
+<h3>Details</h3>
+
+<p>
+The function <code>Jmulti</code>
+generalises <code><a href="Jest.html">Jest</a></code> (for unmarked point
+patterns) and <code><a href="Jdot.html">Jdot</a></code> and <code><a href="Jcross.html">Jcross</a></code> (for
+multitype point patterns) to arbitrary marked point patterns.
+</p>
+<p>
+Suppose <i>X[I]</i>, <i>X[J]</i> are subsets, possibly
+overlapping, of a marked point process. Define
+</p><p align="center"><i>JIJ(r) = (1 - GIJ(r))/(1 - FJ(r))</i></p><p>
+where <i>FJ(r)</i> is the cumulative distribution function of
+the distance from a fixed location to the nearest point
+of <i>X[J]</i>, and <i>GJ(r)</i>
+is the distribution function of the distance
+from a typical point of  <i>X[I]</i> to the nearest distinct point of
+<i>X[J]</i>. 
+</p>
+<p>
+The argument <code>X</code> must be a point pattern (object of class
+<code>"ppp"</code>) or any data that are acceptable to <code><a href="as.ppp.html">as.ppp</a></code>.
+</p>
+<p>
+The arguments <code>I</code> and <code>J</code> specify two subsets of the
+point pattern. They may be logical vectors of length equal to
+<code>X$n</code>, or integer vectors with entries in the range 1 to
+<code>X$n</code>, etc.
+</p>
+<p>
+It is assumed that <code>X</code> can be treated
+as a realisation of a stationary (spatially homogeneous) 
+random spatial point process in the plane, observed through
+a bounded window.
+The window (which is specified in <code>X</code> as <code>X$window</code>)
+may have arbitrary shape.
+Biases due to edge effects are
+treated in the same manner as in <code><a href="Jest.html">Jest</a></code>.
+</p>
+<p>
+The argument <code>r</code> is the vector of values for the
+distance <i>r</i> at which <i>JIJ(r)</i> should be evaluated. 
+It is also used to determine the breakpoints
+(in the sense of <code><a href="../../graphics/html/hist.html">hist</a></code>)
+for the computation of histograms of distances. The reduced-sample and
+Kaplan-Meier estimators are computed from histogram counts. 
+In the case of the Kaplan-Meier estimator this introduces a discretisation
+error which is controlled by the fineness of the breakpoints.
+</p>
+<p>
+First-time users would be strongly advised not to specify <code>r</code>.
+However, if it is specified, <code>r</code> must satisfy <code>r[1] = 0</code>, 
+and <code>max(r)</code> must be larger than the radius of the largest disc 
+contained in the window. Furthermore, the successive entries of <code>r</code>
+must be finely spaced.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"fv"</code> (see <code><a href="fv.object.html">fv.object</a></code>).
+<br>
+Essentially a data frame containing six numeric columns 
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>r</code></td>
+<td>
+the values of the argument <i>r</i> 
+at which the function <i>JIJ(r)</i> has been  estimated
+</td></tr>
+<tr valign="top"><td><code>rs</code></td>
+<td>
+the ``reduced sample'' or ``border correction''
+estimator of <i>JIJ(r)</i>
+</td></tr>
+<tr valign="top"><td><code>km</code></td>
+<td>
+the spatial Kaplan-Meier estimator of <i>JIJ(r)</i>
+</td></tr>
+<tr valign="top"><td><code>un</code></td>
+<td>
+the uncorrected estimate of <i>JIJ(r)</i>,
+formed by taking the ratio of uncorrected empirical estimators
+of <i>1 - GIJ(r)</i>
+and <i>1 - FJ(r)</i>, see
+<code><a href="Gdot.html">Gdot</a></code> and <code><a href="Fest.html">Fest</a></code>.
+</td></tr>
+<tr valign="top"><td><code>theo</code></td>
+<td>
+the theoretical value of <i>JIJ(r)</i>
+for a marked Poisson process with the same estimated intensity,
+namely 1.
+</td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Van Lieshout, M.N.M. and Baddeley, A.J. (1999)
+Indices of dependence between types in multivariate point patterns.
+<EM>Scandinavian Journal of Statistics</EM> <B>26</B>, 511&ndash;532.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="Jcross.html">Jcross</a></code>,
+<code><a href="Jdot.html">Jdot</a></code>,
+<code><a href="Jest.html">Jest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    data(longleaf)
+     # Longleaf Pine data: marks represent diameter
+    
+    Jm &lt;- Jmulti(longleaf, longleaf$marks &lt;= 15, longleaf$marks &gt;= 25)
+    plot(Jm)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

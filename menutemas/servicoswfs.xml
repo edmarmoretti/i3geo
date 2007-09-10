@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0">
+<channel>
+<title>Web services OGC</title>
+<description>Links para web services OGC</description>
+<link>http://www.mma.gov.br</link>
+<docs></docs>
+<copyright>Ministerio do Meio Ambiente</copyright>
+<language>pt-br</language>
+<webmaster>webmaster@mma.gov.br</webmaster>
+
+<item>
+<category/>
+<title>
+Unidades de conservação federais do Brasil
+</title>
+<description></description>
+<link>
+http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/ucs.map&amp;
+</link>
+<linkwfs>
+http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/ucs.map&amp;
+</linkwfs>
+<pubDate></pubDate>
+<author>
+MMA
+</author>
+</item>
+
+
+</channel>
+</rss>

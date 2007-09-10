@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Multitype Nearest Neighbour Distance Function (i-to-j)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Gcross {spatstat}"><tr><td>Gcross {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Multitype Nearest Neighbour Distance Function (i-to-j)</h2>
+
+
+<h3>Description</h3>
+
+<p>
+For a multitype point pattern, 
+estimate the distribution of the distance
+from a point of type <i>i</i>
+to the nearest point of type <i>j</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Gcross(X, i=1, j=2, r=NULL, breaks=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The observed point pattern, 
+from which an estimate of the cross type distance distribution function
+<i>Gij(r)</i> will be computed.
+It must be a multitype point pattern (a marked point pattern
+whose marks are a factor). See under Details.
+</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+Number or character string identifying the type (mark value)
+of the points in <code>X</code> from which distances are measured.
+</td></tr>
+<tr valign="top"><td><code>j</code></td>
+<td>
+Number or character string identifying the type (mark value)
+of the points in <code>X</code> to which distances are measured.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+Optional. Numeric vector. The values of the argument <i>r</i>
+at which the distribution function
+<i>Gij(r)</i> should be evaluated.
+There is a sensible default.
+First-time users are strongly advised not to specify this argument.
+See below for important conditions on <i>r</i>.
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+An alternative to the argument <code>r</code>.
+Not normally invoked by the user. See the <B>Details</B> section.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function <code>Gcross</code> and its companions
+<code><a href="Gdot.html">Gdot</a></code> and <code><a href="Gmulti.html">Gmulti</a></code>
+are generalisations of the function <code><a href="Gest.html">Gest</a></code>
+to multitype point patterns. 
+</p>
+<p>
+A multitype point pattern is a spatial pattern of
+points classified into a finite number of possible
+``colours'' or ``types''. In the <STRONG>spatstat</STRONG> package,
+a multitype pattern is represented as a single 
+point pattern object in which the points carry marks,
+and the mark value attached to each point
+determines the type of that point.
+</p>
+<p>
+The argument <code>X</code> must be a point pattern (object of class
+<code>"ppp"</code>) or any data that are acceptable to <code><a href="as.ppp.html">as.ppp</a></code>.
+It must be a marked point pattern, and the mark vector
+<code>X$marks</code> must be a factor.
+The arguments <code>i</code> and <code>j</code> will be interpreted as
+levels of the factor <code>X$marks</code>. (Warning: this means that
+an integer value <code>i=3</code> will be interpreted as the 3rd smallest level,
+not the number 3). 
+</p>
+<p>
+The ``cross-type'' (type <i>i</i> to type <i>j</i>)
+nearest neighbour distance distribution function 
+of a multitype point process 
+is the cumulative distribution function <i>Gij(r)</i>
+of the distance from a typical random point of the process with type <i>i</i>
+the nearest point of type <i>j</i>. 
+</p>
+<p>
+An estimate of <i>Gij(r)</i>
+is a useful summary statistic in exploratory data analysis
+of a multitype point pattern.
+If the process of type <i>i</i> points
+were independent of the process of type <i>j</i> points,
+then <i>Gij(r)</i> would equal <i>Fj(r)</i>,
+the empty space function of the type <i>j</i> points.
+For a multitype Poisson point process where the type <i>i</i> points
+have intensity <i>lambda[i]</i>, we have
+</p><p align="center"><i>Gij(r) = 1 - exp( - lambda[j] * pi * r^2)</i></p><p>
+Deviations between the empirical and theoretical <i>Gij</i> curves
+may suggest dependence between the points of types <i>i</i> and <i>j</i>.
+</p>
+<p>
+This algorithm estimates the distribution function <i>Gij(r)</i> 
+from the point pattern <code>X</code>. It assumes that <code>X</code> can be treated
+as a realisation of a stationary (spatially homogeneous) 
+random spatial point process in the plane, observed through
+a bounded window.
+The window (which is specified in <code>X</code> as <code>X$window</code>)
+may have arbitrary shape.
+Biases due to edge effects are
+treated in the same manner as in <code><a href="Gest.html">Gest</a></code>.
+</p>
+<p>
+The argument <code>r</code> is the vector of values for the
+distance <i>r</i> at which <i>Gij(r)</i> should be evaluated. 
+It is also used to determine the breakpoints
+(in the sense of <code><a href="../../graphics/html/hist.html">hist</a></code>)
+for the computation of histograms of distances. The reduced-sample and
+Kaplan-Meier estimators are computed from histogram counts. 
+In the case of the Kaplan-Meier estimator this introduces a discretisation
+error which is controlled by the fineness of the breakpoints.
+</p>
+<p>
+First-time users would be strongly advised not to specify <code>r</code>.
+However, if it is specified, <code>r</code> must satisfy <code>r[1] = 0</code>, 
+and <code>max(r)</code> must be larger than the radius of the largest disc 
+contained in the window. Furthermore, the successive entries of <code>r</code>
+must be finely spaced.
+</p>
+<p>
+The algorithm also returns an estimate of the hazard rate function, 
+<i>lambda(r)</i>, of <i>Gij(r)</i>. 
+This estimate should be used with caution as <i>Gij(r)</i>
+is not necessarily differentiable.
+</p>
+<p>
+The naive empirical distribution of distances from each point of
+the pattern <code>X</code> to the nearest other point of the pattern, 
+is a biased estimate of <i>Gij</i>.
+However this is also returned by the algorithm, as it is sometimes 
+useful in other contexts. Care should be taken not to use the uncorrected
+empirical <i>Gij</i> as if it were an unbiased estimator of
+<i>Gij</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"fv"</code> (see <code><a href="fv.object.html">fv.object</a></code>).
+<br>
+Essentially a data frame containing six numeric columns 
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>r</code></td>
+<td>
+the values of the argument <i>r</i> 
+at which the function <i>Gij(r)</i> has been  estimated
+</td></tr>
+<tr valign="top"><td><code>rs</code></td>
+<td>
+the ``reduced sample'' or ``border correction''
+estimator of <i>Gij(r)</i>
+</td></tr>
+<tr valign="top"><td><code>km</code></td>
+<td>
+the spatial Kaplan-Meier estimator of <i>Gij(r)</i>
+</td></tr>
+<tr valign="top"><td><code>hazard</code></td>
+<td>
+the hazard rate <i>lambda(r)</i>
+of <i>Gij(r)</i> by the spatial Kaplan-Meier method
+</td></tr>
+<tr valign="top"><td><code>raw</code></td>
+<td>
+the uncorrected estimate of <i>Gij(r)</i>,
+i.e. the empirical distribution of the distances from 
+each point of type <i>i</i> to the nearest point of type <i>j</i>
+</td></tr>
+<tr valign="top"><td><code>theo</code></td>
+<td>
+the theoretical value of <i>Gij(r)</i>
+for a marked Poisson process with the same estimated intensity
+(see below).
+</td></tr>
+</table>
+
+<h3>Warnings</h3>
+
+<p>
+The arguments <code>i</code> and <code>j</code> are interpreted as
+levels of the factor <code>X$marks</code>. Beware of the usual
+trap with factors: numerical values are not
+interpreted in the same way as character values. See the first example.
+</p>
+<p>
+The function <i>Gij</i> does not necessarily have a density. 
+</p>
+<p>
+The reduced sample estimator of <i>Gij</i> is pointwise approximately 
+unbiased, but need not be a valid distribution function; it may 
+not be a nondecreasing function of <i>r</i>. Its range is always 
+within <i>[0,1]</i>.
+</p>
+<p>
+The spatial Kaplan-Meier estimator of <i>Gij</i>
+is always nondecreasing
+but its maximum value may be less than <i>1</i>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Cressie, N.A.C. <EM>Statistics for spatial data</EM>.
+John Wiley and Sons, 1991.
+</p>
+<p>
+Diggle, P.J. <EM>Statistical analysis of spatial point patterns</EM>.
+Academic Press, 1983.
+</p>
+<p>
+Diggle, P. J. (1986).
+Displaced amacrine cells in the retina of a
+rabbit : analysis of a bivariate spatial point pattern. 
+<EM>J. Neurosci. Meth.</EM> <B>18</B>, 115&ndash;125.
+</p>
+<p>
+Harkness, R.D and Isham, V. (1983)
+A bivariate spatial point pattern of ants' nests.
+<EM>Applied Statistics</EM> <B>32</B>, 293&ndash;303
+</p>
+<p>
+Lotwick, H. W. and Silverman, B. W. (1982).
+Methods for analysing spatial processes of several types of points.
+<EM>J. Royal Statist. Soc. Ser. B</EM> <B>44</B>, 406&ndash;413.
+</p>
+<p>
+Ripley, B.D. <EM>Statistical inference for spatial processes</EM>.
+Cambridge University Press, 1988.
+</p>
+<p>
+Stoyan, D, Kendall, W.S. and Mecke, J.
+<EM>Stochastic geometry and its applications</EM>.
+2nd edition. Springer Verlag, 1995.
+</p>
+<p>
+Van Lieshout, M.N.M. and Baddeley, A.J. (1999)
+Indices of dependence between types in multivariate point patterns.
+<EM>Scandinavian Journal of Statistics</EM> <B>26</B>, 511&ndash;532.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="Gdot.html">Gdot</a></code>,
+<code><a href="Gest.html">Gest</a></code>,
+<code><a href="Gmulti.html">Gmulti</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    data(betacells)
+     # cat retina data
+    G01 &lt;- Gcross(betacells, "off", "on") 
+    plot(G01)
+
+    # empty space function of `on' points
+    ## Not run: 
+       F1 &lt;- Fest(betacells[betacells == "on"], r = G01$r, eps=10.0)
+       lines(F1$r, F1$km, lty=3)
+    
+## End(Not run)
+
+    # synthetic example    
+    pp &lt;- runifpoispp(50)
+    pp &lt;- pp %mark% factor(sample(0:1, pp$n, replace=TRUE))
+    G &lt;- Gcross(pp, "0", "1")   # note: "0" not 0
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

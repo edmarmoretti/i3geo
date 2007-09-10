@@ -1,0 +1,134 @@
+CPAINT changelog
+
+//---- v2.0.3 (Released Feburary 8, 2006) --------------------------
+- PHP: nixed potential security hole with invalid response types
+  (Thanks to James Bercegay)
+
+//---- v2.0.2 (Released January 20, 2006) --------------------------
+- JS: check HTTP response code and throw an error if request was 
+  not accepted by server. (thanks gloomyandy)
+- JS: allowing the underscore in node names.
+- JS: added support for the passing of arrays and objects to the 
+  backend.
+- JS: added X-Powered-By request header.
+- JS: node names, attribute names and -values from backend are now
+  expected to be valid ISO-8859-1.
+- JS: fixed wrong initialization of the data property to int zero in
+  class cpaint_result_object.
+- JS: removed unneccessary setter() methods from internal classes
+  to reduce size.
+- JS: added debugging level cp.set_debug(-1) to suppress errors.
+- JS: fixed type conversion issue where non-empty, pure whitespace
+  strings where interpreted as numbers.
+- JS: fixed problem with callback being called twice.
+	(thanks to Lance Rushing)
+- JS: fixed problem with URLs with existing GET parameters.
+	(thanks to Nelson Antunes)
+- JS / PHP: added support for JSON as response type.
+- JS / PHP: added support for E4X as response type.
+- PHP: added cpaint::unregister()
+- PHP: added cpaint::get_response_type();
+- PHP: removed a bug in JSON library that prevented the generation of valid JSON
+  when including a leading zero character.
+- PHP: Removed unneccessary unescaping of parameters in proxy script.
+- PHP: added support for array and object parameters from JavaScript (JSON!).
+- PHP: added X-Powered-By response header.
+- PHP: removed encoding of node names, attribute names and attribute 
+  values to UTF-8 if possible. those values must now be valid 
+  ISO-8859-1.
+- PHP: removed output buffer to make it possible to include backend 
+  and frontend in the same file.
+- PHP: fixed error output (a function was called...) when no 
+  parameters where sent to CPAINT indicating a function call, thus
+  making it possible to include backend and frontend in the same file
+  (thanks S. Alexandre M. Lemaire)
+- PHP: added backend debugger code to main source tree & documentation.
+- PHP: secured proxy utility (see documentation).
+- PHP: added backend configuration file (for proxy security and future use)
+- ASP: removed from distribution to focus on PHP and other ports.
+  
+//---- v2.0.1 (Released September 5, 2005) --------------------------
+- JS: added the returning of plain-text response when using XML|OBJECT
+  response type as second parameter to user-defined callback function
+  (thanks Gunther)
+- JS: added cpaint.capable property to determine AJAX-compatible 
+  browsers
+- JS: cleaned up CPAINT parameters when not using CPAINT API w/ proxy
+- PHP: fixed callability of object methods (thanks Markus Wolf)
+- PHP: fixed HTTP authentication in proxy file
+- ASP: improved security regarding incoming function arguments
+
+//---- v2.0 (Released August 20, 2005) ------------------------------
+- completely rewrote the JavaScript frontend.
+  - 100% OOP approach.
+  - completely configurable through setter methods.
+  - support for syncronized calls (SJAX?) ;-).
+  - automatic XML parsing into JavaScript document structure if 
+    response_type='object'.
+  - support for arbitrary character sets, including non-printable 
+    characters.
+  - automatic detection and conversion of numeric data into 
+    integers / floats.
+  - unified use of call() for local and remote targets.
+  - can now use frontend to retrieve static files or backend 
+    functions not implemented with CPAINT
+  - use of a single (persistent) connection for multiple calls.
+  - XML to JavaScript parser is able to parse any XML structure now.
+  - support for XML attributes.
+  - added find_item_by_type() to cpaint_result_object.
+  - added get_attribute(), set_attribute() to cpaint_result_object.
+  - improved debugging, added debuglevels 1, 2. see set_debug()
+
+- completely rewrote the PHP and ASP backends.
+  - 100% OOP approach.
+  - protection against remote code-execution.
+  - support for object methods as callable functions.
+  - nested XML support through composite pattern.
+  - arbitrary XML structure creation support.
+  - support for arbitrary character sets.
+  - replaced remote code-execution blacklisting approach of v1.3-SP 
+    with whitelisting through cpaint.register().
+  - changed XML name convention. Attributes and tagnames are send 
+    as-is, not in uppercase.
+
+- improved readability of the ASP and PHP proxy utilities.
+  - fixed GET requests.
+  - proxy now uses attributenames identical to the CPAINT backend 
+    itself whenever possible.
+  - added support for target ports other than 80.
+  - added support for Basic Authentication.
+  - completely redesigned and rewritten documentation!
+
+//---- v1.3-SP2 (Released August 16, 2005) --------------------------
+- improved the remote-code execution fix.
+
+//---- v1.3-SP (Released August 15, 2005) ---------------------------
+- fixed a remote code-execution vulnerability on the backend by 
+  adding a blacklist test on the function name passed by the 
+  frontend.
+
+//---- v1.3 (Released July 10, 2005) --------------------------------
+- rewrote cpaint_parse_ajax_xml() to be able to parse arbitrary XML.
+- added bugfix from v1.01 to cpaint_get_remote_file() as well.
+
+//---- v1.2 (Released June 20, 2005) --------------------------------
+- added method cpaint_parse_ajax_xml() to the JavaScript frontend for 
+  primitive XML to JavaScript transformation of response data.
+
+//---- v1.01 (Released June 16, 2005) -------------------------------
+- bugfix regarding Unicode character encoding in cpaint_call().
+
+//---- v1.0 (Released June 13, 2005) --------------------------------
+- added support for XML/DOM document object returns.
+- added support for XML on the backend.
+- added proxy files for accessing remote functions & data.
+- greatly improved documentation & examples.
+- code stablized
+- development effort moved to SourceForge.Net
+
+//---- Pre-1.0 Releases and Dates -----------------------------------
+- v0.7 - released June 8, 2005
+- v0.5 & 0.6 - released June 6, 2005
+- v0.4 - released June 3, 2005
+- v0.2 & 0.3 - released June 2, 2005
+- v0.1 - released May 31, 2005 (first release)

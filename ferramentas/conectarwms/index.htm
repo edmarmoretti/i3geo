@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<title></title>
+</head>
+<body>
+<div id=fundo >
+	<div class="guias">
+		<div class=guia id=guia1 >&nbsp;Servi&ccedil;os&nbsp;</div>
+		<div class=guia id=guia2 >&nbsp;Metadados&nbsp;</div>
+		<div class=guia id=guia3 >&nbsp;Temas&nbsp;</div>
+	</div>
+	<span id=geral >
+		<div class=guiaobj id="guia1obj" style="left:0px;top:0px;text-align:left">
+			<div id=men1 style="top:5px;left:0px;">
+				<a href="../../ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank >Veja como criar web services no ARCIMS</a>
+				<br><a href="../../ajuda/ArcGIS9.x.html" target=blank >Veja como utilizar web services no ARCGIS</a><br>
+			</div>
+			<div id=opc1 style="text-align:left;top:5px;left:0px">
+				Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado do acesso.<br>
+				<input class=digitar id=servico value="" size=60 />
+			</div>
+			<div id=RSSwms style="text-align:left;color:navy;cursor:pointer;"></div>
+		</div>
+		<div class=guiaobj id="guia2obj" style="display:none;left:0px;top:00px">
+			<br><input class=executar type=buttom value="getCapabilities" size=20 onclick="getcapabilities()" /><br>
+			<div id=resultadoget style="display:block;position:relative;top:5px;left:1px">
+			</div>
+		</div>
+		<div class=guiaobj id="guia3obj" style="left:0px;display:none;">
+			<div style="text-align:left;top:0px;left:0px;font-size:10px">
+				<div id=men2 style="top:5px;left:0px;">
+				Após a conex&atilde;o ser estabelecida e surgir a lista de temas, selecione a camada que ser&aacute; adicionada ao mapa.<br>
+				</div>
+				<span id=textoSLD style="display:none;font-size:10px" >
+				<p>Opcionalmente vc pode indicar o tipo de representa&ccedil;&atilde;o que ser&aacute; utilizada.<br>
+				N&atilde;o altere o tipo de representa&ccedil;&atilde;o se a camada escolhida for uma imagem (dados raster) ou se voc&ecirc; tiver d&uacute;vidas sobre ela.<br>
+				<select id=tiporep >
+				<option value="">---</option>
+				<option value="poligonal">poligonal</option>
+				<option value="linear">linear</option>
+				<option value="pontual">pontual</option>
+				</select>
+				</span>
+				 
+			</div>
+			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
+			</div>
+		</div>
+	</span>
+	<div id="aguarde">
+		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
+	</div>
+</div>
+</body>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../../classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+
+<script>
+mensagemAjuda("men1",document.getElementById("men1").innerHTML)
+mensagemAjuda("men2",document.getElementById("men2").innerHTML)
+mensagemOpcao("opc1","")
+g_RSSwms = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php")
+
+if (window.location.host == "localhost")
+{
+	alert("Vc esta em localhost, sera utilizado o xml local");
+	g_RSSwms = new Array("http://localhost/i3geo/menutemas/servicoswms.xml")
+}
+g_locaplic = window.parent.g_locaplic;
+if (document.getElementById("RSSwms"))
+{
+	if (g_RSSwms.length > 0)
+	{
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSSwms.join("|");
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaRSSws",mostraRetornowmsRSS);
+	}
+}
+function mostraRetornowmsRSS(retorno)
+{
+	var reg = /Erro/gi;
+	if (retorno.data.search(reg) != -1)
+	{
+		alert("OOps! Ocorreu um erro\n"+retorno.data);
+		return;
+	}
+	var linhas = retorno.data.split("|")
+	var ins = ""
+	for (i=0;i<linhas.length; i++)
+	{
+		var caso = linhas[i].split("#")
+		if (i > 0)
+		{
+			ins += "<p class=clique onclick=\"registraws('"+caso[2]+"')\" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
+			if (caso[4])
+			{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
+			else {ins += "</p>"}
+		}
+		else
+		{ins += "<p class=clique ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;</p>"}
+	}
+	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
+}
+</script>
+</html>

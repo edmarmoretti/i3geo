@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Square Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for square {spatstat}"><tr><td>square {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Square Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates a square window
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ square(r=1)
+ unit.square()
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>r</code></td>
+<td>
+The side length of the square.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+<code>square</code>
+is a shortcut for creating a window object
+representing the square 
+<i>[0,r] * [0,r]</i>.
+It is equivalent to the command
+<code>owin(c(0,r),c(0,r))</code>.
+</p>
+<p>
+<code>unit.square</code> creates the unit square
+<i>[0,1] * [0,1]</i>.
+It is equivalent to
+<code>square(1)</code> or <code>square()</code> or <code>owin(c(0,1),c(0,1))</code>.
+</p>
+<p>
+These commands are 
+included mainly to improve the readability of some code.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"owin"</code> (see <code><a href="owin.object.html">owin.object</a></code>)
+specifying a window.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="owin.html">owin</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ W &lt;- square(10)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,135 @@
+caption
+{font-size:8px;color:gray;padding-top:0px;border-top:0px solid #FFFFFF;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+span
+{font-family: Verdana, Arial, Helvetica, sans-serif;}
+body
+{background-color:black;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;margin: 0px;z-index:1000;position:relative;}
+A
+{text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
+A:hover 
+{color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
+textarea 
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px; color: #2F4632;background: #ffffff;border-style: solid;border-top-width: 1px;border-right-width: 1px;border-bottom-width: 1px;border-left-width: 1px}
+form 
+{border: 0px solid #FFFFFF;cursor:pointer;font-family: Verdana, Arial, Helvetica, sans-serif;}
+img
+{border: 0px solid #FFFFFF;border-width:0;cursor:pointer}
+table 
+{text-align:center;border: 0px solid #FFFFFF;padding: 0px;margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+div
+{text-align:center;border: 0px solid #FFFFFF;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+i 
+{color:#660000;BACKGROUND-COLOR:#ffffcc;font-family: Verdana, Arial, Helvetica, sans-serif;}
+P 
+{COLOR: #2F4632;text-align: center;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+H1 
+{COLOR: #2F4632;text-align:left;text-decoration: none;font-weight: normal;font-style: normal;font-size: 14px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #004080;}
+td 
+{background-color:white;border: 0px solid gray;padding: 0px;color:#2F4632;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+input
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
+select
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: left;cursor: pointer;}
+#wdocafecha
+{COLOR: white;text-align: left;font-size: 10pt;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.executar
+{cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
+.inputsb
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 0px solid gray;text-align: center;cursor: text;}
+.legendatemas
+{cursor:pointer;text-align:left;background-color:#ffffff;vertical-align: top;border: 0px solid gray;margin:0;padding:0;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.legendatemas td
+{text-align:left;background-color:#ffffff;vertical-align: top;padding: 0;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+.legendatemas input
+{cursor:pointer;vertical-align: top;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.legendadiv 
+{left:0px;top:100px;overflow: auto;position: absolute;float: left;visibility:hidden;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.button
+{visibility:visible;color: #2F4632;background: #ffffff;text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;border-style:outset;border-width:3px;cursor:pointer}
+.filme
+{cursor:pointer;text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8px;color: #000000;background: #ebf8e9;border-style: solid;border-top-width: 1px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;}
+.direcao
+{cursor:pointer;font-size: 0px;text-align: center;color: #ebf8e9;background-color: #d5e9c1;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.pcenter10
+{COLOR: #2F4632;text-align: center;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
+.tablefilme
+{text-align:center;border: 0px solid #FFFFFF;padding: 0px;margin:0px;border-collapse: collapse;background:#ebf8e9;cursor:pointer;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+.tablefilme td
+{background-color:white;border: 0px solid #FFFFFF;padding: 0px;cursor:pointer;border-collapse: collapse;margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.tdclara
+{color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#DFDFDF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+.tdbranca
+{border-collapse: collapse;color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: center;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+.tdtxtleft
+{color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.tdtxtjust
+{color:#2F4632;border: 0px solid #DFDFDF;padding: 0px;background-color:#FFFFFF;margin:0px;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.verdeescuro 
+{color:orange;border:0px solid #6699FF;padding:0px;background-color:#667B67;margin:0px;text-align: left;font-size: 8px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.verdeclaro
+{padding: 0px;background-color:#d5e9c1;margin:0px;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
+.verdemedio
+{padding: 0px;background-color:#d5e9c1;margin:0px;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+.aplicar
+{visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
+.digitar
+{border: 0px solid gray;border-bottom:1px solid gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.legendaTema
+{font-size:10px;text-align:left;}
+#corpoMapa,#corpoMapaL,#corpoMapaO,#corpoMapaN,#corpoMapaS
+{position:absolute;left:0px;top:0px;z-index:0;}
+#div_d
+{position:absolute;left:0px;top:0px;z-index:0;}
+#executa
+{visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;}
+#imgh
+{z-index:1000;}
+#ferramentas1
+{display:block;}
+#ferramentas2
+{display:none;}
+#ferramentas3
+{display:none;}
+#ferramentas
+{vertical-align:top;font-family: Verdana, Arial, Helvetica, sans-serif;text-align: center;background-color:white;z-index:1000;position:relative;}
+#ferramentas input
+{font-size: 10px;color: #2F4632;border-style: solid;border-top-width: 1px;border-right-width: 2px;border-bottom-width: 2px;border-left-width: 1px;cursor:pointer;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
+#ferramentas table
+{padding: 0px;border-spacing:0px;width:100%;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
+#ferramentas table td
+{border: 0px solid #ebf8e9;font-size: 12px;background-color:white;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
+#guia1,#guia2,#guia3,#guia4,#guia5,#guia6,#guia7,#guia8,#guia9
+{display:inline;background-color:rgb(230,230,230);position:relative;left:0px;top:0px;border: 0px solid black;font-size: 10px;z-index:1000;}
+#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades,
+{overflow:auto;background-color:white;text-align:left;}
+#ferr1
+{background-color:rgb(255,255,255);}
+#janelaMenu
+{opacity:.80;background-color: #667B67;position: absolute;top: 0px;width: 150px;height: 200px;border: 0px solid #667B67;text-align:center;z-index:0;}
+#janelaMenu div
+{position: relative;width: 150px;z-index:10;cursor:pointer;background-color:orange;color:white;}
+#areaRealce
+{opacity:.20;background-color: white;position: absolute;top: 0px;width: 50px;height: 50px;border: 0px solid #667B67;z-index:1000;}
+#tip
+{border: 0px solid yellow; opacity:.90;}
+.clique
+{cursor:pointer;color:blue;}
+.guias 
+{background-color:rgb(245,245,245);cursor:pointer;position:relative;text-align: left;top:8px;left:8px;padding:0px;margin:0px;}
+.guia
+{display:inline;background-color:rgb(230,230,230);color:rgb(150,150,150);position:relative;left:0px;top:0px;border: 0px solid white;font-size: 12px;z-index:1050;padding:0;margin-right:3px;border-left:1px solid rgb(230,230,230);border-top:1px solid rgb(230,230,230);border-right:1px solid rgb(230,230,230);}
+#guia1
+{background-color:rgb(255,255,255);color:black;}
+.guiaobj
+{text-align:left;text-decoration:none;border: 0px solid #ffffff;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;display:block;font-size:8px;padding:1;font-weight:normal;top:0px;width:95%;}
+#mostradistancia
+{z-index:2600;color:red;background-color:white;font-family: Verdana, Arial, Helvetica, sans-serif;font-size:10px;}
+div.yui-b p {margin:0 0 .5em 0;color:#999;}
+div.yui-b p strong {font-weight:bold;color:#000;}
+div.yui-b p em {color:#000;}            
+h1 {padding:.25em .5em;background-color:#ccc;}
+#menus {visibility: visible;margin:0 0 10px 0;}
+#vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
+#vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
+#vertMaisZoom {cursor:pointer;position:relative;top:2px; width:18px; background:url(../imagens/zoom-plus-mini.png) no-repeat;height:18px; }
+#vertMenosZoom {cursor:pointer;position:relative;top:-1px; width:18px; background:url(../imagens/zoom-minus-mini.png) no-repeat;height:18px; }

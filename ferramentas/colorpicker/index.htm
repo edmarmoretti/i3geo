@@ -1,0 +1,175 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui/build/colorpicker/css/screen.css">
+<script type="text/javascript" src="../../pacotes/yui/build/colorpicker/js/ddcolorposter.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/yahoo/yahoo-min.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/colorpicker/js/color.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/event/event-min.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/dom/dom-min.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/animation/animation-min.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/dragdrop/dragdrop-min.js" ></script>
+<script type="text/javascript" src="../../pacotes/yui/build/slider/slider-min.js" ></script>
+<script type="text/javascript">
+
+var hue;
+var picker;
+//var gLogger;
+var dd1, dd2;
+var r, g, b;
+
+function init() {
+	if (typeof(ygLogger) != "undefined")
+	ygLogger.init(document.getElementById("logDiv"));
+	pickerInit();
+	ddcolorposter.fillcolorbox("colorfield1", "colorbox1") //PREFILL "colorbox1" with hex value from "colorfield1"
+	ddcolorposter.fillcolorbox("colorfield2", "colorbox2") //PREFILL "colorbox1" with hex value from "colorfield1"
+}
+
+// Picker ---------------------------------------------------------
+
+function pickerInit() {
+	hue = YAHOO.widget.Slider.getVertSlider("hueBg", "hueThumb", 0, 180);
+	hue.onChange = function(newVal) { hueUpdate(newVal); };
+	picker = YAHOO.widget.Slider.getSliderRegion("pickerDiv", "selector",
+	0, 180, 0, 180);
+	picker.onChange = function(newX, newY) { pickerUpdate(newX, newY); };
+	hueUpdate();
+	dd1 = new YAHOO.util.DD("pickerPanel");
+	dd1.setHandleElId("pickerHandle");
+	dd1.endDrag = function(e) {
+		// picker.thumb.resetConstraints();
+		// hue.thumb.resetConstraints();
+	};
+}
+
+executeonload(init);
+
+function pickerUpdate(newX, newY) {
+	pickerSwatchUpdate();
+}
+
+
+function hueUpdate(newVal) {
+	var h = (180 - hue.getValue()) / 180;
+	if (h == 1) { h = 0; }
+	var a = YAHOO.util.Color.hsv2rgb( h, 1, 1);
+	document.getElementById("pickerDiv").style.backgroundColor =
+	"rgb(" + a[0] + ", " + a[1] + ", " + a[2] + ")";
+	pickerSwatchUpdate();
+}
+
+function pickerSwatchUpdate() {
+	var h = (180 - hue.getValue());
+	if (h == 180) { h = 0; }
+	document.getElementById("pickerhval").value = (h*2);
+	h = h / 180;
+	var s = picker.getXValue() / 180;
+	document.getElementById("pickersval").value = Math.round(s * 100);
+	var v = (180 - picker.getYValue()) / 180;
+	document.getElementById("pickervval").value = Math.round(v * 100);
+	var a = YAHOO.util.Color.hsv2rgb( h, s, v );
+	document.getElementById("pickerSwatch").style.backgroundColor =
+	"rgb(" + a[0] + ", " + a[1] + ", " + a[2] + ")";
+	document.getElementById("pickerrval").value = a[0];
+	document.getElementById("pickergval").value = a[1];
+	document.getElementById("pickerbval").value = a[2];
+	var hexvalue = document.getElementById("pickerhexval").value =
+	YAHOO.util.Color.rgb2hex(a[0], a[1], a[2]);
+	ddcolorposter.initialize(a[0], a[1], a[2], hexvalue)
+}
+
+</script>
+
+
+<!--[if gte IE 5.5000]>
+<script type="text/javascript">
+
+function correctPNG() // correctly handle PNG transparency in Win IE 5.5 or higher.
+   {
+   for(var i=0; i<document.images.length; i++)
+      {
+	  var img = document.images[i]
+	  var imgName = img.src.toUpperCase()
+	  if (imgName.substring(imgName.length-3, imgName.length) == "PNG")
+	     {
+		 var imgID = (img.id) ? "id='" + img.id + "' " : ""
+		 var imgClass = (img.className) ? "class='" + img.className + "' " : ""
+		 var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' "
+		 var imgStyle = "display:inline-block;" + img.style.cssText
+		 if (img.align == "left") imgStyle = "float:left;" + imgStyle
+		 if (img.align == "right") imgStyle = "float:right;" + imgStyle
+		 if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle
+		 var strNewHTML = "<span " + imgID + imgClass + imgTitle
+		 + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";"
+	     + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
+		 + "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>"
+		 img.outerHTML = strNewHTML
+		 i = i-1
+	     }
+      }
+   }
+
+YAHOO.util.Event.addListener(window, "load", correctPNG);
+
+</script>
+<![endif]-->
+</head>
+<body>
+        <div id="pickerPanel" class="dragPanel">
+            <div id="pickerHandle"></div>
+            <div id="pickerDiv">
+              <img id="pickerbg" src="../../pacotes/yui/build/colorpicker/img/pickerbg.png" alt="">
+              <div id="selector"><img src="../../pacotes/yui/build/colorpicker/img/select.gif"></div>
+            </div>
+             <div id="hueBg">
+              <div id="hueThumb"><img src="../../pacotes/yui/build/colorpicker/img/hline.png"></div>
+            </div>
+            <div id="pickervaldiv">
+                <form name="pickerform" onsubmit="return pickerUpdate()">
+                <br />
+                R <input name="pickerrval" id="pickerrval" type="text" value="0" size="3" maxlength="3" />
+                H <input name="pickerhval" id="pickerhval" type="text" value="0" size="3" maxlength="3" />
+                <br />
+                G <input name="pickergval" id="pickergval" type="text" value="0" size="3" maxlength="3" />
+                S <input name="pickergsal" id="pickersval" type="text" value="0" size="3" maxlength="3" />
+                <br />
+                B <input name="pickerbval" id="pickerbval" type="text" value="0" size="3" maxlength="3" />
+                V <input name="pickervval" id="pickervval" type="text" value="0" size="3" maxlength="3" />
+                <br />
+                <br />
+                # <input name="pickerhexval" id="pickerhexval" type="text" value="0" size="6" maxlength="6" />
+                <br />
+                </form>
+                <input class=executar onclick="aplicarCor()" type="buttom" value="aplicar" size="10" />
+                <br />
+             </div>
+            <div id="pickerSwatch">&nbsp;</div>
+        </div>
+		</div>
+    </div>
+  </div>
+<form style="display:none">
+# <input type="text" id="colorfield1" onFocus="ddcolorposter.echocolor(this, 'colorbox1')"> <span id="colorbox1" class="colorbox">____</span> <br />
+# <input type="text" id="colorfield2" onFocus="ddcolorposter.echocolor(this, 'colorbox2')"> <span id="colorbox2" class="colorbox">____</span>
+</form>
+</body>
+<script>
+function aplicarCor()
+{
+	navm = false; // IE
+	navn = false; // netscape
+	var app = navigator.appName.substring(0,1);
+	if (app=='N') navn=true; else navm=true;
+	var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
+	var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
+	var ncor = document.getElementById("pickerrval").value+","+document.getElementById("pickergval").value+","+document.getElementById("pickerbval").value
+	doc.getElementById(elemento).value = ncor;
+	window.parent.$i("wdoca2").style.display = "none";
+	window.parent.$i("wdocai2").src = "";
+	window.parent.YAHOO.util.Event.removeListener(window.parent.YAHOO.janelaDoca2.xp.panel.close, "click");
+	window.parent.YAHOO.janelaDoca2.xp.panel.destroy();
+}
+</script>
+</html>

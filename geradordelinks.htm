@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>Download de dados geográficos</title>
+<meta name="description" content="Mapa interativo do MMA"> 
+<meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" type="text/css" href="css/geral.css">
+<link rel="stylesheet" type="text/css" href="classesjs/jsobjects/documentation.css">
+<style>
+P 
+{COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+</style>
+<script src="classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://mapas.mma.gov.br/i3geo/pacotes/openlayers/OpenLayers.js"></script>
+</head>
+<body style="background-color:white;text-align:left;left:0px;">
+<div id=banner style=position:relative;top:0px;left:0px;text-align:left >
+<img style=left:0px; src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" >
+</div>
+<div style=width:550px;position:relative;top:0px;left:10px >
+<p>Aqui você pode gerar links para abrir o I3Geo de forma personalizada. 
+Os links podem ser incluídos em qualquer página WEB, sendo possível 
+definir quais os temas serão mostrados e qual a extensão geográfica do mapa.</p>
+</div>
+<div style=width:550px;left:10px;text-align:left; >Link (copie e cole ou clique para testar):
+<a href="" id=link target=blanck ></a>
+</div>
+<div style='height:230px;width:550px;top:10px;left:10px;text-align:left;border:1px gray solid;' >
+	<div style=margin:10px; >
+		<img style=position:absolute;top:0px;left:505px; src=imagens/question.gif onclick="javascript:document.getElementById('ajuda1').style.display='block'" />
+		<p><b>Escolha os temas que serão incluídos no mapa (opcional):</b></p>
+		<div id=grupos style=text-align:left; ></div>
+		<div id=subgrupos style=top:5px;text-align:left; ></div>
+		<div id=temas style=top:10px;text-align:left; ></div>
+		<div style=position:absolute;top:35px;left:270px;text-align:left; >
+			Temas que serão adicionados ao mapa:
+			<div id=temasa style='width:250px;border:1px gray solid;height:155px;top:10px;left:0px;text-align:left;overflow:auto' ></div>
+		</div>
+	</div>
+</div>
+<div id=ajuda1 style='display:none;width:550px;top:15px;left:10px;text-align:left;border:1px gray solid;' >
+<p style=margin:10px;>Os temas estão organizados em grupos e sub-grupos. Ao escolher um grupo e/ou sub-grupo, será mostrada 
+a lista de temas disponíveis. Clique em um tema para acrescentar ao link do mapa. Os temas escolhidos são listados 
+à direita. Após escolhido um tema, o mesmo pode ser removido clicando-se no ícone de exclusão. A ordem dos temas na lista 
+corresponde à ordem dos temas no mapa. Esse ordenamento pode ser alterado, subindo ou descendo um tema. Os temas 
+que estiverem marcados, aparecerão visíveis no mapa (ligados)</p>
+</div>
+<div style='width:550px;top:15px;left:10px;text-align:left;border:1px gray solid;' >
+	<div style=margin:10px;>
+		<p><b>Se vc quiser, o mapa poderá ser aberto mostrando pontos, digite abaixo as coordenadas 
+dos pontos em décimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b></p>
+		<p>Coordenadas dos pontos:</p>
+		<input type=text size=80 id=pontos value="" onchange="crialink()" />
+		<p>Nome do tema para a legenda do mapa:</p>
+		<input type=text size=80 id=nometemapontos value="" onchange="crialink()" />&nbsp;
+	</div>
+</div>
+<div style='width:550px;top:20px;left:10px;text-align:left;border:1px gray solid;' >
+	<div style=margin:10px;>
+		<p><b>Caso existam perfis definidos na configuração do menu de temas, vc pode restringir a lista 
+		de temas do menu de adição de temas do I3Geo (opcional)</b></p>
+		<p>Perfil:</p>
+		<input onchange="crialink()" type=text size=80 id=perfil value="" />
+	</div>
+</div>
+<div style='width:550px;top:25px;left:10px;text-align:left;border:1px gray solid;' >
+	<div style=margin:10px;text-align:left; >
+		<p><b>Escolha a interface para o mapa (opcional)</b></p>
+		<select id=interface onchange="crialink()">
+			<option value="" >geral</option>
+			<option value="simples1.htm">simples 1</option>
+			<option value="simples2.htm">simples 2</option>
+			<option value="minima.htm">mínima</option>
+		</select>
+	</div>
+</div>
+<div style='width:550px;top:35px;left:10px;text-align:left;border:1px gray solid;' >
+	<div style=margin:10px;text-align:left; >
+		<p><b>Utilize o mapa para definir as coordenadas geográficas do mapa, ou digite os valores desejados (opcional):</b></p>
+		<div id=mapa1 style="width:250px;height:250px;border:1px solid blue;display:none"></div>
+		<div style=position:absolute;top:40px;left:270px;text-align:left; >
+			Coordenadas geográficas em décimos de grau:<br><br>
+			Longitude mínima:<br><input onchange="crialink()" type=text size=10 value="" id=xmin /><br>
+			Longitude máxima:<br><input onchange="crialink()" type=text size=10 value="" id=xmax /><br>
+			Latitude mínima:<br><input onchange="crialink()" type=text size=10 value="" id=ymin /><br>
+			Latitude máxima:<br><input onchange="crialink()" type=text size=10 value="" id=ymax /><br><br>
+			<input class=executar type=button value="capturar" onclick="capturageo()" />
+		</div>
+	</div>
+</div>
+</body>
+<script>
+navm = false
+navn = false
+var app = navigator.appName.substring(0,1);
+if (app=='N') navn=true; else navm=true;
+seltema("estadosl")
+crialink()
+pegagrupos()
+initOL()
+function crialink()
+{
+	var ins = "http://"+window.location.host+"/i3geo/ms_criamapa.php?";
+	var iguias = document.getElementById("temasa").getElementsByTagName("input");
+	var tsl = new Array(); //temas ligados
+	var tsd = new Array(); //temas
+	for (i=0;i<iguias.length; i++)
+	{
+		if (iguias[i].type == "checkbox")
+		{
+			tsd.push(iguias[i].value);
+			if (iguias[i].checked == true)
+			{tsl.push(iguias[i].value);}
+		}
+	}
+	if(tsd.length > 0)
+	{ins += "&temasa="+tsd.join(" ")}
+	if(tsl.length > 0)
+	{ins += "&layers="+tsl.join(" ")}
+	if(document.getElementById("pontos").value != "")
+	{
+		ins += "&pontos="+document.getElementById("pontos").value
+		ins += "&nometemapontos="+document.getElementById("nometemapontos").value
+	}
+	if(document.getElementById("perfil").value != "")
+	{
+		ins += "&perfil="+document.getElementById("perfil").value
+	}
+	if(document.getElementById("interface").value != "")
+	{
+		ins += "&interface="+document.getElementById("interface").value
+	}
+	if(document.getElementById("xmin").value != "")
+	{
+		ins += "&mapext="+document.getElementById("xmin").value+" "
+		ins += document.getElementById("ymin").value+" "
+		ins += document.getElementById("xmax").value+" "
+		ins += document.getElementById("ymax").value
+	}
+	document.getElementById("link").href = ins
+	document.getElementById("link").innerHTML = ins
+}
+function pegagrupos()
+{
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''";
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadegrupos",combogrupos);
+}
+function combogrupos(retorno)
+{
+	obGrupos = retorno.data
+	var ins = "<select style=width:250px onchange='combosubgrupos(this.value)' ><option value='' >Grupos:</option>"
+	for (ig=0;ig<obGrupos.grupos.length; ig++)
+	{
+		if(obGrupos.grupos[ig].nome)
+		ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>"
+	}
+	document.getElementById("grupos").innerHTML = ins+"</select>"
+	combosubgrupos(-1)
+}
+function combosubgrupos(i)
+{
+	var ins = "<select style=width:250px onchange='combotemas("+i+",this.value)' ><option value='' >Sub-grupos:</option>"
+	if (obGrupos.grupos[i])
+	{
+		for (ig=0;ig<obGrupos.grupos[i].subgrupos.length; ig++)
+		{	
+			ins += "<option value="+ig+" >"+obGrupos.grupos[i].subgrupos[ig].nome+"</option>"
+		}
+	}
+	document.getElementById("subgrupos").innerHTML = ins+"</select>"
+	combotemasgrupo(i)
+}
+function combotemasgrupo(i)
+{
+	var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
+	if (obGrupos.grupos[i])
+	{
+		for (ig=0;ig<obGrupos.grupos[i].temasgrupo.length; ig++)
+		{	
+			ins += "<option value="+obGrupos.grupos[i].temasgrupo[ig].tid+" >"+obGrupos.grupos[i].temasgrupo[ig].nome+"</option>"
+		}
+	}
+	document.getElementById("temas").innerHTML = ins+"</select>"
+}
+function combotemas(grupo,sub)
+{
+	var monta = function(retorno)
+	{
+		var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
+		for (ig=0;ig<retorno.data.temas.length; ig++)
+		{
+			ins += "<option value="+retorno.data.temas[ig].tid+" >"+retorno.data.temas[ig].nome+"</option>"
+		}
+		document.getElementById("temas").innerHTML = ins+"</select>"
+	}
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+grupo+"&subgrupo="+sub;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadetemas",monta);	
+}
+function seltema(idtema)
+{
+	var novodiv = document.createElement("div");
+	novodiv.style.textAlign="left"
+	novodiv.id = idtema
+	document.getElementById("temasa").appendChild(novodiv);
+	var novoel = document.createElement("img");
+	novoel.title = "excluir"
+	novoel.onclick = excluir
+	novoel.src = "imagens/x.png"
+	novodiv.appendChild(novoel);
+	var novoel = document.createElement("img");
+	novoel.title = "subir"
+	novoel.src = "imagens/sobe.gif"
+	novoel.onclick = subir
+	novodiv.appendChild(novoel);
+	var novoel = document.createElement("img");
+	novoel.title = "descer"
+	novoel.src = "imagens/desce.gif"
+	novoel.onclick = descer
+	novodiv.appendChild(novoel);
+	var novoel = document.createElement("input");
+	novoel.onclick = crialink
+	novoel.title = "visível/não visível"
+	novoel.type = "checkbox"
+	novoel.style.cursor="pointer"
+	novoel.style.top="3px"
+	novoel.style.position="relative"
+	novoel.style.border="0px"
+	novoel.value=idtema
+	novodiv.appendChild(novoel);
+	var novoel = document.createElement("span");
+	novoel.innerHTML = idtema
+	novodiv.appendChild(novoel);
+	novodiv.appendChild(document.createElement("br"));
+	crialink()
+}
+function descer(e)
+{
+	var pai = pegaElementoPai(e)
+	divpai = pai.parentNode
+	if(pai.nextSibling)
+		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
+	crialink()
+}
+function subir(e)
+{
+	var pai = pegaElementoPai(e)
+	divpai = pai.parentNode
+	divpai.insertBefore(pai,pai.previousSibling)
+	crialink()
+}
+function excluir(e)
+{
+	var pai = pegaElementoPai(e)
+	pai.parentNode.removeChild(pai)
+	crialink()
+}
+function pegaElementoPai(e)
+{
+	var targ
+	if (!e) var e = window.event
+	if (e.target) targ = e.target
+	else if (e.srcElement) targ = e.srcElement
+	if (targ.nodeType == 3) // defeat Safari bug
+   		targ = targ.parentNode
+	var tname
+	tparent=targ.parentNode
+	return(tparent)
+}
+function initOL() 
+{
+	document.getElementById("mapa1").style.display = "block";
+	OL = new OpenLayers.Map('mapa1',{controls:[],numZoomLevels: 13});
+	//
+	//layers
+	//
+	var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'},{isBaseLayer: true} );
+	ol_wms.setVisibility(true);
+	OL.addLayer(ol_wms);
+	var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://wms.jpl.nasa.gov/wms.cgi", {layers: "global_mosaic"},{isBaseLayer: false});
+	jpl_wms.setVisibility(false);
+	OL.addLayer(jpl_wms);
+	var base = new OpenLayers.Layer.WMS( "Cartografia", "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",{layers:'baseraster',transparent:'true',format:'image/png'},{isBaseLayer:false});
+	base.setVisibility(false);
+	OL.addLayer(base);
+	//
+	//zoom e controle de layers
+	//
+	var ls = new OpenLayers.Control.LayerSwitcher()
+	OL.addControl(ls);
+	document.getElementById(ls.id).style.zIndex=2000;
+	OL.setCenter(new OpenLayers.LonLat(-55,-14), 2);
+	var panel = new OpenLayers.Control.NavToolbar();
+	OL.addControl(panel);
+	panel.div.style.left="-4px";
+	panel.div.style.top="-298px";
+	var zb = new OpenLayers.Control.PanZoomBar();
+	OL.addControl(zb);
+	document.getElementById("OpenLayers_Control_PanZoom_pandown").style.display="none"
+	document.getElementById("OpenLayers_Control_PanZoom_panup").style.display="none"
+	document.getElementById("OpenLayers_Control_PanZoom_panleft").style.display="none"
+	document.getElementById("OpenLayers_Control_PanZoom_panright").style.display="none"
+	zb.div.style.left="-8px"
+}
+function capturageo()
+{
+	var b = OL.getExtent();
+	document.getElementById("xmin").value = b.left
+	document.getElementById("xmax").value = b.right
+	document.getElementById("ymin").value = b.bottom
+	document.getElementById("ymax").value = b.top
+	crialink()
+}
+</script>
+</html>

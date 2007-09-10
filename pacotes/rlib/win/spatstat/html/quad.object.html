@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Class of Quadrature Schemes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for quad.object {spatstat}"><tr><td>quad.object {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Class of Quadrature Schemes</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A class <code>"quad"</code> to represent a quadrature scheme.
+</p>
+
+
+<h3>Details</h3>
+
+<p>
+A (finite) quadrature scheme is a list of quadrature points
+<i>u[j]</i> and associated weights <i>w[j]</i>
+which is used to approximate an integral by a finite sum:
+</p><p align="center"><i>integral(f(x) dx) ~= sum( f(u[j]) w[j] )
+</i></p><p>
+Given a point pattern dataset, a <EM>Berman-Turner</EM>
+quadrature scheme is one which includes all these data points,
+as well as a nonzero number of other (``dummy'') points.
+</p>
+<p>
+These quadrature schemes are used to approximate the
+pseudolikelihood of a point process, in the method of
+Baddeley and Turner (2000) (see Berman and Turner (1992)).
+Accuracy and computation time both increase with the number of
+points in the quadrature scheme.
+</p>
+<p>
+An object of class <code>"quad"</code> represents a Berman-Turner
+quadrature scheme. It can be passed as an argument to
+the model-fitting function <code><a href="ppm.html">ppm</a></code>, which
+requires a quadrature scheme.
+</p>
+<p>
+An object of this class contains at least the following elements:
+<table summary="Rd table">
+<tr>
+  <td align="left"><code>data</code>: </td>  <td align="left"> an object of class <code>"ppp"</code> </td>
+</tr>
+<tr>
+  <td align="left"> </td>  <td align="left"> giving the locations (and marks) of the data points.</td>
+</tr>
+<tr>
+  <td align="left"> <code>dummy</code>: </td>  <td align="left"> an object of class <code>"ppp"</code> </td>
+</tr>
+<tr>
+  <td align="left"> </td>  <td align="left"> giving the locations (and marks) of the dummy points.</td>
+</tr>
+<tr>
+  <td align="left"> <code>w</code>: </td>  <td align="left"> vector of nonnegative weights for the quadrature points</td>
+</tr>
+</table>
+<p>
+Users are strongly advised not to manipulate these entries
+directly.
+</p>
+<p>
+The domain of quadrature is specified by <code>dummy$window</code>
+while the observation window (if this needs to be specified
+separately) is taken to be <code>data$window</code>. 
+</p>
+<p>
+The weights vector <code>w</code> may also have an attribute
+<code>attr(w, "zeroes")</code> equivalent to the logical vector
+<code>(w == 0)</code>. If this is absent then all points are known to
+have positive weights.
+</p>
+<p>
+To create an object of class <code>"quad"</code>,
+users would typically call the
+high level function <code><a href="quadscheme.html">quadscheme</a></code>.
+(They are actually
+created by the low level function <code>quad</code>.)
+</p>
+<p>
+Entries are extracted from a <code>"quad"</code> object by the functions
+<code>x.quad</code>,
+<code>y.quad</code>,
+<code>w.quad</code> and
+<code>marks.quad</code>,
+which extract the <i>x</i> coordinates, <i>y</i> coordinates,
+weights, and marks, respectively. The function
+<code>n.quad</code> returns the total number of quadrature points
+(dummy plus data).
+</p>
+<p>
+An object of class <code>"quad"</code> can be converted into an ordinary
+point pattern by the function <code><a href="union.quad.html">union.quad</a></code> which simply
+takes the union of the data and dummy points.
+</p>
+<p>
+Quadrature schemes can be plotted using <code><a href="plot.quad.html">plot.quad</a></code>
+(a method for the generic <code><a href="../../Zelig/html/plot.zelig.html">plot</a></code>).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="quadscheme.html">quadscheme</a></code>,
+<code><a href="ppm.html">ppm</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

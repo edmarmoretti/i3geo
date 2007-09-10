@@ -1,0 +1,62 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME bioma # ok
+  TYPE Polygon
+  STATUS OFF
+  TEMPLATE "none.htm"
+  data "biomas.shp"
+  METADATA
+	ITENS "CD_LEGENDA"
+	ITENSDESC "Nome"
+  	TEMA "Bioma"
+  	CLASSE "SIM"
+      ESCALA "5000000"
+  END
+  TRANSPARENCY 80
+  CLASS
+    Name 'Amazônia'
+    EXPRESSION ('[CD_LEGENDA]'eq 'AMAZÔNIA')
+    COLOR 255 255 204
+    OUTLINECOLOR 50 50 50
+       LABEL
+            FONT "arial"
+            COLOR 0 0 0
+            POSITION auto
+            SIZE 10
+            TYPE truetype
+         END
+
+  END  # CLASS
+  CLASS
+    Name 'Caatinga'
+    EXPRESSION ('[CD_LEGENDA]'eq 'CAATINGA')
+    COLOR 232 220 201
+    OUTLINECOLOR 50 50 50
+  END  # CLASS
+  CLASS
+    Name 'Cerrado'
+    EXPRESSION ('[CD_LEGENDA]'eq 'CERRADO')
+    COLOR 244 214 0
+    OUTLINECOLOR 50 50 50
+  END  # CLASS
+  CLASS
+    Name 'Pantanal'
+    EXPRESSION ('[CD_LEGENDA]'eq 'PANTANAL')
+    COLOR 200 200 241
+    OUTLINECOLOR 50 50 50
+  END  # CLASS
+  CLASS
+    Name 'Pampa'
+    EXPRESSION ('[CD_LEGENDA]'eq 'PAMPA')
+    COLOR 143 189 192
+    OUTLINECOLOR 50 50 50
+  END  # CLASS
+  CLASS
+    Name 'Mata Atlântica'
+    EXPRESSION ('[CD_LEGENDA]'eq 'MATA ATLÂNTICA')
+    COLOR 218 255 216
+    OUTLINECOLOR 50 50 50
+  END  # CLASS				
+END
+END

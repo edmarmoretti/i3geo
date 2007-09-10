@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Class of Fitted Point Process Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for ppm.object {spatstat}"><tr><td>ppm.object {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Class of Fitted Point Process Models</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A class <code>ppm</code> to represent a fitted stochastic model
+for a point process. The output of <code><a href="ppm.html">ppm</a></code>.
+</p>
+
+
+<h3>Details</h3>
+
+<p>
+An object of class <code>ppm</code> represents a stochastic point process
+model that has been fitted to a point pattern dataset.
+Typically it is the output of the model fitter,
+<code><a href="ppm.html">ppm</a></code>.
+</p>
+<p>
+There are methods <code><a href="print.ppm.html">print.ppm</a></code>,
+<code><a href="plot.ppm.html">plot.ppm</a></code>, <code><a href="predict.ppm.html">predict.ppm</a></code>, <code><a href="fitted.ppm.html">fitted.ppm</a></code>
+and <code><a href="coef.ppm.html">coef.ppm</a></code> for the generic functions
+<code><a href="../../stam/html/stam-internal.html">print</a></code>, <code><a href="../../Zelig/html/plot.zelig.html">plot</a></code>, <code><a href="../../VGAM/html/notdocumentedyet.html">predict</a></code>,
+<code><a href="../../VGAM/html/notdocumentedyet.html">fitted</a></code> and <code><a href="../../stats/html/coef.html">coef</a></code> respectively.
+</p>
+<p>
+See also (for example) <code><a href="Strauss.html">Strauss</a></code>
+to understand how to specify 
+a point process model with unknown parameters.
+</p>
+<p>
+Information about the data (to which the model was fitted)
+can be extracted using <code><a href="data.ppm.html">data.ppm</a></code>, <code><a href="dummy.ppm.html">dummy.ppm</a></code>
+and <code><a href="quad.ppm.html">quad.ppm</a></code>.
+</p>
+<p>
+If you really need to get at the internals,
+a <code>ppm</code> object contains at least the following entries:
+<table summary="Rd table">
+<tr>
+  <td align="left"><code>coef</code> </td>  <td align="left">  the fitted regular parameters (as returned by <code>glm</code>) </td>
+</tr>
+<tr>
+  <td align="left"> <code>trend</code> </td>  <td align="left">  the trend formula or <code>NULL</code> </td>
+</tr>
+<tr>
+  <td align="left"> <code>interaction</code> </td>  <td align="left"> the point process interaction family  (an object of class <code>"interact"</code>) or <code>NULL</code> </td>
+</tr>
+<tr>
+  <td align="left"> <code>Q</code> </td>  <td align="left">      the quadrature scheme used </td>
+</tr>
+<tr>
+  <td align="left"> <code>maxlogpl</code> </td>  <td align="left"> the maximised value of log pseudolikelihood </td>
+</tr>
+<tr>
+  <td align="left"> <code>correction</code> </td>  <td align="left">  name of edge correction method used </td>
+</tr>
+</table>
+<p>
+See <code><a href="ppm.html">ppm</a></code> for explanation of these concepts.
+The irregular parameters (e.g. the interaction radius of the
+Strauss process) are encoded in the <code>interaction</code> entry.
+However see the Warnings.
+</p>
+
+
+<h3>Warnings</h3>
+
+<p>
+The internal representation may change in the next few releases
+of the <STRONG>spatstat</STRONG> package.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="coef.ppm.html">coef.ppm</a></code>,
+<code><a href="fitted.ppm.html">fitted.ppm</a></code>,
+<code><a href="print.ppm.html">print.ppm</a></code>,
+<code><a href="predict.ppm.html">predict.ppm</a></code>,
+<code><a href="plot.ppm.html">plot.ppm</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  data(cells)
+  fit &lt;- ppm(cells, ~ x, Strauss(0.1), correction="periodic")
+  fit
+  coef(fit)
+  ## Not run: 
+  pred &lt;- predict(fit)
+  
+## End(Not run)
+  pred &lt;- predict(fit, ngrid=20, type="trend")
+  ## Not run: 
+  plot(fit)
+  
+## End(Not run)  
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,31 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/3dmap.map"
+    CONNECTIONTYPE WMS
+      METADATA
+        "wms_srs"	"EPSG:4291"
+        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+        "wms_name"	"srtmcinza"
+        "nomeoriginal"	"srtmcinza"
+        "wms_formatlist"	"image/png,image/gif,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+        "wms_format"	"image/png"
+        "wms_server_version"	"1.1.1"
+      END
+    NAME "3dtemp"
+    STATUS DEFAULT
+    TYPE RASTER
+    CLASS
+      NAME " "
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 200 50 0
+        OUTLINECOLOR 0 0 0
+        SYMBOL 0
+      END
+    END
+END
+END
+

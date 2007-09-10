@@ -1,0 +1,59 @@
+SYMBOLSET /opt/www/html/i3geo/symbols/simbolos.sym
+FONTSET   "/opt/www/html/i3geo/symbols/fontes.txt"
+
+	LAYER
+		DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+		METADATA
+			"CLASSE"	"SIM"
+			"TEMA"	"Bahia"
+			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+		END
+		NAME "bahia"
+		SIZEUNITS PIXELS
+		STATUS off
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSPARENCY 100
+		TYPE POLYGON
+		UNITS METERS
+		CLASS
+			NAME " "
+			EXPRESSION ('[ESTADO]' = 'BA')
+			STYLE
+				COLOR 200 0 0
+				MAXSIZE 100
+				MINSIZE 1
+				SIZE 1
+				SYMBOL 0
+			END
+		END
+	END
+	LAYER
+		DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+		METADATA
+			"CLASSE"	"SIM"
+			"TEMA"	"Tocantins"
+			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+		END
+		NAME "tocantins"
+		SIZEUNITS PIXELS
+		STATUS off
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSPARENCY 100
+		TYPE POLYGON
+		UNITS METERS
+		CLASS
+			NAME " "
+			EXPRESSION ('[ESTADO]' = 'TO')
+			STYLE
+				COLOR 100 0 0
+				MAXSIZE 100
+				MINSIZE 1
+				SIZE 1
+				SYMBOL 0
+			END
+		END
+	END
+END
+

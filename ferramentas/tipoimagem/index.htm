@@ -1,0 +1,28 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui/build/button/assets/button.css">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body>
+<div id=opc1 style=top:0px;left:0px;text-align:left;width:100%; >
+	Escolha o filtro que ser&aacute; aplicado. Filtros podem tornar o desenho do mapa mais lento.
+	<div style="font-size:12px;" id=opcoes >
+	<input style='cursor:pointer' type=radio name=tipo value=nenhum checked >nenhum<br>
+	<input style='cursor:pointer' type=radio name=tipo value=cinza>tons de cinza<br>
+	<input style='cursor:pointer' type=radio name=tipo value=sepiaclara>s&eacute;pia clara<br>
+	<input style='cursor:pointer' type=radio name=tipo value=sepianormal>s&eacute;pia normal<br><br>
+	<div onclick="aplicar()" style='top:0px;left:-10px;text-align:left;' >
+	<input id=botao1 type="button" size=10 value="Aplicar"  />
+	</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../pacotes/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/element/element-beta.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/button/button-beta.js"></script>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../../classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

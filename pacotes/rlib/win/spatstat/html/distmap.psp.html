@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Distance Map of Line Segment Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for distmap.psp {spatstat}"><tr><td>distmap.psp {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Distance Map of Line Segment Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes the distance from each pixel to the nearest
+line segment in the given line segment pattern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'psp':
+  distmap(X, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+A line segment pattern (object of class <code>"psp"</code>).
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code><a href="as.mask.html">as.mask</a></code>
+to control pixel resolution.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The ``distance map'' of a line segment pattern <i>X</i> is the function
+<i>f</i> whose value <code>f(u)</code> is defined for any two-dimensional
+location <i>u</i> as the shortest distance from <i>u</i> to <i>X</i>.
+</p>
+<p>
+This function computes the distance map of the line segment pattern <code>X</code>
+and returns the distance map as a pixel image. The greyscale value
+at a pixel <i>u</i> equals the distance from <i>u</i> to the nearest
+line segment of the pattern <code>X</code>.
+</p>
+<p>
+Additionally, the return value 
+has two attributes, <code>"index"</code> and <code>"bdry"</code>, which are
+also pixel images. The grey values in <code>"bdry"</code> give the
+distance from each pixel to the bounding rectangle of the image.
+The grey values in <code>"index"</code> are integers identifying which
+line segment of <code>X</code> is closest. 
+</p>
+<p>
+This is a method for the generic function <code><a href="distmap.html">distmap</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A pixel image (object of class <code>"im"</code>) whose greyscale values
+are the values of the distance map.
+The return value has attributes <code>"index"</code> and <code>"bdry"</code>
+which are also pixel images.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="distmap.html">distmap</a></code>,
+<code><a href="distmap.owin.html">distmap.owin</a></code>,
+<code><a href="distmap.ppp.html">distmap.ppp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    a &lt;- psp(runif(20),runif(20),runif(20),runif(20), window=owin())
+    Z &lt;- distmap(a)
+    plot(Z)
+    plot(a, add=TRUE)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

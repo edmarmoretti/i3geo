@@ -1,0 +1,8 @@
+body { background-color: #ffffff }
+p,ul,ol,li,td,th,h1,h2,h3,h4 { font-family: verdana,helvetica,sans-serif }
+p,td,th,li,ul,ol,input,form,body { font-family: verdana,helvetica; font-size: 10pt }
+h1 { color: #446666; font-size: 14pt }
+h2 { color: #446666; font-size: 13pt }
+.SMALL { font-size: 6pt }
+.aplicar {visibility:visible; color: #2F4632; background:rgb(240,240,240);text-align: center; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; border-style:outset; border-width:2px; cursor:pointer; border-color:#cc0000}
+

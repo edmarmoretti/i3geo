@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Coefficients of Fitted Point Process Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for coef.ppm {spatstat}"><tr><td>coef.ppm {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Coefficients of Fitted Point Process Model</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Given a point process model fitted to a point pattern,
+extract the coefficients of the fitted model.
+A method for <code>coef</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'ppm':
+  coef(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+The fitted point process model (an object of class <code>"ppm"</code>)
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is a method for the generic function <code><a href="../../stats/html/coef.html">coef</a></code>.
+</p>
+<p>
+The argument <code>object</code> must be a fitted point process model
+(object of class <code>"ppm"</code>). Such objects are produced by the maximum
+pseudolikelihood fitting algorithm <code><a href="ppm.html">ppm</a></code>).
+</p>
+<p>
+This function extracts the vector of coefficients of the fitted model.
+This is the estimate of the parameter vector
+<i>theta</i> such that the conditional intensity of the model
+is of the form
+</p><p align="center"><i>lambda(u,x) = exp(theta . S(u,x))
+</i></p><p>
+where <i>S(u,x)</i> is a (vector-valued) statistic.
+</p>
+<p>
+For example, if the model <code>object</code> is the uniform Poisson process,
+then <code>coef(object)</code> will yield a single value
+(named <code>"(Intercept)"</code>) which is the logarithm of the
+fitted intensity of the Poisson process.
+</p>
+<p>
+Use <code><a href="print.ppm.html">print.ppm</a></code> to print a more useful
+description of the fitted model.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A vector containing the fitted coefficients.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="print.ppm.html">print.ppm</a></code>,
+<code><a href="ppm.object.html">ppm.object</a></code>,
+<code><a href="ppm.html">ppm</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    data(cells)
+
+    poi &lt;- ppm(cells, ~1, Poisson())
+    coef(poi)
+    # This is the log of the fitted intensity of the Poisson process
+
+    stra &lt;- ppm(cells, ~1, Strauss(r=0.07), rbord=0.07)
+    coef(stra)
+
+    # The two entries "(Intercept)" and "Interaction"
+    # are respectively log(beta) and log(gamma)
+    # in the usual notation for Strauss(beta, gamma, r)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

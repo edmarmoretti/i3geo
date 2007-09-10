@@ -1,0 +1,108 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui/build/button/assets/button.css">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body>
+<div id=fundo style="left:0px">
+	<div class="guias">
+		<div class=guia id=guia1 >&nbsp;Item&nbsp;</div>
+		<div class=guia id=guia2 >&nbsp;Propriedades&nbsp;</div>
+		<div class=guia id=guia3 >&nbsp;Fundo&nbsp;</div>
+		<div class=guia id=guia4 >&nbsp;Outros&nbsp;</div>
+		<div class=guia id=guia5 >&nbsp;Testar&nbsp;</div>
+	</div>
+	<span id=geral style="left:0px">
+		<div id=executar style="width:95%;text-align:center;top:5px;left:0px;">
+			<input size=10 type=button id=botao1 value="Aplicar" />
+		</div>
+		<div id=guia1obj style="width:95%;top:20px;text-align:left;left:5px">
+			<div id=opc1 style=top:0px;left:0px;text-align:left;width:100%; >
+				Escolha o item que ser&aacute; utilizado na inclus&atilde;o dos textos no tema:
+				<div id=listai class=digitar style="width:100%;text-align:left;top:0px;left:0px;height:200px;overflow:auto">
+				</div>
+			</div>
+		</div>
+		<div id=guia2obj style="width:95%;text-align:left;display:none;width:90%;left:0px">
+			<div style="width:95%;text-align:left;top:15px;left:0px" >
+				<table class=lista2 >
+					<tr><td>Fonte:</td><td><span id="listaf"></span></td></tr>
+					<tr><td>Tamanho:</td><td><input class=digitar size=2 type=text value=8 id=tamanho_i /></td></tr>
+					<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou CURVO, nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td><input class=digitar size=4 type=text value=0 id=angulo_i /></td></tr>
+					<tr>
+						<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
+						<td>x <input class=digitar size=2 type=text value=0 id=offsetx_i /> y <input class=digitar size=2 type=text value=0 id=offsety_i /></td>
+					</tr>
+					<tr><td>Cor do texto:</td><td><input class=digitar  size=11 type=text value="0 0 0" id=frente_i /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente_i')" /></td></tr>
+					<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td><input class=digitar size=11 type=text value="" id=mascara_i /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara_i')" /></td></tr>
+					<tr>
+						<td>Posicionamento:</td>
+						<td>
+							<select id=position_i >"
+								<option value="MS_AUTO" >autom&aacute;tico</option>"
+								<option value="MS_UL" >superior esquerdo</option>"
+								<option value="MS_UC" >superior centro</option>"
+								<option value="MS_UR" >superior direito</option>"
+								<option value="MS_CL" >centro esquerdo</option>"
+								<option value="MS_CC" >centro</option>"
+								<option value="MS_CR" >centro direito</option>"
+								<option value="MS_LL" >inferior esquerdo</option>"
+								<option value="MS_LC" >inferior centro</option>"
+								<option value="MS_LR" >inferior direito</option>"
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id=guia3obj style="display:none;width:95%;left:0px">
+			<div style="width:95%;top:15px;left:0px;" >
+				<table class="lista2" >
+					<tr><td>Cor do fundo:</td><td><input class=digitar size=9 type=text value="" id=fundoc_i /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc_i')" /></td></tr>
+					<tr><td>Cor da sombra do fundo:</td><td><input class=digitar size=9 type=text value="" id=sombra_i /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra_i')" /></td></tr>
+					<tr><td>Deslocamento da sombra do fundo:</td><td>x <input class=digitar size=1 type=text value="1" id=sombrax_i /> y <input class=digitar size=1 type=text value="1" id=sombray_i /></td></tr>
+					<tr><td>Cor da sombra:</td><td><input class=digitar size=9 type=text value="" id=frentes_i /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes_i')" /></td></tr>
+					<tr><td>Deslocamento da sombra:</td><td>x <input class=digitar size=1 type=text value="1" id=frentex_i /> y <input class=digitar size=1 type=text value="1" id=frentey_i /></td></tr>
+				</table>
+			</div>
+		</div>
+		<div id=guia4obj style="display:none;width:90%;left:0px">
+			<div style="width:90%;top:15px;left:0px" >
+				<table class="lista2" width="95%">
+					<tr><td>For&ccedil;a colis&otilde;es entre textos?:</td>
+						<td>
+							<select id=force_i >"
+								<option value="0" >n&atilde;o</option>"
+								<option value="1" >sim</option>"
+							</select>
+						</td>
+					</tr>
+					<tr><td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td><td><input class=digitar size=4 type=text value="auto" id=mindistance_i /></td></tr>
+					<tr><td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td><td><input class=digitar size=4 type=text value="auto" id=minfeaturesize_i /></td></tr>
+					<tr><td>O texto pode ultrapassar o mapa?:</td>
+						<td>
+							<select id=partials_i >"
+								<option value="1" >sim</option>"
+								<option value="0" >n&atilde;o</option>"
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id=guia5obj style="display:none;width:95%;left:0px">
+			<div id=teste style="width:90%;top:15px;left:0px;" >
+			</div>
+		</div>
+	</span>
+</div>
+</body>
+<script type="text/javascript" src="../../pacotes/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/element/element-beta.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/button/button-beta.js"></script>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../../classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

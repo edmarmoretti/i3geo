@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: The Soft Core Point Process Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Softcore {spatstat}"><tr><td>Softcore {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>The Soft Core Point Process Model</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates an instance of the Soft Core point process model
+which can then be fitted to point pattern data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  Softcore(kappa)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+The exponent <i>kappa</i> of the Soft Core interaction</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The (stationary)
+Soft Core point process with parameters <i>beta</i> and
+<i>sigma</i> and exponent <i>kappa</i>
+is the pairwise interaction point process in which 
+each point contributes a factor <i>beta</i> to the 
+probability density of the point pattern, and each pair of points
+contributes a factor
+</p><p align="center"><i>exp( - (sigma/d)^(2/kappa) )
+</i></p><p>
+to the density, where <i>d</i> is the distance between the two points.
+</p>
+<p>
+Thus the process has probability density
+</p><p align="center"><i>f(x_1,...,x_n) =
+alpha . beta^n(x) exp( - sum (sigma/||x[i]-x[j]||)^(2/kappa))
+</i></p><p>
+where <i>x[1],...,x[n]</i> represent the 
+points of the pattern, <i>n(x)</i> is the number of points in the
+pattern, <i>alpha</i> is the normalising constant,
+and the sum on the right hand side is
+over all unordered pairs of points of the pattern. 
+</p>
+<p>
+This model describes an ``ordered'' or ``inhibitive'' process,
+with the interpoint interaction decreasing smoothly with distance.
+The strength of interaction is controlled by the
+parameter <i>sigma</i>, a positive real number,
+with larger values corresponding
+to stronger interaction; and by the exponent <i>kappa</i>
+in the range <i>(0,1)</i>, with larger values corresponding to
+weaker interaction.
+If <i>sigma = 0</i>
+the model reduces to the Poisson point process.
+If <i>sigma &gt; 0</i>,
+the process is well-defined only for <i>kappa</i> in <i>(0,1)</i>.
+The limit of the model as <i>kappa -&gt; 0</i> is the
+hard core process with hard core distance <i>h=sigma</i>.
+</p>
+<p>
+The nonstationary Soft Core process is similar except that 
+the contribution of each individual point <i>x[i]</i>
+is a function <i>beta(x[i])</i>
+of location, rather than a constant beta. 
+</p>
+<p>
+The function <code><a href="ppm.html">ppm</a>()</code>, which fits point process models to 
+point pattern data, requires an argument 
+of class <code>"interact"</code> describing the interpoint interaction
+structure of the model to be fitted. 
+The appropriate description of the Soft Core process pairwise interaction is
+yielded by the function <code>Softcore()</code>. See the examples below.
+</p>
+<p>
+Note the only argument is the exponent  <code>kappa</code>.
+When <code>kappa</code> is fixed, the model becomes an exponential family
+with canonical parameters <i>log(beta)</i>
+and </p><p align="center"><i>log(gamma) = (2/kappa) log(sigma)
+</i></p><p>
+The canonical parameters are estimated by <code><a href="ppm.html">ppm</a>()</code>, not fixed in
+<code>Softcore()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"interact"</code>
+describing the interpoint interaction
+structure of the Soft Core process with exponent <i>kappa</i>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Ogata, Y, and Tanemura, M. (1981).
+Estimation of interaction potentials of spatial point patterns
+through the maximum likelihood procedure.
+<EM>Annals of the Institute of Statistical Mathematics</EM>, B
+<B>33</B>, 315&ndash;338.
+</p>
+<p>
+Ogata, Y, and Tanemura, M. (1984).
+Likelihood analysis of spatial point patterns.
+<EM>Journal of the Royal Statistical Society, series B</EM>
+<B>46</B>, 496&ndash;518.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="pairwise.family.html">pairwise.family</a></code>,
+<code><a href="ppm.object.html">ppm.object</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   data(cells) 
+   ppm(cells, ~1, Softcore(kappa=0.5), rbord=0)
+   # fit the stationary Soft Core process to `cells'
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

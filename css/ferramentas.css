@@ -1,0 +1,42 @@
+td input
+{border-bottom:1px solid rgb(156,195,195);border-left:1px solid rgb(156,195,195);border-right:1px solid rgb(156,195,195);border-top:1px solid rgb(156,195,195);font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: navy;text-align:center;}
+body
+{overflow:hidden;font-size: 12px}
+div
+{text-align:left;border: 0px solid #FFFFFF;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;display:block;font-size:12px;padding:0px;font-weight:normal;left:10px;}
+tr
+{background-color:white;border: 0px solid rgb(240,240,240);padding: 0px;margin:0px;}
+td
+{border: 2px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:center;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.lista td
+{border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.lista2 td
+{border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 2px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+select
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: navy;background-color: #FFFFFF;padding: 0;border: 1px solid rgb(240,240,240);text-align: left;cursor: pointer;}
+.digitar
+{border-bottom:1px solid rgb(156,195,195);border-left:1px solid rgb(156,195,195);border-right:1px solid rgb(156,195,195);border-top:1px solid rgb(156,195,195);font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: navy;text-align:center;}
+.executar
+{cursor:pointer;color:rgb(0,0,200);text-align:left;padding-left:5px;background-color:white;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
+#fundo
+{background-color:rgb(255,255,255);overflow:hidden;position:absolute;top:0px;left:0px;}
+.guias 
+{background-color:rgb(255,255,255);cursor:pointer;position:relative;text-align: left;top:8px;left:8px;padding:0px;margin:0px;}
+.guia
+{display:inline;background-color:rgb(230,230,230);color:rgb(150,150,150);position:relative;left:0px;top:0px;border: 0px solid white;font-size: 12px;z-index:1050;padding:0;margin-right:3px;border-left:1px solid rgb(230,230,230);border-top:1px solid rgb(230,230,230);border-right:1px solid rgb(230,230,230);}
+#guia1
+{background-color:rgb(255,255,255);color:orange;}
+.guiaobj
+{text-align:left;text-decoration:none;border: 0px solid #ffffff;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;display:block;font-size:8px;padding:1;font-weight:normal;top:0px;width:95%;}
+#geral
+{position:relative;background-color:white;text-align:center;text-decoration:none;border-top: 2px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:8px;padding:0;font-weight:normal;top:8px;left:0px;overflow:auto;width:100%;}
+#aguarde
+{position:relative;top:10px;left:5px;}
+.aguarde1
+{background-image:URL('../../imagens/aguarde.gif');}
+.alerta
+{font-weight:bold;color:red;top:5px;left:0px;padding:5px;}
+.erro
+{color:red;padding:5px;}
+.destaca
+{left:0px;bottom:10px;padding:5px;}

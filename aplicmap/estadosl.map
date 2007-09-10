@@ -1,0 +1,34 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME estadosl # ok
+  TYPE line
+  STATUS DEFAULT
+  DATA "/opt/www/html/i3geo/aplicmap/dados/estados.shp"
+  TEMPLATE "estados.htm"
+  METADATA
+	  ITENS "ESTADO"
+	  TIP "ESTADO"
+	  ITENSDESC "Estado"
+	  ITEMIMG "ESTADO"
+	  IMGLOC "imagens/bandeiras"
+  	  TEMA "Limite Estadual"
+	  ESCALA "250000"
+  	  CLASSE "SIM"
+  END
+  TRANSPARENCY 100
+  CLASS
+	  NAME " "
+	  STYLE
+		  SYMBOL linha
+		  SIZE 2
+          COLOR 255 255 0
+          OUTLINECOLOR -1 -1 -1
+	  END
+	  STYLE
+          COLOR 0 0 0
+          OUTLINECOLOR -1 -1 -1
+	  END
+  END  # CLASS
+END  # LAYER
+END

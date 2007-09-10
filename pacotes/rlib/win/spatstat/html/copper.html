@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Berman-Huntington points and lines data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for copper {spatstat}"><tr><td>copper {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Berman-Huntington points and lines data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+These data come from an intensive geological survey of
+a 70 x 158 km region in central Queensland, Australia.
+They consist of 67 points representing copper ore deposits,
+and 146 line segments representing geological `lineaments'.
+Lineaments are linear features, visible on a satellite image,
+that are believed to consist largely of geological faults (Berman, 1986,
+p. 55).
+It would be of great interest to predict the occurrence of copper deposits
+from the lineament pattern, since the latter can easily be observed on
+satellite images. 
+</p>
+<p>
+These data were introduced and analysed by Berman (1986).
+They have also been studied by Berman and Turner (1992),
+Baddeley and Turner (2000, 2005), Foxall and Baddeley (2002)
+and Baddeley et al (2005).
+</p>
+<p>
+Many analyses have been performed on the southern half of the data only.
+This subset is also provided.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(copper)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+<code>copper</code> is a list with the following entries:
+<dl>
+<dt>points</dt><dd>a point pattern (object of class <code>"ppp"</code>)
+representing the full point pattern of copper deposits.
+See <code><a href="ppp.object.html">ppp.object</a></code> for details of the format.
+</dd>
+<dt>lines</dt><dd>a line segment pattern (object of class <code>"psp"</code>)
+representing the lineaments in the full dataset.
+See <code><a href="psp.object.html">psp.object</a></code> for details of the format.
+given as a data frame with 4 columns (x1, y1, x2, y2).
+</dd>
+<dt>SouthWindow</dt><dd>the window delineating the southern half of
+the study region. An object of class <code>"owin"</code>.
+</dd>
+<dt>SouthPoints</dt><dd>the point pattern of copper deposits in the
+southern half of the study region. An object of class
+<code>"ppp"</code>.
+</dd>
+<dt>SouthLines</dt><dd>the line segment pattern of the lineaments in the
+southern half of the study region. An object of class <code>"psp"</code>.
+</dd>
+</dl>
+
+<h3>Source</h3>
+
+<p>
+Dr J. Huntington.
+Coordinates kindly provided by Dr. Mark Berman
+and Dr. A. Green, CSIRO, Sydney, Australia.
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Baddeley, A. and Turner, R. (2000)
+Practical maximum pseudolikelihood for spatial point patterns.
+<EM>Australian and New Zealand Journal of Statistics</EM>
+<B>42</B>, 283&ndash;322.
+</p>
+<p>
+Baddeley, A., Turner, R., Moller, J. and Hazelton, M. (2005)
+Residual analysis for spatial point processes.
+<EM>Journal of the Royal Statistical Society, Series B</EM>
+<B>67</B>, 617&ndash;666.
+</p>
+<p>
+Baddeley, A. and Turner, R. (2005)
+Modelling spatial point patterns in R.
+In: A. Baddeley, P. Gregori, J. Mateu, R. Stoica, and D. Stoyan,
+editors, <EM>Case Studies in Spatial Point Pattern Modelling</EM>,
+Lecture Notes in Statistics number 185. Pages 23&ndash;74.
+Springer-Verlag, New York, 2006. 
+ISBN: 0-387-28311-0.  
+</p>
+<p>
+Berman, M. (1986).
+Testing for spatial association between a point process and another
+stochastic process.
+<EM>Applied Statistics</EM> <B>35</B>, 54&ndash;62.
+</p>
+<p>
+Berman, M. and Turner, T.R. (1992)
+Approximating point process likelihoods with GLIM.
+<EM>Applied Statistics</EM> <B>41</B>, 31&ndash;38.
+</p>
+<p>
+Foxall, R. and Baddeley, A. (2002)
+Nonparametric measures of association between a
+spatial point process and a random set, with
+geological applications. <EM>Applied Statistics</EM> <B>51</B>, 165&ndash;182.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  data(copper)
+
+  # Plot full dataset
+
+  plot(copper$points)
+  plot(copper$lines, add=TRUE)
+
+  # Plot southern half of data
+  plot(copper$SouthPoints)
+  plot(copper$SouthLines, add=TRUE)
+
+  ## Not run: 
+    Z &lt;- distmap(copper$SouthLines)
+    plot(Z)
+    X &lt;- copper$SouthPoints
+    ppm(X, ~D, covariates=list(D=Z))
+  
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

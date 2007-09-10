@@ -1,0 +1,48 @@
+invalid                package:gtools                R Documentation
+
+_T_e_s_t _i_f _a _v_a_l_u_e _i_s _m_i_s_s_i_n_g, _e_m_p_t_y, _o_r _c_o_n_t_a_i_n_s _o_n_l_y _N_A _o_r _N_U_L_L _v_a_l_u_e_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Test if a value is missing, empty, or contains only NA or NULL
+     values.
+
+_U_s_a_g_e:
+
+     invalid(x)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: value to be tested
+
+_V_a_l_u_e:
+
+     Logical value.
+
+_A_u_t_h_o_r(_s):
+
+     Gregory R. Warnes warnes@bst.rochester.edu
+
+_S_e_e _A_l_s_o:
+
+     'missing', 'is.na', 'is.null'
+
+_E_x_a_m_p_l_e_s:
+
+     invalid(NA)
+     invalid()
+     invalid(c(NA,NA,NULL,NA))
+
+     invalid(list(a=1,b=NULL))
+
+     # example use in a function
+     myplot <- function(x,y) {
+                     if(invalid(y)) {
+                             y <- x
+                             x <- 1:length(y)
+                     }
+                     plot(x,y)
+             }
+     myplot(1:10)
+     myplot(1:10,NA)
+

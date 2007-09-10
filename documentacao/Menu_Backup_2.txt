@@ -1,0 +1,89 @@
+Format: Development Release 02-10-2007 (1.35 base)
+
+
+Title: I3Geo
+SubTitle: Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Footer: http://mapas.mma.gov.br/i3geo
+Timestamp: Última atualização mon day
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
+
+
+# --------------------------------------------------------------------------
+# 
+# Cut and paste the lines below to change the order in which your files
+# appear on the menu.  Don't worry about adding or removing files, Natural
+# Docs will take care of that.
+# 
+# You can further organize the menu by grouping the entries.  Add a
+# "Group: [name] {" line to start a group, and add a "}" to end it.
+# 
+# You can add text and web links to the menu by adding "Text: [text]" and
+# "Link: [name] ([URL])" lines, respectively.
+# 
+# The formatting and comments are auto-generated, so don't worry about
+# neatness when editing the file.  Natural Docs will clean it up the next
+# time it is run.  When working with groups, just deal with the braces and
+# forget about the indentation and comments.
+# 
+# --------------------------------------------------------------------------
+
+
+Group: Inicialização  {
+
+   File: Inicializa o I3Geo via URL  (ms_criamapa.php)
+   File: Variáveis de inicialização.  (ms_configura.php)
+   }  # Group: Inicialização
+
+Group: Aplicativos  {
+
+   File: Gerador automático de web services OGC  (ogc.php)
+   File: Testa a instalação do I3Geo.  (testainstal.php)
+   File: Testa um mapfile.  (testamapfile.php)
+   }  # Group: Aplicativos
+
+Group: Classesphp  {
+
+   File: A - Carrega as variáveis passadas como POST ou GET  (classesphp\pega_variaveis.php)
+   File: A - Controle das requisições em Ajax  (classesphp\mapa_controle.php)
+   File: A - Extensões PHP  (classesphp\carrega_ext.php)
+   File: A - Funções compartilhadas  (classesphp\funcoes_gerais.php)
+   File: A - Inicializa o mapa  (classesphp\mapa_inicia.php)
+   File: Administração  (classesphp\admin.php)
+   File: Análise  (classesphp\classe_analise.php)
+   File: Atributos  (classesphp\classe_atributos.php)
+   File: Classes e estilos  (classesphp\classe_alteraclasse.php)
+   File: Degradê  (classesphp\class.palette.php)
+   File: Escala  (classesphp\classe_escala.php)
+   File: Estatística  (classesphp\classe_estatistica.php)
+   File: Gráficos R  (classesphp\graficos.php)
+   File: Imagem  (classesphp\classe_imagem.php)
+   File: Legenda  (classesphp\classe_legenda.php)
+   File: Mapa  (classesphp\classe_mapa.php)
+   File: Menu  (classesphp\classe_menutemas.php)
+   File: Multilayer  (classesphp\classe_vermultilayer.php)
+   File: Navegação  (classesphp\classe_navegacao.php)
+   File: OGC  (classesphp\wmswfs.php)
+   File: Pizza  (classesphp\graficopizza.php)
+   File: Seleção  (classesphp\classe_selecao.php)
+   File: Shape  (classesphp\classe_shp.php)
+   File: Temas  (classesphp\classe_temas.php)
+   File: Toponímia  (classesphp\classe_toponimia.php)
+   File: WS Cliente  (classesphp\wscliente.php)
+   }  # Group: Classesphp
+
+Class Index: Class Index
+Index: Everything
+File Index: File Index
+Function Index: Function Index
+Property Index: Property Index
+Variable Index: Variable Index

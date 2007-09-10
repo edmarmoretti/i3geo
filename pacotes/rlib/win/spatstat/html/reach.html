@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Interaction Distance of a Point Process</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for reach {spatstat}"><tr><td>reach {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Interaction Distance of a Point Process</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes the interaction distance of a point process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  reach(x, ...)
+  ## S3 method for class 'ppm':
+  reach(x, ..., epsilon=0)
+  ## S3 method for class 'interact':
+  reach(x, ...)
+  ## S3 method for class 'rmhmodel':
+  reach(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+Either a fitted point process model (object of class
+<code>"ppm"</code>), an interpoint interaction (object of class
+<code>"interact"</code>) or a point process model for simulation
+(object of class <code>"rmhmodel"</code>).
+</td></tr>
+<tr valign="top"><td><code>epsilon</code></td>
+<td>
+Numerical threshold below which interaction is treated as zero.
+See details.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Other arguments are ignored.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The `interaction distance' or `interaction range' of a point process
+model is the smallest distance <i>D</i> such that any two points in the
+process which are separated by a distance greater than <i>D</i> do not
+interact with each other.
+</p>
+<p>
+For example, the interaction range of a Strauss process
+(see <code><a href="Strauss.html">Strauss</a></code>)
+with parameters <i>beta,gamma,r</i> is equal to
+<i>r</i>, unless <i>gamma=1</i> in which case the model is
+Poisson and the interaction
+range is <i>0</i>.
+The interaction range of a Poisson process is zero.
+The interaction range of the Ord threshold process
+(see <code><a href="OrdThresh.html">OrdThresh</a></code>) is infinite, since two points <EM>may</EM>
+interact at any distance apart.
+</p>
+<p>
+The function <code>reach(x)</code> is generic, with methods
+for the case where <code>x</code> is 
+<ul>
+<li>a fitted point process model
+(object of class <code>"ppm"</code>, usually obtained from the model-fitting
+function <code><a href="ppm.html">ppm</a></code>);
+<li>an interpoint interaction structure (object of class
+<code>"interact"</code>), created by one of the functions
+<code><a href="Poisson.html">Poisson</a></code>,
+<code><a href="Strauss.html">Strauss</a></code>,
+<code><a href="StraussHard.html">StraussHard</a></code>,
+<code><a href="MultiStrauss.html">MultiStrauss</a></code>,
+<code><a href="MultiStraussHard.html">MultiStraussHard</a></code>,
+<code><a href="Softcore.html">Softcore</a></code>,
+<code><a href="DiggleGratton.html">DiggleGratton</a></code>,
+<code><a href="Pairwise.html">Pairwise</a></code>,
+<code><a href="PairPiece.html">PairPiece</a></code>,
+<code><a href="Geyer.html">Geyer</a></code>,
+<code><a href="LennardJones.html">LennardJones</a></code>,
+<code><a href="Saturated.html">Saturated</a></code>,
+<code><a href="OrdThresh.html">OrdThresh</a></code>
+or
+<code><a href="Ord.html">Ord</a></code>;
+<li>a point process model for simulation (object of class
+<code>"rmhmodel"</code>), usually obtained from <code><a href="rmhmodel.html">rmhmodel</a></code>.
+</ul>
+<p>
+When <code>x</code> is an <code>"interact"</code> object,
+<code>reach(x)</code> returns the maximum possible interaction range
+for any point process model with interaction structure given by <code>x</code>.
+For example, <code>reach(Strauss(0.2))</code> returns <code>0.2</code>.
+</p>
+<p>
+When <code>x</code> is a <code>"ppm"</code> object,
+<code>reach(x)</code> returns the interaction range
+for the point process model represented by <code>x</code>.
+For example, a fitted Strauss process model
+with parameters <code>beta,gamma,r</code> will return
+either <code>0</code> or <code>r</code>, depending on whether the fitted
+interaction parameter <code>gamma</code> is equal or not equal to 1.
+</p>
+<p>
+For some point process models, such as the soft core process
+(see <code><a href="Softcore.html">Softcore</a></code>), the interaction distance is
+infinite, because the interaction terms are positive for all
+pairs of points. A practical solution is to compute 
+the distance at which the interaction contribution
+from a pair of points falls below a threshold <code>epsilon</code>,
+on the scale of the log conditional intensity. This is done
+by setting the argument <code>epsilon</code> to a positive value.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The interaction distance, or <code>NA</code> if this cannot be
+computed from the information given.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="Poisson.html">Poisson</a></code>,
+<code><a href="Strauss.html">Strauss</a></code>,
+<code><a href="StraussHard.html">StraussHard</a></code>,
+<code><a href="MultiStrauss.html">MultiStrauss</a></code>,
+<code><a href="MultiStraussHard.html">MultiStraussHard</a></code>,
+<code><a href="Softcore.html">Softcore</a></code>,
+<code><a href="DiggleGratton.html">DiggleGratton</a></code>,
+<code><a href="Pairwise.html">Pairwise</a></code>,
+<code><a href="PairPiece.html">PairPiece</a></code>,
+<code><a href="Geyer.html">Geyer</a></code>,
+<code><a href="LennardJones.html">LennardJones</a></code>,
+<code><a href="Saturated.html">Saturated</a></code>,
+<code><a href="OrdThresh.html">OrdThresh</a></code>,
+<code><a href="Ord.html">Ord</a></code>,
+<code><a href="rmhmodel.html">rmhmodel</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+    reach(Poisson())
+    # returns 0
+
+    reach(Strauss(r=7))
+    # returns 7
+    data(swedishpines)
+    fit &lt;- ppm(swedishpines, ~1, Strauss(r=7))
+    reach(fit)
+    # returns 7
+
+    reach(OrdThresh(42))
+    # returns Inf
+    
+    reach(MultiStrauss(1:2, matrix(c(1,3,3,1),2,2)))
+    # returns 3
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

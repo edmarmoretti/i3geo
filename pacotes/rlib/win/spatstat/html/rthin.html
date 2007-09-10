@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Random Thinning</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rthin {spatstat}"><tr><td>rthin {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Random Thinning</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Applies independent random thinning to a point pattern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rthin(X, P, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+A point pattern (object of class <code>"ppp"</code>)
+that will be thinned.
+</td></tr>
+<tr valign="top"><td><code>P</code></td>
+<td>
+Data giving the retention probabilities, i.e. the probability
+that each point in <code>X</code> will be retained.
+Either a single number, or a vector of numbers,
+or a <code>function(x,y)</code>, or a pixel image (object of class
+<code>"im"</code>).
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Additional arguments passed to <code>P</code>, if it is a function.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+In a random thinning operation, each point of the pattern <code>X</code>
+is randomly either deleted or retained (i.e. not deleted).
+The result is a point pattern,
+consisting of those points of <code>X</code> that were retained.
+</p>
+<p>
+Independent random thinning means that the retention/deletion of each
+point is independent of other points.
+</p>
+<p>
+The argument <code>P</code> determines the probability of <B>retaining</B>
+each point. It may be
+<dl>
+<dt>a single number,</dt><dd>so that each point will be retained with
+the same probability <code>P</code>;
+</dd>
+<dt>a vector of numbers,</dt><dd>so that the <code>i</code>th point of <code>X</code>
+will be retained with probability <code>P[i]</code>;
+</dd>
+<dt>a function <code>P(x,y)</code>,</dt><dd>so that a point at a location
+<code>(x,y)</code> will be retained with probability <code>P(x,y)</code>;
+</dd>
+<dt>a pixel image,</dt><dd>containing values of the retention probability
+for all locations in a region encompassing the point pattern.
+</dd>
+</dl>
+<p>
+If <code>P</code> is a function, it should be &lsquo;vectorised&rsquo;, that is,
+it should accept vector arguments <code>x,y</code> and should yield a
+numeric vector of the same length. The function may have extra
+arguments which are passed through the <code>...</code> argument.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A point pattern (object of class <code>"ppp"</code>).</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+
+
+
+<h3>Examples</h3>
+
+<pre>
+  data(redwood)
+  plot(redwood, main="thinning")
+  
+  # delete 20% of points
+  Y &lt;- rthin(redwood, 0.8)
+  points(Y, col="green", cex=1.4)
+
+  # function
+  f &lt;- function(x,y) { ifelse(x &lt; 0.4, 1, 0.5) }
+  Y &lt;- rthin(redwood, f)
+
+  # pixel image
+  Z &lt;- as.im(f, redwood$window)
+  Y &lt;- rthin(redwood, Z)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

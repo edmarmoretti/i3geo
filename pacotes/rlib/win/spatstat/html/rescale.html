@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Convert dataset to another unit of length</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rescale {spatstat}"><tr><td>rescale {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Convert dataset to another unit of length</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Converts between different units of length
+in a spatial dataset, such as a point pattern or a window.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  rescale(X, s)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+Any suitable dataset representing a two-dimensional
+object, such as a point pattern (object of class <code>"ppp"</code>),
+or a window (object of class <code>"owin"</code>).</td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+Conversion factor: the new units are <code>s</code> times the old units.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is generic. Methods are provided for
+point patterns (<code><a href="rescale.ppp.html">rescale.ppp</a></code>)
+and windows (<code><a href="rescale.owin.html">rescale.owin</a></code>).
+</p>
+<p>
+The spatial coordinates in the dataset <code>X</code> will be re-expressed
+in terms of a new unit of length that is <code>s</code> times the current
+unit of length given in <code>X</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Another object of the same type, representing the same
+data, but expressed in the new units.</p>
+
+<h3>Note</h3>
+
+<p>
+The result of this operation is equivalent to the original dataset.
+If you want to actually change the coordinates by
+a linear transformation, producing a dataset that is not equivalent
+to the original one, use <code><a href="affine.html">affine</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="units.html">units</a></code>,
+<code><a href="rescale.ppp.html">rescale.ppp</a></code>,
+<code><a href="rescale.owin.html">rescale.owin</a></code>,
+<code><a href="affine.html">affine</a></code>,
+<code><a href="rotate.html">rotate</a></code>,
+<code><a href="shift.html">shift</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

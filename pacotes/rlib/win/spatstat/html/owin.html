@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Create a Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for owin {spatstat}"><tr><td>owin {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Create a Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates an object of class <code>"owin"</code> representing 
+an observation window in the two-dimensional plane
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  owin(xrange=c(0,1), yrange=c(0,1), poly=NULL, mask=NULL, units=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>xrange</code></td>
+<td>
+<i>x</i> coordinate limits of enclosing box</td></tr>
+<tr valign="top"><td><code>yrange</code></td>
+<td>
+<i>y</i> coordinate limits of enclosing box</td></tr>
+<tr valign="top"><td><code>poly</code></td>
+<td>
+Optional. Polygonal boundary of window.
+Incompatible with <code>mask</code>.
+</td></tr>
+<tr valign="top"><td><code>mask</code></td>
+<td>
+Optional. Logical matrix giving binary image of window.
+Incompatible with <code>poly</code>.
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+Optional. Name of unit of length. Either a single character string,
+or a vector of two character strings giving the
+singular and plural forms, respectively.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+In the <STRONG>spatstat</STRONG> library, a point pattern dataset must include
+information about the window of observation. This is represented by
+an object of class <code>"owin"</code>.
+See <code><a href="owin.object.html">owin.object</a></code> for an overview.
+</p>
+<p>
+To create a window in its own right, 
+users would normally invoke <code>owin</code>,
+although sometimes <code><a href="as.owin.html">as.owin</a></code> may be convenient.
+</p>
+<p>
+A window may be rectangular, polygonal, or a mask (a binary image).
+<ul>
+<li><B>rectangular windows:</B>
+If only <code>xrange</code> and <code>yrange</code> are given, then
+the window will be rectangular, with its <i>x</i> and <i>y</i>
+coordinate dimensions given by these two arguments
+(which must be vectors of length 2).
+If no arguments are given at all, the default is the unit square
+with dimensions <code>xrange=c(0,1)</code> and <code>yrange=c(0,1)</code>.
+<li><B>polygonal windows:</B>
+If <code>poly</code> is given, then the window will be polygonal.
+<ul>
+<li><EM>single polygon:</EM>
+If <code>poly</code> is a structure with
+two component vectors <code>x</code> and <code>y</code> of equal length,
+then these vectors are interpreted as the cartesian coordinates
+of the vertices of a polygon circumscribing the window.
+The vertices must be listed <EM>anticlockwise</EM>.
+No vertex should be repeated (i.e. do not repeat the first
+vertex).
+<li><EM>multiple polygons or holes:</EM>
+If <code>poly</code> is a list, each entry <code>poly[[i]]</code>
+of which is a structure with
+two component vectors <code>x</code> and <code>y</code> of equal length,
+then the successive list members <code>poly[[i]]</code>
+are interpreted as separate polygons which together
+make up the boundary of the window.
+The vertices of each polygon must be listed <EM>anticlockwise</EM>
+if the polygon is part of the external boundary,
+but <EM>clockwise</EM>
+if the polygon is the boundary of a hole in the window.
+Again, do not repeat any vertex.
+</ul>
+<li><B>binary masks:</B>
+If <code>mask</code> is given, then the window will be a binary image.
+The argument <code>mask</code> should be a logical matrix
+such that <code>mask[i,j]</code> is <code>TRUE</code> if the point
+<code>(x[j],y[i])</code> belongs to the window, and <code>FALSE</code> if it
+does not. Note carefully that rows of <code>mask</code> correspond to the
+<i>y</i> coordinate, and columns to the <i>x</i> coordinate.
+Here <code>x</code> and <code>y</code> are vectors of <i>x</i> and <i>y</i>
+coordinates equally spaced over <code>xrange</code> and <code>yrange</code>
+respectively. 
+</ul>    
+To create a window which is mathematically
+defined by inequalities in the Cartesian coordinates, 
+use <code><a href="raster.x.html">raster.x</a>()</code> and <code><a href="raster.x.html">raster.y</a>()</code>
+as in the examples below.
+</p>
+<p>
+Functions <code><a href="square.html">square</a></code> and <code><a href="disc.html">disc</a></code>
+will create square and circular windows, respectively.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"owin"</code> 
+describing a window in the two-dimensional plane.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="square.html">square</a></code>,
+<code><a href="disc.html">disc</a></code>,
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="as.owin.html">as.owin</a></code>,
+<code><a href="complement.owin.html">complement.owin</a></code>,
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="ppp.html">ppp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  w &lt;- owin()
+  w &lt;- owin(c(0,1), c(0,1))
+  # the unit square
+
+  w &lt;- owin(c(10,20), c(10,30), units=c("foot","feet"))
+  # a rectangle of dimensions 10 x 20 feet
+  # with lower left corner at (10,10)
+
+  # polygon (diamond shape)
+  w &lt;- owin(poly=list(x=c(0.5,1,0.5,0),y=c(0,1,2,1)))
+  w &lt;- owin(c(0,1), c(0,2), poly=list(x=c(0.5,1,0.5,0),y=c(0,1,2,1)))
+
+  # polygon with hole
+  ho &lt;- owin(poly=list(list(x=c(0,1,1,0), y=c(0,0,1,1)),
+                       list(x=c(0.6,0.4,0.4,0.6), y=c(0.2,0.2,0.4,0.4))))
+  
+  w &lt;- owin(c(-1,1), c(-1,1), mask=matrix(TRUE, 100,100))
+          # 100 x 100 image, all TRUE
+  X &lt;- raster.x(w)
+  Y &lt;- raster.y(w)
+  wm &lt;- owin(w$xrange, w$yrange, mask=(X^2 + Y^2 &lt;= 1))
+          # discrete approximation to the unit disc
+
+  ## Not run: 
+  plot(c(0,1),c(0,1),type="n")
+  bdry &lt;- locator()
+  # click the vertices of a polygon (anticlockwise)
+  
+## End(Not run)
+  
+  w &lt;- owin(poly=bdry)
+  ## Not run: plot(w)
+ 
+ ## Not run: 
+ im &lt;- as.logical(matrix(scan("myfile"), nrow=128, ncol=128))
+ # read in an arbitrary 128 x 128 digital image from text file
+ rim &lt;- im[, 128:1]
+ # Assuming it was given in row-major order in the file
+ # i.e. scanning left-to-right in rows from top-to-bottom,
+ # the use of matrix() has effectively transposed rows &amp; columns,
+ # so to convert it to our format just reverse the column order.
+ w &lt;- owin(mask=rim)
+ plot(w)
+ # display it to check!
+ 
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Name for Unit of Length</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for units {spatstat}"><tr><td>units {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Name for Unit of Length</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Inspect or change the name of the unit of length
+in a spatial dataset.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+units(x)
+## S3 method for class 'ppp':
+units(x)
+## S3 method for class 'psp':
+units(x)
+## S3 method for class 'owin':
+units(x)
+## S3 method for class 'im':
+units(x)
+units(x) &lt;- value
+## S3 method for class 'ppp':
+units(x) &lt;- value
+## S3 method for class 'psp':
+units(x) &lt;- value
+## S3 method for class 'owin':
+units(x) &lt;- value
+## S3 method for class 'im':
+units(x) &lt;- value
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A spatial dataset.
+Either a point pattern (object of class <code>"ppp"</code>),
+a line segment pattern (object of class <code>"psp"</code>),
+a window (object of class <code>"owin"</code>) or
+a pixel image (object of class <code>"im"</code>).
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+Name of the unit of length. See Details.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Spatial datasets in the <STRONG>spatstat</STRONG> package
+may include the name of the unit of length. This name is used
+when printing or plotting the dataset, and in some other
+applications. 
+</p>
+<p>
+<code>units(x)</code> extracts this name,
+and <code>units(x) &lt;- value</code> sets the name to <code>value</code>.
+</p>
+<p>
+A valid name is either
+<ul>
+<li>a single character string
+<li>a vector of two character strings giving the
+singular and plural forms of the unit name
+<li>a list of length 3, containing two character strings
+giving the singular and plural forms of the basic unit,
+and a number specifying the multiple of this unit.
+</ul>
+
+<h3>Value</h3>
+
+<p>
+The return value of <code>units</code> is an object of class <code>"units"</code>
+containing the name of the unit of length in <code>x</code>. There are
+methods for <code>print</code> and <code>summary</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.html">owin</a></code>,
+<code><a href="ppp.html">ppp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  X &lt;- runifpoint(20)
+
+  # if the unit of length is 1 metre:
+  units(X) &lt;- c("metre", "metres")
+
+  # if the unit of length is 6 inches:
+  units(X) &lt;- list("inch", "inches", 6)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

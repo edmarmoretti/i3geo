@@ -1,0 +1,60 @@
+\HeaderA{logit}{Generalized logit and inverse logit function}{logit}
+\aliasA{inv.logit}{logit}{inv.logit}
+\keyword{math}{logit}
+\begin{Description}\relax
+Compute generalized logit and generalized inverse logit functions.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+logit(x, min = 0, max = 1)
+inv.logit(x, min = 0, max = 1)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] value(s) to be transformed
+\item[\code{min}] Lower end of logit interval
+\item[\code{max}] Upper end of logit interval
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+The generalized logit function takes values on [min, max] and
+transforms them to span [-Inf,Inf] it is defined as:
+
+\deqn{y = log(\frac{p}{(1-p)})}{y = log(p/(1-p))}
+
+where
+
+\deqn{p=\frac{(x-min)}{(max-min)}}{p=(x-min)/(max-min)}
+
+The generized inverse logit function provides the inverse
+transformation:
+
+\deqn{x = p' (max-min) + min}{x = p * (max-min) + min}
+
+where
+
+\deqn{p'=\frac{exp(y)}{(1+exp(y))}}{exp(y)/(1+exp(y))}
+\end{Details}
+\begin{Value}
+Transformed value(s).
+\end{Value}
+\begin{Author}\relax
+Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{logit}{logit}}, \code{\LinkA{inv.glogit}{inv.glogit}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+  x <- seq(0,10, by=0.25)
+  xt <- logit(x, min=0, max=10)
+  cbind(x,xt)
+
+  y <- inv.logit(xt, min=0, max=10)
+  cbind(x,xt,y)  
+
+\end{ExampleCode}
+\end{Examples}
+

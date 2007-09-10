@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Simulate from a Fitted Point Process Model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rmh.ppm {spatstat}"><tr><td>rmh.ppm {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Simulate from a Fitted Point Process Model</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Given a point process model fitted to data, 
+generate a random simulation of the model, 
+using the Metropolis-Hastings algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>## S3 method for class 'ppm':
+rmh(model,start=NULL,
+               control=rmhcontrol(),
+               ..., verbose=TRUE, project=TRUE) </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+A fitted point process model (object of class
+<code>"ppm"</code>, see <code><a href="ppm.object.html">ppm.object</a></code>) which it is desired
+to simulate.  This fitted model is usually the result of a call
+to <code><a href="ppm.html">ppm</a></code>.  See <B>Details</B> below.
+</td></tr>
+<tr valign="top"><td><code>start</code></td>
+<td>
+Data determining the initial state
+of the Metropolis-Hastings algorithm.  See
+<code><a href="rmhstart.html">rmhstart</a></code> for description of these arguments.
+Defaults to <code>list(x.start=data.ppm(model))</code>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+Data controlling the running of
+the Metropolis-Hastings algorithm.  See <code><a href="rmhcontrol.html">rmhcontrol</a></code>
+for description of these arguments.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Further arguments passed to <code><a href="rmh.default.html">rmh.default</a></code>.
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+Logical flag indicating whether to print progress reports.
+</td></tr>
+<tr valign="top"><td><code>project</code></td>
+<td>
+Logical flag indicating what to do if the fitted model is
+invalid (in the sense that the values of the fitted coefficients do not
+specify a valid point process).
+If <code>project=TRUE</code> the closest valid model will be simulated;
+if <code>project=FALSE</code> an error will occur.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function generates simulated realisations from a point
+process model that has been fitted to point pattern data.  It is
+a method for the generic function <code><a href="rmh.html">rmh</a></code> for the
+class <code>"ppm"</code> of fitted point process models.  To simulate
+other kinds of point process models, see <code><a href="rmh.html">rmh</a></code>
+or <code><a href="rmh.default.html">rmh.default</a></code>.
+</p>
+<p>
+The argument <code>model</code> describes the fitted model.  It must be
+an object of class <code>"ppm"</code> (see <code><a href="ppm.object.html">ppm.object</a></code>),
+and will typically be the result of a call to the point process
+model fitting function <code><a href="ppm.html">ppm</a></code>.
+</p>
+<p>
+The current implementation enables simulation from any fitted model
+involving the interactions
+<code><a href="DiggleGratton.html">DiggleGratton</a></code>,
+<code><a href="Geyer.html">Geyer</a></code>,
+<code><a href="MultiStrauss.html">MultiStrauss</a></code>,
+<code><a href="MultiStraussHard.html">MultiStraussHard</a></code>,
+<code><a href="PairPiece.html">PairPiece</a></code>,
+<code><a href="Poisson.html">Poisson</a></code>,
+<code><a href="Strauss.html">Strauss</a></code>,
+<code><a href="StraussHard.html">StraussHard</a></code>
+and <code><a href="Softcore.html">Softcore</a></code>,
+including nonstationary models. See the examples.
+</p>
+<p>
+It is possible that the fitted coefficients of a point process model
+may be ``illegal'', i.e. that there may not exist a
+mathematically well-defined point process with the given parameter
+values. For example, a Strauss process with interaction
+parameter <i>gamma &gt; 1</i> does not exist,
+but the model-fitting procedure used in <code><a href="ppm.html">ppm</a></code> will sometimes
+produce values of <i>gamma</i> greater than 1.
+In such cases, if <code>project=FALSE</code> then an error will occur,
+while if <code>project=TRUE</code> then <code>rmh.ppm</code> will find
+the nearest legal model and simulate
+this model instead. (The nearest legal model is obtained by
+projecting the vector of coefficients onto the set of
+valid coefficient vectors. The result is usually the Poisson process
+with the same fitted intensity.)
+</p>
+<p>
+The arguments <code>start</code> and <code>control</code> are lists of
+parameters determining the initial state and the iterative
+behaviour, respectively, of the Metropolis-Hastings algorithm.
+They are passed directly to <code><a href="rmhstart.html">rmhstart</a></code> and
+<code><a href="rmhcontrol.html">rmhcontrol</a></code> respectively.
+See <code><a href="rmhstart.html">rmhstart</a></code> and
+<code><a href="rmhcontrol.html">rmhcontrol</a></code> for details of these parameters.
+</p>
+<p>
+Note that if you specify <code>control$expand &gt; 1</code> (so that the
+model will be simulated on a window larger than the original data
+window) then the model must be capable of extrapolation to this
+larger window. This excludes models which depend on external covariates.
+</p>
+<p>
+After extracting the relevant information from the fitted model
+object <code>model</code>, <code>rmh.ppm</code> simply invokes the default
+<code>rmh</code> algorithm <code><a href="rmh.default.html">rmh.default</a></code>, unless the model
+is Poisson.
+</p>
+<p>
+If the model is Poisson then the Metropolis-Hastings
+algorithm is not needed, and the model is simulated directly, using
+one of <code><a href="rpoispp.html">rpoispp</a></code>, <code><a href="rmpoispp.html">rmpoispp</a></code>,
+<code><a href="rpoint.html">rpoint</a></code> or <code><a href="rmpoint.html">rmpoint</a></code>.
+</p>
+<p>
+See <code><a href="rmh.default.html">rmh.default</a></code> for further information about the
+implementation, or about the Metropolis-Hastings algorithm.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A point pattern (an object of class <code>"ppp"</code>; see
+<code><a href="ppp.object.html">ppp.object</a></code>).</p>
+
+<h3>Warnings</h3>
+
+<p>
+See Warnings in <code><a href="rmh.default.html">rmh.default</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="rmh.html">rmh</a></code>,
+<code><a href="rmhmodel.html">rmhmodel</a></code>,
+<code><a href="rmhcontrol.html">rmhcontrol</a></code>,
+<code><a href="rmhstart.html">rmhstart</a></code>,
+<code><a href="rmh.default.html">rmh.default</a></code>,
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="PairPiece.html">PairPiece</a></code>,
+<code><a href="Poisson.html">Poisson</a></code>,
+<code><a href="Strauss.html">Strauss</a></code>,
+<code><a href="StraussHard.html">StraussHard</a></code>,
+<code><a href="Softcore.html">Softcore</a></code>,
+<code><a href="Geyer.html">Geyer</a></code>,
+<code><a href="DiggleGratton.html">DiggleGratton</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   data(swedishpines)
+   X &lt;- swedishpines
+   plot(X, main="Swedish Pines data")
+
+   # Poisson process
+   fit &lt;- ppm(X, ~1, Poisson())
+   Xsim &lt;- rmh(fit)
+   plot(Xsim, main="simulation from fitted Poisson model")
+
+   # Strauss process   
+   fit &lt;- ppm(X, ~1, Strauss(r=7), rbord=7)
+   Xsim &lt;- rmh(fit, control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted Strauss model")
+
+   ## Not run: 
+   # Strauss process simulated on a larger window
+   # then clipped to original window
+   Xsim &lt;- rmh(fit, control=list(nrep=1e3, expand=2, periodic=TRUE))
+   
+   # Strauss - hard core process
+   fit &lt;- ppm(X, ~1, StraussHard(r=7,hc=2), rbord=7)
+   Xsim &lt;- rmh(fit, start=list(n.start=X$n), control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted Strauss hard core model")
+
+   # Geyer saturation process
+   fit &lt;- ppm(X, ~1, Geyer(r=7,sat=2), rbord=7)
+   Xsim &lt;- rmh(fit, start=list(n.start=X$n), control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted Geyer model")
+
+   # soft core interaction process
+   Q &lt;- quadscheme(X, nd=50)
+   fit &lt;- ppm(Q, ~1, Softcore(kappa=0.1))
+   Xsim &lt;- rmh(fit, start=list(n.start=X$n), control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted Soft Core model")
+
+   data(cells)
+   plot(cells)
+   # Diggle-Gratton pairwise interaction model
+   fit &lt;- ppm(cells, ~1, DiggleGratton(0.05, 0.1))
+   Xsim &lt;- rmh(fit, start=list(n.start=cells$n), control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted Diggle-Gratton model")
+
+   X &lt;- rSSI(0.05, 100)
+   plot(X, main="new data")
+
+   # piecewise-constant pairwise interaction function
+   fit &lt;- ppm(X, ~1, PairPiece(seq(0.02, 0.1, by=0.01)))
+   Xsim &lt;- rmh(fit, control=list(nrep=1e3))
+   plot(Xsim, main="simulation from fitted pairwise model")
+
+   # marked point pattern
+   data(amacrine)
+   Y &lt;- amacrine
+   plot(Y, main="Amacrine data")
+
+   # marked Poisson models 
+   fit &lt;- ppm(Y)
+   Ysim &lt;- rmh(fit)
+   plot(Ysim, main="simulation from ppm(Y)")
+
+   fit &lt;- ppm(Y,~marks)
+   Ysim &lt;- rmh(fit)
+   plot(Ysim, main="simulation from ppm(Y, ~marks)")
+
+   fit &lt;- ppm(Y,~polynom(x,y,2))
+   Ysim &lt;- rmh(fit)
+   plot(Ysim, main="simulation from ppm(Y, ~polynom(x,y,2))")
+
+   fit &lt;- ppm(Y,~marks+polynom(x,y,2))
+   Ysim &lt;- rmh(fit)
+   plot(Ysim, main="simulation from ppm(Y, ~marks+polynom(x,y,2))")
+
+   fit &lt;- ppm(Y,~marks*polynom(x,y,2))
+   Ysim &lt;- rmh(fit)
+   plot(Ysim, main="simulation from ppm(Y, ~marks*polynom(x,y,2))")
+
+   # multitype Strauss models
+   MS &lt;- MultiStrauss(types = levels(Y$marks),
+                      radii=matrix(0.07, ncol=2, nrow=2))
+   fit &lt;- ppm(Y, ~marks, MS)
+   Ysim &lt;- rmh(fit, control=list(nrep=1e3))
+   plot(Ysim, main="simulation from fitted Multitype Strauss")
+
+   fit &lt;- ppm(Y,~marks*polynom(x,y,2), MS)
+   Ysim &lt;- rmh(fit, control=list(nrep=1e3))
+   plot(Ysim, main="simulation from fitted inhomogeneous Multitype Strauss")
+   ## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

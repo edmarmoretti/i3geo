@@ -1,0 +1,57 @@
+foldchange              package:gtools              R Documentation
+
+_C_o_m_p_u_t_e _f_o_l_d-_c_h_a_n_g_e _o_r _c_o_n_v_e_r_t _b_e_t_w_e_e_n _l_o_g-_r_a_t_i_o _a_n_d _f_o_l_d-_c_h_a_n_g_e.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     'foldchange' computes the fold change for two sets of values.
+     'logratio2foldchange' converts values from log-ratios to fold
+     changes.  'foldchange2logratio' does the reverse.
+
+_U_s_a_g_e:
+
+     foldchange(num,denom)
+     logratio2foldchange(logratio, base=2)
+     foldchange2logratio(foldchange, base=2)
+
+_A_r_g_u_m_e_n_t_s:
+
+num,denom: vector/matrix of numeric values
+
+logratio: vector/matrix of log-ratio values
+
+foldchange: vector/matrix of fold-change values
+
+    base: Exponential base for the log-ratio.
+
+_D_e_t_a_i_l_s:
+
+     Fold changes are commonly used in the biological sciences as a
+     mechanism for comparing the relative size of two measurements. 
+     They are computed as: num/denom if num>denom, and as -denom/num
+     otherwise.
+
+     Fold-changes have the advantage of ease of interpretation and
+     symmetry about num=denom, but suffer from a discontinuty between
+     -1 and 1, which can cause significant problems when performing
+     data analysis.  Consequently statisticians prefer to use
+     log-ratios.
+
+_V_a_l_u_e:
+
+     A vector or matrix of the same dimensions as the input containing
+     the converted values.
+
+_A_u_t_h_o_r(_s):
+
+     Gregory R. Warnes warnes@bst.rochester.edu
+
+_E_x_a_m_p_l_e_s:
+
+       a <- 1:21
+       b <- 21:1
+
+       f <- foldchange(a,b)
+
+       cbind(a,b,f)
+

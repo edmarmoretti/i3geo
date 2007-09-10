@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Test whether Object is Multitype</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for is.multitype {spatstat}"><tr><td>is.multitype {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Test whether Object is Multitype</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Generic function to test whether a given object (usually a point
+pattern or something related to a point pattern) has ``marks''
+attached to the points which classify the points into several types.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  is.multitype(X, ...) 
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+Object to be inspected
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Other arguments.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+``Marks'' are observations attached to each point of a point pattern.
+For example the <code><a href="longleaf.html">longleaf</a></code> dataset contains the locations
+of trees, each tree being marked by its diameter;
+the <code><a href="amacrine.html">amacrine</a></code> dataset gives the locations of cells
+of two types (on/off) and the type of cell may be regarded as a mark attached
+to the location of the cell.
+Other objects related to point patterns, such as point process models,
+may involve marked points.
+</p>
+<p>
+This function tests whether the object <code>X</code>
+contains or involves marked points, <B>and</B> that the
+marks are a factor.
+</p>
+<p>
+For example, the <code><a href="amacrine.html">amacrine</a></code>
+dataset is multitype (there are two types of cells, on and off),
+but the <code><a href="longleaf.html">longleaf</a></code> dataset is <EM>not</EM> multitype
+(the marks are real numbers).
+</p>
+<p>
+This function is generic; methods are provided
+for point patterns (objects of class <code>"ppp"</code>)
+and point process models (objects of class <code>"ppm"</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Logical value, equal to <code>TRUE</code> if <code>X</code> is multitype.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="is.multitype.ppp.html">is.multitype.ppp</a></code>,
+<code><a href="is.multitype.ppm.html">is.multitype.ppm</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

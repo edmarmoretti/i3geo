@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Distance to Boundary of Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for bdist.pixels {spatstat}"><tr><td>bdist.pixels {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Distance to Boundary of Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes the distances 
+from each pixel in a window to the boundary of the window.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ bdist.pixels(w, ..., coords=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>w</code></td>
+<td>
+A window (object of class <code>"owin"</code>).</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code><a href="as.mask.html">as.mask</a></code> to determine
+the pixel resolution.</td></tr>
+<tr valign="top"><td><code>coords</code></td>
+<td>
+Logical: if <code>TRUE</code>, the result can be
+displayed using <code>persp</code>, <code>contour</code> etc.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function computes, for each pixel <i>u</i>
+in the window <code>w</code>, the shortest distance
+<i>dist(u, W')</i> from <i>u</i>
+to the boundary of <i>W</i>.
+</p>
+<p>
+If the window is not of type <code>"mask"</code> then it is first
+converted to that type. The arguments <code>"..."</code> are
+passed to <code><a href="as.mask.html">as.mask</a></code> to determine the pixel resolution.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+If <code>coords</code> is false,
+a matrix giving the distances from each pixel in the image raster
+to the boundary of the window. Rows of this matrix correspond to
+the <i>y</i> coordinate and columns to the <i>x</i> coordinate.
+<br>
+If <code>coords</code> is true, a list with three components
+<code>x,y,z</code>, where <code>x,y</code> are vectors of length <i>m,n</i>
+giving the <i>x</i> and <i>y</i> coordinates respectively,
+and <code>z</code> is an <i>m x n</i> matrix such that
+<code>z[i,j]</code> is the distance from <code>(x[i],y[j])</code> to the
+boundary of the window. Rows of this matrix correspond to the
+<i>x</i> coordinate and columns to the <i>y</i> coordinate.
+This result can be plotted with <code>persp</code>, <code>image</code>
+or <code>contour</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="erode.owin.html">erode.owin</a></code>,
+<code><a href="bdist.points.html">bdist.points</a></code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  u &lt;- owin(c(0,1),c(0,1))
+  d &lt;- bdist.pixels(u, eps=0.01)
+  image(d)
+  d &lt;- bdist.pixels(u, eps=0.01, coords=FALSE)
+  mean(d &gt;= 0.1)
+  # value is approx (1 - 2 * 0.1)^2 = 0.64
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,45 @@
+\HeaderA{ask}{Display a prompt and collect the user's response}{ask}
+\keyword{IO}{ask}
+\begin{Description}\relax
+Display a prompt and collect the user's response
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+ask(msg = "Press <RETURN> to continue: ")
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{msg}] Character vetor providing the message to be displayed
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+The prompt message will be displayed, and then \code{readLines} is
+used to collect a single input value (possibly empty), which is then
+returned.
+\end{Details}
+\begin{Value}
+A character scalar containing the input providede by the user.
+\end{Value}
+\begin{Author}\relax
+Gregory R. Warnes \email{greg@random-technologies-llc.com}
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{readLines}{readLines}}, \code{\LinkA{scan}{scan}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+# use default prompt
+ask()
+
+silly <- function()
+{
+   age <- ask("How old aroe you? ")
+   age <- as.numeric(age)
+   cat("In 10 years you will be", age+10, "years old!\n")
+}
+   
+\end{ExampleCode}
+\end{Examples}
+

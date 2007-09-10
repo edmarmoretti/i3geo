@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Circular Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for disc {spatstat}"><tr><td>disc {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Circular Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates a circular window
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ disc(radius=1, centre=c(0,0), ..., mask=FALSE, npoly=128)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>radius</code></td>
+<td>
+Radius of the circle.</td></tr>
+<tr valign="top"><td><code>centre</code></td>
+<td>
+Coordinates of the centre of the circle.</td></tr>
+<tr valign="top"><td><code>mask</code></td>
+<td>
+Logical flag controlling the type of approximation
+to a perfect circle. See Details.
+</td></tr>
+<tr valign="top"><td><code>npoly</code></td>
+<td>
+Number of edges of the polygonal approximation,
+if <code>mask=FALSE</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code>as.mask</code> determining the
+pixel resolution, if <code>mask=TRUE</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This command creates a window object
+representing a disc, with the given radius and centre.
+</p>
+<p>
+By default, the circle is
+approximated by a polygon with <code>npoly</code> edges.
+</p>
+<p>
+If <code>mask=TRUE</code>, then the disc is approximated by a binary pixel
+mask. The resolution of the mask is controlled by
+the arguments <code>...</code> which are passed to <code><a href="as.mask.html">as.mask</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"owin"</code> (see <code><a href="owin.object.html">owin.object</a></code>)
+specifying a window.</p>
+
+<h3>Note</h3>
+
+<p>
+This function can also be used to generate regular polygons,
+by setting <code>npoly</code> to a small integer value. For example
+<code>npoly=5</code> generates a pentagon and <code>npoly=13</code> a triskaidecagon.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="owin.html">owin</a></code>,
+<code><a href="as.mask.html">as.mask</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ # unit disc
+ W &lt;- disc()
+ # disc of radius 3 centred at x=10, y=5
+ W &lt;- disc(3, c(10,5))
+ #
+ plot(disc())
+ plot(disc(mask=TRUE))
+ # nice smooth circle
+ plot(disc(npoly=256))
+ # how to control the resolution of the mask
+ plot(disc(mask=TRUE, dimyx=256))
+ # check accuracy of approximation
+ area.owin(disc())/pi
+ area.owin(disc(mask=TRUE))/pi
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

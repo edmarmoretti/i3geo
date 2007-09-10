@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Count Multiplicity of Duplicate Points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for multiplicity.ppp {spatstat}"><tr><td>multiplicity.ppp {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Count Multiplicity of Duplicate Points</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Counts the number of duplicates for each point
+in a spatial point pattern.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ multiplicity.ppp(x)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A spatial point pattern
+(object of class <code>"ppp"</code>).
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Two points in a point pattern are deemed to be identical
+if their <i>x,y</i> coordinates are the same,
+and their marks are also the same (if they carry marks).
+The Examples section illustrates how it is possible for
+a point pattern to contain a pair of identical points.
+</p>
+<p>
+For each point in <code>x</code>, this function counts how many
+points are identical to it, and returns the vector of counts.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A vector of integers (multiplicities) of length equal to the
+number of points in <code>x</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="duplicated.ppp.html">duplicated.ppp</a></code>,
+<code><a href="unique.ppp.html">unique.ppp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   X &lt;- ppp(c(1,1,0.5), c(2,2,1), window=square(3))
+   m &lt;- multiplicity.ppp(X)
+
+   # unique points in X, marked by multiplicity
+   first &lt;- !duplicated(X)
+   Y &lt;- X[first] %mark% m[first]
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<title></title>
+</head>
+<body>
+<div id=fundo >
+	<div class="guias">
+		<div class=guia id=guia1 >&nbsp;Servi&ccedil;os&nbsp;</div>
+		<div class=guia id=guia2 >&nbsp;Metadados&nbsp;</div>
+		<div class=guia id=guia3 >&nbsp;Temas&nbsp;</div>
+	</div>
+	<span id=geral >
+		<div class=guiaobj id="guia1obj" style="width:320px">
+			<div style="text-align:left;color:navy;cursor:pointer;width:100%;position:relative;top:5px;left:0px">
+				<p>Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado do acesso.<br>
+				<input class=digitar id=servico value="" size=60 />
+				<!--
+				<p onclick="registraws('http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&')">Agência Nacional das Águas
+				-->
+				<div id=RSSwms style="text-align:left"></div>
+			</div>
+		</div>
+		<div class=guiaobj id="guia2obj" style="display:none;width:320px">
+			<input class=executar type=buttom value="getCapabilities" size=20 onclick="getcapabilities()" /><br>
+			<div id=resultadoget style="display:block;position:relative;top:5px;left:0px">
+			</div>
+		</div>
+		<div class=guiaobj id="guia3obj" style="display:none;width:320px">
+			<div style="display:block;position:relative;top:5px;left:0px;">
+				Selecione a camada que ser&aacute; adicionada ao mapa.<br>
+			</div>
+			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
+			</div>
+		</div>
+	</span>
+	<div id="aguarde">
+		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
+	</div>
+</div>
+</body>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../../classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+
+<script>
+g_RSSwms = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswfs.xml")
+g_locaplic = window.parent.g_locaplic;
+if (document.getElementById("RSSwms"))
+{
+	if (g_RSSwms.length > 0)
+	{
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSSwms.join("|");
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaRSSws",mostraRetornowmsRSS);
+	}
+}
+function mostraRetornowmsRSS(retorno)
+{
+	var linhas = retorno.data.split("|")
+	var ins = ""
+	for (i=0;i<linhas.length; i++)
+	{
+		var caso = linhas[i].split("#")
+		
+		ins += "<p class=clique onclick=\"registraws('"+caso[2]+"')\" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")</p>"
+	}
+	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
+}
+</script>
+</html>

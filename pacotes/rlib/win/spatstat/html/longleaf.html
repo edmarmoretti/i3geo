@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Longleaf Pines Point Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for longleaf {spatstat}"><tr><td>longleaf {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Longleaf Pines Point Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Locations and sizes of Longleaf pine trees.
+A marked point pattern.
+</p>
+<p>
+The data record the locations and diameters of 
+584 Longleaf pine (<EM>Pinus palustris</EM>) trees 
+in a 200 x 200 metre region in southern Georgia (USA).
+They were collected and analysed by Platt, Evans and Rathbun (1988).
+</p>
+<p>
+This is a marked point pattern; the mark associated with a tree is its
+diameter at breast height (<code>dbh</code>), a convenient measure of its size. 
+Several analyses have considered only the ``adult'' trees which
+are conventionally defined as those trees with <code>dbh</code>
+greater than or equal to 30 cm.
+</p>
+<p>
+The pattern is regarded as spatially inhomogeneous.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>data(longleaf)</pre>
+
+
+<h3>Format</h3>
+
+<p>
+An object of class <code>"ppp"</code>
+representing the point pattern of tree locations.
+Entries include
+<table summary="Rd table">
+<tr>
+  <td align="left"><code>x</code> </td>  <td align="left"> Cartesian <i>x</i>-coordinate of tree </td>
+</tr>
+<tr>
+  <td align="left"> <code>y</code> </td>  <td align="left"> Cartesian <i>y</i>-coordinate of tree </td>
+</tr>
+<tr>
+  <td align="left"> <code>marks</code> </td>  <td align="left"> diameter at breast height, in centimetres. </td>
+</tr>
+</table>
+<p>
+See <code><a href="ppp.object.html">ppp.object</a></code> for details of the format of a
+point pattern object.
+</p>
+
+
+<h3>Source</h3>
+
+<p>
+Platt, Evans and Rathbun (1988)
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Platt, W. J., Evans, G. W. and Rathbun, S. L. (1988)
+The population dynamics of a long-lived Conifer (Pinus palustris).
+<EM>The American Naturalist</EM> <B>131</B>, 491&ndash;525.
+</p>
+<p>
+Rathbun, S. L. and Cressie, N. (1994)
+A space-time survival point process for a longleaf
+pine forest in southern Georgia.
+<EM>Journal of the American Statistical Association</EM> <B>89</B>, 1164&ndash;1173.
+</p>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

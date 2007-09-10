@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Pairwise distances</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for pairdist.default {spatstat}"><tr><td>pairdist.default {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Pairwise distances</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes the matrix of distances between all pairs of points
+in a set of points
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## Default S3 method:
+  pairdist(X, Y=NULL, ..., period=NULL, method="C")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X,Y</code></td>
+<td>
+Arguments specifying the coordinates of a set of points.
+Typically <code>X</code> and <code>Y</code> would be
+numeric vectors of equal length.
+Alternatively <code>Y</code> may be omitted and <code>X</code> may be
+a list with two components <code>x</code> and <code>y</code>,
+or a matrix with two columns.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.
+</td></tr>
+<tr valign="top"><td><code>period</code></td>
+<td>
+Optional. Dimensions for periodic edge correction.
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+String specifying which method of calculation to use.
+Values are <code>"C"</code> and <code>"interpreted"</code>.
+Usually not specified.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Given the coordinates of a set of points,
+this function computes the Euclidean distances between all pairs of
+points, and returns the matrix of distances.
+It is a method for the generic function <code>pairdist</code>.
+</p>
+<p>
+The arguments <code>X</code> and <code>Y</code> must determine
+the coordinates of a set of points. Typically <code>X</code> and
+<code>Y</code> would be numeric vectors of equal length. Alternatively
+<code>Y</code> may be omitted and <code>X</code> may be a list with two components
+named <code>x</code> and <code>y</code>, or a matrix or data frame with two columns.
+</p>
+<p>
+Alternatively if <code>period</code> is given,
+then the distances will be computed in the `periodic'
+sense (also known as `torus' distance).
+The points will be treated as if they are in a rectangle
+of width <code>period[1]</code> and height <code>period[2]</code>.
+Opposite edges of the rectangle are regarded as equivalent.
+</p>
+<p>
+The argument <code>method</code> is not normally used. It is
+retained only for checking the validity of the software.
+If <code>method = "interpreted"</code> then the distances are
+computed using interpreted R code only. If <code>method="C"</code>
+(the default) then C code is used. The C code is somewhat faster.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A square matrix whose <code>[i,j]</code> entry is the distance
+between the points numbered <code>i</code> and <code>j</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Pavel Grabarnik
+<a href="mailto:pavel.grabar@issp.serpukhov.su">pavel.grabar@issp.serpukhov.su</a>
+and 
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="crossdist.html">crossdist</a></code>,
+<code><a href="nndist.html">nndist</a></code>,
+<code><a href="Kest.html">Kest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   x &lt;- runif(100)
+   y &lt;- runif(100)
+   d &lt;- pairdist(x, y)
+   d &lt;- pairdist(cbind(x,y))
+   d &lt;- pairdist(x, y, period=c(1,1))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

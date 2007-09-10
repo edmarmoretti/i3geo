@@ -1,0 +1,71 @@
+quantcut               package:gtools               R Documentation
+
+_C_r_e_a_t_e _a _F_a_c_t_o_r _V_a_r_i_a_b_l_e _U_s_i_n_g _t_h_e _Q_u_a_n_t_i_l_e_s _o_f _a _C_o_n_t_i_n_u_o_u_s _V_a_r_i_a_b_l_e
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Create a factor variable using the quantiles of a continous
+     variable.
+
+_U_s_a_g_e:
+
+     quantcut(x, q=seq(0,1,by=0.25), na.rm=TRUE, ...)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: Continous variable. 
+
+       q: Vector of quantiles used for creating groups. Defaults to
+          'seq(0, 1, by=0.25)'.  See 'quantile' for details. 
+
+   na.rm: Boolean indicating whether missing values should be removed
+          when computing quantiles.  Defaults to TRUE.
+
+     ...: Optional arguments passed to 'cut'. 
+
+_D_e_t_a_i_l_s:
+
+     This function uses 'quantile' to obtain the specified quantiles of
+     'x', then calls 'cut' to create a factor variable using the
+     intervals specified by these quantiles.
+
+     It properly handles cases where more than one quantile obtains the
+     same value, as in the second example below.  Note that in this
+     case, there will be fewer generated factor levels than the
+     specified number of quantile intervals.
+
+_V_a_l_u_e:
+
+     Factor variable with one level for each quantile interval given by
+     'q'.
+
+_A_u_t_h_o_r(_s):
+
+     Gregory R. Warnes warnes@bst.rochester.edu
+
+_S_e_e _A_l_s_o:
+
+     'cut', 'quantile'
+
+_E_x_a_m_p_l_e_s:
+
+       ## create example data
+       
+       x <- rnorm(1000)
+
+       ## cut into quartiles
+       quartiles <- quantcut( x )
+       table(quartiles)
+
+       ## cut into deciles
+       deciles <- quantcut( x, seq(0,1,by=0.1) )
+       table(deciles)
+
+       ## show handling of 'tied' quantiles.
+       x <- round(x)  # discretize to create ties
+       stem(x)        # display the ties
+       deciles <- quantcut( x, seq(0,1,by=0.1) )
+
+       table(deciles) # note that there are only 5 groups (not 10) 
+                      # due to duplicates
+

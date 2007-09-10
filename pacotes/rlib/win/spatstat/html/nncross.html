@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Nearest Neighbour in Another Point Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for nncross {spatstat}"><tr><td>nncross {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Nearest Neighbour in Another Point Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Given two point patterns <code>X</code> and <code>Y</code>,
+finds the nearest neighbour in <code>Y</code> of each point of <code>X</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  nncross(X, Y, iX=NULL, iY=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X, Y</code></td>
+<td>
+Two point patterns (objects of class <code>"ppp"</code>).</td></tr>
+<tr valign="top"><td><code>iX, iY</code></td>
+<td>
+Optional identifiers, used to test whether a point in
+<code>X</code> is identical to a point in <code>Y</code>. See Details</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Given two point patterns <code>X</code> and <code>Y</code> this
+function finds, for each point of <code>X</code>, 
+the nearest point of <code>Y</code>. The distance between these points
+is also computed.
+</p>
+<p>
+The return value is a data frame, with rows corresponding to
+the points of <code>X</code>.  The first column gives the nearest neighbour
+distances (i.e. the <code>i</code>th entry is the distance 
+from the <code>i</code>th point of <code>X</code> to the nearest point of
+<code>Y</code>). The second column gives the indices of the nearest
+neighbours (i.e. the <code>i</code>th entry is the index of
+the nearest point in <code>Y</code>.)
+</p>
+<p>
+Note that this function is not symmetric in <code>X</code> and <code>Y</code>.
+To find the nearest neighbour in <code>X</code> of each point in <code>Y</code>,
+just use <code>nncross(Y,X)</code>.
+</p>
+<p>
+The arguments <code>iX</code> and <code>iY</code> are used when
+the two point patterns <code>X</code> and <code>Y</code> have some points in
+common.  In this situation <code>nncross(X, Y)</code> would return some zero
+distances. To avoid this, attach a unique integer identifier to
+each point, such that two points are identical if their
+identifying numbers are equal. Let <code>iX</code> be the vector of
+identifier values for the points in <code>X</code>, and <code>iY</code>
+the vector of identifiers for points in <code>Y</code>. Then the code
+will only compare two points if they have different values of the
+identifier. See the Examples.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A data frame with two columns:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>dist</code></td>
+<td>
+Nearest neighbour distance</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+Nearest neighbour index in <code>Y</code></td></tr>
+</table>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # two different point patterns
+  X &lt;- runifpoint(15)
+  Y &lt;- runifpoint(20)
+  N &lt;- nncross(X,Y)$which
+  # note that length(N) = 15
+  plot(superimpose(X=X,Y=Y), main="nncross", cols=c("red","blue"))
+  arrows(X$x, X$y, Y[N]$x, Y[N]$y, length=0.15)
+
+  # two patterns with some points in common
+  Z &lt;- runifpoint(50)
+  X &lt;- Z[1:30]
+  Y &lt;- Z[20:50]
+  iX &lt;- 1:30
+  iY &lt;- 20:50
+  N &lt;- nncross(X,Y, iX, iY)$which
+  plot(superimpose(X=X, Y=Y), main="nncross", cols=c("red","blue"))
+  arrows(X$x, X$y, Y[N]$x, Y[N]$y, length=0.15)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

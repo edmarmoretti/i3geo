@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Define Point Process Model for Metropolis-Hastings Simulation.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rmhmodel {spatstat}"><tr><td>rmhmodel {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Define Point Process Model for Metropolis-Hastings Simulation.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Builds a description of a point process model
+for use in simulating the model by the Metropolis-Hastings
+algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+   rmhmodel(model, ...)
+   ## Default S3 method:
+   rmhmodel(model, ..., cif=NULL, par=NULL, w=NULL, trend=NULL, types=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+An existing description of the model in some
+other format. Incompatible with the arguments listed below.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+There should be no other arguments.</td></tr>
+<tr valign="top"><td><code>cif</code></td>
+<td>
+Character string specifying the choice of model</td></tr>
+<tr valign="top"><td><code>par</code></td>
+<td>
+Parameters of the model</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+Spatial window in which to simulate</td></tr>
+<tr valign="top"><td><code>trend</code></td>
+<td>
+Specification of the trend in the model</td></tr>
+<tr valign="top"><td><code>types</code></td>
+<td>
+A vector of factor levels defining the possible
+marks, for a multitype process.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Simulated realisations of many point process models
+can be generated using the Metropolis-Hastings algorithm
+<code><a href="rmh.html">rmh</a></code>. The algorithm requires the model to be specified
+in a particular format.
+</p>
+<p>
+This function <code>rmhmodel</code>
+creates a description of the point process model in the form
+required by <code><a href="rmh.html">rmh</a></code>, and checks that the parameters of the
+model are valid.
+</p>
+<p>
+The point process model should be specified <B>either</B> by the
+first argument <code>model</code> <B>or</B> by the other arguments
+<code>cif</code>, <code>par</code> etc.
+</p>
+<p>
+If <code>model</code> is a fitted point process model
+(object of class <code>"ppm"</code> obtained by a call to the model-fitting
+function <code><a href="ppm.html">ppm</a></code>) then a description of the point process
+model will be extracted from this object.
+</p>
+<p>
+If <code>model</code> is a list, then it should have components named 
+<code>cif</code>, <code>par</code> and optionally <code>w</code>, <code>trend</code>,
+<code>types</code> with the same interpretation as described below.
+</p>
+<p>
+The argument <code>cif</code> is a character string specifying the choice of
+interpoint interaction for the point process. The current options are
+<dl>
+<dt><code>'strauss'</code></dt><dd>The Strauss process</dd>
+<dt><code>'straush'</code></dt><dd>The Strauss process with hard core</dd>
+<dt><code>'sftcr'</code></dt><dd>The Softcore process</dd>
+<dt><code>'straussm'</code></dt><dd>The multitype Strauss process</dd>
+<dt><code>'straushm'</code></dt><dd>Multitype Strauss process with hard core</dd>
+<dt><code>'dgs'</code></dt><dd>Diggle, Gates and Stibbard (1987) process</dd>
+<dt><code>'diggra'</code></dt><dd>Diggle and Gratton (1984) process</dd>
+<dt><code>'geyer'</code></dt><dd>Saturation process (Geyer, 1999).</dd>
+<dt><code>'lookup'</code></dt><dd>General isotropic pairwise interaction process,
+with the interaction function specified via a ``lookup table''.</dd>
+</dl>
+
+<p>
+The argument <code>par</code> supplies parameter values appropriate to
+the conditional intensity function being invoked. These are:
+<dl>
+<dt>strauss:</dt><dd>(Strauss process.) A <B>named</B> vector with components
+<code>beta,gamma,r</code> which are respectively the ``base''
+intensity, the pair-wise interaction parameter and the
+interaction radius.  Note that <code>gamma</code> must be less than
+or equal to 1.
+(Note that there is also an algorithm for perfect simulation
+of the Strauss process, <code><a href="rStrauss.html">rStrauss</a></code>)
+</dd>
+<dt>straush:</dt><dd>(Strauss process with hardcore.) A <B>named</B> vector with
+entries <code>beta,gamma,r,hc</code> where <code>beta</code>, <code>gamma</code>,
+and <code>r</code> are as for the Strauss process, and <code>hc</code> is
+the hardcore radius.  Of course <code>hc</code> must be less than
+<code>r</code>.
+</dd>
+<dt>sftcr:</dt><dd>(Softcore process.) A <B>named</B> vector with components
+<code>beta,sigma,kappa</code>.  Again <code>beta</code> is a ``base''
+intensity. The pairwise interaction between two points
+<i>u != v</i> is
+</p><p align="center"><i>-(sigma/||u-v||)^(2/kappa)</i></p><p>
+Note that it is necessary that <i>0 &lt; kappa &lt;1</i>.
+</dd>
+<dt>straussm:</dt><dd>(Multitype Strauss process.) A <B>named</B> list with components
+<ul>
+<li><code>beta</code>: 
+A vector of ``base'' intensities, one for each possible type.
+<li><code>gamma</code>:
+A <B>symmetric</B> matrix of interaction parameters,
+with <i>gamma_ij</i> pertaining to the interaction between
+type <i>i</i> and type <i>j</i>.
+<li><code>radii</code>:
+A <B>symmetric</B> matrix of interaction radii, with
+entries <i>r_ij</i> pertaining to the interaction between type
+<i>i</i> and type <i>j</i>.
+</ul>
+</dd>
+<dt>straushm:</dt><dd>(Multitype Strauss process with hardcore.)
+A <B>named</B> list with components <code>beta</code> and <code>gamma</code>
+as for <code>straussm</code> and
+<B>two</B> ``radii'' components:
+<ul>
+<li><code>iradii</code>: the interaction radii
+<li><code>hradii</code>: the hardcore radii
+</ul>
+<p>
+which are both symmetric matrices of nonnegative numbers.
+The entries of <code>hradii</code> must be less than the
+corresponding entries
+of <code>iradii</code>.
+</dd>
+<dt>dgs:</dt><dd>(Diggle, Gates, and Stibbard process.
+See Diggle, Gates, and Stibbard (1987))
+A <B>named</B> vector with components
+<code>beta</code> and <code>rho</code>.  This process has pairwise interaction
+function equal to
+</p><p align="center"><i>e(t) = sin^2((pi * t)/(2 * rho))
+</i></p><p>
+for <i>t &lt; rho</i>, and equal to 1
+for <i>t &gt;= rho</i>.
+</dd>
+<dt>diggra:</dt><dd>(Diggle-Gratton process. See Diggle and Gratton (1984)
+and Diggle, Gates and Stibbard (1987).)
+A <B>named</B> vector with components <code>beta</code>,
+<code>kappa</code>, <code>delta</code> and <code>rho</code>.  This process has
+pairwise interaction function <i>e(t)</i> equal to 0
+for <i>t &lt; delta</i>, equal to
+</p><p align="center"><i>((t-delta)/(rho-delta))^kappa
+</i></p><p>
+for <i>delta &lt;= t &lt; rho</i>,
+and equal to 1 for <i>t &gt;= rho</i>.
+Note that here we use the symbol
+<i>kappa</i> where Diggle, Gates, and Stibbard use
+<i>beta</i> since we reserve the symbol <i>beta</i>
+for an intensity parameter.
+</dd>
+<dt>geyer:</dt><dd>(Geyer's saturation process. See Geyer (1999).)
+A <B>named</B> vector
+with components <code>beta</code>, <code>gamma</code>, <code>r</code>, and <code>sat</code>.
+The components <code>beta</code>, <code>gamma</code>, <code>r</code> are as for
+the Strauss model, and <code>sat</code> is the ``saturation''
+parameter.  The model is Geyer's ``saturation'' point process
+model, a modification of the Strauss process in which
+we effectively impose an upper limit (<code>sat</code>) on the number of
+neighbours which will be counted as close to a given point.
+</p>
+<p>
+Explicitly, a saturation point process with interaction
+radius <i>r</i>, saturation threshold <i>s</i>, and
+parameters <i>beta</i> and <i>gamma</i>,
+is the point process in which each point <i>x[i]</i>
+in the pattern <i>X</i> contributes a factor
+</p><p align="center"><i>beta gamma^min(s,t(x[i],X))</i></p><p>
+to the probability density of the point pattern,
+where <i>t(x[i],X)</i> denotes the number of
+``<i>r</i>-close neighbours'' of <i>x[i]</i> in the
+pattern <i>X</i>.
+</p>
+<p>
+If the saturation threshold <i>s</i> is infinite,
+the Geyer process reduces to a Strauss process
+with interaction parameter <i>gamma^2</i>
+rather than <i>gamma</i>.
+</dd>
+
+
+<dt>lookup:</dt><dd>(Arbitrary pairwise interaction process with isotropic interaction.)
+A <B>named</B> list with components
+<code>beta</code>, <code>r</code>, and <code>h</code>, or just with components
+<code>beta</code> and <code>h</code>.
+</p>
+<p>
+This model is the pairwise interaction process
+with an isotropic interaction given by any chosen function <i>H</i>.
+Each pair of points <i>x[i], x[j]</i> in the
+point pattern contributes
+a factor <i>H(d(x[i],x[j]))</i>
+to the probability density, where <i>d</i> denotes distance
+and <i>H</i> is the pair interaction function.
+</p>
+<p>
+The component <code>beta</code> is a
+(positive) scalar which determines the ``base'' intensity
+of the process.
+</p>
+<p>
+In this implementation, <i>H</i> must be a step function.
+It is specified by the user in one of two ways.
+<ul>
+<li><B>as a vector of values:</B>
+If <code>r</code> is present, then <code>r</code> is assumed to 
+give the locations of jumps in the function <i>H</i>,
+while the vector <code>h</code> gives the corresponding
+values of the function.
+</p>
+<p>
+Specifically, the interaction function
+<i>H(t)</i> takes the value <code>h[1]</code>
+for distances <i>t</i> in the interval 
+<code>[0, r[1])</code>; takes the value <code>h[i]</code>
+for distances <i>t</i> in the interval 
+<code>[r[i-1], r[i])</code> where
+<i>i = 2, ..., n</i>;
+and takes the value 1 for <i>t &gt;= r[n]</i>.
+Here <i>n</i> denotes the length of <code>r</code>.
+</p>
+<p>
+The components <code>r</code> and <code>h</code>
+must be numeric vectors of equal length.
+The <code>r</code> values must be strictly positive, and 
+sorted in increasing order.
+</p>
+<p>
+The entries of <code>h</code> must be non-negative. 
+If any entry of <code>h</code> is greater than 1,
+then the entry <code>h[1]</code> must be 0 (otherwise the specified
+process is non-existent).
+</p>
+<p>
+Greatest efficiency is achieved if the values of
+<code>r</code> are equally spaced.
+</p>
+<p>
+[<B>Note:</B> The usage of <code>r</code> and <code>h</code>
+has <EM>changed</EM> from the previous usage in <STRONG>spatstat</STRONG>
+versions 1.4-7 to 1.5-1, in which ascending order was not required,
+and in which the first entry of <code>r</code> had to be 0.]
+<li><B>as a stepfun object:</B>
+If <code>r</code> is absent, then <code>h</code> must be
+an object of class <code>"stepfun"</code> specifying
+a step function. Such objects are created by
+<code><a href="../../stats/html/stepfun.html">stepfun</a></code>. 
+</p>
+<p>
+The stepfun object <code>h</code> must be right-continuous
+(which is the default using <code><a href="../../stats/html/stepfun.html">stepfun</a></code>.)
+</p>
+<p>
+The values of the step function must all be nonnegative.
+The values must all be less than 1
+unless the function is identically zero on some initial
+interval <i>[0,r)</i>. The rightmost value (the value of
+<code>h(t)</code> for large <code>t</code>) must be equal to 1.
+</p>
+<p>
+Greatest efficiency is achieved if the jumps (the
+``knots'' of the step function) are equally spaced.
+</ul>
+</dd>
+</dl>
+
+<p>
+The optional argument <code>trend</code> determines the spatial trend in the model,
+if it has one. It should be a function or image
+(or a list of such, if the model is multitype)
+to provide the value of the trend at an arbitrary point.
+<dl>
+<dt>trend given as a function:</dt><dd>A trend
+function may be a function of any number of arguments,
+but the first two must be the eqn{x,y} coordinates of
+a point.  Auxiliary arguments may be passed
+to the <code>trend</code> function at the time of simulation,
+via the <code>...</code> argument to <code><a href="rmh.html">rmh</a></code>.
+</p>
+<p>
+The function <B>must</B> be <B>vectorized</B>.
+That is, it must be capable of accepting vector valued
+<code>x</code> and <code>y</code> arguments.  Put another way,
+it must be capable of calculating the trend value at a
+number of points, simultaneously, and should return the
+<B>vector</B> of corresponding trend values.
+</dd>
+<dt>trend given as an image:</dt><dd>An image (see <code><a href="im.object.html">im.object</a></code>)
+provides the trend values at a grid of
+points in the observation window and determines the trend
+value at other points as the value at the nearest grid point.
+</dd>
+</dl>
+<p>
+Note that the trend or trends must be <B>non-negative</B>;
+no checking is done for this.
+</p>
+<p>
+The optional argument <code>w</code> specifies the window
+in which the pattern is to be generated.  If specified, it must be in
+a form which can be coerced to an object of class <code>owin</code>
+by <code><a href="as.owin.html">as.owin</a></code>.
+</p>
+<p>
+The optional argument <code>types</code> specifies the possible
+types in a multitype point process. If the model being simulated
+is multitype, and <code>types</code> is not specified, then this vector
+defaults to <code>1:ntypes</code> where <code>ntypes</code> is the number of
+types.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"rmhmodel"</code>, which is essentially
+a list of parameter values for the model.
+<br>
+There is a <code>print</code> method for this class, which prints
+a sensible description of the model chosen.</p>
+
+<h3>Warnings in Respect of &ldquo;lookup&rdquo;</h3>
+
+<p>
+The syntax of <code>rmh.default</code> in respect of the <code>lookup</code> cif
+has <EM>changed</EM> from the previous release of <STRONG>spatstat</STRONG>
+(versions 1.4-7 to 1.5-1).
+Read the <EM>Details</EM> carefully. In particular it is now required
+that the first entry of the <code>r</code> component of <code>par</code>
+be <EM>strictly positive</EM>.  (This is the opposite of what was
+required in the previous release, which was that this first entry
+had to be 0.)
+</p>
+<p>
+It is also now required that the entries of <code>r</code> be
+sorted into ascending order.  (In the previous release it
+was assumed that the entries of <code>r</code> and <code>h</code> were
+in corresponding order and the two vectors were sorted
+commensurately.  It was decided that this is dangerous sand
+unnecessary.)
+</p>
+<p>
+Note that if you specify the <code>lookup</code> pairwise interaction
+function via <code><a href="../../stats/html/stepfun.html">stepfun</a>()</code> the arguments <code>x</code>
+and <code>y</code> which are passed to <code>stepfun()</code> are slightly
+different from <code>r</code> and <code>h</code>:  <code>length(y)</code> is equal
+to <code>1+length(x)</code>; the final entry of <code>y</code> must be equal
+to 1 &mdash; i.e. this value is explicitly supplied by the user rather
+than getting tacked on internally.
+</p>
+<p>
+The step function returned by <code>stepfun()</code> must be right
+continuous (this is the default behaviour of <code>stepfun()</code>)
+otherwise an error is given.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Diggle, P. J. (2003) <EM>Statistical Analysis of Spatial Point
+Patterns</EM> (2nd ed.) Arnold, London.
+</p>
+<p>
+Diggle, P.J. and Gratton, R.J. (1984)
+Monte Carlo methods of inference for implicit statistical models.
+<EM>Journal of the Royal Statistical Society, series B</EM>
+<B>46</B>, 193 &ndash; 212.
+</p>
+<p>
+Diggle, P.J., Gates, D.J., and Stibbard, A. (1987)
+A nonparametric estimator for pairwise-interaction point processes.
+Biometrika <B>74</B>, 763 &ndash; 770.
+<EM>Scandinavian Journal of Statistics</EM> <B>21</B>, 359&ndash;373.
+</p>
+<p>
+Geyer, C.J. (1999)
+Likelihood Inference for Spatial Point
+Processes. Chapter 3 in  O.E. Barndorff-Nielsen, W.S. Kendall and
+M.N.M. Van Lieshout (eds) <EM>Stochastic Geometry: Likelihood and
+Computation</EM>, Chapman and Hall / CRC,  Monographs on Statistics and
+Applied Probability, number 80. Pages 79&ndash;140.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="rmh.html">rmh</a></code>,
+<code><a href="rmhcontrol.html">rmhcontrol</a></code>,
+<code><a href="rmhstart.html">rmhstart</a></code>,
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="Strauss.html">Strauss</a></code>,
+<code><a href="Softcore.html">Softcore</a></code>,
+<code><a href="StraussHard.html">StraussHard</a></code>,
+<code><a href="MultiStrauss.html">MultiStrauss</a></code>,
+<code><a href="MultiStraussHard.html">MultiStraussHard</a></code>,
+<code><a href="DiggleGratton.html">DiggleGratton</a></code>,
+<code><a href="PairPiece.html">PairPiece</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   # Strauss process:
+   mod01 &lt;- rmhmodel(cif="strauss",par=c(beta=2,gamma=0.2,r=0.7),
+                 w=c(0,10,0,10))
+   # Equivalent to:
+   a &lt;- list(cif="strauss",par=c(beta=2,gamma=0.2,r=0.7),
+                 w=c(0,10,0,10))
+   mod01 &lt;- rmhmodel(a)
+   # The above could also be simulated using 'rStrauss'
+
+   # Strauss with hardcore:
+   mod04 &lt;- list(cif="straush",par=c(beta=2,gamma=0.2,r=0.7,hc=0.3),
+                w=owin(c(0,10),c(0,5)))
+   mod04 &lt;- rmhmodel(mod04)
+
+   # Soft core:
+   par3 &lt;- c(0.8,0.1,0.5)
+   w    &lt;- square(10)
+   mod07 &lt;- rmhmodel(cif="sftcr",
+                     par=c(beta=0.8,sigma=0.1,kappa=0.5),
+                     w=w)
+   
+   # Multitype Strauss:
+   beta &lt;- c(0.027,0.008)
+   gmma &lt;- matrix(c(0.43,0.98,0.98,0.36),2,2)
+   r    &lt;- matrix(c(45,45,45,45),2,2)
+   mod08 &lt;- rmhmodel(cif="straussm",
+                     par=list(beta=beta,gamma=gmma,radii=r),
+                     w=square(250))
+   # specify types
+   mod09 &lt;- rmhmodel(cif="straussm",
+                     par=list(beta=beta,gamma=gmma,radii=r),
+                     w=square(250),
+                     types=c("A", "B"))
+
+   
+   # Multitype Strauss hardcore with trends for each type:
+   beta  &lt;- c(0.27,0.08)
+   ri    &lt;- matrix(c(45,45,45,45),2,2)
+   rhc  &lt;- matrix(c(9.1,5.0,5.0,2.5),2,2)
+   tr3   &lt;- function(x,y){x &lt;- x/250; y &lt;- y/250;
+                           exp((6*x + 5*y - 18*x^2 + 12*x*y - 9*y^2)/6)
+                         }
+                         # log quadratic trend
+   tr4   &lt;- function(x,y){x &lt;- x/250; y &lt;- y/250;
+                         exp(-0.6*x+0.5*y)}
+                        # log linear trend
+   mod10 &lt;- rmhmodel(cif="straushm",par=list(beta=beta,gamma=gmma,
+                 iradii=ri,hradii=rhc),w=c(0,250,0,250),
+                 trend=list(tr3,tr4))
+
+   # Lookup (interaction function h_2 from page 76, Diggle (2003)):
+      r &lt;- seq(from=0,to=0.2,length=101)[-1] # Drop 0.
+      h &lt;- 20*(r-0.05)
+      h[r&lt;0.05] &lt;- 0
+      h[r&gt;0.10] &lt;- 1
+      mod17 &lt;- rmhmodel(cif="lookup",par=list(beta=4000,h=h,r=r),w=c(0,1,0,1))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Summarise Marks in Every Neighbourhood in a Point Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for markstat {spatstat}"><tr><td>markstat {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Summarise Marks in Every Neighbourhood in a Point Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Visit each point in a point pattern, find the neighbouring points,
+and summarise their marks
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+   markstat(X, fun, N, R, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+A marked point pattern. 
+An object of class <code>"ppp"</code>.
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+Function to be applied to the vector of marks.
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+Integer. If this argument is present,
+the neighbourhood of a point of <code>X</code> is defined to consist of the
+<code>N</code> points of <code>X</code> which are closest to it.
+This argument is incompatible with <code>R</code>.
+</td></tr>
+<tr valign="top"><td><code>R</code></td>
+<td>
+Nonnegative numeric value. If this argument is present,
+the neighbourhood of a point of <code>X</code> is defined to consist of
+all points of <code>X</code> which lie within a distance <code>R</code>
+of it.
+This argument is incompatible with <code>N</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+extra arguments passed to the function <code>fun</code>.
+They must be given in the form <code>name=value</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This algorithm visits each point in the point pattern <code>X</code>,
+determines which points of <code>X</code> are ``neighbours'' of the current
+point, extracts the marks of these neighbouring points,
+applies the function <code>fun</code> to the marks,
+and collects the value or values returned by <code>fun</code>.
+</p>
+<p>
+The definition of ``neighbours'' depends on the arguments
+<code>N</code> and <code>R</code>, exactly one of which must be given.
+</p>
+<p>
+If <code>N</code> is given, then the neighbours of the current
+point are the <code>N</code> points of <code>X</code> which are closest to
+the current point (including the current point itself).
+If <code>R</code> is given, then the neighbourhood of the current point
+consists of all points of <code>X</code> which lie closer than a distance <code>R</code>
+from the current point.
+</p>
+<p>
+Each point of <code>X</code> is visited; the neighbourhood
+of the current point is determined; the marks of these points
+are extracted as a vector <code>v</code>; then the function 
+<code>fun</code> is called as:
+</p>
+<p>
+<code>fun(v, ...)</code>
+</p>
+<p>
+where <code>...</code> are the arguments passed from the call to
+<code>markstat</code>.
+</p>
+<p>
+The results of each call to <code>fun</code> are collected and returned
+according to the usual rules for <code><a href="../../base/html/apply.html">apply</a></code> and its
+relatives. See <B>Value</B> above.
+</p>
+<p>
+This function is just a convenient wrapper for a common use of the
+function <code><a href="applynbd.html">applynbd</a></code>. For more complex tasks,
+see <code><a href="applynbd.html">applynbd</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Similar to the result of <code><a href="../../base/html/apply.html">apply</a></code>.
+if each call to <code>fun</code> returns a single numeric value,
+the result is a vector of dimension <code>X$n</code>, the number of points
+in <code>X</code>.
+If each call to <code>fun</code> returns a vector of the same length
+<code>m</code>, then the result is a matrix of dimensions <code>c(m,n)</code>;
+note the transposition of the indices, as usual for the family of
+<code>apply</code> functions.
+If the calls to <code>fun</code> return vectors of different lengths,
+the result is a list of length <code>X$n</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="applynbd.html">applynbd</a></code>,
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="../../base/html/apply.html">apply</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  data(longleaf)
+  
+
+  # average diameter of 5 closest neighbours of each tree
+  md &lt;- markstat(longleaf, mean, N=5)
+
+  # range of diameters of trees within 10 metre radius
+  rd &lt;- markstat(longleaf, range, R=10)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

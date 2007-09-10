@@ -1,0 +1,35 @@
+ELISA                 package:gtools                 R Documentation
+
+_D_a_t_a _f_r_o_m _a_n _E_L_I_S_A _a_s_s_a_y
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Observed signals and (for some observations) nominal
+     concentrations for samples that were aliquoted to multiple assay
+     plates, which were read multiple times on multiple days.
+
+_U_s_a_g_e:
+
+     data(ELISA)
+
+_F_o_r_m_a_t:
+
+     a data frame with the following columns:
+
+   _P_l_a_t_e_D_a_y factor. Specifies one of four physically disctinct 96 well
+        plates
+
+   _R_e_a_d factor. The signal was read 3 times for each plate.
+
+   _D_e_s_c_r_i_p_t_i_o_n character. Indicates contents of sample.
+
+   _C_o_n_c_e_n_t_r_a_t_i_o_n numeric. Nominal concentration of standards (NA for
+        all other samples).
+
+   _S_i_g_n_a_l numeric. Assay signal. Specifically, optical density (a
+        colorimetric assay).
+
+_S_o_u_r_c_e:
+
+     Anonymized data.
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Pixel Image Approximation of a Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for as.mask {spatstat}"><tr><td>as.mask {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Pixel Image Approximation of a Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Obtain a discrete (pixel image) approximation of a given window
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ as.mask(w, eps=NULL, dimyx=NULL, xy=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>w</code></td>
+<td>
+A window (object of class <code>"owin"</code>).</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+(optional) width and height of pixels.</td></tr>
+<tr valign="top"><td><code>dimyx</code></td>
+<td>
+(optional) pixel array dimensions</td></tr>
+<tr valign="top"><td><code>xy</code></td>
+<td>
+(optional) pixel coordinates</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function generates a rectangular grid of locations in the plane,
+tests whether each of these locations lies inside the
+window <code>w</code>, and stores the results as a binary pixel image
+or `mask' (an object of class <code>"owin"</code>, see <code><a href="owin.object.html">owin.object</a></code>).
+</p>
+<p>
+The most common use of this function is to approximate the shape
+of another window <code>w</code> by a binary pixel image. In this case,
+we will usually want to have a very fine grid of pixels.
+</p>
+<p>
+This function can also be used to generate a coarsely-spaced grid of
+locations inside a window, for purposes such as subsampling
+and prediction.
+</p>
+<p>
+The grid spacing and location are controlled by the
+arguments <code>eps</code>, <code>dimyx</code> and <code>xy</code>,
+which are mutually incompatible.
+</p>
+<p>
+If <code>eps</code> is given, then the grid spacing will be 
+approximately <code>eps</code> in both the <i>x</i> and <i>y</i> directions.
+</p>
+<p>
+If <code>dimyx</code> is given, then the pixel grid will be an
+<i>m x n</i> rectangular grid
+where <i>m, n</i> are given by <code>dimyx[2]</code>, <code>dimyx[1]</code>
+respectively. <B>Warning:</B> <code>dimyx[1]</code> is the number of
+pixels in the <i>y</i> direction, and <code>dimyx[2]</code> is the number
+in the <i>x</i> direction. 
+</p>
+<p>
+If <code>xy</code> is given, then this should be a structure
+containing two elements <code>x</code> and <code>y</code> which are the
+vectors of <i>x</i> and <code>y</code> coordinates of the margins
+of the grid. The pixel coordinates will be generated
+from these two vectors. In this case <code>w</code> may be omitted.
+</p>
+<p>
+If neither <code>eps</code> nor <code>dimyx</code> nor <code>xy</code> is given,
+the pixel raster dimensions are obtained from
+<code><a href="spatstat.options.html">spatstat.options</a>("npixel")</code>.
+</p>
+<p>
+There is no inverse of this function!
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A window (object of class <code>"owin"</code>)
+of type <code>"mask"</code> representing a binary pixel image.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="as.rectangle.html">as.rectangle</a></code>,
+<code><a href="spatstat.options.html">spatstat.options</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  w &lt;- owin(c(0,10),c(0,10), poly=list(x=c(1,2,3,2,1), y=c(2,3,4,6,7)))
+  ## Not run: plot(w)
+  m &lt;- as.mask(w)
+  ## Not run: plot(m)
+  x &lt;- 1:9
+  y &lt;- seq(0.25, 9.75, by=0.5)
+  m &lt;- as.mask(w, xy=list(x=x, y=y))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

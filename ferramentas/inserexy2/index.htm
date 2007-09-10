@@ -1,0 +1,87 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui/build/button/assets/button.css">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body>
+<div id=fundo style="left:0px" >
+	<div class="guias">
+		<div class=guia id=guia1 >&nbsp;Tema&nbsp;</div>
+		<div class=guia id=guia2 >&nbsp;Digitar&nbsp;</div>
+		<div class=guia id=guia3 >&nbsp;Colar&nbsp;</div>
+		<div class=guia id=guia4 >&nbsp;Conversor&nbsp;</div>
+		<div class=guia id=guia5 >&nbsp;Coordenadas&nbsp;</div>
+	</div>
+	<span id=geral style="left:0px">
+		<div class=guiaobj id="guia1obj" style="display:block;left:1px" >
+		    <div id=opc1 style=left:0px;top:0px;text-align:left; >
+				Escolha o tema para inserir os pontos:
+				<div id=shapefile style="display:block;position:relative;top:15px;left:0px">
+				</div><br>
+			</div>
+			<div id=men1 style="display:block;position:relative;left:0px">
+				Para inserir pontos, &eacute; necess&aacute;rio a exist&ecirc;ncia de um tema edit&aacute;vel dispon&iacute;vel no mapa.
+				<br>Utilize o bot&atilde;o "criar um novo" se n&atilde;o existir nenhum tema desse tipo no mapa.
+				<br>Ap&oacute;s selecionar ou criar um tema, clique no mapa para inserir os pontos ou use as op&ccedil;&otilde;es das guias acima.
+			</div>
+		</div>
+		<div class=guiaobj id="guia2obj" style="display:none;;left:1px" >
+			<div id=opc2 style="display:block;top:0px;left:0px">
+				X:<input class=digitar id='xg' title='grau' type=text size=3 value='-00'/>
+				<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>
+				<input class=digitar id='xs' title='segundo' type=text size=3 value='0.0'/>
+				ou <input class=digitar id='longitude' title='dms' type=text size=16 value=''/><br>
+				Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
+				<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>
+				<input class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/>
+				ou <input class=digitar id='latitude' title='dms' type=text size=16 value=''/><br><br>
+				<div style=top:0px;left:0px;text-align:left onclick='inserir()' >
+				<input id=botao2 type='button' size=14 value='Insere'  />
+				</div>
+			</div>
+			<div id=men2 style="display:block;position:relative;left:0px">
+				Digite as coordenadas do ponto desejado e clique em "Insere" para incluir o ponto.
+				<br>A coordenada X corresponde a longitude (leste-oeste) e a coordenada Y corresponde a latitude (norte-sul).
+				<br>Os valores devem sempre estar no formato Grau, Minuto e Segundo. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".
+				<br>O valor correspondente ao Grau deve receber o sinal de negativo("-") nos casos de longitude oeste (todo o Brasil est&aacute; nesse caso) e nos casos de latitude Sul.<br><br><br>
+			</div>
+		</div>
+		<div class=guiaobj id="guia3obj" style="display:none;left:1px" >
+			<div id=opc3 style="top:0px;left:0px;text-align:left;">
+				<input class=digitar id='colar' title='pares' type=text size=30 value=''/>
+				<img style="cursor:pointer" title='inserir' onclick='colar()' src='../../imagens/tic.png' id=procurarxy />
+			</div>
+			<div id=men3 style="display:block;position:relative;left:0px">
+				Cole os valores de X e Y, em d&eacute;cimos de grau, com sinal de negativo para oeste e sul, exemplo:<br> -54.23 -12.5 -50 -5.33<br>
+			</div>
+		</div>
+		<div class=guiaobj id="guia4obj" style="display:none;left:1px" >
+			<div id=opc4 style="top:0px;left:0px">
+			<div style=top:0px;left:0px;text-align:left onclick='wkt()'>
+				<input id=botao3 type='button' size=25 value='Lista wkt' /><br><br>
+			</div>
+			<div style=top:0px;left:0px;text-align:left onclick='criaPol()'>
+				<input id=botao4 type='button' size=25 value='Cria tema poligonal' /><br><br>
+			</div>
+			<div style=top:0px;left:0px;text-align:left onclick='criaLin()'>
+				<input id=botao5 type='button' size=25 value='Cria tema linear' /><br>
+			</div>
+			</div>
+			<div id=wktres style="display:block;position:relative;top:5px;left:0px">
+			</div>
+		</div>
+		<div class=guiaobj id="guia5obj" style="display:none;left:1px" >
+		<div id="resultado" style="display:block;position:relative;top:10px;left:0px;font-size:12px"></div>
+		</div>
+</span>
+</div>
+</body>
+<script type="text/javascript" src="../../pacotes/yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/element/element-beta.js"></script>
+<script type="text/javascript" src="../../pacotes/yui/build/button/button-beta.js"></script>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../../classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Generate Multitype Poisson Point Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rmpoispp {spatstat}"><tr><td>rmpoispp {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Generate Multitype Poisson Point Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Generate a random point pattern, a realisation of the
+(homogeneous or inhomogeneous) multitype Poisson process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ rmpoispp(lambda, lmax=NULL, win, types, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+Intensity of the multitype Poisson process.
+Either a single positive number, a vector, a <code>function(x,y,m, ...)</code>,
+a pixel image, a list of functions <code>function(x,y, ...)</code>,
+or a list of pixel images.
+</td></tr>
+<tr valign="top"><td><code>lmax</code></td>
+<td>
+An upper bound for the value of <code>lambda</code>.
+May be omitted
+</td></tr>
+<tr valign="top"><td><code>win</code></td>
+<td>
+Window in which to simulate the pattern.
+An object of class <code>"owin"</code>
+or something acceptable to <code><a href="as.owin.html">as.owin</a></code>.
+Ignored if <code>lambda</code> is a pixel image or list of images.
+</td></tr>
+<tr valign="top"><td><code>types</code></td>
+<td>
+All the possible types for the multitype pattern.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code>lambda</code> if it is a function.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function generates a realisation of the marked Poisson
+point process with intensity <code>lambda</code>.
+</p>
+<p>
+Note that the intensity function
+<i>lambda(x,y,m)</i> is the
+average number of points <B>of type m</B> per unit area
+near the location <i>(x,y)</i>.
+Thus a marked point process with a constant intensity of 10
+and three possible types will have an average of 30 points per unit
+area, with 10 points of each type on average.
+</p>
+<p>
+The intensity function may be specified in any of the following ways.
+<dl>
+<dt>single number:</dt><dd>If <code>lambda</code> is a single number,
+then this algorithm generates a realisation
+of the uniform marked Poisson process inside the window <code>win</code> with 
+intensity <code>lambda</code> for each type. The total intensity of
+points of all types is <code>lambda * length(types)</code>.
+The argument <code>types</code> must be given
+and determines the possible types in the multitype pattern.
+</dd>
+<dt>vector:</dt><dd>If <code>lambda</code> is a numeric vector,
+then this algorithm generates a realisation
+of the stationary marked Poisson process inside the window
+<code>win</code> with intensity <code>lambda[i]</code> for points of type
+<code>types[i]</code>. The total intensity of points of all types
+is <code>sum(lambda)</code>.  The argument <code>types</code> defaults to
+<code>seq(lambda)</code>.
+</dd>
+<dt>function:</dt><dd>If <code>lambda</code> is a function, the process has intensity
+<code>lambda(x,y,m,...)</code> at spatial location <code>(x,y)</code>
+for points of type <code>m</code>.
+The function <code>lambda</code> must work correctly with vectors <code>x</code>,
+<code>y</code> and <code>m</code>, returning a vector of function values.
+(Note that <code>m</code> will be a factor
+with levels equal to <code>types</code>.)
+The value <code>lmax</code>, if present, must be an upper bound on the 
+values of <code>lambda(x,y,m,...)</code> for all locations <code>(x, y)</code>
+inside the window <code>win</code> and all types <code>m</code>.
+The argument <code>types</code> must be given.
+</dd>
+<dt>list of functions:</dt><dd>If <code>lambda</code> is a list of functions,
+the process has intensity <code>lambda[[i]](x,y,...)</code> at spatial
+location <code>(x,y)</code> for points of type <code>types[i]</code>.
+The function <code>lambda[[i]]</code> must work correctly with vectors
+<code>x</code> and <code>y</code>, returning a vector of function values.
+The value <code>lmax</code>, if given, must be an upper bound on the 
+values of <code>lambda(x,y,...)</code> for all locations <code>(x, y)</code>
+inside the window <code>win</code>. 
+The argument <code>types</code> defaults to <code>seq(lambda)</code>.
+</dd>
+<dt>pixel image:</dt><dd>If <code>lambda</code> is a pixel image object of class <code>"im"</code>
+(see <code><a href="im.object.html">im.object</a></code>), the intensity at a location
+<code>(x,y)</code> for points of any type is equal to the pixel value
+of <code>lambda</code> for the pixel nearest to <code>(x,y)</code>.
+The argument <code>win</code> is ignored;
+the window of the pixel image is used instead.
+The argument <code>types</code> must be given.
+</dd>
+<dt>list of pixel images:</dt><dd>If <code>lambda</code> is a list of pixel images,
+then the image <code>lambda[[i]]</code> determines the intensity
+of points of type <code>types[i]</code>. 
+The argument <code>win</code> is ignored;
+the window of the pixel image is used instead.
+The argument <code>types</code> defaults to <code>seq(lambda)</code>.
+</dd>
+</dl>
+<p>
+If <code>lmax</code> is missing, an approximate upper bound will be calculated.
+</p>
+<p>
+To generate an inhomogeneous Poisson process
+the algorithm uses ``thinning'': it first generates a uniform
+Poisson process of intensity <code>lmax</code> for points of each type <code>m</code>,
+then randomly deletes or retains each point independently,
+with retention probability
+<i>p(x,y,m) = lambda(x,y)/lmax</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The simulated multitype point pattern (an object of class <code>"ppp"</code>
+with a component <code>marks</code> which is a factor).</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="owin.object.html">owin.object</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ # uniform bivariate Poisson process with total intensity 100 in unit square
+ pp &lt;- rmpoispp(50, types=c("a","b"))
+ 
+ # stationary bivariate Poisson process with intensity A = 30, B = 70
+ pp &lt;- rmpoispp(c(30,70), types=c("A","B"))
+ pp &lt;- rmpoispp(c(30,70))
+
+ # works in any window
+ data(letterR)
+ pp &lt;- rmpoispp(c(30,70), win=letterR, types=c("A","B"))
+
+ # inhomogeneous lambda(x,y,m)
+ # note argument 'm' is a factor 
+ lam &lt;- function(x,y,m) { 50 * (x^2 + y^3) * ifelse(m=="A", 2, 1)}
+ pp &lt;- rmpoispp(lam, win=letterR, types=c("A","B"))
+ # extra arguments
+ lam &lt;- function(x,y,m,scal) { scal * (x^2 + y^3) * ifelse(m=="A", 2, 1)}
+ pp &lt;- rmpoispp(lam, win=letterR, types=c("A","B"), scal=50)
+
+ # list of functions lambda[[i]](x,y)
+ lams &lt;- list(function(x,y){50 * x^2}, function(x,y){20 * abs(y)})
+ pp &lt;- rmpoispp(lams, win=letterR, types=c("A","B"))
+ pp &lt;- rmpoispp(lams, win=letterR)
+ # functions with extra arguments
+ lams &lt;- list(function(x,y,scal){5 * scal * x^2},
+              function(x,y, scal){2 * scal * abs(y)})
+ pp &lt;- rmpoispp(lams, win=letterR, types=c("A","B"), scal=10)
+ pp &lt;- rmpoispp(lams, win=letterR, scal=10)
+
+ # florid example
+ lams &lt;- list(function(x,y){
+                           100*exp((6*x + 5*y - 18*x^2 + 12*x*y - 9*y^2)/6)
+                         }
+                         # log quadratic trend
+              ,
+              function(x,y){
+                                   100*exp(-0.6*x+0.5*y)
+                         }
+                        # log linear trend
+              )
+  X &lt;- rmpoispp(lams, win=unit.square(), types=c("on", "off"))   
+
+ # pixel image
+ Z &lt;- as.im(function(x,y){30 * (x^2 + y^3)}, letterR)
+ pp &lt;- rmpoispp(Z, types=c("A","B"))
+
+ # list of pixel images
+ ZZ &lt;- list(
+          as.im(function(x,y){20 * (x^2 + y^3)}, letterR),
+          as.im(function(x,y){40 * (x^3 + y^2)}, letterR))
+ pp &lt;- rmpoispp(ZZ, types=c("A","B"))
+ pp &lt;- rmpoispp(ZZ)
+ 
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

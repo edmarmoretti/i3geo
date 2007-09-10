@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Histogram of Pixel Values in an Image</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for hist.im {spatstat}"><tr><td>hist.im {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Histogram of Pixel Values in an Image</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes and displays a histogram of the pixel values in a pixel image.
+The <code>hist</code> method for class <code>"im"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'im':
+  hist(x, ..., probability=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A pixel image (object of class <code>"im"</code>).</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code><a href="../../graphics/html/hist.html">hist.default</a></code>
+or <code><a href="../../graphics/html/barplot.html">barplot</a></code>.</td></tr>
+<tr valign="top"><td><code>probability</code></td>
+<td>
+Logical. If <code>TRUE</code>, the histogram will be
+normalised to give probabilities or probability densities.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function computes and (by default) displays a histogram
+of the pixel values in the image <code>x</code>.
+</p>
+<p>
+An object of class <code>"im"</code>
+describes a pixel image. See <code><a href="im.object.html">im.object</a></code>)
+for details of this class.
+</p>
+<p>
+The function <code>hist.im</code> is a method for the generic
+function <code><a href="../../graphics/html/hist.html">hist</a></code> for the class <code>"im"</code>. 
+</p>
+<p>
+Any arguments in <code>...</code> are passed to <code><a href="../../graphics/html/hist.html">hist.default</a></code>
+(for numeric valued images) or <code><a href="../../graphics/html/barplot.html">barplot</a></code> (for factor or
+logical images).
+For example, such arguments control the axes, and may be used to
+suppress the plotting.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A single number.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../graphics/html/hist.html">hist</a></code>,
+<code><a href="../../graphics/html/hist.html">hist.default</a></code>,
+<code><a href="../../graphics/html/barplot.html">barplot</a></code>,
+<code><a href="im.object.html">im.object</a></code>,
+<code><a href="summary.im.html">summary.im</a></code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  X &lt;- as.im(function(x,y) {x^2}, unit.square())
+  hist(X)
+  hist(cut(X,3))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

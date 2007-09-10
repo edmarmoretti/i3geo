@@ -1,0 +1,165 @@
+ ## $Id: methas.template,v 1.1 2006/05/10 03:24:24 adrian Exp adrian $
+
+#include "cif.h"
+#include "death.h"
+
+subroutine MHNAME(par,period,xprop,yprop,mprop,ntypes,
+                  iseed,nrep,mrep,p,q,npmax,nverb,x,y,marks,aux,npts,fixall)
+implicit double precision(a-h,o-z)
+dimension par(1), iseed(3)
+dimension x(1), y(1), marks(1), period(2)
+dimension xprop(1), yprop(1), mprop(1)
+integer aux(1)
+logical verb, fixall
+
+   ## Set up some constants
+one    = 1.d0
+zero   = 0.d0
+m1     = -1
+verb   = !(nverb==0)
+qnodds = (one - q)/q
+
+   ## Loop:
+irep = mrep
+while(irep <= nrep) {
+	if(verb && mod(irep,nverb)==0) {
+		iprt = irep/nverb
+		call intpr('irep/nverb=',-1,iprt,1)
+	}
+	itype = 0
+	call aru(1,zero,one,iseed,urp)
+
+  ## Shift or birth/death:
+	if(urp>p) {
+  ## Birth/death:
+		call aru(1,zero,one,iseed,urq)
+		if(urq>q) {
+
+   ## Propose birth:
+			u = xprop(irep)
+			v = yprop(irep)
+#ifdef MARKED
+			mrk = mprop(irep)
+#endif                        
+			call CIF(u,v,mrk,m1,x,y,marks,npts,ntypes,
+                                 par,period,cifval,aux)
+#ifdef DEBUG_GEYER
+#if (NMBR == 8)
+			call strauss(u,v,m1,x,y,npts,par,period,cifstr)
+			call dblepr('birth: cifval/cifstr=', -1, cifval/cifstr, 1)
+#endif
+#endif
+			anumer = cifval
+                        adenom = qnodds*(npts+1)
+			call aru(1,zero,one,iseed,bp)
+			if(bp*adenom < anumer) {
+				npts = npts + 1
+				itype = 1  ## Birth occurs.
+			}
+		}
+		else {
+
+  ## Propose death:
+                       if(npts != 0) {
+				call aru(1,zero,one,iseed,xi)
+				ix = 1 + int(npts*xi)
+#ifdef MARKED
+				mrki = marks(ix)
+#endif
+				call CIF(x(ix),y(ix),mrki,ix,x,y,
+                                 	marks,npts,ntypes,par,period,cifval,aux)
+#ifdef DEBUG_GEYER
+#if NMBR == 8
+			call strauss(x(ix),y(ix),ix,x,y,npts,par,period,cifstr)
+			call dblepr('death: cifval/cifstr=', -1, cifval/cifstr, 1)
+#endif
+#endif
+                                anumer = qnodds * npts
+				adenom = cifval
+				call aru(1,zero,one,iseed,dp)
+				if(dp*adenom < anumer) itype = 2
+                                                       ## Death occurs.
+			}
+		}
+	}
+	else {
+
+   ## Propose shift:
+               if(npts != 0) {
+                 call aru(1,zero,one,iseed,xi)
+                 ix = 1 + int(npts*xi)
+                 u = xprop(irep)
+                 v = yprop(irep)
+#ifdef MARKED
+                   mrki = marks(ix)
+                   mrk = mprop(irep)
+                   if(fixall && (mrk != mrki))
+                     itype = 0    ## reject
+                   else {
+                     call CIF(x(ix),y(ix),mrki,ix,x,y,marks,npts,
+                              ntypes,par,period,cvd,aux)
+                     call CIF(u,v,mrk,ix,x,y,marks,npts,
+                              ntypes,par,period,cvn,aux)
+                     call aru(1,zero,one,iseed,sp)
+                     if(sp*cvd < cvn) itype = 3    ## Shift occurs.
+                   }
+#else
+                   call CIF(x(ix),y(ix),mrki,ix,x,y,marks,npts,
+                            ntypes,par,period,cvd,aux)
+                   call CIF(u,v,mrk,ix,x,y,marks,npts,
+                            ntypes,par,period,cvn,aux)
+#ifdef DEBUG_GEYER
+#if NMBR == 8
+			call strauss(x(ix),y(ix),ix,x,y,npts,par,period,cifstr)
+			call dblepr('shift: cvd/cifstr=', -1, cvd/cifstr, 1)
+			call strauss(u,v,ix,x,y,npts,par,period,cifstr)
+			call dblepr('shift: cvn/cifstr=', -1, cvn/cifstr, 1)
+#endif
+#endif
+                   call aru(1,zero,one,iseed,sp)
+                   if(sp*cvd < cvn) itype = 3    ## Shift occurs.
+#endif
+               }
+        }
+	if(itype > 0) {
+#if (NMBR == 8)
+	  call updaux(itype,x,y,u,v,npts,ix,par,period,aux)
+#endif          
+		if(itype==1) {      ## Birth
+			ix    = npts
+			x(ix) = u
+			y(ix) = v
+#ifdef MARKED                        
+                        marks(ix) = mrk
+#endif                        
+			if(npts >= npmax) {
+			## Birth has occurred; if there is a birth
+			## on the next repetition, we'll be out of
+			## storage space; go back out to R and
+			## increase the storage space.  Note:
+			## There may be no ``next repetition'', i.e.
+			## we ***may*** have just finished the last
+			## (nrep-th) MH step, in which case we squeaked
+			## in with the existing storage space and
+			## we won't actually come back from R.
+				mrep = irep+1
+				return
+			}
+		}
+		else if(itype==2) { ## Death
+			call DEATH(x,y,marks,npts,ix)
+		}
+		else {              ## Shift
+			x(ix) = u
+			y(ix) = v
+#ifdef MARKED                        
+			marks(ix) = mrk
+#endif                        
+        	}
+	}
+	irep = irep+1
+	mrep = irep
+}
+return
+end
+

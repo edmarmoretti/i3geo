@@ -1,0 +1,16 @@
+- Verificação das bibliotecas:
+	Foi feita a verificação das bibliotecas distribuídas com o I3Geo e constatado que todas são de licença livre.
+
+- Inclusão do cabeçalho GPL 2
+	Foi incluído o cabeçalho em todos os programas javascript e PHP.
+	
+- Fontes
+	As fontes foram substituídas por fontes livres
+	
+- Linguagens de programação
+	As linguagens de programação são todas livres, basicamente, PHP e Javascript.
+	
+- Contratos de terceiros
+	O desenvolvimento do código do I3Geo, foi feito por profissionais terceirizados.
+	O contrato do MMA com a empresa terceirizada (Contrato Administrativo MMA 013/2005, baseado no Processo Administrativo 02000.002328/2002-66, cujos técnicos participaram no desenvolvimento, 
+	

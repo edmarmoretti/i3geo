@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Convert Pixel Image from Numeric to Factor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for cut.im {spatstat}"><tr><td>cut.im {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Convert Pixel Image from Numeric to Factor</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Transform the values of a pixel image
+from numeric values into a factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'im':
+  cut(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A pixel image.
+An object of class <code>"im"</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code><a href="../../base/html/cut.html">cut.default</a></code>.
+They determine the breakpoints for the mapping from numerical values to
+factor values. See <code><a href="../../base/html/cut.html">cut.default</a></code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This simple function applies the generic <code><a href="../../base/html/cut.html">cut</a></code> operation
+to the pixel values of the image <code>x</code>. The range of pixel values
+is divided into several intervals, and each
+interval is associated with a level of a factor. 
+The result is another pixel image,
+with the same window and pixel grid as
+<code>x</code>, but with the numeric value of each pixel discretised
+by replacing it by the factor level. 
+</p>
+<p>
+This function is a convenient
+way to inspect an image and to obtain summary statistics.
+See the examples.
+</p>
+<p>
+To select a subset of an image, use the subset operator
+<code><a href="subset.im.html">[.im</a></code> instead.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A pixel image (object of class <code>"im"</code>) with 
+pixel values that are a factor.
+See <code><a href="im.object.html">im.object</a></code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../base/html/cut.html">cut</a></code>,
+<code><a href="im.object.html">im.object</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # artificial image data
+  Z &lt;- setcov(square(1))
+
+  Y &lt;- cut(Z, 3)
+  Y &lt;- cut(Z, breaks=seq(0,1,length=5))
+
+  # cut at the quartiles
+  # (divides the image into 4 equal areas)
+  Y &lt;- cut(Z, quantile(Z))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Calculate four standard summary functions of a point pattern.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for allstats {spatstat}"><tr><td>allstats {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Calculate four standard summary functions of a point pattern.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Calculates the <i>F</i>, <i>G</i>, <i>J</i>, and <i>K</i>
+summary functions for an unmarked point pattern.
+Returns them as a function array (of class <code>"fasp"</code>, see
+<code><a href="fasp.object.html">fasp.object</a></code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  allstats(pp, ..., dataname=NULL, verb=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pp</code></td>
+<td>
+The observed point pattern, for which summary function
+estimates are required.  An object of class <code>"ppp"</code>.
+It must not be marked.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Optional arguments passed to the summary functions
+<code><a href="Fest.html">Fest</a></code>, <code><a href="Gest.html">Gest</a></code>, <code><a href="Jest.html">Jest</a></code>
+and <code><a href="Kest.html">Kest</a></code>.
+</td></tr>
+<tr valign="top"><td><code>dataname</code></td>
+<td>
+A character string giving an optional (alternative)
+name for the point pattern.
+</td></tr>
+<tr valign="top"><td><code>verb</code></td>
+<td>
+A logical value meaning ``verbose''. If <code>TRUE</code>,
+progress reports are printed during calculation.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This computes four standard summary statistics for a
+point pattern: the empty space function <i>F(r)</i>,
+nearest neighbour distance distribution function <i>G(r)</i>,
+van Lieshout-Baddeley function <i>J(r)</i>
+and Ripley's function <i>K(r)</i>.
+The real work is done by 
+<code><a href="Fest.html">Fest</a></code>, <code><a href="Gest.html">Gest</a></code>, <code><a href="Jest.html">Jest</a></code> and
+<code><a href="Kest.html">Kest</a></code> respectively. Consult the help files for these functions
+for further information about the statistical interpretation
+of <i>F</i>, <i>G</i>, <i>J</i> and <i>K</i>.
+</p>
+<p>
+If <code>verb</code> is <code>TRUE</code>, then ``progress reports''
+(just indications of completion) are printed out when the
+calculations are finished for each of the four function types.
+</p>
+<p>
+The overall title of the array of four functions
+(for plotting by <code><a href="plot.fasp.html">plot.fasp</a></code>)
+will be formed from the argument <code>dataname</code>.
+If this is not given, it defaults to the expression
+for <code>pp</code> given in the call to <code>allstats</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A function array (an object of class <code>"fasp"</code>,
+see <code><a href="fasp.object.html">fasp.object</a></code>). This can be plotted
+using <code><a href="plot.fasp.html">plot.fasp</a></code>.
+<br>
+The function array has dimensions <i>2 * 2</i>
+with the entries at positions <code>[1,1]</code>,
+<code>[1,2]</code>, <code>[2,1]</code> and <code>[2,2]</code> 
+representing <i>F(r)</i>, <i>G(r)</i>, <i>J(r)</i> and <i>K(r)</i> respectively.
+<br>
+Each function entry <code>fns[[i]]</code> retains the format
+of the output of the relevant estimating routine
+<code><a href="Fest.html">Fest</a></code>, <code><a href="Gest.html">Gest</a></code>, <code><a href="Jest.html">Jest</a></code> or
+<code><a href="Kest.html">Kest</a></code>. 
+<br>
+The default formulae for plotting these functions are 
+<code>cbind(km,theo) ~ r</code> for F, G, and J, and
+<code>cbind(trans,theo) ~ r</code> for K.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="plot.fasp.html">plot.fasp</a></code>,
+<code><a href="fasp.object.html">fasp.object</a></code>,
+<code><a href="Fest.html">Fest</a></code>,
+<code><a href="Gest.html">Gest</a></code>,
+<code><a href="Jest.html">Jest</a></code>,
+<code><a href="Kest.html">Kest</a></code>,
+<code><a href="alltypes.html">alltypes</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+        data(swedishpines)
+        a &lt;- allstats(swedishpines,dataname="Swedish Pines")
+        ## Not run: 
+        plot(a)
+        plot(a, subset=list("r&lt;=15","r&lt;=15","r&lt;=15","r&lt;=50"))
+        
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

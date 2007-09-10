@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Create a Pixel Image Object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for im {spatstat}"><tr><td>im {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Create a Pixel Image Object</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates an object of
+class <code>"im"</code> representing a two-dimensional pixel image.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  im(mat, xcol=seq(ncol(mat)), yrow=seq(nrow(mat)), lev=levels(mat),
+   units=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mat</code></td>
+<td>
+matrix or vector containing the pixel values of the image.
+</td></tr>
+<tr valign="top"><td><code>xcol</code></td>
+<td>
+vector of <i>x</i> coordinates for the pixel gid
+</td></tr>
+<tr valign="top"><td><code>yrow</code></td>
+<td>
+vector of <i>y</i> coordinates for the pixel grid
+</td></tr>
+<tr valign="top"><td><code>lev</code></td>
+<td>
+possible factor levels, if <code>mat</code> should be interpreted
+as a factor.
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+Optional. Name of unit of length. Either a single character string,
+or a vector of two character strings giving the
+singular and plural forms, respectively.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function creates an object of class <code>"im"</code> representing
+a two-dimensional pixel image. See <code><a href="im.object.html">im.object</a></code>
+for details of this class.
+</p>
+<p>
+The matrix <code>mat</code> contains the &lsquo;greyscale&rsquo; values
+for a rectangular grid of pixels.
+Note carefully that the entry <code>mat[i,j]</code>
+gives the pixel value at the location <code>(xcol[j],yrow[i]</code>.
+That is, the <B>row</B> index of the matrix <code>mat</code> corresponds
+to increasing <B>y</B> coordinate, while the column index of <code>mat</code>
+corresponds to increasing <B>x</B> coordinate.
+Thus <code>yrow</code> has one entry for each row of <code>mat</code>
+and <code>xcol</code> has one entry for each column of <code>mat</code>.
+Under the usual convention in <font face="Courier New,Courier" color="#666666"><b>R</b></font>, a correct
+display of the image would be obtained by transposing the matrix, e.g.
+<code>image.default(xcol, yrow, t(mat))</code>, if you wanted to do it by hand.
+</p>
+<p>
+The entries of <code>mat</code> may be numeric (real or integer), complex, 
+logical, character, or factor values.
+If <code>mat</code> is not a matrix, it will be converted into
+a matrix with <code>nrow(mat) = length(yrow)</code> and
+<code>ncol(mat) = length(xcol)</code>.
+</p>
+<p>
+<font face="Courier New,Courier" color="#666666"><b>R</b></font>{} does not allow a matrix to have
+factor-valued entries. So to make a factor-valued image from raw data,
+you must supply <code>mat</code> as a factor vector and specify the arguments
+<code>xcol</code> and <code>yrow</code> to determine the dimensions of the image.
+See the examples. (Alternatively you can use the functions
+<code><a href="cut.im.html">cut.im</a></code> or <code><a href="eval.im.html">eval.im</a></code> to make factor-valued
+images from other images).
+</p>
+<p>
+For a description of the methods available for pixel image objects,
+see <code><a href="im.object.html">im.object</a></code>.
+</p>
+<p>
+To convert other kinds of data to a pixel image (for example,
+functions or windows), use <code><a href="as.im.html">as.im</a></code>.
+</p>
+
+
+<h3>Warnings</h3>
+
+<p>
+The internal representation of images is likely to change in future
+releases of <STRONG>spatstat</STRONG>. The safe way to extract pixel values
+from an image object is to use <code><a href="as.matrix.im.html">as.matrix.im</a></code>
+or <code><a href="subset.im.html">[.im</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="im.object.html">im.object</a></code>,
+<code><a href="as.im.html">as.im</a></code>,
+<code><a href="as.matrix.im.html">as.matrix.im</a></code>,
+<code><a href="subset.im.html">[.im</a></code>,
+<code><a href="eval.im.html">eval.im</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   vec &lt;- rnorm(1200)
+   mat &lt;- matrix(vec, nrow=30, ncol=40)
+   whitenoise &lt;- im(mat)
+   whitenoise &lt;- im(mat, xcol=seq(0,1,length=40), yrow=seq(0,1,length=30))
+   whitenoise &lt;- im(vec, xcol=seq(0,1,length=40), yrow=seq(0,1,length=30))
+   plot(whitenoise)
+
+   # FACTOR-VALUED IMAGES:
+   cutvec &lt;- cut(mat, 3)
+   # although mat was a matrix, cutvec is a vector, with factor values
+   cutwhite &lt;- im(cutvec, xcol=seq(0,1,length=40), yrow=seq(0,1,length=30))
+   # cutwhite is a factor-valued image
+   plot(cutwhite)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

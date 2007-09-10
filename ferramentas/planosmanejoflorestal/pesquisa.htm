@@ -1,0 +1,155 @@
+<STYLE >
+.combo {
+font-family: verdana, arial, sans;
+font-size: 8pt;
+}
+div#ResultadoPesquisa {
+position: absolute;
+left: 2px;
+top: 200px;
+width: 100%;
+height: 20px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#ResultadoDetalhe {
+position: absolute;
+left: 1px;
+top: 410px;
+width: 610px;
+height: 432px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#estado {
+position:absolute;
+left:15px;;
+top:100px;
+width:155px;
+height:35px;
+}
+div#ano {
+position: absolute;
+left: 173px;
+top:100px;
+width: 119px;
+height: 35px;
+}
+div#mes {
+position: absolute;
+left: 294px;
+top:100px;
+width: 146px;
+height: 35px;
+}
+div#cnpj {
+position: absolute;
+left: 440px;
+top:100px;
+width: 150px;
+height: 35px;
+}
+div#categoria {
+position: absolute;
+left: 15px;
+top: 140px;
+width: 278px;
+height: 35px;
+}
+div#situacao {
+position: absolute;
+left: 294px;
+top: 140px;
+width: 200px;
+height: 35px;
+}
+div#pesquisar {
+position: absolute;
+left: 496px;
+top: 153px;
+width: 94px;
+height: 35px;
+}
+</STYLE>
+
+<SCRIPT src="http://mapas.mma.gov.br/i3geo/classesjs/cpaint/cpaint2.inc.compressed.js" ></script>
+<body>
+<FONT face=Arial color=#808000 size=4>Planos de Manejo - Pesquisa</FONT><br>
+Planos de manejo florestal cadastrados no IBAMA. <a href="http://www.mma.gov.br/index.php?ido=conteudo.monta&idEstrutura=113&idConteudo=5588" >Mais info...</a>
+<FORM name=frmPlanoDeManejo>
+<DIV id=estado><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>Estado</FONT><BR><SELECT class=combo id=cboEstado name=cboEstado> <OPTION class=combo value=TODOS selected>Todos</OPTION> <OPTION class=combo value=AC>Acre</OPTION> <OPTION class=combo value=AP>Amapá</OPTION> <OPTION class=combo value=AM>Amazonas</OPTION> <OPTION class=combo value=MA>Maranhão</OPTION> <OPTION class=combo value=MT>Mato Grosso</OPTION> <OPTION class=combo value=PA>Pará</OPTION> <OPTION class=combo value=RO>Rondônia</OPTION> <OPTION class=combo value=RR>Roraima</OPTION> <OPTION class=combo value=TO>Tocantins</OPTION></SELECT></DIV>
+<DIV id=ano><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>Ano - AUTEX</FONT><BR><SELECT class=combo name=cboAno> <OPTION class=combo value=TODOS selected>Todos</OPTION> <OPTION class=combo value=2007>2007</OPTION> <OPTION class=combo value=2006>2006</OPTION> <OPTION class=combo value=2005>2005</OPTION> <OPTION class=combo value=2004>2004</OPTION> <OPTION class=combo value=2003>2003</OPTION> </SELECT></DIV>
+<DIV id=mes><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>Mês</FONT><BR><SELECT class=combo name=cboMes> <OPTION class=combo value=TODOS selected>Todos</OPTION> <OPTION class=combo value=01>Janeiro</OPTION> <OPTION class=combo value=02>Fevereiro</OPTION> <OPTION class=combo value=03>Março</OPTION> <OPTION class=combo value=04>Abril</OPTION> <OPTION class=combo value=05>Maio</OPTION> <OPTION class=combo value=06>Junho</OPTION> <OPTION class=combo value=07>Julho</OPTION> <OPTION class=combo value=08>Agosto</OPTION> <OPTION class=combo value=09>Setembro</OPTION> <OPTION class=combo value=10>Outubro</OPTION> <OPTION class=combo value=11>Novembro</OPTION> <OPTION class=combo value=12>Dezembro</OPTION></SELECT> </DIV>
+<DIV id=cnpj><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>CNPJ/CPF - Detentor</FONT><BR><INPUT class=combo name=txtCnpj> </INPUT></DIV>
+<DIV id=categoria><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>Categoria</FONT><BR><SELECT class=combo name=cboCategoria> <OPTION class=combo value=TODOS selected>Todos</OPTION> <OPTION class=combo value=0>Pequena Escala</OPTION> <OPTION class=combo value=1>Empresarial</OPTION> <OPTION class=combo value=2>Comunitário de Pequena Escala</OPTION> <OPTION class=combo value=3>Manejo em Regime Especial em Volume</OPTION> <OPTION class=combo value=4>Palmeiras</OPTION> <OPTION class=combo value=5>Comunitário Empresarial</OPTION> <OPTION value=6>Em Certificação</OPTION></SELECT></DIV>
+<DIV id=situacao><FONT face="Verdana, Arial, Helvetica, sans-serif" size=1>Situação</FONT><BR><SELECT class=combo name=cboSituacao> <OPTION class=combo value=TODOS selected>Todos</OPTION> <OPTION class=combo value=0>Apto</OPTION> <OPTION class=combo value=1>Suspenso</OPTION> <OPTION class=combo value=2>Cancelado</OPTION> <OPTION class=combo value=3>Indeferido</OPTION> <OPTION class=combo value=4>Em análise</OPTION> <OPTION class=combo value=5>Em análise com pendência</OPTION> <OPTION class=combo value=6>Manutenção</OPTION> <OPTION class=combo value=7>Cadastro inicial</OPTION></SELECT></DIV>
+<DIV id=pesquisar>
+<INPUT class=combo onclick=executa() type=button value=Pesquisar></INPUT>
+</DIV>
+</form>
+<DIV id=ResultadoPesquisa></DIV>
+</body>
+<script>
+/*
+Title: Formulário de consulta aos planos de manejo florestal.
+
+Acessa os web services do IBAMA para recuperar dados sobre planos de manejo florestal.
+
+Essa interface é utilizada no I3Geo (ver i3geo/menutemas/sistemas.xml) para a geração de uma camada com a localização dos planos de manejo.
+
+A realização da consulta é feita através de uma chamada Ajax.
+
+See:
+
+<pesquisa.php>
+
+File: pesquisa.htm
+
+19/6/2007
+
+Include:
+
+<http://mapas.mma.gov.br/i3geo/classesjs/cpaint/cpaint2.inc.compressed.js>
+
+*/
+g_sid = window.parent.g_sid
+/*
+Function: executa
+
+Chama a função Ajax para realizar a consulta e adicionar a nova camada ao mapa atual.
+*/
+function executa()
+{
+	parametros = "&uf="+document.frmPlanoDeManejo.cboEstado[document.frmPlanoDeManejo.cboEstado.selectedIndex].value; 
+	parametros = parametros+"&categoria="+document.frmPlanoDeManejo.cboCategoria[document.frmPlanoDeManejo.cboCategoria.selectedIndex].value; 
+	parametros = parametros+"&ano="+document.frmPlanoDeManejo.cboAno[document.frmPlanoDeManejo.cboAno.selectedIndex].value; 
+	parametros = parametros+"&situacao="+document.frmPlanoDeManejo.cboSituacao[document.frmPlanoDeManejo.cboSituacao.selectedIndex].value; 
+	parametros = parametros+"&mes="+document.frmPlanoDeManejo.cboMes[document.frmPlanoDeManejo.cboMes.selectedIndex].value; 
+	parametros = parametros+"&cnpj="+document.frmPlanoDeManejo.txtCnpj.value; 
+	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
+	var p = "pesquisa.php?g_sid="+g_sid+parametros
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pesquisa",listaretornof);
+}
+/*
+Function: listaretornof
+
+Recebe os dados da função "executa" e redesenha o mapa atual.
+*/
+function listaretornof(retorno)
+{
+	document.getElementById("ResultadoPesquisa").style.color="red"
+	if (retorno.data != "erro")
+	{
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
+		window.parent.remapaf()
+	}
+	else
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Erro. O mapa não pode ser criado!"}
+}
+</script>
+

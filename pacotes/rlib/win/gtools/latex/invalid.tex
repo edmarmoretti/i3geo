@@ -1,0 +1,47 @@
+\HeaderA{invalid}{Test if a value is missing, empty, or contains only NA or NULL values}{invalid}
+\keyword{programming}{invalid}
+\begin{Description}\relax
+Test if a value is missing, empty, or contains only NA or NULL values.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+invalid(x)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{x}] value to be tested
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+Logical value.
+\end{Value}
+\begin{Author}\relax
+Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{missing}{missing}}, \code{\LinkA{is.na}{is.na}},
+\code{\LinkA{is.null}{is.null}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+
+invalid(NA)
+invalid()
+invalid(c(NA,NA,NULL,NA))
+
+invalid(list(a=1,b=NULL))
+
+# example use in a function
+myplot <- function(x,y) {
+                if(invalid(y)) {
+                        y <- x
+                        x <- 1:length(y)
+                }
+                plot(x,y)
+        }
+myplot(1:10)
+myplot(1:10,NA)
+\end{ExampleCode}
+\end{Examples}
+
