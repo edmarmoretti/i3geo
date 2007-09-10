@@ -100,6 +100,7 @@ $srid_area_ = $srid_area;
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
+$perfil_ = $perfil;
 //
 //inicia a sessão
 //
@@ -129,6 +130,7 @@ $_SESSION["srid_area"] = $srid_area_;
 $_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
+$_SESSION["perfil"] = $perfil_;
 //
 //pega todas as variáveis da sessão
 //
@@ -306,11 +308,6 @@ if ((isset($mapext)) && ($mapext != ""))
 	}
 	if (count($newext) == 4)
 	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
-}
-if (isset($perfil))
-{
-	$mapn->setmetadata("PERFIL",$perfil);
-	$_SESSION["perfil"] = $perfil;
 }
 //
 //configura os endereços corretos
