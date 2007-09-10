@@ -341,7 +341,16 @@ $testa - Testa o filtro e retorna uma imagem.
 			$filtro = str_replace("("," ",$filtro);
 			$filtro = str_replace(")"," ",$filtro);
 		}
-		$this->layer->setfilter($filtro);
+        if ($filtro == "")       
+        {$this->layer->setfilter($filtro);}
+        else
+        {
+            $this->layer->setfilter($filtro);
+            $v = explode(" ",ms_GetVersion());
+			//corrige bug do mapserver
+            if (($v[2] == "4.10.0") && ($this->layer->connectiontype == MS_POSTGIS))
+            {$this->layer->setfilter("\"".$filtro."\"");}
+        }        
 		if ($testa == "")
 		{
 			$img = $this->mapa->prepareimage();
