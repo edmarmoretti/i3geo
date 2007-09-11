@@ -218,7 +218,7 @@ function valorU()
 	if (item == "")
 	{alert("Selecione um item!");return;}
 	aguarde("block")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&tema="+tema+"&item="+item+"&opcao=valorunico"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&tema="+tema+"&item="+item+"&opcao=valorunico&ignorar="+$i("ignorar").value
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -244,7 +244,7 @@ function valorC()
 	{alert("Selecione um item!");return;}
 	aguarde("block")
 	var nclasses = $i("nclasses").value
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&nclasses="+nclasses+"&tema="+tema+"&item="+item+"&opcao=intervalosiguais"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&nclasses="+nclasses+"&tema="+tema+"&item="+item+"&opcao=intervalosiguais&ignorar="+$i("ignorar").value
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -259,7 +259,7 @@ function valorQ()
 	{alert("Selecione um item!");return;}
 	aguarde("block")
 	var nclasses = $i("nclasses").value
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&tema="+tema+"&item="+item+"&opcao=quartis"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=alteraclasse&tema="+tema+"&item="+item+"&opcao=quartis&ignorar="+$i("ignorar").value
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

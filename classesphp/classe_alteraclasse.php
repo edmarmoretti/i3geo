@@ -178,10 +178,12 @@ parameters:
 $item - item da tabela de atributos
 
 $nclasses - número de classes
+
+$ignorar - valor que será ignorado na listagem final
 */
-	function intervalosiguais($item,$nclasses)
+	function intervalosiguais($item,$nclasses,$ignorar)
 	{
-		$valores = pegaValores($this->mapa,$this->layer,$item,true);
+		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
 			//calcula o menor valor e o maior valor
@@ -231,14 +233,17 @@ function: quartis
 Cria classes em um objeto layer com intervalos em quartis baseando-se em um item numérico na tabela de atributos com um número de classes fixos.
 
 parameters:
+
 $item - Item da tabela de atributos utilizado para gerar as classes.
+
+$ignorar - valor que será ignorado na listagem final
 
 Include:
 <classe_estatistica.php>
 */
-	function quartis($item)
+	function quartis($item,$ignorar)
 	{
-		$valores = pegaValores($this->mapa,$this->layer,$item,true);
+		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
 			require_once("classe_estatistica.php");
@@ -286,12 +291,15 @@ Cria classes em um objeto layer baseando-se em um item na tabela de atributos.
 Para cada ocorrência de um valor é acrescentada uma classe.
 
 parameters:
+
 $item - Item da tabela de atributos utilizado para gerar as classes.
+
+$ignorar - valor que será ignorado na listagem final
 */
-	function valorunico($item)
+	function valorunico($item,$ignorar)
 	{
 		// pega valores
-		$valoresu = array_unique(pegaValores($this->mapa,$this->layer,$item));
+		$valoresu = array_unique(pegaValores($this->mapa,$this->layer,$item,false,$ignorar));
 		// processa array com os valores
 		rsort($valoresu);
 		reset($valoresu);

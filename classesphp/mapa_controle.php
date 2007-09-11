@@ -797,11 +797,11 @@ Include:
 		if ($opcao == "adicionaclasse")
 		{$cp->set_data($m->adicionaclasse());}
 		if ($opcao == "valorunico")
-		{$cp->set_data($m->valorunico($item));}
+		{$cp->set_data($m->valorunico($item,$ignorar));}
 		if ($opcao == "intervalosiguais")
-		{$cp->set_data($m->intervalosiguais($item,$nclasses));}
+		{$cp->set_data($m->intervalosiguais($item,$nclasses,$ignorar));}
 		if ($opcao == "quartis")
-		{$cp->set_data($m->quartis($item));}
+		{$cp->set_data($m->quartis($item,$ignorar));}
 		if ($opcao == "alteraclasses")
 		{
 			//esta operação é chamada com POST via cpaint

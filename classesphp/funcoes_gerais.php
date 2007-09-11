@@ -789,8 +789,10 @@ $layer - Layer que será processado.
 $item - Item que será processado.
 
 $numerico - O item e numerico (true ou false).
+
+$ignorar - valor que será ignorado na listagem final
 */
-function pegaValores($mapa,$layer,$item,$numerico=false)
+function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 {
 	$layer->set("template","none.htm");
 	$layer->setfilter("");
@@ -808,10 +810,26 @@ function pegaValores($mapa,$layer,$item,$numerico=false)
 			if ($numerico)
 			{
 				if (is_numeric($v))
-				{$valitem[] = $v;}
+				{
+					if ($ignorar == "")
+					{$valitem[] = $v;}
+					else
+					{
+						if ($v != $ignorar)
+						{$valitem[] = $v;}
+					}
+				}
 			}
 			else
-			{$valitem[] = $v;}
+			{
+				if ($ignorar == "")
+				{$valitem[] = $v;}
+				else
+				{
+					if ($v != $ignorar)
+					{$valitem[] = $v;}
+				}				
+			}
 		}
 		$fechou = $layer->close();
 	}
