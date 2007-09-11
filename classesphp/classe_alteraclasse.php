@@ -416,6 +416,22 @@ Inverte as cores da legenda de um tema.
 		return("ok");
 	}
 /*
+function: calculaTamanhoClasses
+
+Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
+*/
+	function calculaTamanhoClasses()
+	{
+		$numclasses = $this->layer->numclasses;
+		for($i=0;$i<$numclasses;$i++)
+		{
+			$classe = $this->layer->getclass($i);
+			$estilo = $classe->getstyle(0);
+			$estilo->set("size",($i+1));
+		}
+		return("ok");
+	}
+/*
 function: inverteStatusClasse
 
 Inverte o status a uma classe.

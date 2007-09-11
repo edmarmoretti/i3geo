@@ -123,7 +123,7 @@ function montaLegenda(retorno)
 		if (retorno.data[0].proc == "") //o layer nao deve ser raster
 		{
 			var ins = new Array()
-			ins.push("<table id=legenda ><tr><td><img src='../../imagens/reinicia.gif' title='Inverter cores' onclick='inverteCores()' style=cursor:pointer /></td><td style=background-color:yellow >s&iacute;mbolo</td><td style=background-color:yellow >nome</td><td style=background-color:yellow >express&atilde;o</td></tr>")
+			ins.push("<table id=legenda ><tr><td><img src='../../imagens/inverter.png' title='Inverter cores' onclick='inverteCores()' style=cursor:pointer /></td><td style=background-color:white ><img src='../../imagens/tamanho.png' title='Calcula tamanho' onclick='calculaTamanho()' style=cursor:pointer /></td><td style=background-color:yellow >nome</td><td style=background-color:yellow >express&atilde;o</td></tr>")
 			for (i=0;i<retorno.data.length;i++)
 			{
 				var id = retorno.data[i].tema+"-"+retorno.data[i].idclasse //layer+indice da classe
@@ -211,6 +211,20 @@ function inverteCores()
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"alteraCoresClasses",retornapaleta);
+}
+function calculaTamanho()
+{
+	var retornapaleta = function()
+	{
+		window.parent.ajaxredesenha("");
+		mostralegenda();
+	}
+	aguarde("block")
+	var cp = new cpaint();
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=calculaTamanhoClasses&tema="+tema
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"calculaTamanhoClasses",retornapaleta);
 }
 function valorU()
 {

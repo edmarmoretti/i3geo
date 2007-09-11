@@ -831,6 +831,20 @@ Include:
 		$m->salva();
 	break;
 /*
+Property: calculaTamanhoClasses
+
+Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
+
+Include:
+<classe_alteraclasse.php>
+*/	
+	case "calculaTamanhoClasses":
+		include("classe_alteraclasse.php");
+		$m = new Alteraclasse($map_file,$tema);
+		$cp->set_data($m->calculaTamanhoClasses());
+		$m->salva();
+	break;
+/*
 Property: alteraCoresClasses
 
 Altera as cores das classes de um tema conforme uma cor inicial e uma final.
