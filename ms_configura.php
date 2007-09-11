@@ -58,7 +58,7 @@ srid_area - srid utilizado nos cálculos que exigem projeção equivalente
 
 postgis_mapa - string de conexão com o banco de dados para substituição do CONNECTION " ". Os layers que tiverem CONNECTION " " terão a string de conexão substituída por esse valor.
 */
-$mensagemInicia = "I3Geo versão 3.6";
+$mensagemInicia = "I3Geo versão 3.7";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	//ip dos usuarios que podem administrar via navegador
