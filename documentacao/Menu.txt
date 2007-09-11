@@ -53,6 +53,7 @@ Group: Interfaces - diretório aplicmap  {
 
    File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
    File: Interface normal  (aplicmap\geral.htm)
+   File: Interface normal  (aplicmap\geral3.htm)
    File: Mínima  (aplicmap\minima.htm)
    File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
    File: Simples 1  (aplicmap\simples1.htm)
