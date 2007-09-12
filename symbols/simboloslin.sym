@@ -25,7 +25,7 @@ Symbol
   END
 END
   Symbol
-    Name "pt1"
+    Name "pt1l"
     Type VECTOR
     TRANSPARENT 0
     Points
@@ -38,7 +38,7 @@ END
   END
 	
   Symbol 
-	  name "pt2" 
+	  name "pt2l" 
     TYPE ELLIPSE
     POINTS 1 1 END
     FILLED true
@@ -48,7 +48,7 @@ END
   END
 
   Symbol
-    Name "pt3"
+    Name "pt3l"
     Type ELLIPSE
     POINTS 1 1 END
     Transparent 0
@@ -83,7 +83,7 @@ END
 		1 1 
 		END 
 	STYLE 
-		20 10 20 10 
+		8 3 
 	END 
   END
 
@@ -105,14 +105,11 @@ END
 	FILLED true 
 	POINTS 
     2 0
-	END
-	STYLE 
-		8 8 1 8 
-	END 
+		END 
   END 	
 
   Symbol
-    Name "seta"
+    Name "setal"
     Type PIXMAP
     Image "seta.png"
   STYLE
@@ -121,7 +118,7 @@ END
   END
 
   Symbol
-    Name "sede"
+    Name "sedel"
     Type PIXMAP
     Image "sede.png"
     Transparent 1
@@ -132,7 +129,7 @@ END
   END
 
   Symbol
-    Name "cidmun"
+    Name "cidmunl"
     Type PIXMAP
     Image "cidmun.png"
   STYLE
@@ -142,7 +139,7 @@ END
   END
 	
   Symbol
-    Name "capital"
+    Name "capitall"
     Type PIXMAP
     Image "capital.png"
   STYLE
@@ -152,7 +149,7 @@ END
   END
 
   Symbol
-    Name "cidade"
+    Name "cidadel"
     Type PIXMAP
     Image "cidade.png"
   STYLE
@@ -162,7 +159,7 @@ END
   END
 
   Symbol
-    Name "vila"
+    Name "vilal"
     Type PIXMAP
     Image "vila.png"
   STYLE
@@ -172,7 +169,7 @@ END
   END
 
   Symbol
-    Name "xy"
+    Name "xyl"
     Type PIXMAP
     Image "xy.png"
   STYLE
@@ -182,7 +179,7 @@ END
   END
 
 	Symbol
-    Name "xyr"
+    Name "xyrl"
     Type PIXMAP
     Image "xyr.png"
   STYLE
@@ -192,7 +189,7 @@ END
   END
 	
   Symbol
-    Name "porto"
+    Name "portol"
     Type PIXMAP
     Image "porto.png"
   STYLE
@@ -202,7 +199,7 @@ END
   END
 	
   Symbol
-    Name "ref"
+    Name "refl"
     Type PIXMAP
     Image "ref.png"
   STYLE
@@ -212,7 +209,7 @@ END
   END
 
   Symbol
-    Name "marca"
+    Name "marcal"
     Type PIXMAP
     Image "marca.png"
   STYLE
@@ -223,7 +220,7 @@ END
 
 	
   Symbol
-    Name "ponto"
+    Name "pontol"
     Type ELLIPSE
 		FILLED true
     TRANSPARENT 0
@@ -238,7 +235,7 @@ END
   END
  
 	Symbol 
-		NAME 'quadrado' 
+		NAME 'quadradol' 
 		TYPE VECTOR 
 		FILLED TRUE 
 		POINTS 
@@ -255,7 +252,7 @@ END
 	END
 
 	SYMBOL 
-  	NAME "estrela"
+  	NAME "estrelal"
   	TYPE vector
   	FILLED TRUE
   	POINTS
@@ -278,7 +275,7 @@ END
 	END
 
   SYMBOL 
-    NAME 'triangulo' 
+    NAME 'triangulol' 
 		TYPE VECTOR 
 		FILLED TRUE 
 		POINTS 
@@ -294,7 +291,7 @@ END
 	END
 
   SYMBOL 
-    NAME 'industria' 
+    NAME 'industrial' 
 		TYPE VECTOR 
 		FILLED TRUE 
 		POINTS 
@@ -313,7 +310,7 @@ END
 	END
 	
   SYMBOL 
-    NAME 'torre' 
+    NAME 'torrel' 
 		TYPE VECTOR 
 		FILLED FALSE 
 		POINTS 
@@ -333,7 +330,7 @@ END
 	END
 	
   SYMBOL 
-    NAME 'mineracao' 
+    NAME 'mineracaol' 
 		TYPE VECTOR 
 		FILLED FALSE 
 		POINTS 
@@ -351,7 +348,7 @@ END
 
 	END
   SYMBOL 
-    NAME 'cruz' 
+    NAME 'cruzl' 
 		TYPE VECTOR 
 		FILLED TRUE 
 		POINTS 
@@ -376,7 +373,7 @@ END
 	END
 
 Symbol 
-	name "circle" 
+	name "circlel" 
 	Type ELLIPSE 
 	Filled true 
 	POINTS 

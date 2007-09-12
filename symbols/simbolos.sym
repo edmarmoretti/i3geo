@@ -518,14 +518,315 @@ Symbol
 		1 1 
 		END 
 END
-SYMBOL
-NAME "T"
-TYPE TRUETYPE
-FONT "arial"
-CHARACTER "#"
-ANTIALIAS TRUE
-GAP 10
+  Symbol
+    Name "pt1l"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  STYLE
+    1 13 1 13
+  END
+  END
+	
+  Symbol 
+	  name "pt2l" 
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED true
+  STYLE
+    1 13 1 13
+  END
+  END
+
+  Symbol
+    Name "pt3l"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  STYLE
+    1 13 1 13
+  END
+  END
+  Symbol
+    Name "setal"
+    Type PIXMAP
+    Image "seta.png"
+  STYLE
+    1 13 1 13
+  END
+  END
+
+  Symbol
+    Name "sedel"
+    Type PIXMAP
+    Image "sede.png"
+    Transparent 1
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+  Symbol
+    Name "cidmunl"
+    Type PIXMAP
+    Image "cidmun.png"
+  STYLE
+    1 13 1 13
+  END
+    
+  END
+	
+  Symbol
+    Name "capitall"
+    Type PIXMAP
+    Image "capital.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+  Symbol
+    Name "cidadel"
+    Type PIXMAP
+    Image "cidade.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+  Symbol
+    Name "vilal"
+    Type PIXMAP
+    Image "vila.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+  Symbol
+    Name "xyl"
+    Type PIXMAP
+    Image "xy.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+	Symbol
+    Name "xyrl"
+    Type PIXMAP
+    Image "xyr.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+	
+  Symbol
+    Name "portol"
+    Type PIXMAP
+    Image "porto.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+	
+  Symbol
+    Name "refl"
+    Type PIXMAP
+    Image "ref.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+  Symbol
+    Name "marcal"
+    Type PIXMAP
+    Image "marca.png"
+  STYLE
+    1 13 1 13
+  END
+
+  END
+
+	
+  Symbol
+    Name "pontol"
+    Type ELLIPSE
+		FILLED true
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  STYLE
+    1 13 1 13
+  END
+
+  END
+ 
+	Symbol 
+		NAME 'quadradol' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		0 0 
+		1 0 
+		1 1 
+		0 1 
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+
+	SYMBOL 
+  	NAME "estrelal"
+  	TYPE vector
+  	FILLED TRUE
+  	POINTS
+		81 48
+		66 0
+		50 48
+		0 48
+		41 77
+		25 125
+		66 96
+		106 125
+		91 77
+		131 48
+		81 48
+  	END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+
+  SYMBOL 
+    NAME 'triangulol' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		.5 0 
+		1 1 
+		0 1 
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+
+  SYMBOL 
+    NAME 'industrial' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 2
+		0 5
+		4 5
+		4 0
+		3 0
+		3 2
+		0 2
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+	
+  SYMBOL 
+    NAME 'torrel' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		3 4
+		4 4
+		4 5
+		0 5
+		0 4
+		1 4
+		2 0
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+	
+  SYMBOL 
+    NAME 'mineracaol' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		0 0
+		5 5
+		4 6
+		3 7
+		2 6
+		0 5
+		5 0
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+  SYMBOL 
+    NAME 'cruzl' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		5 1
+		5 2
+		3 2
+		3 7
+		2 7
+		2 2
+		0 2
+		0 1
+		2 1
+		2 0
+		END 
+  STYLE
+    1 13 1 13
+  END
+
+	END
+
+Symbol 
+	name "circlel" 
+	Type ELLIPSE 
+	Filled true 
+	POINTS 
+		1 1 
+		END 
+  STYLE
+    1 13 1 13
+  END
+
 END
+
 
 
 

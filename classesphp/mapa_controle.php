@@ -1601,16 +1601,30 @@ Include:
 		include("classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		if ($opcao == "excluiestilo")
-		{$cp->set_data($m->excluiEstilo($classe,$estilo));}
+		{
+			$cp->set_data($m->excluiEstilo($classe,$estilo));
+			$m->salva();
+		}
 		if ($opcao == "adicionaestilo")
-		{$cp->set_data($m->adicionaEstilo($classe,$estilo));}
+		{
+			$cp->set_data($m->adicionaEstilo($classe,$estilo));
+			$m->salva();
+		}
 		if ($opcao == "sobeestilo")
-		{$cp->set_data($m->sobeEstilo ($classe,$estilo));}
+		{
+			$cp->set_data($m->sobeEstilo ($classe,$estilo));
+			$m->salva();
+		}
 		if ($opcao == "desceestilo")
-		{$cp->set_data($m->desceEstilo ($classe,$estilo));}
+		{
+			$cp->set_data($m->desceEstilo ($classe,$estilo));
+			$m->salva();
+		}
 		if ($opcao == "aplica")
-		{$cp->set_data($m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size));}
-		$m->salva();
+		{
+			$cp->set_data($m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size));
+			$m->salva();
+		}
 		if ($opcao == "listaSimbolos")
 		{$cp->set_data($m->listaSimbolos($tipo,$dir_tmp,$imgdir));}
 		if ($opcao == "pegaparametros")

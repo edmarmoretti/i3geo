@@ -507,6 +507,7 @@ $size - Tamanho que será aplicado ao símbolo.
 			$sld = $this->layer->getmetadata("sld");
 			reSLD($this->arquivo,$this->nome,$sld);
 		}
+		return "ok";
 	}
 /*
 function: pegaParametrosLegImg
