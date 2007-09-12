@@ -41,7 +41,7 @@ Monta o menu baseado na variável oMenuData
 				    //
 				    if(oMenuData.ajudas)
 				    {
-				    	var ins = '<div class="bd" >';
+				    	var ins = '<div class="bd" style=z-index:1 >';
 						ins += '<ul class="first-of-type" style="text-align:center;">';
 						ins += '<li class="yuimenubaritem">Ajuda?</li>';
 						ins += '<li class="yuimenubaritem">An&aacute;lise</li>';
@@ -50,7 +50,7 @@ Monta o menu baseado na variável oMenuData
 						ins += '<li class="yuimenubaritem">Janelas</li>';
 						ins += '<li class="yuimenubaritem">Arquivo</li>';
 						ins += '</ul>';
-						ins += '<a href=http://mapas.mma.gov.br target+blank ><p style=text-align:left; ><img id=banneri3geo src=\'http://mapas.mma.gov.br/i3geo/imagens/banneri3geo.png\' /></a>';
+						ins += '<a href=http://mapas.mma.gov.br target=blank ><p style=text-align:left; ><img id=banneri3geo src=\''+g_locaplic+'/imagens/banneri3geo.png\' /></a>';
 						ins += '</div>';
 						$i("menus").innerHTML = ins;
 					}

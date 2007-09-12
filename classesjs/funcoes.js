@@ -914,8 +914,8 @@ function aguarde()
 	this.abre = function(aguardeId,texto)
 	{
 		YAHOO.namespace("aguarde");
-		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{ width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})');
-		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=text-align:left ><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span><span style=font-size:10px >"+texto+"&nbsp;</span>")');
+		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})');
+		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span><span style=font-size:10px >"+texto+"&nbsp;</span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
 		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)');
 		eval('YAHOO.aguarde.'+aguardeId+'.show()');

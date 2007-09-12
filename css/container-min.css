@@ -21,7 +21,7 @@ Version 0.11.4
 .panel-container.shadow .underlay {visibility:inherit;position:absolute;background-color:#CCC;top:3px;left:3px;z-index:0;width:100%;height:100%;-moz-opacity: 0.7;opacity:.70;filter:alpha(opacity=70);zoom:1;}
 .panel {visibility:hidden;border-collapse:separate;position:relative;left:0px;top:0px;font:1em Arial;background-color:#FFF;border:1px solid #000;z-index:1;overflow:hidden;}
 .panel .hd {background-color:#3d77cb;color:#FFF;font-size:100%;line-height:100%;border:1px solid #FFF;border-bottom:1px solid #000;font-weight:bold;overflow:hidden;padding:8px;}
-.panel .bd {overflow:hidden;padding:4px;}
+.panel .bd {overflow:hidden;padding:4px;text-align:left;}
 .panel .bd p {margin:0 0 1em;}
 .panel .close {position:absolute;top:5px;right:4px;z-index:2000;height:12px;width:12px;margin:0px;padding:0px;background-repeat:no-repeat;cursor:pointer;visibility:inherit;}
 .panel .close.nonsecure {background-image:url(../imagens/close12_1.gif);}

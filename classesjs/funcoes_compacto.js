@@ -88,7 +88,7 @@ function mostraferramenta(guia){ if($i("ferr"+guia)){ var fs=[1,2,3,4,5,6,7,8,9,
  $i("ferr"+guia).style.backgroundColor="rgb(255,255,255)"; if($i("ferr"+guia+"obj")){$i("ferr"+guia+"obj").style.display="block";}
  else{alert("O objeto ferr"+guia+"obj nao existe.");}}}
 function borra(tipo){ }
-function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=text-align:left ><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
+function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
  this.fecha=function(aguardeId){ if(eval('YAHOO.aguarde.'+aguardeId)){ eval('YAHOO.aguarde.'+aguardeId+'.destroy()');}}
  }
 function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i("imgh").style.display="block";}

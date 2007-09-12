@@ -848,7 +848,7 @@ function mostraferramenta(guia){ if($i("ferr"+guia)){ var fs=[1,2,3,4,5,6,7,8,9,
  $i("ferr"+guia).style.backgroundColor="rgb(255,255,255)"; if($i("ferr"+guia+"obj")){$i("ferr"+guia+"obj").style.display="block";}
  else{alert("O objeto ferr"+guia+"obj nao existe.");}}}
 function borra(tipo){ }
-function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=text-align:left ><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
+function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
  this.fecha=function(aguardeId){ if(eval('YAHOO.aguarde.'+aguardeId)){ eval('YAHOO.aguarde.'+aguardeId+'.destroy()');}}
  }
 function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i("imgh").style.display="block";}
@@ -1417,8 +1417,8 @@ function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor
  this.verificaClickMapa=function(){ if(this.funcoesClickMapa.length > 0){ for(f=0;f<this.funcoesClickMapa.length;f++){ eval(this.funcoesClickMapa[f]);}}}}
 
 
- YAHOO.example.onWindowLoadMenu=function(p_oEvent){ if($i("menus")){ if(oMenuData.ajudas){ var ins='<div class="bd" >'; ins+='<ul class="first-of-type" style="text-align:center;">'; ins+='<li class="yuimenubaritem">Ajuda?</li>'; ins+='<li class="yuimenubaritem">An&aacute;lise</li>'; if(!$i("listaPropriedades")){ins+='<li class="yuimenubaritem">Propriedades</li>';}
- ins+='<li class="yuimenubaritem">Janelas</li>'; ins+='<li class="yuimenubaritem">Arquivo</li>'; ins+='</ul>'; ins+='<a href=http://mapas.mma.gov.br target+blank ><p style=text-align:left;><img id=banneri3geo src=\'http://mapas.mma.gov.br/i3geo/imagens/banneri3geo.png\'/></a>'; ins+='</div>'; $i("menus").innerHTML=ins;}}
+ YAHOO.example.onWindowLoadMenu=function(p_oEvent){ if($i("menus")){ if(oMenuData.ajudas){ var ins='<div class="bd" style=z-index:1 >'; ins+='<ul class="first-of-type" style="text-align:center;">'; ins+='<li class="yuimenubaritem">Ajuda?</li>'; ins+='<li class="yuimenubaritem">An&aacute;lise</li>'; if(!$i("listaPropriedades")){ins+='<li class="yuimenubaritem">Propriedades</li>';}
+ ins+='<li class="yuimenubaritem">Janelas</li>'; ins+='<li class="yuimenubaritem">Arquivo</li>'; ins+='</ul>'; ins+='<a href=http://mapas.mma.gov.br target=blank ><p style=text-align:left;><img id=banneri3geo src=\''+g_locaplic+'/imagens/banneri3geo.png\'/></a>'; ins+='</div>'; $i("menus").innerHTML=ins;}}
  else{return;}
  function hideSubmenus(){ if(oMenuBar.activeItem){ var oSubmenu=oMenuBar.activeItem.cfg.getProperty("submenu"); if(oSubmenu){oSubmenu.hide();}}}
  function cancelTimer(){ if(nTimeoutId){window.clearTimeout(nTimeoutId);}}

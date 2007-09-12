@@ -127,6 +127,7 @@ Version 0.11.4
 .panel .bd {
 	overflow:hidden;
 	padding:4px;
+    text-align: left;
 }
 
 .panel .bd p {
