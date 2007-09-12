@@ -428,6 +428,15 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 			$classe = $this->layer->getclass($i);
 			$estilo = $classe->getstyle(0);
 			$estilo->set("size",($i+1));
+			if ($estilo->symbolname == "")
+			{
+				if ($this->layer->type == MS_LAYER_LINE)
+				{$estilo->set("symbolname","linha");}
+				if ($this->layer->type == MS_LAYER_POINT)
+				{$estilo->set("symbolname","ponto");}
+				if ($this->layer->type == MS_LAYER_POLYGON)
+				{$estilo->set("symbolname","p4");}
+			}
 		}
 		return("ok");
 	}
