@@ -393,8 +393,10 @@ function listaSimbolos($tipo,$dir_tmp,$imgdir)
 		else
 		{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
 		$ins = "";
-		$ns = $this->mapa->getnumsymbols();
+		$ns = $mapatemp->getnumsymbols();
 		$l = $mapatemp->getlayer(0);
+		$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
+		$this->mapa->setsymbolset($novoss);
 		for ($i=0;$i < $ns;$i++)
 		{
 			$oSymbol = $this->mapa->getSymbolObjectById($i);
@@ -409,7 +411,7 @@ function listaSimbolos($tipo,$dir_tmp,$imgdir)
 			$ico = $c->createLegendIcon(40,40);
 			$nimg = $ico->saveWebImage();
 			$pat = $this->mapa->web->imageurl;
-			$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 1px solid #FFFFFF' title=".$nomes." onclick='aplicarsim(this)'>";
+			$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$nomes." onclick='aplicarsim(this)'>";
 		}
 		fwrite($f,"<?php \$res = \"".$ins."\";?>");
 		fclose($f);

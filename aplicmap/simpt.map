@@ -1,4 +1,4 @@
-SYMBOLSET ../symbols/simbolos.sym
+SYMBOLSET ../symbols/simbolospt.sym
 FONTSET   "../symbols/fontes.txt"
   LAYER
       METADATA
