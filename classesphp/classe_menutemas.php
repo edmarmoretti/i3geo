@@ -154,25 +154,25 @@ array
 		foreach($this->xml->TEMA as $temar)
 		{
 			$down = "nao";
-			if (($temar->DOWNLOAD == "sim") || ($temar->DOWNLOAD == "SIM"))
+			$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
+			if (($temp == "sim") || ($temp == "SIM"))
 			{$down = "sim";}
 			$link = " ";
-			if ($temar->TLINK != "")
-			{$link = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");}
+			$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
+			if ($temp != "")
+			{$link = $temp;}
 			$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
-			if (function_exists("mb_convert_encoding"))
-			{$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");}
-			else
-			{$nome = $temar->TNOME;}
+			$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
 			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down);
 		}
 		foreach($this->xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
-			if ($grupo->PERFIL != "")
+			$temp = mb_convert_encoding($grupo->PERFIL,"HTML-ENTITIES","auto");
+			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
-				$perfis = explode(",",$grupo->PERFIL);
+				$perfis = explode(",",$temp);
 				if (in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
@@ -183,26 +183,26 @@ array
 				foreach($grupo->TEMA as $temar)
 				{
 					$down = "nao";
-					if (($temar->DOWNLOAD == "sim") || ($temar->DOWNLOAD == "SIM"))
+					$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
+					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
 					$link = " ";
-					if ($temar->TLINK != "")
-					{$link = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");}
+					$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
+					if ($temp != "")
+					{$link = $temp;}
 					$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
-					if (function_exists("mb_convert_encoding"))
-					{$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");}
-					else
-					{$nome = $temar->TNOME;}
+					$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down);
 				}
 				$subgrupos = array();
 				foreach($grupo->SGRUPO as $sgrupo)
 				{
 					$incluisgrupo = TRUE;
-					if ($sgrupo->PERFIL != "")
+					$temp = mb_convert_encoding($sgrupo->PERFIL,"HTML-ENTITIES","auto");
+					if ($temp != "")
 					{
 						$incluisgrupo = FALSE;
-						$perfis = explode(",",$sgrupo->PERFIL);
+						$perfis = explode(",",$temp);
 						if (in_array($this->perfil,$perfis))
 						{$incluisgrupo = TRUE;}
 					}
@@ -212,13 +212,11 @@ array
 						$down = "nao";
 						foreach($sgrupo->TEMA as $tema)
 						{
-							if (($tema->DOWNLOAD == "sim") || ($tema->DOWNLOAD == "SIM"))
+							$temp = mb_convert_encoding($tema->DOWNLOAD,"HTML-ENTITIES","auto");
+							if (($temp == "sim") || ($temp == "SIM"))
 							{$down = "sim";}
 						}
-						if (function_exists("mb_convert_encoding"))
-						{$nome = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");}
-						else
-						{$nome = $sgrupo->SDTIPO;}
+						$nome = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");
 						$subgrupos[] = array("nome"=>$nome,"download"=>$down);
 					}
 				}

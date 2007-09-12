@@ -34,29 +34,6 @@ SYMBOLSET
     END
   END
 
-Symbol
-  Name 'ferrovia-line1'
-  Type ELLIPSE
-  Points
-    1 1
-  END
-  FILLED TRUE
-END
-
-Symbol
-  Name 'ferrovia-line2'
-  Type VECTOR
-  Points
-    0 0
-    1 0
-    1 0
-    0 0
-  END
-  FILLED TRUE
-  STYLE
-    5 13 5 13
-  END
-END
   Symbol
     Name "p3"
     Type VECTOR
@@ -160,53 +137,6 @@ END
     Transparent 0
   END
 	
-  Symbol
-    Name "linha"
-    Type ELLIPSE
-    POINTS 1 1 END
-    Transparent 0
-  END
-
-  Symbol
-    Name "linha1"
-    Type ELLIPSE
-    POINTS 1 1 END
-    STYLE 1 4 1 END
-    Transparent 0
-  END
-
-	Symbol 
-	name "dashed" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	STYLE 
-		8 3 
-	END 
-  END
-
-	Symbol 
-	name "dashed1" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-		1 1 
-		END 
-	STYLE 
-		8 8 1 8 
-	END 
-  END 
-
-	Symbol 
-	name "dashed2" 
-	Type ELLIPSE 
-	FILLED true 
-	POINTS 
-    2 0
-		END 
-  END 	
 	
   Symbol
     Name "aviao"
@@ -518,6 +448,33 @@ Symbol
 		1 1 
 		END 
 END
+
+SYMBOLSET
+Symbol
+  Name 'ferrovia-line1'
+  Type ELLIPSE
+  Points
+    1 1
+  END
+  FILLED TRUE
+  STYLE
+    1 13 1 13
+  END
+END
+Symbol
+  Name 'ferrovia-line2'
+  Type VECTOR
+  Points
+    0 0
+    1 0
+    1 0
+    0 0
+  END
+  FILLED TRUE
+  STYLE
+    5 13 5 13
+  END
+END
   Symbol
     Name "pt1l"
     Type VECTOR
@@ -550,6 +507,58 @@ END
     1 13 1 13
   END
   END
+	
+  Symbol
+    Name "linha"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+
+  Symbol
+    Name "linha1"
+    Type ELLIPSE
+    POINTS 1 1 END
+    STYLE 1 4 1 END
+    Transparent 0
+  STYLE
+    10 20 10 20
+  END
+  END
+
+	Symbol 
+	name "dashed" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+	STYLE 
+		8 3 
+	END 
+  END
+
+	Symbol 
+	name "dashed1" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+		1 1 
+		END 
+	STYLE 
+		8 8 1 8 
+	END 
+  END 
+
+	Symbol 
+	name "dashed2" 
+	Type ELLIPSE 
+	FILLED true 
+	POINTS 
+    2 0
+		END 
+  END 	
+
   Symbol
     Name "setal"
     Type PIXMAP
@@ -569,97 +578,7 @@ END
   END
 
   END
-
-  Symbol
-    Name "cidmunl"
-    Type PIXMAP
-    Image "cidmun.png"
-  STYLE
-    1 13 1 13
-  END
-    
-  END
-	
-  Symbol
-    Name "capitall"
-    Type PIXMAP
-    Image "capital.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "cidadel"
-    Type PIXMAP
-    Image "cidade.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "vilal"
-    Type PIXMAP
-    Image "vila.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "xyl"
-    Type PIXMAP
-    Image "xy.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-	Symbol
-    Name "xyrl"
-    Type PIXMAP
-    Image "xyr.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-	
-  Symbol
-    Name "portol"
-    Type PIXMAP
-    Image "porto.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-	
-  Symbol
-    Name "refl"
-    Type PIXMAP
-    Image "ref.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "marcal"
-    Type PIXMAP
-    Image "marca.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
+		
 	
   Symbol
     Name "pontol"
@@ -732,87 +651,8 @@ END
 
 	END
 
-  SYMBOL 
-    NAME 'industrial' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 2
-		0 5
-		4 5
-		4 0
-		3 0
-		3 2
-		0 2
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 	
-  SYMBOL 
-    NAME 'torrel' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
-		2 0
-		3 4
-		4 4
-		4 5
-		0 5
-		0 4
-		1 4
-		2 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 	
-  SYMBOL 
-    NAME 'mineracaol' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
-		0 0
-		5 5
-		4 6
-		3 7
-		2 6
-		0 5
-		5 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
-  SYMBOL 
-    NAME 'cruzl' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		2 0
-		3 0
-		3 1
-		5 1
-		5 2
-		3 2
-		3 7
-		2 7
-		2 2
-		0 2
-		0 1
-		2 1
-		2 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 
 Symbol 
 	name "circlel" 
@@ -826,6 +666,8 @@ Symbol
   END
 
 END
+
+
 
 
 

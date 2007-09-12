@@ -1,3 +1,12 @@
+Symbol 
+	name "circle" 
+	Type ELLIPSE 
+	Filled true 
+	POINTS 
+		1 1 
+		END 
+END
+
 SYMBOLSET
 Symbol
   Name 'ferrovia-line1'
@@ -127,97 +136,7 @@ END
   END
 
   END
-
-  Symbol
-    Name "cidmunl"
-    Type PIXMAP
-    Image "cidmun.png"
-  STYLE
-    1 13 1 13
-  END
-    
-  END
-	
-  Symbol
-    Name "capitall"
-    Type PIXMAP
-    Image "capital.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "cidadel"
-    Type PIXMAP
-    Image "cidade.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "vilal"
-    Type PIXMAP
-    Image "vila.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "xyl"
-    Type PIXMAP
-    Image "xy.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-	Symbol
-    Name "xyrl"
-    Type PIXMAP
-    Image "xyr.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-	
-  Symbol
-    Name "portol"
-    Type PIXMAP
-    Image "porto.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-	
-  Symbol
-    Name "refl"
-    Type PIXMAP
-    Image "ref.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
-  Symbol
-    Name "marcal"
-    Type PIXMAP
-    Image "marca.png"
-  STYLE
-    1 13 1 13
-  END
-
-  END
-
+		
 	
   Symbol
     Name "pontol"
@@ -290,87 +209,8 @@ END
 
 	END
 
-  SYMBOL 
-    NAME 'industrial' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		0 2
-		0 5
-		4 5
-		4 0
-		3 0
-		3 2
-		0 2
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 	
-  SYMBOL 
-    NAME 'torrel' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
-		2 0
-		3 4
-		4 4
-		4 5
-		0 5
-		0 4
-		1 4
-		2 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 	
-  SYMBOL 
-    NAME 'mineracaol' 
-		TYPE VECTOR 
-		FILLED FALSE 
-		POINTS 
-		0 0
-		5 5
-		4 6
-		3 7
-		2 6
-		0 5
-		5 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
-  SYMBOL 
-    NAME 'cruzl' 
-		TYPE VECTOR 
-		FILLED TRUE 
-		POINTS 
-		2 0
-		3 0
-		3 1
-		5 1
-		5 2
-		3 2
-		3 7
-		2 7
-		2 2
-		0 2
-		0 1
-		2 1
-		2 0
-		END 
-  STYLE
-    1 13 1 13
-  END
-
-	END
 
 Symbol 
 	name "circlel" 
@@ -384,6 +224,3 @@ Symbol
   END
 
 END
-
-
-
