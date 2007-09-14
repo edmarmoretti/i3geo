@@ -1803,6 +1803,19 @@ Include:
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoEXT($tipo));
 	break;
+/*
+Property: selecaobox
+
+Seleciona elementos utilizando um retângulo.
+
+Include:
+<classe_selecao.php>
+*/	
+	case "selecaobox":
+		include("classe_selecao.php");
+		$m = new Selecao($map_file,$tema);
+		$cp->set_data($m->selecaoBOX($tipo,$ext));
+	break;
 
 /*
 Property: selecaoatrib

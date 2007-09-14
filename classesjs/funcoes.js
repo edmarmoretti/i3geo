@@ -516,7 +516,7 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		$i("wdocai").src = "";
 		YAHOO.util.Event.removeListener(YAHOO.janelaDoca.xp.panel.close, "click");
 		YAHOO.janelaDoca.xp.panel.destroy();
-		if ((g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
 		{mudaiconf("pan");}
 		//esconde o box do google
 		if ($i("boxg"))
@@ -621,7 +621,7 @@ function wdocafechaf(odoca)
 		$i("wdocai").src = "";
 		$i("imgh").style.visibility="visible";
 	}
-	if ((g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+	if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
 	{mudaiconf("pan");}
 }
 /*
@@ -1016,7 +1016,7 @@ function ativaClicks(docMapa)
 					}
 					movelentef(); //move a lente de aumento
 					//desloca cursor de zoom box
-					if ((g_tipoacao == "zoomli") && ($i("box1").style.visibility == "visible"))
+					if (((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox")) && ($i("box1").style.visibility == "visible"))
 					{zoomboxf("desloca");}
 				}
 			}
@@ -1030,7 +1030,7 @@ function ativaClicks(docMapa)
 			{
 				$i("imgh").style.display="none";
 				//verifica se esta na opï¿½o de zoom box
-				if (g_tipoacao == "zoomli")
+				if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
 				{
 					// inicia retï¿½gulo de zoom
 					$i("imgh").style.display="none";
@@ -1187,6 +1187,7 @@ function ativaClicks(docMapa)
 			docMapa.onmouseup = function()
 			{
 				if (g_tipoacao == "zoomli"){zoomboxf("termina");}
+				if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
 				if ($i("img") && (g_tipoacao == "pan"))
 				{
 					g_panM = "nao";
@@ -1561,16 +1562,40 @@ function zoomboxf (tipo)
 		y2 = (amext[3] * 1) - ny;
 		v = x2+" "+y2+" "+x1+" "+y1;
 		// se o retangulo for negativo pula essa parte para n� gerar erro
-		if (x1 != x2)
+		if (g_tipoacao != "selecaobox")
 		{
-			objmapa.extent=v;
-			objaguarde.abre("ajaxredesenha","Aguarde...");
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaExtensao",ajaxredesenha);
+			if (x1 != x2)
+			{
+				objmapa.extent=v;
+				objaguarde.abre("ajaxredesenha","Aguarde...");
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
+				var cp = new cpaint();
+				//cp.set_debug(2)
+				cp.set_response_type("JSON");
+				cp.call(p,"mudaExtensao",ajaxredesenha);
+			}
 		}
+		else
+		{
+			if (x1 != x2)
+			{
+				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				var tipo = "adiciona";
+				//pega o tipo de operacao da janela de selecao
+				if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
+				if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+				//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
+				if ((tipo != "limpa") && (tipo != "inverte"))
+				{
+					objaguarde.abre("ajaxredesenha","Aguarde...");
+					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
+					var cp = new cpaint();
+					//cp.set_debug(2)
+					cp.set_response_type("JSON");
+					cp.call(p,"selecaobox",ajaxredesenha);
+				}
+			}
+		}		
 		with(bx.style){visibility="hidden";width = 0; height = 0;}
 		document.getElementById("imgh").style.display="block";
 		break;

@@ -548,5 +548,58 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($tipo == "retira")
 		{return($this->selecaoRetira($shpi,$shp_atual));}
 	}
+/*
+function: selecaoBOX
+
+Seleciona por retângulo.
+
+parameters:
+
+$tipo - Tipo de operação adiciona|retira|inverte|limpa
+
+$ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
+*/
+	function selecaoBOX($tipo,$ext)
+	{
+		if ($tipo == "limpa")
+		{return ($this->selecaoLimpa());}
+		if ($tipo == "inverte")
+		{return ($this->selecaoInverte());}
+		$this->layer->set("template","none.htm");
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$indxlayer = $this->layer->index;
+		$res_count = $this->layer->getNumresults();
+		$shp_atual = array();
+		for ($i = 0; $i < $res_count;$i++)
+		{
+			$rc = $this->layer->getResult($i);
+			$shp_atual[] = $rc->shapeindex;
+		}
+		$this->mapa->freequery($indxlayer);
+		$shpi = array();
+		$temp = explode(" ",$ext);
+		$rect = ms_newRectObj();
+		$rect->set("minx",(min(array($temp[0],$temp[2]))));
+		$rect->set("miny",(min(array($temp[1],$temp[3]))));
+		$rect->set("maxx",(max(array($temp[0],$temp[2]))));
+		$rect->set("maxy",(max(array($temp[1],$temp[3]))));
+		$ident = $this->layer->queryByRect($rect);
+		if ($ident != 1)
+		{
+			$res_count = $this->layer->getNumresults();
+			$shpi = array();
+			for ($i = 0; $i < $res_count; $i++)
+			{
+				$result = $this->layer->getResult($i);
+				$shpi[]  = $result->shapeindex;
+			}
+		}
+		if ($tipo == "adiciona")
+		{return($this->selecaoAdiciona($shpi,$shp_atual));}
+		if ($tipo == "retira")
+		{return($this->selecaoRetira($shpi,$shp_atual));}
+	}
+
 }
 ?>

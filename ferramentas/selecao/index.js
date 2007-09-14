@@ -62,16 +62,17 @@ combot += "<option value='limpa' >Limpa</option>"
 combot += "</select>"
 $i("operacao").innerHTML = combot
 
+
+function mudaicone()
+{
+	$i("selecaopt").style.border = "1px solid gray"
+	$i("selecaoext").style.border = "1px solid gray"
+	$i("selecaobox").style.border = "1px solid gray"
+}
 //botoes de tipo
 function tiposel(obj)
 {
 	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
-	var mudaicone = function()
-	{
-		$i("selecaopt").style.border = "1px solid black"
-		$i("selecaoext").style.border = "1px solid black"
-		obj.style.border = "1px solid white"
-	}
 	if (obj.id == "selecaoext")
 	{
 		if (window.parent.objmapa.scale > 500000)
@@ -82,6 +83,18 @@ function tiposel(obj)
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"selecaoEXT",window.parent.ajaxredesenha);	
+	}
+	if (obj.id == "selecaobox")
+	{
+		mudaicone()
+		obj.style.border = "1px solid white"
+		window.parent.g_tipoacao = "selecaobox";	
+	}
+	if (obj.id == "selecaopt")
+	{
+		mudaicone()
+		obj.style.border = "1px solid white"
+		window.parent.g_tipoacao = "selecao";	
 	}
 	
 }
