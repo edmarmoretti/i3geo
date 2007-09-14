@@ -48,6 +48,13 @@ function busca()
 			ins += "</table>"
 		}
 		$i("resultado").innerHTML = ins
+		var palavra = window.parent.document.getElementById("valorBuscaRapida").value
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+palavra+"&g_sid="+g_sid;
+		var cp = new cpaint();
+		//cp.set_debug(2);
+		cp.set_response_type("json");
+		cp.call(p,"procurartemas",resultadoTemas);
+		
 	}
 	$i("resultado").innerHTML = "Aguarde..."
 	var palavra = window.parent.document.getElementById("valorBuscaRapida").value
@@ -57,6 +64,50 @@ function busca()
 	//cp.set_debug(2)
 	cp.set_response_type("json");
 	cp.call(p,"buscaRapida",listaretorno);	
+}
+function resultadoTemas(retorno)
+{
+	var retorno = retorno.data;
+	if ((retorno != "erro") && (retorno != undefined))
+	{
+		var ins = "";
+		for (ig=0;ig<retorno.length;ig++)
+		{
+			var ngSgrupo = retorno[ig].subgrupos;
+			for (sg=0;sg<ngSgrupo.length;sg++)
+			{
+				var nomeSgrupo = ngSgrupo[sg].subgrupo;
+				var ngTema = ngSgrupo[sg].temas;
+				for (st=0;st<ngTema.length;st++)
+				{
+					if ( ngTema[st].link != " ")
+					{var lk = "<a href="+ngTema[st].link+" target=blank>&nbsp;fonte</a>";}
+					var tid = ngTema[st].tid;
+					var inp = "<input style='text-align:left;cursor:pointer;' onclick='adicionatema(this)' class=inputsb style='cursor:pointer' type=\"checkbox\" value='"+tid+"'  /> ("+nomeSgrupo+")";
+					var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
+					ins += nomeTema;
+				}
+			}
+		}
+		if (ins != "")
+		{
+			$i("resultado").innerHTML += "<br><b>Temas:</b><br>"+ins
+		}
+	}
+}
+function adicionatema(obj)
+{
+	if (obj.checked)
+	{
+		window.parent.objaguarde.abre("ajaxredesenha","Aguarde...");
+		var temp = function()
+		{window.parent.ajaxredesenha("");}
+		var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+obj.value+"&g_sid="+g_sid;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"adicionaTema",temp);
+	}
 }
 function mostraxy(wkt)
 {

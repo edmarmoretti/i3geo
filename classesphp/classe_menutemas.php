@@ -360,10 +360,11 @@ $procurar - String que será procurada.
 		foreach($this->xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
-			if ($grupo->PERFIL != "")
+			$temp = mb_convert_encoding($grupo->PERFIL,"HTML-ENTITIES","auto");
+			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
-				$perfis = explode(",",$grupo->PERFIL);
+				$perfis = explode(",",$temp);
 				if (in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
@@ -374,7 +375,8 @@ $procurar - String que será procurada.
 					$incluisgrupo = TRUE;
 					if ($this->perfil != "")
 					{
-						$perfis = explode(",",$sgrupo->PERFIL);
+						$temp = mb_convert_encoding($sgrupo->PERFIL,"HTML-ENTITIES","auto");
+						$perfis = explode(",",$temp);
 						if (!in_array($this->perfil,$perfis))
 						{$incluisgrupo = FALSE;}
 					}
@@ -385,22 +387,24 @@ $procurar - String que será procurada.
 							$inclui = TRUE;
 							if ($this->perfil != "")
 							{
-								$perfis = explode(",",$tema->PERFIL);
+								$temp = mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto");
+								$perfis = explode(",",$temp);
 								if (!in_array($this->perfil,$perfis))
 								{$inclui = FALSE;}
 							}
 							if ($inclui == TRUE)
 							{
 								$down = "nao";
-								if (($tema->DOWNLOAD == "sim") || ($tema->DOWNLOAD == "SIM"))
+								$temp = mb_convert_encoding($tema->DOWNLOAD,"HTML-ENTITIES","auto");
+								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
-								$link = mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto");;
+								$link = mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto");
 								$tid = mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto");
 								if (function_exists("mb_convert_encoding"))
 								{$texto = array("tid"=>$tid,"nome"=>(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")),"link"=>$link,"download"=>$down);}
 								else
 								{$texto = array("tid"=>$tid,"nome"=>$tema->TNOME,"link"=>$link,"download"=>$down);}
-								if (stristr((mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")),$procurar))
+								if ((stristr(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto"),$procurar)) || (stristr(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto"),htmlentities($procurar))))
 								{$listadetemas[] = $texto;}
 							}
 						}
