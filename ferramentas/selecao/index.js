@@ -62,6 +62,30 @@ combot += "<option value='limpa' >Limpa</option>"
 combot += "</select>"
 $i("operacao").innerHTML = combot
 
+//botoes de tipo
+function tiposel(obj)
+{
+	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
+	var mudaicone = function()
+	{
+		$i("selecaopt").style.border = "1px solid black"
+		$i("selecaoext").style.border = "1px solid black"
+		obj.style.border = "1px solid white"
+	}
+	if (obj.id == "selecaoext")
+	{
+		if (window.parent.objmapa.scale > 500000)
+		{alert("A escala do mapa deve ser pelo menos 1:500.000");return;}
+		aguarde("block")
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoext&tema="+$i("comboTemas").value+"&tipo="+$i("tipoOperacao").value
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"selecaoEXT",window.parent.ajaxredesenha);	
+	}
+	
+}
+
 //cria combo com os temas
 comboTemasLigados("comboTemas",function(retorno)
 {
@@ -135,6 +159,7 @@ function adicionalinha()
 //executa o tipo de operacao selecionada se for o caso
 function operacao(tipo)
 {
+	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
 	if((tipo.value == "limpa") || (tipo.value == "inverte"))
 	{
 		aguarde("block")
@@ -150,6 +175,7 @@ function operacao(tipo)
 //aplica a selecao por atributo
 function aplicaselecao()
 {
+	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
 	aguarde("block")
 	var g = $i("parametros")
 	var ipt = g.getElementsByTagName("tr")

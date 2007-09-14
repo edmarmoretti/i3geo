@@ -492,7 +492,6 @@ $dir_tmp - localização do diretório temporário
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp);
-
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Seleção de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",basename($nomeshp));
@@ -503,6 +502,51 @@ $dir_tmp - localização do diretório temporário
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->setfilter("");
 		return("ok");
+	}
+/*
+function: selecaoEXT
+
+Seleciona por extensão geográfica.
+
+parameters:
+
+$tipo - Tipo de operação adiciona|retira|inverte|limpa
+*/
+	function selecaoEXT($tipo)
+	{
+		if ($tipo == "limpa")
+		{return ($this->selecaoLimpa());}
+		if ($tipo == "inverte")
+		{return ($this->selecaoInverte());}
+		$this->layer->set("template","none.htm");
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$indxlayer = $this->layer->index;
+		$res_count = $this->layer->getNumresults();
+		$shp_atual = array();
+		for ($i = 0; $i < $res_count;$i++)
+		{
+			$rc = $this->layer->getResult($i);
+			$shp_atual[] = $rc->shapeindex;
+		}
+		$this->mapa->freequery($indxlayer);
+		$shpi = array();
+		$rect = $this->mapa->extent;
+		$ident = @$this->layer->queryByRect($rect);
+		if ($ident != 1)
+		{
+			$res_count = $this->layer->getNumresults();
+			$shpi = array();
+			for ($i = 0; $i < $res_count; $i++)
+			{
+				$result = $this->layer->getResult($i);
+				$shpi[]  = $result->shapeindex;
+			}
+		}
+		if ($tipo == "adiciona")
+		{return($this->selecaoAdiciona($shpi,$shp_atual));}
+		if ($tipo == "retira")
+		{return($this->selecaoRetira($shpi,$shp_atual));}
 	}
 }
 ?>

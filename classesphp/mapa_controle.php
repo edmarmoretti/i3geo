@@ -1791,6 +1791,20 @@ Include:
 		$cp->set_data($m->selecaoPT($xy,$tipo));
 	break;
 /*
+Property: selecaoext
+
+Seleciona elementos utilizando a extensão do mapa.
+
+Include:
+<classe_selecao.php>
+*/	
+	case "selecaoext":
+		include("classe_selecao.php");
+		$m = new Selecao($map_file,$tema);
+		$cp->set_data($m->selecaoEXT($tipo));
+	break;
+
+/*
 Property: selecaoatrib
 
 Seleciona elementos com base nos atributos.
