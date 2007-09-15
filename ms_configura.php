@@ -65,14 +65,14 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	$editores = array("127.0.0.1");
 	//caminho completo do diretório temporário utilizado pelo mapserver
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
+	//caminho completo onde fica o I3Geo
+	$locaplic = getcwd(); //"c:/ms4w/apache/htdocs/i3geo";
 	//caminho completo do diretório onde ficam os arquivos .map correspondentes aos temas disponíveis
-	$temasdir = "c:/ms4w/apache/htdocs/i3geo/temas";
+	$temasdir = $locaplic."/temas"; //"c:/ms4w/apache/htdocs/i3geo/temas";
 	//caminho completo onde ficam os arquivos .map específicos do I3Geo
-	$temasaplic = "c:\ms4w\apache\htdocs\i3geo\aplicmap";
+	$temasaplic = $locaplic."/aplicmap";//"c:\ms4w\apache\htdocs\i3geo\aplicmap";
 	//localização do executável do Mapserver conforme deve ser acrescentado a URL após o nome do host
 	$locmapserv = "/cgi-bin/mapserv.exe";
-	//caminho completo onde fica o I3Geo
-	$locaplic = "c:/ms4w/apache/htdocs/i3geo";
 	// onde fica o xml, relativo ao diretório i3geo, que será embutido na lista de temas com sistemas locais, se for "" não será feita nenhuma inclusão
 	$locsistemas = "http://localhost/i3geo/menutemas/sistemas.xml";
 	// onde fica o xml, relativo ao diretório i3geo, que será embutido na lista de identificacao, se for "" não será feita nenhuma inclusão
