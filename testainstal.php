@@ -41,12 +41,13 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+error_reporting(E_ALL);
 echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO I3Geo</b><br>\n";
 echo getcwd();
-echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
-echo "PHP (a versão deve ser a 5x): ";
-echo phpversion()."<br>\n";
+//echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
+echo "<br><br>PHP (a versão deve ser a 5x): ";
+echo "<br>".phpversion()."<br>\n";
 require_once("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
 echo ms_GetVersion()."<br><br>";
@@ -57,14 +58,14 @@ if (array_search( "SimpleXML", $exts) != TRUE){echo "<span style=color:red >Prob
 if (array_search( "dom", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
 if (array_search( "xml", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
 if (array_search( "gd", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
-if (array_search( "gd2", $exts) != TRUE){echo "<span style=color:red >Obs: não está instalado a gd2<br></span>";}
+if (array_search( "gd2", $exts) != TRUE){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
 if (array_search( "SimpleXML", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
 
 var_dump( $exts );
 
 echo "Existe o ms_configura.php? ";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo("ms_configura não encontrado");}
-echo "Incluindo...\n";
+echo "Incluindo...\n<br>";
 include ("ms_configura.php");
 echo "dir_tmp = $dir_tmp \n";
 echo "temasdir = $temasdir \n";
@@ -73,7 +74,7 @@ echo "locmapserv = $locmapserv \n";
 echo "locaplic = $locaplic \n";
 echo "locsistemas = $locsistemas \n";
 echo "locidentifica = $locidentifica \n";
-echo "Escrevendo no diretorio temporario...";
+echo "<br>Escrevendo no diretorio temporario...";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
 if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("Não foi possível gravar no diretório temporário");
@@ -103,9 +104,33 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {$mapa = ms_newMapObj($temasaplic."/geral1windows.map");}
 else
 {$mapa = ms_newMapObj($temasaplic."/geral1.map");}
-echo "<h1>E agora..desenhando o mapa:</h1>\n";
+echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...verifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
+echo "<p>Nome da imagem gerada: $nome </p>";
+$imgo->saveImage($nome);
+$nome = ($imgo->imageurl).basename($nome);
+echo "<p><img src=$nome /></p>";
+
+echo " \n";
+echo "Carregando o map_file geral1... e acrescentando o estadosl.map \n";
+if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+{$maptemp = ms_newMapObj($temasaplic."/estadoslwindows.map");}
+else
+{$maptemp = ms_newMapObj($temasaplic."/estadosl.map");}
+echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...verifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
+
+for($i=0;$i<($maptemp->numlayers);$i++)
+{
+	$layern = $maptemp->getLayer($i);
+	if ($layern->name == "estadosl")
+	{$layern->set("data",$temasaplic."/dados/estados.shp");}
+	ms_newLayerObj($mapa, $layern);
+}
+
+$imgo = $mapa->draw();
+$nome = ($imgo->imagepath)."teste1.png";
+echo "<p>Nome da imagem gerada: $nome </p>";
 $imgo->saveImage($nome);
 $nome = ($imgo->imageurl).basename($nome);
 echo "<p><img src=$nome /></p></body></html>";
