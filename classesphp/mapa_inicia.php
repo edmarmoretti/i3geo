@@ -84,6 +84,10 @@ Essa string é recuperada no lado do javascript com eval().
 function iniciaMapa()
 {
 	global $locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con;
+	if (!file_exists($locaplic))
+	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
+	if (!file_exists($map_file))
+	{$cp->set_data("erro. $map_file nao existe (variavel map_file utilize o testainstal.php)");return;}
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include("classe_mapa.php");
 	$m = new Mapa($map_file);

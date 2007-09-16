@@ -1263,7 +1263,8 @@ function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor
  if(!window.testaferramentas){alert("ferramentas.js com problemas");}
  if(!window.testaajax){alert("redesenho.js com problemas");}
  objaguarde.abre("montaMapa","Aguarde...iniciando o mapa"); var cp=new cpaint(); cp.set_response_type("JSON"); var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid; cp.call(p,"iniciaMapa",this.montaMapa);}
- this.montaMapa=function(retorno){ if(retorno.data=="linkquebrado"){ objaguarde.fecha("montaMapa"); document.body.style.backgroundColor="white"; document.body.innerHTML="<br>Para abrir o mapa utilize o link:<br><a href="+g_locaplic+"/ms_criamapa.php >"+g_locaplic+"/ms_criamapa.php</a>"; return("linkquebrado");}
+ this.montaMapa=function(retorno){ if(retorno.data.search("erro.")>-1){ alert(retorno.data);}
+ if(retorno.data=="linkquebrado"){ objaguarde.fecha("montaMapa"); document.body.style.backgroundColor="white"; document.body.innerHTML="<br>Para abrir o mapa utilize o link:<br><a href="+g_locaplic+"/ms_criamapa.php >"+g_locaplic+"/ms_criamapa.php</a>"; return("linkquebrado");}
  else{ if((retorno.data !="erro")&&(retorno.data !=undefined)){ eval(retorno.data); if(oMenuData==""){ oMenuData={ "ajudas": [{text: "Sobre o I3Geo", url: "javascript:g_hlpt='sobrei3geo';ajudaf('abre')"},{text: "Sistema", url: "javascript:abreDoc()"},{text: "WikiBook", url: "http://pt.wikibooks.org/wiki/I3geo"},{text: "Tutoriais", url: "http://mapas.mma.gov.br/wikibooki3geo"},{text: "Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6"}, ], "analise": [{text: "Geometrias", url: "javascript:analisaGeometrias()"},{text: "Grade de poligonos", url: "javascript:gradePol()"},{text: "Grade de pontos", url: "javascript:gradePontos()"},{text: "Grade de hexágonos", url: "javascript:gradeHex()"},{text: "Entorno(buffer)", url: "javascript:buffer()"},{text: "Centróide", url: "javascript:centroide()"},{text: "N pontos em poligono", url: "javascript:nptPol()"},{text: "Ponto em poligono/raster", url: "javascript:pontoempoligono()"},{text: "Distribuição de pontos", url: "javascript:pontosdistri()"}
  ] }; if(!$i("listaPropriedades")){ oMenuData.propriedades=[{text: "Tipo de imagem", url: "javascript:tipoimagem()"},{text: "Legenda", url: "javascript:opcoesLegenda()"},{text: "Escala", url: "javascript:opcoesEscala()"},{text: "Tamanho", url: "javascript:tamanho()"},{text: "Ativa/desativa entorno", url: "javascript:ativaEntorno()"},{text: "Ativa/desativa logo", url: "javascript:ativaLogo()"},{text: "Cor da selecao", url: "javascript:queryMap()"},{text: "Cor do fundo", url: "javascript:corFundo()"},{text: "Grade de coordenadas", url: "javascript:gradeCoord()"}
  ];}
@@ -1286,7 +1287,7 @@ function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor
  if($i("maisBotoes2")){YAHOO.janelaBotoes2.xp.panel.moveTo(imagemxi,imagemyi+10);}
  mudaiconf("pan"); if(g_entorno=="sim"){ geraURLentorno(); var letras=["L","O","N","S"]; for(l=0;l<letras.length;l++){ if($i("img"+letras[l])){ $i("img"+letras[l]).style.width=objmapa.w; $i("img"+letras[l]).style.height=objmapa.h; $i("img"+letras[l]).style.display="block";}}
  ajustaEntorno();}}
- else{trataErro();alert("Erro. Impossivel criar o mapa");return;}
+ else{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
  var temp=g_guiaativa.split("guia"); mostraguiaf(temp[1]); if($i(objmapa.guiaListaMapas)){ if(g_locmapas==""){$i(objmapa.guiaListaMapas).style.display="none"}}
  if(pCookie("g_janelaMen")){g_janelaMen=pCookie("g_janelaMen");}
  if(g_janelaMen=="sim"){initJanelaMen();}

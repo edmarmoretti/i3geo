@@ -725,6 +725,10 @@ function Mapa(e,m)
 	*/
 	this.montaMapa = function (retorno)
 	{
+		if (retorno.data.search("erro.") > -1)
+		{
+			alert(retorno.data);
+		}
 		if (retorno.data == "linkquebrado")
 		{
 			objaguarde.fecha("montaMapa");
@@ -902,7 +906,7 @@ function Mapa(e,m)
 				}		
 			}
 			else
-			{trataErro();alert("Erro. Impossivel criar o mapa");return;}
+			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
 			//ativa a guia correta
 			var temp = g_guiaativa.split("guia");
 			mostraguiaf(temp[1]);

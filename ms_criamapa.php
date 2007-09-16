@@ -211,6 +211,7 @@ if (!file_exists($dir_tmp."/index.htm"))
 //
 //cria os objetos map
 //
+ms_ResetErrorList();
 if (file_exists($base))
 {
 	$map = ms_newMapObj($base);
@@ -221,6 +222,13 @@ else
 	$map = ms_newMapObj($temasaplic."/".$base.".map");
 	$mapn = ms_newMapObj($temasaplic."/".$base.".map");
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //
 //verifica a lista de temas da inicializacao, adicionando-os se necessário
 //
@@ -263,6 +271,13 @@ foreach ($alayers as $arqt)
 		}	
 	}
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //
 //liga os temas definidos em $layers
 //
@@ -279,6 +294,13 @@ if (isset($layers))
 		{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_DEFAULT);}
 	}
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //
 //aplica ao mapa os parâmetros passados pela URL
 //
@@ -309,6 +331,13 @@ if ((isset($mapext)) && ($mapext != ""))
 	if (count($newext) == 4)
 	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //
 //configura os endereços corretos
 //
@@ -334,6 +363,13 @@ if (isset($executa))
 	if (function_exists($executa))
 	{eval($executa."();");}
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //inclui pontos via url
 if (isset($pontos))
 {
@@ -390,11 +426,42 @@ if (isset($pontos))
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
 }
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 //
 //se vc quiser para o script aqui, para verificar erros, descomente a linha abaixo
 //
 //exit;
-
+//
+//verifica os dados de cada layer
+//
+$mapa = ms_newMapObj($tmpfname);
+$path = $mapa->shappath;
+for($i=0;$i<($mapa->numlayers);$i++)
+{
+	$layer = $mapa->getLayer($i);
+	$ok = true;
+	if ($layer->connection == "")
+	{
+		$ok = false;
+		$d = $layer->data;
+		if((file_exists($d)) || (file_exists($d.".shp")))
+		{$ok = true;}
+		else
+		{
+			if((file_exists($path."/".$d)) || (file_exists($path."/".$d.".shp")))
+			{$ok = true;}
+		}
+	}
+	if ($ok == false)
+	{$layer->set("status",MS_OFF);}
+}
+$mapa->save($tmpfname);
 //
 // gera a url para abrir o mapa
 // interface = arquivo html que será aberto
