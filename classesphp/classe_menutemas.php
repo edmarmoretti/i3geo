@@ -404,7 +404,14 @@ $procurar - String que será procurada.
 								{$texto = array("tid"=>$tid,"nome"=>(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")),"link"=>$link,"download"=>$down);}
 								else
 								{$texto = array("tid"=>$tid,"nome"=>$tema->TNOME,"link"=>$link,"download"=>$down);}
-								if ((stristr(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto"),$procurar)) || (stristr(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto"),htmlentities($procurar))))
+								$p1 = $this->removeAcentos($procurar);
+								$p1 = $this->removeAcentos(htmlentities($p1));
+								
+								$pp1 = $this->removeAcentos(mb_convert_encoding($tema->TNOME,"auto","auto"));
+								$pp1 = $this->removeAcentos(mb_convert_encoding($tema->TNOME,"auto","auto"));
+								$pp1 = $this->removeAcentos(htmlentities($pp1));
+								//$listadetemas[] = array("tid"=>"","nome"=>$pp1);
+								if (stristr($pp1,$p1))
 								{$listadetemas[] = $texto;}
 							}
 						}
@@ -431,5 +438,22 @@ $procurar - String que será procurada.
 		}
 		return ($resultado);
 	}
+	function removeAcentos($s)
+	{
+		$s = ereg_replace("[áàâã]","a",$s);
+		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
+		$s = ereg_replace("[éèê]","e",$s);
+		$s = ereg_replace("[í]","i",$s);
+		$s = ereg_replace("[Í]","I",$s);
+		$s = ereg_replace("[ÉÈÊ]","E",$s);
+		$s = ereg_replace("[óòôõ]","o",$s);
+		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
+		$s = ereg_replace("[úùû]","u",$s);
+		$s = ereg_replace("[ÚÙÛ]","U",$s);
+		$s = str_replace("ç","c",$s);
+		$s = str_replace("Ç","C",$s);
+		//$s = ereg_replace(" ","",$s); 
+		return $s;
+	}	
 }
 ?>

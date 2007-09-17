@@ -28,27 +28,30 @@ function busca()
 	var listaretorno = function(retorno)
 	{
 		var ins = "Nada encontrado";
-		if (retorno.data.geonames)
+		if (retorno.data)
 		{
-			for (i=0;i<retorno.data.geonames.length; i++)
+			if (retorno.data.geonames)
 			{
-				if (i == 0){var ins = "<table>";}
-				ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
-				var layer = retorno.data.geonames[i].layer
-				for (j=0;j<retorno.data.geonames[i].lugares.length; j++)
+				for (i=0;i<retorno.data.geonames.length; i++)
 				{
-					ins += "<tr><td style='text-align:left'>"
-					var nm = retorno.data.geonames[i].lugares[j].nome;
-					ins += nm;
-					var wkt = retorno.data.geonames[i].lugares[j].limite
-					var gid = retorno.data.geonames[i].lugares[j].gid
-					ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'>zoom</td></tr>"
+					if (i == 0){var ins = "<table>";}
+					ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
+					var layer = retorno.data.geonames[i].layer
+					for (j=0;j<retorno.data.geonames[i].lugares.length; j++)
+					{
+						ins += "<tr><td style='text-align:left'>"
+						var nm = retorno.data.geonames[i].lugares[j].nome;
+						ins += nm;
+						var wkt = retorno.data.geonames[i].lugares[j].limite
+						var gid = retorno.data.geonames[i].lugares[j].gid
+						ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'>zoom</td></tr>"
+					}
 				}
 			}
 			ins += "</table>"
 		}
 		$i("resultado").innerHTML = ins
-		var palavra = window.parent.document.getElementById("valorBuscaRapida").value
+		//var palavra = window.parent.document.getElementById("valorBuscaRapida").value
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+palavra+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2);
@@ -80,7 +83,7 @@ function resultadoTemas(retorno)
 				var ngTema = ngSgrupo[sg].temas;
 				for (st=0;st<ngTema.length;st++)
 				{
-					if ( ngTema[st].link != " ")
+					if (ngTema[st].link != " ")
 					{var lk = "<a href="+ngTema[st].link+" target=blank>&nbsp;fonte</a>";}
 					var tid = ngTema[st].tid;
 					var inp = "<input style='text-align:left;cursor:pointer;' onclick='adicionatema(this)' class=inputsb style='cursor:pointer' type=\"checkbox\" value='"+tid+"'  /> ("+nomeSgrupo+")";
