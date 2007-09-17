@@ -41,7 +41,7 @@ Monta o menu baseado na variável oMenuData
 				    //
 				    if(oMenuData.ajudas)
 				    {
-				    	var ins = '<div class="bd" style=z-index:1 >';
+				    	var ins = '<div class="bd" style=z-index:2000 >';
 						ins += '<ul class="first-of-type" style="text-align:center;">';
 						ins += '<li class="yuimenubaritem">Ajuda?</li>';
 						ins += '<li class="yuimenubaritem">An&aacute;lise</li>';
