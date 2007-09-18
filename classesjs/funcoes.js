@@ -2372,6 +2372,11 @@ function processaGrupos(retorno)
 		if (g_conectargeorss == "sim")
 		{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img src="+g_locaplic+"/imagens/georss-1.png style='cursor:pointer;text-align:left'  />&nbsp;Conectar com GeoRss</div>";}
 		$i(objmapa.guiaMenu+"obj").innerHTML += upload;
+		if (objmapa.navegacaoDir == "sim")
+		{
+			var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img src="+g_locaplic+"/imagens/desktop.png style='cursor:pointer;text-align:left'  />&nbsp;Acesso aos arquivos do servidor</div>";
+			$i(objmapa.guiaMenu+"obj").innerHTML += temp;
+		}
 		//arvore MMA
 		mytreeview2 = new Object();
 		mytreeview2 = treeviewNew("mytreeview2", "default", objmapa.guiaMenu+"obj", null);

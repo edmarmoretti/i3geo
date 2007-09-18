@@ -37,6 +37,8 @@ Inicia um mapa, pegando os parâmetros necessários.
 
 Parameters:
 
+navegadoresLocais - array que indica quais usuários podem navegar no servidor
+
 cp - Objeto CPAINT.
 
 embedLegenda - inclui a legenda no corpo do mapa sim|nao
@@ -57,7 +59,7 @@ R_path - Variável definida no arquivo ms_configura.php que indica se o software 
 
 locmapas - Variável definida no arquivo ms_configura.php que indica se a guia de mapas deve ser mostrada.
 
-locmapserve - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
+locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
 
 postgis_con - Variável definida no arquivo ms_configura.php que indica qual conexão postgis deve ser utilizada (algumas funções de análise utilizam essa conexão, se existir)
 
@@ -83,7 +85,7 @@ Essa string é recuperada no lado do javascript com eval().
 */
 function iniciaMapa()
 {
-	global $locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con;
+	global $navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con;
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -174,7 +176,9 @@ function iniciaMapa()
 	$visual = "";
 	if (file_exists($locaplic."/imagens/visual"))
 	{$visual = implode(",",listaDiretorios($locaplic."/imagens/visual"));}
-	$res .= ";objmapa.listavisual='".$visual."';";
+	$res .= ";objmapa.listavisual='".$visual."'";
+	//pega os usuários navegadores
+	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."';";
 	if (function_exists("mb_convert_encoding"))
 	{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
 	//

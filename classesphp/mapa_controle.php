@@ -119,8 +119,8 @@ if (!isset($map_file))
 	exit;
 }
 require_once("classe_vermultilayer.php");
-require_once ("classe_estatistica.php");
-require_once ("funcoes_gerais.php");
+require_once("classe_estatistica.php");
+require_once("funcoes_gerais.php");
 
 //
 //copia o map_file atual com outro nome para restaurar caso ocorra algum problema
@@ -474,6 +474,46 @@ Include:
 		}
 	break;
 /*
+Property: adicionaTemaSHP
+
+Adiciona um tema baseado em um arquivo shape file.
+
+Include:
+<classe_mapa.php>
+*/
+	case "adicionaTemaSHP":
+		include("classe_mapa.php");
+		$m = new Mapa($map_file);
+		$retorno = $m->adicionaTemaSHP($arq);
+		$cp->set_data($retorno);
+		if ($retorno != "erro")
+		{$m->salva();redesenhaMapa();}
+		else
+		{
+			$cp->set_data("erro.Nenhum dado espacializado foi encontrado.");
+		}
+	break;
+/*
+Property: adicionaTemaIMG
+
+Adiciona um tema baseado em um arquivo de imagem.
+
+Include:
+<classe_mapa.php>
+*/
+	case "adicionaTemaIMG":
+		include("classe_mapa.php");
+		$m = new Mapa($map_file);
+		$retorno = $m->adicionaTemaIMG($arq);
+		$cp->set_data($retorno);
+		if ($retorno != "erro")
+		{$m->salva();redesenhaMapa();}
+		else
+		{
+			$cp->set_data("erro.Nenhum dado espacializado foi encontrado.");
+		}
+	break;
+/*
 Property: listatemas
 
 Lista os temas existentes em um mapa.
@@ -608,6 +648,29 @@ Section: Temas
 
 Processa os layers do mapa.
 */
+
+/*
+Property: listaDrives
+
+Pega a lista de drives registrados para o usuário atual.
+
+A lista de drives é definida no ms_configura e permite que o usuário navegue pelos arquivos do servidor.
+
+Include:
+<ms_configura.php>
+*/
+	case "listaDrives":
+		include("../ms_configura.php");
+		//verifica se está cadastrado
+		$ipcliente = pegaIPcliente();
+		$retorno = array();
+		foreach ($navegadoresLocais as $n)
+		{
+			if (gethostbyname($n["ip"]) == $ipcliente)
+			{$retorno[] = $n["drives"];}	
+		}		
+		$cp->set_data($retorno);
+	break;
 /*
 Property: alterarepresentacao
 

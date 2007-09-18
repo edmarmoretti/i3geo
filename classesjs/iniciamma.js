@@ -577,6 +577,14 @@ function Mapa(e,m)
 		$i("openlayers").style.height = this.h;
 	}
 	/*
+	Variable: objmapa.navegacaoDir
+	
+	Indica se deve ser incluida a opção de navegação nos diretórios do servidor.
+
+	A indicação sim|nao é obtida na inicialização do i3geo, e é definido no ms_configura.php
+	*/
+	this.navegacaoDir = "nao";	
+	/*
 	Variable: objmapa.listavisual
 	
 	String com a lista de visuais disponíveis no i3geo.

@@ -489,6 +489,13 @@ function editaLegenda(idtema)
 Section: adição de temas
 */
 /*
+Function: navegacaoDir
+
+Adiciona temas navegando pelos diretórios do servidor
+*/
+function navegacaoDir()
+{wdocaf("550px","350px",g_locaplic+"/ferramentas/navegacaodir/index.htm","","","");}
+/*
 Function: conectarwms
 
 Adiciona temas tendo como fonte um web service do tipo wms

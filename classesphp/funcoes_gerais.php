@@ -1408,4 +1408,21 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	}
 	return(implode(",",$resultado));
 }
+/*
+Section: Outros
+*/
+/*
+function: pegaIPcliente
+
+Pega o IP do cliente
+*/
+function pegaIPcliente()
+{
+	$ip = "UNKNOWN";
+	if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+	else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+	else $ip = "UNKNOWN";
+	return $ip;
+}
 ?>

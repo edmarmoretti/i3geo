@@ -101,6 +101,10 @@ $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
 $perfil_ = $perfil;
+if ((isset($navegadoresLocais)) && ($navegadoresLocais != ""))
+$navegadoresLocais_ = "sim";
+else
+$navegadoresLocais_ = "nao";
 //
 //inicia a sessão
 //
@@ -131,6 +135,7 @@ $_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
 $_SESSION["perfil"] = $perfil_;
+$_SESSION["navegadoresLocais"] = $navegadoresLocais_;
 //
 //pega todas as variáveis da sessão
 //

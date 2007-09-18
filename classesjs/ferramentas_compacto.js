@@ -43,6 +43,7 @@ function etiquetas(idtema){wdocaf("400px","300px",g_locaplic+"/ferramentas/etiqu
 function opcoesLegenda(){wdocaf("300px","280px",g_locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");}
 function abreCor(janela,elemento){wdocaf2("385px","280px",g_locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor");}
 function editaLegenda(idtema){wdocaf("490px","340px",g_locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda");}
+function navegacaoDir(){wdocaf("550px","350px",g_locaplic+"/ferramentas/navegacaodir/index.htm","","","");}
 function conectarwms(){wdocaf("400px","300px",g_locaplic+"/ferramentas/conectarwms/index.htm","","","WMS");}
 function conectarwfs(){wdocaf("400px","300px",g_locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");}
 function conectargeorss(){wdocaf("400px","300px",g_locaplic+"/ferramentas/conectargeorss/index.htm","","","GeoRSS");}

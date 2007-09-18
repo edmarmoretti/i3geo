@@ -61,7 +61,17 @@ postgis_mapa - string de conexão com o banco de dados para substituição do CONNE
 $mensagemInicia = "I3Geo versão 3.7";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
-	//ip dos usuarios que podem administrar via navegador
+	//ip dos usuarios que podem navegar no servidor para acessar arquivos de dados geográficos 
+	$navegadoresLocais = array(
+							array(
+							"ip"=>"127.0.0.1",
+							"drives"=>array(
+										array("caminho"=>"c:/","nome"=>"c"),
+										array("caminho"=>"d:/","nome"=>"d")
+										)
+							)
+						);
+	//ip dos usuarios que podem administrar via navegador. Separe os ips por vírgula
 	$editores = array("127.0.0.1");
 	//caminho completo do diretório temporário utilizado pelo mapserver
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";

@@ -1057,5 +1057,53 @@ $canal - Identificador do canal (ordem em que está no RSS)
 		}
 		return("erro");
 	}
+/*
+Method: adicionaTemaSHP
+
+Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
+
+Parameters:
+$arq - Nome do shape file.
+*/
+	function adicionaTemaSHP($arq)
+	{
+		if (file_exists($arq))
+		{
+			$s = ms_newShapefileObj($arq,-1);
+			$shape = $s->getShape(0);
+			$t = $shape->type;
+			$tipo = MS_LAYER_POLYGON;
+			if ($t == 0)
+			{$tipo = MS_LAYER_POINT;}
+			if ($t == 1)
+			{$tipo = MS_LAYER_LINE;}
+			$layer = criaLayer($this->mapa,$tipo,MS_DEFAULT,basename($arq),"SIM");
+			$layer->set("data",$arq);
+			$layer->set("name",basename($arq));
+			$layer->setmetadata("DOWNLOAD","nao");
+			$layer->setmetadata("TEMALOCAL","NAO");
+		}
+		return("ok");
+	}
+/*
+Method: adicionaTemaIMG
+
+Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
+
+Parameters:
+$arq - Nome do arquivo.
+*/
+	function adicionaTemaIMG($arq)
+	{
+		if (file_exists($arq))
+		{
+			$layer = criaLayer($this->mapa,MS_LAYER_RASTER,MS_DEFAULT,basename($arq),"SIM");
+			$layer->set("data",$arq);
+			$layer->set("name",basename($arq));
+			$layer->setmetadata("DOWNLOAD","nao");
+			$layer->setmetadata("TEMALOCAL","NAO");
+		}
+		return("ok");
+	}
 }
 ?>
