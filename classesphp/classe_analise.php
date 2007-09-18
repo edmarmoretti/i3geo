@@ -179,6 +179,8 @@ Include:
 
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
+		if ($tipo == "kernel")
+		{$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);}
 		if ($tipo == "densidade")
 		{$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);}
 		if ($tipo == "distancia")
@@ -346,6 +348,47 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'sink()';
 		$rcode[] = 'close(zz)';
 		$r = executaR($rcode,$dir_tmp,$R_path);
+	}
+/*
+function: mapaKernel
+
+Gera um mapa de kernel.
+
+Executa script R para gerar a imagem.
+
+parameters:
+$arqpt - Prefixo dos arquivos em disco com os pontos.
+
+$dimx - Range em x no formato R c(-54,-53).
+
+$dimy - Range em y no formato R c(-25,-23).
+
+$dir_tmp - Diretório temporário do mapserver.
+
+$R_path - Onde fica o R.
+
+$locaplic - Onde fica o I3Geo.
+*/
+	function mapaKernel($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
+	{
+		$gfile_name = nomeRandomico(20);
+		$graf = "png";
+		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
+		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{$lib = '.libPaths("'.$locaplic.'/pacotes/r/win/library")';}
+		$rcode[] = $lib;
+		$rcode[] = 'library(spatstat)';
+		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
+		$rcode[] = 'img <- ksmooth.ppp(pt)';
+		$rcode[] = 'cat(img$v,file="'.$arqpt.'img",fill=FALSE)';
+		$rcode[] = 'cat(img$xstep,file="'.$arqpt.'h",fill=TRUE)';
+		$rcode[] = 'cat(img$ystep,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		$rcode[] = 'cat(img$xrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		return "ok";
 	}
 /*
 function: mapaDensidade

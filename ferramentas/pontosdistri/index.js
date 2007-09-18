@@ -35,6 +35,7 @@ comboTemasPt("temasPt",function(retorno)
 	ins += retorno	
 	ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='densidade de pontos' /></div><br>"
 	ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='dist&acirc;ncia entre pontos' /></div><br>"
+	ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div><br>"
 	ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='relat&oacute;rio' /></div><br>"
 	mensagemOpcao("guia1obj",ins)
 	YAHOO.example.init = function ()
@@ -45,6 +46,7 @@ comboTemasPt("temasPt",function(retorno)
 			new YAHOO.widget.Button("botao2");
 			new YAHOO.widget.Button("botao3");
 			new YAHOO.widget.Button("botao4");
+			new YAHOO.widget.Button("botaokernel");
 		}
     	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 	}()		
@@ -77,6 +79,21 @@ function mostracores(retorno)
 //abre a paleta de cores
 function corj(obj)
 {window.parent.abreCor("wdocai",obj)}
+
+function analiseKernel()
+{
+	//window.parent.borra("sim")
+	var n = $i("numclasses").value
+	var ci = $i("cori").value
+	var cf = $i("corf").value
+	aguarde("block")
+	var tema = $i("temasPt").value
+	var cp = new cpaint();
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel"
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"analiseDistriPt",window.parent.ajaxredesenha);
+}
 
 function analiseDensidade()
 {
