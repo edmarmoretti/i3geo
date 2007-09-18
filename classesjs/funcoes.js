@@ -1413,6 +1413,7 @@ function mudaboxnf(tipo)
 	g_operacao = tipo;
 	clearTimeout(objmapa.tempo);
 	objmapa.tempo = setTimeout('remapaf()',(4000));
+	autoRedesenho("reinicia");
 	if ($i("aplicari"))
 	{
 		$i("aplicari").style.display="block";
@@ -2583,6 +2584,58 @@ function pegaTema(celula)
 /*
 Section: redesenho do mapa
 */
+/*
+Function: autoRedesenho
+
+Controla a opção de redesenho automático temporizado
+
+Para funcionar, a variável de inicialização g_autoRedesenho deve ser > 0
+
+Parameters:
+
+opcao: ativa|desativa|redesenha
+*/
+function autoRedesenho(opcao)
+{
+	if (opcao == "desativa")
+	{
+		g_autoRedesenho = 0;
+		clearTimeout(objmapa.tempoRedesenho);
+		clearTimeout(objmapa.contaTempoRedesenho);
+		objmapa.tempoRedesenho = "";
+		objmapa.contaTempoRedesenho = "";
+		objmapa.tempoRedesenho = "";
+		if ($i("tempoRedesenho"))
+		{$i("tempoRedesenho").style.display = "none";}
+	}
+	if (opcao == "ativa")
+	{
+		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
+		{$i("tempoRedesenho").style.display = "block";}
+		if (g_autoRedesenho > 0)
+		{objmapa.tempoRedesenho = setTimeout('autoRedesenho("redesenha")',g_autoRedesenho);}
+		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
+		{
+			$i("tempoRedesenho").innerHTML = g_autoRedesenho/1000;
+			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
+		}
+	}
+	if (opcao == "redesenha")
+	{
+		clearTimeout(objmapa.tempoRedesenho);
+		clearTimeout(objmapa.contaTempoRedesenho);
+		remapaf();
+		autoRedesenho("ativa");
+	}
+	if (opcao == "contagem")
+	{
+		if ($i("tempoRedesenho"))
+		{
+			$i("tempoRedesenho").innerHTML = parseInt($i("tempoRedesenho").innerHTML) - 1;
+			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
+		}
+	}
+}
 /*
 Function: remapaf
 

@@ -156,7 +156,7 @@ function initJanelaRef(){ if(!$i("winRef")){ var novoel=document.createElement("
  else{YAHOO.janelaRef.xp.panel.moveTo((imagemxi+objmapa.w-167),imagemyi+4);}
  var escondeRef=function(){ YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click"); YAHOO.janelaRef.xp.panel.destroy(); iCookie("g_mapaRefDisplay","none");}
  YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef); iCookie("g_mapaRefDisplay","block"); objmapa.atualizaReferencia();}
-function mudaboxnf(tipo){ g_operacao=tipo; clearTimeout(objmapa.tempo); objmapa.tempo=setTimeout('remapaf()',(4000)); if($i("aplicari")){ $i("aplicari").style.display="block"; if(navm){ mx=objposicaomouse.x-10; my=objposicaomouse.y-15; with($i("aplicari").style){ pixelLeft=mx+document.body.scrollLeft; pixelTop=my+document.body.scrollTop;}}
+function mudaboxnf(tipo){ g_operacao=tipo; clearTimeout(objmapa.tempo); objmapa.tempo=setTimeout('remapaf()',(4000)); autoRedesenho("reinicia"); if($i("aplicari")){ $i("aplicari").style.display="block"; if(navm){ mx=objposicaomouse.x-10; my=objposicaomouse.y-15; with($i("aplicari").style){ pixelLeft=mx+document.body.scrollLeft; pixelTop=my+document.body.scrollTop;}}
  if(navn){ with($i("aplicari").style){ left=objposicaomouse.x; top=objposicaomouse.y+document.body.scrollTop;}}}}
 function movelentef(){ if($i("lente")){ if($i("lente").style.visibility=="visible"){ var esq=(objposicaocursor.telax-imagemxi)*2.25; var topo=(objposicaocursor.telay-imagemyi)*2.25; var clipt="rect("+(topo-40)+" "+(esq+40)+" "+(topo+40)+" "+(esq-40)+")"; with($i("lente").style){ clip=clipt; eval(g_tipotop+"=(imagemyi-(topo-40))+g_postpx"); eval(g_tipoleft+"=(imagemxi-(esq-40))+g_postpx");}}}}
 function zoomiauto(){ objaguarde.abre("ajaxredesenha","Aguarde..."); g_fatordezoom=0; var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); g_operacao="navega"; cp.call(p,"aproxima",ajaxredesenha);}
@@ -276,6 +276,12 @@ function pegaMapas(retorno){ var ins="<br>"; var mapa=retorno.data.mapas; for(ig
 function arvoreclick(itemID){ if(itemID.search("tema")==0){ if($i(itemID).checked==true){$i(itemID).checked=false;}
  else{$i(itemID).checked=true;}}}
 function pegaTema(celula){ var nos=celula.parentNode.childNodes; for(no=0;no<nos.length;no++){if(nos[no].type=="checkbox"){return nos[no].value;}}}
+function autoRedesenho(opcao){ if(opcao=="desativa"){ g_autoRedesenho=0; clearTimeout(objmapa.tempoRedesenho); clearTimeout(objmapa.contaTempoRedesenho); objmapa.tempoRedesenho=""; objmapa.contaTempoRedesenho=""; objmapa.tempoRedesenho=""; if($i("tempoRedesenho")){$i("tempoRedesenho").style.display="none";}}
+ if(opcao=="ativa"){ if(($i("tempoRedesenho"))&&(g_autoRedesenho > 0)){$i("tempoRedesenho").style.display="block";}
+ if(g_autoRedesenho > 0){objmapa.tempoRedesenho=setTimeout('autoRedesenho("redesenha")',g_autoRedesenho);}
+ if(($i("tempoRedesenho"))&&(g_autoRedesenho > 0)){ $i("tempoRedesenho").innerHTML=g_autoRedesenho/1000; objmapa.contaTempoRedesenho=setTimeout('autoRedesenho("contagem")',1000);}}
+ if(opcao=="redesenha"){ clearTimeout(objmapa.tempoRedesenho); clearTimeout(objmapa.contaTempoRedesenho); remapaf(); autoRedesenho("ativa");}
+ if(opcao=="contagem"){ if($i("tempoRedesenho")){ $i("tempoRedesenho").innerHTML=parseInt($i("tempoRedesenho").innerHTML)-1; objmapa.contaTempoRedesenho=setTimeout('autoRedesenho("contagem")',1000);}}}
 function remapaf(){ clearTimeout(objmapa.tempo); objmapa.tempo=""; objmapa.temaAtivo=""; if($i(objmapa.guiaTemas+"obj")){ var iguias=$i(objmapa.guiaTemas+"obj").getElementsByTagName("input"); var tsl=new Array(); var tsd=new Array(); for(i=0;i<iguias.length;i++){ if(iguias[i].type=="checkbox"){ if(iguias[i].checked==false){tsd.push(iguias[i].value);}
  if(iguias[i].checked==true){tsl.push(iguias[i].value);}}}
  var remapaAdicNovos=function remapaAdicNovos(retorno){ if($i("buscatema")){ var g=$i(objmapa.guiaMenu+"obj"); var iguias=g.getElementsByTagName("input"); var ta=new Array(); for(i=0;i<iguias.length;i++){ if(iguias[i].type=="checkbox"){ if(iguias[i].checked==true){ ta.push(iguias[i].value); iguias[i].checked=false;}}}

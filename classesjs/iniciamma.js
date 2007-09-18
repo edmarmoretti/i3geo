@@ -36,8 +36,16 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Section: variáveis internas
+Section: variáveis de configuração
 */
+/*
+Variable: g_autoRedesenho
+
+Ativa o auto redesenho após um determinado temp.
+
+Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
+*/
+g_autoRedesenha = 0;
 /*
 Variable: g_sid
 
@@ -610,6 +618,14 @@ function Mapa(e,m)
 	*/
 	this.tempo = ""; //
 	/*
+	Variable: objmapa.autoRedesenho
+	
+	Inicia o temporizador para redesenhar o mapa automaticamente.
+	
+	*/
+	this.tempoRedesenho = ""; //
+	this.contaTempoRedesenho = ""; //
+	/*
 	Variable: objmapa.temaAtivo
 	
 	Tema que esta ativo.
@@ -903,7 +919,8 @@ function Mapa(e,m)
 						}
 					}
 					ajustaEntorno();
-				}		
+				}
+				autoRedesenho("ativa");
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
@@ -1015,7 +1032,8 @@ function Mapa(e,m)
    	                  { text: "Cor da selecao", url: "javascript:queryMap()" },
    	                  { text: "Cor do fundo", url: "javascript:corFundo()" },
    	                  { text: "Grade de coordenadas", url: "javascript:gradeCoord()" },
-   	                  { text: "Template", url: "javascript:template()" }
+   	                  { text: "Template", url: "javascript:template()" },
+   	                  { text: "Temporizador", url: "javascript:autoredesenha()" }
    	              ]};					
 			listaPr = new Object();
 			listaPr = treeviewNew("listaPr", "default", id, null);

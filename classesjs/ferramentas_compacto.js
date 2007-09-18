@@ -1,3 +1,4 @@
+function autoredesenha(){wdocaf("300px","180px",g_locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","");}
 function salvaMapa(){wdocaf("300px","180px",g_locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");}
 function carregaMapa(){wdocaf("300px","150px",g_locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa");}
 function convertews(){wdocaf("440px","280px",g_locaplic+"/ferramentas/convertews/index.htm","","","Web service");}

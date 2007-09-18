@@ -31,6 +31,13 @@ Free Software Foundation, Inc., no endereço
 Section: propriedades do mapa
 */
 /*
+Function: temporizador
+
+Define o intervalo de tempo para redesenho automático do mapa.
+*/
+function autoredesenha()
+{wdocaf("300px","180px",g_locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","");}
+/*
 Function: salvaMapa
 
 Salva o map file localmente

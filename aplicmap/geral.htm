@@ -71,7 +71,9 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 <tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
 -->
 <tr>
- <td class=tdbranca ><div id=visual ></div>
+ <td class=tdbranca >
+ 	<div id=visual ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
   <table width=100% ><tr>
@@ -416,6 +418,15 @@ Indica qual o tipo de visual para abertura do mapa.
 Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
 */
 g_visual = "default";
+
+/*
+Variable: g_autoRedesenho
+
+Ativa o auto redesenho após um determinado tempo (milisegundos).
+
+Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
+*/
+g_autoRedesenho = 0;
 
 /*
 	Variable: objmapa.guiaTemas
