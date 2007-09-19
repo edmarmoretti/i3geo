@@ -446,7 +446,7 @@ ms_ResetErrorList();
 //verifica os dados de cada layer
 //
 $mapa = ms_newMapObj($tmpfname);
-$path = $mapa->shappath;
+$path = $mapa->shapepath;
 for($i=0;$i<($mapa->numlayers);$i++)
 {
 	$layer = $mapa->getLayer($i);
