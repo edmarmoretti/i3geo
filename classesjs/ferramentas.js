@@ -338,7 +338,7 @@ function pontosdistri()
 	if (g_r == "nao")
 	{alert("Opção não disponível");}
 	else
-	{wdocaf("400px","250px",g_locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribuição de pontos");}
+	{wdocaf("400px","300px",g_locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribuição de pontos");}
 }
 
 /*

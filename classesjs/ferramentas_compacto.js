@@ -27,7 +27,7 @@ function mudanomef(idtema){ g_operacao="mudanome"; if($i("nn"+idtema)){var valor
 function toponimiaf(idtema){wdocaf("350px","340px",g_locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");}
 function filtrof(idtema){wdocaf("480px","250px",g_locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");}
 function pontosdistri(){ if(g_r=="nao"){alert("Opção não disponível");}
- else{wdocaf("400px","250px",g_locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribuição de pontos");}}
+ else{wdocaf("400px","300px",g_locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribuição de pontos");}}
 function pontoempoligono(){wdocaf("400px","250px",g_locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono");}
 function nptPol(){wdocaf("400px","200px",g_locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono");}
 function buffer(){wdocaf("400px","180px",g_locaplic+"/ferramentas/buffer/index.htm","","","Entorno");}
