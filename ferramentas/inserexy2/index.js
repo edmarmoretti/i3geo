@@ -181,32 +181,46 @@ function mostrawkt(retorno)
 function inserir()
 {
 	var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g");
+	var regv = new RegExp(",", "g");
 	if (!$i("longitude").value == "")
 	{
 		var v = $i("longitude").value + " 0" + " 0"
 		v = v.replace(reg,"");
+		v = v.replace(regv,".");
 		v = v.split(" ");
 		$i("xg").value = v[0]
 		$i("xm").value = v[1]
 		$i("xs").value = v[2]
+		var xgv = v[0]
+		var xmv = v[1]
+		var xsv = v[2]
+		var xsv = xsv.replace(",",".");
 	}
-	var xgv = $i("xg").value;
-	var xmv = $i("xm").value;
-	var xsv = $i("xs").value;
-	xsv = xsv.replace(",",".");
+	else
+	{
+		var xgv = $i("xg").value;
+		var xmv = $i("xm").value;
+		var xsv = $i("xs").value;
+		var xsv = xsv.replace(regv,".");
+	}
 	if (!$i("latitude").value == "")
 	{
 		var vv = $i("latitude").value  + " 0" + " 0"
 		vv = vv.replace(reg,"");
+		vv = vv.replace(regv,".");
 		vv = vv.split(" ");
-		$i("yg").value = vv[0]
-		$i("ym").value = vv[1]
-		$i("ys").value = vv[2]
+		var ygv = vv[0]
+		var ymv = vv[1]
+		var ysv = vv[2]
+		var ysv = ysv.replace(regv,".");
 	}
-	var ygv = $i("yg").value;
-	var ymv = $i("ym").value;
-	var ysv = $i("ys").value;
-	ysv = ysv.replace(",",".");
+	else
+	{
+		var ygv = $i("yg").value;
+		var ymv = $i("ym").value;
+		var ysv = $i("ys").value;
+		var ysv = ysv.replace(regv,".");
+	}
 	var xxx = window.parent.convdmsddf(xgv,xmv,xsv);
 	var yyy = window.parent.convdmsddf(ygv,ymv,ysv);
 	var ins = $i("resultado").innerHTML
@@ -222,8 +236,10 @@ function inserir()
 }
 function colar()
 {
+	var regv = new RegExp(",", "g");
+	$i("colar").value = $i("colar").value.replace(regv,".")
 	var xys = $i("colar").value.split(" ")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+window.parent.objmapa.sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+$i("colar").value;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+$i("colar").value;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

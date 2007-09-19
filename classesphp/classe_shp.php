@@ -140,18 +140,22 @@ $xy - X e y do novo ponto, separados por espaços. Pode ser mais de um ponto.
 		$data = $this->layer->data;
 		$data = explode(".shp",$data);
 		$data = $data[0];
-		if (@$shapefileObj = ms_newShapefileObj($data,-2))
+		$items = pegaItens($this->layer);
+		$dbname = $data.".dbf";
+		$db=xbase_open($dbname,2);
+		for($i=0;$i<(count($xy) / 2);$i++)
 		{
-			$items = pegaItens($this->layer);
-			$dbname = $data.".dbf";
-			$db=xbase_open($dbname,2);
+			$reg = array();
 			foreach ($items as $ni)
 			{$reg[] = "-";}
 			xbase_add_record($db,$reg);
-			xbase_close($db);
-			$poPoint = ms_newpointobj();
-			for($i=0;$i<(count($xy) / 2);$i=$i+2)
+		}
+		xbase_close($db);
+		if (@$shapefileObj = ms_newShapefileObj($data,-2))
+		{
+			for($i=0;$i<(count($xy));$i=$i+2)
 			{
+				$poPoint = ms_newpointobj();
 				$poPoint->setXY($xy[$i],$xy[$i+1]);
 				$shapefileObj->addpoint($poPoint);
 			}
