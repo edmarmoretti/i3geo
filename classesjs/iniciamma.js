@@ -749,7 +749,7 @@ function Mapa(e,m)
 	*/
 	this.montaMapa = function (retorno)
 	{
-		if (retorno.data.search("erro.") > -1)
+		if (retorno.data.search(" erro.") > -1)
 		{
 			alert(retorno.data);
 		}
