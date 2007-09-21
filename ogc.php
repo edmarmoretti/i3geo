@@ -122,6 +122,8 @@ $oMap = ms_newMapobj("aplicmap/ogcws.map");
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
+if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
+{$or = $or."tema=".$tema."&";}
 $oMap->setmetadata("ows_onlineresource",$or);
 if (!isset($intervalo))
 {$intervalo = "0,50";}
