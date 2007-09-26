@@ -11,7 +11,7 @@ echo '
 <script type="text/javascript" src="'.$caminho.'classesjs/ferramentas_compacto.js"></script>
 <script type="text/javascript" src="'.$caminho.'classesjs/ajax_compacto.js"></script>
 <script type="text/javascript" src="'.$caminho.'classesjs/iniciamma_compacto.js"></script>
-<body id=corpo >
+<body id=i3geo >
 <center>
 <table id="mst" width=100% cellspacing="0">
 	<tr>

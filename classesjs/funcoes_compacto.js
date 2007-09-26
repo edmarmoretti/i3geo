@@ -88,7 +88,7 @@ function mostraferramenta(guia){ if($i("ferr"+guia)){ var fs=[1,2,3,4,5,6,7,8,9,
  $i("ferr"+guia).style.backgroundColor="rgb(255,255,255)"; if($i("ferr"+guia+"obj")){$i("ferr"+guia+"obj").style.display="block";}
  else{alert("O objeto ferr"+guia+"obj nao existe.");}}}
 function borra(tipo){ }
-function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
+function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
  this.fecha=function(aguardeId){ if(eval('YAHOO.aguarde.'+aguardeId)){ eval('YAHOO.aguarde.'+aguardeId+'.destroy()');}}
  }
 function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i("imgh").style.display="block";}
@@ -98,7 +98,9 @@ function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i
  this.onmousemove=function(exy){ if($i("tip")){$i("tip").style.display="none";}
  capturaposicao(exy); if(g_destaca !=""){$i("imgh").style.display="none";$i("div_d").style.clip='rect('+(objposicaocursor.imgy-destacaTamanho)+" "+(objposicaocursor.imgx-10)+" "+(objposicaocursor.imgy-10)+" "+(objposicaocursor.imgx-destacaTamanho)+')';}
  if(g_realca=="sim"){ $i("areaRealce").style.left=objposicaocursor.telax-destacaTamanho+10; $i("areaRealce").style.top=objposicaocursor.telay-destacaTamanho+10;}
- if($i("img")&&(g_panM=="sim")){ var nx=objposicaocursor.telax-leftinicial-clicinicialx; var ny=objposicaocursor.telay-topinicial-clicinicialy; if(g_entorno=="nao"){ $i("img").style.left=nx; $i("img").style.top=ny;}
+ if($i("img")&&(g_panM=="sim")){ var nx=objposicaocursor.telax-leftinicial-clicinicialx; var ny=objposicaocursor.telay-topinicial-clicinicialy; if(g_entorno=="nao"){ var l=0; if(parseInt($i("i3geo").style.left)){var l=parseInt($i("i3geo").style.left);}
+ $i("img").style.left=nx-l; var t=0; if(parseInt($i("i3geo").style.top)){var t=parseInt($i("i3geo").style.top);}
+ $i("img").style.top=ny-t;}
  else{ $left("img",objmapa.w*-1+nx); $left("imgS",objmapa.w*-1+nx); $left("imgL",objmapa.w+nx); $left("imgO",objmapa.w*-3+nx); $left("imgN",objmapa.w*-1+nx); $top("img",objmapa.h*-1+ny); $top("imgS",objmapa.h*-1+ny); $top("imgL",objmapa.h*-1+ny); $top("imgN",objmapa.h*-1+ny); $top("imgO",objmapa.h*-1+ny);}}
  movecursor(); if($i("longlat")){$i("longlat").innerHTML=objposicaocursor.dmsx+" "+objposicaocursor.dmsy;}
  if(g_tipoacao=="mede"){ $i("mostradistancia").style.display="block"; var n=pontosdistobj.xpt.length; if(n > 0){ var d=calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy); if(objmapa.scale > 500000){ var d=parseInt(d);}
@@ -157,7 +159,7 @@ function initJanelaRef(){ if(!$i("winRef")){ var novoel=document.createElement("
  var escondeRef=function(){ YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click"); YAHOO.janelaRef.xp.panel.destroy(); iCookie("g_mapaRefDisplay","none");}
  YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef); iCookie("g_mapaRefDisplay","block"); objmapa.atualizaReferencia();}
 function mudaboxnf(tipo){ g_operacao=tipo; clearTimeout(objmapa.tempo); objmapa.tempo=setTimeout('remapaf()',(4000)); autoRedesenho("reinicia"); if($i("aplicari")){ $i("aplicari").style.display="block"; if(navm){ mx=objposicaomouse.x-10; my=objposicaomouse.y-15; with($i("aplicari").style){ pixelLeft=mx+document.body.scrollLeft; pixelTop=my+document.body.scrollTop;}}
- if(navn){ with($i("aplicari").style){ left=objposicaomouse.x; top=objposicaomouse.y+document.body.scrollTop;}}}}
+ if(navn){ var l=objposicaomouse.x; var t=objposicaomouse.y+document.body.scrollTop; with($i("aplicari").style){ left=l; top=t;}}}}
 function movelentef(){ if($i("lente")){ if($i("lente").style.visibility=="visible"){ var esq=(objposicaocursor.telax-imagemxi)*2.25; var topo=(objposicaocursor.telay-imagemyi)*2.25; var clipt="rect("+(topo-40)+" "+(esq+40)+" "+(topo+40)+" "+(esq-40)+")"; with($i("lente").style){ clip=clipt; eval(g_tipotop+"=(imagemyi-(topo-40))+g_postpx"); eval(g_tipoleft+"=(imagemxi-(esq-40))+g_postpx");}}}}
 function zoomiauto(){ objaguarde.abre("ajaxredesenha","Aguarde..."); g_fatordezoom=0; var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); g_operacao="navega"; cp.call(p,"aproxima",ajaxredesenha);}
 function zoomoauto(){ objaguarde.abre("ajaxredesenha","Aguarde..."); g_fatordezoom=0; var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); g_operacao="navega"; cp.call(p,"afasta",ajaxredesenha);}
@@ -294,16 +296,17 @@ function remapaf(){ clearTimeout(objmapa.tempo); objmapa.tempo=""; objmapa.temaA
  if((tsd.length > 0)||(tsl.length > 0)){ objaguarde.abre("remapa","Aguarde...refazendo o mapa"); var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(p,"ligaDesligaTemas",remapaAdicNovos);}
  else{remapaAdicNovos();}}
  else{remapaAdicNovos();}}
-function processevent1(exy1){ navm=false; navn=false; var app=navigator.appName.substring(0,1); if(app=='N')navn=true;else navm=true; if($i("img")){calcposf();}
- if(navn){ objposicaomouse.x=exy1.clientX; objposicaomouse.y=exy1.clientY;}
- if(navm){ objposicaomouse.x=window.event.clientX; objposicaomouse.y=window.event.clientY;}}
-function calcposf(){ imagemxi=0; imagemyi=0; imagemxref=0; imagemyref=0; if(!$i("corpo")){return;}
- var dc=$i("corpo"); if($i("img")){var dc=$i("contemImg");}
+function processevent1(exy1){ }
+function calcposf(){ imagemxi=0; imagemyi=0; imagemxref=0; imagemyref=0; if(!$i("i3geo")){return;}
+ if($i("i3geo").style.left){imagemxi+=parseInt($i("i3geo").style.left);}
+ if($i("i3geo").style.top){imagemyi+=parseInt($i("i3geo").style.top);}
+ var dc=$i("i3geo"); if($i("img")){var dc=$i("contemImg");}
  if($i("openlayers_OpenLayers_Container")){var dc=$i("openlayers_OpenLayers_Container");}
- while(dc.offsetParent){ dc=dc.offsetParent; imagemxi=imagemxi+dc.offsetLeft; imagemyi=imagemyi+dc.offsetTop;}
- if($i("img")){ $left("corpoMapa",imagemxi); $top("corpoMapa",imagemyi);}
+ while((dc.offsetParent)&&(dc.offsetParent.id !="i3geo")){ dc=dc.offsetParent; imagemxi=imagemxi+dc.offsetLeft; imagemyi=imagemyi+dc.offsetTop;}
+ if($i("img")){ $left("corpoMapa",imagemxi); $top("corpoMapa",imagemyi); if($i("i3geo").style.left){$left("corpoMapa",imagemxi-parseInt($i("i3geo").style.left));}
+ if($i("i3geo").style.top){$top("corpoMapa",imagemyi-parseInt($i("i3geo").style.top));}}
  if($i("mostradistancia")){ $left("mostradistancia",imagemxi); $top("mostradistancia",imagemyi);}
- if($i("ref")){ var dc=$i("ref"); while(dc.offsetParent.id !="corpo"){ dc=dc.offsetParent; imagemxref=imagemxref+dc.offsetLeft; imagemyref=imagemyref+dc.offsetTop;}}
+ if($i("ref")){ var dc=$i("ref"); while(dc.offsetParent.id !="i3geo"){ dc=dc.offsetParent; imagemxref=imagemxref+dc.offsetLeft; imagemyref=imagemyref+dc.offsetTop;}}
  if($i("aguarde")){ $top("aguarde",imagemyi); $left("aguarde",imagemxi);}}
 function movecursor(){ var obje=$i("obj").style; if($i("img")){ eval("obje."+g_tipotop+"=objposicaocursor.telay+5+g_postpx"); eval("obje."+g_tipoleft+"=objposicaocursor.telax+5+g_postpx");}
  else{ eval("obje."+g_tipotop+"=objposicaocursor.telay-15+g_postpx"); eval("obje."+g_tipoleft+"=objposicaocursor.telax+15+g_postpx");}

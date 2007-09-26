@@ -79,7 +79,7 @@ Include:
 <pega_variaveis.php>, <carrega_ext.php>, <cpaint2.inc.php>, <classe_vermultilayer.php>, <classe_estatistica.php>, <funcoes_gerais.php>
 
 */
-error_reporting(E_ALL);
+error_reporting(0);
 set_time_limit(240);
 //
 //pega as variaveis passadas com get ou post
@@ -88,17 +88,20 @@ include_once("pega_variaveis.php");
 //
 //inicializa a sessão
 //
-session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
-session_start();
-foreach(array_keys($_SESSION) as $k)
+if ($funcao != "criaMapa")
 {
-	eval("\$".$k."='".$_SESSION[$k]."';");
+	session_name("i3GeoPHP");
+	if (isset($g_sid))
+	{session_id($g_sid);}
+	session_start();
+	foreach(array_keys($_SESSION) as $k)
+	{
+		eval("\$".$k."='".$_SESSION[$k]."';");
+	}
+	//
+	//verifica se deve ativar o debug
+	//
 }
-//
-//verifica se deve ativar o debug
-//
 if (isset($debug) && $debug == "sim")
 {error_reporting(E_ALL);}
 //
@@ -106,14 +109,24 @@ if (isset($debug) && $debug == "sim")
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once ("carrega_ext.php");
-
 require_once("../classesjs/cpaint/cpaint2.inc.php");
 //
 //cria objeto cpaint para uso com ajax
 //
 $cp = new cpaint();
+if ($funcao == "criaMapa")
+{
+	session_destroy();
+	include("../ms_configura.php");
+	chdir($locaplic);
+	$interface = "mashup";
+	include("ms_criamapa.php");
+	$cp->set_data(session_id());
+	$cp->return_data();
+}	
 if (!isset($map_file))
 {
+	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
 	$cp->set_data("linkquebrado");
 	$cp->return_data();
 	exit;

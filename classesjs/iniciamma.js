@@ -52,7 +52,24 @@ Variable: g_sid
 Id da seção atual no servidor.
 
 */
-g_sid = window.location.href.split("?")[1];
+if (window.location.href.split("?")[1])
+{g_sid = window.location.href.split("?")[1];}
+else 
+{g_sid = "";}
+/*
+Variable: imagemxi
+
+Inicialização da variável de cálculo de posicionamento.
+
+*/
+imagemxi = 0;
+/*
+Variable: imagemyi
+
+Inicialização da variável de cálculo de posicionamento.
+
+*/
+imagemyi = 0;
 /*
 Variable: atuaLeg
 
@@ -60,6 +77,16 @@ Variável interna que define se a legenda docável deve ser atualizada.
 
 */
 atuaLeg="nao";
+/*
+Variable: g_mashuppar
+
+Parâmetros de inicialização que podem ser utilizados na interface mashup.
+
+Os parâmetros são os mesmos que podem ser utilizados quando o i3geo é inicializado pelo ms_criamapa.php.
+
+Exemplo: g_mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+*/
+g_mashuppar = "";
 /*
 Variable: g_operacao
 
@@ -471,6 +498,21 @@ else
 }
 //inclui uma mensagem no rodapé da janela quando a tela do navegador tem seu tamanho modificado pelo usuário
 window.onresize = function(){window.status = "Após alterar o tamanho da janela, clique no botão de refresh do navegador";}
+
+function cria()
+{
+var mashup = function (retorno)
+{
+	g_sid = retorno.data;
+	objmapa.inicializa();
+}
+	var cp = new cpaint();
+	cp.set_async(true);
+	cp.set_response_type("JSON");
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa";
+	cp.call(p,"",mashup);		
+}
+
 /*
 Class: Mapa
 
@@ -562,8 +604,10 @@ function Mapa(e,m)
 			if (document.getElementById("corpoMapa").style.width)
 			{
 				this.w = parseInt(document.getElementById("corpoMapa").style.width);
-				this.h = parseInt(document.getElementById("corpoMapa").style.height);
+				this.h = parseInt(document.getElementById("corpoMapa").style.width);
 			}
+			if (document.getElementById("corpoMapa").style.height)
+			{this.h = parseInt(document.getElementById("corpoMapa").style.height);}
 		}
 	}
 	else
@@ -722,6 +766,43 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
+		if (!$i("i3geo"))
+		{document.body.id = "i3geo";}
+		$i("i3geo").onmouseover = function()
+		{
+			this.onmousemove=function(exy1)
+			{
+				//if ($i("img")){calcposf();}
+				if (navn)
+				{
+					objposicaomouse.x = exy1.clientX;
+					objposicaomouse.y = exy1.clientY;
+				}
+				if (navm)
+				{
+					objposicaomouse.x = window.event.clientX;
+					objposicaomouse.y = window.event.clientY;
+				}
+			}
+		}
+		//
+		//se g_sid="", o html foi aberto diretamente
+		//então, é necessário criar o mapa
+		//
+		if (g_sid=="")
+		{
+			var mashup = function (retorno)
+			{
+				g_sid = retorno.data;
+				objmapa.inicializa();
+			}
+			var cp = new cpaint();
+			cp.set_async("true");
+			cp.set_response_type("JSON");
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
+			cp.call(p,"",mashup);
+			return;
+		}	
 		//testa se os javascripts foram carregados
 		if (!window.testafuncoes)
 		{alert("funcoes.js com problemas");}
@@ -731,6 +812,7 @@ function Mapa(e,m)
 		{alert("ferramentas.js com problemas");}
 		if (!window.testaajax)
 		{alert("redesenho.js com problemas");}
+		//
 		//objeto que guarda os parametros de posicionamento do cursor
 		objaguarde.abre("montaMapa","Aguarde...iniciando o mapa");
 		var cp = new cpaint();

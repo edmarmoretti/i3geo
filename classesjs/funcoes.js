@@ -917,7 +917,7 @@ function aguarde()
 		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span><span style=font-size:10px >"+texto+"&nbsp;</span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
-		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)');
+		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')');
 		eval('YAHOO.aguarde.'+aguardeId+'.show()');
 	}
 	this.fecha = function(aguardeId)
@@ -970,8 +970,14 @@ function ativaClicks(docMapa)
 						var ny = objposicaocursor.telay - topinicial - clicinicialy;
 						if (g_entorno == "nao")
 						{
-							$i("img").style.left = nx;
-							$i("img").style.top = ny;
+							var l = 0;
+							if (parseInt($i("i3geo").style.left))
+							{var l = parseInt($i("i3geo").style.left);}
+							$i("img").style.left = nx - l;
+							var t = 0;
+							if (parseInt($i("i3geo").style.top))
+							{var t = parseInt($i("i3geo").style.top);}
+							$i("img").style.top = ny - t;
 						}
 						else
 						{
@@ -1429,10 +1435,12 @@ function mudaboxnf(tipo)
 		}
 		if (navn)
 		{
+			var l = objposicaomouse.x;
+			var t = objposicaomouse.y+document.body.scrollTop;
 			with ($i("aplicari").style)
 			{
-				left = objposicaomouse.x;
-				top = objposicaomouse.y+document.body.scrollTop;
+				left = l;
+				top = t;
 			}
 		}
 	}
@@ -2731,7 +2739,7 @@ function remapaf()
 Section: eventos
 */
 /*
-Function: processevent1
+Function: processevent1 (depreciado)
 
 Captura a posição do mouse tendo como referência o navegador.
 
@@ -2746,6 +2754,7 @@ exy1 - objeto evento.
 function processevent1(exy1)
 {
 	//detecï¿½o do navegador
+	/*
 	navm = false; // IE
 	navn = false; // netscape
 	var app = navigator.appName.substring(0,1);
@@ -2761,6 +2770,7 @@ function processevent1(exy1)
 		objposicaomouse.x = window.event.clientX;
 		objposicaomouse.y = window.event.clientY;
 	}
+	*/
 }
 /*
 Function: calcposf
@@ -2775,32 +2785,38 @@ function calcposf()
 	imagemyi = 0;
 	imagemxref = 0;  //posicao da tag ref
 	imagemyref = 0;
-	if(!$i("corpo")){return;}
-	var dc = $i("corpo");
+	if(!$i("i3geo")){return;}
+	if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
+	if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
+	var dc = $i("i3geo");
 	if ($i("img"))
 	{var dc = $i("contemImg");}
 	if ($i("openlayers_OpenLayers_Container"))
 	{var dc = $i("openlayers_OpenLayers_Container");}
-	while (dc.offsetParent)
+	while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
 	{
 		dc = dc.offsetParent;
 		imagemxi = imagemxi + dc.offsetLeft;
 		imagemyi = imagemyi + dc.offsetTop;
 	}
+
 	if ($i("img"))
 	{
 		$left("corpoMapa",imagemxi);
 		$top("corpoMapa",imagemyi);
+		if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
+		if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
 	}
 	if ($i("mostradistancia"))
 	{
 		$left("mostradistancia",imagemxi);
 		$top("mostradistancia",imagemyi);
 	}
+	
 	if ($i("ref"))
 	{
 		var dc = $i("ref");
-		while (dc.offsetParent.id != "corpo")
+		while (dc.offsetParent.id != "i3geo")
 		{
 			dc = dc.offsetParent;
 			imagemxref = imagemxref + dc.offsetLeft;
@@ -2880,7 +2896,7 @@ function capturaposicao(exy)
 		var xreffig = e.clientX - imagemxref + document.body.scrollLeft;
 		var yreffig = e.clientY - imagemyref + document.body.scrollTop;
 	}
-	var teladd = calcddf (xfig,yfig,g_celula,objmapa.extent);
+	var teladd = calcddf(xfig,yfig,g_celula,objmapa.extent);
 	var teladms = convdmsf(teladd[0],teladd[1]);
 	with(objposicaocursor)
 	{

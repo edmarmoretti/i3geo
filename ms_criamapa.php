@@ -471,21 +471,24 @@ $mapa->save($tmpfname);
 // gera a url para abrir o mapa
 // interface = arquivo html que será aberto
 //
-if (count(explode(".php",$interface)) > 1)
+if ($interface != "mashup")
 {
-	if (file_exists($caminho."aplicmap/".$interface))
-	{include_once($caminho."aplicmap/".$interface);}
-	else 
-	{include_once($interface);}
-	exit;
-}
-else
-{
-	if (file_exists($caminho."aplicmap/".$interface))
-	{$urln = $caminho."aplicmap/".$interface."?".session_id();}
-	else 
-	{$urln = $interface."?".session_id();}
-	//header("Location:".$urln);
-	echo "<meta http-equiv='refresh' content='0;url=$urln'>";
+	if (count(explode(".php",$interface)) > 1)
+	{
+		if (file_exists($caminho."aplicmap/".$interface))
+		{include_once($caminho."aplicmap/".$interface);}
+		else 
+		{include_once($interface);}
+		exit;
+	}
+	else
+	{
+		if (file_exists($caminho."aplicmap/".$interface))
+		{$urln = $caminho."aplicmap/".$interface."?".session_id();}
+		else 
+		{$urln = $interface."?".session_id();}
+		//header("Location:".$urln);
+		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
+	}
 }
 ?>

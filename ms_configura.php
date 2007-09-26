@@ -76,7 +76,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	//caminho completo do diretório temporário utilizado pelo mapserver
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
 	//caminho completo onde fica o I3Geo
-	$locaplic = getcwd(); //"c:/ms4w/apache/htdocs/i3geo";
+	$locaplic = "c:/ms4w/apache/htdocs/i3geo";
 	//caminho completo do diretório onde ficam os arquivos .map correspondentes aos temas disponíveis
 	$temasdir = $locaplic."/temas"; //"c:/ms4w/apache/htdocs/i3geo/temas";
 	//caminho completo onde ficam os arquivos .map específicos do I3Geo

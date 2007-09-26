@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="../css/panel-aqua.css" />
 -->
 </head>
-<body id=corpo onmouseover="javascript:this.onmousemove=processevent1" >
+<body id=i3geo onmouseover="javascript:this.onmousemove=processevent1" >
 <center>
 <table id='mst' width=100% cellspacing='0'>
 <!-- Inclui o menu suspenso. Se vc não quiser o menu, é só comentar -->
@@ -166,7 +166,7 @@ function criaOL(posfixo)
 		objposicaocursor.ddy = lonlat.lat;
 		objposicaocursor.telax = p.x;
 		objposicaocursor.telay = p.y;
-		var dc = $i("corpo");
+		var dc = $i("i3geo");
 		if ($i("openlayers_OpenLayers_Container")){var dc = $i("openlayers_OpenLayers_Container");}
 		while (dc.offsetParent)
 		{

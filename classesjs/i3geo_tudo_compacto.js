@@ -848,7 +848,7 @@ function mostraferramenta(guia){ if($i("ferr"+guia)){ var fs=[1,2,3,4,5,6,7,8,9,
  $i("ferr"+guia).style.backgroundColor="rgb(255,255,255)"; if($i("ferr"+guia+"obj")){$i("ferr"+guia+"obj").style.display="block";}
  else{alert("O objeto ferr"+guia+"obj nao existe.");}}}
 function borra(tipo){ }
-function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
+function aguarde(){ this.abre=function(aguardeId,texto){ YAHOO.namespace("aguarde"); eval('YAHOO.aguarde.'+aguardeId+'=new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"matte",close:false,draggable:false,modal:false})'); eval('YAHOO.aguarde.'+aguardeId+'.setBody("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\'/></span><span style=font-size:10px >"+texto+"&nbsp;</span>")'); eval('YAHOO.aguarde.'+aguardeId+'.render(document.body)'); eval('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')'); eval('YAHOO.aguarde.'+aguardeId+'.show()');}
  this.fecha=function(aguardeId){ if(eval('YAHOO.aguarde.'+aguardeId)){ eval('YAHOO.aguarde.'+aguardeId+'.destroy()');}}
  }
 function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i("imgh").style.display="block";}
@@ -858,7 +858,9 @@ function ativaClicks(docMapa){ docMapa.onmouseover=function(){ if($i("imgh")){$i
  this.onmousemove=function(exy){ if($i("tip")){$i("tip").style.display="none";}
  capturaposicao(exy); if(g_destaca !=""){$i("imgh").style.display="none";$i("div_d").style.clip='rect('+(objposicaocursor.imgy-destacaTamanho)+" "+(objposicaocursor.imgx-10)+" "+(objposicaocursor.imgy-10)+" "+(objposicaocursor.imgx-destacaTamanho)+')';}
  if(g_realca=="sim"){ $i("areaRealce").style.left=objposicaocursor.telax-destacaTamanho+10; $i("areaRealce").style.top=objposicaocursor.telay-destacaTamanho+10;}
- if($i("img")&&(g_panM=="sim")){ var nx=objposicaocursor.telax-leftinicial-clicinicialx; var ny=objposicaocursor.telay-topinicial-clicinicialy; if(g_entorno=="nao"){ $i("img").style.left=nx; $i("img").style.top=ny;}
+ if($i("img")&&(g_panM=="sim")){ var nx=objposicaocursor.telax-leftinicial-clicinicialx; var ny=objposicaocursor.telay-topinicial-clicinicialy; if(g_entorno=="nao"){ var l=0; if(parseInt($i("i3geo").style.left)){var l=parseInt($i("i3geo").style.left);}
+ $i("img").style.left=nx-l; var t=0; if(parseInt($i("i3geo").style.top)){var t=parseInt($i("i3geo").style.top);}
+ $i("img").style.top=ny-t;}
  else{ $left("img",objmapa.w*-1+nx); $left("imgS",objmapa.w*-1+nx); $left("imgL",objmapa.w+nx); $left("imgO",objmapa.w*-3+nx); $left("imgN",objmapa.w*-1+nx); $top("img",objmapa.h*-1+ny); $top("imgS",objmapa.h*-1+ny); $top("imgL",objmapa.h*-1+ny); $top("imgN",objmapa.h*-1+ny); $top("imgO",objmapa.h*-1+ny);}}
  movecursor(); if($i("longlat")){$i("longlat").innerHTML=objposicaocursor.dmsx+" "+objposicaocursor.dmsy;}
  if(g_tipoacao=="mede"){ $i("mostradistancia").style.display="block"; var n=pontosdistobj.xpt.length; if(n > 0){ var d=calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy); if(objmapa.scale > 500000){ var d=parseInt(d);}
@@ -917,7 +919,7 @@ function initJanelaRef(){ if(!$i("winRef")){ var novoel=document.createElement("
  var escondeRef=function(){ YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click"); YAHOO.janelaRef.xp.panel.destroy(); iCookie("g_mapaRefDisplay","none");}
  YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef); iCookie("g_mapaRefDisplay","block"); objmapa.atualizaReferencia();}
 function mudaboxnf(tipo){ g_operacao=tipo; clearTimeout(objmapa.tempo); objmapa.tempo=setTimeout('remapaf()',(4000)); autoRedesenho("reinicia"); if($i("aplicari")){ $i("aplicari").style.display="block"; if(navm){ mx=objposicaomouse.x-10; my=objposicaomouse.y-15; with($i("aplicari").style){ pixelLeft=mx+document.body.scrollLeft; pixelTop=my+document.body.scrollTop;}}
- if(navn){ with($i("aplicari").style){ left=objposicaomouse.x; top=objposicaomouse.y+document.body.scrollTop;}}}}
+ if(navn){ var l=objposicaomouse.x; var t=objposicaomouse.y+document.body.scrollTop; with($i("aplicari").style){ left=l; top=t;}}}}
 function movelentef(){ if($i("lente")){ if($i("lente").style.visibility=="visible"){ var esq=(objposicaocursor.telax-imagemxi)*2.25; var topo=(objposicaocursor.telay-imagemyi)*2.25; var clipt="rect("+(topo-40)+" "+(esq+40)+" "+(topo+40)+" "+(esq-40)+")"; with($i("lente").style){ clip=clipt; eval(g_tipotop+"=(imagemyi-(topo-40))+g_postpx"); eval(g_tipoleft+"=(imagemxi-(esq-40))+g_postpx");}}}}
 function zoomiauto(){ objaguarde.abre("ajaxredesenha","Aguarde..."); g_fatordezoom=0; var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); g_operacao="navega"; cp.call(p,"aproxima",ajaxredesenha);}
 function zoomoauto(){ objaguarde.abre("ajaxredesenha","Aguarde..."); g_fatordezoom=0; var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); g_operacao="navega"; cp.call(p,"afasta",ajaxredesenha);}
@@ -1054,16 +1056,17 @@ function remapaf(){ clearTimeout(objmapa.tempo); objmapa.tempo=""; objmapa.temaA
  if((tsd.length > 0)||(tsl.length > 0)){ objaguarde.abre("remapa","Aguarde...refazendo o mapa"); var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid; var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(p,"ligaDesligaTemas",remapaAdicNovos);}
  else{remapaAdicNovos();}}
  else{remapaAdicNovos();}}
-function processevent1(exy1){ navm=false; navn=false; var app=navigator.appName.substring(0,1); if(app=='N')navn=true;else navm=true; if($i("img")){calcposf();}
- if(navn){ objposicaomouse.x=exy1.clientX; objposicaomouse.y=exy1.clientY;}
- if(navm){ objposicaomouse.x=window.event.clientX; objposicaomouse.y=window.event.clientY;}}
-function calcposf(){ imagemxi=0; imagemyi=0; imagemxref=0; imagemyref=0; if(!$i("corpo")){return;}
- var dc=$i("corpo"); if($i("img")){var dc=$i("contemImg");}
+function processevent1(exy1){ }
+function calcposf(){ imagemxi=0; imagemyi=0; imagemxref=0; imagemyref=0; if(!$i("i3geo")){return;}
+ if($i("i3geo").style.left){imagemxi+=parseInt($i("i3geo").style.left);}
+ if($i("i3geo").style.top){imagemyi+=parseInt($i("i3geo").style.top);}
+ var dc=$i("i3geo"); if($i("img")){var dc=$i("contemImg");}
  if($i("openlayers_OpenLayers_Container")){var dc=$i("openlayers_OpenLayers_Container");}
- while(dc.offsetParent){ dc=dc.offsetParent; imagemxi=imagemxi+dc.offsetLeft; imagemyi=imagemyi+dc.offsetTop;}
- if($i("img")){ $left("corpoMapa",imagemxi); $top("corpoMapa",imagemyi);}
+ while((dc.offsetParent)&&(dc.offsetParent.id !="i3geo")){ dc=dc.offsetParent; imagemxi=imagemxi+dc.offsetLeft; imagemyi=imagemyi+dc.offsetTop;}
+ if($i("img")){ $left("corpoMapa",imagemxi); $top("corpoMapa",imagemyi); if($i("i3geo").style.left){$left("corpoMapa",imagemxi-parseInt($i("i3geo").style.left));}
+ if($i("i3geo").style.top){$top("corpoMapa",imagemyi-parseInt($i("i3geo").style.top));}}
  if($i("mostradistancia")){ $left("mostradistancia",imagemxi); $top("mostradistancia",imagemyi);}
- if($i("ref")){ var dc=$i("ref"); while(dc.offsetParent.id !="corpo"){ dc=dc.offsetParent; imagemxref=imagemxref+dc.offsetLeft; imagemyref=imagemyref+dc.offsetTop;}}
+ if($i("ref")){ var dc=$i("ref"); while(dc.offsetParent.id !="i3geo"){ dc=dc.offsetParent; imagemxref=imagemxref+dc.offsetLeft; imagemyref=imagemyref+dc.offsetTop;}}
  if($i("aguarde")){ $top("aguarde",imagemyi); $left("aguarde",imagemxi);}}
 function movecursor(){ var obje=$i("obj").style; if($i("img")){ eval("obje."+g_tipotop+"=objposicaocursor.telay+5+g_postpx"); eval("obje."+g_tipoleft+"=objposicaocursor.telax+5+g_postpx");}
  else{ eval("obje."+g_tipotop+"=objposicaocursor.telay-15+g_postpx"); eval("obje."+g_tipoleft+"=objposicaocursor.telax+15+g_postpx");}
@@ -1255,8 +1258,12 @@ function ajaxabrelente(retorno){ try{ var retorno=retorno.data; if(retorno=="err
 function ajaxdestaca(retorno){ var retorno=retorno.data; var m=new Image(); m.src=retorno; if(!$i("img_d")){ var novoel=document.createElement("div"); novoel.id="div_d"; document.body.appendChild(novoel); $i("div_d").innerHTML="<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d'/>"; $i("div_d").style.left=parseInt($i("corpoMapa").style.left); $i("div_d").style.top=parseInt($i("corpoMapa").style.top); $i("img_d").style.left=0; $i("img_d").style.top=0; $i("img_d").style.width=objmapa.w; $i("img_d").style.height=objmapa.h; $i("div_d").style.clip='rect(0 75 75 0)'; $i("img_d").src=retorno; var novoeli=document.createElement("div"); novoeli.id="div_di"; novoel.appendChild(novoeli); $i("div_di").innerHTML="<p style='position:absolute;top:0px;left:0px'>+-</p>";}
  $i("div_d").innerHTML=""; var novoel=document.createElement("input"); novoel.id="img_d"; novoel.style.position="relative"; novoel.style.top="0px"; novoel.style.left="0px"; novoel.type="image"; novoel.src=m.src; novoel.style.display="block"; $i("div_d").appendChild(novoel); objaguarde.fecha("ajaxdestaca");}function testaajax(){}
 
-g_autoRedesenha=0;g_sid=window.location.href.split("?")[1];atuaLeg="nao";g_operacao="";g_nomepin="";g_arvoreClick="";g_arvoreClicks="";g_movedoca=0;g_movedocac=0;g_movedocar=0;g_tipoacao="zoomli";g_realca="nao";g_destaca="";g_lenteaberta="nao";g_hlpt="";g_panM="nao";quadrosfilme=new Array();g_quadrooriginal="";wd=0;navm=false;navn=false;g_r="nao";g_embedLegenda="nao";oMenuData="";g_3dmap="";g_opcoesTemas="sim";g_mostraRosa="sim";g_visual="default";g_janelaMen="sim";g_downloadbase="sim";g_conectargeorss="sim";g_uploadlocal="sim";g_conectarwms="sim";g_docaguias="nao";g_barraFerramentas1="sim";g_barraFerramentas2="sim";g_fatordezoom=0;g_diminuixM=20;g_diminuixN=25;g_diminuiyM=106;g_diminuiyN=103;g_mapaRefDisplay="block";g_funcaoTip="verificaTipDefault()";g_tempotip=4500;g_tipotip="completo";g_tipoimagem="nenhum";g_sistemas="";destacaTamanho=75;g_mensagempadrao="O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";g_entorno="nao";g_guiaativa="guia1";var app=navigator.appName.substring(0,1);if(app=='N')navn=true;else navm=true;if(navm){ g_postpx=""; g_tipotop="pixelTop"; g_tipoleft="pixelLeft";}
+g_autoRedesenha=0;if(window.location.href.split("?")[1]){g_sid=window.location.href.split("?")[1];}
+else{g_sid="";}
+imagemxi=0;imagemyi=0;atuaLeg="nao";g_mashuppar="";g_operacao="";g_nomepin="";g_arvoreClick="";g_arvoreClicks="";g_movedoca=0;g_movedocac=0;g_movedocar=0;g_tipoacao="zoomli";g_realca="nao";g_destaca="";g_lenteaberta="nao";g_hlpt="";g_panM="nao";quadrosfilme=new Array();g_quadrooriginal="";wd=0;navm=false;navn=false;g_r="nao";g_embedLegenda="nao";oMenuData="";g_3dmap="";g_opcoesTemas="sim";g_mostraRosa="sim";g_visual="default";g_janelaMen="sim";g_downloadbase="sim";g_conectargeorss="sim";g_uploadlocal="sim";g_conectarwms="sim";g_docaguias="nao";g_barraFerramentas1="sim";g_barraFerramentas2="sim";g_fatordezoom=0;g_diminuixM=20;g_diminuixN=25;g_diminuiyM=106;g_diminuiyN=103;g_mapaRefDisplay="block";g_funcaoTip="verificaTipDefault()";g_tempotip=4500;g_tipotip="completo";g_tipoimagem="nenhum";g_sistemas="";destacaTamanho=75;g_mensagempadrao="O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";g_entorno="nao";g_guiaativa="guia1";var app=navigator.appName.substring(0,1);if(app=='N')navn=true;else navm=true;if(navm){ g_postpx=""; g_tipotop="pixelTop"; g_tipoleft="pixelLeft";}
 else{ g_postpx="px"; g_tipotop="top"; g_tipoleft="left";}window.onresize=function(){window.status="Após alterar o tamanho da janela, clique no botão de refresh do navegador";}
+function cria(){var mashup=function(retorno){ g_sid=retorno.data; objmapa.inicializa();}
+ var cp=new cpaint(); cp.set_async(true); cp.set_response_type("JSON"); var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"; cp.call(p,"",mashup);}
 function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor(); objposicaomouse=new posicaomouse(); imgBranco=new Image(); imgBranco.src=g_locaplic+"/imagens/branco.gif"; var icache=new Array("foldermapa.gif","extent.gif","tic.png","maisvermelho.png","maisverde.png","maisamarelo.png","temas.png","x.gif","sobe.gif","desce.gif","quadro.png","quadro1.png","excluir.png"); for(i=0;icache.lenght;i++){ var temp=new Image(); temp.src=g_locaplic+"/imagens/"+icache[i];}
  var temp=new Image(); temp.src=g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/plus.gif"; temp.src=g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/minus.gif"; var diminuix=(navm)? g_diminuixM : g_diminuixN; var diminuiy=(navm)? g_diminuiyM : g_diminuiyN; if(e==undefined){ var menos=0; if($i("contemFerramentas")){menos=menos+parseInt($i("contemFerramentas").style.width);}
  if($i("encolheFerramentas")){menos=menos+parseInt($i("encolheFerramentas").style.width);}
@@ -1264,10 +1271,16 @@ function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor
  var novow=screen.availWidth-diminuix; var novoh=screen.availHeight-diminuiy; if(novow >=1024){ novow=1000;}
  if(novoh >=700){ novoh=700;}
  if(document.body.style.width < 400){ var novow=screen.availWidth-diminuix; var novoh=screen.availHeight-diminuiy; window.resizeTo(screen.availWidth,screen.availHeight); window.moveTo(0,0);}
- document.body.style.width=novow; document.body.style.height=novoh; this.w=parseInt(document.body.style.width)-menos-diminuix; this.h=parseInt(document.body.style.height)-diminuiy; if(document.getElementById("corpoMapa")){ if(document.getElementById("corpoMapa").style.width){ this.w=parseInt(document.getElementById("corpoMapa").style.width); this.h=parseInt(document.getElementById("corpoMapa").style.height);}}}
+ document.body.style.width=novow; document.body.style.height=novoh; this.w=parseInt(document.body.style.width)-menos-diminuix; this.h=parseInt(document.body.style.height)-diminuiy; if(document.getElementById("corpoMapa")){ if(document.getElementById("corpoMapa").style.width){ this.w=parseInt(document.getElementById("corpoMapa").style.width); this.h=parseInt(document.getElementById("corpoMapa").style.width);}
+ if(document.getElementById("corpoMapa").style.height){this.h=parseInt(document.getElementById("corpoMapa").style.height);}}}
  else{ this.w=document.body.offsetWidth-parseInt($i("contemFerramentas").style.width)-diminuix; this.h=document.body.offsetHeight-diminuiy;}
  if($i("openlayers")){ $i("openlayers").style.width=this.w; $i("openlayers").style.height=this.h;}
- this.navegacaoDir="nao"; this.listavisual=""; this.visualatual="default"; this.funcoesClickMapa=new Array(); this.objtips=new Array(); this.tempo=""; this.tempoRedesenho=""; this.contaTempoRedesenho=""; this.temaAtivo=""; this.pinmarca="marca"; this.pintamanho="5"; this.scale=50000; this.temas=""; this.legenda=""; this.finaliza=""; this.guiaTemas="guia1"; this.guiaMenu="guia2"; this.guiaLegenda="guia4"; this.guiaListaMapas="guia5"; this.inicializa=function(){ if(!window.testafuncoes){alert("funcoes.js com problemas");}
+ this.navegacaoDir="nao"; this.listavisual=""; this.visualatual="default"; this.funcoesClickMapa=new Array(); this.objtips=new Array(); this.tempo=""; this.tempoRedesenho=""; this.contaTempoRedesenho=""; this.temaAtivo=""; this.pinmarca="marca"; this.pintamanho="5"; this.scale=50000; this.temas=""; this.legenda=""; this.finaliza=""; this.guiaTemas="guia1"; this.guiaMenu="guia2"; this.guiaLegenda="guia4"; this.guiaListaMapas="guia5"; this.inicializa=function(){ if(!$i("i3geo")){document.body.id="i3geo";}
+ $i("i3geo").onmouseover=function(){ this.onmousemove=function(exy1){ if(navn){ objposicaomouse.x=exy1.clientX; objposicaomouse.y=exy1.clientY;}
+ if(navm){ objposicaomouse.x=window.event.clientX; objposicaomouse.y=window.event.clientY;}}}
+ if(g_sid==""){ var mashup=function(retorno){ g_sid=retorno.data; objmapa.inicializa();}
+ var cp=new cpaint(); cp.set_async("true"); cp.set_response_type("JSON"); var p=g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar; cp.call(p,"",mashup); return;}
+ if(!window.testafuncoes){alert("funcoes.js com problemas");}
  if(!window.testamenususpenso){alert("menususpenso.js com problemas");}
  if(!window.testaferramentas){alert("ferramentas.js com problemas");}
  if(!window.testaajax){alert("redesenho.js com problemas");}
@@ -1430,7 +1443,6 @@ function Mapa(e,m){ objaguarde=new aguarde(); objposicaocursor=new posicaocursor
  if($i(objmapa.guiaMenu+"obj")){ $i(objmapa.guiaMenu+"obj").style.overflow="auto"; $i(objmapa.guiaMenu+"obj").style.height=objmapa.h-13; $i(objmapa.guiaMenu+"obj").style.width="100%";}
  if($i(objmapa.guiaLegenda+"obj")){ $i(objmapa.guiaLegenda+"obj").style.overflow="auto"; $i(objmapa.guiaLegenda+"obj").style.height=objmapa.h-13; $i(objmapa.guiaLegenda+"obj").style.width="100%";}}
  this.verificaClickMapa=function(){ if(this.funcoesClickMapa.length > 0){ for(f=0;f<this.funcoesClickMapa.length;f++){ eval(this.funcoesClickMapa[f]);}}}}
-
 
  YAHOO.example.onWindowLoadMenu=function(p_oEvent){ if($i("menus")){ if(oMenuData.ajudas){ var ins='<div class="bd" style=z-index:2000 >'; ins+='<ul class="first-of-type" style="text-align:center;">'; ins+='<li class="yuimenubaritem">Ajuda?</li>'; ins+='<li class="yuimenubaritem">An&aacute;lise</li>'; if(!$i("listaPropriedades")){ins+='<li class="yuimenubaritem">Propriedades</li>';}
  ins+='<li class="yuimenubaritem">Janelas</li>'; ins+='<li class="yuimenubaritem">Arquivo</li>'; ins+='</ul>'; ins+='<a href=http://mapas.mma.gov.br target=blank ><p style=text-align:left;><img id=banneri3geo src=\''+g_locaplic+'/imagens/banneri3geo.png\'/></a>'; ins+='</div>'; $i("menus").innerHTML=ins;}}
