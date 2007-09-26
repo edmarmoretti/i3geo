@@ -45,6 +45,19 @@ File: Inicializa o I3Geo via URL  (ms_criamapa.php)
 Group: Programas especiais  {
 
    File: Gerador automático de web services OGC  (ogc.php)
+   File: Mashup  (exemplos\mashup.htm)
+
+   Group: Menutemas  {
+
+      File: Lista de aplicações de identificação  (menutemas\identifica.xml)
+      File: Lista de links para sites de download  (menutemas\linksdownload.xml)
+      File: Lista de mapas  (menutemas\mapas.xml)
+      File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
+      File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
+      File: Lista de sistemas.  (menutemas\sistemas.xml)
+      File: Menu de temas  (menutemas\menutemas.xml)
+      }  # Group: Menutemas
+
    File: Testa a instalação do I3Geo.  (testainstal.php)
    File: Testa um mapfile.  (testamapfile.php)
    }  # Group: Programas especiais
@@ -53,7 +66,6 @@ Group: Interfaces - diretório aplicmap  {
 
    File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
    File: Interface normal  (aplicmap\geral.htm)
-   File: Interface normal  (aplicmap\geral3.htm)
    File: Mínima  (aplicmap\minima.htm)
    File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
    File: Simples 1  (aplicmap\simples1.htm)
