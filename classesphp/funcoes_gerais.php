@@ -598,7 +598,7 @@ function substituiCon($map_file,$postgis_mapa)
 {
 	if (isset($postgis_mapa))
 	{
-		if ($postgis_mapa != "")
+		if (($postgis_mapa != "") && ($postgis_mapa != " "))
 		{
 			$objMap = ms_newMapObj($map_file);
 			$numlayers = $objMap->numlayers;

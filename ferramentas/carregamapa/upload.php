@@ -29,6 +29,7 @@ Free Software Foundation, Inc., no endereço
 */
 
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -67,6 +68,8 @@ if (isset($_FILES['filemap']['name']))
 	if($status == 1)
 	{
 		echo "<p>Arquivo enviado. Verificando o mapa...</p>";
+		substituiCon($map_file,$postgis_mapa);
+		substituiCon($dirmap."/".$Arquivo,$postgis_mapa);
 		$mapt = ms_newMapObj($dirmap."/".$Arquivo);
 		$map = ms_newMapObj($map_file);
 		//apaga os layers do mapa atual

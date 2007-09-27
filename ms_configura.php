@@ -118,6 +118,6 @@ else //se for linux
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_con = "user=geodados password=geodados dbname=geodados host=mapas.mma.gov.br port=5432";
 	$srid_area = 1;
-	$postgis_mapa = "user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
+	$postgis_mapa = "";
 }
 ?>
