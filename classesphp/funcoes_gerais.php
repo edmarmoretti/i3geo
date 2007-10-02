@@ -1013,6 +1013,40 @@ function buscaRapida($servico,$palavra)
 Section: coordenadas
 */
 /*
+function: ip2geo
+
+Localiza a coordenada geográfica de um endereço IP.
+
+Essa função baseia-se no pacote geoIP, que deve estar instalado em pacotes/geoip.
+
+parameters:
+
+$ip - Número do IP.
+*/
+function ip2geo($ip)
+{
+	//$ip="200.252.111.1";
+	$resultado = array();
+	if (file_exists("../pacotes/geoip/geoipcity.inc"))
+	{
+		require_once("../pacotes/geoip/geoipcity.inc");
+		require_once("../pacotes/geoip/geoipregionvars.php");
+		$gi = geoip_open("../pacotes/geoip/GeoLiteCity.dat",GEOIP_STANDARD);
+		$record = geoip_record_by_addr($gi,$ip);
+		$resultado["country_code"] = $record->country_code . " " . $record->country_code3 . " " . $record->country_name;
+		$resultado["region"] = $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region];
+		$resultado["city"] = $record->city;
+		$resultado["postal_code"] =  $record->postal_code;
+		$resultado["latitude"] =  $record->latitude;
+		$resultado["longitude"] =  $record->longitude;
+		$resultado["dma_code"] =  $record->dma_code;
+		$resultado["area_code"] =  $record->area_code;
+		$resultado["ip"] =  $ip;
+		geoip_close($gi);
+	}
+	return($resultado);
+}
+/*
 function: xy2imagem
 
 Converte coordenadas geograficas em coordenadas de imagem e retorna um ponto.
@@ -1421,6 +1455,19 @@ function pegaIPcliente()
 	$ip = "UNKNOWN";
 	if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 	else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+	else $ip = "UNKNOWN";
+	return $ip;
+}
+/*
+function: pegaIPcliente2
+
+Pega o IP do cliente sem REMOTE_ADDR
+*/
+function pegaIPcliente2()
+{
+	$ip = "UNKNOWN";
+	if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 	else $ip = "UNKNOWN";
 	return $ip;

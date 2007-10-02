@@ -178,7 +178,15 @@ function iniciaMapa()
 	{$visual = implode(",",listaDiretorios($locaplic."/imagens/visual"));}
 	$res .= ";objmapa.listavisual='".$visual."'";
 	//pega os usuários navegadores
-	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."';";
+	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."'";
+	//
+	//verifica se o pacote geoip está instalado ou não
+	//
+	$geoip = "nao";
+	if (file_exists($locaplic."/pacotes/geoip"))
+	{$geoip = "sim";}
+	$res .= ";objmapa.geoip='".$geoip."';";
+	
 	if (function_exists("mb_convert_encoding"))
 	{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
 	//

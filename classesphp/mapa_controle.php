@@ -1642,6 +1642,27 @@ Include:
 		$cp->set_data(($m->mapa->width).",".($m->mapa->height).",".$m->gravaImagemCorpo());
 	break;
 /*
+Property: localizaIP
+
+Localiza as coordenadas geográficas do usuário atual.
+
+Baseia-se na identificação do IP e no pacote geoip
+
+Include:
+<pacotes/geoip/geoipcity.php>
+*/
+	case "localizaIP":
+		$ip = pegaIPcliente();
+		$r = ip2geo($ip);
+		if($r["latitude"] == null)
+		{
+			$ip = pegaIPcliente2();
+			$r = ip2geo($ip);
+		}
+		$cp->set_data($r);
+	break;
+
+/*
 Property: zoomponto
 
 Desloca o centro do mapa para um ponto específico.

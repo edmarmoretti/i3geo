@@ -1611,6 +1611,35 @@ function zoomboxf (tipo)
 	}
 }
 /*
+Function: zoomIP
+
+Localiza no mapa o usuário baseado em seu número IP.
+*/
+function zoomIP()
+{
+	var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
+	var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
+	var mostraIP = function(retorno)
+	{
+		if (retorno.data.latitude != null)
+		{
+			objaguarde.abre("ajaxredesenha","Aguarde...");
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"zoomPonto",ajaxredesenha);
+		}
+		else
+		{alert("Nao foi possivel identificar a localizacao.");}
+	}
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+g_sid;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"localizaIP",mostraIP);	
+}
+/*
 Function: zoomPonto
 
 Localiza uma coordenada no mapa.

@@ -501,11 +501,11 @@ window.onresize = function(){window.status = "Após alterar o tamanho da janela, 
 
 function cria()
 {
-var mashup = function (retorno)
-{
-	g_sid = retorno.data;
-	objmapa.inicializa();
-}
+	var mashup = function (retorno)
+	{
+		g_sid = retorno.data;
+		objmapa.inicializa();
+	}
 	var cp = new cpaint();
 	cp.set_async(true);
 	cp.set_response_type("JSON");
@@ -966,6 +966,7 @@ function Mapa(e,m)
 				objmapa.ativa3D("v3d");
 				objmapa.ativaImpressao("imprimir");
 				objmapa.ativaVisual("visual");
+				objmapa.ativaOndeEstou("ondeestou");
 				ativaGuias();
 				//esconde guias
 				if(($i("encolheFerramentas")) && ($i("contemFerramentas")))
@@ -1769,6 +1770,33 @@ function Mapa(e,m)
 			$i(id).onmouseout = function(){mostradicasf(this,'');}
 		}
 	}
+	/*
+	Function: ativaOndeEstou
+	
+	Ativa o botão de localização do usuário pelo IP.
+	
+	Essa opção só é ativada se a variável objmapa.geoip for igual a "sim" e se existir o div com id=ondeestou.
+	
+	O valor dessa variável é obtida na inicialização.
+	
+	Parameters:
+	
+	id - id do elemento que ativa a operação 
+	*/
+	this.ativaOndeEstou = function(id)
+	{	
+		if ($i(id))
+		{
+			if (objmapa.geoip == "nao")
+			{$i(id).style.display="none";}
+			else
+			{
+				$i(id).onclick = function(){zoomIP();}
+				$i(id).onmouseover = function(){mostradicasf(this,'Localiza o IP do usuario no mapa','');}
+				$i(id).onmouseout = function(){mostradicasf(this,'');}
+			}
+		}
+	}	
 	/*
 	Function: criaEscalaGrafica
 	
