@@ -8,11 +8,11 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="8"
+   height="10"
    space="preserve"
    style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality"
    viewBox="-2794 0 3818 1880"
-   width="17"
+   width="20"
    x="-251.451"
    y="479.15729"
    id="svg2"
@@ -37,8 +37,8 @@
      bordercolor="#666666"
      pagecolor="#ffffff"
      id="base"
-     width="17px"
-     height="8px"
+     width="20px"
+     height="10px"
      inkscape:zoom="15.594017"
      inkscape:cx="9.925682"
      inkscape:cy="4.0720747"
@@ -104,7 +104,7 @@
   </defs>
   <g
      id="Layer 1"
-     transform="matrix(1.0028833,0,0,0.9713068,8.055748,53.943304)">
+     transform="matrix(1.0028833,0,0,0.9988003,8.055748,13.137056)">
     <g
        id="g11" />
     <path

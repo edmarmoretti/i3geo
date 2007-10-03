@@ -1457,6 +1457,7 @@ function pegaIPcliente()
 	else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 	else $ip = "UNKNOWN";
+	//$ip = "200.252.111.1";//teste
 	return $ip;
 }
 /*

@@ -1624,7 +1624,7 @@ function zoomIP()
 		if (retorno.data.latitude != null)
 		{
 			objaguarde.abre("ajaxredesenha","Aguarde...");
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
