@@ -636,7 +636,7 @@ Include:
 	case "adicionatemawms":
 		include("classe_mapa.php");
 		$m = new Mapa($map_file);
-	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld);
+	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo);
 		$teste = $m->mapa->draw();
 		$retorno = "ok";
 		if ($teste != "")

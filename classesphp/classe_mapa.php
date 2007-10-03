@@ -795,20 +795,18 @@ $imgdir - diretório temporário das imagens
 $imgurl - url do imgdir
 $tiporep - tipo de representação das feições do mapa
 $suportasld - Suporta SLD sim|nao.
-
+$formatosinfo - lista de formatos da requisição de atributos para a função getfeatureinfo (default text/plain)
 Include:
 <wmswfs.php>
 */
-	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld)
+	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain")
 	{
 		require_once("wmswfs.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
-		
 		$nmap = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 		$layer = $nmap->getlayerbyname("novotema");
-		
 		$layer->set("name",$tema);
 		$layer->set("status",MS_DEFAULT);
 		$layer->setmetadata("tema",$nomecamada);
@@ -856,6 +854,7 @@ Include:
 		$layer->setmetadata("wms_name",$tema);
 		$layer->setmetadata("wms_server_version",$versao);
 		$layer->setmetadata("wms_formatlist",$formato);
+		$layer->setmetadata("formatosinfo",$formatosinfo);
 		$layer->setmetadata("wms_exceptions_format","application/vnd.ogc.se_xml");
 		$layer->setmetadata("wms_style",$nome);
 		$layer->setmetadata("wms_connectiontimeout","30");

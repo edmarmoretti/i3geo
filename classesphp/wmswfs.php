@@ -323,7 +323,8 @@ function temaswms()
 		}
 	}
 	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
-	$retorna[] = "<br>Formatos:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
+	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
+	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
 	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
 	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
 	$cp->set_data(implode($retorna));
@@ -491,6 +492,23 @@ function wms_formats ( $dom )
 {
 	$xpath = new DOMXPath($dom);
 	$query = '//WMT_MS_Capabilities/Capability/Request/GetMap/Format';
+	$entries = $xpath->query($query);
+	$arr = array();
+	foreach ($entries as $entry)
+	{
+		$arr[] = $entry->nodeValue;
+	}
+	return $arr;
+}
+/*
+function: wms_formatsinfo
+
+Retorna os formatos existentes de retorno da opção getfeatureinfo.
+*/
+function wms_formatsinfo ( $dom )
+{
+	$xpath = new DOMXPath($dom);
+	$query = '//WMT_MS_Capabilities/Capability/Request/GetFeatureInfo/Format';
 	$entries = $xpath->query($query);
 	$arr = array();
 	foreach ($entries as $entry)

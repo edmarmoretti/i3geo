@@ -710,6 +710,19 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
 		$res .= "&Y=".round($ptimg->y);
 		$res .= "&WIDTH=".$mapa->width;
 		$res .= "&HEIGHT=".$mapa->height;
+		$formatoinfo = "text/plain";
+		$formatosinfo = $layer->getmetadata("formatosinfo");
+		if ($formatosinfo != "")
+		{
+			$formatosinfo = explode(",",$formatosinfo);
+			if ($formatosinfo[0] != ""){$formatoinfo = $formatosinfo[0];}
+			foreach ($formatosinfo as $f)
+			{
+		 		if(strtoupper($f) == "TEXT/PLAIN")
+		 		{$formatoinfo = "text/plain";}
+			}
+					
+		}
 		$srs = $layer->getmetadata("wms_srs");
 		$srss = explode(" ",$srs);
 		$srs = "EPSG:4326";
@@ -719,23 +732,25 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
 		 	{$srs = "EPSG:4291";}
 		}
 		$res .= "&SRS=".$srs;
-		$res = file($res);
-		$res = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$res);
-		$res = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$res);
-		$res = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$res);
-		$res = str_ireplace('<?xml',"",$res);
-		$res = str_ireplace("<","zzzzzzzzzz",$res);
-		$res = str_ireplace(">","zzzzzzzzzz",$res);
-		$resultado[] = $res;
+		$resposta = file($res."&FORMAT=".$formatoinfo);
+		$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
+		$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
+		$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
+		$resposta = str_ireplace('<?xml',"",$resposta);
+		$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
+		$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
+		if (stristr(implode(" ",$resposta),"msWMSLoadGetMapParams"))
+		{
+			$resposta = file($res);
+			$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
+			$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
+			$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
+			$resposta = str_ireplace('<?xml',"",$resposta);
+			$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
+			$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
+		}
+		$resultado[] = $resposta;
 		return $resultado;		
-			$lines = file($res);
-			$lines = str_ireplace("<html>","",$lines);
-			$lines = str_ireplace("<body>","",$lines);
-			$lines = str_ireplace("</html>","",$lines);
-			$lines = str_ireplace("</body>","",$lines);
-			$lines = str_ireplace("#","",$lines);
-			$resultado[] = $lines;
-		return $resultado;
 	}
 	if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 	{
