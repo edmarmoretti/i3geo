@@ -468,6 +468,10 @@ for($i=0;$i<($mapa->numlayers);$i++)
 }
 $mapa->save($tmpfname);
 //
+//obtem o IP do usuário e registra no banco de dados
+//essa função pode ser comentada sem prejuízos ao funcionamento do I3Geo
+require_once($caminho."ms_registraip.php");
+//
 // gera a url para abrir o mapa
 // interface = arquivo html que será aberto
 //

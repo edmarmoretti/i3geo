@@ -1023,15 +1023,15 @@ parameters:
 
 $ip - Número do IP.
 */
-function ip2geo($ip)
+function ip2geo($ip,$locaplic="..")
 {
 	//$ip="200.252.111.1";
 	$resultado = array();
-	if (file_exists("../pacotes/geoip/geoipcity.inc"))
+	if (file_exists($locaplic."/pacotes/geoip/geoipcity.inc"))
 	{
-		require_once("../pacotes/geoip/geoipcity.inc");
-		require_once("../pacotes/geoip/geoipregionvars.php");
-		$gi = geoip_open("../pacotes/geoip/GeoLiteCity.dat",GEOIP_STANDARD);
+		require_once($locaplic."/pacotes/geoip/geoipcity.inc");
+		require_once($locaplic."/pacotes/geoip/geoipregionvars.php");
+		$gi = geoip_open($locaplic."/pacotes/geoip/GeoLiteCity.dat",GEOIP_STANDARD);
 		$record = geoip_record_by_addr($gi,$ip);
 		$resultado["country_code"] = $record->country_code . " " . $record->country_code3 . " " . $record->country_name;
 		$resultado["region"] = $record->region . " " . $GEOIP_REGION_NAME[$record->country_code][$record->region];
