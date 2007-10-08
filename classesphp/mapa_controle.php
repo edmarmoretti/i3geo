@@ -1303,6 +1303,20 @@ Section: Menu de temas
 Obtém a lista de temas, grupos e sub-grupos.
 */
 /*
+Property: pegalistademenus
+
+Pega a lista de menus para incluir na guia adiciona.
+
+Parameters:
+*/
+	case "pegalistademenus":
+		$menutemas = "";
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		$cp->set_data($menutemas);
+		$cp->return_data();
+	break;
+/*
 Property: pegalistadegrupos
 
 Pega a lista de grupos do menu.
@@ -1321,7 +1335,7 @@ Include:
 	case "pegalistadegrupos":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
-		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos()));
+		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas)));
 		//$cp->return_data();
 	break;
 /*

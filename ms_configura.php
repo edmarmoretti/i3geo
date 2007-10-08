@@ -103,6 +103,14 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	//os mapfiles do diretório temas que tiverem CONNECTION " ", terão a string de conexão substituída por esse valor
 	//se não for desejado a substituição, deixe essa variável em branco
 	$postgis_mapa = "";
+	//array com a lista de arquivos xml que serão incluidos na guia de adição de temas
+	/*
+	$menutemas = array(
+		array("idmenu"=>1,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml"),
+		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml")
+		);
+	*/
+	$menutemas = "";
 }
 else //se for linux
 {
@@ -119,5 +127,8 @@ else //se for linux
 	$postgis_con = "user=geodados password=geodados dbname=geodados host=mapas.mma.gov.br port=5432";
 	$srid_area = 1;
 	$postgis_mapa = "";
+	$menutemas = array(
+		array("idmenu"=>1,"arquivo"=>"http://mapas.mma.gov.br/i3geo/menutemas/menutemas.xml")
+		);
 }
 ?>

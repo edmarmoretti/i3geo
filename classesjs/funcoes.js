@@ -369,11 +369,27 @@ function ativaGuias()
 			mostraguiaf(2);
 			if (!$i("buscatema"))
 			{
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid;
+				var pegalistademenus = function(retorno)
+				{
+					if (retorno.data == "")
+					{pegaListaDeGrupos("","sim");}
+					else
+					{
+						for (j=0;j<retorno.data.length;j++)
+						{
+							if(j == retorno.data.length-1)
+							{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
+							else
+							{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
+						}
+					}
+				}
+				//pega a lista de árvores que devem ser montadas
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
-				cp.call(p,"pegaListaDeGrupos",processaGrupos);
+				cp.call(p,"pegalistademenus",pegalistademenus);
 			}
 		}
 	}
@@ -2375,6 +2391,25 @@ function expandeGrupo(itemID)
 	}
 }
 /*
+Function: pegaListaDeGrupos
+
+Pega a lista de grupos de uma árvore de tremas.
+
+Parameters:
+
+idmenu - id que identifica a árvore. Esse id é definido no ms_configura, variável $menutemas. Se idmenu for vazio, será considerado o arquivo de menus default do I3Geo, existente no diretório menutemas.
+
+listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
+*/
+function pegaListaDeGrupos(idmenu,listasistemas)
+{			
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegaListaDeGrupos",processaGrupos);
+}
+/*
 Function: processaGrupos
 
 Recebe os dados da função Ajax com a lista de grupos e subgrupos.
@@ -2389,9 +2424,10 @@ function processaGrupos(retorno)
 {
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
+		var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
 		if ($i("buscatema"))
 		{var busca = $i("buscatema").value;}
-		$i(objmapa.guiaMenu+"obj").innerHTML = "";
+		//$i(objmapa.guiaMenu+"obj").innerHTML = "";
 		if (!document.getElementById("buscatema"))
 		{
 			var insp = "<div style='text-align:left;'><table  cellspacing=0 cellpadding=0 ><tr><td style='text-align:left;font-size:10px;'>";
@@ -2399,31 +2435,36 @@ function processaGrupos(retorno)
 			insp = insp + "<p>&nbsp;procurar:<input class=digitar type=text id=buscatema size=15 value=''  /><img  title='procurar' src="+$im("tic.png")+" onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
 			$i(objmapa.guiaMenu+"obj").innerHTML = insp+"<div style='text-align:left;font-size:10px;' id=achados ></div></div>";
 		}
-		var upload = "";
-		if (g_uploadlocal == "sim")
-		{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img src="+$im("upload.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Upload de arquivo local</div>";}
-		if (g_downloadbase == "sim")
-		{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img src="+$im("connected-s.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Download de dados</div>";}
-		if (g_conectarwms == "sim")
-		{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img src="+$im("cmdLink.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Conectar com servidor WMS</div>";}
-		if (g_conectargeorss == "sim")
-		{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img src="+g_locaplic+"/imagens/georss-1.png style='cursor:pointer;text-align:left'  />&nbsp;Conectar com GeoRss</div>";}
-		$i(objmapa.guiaMenu+"obj").innerHTML += upload;
-		if (objmapa.navegacaoDir == "sim")
+		if (!$i("uplocal"))
 		{
-			var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img src="+g_locaplic+"/imagens/desktop.png style='cursor:pointer;text-align:left'  />&nbsp;Acesso aos arquivos do servidor</div>";
-			$i(objmapa.guiaMenu+"obj").innerHTML += temp;
+			var upload = "";
+			if (g_uploadlocal == "sim")
+			{upload += "<div id=uplocal style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img src="+$im("upload.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Upload de arquivo local</div>";}
+			if (g_downloadbase == "sim")
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img src="+$im("connected-s.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Download de dados</div>";}
+			if (g_conectarwms == "sim")
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img src="+$im("cmdLink.gif")+" style='cursor:pointer;text-align:left'  />&nbsp;Conectar com servidor WMS</div>";}
+			if (g_conectargeorss == "sim")
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img src="+g_locaplic+"/imagens/georss-1.png style='cursor:pointer;text-align:left'  />&nbsp;Conectar com GeoRss</div>";}
+			$i(objmapa.guiaMenu+"obj").innerHTML += upload;
+			if (objmapa.navegacaoDir == "sim")
+			{
+				var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img src="+g_locaplic+"/imagens/desktop.png style='cursor:pointer;text-align:left'  />&nbsp;Acesso aos arquivos do servidor</div>";
+				$i(objmapa.guiaMenu+"obj").innerHTML += temp;
+			}
 		}
-		//arvore MMA
+		//arvore de menus
 		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2", "default", objmapa.guiaMenu+"obj", null);
-		mytreeview2.createItem("item1", "<b>Temas</b>", g_locaplic+"/imagens/visual/"+g_visual+"/temas.png", true, true, true, null);
+		mytreeview2 = treeviewNew("mytreeview2"+idarvore, "default", objmapa.guiaMenu+"obj", null);
+		var nometemas = "Temas";
+		if (idarvore != ""){nometemas += " - "+idarvore;}
+		mytreeview2.createItem("item1"+idarvore, "<b>"+nometemas+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/temas.png", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
 		for (i=0;i<retorno.data.grupos.length; i++)
 		{
 			if (retorno.data.grupos[i].nome)
 			{
-				mytreeview2.createItem("grupo"+i, retorno.data.grupos[i].nome, g_locaplic+"/imagens/visual/"+g_visual+"/folder-s.gif", true, true, true, "item1");
+				mytreeview2.createItem("grupo"+i+"a"+idarvore, retorno.data.grupos[i].nome, g_locaplic+"/imagens/visual/"+g_visual+"/folder-s.gif", true, true, true, "item1"+idarvore);
 				var ngSgrupo = retorno.data.grupos[i].subgrupos;
 				var cor = "rgb(230,230,230)";
 				for (sg=0;sg<ngSgrupo.length;sg++)
@@ -2432,7 +2473,7 @@ function processaGrupos(retorno)
 					var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
 					else
 					var nomeSgrupo = "<span style='background-color:"+cor+"' ><img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />"+ngSgrupo[sg].nome+"</span>";
-					mytreeview2.createItem("sgrupo_"+i+"_"+sg, nomeSgrupo, imgBranco, true, true, false, "grupo"+i);
+					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"a"+"grupo"+i+"a"+idarvore, nomeSgrupo, imgBranco, true, true, false, "grupo"+i+"a"+idarvore);
 					if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
 					else
 					{var cor = "rgb(230,230,230)";}
@@ -2451,7 +2492,7 @@ function processaGrupos(retorno)
 					nomeTema = "&nbsp;"+inp+nome+lk;
 					else
 					nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />"+inp+nome+lk+"</span>";
-					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"_"+sgt, nomeTema, imgBranco, false, true, false, "grupo"+i);
+					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"_"+sgt+"a"+idarvore, nomeTema, imgBranco, false, true, false, "grupo"+i+"a"+idarvore);
 				}				
 			}
 			if (retorno.data.grupos[i].temasraiz)
@@ -2469,13 +2510,11 @@ function processaGrupos(retorno)
 					nomeTema = "&nbsp;"+inp+nome+lk;
 					else
 					nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />"+inp+nome+lk+"</span>";
-					mytreeview2.createItem("tema"+i+""+st, nomeTema, imgBranco, false, true, true, "item1");
+					mytreeview2.createItem("tema"+i+""+st+"a"+idarvore, nomeTema, imgBranco, false, true, true, "item1"+idarvore);
 				}
-				mytreeview2.createItem("", "", imgBranco, false, true, true, "item1");
+				mytreeview2.createItem("", "", imgBranco, false, true, true, "item1"+idarvore);
 			}
 		}
-		//if (g_locsistemas != "")
-		//{ajaxexecASXml(g_locsistemas,"pegavalSistemas");}
 		if (g_locsistemas != "")
 		{pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);}		
 	}
@@ -2529,22 +2568,25 @@ sis - objeto com a lista de sistemas.
 */
 function pegavalSistemas(sis)
 {
-	mytreeviewS = new Object();
-	mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
-	mytreeviewS.createItem("Sitem1", "<b>Sistemas</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
-	for (ig=0;ig<sis.length;ig++)
+	if(sis.length > 0)
 	{
-		var nomeSis = sis[ig].NOME;
-		mytreeviewS.createItem("sis"+ig, nomeSis, g_locaplic+"/imagens/folder-s.gif", true, true, true, "Sitem1");
-		var funcoes = sis[ig].FUNCOES;
-		for (ig2=0;ig2<funcoes.length;ig2++)
+		mytreeviewS = new Object();
+		mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
+		mytreeviewS.createItem("Sitem1", "<b>Sistemas</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
+		for (ig=0;ig<sis.length;ig++)
 		{
-			var nomeFunc = funcoes[ig2].NOME;
-			var executar = funcoes[ig2].ABRIR;
-			var w = funcoes[ig2].W;
-			var h = funcoes[ig2].H;
-			var inp = "<img title='Abrir sistema' src="+$im("open.gif")+" style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
-			mytreeviewS.createItem("sis"+ig+"func"+ig2, inp+nomeFunc, imgBranco, false, true, false, "sis"+ig);
+			var nomeSis = sis[ig].NOME;
+			mytreeviewS.createItem("sis"+ig, nomeSis, g_locaplic+"/imagens/folder-s.gif", true, true, true, "Sitem1");
+			var funcoes = sis[ig].FUNCOES;
+			for (ig2=0;ig2<funcoes.length;ig2++)
+			{
+				var nomeFunc = funcoes[ig2].NOME;
+				var executar = funcoes[ig2].ABRIR;
+				var w = funcoes[ig2].W;
+				var h = funcoes[ig2].H;
+				var inp = "<img title='Abrir sistema' src="+$im("open.gif")+" style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
+				mytreeviewS.createItem("sis"+ig+"func"+ig2, inp+nomeFunc, imgBranco, false, true, false, "sis"+ig);
+			}
 		}
 	}
 }

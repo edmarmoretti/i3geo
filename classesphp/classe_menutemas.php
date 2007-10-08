@@ -136,16 +136,36 @@ O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
 Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
 
+Parameters:
+
+idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
+
+listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
+
 return:
 
 array
 */
-	function pegaListaDeGrupos()
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim")
 	{
-		if (file_exists("../menutemas/menutemas.xml"))
-		{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-		else
-		{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		$this->xml = "";
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
+		{
+			foreach ($menutemas as $m)
+			{
+				if (($m["idmenu"] == $idmenu) && (file_exists($m["arquivo"])))
+				{$this->xml = simplexml_load_file($m["arquivo"]);}
+			} 
+		}
+		if ($this->xml == "")
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		}
 		$sistemas = array();
 		$grupos = array();
 		$temasraiz = array();
@@ -229,27 +249,32 @@ array
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
 		//pega os sistemas checando os perfis
-		foreach($this->xmlsistemas->SISTEMA as $s)
+		$sistemas = array();
+		if ($listasistemas == "sim")
 		{
-			$nomesis = mb_convert_encoding($s->NOMESIS,"HTML-ENTITIES","auto");
-			$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
-			$perfis = explode(",",$ps);
-			if ((in_array($this->perfil,$perfis)) || ($ps == ""))
+			foreach($this->xmlsistemas->SISTEMA as $s)
 			{
-				$funcoes = array();
-				foreach($s->FUNCAO as $f)
+				$nomesis = mb_convert_encoding($s->NOMESIS,"HTML-ENTITIES","auto");
+				$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
+				$perfis = explode(",",$ps);
+				if ((in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
-					$n = mb_convert_encoding($f->NOMEFUNCAO,"HTML-ENTITIES","auto");
-					$a = mb_convert_encoding($f->ABRIR,"HTML-ENTITIES","auto");
-					$w = mb_convert_encoding($f->JANELAW,"HTML-ENTITIES","auto");
-					$h = mb_convert_encoding($f->JANELAH,"HTML-ENTITIES","auto");
-					$p = mb_convert_encoding($f->PERFIL,"HTML-ENTITIES","auto");
-					if ((in_array($this->perfil,$perfis)) || ($p == ""))
-					{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
+					$funcoes = array();
+					foreach($s->FUNCAO as $f)
+					{
+						$n = mb_convert_encoding($f->NOMEFUNCAO,"HTML-ENTITIES","auto");
+						$a = mb_convert_encoding($f->ABRIR,"HTML-ENTITIES","auto");
+						$w = mb_convert_encoding($f->JANELAW,"HTML-ENTITIES","auto");
+						$h = mb_convert_encoding($f->JANELAH,"HTML-ENTITIES","auto");
+						$p = mb_convert_encoding($f->PERFIL,"HTML-ENTITIES","auto");
+						if ((in_array($this->perfil,$perfis)) || ($p == ""))
+						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
+					}
+					$sistemas[] =  array("NOME"=>$nomesis,"FUNCOES"=>$funcoes);
 				}
-				$sistemas[] =  array("NOME"=>$nomesis,"FUNCOES"=>$funcoes);
 			}
 		}
+		$grupos[] = array("idmenu"=>$idmenu);
 		$grupos[] = array("sistemas"=>$sistemas);
 		return ($grupos);
 	}
