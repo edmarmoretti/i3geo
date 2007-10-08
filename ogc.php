@@ -112,6 +112,8 @@ foreach ($_GET as $k=>$v)
 	$req->setParameter($k, $v);
 	if(strtolower($v) == "getcapabilities")
 	{$tipo = "metadados";}
+	if(strtolower($v) == "getlegendgraphic")
+	{$tipo = "legenda";}
 	if(strtolower($k) == "layers")
 	{$tema = $v;}
 }
@@ -123,6 +125,8 @@ $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s"
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
 if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
+{$or = $or."tema=".$tema."&";}
+if((isset($tema)) && ($tema != "") && ($tipo=="legenda"))
 {$or = $or."tema=".$tema."&";}
 $oMap->setmetadata("ows_onlineresource",$or);
 if (!isset($intervalo))
