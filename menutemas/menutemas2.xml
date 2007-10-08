@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="menutemas.xsl"?>
+<!--
+Title: Menu de temas
+
+Lista os temas disponíveis para ser acrescentados ao mapa
+
+File: menutemas2.xml
+-->
+<TEMASGEO>
+   <CABECALHO>Clique no grupo temático para abrir a lista de temas e ative o box relativo aos temas de interesse. Terminada a seleção dos temas, clique em um dos botões de aplicar alterações</CABECALHO>
+   <TEMA>
+     <TID>cartobase</TID>
+     <TNOME>Cartografia básica (raster)2</TNOME>
+     <TDESC>Web service com a cartografia básica</TDESC>
+     <TLINK>http://mapas.mma.gov.br/i3geo/wscliente.htm</TLINK>
+   </TEMA>
+   <GRUPO>
+      <GTIPO>Ambiente físico e biodiversidade2</GTIPO>
+      <DTIPO>Biomas, vegetação, áreas prioritárias para conservação, etc.</DTIPO>
+      <SGRUPO>
+         <SDTIPO>Clima2</SDTIPO>
+         <TEMA>
+            <TID>condtemp</TID>
+            <TNOME>Condição do tempo2</TNOME>
+            <TDESC>Web service com a condição do tempo para várias localidades</TDESC>
+            <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>cobnuv</TID>
+            <TNOME>Cobertura de nuvens2</TNOME>
+            <TDESC>Web service com a cobertura de nuvens</TDESC>
+            <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>weather</TID>
+            <TNOME>Previsão do tempo2</TNOME>
+            <TDESC>Web service com a previsão do tempo para várias localidades</TDESC>
+            <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>ratmin</TID>
+            <TNOME>Temperatura mínima do ar (24h)2</TNOME>
+            <TDESC>Temperatura mínima nas últimas 24 horas</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-mintemp.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>ratmax</TID>
+            <TNOME>Temperatura máxima do ar (24h)2</TNOME>
+            <TDESC>Temperatura máxima nas últimas 24 horas</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-maxtemp.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>rprain</TID>
+            <TNOME>Chuva2</TNOME>
+            <TDESC>Chuva na data atual2</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-precip.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>rbpxxl</TID>
+            <TNOME>Pressão barométrica2</TNOME>
+            <TDESC>Pressão barométrica ao nivel do mar em mbar na data atual</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-slpr.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>revxxp</TID>
+            <TNOME>Evaporação2</TNOME>
+            <TDESC>Evaporação na data atual em W/sq m.</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-evap.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>rcosat</TID>
+            <TNOME>Imagem Infravermelho2</TNOME>
+            <TDESC>Imagem de satélite mostrando nuvens, oceano e terra</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-infrared.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>rcoxxr</TID>
+            <TNOME>Cobertura de nuvens prevista2</TNOME>
+            <TDESC>Cobertura de nuvens prevista</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-clouds.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>rprxxr</TID>
+            <TNOME>Chuva estimada2</TNOME>
+            <TDESC>Chuva estimada</TDESC>
+            <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-trmm.ht</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+      </SGRUPO>
+      <SGRUPO>
+         <SDTIPO>Teste2</SDTIPO>
+         <TEMA>
+            <TID>bioma</TID>
+            <TNOME>Biomas2</TNOME>
+            <TDESC>Web service com a condição do tempo para várias localidades</TDESC>
+            <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
+         </TEMA>
+    	</SGRUPO>
+   </GRUPO>
+</TEMASGEO>

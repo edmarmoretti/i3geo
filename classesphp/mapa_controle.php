@@ -1329,6 +1329,7 @@ perfil - perfil do usuário
 
 locsistemas - endereço do xml com a lista de sistemas adicionais
 
+idmenu - identificador da árvore de menus que deverá ser considerada (veja o ms_configura.php)
 Include:
 <classe_menutemas.php>
 */
@@ -1349,7 +1350,7 @@ Include:
 	case "pegalistadetemas":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file);
-		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo)));
+		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
 	break;
 /*
 Property: procurartemas

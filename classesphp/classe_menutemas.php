@@ -155,7 +155,7 @@ array
 		{
 			foreach ($menutemas as $m)
 			{
-				if (($m["idmenu"] == $idmenu) && (file_exists($m["arquivo"])))
+				if (($m["idmenu"] == $idmenu))
 				{$this->xml = simplexml_load_file($m["arquivo"]);}
 			} 
 		}
@@ -291,12 +291,26 @@ $subgrupo - Id do subgrupo
 return:
 array
 */
-	function pegaListaDeTemas($grupo,$subgrupo)
+	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
-		if (file_exists("../menutemas/menutemas.xml"))
-		{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-		else
-		{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		$this->xml = "";
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
+		{
+			foreach ($menutemas as $m)
+			{
+				if (($m["idmenu"] == $idmenu))
+				{$this->xml = simplexml_load_file($m["arquivo"]);}
+			} 
+		}
+		if ($this->xml == "")
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		}
 		$contagrupo = 0;
 		$temas = array();
 		foreach($this->xml->GRUPO as $g)

@@ -2383,7 +2383,7 @@ function expandeGrupo(itemID)
 	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
 	{
 		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&g_sid="+g_sid;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&g_sid="+g_sid+"&idmenu="+codigos[3];
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("json");
@@ -2473,7 +2473,7 @@ function processaGrupos(retorno)
 					var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
 					else
 					var nomeSgrupo = "<span style='background-color:"+cor+"' ><img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />"+ngSgrupo[sg].nome+"</span>";
-					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"a"+"grupo"+i+"a"+idarvore, nomeSgrupo, imgBranco, true, true, false, "grupo"+i+"a"+idarvore);
+					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"a"+"grupo"+i+"_"+idarvore, nomeSgrupo, imgBranco, true, true, false, "grupo"+i+"a"+idarvore);
 					if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
 					else
 					{var cor = "rgb(230,230,230)";}
@@ -2492,7 +2492,7 @@ function processaGrupos(retorno)
 					nomeTema = "&nbsp;"+inp+nome+lk;
 					else
 					nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />"+inp+nome+lk+"</span>";
-					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"_"+sgt+"a"+idarvore, nomeTema, imgBranco, false, true, false, "grupo"+i+"a"+idarvore);
+					mytreeview2.createItem("sgrupo_"+i+"_"+sg+"_"+sgt+"_"+idarvore, nomeTema, imgBranco, false, true, false, "grupo"+i+"a"+idarvore);
 				}				
 			}
 			if (retorno.data.grupos[i].temasraiz)
