@@ -63,6 +63,7 @@ $fecha = fclose ($abre);
 //
 //gera um único js
 //
+
 $jsfiles = array(
 "../pacotes/yui/build/yahoo/yahoo-min.js",
 "../pacotes/yui/build/event/event-min.js",
@@ -112,6 +113,8 @@ $cssfiles = array(
 "../css/reset-min.css",
 "../css/grids-min.css",
 "../css/menu-min.css",
+//"../pacotes/yui231/build/reset-fonts-grids/reset-fonts-grids.css",
+//"../pacotes/yui231/build/menu/assets/skins/sam/menu.css",
 "jsobjects/jsUI-Treeview/default.css"
 );
 $buffer = "";

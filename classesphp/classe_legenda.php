@@ -161,15 +161,13 @@ string com a legenda HTML
 	function criaLegenda()
 	{
 		$l = "";
+		$numlayers = $this->mapa->numlayers;
 		if($this->nome != "")
 		{
 			//verifica se é wms
 			$c = $this->layer->connectiontype;
 			if (($c == 7))
-			{
-				return($this->tabelaLegenda());
-			}
-			$numlayers = $this->mapa->numlayers;
+			{return($this->tabelaLegenda());}
 			for ($i=0;$i < $numlayers;$i++)
 			{
 				$la = $this->mapa->getlayer($i);
@@ -178,6 +176,12 @@ string com a legenda HTML
 				if ($la->group == $this->nome)
 				{$la->set("status",MS_DEFAULT);}
 			}
+		}
+		for ($i=0;$i < $numlayers;$i++)
+		{
+			$la = $this->mapa->getlayer($i);
+			if(strtoupper($la->getmetadata("ESCONDIDO")) == "SIM")
+			{$la->set("status",MS_OFF);}
 		}
 		$legenda = $this->mapa->legend;
 		$legenda->set("template",$this->templateleg);
