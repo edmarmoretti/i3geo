@@ -56,8 +56,10 @@ Group: Programas especiais  {
       File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
       File: Lista de sistemas.  (menutemas\sistemas.xml)
       File: Menu de temas  (menutemas\menutemas.xml)
+      File: Menu de temas  (menutemas\menutemas2.xml)
       }  # Group: Menutemas
 
+   File: Registra o IP do usuário para criação do mapa de visitantes.  (ms_registraip.php)
    File: Testa a instalação do I3Geo.  (testainstal.php)
    File: Testa um mapfile.  (testamapfile.php)
    }  # Group: Programas especiais
