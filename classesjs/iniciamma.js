@@ -45,7 +45,7 @@ Ativa o auto redesenho após um determinado temp.
 
 Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
 */
-g_autoRedesenha = 0;
+g_autoRedesenho = 0;
 /*
 Variable: g_sid
 
