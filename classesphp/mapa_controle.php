@@ -1349,7 +1349,7 @@ Include:
 */
 	case "pegalistadetemas":
 		include("classe_menutemas.php");
-		$m = new Menutemas($map_file);
+		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
 	break;
 /*
@@ -1362,7 +1362,7 @@ Include:
 */
 	case "procurartemas":
 		include("classe_menutemas.php");
-		$m = new Menutemas($map_file);
+		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		$cp->set_data($m->procurartemas($procurar));
 	break;
 /*
