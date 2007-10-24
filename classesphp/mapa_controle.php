@@ -2131,7 +2131,7 @@ Include:
 */
 function redesenhaMapa()
 {
-	global $map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa;
+	global $map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
@@ -2143,7 +2143,10 @@ function redesenhaMapa()
 		copy(str_replace(".map","seguranca.map",$map_file),$map_file);
 		$m = New Mapa($map_file);
 		$par = $m->parametrosTemas();
-		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);
+		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+		{$imagem = $locmapserv."?map=".$map_file."&mode=map";}
+		else
+		{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
 	}
 	restauraCon($map_file,$postgis_mapa);
 	if (($par == "") || ($imagem == ""))

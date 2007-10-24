@@ -110,7 +110,12 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml")
 		);
 	*/
-	$menutemas = "";}
+	$menutemas = "";
+	//variável indicando se o desenho do corpo do mapa será baseado no cgi
+	//Por default, o mapserver desenha o mapa via php.
+	//Em alguns casos o uso do cgi torna a aplicação mais rápida
+	$utilizacgi = "sim";
+}
 else //se for linux
 {
 	$editores = array("10.1.15.207","10.1.13.206","10.1.18.78");
@@ -132,5 +137,6 @@ else //se for linux
 		);
 	*/
 	$menutemas = "";
+	$utilizacgi = "sim";
 }
 ?>

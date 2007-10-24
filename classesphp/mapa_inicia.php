@@ -85,7 +85,7 @@ Essa string é recuperada no lado do javascript com eval().
 */
 function iniciaMapa()
 {
-	global $navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con;
+	global $navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -162,7 +162,10 @@ function iniciaMapa()
 	$nomes = nomeRandomico(12);
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 	$imgo->saveImage($nomer);
-	$nomer = ($imgo->imageurl).basename($nomer);
+	if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
+	else
+	{$nomer = ($imgo->imageurl).basename($nomer);}
 	
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
