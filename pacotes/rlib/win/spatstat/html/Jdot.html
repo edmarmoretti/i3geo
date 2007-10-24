@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Multitype J Function (i-to-any)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Jdot {spatstat}"><tr><td>Jdot {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Multitype J Function (i-to-any)</h2>
+
+
+<h3>Description</h3>
+
+<p>
+For a multitype point pattern, 
+estimate the multitype <i>J</i> function 
+summarising the interpoint dependence between
+the type <i>i</i> points and the points of any type.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Jdot(X, i=1, eps=NULL, r=NULL, breaks=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The observed point pattern, 
+from which an estimate of the multitype <i>J</i> function
+<i>Ji.(r)</i> will be computed.
+It must be a multitype point pattern (a marked point pattern
+whose marks are a factor). See under Details.
+</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+Number or character string identifying the type (mark value)
+of the points in <code>X</code> from which distances are measured.
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+A positive number.
+The resolution of the discrete approximation to Euclidean
+distance (see below). There is a sensible default.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+numeric vector. The values of the argument <i>r</i>
+at which the function
+<i>Ji.(r)</i> should be evaluated.
+There is a sensible default.
+First-time users are strongly advised not to specify this argument.
+See below for important conditions on <i>r</i>.
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+An alternative to the argument <code>r</code>.
+Not normally invoked by the user. See the <B>Details</B> section.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function <code>Jdot</code> and its companions
+<code><a href="Jcross.html">Jcross</a></code> and <code><a href="Jmulti.html">Jmulti</a></code>
+are generalisations of the function <code><a href="Jest.html">Jest</a></code>
+to multitype point patterns. 
+</p>
+<p>
+A multitype point pattern is a spatial pattern of
+points classified into a finite number of possible
+``colours'' or ``types''. In the <STRONG>spatstat</STRONG> package,
+a multitype pattern is represented as a single 
+point pattern object in which the points carry marks,
+and the mark value attached to each point
+determines the type of that point.
+</p>
+<p>
+The argument <code>X</code> must be a point pattern (object of class
+<code>"ppp"</code>) or any data that are acceptable to <code><a href="as.ppp.html">as.ppp</a></code>.
+It must be a marked point pattern, and the mark vector
+<code>X$marks</code> must be a factor.
+The argument <code>i</code> will be interpreted as a
+level of the factor <code>X$marks</code>. (Warning: this means that
+an integer value <code>i=3</code> will be interpreted as the 3rd smallest level,
+not the number 3). 
+</p>
+<p>
+The ``type <i>i</i> to any type'' multitype <i>J</i> function 
+of a stationary multitype point process <i>X</i>
+was introduced by Van lieshout and Baddeley (1999). It is defined by
+</p><p align="center"><i>Ji.(r) = (1 - Gi.(r))/(1-F.(r))</i></p><p>
+where <i>Gi.(r)</i> is the distribution function of
+the distance from a type <i>i</i> point to the nearest other point
+of the pattern, and <i>F.(r)</i> is the distribution
+function of the distance from a fixed point in space to the nearest
+point of the pattern.
+</p>
+<p>
+An estimate of <i>Ji.(r)</i>
+is a useful summary statistic in exploratory data analysis
+of a multitype point pattern. If the pattern is 
+a marked Poisson point process, then
+<i>Ji.(r) = 1</i>.
+If the subprocess of type <i>i</i> points is independent
+of the subprocess of points of all types not equal to <i>i</i>,
+then <i>Ji.(r)</i> equals
+<i>Jii(r)</i>, the ordinary <i>J</i> function
+(see <code><a href="Jest.html">Jest</a></code> and Van Lieshout and Baddeley (1996))
+of the points of type <i>i</i>. 
+Hence deviations from zero of the empirical estimate of
+<i>Ji.-Jii</i> 
+may suggest dependence between types.
+</p>
+<p>
+This algorithm estimates <i>Ji.(r)</i> 
+from the point pattern <code>X</code>. It assumes that <code>X</code> can be treated
+as a realisation of a stationary (spatially homogeneous) 
+random spatial point process in the plane, observed through
+a bounded window.
+The window (which is specified in <code>X</code> as <code>X$window</code>)
+may have arbitrary shape.
+Biases due to edge effects are
+treated in the same manner as in <code><a href="Jest.html">Jest</a></code>,
+using the Kaplan-Meier and border corrections.
+The main work is done by <code><a href="Gmulti.html">Gmulti</a></code> and <code><a href="Fest.html">Fest</a></code>.
+</p>
+<p>
+The argument <code>r</code> is the vector of values for the
+distance <i>r</i> at which <i>Ji.(r)</i> should be evaluated. 
+The values of <i>r</i> must be increasing nonnegative numbers
+and the maximum <i>r</i> value must exceed the radius of the
+largest disc contained in the window.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"fv"</code> (see <code><a href="fv.object.html">fv.object</a></code>).
+<br>
+Essentially a data frame containing six numeric columns 
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>J</code></td>
+<td>
+the recommended
+estimator of <i>Ji.(r)</i>,
+currently the Kaplan-Meier estimator.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+the values of the argument <i>r</i> 
+at which the function <i>Ji.(r)</i> has been  estimated
+</td></tr>
+<tr valign="top"><td><code>km</code></td>
+<td>
+the Kaplan-Meier 
+estimator of <i>Ji.(r)</i>
+</td></tr>
+<tr valign="top"><td><code>rs</code></td>
+<td>
+the ``reduced sample'' or ``border correction''
+estimator of <i>Ji.(r)</i>
+</td></tr>
+<tr valign="top"><td><code>un</code></td>
+<td>
+the ``uncorrected'' 
+estimator of <i>Ji.(r)</i>
+formed by taking the ratio of uncorrected empirical estimators
+of <i>1 - Gi.(r)</i>
+and <i>1 - F.(r)</i>, see
+<code><a href="Gdot.html">Gdot</a></code> and <code><a href="Fest.html">Fest</a></code>.
+</td></tr>
+<tr valign="top"><td><code>theo</code></td>
+<td>
+the theoretical value of  <i>Ji.(r)</i>
+for a marked Poisson process, namely 1.
+</td></tr>
+</table>
+<p>
+
+The result also has two attributes <code>"G"</code> and <code>"F"</code>
+which are respectively the outputs of <code><a href="Gdot.html">Gdot</a></code>
+and <code><a href="Fest.html">Fest</a></code> for the point pattern.</p>
+
+<h3>Warnings</h3>
+
+<p>
+The argument <code>i</code> is interpreted as
+a level of the factor <code>X$marks</code>. Beware of the usual
+trap with factors: numerical values are not
+interpreted in the same way as character values. See the first example.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Van Lieshout, M.N.M. and Baddeley, A.J. (1996)
+A nonparametric measure of spatial interaction in point patterns.
+<EM>Statistica Neerlandica</EM> <B>50</B>, 344&ndash;361.
+</p>
+<p>
+Van Lieshout, M.N.M. and Baddeley, A.J. (1999)
+Indices of dependence between types in multivariate point patterns.
+<EM>Scandinavian Journal of Statistics</EM> <B>26</B>, 511&ndash;532.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="Jcross.html">Jcross</a></code>,
+<code><a href="Jest.html">Jest</a></code>,
+<code><a href="Jmulti.html">Jmulti</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+     # Lansing woods data: 6 types of trees
+    data(lansing)
+
+    
+    Jh. &lt;- Jdot(lansing, "hickory")
+    plot(Jh.)
+    # diagnostic plot for independence between hickories and other trees
+    Jhh &lt;- Jest(lansing[lansing$marks == "hickory", ])
+    plot(Jhh, add=TRUE)
+
+    # synthetic example with two marks "a" and "b"
+    pp &lt;- runifpoispp(50)
+    pp &lt;- pp %mark% sample(c("a","b"), pp$n, replace=TRUE)
+    J &lt;- Jdot(pp, "a")
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

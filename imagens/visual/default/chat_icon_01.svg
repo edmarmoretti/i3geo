@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="12"
+   id="svg602"
+   version="1.0"
+   width="12"
+   x="0"
+   y="0"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   sodipodi:docname="chat_icon_01.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:docbase="C:\ms4w\Apache\htdocs\i3geo\imagens\visual\default"
+   inkscape:export-filename="C:\ms4w\Apache\htdocs\i3geo\imagens\visual\default\chat_icon_01.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <sodipodi:namedview
+     inkscape:window-height="579"
+     inkscape:window-width="758"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="12px"
+     height="12px"
+     inkscape:zoom="8.4643929"
+     inkscape:cx="10.741521"
+     inkscape:cy="2.557505"
+     inkscape:window-x="88"
+     inkscape:window-y="88"
+     inkscape:current-layer="svg602" />
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Chat Icon</dc:title>
+        <dc:description>contact: hermann.schwarting@knackich.de</dc:description>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>icon</rdf:li>
+            <rdf:li />
+            <rdf:li>application</rdf:li>
+            <rdf:li>icons</rdf:li>
+            <rdf:li>appicon</rdf:li>
+            <rdf:li>hash</rdf:li>
+            <rdf:li>callout</rdf:li>
+            <rdf:li>people</rdf:li>
+            <rdf:li>computer</rdf:li>
+            <rdf:li>smiley</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Hermann Schwarting</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Hermann Schwarting</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Hermann Schwarting</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs603">
+    <marker
+       id="ArrowEnd"
+       markerHeight="3"
+       markerUnits="strokeWidth"
+       markerWidth="4"
+       orient="auto"
+       refX="0"
+       refY="5"
+       viewBox="0 0 10 10">
+      <path
+         d="M 0,0 L 10,5 L 0,10 L 0,0 z "
+         id="path605"
+         style="font-size:12px" />
+    </marker>
+    <marker
+       id="ArrowStart"
+       markerHeight="3"
+       markerUnits="strokeWidth"
+       markerWidth="4"
+       orient="auto"
+       refX="10"
+       refY="5"
+       viewBox="0 0 10 10">
+      <path
+         d="M 10,0 L 0,5 L 10,10 L 10,0 z "
+         id="path607"
+         style="font-size:12px" />
+    </marker>
+  </defs>
+  <g
+     id="g3261"
+     transform="matrix(1.2646669,0,0,1.2066359,-0.9164559,-1.7348706)">
+    <path
+       d="M 4.1883062,4.6965572 C 4.286968,4.312537 4.7391679,3.5745223 4.3684521,3.5660064 C 3.9977362,3.5574172 3.1227735,3.5660064 3.1227735,3.5660064 C 3.1227735,3.5660064 1.654592,3.5660064 1.654592,2.5871257 C 1.654592,1.6083183 2.6333552,1.6083183 3.6121918,1.6083183 C 4.590955,1.6083183 6.0591364,1.6083183 6.0591364,2.5871257 C 6.0591364,3.5660064 5.0803733,3.5660064 5.0803733,3.5660064 C 5.0803733,3.5660064 4.4409068,4.3189973 4.1883062,4.6965572 z "
+       id="path621"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.14682145" />
+    <path
+       d="M 7.8096484,5.2988324 C 7.7486455,4.7776779 7.9326821,4.7419994 7.9326821,4.7419994 C 7.9326821,4.7419994 8.4707706,4.7419994 8.4707706,4.7419994 C 8.4707706,4.7419994 10.084963,4.7419994 10.084963,3.6658473 C 10.084963,2.5896951 8.4707706,2.5896951 7.9326821,2.5896951 C 7.3945943,2.5896951 6.3184907,2.5896951 6.3184907,3.6658473 C 6.3184907,4.7419994 7.3945943,4.7419994 7.3945943,4.7419994 C 7.3945943,4.7419994 7.5169672,4.8167333 7.8096484,5.2988324 z "
+       id="path622"
+       style="font-size:12px;fill:none;stroke:#000000;stroke-width:0.14682145" />
+    <g
+       id="g649"
+       transform="matrix(7.3409073e-2,0,0,7.3412386e-2,-47.180134,-26.673142)"
+       style="font-size:12px">
+      <path
+         d="M 698.901,454.821 C 694.948,459.611 688.184,461.482 682.156,458.972 C 674.774,455.899 671.277,447.412 674.35,440.029 C 677.424,432.647 685.911,429.15 693.293,432.223 C 700.676,435.297 704.173,443.784 701.099,451.166 L 687.725,445.598 L 698.901,454.821 z "
+         id="path650"
+         style="stroke:#000000" />
+      <path
+         d="M 686.276,460.086 L 681.447,515.138"
+         id="path651"
+         style="fill:none;stroke:#000000;stroke-width:3" />
+      <path
+         d="M 654.887,490.026 L 672.272,469.261 L 699.315,470.71 L 711.871,498.719 L 725.875,480.851 L 733.119,481.334"
+         id="path652"
+         style="fill:none;stroke:#000000;stroke-width:3" />
+    </g>
+    <g
+       id="g653"
+       transform="matrix(7.3409073e-2,0,0,7.3412386e-2,-47.180134,-26.673142)"
+       style="font-size:12px">
+      <path
+         d="M 750.953,458.469 C 747.84,453.243 748.257,446.395 752.461,441.553 C 757.704,435.514 766.861,434.869 772.899,440.111 C 778.937,445.354 779.583,454.511 774.34,460.549 C 769.098,466.587 759.941,467.233 753.903,461.99 L 763.401,451.051 L 750.953,458.469 z "
+         id="path654"
+         style="stroke:#000000" />
+      <path
+         d="M 764.025,465.398 L 777.064,515.138"
+         id="path655"
+         style="fill:none;stroke:#000000;stroke-width:3" />
+      <path
+         d="M 767.889,481.817 L 735.051,504.031 L 762.577,508.86"
+         id="path656"
+         style="fill:none;stroke:#000000;stroke-width:3" />
+    </g>
+  </g>
+</svg>

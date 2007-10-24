@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>MMA - Mapa interativo</title>
+
+<!-- Leitura dos programas javaScript e estilos. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
+<script type="text/javascript" src="../../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="i3geo.js"></script>
+
+</head>
+<body id=i3geo onmouseover="javascript:this.onmousemove=processevent1">
+<center>
+<table id='mst' width=100% cellspacing='0'>
+<!-- Inclui o menu suspenso. Se vc não quiser o menu, é só comentar -->
+<tr><td colspan=3 class=verdeescuro style="text-align:right;">
+	 <div id="menus" class="yuimenubar" >
+      <div class="bd" >
+       <ul class="first-of-type" style="text-align:center;">
+        <li class="yuimenubaritem">Ajuda?</li>
+        <li class="yuimenubaritem">An&aacute;lise</li>
+        <li class="yuimenubaritem">Propriedades</li>
+        <li class="yuimenubaritem">Arquivo</li>
+       </ul>
+      </div>
+     </div>             
+</td></tr>
+<tr>
+<td title="libera guias" class=tdclara id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+  <table width=100% cellspacing=0 cellpadding=0 >
+   <tr><td style="border-bottom:1px solid rgb(230,230,230)">
+    <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
+    <div class=verdeescuro style="top:0px;cursor:pointer">
+	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
+	 <div id=guia2 class=guia value="Mostra a lista de temas disponíveis no servidor de dados, possibilitando que novos temas sejam adicionados ao mapa.">&nbsp;Adiciona&nbsp;</div>
+	 <div id=guia4 class=guia value="Mostra a legnda do mapa atual." >&nbsp;Legenda&nbsp;</div>
+	 <div id=guia6 class=guia value="Atlas SRH">&nbsp;Atlas&nbsp;</div>
+    </div>
+   </td></tr>
+  </table>
+  <div id='guia1obj' ><div id=listaTemas ></div></div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../../../i3geo/imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+  <div id='guia6obj' style='display:none;text-align:left;overflow:auto'>
+	<H1 style=text-align:left ><b>Aqui vai o título do Atlas</b></H1>
+	<div style='overflow:auto;height:100px;text-align:left;border:solid 1px gray' >
+	<br><p style=text-align:left ><b>Selecione o mapa:</b></p>
+	<br>
+	<table>
+		<!---Inclua uma linha para cada tema que será mostrado no Atlas, alterando a função atlasMapa, por exemplo: atlasMapa('id_do_elemento_com_o_texto','lista_de_layer')--->
+	    <tr>
+			<td style=text-align:left;background-color:rgb(255,249,193) >
+				<input style=cursor:pointer type=radio name=atlasMapa onclick="atlasMapa('texto1','bahia')"/>
+			</td>
+			<td style=text-align:left;padding:3px;;background-color:rgb(255,249,193) >
+				Estado da Bahia
+			</td>
+		</tr>
+	    <tr>
+			<td style=text-align:left;background-color:rgb(255,249,193) >
+				<input style=cursor:pointer type=radio name=atlasMapa onclick="atlasMapa('texto2','tocantins')"/>
+			</td>
+			<td style=text-align:left;padding:3px;;background-color:rgb(255,249,193) >
+				Estado do Tocantins
+			</td>
+		</tr>
+	</table>
+	</div>
+	<div id=atlasTexto style=text-align:left;top:10px >
+	<!---aqui vai o texto que é mostrado quando o Atlas é aberto--->
+	Para incluir temas no atlas, vc precisa editar o arquivo atlas/mapa.map e adicionar as camadas desejadas.<br><br>
+	Depois, inclua cada nova camada na lista que será mostrada acima. Para isso, edite o arquivo atlas/mapa.htm.
+	</div>
+	<div id=texto1 style=text-align:left;top:40px;left:10px;display:none >
+		Você escolheu a camada que mostra o estado da Bahia.
+	</div>
+	<div id=texto2 style=text-align:left;top:40px;left:10px;display:none >
+		Você escolheu a camada que mostra o estado do Tocantins.
+	</div>
+</div>
+
+ </td>
+ <td class=verdeclaro style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;">
+   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs -->
+   <tr><td  class=verdeclaro id=contemImg >
+    <div id=corpoMapa ></div>
+   </td></tr>
+  </table>
+  <table width=100%  >
+   <tr><td class=verdeclaro >
+   <!-- Lugar onde ficarão os quadros de animação. Pode ser excluído -->
+    <td class=verdeclaro ><div id=lugarquadros ></div></td>
+    <!-- Escala numérica. Pode ser excluída. -->
+    <td class=verdeclaro ><div id=escala ></div></td>
+    <!-- Localizador de coordenadas -->
+    <td class=verdeclaro ><div id=localizarxy >Aguarde...</div></td>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+<!-- Mostra as coordenadas conforme o mouse é movimentado
+  <div class=pcenter10 id='longlat'>Longitude e latitude</div>
+-->  
+<!-- Escala gráfica. Pode ser excluída. 
+  <div id="escalaGrafica" style="text-align:left"></div>
+-->
+<tr><td colspan=3 >
+</td></tr>
+<!--- vc pode optar por colocar mensagens de ajuda em algum lugar 
+<tr><td colspan=3 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
+-->
+<tr><td colspan=3 ><p class=verdeescuro style="text-align:center;"> <a href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a></p></td></tr>
+</table>
+</center>
+<!-- barra de botoes que serão incluídos na janela móvel de navegação -->
+<div id=barraDeBotoes1 style='display:none'> 
+   <table title="zoom" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">zoom</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../../../i3geo/imagens/branco.gif" id='zoomli'/></td></tr></table>
+   <table title="desloca" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">desloca</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../../../i3geo/imagens/branco.gif" ID='pan'/></td></tr></table>
+   <table title="info" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">info</caption><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../../../i3geo/imagens/branco.gif" id='identifica'/></td></tr></table>
+   <table title="geral" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">geral</caption><tr><td style='background-color:rgb(250,250,250);'><img title="geral" alt="" src="../../../i3geo/imagens/branco.gif" ID='zoomtot'/></td></tr></table> 
+   <table title="lente" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">lente</caption><tr><td style='background-color:rgb(250,250,250);'><img title="lente" alt="" src="../../../i3geo/imagens/branco.gif" id='lentei'/></td></tr></table>
+   <table title="busca na wikipedia" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">wiki</caption><tr><td style='background-color:rgb(250,250,250);'><img title="busca na wikipedia" alt="" src="../../../i3geo/imagens/branco.gif" id='wiki'/></td></tr></table>
+   <table title="google" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">google</caption><tr><td style='background-color:rgb(250,250,250);'><img title="google" alt="" src="../../../i3geo/imagens/branco.gif" id='google'/></td></tr></table>
+</div>
+<div id=barraDeBotoes2 style='display:none'> 
+   <table title="reinicia" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">reinicia</caption><tr><td style='background-color:rgb(250,250,250);'><img title="reinicia" alt="" src="../../../i3geo/imagens/branco.gif" id='reinicia'/></td></tr></table>
+   <table title="referencia" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">ref.</caption><tr><td style='background-color:rgb(250,250,250);'><img title="referencia" alt="" src="../../../i3geo/imagens/branco.gif" id='referencia'/></td></tr></table>        
+   <table title="extensao" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">extens&atilde;o</caption><tr><td style='background-color:rgb(250,250,250);'><img  title="extensao" alt="" src="../../../i3geo/imagens/branco.gif" id="exten"/></td></tr></table>
+   <table title="mede" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">mede</caption><tr><td style='background-color:rgb(250,250,250);'><img title="mede" alt="" src="../../../i3geo/imagens/branco.gif" id='mede'/></td></tr></table> 
+   <table title="insere xy" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">insere xy</caption><tr><td style='background-color:rgb(250,250,250);'><img title="insere xy" alt="" src="../../../i3geo/imagens/branco.gif" id='inserexy'/></td></tr></table> 
+   <table title="insere grafico" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">gr&aacute;fico</caption><tr><td style='background-color:rgb(250,250,250);'><img title="insere grafico" alt="" src="../../../i3geo/imagens/branco.gif" id='inseregrafico'/></td></tr></table> 
+   <table title="selecao" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">sele&ccedil;&atilde;o</caption><tr><td style='background-color:rgb(250,250,250);'><img title="selecao" alt="" src="../../../i3geo/imagens/branco.gif" id='selecao'/></td></tr></table>
+   <table title="texto" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">texto</caption><tr><td style='background-color:rgb(250,250,250);'><img title="texto" alt="" src="../../../i3geo/imagens/branco.gif" id='textofid'/></td></tr></table>
+   <table title="imprimir" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">imprimir</caption><tr><td style='background-color:rgb(250,250,250);'><img title="imprimir" alt="" src="../../../i3geo/imagens/branco.gif" id='imprimir'/></td></tr></table>   
+   <table title="scielo" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">scielo</caption><tr><td style='background-color:rgb(250,250,250);'><img title="scielo" alt="" src="../../../i3geo/imagens/branco.gif" id='scielo'/></td></tr></table>
+   <table title="confluencias" style="width:100%;border-bottom:1px solid rgb(200,200,200);"><caption style="text-align:center">confl.</caption><tr><td style='background-color:rgb(250,250,250);'><img title="confluencias" alt="" src="../../../i3geo/imagens/branco.gif" id='confluence'/></td></tr></table>
+</div>
+<!-- Variáveis globais e inicialização do mapa-->
+<script type="text/javascript">
+//utilize a string http correta, se vc estiver usando https:
+g_locaplic = "http://"+window.location.host+"/i3geo";
+g_localimg = "http://"+window.location.host+"/i3geo/imagens";
+/*
+Variable: g_funcaoTip
+Função ajax que será executada para mostrar informações do tipo TIP.
+A função é executada pelo CPAINT e avaliada com "eval".
+*/
+g_funcaoTip = "verificaTipPac()";
+/*
+Variable: g_tempotip
+Tempo utilizado para verificar se o mouse está parado.
+Se o mouse estiver parado, a função de mostrar tip é ativada.
+*/
+g_tempotip = 1000;
+/*
+Variable: g_tipotip
+Define como o tip será mostrado.
+Pode ser definida como "simples" ou "completo"
+*/
+//g_tipotip = "completo";
+/*
+Variable: g_tipoimagem
+Indica o tipo de filtro de imagem que está ativo. O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+*/
+//g_tipoimagem = "nenhum";
+/*
+Variable: destacaTamanho
+Valor em pixel do retângulo de destaque de temas.
+*/
+//destacaTamanho = 75;
+/*
+Variable: g_entorno
+Indica se o preenchimento do entorno do mapa está ou não ativo.
+Utilizado para criar o efeito de auto-preenchimento do mapa quando é executada a função pan.
+É alterada em uma opção específica no menu suspenso.
+*/
+//g_entorno = "nao";
+/*
+Variable: g_guiaativa
+Indica qual guia do mapa iniciará ativa.
+*/
+//g_guiaativa = "guia1";
+/*
+Variable: g_diminuixM
+Diminui a largura do mapa em pixels no caso do navegador ser o IE.
+*/
+//g_diminuixM = 20;
+/*
+Variable: g_diminuixN
+Diminui a largura do mapa em pixels no caso do navegador ser o FF.
+*/
+//g_diminuixN = 20;
+/*
+Variable: g_diminuiyM
+Diminui a altura do mapa em pixels no caso do navegador ser o IE.
+*/
+//g_diminuiyM = 150;
+/*
+Variable: g_diminuiyN
+Diminui a altura do mapa em pixels no caso do navegador ser o FF.
+*/
+//g_diminuiyN = 120;
+/*
+Variable: g_janelazoom
+Define se as barras de ferramentas serão aberta no mapa.
+*/
+g_barraFerramentas1 = "sim"
+g_barraFerramentas2 = "sim"
+/*
+Variable: g_mapaRefDisplay
+Indica a visibilidade do mapa de referência na inicialização
+Pode ser "block" ou "none".
+*/
+g_mapaRefDisplay = "block"
+/*
+Variable: g_docaguias
+
+Variável que define se o mapa deve iniciar com as guias em janela ou não.
+
+*/
+//g_docaguias = "sim";
+/*
+Variable: g_downloadbase
+
+Variável que define se na guia 2 será mostrada a opção de download.
+
+*/
+//g_downloadbase = "nao";
+/*
+Variable: g_conectargeorss
+
+Variável que define se na guia 2 será mostrada a opção de conexão com GeoRSS.
+
+*/
+//g_conectargeorss = "nao";
+/*
+Variable: g_uploadlocal
+
+Variável que define se na guia 2 será mostrada a opção de upload.
+
+*/
+//g_uploadlocal = "nao";
+/*
+Variable: g_conectarwms
+
+Variável que define se na guia 2 será mostrada a opção de conexão com WMS.
+
+*/
+//g_conectarwms = "nao";
+/*
+Variable: g_janelaMen
+
+Variável que define se a janela de mensagens começará aberta.
+
+*/
+g_janelaMen = "nao";
+g_mostraRosa = "nao"
+g_guiaativa = "guia6";
+//pac
+atlasInicia()
+
+</script>
+
+</body>
+</html>

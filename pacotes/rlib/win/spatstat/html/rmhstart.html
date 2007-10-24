@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Determine Initial State for Metropolis-Hastings Simulation.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rmhstart {spatstat}"><tr><td>rmhstart {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Determine Initial State for Metropolis-Hastings Simulation.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Builds a description of the initial state
+for the Metropolis-Hastings
+algorithm.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+   rmhstart(start, ...)
+   ## Default S3 method:
+   rmhstart(start=NULL, ..., n.start=NULL, x.start=NULL, iseed)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>start</code></td>
+<td>
+An existing description of the initial state in some
+format. Incompatible with the arguments listed below.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+There should be no other arguments.</td></tr>
+<tr valign="top"><td><code>n.start</code></td>
+<td>
+Number of initial points (to be randomly generated).
+Incompatible with <code>x.start</code>.
+</td></tr>
+<tr valign="top"><td><code>x.start</code></td>
+<td>
+Initial point pattern configuration.
+Incompatible with <code>n.start</code>.
+</td></tr>
+<tr valign="top"><td><code>iseed</code></td>
+<td>
+Vector of 3 integers determining the initial state of
+the random number generator. This argument should not be
+specified, in normal use.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Simulated realisations of many point process models
+can be generated using the Metropolis-Hastings algorithm
+implemented in <code><a href="rmh.html">rmh</a></code>.
+</p>
+<p>
+This function <code>rmhstart</code>
+creates a full description of the initial state of the
+Metropolis-Hastings algorithm,
+<EM>including possibly the initial state of the random number generator</EM>,
+for use in a subsequent call to <code><a href="rmh.html">rmh</a></code>. It also
+checks that the initial state is valid.
+</p>
+<p>
+The initial state should be specified <B>either</B> by the
+first argument <code>start</code> <B>or</B> by the other arguments
+<code>n.start</code>, <code>x.start</code> etc.
+</p>
+<p>
+If <code>start</code> is a list, then it should have components named 
+<code>n.start</code> or <code>x.start</code> and optionally <code>iseed</code>,
+with the same interpretation as described below.
+</p>
+<p>
+The arguments are:
+<dl>
+<dt>n.start</dt><dd>The number of ``initial'' points to be randomly
+(uniformly) generated in the simulation window <code>w</code>.
+Incompatible with <code>x.start</code>.
+</p>
+<p>
+For a multitype point process, <code>n.start</code> may be a vector
+(of length equal to the number of types) giving the number
+of points of each type to be generated.  
+</p>
+<p>
+If expansion of the simulation window is selected (see the argument
+<code>expand</code> to <code><a href="rmhcontrol.html">rmhcontrol</a></code>),
+then <code>n.start</code> will be multiplied by the expansion factor
+(ratio of the areas of the expanded window and original window).
+</p>
+<p>
+For faster convergence of the Metropolis-Hastings algorithm,
+the value of <code>n.start</code> should be roughly equal to
+(an educated guess at) the expected number of points which
+will be generated inside the window.
+</dd>
+<dt>x.start</dt><dd>Initial point pattern configuration. Incompatible with
+<code>n.start</code>.
+</p>
+<p>
+<code>x.start</code> may be a point pattern (an object
+of class <code>ppp</code>), or an object which can be coerced
+to this class by <code><a href="as.ppp.html">as.ppp</a></code>, or a dataset containing
+vectors <code>x</code> and <code>y</code>.  
+</p>
+<p>
+If <code>x.start</code> is specified, then expansion of the
+simulation window (the argument <code>expand</code>
+of <code><a href="rmhcontrol.html">rmhcontrol</a></code>) is not permitted.
+</dd>
+<dt>iseed</dt><dd>Seed
+for the random number generator. A vector of three integers.
+</p>
+<p>
+If given, this seed will fix the initial state
+of the random number generator in any subsequent call
+to <code><a href="rmh.html">rmh</a></code>.
+</p>
+<p>
+This should only be done 
+if it is desired to repeat the algorithm with exactly
+the same sequence of random numbers!
+</dd>
+</dl>
+<p>
+The parameters <code>n.start</code> and <code>x.start</code> are
+<EM>incompatible</EM>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"rmhstart"</code>, which is essentially
+a list of parameters describing the initial point pattern
+and (optionally) the initial state of the random number generator.
+<br>
+There is a <code>print</code> method for this class, which prints
+a sensible description of the initial state.</p>
+
+<h3>Warnings</h3>
+
+<p>
+If <code>iseed</code> is specified, this will fix the initial state
+of the random number generator in any subsequent call
+to <code><a href="rmh.html">rmh</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="rmh.html">rmh</a></code>,
+<code><a href="rmhcontrol.html">rmhcontrol</a></code>,
+<code><a href="rmhmodel.html">rmhmodel</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   # 30 random points
+   a &lt;- rmhstart(n.start=30)
+
+   # a particular point pattern
+   data(cells)
+   b &lt;- rmhstart(x.start=cells)
+
+   # set the seed
+   d &lt;- rmhstart(n.start=30, iseed=c(42, 4, 2))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

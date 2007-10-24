@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Pairwise distances between two different sets of points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for crossdist.default {spatstat}"><tr><td>crossdist.default {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Pairwise distances between two different sets of points</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Computes the distances between each pair of points
+taken from two different sets of points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## Default S3 method:
+  crossdist(X, Y, x2, y2, ..., period=NULL, method="C")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X,Y</code></td>
+<td>
+Numeric vectors of equal length specifying the coordinates of
+the first set of points.
+</td></tr>
+<tr valign="top"><td><code>x2,y2</code></td>
+<td>
+Numeric vectors of equal length specifying the coordinates of
+the second set of points.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.
+</td></tr>
+<tr valign="top"><td><code>period</code></td>
+<td>
+Optional. Dimensions for periodic edge correction.
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+String specifying which method of calculation to use.
+Values are <code>"C"</code> and <code>"interpreted"</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Given two sets of points,
+this function computes the Euclidean distance from each point
+in the first set to each point in the second set,
+and returns a matrix containing these distances.
+</p>
+<p>
+This is a method for the generic function <code><a href="crossdist.html">crossdist</a></code>.
+</p>
+<p>
+This function expects <code>X</code> and <code>Y</code> to be numeric vectors
+of equal length specifying the coordinates of the first set of points.
+The arguments <code>x2</code>,<code>y2</code> specify the coordinates of the
+second set of points.
+</p>
+<p>
+Alternatively if <code>period</code> is given,
+then the distances will be computed in the `periodic'
+sense (also known as `torus' distance).
+The points will be treated as if they are in a rectangle
+of width <code>period[1]</code> and height <code>period[2]</code>.
+Opposite edges of the rectangle are regarded as equivalent.
+</p>
+<p>
+The argument <code>method</code> is not normally used. It is
+retained only for checking the validity of the software.
+If <code>method = "interpreted"</code> then the distances are
+computed using interpreted R code only. If <code>method="C"</code>
+(the default) then C code is used. 
+The C code is faster by a factor of 4.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A matrix whose <code>[i,j]</code> entry is the distance
+from the <code>i</code>-th point in the first set of points
+to the <code>j</code>-th point in the second set of points.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Pavel Grabarnik
+<a href="mailto:pavel.grabar@issp.serpukhov.su">pavel.grabar@issp.serpukhov.su</a>
+and
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="crossdist.html">crossdist</a></code>,
+<code><a href="crossdist.ppp.html">crossdist.ppp</a></code>,
+<code><a href="crossdist.psp.html">crossdist.psp</a></code>,
+<code><a href="pairdist.html">pairdist</a></code>,
+<code><a href="nndist.html">nndist</a></code>,
+<code><a href="Gest.html">Gest</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   d &lt;- crossdist(runif(7), runif(7), runif(12), runif(12))
+   d &lt;- crossdist(runif(7), runif(7), runif(12), runif(12), period=c(1,1))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

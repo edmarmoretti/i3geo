@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Creator: CorelDRAW -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="10"
+   space="preserve"
+   style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality"
+   viewBox="-2794 0 3818 1880"
+   width="20"
+   x="-251.451"
+   y="479.15729"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   sodipodi:docname="world_map_saint_.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:docbase="C:\ms4w\Apache\htdocs\i3geo\imagens"
+   version="1.0"
+   inkscape:export-filename="C:\ms4w\Apache\htdocs\i3geo\imagens\world_map_saint_.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <sodipodi:namedview
+     inkscape:window-height="579"
+     inkscape:window-width="758"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     width="20px"
+     height="10px"
+     inkscape:zoom="15.594017"
+     inkscape:cx="9.925682"
+     inkscape:cy="4.0720747"
+     inkscape:window-x="154"
+     inkscape:window-y="154"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>world map</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>map</rdf:li>
+            <rdf:li>mercator</rdf:li>
+            <rdf:li>world</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org/">
+            <dc:title>Open Clip Art Library</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>saint</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>saint</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6">
+    <style
+       type="text/css"
+       id="style8">
+    .fil0 {fill:#1F1A17}
+   </style>
+  </defs>
+  <g
+     id="Layer 1"
+     transform="matrix(1.0028833,0,0,0.9988003,8.055748,13.137056)">
+    <g
+       id="g11" />
+    <path
+       class="fil0"
+       d="M 814,679 L 738,711 L 719,688 L 788,656 L 814,679 z M 710,738 L 651,834 L 556,883 L 529,851 L 624,798 L 656,705 L 710,738 z M 696,942 L 665,965 L 637,878 L 656,883 L 696,942 z M 747,1320 L 556,1280 L 550,1212 L 729,1257 L 747,1320 z M 1019,1690 L 952,1772 L 920,1768 L 911,1721 L 994,1631 L 960,1580 L 979,1552 L 1011,1599 L 1019,1690 z M 505,1202 L 469,1265 L 438,1261 L 469,1189 L 505,1202 z M 438,1189 L 400,1261 L 332,1243 L 337,1189 L 396,1130 L 438,1189 z M 1024,487 L 897,501 L 901,546 L 825,646 L 810,555 L 852,501 L 706,515 L 620,560 L 609,597 L 670,583 L 674,669 L 633,673 L 620,715 L 537,770 L 550,806 L 497,842 L 478,779 L 442,798 L 451,925 L 296,1015 L 337,1075 L 269,1115 L 241,1062 L 227,1066 L 241,1125 L 296,1161 L 277,1180 L 241,1170 L 250,1198 L 282,1202 L 300,1257 L 383,1288 L 387,1316 L 292,1299 L 159,1153 L 214,1157 L 136,988 L 136,942 L 114,942 L 104,984 L 28,1043 L 28,1098 L -32,1115 L -69,1011 L -95,1003 L -91,942 L -310,902 L -274,961 L -237,948 L -196,988 L -237,1039 L -333,1075 L -433,883 L -460,883 L -464,920 L -397,1056 L -346,1094 L -268,1088 L -409,1293 L -392,1311 L -386,1379 L -428,1411 L -433,1462 L -542,1594 L -629,1589 L -706,1379 L -682,1347 L -682,1293 L -747,1216 L -720,1198 L -783,1157 L -910,1153 L -984,1088 L -988,948 L -824,806 L -733,798 L -710,824 L -715,847 L -642,870 L -606,838 L -578,861 L -479,866 L -460,847 L -460,792 L -501,847 L -555,774 L -546,847 L -597,810 L -606,756 L -667,685 L -678,697 L -629,765 L -661,810 L -674,756 L -729,715 L -760,743 L -779,733 L -883,830 L -920,728 L -847,733 L -834,701 L -861,673 L -815,637 L -788,633 L -737,587 L -751,551 L -724,538 L -706,565 L -614,560 L -610,534 L -510,496 L -528,474 L -591,496 L -610,456 L -564,420 L -591,392 L -650,469 L -629,487 L -633,534 L -692,551 L -706,515 L -769,523 L -765,469 L -661,329 L -546,301 L -374,341 L -405,388 L -473,382 L -428,428 L -296,341 L -209,341 L -268,274 L -200,204 L -105,164 L -91,196 L -181,228 L -232,282 L -128,346 L -145,314 L -82,259 L 32,287 L 49,251 L 255,173 L 396,204 L 292,264 L 615,297 L 670,242 L 696,291 L 852,305 L 897,329 L 1024,314 L 1024,487 z M 797,1508 L 719,1653 L 656,1648 L 533,1557 L 529,1580 L 378,1611 L 396,1548 L 364,1535 L 364,1457 L 561,1330 L 651,1389 L 656,1339 L 683,1335 L 797,1508 z M -807,587 L -811,625 L -875,625 L -855,587 L -897,542 L -866,510 L -847,555 L -807,587 z M -934,415 L -1016,474 L -1065,401 L -974,378 L -934,415 z M -676,809 L -704,799 L -687,772 L -676,809 z M -952,82 L -1006,128 L -1016,242 L -1098,369 L -1229,409 L -1261,487 L -1320,483 L -1388,378 L -1415,237 L -1470,196 L -1530,215 L -1561,173 L -1462,50 L -1052,0 L -952,82 z M -887,602 L -915,633 L -946,605 L -920,560 L -887,602 z M -282,1358 L -323,1489 L -382,1448 L -365,1389 L -306,1343 L -282,1358 z M -1576,956 L -1612,938 L -1612,906 L -1576,956 z M -1443,1043 L -1466,1052 L -1580,1011 L -1572,988 L -1443,1043 z M -1603,975 L -1612,1003 L -1682,988 L -1675,954 L -1603,975 z M -1175,1293 L -1211,1335 L -1221,1417 L -1498,1713 C -1488,1730 -1485,1750 -1489,1772 L -1525,1808 L -1493,1848 L -1521,1880 L -1593,1799 L -1593,1667 L -1548,1407 L -1608,1379 L -1671,1221 L -1644,1180 L -1644,1134 L -1707,1134 L -1735,1079 L -1771,1083 L -1899,1011 L -1940,961 L -1990,961 L -2127,779 L -2121,688 L -2168,620 L -2199,629 L -2222,583 L -2195,587 L -2263,515 L -2353,501 L -2573,610 L -2495,534 L -2550,492 L -2573,337 L -2482,291 L -2045,337 L -2127,278 L -2108,200 L -1671,33 L -1502,41 L -1652,210 L -1453,373 L -1516,441 L -1635,420 L -1620,346 L -1662,346 L -1680,397 L -1667,441 L -1757,433 L -1804,496 L -1771,523 L -1707,542 L -1648,610 L -1626,542 L -1639,528 L -1639,460 L -1498,483 L -1384,620 L -1544,711 L -1544,760 L -1572,756 L -1599,783 L -1593,819 L -1658,874 L -1639,934 L -1671,934 L -1698,893 L -1798,893 L -1836,961 L -1798,997 L -1781,997 L -1745,975 L -1721,988 L -1730,1039 L -1694,1043 L -1685,1098 L -1620,1098 L -1557,1071 L -1512,1088 L -1427,1091 L -1421,1147 L -1352,1147 L -1344,1212 L -1297,1212 L -1175,1293 z M -2586,424 L -2723,420 L -2755,433 L -2719,469 L -2794,487 L -2794,314 L -2609,388 L -2586,424 z M -2395,1003 L -2413,1035 L -2476,993 L -2518,1015 L -2618,956 L -2609,929 L -2495,975 L -2451,952 L -2395,1003 z M -2650,897 L -2700,929 L -2727,870 L -2650,897 z M -2136,1485 L -2163,1512 L -2204,1485 L -2176,1457 L -2136,1485 z M -2208,1444 L -2240,1462 L -2282,1434 L -2250,1394 L -2208,1444 z M -158,746 L -163,709 L -186,712 L -183,749 L -158,746 z M -240,805 L -270,746 L -245,712 L -258,698 L -284,718 L -278,815 L -240,805 z M -381,744 L -414,691 L -445,685 L -443,709 L -470,712 L -493,682 L -534,733 L -526,765 L -490,737 L -462,737 L -381,744 z "
+       id="43381528"
+       style="fill:#1f1a17" />
+  </g>
+</svg>

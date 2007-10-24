@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Summarizing a Quadrature Scheme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for summary.quad {spatstat}"><tr><td>summary.quad {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Summarizing a Quadrature Scheme</h2>
+
+
+<h3>Description</h3>
+
+<p>
+<code>summary</code> method for class <code>"quad"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'quad':
+  summary(object, ..., checkdup=FALSE)
+  ## S3 method for class 'quad':
+  print.summary(x, ..., dp=3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+A quadrature scheme.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+<tr valign="top"><td><code>checkdup</code></td>
+<td>
+Logical value indicating whether to test for duplicated points.
+</td></tr>
+<tr valign="top"><td><code>dp</code></td>
+<td>
+Number of significant digits to print.</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+Object of class <code>"summary.quad"</code> returned by
+<code>summary.quad</code>.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is a method for the generic <code><a href="../../Zelig/html/summary.zelig.html">summary</a></code>
+for the class <code>"quad"</code>. An object of class <code>"quad"</code>
+describes a quadrature scheme, used to fit a point process model.
+See <code><a href="quad.object.html">quad.object</a></code>) for details of this class. 
+</p>
+<p>
+<code>summary.quad</code> extracts information about the
+quadrature scheme,
+and <code>print.summary.quad</code> prints this information in a
+comprehensible format.
+</p>
+<p>
+In normal usage, <code>print.summary.quad</code> is invoked implicitly
+when the user calls <code>summary.quad</code> without assigning its value
+to anything. See the examples.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+<code>summary.quad</code> returns an object of class <code>"summary.quad"</code>,
+while <code>print.summary.quad</code> returns <code>NULL</code>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # make a quadrature scheme
+  Q &lt;- quadscheme(rpoispp(42))
+  # summarize it
+  summary(Q)
+  # save the summary
+  s &lt;- summary(Q)
+  # print it
+  print(s)
+  s
+  # extract total quadrature weight
+  s$w$all$sum
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

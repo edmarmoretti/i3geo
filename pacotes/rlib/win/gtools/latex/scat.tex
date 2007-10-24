@@ -1,0 +1,36 @@
+\HeaderA{scat}{Display debugging text}{scat}
+\keyword{print}{scat}
+\begin{Description}\relax
+If \code{getOption('DEBUG')==TRUE}, write text to STDOUT and flush so
+that the text is immediatly displayed. Otherwise, do nothing.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+scat(...)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{...}] Arguments passed to \code{cat}
+\end{ldescription}
+\end{Arguments}
+\begin{Value}
+NULL (invisibly)
+\end{Value}
+\begin{Author}\relax
+Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\end{Author}
+\begin{SeeAlso}\relax
+\code{\LinkA{cat}{cat}}
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+options(DEBUG=NULL) # makee sure DEBUG isn't set
+scat("Not displayed")
+
+options(DEBUG=TRUE)
+scat("This will be displayed immediately (even in R BATCH output \n")
+scat("files), provided options()$DEBUG is TRUE.")
+\end{ExampleCode}
+\end{Examples}
+

@@ -1,0 +1,263 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+</head>
+<body>
+<div id=fundo >
+	<div class="guias" id="guias">
+		<div class=guia id=guia1 >&nbsp;T&iacute;tulo&nbsp;</div>
+		<div class=guia id=guia2 >&nbsp;Legenda&nbsp;</div>
+		<div class=guia id=guia3 >&nbsp;Escala num.&nbsp;</div>
+		<div class=guia id=guia5 >&nbsp;Mapa&nbsp;</div>
+		<div class=guia id=guia6 >&nbsp;Fecha janela&nbsp;</div>
+	</div>
+	<span id=geral >
+		<div id=guia1obj>
+			<div style="text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.texto()" /></td>
+					<td><input type=text class=digitar size=25 value="digite o titulo" id=titulo /></td>
+				</tr>
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Tamanho</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.tamanho()" /></td></td>
+					<td><input type=text class=digitar size=10 value="14" id=tituloTamanho /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=tituloCor /></td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=tituloFundo /></td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=tituloBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=tituloBordacor /></td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objtitulo.bordaestilo()" /></td></td>
+					<td><select id=tituloBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div id=guia2obj style="display:none">
+			<div style="text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="20" id=legendaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=legendaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=legendaCor /></td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=legendaFundo /></td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=legendaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=legendaBordacor /></td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objlegenda.bordaestilo()" /></td></td>
+					<td><select id=legendaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div id=guia3obj>
+			<div style="text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="40" id=escalanumericaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=escalanumericaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Tamanho</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.tamanho()" /></td></td>
+					<td><input type=text class=digitar size=10 value="14" id=escalanumericaTamanho /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do texto</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.cor()" /></td></td>
+					<td><input type=text class=digitar size=15 value="0,0,0" id=escalanumericaCor /></td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=escalanumericaFundo /></td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=escalanumericaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=escalanumericaBordacor /></td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objescalanumerica.bordaestilo()" /></td></td>
+					<td><select id=escalanumericaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div id=guia5obj>
+			<div style="text-align:left;position:relative;top:5px;left:0px">
+			<table class=lista width="250px">
+				<tr>
+					<td>Topo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.topo()" /></td></td>
+					<td><input type=text class=digitar size=10 value="20" id=mapaTopo /></td>
+				</tr>
+				<tr>
+					<td>Esquerda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.esquerda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="150" id=mapaEsquerda /></td>
+				</tr>
+				<tr>
+					<td>Largura</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.largura()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaLargura /></td>
+				</tr>
+				<tr>
+					<td>Cor do fundo</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.fundo()" /></td></td>
+					<td><input type=text class=digitar size=15 value="255,255,255" id=mapaFundo /></td>
+				</tr>
+				<tr>
+					<td>Margem</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.padding()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaPadding /></td>
+				</tr>				
+				<tr>
+					<td>Tamanho da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.borda()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0" id=mapaBorda /></td>
+				</tr>
+				<tr>
+					<td>Cor da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.bordacor()" /></td></td>
+					<td><input type=text class=digitar size=10 value="0,0,0" id=mapaBordacor /></td>
+				</tr>
+				<tr>
+					<td>Estilo da borda</td>
+					<td><img src="../../imagens/tic.png" style="cursor:pointer" onclick="javascript:objmapa.bordaestilo()" /></td></td>
+					<td><select id=mapaBordaestilo >
+					<option value=none >nenhuma</option>
+					<option value=solid >s&oacute;lida</option>
+					<option value=double >dupla</option>
+					<option value=inset >interna</option>
+					<option value=outset >externa</option>
+					</select></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div id=guia6obj>
+			<div style="text-align:left;position:relative;top:5px;left:0px">
+			</div>
+		</div>		
+	</span>
+</div>
+<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script language="JavaScript" type="text/javascript" src="propriedades.js"></script>
+</body>
+</html>

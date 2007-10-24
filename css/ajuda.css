@@ -1,0 +1,23 @@
+p 
+{
+	COLOR: #2F4632;
+	text-align: justify;
+	font-size: 13px;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+h1
+{
+	text-decoration:bold;
+	COLOR: #2F4632; 
+	text-align: justify; 
+	font-size: 13px; 
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+body
+{
+	background-color:white;
+}
+.centro
+{
+		text-align: center;
+}

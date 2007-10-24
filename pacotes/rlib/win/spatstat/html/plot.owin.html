@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Plot a Spatial Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for plot.owin {spatstat}"><tr><td>plot.owin {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Plot a Spatial Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Plot a two-dimensional window of observation for a spatial point pattern
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ ## S3 method for class 'owin':
+ plot(x, main, add=FALSE, ..., box, edge=0.04)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+The window to be plotted.
+An object of class <code><a href="owin.html">owin</a></code>,
+or data which can be converted into 
+this format by <code><a href="as.owin.html">as.owin</a>()</code>.
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+text to be displayed as a title above the plot.
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+logical flag: if <code>TRUE</code>, draw the window in 
+the current plot; if <code>FALSE</code>, generate a new plot.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+extra arguments passed to the generic <code><a href="../../Zelig/html/plot.zelig.html">plot</a></code> function.
+</td></tr>
+<tr valign="top"><td><code>box</code></td>
+<td>
+logical flag; if <code>TRUE</code>, plot the enclosing rectangular box
+</td></tr>
+<tr valign="top"><td><code>edge</code></td>
+<td>
+nonnegative number; the plotting region will have coordinate limits
+that are <code>1 + edge</code>
+times as large as the limits of the rectangular box
+that encloses the pattern.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is the <code>plot</code> method for the class <code><a href="owin.html">owin</a></code>.
+The action is to plot the boundary of the window on the current plot device,
+using equal scales on the <code>x</code> and <code>y</code> axes.
+</p>
+<p>
+If the window <code>x</code> is of type <code>"rectangle"</code> or <code>"polygonal"</code>,
+the boundary of the window is plotted as a polygon or series of polygons.
+If <code>x</code> is of type <code>"mask"</code> 
+the discrete raster approximation of the window is displayed
+as a binary image (white inside the window, black outside).
+</p>
+<p>
+Graphical parameters controlling the display (e.g. setting the
+colours) may be passed directly via the <code>...</code> arguments,
+or indirectly reset using 
+<code><a href="spatstat.options.html">spatstat.options</a></code>.
+</p>
+<p>
+When <code>x</code> is of type <code>"rectangle"</code> or <code>"polygonal"</code>,
+it is plotted by the <font face="Courier New,Courier" color="#666666"><b>R</b></font> function <code><a href="../../graphics/html/polygon.html">polygon</a></code>. To control the
+appearance (colour, fill density, line density etc) of the polygon
+plot, determine the required argument of <code><a href="../../graphics/html/polygon.html">polygon</a></code>
+and pass it through <code>...</code>
+</p>
+<p>
+When <code>x</code> is of type <code>"mask"</code>, it is plotted by
+<code><a href="../../graphics/html/image.html">image.default</a></code>. The appearance of the image plot
+can be controlled by passing arguments to <code><a href="../../graphics/html/image.html">image.default</a></code>
+through <code>...</code>. The default appearance can also be changed
+by setting the parameter <code>par.binary</code> of <code><a href="spatstat.options.html">spatstat.options</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+none.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="plot.ppp.html">plot.ppp</a></code>,
+<code><a href="../../graphics/html/polygon.html">polygon</a></code>,
+<code><a href="../../graphics/html/image.html">image.default</a></code>,
+<code><a href="spatstat.options.html">spatstat.options</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  # rectangular window
+   data(nztrees)
+   plot(nztrees$window)
+   abline(v=148, lty=2)
+
+  # polygonal window
+  plot(c(0,1),c(0,1),type="n")
+  bdry &lt;- locator()
+  # click the vertices of a polygon (anticlockwise)
+  w &lt;- owin(c(0,1), c(0,1), poly=bdry)
+  plot(w)
+
+  # binary mask
+  we &lt;- erode.owin(w, 0.05, FALSE)
+  plot(we)
+  spatstat.options(par.binary=list(col=grey(c(0.5,1))))
+  plot(we)
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

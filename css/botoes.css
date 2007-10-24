@@ -1,0 +1,82 @@
+#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
+{cursor:pointer;border: 0px solid rgb(50,50,50);border-bottom:1px solid rgb(50,50,50);border-left:1px solid rgb(50,50,50);width:22;height:22;z-index:1000;position:relative;}
+#box1
+{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid #ff0000;}
+#boxg
+{position: absolute;visibility: visible;width: 20px;height: 20px;border: 2px solid red;display:none;}
+#obj
+{position:absolute;z-index:500;height:0;width: 0}
+#lente
+{z-index:101;top:10px;position: absolute;}
+#boxlente
+{display:none;z-index: 200;border: 2px solid #ff0000;top:10px;position:absolute;width: 80px;height: 80px;}
+#aguarde
+{top:0px;position:absolute;visibility: hidden;}
+#mensagem
+{background-color:white;position:absolute;visibility:hidden}
+#aplicari#funcoesrapidasi
+{display:none;position:absolute;cursor:pointer;z-index:1000;}
+#img,#imgL,#imgO,#imgN,#imgS
+{border: 0px solid black;cursor:crosshair;top:0px;left:0px;}
+#img_d
+{border: 0px solid black;cursor:crosshair;}
+#carrega
+{background-image:URL('../imagens/carrega.gif');}
+#salva
+{background-image:URL('../imagens/salva.gif');}
+#imprimir
+{background-image:URL('../imagens/imprimir.gif');}
+#tamanho
+{background-image:URL('../imagens/amp.gif');}
+#cruza
+{background-image:URL('../imagens/cruzapt.png');}
+#perfil
+{background-image:URL('../imagens/perfil.gif');}
+#mede
+{background-image:URL('../imagens/mede.gif');}
+#textofid
+{background-image:URL('../imagens/textofid.gif');}
+#inserexy
+{background-image:URL('../imagens/inserexy.gif');}
+#selecao
+{background-image:URL('../imagens/selecao.gif');}
+#exten
+{background-image:URL('../imagens/exten.png');}
+#reinicia
+{background-image:URL('../imagens/reinicia.gif');}
+#lentei
+{background-image:URL('../imagens/lentei.gif');}
+#identifica
+{background-image:URL('../imagens/identifica.gif');}
+#zoomoauto
+{background-image:URL('../imagens/afasta.png');}
+#zoomiauto
+{background-image:URL('../imagens/aproxima.png');}
+#zoomlo
+{background-image:URL('../imagens/zoomlo.gif');}
+#zoomli
+{background-image:URL('../imagens/zoomli.png');}
+#zoomtot
+{background-image:URL('../imagens/icolimites.png');}
+#pan
+{background-image:URL('../imagens/pan.png');}
+#google
+{background-image:URL('../imagens/google.gif');}
+#referencia
+{background-image:URL('../imagens/referencia.png');}
+#pegaimagens
+{background-image:URL('../imagens/legend.gif');}
+#realca
+{background-image:URL('../imagens/realca.gif');}
+#inseregrafico
+{background-image:URL('../imagens/inseregrafico.png');}
+#wiki
+{background-image:URL('../imagens/wiki.png');}
+#scielo
+{background-image:URL('../imagens/scielo2.gif');}
+#confluence
+{background-image:URL('../imagens/confluence.gif');}
+#v3d
+{background-image:URL('../imagens/3d.png');}
+#encolheFerramentas
+{background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

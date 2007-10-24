@@ -1,0 +1,64 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body>
+<div style="cursor:pointer;position:relative;top:1px;left:0px;text-align:left">
+	<table class=lista3 width="90%"> 
+		<tr>  
+			<td>Largura:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=4 class=digitar type='text' id=w value='' /></td>
+		</tr>
+		<tr>
+			<td>Altura:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=4 class=digitar type='text' id=h value='' /></td>
+		</tr>
+		<tr>
+			<td>Unidade:</td>
+			<td>
+				<select onchange=testaBarra() id=unidade >
+					<option value=3 select >Metros</option>
+					<option value=4 >Km</option>
+				</select>
+			<td>
+		</tr>
+		<tr>
+			<td>Estilo:</td>
+			<td>
+				<select onchange=testaBarra() id=estilo >
+					<option value=0 select >Bloco</option>
+					<option value=1 >Linear</option>
+					<option value=2 >Sem barra</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Intervalos:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=4 class=digitar type='text' id=intervalos value='' /></td>
+		</tr>
+		<tr>
+			<td>Cor:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=12 class=digitar type='text' id=cor value='' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('cor')" /></td>
+		</tr>
+		<tr>
+			<td>Fundo:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=12 class=digitar type='text' id=bcor value='' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('bcor')" /></td>
+		</tr>
+		<tr>
+			<td>Contorno:</td>
+			<td><input onchange=testaBarra() style="cursor:text" size=10 class=digitar type='text' id=ocor value='' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('ocor')" /></td>
+		</tr>
+	</table>
+	<div style=top:10px;left:0px;text-align:left; onclick="executa()">
+	<input id=botao1 size=20  type=button value="Aplicar" />
+	</div>
+	
+	<div id=teste style=left:0px;top:10px; >
+	</div>
+</div>
+</body>
+<script src="../i3geo_tudo_compacto.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

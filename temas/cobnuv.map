@@ -1,0 +1,26 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+      NAME "cobnuv"
+      TYPE RASTER
+      STATUS off
+      CONNECTION "http://maps.customweather.com/image"
+      CONNECTIONTYPE WMS
+			
+      METADATA
+			  "wms_srs"             "EPSG:4326"
+        "wms_name"            "global_ir_satellite_10km"
+				"wms_onlineresource"  "http://maps.customweather.com/image"
+        "wms_server_version"  "1.1.0"
+        #"wms_formatlist"      "image/gif,image/PNG"
+        "wms_format"          "image/png"
+		    DADOS ""
+		    TPSHP ""
+  	    TEMA "Cobertura de nuvens"
+  	    CLASSE "NAO"
+        TEXTO ""
+				TABELA "NAO"
+				ATENCAO "Servidor externo (WS)"
+      END
+END
+END

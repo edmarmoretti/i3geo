@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Function Arrays for Spatial Patterns</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for fasp.object {spatstat}"><tr><td>fasp.object {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Function Arrays for Spatial Patterns</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A class <code>"fasp"</code> to represent a ``matrix''
+of functions, amenable to plotting as a matrix of plot panels.
+</p>
+
+
+<h3>Details</h3>
+
+<p>
+An object of this class is a convenient way of storing
+(and later plotting, editing, etc)
+a set of functions <i>f[i,j](r)</i> of a real argument <i>r</i>,
+defined for each possible pair <i>(i,j)</i> of indices
+<i>1 &lt;= i,j &lt;= n</i>. We may think of this
+as a matrix or array of functions <i>f[i,j]</i>.
+</p>
+<p>
+Function arrays are particularly useful in the 
+analysis of a multitype point pattern (a point pattern in which 
+the points are identified as belonging to separate types).
+We may want to compute a summary function for the points
+of type <i>i</i> only, for each of the possible types <i>i</i>.
+This produces a <i>1 * m</i> array of functions.
+Alternatively we may compute a summary function
+for each possible pair of types <i>(i,j)</i>.
+This produces an <i>m *  m</i> array of functions.
+</p>
+<p>
+For multitype point patterns the command <code><a href="alltypes.html">alltypes</a></code>
+will compute arrays of summary functions for each possible
+type or for each possible pair of types.
+For univariate (single-type) point patterns the command
+<code><a href="allstats.html">allstats</a></code> will compute an array of
+different summary functions <i>F</i>, <i>G</i>, <i>J</i>,
+<i>K</i> for the same dataset.
+Both <code><a href="alltypes.html">alltypes</a></code> and <code><a href="allstats.html">allstats</a></code>
+return an object of class <code>"fasp"</code>.
+</p>
+<p>
+There are methods for <code>plot</code>, <code>print</code> and <code>"["</code> in this class.
+The plot method displays the entire array of functions.
+The method <code><a href="subset.fasp.html">[.fasp</a></code> selects a sub-array using the natural
+indices <code>i,j</code>. 
+</p>
+<p>
+An object of class <code>"fasp"</code> is a list containing at least the
+following components:
+</p>
+
+<dt>fns</dt><dd>A list of data frames, each representing one of the functions.
+</dd>
+<dt>which</dt><dd>A matrix representing the spatial arrangement of the
+functions. If <code>which[i,j] = k</code>
+then the function represented by <code>fns[[k]]</code> should be plotted
+in the panel at position <i>(i,j)</i>. If <code>which[i,j] = NA</code>
+then nothing is plotted in that position.
+</dd>
+<dt>titles</dt><dd>A list of character strings, providing suitable plotting titles
+for the functions.
+</dd>
+<dt>default.formulae</dt><dd>A list of default formulae for plotting each of the functions.
+</dd>
+<dt>title</dt><dd>A character string, giving a default title for the array
+when it is plotted.
+</dd>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="alltypes.html">alltypes</a></code>,
+<code><a href="allstats.html">allstats</a></code>,
+<code><a href="plot.fasp.html">plot.fasp</a></code>,
+<code><a href="subset.fasp.html">[.fasp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  # unmarked point pattern
+  data(swedishpines)
+  
+  a &lt;- allstats(swedishpines,dataname="Swedish Pines")
+  a
+  plot(a)
+  plot(a[1,])
+
+  # multitype point pattern
+  data(amacrine)
+  a &lt;- alltypes(amacrine, "G")
+  plot(a)
+
+  # select the row corresponding to cells of type "on"
+  b &lt;- a["on", ]
+  plot(b)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

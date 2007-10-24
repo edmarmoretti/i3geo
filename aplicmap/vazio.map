@@ -1,0 +1,276 @@
+NAME GERAL
+DEBUG ON
+STATUS ON
+SIZE 480 450
+SYMBOLSET /opt/www/html/mapas/symbols/simbolos.sym
+FONTSET   "/opt/www/html/mapas/symbols/fontes.txt"
+EXTENT -75.048889 -36.906765 -31.048889 7.004346
+UNITS DD
+SHAPEPATH "/opt/www/html/geodados"
+IMAGECOLOR 157 211 255
+OUTPUTFORMAT
+  NAME png1
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  IMAGEMODE RGB
+  EXTENSION "png"
+END
+IMAGETYPE png1
+PROJECTION
+  "init=epsg:4291" #SAD69
+END
+WEB
+  TEMPLATE /opt/www/html/mapas/mma/geral.htm
+  IMAGEPATH "/var/tmp/ms_tmp/"
+  IMAGEURL "/ms_tmp/"
+  LOG "/var/tmp/log.txt"
+  HEADER "/opt/www/html/mapas/mma/cabecalho.htm"
+  FOOTER "/opt/www/html/mapas/mma/rodape.htm"
+	EMPTY "/opt/www/html/mapas/mma/selerro.htm"
+	METADATA
+	  REINICIA "http://10.1.8.74/mapas/php/criamapa.php?serv=10.1.8.74&layers=zee+mundo+estados"
+  END
+END
+QUERYMAP
+  SIZE 480 450
+  STATUS ON
+  STYLE HILITE
+  COLOR 200 50 50
+END
+LEGEND
+  KEYSIZE 12 10
+  LABEL
+    TYPE BITMAP
+    SIZE small
+    COLOR 0 0 0
+    POSITION auto
+  END
+  STATUS ON
+  TEMPLATE "/opt/www/html/mapas/mma/legenda.htm"
+END
+SCALEBAR
+  IMAGECOLOR 0 0 0
+  LABEL
+    COLOR 0 0 0
+    SIZE tiny
+  END
+  SIZE 200 2
+  BACKGROUNDCOLOR 250 250 250
+  IMAGECOLOR 255 255 255
+  COLOR 0 0 0
+  UNITS KILOMETERS
+  INTERVALS 5
+  TRANSPARENT FALSE
+  STATUS TRUE
+END
+REFERENCE
+  IMAGE /opt/www/html/mapas/imagens/reference.png
+  EXTENT -75.048889 -36.906765 -31.048889 7.004346
+  SIZE 177 167
+  STATUS ON
+  COLOR -1 -1 -1
+  OUTLINECOLOR 255 0 0
+  MARKER 'ref'
+  MARKERSIZE 8
+  MINBOXSIZE 8
+  MAXBOXSIZE 145
+END
+LAYER
+  NAME zee # ok
+  TYPE Polygon
+  STATUS ON
+  DATA brasil/limitespol/zee
+	GROUP estados
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+		TEMPLA "zee.htm"
+  END
+     CLASS
+		    NAME ""
+        COLOR 137 201 255
+        OUTLINECOLOR -1 -1 -1
+     END  # CLASS
+END  # LAYER
+LAYER
+  NAME mundo # ok
+  TYPE Polygon
+  STATUS on
+  DATA mundo/limitespol/mundo
+	GROUP 'mundo'
+	TEMPLATE "mundo.htm"
+  METADATA
+	  ITENS "FIPSCNTRY,GMICNTRY,CNTRYNAME"
+		ITENSDESC "FIPS,GMI,Nome"
+		TITULO "País da América do Sul"
+		DADOS "mundo/limitespol/mundo"
+		TPSHP ""
+  	TEMA "América do Sul"
+  	CLASSE "SIM"
+		TEXTO "NAO"
+  END
+	TRANSPARENCY 100
+     CLASS
+		    NAME ""
+        COLOR 230 230 230
+     END  # CLASS
+END  # LAYER
+LAYER
+  NAME estados_anno # ok
+  TYPE ANNOTATION
+  STATUS on
+  DATA brasil/limitespol/estados
+	LABELREQUIRES "([estados] = 1)"
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+  END
+	LABELITEM "ESTADO"
+  CLASS
+	   NAME ""
+     LABEL
+		  COLOR  100 100 100
+      FONT arial
+      TYPE truetype
+      SIZE 8
+      POSITION AUTO            
+		 END
+  END  # CLASS
+END  # LAYER
+LAYER
+  NAME estados # ok
+  TYPE polygon
+  STATUS on
+  DATA brasil/limitespol/estados
+  METADATA
+  	TEMA "Brasil"
+  	CLASSE "SIM"
+		TEXTO "SIM"
+  END
+	TRANSPARENCY 100
+  CLASS
+	   NAME ""
+     COLOR 232 220 201
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+END  # LAYER
+
+LAYER
+  NAME mundo2 # ok
+  TYPE Line
+  STATUS on
+  DATA mundo/limitespol/mundo
+	GROUP 'mundo'
+  METADATA
+		DADOS "mundo/limitespol/mundo"
+		TPSHP ""
+  	TEMA "NAO"
+  	CLASSE "NAO"
+  END
+	TRANSPARENCY 100
+     CLASS
+		    NAME ""
+				SYMBOL 'linha'
+        COLOR 255 255 255
+				SIZE 3
+     END  # CLASS
+END  # LAYER
+LAYER
+  NAME tecladopt # ok
+  TYPE point
+  STATUS default #
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+    TEXTO ""
+  END
+  CLASS
+     NAME 'Pontos inseridos'
+     SYMBOL 'xyr'
+     COLOR 255 0 0
+     SIZE 7
+  END  # CLASS
+END  # LAYER
+LAYER
+  NAME tecladoli # ok
+  TYPE line
+  STATUS default #
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+    TEXTO ""
+  END
+	TRANSPARENCY 100
+  CLASS
+     NAME 'Linhas inseridas'
+     SYMBOL 'linha'
+     COLOR 255 0 0
+     SIZE 2
+  END  # CLASS
+END  # LAYER
+LAYER
+  NAME tecladopo # ok
+  TYPE polygon
+  STATUS default #
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+    TEXTO ""
+  END
+	TRANSPARENCY 100
+  CLASS
+     NAME 'Polígonos inseridos'
+     SYMBOL 'p7'
+     COLOR 255 0 0
+     SIZE 4
+  END  # CLASS
+END  # LAYER
+
+LAYER
+  NAME "Grade1"
+  GROUP grade
+  TYPE LINE
+  STATUS off #
+  #MINSCALE 9000000
+  METADATA
+  	TEMA "NAO"
+  	CLASSE "NAO"
+  END
+  CLASS
+    COLOR 200 200 200 
+    LABEL
+      TYPE BITMAP
+      SIZE 0.5
+      COLOR 50 50 50
+      OFFSET 0 0
+    END
+  END
+  GRID
+		MAXARCS 2
+		MAXSUBDIVIDE 2
+    LABELFORMAT "DDMMSS"
+  END
+END
+
+LAYER
+		NAME "copyright"
+		STATUS DEFAULT
+		TRANSFORM FALSE
+		TYPE ANNOTATION
+		FEATURE
+			POINTS
+				10 5
+			END
+			TEXT 'MMA'
+		END
+		CLASS
+     LABEL
+      TYPE BITMAP
+      SIZE 0.5
+      COLOR 50 50 50
+      OFFSET 0 0
+  	 END
+	  END
+	END
+END # Map File
+

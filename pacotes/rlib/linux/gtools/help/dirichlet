@@ -1,0 +1,58 @@
+rdirichlet              package:gtools              R Documentation
+
+_F_u_n_c_t_i_o_n_s _f_o_r _t_h_e _D_i_r_i_c_h_l_e_t _D_i_s_t_r_i_b_u_t_i_o_n
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Functions to compute the density of or generate random deviates
+     from the Dirichlet distribution.
+
+_U_s_a_g_e:
+
+     rdirichlet(n, alpha)
+     ddirichlet(x, alpha)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: A vector containing a single random deviate or matrix
+          containg one random deviate per row.
+
+       n: Number of random vectors to generate. 
+
+   alpha: Vector or (for 'ddirichlet') matrix containing shape
+          parameters. 
+
+_D_e_t_a_i_l_s:
+
+     The Dirichlet distribution is the multidimensional generalization
+     of the beta distribution.  It is the canonical Bayesian
+     distribution for the parameter estimates of a multinomial
+     distribution.
+
+_V_a_l_u_e:
+
+     'ddirichlet' returns a vector containing the Dirichlet density for
+     the corresponding rows of 'x'.
+
+     'rdirichlet' returns a matrix with 'n' rows, each containing a
+     single Dirichlet random deviate.
+
+_A_u_t_h_o_r(_s):
+
+     Code original posted by Ben Bolker to R-News on Fri Dec 15 2000.
+     See <URL:
+     http://www.r-project.org/nocvs/mail/r-help/2000/3865.html>.  Ben 
+     attributed the code to Ian Wilson i.wilson@maths.abdn.ac.uk.
+     Subsequent modifications by Gregory R. Warnes
+     warnes@bst.rochester.edu.
+
+_S_e_e _A_l_s_o:
+
+     'dbeta', 'rbeta'
+
+_E_x_a_m_p_l_e_s:
+
+       x <- rdirichlet(20, c(1,1,1) )
+
+       ddirichlet(x, c(1,1,1) )
+

@@ -1,0 +1,56 @@
+\HeaderA{foldchange}{Compute fold-change or convert between log-ratio and fold-change.}{foldchange}
+\aliasA{foldchange2logratio}{foldchange}{foldchange2logratio}
+\aliasA{logratio2foldchange}{foldchange}{logratio2foldchange}
+\keyword{math}{foldchange}
+\begin{Description}\relax
+\code{foldchange} computes the fold change for two sets of values.
+\code{logratio2foldchange} converts values from log-ratios to fold
+changes.  \code{foldchange2logratio} does the reverse.
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+foldchange(num,denom)
+logratio2foldchange(logratio, base=2)
+foldchange2logratio(foldchange, base=2)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{num,denom}] vector/matrix of numeric values
+\item[\code{logratio}] vector/matrix of log-ratio values
+\item[\code{foldchange}] vector/matrix of fold-change values
+\item[\code{base}] Exponential base for the log-ratio.
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+Fold changes are commonly used in the biological sciences as a
+mechanism for comparing the relative size of two measurements.  They
+are computed as: \eqn{\frac{num}{denom}}{num/denom} if
+\eqn{num>denom}{}, and as \eqn{\frac{-denom}{num}}{-denom/num}
+otherwise.
+
+Fold-changes have the advantage of ease of interpretation and symmetry
+about \eqn{num=denom}{}, but suffer from a discontinuty between -1 and
+1, which can cause significant problems when performing data
+analysis.  Consequently statisticians prefer to use log-ratios.
+\end{Details}
+\begin{Value}
+A vector or matrix of the same dimensions as the input containing the
+converted values.
+\end{Value}
+\begin{Author}\relax
+Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\end{Author}
+\begin{Examples}
+\begin{ExampleCode}
+
+  a <- 1:21
+  b <- 21:1
+
+  f <- foldchange(a,b)
+
+  cbind(a,b,f)
+
+\end{ExampleCode}
+\end{Examples}
+

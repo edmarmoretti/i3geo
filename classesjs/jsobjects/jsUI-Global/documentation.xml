@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<?xml:stylesheet type="text/xsl" href="../documentation.xsl"?>
+<?xml-stylesheet href="../documentation.xsl" type="text/xsl" media="screen"?>
+<doc xml:whitespace="preserve">
+	<assembly>
+		<name>jsUI-Global</name>
+		<remarks>
+			<para>The global functions include public methods that extend Javascript's abilities, as well as private methods necessary for jsObjects.</para>
+			<para>The common.js functions can be used without uiCommon.js functions -- but not vice versa.</para>
+		</remarks>
+		<requirements>
+			<para>jsUI-Global/common.js</para>
+		</requirements>
+	</assembly>
+	<Method>
+		<member name="replace (string, string, string)">
+			<summary>Returns a string in which a specified substring has been replaced with another substring. Easier to use then the Javascript replace method of the string type.</summary>
+			<param name="oldString">Required. String expression containing substring to replace.</param>
+			<param name="findString">Required. Substring being searched for.</param>
+			<param name="replaceString">Required. Replacement substring. </param>
+			<code>
+				<c>mystring = replace(mystring, "a", "b");</c>
+			</code>
+			<returns>The modified string value.</returns>
+		</member>
+		<member name="objectEvent (object, string, string)">
+			<summary>Creates and fires the specified DOM event on the specified object on the page. Works with both IE and Mozilla.</summary>
+			<param name="target">Required. The object the event is to be fire on.</param>
+			<param name="eventType">Required. The text name of the event. Example: click, blur. Accepts both IE and Mozilla event names (blur OR onBlur)</param>
+			<param name="currbrowser">Optional. The user's current browser. Pass "IE" or "MOZ" or leave blank and the browser will be determined by the function.</param>
+			<returns>Boolean indicating whether or not the event fired sucessfully.</returns>
+		</member>
+		<member name="getAllDescendants(object, string)">
+			<summary>Returns an array of descendants (children, grandchildren, etc) for a given DOM object, of a specified type. Similar to IE's "document.all" but cross-browser compatible.</summary>
+			<param name="node">Required. The DOM object to start the search at. Pass document.body to start at the top of the DOM.</param>
+			<param name="tagName">Optional. The tag name for the type of descendants to find. Pass "ALL" or leave empty to find all descendants regardless of tag name.</param>
+			<returns>An array of all matching descendant objects.</returns>
+		</member>
+		<member name="getHost(string)">
+			<summary>Returns only the host name of a given URL. Useful to pre-check links for security issues.</summary>
+			<param name="url">A fully qualified URL.</param>
+			<returns>A string containing the host name.</returns>
+		</member>
+		<member name="HTMLEncode(string)">
+			<summary>Encodes HTML for transmission via XML, replacing tags with their respective entities.</summary>
+			<param name="htmldata">The HTML to be encoded.</param>
+			<returns>The encoded string.</returns>
+		</member>
+		<member name="getQueryString(string)">
+			<summary>Parses a URL to extract query string parameters into a quickly accessible object. Similar to the Request.QueryString method in ASP.</summary>
+			<param name="path">Optional. The URL to be parsed. If left blank, the current document's location will be used.</param>
+			<code>
+				<c>// URL: http://myserver/webapp/sendRequest.htm?requestType=ShowLatestHits</c>
+				<c>var queryParams = getQueryString(document.location);</c>
+				<c>alert(queryParams.requestType);</c>
+			</code>
+			<returns>An object containing a property for each query string parameter.</returns>
+		</member>
+		<member name="serializeObject(object/array)">
+			<summary>Turns a Javascript object into valid XML describing that object.</summary>
+			<param name="currObject">The Javascript Object or Array to be described.</param>
+			<returns>An XML string describing the Object or Array.</returns>
+			<remarks>Warning. Do not use this function on a DOM object, as those objects appear to be recursive in some way, and will cause this function to loop continuously. Use only on pure Javascript Objects or Arrays.</remarks>
+		</member>
+		<member name="getFormData(object)">
+			<summary>Parses all form elements, and corresponding values, on a page into a nested Javascript object.</summary>
+			<param name="startNode">Optional. The DOM object to start parsing at. If left blank document.body will be used.</param>
+			<returns>A nested Object representing all form elements and values on the page.</returns>
+			<code>alert (serializeObject(getFormData());</code>
+			<remarks>Can be used in conjunction with serializeObject to allow XML transmission of form data.</remarks>
+		</member>
+		<member name="xmlDecode(string)">
+			<summary>Decodes XML (or HTML) that has been encoded by having it's tags changed to entities for transmission as an XML node value. Restores encoded data.</summary>
+			<param name="xmldata">The encoded (entity-replaced) XML (or HTML) to be decoded.</param>
+			<returns>A string.</returns>
+			<remarks>This is the opposite of the HTMLEncode function.</remarks>
+		</member>
+	</Method>
+</doc>

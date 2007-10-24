@@ -1,0 +1,138 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
+<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body class="yui-skin-sam" >
+	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
+		<div id=guia1 >Texto</div>
+		<div id=guia2 >Propriedades</div>
+		<div id=guia3 >Fundo</div>
+		<div id=guia4 >Geral</div>
+	</div>
+	<span id=geral style="left:0px;top:0px;">
+		<div id=guia1obj style="width:95%;text-align:left">
+			<div style="width:95%;top:5px;left:0px">
+				<input size=55 class=digitar type=text value="" id=texto />
+			</div>
+			<div id=men1 style="text-align:left;top:10px;left:-5px;" >
+				Digite o texto e clique no mapa no ponto de inclus&atilde;o.
+				Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de
+				propriedades.
+			</div>
+		</div>
+		<div id=guia2obj style="width:90%;display:none">
+			<div style="width:90%;top:5px;left:0px" >
+				<table class=lista2 width="100%"> 
+					<tr>
+						<td>Fonte:</td>
+						<td><span style="text-align:left" id=listaf ></span></td>
+					</tr>
+					<tr>
+						<td>Tamanho:</td>
+						<td><input size=2 type=text value=8 id=tamanho /></td>
+					</tr>
+					<tr>
+						<td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO):</td>
+						<td><input size=4 type=text value=0 id=angulo /></td>
+					</tr>	
+					<tr>
+						<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
+						<td>x <input size=2 type=text value=0 id=offsetx /> y <input size=2 type=text value=0 id=offsety /></td>
+					</tr>
+					<tr>
+						<td>Cor do texto (digite os valores em vermelho, verde e azul, p.ex. 20 20 20):</td>
+						<td><input onkeyup="icor(this)" size=11 type=text value="0 0 0" id=frente /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente')" /></td>
+					</tr>
+					<tr>
+						<td>Cor da m&aacute;scara de um pixel de entorno:</td>
+						<td><input onkeyup="icor(this)" size=11 type=text value="" id=mascara /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara')" /></td>
+					</tr>
+					<tr>
+						<td>Posi&ccedil;&atilde;o do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
+						<td>
+							<select id=position >
+								<option value="MS_AUTO" >autom&aacute;tico</option>"
+								<option value="MS_UL" >superior esquerdo</option>"
+								<option value="MS_UC" >superior centro</option>"
+								<option value="MS_UR" >superior direito</option>"
+								<option value="MS_CL" >centro esquerdo</option>"
+								<option value="MS_CC" >centro</option>"
+								<option value="MS_CR" >centro direito</option>"
+								<option value="MS_LL" >inferior esquerdo</option>"
+								<option value="MS_LC" >inferior centro</option>"
+								<option value="MS_LR" >inferior direito</option>"
+							</select>
+						</td>
+					</tr>
+				</table>	
+			</div>
+		</div>
+		<div id=guia3obj style="width:90%;display:none">
+			<div style="width:95%;top:5px;left:0px" >
+				<table class=lista2 width="95%"> 
+					<tr>		
+						<td>Cor do fundo:</td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=fundoc /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc')" /></td>
+					</tr>
+					<tr>
+						<td>Cor da sombra do fundo:</td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=sombra /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra')" /></td>
+					</tr>
+					<tr>
+						<td>Desl. da sombra do fundo:</td>
+						<td>x <input size=1 type=text value="1" id=sombrax /> y <input size=1 type=text value="1" id=sombray /></td>
+					</tr>
+					<tr>
+						<td>Cor da sombra:</td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=frentes /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes')" /></td>
+					</tr>
+						<td>Deslocamento da sombra:</td>
+						<td>x <input size=1 type=text value="1" id=frentex /> y <input size=1 type=text value="1" id=frentey /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id=guia4obj style="width:90%;display:none">
+			<div style="width:90%;top:5px;left:0px" >
+				<table class=lista2 width="90%"> 
+					<tr>		
+						<td>For&ccedil;a colis&otilde;es entre textos?:</td>
+						<td>
+							<select id=force >
+								<option value="0" >n&atilde;o</option>
+								<option value="1" >sim</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td>
+						<td><input size=4 type=text value="auto" id=mindistance /></td>
+					</tr>
+					<tr>
+						<td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td>
+						<td><input size=4 type=text value="auto" id=minfeaturesize /></td>
+					</tr>
+					<tr>
+						<td>O texto pode ultrapassar o mapa?:</td>
+						<td>
+							<select id=partials >
+								<option value="1" >sim</option>
+								<option value="0" >n&atilde;o</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</span>
+	<div id="aguarde">
+		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
+	</div>
+</div>
+</body>
+<script src="../i3geo_tudo_compacto.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

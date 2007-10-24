@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>MMA - Mapa interativo</title>
+
+<!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
+arquivos não compactados, bastando substituir por i3geonaocompacto -->
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+
+<!-- formatação alternativa das janelas internas, para usar é só descomentar
+<link rel="stylesheet" type="text/css" href="../css/panel-aqua.css" />
+-->
+</head>
+<body style="background-color:rgb(200,200,200)">
+<p style=text-align:center;font-size:12pt >Este é um exemplo de inclusão do I3Geo dentro de uma página qualquer.<br><br>
+<div style=position:absolute;left:10px;top:50px;width:200px; >
+<p style=text-align:left;font-size:12pt >Você pode chamar o I3Geo de dentro de uma outra página criando o DIV com id=corpo<br><br>
+<p style=text-align:left;font-size:12pt >Para chamar a página não é necessário rodar o i3geo/ms_criamapa.php.<br><br>
+<p style=text-align:left;font-size:12pt >Nem todos os elementos precisam estar no mapa.<br><br>
+<p style=text-align:left;font-size:12pt >Você pode esconder ou mudar as ferramentas de lugar.<br><br>
+</div>
+<div id=i3geo style=position:absolute;left:200px;top:50px >
+<center>
+<table id='mst' style=display:none width=100% cellspacing='0'>
+<!-- Inclui o menu suspenso. Se vc não quiser o menu, é só comentar -->
+<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<tr>
+<td colspan=2 class=verdeescuro style="text-align:right;height:0px;">
+	 <div id="menus" class="yuimenubar" style=height:22px;  >
+     </div>    
+</td>
+</tr>
+<tr>
+
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+  <table width=100% cellspacing=0 cellpadding=0 >
+   <tr>
+   <td title="libera guias" class=tdclaro id=encolheFerramentas style="border-bottom:3px solid rgb(200,200,200);vertical-align:top;width:5px;text-align:left;"></td>
+   <td style="border-bottom:3px solid rgb(200,200,200)">
+    <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
+	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
+	 <div id=guia2 class=guia value="Mostra a lista de temas disponíveis no servidor de dados, possibilitando que novos temas sejam adicionados ao mapa.">&nbsp;Adiciona&nbsp;</div>
+	 <div id=guia4 class=guia value="Mostra a legnda do mapa atual." >&nbsp;Legenda&nbsp;</div>
+	 <div id=guia5 class=guia value="Lista mapas já preparados, com temáticas específicas,que podem ser abertos no I3Geo">&nbsp;Mapas&nbsp;</div>
+    </div>
+   </td>
+   </tr>
+  </table>
+  <!-- Esta div acrescenta a lista de propriedades do mapa
+  <div id=listaPropriedades ></div>
+  -->
+  <!-- Esta div acrescenta a opção de busca rápida
+  <div id=buscaRapida ></div>
+  -->
+  <div id='guia1obj' ><div id=buscaRapida ></div><div id=listaPropriedades ></div><div id=listaTemas ></div></div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+ </td>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px -->
+   <tr><td  class=verdeclaro id=contemImg >
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:300px"></div>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+<!-- Mostra as coordenadas conforme o mouse é movimentado
+  <div class=pcenter10 id='longlat'>Longitude e latitude</div>
+-->  
+<!-- Escala gráfica. Pode ser excluída. 
+  <div id="escalaGrafica" style="text-align:left"></div>
+-->
+<!--- vc pode optar por colocar mensagens de ajuda em algum lugar 
+<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
+-->
+<tr>
+ <td class=tdbranca >
+ 	<div id=escala ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
+ </td>
+ <td class=tdbranca >
+  <table width=100% ><tr>
+  <td class=tdbranca ></td>
+  <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
+  <td class=tdbranca ></td>
+  </tr></table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+</table>
+<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
+</center>
+<!-- barra de botoes que serão incluídos na janela móvel de navegação -->
+<div id=barraDeBotoes1 style='display:none'> 
+   <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
+   <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
+   <table title="info" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../imagens/branco.gif" id='identifica'/></td></tr></table>
+   <table title="geral" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="geral" alt="" src="../imagens/branco.gif" ID='zoomtot'/></td></tr></table> 
+   <table title="mede" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="mede" alt="" src="../imagens/branco.gif" id='mede'/></td></tr></table> 
+   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'></td></tr></table>
+</div>
+<div id=barraDeBotoes2 style='display:none'> 
+   <table title="referencia" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="referencia" alt="" src="../imagens/branco.gif" id='referencia'/></td></tr></table>        
+   <table title="insere xy" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/></td></tr></table> 
+   <table title="insere grafico" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/></td></tr></table> 
+   <table title="selecao" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="selecao" alt="" src="../imagens/branco.gif" id='selecao'/></td></tr></table>
+   <table title="texto" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/></td></tr></table>
+   <table title="confluencias" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/></td></tr></table>
+   <table title="google" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="google" alt="" src="../imagens/branco.gif" id='google'/></td></tr></table>
+   <table id=botao3d title="3d - experimental" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="3d" alt="" src="../imagens/branco.gif" id='v3d'/></td></tr></table>
+   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'></td></tr></table>
+</div>
+</div>
+<!-- Variáveis globais e inicialização do mapa-->
+<script type="text/javascript">
+/*
+Title: Mashup
+
+Exemplo de abertura do I3Geo sem passar pelo ms_criamapa.php
+
+O usuário pode digitar diretamente o html no navegador.
+
+File: mashup.htm
+
+Exemplo:
+
+http://<host>/i3geo/exemplos/mashup.htm
+
+*/
+/*
+	Variable: g_locaplic
+	
+	Indica a localização correta do i3geo.
+	
+	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+*/
+g_locaplic = "http://"+window.location.host+"/i3geo";
+/*
+	Variable: g_localimg
+	
+	Indica a localização correta das imagens.
+	
+	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
+*/
+g_localimg = "http://"+window.location.host+"/i3geo/imagens";
+g_mapaRefDisplay = "none"
+/*
+Variable: g_mashuppar
+
+Parâmetros de inicialização que podem ser utilizados na interface mashup.
+
+Os parâmetros são os mesmos que podem ser utilizados quando o i3geo é inicializado pelo ms_criamapa.php.
+
+Exemplo: g_mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+*/
+g_mashuppar = "&mapext=-53 -26 -42 -18";
+
+objmapa = new Mapa();
+/*
+	Inicializa o mapa
+*/
+objmapa.inicializa();
+</script>
+
+</body>
+</html>

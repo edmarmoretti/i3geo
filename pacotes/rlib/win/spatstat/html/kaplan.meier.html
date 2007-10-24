@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Kaplan-Meier Estimator using Histogram Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for kaplan.meier {spatstat}"><tr><td>kaplan.meier {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Kaplan-Meier Estimator using Histogram Data</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Compute the Kaplan-Meier estimator of a survival time distribution
+function, from histogram data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  kaplan.meier(obs, nco, breaks, upperobs=0)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>obs</code></td>
+<td>
+vector of <i>n</i> integers giving the histogram of
+all observations (censored or uncensored survival times)
+</td></tr>
+<tr valign="top"><td><code>nco</code></td>
+<td>
+vector of <i>n</i> integers giving the histogram of
+uncensored observations (those survival times that are less than or
+equal to the censoring time)
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+Vector of <i>n+1</i> breakpoints which were used to form
+both histograms.
+</td></tr>
+<tr valign="top"><td><code>upperobs</code></td>
+<td>
+Number of observations beyond the rightmost breakpoint, if any.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is needed mainly for internal use in <STRONG>spatstat</STRONG>,
+but may be useful in other applications where you want to form the
+Kaplan-Meier estimator from a huge dataset.
+</p>
+<p>
+Suppose <i>T[i]</i> are the survival times of individuals
+<i>i=1,...,M</i> with unknown distribution function <i>F(t)</i>
+which we wish to estimate. Suppose these times are right-censored
+by random censoring times <i>C[i]</i>.
+Thus the observations consist of right-censored survival times
+<i>T*[i] = min(T[i],C[i])</i>
+and non-censoring indicators
+<i>D[i] = 1(T[i] &lt;= C[i])</i>
+for each <i>i</i>.
+</p>
+<p>
+If the number of observations <i>M</i> is large, it is efficient to
+use histograms.
+Form the histogram <code>obs</code> of all observed times <i>T*[i]</i>.
+That is, <code>obs[k]</code> counts the number of values 
+<i>T*[i]</i> in the interval
+<code>(breaks[k],breaks[k+1]]</code> for <i>k &gt; 1</i>
+and <code>[breaks[1],breaks[2]]</code> for <i>k = 1</i>.
+Also form the histogram <code>nco</code> of all uncensored times,
+i.e. those <i>T*[i]</i> such that <i>D[i]=1</i>.
+These two histograms are the arguments passed to <code>kaplan.meier</code>.
+</p>
+<p>
+The vectors <code>km</code> and <code>lambda</code> returned by <code>kaplan.meier</code>
+are (histogram approximations to) the Kaplan-Meier estimator
+of <i>F(t)</i> and its hazard rate <i>lambda(t)</i>.
+Specifically, <code>km[k]</code> is an estimate of
+<code>F(breaks[k+1])</code>, and <code>lambda[k]</code> is an estimate of
+the average of <i>lambda(t)</i> over the interval
+<code>(breaks[k],breaks[k+1])</code>.
+</p>
+<p>
+The histogram breaks must include <i>0</i>.
+If the histogram breaks do not span the range of the observations,
+it is important to count how many survival times
+<i>T*[i]</i> exceed the rightmost breakpoint,
+and give this as the value <code>upperobs</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A list with two elements:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>km</code></td>
+<td>
+Kaplan-Meier estimate of the survival time c.d.f. <i>F(t)</i>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+corresponding Nelson-Aalen estimate of the
+hazard rate <i>lambda(t)</i>
+</td></tr>
+</table>
+<p>
+
+These are numeric vectors of length <i>n</i>.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="reduced.sample.html">reduced.sample</a></code>,
+<code><a href="km.rs.html">km.rs</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

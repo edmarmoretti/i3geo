@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Multitype K Function (i-to-any)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Kdot {spatstat}"><tr><td>Kdot {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Multitype K Function (i-to-any)</h2>
+
+
+<h3>Description</h3>
+
+<p>
+For a multitype point pattern, 
+estimate the multitype <i>K</i> function
+which counts the expected number of other points of the process
+within a given distance of a point of type <i>i</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Kdot(X, i=1, r=NULL, breaks=NULL, correction, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The observed point pattern, 
+from which an estimate of the multitype <i>K</i> function
+<i>Ki.(r)</i> will be computed.
+It must be a multitype point pattern (a marked point pattern
+whose marks are a factor). See under Details.
+</td></tr>
+<tr valign="top"><td><code>i</code></td>
+<td>
+Number or character string identifying the type (mark value)
+of the points in <code>X</code> from which distances are measured.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+numeric vector. The values of the argument <i>r</i>
+at which the distribution function
+<i>Ki.(r)</i> should be evaluated.
+There is a sensible default.
+First-time users are strongly advised not to specify this argument.
+See below for important conditions on <i>r</i>.
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+An alternative to the argument <code>r</code>.
+Not normally invoked by the user. See the <B>Details</B> section.
+</td></tr>
+<tr valign="top"><td><code>correction</code></td>
+<td>
+A character vector containing any selection of the
+options <code>"border"</code>, <code>"bord.modif"</code>,
+<code>"isotropic"</code>, <code>"Ripley"</code> or <code>"translate"</code>.
+It specifies the edge correction(s) to be applied.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function <code>Kdot</code> and its companions
+<code><a href="Kcross.html">Kcross</a></code> and <code><a href="Kmulti.html">Kmulti</a></code>
+are generalisations of the function <code><a href="Kest.html">Kest</a></code>
+to multitype point patterns. 
+</p>
+<p>
+A multitype point pattern is a spatial pattern of
+points classified into a finite number of possible
+``colours'' or ``types''. In the <STRONG>spatstat</STRONG> package,
+a multitype pattern is represented as a single 
+point pattern object in which the points carry marks,
+and the mark value attached to each point
+determines the type of that point.
+</p>
+<p>
+The argument <code>X</code> must be a point pattern (object of class
+<code>"ppp"</code>) or any data that are acceptable to <code><a href="as.ppp.html">as.ppp</a></code>.
+It must be a marked point pattern, and the mark vector
+<code>X$marks</code> must be a factor.
+The argument <code>i</code> will be interpreted as a
+level of the factor <code>X$marks</code>. (Warning: this means that
+an integer value <code>i=3</code> will be interpreted as the 3rd smallest level,
+not the number 3). 
+</p>
+<p>
+The ``type <i>i</i> to any type'' multitype <i>K</i> function 
+of a stationary multitype point process <i>X</i> is defined so that
+<i>lambda Ki.(r)</i>
+equals the expected number of
+additional random points within a distance <i>r</i> of a
+typical point of type <i>i</i> in the process <i>X</i>.
+Here <i>lambda</i>
+is the intensity of the process,
+i.e. the expected number of points of <i>X</i> per unit area.
+The function <i>Ki.</i> is determined by the 
+second order moment properties of <i>X</i>.
+</p>
+<p>
+An estimate of <i>Ki.(r)</i>
+is a useful summary statistic in exploratory data analysis
+of a multitype point pattern.
+If the subprocess of type <i>i</i> points were independent
+of the subprocess of points of all types not equal to <i>i</i>,
+then <i>Ki.(r)</i> would equal <i>pi * r^2</i>.
+Deviations between the empirical <i>Ki.</i> curve
+and the theoretical curve <i>pi * r^2</i> 
+may suggest dependence between types.
+</p>
+<p>
+This algorithm estimates the distribution function <i>Ki.(r)</i> 
+from the point pattern <code>X</code>. It assumes that <code>X</code> can be treated
+as a realisation of a stationary (spatially homogeneous) 
+random spatial point process in the plane, observed through
+a bounded window.
+The window (which is specified in <code>X</code> as <code>X$window</code>)
+may have arbitrary shape.
+Biases due to edge effects are
+treated in the same manner as in <code><a href="Kest.html">Kest</a></code>,
+using the border correction.
+</p>
+<p>
+The argument <code>r</code> is the vector of values for the
+distance <i>r</i> at which <i>Ki.(r)</i> should be evaluated. 
+The values of <i>r</i> must be increasing nonnegative numbers
+and the maximum <i>r</i> value must exceed the radius of the
+largest disc contained in the window.
+</p>
+<p>
+The pair correlation function can also be applied to the
+result of <code>Kdot</code>; see <code><a href="pcf.html">pcf</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"fv"</code> (see <code><a href="fv.object.html">fv.object</a></code>).
+<br>
+Essentially a data frame containing numeric columns 
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>r</code></td>
+<td>
+the values of the argument <i>r</i> 
+at which the function <i>Ki.(r)</i> has been  estimated
+</td></tr>
+<tr valign="top"><td><code>theo</code></td>
+<td>
+the theoretical value of  <i>Ki.(r)</i>
+for a marked Poisson process, namely <i>pi * r^2</i>
+</td></tr>
+</table>
+<p>
+
+together with a column or columns named 
+<code>"border"</code>, <code>"bord.modif"</code>,
+<code>"iso"</code> and/or <code>"trans"</code>,
+according to the selected edge corrections. These columns contain
+estimates of the function <i>Ki.(r)</i>
+obtained by the edge corrections named.</p>
+
+<h3>Warnings</h3>
+
+<p>
+The argument <code>i</code> is interpreted as
+a level of the factor <code>X$marks</code>. Beware of the usual
+trap with factors: numerical values are not
+interpreted in the same way as character values. See the first example.
+</p>
+<p>
+The reduced sample estimator of <i>Ki.</i> is pointwise approximately 
+unbiased, but need not be a valid distribution function; it may 
+not be a nondecreasing function of <i>r</i>. Its range is always 
+within <i>[0,1]</i>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Cressie, N.A.C. <EM>Statistics for spatial data</EM>.
+John Wiley and Sons, 1991.
+</p>
+<p>
+Diggle, P.J. <EM>Statistical analysis of spatial point patterns</EM>.
+Academic Press, 1983.
+</p>
+<p>
+Harkness, R.D and Isham, V. (1983)
+A bivariate spatial point pattern of ants' nests.
+<EM>Applied Statistics</EM> <B>32</B>, 293&ndash;303
+</p>
+<p>
+Lotwick, H. W. and Silverman, B. W. (1982).
+Methods for analysing spatial processes of several types of points.
+<EM>J. Royal Statist. Soc. Ser. B</EM> <B>44</B>, 406&ndash;413.
+</p>
+<p>
+Ripley, B.D. <EM>Statistical inference for spatial processes</EM>.
+Cambridge University Press, 1988.
+</p>
+<p>
+Stoyan, D, Kendall, W.S. and Mecke, J.
+<EM>Stochastic geometry and its applications</EM>.
+2nd edition. Springer Verlag, 1995.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="Kdot.html">Kdot</a></code>,
+<code><a href="Kest.html">Kest</a></code>,
+<code><a href="Kmulti.html">Kmulti</a></code>,
+<code><a href="pcf.html">pcf</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+     # Lansing woods data: 6 types of trees
+    data(lansing)
+
+    ## Not run: 
+    Kh. &lt;- Kdot(lansing, "hickory") 
+    
+## End(Not run)
+    
+    # diagnostic plot for independence between hickories and other trees
+    plot(Kh.)
+
+    # synthetic example with two marks "a" and "b"
+    pp &lt;- runifpoispp(50)
+    pp &lt;- pp %mark% sample(c("a","b"), pp$n, replace=TRUE)
+    K &lt;- Kdot(pp, "a")
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

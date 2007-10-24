@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Superimpose Several Point Patterns</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for superimpose {spatstat}"><tr><td>superimpose {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Superimpose Several Point Patterns</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Superimpose any number of point patterns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  superimpose(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+Any number of arguments, each of which represents a point pattern.
+Each argument must be either a point pattern
+object (of class <code>"ppp"</code>) or a structure
+containing elements <code>x</code> and <code>y</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is used to superimpose two or more point patterns
+(see also <code><a href="concatxy.html">concatxy</a></code>). 
+</p>
+<p>
+It assumes that each of the arguments in
+<code>...</code> is either a point pattern object (of class <code>"ppp"</code>)
+or a structure containing (at least) the elements
+<code>x</code> and <code>y</code>. All the point patterns are assumed to have
+the same window of observation.
+</p>
+<p>
+The first argument must be a point pattern
+object, and it determines the observation window
+for the result.
+</p>
+<p>
+If any of the arguments is a <EM>marked</EM> point pattern,
+then all of them must be.
+In that case, the result is also a marked point pattern.
+</p>
+<p>
+If the arguments are given in the form <code>name=value</code>,
+then the names will be used
+as marks attached to the corresponding points. See the last line
+in the Examples.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A point pattern (object of class <code>"ppp"</code>) representing the
+superposition (union) of all the point patterns.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="concatxy.html">concatxy</a></code>,
+<code><a href="quadscheme.html">quadscheme</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  dat &lt;- runifrect(30)
+  xy &lt;- list(x=runif(10),y=runif(10))
+  new &lt;- superimpose(dat, xy)
+  ## Not run: plot(new)
+
+  # how to make a 2-type point pattern with types "a" and "b"
+  u &lt;- superimpose(a = rpoispp(10), b = rpoispp(20))
+
+  # how to make a 2-type point pattern with types 1 and 2
+  u &lt;- superimpose("1" = rpoispp(10), "2" = rpoispp(20))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

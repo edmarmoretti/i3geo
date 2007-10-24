@@ -1,0 +1,147 @@
+\HeaderA{defmacro}{Define a macro}{defmacro}
+\aliasA{strmacro}{defmacro}{strmacro}
+\keyword{programming}{defmacro}
+\begin{Description}\relax
+\code{defmacro} define a macro that uses R expression replacement
+
+\code{strmacro} define a macro that uses string replacement
+\end{Description}
+\begin{Usage}
+\begin{verbatim}
+defmacro(..., expr)
+strmacro(..., expr, strexpr)
+\end{verbatim}
+\end{Usage}
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{...}] macro argument list 
+\item[\code{expr}] R expression defining the macro body 
+\item[\code{strexpr}] character string defining the macro body 
+\end{ldescription}
+\end{Arguments}
+\begin{Details}\relax
+\code{defmacro} and \code{strmacro} create a macro from the expression
+given in \code{expr}, with formal arguments given by the other
+elements of the argument list.
+
+A macro is similar to a function definition, the arguments are
+handled.  In a function, formal arguments are simply variables that 
+contains the result of evaluating the expressions provided to the
+function call.  In contrast, macros actually modify the macro body by
+\code{replacing} each formal argument by the expression
+(\code{defmacro}) or string (\code{strmacro}) provided to the macro
+call.
+
+For \code{defmacro}, the special argument name \code{DOTS} will be
+replaced by \code{...} in the formal argument list of the macro so
+that \code{...}  in the body of the expression can be used to obtain
+any additional arguments passed to the macro. For \code{strmacro} you
+can mimic this behavior providing a \code{DOTS=""} argument.  This is
+illustrated by the last example below.
+
+Macros are often useful for creating new functions during code execution.
+\end{Details}
+\begin{Value}
+A macro function.
+\end{Value}
+\begin{Note}\relax
+Note that because [the defmacro code] works on the parsed expression,
+not on a text string, defmacro avoids some of the problems of
+traditional string substitution macros such as \code{strmacro} and the C
+preprocessor macros. For example, in
+\begin{alltt}
+  mul <- defmacro(a, b, expr=\{a*b\})
+\end{alltt}
+a C programmer might expect
+\code{mul(i, j + k)} to expand (incorrectly) to \code{i*j + k}. In fact it
+expands correctly, to the equivalent of \code{i*(j + k)}.
+
+For a discussion of the differences between functions
+and macros, please Thomas Lumley's R-News article (reference below).
+\end{Note}
+\begin{Author}\relax
+Thomas Lumley wrote \code{defmacro}.  Gregory R. Warnes
+\email{warnes@bst.rochester.edu} enhanced it and created
+\code{strmacro}.
+\end{Author}
+\begin{References}\relax
+The original \code{defmacro} code was directly taken from:
+
+Lumley T. "Programmer's Niche: Macros in {R}", R News, 2001, Vol 1,
+No. 3, pp 11--13, \url{http://CRAN.R-project.org/doc/Rnews/}
+\end{References}
+\begin{SeeAlso}\relax
+\code{\LinkA{function}{function}}
+\code{\LinkA{substitute}{substitute}},
+\code{\LinkA{eval}{eval}},
+\code{\LinkA{parse}{parse}},
+\code{\LinkA{source}{source}},
+\code{\LinkA{parse}{parse}},
+\end{SeeAlso}
+\begin{Examples}
+\begin{ExampleCode}
+####
+# macro for replacing a specified missing value indicator with NA
+# within a dataframe
+###
+setNA <- defmacro(df, var, values,
+                  expr={
+                         df$var[df$var %in% values] <- NA
+                       })
+
+# create example data using 999 as a missing value indicator
+d <- data.frame(
+   Grp=c("Trt", "Ctl", "Ctl", "Trt", "Ctl", "Ctl", "Trt", "Ctl", "Trt", "Ctl"),
+   V1=c(1, 2, 3, 4, 5, 6, 999, 8,   9,  10),
+   V2=c(1, 1, 1, 1, 1, 2, 999, 2, 999, 999)
+               )
+d
+
+# Try it out
+setNA(d, V1, 999)
+setNA(d, V2, 999)
+d
+
+###
+# Expression macro
+###
+plot.d <- defmacro( df, var, DOTS, col="red", title="", expr=
+  plot( df$var ~ df$Grp, type="b", col=col, main=title, ... )
+)
+
+plot.d( d, V1)
+plot.d( d, V1, col="blue" )
+plot.d( d, V1, lwd=4)  # use optional 'DOTS' argument
+
+###
+# String macro (note the quoted text in the calls below)
+# 
+# This style of macro can be useful when you are reading
+# function arguments from a text file
+###
+plot.s <- strmacro( DF, VAR, COL="'red'", TITLE="''", DOTS="", expr=
+  plot( DF$VAR ~ DF$Grp, type="b", col=COL, main=TITLE, DOTS)
+)
+
+plot.s( "d", "V1")
+plot.s( DF="d", VAR="V1", COL='"blue"' ) 
+plot.s( "d", "V1", DOTS='lwd=4')  # use optional 'DOTS' argument
+
+
+#######
+# Create a macro that defines new functions
+######
+plot.sf <- defmacro(type='b', col='black',
+                    title=deparse(substitute(x)), DOTS, expr=
+  function(x,y) plot( x,y, type=type, col=col, main=title, ...)
+)
+
+plot.red  <- plot.sf(col='red',title='Red is more Fun!')
+plot.blue <- plot.sf(col='blue',title="Blue is Best!", lty=2)
+
+plot.red(1:100,rnorm(100))
+plot.blue(1:100,rnorm(100))
+
+\end{ExampleCode}
+\end{Examples}
+

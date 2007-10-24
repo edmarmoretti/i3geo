@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="menutemas.xsl"?>
+<!--
+Title: Lista de aplicações de identificação
+
+Lista as funções que são mostradas na ferramenta de identificação, possibilitando executar um programa específico para localizar dados.
+
+File: identifica.xml
+-->
+<SISTEMAS>
+	<FUNCAO>
+		<NOMESIS>Município - IBGE</NOMESIS>
+		<ABRIR>"http://mapas.mma.gov.br/mapas/aplic/dadosdoc/buscamun.php?x="+xpt+"&amp;y="+ypt</ABRIR>
+		<TARGET>self</TARGET>
+	</FUNCAO>
+	<FUNCAO>
+		<NOMESIS>Escolas censo 2006</NOMESIS>
+		<ABRIR>"http://mapas.mma.gov.br/mapas/aplic/dadosdoc/buscaeduca.php?x="+xpt+"&amp;y="+ypt</ABRIR>
+		<TARGET>self</TARGET>
+	</FUNCAO>
+	<FUNCAO>
+		<NOMESIS>Saúde</NOMESIS>
+		<ABRIR>"http://mapas.mma.gov.br/mapas/aplic/dadosdoc/buscasaude.php?x="+xpt+"&amp;y="+ypt</ABRIR>
+		<TARGET>self</TARGET>
+	</FUNCAO>
+</SISTEMAS>

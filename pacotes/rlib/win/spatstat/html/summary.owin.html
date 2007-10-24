@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Summary of a Spatial Window</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for summary.owin {spatstat}"><tr><td>summary.owin {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Summary of a Spatial Window</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Prints a useful description of a window object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'owin':
+  summary(object, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+Window (object of class <code>"owin"</code>).</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+A useful description of the window <code>object</code> is printed.
+</p>
+<p>
+This is a method for the generic function <code><a href="../../Zelig/html/summary.zelig.html">summary</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../Zelig/html/summary.zelig.html">summary</a></code>,
+<code><a href="summary.ppp.html">summary.ppp</a></code>,
+<code><a href="print.owin.html">print.owin</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  summary(owin())  # the unit square
+
+  data(demopat)
+  W &lt;- demopat$window  # weird polygonal window
+  summary(W)           # describes it
+
+  summary(as.mask(W))  # demonstrates current pixel resolution
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

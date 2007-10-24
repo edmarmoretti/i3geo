@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Cut margins from rectangle</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for trim.rectangle {spatstat}"><tr><td>trim.rectangle {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Cut margins from rectangle</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Trims a margin from a rectangle.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ trim.rectangle(W, xmargin=0, ymargin=xmargin)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>W</code></td>
+<td>
+A window (object of class <code>"owin"</code>).
+Must be of type <code>"rectangle"</code>.
+</td></tr>
+<tr valign="top"><td><code>xmargin</code></td>
+<td>
+Width of horizontal margin to be trimmed.
+A single nonnegative number, or a vector of length 2
+indicating margins of unequal width at left and right.
+</td></tr>
+<tr valign="top"><td><code>ymargin</code></td>
+<td>
+Height of vertical margin to be trimmed.
+A single nonnegative number, or a vector of length 2
+indicating margins of unequal width at bottom and top.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is a simple convenience function to trim off a
+margin of specified width and height from each side of a
+rectangular window. Unequal margins can also be trimmed.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Another object of class <code>"owin"</code> representing the
+window after margins are trimmed.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  w &lt;- square(10)
+  # trim a margin of width 1 from all four sides
+  square9 &lt;- trim.rectangle(w, 1)
+
+  # trim margin of width 3 from the right side
+  # and margin of height 4 from top edge.
+  v &lt;- trim.rectangle(w, c(0,3), c(0,4))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

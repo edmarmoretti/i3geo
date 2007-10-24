@@ -1,0 +1,10 @@
+Package: gtools
+Title: Various R programming tools
+Description: Various R programming tools
+Version: 2.4.0
+Author: Gregory R. Warnes. Includes R source code and/or documentation
+        contributed by Ben Bolker and Thomas Lumley
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
+License: LGPL 2.1
+Packaged: Wed Aug 8 06:58:05 2007; warnes
+Built: R 2.5.1; i386-pc-mingw32; 2007-08-10 11:26:09; windows

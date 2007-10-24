@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Nearest Neighbour Distance Function G</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for Gest {spatstat}"><tr><td>Gest {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Nearest Neighbour Distance Function G</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Estimates the nearest neighbour distance distribution
+function <i>G(r)</i> from a point pattern in a 
+window of arbitrary shape.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Gest(X, r=NULL, breaks=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+The observed point pattern, 
+from which an estimate of <i>G(r)</i> will be computed.
+An object of class <code>ppp</code>, or data
+in any format acceptable to <code><a href="as.ppp.html">as.ppp</a>()</code>.
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+Optional. Numeric vector. The values of the argument <i>r</i>
+at which <i>G(r)</i> should be evaluated. There is a sensible default.
+First-time users are strongly advised not to specify this argument.
+See below for important conditions on <i>r</i>.
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+An alternative to the argument <code>r</code>.
+Not normally invoked by the user. See the <B>Details</B> section.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Ignored.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The nearest neighbour distance distribution function 
+(also called the ``<EM>event-to-event</EM>'' or
+``<EM>inter-event</EM>'' distribution)
+of a point process <i>X</i>
+is the cumulative distribution function <i>G</i> of the distance
+from a typical random point of <i>X</i> to
+the nearest other point of <i>X</i>.
+</p>
+<p>
+An estimate of <i>G</i> derived from a spatial point pattern dataset
+can be used in exploratory data analysis and formal inference
+about the pattern (Cressie, 1991; Diggle, 1983; Ripley, 1988).
+In exploratory analyses, the estimate of <i>G</i> is a useful statistic 
+summarising one aspect of the ``clustering'' of points.
+For inferential purposes, the estimate of <i>G</i> is usually compared to the 
+true value of <i>G</i> for a completely random (Poisson) point process,
+which is
+</p><p align="center"><i>G(r) = 1 - exp( - lambda * pi * r^2)</i></p><p>
+where <i>lambda</i> is the intensity
+(expected number of points per unit area).
+Deviations between the empirical and theoretical <i>G</i> curves
+may suggest spatial clustering or spatial regularity.
+</p>
+<p>
+This algorithm estimates the nearest neighbour distance distribution
+function <i>G</i>
+from the point pattern <code>X</code>. It assumes that <code>X</code> can be treated
+as a realisation of a stationary (spatially homogeneous) 
+random spatial point process in the plane, observed through
+a bounded window.
+The window (which is specified in <code>X</code> as <code>X$window</code>)
+may have arbitrary shape. 
+</p>
+<p>
+The argument <code>X</code> is interpreted as a point pattern object 
+(of class <code>"ppp"</code>, see <code><a href="ppp.object.html">ppp.object</a></code>) and can
+be supplied in any of the formats recognised
+by <code><a href="as.ppp.html">as.ppp</a>()</code>. 
+</p>
+<p>
+The estimation of <i>G</i> is hampered by edge effects arising from 
+the unobservability of points of the random pattern outside the window. 
+An edge correction is needed to reduce bias (Baddeley, 1998; Ripley, 1988). 
+The two edge corrections implemented here are the border method or
+``<EM>reduced sample</EM>'' estimator, and the spatial Kaplan-Meier estimator
+(Baddeley and Gill, 1997). 
+</p>
+<p>
+The argument <code>r</code> is the vector of values for the
+distance <i>r</i> at which <i>G(r)</i> should be evaluated. 
+It is also used to determine the breakpoints
+(in the sense of <code><a href="../../graphics/html/hist.html">hist</a></code>)
+for the computation of histograms of distances. The reduced-sample and
+Kaplan-Meier estimators are computed from histogram counts. 
+In the case of the Kaplan-Meier estimator this introduces a discretisation
+error which is controlled by the fineness of the breakpoints.
+</p>
+<p>
+First-time users would be strongly advised not to specify <code>r</code>.
+However, if it is specified, <code>r</code> must satisfy <code>r[1] = 0</code>, 
+and <code>max(r)</code> must be larger than the radius of the largest disc 
+contained in the window. Furthermore, the successive entries of <code>r</code>
+must be finely spaced.
+</p>
+<p>
+The algorithm also returns an estimate of the hazard rate function, 
+<i>lambda(r)</i>, of <i>G(r)</i>. The hazard rate is
+defined as the derivative
+</p><p align="center"><i>lambda(r) = - (d/dr) log(1 - G(r))</i></p><p>
+This estimate should be used with caution as <i>G</i> is not necessarily
+differentiable.
+</p>
+<p>
+The naive empirical distribution of distances from each point of
+the pattern <code>X</code> to the nearest other point of the pattern, 
+is a biased estimate of <i>G</i>.
+However this is also returned by the algorithm, as it is sometimes 
+useful in other contexts. Care should be taken not to use the uncorrected
+empirical <i>G</i> as if it were an unbiased estimator of  <i>G</i>.
+</p>
+<p>
+To simply compute the nearest neighbour distance for each point in the
+pattern, use <code><a href="nndist.html">nndist</a></code>. To determine which point is the
+nearest neighbour of a given point, use <code><a href="nnwhich.html">nnwhich</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"fv"</code>, see <code><a href="fv.object.html">fv.object</a></code>,
+which can be plotted directly using <code><a href="plot.fv.html">plot.fv</a></code>.
+<br>
+Essentially a data frame containing six columns:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>r</code></td>
+<td>
+the values of the argument <i>r</i> 
+at which the function <i>G(r)</i> has been  estimated
+</td></tr>
+<tr valign="top"><td><code>rs</code></td>
+<td>
+the ``reduced sample'' or ``border correction''
+estimator of <i>G(r)</i>
+</td></tr>
+<tr valign="top"><td><code>km</code></td>
+<td>
+the spatial Kaplan-Meier estimator of <i>G(r)</i>
+</td></tr>
+<tr valign="top"><td><code>hazard</code></td>
+<td>
+the hazard rate <i>lambda(r)</i>
+of <i>G(r)</i> by the spatial Kaplan-Meier method
+</td></tr>
+<tr valign="top"><td><code>raw</code></td>
+<td>
+the uncorrected estimate of <i>G(r)</i>,
+i.e. the empirical distribution of the distances from 
+each point in the pattern <code>X</code> to the nearest other point of
+the pattern
+</td></tr>
+<tr valign="top"><td><code>theo</code></td>
+<td>
+the theoretical value of <i>G(r)</i>
+for a stationary Poisson process of the same estimated intensity.
+</td></tr>
+</table>
+
+<h3>Warnings</h3>
+
+<p>
+The function <i>G</i> does not necessarily have a density. 
+Any valid c.d.f. may appear as the nearest neighbour distance
+distribution function of a stationary point process.
+</p>
+<p>
+The reduced sample estimator of <i>G</i> is pointwise approximately 
+unbiased, but need not be a valid distribution function; it may 
+not be a nondecreasing function of <i>r</i>. Its range is always 
+within <i>[0,1]</i>.
+</p>
+<p>
+The spatial Kaplan-Meier estimator of <i>G</i> is always nondecreasing
+but its maximum value may be less than <i>1</i>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Baddeley, A.J. Spatial sampling and censoring.
+In O.E. Barndorff-Nielsen, W.S. Kendall and
+M.N.M. van Lieshout (eds) 
+<EM>Stochastic Geometry: Likelihood and Computation</EM>.
+Chapman and Hall, 1998.
+Chapter 2, pages 37-78.
+</p>
+<p>
+Baddeley, A.J. and Gill, R.D.
+Kaplan-Meier estimators of interpoint distance
+distributions for spatial point processes.
+<EM>Annals of Statistics</EM> <B>25</B> (1997) 263-292.
+</p>
+<p>
+Cressie, N.A.C. <EM>Statistics for spatial data</EM>.
+John Wiley and Sons, 1991.
+</p>
+<p>
+Diggle, P.J. <EM>Statistical analysis of spatial point patterns</EM>.
+Academic Press, 1983.
+</p>
+<p>
+Ripley, B.D. <EM>Statistical inference for spatial processes</EM>.
+Cambridge University Press, 1988.
+</p>
+<p>
+Stoyan, D, Kendall, W.S. and Mecke, J.
+<EM>Stochastic geometry and its applications</EM>.
+2nd edition. Springer Verlag, 1995.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="nndist.html">nndist</a></code>,
+<code><a href="nnwhich.html">nnwhich</a></code>,
+<code><a href="Fest.html">Fest</a></code>,
+<code><a href="Jest.html">Jest</a></code>,
+<code><a href="Kest.html">Kest</a></code>,
+<code><a href="km.rs.html">km.rs</a></code>,
+<code><a href="reduced.sample.html">reduced.sample</a></code>,
+<code><a href="kaplan.meier.html">kaplan.meier</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  data(cells)
+  G &lt;- Gest(cells)
+  plot(G)
+
+  # P-P style plot
+  plot(G, cbind(km,theo) ~ theo)
+
+  # the empirical G is below the Poisson G,
+  # indicating an inhibited pattern
+
+  ## Not run: 
+     plot(G, . ~ r)
+     plot(G, . ~ theo)
+     plot(G, asin(sqrt(.)) ~ asin(sqrt(theo)))
+  
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

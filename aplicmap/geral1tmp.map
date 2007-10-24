@@ -1,0 +1,336 @@
+MAP
+  EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+  FONTSET "/opt/www/html/i3geo/symbols/fontes.txt"
+  IMAGECOLOR 157 211 255
+  IMAGETYPE png1
+  SYMBOLSET "/opt/www/html/i3geo/symbols/simbolos.sym"
+  SHAPEPATH "/opt/www/html/geodados"
+  SIZE 480 500
+  STATUS ON
+  UNITS DD
+  NAME "GERAL"
+
+  OUTPUTFORMAT
+    NAME "png1"
+    MIMETYPE "image/png"
+    DRIVER "GD/PNG"
+    EXTENSION "png"
+    IMAGEMODE "RGB"
+    TRANSPARENT FALSE
+  END
+
+  PROJECTION
+    "init=epsg:4291"
+  END
+  LEGEND
+    IMAGECOLOR 255 255 255
+    KEYSIZE 12 10
+    KEYSPACING 5 5
+    LABEL
+      ANGLE 0.000000
+      ANTIALIAS TRUE
+      FONT "verdana"
+      MAXSIZE 256
+      MINSIZE 4
+      SIZE 8
+      TYPE TRUETYPE
+      BUFFER 0
+      COLOR 0 0 0
+      FORCE FALSE
+      MINDISTANCE -1
+      MINFEATURESIZE -1
+      OFFSET 0 -2
+      PARTIALS TRUE
+    END
+    POSITION LL
+    STATUS OFF
+  END
+
+  QUERYMAP
+    COLOR 255 0 0
+    SIZE 480 500
+    STATUS OFF
+    STYLE HILITE
+  END
+
+  REFERENCE
+    COLOR -1 -1 -1
+    EXTENT -75.2486 -35.4973 -31.2486 5.99421
+    IMAGE "/opt/www/html/i3geo/imagens/reference.png"
+    OUTLINECOLOR 255 0 0
+    SIZE 177 167
+    STATUS OFF
+      MARKER "ref"
+      MARKERSIZE 8
+      MINBOXSIZE 8
+      MAXBOXSIZE 145
+  END
+
+  SCALEBAR
+    BACKGROUNDCOLOR 200 200 200
+    COLOR 0 0 0
+    IMAGECOLOR 255 255 255
+    INTERVALS 5
+    LABEL
+      SIZE TINY
+      TYPE BITMAP
+      BUFFER 0
+      COLOR 0 0 0
+      FORCE FALSE
+      MINDISTANCE -1
+      MINFEATURESIZE -1
+      OFFSET 0 0
+      PARTIALS TRUE
+    END
+    POSITION LR
+    SIZE 200 2
+    STATUS EMBED
+    STYLE 1
+    TRANSPARENT TRUE
+    UNITS KILOMETERS
+  END
+
+  WEB
+    IMAGEPATH "/var/tmp/ms_tmp/"
+    IMAGEURL "/ms_tmp/"
+      METADATA
+      END
+    QUERYFORMAT text/html
+    LEGENDFORMAT text/html
+    BROWSEFORMAT text/html
+    TEMPLATE "/opt/www/html/i3geo/aplicmap/geral.htm"
+  END
+
+  LAYER
+    DATA "/opt/www/html/i3geo/aplicmap/dados/zee"
+      METADATA
+        "CLASSE"	"NAO"
+        "TEMA"	"NAO"
+      END
+    NAME "zee"
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 137 201 255
+        SYMBOL 0
+      END
+    END
+  END
+
+  LAYER
+    DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
+    GROUP "mundo"
+      METADATA
+        "CLASSE"	"SIM"
+        "ITENSDESC"	"FIPS,GMI,Nome"
+        "TITULO"	"Países do mundo"
+        "ITENS"	"FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+        "TEMA"	"Países do mundo"
+      END
+    NAME "mundo"
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TRANSPARENCY 100
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 230 230 230
+        SIZE 1
+        SYMBOL 0
+      END
+    END
+  END
+
+  LAYER
+    DATA "/opt/www/html/i3geo/aplicmap/dados/mundo"
+    GROUP "mundo"
+      METADATA
+        "CLASSE"	"NAO"
+        "TEMA"	"NAO"
+      END
+    NAME "mundo2"
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TRANSPARENCY 100
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 255 255 255
+        SIZE 3
+        SYMBOL "linha"
+      END
+    END
+  END
+
+  LAYER
+    DATA "/opt/www/html/i3geo/aplicmap/dados/estados"
+      METADATA
+        "CLASSE"	"SIM"
+        "ESCALA"	"250000"
+        "TEMA"	"Brasil"
+      END
+    NAME "estados"
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TRANSPARENCY 100
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME " "
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 232 220 201
+        MAXSIZE 100
+        SIZE 1
+        SYMBOL 0
+      END
+    END
+  END
+
+  LAYER
+      METADATA
+        "TEMA"	"NAO"
+      END
+    NAME "copyright"
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TRANSFORM FALSE
+    TYPE ANNOTATION
+    UNITS METERS
+    CLASS
+      LABEL
+        SIZE TINY
+        TYPE BITMAP
+        BUFFER 0
+        COLOR 50 50 50
+        FORCE FALSE
+        MINDISTANCE -1
+        MINFEATURESIZE -1
+        OFFSET 0 0
+        PARTIALS TRUE
+        POSITION CC
+      END
+      METADATA
+      END
+    END
+    FEATURE
+      POINTS
+        10 5
+      END
+      TEXT "-I3Geo"
+    END
+  END
+
+  LAYER
+    DATA "brasil/biorregioes/probio"
+      METADATA
+        "DADOS"	"brasil/biorregioes/probio"
+        "CLASSE"	"SIM"
+        "ITENSDESC"	"Código,Workshop,Nome,Prioridade,Mais informações"
+        "ITENSLINK"	",,,,../../../geodados/brasil/biorregioes/linksprobio/[COD_GERAL].htm"
+        "ESCALA"	"1000000"
+        "TEXTO"	"SIM"
+        "ITENS"	"COD_GERAL,FIRST_FONT,FIRST_NOME,FIRST_PRIO,COD_GERAL"
+        "TPSHP"	""
+        "TEMA"	"Áreas prioritárias para conservação da biodiversidade"
+      END
+    NAME "probio"
+    SIZEUNITS PIXELS
+    STATUS OFF
+    TEMPLATE "probio.htm"
+    TOLERANCEUNITS PIXELS
+    TRANSPARENCY 50
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Extremamente alta"
+      EXPRESSION ('[FIRST_PRIO]'eq'1 - Extremamente alta')
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 255 60 60
+        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Muito alta"
+      EXPRESSION ('[FIRST_PRIO]'eq'2 - Muito alta')
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 250 130 20
+        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Alta"
+      EXPRESSION ('[FIRST_PRIO]'eq'3 - Alta')
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 255 255 0
+        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Insuficientemente conhecida"
+      EXPRESSION ('[FIRST_PRIO]'eq'Insuficientemente conhecida')
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 150 150 150
+        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Áreas adicionais"
+      EXPRESSION ('[FIRST_PRIO]'eq'Novas áreas identificadas pelos grupos regionais')
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 200 150 255
+        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+  END
+
+END

@@ -1,0 +1,155 @@
+<html>
+<head>
+    <title>jsUI-Treeview Sample</title>
+    <script language="javascript" src="../jsUI-Global/common.js"></script>
+	<script language="javascript" src="../jsUI-Global/uiCommon.js"></script>
+	<script language="javascript" src="../jsUI-Treeview/component.js"></script>
+
+    <link rel='stylesheet' type='text/css' href='../documentation.css'></link>
+</head>
+<body vlink="#0000ff" link="#0000ff" alink="#0000ff">
+<div id="menutemas" >   
+</div>
+<div id='bloco'></div>
+</body>
+<script>
+
+var mytreeview = new Object();
+mytreeview = treeviewNew("mytreeview", "default", document.getElementById("treeCell"), null);
+//mytreeview.itemClick = doClick;
+//mytreeview.itemExpand = loadBranch;
+mytreeview.createItem("item1", "MMA", "../../../imagens/iconlimites.png", true, true, true, null);
+function doClick(itemID)
+{alert(itemID)}
+    </script>
+		
+<script>
+var mytreeview = new Object();
+mytreeview = treeviewNew("mytreeview", "default", document.getElementById("menutemas"), null);
+//mytreeview.itemClick = doClick;
+//mytreeview.itemExpand = loadBranch;
+mytreeview.createItem("item1", "MMA", "../../../imagens/iconlimites.png", true, true, true, null);
+function doClick(itemID)
+{alert(itemID)}
+//detec&ccedil;&atilde;o do navegador
+navm = false // IE
+navn = false // netscape
+var app = navigator.appName.substring(0,1)
+if (app=='N') navn=true; else navm=true
+//load xml file
+if (window.ActiveXObject)
+{
+  var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+  xmlDoc.async=false; //Enforce download of XML file first. IE only.
+}
+else if (document.implementation && document.implementation.createDocument)
+{
+  var xmlDoc= document.implementation.createDocument("","doc",null);
+}
+if (typeof xmlDoc!="undefined")
+xmlDoc.load("../../../menutemas/menutemas.xml");
+
+//Regular expression used to match any non-whitespace character
+var notWhitespace = /\S/
+function pegaval()
+{
+ ng = xmlDoc.getElementsByTagName("TEMA").length
+ novo = '<table width="550">'
+ grupoantes = ""
+ sgrupoantes = ""
+ idgrupo = 0
+ idsgrupo = 0
+ idtema = 0
+ for (ig=0;ig<ng;ig++)
+ {
+  var msgobj=xmlDoc.getElementsByTagName("TEMA")[ig]
+  //REMOVE white spaces in XML file. Intended mainly for NS6/Mozilla
+  for (i=0;i<msgobj.childNodes.length;i++)
+  {
+   if ((msgobj.childNodes[i].nodeType == 3)&& (!notWhitespace.test(msgobj.childNodes[i].nodeValue))) 
+   {
+     // that is, if it's a whitespace text node
+     msgobj.removeChild(msgobj.childNodes[i])
+     i--
+   }
+  }
+  tid = xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[0].firstChild.nodeValue
+  tnome = xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[1].firstChild.nodeValue
+  tdesc = xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[2].firstChild.nodeValue
+  tfonte = ""
+  if (xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[3].firstChild)
+  {
+    tfonte = xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[3].firstChild.nodeValue
+    if (navn)
+    {
+      sgrupo = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.childNodes[1].firstChild.nodeValue
+      grupo = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.parentNode.childNodes[1].firstChild.nodeValue
+      //ico = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.parentNode.childNodes[7].firstChild.nodeValue
+    }
+    else
+    {
+      sgrupo = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.childNodes[0].firstChild.nodeValue
+      grupo = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.parentNode.childNodes[0].firstChild.nodeValue
+      //ico = xmlDoc.getElementsByTagName("TEMA")[ig].parentNode.parentNode.childNodes[3].firstChild.nodeValue
+    }
+    if (grupoantes != grupo)
+    {
+      idgrupo = idgrupo + 1
+			mytreeview.createItem("grupo"+idgrupo, grupo, "../../../imagens/folder-s.gif", true, true, true, "item1");
+			//novo = novo+'<tr><td colspan=3 style="color:red"><img src="../imagens/'+ico+'"/><b> '+grupo+'</b></td></tr>'
+      grupoantes = grupo
+    }
+    if (sgrupoantes != sgrupo)
+    {
+      idsgrupo = idsgrupo + 1
+			mytreeview.createItem("sgrupo"+idsgrupo, sgrupo, "../../../imagens/arquivos.gif", true, true, false, "grupo"+idgrupo);
+			//novo = novo+'<tr><td colspan=3 style="color:gray">'+sgrupo+'</td></tr>'
+      sgrupoantes = sgrupo
+    }
+    if (xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[4].firstChild)
+    {
+      idtema = idtema + 1
+			lk = xmlDoc.getElementsByTagName("TEMA")[ig].childNodes[4].firstChild.nodeValue
+			tnome = "<input type=\"checkbox\" name=\"layer\" value=\"TID\" onclick=\"mudaboxf(this)\"/>"+tnome
+			mytreeview.createItem("tema"+idtema, tnome, "../../../imagens/branco.gif", false, true, false, "sgrupo"+idsgrupo);	
+      //novo = novo + '<tr><td width="50" style="text-align:right"><input style="cursor:pointer" type="button" name="'+tid+'" value="ver" onclick="exec(this.name)"/></td><td width="235" style="cursor:default" title="'+tdesc+'"><p>'+tnome+'</p></td><td width="345" style="cursor:default" ><a href="'+lk+'" target="blank">'+tfonte+'</a></td>'
+    }
+    else
+    {
+		  //novo = novo + '<tr><td width="50" style="text-align:right"><input style="cursor:pointer" type="button" name="'+tid+'" value="ver" onclick="exec(this.name)"/></td><td width="235" style="cursor:default" title="'+tdesc+'"><p>'+tnome+'</p></td><td width="345" style="cursor:default" ><p>'+tfonte+'</p></td>'
+      idtema = idtema + 1
+			tnome = "<input type=\"checkbox\" name=\"layer\" value=\"TID\" onclick=\"mudaboxf(this)\"/>"+tnome
+			mytreeview.createItem("tema"+idtema, tnome, "../../../imagens/branco.gif", false, true, false, "sgrupo"+idsgrupo);	
+		}
+   }
+  }
+   novo = novo+'</table>'
+   //document.getElementById("bloco").innerHTML = document.getElementById("bloco").innerHTML + novo 
+}
+
+if (typeof xmlDoc!="undefined")
+{
+  if (window.ActiveXObject) //if IE, simply execute script (due to async prop).
+    pegaval()
+  else //else if NS6, execute script when XML object has loaded
+    xmlDoc.onload=pegaval
+}
+
+function exec(tema)
+{
+  host = window.location.host
+  if (navn)
+  {
+    w = window.innerWidth - 150;
+    h = window.innerHeight - 100;
+  }
+  if (navm)
+  {
+    w = window.screen.availWidth - 150;
+    h = window.screen.availHeight - 230;
+  }
+  mapsize= w+" "+h
+  jan = 'http://'+host+'/mapas/mma/ms_criamapa.php?serv='+host+'&layers='+tema+' estadosl &base=reduzido&mapext=-75.048889 -36.906765 -31.048889 7.004346&temasa='+tema+' estadosl&mapsize='+mapsize
+  window.open(jan)
+}
+

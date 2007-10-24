@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Spokes pattern of dummy points</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for spokes {spatstat}"><tr><td>spokes {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Spokes pattern of dummy points</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Generates a pattern of dummy points in a window,
+given a data point pattern.
+The dummy points lie on the radii of circles emanating from each
+data point.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ spokes(x, y, nrad = 3, nper = 3, fctr = 1.5, Mdefault = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+Vector of <i>x</i> coordinates of data points, or a list
+with components <code>x</code> and <code>y</code>, or a point pattern
+(an object of class <code>ppp</code>).
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+Vector of <i>y</i> coordinates of data points.  Ignored
+unless <code>x</code> is a vector.
+</td></tr>
+<tr valign="top"><td><code>nrad</code></td>
+<td>
+Number of radii emanating from each data point.
+</td></tr>
+<tr valign="top"><td><code>nper</code></td>
+<td>
+Number of dummy points per radius.
+</td></tr>
+<tr valign="top"><td><code>fctr</code></td>
+<td>
+Scale factor.
+Length of largest spoke radius is <code>fctr * M</code>
+where <code>M</code> is the mean nearest neighbour distance
+for the data points.
+</td></tr>
+<tr valign="top"><td><code>Mdefault</code></td>
+<td>
+Value of <code>M</code> to be used if <code>x</code> has length 1.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function is useful in creating dummy points for quadrature
+schemes (see <code><a href="quadscheme.html">quadscheme</a></code>).
+</p>
+<p>
+Given the data points, the function creates a collection of
+<code>nrad * nper * length(x)</code> dummy points.
+</p>
+<p>
+Around each data point <code>(x[i],y[i])</code> there are
+<code>nrad * nper</code> dummy points, lying on <code>nrad</code> radii
+emanating from <code>(x[i],y[i])</code>, with <code>nper</code> dummy points
+equally spaced along each radius.
+</p>
+<p>
+The (equal) spacing of dummy points along each radius is
+controlled by the factor <code>fctr</code>. 
+The distance from a data point to the furthest of its associated
+dummy points is <code>fctr * M</code>
+where <code>M</code> is the mean nearest neighbour distance
+for the data points.
+</p>
+<p>
+If there is only one data point the nearest neighbour distance
+is infinite, so the value <code>Mdefault</code> will be used in place
+of <code>M</code>.
+</p>
+<p>
+If <code>x</code> is a point pattern, then the value returned is
+also a point pattern, which is clipped to the window
+of <code>x</code>.  Hence there may be fewer than
+<code>nrad * nper * length(x)</code> dummy points in the pattern
+returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+If argument <code>x</code> is a point pattern, a point pattern with
+window equal to that of <code>x</code>.  Otherwise a list with two
+components <code>x</code> and <code>y</code>.  In either case the components
+<code>x</code> and <code>y</code> of the value are numeric vectors giving
+the coordinates of the dummy points.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="quad.object.html">quad.object</a></code>,
+<code><a href="quadscheme.html">quadscheme</a></code>,
+<code><a href="inside.owin.html">inside.owin</a></code>,
+<code><a href="gridcentres.html">gridcentres</a></code>,
+<code><a href="internal.html">stratrand</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  dat &lt;- runifrect(10)
+  ## Not run: 
+  plot(dat)
+  
+## End(Not run)
+  dum &lt;- spokes(dat$x, dat$y)
+  ## Not run: 
+  points(dum$x, dum$y, pch=".")
+  
+## End(Not run)
+  Q &lt;- quadscheme(dat, dum)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

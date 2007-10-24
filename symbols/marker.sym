@@ -1,0 +1,94 @@
+MARKERSET
+
+ Symbol
+    Name 'circle'
+    Type ELLIPSE
+    Filled
+    Points
+      100 100
+    END
+  END 
+
+  Symbol
+    Name 'interstate_shield'
+    Type PIXMAP
+    Image 'images/interstate.gif'
+    Transparent 7
+  END
+
+  Symbol
+    Name 'us_highway_shield'
+    Type PIXMAP
+    Image 'images/ushwy.gif'
+    Transparent 1
+  END
+
+  Symbol
+    Name 'state_highway_shield'
+    Type PIXMAP
+    Image 'images/sthwy.gif'
+  END 
+
+  Symbol
+    Name 'county_highway_shield'
+    Type PIXMAP
+    Image 'images/ctyhwy.gif'
+    Transparent 0	
+  END
+
+  Symbol
+    Name 'aviao'
+    Type PIXMAP
+    Image 'images/aviao.gif'
+    Transparent 0
+  END
+  
+  Symbol
+    Name 'sede'
+    Type PIXMAP
+    Image 'images/sede.gif'
+    Transparent 1
+  END
+
+  Symbol
+    Name 'incra'
+    Type PIXMAP
+    Image 'images/incra.gif'
+    Transparent 1
+  END
+
+  Symbol
+    Name 'ibama'
+    Type PIXMAP
+    Image 'images/ibama.gif'
+    Transparent 1
+  END
+
+  Symbol
+    Name 'capital'
+    Type PIXMAP
+    Image 'images/capital.gif'
+  END
+
+  Symbol
+    Name 'cidade'
+    Type PIXMAP
+    Image 'images/cidade.gif'
+  END
+
+  Symbol
+    Name 'vila'
+    Type PIXMAP
+    Image 'images/vila.gif'
+  END
+
+  Symbol
+    Name 'xy'
+    Type PIXMAP
+    Image 'images/xy.gif'
+  END
+
+
+END # MapServer Demo Marker Set
+
+

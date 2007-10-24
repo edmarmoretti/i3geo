@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Plot a List of Things</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for plot.listof {spatstat}"><tr><td>plot.listof {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Plot a List of Things</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Plots a list of things
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  ## S3 method for class 'listof':
+  plot(x, ..., main, arrange=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+An object of the class <code>"listof"</code>.
+Essentially a list of objects.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code><a href="../../Zelig/html/plot.zelig.html">plot</a></code> when generating each
+plot panel.
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+Overall heading for the plot.
+</td></tr>
+<tr valign="top"><td><code>arrange</code></td>
+<td>
+Logical flag indicating whether to plot the objects
+side-by-side. Set this to <code>FALSE</code> if you want to control
+the arrangement of the plots yourself.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This is the <code>plot</code> method for the class <code>"listof"</code>.
+</p>
+<p>
+An object of class <code>"listof"</code> (defined in the base R package) represents
+a list of objects, all belonging to a common class.
+The base R package defines a method for printing these objects,
+<code><a href="../../base/html/print.html">print.listof</a></code>, but does not define a method for <code>plot</code>.
+So here we have provided a method for <code>plot</code>.
+</p>
+<p>
+In the <STRONG>spatstat</STRONG> package, the function
+<code><a href="density.splitppp.html">density.splitppp</a></code> produces an object of
+class <code>"listof"</code>, essentially a list of pixel images.
+These images can be plotted in a nice arrangement
+using <code>plot.listof</code>. See the Example.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Null.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="../../base/html/print.html">print.listof</a></code>,
+<code><a href="density.splitppp.html">density.splitppp</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Multitype point pattern
+ data(amacrine)
+ plot(density(split(amacrine)))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

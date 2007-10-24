@@ -1,0 +1,1721 @@
+Entry: spatstat
+Aliases: spatstat spatstat-package
+Keywords: spatial package
+Description: The Spatstat Package
+URL: ../../../library/spatstat/html/00spatstat.html
+
+Entry: DiggleGratton
+Aliases: DiggleGratton
+Keywords: spatial models
+Description: Diggle-Gratton model
+URL: ../../../library/spatstat/html/DiggleGratton.html
+
+Entry: Fest
+Aliases: Fest empty.space
+Keywords: spatial nonparametric
+Description: Estimate the empty space function F
+URL: ../../../library/spatstat/html/Fest.html
+
+Entry: Gcross
+Aliases: Gcross
+Keywords: spatial nonparametric
+Description: Multitype Nearest Neighbour Distance Function (i-to-j)
+URL: ../../../library/spatstat/html/Gcross.html
+
+Entry: Gdot
+Aliases: Gdot
+Keywords: spatial nonparametric
+Description: Multitype Nearest Neighbour Distance Function (i-to-any)
+URL: ../../../library/spatstat/html/Gdot.html
+
+Entry: Gest
+Aliases: Gest nearest.neighbour
+Keywords: spatial nonparametric
+Description: Nearest Neighbour Distance Function G
+URL: ../../../library/spatstat/html/Gest.html
+
+Entry: Geyer
+Aliases: Geyer
+Keywords: spatial models
+Description: Geyer's Saturation Point Process Model
+URL: ../../../library/spatstat/html/Geyer.html
+
+Entry: Gmulti
+Aliases: Gmulti
+Keywords: spatial nonparametric
+Description: Marked Nearest Neighbour Distance Function
+URL: ../../../library/spatstat/html/Gmulti.html
+
+Entry: Iest
+Aliases: Iest
+Keywords: spatial nonparametric
+Description: Estimate the I-function
+URL: ../../../library/spatstat/html/Iest.html
+
+Entry: Jcross
+Aliases: Jcross
+Keywords: spatial nonparametric
+Description: Multitype J Function (i-to-j)
+URL: ../../../library/spatstat/html/Jcross.html
+
+Entry: Jdot
+Aliases: Jdot
+Keywords: spatial nonparametric
+Description: Multitype J Function (i-to-any)
+URL: ../../../library/spatstat/html/Jdot.html
+
+Entry: Jest
+Aliases: Jest
+Keywords: spatial nonparametric
+Description: Estimate the J-function
+URL: ../../../library/spatstat/html/Jest.html
+
+Entry: Jmulti
+Aliases: Jmulti
+Keywords: spatial nonparametric
+Description: Marked J Function
+URL: ../../../library/spatstat/html/Jmulti.html
+
+Entry: Kcross
+Aliases: Kcross
+Keywords: spatial nonparametric
+Description: Multitype K Function (Cross-type)
+URL: ../../../library/spatstat/html/Kcross.html
+
+Entry: Kcross.inhom
+Aliases: Kcross.inhom
+Keywords: spatial nonparametric
+Description: Inhomogeneous Cross K Function
+URL: ../../../library/spatstat/html/Kcross.inhom.html
+
+Entry: Kdot
+Aliases: Kdot
+Keywords: spatial nonparametric
+Description: Multitype K Function (i-to-any)
+URL: ../../../library/spatstat/html/Kdot.html
+
+Entry: Kdot.inhom
+Aliases: Kdot.inhom
+Keywords: spatial nonparametric
+Description: Inhomogeneous Multitype K Dot Function
+URL: ../../../library/spatstat/html/Kdot.inhom.html
+
+Entry: Kest
+Aliases: Kest
+Keywords: spatial nonparametric
+Description: K-function
+URL: ../../../library/spatstat/html/Kest.html
+
+Entry: Kest.fft
+Aliases: Kest.fft
+Keywords: spatial nonparametric
+Description: K-function using FFT
+URL: ../../../library/spatstat/html/Kest.fft.html
+
+Entry: Kinhom
+Aliases: Kinhom
+Keywords: spatial nonparametric
+Description: Inhomogeneous K-function
+URL: ../../../library/spatstat/html/Kinhom.html
+
+Entry: Kmeasure
+Aliases: Kmeasure
+Keywords: spatial nonparametric
+Description: Reduced Second Moment Measure
+URL: ../../../library/spatstat/html/Kmeasure.html
+
+Entry: Kmulti
+Aliases: Kmulti
+Keywords: spatial nonparametric
+Description: Marked K-Function
+URL: ../../../library/spatstat/html/Kmulti.html
+
+Entry: LennardJones
+Aliases: LennardJones
+Keywords: spatial models
+Description: The Lennard-Jones Potential
+URL: ../../../library/spatstat/html/LennardJones.html
+
+Entry: MultiStrauss
+Aliases: MultiStrauss
+Keywords: spatial models
+Description: The Multitype Strauss Point Process Model
+URL: ../../../library/spatstat/html/MultiStrauss.html
+
+Entry: MultiStraussHard
+Aliases: MultiStraussHard
+Keywords: spatial models
+Description: The Multitype/Hard Core Strauss Point Process Model
+URL: ../../../library/spatstat/html/MultiStraussHard.html
+
+Entry: Ord
+Aliases: Ord
+Keywords: spatial models
+Description: Generic Ord Interaction model
+URL: ../../../library/spatstat/html/Ord.html
+
+Entry: OrdThresh
+Aliases: OrdThresh
+Keywords: spatial models
+Description: Ord's Interaction model
+URL: ../../../library/spatstat/html/OrdThresh.html
+
+Entry: PairPiece
+Aliases: PairPiece
+Keywords: spatial models
+Description: The Piecewise Constant Pairwise Interaction Point Process Model
+URL: ../../../library/spatstat/html/PairPiece.html
+
+Entry: Pairwise
+Aliases: Pairwise
+Keywords: spatial models
+Description: Generic Pairwise Interaction model
+URL: ../../../library/spatstat/html/Pairwise.html
+
+Entry: Poisson
+Aliases: Poisson
+Keywords: spatial models
+Description: Poisson Point Process Model
+URL: ../../../library/spatstat/html/Poisson.html
+
+Entry: Saturated
+Aliases: Saturated
+Keywords: spatial models
+Description: Saturated Pairwise Interaction model
+URL: ../../../library/spatstat/html/Saturated.html
+
+Entry: Softcore
+Aliases: Softcore
+Keywords: spatial models
+Description: The Soft Core Point Process Model
+URL: ../../../library/spatstat/html/Softcore.html
+
+Entry: Strauss
+Aliases: Strauss
+Keywords: spatial models
+Description: The Strauss Point Process Model
+URL: ../../../library/spatstat/html/Strauss.html
+
+Entry: StraussHard
+Aliases: StraussHard
+Keywords: spatial models
+Description: The Strauss / Hard Core Point Process Model
+URL: ../../../library/spatstat/html/StraussHard.html
+
+Entry: affine
+Aliases: affine
+Keywords: spatial math
+Description: Apply Affine Transformation
+URL: ../../../library/spatstat/html/affine.html
+
+Entry: affine.owin
+Aliases: affine.owin
+Keywords: spatial math
+Description: Apply Affine Transformation To Window
+URL: ../../../library/spatstat/html/affine.owin.html
+
+Entry: affine.ppp
+Aliases: affine.ppp
+Keywords: spatial math
+Description: Apply Affine Transformation To Point Pattern
+URL: ../../../library/spatstat/html/affine.ppp.html
+
+Entry: affine.psp
+Aliases: affine.psp
+Keywords: spatial math
+Description: Apply Affine Transformation To Line Segment Pattern
+URL: ../../../library/spatstat/html/affine.psp.html
+
+Entry: allstats
+Aliases: allstats
+Keywords: spatial nonparametric
+Description: Calculate four standard summary functions of a point pattern.
+URL: ../../../library/spatstat/html/allstats.html
+
+Entry: alltypes
+Aliases: alltypes
+Keywords: spatial nonparametric
+Description: Calculate Statistic for All Types in a Multitype Point Pattern
+URL: ../../../library/spatstat/html/alltypes.html
+
+Entry: amacrine
+Aliases: amacrine
+Keywords: datasets spatial
+Description: Hughes' Amacrine Cell Data
+URL: ../../../library/spatstat/html/amacrine.html
+
+Entry: angles.psp
+Aliases: angles.psp
+Keywords: spatial math
+Description: Orientation Angles of Line Segments
+URL: ../../../library/spatstat/html/angles.psp.html
+
+Entry: anova.ppm
+Aliases: anova.ppm
+Keywords: spatial models methods
+Description: ANOVA for Fitted Point Process Models
+URL: ../../../library/spatstat/html/anova.ppm.html
+
+Entry: ants
+Aliases: ants ants.extra
+Keywords: datasets spatial
+Description: Harkness-Isham ants' nests data
+URL: ../../../library/spatstat/html/ants.html
+
+Entry: append.psp
+Aliases: append.psp
+Keywords: spatial manip
+Description: Combine Two Line Segment Patterns
+URL: ../../../library/spatstat/html/append.psp.html
+
+Entry: applynbd
+Aliases: applynbd
+Keywords: spatial programming iteration
+Description: Apply Function to Every Neighbourhood in a Point Pattern
+URL: ../../../library/spatstat/html/applynbd.html
+
+Entry: area.owin
+Aliases: area.owin
+Keywords: spatial math
+Description: Area of a Window
+URL: ../../../library/spatstat/html/area.owin.html
+
+Entry: as.im
+Aliases: as.im
+Keywords: spatial manip
+Description: Convert to Pixel Image
+URL: ../../../library/spatstat/html/as.im.html
+
+Entry: as.mask
+Aliases: as.mask
+Keywords: spatial manip
+Description: Pixel Image Approximation of a Window
+URL: ../../../library/spatstat/html/as.mask.html
+
+Entry: as.matrix.im
+Aliases: as.matrix.im
+Keywords: spatial methods
+Description: Convert Pixel Image to Matrix
+URL: ../../../library/spatstat/html/as.matrix.im.html
+
+Entry: as.owin
+Aliases: as.owin as.owin.owin as.owin.ppp as.owin.im as.owin.default
+Keywords: spatial manip
+Description: Convert Data To Class owin
+URL: ../../../library/spatstat/html/as.owin.html
+
+Entry: as.ppp
+Aliases: as.ppp as.ppp.ppp as.ppp.quad as.ppp.matrix as.ppp.default
+Keywords: spatial manip
+Description: Convert Data To Class ppp
+URL: ../../../library/spatstat/html/as.ppp.html
+
+Entry: as.psp
+Aliases: as.psp as.psp.psp as.psp.data.frame as.psp.matrix as.psp.owin as.psp.default
+Keywords: spatial manip
+Description: Convert Data To Class psp
+URL: ../../../library/spatstat/html/as.psp.html
+
+Entry: as.rectangle
+Aliases: as.rectangle
+Keywords: spatial manip
+Description: Window Frame
+URL: ../../../library/spatstat/html/as.rectangle.html
+
+Entry: bdist.pixels
+Aliases: bdist.pixels
+Keywords: spatial math
+Description: Distance to Boundary of Window
+URL: ../../../library/spatstat/html/bdist.pixels.html
+
+Entry: bdist.points
+Aliases: bdist.points
+Keywords: spatial math
+Description: Distance to Boundary of Window
+URL: ../../../library/spatstat/html/bdist.points.html
+
+Entry: bei
+Aliases: bei bei.extra
+Keywords: datasets spatial
+Description: Tropical rain forest trees
+URL: ../../../library/spatstat/html/bei.html
+
+Entry: betacells
+Aliases: betacells betacells.extra
+Keywords: datasets spatial
+Description: Beta Ganglion Cells in Cat Retina
+URL: ../../../library/spatstat/html/betacells.html
+
+Entry: bounding.box
+Aliases: bounding.box
+Keywords: spatial utilities
+Description: Bounding Box of a Window
+URL: ../../../library/spatstat/html/bounding.box.html
+
+Entry: bramblecanes
+Aliases: bramblecanes
+Keywords: datasets spatial
+Description: Hutchings' Bramble Canes data
+URL: ../../../library/spatstat/html/bramblecanes.html
+
+Entry: cells
+Aliases: cells
+Keywords: datasets spatial
+Description: Biological Cells Point Pattern
+URL: ../../../library/spatstat/html/cells.html
+
+Entry: centroid.owin
+Aliases: centroid.owin
+Keywords: spatial math
+Description: Centroid of a window
+URL: ../../../library/spatstat/html/centroid.owin.html
+
+Entry: chorley
+Aliases: chorley chorley.extra
+Keywords: datasets spatial
+Description: Chorley-Ribble Cancer Data
+URL: ../../../library/spatstat/html/chorley.html
+
+Entry: clickppp
+Aliases: clickppp
+Keywords: spatial iplot
+Description: Interactively Add Points
+URL: ../../../library/spatstat/html/clickppp.html
+
+Entry: coef.ppm
+Aliases: coef.ppm
+Keywords: spatial methods models methods methods methods methods
+Description: Coefficients of Fitted Point Process Model
+URL: ../../../library/spatstat/html/coef.ppm.html
+
+Entry: compatible.fv
+Aliases: compatible.fv
+Keywords: spatial manip
+Description: Test Whether Two Function Objects Are Compatible
+URL: ../../../library/spatstat/html/compatible.fv.html
+
+Entry: compatible.im
+Aliases: compatible.im
+Keywords: spatial manip
+Description: Test Whether Two Pixel Images Are Compatible
+URL: ../../../library/spatstat/html/compatible.im.html
+
+Entry: complement.owin
+Aliases: complement.owin
+Keywords: spatial math
+Description: Take Complement of a Window
+URL: ../../../library/spatstat/html/complement.owin.html
+
+Entry: concatxy
+Aliases: concatxy
+Keywords: spatial manip
+Description: Concatenate x,y Coordinate Vectors
+URL: ../../../library/spatstat/html/concatxy.html
+
+Entry: contour.im
+Aliases: contour.im
+Keywords: spatial hplot
+Description: Contour plot of pixel image
+URL: ../../../library/spatstat/html/contour.im.html
+
+Entry: copper
+Aliases: copper
+Keywords: datasets spatial
+Description: Berman-Huntington points and lines data
+URL: ../../../library/spatstat/html/copper.html
+
+Entry: corners
+Aliases: corners
+Keywords: spatial utilities
+Description: Corners of a rectangle
+URL: ../../../library/spatstat/html/corners.html
+
+Entry: crossdist
+Aliases: crossdist
+Keywords: spatial math
+Description: Pairwise distances
+URL: ../../../library/spatstat/html/crossdist.html
+
+Entry: crossdist.default
+Aliases: crossdist.default
+Keywords: spatial math
+Description: Pairwise distances between two different sets of points
+URL: ../../../library/spatstat/html/crossdist.default.html
+
+Entry: crossdist.ppp
+Aliases: crossdist.ppp
+Keywords: spatial math
+Description: Pairwise distances between two different point patterns
+URL: ../../../library/spatstat/html/crossdist.ppp.html
+
+Entry: crossdist.psp
+Aliases: crossdist.psp
+Keywords: spatial math
+Description: Pairwise distances between two different line segment patterns
+URL: ../../../library/spatstat/html/crossdist.psp.html
+
+Entry: crossing.psp
+Aliases: crossing.psp
+Keywords: spatial manip
+Description: Crossing Points of Two Line Segment Patterns
+URL: ../../../library/spatstat/html/crossing.psp.html
+
+Entry: cut.im
+Aliases: cut.im
+Keywords: spatial methods
+Description: Convert Pixel Image from Numeric to Factor
+URL: ../../../library/spatstat/html/cut.im.html
+
+Entry: cut.ppp
+Aliases: cut.ppp
+Keywords: spatial methods
+Description: Convert Point Pattern Marks from Numeric to Factor
+URL: ../../../library/spatstat/html/cut.ppp.html
+
+Entry: data.ppm
+Aliases: data.ppm
+Keywords: spatial manip models
+Description: Extract Original Data from a Fitted Point Process Model
+URL: ../../../library/spatstat/html/data.ppm.html
+
+Entry: default.dummy
+Aliases: default.dummy
+Keywords: spatial datagen
+Description: Generate a Default Pattern of Dummy Points
+URL: ../../../library/spatstat/html/default.dummy.html
+
+Entry: demopat
+Aliases: demopat
+Keywords: datasets spatial
+Description: Artificial Data Point Pattern
+URL: ../../../library/spatstat/html/demopat.html
+
+Entry: density.ppp
+Aliases: density.ppp
+Keywords: spatial methods smooth
+Description: Kernel Smoothed Intensity of Point Pattern
+URL: ../../../library/spatstat/html/density.ppp.html
+
+Entry: density.psp
+Aliases: density.psp
+Keywords: spatial methods smooth
+Description: Kernel Smoothing of Line Segment Pattern
+URL: ../../../library/spatstat/html/density.psp.html
+
+Entry: density.splitppp
+Aliases: density.splitppp
+Keywords: spatial methods smooth
+Description: Kernel Smoothed Intensity of Split Point Pattern
+URL: ../../../library/spatstat/html/density.splitppp.html
+
+Entry: spatstat-deprecated
+Aliases: conspire ksmooth.ppp mpl rtoro
+Keywords: internal
+Description: Deprecated spatstat functions
+URL: ../../../library/spatstat/html/deprecated.html
+
+Entry: diagnose.ppm
+Aliases: diagnose.ppm plot.diagppm
+Keywords: spatial models hplot
+Description: Diagnostic Plots for Fitted Point Process Model
+URL: ../../../library/spatstat/html/diagnose.ppm.html
+
+Entry: diameter
+Aliases: diameter
+Keywords: spatial math
+Description: Diameter of a Window Frame
+URL: ../../../library/spatstat/html/diameter.html
+
+Entry: dilate.owin
+Aliases: dilate.owin
+Keywords: spatial math
+Description: Dilate a Window
+URL: ../../../library/spatstat/html/dilate.owin.html
+
+Entry: dirichlet.weights
+Aliases: dirichlet.weights
+Keywords: spatial utilities
+Description: Compute Quadrature Weights Based on Dirichlet Tessellation
+URL: ../../../library/spatstat/html/dirichlet.weights.html
+
+Entry: disc
+Aliases: disc
+Keywords: spatial datagen
+Description: Circular Window
+URL: ../../../library/spatstat/html/disc.html
+
+Entry: distmap
+Aliases: distmap
+Keywords: spatial math
+Description: Distance Map
+URL: ../../../library/spatstat/html/distmap.html
+
+Entry: distmap.owin
+Aliases: distmap.owin
+Keywords: spatial math
+Description: Distance Map of Window
+URL: ../../../library/spatstat/html/distmap.owin.html
+
+Entry: distmap.ppp
+Aliases: distmap.ppp
+Keywords: spatial math
+Description: Distance Map of Point Pattern
+URL: ../../../library/spatstat/html/distmap.ppp.html
+
+Entry: distmap.psp
+Aliases: distmap.psp
+Keywords: spatial math
+Description: Distance Map of Line Segment Pattern
+URL: ../../../library/spatstat/html/distmap.psp.html
+
+Entry: dummy.ppm
+Aliases: dummy.ppm
+Keywords: spatial utilities models
+Description: Extract Dummy Points Used to Fit a Point Process Model
+URL: ../../../library/spatstat/html/dummy.ppm.html
+
+Entry: duplicated.ppp
+Aliases: duplicated.ppp
+Keywords: spatial methods
+Description: Determine Duplicated Points in a Spatial Point Pattern
+URL: ../../../library/spatstat/html/duplicated.ppp.html
+
+Entry: eem
+Aliases: eem
+Keywords: spatial models
+Description: Exponential Energy Marks
+URL: ../../../library/spatstat/html/eem.html
+
+Entry: endpoints.psp
+Aliases: endpoints.psp
+Keywords: spatial manip
+Description: Endpoints of Line Segment Pattern
+URL: ../../../library/spatstat/html/endpoints.psp.html
+
+Entry: envelope
+Aliases: envelope
+Keywords: spatial htest hplot iteration
+Description: Simulation envelopes of summary function
+URL: ../../../library/spatstat/html/envelope.html
+
+Entry: erode.owin
+Aliases: erode.owin
+Keywords: spatial math
+Description: Erode a Window
+URL: ../../../library/spatstat/html/erode.owin.html
+
+Entry: eroded.areas
+Aliases: eroded.areas
+Keywords: spatial math
+Description: Areas of Morphological Erosions
+URL: ../../../library/spatstat/html/eroded.areas.html
+
+Entry: eval.fv
+Aliases: eval.fv
+Keywords: spatial manip programming
+Description: Evaluate Expression Involving Functions
+URL: ../../../library/spatstat/html/eval.fv.html
+
+Entry: eval.im
+Aliases: eval.im
+Keywords: spatial manip programming
+Description: Evaluate Expression Involving Pixel Images
+URL: ../../../library/spatstat/html/eval.im.html
+
+Entry: expand.owin
+Aliases: expand.owin
+Keywords: spatial manip
+Description: Expand Window By Factor
+URL: ../../../library/spatstat/html/expand.owin.html
+
+Entry: fasp.object
+Aliases: fasp.object
+Keywords: spatial attribute
+Description: Function Arrays for Spatial Patterns
+URL: ../../../library/spatstat/html/fasp.object.html
+
+Entry: finpines
+Aliases: finpines finpines.extra
+Keywords: datasets spatial
+Description: Pine saplings in Finland.
+URL: ../../../library/spatstat/html/finpines.html
+
+Entry: fitted.ppm
+Aliases: fitted.ppm
+Keywords: spatial methods models
+Description: Fitted Conditional Intensity for Point Process Model
+URL: ../../../library/spatstat/html/fitted.ppm.html
+
+Entry: fv.object
+Aliases: fv.object
+Keywords: spatial attribute
+Description: Data Frames of Function Values
+URL: ../../../library/spatstat/html/fv.object.html
+
+Entry: ganglia
+Aliases: ganglia
+Keywords: datasets spatial
+Description: Beta Ganglion Cells in Cat Retina, Old Version
+URL: ../../../library/spatstat/html/ganglia.html
+
+Entry: gridcentres
+Aliases: gridcentres gridcenters
+Keywords: spatial datagen
+Description: Rectangular grid of points
+URL: ../../../library/spatstat/html/gridcentres.html
+
+Entry: gridweights
+Aliases: gridweights
+Keywords: spatial datagen
+Description: Compute Quadrature Weights Based on Grid Counts
+URL: ../../../library/spatstat/html/gridweights.html
+
+Entry: hamster
+Aliases: hamster
+Keywords: datasets spatial
+Description: Aherne's hamster tumour data
+URL: ../../../library/spatstat/html/hamster.html
+
+Entry: harmonic
+Aliases: harmonic
+Keywords: spatial models
+Description: Basis for Harmonic Functions
+URL: ../../../library/spatstat/html/harmonic.html
+
+Entry: hist.im
+Aliases: hist.im
+Keywords: spatial methods
+Description: Histogram of Pixel Values in an Image
+URL: ../../../library/spatstat/html/hist.im.html
+
+Entry: humberside
+Aliases: humberside humberside.convex
+Keywords: datasets spatial
+Description: Humberside Data on Childhood Leukaemia and Lymphoma
+URL: ../../../library/spatstat/html/humberside.html
+
+Entry: identify.ppp
+Aliases: identify.ppp
+Keywords: spatial iplot
+Description: Identify Points in a Point Pattern
+URL: ../../../library/spatstat/html/identify.ppp.html
+
+Entry: im
+Aliases: im
+Keywords: spatial manip datagen
+Description: Create a Pixel Image Object
+URL: ../../../library/spatstat/html/im.html
+
+Entry: im.object
+Aliases: im.object
+Keywords: spatial attribute
+Description: Class of Images
+URL: ../../../library/spatstat/html/im.object.html
+
+Entry: inside.owin
+Aliases: inside.owin
+Keywords: spatial math
+Description: Test Whether Points Are Inside A Window
+URL: ../../../library/spatstat/html/inside.owin.html
+
+Entry: spatstat-internal
+Aliases: affinexy apply23sum area.xypolygon AsymmHausdorff.psp as.breakpts as.fv as.polygonal as.units beachcolours bind.fv bdrylength.xypolygon breakpts breakpts.from.r cartesian cellmiddles checkfields check.hist.lengths check.named.vector clip.psp cliprect.psp clippoly.psp closepairs crosspairs cobble.xy commasep countingweights damaged.ppm default.expand default.clipwindow default.n.tiling default.ntile densityhack diagnose.ppm.engine discretise distpl distppl distppll divisors do.call.matched edge.Ripley edge.Trans ensure2vector equals.quad eratosthenes erode.mask even.breaks.owin exactdt exactPdt fasp findmarktype FormatFaspFormulae fv greatest.common.divisor getfields getglmfit gridindex handle.r.b.args handle.rshift.args ho.engine identical.formulae inside.xypolygon intX.owin intX.xypolygon intY.owin intY.xypolygon is.cadlag is.data is.fv is.marked.default is.marked.quad is.multitype.quad is.multitype.default is.prime is.poisson.ppm is.stationary.ppm Kborder.engine Kount Kwtsum Kmulti.inhom killinteraction least.common.multiple levels<-.im lookup.im make.even.breaks makeunits markformat markformat.ppp markformat.psp markspace.integral marks marks.ppp marks.psp marks.quad marks<- marks<-.ppp %mapp% markappendop marksubset markreplicateop %mrep% marksubsetop %msub% matcolall matcolany matcolsum matrixsample matrowall matrowany matrowsum maxflow meanX.owin meanY.owin mkcor mpl.engine mpl.get.covariates mpl.prepare MultiPair.checkmatrix nearest.pixel no.trend.ppm n.quad overlap.owin overlap.trapezium overlap.xypolygon owinpolycheck param.quad pixellate ploterodewin ploterodeimage plot.minconfit plot.pppmatching plot.profilepl plot.qqppm plot.quadratcount plot.quadrattest polynom pppdist.prohorov pppmatching primefactors print.diagppm print.envelope print.fasp print.fv print.interact print.isf print.minconfit print.plotppm print.pppmatching print.profilepl print.qqppm print.rmhcontrol print.rmhmodel print.rmhstart print.rmhseed print.summary.owin print.summary.ppp print.summary.psp print.summary.units print.units quad quadrat.breaks quadrat.count.engine quadscheme.replicated quadscheme.spatial rasterx.im rastery.im rebound.ppp rebound.psp rebound.owin rescale.units resid4plot resid1plot resid1panel resolve.defaults reverse.xypolygon revcumsum rmax.rule rotxy runifpoispp runifrect rmhResolveTypes rmhcontrol.rmhcontrol rmhcontrol.list rmhEngine rmhmodel.rmhmodel rmhmodel.list rmhseed rmhstart.rmhstart rmhstart.list rmhmodel.ppm rmpoint.I.allim rpoint.multi second.moment.calc shiftxy spatstat.rawdata.location sp.foundclass sp.foundclasses stratrand suffloc suffstat.generic suffstat.poisson summary.envelope summary.profilepl summary.pppmatching summary.units sympoly termsinformula tilecentroids units.default units<-.default update.interact validate.mask validate.quad variablesinformula verifyclass verify.xypolygon whist w.quad x.quad y.quad xypolygon2psp xypolyselfint
+Keywords: internal
+Description: Internal spatstat functions
+URL: ../../../library/spatstat/html/internal.html
+
+Entry: intersect.owin
+Aliases: intersect.owin union.owin
+Keywords: spatial math
+Description: Intersection or Union of Two Windows
+URL: ../../../library/spatstat/html/intersect.owin.html
+
+Entry: is.im
+Aliases: is.im
+Keywords: spatial manip
+Description: Test Whether An Object Is A Pixel Image
+URL: ../../../library/spatstat/html/is.im.html
+
+Entry: is.marked
+Aliases: is.marked
+Keywords: spatial manip
+Description: Test Whether Marks Are Present
+URL: ../../../library/spatstat/html/is.marked.html
+
+Entry: is.marked.ppm
+Aliases: is.marked.ppm
+Keywords: spatial manip models
+Description: Test Whether A Point Process Model is Marked
+URL: ../../../library/spatstat/html/is.marked.ppm.html
+
+Entry: is.marked.ppp
+Aliases: is.marked.ppp
+Keywords: spatial manip
+Description: Test Whether A Point Pattern is Marked
+URL: ../../../library/spatstat/html/is.marked.ppp.html
+
+Entry: is.multitype
+Aliases: is.multitype
+Keywords: spatial manip
+Description: Test whether Object is Multitype
+URL: ../../../library/spatstat/html/is.multitype.html
+
+Entry: is.multitype.ppm
+Aliases: is.multitype.ppm
+Keywords: spatial manip models
+Description: Test Whether A Point Process Model is Multitype
+URL: ../../../library/spatstat/html/is.multitype.ppm.html
+
+Entry: is.multitype.ppp
+Aliases: is.multitype.ppp
+Keywords: spatial manip
+Description: Test Whether A Point Pattern is Multitype
+URL: ../../../library/spatstat/html/is.multitype.ppp.html
+
+Entry: is.owin
+Aliases: is.owin
+Keywords: spatial manip
+Description: Test Whether An Object Is A Window
+URL: ../../../library/spatstat/html/is.owin.html
+
+Entry: is.ppm
+Aliases: is.ppm
+Keywords: spatial manip models
+Description: Test Whether An Object Is A Fitted Point Process Model
+URL: ../../../library/spatstat/html/is.ppm.html
+
+Entry: is.ppp
+Aliases: is.ppp
+Keywords: spatial manip
+Description: Test Whether An Object Is A Point Pattern
+URL: ../../../library/spatstat/html/is.ppp.html
+
+Entry: is.subset.owin
+Aliases: is.subset.owin
+Keywords: spatial math
+Description: Determine Whether One Window is Contained In Another
+URL: ../../../library/spatstat/html/is.subset.owin.html
+
+Entry: japanesepines
+Aliases: japanesepines
+Keywords: datasets spatial
+Description: Japanese Pines Point Pattern
+URL: ../../../library/spatstat/html/japanesepines.html
+
+Entry: kaplan.meier
+Aliases: kaplan.meier
+Keywords: spatial nonparametric
+Description: Kaplan-Meier Estimator using Histogram Data
+URL: ../../../library/spatstat/html/kaplan.meier.html
+
+Entry: km.rs
+Aliases: km.rs
+Keywords: spatial nonparametric
+Description: Kaplan-Meier and Reduced Sample Estimator using Histograms
+URL: ../../../library/spatstat/html/km.rs.html
+
+Entry: lansing
+Aliases: lansing
+Keywords: datasets spatial
+Description: Lansing Woods Point Pattern
+URL: ../../../library/spatstat/html/lansing.html
+
+Entry: lengths.psp
+Aliases: lengths.psp
+Keywords: spatial math
+Description: Lengths of Line Segments
+URL: ../../../library/spatstat/html/lengths.psp.html
+
+Entry: letterR
+Aliases: letterR
+Keywords: datasets spatial
+Description: Window in Shape of Letter R
+URL: ../../../library/spatstat/html/letterR.html
+
+Entry: levelset
+Aliases: levelset
+Keywords: spatial programming manip
+Description: Level Set of a Pixel Image
+URL: ../../../library/spatstat/html/levelset.html
+
+Entry: lgcp.estK
+Aliases: lgcp.estK
+Keywords: spatial models
+Description: Fit a Log-Gaussian Cox Point Process by Minimum Contrast
+URL: ../../../library/spatstat/html/lgcp.estK.html
+
+Entry: longleaf
+Aliases: longleaf
+Keywords: datasets spatial
+Description: Longleaf Pines Point Pattern
+URL: ../../../library/spatstat/html/longleaf.html
+
+Entry: lurking
+Aliases: lurking
+Keywords: spatial models hplot
+Description: Lurking variable plot
+URL: ../../../library/spatstat/html/lurking.html
+
+Entry: markcorr
+Aliases: markcorr
+Keywords: spatial nonparametric
+Description: Mark Correlation Function
+URL: ../../../library/spatstat/html/markcorr.html
+
+Entry: markstat
+Aliases: markstat
+Keywords: spatial programming
+Description: Summarise Marks in Every Neighbourhood in a Point Pattern
+URL: ../../../library/spatstat/html/markstat.html
+
+Entry: matclust.estK
+Aliases: matclust.estK
+Keywords: spatial models
+Description: Fit the Matern Cluster Point Process by Minimum Contrast
+URL: ../../../library/spatstat/html/matclust.estK.html
+
+Entry: mean.im
+Aliases: mean.im
+Keywords: spatial methods univar
+Description: Mean Pixel Value in an Image
+URL: ../../../library/spatstat/html/mean.im.html
+
+Entry: midpoints.psp
+Aliases: midpoints.psp
+Keywords: spatial math
+Description: Midpoints of Line Segment Pattern
+URL: ../../../library/spatstat/html/midpoints.psp.html
+
+Entry: mincontrast
+Aliases: mincontrast
+Keywords: spatial models
+Description: Method of Minimum Contrast
+URL: ../../../library/spatstat/html/mincontrast.html
+
+Entry: multiplicity.ppp
+Aliases: multiplicity.ppp
+Keywords: spatial utilities
+Description: Count Multiplicity of Duplicate Points
+URL: ../../../library/spatstat/html/multiplicity.ppp.html
+
+Entry: nearest.raster.point
+Aliases: nearest.raster.point
+Keywords: spatial manip
+Description: Find Pixel Nearest to a Given Point
+URL: ../../../library/spatstat/html/nearest.raster.point.html
+
+Entry: nncorr
+Aliases: nncorr
+Keywords: spatial nonparametric
+Description: Nearest-Neighbour Correlation of Marked Point Pattern
+URL: ../../../library/spatstat/html/nncorr.html
+
+Entry: nncross
+Aliases: nncross
+Keywords: spatial math
+Description: Nearest Neighbour in Another Point Pattern
+URL: ../../../library/spatstat/html/nncross.html
+
+Entry: nndist
+Aliases: nndist nndist.ppp nndist.default
+Keywords: spatial math
+Description: Nearest neighbour distances
+URL: ../../../library/spatstat/html/nndist.html
+
+Entry: nnwhich
+Aliases: nnwhich nnwhich.ppp nnwhich.default
+Keywords: spatial math
+Description: Nearest neighbour
+URL: ../../../library/spatstat/html/nnwhich.html
+
+Entry: nztrees
+Aliases: nztrees
+Keywords: datasets spatial
+Description: New Zealand Trees Point Pattern
+URL: ../../../library/spatstat/html/nztrees.html
+
+Entry: ord.family
+Aliases: ord.family
+Keywords: spatial models
+Description: Ord Interaction Process Family
+URL: ../../../library/spatstat/html/ord.family.html
+
+Entry: owin
+Aliases: owin
+Keywords: spatial datagen
+Description: Create a Window
+URL: ../../../library/spatstat/html/owin.html
+
+Entry: owin.object
+Aliases: owin.object
+Keywords: spatial attribute
+Description: Class owin
+URL: ../../../library/spatstat/html/owin.object.html
+
+Entry: pairdist
+Aliases: pairdist
+Keywords: spatial math
+Description: Pairwise distances
+URL: ../../../library/spatstat/html/pairdist.html
+
+Entry: pairdist.default
+Aliases: pairdist.default
+Keywords: spatial math
+Description: Pairwise distances
+URL: ../../../library/spatstat/html/pairdist.default.html
+
+Entry: pairdist.ppp
+Aliases: pairdist.ppp
+Keywords: spatial math
+Description: Pairwise distances
+URL: ../../../library/spatstat/html/pairdist.ppp.html
+
+Entry: pairdist.psp
+Aliases: pairdist.psp
+Keywords: spatial math
+Description: Pairwise distances between line segments
+URL: ../../../library/spatstat/html/pairdist.psp.html
+
+Entry: pairsat.family
+Aliases: pairsat.family
+Keywords: spatial models
+Description: Saturated Pairwise Interaction Point Process Family
+URL: ../../../library/spatstat/html/pairsat.family.html
+
+Entry: pairwise.family
+Aliases: pairwise.family
+Keywords: spatial models
+Description: Pairwise Interaction Process Family
+URL: ../../../library/spatstat/html/pairwise.family.html
+
+Entry: pcf
+Aliases: pcf
+Keywords: spatial nonparametric
+Description: Pair Correlation Function
+URL: ../../../library/spatstat/html/pcf.html
+
+Entry: pcf.fasp
+Aliases: pcf.fasp
+Keywords: spatial nonparametric
+Description: Pair Correlation Function obtained from array of K functions
+URL: ../../../library/spatstat/html/pcf.fasp.html
+
+Entry: pcf.fv
+Aliases: pcf.fv
+Keywords: spatial nonparametric
+Description: Pair Correlation Function obtained from K Function
+URL: ../../../library/spatstat/html/pcf.fv.html
+
+Entry: pcf.ppp
+Aliases: pcf.ppp
+Keywords: spatial nonparametric
+Description: Pair Correlation Function of Point Pattern
+URL: ../../../library/spatstat/html/pcf.ppp.html
+
+Entry: persp.im
+Aliases: persp.im
+Keywords: spatial hplot
+Description: Perspective Plot of Pixel Image
+URL: ../../../library/spatstat/html/persp.im.html
+
+Entry: plot.fasp
+Aliases: plot.fasp
+Keywords: spatial hplot
+Description: Plot a Function Array
+URL: ../../../library/spatstat/html/plot.fasp.html
+
+Entry: plot.fv
+Aliases: plot.fv
+Keywords: spatial hplot
+Description: Plot Function Valuesn
+URL: ../../../library/spatstat/html/plot.fv.html
+
+Entry: plot.im
+Aliases: plot.im image.im
+Keywords: spatial hplot
+Description: Plot a Pixel Image
+URL: ../../../library/spatstat/html/plot.im.html
+
+Entry: plot.listof
+Aliases: plot.listof
+Keywords: spatial hplot
+Description: Plot a List of Things
+URL: ../../../library/spatstat/html/plot.listof.html
+
+Entry: plot.owin
+Aliases: plot.owin
+Keywords: spatial hplot
+Description: Plot a Spatial Window
+URL: ../../../library/spatstat/html/plot.owin.html
+
+Entry: plot.plotppm
+Aliases: plot.plotppm
+Keywords: spatial hplot models
+Description: Plot a plotppm Object Created by plot.ppm
+URL: ../../../library/spatstat/html/plot.plotppm.html
+
+Entry: plot.ppm
+Aliases: plot.ppm
+Keywords: spatial hplot models
+Description: plot a Fitted Point Process Model
+URL: ../../../library/spatstat/html/plot.ppm.html
+
+Entry: plot.ppp
+Aliases: plot.ppp
+Keywords: spatial hplot
+Description: plot a Spatial Point Pattern
+URL: ../../../library/spatstat/html/plot.ppp.html
+
+Entry: plot.psp
+Aliases: plot.psp
+Keywords: spatial hplot
+Description: plot a Spatial Line Segment Pattern
+URL: ../../../library/spatstat/html/plot.psp.html
+
+Entry: plot.quad
+Aliases: plot.quad
+Keywords: spatial hplot
+Description: plot a Spatial Quadrature Scheme
+URL: ../../../library/spatstat/html/plot.quad.html
+
+Entry: plot.splitppp
+Aliases: plot.splitppp
+Keywords: spatial hplot
+Description: Plot a List of Point Patterns
+URL: ../../../library/spatstat/html/plot.splitppp.html
+
+Entry: ppm
+Aliases: ppm
+Keywords: spatial models
+Description: Fit Point Process Model to Data
+URL: ../../../library/spatstat/html/ppm.html
+
+Entry: ppm.object
+Aliases: ppm.object
+Keywords: spatial attribute
+Description: Class of Fitted Point Process Models
+URL: ../../../library/spatstat/html/ppm.object.html
+
+Entry: ppp
+Aliases: ppp
+Keywords: spatial datagen
+Description: Create a Point Pattern
+URL: ../../../library/spatstat/html/ppp.html
+
+Entry: ppp.object
+Aliases: ppp.object
+Keywords: spatial attribute
+Description: Class of Point Patterns
+URL: ../../../library/spatstat/html/ppp.object.html
+
+Entry: pppdist
+Aliases: pppdist
+Keywords: spatial math
+Description: Optimal Match Between Two Point Patterns
+URL: ../../../library/spatstat/html/pppdist.html
+
+Entry: predict.ppm
+Aliases: predict.ppm
+Keywords: spatial models
+Description: Prediction from a Fitted Point Process Model
+URL: ../../../library/spatstat/html/predict.ppm.html
+
+Entry: print.im
+Aliases: print.im
+Keywords: spatial print
+Description: Print Brief Details of an Image
+URL: ../../../library/spatstat/html/print.im.html
+
+Entry: print.owin
+Aliases: print.owin
+Keywords: spatial print
+Description: Print Brief Details of a Spatial Window
+URL: ../../../library/spatstat/html/print.owin.html
+
+Entry: print.ppm
+Aliases: print.ppm
+Keywords: spatial print models
+Description: Print a Fitted Point Process Model
+URL: ../../../library/spatstat/html/print.ppm.html
+
+Entry: print.ppp
+Aliases: print.ppp
+Keywords: spatial print
+Description: Print Brief Details of a Point Pattern Dataset
+URL: ../../../library/spatstat/html/print.ppp.html
+
+Entry: print.psp
+Aliases: print.psp
+Keywords: spatial print
+Description: Print Brief Details of a Line Segment Pattern Dataset
+URL: ../../../library/spatstat/html/print.psp.html
+
+Entry: print.quad
+Aliases: print.quad
+Keywords: spatial print
+Description: Print a Quadrature Scheme
+URL: ../../../library/spatstat/html/print.quad.html
+
+Entry: profilepl
+Aliases: profilepl
+Keywords: spatial models
+Description: Profile Maximum Pseudolikelihood
+URL: ../../../library/spatstat/html/profilepl.html
+
+Entry: psp
+Aliases: psp
+Keywords: spatial datagen
+Description: Create a Line Segment Pattern
+URL: ../../../library/spatstat/html/psp.html
+
+Entry: psp.object
+Aliases: psp.object
+Keywords: spatial attribute
+Description: Class of Line Segment Patterns
+URL: ../../../library/spatstat/html/psp.object.html
+
+Entry: qqplot.ppm
+Aliases: qqplot.ppm
+Keywords: spatial models hplot
+Description: Q-Q Plot of Residuals from Fitted Point Process Model
+URL: ../../../library/spatstat/html/qqplot.ppm.html
+
+Entry: quad.object
+Aliases: quad.object
+Keywords: spatial attribute
+Description: Class of Quadrature Schemes
+URL: ../../../library/spatstat/html/quad.object.html
+
+Entry: quad.ppm
+Aliases: quad.ppm
+Keywords: spatial manip models
+Description: Extract Quadrature Scheme Used to Fit a Point Process Model
+URL: ../../../library/spatstat/html/quad.ppm.html
+
+Entry: quadrat.test
+Aliases: quadrat.test
+Keywords: spatial htest
+Description: Chi-Squared Dispersion Test for Spatial Point Pattern Based on Quadrat Counts
+URL: ../../../library/spatstat/html/quadrat.test.html
+
+Entry: quadratcount
+Aliases: quadratcount
+Keywords: spatial math
+Description: Quadrat counting for a point pattern
+URL: ../../../library/spatstat/html/quadratcount.html
+
+Entry: quadscheme
+Aliases: quadscheme
+Keywords: spatial datagen
+Description: Generate a Quadrature Scheme from a Point Pattern
+URL: ../../../library/spatstat/html/quadscheme.html
+
+Entry: quantile.im
+Aliases: quantile.im
+Keywords: spatial methods univar
+Description: Sample Quantiles of Pixel Image
+URL: ../../../library/spatstat/html/quantile.im.html
+
+Entry: rMatClust
+Aliases: rMatClust
+Keywords: spatial datagen
+Description: Simulate Matern Cluster Process
+URL: ../../../library/spatstat/html/rMatClust.html
+
+Entry: rMaternI
+Aliases: rMaternI
+Keywords: spatial datagen
+Description: Simulate Matern Model I
+URL: ../../../library/spatstat/html/rMaternI.html
+
+Entry: rMaternII
+Aliases: rMaternII
+Keywords: spatial datagen
+Description: Simulate Matern Model II
+URL: ../../../library/spatstat/html/rMaternII.html
+
+Entry: rNeymanScott
+Aliases: rNeymanScott
+Keywords: spatial datagen
+Description: Simulate Neyman-Scott Process
+URL: ../../../library/spatstat/html/rNeymanScott.html
+
+Entry: rSSI
+Aliases: rSSI
+Keywords: spatial datagen
+Description: Simulate Simple Sequential Inhibition
+URL: ../../../library/spatstat/html/rSSI.html
+
+Entry: rStrauss
+Aliases: rStrauss
+Keywords: spatial datagen
+Description: Perfect Simulation of the Strauss Process
+URL: ../../../library/spatstat/html/rStrauss.html
+
+Entry: rThomas
+Aliases: rThomas
+Keywords: spatial datagen
+Description: Simulate Thomas Process
+URL: ../../../library/spatstat/html/rThomas.html
+
+Entry: raster.x
+Aliases: raster.x raster.y
+Keywords: spatial manip
+Description: Cartesian Coordinates for a Pixel Raster
+URL: ../../../library/spatstat/html/raster.x.html
+
+Entry: rcell
+Aliases: rcell
+Keywords: spatial datagen
+Description: Simulate Baddeley-Silverman Cell Process
+URL: ../../../library/spatstat/html/rcell.html
+
+Entry: reach
+Aliases: reach reach.ppm reach.interact reach.rmhmodel
+Keywords: spatial models
+Description: Interaction Distance of a Point Process
+URL: ../../../library/spatstat/html/reach.html
+
+Entry: reduced.sample
+Aliases: reduced.sample
+Keywords: spatial nonparametric
+Description: Reduced Sample Estimator using Histogram Data
+URL: ../../../library/spatstat/html/reduced.sample.html
+
+Entry: redwood
+Aliases: redwood
+Keywords: datasets spatial
+Description: California Redwoods Point Pattern (Ripley's Subset)
+URL: ../../../library/spatstat/html/redwood.html
+
+Entry: redwoodfull
+Aliases: redwoodfull redwoodfull.extra
+Keywords: datasets spatial
+Description: California Redwoods Point Pattern (Entire Dataset)
+URL: ../../../library/spatstat/html/redwoodfull.html
+
+Entry: rescale
+Aliases: rescale
+Keywords: spatial math
+Description: Convert dataset to another unit of length
+URL: ../../../library/spatstat/html/rescale.html
+
+Entry: rescale.owin
+Aliases: rescale.owin
+Keywords: spatial math
+Description: Convert Window to Another Unit of Length
+URL: ../../../library/spatstat/html/rescale.owin.html
+
+Entry: rescale.ppp
+Aliases: rescale.ppp
+Keywords: spatial math
+Description: Convert Point Pattern to Another Unit of Length
+URL: ../../../library/spatstat/html/rescale.ppp.html
+
+Entry: rescale.psp
+Aliases: rescale.psp
+Keywords: spatial math
+Description: Convert Line Segment Pattern to Another Unit of Length
+URL: ../../../library/spatstat/html/rescale.psp.html
+
+Entry: rescue.rectangle
+Aliases: rescue.rectangle
+Keywords: spatial manip
+Description: Convert Window Back To Rectangle
+URL: ../../../library/spatstat/html/rescue.rectangle.html
+
+Entry: residuals.ppm
+Aliases: residuals.ppm
+Keywords: spatial models methods
+Description: Residuals for Fitted Point Process Model
+URL: ../../../library/spatstat/html/residuals.ppm.html
+
+Entry: residualspaper
+Aliases: residualspaper
+Keywords: datasets spatial models
+Description: Data and Code From JRSS Discussion Paper on Residuals
+URL: ../../../library/spatstat/html/residualspaper.html
+
+Entry: ripras
+Aliases: ripras
+Keywords: spatial utilities
+Description: Estimate window from points alone
+URL: ../../../library/spatstat/html/ripras.html
+
+Entry: rlabel
+Aliases: rlabel
+Keywords: spatial datagen
+Description: Random Re-Labelling of Point Pattern
+URL: ../../../library/spatstat/html/rlabel.html
+
+Entry: rmh
+Aliases: rmh
+Keywords: spatial datagen
+Description: Simulate point patterns using the Metropolis-Hastings algorithm.
+URL: ../../../library/spatstat/html/rmh.html
+
+Entry: rmh.default
+Aliases: rmh.default
+Keywords: spatial datagen
+Description: Simulate Point Process Models using the Metropolis-Hastings Algorithm.
+URL: ../../../library/spatstat/html/rmh.default.html
+
+Entry: rmh.ppm
+Aliases: rmh.ppm
+Keywords: spatial models datagen
+Description: Simulate from a Fitted Point Process Model
+URL: ../../../library/spatstat/html/rmh.ppm.html
+
+Entry: rmhcontrol
+Aliases: rmhcontrol rmhcontrol.default
+Keywords: spatial datagen
+Description: Set Control Parameters for Metropolis-Hastings Algorithm.
+URL: ../../../library/spatstat/html/rmhcontrol.html
+
+Entry: rmhmodel
+Aliases: rmhmodel rmhmodel.default
+Keywords: spatial datagen
+Description: Define Point Process Model for Metropolis-Hastings Simulation.
+URL: ../../../library/spatstat/html/rmhmodel.html
+
+Entry: rmhstart
+Aliases: rmhstart rmhstart.default
+Keywords: spatial datagen
+Description: Determine Initial State for Metropolis-Hastings Simulation.
+URL: ../../../library/spatstat/html/rmhstart.html
+
+Entry: rmpoint
+Aliases: rmpoint
+Keywords: spatial datagen
+Description: Generate N Random Multitype Points
+URL: ../../../library/spatstat/html/rmpoint.html
+
+Entry: rmpoispp
+Aliases: rmpoispp
+Keywords: spatial datagen
+Description: Generate Multitype Poisson Point Pattern
+URL: ../../../library/spatstat/html/rmpoispp.html
+
+Entry: rotate
+Aliases: rotate
+Keywords: spatial math
+Description: Rotate
+URL: ../../../library/spatstat/html/rotate.html
+
+Entry: rotate.owin
+Aliases: rotate.owin
+Keywords: spatial math
+Description: Rotate a Window
+URL: ../../../library/spatstat/html/rotate.owin.html
+
+Entry: rotate.ppp
+Aliases: rotate.ppp
+Keywords: spatial math
+Description: Rotate a Point Pattern
+URL: ../../../library/spatstat/html/rotate.ppp.html
+
+Entry: rotate.psp
+Aliases: rotate.psp
+Keywords: spatial math
+Description: Rotate a Line Segment Pattern
+URL: ../../../library/spatstat/html/rotate.psp.html
+
+Entry: rpoint
+Aliases: rpoint
+Keywords: spatial datagen
+Description: Generate N Random Points
+URL: ../../../library/spatstat/html/rpoint.html
+
+Entry: rpoisline
+Aliases: rpoisline
+Keywords: spatial datagen
+Description: Generate Poisson Random Line Process
+URL: ../../../library/spatstat/html/rpoisline.html
+
+Entry: rpoispp
+Aliases: rpoispp
+Keywords: spatial datagen
+Description: Generate Poisson Point Pattern
+URL: ../../../library/spatstat/html/rpoispp.html
+
+Entry: rshift
+Aliases: rshift
+Keywords: spatial datagen
+Description: Random Shift
+URL: ../../../library/spatstat/html/rshift.html
+
+Entry: rshift.ppp
+Aliases: rshift.ppp
+Keywords: spatial datagen
+Description: Randomly Shift a Point Pattern
+URL: ../../../library/spatstat/html/rshift.ppp.html
+
+Entry: rshift.psp
+Aliases: rshift.psp
+Keywords: spatial datagen
+Description: Randomly Shift a Line Segment Pattern
+URL: ../../../library/spatstat/html/rshift.psp.html
+
+Entry: rshift.splitppp
+Aliases: rshift.splitppp
+Keywords: spatial datagen
+Description: Randomly Shift a List of Point Patterns
+URL: ../../../library/spatstat/html/rshift.splitppp.html
+
+Entry: rstrat
+Aliases: rstrat
+Keywords: spatial datagen
+Description: Simulate Stratified Random Point Pattern
+URL: ../../../library/spatstat/html/rstrat.html
+
+Entry: rsyst
+Aliases: rsyst
+Keywords: spatial datagen
+Description: Simulate systematic random point pattern
+URL: ../../../library/spatstat/html/rsyst.html
+
+Entry: rthin
+Aliases: rthin
+Keywords: spatial datagen
+Description: Random Thinning
+URL: ../../../library/spatstat/html/rthin.html
+
+Entry: runifdisc
+Aliases: runifdisc
+Keywords: spatial datagen
+Description: Generate N Uniform Random Points in a Disc
+URL: ../../../library/spatstat/html/runifdisc.html
+
+Entry: runifpoint
+Aliases: runifpoint
+Keywords: spatial datagen
+Description: Generate N Uniform Random Points
+URL: ../../../library/spatstat/html/runifpoint.html
+
+Entry: scanpp
+Aliases: scanpp
+Keywords: spatial IO
+Description: Read Point Pattern From Data File
+URL: ../../../library/spatstat/html/scanpp.html
+
+Entry: selfcrossing.psp
+Aliases: selfcrossing.psp
+Keywords: spatial manip
+Description: Crossing Points in a Line Segment Pattern
+URL: ../../../library/spatstat/html/selfcrossing.psp.html
+
+Entry: setcov
+Aliases: setcov
+Keywords: spatial math
+Description: Set Covariance of a Window
+URL: ../../../library/spatstat/html/setcov.html
+
+Entry: setmarks
+Aliases: setmarks %mark%
+Keywords: spatial manip
+Description: Set or Reset the Marks in a Point Pattern
+URL: ../../../library/spatstat/html/setmarks.html
+
+Entry: shift
+Aliases: shift
+Keywords: spatial manip
+Description: Apply Vector Translation
+URL: ../../../library/spatstat/html/shift.html
+
+Entry: shift.im
+Aliases: shift.im
+Keywords: spatial manip
+Description: Apply Vector Translation To Pixel Image
+URL: ../../../library/spatstat/html/shift.im.html
+
+Entry: shift.owin
+Aliases: shift.owin
+Keywords: spatial manip
+Description: Apply Vector Translation To Window
+URL: ../../../library/spatstat/html/shift.owin.html
+
+Entry: shift.ppp
+Aliases: shift.ppp
+Keywords: spatial manip
+Description: Apply Vector Translation To Point Pattern
+URL: ../../../library/spatstat/html/shift.ppp.html
+
+Entry: shift.psp
+Aliases: shift.psp
+Keywords: spatial manip
+Description: Apply Vector Translation To Line Segment Pattern
+URL: ../../../library/spatstat/html/shift.psp.html
+
+Entry: simdat
+Aliases: simdat
+Keywords: datasets spatial
+Description: Simulated Point Pattern
+URL: ../../../library/spatstat/html/simdat.html
+
+Entry: solutionset
+Aliases: solutionset
+Keywords: spatial programming manip
+Description: Evaluate Logical Expression Involving Pixel Images and Return Region Where Expression is True
+URL: ../../../library/spatstat/html/solutionset.html
+
+Entry: spatstat.options
+Aliases: spatstat.options
+Keywords: spatial
+Description: Internal Options in Spatstat Package
+URL: ../../../library/spatstat/html/spatstat.options.html
+
+Entry: split.ppp
+Aliases: split.ppp split<-.ppp
+Keywords: spatial methods manip
+Description: Divide Point Pattern into Sub-patterns
+URL: ../../../library/spatstat/html/split.ppp.html
+
+Entry: spokes
+Aliases: spokes
+Keywords: spatial datagen
+Description: Spokes pattern of dummy points
+URL: ../../../library/spatstat/html/spokes.html
+
+Entry: spruces
+Aliases: spruces
+Keywords: datasets spatial
+Description: Spruces Point Pattern
+URL: ../../../library/spatstat/html/spruces.html
+
+Entry: square
+Aliases: square unit.square
+Keywords: spatial datagen
+Description: Square Window
+URL: ../../../library/spatstat/html/square.html
+
+Entry: subset.fasp
+Aliases: subset.fasp [.fasp
+Keywords: spatial manip
+Description: Extract Subset of Function Array
+URL: ../../../library/spatstat/html/subset.fasp.html
+
+Entry: subset.fv
+Aliases: subset.fv [.fv
+Keywords: spatial manip
+Description: Extract Subset of Function Values
+URL: ../../../library/spatstat/html/subset.fv.html
+
+Entry: subset.im
+Aliases: subset.im [.im
+Keywords: spatial manip
+Description: Extract Subset of Image
+URL: ../../../library/spatstat/html/subset.im.html
+
+Entry: subset.ppp
+Aliases: subset.ppp [.ppp [<-.ppp
+Keywords: spatial manip
+Description: Extract or Replace Subset of Point Pattern
+URL: ../../../library/spatstat/html/subset.ppp.html
+
+Entry: subset.psp
+Aliases: subset.psp [.psp
+Keywords: spatial manip
+Description: Extract Subset of Line Segment Pattern
+URL: ../../../library/spatstat/html/subset.psp.html
+
+Entry: suffstat
+Aliases: suffstat
+Keywords: spatial models
+Description: Sufficient Statistic of Point Process Model
+URL: ../../../library/spatstat/html/suffstat.html
+
+Entry: summary.im
+Aliases: summary.im print.summary.im
+Keywords: spatial methods
+Description: Summarizing a Pixel Image
+URL: ../../../library/spatstat/html/summary.im.html
+
+Entry: summary.owin
+Aliases: summary.owin
+Keywords: spatial methods
+Description: Summary of a Spatial Window
+URL: ../../../library/spatstat/html/summary.owin.html
+
+Entry: summary.ppm
+Aliases: summary.ppm print.summary.ppm
+Keywords: spatial methods models
+Description: Summarizing a Fitted Point Process Model
+URL: ../../../library/spatstat/html/summary.ppm.html
+
+Entry: summary.ppp
+Aliases: summary.ppp
+Keywords: spatial methods
+Description: Summary of a Point Pattern Dataset
+URL: ../../../library/spatstat/html/summary.ppp.html
+
+Entry: summary.psp
+Aliases: summary.psp
+Keywords: spatial methods
+Description: Summary of a Line Segment Pattern Dataset
+URL: ../../../library/spatstat/html/summary.psp.html
+
+Entry: summary.quad
+Aliases: summary.quad print.summary.quad
+Keywords: spatial methods
+Description: Summarizing a Quadrature Scheme
+URL: ../../../library/spatstat/html/summary.quad.html
+
+Entry: superimpose
+Aliases: superimpose
+Keywords: spatial manip
+Description: Superimpose Several Point Patterns
+URL: ../../../library/spatstat/html/superimpose.html
+
+Entry: swedishpines
+Aliases: swedishpines
+Keywords: datasets spatial
+Description: Swedish Pines Point Pattern
+URL: ../../../library/spatstat/html/swedishpines.html
+
+Entry: thomas.estK
+Aliases: thomas.estK
+Keywords: spatial models
+Description: Fit the Thomas Point Process by Minimum Contrast
+URL: ../../../library/spatstat/html/thomas.estK.html
+
+Entry: trim.rectangle
+Aliases: trim.rectangle
+Keywords: spatial manip
+Description: Cut margins from rectangle
+URL: ../../../library/spatstat/html/trim.rectangle.html
+
+Entry: union.quad
+Aliases: union.quad
+Keywords: spatial manip
+Description: Union of Data and Dummy Points
+URL: ../../../library/spatstat/html/union.quad.html
+
+Entry: unique.ppp
+Aliases: unique.ppp
+Keywords: spatial methods
+Description: Extract Unique Points from a Spatial Point Pattern
+URL: ../../../library/spatstat/html/unique.ppp.html
+
+Entry: units
+Aliases: units units.owin units.psp units.ppp units.im units<- units<-.ppp units<-.psp units<-.owin units<-.im
+Keywords: spatial manip
+Description: Name for Unit of Length
+URL: ../../../library/spatstat/html/units.html
+
+Entry: unmark
+Aliases: unmark
+Keywords: spatial manip
+Description: Remove Marks from a Marked Point Pattern
+URL: ../../../library/spatstat/html/unmark.html
+
+Entry: update.ppm
+Aliases: update.ppm
+Keywords: spatial methods models
+Description: Update a Fitted Point Process Model
+URL: ../../../library/spatstat/html/update.ppm.html
+
+Entry: vcov.ppm
+Aliases: vcov.ppm
+Keywords: spatial methods models
+Description: Variance-Covariance Matrix for a Fitted Point Process Model
+URL: ../../../library/spatstat/html/vcov.ppm.html

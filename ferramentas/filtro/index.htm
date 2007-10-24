@@ -1,0 +1,61 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
+<style>
+.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
+</style>
+</head>
+<body class="yui-skin-sam" >
+	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
+		<div id=guia1 >Construir</div>
+		<div id=guia2 >Digitar</div>
+		<div id=guia3 >Testar</div>
+	</div>
+	<span id=geral style="left:0px;top:0px;">
+		<div style="text-align:center;top:5px;left:0px;display:block;width:97%">
+			<div onclick='aplicaFiltro("")' style=position:relative >
+			<input id=botao1 size=18  type="button" value="Incluir/aplicar" />
+			</div>
+			<div id=limpar style="top:0px;left:130px;position:absolute">
+			<input id=botao2 size=18 type="button" value="Excluir filtro" />
+		    </div>
+		</div>
+		<div id=combot style="position:relative;top:10px;left:0px;">
+		</div>
+		<div id=guia1obj style="display:block;text-align:left;width:97%">
+			<div style="text-align:left;display:block;position:relative;top:10px;left:0px;">
+				<div id=par style="display:none;position:relative;top:5px;left:0px;width:97%">
+					<table id="parametros" >
+						<tr><td></td><td></td>
+							<td style=background-color:yellow >Item</td>
+							<td style=background-color:yellow >Operador</td>
+							<td style=background-color:yellow >Valor</td>
+							<td style=background-color:yellow >Conector</td>
+						</tr>
+					</table>
+				</div>
+				<div id=resultado style="position:relative;top:5px;left:0px">
+				</div>
+				<div id=valores style="position:relative;top:5px;left:0px">
+				</div>
+			</div>
+			<div id=men1 style=width:80%;top:15px;left:0px; >O resultado da filtragem ser&aacute; mostrado no mapa. Certifique-se que o tema está v&iacute;sivel. Antes de aplicar, vc pode testar o filtro definido.</div>
+		</div>
+		<div id=guia2obj style="display:none;width:250px">
+			<div style="position:relative;top:15px;left:0px">
+				<input type="text" class="digitar" id="filtro" size=65 value="" />
+			</div>
+			<br><br>Digite o filtro desejado.
+		</div>
+		<div id=guia3obj style="display:none;">
+			<div id=teste style=top:5px >
+				Aguarde...
+			</div>
+		</div>
+	</span>
+</body>
+<script src="../i3geo_tudo_compacto.js" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</html>

@@ -1,0 +1,357 @@
+SYMBOLSET
+	Symbol 
+		NAME 'p0' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		0 0 
+		1 0 
+		1 1 
+		0 1 
+		END 
+  END
+  Symbol
+    Name "p1"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 1
+    1 1
+    END
+  END
+  Symbol
+    Name "p2"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 0
+    1 1
+    END
+  END
+
+  Symbol
+    Name "p3"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 0
+    0 1
+    END
+  END
+
+  Symbol
+    Name "p4"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    0 0
+    END
+  END
+
+  Symbol
+    Name "p5"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 0
+    1 0
+    0 1
+    END
+  END
+  
+  Symbol
+    Name "p6"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 0
+    0 1
+    1 0
+    END
+  END
+	
+  Symbol
+    Name "p7"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    0 1
+		1 1
+    1 0
+    END
+  END
+
+  Symbol
+    Name "p8"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+		0 1
+    1 1
+		-99 -99
+		0 3
+		3 3
+    END
+  END
+	
+  Symbol
+    Name "p9"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+		0 1
+    1 1
+		-99 -99
+		0 0
+		1 1
+    END
+  END
+
+  Symbol
+    Name "pt1"
+    Type VECTOR
+    TRANSPARENT 0
+    Points
+    1 1
+    1 1
+    END
+  END
+	
+  Symbol 
+	  name "pt2" 
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED true
+  END
+
+  Symbol
+    Name "pt3"
+    Type ELLIPSE
+    POINTS 1 1 END
+    Transparent 0
+  END
+  Symbol
+    Name "cidmun"
+    Type PIXMAP
+    Image "cidmun.png"
+  END
+	
+  Symbol
+    Name "capital"
+    Type PIXMAP
+    Image "capital.png"
+  END
+  Symbol
+    Name "vila"
+    Type PIXMAP
+    Image "vila.png"
+  END
+
+  Symbol
+    Name "xy"
+    Type PIXMAP
+    Image "xy.png"
+  END
+
+	Symbol
+    Name "xyr"
+    Type PIXMAP
+    Image "xyr.png"
+  END
+	
+  Symbol
+    Name "porto"
+    Type PIXMAP
+    Image "porto.png"
+  END
+	
+  Symbol
+    Name "ref"
+    Type PIXMAP
+    Image "ref.png"
+  END
+
+  Symbol
+    Name "foto"
+    Type PIXMAP
+    Image "foto.png"
+  END
+	
+  Symbol
+    Name "filme"
+    Type PIXMAP
+    Image "filme.png"
+  END
+
+  Symbol
+    Name "marca"
+    Type PIXMAP
+    Image "marca.png"
+  END
+	SYMBOL 
+  	NAME "estrela"
+  	TYPE vector
+  	FILLED TRUE
+  	POINTS
+		81 48
+		66 0
+		50 48
+		0 48
+		41 77
+		25 125
+		66 96
+		106 125
+		91 77
+		131 48
+		81 48
+  	END 
+	END
+
+  SYMBOL 
+    NAME 'triangulo' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 1 
+		.5 0 
+		1 1 
+		0 1 
+		END 
+	END
+
+  SYMBOL 
+    NAME 'industria' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		0 2
+		0 5
+		4 5
+		4 0
+		3 0
+		3 2
+		0 2
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'torre' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		3 4
+		4 4
+		4 5
+		0 5
+		0 4
+		1 4
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'mineracao' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		0 0
+		5 5
+		4 6
+		3 7
+		2 6
+		0 5
+		5 0
+		END 
+	END
+
+  SYMBOL 
+    NAME 'templo' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		4 1
+		4 2
+		3 2
+		3 3
+		5 3
+		5 5
+		0 5
+		0 3
+		2 3
+		2 2
+		1 2
+		1 1
+		2 1
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'saude' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		4 1
+		4 2
+		3 2
+		3 3
+		2 3
+		2 2
+		1 2
+		1 1
+		2 1
+		2 0
+		END 
+	END
+	
+  SYMBOL 
+    NAME 'escola' 
+		TYPE VECTOR 
+		FILLED FALSE 
+		POINTS 
+		2 0
+		5 2
+		3 2
+		3 4
+		5 4
+		5 7
+		0 7
+		0 4
+		2 4
+		2 0
+		END 
+	END
+
+  SYMBOL 
+    NAME 'cruz' 
+		TYPE VECTOR 
+		FILLED TRUE 
+		POINTS 
+		2 0
+		3 0
+		3 1
+		5 1
+		5 2
+		3 2
+		3 7
+		2 7
+		2 2
+		0 2
+		0 1
+		2 1
+		2 0
+		END 
+	END
+
+
+
+

@@ -1,0 +1,840 @@
+<html>
+  <head>
+    <title>OpenLayers Class Reference Documentation</title>
+    <style type='text/css'> 
+        .type { background-color: #ddd } 
+        td { border: black solid 1px; padding: 3px;  } 
+        table { border-collapse: collapse; margin: 5px 10px; } 
+        .classref { margin-left: 20px; }
+        div.index { float:left;  width: 300px; }
+    </style>
+  </head>
+  <body>
+<div class='index'><a href='#OpenLayers.Map'>OpenLayers.Map</a></div>
+<div class='index'><a href='#OpenLayers.Layer'>OpenLayers.Layer</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Image'>OpenLayers.Layer.Image</a></div>
+<div class='index'><a href='#OpenLayers.Layer.HTTPRequest'>OpenLayers.Layer.HTTPRequest</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Grid'>OpenLayers.Layer.Grid</a></div>
+<div class='index'><a href='#OpenLayers.Layer.WMS'>OpenLayers.Layer.WMS</a></div>
+<div class='index'><a href='#OpenLayers.Layer.KaMap'>OpenLayers.Layer.KaMap</a></div>
+<div class='index'><a href='#OpenLayers.Layer.EventPane'>OpenLayers.Layer.EventPane</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Google'>OpenLayers.Layer.Google</a></div>
+<div class='index'><a href='#OpenLayers.Layer.VirtualEarth'>OpenLayers.Layer.VirtualEarth</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Markers'>OpenLayers.Layer.Markers</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Text'>OpenLayers.Layer.Text</a></div>
+<div class='index'><a href='#OpenLayers.Layer.GeoRSS'>OpenLayers.Layer.GeoRSS</a></div>
+<div class='index'><a href='#OpenLayers.Layer.Boxes'>OpenLayers.Layer.Boxes</a></div>
+<div class='index'><a href='#OpenLayers.Layer.TMS'>OpenLayers.Layer.TMS</a></div>
+<div class='index'><a href='#OpenLayers.Icon'>OpenLayers.Icon</a></div>
+<div class='index'><a href='#OpenLayers.Marker'>OpenLayers.Marker</a></div>
+<div class='index'><a href='#OpenLayers.Marker.Box'>OpenLayers.Marker.Box</a></div>
+<div class='index'><a href='#OpenLayers.Tile'>OpenLayers.Tile</a></div>
+<div class='index'><a href='#OpenLayers.Tile.Image'>OpenLayers.Tile.Image</a></div>
+<div class='index'><a href='#OpenLayers.Tile.WFS'>OpenLayers.Tile.WFS</a></div>
+<div class='index'><a href='#OpenLayers.Control'>OpenLayers.Control</a></div>
+<div class='index'><a href='#OpenLayers.Control.LayerSwitcher'>OpenLayers.Control.LayerSwitcher</a></div>
+<div class='index'><a href='#OpenLayers.Control.MouseDefaults'>OpenLayers.Control.MouseDefaults</a></div>
+<div class='index'><a href='#OpenLayers.Control.MousePosition'>OpenLayers.Control.MousePosition</a></div>
+<div class='index'><a href='#OpenLayers.Control.MouseToolbar'>OpenLayers.Control.MouseToolbar</a></div>
+<div class='index'><a href='#OpenLayers.Control.OverviewMap'>OpenLayers.Control.OverviewMap</a></div>
+<div class='index'><a href='#OpenLayers.Control.PanZoom'>OpenLayers.Control.PanZoom</a></div>
+<div class='index'><a href='#OpenLayers.Control.PanZoomBar'>OpenLayers.Control.PanZoomBar</a></div>
+<div class='index'><a href='#OpenLayers.Control.Permalink'>OpenLayers.Control.Permalink</a></div>
+<div class='index'><a href='#OpenLayers.Control.Scale'>OpenLayers.Control.Scale</a></div>
+<div class='index'><a href='#OpenLayers.LonLat'>OpenLayers.LonLat</a></div>
+<div class='index'><a href='#OpenLayers.Size'>OpenLayers.Size</a></div>
+<div class='index'><a href='#OpenLayers.Pixel'>OpenLayers.Pixel</a></div>
+<div class='index'><a href='#OpenLayers.Bounds'>OpenLayers.Bounds</a></div>
+<div class='index'><a href='#OpenLayers.Util'>OpenLayers.Util</a></div>
+<div class='index'><a href='#OpenLayers.Ajax'>OpenLayers.Ajax</a></div>
+<br style='clear:both' />
+<h1><a name="OpenLayers.Map">OpenLayers.Map</a></h1><div class="classref">
+
+Instantiate class <a href="#OpenLayers.Map" title="OpenLayers.Map">OpenLayers.Map</a> in order to create a map. This is the central class in the API. Everything else is auxiliary.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Map(container,  opts?)</td><td>Creates a new map inside of the given HTML container, which is typically a DIV element. The opts variable is an object with various options, as described in the options section below.</td></tr>
+  
+</table>
+<h2>Methods</h2>
+<table>
+  </table>
+
+<h3>Layer Management </h3>
+  <table>
+  <tr><td>  addLayer(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>)</td><td>none</td><td>adds a layer to the list currently set for the map. </td></tr>
+  <tr><td>  addLayers([ <a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>, <a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a> ])</td><td>none</td><td>Adds multiple layers to a map.</td></tr>
+  <tr><td>  removeLayer(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>)</td><td>none</td><td>Remove a layer from the map.</td></tr>
+  <tr><td>  setBaseLayer(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>)</td><td>none</td><td>Sets a new base layer for the map. The provided layer should have already been added to the map. Changing the base layer causes all other base layers to be turned off, and all overlays to reproject themselves. </td></tr>
+  
+  </table>
+
+<h3>Control Management</h3>
+  <table>
+  <tr><td>  addControl(<a href="#OpenLayers.Control" title="OpenLayers.Control">control</a>)</td><td>none</td><td>Adds a control to the map.</td></tr>
+  
+  </table>
+
+<h3>Popup Management</h3>
+  <table>
+  <tr><td>  addPopup(<a href="#OpenLayers.Popup" title="OpenLayers.Popup">popup</a>, <span class="type" title="Boolean">exclusive</span>)</td><td>none</td><td>adds a popup to the map. If exclusive is set to true, then all other popups are closed first.</td></tr>
+  <tr><td>  removePopup(<a href="#OpenLayers.Popup" title="OpenLayers.Popup">popup</a>)</td><td>none</td><td>removes an existing popup from the map.</td></tr>
+
+  </table>
+
+<h3>Center management</h3>
+  <table>
+  <tr><td>  setCenter(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>, <span class="type" title="int">zoom</span>)</td><td>none</td><td>Set the center point of the map. This then moves all the layers to the new center location as well, using each layer's 'moveTo' function. The 'zoom' is an integer from 0 to maxZoomLevel.</td></tr>
+  <tr><td>  pan(<span class="type" title="Integer">dx</span>, <span class="type" title="Integer">dy</span>)</td><td>none</td><td>Allows user to pan by a value of screen pixels</td></tr>
+  
+  </table>
+
+<h3>Zoom Management</h3>
+  <table>
+  <tr><td>  zoomTo(<span class="type" title="int">zoom</span>)</td><td>none</td><td>zoom to the given zoom level.</td></tr>
+  <tr><td>  zoomIn()</td><td>none</td><td>zoom in one level.</td></tr>
+  <tr><td>  zoomOut()</td><td>none</td><td>zoom out one level.</td></tr>
+  <tr><td>  zoomToExtent(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td>none</td><td>Set the map such that the bounds fits within the current viewport area.</td></tr>
+  <tr><td>  zoomToMaxExtent()</td><td>none</td><td>Zoom such that the entire bounds of the map is contained in the viewport.</td></tr>
+  <tr><td>  zoomToScale(<span class="type" title="float">float</span>)</td><td>none</td><td>Zoom as close to the given scale as possible. Scale can be given as a ratio (1/24000) or as the denominator of the scale value (24000). zoomToScale will find the zoom level which most closely fits the requested scale and set that as the current zoom level.</td></tr>
+
+  </table>
+
+<h3>Current Map Information</h3>
+  <table>
+  <tr><td>  getLonLatFromPixel(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Returns OpenLayers.LonLat corresponding to the given OpenLayers.Pixel, translated into lon/lat by the current base layer</td></tr>
+  <tr><td>  getPixelFromLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Returns OpenLayers.Pixel corresponding to the given OpenLayers.LonLat, translated by the current base layer  </td></tr>
+  <tr><td>  getCenter()</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Returns a LonLat for the current center of the map</td></tr>
+  <tr><td>  getZoom()</td><td><span class="type" title="Integer">Integer</span></td><td>Returns the current zoom level as an integer</td></tr>
+  <tr><td>  getExtent()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Returns a Bounds object which represents the geographic bounds of the current viewPort. </td></tr>
+  <tr><td>  getSize()</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Returns the pixel size of the current map window.</td></tr>
+  <tr><td>  getTileSize()</td><td><a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a></td><td>Returns tile size currently set for map.</td></tr>
+  <tr><td>  getResolution()</td><td><span class="type" title="float">float</span></td><td>Returns the current resolution (units/pixel) of the map</td></tr>
+  <tr><td>  getZoomForExtent(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td>Zoom level in which the given bounds will fit</td><td>zooming to this level and setting the center of the map in the center of the bounds will always fit the given bounds in the map.</td></tr>
+  
+  </table>
+
+<h3>Default Map Information </h3>
+  <table>
+  <tr><td>  getMaxResolution()</td><td><span class="type" title="float">float</span></td><td>returns The Map's Maximum Resolution, the units/pixel at zoom level 0. The default is 1.40625, to match the approximate MaxResolution used by the commercial providers. </td></tr>
+  <tr><td>  getMaxExtent()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Return the max extent of the current base layer as defined on the layer. The default maxExtent for OpenLayers is -180,-90,180,90</td></tr>
+  <tr><td>  getMaxZoomLevel()</td><td><span class="type" title="int">int</span></td><td>Returns the maximum zoom level that can be reached in the map for the current base layer</td></tr>
+  <tr><td>  getMinZoomLevel()</td><td><span class="type" title="int">int</span></td><td>Returns the minimum zoom level that can be reached in the map for the current base layer</td></tr>
+
+</table>
+<h2>Events</h2>
+<table>
+  <tr><td>  addlayer</td><td>a layer is added to the map</td></tr>
+  <tr><td>  removelayer</td><td>a layer is removed from the map</td></tr>
+  <tr><td>  changelayer</td><td>a layer has some property of it, typically visibility, changed.</td></tr>
+  <tr><td>  changebaselayer</td><td>the current base layer changes</td></tr>
+  <tr><td>  movestart</td><td>start of a movement in the map       </td></tr>
+  <tr><td>  move</td><td>end of movement in a map. this happens while te mouse is dragging as well as for all other events.</td></tr>
+  <tr><td>  moveend</td><td>end of movement in a map, but does not happen when the 'dragging' flag is set, as is the case when the move event is in the middle of a drag action.         </td></tr>
+  <tr><td>  zoomend</td><td>end of a zoom action</td></tr>
+  <tr><td>  mouseover</td><td>map is moused over</td></tr>
+  <tr><td>  mouseout</td><td>map is no longer mousedout</td></tr>
+  <tr><td>  mousemove</td><td>mouse moves inside map</td></tr>
+  <tr><td>  dragstart</td><td>drag action starts</td></tr>
+  <tr><td>  dragend</td><td>drag action ends</td></tr>
+  
+</table>
+<h2>Options:</h2>
+<table>
+  <tr><td>controls</td><td>an array of control objects to be added to the map. The default is [new OpenLayers.Control.MouseDefaults(), new OpenLayers.Control.PanZoom()] </td></tr>
+  <tr><td>projection</td><td>used by WMS layers, should be an SRS identifier.</td></tr>
+  <tr><td>maxZoomLevel</td><td>The number of zoom levels to use in the map.</td></tr>
+  <tr><td>maxExtent</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a> to be used as the maximum extent of a map. The center of the map can not leave the maxExtent of the map when dragging.</td></tr>
+  <tr><td>maxResolution</td><td>The units/pixel measurement at zoom level 0. Default is 1.40625</td></tr>
+  <tr><td>resolutions</td><td>An array of resolutions to be used as an index when zooming. Overrides maxZoomLevel and maxResolution if present.</td></tr>
+  <tr><td>minScale</td><td>The smallest scale value. minScale is preferred over maxResolution, if present.</td></tr>
+  <tr><td>maxScale</td><td>The maximum scale the map should include. Overrides maxZoomLevel if present.</td></tr>
+  <tr><td>units</td><td>The units of the map. Defaults to degrees. Neccesary when using scale in any way.</td></tr>
+  <tr><td>scales</td><td>An array of scale values. Overrides maxResolution, maxZoomLevel, resolutions, and min/max scale if present.</td></tr>
+  
+</table></div>
+<h1><a name="OpenLayers.Layer">OpenLayers.Layer</a></h1><div class="classref">
+
+Layers are the most important and central aspect of OpenLayers. They are the 
+core functionality for the software: Everything that ends up on the map comes
+from a layer. The base layer class is designed to be subclassed by any number
+of different layers.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer(name, options)</td><td>All layers have a name as their first param. This name is used to display the layer in the LayerSwitcher, and for other purposes. The options parameter is used to replace any parameters of the Layer which need to be different.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Layer" title="OpenLayers.Layer">OpenLayers.Layer</a></td><td>create a clone of the layer.</td></tr>
+  <tr><td>  setName(<span class="type" title="String">name</span>)</td><td>none</td><td>Set the name of the layer to something different.</td></tr>
+  <tr><td>  moveTo(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="Boolean">zoomChanged</span>)</td><td>none</td><td>Not implemented here, but the general function called on dragging or setCenter, to move the Layer to a new geographic location.</td></tr>
+  <tr><td>  setMap(map)</td><td>none</td><td>Set the map property of the layer. Also set the parameters which are inherited from the map.</td></tr>
+  <tr><td>  getVisibility()</td><td><span class="type" title="Boolean">Boolean</span></td><td>Return true or false based on visibility of the layer.</td></tr>
+  <tr><td>  setVisibility(<span class="type" title="Boolean">visible</span>)</td><td>none</td><td>Set the layer visibility, and trigger the appropriate events.</td></tr>
+  <tr><td>  getResolution()</td><td><span class="type" title="float">float</span></td><td>Return the current resolution of the map, in units/pixel.</td></tr>
+  <tr><td>  getExtent()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Return the geographic extent of the current map viewport.</td></tr>
+  <tr><td>  getZoomForExtent(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td><span class="type" title="Integer">Integer</span></td><td>return the integer zoom which most closely matches the passed bounds.</td></tr>
+  <tr><td>  getLonLatFromViewPortPx(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Returns an OpenLayers.LonLat which is the passed-in view port OpenLayers.Pixel, translated into lon/lat by the laye</td></tr>
+  <tr><td>  getViewPortPxFromLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Returns An OpenLayers.Pixel which is the passed-in OpenLayers.LonLat, translated into view port pixels</td></tr>
+  <tr><td>  addOptions(<span class="type" title="options">options</span>))</td><td>none</td><td>Change the options on the layer. This is the supported way to change properties of the layer. </td></tr>
+  
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  displayOutsideMaxExtent</td><td>Determine whether images or data are loaded outside the maxExtent. Default is false.</td></tr>
+  <tr><td>  isBaseLayer</td><td>This determines whether the layer is a base layer or an overlay. Only one Base Layer can be displayed on the map at once. Default is false.</td></tr>
+  <tr><td>  projection</td><td>SRS string to describe the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxExtent</td><td>an OpenLayers.Bounds for the layer. This is the maximum geographic extent of the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxResolution</td><td>The number of degrees per pixel at zoom level 0. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxZoomLevel</td><td>The maximum zoom level for the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  minScale</td><td>The scale at zoom level 0. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxScale</td><td>The scale at the highest zoom level. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  units</td><td>The units the map is projected into. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  
+
+ 
+ 
+
+  
+</table></div>
+<h1><a name="OpenLayers.Layer.Image">OpenLayers.Layer.Image</a></h1><div class="classref">
+
+The Image Layer allows you to load a single image and use it as a layer in your
+map.
+
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer(name, url, <a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <a href="#OpenLayers.Size" title="OpenLayers.Size">size</a>, <span class="type" title="options">options</span>)</td><td>Image Layer constructor requires a name, URL of the image, geographic bounds of the image, pixel size of the image, and an optional options parameter. </td></tr>
+
+</table></div>
+<h1><a name="OpenLayers.Layer.HTTPRequest">OpenLayers.Layer.HTTPRequest</a></h1><div class="classref">
+
+Sublass of Layer used for services which require initiating multiple HTTPRequests.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.HTTPRequest(name, url, params, options)</td><td>URL is the base URL to the layer. Params is a set of params to be included in the HTTP Request. Options is a set of options, extending the parameters of the layer.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  initResolutions()</td><td>none</td><td>Based on the current minScale/maxScale/maxResolution/numZoomLevel/scales/resolutions parameters, initializes an array of 'zoom levels' as this.resolutions, which are then used as an index into when zooming.</td></tr>
+  <tr><td>  getFullRequestString(newParams)</td><td><span class="type" title="String">String</span></td><td>Returns the full request string for a combination of the defaults on this layer and the parameters passed via newParams.</td></tr>
+
+</table>
+<h2>Options</h2>
+<table>
+  <tr><td>  reproject</td><td>If reproject is true, then the layer will alter the bounding boxes of its tiles to be based on the geographic location of the pixel bounds in the base layer. This is important for reprojecting WMS tiles onto something like Google Maps. Tile locations are calculated, and then when creating the tile request, the bounding box is adjusted to match the bounding box of the base layer at that location.    </td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.Grid">OpenLayers.Layer.Grid</a></h1><div class="classref">
+
+The Grid layer is the base layer for almost all image layers. This is a subclass of HTTPRequest.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.Grid(name, url, params, options)</td><td>URL is the base URL to the layer. Params is a set of params to be included in the HTTP Request. Options is a set of options, extending the parameters of the layer.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  getGridBounds()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>return geographic extent of the grid of tiles.</td></tr>
+  <tr><td>  _initTiles()</td><td>none</td><td>Used to initialize the tile grid, creating image elements as neccesary and filling them with the correct images.</td></tr>
+  <tr><td>  spiralTileLoad()</td><td>none</td><td>Called from _initTiles. Rotates through the grid filling in the images for the grid.</td></tr>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Layer.Grid" title="OpenLayers.Layer.Grid">OpenLayers.Layer.Grid</a></td><td>create a clone of the layer. Subclassed from {OpenLayers.Layer}.</td></tr>
+  <tr><td>  setMap(map)</td><td>none</td><td>Set the map property of the layer. Also set the parameters which are inherited from the map. This is also where the tileSize is retrieved from the map. Subclassed from <a href="#OpenLayers.Layer" title="OpenLayers.Layer">OpenLayers.Layer</a>.</td></tr>
+  <tr><td>  moveTo(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="Boolean">zoomChanged</span>)</td><td>none</td><td>Not implemented here, but the general function called on dragging or setCenter, to move the Layer to a new geographic location. Subclassed from <a href="#OpenLayers.Layer" title="OpenLayers.Layer">OpenLayers.Layer</a>.</td></tr>
+  <tr><td>  getResolution()</td><td><span class="type" title="float">float</span></td><td>Return the current resolution of the map, in units/pixel. Subclassed from <a href="#OpenLayers.Layer" title="OpenLayers.Layer">OpenLayers.Layer</a>.</td></tr>
+  <tr><td>  getExtent()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Return the geographic extent of the current map viewport. Subclassed from {OpenLayers.Layer}.</td></tr>
+  <tr><td>  getZoomForExtent(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td><span class="type" title="Integer">Integer</span></td><td>return the integer zoom which most closely matches the passed bounds. Subclassed from <a href="#OpenLayers.Layer" title="OpenLayers.Layer">OpenLayers.Layer</a>.</td></tr>
+  <tr><td>  getLonLatFromViewPortPx(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Returns an OpenLayers.LonLat which is the passed-in view port OpenLayers.Pixel, translated into lon/lat by the layer. Subclassed from {OpenLayers.Layer}.</td></tr>
+  <tr><td>  getViewPortPxFromLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Returns An OpenLayers.Pixel which is the passed-in OpenLayers.LonLat, translated into view port pixels. Subclassed from {OpenLayers.Layer}.</td></tr>
+
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  buffer</td><td>Default 2. Number of tiles around the central map area which OpenLayers will preload so that dragging goes more smoothly.</td></tr>
+  </table>
+
+<h3>Subclassed from OpenLayers.Layer</h3>
+  <table>
+  <tr><td>  isBaseLayer</td><td>This determines whether the layer is a base layer or an overlay. Only one Base Layer can be displayed on the map at once. Default is false.</td></tr>
+  <tr><td>  projection</td><td>SRS string to describe the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxExtent</td><td>an OpenLayers.Bounds for the layer. This is the maximum geographic extent of the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxResolution</td><td>The number of degrees per pixel at zoom level 0. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxZoomLevel</td><td>The maximum zoom level for the layer. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  minScale</td><td>The scale at zoom level 0. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  maxScale</td><td>The scale at the highest zoom level. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+  <tr><td>  units</td><td>The units the map is projected into. If this is set on the map before the Layer is added to the map, it will inherit from the map.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.WMS">OpenLayers.Layer.WMS</a></h1><div class="classref">
+
+The WMS layer allows one to connect to a WMS server to obtain images. Params are available as a hash on the layer object, however, all keys are upper-cased automatically for maximum compatibility with WMS servers, so a parameter which is set as 'layers' will be uppercased to LAYERS. Where 'layer' is your Javscript variable for the layer, layer.params.LAYERS is the value of the layers param as set by the constructor.
+
+If you wish to change params, you should use mergeNewParams, rather than accessing the parameters directly.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.WMS(name, url, params, options)</td><td>URL is the base URL to the layer. Params is a set of params to be included in the HTTP Request. Options is a set of options, extending the parameters of the layer.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  getURL(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td><span class="type" title="String">String</span></td><td>Returns a WMS URL for the given bounds based on the properties of the layer.</td></tr>
+  All other methods are inherited from <a href="#OpenLayers.Layer.Grid" title="OpenLayers.Layer.Grid">OpenLayers.Layer.Grid</a>
+  
+</table>
+<h2>Options </h2>
+<table>
+  <tr><td>  isBaseLayer</td><td>WMS layers default to being base layers unless one of their parameters is 'transparent':'true'.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.KaMap">OpenLayers.Layer.KaMap</a></h1><div class="classref">
+
+ka-Map is a Mapserver wrapper which performs caching and works around many of the deficiencies with tiling when using Mapserver as a WMS client.
+
+</table>
+<h2>Construtor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.KaMap(name, url, params, options)</td><td>URL is the url of the tile.php for KaMap.</td></tr>
+
+</table></div>
+<h1><a name="OpenLayers.Layer.EventPane">OpenLayers.Layer.EventPane</a></h1><div class="classref">
+
+Designed to act as a super-class for layers which need OpenLayers to intercept click events. Google Maps and Microsoft Virtual Earth both use this functionality, in order to allow for actions like the rubber-band-zoom/zoombox functionality. This Layer is not designed to be used on its own, but instead to act as an intermediary between the user and layers which have their own click handlers.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.EventPane(name, options)</td><td>Only designed to be used by subclasses.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.Google">OpenLayers.Layer.Google</a></h1><div class="classref">
+
+The Google Layer in OpenLayers allows you to include Google Maps functionality in your OpenLayers maps. In order to use the Google Layer, you must first obtain an API key for Google Maps, and include the Google Maps API script in your page. Once you have done this, 
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.Google(name, options?)</td><td>Constructor for Google layer. Accepts name and options.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  getOLLonLatFromGLatLng(GLonLat)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Convert from GLatLon to OpenLayers LonLat</td></tr>
+  <tr><td>  getGLatLngFromOLLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td>GLatLon</td><td>Convert From OpenLayers LonLat to GLatLon</td></tr>
+  <tr><td>  getOLPixelFromGPoint(GPoint)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Convert from GPoint to OpenLayers.Pixel</td></tr>
+  <tr><td>  getGPointFromOLPixel(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td>GPoint</td><td>Create GPoint from OpenLayers Pixel.</td></tr>
+  
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  type</td><td>one of G_NORMAL_MAP, G_SATELLITE_MAP, G_HYBRID_MAP, used to choose the type of map to display. (See <a href="http://www.google.com/apis/maps/documentation/reference.html#GMapType">GMapType in the Google documentation</a> for more.)</td></tr>
+  
+</table></div>
+<h1><a name="OpenLayers.Layer.VirtualEarth">OpenLayers.Layer.VirtualEarth</a></h1><div class="classref">
+
+The Virtual Earth Layer in OpenLayers allows you to include Virtual Earth Maps in your OpenLayers maps. In order to use the Virtual Earth Layer, you must first include the Virtual Earth API script in your page. Once you have done this, simply add the layer to your map.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.VirtualEarth(name)</td><td>Constructor for Virtual Earth layer. Accepts name.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  getOLLonLatFromVELatLng(VELatLon)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Convert from VELatLon to OpenLayers LonLat</td></tr>
+  <tr><td>  getVELatLngFromOLLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td>VELatLon</td><td>Convert From OpenLayers LonLat to VELatLon</td></tr>
+  <tr><td>  getOLPixelFromVEPoint(Msn.VE.Pixel)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Convert from VEPoint to OpenLayers.Pixel</td></tr>
+  <tr><td>  getGPointFromOLPixel(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td>Msn.VE.Pixel</td><td>Create Msvn.VE.Pixel from OpenLayers Pixel.</td></tr>
+  
+  
+</table></div>
+<h1><a name="OpenLayers.Layer.Markers">OpenLayers.Layer.Markers</a></h1><div class="classref">
+
+The base class for all vector drawing, The OpenLayers.Layer.Markers layer is the primary way to get annotations into your map. 
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.Markers(name, options)</td><td>Name and options for layer.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  addMarker(<a href="#OpenLayers.Marker" title="OpenLayers.Marker">Marker</a>)</td><td>none</td><td>Adds a marker to the layer, sets the map object on the marker, and calls drawMarker on the marker.</td></tr>
+  <tr><td>  removeMarker(<a href="#OpenLayers.Marker" title="OpenLayers.Marker">Marker</a>)</td><td>none</td><td>Remove the marker from the layer and map.</td></tr>
+  <tr><td>  clearMarkers()</td><td>none</td><td>Remove all markers from the layer with removeMarker.</td></tr>
+  <tr><td>  redraw()</td><td>none</td><td>Redraw all markers. Used so that markers can change their position when a base layer changes.</td></tr>
+  <tr><td>  drawMarker</td><td>none</td><td>Call marker.draw(px), which passes the Pixel of the latitude/longitude in the map viewport to the marker. adds the marker to the div, and marks the marker as drawn.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.Text">OpenLayers.Layer.Text</a></h1><div class="classref">
+
+Subclass of Markers layer which retrieves CSV file from the web, and parses content to create markers and popups.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.Text(name, options)</td><td>Pass in name, and set location: 'URL of CSV file' in the options hash.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  parseData(ajaxRequest)</td><td>none</td><td>Parses returned CSV file. </td></tr>
+
+</table></div>
+<h1><a name="OpenLayers.Layer.GeoRSS">OpenLayers.Layer.GeoRSS</a></h1><div class="classref">
+
+GeoRSS layer. Pass a name and location of a GeoRSS file on the web, and a marker will be added to the map for each item in the GeoRSS feed. Uses OpenLayers.loadURL to load the XML, parses the data, and adds markers to the map. The GeoRSS layer supports 1.0 and 2.0 in IE and Firefox, and supports 2.0 in Safari. (Ticket #111 explains the reason for this difference.)
+
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.GeoRSS(name, url)</td><td>Name and location of GeoRSS XML file.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  parseData(ajaxResponse)</td><td>none</td><td>Callback for the loadURL call. This function parses the XML for the GeoRSS feed, creating markers for the data and adding a popup to each marker. It populates an array of features as 'this.features'.</td></tr>
+  <tr><td>  markerClick(Event)</td><td>none</td><td>Action to perform when a marker is clicked.</td></tr>
+  <tr><td>  clearFeatures()</td><td>none</td><td>Removes all features and markers from the map.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.Boxes">OpenLayers.Layer.Boxes</a></h1><div class="classref">
+
+A subclass of the markers layer, this layer draws boxes using div elements
+instead of icons using images.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.Boxes(name, options)</td><td>Same as OpenLayers.Layer.Markers.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Layer.TMS">OpenLayers.Layer.TMS</a></h1><div class="classref">
+
+  <tr><td>The TMS layer allows one to connect to a TMS</td><td>Tiled Map Service</td><td>server to obtain images. </td></tr>
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Layer.TMS(name, url, options)</td><td>URL is the base URL to the layer. Options is a set of options, extending the parameters of the layer.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  getURL(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td><span class="type" title="String">String</span></td><td>Returns a TMS URL for the given bounds based on the properties of the layer.</td></tr>
+  All other methods are inherited from <a href="#OpenLayers.Layer.Grid" title="OpenLayers.Layer.Grid">OpenLayers.Layer.Grid</a>
+  
+</table>
+<h2>Options </h2>
+<table>
+  <tr><td>  tileOrigin</td><td>The tileOrigin option will allow you to set your tileOrigin to something other than the lower left extent of your map. </td></tr>
+  <tr><td>  layername</td><td>Name of the layer in the TMS request.</td></tr>
+  <tr><td>  type</td><td>The extension images have. </td></tr>
+</table></div>
+<h1><a name="OpenLayers.Icon">OpenLayers.Icon</a></h1><div class="classref">
+
+Icon is used as the visual representation of a Marker. Creating such a representation requres up to three parts: An Icon URL, a size, and an offset. The icon URL is a pointer to an image to use as an icon. The size is the size of the image, as an <a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a> object, and the offset is the position of the top left corner of the image in pixels, relative to the latitude and longitude of the Marker.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Icon(<span class="type" title="String">url</span>, <a href="#OpenLayers.Size" title="OpenLayers.Size">size</a>, <a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">offset</a>)</td><td>creates a new icon.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Icon" title="OpenLayers.Icon">OpenLayers.Icon</a></td><td>Create an exact copy of the icon.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Marker">OpenLayers.Marker</a></h1><div class="classref">
+
+Instantiate class <a href="#OpenLayers.Marker" title="OpenLayers.Marker">OpenLayers.Marker</a> in order to create a marker.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Marker(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>, <a href="#OpenLayers.Icon" title="OpenLayers.Icon">icon</a>?  )</td><td>Creates a new marker object. This object must be added to a Marker layer and will then be displayed. The icon can be left null</td><td>if this is the case, then the default OpenLayers icon will be used.</td></tr>
+  
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  onScreen()</td><td><span class="type" title="boolean">boolean</span></td><td>Returns whether or not the marker is currently visible on screen.</td></tr>
+  <tr><td>  inflate(<span class="type" title="float">float</span>)</td><td>none</td><td>Changes the size of the Icon by a factor of the passed float.</td></tr>
+  <tr><td>  display(<span class="type" title="string">string</span>)</td><td>none</td><td>Sets the style.display property of the Icon.</td></tr>
+
+</table>
+<h2>Events</h2>
+<table>
+  Standard browser events are available.
+
+</table></div>
+<h1><a name="OpenLayers.Marker.Box">OpenLayers.Marker.Box</a></h1><div class="classref">
+
+A different kind of Marker, designed to be added to a Boxes layer instead of a Markers layer.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Marker.Box(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, borderColor, borderWidth)</td><td>Set up a box. Defaults are red, with a width of 2.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  setBorder(color, width)</td><td>sets properties of border color and width.</td></tr>
+
+</table></div>
+<h1><a name="OpenLayers.Tile">OpenLayers.Tile</a></h1><div class="classref">
+
+This is a class designed to designate a single tile, however
+it is explicitly designed to do relatively little. Tiles store information
+  <tr><td>about themselves</td><td>such as the URL that they are related to, and their </td></tr>
+size - but do not add themselves to the layer div automatically, for 
+example.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Tile(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>, <a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">position</a>, <a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="String">url</span>, <a href="#OpenLayers.Size" title="OpenLayers.Size">size</a>)</td><td>Create a new tile, with properties passed.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Tile.Image">OpenLayers.Tile.Image</a></h1><div class="classref">
+
+The image tile is designed to hold images for all types of layers, from WMS to KaMap to WorldWind.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Tile.Image(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>, <a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">position</a>, <a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="String">url</span>, <a href="#OpenLayers.Size" title="OpenLayers.Size">size</a>)</td><td>Create a new tile, with properties passed.</td></tr>
+  
+</table></div>
+<h1><a name="OpenLayers.Tile.WFS">OpenLayers.Tile.WFS</a></h1><div class="classref">
+
+The WFS tile allows you to load any number of WFS URLs into a single tile. 
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Tile.WFS(<a href="#OpenLayers.Layer" title="OpenLayers.Layer">layer</a>, <a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">position</a>, <a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="String">urls</span>, <a href="#OpenLayers.Size" title="OpenLayers.Size">size</a>)</td><td>Create a new tile, with properties passed. The major difference between this tile and other tiles is what it does with results: The WFS tile is designed to parse XML responses, and create features for each item in the response. </td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control">OpenLayers.Control</a></h1><div class="classref">
+
+Base class from which controls are derived. Controls are elements of the map used to control things like zoom, layer status, or to provide information to the user about the status of the map, such as scale or copyright information.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control(<span class="type" title="Object">options</span>?)</td><td>Creates a new control. The options here are used to control parameters of the control. The base control defines only "position", which is designed to be an <a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a> which is the top-left of the location of the control relative to the map div. </td></tr>
+
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  position</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a> to use as the top-left corner of the control div, relative to the map area.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.LayerSwitcher">OpenLayers.Control.LayerSwitcher</a></h1><div class="classref">
+
+This control will by default display a small image in the upper right corner of the map. When clicked, this image expands into a control which allows one to select between multiple types of layers, seperated into two types: Base Layers and Overlays. Only one base layer can be selected at a time, and is enforced by a radio button control being used. Multiple overlays can be selected at once, and a checkbox control is visible for this functionality.
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.LayerSwitcher(<span class="type" title="Object">options</span>?)</td><td>Creates a new control.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  maximizeControl()</td><td>none</td><td>Expand the layer switcher control.</td></tr>
+  <tr><td>  minimizeControl()</td><td>none</td><td>Close the layer switcher control.</td></tr>
+
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  position</td><td>(inherited from <a href="#OpenLayers.Control" title="OpenLayers.Control">OpenLayers.Control</a>) {OpenLayers.Pixel} to use as the top-left corner of the control div, relative to the map area.</td></tr>
+  <tr><td>  activeColor</td><td>The color to use for the background of the layer switcher div.</td></tr>
+  <tr><td>  ascending</td><td>Ascending determines whether layers are added to the layer switcher in ascending or descending order. If ascending is true, the lowest layer is appended to the list first. If ascending is false, the lowest layer is at the very bottom of the LayerSwitcher. Default is true.  </td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.MouseDefaults">OpenLayers.Control.MouseDefaults</a></h1><div class="classref">
+
+Control to set up mouse handling. This includes clicks, double clicks, scrollwheel events, and mouse movement. There are a number of functions which act as the default handlers for these events: if you wish to create your own mouse control which behaves differently, you should create a subclass of MouseDefaults, replacing the functions whose behavior you wish to change.
+
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control()</td><td>Creates a new control. No options available. </td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  defaultClick</td><td>none</td><td>This event takes place when a click event occurs on the map.</td></tr>
+  <tr><td>  defaultDblClick</td><td>none</td><td>This event re-centers the map on the clicked location.</td></tr>
+  <tr><td>  defaultMouseDown</td><td>none</td><td>This event starts a dragging event, so that the map can be dragged. If the shift key is held, it starts a 'zoombox' or rubber-band-zoom action instead.</td></tr>
+  <tr><td>  defaultMouseMove</td><td>none</td><td>If a mouseDrag is in operation, this function causes the map to move to follow the cursor. If a zoombox is in place, this increases the size of the zoombox element to match the cursor.</td></tr>
+  <tr><td>  defaultMouseUp</td><td>none</td><td>This function is called when a mouseup event is received, and either sets the center of the map to be the final location or zooms to the zoombox if enabled.</td></tr>
+  <tr><td>  defaultMouseOut</td><td>none</td><td>This calls defaultMouseUp, so that when you mouse out of the map div, the events are stopped.</td></tr>
+  <tr><td>  defaultWheelUp</td><td>none</td><td>Zooms in one level. Called by onWheelEvent</td></tr>
+  <tr><td>  defaultWheelDown</td><td>none</td><td>Zooms out one level. Called by onWheelEvent.</td></tr>
+  <tr><td>  onWheelEvent</td><td>none</td><td>catches the map wheel event, and handles it, zooming appropriately. </td></tr>
+  
+</table></div>
+<h1><a name="OpenLayers.Control.MousePosition">OpenLayers.Control.MousePosition</a></h1><div class="classref">
+
+A small control which displays the Longitude and Latitude of the current mouse position, by defualt in the lower right of the map viewport.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.MousePosition(<span class="type" title="Object">options</span>)</td><td>Creates a new MousePosition control.</td></tr>
+  
+  
+</table>
+<h2>Parameters</h2>
+<table>
+
+  <tr><td>  element</td><td>if not null, div in which to display the MousePosition</td></tr>
+  <tr><td>  prefix</td><td>html to precede the longitude value (default: '')</td></tr>
+  <tr><td>  separator</td><td>html to separate the longitude and latitude values (default: '<br />')</td></tr>
+  <tr><td>  suffix</td><td>html to follow the latitude value (default: '')</td></tr>
+  <tr><td>  numdigits</td><td>number of digits to the right of the decimal (default: 5)</td></tr>
+  <tr><td>  granularity</td><td>Don't refresh display if mouse has moved more than this (default: 10)</td></tr>
+
+prefix, separator, and suffix are used to format the lon/lat values.
+
+With:
+   prefix = 'Lon:&nbsp;'
+   suffix = '<br />Lat:&nbsp;'
+   suffix = ''
+   nudigits = 3
+Lon/Lat is displayed as:
+    Lon: 95.123
+	Lat: 35.456
+
+If the mouse has never been over the map, Lon/Lat will equal 0/0.  If the mouse is over the map, Lon/Lat will equal the current mouse position.  If the mouse has been moved off the map, Lon/Lat will equal the value displayed at the time the mouse was moved off the map.
+
+If the mouse is moving slowly, the Lon/Lat will refresh continuously.  If the mouse is moving rapidly, the refresh of Lon/Lat will be suspended until the mouse has slowed down or stopped.  (Trying to update the Lon/Lat value while the mouse is in rapid movemement makes the movement of the mouse unacceptably jerky.)
+
+</table></div>
+<h1><a name="OpenLayers.Control.MouseToolbar">OpenLayers.Control.MouseToolbar</a></h1><div class="classref">
+
+Control to set up mouse handling. This includes clicks, double clicks, scrollwheel events, and mouse movement. There are a number of functions which act as the default handlers for these events: if you wish to create your own mouse control which behaves differently, you should create a subclass of MouseToolbar, replacing the functions whose behavior you wish to change. Additionally, a toolbar of images can be clicked to start events, as well as using the keyboard shortcuts. Note that if you wish to use the MouseToolbar, you *must* add a 'controls' option to the map constructor, otherwise you will have both MouseDefaults and MouseToolbar on the map, which will not work.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.MouseToolbar(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">position</a>, <span class="type" title="String">direction</span>)</td><td>Creates a new control. The direction of the control can be either "vertical" or "horizontal". The default is vertical.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  defaultClick</td><td>none</td><td>This event takes place when a click event occurs on the map.</td></tr>
+  <tr><td>  defaultDblClick</td><td>none</td><td>This event re-centers the map on the clicked location.</td></tr>
+  <tr><td>  defaultMouseDown</td><td>none</td><td>This event starts a dragging event, so that the map can be dragged. If the shift key is held, it starts a 'zoombox' or rubber-band-zoom action instead.</td></tr>
+  <tr><td>  defaultMouseMove</td><td>none</td><td>If a mouseDrag is in operation, this function causes the map to move to follow the cursor. If a zoombox is in place, this increases the size of the zoombox element to match the cursor.</td></tr>
+  <tr><td>  defaultMouseUp</td><td>none</td><td>This function is called when a mouseup event is received, and either sets the center of the map to be the final location or zooms to the zoombox if enabled.</td></tr>
+  <tr><td>  defaultMouseOut</td><td>none</td><td>This calls defaultMouseUp, so that when you mouse out of the map div, the events are stopped.</td></tr>
+  
+</table></div>
+<h1><a name="OpenLayers.Control.OverviewMap">OpenLayers.Control.OverviewMap</a></h1><div class="classref">
+
+This control provides a locator or overview map linked to another map. By default, the overview map shows up in the lower right of the main map and can be expdaned with the '+' button.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.OverviewMap(opts?)</td><td>Creates a new overview map. The opts variable is an object with various options, as described in the options section below.</td></tr>
+  
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>isSuitableOverview()</td><td><span class="type" title="Boolean">Boolean</span></td><td>Determines if the overview map is suitable given the extent and resolution of the main map.</td></tr>
+  <tr><td>getRectPxBounds()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a></td><td>An OpenLayers.Bounds which is the extent rectangle's pixel bounds (relative to the parent element).</td></tr>
+  <tr><td>setRectPxBounds(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td>none</td><td>Set extent rectangle pixel bounds.</td></tr>
+  <tr><td>getRectBoundsFromMapBounds(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">lonLatBounds</a>)</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a></td><td>An OpenLayers.Bounds which is the passed-in map lon/lat extent translated into pixel bounds for the overview map.</td></tr>
+  <tr><td>getMapBoundsFromRectBounds(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">pxBounds]</a>)</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a></td><td>An OpenLayers.Bounds which is the passed-in overview rect bounds translated into lon/lat bounds for the overview map.</td></tr>
+  <tr><td>getLonLatFromOverviewPx(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a></td><td>An OpenLayers.LonLat which is the passed-in overview map OpenLayers.Pixel translated into lon/lat by the overview map.</td></tr>
+  <tr><td>getOverviewPxFromLonLat(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a></td><td>An OpenLayers.Pixel which is the passed-in OpenLayers.LonLat, translated into overview map pixels</td></tr>
+
+
+</table>
+<h2>Events</h2>
+<table>
+  </table>
+
+<h3>Rectangle events</h3>
+  <table>
+They are defined on OverviewMap.rectEvents
+	
+  <tr><td>  mouseover</td><td>rectangle is moused over</td></tr>
+  <tr><td>  mouseout</td><td>rectangle is no longer mousedout</td></tr>
+  <tr><td>  mousemove</td><td>mouse moves inside rectangle</td></tr>
+  <tr><td>  mousedown</td><td>mouse button is pressed over the rectangle.</td></tr>
+  <tr><td>  mouseup</td><td>mouse button is released over the rectangle.</td></tr>
+  <tr><td>  click</td><td>mouse clicked</td></tr>
+  <tr><td>  dblclick</td><td>mouse double clicked</td></tr>
+	
+  </table>
+
+<h3>Map events</h3>
+  <table>
+	They are defined on OverviewMap.mapDivEvents
+	
+  <tr><td>  click</td><td>mouse clicked	</td></tr>
+  
+</table>
+<h2>Options:</h2>
+<table>
+  <tr><td>minRatio</td><td>The ratio of the overview map resolution to the main map resolution at which to zoom farther out on the overview map.</td></tr>
+  <tr><td>maxRatio</td><td>The ratio of the overview map resolution to the main map resolution at which to zoom farther in on the overview map.</td></tr>
+  <tr><td>layers</td><td>Ordered list of layers in the overview map.  If none, then the map base layer is used.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.PanZoom">OpenLayers.Control.PanZoom</a></h1><div class="classref">
+
+Creates a small toolset for controlling the location of the map with panning and zooming, including four directional arrows, a zoom in and zoom out, and one button which zooms to the max extent of the map.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.PanZoom(<span class="type" title="Object">options</span>)</td><td>Creates a new panzoom control.</td></tr>
+
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  slideFactor</td><td>Number of pixels by which to slide the map when a pan arrow is clicked.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.PanZoomBar">OpenLayers.Control.PanZoomBar</a></h1><div class="classref">
+
+Creates a small toolset for controlling the location of the map with panning and zooming, including four directional arrows, a zoom in and zoom out, and a bar on which a slider can be moved to zoom in or out by multiple stops at once.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.PanZoomBar()</td><td>Creates a new panzoombar control.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.Permalink">OpenLayers.Control.Permalink</a></h1><div class="classref">
+
+A small control which updates a "Permalink" to the map every time the viewport changes. This allows users to copy a link to a specfic map view. By default, it places itself in the lower right corner of the map. This control must be added to the map after a baselayer has been set.  
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.Scale(<span class="type" title="DOMElement">element</span>?, <span class="type" title="String">base</span>)</td><td>Creates a new permalink control. The DOMElement is used, if passed, as the element on which the 'href' is set. If you prefer to put this link on an element outside of the map, set this element to an anchor element to have its href updated when the map moves. If you wish to make the link go to some other URL (for example, an editing interface rather than the current URL), the 'base' property can be used, to which the ?lat=&lon=&zoom= will be appended after the map has moved.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Control.Scale">OpenLayers.Control.Scale</a></h1><div class="classref">
+
+A small control which displays an informative scale value, a la "1:50K" , by defualt in the lower right of the map viewport.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Control.Scale(<span class="type" title="DOMElement">element</span>?)</td><td>Creates a new scale control. The DOMElement is used, if passed, to put the scale inside</td><td>this allows you to have the scale displayed in some location outside the map. </td></tr>
+</table></div>
+<h1><a name="OpenLayers.LonLat">OpenLayers.LonLat</a></h1><div class="classref">
+
+This class represents a geographic coordinate pair, either projected or unprojected.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.LonLat(<span class="type" title="float">lon</span>, <span class="type" title="float">lat</span>)</td><td>Create LonLat.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  toString()</td><td><span class="type" title="String">String</span></td><td>Converts to human readable string.</td></tr>
+  <tr><td>  toShortString()</td><td><span class="type" title="String">String</span></td><td>Converts to short human readable string.</td></tr>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a></td><td>Returns a copy of the pixel.</td></tr>
+  <tr><td>  equals(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">ll</a>)</td><td><span class="type" title="Boolean">Boolean</span></td><td>Compares two LonLats. </td></tr>
+  <tr><td>  add(<span class="type" title="int">lon</span>, <span class="type" title="int">lat</span>)</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>add x and y to the current coordinates.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Size">OpenLayers.Size</a></h1><div class="classref">
+
+This class represents a width/height pair.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Size(<span class="type" title="float">h</span>, <span class="type" title="float">w</span>)</td><td>Create Size.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  toString()</td><td><span class="type" title="String">String</span></td><td>Converts to human readable string.</td></tr>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a></td><td>Returns a copy of the pixel.</td></tr>
+  <tr><td>  add(<span class="type" title="int">x</span>, <span class="type" title="int">y</span>)</td><td><a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a></td><td>add x and y to the current coordinates.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Pixel">OpenLayers.Pixel</a></h1><div class="classref">
+
+This class represents a screen coordinate in x and y coordinates.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Pixel(<span class="type" title="float">x</span>, <span class="type" title="float">y</span>)</td><td>Create Pixel.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  toString()</td><td><span class="type" title="String">String</span></td><td>Converts to human readable string.</td></tr>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Returns a copy of the pixel.</td></tr>
+  <tr><td>  equals(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">px</a>)</td><td><span class="type" title="Boolean">Boolean</span></td><td>Tests for equivilance.</td></tr>
+  <tr><td>  add(<span class="type" title="int">x</span>, <span class="type" title="int">y</span>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>add x and y to the current coordinates.</td></tr>
+  <tr><td>  offset(<a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">pixel</a>)</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Add pixels together.</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Bounds">OpenLayers.Bounds</a></h1><div class="classref">
+
+This class represents a bounding box. Data stores as left, bottom, right, top floats.
+
+</table>
+<h2>Constructor</h2>
+<table>
+  <tr><td>  OpenLayers.Bounds(left, bottom, right, top)</td><td>Create new Bounds.</td></tr>
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  clone()</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Return copy of the current bounds.</td></tr>
+  <tr><td>  toString()</td><td><span class="type" title="String">String</span></td><td>Return bounds as string. </td></tr>
+  <tr><td>  toBBOX()</td><td><span class="type" title="String">String</span></td><td>Return bounds as simple string, usable for WMS.</td></tr>
+  <tr><td>  getWidth()</td><td><span class="type" title="float">float</span></td><td>Return width of bounds.</td></tr>
+  <tr><td>  getHeight()</td><td><span class="type" title="float">float</span></td><td>Return height of bounds.</td></tr>
+  <tr><td>  getSize()</td><td><a href="#OpenLayers.Size" title="OpenLayers.Size">OpenLayers.Size</a></td><td>Return size of bounds.</td></tr>
+  <tr><td>  getCenterPixel()</td><td><a href="#OpenLayers.Pixel" title="OpenLayers.Pixel">OpenLayers.Pixel</a></td><td>Return center of bounds as pixel.</td></tr>
+  <tr><td>  getCenterLonLat()</td><td><a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">OpenLayers.LonLat</a></td><td>Return center of bounds as LonLat.</td></tr>
+  <tr><td>  equals(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>)</td><td><span class="type" title="Boolean">Boolean</span></td><td>whether or not the bounds are equivilant.</td></tr>
+  <tr><td>  add(<span class="type" title="float">x</span>, <span class="type" title="float">y</span>)</td><td><a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">OpenLayers.Bounds</a></td><td>Shift bounds by x and y. </td></tr>
+  <tr><td>  contains(<span class="type" title="float">x</span>, <span class="type" title="float">y</span>, <span class="type" title="Boolean">inclusive</span>)</td><td><span class="type" title="Boolean">Boolean</span></td><td>Return Whether or not the passed-in coordinates are within this bounds </td></tr>
+  <tr><td>  containsBounds(<a href="#OpenLayers.Bounds" title="OpenLayers.Bounds">bounds</a>, <span class="type" title="Boolean">partial</span>, <span class="type" title="Boolean">inclusive</span>)</td><td><span class="type" title="Boolean">Boolean</span></td><td>Returns whether or not the passed-in OpenLayers.Bounds object is contained within this bounds. partial indicates whether bounds must be contained or only overlap. Inclusive determines whether border is included.</td></tr>
+  <tr><td>  determineQuadrant(<a href="#OpenLayers.LonLat" title="OpenLayers.LonLat">lonlat</a>)</td><td><span class="type" title="String">String</span></td><td>Determine which quadrant the LonLat is in. Returns combination of "b" or "t" and "l" or "r".</td></tr>
+</table></div>
+<h1><a name="OpenLayers.Util">OpenLayers.Util</a></h1><div class="classref">
+
+Utility class. Stores a bunch of methods and settings that don't fit anywhere else.
+
+</table>
+<h2>Options</h2>
+<table>
+
+  <tr><td> OpenLayers.Util.onImageLoadErrorColor</td><td>A string to set img.style.backgroundColor to if the onerror event fires for the image (useful for 500 errors from WMS, for example). </td></tr>
+  <tr><td> OpenLayers.ImgPath</td><td>A string to be used as the base for images for controls and the like. Should end with '/'. </td></tr>
+</table></div>
+OpenLayers contains a number of helper functions for working with AJAX. 
+
+</table>
+<h2>Methods</h2>
+<table>
+  <tr><td>  OpenLayers.loadURL(<span class="type" title="String">uri</span>, <span class="type" title="String">params</span>, <span class="type" title="Object">caller</span>, <span class="type" title="function">onComplete</span>, <span class="type" title="function">onFailure</span>)</td><td>none</td><td>This function sends an XMLHTTPRequest to a remote site, specified by URI, with the params string given as the params argument. Caller is bound as 'this' to the function specified by either onComplete or onFailure.</td></tr>
+  <tr><td>  OpenLayers.parseXMLString(<span class="type" title="String">text</span>)</td><td><span class="type" title="AJAXResponse">AJAXResponse</span></td><td>Accepts a block of text, and creates a DOM response document from the text.</td></tr>
+
+</table>
+<h2>Parameters</h2>
+<table>
+  <tr><td>  OpenLayers.ProxyHost</td><td>When initiating an AJAX request, any URL that is absolute is prefixed with OpenLayers.ProxyHost. The ProxyHost is designed to accept a URL and return the content, in an effort to work around cross-browser security restrictions. This defaults to null, but if you wish to access content from another domain that Javascript would restrict access to, you must set this to be the URL which will accept a URL encoded version of the passed URL and return the content at that URL. An example is available as proxy.txt in the examples/ directory.</td></tr>
+  
+</table></div>
+  </body>
+</html>

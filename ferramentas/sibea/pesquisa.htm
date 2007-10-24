@@ -1,0 +1,222 @@
+<STYLE >
+
+.combo {
+font-family: verdana, arial, sans;
+font-size: 8pt;
+}
+div#ResultadoPesquisa {
+position: absolute;
+left: 2px;
+top: 210px;
+width: 100%;
+height: 20px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#ResultadoDetalhe {
+position: absolute;
+left: 1px;
+top: 410px;
+width: 610px;
+height: 432px;
+overflow: auto;
+font-family: verdana, arial, sans;
+font-size: 9pt;
+}
+div#filtro {
+position:absolute;
+left:10px;;
+top:60px;
+width:255px;
+height:35px;
+}
+div#tipoFiltro {
+position:relative;
+left:0px;;
+top:10px;
+width:155px;
+height:35px;
+}
+div#valores {
+position:relative;
+left:0px;;
+top:70px;
+width:255px;
+height:35px;
+display:none;
+}
+div#valoresFiltro {
+position:relative;
+left:0px;;
+top:10px;
+width:155px;
+height:35px;
+}
+div#pesquisar {
+position: relative;
+left: 0px;
+top: 100px;
+width: 200px;
+height: 35px;
+}
+</STYLE>
+
+<SCRIPT src="http://mapas.mma.gov.br/i3geo/classesjs/cpaint/cpaint2.inc.compressed.js" ></script>
+<body>
+<FONT face=Arial color=#808000 size=4>SIBEA - Educadores ambientais</FONT><br>
+<FONT face=Arial color=#808000 size=2>
+Educadores cadastrados no SIBEA. <a href="http://sibea.mma.gov.br/dcsibea/" target=blank >Mais info...</a>
+</FONT>
+<FORM name=frmSibea>
+<DIV id=filtro >
+<FONT face="Verdana, Arial, Helvetica, sans-serif" size=2>Escolha o tipo de filtro:</FONT>
+	<div id=tipoFiltro >
+		Aguarde...
+	</div>
+</DIV>
+<DIV id=valores >
+<FONT face="Verdana, Arial, Helvetica, sans-serif" size=2>Escolha o valor para o filtro:</FONT>
+	<div id=valoresFiltro >
+	</div>
+</DIV>
+<DIV id=pesquisar>
+<INPUT class=combo onclick=executa() type=button value='Criar mapa'></INPUT>
+<select id=cor >
+	<option value='255,0,0' >cor</option>
+	<option value='255,0,0' >vermelho</option>
+	<option value='0,255,0' >verde</option>
+	<option value='255,255,0' >amarelo</option>
+	<option value='0,0,255' >azul</option>
+</select>
+</DIV>
+</form>
+<DIV id=ResultadoPesquisa></DIV>
+</body>
+<script>
+/*
+Title: Formulário de consulta ao SIBEA.
+
+Acessa os web services do SIBEA.
+
+Essa interface é utilizada no I3Geo (ver i3geo/menutemas/sistemas.xml) para a geração de uma camada com a localização dos educadores.
+
+A realização da consulta é feita através de uma chamada Ajax.
+
+See:
+
+<pesquisa.php>
+
+File: pesquisa.htm
+
+19/6/2007
+
+Include:
+
+<http://mapas.mma.gov.br/i3geo/classesjs/cpaint/cpaint2.inc.compressed.js>
+
+*/
+g_sid = window.parent.g_sid
+
+comboTipoFiltro()
+
+/*
+Function: comboTipoFiltro
+
+Monta o combo com os tipos de filtro
+*/
+function comboTipoFiltro()
+{
+	var monta = function(retorno)
+	{
+		var ins = "<select class=combo id=comboFiltros onchange='comboListaValores(this.value)' ><option value=''>Nenhum</option>"
+		for(i=0;i<retorno.data.sibea.length;i++)
+		{
+			ins += "<option value="+retorno.data.sibea[i].funcao+" >"+retorno.data.sibea[i].nome+"</option>"
+		}
+		document.getElementById("tipoFiltro").innerHTML = ins+"</select>"
+	}
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaTipoFiltro"
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listaTipoFiltro",monta);
+}
+/*
+Function: comboListaValores
+
+Lista os valores de um determinado tipo de filtro.
+*/
+function comboListaValores(funcao)
+{
+	if (funcao == "")
+	{
+		document.getElementById("valores").style.display="none"
+		return
+	}
+	document.getElementById("valores").style.display="block"
+	document.getElementById("valoresFiltro").innerHTML = "Aguarde..."
+	var monta = function(retorno)
+	{
+		var ins = "<select class=combo id=comboValores ><option value=''>---</option>"
+		for(i=0;i<retorno.data.sibea.length;i++)
+		{
+			ins += "<option value='"+retorno.data.sibea[i].codigo+"*"+retorno.data.sibea[i].nome+"' >"+retorno.data.sibea[i].nome+"</option>"
+		}
+		document.getElementById("valoresFiltro").innerHTML = ins+"</select>"
+	}
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaValorFiltro&execFuncao="+funcao
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listaValorFiltro",monta);	
+}
+/*
+Function: executa
+
+Chama a função Ajax para realizar a consulta e adicionar a nova camada ao mapa atual.
+*/
+function executa()
+{
+	var filtro = document.getElementById("comboFiltros").value
+	if (filtro == "")
+	{alert("Escolha um filtro!");return}
+	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
+	
+	if (document.getElementById("comboValores"))
+	{
+		var temp = (document.getElementById("comboValores").value).split("*")
+		var valor = temp[0]
+		var nomevalor = temp[1]
+	}
+	else
+	{
+		var valor = ""
+		var nomevalor = ""
+	}
+	var cor = document.getElementById("cor").value
+	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&filtro="+filtro+"&valor="+valor+"&nomevalor="+nomevalor+"&cor="+cor
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"adicionatema",listaretornof);
+	
+}
+/*
+Function: listaretornof
+
+Recebe os dados da função "executa" e redesenha o mapa atual.
+*/
+function listaretornof(retorno)
+{
+	document.getElementById("ResultadoPesquisa").style.color="red"
+	if (retorno.data == "ok")
+	{
+		document.getElementById("ResultadoPesquisa").innerHTML = "<b>Mapa criado!"
+		window.parent.remapaf()
+	}
+	else
+	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!"}
+}
+</script>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Chi-Squared Dispersion Test for Spatial Point Pattern Based on
+Quadrat Counts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for quadrat.test {spatstat}"><tr><td>quadrat.test {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Chi-Squared Dispersion Test for Spatial Point Pattern Based on
+Quadrat Counts</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Performs a chi-squared test of complete spatial randomness
+for a given point pattern, based on quadrat counts.
+Alternatively performs a chi-squared goodness-of-fit test of a fitted
+inhomogeneous Poisson model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+quadrat.test(X, nx = 5, ny = nx, xbreaks = NULL, ybreaks = NULL, fit)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+A point pattern (object of class <code>"ppp"</code>)
+to be subjected to the goodness-of-fit test.
+Alternatively a fitted point process model (object of class
+<code>"ppm"</code>) to be tested.
+</td></tr>
+<tr valign="top"><td><code>nx,ny</code></td>
+<td>
+Numbers of quadrats in the <i>x</i> and <i>y</i> directions.
+Incompatible with <code>xbreaks</code> and <code>ybreaks</code>.
+</td></tr>
+<tr valign="top"><td><code>xbreaks</code></td>
+<td>
+Optional. Numeric vector giving the <i>x</i> coordinates of the
+boundaries of the quadrats. Incompatible with <code>nx</code>.
+</td></tr>
+<tr valign="top"><td><code>ybreaks</code></td>
+<td>
+Optional. Numeric vector giving the <i>y</i> coordinates of the
+boundaries of the quadrats. Incompatible with <code>ny</code>.
+</td></tr>
+<tr valign="top"><td><code>fit</code></td>
+<td>
+Optional. A fitted point process model (object of class
+<code>"ppm"</code>). The point pattern <code>X</code> will be subjected to
+a test of goodness-of-fit to the model <code>fit</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function performs a <i>chi^2</i> test of goodness-of-fit
+to the Poisson point process (including &lsquo;Complete Spatial
+Randomness&rsquo; but also inhomogeneous Poisson processes),
+based on quadrat counts.
+</p>
+<p>
+If <code>X</code> is a point pattern, it is taken as the data point pattern
+for the test. If <code>X</code> is a fitted point process model, then the
+data to which this model was fitted are extracted from the model
+object, and are treated as the data point pattern for the test.
+</p>
+<p>
+The window of observation is divided into rectangular tiles
+and the number of data points in each tile is counted,
+as described in <code><a href="quadratcount.html">quadratcount</a></code>.
+</p>
+<p>
+If <code>fit</code> is absent, then we test the null hypothesis
+that the data pattern is a realisation of Complete Spatial
+Randomness (the uniform Poisson point process) by applying the
+<i>chi^2</i> test of goodness-of-fit to the quadrat counts.
+</p>
+<p>
+If <code>fit</code> is present, then it should be a point process model
+(object of class <code>"ppm"</code>) and it should be a Poisson point
+process. Then we test the null hypothesis 
+that the data pattern is a realisation of the (inhomogeneous) Poisson point
+process specified by <code>fit</code>. Again this is a 
+<i>chi^2</i> test of goodness-of-fit to the quadrat counts.
+</p>
+<p>
+The return value is an object of class <code>"htest"</code>.
+Printing the object gives comprehensible output
+about the outcome of the test. The return value also belongs to
+the special class <code>"quadrat.test"</code>. Plotting the object
+will display the quadrats, annotated by their observed and expected
+counts and the Pearson residuals. See the examples.
+</p>
+<p>
+To test the Poisson point process against a specific alternative
+point process model, use <code><a href="anova.ppm.html">anova.ppm</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"htest"</code>. See <code><a href="../../stats/html/chisq.test.html">chisq.test</a></code>
+for explanation.
+<br>
+The return value is also an object of the special class
+<code>"quadrat.test"</code>, and there is a plot method for this class.
+See the examples.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="quadratcount.html">quadratcount</a></code>,
+<code><a href="../../stats/html/chisq.test.html">chisq.test</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  data(simdat)
+  quadrat.test(simdat)
+  quadrat.test(simdat, 4)
+
+  # fitted model: inhomogeneous Poisson
+  fitx &lt;- ppm(simdat, ~x, Poisson())
+  # equivalent:
+  quadrat.test(simdat, fit=fitx)
+  quadrat.test(fitx)
+
+  te &lt;- quadrat.test(simdat, 4)
+  residuals(te)  # Pearson residuals
+
+  plot(te)
+
+  plot(simdat, pch="+", col="green", cex=1.2, lwd=2)
+  plot(te, add=TRUE, col="red", cex=1.5, lty=2, lwd=3)
+
+  sublab &lt;- eval(substitute(expression(p[chi^2]==z),
+                       list(z=signif(te$p.value,3))))
+  title(sub=sublab, cex.sub=3)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

@@ -1,0 +1,69 @@
+logit                 package:gtools                 R Documentation
+
+_G_e_n_e_r_a_l_i_z_e_d _l_o_g_i_t _a_n_d _i_n_v_e_r_s_e _l_o_g_i_t _f_u_n_c_t_i_o_n
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Compute generalized logit and generalized inverse logit functions.
+
+_U_s_a_g_e:
+
+     logit(x, min = 0, max = 1)
+     inv.logit(x, min = 0, max = 1)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: value(s) to be transformed
+
+     min: Lower end of logit interval
+
+     max: Upper end of logit interval
+
+_D_e_t_a_i_l_s:
+
+     The generalized logit function takes values on [min, max] and
+     transforms them to span [-Inf,Inf] it is defined as:
+
+
+                           y = log(p/(1-p))
+
+
+     where
+
+
+                         p=(x-min)/(max-min)
+
+
+     The generized inverse logit function provides the inverse
+     transformation:
+
+
+                       x = p * (max-min) + min
+
+
+     where
+
+
+                          exp(y)/(1+exp(y))
+
+_V_a_l_u_e:
+
+     Transformed value(s).
+
+_A_u_t_h_o_r(_s):
+
+     Gregory R. Warnes warnes@bst.rochester.edu
+
+_S_e_e _A_l_s_o:
+
+     'logit', 'inv.glogit'
+
+_E_x_a_m_p_l_e_s:
+
+       x <- seq(0,10, by=0.25)
+       xt <- logit(x, min=0, max=10)
+       cbind(x,xt)
+
+       y <- inv.logit(xt, min=0, max=10)
+       cbind(x,xt,y)  
+

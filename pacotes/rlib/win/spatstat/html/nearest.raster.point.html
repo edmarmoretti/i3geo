@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Find Pixel Nearest to a Given Point</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for nearest.raster.point {spatstat}"><tr><td>nearest.raster.point {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Find Pixel Nearest to a Given Point</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Given cartesian coordinates, find the nearest pixel.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ nearest.raster.point(x,y,w, indices=TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+Numeric vector of <i>x</i> coordinates of any points</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+Numeric vector of <i>y</i> coordinates of any points</td></tr>
+<tr valign="top"><td><code>w</code></td>
+<td>
+A window (an object of class <code>"owin"</code>)
+of type <code>"mask"</code> representing a binary pixel image.
+</td></tr>
+<tr valign="top"><td><code>indices</code></td>
+<td>
+Logical flag indicating whether to return the
+row and column indices, or the actual <i>x,y</i> coordinates.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The argument <code>w</code> should be a window (an object of class
+<code>"owin"</code>, see <code><a href="owin.object.html">owin.object</a></code> for details)
+of type <code>"mask"</code>. This represents a binary pixel image.
+</p>
+<p>
+The arguments <code>x</code> and <code>y</code> should be numeric vectors
+of equal length. They are interpreted as the coordinates of
+points in space. For each point <code>(x[i], y[i])</code>, the function
+finds the nearest pixel in the grid of pixels for <code>w</code>.
+</p>
+<p>
+If <code>indices=TRUE</code>,
+this function returns a list containing two vectors <code>rr</code> and
+<code>cc</code> giving row and column positions (in the image matrix).
+For the location <code>(x[i],y[i])</code> the nearest
+pixel is at row <code>rr[i]</code> and column <code>cc[i]</code> of
+the image.
+</p>
+<p>
+If <code>indices=FALSE</code>, the function returns a list containing
+two vectors <code>x</code> and <code>y</code> giving the actual coordinates
+of the pixels.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+If <code>indices=TRUE</code>, a 
+list containing two vectors <code>rr</code> and <code>cc</code>
+giving row and column positions (in the image matrix).
+If <code>indices=FALSE</code>, a list containing
+vectors <code>x</code> and <code>y</code> giving actual coordinates
+of the pixels.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.object.html">owin.object</a></code>,
+<code><a href="as.mask.html">as.mask</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  w &lt;- owin(c(0,1), c(0,1), mask=matrix(TRUE, 100,100))  # 100 x 100 grid
+  nearest.raster.point(0.5, 0.3, w)
+  nearest.raster.point(0.5, 0.3, w, indices=FALSE)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

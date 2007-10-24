@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Diggle-Gratton model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for DiggleGratton {spatstat}"><tr><td>DiggleGratton {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Diggle-Gratton model</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Creates an instance of the Diggle-Gratton pairwise interaction
+point process model, which can then be fitted to point pattern data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  DiggleGratton(delta, rho)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>delta</code></td>
+<td>
+lower threshold <i>delta</i></td></tr>
+<tr valign="top"><td><code>rho</code></td>
+<td>
+upper threshold <i>rho</i></td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+Diggle and Gratton (1984, pages 208-210)
+introduced the pairwise interaction point
+process with pair potential <i>h(t)</i> of the form
+</p><p align="center"><i>h(t) = ((t - delta)/(rho - delta))^kappa, {    } delta &lt;= t &lt;= rho
+</i></p><p>
+with <i>h(t) = 0</i> for <i>t &lt; delta</i>
+and  <i>h(t) = 1</i> for <i>t &gt; rho</i>.
+Here <i>delta</i>, <i>rho</i> and <i>kappa</i>
+are parameters.
+</p>
+<p>
+Note that we use the symbol <i>kappa</i>
+where Diggle and Gratton (1984) and Diggle, Gates and Stibbard (1987)
+use <i>beta</i>, since in <STRONG>spatstat</STRONG> we reserve the symbol
+<i>beta</i> for an intensity parameter.
+</p>
+<p>
+The parameters must all be nonnegative,
+and must satisfy <i>delta &lt;= rho</i>.
+</p>
+<p>
+The potential is inhibitory, i.e. this model is only appropriate for
+regular point patterns. The strength of inhibition increases with
+<i>kappa</i>. For <i>kappa=0</i> the model is
+a hard core process with hard core radius <i>delta</i>.
+For <i>kappa=infinity</i> the model is a hard core
+process with hard core radius <i>rho</i>.
+</p>
+<p>
+The irregular parameters 
+<i>delta, rho</i> must be given in the call to
+<code>DiggleGratton</code>, while the
+regular parameter <i>kappa</i> will be estimated.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+An object of class <code>"interact"</code>
+describing the interpoint interaction
+structure of a point process.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Diggle, P.J., Gates, D.J. and Stibbard, A. (1987)
+A nonparametric estimator for pairwise-interaction point processes.
+<EM>Biometrika</EM> <B>74</B>, 763 &ndash; 770.
+</p>
+<p>
+Diggle, P.J. and Gratton, R.J. (1984)
+Monte Carlo methods of inference for implicit statistical models.
+<EM>Journal of the Royal Statistical Society, series B</EM>
+<B>46</B>, 193 &ndash; 212.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppm.html">ppm</a></code>,
+<code><a href="ppm.object.html">ppm.object</a></code>,
+<code><a href="Pairwise.html">Pairwise</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   data(cells)
+   ppm(cells, ~1, DiggleGratton(0.05, 0.1))
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

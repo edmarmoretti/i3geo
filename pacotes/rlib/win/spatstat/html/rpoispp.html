@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Generate Poisson Point Pattern</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for rpoispp {spatstat}"><tr><td>rpoispp {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Generate Poisson Point Pattern</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Generate a random point pattern using the
+(homogeneous or inhomogeneous) Poisson process.
+Includes CSR (complete spatial randomness).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ rpoispp(lambda, lmax, win, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+Intensity of the Poisson process.
+Either a single positive number, a <code>function(x,y, ...)</code>,
+or a pixel image.
+</td></tr>
+<tr valign="top"><td><code>lmax</code></td>
+<td>
+An upper bound for the value of <code>lambda(x,y)</code>,
+if <code>lambda</code> is a function.
+</td></tr>
+<tr valign="top"><td><code>win</code></td>
+<td>
+Window in which to simulate the pattern.
+An object of class <code>"owin"</code>
+or something acceptable to <code><a href="as.owin.html">as.owin</a></code>.
+Ignored if <code>lambda</code> is a pixel image.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments passed to <code>lambda</code> if it is a function.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+If <code>lambda</code> is a single number,
+then this algorithm generates a realisation
+of the uniform Poisson process (also known as 
+Complete Spatial Randomness, CSR) inside the window <code>win</code> with 
+intensity <code>lambda</code> (points per unit area).
+</p>
+<p>
+If <code>lambda</code> is a function, then this algorithm generates a realisation
+of the inhomogeneous Poisson process with intensity function
+<code>lambda(x,y,...)</code> at spatial location <code>(x,y)</code>
+inside the window <code>win</code>.
+The function <code>lambda</code> must work correctly with vectors <code>x</code>
+and <code>y</code>.
+The value <code>lmax</code> must be given and must be an upper bound on the 
+values of <code>lambda(x,y,...)</code> for all locations <code>(x, y)</code>
+inside the window <code>win</code>. 
+</p>
+<p>
+If <code>lambda</code> is a pixel image object of class <code>"im"</code>
+(see <code><a href="im.object.html">im.object</a></code>), this algorithm generates a realisation
+of the inhomogeneous Poisson process with intensity equal to the
+pixel values of the image. (The value of the intensity function at an
+arbitrary location is the pixel value of the nearest pixel.)
+The argument <code>win</code> is ignored;
+the window of the pixel image is used instead.
+</p>
+<p>
+To generate an inhomogeneous Poisson process
+the algorithm uses ``thinning'': it first generates a uniform
+Poisson process of intensity <code>lmax</code>,
+then randomly deletes or retains each point, independently of other points,
+with retention probability
+<i>p(x,y) = lambda(x,y)/lmax</i>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+The simulated point pattern (an object of class <code>"ppp"</code>).</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="ppp.object.html">ppp.object</a></code>,
+<code><a href="owin.object.html">owin.object</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ # uniform Poisson process with intensity 100 in the unit square
+ pp &lt;- rpoispp(100)
+ 
+ # uniform Poisson process with intensity 1 in a 10 x 10 square
+ pp &lt;- rpoispp(1, win=owin(c(0,10),c(0,10)))
+ # plots should look similar !
+ 
+ # inhomogeneous Poisson process in unit square
+ # with intensity lambda(x,y) = 100 * exp(-3*x)
+ # Intensity is bounded by 100
+ pp &lt;- rpoispp(function(x,y) {100 * exp(-3*x)}, 100)
+
+ # How to tune the coefficient of x
+ lamb &lt;- function(x,y,a) { 100 * exp( - a * x)}
+ pp &lt;- rpoispp(lamb, 100, a=3)
+
+ # pixel image
+ Z &lt;- as.im(function(x,y){100 * sqrt(x+y)}, unit.square())
+ pp &lt;- rpoispp(Z)
+
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>

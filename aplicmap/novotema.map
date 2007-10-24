@@ -1,0 +1,30 @@
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+      DATA ""
+      METADATA
+        "CLASSE"	"SIM"
+        "TEXTO"	"NAO"
+        "TEMA"	"Novo"
+      END
+    NAME "novotema"
+    SIZEUNITS PIXELS
+    STATUS OFF
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME " "
+      METADATA
+      END
+      STYLE
+          COLOR 200 50 0
+        MAXSIZE 500
+        MINSIZE 1
+          OUTLINECOLOR 0 0 0
+      END
+    END
+  END
+
+END

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Expand Window By Factor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for expand.owin {spatstat}"><tr><td>expand.owin {spatstat}</td><td align="right">R Documentation</td></tr></table>
+<h2>Expand Window By Factor</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Expands the bounding box of a window by a given factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ expand.owin(W, f=1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>W</code></td>
+<td>
+A window.</td></tr>
+<tr valign="top"><td><code>f</code></td>
+<td>
+Scalar factor for expansion of the <EM>area</EM> of the window.</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The argument <code>w</code> should be a window (an object of class
+<code>"owin"</code>, see <code><a href="owin.object.html">owin.object</a></code> for details)
+or can be given in any format acceptable to <code><a href="as.owin.html">as.owin</a>()</code>.
+</p>
+<p>
+The bounding box of the
+window <code>W</code> is expanded by a scale factor equal to the square root
+of <code>f</code> in both the <i>x</i> and <i>y</i> directions,
+so that the area increases by a factor <code>f</code>. The centre of this
+expanded rectangle is the same as the centre of the original bounding
+box. The expanded rectangle is returned.
+</p>
+<p>
+This quirky little function exists mainly for reference,
+as it is the rule for calculating window expansion in our implementation of
+the Metropolis-Hastings algorithm <code><a href="rmh.default.html">rmh.default</a></code>.
+</p>
+<p>
+For general transformations of the scale, location and orientation
+of a window, see <code><a href="shift.html">shift</a></code>, <code><a href="affine.html">affine</a></code>
+and <code><a href="rotate.html">rotate</a></code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A rectangular window.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Adrian Baddeley
+<a href="mailto:adrian@maths.uwa.edu.au">adrian@maths.uwa.edu.au</a>
+<a href="http://www.maths.uwa.edu.au/~adrian/">http://www.maths.uwa.edu.au/~adrian/</a>
+and Rolf Turner
+<a href="mailto:rolf@math.unb.ca">rolf@math.unb.ca</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="owin.html">owin</a></code>,
+<code><a href="as.owin.html">as.owin</a></code>,
+<code><a href="shift.html">shift</a></code>,
+<code><a href="rotate.html">rotate</a></code>,
+<code><a href="affine.html">affine</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  w &lt;- square(1)
+  expand.owin(w, 9)
+  # returns the square [-1,2] x [-1,2]
+</pre>
+
+
+
+<hr><div align="center">[Package <em>spatstat</em> version 1.10-3 <a href="00Index.html">Index]</a></div>
+
+</body></html>
