@@ -1,3 +1,0 @@
-cd c:\naturaldocs
-c:
-naturaldocs -xi j:\i3geo\classesjs\i3geo_tudo_compacto.js -xi j:\i3geo\classesjs\jsobjects -xi j:\i3geo\classesjs\cpaint  -xi j:\i3geo\classesphp\lews -xi j:\i3geo\ajuda -xi j:\i3geo\css -xi j:\i3geo\documentacao -xi j:\i3geo\exemplos -xi j:\i3geo\ferramentas -xi j:\i3geo\imagens -xi j:\i3geo\images -xi j:\i3geo\licenciamento -xi j:\i3geo\pacotes -xi j:\i3geo\symbols -xi j:\i3geo\temas -i j:\i3geo -o HTML j:\i3geo\documentacao -p j:\i3geo\documentacao -r
