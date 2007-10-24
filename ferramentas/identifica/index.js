@@ -23,14 +23,16 @@ Free Software Foundation, Inc., no endereço
 function inicializaJanela()
 {
 	aguarde("block")
+	ativaGuias("")
+	mostraGuia("guia1")
 	g_locaplic = window.parent.g_locaplic
 	xpt = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
 	ypt = unescape(((((window.location.href).split("y="))[1]).split("&"))[0] );
 	escala = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
 	//eventos das guias
-	$i("guia1").onclick = function(){listaTemasLigados();$i("guia1obj").style.display="block"}
-	$i("guia2").onclick = function(){listaTodos();$i("guia1obj").style.display="block"}
-	$i("guia3").onclick = function(){$i("guia1obj").style.display="none";$i("guia3obj").style.display="block"}
+	$i("guia1").onclick = function(){listaTemasLigados();mostraGuia("guia1")}
+	$i("guia2").onclick = function(){listaTodos()}
+	$i("guia3").onclick = function(){mostraGuia("guia3")}
 	$i("xy").innerHTML = "x: " + xpt + "  y: " + ypt
 	listaTemasLigados()
 }
@@ -120,11 +122,12 @@ function listaTodos()
 	var linhas = "Clique no tema para ver os dados<table class=lista2 >"
 	for (l=0;l<lista.length;l++)
 	{
-		var ltema = lista[l].split(",")
-		if (ltema[2] != undefined)
+		var ltema = lista[l].split("*")
+		if (ltema[2] != 2)
 		linhas += "<tr><td><input onclick='identifica(\""+ltema[0]+"\")' style=cursor:pointer type=radio name=tema /></td><td>"+ltema[2]+"</td></tr>"
 	}
-	$i("resultado").innerHTML = linhas+"</table>"
+	$i("resultado").innerHTML = "<table>"+linhas+"</table>"
+	mostraGuia("guia1");
 }
 //identifica o sistema clicado
 function identificasistema(exec,t)

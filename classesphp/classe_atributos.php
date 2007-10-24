@@ -684,6 +684,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
 {
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getLayerByName($tema);
+	$layer->set("status",MS_DEFAULT);
 	$layer->set("template","none.htm");
 	$pt = ms_newPointObj();
 	$pt->setXY($x, $y);

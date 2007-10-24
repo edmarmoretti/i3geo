@@ -57,6 +57,8 @@ postgis_con - string de conexão com o banco de dados postgis para realização de 
 srid_area - srid utilizado nos cálculos que exigem projeção equivalente
 
 postgis_mapa - string de conexão com o banco de dados para substituição do CONNECTION " ". Os layers que tiverem CONNECTION " " terão a string de conexão substituída por esse valor.
+
+utilizacgi - sim|nao variável indicando se o desenho do corpo do mapa será baseado no cgi. Por default, o mapserver desenha o mapa via php. Em alguns casos o uso do cgi torna a aplicação mais rápida
 */
 $mensagemInicia = "I3Geo versão 3.8";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
