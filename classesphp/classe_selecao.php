@@ -496,7 +496,10 @@ $dir_tmp - localização do diretório temporário
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Seleção de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->set("name",basename($nomeshp));
-		$novolayer->setmetadata("DOWNLOAD","sim");
+		$down = "nao";
+		$down = $this->layer->getmetadata("download");
+		if ($down == ""){$down = "nao";}
+		$novolayer->setmetadata("DOWNLOAD",$down);
 		$tipo = $this->layer->type;
 		if ($this->layer->getmetadata("TABELA") != '')
 		{$novolayer->setmetadata("TABELA","NAO");}
