@@ -296,9 +296,18 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 */
 	function zoomTema()
 	{
-		$ret = $this->layer->getextent();
 		$extatual = $this->mapa->extent;
-		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+		$ret = $this->layer->getmetadata("extent");
+		if ($ret == "")
+		{
+			$ret = $this->layer->getextent();
+			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+		}
+		else
+		{
+			$ret = explode(" ",$ret);
+			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
+		}
 		return("ok");
 	}
 /*
