@@ -1275,9 +1275,46 @@ $operacao - Tipo de análise.
 		if (count($calculo)>0)
 		{
 			$final["layer"] = $operacao." ".(implode(" ",$lista));
-			$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais);
+			$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>"");
 			$nomegeo = $dir.(nomerandomico(10)).".geo";
 			$this->serializeGeo($nomegeo,$final);
+			$ext = $this->mapa->extent;
+			$minx = $ext->minx;
+			$miny = $ext->miny;
+			$maxx = $ext->maxx;
+			$maxy = $ext->maxy;
+			$h = $this->mapa->height;
+			$w = $this->mapa->width;
+			$nomelayer = $this->incmapageometrias($dir_tmp,$imgdir,basename($nomegeo));
+			if ($nomelayer != "erro")
+			{
+				
+				$nlayer = $this->mapa->getlayerbyname($nomelayer);
+				$bounds = $nlayer->getExtent();
+				$this->mapa->setsize(30,30);
+				$sb = $this->mapa->scalebar;
+				$statusoriginal = $sb->status;
+				$sb->set("status",MS_OFF);
+	
+				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
+	 			
+	 			$imgo = $this->mapa->draw();
+				$nomei = ($imgo->imagepath).nomeRandomico().".png";
+				$imgo->saveImage($nomei);
+				$nomei = ($imgo->imageurl).basename($nomei);
+				$imgo->free();
+
+				$this->mapa->setsize($w,$h);
+				$ext->setextent($minx,$miny,$maxx,$maxy);			
+
+				$nlayer->set("status",MS_DELETE);
+				$sb->set("status",$statusoriginal);
+				$this->salva();
+				$final = array();
+				$final["layer"] = $operacao." ".(implode(" ",$lista));
+				$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>$nomei);
+				$this->serializeGeo($nomegeo,$final);
+			}
 		}
 		return($nomegeo);	
 	}

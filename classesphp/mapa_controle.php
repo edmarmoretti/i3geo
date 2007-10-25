@@ -205,7 +205,6 @@ Include:
 		$m = new Analise($map_file,"");
 		$resultado = $m->incmapageometrias($dir_tmp,$imgdir,$lista);
 		$cp->set_data($resultado);
-		
 	break;
 /*
 Property: funcoesGeometrias

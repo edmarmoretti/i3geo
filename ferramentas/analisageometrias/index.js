@@ -120,9 +120,12 @@ function montalistageometrias(retorno)
 			for (j=0;j<temp.length; j++)
 			{
 				ins += "<tr><td>"+temp[j].id+"</td><td style=text-align:left >"
+				if (temp[j].imagem != "")
+				{ins += "<img src='"+temp[j].imagem+"' />"}
 				for (k=0;k<temp[j].valores.length; k++)
 				{
 					ins += temp[j].valores[k].item+" = "+temp[j].valores[k].valor+"<br>"
+					
 				}
 				ins += "</td></tr>"
 			}
@@ -157,7 +160,6 @@ function pegaMarcados()
 }
 function incmapa()
 {
-	aguarde("block")
 	var lista = pegaMarcados()
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=incmapageometrias&lista="+lista
 	var cp = new cpaint();

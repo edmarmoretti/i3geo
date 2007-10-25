@@ -610,6 +610,11 @@ $nome - nome que será dado a geometria
 */
 	function capturaGeometrias($dir_tmp,$imgdir,$nome="")
 	{
+		$this->mapa->setsize(30,30);
+		$ext = $this->mapa->extent;
+		$sb = $this->mapa->scalebar;
+		$sb->set("status",MS_OFF);
+		
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$items = pegaItens($this->layer);
@@ -632,7 +637,19 @@ $nome - nome que será dado a geometria
 			}
 			$wktgeo=$shape->toWkt();
 			if ($wktgeo != "")
-			{$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem);}
+			{			
+				$fechou = $this->layer->close();
+				$bounds = $shape->bounds;
+				//gera imagem
+				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
+	 			$imgo = $this->mapa->draw();
+				$nomei = ($imgo->imagepath).nomeRandomico().".png";
+				$imgo->saveImage($nomei);
+				$nomei = ($imgo->imageurl).basename($nomei);
+				$imgo->free();
+				$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem,"imagem"=>$nomei);
+				$fechou = $this->layer->open();
+			}
 		}
 		$fechou = $this->layer->close();
 		if (count($registros) > 0)
@@ -650,6 +667,7 @@ $nome - nome que será dado a geometria
 			$r = serialize($final);
 			fwrite($fp,$r);
 			fclose($fp);
+			
 		}
 		return("ok");
 	}
@@ -675,7 +693,7 @@ $imgdir - diretório temporário das imagens do mapa atual
 			//var_dump($final);
 			$dados = array();
 			foreach ($final["dados"] as $d)
-			{$dados[] = array("id"=>($d["id"]),"valores"=>($d["valores"]));}
+			{$dados[] = array("id"=>($d["id"]),"valores"=>($d["valores"]),"imagem"=>($d["imagem"]));}
 			$resultado[] = array("arquivo"=>(basename($arquivo)),"layer"=>$final["layer"],"dados"=>$dados);
 		}
 		return($resultado);
