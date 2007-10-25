@@ -605,8 +605,10 @@ parameters:
 $dir_tmp - diretório temporário do I3Geo
 
 $imgdir - diretório temporário das imagens do mapa atual
+
+$nome - nome que será dado a geometria
 */
-	function capturaGeometrias($dir_tmp,$imgdir)
+	function capturaGeometrias($dir_tmp,$imgdir,$nome="")
 	{
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
@@ -637,7 +639,11 @@ $imgdir - diretório temporário das imagens do mapa atual
 		{
 			$final["dados"] = $registros;
 			//salva arquivo
-			$arq = $dir_tmp."/".$imgdir."/geometria".nomerandomico(15).".geo";
+			if ($nome == "")
+			{$nome = nomerandomico(15);}
+			else
+			{$nome = str_replace(" ","_",$nome);}
+			$arq = $dir_tmp."/".$imgdir."/".$nome.".geo";
 			if (file_exists($arq))
 			{unlink($arq);}
 			$fp = fopen($arq,"w");

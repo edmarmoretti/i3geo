@@ -266,7 +266,7 @@ Include:
 	case "capturageometrias":
 		include("classe_temas.php");
 		$m = new Temas($map_file,$tema);
-		$resultado = $m->capturaGeometrias($dir_tmp,$imgdir);
+		$resultado = $m->capturaGeometrias($dir_tmp,$imgdir,$nome);
 		$cp->set_data($resultado);
 	break;
 /*

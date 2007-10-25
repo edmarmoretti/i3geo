@@ -85,8 +85,9 @@ function operacao(tipo)
 //captura as geometrias selecionadas e grava em arquivos
 function capturageo()
 {
+	var nome=window.prompt("Nome que sera dado a geometria:")
 	aguarde("block")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=capturageometrias&tema="+$i("comboTemas").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=capturageometrias&tema="+$i("comboTemas").value+"&nome="+nome
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -113,7 +114,7 @@ function montalistageometrias(retorno)
 		{
 			ins += "<table width=700 ><tr style=background-color:"+cor+" >"
 			ins += "<td width=5 ><input type=checkbox id="+retorno.data[i].arquivo+" style=cursor:pointer \></td>"
-			ins += "<td width=55 >"+retorno.data[i].layer+"</td>"
+			ins += "<td width=55 >"+retorno.data[i].layer+" "+retorno.data[i].arquivo+"</td>"
 			ins += "<td><table>"
 			var temp = retorno.data[i].dados
 			for (j=0;j<temp.length; j++)
