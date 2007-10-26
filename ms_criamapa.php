@@ -142,22 +142,11 @@ $_SESSION["utilizacgi"] = $utilizacgi_;
 //pega todas as variáveis da sessão
 //
 foreach(array_keys($_SESSION) as $k)
-{
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
+{eval("\$".$k."='".$_SESSION[$k]."';");}
 //
 //monta a apresentação do aguarde
 //
-if (!isset($interface))
-{
-	echo "<html><head>";
-	echo '<div id="aguarde">';
-	echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...criando o mapa</p>';
-	echo "<center><img src='".$caminho."imagens/i3geo1.jpg'><br><br>";
-	echo "<center><img src='".$caminho."imagens/mapserv.png'><br><br>";
-	echo "<center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a>";
-	echo '<BODY bgcolor="white" style="background-color:white">';
-}
+mostraAguarde();
 //
 //define os arquivos .map conforme o tipo de sistema operacional
 //
@@ -195,26 +184,7 @@ $_SESSION["imgdir"] = $diretorios[2];
 //
 //cria arquivos para impedir a leitura dos diretórios temporários
 //
-if (!file_exists($dir_tmp."/index.htm"))
-{
-	$f = fopen($dir_tmp."/index.htm",x);
-	fclose($f);
-	$f = fopen($dir_tmp."/index.html",x);
-	fclose($f);
-	$f = fopen($dir_tmp."/".$diretorios[1]."/index.html",x);
-	fclose($f);
-	$f = fopen($dir_tmp."/".$diretorios[1]."/index.htm",x);
-	fclose($f);
-	$f = fopen($dir_tmp."/".$diretorios[2]."/index.html",x);
-	fclose($f);
-	$f = fopen($dir_tmp."/".$diretorios[2]."/index.htm",x);
-	fclose($f);
-}
-if (!file_exists($dir_tmp."/index.htm"))
-{
-	echo "Erro. Não foi possível gravar no diretório temporário";
-	exit;
-}
+criaIndex();
 //
 //cria os objetos map
 //
@@ -239,45 +209,10 @@ ms_ResetErrorList();
 //
 //verifica a lista de temas da inicializacao, adicionando-os se necessário
 //
-if (!isset($temasa)){$temasa = $estadosl;}
-$temasa = str_replace(','," ",$temasa);
-$alayers = explode(" ",$temasa);
-foreach ($alayers as $arqt)
-{
-	$arqtemp = "";
-	$arqt = trim($arqt);
-	if ($arqt == "")
-	{continue;}
-	if (file_exists($arqt))
-	{$arqtemp = $arqt;}
-	if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasaplic."\\".$arqt.".map")))
-	{$arqtemp = $temasaplic."\\".$arqt.".map";}
-	elseif (file_exists($temasaplic."/".$arqt.".map"))
-	{$arqtemp = $temasaplic."/".$arqt.".map";}
-	if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.".map")))
-	{$arqtemp = $temasdir."\\".$arqt.".map";}
-	elseif (file_exists($temasdir."/".$arqt.".map"))
-	{$arqtemp = $temasdir."/".$arqt.".map";}
-	if ($arqtemp == "")
-	{echo "<br>Imposs&iacute;vel acessar tema $arqtemp";}
-	else
-	{
-		if (!@ms_newMapObj($arqtemp))
-		{echo "<br>Problemas com a camada $arqtemp<br>";}
-		else
-		{
-			$maptemp = @ms_newMapObj($arqtemp);
-			for($i=0;$i<($maptemp->numlayers);$i++)
-			{
-				$layern = $maptemp->getLayer($i);
-				$layern->setmetadata("NOMEORIGINAL",$layern->name);
-				if ($layern->name == "estadosl")
-				{$layern->set("data",$temasaplic."/dados/estados.shp");}
-				ms_newLayerObj($mapn, $layern);
-			}
-		}	
-	}
-}
+incluiTemasIniciais();
+//
+//verifica erros
+//
 $error = ms_GetErrorObj();
 while($error && $error->code != MS_NOERR)
 {
@@ -288,19 +223,10 @@ ms_ResetErrorList();
 //
 //liga os temas definidos em $layers
 //
-if (isset($layers))
-{
-	$layers = str_replace(','," ",$layers);
-	$lista = explode(" ", $layers);
-	foreach ($lista as $l)
-	{
-		$arqt = trim($l);
-		if ($l == "")
-		{continue;}
-		if(@$mapn->getLayerByName($l))
-		{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_DEFAULT);}
-	}
-}
+ligaTemas();
+//
+//verifica erros
+//
 $error = ms_GetErrorObj();
 while($error && $error->code != MS_NOERR)
 {
@@ -377,62 +303,11 @@ while($error && $error->code != MS_NOERR)
 	$error = $error->next();
 }
 ms_ResetErrorList();
+//
 //inclui pontos via url
+//
 if (isset($pontos))
-{
-	require_once "pacotes/phpxbase/api_conversion.php";
-	if (!isset($nometemapontos))
-	{$nometemapontos="Pontos";}
-	if ($nometemapontos == "")
-	{$nometemapontos="Pontos";}
-	//
-	//cria o shape file
-	//
-	$tipol = MS_SHP_POINT;
-	$nomeshp = $dir_tmp."/".$imgdir."/pontosins";
-	// cria o dbf
-	$def = array();
-	$items = array("COORD");
-	foreach ($items as $ni)
-	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
-	$dbname = $nomeshp.".dbf";
-	$db=xbase_open($dbname,2);
-	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-	$pontos = explode(" ",trim($pontos));
-	foreach ($pontos as $p)
-	{if (is_numeric($p)){$pontosn[] = $p;}}
-	$pontos = $pontosn;
-	for ($ci = 0;$ci < count($pontos);$ci=$ci+2)
-	{
-		$reg = array();
-		$reg[] = $pontos[$ci]." ".$pontos[$ci+1];
-		$shape = ms_newShapeObj($tipol);
-		$linha = ms_newLineObj();
-		$linha->addXY($pontos[$ci],$pontos[$ci+1]);
-		$shape->add($linha);
-		$novoshpf->addShape($shape);
-		xbase_add_record($db,$reg);
-	}
-	$novoshpf->free();
-	xbase_close($db);
-	//adiciona o layer
-	$mapa = ms_newMapObj($tmpfname);
-	$layer = ms_newLayerObj($mapa);
-	$layer->set("name","pontoins");
-	$layer->set("data",$nomeshp);
-	$layer->setmetadata("tema",$nometemapontos);
-	$layer->setmetadata("classe","sim");
-	$layer->set("type",MS_LAYER_POINT);
-	$layer->set("status",MS_DEFAULT);
-	$classe = ms_newClassObj($layer);
-	$estilo = ms_newStyleObj($classe);
-	$estilo->set("symbolname","ponto");
-	$estilo->set("size",6);
-	$cor = $estilo->color;
-	$cor->setRGB(255,0,0);
-	$salvo = $mapa->save($tmpfname);
-}
+{inserePontosUrl();}
 $error = ms_GetErrorObj();
 while($error && $error->code != MS_NOERR)
 {
@@ -441,7 +316,31 @@ while($error && $error->code != MS_NOERR)
 }
 ms_ResetErrorList();
 //
-//se vc quiser para o script aqui, para verificar erros, descomente a linha abaixo
+//inclui linhas via url
+//
+if (isset($linhas))
+{insereLinhasUrl();}
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
+//
+//inclui pontos via url
+//
+if (isset($poligonos))
+{inserePoligonosUrl();}
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
+//
+//se vc quiser parar o script aqui, para verificar erros, descomente a linha abaixo
 //
 //exit;
 //
@@ -496,5 +395,307 @@ if ($interface != "mashup")
 		//header("Location:".$urln);
 		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
 	}
+}
+//////////////////////////////////////////////////////////////////////////////
+//funções
+/////////////////////////////////////////////////////////////////////////////
+
+function ligaTemas()
+{
+	global $layers,$mapn;
+	if (isset($layers))
+	{
+		$layers = str_replace(','," ",$layers);
+		$lista = explode(" ", $layers);
+		foreach ($lista as $l)
+		{
+			$arqt = trim($l);
+			if ($l == "")
+			{continue;}
+			if(@$mapn->getLayerByName($l))
+			{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_DEFAULT);}
+		}
+	}
+}
+
+function incluiTemasIniciais()
+{
+	global $temasa,$estadosl,$temasaplic,$temasdir,$mapn;
+	if (!isset($temasa)){$temasa = $estadosl;}
+	$temasa = str_replace(','," ",$temasa);
+	$alayers = explode(" ",$temasa);
+	foreach ($alayers as $arqt)
+	{
+		$arqtemp = "";
+		$arqt = trim($arqt);
+		if ($arqt == "")
+		{continue;}
+		if (file_exists($arqt))
+		{$arqtemp = $arqt;}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasaplic."\\".$arqt.".map")))
+		{$arqtemp = $temasaplic."\\".$arqt.".map";}
+		elseif (file_exists($temasaplic."/".$arqt.".map"))
+		{$arqtemp = $temasaplic."/".$arqt.".map";}
+		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt.".map")))
+		{$arqtemp = $temasdir."\\".$arqt.".map";}
+		elseif (file_exists($temasdir."/".$arqt.".map"))
+		{$arqtemp = $temasdir."/".$arqt.".map";}
+		if ($arqtemp == "")
+		{echo "<br>Imposs&iacute;vel acessar tema $arqtemp";}
+		else
+		{
+			if (!@ms_newMapObj($arqtemp))
+			{echo "<br>Problemas com a camada $arqtemp<br>";}
+			else
+			{
+				$maptemp = @ms_newMapObj($arqtemp);
+				for($i=0;$i<($maptemp->numlayers);$i++)
+				{
+					$layern = $maptemp->getLayer($i);
+					$layern->setmetadata("NOMEORIGINAL",$layern->name);
+					if ($layern->name == "estadosl")
+					{$layern->set("data",$temasaplic."/dados/estados.shp");}
+					ms_newLayerObj(&$mapn, $layern);
+				}
+			}	
+		}
+	}
+}
+
+function criaIndex()
+{
+	global $dir_tmp,$diretorios;
+	if (!file_exists($dir_tmp."/index.htm"))
+	{
+		$f = fopen($dir_tmp."/index.htm",x);
+		fclose($f);
+		$f = fopen($dir_tmp."/index.html",x);
+		fclose($f);
+		$f = fopen($dir_tmp."/".$diretorios[1]."/index.html",x);
+		fclose($f);
+		$f = fopen($dir_tmp."/".$diretorios[1]."/index.htm",x);
+		fclose($f);
+		$f = fopen($dir_tmp."/".$diretorios[2]."/index.html",x);
+		fclose($f);
+		$f = fopen($dir_tmp."/".$diretorios[2]."/index.htm",x);
+		fclose($f);
+	}
+	if (!file_exists($dir_tmp."/index.htm"))
+	{
+		echo "Erro. Não foi possível gravar no diretório temporário";
+		exit;
+	}
+}
+
+function mostraAguarde()
+{
+	global $interface,$caminho,$mensagemInicia;
+	if (!isset($interface))
+	{
+		echo "<html><head>";
+		echo '<div id="aguarde">';
+		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...criando o mapa</p>';
+		echo "<center><img src='".$caminho."imagens/i3geo1.jpg'><br><br>";
+		echo "<center><img src='".$caminho."imagens/mapserv.png'><br><br>";
+		echo "<center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a>";
+		echo '<BODY bgcolor="white" style="background-color:white">';
+	}
+}
+
+function inserePontosUrl()
+{
+	global $pontos,$nometemapontos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	require_once "pacotes/phpxbase/api_conversion.php";
+	if (!isset($nometemapontos))
+	{$nometemapontos="Pontos";}
+	if ($nometemapontos == "")
+	{$nometemapontos="Pontos";}
+	//
+	//cria o shape file
+	//
+	$tipol = MS_SHP_POINT;
+	$nomeshp = $dir_tmp."/".$imgdir."/pontosins";
+	// cria o dbf
+	$def = array();
+	$items = array("COORD");
+	foreach ($items as $ni)
+	{$def[] = array($ni,"C","254");}
+	xbase_create($nomeshp.".dbf", $def);
+	$dbname = $nomeshp.".dbf";
+	$db=xbase_open($dbname,2);
+	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+	$pontos = explode(" ",trim($pontos));
+	foreach ($pontos as $p)
+	{if (is_numeric($p)){$pontosn[] = $p;}}
+	$pontos = $pontosn;
+	for ($ci = 0;$ci < count($pontos);$ci=$ci+2)
+	{
+		$reg = array();
+		$reg[] = $pontos[$ci]." ".$pontos[$ci+1];
+		$shape = ms_newShapeObj($tipol);
+		$linha = ms_newLineObj();
+		$linha->addXY($pontos[$ci],$pontos[$ci+1]);
+		$shape->add($linha);
+		$novoshpf->addShape($shape);
+		xbase_add_record($db,$reg);
+	}
+	$novoshpf->free();
+	xbase_close($db);
+	//adiciona o layer
+	$mapa = ms_newMapObj($tmpfname);
+	$layer = ms_newLayerObj($mapa);
+	$layer->set("name","pontoins");
+	$layer->set("data",$nomeshp);
+	$layer->setmetadata("tema",$nometemapontos);
+	$layer->setmetadata("classe","sim");
+	$layer->set("type",MS_LAYER_POINT);
+	$layer->set("status",MS_DEFAULT);
+	$classe = ms_newClassObj($layer);
+	$estilo = ms_newStyleObj($classe);
+	$estilo->set("symbolname","ponto");
+	$estilo->set("size",6);
+	$cor = $estilo->color;
+	$cor->setRGB(255,0,0);
+	$salvo = $mapa->save($tmpfname);
+}
+//
+//as linhas devem ter os pontos separados por espaços e cada linha separada por vírgula
+//
+function insereLinhasUrl()
+{
+	global $linhas,$nometemalinhas,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	require_once "pacotes/phpxbase/api_conversion.php";
+	if (!isset($nometemalinhas))
+	{$nometemalinhas="Linhas";}
+	if ($nometemalinhas == "")
+	{$nometemalinhas="Linhas";}
+	//
+	//cria o shape file
+	//
+	$tipol = MS_SHP_ARC;
+	$nomeshp = $dir_tmp."/".$imgdir."/linhains";
+	// cria o dbf
+	$def = array();
+	$items = array("COORD");
+	foreach ($items as $ni)
+	{$def[] = array($ni,"C","254");}
+	xbase_create($nomeshp.".dbf", $def);
+	$dbname = $nomeshp.".dbf";
+	$db=xbase_open($dbname,2);
+	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+	$linhas = explode(",",trim($linhas));
+	$pontosLinhas = array(); //guarda os pontos de cada linha em arrays
+	foreach ($linhas as $l)
+	{
+		$tempPTs = explode(" ",trim($l));
+		$temp = array();
+		foreach ($tempPTs as $p)
+		if (is_numeric($p)){$temp[] = $p;}
+		$pontosLinhas[] = $temp;
+	}
+	foreach ($pontosLinhas as $ptsl)
+	{
+		$linhas = $ptsl;
+		$shape = ms_newShapeObj($tipol);
+		$linha = ms_newLineObj();
+		$reg = array();
+		$reg[] = "";
+		for ($ci = 0;$ci < count($linhas);$ci=$ci+2)
+		{
+			$linha->addXY($linhas[$ci],$linhas[$ci+1]);
+			$shape->add($linha);
+		}
+		$novoshpf->addShape($shape);
+		xbase_add_record($db,$reg);
+	}
+	$novoshpf->free();
+	xbase_close($db);
+	//adiciona o layer
+	$mapa = ms_newMapObj($tmpfname);
+	$layer = ms_newLayerObj($mapa);
+	$layer->set("name","linhains");
+	$layer->set("data",$nomeshp);
+	$layer->setmetadata("tema",$nometemalinhas);
+	$layer->setmetadata("classe","sim");
+	$layer->set("type",MS_LAYER_LINE);
+	$layer->set("status",MS_DEFAULT);
+	$classe = ms_newClassObj($layer);
+	$estilo = ms_newStyleObj($classe);
+	$estilo->set("symbolname","linha");
+	$estilo->set("size",3);
+	$cor = $estilo->color;
+	$cor->setRGB(255,0,0);
+	$salvo = $mapa->save($tmpfname);
+}
+//
+//os polígonos devem ter os pontos separados por espaços e cada polígono separado por vírgula
+//
+function inserePoligonosUrl()
+{
+	global $poligonos,$nometemapoligonos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	require_once "pacotes/phpxbase/api_conversion.php";
+	if (!isset($nometemapoligonos))
+	{$nometemapoligonos="Poligonos";}
+	if ($nometemapoligonos == "")
+	{$nometemapoligonos="Poligonos";}
+	//
+	//cria o shape file
+	//
+	$tipol = MS_SHP_POLYGON;
+	$nomeshp = $dir_tmp."/".$imgdir."/poligonosins";
+	// cria o dbf
+	$def = array();
+	$items = array("COORD");
+	foreach ($items as $ni)
+	{$def[] = array($ni,"C","254");}
+	xbase_create($nomeshp.".dbf", $def);
+	$dbname = $nomeshp.".dbf";
+	$db=xbase_open($dbname,2);
+	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+	$linhas = explode(",",trim($poligonos));
+	$pontosLinhas = array(); //guarda os pontos de cada linha em arrays
+	foreach ($linhas as $l)
+	{
+		$tempPTs = explode(" ",trim($l));
+		$temp = array();
+		foreach ($tempPTs as $p)
+		if (is_numeric($p)){$temp[] = $p;}
+		$pontosLinhas[] = $temp;
+	}
+	foreach ($pontosLinhas as $ptsl)
+	{
+		$linhas = $ptsl;
+		$shape = ms_newShapeObj($tipol);
+		$linha = ms_newLineObj();
+		$reg = array();
+		$reg[] = "";
+		for ($ci = 0;$ci < count($linhas);$ci=$ci+2)
+		{
+			$linha->addXY($linhas[$ci],$linhas[$ci+1]);
+			
+		}
+		$shape->add($linha);
+		$novoshpf->addShape($shape);
+		xbase_add_record($db,$reg);
+	}
+	$novoshpf->free();
+	xbase_close($db);
+	//adiciona o layer
+	$mapa = ms_newMapObj($tmpfname);
+	$layer = ms_newLayerObj($mapa);
+	$layer->set("name","linhains");
+	$layer->set("data",$nomeshp);
+	$layer->setmetadata("tema",$nometemapoligonos);
+	$layer->setmetadata("classe","sim");
+	$layer->set("type",MS_LAYER_POLYGON);
+	$layer->set("transparency","50");
+	$layer->set("status",MS_DEFAULT);
+	$classe = ms_newClassObj($layer);
+	$estilo = ms_newStyleObj($classe);
+	//$estilo->set("symbolname","linha");
+	//$estilo->set("size",3);
+	$cor = $estilo->color;
+	$cor->setRGB(255,0,0);
+	$salvo = $mapa->save($tmpfname);
 }
 ?>
