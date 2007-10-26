@@ -1910,7 +1910,8 @@ function Mapa(e,m)
 			var lista = temas.split(";");
 			mytreeview1 = new Object();
 			mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
-			mytreeview1.createItem("g1", "<b>Camadas</b>", g_locaplic+"/imagens/foldermapa.gif", true, true, true, null);
+			var titulo = "<b>Camadas</b><img id='lixeira' style='position:relative;top:5px' title='arraste o tema aqui para excluir'  src='"+$im("gnome-fs-trash-full.png")+"' />";
+			mytreeview1.createItem("g1",titulo, g_locaplic+"/imagens/foldermapa.gif", true, true, true, null);
 			mytreeview1.itemExpand = expandeTema;
 			var cor = "rgb(250,250,250)";
 			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
@@ -1940,6 +1941,7 @@ function Mapa(e,m)
 				else
 				{var cor = "rgb(250,250,250)";}
 			}
+			ativaDragDrop();
 		}
 	};
 	/*

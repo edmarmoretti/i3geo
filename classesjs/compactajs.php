@@ -45,6 +45,7 @@ packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compa
 packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","High ASCII");
 packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","High ASCII");
 packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
+packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
 /*
 $s = inicia("iniciamma.js");
 $abre = fopen("iniciamma_compacto.js", "wt");
@@ -87,6 +88,7 @@ $jsfiles = array(
 "../pacotes/yui231/build/container/container-min.js",
 "../pacotes/yui231/build/element/element-beta-min.js",
 "../pacotes/yui231/build/tabview/tabview-min.js",
+"../pacotes/yui231/build/utilities/utilities_packer.js",
 "cpaint/cpaint2.inc.compressed.js",
 "jsobjects/jsUI-Global/common_compacto.js",
 "jsobjects/jsUI-Global/uiCommon_compacto.js",

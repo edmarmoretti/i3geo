@@ -159,7 +159,8 @@ function excluitemaf(tema)
 	do
 	{
 		p.removeChild(p.childNodes[0]);
-	} while (p.childNodes.length > 0);
+	}
+	while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;

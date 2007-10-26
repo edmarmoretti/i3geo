@@ -43,6 +43,7 @@ var jsfiles = new Array(
 "../pacotes/yui231/build/container/container-min.js",
 "../pacotes/yui231/build/element/element-beta.js",
 "../pacotes/yui231/build/tabview/tabview.js",
+"../pacotes/yui231/build/utilities/utilities.js",
 "cpaint/cpaint2.inc.compressed.js",
 "jsobjects/jsUI-Global/common.js",
 "jsobjects/jsUI-Global/uiCommon.js",
