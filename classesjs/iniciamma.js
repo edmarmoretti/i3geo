@@ -466,7 +466,7 @@ Variable: g_mensagempadrao
 
 Mensagem padrão que será mostrada na janela de mensagens.
 */
-g_mensagempadrao = "O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
+g_mensagempadrao = "O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
 /*
 Variable: g_entorno
 
@@ -501,7 +501,7 @@ else
 	g_tipoleft = "left";
 }
 //inclui uma mensagem no rodapé da janela quando a tela do navegador tem seu tamanho modificado pelo usuário
-window.onresize = function(){window.status = "Após alterar o tamanho da janela, clique no botão de refresh do navegador";};
+window.onresize = function(){window.status = "Ap&oacute;s alterar o tamanho da janela, clique no bot&atilde;o de refresh do navegador";};
 
 function cria()
 {
@@ -1084,7 +1084,7 @@ function Mapa(e,m)
 		if ($i(id))
 		{
 			$i(id).innerHTML = "localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  title='zoom' onclick='zoomPonto()' src="+$im("tic.png") +" id=procurarxy />";
-			$i(id).onmouseover = function(){mostradicasf(this,'Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localizá-lo no mapa. O centro do mapa será deslocado para o ponto digitado.','');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para o ponto digitado.','');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1220,7 +1220,7 @@ function Mapa(e,m)
 				g_operacao = "navega";
 				wdocaf("340px","340px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");
 			};
-			$i(id).onmouseover=function(){mostradicasf(this,'Abre o Google Maps, mostrando uma imagem de satélite da região vista no mapa principal.','google');};
+			$i(id).onmouseover=function(){mostradicasf(this,'Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da regi&atilde;o vista no mapa principal.','google');};
 			$i(id).onmouseout=function(){mostradicasf(this,'');};
 		}
 	};	
@@ -1272,7 +1272,7 @@ function Mapa(e,m)
 					document.body.appendChild(novoel);
 				} 
 			};
-			$i(id).onmouseover=function(){mostradicasf(this,'Projeto Confluence. Pontos de intersecção de coordenadas observadas em campo.','confluence');};
+			$i(id).onmouseover=function(){mostradicasf(this,'Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo.','confluence');};
 			$i(id).onmouseout=function(){mostradicasf(this,'');};
 		}
 	};
@@ -1290,7 +1290,7 @@ function Mapa(e,m)
 		if ($i(id))
 		{
 			$i(id).onclick = function (){zoomtot();};
-			$i(id).onmouseover = function(){mostradicasf(this,'Altera a escala do mapa ajustando-a para mostrar a mesma abrangência geográfica da inicialização.','geral');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.','geral');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1308,7 +1308,7 @@ function Mapa(e,m)
 		if ($i(id))
 		{
 			$i(id).onclick =function(){mudaiconf("zoomli");g_operacao="navega";};
-			$i(id).onmouseover = function(){mostradicasf(this,'Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Após ativada, clique e arraste o mouse sobre o mapa na área de zoom desejada.','zoomli');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.','zoomli');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1326,7 +1326,7 @@ function Mapa(e,m)
 		if ($i(id))
 		{
 			$i(id).onclick =function(){mudaiconf("pan");g_tipoacao = "pan";g_operacao="navega";};
-			$i(id).onmouseover = function(){mostradicasf(this,'Desloca a região visível no mapa. Após ativada, clique e arraste o mouse sobre o mapa para deslocar a região visível.','pan');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o vis&iacute;vel.','pan');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1384,7 +1384,7 @@ function Mapa(e,m)
 				mudaiconf("identifica");
 				g_operacao="identifica";
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Após ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.','identifica');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.','identifica');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};	
@@ -1455,7 +1455,7 @@ function Mapa(e,m)
 		if ($i(id))
 		{
 			$i(id).onclick = function(){mensagemf(objmapa.extent);};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geográficas.','extensao');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas.','extensao');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};	
@@ -1491,7 +1491,7 @@ function Mapa(e,m)
 		if($i(id))
 		{
 			$i(id).innerHTML = "1:<input class='digitar' type='text' onchange='javascript:aplicaescala()' id=escalanum size=19 value=''/><img src=\""+g_localimg+"/tic.png\" onclick='javascript:aplicaescala()' />";
-			$i("escalanum").onmouseover = function(){mostradicasf(this,'Digite o novo valor de escala e clique no botão aplicar para alterar a escala do mapa.','escala');};
+			$i("escalanum").onmouseover = function(){mostradicasf(this,'Digite o novo valor de escala e clique no bot&atilde;o aplicar para alterar a escala do mapa.','escala');};
 			$i("escalanum").onmouseout = function(){mostradicasf(this,'');};
 			if ($i("escalanum")){$i("escalanum").value = this.scale;}
 		}
@@ -1514,7 +1514,7 @@ function Mapa(e,m)
 				g_operacao = "navega";
 				wdocaf("450px","190px",g_locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Faça um zoom no mapa antes de abrir essa opção. Regiões muito extensas podem tornar a busca muito demorada.','');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada.','');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};	
@@ -1540,7 +1540,7 @@ function Mapa(e,m)
 				cp.set_response_type("JSON");
 				cp.call(p,"reiniciaMapa",ajaxredesenha);
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Redesenha o mapa com as configurações iniciais.','redesenha');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Redesenha o mapa com as configura&ccedil;&ocirc;es iniciais.','redesenha');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1587,7 +1587,7 @@ function Mapa(e,m)
 					$i("mostradistancia").style.display="none";
 				}
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O cálculo de distância é aproximado e sua precisão depende da escala do mapa.','mede');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.','mede');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1623,7 +1623,7 @@ function Mapa(e,m)
 				else
 				{mudaiconf("pan");}
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os pontos incluídos podem ser transformados em linhas ou polígonos. Os pontos são armazenados em um tema temporário, podendo-se fazer o download do arquivo shapefile.','inserexy');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os pontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.','inserexy');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1659,7 +1659,7 @@ function Mapa(e,m)
 				else
 				{mudaiconf("pan");}
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Insere um gr&aacute;fico no ponto clicado conforme os atributos existentes no tema escolhido. O tema deve possuir itens com valores numéricos na tabela de atributos.','inseregrafico');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Insere um gr&aacute;fico no ponto clicado conforme os atributos existentes no tema escolhido. O tema deve possuir itens com valores num&eacute;ricos na tabela de atributos.','inseregrafico');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1694,7 +1694,7 @@ function Mapa(e,m)
 				else
 				{mudaiconf("pan");}
 			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras operações, como buffer e seleção por tema.','selecao');};
+			$i(id).onmouseover = function(){mostradicasf(this,'Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por tema.','selecao');};
 			$i(id).onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1731,7 +1731,7 @@ function Mapa(e,m)
 				else
 				{mudaiconf("pan");}
 			};
-			$i("textofid").onmouseover = function(){mostradicasf(this,'Insere um texto no mapa clicando no ponto desejado no mapa. Utilize essa opção para adicionar informações ao mapa.','inseretxt');};
+			$i("textofid").onmouseover = function(){mostradicasf(this,'Insere um texto no mapa clicando no ponto desejado no mapa. Utilize essa op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao mapa.','inseretxt');};
 			$i("textofid").onmouseout = function(){mostradicasf(this,'');};
 		}
 	};
@@ -1922,7 +1922,7 @@ function Mapa(e,m)
 				if(ltema[1] == 2){ck = 'CHECKED';}
 				//ltema[8]==sim indica que e um tema com features
 				if (ltema[8] == undefined){ltema[8] = "nao";}
-				tnome = "<input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
+				tnome = "<input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
 				if (ltema[5] == "sim") //o tema tem selecao
 				{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='limpa sele&ccedil;&atilde;o' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'Limpa sele&ccedil;&atilde;o existente nesse tema','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				//verifica se e um wms que tem wfs
