@@ -785,6 +785,21 @@ Include:
 		redesenhaMapa();
 	break;
 /*
+Property: reordenatemas
+
+Reordena os temas baseados na localização de um segundo tema no mapa.
+
+Include:
+<classe_temas.php>
+*/
+	case "reordenatemas":
+		include("classe_temas.php");
+		$m = new Temas($map_file);
+		$cp->set_data($m->reordenatemas($lista));
+		$m->salva();
+		redesenhaMapa();
+	break;
+/*
 Property: zoomtema
 
 Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.

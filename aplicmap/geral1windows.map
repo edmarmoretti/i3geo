@@ -145,6 +145,7 @@ MAP
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"NAO"
+			"TEMA" "linha"
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
 		END
@@ -192,6 +193,7 @@ MAP
 	END
 	LAYER
 		METADATA
+		
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
 		END

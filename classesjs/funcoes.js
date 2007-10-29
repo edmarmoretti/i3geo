@@ -2736,9 +2736,10 @@ function remapaf()
 				}
 				if (ta.length > 0)
 				{
+					objaguarde.fecha("remapa");
 					objaguarde.abre("ajaxredesenha","Aguarde...");
 					var temp = function()
-					{ajaxredesenha("");};
+					{objaguarde.fecha("ajaxredesenha");ajaxredesenha("");};
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+g_sid;
 					var cp = new cpaint();
 					//cp.set_debug(2)
@@ -2747,16 +2748,17 @@ function remapaf()
 				}
 				else
 				{
+					objaguarde.fecha("remapa");
 					objaguarde.abre("ajaxredesenha","Aguarde...");
 					ajaxredesenha("");
 				}
 			}
 			else
 			{
+				objaguarde.fecha("remapa");
 				objaguarde.abre("ajaxredesenha","Aguarde...");
 				ajaxredesenha("");
 			}
-			objaguarde.fecha("remapa");
 		};
 		if ((tsd.length > 0) || (tsl.length > 0))
 		{
@@ -2768,6 +2770,7 @@ function remapaf()
 			cp.call(p,"ligaDesligaTemas",remapaAdicNovos);
 		}
 		else{remapaAdicNovos();}
+		objaguarde.fecha("remapa");
 	}
 	else
 	{remapaAdicNovos();}
@@ -3593,6 +3596,7 @@ function ativaDragDrop()
 	var Dom = YAHOO.util.Dom;
 	var Event = YAHOO.util.Event;
 	var DDM = YAHOO.util.DragDropMgr;
+	YAHOO.example.DDList = "";
 	YAHOO.example.DDApp = 
 	{
     	init: function() 
@@ -3684,11 +3688,12 @@ function ativaDragDrop()
                 		//var destDD = DDM.getDDById(id);
                 		//destEl.appendChild(this.getEl());
                 		//destDD.isEmpty = false;
-                		//DDM.refreshCache();
+                		DDM.refreshCache();
+                		//exclui tema
                 		if(DDM.getDDById(id).id == "lixeira")
                 		{
                 			var tema = (this.getEl()).id;
-                			objaguarde.abre("ajaxredesenha","Aguarde...");
+                			//objaguarde.abre("ajaxredesenha","Aguarde...");
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 							var cp = new cpaint();
 							//cp.set_debug(2)
@@ -3696,13 +3701,33 @@ function ativaDragDrop()
 							cp.call(p,"excluiTemas",ajaxredesenha);
 							objmapa.temaAtivo = "";
 						}
-						/*
+						//muda ordem de desenho do tema
 						else
 						{
 							if ($i(DDM.getDDById(id).id).parentNode.parentNode.id == "mytreeview1")
-							{alert(DDM.getDDById(id).id);}
+							{
+               					objmapa.temas = "";
+               					var temaDe = (this.getEl()).id;
+               					var temaPara = DDM.getDDById(id).id;
+               					var destEl = Dom.get(id);
+               					destEl.appendChild(this.getEl());
+ 							}
+ 							var els = $i("mytreeview1").getElementsByTagName("input");
+ 							var lista = new Array();
+ 							for (i=0;i<els.length;i=i+1)
+ 							{
+ 								var itema = els[i].parentNode.parentNode.id;
+ 								lista.push(itema);								
+ 							}
+ 							var lista = lista.join(',');
+ 							$i("listaTemas").removeChild($i("listaTemas").firstChild);
+              				//objaguarde.abre("ajaxredesenha","Aguarde...");
+							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reordenatemas&lista="+lista+"&g_sid="+g_sid;
+							var cp = new cpaint();
+							//cp.set_debug(2)
+							cp.set_response_type("JSON");
+							cp.call(p,"reordenatemas",ajaxredesenha);
 						}
-						*/
             		}
 	        	}
 	    	},

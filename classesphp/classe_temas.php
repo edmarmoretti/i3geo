@@ -91,21 +91,24 @@ $tema - nome do tema que será processado
 	{
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-  		$this->layer = $this->mapa->getlayerbyname($tema);
-  		$this->nome = $tema;
-		$vermultilayer = new vermultilayer();
-		$vermultilayer->verifica($map_file,$tema);
-		if ($vermultilayer->resultado == 1) // o tema e multi layer
-		{$ls = $vermultilayer->temas;}
-		else
-		{$ls[] = $tema;}
-		$this->grupo = $ls;
-		$this->visiveis = $vermultilayer->temasvisiveis;
-		foreach ($ls as $l)
-		{
-			$t = $this->mapa->getlayerbyname($l);
-			$this->indices[] = $t->index;
-		}
+  		if (isset($tema))
+  		{
+  			$this->layer = $this->mapa->getlayerbyname($tema);
+  			$this->nome = $tema;
+			$vermultilayer = new vermultilayer();
+			$vermultilayer->verifica($map_file,$tema);
+			if ($vermultilayer->resultado == 1) // o tema e multi layer
+			{$ls = $vermultilayer->temas;}
+			else
+			{$ls[] = $tema;}
+			$this->grupo = $ls;
+			$this->visiveis = $vermultilayer->temasvisiveis;
+			foreach ($ls as $l)
+			{
+				$t = $this->mapa->getlayerbyname($l);
+				$this->indices[] = $t->index;
+			}
+  		}
 	}
 /*
 function: salva
@@ -280,13 +283,52 @@ Altera a ordem de armazenamento dos layers no mapfile.
 		foreach ($indices as $indice)
 		{
 			for ($i=0;$i<$mover;$i++)
-			{$moveu = $this->mapa->moveLayerDown($indice);			}
+			{$moveu = $this->mapa->moveLayerDown($indice);}
 		}
 		if ($moveu == MS_TRUE)
 		{return "ok";}
 		else
 		{return "erro. Nao foi possivel mover o tema";}
 	}
+/*
+function: reordenatemas
+
+Reordena os temas baseados na localização de um segundo tema no mapa.
+
+Parameters:
+
+lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas separados por vírgula.
+*/
+	function reordenatemas($lista)
+	{
+		//$do = $this->mapa->getlayersdrawingorder();
+		//var_dump($do);
+		$nlayers = $this->mapa->numlayers;
+		$lista = explode(",",$lista);
+		$lista = array_reverse($lista);
+		$novaordem = array();
+		$escondidos = array();
+		foreach ($lista as $l)
+		{
+			for ($i=0;$i<$nlayers;$i++)
+			{
+				$la = $this->mapa->getlayer($i);
+				$g = strtoupper($la->group);
+				$n = strtoupper($la->name);
+				//echo "$l $n $g -";
+				if ((strtoupper($l) == $n) || (strtoupper($l) == $g))
+				{$novaordem[] = $i;}
+			}
+		}
+		for ($i=0;$i<$nlayers;$i++)
+		{
+			if (!in_array($i,$novaordem))
+			{$novaordem[] = $i;}
+		}
+		$this->mapa->setlayersdrawingorder($novaordem);
+		return "ok";
+	}
+
 /*
 function: zoomTema
 

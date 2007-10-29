@@ -1931,9 +1931,9 @@ function Mapa(e,m)
 				if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
 				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para fazer o download desse tema no formato shapefile','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				if (navm)
-				{tnome += "<span style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span>";}
+				{tnome += "<span title=1clique e arraste' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span>";}
 				else
-				{tnome += "<span style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span>";}
+				{tnome += "<span title='arraste para mudar a ordem' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span>";}
 				mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
 				tnome = "<img width=0px src="+$im("branco.gif") + " />";
 				mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
@@ -1941,8 +1941,8 @@ function Mapa(e,m)
 				else
 				{var cor = "rgb(250,250,250)";}
 			}
-			ativaDragDrop();
 		}
+		ativaDragDrop();
 	};
 	/*
 	Function: atualizaFarol
