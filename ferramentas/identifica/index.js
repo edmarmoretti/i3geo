@@ -69,6 +69,7 @@ function pegavalSistemas(xmlDoc)
 //lista os temas ligados
 function listaTemasLigados()
 {
+	aguarde("none");
 	var lista = (window.parent.objmapa.temas).split(";")
 	var b = window.parent.convdmsf(xpt,ypt);
 	var x = b[0].split(" ")
