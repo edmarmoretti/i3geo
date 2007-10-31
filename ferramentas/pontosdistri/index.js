@@ -35,7 +35,7 @@ comboTemasPt("temasPt",function(retorno)
 {
 	if (retorno.tipo == "dados")
 	{	
-		var ins = "Escolha o tema:<br><br>"
+		var ins = "<span style=font-size:10px >Escolha o tema:</span><br><br>"
 		ins += retorno.dados
 		ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='densidade de pontos' /></div><br>"
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='dist&acirc;ncia entre pontos' /></div><br>"

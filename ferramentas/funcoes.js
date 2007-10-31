@@ -468,7 +468,7 @@ function comboTemasPt(id,funcao,onde)
 				for (i=0;i<retorno.data.length;i++)
 				{comboTemas += "<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
 				comboTemas += "</select>";
-				var temp = {dados:"comboTemas",tipo:"dados"};
+				var temp = {dados:comboTemas,tipo:"dados"};
 			}
 			else
 			{var temp = {dados:'<div class=alerta >Nenhum tema de pontos dispon&iacute;vel.</div>',tipo:"mensagem"};}
