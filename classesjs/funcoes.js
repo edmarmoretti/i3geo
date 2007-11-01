@@ -1171,9 +1171,7 @@ function ativaClicks(docMapa)
 				else
 				{
 					try
-					{
-						richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (objposicaocursor.imgx)-(objmapa.w/2), objposicaocursor.imgy);
-					}
+					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (objposicaocursor.imgx)-(objmapa.w/2), objposicaocursor.imgy);}
 					catch(e){window.status="erro ao desenhar a linha";}
 				}
 			}

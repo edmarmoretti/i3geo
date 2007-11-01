@@ -32,6 +32,23 @@ File: compactajs.php
 
 */
 //
+//compacta os arquivos do richdraw
+//
+packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","High ASCII");
+packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","High ASCII");
+packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","High ASCII");
+$s = inicia("../pacotes/richdraw/prototype.js");
+$abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
+$escreve = fwrite ($abre,$s);
+$fecha = fclose ($abre);
+$jsfiles = array(
+"../pacotes/richdraw/richdraw_compacto.js",
+"../pacotes/richdraw/svgrenderer_compacto.js",
+"../pacotes/richdraw/vmlrenderer_compacto.js"
+);
+$buffer = "";
+salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js");
+//
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
@@ -46,34 +63,8 @@ packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.
 packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","High ASCII");
 packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
 packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
-/*
-$s = inicia("iniciamma.js");
-$abre = fopen("iniciamma_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-
-$s = inicia("ferramentas.js");
-$abre = fopen("ferramentas_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-
-$s = inicia("redesenho.js");
-$abre = fopen("redesenho_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-
-$s = inicia("funcoes.js");
-$abre = fopen("funcoes_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-
-$s = inicia("menususpenso.js");
-$abre = fopen("menususpenso_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-*/
 //
-//gera um único js
+//gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
 "../pacotes/yui231/build/yahoo/yahoo-min_packer.js",
@@ -100,21 +91,7 @@ $jsfiles = array(
 "menususpenso_compacto.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
-
-//junta todos os js em um unico
-foreach ($jsfiles as $f)
-{
-	$abre = fopen($f, "r");
-	while (!feof($abre))
-	{$buffer .= fgets($abre);}
-	fclose($abre);
-	$buffer .= "\n";
-}
-$abre = fopen("i3geo_tudo_compacto.js", "wt");
-$escreve = fwrite ($abre,$buffer);
-$fecha = fclose ($abre);
-chmod("i3geo_tudo_compacto.js",0777);
-//packer("temp.js","i3geo_tudo_compacto.js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js");
 //
 //gera um único css
 //
@@ -128,18 +105,25 @@ $cssfiles = array(
 "../css/menu.css"
 );
 $buffer = "";
-foreach ($cssfiles as $f)
-{
-	$abre = fopen($f, "r");
-	while (!feof($abre))
-	{$buffer .= fgets($abre);}
-	fclose($abre);
-	$buffer .= "\n";
-}
-$abre = fopen("../css/i3geo.css", "wt");
-$escreve = fwrite ($abre,$buffer);
+salvatudojs($cssfiles,$buffer,"../css/i3geo.css");
+
+//
+//compacta o ferramentas/funcoes.js
+//
+$s = inicia("../ferramentas/funcoes.js");
+$abre = fopen("../ferramentas/funcoes_compacto.js", "wt");
+$escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
-chmod("../css/i3geo.css",0777);
+$jsfiles = array(
+"../ferramentas/funcoes_compacto.js",
+"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui231/build/element/element-beta.js",
+"../pacotes/yui231/build/button/button-beta.js",
+"../pacotes/yui231/build/tabview/tabview.js",
+"../classesjs/cpaint/cpaint2.inc.compressed.js"
+);
+$buffer = "\$i = function(id){return document.getElementById(id);}\n";
+salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js");
 
 function inicia($arquivo)
 {
@@ -181,18 +165,34 @@ return $code;
 }
 function packer($src,$out,$tipo="None")
 {
-//packer
-//$src = 'temp.js';
-//$out = 'i3geo_tudo_compacto.js';
-require_once 'packer/class.JavaScriptPacker.php';
-$script = file_get_contents($src);
-$t1 = microtime(true);
-$packer = new JavaScriptPacker($script, $tipo, true, false);
-$packed = $packer->pack();
-$t2 = microtime(true);
-$time = sprintf('%.4f', ($t2 - $t1) );
-echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
-file_put_contents($out, $packed);
-chmod($out,0777);
+	//packer
+	//$src = 'temp.js';
+	//$out = 'i3geo_tudo_compacto.js';
+	require_once 'packer/class.JavaScriptPacker.php';
+	$script = file_get_contents($src);
+	$t1 = microtime(true);
+	$packer = new JavaScriptPacker($script, $tipo, true, false);
+	$packed = $packer->pack();
+	$t2 = microtime(true);
+	$time = sprintf('%.4f', ($t2 - $t1) );
+	echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
+	file_put_contents($out, $packed);
+	chmod($out,0777);
+}
+function salvatudojs($jsfiles,$buffer,$final)
+{
+	//junta todos os js em um unico
+	foreach ($jsfiles as $f)
+	{
+		$abre = fopen($f, "r");
+		while (!feof($abre))
+		{$buffer .= fgets($abre);}
+		fclose($abre);
+		$buffer .= "\n";
+	}
+	$abre = fopen($final, "wt");
+	$escreve = fwrite ($abre,$buffer);
+	$fecha = fclose ($abre);
+	chmod($final,0777);
 }
 ?>

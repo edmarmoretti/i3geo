@@ -1619,7 +1619,7 @@ function Mapa(e,m)
 			    		richdraw.editCommand('mode', 'line');
 			    		$i("divGeometriasTemp").style.display="block";
 					}
-					//ativaClicks($i("divGeometriasTemp"));
+					if(navn){ativaClicks($i("divGeometriasTemp"));}
 				}
 				else
 				{
