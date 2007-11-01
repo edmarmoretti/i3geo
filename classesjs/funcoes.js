@@ -1153,6 +1153,8 @@ function ativaClicks(docMapa)
 			pontosdistobj.ypt[n] = objposicaocursor.ddy;
 			pontosdistobj.xtela[n] = objposicaocursor.telax;
 			pontosdistobj.ytela[n] = objposicaocursor.telay;
+			pontosdistobj.ximg[n] = objposicaocursor.imgx
+			pontosdistobj.yimg[n] = objposicaocursor.imgy
 			pontosdistobj.dist[n] = 0;
 			if (navn)
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, objposicaocursor.imgx,objposicaocursor.imgy,objposicaocursor.imgx,objposicaocursor.imgy);}
@@ -1166,13 +1168,25 @@ function ativaClicks(docMapa)
 				{
 					try
 					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], objposicaocursor.imgx, objposicaocursor.imgy);}
-					catch(e){window.status="erro ao desenhar a linha";} 
+					catch(e){window.status="erro ao desenhar a linha";}
+					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+					var w = Math.sqrt(dx + dy);
+					try
+					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
+					catch(e){window.status="erro ao desenhar o raio";}
 				}
 				else
 				{
 					try
 					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (objposicaocursor.imgx)-(objmapa.w/2), objposicaocursor.imgy);}
 					catch(e){window.status="erro ao desenhar a linha";}
+					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+					var w = Math.sqrt(dx + dy);
+					try
+					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
+					catch(e){window.status="erro ao desenhar o raio";}
 				}
 			}
 			inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
@@ -3468,6 +3482,10 @@ xtela - coordenada x na tela
 
 ytela - coordenada y na tela
 
+ximg - coordenada x na imagem do mapa
+
+yimg - coordenada y na imagem do mapa
+
 linhas - lista de objetos criados pela biblioteca richdraw utilizados no desenho da linha de medição
 */
 function pontosdist()
@@ -3477,6 +3495,8 @@ function pontosdist()
 	this.dist = new Array();
 	this.xtela = new Array();
 	this.ytela = new Array();
+	this.ximg = new Array();
+	this.yimg = new Array();
 	this.linhas = new Array();
 }
 /*

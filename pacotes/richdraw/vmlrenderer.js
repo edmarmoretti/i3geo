@@ -75,6 +75,9 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   else if (shape == 'ellipse') {
     vml = this.container.ownerDocument.createElement('v:oval');
   }
+  else if (shape == 'circ') {
+	vml = this.container.ownerDocument.createElement('v:oval');
+  }
   else if (shape == 'line') {
     vml = this.container.ownerDocument.createElement('v:line');
   }

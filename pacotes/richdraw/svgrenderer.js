@@ -82,6 +82,13 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     svg.setAttributeNS(null, 'rx', (width / 2) + 'px');
     svg.setAttributeNS(null, 'ry', (height / 2) + 'px');
   }
+  else if (shape == 'circ') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'ellipse');
+    svg.setAttributeNS(null, 'cx', left + 'px');
+    svg.setAttributeNS(null, 'cy', top + 'px');
+    svg.setAttributeNS(null, 'rx', width + 'px');
+    svg.setAttributeNS(null, 'ry', width + 'px');
+  }
   else if (shape == 'roundrect') {
     svg = this.container.ownerDocument.createElementNS(svgNamespace, 'rect');
     svg.setAttributeNS(null, 'x', left + 'px');
