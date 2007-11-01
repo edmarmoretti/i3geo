@@ -1572,6 +1572,16 @@ function Mapa(e,m)
 					novoel.id = "mostradistancia";
 					novoel.style.display="none";
 					novoel.style.position="absolute";
+					novoel.style.zIndex=5000;
+					novoel.style.height="50px";
+					novoel.style.border="1px solid black";
+					novoel.style.padding="5px";
+					var calculo = document.createElement("div");
+					calculo.id = "mostradistancia_calculo";
+					novoel.appendChild(calculo);
+					var divin = document.createElement("div");
+					divin.innerHTML = "<span style='color:navy;cursor:pointer' onclick='javascript:richdraw.fecha()' >Parar de medir</span>";
+					novoel.appendChild(divin);				
 					document.body.appendChild(novoel);
 				}
 				if (g_tipoacao != "mede")
@@ -1579,9 +1589,41 @@ function Mapa(e,m)
 					mudaiconf("mede");
 					pontosdistobj = new pontosdist();
 					$i("mostradistancia").style.display="block";
+					//
+					//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
+					//
+					if (!$i("divGeometriasTemp"))
+					{
+						var novoel = document.createElement("div");
+						novoel.id = "divGeometriasTemp";
+						novoel.style.cursor="crosshair";
+						novoel.style.zIndex=0;
+						novoel.style.position="absolute";
+						novoel.style.width=objmapa.w;
+						novoel.style.height=objmapa.h;
+						novoel.style.border="1px solid black";
+						novoel.style.display="none";
+						novoel.style.top=imagemyi;
+						novoel.style.left=imagemxi;
+						document.body.appendChild(novoel);
+					}
+					if ($i("divGeometriasTemp"))
+					{
+			    		var renderer;
+			    		if (navn) {renderer = new SVGRenderer();}
+    					else {renderer = new VMLRenderer();}
+			    		richdraw = new RichDrawEditor(document.getElementById('divGeometriasTemp'), renderer);
+    					richdraw.editCommand('fillcolor', 'red');
+    					richdraw.editCommand('linecolor', 'black');
+    					richdraw.editCommand('linewidth', '1px');
+			    		richdraw.editCommand('mode', 'line');
+			    		$i("divGeometriasTemp").style.display="block";
+					}
+					//ativaClicks($i("divGeometriasTemp"));
 				}
 				else
 				{
+					richdraw.fecha();
 					mudaiconf("pan");
 					limpacontainerf(); //tira os pontos da tela
 					$i("mostradistancia").style.display="none";

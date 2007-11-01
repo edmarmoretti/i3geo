@@ -719,6 +719,8 @@ function mudaiconf(i)
 		with ($i(i).style){borderLeftWidth='0px';borderBottomWidth='0px';borderColor='black';}
 	}
 	$i("imgh").style.display="block";
+	if ($i("divGeometriasTemp"))
+	{$i("divGeometriasTemp").style.display = "none";}
 	switch(i)
 	{
 		case "zoomli":
@@ -985,8 +987,8 @@ function ativaClicks(docMapa)
 						d = d * 1;
 					}
 					var da = d + pontosdistobj.dist[n-1];
-					if ($i("mostradistancia"))
-					{$i("mostradistancia").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
+					if ($i("mostradistancia_calculo"))
+					{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
 				}
 			}
 			movelentef();
@@ -1033,19 +1035,6 @@ function ativaClicks(docMapa)
 		if (g_tipoacao == "identifica")
 		{
 			wdocaf("450px","250px",g_locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");
-		}
-		if (g_tipoacao == "mede")
-		{
-			var n = pontosdistobj.xpt.length;
-			pontosdistobj.xpt[n] = objposicaocursor.ddx;
-			pontosdistobj.ypt[n] = objposicaocursor.ddy;
-			pontosdistobj.dist[n] = 0;
-			if (n > 0)
-			{
-				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-				pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-			}
-			inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
 		}
 		//insere pontos
 		if (g_tipoacao == "inserexy")
@@ -1157,6 +1146,39 @@ function ativaClicks(docMapa)
 				cp.call(p,"selecaoPT",ajaxredesenha);
 			}
 		}
+		if (g_tipoacao == "mede")
+		{
+			var n = pontosdistobj.xpt.length;
+			pontosdistobj.xpt[n] = objposicaocursor.ddx;
+			pontosdistobj.ypt[n] = objposicaocursor.ddy;
+			pontosdistobj.xtela[n] = objposicaocursor.telax;
+			pontosdistobj.ytela[n] = objposicaocursor.telay;
+			pontosdistobj.dist[n] = 0;
+			if (navn)
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, objposicaocursor.imgx,objposicaocursor.imgy,objposicaocursor.imgx,objposicaocursor.imgy);}
+			else
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (objposicaocursor.imgx)-(objmapa.w/2),objposicaocursor.imgy,(objposicaocursor.imgx)-(objmapa.w/2),objposicaocursor.imgy);}
+			if (n > 0)
+			{
+				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+				pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
+				if (navn)
+				{
+					try
+					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], objposicaocursor.imgx, objposicaocursor.imgy);}
+					catch(e){window.status="erro ao desenhar a linha";} 
+				}
+				else
+				{
+					try
+					{
+						richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (objposicaocursor.imgx)-(objmapa.w/2), objposicaocursor.imgy);
+					}
+					catch(e){window.status="erro ao desenhar a linha";}
+				}
+			}
+			inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
+		}
 		objmapa.verificaClickMapa();
 	};
 	docMapa.onmouseup = function()
@@ -1192,6 +1214,7 @@ function ativaClicks(docMapa)
 			cp.set_response_type("JSON");
 			cp.call(p,"mudaExtensao",ajaxredesenha);
 		}
+		
 	};
 }
 /*
@@ -3434,12 +3457,29 @@ function posicaocursor()
 Function: pontosdist
 
 Armazena coordenadas no objeto pontosdist para calculo de distancia
+
+Parameters:
+
+xpt - coordenadas x em dd
+
+ypt - coordenadas y em dd
+
+dist - distância entre os dois últimos pontos
+
+xtela - coordenada x na tela
+
+ytela - coordenada y na tela
+
+linhas - lista de objetos criados pela biblioteca richdraw utilizados no desenho da linha de medição
 */
 function pontosdist()
 {
 	this.xpt = new Array();
 	this.ypt = new Array();
 	this.dist = new Array();
+	this.xtela = new Array();
+	this.ytela = new Array();
+	this.linhas = new Array();
 }
 /*
 Section: outros
@@ -3589,8 +3629,11 @@ YAHOO.extend
    		{return "ResizePanel " + this.id;}
 	}
 );
-//controle do dragdrop
+/*
+Function: ativaDragDrop
 
+Ativa a funcionalidade de arrastar e soltar para alteração da ordem de desenho dos temas e para excluir um tema do mapa.
+*/
 function ativaDragDrop()
 {
 	var Dom = YAHOO.util.Dom;
@@ -3755,9 +3798,6 @@ function ativaDragDrop()
 	);
 	Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
 }
-
-
-
 //testa se esse script foi carregado
 function testafuncoes()
 {}

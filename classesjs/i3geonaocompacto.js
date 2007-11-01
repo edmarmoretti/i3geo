@@ -52,7 +52,8 @@ var jsfiles = new Array(
 "ferramentas.js",
 "redesenho.js",
 "iniciamma.js",
-"menususpenso.js"
+"menususpenso.js",
+"../pacotes/richdraw/richdraw_tudo_compacto.js"
 );
 for (var i = 0; i < jsfiles.length; i++)
 {

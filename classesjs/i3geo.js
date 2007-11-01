@@ -61,7 +61,7 @@ for (var i = 0; i < scripts.length; i++) {
 }
 //scripts
 var allScriptTags = "";
-var jsfiles = new Array("i3geo_tudo_compacto.js")
+var jsfiles = new Array("i3geo_tudo_compacto.js","../pacotes/richdraw/richdraw_tudo_compacto.js")
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
