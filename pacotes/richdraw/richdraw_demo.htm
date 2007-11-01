@@ -1,0 +1,158 @@
+<html>
+<head>
+  <title>RichDraw Demo</title>
+  <!--
+  <script type="text/javascript" src="prototype.js"></script>
+  <script type="text/javascript" src="richdraw.js"></script>
+  <script type="text/javascript" src="svgrenderer_compacto.js"></script>
+  <script type="text/javascript" src="vmlrenderer.js"></script>
+-->
+  <script type="text/javascript" src="richdraw_tudo_compacto.js"></script>
+
+  <script type="text/javascript">
+  var c;
+  function demo() {
+    var renderer;
+
+    ie = navigator.appVersion.match(/MSIE (\d\.\d)/);
+    opera = (navigator.userAgent.toLowerCase().indexOf("opera") != -1);
+    if ((!ie) || (opera)) {
+      renderer = new SVGRenderer();
+    }
+    else {
+      renderer = new VMLRenderer();
+    }
+
+    c = new RichDrawEditor(document.getElementById('richdraw'), renderer);
+    c.onselect = onSelect;
+    c.onunselect = onUnselect;
+    
+    c.editCommand('fillcolor', 'red');
+    c.editCommand('linecolor', 'black');
+    c.editCommand('linewidth', '1px');
+    setMode('rect', 'Rectangle');
+    
+    $('fillcolor').style.backgroundColor = 'red';
+    $('linecolor').style.backgroundColor = 'black';
+  }
+  
+  function setMode(mode, status) {
+    c.editCommand('mode', mode);
+    
+    var imgs = $('toolbar').getElementsByTagName('img');
+    for (var i=0; i<imgs.length; i++) {
+      imgs[i].style.backgroundColor = '';
+    }
+    $(mode).style.backgroundColor = 'orange';
+    
+    if (mode == 'select')
+      $('status').innerHTML = 'Mode: Select/Move' ;
+    else
+      $('status').innerHTML = 'Mode: Draw ' + status;
+  }
+  
+  function deleteShape() {
+    c.deleteSelection();
+  }
+  
+  function setFillColor(colors) {
+    var color = colors.options[colors.selectedIndex].value;
+    colors.style.backgroundColor = color;
+    
+    c.editCommand('fillcolor', color);
+  }
+  
+  function setLineColor(colors) {
+    var color = colors.options[colors.selectedIndex].value;
+    colors.style.backgroundColor = color;
+
+    c.editCommand('linecolor', color);
+  }
+  
+  function setLineWidth(widths) {
+    var width = widths.options[widths.selectedIndex].value;
+    c.editCommand('linewidth', width);
+  }
+
+  function getOptionByValue(select, value)
+  {
+    for (var i=0; i<select.length; i++) {
+      if (select.options[i].value == value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function showMarkup() {
+    alert(c.renderer.getMarkup());
+  }
+  
+  function onSelect() {
+    $('fillcolor').selectedIndex = getOptionByValue($('fillcolor'), c.queryCommand('fillcolor'));
+    $('fillcolor').style.backgroundColor = c.queryCommand('fillcolor');
+    $('linecolor').selectedIndex = getOptionByValue($('linecolor'), c.queryCommand('linecolor'));
+    $('linecolor').style.backgroundColor = c.queryCommand('linecolor');
+    $('linewidth').selectedIndex = getOptionByValue($('linewidth'), c.queryCommand('linewidth'));
+  }
+
+  function onUnselect() {
+    $('fillcolor').selectedIndex = getOptionByValue($('fillcolor'), c.queryCommand('fillcolor'));
+    $('fillcolor').style.backgroundColor = c.queryCommand('fillcolor');
+    $('linecolor').selectedIndex = getOptionByValue($('linecolor'), c.queryCommand('linecolor'));
+    $('linecolor').style.backgroundColor = c.queryCommand('linecolor');
+    $('linewidth').selectedIndex = getOptionByValue($('linewidth'), c.queryCommand('linewidth'));
+  }
+  </script>
+  <style>
+  body        { font-family:verdana,arial; font-size:10pt; }
+  div *       { vertical-align: middle; }
+  div img     { padding:2px; border:2px solid orange;}
+  </style>
+</head>
+<body onload="demo();">
+  <h2>RichDraw Demo</h2>
+  <div id="toolbar" style="width:700px; padding:5px; margin-bottom:5px; background-color:wheat;">
+    <img id="select" title="Select shapes" onclick="setMode('select', 'Selection');" src="select.gif" />
+    <span> | </span>
+    <img id="rect" title="Draw a rectangle" onclick="setMode('rect', 'Rectangle');" src="rectangle.gif" />
+    <img id="roundrect" title="Draw a rounded rectangle" onclick="setMode('roundrect', 'Rounded Rectangle');" src="roundrect.gif" />
+    <img id="ellipse" title="Draw an ellipse" onclick="setMode('ellipse', 'Ellipse / Circle');" src="circle.gif" />
+    <img id="line" title="Draw a line" onclick="setMode('line', 'Line');" src="line.gif" />
+    <span> | </span>
+    <img id="delete" title="Delete selected shape" onclick="deleteShape();" src="delete.gif" />
+    <span> | </span>
+    <img id="showmarkup" title="Show the raw markup" onclick="showMarkup();" src="viewcode.gif" />
+    <span> | </span>
+    <span>Fill:</span>
+    <select id="fillcolor" onchange="setFillColor(this);">
+      <option style="background-color:red;" value="red"></option>
+      <option style="background-color:blue;" value="blue"></option>
+      <option style="background-color:green;" value="green"></option>
+      <option style="background-color:yellow;" value="yellow"></option>
+      <option style="background-color:aqua;" value="aqua"></option>
+      <option style="background-color:white;" value="">None</option>
+    </select>
+    <span>Line:</span>
+    <select id="linecolor" onchange="setLineColor(this);">
+      <option style="background-color:black;" value="black"></option>
+      <option style="background-color:red;" value="red"></option>
+      <option style="background-color:blue;" value="blue"></option>
+      <option style="background-color:green;" value="green"></option>
+      <option style="background-color:yellow;" value="yellow"></option>
+      <option style="background-color:aqua;" value="aqua"></option>
+      <option style="background-color:white;" value="">None</option>
+    </select>
+    <select id="linewidth" onchange="setLineWidth(this);">
+      <option value="1px">1px</option>
+      <option value="2px">2px</option>
+      <option value="3px">3px</option>
+      <option value="5px">5px</option>
+      <option value="7px">7px</option>
+    </select>
+  </div>
+  <div id="richdraw" style="position:relative; width:700px; height:500px; border:1px solid black;">
+  </div>
+  <div id="status" style="width:700px; padding:5px; margin-top:5px; background-color:wheat;">Mode: Draw Rectangle</div>
+</body>
+</html>
