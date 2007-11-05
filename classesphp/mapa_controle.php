@@ -627,7 +627,13 @@ Include:
 		$m = new Mapa($map_file);
 		$m->adicionaTema($temas,$locaplic);
 		$m->salva();
-		$cp->set_data(testaMapa($map_file));
+		$teste = testaMapa($map_file);
+		if ($teste == "ok")
+		{$cp->set_data("ok");}
+		else
+		{
+			$cp->set_data(array("erro"=>"A camada nao pode ser adicionada. ".$teste));	
+		}
 	break;
 /*
 Property: excluitema

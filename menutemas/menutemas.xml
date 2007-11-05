@@ -103,8 +103,14 @@ File: menutemas.xml
          <TEMA>
             <TID>bioma</TID>
             <TNOME>Biomas</TNOME>
-            <TDESC>Web service com a condição do tempo para várias localidades</TDESC>
-            <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
+            <TDESC></TDESC>
+            <TLINK></TLINK>
+         </TEMA>
+         <TEMA>
+            <TID>biomaerro</TID>
+            <TNOME>Biomas para teste de erros</TNOME>
+            <TDESC></TDESC>
+            <TLINK></TLINK>
          </TEMA>
     	</SGRUPO>
    </GRUPO>

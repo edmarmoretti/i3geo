@@ -2779,11 +2779,19 @@ function remapaf()
 				{
 					objaguarde.fecha("remapa");
 					objaguarde.abre("ajaxredesenha","Aguarde...");
-					var temp = function()
-					{objaguarde.fecha("ajaxredesenha");ajaxredesenha("");};
+					var temp = function(retorno)
+					{
+						objaguarde.fecha("ajaxredesenha");
+						if(retorno.data.erro)
+						{
+							alert(retorno.data.erro);
+							return;
+						}
+						ajaxredesenha("");					
+					};
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+g_sid;
 					var cp = new cpaint();
-					//cp.set_debug(2)
+					//cp.set_debug(2);
 					cp.set_response_type("JSON");
 					cp.call(p,"adicionaTema",temp);
 				}

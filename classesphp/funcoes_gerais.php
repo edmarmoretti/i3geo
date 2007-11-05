@@ -699,7 +699,7 @@ function testaMapa($map_file)
 	$error = ms_GetErrorObj();
 	while($error && $error->code != MS_NOERR)
 	{
-		$erros .= " Erro. ".$error->routine." ".$error->message;
+		$erros .= $error->routine;
 		$error = $error->next();
 	}
 	$error = ms_GetErrorObj();
@@ -708,6 +708,16 @@ function testaMapa($map_file)
 		$nmf = str_replace(".map","seguranca.map",$map_file);
 		$objMapa = ms_newMapObj($nmf);
 		$objMapa->save($map_file);
+		$erros = str_replace("\n","",$erros);
+		$erros = str_replace("\"","",$erros);
+		$erros = str_replace("'","",$erros);
+		$erros = str_replace(":"," ",$erros);
+		$erros = str_replace("..."," ",$erros);
+		$erros = str_replace("("," ",$erros);
+		$erros = str_replace(")"," ",$erros);
+		$erros = str_replace("*"," ",$erros);
+		$erros = str_replace("/"," ",$erros);
+		$erros = htmlentities($erros);
 		return $erros;
 	}
 	else
