@@ -3761,7 +3761,8 @@ function ativaDragDrop()
 	            	{
                 		var destEl = Dom.get(id);
                 		//var destDD = DDM.getDDById(id);
-                		destEl.appendChild(this.getEl());
+                		if(DDM.getDDById(id).id != "lixeira")
+                		{destEl.appendChild(this.getEl());}
                 		//destDD.isEmpty = false;
                 		DDM.refreshCache();
                 		//exclui tema
