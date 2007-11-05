@@ -1576,11 +1576,14 @@ function Mapa(e,m)
 					novoel.style.height="50px";
 					novoel.style.border="1px solid black";
 					novoel.style.padding="5px";
+					novoel.style.textAlign="left";
 					var calculo = document.createElement("div");
 					calculo.id = "mostradistancia_calculo";
 					novoel.appendChild(calculo);
 					var divin = document.createElement("div");
-					divin.innerHTML = "<span style='color:navy;cursor:pointer' onclick='javascript:richdraw.fecha()' >Parar de medir</span>";
+					divin.style.textAlign="left";
+					divin.innerHTML = "<div style='color:navy;cursor:pointer;text-align:left;' onclick='javascript:richdraw.fecha()' >Parar de medir</div>";
+					divin.innerHTML += "<br><span style='color:navy;cursor:pointer;text-align:left;' ><input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
 					novoel.appendChild(divin);				
 					document.body.appendChild(novoel);
 				}

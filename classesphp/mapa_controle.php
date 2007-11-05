@@ -625,8 +625,9 @@ Include:
 	case "adtema":
 		include("classe_mapa.php");
 		$m = new Mapa($map_file);
-		$cp->set_data($m->adicionaTema($temas,$locaplic));
+		$m->adicionaTema($temas,$locaplic);
 		$m->salva();
+		$cp->set_data(testaMapa($map_file));
 	break;
 /*
 Property: excluitema

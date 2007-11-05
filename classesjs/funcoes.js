@@ -1157,9 +1157,9 @@ function ativaClicks(docMapa)
 			pontosdistobj.yimg[n] = objposicaocursor.imgy
 			pontosdistobj.dist[n] = 0;
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, objposicaocursor.imgx,objposicaocursor.imgy,objposicaocursor.imgx,objposicaocursor.imgy);}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
 			else
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (objposicaocursor.imgx)-(objmapa.w/2),objposicaocursor.imgy,(objposicaocursor.imgx)-(objmapa.w/2),objposicaocursor.imgy);}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
 			if (n > 0)
 			{
 				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
@@ -1167,25 +1167,31 @@ function ativaClicks(docMapa)
 				if (navn)
 				{
 					try
-					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], objposicaocursor.imgx, objposicaocursor.imgy);}
+					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], pontosdistobj.ximg[n], pontosdistobj.yimg[n]);}
 					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 					var w = Math.sqrt(dx + dy);
 					try
-					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
+					{
+						if($i("pararraios") && $i("pararraios").checked == true )
+						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
+					}
 					catch(e){window.status="erro ao desenhar o raio";}
 				}
 				else
 				{
 					try
-					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (objposicaocursor.imgx)-(objmapa.w/2), objposicaocursor.imgy);}
+					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (pontosdistobj.ximg[n])-(objmapa.w/2), pontosdistobj.yimg[n]);}
 					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 					var w = Math.sqrt(dx + dy);
 					try
-					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
+					{
+						if($i("pararraios") && $i("pararraios").checked==true )
+						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
+					}
 					catch(e){window.status="erro ao desenhar o raio";}
 				}
 			}

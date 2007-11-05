@@ -695,10 +695,11 @@ function testaMapa($map_file)
 	$objMapa = ms_newMapObj($map_file);
 	ms_ResetErrorList();
 	$img = $objMapa->draw();
+	$erros = "";
 	$error = ms_GetErrorObj();
 	while($error && $error->code != MS_NOERR)
 	{
-		printf("Erro em %s: %s<br>\n", $error->routine, $error->message);
+		$erros .= " Erro. ".$error->routine." ".$error->message;
 		$error = $error->next();
 	}
 	$error = ms_GetErrorObj();
@@ -707,7 +708,10 @@ function testaMapa($map_file)
 		$nmf = str_replace(".map","seguranca.map",$map_file);
 		$objMapa = ms_newMapObj($nmf);
 		$objMapa->save($map_file);
+		return $erros;
 	}
+	else
+	{return "ok";}
 }
 /*
 function: desligamargem
