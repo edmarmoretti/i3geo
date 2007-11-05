@@ -1949,7 +1949,7 @@ function Mapa(e,m)
 	*/
 	this.atualizaListaTemas = function(temas)
 	{
-		if (($i("listaTemas")) && (objmapa.temas != temas))
+		if ( (($i("listaTemas")) && (objmapa.temas != temas)) || (!$i("listaTemas").hasChildNodes()) )
 		{
 			$i("listaTemas").innerHTML = "";
 			var lista = temas.split(";");
@@ -1967,7 +1967,7 @@ function Mapa(e,m)
 				if(ltema[1] == 2){ck = 'CHECKED';}
 				//ltema[8]==sim indica que e um tema com features
 				if (ltema[8] == undefined){ltema[8] = "nao";}
-				tnome = "<input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
+				tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
 				if (ltema[5] == "sim") //o tema tem selecao
 				{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='limpa sele&ccedil;&atilde;o' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'Limpa sele&ccedil;&atilde;o existente nesse tema','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				//verifica se e um wms que tem wfs
@@ -1976,9 +1976,9 @@ function Mapa(e,m)
 				if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
 				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para fazer o download desse tema no formato shapefile','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				if (navm)
-				{tnome += "<span title=1clique e arraste' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span>";}
+				{tnome += "<span title=1clique e arraste' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
 				else
-				{tnome += "<span title='arraste para mudar a ordem' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span>";}
+				{tnome += "<span title='arraste para mudar a ordem' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
 				mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
 				tnome = "<img width=0px src="+$im("branco.gif") + " />";
 				mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);

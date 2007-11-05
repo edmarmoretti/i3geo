@@ -2281,11 +2281,11 @@ function expandeTema(itemID)
 					//transparencia
 					if ((ltema[4] != 0) || (ltema[8] == "sim"))
 					{
-						tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;opacidade: </span><input  onchange='mudatranspf(\""+ltema[0]+"\")' class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
+						tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;opacidade: </span><input  class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
 						mytreeview1.createItem("temap1"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					}
 					//muda nome
-					tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Muda o nome atual do tema, utilize para melhorar a leganda do mapa.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;novo nome: </span><input onchange='mudanomef(\""+ltema[0]+"\")' class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
+					tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Muda o nome atual do tema, utilize para melhorar a leganda do mapa.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;novo nome: </span><input class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
 					mytreeview1.createItem("temap2"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					if ((ltema[4] < 3) && (ltema[9] != 7))
 					{
@@ -3682,8 +3682,8 @@ function ativaDragDrop()
 	        for (i=0;i<lista.length;i=i+1)
 	        {
                	var ltema = lista[i].split("*");
-               	if($i(ltema[0]))
-               	{new YAHOO.example.DDList(ltema[0]);}
+               	if($i("arrastar_"+ltema[0]))
+               	{new YAHOO.example.DDList("arrastar_"+ltema[0]);}
         	}
     	}
 	};
@@ -3759,15 +3759,15 @@ function ativaDragDrop()
 	            	// the negative space (the area of the list without any list items)
 	            	if (!region.intersect(pt))
 	            	{
-                		//var destEl = Dom.get(id);
+                		var destEl = Dom.get(id);
                 		//var destDD = DDM.getDDById(id);
-                		//destEl.appendChild(this.getEl());
+                		destEl.appendChild(this.getEl());
                 		//destDD.isEmpty = false;
                 		DDM.refreshCache();
                 		//exclui tema
                 		if(DDM.getDDById(id).id == "lixeira")
                 		{
-                			var tema = (this.getEl()).id;
+                			var tema = (this.getEl()).id.split("arrastar_")[1];
                 			//objaguarde.abre("ajaxredesenha","Aguarde...");
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 							var cp = new cpaint();
@@ -3779,24 +3779,17 @@ function ativaDragDrop()
 						//muda ordem de desenho do tema
 						else
 						{
-							if ($i(DDM.getDDById(id).id).parentNode.parentNode.id == "mytreeview1")
-							{
-               					objmapa.temas = "";
-               					var temaDe = (this.getEl()).id;
-               					var temaPara = DDM.getDDById(id).id;
-               					var destEl = Dom.get(id);
-               					destEl.appendChild(this.getEl());
- 							}
  							var els = $i("mytreeview1").getElementsByTagName("input");
  							var lista = new Array();
  							for (i=0;i<els.length;i=i+1)
  							{
- 								var itema = els[i].parentNode.parentNode.id;
- 								lista.push(itema);								
+ 								if(els[i].type == "checkbox")
+ 								{
+ 									var itema = els[i].value;
+ 									lista.push(itema);
+ 								}								
  							}
  							var lista = lista.join(',');
- 							$i("listaTemas").removeChild($i("listaTemas").firstChild);
-              				//objaguarde.abre("ajaxredesenha","Aguarde...");
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reordenatemas&lista="+lista+"&g_sid="+g_sid;
 							var cp = new cpaint();
 							//cp.set_debug(2)
@@ -3825,7 +3818,11 @@ function ativaDragDrop()
 	        	// notifications for the list.
 	        	if ($i("lixeira") && id == "lixeira")
 	        	{$i("lixeira").style.border = "1px solid blue";}
-	    	}
+	        	else
+	        	{destEl.style.textDecoration="underline";}
+	    	},
+	    	onDragOut: function(e, id)
+	    	{$i(id).style.textDecoration="none";}
 		}
 	);
 	Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
