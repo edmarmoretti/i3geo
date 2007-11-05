@@ -133,6 +133,7 @@ function adiciona()
 	{
 		var retorno = function(retorno)
 		{
+			aguarde("none")
 			if(retorno.data != "ok")
 			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
 			else
