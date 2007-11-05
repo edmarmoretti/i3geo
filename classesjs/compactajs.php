@@ -102,7 +102,10 @@ $cssfiles = array(
 "../css/fonts.css",
 "../css/reset.css",
 "../css/grids.css",
-"../css/menu.css"
+"../css/menu.css",
+"../pacotes/yui231/build/container/assets/skins/sam/container.css",
+"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
+"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css"
 );
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css");

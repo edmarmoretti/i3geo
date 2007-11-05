@@ -1153,8 +1153,8 @@ function ativaClicks(docMapa)
 			pontosdistobj.ypt[n] = objposicaocursor.ddy;
 			pontosdistobj.xtela[n] = objposicaocursor.telax;
 			pontosdistobj.ytela[n] = objposicaocursor.telay;
-			pontosdistobj.ximg[n] = objposicaocursor.imgx
-			pontosdistobj.yimg[n] = objposicaocursor.imgy
+			pontosdistobj.ximg[n] = objposicaocursor.imgx;
+			pontosdistobj.yimg[n] = objposicaocursor.imgy;
 			pontosdistobj.dist[n] = 0;
 			if (navn)
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
