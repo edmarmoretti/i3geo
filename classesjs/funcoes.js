@@ -2122,7 +2122,7 @@ function atualizagoogle()
 		if(doc)
 		{
 			if (doc.getElementById("map"))
-			{parent.frames["wdocai"].panTogoogle();}
+			{window.parent.frames["wdocai"].panTogoogle();}
 		}
 	}
 }
@@ -2139,7 +2139,7 @@ function atualizascielo()
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoscielo"))
-			{parent.frames["wdocai"].buscascielo();}
+			{window.parent.frames["wdocai"].buscascielo();}
 		}
 	}
 }
@@ -2156,7 +2156,7 @@ function atualizaconfluence()
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoconfluence"))
-			{parent.frames["wdocai"].buscaconfluence();}
+			{window.parent.frames["wdocai"].buscaconfluence();}
 		}
 	}
 }
@@ -2173,7 +2173,7 @@ function atualizawiki()
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadowiki"))
-			{parent.frames["wdocai"].buscawiki();}
+			{window.parent.frames["wdocai"].buscawiki();}
 		}
 	}
 }

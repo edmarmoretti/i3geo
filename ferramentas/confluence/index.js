@@ -38,21 +38,32 @@ function buscaconfluence()
 	var xfim = parseInt(ext[2])
 	var yfim = parseInt(ext[3])
 	var xs = new Array()
-	for (i=xini;i<xfim;i++)
+	var dx = xfim - xini;
+	if ((dx > 1) || (dx < -1))
 	{
-		xs.push(i)
-	}
-	var ys = new Array()
-	for (i=yini;i<yfim;i++)
-	{
-		ys.push(i)
+		for (i=xini;i<xfim;i++)
+		{
+			xs.push(i)
+		}
+		var ys = new Array()
+		for (i=yini;i<yfim;i++)
+		{
+			ys.push(i)
+		}
 	}
 	var ins = mensagemAjuda("","Navegue pelo mapa para ver o resultado! Clique no link para abrir a p&aacute;gina sobre o ponto.")
-	for (i=0;i<xs.length;i++)
+	if(xs.length == 0)
 	{
-		for (j=0;j<ys.length;j++)
+		ins += "<br>Nenhuma coordenada encontrada. Talvez vc precise afastar mais o zoom."
+	}
+	else
+	{
+		for (i=0;i<xs.length;i++)
 		{
-			ins += "<br><a onmouseout='escondexy()' onmouseover='mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>"
+			for (j=0;j<ys.length;j++)
+			{
+				ins += "<br><a onmouseout='escondexy()' onmouseover='mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>"
+			}
 		}
 	}
 	$i("resultadoconfluence").innerHTML = ins;

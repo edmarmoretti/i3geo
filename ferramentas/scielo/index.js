@@ -43,15 +43,16 @@ function buscascielo()
 function listaartigos(retorno)
 {
 	$link = "http://www.scielo.br/scielo.php?script=sci_abstract&pid=";
-	var res = retorno.data.split("#")
+	var res = retorno.data.scielo
 	var ins = "<span style=color:red>Navegue pelo mapa para ver o resultado!</span><br><br>"
-	for (i=0;i<res.length;i++)
+	if (res.length == 0)
+	{ins += "<br><span style=color:red>Nada encontrado nessa regi&atilde;o!</span><br><br>";}
+	else
 	{
-		var val = res[i].split("*")
-		if (val[0] != "")
-		{ins += "<br><a href='"+$link+val[0]+"' target=blank >"+val[1]+"</a><br><br>"}
-		else
-		{ins += "<br>"+val[1]+"<br><br>"}
+		for (i=0;i<res.length;i++)
+		{
+			ins += "<br><a href='"+$link+res[i].codigo+"' target=blank >"+res[i].titulo+"</a><br><br>"
+		}
 	}
 	$i("resultadoscielo").innerHTML = ins;
 }
