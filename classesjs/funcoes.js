@@ -1158,8 +1158,6 @@ function ativaClicks(docMapa)
 			pontosdistobj.dist[n] = 0;
 			if (navn)
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
-			else
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
 			if (n > 0)
 			{
 				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
@@ -1182,7 +1180,9 @@ function ativaClicks(docMapa)
 				else
 				{
 					try
-					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], (pontosdistobj.ximg[n])-(objmapa.w/2), pontosdistobj.yimg[n]);}
+					{
+						richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
+					}
 					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
@@ -2122,7 +2122,10 @@ function atualizagoogle()
 		if(doc)
 		{
 			if (doc.getElementById("map"))
-			{window.parent.frames["wdocai"].panTogoogle();}
+			{
+				if(window.parent.frames["wdocai"].panTogoogle)
+				{window.parent.frames["wdocai"].panTogoogle();}
+			}
 		}
 	}
 }

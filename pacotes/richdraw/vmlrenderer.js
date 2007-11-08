@@ -100,7 +100,7 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   else {
     vml.style.position = 'absolute';
     vml.setAttribute('from', left + 'px,' + top + 'px');
-    vml.setAttribute('to', left + 'px,' + top + 'px');
+    vml.setAttribute('to', width + 'px,' + height + 'px');
   }
 
   if (lineColor != '') {
@@ -113,7 +113,6 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   }
 
   this.container.appendChild(vml);
-
   return vml;
 };
 

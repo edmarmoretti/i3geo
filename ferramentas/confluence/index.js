@@ -99,6 +99,6 @@ function ajustarescala()
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=2000000";
 	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
 }

@@ -1218,7 +1218,9 @@ function Mapa(e,m)
 					document.body.appendChild(novoel);
 				}
 				g_operacao = "navega";
-				wdocaf("340px","340px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");
+				if(navn){wdocaf("340px","340px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
+				else
+				{wdocaf("360px","360px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
 			};
 			$i(id).onmouseover=function(){mostradicasf(this,'Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da regi&atilde;o vista no mapa principal.','google');};
 			$i(id).onmouseout=function(){mostradicasf(this,'');};
@@ -1586,6 +1588,7 @@ function Mapa(e,m)
 					divin.innerHTML += "<br><span style='color:navy;cursor:pointer;text-align:left;' ><input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
 					novoel.appendChild(divin);				
 					document.body.appendChild(novoel);
+					$i('pararraios').checked=true;
 				}
 				if (g_tipoacao != "mede")
 				{
