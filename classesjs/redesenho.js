@@ -455,7 +455,8 @@ function ajaxIniciaParametros(retorno)
 		//
 		if($i("imgh"))
 		{$i("imgh").style.display="block";}
-		var retorno = retorno.data;
+		if(retorno.data)
+		{var retorno = retorno.data;}
 		if ((retorno != "erro") && (retorno != undefined))
 		{
 			if ($i("imgL"))

@@ -20,17 +20,23 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
-
+parametrosURL()
 buscascielo()
 //pega a lista de temas editaveis
 function buscascielo()
 {
-	g_sid = window.parent.objmapa.sid
-	g_locaplic = window.parent.g_locaplic
 	$i("resultadoscielo").innerHTML = "Aguarde...";
 	if (window.parent.objmapa.scale > 150001)
 	{
-		$i("resultadoscielo").innerHTML = "Aproxime mais o mapa (pelo menos até a escala 1:150.000)!";
+		var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
+		ins += "<br><br><div style=width:80px onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
+		$i("resultadoscielo").innerHTML = ins;
+		YAHOO.example.init = function ()
+		{
+			function onPushButtonsMarkupReady()
+			{new YAHOO.widget.Button("botao1");}
+  				YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+		}() 	
 		return;
 	}
 	//pega a lista de temas locais do mapfile
@@ -43,6 +49,8 @@ function buscascielo()
 function listaartigos(retorno)
 {
 	$link = "http://www.scielo.br/scielo.php?script=sci_abstract&pid=";
+	if(retorno.data == "")
+	{$i("resultadoscielo").innerHTML = "N&atilde;o foi poss&iacute;vel acessar os dados";return}
 	var res = retorno.data.scielo
 	var ins = "<span style=color:red>Navegue pelo mapa para ver o resultado!</span><br><br>"
 	if (res.length == 0)
@@ -55,4 +63,12 @@ function listaartigos(retorno)
 		}
 	}
 	$i("resultadoscielo").innerHTML = ins;
+}
+function ajustarescala()
+{
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	//cp.set_debug(2)
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
+	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
 }

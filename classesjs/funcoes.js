@@ -1714,7 +1714,7 @@ function aplicaescala()
 	if ($i("escalanum"))
 	{var nova = $i("escalanum").value;}
 	else
-	{ var nova = objmapa.scale;}
+	{var nova = objmapa.scale;}
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+nova+"&g_sid="+g_sid;
 	var cp = new cpaint();
@@ -2107,7 +2107,7 @@ Atualiza o box do google se a função google estiver ativa
 */
 function atualizagoogle()
 {
-	if (parent.frames["wdocai"])
+	if (window.parent.frames["wdocai"])
 	{
 		if (navn)
 		{
@@ -2135,11 +2135,14 @@ function atualizascielo()
 {
 	if ($i("wdocai"))
 	{
-		if (parent.frames["wdocai"])
+		if (window.parent.frames["wdocai"])
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoscielo"))
-			{window.parent.frames["wdocai"].buscascielo();}
+			{
+				//window.parent.frames["wdocai"].buscascielo();
+				$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
+			}
 		}
 	}
 }
@@ -2152,11 +2155,14 @@ function atualizaconfluence()
 {
 	if($i("wdocai"))
 	{
-		if (parent.frames["wdocai"])
+		if (window.parent.frames["wdocai"])
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoconfluence"))
-			{window.parent.frames["wdocai"].buscaconfluence();}
+			{
+				//window.parent.frames["wdocai"].buscaconfluence();
+				$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
+			}
 		}
 	}
 }
@@ -2169,11 +2175,14 @@ function atualizawiki()
 {
 	if ($i("wdocai"))
 	{
-		if (parent.frames["wdocai"])
+		if (window.parent.frames["wdocai"])
 		{
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadowiki"))
-			{window.parent.frames["wdocai"].buscawiki();}
+			{
+				$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
+				//window.parent.frames["wdocai"].buscawiki();
+			}
 		}
 	}
 }

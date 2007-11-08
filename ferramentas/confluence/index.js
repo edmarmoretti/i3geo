@@ -20,6 +20,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
+parametrosURL()
 buscaconfluence()
 //pega a lista de temas editaveis
 function buscaconfluence()
@@ -27,8 +28,15 @@ function buscaconfluence()
 	$i("resultadoconfluence").innerHTML = "Aguarde...";
 	if (window.parent.objmapa.scale > 2000001)
 	{
-		$i("resultadoconfluence").innerHTML = "Aproxime mais o mapa (pelo menos até a escala 1:2.000.000)!";
-		mensagemAjuda("resultadoconfluence","")
+		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:2.000.000)!";
+		ins += "<br><br><div onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
+		$i("resultadoconfluence").innerHTML = ins;
+		YAHOO.example.init = function ()
+		{
+			function onPushButtonsMarkupReady()
+			{new YAHOO.widget.Button("botao1");}
+  				YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+		}() 	
 		return;
 	}
 	var ext = window.parent.objmapa.extent
@@ -51,10 +59,10 @@ function buscaconfluence()
 			ys.push(i)
 		}
 	}
-	var ins = mensagemAjuda("","Navegue pelo mapa para ver o resultado! Clique no link para abrir a p&aacute;gina sobre o ponto.")
+	var ins = "Navegue pelo mapa para ver o resultado! Clique no link para abrir a p&aacute;gina sobre o ponto."
 	if(xs.length == 0)
 	{
-		ins += "<br>Nenhuma coordenada encontrada. Talvez vc precise afastar mais o zoom."
+		ins += "<br><br>Nenhuma coordenada encontrada. <br><br>Talvez vc precise afastar mais o zoom ou deslocar o mapa."
 	}
 	else
 	{
@@ -85,4 +93,12 @@ function escondexy()
 	box.style.display = "none"
 	box.style.top = "0px"
 	box.style.left = "0px"
+}
+function ajustarescala()
+{
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	//cp.set_debug(2)
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
+	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
 }

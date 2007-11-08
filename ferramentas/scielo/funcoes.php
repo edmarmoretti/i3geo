@@ -13,9 +13,13 @@ $cp->return_data();
 function listaartigos()
 {
 	global $ret, $cp, $servico;
-	$ret = explode(" ",$ret);
-	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
-	$resultado = $soapclient->call("listaartigosregiao",$ret);
+	$resultado = "";
+	if (file($servico))
+	{
+		$ret = explode(" ",$ret);
+		$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+		$resultado = $soapclient->call("listaartigosregiao",$ret);
+	}
 	$cp->set_data($resultado);
 }
 ?>
