@@ -20,7 +20,6 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-
 require_once("../../classesphp/pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
@@ -53,6 +52,10 @@ require("../../classesphp/funcoes_gerais.php");
 error_reporting(E_ALL);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
+$temp = str_replace(".map","xxx.map",$map_file);
+$map->save($temp);
+substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias

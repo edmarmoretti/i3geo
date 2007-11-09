@@ -102,8 +102,8 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     svg = this.container.ownerDocument.createElementNS(svgNamespace, 'line');
     svg.setAttributeNS(null, 'x1', left + 'px');
     svg.setAttributeNS(null, 'y1', top + 'px');
-    svg.setAttributeNS(null, 'x2', left + 'px');
-    svg.setAttributeNS(null, 'y2', top + 'px');
+    svg.setAttributeNS(null, 'x2', width + 'px');
+    svg.setAttributeNS(null, 'y2', height + 'px');
   }
 
   svg.style.position = 'absolute';

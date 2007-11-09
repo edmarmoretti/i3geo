@@ -140,11 +140,12 @@ VMLRenderer.prototype.track = function(shape) {
 
 
 VMLRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
+  shape.setAttribute('to', toX + 'px,' + toY + 'px');
+  /*
   var deltaX = toX - fromX;
   var deltaY = toY - fromY;
   if (shape.tagName == 'line') {
-    //shape.setAttribute('from', fromX + 'px,' + fromY + 'px');
-	shape.setAttribute('from', toX + 'px,' + toY + 'px');
+	shape.setAttribute('to', toX + 'px,' + toY + 'px');
   }
   else {
     if (deltaX < 0) {
@@ -153,8 +154,7 @@ VMLRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
     }
     else {
       shape.style.width = deltaX + 'px';
-    }
-  
+    } 
     if (deltaY < 0) {
       shape.style.top = toY + 'px';
       shape.style.height = -deltaY + 'px';
@@ -163,6 +163,7 @@ VMLRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
       shape.style.height = deltaY + 'px';
     }
   }
+  */
 };
 
 VMLRenderer.prototype.editCommand = function(shape, cmd, value)

@@ -989,6 +989,19 @@ function ativaClicks(docMapa)
 					var da = d + pontosdistobj.dist[n-1];
 					if ($i("mostradistancia_calculo"))
 					{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
+					if (richdraw)
+					{
+						try
+						{
+							if(navn)
+							{richdraw.renderer.resize(linhaMovel,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
+							else
+							{
+								richdraw.renderer.resize(objposicaocursor.imgx-(parseInt(objmapa.w/2)) + 'px,' + objposicaocursor.imgy + 'px');
+							}
+						}
+						catch(e){window.status="erro ao desenhar a linha";}			
+					}
 				}
 			}
 			movelentef();
@@ -1157,7 +1170,9 @@ function ativaClicks(docMapa)
 			pontosdistobj.yimg[n] = objposicaocursor.imgy;
 			pontosdistobj.dist[n] = 0;
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			{linhaMovel = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			else
+			{linhaMovel = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2) + 1,pontosdistobj.yimg[n]);}				
 			if (n > 0)
 			{
 				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
@@ -1165,7 +1180,9 @@ function ativaClicks(docMapa)
 				if (navn)
 				{
 					try
-					{richdraw.renderer.resize(pontosdistobj.linhas[n-1], pontosdistobj.xtela[n-1], pontosdistobj.ytela[n-1], pontosdistobj.ximg[n], pontosdistobj.yimg[n]);}
+					{
+						richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);	
+					}
 					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);

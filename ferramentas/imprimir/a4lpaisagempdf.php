@@ -32,6 +32,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 }
 require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
+substituiCon($map_file,$postgis_mapa);
 $map = ms_newMapObj($map_file);
 $w = $map->width;
 $h = $map->height;
@@ -50,48 +51,35 @@ foreach ($temas as $tema)
 		}
 	}
 }
-
-
-
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $pathMapa = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
-
 $nomeImagem = nomeRandomico();
-
 $legenda = $map->legend;
 $legenda->set("keysizex",20);
 $legenda->set("keysizey",20);
 $label = $legenda->label;
 $label->set("size",14);
-
 $imgo = $map->drawlegend();
-
 $nomer = ($imgo->imagepath)."leg".$nomeImagem.".PNG";
 $imgo->saveImage($nomer);
 $pathlegenda = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
-
 $titulo = $_GET['titulo'];
-
+substituiCon($map_file,$postgis_mapa);
 require('../../pacotes/fpdf/fpdf.php');
-
 $pdf = new FPDF("L","mm","A4");
 $pdf->SetAutoPageBreak(false);
 $pdf->SetDisplayMode( 70 , "single");
 $pdf->SetMargins(0, 0, 0);
 $pdf->AddPage("L");
-
 $pdf->SetLineWidth(0.6);
-
 $wMapaMax = 222;
 $hMapaMax = 171;
-
 $mapasize = getimagesize($pathMapa);
 $wMapa = $mapasize[0];
 $hMapa = $mapasize[1];
-
 if (($wMapa / $wMapaMax) > ($hMapa / $hMapaMax)){
 	$nW = $wMapaMax;
 	$nH = $hMapa * $nW / $wMapa;
@@ -99,50 +87,35 @@ if (($wMapa / $wMapaMax) > ($hMapa / $hMapaMax)){
 	$nH = $hMapaMax;
 	$nW = $wMapa * $nH / $hMapa;
 }
-
 $pdf->Rect(3, 3, $nW+69, 14, 'D');//Título
 $pdf->SetFont('Arial','B',18);
 $xMsg = 292/2 - $pdf->GetStringWidth($titulo)/2;
 $pdf->Text($xMsg,13,$titulo);
-
 //208
 $pdf->Rect(1, 1, 295, $nH+30, 'D');//Quadro
 $pdf->Rect(3, 20, 65, $nH+2, 'D');//Legenda
 $pdf->Rect(70, 20, $nW+2, $nH+2, 'D');//Mapa
-
 $pdf->Image($pathMapa, 71, 21, $nW, $nH);
-
 $pdf->SetFont('Arial','',9);
 //$pdf->Text(14,$nH-1,"Projeção Geográficas");
 //$pdf->Text(14,$nH+3,"Sistema de Referência:  SAD69");
-
 $pdf->Image("../../imagens/i3geo1.jpg", 23, $nH+5, 25);
-
-
 $pdf->SetFont('Arial','',9);
 $textMsg = "Projeção Geográfica - datum SAD-69";
 $xMsg = 292/2 - $pdf->GetStringWidth($textMsg)/2;
 $pdf->Text($xMsg,$nH+28,$textMsg);
-
-
 $wLegendaMax = 63;
 $hLegendaMax = 105;
-
 $legendaSize = getimagesize($pathlegenda);
 $wLegenda = $legendaSize[0];
 $hLegenda = $legendaSize[1];
-
 $wLegenda = (0.35)*$wLegenda;//de pt para mm
 $hLegenda = (0.35)*$hLegenda;
-
 $nW = $wLegenda*0.6;
 if ($wLegenda > $wLegendaMax * 1.5)
 	$nW = $wLegendaMax;
 
 $pdf->Image($pathlegenda, 4, 21,$nW);
-
-
 $pdf->Close();
 $pdf->Output("mapa.pdf", true);
-
 ?>
