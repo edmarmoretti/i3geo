@@ -53,6 +53,7 @@ var jsfiles = new Array(
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
+"configura.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js"
 );
 for (var i = 0; i < jsfiles.length; i++)

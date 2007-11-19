@@ -374,6 +374,8 @@ retorno - string indicando se houve erro na função que chamou.
 */
 function ajaxredesenha(retorno)
 {
+	try
+	{richdraw.clearWorkspace();}catch(e){};
 	var original = retorno;
 	if (retorno.data)
 	{var retorno = retorno.data;}

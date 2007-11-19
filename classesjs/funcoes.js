@@ -617,43 +617,6 @@ function wdocafechaf(odoca)
 	{mudaiconf("pan");}
 }
 /*
-Function: ajudaf
-
-Depreciada - Mostra a ajuda sobre uma opção do mapa quando é pressionada a tecla "a".
-
-Parameters:
-
-evt - evento onkeypress sobre o elemento BODY.
-*/
-function ajudaf(evt)
-{
-	if (navn)
-	{
-		var tecla = evt.keyCode ? evt.keyCode : evt.charCode ? evt.charCode : evt.which ? evt.which : void 0;
-	}
-	if (navm)
-	{var tecla = evt.keyCode;}
-	//a variavel g_hlpt guarda o endereco do help que deve ser aberto
-	if (evt == "abre") // nesse caso a ajuda sera aberta (nao e um evento)
-	{
-		s = g_locaplic+"/ajuda/"+g_hlpt+".htm";
-		wdocaf("400px","300px",s,"","","Ajuda");
-		return;
-	}
-	if ($i("ajuda").innerHTML!="-")
-	{
-		if (tecla == 97)
-		{
-			s = g_locaplic+"/ajuda/"+g_hlpt+".htm";
-			wdocaf("300px","300px",s,"","","Ajuda");
-		}
-	}
-	if (tecla == 43)
-	{destacaTamanho += 10;} //aumenta o tamanho do destaque
-	if (tecla == 45)
-	{destacaTamanho -= 10;} //diminui o tamanho do destaque
-}
-/*
 Function: mostradicasf
 
 Mostra dicas sobre uma função quando o mouse passa sobre um botão ou outra opção qualquer.
@@ -994,13 +957,20 @@ function ativaClicks(docMapa)
 						try
 						{
 							if(navn)
-							{richdraw.renderer.resize(linhaMovel,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
+							{richdraw.renderer.resize(pontosdistobj.linhas[n-1],0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
 							else
 							{
-								richdraw.renderer.resize(objposicaocursor.imgx-(parseInt(objmapa.w/2)) + 'px,' + objposicaocursor.imgy + 'px');
+								var r = $i(richdraw.container.id);
+								r.removeChild(r.lastChild);
+								var dy = objposicaocursor.imgy;
+								var dx = objposicaocursor.imgx - (objmapa.w/2);
+								if(dy > pontosdistobj.yimg[n-1]){var dy=dy-2;}
+								if(dx > ((pontosdistobj.ximg[n-1])-(objmapa.w/2))){var dx=dx-3;}
+								window.status=objposicaocursor.imgx;
+								richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],dx,dy);
 							}
 						}
-						catch(e){window.status="erro ao desenhar a linha";}			
+						catch(e){window.status=n+" erro ao movimentar a linha ";}			
 					}
 				}
 			}
@@ -1169,21 +1139,21 @@ function ativaClicks(docMapa)
 			pontosdistobj.ximg[n] = objposicaocursor.imgx;
 			pontosdistobj.yimg[n] = objposicaocursor.imgy;
 			pontosdistobj.dist[n] = 0;
-			if (navn)
-			{linhaMovel = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
-			else
-			{linhaMovel = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2) + 1,pontosdistobj.yimg[n]);}				
+			window.status=n;
+			try
+			{
+				if (navn)
+				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+				else
+				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+			}
+			catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 			if (n > 0)
 			{
 				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 				pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 				if (navn)
 				{
-					try
-					{
-						richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);	
-					}
-					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 					var w = Math.sqrt(dx + dy);
@@ -1192,15 +1162,10 @@ function ativaClicks(docMapa)
 						if($i("pararraios") && $i("pararraios").checked == true )
 						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
 					}
-					catch(e){window.status="erro ao desenhar o raio";}
+					catch(e){window.status=n+" erro ao desenhar o raio";}
 				}
 				else
 				{
-					try
-					{
-						richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
-					}
-					catch(e){window.status="erro ao desenhar a linha";}
 					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
 					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
 					var w = Math.sqrt(dx + dy);
@@ -1209,7 +1174,8 @@ function ativaClicks(docMapa)
 						if($i("pararraios") && $i("pararraios").checked==true )
 						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
 					}
-					catch(e){window.status="erro ao desenhar o raio";}
+					catch(e){window.status=n+" erro ao desenhar o raio";}
+					pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
 				}
 			}
 			inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
@@ -1893,14 +1859,7 @@ Chama o web service e mostra os resultados na tela
 */
 function buscaRapida()
 {
-	if (!$i("boxg"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "boxg";
-		novoel.style.zIndex=5000;
-		novoel.innerHTML = '<font face="Arial" size="0"></font>';
-		document.body.appendChild(novoel);
-	}
+	criaboxg();
 	if ($i("buscaRapida"))
 	{
 		if ($i("valorBuscaRapida").value == "")
@@ -2906,12 +2865,6 @@ function calcposf()
 		if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
 		if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
 	}
-	if ($i("mostradistancia"))
-	{
-		$left("mostradistancia",imagemxi);
-		$top("mostradistancia",imagemyi);
-	}
-	
 	if ($i("ref"))
 	{
 		var dc = $i("ref");
@@ -3585,12 +3538,30 @@ Limpa o container de pontos.
 */
 function limpacontainerf()
 {
-	if ($i("pontosins") )
+	if ($i("pontosins"))
 	{$i("pontosins").innerHTML = "";}
 	if ($i("mostradistancia"))
 	{$i("mostradistancia").style.display="none";}
 }
+/*
+Function: criaboxg
 
+Cria o div boxg utilizado nas operações de navegação, google, etc.
+
+O boxg é utilizado para o desenho de retângulos na tela.
+*/
+function criaboxg()
+{
+	if (!$i("boxg"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id = "boxg";
+		novoel.style.zIndex=1;
+		novoel.innerHTML = '<font face="Arial" size=0></font>';
+		novoel.onmouseover = function(){$i("boxg").style.display="none";};
+		document.body.appendChild(novoel);
+	}
+}
 //controle dois painéis que podem ser redimensionados
 YAHOO.widget.ResizePanel = function(el, userConfig)
 {

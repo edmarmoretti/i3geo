@@ -329,6 +329,24 @@ function filtrof(idtema)
 Section: análise geográfica
 */
 /*
+Function selecao
+
+Abre a janela com as opções de seleção de elementos no mapa
+*/
+function selecao()
+{
+	if (g_tipoacao != "selecao")
+	{
+		g_tipoacao = "selecao";
+		mudaiconf("selecao");
+		pontosdistobj = new pontosdist();
+		objmapa.temaAtivo = "";
+		wdocaf("360px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+	}
+	else
+	{mudaiconf("pan");}
+}
+/*
 Function: pontosdistri
 
 Análises de distribuição de pontos
@@ -382,6 +400,139 @@ function analisaGeometrias()
 	pontosdistobj = new pontosdist();
 	objmapa.temaAtivo = "";
 	wdocaf("500px","400px",g_locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
+}
+/*
+Function: mede
+	
+Botão de medição de distâncias.
+
+A medida é feita quando o usuário clica no mapa com esta opção ativa
+
+Quando o botão é acionado, abre-se a janela que mostra o resultado da medida, o ícone que segue o mouse é alterado.
+
+Para mostrar o resultado do cálculo, é incluído um div específico.
+*/
+function mede()
+{
+	//insere div para medida de distancias
+	if (!$i("mostradistancia"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id = "mostradistancia";
+		var ins = '<div class="hd" >&nbsp</div>';
+		ins += '<div class="bd" style="text-align:left;padding:3px;" >';
+		ins += '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>';
+		ins += '<div style="text-align:left;font-size:10px" >';
+		ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
+		ins += "<input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
+		ins += '</div>';
+		ins+= '</div>';
+		novoel.innerHTML = ins;
+		novoel.style.borderColor="gray";
+		document.body.appendChild(novoel);
+		$i('pararraios').checked=true;
+	}
+	if (g_tipoacao != "mede")
+	{
+		YAHOO.namespace("janelaDocamede.xp");
+		YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+		YAHOO.janelaDocamede.xp.panel.render();
+		YAHOO.janelaDocamede.xp.panel.moveTo(imagemxi+150,imagemyi);
+		var escondeWdocamede = function()
+		{
+			richdraw.fecha();
+			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
+		};
+		YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", escondeWdocamede);
+		mudaiconf("mede");
+		pontosdistobj = new pontosdist();
+		$i("mostradistancia").style.display="block";
+		//
+		//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
+		//
+		if (!$i("divGeometriasTemp"))
+		{
+			var novoel = document.createElement("div");
+			novoel.id = "divGeometriasTemp";
+			novoel.style.cursor="crosshair";
+			novoel.style.zIndex=0;
+			novoel.style.position="absolute";
+			novoel.style.width=objmapa.w;
+			novoel.style.height=objmapa.h;
+			novoel.style.border="1px solid black";
+			novoel.style.display="none";
+			novoel.style.top=imagemyi;
+			novoel.style.left=imagemxi;
+			document.body.appendChild(novoel);
+		}
+		if ($i("divGeometriasTemp"))
+		{
+    		$i("divGeometriasTemp").innerHTML = "";
+    		var renderer;
+    		if (navn) {renderer = new SVGRenderer();}
+			else {renderer = new VMLRenderer();}
+    		richdraw = new RichDrawEditor(document.getElementById('divGeometriasTemp'), renderer);
+			richdraw.editCommand('fillcolor', 'red');
+			richdraw.editCommand('linecolor', 'gray');
+			richdraw.editCommand('linewidth', '1px');
+    		richdraw.editCommand('mode', 'line');
+    		$i("divGeometriasTemp").style.display="block";
+		}
+		if(navn){ativaClicks($i("divGeometriasTemp"));}
+	}
+	else
+	{
+		mudaiconf("pan");
+		richdraw.fecha();
+		if($i("mostradistancia")){$i("mostradistancia").style.display="none";}
+	}
+}
+/*
+Function: inserexy
+	
+Ativa o botão de inserção de pontos (digitalização).
+	
+A inserção é feita quando o usuário clica no mapa com esta opção ativa
+	
+Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
+e a variável g_tipoacao é definida.
+*/
+function inserexy()
+{
+	if (g_tipoacao != "inserexy")
+	{
+		var temp = Math.random() + "a";
+		temp = temp.split(".");
+		g_nomepin = "pin"+temp[1];
+		mudaiconf("inserexy");
+		pontosdistobj = new pontosdist();
+		wdocaf("400px","300px",g_locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
+	}
+	else
+	{mudaiconf("pan");}
+}
+/*
+Function: inseregrafico
+
+Inserção de gráficos.
+	
+A inserção é feita quando o usuário clica no mapa com esta opção ativa
+	
+Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
+e a variável g_tipoacao é definida.
+*/
+function inseregrafico()
+{
+	if (g_tipoacao != "inseregrafico")
+	{
+		var temp = Math.random() + "gr";
+		temp = temp.split(".");
+		g_nomepin = "pin"+temp[1];
+		mudaiconf("inseregrafico");
+		wdocaf("400px","300px",g_locaplic+'/ferramentas/inseregrafico/index.htm',"","","Insere");
+	}
+	else
+	{mudaiconf("pan");}
 }
 /*
 Section: grades
@@ -545,6 +696,111 @@ Faz o upload de shape file
 function upload()
 {wdocaf("300px","200px",g_locaplic+"/ferramentas/upload/index.htm","","","Upload");}
 /*
+Section: navegação
+*/
+/*
+Function: buscaRapida
+	
+Insere a opção de busca rápida.
+	
+*/	
+function ativaBuscaRapida(iddiv)
+{
+	if($i("buscaRapida"))
+	{
+		var ins = "<input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='busca r&aacute;pida...' />";
+		ins += "<img  src='"+g_locaplic+"/imagens/tic.png' onclick='buscaRapida()' />";
+		$i(iddiv).innerHTML = ins;
+	}
+}
+/*
+Function: wiki
+
+Abre a janela de busca na wikipedia.
+*/
+function wiki()
+{
+	g_operacao = "navega";
+	wdocaf("450px","190px",g_locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
+}
+/*
+Function: google
+
+Abre a janela do google.
+*/
+function google()
+{
+	criaboxg();
+	g_operacao = "navega";
+	if(navn){wdocaf("340px","340px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
+	else
+	{wdocaf("360px","360px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
+}
+/*
+Function: scielo
+
+Abre a janela de busca de artigos científicos na base de dados Scielo.
+*/
+function scielo()
+{
+	g_operacao = "navega";
+	wdocaf("450px","190px",g_locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
+}
+/*
+Function: confluence
+
+Abre a janela de busca na base de dados confluence (documentos relativos a uma intersecção de coordenadas).
+*/
+function confluence()
+{
+	g_operacao = "navega";
+	wdocaf("250px","190px",g_locaplic+"/ferramentas/confluence/index.htm","","","confluence");
+	criaboxg();
+}
+/*
+Function: lenteDeAumento
+
+Cria a lente de aumento.
+
+A lente de aumento permite visualizar a mesma imagem do mapa de forma ampliada, porém, em uma janela menor. A imagem é mostrada conforme a posição do mouse sobre o corpo do mapa.
+*/
+function lenteDeAumento()
+{
+	//insere lente de aumento
+	if (!$i("lente"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id = 'lente';
+		novoel.style.clip='rect(0px,0px,0px,0px)';
+		var novoimg = document.createElement("img");
+		novoimg.src="";
+		novoimg.id='lenteimg';
+		novoel.appendChild(novoimg);
+		document.body.appendChild(novoel);
+		var novoel = document.createElement("div");
+		novoel.id = 'boxlente';
+		document.body.appendChild(novoel);
+	}
+	with($i(id).style){borderWidth='1' + g_postpx;borderColor="red";}
+	if (g_lenteaberta == "sim")
+	{
+		$i("lente").style.display = "none";
+		$i("boxlente").style.display = "none";
+		$i(id).style.borderWidth = 0;
+		g_lenteaberta = "nao";
+	}
+	else
+	{
+		g_lenteaberta = "sim";
+		objaguarde.abre("ajaxabrelente","Aguarde...");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"lente",ajaxabrelente);
+	}
+}
+/*
 Section: outros
 */
 /*
@@ -620,7 +876,71 @@ Opções da barra de escala.
 */
 function opcoesEscala()
 {wdocaf("250px","300px",g_locaplic+"/ferramentas/opcoes_escala/index.htm",objposicaomouse.x - 75,objposicaomouse.y - 260,"Escala");}
+/*
+Function: imprimir
 
+Abre as opções de impressão do mapa
+*/
+function imprimir()
+{wdocaf("320px","180px",g_locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");};
+/*
+Function: reiniciaMapa
+
+Reinicia o mapa atual
+*/
+function reiniciaMapa()
+{
+	objaguarde.abre("ajaxredesenha","Aguarde...");
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
+	var cp = new cpaint();
+	//cp.set_debug(2);
+	cp.set_response_type("JSON");
+	cp.call(p,"reiniciaMapa",ajaxredesenha);
+}
+/*
+Function: textofid
+
+Abre a ferramenta de inclusão de textos no mapa.
+
+A inserção é feita quando o usuário clica no mapa com esta opção ativa
+	
+Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
+e a variável g_tipoacao é definida.
+*/
+function textofid()
+{
+	if (g_tipoacao != "textofid")
+	{
+		var temp = Math.random() + "b";
+		temp = temp.split(".");
+		g_nomepin = "pin"+temp[1];
+		mudaiconf("textofid");
+		pontosdistobj = new pontosdist();
+		g_tipoacao = "textofid";
+		wdocaf("350px","200px",g_locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
+	}
+	else
+	{mudaiconf("pan");}
+}
+/*
+Function: visual
+
+Adiciona os ícones de escolha do visual do mapa.
+	
+*/
+function visual(iddiv)
+{
+	if (objmapa.listavisual != "")
+	{
+		var l = objmapa.listavisual.split(",");
+		var visuais = "";
+		for (li=0;li<l.length; li++)
+		{
+			visuais += "<img title='muda visual - "+l[li]+"' style=cursor:pointer onclick='mudaVisual(\""+l[li]+"\")' src='"+g_locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";
+		}
+		$i(iddiv).innerHTML = visuais;
+	}
+}
 //testa se esse script foi carregado
 function testaferramentas()
 {}

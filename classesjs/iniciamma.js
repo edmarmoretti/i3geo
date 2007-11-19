@@ -1,9 +1,14 @@
 /*
 Title: Inicialização do i3geo.
 
-Cria o objeto objmapa e inicializa o mapa.
+Cria o objeto objmapa e inicializa o i3geo.
 
 Define as operações das funcionalidades principais.
+
+O I3Geo utiliza variáveis (veja o item específico na documentação) globais que possibilitam alterar algumas das características da interface.
+Essas variáveis recebem valores default quando o I3Geo é iniciado mas podem ser alterados antes da inicialização do mapa (método inicializa()).
+No arquivo aplicmapa/geral.htm existem exemplos de como fazer isso.
+As variáveis globais podem também ser alteradas em tempo de execução.
 
 Exemplo:
 
@@ -36,25 +41,21 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Section: variáveis de configuração
+Section: variáveis de configuração calculadas na inicialização do mapa
 */
-/*
-Variable: g_autoRedesenho
-
-Ativa o auto redesenho após um determinado temp.
-
-Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
-*/
-g_autoRedesenho = 0;
 /*
 Variable: g_sid
 
 Id da seção atual no servidor.
-
+Na inicialização o ID pode ser passado na URL logo após a ?, por exemplo, http://localhost/i3geo/aplicmap/geral.htm?xxxxxxxxxxxx
+Se o id não for definido, significa que o I3Geo deverá criar os arquivos temporários necessários ao seu funcionamento, o que é feito via ajax.
 */
 if (window.location.href.split("?")[1])
 {
 	g_sid = window.location.href.split("?")[1];
+	//
+	//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
+	//
 	if (g_sid.split("#")[0])
 	{g_sid = g_sid.split("#")[0];}
 }
@@ -63,22 +64,42 @@ else
 /*
 Variable: imagemxi
 
-Inicialização da variável de cálculo de posicionamento.
-
+Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa.
+É calculada na iniciallização e indica a posição em pixels do corpo do mapa na página. Muitos elementos da interface são posicionados em função desse valor.
 */
 imagemxi = 0;
 /*
 Variable: imagemyi
 
-Inicialização da variável de cálculo de posicionamento.
+Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa
+É calculada na iniciallização e indica a posição em pixels do corpo do mapa na página. Muitos elementos da interface são posicionados em função desse valor.
 
 */
 imagemyi = 0;
 /*
+Variable: navm
+
+Verdadeiro (true) se o navegador for o Internet Explorer
+*/
+navm = false;
+/*
+Variable: navn
+
+Verdadeiro (true) se o navegador for o Firefox
+*/
+navn = false;
+//seta as variáveis navn e navm
+var app = navigator.appName.substring(0,1);
+if (app=='N') navn=true; else navm=true;
+/*
+Section: variáveis que são definidas para controle de processos das funções do I3Geo. São definidas aqui para não gerarem erros nas funções que as utilizam.
+*/
+/*
 Variable: atuaLeg
 
 Variável interna que define se a legenda docável deve ser atualizada.
-
+Quando a legenda é colocada em uma janela móvel, essa variável é utilizada para demonstrar seu status.
+Se sim, a legenda móvel é atualizada quando o mapa é alterado.
 */
 atuaLeg="nao";
 /*
@@ -89,6 +110,8 @@ Parâmetros de inicialização que podem ser utilizados na interface mashup.
 Os parâmetros são os mesmos que podem ser utilizados quando o i3geo é inicializado pelo ms_criamapa.php.
 
 Exemplo: g_mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+
+A inicialização do I3Geo como Mashup possibilita que o I3Geo funcione dentro de uma página web qualquer, como um componente.
 */
 g_mashuppar = "";
 /*
@@ -109,38 +132,12 @@ Nome do tema atual que irá receber dados pontuais ou toponimia.
 */
 g_nomepin = "";
 /*
-Variable: g_arvoreClick
+Variable: g_arvoreClick (depreciado)
 
 Item da árvore de temas que foi clicado por último. Guarda o identificador do nó da árvore de temas.
+Essa variável permite que as funções lembrem qual foi o último tema sobre o qual o usuário fez alguma operação.
 */
 g_arvoreClick = "";
-/*
-Variable: g_arvoreClicks
-
-Guarda os nós da árvore de temas que já foram clicados. Evita que a função ajax que busca os filhos de um nó na árvore de temas seja executado novamente, recuperando o que já está na memória.
-*/
-g_arvoreClicks = "";
-/*
-Variable: g_movedoca (depreciado)
-
-Indica o status (0 ou 1) atual da janela interna.
-Se a janela estiver sendo movimentada, o status é igual a 1.
-*/
-g_movedoca = 0;
-/*
-Variable: g_movedocac (depreciado)
-
-Indica o status (0 ou 1) atual da janela para seleção de cores.
-Se a janela estiver sendo movimentada, o status é igual a 1.
-*/
-g_movedocac = 0;
-/*
-Variable: g_movedocar (depreciado)
-
-Indica o status (0 ou 1) atual da janela do mapa de referência.
-Se a janela estiver sendo movimentada, o status é igual a 1.
-*/
-g_movedocar = 0;
 /*
 Variable: g_tipoacao
 
@@ -173,13 +170,6 @@ Quando o mapa é redesenhado, essa variável é checada para verificar se a lente d
 */
 g_lenteaberta = "nao";
 /*
-Variable: g_hlpt
-
-Indica qual o nome do arquivo de ajuda que será aberto quando a letra "a" for digiada.
-É definida quando o usuário passa o mouse sobre um ícone ou outro objeto.
-*/
-g_hlpt = "";
-/*
 Variable: g_panM
 
 Indica se o mapa deve ou não ser deslocado.
@@ -201,293 +191,11 @@ Guarda a URL da imagem do mapa atual.
 */
 g_quadrooriginal = "";
 /*
-Variable: wd (depreciado)
-
-Indica se a janela interna foi clicada.
-Utilizada na movimentação interativa da janela interna.
-*/
-wd = 0;
-/*
-Variable: navm
-
-Verdadeiro (true) se o navegador for o Internet Explorer
-*/
-navm = false;
-/*
-Variable: navn
-
-Verdadeiro (true) se o navegador for o Firefox
-*/
-navn = false;
-/*
 Variable: g_r
 
 Indica se o software R esta instalado (sim ou nao). É preenchida na inicialização do mapa via AJAX.
 */
 g_r = "nao";
-
-/*
-Section: variáveis públicas que podem ser alteradas pelo usuário antes de inicializar o mapa
-*/
-/*
-Variable: g_embedLegenda
-
-Indica se a legenda deve ser incluida no corpo do mapa.
-
-Values:
-
-sim|nao
-
-*/
-g_embedLegenda = "nao";
-/*
-Variable: oMenuData
-
-Array com a arvore do menu suspenso
-
-Se for igual a "" será utilizado o menu padrão.
-*/
-oMenuData = "";
-/*
-Variable: g_3dmap
-
-Variável que define o nome do map_file que possuí o layer para uso na função 3d.
-Pode ser caminho completo. Se não, busca no aplicmap.
-
-*/
-g_3dmap = "";
-/*
-Variable: g_opcoesTemas
-
-Variável que define se as opcoes adicionais de cada tema serao mostradas. As opções são aquelas apresentadas na lista de temas do mapa quando um tema é expandido.
-
-Values:
-
-sim|nao
-
-*/
-g_opcoesTemas = "sim";
-/*
-Variable: g_mostraRosa
-
-Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse. A rosa dos ventos permite a navegação pelo mapa sem a necessidade de alterar a opção atual. Por exemplo, pode-se navegar pelo mapa mesmo estando na opção de identificação.
-
-O aparecimento da rosa é temporizada.
-
-Values:
-
-sim|nao
-*/
-g_mostraRosa = "sim";
-/*
-Variable: g_visual
-
-Indica qual o tipo de visual para abertura do mapa.
-
-Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
-*/
-g_visual = "default";
-
-/*
-Variable: g_janelaMen
-
-Define se a janela de mensagens começará aberta.
-
-Values:
-
-siim|nao
-*/
-g_janelaMen = "sim";
-/*
-Variable: g_downloadbase
-
-Define se na guia 2 será mostrada a opção de download dos dados.
-
-Values:
-
-sim|nao
-*/
-g_downloadbase = "sim";
-/*
-Variable: g_conectargeorss
-
-Define se na guia 2 será mostrada a opção de conexão com GeoRSS.
-
-Values:
-
-sim|nao
-*/
-g_conectargeorss = "sim";
-/*
-Variable: g_uploadlocal
-
-Variável que define se na guia 2 será mostrada a opção de upload.
-
-Values:
-
-sim|nao
-*/
-g_uploadlocal = "sim";
-/*
-Variable: g_conectarwms
-
-Variável que define se na guia 2 será mostrada a opção de conexão com WMS.
-
-Values:
-
-sim|nao
-*/
-g_conectarwms = "sim";
-/*
-Variable: g_docaguias
-
-Variável que define se o mapa deve iniciar com as guias em janela ou não. As guias em janela causam o desenho de um mapa com tamanho extendido.
-
-Values:
-
-sim|nao
-*/
-g_docaguias = "nao";
-/*
-Variable: g_barraFerramentas1
-
-Define se a barra de ferramentas 1 será aberta ou não no mapa.
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas1 = "sim";
-/*
-Variable: g_barraFerramentas2
-
-Define se a barra de ferramentas 2 será aberta ou não no mapa.
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas2 = "sim";
-/*
-Variable: g_fatordezoom
-
-Variável interna para a barra de zoom.
-
-*/
-g_fatordezoom = 0;
-/*
-Variable: g_diminuixM
-
-Diminui a largura do mapa em pixels no caso do navegador ser o IE.
-
-*/
-g_diminuixM = 20;
-/*
-Variable: g_diminuixN
-
-Diminui a largura do mapa em pixels no caso do navegador ser o FF.
-
-*/
-g_diminuixN = 25;
-/*
-Variable: g_diminuiyM
-
-Diminui a altura do mapa em pixels no caso do navegador ser o IE.
-
-*/
-g_diminuiyM = 106;
-/*
-Variable: g_diminuiyN
-
-Diminui a altura do mapa em pixels no caso do navegador ser o FF.
-
-*/
-g_diminuiyN = 103;
-/*
-Variable: g_mapaRefDisplay
-
-Indica a visibilidade do mapa de referência na inicialização
-
-Values:
-
-block|none
-
-*/
-g_mapaRefDisplay = "block";
-/*
-Variable: g_funcaoTip
-
-Função ajax que será executada para mostrar informações do tipo TIP.
-
-A função é executada pelo CPAINT e avaliada com "eval".
-
-Por padrão a função é a verificaTipDefault
-*/
-g_funcaoTip = "verificaTipDefault()";
-/*
-Variable: g_tempotip
-
-Tempo utilizado para verificar se o mouse está parado.
-
-Se o mouse estiver parado, a função de mostrar tip é ativada.
-*/
-g_tempotip = 4500;
-/*
-Variable: g_tipotip
-
-Define como o tip será mostrado.
-
-Values:
-
-simples|completo
-*/
-g_tipotip = "completo";
-/*
-Variable: g_tipoimagem
-
-Indica o tipo de filtro de imagem que está ativo. O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
-*/
-g_tipoimagem = "nenhum";
-/*
-Variable: g_sistemas
-
-Nome do arquivo xml com a lista de sistemas que serão mostrados na guia de adição de temas.
-O valor dessa variável é definido no arquivo "ms_configura.php" e é preenchida utilizando o ajax.
-*/
-g_sistemas = "";
-/*
-Variable: destacaTamanho
-
-Valor em pixel do retângulo de destaque de temas.
-*/
-destacaTamanho = 75;
-/*
-Variable: g_mensagempadrao
-
-Mensagem padrão que será mostrada na janela de mensagens.
-*/
-g_mensagempadrao = "O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
-/*
-Variable: g_entorno
-
-Indica se o preenchimento do entorno do mapa está ou não ativo.
-Utilizado para criar o efeito de auto-preenchimento do mapa quando é executada a função pan.
-É alterada em uma opção específica no menu suspenso.
-
-Values:
-
-sim|nao
-*/
-g_entorno = "nao";
-/*
-Variable: g_guiaativa
-
-Indica qual guia do mapa iniciará ativa.
-*/
-g_guiaativa = "guia1";
-//seta as variáveis navn e navm
-var app = navigator.appName.substring(0,1);
-if (app=='N') navn=true; else navm=true;
 if (navm)
 {
 	g_postpx = "";  //utilizado para crossbrowser
@@ -500,23 +208,6 @@ else
 	g_tipotop = "top";
 	g_tipoleft = "left";
 }
-//inclui uma mensagem no rodapé da janela quando a tela do navegador tem seu tamanho modificado pelo usuário
-window.onresize = function(){window.status = "Ap&oacute;s alterar o tamanho da janela, clique no bot&atilde;o de refresh do navegador";};
-
-function cria()
-{
-	var mashup = function (retorno)
-	{
-		g_sid = retorno.data;
-		objmapa.inicializa();
-	};
-	var cp = new cpaint();
-	cp.set_async(true);
-	cp.set_response_type("JSON");
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa";
-	cp.call(p,"",mashup);		
-}
-
 /*
 Class: Mapa
 
@@ -770,15 +461,20 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
+		//
+		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
+		//
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}
-		//altera a classe do corpo do HTML
+		//altera a classe do corpo do HTML. Utilizada pelo YUI.
 		$i("i3geo").className = "yui-skin-sam";
 		$i("i3geo").onmouseover = function()
 		{
 			this.onmousemove=function(exy1)
 			{
-				//if ($i("img")){calcposf();}
+				//
+				//quando o mouse é movido sobre a tela, a posição de x e y são guardadas em objposicaomouse
+				//
 				if (navn)
 				{
 					objposicaomouse.x = exy1.clientX;
@@ -793,7 +489,8 @@ function Mapa(e,m)
 		};
 		//
 		//se g_sid="", o html foi aberto diretamente
-		//então, é necessário criar o mapa
+		//então, é necessário criar os arquivos temporários do mapa
+		//essa operação deve ser assíncrona
 		//
 		if (g_sid=="")
 		{
@@ -808,8 +505,10 @@ function Mapa(e,m)
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
 			cp.call(p,"",mashup);
 			return;
-		}	
+		}
+		//	
 		//testa se os javascripts foram carregados
+		//
 		if (!window.testafuncoes)
 		{alert("funcoes.js com problemas");}
 		if (!window.testamenususpenso)
@@ -819,7 +518,8 @@ function Mapa(e,m)
 		if (!window.testaajax)
 		{alert("redesenho.js com problemas");}
 		//
-		//objeto que guarda os parametros de posicionamento do cursor
+		//inicia o mapa
+		//
 		objaguarde.abre("montaMapa","Aguarde...iniciando o mapa");
 		var cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -833,7 +533,7 @@ function Mapa(e,m)
 	
 	Parameters:
 	
-	Resultado da função inicializa
+	Resultado da função inicia retornado pela chamada em ajax
 	*/
 	this.montaMapa = function (retorno)
 	{
@@ -852,62 +552,13 @@ function Mapa(e,m)
 		{
 			if ((retorno.data != "erro") && (retorno.data != undefined))
 			{
+				//
+				//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
+				//
 				eval(retorno.data);
-				/*
-				menu suspenso
-				*/
-				if (oMenuData == "")
-				{
-               		oMenuData = {
-                   "ajudas": [ 
-                  
-                       { text: "Sobre o I3Geo", url: "javascript:g_hlpt = 'sobrei3geo';ajudaf('abre')" },
-                       { text: "Sistema", url: "javascript:abreDoc()" },
-                       { text: "WikiBook", url: "http://pt.wikibooks.org/wiki/I3geo" },
-                       { text: "Tutoriais", url: "http://mapas.mma.gov.br/wikibooki3geo" },
-                       { text: "Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" },
-                   ],
-                   "analise": [
-                       { text: "Geometrias", url: "javascript:analisaGeometrias()" },
-                       { text: "Grade de poligonos", url: "javascript:gradePol()" },
-                       { text: "Grade de pontos", url: "javascript:gradePontos()" },
-                       { text: "Grade de hex&aacute;gonos", url: "javascript:gradeHex()" },
-                       { text: "Entorno (buffer)", url: "javascript:buffer()" },
-                       { text: "Centr&oacute;ide", url: "javascript:centroide()" },
-                       { text: "N pontos em poligono", url: "javascript:nptPol()" },
-                       { text: "Ponto em poligono/raster", url: "javascript:pontoempoligono()" },
-                       { text: "Distribui&ccedil;&atilde;o de pontos", url: "javascript:pontosdistri()" }
-                   ]
-                };
-				if (!$i("listaPropriedades"))
-               	{
-                   	oMenuData.propriedades = [
-                       { text: "Tipo de imagem", url: "javascript:tipoimagem()" },
-                       { text: "Legenda", url: "javascript:opcoesLegenda()" },
-                       { text: "Escala", url: "javascript:opcoesEscala()" },
-                       { text: "Tamanho", url: "javascript:tamanho()" },
-                       { text: "Ativa/desativa entorno", url: "javascript:ativaEntorno()" },
-                       { text: "Ativa/desativa logo", url: "javascript:ativaLogo()" },
-                       { text: "Cor da selecao", url: "javascript:queryMap()" },
-                       { text: "Cor do fundo", url: "javascript:corFundo()" },
-                       { text: "Grade de coordenadas", url: "javascript:gradeCoord()" }
-                       ];
-                   }
-                   oMenuData.janelas = [
-                       { text: "Barras de ferramentas", url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
-                       { text: "Janela de mensagens", url: "javascript:initJanelaMen()" }        
-                   ];
-                   oMenuData.arquivo = [
-                       { text: "Salvar mapa", url: "javascript:salvaMapa()" },
-                       { text: "Carregar mapa", url: "javascript:carregaMapa()" },
-                       { text: "Pegar imagens", url: "javascript:pegaimagens()" },
-                       { text: "Converter em WMS", url: "javascript:convertews()" },
-                       { text: "Gerador de links", url: "../geradordelinks.htm" }
-                   ];
-               }
-               if ($i("menus"))
-               {montaMenuSuspenso();}
+				//
 				//insere botao dinamico de aplicar
+				//
 				if (!$i("aplicari"))
 				{
 					var novoel = document.createElement("input");
@@ -928,13 +579,24 @@ function Mapa(e,m)
 					novoel.onmouseout = function(){this.style.display="none";};
 					document.body.appendChild(novoel);
 				}
+				//
+				//gera os ícones para animação
+				//
 				gerafilmef(10);
+				//
 				//inicia as barras de ferramentas
+				//
 				if (g_barraFerramentas1 == "sim")
 				{initJanelaZoom(1);}
 				if (g_barraFerramentas2 == "sim")
 				{initJanelaZoom(2);}				
+				//
+				//gera a lista de temas da guia temas
+				//
 				objmapa.atualizaListaTemas(temas);
+				//
+				//gera o mapa de referencia e outros elementos do mapa
+				//
 				objmapa.atualizaReferencia(mapexten);
 				objmapa.scale = parseInt(mapscale);
 				objmapa.temas = temas;
@@ -945,42 +607,38 @@ function Mapa(e,m)
 				ajaxCorpoMapa(retorno);
 				objmapa.criaEscalaGrafica();
 				objmapa.atualizaEscalaGrafica();
-				objmapa.ativaLocallizarXY("localizarxy");
-				objmapa.ativaBuscaRapida("buscaRapida");
 				objmapa.ativaListaPropriedades("listaPropriedades");
-				objmapa.ativaRealce("realca");
-				objmapa.ativaGoogle("google");
-				objmapa.ativaScielo("scielo");
-				objmapa.ativaConfluence("confluence");
-				objmapa.ativaZoomtot("zoomtot");
-				objmapa.ativaZoomli("zoomli");
-				objmapa.ativaPan("pan");
-				objmapa.ativaZoomiauto("zoomiauto");
-				objmapa.ativaZoomoauto("zoomoauto");
-				objmapa.ativaIdentifica("identifica");
-				objmapa.ativaLente("lentei");
-				objmapa.ativaExten("exten");
-				objmapa.ativaReferencia("referencia");
-				objmapa.ativaEscalanum("escala");
-				objmapa.ativaWiki("wiki");
-				objmapa.ativaReinicia("reinicia");
-				objmapa.ativaMede("mede");
-				objmapa.ativaInserexy("inserexy");	
-				objmapa.ativaInsereGrafico("inseregrafico");
-				objmapa.ativaSelecao("selecao");
-				objmapa.ativaTextofid("textofid");
-				objmapa.ativa3D("v3d");
-				objmapa.ativaImpressao("imprimir");
-				objmapa.ativaVisual("visual");
-				objmapa.ativaOndeEstou("ondeestou");
-				ativaGuias();
-				//esconde guias
-				if(($i("encolheFerramentas")) && ($i("contemFerramentas")))
+				//
+				//ativa os botões  das funções
+				//
+				var l = g_listaFuncoesBotoes.botoes;
+				for(b=0;b<g_listaFuncoesBotoes.botoes.length;b++)
 				{
-					$i("encolheFerramentas").onclick = function()
-					{docaguias();};
+					if ($i(l[b].iddiv))
+					{
+						if(l[b].conteudo)
+						{eval('$i(l[b].iddiv).innerHTML = "'+l[b].conteudo+'"');}
+						if(l[b].dica)
+						{
+							eval('$i("'+l[b].iddiv+'").onmouseover = function(){mostradicasf(this,"'+l[b].dica+'","");}');
+							eval('$i("'+l[b].iddiv+'").onmouseout = function(){mostradicasf(this,"");};');
+						}
+						if(l[b].funcaoonclick)
+						{
+							$i(l[b].iddiv).onclick = l[b].funcaoonclick;
+						}
+						if(l[b].constroiconteudo)
+						{eval(l[b].constroiconteudo);}
+					}
 				}
-				calcposf();           //calcula a posicao do mapa no browser
+				//
+				//ativa as guias
+				//
+				ativaGuias();
+				//
+				//calcula a posicao do mapa no browser
+				//
+				calcposf();
 				g_leftinicial = imagemxi;
 				if ($i("corpoMapa"))
 				{
@@ -1019,6 +677,8 @@ function Mapa(e,m)
 					ajustaEntorno();
 				}
 				autoRedesenho("ativa");
+				if ($i("escalanum")){$i("escalanum").value = objmapa.scale;}
+				if (objmapa.geoip == "nao"){$i(id).style.display="none";}
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
@@ -1042,69 +702,10 @@ function Mapa(e,m)
 				if (g_3dmap == ""){document.getElementById("botao3d").style.display="none";}
 			}
 		}
+		//
+		//zera os quadros de animação
+		//
 		rebobinaf();
-	};
-	/*
-	Function: ativaVisual
-	
-	Ativa os ícones de escolha do visual do mapa.
-	
-	Parameters:
-	
-	id - id do elemento	
-	*/
-	this.ativaVisual = function(visual)
-	{
-		//verifica se o elemento existe
-		if ($i(visual))
-		{
-			if (objmapa.listavisual != "")
-			{
-				var l = objmapa.listavisual.split(",");
-				var visuais = "";
-				for (li=0;li<l.length; li++)
-				{
-					visuais += "<img title='muda visual - "+l[li]+"' style=cursor:pointer onclick='mudaVisual(\""+l[li]+"\")' src='"+g_locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";
-				}
-				$i(visual).innerHTML = visuais;
-			}
-		}
-	};
-	/*
-	Function: ativaLocallizarXY
-	
-	Insere a opção de localização de coordenadas.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/
-	this.ativaLocallizarXY = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).innerHTML = "localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  title='zoom' onclick='zoomPonto()' src="+$im("tic.png") +" id=procurarxy />";
-			$i(id).onmouseover = function(){mostradicasf(this,'Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para o ponto digitado.','');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaBuscaRapida
-	
-	Insere a opção de busca rápida.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaBuscaRapida = function (id)
-	{
-		if($i(id))
-		{
-			var ins = "<input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='busca r&aacute;pida...' />";
-			ins += "<img  src='"+g_locaplic+"/imagens/tic.png' onclick='buscaRapida()' />";
-			$i(id).innerHTML = ins;
-		}
 	};
 	/*
 	Function: ativaListaPropriedades
@@ -1119,739 +720,20 @@ function Mapa(e,m)
 	{
 		if ($i(id))
 		{
-			var lista = {
-   	              "propriedades": [
-   	                  { text: "Tipo de imagem", url: "javascript:tipoimagem()" },
-   	                  { text: "Legenda", url: "javascript:opcoesLegenda()" },
-   	                  { text: "Escala", url: "javascript:opcoesEscala()" },
-   	                  { text: "Tamanho", url: "javascript:tamanho()" },
-   	                  { text: "Ativa/desativa entorno", url: "javascript:ativaEntorno()" },
-   	                  { text: "Ativa/desativa logo", url: "javascript:ativaLogo()" },
-   	                  { text: "Cor da selecao", url: "javascript:queryMap()" },
-   	                  { text: "Cor do fundo", url: "javascript:corFundo()" },
-   	                  { text: "Grade de coordenadas", url: "javascript:gradeCoord()" },
-   	                  { text: "Template", url: "javascript:template()" },
-   	                  { text: "Temporizador", url: "javascript:autoredesenha()" }
-   	              ]};					
 			listaPr = new Object();
 			listaPr = treeviewNew("listaPr", "default", id, null);
 			listaPr.createItem("propriedadesRaiz", "<b>Propriedades do mapa</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
-			for (l=0;l<lista.propriedades.length; l++)
+			for (l=0;l<g_listaPropriedades.propriedades.length; l++)
 			{
-				tnome = "<span onclick='"+lista.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+lista.propriedades[l].text+" </span>";
+				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+g_listaPropriedades.propriedades[l].text+" </span>";
 				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 			}
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
 		}
 	};
-	/*
-	Function: ativaRealce
-	
-	Ativa o botão que realiza o realce de um tema.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/		
-	this.ativaRealce = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function realcaAtiva()
-			{
-				if (!$i("areaRealce"))
-				{
-					var novoel = document.createElement("div");
-					novoel.id = 'areaRealce';
-					novoel.style.display="none";
-					document.body.appendChild(novoel);
-					if (navm)
-					{
-						$i("areaRealce").style.filter = "alpha(opacity=20)";
-					}
-				}
-				if (g_realca == "sim")
-				{
-					g_realca = "nao";
-					$i("areaRealce").style.display = "none";
-					$i(id).style.borderWidth=0;
-					$i(id).style.borderColor='red';
-				}
-				else
-				{
-					g_realca = "sim";
-					$i("areaRealce").style.display = "block";
-					$i(id).style.borderWidth=1;
-					$i(id).style.borderColor='red';
-				}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Ativa/desativa &aacute;rea de destaque no mapa','');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaGoogle
-	
-	Ativa o botão que realiza a operação de de busca no Google.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/		
-	this.ativaGoogle = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick= function google()
-			{
-				//div para google
-				if (!$i("boxg"))
-				{
-					var novoel = document.createElement("div");
-					novoel.id = "boxg";
-					novoel.style.zIndex=1;
-					novoel.innerHTML = '<font face="Arial" size=0></font>';
-					novoel.onmouseover = function(){$i("boxg").style.display="none";};
-					document.body.appendChild(novoel);
-				}
-				g_operacao = "navega";
-				if(navn){wdocaf("340px","340px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
-				else
-				{wdocaf("360px","360px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
-			};
-			$i(id).onmouseover=function(){mostradicasf(this,'Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da regi&atilde;o vista no mapa principal.','google');};
-			$i(id).onmouseout=function(){mostradicasf(this,'');};
-		}
-	};	
-	/*
-	Function: ativaScielo
-	
-	Ativa o botão que realiza a operação de de busca no site Scielo.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/		
-	this.ativaScielo = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick= function scielo()
-			{
-				g_operacao = "navega";
-				wdocaf("450px","190px",g_locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
-			};
-			$i(id).onmouseover=function(){mostradicasf(this,'Pesquisa documentos na base de dados Scielo (dados preliminares)','scielo');};
-			$i(id).onmouseout=function(){mostradicasf(this,'');};
-		}	
-	};
-	/*
-	Function: ativaConfluence
-	
-	Ativa o botão que realiza a operação de de busca no site confluence.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaConfluence = function(id)
-	{	
-		if ($i(id))
-		{
-			$i(id).onclick= function confluence()
-			{
-				g_operacao = "navega";
-				wdocaf("250px","190px",g_locaplic+"/ferramentas/confluence/index.htm","","","confluence");
-				if (!$i("boxg"))
-				{
-					var novoel = document.createElement("div");
-					novoel.id = "boxg";
-					novoel.style.zIndex=5000;
-					novoel.innerHTML = '<font face="Arial" size=0></font>';
-					document.body.appendChild(novoel);
-				} 
-			};
-			$i(id).onmouseover=function(){mostradicasf(this,'Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo.','confluence');};
-			$i(id).onmouseout=function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaZoomtot
-	
-	Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaZoomtot = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function (){zoomtot();};
-			$i(id).onmouseover = function(){mostradicasf(this,'Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.','geral');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaZoomli
-	
-	Ativa o botão que realiza a operação de zoom interativo.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/		
-	this.ativaZoomli = function (id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick =function(){mudaiconf("zoomli");g_operacao="navega";};
-			$i(id).onmouseover = function(){mostradicasf(this,'Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.','zoomli');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaPan
-	
-	Ativa o botão que realiza a operação de deslocamento (pan).
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaPan = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick =function(){mudaiconf("pan");g_tipoacao = "pan";g_operacao="navega";};
-			$i(id).onmouseover = function(){mostradicasf(this,'Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o vis&iacute;vel.','pan');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaZoomiauto
-	
-	Ativa o botão que realiza a operação de zoom in.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaZoomiauto = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function() {zoomiauto();};
-			$i(id).onmouseover = function(){mostradicasf(this,'Amplia o mapa tendo como refer&ecirc;cia o centro atual.','zoomiauto');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaZoomoauto
-	
-	Ativa o botão que realiza a operação de zoom out.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaZoomoauto = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function(){zoomoauto();};
-			$i(id).onmouseover = function(){mostradicasf(this,'Reduz o mapa tendo como refer&ecirccia o centro atual.','zoomoauto');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaIdentifica
-	
-	Ativa o botão que abre a função de identificação.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/
-	this.ativaIdentifica = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function()
-			{
-				mudaiconf("identifica");
-				g_operacao="identifica";
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.','identifica');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};	
-	/*
-	Function: ativaLente
-	
-	Ativa o botão que abre a lente de aumento.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/	
-	this.ativaLente = function(id)
-	{	
-		if ($i(id))
-		{
-			$i(id).onclick = function lentei()
-			{
-				//insere lente de aumento
-				if (!$i("lente"))
-				{
-					var novoel = document.createElement("div");
-					novoel.id = 'lente';
-					novoel.style.clip='rect(0px,0px,0px,0px)';
-					var novoimg = document.createElement("img");
-					novoimg.src="";
-					novoimg.id='lenteimg';
-					novoel.appendChild(novoimg);
-					document.body.appendChild(novoel);
-					var novoel = document.createElement("div");
-					novoel.id = 'boxlente';
-					document.body.appendChild(novoel);
-				}
-				with($i(id).style){borderWidth='1' + g_postpx;borderColor="red";}
-				if (g_lenteaberta == "sim")
-				{
-					$i("lente").style.display = "none";
-					$i("boxlente").style.display = "none";
-					$i(id).style.borderWidth = 0;
-					g_lenteaberta = "nao";
-				}
-				else
-				{
-					g_lenteaberta = "sim";
-					objaguarde.abre("ajaxabrelente","Aguarde...");
-					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
-					var cp = new cpaint();
-					//cp.set_debug(2)
-					cp.set_response_type("JSON");
-					cp.call(p,"lente",ajaxabrelente);
-				}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Abre lente de amplia&ccedil;&atilde;o','lente');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaExten
-	
-	Ativa o botão que abre a janela com o mapa de referência.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação	
-	*/
-	this.ativaExten = function (id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function(){mensagemf(objmapa.extent);};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas.','extensao');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};	
-	/*
-	Function: ativaReferencia
-	
-	Ativa o botão que abre a janela com o mapa de referência.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação
-	*/
-	this.ativaReferencia = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function(){initJanelaRef();};
-			$i(id).onmouseover = function(){mostradicasf(this,'Abre/fecha o mapa de refer&ecirc;ncia','');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaEscalanum
-	
-	Ativa a apresentação da escala numérica.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/	
-	this.ativaEscalanum = function(id)
-	{
-		if($i(id))
-		{
-			$i(id).innerHTML = "1:<input class='digitar' type='text' onchange='javascript:aplicaescala()' id=escalanum size=19 value=''/><img src=\""+g_localimg+"/tic.png\" onclick='javascript:aplicaescala()' />";
-			$i("escalanum").onmouseover = function(){mostradicasf(this,'Digite o novo valor de escala e clique no bot&atilde;o aplicar para alterar a escala do mapa.','escala');};
-			$i("escalanum").onmouseout = function(){mostradicasf(this,'');};
-			if ($i("escalanum")){$i("escalanum").value = this.scale;}
-		}
-	};
-	/*
-	Function: ativaWiki
-	
-	Ativa o botão de busca na wikipedia.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaWiki = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick= function wiki()
-			{
-				g_operacao = "navega";
-				wdocaf("450px","190px",g_locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada.','');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};	
-	/*
-	Function: ativaReinicia
-	
-	Ativa o botão de reinicialização do mapa que restaura as condições iniciais do mapa.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaReinicia = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick =function()
-			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2);
-				cp.set_response_type("JSON");
-				cp.call(p,"reiniciaMapa",ajaxredesenha);
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Redesenha o mapa com as configura&ccedil;&ocirc;es iniciais.','redesenha');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaMede
-	
-	Ativa o botão de medição de distâncias.
-	
-	A medida é feita quando o usuário clica no mapa com esta opção ativa
-	
-	Quando o botão é acionado, abre-se a janela que mostra o resultado da medida, o ícone que segue o mouse é alterado.
-	
-	Para mostrar o resultado do cálculo, é incluído um div específico.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaMede = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function mede()
-			{
-				//insere div para medida de distancias
-				if (!$i("mostradistancia"))
-				{
-					var novoel = document.createElement("div");
-					novoel.id = "mostradistancia";
-					novoel.style.display="none";
-					novoel.style.position="absolute";
-					novoel.style.zIndex=5000;
-					novoel.style.height="50px";
-					novoel.style.border="1px solid black";
-					novoel.style.padding="5px";
-					novoel.style.textAlign="left";
-					var calculo = document.createElement("div");
-					calculo.id = "mostradistancia_calculo";
-					novoel.appendChild(calculo);
-					var divin = document.createElement("div");
-					divin.style.textAlign="left";
-					divin.innerHTML = "<div style='color:navy;cursor:pointer;text-align:left;' onclick='javascript:richdraw.fecha()' >Parar de medir</div>";
-					divin.innerHTML += "<br><span style='color:navy;cursor:pointer;text-align:left;' ><input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
-					novoel.appendChild(divin);				
-					document.body.appendChild(novoel);
-					$i('pararraios').checked=true;
-				}
-				if (g_tipoacao != "mede")
-				{
-					mudaiconf("mede");
-					pontosdistobj = new pontosdist();
-					$i("mostradistancia").style.display="block";
-					//
-					//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
-					//
-					if (!$i("divGeometriasTemp"))
-					{
-						var novoel = document.createElement("div");
-						novoel.id = "divGeometriasTemp";
-						novoel.style.cursor="crosshair";
-						novoel.style.zIndex=0;
-						novoel.style.position="absolute";
-						novoel.style.width=objmapa.w;
-						novoel.style.height=objmapa.h;
-						novoel.style.border="1px solid black";
-						novoel.style.display="none";
-						novoel.style.top=imagemyi;
-						novoel.style.left=imagemxi;
-						document.body.appendChild(novoel);
-					}
-					if ($i("divGeometriasTemp"))
-					{
-			    		var renderer;
-			    		if (navn) {renderer = new SVGRenderer();}
-    					else {renderer = new VMLRenderer();}
-			    		richdraw = new RichDrawEditor(document.getElementById('divGeometriasTemp'), renderer);
-    					richdraw.editCommand('fillcolor', 'red');
-    					richdraw.editCommand('linecolor', 'black');
-    					richdraw.editCommand('linewidth', '1px');
-			    		richdraw.editCommand('mode', 'line');
-			    		$i("divGeometriasTemp").style.display="block";
-					}
-					if(navn){ativaClicks($i("divGeometriasTemp"));}
-				}
-				else
-				{
-					richdraw.fecha();
-					mudaiconf("pan");
-					limpacontainerf(); //tira os pontos da tela
-					$i("mostradistancia").style.display="none";
-				}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.','mede');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaInserexy
-	
-	Ativa o botão de inserção de pontos (digitalização).
-	
-	A inserção é feita quando o usuário clica no mapa com esta opção ativa
-	
-	Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
-	e a variável g_tipoacao é definida.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaInserexy = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function inserexy()
-			{
-				if (g_tipoacao != "inserexy")
-				{
-					var temp = Math.random() + "a";
-					temp = temp.split(".");
-					g_nomepin = "pin"+temp[1];
-					mudaiconf("inserexy");
-					pontosdistobj = new pontosdist();
-					wdocaf("400px","300px",g_locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
-				}
-				else
-				{mudaiconf("pan");}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os pontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.','inserexy');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaInsereGrafico
-	
-	Ativa o botão de inserção de gráficos.
-	
-	A inserção é feita quando o usuário clica no mapa com esta opção ativa
-	
-	Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
-	e a variável g_tipoacao é definida.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaInsereGrafico = function(id)
-	{
-		//insere grafico
-		if ($i(id))
-		{
-			$i(id).onclick = function inseregrafico()
-			{
-				if (g_tipoacao != "inseregrafico")
-				{
-					var temp = Math.random() + "gr";
-					temp = temp.split(".");
-					g_nomepin = "pin"+temp[1];
-					mudaiconf("inseregrafico");
-					wdocaf("400px","300px",g_locaplic+'/ferramentas/inseregrafico/index.htm',"","","Insere");
-				}
-				else
-				{mudaiconf("pan");}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Insere um gr&aacute;fico no ponto clicado conforme os atributos existentes no tema escolhido. O tema deve possuir itens com valores num&eacute;ricos na tabela de atributos.','inseregrafico');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaSelecao
-	
-	Ativa o botão de seleção.
-	
-	A seleção é feita quando o usuário clica no mapa com esta opção ativa
-	
-	Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
-	e a variável g_tipoacao é definida.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaSelecao = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function selecao()
-			{
-				if (g_tipoacao != "selecao")
-				{
-					g_tipoacao = "selecao";
-					mudaiconf("selecao");
-					pontosdistobj = new pontosdist();
-					objmapa.temaAtivo = "";
-					wdocaf("360px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
-				}
-				else
-				{mudaiconf("pan");}
-			};
-			$i(id).onmouseover = function(){mostradicasf(this,'Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por tema.','selecao');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaTextoFid
-	
-	Ativa o botão de inserção de toponímia.
-	
-	A inserção é feita quando o usuário clica no mapa com esta opção ativa
-	
-	Quando o botão é acionado, abre-se a janela de opções, o ícone que segue o mouse é alterado
-	e a variável g_tipoacao é definida.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaTextofid = function(id)
-	{
-		if ($i("textofid"))
-		{
-			$i("textofid").onclick = function textofid()
-			{
-				if (g_tipoacao != "textofid")
-				{
-					var temp = Math.random() + "b";
-					temp = temp.split(".");
-					g_nomepin = "pin"+temp[1];
-					mudaiconf("textofid");
-					pontosdistobj = new pontosdist();
-					g_tipoacao = "textofid";
-					wdocaf("350px","200px",g_locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
-				}
-				else
-				{mudaiconf("pan");}
-			};
-			$i("textofid").onmouseover = function(){mostradicasf(this,'Insere um texto no mapa clicando no ponto desejado no mapa. Utilize essa op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao mapa.','inseretxt');};
-			$i("textofid").onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativa3d
-	
-	Ativa a funcionalidade do botão 3d.
-	
-	O botão 3d abre a opção de geração de um modelo virtual de elevação.
-
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativa3D = function(id)
-	{
-		if ($i(id))
-		{
-			$i(id).onclick = function v3d()
-			{wdocaf("400px","200px",g_locaplic+"/ferramentas/3d/index.htm","","","3d");};
-			$i(id).onmouseover = function(){mostradicasf(this,'Gera arquivo para 3d','3d');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaImpressão
-	
-	Ativa o botão de impressão do mapa.
-	
-	O botão de impressão abre as opções para impressão do mapa atual.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaImpressao = function(id)
-	{	
-		if ($i(id))
-		{
-			$i(id).onclick = function imprimir()
-			{wdocaf("320px","180px",g_locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");};
-			$i(id).onmouseover = function(){mostradicasf(this,'Imprime o mapa','imprimir');};
-			$i(id).onmouseout = function(){mostradicasf(this,'');};
-		}
-	};
-	/*
-	Function: ativaOndeEstou
-	
-	Ativa o botão de localização do usuário pelo IP.
-	
-	Essa opção só é ativada se a variável objmapa.geoip for igual a "sim" e se existir o div com id=ondeestou.
-	
-	O valor dessa variável é obtida na inicialização.
-	
-	Parameters:
-	
-	id - id do elemento que ativa a operação 
-	*/
-	this.ativaOndeEstou = function(id)
-	{	
-		if ($i(id))
-		{
-			if (objmapa.geoip == "nao")
-			{$i(id).style.display="none";}
-			else
-			{
-				$i(id).onclick = function(){zoomIP();};
-				$i(id).onmouseover = function(){mostradicasf(this,'Localiza o IP do usuario no mapa','');};
-				$i(id).onmouseout = function(){mostradicasf(this,'');};
-			}
-		}
-	};	
 	/*
 	Function: criaEscalaGrafica
 	

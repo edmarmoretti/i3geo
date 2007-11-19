@@ -52,6 +52,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js");
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("configura.js","configura_compacto.js","High ASCII");
 packer("redesenho.js","redesenho_compacto.js","High ASCII");
 packer("iniciamma.js","iniciamma_compacto.js","High ASCII");
 packer("ferramentas.js","ferramentas_compacto.js","High ASCII");
@@ -84,6 +85,8 @@ $jsfiles = array(
 "jsobjects/jsUI-Global/common_compacto.js",
 "jsobjects/jsUI-Global/uiCommon_compacto.js",
 "jsobjects/jsUI-Treeview/component_compacto.js",
+"../pacotes/richdraw/richdraw_tudo_compacto.js",
+"configura_compacto.js",
 "funcoes_compacto.js",
 "ferramentas_compacto.js",
 "redesenho_compacto.js",

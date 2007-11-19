@@ -32,11 +32,11 @@ Function: montaMenuSuspenso
 
 Monta o menu baseado na variável oMenuData
 */
-function montaMenuSuspenso()
+function montaMenuSuspenso(iddiv)
 { 
-	if($i("menus"))
+	if($i(iddiv))
 	{
-		$i("menus").className="yuimenubar yuimenubarnav";
+		$i(iddiv).className="yuimenubar yuimenubarnav";
 		if(oMenuData.ajudas)
 		{
 			var ins='<div class="bd" style="z-index:2000;" >';
@@ -63,7 +63,7 @@ function montaMenuSuspenso()
 		}
 	}
 	else{return;}
- 	var oMenuBar=new YAHOO.widget.MenuBar("menus",{autosubmenudisplay: true, showdelay: 250, hidedelay: 750, lazyload: true});
+ 	var oMenuBar=new YAHOO.widget.MenuBar(iddiv,{autosubmenudisplay: true, showdelay: 250, hidedelay: 750, lazyload: true});
  	oMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  	oMenuBar.render();
 }
