@@ -56,7 +56,8 @@ function RichDrawEditor(elem, renderer) {
   	pontosdistobj = new pontosdist();
   	elem.innerHTML = "";
   	elem.style.display="none";
-  	mudaiconf("pan");
+  	if(g_tipoacao == "mede")
+  	{mudaiconf("pan");}
   	if(document.getElementById("mostradistancia"))
   	{document.getElementById("mostradistancia").style.display="none";}
   }
