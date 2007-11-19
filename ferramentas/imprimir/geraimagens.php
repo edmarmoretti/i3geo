@@ -29,7 +29,12 @@ if (array_search( "MapScript", $exts) != TRUE)
 }
 require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
-$map = ms_newMapObj($map_file);
+
+$temp = str_replace(".map","xxx.map",$map_file);
+$map->save($temp);
+substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
+
 $w = $map->width;
 $h = $map->height;
 $legenda =$map->legend;
