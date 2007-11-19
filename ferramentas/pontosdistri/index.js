@@ -95,12 +95,17 @@ function analiseKernel()
 	var ci = $i("cori").value
 	var cf = $i("corf").value
 	aguarde("block")
+	var temp = function()
+	{
+		aguarde("none");
+		window.parent.ajaxredesenha("")
+	}
 	var tema = $i("temasPt").value
 	var cp = new cpaint();
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel"
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"analiseDistriPt",window.parent.ajaxredesenha);
+	cp.call(p,"analiseDistriPt",temp);
 }
 
 function analiseDensidade()
@@ -110,12 +115,17 @@ function analiseDensidade()
 	var ci = $i("cori").value
 	var cf = $i("corf").value
 	aguarde("block")
+	var temp = function()
+	{
+		aguarde("none");
+		window.parent.ajaxredesenha("")
+	}
 	var tema = $i("temasPt").value
 	var cp = new cpaint();
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade"
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"analiseDistriPt",window.parent.ajaxredesenha);
+	cp.call(p,"analiseDistriPt",temp);
 }
 function analiseDistancia()
 {
@@ -124,12 +134,17 @@ function analiseDistancia()
 	var ci = $i("cori").value
 	var cf = $i("corf").value
 	aguarde("block")
+	var temp = function()
+	{
+		aguarde("none");
+		window.parent.ajaxredesenha("")
+	}
 	var tema = $i("temasPt").value
 	var cp = new cpaint();
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia"
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"analiseDistriPt",window.parent.ajaxredesenha);
+	cp.call(p,"analiseDistriPt",temp);
 }
 function analiseRelatorio()
 {
