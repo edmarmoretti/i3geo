@@ -598,7 +598,7 @@ function substituiCon($map_file,$postgis_mapa)
 {
 	if (isset($postgis_mapa))
 	{
-		if (($postgis_mapa != "") && ($postgis_mapa != " "))
+		if (($postgis_mapa != "") || ($postgis_mapa != " "))
 		{
 			$objMap = ms_newMapObj($map_file);
 			$numlayers = $objMap->numlayers;
@@ -607,7 +607,7 @@ function substituiCon($map_file,$postgis_mapa)
 				$layer = $objMap->getlayer($i);
 				if ($layer->connectiontype == MS_POSTGIS)
 				{
-					if ($layer->connection == " ")
+					if (($layer->connection == " ") || ($layer->connection == ""))
 					{
 						$layer->set("connection",$postgis_mapa);
 					}
@@ -689,9 +689,12 @@ Se o mapfile apresentar problemas, a cópia de segurança é restaurada.
 parameter:
 
 map_file - Arquivo map file.
+
+postgis_mapa - string de conexão com o banco de dados definida em ms_configura.php
 */
-function testaMapa($map_file)
+function testaMapa($map_file,$postgis_mapa)
 {
+	substituiCon($map_file,$postgis_mapa);
 	$objMapa = ms_newMapObj($map_file);
 	ms_ResetErrorList();
 	$img = $objMapa->draw();

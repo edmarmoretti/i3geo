@@ -138,6 +138,7 @@ Item da árvore de temas que foi clicado por último. Guarda o identificador do nó
 Essa variável permite que as funções lembrem qual foi o último tema sobre o qual o usuário fez alguma operação.
 */
 g_arvoreClick = "";
+g_arvoreClicks = "";
 /*
 Variable: g_tipoacao
 

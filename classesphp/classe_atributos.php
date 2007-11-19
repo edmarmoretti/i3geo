@@ -131,9 +131,6 @@ $registro - Índice do registro que será consultado.
 		if (@$this->layer->open() == MS_SUCCESS)
 		{
 			$items = pegaItens($this->layer);
-			//$qstring = "/.*/";
-			//if($this->layer->connectiontype == MS_POSTGIS)
-			//{$qstring = $items[0].' ~* \'^.\'  ';}
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
 			{
 				$this->layer->open();
@@ -197,9 +194,6 @@ $tipo - Tipo de busca brasil|null
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
-		//$qstring = "/.*/";
-		//if($this->layer->connectiontype == MS_POSTGIS)
-		//{$qstring = $items[0].' ~* \'^.\'  ';}
 		if ($existesel == "nao")
 		{$this->layer->querybyrect($this->mapa->extent);}
 		$this->layer->open();
@@ -308,9 +302,6 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 			}
 			$this->layer->close();
 			$chk = "";
-			//$qstring = "/.*/";
-			//if($this->layer->connectiontype == MS_POSTGIS)
-			//{$qstring = $items[0].' ~* \'^.\'  ';}
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
 			{
 				$res_count = $this->layer->getNumresults();
@@ -464,9 +455,6 @@ Include:
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
-		//$qstring = "/.*/";
-		//if($this->layer->connectiontype == MS_POSTGIS)
-		//{$qstring = $items[0].' ~* \'^.\'  ';}
 		if ($existesel == "nao")
 		{$this->layer->queryByrect($this->mapa->extent);}
 		$abriu = $this->layer->open();

@@ -133,14 +133,7 @@ Include:
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
-		{
-			$qstring = "/.*/";
-			if($layerPt->connectiontype == MS_POSTGIS)
-			{$layerPt->queryByrect($this->mapa->extent);}
-			//$qstring = $itemspt[0].' ~* \'^.\'  ';
-			else
-			{$layerPt->queryByAttributes($itemspt[0], $qstring, 1);}
-		}
+		{$layerPt->queryByrect($this->mapa->extent);}
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
 		//pega um shape especifico
@@ -167,12 +160,6 @@ Include:
 		foreach ($pontosy as $pt)
 		{fwrite($f,$pt."\n");}
 		fclose($f);
-/*
-		$xi = (intval(min($pontosx)))-1;
-		$xf = (intval(max($pontosx)))+1;
-		$yi = (intval(min($pontosy)))-1;
-		$yf = (intval(max($pontosy)))+1;
-*/
 		$xi = (min($pontosx));
 		$xf = (max($pontosx));
 		$yi = (min($pontosy));

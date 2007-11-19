@@ -627,7 +627,7 @@ Include:
 		$m = new Mapa($map_file);
 		$m->adicionaTema($temas,$locaplic);
 		$m->salva();
-		$teste = testaMapa($map_file);
+		$teste = testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{$cp->set_data("ok");}
 		else
@@ -662,13 +662,13 @@ Include:
 		include("classe_mapa.php");
 		$m = new Mapa($map_file);
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo);
-		$teste = $m->mapa->draw();
-		$retorno = "ok";
-		if ($teste != "")
-		{$m->salva();}
+		$teste = testaMapa($map_file,$postgis_mapa);
+		if ($teste == "ok")
+		{$cp->set_data("ok");}
 		else
-		{$retorno = "erro.";}
-		$cp->set_data($retorno);
+		{
+			$cp->set_data(array("erro"=>"A camada nao pode ser adicionada. ".$teste));	
+		}
 	break;
 /*
 Property: referencia
