@@ -197,17 +197,25 @@ Variable: g_r
 Indica se o software R esta instalado (sim ou nao). É preenchida na inicialização do mapa via AJAX.
 */
 g_r = "nao";
+/*
+Variable: cpObj
+
+Objeto cpaint que pode ser reutilizado.
+
+O objeto cpaint permite executar uma chamada ajax.
+*/
+cpObj = new cpaint();
+cpObj.set_async("true");
+cpObj.set_response_type("JSON");
+
+g_postpx = "px";
+g_tipotop = "top";
+g_tipoleft = "left";
 if (navm)
 {
 	g_postpx = "";  //utilizado para crossbrowser
 	g_tipotop = "pixelTop"; //utilizado para crossbrowser
 	g_tipoleft = "pixelLeft"; //utilizado para crossbrowser
-}
-else
-{
-	g_postpx = "px";
-	g_tipotop = "top";
-	g_tipoleft = "left";
 }
 /*
 Class: Mapa
@@ -239,12 +247,6 @@ function Mapa(e,m)
 	//faz o cache das imagens para desenhar mais rápido
 	imgBranco = new Image();
 	imgBranco.src = g_locaplic+"/imagens/branco.gif";
-	var icache = new Array("foldermapa.gif","extent.gif","tic.png","maisvermelho.png","maisverde.png","maisamarelo.png","temas.png","x.gif","sobe.gif","desce.gif","quadro.png","quadro1.png","excluir.png");
-	for (i=0;icache.lenght;i++)
-	{
-		var temp = new Image();
-		temp.src = g_locaplic+"/imagens/"+icache[i];
-	}
 	var temp = new Image();
 	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/plus.gif";
 	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/minus.gif";
@@ -293,8 +295,8 @@ function Mapa(e,m)
 		}
 		document.body.style.width = novow;
 		document.body.style.height = novoh;
-		this.w = parseInt(document.body.style.width) - menos - diminuix;
-		this.h = parseInt(document.body.style.height) - diminuiy;
+		this.w = novow - menos - diminuix;
+		this.h = novoh - diminuiy;
 		if (document.getElementById("corpoMapa"))
 		{
 			if (document.getElementById("corpoMapa").style.width)
@@ -481,7 +483,7 @@ function Mapa(e,m)
 					objposicaomouse.x = exy1.clientX;
 					objposicaomouse.y = exy1.clientY;
 				}
-				if (navm)
+				else
 				{
 					objposicaomouse.x = window.event.clientX;
 					objposicaomouse.y = window.event.clientY;
@@ -500,11 +502,8 @@ function Mapa(e,m)
 				g_sid = retorno.data;
 				objmapa.inicializa();
 			};
-			var cp = new cpaint();
-			cp.set_async("true");
-			cp.set_response_type("JSON");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
-			cp.call(p,"",mashup);
+			cpObj.call(p,"",mashup);
 			return;
 		}
 		//	
@@ -522,10 +521,8 @@ function Mapa(e,m)
 		//inicia o mapa
 		//
 		objaguarde.abre("montaMapa","Aguarde...iniciando o mapa");
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
-		cp.call(p,"iniciaMapa",this.montaMapa);
+		cpObj.call(p,"iniciaMapa",this.montaMapa);
 	};
 	/*
 	Function: montaMapa
@@ -563,14 +560,17 @@ function Mapa(e,m)
 				if (!$i("aplicari"))
 				{
 					var novoel = document.createElement("input");
-					novoel.id = 'aplicari';
-					novoel.type = 'button';
-					novoel.value = 'Aplicar';
-					novoel.style.cursor="pointer";
-					novoel.style.fontSize="10px";
-					novoel.style.zIndex = 15000;
-					novoel.style.position="absolute";
-					novoel.style.display="none";
+					with(novoel)
+					{
+						id = 'aplicari';
+						type = 'button';
+						value = 'Aplicar';
+						style.cursor="pointer";
+						style.fontSize="10px";
+						style.zIndex = 15000;
+						style.position="absolute";
+						style.display="none";
+					}
 					novoel.onclick=function()
 					{
 						remapaf();
@@ -643,19 +643,28 @@ function Mapa(e,m)
 				g_leftinicial = imagemxi;
 				if ($i("corpoMapa"))
 				{
-					$i("img").style.width=objmapa.w +"px";
-					$i("img").style.height=objmapa.h +"px";
-					$i("corpoMapa").style.width=objmapa.w +"px";
-					$i("corpoMapa").style.height=objmapa.h +"px";
-					$i("corpoMapa").style.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
+					with($i("img"))
+					{
+						style.width=objmapa.w +"px";
+						style.height=objmapa.h +"px";
+					}
+					with($i("corpoMapa"))
+					{
+						style.width=objmapa.w +"px";
+						style.height=objmapa.h +"px";
+						style.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
+					}
 				}
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
 				if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				$i("mst").style.width=objmapa.w + temp + "px";
-				$i("contemImg").style.height=objmapa.h + "px";
-				$i("contemImg").style.width=objmapa.w + "px";
+				with($i("contemImg"))
+				{
+					style.height=objmapa.h + "px";
+					style.width=objmapa.w + "px";
+				}
 				calcposf();
 				//reposiciona a janela de botoes
 				if(navn){var desloca = 40;}else{var desloca = 40;}
@@ -756,10 +765,7 @@ function Mapa(e,m)
 		{
 			//objaguarde.abre("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
+			cpObj.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
 		}
 	};
 	/*
@@ -780,10 +786,7 @@ function Mapa(e,m)
 		if ($i("mapaReferencia") && objmapa.extent != mapexten)
 		{
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2);
-			cp.set_response_type("JSON");
-			cp.call(p,"retornaReferencia",ajaxReferencia);
+			cpObj.call(p,"retornaReferencia",ajaxReferencia);
 		}
 		else
 		{
@@ -801,10 +804,7 @@ function Mapa(e,m)
 		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
 		{
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"criaLegenda",ajaxLegendaHTML);
+			cpObj.call(p,"criaLegenda",ajaxLegendaHTML);
 		}
 	};
 	/*
@@ -818,10 +818,7 @@ function Mapa(e,m)
 		{
 			//objaguarde.abre("ajaxLegenda","Aguarde...atualizando a legenda");
 			var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"legendaGrafica",ajaxLegendaImagem);
+			cpObj.call(p,"legendaGrafica",ajaxLegendaImagem);
 		}
 	};
 	/*
@@ -931,11 +928,14 @@ function Mapa(e,m)
 		novoel.style.zIndex=1000;
 		novoel.id="obj";
 		var novoimg = document.createElement("img");
-		novoimg.src= g_locaplic+"/imagens/pan.gif";
-		novoimg.name="imgh";
-		novoimg.id='imgh';
-		novoimg.style.width = "15px";
-		novoimg.style.height = "15px";
+		with(novoimg)
+		{
+			src= g_locaplic+"/imagens/pan.gif";
+			name="imgh";
+			id='imgh';
+			style.width = "15px";
+			style.height = "15px";
+		}
 		novoel.appendChild(novoimg);
 		novoel.onmouseover = function()
 		{this.style.display = "none";};
@@ -952,9 +952,12 @@ function Mapa(e,m)
 			var docMapa = $i("img");
 			//insere box de zoom
 			var novoel = document.createElement("div");
-			novoel.style.width = "0px";
-			novoel.style.height = "0px";
-			novoel.id = "box1";
+			with(novoel)
+			{
+				style.width = "0px";
+				style.height = "0px";
+				id = "box1";
+			}
 			document.body.appendChild(novoel);
 			if (navm)
 			{
@@ -964,15 +967,15 @@ function Mapa(e,m)
 			{
 				var wb = parseInt($i("box1").style.width);
 				var hb = parseInt($i("box1").style.height);
-				if (navn)
-				{
-					with(this.style){width = wb - 10 + "px";}
-					with(this.style){height = hb - 10 + "px";}
-				}
 				if (navm)
 				{
 					$i("box1").style.width = wb - 2;
 					$i("box1").style.height = hb - 2;
+				}
+				else
+				{
+					with(this.style){width = wb - 10 + "px";}
+					with(this.style){height = hb - 10 + "px";}
 				}
 			};
 			$i("box1").onmouseup = function(){zoomboxf("termina")};
@@ -987,32 +990,27 @@ function Mapa(e,m)
 		{
 			objaguarde.abre("ajaxCorpoMapa","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"redesenhaCorpo",ajaxCorpoMapa);
+			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
 		};
 		if (objmapa.finaliza)
 		{eval(objmapa.finaliza);}
 		//
 		//altera o tamanho das guias
 		//
-		if ($i(objmapa.guiaTemas+"obj"))
+		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
+		for(i=0;i<temp.length;i++)
 		{
-			$i(objmapa.guiaTemas+"obj").style.overflow="auto";
-			$i(objmapa.guiaTemas+"obj").style.height = objmapa.h-13;
-		}
-		if ($i(objmapa.guiaMenu+"obj"))
-		{
-			$i(objmapa.guiaMenu+"obj").style.overflow="auto";
-			$i(objmapa.guiaMenu+"obj").style.height = objmapa.h-13;
-			$i(objmapa.guiaMenu+"obj").style.width = "100%";
-		}
-		if ($i(objmapa.guiaLegenda+"obj"))
-		{
-			$i(objmapa.guiaLegenda+"obj").style.overflow="auto";
-			$i(objmapa.guiaLegenda+"obj").style.height = objmapa.h-13;
-			$i(objmapa.guiaLegenda+"obj").style.width = "100%";
+			eval("var s = objmapa."+temp[i]+"obj"); 
+			if ($i(s))
+			{
+				var d = $i(s);
+				with(d)
+				{
+					style.overflow="auto";
+					style.height = objmapa.h-13;
+					style.width = "100%";
+				}
+			}
 		}
 	};
 	/*
@@ -1027,6 +1025,13 @@ function Mapa(e,m)
 			for (f=0;f<this.funcoesClickMapa.length; f++)
 			{
 				eval(this.funcoesClickMapa[f]);
+			}
+		}
+		if (g_funcoesClickMapaDefault.length > 0)
+		{
+			for (f=0;f<g_funcoesClickMapaDefault.length; f++)
+			{
+				eval(g_funcoesClickMapaDefault[f]);
 			}
 		}
 	};

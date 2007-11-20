@@ -59,7 +59,7 @@ $top = function(id,valor)
 {
 	if (navm)
 	{document.getElementById(id).style.pixelTop=valor;}
-	if(navn)
+	else
 	{document.getElementById(id).style.top=valor+"px";}
 };
 /*
@@ -79,22 +79,9 @@ $left = function(id,valor)
 {
 	if (navm)
 	{document.getElementById(id).style.pixelLeft=valor;}
-	if(navn)
+	else
 	{document.getElementById(id).style.left=valor+"px";}
 };
-/*
-Function: htmlAcentos
-
-Troca os acentos de uma frase por entidades html.
-
-Parâmetros:
-
-palavra - palavra que será processada
-*/
-function htmlAcentos(palavra)
-{
-	return(palavra);
-}
 /*
 Function: trataErro
 
@@ -202,10 +189,7 @@ function mudaVisual(visual)
 	};
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"mudaQS",monta);
+	cpObj.call(p,"mudaQS",monta);
 }
 /*
 Function: initJanelaMen
@@ -218,16 +202,19 @@ function initJanelaMen()
 	if (!$i("janelaMen"))
 	{
 		var novoel = document.createElement("div");
-		novoel.id = "janelaMen";
-		novoel.style.display="block";
-		var temp = '<div class="hd">&nbsp;</div>';
-		temp += '<div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
-		novoel.innerHTML = temp;
-		novoel.style.border="1px solid rgb(170,170,170)";
+		with(novoel)
+		{
+			id = "janelaMen";
+			style.display="block";
+			style.border="1px solid rgb(170,170,170)";
+			innerHTML = '<div class="hd">&nbsp;</div><div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
+		}
 		document.body.appendChild(novoel);
-		$i("janelaMenTexto").style.textAlign="left";
-		$i("janelaMenTexto").style.fontSize="10px";
-		document.body.appendChild(novoel);
+		with($i("janelaMenTexto"))
+		{
+			style.textAlign="left";
+			style.fontSize="10px";
+		}
 		YAHOO.namespace("janelaMen.xp");
 		YAHOO.janelaMen.xp.panel = new YAHOO.widget.Panel("janelaMen", { width:"266px", height:"auto", fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 		YAHOO.janelaMen.xp.panel.render();
@@ -401,10 +388,7 @@ function ativaGuias()
 				};
 				//pega a lista de árvores que devem ser montadas
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(p,"pegalistademenus",pegalistademenus);
+				cpObj.call(p,"pegalistademenus",pegalistademenus);
 			}
 		};
 	}
@@ -423,10 +407,7 @@ function ativaGuias()
 			{
 				$i("banners").innerHTML == "Aguarde...";
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegaMapas&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(p,"pegaMapas",pegaMapas);
+				cpObj.call(p,"pegaMapas",pegaMapas);
 			}
 			else
 			{alert("id banners nao encontrado");}
@@ -489,14 +470,14 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 	YAHOO.namespace("janelaDoca.xp");
 	if (!$i("wdoca"))
 	{
+		var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
 		var novoel = document.createElement("div");
-		novoel.id = "wdoca";
-		novoel.style.display="block";
-		var ins = '<div class="hd">'+texto+"</div>";
-		ins += '<div class="bd">';
-		ins += '<iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe>';
-		ins += "</div>";
-		novoel.innerHTML = ins;
+		with(novoel)
+		{
+			id = "wdoca";
+			style.display="block";
+			innerHTML = ins;
+		}
 		document.body.appendChild(novoel);
 	}
 	if ($i("wdocai"))
@@ -538,10 +519,12 @@ function redimwdocaf(wlargura,waltura)
 {
 	if ($i("wdoca"))
 	{
-		$i("wdoca").style.width = wlargura;
-		$i("wdoca").style.height = waltura;
+		with($i("wdoca"))
+		{
+			style.width = wlargura;
+			style.height = waltura;
+		}
 	}
-		
 }
 /*
 Function: wdocaf2
@@ -566,12 +549,14 @@ function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 {
 	if (!$i("wdoca2"))
 	{
+		var ins = '<div class="hd">&nbsp;</div><div class="bd"><iframe name="wdocai2" id="wdocai2"  valign="top" ></iframe></div></div>';
 		var novoel = document.createElement("div");
-		novoel.id = "wdoca2";
-		novoel.style.display="none";
-		var ins = '<div class="hd">&nbsp;</div><div class="bd">';
-		ins += '<iframe name="wdocai2" id="wdocai2"  valign="top" ></iframe></div></div>';
-		novoel.innerHTML = ins;
+		with(novoel)
+		{
+			id = "wdoca2";
+			style.display="none";
+			innerHTML = ins;
+		}
 		document.body.appendChild(novoel);
 	}
 	YAHOO.namespace("janelaDoca2.xp");
@@ -587,7 +572,6 @@ function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 		$i("wdoca2").style.display = "none";
 		$i("wdocai2").src = "";
 		YAHOO.util.Event.removeListener(YAHOO.janelaDoca2.xp.panel.close, "click");
-		//YAHOO.janelaDoca2.xp.panel.destroy();
 	};
 	YAHOO.util.Event.addListener(YAHOO.janelaDoca2.xp.panel.close, "click", escondeWdoca2);
 }
@@ -627,8 +611,6 @@ objeto - objeto sobre o qual o mouse está sobreposto.
 
 dica - dica que aparece no mapa.
 
-hlpt - arquivo de help que deverá ser aberto se a tecla "a" for pressionada. O arquivo é passado para
-a variável global g_hlpt.
 */
 function mostradicasf(objeto,dica,hlpt)
 {
@@ -720,32 +702,6 @@ function mudaiconf(i)
 	}
 }
 /*
-Function: ferramentasf
-
-Ativa o DIV com as ferramentas dos blocos de ícones quando uma guia de ferramentas é clicada.
-
-Parameters:
-
-f - código da ferramenta.
-*/
-function ferramentasf(f)
-{
-	if ($i("ferramentas"+f))
-	{
-		var fs=["1","2","3","4","5"];
-		for (i=0;i<fs.length; i++)
-		{
-			if ($i("ferramentas"+fs[i]))
-			{
-				$i("ferramentas"+fs[i]).style.display="none";
-				$i("ferr"+fs[i]).style.backgroundColor="rgb(230,230,230)";
-			}
-		}
-		$i("ferramentas"+f).style.display="block";
-		$i("ferr"+f).style.backgroundColor="rgb(255,255,255)";
-	}
-}
-/*
 Function: mostraguiaf
 
 Ativa a visualização de uma determinada guia.
@@ -774,45 +730,6 @@ function mostraguiaf(guia)
 		{alert("O objeto guia"+guia+"obj nao existe.");}
 	}
 }
-/*
-Function: mostraferramenta
-
-Ativa a visualização de uma guia de ferramentas.
-
-Parâmetros:
-
-guia - número da guia que será ativada.
-*/
-function mostraferramenta(guia)
-{
-	if ($i("ferr"+guia))
-	{
-		var fs=[1,2,3,4,5,6,7,8,9,10];
-		for (j=0;j<fs.length; j++)
-		{
-			if ($i("ferr"+fs[j]))
-			{
-				jj = fs[j];
-				$i("ferr"+jj).style.backgroundColor="rgb(230,230,230)";
-				if ($i("ferr"+jj+"obj"))
-				{$i("ferr"+jj+"obj").style.display="none";}
-			}
-		}
-		$i("ferr"+guia).style.backgroundColor="rgb(255,255,255)";
-		if ($i("ferr"+guia+"obj"))
-		{$i("ferr"+guia+"obj").style.display="block";}
-		else
-		{alert("O objeto ferr"+guia+"obj nao existe.");}
-	}
-}
-/*
-Function: borra
-
-Borra o mapa evitando que o usuário clique em alguma opção
-
-*/
-function borra(tipo)
-{}
 /*
 Function: aguarde
 
@@ -849,7 +766,7 @@ function aguarde()
 		eval ('YAHOO.aguarde.'+aguardeId+'.setHeader("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
 		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')');
-		eval('YAHOO.aguarde.'+aguardeId+'.show()');
+		eval ('YAHOO.aguarde.'+aguardeId+'.show()');
 	};
 	this.fecha = function(aguardeId)
 	{
@@ -1013,175 +930,7 @@ function ativaClicks(docMapa)
 		}
 	};
 	docMapa.onclick = function()
-	{
-		//verifica se esta na opcao de identificacao
-		if (g_tipoacao == "identifica")
-		{
-			wdocaf("450px","250px",g_locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");
-		}
-		//insere pontos
-		if (g_tipoacao == "inserexy")
-		{
-			var n = pontosdistobj.xpt.length;
-			pontosdistobj.xpt[n] = objposicaocursor.ddx;
-			pontosdistobj.ypt[n] = objposicaocursor.ddy;
-			if ($i("wdoca").style.display == "none")
-			{wdocaf("270px","200px",g_locaplic+'/ferramentas/inserexy2/index.htm',"");}
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var ins = doc.getElementById("resultado").innerHTML;
-			ins = ins + "<div style='font-size:12px' >" + objposicaocursor.ddx +" " + objposicaocursor.ddy + "</div><br>";
-			doc.getElementById("resultado").innerHTML = ins;
-			if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
-			else
-			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2);
-				cp.set_response_type("JSON");
-				cp.call(p,"insereSHP",ajaxredesenha);
-			}
-		}
-		//insere graficos
-		if (g_tipoacao == "inseregrafico")
-		{
-			if ($i("wdoca").style.display == "none")
-			{wdocaf("270px","200px",g_locaplic+'/ferramentas/inseregrafico/index.htm',"");}
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var tema = doc.getElementById("temasLigados").value;
-			var width = doc.getElementById("w").value;
-			var inclinacao = doc.getElementById("inclinacao").value;
-			var shadow_height = doc.getElementById("sombra").value;
-			if (tema == ""){alert("Nenhum tema definido para pegar os dados");}
-			else
-			{
-				var itens = doc.getElementById("listadeitens").value;;
-				if (itens == "")
-				{alert("Nenhum item foi escolhido");}
-				else
-				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
-					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&tipo=pizza&tema="+tema+"&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&itens="+itens+"&shadow_height="+shadow_height+"&width="+width+"&inclinacao="+inclinacao+"&g_sid="+g_sid;
-					var cp = new cpaint();
-					//cp.set_debug(2);
-					cp.set_response_type("JSON");
-					cp.call(p,"insereSHPgrafico",ajaxredesenha);
-				}
-			}
-		}
-		//insere toponimo
-		if (g_tipoacao == "textofid")
-		{
-			var n = pontosdistobj.xpt.length;
-			pontosdistobj.xpt[n] = objposicaocursor.ddx;
-			pontosdistobj.ypt[n] = objposicaocursor.ddy;
-			if ($i("wdoca").style.display == "none")
-			{textofid();}
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var texto = doc.getElementById("texto").value;
-			texto = htmlAcentos(texto);
-			var f = doc.getElementById("fonte").value;
-			var t = doc.getElementById("tamanho").value;
-			var a = doc.getElementById("angulo").value;
-			var cf = doc.getElementById("fundoc").value;
-			if (cf == ""){cf = "off";}
-			var cs = doc.getElementById("sombra").value;
-			if (cs == ""){cs = "off";}
-			var xs = doc.getElementById("sombrax").value;
-			var ys = doc.getElementById("sombray").value;
-			var c = doc.getElementById("frente").value;
-			var m = doc.getElementById("mascara").value;
-			if (m == ""){m = "off";}
-			var fcs = doc.getElementById("frentes").value;
-			if (fcs == ""){fcs = "off";}
-			var fxs = doc.getElementById("frentex").value;
-			var fys = doc.getElementById("frentey").value;
-			var forca = doc.getElementById("force").value;
-			var md = doc.getElementById("mindistance").value;
-			var mf = doc.getElementById("minfeaturesize").value;
-			var ox = doc.getElementById("offsetx").value;
-			var oy = doc.getElementById("offsety").value;
-			var pl = doc.getElementById("partials").value;
-			var pos = doc.getElementById("position").value;
-			objaguarde.abre("ajaxredesenha","Aguarde...");
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2);
-			cp.set_response_type("JSON");
-			cp.call(p,"insereFeature",ajaxredesenha);
-		}
-		//seleciona
-		if (g_tipoacao == "selecao")
-		{
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var tipo = "adiciona";
-			//pega o tipo de operacao da janela de selecao
-			if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
-			if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-			if ((tipo != "limpa") && (tipo != "inverte"))
-			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(p,"selecaoPT",ajaxredesenha);
-			}
-		}
-		if (g_tipoacao == "mede")
-		{
-			var n = pontosdistobj.xpt.length;
-			pontosdistobj.xpt[n] = objposicaocursor.ddx;
-			pontosdistobj.ypt[n] = objposicaocursor.ddy;
-			pontosdistobj.xtela[n] = objposicaocursor.telax;
-			pontosdistobj.ytela[n] = objposicaocursor.telay;
-			pontosdistobj.ximg[n] = objposicaocursor.imgx;
-			pontosdistobj.yimg[n] = objposicaocursor.imgy;
-			pontosdistobj.dist[n] = 0;
-			window.status=n;
-			try
-			{
-				if (navn)
-				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
-				else
-				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
-			}
-			catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
-			if (n > 0)
-			{
-				var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-				pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-				if (navn)
-				{
-					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-					var w = Math.sqrt(dx + dy);
-					try
-					{
-						if($i("pararraios") && $i("pararraios").checked == true )
-						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
-					}
-					catch(e){window.status=n+" erro ao desenhar o raio";}
-				}
-				else
-				{
-					var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-					var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-					var w = Math.sqrt(dx + dy);
-					try
-					{
-						if($i("pararraios") && $i("pararraios").checked==true )
-						{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
-					}
-					catch(e){window.status=n+" erro ao desenhar o raio";}
-					pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
-				}
-			}
-			inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
-		}
-		objmapa.verificaClickMapa();
-	};
+	{objmapa.verificaClickMapa();};
 	docMapa.onmouseup = function()
 	{
 		if (g_tipoacao == "zoomli"){zoomboxf("termina");}
@@ -1201,19 +950,13 @@ function ativaClicks(docMapa)
 			{
 				objaguarde.abre("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(p,"pan",ajaxredesenha);
+				cpObj.call(p,"pan",ajaxredesenha);
 				return;
 			}
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
 			objaguarde.abre("ajaxredesenha","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaExtensao",ajaxredesenha);
+			cpObj.call(p,"mudaExtensao",ajaxredesenha);
 		}
 		
 	};
@@ -1240,13 +983,16 @@ function initJanelaZoom(qual)
 	if ((qual == 1) && (!$i("maisBotoes1")))
 	{
 		var novoel = document.createElement("div");
-		novoel.id = "janelaBotoes1";
-		novoel.style.display="block";
+		with(novoel)
+		{
+			id = "janelaBotoes1";
+			style.display="block";
+			style.border="1px solid gray";
+		}
 		if (navm)
 		{novoel.style.filter='alpha(opacity=90)';}
 		else
 		{novoel.style.opacity= .85;}
-		novoel.style.border="1px solid gray";
 		var temp = '<div class="hd">&nbsp;</div>';
 		temp += '<div class="bd" style="background-color:rgb(250,250,250);width='+wj+'px"  >';
 		//barra de zoom
@@ -1339,13 +1085,16 @@ function initJanelaZoom(qual)
 	if ((qual == 2) && (!$i("maisBotoes2")))
 	{
 		var novoel = document.createElement("div");
-		novoel.id = "janelaBotoes2";
-		novoel.style.display="block";
+		with(novoel)
+		{
+			id = "janelaBotoes2";
+			style.display="block";
+			style.border="1px solid gray";
+		}
 		if (navm)
 		{novoel.style.filter='alpha(opacity=90)';}
 		else
 		{novoel.style.opacity= .85;}
-		novoel.style.border="1px solid gray";
 		var temp = '<div class="hd">&nbsp;</div>';
 		temp += '<div class="bd" style="background-color:rgb(250,250,250);width='+wj+'px"  >';		
 		temp += '<div id="maisBotoes2" style="left:'+recuo+';top:-6px;"  ></div></div>';
@@ -1376,14 +1125,17 @@ function initJanelaRef()
 	if (!$i("winRef"))
 	{
 		var novoel = document.createElement("div");
-		novoel.id = "winRef";
-		novoel.style.display="none";
+		with (novoel)
+		{
+			id = "winRef";
+			style.display="none";
+			style.borderColor="gray";
+		}
 		var ins = '<div class="hd">Refer&ecirc;ncia</div>';
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
 		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" />';
 		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
 		novoel.innerHTML = ins;
-		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
 		$i("imagemReferencia").style.height = objmapa.refheight+"px";
 	}
@@ -1477,11 +1229,8 @@ function zoomiauto()
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
 	g_operacao = "navega";
-	cp.call(p,"aproxima",ajaxredesenha);
+	cpObj.call(p,"aproxima",ajaxredesenha);
 }
 /*
 Function: zoomoauto
@@ -1493,11 +1242,8 @@ function zoomoauto()
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
 	g_operacao = "navega";
-	cp.call(p,"afasta",ajaxredesenha);
+	cpObj.call(p,"afasta",ajaxredesenha);
 }
 /*
 Function: zoomboxf
@@ -1521,17 +1267,6 @@ function zoomboxf (tipo)
 		// muda o retï¿½gulo de zoom conforme deslocamento do mouse
 		ppx = objposicaocursor.telax;
 		py = objposicaocursor.telay;
-		if (navn)
-		{
-			if (ppx > boxxini)
-			{with(bx.style){width = ppx - boxxini - 15 + "px";}}
-			if (py > boxyini)
-			{with(bx.style){height = py - boxyini - 15 + "px";}}
-			if (ppx < boxxini)
-			{with(bx.style){left = ppx + "px";width = boxxini - ppx + 15 + "px";}}
-			if (py < boxyini)
-			{with(bx.style){top = py + "px";height = boxyini - py + 15 + "px";}}
-		}
 		if (navm)
 		{
 			if (ppx > boxxini)
@@ -1542,6 +1277,17 @@ function zoomboxf (tipo)
 			{with(bx.style){left = ppx;width = boxxini - ppx + 2;}}
 			if (py < boxyini)
 			{with(bx.style){top = py;height = boxyini - py + 2;}}
+		}
+		else
+		{
+			if (ppx > boxxini)
+			{with(bx.style){width = ppx - boxxini - 15 + "px";}}
+			if (py > boxyini)
+			{with(bx.style){height = py - boxyini - 15 + "px";}}
+			if (ppx < boxxini)
+			{with(bx.style){left = ppx + "px";width = boxxini - ppx + 15 + "px";}}
+			if (py < boxyini)
+			{with(bx.style){top = py + "px";height = boxyini - py + 15 + "px";}}
 		}
 		break;
 		case "termina":
@@ -1577,10 +1323,7 @@ function zoomboxf (tipo)
 				objmapa.extent=v;
 				objaguarde.abre("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(p,"mudaExtensao",ajaxredesenha);
+				cpObj.call(p,"mudaExtensao",ajaxredesenha);
 			}
 		}
 		else
@@ -1597,10 +1340,7 @@ function zoomboxf (tipo)
 				{
 					objaguarde.abre("ajaxredesenha","Aguarde...");
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
-					var cp = new cpaint();
-					//cp.set_debug(2)
-					cp.set_response_type("JSON");
-					cp.call(p,"selecaobox",ajaxredesenha);
+					cpObj.call(p,"selecaobox",ajaxredesenha);
 				}
 			}
 		}		
@@ -1624,19 +1364,13 @@ function zoomIP()
 		{
 			objaguarde.abre("ajaxredesenha","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"zoomPonto",ajaxredesenha);
+			cpObj.call(p,"zoomPonto",ajaxredesenha);
 		}
 		else
 		{alert("Nao foi possivel identificar a localizacao.");}
 	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"localizaIP",mostraIP);	
+	cpObj.call(p,"localizaIP",mostraIP);	
 }
 /*
 Function: zoomPonto
@@ -1651,10 +1385,7 @@ function zoomPonto()
 		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
 		objaguarde.abre("ajaxredesenha","Aguarde...");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"zoomPonto",ajaxredesenha);
+		cpObj.call(p,"zoomPonto",ajaxredesenha);
 	}
 }
 /*
@@ -1668,10 +1399,7 @@ function clicouRef()
 	objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
 	objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pan",ajaxredesenha);
+	cpObj.call(p,"pan",ajaxredesenha);
 }
 /*
 Function: movimentoRef
@@ -1700,11 +1428,8 @@ function aplicaescala()
 	{var nova = objmapa.scale;}
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+nova+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
 	g_operacao = "outras";
-	cp.call(p,"mudaEscala",ajaxredesenha);
+	cpObj.call(p,"mudaEscala",ajaxredesenha);
 }
 /*
 Function: zoomtot
@@ -1715,11 +1440,8 @@ function zoomtot()
 {
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
 	g_operacao = "navega";
-	cp.call(p,"mudaExtensao",ajaxredesenha);
+	cpObj.call(p,"mudaExtensao",ajaxredesenha);
 }
 /*
 Function: panFixo
@@ -1750,11 +1472,8 @@ function panFixo(direcao)
 	}
 	objaguarde.abre("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&x="+x+"&y="+y+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
 	g_operacao = "navega";
-	cp.call(p,"pan",ajaxredesenha);
+	cpObj.call(p,"pan",ajaxredesenha);
 }
 /*
 Function: ativaEntorno
@@ -1851,23 +1570,6 @@ function ajustaEntorno()
 Section: atributos
 */
 /*
-Function: buscaRapida
-
-Realiza a busca por palavra no serviço geonames do MMA
-
-Chama o web service e mostra os resultados na tela
-*/
-function buscaRapida()
-{
-	criaboxg();
-	if ($i("buscaRapida"))
-	{
-		if ($i("valorBuscaRapida").value == "")
-		{alert ("Digite uma palavra para busca!");return;}
-		wdocaf("300px","280px",g_locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
-	}
-}
-/*
 Function: verificaTip
 
 Verifica se a opção de identificação está ativa e se o mouse está parado.
@@ -1888,10 +1590,13 @@ function verificaTip()
 	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela")){return;}
 	if ((objmapa.parado == "sim") && (g_operacao == "identifica") && ($i("tip").style.display!="block"))
 	{
-		$i("tip").style.top = objposicaocursor.telay +20;
-		$i("tip").style.left = objposicaocursor.telax;
-		$i("tip").innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>Pesquisando...</td></tr></table>";
-		$i("tip").style.display="block";
+		with($i("tip"))
+		{
+			style.top = objposicaocursor.telay +20;
+			style.left = objposicaocursor.telax;
+			innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>Pesquisando...</td></tr></table>";
+			style.display="block";
+		}
 		eval(g_funcaoTip);
 	}
 	//mostra opção sobre o mouse quando está na função pan
@@ -1918,11 +1623,13 @@ function verificaTip()
 				setas += "</tr></table></td>";
 				setas += "<td><img title='leste' src='"+$im("rosaleste.png")+"' onclick=\"panFixo('leste')\" /></td></tr>";
 				setas += "<tr><td "+s+" ></td><td><img title='sul' src='"+$im("rosasul.png")+"' onclick=\"panFixo('sul')\" /></td><td "+s+" ></td></tr></table>";
-				$i("tip").innerHTML = setas;
-				$i("tip").style.top = objposicaocursor.telay - 27;
-				$i("tip").style.left = objposicaocursor.telax - 27;
-				$i("tip").style.display="block";
-				//anim.animate();
+				with($i("tip"))
+				{
+					innerHTML = setas;
+					style.top = objposicaocursor.telay - 27;
+					style.left = objposicaocursor.telax - 27;
+					style.display="block";
+				}
 				mostradicasf('','Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.','');
 				return;
 			}
@@ -2042,10 +1749,13 @@ function legendaGrafico(par)
 		var temp = '<div class="hd">Legenda</div>';
 		temp += '<div class="bd">';
 		temp += '<div id="contemleggr" ></div></div>';
-		novoel.id = "legendagr";
-		novoel.style.display="block";
-		novoel.style.textAlign="left";
-		novoel.innerHTML = temp;
+		with(novoel)
+		{
+			id = "legendagr";
+			style.display="block";
+			style.textAlign="left";
+			innerHTML = temp;
+		}
 		document.body.appendChild(novoel);
 		YAHOO.namespace("legendagr.xp");
 		YAHOO.legendagr.xp.panel = new YAHOO.widget.Panel("legendagr", {width:"250px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
@@ -2065,13 +1775,8 @@ leg - objeto input clicado no mapa
 */
 function inverteStatusClasse(leg)
 {
-	var classe = leg.value;
-	var layer = leg.name;
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inverteStatusClasse&g_sid="+g_sid+"&tema="+layer+"&classe="+classe;
-	var cp = new cpaint();
-	//cp.set_debug(2);
-	cp.set_response_type("json");
-	cp.call(p,"inverteStatusClasse",ajaxredesenha);
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inverteStatusClasse&g_sid="+g_sid+"&tema="+leg.name+"&classe="+leg.value;
+	cpObj.call(p,"inverteStatusClasse",ajaxredesenha);
 }
 /*
 Section: sistemas de busca e navegação
@@ -2119,7 +1824,6 @@ function atualizascielo()
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoscielo"))
 			{
-				//window.parent.frames["wdocai"].buscascielo();
 				$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
 			}
 		}
@@ -2139,7 +1843,6 @@ function atualizaconfluence()
 			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if (docel.getElementById("resultadoconfluence"))
 			{
-				//window.parent.frames["wdocai"].buscaconfluence();
 				$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
 			}
 		}
@@ -2160,7 +1863,6 @@ function atualizawiki()
 			if (docel.getElementById("resultadowiki"))
 			{
 				$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
-				//window.parent.frames["wdocai"].buscawiki();
 			}
 		}
 	}
@@ -2181,7 +1883,6 @@ function procurartemas()
 		var retorno = retorno.data;
 		if ((retorno != "erro") && (retorno != undefined))
 		{
-			//var grupos = retorno.grupo;
 			var ins = "";
 			for (ig=0;ig<retorno.length;ig++)
 			{
@@ -2210,10 +1911,7 @@ function procurartemas()
 		}
 	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2);
-	cp.set_response_type("json");
-	cp.call(p,"procurartemas",resultadoProcurar);
+	cpObj.call(p,"procurartemas",resultadoProcurar);
 }
 /*
 Function: expandeTema
@@ -2357,10 +2055,7 @@ function expandeTema(itemID)
 		g_arvoreClick = itemID;
 		tema = tema[1];
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&template=legenda2.htm&tema="+tema+"&g_sid="+g_sid;
-		var cp = new cpaint();
-		//cp.set_debug(2);
-		cp.set_response_type("JSON");
-		cp.call(p,"criaLegenda",expandeLegendaVer);
+		cpObj.call(p,"criaLegenda",expandeLegendaVer);
 	}
 }
 /*
@@ -2379,10 +2074,7 @@ function expandeGrupo(itemID)
 	{
 		var codigos = itemID.split("_");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&g_sid="+g_sid+"&idmenu="+codigos[3];
-		var cp = new cpaint();
-		//cp.set_debug(2);
-		cp.set_response_type("json");
-		cp.call(p,"pegaListaDeTemas",processaTemas);
+		cpObj.call(p,"pegaListaDeTemas",processaTemas);
 	}
 }
 /*
@@ -2399,10 +2091,7 @@ listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistema
 function pegaListaDeGrupos(idmenu,listasistemas)
 {			
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegaListaDeGrupos",processaGrupos);
+	cpObj.call(p,"pegaListaDeGrupos",processaGrupos);
 }
 /*
 Function: processaGrupos
@@ -2778,10 +2467,7 @@ function remapaf()
 						ajaxredesenha("");					
 					};
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+g_sid;
-					var cp = new cpaint();
-					//cp.set_debug(2);
-					cp.set_response_type("JSON");
-					cp.call(p,"adicionaTema",temp);
+					cpObj.call(p,"adicionaTema",temp);
 				}
 				else
 				{
@@ -2801,10 +2487,7 @@ function remapaf()
 		{
 			objaguarde.abre("remapa","Aguarde...refazendo o mapa");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"ligaDesligaTemas",remapaAdicNovos);
+			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
 		}
 		else{remapaAdicNovos();}
 		objaguarde.fecha("remapa");
@@ -2928,16 +2611,6 @@ exy - objeto evento.
 function capturaposicao(exy)
 {
 	var e = (navn) ? exy : window.event;
-	if (navn)
-	{
-		var storage = e.clientY+window.pageYOffset;
-		var storage1 = e.clientX+window.pageXOffset;
-		calcposf(); 
-		var xfig = e.clientX - imagemxi + pageXOffset;
-		var yfig = e.clientY - imagemyi + pageYOffset;
-		var xreffig = e.clientX - imagemxref + pageXOffset;
-		var yreffig = e.clientY - imagemyref + pageYOffset;
-	}
 	if (navm)
 	{
 		var storage = e.clientY+document.body.scrollTop;
@@ -2947,6 +2620,16 @@ function capturaposicao(exy)
 		var yfig = e.clientY - imagemyi + document.body.scrollTop;
 		var xreffig = e.clientX - imagemxref + document.body.scrollLeft;
 		var yreffig = e.clientY - imagemyref + document.body.scrollTop;
+	}
+	else
+	{
+		var storage = e.clientY+window.pageYOffset;
+		var storage1 = e.clientX+window.pageXOffset;
+		calcposf(); 
+		var xfig = e.clientX - imagemxi + pageXOffset;
+		var yfig = e.clientY - imagemyi + pageYOffset;
+		var xreffig = e.clientX - imagemxref + pageXOffset;
+		var yreffig = e.clientY - imagemyref + pageYOffset;
 	}
 	var teladd = calcddf(xfig,yfig,g_celula,objmapa.extent);
 	var teladms = convdmsf(teladd[0],teladd[1]);
@@ -3093,14 +2776,11 @@ function filmezf(o)
 	var quadro = (o.id).replace("f","");
 	if (quadrosfilme[quadro].extensao != " ")
 	{
-		ext = quadrosfilme[quadro].extensao;
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+ext+"&g_sid="+g_sid;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
 		objaguarde.abre("ajaxredesenha","Aguarde...");
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaExtensao",ajaxredesenha);
+		cpObj.call(p,"mudaExtensao",ajaxredesenha);
 	}
+	else{alert("Extensao nao definida");}
 }
 /*
 Function: filmeanimaf

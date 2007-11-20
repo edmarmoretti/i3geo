@@ -295,6 +295,23 @@ Indica qual guia do mapa iniciará ativa.
 */
 g_guiaativa = "guia1";
 /*
+Variable: g_funcoesClickMapaDefault
+
+Nome das funções padrão que serão executadas quando o usuário clicar no mapa.
+
+As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções, além das padrão, utilizando-se o objeto objmapa.funcoesClickMapa
+
+Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
+*/
+g_funcoesClickMapaDefault = new Array(
+	"cliqueIdentifica()",
+	"cliqueInserexy()",
+	"cliqueInseregrafico()",
+	"cliqueInseretoponimo()",
+	"cliqueSelecao()",
+	"cliqueMede()"
+);
+/*
 Variable: g_listaPropriedades
 
 Objeo com as funções que são incluidas no item propriedades do mapa
@@ -305,7 +322,6 @@ text - texto que serámostrado na tela
 
 url - função que será executada
 */
-
 g_listaPropriedades = {
 	"propriedades": [
 	{ text: "Tipo de imagem", url: "javascript:tipoimagem()" },
@@ -404,20 +420,19 @@ funcaoonclick - funcao que será incluida no onclick
 constroiconteudo - função que ativará a opção. Essa opção atua como a opção conteúdo, porém, executa uma função para preenchimento do div.
 
 */
-
 g_listaFuncoesBotoes = {
 	"botoes": [
 	{
 		//Insere a opção de localização de coordenadas.
 		iddiv:"localizarxy",
 		dica:"Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para o ponto digitado.",
-		conteudo:"localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  title='zoom' onclick='zoomPonto()' src=\"+$im(\"tic.png\")+\" id=procurarxy />",
+		conteudo:"localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  title='zoom' onclick='zoomPonto()' src=\"+$im(\"tic.png\")+\" id=procurarxy />"
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
 		iddiv:"zoomtot",
 		dica:"Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
-		funcaoonclick:function(){zoomtot()}
+		funcaoonclick:function(){zoomtot();}
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom interativo.
@@ -500,7 +515,7 @@ g_listaFuncoesBotoes = {
 		iddiv:"v3d",
 		dica:"Gera arquivo para 3d",
 		funcaoonclick:function()
-		{wdocaf("400px","200px",g_locaplic+"/ferramentas/3d/index.htm","","","3d")}
+		{wdocaf("400px","200px",g_locaplic+"/ferramentas/3d/index.htm","","","3d");}
 	},
 	{
 		//Ativa o botão que realiza a operação de de busca no Google
@@ -595,5 +610,5 @@ g_listaFuncoesBotoes = {
 		//ativa as opções de busca rápida
 		iddiv:"buscaRapida",
 		constroiconteudo:'ativaBuscaRapida("buscaRapida")'
-	}	
+	}
 ]};

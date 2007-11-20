@@ -31,6 +31,7 @@ for (var i = 0; i < scripts.length; i++) {
 }
 var allScriptTags = "";
 var jsfiles = new Array(
+"configura.js",
 "../pacotes/yui231/build/yahoo/yahoo-min.js",
 "../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui231/build/dom/dom-min.js",
@@ -53,7 +54,6 @@ var jsfiles = new Array(
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
-"configura.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js"
 );
 for (var i = 0; i < jsfiles.length; i++)
