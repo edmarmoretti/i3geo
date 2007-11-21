@@ -75,7 +75,7 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="")
 	{
-		$this->perfil = $perfil;
+		$this->perfil = explode(",",$perfil);
 		$this->xmlsistemas = "";
 		if ($locsistemas != "")
 		$this->xmlsistemas = simplexml_load_file($locsistemas);		
@@ -113,7 +113,7 @@ array
 		{
 			$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
 			$perfis = explode(",",$ps);
-			if ((in_array($this->perfil,$perfis)) || ($ps == ""))
+			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 			{
 				$n = mb_convert_encoding($s->NOME,"HTML-ENTITIES","auto");
 				$i = mb_convert_encoding($s->IMAGEM,"HTML-ENTITIES","auto");
@@ -193,7 +193,7 @@ array
 			{
 				$incluigrupo = FALSE;
 				$perfis = explode(",",$temp);
-				if (in_array($this->perfil,$perfis))
+				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
 			//verifica se existem temas no nível de grupo
@@ -223,7 +223,7 @@ array
 					{
 						$incluisgrupo = FALSE;
 						$perfis = explode(",",$temp);
-						if (in_array($this->perfil,$perfis))
+						if ($this->array_in_array($this->perfil,$perfis))
 						{$incluisgrupo = TRUE;}
 					}
 					if ($incluisgrupo == TRUE)
@@ -257,7 +257,7 @@ array
 				$nomesis = mb_convert_encoding($s->NOMESIS,"HTML-ENTITIES","auto");
 				$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
 				$perfis = explode(",",$ps);
-				if ((in_array($this->perfil,$perfis)) || ($ps == ""))
+				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
 					$funcoes = array();
 					foreach($s->FUNCAO as $f)
@@ -267,7 +267,7 @@ array
 						$w = mb_convert_encoding($f->JANELAW,"HTML-ENTITIES","auto");
 						$h = mb_convert_encoding($f->JANELAH,"HTML-ENTITIES","auto");
 						$p = mb_convert_encoding($f->PERFIL,"HTML-ENTITIES","auto");
-						if ((in_array($this->perfil,$perfis)) || ($p == ""))
+						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
 						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
 					}
 					$sistemas[] =  array("NOME"=>$nomesis,"FUNCOES"=>$funcoes);
@@ -320,7 +320,7 @@ array
 			{
 				$incluigrupo = FALSE;
 				$perfis = explode(",",mb_convert_encoding($g->PERFIL,"HTML-ENTITIES","auto"));
-				if (in_array($this->perfil,$perfis))
+				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
 			if ($incluigrupo == TRUE)
@@ -335,7 +335,7 @@ array
 						{
 							$incluisgrupo = FALSE;
 							$perfis = explode(",",mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto"));
-							if (in_array($this->perfil,$perfis))
+							if ($this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = TRUE;}
 						}
 						if ($incluisgrupo == TRUE)
@@ -350,7 +350,7 @@ array
 										
 										$inclui = FALSE;
 										$perfis = explode(",",mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto"));
-										if (in_array($this->perfil,$perfis))
+										if ($this->array_in_array($this->perfil,$perfis))
 										{$inclui = TRUE;}
 									}
 									if ($inclui == TRUE)
@@ -406,7 +406,7 @@ $procurar - String que será procurada.
 			{
 				$incluigrupo = FALSE;
 				$perfis = explode(",",$temp);
-				if (in_array($this->perfil,$perfis))
+				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
 			if ($incluigrupo == TRUE)
@@ -418,7 +418,7 @@ $procurar - String que será procurada.
 					{
 						$temp = mb_convert_encoding($sgrupo->PERFIL,"HTML-ENTITIES","auto");
 						$perfis = explode(",",$temp);
-						if (!in_array($this->perfil,$perfis))
+						if (!$this->array_in_array($this->perfil,$perfis))
 						{$incluisgrupo = FALSE;}
 					}
 					if ($incluisgrupo == TRUE)
@@ -430,7 +430,7 @@ $procurar - String que será procurada.
 							{
 								$temp = mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto");
 								$perfis = explode(",",$temp);
-								if (!in_array($this->perfil,$perfis))
+								if (!$this->array_in_array($this->perfil,$perfis))
 								{$inclui = FALSE;}
 							}
 							if ($inclui == TRUE)
@@ -495,6 +495,22 @@ $procurar - String que será procurada.
 		$s = str_replace("Ç","C",$s);
 		//$s = ereg_replace(" ","",$s); 
 		return $s;
-	}	
+	}
+	/*
+	Function: array_in_array
+
+	Procura ocorrências de um array em outro array
+	*/
+	function array_in_array($needle, $haystack)
+	{
+    	//Make sure $needle is an array for foreach
+    	if(!is_array($needle)) $needle = array($needle);
+    	//For each value in $needle, return TRUE if in $haystack
+    	foreach($needle as $pin)
+        	if(in_array($pin, $haystack)) return TRUE;
+    	//Return FALSE if none of the values from $needle are found in $haystack
+    	return FALSE;
+	}
+	
 }
 ?>
