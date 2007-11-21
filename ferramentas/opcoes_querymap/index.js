@@ -29,23 +29,30 @@ YAHOO.example.init = function ()
 	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
 //pega a cor atual
+aguarde("block")
 var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=pegaquerymapcor"
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");
 var retorno = function(retorno)
-{$i("cor").value = retorno.data;}
+{$i("cor").value = retorno.data;aguarde("none")}
 cp.call(p,"corQM",retorno);
 
 function mudacor()
 {
+	var temp = function()
+	{
+		aguarde("none")
+		window.parent.ajaxredesenha("")
+	}
+	aguarde("block")
 	var cor = $i("cor").value
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=querymapcor&cor="+cor
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	cp.call(p,"corQM",window.parent.ajaxredesenha);
+	cp.call(p,"corQM",temp);
 }
 //abre a paleta de cores
 function cor(obj)

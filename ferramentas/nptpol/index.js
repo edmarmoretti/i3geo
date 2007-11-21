@@ -98,6 +98,5 @@ function cruza()
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	window.parent.borra("sim");
 	cp.call(p,"nptPol",fim);
 }

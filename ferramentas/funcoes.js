@@ -34,14 +34,7 @@ if (!$i("mascaraaguarde"))
 {
 	if (navm){var s = "filter:'alpha(opacity=20)'";}
 	if (navn){var s = "opacity:.2'";}
-	document.body.innerHTML += "<div id=mascaraaguarde style=display:none;position:absolute;top:0px;left:0px;width:100%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >&nbsp;</div>";
-}
-
-reduzAltura = 30;
-for (i=0;i<7;i++)
-{
-	if (document.getElementById("guia"+i))
-	{reduzAltura = 50;}
+	document.body.innerHTML += "<div id=mascaraaguarde style=display:none;position:absolute;top:0px;left:0px;width:120%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >&nbsp;</div>";
 }
 if (navn)
 {
@@ -65,7 +58,7 @@ else
 	}
 	if (document.getElementById("geral"))
 	{
-		document.getElementById("geral").style.height = "90%";
+		document.getElementById("geral").style.height = "95%";
 		document.getElementById("geral").style.width = "100%";
 	}
 }
@@ -693,7 +686,6 @@ function parametrosURL()
 function zoomf(ext)
 {
 	//faz um zoom na ocorrencia
-	window.parent.borra("sim");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=mudaext&ext="+ext;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -707,7 +699,6 @@ function pinf(ext)
 	valores = ext.split(" ");
 	vx = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
 	vy = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);
-	window.parent.borra("sim");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=zoomponto&pin=pin&xy="+ vx + " " + vy;
 	var cp = new cpaint();
 	//cp.set_debug(2)

@@ -311,7 +311,7 @@ $tipo - tipo de layer que será considerado. Default é 0.
 		//pega o nome correto do tema
 		foreach ($layers as $layer)
 		{
-			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer)));
+			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
 		}
 		return $final;
 	}
@@ -359,7 +359,7 @@ nome
 		$final = array();
 		foreach ($layers as $layer)
 		{
-			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer)));
+			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
 		}
 		return $final;
 	}
@@ -406,7 +406,7 @@ nome
 		{
 			if (!(array_search(($layer->type),$tipos) === FALSE))
 			{
-				$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer)));
+				$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
 			}
 		}
 		return $final;
@@ -450,7 +450,7 @@ nome
 				$res_count = $layer->getNumresults();
 				if ($res_count > 0)
 				{
-				 	$nometmp = pegaNome($layer);
+				 	$nometmp = pegaNome($layer,"UTF-8");
 					$final[] = array("tema"=>$layer->name,"nome"=>$nometmp);
 				}
 			}

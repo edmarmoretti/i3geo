@@ -55,6 +55,12 @@ function inicia(retorno)
 }
 function executa()
 {
+	var temp = function()
+	{
+		aguarde("none")
+		window.parent.ajaxredesenha("")
+	}
+	aguarde("block")
 	var w = $i("w").value
 	var h = $i("h").value
 	var estilo = $i("estilo").value
@@ -67,7 +73,7 @@ function executa()
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"mudaEscalaGrafica",window.parent.ajaxredesenha);
+	cp.call(p,"mudaEscalaGrafica",temp);
 }
 //abre a paleta de cores
 function corj(obj)

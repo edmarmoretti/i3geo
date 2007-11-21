@@ -246,7 +246,6 @@ function valorU()
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	//window.parent.borra("sim");
 	cp.call(p,"alteraclasse",fim);
 }
 function simbU()
@@ -262,7 +261,6 @@ function simbU()
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	//window.parent.borra("sim");
 	cp.call(p,"alteraclasse",fim);
 }
 function valorC()
@@ -282,7 +280,6 @@ function valorC()
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	//window.parent.borra("sim");
 	cp.call(p,"alteraclasse",fim);
 }
 function valorQ()
@@ -302,7 +299,6 @@ function valorQ()
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	//window.parent.borra("sim");
 	cp.call(p,"alteraclasse",fim);
 }
 function representacao()
@@ -318,7 +314,6 @@ function representacao()
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
-	//window.parent.borra("sim");
 	cp.call(p,"alteraRepresentacao",fim);
 }
 function mudaLegenda()

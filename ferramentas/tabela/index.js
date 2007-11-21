@@ -310,7 +310,6 @@ function limpaself()
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	window.parent.borra("sim");
 	cp.call(p,"selecaoLimpa",concluidof);
 }
 //limpa a lista de elementos selecionados

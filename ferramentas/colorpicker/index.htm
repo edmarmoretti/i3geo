@@ -14,21 +14,22 @@ body {
 <script type="text/javascript" src="../../pacotes/yui231/build/slider/slider.js"></script>
 <script type="text/javascript" src="../../pacotes/yui231/build/colorpicker/colorpicker-beta.js"></script>
 <style type="text/css">
-  #container { position: relative; padding: 6px; width: 340px; height:180px; }
+  #container { position: relative; padding: 6px; width: 360px; height:190px; }
 </style>
 </head>
 <body class="yui-skin-sam">
 <div id="container">
 </div>
-<button class=executar onclick="aplicarCor()" size="10" >aplicar</button>
+<button onclick="aplicarCor()" size="10" >aplicar</button>
 
 
 <script type="text/javascript">
-(function() {
-    var Event = YAHOO.util.Event,
-        picker;
-
-    Event.onDOMReady(function() {
+(function()
+{
+	var Event = YAHOO.util.Event,picker;
+    Event.onDOMReady(
+    	function()
+    	{
 			YAHOO.log("Criando....", "info", "example");
             picker = new YAHOO.widget.ColorPicker("container", {
                     showhsvcontrols: true,
@@ -40,8 +41,7 @@ body {
                 });
 			//a listener for logging RGB color changes;
 			//this will only be visible if logger is enabled:
-			var onRgbChange = function(o) {
-				
+			var onRgbChange = function(o) {		
 			}
 			//subscribe to the rgbChange event;
 			picker.on("rgbChange", onRgbChange);
@@ -49,8 +49,7 @@ body {
 			Event.on("reset", "click", function(e) {
 				picker.setValue([255, 255, 255], false); //false here means that rgbChange
 													     //wil fire; true would silence it
-			});
-			
+			});		
 			//use the "get" method to get the current value
 			//of one of the Color Picker's properties; in 
 			//this case, we'll get the hex value and write it

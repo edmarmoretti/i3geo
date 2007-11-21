@@ -318,7 +318,7 @@ Objeo com as funções que são incluidas no item propriedades do mapa
 
 Parameters:
 
-text - texto que serámostrado na tela
+text - texto que será mostrado na tela
 
 url - função que será executada
 */
@@ -368,23 +368,6 @@ oMenuData = {
 	{ text: "Distribui&ccedil;&atilde;o de pontos", url: "javascript:pontosdistri()" }
 	]
 };
-//
-//se o div listapropriedades não existir, as propriedades do mapa são incluídas no menu suspenso
-//
-if (!$i("listaPropriedades"))
-{
-	oMenuData.propriedades = [
-	{ text: "Tipo de imagem", url: "javascript:tipoimagem()" },
-	{ text: "Legenda", url: "javascript:opcoesLegenda()" },
-	{ text: "Escala", url: "javascript:opcoesEscala()" },
-	{ text: "Tamanho", url: "javascript:tamanho()" },
-	{ text: "Ativa/desativa entorno", url: "javascript:ativaEntorno()" },
-	{ text: "Ativa/desativa logo", url: "javascript:ativaLogo()" },
-	{ text: "Cor da selecao", url: "javascript:queryMap()" },
-	{ text: "Cor do fundo", url: "javascript:corFundo()" },
-	{ text: "Grade de coordenadas", url: "javascript:gradeCoord()" }
-	];
-}
 oMenuData.janelas = [
 	{ text: "Barras de ferramentas", url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
 	{ text: "Janela de mensagens", url: "javascript:initJanelaMen()" }        

@@ -69,6 +69,12 @@ $i("executar").onclick = function()
 	{alert("selecione um item");aguarde("none");}
 	else
 	{
+		aguarde("block")
+		var temp = function()
+		{
+			aguarde("none")
+			window.parent.remapaf()
+		}	
 		var f = $i("fonte_i").value
 		var t = $i("tamanho_i").value
 		var a = $i("angulo_i").value
@@ -96,7 +102,7 @@ $i("executar").onclick = function()
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"criaToponimia",window.parent.remapaf);
+		cp.call(p,"criaToponimia",temp);
 	}
 }
 function testa()

@@ -247,13 +247,13 @@ function corE($label,$cor,$elemento)
 		{
 			$corres = $label->$elemento;
 			$cori = explode(" ",$cor);
-			$corres->setRGB($cor[0],$cor[1],$cor[2]);
+			$corres->setRGB($cori[0],$cori[1],$cori[2]);
 		}
 		if (count(explode(",",$cor)) == 3)
 		{
 			$corres = $label->$elemento;
-			$cori = explode(" ",$cor);
-			$corres->setRGB($cor[0],$cor[1],$cor[2]);
+			$cori = explode(",",$cor);
+			$corres->setRGB($cori[0],$cori[1],$cori[2]);
 		}
 	}
 	else
@@ -1199,8 +1199,10 @@ Retorna o nome correto de um layer
 
 parameters:
 $layer - Objeto layer
+
+$enc - Código de página para conversão de caracteres
 */
-function pegaNome($layer)
+function pegaNome($layer,$enc="AUTO")
 {
 	$nometmp = $layer->name;
 	if (strtoupper($layer->getMetaData("TEMA")) != "NAO")
@@ -1208,7 +1210,9 @@ function pegaNome($layer)
 	else if ($layer->getMetaData("ALTTEMA") != "")
 	{$nometmp = $layer->getMetaData("ALTTEMA");}
 	if (function_exists("mb_convert_encoding"))
-	{$nometmp = mb_convert_encoding($nometmp,"UTF-8","ISO-8859-1");}
+	{
+		$nometmp = mb_convert_encoding($nometmp,$enc,"ISO-8859-1");
+	}
 	return $nometmp;
 }
 /*

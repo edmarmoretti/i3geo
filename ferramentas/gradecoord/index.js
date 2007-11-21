@@ -36,12 +36,17 @@ function executa()
 	{alert("Entre com a distância entre os pontos")}
 	else
 	{
+		var temp = function()
+		{
+			aguarde("none")
+			window.parent.ajaxredesenha("")
+		}
+		aguarde("block")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=gradeCoord"
 		p += "&intervalo="+$i("intervalo").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		window.parent.borra("sim");
-		cp.call(p,"gradeCoord",window.parent.ajaxredesenha);
+		cp.call(p,"gradeCoord",temp);
 	}
 }

@@ -88,7 +88,20 @@ function cliqueInseregrafico()
 		if (tema == ""){alert("Nenhum tema definido para pegar os dados");}
 		else
 		{
-			var itens = doc.getElementById("listadeitens").value;;
+			//pega os itens e as cores definidas
+			var listadeitens = new Array();
+			var g = doc.getElementById("listai");
+			var iguias = g.getElementsByTagName("input");
+			for (i=0;i<iguias.length; i++)
+			{
+				if (iguias[i].checked == true)
+				{
+					var it = iguias[i].id;
+					var c = doc.getElementById("cor"+it).value;
+					listadeitens.push(it+","+c);
+				}
+			}
+			var itens = listadeitens.join("*");
 			if (itens == "")
 			{alert("Nenhum item foi escolhido");}
 			else
@@ -116,7 +129,6 @@ function cliqueInseretoponimo()
 		{textofid();}
 		var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 		var texto = doc.getElementById("texto").value;
-		texto = htmlAcentos(texto);
 		var f = doc.getElementById("fonte").value;
 		var t = doc.getElementById("tamanho").value;
 		var a = doc.getElementById("angulo").value;
@@ -296,7 +308,7 @@ Function: tipoimagem
 Define um filtro sobre a imagem gerada alterando susas características
 */
 function tipoimagem()
-{wdocaf("300px","200px",g_locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");}
+{wdocaf("300px","220px",g_locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");}
 /*
 Function: corFundo
 
@@ -333,8 +345,6 @@ function destacaTema(tema)
 	g_destaca = tema;
 	var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"geraDestaque",ajaxdestaca);
-	if ($i("img"))
-	{$i("img").title = "utilize as teclas +- para mudar o tamanho do destaque";}
 }
 /*
 Function: excluitemaf
@@ -800,7 +810,7 @@ janela - id da janela que disparou a janela de cores
 elemento - elemento da janela que receberá os valores de cor selecionada
 */
 function abreCor(janela,elemento)
-{wdocaf2("380px","220px",g_locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor");}
+{wdocaf2("390px","230px",g_locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor");}
 /*
 Function: editaLegenda
 
@@ -973,12 +983,12 @@ function lenteDeAumento()
 		novoel.id = 'boxlente';
 		document.body.appendChild(novoel);
 	}
-	with($i(id).style){borderWidth='1' + g_postpx;borderColor="red";}
+	with($i('boxlente').style){borderWidth='1' + g_postpx;borderColor="red";}
 	if (g_lenteaberta == "sim")
 	{
 		$i("lente").style.display = "none";
 		$i("boxlente").style.display = "none";
-		$i(id).style.borderWidth = 0;
+		$i('boxlente').style.borderWidth = 0;
 		g_lenteaberta = "nao";
 	}
 	else
@@ -1015,8 +1025,6 @@ function pegaimagens()
 				wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrang&eacute;ncia: "+quadrosfilme[i].extensao+"<br>");
 				wi.document.write("<img src="+quadrosfilme[i].imagem+">");
 				wi.document.write("<img src="+quadrosfilme[i].referencia+">");
-				//wi.document.write("<img src="+quadrosfilme[i].legenda+">");
-				//wi.document.write("<img src="+quadrosfilme[i].escala+"><br>");
 				mensagem = "<br>Fim"
 			}
 		}

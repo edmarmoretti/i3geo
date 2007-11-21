@@ -54,10 +54,12 @@ Group: Programas especiais  {
       File: Lista de mapas  (menutemas\mapas.xml)
       File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
       File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
+      File: Lista de serviços wms  (menutemas\servicoswms.xml)
       File: Lista de sistemas.  (menutemas\sistemas.xml)
       File: Menu de temas  (menutemas\menutemas.xml)
       }  # Group: Menutemas
 
+   File: Registra o IP do usuário para criação do mapa de visitantes.  (ms_registraip.php)
    File: Testa a instalação do I3Geo.  (testainstal.php)
    File: Testa um mapfile.  (testamapfile.php)
    }  # Group: Programas especiais
@@ -79,10 +81,12 @@ Group: Programas frontend - diretório classesjs  {
    File: Administração de mapfiles  (classesjs\i3geoadmin.js)
    File: Carrega os scripts do i3geo.  (classesjs\i3geo.js)
    File: Cliente de web service  (classesjs\wscliente.js)
+   File: Configuração da interface.  (classesjs\configura.js)
    File: DataDownLoad  (classesjs\datadownload.js)
    File: Ferramentas  (classesjs\ferramentas.js)
    File: Ferramentas da interface de administração  (classesjs\ferramentasadmin.js)
    File: Funções gerais  (classesjs\funcoes.js)
+   File: Funções gerais  (classesjs\temp.js)
    File: Inicialização do i3geo.  (classesjs\iniciamma.js)
    File: Menu suspenso  (classesjs\menususpenso.js)
    File: Redesenho  (classesjs\redesenho.js)

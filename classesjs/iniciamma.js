@@ -241,6 +241,13 @@ objmapa = New Mapa()
 */
 function Mapa(e,m)
 {
+	//
+	//se o div listapropriedades não existir, as propriedades do mapa são incluídas no menu suspenso
+	//
+	if (!$i("listaPropriedades"))
+	{
+		oMenuData.propriedades = g_listapropriedades;
+	}
 	objaguarde = new aguarde();
 	objposicaocursor = new posicaocursor();
 	objposicaomouse = new posicaomouse();
@@ -957,6 +964,7 @@ function Mapa(e,m)
 				style.width = "0px";
 				style.height = "0px";
 				id = "box1";
+				display = "none";
 			}
 			document.body.appendChild(novoel);
 			if (navm)
@@ -969,8 +977,10 @@ function Mapa(e,m)
 				var hb = parseInt($i("box1").style.height);
 				if (navm)
 				{
-					$i("box1").style.width = wb - 2;
-					$i("box1").style.height = hb - 2;
+					if(wb > 2)
+					{$i("box1").style.width = wb - 2;}
+					if(hb > 2)
+					{$i("box1").style.height = hb - 2;}
 				}
 				else
 				{

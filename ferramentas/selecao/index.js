@@ -203,7 +203,6 @@ function operacao(tipo)
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		window.parent.g_operacao = "selecao"
-		window.parent.borra("sim");
 		cp.call(p,"selecaoPT",fim);
 	}
 }

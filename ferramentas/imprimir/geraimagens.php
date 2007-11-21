@@ -31,6 +31,7 @@ require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
 
 $temp = str_replace(".map","xxx.map",$map_file);
+$map = ms_newMapObj($map_file);
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);

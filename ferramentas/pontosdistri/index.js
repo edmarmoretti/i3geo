@@ -62,7 +62,6 @@ comboTemasPt("temasPt",function(retorno)
 
 function vercores()
 {
-	//window.parent.borra("sim")
 	var n = $i("numclasses").value
 	var ci = $i("cori").value
 	var cf = $i("corf").value
@@ -90,7 +89,6 @@ function corj(obj)
 
 function analiseKernel()
 {
-	//window.parent.borra("sim")
 	var n = $i("numclasses").value
 	var ci = $i("cori").value
 	var cf = $i("corf").value
@@ -110,7 +108,6 @@ function analiseKernel()
 
 function analiseDensidade()
 {
-	//window.parent.borra("sim")
 	var n = $i("numclasses").value
 	var ci = $i("cori").value
 	var cf = $i("corf").value
@@ -129,7 +126,6 @@ function analiseDensidade()
 }
 function analiseDistancia()
 {
-	//window.parent.borra("sim")
 	var n = $i("numclasses").value
 	var ci = $i("cori").value
 	var cf = $i("corf").value
@@ -148,7 +144,6 @@ function analiseDistancia()
 }
 function analiseRelatorio()
 {
-	//window.parent.borra("sim")
 	var n = $i("numclasses").value
 	var ci = $i("cori").value
 	var cf = $i("corf").value

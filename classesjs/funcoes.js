@@ -468,18 +468,17 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 	{$i("boxg").style.display = "none";}
 	var wlargura_ = parseInt(wlargura)+0+"px";
 	YAHOO.namespace("janelaDoca.xp");
-	if (!$i("wdoca"))
+	if ($i("wdoca"))
+	{YAHOO.janelaDoca.xp.panel.destroy();}
+	var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
+	var novoel = document.createElement("div");
+	with(novoel)
 	{
-		var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
-		var novoel = document.createElement("div");
-		with(novoel)
-		{
-			id = "wdoca";
-			style.display="block";
-			innerHTML = ins;
-		}
-		document.body.appendChild(novoel);
+		id = "wdoca";
+		style.display="block";
+		innerHTML = ins;
 	}
+	document.body.appendChild(novoel);
 	if ($i("wdocai"))
 	{
 		with ($i("wdocai").style){width = "100%";height=waltura;};
@@ -810,11 +809,11 @@ function ativaClicks(docMapa)
 			capturaposicao(exy);
 			if (g_destaca != "")
 			{$i("imgh").style.display="none";$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
-			if (g_realca == "sim")
-			{
-				$i("areaRealce").style.left = objposicaocursor.telax - destacaTamanho + 10;
-				$i("areaRealce").style.top = objposicaocursor.telay - destacaTamanho + 10;
-			}
+			//if (g_realca == "sim")
+			//{
+			//	$i("areaRealce").style.left = objposicaocursor.telax - destacaTamanho + 10;
+			//	$i("areaRealce").style.top = objposicaocursor.telay - destacaTamanho + 10;
+			//}
 			if ($i("img") && (g_panM == "sim"))
 			{
 				var nx = objposicaocursor.telax - leftinicial - clicinicialx;
@@ -912,7 +911,7 @@ function ativaClicks(docMapa)
 			// inicia retÃ¯Â¿Â½gulo de zoom
 			$i("imgh").style.display="none";
 			with($i("box1").style)
-			{width=0;height=0;visibility="visible";}
+			{width=0;height=0;visibility="visible";display="none"}
 			boxxini = objposicaocursor.telax;
 			boxyini = objposicaocursor.telay;
 			tamanhox = 0;
@@ -976,10 +975,8 @@ qual - Qual janela (1 ou 2)
 function initJanelaZoom(qual)
 {
 	//janela de botoes 1
-	if(navn){var wj = "36px";}
-	else{var wj = "36px";}
-	if(navn){var recuo = "0px";}
-	else{var recuo = "0px";}	
+	var wj = "36px";
+	var recuo = "0px";
 	if ((qual == 1) && (!$i("maisBotoes1")))
 	{
 		var novoel = document.createElement("div");
@@ -1152,7 +1149,7 @@ function initJanelaRef()
 		YAHOO.janelaRef.xp.panel.destroy();	
 		iCookie("g_mapaRefDisplay","none");	
 	};
-	YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+	//YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
 	iCookie("g_mapaRefDisplay","block");
 	objmapa.atualizaReferencia();
 }
@@ -1265,14 +1262,18 @@ function zoomboxf (tipo)
 	{
 		case "desloca":
 		// muda o retï¿½gulo de zoom conforme deslocamento do mouse
+		bx.style.display="block";
 		ppx = objposicaocursor.telax;
 		py = objposicaocursor.telay;
 		if (navm)
 		{
-			if (ppx > boxxini)
+			if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
 			{with(bx.style){width = ppx - boxxini - 2;}}
-			if (py > boxyini)
-			{with(bx.style){height = py - boxyini - 2;}}
+			if ((py > boxyini) && ((py - boxyini - 2) > 0))
+			{
+				with(bx.style)
+				{height = py - boxyini - 2;}
+			}
 			if (ppx < boxxini)
 			{with(bx.style){left = ppx;width = boxxini - ppx + 2;}}
 			if (py < boxyini)
@@ -1877,9 +1878,11 @@ Localiza um tema no menu de temas.
 */
 function procurartemas()
 {
-	var procurar = document.getElementById("buscatema").value;
+	var procurar = removeAcentos(document.getElementById("buscatema").value);
 	var resultadoProcurar = function(retorno)
 	{
+		if(!retorno.data)
+		{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";return;}
 		var retorno = retorno.data;
 		if ((retorno != "erro") && (retorno != undefined))
 		{
@@ -3453,12 +3456,9 @@ function ativaDragDrop()
                 		if(DDM.getDDById(id).id == "lixeira")
                 		{
                 			var tema = (this.getEl()).id.split("arrastar_")[1];
-                			//objaguarde.abre("ajaxredesenha","Aguarde...");
+                			objaguarde.abre("ajaxredesenha","Aguarde...");
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
-							var cp = new cpaint();
-							//cp.set_debug(2)
-							cp.set_response_type("JSON");
-							cp.call(p,"excluiTemas",ajaxredesenha);
+							cpObj.call(p,"excluiTemas",ajaxredesenha);
 							objmapa.temaAtivo = "";
 						}
 						//muda ordem de desenho do tema
@@ -3511,6 +3511,31 @@ function ativaDragDrop()
 		}
 	);
 	Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
+}
+/*
+Function: removeAcentos
+
+Remove acentos de uma palavra ou frase
+
+Parameters:
+
+palavra -
+*/
+function removeAcentos(palavra)
+{
+	var re = /ã|á|à|â/gi;
+	palavra = palavra.replace(re,"a");
+	var re = /é/gi;
+	palavra = palavra.replace(re,"e");
+	var re = /í/gi;
+	palavra = palavra.replace(re,"i");
+	var re = /ó|õ/gi;
+	palavra = palavra.replace(re,"o");
+	var re = /ç/gi;
+	palavra = palavra.replace(re,"c");
+	var re = /ú/gi;
+	palavra = palavra.replace(re,"u");
+	return(palavra);
 }
 //testa se esse script foi carregado
 function testafuncoes()
