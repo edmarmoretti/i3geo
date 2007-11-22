@@ -859,7 +859,7 @@ Include:
 		$layer->setmetadata("wms_exceptions_format","application/vnd.ogc.se_xml");
 		$layer->setmetadata("wms_style",$nome);
 		$layer->setmetadata("wms_connectiontimeout","30");
-		$layer->setmetadata("wms_force_separate_request"," 1");
+		$layer->setmetadata("wms_force_separate_request","1");
 		if (($tiporep != "") && ($suportasld == "sim"))
 		{
 			$layer->setmetadata("wms_sld_url",$imgurl.$layer->name."sld.xml");
@@ -886,6 +886,7 @@ Include:
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
 		ms_newLayerObj($this->mapa, $layer);
+		$this->salva();
 	}
 /*
 Method: converteWS
