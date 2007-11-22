@@ -42,10 +42,17 @@ function mostraDownload(retorno)
 		for (arq=0;arq<arqs.length;arq++)
 		{
 			var temp = arqs[arq].split(".");
-			arqs[arq] = temp[0];
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shp'>"+arqs[arq]+".shp<br>"
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".dbf'>"+arqs[arq]+".dbf<br>"
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shx'>"+arqs[arq]+".shx<br><br>"
+			if ((temp[1] == "png") || (temp[1] == "tif") || (temp[1] == "wld"))
+			{
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+"'>"+arqs[arq]+"<br>"
+			}
+			else
+			{
+				arqs[arq] = temp[0];
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shp'>"+arqs[arq]+".shp<br>"
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".dbf'>"+arqs[arq]+".dbf<br>"
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shx'>"+arqs[arq]+".shx<br><br>"
+			}
 		}
 		$i("resultado").innerHTML = ins
 	}

@@ -1434,31 +1434,43 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	{
 		$l = $map->getlayerbyname($tema);
 		$dados = $l->data;
-		$sp = $map->shapepath;
-		$arq = "";
-		if (file_exists($dados))
-		{$arq = $dados;}
-		if (file_exists($dados.".shp"))
-		{$arq = $dados.".shp";}
-		if (file_exists($sp.$dados.".shp"))
-		{$arq = $sp.$dados.".shp";}
-		if (file_exists($sp.$dados))
-		{$arq = $sp.$dados;}
-		if ($arq != "")
+		if($l->type == MS_LAYER_RASTER)
 		{
-			//$diretorio = dirname($map_file);
-			$novonomelayer = nomeRandomico(20);
-			$nomeshp = $dir_tmp."/".$novonomelayer;
-			$arq = explode(".shp",$arq);
-			copy($arq[0].".shp",$nomeshp.".shp");
-			copy($arq[0].".shx",$nomeshp.".shx");
-			copy($arq[0].".dbf",$nomeshp.".dbf");
-			$resultado[] = str_replace($radtmp,"",$nomeshp);
+			if (file_exists($dados))
+			{
+				$arq = basename($dados);
+				$resultado[] = str_replace("/img","/",$map->web->imageurl).$arq;
+				$arq = explode(".",$arq);
+				$resultado[] = str_replace("/img","/",$map->web->imageurl).$arq[0].".wld";
+			}
 		}
 		else
 		{
-			$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp);
-			$resultado[] = str_replace($radtmp,"",$restemp);
+			$sp = $map->shapepath;
+			$arq = "";
+			if (file_exists($dados))
+			{$arq = $dados;}
+			if (file_exists($dados.".shp"))
+			{$arq = $dados.".shp";}
+			if (file_exists($sp.$dados.".shp"))
+			{$arq = $sp.$dados.".shp";}
+			if (file_exists($sp.$dados))
+			{$arq = $sp.$dados;}
+			if ($arq != "")
+			{
+				$novonomelayer = nomeRandomico(20);
+				$nomeshp = $dir_tmp."/".$novonomelayer;
+				$arq = explode(".shp",$arq);
+				copy($arq[0].".shp",$nomeshp.".shp");
+				copy($arq[0].".shx",$nomeshp.".shx");
+				copy($arq[0].".dbf",$nomeshp.".dbf");
+				$resultado[] = str_replace($radtmp,"",$nomeshp);
+			}
+			else
+			{
+				$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp);
+				$resultado[] = str_replace($radtmp,"",$restemp);
+			}
 		}
 	}
 	return(implode(",",$resultado));

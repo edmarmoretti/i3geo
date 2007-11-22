@@ -194,6 +194,7 @@ Include:
 			$novolayer = criaLayer($this->mapa,MS_LAYER_RASTER,MS_DEFAULT,($tipo." (".$this->nome.")"),$metaClasse="SIM");
 			$novolayer->set("data",$nomearq.".png");
 			$novolayer->set("template","none.htm");
+			$novolayer->setmetadata("download","sim");
 			//classes
 			$numclassesatual = $novolayer->numclasses;
 			for ($i=0; $i < $numclassesatual; $i++)
