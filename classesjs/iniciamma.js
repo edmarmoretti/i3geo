@@ -246,7 +246,7 @@ function Mapa(e,m)
 	//
 	if (!$i("listaPropriedades"))
 	{
-		oMenuData.propriedades = g_listapropriedades;
+		oMenuData.propriedades = g_listaPropriedades;
 	}
 	objaguarde = new aguarde();
 	objposicaocursor = new posicaocursor();

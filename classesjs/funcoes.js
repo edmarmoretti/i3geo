@@ -353,10 +353,24 @@ function ativaGuias()
 	for(g=0;g<12;g++)
 	{
 		if ($i("guia"+g))
-		{ins += '<li><a href="#"><em><div id="guia'+g+'" >'+$i("guia"+g).innerHTML+'</div></em></a></li>';}
+		{
+			var tituloguia = $i("guia"+g).innerHTML;
+			var re = new RegExp("&nbsp;", "g");
+			var tituloguia = tituloguia.replace(re,'');
+			ins += '<li><a href="#"><em><div id="guia'+g+'" >'+tituloguia+'</div></em></a></li>';
+		}
 	}
 	ins += "</ul>";
 	gpai.innerHTML = ins;
+	for(g=0;g<12;g++)
+	{
+		if ($i("guia"+g))
+		{
+			eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
+			$i("guia"+g+"obj").style.overflow="auto";
+			$i("guia"+g+"obj").style.height = objmapa.h;
+		}
+	}
 	//guias
 	if ($i(objmapa.guiaTemas))
 	{
@@ -3537,6 +3551,9 @@ function removeAcentos(palavra)
 	palavra = palavra.replace(re,"u");
 	return(palavra);
 }
+//Mantido aqui apenas para fins de compatibilidade
+function borra()
+{}
 //testa se esse script foi carregado
 function testafuncoes()
 {}
