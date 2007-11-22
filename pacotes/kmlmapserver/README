@@ -1,0 +1,92 @@
+KML mapserver wrapper
+-------------------------------------
+
+* What is this thing?
+  this is a wrapper around UNM Mapserver, to serve KML data in a WFS-like manner
+
+* Requirements
+  PHP5 with simplexml
+
+* Configuration
+  Configuration is done through CGI-style calls and through some optional metadata in the mapfile
+
+  METADATA:
+  RESULT_FIELDS                # from which field take the name for the feature
+                               # defaults to the first field
+
+  DESCRIPTION_TEMPLATE         # if present, this is used for placemark features
+                               # tooltip. Parameters surrounded by "%" char are substituted
+                               # with real values from the corresponding field for the feature
+
+  DESCRIPTION                  # All those metadata are searched (in this order) to get a layer
+  OWS_TITLE                    # description
+  WFS_TITLE
+  WMS_TITLE
+
+  KML_CACHE                    # number of second the cache will lasts
+                               # if empty or not exists, the cache will be disabled for that layer
+
+  KML_SKIP                     # if equals to "true", kml output is disabled for this layer,
+                               # default is false
+
+  KML_ADD_POINT                # If not empty, add a point with balloon to start and end
+                               # line geometries. Value is the icon url.
+
+
+  CGI-PARAMETERS:
+    * - request     = string - optional - request type (OGC WFS like)
+    * - map         = string - required - path to mapfile
+    * - typename    = string - optional - (can be a csv list) - layer name(s), if empty, all layers are returned
+    * - filter      = string - optional - filter encoding (single layer requests only)
+    * - bbox        = string - optional - standard bbox specification (Not yet implemented)
+    * - encoding    = string - optional - default to ISO-8859-1
+
+* Filters
+  Only PropertyIsEqualTo and PropertyIsLike are supported ATM.
+
+* Encoding
+  kml is UTF-8, mapfile and attributes could have other encodings, you can set encoding via request parameter, otherwise ISO-8859-1 is used as default.
+
+* Raster support
+  Raster layer are supported as standard WMS network links, it is necessary to add EPSG:4326 to WMS_SRS metadata on all mapfile layers.
+  Mapfile must be correctly configured as WMS server (i.e. all required metadata must be set).
+
+* KMZ compressed output
+
+* Styles and classes
+  There is limited support for classes and style:
+    * only one style for each class is parsed, if you have multiple styles in one class, the values of the last one are used
+    * only color, outlinecolor, backgroundcolor, symbol, size and width are parsed
+
+* Cache
+  A simple caching for single layer requests is available.
+  If you want to use the cache, set KML_CACHE layer metadata to the number of seconds the cache should last.
+  A web server writeable "cache" directory must exists at the same level of the main script
+
+* Know issues
+  * Filled polygons fail to wrap on the mountains (this seems a GE bug), a define('TREAT_POLY_AS_LINE', true)  control this behaviour
+
+EXAMPLE CALLS
+------------------------------------
+Single layer:
+http://localhost/kmlserver/service.php?map=/map/mapfile-ogc.map&typename=sfumo,vngeo_ospitalita
+
+Two layers (one raster and one vector):
+http://localhost/kmlserver/service.php?map=/map/mapfile-ogc.map&typename=vngeo_ospitalita
+
+All layers as network links:
+http://localhost/kmlserver/service.php?map=/map/mapfile-ogc.map
+
+Single layer with filter:
+http://localhost/kmlserver/service.php?map=/map/mapfile-ogc.map&typename=comuni&filter=<Filter><PropertyIsLike><PropertyName>toponimo</PropertyName><Literal>Riederalp</Literal></PropertyIsLike></Filter>
+
+
+ICON SERVER
+-------------------------------------
+Returns a PNG icon for a give poin layer/class combination
+Example calls:
+http://localhost/kmlserver/symbolservice.php?map=/map/mapfile-ogc.map&typename=vngeo_ospitalita&class=Alberghi
+
+If you want transparent icons, set PNG output format to RGBA and IMAGECOLOR to the transparent color
+
+
