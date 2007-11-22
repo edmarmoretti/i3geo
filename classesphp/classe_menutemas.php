@@ -174,16 +174,20 @@ array
 		foreach($this->xml->TEMA as $temar)
 		{
 			$down = "nao";
+			$ogc = "sim";
 			$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
 			if (($temp == "sim") || ($temp == "SIM"))
 			{$down = "sim";}
+			$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+			if (($temp == "nao") || ($temp == "NAO"))
+			{$down = "nao";}
 			$link = " ";
 			$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
 			if ($temp != "")
 			{$link = $temp;}
 			$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
 			$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
-			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down);
+			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 		}
 		foreach($this->xml->GRUPO as $grupo)
 		{
@@ -203,16 +207,20 @@ array
 				foreach($grupo->TEMA as $temar)
 				{
 					$down = "nao";
+					$ogc = "sim";
 					$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
 					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
+					$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+					if (($temp == "nao") || ($temp == "NAO"))
+					{$ogc = "nao";}
 					$link = " ";
 					$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
 					if ($temp != "")
 					{$link = $temp;}
 					$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
 					$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
-					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down);
+					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 				}
 				$subgrupos = array();
 				foreach($grupo->SGRUPO as $sgrupo)
@@ -230,14 +238,18 @@ array
 					{
 						//verifica se existem temas que podem receber download
 						$down = "nao";
+						$ogc = "nao";
 						foreach($sgrupo->TEMA as $tema)
 						{
 							$temp = mb_convert_encoding($tema->DOWNLOAD,"HTML-ENTITIES","auto");
 							if (($temp == "sim") || ($temp == "SIM"))
 							{$down = "sim";}
+							$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+							if (($temp != "nao") || ($temp != "NAO"))
+							{$ogc = "sim";}
 						}
 						$nome = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");
-						$subgrupos[] = array("nome"=>$nome,"download"=>$down);
+						$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
 					}
 				}
 				if (function_exists("mb_convert_encoding"))
@@ -358,6 +370,9 @@ array
 										$down = "nao";
 										if (($tema->DOWNLOAD == "sim") || ($tema->DOWNLOAD == "SIM"))
 										{$down = "sim";}
+										$ogc = "sim";
+										if (($tema->OGC == "nao") || ($tema->OGC == "NAO"))
+										{$ogc = "nao";}
 										$link = " ";
 										if ($tema->TLINK != "")
 										{$link = mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto");}
@@ -366,7 +381,7 @@ array
 										{$nome = mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto");}
 										else
 										{$nome = $tema->TNOME;}
-										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down);
+										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 									}
 								}
 							}

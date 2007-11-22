@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>WMS</title>
+<meta name="description" content="Mapa interativo do MMA"> 
+<meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
+<meta name="robots" content="index,follow">
+<!-- Leitura dos arquivos de estilos -->
+<link rel="stylesheet" type="text/css" href="css/geral.css">
+<link rel="stylesheet" type="text/css" href="classesjs/jsobjects/documentation.css">
+<style>
+P 
+{COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+#banner
+{position:absolute;top:0px;left:0px;}
+#arvoreTemas
+{overflow:auto;height:400px;width:280px;position:absolute;top:60px;left:0px;}
+#corpo
+{width:425px;position:absolute;top:60px;left:285px;background:rgb(250,250,250);}
+</style>
+<!-- Leitura dos programas javaScript. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
+<script src="classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script type="text/javascript" src="classesjs/jsobjects/jsUI-Global/common.js"></script>
+<script type="text/javascript" src="classesjs/jsobjects/jsUI-Global/uiCommon.js"></script>
+<script type="text/javascript" src="classesjs/jsobjects/jsUI-Treeview/component.js"></script>
+</head>
+<body style="background-color:white">
+
+<div id=banner ><img src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" ></div>
+
+<!-- aqui vai o menu de opções -->
+<div id=arvoreTemas >
+<!--<span style='text-align:left' >Veja também os dados referentes ao mapeamento dos remanescentes de vegetação dos biomas brasileiros:
+<a href="http://mapas.mma.gov.br/mapas/aplic/probio/datadownload.htm" >link</a>
+</span><br><br> -->
+</div>
+<!-- aqui vai o corpo da aplicação -->
+<div id=corpo style="background-color:rgb(250,250,250)">
+<H1>Download de dados geogr&aacute;ficos</H1>
+<p>Navegue pela &aacute;rvore ao lado para localizar o tema desejado para download.
+<p>Ao lado do nome de cada tema est&aacute; dispon&iacute;vel um link para a documenta&ccedil;&atilde;o dos dados.
+<p>Apenas os dados armazenados no servidor de arquivos do I3Geo, e autorizados pela fonte produtora ou obtidos de locais p&uacute;blicos, est&atilde;o dispon&iacute;veis para download.
+<p>Caso exista interesse por algum outro arquivo n&atilde;o listado aqui, entre em contato com webmaster@mma.gov.br
+<p>Dependendo do tr&aacute;fego na web, o download pode n&atilde;o operar corretamente. Ap&oacute;s escolhido o tema, ser&aacute; gerado um tema no formato "shape file".
+O formato "shape file" &eacute; composto por tr&ecirc;s arquivos (shp, shx e dbf) que devem ser obtidos separadamente e armazenados em um mesmo local em seu disco r&iacute;gido.
+<p>Para abrir o "shape file", voc&ecirc; poder&aacute; utilizar softwares livres como o
+ <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" target=blank>GVSIG</a>, <a href="http://qgis.org/" target=blank > QGIS</a>, ou <a href="http://jump-pilot.sourceforge.net/OpenJUMP.html" target=blank >JUMP</a>.
+<p>Conhe&ccedil;a tamb&eacute;m o <a href="http://mapas.mma.gov.br/i3geo/ms_criamapa.php" target=blank >mapa interativo do MMA.</a>
+</div>
+
+</body>
+<script>
+/*
+Title: Ajuda OGC
+
+Ajuda o usuário a escolher .
+
+A lista de dados pode vir do arquivo menutemas.xml ou de um diretório no servidor.
+
+File: datadownload.js
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+g_locaplic = "."
+g_arvoreClicks = ""
+var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''";
+var cp = new cpaint();
+//cp.set_debug(2)
+cp.set_response_type("JSON");
+cp.call(p,"pegaListaDeGrupos",processaGrupos);
+
+/*
+Function: processaGrupos
+
+Recebe os dados da função Ajax com a lista de grupos e subgrupos.
+
+Monta a árvore para adição de um novo tema no mapa.
+
+Parameters:
+
+retorno - string formatada com os dados para montagem da árvore.
+*/
+function processaGrupos(retorno)
+{
+	if ((retorno.data != "erro") && (retorno.data != undefined))
+	{
+		mytreeview2 = new Object();
+		mytreeview2 = treeviewNew("mytreeview2", "default", "arvoreTemas", null);
+		mytreeview2.createItem("item1", "<b>Temas</b>", "imagens/temas.png", true, true, true, null);
+		mytreeview2.itemExpand = expandeGrupo;
+		for (ig=0;ig<retorno.data.grupos.length; ig++)
+		{
+			ogc = "nao";
+			//verifica se existe no grupo temas para download
+			if (retorno.data.grupos[ig].subgrupos)
+			{
+				var ngSgrupo = retorno.data.grupos[ig].subgrupos;
+				if (retorno.data.grupos[ig].subgrupos)
+				{
+					for (sg=0;sg<ngSgrupo.length;sg++)
+					{
+						if (ngSgrupo[sg].ogc == "sim")
+						{ogc = "sim"}
+					}
+				}
+				if (ogc == "sim")
+				{
+					var nomeGrupo = retorno.data.grupos[ig].nome;
+					mytreeview2.createItem("grupo"+ig, nomeGrupo, "imagens/folder-s.gif", true, true, true, "item1");
+					var cor = "rgb(230,230,230)";
+					for (sg=0;sg<ngSgrupo.length;sg++)
+					{
+						if (ngSgrupo[sg].ogc == "sim")
+						{
+							var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
+							mytreeview2.createItem("sgrupo_"+ig+"_"+sg, nomeSgrupo, "imagens/branco0.gif", true, true, false, "grupo"+ig);
+							if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
+							else
+							{var cor = "rgb(230,230,230)";}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/*
+Function: expandeGrupo
+
+Chama a função ajax que pega a lista de temas de um subgrupo no menu de temas.
+
+Parameters:
+
+itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
+*/
+function expandeGrupo(itemID)
+{
+	g_arvoreClick = itemID;
+	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
+	{
+		var codigos = itemID.split("_");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2];
+		var cp = new cpaint();
+		//cp.set_debug(2);
+		cp.set_response_type("json");
+		cp.call(p,"pegaListaDeTemas",processaTemas);
+	}
+}
+/*
+Function: processaTemas
+
+Recebe os dados da função Ajax com a lista de temas de um subgrupo.
+
+Monta a árvore para adição de um novo tema no mapa.
+
+Parameters:
+
+retorno - string formatada com os dados para montagem da árvore.
+*/
+function processaTemas(retorno)
+{
+	if ((retorno.data != "erro") && (retorno.data != undefined))
+	{
+		var cor = "rgb(251,246,184)";
+		for (st=0;st<retorno.data.temas.length; st++)
+		{
+			var inp = "";
+			var nome = retorno.data.temas[st].nome;
+			var lk = "";
+			if (retorno.data.temas[st].link != " ")
+			{var lk = "<a href="+retorno.data.temas[st].link+" target=blank>&nbsp;fonte</a>";}
+			if (retorno.data.temas[st].ogc=="sim")
+			{
+				var inp = "<img style='text-align:left;' src="+g_locaplic+"/imagens/tic.png  />";
+				nomeTema = "<span style='text-align:left;' title='clique para ver' onclick='endereco(\""+retorno.data.temas[st].tid+"\")' style='cursor:pointer;background-color:"+cor+"' >"+inp+nome+lk+"</span>";
+				mytreeview2.createItem("tema"+ig+""+sg+""+st, nomeTema, g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
+				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
+				else
+				{var cor = "rgb(251,246,184)";}
+			}
+		}
+		//inclui um item em branco
+		mytreeview2.createItem("vazio", "", g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
+		g_arvoreClicks += ","+g_arvoreClick;
+	}
+}
+/*
+Function: endereco
+
+Gera o endereço do webservice do tema escolhido
+
+Parameters:
+
+tema - tema para download
+*/
+function endereco(tema)
+{
+	ins = "<H1>Endere&ccedil;o do web service:</H1><br>"
+	var re = new RegExp(".htm", "g");
+	var servico = window.location.href.replace(re,'.php?tema=')+tema	
+	ins += "<p>"+servico
+	ins += "<p><a target=blank href='"+servico+"&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar</a>"
+	document.getElementById("corpo").innerHTML = ins
+}
+
+
+</script>
+</html>
