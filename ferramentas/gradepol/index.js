@@ -42,11 +42,12 @@ function t1()
 	ins += "Grau <input class=digitar id='yg' title='grau' type=text size=3 value='1'/>"
 	ins += "Minuto <input class=digitar id='ym' title='minuto' type=text size=5 value='00'/>"
 	ins += "Segundo <input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/>"
+	window.parent.g_tipoacao = "capturaponto"
 	mostraOpcao("t0()","t2()",ins,"t1")
 }
 function t2()
 {
-	ins = "Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste)"
+	ins = "Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>"
 	ins += "<p>em X: "
 	ins += "Grau<input class=digitar id='ixg' title='grau'  type=text size=3 value='-00'/>"
 	ins += "Minuto<input class=digitar id='ixm' title='minuto'  type=text size=5 value='00'/>"
@@ -59,6 +60,7 @@ function t2()
 }
 function t3()
 {
+	window.parent.mudaiconf("pan")
 	ins = "Número de c&eacute;lulas. Máximo de 10.000."
 	ins += "<p>em X: "
 	ins += "<input class=digitar id='nptx' title='em x'  type=text size=3 value='10'/>"

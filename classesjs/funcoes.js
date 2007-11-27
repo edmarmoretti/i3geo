@@ -130,6 +130,60 @@ function pCookie(nome)
 Section: interface
 */
 /*
+Function: trocallingua
+
+Troca a linguagem atual.
+
+Parameters:
+
+lingua
+*/
+function trocalingua(l)
+{
+	iCookie("i3geolingua",l);
+	window.location.reload(true)	
+}
+/*
+Function: criaContainerRichdraw
+
+Cria os elementos dom necessários ao uso das funções de desenho sobre o mapa.
+*/
+function criaContainerRichdraw()
+{
+	if (!$i("divGeometriasTemp"))
+	{
+		var novoel = document.createElement("div");
+		with(novoel)
+		{
+			id = "divGeometriasTemp";
+			style.cursor="crosshair";
+			style.zIndex=0;
+			style.position="absolute";
+			style.width=objmapa.w;
+			style.height=objmapa.h;
+			style.border="1px solid black";
+			style.display="none";
+			style.top=imagemyi;
+			style.left=imagemxi;
+		}
+		document.body.appendChild(novoel);
+	}
+	if ($i("divGeometriasTemp"))
+	{
+   		$i("divGeometriasTemp").innerHTML = "";
+   		var renderer;
+   		if (navn) {renderer = new SVGRenderer();}
+		else {renderer = new VMLRenderer();}
+   		richdraw = new RichDrawEditor(document.getElementById('divGeometriasTemp'), renderer);
+		richdraw.editCommand('fillcolor', 'red');
+		richdraw.editCommand('linecolor', 'gray');
+		richdraw.editCommand('linewidth', '1px');
+   		richdraw.editCommand('mode', 'line');
+   		$i("divGeometriasTemp").style.display="block";
+	}
+	if(navn){ativaClicks($i("divGeometriasTemp"));}
+}
+/*
 Function: mudaVisual
 
 Muda o visual do mapa atual
@@ -187,7 +241,7 @@ function mudaVisual(visual)
 		}
 		g_visual = visual;
 	};
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
 	cpObj.call(p,"mudaQS",monta);
 }
@@ -292,7 +346,7 @@ function docaguias()
 			}
 		}
 		calcposf();
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -347,28 +401,39 @@ function ativaGuias()
 		if ($i("guia"+g))
 		var gpai = $i("guia"+g).parentNode;
 	}
-	gpai.id = "guiasYUI";
-	gpai.className = "yui-navset";
-	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
-	for(g=0;g<12;g++)
+	if(gpai)
 	{
-		if ($i("guia"+g))
+		gpai.id = "guiasYUI";
+		gpai.className = "yui-navset";
+		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+		if($i(objmapa.guiaTemas))
+		{$i(objmapa.guiaTemas).innerHTML = $trad("g1");}
+		if($i(objmapa.guiaMenu))
+		{$i(objmapa.guiaMenu).innerHTML = $trad("g2");}
+		if($i(objmapa.guiaLegenda))
+		{$i(objmapa.guiaLegenda).innerHTML = $trad("g3");}
+		if($i(objmapa.guiaListaMapas))
+		{$i(objmapa.guiaListaMapas).innerHTML = $trad("g4");}
+		for(g=0;g<12;g++)
 		{
-			var tituloguia = $i("guia"+g).innerHTML;
-			var re = new RegExp("&nbsp;", "g");
-			var tituloguia = tituloguia.replace(re,'');
-			ins += '<li><a href="#"><em><div id="guia'+g+'" >'+tituloguia+'</div></em></a></li>';
+			if ($i("guia"+g))
+			{
+				var tituloguia = $i("guia"+g).innerHTML;
+				var re = new RegExp("&nbsp;", "g");
+				var tituloguia = tituloguia.replace(re,'');
+				ins += '<li><a href="#"><em><div id="guia'+g+'" >'+tituloguia+'</div></em></a></li>';
+			}
 		}
-	}
-	ins += "</ul>";
-	gpai.innerHTML = ins;
-	for(g=0;g<12;g++)
-	{
-		if ($i("guia"+g))
+		ins += "</ul>";
+		gpai.innerHTML = ins;
+		for(g=0;g<12;g++)
 		{
-			eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
-			$i("guia"+g+"obj").style.overflow="auto";
-			$i("guia"+g+"obj").style.height = objmapa.h;
+			if ($i("guia"+g))
+			{
+				eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
+				$i("guia"+g+"obj").style.overflow="auto";
+				$i("guia"+g+"obj").style.height = objmapa.h;
+			}
 		}
 	}
 	//guias
@@ -419,7 +484,7 @@ function ativaGuias()
 			mostraguiaf(5);
 			if ($i("banners"))
 			{
-				$i("banners").innerHTML == "Aguarde...";
+				$i("banners").innerHTML == $trad("o1");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegaMapas&g_sid="+g_sid;
 				cpObj.call(p,"pegaMapas",pegaMapas);
 			}
@@ -513,6 +578,10 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		//esconde o box do google
 		if ($i("boxg"))
 		{$i("boxg").style.display = "none";}
+		//fecha o container de desenho de elementos na tela
+		if($i("divGeometriasTemp"))
+		{richdraw.fecha();}
+		limpacontainerf();
 	};
 	YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
 }
@@ -857,57 +926,7 @@ function ativaClicks(docMapa)
 					$top("imgO",objmapa.h*-1 + ny);
 				}
 			}
-			movecursor();
-			if ($i("longlat"))
-			{$i("longlat").innerHTML = objposicaocursor.dmsx + "   " +  objposicaocursor.dmsy;}
-			if (g_tipoacao == "mede")
-			{
-				$i("mostradistancia").style.display="block";
-				var n = pontosdistobj.xpt.length;
-				if (n > 0)
-				{
-					var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (objmapa.scale > 500000)
-					{
-						var d = parseInt(d);
-					}
-					else
-					{
-						d= d + "";
-						d = d.split(".");
-						var decimal = d[1].substr(0,3);
-						d = d[0]+"."+decimal;
-						d = d * 1;
-					}
-					var da = d + pontosdistobj.dist[n-1];
-					if ($i("mostradistancia_calculo"))
-					{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
-					if (richdraw)
-					{
-						try
-						{
-							if(navn)
-							{richdraw.renderer.resize(pontosdistobj.linhas[n-1],0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-							else
-							{
-								var r = $i(richdraw.container.id);
-								r.removeChild(r.lastChild);
-								var dy = objposicaocursor.imgy;
-								var dx = objposicaocursor.imgx - (objmapa.w/2);
-								if(dy > pontosdistobj.yimg[n-1]){var dy=dy-2;}
-								if(dx > ((pontosdistobj.ximg[n-1])-(objmapa.w/2))){var dx=dx-3;}
-								window.status=objposicaocursor.imgx;
-								richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],dx,dy);
-							}
-						}
-						catch(e){window.status=n+" erro ao movimentar a linha ";}			
-					}
-				}
-			}
-			movelentef();
-			//desloca cursor de zoom box
-			if (((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox")) && ($i("box1").style.visibility == "visible"))
-			{zoomboxf("desloca");}
+			objmapa.verificaMousemoveMapa();
 		};
 	};
 	docMapa.onmouseout = function()
@@ -961,17 +980,16 @@ function ativaClicks(docMapa)
 			var novoyf = (ex[3] * 1) - disty;
 			if ((distx == 0)||(disty == 0))
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+g_sid;
 				cpObj.call(p,"pan",ajaxredesenha);
 				return;
 			}
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
 			cpObj.call(p,"mudaExtensao",ajaxredesenha);
 		}
-		
 	};
 }
 /*
@@ -1237,7 +1255,7 @@ Aproxima o mapa tendo o centro como referência.
 */
 function zoomiauto()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid;
 	g_operacao = "navega";
@@ -1250,7 +1268,7 @@ Afasta o mapa tendo o centro como referência.
 */
 function zoomoauto()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid;
 	g_operacao = "navega";
@@ -1336,7 +1354,7 @@ function zoomboxf (tipo)
 			if (x1 != x2)
 			{
 				objmapa.extent=v;
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
 				cpObj.call(p,"mudaExtensao",ajaxredesenha);
 			}
@@ -1353,7 +1371,7 @@ function zoomboxf (tipo)
 				//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 				if ((tipo != "limpa") && (tipo != "inverte"))
 				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					objaguarde.abre("ajaxredesenha",$trad("o1"));
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
 					cpObj.call(p,"selecaobox",ajaxredesenha);
 				}
@@ -1377,7 +1395,7 @@ function zoomIP()
 	{
 		if (retorno.data.latitude != null)
 		{
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
 			cpObj.call(p,"zoomPonto",ajaxredesenha);
 		}
@@ -1398,7 +1416,7 @@ function zoomPonto()
 	{
 		var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
 		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
 		cpObj.call(p,"zoomPonto",ajaxredesenha);
 	}
@@ -1441,7 +1459,7 @@ function aplicaescala()
 	{var nova = $i("escalanum").value;}
 	else
 	{var nova = objmapa.scale;}
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+nova+"&g_sid="+g_sid;
 	g_operacao = "outras";
 	cpObj.call(p,"mudaEscala",ajaxredesenha);
@@ -1453,7 +1471,7 @@ Zoom para a extensão default.
 */
 function zoomtot()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
 	g_operacao = "navega";
 	cpObj.call(p,"mudaExtensao",ajaxredesenha);
@@ -1485,7 +1503,7 @@ function panFixo(direcao)
 		var x = objmapa.w / 6;
 		var y = objmapa.h / 2;
 	}
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&x="+x+"&y="+y+"&g_sid="+g_sid;
 	g_operacao = "navega";
 	cpObj.call(p,"pan",ajaxredesenha);
@@ -1955,27 +1973,27 @@ function expandeTema(itemID)
 				if (ltema[6]*1 < objmapa.scale*1)
 				{
 				 	var farol = "maisverde.png";
-				 	var mfarol = "A escala do tema &eacute; compat&iacute;vel com a escala do mapa";
+				 	var mfarol = $trad("t9");
 				}
 				if (ltema[6]*1 > objmapa.scale*1)
 				{
 				 	var farol = "maisvermelho.png";
-					var mfarol = "A escala do tema &eacute incompat&iacute;vel com a escala do mapa";
+					var mfarol = $trad("t10");
 				}
 				if (ltema[6] == 0)
 				{
 				 	var farol = "maisamarelo.png";
-					var mfarol = "A escala do tema n&atilde;o &eacute conhecida";
+					var mfarol = $trad("t11");
 				}
 				tnome = "&nbsp;<img id='farol"+ltema[0]+"' src='"+$im(farol)+"' title='"+mfarol+"' \>";
-				tnome += "&nbsp;<img  id='idx"+ltema[0]+"' src='"+$im("x.gif")+"' title='excluir' onclick='excluitemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para excluir esse tema do mapa.','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("sobe.gif") +"' title='sobe' onclick='sobetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para subir esse tema na ordem de desenho','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("desce.gif") +"' title='desce' onclick='descetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou descer esse tema na ordem de desenho','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("extent.gif") +"' title='zoom para o tema' onclick='zoomtemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para ajustar o mapa de forma a mostrar todo o tema','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+				tnome += "&nbsp;<img  id='idx"+ltema[0]+"' src='"+$im("x.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+				tnome += "&nbsp;<img src='"+$im("sobe.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+				tnome += "&nbsp;<img src='"+$im("desce.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+				tnome += "&nbsp;<img src='"+$im("extent.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
 				mytreeview1.createItem("temap0"+ltema[0], tnome, imgBranco, false, true, true, ltema[0]);
 				if (g_opcoesTemas == "sim")
-				{mytreeview1.createItem("opc"+ltema[0], "Op&ccedil;&otilde;es", imgBranco, true, true, true, ltema[0]);}
-				mytreeview1.createItem("legenda"+ltema[0], "Legenda", imgBranco, true, true, true, ltema[0]);
+				{mytreeview1.createItem("opc"+ltema[0], $trad("t18a"), imgBranco, true, true, true, ltema[0]);}
+				mytreeview1.createItem("legenda"+ltema[0], $trad("t18b"), imgBranco, true, true, true, ltema[0]);
 				if (g_opcoesTemas == "sim")
 				{
 					var im = "";
@@ -1984,31 +2002,31 @@ function expandeTema(itemID)
 					//transparencia
 					if ((ltema[4] != 0) || (ltema[8] == "sim"))
 					{
-						tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;opacidade: </span><input  class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
+						tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t20")+" </span><input  class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
 						mytreeview1.createItem("temap1"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					}
 					//muda nome
-					tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'Muda o nome atual do tema, utilize para melhorar a leganda do mapa.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;novo nome: </span><input class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
+					tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t21")+" </span><input class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
 					mytreeview1.createItem("temap2"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					if ((ltema[4] < 3) && (ltema[9] != 7))
 					{
-						tnome = "<span onclick='procuraratribf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png")+" onmouseover=\"javascript:mostradicasf(this,'Localize elementos no tema com base em seus atributos descritivos.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;procurar... </span>";
+						tnome = "<span onclick='procuraratribf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png")+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("t22")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t23")+" </span>";
 						mytreeview1.createItem("temap3"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='toponimiaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'Crie uma nova camada no mapa para apresentar textos descritivos sobre esse tema, tendo como base a tabela de atributos.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;texto... </span>";
+						tnome = "<span onclick='toponimiaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t24")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t25")+" </span>";
 						mytreeview1.createItem("temap4"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='etiquetas(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'Defina as etiquetas que serão mostradas quando o mouse é estacionado sobre um elemento desse tema.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;etiquetas... </span>";
+						tnome = "<span onclick='etiquetas(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t26")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t27")+" </span>";
 						mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='filtrof(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'Insira um filtro nesse tema para mostrar apenas determinadas informações, com base na tabela de atributos.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;filtro... </span>";
+						tnome = "<span onclick='filtrof(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t28")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t29")+" </span>";
 						mytreeview1.createItem("temap5"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'Veja a tabela de atributos relacionada a esse tema.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;tabela... </span>";
+						tnome = "<span onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t31")+" </span>";
 						mytreeview1.createItem("temap6"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					}
 					if (ltema[4] < 4)
 					{
-						tnome = "<span onclick='editaLegenda(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'Abre o editor de legenda, permitindo a alteração da forma de representação desse tema.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;editar legenda... </span>";
+						tnome = "<span onclick='editaLegenda(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t32")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t33")+" </span>";
 						mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 					}
-					tnome = "<span onclick='destacaTema(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'Mostra os dados desse tema em uma janela que acompanha o mouse.','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;mostra em janela... </span>";
+					tnome = "<span onclick='destacaTema(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t34")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t35")+" </span>";
 					mytreeview1.createItem("temap8"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 				}
 				mytreeview1.createItem("","", imgBranco, false, true, true, ltema[0]);
@@ -2133,31 +2151,31 @@ function processaGrupos(retorno)
 		{
 			var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
 			insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-			insp = insp + "<p>&nbsp;procurar:<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  title='procurar' src='"+$im("tic.png")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
+			insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  title='"+$trad("a1")+"' src='"+$im("tic.png")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
 			$i(objmapa.guiaMenu+"obj").innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 		}
 		if (!$i("uplocal"))
 		{
 			var upload = "";
 			if (g_uploadlocal == "sim")
-			{upload += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img src='"+$im("upload.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;Upload de arquivo local</div>";}
+			{upload += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img src='"+$im("upload.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
 			if (g_downloadbase == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img src='"+$im("connected-s.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;Download de dados</div>";}
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img src='"+$im("connected-s.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
 			if (g_conectarwms == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img src='"+$im("cmdLink.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;Conectar com servidor WMS</div>";}
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img src='"+$im("cmdLink.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
 			if (g_conectargeorss == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img src='"+g_locaplic+"/imagens/georss-1.png' style='cursor:pointer;text-align:left'  />&nbsp;Conectar com GeoRss</div>";}
+			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img src='"+g_locaplic+"/imagens/georss-1.png' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
 			$i(objmapa.guiaMenu+"obj").innerHTML += upload;
 			if (objmapa.navegacaoDir == "sim")
 			{
-				var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img src='"+g_locaplic+"/imagens/desktop.png' style='cursor:pointer;text-align:left'  />&nbsp;Acesso aos arquivos do servidor</div>";
+				var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img src='"+g_locaplic+"/imagens/desktop.png' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
 				$i(objmapa.guiaMenu+"obj").innerHTML += temp;
 			}
 		}
 		//arvore de menus
 		mytreeview2 = new Object();
 		mytreeview2 = treeviewNew("mytreeview2"+idarvore, "default", objmapa.guiaMenu+"obj", null);
-		var nometemas = "Temas";
+		var nometemas = $trad("a7");
 		if (idarvore != ""){nometemas += " - "+idarvore;}
 		mytreeview2.createItem("item1"+idarvore, "<b>"+nometemas+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/temas.png", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
@@ -2188,7 +2206,7 @@ function processaGrupos(retorno)
 					if ( lk != " ")
 					{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 					var tid = no.tid;
-					var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+					var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 					if(navm)
 					nomeTema = "&nbsp;"+inp+nome+lk;
 					else
@@ -2206,7 +2224,7 @@ function processaGrupos(retorno)
 					if ( lk != " ")
 					{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 					var tid = no.tid;
-					var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+					var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 					if(navm)
 					nomeTema = "&nbsp;"+inp+nome+lk;
 					else
@@ -2241,13 +2259,13 @@ function processaTemas(retorno)
 			var nome = retorno.data.temas[st].nome;
 			var lk = retorno.data.temas[st].link;
 			if ( lk != " ")
-			{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
+			{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
 			var tid = retorno.data.temas[st].tid;
-			var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+			var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 			if(navm)
-			nomeTema = "<span style='background-color:"+cor+"' title='c&oacute;digo: "+tid+"'>"+inp+nome+lk+"</span>";
+			nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+"</span>";
 			else
-			nomeTema = "<span style='background-color:"+cor+"' title='c&oacute;digo: "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
+			nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
 			mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
 			if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 			else
@@ -2273,7 +2291,7 @@ function pegavalSistemas(sis)
 	{
 		mytreeviewS = new Object();
 		mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
-		mytreeviewS.createItem("Sitem1", "<b>Sistemas</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
+		mytreeviewS.createItem("Sitem1", "<b>"+$trad("a11")+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
 		for (ig=0;ig<sis.length;ig++)
 		{
 			var nomeSis = sis[ig].NOME;
@@ -2285,7 +2303,7 @@ function pegavalSistemas(sis)
 				var executar = funcoes[ig2].ABRIR;
 				var w = funcoes[ig2].W;
 				var h = funcoes[ig2].H;
-				var inp = "<img title='Abrir sistema' src='"+$im("open.gif")+"' style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
+				var inp = "<img title='"+$trad("a12")+"' src='"+$im("open.gif")+"' style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
 				mytreeviewS.createItem("sis"+ig+"func"+ig2, inp+nomeFunc, imgBranco, false, true, false, "sis"+ig);
 			}
 		}
@@ -2472,7 +2490,7 @@ function remapaf()
 				if (ta.length > 0)
 				{
 					objaguarde.fecha("remapa");
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					objaguarde.abre("ajaxredesenha",$trad("o1"));
 					var temp = function(retorno)
 					{
 						objaguarde.fecha("ajaxredesenha");
@@ -2489,20 +2507,20 @@ function remapaf()
 				else
 				{
 					objaguarde.fecha("remapa");
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					objaguarde.abre("ajaxredesenha",$trad("o1"));
 					ajaxredesenha("");
 				}
 			}
 			else
 			{
 				objaguarde.fecha("remapa");
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
 				ajaxredesenha("");
 			}
 		};
 		if ((tsd.length > 0) || (tsl.length > 0))
 		{
-			objaguarde.abre("remapa","Aguarde...refazendo o mapa");
+			objaguarde.abre("remapa",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid;
 			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
 		}
@@ -2794,7 +2812,7 @@ function filmezf(o)
 	if (quadrosfilme[quadro].extensao != " ")
 	{
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		cpObj.call(p,"mudaExtensao",ajaxredesenha);
 	}
 	else{alert("Extensao nao definida");}
@@ -3193,6 +3211,73 @@ function pontosdist()
 	this.linhas = new Array();
 }
 /*
+Section: desenho sobre o mapa
+*/
+/*
+Function: desenhoRichdraw
+
+Desenha elementos na tela usando a biblioteca richdraw
+
+Parameters:
+
+tipo - tipo de operação
+
+objeto - objeto gráfico do container richdraw
+
+n - índice do elemento no array pontosdistobj
+*/
+function desenhoRichdraw(tipo,objeto,n)
+{
+	if (richdraw)
+	{
+		if(tipo="resizeLinha")
+		{
+			try
+			{
+				if(navn)
+				{richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
+				else
+				{
+					var r = $i(richdraw.container.id);
+					r.removeChild(r.lastChild);
+					var dy = objposicaocursor.imgy;
+					var dx = objposicaocursor.imgx - (objmapa.w/2);
+					if(dy > pontosdistobj.yimg[n-1]){var dy=dy-2;}
+					if(dx > ((pontosdistobj.ximg[n-1])-(objmapa.w/2))){var dx=dx-3;}
+					window.status=objposicaocursor.imgx;
+					richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],dx,dy);
+				}
+			}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}			
+		}
+		if(tipo="insereCirculo")
+		{
+			if (navn)
+			{
+				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+				var w = Math.sqrt(dx + dy);
+				try
+				{
+					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);
+				}
+				catch(e){window.status=n+" erro ao desenhar o raio";}
+			}
+			else
+			{
+				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+				var w = Math.sqrt(dx + dy);
+				try
+				{
+					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
+				}
+				catch(e){window.status=n+" erro ao desenhar o raio";}
+			}
+		}
+	}
+}
+/*
 Section: outros
 */
 /*
@@ -3470,7 +3555,7 @@ function ativaDragDrop()
                 		if(DDM.getDDById(id).id == "lixeira")
                 		{
                 			var tema = (this.getEl()).id.split("arrastar_")[1];
-                			objaguarde.abre("ajaxredesenha","Aguarde...");
+                			objaguarde.abre("ajaxredesenha",$trad("o1"));
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 							cpObj.call(p,"excluiTemas",ajaxredesenha);
 							objmapa.temaAtivo = "";

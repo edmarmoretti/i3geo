@@ -88,7 +88,63 @@ Salva o mapfile atual
 	  	if (connection_aborted()){exit();}
 	  	$this->mapa->save($this->arquivo);
 	}
+/*
+function: selecaoPorPoligono
 
+Seleciona os elementos de um tema baseado em um conjunto de pontos que formarão um polígono.
+
+parameters:
+
+$tipo - Tipo de operação adiciona|retira|inverte|limpa
+
+$xs - lista de coordenadas x separadas por virgula
+
+$ys - lista de coordenadas y separadas por virgula
+*/
+	function selecaoPorPoligono($tipo,$xs,$ys)
+	{
+		if ($tipo == "limpa")
+		{return($this->selecaoLimpa());}
+		if ($tipo == "inverte")
+		{return($this->selecaoInverte());}
+		$tipoLayer = $this->layer->type;
+		$this->layer->set("template","none.htm");
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$indxlayer = $this->layer->index;
+		$res_count = $this->layer->getNumresults();
+		$shp_atual = array();
+		for ($i = 0; $i < $res_count;$i++)
+		{
+			$rc = $this->layer->getResult($i);
+			$shp_atual[] = $rc->shapeindex;
+		}
+		$this->mapa->freequery($indxlayer);
+		$shpi = array();
+		//transforma os pontos em shape
+		$s = ms_newShapeObj(MS_SHAPE_POLYGON);
+		$linha = ms_newLineObj();
+		$xs = explode(",",$xs);
+		$ys = explode(",",$ys);
+		for($i=0;$i<(count($xs));$i++)
+		{
+			$linha->addxy($xs[$i],$ys[$i]);
+		}
+		$linha->addxy($xs[0],$ys[0]);
+		$s->add($linha);
+		$this->layer->querybyshape($s);
+		$res_count = $this->layer->getNumresults();
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $this->layer->getResult($i);
+			$shpi[]  = $result->shapeindex;
+		}
+		if (($tipo == "adiciona") && (count($shpi) > 0))
+		{return($this->selecaoAdiciona($shpi,$shp_atual));}
+		if (($tipo == "retira") && (count ($shp_atual) > 0))
+		{return($this->selecaoRetira($shpi,$shp_atual));}
+		return("Nada selecionado.");
+	}
 /*
 function: selecaoTema
 
@@ -304,7 +360,7 @@ $xy - X e Y separados por vírgula.
 
 $tipo - Tipo de operação adiciona|retira|inverte|limpa
 */
-	function selecaoPT($xy,$tipo)
+	function selecaoPT($xy,$tipo,$tolerancia)
 	{
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
@@ -326,15 +382,42 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$c = explode(" ",$xy);
 		$pt = ms_newPointObj();
 		$pt->setXY($c[0], $c[1]);
-		$this->layer->set("tolerance",0);
-		$this->layer->set("toleranceunits",6);
-		if (($this->layer->type == MS_LAYER_POINT) || ($this->layer->type == MS_LAYER_LINE))
+		if ($tolerancia == 0)
 		{
-			$this->layer->set("tolerance",5);
-			$ident = @$this->layer->queryByPoint($pt, 1, 0);
+			$this->layer->set("tolerance",0);
+			$this->layer->set("toleranceunits",6);
+			if (($this->layer->type == MS_LAYER_POINT) || ($this->layer->type == MS_LAYER_LINE))
+			{
+				$this->layer->set("tolerance",5);
+				$ident = @$this->layer->queryByPoint($pt, 1, 0);
+			}
+			else
+			{$ident = @$this->layer->queryByPoint($pt, 1, 0);}
 		}
 		else
-		{$ident = @$this->layer->queryByPoint($pt, 1, 0);}
+		{
+			$rect = $pt->bounds;
+			$projInObj = ms_newprojectionobj("proj=latlong");
+			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+			$poPoint = ms_newpointobj();
+			$poPoint->setXY($rect->minx, $rect->miny);
+			$dd1 = ms_newpointobj();
+			$dd1->setXY($rect->minx, $rect->miny);
+			$poPoint->project($projInObj, $projOutObj);
+			$dd2 = ms_newpointobj();
+			$dd2->setXY(($poPoint->x + $tolerancia), $poPoint->y);
+			$dd2->project($projOutObj,$projInObj);
+			$d = $dd1->distanceToPoint($dd2);
+			if ($d < 0){$d = $d * -1;}
+			//calcula a distancia 29100
+			//gera o buffer
+			$s = ms_newShapeObj(MS_SHAPE_POINT);
+			$linha = ms_newLineObj();
+			$linha->add($pt);
+			$s->add($linha);
+			$buffer = $s->buffer($d);
+			$ident = @$this->layer->queryByShape($buffer);
+		}
 		if ($ident != 1)
 		{
 			$res_count = $this->layer->getNumresults();

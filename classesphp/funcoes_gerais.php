@@ -670,7 +670,7 @@ Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferencia()
 {
-	global $cp,$nomeImagem,$objMapa;
+	global $cp,$nomeImagem,$objMapa,$utilizacgi,$locmapserv;
 	$objMapa->preparequery();
 	$objImagem = $objMapa->drawreferencemap();
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";

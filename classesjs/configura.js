@@ -39,6 +39,542 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
+Variable: g_traducao
+
+Termos utilizados na interface conforme a linguagem
+*/
+g_traducao = {
+	//texto da janela de mensagens
+	"p1": [
+	{
+		pt:"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>",
+		en:"I3geo is a open source software. <a href='http://mapas.mma.gov.br/download' target=blanck >Click</a> to download."
+	}],
+	//lista de propriedades do mapa
+	"p2": [
+	{
+		pt:"Tipo de imagem",
+		en:"Image type"
+	}],
+	"p3": [
+	{
+		pt: "Legenda",
+		en: "Legend"
+	}],
+	"p4": [
+	{
+		pt:"Escala",
+		en:"Scale"
+	}],
+	"p5": [
+	{
+		pt: "Tamanho",
+		en:"Size"
+	}],
+	"p6": [
+	{
+		pt: "Ativa/desativa entorno",
+		en:"Activate/Disable surrounding"
+	}],
+	"p7": [
+	{
+		pt: "Ativa/desativa logo",
+		en:"Activate/Disable logo"
+	}],
+	"p8": [
+	{
+		pt: "Cor da selecao",
+		en:"Selection color"
+	}],
+	"p9": [
+	{
+		pt: "Cor do fundo",
+		en:"Background color"
+	}],
+	"p10": [
+	{
+		pt: "Grade de coordenadas",
+		en:"Graticule"
+	}],
+	"p11": [
+	{
+		pt: "Template",
+		en:"Template"
+	}],
+	"p12": [
+	{
+		pt: "Temporizador",
+		en:"Timer"
+	}],
+	"p13": [
+	{
+		pt: "Propriedades do mapa",
+		en:"Map properties"
+	}],
+	//itens do menu suspenso
+	"s1": [
+	{
+		pt: "&nbsp;Ajuda?",
+		en:"&nbsp;Help"
+	}],
+	"s2": [
+	{
+		pt: "&nbsp;An&aacute;lise",
+		en:"&nbsp;Analysis"
+	}],
+	"s3": [
+	{
+		pt: "&nbsp;Janelas",
+		en:"&nbsp;Windows"
+	}],
+	"s4": [
+	{
+		pt: "&nbsp;Arquivo",
+		en:"&nbsp;Files"
+	}],
+	"s5": [
+	{
+		pt: "&nbsp;Propriedades",
+		en:"&nbsp;Properties"
+	}],
+	//submenus
+	"u1": [
+	{
+		pt: "Sobre o I3Geo",
+		en:"About"
+	}],
+	"u2": [
+	{
+		pt: "Sistema",
+		en:"System"
+	}],
+	"u3": [
+	{
+		pt: "WikiBook",
+		en:"WikiBook"
+	}],
+	"u4": [
+	{
+		pt: "Tutoriais",
+		en:"Tutorials"
+	}],
+	"u5": [
+	{
+		pt: "Blog",
+		en:"Blog"
+	}],
+	"u6": [
+	{
+		pt: "Geometrias",
+		en:"Geometries"
+	}],
+	"u7": [
+	{
+		pt: "Grade de poligonos",
+		en:"Polygon grid"
+	}],
+	"u8": [
+	{
+		pt: "Grade de pontos",
+		en:"Point grid"
+	}],
+	"u9": [
+	{
+		pt: "Grade de hex&aacute;gonos",
+		en:"Hexagonal grid"
+	}],
+	"u10": [
+	{
+		pt: "Entorno(Buffer)",
+		en:"Buffer"
+	}],
+	"u11": [
+	{
+		pt: "Centr&oacute;ide",
+		en:"Centroid"
+	}],
+	"u12": [
+	{
+		pt: "N pontos em poligono",
+		en:"N point in polygon"
+	}],
+	"u13": [
+	{
+		pt: "Ponto em poligono/raster",
+		en:"Point in polygon/raster"
+	}],
+	"u14": [
+	{
+		pt: "Distribui&ccedil;&atilde;o de pontos",
+		en:"Point distribuition"
+	}],
+	"u15": [
+	{
+		pt: "Barras de ferramentas",
+		en:"Tools"
+	}],
+	"u16": [
+	{
+		pt: "Janela de mensagens",
+		en:"Message window"
+	}],     
+	"u17": [
+	{
+		pt: "Salvar mapa",
+		en:"Save map"
+	}],
+	"u18": [
+	{
+		pt: "Carregar mapa",
+		en:"Load map"
+	}],
+	"u19": [
+	{
+		pt: "Pegar imagens",
+		en:"Take pictures"
+	}],
+	"u20": [
+	{
+		pt: "Converter em WMS",
+		en:"Convert to WMS"
+	}],
+	"u21": [
+	{
+		pt: "Gerador de links",
+		en:"Link generator"
+	}],
+	//arvore com a lista de temas
+	"t1": [
+	{
+		pt: "Camadas",
+		en:"Layers"
+	}],
+	"t2":[
+	{
+		pt:"arraste o tema aqui para excluir",
+		en:"Drag the theme here to exclude"
+	}],
+	"t3":[
+	{
+		pt:"Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
+		en:"Click to connect or disconnect the subject, showing it or not on the map. After changing the status of the topic, wait a few moments to be redesigned the map, or click the button to apply that will be shown."
+	}],
+	"t4":[
+	{
+		pt:"limpa sele&ccedil;&atilde;o",
+		en:"Clear the selection"
+	}],
+	"t5":[
+	{
+		pt:"Limpa sele&ccedil;&atilde;o existente nesse tema",
+		en:"Clear the selection"
+	}],
+	"t6":[
+	{
+		pt:"Clique para fazer o download desse tema no formato shapefile",
+		en:"Download in shapefile format"
+	}],
+	"t7":[
+	{
+		pt:"clique e arraste",
+		en:"click and drag"
+	}],
+	"t8":[
+	{
+		pt:"arraste para mudar a ordem",
+		en:"drag to change the draw order"
+	}],
+
+	
+	"t9":[
+	{
+		pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
+		en:"The scale of the issue is compatible with the scale of the map"
+	}],
+	"t10":[
+	{
+		pt:"A escala do tema &eacute incompat&iacute;vel com a escala do mapa",
+		en:"The scale of the issue is incompatible with the scale of the map"
+	}],	
+	"t11":[
+	{
+		pt:"A escala do tema n&atilde;o &eacute conhecida",
+		en:"The scale of the issue is not known"
+	}],
+	"t12":[
+	{
+		pt:"excluir",
+		en:"delete"
+	}],
+	"t12a":[
+	{
+		pt:"Clique para excluir esse tema do mapa.",
+		en:"Click to exclude the subject of the map."
+	}],
+	"t13":[
+	{
+		pt:"sobe",
+		en:"up"
+	}],
+	"t14":[
+	{
+		pt:"Clique para subir esse tema na ordem de desenho",
+		en:"Click to raise this issue in order to design"
+	}],
+	"t15":[
+	{
+		pt:"desce",
+		en:"down"
+	}],
+	"t16":[
+	{
+		pt:"Clique para descer esse tema na ordem de desenho",
+		en:"Click to fall this subject in the order of drawing"
+	}],
+	"t17":[
+	{
+		pt:"zoom para o tema",
+		en:"zoom to the layer"
+	}],
+	"t18":[
+	{
+		pt:"Clique para ajustar o mapa de forma a mostrar todo o tema",
+		en:"Click to adjust the map in order to show the whole issue"
+	}],
+	"t18a":[
+	{
+		pt:"Op&ccedil;&otilde;es",
+		en:"Options"
+	}],
+	"t18b":[
+	{
+		pt:"Legenda",
+		en:"Legend"
+	}],
+	"t19":[
+	{
+		pt:"Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.",
+		en:"Amends the transparency of the subject so that the layers can be seen below."
+	}],
+	"t20":[
+	{
+		pt:"opacidade:",
+		en:"opacity"
+	}],
+	"t21a":[
+	{
+		pt:"Muda o nome atual do tema, utilize para melhorar a leganda do mapa.",
+		en:"Change the name"
+	}],
+	"t21":[
+	{
+		pt:"novo nome:",
+		en:"new name"
+	}],
+	"t22":[
+	{
+		pt:"Localize elementos no tema com base em seus atributos descritivos.",
+		en:"Locate evidence on the issue based on their attributes descriptive."
+	}],
+	"t23":[
+	{
+		pt:"procurar...",
+		en:"locate..."
+	}],
+	"t24":[
+	{
+		pt:"Crie uma nova camada no mapa para apresentar textos descritivos sobre esse tema, tendo como base a tabela de atributos.",
+		en:"Create a new layer on the map to display descriptive texts on the subject, drawing upon the table of attributes."
+	}],
+	"t25":[
+	{
+		pt:"texto...",
+		en:"text..."
+	}],
+	"t26":[
+	{
+		pt:"Defina as etiquetas que serão mostradas quando o mouse é estacionado sobre um elemento desse tema.",
+		en:"Set the labels that will be shown when the mouse is parked on an element of that theme."
+	}],
+	"t27":[
+	{
+		pt:"etiquetas...",
+		en:"labels..."
+	}],
+	"t28":[
+	{
+		pt:"Insira um filtro nesse tema para mostrar apenas determinadas informações, com base na tabela de atributos.",
+		en:"Enter a topic that filter to show only certain information, based on the table of attributes."
+	}],
+	"t29":[
+	{
+		pt:"filtro...",
+		en:"filter..."
+	}],
+	"t30":[
+	{
+		pt:"Veja a tabela de atributos relacionada a esse tema.",
+		en:"See the table of attributes related to that theme."
+	}],
+	"t31":[
+	{
+		pt:"tabela...",
+		en:"table..."
+	}],
+	"t32":[
+	{
+		pt:"Abre o editor de legenda, permitindo a alteração da forma de representação desse tema.",
+		en:"Opens the editor of legend, allowing the modification of the form of representation of this theme."
+	}],
+	"t33":[
+	{
+		pt:"editar legenda...",
+		en:"legend edit..."
+	}],
+	"t34":[
+	{
+		pt:"Mostra os dados desse tema em uma janela que acompanha o mouse.",
+		en:"The data shows that theme in a window that tracks the mouse."
+	}],
+	"t35":[
+	{
+		pt:"mostra em janela...",
+		en:"show in window"
+	}],
+	//guia adiciona
+	"a1":[
+	{
+		pt:"procurar:",
+		en:"search:"
+	}],
+	"a2":[
+	{
+		pt:"Upload de arquivo local",
+		en:"Upload local file"
+	}],
+	"a3":[
+	{
+		pt:"Download de dados",
+		en:"Data download"
+	}],
+	"a4":[
+	{
+		pt:"Conectar com servidor WMS",
+		en:"WMS server connection"
+	}],
+	"a5":[
+	{
+		pt:"Conectar com GeoRss",
+		en:"GeoRss connection"
+	}],
+	"a6":[
+	{
+		pt:"Acesso aos arquivos do servidor",
+		en:"Access files in server directory"
+	}],
+	"a7":[
+	{
+		pt:"Temas",
+		en:"Layers"
+	}],
+	"a8":[
+	{
+		pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
+		en:"Click to connect or disconnect the subject, showing it or not on the map. After changing the status of the topic, wait a few moments to be redesigned the map, or click the button to apply that will be shown."
+	}],
+	"a9":[
+	{
+		pt:"fonte",
+		en:"font"
+	}],
+	"a10":[
+	{
+		pt:"c&oacute;digo:",
+		en:"code"
+	}],
+	"a11":[
+	{
+		pt:"Sistemas",
+		en:"Systems"
+	}],
+	"a12":[
+	{
+		pt:"Abrir sistema",
+		en:"System open"
+	}],
+	//guias principais
+	"g1":[
+	{
+		pt:"Temas",
+		en:"Themes"
+	}],
+	"g2":[
+	{
+		pt:"Adiciona",
+		en:"Add"
+	}],
+	"g3":[
+	{
+		pt:"Legenda",
+		en:"Legend"
+	}],
+	"g4":[
+	{
+		pt:"Mapas",
+		en:"Maps"
+	}],	
+	//outros
+	"o1":[
+	{
+		pt:"Aguarde...",
+		en:"Wait..."
+	}],
+	"o2":[
+	{
+		pt:"busca r&aacute;pida...",
+		en:"quick search..."
+	}],
+	"o3":[
+	{
+		pt:"Lendo imagem...",
+		en:"Loading images..."
+	}],
+	"o4":[
+	{
+		pt:"Aguarde...abrindo lente",
+		en:"Wait...Opening lens..."
+	}],
+	"o5":[
+	{
+		pt:"Aguarde...iniciando",
+		en:"Wait...initializing"
+	}]
+};
+/*
+Variable: g_linguagem
+
+Língua utilizada na interface.
+
+*/
+g_linguagem = "pt";
+var temp = pCookie("i3geolingua");
+if(temp != undefined)
+{g_linguagem = temp;}
+/*
+Variable: g_posicaoLenteX
+
+Posicionamento da lente de aumento em x.
+
+*/
+g_posicaoLenteX = 0;
+/*
+Variable: g_posicaoLenteY
+
+Posicionamento da lente de aumento em y.
+
+*/
+g_posicaoLenteY = 0;
+/*
 Variable: g_autoRedesenho
 
 Ativa o auto redesenho após um determinado tempo.
@@ -275,7 +811,7 @@ Variable: g_mensagempadrao
 
 Mensagem padrão que será mostrada na janela de mensagens.
 */
-g_mensagempadrao = "O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
+g_mensagempadrao = $trad("p1");//"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
 /*
 Variable: g_entorno
 
@@ -309,8 +845,28 @@ g_funcoesClickMapaDefault = new Array(
 	"cliqueInseregrafico()",
 	"cliqueInseretoponimo()",
 	"cliqueSelecao()",
-	"cliqueMede()"
+	"cliqueMede()",
+	"cliqueSelecaoPoli()",
+	"cliqueCapturaPt()"
 );
+/*
+Variable: g_funcoesMousemoveMapaDefault
+
+Nome das funções padrão que serão executadas quando o usuário mover o mouse sobre o mapa.
+
+As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções
+
+Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
+*/
+g_funcoesMousemoveMapaDefault = new Array(
+	"movecursor()",
+	"movePan()",
+	"moveMede()",
+	"movelentef()",
+	"moveLonglat()",
+	"moveSelecaoPoli()"
+);
+
 /*
 Variable: g_listaPropriedades
 
@@ -324,17 +880,17 @@ url - função que será executada
 */
 g_listaPropriedades = {
 	"propriedades": [
-	{ text: "Tipo de imagem", url: "javascript:tipoimagem()" },
-	{ text: "Legenda", url: "javascript:opcoesLegenda()" },
-	{ text: "Escala", url: "javascript:opcoesEscala()" },
-	{ text: "Tamanho", url: "javascript:tamanho()" },
-	{ text: "Ativa/desativa entorno", url: "javascript:ativaEntorno()" },
-	{ text: "Ativa/desativa logo", url: "javascript:ativaLogo()" },
-	{ text: "Cor da selecao", url: "javascript:queryMap()" },
-	{ text: "Cor do fundo", url: "javascript:corFundo()" },
-	{ text: "Grade de coordenadas", url: "javascript:gradeCoord()" },
-	{ text: "Template", url: "javascript:template()" },
-	{ text: "Temporizador", url: "javascript:autoredesenha()" }
+	{ text: "p2", url: "javascript:tipoimagem()" },
+	{ text: "p3", url: "javascript:opcoesLegenda()" },
+	{ text: "p4", url: "javascript:opcoesEscala()" },
+	{ text: "p5", url: "javascript:tamanho()" },
+	{ text: "p6", url: "javascript:ativaEntorno()" },
+	{ text: "p7", url: "javascript:ativaLogo()" },
+	{ text: "p8", url: "javascript:queryMap()" },
+	{ text: "p9", url: "javascript:corFundo()" },
+	{ text: "p10", url: "javascript:gradeCoord()" },
+	{ text: "p11", url: "javascript:template()" },
+	{ text: "p12", url: "javascript:autoredesenha()" }
 ]};
 /*
 Variable: oMenuData
@@ -350,34 +906,34 @@ url - função que será executada
 */
 oMenuData = {
 	"ajudas": [ 
-	{ text: "Sobre o I3Geo", url: "javascript:g_hlpt = 'sobrei3geo';ajudaf('abre')" },
-	{ text: "Sistema", url: "javascript:abreDoc()" },
-	{ text: "WikiBook", url: "http://pt.wikibooks.org/wiki/I3geo" },
-	{ text: "Tutoriais", url: "http://mapas.mma.gov.br/wikibooki3geo" },
-	{ text: "Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" },
+	{ text: $trad("u1"), url: "javascript:g_hlpt = 'sobrei3geo';ajudaf('abre')" },
+	{ text: $trad("u2"), url: "javascript:abreDoc()" },
+	{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
+	{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
+	{ text: $trad("u5"), url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
 	],
 	"analise": [
-	{ text: "Geometrias", url: "javascript:analisaGeometrias()" },
-	{ text: "Grade de poligonos", url: "javascript:gradePol()" },
-	{ text: "Grade de pontos", url: "javascript:gradePontos()" },
-	{ text: "Grade de hex&aacute;gonos", url: "javascript:gradeHex()" },
-	{ text: "Entorno (buffer)", url: "javascript:buffer()" },
-	{ text: "Centr&oacute;ide", url: "javascript:centroide()" },
-	{ text: "N pontos em poligono", url: "javascript:nptPol()" },
-	{ text: "Ponto em poligono/raster", url: "javascript:pontoempoligono()" },
-	{ text: "Distribui&ccedil;&atilde;o de pontos", url: "javascript:pontosdistri()" }
+	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
+	{ text: $trad("u7"), url: "javascript:gradePol()" },
+	{ text: $trad("u8"), url: "javascript:gradePontos()" },
+	{ text: $trad("u9"), url: "javascript:gradeHex()" },
+	{ text: $trad("u10"), url: "javascript:buffer()" },
+	{ text: $trad("u11"), url: "javascript:centroide()" },
+	{ text: $trad("u12"), url: "javascript:nptPol()" },
+	{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
+	{ text: $trad("u14"), url: "javascript:pontosdistri()" }
 	]
 };
 oMenuData.janelas = [
-	{ text: "Barras de ferramentas", url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
-	{ text: "Janela de mensagens", url: "javascript:initJanelaMen()" }        
+	{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
+	{ text: $trad("u16"), url: "javascript:initJanelaMen()" }        
 	];
 oMenuData.arquivo = [
-	{ text: "Salvar mapa", url: "javascript:salvaMapa()" },
-	{ text: "Carregar mapa", url: "javascript:carregaMapa()" },
-	{ text: "Pegar imagens", url: "javascript:pegaimagens()" },
-	{ text: "Converter em WMS", url: "javascript:convertews()" },
-	{ text: "Gerador de links", url: "../geradordelinks.htm" }
+	{ text: $trad("u17"), url: "javascript:salvaMapa()" },
+	{ text: $trad("u18"), url: "javascript:carregaMapa()" },
+	{ text: $trad("u19"), url: "javascript:pegaimagens()" },
+	{ text: $trad("u20"), url: "javascript:convertews()" },
+	{ text: $trad("u21"), url: "../geradordelinks.htm" }
 	];
 /*
 Variable: g_listaFuncoesBotoes

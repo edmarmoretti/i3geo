@@ -44,6 +44,15 @@ object - objeto javaScript
 */
 $i = function(id)
 {return document.getElementById(id);}
+/*
+Function: $trad
+
+Pega o termo traduzido para uma lingua espe´cifica
+*/
+$trad = function(id)
+{
+	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
+}
 //necessario para nao dar erro no refresh
 mostradicasf = function(){}
 var scriptLocation = "";

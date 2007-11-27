@@ -10,13 +10,16 @@
 		<div id=guia1 >Pegar no mapa</div>
 		<div id=guia2 >Por atributo</div>
 		<div id=guia3 >Por tema</div>
+		<div id=guia4 >Op&ccedil;&otilde;es</div>
 	</div>
 	<span id=geral style="left:0px;top:0px;">
 		<div style=top:1px;left:0px;text-align:center;width:90%; >
 			<img id=selecaopt onclick="tiposel(this)" src="../../imagens/selpt.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid white" /> 
 			<img id=selecaoext onclick="tiposel(this)" src="../../imagens/selext.png" title="Seleciona o que estiver visível no mapa" style="cursor:pointer;border:1px solid gray" /> 
 			<img id=selecaobox onclick="tiposel(this)" src="../../imagens/selbox.png" title="Desenhe um retângulo no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
-		</div>	
+			<img id=selecaopoli onclick="tiposel(this)" src="../../imagens/selpoli.png" title="Desenhe um pol&iacute;gono no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
+		</div>
+			<input type=button id=parapoli style="cursor:pointer;display:none;text-align:center" value="concluir pol&iacute;gono" onclick="concluipoligono()"/>
 		<div id=opc1 style=top:0px;left:10px;text-align:left;width:90%; >
 			Tema:
 			<div id="temas" >
@@ -57,6 +60,16 @@
 				</div>
 			</div>
 		</div>
+		<div id=guia4obj style="width:95%;display:none;left:10px;top:10px">
+			<table class=lista3 width="90%"> 
+				<tr>  
+					<td>Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):</td>
+					<td><input style="cursor:text" size=4 class=digitar type='text' id=toleranciapt value='0' /></td>
+				</tr>
+			</table>
+
+		</div>
+
 	</span>
 </body>
 <script src="../i3geo_tudo_compacto.js" type="text/javascript"></script>

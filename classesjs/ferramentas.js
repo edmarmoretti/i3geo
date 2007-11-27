@@ -28,10 +28,127 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
+Section: funções de movimentação do mouse sobre o mapa
+*/
+/*
+Function moveMede
+
+Calcula a distância entre pontos e mostra na tela o resultado.
+*/
+function moveMede()
+{
+	if (g_tipoacao == "mede")
+	{
+		$i("mostradistancia").style.display="block";
+		var n = pontosdistobj.xpt.length;
+		if (n > 0)
+		{
+			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			if (objmapa.scale > 500000)
+			{var d = parseInt(d);}
+			else
+			{
+				d= d + "";
+				d = d.split(".");
+				var decimal = d[1].substr(0,3);
+				d = d[0]+"."+decimal;
+				d = d * 1;
+			}
+			var da = d + pontosdistobj.dist[n-1];
+			if ($i("mostradistancia_calculo"))
+			{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
+			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
+		}
+	}
+}
+/*
+Function movePan
+
+Desloca cursor de zoom box
+*/
+function movePan()
+{
+	if (((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox")) && ($i("box1").style.visibility == "visible"))
+	{zoomboxf("desloca");}
+}
+/*
+Function moveLonglat
+
+Mostra os valores da coordenada do mouse.
+*/
+function moveLonglat()
+{
+	if ($i("longlat"))
+	{$i("longlat").innerHTML = objposicaocursor.dmsx + "   " +  objposicaocursor.dmsy;}
+}
+/*
+Function moveSelecaoPoli
+
+Cria os elementos necessários à função de seleção por polígono.
+*/
+function moveSelecaoPoli()
+{
+	if (g_tipoacao == "selecaopoli")
+	{
+		var n = pontosdistobj.xpt.length;
+		if (n > 0)
+		{
+			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			if (objmapa.scale > 500000)
+			{var d = parseInt(d);}
+			else
+			{
+				d= d + "";
+				d = d.split(".");
+				var decimal = d[1].substr(0,3);
+				d = d[0]+"."+decimal;
+				d = d * 1;
+			}
+			var da = d + pontosdistobj.dist[n-1];
+			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
+		}
+	}
+}
+/*
 Section: funções de clique sobre o mapa
 */
 /*
-Function: identifica
+Function: cliqueCapturaPt
+
+Captura um ponto na tela e retorna o resultado para a janela interna que estiver aberta.
+
+As coordenadas do ponto, em DMS, são repassadas para os campos do tipo input da janela interna que estiver aberta.
+A janela aberta deve ter os seguintes elementos do tipo input (ids):
+ixg,ixm,ixs,iyg,iym,iys
+*/
+function cliqueCapturaPt()
+{
+	if (g_tipoacao == "capturaponto")
+	{
+		if($i("wdocai"))
+		{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+		//convdmsf(objposicaocursor.ddx,objposicaocursor.ddx);
+		var x = objposicaocursor.dmsx.split(" ");
+		var y = objposicaocursor.dmsy.split(" ");
+		if (doc.getElementById("ixg"))
+		{doc.getElementById("ixg").value = x[0];}
+		if (doc.getElementById("ixm"))
+		{doc.getElementById("ixm").value = x[1];}
+		if (doc.getElementById("ixs"))
+		{doc.getElementById("ixs").value = x[2];}
+		if (doc.getElementById("iyg"))
+		{doc.getElementById("iyg").value = y[0];}
+		if (doc.getElementById("iym"))
+		{doc.getElementById("iym").value = y[1];}
+		if (doc.getElementById("iys"))
+		{doc.getElementById("iys").value = y[2];}
+
+		
+		//mudaiconf("pan");
+	}
+}
+/*
+Function: cliqueIdentifica
 
 Abre a janela de identificação de elementos
 */
@@ -63,7 +180,7 @@ function cliqueInserexy()
 		if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 		else
 		{
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
 			cpObj.call(p,"insereSHP",ajaxredesenha);
 		}
@@ -106,7 +223,7 @@ function cliqueInseregrafico()
 			{alert("Nenhum item foi escolhido");}
 			else
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&tipo=pizza&tema="+tema+"&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&itens="+itens+"&shadow_height="+shadow_height+"&width="+width+"&inclinacao="+inclinacao+"&g_sid="+g_sid;
 				cpObj.call(p,"insereSHPgrafico",ajaxredesenha);
 			}
@@ -152,7 +269,7 @@ function cliqueInseretoponimo()
 		var oy = doc.getElementById("offsety").value;
 		var pl = doc.getElementById("partials").value;
 		var pos = doc.getElementById("position").value;
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
 		cpObj.call(p,"insereFeature",ajaxredesenha);
 	}
@@ -171,11 +288,12 @@ function cliqueSelecao()
 		//pega o tipo de operacao da janela de selecao
 		if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
 		if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+		var tolerancia = doc.getElementById("toleranciapt").value;
 		//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 		if ((tipo != "limpa") && (tipo != "inverte"))
 		{
-			objaguarde.abre("ajaxredesenha","Aguarde...");
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+g_sid;
 			cpObj.call(p,"selecaoPT",ajaxredesenha);
 		}
 	}
@@ -210,31 +328,46 @@ function cliqueMede()
 		{
 			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
+			if($i("pararraios") && $i("pararraios").checked == true )
+			{
+				desenhoRichdraw("insereCirculo","",n);
+				if(navm)
+				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
+			}
+		}
+		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
+	}
+}
+/*
+Function: cliqueSelecaoPoli
+
+Executa as operações de seleção por polígono quando o mouse é movido sobre o mapa
+*/
+function cliqueSelecaoPoli()
+{
+	if (g_tipoacao == "selecaopoli")
+	{
+		var n = pontosdistobj.xpt.length;
+		pontosdistobj.xpt[n] = objposicaocursor.ddx;
+		pontosdistobj.ypt[n] = objposicaocursor.ddy;
+		pontosdistobj.xtela[n] = objposicaocursor.telax;
+		pontosdistobj.ytela[n] = objposicaocursor.telay;
+		pontosdistobj.ximg[n] = objposicaocursor.imgx;
+		pontosdistobj.yimg[n] = objposicaocursor.imgy;
+		pontosdistobj.dist[n] = 0;
+		window.status=n;
+		try
+		{
 			if (navn)
-			{
-				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-				var w = Math.sqrt(dx + dy);
-				try
-				{
-					if($i("pararraios") && $i("pararraios").checked == true )
-					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);}
-				}
-				catch(e){window.status=n+" erro ao desenhar o raio";}
-			}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
 			else
-			{
-				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-				var w = Math.sqrt(dx + dy);
-				try
-				{
-					if($i("pararraios") && $i("pararraios").checked==true )
-					{richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);}
-				}
-				catch(e){window.status=n+" erro ao desenhar o raio";}
-				pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
-			}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+		}
+		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+		if (n > 0)
+		{
+			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 		}
 		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
 	}
@@ -366,7 +499,7 @@ function excluitemaf(tema)
 	}
 	while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"excluiTemas",ajaxredesenha);
 	objmapa.temaAtivo = "";
@@ -382,7 +515,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function sobetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"sobeTema",ajaxredesenha);
 }
@@ -397,7 +530,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function descetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"desceTema",ajaxredesenha);
 }
@@ -412,7 +545,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function zoomtemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"zoomTema",ajaxredesenha);
 }
@@ -428,7 +561,7 @@ celula - objeto que foi clicado nas opções de um tema. Passado para a função peg
 function limpaseltemaf(celula)
 {
 	g_operacao = "limpasel";
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+pegaTema(celula)+"&g_sid="+g_sid;
 	cpObj.call(p,"selecaoLimpa",ajaxredesenha);
 }
@@ -451,7 +584,7 @@ function mudatranspf(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		cpObj.call(p,"mudaTransparencia",ajaxredesenha);
 	}
@@ -478,7 +611,7 @@ function mudanomef(idtema)
 	{
 		var p = $i("nometema"+idtema);
 		$i("nometema"+idtema).innerHTML = valor;
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		cpObj.call(p,"mudaNome",ajaxredesenha);
 	}
@@ -523,6 +656,7 @@ function selecao()
 		mudaiconf("selecao");
 		pontosdistobj = new pontosdist();
 		objmapa.temaAtivo = "";
+		criaContainerRichdraw();
 		wdocaf("360px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
 	}
 	else
@@ -632,38 +766,7 @@ function mede()
 		//
 		//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
 		//
-		if (!$i("divGeometriasTemp"))
-		{
-			var novoel = document.createElement("div");
-			with(novoel)
-			{
-				id = "divGeometriasTemp";
-				style.cursor="crosshair";
-				style.zIndex=0;
-				style.position="absolute";
-				style.width=objmapa.w;
-				style.height=objmapa.h;
-				style.border="1px solid black";
-				style.display="none";
-				style.top=imagemyi;
-				style.left=imagemxi;
-			}
-			document.body.appendChild(novoel);
-		}
-		if ($i("divGeometriasTemp"))
-		{
-    		$i("divGeometriasTemp").innerHTML = "";
-    		var renderer;
-    		if (navn) {renderer = new SVGRenderer();}
-			else {renderer = new VMLRenderer();}
-    		richdraw = new RichDrawEditor(document.getElementById('divGeometriasTemp'), renderer);
-			richdraw.editCommand('fillcolor', 'red');
-			richdraw.editCommand('linecolor', 'gray');
-			richdraw.editCommand('linewidth', '1px');
-    		richdraw.editCommand('mode', 'line');
-    		$i("divGeometriasTemp").style.display="block";
-		}
-		if(navn){ativaClicks($i("divGeometriasTemp"));}
+		criaContainerRichdraw();
 	}
 	else
 	{
@@ -893,7 +996,7 @@ function ativaBuscaRapida(iddiv)
 {
 	if($i("buscaRapida"))
 	{
-		var ins = "<input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='busca r&aacute;pida...' />";
+		var ins = "<input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
 		ins += "<img  src='"+g_locaplic+"/imagens/tic.png' onclick='buscaRapida()' />";
 		$i(iddiv).innerHTML = ins;
 	}
@@ -994,7 +1097,7 @@ function lenteDeAumento()
 	else
 	{
 		g_lenteaberta = "sim";
-		objaguarde.abre("ajaxabrelente","Aguarde...");
+		objaguarde.abre("ajaxabrelente",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 		cpObj.call(p,"lente",ajaxabrelente);
 	}
@@ -1087,7 +1190,7 @@ Reinicia o mapa atual
 */
 function reiniciaMapa()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
 	cpObj.call(p,"reiniciaMapa",ajaxredesenha);
 }

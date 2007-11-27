@@ -1940,7 +1940,7 @@ Include:
 	case "selecaopt":
 		include("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
-		$cp->set_data($m->selecaoPT($xy,$tipo));
+		$cp->set_data($m->selecaoPT($xy,$tipo,$tolerancia));
 	break;
 /*
 Property: selecaoext
@@ -1994,6 +1994,22 @@ Include:
 		include("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoTema($temao,$tipo));
+	break;
+/*
+Property: selecaoPoli
+
+Seleção por poligono (chamado via POST).
+
+Include:
+<classe_alteraclasse.php>
+*/	
+	case "selecaoPoli":
+		//esta operação é chamada com POST via cpaint
+		//por isso precisa ser executada com start
+		$cp->register('selecaoPoli');
+		$cp->start();
+		restauraCon($map_file,$postgis_mapa);
+		$cp->return_data();
 	break;
 /*
 Property: limpasel
@@ -2143,6 +2159,22 @@ function alteraclassesPost($ids,$nomes,$exps)
 	$m->salva();
 }
 /*
+Function: selecaoPoli
+
+Seleciona um tema por polígono baseado em uma lista de pontos.
+
+Include:
+<classe_selecao.php>
+*/
+function selecaoPoli($xs,$ys,$tema,$tipo)
+{
+	global $map_file,$cp;
+	include("classe_selecao.php");
+	$m = new Selecao($map_file,$tema);
+	$cp->set_data($m->selecaoPorPoligono($tipo,$xs,$ys));
+	$m->salva();
+}
+/*
 Function: redesenhaMapa
 
 Redesenha o mapa e retorna os parâmetros do novo mapa.
@@ -2157,7 +2189,7 @@ function redesenhaMapa()
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
-	$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);
+	$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
 	if ($imagem == "erro")
 	{
 		unlink($map_file);
@@ -2165,7 +2197,7 @@ function redesenhaMapa()
 		$m = New Mapa($map_file);
 		$par = $m->parametrosTemas();
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
-		{$imagem = $locmapserv."?map=".$map_file."&mode=map";}
+		{$imagem = "var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
 		else
 		{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
 	}

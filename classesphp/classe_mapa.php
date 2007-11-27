@@ -67,7 +67,7 @@ $map_file - Endereço do mapfile no servidor.
   		$this->arquivo = $map_file;
 		for ($i=0;$i < ($this->mapa->numlayers);$i++)
 		{$this->layers[] = $this->mapa->getlayer($i);}
-		$this->mapa->preparequery();
+		//$this->mapa->prepareimage();
 	}
 /*
 Method: salva
@@ -160,7 +160,7 @@ string - parametros do corpo do mapa
 Include:
 <classe_imagem.php>
 */
-	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem)
+	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
 		require_once("classe_imagem.php");
 		$legenda = $this->mapa->legend;
@@ -181,31 +181,51 @@ Include:
 			}
 		}			
 		$nome = nomeRandomico();
+		
+		/*
 		if (!file_exists(($this->arquivo)."qy"))
 		{$imgo = @$this->mapa->draw();}
 		else
 		{$imgo = @$this->mapa->drawQuery();}
+		*/
+		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum")
+		{
+			foreach($this->layers as $l)
+			{$l->set("status",MS_OFF);}
+			$imgo = @$this->mapa->draw();		
+		}
+		else
+		{
+			if (!file_exists(($this->arquivo)."qy"))
+			{$imgo = @$this->mapa->draw();}
+			else
+			{$imgo = @$this->mapa->drawQuery();}
+			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
+			$imgo->saveImage($nomer);
+			if ($tipoimagem == "cinza")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "sepiaclara")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "sepianormal")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
+			}
+		}
 		if ($imgo == ""){return "erro";}
 		$e = $this->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-		$nomer = ($imgo->imagepath)."mapa".$nome.".png";
-		$imgo->saveImage($nomer);
-		if ($tipoimagem == "cinza")
-		{
-			$m = new Imagem($nomer);
-			imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));
-		}
-		if ($tipoimagem == "sepiaclara")
-		{
-			$m = new Imagem($nomer);
-			imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));
-		}
-		if ($tipoimagem == "sepianormal")
-		{
-			$m = new Imagem($nomer);
-			imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
-		}
 		$nomer = ($imgo->imageurl).basename($nomer);
+		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+		{
+			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
+		}
 		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 		$imgo->free();
 		return $res;
@@ -641,6 +661,8 @@ $locaplic - string Diretório onde fica a aplicação.
 				foreach ($novosnomes as $n)
 				{
 					$nlayer = $nmap->getlayerbyname($n);
+					//if($nlayer->type == MS_LAYER_RASTER)
+					//{$this->mapa->selectOutputFormat("png2");}
 					$nlayer->set("status",MS_DEFAULT);
 					$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 					$nlayer->set("name",$nomeunico[$n]);

@@ -55,6 +55,10 @@ $i("guia3").onclick = function()
  		$i("overlay").innerHTML = retorno.dados
 	},"overlay")
 }
+$i("guia4").onclick = function()
+{
+ 	mostraGuia("guia4")
+}
 
 //combo com o tipo de operacao
 var combot = "<select  id=tipoOperacao onchange='operacao(this)' >"
@@ -70,10 +74,12 @@ function mudaicone()
 	$i("selecaopt").style.border = "1px solid gray"
 	$i("selecaoext").style.border = "1px solid gray"
 	$i("selecaobox").style.border = "1px solid gray"
+	$i("selecaopoli").style.border = "1px solid gray"
 }
 //botoes de tipo
 function tiposel(obj)
 {
+	$i("parapoli").style.display = "none";
 	var fim = function()
 	{aguarde("none");window.parent.ajaxredesenha("");}
 	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
@@ -100,7 +106,17 @@ function tiposel(obj)
 		obj.style.border = "1px solid white"
 		window.parent.g_tipoacao = "selecao";	
 	}
-	
+	if (obj.id == "selecaopoli")
+	{
+		window.parent.richdraw.fecha()
+		window.parent.limpacontainerf()
+		mudaicone()
+		obj.style.border = "1px solid white"
+		window.parent.g_tipoacao = "selecaopoli";
+		alert("Clique no mapa para desenhar o polígono. O ultimo ponto sera ligado ao primeiro.")
+		$i("parapoli").style.display = "block";
+		window.parent.criaContainerRichdraw();
+	}
 }
 
 //cria combo com os temas
@@ -198,7 +214,7 @@ function operacao(tipo)
 		aguarde("block")
 		var fim = function()
 		{aguarde("none");window.parent.ajaxredesenha("")}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+$i("comboTemas").value+"&tipo="+tipo.value
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+$i("comboTemas").value+"&tipo="+tipo.value+"&tolerancia="+$i("toleranciapt").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -278,4 +294,26 @@ function concluidof()
 {
 	window.parent.remapaf()
 	aguarde("none")
+}
+function concluipoligono()
+{
+	$i("parapoli").style.display = "none";
+	tiposel($i("selecaopt"))
+	var pontos = window.parent.pontosdistobj;
+	window.parent.richdraw.fecha()
+	var n = pontos.xpt.length;
+	if (n > 2)
+	{
+		aguarde("block")
+		var xs = pontos.xpt.toString(",")
+		var ys = pontos.ypt.toString(",")
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli"
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_transfer_mode('POST');
+		cp.set_response_type("JSON");
+		cp.call(p,"selecaoPoli",concluidof,xs,ys,$i("comboTemas").value,$i("tipoOperacao").value);
+	}
+	else
+	{alert("Sao necessarios pelo menos tres pontos");}
 }

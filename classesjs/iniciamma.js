@@ -279,8 +279,8 @@ function Mapa(e,m)
 		var menos = 0;
 		if ($i("contemFerramentas"))
 		{menos = menos + parseInt($i("contemFerramentas").style.width);}
-		if ($i("encolheFerramentas"))
-		{menos = menos + parseInt($i("encolheFerramentas").style.width);}
+		//if ($i("encolheFerramentas"))
+		//{menos = menos + parseInt($i("encolheFerramentas").style.width);}
 		if ($i("ferramentas"))
 		{menos = menos + parseInt($i("ferramentas").style.width);}
 		var novow = screen.availWidth - diminuix;
@@ -527,7 +527,7 @@ function Mapa(e,m)
 		//
 		//inicia o mapa
 		//
-		objaguarde.abre("montaMapa","Aguarde...iniciando o mapa");
+		objaguarde.abre("montaMapa",$trad("o5"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
 		cpObj.call(p,"iniciaMapa",this.montaMapa);
 	};
@@ -664,7 +664,7 @@ function Mapa(e,m)
 				}
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
-				if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
+				//if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				$i("mst").style.width=objmapa.w + temp + "px";
 				with($i("contemImg"))
@@ -739,13 +739,15 @@ function Mapa(e,m)
 		{
 			listaPr = new Object();
 			listaPr = treeviewNew("listaPr", "default", id, null);
-			listaPr.createItem("propriedadesRaiz", "<b>Propriedades do mapa</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
+			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
 			for (l=0;l<g_listaPropriedades.propriedades.length; l++)
 			{
-				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+g_listaPropriedades.propriedades[l].text+" </span>";
+				var temp = g_listaPropriedades.propriedades[l].text;
+				var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
+				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
 				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 			}
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
@@ -792,8 +794,17 @@ function Mapa(e,m)
 		//
 		if ($i("mapaReferencia") && objmapa.extent != mapexten)
 		{
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
-			cpObj.call(p,"retornaReferencia",ajaxReferencia);
+			if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
+			{
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
+				cpObj.call(p,"retornaReferencia",ajaxReferencia);
+			}
+			else
+			{
+				var re = new RegExp("&mode=map", "g");
+				$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
+				gravaQuadro("referencia",$i("imagemReferencia").src);
+			}
 		}
 		else
 		{
@@ -845,7 +856,7 @@ function Mapa(e,m)
 			var lista = temas.split(";");
 			mytreeview1 = new Object();
 			mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
-			var titulo = "<b>Camadas</b><img id='lixeira' style='position:relative;top:5px' title='arraste o tema aqui para excluir'  src='"+$im("gnome-fs-trash-full.png")+"' />";
+			var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("gnome-fs-trash-full.png")+"' />";
 			mytreeview1.createItem("g1",titulo, g_locaplic+"/imagens/foldermapa.gif", true, true, true, null);
 			mytreeview1.itemExpand = expandeTema;
 			var cor = "rgb(250,250,250)";
@@ -857,18 +868,18 @@ function Mapa(e,m)
 				if(ltema[1] == 2){ck = 'CHECKED';}
 				//ltema[8]==sim indica que e um tema com features
 				if (ltema[8] == undefined){ltema[8] = "nao";}
-				tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
+				tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
 				if (ltema[5] == "sim") //o tema tem selecao
-				{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='limpa sele&ccedil;&atilde;o' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'Limpa sele&ccedil;&atilde;o existente nesse tema','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+				{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				//verifica se e um wms que tem wfs
 				if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
-				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para fazer o download desse tema no formato shapefile','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
-				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'Clique para fazer o download desse tema no formato shapefile','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 				if (navm)
-				{tnome += "<span title=1clique e arraste' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
+				{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
 				else
-				{tnome += "<span title='arraste para mudar a ordem' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
+				{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
 				mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
 				tnome = "<img width=0px src="+$im("branco.gif") + " />";
 				mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
@@ -998,7 +1009,7 @@ function Mapa(e,m)
 		}
 		this.atualizaCorpoMapa = function()
 		{
-			objaguarde.abre("ajaxCorpoMapa","Aguarde...");
+			objaguarde.abre("ajaxCorpoMapa",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
 			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
 		};
@@ -1045,4 +1056,20 @@ function Mapa(e,m)
 			}
 		}
 	};
+	/*
+	Function: verificaMousemoveMapa
+	
+	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
+	*/
+	this.verificaMousemoveMapa = function()
+	{
+		if (g_funcoesMousemoveMapaDefault.length > 0)
+		{
+			for (f=0;f<g_funcoesMousemoveMapaDefault.length; f++)
+			{
+				eval(g_funcoesMousemoveMapaDefault[f]);
+			}
+		}
+	};
+
 }

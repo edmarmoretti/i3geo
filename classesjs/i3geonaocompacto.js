@@ -15,6 +15,16 @@ object - objeto javaScript
 */
 $i = function(id)
 {return document.getElementById(id);}
+/*
+Function: $trad
+
+Pega o termo traduzido para uma lingua espe´cifica
+*/
+$trad = function(id)
+{
+	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
+}
+
 mostradicasf = function(){}
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
@@ -31,7 +41,6 @@ for (var i = 0; i < scripts.length; i++) {
 }
 var allScriptTags = "";
 var jsfiles = new Array(
-"configura.js",
 "../pacotes/yui231/build/yahoo/yahoo-min.js",
 "../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui231/build/dom/dom-min.js",
@@ -50,6 +59,7 @@ var jsfiles = new Array(
 "jsobjects/jsUI-Global/uiCommon.js",
 "jsobjects/jsUI-Treeview/component.js",
 "funcoes.js",
+"configura.js",
 "ferramentas.js",
 "redesenho.js",
 "iniciamma.js",

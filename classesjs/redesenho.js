@@ -330,7 +330,7 @@ function ajaxCorpoMapa(retorno)
 {
 	$i("mst").style.display="block";
 	if (!$i("img")){return;}
-	objaguarde.abre("ajaxCorpoMapa1","Lendo imagem...");
+	objaguarde.abre("ajaxCorpoMapa1",$trad("o3"));
 	//retorno não é um objeto CPAINT
 	if (retorno.data){retorno = retorno.data;}
 	if ((retorno != "erro") && (retorno != undefined))
@@ -383,7 +383,7 @@ function ajaxredesenha(retorno)
 	if ((retorno != "erro") && (retorno != undefined))
 	{
 		if (retorno.search("var mapimagem=") > -1)
-		{objaguarde.abre("ajaxiniciaParametros","Aguarde...");ajaxIniciaParametros(original);}
+		{objaguarde.abre("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(original);}
 		else
 		{
 			//algumas variï¿½eis nï¿½ sï¿½ retornadas, conforme o programa, entï¿½ devem ser declaradas
@@ -391,7 +391,7 @@ function ajaxredesenha(retorno)
 			//pega os parametros do mapa e redesenha
 			if($i("img"))
 			{
-				objaguarde.abre("ajaxiniciaParametros","Aguarde...");
+				objaguarde.abre("ajaxiniciaParametros",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+g_tipoimagem+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
@@ -545,7 +545,7 @@ function ajaxIniciaParametros(retorno)
 			objaguarde.fecha("ajaxredesenha");
 			if (g_lenteaberta == "sim")
 			{
-				objaguarde.abre("ajaxabrelente","Aguarde...abrindo lente");
+				objaguarde.abre("ajaxabrelente",$trad("o4"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2);
@@ -595,10 +595,10 @@ function ajaxabrelente(retorno)
 		olente.style.zIndex=1000;
 		olenteimg.style.zIndex=1000;
 		oboxlente.style.zIndex=1000;
-		eval ("olente.style." + g_tipoleft + " = imagemxi + g_postpx");
-		eval ("olente.style." + g_tipotop + " = imagemyi + g_postpx");
-		eval ("oboxlente.style." + g_tipoleft + " = imagemxi + g_postpx");
-		eval ("oboxlente.style." + g_tipotop + " = imagemyi + g_postpx");
+		eval ("olente.style." + g_tipoleft + " = imagemxi + g_posicaoLenteX + g_postpx");
+		eval ("olente.style." + g_tipotop + " = imagemyi + g_posicaoLenteY + g_postpx");
+		eval ("oboxlente.style." + g_tipoleft + " = imagemxi + g_posicaoLenteX + g_postpx");
+		eval ("oboxlente.style." + g_tipotop + " = imagemyi + g_posicaoLenteY + g_postpx");
 		oboxlente.style.display='block';
 		oboxlente.style.visibility='visible';
 		olente.style.display='block';
