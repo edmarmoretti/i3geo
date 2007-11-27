@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<!-- /Creative Commons Public Domain -->
+<!--
+
+
+-->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="10"
+   id="svg1"
+   sodipodi:docname="united_kingdom.svg"
+   sodipodi:version="0.32"
+   width="20"
+   inkscape:version="0.45.1"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:docbase="C:\ms4w\Apache\htdocs\i3geo\imagens"
+   version="1.0"
+   inkscape:export-filename="C:\ms4w\Apache\htdocs\i3geo\imagens\united_kingdom.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata3">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Clipart by Daniel McRae - United Kingdom</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>unitedkingdom</rdf:li>
+            <rdf:li />
+            <rdf:li>europe</rdf:li>
+            <rdf:li>united_nations_member</rdf:li>
+            <rdf:li>flag</rdf:li>
+            <rdf:li>sign</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org">
+            <dc:title>Daniel McRae</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Daniel McRae</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Daniel McRae</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="base"
+     width="20px"
+     height="10px"
+     inkscape:zoom="7.6367532"
+     inkscape:cx="40.234691"
+     inkscape:cy="-24.36548"
+     inkscape:window-width="1280"
+     inkscape:window-height="753"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:current-layer="svg1" />
+  <g
+     id="g578"
+     transform="matrix(0.3315599,0,0,0.3215893,0.1745601,0.2285257)">
+    <rect
+       height="30"
+       id="rect124"
+       style="font-size:12px;fill:#000066;stroke-width:1pt"
+       width="60"
+       x="0"
+       y="0" />
+    <g
+       id="g584"
+       style="font-size:12px">
+      <path
+         d="M 0,0 L 0,3.3541 L 53.2918,30 L 60,30 L 60,26.6459 L 6.7082,0 L 0,0 z M 60,0 L 60,3.35405 L 6.7082,30 L 0,30 L 0,26.6458 L 53.2918,0 L 60,0 z "
+         id="path146"
+         style="font-size:12px;fill:#ffffff;stroke-width:1pt" />
+      <path
+         d="M 25,0 L 25,30 L 35,30 L 35,0 L 25,0 z M 0,10 L 0,20 L 60,20 L 60,10 L 0,10 z "
+         id="path136"
+         style="font-size:12px;fill:#ffffff;stroke-width:1pt" />
+      <path
+         d="M 0,12 L 0,18 L 60,18 L 60,12 L 0,12 z M 27,0 L 27,30 L 33,30 L 33,0 L 27,0 z "
+         id="path141"
+         style="font-size:12px;fill:#cc0000;stroke-width:1pt" />
+      <path
+         d="M 0,30 L 20,20 L 24.4721,20 L 4.47214,30 L 0,30 z M 0,0 L 20,10 L 15.5279,10 L 0,2.23607 L 0,0 z M 35.5279,10 L 55.5279,0 L 60,0 L 40,10 L 35.5279,10 z M 60,30 L 40,20 L 44.4721,20 L 60,27.7639 L 60,30 z "
+         id="path150"
+         style="font-size:12px;fill:#cc0000;stroke-width:1pt" />
+    </g>
+  </g>
+</svg>
