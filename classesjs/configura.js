@@ -42,6 +42,7 @@ Free Software Foundation, Inc., no endereço
 Variable: g_traducao
 
 Termos utilizados na interface conforme a linguagem
+
 */
 g_traducao = {
 //texto da janela de mensagens
