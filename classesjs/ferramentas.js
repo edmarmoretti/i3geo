@@ -245,7 +245,7 @@ function cliqueInseretoponimo()
 		if ($i("wdoca").style.display == "none")
 		{textofid();}
 		var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-		var texto = doc.getElementById("texto").value;
+		texto = doc.getElementById("texto").value;
 		var f = doc.getElementById("fonte").value;
 		var t = doc.getElementById("tamanho").value;
 		var a = doc.getElementById("angulo").value;
@@ -269,9 +269,37 @@ function cliqueInseretoponimo()
 		var oy = doc.getElementById("offsety").value;
 		var pl = doc.getElementById("partials").value;
 		var pos = doc.getElementById("position").value;
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
-		cpObj.call(p,"insereFeature",ajaxredesenha);
+		//o texto será digitado
+		var digi = function(retorno)
+		{
+			//se texto for igual a vazio é pq o valor foi pego de um atributo
+			if(texto == "")
+			{
+				objaguarde.fecha("ajaxredesenha");
+				texto = retorno.data;
+			}
+			if (texto != " ")
+			{
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
+				cpObj.call(p,"insereFeature",ajaxredesenha);
+			}
+		};
+		if (doc.getElementById("tipoInsere").value == "digitando")
+		{eval("digi('')");}
+		else
+		{
+			//o texto será capturado de um atributo do elemento
+			texto = "";
+			if ((doc.getElementById("temasLigados")) && (doc.getElementById("itemsel")))
+			{
+				var tema = doc.getElementById("temasLigados").value;
+				var item = doc.getElementById("itemsel").value;
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+g_sid;
+				cpObj.call(p,"identificaunico",digi);
+			}			
+		}
 	}
 }
 /*
@@ -1214,7 +1242,7 @@ function textofid()
 		mudaiconf("textofid");
 		pontosdistobj = new pontosdist();
 		g_tipoacao = "textofid";
-		wdocaf("350px","200px",g_locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
+		wdocaf("360px","250px",g_locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
 	}
 	else
 	{mudaiconf("pan");}

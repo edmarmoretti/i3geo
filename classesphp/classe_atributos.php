@@ -809,6 +809,11 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
 				$layer->close();
 				return $shape;
 			}
+			if ($tiporetorno == "unico")
+			{
+				$layer->close();
+				return $shape->values[$itsarray[0]];;
+			}
 			$conta = 0;
 			foreach ($itsarray as $it)
 			{

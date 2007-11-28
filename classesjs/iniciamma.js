@@ -244,10 +244,10 @@ function Mapa(e,m)
 	//
 	//se o div listapropriedades não existir, as propriedades do mapa são incluídas no menu suspenso
 	//
-	if (!$i("listaPropriedades"))
-	{
-		oMenuData.propriedades = g_listaPropriedades;
-	}
+	//if (!$i("listaPropriedades"))
+	//{
+	//	oMenuData.propriedades = g_listaPropriedades;
+	//}
 	objaguarde = new aguarde();
 	objposicaocursor = new posicaocursor();
 	objposicaomouse = new posicaomouse();

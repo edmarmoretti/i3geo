@@ -1548,6 +1548,21 @@ Include:
 		$cp->set_data($m->identifica($opcao,$xy,$resolucao));
 	break;
 /*
+Property: identificaunico
+
+Identifica elementos no mapa retornando apenas o valor de um único item.
+
+Include:
+<classe_atributos.php>
+*/
+	case "identificaunico":
+		if (!isset($resolucao)){$resolucao = 5;}
+		include("classe_atributos.php");
+		$m = new Atributos($map_file,$tema);
+		$xy = explode(",",$xy);
+		$cp->set_data($m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico"));
+	break;
+/*
 Property: estatistica
 
 Calcula estatísticas básicas de uma tabela de um tema.

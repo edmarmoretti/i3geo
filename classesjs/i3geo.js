@@ -47,7 +47,11 @@ $i = function(id)
 /*
 Function: $trad
 
-Pega o termo traduzido para uma lingua espe´cifica
+Pega o termo traduzido para uma lingua específica
+
+Parameters:
+
+id - id que identifica o texto na variável g_linguagem, definida em configura.js
 */
 $trad = function(id)
 {
