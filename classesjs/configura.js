@@ -44,767 +44,861 @@ Variable: g_traducao
 Termos utilizados na interface conforme a linguagem
 */
 g_traducao = {
-	//texto da janela de mensagens
-	"p1": [
-	{
-		pt:"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>",
-		en:"I3geo is a open source software. <a href='http://mapas.mma.gov.br/download' target=blanck >Click</a> to download.",
-		es:""
-	}],
-	//lista de propriedades do mapa
-	"p2": [
-	{
-		pt:"Tipo de imagem",
-		en:"Image type",
-		es:""
-	}],
-	"p3": [
-	{
-		pt: "Legenda",
-		en: "Legend",
-		es:""
-	}],
-	"p4": [
-	{
-		pt:"Escala",
-		en:"Scale",
-		es:""
-	}],
-	"p5": [
-	{
-		pt: "Tamanho",
-		en:"Size",
-		es:""
-	}],
-	"p6": [
-	{
-		pt: "Ativa/desativa entorno",
-		en:"Activate/Disable surrounding",
-		es:""
-	}],
-	"p7": [
-	{
-		pt: "Ativa/desativa logo",
-		en:"Activate/Disable logo",
-		es:""
-	}],
-	"p8": [
-	{
-		pt: "Cor da selecao",
-		en:"Selection color",
-		es:""
-	}],
-	"p9": [
-	{
-		pt: "Cor do fundo",
-		en:"Background color",
-		es:""
-	}],
-	"p10": [
-	{
-		pt: "Grade de coordenadas",
-		en:"Graticule",
-		es:""
-	}],
-	"p11": [
-	{
-		pt: "Template",
-		en:"Template",
-		es:""
-	}],
-	"p12": [
-	{
-		pt: "Temporizador",
-		en:"Timer",
-		es:""
-	}],
-	"p13": [
-	{
-		pt: "Propriedades do mapa",
-		en:"Map properties",
-		es:""
-	}],
-	//itens do menu suspenso
-	"s1": [
-	{
-		pt: "&nbsp;Ajuda?",
-		en:"&nbsp;Help",
-		es:""
-	}],
-	"s2": [
-	{
-		pt: "&nbsp;An&aacute;lise",
-		en:"&nbsp;Analysis",
-		es:""
-	}],
-	"s3": [
-	{
-		pt: "&nbsp;Janelas",
-		en:"&nbsp;Windows",
-		es:""
-	}],
-	"s4": [
-	{
-		pt: "&nbsp;Arquivo",
-		en:"&nbsp;Files",
-		es:""
-	}],
-	"s5": [
-	{
-		pt: "&nbsp;Propriedades",
-		en:"&nbsp;Properties",
-		es:""
-	}],
-	//submenus
-	"u1": [
-	{
-		pt: "Sobre o I3Geo",
-		en:"About",
-		es:""
-	}],
-	"u2": [
-	{
-		pt: "Sistema",
-		en:"System",
-		es:""
-	}],
-	"u3": [
-	{
-		pt: "WikiBook",
-		en:"WikiBook",
-		es:""
-	}],
-	"u4": [
-	{
-		pt: "Tutoriais",
-		en:"Tutorials",
-		es:""
-	}],
-	"u5": [
-	{
-		pt: "Blog",
-		en:"Blog",
-		es:""
-	}],
-	"u6": [
-	{
-		pt: "Geometrias",
-		en:"Geometries",
-		es:""
-	}],
-	"u7": [
-	{
-		pt: "Grade de poligonos",
-		en:"Polygon grid",
-		es:""
-	}],
-	"u8": [
-	{
-		pt: "Grade de pontos",
-		en:"Point grid",
-		es:""
-	}],
-	"u9": [
-	{
-		pt: "Grade de hex&aacute;gonos",
-		en:"Hexagonal grid",
-		es:""
-	}],
-	"u10": [
-	{
-		pt: "Entorno(Buffer)",
-		en:"Buffer",
-		es:""
-	}],
-	"u11": [
-	{
-		pt: "Centr&oacute;ide",
-		en:"Centroid",
-		es:""
-	}],
-	"u12": [
-	{
-		pt: "N pontos em poligono",
-		en:"N point in polygon",
-		es:""
-	}],
-	"u13": [
-	{
-		pt: "Ponto em poligono/raster",
-		en:"Point in polygon/raster",
-		es:""
-	}],
-	"u14": [
-	{
-		pt: "Distribui&ccedil;&atilde;o de pontos",
-		en:"Point distribuition",
-		es:""
-	}],
-	"u15": [
-	{
-		pt: "Barras de ferramentas",
-		en:"Tools",
-		es:""
-	}],
-	"u16": [
-	{
-		pt: "Janela de mensagens",
-		en:"Message window",
-		es:""
-	}],     
-	"u17": [
-	{
-		pt: "Salvar mapa",
-		en:"Save map",
-		es:""
-	}],
-	"u18": [
-	{
-		pt: "Carregar mapa",
-		en:"Load map",
-		es:""
-	}],
-	"u19": [
-	{
-		pt: "Pegar imagens",
-		en:"Take pictures",
-		es:""
-	}],
-	"u20": [
-	{
-		pt: "Converter em WMS",
-		en:"Convert to WMS",
-		es:""
-	}],
-	"u21": [
-	{
-		pt: "Gerador de links",
-		en:"Link generator",
-		es:""
-	}],
-	//arvore com a lista de temas
-	"t1": [
-	{
-		pt: "Camadas",
-		en:"Layers",
-		es:""
-	}],
-	"t2":[
-	{
-		pt:"arraste o tema aqui para excluir",
-		en:"Drag the layer here to exclude",
-		es:""
-	}],
-	"t3":[
-	{
-		pt:"Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
-		en:"Click to connect or disconnect the layer, showing it or not on the map. After changing the status of the topic, wait a few moments to be redesigned the map, or click the button to apply that will be shown.",
-		es:""
-	}],
-	"t4":[
-	{
-		pt:"limpa sele&ccedil;&atilde;o",
-		en:"Clear the selection",
-		es:""
-	}],
-	"t5":[
-	{
-		pt:"Limpa sele&ccedil;&atilde;o existente nesse tema",
-		en:"Clear the selection",
-		es:""
-	}],
-	"t6":[
-	{
-		pt:"Clique para fazer o download desse tema no formato shapefile",
-		en:"Download in shapefile format",
-		es:""
-	}],
-	"t7":[
-	{
-		pt:"clique e arraste",
-		en:"click and drag",
-		es:""
-	}],
-	"t8":[
-	{
-		pt:"arraste para mudar a ordem",
-		en:"drag to change the draw order",
-		es:""
-	}],
+//texto da janela de mensagens
+"p1": [
+{
+pt:"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>",
+en:"I3geo is a open source software! <a href='http://mapas.mma.gov.br/download' target=blank >Click</a> to 
+download.",
+es:""
+}],
+//lista de propriedades do mapa
+"p2": [
+{
+pt:"Tipo de imagem",
+en:"Image type",
+es:""
+}],
+"p3": [
+{
+pt: "Legenda",
+en: "Legend",
+es:""
+}],
+"p4": [
+{
+pt:"Escala",
+en:"Scale",
+es:""
+}],
+"p5": [
+{
+pt: "Tamanho",
+en:"Size",
+es:""
+}],
+"p6": [
+{
+pt: "Ativa/desativa entorno",
+en:"Enable/Disable surrounding",
+es:""
+}],
+"p7": [
+{
+pt: "Ativa/desativa logo",
+en:"Enable/Disable logo",
+es:""
+}],
+"p8": [
+{
+pt: "Cor da selecao",
+en:"Selection color",
+es:""
+}],
+"p9": [
+{
+pt: "Cor do fundo",
+en:"Background color",
+es:""
+}],
+"p10": [
+{
+pt: "Grade de coordenadas",
+en:"Graticule",
+es:""
+}],
+"p11": [
+{
+pt: "Template",
+en:"Template",
+es:""
+}],
+"p12": [
+{
+pt: "Temporizador",
+en:"Timer",
+es:""
+}],
+"p13": [
+{
+pt: "Propriedades do mapa",
+en:"Map properties",
+es:""
+}],
+//itens do menu suspenso
+"s1": [
+{
+pt: "Ajuda?",
+en:"Help",
+es:""
+}],
+"s2": [
+{
+pt: "An&aacute;lise",
+en:"Analysis",
+es:""
+}],
+"s3": [
+{
+pt: "Janelas",
+en:"Windows",
+es:""
+}],
+"s4": [
+{
+pt: "Arquivo",
+en:"Files",
+es:""
+}],
+"s5": [
+{
+pt: "Propriedades",
+en:"Properties",
+es:""
+}],
+//submenus
+"u1": [
+{
+pt: "Sobre o I3Geo",
+en:"About",
+es:""
+}],
+"u2": [
+{
+pt: "Sistema",
+en:"System",
+es:""
+}],
+"u3": [
+{
+pt: "WikiBook",
+en:"WikiBook",
+es:""
+}],
+"u4": [
+{
+pt: "Tutoriais",
+en:"Tutorials",
+es:""
+}],
+"u5": [
+{
+pt: "Blog",
+en:"Blog",
+es:""
+}],
+"u6": [
+{
+pt: "Geometrias",
+en:"Geometries",
+es:""
+}],
+"u7": [
+{
+pt: "Grade de poligonos",
+en:"Polygon grid",
+es:""
+}],
+"u8": [
+{
+pt: "Grade de pontos",
+en:"Grid of Points",
+es:""
+}],
+"u9": [
+{
+pt: "Grade de hex&aacute;gonos",
+en:"Grid of Hexagons",
+es:""
+}],
+"u10": [
+{
+pt: "Entorno(Buffer)",
+en:"Buffer",
+es:""
+}],
+"u11": [
+{
+pt: "Centr&oacute;ide",
+en:"Centroid",
+es:""
+}],
+"u12": [
+{
+pt: "N pontos em poligono",
+en:"N point in polygon",
+es:""
+}],
+"u13": [
+{
+pt: "Ponto em poligono/raster",
+en:"Point in polygon/raster",
+es:""
+}],
+"u14": [
+{
+pt: "Distribui&ccedil;&atilde;o de pontos",
+en:"Point distribution",
+es:""
+}],
+"u15": [
+{
+pt: "Barras de ferramentas",
+en:"Toolbars",
+es:""
+}],
+"u16": [
+{
+pt: "Janela de mensagens",
+en:"Message window",
+es:""
+}],
+"u17": [
+{
+pt: "Salvar mapa",
+en:"Save map",
+es:""
+}],
+"u18": [
+{
+pt: "Carregar mapa",
+en:"Load map",
+es:""
+}],
+"u19": [
+{
+pt: "Pegar imagens",
+en:"Get pictures",
+es:""
+}],
+"u20": [
+{
+pt: "Converter em WMS",
+en:"Convert to WMS",
+es:""
+}],
+"u21": [
+{
+pt: "Gerador de links",
+en:"Link generator",
+es:""
+}],
+//arvore com a lista de temas
+"t1": [
+{
+pt: "Camadas",
+en:"Layers",
+es:""
+}],
+"t2":[
+{
+pt:"arraste o tema aqui para excluir",
+en:"Drag the layer here to remove",
+es:""
+}],
+"t3":[
+{
+pt:"Clique para ligar ou desligar esse tema, mostrando-o ou
+n&atilde;o 
+no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns
+instantes 
+para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que 
+ser&aacute; mostrado.",
+en:"Turn the layer on/off on the map. Wait a few moments to get the map redesigned or press the button to apply it.",
+es:""
+}],
+"t4":[
+{
+pt:"limpa sele&ccedil;&atilde;o",
+en:"Clear selection",
+es:""
+}],
+"t5":[
+{
+pt:"Limpa sele&ccedil;&atilde;o existente nesse tema",
+en:"Clear selection",
+es:""
+}],
+"t6":[
+{
+pt:"Clique para fazer o download desse tema no formato shapefile",
+en:"Click to download in shapefile format",
+es:""
+}],
+"t7":[
+{
+pt:"clique e arraste",
+en:"dragging",
+es:""
+}],
+"t8":[
+{
+pt:"arraste para mudar a ordem",
+en:"drag to change the draw order",
+es:""
+}],
 
-	
-	"t9":[
-	{
-		pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
-		en:"The scale of the issue is compatible with the scale of the map",
-		es:""
-	}],
-	"t10":[
-	{
-		pt:"A escala do tema &eacute incompat&iacute;vel com a escala do mapa",
-		en:"The scale of the issue is incompatible with the scale of the map",
-		es:""
-	}],	
-	"t11":[
-	{
-		pt:"A escala do tema n&atilde;o &eacute conhecida",
-		en:"The scale of the issue is not known",
-		es:""
-	}],
-	"t12":[
-	{
-		pt:"excluir",
-		en:"delete",
-		es:""
-	}],
-	"t12a":[
-	{
-		pt:"Clique para excluir esse tema do mapa.",
-		en:"Click to exclude the subject of the map.",
-		es:""
-	}],
-	"t13":[
-	{
-		pt:"sobe",
-		en:"up",
-		es:""
-	}],
-	"t14":[
-	{
-		pt:"Clique para subir esse tema na ordem de desenho",
-		en:"Click to raise this issue in order to design",
-		es:""
-	}],
-	"t15":[
-	{
-		pt:"desce",
-		en:"down",
-		es:""
-	}],
-	"t16":[
-	{
-		pt:"Clique para descer esse tema na ordem de desenho",
-		en:"Click to fall this subject in the order of drawing",
-		es:""
-	}],
-	"t17":[
-	{
-		pt:"zoom para o tema",
-		en:"zoom to the layer",
-		es:""
-	}],
-	"t18":[
-	{
-		pt:"Clique para ajustar o mapa de forma a mostrar todo o tema",
-		en:"Click to adjust the map in order to show the whole issue",
-		es:""
-	}],
-	"t18a":[
-	{
-		pt:"Op&ccedil;&otilde;es",
-		en:"Options",
-		es:""
-	}],
-	"t18b":[
-	{
-		pt:"Legenda",
-		en:"Legend",
-		es:""
-	}],
-	"t19":[
-	{
-		pt:"Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.",
-		en:"Amends the transparency of the subject so that the layers can be seen below.",
-		es:""
-	}],
-	"t20":[
-	{
-		pt:"opacidade:",
-		en:"opacity",
-		es:""
-	}],
-	"t21a":[
-	{
-		pt:"Muda o nome atual do tema, utilize para melhorar a leganda do mapa.",
-		en:"Change the name",
-		es:""
-	}],
-	"t21":[
-	{
-		pt:"novo nome:",
-		en:"new name",
-		es:""
-	}],
-	"t22":[
-	{
-		pt:"Localize elementos no tema com base em seus atributos descritivos.",
-		en:"Locate evidence on the issue based on their attributes descriptive.",
-		es:""
-	}],
-	"t23":[
-	{
-		pt:"procurar...",
-		en:"locate...",
-		es:""
-	}],
-	"t24":[
-	{
-		pt:"Crie uma nova camada no mapa para apresentar textos descritivos sobre esse tema, tendo como base a tabela de atributos.",
-		en:"Create a new layer on the map to display descriptive texts on the subject, drawing upon the table of attributes.",
-		es:""
-	}],
-	"t25":[
-	{
-		pt:"texto...",
-		en:"text...",
-		es:""
-	}],
-	"t26":[
-	{
-		pt:"Defina as etiquetas que serão mostradas quando o mouse é estacionado sobre um elemento desse tema.",
-		en:"Set the labels that will be shown when the mouse is parked on an element of that theme.",
-		es:""
-	}],
-	"t27":[
-	{
-		pt:"etiquetas...",
-		en:"labels...",
-		es:""
-	}],
-	"t28":[
-	{
-		pt:"Insira um filtro nesse tema para mostrar apenas determinadas informações, com base na tabela de atributos.",
-		en:"Enter a topic that filter to show only certain information, based on the table of attributes.",
-		es:""
-	}],
-	"t29":[
-	{
-		pt:"filtro...",
-		en:"filter...",
-		es:""
-	}],
-	"t30":[
-	{
-		pt:"Veja a tabela de atributos relacionada a esse tema.",
-		en:"See the table of attributes related to that theme.",
-		es:""
-	}],
-	"t31":[
-	{
-		pt:"tabela...",
-		en:"table...",
-		es:""
-	}],
-	"t32":[
-	{
-		pt:"Abre o editor de legenda, permitindo a alteração da forma de representação desse tema.",
-		en:"Opens the editor of legend, allowing the modification of the form of representation of this theme.",
-		es:""
-	}],
-	"t33":[
-	{
-		pt:"editar legenda...",
-		en:"legend edit...",
-		es:""
-	}],
-	"t34":[
-	{
-		pt:"Mostra os dados desse tema em uma janela que acompanha o mouse.",
-		en:"The data shows that theme in a window that tracks the mouse.",
-		es:""
-	}],
-	"t35":[
-	{
-		pt:"mostra em janela...",
-		en:"show in window",
-		es:""
-	}],
-	//guia adiciona
-	"a1":[
-	{
-		pt:"procurar:",
-		en:"search:"
-	}],
-	"a2":[
-	{
-		pt:"Upload de arquivo local",
-		en:"Upload local file",
-		es:""
-	}],
-	"a3":[
-	{
-		pt:"Download de dados",
-		en:"Data download",
-		es:""
-	}],
-	"a4":[
-	{
-		pt:"Conectar com servidor WMS",
-		en:"WMS server connection",
-		es:""
-	}],
-	"a5":[
-	{
-		pt:"Conectar com GeoRss",
-		en:"GeoRss connection",
-		es:""
-	}],
-	"a6":[
-	{
-		pt:"Acesso aos arquivos do servidor",
-		en:"Access files in server directory",
-		es:""
-	}],
-	"a7":[
-	{
-		pt:"Temas",
-		en:"Layers",
-		es:""
-	}],
-	"a8":[
-	{
-		pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
-		en:"Click to connect or disconnect the subject, showing it or not on the map. After changing the status of the topic, wait a few moments to be redesigned the map, or click the button to apply that will be shown.",
-		es:""
-	}],
-	"a9":[
-	{
-		pt:"fonte",
-		en:"font",
-		es:""
-	}],
-	"a10":[
-	{
-		pt:"c&oacute;digo:",
-		en:"code",
-		es:""
-	}],
-	"a11":[
-	{
-		pt:"Sistemas",
-		en:"Systems",
-		es:""
-	}],
-	"a12":[
-	{
-		pt:"Abrir sistema",
-		en:"System open",
-		es:""
-	}],
-	//guias principais
-	"g1":[
-	{
-		pt:"Temas",
-		en:"Themes",
-		es:""
-	}],
-	"g2":[
-	{
-		pt:"Adiciona",
-		en:"Add",
-		es:""
-	}],
-	"g3":[
-	{
-		pt:"Legenda",
-		en:"Legend",
-		es:""
-	}],
-	"g4":[
-	{
-		pt:"Mapas",
-		en:"Maps",
-		es:""
-	}],	
-	//outros
-	"o1":[
-	{
-		pt:"Aguarde...",
-		en:"Wait...",
-		es:""
-	}],
-	"o2":[
-	{
-		pt:"busca r&aacute;pida...",
-		en:"quick search...",
-		es:""
-	}],
-	"o3":[
-	{
-		pt:"Lendo imagem...",
-		en:"Loading images...",
-		es:""
-	}],
-	"o4":[
-	{
-		pt:"Aguarde...abrindo lente",
-		en:"Wait...Opening lens...",
-		es:""
-	}],
-	"o5":[
-	{
-		pt:"Aguarde...iniciando",
-		en:"Wait...initializing",
-		es:""
-	}],
-	//dicas das ferramentas
-	"d1":[
-	{
-		pt:"Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para o ponto digitado.",
-		en:"Enter the coordinates of a point (X = Y = latitude longitude) to localiz' it on the map. The center of the map is' move to the point entered.",
-		es:""
-	}],
-	"d2":[
-	{
-		pt:"Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
-		en:"Change the scale of the map adjusting it to show the same cover ˆ ncia geographical boot.",
-		es:""
-	}],
-	"d3":[
-	{
-		pt:"Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
-		en:"Extends the map places the clicked point in the center of the screen or extends the region indicated by a retângulo.Após enabled, click and drag the mouse over the map in the area of zoom desired.",
-		es:""
-	}],
-	"d4":[
-	{
-		pt:"Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o vis&iacute;vel.",
-		en:"Shifts the region visible on the map. Once activated, click and drag the mouse over the map to move the visible region.",
-		es:""
-	}],
-	"d5":[
-	{
-		pt:"Amplia o mapa tendo como refer&ecirc;cia o centro atual.",
-		en:"Magnify the map with the referêcia the center today.",
-		es:""
-	}],
-	"d6":[
-	{
-		pt:"Reduz o mapa tendo como refer&ecirccia o centro atual.",
-		en:"Reduces the map as having refer & ecirccia the center today.",
-		es:""
-	}],
-	"d7":[
-	{
-		pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.",
-		en:"Displays information about a point on the map. Once activated, stop the mouse for a few moments at the desired point or click on it.",
-		es:""
-	}],
-	"d8":[
-	{
-		pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas",
-		en:"It shows the extent of current geographic coordinates",
-		es:""
-	}],
-	"d9":[
-	{
-		pt:"Abre-fecha o mapa de refer&ecirc;ncia",
-		en:"Open-close the map reference",
-		es:""
-	}],
-	"d10":[
-	{
-		pt:"Digite o novo valor de escala e clique no bot&atilde;o aplicar para alterar a escala do mapa",
-		en:"Enter the new value of scale and click the button to apply to change the scale of the map",
-		es:""
-	}],
-	"d11":[
-	{
-		pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
-		en:"Search data on Wikipedia in the current scope of the map. Make a zoom on the map before opening this option. Regions can make a very extensive search very long",
-		es:""
-	}],
-	"d12":[
-	{
-		pt:"Imprime o mapa",
-		en:"Print the map",
-		es:""
-	}],
-	"d13":[
-	{
-		pt:"Localiza o IP do usu&aacute;rio no mapa",
-		en:"Locates the user's IP on the map",
-		es:""
-	}],
-	"d14":[
-	{
-		pt:"Gera arquivo para 3d",
-		en:"Generates file for 3d",
-		es:""
-	}],
-	"d15":[
-	{
-		pt:"Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da regi&atilde;o vista no mapa principal",
-		en:"Opens Google Maps, showing a satellite image of the region's main views on the map",
-		es:""
-	}],
-	"d16":[
-	{
-		pt:"Pesquisa documentos na base de dados Scielo (dados preliminares)",
-		en:"Search documents in the database Scielo (preliminary data)",
-		es:""
-	}],
-	"d17":[
-	{
-		pt:"Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo",
-		en:"Confluence Project. Points of intersection of coordinates observed in field",
-		es:""
-	}],
-	"d18":[
-	{
-		pt:"Abre lente de amplia&ccedil;&atilde;o",
-		en:"Opens lens of expansion",
-		es:""
-	}],
-	"d19":[
-	{
-		pt:"Coloca as guias em uma janela m&oacute;vel",
-		en:"Open the tabs in a window mobile",
-		es:""
-	}],
-	"d20":[
-	{
-		pt:"Redesenha o mapa com as configura&ccedil;&ocirc;es iniciais.",
-		en:"Redesenha the map with the configuraçôes initials.",
-		es:""
-	}],
-	"d21":[
-	{
-		pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
-		en:"It measures the distance between two or more points clicked on the map (less distance). The calculation of distance is approximate and their accuracy depends on the scale of the map.",
-		es:""
-	}],
-	"d22":[
-	{
-		pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os pontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.",
-		en:"Insert points on the map in geographical coordinates. Items included can be converted into lines or polygons. Items are stored in a temporary issue, can be to download shapefile.",
-		es:""
-	}],
-	"d23":[
-	{
-		pt:"Insere um gr&aacute;fico no ponto clicado conforme os atributos existentes no tema escolhido. O tema deve possuir itens com valores num&eacute;ricos na tabela de atributos.",
-		en:"Insert a graphic in point clicked as the attributes exist in the chosen theme. The subject must have items with numerical values in the table of attributes.",
-		es:""
-	}],
-	"d24":[
-	{
-		pt:"Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por tema.",
-		en:"Opens the tools to select elements of a theme. The elements selected can be used in other operaçôes as buffer and selection by theme.",
-		es:""
-	}],
-	"d25":[
-	{
-		pt:"Insere texto no mapa clicando em um ponto. Utilize essa op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao mapa.",
-		en:"Insert text on the map by clicking on a point. Use this option to add informaçôes the map.",
-		es:""
-	}],
-	"d26":[
-	{
-		pt:"Escolha o visual para os botões e outras caracter&iacute;sticas visuais do mapa",
-		en:"Choose your look for the buttons and other visual characteristics of the map",
-		es:""
-	}]
+"t9":[
+{
+pt:"A escala do tema &eacute; compat&iacute;vel com a escala do
+mapa",
+en:"The scale of the layer is compatible with the scale of the map",
+es:""
+}],
+"t10":[
+{
+pt:"A escala do tema &eacute incompat&iacute;vel com a escala do
+mapa",
+en:"The scale of the layer is incompatible with the scale of the
+map",
+es:""
+}],
+"t11":[
+{
+pt:"A escala do tema n&atilde;o &eacute conhecida",
+en:"The scale of the layer is not known",
+es:""
+}],
+"t12":[
+{
+pt:"excluir",
+en:"delete",
+es:""
+}],
+"t12a":[
+{
+pt:"Clique para excluir esse tema do mapa.",
+en:"Delete layer of the map.",
+es:""
+}],
+"t13":[
+{
+pt:"sobe",
+en:"up",
+es:""
+}],
+"t14":[
+{
+pt:"Clique para subir esse tema na ordem de desenho",
+en:"Drag the layer up",
+es:""
+}],
+"t15":[
+{
+pt:"desce",
+en:"down",
+es:""
+}],
+"t16":[
+{
+pt:"Clique para descer esse tema na ordem de desenho",
+en:"Drag the layer down",
+es:""
+}],
+"t17":[
+{
+pt:"zoom para o tema",
+en:"zoom to a layer",
+es:""
+}],
+"t18":[
+{
+pt:"Clique para ajustar o mapa de forma a mostrar todo o tema",
+en:"Click to adjust the map in order to show the whole layer",
+es:""
+}],
+"t18a":[
+{
+pt:"Op&ccedil;&otilde;es",
+en:"Options",
+es:""
+}],
+"t18b":[
+{
+pt:"Legenda",
+en:"Legend",
+es:""
+}],
+"t19":[
+{
+pt:"Altera a transparência do tema, possibilitando que as camadas 
+inferiores possam ser vistas.",
+en:"Change the layer transparency.",
+es:""
+}],
+"t20":[
+{
+pt:"opacidade:",
+en:"opacity",
+es:""
+}],
+"t21a":[
+{
+pt:"Muda o nome atual do tema. Utilize para melhorar a legenda do
+mapa.",
+en:"Change layer name.",
+es:""
+}],
+"t21":[
+{
+pt:"novo nome:",
+en:"new name",
+es:""
+}],
+"t22":[
+{
+pt:"Localize elementos no tema com base em seus atributos
+descritivos.",
+en:"Find elements on the layer based on their descriptive attributes.",
+es:""
+}],
+"t23":[
+{
+pt:"procurar...",
+en:"Search...",
+es:""
+}],
+"t24":[
+{
+pt:"Crie uma nova camada no mapa para apresentar textos descritivos 
+sobre esse tema, tendo como base a tabela de atributos.",
+en:"Create a new layer to display descriptive texts on the subject, based on table of attributes.",
+es:""
+}],
+"t25":[
+{
+pt:"texto...",
+en:"label...",
+es:""
+}],
+"t26":[
+{
+pt:"Defina as etiquetas que ser&atilde;o mostradas quando o mouse &eacute; estacionado sobre um elemento desse tema.",
+en:"Set the tooltips that will be shown when the mouse is over the element of that layer.",
+es:""
+}],
+"t27":[
+{
+pt:"etiquetas...",
+en:"tooltip...",
+es:""
+}],
+"t28":[
+{
+pt:"Insira um filtro nesse tema para mostrar apenas determinadas informa&ccedil;&otilde;es, com base na tabela de atributos.",
+en:"Filter based on the table of attributes.",
+es:""
+}],
+"t29":[
+{
+pt:"filtro...",
+en:"filter...",
+es:""
+}],
+"t30":[
+{
+pt:"Veja a tabela de atributos relacionada a esse tema.",
+en:"See the table of attributes related to that layer.",
+es:""
+}],
+"t31":[
+{
+pt:"tabela...",
+en:"table...",
+es:""
+}],
+"t32":[
+{
+pt:"Abre o editor de legenda, permitindo a alteração da forma de 
+representação desse tema.",
+en:"Opens the editor of legend, allowing the modification of the form
+of 
+representation of this theme.",
+es:""
+}],
+"t33":[
+{
+pt:"editar legenda...",
+en:"legend edit...",
+es:""
+}],
+"t34":[
+{
+pt:"Mostra os dados desse tema em uma janela que acompanha o mouse.",
+en:"The data shows that layer in a window that tracks the mouse.",
+es:""
+}],
+"t35":[
+{
+pt:"mostra em janela...",
+en:"show in window",
+es:""
+}],
+//guia adiciona
+"a1":[
+{
+pt:"procurar:",
+en:"search:"
+}],
+"a2":[
+{
+pt:"Upload de arquivo local",
+en:"Upload local file",
+es:""
+}],
+"a3":[
+{
+pt:"Download de dados",
+en:"Data download",
+es:""
+}],
+"a4":[
+{
+pt:"Conectar com servidor WMS",
+en:"WMS server connection",
+es:""
+}],
+"a5":[
+{
+pt:"Conectar com GeoRss",
+en:"GeoRss connection",
+es:""
+}],
+"a6":[
+{
+pt:"Acesso aos arquivos do servidor",
+en:"Access files in server directory",
+es:""
+}],
+"a7":[
+{
+pt:"Temas",
+en:"Layers",
+es:""
+}],
+"a8":[
+{
+pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no
+mapa. 
+Após alterar o estado do tema, aguarde alguns instantes para o mapa
+ser 
+redesenhado, ou clique no botão aplicar que será mostrado.",
+en:"Click to connect or disconnect layer, showing it or not on
+the map. After changing the layer status, wait a few moments to be
+redesigned the map, or click in the button apply that will be
+shown.",
+es:""
+}],
+"a9":[
+{
+pt:"fonte",
+en:"font",
+es:""
+}],
+"a10":[
+{
+pt:"c&oacute;digo:",
+en:"code",
+es:""
+}],
+"a11":[
+{
+pt:"Sistemas",
+en:"Systems",
+es:""
+}],
+"a12":[
+{
+pt:"Abrir sistema",
+en:"Open system",
+es:""
+}],
+//guias principais
+"g1":[
+{
+pt:"Temas",
+en:"Layer",
+es:""
+}],
+"g2":[
+{
+pt:"Adiciona",
+en:"Add",
+es:""
+}],
+"g3":[
+{
+pt:"Legenda",
+en:"Legend",
+es:""
+}],
+"g4":[
+{
+pt:"Mapas",
+en:"Maps",
+es:""
+}],
+//outros
+"o1":[
+{
+pt:"Aguarde...",
+en:"Wait...",
+es:""
+}],
+"o2":[
+{
+pt:"busca r&aacute;pida...",
+en:"quick search...",
+es:""
+}],
+"o3":[
+{
+pt:"Lendo imagem...",
+en:"Loading images...",
+es:""
+}],
+"o4":[
+{
+pt:"Aguarde...abrindo lente",
+en:"Wait...Opening lens...",
+es:""
+}],
+"o5":[
+{
+pt:"Aguarde...iniciando",
+en:"Wait...initializing",
+es:""
+}],
+//dicas das ferramentas
+"d1":[
+{
+pt:"Digite as coordenadas de um ponto (X=longitude e Y=latitude) para
+
+localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para
+o 
+ponto digitado.",
+en:"Enter the coordinates of a point (X=longitude and Y=latitude) to 
+localize it on the map. The center of the map is move to the point 
+entered.",
+es:""
+}],
+"d2":[
+{
+pt:"Altera a escala do mapa ajustando-a para mostrar a mesma 
+abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
+en:"Change the scale of the map adjusting it to show the same initial geographical 
+cover.",
+es:""
+}],
+"d3":[
+{
+pt:"Amplia o mapa - coloca o ponto clicado no centro da tela ou
+amplia a 
+regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, 
+clique e arraste o mouse sobre o mapa na &aacute;rea de zoom
+desejada.",
+en:"Extends the map - place the clicked point in the center of the
+screen 
+or extends the region indicated by a rectangular.After enabled, click
+and drag the mouse over the map in the area of zoom desired.",
+es:""
+}],
+"d4":[
+{
+pt:"Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s
+ativada, 
+clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o 
+vis&iacute;vel.",
+en:"Shifts the region visible on the map. Once activated, click and
+drag 
+the mouse over the map to move the visible region.",
+es:""
+}],
+"d5":[
+{
+pt:"Amplia o mapa tendo como refer&ecirc;cia o centro atual.",
+en:"Magnify the map with the reference the current center.",
+es:""
+}],
+"d6":[
+{
+pt:"Reduz o mapa tendo como refer&ecirccia o centro atual.",
+en:"Reduces the map as having reference the current center.",
+es:""
+}],
+"d7":[
+{
+pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa.
+Ap&oacute;s 
+ativada, pare o mouse por alguns instantes no ponto desejado ou
+clique 
+sobre o mesmo.",
+en:"Displays information about a point on the map. Once activated,
+stop 
+the mouse for a few moments at the desired point or click on it.",
+es:""
+}],
+"d8":[
+{
+pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas 
+geogr&aacute;ficas",
+en:"It shows the extent of current geographic coordinates",
+es:""
+}],
+"d9":[
+{
+pt:"Abre-fecha o mapa de refer&ecirc;ncia",
+en:"Open-close the reference map ",
+es:""
+}],
+"d10":[
+{
+pt:"Digite o novo valor de escala e clique no bot&atilde;o aplicar
+para 
+alterar a escala do mapa",
+en:"Enter the new value of scale and click the button Apply to
+change 
+the scale of the map",
+es:""
+}],
+"d11":[
+{
+pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. 
+Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. 
+Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
+en:"Search data on Wikipedia in the current scope of the map. Make a 
+zoom on the map before opening this option. Regions very 
+extensive can make a very long search ",
+es:""
+}],
+"d12":[
+{
+pt:"Imprime o mapa",
+en:"Print the map",
+es:""
+}],
+"d13":[
+{
+pt:"Localiza o IP do usu&aacute;rio no mapa",
+en:"Locates the user's IP on the map",
+es:""
+}],
+"d14":[
+{
+pt:"Gera arquivo para 3d",
+en:"Generates file for 3d",
+es:""
+}],
+"d15":[
+{
+pt:"Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da 
+regi&atilde;o vista no mapa principal",
+en:"Open Google Maps, showing a satellite image of the region's main
+views on the map",
+es:""
+}],
+"d16":[
+{
+pt:"Pesquisa documentos na base de dados Scielo (dados
+preliminares)",
+en:"Search documents in the database Scielo (preliminary data)",
+es:""
+}],
+"d17":[
+{
+pt:"Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de 
+coordenadas observadas em campo",
+en:"Confluence Project. Points of intersection of coordinates
+observed in field",
+es:""
+}],
+"d18":[
+{
+pt:"Abre lente de amplia&ccedil;&atilde;o",
+en:"Opens lens to expansion",
+es:""
+}],
+"d19":[
+{
+pt:"Coloca as guias em uma janela m&oacute;vel",
+en:"Open the tabs in a window mobile",
+es:""
+}],
+"d20":[
+{
+pt:"Redesenha o mapa com as configura&ccedil;&ocirc;es iniciais.",
+en:"Reload the map with the initial configurations.",
+es:""
+}],
+"d21":[
+{
+pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa
+
+(menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute;
+
+aproximado e sua precis&atilde;o depende da escala do mapa.",
+en:"It measures the distance between two or more clicked points on
+the map (less distance). The calculation of distance is approximate and 
+their accuracy depends on the scale of the map.",
+es:""
+}],
+"d22":[
+{
+pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os
+pontos 
+inclu&iacute;dos podem ser transformados em linhas ou
+pol&iacute;gonos. 
+Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, 
+podendo-se fazer o download do arquivo shapefile.",
+en:"Insert points on the map in geographical coordinates. Items
+included 
+can be converted into lines or polygons. Items are stored in a
+temporary 
+layer, can be to download shapefile.",
+es:""
+}],
+"d23":[
+{
+pt:"Insere um gr&aacute;fico no ponto clicado conforme os atributos 
+existentes no tema escolhido. O tema deve possuir itens com valores 
+num&eacute;ricos na tabela de atributos.",
+en:"Insert a graphic in the clicked point as the exist attributes in the 
+chosen layer. The layer must have items with numerical values in
+the 
+table of attributes.",
+es:""
+}],
+"d24":[
+{
+pt:"Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um
+
+tema. Os elementos selecionados podem ser utilizados em outras 
+opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por
+tema.",
+en:"Opens the tools to select elements of a layer. The elements
+selected 
+can be used in other buffer or selection operation by layer  .",
+es:""
+}],
+"d25":[
+{
+pt:"Insere texto no mapa clicando em um ponto. Utilize essa 
+op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao
+mapa.",
+en:"Insert text on the map by clicking on a point. Use this option to
+
+add information on the map.",
+es:""
+}],
+"d26":[
+{
+pt:"Escolha o visual para os botões e outras caracter&iacute;sticas 
+visuais do mapa",
+en:"Choose look for the buttons and other map's visual characteristics",
+es:""
+}]
 };
+
 /*
 Variable: g_linguagem
 
