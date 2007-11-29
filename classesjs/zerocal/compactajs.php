@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Compacta js e css
+Title: Compacta js e css para a interface zerocal
 
 Compacta os arquivos js e css utilizados pelo I3Geo.
 
@@ -34,20 +34,6 @@ File: compactajs.php
 //
 //compacta os arquivos do richdraw
 //
-packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","High ASCII");
-packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","High ASCII");
-packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","High ASCII");
-$s = inicia("../pacotes/richdraw/prototype.js");
-$abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-$jsfiles = array(
-"../pacotes/richdraw/richdraw_compacto.js",
-"../pacotes/richdraw/svgrenderer_compacto.js",
-"../pacotes/richdraw/vmlrenderer_compacto.js"
-);
-$buffer = "";
-salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js");
 //
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
@@ -57,79 +43,31 @@ packer("redesenho.js","redesenho_compacto.js","High ASCII");
 packer("iniciamma.js","iniciamma_compacto.js","High ASCII");
 packer("ferramentas.js","ferramentas_compacto.js","High ASCII");
 packer("funcoes.js","funcoes_compacto.js","High ASCII");
-packer("menususpenso.js","menususpenso_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Treeview/component.js","jsobjects/jsUI-Treeview/component_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","High ASCII");
-packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","High ASCII");
-packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
-packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
 //
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
-"../pacotes/yui231/build/yahoo/yahoo-min_packer.js",
-"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js",
-"../pacotes/yui231/build/dom/dom-min.js",
-"../pacotes/yui231/build/container/container_core-min.js",
-"../pacotes/yui231/build/menu/menu-min.js",
-"../pacotes/yui231/build/logger/logger-min.js",
-"../pacotes/yui231/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui231/build/slider/slider-min.js",
-"../pacotes/yui231/build/animation/animation-min.js",
-"../pacotes/yui231/build/container/container-min.js",
-"../pacotes/yui231/build/element/element-beta-min.js",
-"../pacotes/yui231/build/tabview/tabview-min.js",
-"../pacotes/yui231/build/utilities/utilities_packer.js",
-"cpaint/cpaint2.inc.compressed.js",
-"jsobjects/jsUI-Global/common_compacto.js",
-"jsobjects/jsUI-Global/uiCommon_compacto.js",
-"jsobjects/jsUI-Treeview/component_compacto.js",
-"../pacotes/richdraw/richdraw_tudo_compacto.js",
 "funcoes_compacto.js",
 "configura_compacto.js",
 "ferramentas_compacto.js",
 "redesenho_compacto.js",
 "iniciamma_compacto.js",
-"menususpenso_compacto.js"
+"../cpaint/cpaint2.inc.compressed.js",
+"../jsobjects/jsUI-Global/common.js",
+"../jsobjects/jsUI-Global/uiCommon.js",
+"../jsobjects/jsUI-Treeview/component.js",
+"../../pacotes/yui231/build/yahoo/yahoo-min_packer.js",
+"../../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js",
+"../../pacotes/yui231/build/dom/dom-min.js",
+"../../pacotes/yui231/build/container/container_core-min.js",
+"../../pacotes/yui231/build/logger/logger-min.js",
+"../../pacotes/yui231/build/dragdrop/dragdrop-min.js",
+"../../pacotes/yui231/build/container/container-min.js",
+"../../pacotes/yui231/build/tabview/tabview.js",
+"../../pacotes/yui231/build/utilities/utilities_packer.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js");
-//
-//gera um único css
-//
-$cssfiles = array(
-"../css/geral.css",
-"../css/botoes.css",
-"../css/documentation.css",
-"../css/fonts.css",
-"../css/reset.css",
-"../css/grids.css",
-"../css/menu.css",
-"../pacotes/yui231/build/container/assets/skins/sam/container.css",
-"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
-"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css"
-);
-$buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo.css");
-
-//
-//compacta o ferramentas/funcoes.js
-//
-$s = inicia("../ferramentas/funcoes.js");
-$abre = fopen("../ferramentas/funcoes_compacto.js", "wt");
-$escreve = fwrite ($abre,$s);
-$fecha = fclose ($abre);
-$jsfiles = array(
-"../ferramentas/funcoes_compacto.js",
-"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui231/build/element/element-beta.js",
-"../pacotes/yui231/build/button/button-beta.js",
-"../pacotes/yui231/build/tabview/tabview.js",
-"../classesjs/cpaint/cpaint2.inc.compressed.js"
-);
-$buffer = "\$i = function(id){return document.getElementById(id);}\n";
-salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js");
 
 function inicia($arquivo)
 {
@@ -174,7 +112,7 @@ function packer($src,$out,$tipo="None")
 	//packer
 	//$src = 'temp.js';
 	//$out = 'i3geo_tudo_compacto.js';
-	require_once 'packer/class.JavaScriptPacker.php';
+	require_once '../packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
 	$t1 = microtime(true);
 	$packer = new JavaScriptPacker($script, $tipo, true, false);
@@ -190,7 +128,7 @@ function salvatudojs($jsfiles,$buffer,$final)
 	//junta todos os js em um unico
 	foreach ($jsfiles as $f)
 	{
-		echo $f;
+		echo $f."<br>";
 		$abre = fopen($f, "r");
 		while (!feof($abre))
 		{$buffer .= fgets($abre);}
