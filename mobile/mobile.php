@@ -79,16 +79,6 @@ if ($tipo=="oeste")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
-if ($tipo=="ligar")
-{
-	include("ligar.php");
-	exit;	
-}
-if ($tipo=="desligar")
-{
-	include("desligar.php");
-	exit;	
-}
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
@@ -102,7 +92,7 @@ else
 	$nomeimagem = ($imgo->imageurl).basename($nome);
 }
 ?>
-<div id='botoes' >
+<div id='botoes' style="position:relative;top:1px;left:1px" >
 	<input type='button' value='+' onclick='zoommais()' />
 	<input type='button' value='-' onclick='zoommenos()' />
 	<input type='button' value='N' onclick='norte()' />
@@ -113,13 +103,16 @@ else
 		<option value=''>Op&ccedil;&otilde;es</option>
 		<option value='ligar'>ligar</option>
 		<option value='desligar'>desligar</option>
+		<option value='legenda'>legenda</option>
+		<option value='escala'>escala</option>
+		<option value='localizar'>localizar</option>
 	</select>
 </div>
 <form id='f' action='mobile.php?' method='get'>
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname;?>' />
 	<input id='tipo' type=hidden name='tipo' value='' />
 </form>
-<img id='mapa' src='<?php echo $nomeimagem; ?>' />
+<img id='mapa' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' />
 </body>
 <script>
 var app = navigator.appName.substring(0,1);
@@ -158,6 +151,16 @@ function oeste()
 function op(valor)
 {
 	document.getElementById('tipo').value = valor;
+	if (valor=="escala")
+	{document.getElementById('f').action = "escala.php?"}
+	if (valor=="ligar")
+	{document.getElementById('f').action = "ligar.php?"}
+	if (valor=="desligar")
+	{document.getElementById('f').action = "desligar.php?"}
+	if (valor=="legenda")
+	{document.getElementById('f').action = "legenda.php?"}
+	if (valor=="localizar")
+	{document.getElementById('f').action = "localizar.php?"}
 	document.getElementById('f').submit();
 }
 </script>

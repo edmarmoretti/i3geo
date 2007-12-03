@@ -22,6 +22,7 @@ input
 	font:14pt arial,helvetica,clean,sans-serif;
 	color:black;
 	cursor:pointer;
+	background-color:white;
 }
 </style>
 <body>
