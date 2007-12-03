@@ -78,6 +78,11 @@ require_once ($caminho."classesphp/pega_variaveis.php");
 require_once ($caminho."classesphp/funcoes_gerais.php");
 require_once ($caminho."ms_configura.php");
 //
+//monta a apresentação do aguarde
+//
+if (!isset($executa))
+{mostraAguarde();}
+//
 //define a variável $mapext que define a extensão geográfica do mapa
 //
 if (!isset($mapext)){$mapext="";}
@@ -143,10 +148,7 @@ $_SESSION["utilizacgi"] = $utilizacgi_;
 //
 foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
-//
-//monta a apresentação do aguarde
-//
-mostraAguarde();
+
 //
 //define os arquivos .map conforme o tipo de sistema operacional
 //
