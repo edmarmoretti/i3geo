@@ -92,11 +92,15 @@ if ($tipo=="desligar")
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
-
-$imgo = $mapa->draw();
-$nome = ($imgo->imagepath).nomeRandomico().".png";
-$imgo->saveImage($nome);
-$nomeimagem = ($imgo->imageurl).basename($nome);
+if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+{$nomeimagem = $locmapserv."?map=".$tmpfname."&mode=map";}
+else
+{
+	$imgo = $mapa->draw();
+	$nome = ($imgo->imagepath).nomeRandomico().".png";
+	$imgo->saveImage($nome);
+	$nomeimagem = ($imgo->imageurl).basename($nome);
+}
 ?>
 <div id='botoes' >
 	<input type='button' value='+' onclick='zoommais()' />
