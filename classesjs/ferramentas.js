@@ -1145,9 +1145,16 @@ function pegaimagens()
 		//abre uma nova janela do navegador
 		if (navm) {var wi = window.open("",null,"width=550,height=650,resizable=yes,scrollbars=yes");}
 		if (navn) {var wi = window.open("","Cor","width=550,height=650,resizable,scrollbars");}
-		wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");
 		//pega os dados do objeto quadrosfilme e escreve na nova janela
 		var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
+		if (objmapa.utilizacgi == "sim")
+		{
+			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Op&ccedil;&atilde;o n&atilde;o dispon&iacute;vel. i3Geo operando no modo CGI!<br>");	
+		}
+		else
+		{
+			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
+		}
 		for (i = 1; i < (quadrosfilme.length); i++)
 		{
 			if (quadrosfilme[i].imagem != " ")

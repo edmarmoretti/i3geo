@@ -178,6 +178,7 @@ function iniciaMapa()
 	$res .= ";g_locmapas='".$locmapas."'"; //identifica se o r esta instalado
 	$res .= ";objmapa.mapfile='".$map_file."'";
 	$res .= ";objmapa.cgi='".$locmapserv."'";
+	$res .= ";objmapa.utilizacgi='".$utilizacgi."'";
 	$res .= ";objmapa.postgis_con='".$postgis_con."'";
 	//Pega os estilos disponíveis
 	$visual = "";

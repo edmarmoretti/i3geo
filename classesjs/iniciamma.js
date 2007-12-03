@@ -461,6 +461,18 @@ function Mapa(e,m)
 	*/
 	this.guiaListaMapas = "guia5";
 	/*
+	Variable: objmapa.cgi
+	
+	Indica a localização do mapserver cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
+	*/
+	this.cgi = "";
+	/*
+	Variable: objmapa.utilizacgi
+	
+	Indica se o mapserver está operando no modo cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
+	*/
+	this.utilizacgi = "";	
+	/*
 	Function: inicializa
 	
 	Inicializa o mapa

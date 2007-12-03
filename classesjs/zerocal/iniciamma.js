@@ -456,6 +456,18 @@ function Mapa(e,m)
 	*/
 	this.guiaListaMapas = "guia5";
 	/*
+	Variable: objmapa.cgi
+	
+	Indica a localização do mapserver cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
+	*/
+	this.cgi = "";
+	/*
+	Variable: objmapa.utilizacgi
+	
+	Indica se o mapserver está operando no modo cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
+	*/
+	this.utilizacgi = "";	
+	/*
 	Function: inicializa
 	
 	Inicializa o mapa
@@ -780,7 +792,7 @@ function Mapa(e,m)
 		//
 		if ($i("mapaReferencia") && objmapa.extent != mapexten)
 		{
-			if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
+			if(($i("imagemReferencia").src == "") || (objmapa.utilizacgi != "sim"))
 			{
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
 				cpObj.call(p,"retornaReferencia",ajaxReferencia);
