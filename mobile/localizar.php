@@ -94,50 +94,8 @@ if($tipo == "zoom")
 	$m = new Mapa($tmpfname);
 	$m->adicionatemawms($layer,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo);
 	$m->salva();
-	//echo $tmpfname;exit;
 	$urln = "mobile.php?tmpfname=".$tmpfname;
 	echo "<meta http-equiv='refresh' content='0;url=$urln'>";
-
-/*
-	var re = new RegExp("POLYGON", "g")
-	wkt = wkt.replace(re,"")
-	wkt = wkt.split("(")[2].split(")")[0]
-	wkt = wkt.split(",");
-	x = new Array();
-	y = new Array();
-	for (w=0;w<wkt.length; w++)
-	{
- 		temp = wkt[w].split(" ");
- 		x.push(temp[0])
- 		y.push(temp[1])
-	}
-	x.sort(sortNumber)
-	xMin = x[0]
-	xMax = x[(x.length)-1]
-	y.sort(sortNumber)
-	yMin = y[0]
-	yMax = y[(y.length)-1]
-	var ext = xMin+" "+yMin+" "+xMax+" "+yMax
-	window.parent.objaguarde.abre("ajaxredesenha","Aguarde...");
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+ext+"&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"mudaExtensao",adicionaCamada(layer,gid,nm));
-    var adicionaCamada = function(layer,gid,nm)
-    {
-	 	var s = "&tema="+layer
-	 	s += "&servico=http://mapas.mma.gov.br/webservices/geonameswms.php?gid="+gid+"&";
-	 	s += "&nome=default"
-	 	s += "&proj=EPSG:4291&formato=image/png&nomecamada="+nm+" - "+layer
-	 	s += "&suportasld=nao&versao=1.1.0"
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adicionatemawms&g_sid="+g_sid+s;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaExtensao",window.parent.ajaxredesenha);
-    }
-*/
 }
 ?>
 </body>

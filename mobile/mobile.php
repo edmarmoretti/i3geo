@@ -106,6 +106,7 @@ else
 		<option value='legenda'>legenda</option>
 		<option value='escala'>escala</option>
 		<option value='localizar'>localizar</option>
+		<option value='adicionar'>adicionar</option>
 	</select>
 </div>
 <form id='f' action='mobile.php?' method='get'>
@@ -161,6 +162,8 @@ function op(valor)
 	{document.getElementById('f').action = "legenda.php?"}
 	if (valor=="localizar")
 	{document.getElementById('f').action = "localizar.php?"}
+	if (valor=="adicionar")
+	{document.getElementById('f').action = "adicionatema.php?"}
 	document.getElementById('f').submit();
 }
 </script>
