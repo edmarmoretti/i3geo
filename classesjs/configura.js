@@ -16,7 +16,7 @@ objmapa = new Mapa()
 
 objmapa.inicializa()
 
-File: configura.js
+File: i3geo/classesjs/configura.js
 
 About: Licença
 

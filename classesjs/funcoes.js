@@ -3,7 +3,7 @@ Title: Funções gerais
 
 Funções de uso geral para processamento de dados
 
-File: funcoes.js
+File: i3geo/classesjs/funcoes.js
 
 About: Licença
 

@@ -71,7 +71,7 @@ mapdir - localização, no servidor, do diretório com o mapfile temporário do mapa
 imgdir - localização, no servidor, das imagens temporárias do mapa atual. 
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 
-File: mapa_controle.php
+File: i3geo/classesphp/mapa_controle.php
 
 19/6/2007
 

@@ -5,7 +5,7 @@ Abre ou executa determinadas operações de manipulação do mapa.
 
 Normalmente, as funções abrem uma janela interna no i3geo
 
-File: ferramentas.js
+File: i3geo/classesjs/ferramentas.js
 
 About: Licença
 

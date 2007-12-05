@@ -5,7 +5,7 @@ Lê o conjunto de javascripts para o funcionamento do i3geo.
 
 Carrega o arquivo compactado i3geo_tudo_compacto.js que inclui também os scripts do YUI
 
-File: i3geo.js
+File: i3geo/classesjs/i3geo.js
 
 About: Licença
 

@@ -8,7 +8,7 @@ O ms_configura é incluído em vários programas do I3Geo.
 
 As variáveis de configuração devem ser definidas para linux e windows.
 
-File: ms_configura.php
+File: i3geo/ms_configura.php
 
 About: Licença
 

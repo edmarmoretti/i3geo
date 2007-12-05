@@ -23,7 +23,7 @@ Title: Testa um mapfile.
 
 Permite testar um mapfile específico existente no diretório "temas".
 
-File: testamapfile.php
+File: i3geo/testamapfile.php
 
 About: Licença
 

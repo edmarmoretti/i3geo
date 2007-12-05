@@ -5,7 +5,7 @@ Title: Lista de sistemas.
 
 Utilizado na montagem da árvore de sistemas. Cada função executa alguma operação que altera o mapfile atual para acréscimo de temas.
 
-File: sistemas.xml
+File: i3geo/menutemas/sistemas.xml
 -->
 <SISTEMAS>
 <SISTEMA>

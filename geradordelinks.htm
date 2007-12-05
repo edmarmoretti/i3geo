@@ -12,7 +12,7 @@ P
 {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 </style>
 <script src="classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://mapas.mma.gov.br/i3geo/pacotes/openlayers/OpenLayers.js"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js"></script>
 </head>
 <body style="background-color:white;text-align:left;left:0px;">
 <div id=banner style=position:relative;top:0px;left:0px;text-align:left >
@@ -92,17 +92,61 @@ dos pontos em décimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b></
 </div>
 </body>
 <script>
+/*
+Title: Aplicativo para geração de links
+
+Esse aplicativo permite ao usuário gerar links para abertura do i3geo.
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+File: i3geo/geradordelinks.htm
+
+Include:
+
+classesjs/cpaint/cpaint2.inc.compressed.js
+pacotes/openlayers/OpenLayers.js
+*/
 navm = false
 navn = false
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
+/*
+Variable: g_locaplic
+
+Localização da instalação do i3geo.
+*/
+g_locaplic = "http://"+window.location.host+"/i3geo";
 seltema("estadosl")
 crialink()
 pegagrupos()
 initOL()
+/*
+Function: crialink
+
+Cria o link e mostra na tela.
+
+*/
 function crialink()
 {
-	var ins = "http://"+window.location.host+"/i3geo/ms_criamapa.php?";
+	var ins = g_locaplic+"/ms_criamapa.php?";
 	var iguias = document.getElementById("temasa").getElementsByTagName("input");
 	var tsl = new Array(); //temas ligados
 	var tsd = new Array(); //temas
@@ -142,6 +186,11 @@ function crialink()
 	document.getElementById("link").href = ins
 	document.getElementById("link").innerHTML = ins
 }
+/*
+Function: pegagrupos
+
+Pega a lista de grupos existentes no menu de temas do i3geo.
+*/
 function pegagrupos()
 {
 	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''";
@@ -150,6 +199,11 @@ function pegagrupos()
 	cp.set_response_type("JSON");
 	cp.call(p,"pegalistadegrupos",combogrupos);
 }
+/*
+Function: combogrupos
+
+Monta um combo com a lista de grupos.
+*/
 function combogrupos(retorno)
 {
 	obGrupos = retorno.data
@@ -162,6 +216,17 @@ function combogrupos(retorno)
 	document.getElementById("grupos").innerHTML = ins+"</select>"
 	combosubgrupos(-1)
 }
+/*
+Function: combosubgrupos
+
+Monta um combo com a lista de subgrupos de um grupo.
+
+Chamado pela função combogrupos.
+
+Parameters:
+
+i - id que identifica o grupo escolhido.
+*/
 function combosubgrupos(i)
 {
 	var ins = "<select style=width:250px onchange='combotemas("+i+",this.value)' ><option value='' >Sub-grupos:</option>"
@@ -175,6 +240,17 @@ function combosubgrupos(i)
 	document.getElementById("subgrupos").innerHTML = ins+"</select>"
 	combotemasgrupo(i)
 }
+/*
+Function: combotemasgrupo
+
+Monta um combo com a lista de temas vinculados diretamente a um grupo.
+
+Chamado pela função combosubgrupos.
+
+Parameters:
+
+i - id que identifica o grupo escolhido.
+*/
 function combotemasgrupo(i)
 {
 	var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
@@ -187,6 +263,17 @@ function combotemasgrupo(i)
 	}
 	document.getElementById("temas").innerHTML = ins+"</select>"
 }
+/*
+Function: combotemas
+
+Monta um combo com a lista de temas ligados a um sub-grupo.
+
+Parameters:
+
+grupo - id que identifica um grupo
+
+sub - id que identifica um subgrupo
+*/
 function combotemas(grupo,sub)
 {
 	var monta = function(retorno)
@@ -204,6 +291,17 @@ function combotemas(grupo,sub)
 	cp.set_response_type("JSON");
 	cp.call(p,"pegalistadetemas",monta);	
 }
+/*
+Function seletma
+
+Acrescenta um tema no link.
+
+Além de acrescentar o tema no link, o tema é acrescentado na lista de gerenciamento dos temas já escolhidos.
+
+Parameters:
+
+idtema - codigo do tema que será crescentado
+*/
 function seltema(idtema)
 {
 	var novodiv = document.createElement("div");
@@ -241,6 +339,15 @@ function seltema(idtema)
 	novodiv.appendChild(document.createElement("br"));
 	crialink()
 }
+/*
+Function: descer
+
+Desce um tema na lista de temas selecionados.
+
+Parameters:
+
+e - elemento do DOM.
+*/
 function descer(e)
 {
 	var pai = pegaElementoPai(e)
@@ -249,6 +356,15 @@ function descer(e)
 		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
 	crialink()
 }
+/*
+Function: subir
+
+Sobe um tema na lista de temas selecionados
+
+Parameters:
+
+e - elemento do DOM.
+*/
 function subir(e)
 {
 	var pai = pegaElementoPai(e)
@@ -256,12 +372,30 @@ function subir(e)
 	divpai.insertBefore(pai,pai.previousSibling)
 	crialink()
 }
+/*
+Function: excluir
+
+Exclui um tema da lista de temas selecionados
+
+Parameters:
+
+e - elemento do DOM.
+*/
 function excluir(e)
 {
 	var pai = pegaElementoPai(e)
 	pai.parentNode.removeChild(pai)
 	crialink()
 }
+/*
+Function: pegaElementoPai
+
+Pega o elemento pai de um elemento clicado para identificar o código do tema.
+
+Parameters:
+
+e - elemento do DOM.
+*/
 function pegaElementoPai(e)
 {
 	var targ
@@ -274,6 +408,11 @@ function pegaElementoPai(e)
 	tparent=targ.parentNode
 	return(tparent)
 }
+/*
+Function: initOL
+
+Inicialliza o OpenLayers para permitir ao usuário escolher a abrangência espacial do link.
+*/
 function initOL() 
 {
 	document.getElementById("mapa1").style.display = "block";
@@ -309,6 +448,11 @@ function initOL()
 	document.getElementById("OpenLayers_Control_PanZoom_panright").style.display="none"
 	zb.div.style.left="-8px"
 }
+/*
+Function: capturageo
+
+Pega as coordenadas geográficas da extensão definida no OpenLayers.
+*/
 function capturageo()
 {
 	var b = OL.getExtent();

@@ -4,7 +4,7 @@ Title: Lista de links para sites de download
 
 Utilizado no sistema de download de dados para apresentar links para sites que permitem o download de dados..
 
-File: linksdownload.xml
+File: i3geo/menutemas/linksdownload.xml
 -->
 <rss version="2.0">
 <channel>

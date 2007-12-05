@@ -1,7 +1,7 @@
 /*
 Title: Cliente de web service
 
-File: wscliente.js
+File: i3geo/classesjs/wscliente.js
 
 About: Licença
 

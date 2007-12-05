@@ -5,7 +5,7 @@ Executa as operações de redesenho do mapa.
 
 Obtém os parâmetros necessários ao funcionamento da interface, como resolução, escala, etc.
 
-File: redesenho.js
+File: i3geo/classesjs/redesenho.js
 
 About: Licença
 

@@ -5,7 +5,7 @@ Title: Lista de aplicações de identificação
 
 Lista as funções que são mostradas na ferramenta de identificação, possibilitando executar um programa específico para localizar dados.
 
-File: identifica.xml
+File: i3geo/menutemas/identifica.xml
 -->
 <SISTEMAS>
 	<FUNCAO>

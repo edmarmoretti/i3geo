@@ -5,7 +5,7 @@ Title: Menu de temas
 
 Lista os temas disponíveis para ser acrescentados ao mapa
 
-File: menutemas.xml
+File: i3geo/menutemas/menutemas.xml
 -->
 <TEMASGEO>
    <CABECALHO>Clique no grupo temático para abrir a lista de temas e ative o box relativo aos temas de interesse. Terminada a seleção dos temas, clique em um dos botões de aplicar alterações</CABECALHO>

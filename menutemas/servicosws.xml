@@ -6,7 +6,7 @@ Utilizado para listar os serviços (web services) disponíveis, principalmente no 
 
 Lista os temas disponíveis para ser acrescentados ao mapa
 
-File: servicosws.xml
+File: i3geo/menutemas/servicosws.xml
 -->
 
 <rss version="2.0">

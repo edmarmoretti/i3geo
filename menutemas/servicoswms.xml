@@ -6,7 +6,7 @@ Lista os serviços wms (OGC).
 
 Utilizado no cliente de web services e na opção de conexão com servidor remoto.
 
-File: servicoswms.xml
+File: i3geo/menutemas/servicoswms.xml
 -->
 <rss version="2.0">
 <channel>

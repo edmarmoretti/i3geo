@@ -18,7 +18,7 @@ objmapa = new Mapa()
 
 objmapa.inicializa()
 
-File: iniciamma.js
+File: i3geo/classesjs/iniciamma.js
 
 About: Licença
 

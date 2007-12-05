@@ -6,7 +6,7 @@ Cria os diretórios temporários para o I3Geo e o mapfile inicial.
 
 Abre o I3Geo com a interface padrão ou uma específica.
 
-File: ms_criamapa.php
+File: i3geo/ms_criamapa.php
 
 About: Licença
 

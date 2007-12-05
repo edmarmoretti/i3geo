@@ -5,7 +5,8 @@ Sistema de download de dados geográficos.
 
 A lista de dados pode vir do arquivo menutemas.xml ou de um diretório no servidor.
 
-File: datadownload.js
+File: i3geo/classesjs/datadownload.js
+
 About: Licença
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
@@ -25,6 +26,10 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Veja:
+
+<Aplicativo para download de dados>
 */
 
 var loc = window.location.href;
@@ -88,7 +93,10 @@ g_dirarquivos = ""
 /*
 Function: DDinicia
 
-Monta a árvore de opções e preenche a DIV arvore.
+Inicia o aplicativo montando a árvore de opções e preenchendo a DIV arvore.
+
+Deve existir no HTML um DIV com id='arvore'.
+
 */
 function DDinicia()
 {
@@ -113,7 +121,7 @@ function DDinicia()
 /*
 Function: processaDiretorios
 
-Recebe os dados da função Ajax com a lista de diretorios.
+Cahamado pela função DDinicia. Recebe os dados da função Ajax com a lista de diretorios.
 
 Monta a árvore para navegação pelos diretórios.
 
@@ -123,6 +131,11 @@ retorno - string formatada com os dados para montagem da árvore.
 */
 function processaDiretorios(retorno)
 {
+	if(!document.getElementById("arvoreTemas"))
+	{
+		alert("Nao foi encontrado o DIV arvoreTemas");
+		return;
+	}
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		treeDir = new Object();
@@ -139,11 +152,13 @@ function processaDiretorios(retorno)
 /*
 Function: expandeDiretorio
 
-Expande um diretório.
+Expande um diretório quando o usuário clica no nó da árvore de diretórios.
+
+Definido na função processaDiretorios. Após serem mostrados os sub-diretórios é disparada a função listaArquivos para mostrar a lista de arquivos existentes no diretório selecionado.
 
 Parameters:
 
-id - ide do nó clicado na árvore treeview
+id - id do nó clicado na árvore treeview
 */
 function expandeDiretorio(id)
 {
@@ -169,7 +184,9 @@ function expandeDiretorio(id)
 /*
 Function: listaArquivos
 
-Lista os arquivos de um diretório
+Lista os arquivos de um diretório.
+
+No HTML deve existir um DIV com id='corpo'. Nesse div será incluída a lista.
 
 Parameters:
 
@@ -177,6 +194,11 @@ dir - diretório no servidor
 */
 function listaArquivos(dir)
 {
+	if(!document.getElementById("corpo"))
+	{
+		alert("Nao foi encontrado o DIV corpo");
+		return;
+	}
 	document.getElementById("corpo").innerHTML = ""
 	var re = new RegExp(g_dirbase, "g");
 	var d = dir.replace(re,'')
@@ -209,7 +231,9 @@ Function: processaGrupos
 
 Recebe os dados da função Ajax com a lista de grupos e subgrupos.
 
-Monta a árvore para adição de um novo tema no mapa.
+Monta a árvore de navegação baseada no menutemas.xml.
+
+No HTML da interface deve existir um DIV com id='arvoreTemas'. Esse div receberá a árvore de navegação.
 
 Parameters:
 
@@ -217,6 +241,11 @@ retorno - string formatada com os dados para montagem da árvore.
 */
 function processaGrupos(retorno)
 {
+	if(!document.getElementById("arvoreTemas"))
+	{
+		alert("Nao foi encontrado o DIV arvoreTemas");
+		return;
+	}
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		mytreeview2 = new Object();
@@ -261,6 +290,8 @@ Function: expandeGrupo
 
 Chama a função ajax que pega a lista de temas de um subgrupo no menu de temas.
 
+Essa função é definida na função processaGrupos.
+
 Parameters:
 
 itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
@@ -281,7 +312,7 @@ function expandeGrupo(itemID)
 /*
 Function: processaTemas
 
-Recebe os dados da função Ajax com a lista de temas de um subgrupo.
+Recebe os dados da função Ajax com a lista de temas de um sub-grupo.
 
 Monta a árvore para adição de um novo tema no mapa.
 
@@ -323,7 +354,7 @@ Gera os arquivos para download do shape file de um tema.
 
 Parameters:
 
-tema - tema para download
+tema - código do tema para download
 */
 function download(tema)
 {

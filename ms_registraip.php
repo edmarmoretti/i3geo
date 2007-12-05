@@ -33,7 +33,7 @@ GRANT SELECT ON TABLE visitantes_i3geo TO geodados;
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE visitantes_i3geo TO geoeditor;
 COMMENT ON TABLE visitantes_i3geo IS 'Registra as coordenadas dos usuários que acessam o I3Geo. É mantido pelo i3geo/ms_criamapa.php.';
 
-File: ms_registraip.php
+File: i3geo/ms_registraip.php
 
 About: Licença
 

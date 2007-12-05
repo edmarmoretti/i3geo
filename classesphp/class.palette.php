@@ -14,7 +14,7 @@ http://slayeroffice.com/tools/color_palette/
 Basado a su vez en una idea de Andy Clarke:
 http://www.stuffandnonsense.co.uk/archives/creating_colour_palettes.html
 
-File: class.palette.php
+File: i3geo/classesphp/class.palette.php
 
 19/6/2007
 */

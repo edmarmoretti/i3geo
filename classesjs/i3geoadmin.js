@@ -3,7 +3,7 @@ Title: Administração de mapfiles
 
 Carrega os javascripts da interface de administração de mapfiles
 
-File: i3geoadmin.js
+File: i3geo/classesjs/i3geoadmin.js
 
 About: Licença
 

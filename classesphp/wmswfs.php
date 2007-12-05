@@ -25,7 +25,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: wmswfs.php
+File: i3geo/classesphp/wmswfs.php
 
 19/6/2007
 */

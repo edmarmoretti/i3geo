@@ -29,7 +29,7 @@ About: Exemplo
 
 include("pega_variaveis.php");
 
-File: pega_variaveis.php
+File: i3geo/classesphp/pega_variaveis.php
 
 19/6/2007
 */
