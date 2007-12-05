@@ -1621,6 +1621,17 @@ Section: Navegação
 Altera a extensão geográfica do mapa.
 */
 /*
+Property: desativacgi
+
+Desativa o modo cgi.
+
+*/
+	case "desativacgi":
+		$_SESSION["utilizacgi"] = "nao";
+		$cp->set_data($_SESSION["utilizacgi"]);
+	break;
+
+/*
 Property: mudaext
 
 Muda a extensão geográfica do mapa.

@@ -1142,31 +1142,37 @@ function pegaimagens()
 {
 	if ($i("lugarquadros"))
 	{
-		//abre uma nova janela do navegador
-		if (navm) {var wi = window.open("",null,"width=550,height=650,resizable=yes,scrollbars=yes");}
-		if (navn) {var wi = window.open("","Cor","width=550,height=650,resizable,scrollbars");}
-		//pega os dados do objeto quadrosfilme e escreve na nova janela
-		var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
 		if (objmapa.utilizacgi == "sim")
 		{
-			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Op&ccedil;&atilde;o n&atilde;o dispon&iacute;vel. i3Geo operando no modo CGI!<br>");	
+			//wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Op&ccedil;&atilde;o n&atilde;o dispon&iacute;vel. i3Geo operando no modo CGI!<br>");	
+			objmapa.utilizacgi = "nao";
+			var volta = function()
+			{
+				alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
+			};
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+g_sid;
+			cpObj.call(p,"desativacgi",volta);
 		}
 		else
 		{
+			if (navm) {var wi = window.open("",null,"width=550,height=650,resizable=yes,scrollbars=yes");}
+			if (navn) {var wi = window.open("","Cor","width=550,height=650,resizable,scrollbars");}
+			//pega os dados do objeto quadrosfilme e escreve na nova janela
+			var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
 			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
-		}
-		for (i = 1; i < (quadrosfilme.length); i++)
-		{
-			if (quadrosfilme[i].imagem != " ")
+			for (i = 1; i < (quadrosfilme.length); i++)
 			{
-				wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
-				wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrang&eacute;ncia: "+quadrosfilme[i].extensao+"<br>");
-				wi.document.write("<img src="+quadrosfilme[i].imagem+">");
-				wi.document.write("<img src="+quadrosfilme[i].referencia+">");
-				mensagem = "<br>Fim"
+				if (quadrosfilme[i].imagem != " ")
+				{
+					wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
+					wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrang&eacute;ncia: "+quadrosfilme[i].extensao+"<br>");
+					wi.document.write("<img src="+quadrosfilme[i].imagem+">");
+					wi.document.write("<img src="+quadrosfilme[i].referencia+">");
+					mensagem = "<br>Fim"
+				}
 			}
+			wi.document.write(mensagem);
 		}
-		wi.document.write(mensagem);
 	}
 }
 
@@ -1203,7 +1209,21 @@ Function: opcoesQuadros
 Opções de animação dos quadros de armazenamento de imagens.
 */
 function opcoesQuadros()
-{wdocaf("150px","150px",g_locaplic+"/ferramentas/opcoes_quadros/index.htm",objposicaomouse.x - 75,objposicaomouse.y - 160,"Quadros");}
+{
+	if (objmapa.utilizacgi == "sim")
+	{
+		//wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Op&ccedil;&atilde;o n&atilde;o dispon&iacute;vel. i3Geo operando no modo CGI!<br>");	
+		objmapa.utilizacgi = "nao";
+		var volta = function()
+		{
+			alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
+		};
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+g_sid;
+		cpObj.call(p,"desativacgi",volta);
+	}
+	else
+	{wdocaf("150px","150px",g_locaplic+"/ferramentas/opcoes_quadros/index.htm",objposicaomouse.x - 75,objposicaomouse.y - 160,"Quadros");}
+}
 /*
 Function: opcoesEscala
 
