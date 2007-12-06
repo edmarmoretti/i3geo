@@ -95,11 +95,6 @@ function iniciaMapa()
 	$m = new Mapa($map_file);
 	$m->mudaQS($w,$h);
 	$m = new Mapa($map_file);
-	//
-	//aplica a extensao geografica que for passada como parametro
-	//para pegar o valor da escala e necessario redesenhar o mapa
-	//para o redesenho ficar mais rapido, um mapa temporario e criado e os temas sao desligados
-	//
 	$m->mapa->setsize($w,$h);
 	//
 	//verifica se a legenda deve ser embebida no mapa
@@ -134,7 +129,7 @@ function iniciaMapa()
 	//
 	//cuidado ao mexer aqui
 	//o mapa precisa ser salvo para registrar a extensão geográfica
-	//	
+	//
 	$imgo = $m->mapa->draw();
 	$m->salva($map_file);
 	$e = $m->mapa->extent;

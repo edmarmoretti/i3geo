@@ -210,12 +210,9 @@ Include:
 		//
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum" && !$qy)
 		{
-			//foreach($this->layers as $l)
-			//{$l->set("status",MS_OFF);}
-			//$imgo = @$this->mapa->draw();
-			
-			$imgo = @$this->mapa->prepareImage();
-			$this->mapa->preparequery();	
+			foreach($this->layers as $l)
+			{$l->set("status",MS_OFF);}
+			$imgo = @$this->mapa->draw();
 		}
 		else
 		{

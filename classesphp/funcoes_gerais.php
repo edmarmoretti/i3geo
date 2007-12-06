@@ -718,11 +718,11 @@ function retornaReferencia()
 	//pega a extensao original caso ela tenha sido registrada no modo dinamico
 	//
 	$original = $objMapa->getmetadata("referenciaextentoriginal");
+	$ref = $objMapa->reference;
+	$em = $ref->extent;
 	if($original != "")
 	{
 		$original = explode(" ",$original);
-		$ref = $objMapa->reference;
-		$em = $ref->extent;
 		$em->set("minx",$original[0]);
 		$em->set("miny",$original[1]);
 		$em->set("maxx",$original[2]);
@@ -735,7 +735,10 @@ function retornaReferencia()
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";
 	$objImagem->saveImage($nomer);
 	$nomer = ($objImagem->imageurl).basename($nomer);
-	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
+	$d = (abs($em->maxx - $em->minx)) / ($objImagem->width);
+	$s = "g_celularef = ".$d.";";
+	$s .= "objmapa.extentref = '".$em->minx." ".$em->miny." ".$em->maxx." ".$em->maxy."';";
+	$s .=  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$cp->set_data($s);
 }
 /*
@@ -813,6 +816,9 @@ function retornaReferenciaDinamica()
 		$original = $r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy;
 		$mapa->setmetadata("referenciaextentoriginal",$original);
 	}
+	$s .= ";objmapa.extentref = '".$r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy."';";
+	$d = (abs($r->maxx - $r->minx)) / ($objImagem->width);
+	$s .= "g_celularef = ".$d.";";
 	$emt = $objMapa->extent;
 	$r->set("minx",$emt->minx);
 	$r->set("miny",$emt->miny);

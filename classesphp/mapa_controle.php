@@ -1267,7 +1267,7 @@ Include:
 	case "listaPontosShape":
 		include("classe_shp.php");
 		$m = new SHP($map_file,$tema);
-		$cp->set_data($m->listaPontosShape($xy));
+		$cp->set_data($m->listaPontosShape());
 	break;
 /*
 Property: criashpvazio
@@ -1279,7 +1279,8 @@ Include:
 */
 	case "criashpvazio":
 		include("classe_shp.php");
-		copiaSeguranca($map_file);
+		//se colocar aqui da um erro
+		//copiaSeguranca($map_file);
 		$m = new SHP($map_file);
 		$cp->set_data($m->criaSHPvazio());
 		$m->salva();
