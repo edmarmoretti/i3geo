@@ -5,7 +5,7 @@ Funções de uso geral para processamento de dados
 
 File: i3geo/classesjs/funcoes.js
 
-About: Licença
+About: Licençamento
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -1068,7 +1068,8 @@ function aguarde()
 			document.body.removeChild($i("wait_c"));
 		}
 		YAHOO.namespace("aguarde."+aguardeId);
-		var pos = pegaPosicaoObjeto($i("img"));
+		if($i("contemImg"))
+		var pos = pegaPosicaoObjeto($i("contemImg"));
 		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.body.style.height="20px"');
@@ -2129,7 +2130,7 @@ Atualiza o box do google se a função google estiver ativa
 */
 function atualizagoogle()
 {
-	if (window.parent.frames["wdocai"])
+	if (frames["wdocai"])
 	{
 		if (navn)
 		{
@@ -3668,19 +3669,21 @@ function convddtela(vx,vy,docmapa)
 {
 	try
 	{
-		var pos = pegaPosicaoObjeto($i("img"));
 		if(!docmapa)
 		{var docmapa = window.document;}
+		if(docmapa.getElementById("contemImg"))
+		var dc = docmapa.getElementById("contemImg");
+		else
 		var dc = docmapa.getElementById("img");
-		imgext = objmapa.extent;
-		varimgext = imgext.split(" ");
-		vx = (varimgext[0] * -1) - (vx * -1);
-		vy = (vy * -1) + (varimgext[3] * 1);
+		
+		var pos = pegaPosicaoObjeto(dc);
+		var imgext = objmapa.extent;
+		var imgext = imgext.split(" ");
+		vx = (vx * 1) - (imgext[0] * 1);
+		vy = (vy * -1) + (imgext[3] * 1);
 		c = objmapa.cellsize * 1;
 		xy = new Array();
-		xy[0] = (vx  / c) + pos[0];
-		xy[1]  = (vy / c) + pos[1];
-		return (xy);
+		return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 	}
 	catch(e){return(new Array());}
 }
@@ -4284,6 +4287,7 @@ function pegaPosicaoObjeto(obj)
 			} while (obj = obj.offsetParent);
 		}
 	}
+	//if($i("escalanum"))$i("escalanum").value = [curleft,curtop]
 	return [curleft,curtop];
 }
 /*

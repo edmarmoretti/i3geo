@@ -517,7 +517,7 @@ function Mapa(e,m)
 				//
 				//quando o mouse é movido sobre a tela, a posição de x e y são guardadas em objposicaomouse
 				//
-				if (navn)
+				if (exy1.clientX)
 				{
 					objposicaomouse.x = exy1.clientX;
 					objposicaomouse.y = exy1.clientY;
