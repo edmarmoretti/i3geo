@@ -56,6 +56,8 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
+if (!file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
+{exit;}
 if (file_exists($locaplic."/pacotes/geoip"))
 {
 	$r["latitude"] = "";
@@ -74,26 +76,29 @@ if (file_exists($locaplic."/pacotes/geoip"))
 	if(($r["latitude"] != null) && ($r["latitude"] != ""))
 	{
 		$pgconn = pg_connect($conexao);
-		//
-		$sqlVerificaExistencia = "select * from visitantes_i3geo where latitude = ".$r["latitude"]." and longitude = ".$r["longitude"];
-		//
-		$result = pg_query($pgconn, $sqlVerificaExistencia);
-		$numrows = pg_num_rows($result);
-		if ($numrows != 0)
+		if($pgconn)
 		{
 			//
-			$sqlGravaMaisUm = "update visitantes_i3geo set n = n+1 where (latitude = ".$r["latitude"]." and longitude = ".$r["longitude"].")";
+			$sqlVerificaExistencia = "select * from visitantes_i3geo where latitude = ".$r["latitude"]." and longitude = ".$r["longitude"];
 			//
-			$result = pg_query($pgconn, $sqlGravaMaisUm);
+			$result = pg_query($pgconn, $sqlVerificaExistencia);
+			$numrows = pg_num_rows($result);
+			if ($numrows != 0)
+			{
+				//
+				$sqlGravaMaisUm = "update visitantes_i3geo set n = n+1 where (latitude = ".$r["latitude"]." and longitude = ".$r["longitude"].")";
+				//
+				$result = pg_query($pgconn, $sqlGravaMaisUm);
+			}
+			else
+			{
+				//
+				$sqlGravaNovo = "insert into visitantes_i3geo (gid,latitude,longitude,n) values(default,".$r["latitude"].",".$r["longitude"].",1)";
+				//
+				$result = pg_query($pgconn, $sqlGravaNovo);		
+			}
+			pg_close($pgconn);
 		}
-		else
-		{
-			//
-			$sqlGravaNovo = "insert into visitantes_i3geo (gid,latitude,longitude,n) values(default,".$r["latitude"].",".$r["longitude"].",1)";
-			//
-			$result = pg_query($pgconn, $sqlGravaNovo);		
-		}
-		pg_close($pgconn);
 	}
 }
 ?>
