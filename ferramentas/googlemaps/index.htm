@@ -30,7 +30,7 @@
     	ondegoogle(map);
     });
     GEvent.addListener(map, "zoomend", function() {
-    	ondegoogle(map);
+    	ondegoogle();
     });
     function moveMapa(bd)
     {
@@ -45,29 +45,19 @@
     function ondegoogle()
     {
     	var bd = map.getBoundsLatLng();
-    	var xyt1 = window.parent.convddtela(bd.minX,bd.minY,window.parent.document);
-    	var xyt2 = window.parent.convddtela(bd.maxX,bd.maxY,window.parent.document);
-    	var xi = xyt1[0];
-    	var yi = xyt1[1];
-    	var xf = xyt2[0];
-    	var yf = xyt2[1];
-    	var b = window.parent.document.getElementById("boxg")
-    	if (navn)
-    	{
-    		b.style.left = xi+"px"
-    		b.style.top = yf+"px"
-    		b.style.width = xf - xi + "px"
-    		b.style.height = yi - yf + "px"
-    	}
-    	if (navm)
-    	{
-    		b.style.pixelLeft = xi
-    		b.style.pixelTop = yf
-    		b.style.width = xf - xi
-    		b.style.height = yi - yf
-    	}
-    	b.style.display="block"
+    	var xyMin = window.parent.convddtela(bd.minX,bd.minY,window.parent.document);
+    	var xyMax = window.parent.convddtela(bd.maxX,bd.maxY,window.parent.document);
+		var box = window.parent.$i("boxg")
+		var w = xyMax[0]-xyMin[0]
+		var h = xyMin[1]-xyMax[1]
+		box.style.display = "block"
+		box.style.width = w
+		box.style.height = h
+		box.style.top = xyMax[1]+"px"
+		box.style.left = xyMin[0]+"px"
+    	box.style.display="block"
     }
+    
     function panTogoogle()
     {
     	var b = window.parent.document.getElementById("boxg");
