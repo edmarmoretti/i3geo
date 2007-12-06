@@ -273,9 +273,21 @@ function criaContainerRichdraw()
 		//esse objeto será utilizado nas funções de desenho
 		//mais detalhes, veja em pacotes/richdraw
 		//
-		if (navn) {renderer = new SVGRenderer();}
-		else {renderer = new VMLRenderer();}
+		/*
+		if(navm){renderer = new VMLRenderer();}
+		else {renderer = new SVGRenderer();}
 		richdraw = new RichDrawEditor(divgeo, renderer);
+		*/
+		try
+		{
+			renderer = new VMLRenderer();
+			richdraw = new RichDrawEditor(divgeo, renderer);
+		}
+		catch(e)
+		{
+			renderer = new SVGRenderer();
+			richdraw = new RichDrawEditor(divgeo, renderer);
+		}
 		richdraw.editCommand('fillcolor', 'red');
 		richdraw.editCommand('linecolor', 'gray');
 		richdraw.editCommand('linewidth', '1px');
@@ -287,6 +299,7 @@ function criaContainerRichdraw()
 		//para funcionarem sobre o container
 		//
 		ativaClicks(divgeo);
+		
 	}
 	catch(e){alert("Erro ao tentar criar container richdraw");}
 }
