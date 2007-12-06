@@ -29,7 +29,7 @@ YAHOO.example.init = function ()
 function executaf()
 {
 	window.parent.autoRedesenho("desativa")
-	window.parent.g_autoRedesenho = $i("t").value
+	window.parent.g_autoRedesenho = $i("t").value * 1000
 	if (($i("t").value == 0) || ($i("t").value == ""))
 	{window.parent.autoRedesenho("desativa")}
 	else
