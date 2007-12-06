@@ -212,6 +212,8 @@ Include:
 				$classe->setexpression($cls[$i]["expressao"]);
 				$classe->set("name",$cls[$i]["nomeclasse"]);
 			}
+			$of = $this->mapa->outputformat;
+			$of->set("imagemode",MS_IMAGEMODE_RGB);
 		}
 		else
 		{return("erro");}

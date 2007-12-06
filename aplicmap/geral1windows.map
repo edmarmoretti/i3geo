@@ -4,7 +4,7 @@ MAP
 	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 157 211 255
-	IMAGETYPE png1
+	IMAGETYPE png2
 	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 	SIZE 480 500
 	STATUS ON
@@ -55,7 +55,7 @@ MAP
 		#TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/legenda.htm"
 	END
 	QUERYMAP
-		OUTLINECOLOR 255 0 0
+		#OUTLINECOLOR 255 0 0
 		COLOR 0 255 255
 		SIZE 480 500
 		STATUS off

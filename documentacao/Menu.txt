@@ -2,7 +2,7 @@ Format: Development Release 02-10-2007 (1.35 base)
 
 
 Title: I3Geo
-SubTitle: Interface Integrada de Ferramentas de Geoprocessamento para Internet
+SubTitle: Interface Integrada para Internet de Ferramentas de Geoprocessamento
 
 Footer: http://mapas.mma.gov.br/i3geo
 Timestamp: Última atualização mon day
@@ -40,7 +40,7 @@ Timestamp: Última atualização mon day
 
 Link: I3Geo no MMA  (http://mapas.mma.gov.br/i3geo)
 File: Variáveis de inicialização.  (ms_configura.php)
-File: Inicializa o I3Geo via URL  (ms_criamapa.php)
+File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 
 Group: Programas especiais  {
 
