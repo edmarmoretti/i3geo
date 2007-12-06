@@ -163,6 +163,7 @@ Include:
 	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
 		require_once("classe_imagem.php");
+		$qy = file_exists(($this->arquivo)."qy");
 		$legenda = $this->mapa->legend;
 		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
 		if ($legenda->status == MS_EMBED)
@@ -181,14 +182,7 @@ Include:
 			}
 		}			
 		$nome = nomeRandomico();
-		
-		/*
-		if (!file_exists(($this->arquivo)."qy"))
-		{$imgo = @$this->mapa->draw();}
-		else
-		{$imgo = @$this->mapa->drawQuery();}
-		*/
-		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum")
+		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum" && !$qy)
 		{
 			foreach($this->layers as $l)
 			{$l->set("status",MS_OFF);}
@@ -196,7 +190,7 @@ Include:
 		}
 		else
 		{
-			if (!file_exists(($this->arquivo)."qy"))
+			if (!$qy)
 			{$imgo = @$this->mapa->draw();}
 			else
 			{$imgo = @$this->mapa->drawQuery();}
@@ -222,7 +216,7 @@ Include:
 		$e = $this->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		$nomer = ($imgo->imageurl).basename($nomer);
-		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && !$qy)
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
@@ -661,8 +655,14 @@ $locaplic - string Diretório onde fica a aplicação.
 				foreach ($novosnomes as $n)
 				{
 					$nlayer = $nmap->getlayerbyname($n);
-					//if($nlayer->type == MS_LAYER_RASTER)
-					//{$this->mapa->selectOutputFormat("png2");}
+					//
+					//muda para RGB para melhorar o desenho da imagem raster
+					//
+					if($nlayer->type == MS_LAYER_RASTER)
+					{
+						$of = $this->mapa->outputformat;
+						$of->set("imagemode",MS_IMAGEMODE_RGB);
+					}
 					$nlayer->set("status",MS_DEFAULT);
 					$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 					$nlayer->set("name",$nomeunico[$n]);
@@ -908,6 +908,8 @@ Include:
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
 		ms_newLayerObj($this->mapa, $layer);
+		$of = $this->mapa->outputformat;
+		$of->set("imagemode",MS_IMAGEMODE_RGB);
 		$this->salva();
 	}
 /*
