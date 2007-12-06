@@ -241,8 +241,16 @@ function criaContainerRichdraw()
 {
 	try
 	{
+		//
+		//cria o container para uso da função de desenho usando
+		//svg ou vml
+		//esse container é sobreposto exatamente sobre o mapa
+		//
 		if (!$i("divGeometriasTemp"))
 		{
+			var pos = [0,0];
+			if($i("img"))
+			var pos = pegaPosicaoObjeto($i("img"));
 			var novoel = document.createElement("div");
 			novoel.id = "divGeometriasTemp";
 			var ne = novoel.style;
@@ -253,13 +261,18 @@ function criaContainerRichdraw()
 			ne.height=objmapa.h;
 			ne.border="1px solid black";
 			ne.display="none";
-			ne.top=imagemyi;
-			ne.left=imagemxi;
+			ne.top=pos[1];
+			ne.left=pos[0];
 			document.body.appendChild(novoel);
 		}
 		var divgeo = $i("divGeometriasTemp");
 		divgeo.innerHTML = "";
 		var renderer;
+		//
+		//cria o objeto renderer conforme o browser em uso
+		//esse objeto será utilizado nas funções de desenho
+		//mais detalhes, veja em pacotes/richdraw
+		//
 		if (navn) {renderer = new SVGRenderer();}
 		else {renderer = new VMLRenderer();}
 		richdraw = new RichDrawEditor(divgeo, renderer);
@@ -268,6 +281,11 @@ function criaContainerRichdraw()
 		richdraw.editCommand('linewidth', '1px');
 		richdraw.editCommand('mode', 'line');
 		divgeo.style.display="block";
+		//
+		//após o container ser criado, é necessário que as funções
+		//de clique sobre o mapa sejam ativadas
+		//para funcionarem sobre o container
+		//
 		ativaClicks(divgeo);
 	}
 	catch(e){alert("Erro ao tentar criar container richdraw");}
@@ -396,7 +414,8 @@ function initJanelaMen()
 			iCookie("g_janelaMen","sim");
 		}
 		YAHOO.janelaMen.xp.panel.show();
-		YAHOO.janelaMen.xp.panel.moveTo(imagemxi - 267 ,objmapa.h - 70);
+		var pos = pegaPosicaoObjeto($i("img"));
+		YAHOO.janelaMen.xp.panel.moveTo(pos[0] - 267 ,objmapa.h - 70);
 	}
 	catch(e){alert("Nao foi possivel criar a janela de mensagens. initJanelaMen"+e);}
 }
@@ -655,8 +674,9 @@ function mensagemf(m)
 			$i("mensagemt").value = m;
 			$i("mensagem").style.visibility = "visible";
 		}
-		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = imagemxi + g_postpx');
-		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = imagemyi + g_postpx');
+		var pos = pegaPosicaoObjeto($i("img"));
+		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = pos[0] + g_postpx');
+		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = pos[1] + g_postpx');
 	}
 	catch(e){alert("Impossivel criar mensagem."+e);}
 }
@@ -704,9 +724,10 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 			$i("wdocai").src = wsrc;
 		}
 		var fix = false;
+		var pos = pegaPosicaoObjeto($i("img"));
 		if(nx == "center"){var fix = true;}
 		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.janelaDoca.xp.panel.moveTo(imagemxi,imagemyi+50);
+		YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		YAHOO.janelaDoca.xp.panel.render();
 		var escondeWdoca = function()
 		{
@@ -787,9 +808,10 @@ function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 			novoel.innerHTML = ins;
 			document.body.appendChild(novoel);
 		}
+		var pos = pegaPosicaoObjeto($i("img"));
 		YAHOO.namespace("janelaDoca2.xp");
 		YAHOO.janelaDoca2.xp.panel = new YAHOO.widget.Panel("wdoca2", {width:wlargura, fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:true } );
-		YAHOO.janelaDoca2.xp.panel.moveTo(imagemxi,imagemyi);
+		YAHOO.janelaDoca2.xp.panel.moveTo(pos[0],pos[1]);
 		YAHOO.janelaDoca2.xp.panel.render();
 		YAHOO.janelaDoca2.xp.panel.show();
 		with ($i("wdocai2").style){width = "100%";height = waltura;}
@@ -1033,12 +1055,13 @@ function aguarde()
 			document.body.removeChild($i("wait_c"));
 		}
 		YAHOO.namespace("aguarde."+aguardeId);
+		var pos = pegaPosicaoObjeto($i("img"));
 		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.body.style.height="20px"');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setHeader("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
-		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')');
+		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+pos[0]+','+pos[1]+')');
 		eval ('YAHOO.aguarde.'+aguardeId+'.show()');
 		if($i("wait_mask"))
 		{$i("wait_mask").style.zIndex=5000;}
@@ -1397,9 +1420,10 @@ function initJanelaRef()
 	YAHOO.namespace("janelaRef.xp");
 	YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
 	YAHOO.janelaRef.xp.panel.render();
-	if (navm){YAHOO.janelaRef.xp.panel.moveTo((imagemxi+objmapa.w-160),imagemyi+4);}
+	var pos = pegaPosicaoObjeto($i("img"));
+	if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
 	else
-	{YAHOO.janelaRef.xp.panel.moveTo((imagemxi+objmapa.w-160),imagemyi+4);}
+	{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
 	var escondeRef = function()
 	{
 		YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
@@ -1463,13 +1487,14 @@ function movelentef()
 		{
 			if ($i("lente").style.visibility=="visible")
 			{
-				var esq = (objposicaocursor.telax - imagemxi) * 2.25;
-				var topo = (objposicaocursor.telay - imagemyi) * 2.25;
+				var pos = pegaPosicaoObjeto($i("img"));
+				var esq = (objposicaocursor.telax - pos[0]) * 2.25;
+				var topo = (objposicaocursor.telay - pos[1]) * 2.25;
 				var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
 				var i = $i("lente").style;
 				i.clip = clipt;
-				eval("i." + g_tipotop + "= (imagemyi - (topo - 40)) + g_postpx");
-				eval("i." + g_tipoleft +  "= (imagemxi - (esq - 40)) + g_postpx");
+				eval("i." + g_tipotop + "= (pos[1] - (topo - 40)) + g_postpx");
+				eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
 			}
 		}
 	}
@@ -1516,6 +1541,7 @@ tipo - desloca|termina
 */
 function zoomboxf (tipo)
 {
+	var pos = pegaPosicaoObjeto($i("img"));
 	if($i("box1"))
 	{
 		var bx = $i("box1");
@@ -1560,10 +1586,10 @@ function zoomboxf (tipo)
 		md = 1;
 		eval ('pix = parseInt(document.getElementById("box1").style.' + g_tipoleft + ")");
 		eval ('piy = parseInt(document.getElementById("box1").style.' + g_tipotop + ")");
-		xfig0 = parseInt(bxs.width) - imagemxi;
-		yfig0 = parseInt(bxs.height) - imagemyi;
-		xfig = pix + (parseInt(bxs.width)) - imagemxi;
-		yfig = piy + (parseInt(bxs.height)) - imagemyi;
+		xfig0 = parseInt(bxs.width) - pos[0];
+		yfig0 = parseInt(bxs.height) - pos[1];
+		xfig = pix + (parseInt(bxs.width)) - pos[0];
+		yfig = piy + (parseInt(bxs.height)) - pos[1];
 		amext = objmapa.extent.split(" ");
 		dx = ((amext[0] * -1) - (amext[2] * -1)) / (tamanhox - 1);
 		dy = ((amext[1] * 1) - (amext[3] * 1)) / (tamanhoy - 1);
@@ -1572,8 +1598,8 @@ function zoomboxf (tipo)
 		ny = g_celula * yfig;
 		x1 = (amext[0] * 1) + nx;
 		y1 = (amext[3] * 1) - ny;
-		xfig = pix - imagemxi;
-		yfig = piy - imagemyi;
+		xfig = pix - pos[0];
+		yfig = piy - pos[1];
 		if (dy < 0) dy=dy * -1;
 		nx = g_celula * xfig;
 		ny = g_celula * yfig;
@@ -1678,8 +1704,8 @@ function clicouRef()
 	try
 	{
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
-		objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
+		//objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
+		//objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
 		cpObj.call(p,"pan",ajaxredesenha);
 	}
@@ -1695,8 +1721,7 @@ function movimentoRef(obj)
 {
 	obj.onmousemove =function(exy)
 	{
-		if (navm){capturaposicao(obj);}
-		else{capturaposicao(exy);}
+		capturaposicao(exy);
 	};
 }
 /*
@@ -2955,7 +2980,7 @@ function processevent1(exy1)
 /*
 Function: calcposf
 
-Calcula a posição correta do corpo do mapa e posiciona-o corretamente na tela.
+Calcula a posição do corpo do mapa e posiciona-o corretamente na tela.
 
 Atualiza as variáveis imagemxi,imagemyi,imagemxref e imagemyref
 */
@@ -3013,20 +3038,27 @@ Move o ícone que segue o mouse quando da movimentação sobre o mapa
 */
 function movecursor()
 {
-	if ($i("openlayers"))
-	{$i("obj").style.display = "none";}
-	else
+	//
+	//se a interface openlayers estiver sendo usada, o ícone não é mostrado
+	//'obj' é o elemento que guarda o ícone
+	//
+	if ($i("obj"))
 	{
-		var obje = $i("obj").style;
-		if ($i("img"))
-		{
-			eval ("obje." + g_tipotop + "= objposicaocursor.telay + 5 + g_postpx");
-			eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 5 + g_postpx");
-		}
+		if ($i("openlayers"))
+		{$i("obj").style.display = "none";}
 		else
 		{
-			eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
-			eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+			var obje = $i("obj").style;
+			if ($i("img"))
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 5 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 5 + g_postpx");
+			}
+			else
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+			}
 		}
 	}
 	if($i("box1"))
@@ -3043,7 +3075,7 @@ function movecursor()
 /*
 Function: capturaposicao
 
-Captura a posição do mouse em função do evento onmousemove sobre o corpo do mapa.
+Captura a posição do mouse em função do evento onmousemove sobre o corpo do mapa ou sobre o mapa de referência.
 
 Atualiza o objeto objposicaocursor.
 A função de mostrar TIP é definida como "" quando o mouse é movimentado.
@@ -3052,41 +3084,81 @@ Parameters:
 
 exy - objeto evento.
 */
-function capturaposicao(exy)
+function capturaposicao(e)
 {
-	var e = (navn) ? exy : window.event;
-	if (navm)
-	{
-		var storage = e.clientY+document.body.scrollTop;
-		var storage1 = e.clientX+document.body.scrollLeft;
-		calcposf(); 
-		var xfig = e.clientX - imagemxi + document.body.scrollLeft;
-		var yfig = e.clientY - imagemyi + document.body.scrollTop;
-		var xreffig = e.clientX - imagemxref + document.body.scrollLeft;
-		var yreffig = e.clientY - imagemyref + document.body.scrollTop;
-	}
+	if (!e) var e = window.event;
+	//
+	//verifica sob qual objeto o mouse está se movendo
+	//
+	if (e.target)
+	{var targ = e.target;}
+	else if (e.srcElement) var targ = e.srcElement;
+	if(targ.id == "" && $i("img"))
+	{targ = $i("img");}
+	//
+	//se estiver no modo pan, o movimento deve ser obtido do elemento
+	//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
+	//se não for feito assim, o deslocamento do mapa não é capturado
+	//
+	if (g_panM == "sim")
+	{var pos = pegaPosicaoObjeto(targ.parentNode);}
 	else
-	{
-		var storage = e.clientY+window.pageYOffset;
-		var storage1 = e.clientX+window.pageXOffset;
-		calcposf(); 
-		var xfig = e.clientX - imagemxi + pageXOffset;
-		var yfig = e.clientY - imagemyi + pageYOffset;
-		var xreffig = e.clientX - imagemxref + pageXOffset;
-		var yreffig = e.clientY - imagemyref + pageYOffset;
+	{var pos = pegaPosicaoObjeto(targ);}
+	//
+	//pega a posicao correta do mouse
+	//
+	var mousex = 0;
+	var mousey = 0;
+	if (e.pageX || e.pageY) 	{
+		mousex = e.pageX;
+		mousey = e.pageY;
 	}
-	var teladd = calcddf(xfig,yfig,g_celula,objmapa.extent);
+	else if (e.clientX || e.clientY) 	{
+		mousex = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		mousey = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
+	}
+	//
+	//faz os cálculos de posicionamento
+	//fig e reffig são a mesma coisa por enquanto
+	//
+	var xfig = mousex - pos[0];
+	var yfig = mousey - pos[1];
+	var xreffig = xfig;
+	var yreffig = yfig;
+	var xtela = mousex;
+	var ytela = mousey;
+	//$i("escalanum").value = mousex+" "+xfig
+	//
+	//celula e extent são necessários para se fazer a
+	//conversão de coordenadas de tela para coordenadas geográficas
+	//esses valores são obtidos das funções ajax que redesenham ou inicializam o mapa
+	// 
+	var c = g_celula;
+	var ex = objmapa.extent;
+	if(targ.id == "imagemReferencia")
+	{
+		var c = g_celularef;
+		var ex = objmapa.extentref;
+	}
+	var teladd = calcddf(xfig,yfig,c,ex);
 	var teladms = convdmsf(teladd[0],teladd[1]);
 	objposicaocursor.ddx = teladd[0];
 	objposicaocursor.ddy = teladd[1];
 	objposicaocursor.dmsx = teladms[0];
 	objposicaocursor.dmsy = teladms[1];
-	objposicaocursor.telax = storage1;
-	objposicaocursor.telay = storage;
+	objposicaocursor.telax = xtela;
+	objposicaocursor.telay = ytela;
 	objposicaocursor.imgx = xfig;
 	objposicaocursor.imgy = yfig;
 	objposicaocursor.refx = xreffig;
 	objposicaocursor.refy = yreffig;
+	//
+	//aqui é feita a verificação da função de etiquetas
+	//toda vez que o mouse é movimentado o tip é zerado
+	//e é identificado que o mouse não está parado, obviamente
+	//
 	if (objmapa.parado!="cancela")
 	{objmapa.parado = "nao";}
 	ajaxTip = "";
@@ -3326,8 +3398,6 @@ function calculaArea()
 		if(pontosdistobj.xpt.length > 2)
 		{
 			var $array_length = pontosdistobj.xpt.length;
-			// add the first coordinates at the end to close de polygon
-			//array_push($polygon_coordinates,array($polygon_coordinates[0][0],$polygon_coordinates[0][1]));
 			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
 			pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
 			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
@@ -3585,6 +3655,7 @@ function convddtela(vx,vy,docmapa)
 {
 	try
 	{
+		var pos = pegaPosicaoObjeto($i("img"));
 		if(!docmapa)
 		{var docmapa = window.document;}
 		var dc = docmapa.getElementById("img");
@@ -3594,8 +3665,8 @@ function convddtela(vx,vy,docmapa)
 		vy = (vy * -1) + (varimgext[3] * 1);
 		c = objmapa.cellsize * 1;
 		xy = new Array();
-		xy[0] = (vx  / c) + imagemxi;
-		xy[1]  = (vy / c) + imagemyi;
+		xy[0] = (vx  / c) + pos[0];
+		xy[1]  = (vy / c) + pos[1];
 		return (xy);
 	}
 	catch(e){return(new Array());}
@@ -3708,20 +3779,25 @@ n - índice do elemento no array pontosdistobj
 */
 function desenhoRichdraw(tipo,objeto,n)
 {
-	if (richdraw)
+	if (richdraw && $i("img"))
 	{
+		var pos = pegaPosicaoObjeto($i("img"));
+		//
+		//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
+		//
 		if((tipo=="resizeLinha") || (tipo=="resizePoligono") && navn)
 		{
 			try
-			{
-				richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);
-			}
+			{richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
 			catch(e){window.status=n+" erro ao movimentar a linha ";}
 		}
 		if((tipo=="resizeLinha") && navm)
 		{
 			try
 			{
+				//
+				//no caso do ie, a linha tem de ser removida e desenhada novamente
+				//
 				var r = $i(richdraw.container.id);
 				r.removeChild(r.lastChild);
 				var dy = objposicaocursor.imgy;
@@ -3753,7 +3829,7 @@ function desenhoRichdraw(tipo,objeto,n)
 				var w = Math.sqrt(dx + dy);
 				try
 				{
-					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.xtela[n-1] - imagemxi,pontosdistobj.ytela[n-1] - imagemyi,w,w);
+					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
 				}
 				catch(e){window.status=n+" erro ao desenhar o raio";}
 			}
@@ -4186,11 +4262,14 @@ Retorna a posição x,y de um objeto em relação a tela do navegador
 function pegaPosicaoObjeto(obj)
 {
 	var curleft = curtop = 0;
-	if (obj.offsetParent) {
-		do {
-			curleft += obj.offsetLeft;
-			curtop += obj.offsetTop;
-		} while (obj = obj.offsetParent);
+	if(obj)
+	{
+		if (obj.offsetParent) {
+			do {
+				curleft += obj.offsetLeft;
+				curtop += obj.offsetTop;
+			} while (obj = obj.offsetParent);
+		}
 	}
 	return [curleft,curtop];
 }

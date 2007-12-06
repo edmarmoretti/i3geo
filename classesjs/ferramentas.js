@@ -122,6 +122,9 @@ function moveArea()
 		var n = pontosdistobj.xpt.length;
 		if (n > 0)
 		{
+			//
+			//conforme a escala, os dados são arredondados
+			// 
 			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 			if (objmapa.scale > 500000)
 			{var d = parseInt(d);}
@@ -134,6 +137,9 @@ function moveArea()
 				d = d * 1;
 			}
 			var da = d + pontosdistobj.dist[n-1];
+			//
+			//desenha as linhas na tela com o objeto richdraw
+			//
 			if(navn){desenhoRichdraw("resizePoligono",pontosdistobj.linhastemp,0);}
 			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
 		}
@@ -157,7 +163,6 @@ function cliqueCapturaPt()
 	{
 		if($i("wdocai"))
 		{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
-		//convdmsf(objposicaocursor.ddx,objposicaocursor.ddx);
 		var x = objposicaocursor.dmsx.split(" ");
 		var y = objposicaocursor.dmsy.split(" ");
 		if (doc.getElementById("ixg"))
@@ -172,9 +177,6 @@ function cliqueCapturaPt()
 		{doc.getElementById("iym").value = y[1];}
 		if (doc.getElementById("iys"))
 		{doc.getElementById("iys").value = y[2];}
-
-		
-		//mudaiconf("pan");
 	}
 }
 /*
@@ -380,6 +382,7 @@ function cliqueMede()
 	if (g_tipoacao == "mede")
 	{
 		var n = pontosdistobj.xpt.length;
+		//$i("escalanum").value = objposicaocursor.telax+" "+objposicaocursor.imgx
 		pontosdistobj.xpt[n] = objposicaocursor.ddx;
 		pontosdistobj.ypt[n] = objposicaocursor.ddy;
 		pontosdistobj.xtela[n] = objposicaocursor.telax;
@@ -390,7 +393,7 @@ function cliqueMede()
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
 			else
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
