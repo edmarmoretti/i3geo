@@ -56,9 +56,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-if (!file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
-{exit;}
-if (file_exists($locaplic."/pacotes/geoip"))
+if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 {
 	$r["latitude"] = "";
 	require_once($locaplic."/classesphp/funcoes_gerais.php");

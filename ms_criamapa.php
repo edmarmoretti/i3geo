@@ -70,11 +70,12 @@ Note: Verifica se a variável $caminho está definida
 Essa variável deve ser definida em programas que utilizam o ms_criamapa.php via include
 indica onde está o diretório i3geo para que os includes seguintes possam ser localizados
 */
+if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
 if (isset($_GET["caminho"]))
 {$caminho = $_GET["caminho"];}
-if (!isset($caminho)){$caminho = "";}
+
 /*
 Note: Carrega as extensões, geralmente necessário nas instalações windows
 */
@@ -87,14 +88,6 @@ Inclui os programas php com funções necessárias
 require_once ($caminho."classesphp/pega_variaveis.php");
 require_once ($caminho."classesphp/funcoes_gerais.php");
 require_once ($caminho."ms_configura.php");
-/*
-Note: Monta a apresentação do aguarde
-
-Aqui é necessário verificar se $executa está definido
-isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
-*/
-if (!isset($executa))
-{mostraAguarde();}
 /*
 Note: Define a variável $mapext que especifica a extensão geográfica do mapa
 */
@@ -119,6 +112,7 @@ $srid_area_ = $srid_area;
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
+if(!isset($perfil)){$perfil="";}
 $perfil_ = $perfil;
 $utilizacgi_ = $utilizacgi;
 if ((isset($navegadoresLocais)) && ($navegadoresLocais != ""))
@@ -136,6 +130,16 @@ session_start();
 if (!isset($g_sid)){$g_sid="";}
 if(isset($_SESSION["map_file"]) || $g_sid!="")
 {session_regenerate_id();}
+
+/*
+Note: Monta a apresentação do aguarde
+
+Aqui é necessário verificar se $executa está definido
+isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
+*/
+if (!isset($executa))
+{mostraAguarde();}
+
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["temasdir"] = $temasdir_;
 $_SESSION["temasaplic"] = $temasaplic_;
