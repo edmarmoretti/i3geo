@@ -35,11 +35,12 @@ comboTemasPt("temasPt",function(retorno)
 {
 	if (retorno.tipo == "dados")
 	{	
-		var ins = "<span style=font-size:10px >Escolha o tema:</span><br><br>"
+		var ins = "<div style=top:0px;left:0px;text-align:left; >Escolha o tema de pontos que ser&aacute; utilizado:</div><br><br>"
 		ins += retorno.dados
+		ins += "<br><br><div style=top:0px;left:0px;text-align:left; >Restringe a análise aos limites de abrang&ecirc;ncia dos pontos? "+simnao("limitePontos")+"<div>"
 		ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='densidade de pontos' /></div><br>"
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='dist&acirc;ncia entre pontos' /></div><br>"
-		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div><br>"
+		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div><div>Desvio padr&atilde;o (sigma):<input class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='relat&oacute;rio' /></div><br>"
 		$i("guia1obj").innerHTML = ins;
 		YAHOO.example.init = function ()
@@ -99,8 +100,9 @@ function analiseKernel()
 		window.parent.ajaxredesenha("")
 	}
 	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&sigma="+$i("sigma").value+"&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -118,8 +120,9 @@ function analiseDensidade()
 		window.parent.ajaxredesenha("")
 	}
 	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -136,8 +139,9 @@ function analiseDistancia()
 		window.parent.ajaxredesenha("")
 	}
 	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -149,8 +153,9 @@ function analiseRelatorio()
 	var cf = $i("corf").value
 	aguarde("block")
 	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",abreRelatorio);
