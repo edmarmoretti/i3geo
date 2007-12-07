@@ -1,0 +1,30 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+      NAME "refdin"
+      TYPE RASTER
+      STATUS default
+      CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
+      CONNECTIONTYPE WMS
+      METADATA
+        "wms_srs"	"EPSG:4326"
+        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+        "wms_name"	"base"
+        "wms_formatlist"	"image/gif,image/png,image/png"
+        "wms_format"	"image/png"
+        "wms_connectiontimeout"	"20"
+        "wms_server_version"	"1.1.1"
+        "wms_styles"	"default"
+      END
+	  TRANSPARENCY 100
+END
+LAYER
+	NAME "refdinrect"
+	TYPE line
+	STATUS default
+	CLASS
+		NAME " "
+		COLOR 255 0 0
+	END
+END
+END

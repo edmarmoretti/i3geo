@@ -682,6 +682,17 @@ Gera a imagem do mapa de referência.
 		$cp->start();
 	break;
 /*
+Property: referenciadinamica
+
+Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do mapa atual.
+*/	
+	case "referenciadinamica":
+		//$objMapa = ms_newMapObj($map_file);
+		$nomeImagem = nomeRandomico();
+		$cp->register('retornaReferenciaDinamica');
+		$cp->start();
+	break;
+/*
 Section: Temas
 
 Processa os layers do mapa.

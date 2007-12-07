@@ -792,30 +792,46 @@ function Mapa(e,m)
 	/*
 	Function: atualizaReferencia
 	
-	Atualiza o mapa de referência
+	Atualiza o mapa de referência.
 	
+	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
+	
+	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
+	
+	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
+	
+	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
+
 	Parameters:
 	
-	mapexten - extensão geográfica
+	mapexten - extensão geográfica do retângulo que será desenhado no mapa de referência. 
+	Esse valor é utilizado apenas para comparar a extensão geográfica do mapa atual com a extensão geográfica do mapa seguinte.
 	*/
 	this.atualizaReferencia = function(mapexten)
 	{
-		//
-		//se houve alteração na extensão, é preciso refazer o mapa de referência
-		//se não, a imagem atual é armazenada no quado de animação
-		//
+		var dinamico = false;
+		if ($i("refDinamico"))
+		{var dinamico = $i("refDinamico").checked;}
 		if ($i("mapaReferencia") && objmapa.extent != mapexten)
 		{
-			if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
+			if(dinamico)
 			{
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
-				cpObj.call(p,"retornaReferencia",ajaxReferencia);
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+g_sid;
+				cpObj.call(p,"retornaReferenciaDinamica",ajaxReferencia);
 			}
 			else
 			{
-				var re = new RegExp("&mode=map", "g");
-				$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
-				gravaQuadro("referencia",$i("imagemReferencia").src);
+				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
+				{
+					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
+					cpObj.call(p,"retornaReferencia",ajaxReferencia);
+				}
+				else
+				{
+					var re = new RegExp("&mode=map", "g");
+					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
+					gravaQuadro("referencia",$i("imagemReferencia").src);
+				}
 			}
 		}
 		else

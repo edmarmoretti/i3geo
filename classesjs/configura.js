@@ -49,8 +49,7 @@ g_traducao = {
 "p1": [
 {
 pt:"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>",
-en:"I3geo is a open source software! <a href='http://mapas.mma.gov.br/download' target=blank >Click</a> to 
-download.",
+en:"I3geo is a open source software! <a href='http://mapas.mma.gov.br/download' target=blank >Click</a> to download.",
 es:""
 }],
 //lista de propriedades do mapa
@@ -299,12 +298,7 @@ es:""
 }],
 "t3":[
 {
-pt:"Clique para ligar ou desligar esse tema, mostrando-o ou
-n&atilde;o 
-no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns
-instantes 
-para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que 
-ser&aacute; mostrado.",
+pt:"Clique para ligar ou desligar esse tema, mostrando-o ou n&atilde;o no mapa. Ap&oacute;s alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no bot&atilde;o aplicar que ser&aacute; mostrado.",
 en:"Turn the layer on/off on the map. Wait a few moments to get the map redesigned or press the button to apply it.",
 es:""
 }],
@@ -341,17 +335,14 @@ es:""
 
 "t9":[
 {
-pt:"A escala do tema &eacute; compat&iacute;vel com a escala do
-mapa",
+pt:"A escala do tema &eacute; compat&iacute;vel com a escala do mapa",
 en:"The scale of the layer is compatible with the scale of the map",
 es:""
 }],
 "t10":[
 {
-pt:"A escala do tema &eacute incompat&iacute;vel com a escala do
-mapa",
-en:"The scale of the layer is incompatible with the scale of the
-map",
+pt:"A escala do tema &eacute incompat&iacute;vel com a escala do mapa",
+en:"The scale of the layer is incompatible with the scale of the map",
 es:""
 }],
 "t11":[
@@ -422,8 +413,7 @@ es:""
 }],
 "t19":[
 {
-pt:"Altera a transparência do tema, possibilitando que as camadas 
-inferiores possam ser vistas.",
+pt:"Altera a transparência do tema, possibilitando que as camadas inferiores possam ser vistas.",
 en:"Change the layer transparency.",
 es:""
 }],
@@ -435,8 +425,7 @@ es:""
 }],
 "t21a":[
 {
-pt:"Muda o nome atual do tema. Utilize para melhorar a legenda do
-mapa.",
+pt:"Muda o nome atual do tema. Utilize para melhorar a legenda do mapa.",
 en:"Change layer name.",
 es:""
 }],
@@ -448,8 +437,7 @@ es:""
 }],
 "t22":[
 {
-pt:"Localize elementos no tema com base em seus atributos
-descritivos.",
+pt:"Localize elementos no tema com base em seus atributos descritivos.",
 en:"Find elements on the layer based on their descriptive attributes.",
 es:""
 }],
@@ -461,8 +449,7 @@ es:""
 }],
 "t24":[
 {
-pt:"Crie uma nova camada no mapa para apresentar textos descritivos 
-sobre esse tema, tendo como base a tabela de atributos.",
+pt:"Crie uma nova camada no mapa para apresentar textos descritivos sobre esse tema, tendo como base a tabela de atributos.",
 en:"Create a new layer to display descriptive texts on the subject, based on table of attributes.",
 es:""
 }],
@@ -510,11 +497,8 @@ es:""
 }],
 "t32":[
 {
-pt:"Abre o editor de legenda, permitindo a alteração da forma de 
-representação desse tema.",
-en:"Opens the editor of legend, allowing the modification of the form
-of 
-representation of this theme.",
+pt:"Abre o editor de legenda, permitindo a alteração da forma de representação desse tema.",
+en:"Opens the editor of legend, allowing the modification of the form of representation of this theme.",
 es:""
 }],
 "t33":[
@@ -579,15 +563,8 @@ es:""
 }],
 "a8":[
 {
-pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no
-mapa. 
-Após alterar o estado do tema, aguarde alguns instantes para o mapa
-ser 
-redesenhado, ou clique no botão aplicar que será mostrado.",
-en:"Click to connect or disconnect layer, showing it or not on
-the map. After changing the layer status, wait a few moments to be
-redesigned the map, or click in the button apply that will be
-shown.",
+pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
+en:"Click to connect or disconnect layer, showing it or not on the map. After changing the layer status, wait a few moments to be redesigned the map, or click in the button apply that will be shown.",
 es:""
 }],
 "a9":[
@@ -670,49 +647,35 @@ pt:"Aguarde...iniciando",
 en:"Wait...initializing",
 es:""
 }],
+"o6":[
+{
+pt:"din&acirc;mico",
+en:"dynamic",
+es:""
+}],
 //dicas das ferramentas
 "d1":[
 {
-pt:"Digite as coordenadas de um ponto (X=longitude e Y=latitude) para
-
-localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para
-o 
-ponto digitado.",
-en:"Enter the coordinates of a point (X=longitude and Y=latitude) to 
-localize it on the map. The center of the map is move to the point 
-entered.",
+pt:"Digite as coordenadas de um ponto (X=longitude e Y=latitude) para localiz&acute;-lo no mapa. O centro do mapa ser&acute; deslocado para o ponto digitado.",
+en:"Enter the coordinates of a point (X=longitude and Y=latitude) to localize it on the map. The center of the map is move to the point entered.",
 es:""
 }],
 "d2":[
 {
-pt:"Altera a escala do mapa ajustando-a para mostrar a mesma 
-abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
-en:"Change the scale of the map adjusting it to show the same initial geographical 
-cover.",
+pt:"Altera a escala do mapa ajustando-a para mostrar a mesma abrang&circ;ncia geogr&aacute;fica da inicializa&ccedil;&atilde;o.",
+en:"Change the scale of the map adjusting it to show the same initial geographical cover.",
 es:""
 }],
 "d3":[
 {
-pt:"Amplia o mapa - coloca o ponto clicado no centro da tela ou
-amplia a 
-regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, 
-clique e arraste o mouse sobre o mapa na &aacute;rea de zoom
-desejada.",
-en:"Extends the map - place the clicked point in the center of the
-screen 
-or extends the region indicated by a rectangular.After enabled, click
-and drag the mouse over the map in the area of zoom desired.",
+pt:"Amplia o mapa - coloca o ponto clicado no centro da tela ou amplia a regi&atilde;o indicada por um ret&acirc;ngulo.Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa na &aacute;rea de zoom desejada.",
+en:"Extends the map - place the clicked point in the center of the screen or extends the region indicated by a rectangular.After enabled, click and drag the mouse over the map in the area of zoom desired.",
 es:""
 }],
 "d4":[
 {
-pt:"Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s
-ativada, 
-clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o 
-vis&iacute;vel.",
-en:"Shifts the region visible on the map. Once activated, click and
-drag 
-the mouse over the map to move the visible region.",
+pt:"Desloca a regi&atilde;o vis&iacute;vel no mapa. Ap&oacute;s ativada, clique e arraste o mouse sobre o mapa para deslocar a regi&atilde;o vis&iacute;vel.",
+en:"Shifts the region visible on the map. Once activated, click and drag the mouse over the map to move the visible region.",
 es:""
 }],
 "d5":[
@@ -729,20 +692,13 @@ es:""
 }],
 "d7":[
 {
-pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa.
-Ap&oacute;s 
-ativada, pare o mouse por alguns instantes no ponto desejado ou
-clique 
-sobre o mesmo.",
-en:"Displays information about a point on the map. Once activated,
-stop 
-the mouse for a few moments at the desired point or click on it.",
+pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.",
+en:"Displays information about a point on the map. Once activated, stop the mouse for a few moments at the desired point or click on it.",
 es:""
 }],
 "d8":[
 {
-pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas 
-geogr&aacute;ficas",
+pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas",
 en:"It shows the extent of current geographic coordinates",
 es:""
 }],
@@ -754,22 +710,14 @@ es:""
 }],
 "d10":[
 {
-pt:"Digite o novo valor de escala e clique no bot&atilde;o aplicar
-para 
-alterar a escala do mapa",
-en:"Enter the new value of scale and click the button Apply to
-change 
-the scale of the map",
+pt:"Digite o novo valor de escala e clique no bot&atilde;o aplicar para alterar a escala do mapa",
+en:"Enter the new value of scale and click the button Apply to change the scale of the map",
 es:""
 }],
 "d11":[
 {
-pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. 
-Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. 
-Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
-en:"Search data on Wikipedia in the current scope of the map. Make a 
-zoom on the map before opening this option. Regions very 
-extensive can make a very long search ",
+pt:"Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
+en:"Search data on Wikipedia in the current scope of the map. Make a zoom on the map before opening this option. Regions very extensive can make a very long search ",
 es:""
 }],
 "d12":[
@@ -792,25 +740,20 @@ es:""
 }],
 "d15":[
 {
-pt:"Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da 
-regi&atilde;o vista no mapa principal",
-en:"Open Google Maps, showing a satellite image of the region's main
-views on the map",
+pt:"Abre o Google Maps, mostrando uma imagem de sat&eacute;lite da regi&atilde;o vista no mapa principal",
+en:"Open Google Maps, showing a satellite image of the region's main views on the map",
 es:""
 }],
 "d16":[
 {
-pt:"Pesquisa documentos na base de dados Scielo (dados
-preliminares)",
+pt:"Pesquisa documentos na base de dados Scielo (dados preliminares)",
 en:"Search documents in the database Scielo (preliminary data)",
 es:""
 }],
 "d17":[
 {
-pt:"Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de 
-coordenadas observadas em campo",
-en:"Confluence Project. Points of intersection of coordinates
-observed in field",
+pt:"Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo",
+en:"Confluence Project. Points of intersection of coordinates observed in field",
 es:""
 }],
 "d18":[
@@ -833,68 +776,37 @@ es:""
 }],
 "d21":[
 {
-pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa
-
-(menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute;
-
-aproximado e sua precis&atilde;o depende da escala do mapa.",
-en:"It measures the distance between two or more clicked points on
-the map (less distance). The calculation of distance is approximate and 
-their accuracy depends on the scale of the map.",
+pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dist&acirc;ncia). O c&aacute;lculo de dist&acirc;ncia &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
+en:"It measures the distance between two or more clicked points on the map (less distance). The calculation of distance is approximate and their accuracy depends on the scale of the map.",
 es:""
 }],
 "d22":[
 {
-pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Os
-pontos 
-inclu&iacute;dos podem ser transformados em linhas ou
-pol&iacute;gonos. 
-Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, 
-podendo-se fazer o download do arquivo shapefile.",
-en:"Insert points on the map in geographical coordinates. Items
-included 
-can be converted into lines or polygons. Items are stored in a
-temporary 
-layer, can be to download shapefile.",
+pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Ospontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.",
+en:"Insert points on the map in geographical coordinates. Items included can be converted into lines or polygons. Items are stored in a temporary layer, can be to download shapefile.",
 es:""
 }],
 "d23":[
 {
-pt:"Insere um gr&aacute;fico no ponto clicado conforme os atributos 
-existentes no tema escolhido. O tema deve possuir itens com valores 
-num&eacute;ricos na tabela de atributos.",
-en:"Insert a graphic in the clicked point as the exist attributes in the 
-chosen layer. The layer must have items with numerical values in
-the 
-table of attributes.",
+pt:"Insere um gr&aacute;fico no ponto clicado conforme os atributos existentes no tema escolhido. O tema deve possuir itens com valores num&eacute;ricos na tabela de atributos.",
+en:"Insert a graphic in the clicked point as the exist attributes in the chosen layer. The layer must have items with numerical values in the table of attributes.",
 es:""
 }],
 "d24":[
 {
-pt:"Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um
-
-tema. Os elementos selecionados podem ser utilizados em outras 
-opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por
-tema.",
-en:"Opens the tools to select elements of a layer. The elements
-selected 
-can be used in other buffer or selection operation by layer  .",
+pt:"Abre as ferramentas para sele&ccedil;&atilde;o de elementos de um tema. Os elementos selecionados podem ser utilizados em outras opera&ccedil;&ocirc;es, como buffer e sele&ccedil;&atilde;o por tema.",
+en:"Opens the tools to select elements of a layer. The elements selected can be used in other buffer or selection operation by layer  .",
 es:""
 }],
 "d25":[
 {
-pt:"Insere texto no mapa clicando em um ponto. Utilize essa 
-op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao
-mapa.",
-en:"Insert text on the map by clicking on a point. Use this option to
-
-add information on the map.",
+pt:"Insere texto no mapa clicando em um ponto. Utilize essa op&ccedil;&atilde;o para adicionar informa&ccedil;&ocirc;es ao mapa.",
+en:"Insert text on the map by clicking on a point. Use this option to add information on the map.",
 es:""
 }],
 "d26":[
 {
-pt:"Escolha o visual para os botões e outras caracter&iacute;sticas 
-visuais do mapa",
+pt:"Escolha o visual para os botões e outras caracter&iacute;sticas visuais do mapa",
 en:"Choose look for the buttons and other map's visual characteristics",
 es:""
 }]

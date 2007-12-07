@@ -670,7 +670,23 @@ Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferencia()
 {
-	global $cp,$nomeImagem,$objMapa,$utilizacgi,$locmapserv;
+	global $cp,$nomeImagem,$objMapa,$utilizacgi,$locmapserv,$map_file;
+	//
+	//pega a extensao original caso ela tenha sido registrada no modo dinamico
+	//
+	$original = $objMapa->getmetadata("referenciaextentoriginal");
+	if($original != "")
+	{
+		$original = explode(" ",$original);
+		$ref = $objMapa->reference;
+		$em = $ref->extent;
+		$em->set("minx",$original[0]);
+		$em->set("miny",$original[1]);
+		$em->set("maxx",$original[2]);
+		$em->set("maxy",$original[3]);
+		$objMapa->setmetadata("referenciaextentoriginal","");
+	}
+	$objMapa->save($map_file);
 	$objMapa->preparequery();
 	$objImagem = $objMapa->drawreferencemap();
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";
@@ -679,6 +695,88 @@ function retornaReferencia()
 	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$cp->set_data($s);
 }
+/*
+function: retornaReferenciaDinamica
+
+Retorna uma string com as variaveis de um novo mapa de referencia gerado de forma dinamica.
+
+O mapa de referência é baseado no mapfile aplicmap/referenciadinamica.map
+
+parameter:
+
+cp - Objeto CPAINT.
+
+nomeImagem - Nome da imagem do corpo do mapa.
+
+objMapa - Objeto map.
+
+return:
+
+Objeto cpaint com uma string contendo variáveis no formato javascript
+*/
+function retornaReferenciaDinamica()
+{
+	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic;
+	//
+	//adiciona o tema com o web service com o mapa mundi
+	//
+	$objMapa = ms_newMapObj($map_file);
+	$numlayers = $objMap->numlayers;
+	for ($i=0;$i < $numlayers;$i++)
+	{
+		$layer = $objMap->getlayer($i);
+		$layer->set("status",MS_OFF);
+	}
+	$maptemp = ms_newMapObj($locaplic."/aplicmap/referenciadinamica.map");
+	$layern = $maptemp->getlayerbyname("refdin");
+	ms_newLayerObj($objMapa, $layern);
+	$layern = $maptemp->getlayerbyname("refdinrect");
+	ms_newLayerObj($objMapa, $layern);
+	$r = $objMapa->reference;
+	$w = $r->width;
+	$h = $r->height;
+	$emt = $objMapa->extent;
+	$em = ms_newRectObj();
+	$em->set("minx",$emt->minx);
+	$em->set("miny",$emt->miny);
+	$em->set("maxx",$emt->maxx);
+	$em->set("maxy",$emt->maxy);
+	$objMapa->setsize($w,$h);
+	$scalebar = $objMapa->scalebar;
+	$scalebar->set("status",MS_OFF);
+	$leg = $objMapa->legend;
+	$leg->set("status",MS_OFF);
+	$objMapa->preparequery();
+	$pt = ms_newPointObj();
+	$pt->setXY(($w/2),($h/2));
+	$objMapa->zoompoint(-3, $pt,$w,$h,$objMapa->extent);
+	$objImagem = $objMapa->draw();
+	$em->draw($objMapa, ($objMapa->getlayerbyname("refdinrect")), $objImagem,0,"");
+	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";
+	$objImagem->saveImage($nomer);
+	$nomer = ($objImagem->imageurl).basename($nomer);
+	$s =  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
+	$mapa = ms_newMapObj($map_file);
+	$ref = $mapa->reference;
+	$r = $ref->extent;
+	//
+	//guarda a extensao original para quando o modo dinâmico parar
+	//
+	$original = $mapa->getmetadata("referenciaextentoriginal");
+	if($original == "")
+	{
+		$original = $r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy;
+		$mapa->setmetadata("referenciaextentoriginal",$original);
+	}
+	$emt = $objMapa->extent;
+	$r->set("minx",$emt->minx);
+	$r->set("miny",$emt->miny);
+	$r->set("maxx",$emt->maxx);
+	$r->set("maxy",$emt->maxy);
+	$mapa->save($map_file);
+	$cp->set_data($s);
+}
+
 /*
 function: testaMapa
 

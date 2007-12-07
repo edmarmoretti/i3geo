@@ -1160,7 +1160,7 @@ function initJanelaRef()
 			style.display="none";
 			style.borderColor="gray";
 		}
-		var ins = '<div class="hd">Refer&ecirc;ncia</div>';
+		var ins = '<div class="hd"><input style="cursor:pointer" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
 		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" />';
 		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
