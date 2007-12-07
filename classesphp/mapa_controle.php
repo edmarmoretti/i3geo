@@ -1178,7 +1178,7 @@ Include:
 		include("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
-		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl));
+		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos));
 		$m->salva();
 	break;
 /*

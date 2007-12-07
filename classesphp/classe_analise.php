@@ -121,10 +121,14 @@ $corf - Cor final em rgb.
 
 $tmpurl - Url com o nome da imagem final
 
+$sigma - desvio padrão para a opção kernel
+
+$limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geográfico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
+
 Include:
 <class.palette.php>
 */
-	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl)
+	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE")
 	{
 		$layerPt = $this->layer;
 		$layerPt->set("tolerance",0);
@@ -164,17 +168,27 @@ Include:
 		foreach ($pontosy as $pt)
 		{fwrite($f,$pt."\n");}
 		fclose($f);
-		$xi = (min($pontosx));
-		$xf = (max($pontosx));
-		$yi = (min($pontosy));
-		$yf = (max($pontosy));
-
+		if ($limitepontos == "TRUE")
+		{
+			$xi = (min($pontosx));
+			$xf = (max($pontosx));
+			$yi = (min($pontosy));
+			$yf = (max($pontosy));
+		}
+		else
+		{
+			$ext = $this->mapa->extent;
+			$xi = $ext->minx;
+			$xf = $ext->maxx;
+			$yi = $ext->miny;
+			$yf = $ext->maxy;
+		}
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
 		switch ($tipo)
 		{
 			case "kernel":
-			$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+			$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma);
 			break;
 			case "densidade":
 			$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
@@ -258,14 +272,18 @@ $locaplic - Onde fica o I3Geo.
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{
 			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
 			$tipoimg = "png";
 		}
 		else
 		{
 			if(file_exists($locaplic."/pacotes/rlib/linux"))
-			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
-		}
-		$rcode[] = $lib;		
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
 		$rcode[] = 'library(spatstat)';
 		$rcode[] = 'oppp <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
 		$rcode[] = 'img<-distmap(oppp)';
@@ -368,25 +386,44 @@ $dir_tmp - Diretório temporário do mapserver.
 $R_path - Onde fica o R.
 
 $locaplic - Onde fica o I3Geo.
+
+$sigma - Bandwidth for kernel smoother in "smooth" option.
 */
-	function mapaKernel($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
+	function mapaKernel($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma="")
 	{
 		$gfile_name = nomeRandomico(20);
 		$graf = "png";
 		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
 		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$lib = '.libPaths("'.$locaplic.'/pacotes/r/win/library")';}
-		$rcode[] = $lib;
+		{
+			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
+			$tipoimg = "png";
+		}
+		else
+		{
+			if(file_exists($locaplic."/pacotes/rlib/linux"))
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
 		$rcode[] = 'library(spatstat)';
 		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
-		$rcode[] = 'img <- ksmooth.ppp(pt)';
+		$rcode[] = 'img <- ksmooth.ppp(pt';
+		if (is_numeric($sigma))
+		{$rcode[] = ',sigma='.$sigma.')';}
+		else
+		{$rcode[] = ')';}
 		$rcode[] = 'cat(img$v,file="'.$arqpt.'img",fill=FALSE)';
 		$rcode[] = 'cat(img$xstep,file="'.$arqpt.'h",fill=TRUE)';
 		$rcode[] = 'cat(img$ystep,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$xrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$yrange,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
+		//var_dump($rcode);
 		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
 	}
@@ -417,8 +454,20 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
 		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$lib = '.libPaths("'.$locaplic.'/pacotes/r/win/library")';}
-		$rcode[] = $lib;
+		{
+			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
+			$tipoimg = "png";
+		}
+		else
+		{
+			if(file_exists($locaplic."/pacotes/rlib/linux"))
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
 		$rcode[] = 'library(spatstat)';
 		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
 		$rcode[] = 'img <- density.ppp(pt)';
@@ -459,8 +508,20 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
 		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$lib = '.libPaths("'.$locaplic.'/pacotes/r/win/library")';}
-		$rcode[] = $lib;
+		{
+			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
+			$tipoimg = "png";
+		}
+		else
+		{
+			if(file_exists($locaplic."/pacotes/rlib/linux"))
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
 		$rcode[] = 'library(spatstat)';
 		$rcode[] = 'pt <- ppp(dadosx, dadosy, '.$dimx.','.$dimy.')';
 		$rcode[] = 'img <- distmap(pt)';
