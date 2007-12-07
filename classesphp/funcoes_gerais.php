@@ -721,10 +721,10 @@ function retornaReferenciaDinamica()
 	//adiciona o tema com o web service com o mapa mundi
 	//
 	$objMapa = ms_newMapObj($map_file);
-	$numlayers = $objMap->numlayers;
+	$numlayers = $objMapa->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
 	{
-		$layer = $objMap->getlayer($i);
+		$layer = $objMapa->getlayer($i);
 		$layer->set("status",MS_OFF);
 	}
 	$maptemp = ms_newMapObj($locaplic."/aplicmap/referenciadinamica.map");
