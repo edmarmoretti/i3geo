@@ -130,6 +130,8 @@ Include:
 */
 	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE")
 	{
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
 		$layerPt = $this->layer;
 		$layerPt->set("tolerance",0);
 		$layerPt->set("template","none.htm");
@@ -146,6 +148,8 @@ Include:
 		$pontos = array();
 		//pega um shape especifico
 		$layerPt->open();
+		$projInObj = ms_newprojectionobj($prjTema);
+		$projOutObj = ms_newprojectionobj($prjMapa);		
 		for ($i = 0; $i < $res_count; $i++)
 		{
 			$result = $layerPt->getResult($i);
@@ -153,6 +157,10 @@ Include:
 			$shape = $layerPt->getshape(-1, $shp_index);
 			$lineo = $shape->line(0);
 			$pt = $lineo->point(0);
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$pt->project($projInObj, $projOutObj);
+			}		
 			$pontos[] = $pt->x."  ".$pt->y."\n";
 			$pontosx[] = $pt->x;
 			$pontosy[] = $pt->y;
