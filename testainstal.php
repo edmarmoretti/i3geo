@@ -74,6 +74,17 @@ echo "locmapserv = $locmapserv \n";
 echo "locaplic = $locaplic \n";
 echo "locsistemas = $locsistemas \n";
 echo "locidentifica = $locidentifica \n";
+echo "localizando o cgi...\n";
+$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
+$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+$enderecocgi = $proto.$server.$locmapserv;
+if(!file($enderecocgi))
+{
+	echo "<span style=color:red >O arquivo cgi $enderecocgi do mapserver nao foi encontrado</span> \n";
+}
+else
+{echo "O arquivo cgi $enderecocgi do mapserver foi encontrado \n";}
+
 echo "<br>Escrevendo no diretorio temporario...";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
