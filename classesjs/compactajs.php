@@ -52,12 +52,12 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("configura.js","configura_compacto.js","Normal");
-packer("redesenho.js","redesenho_compacto.js","Normal");
-packer("iniciamma.js","iniciamma_compacto.js","Normal");
-packer("ferramentas.js","ferramentas_compacto.js","Normal");
-packer("funcoes.js","funcoes_compacto.js","Normal");
-packer("menususpenso.js","menususpenso_compacto.js","Normal");
+packer("configura.js","compactados/configura_compacto.js","Normal");
+packer("redesenho.js","compactados/redesenho_compacto.js","Normal");
+packer("iniciamma.js","compactados/iniciamma_compacto.js","Normal");
+packer("ferramentas.js","compactados/ferramentas_compacto.js","Normal");
+packer("funcoes.js","compactados/funcoes_compacto.js","Normal");
+packer("menususpenso.js","compactados/menususpenso_compacto.js","Normal");
 packer("jsobjects/jsUI-Treeview/component_i3geo.js","jsobjects/jsUI-Treeview/component_compacto.js","Normal");
 packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compacto.js","Normal");
 packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","Normal");
@@ -86,12 +86,12 @@ $jsfiles = array(
 "jsobjects/jsUI-Global/uiCommon_compacto.js",
 "jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"funcoes_compacto.js",
-"configura_compacto.js",
-"ferramentas_compacto.js",
-"redesenho_compacto.js",
-"iniciamma_compacto.js",
-"menususpenso_compacto.js"
+"compactados/funcoes_compacto.js",
+"compactados/configura_compacto.js",
+"compactados/ferramentas_compacto.js",
+"compactados/redesenho_compacto.js",
+"compactados/iniciamma_compacto.js",
+"compactados/menususpenso_compacto.js"
 );
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");

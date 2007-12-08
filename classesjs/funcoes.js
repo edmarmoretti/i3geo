@@ -1068,8 +1068,11 @@ function aguarde()
 			document.body.removeChild($i("wait_c"));
 		}
 		YAHOO.namespace("aguarde."+aguardeId);
-		if($i("contemImg"))
-		var pos = pegaPosicaoObjeto($i("contemImg"));
+		var pos = [0,0];
+		if($i("corpoMapa"))
+		{var pos = pegaPosicaoObjeto($i("corpoMapa"));}
+		else if ($i("contemImg"))
+		{var pos = pegaPosicaoObjeto($i("contemImg"));}
 		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.body.style.height="20px"');
@@ -1275,7 +1278,7 @@ function initJanelaZoom(qual)
 	//janela de botoes 1
 	var wj = "36px";
 	var recuo = "0px";
-	if ((qual == 1) && (!$i("maisBotoes1")))
+	if ((qual == 1) && (!$i("maisBotoes1"))  && ($i("barraDeBotoes1")))
 	{
 		var novoel = document.createElement("div");
 		novoel.id = "janelaBotoes1";
@@ -1371,10 +1374,10 @@ function initJanelaZoom(qual)
 		}		
 		return;
 	}
-	if ((qual == 1) && ($i("maisBotoes1")))
+	if ((qual == 1) && ($i("maisBotoes1")) )
 	{YAHOO.janelaBotoes1.xp.panel.show();}
 	//janela de botoes 2
-	if ((qual == 2) && (!$i("maisBotoes2")))
+	if ((qual == 2) && (!$i("maisBotoes2"))  && ($i("barraDeBotoes2")))
 	{
 		var novoel = document.createElement("div");
 		novoel.id = "janelaBotoes2";
@@ -1456,33 +1459,56 @@ Posiciona o botao aplicar quando o check box que liga/desliga um tema é pression
 Parâmetros:
 
 tipo - de onde veio a requisicao ligadesliga|adicionatema
+
+obj - objeto que foi clicado
 */
-function mudaboxnf(tipo)
+function mudaboxnf(tipo,obj)
 {
 	try
 	{
+		//
+		//insere botao dinamico de aplicar se ainda não existir
+		//
+		if (!$i("aplicari"))
+		{
+			var novoel = document.createElement("input");
+			novoel.id = 'aplicari';
+			novoel.type = 'button';
+			novoel.value = 'Aplicar';
+			novoel.style.cursor="pointer";
+			novoel.style.fontSize="10px";
+			novoel.style.zIndex = 15000;
+			novoel.style.position="absolute";
+			novoel.style.display="none";
+			novoel.onclick=function()
+			{
+				remapaf();
+				this.style.display="none"
+			};
+			novoel.onmouseover = function(){this.style.display="block";};
+			novoel.onmouseout = function(){this.style.display="none";};
+			document.body.appendChild(novoel);
+		}
+		var pos = pegaPosicaoObjeto(obj);
 		g_operacao = tipo;
 		clearTimeout(objmapa.tempo);
 		objmapa.tempo = setTimeout('remapaf()',(4000));
 		autoRedesenho("reinicia");
 		if ($i("aplicari"))
 		{
-			$i("aplicari").style.display="block";
-			if (navm)
-			{
-				mx = objposicaomouse.x - 10;
-				my = objposicaomouse.y - 15;
-				var i = $i("aplicari").style;
-				i.pixelLeft = mx+document.body.scrollLeft;
-				i.pixelTop = my+document.body.scrollTop;
-			}
+			var i = $i("aplicari").style;
+			i.display="block";
+			var l = pos[0];
+			var t = pos[1]-5;
 			if (navn)
 			{
-				var l = objposicaomouse.x;
-				var t = objposicaomouse.y+document.body.scrollTop;
-				var i = $i("aplicari").style;
 				i.left = l;
 				i.top = t;
+			}			
+			else
+			{
+				i.pixelLeft = l+document.body.scrollLeft;
+				i.pixelTop = t+document.body.scrollTop;
 			}
 		}
 	}
@@ -2245,7 +2271,7 @@ function procurartemas()
 								if ( ngTema[st].link != " ")
 								{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
 								var tid = ngTema[st].tid;
-								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" /> ("+nomeSgrupo+")";
+								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" /> ("+nomeSgrupo+")";
 								var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
 								ins += nomeTema;
 						}
@@ -2513,6 +2539,7 @@ retorno - string formatada com os dados para montagem da árvore.
 */
 function processaGrupos(retorno)
 {
+	if (!$i(objmapa.guiaMenu+"obj")){return;}
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
@@ -2591,7 +2618,7 @@ function processaGrupos(retorno)
 						if ( lk != " ")
 						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 						if(navm)
 						nomeTema = "&nbsp;"+inp+nome+lk;
 						else
@@ -2616,7 +2643,7 @@ function processaGrupos(retorno)
 						if ( lk != " ")
 						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 						if(navm)
 						nomeTema = "&nbsp;"+inp+nome+lk;
 						else
@@ -2666,7 +2693,7 @@ function processaTemas(retorno)
 				//
 				//inclui o link para abrir o qrcode e kml
 				//
-				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 				var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 				var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 				var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
@@ -2996,7 +3023,6 @@ Function: calcposf
 
 Calcula a posição do corpo do mapa e posiciona-o corretamente na tela.
 
-Atualiza as variáveis imagemxi,imagemyi,imagemxref e imagemyref
 */
 function calcposf()
 {
@@ -3010,8 +3036,10 @@ function calcposf()
 		if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
 		if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
 		var dc = $i("i3geo");
-		if ($i("img"))
+		if ($i("contemImg"))
 		{var dc = $i("contemImg");}
+		else
+		{var dc = $i("img");}
 		if ($i("openlayers"))
 		{var dc = $i("openlayers");}
 		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
@@ -3020,8 +3048,9 @@ function calcposf()
 			imagemxi = imagemxi + dc.offsetLeft;
 			imagemyi = imagemyi + dc.offsetTop;
 		}
-		if ($i("img"))
+		if ($i("corpoMapa"))
 		{
+			$i("corpoMapa").style.position="absolute";
 			$left("corpoMapa",imagemxi);
 			$top("corpoMapa",imagemyi);
 			if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
@@ -3962,7 +3991,7 @@ function criaboxg()
 		document.body.appendChild(novoel);
 	}
 }
-//controle dois painéis que podem ser redimensionados
+//controle dos painéis que podem ser redimensionados
 YAHOO.widget.ResizePanel = function(el, userConfig)
 {
     if (arguments.length > 0) 
@@ -4277,18 +4306,24 @@ Retorna a posição x,y de um objeto em relação a tela do navegador
 */
 function pegaPosicaoObjeto(obj)
 {
-	var curleft = curtop = 0;
-	if(obj)
+	if(obj.style.position == "absolute")
 	{
-		if (obj.offsetParent) {
-			do {
-				curleft += obj.offsetLeft;
-				curtop += obj.offsetTop;
-			} while (obj = obj.offsetParent);
-		}
+		return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];
 	}
-	//if($i("escalanum"))$i("escalanum").value = [curleft,curtop]
-	return [curleft,curtop];
+	else
+	{
+		var curleft = curtop = 0;
+		if(obj)
+		{
+			if (obj.offsetParent) {
+				do {
+					curleft += obj.offsetLeft;
+					curtop += obj.offsetTop;
+				} while (obj = obj.offsetParent);
+			}
+		}
+		return [curleft,curtop];
+	}
 }
 /*
 Function: recuperamapa

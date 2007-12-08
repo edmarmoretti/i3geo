@@ -329,7 +329,8 @@ retorno - string no formato "var mapimagem='nome da imagem'".
 */
 function ajaxCorpoMapa(retorno)
 {
-	$i("mst").style.display="block";
+	if($i("mst"))
+	{$i("mst").style.display="block";}
 	if (!$i("img")){return;}
 	try
 	{
@@ -630,10 +631,11 @@ function ajaxabrelente(retorno)
 		olente.style.zIndex=1000;
 		olenteimg.style.zIndex=1000;
 		oboxlente.style.zIndex=1000;
-		eval ("olente.style." + g_tipoleft + " = imagemxi + g_posicaoLenteX + g_postpx");
-		eval ("olente.style." + g_tipotop + " = imagemyi + g_posicaoLenteY + g_postpx");
-		eval ("oboxlente.style." + g_tipoleft + " = imagemxi + g_posicaoLenteX + g_postpx");
-		eval ("oboxlente.style." + g_tipotop + " = imagemyi + g_posicaoLenteY + g_postpx");
+		var pos = pegaPosicaoObjeto($i("corpoMapa"));
+		eval ("olente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
+		eval ("olente.style." + g_tipotop + " = pos[1] + g_posicaoLenteY + g_postpx");
+		eval ("oboxlente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
+		eval ("oboxlente.style." + g_tipotop + " = pos[1] + g_posicaoLenteY + g_postpx");
 		oboxlente.style.display='block';
 		oboxlente.style.visibility='visible';
 		olente.style.display='block';

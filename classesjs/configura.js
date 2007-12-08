@@ -283,6 +283,12 @@ pt: "Converter em WMS",
 en:"Convert to WMS",
 es:"Convertir en WMS"
 }],
+"u20a": [
+{
+pt: "Converter em KML",
+en:"Convert to KML",
+es:"Convertir en KML"
+}],
 "u21": [
 {
 pt: "Gerador de links",
@@ -1256,6 +1262,7 @@ oMenuData.arquivo = [
 	{ text: $trad("u18"), url: "javascript:carregaMapa()" },
 	{ text: $trad("u19"), url: "javascript:pegaimagens()" },
 	{ text: $trad("u20"), url: "javascript:convertews()" },
+	//{ text: $trad("u20a"), url: "javascript:abreKml('mapfile')" },
 	{ text: $trad("u21"), url: "../geradordelinks.htm" }
 	];
 /*

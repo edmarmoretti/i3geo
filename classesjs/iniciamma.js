@@ -68,14 +68,14 @@ Conta quantas vezes foi feita uma tentativa de recuperar um mapa com problemas
 */
 g_recupera = 0;
 /*
-Variable: imagemxi
+Variable: imagemxi depreciada
 
 Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa.
 É calculada na iniciallização e indica a posição em pixels do corpo do mapa na página. Muitos elementos da interface são posicionados em função desse valor.
 */
 imagemxi = 0;
 /*
-Variable: imagemyi
+Variable: imagemyi depreciada
 
 Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa
 É calculada na iniciallização e indica a posição em pixels do corpo do mapa na página. Muitos elementos da interface são posicionados em função desse valor.
@@ -253,13 +253,6 @@ objmapa = New Mapa()
 */
 function Mapa(e,m)
 {
-	//
-	//se o div listapropriedades não existir, as propriedades do mapa são incluídas no menu suspenso
-	//
-	//if (!$i("listaPropriedades"))
-	//{
-	//	oMenuData.propriedades = g_listaPropriedades;
-	//}
 	objaguarde = new aguarde();
 	objposicaocursor = new posicaocursor();
 	objposicaomouse = new posicaomouse();
@@ -288,8 +281,6 @@ function Mapa(e,m)
 		var menos = 0;
 		if ($i("contemFerramentas"))
 		{menos = menos + parseInt($i("contemFerramentas").style.width);}
-		//if ($i("encolheFerramentas"))
-		//{menos = menos + parseInt($i("encolheFerramentas").style.width);}
 		if ($i("ferramentas"))
 		{menos = menos + parseInt($i("ferramentas").style.width);}
 		var novow = screen.availWidth - diminuix;
@@ -510,25 +501,6 @@ function Mapa(e,m)
 		{document.body.id = "i3geo";}
 		//altera a classe do corpo do HTML. Utilizada pelo YUI.
 		$i("i3geo").className = "yui-skin-sam";
-		$i("i3geo").onmouseover = function()
-		{
-			this.onmousemove=function(exy1)
-			{
-				//
-				//quando o mouse é movido sobre a tela, a posição de x e y são guardadas em objposicaomouse
-				//
-				if (exy1.clientX)
-				{
-					objposicaomouse.x = exy1.clientX;
-					objposicaomouse.y = exy1.clientY;
-				}
-				else
-				{
-					objposicaomouse.x = window.event.clientX;
-					objposicaomouse.y = window.event.clientY;
-				}
-			};
-		};
 		//
 		//se g_sid="", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa
@@ -605,29 +577,6 @@ function Mapa(e,m)
 				catch(e){var e = "";}
 				mostradicasf("","Tempo de desenho em segundos: "+tempo,"");
 				//
-				//insere botao dinamico de aplicar
-				//
-				if (!$i("aplicari"))
-				{
-					var novoel = document.createElement("input");
-					novoel.id = 'aplicari';
-					novoel.type = 'button';
-					novoel.value = 'Aplicar';
-					novoel.style.cursor="pointer";
-					novoel.style.fontSize="10px";
-					novoel.style.zIndex = 15000;
-					novoel.style.position="absolute";
-					novoel.style.display="none";
-					novoel.onclick=function()
-					{
-						remapaf();
-						this.style.display="none"
-					};
-					novoel.onmouseover = function(){this.style.display="block";};
-					novoel.onmouseout = function(){this.style.display="none";};
-					document.body.appendChild(novoel);
-				}
-				//
 				//gera os ícones para animação
 				//
 				gerafilmef(10);
@@ -692,8 +641,6 @@ function Mapa(e,m)
 				//
 				//calcula a posicao do mapa no browser
 				//
-				calcposf();
-				g_leftinicial = imagemxi;
 				if ($i("corpoMapa"))
 				{
 					var i = $i("img").style;
@@ -704,12 +651,16 @@ function Mapa(e,m)
 					i.height=objmapa.h +"px";
 					i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
 				}
+				//
+				//calcula (opcional) o tamanho correto da tabela onde fica o mapa
+				//se não for feito esse cálculo, o mapa fica ajustado à esquerda
+				//
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
-				//if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				if($i("mst"))
 				{$i("mst").style.width=objmapa.w + temp + "px";}
+				
 				if($i("contemImg"))
 				{
 					var i = $i("contemImg").style;
@@ -717,12 +668,14 @@ function Mapa(e,m)
 					i.width=objmapa.w + "px";
 				}
 				calcposf();
+				//
 				//reposiciona a janela de botoes
-				if(navn){var desloca = 40;}else{var desloca = 40;}
-				if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxi+desloca,imagemyi+10);}
-				if ($i("maisBotoes2")){YAHOO.janelaBotoes2.xp.panel.moveTo(imagemxi,imagemyi+10);}
+				//
+				var imagemxy = pegaPosicaoObjeto($i("corpoMapa"));
+				if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxy[0]+40,imagemxy[1]+10);}
+				if ($i("maisBotoes2")){YAHOO.janelaBotoes2.xp.panel.moveTo(imagemxy[0],imagemxy[1]+10);}
 				else
-				{if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxi,imagemyi+10);}}
+				{if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxy[0],imagemxy[1]+10);}}
 				mudaiconf("pan"); //inicia no icone de zoom por box
 				if (g_entorno == "sim")
 				{
@@ -927,52 +880,55 @@ function Mapa(e,m)
 	*/
 	this.atualizaListaTemas = function(temas)
 	{
-		if ( (($i("listaTemas")) && (objmapa.temas != temas)) || (!$i("listaTemas").hasChildNodes()) )
+		if($i("listaTemas"))
 		{
-			$i("listaTemas").innerHTML = "";
-			var lista = temas.split(";");
-			mytreeview1 = new Object();
-			mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
-			var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' />";
-			mytreeview1.createItem("g1",titulo, "foldermapa", true, true, true, null);
-			mytreeview1.itemExpand = expandeTema;
-			var cor = "rgb(250,250,250)";
-			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-			var lle = lista.length;
-			var l = 0;
-			if (lle >= 0)
+			if ( (objmapa.temas != temas) || (!$i("listaTemas").hasChildNodes()) )
 			{
-				do
+				$i("listaTemas").innerHTML = "";
+				var lista = temas.split(";");
+				mytreeview1 = new Object();
+				mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
+				var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' />";
+				mytreeview1.createItem("g1",titulo, "foldermapa", true, true, true, null);
+				mytreeview1.itemExpand = expandeTema;
+				var cor = "rgb(250,250,250)";
+				//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
+				var lle = lista.length;
+				var l = 0;
+				if (lle >= 0)
 				{
-					var ltema = lista[l].split("*");
-					var ck = "";
-					if(ltema[1] == 2){ck = 'CHECKED';}
-					//ltema[8]==sim indica que e um tema com features
-					if (ltema[8] == undefined){ltema[8] = "nao";}
-					tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
-					//verifica se existe contexto de desenho baseado na escala
-					if (ltema[12] == "sim")
-					{tnome += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
-					if (ltema[5] == "sim") //o tema tem selecao
-					{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-					//verifica se e um wms que tem wfs
-					if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
-					{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-					if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
-					{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-					if (navm)
-					{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
-					else
-					{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
-					mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
-					tnome = "<img width=0px src="+$im("branco.gif") + " />";
-					mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
-					if (cor == "rgb(250,250,250)"){var cor = "none";}
-					else
-					{var cor = "rgb(250,250,250)";}
-					l++;
+					do
+					{
+						var ltema = lista[l].split("*");
+						var ck = "";
+						if(ltema[1] == 2){ck = 'CHECKED';}
+						//ltema[8]==sim indica que e um tema com features
+						if (ltema[8] == undefined){ltema[8] = "nao";}
+						tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\",this)'/>";
+						//verifica se existe contexto de desenho baseado na escala
+						if (ltema[12] == "sim")
+						{tnome += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
+						if (ltema[5] == "sim") //o tema tem selecao
+						{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+						//verifica se e um wms que tem wfs
+						if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
+						{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+						if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
+						{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+						if (navm)
+						{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
+						else
+						{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
+						mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
+						tnome = "<img width=0px src="+$im("branco.gif") + " />";
+						mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
+						if (cor == "rgb(250,250,250)"){var cor = "none";}
+						else
+						{var cor = "rgb(250,250,250)";}
+						l++;
+					}
+					while(l<lle)
 				}
-				while(l<lle)
 			}
 		}
 		ativaDragDrop();
@@ -1055,11 +1011,10 @@ function Mapa(e,m)
 		var docMapa = "";
 		if (document.getElementById("openlayers"))
 		{
-			var docMapa = $i("openlayers");
+			ativaClicks($i("openlayers"));
 		}
 		if (document.getElementById("img"))
 		{
-			var docMapa = $i("img");
 			//insere box de zoom
 			var novoel = document.createElement("div");
 			novoel.style.width = "0px";
@@ -1091,10 +1046,7 @@ function Mapa(e,m)
 			$i("box1").onmouseup = function(){zoomboxf("termina")};
 			//funcoes que operam sobre o mapa
 			this.parado = "nao"; //utilizado para verificar se o mouse esta parado
-		}
-		if (docMapa != "")
-		{
-			ativaClicks(docMapa);
+			ativaClicks($i("img"));
 		}
 		this.atualizaCorpoMapa = function()
 		{

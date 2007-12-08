@@ -186,7 +186,12 @@ Abre a janela para mostrar o link de acesso a um tema via kml.
 */
 function abreKml(tema)
 {
-	wdocaf("450px","250px",g_locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml");
+	if(tema == "mapfile")
+	{
+		wdocaf("450px","250px",g_locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml");
+	}
+	else
+	{wdocaf("450px","250px",g_locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml");}
 }
 /*
 Function: cliqueIdentifica
@@ -1302,7 +1307,13 @@ function ativaBuscaRapida(iddiv)
 	if($i("buscaRapida"))
 	{
 		$i("buscaRapida").style.width="90%";
-		var ins = "<table><tr><td><input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
+		$i("buscaRapida").style.padding="5";
+		$i("buscaRapida").style.textAlign="center";
+		$i(iddiv).onmouseover = function()
+		{this.className = "digitarMouseover";};
+		$i(iddiv).onmouseout = function()
+		{this.className = "";};
+		var ins = "<table><tr ><td><input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
 		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
 		$i(iddiv).innerHTML = ins;
 	}
