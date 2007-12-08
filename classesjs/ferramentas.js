@@ -387,7 +387,6 @@ function cliqueMede()
 	if (g_tipoacao == "mede")
 	{
 		var n = pontosdistobj.xpt.length;
-		//$i("escalanum").value = objposicaocursor.telax+" "+objposicaocursor.imgx
 		pontosdistobj.xpt[n] = objposicaocursor.ddx;
 		pontosdistobj.ypt[n] = objposicaocursor.ddy;
 		pontosdistobj.xtela[n] = objposicaocursor.telax;
@@ -1306,21 +1305,33 @@ function ativaLocalizarxy(iddiv)
 {
 	if($i(iddiv))
 	{
-		
-		
-		var teste = "localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  class='tic' title='zoom' onclick='zoomPonto()' src=\"+$im(\"branco.gif\")+\" id=procurarxy />"
-		/*
-		$i("buscaRapida").style.width="180px";
-		$i("buscaRapida").style.padding="3";
-		$i("buscaRapida").style.textAlign="center";
-		$i(iddiv).onmouseover = function()
-		{this.className = "digitarMouseover";};
-		$i(iddiv).onmouseout = function()
-		{this.className = "";};
-		var ins = "<table><tr ><td><input onmouseout='javascript:this.value=\"\";this.className=\"digitar\";' onclick='javascript:this.value=\"\";this.className=\"digitarMouseclick\";' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
-		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
-		*/
-		$i(iddiv).innerHTML = teste;
+		var ins = "<table style='text-align:center'><tr>"
+		ins += "<td>localiza X:&nbsp;</td>";
+		ins += "<td>"+$inputText(iddiv,"315","xg","grau","3","-00")+"&nbsp;</td>";
+		ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
+		ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
+		ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
+		ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
+		ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+		ins += "<td><img  class='tic' title='zoom' onclick='zoomPonto()' src='"+$im("branco.gif")+"' id=procurarxy /></td>";
+		ins += "</tr></table>";
+		$i(iddiv).innerHTML = ins;
+	}
+}
+/*
+Function: ativaEscalaNumerica
+	
+Insere a apresentação da escala numérica no mapa.
+	
+*/	
+function ativaEscalaNumerica(iddiv)
+{
+	if($i(iddiv))
+	{
+		var i = $inputText(iddiv,"138","escalanum","digite o denominador da escala","19","");
+		var ins = "<table><tr><td>1:"+i;
+		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='aplicaescala()' /></td></tr></table>";
+		$i(iddiv).innerHTML = ins;
 	}
 }
 /*
@@ -1331,16 +1342,10 @@ Insere a opção de busca rápida.
 */	
 function ativaBuscaRapida(iddiv)
 {
-	if($i("buscaRapida"))
+	if($i(iddiv))
 	{
-		$i("buscaRapida").style.width="180px";
-		$i("buscaRapida").style.padding="3";
-		$i("buscaRapida").style.textAlign="center";
-		$i(iddiv).onmouseover = function()
-		{this.className = "digitarMouseover";};
-		$i(iddiv).onmouseout = function()
-		{this.className = "";};
-		var ins = "<table><tr ><td><input onmouseout='javascript:this.value=\"\";this.className=\"digitar\";' onclick='javascript:this.value=\"\";this.className=\"digitarMouseclick\";' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
+		var i = $inputText(iddiv,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
+		var ins = "<table><tr><td>"+i;
 		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
 		$i(iddiv).innerHTML = ins;
 	}

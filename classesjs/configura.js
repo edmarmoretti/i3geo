@@ -1356,7 +1356,7 @@ g_listaFuncoesBotoes = {
 		//apresentação da escala numérica
 		iddiv:"escala",
 		dica:$trad("d10"),
-		conteudo:"1:<input class='digitar' type='text' onchange='javascript:aplicaescala()' id=escalanum size=19 value=''/><img class='tic' src=\"+$im(\"branco.gif\")+\" onclick='javascript:aplicaescala()' />"
+		constroiconteudo:'ativaEscalaNumerica("escala")'
 	},
 	{
 		//botão de busca na wikipedia

@@ -521,7 +521,7 @@
 	width:9px;
 	height:10px;
 	cursor:pointer;
-	margin:0px;
+	margin-right:3px;
 }
 /*marcador de lista das opções do tema*/
 .ticOpcoesTemas
@@ -532,7 +532,7 @@
 	width:9px;
 	height:10px;
 	cursor:pointer;
-	margin:0px;
+	margin-right:3px;
 }
 
 #encolheFerramentas

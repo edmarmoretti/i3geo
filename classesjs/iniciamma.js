@@ -755,7 +755,7 @@ function Mapa(e,m)
 					{
 						var temp = g_listaPropriedades.propriedades[l].text;
 						var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-						tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='ticPropriedades' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />&nbsp;"+temp+" </span>";
+						tnome = "<span onmouseover=\"javascript:this.style.textDecoration='underline';\" onmouseout=\"javascript:this.style.textDecoration='none';\" onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='ticPropriedades' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />"+temp+" </span>";
 						listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 					}
 				}
