@@ -3,7 +3,7 @@ function treeviewNew(treeviewName, skinName, treeviewParent, rootDir)
 	if (treeviewName == null || treeviewName == "")
 		return false;
 	if (rootDir == null)
-		rootDir = g_locaplic+"/classesjs/jsobjects";
+		rootDir = g_locaplic+"/pacotes/jsobjects";
 	jsUIGblAddSkin("jsUI-Treeview", skinName, rootDir);
 	if (treeviewParent == null || treeviewParent == "" || treeviewParent == undefined)
 		treeviewParent = document.body;

@@ -112,7 +112,7 @@ if (isset($debug) && $debug == "sim")
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once ("carrega_ext.php");
-require_once("../classesjs/cpaint/cpaint2.inc.php");
+require_once("../pacotes/cpaint/cpaint2.inc.php");
 //
 //cria objeto cpaint para uso com ajax
 //

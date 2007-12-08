@@ -58,9 +58,9 @@ packer("iniciamma.js","compactados/iniciamma_compacto.js","Normal");
 packer("ferramentas.js","compactados/ferramentas_compacto.js","Normal");
 packer("funcoes.js","compactados/funcoes_compacto.js","Normal");
 packer("menususpenso.js","compactados/menususpenso_compacto.js","Normal");
-packer("jsobjects/jsUI-Treeview/component_i3geo.js","jsobjects/jsUI-Treeview/component_compacto.js","Normal");
-packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compacto.js","Normal");
-packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","Normal");
+packer("../pacotes/jsobjects/jsUI-Treeview/component_i3geo.js","../pacotes/jsobjects/jsUI-Treeview/component_compacto.js","Normal");
+packer("../pacotes/jsobjects/jsUI-Global/uiCommon.js","../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js","Normal");
+packer("../pacotes/jsobjects/jsUI-Global/common.js","../pacotes/jsobjects/jsUI-Global/common_compacto.js","Normal");
 packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","Normal");
 packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
 packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
@@ -81,10 +81,10 @@ $jsfiles = array(
 "../pacotes/yui231/build/element/element-beta-min.js",
 "../pacotes/yui231/build/tabview/tabview-min.js",
 "../pacotes/yui231/build/utilities/utilities_packer.js",
-"cpaint/cpaint2.inc.compressed.js",
-"jsobjects/jsUI-Global/common_compacto.js",
-"jsobjects/jsUI-Global/uiCommon_compacto.js",
-"jsobjects/jsUI-Treeview/component_compacto.js",
+"../pacotes/cpaint/cpaint2.inc.compressed.js",
+"../pacotes/jsobjects/jsUI-Global/common_compacto.js",
+"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
+"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "compactados/funcoes_compacto.js",
 "compactados/configura_compacto.js",
@@ -126,7 +126,7 @@ $jsfiles = array(
 "../pacotes/yui231/build/element/element-beta.js",
 "../pacotes/yui231/build/button/button-beta.js",
 "../pacotes/yui231/build/tabview/tabview.js",
-"../classesjs/cpaint/cpaint2.inc.compressed.js"
+"../pacotes/cpaint/cpaint2.inc.compressed.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";
 salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js","js");
@@ -174,7 +174,7 @@ function packer($src,$out,$tipo="None")
 	//packer
 	//$src = 'temp.js';
 	//$out = 'i3geo_tudo_compacto.js';
-	require_once 'packer/class.JavaScriptPacker.php';
+	require_once '../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
 	$t1 = microtime(true);
 	$packer = new JavaScriptPacker($script, $tipo, true, false);

@@ -36,7 +36,7 @@ Include:
 */
 require_once("pega_variaveis.php");
 include("lews/wms_functions.php");
-require_once("../classesjs/cpaint/cpaint2.inc.php");
+require_once("../pacotes/cpaint/cpaint2.inc.php");
 $cp = new cpaint();
 //
 //busca o getcapabilities de um wms

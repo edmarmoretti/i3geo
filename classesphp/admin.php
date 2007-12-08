@@ -48,7 +48,7 @@ foreach(array_keys($_SESSION) as $k)
 include_once ("carrega_ext.php");
 //verifica se o cliente pode editar
 require_once("../ms_configura.php");
-require_once("../classesjs/cpaint/cpaint2.inc.php");
+require_once("../pacotes/cpaint/cpaint2.inc.php");
 $editor = "nao";
 foreach ($editores as $e)
 {

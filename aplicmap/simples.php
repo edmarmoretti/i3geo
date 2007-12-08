@@ -2,11 +2,11 @@
 echo '
 <link rel="stylesheet" type="text/css" href="'.$caminho.'css/geral.css">
 <link rel="stylesheet" type="text/css" href="'.$caminho.'css/botoes.css">
-<link rel="stylesheet" type="text/css" href="'.$caminho.'classesjs/jsobjects/documentation.css">
-<script src="'.$caminho.'classesjs/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script type="text/javascript" src="'.$caminho.'classesjs/jsobjects/jsUI-Global/common.js"></script>
-<script type="text/javascript" src="'.$caminho.'classesjs/jsobjects/jsUI-Global/uiCommon.js"></script>
-<script type="text/javascript" src="'.$caminho.'classesjs/jsobjects/jsUI-Treeview/component.js"></script>
+<link rel="stylesheet" type="text/css" href="'.$caminho.'pacotes/jsobjects/documentation.css">
+<script src="'.$caminho.'pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script type="text/javascript" src="'.$caminho.'pacotes/jsobjects/jsUI-Global/common.js"></script>
+<script type="text/javascript" src="'.$caminho.'pacotes/jsobjects/jsUI-Global/uiCommon.js"></script>
+<script type="text/javascript" src="'.$caminho.'pacotes/jsobjects/jsUI-Treeview/component.js"></script>
 <script type="text/javascript" src="'.$caminho.'classesjs/funcoes_compacto.js"></script>
 <script type="text/javascript" src="'.$caminho.'classesjs/ferramentas_compacto.js"></script>
 <script type="text/javascript" src="'.$caminho.'classesjs/ajax_compacto.js"></script>
