@@ -68,6 +68,8 @@ select
 {visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
 .digitar
 {color:#426252;background-color:#F6F6F6;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.digitarMouseclick
+{color:#426252;background-color:white;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarMouseover
 {color:#426252;background-color:rgb(246,227,174);border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 
@@ -304,6 +306,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 0px -450px;
 }
+/*icone do geoip*/
 #ondeestou
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -344,6 +347,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:52px;
 	height:12px;
 }
+/*bandeira do brasil*/
 #brasil
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -353,6 +357,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	height:10px;
 	cursor:pointer;
 }
+/*bandeira inglaterra*/
 #uk
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -364,6 +369,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	left:25px;
 	cursor:pointer;
 }
+/*ícone de aplicar*/
 .tic
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -372,6 +378,11 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:10px;
 	height:9px;
 	cursor:pointer;
+	margin:2px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .x
 {
@@ -644,7 +655,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:22px;
 	height:10px;
 }
-
 #sobeferramentas
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -653,6 +663,28 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	cursor:pointer;
 	width:22px;
 	height:10px;
+}
+/*marcador de lista das propriedades do mapa*/
+.ticPropriedades
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1500px;
+	width:9px;
+	height:10px;
+	cursor:pointer;
+	margin:2px;
+}
+/*marcador de lista das opções do tema*/
+.ticOpcoesTemas
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1500px;
+	width:9px;
+	height:10px;
+	cursor:pointer;
+	margin:0px;
 }
 
 #encolheFerramentas

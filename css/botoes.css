@@ -154,6 +154,7 @@
 	background-repeat: no-repeat;
 	background-position: 0px -450px;
 }
+/*icone do geoip*/
 #ondeestou
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -194,6 +195,7 @@
 	width:52px;
 	height:12px;
 }
+/*bandeira do brasil*/
 #brasil
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -203,6 +205,7 @@
 	height:10px;
 	cursor:pointer;
 }
+/*bandeira inglaterra*/
 #uk
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -214,6 +217,7 @@
 	left:25px;
 	cursor:pointer;
 }
+/*ícone de aplicar*/
 .tic
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -222,6 +226,11 @@
 	width:10px;
 	height:9px;
 	cursor:pointer;
+	margin:2px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .x
 {
@@ -494,7 +503,6 @@
 	width:22px;
 	height:10px;
 }
-
 #sobeferramentas
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -503,6 +511,28 @@
 	cursor:pointer;
 	width:22px;
 	height:10px;
+}
+/*marcador de lista das propriedades do mapa*/
+.ticPropriedades
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1500px;
+	width:9px;
+	height:10px;
+	cursor:pointer;
+	margin:0px;
+}
+/*marcador de lista das opções do tema*/
+.ticOpcoesTemas
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1500px;
+	width:9px;
+	height:10px;
+	cursor:pointer;
+	margin:0px;
 }
 
 #encolheFerramentas

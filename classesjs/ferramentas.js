@@ -1297,7 +1297,34 @@ function upload()
 Section: navegação
 */
 /*
-Function: buscaRapida
+Function: ativaLocalizarxy
+	
+Insere a opção para mostrar as coordenadas xy e localização de coordenadas.
+	
+*/	
+function ativaLocalizarxy(iddiv)
+{
+	if($i(iddiv))
+	{
+		
+		
+		var teste = "localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  class='tic' title='zoom' onclick='zoomPonto()' src=\"+$im(\"branco.gif\")+\" id=procurarxy />"
+		/*
+		$i("buscaRapida").style.width="180px";
+		$i("buscaRapida").style.padding="3";
+		$i("buscaRapida").style.textAlign="center";
+		$i(iddiv).onmouseover = function()
+		{this.className = "digitarMouseover";};
+		$i(iddiv).onmouseout = function()
+		{this.className = "";};
+		var ins = "<table><tr ><td><input onmouseout='javascript:this.value=\"\";this.className=\"digitar\";' onclick='javascript:this.value=\"\";this.className=\"digitarMouseclick\";' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
+		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
+		*/
+		$i(iddiv).innerHTML = teste;
+	}
+}
+/*
+Function: ativaBuscaRapida
 	
 Insere a opção de busca rápida.
 	
@@ -1306,14 +1333,14 @@ function ativaBuscaRapida(iddiv)
 {
 	if($i("buscaRapida"))
 	{
-		$i("buscaRapida").style.width="90%";
-		$i("buscaRapida").style.padding="5";
+		$i("buscaRapida").style.width="180px";
+		$i("buscaRapida").style.padding="3";
 		$i("buscaRapida").style.textAlign="center";
 		$i(iddiv).onmouseover = function()
 		{this.className = "digitarMouseover";};
 		$i(iddiv).onmouseout = function()
 		{this.className = "";};
-		var ins = "<table><tr ><td><input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
+		var ins = "<table><tr ><td><input onmouseout='javascript:this.value=\"\";this.className=\"digitar\";' onclick='javascript:this.value=\"\";this.className=\"digitarMouseclick\";' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
 		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
 		$i(iddiv).innerHTML = ins;
 	}

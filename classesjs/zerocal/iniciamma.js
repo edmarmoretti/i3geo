@@ -255,8 +255,8 @@ function Mapa(e,m)
 	imgBranco = new Image();
 	imgBranco.src = g_locaplic+"/imagens/branco.gif";
 	var temp = new Image();
-	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/plus.gif";
-	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/minus.gif";
+	temp.src = g_locaplic+"/pacotes/jsobjects/jsUI-Treeview/plus.gif";
+	temp.src = g_locaplic+"/pacotes/jsobjects/jsUI-Treeview/minus.gif";
 	//calcula o tamanho do mapa
 	var diminuix = (navm) ? g_diminuixM : g_diminuixN;
 	var diminuiy = (navm) ? g_diminuiyM : g_diminuiyN;
