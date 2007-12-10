@@ -579,17 +579,14 @@ function Mapa(e,m)
 				if (!$i("aplicari"))
 				{
 					var novoel = document.createElement("input");
-					with(novoel)
-					{
-						id = 'aplicari';
-						type = 'button';
-						value = 'Aplicar';
-						style.cursor="pointer";
-						style.fontSize="10px";
-						style.zIndex = 15000;
-						style.position="absolute";
-						style.display="none";
-					}
+					novoel.id = 'aplicari';
+					novoel.type = 'button';
+					novoel.value = 'Aplicar';
+					novoel.style.cursor="pointer";
+					novoel.style.fontSize="10px";
+					novoel.style.zIndex = 15000;
+					novoel.style.position="absolute";
+					novoel.style.display="none";
 					novoel.onclick=function()
 					{
 						remapaf();
@@ -632,7 +629,9 @@ function Mapa(e,m)
 				//ativa os botões  das funções
 				//
 				var l = g_listaFuncoesBotoes.botoes;
-				for(b=0;b<g_listaFuncoesBotoes.botoes.length;b++)
+				var lle = l.length;
+				var b = l.length-1;
+				do
 				{
 					if ($i(l[b].iddiv))
 					{
@@ -651,6 +650,7 @@ function Mapa(e,m)
 						{eval(l[b].constroiconteudo);}
 					}
 				}
+				while (b--);
 				//
 				//ativa as guias
 				//
@@ -662,28 +662,22 @@ function Mapa(e,m)
 				g_leftinicial = imagemxi;
 				if ($i("corpoMapa"))
 				{
-					with($i("img"))
-					{
-						style.width=objmapa.w +"px";
-						style.height=objmapa.h +"px";
-					}
-					with($i("corpoMapa"))
-					{
-						style.width=objmapa.w +"px";
-						style.height=objmapa.h +"px";
-						style.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
-					}
+					var i = $i("img").style;
+					i.width=objmapa.w +"px";
+					i.height=objmapa.h +"px";
+					var i = $i("corpoMapa").style;
+					i.width=objmapa.w +"px";
+					i.height=objmapa.h +"px";
+					i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
 				}
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
 				//if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				$i("mst").style.width=objmapa.w + temp + "px";
-				with($i("contemImg"))
-				{
-					style.height=objmapa.h + "px";
-					style.width=objmapa.w + "px";
-				}
+				var i = $i("contemImg").style;
+				i.height=objmapa.h + "px";
+				i.width=objmapa.w + "px";
 				calcposf();
 				//reposiciona a janela de botoes
 				if(navn){var desloca = 40;}else{var desloca = 40;}
@@ -694,7 +688,7 @@ function Mapa(e,m)
 				{
 					geraURLentorno();
 					var letras=["L","O","N","S"];
-					for (l=0;l<letras.length; l++)
+					for (var l=0;l<4; l++)
 					{
 						if ($i("img"+letras[l]))
 						{
@@ -755,13 +749,15 @@ function Mapa(e,m)
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
-			for (l=0;l<g_listaPropriedades.propriedades.length; l++)
+			var l = g_listaPropriedades.propriedades.length-1;
+			do
 			{
 				var temp = g_listaPropriedades.propriedades[l].text;
 				var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
 				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
 				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 			}
+			while(l--)
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
 		}
 	};
@@ -889,7 +885,9 @@ function Mapa(e,m)
 			mytreeview1.itemExpand = expandeTema;
 			var cor = "rgb(250,250,250)";
 			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-			for (l=0;l<lista.length; l++)
+			var lle = lista.length;
+			var l = 0;
+			do
 			{
 				var ltema = lista[l].split("*");
 				var ck = "";
@@ -914,7 +912,9 @@ function Mapa(e,m)
 				if (cor == "rgb(250,250,250)"){var cor = "none";}
 				else
 				{var cor = "rgb(250,250,250)";}
+				l++;
 			}
+			while(l<lle)
 		}
 		ativaDragDrop();
 	};
@@ -936,7 +936,8 @@ function Mapa(e,m)
 		{
 			var lista = (objmapa.temas).split(";");
 			var farol = "maisamarelo.png";
-			for (l=0;l<lista.length; l++)
+			var l = lista.length-1;
+			do
 			{
 				var ltema = lista[l].split("*");
 				if (ltema[6]*1 < mapscale*1)
@@ -950,6 +951,7 @@ function Mapa(e,m)
 					$i("farol"+ltema[0]).src = g_locaplic+"/imagens/"+farol;
 				}
 			}
+			while(l--)
 		}
 	};
 	/*
@@ -974,14 +976,11 @@ function Mapa(e,m)
 		novoel.style.zIndex=1000;
 		novoel.id="obj";
 		var novoimg = document.createElement("img");
-		with(novoimg)
-		{
-			src= g_locaplic+"/imagens/pan.gif";
-			name="imgh";
-			id='imgh';
-			style.width = "15px";
-			style.height = "15px";
-		}
+		novoimg.src= g_locaplic+"/imagens/pan.gif";
+		novoimg.name="imgh";
+		novoimg.id='imgh';
+		novoimg.style.width = "15px";
+		novoimg.style.height = "15px";
 		novoel.appendChild(novoimg);
 		novoel.onmouseover = function()
 		{this.style.display = "none";};
@@ -998,13 +997,10 @@ function Mapa(e,m)
 			var docMapa = $i("img");
 			//insere box de zoom
 			var novoel = document.createElement("div");
-			with(novoel)
-			{
-				style.width = "0px";
-				style.height = "0px";
-				id = "box1";
-				display = "none";
-			}
+			novoel.style.width = "0px";
+			novoel.style.height = "0px";
+			novoel.id = "box1";
+			novoel.display = "none";
 			document.body.appendChild(novoel);
 			if (navm)
 			{
@@ -1047,20 +1043,19 @@ function Mapa(e,m)
 		//altera o tamanho das guias
 		//
 		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
-		for(i=0;i<temp.length;i++)
+		var i = temp.length-1;
+		do
 		{
 			eval("var s = objmapa."+temp[i]+"obj"); 
 			if ($i(s))
 			{
-				var d = $i(s);
-				with(d)
-				{
-					style.overflow="auto";
-					style.height = objmapa.h-13;
-					style.width = "100%";
-				}
+				var d = $i(s).style;
+				d.style.overflow="auto";
+				d.style.height = objmapa.h-13;
+				d.style.width = "100%";
 			}
 		}
+		while(i--)
 	};
 	/*
 	Function: verificaClickMapa
@@ -1071,14 +1066,17 @@ function Mapa(e,m)
 	{
 		if (this.funcoesClickMapa.length > 0)
 		{
-			for (f=0;f<this.funcoesClickMapa.length; f++)
+			var f = this.funcoesClickMapa.length-1;
+			do
 			{
 				eval(this.funcoesClickMapa[f]);
 			}
+			while(f--)
 		}
 		if (g_funcoesClickMapaDefault.length > 0)
 		{
-			for (f=0;f<g_funcoesClickMapaDefault.length; f++)
+			var lle = g_funcoesClickMapaDefault.length;
+			for (var f=0;f<lle; f++)
 			{
 				eval(g_funcoesClickMapaDefault[f]);
 			}
@@ -1093,11 +1091,40 @@ function Mapa(e,m)
 	{
 		if (g_funcoesMousemoveMapaDefault.length > 0)
 		{
-			for (f=0;f<g_funcoesMousemoveMapaDefault.length; f++)
+			var f = g_funcoesMousemoveMapaDefault.length-1;
+			do
 			{
 				eval(g_funcoesMousemoveMapaDefault[f]);
 			}
+			while(f--)
 		}
 	};
-
+	/*
+	Function: verificaNavegaMapa
+	
+	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
+	*/
+	this.verificaNavegaMapa = function()
+	{
+		if (g_funcoesNevegaMapaDefault.length > 0)
+		{
+			var f = g_funcoesNevegaMapaDefault.length-1;
+			do
+			{
+				eval(g_funcoesNevegaMapaDefault[f]);
+			}
+			while(f--)
+		}
+	};
 }
+
+/*
+function loopDoWhileReverse3() {
+var i=iter;
+do 
+{
+  // do something here
+}
+while (--i);
+}
+*/

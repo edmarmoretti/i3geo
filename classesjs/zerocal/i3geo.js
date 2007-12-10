@@ -74,7 +74,7 @@ for (var i = 0; i < scripts.length; i++) {
 }
 //scripts
 var allScriptTags = "";
-var jsfiles = new Array("i3geo_tudo_compacto.js")
+var jsfiles = new Array("i3geo_tudo_compacto.js.php")
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
@@ -83,7 +83,7 @@ for (var i = 0; i < jsfiles.length; i++)
 //css
 var allCssTags = "";
 var cssfiles = new Array(
-"../../css/i3geo.css",
+"../../css/i3geo.css.php",
 "../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css",
 "../../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
 "../../pacotes/yui231/build/container/assets/skins/sam/container.css"

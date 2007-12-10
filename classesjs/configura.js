@@ -1128,7 +1128,18 @@ g_funcoesMousemoveMapaDefault = new Array(
 	"moveLonglat()",
 	"moveSelecaoPoli()"
 );
+/*
+Variable: g_funcoesNevegaMapaDefault
 
+Nome das funções padrão que serão executadas quando o usuário navegar pelo mapa.
+
+*/
+g_funcoesNevegaMapaDefault = new Array(
+	"atualizagoogle()",
+	"atualizascielo()",
+	"atualizawiki()",
+	"atualizaconfluence()"
+);
 /*
 Variable: g_listaPropriedades
 

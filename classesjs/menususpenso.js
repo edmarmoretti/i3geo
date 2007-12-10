@@ -56,7 +56,7 @@ function montaMenuSuspenso(iddiv)
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
 		{
 			var conta=0;
-			for(nomeMenu in oMenuData)
+			for(var nomeMenu in oMenuData)
 			{
 				var v="this.getItem("+conta+").cfg.setProperty('submenu',{id:'"+nomeMenu+"',itemdata: oMenuData['"+nomeMenu+"']})";
 				eval(v);

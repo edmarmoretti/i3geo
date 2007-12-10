@@ -67,7 +67,7 @@ $jsfiles = array(
 "../../pacotes/yui231/build/utilities/utilities_packer.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 
 function inicia($arquivo)
 {
@@ -123,7 +123,7 @@ function packer($src,$out,$tipo="None")
 	file_put_contents($out, $packed);
 	chmod($out,0777);
 }
-function salvatudojs($jsfiles,$buffer,$final)
+function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
 	//junta todos os js em um unico
 	foreach ($jsfiles as $f)
@@ -139,5 +139,21 @@ function salvatudojs($jsfiles,$buffer,$final)
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
 	chmod($final,0777);
+	//gzip
+	$abre = fopen($final, "r");
+	if ($tipo == "js")
+	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
+	else
+	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
+
+	while (!feof($abre))
+	{$buffer .= fgets($abre);}
+	fclose($abre);
+	$buffer .= "\n";
+	$buffer .= "<?php if(extension_loaded('zlib')){ob_end_flush();}?>";
+	$abre = fopen($final.".php", "wt");
+	$escreve = fwrite ($abre,$buffer);
+	$fecha = fclose ($abre);
+	chmod($final.".php",0777);
 }
 ?>

@@ -25,7 +25,11 @@
 #salva
 {background-image:URL('../imagens/salva.gif');}
 #imprimir
-{background-image:URL('../imagens/imprimir.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
 #tamanho
 {background-image:URL('../imagens/amp.gif');}
 #cruza
@@ -33,21 +37,53 @@
 #perfil
 {background-image:URL('../imagens/perfil.gif');}
 #mede
-{background-image:URL('../imagens/mede.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -25px;
+}
 #textofid
-{background-image:URL('../imagens/textofid.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -50px;
+}
 #inserexy
-{background-image:URL('../imagens/inserexy.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -75px;
+}
 #selecao
-{background-image:URL('../imagens/selecao.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -100px;
+}
 #exten
-{background-image:URL('../imagens/exten.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -125px;
+}
 #reinicia
-{background-image:URL('../imagens/reinicia.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -150px;
+}
 #lentei
-{background-image:URL('../imagens/lentei.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -175px;
+}
 #identifica
-{background-image:URL('../imagens/identifica.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -200px;
+}
 #zoomoauto
 {background-image:URL('../imagens/out.png');}
 #zoomiauto
@@ -57,26 +93,62 @@
 #zoomli
 {background-image:URL('../imagens/zoomli.png');}
 #zoomtot
-{background-image:URL('../imagens/icolimites.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -225px;
+}
 #pan
-{background-image:URL('../imagens/pan.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -250px;
+}
 #google
-{background-image:URL('../imagens/google.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -275px;
+}
 #referencia
-{background-image:URL('../imagens/referencia.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -300px;
+}
 #pegaimagens
 {background-image:URL('../imagens/legend.gif');}
 #realca
 {background-image:URL('../imagens/realca.gif');}
 #inseregrafico
-{background-image:URL('../imagens/inseregrafico.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -325px;
+}
 #wiki
-{background-image:URL('../imagens/wiki.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -350px;
+}
 #scielo
-{background-image:URL('../imagens/scielo2.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -375px;
+}
 #confluence
-{background-image:URL('../imagens/confluence.gif');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -400px;
+}
 #v3d
-{background-image:URL('../imagens/3d.png');}
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -425px;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

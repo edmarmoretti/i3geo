@@ -142,7 +142,7 @@ function processaDiretorios(retorno)
 		treeDir = treeviewNew("treeDir", "default", "arvoreTemas", null);
 		treeDir.createItem("raiz", "<b>Diretórios</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
 		treeDir.itemExpand = expandeDiretorio;
-		for (ig=0;ig<retorno.data.length; ig++)
+		for (var ig=0;ig<retorno.data.length; ig++)
 		{
 			var nomeDir = retorno.data[ig];
 			treeDir.createItem(g_dirbase+"/"+nomeDir, nomeDir, g_locaplic+"/imagens/folder-s.gif", true, true, true, "raiz");
@@ -166,7 +166,7 @@ function expandeDiretorio(id)
 	{
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
-			for (ig=0;ig<retorno.data.length; ig++)
+			for (var ig=0;ig<retorno.data.length; ig++)
 			{
 				var nomeDir = retorno.data[ig];
 				if (!document.getElementById(id+"/"+nomeDir))
@@ -208,12 +208,12 @@ function listaArquivos(dir)
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
 			ins += "<b>Diretórios:</b><br><br>"
-			for (ig=0;ig<retorno.data.diretorios.length; ig++)
+			for (var ig=0;ig<retorno.data.diretorios.length; ig++)
 			{
 				ins += "<span style=cursor:pointer onclick=listaArquivos('"+g_dirbase+d+"/"+retorno.data.diretorios[ig]+"') ><img src="+g_locaplic+"/imagens/folder-s.gif />"+retorno.data.diretorios[ig]+"</span><br><br>" 
 			}
 			ins += "<b>Arquivos:</b><br><br>"
-			for (ig=0;ig<retorno.data.arquivos.length; ig++)
+			for (var ig=0;ig<retorno.data.arquivos.length; ig++)
 			{
 				ins += "<a href='"+g_dirbaseDown+d+"/"+retorno.data.arquivos[ig]+"' target=new >"+retorno.data.arquivos[ig]+"</a><br><br>" 
 			}
@@ -252,14 +252,14 @@ function processaGrupos(retorno)
 		mytreeview2 = treeviewNew("mytreeview2", "default", "arvoreTemas", null);
 		mytreeview2.createItem("item1", "<b>Temas</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
-		for (ig=0;ig<retorno.data.grupos.length; ig++)
+		for (var ig=0;ig<retorno.data.grupos.length; ig++)
 		{
 			var down = "nao";
 			//verifica se existe no grupo temas para download
 			var ngSgrupo = retorno.data.grupos[ig].subgrupos;
 			if (retorno.data.grupos[ig].subgrupos)
 			{
-				for (sg=0;sg<ngSgrupo.length;sg++)
+				for (var sg=0;sg<ngSgrupo.length;sg++)
 				{
 					if (ngSgrupo[sg].download == "sim")
 					{down = "sim"}
@@ -270,7 +270,7 @@ function processaGrupos(retorno)
 				var nomeGrupo = retorno.data.grupos[ig].nome;
 				mytreeview2.createItem("grupo"+ig, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "item1");
 				var cor = "rgb(230,230,230)";
-				for (sg=0;sg<ngSgrupo.length;sg++)
+				for (var sg=0;sg<ngSgrupo.length;sg++)
 				{
 					if (ngSgrupo[sg].download != "nao")
 					{
@@ -325,7 +325,7 @@ function processaTemas(retorno)
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		var cor = "rgb(251,246,184)";
-		for (st=0;st<retorno.data.temas.length; st++)
+		for (var st=0;st<retorno.data.temas.length; st++)
 		{
 			var inp = "";
 			var nome = retorno.data.temas[st].nome;
@@ -377,7 +377,7 @@ function mostraDownload(retorno)
 		var retorno = retorno.data
 		var arqs = retorno.split(",")
 		var ins = "<b>Clique nos links para pegar os arquivos:</b><br><br>"
-		for (arq=0;arq<arqs.length;arq++)
+		for (var arq=0;arq<arqs.length;arq++)
 		{
 			var temp = arqs[arq].split(".");
 			arqs[arq] = temp[0];
@@ -417,7 +417,7 @@ function dataDownloadLinks(rss)
 		}
 		var linhas = retorno.data.split("|")
 		var ins = ""
-		for (i=0;i<linhas.length; i++)
+		for (var i=0;i<linhas.length; i++)
 		{
 			var caso = linhas[i].split("#")
 			if (i > 0)

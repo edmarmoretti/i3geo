@@ -439,13 +439,18 @@ function ajaxIniciaParametros(retorno)
 		//
 		//limpa os objetos tips da tela
 		//
-		for(ot=0;ot<objmapa.objtips.length;ot++)
+		if(objmapa.objtips.length > 0)
 		{
-			if (objmapa.objtips[ot])
+			var ot = objmapa.objtips.length-1;
+			do
 			{
-				objmapa.objtips[ot].innerHTML = "";
-				objmapa.objtips[ot].style.display="none";
+				if (objmapa.objtips[ot])
+				{	
+					objmapa.objtips[ot].innerHTML = "";
+					objmapa.objtips[ot].style.display="none";
+				}
 			}
+			while(ot--)
 		}
 		objmapa.objtips = new Array();
 		//
@@ -464,7 +469,7 @@ function ajaxIniciaParametros(retorno)
 			if ($i("imgL"))
 			{
 				var letras=["N","S","L","O"];
-				for (l=0;l<letras.length; l++)
+				for (var l=0;l<4; l++)
 				{$i("img"+letras[l]).src="";}
 			}
 			temas = "";
@@ -554,11 +559,8 @@ function ajaxIniciaParametros(retorno)
 			}
 			//
 			//atualiza as ferramentas de consulta que dependem da extensão geográfica
-			//	
-			atualizagoogle();
-			atualizascielo();
-			atualizawiki();
-			atualizaconfluence();
+			//
+			objmapa.verificaNavegaMapa;
 			//
 			//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
 			//

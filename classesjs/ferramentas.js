@@ -209,7 +209,8 @@ function cliqueInseregrafico()
 			var listadeitens = new Array();
 			var g = doc.getElementById("listai");
 			var iguias = g.getElementsByTagName("input");
-			for (i=0;i<iguias.length; i++)
+			var i = iguias.length-1;
+			do
 			{
 				if (iguias[i].checked == true)
 				{
@@ -218,6 +219,7 @@ function cliqueInseregrafico()
 					listadeitens.push(it+","+c);
 				}
 			}
+			while(i--)
 			var itens = listadeitens.join("*");
 			if (itens == "")
 			{alert("Nenhum item foi escolhido");}
@@ -496,11 +498,13 @@ function destacaTema(tema)
 	if ($i(objmapa.guiaTemas+"obj"))
 	{
 		var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");
-		for (i=0;i<iguias.length; i++)
+		var i = iguias.length-1;
+		do
 		{
 			if ((iguias[i].type == "checkbox") && (iguias[i].value == tema) && (iguias[i].checked == true))
 			{alert("Desligue o tema antes de destacar");return;}
 		}
+		while(i--)
 	}
 	objaguarde.abre("ajaxdestaca","Aguarde...gerando imagem");
 	g_destaca = tema;
@@ -1160,7 +1164,8 @@ function pegaimagens()
 			//pega os dados do objeto quadrosfilme e escreve na nova janela
 			var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
 			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
-			for (i = 1; i < (quadrosfilme.length); i++)
+			var i = quadrosfilme.length-1;
+			do
 			{
 				if (quadrosfilme[i].imagem != " ")
 				{
@@ -1171,6 +1176,7 @@ function pegaimagens()
 					mensagem = "<br>Fim"
 				}
 			}
+			while(i--)
 			wi.document.write(mensagem);
 		}
 	}
@@ -1286,10 +1292,12 @@ function visual(iddiv)
 	{
 		var l = objmapa.listavisual.split(",");
 		var visuais = "";
-		for (li=0;li<l.length; li++)
+		var li = l.length-1;
+		do
 		{
 			visuais += "<img title='muda visual - "+l[li]+"' style=cursor:pointer onclick='mudaVisual(\""+l[li]+"\")' src='"+g_locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";
 		}
+		while(li--)
 		$i(iddiv).innerHTML = visuais;
 	}
 }
