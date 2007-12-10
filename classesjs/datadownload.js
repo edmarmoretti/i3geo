@@ -259,7 +259,7 @@ function processaGrupos(retorno)
 			var ngSgrupo = retorno.data.grupos[ig].subgrupos;
 			if (retorno.data.grupos[ig].subgrupos)
 			{
-				for (var sg=0;sg<ngSgrupo.length;sg++)
+				for (sg=0;sg<ngSgrupo.length;sg++)
 				{
 					if (ngSgrupo[sg].download == "sim")
 					{down = "sim"}
@@ -270,7 +270,7 @@ function processaGrupos(retorno)
 				var nomeGrupo = retorno.data.grupos[ig].nome;
 				mytreeview2.createItem("grupo"+ig, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "item1");
 				var cor = "rgb(230,230,230)";
-				for (var sg=0;sg<ngSgrupo.length;sg++)
+				for (sg=0;sg<ngSgrupo.length;sg++)
 				{
 					if (ngSgrupo[sg].download != "nao")
 					{
@@ -336,7 +336,7 @@ function processaTemas(retorno)
 			{
 				var inp = "<img src="+g_locaplic+"/imagens/down1.gif style='text-align:left;cursor:pointer;' onclick='download(\""+retorno.data.temas[st].tid+"\")' />";
 				nomeTema = "<span style='background-color:"+cor+"' >"+inp+nome+lk+"</span>";
-				mytreeview2.createItem("tema"+ig+""+sg+""+st, nomeTema, g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
+				mytreeview2.createItem("tema"+g_arvoreClick+""+sg+""+st, nomeTema, g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
 				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 				else
 				{var cor = "rgb(251,246,184)";}
