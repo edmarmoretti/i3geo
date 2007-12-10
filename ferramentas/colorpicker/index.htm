@@ -1,7 +1,13 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
 body {
 	margin:0;
 	padding:0;
@@ -13,49 +19,75 @@ body {
 <script type="text/javascript" src="../../pacotes/yui231/build/utilities/utilities.js"></script>
 <script type="text/javascript" src="../../pacotes/yui231/build/slider/slider.js"></script>
 <script type="text/javascript" src="../../pacotes/yui231/build/colorpicker/colorpicker-beta.js"></script>
+
+
+<!--begin custom header content for this example-->
+
 <style type="text/css">
-  #container { position: relative; padding: 6px; width: 360px; height:190px; }
+  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 420px; height:220px; }
 </style>
+
+
+
+<!--end custom header content for this example-->
+
 </head>
-<body class="yui-skin-sam">
+
+<body class=" yui-skin-sam">
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
 <div id="container">
 </div>
-<button onclick="aplicarCor()" size="10" >aplicar</button>
+<button onclick="aplicarCor()" size="10" style="position:absolute;top:188px"  >aplicar</button>
+<!--We'll use these to trigger interactions with the Color Picker
+API -->
 
 
 <script type="text/javascript">
-(function()
-{
-	var Event = YAHOO.util.Event,picker;
-    Event.onDOMReady(
-    	function()
-    	{
-			YAHOO.log("Criando....", "info", "example");
+(function() {
+    var Event = YAHOO.util.Event,
+        picker;
+
+    Event.onDOMReady(function() {
+			YAHOO.log("Creating Color Picker.", "info", "example");
             picker = new YAHOO.widget.ColorPicker("container", {
                     showhsvcontrols: true,
                     showhexcontrols: true,
 					images: {
-						PICKER_THUMB: window.parent.g_locaplic+"/pacotes/yui231/examples/colorpicker/assets/picker_thumb.png",
-						HUE_THUMB: window.parent.g_locaplic+"/pacotes/yui231/examples/colorpicker/assets/hue_thumb.png"
+						PICKER_THUMB: "../../pacotes/yui231/examples/colorpicker/assets/picker_thumb.png",
+						HUE_THUMB: "../../pacotes/yui231/examples/colorpicker/assets/hue_thumb.png"
     				}
                 });
+			YAHOO.log("Finished creating Color Picker.", "info", "example");
+			
 			//a listener for logging RGB color changes;
 			//this will only be visible if logger is enabled:
-			var onRgbChange = function(o) {		
+			var onRgbChange = function(o) {
+				/*o is an object
+					{ newValue: (array of R, G, B values),
+					  prevValue: (array of R, G, B values),
+					  type: "rgbChange"
+					 }
+				*/
+				YAHOO.log("The new color value is " + o.newValue, "info", "example");
 			}
+			
 			//subscribe to the rgbChange event;
 			picker.on("rgbChange", onRgbChange);
+			
 			//use setValue to reset the value to white:
 			Event.on("reset", "click", function(e) {
 				picker.setValue([255, 255, 255], false); //false here means that rgbChange
 													     //wil fire; true would silence it
-			});		
+			});
+			
 			//use the "get" method to get the current value
 			//of one of the Color Picker's properties; in 
 			//this case, we'll get the hex value and write it
 			//to the log:
 			Event.on("gethex", "click", function(e) {
-				YAHOO.log("hex: " + picker.get("hex"), "info", "example"); 
+				YAHOO.log("Current hex value: " + picker.get("hex"), "info", "example"); 
 			});
         });
 })();
@@ -77,4 +109,8 @@ function aplicarCor()
 	window.parent.YAHOO.janelaDoca2.xp.panel.destroy();
 }
 </script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
 </html>
