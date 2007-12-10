@@ -284,6 +284,10 @@ array
 							$exp = str_replace("]'","",$exp);
 							$exp = str_replace("' [","",$exp);
 							$exp = str_replace("] '","",$exp);
+							$exp = str_replace("and"," and ",$exp);
+							$exp = str_replace("or"," or ",$exp);
+							$exp = str_replace("[","",$exp);
+							$exp = str_replace("]","",$exp);
 						}
 						$teste = $layer->queryByAttributes($itens[0], $exp, 1);
 						if ($teste == 0)
