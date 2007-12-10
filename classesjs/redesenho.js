@@ -442,15 +442,18 @@ function ajaxIniciaParametros(retorno)
 		if(objmapa.objtips.length > 0)
 		{
 			var ot = objmapa.objtips.length-1;
-			do
+			if (ot >= 0)
 			{
-				if (objmapa.objtips[ot])
-				{	
-					objmapa.objtips[ot].innerHTML = "";
-					objmapa.objtips[ot].style.display="none";
+				do
+				{
+					if (objmapa.objtips[ot])
+					{	
+						objmapa.objtips[ot].innerHTML = "";
+						objmapa.objtips[ot].style.display="none";
+					}
 				}
+				while(ot--)
 			}
-			while(ot--)
 		}
 		objmapa.objtips = new Array();
 		//

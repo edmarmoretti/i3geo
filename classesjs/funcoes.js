@@ -196,53 +196,66 @@ function mudaVisual(visual)
 		var imgstemp = retorno.data.arquivos;
 		var imgs = new Array();
 		var i = imgstemp.length-1;
-		do
+		if(i >= 0)
 		{
-			var temp = imgstemp[i].split(".");
-			if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
+			do
 			{
-				imgs.push(imgstemp[i]);
+				var temp = imgstemp[i].split(".");
+				if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
+				{
+					imgs.push(imgstemp[i]);
+				}
 			}
+			while(i--)
 		}
-		while(i--)
 		var elementos = document.getElementsByTagName("img");
+		var elt = elementos.length;
 		var caminho = g_locaplic+"/imagens/visual/"+visual+"/";
 		//faz a troca em imagens
 		var j = imgs.length-1;
-		do
+		if(j >= 0)
 		{
-			for (var i=0;i < elementos.length; i++)
+			do
 			{
-				if (elementos[i].src.search(imgs[j]) > -1)
-				{elementos[i].src = caminho+imgs[j];}
+				for (var i=0;i < elt; i++)
+				{
+					if (elementos[i].src.search(imgs[j]) > -1)
+					{elementos[i].src = caminho+imgs[j];}
+				}
 			}
+			while(j--)
 		}
-		while(j--)
 		//faz a troca em ids
 		var j = imgs.length-1;
-		do
+		if(j >= 0)
 		{
-			var busca = imgs[j].split(".");
-			if ($i(busca[0]))
-			{$i(busca[0]).src = caminho+imgs[j];}
+			do
+			{
+				var busca = imgs[j].split(".");
+				if ($i(busca[0]))
+				{$i(busca[0]).src = caminho+imgs[j];}
+			}
+			while(j--)
 		}
-		while(j--)
 		//faz a troca em bg
 		var elementos = new Array("vertMaisZoom","vertMenosZoom","vertBGDiv");
 		var i = elementos.length-1;
-		do
+		if(i >= 0)
 		{
-			if ($i(elementos[i]))
+			do
 			{
-				for (var j=0;j < tempi.length; j++)
+				if ($i(elementos[i]))
 				{
-					var busca = imgs[j].split(".");
-					if (busca[0] == elementos[i])
-					{$i(elementos[i]).style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
-				}				
+					for (var j=0;j < tempi.length; j++)
+					{
+						var busca = imgs[j].split(".");
+						if (busca[0] == elementos[i])
+						{$i(elementos[i]).style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
+					}				
+				}
 			}
+			while(i--)
 		}
-		while(i--)
 		g_visual = visual;
 	};
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
@@ -456,14 +469,17 @@ function ativaGuias()
 					else
 					{
 						var j = retorno.data.length-1;
-						do
+						if(j >= 0)
 						{
-							if(j == retorno.data.length-1)
-							{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
-							else
-							{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
+							do
+							{
+								if(j == retorno.data.length-1)
+								{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
+								else
+								{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
+							}
+							while(j--)
 						}
-						while(j--)
 					}
 				};
 				//pega a lista de árvores que devem ser montadas
@@ -720,32 +736,38 @@ function mudaiconf(i)
 	if(objmapa.objtips.length > 0)
 	{
 		var ot = objmapa.objtips.length-1;
-		do
+		if(ot >= 0)
 		{
-			if (objmapa.objtips[ot])
+			do
 			{
-				objmapa.objtips[ot].innerHTML = "";
-				objmapa.objtips[ot].style.display="none";
+				if (objmapa.objtips[ot])
+				{
+					objmapa.objtips[ot].innerHTML = "";
+					objmapa.objtips[ot].style.display="none";
+				}
 			}
+			while(ot--)
 		}
-		while(ot--)
 	}
 	objmapa.objtips = new Array();
 	limpacontainerf();
 	var objetos=["inseregrafico","textofid","zoomli","zoomlo","zoomiauto","zoomoauto","pan","identifica","mede","inserexy","selecao"];
 	var ko = objetos.length-1;
-	do
+	if(ko >= 0)
 	{
-		if ($i(objetos[ko]))
+		do
 		{
-			var ist = $i(objetos[ko]).style;
-			ist.borderWidth=0;
-			ist.borderBottomWidth=1;
-			ist.borderLeftWidth=1;
-			ist.borderColor='rgb(50,50,50)';
+			if ($i(objetos[ko]))
+			{
+				var ist = $i(objetos[ko]).style;
+				ist.borderWidth=0;
+				ist.borderBottomWidth=1;
+				ist.borderLeftWidth=1;
+				ist.borderColor='rgb(50,50,50)';
+			}
 		}
+		while(ko--)
 	}
-	while(ko--)
 	g_tipoacao = i;
 	if($i(i))
 	{
@@ -1705,38 +1727,44 @@ function mostraTip(retorno)
 			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
 			var temas = retorno.split("!");
 			var tema = temas.length-1;
-			do
+			if(tema >= 0)
 			{
-				var titulo = temas[tema].split("@");
-				if (g_tipotip == "completo")
-				{
-					res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
-				}
-				var ocorrencias = titulo[1].split("*");
-				var ocorrencia = ocorrencias.length-1;
 				do
 				{
-					if (ocorrencias[ocorrencia] != "")
+					var titulo = temas[tema].split("@");
+					if (g_tipotip == "completo")
 					{
-						var pares = ocorrencias[ocorrencia].split("##");
-						var paresi = pares.length;
-						for (var par=0;par<paresi; par++)
+						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
+					}
+					var ocorrencias = titulo[1].split("*");
+					var ocorrencia = ocorrencias.length-1;
+					if(ocorrencias >= 0)
+					{
+						do
 						{
-							var valores = pares[par].split("#");
-							if (g_tipotip == "completo")
+							if (ocorrencias[ocorrencia] != "")
 							{
-								res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-							}
-							else
-							{
-								res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+								var pares = ocorrencias[ocorrencia].split("##");
+								var paresi = pares.length;
+								for (var par=0;par<paresi; par++)
+								{
+									var valores = pares[par].split("#");
+									if (g_tipotip == "completo")
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+									}
+									else
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+									}
+								}
 							}
 						}
+						while(ocorrencias--)
 					}
 				}
-				while(ocorrencias--)
+				while(tema--)
 			}
-			while(tema--)
 			if ($i("janelaMen"))
 			{
 				$i("janelaMenTexto").innerHTML = res;
@@ -1772,13 +1800,16 @@ function legendaGrafico(par)
 	var temp = par.split("*");
 	var par = "<table>";
 	var i = temp.length-1;
-	do
+	if(i >= 0)
 	{
-		var t = temp[i];
-		var t = t.split(",");
-		par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
+		do
+		{
+			var t = temp[i];
+			var t = t.split(",");
+			par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
+		}
+		while(i--)
 	}
-	while(i--)
 	par += "</table>";
 	if (!$i("legendagr"))
 	{
@@ -1921,8 +1952,10 @@ function procurartemas()
 		{
 			var ins = "";
 			var ig = retorno.length-1;
-			do
+			if(ig >= 0)
 			{
+				do
+				{
 					var ngSgrupo = retorno[ig].subgrupos;
 					var tempn = ngSgrupo.length;
 					for (var sg=0;sg<tempn;sg++)
@@ -1940,8 +1973,9 @@ function procurartemas()
 								ins += nomeTema;
 						}
 					}
+				}
+				while(ig--)
 			}
-			while(ig--)
 			if (ins != "")
 			{
 				$i("achados").innerHTML = ins+"<br>";
@@ -1968,78 +2002,81 @@ function expandeTema(itemID)
 	if (!document.getElementById("idx"+itemID))
 	{
 		var l = lista.length-1;
-		do
+		if(l >= 0)
 		{
-			var ltema = lista[l].split("*");
-			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-			if (ltema[0] == itemID)
+			do
 			{
-				var farol = "maisamarelo.png";
-				if (ltema[8] == undefined){ltema[8] = "nao";}
-				if (ltema[6]*1 < objmapa.scale*1)
+				var ltema = lista[l].split("*");
+				//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
+				if (ltema[0] == itemID)
 				{
-				 	var farol = "maisverde.png";
-				 	var mfarol = $trad("t9");
-				}
-				if (ltema[6]*1 > objmapa.scale*1)
-				{
-				 	var farol = "maisvermelho.png";
-					var mfarol = $trad("t10");
-				}
-				if (ltema[6] == 0)
-				{
-				 	var farol = "maisamarelo.png";
-					var mfarol = $trad("t11");
-				}
-				tnome = "&nbsp;<img id='farol"+ltema[0]+"' src='"+$im(farol)+"' title='"+mfarol+"' \>";
-				tnome += "&nbsp;<img  id='idx"+ltema[0]+"' src='"+$im("x.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("sobe.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("desce.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				tnome += "&nbsp;<img src='"+$im("extent.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-				mytreeview1.createItem("temap0"+ltema[0], tnome, imgBranco, false, true, true, ltema[0]);
-				if (g_opcoesTemas == "sim")
-				{mytreeview1.createItem("opc"+ltema[0], $trad("t18a"), imgBranco, true, true, true, ltema[0]);}
-				mytreeview1.createItem("legenda"+ltema[0], $trad("t18b"), imgBranco, true, true, true, ltema[0]);
-				if (g_opcoesTemas == "sim")
-				{
-					var im = "";
-					if (navn)
-					{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='13' />";}
-					//transparencia
-					if ((ltema[4] != 0) || (ltema[8] == "sim"))
+					var farol = "maisamarelo.png";
+					if (ltema[8] == undefined){ltema[8] = "nao";}
+					if (ltema[6]*1 < objmapa.scale*1)
 					{
-						tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t20")+" </span><input  class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
-						mytreeview1.createItem("temap1"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+				 		var farol = "maisverde.png";
+				 		var mfarol = $trad("t9");
 					}
-					//muda nome
-					tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t21")+" </span><input class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
-					mytreeview1.createItem("temap2"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-					if ((ltema[4] < 3) && (ltema[9] != 7))
+					if (ltema[6]*1 > objmapa.scale*1)
 					{
-						tnome = "<span onclick='procuraratribf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png")+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("t22")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t23")+" </span>";
-						mytreeview1.createItem("temap3"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='toponimiaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t24")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t25")+" </span>";
-						mytreeview1.createItem("temap4"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='etiquetas(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t26")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t27")+" </span>";
-						mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='filtrof(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t28")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t29")+" </span>";
-						mytreeview1.createItem("temap5"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						tnome = "<span onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t31")+" </span>";
-						mytreeview1.createItem("temap6"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+				 		var farol = "maisvermelho.png";
+						var mfarol = $trad("t10");
 					}
-					if (ltema[4] < 4)
+					if (ltema[6] == 0)
 					{
-						tnome = "<span onclick='editaLegenda(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t32")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t33")+" </span>";
-						mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+				 		var farol = "maisamarelo.png";
+						var mfarol = $trad("t11");
 					}
-					tnome = "<span onclick='destacaTema(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t34")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t35")+" </span>";
-					mytreeview1.createItem("temap8"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+					tnome = "&nbsp;<img id='farol"+ltema[0]+"' src='"+$im(farol)+"' title='"+mfarol+"' \>";
+					tnome += "&nbsp;<img  id='idx"+ltema[0]+"' src='"+$im("x.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+					tnome += "&nbsp;<img src='"+$im("sobe.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+					tnome += "&nbsp;<img src='"+$im("desce.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+					tnome += "&nbsp;<img src='"+$im("extent.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+					mytreeview1.createItem("temap0"+ltema[0], tnome, imgBranco, false, true, true, ltema[0]);
+					if (g_opcoesTemas == "sim")
+					{mytreeview1.createItem("opc"+ltema[0], $trad("t18a"), imgBranco, true, true, true, ltema[0]);}
+					mytreeview1.createItem("legenda"+ltema[0], $trad("t18b"), imgBranco, true, true, true, ltema[0]);
+					if (g_opcoesTemas == "sim")
+					{
+						var im = "";
+						if (navn)
+						{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='13' />";}
+						//transparencia
+						if ((ltema[4] != 0) || (ltema[8] == "sim"))
+						{
+							tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img  src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t20")+" </span><input  class=digitar type=text size=3 value='"+ltema[3]+"' id='tr"+ltema[0]+"' />";
+							mytreeview1.createItem("temap1"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+						}
+						//muda nome
+						tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t21")+" </span><input class=digitar type=text size=10 value='' id='nn"+ltema[0]+"' />";
+						mytreeview1.createItem("temap2"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+						if ((ltema[4] < 3) && (ltema[9] != 7))
+						{
+							tnome = "<span onclick='procuraratribf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png")+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("t22")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t23")+" </span>";
+							mytreeview1.createItem("temap3"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+							tnome = "<span onclick='toponimiaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t24")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t25")+" </span>";
+							mytreeview1.createItem("temap4"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+							tnome = "<span onclick='etiquetas(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t26")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t27")+" </span>";
+							mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+							tnome = "<span onclick='filtrof(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t28")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t29")+" </span>";
+							mytreeview1.createItem("temap5"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+							tnome = "<span onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img src="+$im("tic.png") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t31")+" </span>";
+							mytreeview1.createItem("temap6"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+						}
+						if (ltema[4] < 4)
+						{
+							tnome = "<span onclick='editaLegenda(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t32")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t33")+" </span>";
+							mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+						}
+						tnome = "<span onclick='destacaTema(\""+ltema[0]+"\")'>"+im+"<img src='"+$im("tic.png") + "' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t34")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t35")+" </span>";
+						mytreeview1.createItem("temap8"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+					}
+					mytreeview1.createItem("","", imgBranco, false, true, true, ltema[0]);
+					break;
 				}
-				mytreeview1.createItem("","", imgBranco, false, true, true, ltema[0]);
-				break;
 			}
+			while(l--)
 		}
-		while(l--)
 	}
 	//verifica se clicou para expandir a legenda
 	var tema = itemID.split("legenda");
@@ -2071,15 +2108,18 @@ function expandeTema(itemID)
 						var linhas = retorno.split("|");
 						var tabela = "<table >";
 						var linha = linhas.length-1;
-						do
+						if(linha >= 0)
 						{
-							var colunas = linhas[linha].split("#");
-							var id = colunas[0]+"-"+colunas[1];
-							var re = new RegExp("'", "g");
-							var exp = colunas[3].replace(re,'"');
-							tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
+							do
+							{
+								var colunas = linhas[linha].split("#");
+								var id = colunas[0]+"-"+colunas[1];
+								var re = new RegExp("'", "g");
+								var exp = colunas[3].replace(re,'"');
+								tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
+							}
+							while(linha--)
 						}
-						while(linha--)
 						tabela += "</table><br>";
 					}
 					else
@@ -2243,23 +2283,26 @@ function processaGrupos(retorno)
 			{
 				var stlt = retorno.data.grupos[i].temasraiz.length;
 				var st = 0;
-				do
+				if(stlt > 0)
 				{
-					var no = retorno.data.grupos[i].temasraiz[st];
-					var nome = no.nome;
-					var lk = no.link;
-					if ( lk != " ")
-					{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
-					var tid = no.tid;
-					var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-					if(navm)
-					nomeTema = "&nbsp;"+inp+nome+lk;
-					else
-					nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-					mytreeview2.createItem("tema"+i+""+st+"a"+idarvore, nomeTema, imgBranco, false, true, true, "item1"+idarvore);
-					st++;
+					do
+					{
+						var no = retorno.data.grupos[i].temasraiz[st];
+						var nome = no.nome;
+						var lk = no.link;
+						if ( lk != " ")
+						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
+						var tid = no.tid;
+						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+						if(navm)
+						nomeTema = "&nbsp;"+inp+nome+lk;
+						else
+						nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
+						mytreeview2.createItem("tema"+i+""+st+"a"+idarvore, nomeTema, imgBranco, false, true, true, "item1"+idarvore);
+						st++;
+					}
+					while(st<stlt)
 				}
-				while(st<stlt)
 				mytreeview2.createItem("", "", imgBranco, false, true, true, "item1"+idarvore);
 			}
 			i++;
@@ -2369,28 +2412,31 @@ function pegaMapas(retorno)
 	var mapa = retorno.data.mapas;
 	var ig1lt = mapa.length;
 	var ig1=0;
-	do
+	if(ig1lt > 0)
 	{
-		var nome = mapa[ig1].NOME;
-		var descricao = mapa[ig1].DESCRICAO;
-		var imagem = mapa[ig1].IMAGEM;
-		var temas = mapa[ig1].TEMAS;
-		var ligados = mapa[ig1].LIGADOS;
-		var extensao = mapa[ig1].EXTENSAO;
-		var outros = mapa[ig1].OUTROS;
-		var lkd = mapa[ig1].LINK;
-		var link = g_locaplic+"/ms_criamapa.php?temasa="+temas+"&layers="+ligados;
-		if (extensao != "")
-		{link += "&mapext="+extensao;}
-		if (outros != "")
-		{link += "&"+outros;}
-		if (lkd != "")
-		{var link = lkd;}
-		ins += "<div><a href='"+link+"'><img src='"+imagem+"'></a></div><br>";
-		ins += "<div><p>"+nome+"</p></div><br>";
-		ig1++;
+		do
+		{
+			var nome = mapa[ig1].NOME;
+			var descricao = mapa[ig1].DESCRICAO;
+			var imagem = mapa[ig1].IMAGEM;
+			var temas = mapa[ig1].TEMAS;
+			var ligados = mapa[ig1].LIGADOS;
+			var extensao = mapa[ig1].EXTENSAO;
+			var outros = mapa[ig1].OUTROS;
+			var lkd = mapa[ig1].LINK;
+			var link = g_locaplic+"/ms_criamapa.php?temasa="+temas+"&layers="+ligados;
+			if (extensao != "")
+			{link += "&mapext="+extensao;}
+			if (outros != "")
+			{link += "&"+outros;}
+			if (lkd != "")
+			{var link = lkd;}
+			ins += "<div><a href='"+link+"'><img src='"+imagem+"'></a></div><br>";
+			ins += "<div><p>"+nome+"</p></div><br>";
+			ig1++;
+		}
+		while(ig1<ig1lt)
 	}
-	while(ig1<ig1lt)
 	$i("banners").innerHTML = ins;
 }
 /*
@@ -2509,17 +2555,20 @@ function remapaf()
 		var tsl = new Array();
 		var tsd = new Array();
 		var i = iguias.length-1;
-		do
+		if (i >= 0)
 		{
-			if (iguias[i].type == "checkbox")
+			do
 			{
-				if (iguias[i].checked == false)
-				{tsd.push(iguias[i].value);}
-				if (iguias[i].checked == true)
-				{tsl.push(iguias[i].value);}
+				if (iguias[i].type == "checkbox")
+				{
+					if (iguias[i].checked == false)
+					{tsd.push(iguias[i].value);}
+					if (iguias[i].checked == true)
+					{tsl.push(iguias[i].value);}
+				}
 			}
+			while(i--)
 		}
-		while(i--)
 		var remapaAdicNovos = function remapaAdicNovos(retorno)
 		{
 			if ($i("buscatema"))
@@ -2528,18 +2577,21 @@ function remapaf()
 				var iguias = g.getElementsByTagName("input");
 				var ta = new Array();
 				var i = iguias.length-1;
-				do
+				if (i >= 0)
 				{
-					if (iguias[i].type == "checkbox")
+					do
 					{
-						if (iguias[i].checked == true)
+						if (iguias[i].type == "checkbox")
 						{
-							ta.push(iguias[i].value);
-							iguias[i].checked = false;
+							if (iguias[i].checked == true)
+							{
+								ta.push(iguias[i].value);
+								iguias[i].checked = false;
+							}
 						}
 					}
+					while(i--)
 				}
-				while(i--)
 				if (ta.length > 0)
 				{
 					objaguarde.fecha("remapa");
@@ -3519,13 +3571,16 @@ function ativaDragDrop()
         	{new YAHOO.util.DDTarget("lixeira");}
         	var lista = objmapa.temas.split(";");
         	var i = lista.length-1;
-	        do
-	        {
-               	var ltema = lista[i].split("*");
-               	if($i("arrastar_"+ltema[0]))
-               	{new YAHOO.example.DDList("arrastar_"+ltema[0]);}
+        	if (i >= 0)
+        	{
+	        	do
+	        	{
+               		var ltema = lista[i].split("*");
+               		if($i("arrastar_"+ltema[0]))
+               		{new YAHOO.example.DDList("arrastar_"+ltema[0]);}
+        		}
+        		while(i--)
         	}
-        	while(i--)
     	}
 	};
 	YAHOO.example.DDList = function(id, sGroup, config) 

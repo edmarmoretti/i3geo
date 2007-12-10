@@ -210,16 +210,19 @@ function cliqueInseregrafico()
 			var g = doc.getElementById("listai");
 			var iguias = g.getElementsByTagName("input");
 			var i = iguias.length-1;
-			do
+			if (i >= 0)
 			{
-				if (iguias[i].checked == true)
+				do
 				{
-					var it = iguias[i].id;
-					var c = doc.getElementById("cor"+it).value;
-					listadeitens.push(it+","+c);
+					if (iguias[i].checked == true)
+					{
+						var it = iguias[i].id;
+						var c = doc.getElementById("cor"+it).value;
+						listadeitens.push(it+","+c);
+					}
 				}
+				while(i--)
 			}
-			while(i--)
 			var itens = listadeitens.join("*");
 			if (itens == "")
 			{alert("Nenhum item foi escolhido");}
@@ -499,12 +502,15 @@ function destacaTema(tema)
 	{
 		var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");
 		var i = iguias.length-1;
-		do
+		if(i >= 0)
 		{
-			if ((iguias[i].type == "checkbox") && (iguias[i].value == tema) && (iguias[i].checked == true))
-			{alert("Desligue o tema antes de destacar");return;}
+			do
+			{
+				if ((iguias[i].type == "checkbox") && (iguias[i].value == tema) && (iguias[i].checked == true))
+				{alert("Desligue o tema antes de destacar");return;}
+			}
+			while(i--)
 		}
-		while(i--)
 	}
 	objaguarde.abre("ajaxdestaca","Aguarde...gerando imagem");
 	g_destaca = tema;
@@ -1165,18 +1171,21 @@ function pegaimagens()
 			var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
 			wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
 			var i = quadrosfilme.length-1;
-			do
+			if(i >= 0)
 			{
-				if (quadrosfilme[i].imagem != " ")
+				do
 				{
-					wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
-					wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrang&eacute;ncia: "+quadrosfilme[i].extensao+"<br>");
-					wi.document.write("<img src="+quadrosfilme[i].imagem+">");
-					wi.document.write("<img src="+quadrosfilme[i].referencia+">");
-					mensagem = "<br>Fim"
+					if (quadrosfilme[i].imagem != " ")
+					{
+						wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
+						wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrang&eacute;ncia: "+quadrosfilme[i].extensao+"<br>");
+						wi.document.write("<img src="+quadrosfilme[i].imagem+">");
+						wi.document.write("<img src="+quadrosfilme[i].referencia+">");
+						mensagem = "<br>Fim"
+					}
 				}
+				while(i--)
 			}
-			while(i--)
 			wi.document.write(mensagem);
 		}
 	}
@@ -1293,11 +1302,14 @@ function visual(iddiv)
 		var l = objmapa.listavisual.split(",");
 		var visuais = "";
 		var li = l.length-1;
-		do
+		if(li >= 0)
 		{
-			visuais += "<img title='muda visual - "+l[li]+"' style=cursor:pointer onclick='mudaVisual(\""+l[li]+"\")' src='"+g_locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";
+			do
+			{
+				visuais += "<img title='muda visual - "+l[li]+"' style=cursor:pointer onclick='mudaVisual(\""+l[li]+"\")' src='"+g_locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";
+			}
+			while(li--)
 		}
-		while(li--)
 		$i(iddiv).innerHTML = visuais;
 	}
 }

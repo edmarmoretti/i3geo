@@ -631,26 +631,29 @@ function Mapa(e,m)
 				var l = g_listaFuncoesBotoes.botoes;
 				var lle = l.length;
 				var b = l.length-1;
-				do
+				if (b >= 0)
 				{
-					if ($i(l[b].iddiv))
+					do
 					{
-						if(l[b].conteudo)
-						{eval('$i(l[b].iddiv).innerHTML = "'+l[b].conteudo+'"');}
-						if(l[b].dica)
+						if ($i(l[b].iddiv))
 						{
-							eval('$i("'+l[b].iddiv+'").onmouseover = function(){mostradicasf(this,"'+l[b].dica+'","");}');
-							eval('$i("'+l[b].iddiv+'").onmouseout = function(){mostradicasf(this,"");};');
+							if(l[b].conteudo)
+							{eval('$i(l[b].iddiv).innerHTML = "'+l[b].conteudo+'"');}
+							if(l[b].dica)
+							{
+								eval('$i("'+l[b].iddiv+'").onmouseover = function(){mostradicasf(this,"'+l[b].dica+'","");}');
+								eval('$i("'+l[b].iddiv+'").onmouseout = function(){mostradicasf(this,"");};');
+							}
+							if(l[b].funcaoonclick)
+							{
+								$i(l[b].iddiv).onclick = l[b].funcaoonclick;
+							}
+							if(l[b].constroiconteudo)
+							{eval(l[b].constroiconteudo);}
 						}
-						if(l[b].funcaoonclick)
-						{
-							$i(l[b].iddiv).onclick = l[b].funcaoonclick;
-						}
-						if(l[b].constroiconteudo)
-						{eval(l[b].constroiconteudo);}
 					}
+					while (b--);
 				}
-				while (b--);
 				//
 				//ativa as guias
 				//
@@ -750,14 +753,17 @@ function Mapa(e,m)
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
 			var l = g_listaPropriedades.propriedades.length-1;
-			do
+			if (l >= 0)
 			{
-				var temp = g_listaPropriedades.propriedades[l].text;
-				var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
-				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
+				do
+				{
+					var temp = g_listaPropriedades.propriedades[l].text;
+					var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
+					tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
+					listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
+				}
+				while(l--)
 			}
-			while(l--)
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
 		}
 	};
@@ -887,34 +893,37 @@ function Mapa(e,m)
 			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
 			var lle = lista.length;
 			var l = 0;
-			do
+			if (lle >= 0)
 			{
-				var ltema = lista[l].split("*");
-				var ck = "";
-				if(ltema[1] == 2){ck = 'CHECKED';}
-				//ltema[8]==sim indica que e um tema com features
-				if (ltema[8] == undefined){ltema[8] = "nao";}
-				tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
-				if (ltema[5] == "sim") //o tema tem selecao
-				{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-				//verifica se e um wms que tem wfs
-				if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
-				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-				if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
-				{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-				if (navm)
-				{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
-				else
-				{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
-				mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
-				tnome = "<img width=0px src="+$im("branco.gif") + " />";
-				mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
-				if (cor == "rgb(250,250,250)"){var cor = "none";}
-				else
-				{var cor = "rgb(250,250,250)";}
-				l++;
+				do
+				{
+					var ltema = lista[l].split("*");
+					var ck = "";
+					if(ltema[1] == 2){ck = 'CHECKED';}
+					//ltema[8]==sim indica que e um tema com features
+					if (ltema[8] == undefined){ltema[8] = "nao";}
+					tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
+					if (ltema[5] == "sim") //o tema tem selecao
+					{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+					//verifica se e um wms que tem wfs
+					if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
+					{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+					if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
+					{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+					if (navm)
+					{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
+					else
+					{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
+					mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
+					tnome = "<img width=0px src="+$im("branco.gif") + " />";
+					mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
+					if (cor == "rgb(250,250,250)"){var cor = "none";}
+					else
+					{var cor = "rgb(250,250,250)";}
+					l++;
+				}
+				while(l<lle)
 			}
-			while(l<lle)
 		}
 		ativaDragDrop();
 	};
@@ -937,21 +946,24 @@ function Mapa(e,m)
 			var lista = (objmapa.temas).split(";");
 			var farol = "maisamarelo.png";
 			var l = lista.length-1;
-			do
+			if (l >= 0)
 			{
-				var ltema = lista[l].split("*");
-				if (ltema[6]*1 < mapscale*1)
-				{var farol = "maisverde.png";}
-				if (ltema[6]*1 > mapscale*1)
-				{var farol = "maisvermelho.png";}
-				if (ltema[6]*1 == 0)
-				{var farol = "maisamarelo.png";}
-				if ($i("farol"+ltema[0]))
+				do
 				{
-					$i("farol"+ltema[0]).src = g_locaplic+"/imagens/"+farol;
+					var ltema = lista[l].split("*");
+					if (ltema[6]*1 < mapscale*1)
+					{var farol = "maisverde.png";}
+					if (ltema[6]*1 > mapscale*1)
+					{var farol = "maisvermelho.png";}
+					if (ltema[6]*1 == 0)
+					{var farol = "maisamarelo.png";}
+					if ($i("farol"+ltema[0]))
+					{
+						$i("farol"+ltema[0]).src = g_locaplic+"/imagens/"+farol;
+					}
 				}
+				while(l--)
 			}
-			while(l--)
 		}
 	};
 	/*
@@ -1044,18 +1056,21 @@ function Mapa(e,m)
 		//
 		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
 		var i = temp.length-1;
-		do
+		if (i >= 0)
 		{
-			eval("var s = objmapa."+temp[i]+"obj"); 
-			if ($i(s))
+			do
 			{
-				var d = $i(s).style;
-				d.style.overflow="auto";
-				d.style.height = objmapa.h-13;
-				d.style.width = "100%";
+				eval("var s = objmapa."+temp[i]+"obj"); 
+				if ($i(s))
+				{
+					var d = $i(s).style;
+					d.style.overflow="auto";
+					d.style.height = objmapa.h-13;
+					d.style.width = "100%";
+				}
 			}
+			while(i--)
 		}
-		while(i--)
 	};
 	/*
 	Function: verificaClickMapa
@@ -1067,11 +1082,14 @@ function Mapa(e,m)
 		if (this.funcoesClickMapa.length > 0)
 		{
 			var f = this.funcoesClickMapa.length-1;
-			do
+			if (f >= 0)
 			{
-				eval(this.funcoesClickMapa[f]);
+				do
+				{
+					eval(this.funcoesClickMapa[f]);
+				}
+				while(f--)
 			}
-			while(f--)
 		}
 		if (g_funcoesClickMapaDefault.length > 0)
 		{
@@ -1092,11 +1110,14 @@ function Mapa(e,m)
 		if (g_funcoesMousemoveMapaDefault.length > 0)
 		{
 			var f = g_funcoesMousemoveMapaDefault.length-1;
-			do
+			if (f >= 0)
 			{
-				eval(g_funcoesMousemoveMapaDefault[f]);
+				do
+				{
+					eval(g_funcoesMousemoveMapaDefault[f]);
+				}
+				while(f--)
 			}
-			while(f--)
 		}
 	};
 	/*
@@ -1109,22 +1130,14 @@ function Mapa(e,m)
 		if (g_funcoesNevegaMapaDefault.length > 0)
 		{
 			var f = g_funcoesNevegaMapaDefault.length-1;
-			do
+			if (f >= 0)
 			{
-				eval(g_funcoesNevegaMapaDefault[f]);
+				do
+				{
+					eval(g_funcoesNevegaMapaDefault[f]);
+				}
+				while(f--)
 			}
-			while(f--)
 		}
 	};
 }
-
-/*
-function loopDoWhileReverse3() {
-var i=iter;
-do 
-{
-  // do something here
-}
-while (--i);
-}
-*/
