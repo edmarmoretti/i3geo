@@ -305,6 +305,7 @@ function docaguias()
 {
 	if (!$i("conteudojanelaguias"))
 	{
+		if($i("guiasYUI")){$i("guiasYUI").style.display="none";}
 		if (!$i("contemFerramentas")){return;}
 		var novono = $i("contemFerramentas").innerHTML;
 		$i("contemFerramentas").innerHTML = "";
