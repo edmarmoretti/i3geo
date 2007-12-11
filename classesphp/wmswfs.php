@@ -234,6 +234,7 @@ function temaswms()
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
 	#
+	//$wms_service_request = "c://temp//teste.xml";
 	if( !($wms_capabilities = file($wms_service_request)) ) {
 		# Cannot download the capabilities file.
 		$cp->set_data("Erro de acesso");
@@ -251,15 +252,121 @@ function temaswms()
 	{$n = $e->getAttribute("SupportSLD");}
 	$suporta = "nao";
 	if ($n == 1){$suporta = "sim";}
-	
-	$query = '//WMT_MS_Capabilities/Capability/Layer/Layer/Style';
-	$entries = $xpath->query($query);
-	$nums = $entries->length;
-	if ($entries->length > 0)
+	$xpath = new DOMXPath($dom);
+	$q = '//WMT_MS_Capabilities/Capability';
+	$query = $q.'/Layer';
+	$layers = $xpath->query($query);
+	$retorna = array();
+	foreach ($layers as $layer)
 	{
-	 	 $query = '//WMT_MS_Capabilities/Capability/Layer';
-		 $entries = $xpath->query($query);	 	 
+		$r = pegaTag($layer);
+		$retorna = imprimeTag($r,$retorna);
+		$query = $q.'/Layer/Layer';
+		$layers1 = $xpath->query($query);
+		foreach ($layers1 as $layer1)
+		{
+			$r1 = pegaTag($layer1);
+			$camada1 = $r1["nome"];
+			$titulocamada1 = $r1["titulo"];
+			$retorna = imprimeTag($r1,$retorna);
+			if($r1["estilos"])
+			{$retorna = imprimeEstilos($r1["estilos"],$suporta,$retorna,$camada1,$titulocamada1);}
+			else
+			{$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada1 . "\",\"\",\"default\",\"".$camada1." ".$titulocamada1."\",\"".$suporta."\")' value='" . $camada1 . "'/> default<i>".$titulocamada1."</i></span><br>";}
+			
+			$query = $q.'/Layer/Layer/Layer';
+			$layers2 = $xpath->query($query);
+			foreach ($layers2 as $layer2)
+			{
+				$r2 = pegaTag($layer2);
+				$camada2 = $r2["nome"];
+				$titulocamada2 = $r2["titulo"];
+				$retorna = imprimeTag($r2,$retorna);
+				if($r2["estilos"])
+				{$retorna = imprimeEstilos($r2["estilos"],$suporta,$retorna,$camada2,$titulocamada2);}
+				else
+				{$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada2 . "\",\"\",\"default\",\"".$camada2." ".$titulocamada2."\",\"".$suporta."\")' value='" . $camada2 . "'/> default <i>".$titulocamada2."</i></span><br>";}
+
+			}		
+		}
+		
+	}	
+	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
+	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
+	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
+	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
+	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
+	//echo "<pre>";
+	//var_dump($retorna);
+	$cp->set_data(implode($retorna));
+}
+function imprimeEstilos($es,$suporta,$retorna,$tval,$tituloalternativo)
+{
+	foreach($es as $e)
+	{
+		//$tval = $e["titulo"];
+		$nomeestilo = $e["nome"];
+		$nomecamada = $e["titulo"];
+		//if($nomecamada == "default" || $nomecamada == "")
+		//{$nomecamada = $tituloalternativo;}
+		$tituloestilo = $e["titulo"];
+		$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"estilo\",\"" . $tval . "\",\"\",\"" . $nomeestilo . "\",\"".$tituloalternativo." ".$nomecamada." ".$tituloestilo."\",\"".$suporta."\")' value='" . $nomeestilo . "'/><span style=color:blue >" . $nomeestilo." <i>".$tituloestilo."</i></span><br>";	
 	}
+	return $retorna;
+}
+function imprimeTag($r,$retorna)
+{
+	if(!$r["nome"])
+	{$retorna[] =  "<br><span style='color:brown;font-size:14pt' ><b>".$r["titulo"]."</b></span><br>";}
+	else
+	{
+		$retorna[] =  "<hr>";
+		$retorna[] =  "<br><span style='color:brown;font-size:12pt' ><b>".$r["nome"]."</b></span><br>";
+		$retorna[] =  "<br><span style='color:black;font-size:12pt' ><b>".$r["titulo"]."</b></span><br>";
+		$retorna[] =  "<br><span style='color:gray;font-size:9pt' >".$r["resumo"]."</span><br>";
+	}
+	return $retorna;
+}
+function pegaTag($layer)
+{
+	$noslayer = $layer->childNodes;
+	$resultado = array();
+	for ($i = 0; $i < $noslayer->length; $i++)
+	{
+		$tnome = $noslayer->item($i)->tagName;
+		$tvalor = $noslayer->item($i)->nodeValue;
+		//$tvalor = mb_convert_encoding($tvalor,"AUTO","AUTO");
+		if($tnome)
+		{
+			if ($tnome == "Title")
+			{$resultado["titulo"] = $tvalor;}
+			if ($tnome == "Name")
+			{$resultado["nome"] = $tvalor;}
+			if ($tnome == "Abstract")
+			{$resultado["resumo"] = $tvalor;}
+			if ($tnome == "Style")
+			{
+				$ss = $noslayer->item($i)->childNodes;
+				for ($s = 0; $s < $ss->length; $s++)
+				{
+					$snome = $ss->item($s)->tagName;
+					$svalor = $ss->item($s)->nodeValue;
+					if($snome)
+					{
+						if ($snome == "Title")
+						{$t=$svalor;}
+						if ($snome == "Name")
+						{$n=$svalor;}
+					}
+				}
+				$resultado["estilos"][] = array("nome"=>$n,"titulo"=>$t);
+			}
+			$resultado["tags"][] = $tnome;
+		}
+	}
+	return $resultado;
+		
+	/*
 	$tval = "";
 	foreach ($layers as $layer)
 	{
@@ -268,8 +375,8 @@ function temaswms()
 		{
 			$tnome = $noslayer->item($i)->tagName;
 			$tvalor = $noslayer->item($i)->nodeValue;
-			if ($tnome == "Title")
-			{$retorna[] = "<b>Titulo da camada: ".$tvalor."</b><br><br>Sub-camadas:<br><br>";}
+			
+		
 			if ($tnome == "Layer")
 			{
 				$retorna[] = "<hr>";
@@ -278,6 +385,7 @@ function temaswms()
 				{
 					$tnome = $sublayers->item($j)->tagName;
 					$tvalor = $sublayers->item($j)->nodeValue;
+					
 					if ($tnome != "Style")
 					{
 						$ns = "";
@@ -322,13 +430,10 @@ function temaswms()
 			}
 		}
 	}
-	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
-	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
-	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
-	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
-	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
-	$cp->set_data(implode($retorna));
+	*/
+	
 }
+
 
 /*
 function: temaswfs

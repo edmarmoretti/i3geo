@@ -939,7 +939,9 @@ Endereço do WMS
 		$this->mapa->setmetadata("wms_srs","EPSG:4291");
 		foreach ($this->layers as $layer)
 		{
-			$layer->setmetadata("wms_title",pegaNome($layer));
+			$n = pegaNome($layer);
+			$layer->setmetadata("wms_title",$n);
+			$layer->setmetadata("wms_name",$n);
 			$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
 			$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
 			$layer->set("status","ON");
