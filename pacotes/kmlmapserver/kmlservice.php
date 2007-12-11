@@ -23,7 +23,7 @@ This file is part of KMLMAPSERVER.
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
-
+error_reporting(0);
 set_time_limit(0);
 include 'classes/kmlserver.class.php';
 $server = new KmlServer();
