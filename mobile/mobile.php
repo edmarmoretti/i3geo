@@ -123,10 +123,10 @@ else
 <div id='botoes' style="position:relative;top:1px;left:1px" >
 	<input type='button' value='+' onclick='zoommais()' />
 	<input type='button' value='-' onclick='zoommenos()' />
+	<input type='button' value='O' onclick='oeste()' />	
 	<input type='button' value='N' onclick='norte()' />
 	<input type='button' value='S' onclick='sul()' />
 	<input type='button' value='L' onclick='leste()' />
-	<input type='button' value='O' onclick='oeste()' />
 	<select id='op' name='op' onchange='op(this.value)'>
 		<option value=''>Op&ccedil;&otilde;es</option>
 		<option value='ligar'>ligar</option>
