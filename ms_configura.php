@@ -30,7 +30,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-$mensagemInicia = "I3Geo versão 3.8 beta 3";
+$mensagemInicia = "I3Geo versão 3.8";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*
@@ -158,7 +158,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	$editores = array("10.1.15.207","10.1.13.206","10.1.18.78");
+	$editores = array("");
 	$dir_tmp = "/var/tmp/ms_tmp";
 	$temasdir = "/opt/www/html/i3geo/temas";
 	$temasaplic = "/opt/www/html/i3geo/aplicmap";
@@ -168,7 +168,7 @@ else //se for linux
 	$locidentifica = "http://mapas.mma.gov.br/i3geo/menutemas/identifica.xml";
 	$locmapas = "http://mapas.mma.gov.br/abremapa.php?id=xml";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
-	$postgis_con = "user=geodados password=geodados dbname=geodados host=mapas.mma.gov.br port=5432";
+	$postgis_con = "";
 	$srid_area = 1;
 	$postgis_mapa = "";
 	/*
