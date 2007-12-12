@@ -12,8 +12,6 @@
 <22525> +proj=utm +zone=25 +south +ellps=intl +towgs84=-206,172,-6,0,0,0,0 +units=m +no_defs  <>
 # SAD69 / Brazil Polyconic
 <29101> +proj=poly +lat_0=0 +lon_0=-54 +x_0=5000000 +y_0=10000000 +ellps=aust_SA +units=m +no_defs  <>
-# SAD69 / UTM zone 18N (deprecated)
-<29118> +proj=utm +zone=18 +ellps=GRS67 +units=m +no_defs  <>
 # SAD69 / UTM zone 19N 
 <29119> +proj=utm +zone=19 +ellps=GRS67 +units=m +no_defs  <>
 # SAD69 / UTM zone 20N 
