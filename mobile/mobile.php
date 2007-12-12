@@ -182,7 +182,7 @@ if(!isset($maparef)){$maparef = "";}
 		<option value='desligar'>desligar camadas</option>
 		<option value='adicionar'>adicionar camadas</option>
 		<option value='legenda'>ver a legenda</option>
-		<option value='localizar lugares'>localizar</option>
+		<option value='localizar'>localizar lugares</option>
 	</select>
 </div>
 <form id='f' action='mobile.php?' method='get'>

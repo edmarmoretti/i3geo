@@ -116,6 +116,7 @@ if ($tipo == 'executa')
 if($tipo == "zoom")
 {
 	$mapa = ms_newMapObj($tmpfname);
+	$i = $mapa->draw();
 	$ext = $mapa->extent;
 	$wkt = explode(",",$wkt);
 	$ext->setextent($wkt[0],$wkt[1],$wkt[2],$wkt[3]);
