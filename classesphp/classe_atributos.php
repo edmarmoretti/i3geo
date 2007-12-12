@@ -588,10 +588,17 @@ $resolucao - Resolucao de busca.
 		//pesquisa apenas os temas visiveis
 		if ($opcao == "ligados")
 		{
+			$novalista = array();
 			foreach ($listatemas as $tema)
 			{
 				$l = $this->mapa->getlayerbyname($tema);
 				if($l->status == MS_DEFAULT)
+				$novalista[] = $tema;
+				$listatemas = $novalista;
+			}
+			foreach ($listatemas as $tema)
+			{
+				$l = $this->mapa->getlayerbyname($tema);
 				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
 			}
 			//var_dump($resultados);
