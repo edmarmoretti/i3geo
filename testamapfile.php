@@ -55,6 +55,7 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
+ms_ResetErrorList();
 if(!isset($tipo))
 {$tipo = "";}
 if ($tipo == "")
@@ -122,7 +123,16 @@ if (isset($map) && $map != "")
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);
 		if($tipo == "")
-		{echo "<img src=".$nomer." />";}
+		{
+			echo "<img src=".$nomer." />";
+			echo "<br>Erros:<br>";
+			$error = ms_GetErrorObj();
+			while($error && $error->code != MS_NOERR)
+			{
+				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+				$error = $error->next();
+			}		
+		}
 		else
 		{
 		 Header("Content-type: image/png");
