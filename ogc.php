@@ -62,6 +62,7 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
+require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 //pega a lista de grupos
@@ -187,7 +188,7 @@ else
 		{
 			foreach($sgrupo->TEMA as $tm)
 			{
-				if (mb_convert_encoding($tm->OGC,"HTML-ENTITIES","auto") == "")
+				if (iXml($tm->OGC,"OGC") == "")
 				{
 					if (@ms_newMapobj("temas/".(mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto")).".map"))
 					{
@@ -201,7 +202,7 @@ else
 								if (($conta >= $int[0]) && ($conta <= $int[1]))
 								{
 									$l = $nmap->getlayerbyname($t);
-									$l->setmetadata("ows_title",mb_convert_encoding(pegaNome($l),"HTML-ENTITIES","auto"));
+									$l->setmetadata("ows_title",pegaNome($l));//mb_convert_encoding(pegaNome($l),"HTML-ENTITIES","auto"));
 									$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
 									$l->set("status",MS_OFF);
 									$l->setmetadata("gml_include_items","all");
