@@ -2537,12 +2537,142 @@ itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
 */
 function expandeGrupo(itemID)
 {
-	g_arvoreClick = itemID;
-	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
+	var idmenu = (TreeviewPvtFindRootObject($i(itemID)).idmenu);
+	//
+	//o codigo do grupo é sempre somado +1, para pegar o correto é necessário subtrair 1
+	//
+	var item = $i(itemID);
+	if (item.grupo)
 	{
-		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&g_sid="+g_sid+"&idmenu="+codigos[3];
-		cpObj.call(p,"pegaListaDeTemas",processaTemas);
+		if(item.grupo == "0a"){var grupo = "0";}
+		else
+		{var grupo = parseInt(item.grupo);}
+	}
+	else
+	{var grupo = "";}
+	if (item.subgrupo)
+	{
+		if(item.subgrupo == "0a"){var subgrupo = "0";}
+		else
+		{var subgrupo = parseInt(item.subgrupo);}
+	}
+	else
+	{var subgrupo = "";}
+	if (item.getElementsByTagName("ul").length == 0)
+	{
+		if (subgrupo != "")
+		{
+			var processaTemas = function(retorno)
+			{
+				if ((retorno.data != "erro") && (retorno.data != undefined))
+				{
+					var cor = "rgb(251,246,184)";
+					var stlt = retorno.data.temas.length;
+					if(stlt > 0)
+					{
+						var st = 0;
+						do
+						{
+							var nome = retorno.data.temas[st].nome;
+							var lk = retorno.data.temas[st].link;
+							if ( lk != " ")
+							{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
+							var tid = retorno.data.temas[st].tid;
+							//
+							//inclui o link para abrir o qrcode e kml
+							//
+							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+							var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
+							var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
+							var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
+							var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
+							if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
+							{var kml = "";}
+							var mini = "";
+							var lkmini = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=mini";
+							var lkmini1 = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=grande";
+							var mini = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >mini</a>";	
+							if (g_qrcode == "nao"){qrcode = "";}
+							if(navm)
+							nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
+							else
+							nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
+							mytreeview2.createItem("t_"+itemID+"_"+st, nomeTema, imgBranco, false, true, true, itemID);
+							if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
+							else
+							{var cor = "rgb(251,246,184)";}
+							st++;
+						}
+						while(st<stlt)
+					}
+					//inclui um item em branco
+					mytreeview2.createItem("vazio", "", imgBranco, false, true, true, g_arvoreClick);
+				}
+			};
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+grupo+"&subgrupo="+subgrupo+"&g_sid="+g_sid+"&idmenu="+idmenu;
+			cpObj.call(p,"pegaListaDeTemas",processaTemas);
+		}
+		else if (grupo != "")
+		{
+			//
+			//processa o resultado da chamada ajax para montar a árvore de sub-grupos
+			//
+			var processaSubgrupos = function (retorno)
+			{	
+				var ngSgrupo = retorno.data.subgrupo;
+				var cor = "rgb(230,230,230)";
+				var sglt = ngSgrupo.length;
+				if (sglt>0)
+				{
+					var sg = 0;
+					do
+					{
+						if (navm)
+						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
+						else
+						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' ><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+ngSgrupo[sg].nome+"</span>";
+						mytreeview2.createItem(itemID+"_"+sg, nomeSgrupo, imgBranco, true, true, true, itemID);
+						$i(itemID+"_"+sg).subgrupo = sg+"a";
+						$i(itemID+"_"+sg).grupo = grupo+"a";
+						if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
+						else
+						{var cor = "rgb(230,230,230)";}
+						sg++;
+					}
+					while(sg<sglt)
+					mytreeview2.createItem("","", imgBranco, false, true, true, itemID);
+				}
+				var ngtSgrupo = retorno.data.temasgrupo;
+				var sgtlt = ngtSgrupo.length;
+				if(sgtlt > 0)
+				{
+					var sgt=0;
+					do
+					{
+						var no = ngtSgrupo[sgt];
+						var nome = no.nome;
+						var lk = no.link;
+						if ( lk != " ")
+						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
+						var tid = no.tid;
+						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+						if(navm)
+						nomeTema = "&nbsp;"+inp+nome+lk;
+						else
+						nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
+						mytreeview2.createItem(itemID+"tema_"+sgt, nomeTema, imgBranco, false, true, true, itemID);
+						sgt++;
+					}
+					while(sgt<sgtlt)
+					mytreeview2.createItem("","", imgBranco, false, true, true, itemID);
+				}		
+			};		
+			//
+			//faz a cahamada ajax para pegar a lista de sub-grupos de um grupo
+			//
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&grupo="+grupo+"&g_sid="+g_sid+"&idmenu="+idmenu;
+			cpObj.call(p,"pegaListaDeSubgrupos",processaSubgrupos);
+		}
 	}
 }
 /*
@@ -2558,205 +2688,117 @@ listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistema
 */
 function pegaListaDeGrupos(idmenu,listasistemas)
 {			
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas;
-	cpObj.call(p,"pegaListaDeGrupos",processaGrupos);
-}
-/*
-Function: processaGrupos
-
-Recebe os dados da função Ajax com a lista de grupos e subgrupos.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaGrupos(retorno)
-{
-	if (!$i(objmapa.guiaMenu+"obj")){return;}
-	if ((retorno.data != "erro") && (retorno.data != undefined))
+	//
+	//pega o retorno da chamada ajax com a lista de grupos de um determinado menu de temas
+	//
+	var processaGrupos = function(retorno)
 	{
-		var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
-		if ($i("buscatema"))
-		{var busca = $i("buscatema").value;}
-		//$i(objmapa.guiaMenu+"obj").innerHTML = "";
-		if (!document.getElementById("buscatema"))
+		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
-			var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
-			insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-			insp = insp + "<p>&nbsp;"+$trad("a1")+$inputText("","","buscatema","","15","")+"<img  class='tic' style='position:relative;top:3px;' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' /></td></tr></table><br>";
-			$i(objmapa.guiaMenu+"obj").innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
-		}
-		if (!$i("uplocal"))
-		{
-			var upload = "";
-			if (g_uploadlocal == "sim")
-			{upload += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
-			if (g_downloadbase == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
-			if (g_conectarwms == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
-			if (g_conectargeorss == "sim")
-			{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
-			$i(objmapa.guiaMenu+"obj").innerHTML += upload;
-			if (objmapa.navegacaoDir == "sim")
+			if ($i("buscatema"))
+			{var busca = $i("buscatema").value;}
+			//
+			//monta o input de busca de temas caso esse não exista
+			//
+			if (!document.getElementById("buscatema"))
 			{
-				var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
-				$i(objmapa.guiaMenu+"obj").innerHTML += temp;
+				var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
+				insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
+				insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
+				$i(objmapa.guiaMenu+"obj").innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 			}
-		}
-		//arvore de menus
-		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2"+idarvore, "default", objmapa.guiaMenu+"obj", null);
-		var nometemas = $trad("a7");
-		if (idarvore != ""){nometemas += " - "+idarvore;}
-		mytreeview2.createItem("item1"+idarvore, "<b>"+nometemas+"</b>", "foldermapa", true, true, true, null);
-		mytreeview2.itemExpand = expandeGrupo;
-		var ilt = retorno.data.grupos.length;
-		var i = 0;
-		do
-		{
-			if (retorno.data.grupos[i].nome)
+			//
+			//monta as opções adicionais de upload de temas, conexão com wms, etc
+			//
+			if (!$i("uplocal"))
 			{
-				mytreeview2.createItem("grupo"+i+"a"+idarvore, retorno.data.grupos[i].nome, "folder", true, true, true, "item1"+idarvore);
-				var ngSgrupo = retorno.data.grupos[i].subgrupos;
-				var cor = "rgb(230,230,230)";
-				var sglt = ngSgrupo.length;
-				if (sglt>0)
+				var upload = "";
+				if (g_uploadlocal == "sim")
+				{upload += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
+				if (g_downloadbase == "sim")
+				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
+				if (g_conectarwms == "sim")
+				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
+				if (g_conectargeorss == "sim")
+				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
+				$i(objmapa.guiaMenu+"obj").innerHTML += upload;
+				if (objmapa.navegacaoDir == "sim")
 				{
-					var sg = 0;
-					do
-					{
-						if (navm)
-						var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
-						else
-						var nomeSgrupo = "<span style='background-color:"+cor+"' ><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+ngSgrupo[sg].nome+"</span>";
-						mytreeview2.createItem("sgrupo_"+i+"_"+sg+"a"+"grupo"+i+"_"+idarvore, nomeSgrupo, imgBranco, true, true, false, "grupo"+i+"a"+idarvore);
-						if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
-						else
-						{var cor = "rgb(230,230,230)";}
-						sg++;
-					}
-					while(sg<sglt)
+					var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
+					$i(objmapa.guiaMenu+"obj").innerHTML += temp;
 				}
-				var ngtSgrupo = retorno.data.grupos[i].temasgrupo;
-				var sgtlt = ngtSgrupo.length;
-				if(sgtlt > 0)
-				{
-					var sgt=0;
-					do
-					{
-						var no = ngtSgrupo[sgt];
-						var nome = no.nome;
-						var lk = no.link;
-						if ( lk != " ")
-						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
-						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-						if(navm)
-						nomeTema = "&nbsp;"+inp+nome+lk;
-						else
-						nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-						mytreeview2.createItem("sgrupo_"+i+"_"+sg+"_"+sgt+"_"+idarvore, nomeTema, imgBranco, false, true, false, "grupo"+i+"a"+idarvore);
-						sgt++;
-					}
-					while(sgt<sgtlt)
-				}		
 			}
-			if (retorno.data.grupos[i].temasraiz)
-			{
-				var stlt = retorno.data.grupos[i].temasraiz.length;
-				var st = 0;
-				if(stlt > 0)
-				{
-					do
-					{
-						var no = retorno.data.grupos[i].temasraiz[st];
-						var nome = no.nome;
-						var lk = no.link;
-						if ( lk != " ")
-						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
-						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-						if(navm)
-						nomeTema = "&nbsp;"+inp+nome+lk;
-						else
-						nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-						mytreeview2.createItem("tema"+i+""+st+"a"+idarvore, nomeTema, imgBranco, false, true, true, "item1"+idarvore);
-						st++;
-					}
-					while(st<stlt)
-				}
-				mytreeview2.createItem("", "", imgBranco, false, true, true, "item1"+idarvore);
-			}
-			i++;
-		}
-		while(i<ilt)
-		if (g_locsistemas != "")
-		{pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);}		
-	}
-}
-/*
-Function: processaTemas
-
-Recebe os dados da função Ajax com a lista de temas de um subgrupo.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaTemas(retorno)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		var cor = "rgb(251,246,184)";
-		var stlt = retorno.data.temas.length;
-		if(stlt > 0)
-		{
-			var st = 0;
-			var sg = g_arvoreClick;
+			//
+			//monta a árvore de menus com os grupos e temas no nível raiz
+			//cria o objeto mytreeview2
+			//
+			mytreeview2 = treeviewNew("mytreeview2"+idmenu, "default", objmapa.guiaMenu+"obj", null);
+			//
+			//aqui é incluido um atributo na árvore correspondente ao seu codigo
+			//isso é necessário para identificar qual árvore foi clicada e assim, descobrir o código do menu
+			//isso é necessário pq podem existir mais de uma árvore de menus
+			//
+			$i("mytreeview2"+idmenu).idmenu = idmenu;
+			//
+			//cria a raiz da árvore
+			//
+			var nometemas = $trad("a7");
+			if (idmenu != ""){nometemas += " - "+idmenu;}
+			mytreeview2.createItem("i"+idmenu, "<b>"+nometemas+"</b>", "foldermapa", true, true, true, null);
+			mytreeview2.itemExpand = expandeGrupo;
+			//
+			//monta a árvore de grupos
+			//
+			var ilt = retorno.data.grupos.length;
+			var i = 0;
 			do
 			{
-				var nome = retorno.data.temas[st].nome;
-				var lk = retorno.data.temas[st].link;
-				if ( lk != " ")
-				{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
-				var tid = retorno.data.temas[st].tid;
+				if (retorno.data.grupos[i].nome)
+				{
+					mytreeview2.createItem("g"+i+"_"+idmenu, retorno.data.grupos[i].nome, "folder", true, true, true, "i"+idmenu);
+					$i("g"+i+"_"+idmenu).grupo = i+"a";
+				}
 				//
-				//inclui o link para abrir o qrcode e kml
+				//acrescenta os temas que ficam no nível da raiz da árvore
 				//
-				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-				var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
-				var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
-				var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
-				var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
-				if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
-				{var kml = "";}
-				var mini = "";
-				var lkmini = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=mini";
-				var lkmini1 = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=grande";
-				var mini = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >mini</a>";	
-				
-				if (g_qrcode == "nao"){qrcode = "";}
-				if(navm)
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
-				else
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
-				mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
-				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
-				else
-				{var cor = "rgb(251,246,184)";}
-				st++;
+				if (retorno.data.grupos[i].temasraiz)
+				{
+					var stlt = retorno.data.grupos[i].temasraiz.length;
+					var st = 0;
+					if(stlt > 0)
+					{
+						do
+						{
+							var no = retorno.data.grupos[i].temasraiz[st];
+							var nome = no.nome;
+							var lk = no.link;
+							if ( lk != " ")
+							{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
+							var tid = no.tid;
+							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+							if(navm)
+							nomeTema = "&nbsp;"+inp+nome+lk;
+							else
+							nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
+							mytreeview2.createItem("tema"+i+""+st+"a"+idmenu, nomeTema, imgBranco, false, true, true, "i"+idmenu);
+							st++;
+						}
+						while(st<stlt)
+					}
+					mytreeview2.createItem("", "", imgBranco, false, true, true, "i"+idmenu);
+				}
+				i++;
 			}
-			while(st<stlt)
-		}
-		//inclui um item em branco
-		mytreeview2.createItem("vazio", "", imgBranco, false, true, true, g_arvoreClick);
-		g_arvoreClicks += ","+g_arvoreClick;
-	}
+			while(retorno.data.grupos[i])
+			if (g_locsistemas != "")
+			{pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);}		
+		}	
+	};
+	//
+	//faz a chamada em ajax para pegar a lista de grupos de um menu
+	//
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas+"&listasgrupos=nao";
+	cpObj.call(p,"pegaListaDeGrupos",processaGrupos);
 }
 /*
 Function: pegavalSistemas

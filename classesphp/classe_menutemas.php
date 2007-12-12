@@ -147,7 +147,7 @@ return:
 
 array
 */
-	function pegaListaDeGrupos($idmenu="",$listasistemas="sim")
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim")
 	{
 		$this->xml = "";
 		if (file_exists("../ms_configura.php"))
@@ -160,7 +160,7 @@ array
 				{$this->xml = simplexml_load_file($m["arquivo"]);}
 			} 
 		}
-		if ($this->xml == "")
+		if (($this->xml == "") && ($menutemas == ""))
 		{
 			if (file_exists("../menutemas/menutemas.xml"))
 			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
@@ -224,33 +224,36 @@ array
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 				}
 				$subgrupos = array();
-				foreach($grupo->SGRUPO as $sgrupo)
+				if($listasgrupos=="sim")
 				{
-					$incluisgrupo = TRUE;
-					$temp = ixml($sgrupo,"PERFIL");
-					if ($temp != "")
+					foreach($grupo->SGRUPO as $sgrupo)
 					{
-						$incluisgrupo = FALSE;
-						$perfis = explode(",",$temp);
-						if ($this->array_in_array($this->perfil,$perfis))
-						{$incluisgrupo = TRUE;}
-					}
-					if ($incluisgrupo == TRUE)
-					{
-						//verifica se existem temas que podem receber download
-						$down = "nao";
-						$ogc = "nao";
-						foreach($sgrupo->TEMA as $tema)
+						$incluisgrupo = TRUE;
+						$temp = ixml($sgrupo,"PERFIL");
+						if ($temp != "")
 						{
-							$temp = ixml($tema,"DOWNLOAD");
-							if (($temp == "sim") || ($temp == "SIM"))
-							{$down = "sim";}
-							$temp = ixml($temar,"OGC");
-							if (($temp != "nao") || ($temp != "NAO"))
-							{$ogc = "sim";}
+							$incluisgrupo = FALSE;
+							$perfis = explode(",",$temp);
+							if ($this->array_in_array($this->perfil,$perfis))
+							{$incluisgrupo = TRUE;}
 						}
-						$nome = ixml($sgrupo,"SDTIPO");
-						$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
+						if ($incluisgrupo == TRUE)
+						{
+							//verifica se existem temas que podem receber download
+							$down = "nao";
+							$ogc = "nao";
+							foreach($sgrupo->TEMA as $tema)
+							{
+								$temp = ixml($tema,"DOWNLOAD");
+								if (($temp == "sim") || ($temp == "SIM"))
+								{$down = "sim";}
+								$temp = ixml($temar,"OGC");
+								if (($temp != "nao") || ($temp != "NAO"))
+								{$ogc = "sim";}
+							}
+							$nome = ixml($sgrupo,"SDTIPO");
+							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
+						}
 					}
 				}
 				$nome = ixml($grupo,"GTIPO");
@@ -287,6 +290,109 @@ array
 		$grupos[] = array("idmenu"=>$idmenu);
 		$grupos[] = array("sistemas"=>$sistemas);
 		return ($grupos);
+	}
+/*
+function: pegaListaDeSubGrupos
+
+Pega a lista de sub-grupos.
+
+O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+
+Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
+
+Parameters:
+
+idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
+
+grupo - código do grupo
+
+return:
+
+array
+*/
+	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
+	{
+		$this->xml = "";
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
+		{
+			foreach ($menutemas as $m)
+			{
+				if (($m["idmenu"] == $idmenu))
+				{$this->xml = simplexml_load_file($m["arquivo"]);}
+			} 
+		}
+		if (($this->xml == "") && ($menutemas == ""))
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		}
+		$conta = 0;
+		$subgrupos[] = array();
+		foreach($this->xml->GRUPO as $grupo)
+		{
+			$temp = ixml($grupo,"PERFIL");
+			if ($conta == $codgrupo)
+			{
+				$incluigrupo = TRUE;
+				if ($temp != "")
+				{
+					$incluigrupo = FALSE;
+					$perfis = explode(",",$temp);
+					if ($this->array_in_array($this->perfil,$perfis))
+					{$incluigrupo = TRUE;}
+				}
+				//verifica se existem temas no nível de grupo
+				if ($incluigrupo == TRUE)
+				{
+					$subgrupos = array();
+					foreach($grupo->SGRUPO as $sgrupo)
+					{
+						$incluisgrupo = TRUE;
+						$temp = ixml($sgrupo,"PERFIL");
+						if ($temp != "")
+						{
+							$incluisgrupo = FALSE;
+							$perfis = explode(",",$temp);
+							if ($this->array_in_array($this->perfil,$perfis))
+							{$incluisgrupo = TRUE;}
+						}
+						if (($incluisgrupo == TRUE))
+						{
+							$down = "nao";
+							$ogc = "nao";
+							$nome = ixml($sgrupo,"SDTIPO");
+							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
+						}
+					}
+				}
+					$temas = array();
+					foreach($grupo->TEMA as $temar)
+					{
+						$down = "nao";
+						$ogc = "sim";
+						$temp = ixml($temar,"DOWNLOAD");
+						if (($temp == "sim") || ($temp == "SIM"))
+						{$down = "sim";}
+						$temp = ixml($temar,"OGC");
+						if (($temp == "nao") || ($temp == "NAO"))
+						{$ogc = "nao";}
+						$link = " ";
+						$temp = ixml($temar,"TLINK");
+						if ($temp != "")
+						{$link = $temp;}
+						$tid = ixml($temar,"TID");
+						$nome = ixml($temar,"TNOME");
+						$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+					}
+
+			}
+			$conta = $conta + 1;
+		}
+		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temas));
 	}
 /*
 function: pegaListaDeTemas

@@ -1472,7 +1472,6 @@ Parameters:
 		if (file_exists("../ms_configura.php"))
 		{require_once("../ms_configura.php");}
 		$cp->set_data($menutemas);
-		$cp->return_data();
 	break;
 /*
 Property: pegalistadegrupos
@@ -1494,8 +1493,20 @@ Include:
 	case "pegalistadegrupos":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
-		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas)));
-		//$cp->return_data();
+		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos)));
+	break;
+/*
+Property: pegalistadeSubgrupos
+
+Pega a lista de subgrupos de um grupo do menu.
+
+Include:
+<classe_menutemas.php>
+*/
+	case "pegalistadeSubgrupos":
+		include("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$cp->set_data($m->pegaListaDeSubGrupos($grupo,$idmenu));
 	break;
 /*
 Property: pegalistadetemas

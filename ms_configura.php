@@ -214,9 +214,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para mais detalhes veja a documentação específica do arquivo menutemas/menutemas.xml
 	
 	Example:
-	
+
 	$menutemas = array(
-		array("idmenu"=>1,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml"),
+		array("idmenu"=>1,"arquivo"=>"http://10.1.1.34/i3geo/menutemas/menutemas.xml"),
 		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml")
 		);
 	*/

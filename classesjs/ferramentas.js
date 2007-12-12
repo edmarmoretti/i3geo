@@ -1305,7 +1305,7 @@ function ativaLocalizarxy(iddiv)
 {
 	if($i(iddiv))
 	{
-		var ins = "<table style='text-align:center'><tr>"
+		var ins = "<table style='text-align:center'><tr>";
 		ins += "<td>localiza X:&nbsp;</td>";
 		ins += "<td>"+$inputText(iddiv,"315","xg","grau","3","-00")+"&nbsp;</td>";
 		ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";

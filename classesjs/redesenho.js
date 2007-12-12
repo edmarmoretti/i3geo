@@ -293,7 +293,7 @@ function ajaxLegendaHTML(retorno)
 				novoel.innerHTML = temp;
 				document.body.appendChild(novoel);
 				YAHOO.namespace("moveLegi.xp");
-				YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+				YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			}
 			YAHOO.moveLegi.xp.panel.render();
 			YAHOO.moveLegi.xp.panel.show();
