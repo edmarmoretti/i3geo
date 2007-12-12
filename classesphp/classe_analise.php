@@ -1327,75 +1327,70 @@ $operacao - Tipo de análise.
 	{
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
-		if ($postgis_con == "")
-		{return ("erro. Nao foi definida a conexao com o Postgis.");}
+		//if ($postgis_con == "")
+		//{return ("erro. Nao foi definida a conexao com o Postgis.");}
 		foreach ($lista as $l)
 		{
 			$geos = &$this->unserializeGeo($dir.$l);
 			foreach ($geos["dados"] as &$geo)
 			{
 				$g = $geo["wkt"];
-				$pgconn = pg_connect($postgis_con);
+				//$pgconn = pg_connect($postgis_con);
 				switch ($operacao)
 				{
 					case "perimetro":
+						/*
 						$sql = "select perimeter(transform( GeomFromText('$g',4291),$srid_area))::float as perim";
 						$result=pg_query($pgconn, $sql);
 						pg_close($pgconn);	
 						$calculo = pg_fetch_all($result);
 						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$calculo[0]["perim"]);
+						*/
+						$shape = ms_shapeObjFromWkt($g);
+						$area = $shape->getArea();
+						$rect = $shape->bounds;
+						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+						$shape->project($projInObj, $projOutObj);
+						$s = $shape->towkt();
+						$shape = ms_shapeObjFromWkt($s);
+						$area = $shape->getLength();
+						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$area);
+
 					break;
 					case "area":
+						/*
 						$sql = "select area(transform( GeomFromText('$g',4291),$srid_area))::float as aream";
 						$result=pg_query($pgconn, $sql);
 						pg_close($pgconn);	
 						$calculo = pg_fetch_all($result);
 						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$calculo[0]["aream"]);
+						*/
+						$shape = ms_shapeObjFromWkt($g);
+						$area = $shape->getArea();
+						$rect = $shape->bounds;
+						$projInObj = ms_newprojectionobj("proj=latlong");
+						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+						$shape->project($projInObj, $projOutObj);
+						$s = $shape->towkt();
+						$shape = ms_shapeObjFromWkt($s);
+						$area = $shape->getArea();
+						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$area);
 					break;
 					case "comprimento":
+						/*
 						$sql = "select length(transform( GeomFromText('$g',4291),$srid_area))::float as compm";
 						$result=pg_query($pgconn, $sql);
 						pg_close($pgconn);	
 						$calculo = pg_fetch_all($result);
 						$geo["valores"][] = array("item"=>"P_compr_metros","valor"=>$calculo[0]["compm"]);	
+						*/
 					break;
 				}
 			}
 			$this->serializeGeo($dir.$l,$geos);
 		}
 		return("ok");	
-
-
-		
-		/* utiliza o geos
-		$lista = explode(",",$lista);
-		$dir = $dir_tmp."/".$imgdir."/";
-		foreach ($lista as $l)
-		{
-			$geos = &$this->unserializeGeo($dir.$l);
-			foreach ($geos["dados"] as &$geo)
-			{
-				//cria objeto projecao
-				$projInObj = ms_newprojectionobj("proj=latlong,ellps=GRS67");
-				$projOutObj = ms_newprojectionobj("proj=laea,ellps=GRS67,lat_0=-12,lon_0=-52,x_0=500000,y_0=10000000,units=m");				
-				$g = ms_shapeObjFromWkt($geo["wkt"]);
-				$p = $g->project($projInObj,$projOutObj);
-				switch ($operacao)
-				{
-					case "comprimento":
-						$valor = $g->getLength();
-						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$valor);
-					break;
-					case "area":
-						$valor = $g->getArea();
-						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$valor);
-					break;
-				}
-			}
-			$this->serializeGeo($dir.$l,$geos);
-		}
-		return("ok");
-		*/	
 	}
 /*
 function: incmapageometrias

@@ -113,6 +113,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: $postgis_con
 	
+	Depreciado - não é mais necessário
+	
 	string de conexão com o banco de dados postgis utilizada para reallização de cálculos
 	
 	se não existir, deixe em branco
@@ -120,6 +122,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	$postgis_con = "";
 	/*
 	Variable: $srid_area
+	
+	Depreciado - não é mais necessário
 	
 	srid utilizado nos cálculos que exigem projeção equivalente
 	*/
