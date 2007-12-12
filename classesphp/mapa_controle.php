@@ -2155,6 +2155,15 @@ Section: Outros
 Opções de uso geral.
 */
 /*
+Property: listaEpsg
+
+Pega os códigos de projeção EPSG.
+
+*/
+	case "listaEpsg":
+		$cp->set_data(listaEpsg());
+	break;
+/*
 Property: listaDiretorios
 
 Lista os diretórios de um diretório.

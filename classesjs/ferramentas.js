@@ -1020,7 +1020,7 @@ Function: upload
 Faz o upload de shape file
 */
 function upload()
-{wdocaf("300px","200px",g_locaplic+"/ferramentas/upload/index.htm","","","Upload");}
+{wdocaf("300px","230px",g_locaplic+"/ferramentas/upload/index.htm","","","Upload");}
 /*
 Section: navegação
 */

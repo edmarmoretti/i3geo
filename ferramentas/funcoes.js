@@ -595,6 +595,38 @@ function comboTrueType(funcao,onde)
 	cp.set_response_type("JSON");
 	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatruetype","listaTrueType",monta);
 }
+//monta radios com a lista de codigos epsg
+function radioepsg(funcao,onde)
+{
+	if (arguments.length == 2)
+	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";
+	var monta = function(retorno)
+	{
+		if (retorno.data != undefined)
+		{
+			var ins = new Array();
+			ins.push("<table class=lista >");
+			ins.push("<tr><td><input size=2 style='cursor:pointer' name='epsg' type=radio checked value='' /></td>");
+			ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
+
+			for (i=1;i<retorno.data.length; i++)
+			{
+				ins.push("<tr><td><input size=2 style='cursor:pointer' name='epsg' type=radio value='"+retorno.data[i].codigo+"' /></td>");
+				ins.push("<td>"+retorno.data[i].nome+"</td></tr>");
+			}
+			ins.push("</table>");
+			var ins = ins.join('');
+			var temp = {dados:ins,tipo:"dados"};
+		}
+		else
+		{var temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
+		eval("funcao(temp)");
+	}
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaEpsg","listaEpsg",monta);
+}
 
 //remove os acentos de uma frase ou palavra
 function removeAcentos(palavra)

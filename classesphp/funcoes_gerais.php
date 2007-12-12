@@ -403,6 +403,38 @@ function nomeRandomico($n=10)
 	return $nomes;
 }
 /*
+function: listaEpsg
+
+Lê o arquivo com os códigos de projeção epsg e retorna um array com os dados.
+
+*/
+function listaEpsg()
+{
+	$abre = fopen("../ferramentas/epsg.txt", "r");
+	while (!feof($abre))
+	{
+		$buffer = fgets($abre);
+		$linhas[] = $buffer;
+	}
+	fclose($abre);
+	for ($i=0;$i < count($linhas);$i=$i+2)
+	{
+		$n = $linhas[$i];
+		$n = str_replace("#","",$n);
+		$n = str_replace("\n","",$n);
+		$d = $linhas[$i+1];
+		$d = str_replace("\n","",$d);
+		$temp = explode(">",$d);
+		$d = $temp[1];
+		$c = $temp[0];
+		$d = str_replace("<","",$d);
+		$c = str_replace("<","",$c);
+		$n = mb_convert_encoding($n,"UTF-8","ISO-8859-1");
+		$lista[] = array("codigo"=>$c,"nome"=>$n,"def"=>$d);	
+	}
+	return $lista;		
+}
+/*
 function: copiaSeguranca
 
 Cria cópia de segurança do map_file.

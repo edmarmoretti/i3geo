@@ -1,17 +1,12 @@
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
-<title></title>
-</head>
-<body bgcolor="white" style="background-color:white">
-<p>
 <?php
 require_once("../../classesphp/pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
+
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
+
 foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
@@ -30,20 +25,29 @@ if (!function_exists(ms_GetVersion))
 		{dl('php_mapscript.so');}
 	}
 }
+?>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
+<title></title>
+</head>
+<body bgcolor="white" style="background-color:white">
+<p>
+<?php
 if (isset($_FILES['fileshp']['name']))
 {
-	$ndir = dirname($filen);
+	//$ndir = dirname($filen);
 	require_once ("../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p>Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9\.]',$nome)) || (!ereg('\.shp$',$_FILES['fileshp']['name'])) )
+	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['fileshp']['name'])) || (!ereg('\.shp$',$_FILES['fileshp']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9\.]',$nome)) || (!ereg('\.shx$',$_FILES['fileshx']['name'])) )
+	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['fileshx']['name'])) || (!ereg('\.shx$',$_FILES['fileshx']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9\.]',$nome)) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "Arquivos inválidos";exit;}
@@ -91,6 +95,9 @@ if (isset($_FILES['fileshp']['name']))
 			$novolayer->setmetadata("ITENSDESC",$its);
 			$novolayer->set("template","none.htm");
 		}
+		//echo $epsg;
+		if($epsg != "")
+		{$novolayer->setProjection("init=epsg:".$epsg);}
 		$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
