@@ -338,11 +338,20 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 */
 	function zoomTema()
 	{
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
 		$extatual = $this->mapa->extent;
 		$ret = $this->layer->getmetadata("extent");
 		if ($ret == "")
 		{
 			$ret = $this->layer->getextent();
+			//reprojeta o retangulo
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$projInObj = ms_newprojectionobj($prjTema);
+				$projOutObj = ms_newprojectionobj($prjMapa);
+				$ret->project($projInObj, $projOutObj);
+			}
 			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
 		}
 		else
