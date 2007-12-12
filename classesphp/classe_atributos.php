@@ -103,14 +103,24 @@ xmin ymin xmax ymax separados por espaço.
 */
 	function extensaoShape($shape)
 	{
-		$ext = $shape->bounds->minx." ".$shape->bounds->miny." ".$shape->bounds->maxx." ".$shape->bounds->maxy;
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
+		$ret = $shape->bounds;
+		//reprojeta o retangulo
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
+			$ret->project($projInObj, $projOutObj);
+		}		
+		$ext = $ret->minx." ".$ret->miny." ".$ret->maxx." ".$ret->maxy;
 		if ($shape->type == MS_SHP_POINT)
 		{
-			$minx = $shape->bounds->minx;
+			$minx = $ret->minx;
 			$minx = $minx - 0.01;
-			$maxx = $shape->bounds->maxx;
+			$maxx = $ret->maxx;
 			$maxx = $maxx + 0.01;
-			$ext = $minx." ".$shape->bounds->miny." ".$maxx." ".$shape->bounds->maxy;
+			$ext = $minx." ".$ret->miny." ".$maxx." ".$ret->maxy;
 		}
 		return $ext;
 	}
