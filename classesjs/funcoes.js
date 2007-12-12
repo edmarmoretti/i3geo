@@ -2087,7 +2087,8 @@ function expandeTema(itemID)
 		{
 			if (retorno.data != undefined)
 			{
-				var retorno = retorno.data;
+				var original = retorno;
+				var retorno = retorno.data.legenda;
 				if (retorno[0])
 				{
 					if ((navn) && (!retorno[0].imagem))
@@ -2135,6 +2136,35 @@ function expandeTema(itemID)
 				{
 					$i(g_arvoreClick+"verdiv").innerHTML = tabela;
 				}
+				//desliga os checkbox que foram desativados
+				//pega os objetos input
+				var elementos = $i(g_arvoreClick+"verdiv").getElementsByTagName("input");
+				var nelementos = elementos.length;
+				var inputs = new Array();
+				var i = 0;
+				if (nelementos > 0)
+				{
+					do
+					{
+						if (elementos[i].type == "checkbox")
+						{inputs.push(elementos[i]);}
+						i++;
+					}
+					while(i < nelementos)
+				}
+				var desativar = original.data.desativar;
+				var nindices = desativar.length;
+				var i = 0;
+				if (nindices > 0)
+				{
+					do
+					{
+						inputs[desativar[i]].checked = false;
+						i++;
+					}
+					while(i < nindices)
+				}
+				
 			}
 		};
 		g_arvoreClick = itemID;

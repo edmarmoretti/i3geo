@@ -180,11 +180,25 @@ string com a legenda HTML
 				{$la->set("status",MS_DEFAULT);}
 			}
 		}
+		$desligar = array();
+		$conta = 0;
+		$desligar = array();
 		for ($i=0;$i < $numlayers;$i++)
 		{
 			$la = $this->mapa->getlayer($i);
 			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM")
 			{$la->set("status",MS_OFF);}
+			if($la->status == MS_DEFAULT)
+			{
+				$nc = $la->numclasses;
+				for ($c = 0;$c < $nc;$c++)
+				{
+					$classe = $la->getclass($c);
+					if($classe->status == MS_OFF)
+					{$desligar[] = $conta;}
+					$conta = $conta + 1;
+				}
+			} 
 		}
 		$legenda = $this->mapa->legend;
 		$legenda->set("template",$this->templateleg);
@@ -193,7 +207,7 @@ string com a legenda HTML
 		{return ("erro");}
 		if (function_exists("mb_convert_encoding"))
 		{$l = mb_convert_encoding($l,"UTF-8","ISO-8859-1");}
-		return ($l);
+		return (array("legenda"=>$l,"desativar"=>$desligar));
 	}
 /*
 function: legendaGrafica
