@@ -402,7 +402,7 @@ function cliqueSelecaoPoli()
 			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			//verifica se deve terminar
-			if (pontosdistobj.dist[n] == pontosdistobj.dist[n-1])
+			if (d < 3)
 			{
 				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 				var pontos = pontosdistobj;
@@ -411,7 +411,7 @@ function cliqueSelecaoPoli()
 				objmapa.temaAtivo = doc.getElementById("comboTemas").value;
 				if (n > 2)
 				{
-					//aguarde("block")
+					//objaguarde.abre("ajaxredesenha",$trad("o1"));
 					var xs = pontos.xpt.toString(",")
 					var ys = pontos.ypt.toString(",")
 					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli"
