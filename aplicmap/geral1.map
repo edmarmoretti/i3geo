@@ -217,6 +217,44 @@ MAP
 			END
 		END
 	END
+	
+  LAYER
+    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map"
+    CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4291"
+      "tipooriginal"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "TEXTO"	"NAO"
+      "wms_name"	"baseraster"
+      "nomeoriginal"	"cartobase"
+      "wms_format"	"image/png"
+      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+      "wms_connectiontimeout"	"30"
+      "TEMA"	"Base cartografica"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"default"
+    END
+    NAME "baserasterwms"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TOLERANCE 0
+    TRANSFORM FALSE
+    TYPE RASTER
+    CLASS
+      NAME " "
+      STYLE
+        ANGLE 360
+        COLOR 200 50 0
+        OPACITY 100
+        OUTLINECOLOR 0 0 0
+        SYMBOL 0
+      END
+    END
+  END
+	
 	LAYER
 		METADATA
 			"TEMA"	"NAO"
