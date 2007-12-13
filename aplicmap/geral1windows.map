@@ -1,9 +1,31 @@
+#Este mapfile é utilizado pelo i3geo na instalação em servidores linux
+#Toda vez que o i3geo é iniciado, esse mapfile é considerado como o mapa básico.
+#Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para refletir
+#o mapa desejado.
+#
+#Se vc quer adicionar temas, dê preferência por editar o arquivo menutemas/menutemas.xml
+#assim, as camadas ficam disponíveis no menu de adição de temas do i3geo. Não se esqueça
+#de criar o arquivo mapfile no diretório i3geo/temas (veja a documentação no wiki da
+#comunidade i3geo no Portal do Software Público Brasileiro.
+#
+#Existem vários metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
+#Esses metadados possibilitam coisas como mostrar ou não a legenda de um tema no mapa,
+#mostrar ou não o tema na ferramenta de identificacao, etc.
+#A lista completa de metadados vc pode obter no wiki da comunidade
+#
 MAP
-	#edite os caminhos caso a aplicacao for instalada em outro local
+	#
+	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do defaul
+	#
 	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
 	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 157 211 255
+	#
+	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
+	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo rsater é adicionado ao mapa
+	#
 	IMAGETYPE png2
 	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 	SIZE 480 500
