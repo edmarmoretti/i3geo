@@ -533,12 +533,17 @@ $resolucao - Resolucao de busca.
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
 			{
 				foreach (($vermultilayer->temasvisiveis) as $tv)
-				{$listatemas[] = $tv;}
+				{
+					$l = $this->mapa->getlayerbyname($tv);
+					if ($l->getmetadata("identifica") != "nao")
+					{$listatemas[] = $tv;}
+				}
 			}
 			else
 			{
 		 		$l = $this->mapa->getlayerbyname($tem);
-				if ($l->getmetadata("escondido") == ""){$listatemas[] = $tem;}
+				if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
+				{$listatemas[] = $tem;}
 			}
 		}
 		$listatemas = array_unique($listatemas);

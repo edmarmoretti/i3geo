@@ -127,6 +127,7 @@ MAP
 			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
 			"TEMA"	"Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
 			#"ESCONDIDO" "SIM"
+			"IDENTIFICA" "nao"
 		END
 		NAME "zee"
 		SIZEUNITS PIXELS
@@ -197,6 +198,7 @@ MAP
 			"CLASSE"	"SIM"
 			"TEMA"	"Brasil"
 			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+			"IDENTIFICA" "nao"
 		END
 		NAME "estados"
 		SIZEUNITS PIXELS

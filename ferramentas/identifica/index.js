@@ -70,51 +70,71 @@ function pegavalSistemas(xmlDoc)
 function listaTemasLigados()
 {
 	aguarde("none");
-	var lista = (window.parent.objmapa.temas).split(";")
-	var b = window.parent.convdmsf(xpt,ypt);
-	var x = b[0].split(" ")
-	var y = b[1].split(" ")
-	var w = "W"
-	var s = "S"
-	if (x[0]*1 > 0){w = "L"}
-	if (y[0]*1 > 0){s = "N"}
-	if (x[0]*1 < 0){x[0] = x[0]*-1}
-	if (y[0]*1 < 0){y[0] = y[0]*-1}
-	var param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w
-	var url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param//15_48_00_S_47_51_50_W
-	var linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>"
-	linhas += "Clique no tema para ver os dados<table class=lista2 >"
-	var linhas1 = "";
-	for (l=0;l<lista.length;l++)
+	var retorno = function (retorno)
 	{
-		var ltema = lista[l].split("*")
-		if(ltema[1] == 2)
-		{
-		 	linhas1 += "<tr><td><input onclick='identifica(\""+ltema[0]+"\")' style=cursor:pointer type=radio name=tema /></td><td>"+ltema[2]+"</td></tr>"
-		}
-	}
-	$i("resultado").innerHTML = linhas+"<table class=lista ><tr><td style=text-align:left ><input onclick='identifica(\"ligados\")' style=cursor:pointer type=radio name=tema /></td><td>Todos</td></tr>"+linhas1+"</table>"
-	//verifica se existem sistemas para identificar
-	g_locidentifica = window.parent.g_locidentifica
-	if (g_locidentifica != "")
-	{
-		sistemasAdicionais = new Array()
-		ajaxexecASXml(g_locidentifica,"pegavalSistemas")
-	}
-	if (window.parent.objmapa.temaAtivo == "")
-	{
-		var temp = ""
+		//var lista = (window.parent.objmapa.temas).split(";")
+		var lista = retorno.data;
+		var b = window.parent.convdmsf(xpt,ypt);
+		var x = b[0].split(" ")
+		var y = b[1].split(" ")
+		var w = "W"
+		var s = "S"
+		if (x[0]*1 > 0){w = "L"}
+		if (y[0]*1 > 0){s = "N"}
+		if (x[0]*1 < 0){x[0] = x[0]*-1}
+		if (y[0]*1 < 0){y[0] = y[0]*-1}
+		var param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w
+		var url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param//15_48_00_S_47_51_50_W
+		var linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>"
+		linhas += "Clique no tema para ver os dados<table class=lista2 >"
+		var linhas1 = "";
 		for (l=0;l<lista.length;l++)
 		{
-			var ltema = lista[l].split("*")
-			if(ltema[1] == 2)
-			{var temp = ltema[0];break;}
+			var nome = lista[l].nome
+			var tema = lista[l].tema
+			if(lista[l].identifica != "nao")
+			{
+		 		linhas1 += "<tr><td><input onclick='identifica(\""+tema+"\")' style=cursor:pointer type=radio name=tema /></td><td>"+nome+"</td></tr>"
+			}
 		}
-		window.parent.objmapa.temaAtivo = temp
-		identifica(temp)
-	}
-	else
-	{identifica(window.parent.objmapa.temaAtivo)}
+		$i("resultado").innerHTML = linhas+"<table class=lista ><tr><td style=text-align:left ><input onclick='identifica(\"ligados\")' style=cursor:pointer type=radio name=tema /></td><td>Todos</td></tr>"+linhas1+"</table>"
+		//verifica se existem sistemas para identificar
+		g_locidentifica = window.parent.g_locidentifica
+		if (g_locidentifica != "")
+		{
+			sistemasAdicionais = new Array()
+			ajaxexecASXml(g_locidentifica,"pegavalSistemas")
+		}
+		if (window.parent.objmapa.temaAtivo == "")
+		{
+			/*
+			var temp = ""
+			for (l=0;l<lista.length;l++)
+			{
+				var ltema = lista[l].split("*")
+				if(ltema[1] == 2)
+				{var temp = ltema[0];break;}
+			}
+			window.parent.objmapa.temaAtivo = temp
+			*/
+			var temp = "";
+			for (l=0;l<lista.length;l++)
+			{
+				if(lista[l].identifica != "nao")
+				{var temp = lista[l].tema;break;}
+			}			
+			identifica(temp)
+		}
+		else
+		{identifica(window.parent.objmapa.temaAtivo)}
+	};
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemas&opcao=ligados"
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"listatemas",retorno);
+	
+	
 }
 //lista os temas ligados
 function listaTodos()
