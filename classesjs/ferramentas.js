@@ -401,8 +401,31 @@ function cliqueSelecaoPoli()
 		{
 			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
+			//verifica se deve terminar
+			if (pontosdistobj.dist[n] == pontosdistobj.dist[n-1])
+			{
+				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				var pontos = pontosdistobj;
+				richdraw.fecha()
+				var n = pontos.xpt.length;
+				objmapa.temaAtivo = doc.getElementById("comboTemas").value;
+				if (n > 2)
+				{
+					//aguarde("block")
+					var xs = pontos.xpt.toString(",")
+					var ys = pontos.ypt.toString(",")
+					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli"
+					var cp = new cpaint();
+					//cp.set_debug(2)
+					cp.set_transfer_mode('POST');
+					cp.set_response_type("JSON");
+					cp.call(p,"selecaoPoli",remapaf,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
+				}
+				else
+				{alert("Sao necessarios pelo menos tres pontos");}
+			}
 		}
-		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
+		//inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
 	}
 }
 /*

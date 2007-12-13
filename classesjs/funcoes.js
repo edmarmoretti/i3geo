@@ -994,7 +994,9 @@ function ativaClicks(docMapa)
 		}
 	};
 	docMapa.onclick = function()
-	{objmapa.verificaClickMapa();};
+	{
+		objmapa.verificaClickMapa();
+	};
 	docMapa.onmouseup = function()
 	{
 		if (g_tipoacao == "zoomli"){zoomboxf("termina");}

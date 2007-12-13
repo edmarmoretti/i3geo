@@ -79,6 +79,7 @@ function mudaicone()
 //botoes de tipo
 function tiposel(obj)
 {
+	window.parent.objmapa.temaAtivo = $i("comboTemas").value;
 	$i("parapoli").style.display = "none";
 	var fim = function()
 	{aguarde("none");window.parent.ajaxredesenha("");}
@@ -113,8 +114,8 @@ function tiposel(obj)
 		mudaicone()
 		obj.style.border = "1px solid white"
 		window.parent.g_tipoacao = "selecaopoli";
-		alert("Clique no mapa para desenhar o polígono. O ultimo ponto sera ligado ao primeiro.")
-		$i("parapoli").style.display = "block";
+		alert("Clique no mapa para desenhar o polígono. Clique duas vezes para parar.")
+		//$i("parapoli").style.display = "block";
 		window.parent.criaContainerRichdraw();
 	}
 }
