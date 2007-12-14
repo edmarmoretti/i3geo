@@ -145,6 +145,11 @@ if ($tipo=="localizar")
 	include("localizar.php");
 	exit;
 }
+if ($tipo=="localizarxy")
+{
+	include("localizarxy.php");
+	exit;
+}
 if ($tipo =="autopan")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -184,6 +189,7 @@ if(!isset($maparef)){$maparef = "";}
 		<option value='ativatexto'>ativar textos</option>
 		<option value='legenda'>ver a legenda</option>
 		<option value='localizar'>localizar lugares</option>
+		<option value='localizarxy'>localizar coordenada</option>
 	</select>
 </div>
 <form id='f' action='mobile.php?' method='get'>
@@ -299,6 +305,8 @@ function op(valor)
 	{document.getElementById('f').action = "index.php?"}
 	if (valor=="ativatexto")
 	{document.getElementById('f').action = "ativatexto.php?"}
+	if (valor=="localizarxy")
+	{document.getElementById('f').action = "localizarxy.php?"}
 	document.getElementById('f').submit();
 }
 function maparef()
