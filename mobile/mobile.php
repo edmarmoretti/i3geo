@@ -181,6 +181,7 @@ if(!isset($maparef)){$maparef = "";}
 		<option value='ligar'>ligar camadas</option>
 		<option value='desligar'>desligar camadas</option>
 		<option value='adicionar'>adicionar camadas</option>
+		<option value='ativatexto'>ativar textos</option>
 		<option value='legenda'>ver a legenda</option>
 		<option value='localizar'>localizar lugares</option>
 	</select>
@@ -296,6 +297,8 @@ function op(valor)
 	{document.getElementById('f').action = "adicionatema.php?"}
 	if (valor=="reiniciar")
 	{document.getElementById('f').action = "index.php?"}
+	if (valor=="ativatexto")
+	{document.getElementById('f').action = "ativatexto.php?"}
 	document.getElementById('f').submit();
 }
 function maparef()
