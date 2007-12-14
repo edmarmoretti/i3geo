@@ -780,6 +780,12 @@ pt:"Mede a dist&acirc;ncia entre dois ou mais pontos clicados no mapa (menor dis
 en:"It measures the distance between two or more clicked points on the map (less distance). The calculation of distance is approximate and their accuracy depends on the scale of the map.",
 es:""
 }],
+"d21a":[
+{
+pt:"Mede a &aacute;rea de um pol&iacute;gono desenhado na tela. O c&aacute;lculo de &aacute;ria &eacute; aproximado e sua precis&atilde;o depende da escala do mapa.",
+en:"It measures the area on the map. The calculation of area is approximate and their accuracy depends on the scale of the map.",
+es:""
+}],
 "d22":[
 {
 pt:"Insere pontos no mapa em coordenadas geogr&aacute;ficas. Ospontos inclu&iacute;dos podem ser transformados em linhas ou pol&iacute;gonos. Os pontos s&atilde;o armazenados em um tema tempor&aacute;rio, podendo-se fazer o download do arquivo shapefile.",
@@ -1108,6 +1114,7 @@ g_funcoesClickMapaDefault = new Array(
 	"cliqueInseretoponimo()",
 	"cliqueSelecao()",
 	"cliqueMede()",
+	"cliqueArea()",
 	"cliqueSelecaoPoli()",
 	"cliqueCapturaPt()"
 );
@@ -1126,7 +1133,8 @@ g_funcoesMousemoveMapaDefault = new Array(
 	"moveMede()",
 	"movelentef()",
 	"moveLonglat()",
-	"moveSelecaoPoli()"
+	"moveSelecaoPoli()",
+	"moveArea()"
 );
 /*
 Variable: g_funcoesNevegaMapaDefault
@@ -1377,6 +1385,13 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d21"),
 		funcaoonclick:function()
 		{mede();}
+	},
+	{
+		//botão de medição de área
+		iddiv:"area",
+		dica:$trad("d21a"),
+		funcaoonclick:function()
+		{area();}
 	},
 	{
 		//botão de digitalização

@@ -177,7 +177,7 @@ function criaContainerRichdraw()
 	richdraw.editCommand('linewidth', '1px');
 	richdraw.editCommand('mode', 'line');
 	divgeo.style.display="block";
-	if(navn){ativaClicks(divgeo);}
+	ativaClicks(divgeo);
 }
 /*
 Function: mudaVisual
@@ -752,7 +752,7 @@ function mudaiconf(i)
 	}
 	objmapa.objtips = new Array();
 	limpacontainerf();
-	var objetos=["inseregrafico","textofid","zoomli","zoomlo","zoomiauto","zoomoauto","pan","identifica","mede","inserexy","selecao"];
+	var objetos=["area","inseregrafico","textofid","zoomli","zoomlo","zoomiauto","zoomoauto","pan","identifica","mede","inserexy","selecao"];
 	var ko = objetos.length-1;
 	if(ko >= 0)
 	{
@@ -789,6 +789,8 @@ function mudaiconf(i)
 		break;
 		case "mede":
 		$i("imgh").src= g_localimg + "/" + "mede.gif";
+		case "area":
+		$i("imgh").src= g_localimg + "/" + "mede.gif";
 		break;
 		case "inserexy":
 		$i("imgh").src= g_localimg + "/" + "ic_xy.png";
@@ -800,7 +802,7 @@ function mudaiconf(i)
 		break;
 		case "selecao":
 		$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
-		if($i("img")){$i("img").title = "clique para selecionar";}
+		if($i("img")){$i("img").title = "";}
 		break;
 		case "inseregrafico":
 		$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
@@ -3363,27 +3365,41 @@ function desenhoRichdraw(tipo,objeto,n)
 {
 	if (richdraw)
 	{
-		if(tipo="resizeLinha")
+		if((tipo=="resizeLinha") || (tipo=="resizePoligono") && navn)
 		{
 			try
 			{
-				if(navn)
-				{richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-				else
-				{
-					var r = $i(richdraw.container.id);
-					r.removeChild(r.lastChild);
-					var dy = objposicaocursor.imgy;
-					var dx = objposicaocursor.imgx - (objmapa.w/2);
-					if(dy > pontosdistobj.yimg[n-1]){var dy=dy-2;}
-					if(dx > ((pontosdistobj.ximg[n-1])-(objmapa.w/2))){var dx=dx-3;}
-					window.status=objposicaocursor.imgx;
-					richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],dx,dy);
-				}
+				richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);
+			}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}
+		}
+		if((tipo=="resizeLinha") && navm)
+		{
+			try
+			{
+				var r = $i(richdraw.container.id);
+				r.removeChild(r.lastChild);
+				var dy = objposicaocursor.imgy;
+				var dx = objposicaocursor.imgx - (objmapa.w/2);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 			}
 			catch(e){window.status=n+" erro ao movimentar a linha ";}			
 		}
-		if(tipo="insereCirculo")
+		if((tipo=="resizePoligono") && navm)
+		{
+			try
+			{
+				var r = $i(richdraw.container.id);
+				r.removeChild(r.lastChild);
+				r.removeChild(r.lastChild);
+				var dy = objposicaocursor.imgy;
+				var dx = objposicaocursor.imgx - (objmapa.w/2);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[0])-(objmapa.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
+			}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}			
+		}
+		if(tipo=="insereCirculo")
 		{
 			if (navn)
 			{
@@ -3426,13 +3442,19 @@ Parameters:
 xi - coordenada x.
 
 yi - coordenada y.
+
+funcaoonclick - funcao que sera executada quando a marca for clicada
 */
-function inseremarcaf(xi,yi)
+function inseremarcaf(xi,yi,funcaoOnclick)
 {
 	//verifica se existe o container para os pontos
 	if (!$i("pontosins") )
 	{
 		var novoel = document.createElement("div");
+		if (arguments.length == 2)
+		{funcaoOnclick = "";}
+		if (funcaoOnclick != "")
+		{novoel.onclick = funcaoOnclick;}
 		novoel.id = "pontosins";
 		var i = novoel.style;
 		i.position = "absolute";
@@ -3445,13 +3467,13 @@ function inseremarcaf(xi,yi)
 	var i = novoel.style;
 	i.position = "absolute";
 	i.zIndex=2000;
-	i.top=(yi - 2)+"px";
-	i.left=(xi - 2)+"px";
+	i.top=(yi - 4)+"px";
+	i.left=(xi - 4)+"px";
 	i.width="4px";
 	i.height="4px";
 	var novoimg = document.createElement("img");
 	novoimg.src=g_locaplic+"/imagens/dot1.gif";
-	with (novoimg.style){width="4px";height="4px";zIndex=2000;}
+	with (novoimg.style){width="6px";height="6px";zIndex=2000;}
 	novoel.appendChild(novoimg);
 	container.appendChild(novoel);
 }

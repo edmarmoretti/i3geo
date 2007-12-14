@@ -105,6 +105,35 @@ function moveSelecaoPoli()
 				d = d * 1;
 			}
 			var da = d + pontosdistobj.dist[n-1];
+			if(navn){desenhoRichdraw("resizePoligono",pontosdistobj.linhastemp,0);}
+			desenhoRichdraw("resizePoligono",pontosdistobj.linhas[n-1],n);
+		}
+	}
+}
+/*
+Function moveArea
+
+Cria os elementos necessários à função de cálculo de área.
+*/
+function moveArea()
+{
+	if (g_tipoacao == "area")
+	{
+		var n = pontosdistobj.xpt.length;
+		if (n > 0)
+		{
+			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			if (objmapa.scale > 500000)
+			{var d = parseInt(d);}
+			else
+			{
+				d= d + "";
+				d = d.split(".");
+				var decimal = d[1].substr(0,3);
+				d = d[0]+"."+decimal;
+				d = d * 1;
+			}
+			var da = d + pontosdistobj.dist[n-1];
 			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
 		}
 	}
@@ -348,11 +377,10 @@ function cliqueMede()
 		pontosdistobj.ximg[n] = objposicaocursor.imgx;
 		pontosdistobj.yimg[n] = objposicaocursor.imgy;
 		pontosdistobj.dist[n] = 0;
-		window.status=n;
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
 			else
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
@@ -368,7 +396,12 @@ function cliqueMede()
 				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
 			}
 		}
-		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
+		var temp = function()
+		{
+			richdraw.fecha();
+			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
+		};
+		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
 	}
 }
 /*
@@ -388,13 +421,32 @@ function cliqueSelecaoPoli()
 		pontosdistobj.ximg[n] = objposicaocursor.imgx;
 		pontosdistobj.yimg[n] = objposicaocursor.imgy;
 		pontosdistobj.dist[n] = 0;
-		window.status=n;
+		//inclui a linha para ligar com o ponto inicial
+		if (n == 0)
+		{
+			try
+			{
+				if (navn)
+				{
+					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
+				}
+				else
+				{
+					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	
+				}				
+			}
+			catch(e){window.status="";}
+		}
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			{
+				pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);
+			}
 			else
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+			{
+				pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
+			}				
 		}
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 		if (n > 0)
@@ -406,15 +458,14 @@ function cliqueSelecaoPoli()
 			{
 				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 				var pontos = pontosdistobj;
-				richdraw.fecha()
+				richdraw.fecha();
 				var n = pontos.xpt.length;
 				objmapa.temaAtivo = doc.getElementById("comboTemas").value;
 				if (n > 2)
 				{
-					//objaguarde.abre("ajaxredesenha",$trad("o1"));
-					var xs = pontos.xpt.toString(",")
-					var ys = pontos.ypt.toString(",")
-					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli"
+					var xs = pontos.xpt.toString(",");
+					var ys = pontos.ypt.toString(",");
+					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
 					var cp = new cpaint();
 					//cp.set_debug(2)
 					cp.set_transfer_mode('POST');
@@ -423,6 +474,79 @@ function cliqueSelecaoPoli()
 				}
 				else
 				{alert("Sao necessarios pelo menos tres pontos");}
+			}
+		}
+		var temp = function()
+		{
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			var pontos = pontosdistobj;
+			richdraw.fecha();
+			var n = pontos.xpt.length;
+			objmapa.temaAtivo = doc.getElementById("comboTemas").value;
+			var xs = pontos.xpt.toString(",");
+			var ys = pontos.ypt.toString(",");
+			var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_transfer_mode('POST');
+			cp.set_response_type("JSON");
+			cp.call(p,"selecaoPoli",remapaf,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
+		};
+		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
+	}
+}
+/*
+Function: cliqueArea
+
+Executa as operações de cálculo de área quando o usuário clica no mapa
+*/
+function cliqueArea()
+{
+	if (g_tipoacao == "area")
+	{
+		var n = pontosdistobj.xpt.length;
+		pontosdistobj.xpt[n] = objposicaocursor.ddx;
+		pontosdistobj.ypt[n] = objposicaocursor.ddy;
+		pontosdistobj.xtela[n] = objposicaocursor.telax;
+		pontosdistobj.ytela[n] = objposicaocursor.telay;
+		pontosdistobj.ximg[n] = objposicaocursor.imgx;
+		pontosdistobj.yimg[n] = objposicaocursor.imgy;
+		pontosdistobj.dist[n] = 0;
+		try
+		{
+			if (navn)
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			else
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+		}
+		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+		if (n > 3)
+		{
+			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
+			//verifica se deve terminar
+			if (d < 3)
+			{
+				var pontos = pontosdistobj;
+				richdraw.fecha();
+				var n = pontos.xpt.length;
+				if (n > 2)
+				{
+					var retornaArea = function(retorno)
+					{
+						alert(retorno.data);
+					};
+					var xs = pontos.xpt.toString(",");
+					var ys = pontos.ypt.toString(",");
+					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=calcareapoli";
+					var cp = new cpaint();
+					//cp.set_debug(2)
+					cp.set_transfer_mode('POST');
+					cp.set_response_type("JSON");
+					cp.call(p,"calcareapoli",retornaArea,xs,ys);
+				}
+				else
+				{alert("Sao necessarios pelo menos tres pontos para o calculo");}
 			}
 		}
 		//inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
@@ -718,6 +842,8 @@ function selecao()
 		pontosdistobj = new pontosdist();
 		objmapa.temaAtivo = "";
 		criaContainerRichdraw();
+		richdraw.lineColor = "red";
+		richdraw.lineWidth = "2px";	
 		wdocaf("360px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
 	}
 	else
@@ -779,6 +905,32 @@ function analisaGeometrias()
 	wdocaf("500px","400px",g_locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
 }
 /*
+Function: area
+	
+Botão de medição de área.
+
+A medida é feita quando o usuário clica no mapa com esta opção ativa
+
+*/
+function area()
+{
+	if (g_tipoacao != "area")
+	{
+		alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
+		mudaiconf("area");
+		g_tipoacao = "area";
+		pontosdistobj = new pontosdist();
+		criaContainerRichdraw();
+		richdraw.lineColor = "green";
+		richdraw.lineWidth = "2px";			
+	}
+	else
+	{
+		mudaiconf("pan");
+		richdraw.fecha();
+	}
+}
+/*
 Function: mede
 	
 Botão de medição de distâncias.
@@ -828,6 +980,8 @@ function mede()
 		//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
 		//
 		criaContainerRichdraw();
+		richdraw.lineColor = "black";
+		richdraw.lineWidth = "1px";	
 	}
 	else
 	{

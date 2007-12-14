@@ -147,7 +147,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
      cursor: se-resize;
  }
 
-#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
+#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
 {cursor:pointer;border: 0px solid rgb(50,50,50);border-bottom:1px solid rgb(50,50,50);border-left:1px solid rgb(50,50,50);width:22;height:22;z-index:1000;position:relative;}
 #box1
 {font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid #ff0000;}
@@ -298,6 +298,12 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-image:URL('../imagens/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -425px;
+}
+#area
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -450px;
 }
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

@@ -117,6 +117,8 @@ function tiposel(obj)
 		alert("Clique no mapa para desenhar o polígono. Clique duas vezes para parar.")
 		//$i("parapoli").style.display = "block";
 		window.parent.criaContainerRichdraw();
+		window.parent.richdraw.lineColor = "red";
+		window.parent.richdraw.lineWidth = "2px";
 	}
 }
 
