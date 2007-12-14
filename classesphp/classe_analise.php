@@ -632,7 +632,7 @@ $locaplic - Localização do I3geo.
 				//calcula a extensão geografica
 				$rect = $shape->bounds;
 				$projInObj = ms_newprojectionobj("proj=latlong");
-				$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+				$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 				$poPoint = ms_newpointobj();
 				$poPoint->setXY($rect->minx, $rect->miny);
 				$dd1 = ms_newpointobj();
@@ -1347,10 +1347,9 @@ $operacao - Tipo de análise.
 						$geo["valores"][] = array("item"=>"P_perim_metros","valor"=>$calculo[0]["perim"]);
 						*/
 						$shape = ms_shapeObjFromWkt($g);
-						$area = $shape->getArea();
 						$rect = $shape->bounds;
 						$projInObj = ms_newprojectionobj("proj=latlong");
-						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000,units=m");
 						$shape->project($projInObj, $projOutObj);
 						$s = $shape->towkt();
 						$shape = ms_shapeObjFromWkt($s);
@@ -1367,12 +1366,13 @@ $operacao - Tipo de análise.
 						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$calculo[0]["aream"]);
 						*/
 						$shape = ms_shapeObjFromWkt($g);
-						$area = $shape->getArea();
 						$rect = $shape->bounds;
 						$projInObj = ms_newprojectionobj("proj=latlong");
-						$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+						$projOutObj = ms_newprojectionobj("proj=laea,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=500000,y_0=10000000,ellps=GRS67,units=m,no_defs");
+						
 						$shape->project($projInObj, $projOutObj);
 						$s = $shape->towkt();
+						//echo $s;
 						$shape = ms_shapeObjFromWkt($s);
 						$area = $shape->getArea();
 						$geo["valores"][] = array("item"=>"P_area_metros","valor"=>$area);

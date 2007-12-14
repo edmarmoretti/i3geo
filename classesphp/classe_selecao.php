@@ -398,7 +398,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{
 			$rect = $pt->bounds;
 			$projInObj = ms_newprojectionobj("proj=latlong");
-			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->miny.",x_0=5000000,y_0=10000000");
+			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 			$poPoint = ms_newpointobj();
 			$poPoint->setXY($rect->minx, $rect->miny);
 			$dd1 = ms_newpointobj();

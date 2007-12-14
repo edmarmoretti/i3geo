@@ -2874,7 +2874,8 @@ function gravaQuadro(variavel,valor)
 			if ((eval("quadrosfilme["+i+"]."+variavel+" == ' '")) && (muda < 0))
 			{muda = i;}
 		}
-		eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");
+		if (eval("quadrosfilme["+(muda)+"]"))
+		{eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");}
 	}
 }
 /*
@@ -3017,6 +3018,38 @@ function quadrofilme()
 /*
 Section: calculos
 */
+/*
+Function calculaArea
+
+Calcula a área de um polígono.
+
+Os pontos são obtidos do objeto pontosdistobj
+
+Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
+*/
+function calculaArea()
+{
+	if(pontosdistobj.xpt.length > 2)
+	{
+		var $array_length = pontosdistobj.xpt.length;
+		// add the first coordinates at the end to close de polygon
+		//array_push($polygon_coordinates,array($polygon_coordinates[0][0],$polygon_coordinates[0][1]));
+		pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
+		pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
+		pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
+		pontosdistobj.ytela.push(pontosdistobj.ytela[1]);
+		var $polygon_area = 0;
+		for (var $i=0;$i <= $array_length;$i++)
+		{
+			$polygon_area += ((pontosdistobj.xtela[$i] * pontosdistobj.ytela[$i+1])-(pontosdistobj.ytela[$i] * pontosdistobj.xtela[$i+1]));
+		}
+		$polygon_area = Math.abs($polygon_area) / 2;
+	}
+	else
+	{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
+	//g_areapixel precisa estar definida
+	return $polygon_area*g_areapixel;
+}
 /*
 Function: calculadistancia
 
@@ -3451,10 +3484,6 @@ function inseremarcaf(xi,yi,funcaoOnclick)
 	if (!$i("pontosins") )
 	{
 		var novoel = document.createElement("div");
-		if (arguments.length == 2)
-		{funcaoOnclick = "";}
-		if (funcaoOnclick != "")
-		{novoel.onclick = funcaoOnclick;}
 		novoel.id = "pontosins";
 		var i = novoel.style;
 		i.position = "absolute";
@@ -3472,6 +3501,10 @@ function inseremarcaf(xi,yi,funcaoOnclick)
 	i.width="4px";
 	i.height="4px";
 	var novoimg = document.createElement("img");
+	if (arguments.length == 2)
+	{funcaoOnclick = "";}
+	if (funcaoOnclick != "")
+	{novoimg.onclick = funcaoOnclick;}
 	novoimg.src=g_locaplic+"/imagens/dot1.gif";
 	with (novoimg.style){width="6px";height="6px";zIndex=2000;}
 	novoel.appendChild(novoimg);

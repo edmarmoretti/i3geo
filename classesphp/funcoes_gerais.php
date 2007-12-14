@@ -1609,6 +1609,39 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 Section: Outros
 */
 /*
+function: calculaAreaPixel
+
+Calcula a área em m2 de um pixel do mapa
+
+Parameters:
+
+map_file - arquivo do mapa
+
+celsize - tamanho do pixel em dd
+*/
+function calculaAreaPixel($map_file,$celsize)
+{
+	$mapa = ms_newMapObj($map_file);
+	$rect = $mapa->extent;
+	$projInObj = ms_newprojectionobj("proj=latlong");
+	$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+	$y = $rect->maxy - ((($rect->maxy) - ($rect->miny)) / 2);
+	$x = $rect->maxx - ((($rect->maxx) - ($rect->minx)) / 2);
+	$shape = ms_newShapeObj(MS_SHAPE_POLYGON);
+	$linha = ms_newLineObj();
+	$linha->addXY($x,$y);
+	$linha->addXY(($x+$celsize),$y);
+	$linha->addXY(($x+$celsize),($y-$celsize));
+	$linha->addXY($x,($y-$celsize));
+	$linha->addXY($x,$y);
+	$shape->add($linha);
+	$shape->project($projInObj,$projOutObj);
+	$s = $shape->towkt();
+	$shape = ms_shapeObjFromWkt($s);
+	$area = $shape->getArea();	
+	return $area;
+}
+/*
 function: pegaIPcliente
 
 Pega o IP do cliente

@@ -2155,6 +2155,18 @@ Section: Outros
 Opções de uso geral.
 */
 /*
+Property: areaPixel
+
+Calcula a área de um pixel da imagem.
+
+Parameter:
+
+celsize - tamanho de cada pixel em dd
+*/
+	case "areaPixel":
+		$cp->set_data(calculaAreaPixel($map_file,$celsize));
+	break;
+/*
 Property: listaEpsg
 
 Pega os códigos de projeção EPSG.

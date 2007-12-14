@@ -134,6 +134,7 @@ function moveArea()
 				d = d * 1;
 			}
 			var da = d + pontosdistobj.dist[n-1];
+			if(navn){desenhoRichdraw("resizePoligono",pontosdistobj.linhastemp,0);}
 			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
 		}
 	}
@@ -466,11 +467,17 @@ function cliqueSelecaoPoli()
 					var xs = pontos.xpt.toString(",");
 					var ys = pontos.ypt.toString(",");
 					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
+					var retorna = function()
+					{
+						objaguarde.fecha("ajaxredesenha",$trad("o1"));
+						remapaf();
+					};
+					objaguarde.abre("ajaxredesenha",$trad("o1"));
 					var cp = new cpaint();
 					//cp.set_debug(2)
 					cp.set_transfer_mode('POST');
 					cp.set_response_type("JSON");
-					cp.call(p,"selecaoPoli",remapaf,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
+					cp.call(p,"selecaoPoli",retorna,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
 				}
 				else
 				{alert("Sao necessarios pelo menos tres pontos");}
@@ -486,11 +493,17 @@ function cliqueSelecaoPoli()
 			var xs = pontos.xpt.toString(",");
 			var ys = pontos.ypt.toString(",");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
+			var retorna = function()
+			{
+				objaguarde.fecha("ajaxredesenha",$trad("o1"));
+				remapaf();
+			};
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_transfer_mode('POST');
 			cp.set_response_type("JSON");
-			cp.call(p,"selecaoPoli",remapaf,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
+			cp.call(p,"selecaoPoli",retorna,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
 		};
 		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
 	}
@@ -512,14 +525,35 @@ function cliqueArea()
 		pontosdistobj.ximg[n] = objposicaocursor.imgx;
 		pontosdistobj.yimg[n] = objposicaocursor.imgy;
 		pontosdistobj.dist[n] = 0;
+		//inclui a linha para ligar com o ponto inicial
+		if (n == 0)
+		{
+			try
+			{
+				if (navn)
+				{
+					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
+				}
+				else
+				{
+					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	
+				}				
+			}
+			catch(e){window.status="";}
+		}
+
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);}
+			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
 			else
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+		var m = calculaArea();
+		if($i("mostraarea_calculo"))
+		{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m+"<br><b>km2</b>= "+m/1000000+"<br><b>ha</b>= "+m/10000;}
+		
 		if (n > 3)
 		{
 			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
@@ -527,29 +561,18 @@ function cliqueArea()
 			//verifica se deve terminar
 			if (d < 3)
 			{
-				var pontos = pontosdistobj;
 				richdraw.fecha();
-				var n = pontos.xpt.length;
-				if (n > 2)
-				{
-					var retornaArea = function(retorno)
-					{
-						alert(retorno.data);
-					};
-					var xs = pontos.xpt.toString(",");
-					var ys = pontos.ypt.toString(",");
-					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=calcareapoli";
-					var cp = new cpaint();
-					//cp.set_debug(2)
-					cp.set_transfer_mode('POST');
-					cp.set_response_type("JSON");
-					cp.call(p,"calcareapoli",retornaArea,xs,ys);
-				}
-				else
-				{alert("Sao necessarios pelo menos tres pontos para o calculo");}
+				limpacontainerf();
+				mudaiconf("pan");
 			}
 		}
-		//inseremarcaf(objposicaocursor.telax,objposicaocursor.telay);
+		var temp = function()
+		{
+			richdraw.fecha();
+			limpacontainerf();
+			mudaiconf("pan");
+		};
+		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
 	}
 }
 /*
@@ -905,7 +928,7 @@ function analisaGeometrias()
 	wdocaf("500px","400px",g_locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
 }
 /*
-Function: area
+Function: 
 	
 Botão de medição de área.
 
@@ -914,15 +937,46 @@ A medida é feita quando o usuário clica no mapa com esta opção ativa
 */
 function area()
 {
+	if (!$i("mostraarea"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id = "mostraarea";
+		var ins = '<div class="hd" >&Aacute;rea aproximada</div>';
+		ins += '<div class="bd" style="text-align:left;padding:3px;" >';
+		ins += '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>';
+		ins+= '</div>';
+		novoel.innerHTML = ins;
+		novoel.style.borderColor="gray";
+		document.body.appendChild(novoel);
+	}
 	if (g_tipoacao != "area")
 	{
-		alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
-		mudaiconf("area");
-		g_tipoacao = "area";
-		pontosdistobj = new pontosdist();
-		criaContainerRichdraw();
-		richdraw.lineColor = "green";
-		richdraw.lineWidth = "2px";			
+		YAHOO.namespace("janelaDocaarea.xp");
+		YAHOO.janelaDocaarea.xp.panel = new YAHOO.widget.Panel("mostraarea", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+		YAHOO.janelaDocaarea.xp.panel.render();
+		YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxi+150,imagemyi);
+		var escondeWdocaarea = function()
+		{
+			richdraw.fecha();
+			YAHOO.util.Event.removeListener(YAHOO.janelaDocaarea.xp.panel.close, "click");
+			limpacontainerf();
+		};
+		YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", escondeWdocaarea);
+		var temp = function(retorno)
+		{
+			objaguarde.fecha("ajaxredesenha");
+			g_areapixel = retorno.data;
+			alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
+			mudaiconf("area");
+			g_tipoacao = "area";
+			pontosdistobj = new pontosdist();
+			criaContainerRichdraw();
+			richdraw.lineColor = "green";
+			richdraw.lineWidth = "2px";
+		};
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=areaPixel&celsize="+g_celula+"&g_sid="+g_sid;
+		cpObj.call(p,"areaPixel",temp);			
 	}
 	else
 	{
