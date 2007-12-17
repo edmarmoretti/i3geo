@@ -3747,9 +3747,14 @@ function ativaDragDrop()
                 		//var destDD = DDM.getDDById(id);
                 		if(DDM.getDDById(id).id != "lixeira")
                 		{
-                			var brd = document.createElement("br");
-                			brd.appendChild(this.getEl());
-                			destEl.appendChild(brd);			
+                 			if(navn)
+							{
+								 var brd = document.createElement("br");
+	                			 brd.appendChild(this.getEl());
+    	            			 destEl.appendChild(brd);
+							}
+							else
+							{destEl.appendChild(this.getEl());}		
                 		}
                 		//destDD.isEmpty = false;
                 		DDM.refreshCache();
