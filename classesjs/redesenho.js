@@ -266,8 +266,8 @@ function ajaxLegendaHTML(retorno)
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		var s = g_locaplic+"/imagens/solta.gif";
-		$i("legenda").innerHTML = "<img src="+s+" title='clique para liberar'/><div id='corpoLegi' >"+ retorno.data + "</div>";
-		g_legendaHTML = retorno.data;
+		$i("legenda").innerHTML = "<img src="+s+" title='clique para liberar'/><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
+		g_legendaHTML = retorno.data.legenda;
 		//
 		//verifica se a janela móvel existe e preenche com a legenda se for o caso
 		//

@@ -262,8 +262,8 @@ function ajaxLegendaHTML(retorno)
 {
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
-		$i("legenda").innerHTML = "<div id='corpoLegi' >"+ retorno.data + "</div>";
-		g_legendaHTML = retorno.data;
+		$i("legenda").innerHTML = "<div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
+		g_legendaHTML = retorno.data.legenda;
 	}
 }
 /*

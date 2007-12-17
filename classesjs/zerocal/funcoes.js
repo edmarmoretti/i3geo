@@ -1538,7 +1538,7 @@ function expandeTema(itemID)
 		{
 			if (retorno.data != undefined)
 			{
-				var retorno = retorno.data;
+				var retorno = retorno.data.legenda;
 				if (retorno[0])
 				{
 					if ((navn) && (!retorno[0].imagem))
