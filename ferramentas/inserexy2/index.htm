@@ -14,6 +14,11 @@
 		<div id=guia5 >Coordenadas</div>
 	</div>
 	<span id=geral style="left:0px;top:0px;">
+		<div id=projecao style='left:0px;display:none'>
+		    Proje&ccedil;&atilde;o:
+			<div onclick='verificaproj()' id="listaepsg" style="border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >
+			</div>
+		</div>
 		<div class=guiaobj id="guia1obj" style="display:block;left:1px" >
 		    <div id=opc1 style=left:0px;top:5px;text-align:left; >
 				Escolha o tema para inserir os pontos:
@@ -27,28 +32,46 @@
 			</div>
 		</div>
 		<div class=guiaobj id="guia2obj" style="display:none;;left:1px" >
-			<div id=opc2 style="display:block;top:5px;left:0px">
+			<div id=tipodig style="display:block;top:5px;left:0px">
+				Tipo de entrada:
+				<table class=lista >
+				<tr>
+					<td><input title='DMS' onclick='escolhedig("digmascara")' name=tipodig type=radio id='tipodigmascara' checked /></td>
+					<td>Máscara</td>
+					<td><input title='DMS' onclick='escolhedig("digcampo")' name=tipodig type=radio id='tipodigcampo' /></td>
+					<td>Campo &uacute;nico</td>
+				</tr>
+				</table><br>
+			</div>
+			<div id=digmascara style="display:block;top:10px;left:0px">
 				X:<input class=digitar id='xg' title='grau' type=text size=3 value='-00'/>
 				<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>
 				<input class=digitar id='xs' title='segundo' type=text size=3 value='0.0'/>
-				ou <input class=digitar id='longitude' title='dms' type=text size=16 value=''/><br>
-				Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
+				&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
 				<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>
-				<input class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/>
-				ou <input class=digitar id='latitude' title='dms' type=text size=16 value=''/><br><br>
+				<input class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/><br><br>
+			</div>
+			<div id=digcampo style="display:none;top:10px;left:0px">
+				X: <input class=digitar id='longitude' title='dms' type=text size=16 value=''/>
+				Y: <input class=digitar id='latitude' title='dms' type=text size=16 value=''/><br><br>
+			</div>
+			<div id=opc2 style="display:block;top:15px;left:0px">
 				<div style=top:0px;left:0px;text-align:left onclick='inserir()' >
 				<input id=botao2 type='button' size=14 value='Insere'  />
 				</div>
 			</div>
-			<div id=men2 style="display:block;position:relative;left:0px;top:10px">
-				Digite as coordenadas do ponto desejado e clique em "Insere" para incluir o ponto.
+
+			<div id=men2 style="display:block;position:relative;left:0px;top:20px">
+				Digite as coordenadas do ponto desejado e clique em "Insere".
 				<br>A coordenada X corresponde a longitude (leste-oeste) e a coordenada Y corresponde a latitude (norte-sul).
-				<br>Os valores devem sempre estar no formato Grau, Minuto e Segundo. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".
+				<br>Os valores devem sempre estar no formato Grau, Minuto e Segundo, sendo que no caso da opção de campo &uacute;nico, os valores devem estar separados por espaços. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia "Colar".
 				<br>O valor correspondente ao Grau deve receber o sinal de negativo("-") nos casos de longitude oeste (todo o Brasil est&aacute; nesse caso) e nos casos de latitude Sul.<br><br><br>
 			</div>
 		</div>
 		<div class=guiaobj id="guia3obj" style="display:none;left:1px;top:5px" >
+			
 			<div id=opc3 style="top:0px;left:0px;text-align:left;">
+				Cole ou digite a lista de coordenadas:
 				<input class=digitar id='colar' title='pares' type=text size=50 value=''/>
 			</div>
 			<div style=top:10px;left:0px;text-align:left onclick='colar()' >

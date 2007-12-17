@@ -26,20 +26,30 @@ ativaGuias("")
 mostraGuia("guia1")
 //eventos das guias
 $i("guia1").onclick = function()
-{mostraGuia("guia1");}
+{mostraGuia("guia1");$i("projecao").style.display="none";}
 $i("guia2").onclick = function()
-{mostraGuia("guia2");}
+{mostraGuia("guia2");$i("projecao").style.display="block";}
 $i("guia3").onclick = function()
-{mostraGuia("guia3");}
+{mostraGuia("guia3");$i("projecao").style.display="block";}
 $i("guia4").onclick = function()
-{mostraGuia("guia4");}
+{mostraGuia("guia4");$i("projecao").style.display="none";}
 $i("guia5").onclick = function()
-{mostraGuia("guia5");}
+{mostraGuia("guia5");$i("projecao").style.display="none";}
 
 window.parent.g_nomepin = ""
 mensagemAjuda("men1",$i("men1").innerHTML)
 mensagemAjuda("men2",$i("men2").innerHTML)
 mensagemAjuda("men3",$i("men3").innerHTML)
+
+radioepsg
+(
+	function(retorno)
+	{
+		$i("listaepsg").innerHTML = retorno.dados
+	},
+	"listaepsg"
+)
+
 //pega a lista de temas editaveis
 function montaComboLocal()
 {
@@ -190,40 +200,37 @@ function inserir()
 	aguarde("block")
 	var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g");
 	var regv = new RegExp(",", "g");
-	if (!$i("longitude").value == "")
+	if($i("tipodigcampo").checked)
 	{
-		var v = $i("longitude").value + " 0" + " 0"
-		v = v.replace(reg,"");
-		v = v.replace(regv,".");
-		v = v.split(" ");
-		$i("xg").value = v[0]
-		$i("xm").value = v[1]
-		$i("xs").value = v[2]
-		var xgv = v[0]
-		var xmv = v[1]
-		var xsv = v[2]
-		var xsv = xsv.replace(",",".");
+		if (!$i("longitude").value == "")
+		{
+			var v = $i("longitude").value + " 0" + " 0"
+			v = v.replace(reg,"");
+			v = v.replace(regv,".");
+			v = v.split(" ");
+			var xgv = v[0]
+			var xmv = v[1]
+			var xsv = v[2]
+			var xsv = xsv.replace(",",".");
+		}
+		if (!$i("latitude").value == "")
+		{
+			var vv = $i("latitude").value  + " 0" + " 0"
+			vv = vv.replace(reg,"");
+			vv = vv.replace(regv,".");
+			vv = vv.split(" ");
+			var ygv = vv[0]
+			var ymv = vv[1]
+			var ysv = vv[2]
+			var ysv = ysv.replace(regv,".");
+		}
 	}
-	else
-	{
+	if($i("tipodigmascara").checked)
+	{		
 		var xgv = $i("xg").value;
 		var xmv = $i("xm").value;
 		var xsv = $i("xs").value;
 		var xsv = xsv.replace(regv,".");
-	}
-	if (!$i("latitude").value == "")
-	{
-		var vv = $i("latitude").value  + " 0" + " 0"
-		vv = vv.replace(reg,"");
-		vv = vv.replace(regv,".");
-		vv = vv.split(" ");
-		var ygv = vv[0]
-		var ymv = vv[1]
-		var ysv = vv[2]
-		var ysv = ysv.replace(regv,".");
-	}
-	else
-	{
 		var ygv = $i("yg").value;
 		var ymv = $i("ym").value;
 		var ysv = $i("ys").value;
@@ -236,14 +243,42 @@ function inserir()
 	$i("resultado").innerHTML = ins
 	var fim = function()
 	{aguarde("none");window.parent.ajaxredesenha("");}
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+window.parent.objmapa.sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy;
+
+	var inputs = $i("listaepsg").getElementsByTagName("input")
+	var listai = new Array;
+	for (i=0;i<inputs.length; i++)
+	{
+		if (inputs[i].checked == true)
+		{var projecao = inputs[i].value}
+	}
+	var projecao = pegaProj()
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+window.parent.objmapa.sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy+"&projecao="+projecao;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"insereSHP",fim);
 	$i("longitude").value = ""
 	$i("latitude").value = ""
-	
+}
+function verificaproj()
+{
+	var p = pegaProj()
+	if (p != "")
+	{
+		escolhedig("digcampo")
+		$i("tipodigcampo").checked = true;
+	}
+}
+function pegaProj()
+{
+	var inputs = $i("listaepsg").getElementsByTagName("input")
+	var listai = new Array;
+	for (i=0;i<inputs.length; i++)
+	{
+		if (inputs[i].checked == true)
+		{var projecao = inputs[i].value}
+	}
+	return (projecao)
 }
 function colar()
 {
@@ -264,4 +299,10 @@ function colar()
 		ins = ins + "<div style='font-size:12px'>" + n[i] +" " + n[i+1] + "</div><br>"
 	}
 	$i("resultado").innerHTML = ins
+}
+function escolhedig(q)
+{
+	$i("digmascara").style.display="none";
+	$i("digcampo").style.display="none";
+	$i(q).style.display="block";
 }

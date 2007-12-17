@@ -133,8 +133,10 @@ Insere um ponto em um shape file no diretório local
 
 parameters:
 $xy - X e y do novo ponto, separados por espaços. Pode ser mais de um ponto.
+
+$projecao - código epsg da projeção das coordenadas
 */
-	function insereSHP($xy)
+	function insereSHP($xy,$projecao)
 	{
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$xy = explode(" ",$xy);
@@ -158,6 +160,12 @@ $xy - X e y do novo ponto, separados por espaços. Pode ser mais de um ponto.
 			{
 				$poPoint = ms_newpointobj();
 				$poPoint->setXY($xy[$i],$xy[$i+1]);
+				if($projecao != "")
+				{
+					$projOutObj = ms_newprojectionobj("proj=latlong");
+					$projInObj = ms_newprojectionobj("init=epsg:".$projecao);
+					$poPoint->project($projInObj, $projOutObj);
+				}
 				$shapefileObj->addpoint($poPoint);
 			}
 			$shapefileObj->free();

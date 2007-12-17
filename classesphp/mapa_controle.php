@@ -1210,7 +1210,8 @@ Include:
 	case "insereSHP":
 		include("classe_shp.php");
 		$m = new SHP($map_file,$tema);
-		$m->insereSHP($xy);
+		if (!isset($projecao)){$projecao = "";}
+		$m->insereSHP($xy,$projecao);
 		redesenhaMapa();
 	break;
 /*
