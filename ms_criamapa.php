@@ -443,7 +443,18 @@ function ligaTemas()
 			{continue;}
 			if(@$mapn->getLayerByName($l))
 			{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_DEFAULT);}
+			$grupos = $mapn->getLayersIndexByGroup($l);
+			if(count($grupos > 0))
+			{
+				for ($i = 0;$i < count($grupos);$i++)
+				{
+					$layern = $mapn->getLayer($i);
+					if($layern->group == $l)
+					{$layern->set("status",MS_DEFAULT);}
+				}
+			}
 		}
+		
 	}
 }
 /*
