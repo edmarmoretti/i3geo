@@ -438,10 +438,15 @@ $valor - Novo valor da transparência
 */
 	function mudaTransparencia($valor)
 	{
+        $v = explode(" ",ms_GetVersion());
+        $v = explode(".",$v[2]);
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
-			$ll->set("transparency",$valor);
+			if($v == 4)
+			{$ll->set("transparency",$valor);}
+			else
+			{$ll->set("opacity",$valor);}
 		}
 		return("ok");
 	}
