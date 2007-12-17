@@ -96,6 +96,24 @@ if (isset($map) && $map != "")
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
 		}
+		if (isset($postgis_mapa))
+		{
+			if ($postgis_mapa != "")
+			{
+				$numlayers = $mapa->numlayers;
+				for ($i=0;$i < $numlayers;$i++)
+				{
+					$layer = $mapa->getlayer($i);
+					if ($layer->connectiontype == MS_POSTGIS)
+					{
+						if ($layer->connection == " ")
+						{
+							$layer->set("connection",$postgis_mapa);
+						}
+					}
+				}
+			}
+		}
 		$objImagem = $mapa->draw();
 		$nomer = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomer);

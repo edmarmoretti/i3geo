@@ -75,7 +75,6 @@ if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}
 if (isset($_GET["caminho"]))
 {$caminho = $_GET["caminho"];}
-
 /*
 Note: Carrega as extensões, geralmente necessário nas instalações windows
 */
@@ -112,6 +111,12 @@ $srid_area_ = $srid_area;
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
+//
+//se houver string de conexão para substituição
+//o modo cgi não irá funcionar
+//
+if($postgis_mapa != "")
+{$utilizacgi = "nao";echo "<br>O mapa não poderá utilizar o modo CGI.</br>";}
 if(!isset($perfil)){$perfil="";}
 $perfil_ = $perfil;
 $utilizacgi_ = $utilizacgi;

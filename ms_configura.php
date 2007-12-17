@@ -135,8 +135,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	os mapfiles do diretório temas que tiverem CONNECTION " ", terão a string de conexão substituída por esse valor
 	se não for desejado a substituição, deixe essa variável em branco
+	Se vc especificar essa variável, o mapa será forçado a recusar o modo CGI.
 	*/
-	$postgis_mapa = "";
+	$postgis_mapa = ""; //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
 	/*
 	Variable: $menutemas
 	
