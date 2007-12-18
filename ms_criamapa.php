@@ -60,6 +60,7 @@ Section: Fluxo do código
 /*
 Note: Verifica se o debug deve ser ativado, checando a variável debug
 */
+$tempo = microtime(1);
 if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else
@@ -365,7 +366,7 @@ ms_ResetErrorList();
 //
 //se vc quiser parar o script aqui, para verificar erros, descomente a linha abaixo
 //
-//exit;
+//exit
 /*
 Note: Adapta os dados de cada layer.
 
@@ -400,6 +401,8 @@ Essa função pode ser comentada sem prejuízos ao funcionamento do I3Geo.
 Só opera corretamente se a rotina de registro tiver sido configurada corretamente.
 */
 require_once($caminho."ms_registraip.php");
+
+echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo));
 /*
 Note: Gera a url para abrir o mapa
 
@@ -565,7 +568,7 @@ function mostraAguarde()
 	{
 		echo "<html><head>";
 		echo '<div id="aguarde">';
-		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...criando o mapa</p>';
+		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...carregando o mapa</p>';
 		echo "<center><img src='".$caminho."imagens/i3geo1.jpg'><br><br>";
 		echo "<center><img src='".$caminho."imagens/mapserv.png'><br><br>";
 		echo "<center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a>";

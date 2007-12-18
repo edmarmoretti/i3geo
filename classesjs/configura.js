@@ -1187,7 +1187,7 @@ url - função que será executada
 */
 oMenuData = {
 	"ajudas": [ 
-	{ text: $trad("u1"), url: "javascript:g_hlpt = 'sobrei3geo';ajudaf('abre')" },
+	{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 	{ text: $trad("u2"), url: "javascript:abreDoc()" },
 	{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
 	{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
