@@ -59,6 +59,11 @@ input
 	cursor:pointer;
 	background-color:white;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br><br>
@@ -81,7 +86,7 @@ if ($tipo == 'executa')
 	foreach($r["geonames"] as $linha)
 	{
 		$lugares = $linha["lugares"];
-		echo $linha["tema"]."<br>";
+		echo "<h1>".$linha["tema"]."</h1>";
 		$layer = $linha["layer"];
 		foreach ($lugares as $lugar)
 		{

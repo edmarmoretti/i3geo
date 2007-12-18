@@ -32,8 +32,10 @@ Free Software Foundation, Inc., no endereço
 
 include_once("../classesphp/pega_variaveis.php");
 $caminho = "../";
+if(!isset($layers))
 $layers = $temasa;
 $executa = "iniciamobile";
+if(!isset($tipo)){$tipo = "inicia";}
 include("../ms_criamapa.php");
 /*
 Function: iniciamobile
@@ -48,11 +50,11 @@ A variável tmpfname é definida no processo de criação do mapa, feito pelo ms_cri
 */
 function iniciamobile()
 {
-	global $wmobile,$hmobile,$tmpfname;
+	global $wmobile,$hmobile,$tmpfname,$tipo;
 	$mapa = ms_newMapObj($tmpfname);
 	$mapa->setsize($wmobile,$hmobile);
 	$mapa->save($tmpfname);
-	$tipo = "inicia";
+	//$tipo = "inicia";
 	include("mobile.php");
 	exit;
 }	

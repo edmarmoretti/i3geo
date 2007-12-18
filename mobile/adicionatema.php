@@ -55,6 +55,11 @@ input
 	cursor:pointer;
 	background-color:white;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <form id='f' action='adicionatema.php?' method='get'>
@@ -70,7 +75,7 @@ if ($tipo == "listatemas")
 {
 	$m = new Menutemas($tmpfname,"","nao");
 	$r = $m->pegaListaDeTemas($grupo,$subgrupo,"");
-	echo "Escolha o tema:<br><br>";
+	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)
 	{
 		echo "<input type='radio' onclick='adicionatema(\"".$l["tid"]."\")' />".$l["nome"]."<br>";
@@ -89,7 +94,7 @@ if ($tipo == "adicionar")
 {
 	$m = new Menutemas($tmpfname,"",$locsistemas);
 	$r = $m->pegaListaDeGrupos("","nao");
-	echo "Escolha o sub-grupo:<br><br>";
+	echo "<h1>Escolha o sub-grupo:</h1>";
 	for($rid=0;$rid<count($r);$rid++)
 	{
 		$g = $r[$rid];

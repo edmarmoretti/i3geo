@@ -107,6 +107,11 @@ if ($tipo=="oeste")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
+if ($tipo=="localizar")
+{
+	include("localizar.php");
+	exit;
+}
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
@@ -129,6 +134,7 @@ else
 	<input type='button' value='L' onclick='leste()' />
 	<select id='op' name='op' onchange='op(this.value)'>
 		<option value=''>Op&ccedil;&otilde;es</option>
+		<option value='reiniciar'>reiniciar</option>
 		<option value='ligar'>ligar</option>
 		<option value='desligar'>desligar</option>
 		<option value='legenda'>legenda</option>
@@ -192,6 +198,8 @@ function op(valor)
 	{document.getElementById('f').action = "localizar.php?"}
 	if (valor=="adicionar")
 	{document.getElementById('f').action = "adicionatema.php?"}
+	if (valor=="reiniciar")
+	{document.getElementById('f').action = "index.php?"}
 	document.getElementById('f').submit();
 }
 </script>

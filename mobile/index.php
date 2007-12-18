@@ -16,6 +16,11 @@ input
 	color:blue;
 	cursor:pointer;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <img src='../imagens/i3geo1.jpg' /><br>
@@ -54,7 +59,6 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-
 include_once("../classesphp/pega_variaveis.php");
 require_once("../classesphp/funcoes_gerais.php");
 include("../classesphp/classe_menutemas.php");
@@ -62,15 +66,20 @@ include("../classesphp/carrega_ext.php");
 include("../ms_configura.php");
 $m = new Menutemas($tmpfname,"");
 $mapas = $m->pegaListaDeMapas($locmapas);
+echo "<h1>Escolha um dos mapas:</h1>";
 foreach($mapas["mapas"] as $obj)
 {
 	echo "<input type=radio onclick='ligar(\"".$obj["TEMAS"]."\")' />".$obj["NOME"]."<br><br>";
 }
+echo "<h1>ou uma das op&ccedil;&otilde;es:</h1>";
+echo "<input type=radio onclick='localizar()' />Procurar lugar<br><br>";
 ?>
 <form id=f action='inicia.php' method='get' >
 <input id='wmobile' type=hidden name='wmobile' value='' />
 <input id='hmobile' type=hidden name='hmobile' value='' />
-<input type=hidden id=temasa name=temasa value='' />
+<input type='hidden' id='temasa' name='temasa' value='' />
+<input type='hidden' id='layers' name='layers' value='' />
+<input type='hidden' id='tipo' name='tipo' value='inicia' />
 </form>
 <hr>
 <p>O i3Geo &eacute; um software livre desenvolvido pelo Minist&eacute;rio do Meio Ambiente. Veja:
@@ -95,6 +104,19 @@ temas - lista de códigos de temas
 function ligar(temas)
 {
 	document.getElementById('temasa').value = temas;
+	document.getElementById('f').submit();
+}
+/*
+Function: localizar
+
+Inicia a busca por um lugar
+
+*/
+function localizar(temas)
+{
+	document.getElementById('temasa').value = "estadosl";
+	document.getElementById('layers').value = "baserasterwms";
+	document.getElementById('tipo').value = "localizar";
 	document.getElementById('f').submit();
 }
 </script>

@@ -52,6 +52,11 @@ input
 	cursor:pointer;
 	background-color:white;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <form id='f' action='mobile.php?' method='get'>

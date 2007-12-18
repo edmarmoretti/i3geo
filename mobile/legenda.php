@@ -53,6 +53,11 @@ input
 	cursor:pointer;
 	background-color:white;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <form id='f' action='mobile.php?' method='get'>
@@ -65,7 +70,7 @@ input
 $m = new Legenda($tmpfname,$locaplic,"",$template);
 $r = $m->criaLegenda();
 if(!$r){$r = "erro. Legenda nao disponivel";}
-$r = mb_convert_encoding($r,"ISO-8859-1","UTF-8");
+$r = mb_convert_encoding($r["legenda"],"ISO-8859-1","UTF-8");
 echo $r;
 ?>
 </body>

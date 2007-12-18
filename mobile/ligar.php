@@ -53,6 +53,11 @@ input
 	cursor:pointer;
 	background-color:white;
 }
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
 </style>
 <body>
 <form id='f' action='ligar.php?' method='get'>
@@ -72,7 +77,7 @@ $par = $m->parametrosTemas();
 $par = mb_convert_encoding($par,"ISO-8859-1","UTF-8");
 $par = explode("'",$par);
 $par = explode(";",$par[1]);
-echo "Escolha o tema que vc quer ver no mapa:<br><br>";
+echo "<h1>Escolha o tema que vc quer ver no mapa:</h1>";
 $existe = false;
 foreach($par as $p)
 {
