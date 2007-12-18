@@ -58,6 +58,7 @@ Free Software Foundation, Inc., no endereço
 include_once("../classesphp/pega_variaveis.php");
 require_once("../classesphp/funcoes_gerais.php");
 include("../classesphp/classe_menutemas.php");
+include("../classesphp/carrega_ext.php");
 include("../ms_configura.php");
 $m = new Menutemas($tmpfname,"");
 $mapas = $m->pegaListaDeMapas($locmapas);
@@ -76,8 +77,12 @@ foreach($mapas["mapas"] as $obj)
 <a href='http://mapas.mma.gov.br' >http://mapas.mma.gov.br</a></p>
 </body>
 <script>
-document.getElementById('wmobile').value = screen.availWidth;
-document.getElementById('hmobile').value = screen.availHeight;
+var w = screen.availWidth;
+var h = screen.availHeight;
+if (w > 600){var w = w/2;}
+if (h > 600){var h = h/2;}
+document.getElementById('wmobile').value = w;
+document.getElementById('hmobile').value = h;
 /*
 Function: ligar
 
