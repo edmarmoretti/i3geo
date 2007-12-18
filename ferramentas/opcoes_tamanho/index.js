@@ -52,6 +52,18 @@ function executaf()
 		doc.getElementById("mst").style.width = (l * 1) + calc + pos;
 		doc.getElementById("contemImg").style.height= a+pos
 		doc.getElementById("contemImg").style.width= l+pos
+		
+		for(var g=0;g<12;g++)
+		{
+			if (window.parent.document.getElementById("guia"+g))
+			{
+				window.parent.document.getElementById("guia"+g+"obj").style.height = window.parent.objmapa.h;
+			}
+		}
+		
+		
+		
+		
 		window.parent.calcposf()
 		window.parent.objaguarde.abre("ajaxredesenha","Aguarde...")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=mudatamanho&altura="+a+"&largura="+l
