@@ -662,25 +662,22 @@ postgis_mapa - string de conexão com o banco
 */
 function restauraCon($map_file,$postgis_mapa)
 {
-	if (isset($postgis_mapa))
+	if (isset($postgis_mapa) && $postgis_mapa != "")
 	{
-		if ($postgis_mapa != "")
+		$objMap = ms_newMapObj($map_file);
+		$numlayers = $objMap->numlayers;
+		for ($i=0;$i < $numlayers;$i++)
 		{
-			$objMap = ms_newMapObj($map_file);
-			$numlayers = $objMap->numlayers;
-			for ($i=0;$i < $numlayers;$i++)
+			$layer = $objMap->getlayer($i);
+			if ($layer->connectiontype == MS_POSTGIS)
 			{
-				$layer = $objMap->getlayer($i);
-				if ($layer->connectiontype == MS_POSTGIS)
+				if ($layer->connection == $postgis_mapa)
 				{
-					if ($layer->connection == $postgis_mapa)
-					{
-						$layer->set("connection"," ");
-					}
+					$layer->set("connection"," ");
 				}
 			}
-			$objMap->save($map_file);
 		}
+		$objMap->save($map_file);
 	}
 }
 /*

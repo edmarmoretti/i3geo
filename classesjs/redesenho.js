@@ -429,150 +429,152 @@ retorno - string no formato "var variavel='valor'".
 */
 function ajaxIniciaParametros(retorno)
 {
-		if ($i("openlayers"))
+	var tempo = "";
+	if ($i("openlayers"))
+	{
+		$i("openlayers").innerHTML = "";
+		var b = objmapa.OL.getExtent();
+		criaOL(Math.random()+Math.random()+Math.random()+Math.random());
+		objmapa.OL.zoomToExtent(b);
+	}
+	//
+	//limpa os objetos tips da tela
+	//
+	if(objmapa.objtips.length > 0)
+	{
+		var ot = objmapa.objtips.length-1;
+		if (ot >= 0)
 		{
-			$i("openlayers").innerHTML = "";
-			var b = objmapa.OL.getExtent();
-			criaOL(Math.random()+Math.random()+Math.random()+Math.random());
-			objmapa.OL.zoomToExtent(b);
-		}
-		//
-		//limpa os objetos tips da tela
-		//
-		if(objmapa.objtips.length > 0)
-		{
-			var ot = objmapa.objtips.length-1;
-			if (ot >= 0)
+			do
 			{
-				do
-				{
-					if (objmapa.objtips[ot])
-					{	
-						objmapa.objtips[ot].innerHTML = "";
-						objmapa.objtips[ot].style.display="none";
-					}
+				if (objmapa.objtips[ot])
+				{	
+					objmapa.objtips[ot].innerHTML = "";
+					objmapa.objtips[ot].style.display="none";
 				}
-				while(ot--)
 			}
+			while(ot--)
 		}
-		objmapa.objtips = new Array();
-		//
-		//limpa os pontos digitados no calculo de distancia
-		//
-		limpacontainerf();
-		//
-		//mostra a figura que segue o mouse
-		//
-		if($i("imgh"))
-		{$i("imgh").style.display="block";}
-		if(retorno.data)
-		{var retorno = retorno.data;}
-		if ((retorno != "erro") && (retorno != undefined))
+	}
+	objmapa.objtips = new Array();
+	//
+	//limpa os pontos digitados no calculo de distancia
+	//
+	limpacontainerf();
+	//
+	//mostra a figura que segue o mouse
+	//
+	if($i("imgh"))
+	{$i("imgh").style.display="block";}
+	if(retorno.data)
+	{var retorno = retorno.data;}
+	if ((retorno != "erro") && (retorno != undefined))
+	{
+		if ($i("imgL"))
 		{
-			if ($i("imgL"))
-			{
-				var letras=["N","S","L","O"];
-				for (var l=0;l<4; l++)
-				{$i("img"+letras[l]).src="";}
-			}
-			temas = "";
-			mapscale = "";
-			mapexten = "";
-			if (retorno != "")
-			{eval(retorno);}
-			if($i("img"))
-			{
-				if (!$i("imgtemp"))
-				{
-					var ndiv = document.createElement("div");
-					ndiv.id = "imgtemp";
-					ndiv.style.position = "absolute";
-					ndiv.style.border = "1px solid blue";
-					document.getElementById("corpoMapa").appendChild(ndiv);
-				}
-				if(g_tipoacao == "pan")
-				{
-					$i("imgtemp").style.left = parseInt($i("img").style.left);
-					$i("imgtemp").style.top = parseInt($i("img").style.top);
-					$i("imgtemp").style.width = objmapa.w;
-					$i("imgtemp").style.height = objmapa.h;
-					$i("imgtemp").style.display="block";
-					$i("imgtemp").style.backgroundImage = 'url("'+$i("img").src+'")';
-				}		
-				$i("img").style.width = 0;
-				$i("img").style.height = 0;
-				$i("img").src = "";
-				$i("img").style.left = 0;
-				$i("img").style.top = 0;
-				ajaxCorpoMapa(retorno);
-			}
-			//
-			//atualiza a legenda
-			//
-			objmapa.atualizaLegendaHTML();
-			//
-			//verifica se precisa mudar a lista de temas
-			//
-			objmapa.atualizaListaTemas(temas);
-			//
-			//atualiza o indicador de compatibilidade de escala se houve um processo de navegacao
-			//
-			objmapa.atualizaFarol(mapscale);
-			//
-			//atualiza mapa de referencia
-			//
-			objmapa.atualizaReferencia(mapexten);
-			//
-			//atualliza os valores do objmapa
-			//
-			objmapa.scale = mapscale;
-			g_operacao = "";
-			objmapa.temas = temas;
-			objmapa.cellsize = g_celula;
-			objmapa.extent = mapexten;
-			objmapa.temas = temas;
-			//
-			//arredonda o valor da escala numerica e mostra no mapa se for o caso
-			//
-			if ($i("escalanum"))
-			{$i("escalanum").value=parseInt(mapscale);}
-			//
-			//atualiza a janela com o valor da extensão geográfica do mapa se for o caso
-			//
-			if ($i("mensagemt"))
-			{$i("mensagemt").value = mapexten;}
-			//
-			//grava a extensao geográfica nova no quadro de animação
-			//
-			gravaQuadro("extensao",mapexten);
-			//
-			//fecha as janelas de aguarde
-			//
-			objaguarde.fecha("ajaxiniciaParametros");
-			objaguarde.fecha("aguardedoc");
-			objaguarde.fecha("ajaxredesenha");
-			if (g_lenteaberta == "sim")
-			{
-				objaguarde.abre("ajaxabrelente",$trad("o4"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
-				var cp = new cpaint();
-				//cp.set_debug(2);
-				cp.set_response_type("JSON");
-				cp.call(p,"lente",ajaxabrelente);
-			}
-			//
-			//atualiza as ferramentas de consulta que dependem da extensão geográfica
-			//
-			objmapa.verificaNavegaMapa;
-			//
-			//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
-			//
-			if (g_entorno == "sim")
-			{
-				geraURLentorno();
-				ajustaEntorno();
-			}
+			var letras=["N","S","L","O"];
+			for (var l=0;l<4; l++)
+			{$i("img"+letras[l]).src="";}
 		}
+		temas = "";
+		mapscale = "";
+		mapexten = "";
+		if (retorno != "")
+		{eval(retorno);}
+		if($i("img"))
+		{
+			if (!$i("imgtemp"))
+			{
+				var ndiv = document.createElement("div");
+				ndiv.id = "imgtemp";
+				ndiv.style.position = "absolute";
+				ndiv.style.border = "1px solid blue";
+				document.getElementById("corpoMapa").appendChild(ndiv);
+			}
+			if(g_tipoacao == "pan")
+			{
+				$i("imgtemp").style.left = parseInt($i("img").style.left);
+				$i("imgtemp").style.top = parseInt($i("img").style.top);
+				$i("imgtemp").style.width = objmapa.w;
+				$i("imgtemp").style.height = objmapa.h;
+				$i("imgtemp").style.display="block";
+				$i("imgtemp").style.backgroundImage = 'url("'+$i("img").src+'")';
+			}		
+			$i("img").style.width = 0;
+			$i("img").style.height = 0;
+			$i("img").src = "";
+			$i("img").style.left = 0;
+			$i("img").style.top = 0;
+			ajaxCorpoMapa(retorno);
+		}
+		//
+		//atualiza a legenda
+		//
+		objmapa.atualizaLegendaHTML();
+		//
+		//verifica se precisa mudar a lista de temas
+		//
+		objmapa.atualizaListaTemas(temas);
+		//
+		//atualiza o indicador de compatibilidade de escala se houve um processo de navegacao
+		//
+		objmapa.atualizaFarol(mapscale);
+		//
+		//atualiza mapa de referencia
+		//
+		objmapa.atualizaReferencia(mapexten);
+		//
+		//atualliza os valores do objmapa
+		//
+		objmapa.scale = mapscale;
+		g_operacao = "";
+		objmapa.temas = temas;
+		objmapa.cellsize = g_celula;
+		objmapa.extent = mapexten;
+		objmapa.temas = temas;
+		//
+		//arredonda o valor da escala numerica e mostra no mapa se for o caso
+		//
+		if ($i("escalanum"))
+		{$i("escalanum").value=parseInt(mapscale);}
+		//
+		//atualiza a janela com o valor da extensão geográfica do mapa se for o caso
+		//
+		if ($i("mensagemt"))
+		{$i("mensagemt").value = mapexten;}
+		//
+		//grava a extensao geográfica nova no quadro de animação
+		//
+		gravaQuadro("extensao",mapexten);
+		//
+		//fecha as janelas de aguarde
+		//
+		objaguarde.fecha("ajaxiniciaParametros");
+		objaguarde.fecha("aguardedoc");
+		objaguarde.fecha("ajaxredesenha");
+		if (g_lenteaberta == "sim")
+		{
+			objaguarde.abre("ajaxabrelente",$trad("o4"));
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
+			var cp = new cpaint();
+			//cp.set_debug(2);
+			cp.set_response_type("JSON");
+			cp.call(p,"lente",ajaxabrelente);
+		}
+		//
+		//atualiza as ferramentas de consulta que dependem da extensão geográfica
+		//
+		objmapa.verificaNavegaMapa;
+		//
+		//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
+		//
+		if (g_entorno == "sim")
+		{
+			geraURLentorno();
+			ajustaEntorno();
+		}
+	}
+	mostradicasf("","Tempo de redesenho em segundos: "+tempo,"");
 }
 /*
 Function: ajaxabrelente

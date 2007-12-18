@@ -85,7 +85,7 @@ Essa string é recuperada no lado do javascript com eval().
 */
 function iniciaMapa()
 {
-	global $navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
+	global $tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -166,10 +166,8 @@ function iniciaMapa()
 	{$nomer = $locmapserv."?map=".$map_file."&mode=map";}
 	else
 	{$nomer = ($imgo->imageurl).basename($nomer);}
-	
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
-	
 	$res = "var temas='".$temas."';var mapexten= '".$ext."';var mapscale=".$m->mapa->scale.";var mapres=".$m->mapa->resolution.";g_celula=".$m->mapa->cellsize.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 	$res .= ";var refimagem='';var refwidth=0;objmapa.refheight=".$irefH.";var refpath='';var refurl=''";
 	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';g_locsistemas='".$locsistemas."';g_locidentifica='".$locidentifica."'";
@@ -194,7 +192,7 @@ function iniciaMapa()
 	if (file_exists($locaplic."/pacotes/geoip"))
 	{$geoip = "sim";}
 	$res .= ";objmapa.geoip='".$geoip."';";
-	
+	$res .= "var tempo =".(microtime(1) - $tempo).";";
 	if (function_exists("mb_convert_encoding"))
 	{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
 	//

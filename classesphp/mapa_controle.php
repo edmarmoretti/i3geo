@@ -86,6 +86,7 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
+$tempo = microtime(1);
 include_once("pega_variaveis.php");
 //
 //inicializa a sessão
@@ -158,7 +159,7 @@ copiaSeguranca($map_file);
 //
 substituiCon($map_file,$postgis_mapa);
 
-set_time_limit(240);
+//set_time_limit(240);
 
 //
 //faz a busca da função que deve ser executada
@@ -2243,7 +2244,7 @@ Include:
 */
 function redesenhaMapa()
 {
-	global $map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
+	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
@@ -2264,6 +2265,6 @@ function redesenhaMapa()
 	if (($par == "") || ($imagem == ""))
 	{$cp->set_data("erro");}
 	else
-	{$cp->set_data($imagem.";".$par);}
+	{$cp->set_data($imagem.";".$par.";var tempo=".(microtime(1) - $tempo));}
 }
 ?>
