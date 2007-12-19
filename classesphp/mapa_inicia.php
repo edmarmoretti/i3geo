@@ -128,7 +128,9 @@ function iniciaMapa()
 				}
 			}
 		}
-	}			
+	}
+	if($utilizacgi == "sim")
+	{$m->ligaDesligaTemas("","todos");}		
 	$imgo = $m->mapa->draw();
 	$e = $m->mapa->extent;
 	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
