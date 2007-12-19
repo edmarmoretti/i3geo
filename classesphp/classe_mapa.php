@@ -754,10 +754,15 @@ Parameters:
 
 $ligar - lista separada por vírgula dos temas que serão ligados.
 
-$desligar - lista separada por vírgula dos temas que serão desligados.
+$desligar - lista separada por vírgula dos temas que serão desligados. Se for igual a todos, todos os layers serão desligados.
 */
 	function ligaDesligaTemas($ligar,$desligar)
 	{
+		if($desligar == "todos")
+		{
+			$desligar = $this->mapa->getalllayernames;
+			$desligar = implode(",",$desligar);	
+		}
 		if ($ligar != "")
 		{
 			$listal = explode(",",$ligar);
