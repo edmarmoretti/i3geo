@@ -1,0 +1,36 @@
+<html>
+<style>
+body
+{
+	font:14pt arial,helvetica,clean,sans-serif;
+	color:rgb(100,100,100);
+}
+p
+{
+	font:12pt arial,helvetica,clean,sans-serif;
+	color:black;
+}
+input
+{
+	font:14pt arial,helvetica,clean,sans-serif;
+	color:black;
+	cursor:pointer;
+	background-color:white;
+}
+h1
+{
+	font:16pt arial,helvetica,clean,sans-serif;
+	color:brown;
+}
+</style>
+<body>
+<center>
+<p>Para acessar o endere&ccedil;o do i3geo via c&oacute;digo de barras, leia a imagem abaixo com seu celular:</p>
+<br><br><br>
+<img src='' id=rcode >
+<script>
+var endereco = 'http://qrcode.kaywa.com/img.php?s=5&d='+"http://"+window.location.host+"/i3geo/mobile"
+document.getElementById("rcode").src = endereco
+</script>
+</body>
+</html>
