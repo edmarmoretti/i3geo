@@ -668,7 +668,7 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic)
 	if (count($shapesdestino)==0){return "erro";}
 	$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
 	// cria o dbf
-	$def[] = array("dist_m","N","10");
+	$def[] = array("dist_m","N","10","2");
 	$db = xbase_create($nomeshp.".dbf", $def);
 	//acrescenta os pontos no novo shapefile
 	$dbname = $nomeshp.".dbf";
