@@ -65,6 +65,7 @@ include("../classesphp/classe_menutemas.php");
 include("../classesphp/carrega_ext.php");
 include("../ms_configura.php");
 if (!isset($temasa)){$temasa = "";}
+if (!isset($layers)){$layers = $temasa;}
 $m = new Menutemas($tmpfname,"");
 $mapas = $m->pegaListaDeMapas($locmapas);
 echo "<h1>Escolha um dos mapas:</h1>";
@@ -79,7 +80,7 @@ echo "<input type=radio onclick='localizar()' />Procurar lugar<br><br>";
 <input id='wmobile' type=hidden name='wmobile' value='' />
 <input id='hmobile' type=hidden name='hmobile' value='' />
 <input type='hidden' id='temasa' name='temasa' value='<?php echo $temasa;?>' />
-<input type='hidden' id='layers' name='layers' value='<?php echo $temasa;?>' />
+<input type='hidden' id='layers' name='layers' value='<?php echo $layers;?>' />
 <input type='hidden' id='tipo' name='tipo' value='inicia' />
 </form>
 <hr>
