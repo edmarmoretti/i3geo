@@ -24,31 +24,35 @@ parametrosURL()
 ins = ""
 tema = ""
 
-comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados})
+comboTemasPt("temasOrigem",function(retorno){comboTemasOrigem = retorno.dados},"","sim")
+comboTemasPt("temasDestino",function(retorno){comboTemasDestino = retorno.dados})
 t0()
 
 function t0()
 {
-	ins = "<p>O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa."
-	ins += "<p>Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado."
+	ins = "<p>O cálculo de dist&acirc;ncias é feito de um ponto em rela&ccedil;&atilde;o aos mais pr&oacute;ximos."
+	ins += "<p>O ponto origem, deve estar selecionado em um dos temas existentes no mapa."
+	ins += "<p>Os pontos de destino s&atilde;o selecionados em fun&ccedil;&atilde;o de uma dist&acirc;ncia fixa do ponto origem."
 	mostraOpcao("","t1()",ins,"t0")
 }
 function t1()
 {
-	ins = "Tema que ser&aacute; utilizado:<br><br>"
-	ins += comboTemas
+	ins = "Tema que cont&eacute;m o ponto de origem:<br>"
+	ins += comboTemasOrigem
+	ins += "<br><br>Tema que cont&eacute;m o(s) ponto(s) de destino:<br>"
+	ins += comboTemasDestino
 	mostraOpcao("t0()","t2()",ins,"t1")
 }
 function t2()
 {
-	ins = "Dist&acirc;ncia do entorno em metros"
+	ins = "Dist&acirc;ncia do entorno do ponto de origem em metros"
 	ins += "<br><br><input class=digitar id='d' type=text size=10 value='0'/>"
 	mostraOpcao("t1()","t3()",ins,"t2")
 }
 function t3()
 {
-	ins = "O tema com o entorno ser&aacute; adicionado ao mapa atual."
-	ins += "<br><br><div onclick='criarbuffer()' style='text-align:left;left:0px'><input id=botao1 size=18 class=executar type='buttom' value='Criar entorno' /></div>"
+	ins = "O tema com o entorno e as dist&acirc;ncias ser&atilde;o adicionados ao mapa atual."
+	ins += "<br><br><div onclick='calcula()' style='text-align:left;left:0px'><input id=botao1 size=18 class=executar type='buttom' value='Calcular' /></div>"
 	mostraOpcao("t2()","",ins,"t3")
 	YAHOO.example.init = function ()
 	{
@@ -57,12 +61,13 @@ function t3()
     	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 	}()	
 }
-function criarbuffer()
+function calcula()
 {
 	$i("fim").innerHTML ="";
 	var distancia = $i("d").value
-	tema = $i("temasComSel").value
-	if (distancia*1 > 0)
+	var temaOrigem = $i("temasOrigem").value
+	var temaDestino = $i("temasDestino").value
+	if ((distancia*1 > 0) && (temaOrigem != "") && (temaDestino != ""))
 	{
 		aguarde("block")
 		var fim = function(retorno)
@@ -73,11 +78,13 @@ function criarbuffer()
 			else
 			{window.parent.ajaxredesenha("");}
 		}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("JSON");
 		//cp.set_persistent_connection(true);
-		cp.call(p,"criaBuffer",fim);
+		cp.call(p,"distanciaptpt",fim);
 	}
+	else
+	{$i("fim").innerHTML = "Algum par&acirc;metro n&atilde;o foi preenchido.";}
 }
