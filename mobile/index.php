@@ -64,6 +64,7 @@ require_once("../classesphp/funcoes_gerais.php");
 include("../classesphp/classe_menutemas.php");
 include("../classesphp/carrega_ext.php");
 include("../ms_configura.php");
+if (!isset($temasa)){$temasa = "";}
 $m = new Menutemas($tmpfname,"");
 $mapas = $m->pegaListaDeMapas($locmapas);
 echo "<h1>Escolha um dos mapas:</h1>";
@@ -77,8 +78,8 @@ echo "<input type=radio onclick='localizar()' />Procurar lugar<br><br>";
 <form id=f action='inicia.php' method='get' >
 <input id='wmobile' type=hidden name='wmobile' value='' />
 <input id='hmobile' type=hidden name='hmobile' value='' />
-<input type='hidden' id='temasa' name='temasa' value='' />
-<input type='hidden' id='layers' name='layers' value='' />
+<input type='hidden' id='temasa' name='temasa' value='<?php echo $temasa;?>' />
+<input type='hidden' id='layers' name='layers' value='<?php echo $temasa;?>' />
 <input type='hidden' id='tipo' name='tipo' value='inicia' />
 </form>
 <hr>
@@ -92,6 +93,8 @@ if (w > 600){var w = w/2;}
 if (h > 600){var h = h/2;}
 document.getElementById('wmobile').value = w;
 document.getElementById('hmobile').value = h;
+if ('<?php echo $temasa;?>' != "")
+{document.getElementById('f').submit();}
 /*
 Function: ligar
 
