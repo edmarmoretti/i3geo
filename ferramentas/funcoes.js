@@ -446,10 +446,15 @@ function comboTemasLocais(id,funcao,onde)
 	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemaslocais","listaTemasLocais",monta);
 }
 //lista temas do tipo ponto
-function comboTemasPt(id,funcao,onde)
+function comboTemasPt(id,funcao,onde,selecao)
 {
 	if (arguments.length == 3)
-	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";
+	{
+		$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";
+		var selecao = "nao";
+	}
+	if (arguments.length == 2)
+	{var selecao = "nao";}
 	var monta = function(retorno)
 	{
 		if (retorno.data != undefined)
@@ -473,7 +478,7 @@ function comboTemasPt(id,funcao,onde)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemasTipo&tipo=ponto","listaTemasTipo",monta);
+	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemasTipo&tipo=ponto&selecao="+selecao,"listaTemasTipo",monta);
 }
 //lista temas do tipo poligonal
 function comboTemasPol(id,funcao,onde)

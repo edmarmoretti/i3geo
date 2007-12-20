@@ -584,7 +584,8 @@ Include:
 	case "listatemasTipo":
 		include("classe_mapa.php");
 		$m = new Mapa($map_file);
-		$resultado = $m->listaTemasTipo($tipo);
+		if(!isset($selecao)){$selecao = "nao";}
+		$resultado = $m->listaTemasTipo($tipo,$selecao);
 		$cp->set_data($resultado);
 	break;
 /*
@@ -1070,6 +1071,26 @@ Include:
 		include("classe_analise.php");
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->criaBuffer($distancia,$locaplic));
+		$m->salva();
+		//limpa selecao
+		if (file_exists($map_file."qy"))
+		{unlink ($map_file."qy");}
+	break;
+/*
+Property - distanciaptpt
+
+Calcula a distancia entre um ponto de origem e os pontos em um tema.
+
+São considerados apenas os pontos próximos definidos por um buffer.
+
+Include:
+<classe_analise.php>
+*/	
+	case "distanciaptpt":
+		include("classe_analise.php");
+		$m = new Analise($map_file,$temaorigem);
+		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
+		$cp->set_data($m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic));
 		$m->salva();
 	break;
 /*

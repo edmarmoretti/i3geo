@@ -597,15 +597,137 @@ $locaplic - Localização do I3geo.
 		return(implode(" ",$nomesitens));
 	}
 /*
-function - criaBuffer
+function: distanciaptpt
+
+Calcula a distancia entre um ponto de origem e os pontos em um tema.
+
+São considerados apenas os pontos dentro de um tema de overlay.
+
+parameters:
+
+temaorigem - nome do layer com o ponto de origem
+
+temadestino - nome od tema com os pontos de destino
+
+temaoverlay - tema que será utilizado para selecionar o tema de destino
+
+locapli - endereço da aplicação i3geo
+*/
+function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic)
+{
+	//error_reporting(E_ALL);
+	//para manipular dbf
+	require_once "../pacotes/phpxbase/api_conversion.php";
+	//define o nome do novo shapefile que será criado
+	$nomefinal = nomeRandomico();
+	$nomeshp = $this->diretorio."/".$nomefinal;
+	if (file_exists(($this->arquivo)."qy"))
+	{$this->mapa->loadquery(($this->arquivo)."qy");}
+	else
+	{return "errox";}
+	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
+	$layerdestino = $this->mapa->getlayerbyname($temadestino);
+	$layeroverlay = $this->mapa->getlayerbyname($temaoverlay);
+	if (@$layerorigem->open() == MS_SUCCESS)
+	{
+		$layerorigem->open();
+		$res_count = $layerorigem->getNumresults();
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $layerorigem->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);
+		}
+		$layerorigem->close();
+	}
+	else
+	{return "erro";}
+	$layeroverlay->queryByrect($this->mapa->extent);
+	$layerdestino->queryByFeatures($layeroverlay->index);
+	if (@$layerdestino->open() == MS_SUCCESS)
+	{
+		$layerdestino->open();
+		$res_count = $layerdestino->getNumresults();
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $layerdestino->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
+		}
+		$layerdestino->close();
+	}
+	else
+	{return "erro";}
+	$rect = $this->mapa->extent;
+	$projInObj = $layerorigem->getProjection();
+	if ($projInObj == "")
+	{$projInObj = ms_newprojectionobj("proj=latlong");}
+	$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+	$origemdestino = array();
+	if (count($shapesorigem)==0){return "erro";}
+	if (count($shapesdestino)==0){return "erro";}
+	$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
+	// cria o dbf
+	$def[] = array("dist_m","N","10");
+	$db = xbase_create($nomeshp.".dbf", $def);
+	//acrescenta os pontos no novo shapefile
+	$dbname = $nomeshp.".dbf";
+	foreach ($shapesorigem as $sorigem)
+	{
+		foreach ($shapesdestino as $sdestino)
+		{
+			$linha = ms_newLineObj();
+			$linha->add($sorigem->getCentroid());
+			$linha->add($sdestino->getCentroid());
+			$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
+			$ShapeObj->add($linha);
+			$novoshpf->addShape($ShapeObj);
+			$ShapeObj->project($projInObj, $projOutObj);
+			$distancia = array();
+			$distancia[] = $ShapeObj->getLength();
+			xbase_add_record($db,$distancia);
+			$linha->free();
+			$ShapeObj->free();
+		}
+	}
+	$novoshpf->free();
+	xbase_close($db);
+	//adiciona no mapa atual o novo tema
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
+	else
+	{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
+	$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Distancias (".$nomefinal.")"),$metaClasse="SIM");
+	$novolayer->set("data",$nomeshp.".shp");
+	$novolayer->setmetadata("DOWNLOAD","SIM");
+	$novolayer->set("template","none.htm");
+	$classe = $novolayer->getclass(0);
+	$estilo = $classe->getstyle(0);
+	$estilo->set("symbolname","linha");
+	$estilo->set("size",4);
+	$cor = $estilo->color;
+	$cor->setrgb(255,210,0);
+	//limpa selecao
+	//if (file_exists(($this->arquivo)."qy"))
+	//{unlink (($this->arquivo)."qy");}
+	return($nomeshp.".shp");	
+}
+/*
+function: criaBuffer
 
 Gera entorno (buffer) nos elementos selecionados de um tema.
 
 Salva o mapa acrescentando um novo layer com o buffer.
 
+Parameters:
+
 $distancia - Distância em km.
 
 $locaplic - Localização do I3geo.
+
+return:
+
+nome do layer criado com o buffer.
 */
 	function criaBuffer($distancia,$locaplic)
 	{
@@ -632,7 +754,7 @@ $locaplic - Localização do I3geo.
 				//calcula a extensão geografica
 				$rect = $shape->bounds;
 				$projInObj = ms_newprojectionobj("proj=latlong");
-				$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+				$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
 				$poPoint = ms_newpointobj();
 				$poPoint->setXY($rect->minx, $rect->miny);
 				$dd1 = ms_newpointobj();
@@ -680,10 +802,16 @@ $locaplic - Localização do I3geo.
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
-		//limpa selecao
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
-		return("ok");
+		$classe = $novolayer->getclass(0);
+		$estilo = $classe->getstyle(0);
+		$estilo->set("symbolname","p4");
+		$estilo->set("size",5);		
+		$cor = $estilo->color;
+		$cor->setrgb(255,0,0);
+		$coro = $estilo->outlinecolor;
+		$coro->setrgb(255,0,0);
+
+		return($novolayer->name);
 	}
 /*
 function - criaCentroide

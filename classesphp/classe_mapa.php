@@ -401,8 +401,12 @@ tema
 nome
 
 */
-	function listaTemasTipo($tipo)
+	function listaTemasTipo($tipo,$selecao="nao")
 	{
+		if (($selecao=="sim") && (file_exists(($this->arquivo)."qy")))
+		{
+			$this->mapa->loadquery(($this->arquivo)."qy");
+		}
 		foreach($this->layers as $layer)
 		{
 			if (($layer->isvisible()) && ($layer->getmetadata("ESCONDIDO") == ""))
@@ -420,7 +424,14 @@ nome
 		{
 			if (!(array_search(($layer->type),$tipos) === FALSE))
 			{
-				$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+				if($selecao == "sim")
+				{
+					$res_count = $layer->getNumresults();
+					if ($res_count > 0)
+					{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}					
+				}
+				else
+				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
 			}
 		}
 		return $final;
