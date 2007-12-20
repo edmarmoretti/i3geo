@@ -2376,10 +2376,11 @@ function processaTemas(retorno)
 				{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
 				var tid = retorno.data.temas[st].tid;
 				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+				var qrcode = "&nbsp;<a href='"+g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid+"' target='blank' >qrcode</a>";	
 				if(navm)
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+"</span>";
 				else
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+"</span>";
 				mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
 				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 				else

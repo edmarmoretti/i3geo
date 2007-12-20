@@ -223,6 +223,12 @@ pt: "Centr&oacute;ide",
 en:"Centroid",
 es:""
 }],
+"u11a": [
+{
+pt: "Dist&acirc;ncia entre pontos",
+en:"Point distance",
+es:""
+}],
 "u12": [
 {
 pt: "N pontos em poligono",
@@ -1200,6 +1206,7 @@ oMenuData = {
 	{ text: $trad("u9"), url: "javascript:gradeHex()" },
 	{ text: $trad("u10"), url: "javascript:buffer()" },
 	{ text: $trad("u11"), url: "javascript:centroide()" },
+	{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
 	{ text: $trad("u12"), url: "javascript:nptPol()" },
 	{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
 	{ text: $trad("u14"), url: "javascript:pontosdistri()" }

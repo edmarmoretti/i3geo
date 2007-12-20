@@ -908,6 +908,13 @@ Gera um buffer em elementos selecionados
 function buffer()
 {wdocaf("400px","180px",g_locaplic+"/ferramentas/buffer/index.htm","","","Entorno");}
 /*
+Function: distanciaptpt
+
+Calcula a distância entre um ponto e outros pontos próximos
+*/
+function distanciaptpt()
+{wdocaf("400px","180px",g_locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");}
+/*
 Function: centroide
 
 Gera um tema com os centroides dos elementos selecionados
