@@ -103,6 +103,7 @@ $ys - lista de coordenadas y separadas por virgula
 */
 	function selecaoPorPoligono($tipo,$xs,$ys)
 	{
+		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -158,7 +159,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 */
 	function selecaoTema($temao,$tipo)
 	{
-		set_time_limit(2000);
+		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -601,6 +602,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 */
 	function selecaoEXT($tipo)
 	{
+		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
@@ -648,6 +650,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 */
 	function selecaoBOX($tipo,$ext)
 	{
+		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")

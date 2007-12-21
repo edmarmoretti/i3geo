@@ -124,6 +124,7 @@ Include:
 	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl)
 	{
 		$layerPt = $this->layer;
+		$layerPt->set("tolerance",0);
 		$layerPt->set("template","none.htm");
 		$nomefinal = nomeRandomico();
 		$nomearq = $this->diretorio."/".$nomefinal;
@@ -484,6 +485,7 @@ $locaplic - Localização do I3geo.
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
+		$layerPt->set("tolerance",0);
 		//define o nome do novo shapefile que será criado
 		$nomefinal = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomefinal;
@@ -642,6 +644,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic)
 	}
 	else
 	{return "erro";}
+	$layeroverlay->set("tolerance",0);
+	$layerdestino->set("tolerance",0);
 	$layeroverlay->queryByrect($this->mapa->extent);
 	$layerdestino->queryByFeatures($layeroverlay->index);
 	if (@$layerdestino->open() == MS_SUCCESS)
@@ -1298,6 +1302,7 @@ $locaplic - Localização do I3geo
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
+		$layerPt->set("tolerance",0);
 		$layerPo = $this->mapa->getlayerbyname($temaPo);
 		$layerPo->set("template","none.htm");
 		//define o nome do novo shapefile que será criado
