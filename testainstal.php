@@ -115,7 +115,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {$mapa = ms_newMapObj($temasaplic."/geral1windows.map");}
 else
 {$mapa = ms_newMapObj($temasaplic."/geral1.map");}
-echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...verifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
+echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...\nverifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
 echo "<p>Nome da imagem gerada: $nome </p>";
@@ -124,12 +124,23 @@ $nome = ($imgo->imageurl).basename($nome);
 echo "<p><img src=$nome /></p>";
 
 echo " \n";
+$error = "";
+ms_ResetErrorList();
 echo "Carregando o map_file geral1... e acrescentando o estadosl.map \n";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {$maptemp = ms_newMapObj($temasaplic."/estadoslwindows.map");}
 else
 {$maptemp = ms_newMapObj($temasaplic."/estadosl.map");}
-echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...verifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
+echo "Um problema bastante comum é o não reconhecimento do diretório ms_tmp pelo Apache. \nO diretório ms_tmp é utilizado pelo Mapserver e pelo i3geo para armazenar dados temporários. \nÉ nesse diretório que ficam as imagens do mapa.\n";
+echo "Quando o Apache não consegue utilizar esse diretório, a imagem não será mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa estão sendo criadas no ms_tmp após rodar o testainstal.php).\n";
+echo "Para solucionar esse problema, vc pode criar um link simbólico (nos sistemas linux),\n no mesmo local onde está instalado o i3geo, apontando para o local \nfísico onde está o ms_tmp.\n";
+echo "No wiki do portal do software público vc poderá encontrar mais detalhes sobre isso.\n";
 
 for($i=0;$i<($maptemp->numlayers);$i++)
 {
