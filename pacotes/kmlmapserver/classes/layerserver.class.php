@@ -831,7 +831,40 @@ class LayerServer {
         if(!file_exists($this->map) && is_readable($this->map)){
             $this->set_error('Cannot read mapfile '. $this->map);
         } else {
+			$maptemp = ms_newMapObj("../../temas/".$this->map.".map");
+			$temp = $this->map;
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$this->map = "../../aplicmap/geral1windows.map";}
+			else
+			{$this->map = "../../aplicmap/geral1.map";}
             $this->map_object = ms_newMapObj($this->map);
+            $this->map_object->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+            for ($i=0;$i < ($this->map_object->numlayers);$i++)
+			{
+				$l = $this->map_object->getlayer($i);
+				$l->set("status",MS_DELETE);
+			}
+			for ($i=0;$i < ($maptemp->numlayers);$i++)
+			{
+				$l = $maptemp->getlayer($i);
+				$l->set("status",MS_DEFAULT);
+				$l->set("type",MS_LAYER_RASTER);
+				/*
+				$numclasses = $l->numclasses;
+				for ($c=0; $c < $numclasses; $c++)
+				{
+					$classe = $l->getClass($c);
+					$e = $classe->getstyle(0);
+					$cor[$c] = $e->color;
+					if ($cor[$c] != "")
+					{
+						$ocor[$c] = $e->outlinecolor;
+						$ocor[$c]->setrgb($cor[$c]->red,$cor[$c]->green,$cor[$c]->blue);
+					}
+				}
+				*/
+				ms_newLayerObj($this->map_object, $l);
+			}
             if(!$this->map_object){
                 $this->set_error('Cannot load mapfile '. $this->map);
             }
