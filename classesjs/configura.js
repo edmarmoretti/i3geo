@@ -835,6 +835,18 @@ var temp = pCookie("i3geolingua");
 if(temp != undefined)
 {g_linguagem = temp;}
 /*
+Variable: g_qrcode
+
+Indica se o código de barras do tipo QRcode deve ser mostrado.
+
+O link para abertura do qrcode é mostrado na caixa de mensagens e na árvore de adição de temas.
+ 
+Parameters:
+
+sim|nao
+*/
+g_qrcode = "sim";
+/*
 Variable: g_posicaoLenteX
 
 Posicionamento da lente de aumento em x.

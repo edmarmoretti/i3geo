@@ -703,6 +703,8 @@ objeto - objeto sobre o qual o mouse está sobreposto.
 
 dica - dica que aparece no mapa.
 
+hlpt - depreciado
+
 */
 function mostradicasf(objeto,dica,hlpt)
 {
@@ -2376,7 +2378,9 @@ function processaTemas(retorno)
 				{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
 				var tid = retorno.data.temas[st].tid;
 				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-				var qrcode = "&nbsp;<a href='"+g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid+"' target='blank' >qrcode</a>";	
+				var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
+				var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
+				if (g_qrcode == "nao"){qrcode = "";}
 				if(navm)
 				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+"</span>";
 				else
