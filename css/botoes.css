@@ -156,5 +156,13 @@
 	background-repeat: no-repeat;
 	background-position: 0px -450px;
 }
+#ondeestou
+{
+	background-image:URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -475px;
+	width:20px;
+	height:10px;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

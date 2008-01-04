@@ -191,7 +191,7 @@ function iniciaMapa()
 	//verifica se o pacote geoip está instalado ou não
 	//
 	$geoip = "nao";
-	if (file_exists($locaplic."/pacotes/geoip"))
+	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 	{$geoip = "sim";}
 	$res .= ";objmapa.geoip='".$geoip."';";
 	$res .= "var tempo =".(microtime(1) - $tempo).";";

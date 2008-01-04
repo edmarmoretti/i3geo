@@ -706,7 +706,8 @@ function Mapa(e,m)
 				}
 				autoRedesenho("ativa");
 				if ($i("escalanum")){$i("escalanum").value = objmapa.scale;}
-				if (objmapa.geoip == "nao"){$i(id).style.display="none";}
+				if ((objmapa.geoip == "nao") && ($i("ondeestou")))
+				{$i("ondeestou").style.display="none";}
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
