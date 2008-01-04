@@ -39,16 +39,11 @@ Timestamp: Última atualização mon day
 
 
 Link: I3Geo no MMA  (http://mapas.mma.gov.br/i3geo)
-File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
 File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
+File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
+File: Variáveis de Configuração da Interface configura.js.  (no auto-title, classesjs\configura.js)
 
 Group: Programas especiais  {
-
-   File: Ajuda OGC  (ogc.htm)
-   File: Aplicativo para acesso a web services  (wscliente.htm)
-   File: Aplicativo para download de dados  (datadownload.htm)
-   File: Aplicativo para geração de links  (geradordelinks.htm)
-   File: Gerador automático de web services OGC  (ogc.php)
 
    Group: Mobile  {
 
@@ -65,6 +60,11 @@ Group: Programas especiais  {
       File: Redirecionador HTML do i3geo mobile  (mobile\index.html)
       }  # Group: Mobile
 
+   File: Ajuda OGC  (ogc.htm)
+   File: Aplicativo para acesso a web services  (wscliente.htm)
+   File: Aplicativo para download de dados  (datadownload.htm)
+   File: Aplicativo para geração de links  (geradordelinks.htm)
+   File: Gerador automático de web services OGC  (ogc.php)
    File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
    File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
    File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
@@ -96,7 +96,6 @@ Group: Programas frontend - diretório classesjs  {
    File: Administração de mapfiles  (classesjs\i3geoadmin.js)
    File: Carrega os scripts do i3geo.  (classesjs\i3geo.js)
    File: Cliente de web service  (classesjs\wscliente.js)
-   File: Configuração da interface.  (classesjs\configura.js)
    File: DataDownLoad  (classesjs\datadownload.js)
    File: Ferramentas  (classesjs\ferramentas.js)
    File: Ferramentas da interface de administração  (classesjs\ferramentasadmin.js)

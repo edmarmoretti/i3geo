@@ -248,7 +248,6 @@ MAP
       STYLE
         ANGLE 360
         COLOR 200 50 0
-        OPACITY 100
         OUTLINECOLOR 0 0 0
         SYMBOL 0
       END

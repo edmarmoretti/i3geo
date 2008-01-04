@@ -1,5 +1,5 @@
 /*
-Title: Configuração da interface.
+Title: Variáveis de Configuração da interface configura.js.
 
 Definição das variáveis de configuração da interface.
 

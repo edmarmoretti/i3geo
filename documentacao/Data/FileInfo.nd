@@ -1,122 +1,123 @@
 Development Release 02-10-2007 (1.35 base)
 PHP
-C:\ms4w\Apache\htdocs\i3geo\classesjs\menususpenso_compacto.js	1197293598	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\menususpenso_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\menususpenso_compacto.js	1198628492	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\menususpenso_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\minima.htm	1196779487	1	Mínima
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\configura_compacto.js	1197228681	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\configura_compacto.js
-C:\ms4w\Apache\htdocs\i3geo\geradordelinks.htm	1196779880	1	Aplicativo para geração de links
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\configura_compacto.js	1197897685	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\configura_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\geradordelinks.htm	1198078541	1	Aplicativo para geração de links
 C:\ms4w\Apache\htdocs\i3geo\index.htm	1196779885	1	Redirecionador para o ms_criamapa.php com extensão HTM
 C:\ms4w\Apache\htdocs\i3geo\classesphp\wscliente.php	1196779764	1	WS Cliente
-C:\ms4w\Apache\htdocs\i3geo\mobile\adicionatema.php	1196782417	1	Adiciona um tema ao mapa
-C:\ms4w\Apache\htdocs\i3geo\mobile\legenda.php	1196782493	1	Mostra a legenda do mapa
-C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho_compacto.js	1197293594	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho_compacto.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js	1197293601	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\mobile\adicionatema.php	1197975707	1	Adiciona um tema ao mapa
+C:\ms4w\Apache\htdocs\i3geo\mobile\legenda.php	1197975444	1	Mostra a legenda do mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho_compacto.js	1198628489	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js	1198628494	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\datadownload.htm	1196779875	1	Aplicativo para download de dados
-C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js	1197286364	1	Redesenho
+C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js	1198002591	1	Redesenho
 C:\ms4w\Apache\htdocs\i3geo\zerocal\index.htm	1196780793	1	Redirecionador HTM para o ms_criamapa.php com interface zerocal
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\iniciamma.js	1196695018	1	Inicialização do i3geo.
+C:\ms4w\Apache\htdocs\i3geo\mobile\qrcode.htm	1198161199	0	C:\ms4w\Apache\htdocs\i3geo\mobile\qrcode.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\temp.js	1193194673	1	Funções gerais
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes.js	1196335041	1	Funções gerais
-C:\ms4w\Apache\htdocs\i3geo\mobile\desligar.php	1196782455	1	Desliga um tema que está visível no mapa
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_legenda.php	1197289757	1	Legenda
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes.js	1197897446	1	Funções gerais
+C:\ms4w\Apache\htdocs\i3geo\mobile\desligar.php	1197975339	1	Desliga um tema que está visível no mapa
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_legenda.php	1197483650	1	Legenda
 C:\ms4w\Apache\htdocs\i3geo\ogc.htm	1196779910	1	Ajuda OGC
-C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas_compacto.js	1197293595	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas_compacto.js	1198628490	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\menuadmin.js	1189445596	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\menuadmin.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\iniciamma_compacto.js	1197228682	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\iniciamma_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\iniciamma_compacto.js	1197897685	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\iniciamma_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\wscliente.js	1189445597	1	Cliente de web service
-C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1197292881	1	Variáveis de inicialização ms_configura.php
+C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1198964640	1	Variáveis de inicialização ms_configura.php
 C:\ms4w\Apache\htdocs\i3geo\wscliente.htm	1196779932	1	Aplicativo para acesso a web services
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\menususpenso_compacto.js	1196253013	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\menususpenso_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\readme.txt	1170194866	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\readme.txt
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho_compacto.js	1197228681	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho_compacto.js	1197897685	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\zerocal\index.html	1196780814	1	Redirecionador HTML para o ms_criamapa.php com interface zerocal
-C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1197036563	1	Inicializa o I3Geo via URL ms_criamapa.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentas_compacto.js	1197228682	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentas_compacto.js
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php	1197293601	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php
+C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1198887969	1	Inicializa o I3Geo via URL ms_criamapa.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentas_compacto.js	1197897686	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentas_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php	1198628494	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\graficopizza.php	1196779735	1	Pizza
-C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma_compacto.js	1197293594	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma_compacto.js	1198628489	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesphp\graficos.php	1196779740	1	Gráficos R
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_imagem.php	1196779685	1	Imagem
 C:\ms4w\Apache\htdocs\i3geo\variaveis_sessao.txt	1189445726	0	C:\ms4w\Apache\htdocs\i3geo\variaveis_sessao.txt
 C:\ms4w\Apache\htdocs\i3geo\exemplos\mashup.htm	1196779785	1	Mashup
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples.php	1190753981	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples.php
 C:\ms4w\Apache\htdocs\i3geo\menutemas\servicoswms.php	1189445598	0	C:\ms4w\Apache\htdocs\i3geo\menutemas\servicoswms.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes.js	1197293564	1	Funções gerais
+C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes.js	1198628299	1	Funções gerais
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples2.htm	1196779533	1	Simples 2
 C:\ms4w\Apache\htdocs\i3geo\classesjs\ajax_compacto.js	1189445596	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\ajax_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.htm	1196954291	1	Redirecionador HTM do i3geo mobile
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda.htm	1191731230	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda.htm
 C:\ms4w\Apache\htdocs\i3geo\classesphp\carrega_ext.php	1196779650	1	A - Extensões PHP
-C:\ms4w\Apache\htdocs\i3geo\testamapfile.php	1196779927	1	Testa um mapfile.
+C:\ms4w\Apache\htdocs\i3geo\testamapfile.php	1197922336	1	Testa um mapfile.
 C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\class.JavaScriptPacker.php	1165505680	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\class.JavaScriptPacker.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\admin.htm	1190753919	1	Administração de mapfiles (experimental)
 C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geoadmin.js	1196779604	1	Administração de mapfiles
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_selecao.php	1196779710	1	Seleção
-C:\ms4w\Apache\htdocs\i3geo\classesphp\funcoes_gerais.php	1197033195	1	A - Funções compartilhadas
-C:\ms4w\Apache\htdocs\i3geo\mobile\ligar.php	1196782510	1	Liga um tema que não está visível no mapa
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_selecao.php	1198238119	1	Seleção
+C:\ms4w\Apache\htdocs\i3geo\classesphp\funcoes_gerais.php	1198000743	1	A - Funções compartilhadas
+C:\ms4w\Apache\htdocs\i3geo\mobile\ligar.php	1197975295	1	Liga um tema que não está visível no mapa
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\compactajs.php	1197228663	1	Compacta js e css para a interface zerocal
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_alteraclasse.php	1196779659	1	Classes e estilos
-C:\ms4w\Apache\htdocs\i3geo\mobile\mobile.php	1196782575	1	Interface do mapa
+C:\ms4w\Apache\htdocs\i3geo\mobile\mobile.php	1197976769	1	Interface do mapa
 C:\ms4w\Apache\htdocs\i3geo\admin.htm	1189445726	0	C:\ms4w\Apache\htdocs\i3geo\admin.htm
-C:\ms4w\Apache\htdocs\i3geo\mobile\index.php	1196782120	1	i3geo mobile
-C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1197133462	1	DataDownLoad
-C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma.js	1197286331	1	Inicialização do i3geo.
+C:\ms4w\Apache\htdocs\i3geo\mobile\index.php	1198168283	1	i3geo mobile
+C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1197303391	1	DataDownLoad
+C:\ms4w\Apache\htdocs\i3geo\classesjs\iniciamma.js	1198001972	1	Inicialização do i3geo.
 C:\ms4w\Apache\htdocs\i3geo\classesjs\compactajs.php	1197232045	1	A - Compacta js e css
-C:\ms4w\Apache\htdocs\i3geo\mobile\localizar.php	1196782547	1	Localiza um lugar no mapa.
-C:\ms4w\Apache\htdocs\i3geo\aplicmap\geral.htm	1197286722	1	Interface normal
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_analise.php	1196883887	1	Análise
+C:\ms4w\Apache\htdocs\i3geo\mobile\localizar.php	1197975617	1	Localiza um lugar no mapa.
+C:\ms4w\Apache\htdocs\i3geo\aplicmap\geral.htm	1198628541	1	Interface normal
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_analise.php	1198237952	1	Análise
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_estatistica.php	1196779679	1	Estatística
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geonaocompacto.js	1196335551	1	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geonaocompacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentas.js	1196265050	1	Ferramentas
 C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo.js	1197227361	1	Carrega os scripts do i3geo.
 C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php	1189445726	0	C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\configura_compacto.js	1197293594	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\configura_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\configura_compacto.js	1198628488	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\configura_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\example-inline.php	1165505302	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\example-inline.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js	1197228684	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js	1197897687	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\menuadmin.js	1189445596	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\menuadmin.js
 C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentasadmin.js	1189445596	1	Ferramentas da interface de administração
 C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geonaocompacto.js	1196247107	1	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geonaocompacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_escala.php	1196779674	1	Escala
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho.js	1196273527	1	Redesenho
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\redesenho.js	1197897471	1	Redesenho
 C:\ms4w\Apache\htdocs\i3geo\classesjs\wscliente.js	1196779624	1	Cliente de web service
 C:\ms4w\Apache\htdocs\i3geo\classesjs\performance.htm	1189445596	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\performance.htm
-C:\ms4w\Apache\htdocs\i3geo\classesjs\configura.js	1197209403	1	Configuração da interface.
+C:\ms4w\Apache\htdocs\i3geo\classesjs\configura.js	1198871269	1	Variáveis de Configuração da interface configura.js.
 C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\class.JavaScriptPacker.php4	1170194008	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\class.JavaScriptPacker.php4
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\configura.js	1196337317	1	Configuração da interface.
 C:\ms4w\Apache\htdocs\i3geo\exemplos\executafuncao.php	1189445597	0	C:\ms4w\Apache\htdocs\i3geo\exemplos\executafuncao.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_vermultilayer.php	1196779726	1	Multilayer
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geoadmin.js	1189445596	1	Administração de mapfiles
-C:\ms4w\Apache\htdocs\i3geo\mobile\escala.php	1196782473	1	Mostra a escala
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_shp.php	1196779716	1	Shape
-C:\ms4w\Apache\htdocs\i3geo\testainstal.php	1197029391	1	Testa a instalação do I3Geo.
+C:\ms4w\Apache\htdocs\i3geo\mobile\escala.php	1197975234	1	Mostra a escala
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_shp.php	1197916233	1	Shape
+C:\ms4w\Apache\htdocs\i3geo\testainstal.php	1198629803	1	Testa a instalação do I3Geo.
 C:\ms4w\Apache\htdocs\i3geo\index.html	1196779890	1	Redirecionador para o ms_criamapa.php com extensão HTML
-C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm	1189445586	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm
-C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes_compacto.js	1197293597	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm	1197480271	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm
+C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes_compacto.js	1198628492	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\funcoes_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.html	1196954344	1	Redirecionador HTML do i3geo mobile
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\datadownload.js	1189445597	1	DataDownLoad
-C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas.js	1197285265	1	Ferramentas
+C:\ms4w\Apache\htdocs\i3geo\classesjs\ferramentas.js	1198090765	1	Ferramentas
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\zerocal.htm	1196779543	1	Interface zerocal
 C:\ms4w\Apache\htdocs\i3geo\ogc.php	1196779916	1	Gerador automático de web services OGC
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\ferramentasadmin.js	1189445596	1	Ferramentas da interface de administração
 C:\ms4w\Apache\htdocs\i3geo\ms_registraip.php	1197036272	1	Registra o IP do usuário para criação do mapa de visitantes.
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_temas.php	1196779720	1	Temas
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_temas.php	1197897057	1	Temas
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\openlayers.htm	1196779510	1	OpenLayers (experimental)
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_navegacao.php	1196779705	1	Navegação
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js.php	1197228684	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js.php	1197897687	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo_tudo_compacto.js.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples1.htm	1196779524	1	Simples 1
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_menutemas.php	1196779700	1	Menu
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1197030376	1	A - Controle das requisições em Ajax
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1198171720	1	A - Controle das requisições em Ajax
 C:\ms4w\Apache\htdocs\i3geo\classesjs\temp.js	1193194673	1	Funções gerais
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atributos.php	1196779669	1	Atributos
-C:\ms4w\Apache\htdocs\i3geo\classesphp\wmswfs.php	1196779759	1	OGC
-C:\ms4w\Apache\htdocs\i3geo\mobile\inicia.php	1196782251	1	Abre o mapa
-C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes_compacto.js	1197228684	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atributos.php	1197465083	1	Atributos
+C:\ms4w\Apache\htdocs\i3geo\classesphp\wmswfs.php	1197378451	1	OGC
+C:\ms4w\Apache\htdocs\i3geo\mobile\inicia.php	1197977255	1	Abre o mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes_compacto.js	1197897687	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\funcoes_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\classesphp\class.palette.php	1196779655	1	Degradê
 C:\ms4w\Apache\htdocs\i3geo\classesphp\admin.php	1196779644	1	Administração
 C:\ms4w\Apache\htdocs\i3geo\classesjs\zerocal\i3geo.js	1197228624	1	Carrega os scripts do i3geo.
 C:\ms4w\Apache\htdocs\i3geo\classesjs\menususpenso.js	1197133680	1	Menu suspenso
 C:\ms4w\Apache\htdocs\i3geo\classesphp\pega_variaveis.php	1196779754	1	A - Carrega as variáveis passadas como POST ou GET
 C:\ms4w\Apache\htdocs\i3geo\licenca.txt	1193248613	0	C:\ms4w\Apache\htdocs\i3geo\licenca.txt
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1196779749	1	A - Inicializa o mapa
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1198082755	1	A - Inicializa o mapa
 C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\example-file.php	1165507558	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\packer\example-file.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_toponimia.php	1193102331	1	Toponímia
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1196952382	1	Mapa
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1198089746	1	Mapa
