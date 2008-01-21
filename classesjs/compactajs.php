@@ -34,9 +34,9 @@ File: i3geo/classesjs/compactajs.php
 //
 //compacta os arquivos do richdraw
 //
-packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","High ASCII");
-packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","High ASCII");
-packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","High ASCII");
+packer("../pacotes/richdraw/richdraw.js","../pacotes/richdraw/richdraw_compacto.js","Normal");
+packer("../pacotes/richdraw/svgrenderer.js","../pacotes/richdraw/svgrenderer_compacto.js","Normal");
+packer("../pacotes/richdraw/vmlrenderer.js","../pacotes/richdraw/vmlrenderer_compacto.js","Normal");
 $s = inicia("../pacotes/richdraw/prototype.js");
 $abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
 $escreve = fwrite ($abre,$s);
@@ -52,16 +52,16 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("configura.js","configura_compacto.js","High ASCII");
-packer("redesenho.js","redesenho_compacto.js","High ASCII");
-packer("iniciamma.js","iniciamma_compacto.js","High ASCII");
-packer("ferramentas.js","ferramentas_compacto.js","High ASCII");
-packer("funcoes.js","funcoes_compacto.js","High ASCII");
-packer("menususpenso.js","menususpenso_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Treeview/component.js","jsobjects/jsUI-Treeview/component_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compacto.js","High ASCII");
-packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","High ASCII");
-packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","High ASCII");
+packer("configura.js","configura_compacto.js","Normal");
+packer("redesenho.js","redesenho_compacto.js","Normal");
+packer("iniciamma.js","iniciamma_compacto.js","Normal");
+packer("ferramentas.js","ferramentas_compacto.js","Normal");
+packer("funcoes.js","funcoes_compacto.js","Normal");
+packer("menususpenso.js","menususpenso_compacto.js","Normal");
+packer("jsobjects/jsUI-Treeview/component_i3geo.js","jsobjects/jsUI-Treeview/component_compacto.js","Normal");
+packer("jsobjects/jsUI-Global/uiCommon.js","jsobjects/jsUI-Global/uiCommon_compacto.js","Normal");
+packer("jsobjects/jsUI-Global/common.js","jsobjects/jsUI-Global/common_compacto.js","Normal");
+packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","Normal");
 packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
 packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
 //
