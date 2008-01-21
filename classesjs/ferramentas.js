@@ -1272,8 +1272,9 @@ function ativaBuscaRapida(iddiv)
 {
 	if($i("buscaRapida"))
 	{
-		var ins = "<input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
-		ins += "<img  src='"+g_locaplic+"/imagens/tic.png' onclick='buscaRapida()' />";
+		$i("buscaRapida").style.width="90%";
+		var ins = "<table><tr><td><input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
+		ins += "</td><td><div class='tic' onclick='buscaRapida()' ></div></td></tr></table>";
 		$i(iddiv).innerHTML = ins;
 	}
 }

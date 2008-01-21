@@ -61,7 +61,7 @@ var jsfiles = new Array(
 "cpaint/cpaint2.inc.compressed.js",
 "jsobjects/jsUI-Global/common.js",
 "jsobjects/jsUI-Global/uiCommon.js",
-"jsobjects/jsUI-Treeview/component.js",
+"jsobjects/jsUI-Treeview/component_i3geo.js",
 "funcoes.js",
 "configura.js",
 "ferramentas.js",

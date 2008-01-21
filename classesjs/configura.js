@@ -1265,7 +1265,7 @@ g_listaFuncoesBotoes = {
 		//Insere a opção de localização de coordenadas.
 		iddiv:"localizarxy",
 		dica:$trad("d1"),
-		conteudo:"localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  title='zoom' onclick='zoomPonto()' src=\"+$im(\"tic.png\")+\" id=procurarxy />"
+		conteudo:"localiza X:<input class=digitar id='xg' title='grau' type=text size=5 value='-00'/>&nbsp;<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>&nbsp;&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>&nbsp;<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>&nbsp;<input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/><img  class='tic' title='zoom' onclick='zoomPonto()' src=\"+$im(\"branco.gif\")+\" id=procurarxy />"
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
@@ -1326,7 +1326,7 @@ g_listaFuncoesBotoes = {
 		//apresentação da escala numérica
 		iddiv:"escala",
 		dica:$trad("d10"),
-		conteudo:"1:<input class='digitar' type='text' onchange='javascript:aplicaescala()' id=escalanum size=19 value=''/><img src=\"+$im(\"tic.png\")+\" onclick='javascript:aplicaescala()' />"
+		conteudo:"1:<input class='digitar' type='text' onchange='javascript:aplicaescala()' id=escalanum size=19 value=''/><img class='tic' src=\"+$im(\"branco.gif\")+\" onclick='javascript:aplicaescala()' />"
 	},
 	{
 		//botão de busca na wikipedia

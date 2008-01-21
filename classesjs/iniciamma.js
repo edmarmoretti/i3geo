@@ -254,9 +254,6 @@ function Mapa(e,m)
 	//faz o cache das imagens para desenhar mais rápido
 	imgBranco = new Image();
 	imgBranco.src = g_locaplic+"/imagens/branco.gif";
-	var temp = new Image();
-	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/plus.gif";
-	temp.src = g_locaplic+"/classesjs/jsobjects/jsUI-Treeview/minus.gif";
 	//calcula o tamanho do mapa
 	var diminuix = (navm) ? g_diminuixM : g_diminuixN;
 	var diminuiy = (navm) ? g_diminuiyM : g_diminuiyN;
@@ -751,7 +748,7 @@ function Mapa(e,m)
 		{
 			listaPr = new Object();
 			listaPr = treeviewNew("listaPr", "default", id, null);
-			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
+			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", "foldermapa1", true, false, true, null);
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
@@ -762,7 +759,7 @@ function Mapa(e,m)
 				{
 					var temp = g_listaPropriedades.propriedades[l].text;
 					var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-					tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
+					tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='tic' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />&nbsp;"+temp+" </span>";
 					listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 				}
 				while(l--)
@@ -778,7 +775,7 @@ function Mapa(e,m)
 	this.criaEscalaGrafica = function()
 	{
 		if ( ($i("escalaGrafica")) && (!$i("imagemEscalaGrafica")) )
-		{$i("escalaGrafica").innerHTML = "<img src=\""+g_localimg+"/icon_menuarrow.gif\" title='op&ccedil;&otilde;es' onclick='opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";}
+		{$i("escalaGrafica").innerHTML = "<img class='menuarrow' src=\""+g_localimg+"/branco.gif\" title='op&ccedil;&otilde;es' onclick='opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";}
 	};
 	/*
 	Function: atualizaEscalaGrafica
@@ -889,8 +886,8 @@ function Mapa(e,m)
 			var lista = temas.split(";");
 			mytreeview1 = new Object();
 			mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
-			var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("gnome-fs-trash-full.png")+"' />";
-			mytreeview1.createItem("g1",titulo, g_locaplic+"/imagens/foldermapa.gif", true, true, true, null);
+			var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' />";
+			mytreeview1.createItem("g1",titulo, "foldermapa", true, true, true, null);
 			mytreeview1.itemExpand = expandeTema;
 			var cor = "rgb(250,250,250)";
 			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs

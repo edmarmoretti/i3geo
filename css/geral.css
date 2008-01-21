@@ -116,8 +116,6 @@ div.yui-b p em {color:#000;}
 h1 {padding:.25em .5em;background-color:#ccc;}
 #vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
 #vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
-#vertMaisZoom {cursor:pointer;position:relative;top:2px; width:18px; background:url(../imagens/zoom-plus-mini.png) no-repeat;height:18px; }
-#vertMenosZoom {cursor:pointer;position:relative;top:-1px; width:18px; background:url(../imagens/zoom-minus-mini.png) no-repeat;height:18px; }
 .yui-panel-container .yui-resizepanel .bd {
 
     overflow: auto;

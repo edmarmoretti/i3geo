@@ -116,8 +116,6 @@ div.yui-b p em {color:#000;}
 h1 {padding:.25em .5em;background-color:#ccc;}
 #vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
 #vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
-#vertMaisZoom {cursor:pointer;position:relative;top:2px; width:18px; background:url(../imagens/zoom-plus-mini.png) no-repeat;height:18px; }
-#vertMenosZoom {cursor:pointer;position:relative;top:-1px; width:18px; background:url(../imagens/zoom-minus-mini.png) no-repeat;height:18px; }
 .yui-panel-container .yui-resizepanel .bd {
 
     overflow: auto;
@@ -175,7 +173,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {background-image:URL('../imagens/salva.gif');}
 #imprimir
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 }
@@ -187,49 +185,49 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {background-image:URL('../imagens/perfil.gif');}
 #mede
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -25px;
 }
 #textofid
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -50px;
 }
 #inserexy
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -75px;
 }
 #selecao
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -100px;
 }
 #exten
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -125px;
 }
 #reinicia
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -150px;
 }
 #lentei
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -175px;
 }
 #identifica
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -200px;
 }
@@ -237,31 +235,27 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {background-image:URL('../imagens/out.png');}
 #zoomiauto
 {background-image:URL('../imagens/in.png');}
-#zoomlo
-{background-image:URL('../imagens/zoomlo.gif');}
-#zoomli
-{background-image:URL('../imagens/zoomli.png');}
 #zoomtot
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -225px;
 }
 #pan
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -250px;
 }
 #google
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -275px;
 }
 #referencia
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -300px;
 }
@@ -269,50 +263,359 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {background-image:URL('../imagens/legend.gif');}
 #realca
 {background-image:URL('../imagens/realca.gif');}
+#zoomlo
+{background-image:URL('../imagens/zoomlo.gif');}
 #inseregrafico
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -325px;
 }
 #wiki
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -350px;
 }
 #scielo
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -375px;
 }
 #confluence
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -400px;
 }
 #v3d
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -425px;
 }
 #area
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -450px;
 }
 #ondeestou
 {
-	background-image:URL('../imagens/sprite.png');
+	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -475px;
 	width:20px;
 	height:10px;
 }
+#menuajuda
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -500px;
+	width:52px;
+	height:12px;
+}
+#menuanalise
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -525px;
+	width:52px;
+	height:12px;
+}
+#menujanelas
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -550px;
+	width:52px;
+	height:12px;
+}
+#menuarquivos
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -575px;
+	width:52px;
+	height:12px;
+}
+#brasil
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -600px;
+	width:20px;
+	height:10px;
+	cursor:pointer;
+}
+#uk
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -625px;
+	width:20px;
+	height:10px;
+	top:-13px;
+	left:25px;
+	cursor:pointer;
+}
+.tic
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -650px;
+	width:10px;
+	height:9px;
+	cursor:pointer;
+}
+.x
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -675px;
+	width:9px;
+	height:9px;
+	cursor:pointer;
+}
+.sobe
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -700px;
+	width:9px;
+	height:9px;
+	cursor:pointer;
+}
+.desce
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -725px;
+	width:9px;
+	height:9px;
+	cursor:pointer;
+}
+.extent
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -750px;
+	width:9px;
+	height:9px;
+	cursor:pointer;
+}
+.menuarrow
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -775px;
+	width:16px;
+	height:16px;
+	cursor:pointer;
+}
+.mais
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -800px;
+	width:17px;
+	height:9px;
+	cursor:pointer;
+}
+.menos
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -825px;
+	width:17px;
+	height:9px;
+	cursor:pointer;
+}
+.ponto
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -850px;
+	width:17px;
+	height:9px;
+	cursor:pointer;
+}
+.quadro
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -875px;
+	width:13px;
+	height:13px;
+	cursor:pointer;
+}
+.quadro1
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -900px;
+	width:13px;
+	height:13px;
+	cursor:pointer;
+}
+.slider
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -925px;
+	width:20px;
+	height:9px;
+}
+#vertMenosZoom
+{
+	cursor:pointer;
+	position:relative;
+	top:-1px; 
+	width:18px; 
+	background:url('../imagens/visual/default/sprite.png');
+	background-position: 0px -950px;
+	height:18px;
+}
+#vertMaisZoom
+{
+	cursor:pointer;
+	position:relative;
+	top:2px;
+	width:18px;
+	background:url('../imagens/visual/default/sprite.png');
+	background-position: 0px -975px;
+	height:18px;
+}
+#zoomli
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1000px;
+}
+.foldermapa1
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1025px;
+	width:17px;
+	height:15px;
+}
+.foldermapa
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1050px;
+	width:17px;
+	height:15px;
+}
+#lixeira
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1075px;
+	width:22px;
+	height:22px;
+}
+.upload
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1100px;
+	width:16px;
+	height:16px;
+}
+.download
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1125px;
+	width:16px;
+	height:16px;
+}
+.conectarwms
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1150px;
+	width:14px;
+	height:14px;
+}
+.conectargeorss
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1175px;
+	width:14px;
+	height:14px;
+}
+.conectarservidor
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1200px;
+	width:14px;
+	height:14px;
+}
+.folder
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1225px;
+	width:17px;
+	height:15px;
+}
+.rosanorte
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1250px;
+	width:14px;
+	height:14px;
+}
+.rosasul
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1275px;
+	width:14px;
+	height:14px;
+}
+.rosaleste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1300px;
+	width:14px;
+	height:14px;
+}
+.rosaoeste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1325px;
+	width:14px;
+	height:14px;
+}
+.rosamais
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1350px;
+	width:10px;
+	height:20px;
+}
+.rosamenos
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1375px;
+	width:10px;
+	height:20px;
+}
+
+
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}

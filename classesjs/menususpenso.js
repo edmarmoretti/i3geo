@@ -42,15 +42,11 @@ function montaMenuSuspenso(iddiv)
 			var ins='<div class="bd" style="z-index:2000;" >';
 			ins += '<ul class="first-of-type">';
 
-			ins += '<li class="yuimenubaritemlabel"><a class="yuimenubaritemlabel" ><img style="width:12px;height:12px;"src="'+g_locaplic+'/imagens/visual/default/chat_icon_01.png"/>'+$trad("s1")+'</a></li>';
-			ins += '<li class="yuimenubaritemlabel"><a><img style="width:12px;height:12px;"src="'+g_locaplic+'/imagens/visual/default/grey_wheel_cedric_bosdon_01.png"/>'+$trad("s2")+'</a></li>';
-			//if(!$i("listaPropriedades"))
-			//{
-			//	ins += '<li class="yuimenubaritemlabel"><a>'+$trad("s5")+'</a></li>';
-			//}
- 			ins += '<li class="yuimenubaritemlabel"><a><img style="width:12px;height:12px;"src="'+g_locaplic+'/imagens/visual/default/gthumb.png"/>'+$trad("s3")+'</a></li>';
- 			ins += '<li class="yuimenubaritemlabel"><a><img style="width:12px;height:12px;"src="'+g_locaplic+'/imagens/visual/default/bb_dsk_.png"/>'+$trad("s4")+'</a></li>';
-			ins += '<img onclick="trocalingua(\'pt\')" style="width:20px;height:10px;"src="'+g_locaplic+'/imagens/brazil.png"/>&nbsp;<img onclick="trocalingua(\'en\')" style="width:20px;height:10px;"src="'+g_locaplic+'/imagens/united_kingdom.png"/>';
+			ins += '<li class="yuimenubaritemlabel"><a id="menuajuda" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
+			ins += '<li class="yuimenubaritemlabel"><a id="menuanalise" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
+ 			ins += '<li class="yuimenubaritemlabel"><a id="menujanelas" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
+ 			ins += '<li class="yuimenubaritemlabel"><a id="menuarquivos" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
+			ins += '<div onclick="trocalingua(\'pt\')" id="brasil" />&nbsp;<div onclick="trocalingua(\'en\')" id="uk" />';
  			ins += '</ul>'; ins+='</div>'; $i("menus").innerHTML=ins;
  		}
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
