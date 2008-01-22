@@ -131,7 +131,13 @@ string - javascript com os parametros
 				$ct = $oLayer->connectiontype;
 				//verifica se o tema tem wfs
 				$wfs = $oLayer->getmetadata("wfs");
-				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*".$wfs;
+				//
+				//verifica se o tema pode receber a operação de zoom para o tema
+				//
+				$zoomtema = "sim";
+				if (($ct != 1) && ($oLayer->getmetadata("extent") == ""))
+				{$zoomtema = "nao";}
+				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*nao*".$zoomtema;
 			}
 		}
 		if (($existesel == "nao") && $qy)
