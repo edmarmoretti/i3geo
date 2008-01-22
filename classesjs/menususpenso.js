@@ -46,7 +46,7 @@ function montaMenuSuspenso(iddiv)
 			ins += '<li class="yuimenubaritemlabel"><a id="menuanalise" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
  			ins += '<li class="yuimenubaritemlabel"><a id="menujanelas" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
  			ins += '<li class="yuimenubaritemlabel"><a id="menuarquivos" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
-			ins += '<div onclick="trocalingua(\'pt\')" id="brasil" />&nbsp;<div onclick="trocalingua(\'en\')" id="uk" />';
+			ins += '<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />&nbsp;<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />&nbsp;<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
  			ins += '</ul>'; ins+='</div>'; $i("menus").innerHTML=ins;
  		}
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
