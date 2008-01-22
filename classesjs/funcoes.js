@@ -219,12 +219,14 @@ function mudaVisual(visual)
 			{
 				for (var i=0;i < elt; i++)
 				{
-					if (elementos[i].src.search(imgs[j]) > -1)
-					{elementos[i].src = caminho+imgs[j];}
+					if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
+					{elementos[i].src = caminho+"branco.gif";}
+					if (elementos[i].src.search("visual") > -1)
+					{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
 				}
 			}
 			while(j--)
-		}
+		}	
 		//faz a troca em ids
 		var j = imgs.length-1;
 		if(j >= 0)
@@ -238,7 +240,7 @@ function mudaVisual(visual)
 			while(j--)
 		}
 		//faz a troca em bg
-		var elementos = new Array("vertMaisZoom","vertMenosZoom","vertBGDiv");
+		var elementos = new Array("vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
 		var i = elementos.length-1;
 		if(i >= 0)
 		{
@@ -246,7 +248,8 @@ function mudaVisual(visual)
 			{
 				if ($i(elementos[i]))
 				{
-					for (var j=0;j < tempi.length; j++)
+					$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
+					for (var j=0;j < imgs.length; j++)
 					{
 						var busca = imgs[j].split(".");
 						if (busca[0] == elementos[i])

@@ -1274,7 +1274,7 @@ function ativaBuscaRapida(iddiv)
 	{
 		$i("buscaRapida").style.width="90%";
 		var ins = "<table><tr><td><input onclick='javascript:this.value=\"\"' id=valorBuscaRapida title='digite o texto para busca' type=text size=30 class=digitar value='"+$trad("o2")+"' />";
-		ins += "</td><td><div class='tic' onclick='buscaRapida()' ></div></td></tr></table>";
+		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='buscaRapida()' /></td></tr></table>";
 		$i(iddiv).innerHTML = ins;
 	}
 }

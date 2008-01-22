@@ -67,7 +67,7 @@ function TreeviewPubCreateItem(itemID, itemName, itemImg, hasChildren, preload, 
 		tbItem.style.display = "none";
 	var tbImg = document.createElement("img");
 	tbImg.className = "mais";
-	tbImg.src = this.rootDir + "/../../imagens/branco.gif";
+	tbImg.src = this.rootDir + "/../../imagens/visual/"+g_visual+"/branco.gif";
 	if (hasChildren == false)
 		tbImg.className = "menos";
 	else if (hasChildren == true)
@@ -85,7 +85,7 @@ function TreeviewPubCreateItem(itemID, itemName, itemImg, hasChildren, preload, 
 	{
 		var tbIcon = document.createElement("img");
 		//tbIcon.src = itemImg;
-		tbIcon.src = this.rootDir + "/../../imagens/branco.gif";
+		tbIcon.src = this.rootDir + "/../../imagens/visual/"+g_visual+"/branco.gif";
 		tbIcon.className = itemImg;
 	}
 	if (itemImg != null)
