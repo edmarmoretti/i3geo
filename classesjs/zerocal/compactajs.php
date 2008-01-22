@@ -38,11 +38,11 @@ File: compactajs.php
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("configura.js","configura_compacto.js","High ASCII");
-packer("redesenho.js","redesenho_compacto.js","High ASCII");
-packer("iniciamma.js","iniciamma_compacto.js","High ASCII");
-packer("ferramentas.js","ferramentas_compacto.js","High ASCII");
-packer("funcoes.js","funcoes_compacto.js","High ASCII");
+packer("configura.js","configura_compacto.js","Normal");
+packer("redesenho.js","redesenho_compacto.js","Normal");
+packer("iniciamma.js","iniciamma_compacto.js","Normal");
+packer("ferramentas.js","ferramentas_compacto.js","Normal");
+packer("funcoes.js","funcoes_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -55,7 +55,7 @@ $jsfiles = array(
 "../cpaint/cpaint2.inc.compressed.js",
 "../jsobjects/jsUI-Global/common.js",
 "../jsobjects/jsUI-Global/uiCommon.js",
-"../jsobjects/jsUI-Treeview/component.js",
+"../jsobjects/jsUI-Treeview/component_i3geo.js",
 "../../pacotes/yui231/build/yahoo/yahoo-min_packer.js",
 "../../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js",
 "../../pacotes/yui231/build/dom/dom-min.js",

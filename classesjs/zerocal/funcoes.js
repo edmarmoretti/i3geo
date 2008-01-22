@@ -1673,13 +1673,13 @@ function processaGrupos(retorno)
 		mytreeview2 = treeviewNew("mytreeview2"+idarvore, "default", objmapa.guiaMenu+"obj", null);
 		var nometemas = $trad("a7");
 		if (idarvore != ""){nometemas += " - "+idarvore;}
-		mytreeview2.createItem("item1"+idarvore, "<b>"+nometemas+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/temas.png", true, true, true, null);
+		mytreeview2.createItem("item1"+idarvore, "<b>"+nometemas+"</b>", "foldermapa", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
 		for (i=0;i<retorno.data.grupos.length; i++)
 		{
 			if (retorno.data.grupos[i].nome)
 			{
-				mytreeview2.createItem("grupo"+i+"a"+idarvore, retorno.data.grupos[i].nome, g_locaplic+"/imagens/visual/"+g_visual+"/folder-s.gif", true, true, true, "item1"+idarvore);
+				mytreeview2.createItem("grupo"+i+"a"+idarvore, retorno.data.grupos[i].nome, "folder", true, true, true, "item1"+idarvore);
 				var ngSgrupo = retorno.data.grupos[i].subgrupos;
 				var cor = "rgb(230,230,230)";
 				for (sg=0;sg<ngSgrupo.length;sg++)
@@ -1787,11 +1787,11 @@ function pegavalSistemas(sis)
 	{
 		mytreeviewS = new Object();
 		mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
-		mytreeviewS.createItem("Sitem1", "<b>"+$trad("a11")+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
+		mytreeviewS.createItem("Sitem1", "<b>"+$trad("a11")+"</b>", "foldermapa", true, true, true, null);
 		for (ig=0;ig<sis.length;ig++)
 		{
 			var nomeSis = sis[ig].NOME;
-			mytreeviewS.createItem("sis"+ig, nomeSis, g_locaplic+"/imagens/folder-s.gif", true, true, true, "Sitem1");
+			mytreeviewS.createItem("sis"+ig, nomeSis, "folder", true, true, true, "Sitem1");
 			var funcoes = sis[ig].FUNCOES;
 			for (ig2=0;ig2<funcoes.length;ig2++)
 			{

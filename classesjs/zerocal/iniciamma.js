@@ -674,7 +674,7 @@ function Mapa(e,m)
 				if(navn){var desloca = 40;}else{var desloca = 40;}
 				mudaiconf("pan"); //inicia no icone de zoom por box
 				if ($i("escalanum")){$i("escalanum").value = objmapa.scale;}
-				if (objmapa.geoip == "nao"){$i(id).style.display="none";}
+				if (objmapa.geoip == "nao"){$i("ondeestou").style.display="none";}
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
@@ -713,7 +713,7 @@ function Mapa(e,m)
 		{
 			listaPr = new Object();
 			listaPr = treeviewNew("listaPr", "default", id, null);
-			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
+			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", "foldermapa1", true, false, true, null);
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
@@ -721,7 +721,7 @@ function Mapa(e,m)
 			{
 				var temp = g_listaPropriedades.propriedades[l].text;
 				var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
+				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
 				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 			}
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
@@ -729,7 +729,7 @@ function Mapa(e,m)
 			//lista de funções
 			listaF = new Object();
 			listaF = treeviewNew("listaF", "default", id, null);
-			listaF.createItem("listaFraiz", "<b>Fun&ccedil;&otilde;es</b>", g_locaplic+"/imagens/visual/"+g_visual+"/foldermapa1.gif", true, false, true, null);
+			listaF.createItem("listaFraiz", "<b>Fun&ccedil;&otilde;es</b>", "foldermapa1", true, false, true, null);
 			var im = "";
 			if (navn)
 			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
@@ -741,7 +741,7 @@ function Mapa(e,m)
 				for (j=0;j<o.length; j++)
 				{
 					var temp = o[j].text;
-					tnome = "<span onclick='"+o[j].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/visual/"+g_visual+"/tic.png' />&nbsp;"+temp+" </span>";
+					tnome = "<span onclick='"+o[j].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
 					listaPr.createItem("funcoesMapa"+l, tnome, imgBranco, false, true, false, "listaFraiz");
 					tnome = ""
 				}
@@ -849,7 +849,7 @@ function Mapa(e,m)
 			mytreeview1 = new Object();
 			mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
 			var titulo = "<b>"+$trad("t1")+"</b>";
-			mytreeview1.createItem("g1",titulo, g_locaplic+"/imagens/foldermapa.gif", true, true, true, null);
+			mytreeview1.createItem("g1",titulo, "foldermapa", true, true, true, null);
 			mytreeview1.itemExpand = expandeTema;
 			var cor = "rgb(250,250,250)";
 			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
