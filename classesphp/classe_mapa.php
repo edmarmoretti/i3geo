@@ -137,7 +137,13 @@ string - javascript com os parametros
 				$zoomtema = "sim";
 				if (($ct != 1) && ($oLayer->getmetadata("extent") == ""))
 				{$zoomtema = "nao";}
-				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*nao*".$zoomtema;
+				//
+				//verifica se existe restrição de escala
+				//
+				$contextoescala = "nao";
+				if(($oLayer->minscale > 0) || ($oLayer->maxscale > 0))
+				{$contextoescala = "sim";}
+				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*nao*".$zoomtema."*".$contextoescala;
 			}
 		}
 		if (($existesel == "nao") && $qy)

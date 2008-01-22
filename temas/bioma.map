@@ -15,6 +15,7 @@ LAYER
   	CLASSE "SIM"
       ESCALA "5000000"
   END
+  MINSCALE 50
   TRANSPARENCY 80
   CLASS
     Name 'Amazônia'

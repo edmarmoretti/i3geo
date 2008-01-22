@@ -903,6 +903,9 @@ function Mapa(e,m)
 					//ltema[8]==sim indica que e um tema com features
 					if (ltema[8] == undefined){ltema[8] = "nao";}
 					tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\")'/>";
+					//verifica se existe contexto de desenho baseado na escala
+					if (ltema[12] == "sim")
+					{tnome += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
 					if (ltema[5] == "sim") //o tema tem selecao
 					{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 					//verifica se e um wms que tem wfs

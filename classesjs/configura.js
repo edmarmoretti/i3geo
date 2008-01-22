@@ -525,6 +525,12 @@ pt:"mostra em janela...",
 en:"show in window",
 es:""
 }],
+"t36":[
+{
+pt:"tema vis&iacute;vel apenas em determinadas escalas",
+en:"the layer is visible in specific scales",
+es:""
+}],
 //guia adiciona
 "a1":[
 {

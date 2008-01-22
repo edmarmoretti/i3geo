@@ -162,8 +162,14 @@ function iniciaMapa()
 			$zoomtema = "sim";
 			if (($ct != 1) && ($oLayer->getmetadata("extent") == ""))
 			{$zoomtema = "nao";}
-			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-			$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*nao*".$ct."*nao*".$zoomtema;
+			//
+			//verifica se existe restrição de escala
+			//
+			$contextoescala = "nao";
+			if(($oLayer->minscale > 0) || ($oLayer->maxscale > 0))
+			{$contextoescala = "sim";}
+			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs,permite zoom para o tema
+			$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*nao*".$ct."*nao*".$zoomtema."*".$contextoescala;
 		}
 	}
 	$temas = implode(";",array_reverse($temas));
