@@ -37,7 +37,7 @@ function t0()
 }
 function t1()
 {
-	ins = "Tema que cont&eacute;m o ponto de origem:<br>"
+	ins = "Tema que cont&eacute;m o ponto de origem (pelo menos um ponto deve estar selecionado):<br>"
 	ins += comboTemasOrigem
 	ins += "<br><br>Tema que cont&eacute;m o(s) ponto(s) de destino:<br>"
 	ins += comboTemasDestino
