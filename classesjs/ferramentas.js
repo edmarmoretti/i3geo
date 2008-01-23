@@ -973,13 +973,18 @@ function area()
 		{
 			objaguarde.fecha("ajaxredesenha");
 			g_areapixel = retorno.data;
-			alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
-			mudaiconf("area");
-			g_tipoacao = "area";
-			pontosdistobj = new pontosdist();
-			criaContainerRichdraw();
-			richdraw.lineColor = "green";
-			richdraw.lineWidth = "2px";
+			if (g_areapixel < 0)
+			{alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.");}
+			else
+			{
+				alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
+				mudaiconf("area");
+				g_tipoacao = "area";
+				pontosdistobj = new pontosdist();
+				criaContainerRichdraw();
+				richdraw.lineColor = "green";
+				richdraw.lineWidth = "2px";
+			}
 		};
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=areaPixel&celsize="+g_celula+"&g_sid="+g_sid;
