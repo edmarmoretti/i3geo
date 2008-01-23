@@ -51,9 +51,40 @@ function t2()
 }
 function t3()
 {
+	ins = "Escolha os itens das tabelas de atributos dos temas de origem e de destino que ser&aatilde;o acrescentados ao novo tema que ser&aacute; criado com o resultado do c&aacute;lculo."
+	var temaOrigem = $i("temasOrigem").value
+	var temaDestino = $i("temasDestino").value
+	ins += "<br><br>Para o tema de origem:"
+	comboitens("selItemOrigem",temaOrigem,function(retorno)
+	{
+	 	var comboDeOrigem = retorno.dados
+	 	if(retorno.tipo == "erro")
+	 	{ins += "<br><br><span style='color:red'>erro ao ler os itens do tema de origem</span><br><br>";}
+	 	else
+	 	{
+	 		ins += "<br><br>"+comboDeOrigem;
+			comboitens("selItemDestino",temaDestino,function(retorno)
+			{
+	 			ins += "<br><br>Para o tema de destino:"
+	 			var comboDeDestino = retorno.dados
+	 			if(retorno.tipo == "erro")
+	 			{ins += "<br><br><span style='color:red'>erro ao ler os itens do tema de destino</span><br><br>";}
+	 			else
+	 			{
+	 				ins += "<br><br>"+comboDeDestino;
+		 			mostraOpcao("t1()","t4()",ins,"t3")
+	 			}
+			}
+			)		 	
+	 	}
+	}
+	)
+}
+function t4()
+{
 	ins = "O tema com o entorno e as dist&acirc;ncias ser&atilde;o adicionados ao mapa atual."
 	ins += "<br><br><div onclick='calcula()' style='text-align:left;left:0px'><input id=botao1 size=18 class=executar type='buttom' value='Calcular' /></div>"
-	mostraOpcao("t2()","",ins,"t3")
+	mostraOpcao("t3()","",ins,"t4")
 	YAHOO.example.init = function ()
 	{
 		function onPushButtonsMarkupReady()
@@ -78,7 +109,7 @@ function calcula()
 			else
 			{window.parent.ajaxredesenha("");}
 		}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("selItemOrigem").value+"&itemdestino="+$i("selItemDestino").value
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("JSON");
