@@ -85,7 +85,7 @@ Essa string é recuperada no lado do javascript com eval().
 */
 function iniciaMapa()
 {
-	global $tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
+	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -192,6 +192,8 @@ function iniciaMapa()
 	$res .= ";objmapa.cgi='".$locmapserv."'";
 	$res .= ";objmapa.utilizacgi='".$utilizacgi."'";
 	$res .= ";objmapa.postgis_con='".$postgis_con."'";
+	$res .= ";var titulo='".$tituloInstituicao."'";
+	
 	//Pega os estilos disponíveis
 	$visual = "";
 	if (file_exists($locaplic."/imagens/visual"))

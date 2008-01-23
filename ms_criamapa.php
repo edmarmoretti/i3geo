@@ -137,6 +137,7 @@ $srid_area_ = $srid_area;
 $debug_ = $debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
+$tituloInstituicao_ = $tituloInstituicao;
 //
 //se houver string de conexão para substituição
 //o modo cgi não irá funcionar
@@ -191,6 +192,7 @@ $_SESSION["postgis_mapa"] = $postgis_mapa_;
 $_SESSION["perfil"] = $perfil_;
 $_SESSION["navegadoresLocais"] = $navegadoresLocais_;
 $_SESSION["utilizacgi"] = $utilizacgi_;
+$_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //
@@ -601,10 +603,11 @@ Mostra a mensagem de aguarde
 */
 function mostraAguarde()
 {
-	global $interface,$caminho,$mensagemInicia;
+	global $interface,$caminho,$mensagemInicia,$tituloInstituicao;
 	if (!isset($interface))
 	{
 		echo "<html><head>";
+		echo "<title>".$tituloInstituicao."</title>";
 		echo '<div id="aguarde">';
 		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...carregando o mapa</p>';
 		echo "<center><img src='".$caminho."imagens/i3geo1.jpg'><br><br>";

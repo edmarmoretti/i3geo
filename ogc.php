@@ -125,6 +125,7 @@ $or = $proto.$server.$_SERVER['PHP_SELF'];
 if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
 {$or = $or."tema=".$tema."&";}
 $oMap->setmetadata("ows_onlineresource",$or);
+$oMap->setmetadata("ows_title",$tituloInstituicao." - i3geo");
 if (!isset($intervalo))
 {$intervalo = "0,50";}
 if ($tipo == "")

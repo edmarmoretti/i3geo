@@ -44,6 +44,12 @@ Free Software Foundation, Inc., no endereço
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
 $mensagemInicia = "I3Geo versão 3.9";
+/*
+	Variable: $tituloInstituicao
+	
+	Nome que será utilizado em alguns cabçalhos e títulos de páginas
+*/
+$tituloInstituicao = "MMA - Ministério do Meio Ambiente";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*

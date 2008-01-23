@@ -64,6 +64,7 @@ require_once("../classesphp/funcoes_gerais.php");
 include("../classesphp/classe_menutemas.php");
 include("../classesphp/carrega_ext.php");
 include("../ms_configura.php");
+echo $tituloInstituicao;
 if (!isset($temasa)){$temasa = "";}
 if (!isset($layers)){$layers = $temasa;}
 $m = new Menutemas($tmpfname,"");

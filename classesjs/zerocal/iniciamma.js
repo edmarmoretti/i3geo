@@ -566,6 +566,8 @@ function Mapa(e,m)
 				//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
 				//
 				eval(retorno.data);
+				if (titulo != "")
+				{top.document.title = titulo;}
 				//
 				//insere botao dinamico de aplicar
 				//

@@ -571,6 +571,8 @@ function Mapa(e,m)
 				//
 				var tempo = "";
 				eval(retorno.data);
+				if (titulo != "")
+				{top.document.title = titulo;}
 				mostradicasf("","Tempo de desenho em segundos: "+tempo,"");
 				//
 				//insere botao dinamico de aplicar
