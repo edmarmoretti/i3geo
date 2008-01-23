@@ -913,7 +913,7 @@ Function: distanciaptpt
 Calcula a distância entre um ponto e outros pontos próximos
 */
 function distanciaptpt()
-{wdocaf("400px","180px",g_locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");}
+{wdocaf("400px","220px",g_locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");}
 /*
 Function: centroide
 

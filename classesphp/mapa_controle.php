@@ -1090,7 +1090,7 @@ Include:
 		include("classe_analise.php");
 		$m = new Analise($map_file,$temaorigem);
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
-		$cp->set_data($m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic));
+		$cp->set_data($m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino));
 		$m->salva();
 	break;
 /*

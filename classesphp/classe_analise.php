@@ -614,8 +614,13 @@ temadestino - nome od tema com os pontos de destino
 temaoverlay - tema que será utilizado para selecionar o tema de destino
 
 locapli - endereço da aplicação i3geo
+
+itemorigem - nome do item na tabela de atributos do tema de origem que será acrescentado ao tema que será criado
+
+itemdestino - nome do item na tabela de atributos do tema de origem que será acrescentado ao tema que será criado
+
 */
-function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic)
+function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino)
 {
 	//error_reporting(E_ALL);
 	//para manipular dbf
@@ -673,23 +678,27 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic)
 	$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
 	// cria o dbf
 	$def[] = array("dist_m","N","10","2");
+	$def[] = array("origem","C","255");
+	$def[] = array("destino","C","255");
 	$db = xbase_create($nomeshp.".dbf", $def);
 	//acrescenta os pontos no novo shapefile
 	$dbname = $nomeshp.".dbf";
 	foreach ($shapesorigem as $sorigem)
 	{
+		$valororigem = $sorigem->values[$itemorigem];
 		foreach ($shapesdestino as $sdestino)
 		{
 			$linha = ms_newLineObj();
 			$linha->add($sorigem->getCentroid());
 			$linha->add($sdestino->getCentroid());
+			$valordestino = $sdestino->values[$itemdestino];
 			$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
 			$ShapeObj->add($linha);
 			$novoshpf->addShape($ShapeObj);
 			$ShapeObj->project($projInObj, $projOutObj);
-			$distancia = array();
-			$distancia[] = $ShapeObj->getLength();
-			xbase_add_record($db,$distancia);
+			$distancia = $ShapeObj->getLength();
+			$registro = array($distancia,$valororigem,$valordestino);
+			xbase_add_record($db,$registro);
 			$linha->free();
 			$ShapeObj->free();
 		}
