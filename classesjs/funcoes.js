@@ -1748,7 +1748,7 @@ function mostraTip(retorno)
 					}
 					var ocorrencias = titulo[1].split("*");
 					var ocorrencia = ocorrencias.length-1;
-					if(ocorrencias >= 0)
+					if(ocorrencia >= 0)
 					{
 						do
 						{
