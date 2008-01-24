@@ -69,7 +69,7 @@ h1
 	<input id='subgrupo' type=hidden name='subgrupo' value='' />
 	<input id='tid' type=hidden name='tid' value='' />
 </form>
-<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br><br>
+<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 <?php
 if ($tipo == "listatemas")
 {
@@ -110,6 +110,7 @@ if ($tipo == "adicionar")
 
 	
 ?>
+<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 </body>
 <script>
 function retorno()

@@ -1463,5 +1463,5 @@ g_listaFuncoesBotoes = {
 		//ativa as opções de busca rápida
 		iddiv:"buscaRapida",
 		constroiconteudo:'ativaBuscaRapida("buscaRapida")'
-	}
+	}	
 ]};

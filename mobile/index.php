@@ -72,7 +72,7 @@ $mapas = $m->pegaListaDeMapas($locmapas);
 echo "<h1>Escolha um dos mapas:</h1>";
 foreach($mapas["mapas"] as $obj)
 {
-	echo "<input type=radio onclick='ligar(\"".$obj["TEMAS"]."\")' />".$obj["NOME"]."<br><br>";
+	echo "<input type=radio onclick='ligar(\"".$obj["TEMAS"]."\",\"".$obj["LIGADOS"]."\")' />".$obj["NOME"]."<br><br>";
 }
 echo "<h1>ou uma das op&ccedil;&otilde;es:</h1>";
 echo "<input type=radio onclick='localizar()' />Procurar lugar<br><br>";
@@ -106,9 +106,10 @@ Parameter:
 
 temas - lista de códigos de temas
 */
-function ligar(temas)
+function ligar(temas,layers)
 {
 	document.getElementById('temasa').value = temas;
+	document.getElementById('layers').value = layers;
 	document.getElementById('f').submit();
 }
 /*

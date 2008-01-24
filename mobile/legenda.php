@@ -65,13 +65,44 @@ h1
 	<input id='tipo' type=hidden name='tipo' value='retorno' />
 	<input id='tema' type=hidden name='tema' value='' />
 </form>
-<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' />
+<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 <?php
+/*
 $m = new Legenda($tmpfname,$locaplic,"",$template);
 $r = $m->criaLegenda();
 if(!$r){$r = "erro. Legenda nao disponivel";}
 $r = mb_convert_encoding($r["legenda"],"ISO-8859-1","UTF-8");
 echo $r;
+*/
+$map = ms_newMapObj($tmpfname);
+$temas = $map->getalllayernames();
+foreach ($temas as $tema)
+{
+	$layer = $map->getlayerbyname($tema);
+	if (($layer->data != "") && ($layer->getmetadata("escondido") != "SIM") && ($layer->getmetadata("tema") != "NAO"))
+	{
+		if ($layer->numclasses > 0)
+		{
+			$classe = $layer->getclass(0);
+			if (($classe->name == "") || ($classe->name == " "))
+			{$classe->set("name",$layer->getmetadata("tema"));}
+		}
+	}
+}
+$nomeImagem = nomeRandomico();
+$legenda = $map->legend;
+$legenda->set("keysizex",20);
+$legenda->set("keysizey",20);
+$label = $legenda->label;
+$label->set("size",14);
+
+$legenda->set("status",MS_DEFAULT);
+$imgo = $map->drawlegend();
+$nomer = ($imgo->imagepath)."leg".$nomeImagem.".PNG";
+$nomei = ($imgo->imageurl).basename($nomer);
+$imgo->saveImage($nomer);
+$pathlegenda = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
+echo "<img src='".$nomei."' />";
 ?>
 </body>
 <script>

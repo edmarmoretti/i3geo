@@ -570,6 +570,7 @@ function Mapa(e,m)
 				//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
 				//
 				var tempo = "";
+				var titulo = "";
 				eval(retorno.data);
 				if (titulo != "")
 				{top.document.title = titulo;}

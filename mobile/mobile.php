@@ -19,6 +19,10 @@ input
 	background-color:white;
 }
 </style>
+<script>
+//limpa a tela caso tenha sido enviada alguma mensagem pelo ms_criamapa.php
+document.body.innerHTML="";
+</script>
 <body>
 
 <?php

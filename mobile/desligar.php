@@ -66,6 +66,7 @@ h1
 	<input id='tipo' type=hidden name='tipo' value='retorno' />
 	<input id='tema' type=hidden name='tema' value='' />
 </form>
+<input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 <?php
 $m = New Mapa($tmpfname);
 if(isset($tema) && $tema != '')
