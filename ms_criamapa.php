@@ -441,8 +441,6 @@ Essa função pode ser comentada sem prejuízos ao funcionamento do I3Geo.
 Só opera corretamente se a rotina de registro tiver sido configurada corretamente.
 */
 require_once($caminho."ms_registraip.php");
-
-echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo));
 /*
 Note: Gera a url para abrir o mapa
 
@@ -450,6 +448,7 @@ interface = arquivo html que será aberto
 */
 if ($interface != "mashup")
 {
+	echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo));
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))
