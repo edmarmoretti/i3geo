@@ -113,11 +113,11 @@ function adicionatema()
 	$mapa = ms_newMapObj($map_file);
 	include("../../classesphp/classe_mapa.php");
 	include("../../classesphp/funcoes_gerais.php");
-	$nomeslegenda["munamb1"] = "pássaros (poligonos)";
-	$nomeslegenda["munamb2"] = "anfíbios (poligonos)";
-	$nomeslegenda["munamb3"] = "mamíferos (poligonos)";
-	$nomeslegenda["munamb4"] = "pássaros (pontos)";
-	$nomeslegenda["munamb5"] = "mamíferos (pontos)";
+	$nomeslegenda["munamb1"] = "pássaros (poligonos) ".$especie;
+	$nomeslegenda["munamb2"] = "anfíbios (poligonos) ".$especie;
+	$nomeslegenda["munamb3"] = "mamíferos (poligonos) ".$especie;
+	$nomeslegenda["munamb4"] = "pássaros (pontos) ".$especie;
+	$nomeslegenda["munamb5"] = "mamíferos (pontos) ".$especie;
 	foreach ($tabelas as $tabela)
 	{
 		if ($tabela["gids"] != '')

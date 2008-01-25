@@ -113,7 +113,7 @@ Banco de dados NatureServer . <a href="http://www.natureserve.org/infonatura/" t
 </select>
 </DIV>
 </form>
-<DIV id=ResultadoPesquisa></DIV>
+<DIV id=ResultadoPesquisa ></DIV>
 </body>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
@@ -237,18 +237,20 @@ function executa()
 {
 	var banco = document.getElementById("comboFiltros").value
 	if (banco == "")
-	{alert("Escolha um tipo!");return}
+	{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha um tipo!");return}
 	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
 	if (document.getElementById("comboFamilias"))
 	{
 		var familia = document.getElementById("comboFamilias").value
 		if (familia == "")
-		{alert("Escolha uma familia!");return}
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma familia!");return}
 	}
 	var especie = ""
 	if (document.getElementById("comboEspecies"))
 	{
 		var especie = (document.getElementById("comboEspecies").value)
+		if (especie == "")
+		{$i("ResultadoPesquisa").innerHTML = "";alert("Escolha uma especie!");return}
 	}
 	var cor = document.getElementById("cor").value
 	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=adicionatema&banco="+banco+"&familia="+familia+"&especie="+especie+"&cor="+cor
