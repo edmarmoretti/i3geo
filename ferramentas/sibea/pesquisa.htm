@@ -181,8 +181,9 @@ function executa()
 	var filtro = document.getElementById("comboFiltros").value
 	if (filtro == "")
 	{alert("Escolha um filtro!");return}
+	if (document.getElementById("comboValores").value == "")
+	{alert("Escolha um valor para o filtro");return;}
 	document.getElementById("ResultadoPesquisa").innerHTML = "Aguarde! Pesquisando.....";
-	
 	if (document.getElementById("comboValores"))
 	{
 		var temp = (document.getElementById("comboValores").value).split("*")

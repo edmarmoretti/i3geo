@@ -59,7 +59,7 @@ if (window.location.href.split("?")[1])
 	if (g_sid.split("#")[0])
 	{g_sid = g_sid.split("#")[0];}
 }
-else 
+else
 {g_sid = "";}
 /*
 Variable: imagemxi
@@ -518,27 +518,29 @@ function Mapa(e,m)
 				g_sid = retorno.data;
 				objmapa.inicializa();
 			};
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa&"+g_mashuppar;
 			cpObj.call(p,"",mashup);
-			return;
 		}
-		//	
-		//testa se os javascripts foram carregados
-		//
-		if (!window.testafuncoes)
-		{alert("funcoes.js com problemas");}
-		if (!window.testamenususpenso)
-		{alert("menususpenso.js com problemas");}
-		if (!window.testaferramentas)
-		{alert("ferramentas.js com problemas");}
-		if (!window.testaajax)
-		{alert("redesenho.js com problemas");}
-		//
-		//inicia o mapa
-		//
-		objaguarde.abre("montaMapa",$trad("o5"));
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
-		cpObj.call(p,"iniciaMapa",this.montaMapa);
+		else
+		{
+			//	
+			//testa se os javascripts foram carregados
+			//
+			if (!window.testafuncoes)
+			{alert("funcoes.js com problemas");}
+			if (!window.testamenususpenso)
+			{alert("menususpenso.js com problemas");}
+			if (!window.testaferramentas)
+			{alert("ferramentas.js com problemas");}
+			if (!window.testaajax)
+			{alert("redesenho.js com problemas");}
+			//
+			//inicia o mapa
+			//
+			objaguarde.abre("montaMapa",$trad("o5"));
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
+			cpObj.call(p,"iniciaMapa",this.montaMapa);
+		}
 	};
 	/*
 	Function: montaMapa
