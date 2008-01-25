@@ -112,6 +112,12 @@ File: i3geo/menutemas/menutemas.xml
             <TDESC></TDESC>
             <TLINK></TLINK>
          </TEMA>
+         <TEMA>
+            <TID>testephp</TID>
+            <TNOME>Teste de inclusao de tema PHP</TNOME>
+            <TDESC></TDESC>
+            <TLINK></TLINK>
+         </TEMA>
     	</SGRUPO>
    </GRUPO>
 </TEMASGEO>

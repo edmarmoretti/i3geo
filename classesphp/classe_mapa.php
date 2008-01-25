@@ -661,66 +661,73 @@ $locaplic - string Diretório onde fica a aplicação.
 		foreach ($temas as $nome)
 		{
 			$nomemap = "";
-			if (file_exists($locaplic."/temas/".$nome.".map"))
-			{$nomemap = $locaplic."/temas/".$nome.".map";}
-			if (file_exists($nome))
-			{$nomemap = $nome;}
-			if (file_exists($nome.".map"))
-			{$nomemap = $nome.".map";}
-			if ($nomemap != "")
+			//
+			//verifica se o tema é um arquivo php
+			//
+			if (file_exists($locaplic."/temas/".$nome.".php"))
+			{include_once($locaplic."/temas/".$nome.".php");}
+			else
 			{
-				$nmap = ms_newMapObj($nomemap);
-				$novosnomes = $nmap->getAllLayerNames();
-				//define nomes unicos para os temas
-				foreach ($novosnomes as $n)
-				{$nomeunico[$n] = nomeRandomico();}
-				//altera os temas para incluir o nome unico
-				foreach ($novosnomes as $n)
+				if (file_exists($locaplic."/temas/".$nome.".map"))
+				{$nomemap = $locaplic."/temas/".$nome.".map";}
+				if (file_exists($nome))
+				{$nomemap = $nome;}
+				if (file_exists($nome.".map"))
+				{$nomemap = $nome.".map";}
+				if ($nomemap != "")
 				{
-					$nlayer = $nmap->getlayerbyname($n);
-					//
-					//muda para RGB para melhorar o desenho da imagem raster
-					//
-					if($nlayer->type == MS_LAYER_RASTER)
+					$nmap = ms_newMapObj($nomemap);
+					$novosnomes = $nmap->getAllLayerNames();
+					//define nomes unicos para os temas
+					foreach ($novosnomes as $n)
+					{$nomeunico[$n] = nomeRandomico();}
+					//altera os temas para incluir o nome unico
+					foreach ($novosnomes as $n)
 					{
-						$of = $this->mapa->outputformat;
-						$of->set("imagemode",MS_IMAGEMODE_RGB);
-					}
-					$nlayer->set("status",MS_DEFAULT);
-					$nlayer->setmetadata("nomeoriginal",$nlayer->name);
-					$nlayer->set("name",$nomeunico[$n]);
-					//altera o nome do grupo se existir
-					if ($nlayer->group != " ")
-					{
-						$lr = $nlayer->group;
-						$nlayer->set("group",$nomeunico[$lr]);
-					}
-					ms_newLayerObj($this->mapa, $nlayer);
-					$l = $this->mapa->getlayerbyname($nlayer->name);
-					//reposiciona o layer se for o caso
-					if ($l->group == "")
-					{
-						$ltipo = $l->type;
-						if (($ltipo == 2) || ($ltipo == 3))//poligono = 2
+						$nlayer = $nmap->getlayerbyname($n);
+						//
+						//muda para RGB para melhorar o desenho da imagem raster
+						//
+						if($nlayer->type == MS_LAYER_RASTER)
 						{
-							$indicel = $l->index;
-							$numlayers = $this->mapa->numlayers;
-							$nummove = 0;
-							for ($i = $numlayers-1;$i > 0;$i--)
+							$of = $this->mapa->outputformat;
+							$of->set("imagemode",MS_IMAGEMODE_RGB);
+						}
+						$nlayer->set("status",MS_DEFAULT);
+						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
+						$nlayer->set("name",$nomeunico[$n]);
+						//altera o nome do grupo se existir
+						if ($nlayer->group != " ")
+						{
+							$lr = $nlayer->group;
+							$nlayer->set("group",$nomeunico[$lr]);
+						}
+						ms_newLayerObj($this->mapa, $nlayer);
+						$l = $this->mapa->getlayerbyname($nlayer->name);
+						//reposiciona o layer se for o caso
+						if ($l->group == "")
+						{
+							$ltipo = $l->type;
+							if (($ltipo == 2) || ($ltipo == 3))//poligono = 2
 							{
-								$layerAbaixo = $this->mapa->getlayer($i);
-								$tipo = $layerAbaixo->type;
-								if (($tipo != 2) && ($tipo != 3))
-								{$nummove++;}
-							}
-							if ($nummove > 2)
-							{
-								for ($i=0;$i<=($nummove - 3);$i++)
+								$indicel = $l->index;
+								$numlayers = $this->mapa->numlayers;
+								$nummove = 0;
+								for ($i = $numlayers-1;$i > 0;$i--)
 								{
-									$this->mapa->movelayerup($indicel);
+									$layerAbaixo = $this->mapa->getlayer($i);
+									$tipo = $layerAbaixo->type;
+									if (($tipo != 2) && ($tipo != 3))
+									{$nummove++;}
+								}
+								if ($nummove > 2)
+								{
+									for ($i=0;$i<=($nummove - 3);$i++)
+									{
+										$this->mapa->movelayerup($indicel);
+									}
 								}
 							}
-
 						}
 					}
 				}
