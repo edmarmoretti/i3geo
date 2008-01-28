@@ -49,7 +49,7 @@ $mensagemInicia = "I3Geo versão 3.9";
 	
 	Nome que será utilizado em alguns cabçalhos e títulos de páginas
 */
-$tituloInstituicao = "MMA - Ministério do Meio Ambiente";
+$tituloInstituicao = "MMA - Minist&eacute;rio do Meio Ambiente";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*
@@ -236,6 +236,12 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Em alguns casos o uso do cgi torna a aplicação mais rápida.
 	*/
 	$utilizacgi = "sim";
+	/*
+	 Variable: $atlasxml
+	 
+	 Indica o nome do arquivo xml que será utilizado na interface Atlas do i3geo.
+	*/
+	$atlasxml = "http://localhost/i3geo/menutemas/atlas.xml";
 }
 else //se for linux
 {
@@ -259,5 +265,6 @@ else //se for linux
 	*/
 	$menutemas = "";
 	$utilizacgi = "sim";
+	$atlasxml = "http://mapas.mma.gov.br/i3geo/menutemas/atlas.xml";
 }
 ?>

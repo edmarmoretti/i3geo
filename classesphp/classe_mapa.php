@@ -664,7 +664,7 @@ $locaplic - string Diretório onde fica a aplicação.
 			//
 			//verifica se o tema é um arquivo php
 			//
-			if (file_exists($locaplic."/temas/".$nome.".php"))
+			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php")))
 			{include_once($locaplic."/temas/".$nome.".php");}
 			else
 			{

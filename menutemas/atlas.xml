@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="menutemas.xsl"?>
+<!--
+Title: Lista de Atlas
+
+Lista os atlas que podem ser vistos no i3geo. Atlas é uma interface específica para uso no i3geo.
+
+File: i3geo/menutemas/atlas.xml
+-->
+<RAIZ>
+<!-- Cada atlas deve ter uma entrada aqui com seus parâmetros específicos-->
+	<ATLAS>
+		<!-- identificador numérico e único do Atlas-->
+		<ID>0</ID>
+		<!-- Aqui vai o título geral do Atlas -->
+		<TITULO>Título do atlas para testes</TITULO>
+		<!-- Aqui vai uma descricao resumida do Atlas -->
+		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas</DESCRICAO>
+		<!-- endereco na web do icone utilizado para destacar o atlas -->
+		<ICONE></ICONE>
+		<!-- Aqui vai o link HTML para mais informacoes-->
+		<LINKMAISINFO></LINKMAISINFO>
+		<!-- Endereco na web do template HTML que sera utilizado no atlas, se for vazio será usado o default -->
+		<TEMPLATEHTML></TEMPLATEHTML>
+		<!-- largura da janela do texto de apresentacao -->
+		<WABERTURA></WABERTURA>
+		<!-- altura da janela do texto de apresentacao -->
+		<HABERTURA></HABERTURA>
+		<!-- Cada prancha que compõe o Atlas tem aqui seus parâmetros definidos-->
+		<PRANCHAS>
+			<PRANCHA>
+				<!-- Titulo da prancha do atlas-->
+				<TITULO></TITULO>
+				<!-- Descricao da prancha do atlas-->
+				<DESCRICAO></DESCRICAO>
+				<!--endereco na web do icone utilizado para destacar a prancha-->
+				<ICONE></ICONE>
+				<!--Aqui vai o link HTML para mais informacoes-->
+				<LINKMAISINFO></LINKMAISINFO>
+				<!-- largura da janela do texto de apresentacao-->
+				<WABERTURA></WABERTURA>
+				<!-- altura da janela do texto de apresentacao-->
+				<HABERTURA></HABERTURA>
+				<!-- Cada tema da prancha tem aqui seus parametros definidos-->
+				<TEMAS>
+					<TEMA>
+						<!-- código do tema, ou seja, nome do arquivo mapfile ou php existente no diretório temas do i3geo-->
+						<CODIGO></CODIGO>
+						<!-- indica se o tema será visível no mapa já na abertura-->
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+					<TEMA>
+						<CODIGO></CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>				
+				</TEMAS>
+				<!--Cada prancha é apresentada em uma guia, cada guia pode ter sub-guias, definidas aqui-->
+				<SUBGUIAS>
+					<SUBGUIA>
+						<!-- titulo da subguia, se for vazio, será utilizado apenas o icone -->
+						<TITULO></TITULO>
+						<ICONE></ICONE>
+						<LINK></LINK>
+					</SUBGUIA>
+				</SUBGUIAS>
+			</PRANCHA>
+		</PRANCHAS>
+	</ATLAS>
+	<ATLAS>
+		<ID>1</ID>
+		<TITULO>Título do segundo atlas para testes</TITULO>
+		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas - teste 2</DESCRICAO>
+		<ICONE></ICONE>
+		<LINKMAISINFO></LINKMAISINFO>
+		<TEMPLATEHTML></TEMPLATEHTML>
+		<WABERTURA></WABERTURA>
+		<HABERTURA></HABERTURA>
+		<PRANCHAS>
+			<PRANCHA>
+				<TITULO></TITULO>
+				<DESCRICAO></DESCRICAO>
+				<ICONE></ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO></CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+					<TEMA>
+						<CODIGO></CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>				
+				</TEMAS>
+				<SUBGUIAS>
+					<SUBGUIA>
+						<TITULO></TITULO>
+						<ICONE></ICONE>
+						<LINK></LINK>
+					</SUBGUIA>
+				</SUBGUIAS>
+			</PRANCHA>
+		</PRANCHAS>
+	</ATLAS>
+
+</RAIZ>

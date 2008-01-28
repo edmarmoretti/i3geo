@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Controle das requisições em Ajax
+Title: A - Controle das requisições em Ajax feitas pelas interfaces normais do i3geo
 
 Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
