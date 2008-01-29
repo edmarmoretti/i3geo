@@ -69,8 +69,14 @@ function iniciaAtlas()
 				if (pranchas[i])
 				{
 					//monta as guias das pranchas
-					
-					ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >'+pranchas[i].titulo+'</div></em></a></li>';
+					ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >';
+					var icone = g_locaplic+"/imagens/branco.gif";
+					if(pranchas[i].icone != "")
+					{
+						var icone = pranchas[i].icone;
+					}
+					ins += "<img src='"+icone+"'/>&nbsp;";
+					ins += pranchas[i].titulo+'</div></em></a></li>';
 				}
 				var i = i + 1;
 			}
@@ -79,9 +85,17 @@ function iniciaAtlas()
 			pai.innerHTML = ins;
 		}
 		if (localTitulo)
-		{localTitulo.innerHTML = retorno.data.titulo;}
+		{
+			var icone = g_locaplic+"/imagens/branco.gif";
+			if (retorno.data.icone != "")
+			{var icone = retorno.data.icone;}
+			localTitulo.innerHTML = retorno.data.titulo;
+
+		}
 		if (retorno.data.link != "")
 		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"","","Info");}
+		if(retorno.data.pranchadefault != "")
+		{abrePrancha(retorno.data.pranchadefault)}
 	}
 	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+g_sid;
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
@@ -111,7 +125,7 @@ function pegaListaDeAtlas()
 	{
 		var monta = function (retorno)
 		{
-			var texto = "";
+			var texto = "<table>";
 			listaAtlas = retorno.data.atlas;
 			atlasxml = retorno.data.atlasxml;
 			var i = 0;
@@ -120,15 +134,23 @@ function pegaListaDeAtlas()
 				if (listaAtlas[i].ID)
 				{
 					var inicia = g_locaplic+"/classesphp/atlas_controle.php?atlasxml= "+atlasxml+"&atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
-					texto += "<div class='titulo' style='cursor:pointer' onclick='abreatlas(\""+listaAtlas[i].ID+"\")' ><input style='cursor:pointer' type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
+					texto += "<tr><td >";
+					if (listaAtlas[i].ICONE != "")
+					{
+						texto += "<img src='"+listaAtlas[i].ICONE+"' />";
+					}
+					texto += "</td>";				
+					texto += "<td><div class='titulo' style='cursor:pointer' onclick='abreatlas(\""+listaAtlas[i].ID+"\")' >";
+					texto += "<input style='cursor:pointer' type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
 					texto += listaAtlas[i].TITULO+"</div>";
 					texto += "<div class='descricao' >"+listaAtlas[i].DESCRICAO+"</div><br>";
-					texto += "<div class='descricao' >Link: "+inicia+"</div><br>";
+					texto += "<div class='descricao' >Link: "+inicia+"</div><br></td>";
+					texto += "</tr>";
 				}
 				var i = i + 1;
 			}
 			while(listaAtlas[i])
-			local.innerHTML = texto;
+			local.innerHTML = texto+"</table>";
 			document.getElementById("tituloinstituicao").innerHTML = retorno.data.tituloinstituicao
 		}
 		var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDeAtlas";

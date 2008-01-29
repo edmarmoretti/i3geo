@@ -450,7 +450,7 @@ interface = arquivo html que será aberto
 */
 if ($interface != "mashup")
 {
-	echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo));
+	echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo))."<span>";
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))

@@ -114,18 +114,21 @@ atlasId - identificador do Atlas desejado
 				$link = mb_convert_encoding($s->LINKMAISINFO,"HTML-ENTITIES","auto");
 				$w = mb_convert_encoding($s->WABERTURA,"HTML-ENTITIES","auto");
 				$h = mb_convert_encoding($s->HABERTURA,"HTML-ENTITIES","auto");
+				$icone = mb_convert_encoding($s->ICONE,"HTML-ENTITIES","auto");
+				$pdefault = mb_convert_encoding($s->PRANCHADEFAULT,"HTML-ENTITIES","auto");
 				foreach($s->PRANCHAS as $pranchas)
 				{
 					foreach($pranchas->PRANCHA as $prancha)
 					{
 						$t = mb_convert_encoding($prancha->TITULO,"HTML-ENTITIES","auto");
+						$i = mb_convert_encoding($prancha->ICONE,"HTML-ENTITIES","auto");
 						$pranchaId = mb_convert_encoding($prancha->ID,"HTML-ENTITIES","auto");
-						$p[] = array("id"=>$pranchaId,"titulo"=>$t);
+						$p[] = array("id"=>$pranchaId,"titulo"=>$t,"icone"=>$i);
 					}
 				}
 			}
 		}
-		return (array("titulo"=>$titulo,"w"=>$w,"h"=>$h,"link"=>$link,"pranchas"=>$p));
+		return (array("pranchadefault"=>$pdefault,"icone"=>$icone,"titulo"=>$titulo,"w"=>$w,"h"=>$h,"link"=>$link,"pranchas"=>$p));
 	}
 /*
 Method: abrePrancha
@@ -158,7 +161,7 @@ locaplic - localização do i3geo no servidor
 			{$l->set("status",MS_DELETE);}
 		}
 		$mapa->save($map_file);
-
+		$mp = "";
 		foreach($this->xml->ATLAS as $s)
 		{
 			$ida = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
@@ -173,6 +176,7 @@ locaplic - localização do i3geo no servidor
 							$link = mb_convert_encoding($prancha->LINKMAISINFO,"HTML-ENTITIES","auto");
 							$w = mb_convert_encoding($prancha->WABERTURA,"HTML-ENTITIES","auto");
 							$h = mb_convert_encoding($prancha->HABERTURA,"HTML-ENTITIES","auto");
+							$mp = mb_convert_encoding($prancha->MAPEXT,"HTML-ENTITIES","auto");
 							//pega os temas
 							foreach($prancha->TEMAS as $temas)
 							{
@@ -212,6 +216,21 @@ locaplic - localização do i3geo no servidor
 				$layer->set("status",MS_DEFAULT);
 			}
 			$mapa->save($map_file);
+		}
+		//verifica extensão geográfica
+		if ($mp != "")
+		{
+			$ext = $mapa->extent;
+			$newext = array();
+			$temp = explode(",",$mp);
+			foreach ($temp as $t)
+			{
+				if ($t != "")
+				{$newext[] = $t;}
+			}
+			if (count($newext) == 4)
+			{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
+			$mapa->save($map_file);	
 		}
 		if ($w == ""){$w = 300;}
 		if($h == ""){$h = 300;}

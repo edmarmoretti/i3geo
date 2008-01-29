@@ -193,6 +193,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		$caminho = "../";
 		$executa = "gravaId";
 		include("../ms_criamapa.php");
+		exit;
 	break;
 /*
 Property: pegaListaDePranchas

@@ -17,7 +17,7 @@ File: i3geo/menutemas/atlas.xml
 		<!-- Aqui vai uma descricao resumida do Atlas -->
 		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas</DESCRICAO>
 		<!-- endereco na web do icone utilizado para destacar o atlas -->
-		<ICONE></ICONE>
+		<ICONE>../imagens/atlas_icone2.jpg</ICONE>
 		<!-- Aqui vai o link HTML para mais informacoes-->
 		<LINKMAISINFO>testemaisinfo.htm</LINKMAISINFO>
 		<!-- Endereco na web do template HTML que sera utilizado no atlas, se for vazio será usado o default -->
@@ -45,6 +45,8 @@ File: i3geo/menutemas/atlas.xml
 				<WABERTURA>200</WABERTURA>
 				<!-- altura da janela do texto de apresentacao-->
 				<HABERTURA>200</HABERTURA>
+				<!--extensão geográfica da prancha-->
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
 				<!-- Cada tema da prancha tem aqui seus parametros definidos-->
 				<TEMAS>
 					<TEMA>
@@ -63,20 +65,21 @@ File: i3geo/menutemas/atlas.xml
 	</ATLAS>
 	<ATLAS>
 		<ID>1</ID>
-		<TITULO>Título do segundo atlas para testes</TITULO>
+		<TITULO>Unidades de Conservação</TITULO>
 		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas - teste 2</DESCRICAO>
-		<ICONE></ICONE>
+		<ICONE>../imagens/atlas_icone1.jpg</ICONE>
 		<LINKMAISINFO>testemaisinfo.htm</LINKMAISINFO>
 		<TEMPLATEHTML>http://localhost/i3geo/atlas/geral.htm</TEMPLATEHTML>
 		<WABERTURA>400</WABERTURA>
 		<HABERTURA>200</HABERTURA>
-		<PRANCHADEFAULT></PRANCHADEFAULT>
+		<PRANCHADEFAULT>1</PRANCHADEFAULT>
 		<PRANCHAS>
 			<PRANCHA>
 				<ID>1</ID>
 				<TITULO>Uni. de Conservação</TITULO>
 				<DESCRICAO></DESCRICAO>
-				<ICONE></ICONE>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
 				<LINKMAISINFO>http://sistemas.mma.gov.br/portalcnuc/index.php?ido=principal.index&amp;idEstrutura=119</LINKMAISINFO>
 				<WABERTURA>700</WABERTURA>
 				<HABERTURA>300</HABERTURA>
@@ -92,7 +95,7 @@ File: i3geo/menutemas/atlas.xml
 				<ID>2</ID>
 				<TITULO>Prancha 2</TITULO>
 				<DESCRICAO></DESCRICAO>
-				<ICONE></ICONE>
+				<ICONE>../imagens/minipizza.gif</ICONE>
 				<LINKMAISINFO></LINKMAISINFO>
 				<WABERTURA>300</WABERTURA>
 				<HABERTURA>300</HABERTURA>
@@ -101,7 +104,7 @@ File: i3geo/menutemas/atlas.xml
 				<ID>3</ID>
 				<TITULO>Prancha 3</TITULO>
 				<DESCRICAO></DESCRICAO>
-				<ICONE></ICONE>
+				<ICONE>../imagens/minipizza.gif</ICONE>
 				<LINKMAISINFO></LINKMAISINFO>
 				<WABERTURA>300</WABERTURA>
 				<HABERTURA>300</HABERTURA>

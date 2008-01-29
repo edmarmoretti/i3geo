@@ -533,7 +533,7 @@ function mensagemf(m)
 	{
 		var novoel = document.createElement("div");
 		novoel.id = 'mensagem';
-		novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src='+$im("excluir.png")+' /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
+		novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
 		document.body.appendChild(novoel);
 	}
 	if (m == null)
@@ -1259,7 +1259,7 @@ function mudaboxnf(tipo)
 /*
 Function: movelentef
 
-Move a imagem na lente de aumento conforme o moveimento do mouse sobre o mapa.
+Move a imagem na lente de aumento conforme o movimento do mouse sobre o mapa.
 */
 function movelentef()
 {
@@ -1272,8 +1272,8 @@ function movelentef()
 			var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
 			var i = $i("lente").style;
 			i.clip = clipt;
-			i.eval (g_tipotop + "= (imagemyi - (topo - 40)) + g_postpx");
-			i.eval (g_tipoleft +  "= (imagemxi - (esq - 40)) + g_postpx");
+			eval("i." + g_tipotop + "= (imagemyi - (topo - 40)) + g_postpx");
+			eval("i." + g_tipoleft +  "= (imagemxi - (esq - 40)) + g_postpx");
 		}
 	}
 }
@@ -1773,7 +1773,7 @@ function mostraTip(retorno)
 								}
 							}
 						}
-						while(ocorrencias--)
+						while(ocorrencia--)
 					}
 				}
 				while(tema--)
