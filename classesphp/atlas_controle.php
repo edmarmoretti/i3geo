@@ -86,16 +86,26 @@ error_reporting(0);
 //
 $tempo = microtime(1);
 include_once("pega_variaveis.php");
+//
+// se $atlasId estiver definido, define $map_file para o programa continuar
+//
+if (isset ($atlasId) || isset ($atlasId_))
+{
+	$map_file = "";	
+}
+//
+// define $map_file para o programa poder continuar
+// esse caso acontece na lista de atlas inicial
+//
 if (!isset($atlasxml))
 {
 	include_once("../ms_configura.php");
 	$map_file = "";
 }
-else
+if (isset ($g_sid))
 {
 	session_name("i3GeoPHP");
-	if (isset($g_sid))
-	{session_id($g_sid);}
+	session_id($g_sid);
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
 	{
@@ -120,7 +130,7 @@ if ($funcao == "criaMapa")
 	include("../ms_configura.php");
 	chdir($locaplic);
 	$interface = "mashup";
-	include("ms_criamapa.php");
+	include("../ms_criamapa.php");
 	$cp->set_data(session_id());
 	$cp->return_data();
 }
@@ -163,7 +173,54 @@ Include:
 		$resultado = $atl->pegaListaDeAtlas($tituloInstituicao);
 		$cp->set_data($resultado);
 	break;
+/*
+Property: criaAtlas
+
+Abre um Atlas específico, criando o mapa e chamando a interface desejada.
+
+Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?atlasxml=&atlasId=
+
+*/
+	case "criaAtlas":
+		include("classe_atlas.php");
+		$atl = new Atlas($atlasxml);
+		$interface = $atl->criaAtlas($atlasId_);
+		if ($interface == "")
+		{
+			echo "Erro. Nenhuma interface definida para esse Atlas";
+			exit;
+		}
+		$caminho = "../";
+		$executa = "gravaId";
+		include("../ms_criamapa.php");
+	break;
+/*
+Property: pegaListaDePranchas
+
+Pega a lista de pranchas de um atlas específico.
+
+*/
+	case "pegaListaDePranchas":
+		include("classe_atlas.php");
+		$atl = new Atlas($atlasxml);
+		$resultado = $atl->pegaListaDePranchas($atlasId);
+		$cp->set_data($resultado);
+	break;
+/*
+Property: abrePrancha
+
+Ativa uma prancha do atlas.
+
+*/
+	case "abrePrancha":
+		include("classe_atlas.php");
+		$atl = new Atlas($atlasxml);
+		$resultado = $atl->abrePrancha($atlasId,$pranchaId,$map_file,$locaplic);
+		$cp->set_data($resultado);
+	break;
+
 }
+
 if (!connection_aborted())
 {
 	restauraCon($map_file,$postgis_mapa);
@@ -171,4 +228,9 @@ if (!connection_aborted())
 }
 else
 {exit();}
+function gravaid()
+{
+	global $atlasId_;
+	$_SESSION["atlasId"] = $atlasId_;	
+}
 ?>

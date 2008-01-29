@@ -447,8 +447,11 @@ function ativaGuias()
 			if ($i("guia"+g))
 			{
 				eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
-				$i("guia"+g+"obj").style.overflow="auto";
-				$i("guia"+g+"obj").style.height = objmapa.h;
+				if($i("guia"+g+"obj"))
+				{
+					$i("guia"+g+"obj").style.overflow="auto";
+					$i("guia"+g+"obj").style.height = objmapa.h;
+				}
 			}
 		}
 	}

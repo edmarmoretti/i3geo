@@ -265,6 +265,6 @@ else //se for linux
 	*/
 	$menutemas = "";
 	$utilizacgi = "sim";
-	$atlasxml = "http://mapas.mma.gov.br/i3geo/menutemas/atlas.xml";
+	$atlasxml = "http://10.1.1.34/i3geo/menutemas/atlas.xml";
 }
 ?>

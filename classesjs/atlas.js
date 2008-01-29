@@ -26,11 +26,72 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
+Variable: listaAtlas
+
+Objeto com as informações básicas sobre os Atlas existentes.
+
+Essa lista é obtida lendo-se o arquivo xml definido em atlasxml
+*/
+listaAtlas = "";
+/*
+Variable: atlasxml
+
+Endereço do arquivo xml com a lista de atlas.
+*/
+atlasxml = "";
+
+/*
 Function: iniciaAtlas
 
-Inicializa o Atlas
+Inicializa o Atlas.
+
+Pega o título e monta as pranchas
 */
 function iniciaAtlas()
+{
+	cpObjAtlas = new cpaint();
+	cpObjAtlas.set_async("true");
+	cpObjAtlas.set_response_type("JSON");
+	var localTitulo = document.getElementById("tituloAtlas");
+	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+
+	var monta = function (retorno)
+	{
+		var texto = "";
+		var pranchas = retorno.data.pranchas;
+		var pai = document.getElementById("guiasAtlas");
+		if (pai)
+		{
+			pai.className = "yui-navset";
+			var i = 0;
+			do
+			{
+				if (pranchas[i])
+				{
+					//monta as guias das pranchas
+					
+					ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >'+pranchas[i].titulo+'</div></em></a></li>';
+				}
+				var i = i + 1;
+			}
+			while(pranchas[i])
+			ins += "</ul>";
+			pai.innerHTML = ins;
+		}
+		if (localTitulo)
+		{localTitulo.innerHTML = retorno.data.titulo;}
+		if (retorno.data.link != "")
+		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"","","Info");}
+	}
+	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+g_sid;
+	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
+}
+/*
+Function: iniciaListaAtlas
+
+Mostra a lista de Atlas disponíveis para que o usuário possa escolher qual abrir.
+*/
+function iniciaListaAtlas()
 {
 	cpObjAtlas = new cpaint();
 	cpObjAtlas.set_async("true");
@@ -52,14 +113,17 @@ function pegaListaDeAtlas()
 		{
 			var texto = "";
 			listaAtlas = retorno.data.atlas;
+			atlasxml = retorno.data.atlasxml;
 			var i = 0;
 			do
 			{
 				if (listaAtlas[i].ID)
 				{
-					texto += "<div class='titulo' ><input type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
+					var inicia = g_locaplic+"/classesphp/atlas_controle.php?atlasxml= "+atlasxml+"&atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
+					texto += "<div class='titulo' style='cursor:pointer' onclick='abreatlas(\""+listaAtlas[i].ID+"\")' ><input style='cursor:pointer' type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
 					texto += listaAtlas[i].TITULO+"</div>";
 					texto += "<div class='descricao' >"+listaAtlas[i].DESCRICAO+"</div><br>";
+					texto += "<div class='descricao' >Link: "+inicia+"</div><br>";
 				}
 				var i = i + 1;
 			}
@@ -72,4 +136,47 @@ function pegaListaDeAtlas()
 	}
 	else
 	{alert("Div listaAtlas nao existe");}
+}
+/*
+Function: abreatlas
+
+Abre um Atlas específico escolhido pelo usuário
+*/
+function abreatlas(id)
+{
+	var inicia = g_locaplic+"/classesphp/atlas_controle.php?atlasxml="+atlasxml+"&atlasId_="+id+"&funcao=criaAtlas";
+	//document.body.innerHTML = "<center>Aguarde...<br>Iniciando</center>";
+	window.location = inicia;
+}
+/*
+Function: abrePrancha
+
+Ativa uma prancha, adicionando e ativando as camadas específicas.
+*/
+function abrePrancha(id)
+{
+	objaguarde.abre("Atlas","Atlas");
+	var monta = function(retorno)
+	{
+		objaguarde.fecha("Atlas");
+		if(retorno.data.link != "")
+		{
+			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"","","Info");
+		}
+		ajaxredesenha("");
+	}
+	var p = g_locaplic+"/classesphp/atlas_controle.php?g_sid="+g_sid+"&funcao=abrePrancha&pranchaId="+id;
+	cpObjAtlas.call(p,"abrePrancha",monta);
+}
+/*
+Function: atlas2i3geo
+
+Abre o mapa atual no i3geo
+*/
+function atlas2i3geo()
+{
+	var atual = window.location.href;
+	var nova = atual.replace("atlas",'aplicmap');
+	var nova = nova.replace("#",'');
+	window.location=nova;
 }

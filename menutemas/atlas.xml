@@ -19,28 +19,32 @@ File: i3geo/menutemas/atlas.xml
 		<!-- endereco na web do icone utilizado para destacar o atlas -->
 		<ICONE></ICONE>
 		<!-- Aqui vai o link HTML para mais informacoes-->
-		<LINKMAISINFO></LINKMAISINFO>
+		<LINKMAISINFO>testemaisinfo.htm</LINKMAISINFO>
 		<!-- Endereco na web do template HTML que sera utilizado no atlas, se for vazio será usado o default -->
-		<TEMPLATEHTML></TEMPLATEHTML>
+		<TEMPLATEHTML>http://localhost/i3geo/atlas/geral.htm</TEMPLATEHTML>
 		<!-- largura da janela do texto de apresentacao -->
-		<WABERTURA></WABERTURA>
+		<WABERTURA>500</WABERTURA>
 		<!-- altura da janela do texto de apresentacao -->
-		<HABERTURA></HABERTURA>
+		<HABERTURA>500</HABERTURA>
+		<!-- id da prancha que será aberta logo na inicialização-->
+		<PRANCHADEFAULT></PRANCHADEFAULT>
 		<!-- Cada prancha que compõe o Atlas tem aqui seus parâmetros definidos-->
 		<PRANCHAS>
 			<PRANCHA>
+				<!-- id da prancha -->
+				<ID>0</ID>
 				<!-- Titulo da prancha do atlas-->
-				<TITULO></TITULO>
+				<TITULO>Pranchax 1</TITULO>
 				<!-- Descricao da prancha do atlas-->
-				<DESCRICAO></DESCRICAO>
+				<DESCRICAO>Teste da prancha 1</DESCRICAO>
 				<!--endereco na web do icone utilizado para destacar a prancha-->
 				<ICONE></ICONE>
 				<!--Aqui vai o link HTML para mais informacoes-->
 				<LINKMAISINFO></LINKMAISINFO>
 				<!-- largura da janela do texto de apresentacao-->
-				<WABERTURA></WABERTURA>
+				<WABERTURA>200</WABERTURA>
 				<!-- altura da janela do texto de apresentacao-->
-				<HABERTURA></HABERTURA>
+				<HABERTURA>200</HABERTURA>
 				<!-- Cada tema da prancha tem aqui seus parametros definidos-->
 				<TEMAS>
 					<TEMA>
@@ -54,15 +58,6 @@ File: i3geo/menutemas/atlas.xml
 						<LIGADO>sim</LIGADO>
 					</TEMA>				
 				</TEMAS>
-				<!--Cada prancha é apresentada em uma guia, cada guia pode ter sub-guias, definidas aqui-->
-				<SUBGUIAS>
-					<SUBGUIA>
-						<!-- titulo da subguia, se for vazio, será utilizado apenas o icone -->
-						<TITULO></TITULO>
-						<ICONE></ICONE>
-						<LINK></LINK>
-					</SUBGUIA>
-				</SUBGUIAS>
 			</PRANCHA>
 		</PRANCHAS>
 	</ATLAS>
@@ -71,37 +66,55 @@ File: i3geo/menutemas/atlas.xml
 		<TITULO>Título do segundo atlas para testes</TITULO>
 		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas - teste 2</DESCRICAO>
 		<ICONE></ICONE>
-		<LINKMAISINFO></LINKMAISINFO>
-		<TEMPLATEHTML></TEMPLATEHTML>
-		<WABERTURA></WABERTURA>
-		<HABERTURA></HABERTURA>
+		<LINKMAISINFO>testemaisinfo.htm</LINKMAISINFO>
+		<TEMPLATEHTML>http://localhost/i3geo/atlas/geral.htm</TEMPLATEHTML>
+		<WABERTURA>400</WABERTURA>
+		<HABERTURA>200</HABERTURA>
+		<PRANCHADEFAULT></PRANCHADEFAULT>
 		<PRANCHAS>
 			<PRANCHA>
-				<TITULO></TITULO>
+				<ID>1</ID>
+				<TITULO>Uni. de Conservação</TITULO>
 				<DESCRICAO></DESCRICAO>
 				<ICONE></ICONE>
-				<LINKMAISINFO></LINKMAISINFO>
-				<WABERTURA></WABERTURA>
-				<HABERTURA></HABERTURA>
+				<LINKMAISINFO>http://sistemas.mma.gov.br/portalcnuc/index.php?ido=principal.index&amp;idEstrutura=119</LINKMAISINFO>
+				<WABERTURA>700</WABERTURA>
+				<HABERTURA>300</HABERTURA>
 				<TEMAS>
 					<TEMA>
-						<CODIGO></CODIGO>
-						<LIGADO>sim</LIGADO>
-					</TEMA>
-					<TEMA>
-						<CODIGO></CODIGO>
+						<CODIGO>ucsef</CODIGO>
 						<LIGADO>sim</LIGADO>
 					</TEMA>				
 				</TEMAS>
-				<SUBGUIAS>
-					<SUBGUIA>
-						<TITULO></TITULO>
-						<ICONE></ICONE>
-						<LINK></LINK>
-					</SUBGUIA>
-				</SUBGUIAS>
+
+			</PRANCHA>
+			<PRANCHA>
+				<ID>2</ID>
+				<TITULO>Prancha 2</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<ICONE></ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA>300</WABERTURA>
+				<HABERTURA>300</HABERTURA>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>3</ID>
+				<TITULO>Prancha 3</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<ICONE></ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA>300</WABERTURA>
+				<HABERTURA>300</HABERTURA>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>4</ID>
+				<TITULO>Prancha 4</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<ICONE></ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA>300</WABERTURA>
+				<HABERTURA>300</HABERTURA>
 			</PRANCHA>
 		</PRANCHAS>
 	</ATLAS>
-
 </RAIZ>

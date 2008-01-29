@@ -651,8 +651,10 @@ Parameters:
 $temas - string Lista separada por vírgulas, dos arquivos que serão abertos para pegar os novos layers. Não inclua a extensão ".map".
 
 $locaplic - string Diretório onde fica a aplicação.
+
+$random - indica se os nomes dos novos layers serão modificados ou nao
 */
-	function adicionaTema($temas,$locaplic)
+	function adicionaTema($temas,$locaplic,$random="sim")
 	{
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
@@ -680,7 +682,12 @@ $locaplic - string Diretório onde fica a aplicação.
 					$novosnomes = $nmap->getAllLayerNames();
 					//define nomes unicos para os temas
 					foreach ($novosnomes as $n)
-					{$nomeunico[$n] = nomeRandomico();}
+					{
+						if($random == "sim")
+						{$nomeunico[$n] = nomeRandomico();}
+						else
+						{$nomeunico[$n] = $n;}
+					}
 					//altera os temas para incluir o nome unico
 					foreach ($novosnomes as $n)
 					{

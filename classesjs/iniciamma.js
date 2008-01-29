@@ -690,6 +690,8 @@ function Mapa(e,m)
 				if(navn){var desloca = 40;}else{var desloca = 40;}
 				if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxi+desloca,imagemyi+10);}
 				if ($i("maisBotoes2")){YAHOO.janelaBotoes2.xp.panel.moveTo(imagemxi,imagemyi+10);}
+				else
+				{if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxi,imagemyi+10);}}
 				mudaiconf("pan"); //inicia no icone de zoom por box
 				if (g_entorno == "sim")
 				{
