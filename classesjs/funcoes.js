@@ -559,7 +559,7 @@ waltura - altura da nova janela
 
 wsrc - endereço do conteúdo que será aberto
 
-nx - posição da janela em x
+nx - posição da janela em x. Pode ser definido como "center"
 
 ny - posição da janela em y
 
@@ -585,7 +585,9 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		$i("wdoca").style.display = "block";
 		$i("wdocai").src = wsrc;
 	}
-    YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: false, constraintoviewport: false, visible: true, iframe:false} );
+	var fix = false;
+	if(nx == "center"){var fix = true;}
+    YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
     YAHOO.janelaDoca.xp.panel.moveTo(imagemxi,imagemyi+50);
     YAHOO.janelaDoca.xp.panel.render();
 	var escondeWdoca = function()
