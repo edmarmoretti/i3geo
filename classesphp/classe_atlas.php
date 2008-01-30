@@ -115,6 +115,7 @@ atlasId - identificador do Atlas desejado
 				$w = mb_convert_encoding($s->WABERTURA,"HTML-ENTITIES","auto");
 				$h = mb_convert_encoding($s->HABERTURA,"HTML-ENTITIES","auto");
 				$icone = mb_convert_encoding($s->ICONE,"HTML-ENTITIES","auto");
+				$tipoguias = mb_convert_encoding($s->TIPOGUIAS,"HTML-ENTITIES","auto");
 				$pdefault = mb_convert_encoding($s->PRANCHADEFAULT,"HTML-ENTITIES","auto");
 				foreach($s->PRANCHAS as $pranchas)
 				{
@@ -128,7 +129,7 @@ atlasId - identificador do Atlas desejado
 				}
 			}
 		}
-		return (array("pranchadefault"=>$pdefault,"icone"=>$icone,"titulo"=>$titulo,"w"=>$w,"h"=>$h,"link"=>$link,"pranchas"=>$p));
+		return (array("tipoguias"=>$tipoguias,"pranchadefault"=>$pdefault,"icone"=>$icone,"titulo"=>$titulo,"w"=>$w,"h"=>$h,"link"=>$link,"pranchas"=>$p));
 	}
 /*
 Method: abrePrancha
@@ -157,7 +158,8 @@ locaplic - localização do i3geo no servidor
 		foreach ($nomes as $n)
 		{
 			$l = $mapa->getlayerbyname($n);
-			if (($l->getmetadata("ATLAS")) == "sim")
+			//echo $n." ".$l->getmetadata("ATLAS");
+			if (($l->getmetadata("ATLAS")) != "nao")
 			{$l->set("status",MS_DELETE);}
 		}
 		$mapa->save($map_file);
@@ -200,16 +202,19 @@ locaplic - localização do i3geo no servidor
 		if(count($temasa) > 0)
 		{
 			include("classe_mapa.php");
+			$mapa = "";
 			$m = new Mapa($map_file);
 			$m->adicionaTema((implode(",",$temasa)),$locaplic,"nao");
 			$m->salva();
+			
 			$mapa = ms_newMapObj($map_file);
-			foreach($temasa as $t)
+			$nomes = $mapa->getalllayernames();
+			foreach ($nomes as $n)
 			{
-				$layer = $mapa->getlayerbyname($t);
-				$layer->setmetadata("ATLAS","sim");
+				$l = $mapa->getlayerbyname($n);
+				if (($l->getmetadata("ATLAS")) != "nao")
+				{$l->set("status",MS_OFF);}
 			}
-			$mapa->save($map_file);
 			foreach($layers as $t)
 			{
 				$layer = $mapa->getlayerbyname($t);
@@ -217,6 +222,7 @@ locaplic - localização do i3geo no servidor
 			}
 			$mapa->save($map_file);
 		}
+
 		//verifica extensão geográfica
 		if ($mp != "")
 		{

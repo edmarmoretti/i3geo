@@ -240,8 +240,10 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Variable: $atlasxml
 	 
 	 Indica o nome do arquivo xml que será utilizado na interface Atlas do i3geo.
+	 
+	 Pode ser utilizado o caminho relativo, tendo como base i3geo/diretorio
 	*/
-	$atlasxml = "http://localhost/i3geo/menutemas/atlas.xml";
+	$atlasxml = "../menutemas/atlas.xml";
 }
 else //se for linux
 {
@@ -265,6 +267,6 @@ else //se for linux
 	*/
 	$menutemas = "";
 	$utilizacgi = "sim";
-	$atlasxml = "http://10.1.1.34/i3geo/menutemas/atlas.xml";
+	$atlasxml = "../menutemas/atlas.xml";
 }
 ?>

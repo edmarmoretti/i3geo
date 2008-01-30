@@ -124,6 +124,7 @@ require_once("../classesjs/cpaint/cpaint2.inc.php");
 //cria objeto cpaint para uso com ajax
 //
 $cp = new cpaint();
+$cp->set_data("");
 if ($funcao == "criaMapa")
 {
 	session_destroy();
@@ -231,7 +232,16 @@ else
 {exit();}
 function gravaid()
 {
-	global $atlasId_;
-	$_SESSION["atlasId"] = $atlasId_;	
+	global $atlasId_,$tmpfname;//a variavel tmpfname vem do ms_criamapa.php
+	$_SESSION["atlasId"] = $atlasId_;
+	$_SESSION["utilizacgi"] = "nao";
+	$m = ms_newMapObj($tmpfname);
+	$nomes = $m->getalllayernames();
+	foreach($nomes as $n)
+	{
+		$l = $m->getlayerbyname($n);
+		$l->setmetadata("ATLAS","nao");
+	}
+	$m->save($tmpfname);		
 }
 ?>

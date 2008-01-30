@@ -117,6 +117,7 @@ require_once("../classesjs/cpaint/cpaint2.inc.php");
 //cria objeto cpaint para uso com ajax
 //
 $cp = new cpaint();
+$cp->set_data("");
 /*
 //
 //grava na sessão o PID do processo PHP

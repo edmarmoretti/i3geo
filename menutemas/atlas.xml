@@ -11,7 +11,7 @@ File: i3geo/menutemas/atlas.xml
 <!-- Cada atlas deve ter uma entrada aqui com seus parâmetros específicos-->
 	<ATLAS>
 		<!-- identificador numérico e único do Atlas-->
-		<ID>0</ID>
+		<ID></ID>
 		<!-- Aqui vai o título geral do Atlas -->
 		<TITULO>Título do atlas para testes</TITULO>
 		<!-- Aqui vai uma descricao resumida do Atlas -->
@@ -28,6 +28,8 @@ File: i3geo/menutemas/atlas.xml
 		<HABERTURA>500</HABERTURA>
 		<!-- id da prancha que será aberta logo na inicialização-->
 		<PRANCHADEFAULT></PRANCHADEFAULT>
+		<!-- tipo de apresentação das guias dos atlas. Pode receber os valores "expandida" ou "automatica"-->
+		<TIPOGUIAS></TIPOGUIAS>
 		<!-- Cada prancha que compõe o Atlas tem aqui seus parâmetros definidos-->
 		<PRANCHAS>
 			<PRANCHA>
@@ -66,57 +68,174 @@ File: i3geo/menutemas/atlas.xml
 	<ATLAS>
 		<ID>1</ID>
 		<TITULO>Unidades de Conservação</TITULO>
-		<DESCRICAO>Esse é um texto mais longo com a descrição do atlas - teste 2</DESCRICAO>
+		<DESCRICAO>Atlas das Unidades de Conservação brasileiras - experimental</DESCRICAO>
 		<ICONE>../imagens/atlas_icone1.jpg</ICONE>
-		<LINKMAISINFO>testemaisinfo.htm</LINKMAISINFO>
-		<TEMPLATEHTML>http://localhost/i3geo/atlas/geral.htm</TEMPLATEHTML>
+		<LINKMAISINFO>http://mapas.mma.gov.br/geodados/brasil/areasespec/atlas_ucs.html</LINKMAISINFO>
+		<TEMPLATEHTML>../atlas/geral.htm</TEMPLATEHTML>
 		<WABERTURA>400</WABERTURA>
-		<HABERTURA>200</HABERTURA>
-		<PRANCHADEFAULT>1</PRANCHADEFAULT>
+		<HABERTURA>380</HABERTURA>
+		<PRANCHADEFAULT></PRANCHADEFAULT>
+		<TIPOGUIAS>expandida</TIPOGUIAS>
 		<PRANCHAS>
 			<PRANCHA>
 				<ID>1</ID>
-				<TITULO>Uni. de Conservação</TITULO>
+				<TITULO>Todas</TITULO>
 				<DESCRICAO></DESCRICAO>
 				<MAPEXT>-82,-39,-23,9</MAPEXT>
 				<ICONE>../imagens/minipizza.gif</ICONE>
-				<LINKMAISINFO>http://sistemas.mma.gov.br/portalcnuc/index.php?ido=principal.index&amp;idEstrutura=119</LINKMAISINFO>
-				<WABERTURA>700</WABERTURA>
-				<HABERTURA>300</HABERTURA>
+				<LINKMAISINFO>http://mapas.mma.gov.br/geodados/brasil/areasespec/atlas_ucs.html</LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
 				<TEMAS>
 					<TEMA>
-						<CODIGO>ucsef</CODIGO>
+						<CODIGO>atlas_biomas</CODIGO>
 						<LIGADO>sim</LIGADO>
-					</TEMA>				
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsef</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
 				</TEMAS>
-
 			</PRANCHA>
 			<PRANCHA>
 				<ID>2</ID>
-				<TITULO>Prancha 2</TITULO>
+				<TITULO>Estaduais de proteção integral</TITULO>
 				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
 				<ICONE>../imagens/minipizza.gif</ICONE>
-				<LINKMAISINFO></LINKMAISINFO>
-				<WABERTURA>300</WABERTURA>
-				<HABERTURA>300</HABERTURA>
+				<LINKMAISINFO>http://mapas.mma.gov.br/geodados/brasil/areasespec/atlas_ucs.html</LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucse</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
 			</PRANCHA>
 			<PRANCHA>
 				<ID>3</ID>
-				<TITULO>Prancha 3</TITULO>
+				<TITULO>Federais de proteção integral</TITULO>
 				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
 				<ICONE>../imagens/minipizza.gif</ICONE>
-				<LINKMAISINFO></LINKMAISINFO>
-				<WABERTURA>300</WABERTURA>
-				<HABERTURA>300</HABERTURA>
+				<LINKMAISINFO>http://mapas.mma.gov.br/geodados/brasil/areasespec/atlas_ucs.html</LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
 			</PRANCHA>
 			<PRANCHA>
 				<ID>4</ID>
-				<TITULO>Prancha 4</TITULO>
+				<TITULO>Teste de guia 1</TITULO>
 				<DESCRICAO></DESCRICAO>
-				<ICONE></ICONE>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
 				<LINKMAISINFO></LINKMAISINFO>
-				<WABERTURA>300</WABERTURA>
-				<HABERTURA>300</HABERTURA>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>5</ID>
+				<TITULO>Teste de guia 2</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>6</ID>
+				<TITULO>Teste de guia 3</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>7</ID>
+				<TITULO>Teste de guia 4</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
+			</PRANCHA>
+			<PRANCHA>
+				<ID>8</ID>
+				<TITULO>Teste de guia 5</TITULO>
+				<DESCRICAO></DESCRICAO>
+				<MAPEXT>-82,-39,-23,9</MAPEXT>
+				<ICONE>../imagens/minipizza.gif</ICONE>
+				<LINKMAISINFO></LINKMAISINFO>
+				<WABERTURA></WABERTURA>
+				<HABERTURA></HABERTURA>
+				<TEMAS>
+					<TEMA>
+						<CODIGO>atlas_biomas</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>			
+					<TEMA>
+						<CODIGO>atlas_ucsf</CODIGO>
+						<LIGADO>sim</LIGADO>
+					</TEMA>
+				</TEMAS>
 			</PRANCHA>
 		</PRANCHAS>
 	</ATLAS>

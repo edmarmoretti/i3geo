@@ -53,10 +53,19 @@ function iniciaAtlas()
 	cpObjAtlas.set_async("true");
 	cpObjAtlas.set_response_type("JSON");
 	var localTitulo = document.getElementById("tituloAtlas");
-	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
-
 	var monta = function (retorno)
 	{
+		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+		//coloca as guias com barra de rolagem
+		if (retorno.data.tipoguias == "expandida")
+		{
+			var ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+			if(navm)
+			{
+				document.getElementById("guiasAtlas").style.width=objmapa.w;
+			}
+			document.getElementById("guiasAtlas").style.height="35px";
+		}
 		var texto = "";
 		var pranchas = retorno.data.pranchas;
 		var pai = document.getElementById("guiasAtlas");
@@ -93,9 +102,10 @@ function iniciaAtlas()
 
 		}
 		if (retorno.data.link != "")
-		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"","","Info");}
+		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");}
 		if(retorno.data.pranchadefault != "")
 		{abrePrancha(retorno.data.pranchadefault)}
+		calcposf();
 	}
 	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+g_sid;
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
@@ -183,9 +193,9 @@ function abrePrancha(id)
 		objaguarde.fecha("Atlas");
 		if(retorno.data.link != "")
 		{
-			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"","","Info");
+			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
 		}
-		ajaxredesenha("");
+		remapaf();
 	}
 	var p = g_locaplic+"/classesphp/atlas_controle.php?g_sid="+g_sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);
