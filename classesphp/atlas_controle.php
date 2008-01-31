@@ -93,15 +93,6 @@ if (isset ($atlasId) || isset ($atlasId_))
 {
 	$map_file = "";	
 }
-//
-// define $map_file para o programa poder continuar
-// esse caso acontece na lista de atlas inicial
-//
-if (!isset($atlasxml))
-{
-	include_once("../ms_configura.php");
-	$map_file = "";
-}
 if (isset ($g_sid))
 {
 	session_name("i3GeoPHP");
@@ -112,6 +103,12 @@ if (isset ($g_sid))
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
 }
+if (!isset($atlasxml))
+{
+	include_once("../ms_configura.php");
+	$map_file = "";
+}
+
 if (isset($debug) && $debug == "sim")
 {error_reporting(E_ALL);}
 //
@@ -125,16 +122,7 @@ require_once("../classesjs/cpaint/cpaint2.inc.php");
 //
 $cp = new cpaint();
 $cp->set_data("");
-if ($funcao == "criaMapa")
-{
-	session_destroy();
-	include("../ms_configura.php");
-	chdir($locaplic);
-	$interface = "mashup";
-	include("../ms_criamapa.php");
-	$cp->set_data(session_id());
-	$cp->return_data();
-}
+
 if (!isset($map_file))
 {
 	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
@@ -184,6 +172,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 */
 	case "criaAtlas":
 		include("classe_atlas.php");
+		$atlasxmltemp = $atlasxml;
 		$atl = new Atlas($atlasxml);
 		$interface = $atl->criaAtlas($atlasId_);
 		if ($interface == "")
@@ -232,9 +221,10 @@ else
 {exit();}
 function gravaid()
 {
-	global $atlasId_,$tmpfname;//a variavel tmpfname vem do ms_criamapa.php
+	global $atlasId_,$tmpfname,$atlasxmltemp;//a variavel tmpfname vem do ms_criamapa.php
 	$_SESSION["atlasId"] = $atlasId_;
 	$_SESSION["utilizacgi"] = "nao";
+	$_SESSION["atlasxml"] = $atlasxmltemp;
 	$m = ms_newMapObj($tmpfname);
 	$nomes = $m->getalllayernames();
 	foreach($nomes as $n)
