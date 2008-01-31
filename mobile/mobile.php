@@ -21,6 +21,7 @@ input
 </style>
 <script>
 //limpa a tela caso tenha sido enviada alguma mensagem pelo ms_criamapa.php
+if(document.body)
 document.body.innerHTML="";
 </script>
 <body>
@@ -119,6 +120,7 @@ if ($tipo=="localizar")
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
+/*
 if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
 {$nomeimagem = $locmapserv."?map=".$tmpfname."&mode=map";}
 else
@@ -128,14 +130,36 @@ else
 	$imgo->saveImage($nome);
 	$nomeimagem = ($imgo->imageurl).basename($nome);
 }
+*/
+error_reporting(E_ALL);
+$imgo = $mapa->draw();
+$nome = ($imgo->imagepath).nomeRandomico().".png";
+$imgo->saveImage($nome);
+$nomeimagem = ($imgo->imageurl).basename($nome);
+//funde com a imagem da barra de navegacao
+$ims = imagecreatefrompng("navegacao.png");
+$img = imagecreatefrompng($nome);
+$wdst = imagesx($img);
+$hdst = imagesy($img);
+$wsrc = imagesx($ims);
+$hsrc = imagesy($ims);
+$xdst = abs(($wdst - $wsrc) / 2);
+$ydst = abs(($hdst - $hsrc) / 2);
+$branco = imagecolorresolve($ims,255,255,255);
+//imagecolortransparent($ims,$branco);
+//imageSaveAlpha($ims, true);
+imagecopymerge($img,$ims,0,0,0,0,$wsrc,$hsrc,80);
+ImagePNG($img, $nome);
 ?>
 <div id='botoes' style="position:relative;top:1px;left:1px" >
+	<!--
 	<input type='button' value='+' onclick='zoommais()' />
 	<input type='button' value='-' onclick='zoommenos()' />
 	<input type='button' value='O' onclick='oeste()' />	
 	<input type='button' value='N' onclick='norte()' />
 	<input type='button' value='S' onclick='sul()' />
 	<input type='button' value='L' onclick='leste()' />
+	-->
 	<select id='op' name='op' onchange='op(this.value)'>
 		<option value=''>Op&ccedil;&otilde;es</option>
 		<option value='reiniciar'>reiniciar</option>
@@ -151,7 +175,15 @@ else
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname;?>' />
 	<input id='tipo' type=hidden name='tipo' value='' />
 </form>
-<img id='mapa' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' />
+<map name="sample">
+<area shape="rect" coords="0,0,44,23" onclick='zoommais()'>
+<area shape="rect" coords="0,26,44,42" onclick='zoommenos()'>
+<area shape="rect" coords="14,46,28,58" onclick='norte()'>
+<area shape="rect" coords="28,58,40,73" onclick='leste()'>
+<area shape="rect" coords="16,74,30,86" onclick='sul()'>
+<area shape="rect" coords="3,58,17,71" onclick='oeste()'>
+</map>
+<img id='mapa' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
 </body>
 <script>
 var app = navigator.appName.substring(0,1);
