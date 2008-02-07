@@ -34,7 +34,7 @@ Class: Atlas
 class Atlas
 {
 	/*
-	Variable: $tlas
+	Variable: $atlas
 	
 	Objeto Atlas
 	*/
@@ -57,8 +57,12 @@ $atlasxml - Endereço do arquivo xml com as definições do Atlas.
 Method: pegaListaDeAtlas
 
 Pega a lista de atlas existentes e as informações básicas sobre cada um
+
+Parameters:
+
+tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atlas. Pode ser obtido do ms_configura.php
 */
-	function pegaListaDeAtlas($tituloinstituicao)
+	function pegaListaDeAtlas($tituloinstituicao="")
 	{
 		$tituloinstituicao = mb_convert_encoding($tituloinstituicao,"HTML-ENTITIES","auto");
 		$atlas = array();
@@ -78,11 +82,14 @@ Pega a lista de atlas existentes e as informações básicas sobre cada um
 /*
 Method: criaAtlas
 
-Lê os parâmetros específicos para abrir um atlas
+Lê os parâmetros necessários para abrir um atlas no i3geo
+
+Parameters:
+
+atlasId - id do atlas desejado, conforme existente em atlas.xml
 */
 	function criaAtlas($atlasId)
 	{
-		$parametros = array();
 		foreach($this->xml->ATLAS as $s)
 		{
 			$id = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
@@ -96,7 +103,7 @@ Lê os parâmetros específicos para abrir um atlas
 /*
 Method: pegaListaDePranchas
 
-Pega a lista de atlas existentes e as informações básicas sobre cada um
+Pega a lista de pranchas existentes em um atlas específico e as informações básicas sobre cada uma
 
 Parameters:
 
@@ -136,7 +143,9 @@ Method: abrePrancha
 
 Ativa uma prancha do atlas.
 
-Inclui os temas definidos na configuração da prancha. Ao adicionar um tema, é incluido o metadata ATLAS = "sim" no layer
+Inclui os temas definidos na configuração da prancha.
+
+Os layers que não são oriundos de uma prancha recebe o metadata "ATLAS" igual a "nao". Isso é feito na inicialização do Atlas.
 
 Parameters:
 

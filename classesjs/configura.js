@@ -842,6 +842,16 @@ var temp = pCookie("i3geolingua");
 if(temp != undefined)
 {g_linguagem = temp;}
 /*
+Variable: g_kml
+
+Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do link para acesso ao tema via kml.
+
+Parameters:
+
+sim|nao
+*/
+g_kml = "sim";
+/*
 Variable: g_qrcode
 
 Indica se o código de barras do tipo QRcode deve ser mostrado.
@@ -1343,6 +1353,13 @@ g_listaFuncoesBotoes = {
 		{wiki();}
 	},
 	{
+		//botão de busca de fotos
+		iddiv:"buscafotos",
+		dica:"Fotos",
+		funcaoonclick:function()
+		{buscafotos();}
+	},
+	{
 		//botão de impressão
 		iddiv:"imprimir",
 		dica:$trad("d12"),
@@ -1463,5 +1480,17 @@ g_listaFuncoesBotoes = {
 		//ativa as opções de busca rápida
 		iddiv:"buscaRapida",
 		constroiconteudo:'ativaBuscaRapida("buscaRapida")'
+	},
+	{
+		//sobe os botoes da barra de ferramentas
+		iddiv:"sobeferramentas",
+		funcaoonclick:function()
+		{sobeferramentas();}
+	},
+	{
+		//desce os botoes da barra de ferramentas
+		iddiv:"desceferramentas",
+		funcaoonclick:function()
+		{desceferramentas();}
 	}	
 ]};

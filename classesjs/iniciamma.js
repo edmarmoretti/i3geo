@@ -681,10 +681,14 @@ function Mapa(e,m)
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
 				//if ($i("encolheFerramentas")){temp = temp + parseInt($i("encolheFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
-				$i("mst").style.width=objmapa.w + temp + "px";
-				var i = $i("contemImg").style;
-				i.height=objmapa.h + "px";
-				i.width=objmapa.w + "px";
+				if($i("mst"))
+				{$i("mst").style.width=objmapa.w + temp + "px";}
+				if($i("contemImg"))
+				{
+					var i = $i("contemImg").style;
+					i.height=objmapa.h + "px";
+					i.width=objmapa.w + "px";
+				}
 				calcposf();
 				//reposiciona a janela de botoes
 				if(navn){var desloca = 40;}else{var desloca = 40;}
@@ -747,7 +751,7 @@ function Mapa(e,m)
 	
 	Parameters:
 	
-	id - id do elemento que ativa a operação	
+	id - id do elemento que receberá a árvore com a lista de propriedades.	
 	*/	
 	this.ativaListaPropriedades = function(id)
 	{
@@ -764,10 +768,13 @@ function Mapa(e,m)
 			{
 				do
 				{
-					var temp = g_listaPropriedades.propriedades[l].text;
-					var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-					tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='tic' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />&nbsp;"+temp+" </span>";
-					listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
+					if(g_listaPropriedades.propriedades[l])
+					{
+						var temp = g_listaPropriedades.propriedades[l].text;
+						var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
+						tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='tic' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />&nbsp;"+temp+" </span>";
+						listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
+					}
 				}
 				while(l--)
 			}

@@ -175,8 +175,10 @@ class LayerServer {
         $this->out_proj = ms_newProjectionObj("init=epsg:4326");
         // Set endpoint
         //die($_SERVER['REQUEST_URI']);
-        $this->endpoint = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
-
+		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+		$protocolo = $protocolo[0];
+        $this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
+		
 
         // Process request
         if(!$this->has_error()) {
@@ -314,9 +316,12 @@ class LayerServer {
             $wms_link = preg_replace('/&/', '&amp;', $wms_link);
             $wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;';
             // Link ok, create folder
-            $folder =& $this->_xml->Document->addChild('GroundOverlay');
-            $folder->addChild('description', $this->get_layer_description($layer));
-            $folder->addChild('name', $layer_desc);
+            //$folder =& $this->_xml->Document->addChild('GroundOverlay');
+            $folder =& $this->simplexml_addChild($this->_xml->Document,'GroundOverlay');
+            //simplexml_addChild($parent, $name, $value='')
+            //$folder->addChild('description', $this->get_layer_description($layer));
+            $this->simplexml_addChild($folder,'name',$layer_desc);
+            //$folder->addChild('name', $layer_desc);
             $this->add_wms_link($folder, $layer, $wms_link);
         } else {
 
@@ -745,17 +750,24 @@ class LayerServer {
     */
     function add_wms_link(&$folder, &$layer, &$link){
         // Build up the KML response document.
-        $icon =& $folder->addChild('Icon');
-        $icon->addChild('href', $link . 'layers=' . $layer->name);
-        //$icon->addChild('viewBoundScale', 1.5);
-        $icon->addChild('viewRefreshMode', 'onStop');
-        $llbox =& $folder->addChild('LatLonBox');
+        //$icon =& $folder->addChild('Icon');
+        $icon =& $this->simplexml_addChild($folder,'Icon');
+        //$icon->addChild('href', $link . 'layers=' . $layer->name);
+        $this->simplexml_addChild($icon,'href', $link . 'layers=' . $layer->name);
+        //$icon->addChild('viewRefreshMode', 'onStop');
+        $this->simplexml_addChild($icon,'viewRefreshMode', 'onStop');
+        //$llbox =& $folder->addChild('LatLonBox');
+        $llbox =& $this->simplexml_addChild($folder,'LatLonBox');
         $ext = $this->map_object->extent;
         $ext->project($this->in_proj, $this->out_proj);
-        $llbox->north = $ext->maxy;
-        $llbox->south = $ext->miny;
-        $llbox->east  = $ext->maxx;
-        $llbox->west  = $ext->minx;
+        //$llbox->north = $ext->maxy;
+        $this->simplexml_addChild($llbox,'north', $ext->maxy);
+        //$llbox->south = $ext->miny;
+        $this->simplexml_addChild($llbox,'south', $ext->miny);
+        //$llbox->east  = $ext->maxx;
+        $this->simplexml_addChild($llbox,'east', $ext->maxx);
+        //$llbox->west  = $ext->minx;
+        $this->simplexml_addChild($llbox,'west', $ext->minx);
         // Reset original projection
         $ext->project($this->out_proj, $this->in_proj);
      }
@@ -831,6 +843,8 @@ class LayerServer {
         if(!file_exists($this->map) && is_readable($this->map)){
             $this->set_error('Cannot read mapfile '. $this->map);
         } else {
+			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+			$servidor = $protocolo[0]."://".$_SERVER['HTTP_HOST'];
 			$maptemp = ms_newMapObj("../../temas/".$this->map.".map");
 			$temp = $this->map;
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -838,36 +852,25 @@ class LayerServer {
 			else
 			{$this->map = "../../aplicmap/geral1.map";}
             $this->map_object = ms_newMapObj($this->map);
-            $this->map_object->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+            $this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
             for ($i=0;$i < ($this->map_object->numlayers);$i++)
 			{
 				$l = $this->map_object->getlayer($i);
 				$l->set("status",MS_DELETE);
+				$l->set("name","");
 			}
 			for ($i=0;$i < ($maptemp->numlayers);$i++)
 			{
 				$l = $maptemp->getlayer($i);
 				$l->set("status",MS_DEFAULT);
 				$l->set("type",MS_LAYER_RASTER);
-				/*
-				$numclasses = $l->numclasses;
-				for ($c=0; $c < $numclasses; $c++)
-				{
-					$classe = $l->getClass($c);
-					$e = $classe->getstyle(0);
-					$cor[$c] = $e->color;
-					if ($cor[$c] != "")
-					{
-						$ocor[$c] = $e->outlinecolor;
-						$ocor[$c]->setrgb($cor[$c]->red,$cor[$c]->green,$cor[$c]->blue);
-					}
-				}
-				*/
+				$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
 				ms_newLayerObj($this->map_object, $l);
 			}
             if(!$this->map_object){
                 $this->set_error('Cannot load mapfile '. $this->map);
             }
+            //http://localhost:80/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
         }
     }
 
@@ -937,5 +940,15 @@ class LayerServer {
         print $data;
         exit();
     }
+// phpversion <= 5.1.2
+
+function simplexml_addChild($parent, $name, $value=''){
+    $new_child = new SimpleXMLElement("<$name>$value</$name>");
+    $node1 = dom_import_simplexml($parent);
+    $dom_sxe = dom_import_simplexml($new_child);
+    $node2 = $node1->ownerDocument->importNode($dom_sxe, true);
+    $node1->appendChild($node2);
+    return simplexml_import_dom($node2);
+}
 }
 ?>

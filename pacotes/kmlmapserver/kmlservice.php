@@ -22,7 +22,6 @@ This file is part of KMLMAPSERVER.
     along with KMLMAPSERVER; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-http://localhost/i3geo/pacotes/kmlmapserver/kmlservice.php?map=x
 http://10.1.1.34:80/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
 */
 error_reporting(0);

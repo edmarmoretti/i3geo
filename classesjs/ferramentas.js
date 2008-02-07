@@ -178,6 +178,15 @@ function cliqueCapturaPt()
 	}
 }
 /*
+Function: abreKml
+
+Abre a janela para mostrar o link de acesso a um tema via kml.
+*/
+function abreKml(tema)
+{
+	wdocaf("450px","250px",g_locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml");
+}
+/*
 Function: cliqueIdentifica
 
 Abre a janela de identificação de elementos
@@ -1309,6 +1318,17 @@ function wiki()
 {
 	g_operacao = "navega";
 	wdocaf("450px","190px",g_locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
+}
+/*
+Function: buscafotos
+
+Abre a janela de busca de fotos.
+*/
+function buscafotos()
+{
+	g_operacao = "navega";
+	wdocaf("550px","400px",g_locaplic+"/ferramentas/buscafotos/index.htm","","","Fotos");
+	criaboxg();
 }
 /*
 Function: google

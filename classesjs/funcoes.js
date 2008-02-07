@@ -129,6 +129,90 @@ function pCookie(nome)
 /*
 Section: interface
 */
+function sobeferramentas()
+{
+	if($i("maisBotoes2"))
+	{
+		var elementos = $i("maisBotoes2").getElementsByTagName("div");
+		if(elementos[0].style.display == "inline")
+		{return;}
+		if(elementos.length > 0)
+		{
+			//mostra o primeiro botão
+			var mostra = elementos[0];
+			var i = 0;
+			do
+			{
+				if(elementos[i].style)
+				{
+					if(elementos[i].style.display == "inline")
+					{break;}
+					if(elementos[i].style.display == "none")
+					{var mostra = elementos[i];}
+				}
+				var i = i + 1;
+			}
+			while(i < elementos.length)
+			mostra.style.display="inline";
+			//esconde o último botao
+			var i = elementos.length - 1;
+			var mostra = elementos[i];
+			do
+			{
+				if(elementos[i].style)
+				{
+					if(elementos[i].style.display == "inline")
+					{var mostra = elementos[i];break;}
+				}
+				var i = i - 1;
+			}
+			while(i >= 0)
+			mostra.style.display="none";
+		}
+	}
+
+}
+function desceferramentas()
+{
+	var tipo = "inline";
+	if($i("maisBotoes2"))
+	{
+		var elementos = $i("maisBotoes2").getElementsByTagName("div");
+		if(elementos[elementos.length - 1].style.display == tipo)
+		{return;}
+		if(elementos.length > 0)
+		{
+			//esconde o primeiro botao
+			var i = 0;
+			do
+			{
+				if(elementos[i].style)
+				{
+					if((elementos[i].style.display == "block") || (elementos[i].style.display == "inline") || (elementos[i].style.display == ""))
+					{elementos[i].style.display="none";break;}
+				}
+				var i = i + 1;
+			}
+			while(i < elementos.length)
+			//mostra o último botao
+			var i = elementos.length-1;
+			var mostra = elementos[i];
+			do
+			{
+				if(elementos[i].style)
+				{
+					if(elementos[i].style.display == tipo)
+					{break;}
+					if(elementos[i].style.display == "none")
+					{var mostra = elementos[i];}
+				}
+				var i = i - 1;
+			}
+			while(i >= 0)
+			mostra.style.display=tipo;
+		}
+	}
+}
 /*
 Function: trocallingua
 
@@ -140,8 +224,12 @@ lingua
 */
 function trocalingua(l)
 {
-	iCookie("i3geolingua",l);
-	window.location.reload(true)	
+	try
+	{
+		iCookie("i3geolingua",l);
+		window.location.reload(true)	
+	}
+	catch(e){alert("Erro ao mudar lingua");}
 }
 /*
 Function: criaContainerRichdraw
@@ -150,34 +238,38 @@ Cria os elementos dom necessários ao uso das funções de desenho sobre o mapa.
 */
 function criaContainerRichdraw()
 {
-	if (!$i("divGeometriasTemp"))
+	try
 	{
-		var novoel = document.createElement("div");
-		novoel.id = "divGeometriasTemp";
-		var ne = novoel.style;
-		ne.cursor="crosshair";
-		ne.zIndex=0;
-		ne.position="absolute";
-		ne.width=objmapa.w;
-		ne.height=objmapa.h;
-		ne.border="1px solid black";
-		ne.display="none";
-		ne.top=imagemyi;
-		ne.left=imagemxi;
-		document.body.appendChild(novoel);
+		if (!$i("divGeometriasTemp"))
+		{
+			var novoel = document.createElement("div");
+			novoel.id = "divGeometriasTemp";
+			var ne = novoel.style;
+			ne.cursor="crosshair";
+			ne.zIndex=0;
+			ne.position="absolute";
+			ne.width=objmapa.w;
+			ne.height=objmapa.h;
+			ne.border="1px solid black";
+			ne.display="none";
+			ne.top=imagemyi;
+			ne.left=imagemxi;
+			document.body.appendChild(novoel);
+		}
+		var divgeo = $i("divGeometriasTemp");
+		divgeo.innerHTML = "";
+		var renderer;
+		if (navn) {renderer = new SVGRenderer();}
+		else {renderer = new VMLRenderer();}
+		richdraw = new RichDrawEditor(divgeo, renderer);
+		richdraw.editCommand('fillcolor', 'red');
+		richdraw.editCommand('linecolor', 'gray');
+		richdraw.editCommand('linewidth', '1px');
+		richdraw.editCommand('mode', 'line');
+		divgeo.style.display="block";
+		ativaClicks(divgeo);
 	}
-	var divgeo = $i("divGeometriasTemp");
-	divgeo.innerHTML = "";
-	var renderer;
-	if (navn) {renderer = new SVGRenderer();}
-	else {renderer = new VMLRenderer();}
-	richdraw = new RichDrawEditor(divgeo, renderer);
-	richdraw.editCommand('fillcolor', 'red');
-	richdraw.editCommand('linecolor', 'gray');
-	richdraw.editCommand('linewidth', '1px');
-	richdraw.editCommand('mode', 'line');
-	divgeo.style.display="block";
-	ativaClicks(divgeo);
+	catch(e){alert("Erro ao tentar criar container richdraw");}
 }
 /*
 Function: mudaVisual
@@ -192,74 +284,78 @@ function mudaVisual(visual)
 {
 	var monta = function(retorno)
 	{
-		objaguarde.fecha("ajaxredesenha");
-		var imgstemp = retorno.data.arquivos;
-		var imgs = new Array();
-		var i = imgstemp.length-1;
-		if(i >= 0)
+		try
 		{
-			do
+			objaguarde.fecha("ajaxredesenha");
+			var imgstemp = retorno.data.arquivos;
+			var imgs = new Array();
+			var i = imgstemp.length-1;
+			if(i >= 0)
 			{
-				var temp = imgstemp[i].split(".");
-				if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
+				do
 				{
-					imgs.push(imgstemp[i]);
-				}
-			}
-			while(i--)
-		}
-		var elementos = document.getElementsByTagName("img");
-		var elt = elementos.length;
-		var caminho = g_locaplic+"/imagens/visual/"+visual+"/";
-		//faz a troca em imagens
-		var j = imgs.length-1;
-		if(j >= 0)
-		{
-			do
-			{
-				for (var i=0;i < elt; i++)
-				{
-					if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
-					{elementos[i].src = caminho+"branco.gif";}
-					if (elementos[i].src.search("visual") > -1)
-					{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
-				}
-			}
-			while(j--)
-		}	
-		//faz a troca em ids
-		var j = imgs.length-1;
-		if(j >= 0)
-		{
-			do
-			{
-				var busca = imgs[j].split(".");
-				if ($i(busca[0]))
-				{$i(busca[0]).src = caminho+imgs[j];}
-			}
-			while(j--)
-		}
-		//faz a troca em bg
-		var elementos = new Array("vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
-		var i = elementos.length-1;
-		if(i >= 0)
-		{
-			do
-			{
-				if ($i(elementos[i]))
-				{
-					$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
-					for (var j=0;j < imgs.length; j++)
+					var temp = imgstemp[i].split(".");
+					if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
 					{
-						var busca = imgs[j].split(".");
-						if (busca[0] == elementos[i])
-						{$i(elementos[i]).style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
-					}				
+						imgs.push(imgstemp[i]);
+					}
 				}
+				while(i--)
 			}
-			while(i--)
+			var elementos = document.getElementsByTagName("img");
+			var elt = elementos.length;
+			var caminho = g_locaplic+"/imagens/visual/"+visual+"/";
+			//faz a troca em imagens
+			var j = imgs.length-1;
+			if(j >= 0)
+			{
+				do
+				{
+					for (var i=0;i < elt; i++)
+					{
+						if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
+						{elementos[i].src = caminho+"branco.gif";}
+						if (elementos[i].src.search("visual") > -1)
+						{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
+					}
+				}
+				while(j--)
+			}	
+			//faz a troca em ids
+			var j = imgs.length-1;
+			if(j >= 0)
+			{
+				do
+				{
+					var busca = imgs[j].split(".");
+					if ($i(busca[0]))
+					{$i(busca[0]).src = caminho+imgs[j];}
+				}
+				while(j--)
+			}
+			//faz a troca em bg
+			var elementos = new Array("vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
+			var i = elementos.length-1;
+			if(i >= 0)
+			{
+				do
+				{
+					if ($i(elementos[i]))
+					{
+						$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
+						for (var j=0;j < imgs.length; j++)
+						{
+							var busca = imgs[j].split(".");
+							if (busca[0] == elementos[i])
+							{$i(elementos[i]).style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
+						}				
+					}
+				}
+				while(i--)
+			}
+			g_visual = visual;
 		}
-		g_visual = visual;
+		catch(e){alert("Ocorreu um erro.");objaguarde.fecha("ajaxredesenha");}
 	};
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
@@ -273,31 +369,35 @@ Abre a janela com as mensagens de ajuda ao usuário
 */
 function initJanelaMen()
 {
-	if (!$i("janelaMen"))
+	try
 	{
-		var novoel = document.createElement("div");
-		novoel.id = "janelaMen";
-		novoel.style.display="block";
-		novoel.style.border="1px solid rgb(170,170,170)";
-		novoel.innerHTML = '<div class="hd">&nbsp;</div><div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
-		document.body.appendChild(novoel);
-		var i = ($i("janelaMenTexto")).style;
-		i.textAlign="left";
-		i.fontSize="10px";
-		YAHOO.namespace("janelaMen.xp");
-		YAHOO.janelaMen.xp.panel = new YAHOO.widget.Panel("janelaMen", { width:"266px", height:"auto", fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-		YAHOO.janelaMen.xp.panel.render();
-		var escondeMen = function()
+		if (!$i("janelaMen"))
 		{
-			YAHOO.util.Event.removeListener(YAHOO.janelaMen.xp.panel.close, "click");
-			YAHOO.janelaMen.xp.panel.destroy();	
-			iCookie("g_janelaMen","nao");	
-		};
-		YAHOO.util.Event.addListener(YAHOO.janelaMen.xp.panel.close, "click", escondeMen);
-		iCookie("g_janelaMen","sim");
+			var novoel = document.createElement("div");
+			novoel.id = "janelaMen";
+			novoel.style.display="block";
+			novoel.style.border="1px solid rgb(170,170,170)";
+			novoel.innerHTML = '<div class="hd">&nbsp;</div><div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
+			document.body.appendChild(novoel);
+			var i = ($i("janelaMenTexto")).style;
+			i.textAlign="left";
+			i.fontSize="10px";
+			YAHOO.namespace("janelaMen.xp");
+			YAHOO.janelaMen.xp.panel = new YAHOO.widget.Panel("janelaMen", { width:"266px", height:"auto", fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaMen.xp.panel.render();
+			var escondeMen = function()
+			{
+				YAHOO.util.Event.removeListener(YAHOO.janelaMen.xp.panel.close, "click");
+				YAHOO.janelaMen.xp.panel.destroy();	
+				iCookie("g_janelaMen","nao");	
+			};
+			YAHOO.util.Event.addListener(YAHOO.janelaMen.xp.panel.close, "click", escondeMen);
+			iCookie("g_janelaMen","sim");
+		}
+		YAHOO.janelaMen.xp.panel.show();
+		YAHOO.janelaMen.xp.panel.moveTo(imagemxi - 267 ,objmapa.h - 70);
 	}
-	YAHOO.janelaMen.xp.panel.show();
-	YAHOO.janelaMen.xp.panel.moveTo(imagemxi - 267 ,objmapa.h - 70);
+	catch(e){alert("Nao foi possivel criar a janela de mensagens.");}
 }
 /*
 Function: docaguias
@@ -528,23 +628,27 @@ m - mensagem que será mostrada.
 */
 function mensagemf(m)
 {
-	//insere o div para mensagens
-	if (!$i("mensagem"))
+	try
 	{
-		var novoel = document.createElement("div");
-		novoel.id = 'mensagem';
-		novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
-		document.body.appendChild(novoel);
+		//insere o div para mensagens
+		if (!$i("mensagem"))
+		{
+			var novoel = document.createElement("div");
+			novoel.id = 'mensagem';
+			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
+			document.body.appendChild(novoel);
+		}
+		if (m == null)
+		{$i("mensagem").style.visibility = "hidden";}
+		else
+		{
+			$i("mensagemt").value = m;
+			$i("mensagem").style.visibility = "visible";
+		}
+		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = imagemxi + g_postpx');
+		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = imagemyi + g_postpx');
 	}
-	if (m == null)
-	{$i("mensagem").style.visibility = "hidden";}
-	else
-	{
-		$i("mensagemt").value = m;
-		$i("mensagem").style.visibility = "visible";
-	}
-	eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = imagemxi + g_postpx');
-	eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = imagemyi + g_postpx');
+	catch(e){alert("Impossivel criar mensagem");}
 }
 /*
 Function: wdocaf
@@ -567,46 +671,54 @@ texto - texto que será mostrado no título da janela
 */
 function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 {
-	if($i("boxg"))
-	{$i("boxg").style.display = "none";}
-	var wlargura_ = parseInt(wlargura)+0+"px";
-	YAHOO.namespace("janelaDoca.xp");
-	if ($i("wdoca"))
-	{YAHOO.janelaDoca.xp.panel.destroy();}
-	var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
-	var novoel = document.createElement("div");
-	novoel.id = "wdoca";
-	novoel.style.display="block";
-	novoel.innerHTML = ins;
-	document.body.appendChild(novoel);
-	if ($i("wdocai"))
+	try
 	{
-		with ($i("wdocai").style){width = "100%";height=waltura;};
-		$i("wdoca").style.display = "block";
-		$i("wdocai").src = wsrc;
-	}
-	var fix = false;
-	if(nx == "center"){var fix = true;}
-    YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-    YAHOO.janelaDoca.xp.panel.moveTo(imagemxi,imagemyi+50);
-    YAHOO.janelaDoca.xp.panel.render();
-	var escondeWdoca = function()
-	{
-		$i("wdoca").style.display = "none";
-		$i("wdocai").src = "";
-		YAHOO.util.Event.removeListener(YAHOO.janelaDoca.xp.panel.close, "click");
-		YAHOO.janelaDoca.xp.panel.destroy();
-		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-		{mudaiconf("pan");}
-		//esconde o box do google
-		if ($i("boxg"))
+		if($i("boxg"))
 		{$i("boxg").style.display = "none";}
-		//fecha o container de desenho de elementos na tela
-		if($i("divGeometriasTemp"))
-		{richdraw.fecha();}
-		limpacontainerf();
-	};
-	YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
+		if($i("boxpin"))
+		{$i("boxpin").style.display = "none";}
+		var wlargura_ = parseInt(wlargura)+0+"px";
+		YAHOO.namespace("janelaDoca.xp");
+		if ($i("wdoca"))
+		{YAHOO.janelaDoca.xp.panel.destroy();}
+		var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
+		var novoel = document.createElement("div");
+		novoel.id = "wdoca";
+		novoel.style.display="block";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		if ($i("wdocai"))
+		{
+			with ($i("wdocai").style){width = "100%";height=waltura;};
+			$i("wdoca").style.display = "block";
+			$i("wdocai").src = wsrc;
+		}
+		var fix = false;
+		if(nx == "center"){var fix = true;}
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaDoca.xp.panel.moveTo(imagemxi,imagemyi+50);
+		YAHOO.janelaDoca.xp.panel.render();
+		var escondeWdoca = function()
+		{
+			$i("wdoca").style.display = "none";
+			$i("wdocai").src = "";
+			YAHOO.util.Event.removeListener(YAHOO.janelaDoca.xp.panel.close, "click");
+			YAHOO.janelaDoca.xp.panel.destroy();
+			if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+			{mudaiconf("pan");}
+			//esconde o box do google
+			if ($i("boxg"))
+			{$i("boxg").style.display = "none";}
+			if ($i("boxpin"))
+			{$i("boxpin").style.display = "none";}
+			//fecha o container de desenho de elementos na tela
+			if($i("divGeometriasTemp"))
+			{richdraw.fecha();}
+			limpacontainerf();
+		};
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
+	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: redimwdocaf
@@ -622,12 +734,16 @@ waltura - altura da nova janela
 */
 function redimwdocaf(wlargura,waltura)
 {
-	if ($i("wdoca"))
+	try
 	{
-		var i = $i("wdoca");
-		i.style.width = wlargura;
-		i.style.height = waltura;
+		if ($i("wdoca"))
+		{
+			var i = $i("wdoca");
+			i.style.width = wlargura;
+			i.style.height = waltura;
+		}
 	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: wdocaf2
@@ -650,30 +766,34 @@ texto - texto que será mostrado no título da janela
 */
 function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 {
-	if (!$i("wdoca2"))
+	try
 	{
-		var ins = '<div class="hd">&nbsp;</div><div class="bd"><iframe name="wdocai2" id="wdocai2"  valign="top" ></iframe></div></div>';
-		var novoel = document.createElement("div");
-		novoel.id = "wdoca2";
-		novoel.style.display="none";
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
+		if (!$i("wdoca2"))
+		{
+			var ins = '<div class="hd">&nbsp;</div><div class="bd"><iframe name="wdocai2" id="wdocai2"  valign="top" ></iframe></div></div>';
+			var novoel = document.createElement("div");
+			novoel.id = "wdoca2";
+			novoel.style.display="none";
+			novoel.innerHTML = ins;
+			document.body.appendChild(novoel);
+		}
+		YAHOO.namespace("janelaDoca2.xp");
+		YAHOO.janelaDoca2.xp.panel = new YAHOO.widget.Panel("wdoca2", {width:wlargura, fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:true } );
+		YAHOO.janelaDoca2.xp.panel.moveTo(imagemxi,imagemyi);
+		YAHOO.janelaDoca2.xp.panel.render();
+		YAHOO.janelaDoca2.xp.panel.show();
+		with ($i("wdocai2").style){width = "100%";height = waltura;}
+		$i("wdoca2").style.display = "block";
+		$i("wdocai2").src = wsrc;
+		var escondeWdoca2 = function()
+		{
+			$i("wdoca2").style.display = "none";
+			$i("wdocai2").src = "";
+			YAHOO.util.Event.removeListener(YAHOO.janelaDoca2.xp.panel.close, "click");
+		};
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca2.xp.panel.close, "click", escondeWdoca2);
 	}
-	YAHOO.namespace("janelaDoca2.xp");
-	YAHOO.janelaDoca2.xp.panel = new YAHOO.widget.Panel("wdoca2", {width:wlargura, fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:true } );
-	YAHOO.janelaDoca2.xp.panel.moveTo(imagemxi,imagemyi);
-	YAHOO.janelaDoca2.xp.panel.render();
-	YAHOO.janelaDoca2.xp.panel.show();
-	with ($i("wdocai2").style){width = "100%";height = waltura;}
-	$i("wdoca2").style.display = "block";
-	$i("wdocai2").src = wsrc;
-	var escondeWdoca2 = function()
-	{
-		$i("wdoca2").style.display = "none";
-		$i("wdocai2").src = "";
-		YAHOO.util.Event.removeListener(YAHOO.janelaDoca2.xp.panel.close, "click");
-	};
-	YAHOO.util.Event.addListener(YAHOO.janelaDoca2.xp.panel.close, "click", escondeWdoca2);
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: wdocafechaf
@@ -688,17 +808,21 @@ odoca - objeto janela
 */
 function wdocafechaf(odoca)
 {
-	$i(odoca).style.display="none";
-	if ((odoca != "wdocaref") && (odoca != "wdocac"))
+	try
 	{
-		if($i("wdocain")){$i("wdocain").value = "";}
-		if($i("wdocadiv")){$i("wdocadiv").innerHTML = "";$i("wdocadiv").display="none";}
-		if ($i("temp")){$i("temp").value == "";}
-		$i("wdocai").src = "";
-		$i("imgh").style.visibility="visible";
+		$i(odoca).style.display="none";
+		if ((odoca != "wdocaref") && (odoca != "wdocac"))
+		{
+			if($i("wdocain")){$i("wdocain").value = "";}
+			if($i("wdocadiv")){$i("wdocadiv").innerHTML = "";$i("wdocadiv").display="none";}
+			if ($i("temp")){$i("temp").value == "";}
+			$i("wdocai").src = "";
+			$i("imgh").style.visibility="visible";
+		}
+		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+		{mudaiconf("pan");}
 	}
-	if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-	{mudaiconf("pan");}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: mostradicasf
@@ -716,21 +840,25 @@ hlpt - depreciado
 */
 function mostradicasf(objeto,dica,hlpt)
 {
-	if ($i("ajuda"))
+	try
 	{
-		if (dica == ""){$i("ajuda").innerHTML="-";}
-		else
+		if ($i("ajuda"))
 		{
-			g_hlpt = hlpt;
-			$i("ajuda").innerHTML= "<b>"+dica+" </b>";
+			if (dica == ""){$i("ajuda").innerHTML="-";}
+			else
+			{
+				g_hlpt = hlpt;
+				$i("ajuda").innerHTML= "<b>"+dica+" </b>";
+			}
+		}
+		if ($i("janelaMenTexto"))
+		{
+			if (dica == ""){dica = g_mensagempadrao;}
+			$i("janelaMenTexto").innerHTML= "<b>"+dica+" </b>";
 		}
 	}
-	if ($i("janelaMenTexto"))
-	{
-		if (dica == ""){dica = g_mensagempadrao;}
-		$i("janelaMenTexto").innerHTML= "<b>"+dica+" </b>";
-	}
-}
+	catch(e){alert("Ocorreu um erro.");}
+}	
 /*
 Function: mudaiconf
 
@@ -743,86 +871,90 @@ i - id do ícone que receberá a borda.
 */
 function mudaiconf(i)
 {
-	//limpa o container com os tips fixos na tela
-	if(objmapa.objtips.length > 0)
+	try
 	{
-		var ot = objmapa.objtips.length-1;
-		if(ot >= 0)
+		//limpa o container com os tips fixos na tela
+		if(objmapa.objtips.length > 0)
+		{
+			var ot = objmapa.objtips.length-1;
+			if(ot >= 0)
+			{
+				do
+				{
+					if (objmapa.objtips[ot])
+					{
+						objmapa.objtips[ot].innerHTML = "";
+						objmapa.objtips[ot].style.display="none";
+					}
+				}
+				while(ot--)
+			}
+		}
+		objmapa.objtips = new Array();
+		limpacontainerf();
+		var objetos=["area","inseregrafico","textofid","zoomli","zoomlo","zoomiauto","zoomoauto","pan","identifica","mede","inserexy","selecao"];
+		var ko = objetos.length-1;
+		if(ko >= 0)
 		{
 			do
 			{
-				if (objmapa.objtips[ot])
+				if ($i(objetos[ko]))
 				{
-					objmapa.objtips[ot].innerHTML = "";
-					objmapa.objtips[ot].style.display="none";
+					var ist = $i(objetos[ko]).style;
+					ist.borderWidth=0;
+					ist.borderBottomWidth=1;
+					ist.borderLeftWidth=1;
+					ist.borderColor='rgb(50,50,50)';
 				}
 			}
-			while(ot--)
+			while(ko--)
 		}
-	}
-	objmapa.objtips = new Array();
-	limpacontainerf();
-	var objetos=["area","inseregrafico","textofid","zoomli","zoomlo","zoomiauto","zoomoauto","pan","identifica","mede","inserexy","selecao"];
-	var ko = objetos.length-1;
-	if(ko >= 0)
-	{
-		do
+		g_tipoacao = i;
+		if($i(i))
 		{
-			if ($i(objetos[ko]))
-			{
-				var ist = $i(objetos[ko]).style;
-				ist.borderWidth=0;
-				ist.borderBottomWidth=1;
-				ist.borderLeftWidth=1;
-				ist.borderColor='rgb(50,50,50)';
-			}
+			with ($i(i).style){borderLeftWidth='0px';borderBottomWidth='0px';borderColor='black';}
 		}
-		while(ko--)
+		$i("imgh").style.display="block";
+		if ($i("divGeometriasTemp"))
+		{$i("divGeometriasTemp").style.display = "none";}
+		switch(i)
+		{
+			case "zoomli":
+			$i("imgh").src= g_localimg + "/" + "ic_zoom.png";
+			if($i("img")){$i("img").title = "";}
+			break;
+			case "pan":
+			$i("imgh").src= g_localimg + "/" + "icon_pan.gif";
+			if($i("img")){$i("img").title = "";}
+			break;
+			case "mede":
+			$i("imgh").src= g_localimg + "/" + "mede.gif";
+			case "area":
+			$i("imgh").src= g_localimg + "/" + "mede.gif";
+			break;
+			case "inserexy":
+			$i("imgh").src= g_localimg + "/" + "ic_xy.png";
+			if($i("img")){$i("img").title = "clique para inserir um ponto";}
+			break;
+			case "textofid":
+			$i("imgh").src= g_localimg + "/" + "ic_xy.png";
+			if($i("img")){$i("img").title = "clique para inserir o texto";}
+			break;
+			case "selecao":
+			$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
+			if($i("img")){$i("img").title = "";}
+			break;
+			case "inseregrafico":
+			$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
+			if($i("img")){$i("img").title = "clique para incluir o gráfico";}
+			break;
+			case "identifica":
+			$i("imgh").src= g_localimg + "/" + "ic_identifica.png";
+			if($i("img")){$i("img").title = "";}
+			break;
+		}
 	}
-	g_tipoacao = i;
-	if($i(i))
-	{
-		with ($i(i).style){borderLeftWidth='0px';borderBottomWidth='0px';borderColor='black';}
-	}
-	$i("imgh").style.display="block";
-	if ($i("divGeometriasTemp"))
-	{$i("divGeometriasTemp").style.display = "none";}
-	switch(i)
-	{
-		case "zoomli":
-		$i("imgh").src= g_localimg + "/" + "ic_zoom.png";
-		if($i("img")){$i("img").title = "";}
-		break;
-		case "pan":
-		$i("imgh").src= g_localimg + "/" + "icon_pan.gif";
-		if($i("img")){$i("img").title = "";}
-		break;
-		case "mede":
-		$i("imgh").src= g_localimg + "/" + "mede.gif";
-		case "area":
-		$i("imgh").src= g_localimg + "/" + "mede.gif";
-		break;
-		case "inserexy":
-		$i("imgh").src= g_localimg + "/" + "ic_xy.png";
-		if($i("img")){$i("img").title = "clique para inserir um ponto";}
-		break;
-		case "textofid":
-		$i("imgh").src= g_localimg + "/" + "ic_xy.png";
-		if($i("img")){$i("img").title = "clique para inserir o texto";}
-		break;
-		case "selecao":
-		$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
-		if($i("img")){$i("img").title = "";}
-		break;
-		case "inseregrafico":
-		$i("imgh").src= g_localimg + "/" + "ic_seleciona.png";
-		if($i("img")){$i("img").title = "clique para incluir o gráfico";}
-		break;
-		case "identifica":
-		$i("imgh").src= g_localimg + "/" + "ic_identifica.png";
-		if($i("img")){$i("img").title = "";}
-		break;
-	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: mostraguiaf
@@ -928,45 +1060,44 @@ function ativaClicks(docMapa)
 		{$i("tip").style.display="none";}
 		this.onmousemove=function(exy)
 		{
-			if ($i("tip"))
-			{$i("tip").style.display="none";}
-			capturaposicao(exy);
-			if (g_destaca != "")
-			{$i("imgh").style.display="none";$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
-			//if (g_realca == "sim")
-			//{
-			//	$i("areaRealce").style.left = objposicaocursor.telax - destacaTamanho + 10;
-			//	$i("areaRealce").style.top = objposicaocursor.telay - destacaTamanho + 10;
-			//}
-			if ($i("img") && (g_panM == "sim"))
+			try
 			{
-				var nx = objposicaocursor.telax - leftinicial - clicinicialx;
-				var ny = objposicaocursor.telay - topinicial - clicinicialy;
-				if (g_entorno == "nao")
+				if ($i("tip"))
+				{$i("tip").style.display="none";}
+				capturaposicao(exy);
+				if (g_destaca != "")
+				{$i("imgh").style.display="none";$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
+				if ($i("img") && (g_panM == "sim"))
 				{
-					var l = 0;
-					if (parseInt($i("i3geo").style.left))
-					{var l = parseInt($i("i3geo").style.left);}
-					$i("img").style.left = nx - l;
-					var t = 0;
-					if (parseInt($i("i3geo").style.top))
-					{var t = parseInt($i("i3geo").style.top);}
-					$i("img").style.top = ny - t;
-				}
-				else
-				{
-					$left("img",objmapa.w*-1 + nx);
-					$left("imgS",objmapa.w*-1 + nx);
-					$left("imgL",objmapa.w + nx);
-					$left("imgO",objmapa.w*-3 + nx);
-					$left("imgN",objmapa.w*-1 + nx);
-					$top("img",objmapa.h*-1 + ny);
-					$top("imgS",objmapa.h*-1 + ny);
-					$top("imgL",objmapa.h*-1 + ny);
-					$top("imgN",objmapa.h*-1 + ny);
-					$top("imgO",objmapa.h*-1 + ny);
+					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
+					var ny = objposicaocursor.telay - topinicial - clicinicialy;
+					if (g_entorno == "nao")
+					{
+						var l = 0;
+						if (parseInt($i("i3geo").style.left))
+						{var l = parseInt($i("i3geo").style.left);}
+						$i("img").style.left = nx - l;
+						var t = 0;
+						if (parseInt($i("i3geo").style.top))
+						{var t = parseInt($i("i3geo").style.top);}
+						$i("img").style.top = ny - t;
+					}
+					else
+					{
+						$left("img",objmapa.w*-1 + nx);
+						$left("imgS",objmapa.w*-1 + nx);
+						$left("imgL",objmapa.w + nx);
+						$left("imgO",objmapa.w*-3 + nx);
+						$left("imgN",objmapa.w*-1 + nx);
+						$top("img",objmapa.h*-1 + ny);
+						$top("imgS",objmapa.h*-1 + ny);
+						$top("imgL",objmapa.h*-1 + ny);
+						$top("imgN",objmapa.h*-1 + ny);
+						$top("imgO",objmapa.h*-1 + ny);
+					}
 				}
 			}
+			catch(e){alert("Ocorreu um erro.");}
 			objmapa.verificaMousemoveMapa();
 		};
 	};
@@ -978,17 +1109,22 @@ function ativaClicks(docMapa)
 	};
 	docMapa.onmousedown = function()
 	{
+		if ($i("imgh"))
 		$i("imgh").style.display="none";
 		//verifica se esta na opÃ¯Â¿Â½o de zoom box
 		if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
 		{
 			// inicia retÃ¯Â¿Â½gulo de zoom
+			if ($i("imgh"))
 			$i("imgh").style.display="none";
-			var i = $i("box1").style;
-			i.width=0;
-			i.height=0;
-			i.visibility="visible";
-			i.display="none";
+			if($i("box1"))
+			{
+				var i = $i("box1").style;
+				i.width=0;
+				i.height=0;
+				i.visibility="visible";
+				i.display="none";
+			}
 			boxxini = objposicaocursor.telax;
 			boxyini = objposicaocursor.telay;
 			tamanhox = 0;
@@ -997,8 +1133,11 @@ function ativaClicks(docMapa)
 		if ($i("img") && (g_tipoacao == "pan"))
 		{
 			g_panM = "sim";
-			leftinicial = parseInt($i("corpoMapa").style.left);
-			topinicial = parseInt($i("corpoMapa").style.top);
+			if($i("corpoMapa"))
+			{
+				leftinicial = parseInt($i("corpoMapa").style.left);
+				topinicial = parseInt($i("corpoMapa").style.top);
+			}
 			clicinicialx = objposicaocursor.imgx;
 			clicinicialy = objposicaocursor.imgy;
 			ddinicialx = objposicaocursor.ddx;
@@ -1233,30 +1372,34 @@ tipo - de onde veio a requisicao ligadesliga|adicionatema
 */
 function mudaboxnf(tipo)
 {
-	g_operacao = tipo;
-	clearTimeout(objmapa.tempo);
-	objmapa.tempo = setTimeout('remapaf()',(4000));
-	autoRedesenho("reinicia");
-	if ($i("aplicari"))
+	try
 	{
-		$i("aplicari").style.display="block";
-		if (navm)
+		g_operacao = tipo;
+		clearTimeout(objmapa.tempo);
+		objmapa.tempo = setTimeout('remapaf()',(4000));
+		autoRedesenho("reinicia");
+		if ($i("aplicari"))
 		{
-			mx = objposicaomouse.x - 10;
-			my = objposicaomouse.y - 15;
-			var i = $i("aplicari").style;
-			i.pixelLeft = mx+document.body.scrollLeft;
-			i.pixelTop = my+document.body.scrollTop;
-		}
-		if (navn)
-		{
-			var l = objposicaomouse.x;
-			var t = objposicaomouse.y+document.body.scrollTop;
-			var i = $i("aplicari").style;
-			i.left = l;
-			i.top = t;
+			$i("aplicari").style.display="block";
+			if (navm)
+			{
+				mx = objposicaomouse.x - 10;
+				my = objposicaomouse.y - 15;
+				var i = $i("aplicari").style;
+				i.pixelLeft = mx+document.body.scrollLeft;
+				i.pixelTop = my+document.body.scrollTop;
+			}
+			if (navn)
+			{
+				var l = objposicaomouse.x;
+				var t = objposicaomouse.y+document.body.scrollTop;
+				var i = $i("aplicari").style;
+				i.left = l;
+				i.top = t;
+			}
 		}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: movelentef
@@ -1265,19 +1408,23 @@ Move a imagem na lente de aumento conforme o movimento do mouse sobre o mapa.
 */
 function movelentef()
 {
-	if ($i("lente"))
+	try
 	{
-		if ($i("lente").style.visibility=="visible")
+		if ($i("lente"))
 		{
-			var esq = (objposicaocursor.telax - imagemxi) * 2.25;
-			var topo = (objposicaocursor.telay - imagemyi) * 2.25;
-			var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
-			var i = $i("lente").style;
-			i.clip = clipt;
-			eval("i." + g_tipotop + "= (imagemyi - (topo - 40)) + g_postpx");
-			eval("i." + g_tipoleft +  "= (imagemxi - (esq - 40)) + g_postpx");
+			if ($i("lente").style.visibility=="visible")
+			{
+				var esq = (objposicaocursor.telax - imagemxi) * 2.25;
+				var topo = (objposicaocursor.telay - imagemyi) * 2.25;
+				var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
+				var i = $i("lente").style;
+				i.clip = clipt;
+				eval("i." + g_tipotop + "= (imagemyi - (topo - 40)) + g_postpx");
+				eval("i." + g_tipoleft +  "= (imagemxi - (esq - 40)) + g_postpx");
+			}
 		}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: zoomiauto
@@ -1320,8 +1467,13 @@ tipo - desloca|termina
 */
 function zoomboxf (tipo)
 {
-	var bx = $i("box1");
-	var bxs = bx.style;
+	if($i("box1"))
+	{
+		var bx = $i("box1");
+		var bxs = bx.style;
+	}
+	else
+	{alert("Box nao encontrado");return;}
 	switch(tipo)
 	{
 		case "desloca":
@@ -1394,18 +1546,22 @@ function zoomboxf (tipo)
 		{
 			if (x1 != x2)
 			{
-				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				var tipo = "adiciona";
-				//pega o tipo de operacao da janela de selecao
-				if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
-				if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-				//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-				if ((tipo != "limpa") && (tipo != "inverte"))
+				try
 				{
-					objaguarde.abre("ajaxredesenha",$trad("o1"));
-					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
-					cpObj.call(p,"selecaobox",ajaxredesenha);
+					var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+					var tipo = "adiciona";
+					//pega o tipo de operacao da janela de selecao
+					if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
+					if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+					//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
+					if ((tipo != "limpa") && (tipo != "inverte"))
+					{
+						objaguarde.abre("ajaxredesenha",$trad("o1"));
+						var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
+						cpObj.call(p,"selecaobox",ajaxredesenha);
+					}
 				}
+				catch(e){var e = "";}
 			}
 		}		
 		bxs.visibility="hidden";
@@ -1422,21 +1578,25 @@ Localiza no mapa o usuário baseado em seu número IP.
 */
 function zoomIP()
 {
-	var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-	var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-	var mostraIP = function(retorno)
+	try
 	{
-		if (retorno.data.latitude != null)
+		var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
+		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
+		var mostraIP = function(retorno)
 		{
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
-			cpObj.call(p,"zoomPonto",ajaxredesenha);
-		}
-		else
-		{alert("Nao foi possivel identificar a localizacao.");}
-	};
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+g_sid;
-	cpObj.call(p,"localizaIP",mostraIP);	
+			if (retorno.data.latitude != null)
+			{
+				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
+				cpObj.call(p,"zoomPonto",ajaxredesenha);
+			}
+			else
+			{alert("Nao foi possivel identificar a localizacao.");}
+		};
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+g_sid;
+		cpObj.call(p,"localizaIP",mostraIP);	
+	}
+	catch(e){var e = "";}
 }
 /*
 Function: zoomPonto
@@ -1445,14 +1605,18 @@ Localiza uma coordenada no mapa.
 */
 function zoomPonto()
 {
-	if ($i("xg"))
+	try
 	{
-		var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
-		cpObj.call(p,"zoomPonto",ajaxredesenha);
+		if ($i("xg"))
+		{
+			var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
+			var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
+			cpObj.call(p,"zoomPonto",ajaxredesenha);
+		}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: clicouRef
@@ -1462,10 +1626,14 @@ Altera a abrangência do mapa quando o mapa de referência é clicado
 */
 function clicouRef()
 {
-	objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
-	objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
-	cpObj.call(p,"pan",ajaxredesenha);
+	try
+	{
+		objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
+		objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
+		cpObj.call(p,"pan",ajaxredesenha);
+	}
+	catch(e){var e = "";}
 }
 /*
 Function: movimentoRef
@@ -1812,37 +1980,41 @@ par - string com os parâmetros item*r,g,b*item....
 */
 function legendaGrafico(par)
 {
-	var temp = par.split("*");
-	var par = "<table>";
-	var i = temp.length-1;
-	if(i >= 0)
+	try
 	{
-		do
+		var temp = par.split("*");
+		var par = "<table>";
+		var i = temp.length-1;
+		if(i >= 0)
 		{
-			var t = temp[i];
-			var t = t.split(",");
-			par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
+			do
+			{
+				var t = temp[i];
+				var t = t.split(",");
+				par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
+			}
+			while(i--)
 		}
-		while(i--)
+		par += "</table>";
+		if (!$i("legendagr"))
+		{
+			var novoel = document.createElement("div");
+			var temp = '<div class="hd">Legenda</div>';
+			temp += '<div class="bd">';
+			temp += '<div id="contemleggr" ></div></div>';
+			novoel.id = "legendagr";
+			novoel.style.display="block";
+			novoel.style.textAlign="left";
+			novoel.innerHTML = temp;
+			document.body.appendChild(novoel);
+			YAHOO.namespace("legendagr.xp");
+			YAHOO.legendagr.xp.panel = new YAHOO.widget.Panel("legendagr", {width:"250px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+		}
+		$i("contemleggr").innerHTML = par;
+		YAHOO.legendagr.xp.panel.render();
+		YAHOO.legendagr.xp.panel.show();
 	}
-	par += "</table>";
-	if (!$i("legendagr"))
-	{
-		var novoel = document.createElement("div");
-		var temp = '<div class="hd">Legenda</div>';
-		temp += '<div class="bd">';
-		temp += '<div id="contemleggr" ></div></div>';
-		novoel.id = "legendagr";
-		novoel.style.display="block";
-		novoel.style.textAlign="left";
-		novoel.innerHTML = temp;
-		document.body.appendChild(novoel);
-		YAHOO.namespace("legendagr.xp");
-		YAHOO.legendagr.xp.panel = new YAHOO.widget.Panel("legendagr", {width:"250px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-	}
-	$i("contemleggr").innerHTML = par;
-	YAHOO.legendagr.xp.panel.render();
-	YAHOO.legendagr.xp.panel.show();
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: inverteStatusClasse
@@ -1868,27 +2040,31 @@ Atualiza o box do google se a função google estiver ativa
 */
 function atualizagoogle()
 {
-	if (window.parent.frames["wdocai"])
+	try
 	{
-		if (navn)
+		if (window.parent.frames["wdocai"])
 		{
-			if ($i("wdocai"))
-			{var doc = $i("wdocai").contentDocument;}
-		}
-		else
-		{
-			if(document.frames("wdocai"))
-			{var doc = document.frames("wdocai").document;}
-		}
-		if(doc)
-		{
-			if (doc.getElementById("map"))
+			if (navn)
 			{
-				if(window.parent.frames["wdocai"].panTogoogle)
-				{window.parent.frames["wdocai"].panTogoogle();}
+				if ($i("wdocai"))
+				{var doc = $i("wdocai").contentDocument;}
+			}
+			else
+			{
+				if(document.frames("wdocai"))
+				{var doc = document.frames("wdocai").document;}
+			}
+			if(doc)
+			{
+				if (doc.getElementById("map"))
+				{
+					if(window.parent.frames["wdocai"].panTogoogle)
+					{window.parent.frames["wdocai"].panTogoogle();}
+				}
 			}
 		}
 	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: atualizascielo
@@ -1897,18 +2073,22 @@ Atualiza a lista de dados na opção de busca Scielo
 */
 function atualizascielo()
 {
-	if ($i("wdocai"))
+	try
 	{
-		if (window.parent.frames["wdocai"])
+		if ($i("wdocai"))
 		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoscielo"))
+			if (window.parent.frames["wdocai"])
 			{
-				$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadoscielo"))
+				{
+					$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
+				}
 			}
 		}
 	}
-}
+	catch(e){alert("Ocorreu um erro.");}
+}	
 /*
 Function: atualizaconfluence
 
@@ -1916,17 +2096,21 @@ Atualiza a lista de dados na opção de busca confluence
 */
 function atualizaconfluence()
 {
-	if($i("wdocai"))
+	try
 	{
-		if (window.parent.frames["wdocai"])
+		if($i("wdocai"))
 		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoconfluence"))
+			if (window.parent.frames["wdocai"])
 			{
-				$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadoconfluence"))
+				{
+					$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
+				}
 			}
 		}
 	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: atualizawiki
@@ -1935,17 +2119,21 @@ Atualiza a lista de dados na opção de busca wiki
 */
 function atualizawiki()
 {
-	if ($i("wdocai"))
+	try
 	{
-		if (window.parent.frames["wdocai"])
+		if ($i("wdocai"))
 		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadowiki"))
+			if (window.parent.frames["wdocai"])
 			{
-				$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadowiki"))
+				{
+					$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
+				}
 			}
 		}
 	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Section: menu de temas e outras listagens
@@ -2386,15 +2574,21 @@ function processaTemas(retorno)
 				if ( lk != " ")
 				{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
 				var tid = retorno.data.temas[st].tid;
+				//
+				//inclui o link para abrir o qrcode e kml
+				//
 				var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 				var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 				var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 				var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
+				var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
+				if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
+				{var kml = "";}
 				if (g_qrcode == "nao"){qrcode = "";}
 				if(navm)
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+kml+"</span>";
 				else
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+kml+"</span>";
 				mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
 				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 				else
@@ -2712,47 +2906,51 @@ Atualiza as variáveis imagemxi,imagemyi,imagemxref e imagemyref
 */
 function calcposf()
 {
-	imagemxi = 0;
-	imagemyi = 0;
-	imagemxref = 0;
-	imagemyref = 0;
-	if(!$i("i3geo")){return;}
-	if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
-	if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
-	var dc = $i("i3geo");
-	if ($i("img"))
-	{var dc = $i("contemImg");}
-	if ($i("openlayers_OpenLayers_Container"))
-	{var dc = $i("openlayers_OpenLayers_Container");}
-	while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
+	try
 	{
-		dc = dc.offsetParent;
-		imagemxi = imagemxi + dc.offsetLeft;
-		imagemyi = imagemyi + dc.offsetTop;
-	}
-
-	if ($i("img"))
-	{
-		$left("corpoMapa",imagemxi);
-		$top("corpoMapa",imagemyi);
-		if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
-		if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
-	}
-	if ($i("ref"))
-	{
-		var dc = $i("ref");
-		while (dc.offsetParent.id != "i3geo")
+		imagemxi = 0;
+		imagemyi = 0;
+		imagemxref = 0;
+		imagemyref = 0;
+		if(!$i("i3geo")){return;}
+		if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
+		if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
+		var dc = $i("i3geo");
+		if ($i("img"))
+		{var dc = $i("contemImg");}
+		if ($i("openlayers_OpenLayers_Container"))
+		{var dc = $i("openlayers_OpenLayers_Container");}
+		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
 		{
 			dc = dc.offsetParent;
-			imagemxref = imagemxref + dc.offsetLeft;
-			imagemyref = imagemyref + dc.offsetTop;
+			imagemxi = imagemxi + dc.offsetLeft;
+			imagemyi = imagemyi + dc.offsetTop;
+		}
+
+		if ($i("img"))
+		{
+			$left("corpoMapa",imagemxi);
+			$top("corpoMapa",imagemyi);
+			if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
+			if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
+		}
+		if ($i("ref"))
+		{
+			var dc = $i("ref");
+			while (dc.offsetParent.id != "i3geo")
+			{
+				dc = dc.offsetParent;
+				imagemxref = imagemxref + dc.offsetLeft;
+				imagemyref = imagemyref + dc.offsetTop;
+			}
+		}
+		if ($i("aguarde"))
+		{
+			$top("aguarde",imagemyi);
+			$left("aguarde",imagemxi);
 		}
 	}
-	if ($i("aguarde"))
-	{
-		$top("aguarde",imagemyi);
-		$left("aguarde",imagemxi);
-	}
+	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: movecursor
@@ -2852,18 +3050,22 @@ qs - número de quadros
 */
 function gerafilmef(qs)
 {
-	if ($i("lugarquadros"))
+	try
 	{
-		var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='opcoesQuadros()' style='cursor:pointer'></div></td>";
-		for (var i = 0; i < qs; i++)
+		if ($i("lugarquadros"))
 		{
-			q = q + "<td><img class='quadro' src=\""+g_localimg+"/branco.gif\" id=f"+i+"  onmouseover='filmef(this);mostradicasf(this,\"Quadro - clique para restaurar\",\"quadro\")' onmouseout=\"javascript:mostradicasf(this,'')\" onclick='filmezf(this)' /></td>";
-			var qu = new quadrofilme();
-			quadrosfilme[i] = qu;
+			var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='opcoesQuadros()' style='cursor:pointer'></div></td>";
+			for (var i = 0; i < qs; i++)
+			{
+				q = q + "<td><img class='quadro' src=\""+g_localimg+"/branco.gif\" id=f"+i+"  onmouseover='filmef(this);mostradicasf(this,\"Quadro - clique para restaurar\",\"quadro\")' onmouseout=\"javascript:mostradicasf(this,'')\" onclick='filmezf(this)' /></td>";
+				var qu = new quadrofilme();
+				quadrosfilme[i] = qu;
+			}
+			var finalq = "</tr></table>";
+			document.getElementById("lugarquadros").innerHTML = q+finalq;
 		}
-		var finalq = "</tr></table>";
-		document.getElementById("lugarquadros").innerHTML = q+finalq;
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: gravaQuadro
@@ -2878,20 +3080,24 @@ valor - valor que será aplicado.
 */
 function gravaQuadro(variavel,valor)
 {
-	var muda = -1;
-	if ($i("lugarquadros"))
+	try
 	{
-		var nquadros = quadrosfilme.length;
-		if (quadrosfilme[nquadros - 1].imagem != " ")
-		{rebobinaf();}
-		for (var i = 0; i < nquadros; i++)
+		var muda = -1;
+		if ($i("lugarquadros"))
 		{
-			if ((eval("quadrosfilme["+i+"]."+variavel+" == ' '")) && (muda < 0))
-			{muda = i;}
+			var nquadros = quadrosfilme.length;
+			if (quadrosfilme[nquadros - 1].imagem != " ")
+			{rebobinaf();}
+			for (var i = 0; i < nquadros; i++)
+			{
+				if ((eval("quadrosfilme["+i+"]."+variavel+" == ' '")) && (muda < 0))
+				{muda = i;}
+			}
+			if (eval("quadrosfilme["+(muda)+"]"))
+			{eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");}
 		}
-		if (eval("quadrosfilme["+(muda)+"]"))
-		{eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: avancaQuadro
@@ -2900,19 +3106,23 @@ Avança um quadro na lista de quadros, mudando a imagem utilizada na sua represen
 */
 function avancaQuadro()
 {
-	var muda = -1;
-	if ($i("lugarquadros"))
+	try
 	{
-		var nquadros = quadrosfilme.length;
-		if (quadrosfilme[nquadros - 1].imagem != " ")
-		{rebobinaf();}
-		for (var i = 0; i < nquadros; i++)
+		var muda = -1;
+		if ($i("lugarquadros"))
 		{
-			if ((quadrosfilme[i].imagem == " ") && (muda < 0))
-			{muda = i;}
+			var nquadros = quadrosfilme.length;
+			if (quadrosfilme[nquadros - 1].imagem != " ")
+			{rebobinaf();}
+			for (var i = 0; i < nquadros; i++)
+			{
+				if ((quadrosfilme[i].imagem == " ") && (muda < 0))
+				{muda = i;}
+			}
+			$i("f"+muda).className = "quadro1";
 		}
-		$i("f"+muda).className = "quadro1";
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: filmef
@@ -2925,12 +3135,16 @@ o - quadro
 */
 function filmef(o)
 {
-	if ($i("lugarquadros"))
+	try
 	{
-		var v = (o.id).replace("f","");
-		if (quadrosfilme[v].imagem != " ")
-		{$i("img").src = quadrosfilme[v].imagem;}
+		if ($i("lugarquadros"))
+		{
+			var v = (o.id).replace("f","");
+			if (quadrosfilme[v].imagem != " ")
+			{$i("img").src = quadrosfilme[v].imagem;}
+		}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: rebobinaf
@@ -2939,13 +3153,17 @@ Rebobina as imagens dos quadros, limpando os parâmetros armazenados.
 */
 function rebobinaf()
 {
-	janima = 0;
-	var nquadros = quadrosfilme.length;
-	for (var i = 0; i < nquadros; i++)
+	try
 	{
-		$i("f"+i).className = "quadro";
-		with (quadrosfilme[i]){imagem = " ";escala = " ";legenda = " ";extensao = " ";referencia = " ";}
+		janima = 0;
+		var nquadros = quadrosfilme.length;
+		for (var i = 0; i < nquadros; i++)
+		{
+			$i("f"+i).className = "quadro";
+			with (quadrosfilme[i]){imagem = " ";escala = " ";legenda = " ";extensao = " ";referencia = " ";}
+		}
 	}
+	catch(e){var e = "";}
 }
 /*
 Function: filmezf
@@ -3044,26 +3262,30 @@ Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.
 */
 function calculaArea()
 {
-	if(pontosdistobj.xpt.length > 2)
+	try
 	{
-		var $array_length = pontosdistobj.xpt.length;
-		// add the first coordinates at the end to close de polygon
-		//array_push($polygon_coordinates,array($polygon_coordinates[0][0],$polygon_coordinates[0][1]));
-		pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-		pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
-		pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-		pontosdistobj.ytela.push(pontosdistobj.ytela[1]);
-		var $polygon_area = 0;
-		for (var $i=0;$i <= $array_length;$i++)
+		if(pontosdistobj.xpt.length > 2)
 		{
-			$polygon_area += ((pontosdistobj.xtela[$i] * pontosdistobj.ytela[$i+1])-(pontosdistobj.ytela[$i] * pontosdistobj.xtela[$i+1]));
+			var $array_length = pontosdistobj.xpt.length;
+			// add the first coordinates at the end to close de polygon
+			//array_push($polygon_coordinates,array($polygon_coordinates[0][0],$polygon_coordinates[0][1]));
+			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
+			pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
+			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
+			pontosdistobj.ytela.push(pontosdistobj.ytela[1]);
+			var $polygon_area = 0;
+			for (var $i=0;$i <= $array_length;$i++)
+			{
+				$polygon_area += ((pontosdistobj.xtela[$i] * pontosdistobj.ytela[$i+1])-(pontosdistobj.ytela[$i] * pontosdistobj.xtela[$i+1]));
+			}
+			$polygon_area = Math.abs($polygon_area) / 2;
 		}
-		$polygon_area = Math.abs($polygon_area) / 2;
+		else
+		{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
+		//g_areapixel precisa estar definida
+		return $polygon_area*g_areapixel;
 	}
-	else
-	{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
-	//g_areapixel precisa estar definida
-	return $polygon_area*g_areapixel;
+	catch(e){return (0);}
 }
 /*
 Function: calculadistancia
@@ -3083,27 +3305,31 @@ ltb - y final
 function calculadistancia(lga,lta,lgb,ltb) //0ms
 {
 	//calculo baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
-	var er = 6366.707;
-	var radlat1 = Math.PI * lta/180;
-	var radlat2 = Math.PI * ltb/180;
-	var radlong1 = Math.PI * lga/180;
-	var radlong2 = Math.PI * lgb/180;
-	if (lta > 0) {radlat1=Math.PI/2-radlat1;}
-	if (lta < 0) {radlat1=Math.PI/2+radlat1;}
-	if (lga < 0) {radlong1=Math.PI*2-radlong1;}
-	if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
-	if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
-	if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
-	var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
-	var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
-	var z1 = er * Math.cos(radlat1);
-	var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
-	var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
-	var z2 = er * Math.cos(radlat2);
-	var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-	//side, side, side, law of cosines and arccos
-	var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
-	return theta*er;
+	try
+	{
+		var er = 6366.707;
+		var radlat1 = Math.PI * lta/180;
+		var radlat2 = Math.PI * ltb/180;
+		var radlong1 = Math.PI * lga/180;
+		var radlong2 = Math.PI * lgb/180;
+		if (lta > 0) {radlat1=Math.PI/2-radlat1;}
+		if (lta < 0) {radlat1=Math.PI/2+radlat1;}
+		if (lga < 0) {radlong1=Math.PI*2-radlong1;}
+		if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
+		if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
+		if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
+		var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
+		var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
+		var z1 = er * Math.cos(radlat1);
+		var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
+		var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
+		var z2 = er * Math.cos(radlat2);
+		var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
+		//side, side, side, law of cosines and arccos
+		var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
+		return theta*er;
+	}
+	catch(e){return (0);}
 }
 /*
 Function: convdmsddf
@@ -3124,19 +3350,23 @@ Coordenada em dd.
 */
 function convdmsddf(cd,cm,cs)
 {
-	//converte dms em dd
-	var sinal = 'positivo';
-	if (cd < 0)
+	try
 	{
-		cd = cd * -1;
-		sinal = 'negativo';
+		//converte dms em dd
+		var sinal = 'positivo';
+		if (cd < 0)
+		{
+			cd = cd * -1;
+			sinal = 'negativo';
+		}
+		spm = cs / 3600;
+		mpg = cm / 60;
+		var dd = (cd * 1) + (mpg * 1) + (spm * 1);
+		if (sinal == 'negativo')
+		{dd = dd * -1;}
+		return (dd);
 	}
-	spm = cs / 3600;
-	mpg = cm / 60;
-	var dd = (cd * 1) + (mpg * 1) + (spm * 1);
-	if (sinal == 'negativo')
-	{dd = dd * -1;}
-	return (dd);
+	catch(e){return (0);}
 }
 /*
 Function: calcddf
@@ -3159,25 +3389,29 @@ Coordena em dd.
 */
 function calcddf(xfign,yfign,g_celula,imgext)
 {
-	if (navm)
+	try
 	{
-	 xfign = xfign - 2.2;
-	 yfign = yfign - 2.7;
+		if (navm)
+		{
+		 xfign = xfign - 2.2;
+		 yfign = yfign - 2.7;
+		}
+		if (navn)
+		{
+		 xfign = xfign - 0.12;
+		 yfign = yfign - 1.05;
+		}
+		var nx = g_celula * xfign;
+		var ny = g_celula * yfign;
+		var amext = imgext.split(" ");
+		var longdd = (amext[0] * 1) + nx;
+		var latdd = (amext[3] * 1) - ny;
+		var res = new Array();
+		res[0] = longdd;
+		res[1] = latdd;
+		return (res);
 	}
-	if (navn)
-	{
-	 xfign = xfign - 0.12;
-	 yfign = yfign - 1.05;
-	}
-	var nx = g_celula * xfign;
-	var ny = g_celula * yfign;
-	var amext = imgext.split(" ");
-	var longdd = (amext[0] * 1) + nx;
-	var latdd = (amext[3] * 1) - ny;
-	var res = new Array();
-	res[0] = longdd;
-	res[1] = latdd;
-	return (res);
+	catch(e){return(0);}
 }
 /*
 Function: convdmsf
@@ -3290,18 +3524,22 @@ Array com o valor de x [0] e y [1]
 */
 function convddtela(vx,vy,docmapa)
 {
-	if(!docmapa)
-	{var docmapa = window.document;}
-	var dc = docmapa.getElementById("img");
-	imgext = objmapa.extent;
-	varimgext = imgext.split(" ");
-	vx = (varimgext[0] * -1) - (vx * -1);
-	vy = (vy * -1) + (varimgext[3] * 1);
-	c = objmapa.cellsize * 1;
-	xy = new Array();
-	xy[0] = (vx  / c) + imagemxi;
-	xy[1]  = (vy / c) + imagemyi;
-	return (xy);
+	try
+	{
+		if(!docmapa)
+		{var docmapa = window.document;}
+		var dc = docmapa.getElementById("img");
+		imgext = objmapa.extent;
+		varimgext = imgext.split(" ");
+		vx = (varimgext[0] * -1) - (vx * -1);
+		vy = (vy * -1) + (varimgext[3] * 1);
+		c = objmapa.cellsize * 1;
+		xy = new Array();
+		xy[0] = (vx  / c) + imagemxi;
+		xy[1]  = (vy / c) + imagemyi;
+		return (xy);
+	}
+	catch(e){return(new Array());}
 }
 /*
 Function: posicaomouse
@@ -3495,35 +3733,39 @@ funcaoonclick - funcao que sera executada quando a marca for clicada
 */
 function inseremarcaf(xi,yi,funcaoOnclick)
 {
-	//verifica se existe o container para os pontos
-	if (!$i("pontosins") )
+	try
 	{
+		//verifica se existe o container para os pontos
+		if (!$i("pontosins") )
+		{
+			var novoel = document.createElement("div");
+			novoel.id = "pontosins";
+			var i = novoel.style;
+			i.position = "absolute";
+			i.top = parseInt($i("img").style.top);
+			i.left = parseInt($i("img").style.left);
+			document.body.appendChild(novoel);
+		}
+		var container = $i("pontosins");
 		var novoel = document.createElement("div");
-		novoel.id = "pontosins";
 		var i = novoel.style;
 		i.position = "absolute";
-		i.top = parseInt($i("img").style.top);
-		i.left = parseInt($i("img").style.left);
-		document.body.appendChild(novoel);
+		i.zIndex=2000;
+		i.top=(yi - 4)+"px";
+		i.left=(xi - 4)+"px";
+		i.width="4px";
+		i.height="4px";
+		var novoimg = document.createElement("img");
+		if (arguments.length == 2)
+		{funcaoOnclick = "";}
+		if (funcaoOnclick != "")
+		{novoimg.onclick = funcaoOnclick;}
+		novoimg.src=g_locaplic+"/imagens/dot1.gif";
+		with (novoimg.style){width="6px";height="6px";zIndex=2000;}
+		novoel.appendChild(novoimg);
+		container.appendChild(novoel);
 	}
-	var container = $i("pontosins");
-	var novoel = document.createElement("div");
-	var i = novoel.style;
-	i.position = "absolute";
-	i.zIndex=2000;
-	i.top=(yi - 4)+"px";
-	i.left=(xi - 4)+"px";
-	i.width="4px";
-	i.height="4px";
-	var novoimg = document.createElement("img");
-	if (arguments.length == 2)
-	{funcaoOnclick = "";}
-	if (funcaoOnclick != "")
-	{novoimg.onclick = funcaoOnclick;}
-	novoimg.src=g_locaplic+"/imagens/dot1.gif";
-	with (novoimg.style){width="6px";height="6px";zIndex=2000;}
-	novoel.appendChild(novoimg);
-	container.appendChild(novoel);
+	catch(e){alert("Ocorreu um erro");}
 }
 /*
 Function: limpacontainerf
@@ -3553,6 +3795,19 @@ function criaboxg()
 		novoel.style.zIndex=1;
 		novoel.innerHTML = '<font face="Arial" size=0></font>';
 		novoel.onmouseover = function(){$i("boxg").style.display="none";};
+		document.body.appendChild(novoel);
+	}
+	if (!$i("boxpin"))
+	{
+		var novoel = document.createElement("img");
+		novoel.id = "boxpin";
+		novoel.style.zIndex=10000;
+		novoel.style.position="absolute";
+		novoel.style.width="21px";
+		novoel.style.height="25px";
+		novoel.src = g_locaplic+'/imagens/marker.png';
+		//novoel.innerHTML = '<img src="'+g_locaplic+'/imagens/marker.png" />';
+		novoel.onmouseover = function(){$i("boxpin").style.display="none";};
 		document.body.appendChild(novoel);
 	}
 }
