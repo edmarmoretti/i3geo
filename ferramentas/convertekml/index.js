@@ -25,3 +25,4 @@ var tema = window.location.href.split("=")
 var tema = tema[1]
 var endereco = g_locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+tema+"&typename="+tema+"&request=kml"
 $i("resultado").innerHTML = endereco
+$i("men1").innerHTML += "<br><br><b>Voc&ecirc; pode também utilizar o link <span style=color:red >"+g_locaplic+"/kml.php </span><br>para mostrar a &aacute;rvore completa de temas no GoogleEarth"
