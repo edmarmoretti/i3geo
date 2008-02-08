@@ -81,6 +81,7 @@ foreach ($menus as $menu)
 					echo "<visibility>0</visibility>";      
 					echo "<Icon>";
 					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+					echo "<viewRefreshMode>onStop</viewRefreshMode>";
 					echo "<href>$l</href>";
 					echo "</Icon>";
 					echo "<LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>";
