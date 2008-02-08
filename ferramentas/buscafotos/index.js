@@ -21,13 +21,25 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
-busca(1)
+
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
 	{new YAHOO.widget.Button("botao2");}
 		YAHOO.util.Event.onContentReady("botao2", onPushButtonsMarkupReady);
-}() 	
+}()
+YAHOO.example.init = function ()
+{
+	function onPushButtonsMarkupReady()
+	{new YAHOO.widget.Button("botao3");}
+		YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
+}()
+function mostramenu()
+{
+	$i("mensagem").style.display="none"
+	$i("busca").style.display="block"
+	busca(1)
+}	
 function busca(pagina)
 {
 	aguarde("block")
@@ -36,6 +48,7 @@ function busca(pagina)
 	var texto = $i("texto").value;
 	var ai = $i("ai").value;
 	var af = $i("af").value;
+	escondexy();
 	if (window.parent.objmapa)
 	{
 		if (window.parent.objmapa.scale > 150001)
@@ -53,7 +66,7 @@ function busca(pagina)
 			return;
 		}
 	}
-	escondexy();
+	
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	if($i("buscaflickr").checked)
