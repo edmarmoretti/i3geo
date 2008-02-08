@@ -41,6 +41,8 @@ tema - nome do tema do serviço. Se for definido, o web service conterá apenas o 
 
 intervalo - valor inicial e final com o número de temas que serão mostrados no serviço
 
+legenda - mostra a legenda no corpo do mapa sim|nao
+
 About: Exemplos
 
 ogc.php?lista=temas
@@ -119,6 +121,11 @@ if(isset($tema))
 {$tipo = "";}
 $req->setParameter("VeRsIoN","1.1.0");
 $oMap = ms_newMapobj("aplicmap/ogcws.map");
+if((isset($legenda)) && ($legenda == "sim"))
+{
+	$leg = $oMap->legend;
+	$leg->set("status",MS_EMBED);
+}
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
@@ -131,16 +138,20 @@ if (!isset($intervalo))
 if ($tipo == "")
 {
 	$tema = explode(" ",$tema);
-	foreach ($tema as $t)
+	foreach ($tema as $tx)
 	{
-		$nmap = ms_newMapobj("temas/".$t.".map");
+		$nmap = ms_newMapobj("temas/".$tx.".map");
 		$ts = $nmap->getalllayernames();
 		foreach ($ts as $t)
 		{
 			$l = $nmap->getlayerbyname($t);
 			$l->setmetadata("ows_title",pegaNome($l));
 			$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
-			$l->set("status",MS_OFF);
+			//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
+			if(count($ts)==1)
+			{
+				$l->set("name",$tx);
+			}
 			$l->setmetadata("gml_include_items","all");
 			$l->set("dump",MS_TRUE);
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
