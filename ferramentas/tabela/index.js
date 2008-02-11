@@ -77,19 +77,27 @@ YAHOO.example.init = function ()
 //conta menos 20
 function menosf()
 {
-	$i("inicio").value = ($i("inicio").value * 1) - 20
-	if ($i("inicio").value < 0)
-	{$i("inicio").value = 0}
-	$i("fim").value = ($i("fim").value * 1) - 20
-	if ($i("fim").value < 0)
-	{$i("fim").value = 1}
+	var i = $i("inicio").value * 1;
+	var f = $i("fim").value * 1
+	var d = f - i;
+
+	$i("inicio").value = i - d - 1
+	$i("fim").value = i - 1
+	if ($i("inicio").value < 1)
+	{
+		$i("inicio").value = 1
+		$i("fim").value = 1 + d
+	}
 	registrosf()
 }
 //conta menos 20
 function maisf()
 {
-	$i("inicio").value = ($i("inicio").value * 1) + 20
-	$i("fim").value = ($i("fim").value * 1) + 20
+	var i = $i("inicio").value * 1;
+	var f = $i("fim").value * 1
+	var d = f - i;
+	$i("inicio").value = f + 1
+	$i("fim").value = f + d + 1
 	registrosf()
 }
 //lista os registros da tabela
@@ -101,7 +109,7 @@ function registrosf()
 	{tiporeg = "mapa"}
 	if ($i("tipolista").checked)
 	{tipolista = "selecionados"}
-	var inicio=$i("inicio").value
+	var inicio=$i("inicio").value - 1
 	var fim=$i("fim").value
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&inicio="+inicio+"&fim="+fim+"&tema="+tema+"&tipo="+tiporeg+"&tipolista="+tipolista
 	var cp = new cpaint();
