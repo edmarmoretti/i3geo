@@ -34,7 +34,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "<kml xmlns='http://earth.google.com/kml/2.2'>";
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = $protocolo[0];
+$protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
+
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+
+
 if ($menutemas == "")
 {$menus[] = "menutemas/menutemas.xml";}
 else
@@ -68,6 +72,7 @@ foreach ($menus as $menu)
 				$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
 				$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
 				$id = mb_convert_encoding($tema->TID,"auto","auto");
+				$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
 				$ogc = sim;
 				if($tema->TID)
 				{
@@ -77,7 +82,10 @@ foreach ($menus as $menu)
 				{
 					echo "<GroundOverlay>";
     				echo "<name>$nome</name>";
-					echo "<description>$desc</description>";
+    				$fonte = "<a href='$fonte' >Fonte </a>";
+    				$legenda = "<a href='$protocolo1/i3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+					//$legenda = "<a href=http://localhost >Legenda</a>";
+					echo "<description><![CDATA[".$fonte.$legenda.$desc."]]></description>";
 					echo "<visibility>0</visibility>";      
 					echo "<Icon>";
 					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
