@@ -92,12 +92,21 @@ Include:
 */
 function fusaoGrafico()
 {
-	global $imagem,$grafico,$dir_tmp,$cp;
+	global $imagem,$grafico,$dir_tmp,$cp,$map_file;
 	include_once("classe_imagem.php");
+	if($map_file != "")
+	{
+		$mapa = ms_newMapObj($map_file);
+		$imgo = $mapa->draw();
+		$nome = ($imgo->imagepath).nomeRandomico().".png";
+		$imgo->saveImage($nome);
+		$imagem = ($imgo->imageurl).basename($nome);
+		$imgo->free();
+	}
 	$m = new Imagem(dirname($dir_tmp).$imagem);
 	$i = $m->fundeIm(dirname($dir_tmp).$grafico);
 	imagepng($i,dirname($dir_tmp).$imagem);
-	$cp->set_data(dirname($dir_tmp).$imagem);
+	$cp->set_data($imagem);
 }
 /*
 Section: R

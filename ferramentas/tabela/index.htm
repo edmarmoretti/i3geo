@@ -25,15 +25,15 @@
 			</div>
 			<div id=combot style="position:relative;top:5px;left:0px;">
 			</div>
-			<div id=contador style="position:relative;top:15px;left:0px;text-align:center">
-				listar: <img style=cursor:pointer onclick='menosf()' src=../../imagens/minus.gif />
+			<div id=contador style="background-color:rgb(240,240,240);width:90%;position:relative;top:15px;left:0px;text-align:left">
+				de <img style=cursor:pointer onclick='menosf()' src=../../imagens/minus.gif />
 				<input type=text class=digitar size=5 value=1 id=inicio />
 				at&eacute;
 				<input type=text class=digitar size=5 value=20 id=fim />
 				<img style=cursor:pointer onclick='maisf()'src=../../imagens/plus.gif />
-				<img style=cursor:pointer onclick='registrosf()'src=../../imagens/tic.png />
+				<span style=cursor:pointer onclick='registrosf()' ><img  title='listar dados'  src=../../imagens/tic.png /> Listar</span>
 			</div>
-			<div id=registros style="position:relative;top:15px;left:0px;text-align:left;">
+			<div id=registros style="position:relative;top:20px;left:0px;text-align:left;">
 			</div>
 		</div>
 		<div id=guia2obj style="display:none;width:95%">
@@ -61,7 +61,7 @@
 			<div onclick="listatextof()" style="position:relative;top:15px;left:0px;">
 				<input id=botao5 size=30  type=button value="Listar no formato texto"/>
 			</div>
-			<div onclick="criatemaf()" style="position:relative;top:20px;left:0px;">
+			<div onclick="criatemaf()" style="position:absolute;top:40px;left:160px;">
 				<input id=botao6 size=30  type=button value="Criar um tema novo"/>
 			</div>
 			<div id="operacoes" class=digitar style="text-align:left;position:relative;top:25px;left:0px;overflow:auto;height:180px"  >

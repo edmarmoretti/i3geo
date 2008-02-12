@@ -1277,6 +1277,8 @@ Include:
 */	
 	case "fusaografico":
 		include("graficos.php");
+		//$_SESSION["utilizacgi"] = "nao";
+		//$utilizacgi = "nao";
 		restauraCon($map_file,$postgis_mapa);
 		$cp->register('fusaoGrafico');
 		$cp->start();

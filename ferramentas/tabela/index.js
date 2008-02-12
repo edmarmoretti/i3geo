@@ -20,7 +20,6 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
-aguarde("block")
 nomeArquivoGr = "" //nome do arquivo que conterá os dados apoós ser feito o gráfico pela primeira vez
 mensagemAjuda("men1",$i("men1").innerHTML)
 parametrosURL()
@@ -103,6 +102,7 @@ function maisf()
 //lista os registros da tabela
 function registrosf()
 {
+	aguarde("block")
 	var tipolista = "tudo"
 	var tiporeg = "brasil"
 	if ($i("tiporeg").checked)
@@ -127,13 +127,13 @@ function montaregistrosf(retorno)
 		ins = "<table id=tabelai >"
 		ins += "<tr><td></td><td></td><td></td>"
 		for (i=0;i<retorno.data[0].itens.length;i++)
-		{ins += "<td id='"+(i * 1 + 3)+"' style='background-color:yellow' ><img onclick='excluicolunaf(this)' src=../../imagens/x.gif title='excluir' /><img onclick='ordenacolunaf(this)' src=../../imagens/ordena1.gif title='ordena' /> "+retorno.data[0].itens[i]+"</td>"}
+		{ins += "<td id='"+(i * 1 + 3)+"' style='background-color:yellow' ><img style=cursor:pointer onclick='excluicolunaf(this)' src=../../imagens/x.gif title='excluir' /><img style=cursor:pointer onclick='ordenacolunaf(this)' src=../../imagens/ordena1.gif title='ordena' /> "+retorno.data[0].itens[i]+"</td>"}
 		ins += "</tr>"
 		var cor = "linha"
 		for (i=0;i<retorno.data[1].registros.length;i++)
 		{
-			ins += "<tr><td><img onclick='excluilinhaf(this)' src=../../imagens/x.gif title='excluir' /></td>"
-			ins += "<td><img onclick='zoomlinhaf(this)' src=../../imagens/o.gif title='zoom' ids="+retorno.data[1].registros[i].indice+" /></td>"
+			ins += "<tr><td><img style=cursor:pointer onclick='excluilinhaf(this)' src=../../imagens/x.gif title='excluir' /></td>"
+			ins += "<td><img style=cursor:pointer onclick='zoomlinhaf(this)' src=../../imagens/o.gif title='zoom' ids="+retorno.data[1].registros[i].indice+" /></td>"
 			ins += "<td><input title='marca' style='cursor:pointer' type='checkbox' "+retorno.data[1].registros[i].status+"  name="+retorno.data[1].registros[i].indice+" /></td>"
 		 	var vals = retorno.data[1].registros[i].valores
 			for (j=0;j<vals.length;j++)
@@ -205,6 +205,7 @@ function excluicolunaf(coluna)
 		{
 			for (i = 0; i < trs[t].childNodes[cid].childNodes.length;i++)
 			{trs[t].childNodes[cid].removeChild(trs[t].childNodes[cid].childNodes[i])}
+			trs[t].childNodes[cid].innerHTML = "";
 		}
 	}
 	aguarde("none")
@@ -1051,7 +1052,7 @@ function fusaoG()
 //mostra o resultado da fusao do mapa com o grafico
 function mostraFG(retorno)
 {
-	var img = window.parent.$i("img").src
+	var img = retorno.data; //window.parent.$i("img").src
 	window.parent.$i("img").src = ""
 	window.parent.$i("img").src = img
 	window.open(img)
