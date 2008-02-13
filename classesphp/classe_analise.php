@@ -1474,11 +1474,10 @@ $operacao - Tipo de análise.
 		foreach ($lista as $l)
 		{
 			$geos = &$this->unserializeGeo($dir.$l);
-            $v = explode(" ",ms_GetVersion());
-            $v = explode(".",$v[2]);
-			if (($v != 5) && ($postgis_con == ""))
+            $v = $this->versao();
+			if (($v["principal"] != 5) && ($postgis_con == ""))
 			{return ("erro. Nao foi definida a conexao com o Postgis.");}
-			if ($v != 5)
+			if ($v["principal"] != 5)
 			{
 				$pgconn = pg_connect($postgis_con);
 				foreach ($geos["dados"] as &$geo)
@@ -1662,6 +1661,25 @@ $geos - array com os dados
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
+	}
+/*
+function: versao
+
+Retorna a versão do Mapserver.
+*/
+	function versao()
+	{
+		$v = "5.0.0";
+		$vs = explode(" ",ms_GetVersion());
+		for ($i=0;$i<(count($vs));$i++)
+		{
+			if(strtolower($vs[$i]) == "version")
+			{$v = $vs[$i+1];}
+		}
+		$versao["completa"] = $v;
+		$v = explode(".",$v);
+		$versao["principal"] = $v[0];
+		return $versao;
 	}
 }
 ?>

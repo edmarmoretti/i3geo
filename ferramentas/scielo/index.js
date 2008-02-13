@@ -29,7 +29,7 @@ function buscascielo()
 	if (window.parent.objmapa.scale > 150001)
 	{
 		var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
-		ins += "<br><br><div style=width:80px onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
+		ins += "<br><br><div style=width:80px onclick='ajustarescala()' ></div>" //<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
 		$i("resultadoscielo").innerHTML = ins;
 		YAHOO.example.init = function ()
 		{

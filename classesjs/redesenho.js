@@ -564,7 +564,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza as ferramentas de consulta que dependem da extensão geográfica
 		//
-		objmapa.verificaNavegaMapa;
+		objmapa.verificaNavegaMapa();
 		//
 		//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
 		//

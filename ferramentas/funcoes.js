@@ -218,6 +218,40 @@ function checkitensf(tema,funcao,onde)
 	cp.set_response_type("JSON");
 	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaitens&tema="+tema,"listaItens",monta);
 }
+//
+//monta checks com os itens baseado em um tema com os nomes em um input editável
+//
+function checkitenseditaveis(tema,funcao,onde)
+{
+	if (arguments.length == 3)
+	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";
+	var monta = function(retorno)
+	{
+		if (retorno.data != undefined)
+		{
+			var ins = new Array();
+			ins.push("<table class=lista >");
+			for (i=0;i<retorno.data.valores.length; i++)
+			{
+				ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+retorno.data.valores[i].item+"' /></td>");
+				ins.push("<td><input id='"+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size=25 value='"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].nome+"' /></td></tr>");
+			}
+			ins.push("</table>");
+			var ins = ins.join('');
+			var temp = {dados:ins,tipo:"dados"};
+		}
+		else
+		{
+			var temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};
+		}
+		eval("funcao(temp)");
+	}
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaitens&tema="+tema,"listaItens",monta);
+}
+
 //monta radios com os itens baseado em um tema
 function radioitensf(tema,funcao,onde)
 {

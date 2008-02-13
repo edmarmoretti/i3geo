@@ -42,7 +42,23 @@ $i("guia3").onclick = function()
 	{$i("itensGuia3").innerHTML = retorno.dados},"itensGuia3")
 }
 $i("guia4").onclick = function()
-{mostraGuia("guia4");;t0();}
+{mostraGuia("guia4");t0();}
+$i("guia5").onclick = function()
+{
+	mostraGuia("guia5")
+	//monta a lista de itens
+	checkitenseditaveis(
+	tema,
+	function(retorno)
+	{
+		if (retorno.tipo == "dados")
+		{$i("itensrelatorio").innerHTML = retorno.dados}
+	}
+	,"itensrelatorio"
+	)
+ 	comboitens("agrupaItem",tema,function(retorno)
+	{$i("agrupamento").innerHTML = retorno.dados},"agrupamento")	
+}
 
 //combo com as camadas
 comboCamadas("selCamada",tema,function(retorno)
@@ -70,6 +86,7 @@ YAHOO.example.init = function ()
 		new YAHOO.widget.Button("botao4");
 		new YAHOO.widget.Button("botao5");
 		new YAHOO.widget.Button("botao6");
+		new YAHOO.widget.Button("botao7");
 	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()	
@@ -1057,4 +1074,27 @@ function mostraFG(retorno)
 	window.parent.$i("img").src = img
 	window.open(img)
 	aguarde("none")
+}
+//gera relatorio
+function gerarelatorio()
+{
+	$i("arearel").value = $i("calculaarea").checked
+	$i("temarel").value=tema
+	$i("g_sid").value=g_sid
+	$i("itemagruparel").value=$i("agrupaItem").value
+	var inputs = $i("itensrelatorio").getElementsByTagName("input")
+	var listai = new Array;
+	var listanomes = new Array();
+	for (i=0;i<inputs.length; i++)
+	{
+		if (inputs[i].checked == true)
+		{
+			listai.push(inputs[i].id+";"+inputs[i].name)
+			var nome = $i(inputs[i].id+inputs[i].name).value;
+			listanomes.push(nome);
+		}
+	}
+	$i("nomesrel").value=listanomes
+	$i("itensrel").value=listai
+	$i("relatorio").submit();
 }

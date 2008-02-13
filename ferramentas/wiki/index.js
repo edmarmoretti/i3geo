@@ -29,7 +29,7 @@ function buscawiki()
 	if (window.parent.objmapa.scale > 500001)
 	{
 		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:500.000)!";
-		ins += "<br><br><div onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
+		ins += "<br><br><div onclick='ajustarescala()' >"//<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
 		$i("resultadowiki").innerHTML = ins;
 		YAHOO.example.init = function ()
 		{
@@ -59,5 +59,5 @@ function ajustarescala()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=500000";
-	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
+	cp.call(p,"mudaescala",window.parent.remapaf);
 }

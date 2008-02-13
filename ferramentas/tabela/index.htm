@@ -11,6 +11,7 @@
 		<div id=guia2 >Marcados</div>
 		<div id=guia3 >Opera&ccedil;&otilde;es</div>
 		<div id=guia4 >Gr&aacute;ficos</div>
+		<!---<div id=guia5 >Relat&oacute;rios</div>--->
 	</div>
 	<span id=geral style="left:0px;top:0px;">
 		<div id=resultadotab style="position:relative;top:5px;left:0px"></div>
@@ -76,7 +77,29 @@
 			<div style="top:5px;left:-5px;display:block;width:95%" id='resultado' >
 			</div>
 		</div>
-
+		<div id=guia5obj style="width:90%;display:none">
+			Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes para adequar os nomes das colunas no relat&oacute;rio:
+			<div id=itensrelatorio class=digitar style="text-align:left;top:15px;left:5px;width:250px;overflow:auto;height:100px">
+			</div>
+			<br><br>Escolha o item que voc&ecirc; quer utilizar para agrupar valores (opcional):
+			<div id=agrupamento style="text-align:left;top:15px;left:5px;">
+			</div>
+			<div style="position:relative;top:25px;left:0px">
+				<input style="cursor:pointer" type=checkbox id=calculaarea CHECKED />
+				Incluir c&aacute;lculo de &aacute;rea
+			</div>
+			<div onclick="gerarelatorio()" style="position:relative;top:35px;left:0px;cursor:pointer">
+				<input id=botao7 size=30  type=button value="Criar"/>
+			</div>
+			<form method=post style="display:none" id=relatorio action="relatorio.php" target="_blank" >
+				<input type=hidden id=arearel name=arearel value=sim />
+				<input type=hidden id=temarel name=temarel value="" />
+				<input type=hidden id=g_sid name=g_sid value="" />
+				<input type=hidden id=itemagruparel name=temaagruparel value="" />
+				<input type=hidden id=itensrel name=itensrel value="" />
+				<input type=hidden id=nomesrel name=nomesrel value="" />
+			</form>
+		</div>
 	</span>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>

@@ -407,9 +407,9 @@ $testa - Testa o filtro e retorna uma imagem.
         else
         {
             $this->layer->setfilter($filtro);
-            $v = explode(" ",ms_GetVersion());
+            $v = $this->versao();
 			//corrige bug do mapserver
-            if (($v[2] == "4.10.0") && ($this->layer->connectiontype == MS_POSTGIS))
+            if (($v["completa"] == "4.10.0") && ($this->layer->connectiontype == MS_POSTGIS))
             {$this->layer->setfilter("\"".$filtro."\"");}
         }        
 		if ($testa == "")
@@ -438,12 +438,11 @@ $valor - Novo valor da transparência
 */
 	function mudaTransparencia($valor)
 	{
-        $v = explode(" ",ms_GetVersion());
-        $v = explode(".",$v[2]);
+        $v = $this->versao();
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
-			if($v == 4)
+			if($v["principal"] == "4")
 			{$ll->set("transparency",$valor);}
 			else
 			{$ll->set("opacity",$valor);}
@@ -775,6 +774,25 @@ $lista - lista com os nomes dos arquivos
 			{unlink ($dir_tmp."/".$imgdir."/".$f);}
 		}
 		return("ok");
+	}
+/*
+function: versao
+
+Retorna a versão do Mapserver.
+*/
+	function versao()
+	{
+		$v = "5.0.0";
+		$vs = explode(" ",ms_GetVersion());
+		for ($i=0;$i<(count($vs));$i++)
+		{
+			if(trim(strtolower($vs[$i])) == "version")
+			{$v = $vs[$i+1];}
+		}
+		$versao["completa"] = $v;
+		$v = explode(".",$v);
+		$versao["principal"] = $v[0];
+		return $versao;
 	}
 }
 ?>
