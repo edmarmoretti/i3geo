@@ -103,6 +103,12 @@ Se sim, a legenda móvel é atualizada quando o mapa é alterado.
 */
 atuaLeg="nao";
 /*
+Variable: g_zoomRefDinamico
+
+Define o fator de zoom que será aplicado ao mapa de referência quando este estiver no modo dinâmico.
+*/
+g_zoomRefDinamico = -3;
+/*
 Variable: g_mashuppar
 
 Parâmetros de inicialização que podem ser utilizados na interface mashup.
@@ -832,7 +838,7 @@ function Mapa(e,m)
 		{
 			if(dinamico)
 			{
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+g_sid;
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+g_sid+"&zoom="+g_zoomRefDinamico;
 				cpObj.call(p,"retornaReferenciaDinamica",ajaxReferencia);
 			}
 			else
@@ -1001,21 +1007,24 @@ function Mapa(e,m)
 			$i("corpoMapa").innerHTML = ins;
 		}
 		//insere a figura que segue o mouse
-		var novoel = document.createElement("div");
-		novoel.style.zIndex=1000;
-		novoel.id="obj";
-		var novoimg = document.createElement("img");
-		novoimg.src= g_locaplic+"/imagens/pan.gif";
-		novoimg.name="imgh";
-		novoimg.id='imgh';
-		novoimg.style.width = "15px";
-		novoimg.style.height = "15px";
-		novoel.appendChild(novoimg);
-		novoel.onmouseover = function()
-		{this.style.display = "none";};
-		novoel.onmouseout = function()
-		{this.style.display = "block";};
-		document.body.appendChild(novoel);
+		if(!$i("imgh"))
+		{
+			var novoel = document.createElement("div");
+			novoel.style.zIndex=1000;
+			novoel.id="obj";
+			var novoimg = document.createElement("img");
+			novoimg.src= g_locaplic+"/imagens/pan.gif";
+			novoimg.name="imgh";
+			novoimg.id='imgh';
+			novoimg.style.width = "15px";
+			novoimg.style.height = "15px";
+			novoel.appendChild(novoimg);
+			novoel.onmouseover = function()
+			{this.style.display = "none";};
+			novoel.onmouseout = function()
+			{this.style.display = "block";};
+			document.body.appendChild(novoel);
+		}
 		var docMapa = "";
 		if (document.getElementById("openlayers_OpenLayers_Container"))
 		{

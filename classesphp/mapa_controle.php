@@ -1926,6 +1926,14 @@ Include:
 */
 	case "aplicaParametrosLegImg":
 		include("classe_legenda.php");
+		//
+		//no caso da opção de legenda incluida no mapa, o modo cgi não desenha a imagem corretamente
+		//
+		if($status == 3)
+		{
+			$_SESSION["utilizacgi"] = "nao";
+			$utilizacgi = "nao";
+		}
 		$m = new Legenda($map_file);
 		$cp->set_data($m->aplicaParametrosLegImg($imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize));
 		$m->salva();

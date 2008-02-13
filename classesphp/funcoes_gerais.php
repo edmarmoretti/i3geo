@@ -748,13 +748,15 @@ nomeImagem - Nome da imagem do corpo do mapa.
 
 objMapa - Objeto map.
 
+zoom - fator de zoom
+
 return:
 
 Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferenciaDinamica()
 {
-	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic;
+	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
@@ -787,7 +789,7 @@ function retornaReferenciaDinamica()
 	$objMapa->preparequery();
 	$pt = ms_newPointObj();
 	$pt->setXY(($w/2),($h/2));
-	$objMapa->zoompoint(-3, $pt,$w,$h,$objMapa->extent);
+	$objMapa->zoompoint($zoom, $pt,$w,$h,$objMapa->extent);
 	$objImagem = $objMapa->draw();
 	$em->draw($objMapa, ($objMapa->getlayerbyname("refdinrect")), $objImagem,0,"");
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";

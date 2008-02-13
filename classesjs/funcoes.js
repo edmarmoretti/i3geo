@@ -1336,7 +1336,12 @@ function initJanelaRef()
 		novoel.id = "winRef";
 		novoel.style.display="none";
 		novoel.style.borderColor="gray";
-		var ins = '<div class="hd"><input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
+		var ins = '<div class="hd">';
+		var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
+		ins += "<img class=mais onclick='"+temp+"' src="+$im("branco.gif")+" />";
+		var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
+		ins += "<img class=menos onclick='"+temp+"' src="+$im("branco.gif")+" />&nbsp;";
+		ins += '<input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
 		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" />';
 		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
@@ -3964,7 +3969,7 @@ function ativaDragDrop()
 	        	dragEl.innerHTML = clickEl.innerHTML;
 	        	Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
    		    	Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
-    	    	Dom.setStyle(dragEl, "border", "2px solid gray");
+    	    	Dom.setStyle(dragEl, "border", "4px solid gray");
     	    	Dom.setStyle(dragEl, "z-index", "5000");
     		},
 	    	endDrag: function(e) 
@@ -4052,6 +4057,7 @@ function ativaDragDrop()
  								}								
  							}
  							var lista = lista.join(',');
+ 							if($i("listaTemas")){$i("listaTemas").innerHTML = "";}
 							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reordenatemas&lista="+lista+"&g_sid="+g_sid;
 							var cp = new cpaint();
 							//cp.set_debug(2)
@@ -4079,12 +4085,16 @@ function ativaDragDrop()
 	        	// We are only concerned with list items, we ignore the dragover
 	        	// notifications for the list.
 	        	if ($i("lixeira") && id == "lixeira")
-	        	{$i("lixeira").style.border = "1px solid blue";}
+	        	{$i("lixeira").style.border = "1px solid red";}
 	        	else
-	        	{destEl.style.textDecoration="underline";}
+	        	{
+	        		destEl.style.textDecoration="underline";
+	        	}
 	    	},
 	    	onDragOut: function(e, id)
-	    	{$i(id).style.textDecoration="none";}
+	    	{
+	    		$i(id).style.textDecoration="none";
+	    	}
 		}
 	);
 	Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
