@@ -230,6 +230,7 @@ retorno - string no formato "var refimagem='nome da imagem'".
 */
 function ajaxReferencia(retorno)
 {
+	objaguarde.fecha("ajaxreferencia1");
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		eval(retorno.data);

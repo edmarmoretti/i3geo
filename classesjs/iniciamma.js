@@ -831,6 +831,7 @@ function Mapa(e,m)
 	*/
 	this.atualizaReferencia = function(mapexten)
 	{
+		//objaguarde.abre("ajaxreferencia1",$trad("o3"));
 		var dinamico = false;
 		if ($i("refDinamico"))
 		{var dinamico = $i("refDinamico").checked;}
@@ -853,6 +854,7 @@ function Mapa(e,m)
 					var re = new RegExp("&mode=map", "g");
 					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
 					gravaQuadro("referencia",$i("imagemReferencia").src);
+					//objaguarde.fecha("ajaxreferencia1");
 				}
 			}
 		}
@@ -860,6 +862,7 @@ function Mapa(e,m)
 		{
 			if($i("imagemReferencia"))
 			gravaQuadro("referencia",$i("imagemReferencia").src);
+			//objaguarde.fecha("ajaxreferencia1");
 		}		
 	};
 	/*

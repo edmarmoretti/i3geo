@@ -355,7 +355,7 @@ function mudaVisual(visual)
 			}
 			g_visual = visual;
 		}
-		catch(e){alert("Ocorreu um erro.");objaguarde.fecha("ajaxredesenha");}
+		catch(e){alert("Ocorreu um erro. mudaVisual"+e);objaguarde.fecha("ajaxredesenha");}
 	};
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
@@ -397,7 +397,7 @@ function initJanelaMen()
 		YAHOO.janelaMen.xp.panel.show();
 		YAHOO.janelaMen.xp.panel.moveTo(imagemxi - 267 ,objmapa.h - 70);
 	}
-	catch(e){alert("Nao foi possivel criar a janela de mensagens.");}
+	catch(e){alert("Nao foi possivel criar a janela de mensagens. initJanelaMen"+e);}
 }
 /*
 Function: docaguias
@@ -648,7 +648,7 @@ function mensagemf(m)
 		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = imagemxi + g_postpx');
 		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = imagemyi + g_postpx');
 	}
-	catch(e){alert("Impossivel criar mensagem");}
+	catch(e){alert("Impossivel criar mensagem."+e);}
 }
 /*
 Function: wdocaf
@@ -718,7 +718,7 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. wdocaf"+e);}
 }
 /*
 Function: redimwdocaf
@@ -743,7 +743,7 @@ function redimwdocaf(wlargura,waltura)
 			i.style.height = waltura;
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. redimwdocaf"+e);}
 }
 /*
 Function: wdocaf2
@@ -793,7 +793,7 @@ function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca2.xp.panel.close, "click", escondeWdoca2);
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. wdocaf2"+e);}
 }
 /*
 Function: wdocafechaf
@@ -822,7 +822,7 @@ function wdocafechaf(odoca)
 		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
 		{mudaiconf("pan");}
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. wdocafechaf"+e);}
 }
 /*
 Function: mostradicasf
@@ -857,7 +857,7 @@ function mostradicasf(objeto,dica,hlpt)
 			$i("janelaMenTexto").innerHTML= "<b>"+dica+" </b>";
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. mostradicasf"+e);}
 }	
 /*
 Function: mudaiconf
@@ -954,7 +954,7 @@ function mudaiconf(i)
 			break;
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. mudaiconf"+e);}
 }
 /*
 Function: mostraguiaf
@@ -1014,6 +1014,14 @@ function aguarde()
 {
 	this.abre = function(aguardeId,texto)
 	{
+		if($i("wait_mask"))
+		{
+			document.body.removeChild($i("wait_mask"));
+		}
+		if($i("wait_c"))
+		{
+			document.body.removeChild($i("wait_c"));
+		}
 		YAHOO.namespace("aguarde."+aguardeId);
 		eval ('YAHOO.aguarde.'+aguardeId+' = new YAHOO.widget.Panel("wait",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
@@ -1046,18 +1054,22 @@ function ativaClicks(docMapa)
 {
 	docMapa.onmouseover = function()
 	{
-		if ($i("imgh")){$i("imgh").style.display="block";}
-		if ($i("janelaMenu"))
-		{$i("janelaMenu").style.display="none";}
-		this.src=g_quadrooriginal;
-		//verifica se o mouse esta parado
-		if (objmapa.parado!="cancela")
+		try
 		{
-			objmapa.parado="nao";
-			verificaTip();
+			if ($i("imgh")){$i("imgh").style.display="block";}
+			if ($i("janelaMenu"))
+			{$i("janelaMenu").style.display="none";}
+			this.src=g_quadrooriginal;
+			//verifica se o mouse esta parado
+			if (objmapa.parado!="cancela")
+			{
+				objmapa.parado="nao";
+				verificaTip();
+			}
+			if ($i("tip"))
+			{$i("tip").style.display="none";}
 		}
-		if ($i("tip"))
-		{$i("tip").style.display="none";}
+		catch(e){var e = "";}
 		this.onmousemove=function(exy)
 		{
 			try
@@ -1097,84 +1109,102 @@ function ativaClicks(docMapa)
 					}
 				}
 			}
-			catch(e){alert("Ocorreu um erro.");}
-			objmapa.verificaMousemoveMapa();
+			catch(e){var e = "";}
+			try
+			{objmapa.verificaMousemoveMapa();}
+			catch(e){var e = "";}
 		};
 	};
 	docMapa.onmouseout = function()
 	{
-		objmapa.parado="parar";
-		mostradicasf(this,'');
-		if ($i("imgh")){$i("imgh").style.display="none";}
+		try
+		{
+			objmapa.parado="parar";
+			mostradicasf(this,'');
+			if ($i("imgh")){$i("imgh").style.display="none";}
+		}
+		catch(e){var e = "";}
 	};
 	docMapa.onmousedown = function()
 	{
-		if ($i("imgh"))
-		$i("imgh").style.display="none";
-		//verifica se esta na opÃ¯Â¿Â½o de zoom box
-		if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
+		try
 		{
-			// inicia retÃ¯Â¿Â½gulo de zoom
 			if ($i("imgh"))
 			$i("imgh").style.display="none";
-			if($i("box1"))
+			//verifica se esta na opÃ¯Â¿Â½o de zoom box
+			if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
 			{
-				var i = $i("box1").style;
-				i.width=0;
-				i.height=0;
-				i.visibility="visible";
-				i.display="none";
+				// inicia retÃ¯Â¿Â½gulo de zoom
+				if ($i("imgh"))
+				$i("imgh").style.display="none";
+				if($i("box1"))
+				{
+					var i = $i("box1").style;
+					i.width=0;
+					i.height=0;
+					i.visibility="visible";
+					i.display="none";
+				}
+				boxxini = objposicaocursor.telax;
+				boxyini = objposicaocursor.telay;
+				tamanhox = 0;
+				tamanhoy = 0;
 			}
-			boxxini = objposicaocursor.telax;
-			boxyini = objposicaocursor.telay;
-			tamanhox = 0;
-			tamanhoy = 0;
-		}
-		if ($i("img") && (g_tipoacao == "pan"))
-		{
-			g_panM = "sim";
-			if($i("corpoMapa"))
+			if ($i("img") && (g_tipoacao == "pan"))
 			{
-				leftinicial = parseInt($i("corpoMapa").style.left);
-				topinicial = parseInt($i("corpoMapa").style.top);
+				g_panM = "sim";
+				if($i("corpoMapa"))
+				{
+					leftinicial = parseInt($i("corpoMapa").style.left);
+					topinicial = parseInt($i("corpoMapa").style.top);
+				}
+				clicinicialx = objposicaocursor.imgx;
+				clicinicialy = objposicaocursor.imgy;
+				ddinicialx = objposicaocursor.ddx;
+				ddinicialy = objposicaocursor.ddy;
 			}
-			clicinicialx = objposicaocursor.imgx;
-			clicinicialy = objposicaocursor.imgy;
-			ddinicialx = objposicaocursor.ddx;
-			ddinicialy = objposicaocursor.ddy;
 		}
+		catch(e){var e = "";}
 	};
 	docMapa.onclick = function()
 	{
-		objmapa.verificaClickMapa();
+		try
+		{
+			objmapa.verificaClickMapa();
+		}
+		catch(e){var e = "";}
 	};
 	docMapa.onmouseup = function()
 	{
-		if (g_tipoacao == "zoomli"){zoomboxf("termina");}
-		if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
-		if ($i("img") && (g_tipoacao == "pan"))
+		try
 		{
-			g_panM = "nao";
-			var disty = (ddinicialy * -1) + objposicaocursor.ddy; //teladd[1]
-			var distx = (ddinicialx * -1) + objposicaocursor.ddx; //teladd[0]
-			var ex = objmapa.extent;
-			var ex = ex.split(" ");
-			var novoxi = (ex[0] * 1) - distx;
-			var novoxf = (ex[2] * 1) - distx;
-			var novoyi = (ex[1] * 1) - disty;
-			var novoyf = (ex[3] * 1) - disty;
-			if ((distx == 0)||(disty == 0))
+			if (g_tipoacao == "zoomli"){zoomboxf("termina");}
+			if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
+			if ($i("img") && (g_tipoacao == "pan"))
 			{
+				g_panM = "nao";
+				var disty = (ddinicialy * -1) + objposicaocursor.ddy; //teladd[1]
+				var distx = (ddinicialx * -1) + objposicaocursor.ddx; //teladd[0]
+				var ex = objmapa.extent;
+				var ex = ex.split(" ");
+				var novoxi = (ex[0] * 1) - distx;
+				var novoxf = (ex[2] * 1) - distx;
+				var novoyi = (ex[1] * 1) - disty;
+				var novoyf = (ex[3] * 1) - disty;
+				if ((distx == 0)||(disty == 0))
+				{
+					objaguarde.abre("ajaxredesenha",$trad("o1"));
+					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+g_sid;
+					cpObj.call(p,"pan",ajaxredesenha);
+					return;
+				}
+				var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
 				objaguarde.abre("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+g_sid;
-				cpObj.call(p,"pan",ajaxredesenha);
-				return;
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
+				cpObj.call(p,"mudaExtensao",ajaxredesenha);
 			}
-			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
-			cpObj.call(p,"mudaExtensao",ajaxredesenha);
 		}
+		catch(e){var e = "";}
 	};
 }
 /*
@@ -1633,12 +1663,13 @@ function clicouRef()
 {
 	try
 	{
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
 		objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
 		cpObj.call(p,"pan",ajaxredesenha);
 	}
-	catch(e){var e = "";}
+	catch(e){var e = "";objaguarde.fecha("ajaxredesenha");}
 }
 /*
 Function: movimentoRef
@@ -2019,7 +2050,7 @@ function legendaGrafico(par)
 		YAHOO.legendagr.xp.panel.render();
 		YAHOO.legendagr.xp.panel.show();
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
 }
 /*
 Function: inverteStatusClasse
@@ -2045,31 +2076,27 @@ Atualiza o box do google se a função google estiver ativa
 */
 function atualizagoogle()
 {
-	try
+	if (window.parent.frames["wdocai"])
 	{
-		if (window.parent.frames["wdocai"])
+		if (navn)
 		{
-			if (navn)
+			if ($i("wdocai"))
+			{var doc = $i("wdocai").contentDocument;}
+		}
+		else
+		{
+			if(document.frames("wdocai"))
+			{var doc = document.frames("wdocai").document;}
+		}
+		if(doc)
+		{
+			if (doc.getElementById("map"))
 			{
-				if ($i("wdocai"))
-				{var doc = $i("wdocai").contentDocument;}
-			}
-			else
-			{
-				if(document.frames("wdocai"))
-				{var doc = document.frames("wdocai").document;}
-			}
-			if(doc)
-			{
-				if (doc.getElementById("map"))
-				{
-					if(window.parent.frames["wdocai"].panTogoogle)
-					{window.parent.frames["wdocai"].panTogoogle();}
-				}
+				if(window.parent.frames["wdocai"].panTogoogle)
+				{window.parent.frames["wdocai"].panTogoogle();}
 			}
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: atualizascielo
@@ -2078,21 +2105,17 @@ Atualiza a lista de dados na opção de busca Scielo
 */
 function atualizascielo()
 {
-	try
+	if ($i("wdocai"))
 	{
-		if ($i("wdocai"))
+		if (window.parent.frames["wdocai"])
 		{
-			if (window.parent.frames["wdocai"])
+			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if (docel.getElementById("resultadoscielo"))
 			{
-				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				if (docel.getElementById("resultadoscielo"))
-				{
-					$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
-				}
+				$i("wdocai").src = g_locaplic+"/ferramentas/scielo/index.htm";
 			}
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
 }	
 /*
 Function: atualizaconfluence
@@ -2101,21 +2124,17 @@ Atualiza a lista de dados na opção de busca confluence
 */
 function atualizaconfluence()
 {
-	try
+	if($i("wdocai"))
 	{
-		if($i("wdocai"))
+		if (window.parent.frames["wdocai"])
 		{
-			if (window.parent.frames["wdocai"])
+			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if (docel.getElementById("resultadoconfluence"))
 			{
-				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				if (docel.getElementById("resultadoconfluence"))
-				{
-					$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
-				}
+				$i("wdocai").src = g_locaplic+"/ferramentas/confluence/index.htm";
 			}
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Function: atualizawiki
@@ -2124,21 +2143,17 @@ Atualiza a lista de dados na opção de busca wiki
 */
 function atualizawiki()
 {
-	try
+	if ($i("wdocai"))
 	{
-		if ($i("wdocai"))
+		if (window.parent.frames["wdocai"])
 		{
-			if (window.parent.frames["wdocai"])
+			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if (docel.getElementById("resultadowiki"))
 			{
-				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				if (docel.getElementById("resultadowiki"))
-				{
-					$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
-				}
+				$i("wdocai").src = g_locaplic+"/ferramentas/wiki/index.htm";
 			}
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
 }
 /*
 Section: menu de temas e outras listagens
@@ -2296,44 +2311,52 @@ function expandeTema(itemID)
 			if (retorno.data != undefined)
 			{
 				var original = retorno;
-				var retorno = retorno.data.legenda;
-				if (retorno[0])
+				//é um tema normal
+				if (retorno.data.legenda)
 				{
-					if ((navn) && (!retorno[0].imagem))
-					{tabela = retorno;}
-					else
+					var retorno = retorno.data.legenda;
+					if (retorno[0])
 					{
-						var i = retorno[0].imagem;
-						var re = new RegExp("tiff", "g");
-						var i = i.replace(re,'png');
-						var tabela = "<img src='"+i+"' />";
-					}					
-					retorno = "";
-				}
-				else
-				{
-					var linhas = retorno.split("#");
-					if (linhas.length > 1)
-					{
-						var linhas = retorno.split("|");
-						var tabela = "<table >";
-						var linha = linhas.length-1;
-						if(linha >= 0)
+						if ((navn) && (!retorno[0].imagem))
+						{tabela = retorno;}
+						else
 						{
-							do
-							{
-								var colunas = linhas[linha].split("#");
-								var id = colunas[0]+"-"+colunas[1];
-								var re = new RegExp("'", "g");
-								var exp = colunas[3].replace(re,'"');
-								tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
-							}
-							while(linha--)
-						}
-						tabela += "</table><br>";
+							var i = retorno[0].imagem;
+							var re = new RegExp("tiff", "g");
+							var i = i.replace(re,'png');
+							var tabela = "<img src='"+i+"' />";
+						}					
+						retorno = "";
 					}
 					else
-					{tabela = retorno;}
+					{
+						var linhas = retorno.split("#");
+						if (linhas.length > 1)
+						{
+							var linhas = retorno.split("|");
+							var tabela = "<table >";
+							var linha = linhas.length-1;
+							if(linha >= 0)
+							{
+								do
+								{
+									var colunas = linhas[linha].split("#");
+									var id = colunas[0]+"-"+colunas[1];
+									var re = new RegExp("'", "g");
+									var exp = colunas[3].replace(re,'"');
+									tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
+								}
+								while(linha--)
+							}
+							tabela += "</table><br>";
+						}
+						else
+						{tabela = retorno;}
+					}
+				}
+				else //o tema é um wms
+				{
+					var tabela = "<img src='"+retorno.data[0].imagem+"' />";
 				}
 				if (!$i(g_arvoreClick+"verdiv"))
 				{
@@ -2360,19 +2383,21 @@ function expandeTema(itemID)
 					}
 					while(i < nelementos)
 				}
-				var desativar = original.data.desativar;
-				var nindices = desativar.length;
-				var i = 0;
-				if (nindices > 0)
+				if(original.data.desativar)
 				{
-					do
+					var desativar = original.data.desativar;
+					var nindices = desativar.length;
+					var i = 0;
+					if (nindices > 0)
 					{
-						inputs[desativar[i]].checked = false;
-						i++;
+						do
+						{
+							inputs[desativar[i]].checked = false;
+							i++;
+						}
+						while(i < nindices)
 					}
-					while(i < nindices)
-				}
-				
+				}	
 			}
 		};
 		g_arvoreClick = itemID;
@@ -2955,7 +2980,7 @@ function calcposf()
 			$left("aguarde",imagemxi);
 		}
 	}
-	catch(e){alert("Ocorreu um erro.");}
+	catch(e){alert("Ocorreu um erro. calcposf"+e);}
 }
 /*
 Function: movecursor
@@ -3770,7 +3795,7 @@ function inseremarcaf(xi,yi,funcaoOnclick)
 		novoel.appendChild(novoimg);
 		container.appendChild(novoel);
 	}
-	catch(e){alert("Ocorreu um erro");}
+	catch(e){alert("Ocorreu um erro. inseremarcaf"+e);}
 }
 /*
 Function: limpacontainerf

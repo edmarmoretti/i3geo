@@ -449,7 +449,7 @@ es:"Ubique elementos en el tema con base en sus atributos descriptivos"
 }],
 "t23":[
 {
-pt:"Procurar...",
+pt:"procurar...",
 en:"Search...",
 es:"Buscar..."
 }],
