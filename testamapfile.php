@@ -1,27 +1,8 @@
-<html>
-<head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-</head>
-<script>
-function roda()
-{
-	window.location.href = "?map="+document.getElementById("nomemap").value;
-}
-</script>
-<body >
-<form action="testamapfile.php" method="post" id=f >
-  Nome do arquivo map (deve estar no diretório 'temas'):<br><br>
-  <input id=nomemap class=digitar type="file" size=20 >
-  <input id=map type="hidden" value="" name="map">
-  <input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit">
-</form>
-</body>
-</html>
 <?php
 /*
 Title: Testa um mapfile.
 
-Permite testar um mapfile específico existente no diretório "temas".
+Permite testar um mapfile específico existente no diretório "temas" ou gerar uma imagem miniatura.
 
 File: i3geo/testamapfile.php
 
@@ -54,6 +35,8 @@ testamapfile.php?map=bioma
 Parameters:
 
 map - nome do mapfile que será aberto. O arquivo é procurado no caminho indicado e no diretório i3geo/temas
+
+tipo - (opcional) tipo de retorno mini|grande . A opção mini retorna uma miniatura do mapa
 */
 include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
@@ -72,6 +55,12 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
+if(!isset($tipo))
+{$tipo = "";}
+if ($tipo == "")
+{
+	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script><body ><form action="testamapfile.php" method="post" id=f >Nome do arquivo map (deve estar no diretório temas):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit"></form></body></html>';
+}
 if (isset($map) && $map != "")
 {
 	$tema = "";
@@ -81,6 +70,7 @@ if (isset($map) && $map != "")
 	{$tema = 'temas/'.$map;}
 	if (file_exists('temas/'.$map.'.map'))
 	{$tema = 'temas/'.$map.".map";}
+	if($tipo == "")
 	echo "<br>Testando: $tema<pre>";
 	if ($tema != "")
 	{
@@ -114,12 +104,30 @@ if (isset($map) && $map != "")
 				}
 			}
 		}
+		if ($tipo == "mini")
+		{
+		 	 $mapa->setsize(50,50);
+			 $sca = $mapa->scalebar;
+			 $sca->set("status",MS_OFF);
+		}
+		if ($tipo == "grande")
+		{
+		 	 $mapa->setsize(300,300);
+			 $sca = $mapa->scalebar;
+			 $sca->set("status",MS_OFF);
+		}
+
 		$objImagem = $mapa->draw();
-		$nomer = ($objImagem->imagepath).nomeRandomico()."teste.png";
-		$objImagem->saveImage($nomer);
-		$nomer = ($objImagem->imageurl).basename($nomer);
-		echo "<img src=".$nomer." />"; 
-			
+		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
+		$objImagem->saveImage($nomec);
+		$nomer = ($objImagem->imageurl).basename($nomec);
+		if($tipo == "")
+		{echo "<img src=".$nomer." />";}
+		else
+		{
+		 Header("Content-type: image/png");
+		 ImagePng(ImageCreateFromPNG($nomec));
+		}
 	}
 	else
 	{echo "<br>Arquivo não existe";}

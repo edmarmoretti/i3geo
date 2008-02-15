@@ -2614,11 +2614,16 @@ function processaTemas(retorno)
 				var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
 				if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
 				{var kml = "";}
+				var mini = "";
+				var lkmini = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=mini";
+				var lkmini1 = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=grande";
+				var mini = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >mini</a>";	
+				
 				if (g_qrcode == "nao"){qrcode = "";}
 				if(navm)
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+kml+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+kml+mini+"</span>";
 				else
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+kml+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+kml+mini+"</span>";
 				mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
 				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 				else
