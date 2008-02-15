@@ -43,23 +43,25 @@ $i("guia3").onclick = function()
 }
 $i("guia4").onclick = function()
 {mostraGuia("guia4");t0();}
-$i("guia5").onclick = function()
+if($i("guia5"))
 {
-	mostraGuia("guia5")
-	//monta a lista de itens
-	checkitenseditaveis(
-	tema,
-	function(retorno)
+	$i("guia5").onclick = function()
 	{
-		if (retorno.tipo == "dados")
-		{$i("itensrelatorio").innerHTML = retorno.dados}
+		mostraGuia("guia5")
+		//monta a lista de itens
+		checkitenseditaveis(
+		tema,
+		function(retorno)
+		{
+			if (retorno.tipo == "dados")
+			{$i("itensrelatorio").innerHTML = retorno.dados}
+		}
+		,"itensrelatorio"
+		)
+ 		comboitens("agrupaItem",tema,function(retorno)
+		{$i("agrupamento").innerHTML = retorno.dados},"agrupamento")	
 	}
-	,"itensrelatorio"
-	)
- 	comboitens("agrupaItem",tema,function(retorno)
-	{$i("agrupamento").innerHTML = retorno.dados},"agrupamento")	
 }
-
 //combo com as camadas
 comboCamadas("selCamada",tema,function(retorno)
 {

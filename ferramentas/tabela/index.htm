@@ -16,14 +16,17 @@
 	<span id=geral style="left:0px;top:0px;">
 		<div id=resultadotab style="position:relative;top:5px;left:0px"></div>
 		<div id=guia1obj style="width:90%">
-			<div style="position:relative;top:5px;left:0px">
-				<input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tiporeg CHECKED />
-				Considerar na listagem apenas a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)
-			</div>
-			<div style="position:relative;top:5px;left:0px">
-				<input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tipolista />
-				Mostrar na listagem apenas os selecionados
-			</div>
+			<table class=lista >
+			<tr>
+				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tiporeg CHECKED /></td>
+				<td>Considerar na listagem apenas a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>
+			</tr>
+			<tr>
+				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tipolista /></td>
+				<td>Mostrar na listagem apenas os selecionados</td>
+			</tr>
+			</table>
+
 			<div id=combot style="position:relative;top:5px;left:0px;">
 			</div>
 			<div id=contador style="background-color:rgb(240,240,240);width:90%;position:relative;top:15px;left:0px;text-align:left">

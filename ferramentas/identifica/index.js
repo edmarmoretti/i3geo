@@ -142,6 +142,7 @@ function identificasistema(exec,t)
 //identifica o tema clicado
 function identifica(tema)
 {
+	aguarde("block")
 	var resolucao = $i("resolucao").value;
 	window.parent.objmapa.temaAtivo = tema;
 	var temp = $i("xy").innerHTML
@@ -243,6 +244,7 @@ function mostraf(retorno)
 			}
 		}
 		$i("ocorrencia").innerHTML=res
+		aguarde("none")
 	}
 	else
 	{

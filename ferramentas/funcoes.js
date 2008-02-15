@@ -849,5 +849,6 @@ function mostraGuia(guia)
 		if ($i("guia"+g+"obj"))
 		$i("guia"+g+"obj").style.display="none";
 	}
-	$i(guia+"obj").style.display="block";
+	if ($i(guia+"obj"))
+	{$i(guia+"obj").style.display="block";}
 }

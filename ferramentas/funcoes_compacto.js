@@ -105,4 +105,4 @@ function ativaGuias(){ for(g=0;g<12;g++){ if($i("guia"+g)) var gpai=$i("guia"+g)
  gpai.id="guiasYUI"; gpai.className="yui-navset"; var ins='<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">'; for(g=0;g<12;g++){ if($i("guia"+g)) ins+='<li><a href="#"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px;>'+$i("guia"+g).innerHTML+'</div></em></a></li>';}
  ins+="</ul>"; gpai.innerHTML=ins;}
 function mostraGuia(guia){ for(g=0;g<12;g++){ if($i("guia"+g+"obj")) $i("guia"+g+"obj").style.display="none";}
- $i(guia+"obj").style.display="block";}
+ if($i(guia+"obj")){$i(guia+"obj").style.display="block";}}
