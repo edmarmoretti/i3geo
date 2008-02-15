@@ -924,11 +924,9 @@ Include:
 		$layer->setmetadata("wms_style",$nome);
 		$layer->setmetadata("wms_connectiontimeout","30");
 		$layer->setmetadata("wms_force_separate_request","1");
-		if (($tiporep != "") && ($suportasld == "sim"))
-		{
-			$layer->setmetadata("wms_sld_url",$imgurl.$layer->name."sld.xml");
-			$layer->setmetadata("sld",$dir_tmp."/".$imgdir."/".$layer->name."sld.xml");
-		}
+		//pega o timpo de formato de imagem que deve ser requisitado
+		//a preferência é png, mas se não for possível, pega o primeiro da lista de formatos
+		//disponíveis no formato
 		if (stristr($formato,"png"))
 		{$im = "image/png";}
 		else
@@ -936,6 +934,17 @@ Include:
 			$im = explode(",",$formato);
 			$im = $im[0];
 		}
+		if (($tiporep != "") && ($suportasld == "sim"))
+		{
+			$layer->setmetadata("wms_sld_url",$imgurl.$layer->name."sld.xml");
+			$layer->setmetadata("sld",$dir_tmp."/".$imgdir."/".$layer->name."sld.xml");
+		}
+		else
+		{
+			$urllegenda = $servico."&service=wms&request=getlegendgraphic&version=".$versao."&service=wms&layer=".$tema."&format=".$im;
+			$layer->setmetadata("legendawms",$urllegenda);
+		}
+
 		$layer->setmetadata("wms_format",$im);
 		$layer->setmetadata("wfs","nao");
 		//verifica se o serviço tem wfs
