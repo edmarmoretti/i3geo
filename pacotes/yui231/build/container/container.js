@@ -1707,6 +1707,7 @@ version: 2.3.1
         * @method hide
         */
         hide: function () {
+            if(this.cfg)
             this.cfg.setProperty("visible", false);
         },
         
