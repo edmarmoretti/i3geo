@@ -82,10 +82,14 @@ function listaCanais(retorno)
 function adicionatema(id)
 {
 	aguarde("block")
+	var redesenha = function()
+	{
+		aguarde("none")
+		window.parent.ajaxredesenha("")
+	}
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"adicionaTemaGeoRSS",window.parent.ajaxredesenha);
-	aguarde("none")
+	cp.call(p,"adicionaTemaGeoRSS",redesenha);
 }

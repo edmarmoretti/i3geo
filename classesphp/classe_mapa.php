@@ -1126,12 +1126,19 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			}
 			xbase_close($db);
 			$novoshpf->free();
-			$layer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,"GeoRSS","SIM");
+			if ($tipol == MS_SHP_POINT)
+			{$tipol = MS_LAYER_POINT;}
+			if ($tipol == MS_SHP_POLYGON)
+			{$tipol = MS_LAYER_POLYGON;}
+			if ($tipol == MS_SHP_LINE)
+			{$tipol = MS_LAYER_LINE;}
+			$layer = criaLayer($this->mapa,$tipol,MS_DEFAULT,"GeoRSS","SIM");
 			$layer->set("data",$nomeshp.".shp");
 			$layer->set("name",basename($nomeshp));
 			$layer->setmetadata("DOWNLOAD","sim");
 			$layer->setmetadata("TEMALOCAL","SIM");
-			$layer->set("transparency",50);
+			//$layer->set("transparency",50);
+			$layer->setmetadata("nomeoriginal",basename($nomeshp));
 			return("ok");
 		}
 		return("erro");
@@ -1161,6 +1168,7 @@ $arq - Nome do shape file.
 			$layer->set("name",basename($arq));
 			$layer->setmetadata("DOWNLOAD","nao");
 			$layer->setmetadata("TEMALOCAL","NAO");
+			$layer->setmetadata("nomeoriginal",basename($arq));
 		}
 		return("ok");
 	}
