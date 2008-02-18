@@ -1,7 +1,7 @@
 var indexSectionsWithContent = {
    "General": {
       "Symbols": true,
-      "Numbers": true,
+      "Numbers": false,
       "A": true,
       "B": true,
       "C": true,
@@ -31,7 +31,7 @@ var indexSectionsWithContent = {
       },
    "Variables": {
       "Symbols": false,
-      "Numbers": true,
+      "Numbers": false,
       "A": true,
       "B": false,
       "C": true,
@@ -107,7 +107,7 @@ var indexSectionsWithContent = {
       "M": true,
       "N": false,
       "O": false,
-      "P": false,
+      "P": true,
       "Q": false,
       "R": true,
       "S": false,

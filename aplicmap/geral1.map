@@ -14,20 +14,20 @@ MAP
 
 	#utilize o agg apenas com mapserver 5x
 	#24 bit png (high quality, large file size):
-	OUTPUTFORMAT
- 		NAME 'AGG'
- 		DRIVER AGG/PNG
- 		IMAGEMODE RGB
-	END
+	#OUTPUTFORMAT
+ 	#	NAME 'AGG'
+ 	#	DRIVER AGG/PNG
+ 	#	IMAGEMODE RGB
+	#END
 	#png output, with number of colors reduced with quantization . ( Note: this functionality is not supported with RGBA images, that is outputformats with IMAGEMODE RGBA, or maps with TRANSPARENT ON ) :
-	OUTPUTFORMAT
-		NAME 'AGG_Q'
- 		DRIVER AGG/PNG
- 		IMAGEMODE RGB
- 		FORMATOPTION "QUANTIZE_FORCE=ON"
- 		FORMATOPTION "QUANTIZE_DITHER=OFF"
- 		FORMATOPTION "QUANTIZE_COLORS=256"
-	END
+	#OUTPUTFORMAT
+	#	NAME 'AGG_Q'
+ 	#	DRIVER AGG/PNG
+ 	#	IMAGEMODE RGB
+ 	#	FORMATOPTION "QUANTIZE_FORCE=ON"
+ 	#	FORMATOPTION "QUANTIZE_DITHER=OFF"
+ 	#	FORMATOPTION "QUANTIZE_COLORS=256"
+	#END
 
 	OUTPUTFORMAT
 		NAME png1

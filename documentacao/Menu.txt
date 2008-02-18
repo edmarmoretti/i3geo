@@ -64,7 +64,17 @@ Group: Programas especiais  {
    File: Aplicativo para acesso a web services  (wscliente.htm)
    File: Aplicativo para download de dados  (datadownload.htm)
    File: Aplicativo para geração de links  (geradordelinks.htm)
+
+   Group: Atlas  {
+
+      File: Interface normal de abertura da interface Atlas  (atlas\geral.htm)
+      File: Lista de atlas disponíveis  (atlas\index.htm)
+      File: Redirecionador HTML para o index.htm da interface Atlas  (atlas\index.html)
+      }  # Group: Atlas
+
    File: Gerador automático de web services OGC  (ogc.php)
+   File: Gerador de menu em kml para uso no Google Earth  (kml.php)
+   File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
    File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
    File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
    File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
@@ -82,18 +92,19 @@ Group: Exemplos - diretório exemplos  {
 Group: Interfaces - diretório aplicmap  {
 
    File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
+   File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
+   File: Interface simples 1  (aplicmap\simples1.htm)
+   File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)
-   File: Mínima  (aplicmap\minima.htm)
    File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
-   File: Simples 1  (aplicmap\simples1.htm)
-   File: Simples 2  (aplicmap\simples2.htm)
    }  # Group: Interfaces - diretório aplicmap
 
 Group: Programas frontend - diretório classesjs  {
 
    File: A - Compacta js e css  (classesjs\compactajs.php)
    File: Administração de mapfiles  (classesjs\i3geoadmin.js)
+   File: Atlas  (classesjs\atlas.js)
    File: Carrega os scripts do i3geo.  (classesjs\i3geo.js)
    File: Cliente de web service  (classesjs\wscliente.js)
    File: DataDownLoad  (classesjs\datadownload.js)
@@ -128,12 +139,14 @@ Group: Programas frontend - diretório classesjs  {
 Group: Programas backend - diretório classesphp  {
 
    File: A - Carrega as variáveis passadas como POST ou GET  (classesphp\pega_variaveis.php)
-   File: A - Controle das requisições em Ajax  (classesphp\mapa_controle.php)
+   File: A - Controle das requisições em Ajax feitas pela interface Atlas do i3geo  (classesphp\atlas_controle.php)
+   File: A - Controle das requisições em Ajax feitas pelas interfaces normais do i3geo  (classesphp\mapa_controle.php)
    File: A - Extensões PHP  (classesphp\carrega_ext.php)
    File: A - Funções compartilhadas  (classesphp\funcoes_gerais.php)
    File: A - Inicializa o mapa  (classesphp\mapa_inicia.php)
    File: Administração  (classesphp\admin.php)
    File: Análise  (classesphp\classe_analise.php)
+   File: Atlas  (classesphp\classe_atlas.php)
    File: Atributos  (classesphp\classe_atributos.php)
    File: Classes e estilos  (classesphp\classe_alteraclasse.php)
    File: Degradê  (classesphp\class.palette.php)
