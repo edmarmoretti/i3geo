@@ -2961,7 +2961,6 @@ function calcposf()
 			imagemxi = imagemxi + dc.offsetLeft;
 			imagemyi = imagemyi + dc.offsetTop;
 		}
-
 		if ($i("img"))
 		{
 			$left("corpoMapa",imagemxi);
@@ -2994,17 +2993,22 @@ Move o ícone que segue o mouse quando da movimentação sobre o mapa
 */
 function movecursor()
 {
-	var obje = $i("obj").style;
-	if ($i("img"))
-	{
-		eval ("obje." + g_tipotop + "= objposicaocursor.telay + 5 + g_postpx");
-		eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 5 + g_postpx");
-	}
+	if ($i("openlayers"))
+	{$i("obj").style.display = "none";}
 	else
 	{
-		eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
-		eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
-	}	
+		var obje = $i("obj").style;
+		if ($i("img"))
+		{
+			eval ("obje." + g_tipotop + "= objposicaocursor.telay + 5 + g_postpx");
+			eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 5 + g_postpx");
+		}
+		else
+		{
+			eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
+			eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+		}
+	}
 	if($i("box1"))
 	{
 		var bx = $i("box1");

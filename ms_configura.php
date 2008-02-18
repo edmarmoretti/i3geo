@@ -49,7 +49,7 @@ $mensagemInicia = "I3Geo versão 3.9";
 	
 	Nome que será utilizado em alguns cabçalhos e títulos de páginas
 */
-$tituloInstituicao = "MMA - Minist&eacute;rio do Meio Ambiente";
+$tituloInstituicao = "MMA - Ministerio do Meio Ambiente";
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*

@@ -1137,6 +1137,17 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			$layer->set("name",basename($nomeshp));
 			$layer->setmetadata("DOWNLOAD","sim");
 			$layer->setmetadata("TEMALOCAL","SIM");
+			if($tipol == MS_LAYER_POLYGON)
+			{
+				$classe = $layer->getclass(0);
+				$estilo = $classe->getstyle(0);
+				$estilo->set("symbolname","p4");
+				$estilo->set("size",5);		
+				$cor = $estilo->color;
+				$cor->setrgb(255,0,0);
+				$coro = $estilo->outlinecolor;
+				$coro->setrgb(255,0,0);				
+			}
 			//$layer->set("transparency",50);
 			$layer->setmetadata("nomeoriginal",basename($nomeshp));
 			return("ok");

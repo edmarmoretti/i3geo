@@ -1,42 +1,80 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<title>MMA - Mapa interativo</title>
+<title>i3Geo - Mapa interativo</title>
 
 <!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
 arquivos não compactados, bastando substituir por i3geonaocompacto -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 
-<!-- formatação alternativa das janelas internas, para usar é só descomentar
-<link rel="stylesheet" type="text/css" href="../css/panel-aqua.css" />
+<!--
+<style>
+#box1
+{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid green;}
+</style>
 -->
 
 </head>
-<body id=i3geo onmouseover="javascript:this.onmousemove=processevent1">
+<body id=i3geo  >
 <center>
 <table id='mst' style=display:none width=100% cellspacing='0'>
-<tr><td colspan=3 class=verdeescuro >&nbsp;</td></tr>
-<td title="libera guias" class=tdclara id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
+<!-- Inclui a barra superior. Se vc não quiser o menu, é só comentar -->
+<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<tr>
+<td>
+</td>
+<td style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+</td>
+</tr>
+<tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
-  <table width=100% cellspacing=0 cellpadding=0 >
-   <tr><td style="border-bottom:1px solid rgb(230,230,230)">
-    <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
-   </td></tr>
-  </table>
-  <!--<div id=listaPropriedades ></div>-->
-  <div id='guia1obj' ><div id=listaPropriedades ></div><div id=listaTemas ></div></div>
+  <!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico
+  <div id=buscaRapida ></div>
+  -->
+  <div id='guia1obj' ><div style='left:5px;top:10px;' id=buscaRapida ></div><div id=listaTemas style='top:15px;'></div></div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
- <td class=verdeclaro style="vertical-align:top;border-width:0px;">
-  <table width="100%" style="vertical-align:top;">
-   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs -->
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px -->
    <tr><td  class=verdeclaro id=contemImg >
-    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg')"></div>
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
   </table>
+  
  </td>
  </tr>
+<!-- Mostra as coordenadas conforme o mouse é movimentado
+  <div class=pcenter10 id='longlat'>Longitude e latitude</div>
+-->  
+<!-- Escala gráfica. Pode ser excluída. 
+  <div id="escalaGrafica" style="text-align:left"></div>
+-->
+<!--- vc pode optar por colocar mensagens de ajuda em algum lugar 
+<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
+-->
+<tr>
+ <td class=tdbranca >
+ 	<div id=visual ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
+ </td>
+ <td class=tdbranca >
+  <table width=100% ><tr>
+  <td class=tdbranca ><div id=lugarquadros ></div></td>
+  <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
+  <td class=tdbranca ><div id=escala ></div></td>
+  <!-- A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
+  que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
+  SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações -->
+  <td class=tdbranca ><div id=ondeestou ></div></td>
+  </tr></table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 </table>
 <a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
@@ -46,37 +84,386 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
    <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
    <table title="info" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../imagens/branco.gif" id='identifica'/></td></tr></table>
    <table title="geral" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="geral" alt="" src="../imagens/branco.gif" ID='zoomtot'/></td></tr></table> 
+   <table title="extensao" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img  title="extensao" alt="" src="../imagens/branco.gif" id="exten"/></td></tr></table>
+   <table title="mede" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="mede" alt="" src="../imagens/branco.gif" id='mede'/></td></tr></table> 
+   <table title="area" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="area" alt="" src="../imagens/branco.gif" id='area'/></td></tr></table>   
    <table title="imprimir" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="imprimir" alt="" src="../imagens/branco.gif" id='imprimir'/></td></tr></table>   
-   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'></td></tr></table>
 </div>
 <!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*
-Title: Mínima
+Title: Interface normal
 
-Abre o i3geo com funcionalidades mínimas.
+Abre o i3geo com todas as suas funcionalidades.
 
-File: i3geo/aplicmap/minima.htm
+File: i3geo/aplicmap/geral.htm
 
 Exemplo:
 
-http://<host>/i3geo/ms_criamapa.php?interface=minima.htm
+http://<host>/i3geo/ms_criamapa.php
 
 */
+/*
+	Variable: g_locaplic
+	
+	Indica a localização correta do i3geo.
+	
+	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+*/
 g_locaplic = "http://"+window.location.host+"/i3geo";
+/*
+	Variable: g_localimg
+	
+	Indica a localização correta das imagens.
+	
+	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
+*/
 g_localimg = "http://"+window.location.host+"/i3geo/imagens";
-g_barraFerramentas1 = "sim"
+/*
+	Variable: g_funcaoTip
+	
+	Função ajax que será executada para mostrar informações do tipo TIP.
+	
+	A função é executada pelo CPAINT e avaliada com "eval".
+
+	Default:
+	
+	g_funcaoTip = "verificaTipDefault()";
+*/
+
+/*
+	Variable: g_tempotip (opcional)
+	
+	Tempo utilizado para verificar se o mouse está parado.
+	
+	Se o mouse estiver parado, a função de mostrar tip é ativada.
+	
+	Default:
+	
+	g_tempotip = 1000;
+*/
+
+/*
+	Variable: g_tipotip
+	
+	Define como o tip será mostrado.
+	
+	Pode ser definida como "simples" ou "completo"
+	
+	Default:
+	
+	g_tipotip = "completo";
+*/
+
+/*
+	Variable: g_tipoimagem
+	
+	Indica o tipo de filtro de imagem que está ativo. O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+	
+	Default:
+	
+	g_tipoimagem = "nenhum";
+*/
+
+/*
+	Variable: destacaTamanho
+	
+	Valor em pixel do retângulo de destaque de temas.
+	
+	Default:
+	
+	destacaTamanho = 75;
+*/
+
+/*
+	Variable: g_entorno
+	
+	Indica se o preenchimento do entorno do mapa está ou não ativo.
+	
+	Utilizado para criar o efeito de auto-preenchimento do mapa quando é executada a função pan.
+	
+	É alterada em uma opção específica no menu suspenso.
+	
+	Default:
+	
+	g_entorno = "nao";
+*/
+
+/*
+	Variable: g_guiaativa
+	
+	Indica qual guia do mapa iniciará ativa.
+	
+	Default:
+	
+	g_guiaativa = "guia1";
+*/
+
+/*
+	Variable: g_diminuixM
+	
+	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
+	
+	Default:
+	
+	g_diminuixM = 20;
+*/
+
+/*
+	Variable: g_diminuixN
+	
+	Diminui a largura do mapa em pixels no caso do navegador ser o FF.
+	
+	Default:
+	
+	g_diminuixN = 20;
+*/
+/*
+	Variable: g_diminuiyM
+	
+	Diminui a altura do mapa em pixels no caso do navegador ser o IE.
+	
+	Default:
+	
+	g_diminuiyM = 150;
+*/
+
+/*
+	Variable: g_diminuiyN
+	
+	Diminui a altura do mapa em pixels no caso do navegador ser o FF.
+	
+	Default:
+	
+	g_diminuiyN = 120;
+*/
+
+/*
+	Variable: g_janelazoom
+	
+	Define se a barra de zoom será aberta no mapa.
+	
+	Default:
+	
+	g_janelazoom = "sim"
+*/
+
+/*
+	Variable: g_barraFerramentas1
+	
+	Define se a barra de ferramentas 1 será mostrada
+	
+	Defaul:
+	
+	g_barraFerramentas1 = "sim"
+*/
+
+/*
+	Variable: g_barraFerramentas2
+	
+	Define se a barra de ferramentas 2 será mostrada
+	
+	Defaul:
+*/	
 g_barraFerramentas2 = "nao"
+
+/*
+	Variable: g_mapaRefDisplay
+	
+	Indica a visibilidade do mapa de referência na inicialização
+	
+	Pode ser "block" ou "none".
+*/
 g_mapaRefDisplay = "none"
-g_janelaMen = "nao";
-g_mostraRosa = "nao"
-g_opcoesTemas = "nao";
+
+/*
+	Variable: g_docaguias
+	
+	Variável que define se o mapa deve iniciar com as guias em janela ou não.
+	
+	Default:
+	
+	g_docaguias = "nao";
+*/
+
+/*
+	Variable: g_downloadbase
+	
+	Variável que define se na guia 2 será mostrada a opção de download.
+	
+	Default:
+	
+	g_downloadbase = "sim";
+*/
+
+/*
+	Variable: g_conectargeorss
+	
+	Variável que define se na guia 2 será mostrada a opção de conexão com GeoRSS.
+	
+	Default:
+	
+	g_conectargeorss = "sim";
+*/
+
+/*
+	Variable: g_uploadlocal
+	
+	Variável que define se na guia 2 será mostrada a opção de upload.
+	
+	Default:
+	
+	g_uploadlocal = "sim";
+*/
+
+/*
+	Variable: g_conectarwms
+	
+	Variável que define se na guia 2 será mostrada a opção de conexão com WMS.
+	
+	Default:
+	
+	g_conectarwms = "sim";
+*/
+
+/*
+	Variable: g_janelaMen
+	
+	Variável que define se a janela de mensagens começará aberta.
+	
+	Default:
+	
+	g_janelaMen = "sim";
+*/
+
+/*
+	Variable: g_mostraRosa
+	
+	Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse
+	
+	Default:
+	
+	g_mostraRosa = "sim"
+*/
+
+/*
+	Variable: g_opcoesTemas
+	
+	Variável que define se as opcoes adicionais de cada tema serao mostradas.
+	
+	Default:
+	
+	g_opcoesTemas = "sim";
+*/
+
+/*
+	Variable: g_3dmap
+	
+	Variável que define o nome do map_file que possuí o layer para uso na função 3d.
+	
+	Pode ser caminho completo. Se não, busca no aplicmap.
+*/
 g_3dmap = "3dmap.map";
-g_embedLegenda = "sim";
+
+/*
+	Variable: g_embedLegenda
+	
+	Indica se a legenda deve ser incluida no corpo do mapa.
+	
+	Default:
+	
+	g_embedLegenda = "nao";
+*/
+
+/*
+Variable: g_mashuppar
+
+Parâmetros de inicialização que podem ser utilizados na interface mashup.
+
+Os parâmetros são os mesmos que podem ser utilizados quando o i3geo é inicializado pelo ms_criamapa.php.
+
+Exemplo: g_mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+
+g_mashuppar = "&mapext=-53 -26 -42 -18";
+*/
+
+/*
+	Variable: g_mensagempadrao
+
+	Mensagem padrão que será mostrada na janela de mensagens.
+
+	g_mensagempadrao = "O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
+*/
+
 objmapa = new Mapa();
+
+/*
+Variable: g_visual
+
+Indica qual o tipo de visual para abertura do mapa.
+
+Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
+*/
+g_visual = "default";
+
+/*
+Variable: g_autoRedesenho
+
+Ativa o auto redesenho após um determinado tempo (milisegundos).
+
+Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
+*/
+g_autoRedesenho = 0;
+
+/*
+	Variable: objmapa.guiaTemas
+	
+	Define qual div corresponde ao local de listagem das camadas disponíveis no mapa
+*/
 objmapa.guiaTemas = "guia1"
+
+/*
+	Variable: objmapa.guiaMenu
+	
+	Define qual div corresponde ao local de inclusão do menu de temas
+*/
+objmapa.guiaMenu = "guia2";
+
+/*
+	Variable: objmapa.guiaLegenda
+	
+	Define qual div corresponde ao local onde será incluida a legenda em HTML
+*/
+objmapa.guiaLegenda = "guia4";
+
+/*
+	Variable: objmapa.guiaListaMapas
+	
+	Define qual div corresponde ao local onde será colocada a lista de links para outros mapas
+*/
+objmapa.guiaListaMapas = "guia5";
+
+/*
+	Este é um exemplo de como incluir opções que são executadas
+	quando o usuário clica no mapa.
+	Vc pode criar um botao novo, e quando ele for clicado,
+	definir a variavel 'clicouBotaoTeste'.
+	O objeto 'funcoesClickMapa' é um array que pode armazenar strigs.
+	
+	function teste()
+	{	
+		g_tipoacao = "";
+		clicouBotaoTeste = "sim";
+		if (clicouBotaoTeste == "sim")
+		{wdocaf("300px","280px",g_locaplic+'/ferramentas/exemplo/index.htm?x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy,"","","");}
+	}
+	objmapa.funcoesClickMapa.push("teste()")
+*/
+
+/*
+	Inicializa o mapa
+*/
 objmapa.inicializa();
 </script>
-
 </body>
 </html>
