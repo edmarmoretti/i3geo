@@ -2621,9 +2621,9 @@ function processaTemas(retorno)
 				
 				if (g_qrcode == "nao"){qrcode = "";}
 				if(navm)
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+lk+qrcode+kml+mini+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
 				else
-				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+qrcode+kml+mini+"</span>";
+				nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
 				mytreeview2.createItem("tema"+sg+""+st, nomeTema, imgBranco, false, true, true, g_arvoreClick);
 				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
 				else
