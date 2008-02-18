@@ -296,13 +296,18 @@ function Mapa(e,m)
 		{
 			novoh = 700;
 		}
-		if (document.body.style.width < 400)
+		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
+		try
 		{
-			var novow = screen.availWidth - diminuix;
-			var novoh = screen.availHeight - diminuiy;
-			window.resizeTo(screen.availWidth,screen.availHeight);
-			window.moveTo(0,0);
+			if (document.body.style.width < 400)
+			{
+				var novow = screen.availWidth - diminuix;
+				var novoh = screen.availHeight - diminuiy;
+				window.resizeTo(screen.availWidth,screen.availHeight);
+				window.moveTo(0,0);
+			}
 		}
+		catch(e){var e = "";}
 		document.body.style.width = novow;
 		document.body.style.height = novoh;
 		this.w = novow - menos - diminuix;
@@ -580,8 +585,12 @@ function Mapa(e,m)
 				var tempo = "";
 				var titulo = "";
 				eval(retorno.data);
-				if (titulo != "")
-				{top.document.title = titulo;}
+				try
+				{
+					if (titulo != "")
+					{top.document.title = titulo;}
+				}
+				catch(e){var e = "";}
 				mostradicasf("","Tempo de desenho em segundos: "+tempo,"");
 				//
 				//insere botao dinamico de aplicar

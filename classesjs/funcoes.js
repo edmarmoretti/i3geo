@@ -1030,6 +1030,10 @@ function aguarde()
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
 		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+imagemxi+','+imagemyi+')');
 		eval ('YAHOO.aguarde.'+aguardeId+'.show()');
+		if($i("wait_mask"))
+		{$i("wait_mask").style.zIndex=5000;}
+		if($i("wait_c"))
+		{$i("wait_c").style.zIndex=6000;}
 	};
 	this.fecha = function(aguardeId)
 	{
@@ -1853,6 +1857,7 @@ function verificaTip()
 		var novoel = document.createElement("div");
 		novoel.id = "tip";
 		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
 		if (navm)
 		{novoel.style.filter = "alpha(opacity=90)";}
 		document.body.appendChild(novoel);
@@ -1876,7 +1881,7 @@ function verificaTip()
 			if(g_mostraRosa == "sim")
 			{
 				if (navm)
-				{$i("tip").style.filter = "alpha(opacity=0)";}
+				{$i("tip").style.filter = "alpha(opacity=70)";}
 				else
 				{$i("tip").style.opacity="5";}
 				var setas = "<table id='rosaV' ><tr>";
