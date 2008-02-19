@@ -3,12 +3,20 @@
 <head>
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <style type="text/css">
+        .olControlEditingToolbar  {
+            float:left;
+            right: 0px;
+            height:30px; 
+            width: 150px;
+        }
+</style>
 <title>MMA - Mapa interativo</title>
 <!-- Leitura dos programas javaScript e estilos. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js"></script>
-<!---
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAKguAlmd-hSDulF2T_tfWMxTrXJzf4cKu_IakhcfRAvg-azCV5RSQYDsrDc6OHQsGVC3r2w_iKOWmoQ" type="text/javascript"></script>
+<!--
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA" type="text/javascript"></script>
 -->
 <!--
     chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
@@ -22,16 +30,13 @@
 <body id=i3geo onmouseover="javascript:this.onmousemove=processevent1" >
 <center>
 <table id='mst' width=100% cellspacing='0'>
-
 <tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
 <tr>
-
-<tr>
- <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+ <td class=tdbranca id=contemFerramentas style="border:0px;vertical-align:top;width:268px;text-align:left;">
   <table width=100% cellspacing=0 cellpadding=0 >
-   <tr><td style="border-bottom:1px solid rgb(230,230,230)">
+   <tr><td style="border-bottom:0px solid rgb(230,230,230);height:45px">
     <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
-    <div class=verdeescuro style="top:0px;cursor:pointer">
+    <div style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
 	 <div id=guia2 class=guia value="Mostra a lista de temas disponíveis no servidor de dados, possibilitando que novos temas sejam adicionados ao mapa.">&nbsp;Adiciona&nbsp;</div>
 	 <div id=guia4 class=guia value="Mostra a legnda do mapa atual." >&nbsp;Legenda&nbsp;</div>
@@ -47,26 +52,16 @@
  <td class=verdeclaro style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;">
    <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs -->
-   <tr><td><div id=localizarxy style=height:25px;  >Aguarde...</div></td></tr>
+   <tr><td><div id="panel" class="olControlEditingToolbar"></div></td></tr>
    <tr><td  class=verdeclaro id=contemImg >
     <div id=openlayers style="text-align:left;background-image:url('../imagens/i3geo1bw.jpg')"></div>
    </td></tr>
   </table>
  </td>
  </tr>
-<tr>
- <td class=tdbranca >
- </td>
- <td class=tdbranca >
-  <table width=100% ><tr>
-  <td class=tdbranca ></td>
-  </tr></table>
- </td>
-</tr>
-<tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 </table>
 <a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
-
 </center>
 <div id=barraDeBotoes1 style='display:none'> 
    <table title="info" style="width:100%;border-bottom:3px solid rgb(255,255,255);"><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../imagens/branco.gif" id='identifica'/></td></tr></table>
@@ -123,30 +118,42 @@ function criaOL(posfixo)
 {
 	var url = window.location.protocol+"//"+window.location.host+objmapa.locmapserv+"?"
 	url += "map="+objmapa.mapfile+"&mode=map&rand="+posfixo
+
+	//var url1 = window.location.protocol+"//"+window.location.host+"/i3geo/ogc.php?tema=openlayers?"
+	//url1 += "&rand="+posfixo
+
 	
 	objmapa.OL = new OpenLayers.Map('openlayers', { controls: [] });
 
 	//
 	//layers
 	//
-	objmapa.OLI3Geo = new OpenLayers.Layer.WMS( "I3Geo", url,{layers:'estadosl'},{isBaseLayer:true});
-	objmapa.OL.addLayer(objmapa.OLI3Geo);
+	//var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://wms.jpl.nasa.gov/wms.cgi", {layers: "modis,global_mosaic"},{isBaseLayer: false, opacity: 0.6});
+	//jpl_wms.setVisibility(false);
+	//objmapa.OL.addLayer(jpl_wms);
 	
-	var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://wms.jpl.nasa.gov/wms.cgi", {layers: "modis,global_mosaic"},{isBaseLayer: false, opacity: 0.6});
-	jpl_wms.setVisibility(false);
-	objmapa.OL.addLayer(jpl_wms);
+	var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'},{'buffer':0},{isBaseLayer: false, opacity: 0.6} );
+	//ol_wms.setVisibility(false);
+	//objmapa.OL.addLayer(ol_wms);
 	
-	var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'},{isBaseLayer: false, opacity: 0.6} );
-	ol_wms.setVisibility(false);
-	objmapa.OL.addLayer(ol_wms);
+	objmapa.OLI3Geoc = new OpenLayers.Layer.WMS( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':0},{isBaseLayer:true, opacity: 1});
+	objmapa.OLI3Geoc.setVisibility(true);
+	objmapa.OL.addLayer(objmapa.OLI3Geoc);	
+
 	/*
-	var ol_sat = new OpenLayers.Layer.Google( "Google" , {type: G_HYBRID_MAP, 'maxZoomLevel':36},{isBaseLayer: false, opacity: 0.6} );
-	ol_wms.setVisibility(false);
+	objmapa.OLI3Geo = new OpenLayers.Layer.WMS( "I3Geo", url1,{layers:'openlayers'},{isBaseLayer:true, opacity: 0});
+	objmapa.OLI3Geo.setVisibility(true);
+	objmapa.OL.addLayer(objmapa.OLI3Geo);
+	*/
+	/*
+	var ol_sat = new OpenLayers.Layer.Google( "Google" , {type: 'G_HYBRID_MAP', 'maxZoomLevel':36},{isBaseLayer: false, opacity: .5} );
+	ol_sat.setVisibility(false);
 	objmapa.OL.addLayer(ol_sat);
 	ol_sat.div.style.left="0px"
 	*/
     vlayer = new OpenLayers.Layer.Vector( "Editável" );
     objmapa.OL.addLayer(vlayer);
+    
     //
     //registra os eventos de captura das coordenadas no mapa
     //
@@ -179,7 +186,7 @@ function criaOL(posfixo)
 	//
 	//ativa as operações de click no mapa do I3Geo
 	//
-	ativaClicks($i("openlayers_OpenLayers_Container"))
+	//ativaClicks($i("openlayers_OpenLayers_ViewPort")); //_OpenLayers_Container"))
 	//objmapa.OL.events.register("click", objmapa.OL, "");
 	//
 	//ferramentas
@@ -187,10 +194,10 @@ function criaOL(posfixo)
 	var pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 	objmapa.OL.addControl(pz);
 	pz.div.style.zIndex = 5000;
-	$i("OpenLayers_Control_PanZoom_pandown").style.top=parseInt($i("OpenLayers_Control_PanZoom_pandown").style.top)+10
-	$i("OpenLayers_Control_PanZoom_panup").style.top=parseInt($i("OpenLayers_Control_PanZoom_panup").style.top)+10
-	$i("OpenLayers_Control_PanZoom_panleft").style.top=parseInt($i("OpenLayers_Control_PanZoom_panleft").style.top)+10
-	$i("OpenLayers_Control_PanZoom_panright").style.top=parseInt($i("OpenLayers_Control_PanZoom_panright").style.top)+10
+	$i("OpenLayers_Control_PanZoom_pandown").style.top=parseInt($i("OpenLayers_Control_PanZoom_pandown").style.top)+5
+	$i("OpenLayers_Control_PanZoom_panup").style.top=parseInt($i("OpenLayers_Control_PanZoom_panup").style.top)+5
+	$i("OpenLayers_Control_PanZoom_panleft").style.top=parseInt($i("OpenLayers_Control_PanZoom_panleft").style.top)+5
+	$i("OpenLayers_Control_PanZoom_panright").style.top=parseInt($i("OpenLayers_Control_PanZoom_panright").style.top)+5
 	var navc = new OpenLayers.Control.NavToolbar();
 	objmapa.OL.addControl(navc);
 	navc.div.style.left="8px";
@@ -214,8 +221,13 @@ function criaOL(posfixo)
 	objmapa.OL.addControl(new OpenLayers.Control.LayerSwitcher());
 	
 	objmapa.OL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
-	
-	objmapa.OL.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
+
+            var container = document.getElementById("panel");
+            var panel = new OpenLayers.Control.EditingToolbar(
+                vlayer, {div: container}
+            );
+            objmapa.OL.addControl(panel);	
+	//objmapa.OL.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
 	
 	objmapa.OL.addControl(new OpenLayers.Control.KeyboardDefaults());	
 
@@ -226,10 +238,29 @@ function criaOL(posfixo)
 	var options = {layers: [ol_overview],minRatio: 8,maxRatio: 128};
 	var overview = new OpenLayers.Control.OverviewMap(options);
 	objmapa.OL.addControl(overview);
-	
 	if (posfixo != "inicia")
 	{
 		atualizaOL()
+	}
+	if($i("layersDiv"))
+	{
+		var linhas = $i("layersDiv").getElementsByTagName("div");
+		var i = 0;
+		do
+		{
+			linhas[i].style.textAlign = "left";
+			var i = i + 1;
+		}
+		while(i < linhas.length)
+	}
+	var i = 0
+	while (i < 10)
+	{
+		if($i("guia"+i+"obj"))
+		{
+			$i("guia"+i+"obj").style.height = parseInt($i("guia"+i+"obj").style.height) - 35
+		}
+		i = i + 1
 	}
 }
 /*

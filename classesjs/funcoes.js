@@ -1394,9 +1394,9 @@ function initJanelaRef()
 	{
 		YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 		YAHOO.janelaRef.xp.panel.destroy();	
-		iCookie("g_mapaRefDisplay","none");	
+		iCookie("g_mapaRefDisplay","none");
 	};
-	//YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+	YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
 	iCookie("g_mapaRefDisplay","block");
 	objmapa.atualizaReferencia();
 }
@@ -2958,8 +2958,8 @@ function calcposf()
 		var dc = $i("i3geo");
 		if ($i("img"))
 		{var dc = $i("contemImg");}
-		if ($i("openlayers_OpenLayers_Container"))
-		{var dc = $i("openlayers_OpenLayers_Container");}
+		if ($i("openlayers"))
+		{var dc = $i("openlayers");}
 		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
 		{
 			dc = dc.offsetParent;

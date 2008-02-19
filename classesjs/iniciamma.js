@@ -744,8 +744,11 @@ function Mapa(e,m)
 			}
 			if (pCookie("g_janelaMen")){g_janelaMen = pCookie("g_janelaMen");}
 			if (g_janelaMen == "sim"){initJanelaMen();}
-			if (pCookie("g_mapaRefDisplay")){g_mapaRefDisplay = pCookie("g_mapaRefDisplay");}
-			if (g_mapaRefDisplay == "block"){initJanelaRef();}
+			if (g_mapaRefDisplay != "none")
+			{
+				if (pCookie("g_mapaRefDisplay")){g_mapaRefDisplay = pCookie("g_mapaRefDisplay");}
+				if (g_mapaRefDisplay == "block"){initJanelaRef();}
+			}
 			if($i("img")){g_quadrooriginal = $i("img").src;}
 			objaguarde.fecha("montaMapa");
 			if (g_docaguias == "sim"){docaguias();}
@@ -1038,9 +1041,9 @@ function Mapa(e,m)
 			document.body.appendChild(novoel);
 		}
 		var docMapa = "";
-		if (document.getElementById("openlayers_OpenLayers_Container"))
+		if (document.getElementById("openlayers"))
 		{
-			var docMapa = $i("openlayers_OpenLayers_Container");
+			var docMapa = $i("openlayers");
 		}
 		if (document.getElementById("img"))
 		{
