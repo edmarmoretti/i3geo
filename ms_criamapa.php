@@ -549,10 +549,14 @@ function incluiTemasIniciais()
 					$layern = $maptemp->getLayer($i);
 					if($layern->type == MS_LAYER_RASTER)
 					{$existeraster = true;}
-					$layern->setmetadata("NOMEORIGINAL",$layern->name);
-					if ($layern->name == "estadosl")
-					{$layern->set("data",$temasaplic."/dados/estados.shp");}
-					ms_newLayerObj(&$mapn, $layern);
+					if((!$existeraster) && ($layern->open() == MS_SUCCESS))
+					{
+						$layern->setmetadata("NOMEORIGINAL",$layern->name);
+						if ($layern->name == "estadosl")
+						{$layern->set("data",$temasaplic."/dados/estados.shp");}
+						ms_newLayerObj(&$mapn, $layern);
+					}
+					$layern->close();
 				}
 			}	
 		}
