@@ -145,6 +145,13 @@ if ($tipo=="localizar")
 	include("localizar.php");
 	exit;
 }
+if ($tipo =="autopan")
+{
+	include("../classesphp/classe_navegacao.php");
+	$m = new Navegacao($tmpfname);
+	$m->pan($x,$y,"","");
+	$m->salva();
+}
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
@@ -163,10 +170,9 @@ $hsrc = imagesy($ims);
 $xdst = abs(($wdst - $wsrc) / 2);
 $ydst = abs(($hdst - $hsrc) / 2);
 $branco = imagecolorresolve($ims,255,255,255);
-//imagecolortransparent($ims,$branco);
-//imageSaveAlpha($ims, true);
 imagecopymerge($img,$ims,0,0,0,0,$wsrc,$hsrc,80);
 ImagePNG($img, $nome);
+if(!isset($maparef)){$maparef = "";}
 ?>
 <div id='botoes' style="position:relative;top:1px;left:1px" >
 	<select id='op' name='op' onchange='op(this.value)'>
@@ -182,6 +188,9 @@ ImagePNG($img, $nome);
 <form id='f' action='mobile.php?' method='get'>
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname;?>' />
 	<input id='tipo' type=hidden name='tipo' value='' />
+	<input id='x' type=hidden name='x' value='' />
+	<input id='y' type=hidden name='y' value='' />
+	<input id='referencia' type=hidden name='maparef' value='<?php echo $maparef;?>' />
 </form>
 <map name="sample">
 <area shape="rect" coords="0,0,40,23" onclick='zoommais()'>
@@ -195,10 +204,28 @@ ImagePNG($img, $nome);
 <area shape="rect" coords="22,91,40,104" onclick='leste()'>
 <area shape="rect" coords="0,106,40,119" onclick='sul()'>
 <area shape="rect" coords="0,91,18,105" onclick='oeste()'>
+<area shape="rect" coords="0,120,40,150" onclick='identifica()'>
 </map>
-<img id='mapa' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
+<img id='mapa' onclick='autopan(event)' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
+<br>
+<a href=# onclick="maparef()">Ativar/desativar mapa de referência</a>
+<?php
+if ((isset($maparef)) && ($maparef == "sim"))
+{
+	//$ref = $mapa->reference;
+	$imgo = $mapa->drawreferencemap();
+	$nome = ($imgo->imagepath).nomeRandomico().".png";
+	$imgo->saveImage($nome);
+	$nomeimagem = ($imgo->imageurl).basename($nome);
+	echo "<br><img style=position:relative;top:1px;left:1px src='".$nomeimagem."' />";
+		
+}
+?>
 </body>
 <script>
+modooperacao = ""
+navn = false
+navm = false
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 pan = ""
@@ -270,6 +297,56 @@ function op(valor)
 	if (valor=="reiniciar")
 	{document.getElementById('f').action = "index.php?"}
 	document.getElementById('f').submit();
+}
+function maparef()
+{
+	var temp = document.getElementById("referencia").value;
+	if (temp == "sim")
+	{document.getElementById("referencia").value = "";}
+	else
+	{document.getElementById("referencia").value = "sim";}
+	document.getElementById('tipo').value = "";
+	document.getElementById('f').submit();
+}
+function autopan(exy)
+{
+	var xy = capturaposicao(exy)
+	if((xy[0] > 40) || (xy[1] > 150) )
+	{
+		document.getElementById('x').value = xy[0]
+		document.getElementById('y').value = xy[1]
+		document.getElementById('tipo').value = "autopan";
+		document.getElementById('f').action = "mobile.php"
+		if (modooperacao == "identifica")
+		{document.getElementById('f').action = "identifica.php?"}
+		document.getElementById('f').submit();
+	}
+}
+function identifica()
+{
+	modooperacao = "identifica"
+	document.getElementById("botoes").innerHTML = "Clique no mapa"
+}
+function capturaposicao(exy)
+{
+	var e = (navn) ? exy : window.event;
+	var xfig = e.clientX;
+	var yfig = e.clientY;
+	var obj = document.getElementById("mapa")
+	var pos = findPos(obj)
+	var xfig = xfig - pos[0]
+	var yfig = yfig - pos[1]
+	return [xfig,yfig]
+}
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+	}
+	return [curleft,curtop];
 }
 </script>
 </html>

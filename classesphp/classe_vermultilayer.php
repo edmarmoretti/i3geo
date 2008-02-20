@@ -88,6 +88,11 @@ class vermultilayer
 		$escala = $map->scale;
 		$todoslayers = $map->getAlllayernames();
 		$multilayer = 0;
+		$temas = array();
+		$layers = array();
+		$nomes = array();
+		$nomesvisiveis = array();
+		$temasvisiveis = array();
 		foreach ($todoslayers as $temai)
 		{
 			$layer = $map->getlayerbyname($temai);

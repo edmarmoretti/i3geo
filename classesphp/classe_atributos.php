@@ -75,6 +75,7 @@ $tema - nome do tema
 	{
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
+  		if($tema != "")
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -587,7 +588,12 @@ $resolucao - Resolucao de busca.
 		if ($opcao == "ligados")
 		{
 			foreach ($listatemas as $tema)
-			{$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);}
+			{
+				$l = $this->mapa->getlayerbyname($tema);
+				if($l->status == MS_DEFAULT)
+				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+			
+			}
 		}
 		//pesquisa apenas os temas com tip
 		if ($opcao == "tip")
@@ -680,7 +686,7 @@ $item - Item único que será identificado.
 
 $tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
 */
-function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
+function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="")
 {
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getLayerByName($tema);
@@ -768,7 +774,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item,$tiporetorno="")
 	}
 	if ($layer->type == MS_LAYER_POLYGON)
 	{
-		$layer->set("toleranceunits",MS_PIXEL);
+		$layer->set("toleranceunits",'MS_PIXEL');
 		$layer->set("tolerance",1);
 		$ident = @$layer->queryByPoint($pt, 1, 0);
 	}

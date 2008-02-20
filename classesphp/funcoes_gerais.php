@@ -900,10 +900,10 @@ Objeto map alterado.
 */
 function desligaTemas($objMapa)
 {
-	$numlayers = $objMap->numlayers;
+	$numlayers = $objMapa->numlayers;
 	for ($i=0;$i < $numlayers;$i++)
 	{
-		$layer = $objMap->getlayer($i);
+		$layer = $objMapa->getlayer($i);
 		$layer->set("status",MS_OFF);
 	}
 	return $objMapa;
@@ -1230,6 +1230,32 @@ function xy2imagem($map_file,$xy)
 	$pt->setXY($x , $y);
 	return $pt;
 }
+/*
+function: imagem2xy
+
+Converte coordenadas de imagem em coordenadas geográficas.
+
+parameters:
+
+$map_file - Arquivo map file.
+
+$xy - XY com as coordenadas (separado por espaço no caso de string)
+*/
+function imagem2xy($map_file,$xy)
+{
+	if (!is_array($xy))
+	{$xy = explode(" ",$xy);}
+	$map = ms_newMapObj($map_file);
+	$map = desligatemas($map);
+	$map = desligamargem($map);
+	$imgo = $map->draw();
+	$e = $map->extent;
+	$c = $map->cellsize;
+	$x = ($e->minx) + $xy[0] * $c;
+	$y = ($e->maxy) + $xy[1] * $c;
+	return array($x,$y);
+}
+
 /*
 function: xy2wkt
 
