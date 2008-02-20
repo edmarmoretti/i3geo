@@ -487,23 +487,23 @@ function ligaTemas()
 		$lista = explode(" ", $layers);
 		foreach ($lista as $l)
 		{
-			$arqt = trim($l);
 			if ($l == "")
 			{continue;}
 			if(@$mapn->getLayerByName($l))
 			{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_DEFAULT);}
 			$grupos = $mapn->getLayersIndexByGroup($l);
-			if(count($grupos > 0))
+			if(count($grupos) > 0)
 			{
 				for ($i = 0;$i < count($grupos);$i++)
 				{
-					$layern = $mapn->getLayer($i);
-					if($layern->group == $l)
-					{$layern->set("status",MS_DEFAULT);}
+					$layern = $mapn->getLayer($grupos[$i]);
+					if(strtolower($layern->group) == strtolower($l))
+					{
+						$layern->set("status",MS_DEFAULT);
+					}
 				}
 			}
 		}
-		
 	}
 }
 /*
@@ -549,14 +549,10 @@ function incluiTemasIniciais()
 					$layern = $maptemp->getLayer($i);
 					if($layern->type == MS_LAYER_RASTER)
 					{$existeraster = true;}
-					if((!$existeraster) && ($layern->open() == MS_SUCCESS))
-					{
-						$layern->setmetadata("NOMEORIGINAL",$layern->name);
-						if ($layern->name == "estadosl")
-						{$layern->set("data",$temasaplic."/dados/estados.shp");}
-						ms_newLayerObj(&$mapn, $layern);
-					}
-					$layern->close();
+					if ($layern->name == "estadosl")
+					{$layern->set("data",$temasaplic."/dados/estados.shp");}
+					$layern->setmetadata("NOMEORIGINAL",$layern->name);
+					ms_newLayerObj(&$mapn, $layern);
 				}
 			}	
 		}
