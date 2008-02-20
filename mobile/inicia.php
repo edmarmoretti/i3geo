@@ -54,6 +54,11 @@ function iniciamobile()
 	substituiCon($tmpfname,$postgis_mapa);
 	$mapa = ms_newMapObj($tmpfname);
 	$mapa->setsize($wmobile,$hmobile);
+	$eb = $mapa->scalebar;
+	$eb->set("style",0);
+		$cornb = $eb->backgroundcolor;
+		$n = explode(",",$bcor);
+		$cornb->setrgb(255,0,0);
 	$mapa->save($tmpfname);
 	//$tipo = "inicia";
 	include("mobile.php");

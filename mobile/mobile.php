@@ -64,14 +64,42 @@ if ($tipo=="zoommais")
 {
 	include("../classesphp/classe_navegacao.php");
 	$m = new Navegacao($tmpfname);
+	$m->aproxima(5);
+	$m->salva();		
+}
+if ($tipo=="zoommais1")
+{
+	include("../classesphp/classe_navegacao.php");
+	$m = new Navegacao($tmpfname);
 	$m->aproxima(3);
+	$m->salva();		
+}
+if ($tipo=="zoommais2")
+{
+	include("../classesphp/classe_navegacao.php");
+	$m = new Navegacao($tmpfname);
+	$m->aproxima(2);
 	$m->salva();		
 }
 if ($tipo=="zoommenos")
 {
 	include("../classesphp/classe_navegacao.php");
 	$m = new Navegacao($tmpfname);
+	$m->afasta(5);
+	$m->salva();		
+}
+if ($tipo=="zoommenos1")
+{
+	include("../classesphp/classe_navegacao.php");
+	$m = new Navegacao($tmpfname);
 	$m->afasta(3);
+	$m->salva();		
+}
+if ($tipo=="zoommenos2")
+{
+	include("../classesphp/classe_navegacao.php");
+	$m = new Navegacao($tmpfname);
+	$m->afasta(2);
 	$m->salva();		
 }
 if ($tipo=="norte")
@@ -120,17 +148,6 @@ if ($tipo=="localizar")
 $mapa = ms_newMapObj($tmpfname);
 $w = $mapa->width;
 $h = $mapa->height;
-/*
-if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
-{$nomeimagem = $locmapserv."?map=".$tmpfname."&mode=map";}
-else
-{
-	$imgo = $mapa->draw();
-	$nome = ($imgo->imagepath).nomeRandomico().".png";
-	$imgo->saveImage($nome);
-	$nomeimagem = ($imgo->imageurl).basename($nome);
-}
-*/
 error_reporting(E_ALL);
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath).nomeRandomico().".png";
@@ -152,23 +169,14 @@ imagecopymerge($img,$ims,0,0,0,0,$wsrc,$hsrc,80);
 ImagePNG($img, $nome);
 ?>
 <div id='botoes' style="position:relative;top:1px;left:1px" >
-	<!--
-	<input type='button' value='+' onclick='zoommais()' />
-	<input type='button' value='-' onclick='zoommenos()' />
-	<input type='button' value='O' onclick='oeste()' />	
-	<input type='button' value='N' onclick='norte()' />
-	<input type='button' value='S' onclick='sul()' />
-	<input type='button' value='L' onclick='leste()' />
-	-->
 	<select id='op' name='op' onchange='op(this.value)'>
 		<option value=''>Op&ccedil;&otilde;es</option>
 		<option value='reiniciar'>reiniciar</option>
-		<option value='ligar'>ligar</option>
-		<option value='desligar'>desligar</option>
-		<option value='legenda'>legenda</option>
-		<option value='escala'>escala</option>
-		<option value='localizar'>localizar</option>
-		<option value='adicionar'>adicionar</option>
+		<option value='ligar'>ligar camadas</option>
+		<option value='desligar'>desligar camadas</option>
+		<option value='adicionar'>adicionar camadas</option>
+		<option value='legenda'>ver a legenda</option>
+		<option value='localizar lugares'>localizar</option>
 	</select>
 </div>
 <form id='f' action='mobile.php?' method='get'>
@@ -176,12 +184,17 @@ ImagePNG($img, $nome);
 	<input id='tipo' type=hidden name='tipo' value='' />
 </form>
 <map name="sample">
-<area shape="rect" coords="0,0,44,23" onclick='zoommais()'>
-<area shape="rect" coords="0,26,44,42" onclick='zoommenos()'>
-<area shape="rect" coords="14,46,28,58" onclick='norte()'>
-<area shape="rect" coords="28,58,40,73" onclick='leste()'>
-<area shape="rect" coords="16,74,30,86" onclick='sul()'>
-<area shape="rect" coords="3,58,17,71" onclick='oeste()'>
+<area shape="rect" coords="0,0,40,23" onclick='zoommais()'>
+<area shape="rect" coords="0,24,40,31" onclick='zoommais1()'>
+<area shape="rect" coords="0,32,40,38" onclick='zoommais2()'>
+<area shape="rect" coords="0,57,40,77" onclick='zoommenos()'>
+<area shape="rect" coords="0,43,40,49" onclick='zoommenos2()'>
+<area shape="rect" coords="0,50,40,56" onclick='zoommenos1()'>
+
+<area shape="rect" coords="0,78,40,90" onclick='norte()'>
+<area shape="rect" coords="22,91,40,104" onclick='leste()'>
+<area shape="rect" coords="0,106,40,119" onclick='sul()'>
+<area shape="rect" coords="0,91,18,105" onclick='oeste()'>
 </map>
 <img id='mapa' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
 </body>
@@ -194,9 +207,29 @@ function zoommais()
 	document.getElementById('tipo').value = 'zoommais';
 	document.getElementById('f').submit();
 }
+function zoommais1()
+{
+	document.getElementById('tipo').value = 'zoommais1';
+	document.getElementById('f').submit();
+}
+function zoommais2()
+{
+	document.getElementById('tipo').value = 'zoommais2';
+	document.getElementById('f').submit();
+}
 function zoommenos()
 {
 	document.getElementById('tipo').value = 'zoommenos';
+	document.getElementById('f').submit();
+}
+function zoommenos1()
+{
+	document.getElementById('tipo').value = 'zoommenos1';
+	document.getElementById('f').submit();
+}
+function zoommenos2()
+{
+	document.getElementById('tipo').value = 'zoommenos2';
 	document.getElementById('f').submit();
 }
 function norte()

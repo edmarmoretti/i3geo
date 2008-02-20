@@ -462,29 +462,38 @@ function docaguias()
 			}
 		}
 		calcposf();
+		
+		var temp = function()
+		{
+			//carrega janela
+			var novoel = document.createElement("div");
+			novoel.id = "janelaguias";
+			novoel.style.display="block";
+			var temp = '<div class="hd">Guias</div>';
+			temp += '<div class="bd" id="conteudojanelaguias"></div>';
+			novoel.innerHTML = temp;
+			document.body.appendChild(novoel);
+			$i("conteudojanelaguias").innerHTML = novono;
+			YAHOO.namespace("janelaguias.xp");
+			YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"268px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaguias.xp.panel.render();
+			if($i(objmapa.guiaMenu+"obj"))
+			{
+				$i(objmapa.guiaMenu+"obj").innerHTML = "";
+			}
+			//ativaGuias();
+			if($i("listaTemas"))
+			{$i("listaTemas").innerHTML = "";}
+			if($i("listaPropriedades"))
+			{$i("listaPropriedades").innerHTML = "";objmapa.ativaListaPropriedades("listaPropriedades");}
+			remapaf();
+		};	
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"mudaQS",ajaxredesenha);
-		//carrega janela
-		var novoel = document.createElement("div");
-		novoel.id = "janelaguias";
-		novoel.style.display="block";
-		var temp = '<div class="hd">Guias</div>';
-		temp += '<div class="bd" id="conteudojanelaguias"></div>';
-		novoel.innerHTML = temp;
-		document.body.appendChild(novoel);
-		$i("conteudojanelaguias").innerHTML = novono;
-		YAHOO.namespace("janelaguias.xp");
-		YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"268px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-		YAHOO.janelaguias.xp.panel.render();
-		if($i(objmapa.guiaMenu+"obj"))
-		{
-			$i(objmapa.guiaMenu+"obj").innerHTML = "";
-		}
-		ativaGuias();
+		cp.call(p,"mudaQS",temp);
 	}
 	else
 	{

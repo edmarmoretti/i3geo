@@ -150,7 +150,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo identifica.xml para maiores detalhes.
 	*/
-	$locidentifica = "http://localhost/i3geo/menutemas/identifica.xml";
+	$locidentifica = "../../menutemas/identifica.xml";
 	/*
 	Variable: $locmapas 
 	

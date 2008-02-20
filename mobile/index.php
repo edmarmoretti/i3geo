@@ -94,7 +94,7 @@ var h = screen.availHeight;
 if (w > 600){var w = w/2;}
 if (h > 600){var h = h/2;}
 document.getElementById('wmobile').value = w;
-document.getElementById('hmobile').value = h;
+document.getElementById('hmobile').value = h - 20;
 if ('<?php echo $temasa;?>' != "")
 {document.getElementById('f').submit();}
 /*
