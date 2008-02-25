@@ -1,0 +1,65 @@
+Interface Integrada para Internet de Ferramentas de Geoprocessamento.
+
+O i3geo é software livre licenciado sob GPL e integra o Portal do Software Público Brasileiro.
+
+Veja:
+
+licenca.txt
+
+http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
+
+Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, menutemas, aplicmap 
+e dos arquivos ms_configura.php e classesjs/configura.js
+
+Se vc apenas criou uma árvore de menus própria, copie os diretórios menutemas e temas antigos sobre os
+novos que foram criados.
+
+---------
+
+Se vc está instalando pela primeira vez, veja no site da comunidade i3geo no www.softwarepublico.gov.br
+as instruções que ficam no item "wiki". Para ter acesso ao portal, vc terá de fazer o cadastramento.
+
+---------
+
+Se vc é usuário windows, descompacte o arquivo do i3geo adequado na raiz do drive "c". No final vc terá 
+um diretório c:\ms4w
+Clique duas vezes em c:\ms4w\apache-install.bat para ativar o servidor Apache. Depois, abra o navegador
+para internet e digite o endereço http://localhost/i3geo ou http://localhost/i3geo/principal.htm
+
+---------
+
+A partir da versão 3.9 do i3geo foi incluida uma página principal com endereços para
+os aplicativos que vêm com o i3geo (não esqueça de dar uma olhada):
+http://localhost/i3geo/principal.htm
+
+---------
+
+Se vc é usuário linux, dê preferência para instalar o i3geo no diretório:
+/opt/www/html/i3geo
+e o diretório temporário em
+/var/tmp/ms_tmp
+Assim vc não precisará alterar os arquivos de configuração.
+
+---------
+
+Se vc não seguiu essa últma dica, terá de editar alguns arquivos, como:
+
+ms_configura.php
+aplicmap/geral1.map
+aplicmap/ogcws.map
+
+---------
+
+Para configurar a ferramenta google, registre seu servidor e edite o arquivo
+ferramentas/googlemaps.htm para colocar a chave correta
+
+---------
+
+Se vc for colocar o i3geo em um servidor web, verifique as configurações de segurança
+para possibilitar o uso de chamadas a web services e leitura de arquivos xml em servidores
+externos.
+
+---------
+
+Se vc quiser entrar em contato com a equipe que desenvolve o i3geo, por favor utilize
+o fórum da comunidade i3geo.
