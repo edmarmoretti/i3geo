@@ -73,6 +73,7 @@ $tema - nome do tema
 */
 	function __construct($map_file,$tema="")
 	{
+  		//error_reporting(E_ALL);
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "")
@@ -226,10 +227,6 @@ $tipo - Tipo de busca brasil|null
 			$registros[] = implode(";",$valitem);
 		}
 		$fechou = $this->layer->close();
-		if (function_exists("mb_convert_encoding"))
-		{$res = mb_convert_encoding(implode("|",$registros),"UTF-8","ISO-8859-1");}
-		else
-		{$res = implode("|",$registros);}
 		return(array("itens"=>implode(";",$items),"valores"=>$registros));
 	}
 /*
@@ -255,7 +252,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista)
 	{
 		$resultadoFinal = array();
-		if (!isset($tipolista)){$tipolista = "tudo";}
+		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}
 		if (!isset($inicio)){$inicio = 0;}
 		if (!isset($fim)){$fim = "";}
 		//se tipo for igual a brasil, define a extensão geográfica total
@@ -266,7 +263,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		if ($this->layer->data == "")
 		{return "erro. O tema não tem tabela";}
 		//pega os valores
-		if (!isset($itemtema))
+		if ((!isset($itemtema)) || ($itemtema == ""))
 		{$items = pegaItens($this->layer);}
 		else
 		{$items[] = $itemtema;}
@@ -330,7 +327,11 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						$result = $this->layer->getResult($i);
 						$shp_index  = $result->shapeindex;
 						$shape = $this->layer->getshape(-1, $shp_index);
-						$valori = ($shape->values[$item]);
+						$valori = "";
+						if(@$shape->values[$item])
+						{
+							$valori = ($shape->values[$item]);
+						}
 						if (function_exists("mb_convert_encoding"))
 						{$valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");}
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
@@ -837,8 +838,12 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 			{
 				$val = $shape->values[$it];
 				if ($val == ""){$val = "-";}
+				if(!@$lksarray[$conta]){$lksarray[$conta] = "";}
 				if ($lksarray[$conta] == "") //descricao,valor,link
-				{$valori[] = $descisarray[$conta].":#".($val)."#"." ";}
+				{
+					if(!@$descisarray[$conta]){$descisarray[$conta] = "";}
+					$valori[] = $descisarray[$conta].":#".($val)."#"." ";
+				}
 				else
 				{
 					$nli = $descisarray[$conta].":#".$val."#".$lksarray[$conta];
@@ -850,7 +855,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 					}
 					$valori[] = $nli;
 				}
-				if ($itemimg != "") //incluir icone
+				if ((@$shape->values[$itemimg]) && ($itemimg != "")) //incluir icone
 				{
 					$valori[] = "<img src=..//".$locimg."//".$shape->values[$itemimg].".png //># # ";
 				}

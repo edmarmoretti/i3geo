@@ -97,6 +97,7 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$ma
 	$data_sum = array_sum($data);
 	$start = 270;
 	$value_counter = 0;
+	$value = 0;
 	for ($i = 0; $i < count($data); $i++)
 	{
 		$value += $data[$i];

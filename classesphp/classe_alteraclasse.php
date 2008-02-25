@@ -73,6 +73,8 @@ $tema - nome do tema
 */ 
 	function __construct($map_file,$tema="")
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
  		$this->layer = $this->mapa->getlayerbyname($tema);

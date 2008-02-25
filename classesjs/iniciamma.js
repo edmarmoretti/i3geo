@@ -62,6 +62,12 @@ if (window.location.href.split("?")[1])
 else
 {g_sid = "";}
 /*
+Variable: g_recupera
+
+Conta quantas vezes foi feita uma tentativa de recuperar um mapa com problemas
+*/
+g_recupera = 0;
+/*
 Variable: imagemxi
 
 Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa.
@@ -1087,7 +1093,7 @@ function Mapa(e,m)
 		this.atualizaCorpoMapa = function()
 		{
 			objaguarde.abre("ajaxCorpoMapa",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid+"&tipoimagem="+g_tipoimagem;
 			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
 		};
 		if (objmapa.finaliza)

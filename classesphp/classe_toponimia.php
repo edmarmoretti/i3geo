@@ -74,6 +74,8 @@ $tema - nome do tema que será processado
 */
 	function __construct($map_file,$tema="")
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
  		$this->layer = $this->mapa->getlayerbyname($tema);
@@ -209,11 +211,8 @@ $tipo Tipo teste|
 		$label->set("position",$p[$position]);
 		if ($tipo == "teste")
 		{
-	 		$imgo = $this->mapa->draw();
-			$nome = ($imgo->imagepath)."teste".nomeRandomico().".png";
-			$imgo->saveImage($nome);
-			$nome = ($imgo->imageurl).basename($nome);
-			return ($nome);
+	 		$i = gravaImagemMapa($this->mapa);
+			return ($i["url"]);
 		}
 		else
 		{return("ok");}

@@ -21,7 +21,7 @@ Free Software Foundation, Inc., no endereço
 */
 parametrosURL()
 aguarde("block")
-var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=convertews"
+var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=convertews&h="+window.location.host
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");

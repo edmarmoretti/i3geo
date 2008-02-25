@@ -75,6 +75,7 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="")
 	{
+		//error_reporting(E_ALL);
 		$this->perfil = explode(",",$perfil);
 		$this->xmlsistemas = "";
 		if ($locsistemas != "")
@@ -111,17 +112,17 @@ array
 		//pega os sistemas checando os perfis
 		foreach($this->xml->MAPA as $s)
 		{
-			$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
+			$ps = ixml($s,"PERFIL");
 			$perfis = explode(",",$ps);
 			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 			{
-				$n = mb_convert_encoding($s->NOME,"HTML-ENTITIES","auto");
-				$i = mb_convert_encoding($s->IMAGEM,"HTML-ENTITIES","auto");
-				$t = mb_convert_encoding($s->TEMAS,"HTML-ENTITIES","auto");
-				$l = mb_convert_encoding($s->LIGADOS,"HTML-ENTITIES","auto");
-				$e = mb_convert_encoding($s->EXTENSAO,"HTML-ENTITIES","auto");
-				$o = mb_convert_encoding($s->OUTROS,"HTML-ENTITIES","auto");
-				$k = mb_convert_encoding($s->LINKDIRETO,"HTML-ENTITIES","auto");
+				$n = ixml($s,"NOME");
+				$i = ixml($s,"IMAGEM");
+				$t = ixml($s,"TEMAS");
+				$l = ixml($s,"LIGADOS");
+				$e = ixml($s,"EXTENSAO");
+				$o = ixml($s,"OUTROS");
+				$k = ixml($s,"LINKDIRETO");
 				$mapas[] =  array("NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
 			}
 		}
@@ -175,24 +176,24 @@ array
 		{
 			$down = "nao";
 			$ogc = "sim";
-			$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
+			$temp = ixml($temar,"DOWNLOAD");
 			if (($temp == "sim") || ($temp == "SIM"))
 			{$down = "sim";}
-			$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+			$temp = ixml($temar,"OGC");
 			if (($temp == "nao") || ($temp == "NAO"))
 			{$down = "nao";}
 			$link = " ";
-			$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
+			$temp = ixml($temar,"TLINK");
 			if ($temp != "")
 			{$link = $temp;}
-			$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
-			$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
+			$tid = ixml($temar,"TID");
+			$nome = ixml($temar,"TNOME");
 			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 		}
 		foreach($this->xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
-			$temp = mb_convert_encoding($grupo->PERFIL,"HTML-ENTITIES","auto");
+			$temp = ixml($grupo,"PERFIL");
 			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
@@ -208,25 +209,25 @@ array
 				{
 					$down = "nao";
 					$ogc = "sim";
-					$temp = mb_convert_encoding($temar->DOWNLOAD,"HTML-ENTITIES","auto");
+					$temp = ixml($temar,"DOWNLOAD");
 					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
-					$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+					$temp = ixml($temar,"OGC");
 					if (($temp == "nao") || ($temp == "NAO"))
 					{$ogc = "nao";}
 					$link = " ";
-					$temp = mb_convert_encoding($temar->TLINK,"HTML-ENTITIES","auto");
+					$temp = ixml($temar,"TLINK");
 					if ($temp != "")
 					{$link = $temp;}
-					$tid = mb_convert_encoding($temar->TID,"HTML-ENTITIES","auto");
-					$nome = mb_convert_encoding($temar->TNOME,"HTML-ENTITIES","auto");
+					$tid = ixml($temar,"TID");
+					$nome = ixml($temar,"TNOME");
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 				}
 				$subgrupos = array();
 				foreach($grupo->SGRUPO as $sgrupo)
 				{
 					$incluisgrupo = TRUE;
-					$temp = mb_convert_encoding($sgrupo->PERFIL,"HTML-ENTITIES","auto");
+					$temp = ixml($sgrupo,"PERFIL");
 					if ($temp != "")
 					{
 						$incluisgrupo = FALSE;
@@ -241,21 +242,18 @@ array
 						$ogc = "nao";
 						foreach($sgrupo->TEMA as $tema)
 						{
-							$temp = mb_convert_encoding($tema->DOWNLOAD,"HTML-ENTITIES","auto");
+							$temp = ixml($tema,"DOWNLOAD");
 							if (($temp == "sim") || ($temp == "SIM"))
 							{$down = "sim";}
-							$temp = mb_convert_encoding($temar->OGC,"HTML-ENTITIES","auto");
+							$temp = ixml($temar,"OGC");
 							if (($temp != "nao") || ($temp != "NAO"))
 							{$ogc = "sim";}
 						}
-						$nome = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");
+						$nome = ixml($sgrupo,"SDTIPO");
 						$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
 					}
 				}
-				if (function_exists("mb_convert_encoding"))
-				{$nome = mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto");}
-				else
-				{$nome = $grupo->GTIPO;}
+				$nome = ixml($grupo,"GTIPO");
 				$grupos[] = array("nome"=>$nome,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
 		}
@@ -266,19 +264,19 @@ array
 		{
 			foreach($this->xmlsistemas->SISTEMA as $s)
 			{
-				$nomesis = mb_convert_encoding($s->NOMESIS,"HTML-ENTITIES","auto");
-				$ps = mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto");
+				$nomesis = ixml($s,"NOMESIS");
+				$ps = ixml($s,"PERFIL");
 				$perfis = explode(",",$ps);
 				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
 					$funcoes = array();
 					foreach($s->FUNCAO as $f)
 					{
-						$n = mb_convert_encoding($f->NOMEFUNCAO,"HTML-ENTITIES","auto");
-						$a = mb_convert_encoding($f->ABRIR,"HTML-ENTITIES","auto");
-						$w = mb_convert_encoding($f->JANELAW,"HTML-ENTITIES","auto");
-						$h = mb_convert_encoding($f->JANELAH,"HTML-ENTITIES","auto");
-						$p = mb_convert_encoding($f->PERFIL,"HTML-ENTITIES","auto");
+						$n = ixml($f,"NOMEFUNCAO");
+						$a = ixml($f,"ABRIR");
+						$w = ixml($f,"JANELAW");
+						$h = ixml($f,"JANELAH");
+						$p = ixml($f,"PERFIL");
 						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
 						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
 					}
@@ -328,10 +326,10 @@ array
 		foreach($this->xml->GRUPO as $g)
 		{
 			$incluigrupo = TRUE;
-			if (mb_convert_encoding($g->PERFIL,"HTML-ENTITIES","auto") != "")
+			if (ixml($g,"PERFIL") != "")
 			{
 				$incluigrupo = FALSE;
-				$perfis = explode(",",mb_convert_encoding($g->PERFIL,"HTML-ENTITIES","auto"));
+				$perfis = explode(",",ixml($g,"PERFIL"));
 				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
@@ -343,10 +341,10 @@ array
 					foreach ($g->SGRUPO as $s)
 					{
 						$incluisgrupo = TRUE;
-						if (mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto") != "")
+						if (ixml($s,"PERFIL") != "")
 						{
 							$incluisgrupo = FALSE;
-							$perfis = explode(",",mb_convert_encoding($s->PERFIL,"HTML-ENTITIES","auto"));
+							$perfis = explode(",",ixml($s,"PERFIL"));
 							if ($this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = TRUE;}
 						}
@@ -357,11 +355,11 @@ array
 								foreach($s->TEMA as $tema)
 								{
 									$inclui = TRUE;
-									if (mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto") != "")
+									if (ixml($tema,"PERFIL") != "")
 									{
 										
 										$inclui = FALSE;
-										$perfis = explode(",",mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto"));
+										$perfis = explode(",",ixml($tema,"PERFIL"));
 										if ($this->array_in_array($this->perfil,$perfis))
 										{$inclui = TRUE;}
 									}
@@ -375,12 +373,9 @@ array
 										{$ogc = "nao";}
 										$link = " ";
 										if ($tema->TLINK != "")
-										{$link = mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto");}
-										$tid = mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto");
-										if (function_exists("mb_convert_encoding"))
-										{$nome = mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto");}
-										else
-										{$nome = $tema->TNOME;}
+										{$link = ixml($tema,"TLINK");}
+										$tid = ixml($tema,"TID");
+										$nome = ixml($tema,"TNOME");
 										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 									}
 								}
@@ -416,7 +411,7 @@ $procurar - String que será procurada.
 		foreach($this->xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
-			$temp = mb_convert_encoding($grupo->PERFIL,"HTML-ENTITIES","auto");
+			$temp = ixml($grupo,"PERFIL");
 			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
@@ -431,7 +426,7 @@ $procurar - String que será procurada.
 					$incluisgrupo = TRUE;
 					if ($this->perfil != "")
 					{
-						$temp = mb_convert_encoding($sgrupo->PERFIL,"HTML-ENTITIES","auto");
+						$temp = ixml($sgrupo,"PERFIL");
 						$perfis = explode(",",$temp);
 						if (!$this->array_in_array($this->perfil,$perfis))
 						{$incluisgrupo = FALSE;}
@@ -443,7 +438,7 @@ $procurar - String que será procurada.
 							$inclui = TRUE;
 							if ($this->perfil != "")
 							{
-								$temp = mb_convert_encoding($tema->PERFIL,"HTML-ENTITIES","auto");
+								$temp = ixml($tema,"PERFIL");
 								$perfis = explode(",",$temp);
 								if (!$this->array_in_array($this->perfil,$perfis))
 								{$inclui = FALSE;}
@@ -451,42 +446,32 @@ $procurar - String que será procurada.
 							if ($inclui == TRUE)
 							{
 								$down = "nao";
-								$temp = mb_convert_encoding($tema->DOWNLOAD,"HTML-ENTITIES","auto");
+								$temp = ixml($tema,"DOWNLOAD");
 								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
-								$link = mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto");
-								$tid = mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto");
-								if (function_exists("mb_convert_encoding"))
-								{$texto = array("tid"=>$tid,"nome"=>(mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")),"link"=>$link,"download"=>$down);}
-								else
-								{$texto = array("tid"=>$tid,"nome"=>$tema->TNOME,"link"=>$link,"download"=>$down);}
+								$link = ixml($tema,"TLINK");
+								$tid = ixml($tema,"TID");
+								$texto = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
 								$p1 = $this->removeAcentos($procurar);
 								$p1 = $this->removeAcentos(htmlentities($p1));
 								
-								$pp1 = $this->removeAcentos(mb_convert_encoding($tema->TNOME,"auto","auto"));
-								$pp1 = $this->removeAcentos(mb_convert_encoding($tema->TNOME,"auto","auto"));
+								$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
+								$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
 								$pp1 = $this->removeAcentos(htmlentities($pp1));
-								//$listadetemas[] = array("tid"=>"","nome"=>$pp1);
 								if (stristr($pp1,$p1))
 								{$listadetemas[] = $texto;}
 							}
 						}
 						if (count($listadetemas) > 0)
 						{
-							if (function_exists("mb_convert_encoding"))
-							{$subgrupo[] = array("subgrupo"=>(mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto")),"temas"=>$listadetemas);}
-							else
-							{$subgrupo[] = array("subgrupo"=>$sgrupo->SDTIPO,"temas"=>$listadetemas);}
+							$subgrupo[] = array("subgrupo"=>(ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
 						}
 					}
 					$listadetemas = array();
 				}
 				if (count($subgrupo) > 0)
 				{
-					if (function_exists("mb_convert_encoding"))
-					{$resultado[] = array("grupo"=>(mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")),"subgrupos"=>$subgrupo);}
-					else
-					{$resultado[] = array("grupo"=>$grupo->GTIPO,"subgrupos"=>$subgrupo);}
+					$resultado[] = array("grupo"=>(ixml($grupo,"GTIPO")),"subgrupos"=>$subgrupo);
 				}
 				$subgrupo = array();
 			}

@@ -50,6 +50,7 @@ $atlasxml - Endereço do arquivo xml com as definições do Atlas.
 */  	
 	function __construct($atlasxml)
 	{
+  		
   		$this->arquivo = $atlasxml;
   		$this->xml = simplexml_load_file($atlasxml);
 	}
@@ -68,14 +69,7 @@ tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atla
 		$atlas = array();
 		foreach($this->xml->ATLAS as $s)
 		{
-			$id = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
-			$titulo = mb_convert_encoding($s->TITULO,"HTML-ENTITIES","auto");
-			$descricao = mb_convert_encoding($s->DESCRICAO,"HTML-ENTITIES","auto");
-			$icone = mb_convert_encoding($s->ICONE,"HTML-ENTITIES","auto");
-			$w = mb_convert_encoding($s->WABERTURA,"HTML-ENTITIES","auto");
-			$h = mb_convert_encoding($s->HABERTURA,"HTML-ENTITIES","auto");
-			$templatehtml = mb_convert_encoding($s->TEMPLATEHTML,"HTML-ENTITIES","auto");
-			$atlas[] =  array("ID"=>$id,"TITULO"=>$titulo,"DESCRICAO"=>$descricao,"ICONE"=>$icone,"W"=>$w,"H"=>$h,"TEMPLATEHTML"=>$templatehtml);
+			$atlas[] =  array("ID"=>ixml($s,"ID"),"TITULO"=>ixml($s,"TITULO"),"DESCRICAO"=>ixml($s,"DESCRICAO"),"ICONE"=>ixml($s,"ICONE"),"W"=>ixml($s,"WABERTURA"),"H"=>ixml($s,"HABERTURA"),"TEMPLATEHTML"=>ixml($s,"TEMPLATEHTML"));
 		}
 		return (array("atlas"=>$atlas,"tituloinstituicao"=>$tituloinstituicao,"atlasxml"=>$this->arquivo));
 	}
@@ -92,10 +86,10 @@ atlasId - id do atlas desejado, conforme existente em atlas.xml
 	{
 		foreach($this->xml->ATLAS as $s)
 		{
-			$id = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
+			$id = ixml($s,"ID");
 			if ($id == $atlasId)
 			{
-				$interface = mb_convert_encoding($s->TEMPLATEHTML,"HTML-ENTITIES","auto");
+				$interface = ixml($s,"TEMPLATEHTML");
 			}
 		}
 		return ($interface);
@@ -114,24 +108,21 @@ atlasId - identificador do Atlas desejado
 		$p = array();
 		foreach($this->xml->ATLAS as $s)
 		{
-			$id = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
+			$id = ixml($s,"ID");
 			if ($id == $atlasId)
 			{
-				$titulo = mb_convert_encoding($s->TITULO,"HTML-ENTITIES","auto");
-				$link = mb_convert_encoding($s->LINKMAISINFO,"HTML-ENTITIES","auto");
-				$w = mb_convert_encoding($s->WABERTURA,"HTML-ENTITIES","auto");
-				$h = mb_convert_encoding($s->HABERTURA,"HTML-ENTITIES","auto");
-				$icone = mb_convert_encoding($s->ICONE,"HTML-ENTITIES","auto");
-				$tipoguias = mb_convert_encoding($s->TIPOGUIAS,"HTML-ENTITIES","auto");
-				$pdefault = mb_convert_encoding($s->PRANCHADEFAULT,"HTML-ENTITIES","auto");
+				$titulo = ixml($s,"TITULO");
+				$link = ixml($s,"LINKMAISINFO");
+				$w = ixml($s,"WABERTURA");
+				$h = ixml($s,"HABERTURA");
+				$icone = ixml($s,"ICONE");
+				$tipoguias = ixml($s,"TIPOGUIAS");
+				$pdefault = ixml($s,"PRANCHADEFAULT");
 				foreach($s->PRANCHAS as $pranchas)
 				{
 					foreach($pranchas->PRANCHA as $prancha)
 					{
-						$t = mb_convert_encoding($prancha->TITULO,"HTML-ENTITIES","auto");
-						$i = mb_convert_encoding($prancha->ICONE,"HTML-ENTITIES","auto");
-						$pranchaId = mb_convert_encoding($prancha->ID,"HTML-ENTITIES","auto");
-						$p[] = array("id"=>$pranchaId,"titulo"=>$t,"icone"=>$i);
+						$p[] = array("id"=>ixml($prancha,"ID"),"titulo"=>ixml($prancha,"TITULO"),"icone"=>ixml($prancha,"ICONE"));
 					}
 				}
 			}
@@ -175,26 +166,26 @@ locaplic - localização do i3geo no servidor
 		$mp = "";
 		foreach($this->xml->ATLAS as $s)
 		{
-			$ida = mb_convert_encoding($s->ID,"HTML-ENTITIES","auto");
+			$ida = ixml($s,"ID");
 			if ($ida == $atlasId)
 			{
 				foreach($s->PRANCHAS as $pranchas)
 				{
 					foreach($pranchas->PRANCHA as $prancha)
 					{
-						if($pranchaId == mb_convert_encoding($prancha->ID,"HTML-ENTITIES","auto"))
+						if($pranchaId == ixml($prancha,"ID"))
 						{
-							$link = mb_convert_encoding($prancha->LINKMAISINFO,"HTML-ENTITIES","auto");
-							$w = mb_convert_encoding($prancha->WABERTURA,"HTML-ENTITIES","auto");
-							$h = mb_convert_encoding($prancha->HABERTURA,"HTML-ENTITIES","auto");
-							$mp = mb_convert_encoding($prancha->MAPEXT,"HTML-ENTITIES","auto");
+							$link = ixml($prancha,"LINKMAISINFO");
+							$w = ixml($prancha,"WABERTURA");
+							$h = ixml($prancha,"HABERTURA");
+							$mp = ixml($prancha,"MAPEXT");
 							//pega os temas
 							foreach($prancha->TEMAS as $temas)
 							{
 								foreach($temas->TEMA as $tema)
 								{
-									$codigo = mb_convert_encoding($tema->CODIGO,"HTML-ENTITIES","auto");
-									$ligado = mb_convert_encoding($tema->LIGADO,"HTML-ENTITIES","auto");
+									$codigo = ixml($tema,"CODIGO");
+									$ligado = ixml($tema,"LIGADO");
 									if ($codigo != "")
 									{
 										$temasa[] = $codigo;

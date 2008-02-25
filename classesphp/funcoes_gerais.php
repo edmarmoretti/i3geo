@@ -52,6 +52,7 @@ return:
 
 array - array("nomeclasse"=>$nomeclasse,"expressao"=>$expressao,"cores"=>$cores[$i])
 */
+//error_reporting(E_ALL);
 function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
 {
 	$resultado = array();
@@ -471,6 +472,10 @@ function copiaSeguranca($map_file)
 			{$objMapa->save($map_file);}
 		}
 	}
+	else
+	{
+		copy((str_replace(".map","seguranca.map",$map_file)),$map_file);	
+	}
 }
 /*
 function: criaDirMapa
@@ -612,7 +617,7 @@ function listaTrueType()
 			$nome[] = $f;
 		}
 		$res = implode(",",$nome);
-		$f = fopen($dir_tmp."/".$imgdir."/truetype.inc",w);
+		$f = fopen($dir_tmp."/".$imgdir."/truetype.inc",'w');
 		fwrite($f,"<?php \$res = '".$res."';?>");
 		fclose($f);
 		copy($dir_tmp."/".$imgdir."/truetype.inc",$dir_tmp."/comum/truetype.inc");
@@ -637,7 +642,7 @@ postgis_mapa - string de conexão com o banco
 */
 function substituiCon($map_file,$postgis_mapa)
 {
-	if (isset($postgis_mapa))
+	if ((isset($postgis_mapa)) && (file_exists($map_file)))
 	{
 		if (($postgis_mapa != "") || ($postgis_mapa != " "))
 		{
@@ -816,7 +821,6 @@ function retornaReferenciaDinamica()
 	$mapa->save($map_file);
 	$cp->set_data($s);
 }
-
 /*
 function: testaMapa
 
@@ -930,6 +934,36 @@ function extPadrao($oMap)
 	return $oMap;
 }
 /*
+function: gravaImagemMapa
+
+Grava a imagem do mapa atual
+
+Parameters:
+
+$mapa - objeto mapa ou arquivo mapfile
+
+Return:
+
+array - array("url"=>,"arquivo"=>) ou falso se ocorrer erro
+
+*/
+function gravaImagemMapa($mapa)
+{
+ 	if(is_string($mapa))
+ 	{$mapa = ms_newMapObj($mapa);}
+ 	$imgo = $mapa->draw();
+	$nome = ($imgo->imagepath).nomeRandomico().".png";
+	$salva = $imgo->saveImage($nome);
+	if ($salva != -1)
+	{
+		$retorno = array("url"=>($imgo->imageurl).basename($nome),"arquivo"=>$nome);
+		$imgo->free();
+	}
+	else
+	{$retorno = false;}
+	return $retorno;
+}	
+/*
 Section: atributos
 */
 /*
@@ -988,7 +1022,7 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 		}
 		$fechou = $layer->close();
 	}
-	$layer->close;
+	$layer->close();
 	return ($valitem);
 }
 /*
@@ -1252,7 +1286,7 @@ function imagem2xy($map_file,$xy)
 	$e = $map->extent;
 	$c = $map->cellsize;
 	$x = ($e->minx) + $xy[0] * $c;
-	$y = ($e->maxy) + $xy[1] * $c;
+	$y = ($e->maxy) - $xy[1] * $c;
 	return array($x,$y);
 }
 
@@ -1702,5 +1736,43 @@ function pegaIPcliente2()
 	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 	else $ip = "UNKNOWN";
 	return $ip;
+}
+/*
+function: versao
+
+Retorna a versão do Mapserver.
+
+Return:
+
+array - array("completa"=>,"principal"=>)
+*/
+function versao()
+{
+	$v = "5.0.0";
+	$vs = explode(" ",ms_GetVersion());
+	for ($i=0;$i<(count($vs));$i++)
+	{
+		if(trim(strtolower($vs[$i])) == "version")
+		{$v = $vs[$i+1];}
+	}
+	$versao["completa"] = $v;
+	$v = explode(".",$v);
+	$versao["principal"] = $v[0];
+	return $versao;
+}
+/*
+function: iXml
+
+Retorna o valor de um elemento xml
+
+Parameter:
+
+no - objeto representando o elemento xml
+
+nome - nome do elemento
+*/
+function ixml($no,$nome)
+{
+	return mb_convert_encoding($no->$nome,"HTML-ENTITIES","auto");
 }
 ?>

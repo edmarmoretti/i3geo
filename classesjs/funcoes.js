@@ -100,6 +100,7 @@ function trataErro()
 	objaguarde.fecha("ajaxEscalaGrafica");
 	objaguarde.fecha("montaMapa");
 	objaguarde.fecha("aguardedoc");
+	objaguarde.fecha("ajaxCorpoMapa1");
 }
 /*
 Function: iCookie
@@ -1213,7 +1214,7 @@ function ativaClicks(docMapa)
 				}
 				var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
 				objaguarde.abre("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+nex+"&g_sid="+g_sid;
 				cpObj.call(p,"mudaExtensao",ajaxredesenha);
 			}
 		}
@@ -1586,7 +1587,7 @@ function zoomboxf (tipo)
 			{
 				objmapa.extent=v;
 				objaguarde.abre("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+v+"&g_sid="+g_sid;
 				cpObj.call(p,"mudaExtensao",ajaxredesenha);
 			}
 		}
@@ -1722,7 +1723,7 @@ Zoom para a extensão default.
 function zoomtot()
 {
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
 	g_operacao = "navega";
 	cpObj.call(p,"mudaExtensao",ajaxredesenha);
 }
@@ -1821,7 +1822,7 @@ function geraURLentorno()
 	var ox = (parseInt(objmapa.w/2)) * -1;
 	var oy = objmapa.h / 2;
 	var u = window.location.protocol+"\/\/"+window.location.host+objmapa.cgi+"?map="+objmapa.mapfile;
-	u += "&mode=map&imgext="+objmapa.extent+"&mapsize="+nnx+" "+oy+"&map_scalebar_status=off";
+	u += "&mode=map&imgext="+objmapa.extent+"&mapsize="+nnx+" "+oy;
 	var sul = u+"&imgxy="+sx/2+" "+sy/2;
 	var norte = u+"&imgxy="+nnx/2+" "+nny/2;
 	var leste = u+"&imgxy="+lx/2+" "+ly/2;
@@ -3232,7 +3233,7 @@ function filmezf(o)
 	var quadro = (o.id).replace("f","");
 	if (quadrosfilme[quadro].extensao != " ")
 	{
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		cpObj.call(p,"mudaExtensao",ajaxredesenha);
 	}
@@ -4171,6 +4172,21 @@ function removeAcentos(palavra)
 	var re = /ú/gi;
 	palavra = palavra.replace(re,"u");
 	return(palavra);
+}
+/*
+Function: recuperamapa
+
+Tenta recuperar o último mapa, caso tenha ocorrido algum erro.
+
+*/
+function recuperamapa()
+{
+	g_recupera = 1;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=recuperamapa&g_sid="+g_sid;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"recuperamapa",remapaf);
 }
 //Mantido aqui apenas para fins de compatibilidade
 function borra()

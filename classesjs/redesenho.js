@@ -331,37 +331,64 @@ function ajaxCorpoMapa(retorno)
 {
 	$i("mst").style.display="block";
 	if (!$i("img")){return;}
-	objaguarde.abre("ajaxCorpoMapa1",$trad("o3"));
-	//retorno não é um objeto CPAINT
-	if (retorno.data){retorno = retorno.data;}
-	if ((retorno != "erro") && (retorno != undefined))
+	try
 	{
-		eval(retorno);
-		$i("img").onload =  function()
+		objaguarde.abre("ajaxCorpoMapa1",$trad("o3"));
+		//retorno não é um objeto CPAINT
+		if (retorno.data){retorno = retorno.data;}
+		if ((retorno != "erro") && (retorno != undefined))
 		{
-			//atualiza quadro
-			avancaQuadro();
-			gravaQuadro("imagem",mapimagem);
-			g_quadrooriginal = mapimagem;
-			if ($i("banners"))
-			{$i("banners").style.height = objmapa.h;}
-			if ($i("legenda"))
-			{$i("legenda").style.height = objmapa.h;}
-			$i("img").style.width = objmapa.w;
-			$i("img").style.height = objmapa.h;
+			eval(retorno);
+			$i("img").onload =  function()
+			{
+				//atualiza quadro
+				avancaQuadro();
+				gravaQuadro("imagem",mapimagem);
+				g_quadrooriginal = mapimagem;
+				if ($i("banners"))
+				{$i("banners").style.height = objmapa.h;}
+				if ($i("legenda"))
+				{$i("legenda").style.height = objmapa.h;}
+				$i("img").style.width = objmapa.w;
+				$i("img").style.height = objmapa.h;
+				calcposf();
+				objaguarde.fecha("ajaxCorpoMapa1");
+				if ($i("imgtemp"))
+				{$i("imgtemp").style.display="none";}
+				$i("img").onload = "";
+			};
+			$i("img").src=mapimagem;
+		}
+		else
+		{
 			calcposf();
-			objaguarde.fecha("ajaxCorpoMapa1");
-			if ($i("imgtemp"))
-			{$i("imgtemp").style.display="none";}
-			$i("img").onload = "";
-		};
-		$i("img").src=mapimagem;
+			trataErro();
+			alert("Erro no mapa");
+		}
+		g_recupera = 0;
 	}
-	else
+	catch(e)
 	{
 		calcposf();
 		trataErro();
-		alert("Erro no mapa");
+		if(g_recupera == 0)
+		{
+			alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+			recuperamapa();
+		}
+		else
+		{
+			alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
+			if (g_recupera == 1)
+			{
+				g_recupera = 2;
+				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
+				var cp = new cpaint();
+				//cp.set_debug(2)
+				cp.set_response_type("JSON");
+				cp.call(p,"recuperamapa",remapaf);
+			}		
+		}
 	}
 }
 /*

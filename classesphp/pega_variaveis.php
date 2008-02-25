@@ -3,7 +3,8 @@
 Title: A - Carrega as variáveis passadas como POST ou GET
 
 Processa os array $_GET e $_POST, transformando-as em variáveis conforme as chaves.
-Deve ser incluído sempre nos programas em PHP, evitando que o parâmetro "REGISTER_GLOBALS" do PHP precise ser definido como "On".
+Deve ser incluído sempre nos programas em PHP, evitando que o parâmetro "REGISTER_GLOBALS" 
+do PHP precise ser definido como "On".
 
 About: Licença
 

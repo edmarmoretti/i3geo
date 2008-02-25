@@ -214,7 +214,8 @@ function iniciaMapa()
 	//
 	//salva uma copia para opção de reiniciar o mapa
 	//
-	$salvoreinc = $m->mapa->save(str_replace(".map","reinc.map",$map_file));
+	//$salvoreinc = $m->mapa->save(str_replace(".map","reinc.map",$map_file));
+	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	$cp->set_data($res);
 }
 ?>

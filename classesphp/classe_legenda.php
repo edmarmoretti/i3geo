@@ -108,6 +108,8 @@ $template - nome do template para processar a legenda
 
 	function __construct($map_file,$locaplic,$tema="",$template="")
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->localaplicacao = $locaplic;
@@ -527,7 +529,7 @@ $size - Tamanho que será aplicado ao símbolo.
 		{$estilo->set("symbolname",$symbolname);}
 		if ((isset ($size)) && ($size != "-1"))
 		{$estilo->set("size",$size);}
-		if ($this->layer->getmetadata("sld") != " ")
+		if ($this->layer->getmetadata("sld") != "")
 		{
 			$sld = $this->layer->getmetadata("sld");
 			reSLD($this->arquivo,$this->nome,$sld);

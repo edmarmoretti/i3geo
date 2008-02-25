@@ -65,6 +65,7 @@ $map_file - Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file,$nomeImagem="")
 	{
+  		//error_reporting(E_ALL);
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if ($nomeImagem == "")

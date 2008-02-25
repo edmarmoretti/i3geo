@@ -7,7 +7,10 @@ Tenta carregar as extensões que não estiverem habilitadas por default.
 
 O ms_criamapa.php define a variável de seção $ler_extensoes indicando as que devem ser lidas.
 
-Se a variável $ler_extensoes não estiver definida, o programa irá criar.
+Se a variável $ler_extensoes não estiver definida, o programa irá criar. Essa é a situação
+quando o ms_criamapa.php é executado.
+
+Caso seja necessário carregar alguma extensão adicional, basta incluir no array $extensoes
 
 About: Licença
 
@@ -33,21 +36,27 @@ File: i3geo/classesphp/carrega_ext.php
 
 19/6/2007
 */
+/*
+Variable: extensoes
+
+Array com a lista de extensoes que devem ser carregadas pelo i3geo.
+
+Outras extensoes exigidas pelo i3geo também são verificadas, como mapscript e gd.
+*/
+$extensoes = array("libxml","SimpleXML","dom","xml","simplexml","mbstring");
 if (isset($ler_extensoes))
 {
-	$temp = explode(",",$ler_extensoes);
+	$extensoes = explode(",",$ler_extensoes);
 	$temp1 = array();
-	
 }
 else
 {
-	$temp = array("libxml","SimpleXML","dom","xml","simplexml","mbstring");
 	$temp1 = get_loaded_extensions();
 }
 $ler_extensoes = array();
-if (count($temp) > 0)
+if (count($extensoes) > 0)
 {
-	foreach ($temp as $templ)
+	foreach ($extensoes as $templ)
 	{
 		if (in_array( $templ, $temp1) != TRUE)
 		{

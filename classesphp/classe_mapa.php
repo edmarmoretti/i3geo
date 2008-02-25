@@ -63,11 +63,12 @@ $map_file - Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file)
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
 		for ($i=0;$i < ($this->mapa->numlayers);$i++)
 		{$this->layers[] = $this->mapa->getlayer($i);}
-		//$this->mapa->prepareimage();
 	}
 /*
 Method: salva
@@ -80,7 +81,7 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
-Method: gravaImagemCorpo
+Method: gravaImagemCorpo (depreciado)
 
 Grava a imagem do mapa atual
 */
@@ -104,32 +105,35 @@ string - javascript com os parametros
 */
 	function parametrosTemas()
 	{
-		$existesel = "nao";
+		$existesel = false;
 		$qy = file_exists(($this->arquivo)."qy");
 		if ($qy)
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
-			if ($qy) //verifica se existe alguma selecao
+			if ($qy) //verifica se existe alguma selecao no tema
 			{
 				$oLayer->open();
 				$res_count = $oLayer->getNumresults();
 				$oLayer->close();
-				if ($res_count > 0){$sel = "sim";$existesel = "sim";}
+				if ($res_count > 0){$sel = "sim";$existesel = true;}
 			}
 			if ((strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($oLayer->getmetadata("escondido") == ""))
 			{
-
 				$escala = $oLayer->getmetadata("escala");
 				if ($escala == ""){$escala = 0;}
 				$down = $oLayer->getmetadata("download");
-				//verifica se o layer contem features
+				//
+				//verifica se o layer é do tipo features
+				//
 				$f = "nao";
 				if (($oLayer->data == "") && ($oLayer->connection == ""))
 				{$f = "sim";}
 				$ct = $oLayer->connectiontype;
+				//
 				//verifica se o tema tem wfs
+				//
 				$wfs = $oLayer->getmetadata("wfs");
 				//
 				//verifica se o tema pode receber a operação de zoom para o tema
@@ -146,7 +150,8 @@ string - javascript com os parametros
 				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*nao*".$zoomtema."*".$contextoescala;
 			}
 		}
-		if (($existesel == "nao") && $qy)
+		//apaga o arquivo qy se não for necessário
+		if (!$existesel && $qy)
 		{unlink(($this->arquivo)."qy");}
 		$temas = array_reverse($temas);
 		$res = "var temas='".implode(";",$temas)."'";
@@ -175,9 +180,13 @@ Include:
 	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
 		require_once("classe_imagem.php");
+		$nomer = "";
 		$qy = file_exists(($this->arquivo)."qy");
 		$legenda = $this->mapa->legend;
-		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
+		//
+		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes que podem estar em branco
+		//isso ocorre quando o layer tem só uma classe
+		//
 		if ($legenda->status == MS_EMBED)
 		{
 			foreach ($this->layers as $layer)
@@ -194,20 +203,35 @@ Include:
 			}
 		}			
 		$nome = nomeRandomico();
+		//
+		//gera a imagem do mapa
+		//se estiver sendo utilizado o cgi para desenhar a imagem
+		//é necessário criar uma imagem vazia para capturar o nome que será retornado
+		//
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && $tipoimagem=="nenhum" && !$qy)
 		{
-			foreach($this->layers as $l)
-			{$l->set("status",MS_OFF);}
-			$imgo = @$this->mapa->draw();		
+			//foreach($this->layers as $l)
+			//{$l->set("status",MS_OFF);}
+			//$imgo = @$this->mapa->draw();
+			$this->mapa->preparequery();
+			$imgo = @$this->mapa->prepareImage();		
 		}
 		else
 		{
+			if($tipoimagem != "nenhum")
+			{
+				$of = $this->mapa->outputformat;
+				$of->set("imagemode",MS_IMAGEMODE_RGB);
+			}
 			if (!$qy)
 			{$imgo = @$this->mapa->draw();}
 			else
 			{$imgo = @$this->mapa->drawQuery();}
 			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
 			$imgo->saveImage($nomer);
+			//
+			//aplica o filtro de imagem se estiver definido em $tipoimagem
+			//
 			if ($tipoimagem == "cinza")
 			{
 				$m = new Imagem($nomer);
@@ -223,11 +247,11 @@ Include:
 				$m = new Imagem($nomer);
 				imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
 			}
+			$nomer = ($imgo->imageurl).basename($nomer);
 		}
 		if ($imgo == ""){return "erro";}
 		$e = $this->mapa->extent;
 		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-		$nomer = ($imgo->imageurl).basename($nomer);
 		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim" && !$qy)
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
@@ -237,7 +261,7 @@ Include:
 		return $res;
 	}
 /*
-Method: redesenhaEntorno
+Method: redesenhaEntorno (depreciado)
 
 Redesenha o entorno do mapa (depreciado).
 
@@ -260,21 +284,21 @@ string - javascript com as variáveis para redesenho do mapa
 		//desenha o leste
 		$pt->setXY($w + ($w/2), $h/2);
 		$this->mapa->zoompoint(0,$pt,$w,$h,$e);
-		$nomeL = gravaImagemCorpo();
+		$nomeL = gravaImagemMapa($this->mapa);
 		//desenha o oeste
 		$pt->setXY(0 - ($w / 2), $h/2);
 		$this->mapa->zoomscale($s*2,$pt,$w,$h,$e);
-		$nomeO = gravaImagemCorpo();
+		$nomeO = gravaImagemMapa();
 		//desenha o norte
 		$pt->setXY($w / 2, 0 - $h);
 		$this->mapa->zoomscale($s*2,$pt,$w,$h,$e);
-		$nomeN = gravaImagemCorpo();
+		$nomeN = gravaImagemMapa();
 		//desenha o sul
 		$pt->setXY($w / 2, $h * 2);
 		$this->mapa->zoomscale($s * 2,$pt,$w,$h,$e);
-		$nomeS = gravaImagemCorpo();
+		$nomeS = gravaImagemMapa();
 		$pt->free();
-		return "var imagens=['".$nomeL."','".$nomeO."','".$nomeN."','".$nomeS."'];";
+		return "var imagens=['".$nomeL["url"]."','".$nomeO["url"]."','".$nomeN["url"]."','".$nomeS["url"]."'];";
 	}
 /*
 Method: ativalegenda
@@ -284,10 +308,7 @@ Ativa/desativa legenda, incluindo ou não no corpo do mapa.
 	function ativalegenda()
 	{
 		$legenda = $this->mapa->legend;
-		if ($legenda->status == MS_EMBED)
-		{$legenda->set("status",MS_OFF);}
-		else
-		{$legenda->set("status",MS_EMBED);}
+		$legenda->status == MS_EMBED ? $legenda->set("status",MS_OFF) : $legenda->set("status",MS_EMBED) ; 
 		return "ok";
 	}
 /*
@@ -305,10 +326,7 @@ Essa função liga ou desliga esse layer, manipulando a propriedade "status".
 		$layer = $this->mapa->getlayerbyname("copyright");
 		if ($layer != "")
 		{
-			if ($layer->status == MS_DEFAULT)
-			{$layer->set("status",MS_OFF);}
-			else
-			{$layer->set("status",MS_DEFAULT);}
+			$layer->status == MS_DEFAULT ? $layer->set("status",MS_OFF) : $layer->set("status",MS_DEFAULT);
 		}
 		return "ok";
 	}
@@ -329,15 +347,13 @@ $tipo - tipo de layer que será considerado. Default é 0.
 	{
 		$final = array(); //resultado final
 		//verifica se o tema é local
+		$layers = array();
 		foreach ($this->layers as $layer)
 		{
 			if (($layer->getMetaData("TEMALOCAL") != "") && ($layer->type == $tipo))
-			{$layers[] = $layer;}
-		}
-		//pega o nome correto do tema
-		foreach ($layers as $layer)
-		{
-			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+			{
+				$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
+			}
 		}
 		return $final;
 	}
@@ -366,12 +382,13 @@ nome
 */
 	function listaTemas($opcao)
 	{
+		$final = array();
 		if ($opcao == "ligados")
 		{
 			foreach ($this->layers as $layer)
 			{
 				if (($layer->isvisible()) && ($layer->status == 2) && ($layer->getmetadata("ESCONDIDO") == ""))
-				{$layers[] = $layer;}
+				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
 			}
 		}
 		else
@@ -379,13 +396,8 @@ nome
 			foreach ($this->layers as $layer)
 			{
 			 	if ($layer->getmetadata("ESCONDIDO") == "")
-				{$layers[] = $layer;}
+				{$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));}
 			}
-		}
-		$final = array();
-		foreach ($layers as $layer)
-		{
-			$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")));
 		}
 		return $final;
 	}
@@ -416,9 +428,8 @@ nome
 	function listaTemasTipo($tipo,$selecao="nao")
 	{
 		if (($selecao=="sim") && (file_exists(($this->arquivo)."qy")))
-		{
-			$this->mapa->loadquery(($this->arquivo)."qy");
-		}
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$layers = array();
 		foreach($this->layers as $layer)
 		{
 			if (($layer->isvisible()) && ($layer->getmetadata("ESCONDIDO") == ""))
@@ -470,20 +481,20 @@ nome
 */
 	function listaTemasComSel()
 	{
-		foreach($this->layers as $layer)
-		{
-			if ($layer->getmetadata("ESCONDIDO") == "")
-			{$layers[] = $layer;}
-		}
+		$layers = array();
 		$final = array();
 		if (file_exists(($this->arquivo)."qy"))
 		{
+			foreach($this->layers as $layer)
+			{
+				if ($layer->getmetadata("ESCONDIDO") == "")
+				{$layers[] = $layer;}
+			}
 			$this->mapa->loadquery(($this->arquivo)."qy");
 			foreach ($layers as $layer)
 			{
 				//verifica se o tema tem selecao
 				$layer->set("template","none.htm");
-				$indxlayer = $layer->index;
 				$res_count = $layer->getNumresults();
 				if ($res_count > 0)
 				{
@@ -555,8 +566,7 @@ $cor - RGB separado por vírgula. Se a cor for vazia, retorna a cor atual.
 */
 	function corQM($cor)
 	{
-		$eb = $this->mapa->querymap;
-		$c = $eb->color;
+		$c = $this->mapa->querymap->color;
 		if ($cor != "")
 		{
 			$cores = explode(",",$cor);
@@ -682,12 +692,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					$novosnomes = $nmap->getAllLayerNames();
 					//define nomes unicos para os temas
 					foreach ($novosnomes as $n)
-					{
-						if($random == "sim")
-						{$nomeunico[$n] = nomeRandomico();}
-						else
-						{$nomeunico[$n] = $n;}
-					}
+					{$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;}
 					//altera os temas para incluir o nome unico
 					foreach ($novosnomes as $n)
 					{
@@ -765,16 +770,22 @@ $temas - lista separada por vírgula dos temas que serão excluídos.
 				$grupo = $layer->group;
 				$layer->set("status",MS_DELETE);
 				$lgs = $this->mapa->getLayersIndexByGroup($grupo);
-				foreach ($lgs as $lg)
+				if($lgs)
 				{
-					$ll = $this->mapa->getlayer($lg);
-					$ll->set("status",MS_DELETE);
+					foreach ($lgs as $lg)
+					{
+						$ll = $this->mapa->getlayer($lg);
+						$ll->set("status",MS_DELETE);
+					}
 				}
 				$lgs = $this->mapa->getLayersIndexByGroup($nome);
-				foreach ($lgs as $lg)
+				if ($lgs)
 				{
-					$ll = $this->mapa->getlayer($lg);
-					$ll->set("status",MS_DELETE);
+					foreach ($lgs as $lg)
+					{
+						$ll = $this->mapa->getlayer($lg);
+						$ll->set("status",MS_DELETE);
+					}
 				}
 			}
 		}
@@ -797,7 +808,7 @@ $desligar - lista separada por vírgula dos temas que serão desligados. Se for ig
 	{
 		if($desligar == "todos")
 		{
-			$desligar = $this->mapa->getalllayernames;
+			$desligar = $this->mapa->getalllayernames();
 			$desligar = implode(",",$desligar);	
 		}
 		if ($ligar != "")

@@ -58,6 +58,8 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file)
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
 	}
@@ -72,7 +74,7 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
-function: gravaImagemCorpo
+function: gravaImagemCorpo (depreciado)
 
 Grava a imagem do mapa atual
 

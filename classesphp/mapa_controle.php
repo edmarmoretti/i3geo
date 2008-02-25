@@ -79,7 +79,7 @@ Include:
 <pega_variaveis.php>, <carrega_ext.php>, <cpaint2.inc.php>, <classe_vermultilayer.php>, <classe_estatistica.php>, <funcoes_gerais.php>
 
 */
-error_reporting(0);
+//error_reporting(E_ALL);
 
 //sleep(5);
 
@@ -151,10 +151,6 @@ if (!isset($map_file))
 require_once("classe_vermultilayer.php");
 require_once("classe_estatistica.php");
 require_once("funcoes_gerais.php");
-//
-//copia o map_file atual com outro nome para restaurar caso ocorra algum problema
-//
-copiaSeguranca($map_file);
 //
 //substitui a string de conexão
 //
@@ -250,6 +246,7 @@ Include:
 */
 	case "listageometrias":
 		include("classe_temas.php");
+		if(!isset($tema)){$tema = "";}
 		$m = new Temas($map_file,$tema);
 		$resultado = $m->listaGeometrias($dir_tmp,$imgdir);
 		$cp->set_data($resultado);
@@ -282,6 +279,7 @@ Include:
 */	
 	case "removergeometrias":
 		include("classe_temas.php");
+		if(!isset($tema)){$tema = "";}
 		$m = new Temas($map_file,$tema);
 		$resultado = $m->removerGeometrias($dir_tmp,$imgdir,$lista);
 		$cp->set_data($resultado);
@@ -324,8 +322,22 @@ Property: reiniciaMapa
 Reinicia um mapa restaurando a cópia de segurança.
 */	
 	case "reiniciaMapa":
+		if(file_exists($map_file."qy"))
+		{unlink($map_file."qy");}
 		unlink($map_file);
 		copy(str_replace(".map","reinc.map",$map_file),$map_file);
+		$cp->set_data("ok");
+	break;
+/*
+Property: recuperamapa
+
+Recupera o mapfile de segurança.
+*/	
+	case "recuperamapa":
+		if(file_exists($map_file."qy"))
+		{unlink($map_file."qy");}
+		unlink($map_file);
+		copiaSeguranca($map_file);
 		$cp->set_data("ok");
 	break;
 /*
@@ -338,6 +350,7 @@ Include:
 */
 	case "ativalogo":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ativalogo());
 		$m->salva();
@@ -353,6 +366,7 @@ Include:
 */
 	case "ativalegenda":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ativalegenda());
 		$m->salva();
@@ -367,6 +381,7 @@ Include:
 <classe_mapa.php>
 */
 	case "mudatamanho":
+		copiaSeguranca($map_file);
 		$map = ms_newMapObj($map_file);
 		$map->setsize($largura,$altura);
 		if (connection_aborted()){exit();}
@@ -386,6 +401,7 @@ Include:
 */
 	case "gradeCoord":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->gradeCoord($intervalo));
 		$m->salva();
@@ -402,6 +418,7 @@ Include:
 	case "convertews":
 		include("classe_mapa.php");
 		$m = new Mapa($map_file);
+		if(!isset($h)){$h = "";}
 		$resultado = $m->converteWS($locmapserv,$h);
 		$cp->set_data($resultado);
 	break;
@@ -415,6 +432,7 @@ Include:
 */
 	case "querymapcor":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corQM($cor));
 		$m->salva();
@@ -443,6 +461,7 @@ Include:
 */
 	case "corfundo":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corfundo($cor));
 		$m->salva();
@@ -496,6 +515,7 @@ Include:
 */
 	case "adicionaTemaGeoRSS":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
 		$cp->set_data($retorno);
@@ -516,6 +536,7 @@ Include:
 */
 	case "adicionaTemaSHP":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaSHP($arq);
 		$cp->set_data($retorno);
@@ -536,6 +557,7 @@ Include:
 */
 	case "adicionaTemaIMG":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaIMG($arq);
 		$cp->set_data($retorno);
@@ -612,7 +634,8 @@ Include:
 <classe_mapa.php>
 */		
 	case "ligatemas":
-  	include("classe_mapa.php");
+  		include("classe_mapa.php");
+  		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ligaDesligaTemas($ligar,$desligar));
 		$m->salva();
@@ -627,6 +650,7 @@ Include:
 */	
 	case "adtema":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$m->adicionaTema($temas,$locaplic);
 		$m->salva();
@@ -647,7 +671,8 @@ Include:
 <classe_mapa.php>
 */
 	case "excluitema":
-	include("classe_mapa.php");
+		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->excluiTemas($temas));
 		$m->salva();
@@ -663,6 +688,7 @@ Include:
 */	
 	case "adicionatemawms":
 		include("classe_mapa.php");
+		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo);
 		$teste = testaMapa($map_file,$postgis_mapa);
@@ -733,6 +759,7 @@ Include:
 */
 	case "alterarepresentacao":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->alteraRepresentacao());
 		$m->salva();
@@ -770,7 +797,9 @@ Include:
 */
 	case "inserefeature":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,"");
+		if(!isset($marca)){$marca="";}
 		$cp->set_data($m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte));
 		$m->salva();
 		redesenhaMapa();	
@@ -785,6 +814,7 @@ Include:
 */
 	case "sobetema":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->sobeTema());
 		$m->salva();
@@ -800,6 +830,7 @@ Include:
 */
 	case "descetema":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->desceTema());
 		$m->salva();
@@ -815,6 +846,7 @@ Include:
 */
 	case "reordenatemas":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file);
 		$cp->set_data($m->reordenatemas($lista));
 		$m->salva();
@@ -830,6 +862,7 @@ Include:
 */
 	case "zoomtema":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->zoomTema());
 		$m->salva();
@@ -845,10 +878,18 @@ Include:
 */
 	case "inserefiltro":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
-		$cp->set_data($m->insereFiltro($filtro,$testa));
-		$m->salva();
-		redesenhaMapa();
+		if(!isset($testa)){$testa="";}
+		{
+			$cp->set_data($m->insereFiltro($filtro,$testa));
+			$cp->return_data();
+		}
+		if($testa != "sim")
+		{
+			$m->salva();
+			redesenhaMapa();
+		}
 	break;
 /*
 Property: pegafiltro
@@ -873,6 +914,7 @@ Include:
 */					
 	case "aplicaProcessos":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->aplicaProcessos($lista);
 		$m->salva();
@@ -888,6 +930,7 @@ Include:
 */					
 	case "mudatransp":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaTransparencia($valor);
 		$m->salva();
@@ -903,6 +946,7 @@ Include:
 */					
 	case "mudanome":
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaNome($valor);
 		$m->salva();
@@ -923,6 +967,7 @@ Include:
 */	
 	case "alteraclasse":
 		include("classe_alteraclasse.php");
+		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		if ($opcao == "adicionaclasse")
 		{$cp->set_data($m->adicionaclasse());}
@@ -956,6 +1001,7 @@ Include:
 */	
 	case "inverteCoresClasses":
 		include("classe_alteraclasse.php");
+		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->inverteCoresClasses());
 		$m->salva();
@@ -970,6 +1016,7 @@ Include:
 */	
 	case "calculaTamanhoClasses":
 		include("classe_alteraclasse.php");
+		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->calculaTamanhoClasses());
 		$m->salva();
@@ -984,6 +1031,7 @@ Include:
 */	
 	case "alteraCoresClasses":
 		include("classe_alteraclasse.php");
+		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->alteraCoresClasses($cori,$corf));
 		$m->salva();
@@ -998,6 +1046,7 @@ Include:
 */
 	case "inverteStatusClasse":
 		include("classe_alteraclasse.php");
+		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->statusClasse($classe));
 		$m->salva();
@@ -1038,6 +1087,7 @@ Include:
 */
 	case "pontoEmPoligono":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->pontoEmPoligono($temaPt,$temasPo,$locaplic));
 		$m->salva();
@@ -1054,6 +1104,7 @@ Include:
 */
 	case "nptPol":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->nptPol($temaPt,$temaPo,$locaplic));
 		$m->salva();
@@ -1070,6 +1121,7 @@ Include:
 */	
 	case "criabuffer":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->criaBuffer($distancia,$locaplic));
 		$m->salva();
@@ -1089,6 +1141,7 @@ Include:
 */	
 	case "distanciaptpt":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$temaorigem);
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
 		$cp->set_data($m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino));
@@ -1106,6 +1159,7 @@ Include:
 */	
 	case "criaCentroide":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->criaCentroide($locaplic));
 		$m->salva();
@@ -1122,6 +1176,7 @@ Include:
 */	
 	case "analiseDistriPt":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl));
 		$m->salva();
@@ -1138,6 +1193,8 @@ Include:
 */	
 	case "gradedepontos":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
+		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty));
 		$m->salva();
@@ -1154,6 +1211,8 @@ Include:
 */	
 	case "gradedepol":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
+		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty));
 		$m->salva();
@@ -1170,7 +1229,9 @@ Include:
 */	
 	case "gradedehex":
 		include("classe_analise.php");
+		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
+		if(!isset($tema)){$tema = "";}
 		$cp->set_data($m->gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty));
 		$m->salva();
 	break;
@@ -1218,6 +1279,7 @@ Include:
 */
 	case "criashpvazio":
 		include("classe_shp.php");
+		copiaSeguranca($map_file);
 		$m = new SHP($map_file);
 		$cp->set_data($m->criaSHPvazio());
 		$m->salva();
@@ -1232,6 +1294,7 @@ Include:
 */
 	case "insereSHP":
 		include("classe_shp.php");
+		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema);
 		if (!isset($projecao)){$projecao = "";}
 		$m->insereSHP($xy,$projecao);
@@ -1249,6 +1312,7 @@ Include:
 */
 	case "insereSHPgrafico":
 		include("classe_shp.php");
+		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema);
 		$cp->set_data($m->insereSHPgrafico($tipo,$x,$y,$itens,$imgurl,$width,$inclinacao,$shadow_height));
 	break;
@@ -1565,7 +1629,8 @@ Include:
 <classe_atributos.php>
 */	
 	case "listavaloresitens":
-	include("classe_atributos.php");
+		include("classe_atributos.php");
+		if(!isset($tema)){$tema = "";}
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->buscaRegistros($palavra,$lista,$tipo,$onde));
 	break;
@@ -1636,7 +1701,12 @@ Include:
 	case "listaregistros":
 		include("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
-		$cp->set_data($m->listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista));
+		if(!isset($tipo)){$tipo = "";}
+		if(!isset($inicio)){$inicio = 0;}
+		if(!isset($fim)){$fim = "";}
+		if(!isset($tipolista)){$tipolista = "";}
+		if(!isset($itemtema)){$itemtema = "";}
+		$cp->set_data($m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista));
 	break;
 /*
 Property: extregistros
@@ -1678,6 +1748,7 @@ Include:
 */
 	case "mudaext":
 		include("classe_navegacao.php");
+		copiaSeguranca($map_file);
 		if (!isset($ext)){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
 		$m = new Navegacao($map_file);
 		$m->mudaExtensao($ext);
@@ -1694,6 +1765,7 @@ Include:
 */
 	case "mudaescala":
 		include("classe_navegacao.php");
+		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->mudaEscala($escala);
 		$m->salva();
@@ -1709,6 +1781,7 @@ Include:
 */
 	case "pan":
 		include("classe_navegacao.php");
+		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->pan($x,$y,$escala,$tipo);
 		$m->salva();
@@ -1724,6 +1797,7 @@ Include:
 */
 	case "aproxima":
 		include("classe_navegacao.php");
+		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->aproxima($nivel);
 		$m->salva();
@@ -1739,6 +1813,7 @@ Include:
 */
 	case "afasta":
 		include("classe_navegacao.php");
+		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->afasta($nivel);
 		$m->salva();
@@ -1770,6 +1845,7 @@ Include:
 <pacotes/geoip/geoipcity.php>
 */
 	case "localizaIP":
+		copiaSeguranca($map_file);
 		$ip = pegaIPcliente();
 		$r = ip2geo($ip);
 		if($r["latitude"] == null)
@@ -1791,6 +1867,7 @@ Include:
 	case "zoomponto":
 		include("classe_navegacao.php");
 		include("classe_temas.php");
+		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->zoomPonto($xy);
 		$m->salva();
@@ -1814,6 +1891,8 @@ Include:
 */
 	case "editasimbolo":
 		include("classe_legenda.php");
+		copiaSeguranca($map_file);
+		if(!isset($tema)){$tema = "";}
 		$m = new Legenda($map_file,$locaplic,$tema);
 		if ($opcao == "excluiestilo")
 		{
@@ -1992,6 +2071,7 @@ Include:
 */
 	case "mudaescalagrafica":
 		include("classe_escala.php");
+		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
 		$cp->set_data($m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor));
 	break;
@@ -2010,6 +2090,7 @@ Include:
 */	
 	case "selecaopt":
 		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoPT($xy,$tipo,$tolerancia));
 	break;
@@ -2023,6 +2104,7 @@ Include:
 */	
 	case "selecaoext":
 		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoEXT($tipo));
 	break;
@@ -2036,6 +2118,7 @@ Include:
 */	
 	case "selecaobox":
 		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoBOX($tipo,$ext));
 	break;
@@ -2050,6 +2133,7 @@ Include:
 */
 	case "selecaoatrib":
 		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoAtributos($tipo,$item,$operador,$valor));
 	break;
@@ -2063,6 +2147,7 @@ Include:
 */
 	case "selecaotema":
 		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoTema($temao,$tipo));
 	break;
@@ -2077,6 +2162,7 @@ Include:
 	case "selecaoPoli":
 		//esta operação é chamada com POST via cpaint
 		//por isso precisa ser executada com start
+		copiaSeguranca($map_file);
 		$cp->register('selecaoPoli');
 		$cp->start();
 		restauraCon($map_file,$postgis_mapa);
@@ -2117,7 +2203,8 @@ Include:
 <classe_selecao.php>
 */
 	case "criatemasel":
-	include("classe_selecao.php");
+		include("classe_selecao.php");
+		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecao2tema($locaplic,$dir_tmp));
 		$m->salva();
@@ -2137,7 +2224,9 @@ Include:
 */	
 	case "criatoponimia":
 		include("classe_toponimia.php");
+		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
+		if(!isset($tipo)){$tipo="";}
 		$cp->set_data($m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo));
 		if ($tipo != "teste")
 		{$m->salva();}
@@ -2152,6 +2241,7 @@ Include:
 */
 	case "ativaEtiquetas":
 		include("classe_toponimia.php");
+		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$cp->set_data($m->ativaEtiquetas($item));
 		$m->salva();
@@ -2166,6 +2256,7 @@ Include:
 */
 	case "removeEtiquetas":
 		include("classe_toponimia.php");
+		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$cp->set_data($m->removeEtiquetas());
 		$m->salva();
@@ -2277,6 +2368,8 @@ Include:
 function redesenhaMapa()
 {
 	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
+	if($tipoimagem != "nenhum")
+	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);

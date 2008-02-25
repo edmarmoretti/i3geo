@@ -335,7 +335,6 @@ function pegaTag($layer)
 	{
 		$tnome = $noslayer->item($i)->tagName;
 		$tvalor = $noslayer->item($i)->nodeValue;
-		//$tvalor = mb_convert_encoding($tvalor,"AUTO","AUTO");
 		if($tnome)
 		{
 			if ($tnome == "Title")

@@ -77,8 +77,11 @@ $tema - Nome do tema que será processado
 */  
 	function __construct($map_file,$tema="")
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
+  		if($tema != "")
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
   		$this->diretorio = dirname($this->arquivo);
@@ -168,16 +171,21 @@ Include:
 
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
-		if ($tipo == "kernel")
-		{$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);}
-		if ($tipo == "densidade")
-		{$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);}
-		if ($tipo == "distancia")
-		{$this->mapaDistancia($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);}
-		if ($tipo == "relatorio")
+		switch ($tipo)
 		{
+			case "kernel":
+			$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+			break;
+			case "densidade":
+			$this->mapaDensidade($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+			break;
+			case "distancia":
+			$this->mapaDistancia($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+			break;
+			case "relatorio":
 			$r = $this->mapaRelatorioAnaliseDist($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
 			return($tmpurl.basename($this->diretorio)."/".basename($nomearq).'.htm');
+			break;
 		}
 		//cria a imagem
 		$minmax = criaImagemR($nomearq);
@@ -1427,24 +1435,16 @@ $operacao - Tipo de análise.
 				$sb = $this->mapa->scalebar;
 				$statusoriginal = $sb->status;
 				$sb->set("status",MS_OFF);
-	
 				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
-	 			
-	 			$imgo = $this->mapa->draw();
-				$nomei = ($imgo->imagepath).nomeRandomico().".png";
-				$imgo->saveImage($nomei);
-				$nomei = ($imgo->imageurl).basename($nomei);
-				$imgo->free();
-
+	 			$imagem = gravaImagemMapa($this->mapa);
 				$this->mapa->setsize($w,$h);
 				$ext->setextent($minx,$miny,$maxx,$maxy);			
-
 				$nlayer->set("status",MS_DELETE);
 				$sb->set("status",$statusoriginal);
 				$this->salva();
 				$final = array();
 				$final["layer"] = $operacao." ".(implode(" ",$lista));
-				$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>$nomei);
+				$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>($imagem["url"]));
 				$this->serializeGeo($nomegeo,$final);
 			}
 		}
@@ -1474,7 +1474,7 @@ $operacao - Tipo de análise.
 		foreach ($lista as $l)
 		{
 			$geos = &$this->unserializeGeo($dir.$l);
-            $v = $this->versao();
+            $v = versao();
 			if (($v["principal"] != 5) && ($postgis_con == ""))
 			{return ("erro. Nao foi definida a conexao com o Postgis.");}
 			if ($v["principal"] != 5)
@@ -1661,25 +1661,6 @@ $geos - array com os dados
 		$r = serialize($geos);
 		fwrite($fp,$r);
 		fclose($fp);
-	}
-/*
-function: versao
-
-Retorna a versão do Mapserver.
-*/
-	function versao()
-	{
-		$v = "5.0.0";
-		$vs = explode(" ",ms_GetVersion());
-		for ($i=0;$i<(count($vs));$i++)
-		{
-			if(strtolower($vs[$i]) == "version")
-			{$v = $vs[$i+1];}
-		}
-		$versao["completa"] = $v;
-		$v = explode(".",$v);
-		$versao["principal"] = $v[0];
-		return $versao;
 	}
 }
 ?>

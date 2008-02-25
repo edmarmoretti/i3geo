@@ -89,11 +89,13 @@ $tema - nome do tema que será processado
 */
 	function __construct($map_file,$tema)
 	{
+  		//error_reporting(E_ALL);
+  		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if (isset($tema))
   		{
-  			$this->layer = $this->mapa->getlayerbyname($tema);
+  			$this->layer = @$this->mapa->getlayerbyname($tema);
   			$this->nome = $tema;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($map_file,$tema);
@@ -130,19 +132,16 @@ $lista - lista de processos separados por |
 */
 	function aplicaProcessos($lista)
 	{
-		$n = $this->layer->num_processing;
-		if ($n > 0)
+		if ($this->layer->num_processing > 0)
 		{$this->layer->clearProcessing();}
 		$lista = str_replace('"',"",$lista);
 		$lista = explode("|",$lista);
 		foreach ($lista as $processo)
-		{
-			$this->layer->setprocessing($processo);
-		}
+		{$this->layer->setprocessing($processo);}
 		return("ok");
 	}
 /*
-function: gravaImagemCorpo
+function: gravaImagemCorpo (depreciado)
 
 Grava a imagem do mapa atual
 
@@ -171,7 +170,8 @@ Gera a imagem desenhando apenas um tema na resolução atual.
 			$l = $this->mapa->getlayerbyname($l);
 			$l->set("status",MS_DEFAULT);
 		}
-		return $this->gravaImagemCorpo();
+		$i = gravaImagemMapa($this->mapa);
+		return $i["url"];
 	}		
 /*
 function: alteraRepresentacao
@@ -407,7 +407,7 @@ $testa - Testa o filtro e retorna uma imagem.
         else
         {
             $this->layer->setfilter($filtro);
-            $v = $this->versao();
+            $v = versao();
 			//corrige bug do mapserver
             if (($v["completa"] == "4.10.0") && ($this->layer->connectiontype == MS_POSTGIS))
             {$this->layer->setfilter("\"".$filtro."\"");}
@@ -422,10 +422,8 @@ $testa - Testa o filtro e retorna uma imagem.
 		}
 		else
 		{
-	 		$imgo = $this->mapa->draw();
-			$n = ($imgo->imagepath)."teste".nomeRandomico().".png";
-			$imgo->saveImage($n);
-			return ($imgo->imageurl).basename($n);
+	 		$i = gravaImagemMapa($this->mapa);
+			return ($i["url"]);
 		}
 	}
 /*
@@ -442,10 +440,7 @@ $valor - Novo valor da transparência
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
-			if($v["principal"] == "4")
-			{$ll->set("transparency",$valor);}
-			else
-			{$ll->set("opacity",$valor);}
+			$v["principal"] == "4" ? $ll->set("transparency",$valor) : $ll->set("opacity",$valor);
 		}
 		return("ok");
 	}
@@ -548,33 +543,31 @@ $fonte - Fonte.
 			$e->set("symbol","ponto");
 			$core = $e->color;
 			$core->setrgb(255,0,0);
-			if ($tipo == "GRAFICOPIZZA")
+			switch ($tipo)
 			{
+				case "GRAFICOPIZZA":
 				if(!isset($tamanho)){$tamanho = 5;}
 				$e->set("size",$tamanho);
 				$pinlayer->setmetadata("tema","Pontos inseridos");
 				$pinlayer->set("type",MS_LAYER_POINT);
-			}
-			if ($tipo == "POINT")
-			{
-				if (!isset($marca)){$marca="marca";}
+				break;
+				case "POINT";
+				if ((!isset($marca)) || ($marca=="")){$marca="marca";}
 				if(!isset($tamanho)){$tamanho = 5;}
 				$e->set("size",$tamanho);
 				$e->set("symbolname",$marca);
 				$pinlayer->setmetadata("tema","Pontos inseridos");
 				$pinlayer->set("type",MS_LAYER_POINT);
-			}
-			if ($tipo == "LINE")
-			{
+				break;
+				case "LINE":
 				if (!isset($marca)){$marca="linha";}
 				if(!isset($tamanho)){$tamanho = 2;}
 				$e->set("size",$tamanho);
 				$e->set("symbolname",$marca);
 				$pinlayer->setmetadata("tema","Linhas inseridas");
 				$pinlayer->set("type",MS_LAYER_LINE);
-			}
-			if ($tipo == "POLYGON")
-			{
+				break;
+				case "POLYGON":
 				if (!isset($marca)){$marca="p9";}
 				if(!isset($tamanho)){$tamanho = 5;}
 				$e->set("size",$tamanho);
@@ -582,9 +575,8 @@ $fonte - Fonte.
 				$pinlayer->setmetadata("tema","Poligonos inseridos");
 				$pinlayer->set("type",MS_LAYER_POLYGON);
 				$pinlayer->set("transparency","50");
-			}
-			if ($tipo == "ANNOTATION")
-			{
+				break;
+				case "ANNOTATION":
 				$c->set("status",MS_DELETE);
 				$novac = ms_newclassobj($pinlayer);
 				$label = $novac->label;
@@ -627,22 +619,28 @@ $fonte - Fonte.
 				$pinlayer->setmetadata("TEMA",$texto);
 				$pinlayer->set("type",MS_LAYER_ANNOTATION);
 				$pinlayer->set("transparency","100");
+				break;
 			}
 		}
 		$apt = explode(" ",$xy);
-		if ($tipo == "ANNOTATION")
+		switch ($tipo)
 		{
+			case "ANNOTATION":
 			$shp = ms_newshapeobj(MS_SHAPE_POINT);
 			$texto = str_replace("*","&",$texto);
 			$texto = str_replace("|",";",$texto);
 			$shp->set("text",$texto);
+			break;
+			case "POINT":
+			$shp = ms_newshapeobj(MS_SHAPE_POINT);
+			break;
+			case "LINE":
+			$shp = ms_newshapeobj(MS_SHAPE_LINE);
+			break;
+			case "POLYGON":
+			$shp = ms_newshapeobj(MS_SHAPE_POLYGON);
+			break;
 		}
-		if ($tipo == "POINT")
-		{$shp = ms_newshapeobj(MS_SHAPE_POINT);}
-		if ($tipo == "LINE")
-		{$shp = ms_newshapeobj(MS_SHAPE_LINE);}
-		if ($tipo == "POLYGON")
-		{$shp = ms_newshapeobj(MS_SHAPE_POLYGON);}
 		$lin = ms_newlineobj();
 		for ($i = 0;$i < count($apt); $i = $i + 2)
 		{$lin->addxy($apt[$i],$apt[$i + 1]);}
@@ -669,7 +667,6 @@ $nome - nome que será dado a geometria
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
 		$sb->set("status",MS_OFF);
-		
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$items = pegaItens($this->layer);
@@ -697,12 +694,8 @@ $nome - nome que será dado a geometria
 				$bounds = $shape->bounds;
 				//gera imagem
 				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
-	 			$imgo = $this->mapa->draw();
-				$nomei = ($imgo->imagepath).nomeRandomico().".png";
-				$imgo->saveImage($nomei);
-				$nomei = ($imgo->imageurl).basename($nomei);
-				$imgo->free();
-				$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem,"imagem"=>$nomei);
+				$im = gravaImagemMapa($this->mapa);
+				$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem,"imagem"=>$im["url"]);
 				$fechou = $this->layer->open();
 			}
 		}
@@ -711,10 +704,7 @@ $nome - nome que será dado a geometria
 		{
 			$final["dados"] = $registros;
 			//salva arquivo
-			if ($nome == "")
-			{$nome = nomerandomico(15);}
-			else
-			{$nome = str_replace(" ","_",$nome);}
+			$nome == "" ? $nome = nomerandomico(15) : $nome = str_replace(" ","_",$nome);
 			$arq = $dir_tmp."/".$imgdir."/".$nome.".geo";
 			if (file_exists($arq))
 			{unlink($arq);}
@@ -722,7 +712,6 @@ $nome - nome que será dado a geometria
 			$r = serialize($final);
 			fwrite($fp,$r);
 			fclose($fp);
-			
 		}
 		return("ok");
 	}
@@ -774,25 +763,6 @@ $lista - lista com os nomes dos arquivos
 			{unlink ($dir_tmp."/".$imgdir."/".$f);}
 		}
 		return("ok");
-	}
-/*
-function: versao
-
-Retorna a versão do Mapserver.
-*/
-	function versao()
-	{
-		$v = "5.0.0";
-		$vs = explode(" ",ms_GetVersion());
-		for ($i=0;$i<(count($vs));$i++)
-		{
-			if(trim(strtolower($vs[$i])) == "version")
-			{$v = $vs[$i+1];}
-		}
-		$versao["completa"] = $v;
-		$v = explode(".",$v);
-		$versao["principal"] = $v[0];
-		return $versao;
 	}
 }
 ?>

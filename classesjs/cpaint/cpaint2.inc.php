@@ -190,7 +190,10 @@
         
         if ($_REQUEST['cpaint_function'] != '') {
           $user_function  = $_REQUEST['cpaint_function'];
+          if(@$_REQUEST['cpaint_argument'])
           $arguments      = $_REQUEST['cpaint_argument'];
+          else
+          $arguments = array();
         }
   
         // perform character conversion on every argument
