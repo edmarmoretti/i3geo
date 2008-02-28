@@ -1081,6 +1081,8 @@ function mostraFG(retorno)
 function gerarelatorio()
 {
 	$i("arearel").value = $i("calculaarea").checked
+	$i("statrel").value = $i("calculaestat").checked
+	$i("excluirvalor").value = $i("excestat").value
 	$i("temarel").value=tema
 	$i("g_sid").value=g_sid
 	$i("itemagruparel").value=$i("agrupaItem").value

@@ -11,7 +11,7 @@
 		<div id=guia2 >Marcados</div>
 		<div id=guia3 >Opera&ccedil;&otilde;es</div>
 		<div id=guia4 >Gr&aacute;ficos</div>
-		<!---<div id=guia5 >Relat&oacute;rios</div>--->
+		<div id=guia5 >Relat&oacute;rios</div>
 	</div>
 	<span id=geral style="left:0px;top:0px;">
 		<div id=resultadotab style="position:relative;top:5px;left:0px"></div>
@@ -88,19 +88,29 @@
 			<div id=agrupamento style="text-align:left;top:15px;left:5px;">
 			</div>
 			<div style="position:relative;top:25px;left:0px">
-				<input style="cursor:pointer" type=checkbox id=calculaarea CHECKED />
+				<input style="cursor:pointer" type=checkbox id=calculaarea />
 				Incluir c&aacute;lculo de &aacute;rea
+			</div>
+			<div style="position:relative;top:25px;left:0px">
+				<input style="cursor:pointer" type=checkbox id=calculaestat />
+				Incluir c&aacute;lculo de estat&iacute;sticas
+			</div>
+			<div style="position:relative;top:25px;left:0px">
+				Excluir das estat&iacute;sticas o valor
+				<input style="cursor:pointer" type=text id=excestat />
 			</div>
 			<div onclick="gerarelatorio()" style="position:relative;top:35px;left:0px;cursor:pointer">
 				<input id=botao7 size=30  type=button value="Criar"/>
 			</div>
 			<form method=post style="display:none" id=relatorio action="relatorio.php" target="_blank" >
-				<input type=hidden id=arearel name=arearel value=sim />
+				<input type=hidden id=arearel name=arearel value=nao />
+				<input type=hidden id=statrel name=statrel value=nao />
 				<input type=hidden id=temarel name=temarel value="" />
 				<input type=hidden id=g_sid name=g_sid value="" />
-				<input type=hidden id=itemagruparel name=temaagruparel value="" />
+				<input type=hidden id=itemagruparel name=itemagruparel value="" />
 				<input type=hidden id=itensrel name=itensrel value="" />
 				<input type=hidden id=nomesrel name=nomesrel value="" />
+				<input type=hidden id=excluirvalor name=excluirvalor value="" />
 			</form>
 		</div>
 	</span>
