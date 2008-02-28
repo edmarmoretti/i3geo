@@ -193,7 +193,8 @@ function iniciaMapa()
 	$res .= ";objmapa.utilizacgi='".$utilizacgi."'";
 	$res .= ";objmapa.postgis_con='".$postgis_con."'";
 	$res .= ";var titulo='".$tituloInstituicao."'";
-	
+	$versao = versao();
+	$res .= ";objmapa.versaoms ='".$versao["principal"]."'";
 	//Pega os estilos disponíveis
 	$visual = "";
 	if (file_exists($locaplic."/imagens/visual"))
