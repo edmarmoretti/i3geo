@@ -129,9 +129,14 @@ function iniciaMapa()
 			}
 		}
 	}
-	if($utilizacgi == "sim")
-	{$m->ligaDesligaTemas("","todos");}		
+	//if($utilizacgi == "sim")
+	//{$m->ligaDesligaTemas("","todos");}
+	//
+	//cuidado ao mexer aqui
+	//o mapa precisa ser salvo para registrar a extensão geográfica
+	//	
 	$imgo = $m->mapa->draw();
+	$m->salva($map_file);
 	$e = $m->mapa->extent;
 	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 	//
@@ -212,6 +217,7 @@ function iniciaMapa()
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
 	if (function_exists("mb_convert_encoding"))
 	{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
+	
 	//
 	//salva uma copia para opção de reiniciar o mapa
 	//
