@@ -2955,7 +2955,7 @@ function processevent1(exy1)
 /*
 Function: calcposf
 
-Calcula a posição correta do corpo do mapa e posiciona-o.
+Calcula a posição correta do corpo do mapa e posiciona-o corretamente na tela.
 
 Atualiza as variáveis imagemxi,imagemyi,imagemxref e imagemyref
 */
@@ -4177,6 +4177,22 @@ function removeAcentos(palavra)
 	var re = /ú/gi;
 	palavra = palavra.replace(re,"u");
 	return(palavra);
+}
+/*
+Function: pegaPosicaoObjeto
+
+Retorna a posição x,y de um objeto em relação a tela do navegador
+*/
+function pegaPosicaoObjeto(obj)
+{
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+	}
+	return [curleft,curtop];
 }
 /*
 Function: recuperamapa

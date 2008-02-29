@@ -72,6 +72,8 @@ for (var i = 0; i < scripts.length; i++) {
 		}
 	}
 }
+g_locaplic = scriptLocation+"..";
+g_localimg = scriptLocation+"../imagens";
 //scripts
 var allScriptTags = "";
 var jsfiles = new Array("i3geo_tudo_compacto.js.php")
