@@ -27,7 +27,7 @@
 		</div>
 		<div class=guiaobj id="guia2obj" style="display:none;left:0px" >
 			<div id=opc2 style="display:block;top:0px;left:0px">
-				<table class=lista2 width="70%">
+				<table class=lista2 width="90%">
 				<tr>  
 					<td>Tipo:</td>
 					<td>
@@ -42,8 +42,16 @@
 					<td><input  style="cursor:text" size=4 class=digitar type='text' id=largura value='50' /></td>
 				</tr>
 				<tr>
-					<td>Altura (em pixels):</td>
+					<td>Altura (em pixels) - relevante apenas para o tipo 'Barras':</td>
 					<td><input  style="cursor:text" size=4 class=digitar type='text' id=altura value='50' /></td>
+				</tr>
+				<tr>
+					<td>Deslocamento das fatias (em pixels) - relevante apenas para o tipo 'Pizza':</td>
+					<td><input  style="cursor:text" size=4 class=digitar type='text' id=offset value='0' /></td>
+				</tr>
+				<tr>
+					<td>Cor do contorno:</td>
+					<td style=width:40% ><input  style="cursor:text" size=12 class=digitar type='text' id='outlinecolor' value='0,0,0' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="cor('outlinecolor')" /></td>
 				</tr>
 				</table>			
 			</div>
@@ -57,8 +65,6 @@
 			Escolha os itens que ser&atilde;o utilizados no gr&aacute;fico clicando no box que aparece na lista de itens. Cada item ir&aacute; compor uma fatia do gr&aacute;fico.
 			Ao lado do item, &eacute; mostrada a cor que ser&aacute; utilizada na representa&ccedil;&atilde;o. Cada cor &eacute; definida em RGB.
 			<p>Na guia "propriedades" &eacute; poss&iacute;vel definir propriedades de representa&ccedil;&atilde;o de cada gr&aacute;fico. As defini&ccedil;&otilde;es afetar&atilde;o a forma de cada gr&aacute;fico.
-			Ap&oacute;s escolhidos os itens e as propriedades, clique no mapa para adicionar o gr&aacute;fico.
-			<p>Os dados que ser&atilde;o utilizados s&atilde;o buscados no elemento clicado.
 			<p>Cada gr&aacute;fico adicionado &etilde; inclu&iacute;do no mapa como um novo tema.<br><br><br>
 			</div>
 		</div>

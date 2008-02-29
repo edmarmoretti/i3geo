@@ -436,7 +436,7 @@ $valor - Novo valor da transparência
 */
 	function mudaTransparencia($valor)
 	{
-        $v = $this->versao();
+        $v = versao();
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
@@ -763,6 +763,55 @@ $lista - lista com os nomes dos arquivos
 			{unlink ($dir_tmp."/".$imgdir."/".$f);}
 		}
 		return("ok");
+	}
+/*
+function: graficotema
+
+Gera um tema com gráficos em cada elemento.
+
+parameters:
+
+lista - lista de item e cores de cada parte do grafico
+
+*/
+	function graficotema($lista,$tamanho="50",$tipo="PIE",$outlinecolor="",$offset=0)
+	{
+		$nome = pegaNome($this->layer);
+		$novolayer = ms_newLayerObj($this->mapa, $this->layer);
+		$nomer = nomeRandomico();
+		$novolayer->set("name",$nomer);
+		$novolayer->set("group",$nomer);
+		$novolayer->set("type",MS_LAYER_CHART);
+		$novolayer->setprocessing("CHART_TYPE=$tipo");
+		$novolayer->setprocessing("CHART_SIZE=$tamanho");
+		$nclasses = $novolayer->numclasses;
+		for ($i=0; $i < $nclasses; $i++)
+		{
+			$c = $novolayer->getclass($i);
+			$c->set("status",MS_DELETE);
+		}
+		$novolayer->set("status",MS_DEFAULT);
+		$novolayer->setmetadata("tema","grafico de ".$nome);
+		$lista = explode("*",$lista);
+		foreach($lista as $l)
+		{
+			$ll = explode(",",$l);
+			$novac = ms_newClassObj($novolayer);
+			$novac->set("name",$ll[0]);
+			$novoestilo = ms_newStyleObj($novac);
+			$novoestilo->setBinding(MS_STYLE_BINDING_SIZE, $ll[0]);
+			$cor = $novoestilo->color;
+			$cor->setrgb($ll[1],$ll[2],$ll[3]);
+			if($outlinecolor != "")
+			{
+				$o = explode(",",$outlinecolor);
+				$corl = $novoestilo->outlinecolor;
+				$corl->setrgb($o[0],$o[1],$o[2]);
+			}
+			if($tipo == "PIE")
+			$novoestilo->set("offsetx",$offset);
+		}
+		
 	}
 }
 ?>

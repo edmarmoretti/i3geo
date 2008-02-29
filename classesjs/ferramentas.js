@@ -836,6 +836,18 @@ function mudanomef(idtema)
 	{alert("Nome não definido");}
 }
 /*
+Function: graficotema
+
+Adiciona gráficos automaticamente nos elementos de um tema
+
+Parameters:
+
+idtema - id que identifica o tema conforme definido no map file
+*/
+function graficotema(idtema)
+{wdocaf("350px","340px",g_locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico");}
+
+/*
 Function: toponimiaf
 
 Opções de toponímia de um tema.

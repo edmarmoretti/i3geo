@@ -51,6 +51,7 @@ Group: Programas especiais  {
       File: Adiciona um tema ao mapa  (mobile\adicionatema.php)
       File: Desliga um tema que está visível no mapa  (mobile\desligar.php)
       File: i3geo mobile  (mobile\index.php)
+      File: Identifica elementos no mapa em determinada coordenada x e y  (mobile\identifica.php)
       File: Interface do mapa  (mobile\mobile.php)
       File: Liga um tema que não está visível no mapa  (mobile\ligar.php)
       File: Localiza um lugar no mapa.  (mobile\localizar.php)

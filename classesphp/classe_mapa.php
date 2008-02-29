@@ -213,8 +213,9 @@ Include:
 			//foreach($this->layers as $l)
 			//{$l->set("status",MS_OFF);}
 			//$imgo = @$this->mapa->draw();
-			$this->mapa->preparequery();
-			$imgo = @$this->mapa->prepareImage();		
+			
+			$imgo = @$this->mapa->prepareImage();
+			$this->mapa->preparequery();	
 		}
 		else
 		{

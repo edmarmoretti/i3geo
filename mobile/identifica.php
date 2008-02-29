@@ -108,7 +108,7 @@ function mostraf(retorno)
 			var contat = 0
 			if (!titulo[1])
 			{
-				break
+				continue
 			}
 			var ocs = titulo[1].split("*")
 			res += "<div style='color:black;font-size:14px;left:2px;text-align:left;background-color:white;width:80%' >"+titulo[0]+"</div>"
@@ -146,7 +146,7 @@ function mostraf(retorno)
 							{res = res + "<div style='font-size:14px;border-top:0px solid brown;width:90%;text-align:left;background-color:"+cor+"' ><b>&nbsp;&nbsp;" + valores[0] + " </b>" + valores[1] + "</div>"}
 							else //corrige o caminho do ícone
 							{
-								var i = valores[0].replace("..","../..")
+								var i = valores[0] //.replace("..","../..")
 								res = res + "<div style='width:80%;text-align:left;background-color:"+cor+"' >" + i + " <i>" + valores[1] + "</i></div>"
 							}
 						}
@@ -164,7 +164,6 @@ function mostraf(retorno)
 	}
 	else
 	{
-		aguarde("none")
 		document.getElementById("ocorrencia").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
 	}
 }

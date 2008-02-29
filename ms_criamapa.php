@@ -95,7 +95,8 @@ Note: Verifica a variável $caminho
 
 Essa variável deve ser definida em programas que utilizam o ms_criamapa.php via include.
 Indica onde está o diretório i3geo para que os includes seguintes possam ser localizados.
-$caminho é sempre colocada antes do nome dos arquivos que serão incçuídos, p.e., require_once ($caminho."classesphp/carrega_ext.php");
+$caminho é sempre colocada antes do nome dos arquivos que serão incçuídos, p.e., 
+require_once ($caminho."classesphp/carrega_ext.php");
 */
 if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
@@ -105,7 +106,8 @@ if (isset($_GET["caminho"]))
 /*
 Note: Carrega as extensões PHP
 
-Carrega as extensões utilizadas no programa de inicialização. A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
+Carrega as extensões utilizadas no programa de inicialização. 
+A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
 */
 require_once ($caminho."classesphp/carrega_ext.php");
 /*

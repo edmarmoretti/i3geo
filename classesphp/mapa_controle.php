@@ -79,7 +79,7 @@ Include:
 <pega_variaveis.php>, <carrega_ext.php>, <cpaint2.inc.php>, <classe_vermultilayer.php>, <classe_estatistica.php>, <funcoes_gerais.php>
 
 */
-//error_reporting(E_ALL);
+//error_reporting(0);
 
 //sleep(5);
 
@@ -94,7 +94,7 @@ include_once("pega_variaveis.php");
 if ($funcao != "criaMapa")
 {
 	session_name("i3GeoPHP");
-	if (isset($g_sid))
+	if (isset($g_sid) && $g_sid != "")
 	{session_id($g_sid);}
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
@@ -1331,6 +1331,22 @@ Section: Gráficos
 
 Criação de representações gráficas de dados estatísticos.
 */
+/*
+Property: graficotema
+
+Gera graficos automaticamente para os elementos de um tema
+
+Include:
+<classe_temas.php>
+*/					
+	case "graficotema":
+		include("classe_temas.php");
+		copiaSeguranca($map_file);
+		$m = new Temas($map_file,$tema);
+		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
+		$m->salva();
+		redesenhaMapa();
+	break;
 /*
 Property: fusaografico
 

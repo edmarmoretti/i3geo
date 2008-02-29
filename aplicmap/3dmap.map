@@ -1,7 +1,7 @@
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
-    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/3dmap.map"
+    CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/3dmap.map&"
     CONNECTIONTYPE WMS
       METADATA
         "wms_srs"	"EPSG:4291"

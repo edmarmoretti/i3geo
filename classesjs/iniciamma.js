@@ -485,7 +485,13 @@ function Mapa(e,m)
 	
 	Indica se o mapserver está operando no modo cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
 	*/
-	this.utilizacgi = "";	
+	this.utilizacgi = "";
+	/*
+	Variable: objmapa.versaoms
+	
+	Versão do mapserver em uso
+	*/
+	this.versaoms = "";	
 	/*
 	Function: inicializa
 	

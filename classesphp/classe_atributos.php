@@ -593,8 +593,8 @@ $resolucao - Resolucao de busca.
 				$l = $this->mapa->getlayerbyname($tema);
 				if($l->status == MS_DEFAULT)
 				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
-			
 			}
+			//var_dump($resultados);
 		}
 		//pesquisa apenas os temas com tip
 		if ($opcao == "tip")

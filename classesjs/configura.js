@@ -531,6 +531,12 @@ pt:"tema vis&iacute;vel apenas em determinadas escalas",
 en:"the layer is visible in specific scales",
 es:"capa visible en ciertas escalas"
 }],
+"t37":[
+{
+pt:"gr&aacute;fico",
+en:"graphic",
+es:"gr&aacute;fico"
+}],
 //guia adiciona
 "a1":[
 {

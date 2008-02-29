@@ -116,7 +116,8 @@ function criar()
 	{alert("selecione um tema");aguarde("none");return;}
 	if (lista == "")
 	{alert("selecione um item");aguarde("none");return;}
-	
+	var outlinecolor = $i("outlinecolor").value
+	var offset = $i("offset").value
 	var tipo = $i("tipo").value
 	if (tipo == "PIE")
 	var tamanho = $i("largura").value
@@ -127,7 +128,7 @@ function criar()
 		aguarde("none")
 		window.parent.ajaxredesenha(retorno)
 	}	
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficotema&tema="+tema+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficotema&tema="+tema+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
