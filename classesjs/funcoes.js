@@ -2301,9 +2301,11 @@ function expandeTema(itemID)
 							mytreeview1.createItem("temap5"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
 							tnome = "<span onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img class='tic' src="+$im("branco.gif") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t31")+" </span>";
 							mytreeview1.createItem("temap6"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							tnome = "<span onclick='graficotema(\""+ltema[0]+"\")'>"+im+"<img class='tic' src="+$im("branco.gif") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t37")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t37")+" </span>";
-							mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-
+							if(objmapa.versaoms > 4)
+							{
+								tnome = "<span onclick='graficotema(\""+ltema[0]+"\")'>"+im+"<img class='tic' src="+$im("branco.gif") + " onmouseover=\"javascript:mostradicasf(this,'"+$trad("t37")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />&nbsp;"+$trad("t37")+" </span>";
+								mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
+							}
 						}
 						if (ltema[4] < 4)
 						{

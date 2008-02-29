@@ -220,7 +220,7 @@ else
 }
 function calculaarea($geo)
 {
-	global $postgis_con;
+	global $postgis_con,$srid_area;
 	$v = versao();
 	if (($v["principal"] != 5) && ($postgis_con == ""))
 	{return ("erro. Nao foi definida a conexao com o Postgis.");}
@@ -229,10 +229,11 @@ function calculaarea($geo)
 		$pgconn = pg_connect($postgis_con);
 		$g = $geo->towkt();
 		$sql = "select area(transform( GeomFromText('$g',4291),$srid_area))::float as aream";
+		//echo $sql."<br>";
 		$result=pg_query($pgconn, $sql);
 		pg_close($pgconn);	
 		$calculo = pg_fetch_all($result);
-		return $calculo[0]["aream"];
+		return $calculo[0]["aream"] / 10000;
 	}
 	else
 	{
