@@ -21,7 +21,9 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/carrega_ext.php");
 error_reporting(0);
+set_time_limit(120);
 if (isset($g_sid))
 {session_id($g_sid);}
 session_name("i3GeoPHP");
@@ -35,7 +37,7 @@ require_once("../../classesphp/funcoes_gerais.php");
 //
 //carrega o phpmapscript
 //
-if (!function_exists(ms_GetVersion))
+if (!function_exists('ms_GetVersion'))
 {
 	$exts = get_loaded_extensions();
 	if (array_search( "MapScript", $exts) != TRUE)
@@ -64,10 +66,12 @@ if ($temaz=="")
 	if ($maptemp == ""){echo "Arquivo com o relevo não foi encontrado";return;}
 }
 $mapa = ms_newMapObj($map_file);
-if ($mapa->width > 400)
+if ($mapa->width > 500)
 {
-	$mapa->setsize(400,400);
+	$mapa->setsize(500,500);
 }
+$of = $mapa->outputformat;
+$of->set("imagemode",MS_IMAGEMODE_RGB);
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath).nomeRandomico().".png";
 $nomefinal = ($imgo->imagepath).nomeRandomico().".wrl";
@@ -106,9 +110,12 @@ $imgo->saveImage($nome);
 $arquivoalt = $nome;
 
 $imgcor = imagecreatefrompng($arquivocor);
+$imgcor = flipImage($imgcor, true, false);
+imagepng($imgcor,$arquivocor);
+
 $imgalt = imagecreatefrompng($arquivoalt);
-$sx = imagesx($imgcor);
-$sy = imagesy($imgcor);
+$sx = imagesx($imgalt);
+$sy = imagesy($imgalt);
 $fp = fopen($nomefinal,"w");
 		
 
@@ -116,7 +123,12 @@ $texto = "#VRML V2.0 utf8
 Group {
 children [DirectionalLight { direction 0 -1 0 }
 Shape {
-appearance Appearance { material Material { diffuseColor .2 .2 .2}}
+appearance Appearance {
+	material Material { diffuseColor .2 .2 .2 }";
+$texto .= "texture ImageTexture { url ".'"'.basename($arquivocor).'"';
+$texto .= "}
+}
+
   geometry ElevationGrid {
 	xDimension $sx
 	xSpacing 1
@@ -135,26 +147,12 @@ for ($y = 0; $y < $sy; $y++)
 		$alt = imagecolorat($imgalt, $x, $y);
 		$z = ($alt >> 16) & 0xFF;
 		fwrite($fp,($z/$fz)." ");
+		//fwrite($fp,($alt)." ");
 	}
 }
 
-$texto = "]
-color Color { color [\n";
-fwrite($fp,$texto);
 
-for ($y = 0; $y < $sy; $y++)
-{
-	for ($x = 0; $x < $sx; $x++)
-	{
-		$cor = imagecolorat($imgcor, $x, $y);
-		$r = ($cor >> 16) & 0xFF;
-		$g = ($cor >> 8) & 0xFF;
-		$b = $cor & 0xFF;
-		fwrite($fp,($r/500)." ".($g/500)." ".($b/500)." ");		
-	}
-}
-
-$texto = '] }
+$texto = ']
 }
 }
 ]
@@ -170,4 +168,34 @@ echo "<br><a id=abre href='' >Clique aqui</a>";
 echo "<br><br>x:$x y:$y";
 
 echo "<script>document.getElementById('abre').href=".$h."</script>";
+
+
+  function flipImage($image, $vertical, $horizontal) {
+    $w = imagesx($image);
+    $h = imagesy($image);
+
+    if (!$vertical && !$horizontal) return $image;
+
+    $flipped = imagecreatetruecolor($w, $h);
+
+    if ($vertical) {
+      for ($y=0; $y<$h; $y++) {
+        imagecopy($flipped, $image, 0, $y, 0, $h - $y - 1, $w, 1);
+      }
+    }
+
+    if ($horizontal) {
+      if ($vertical) {
+        $image = $flipped;
+        $flipped = imagecreatetruecolor($w, $h);
+      }
+
+      for ($x=0; $x<$w; $x++) {
+        imagecopy($flipped, $image, $x, 0, $w - $x - 1, 0, 1, $h);
+      }
+    }
+
+    return $flipped;
+  }
+
 ?>
