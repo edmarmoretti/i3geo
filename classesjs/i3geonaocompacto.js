@@ -43,8 +43,6 @@ for (var i = 0; i < scripts.length; i++) {
 		}
 	}
 }
-g_locaplic = scriptLocation+"..";
-g_localimg = scriptLocation+"../imagens";
 var allScriptTags = "";
 var jsfiles = new Array(
 "../pacotes/yui231/build/yahoo/yahoo-min.js",
