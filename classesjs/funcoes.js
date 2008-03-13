@@ -4417,6 +4417,17 @@ function recuperamapa()
 	cp.set_response_type("JSON");
 	cp.call(p,"recuperamapa",remapaf);
 }
+/*
+Function: protocolo
+
+Retorna o protocolo utilizado na url.
+*/
+function protocolo()
+{
+	var u = window.location.href;
+	var u = u.split(":");
+	return (u[0]);
+}
 //Mantido aqui apenas para fins de compatibilidade
 function borra()
 {}

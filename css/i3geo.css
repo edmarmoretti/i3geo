@@ -673,7 +673,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:9px;
 	height:10px;
 	cursor:pointer;
-	margin:0px;
+	margin-right:3px;
 }
 /*marcador de lista das opções do tema*/
 .ticOpcoesTemas
@@ -684,7 +684,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:9px;
 	height:10px;
 	cursor:pointer;
-	margin:0px;
+	margin-right:3px;
 }
 
 #encolheFerramentas

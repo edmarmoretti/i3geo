@@ -852,3 +852,14 @@ function mostraGuia(guia)
 	if ($i(guia+"obj"))
 	{$i(guia+"obj").style.display="block";}
 }
+/*
+Function: protocolo
+
+Retorna o protocolo utilizado na url.
+*/
+function protocolo()
+{
+	var u = window.location.href;
+	var u = u.split(":");
+	return (u[0]);
+}

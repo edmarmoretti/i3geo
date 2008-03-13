@@ -7,7 +7,7 @@
 
 <!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
 arquivos não compactados, bastando substituir por i3geonaocompacto -->
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 
 <!--
 <style>
@@ -191,7 +191,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 	
 */
-g_locaplic = "http://"+window.location.host+"/i3geo";
+g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -200,7 +200,7 @@ g_locaplic = "http://"+window.location.host+"/i3geo";
 	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
 	
 */
-g_localimg = "http://"+window.location.host+"/i3geo/imagens";
+g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
 /*
 	Variable: g_funcaoTip
 	
@@ -212,7 +212,6 @@ g_localimg = "http://"+window.location.host+"/i3geo/imagens";
 	
 	g_funcaoTip = "verificaTipDefault()";
 */
-
 /*
 	Variable: g_tempotip (opcional)
 	

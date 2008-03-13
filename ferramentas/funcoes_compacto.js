@@ -106,3 +106,4 @@ function ativaGuias(){ for(g=0;g<12;g++){ if($i("guia"+g)) var gpai=$i("guia"+g)
  ins+="</ul>"; gpai.innerHTML=ins;}
 function mostraGuia(guia){ for(g=0;g<12;g++){ if($i("guia"+g+"obj")) $i("guia"+g+"obj").style.display="none";}
  if($i(guia+"obj")){$i(guia+"obj").style.display="block";}}
+function protocolo(){ var u=window.location.href; var u=u.split(":"); return(u[0]);}

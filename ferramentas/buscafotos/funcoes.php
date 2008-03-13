@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesjs/cpaint/cpaint2.inc.php");
+require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../ms_configura.php");
 require_once("../../pacotes/phpflickr/phpFlickr.php");
 $cp = new cpaint();
