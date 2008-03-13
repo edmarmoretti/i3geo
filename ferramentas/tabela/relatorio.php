@@ -246,7 +246,7 @@ function calculaarea($geo)
 		$s = $shape->towkt();
 		$shape = ms_shapeObjFromWkt($s);
 		$area = $shape->getArea();
-		return $area;
+		return $area / 10000;
 	}
 }
 /*
