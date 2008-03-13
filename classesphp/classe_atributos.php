@@ -116,13 +116,17 @@ xmin ymin xmax ymax separados por espaço.
 			$ret->project($projInObj, $projOutObj);
 		}		
 		$ext = $ret->minx." ".$ret->miny." ".$ret->maxx." ".$ret->maxy;
-		if ($shape->type == MS_SHP_POINT)
+		if (($shape->type == MS_SHP_POINT) || ($shape->type == 0))
 		{
 			$minx = $ret->minx;
-			$minx = $minx - 0.01;
+			$minx = $minx - 0.03;
 			$maxx = $ret->maxx;
-			$maxx = $maxx + 0.01;
-			$ext = $minx." ".$ret->miny." ".$maxx." ".$ret->maxy;
+			$maxx = $maxx + 0.03;
+			$miny = $ret->miny;
+			$miny = $miny - 0.03;
+			$maxy = $ret->maxy;
+			$maxy = $maxy + 0.03;
+			$ext = $minx." ".$miny." ".$maxx." ".$maxy;
 		}
 		return $ext;
 	}
