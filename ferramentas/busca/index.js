@@ -50,7 +50,7 @@ function procurar()
 	else
 	{
 		if ($i("palavra").value == "")
-		{alert("digite uma palavra")}
+		{alert("digite uma palavra");aguarde("none")}
 		else
 		{
 			$i("resultado").innerHTML = "";
