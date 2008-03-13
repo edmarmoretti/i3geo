@@ -244,6 +244,14 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Pode ser utilizado o caminho relativo, tendo como base i3geo/diretorio
 	*/
 	$atlasxml = "../menutemas/atlas.xml";
+	/*
+	 Variable: $expoeMapfile
+	 
+	 Essa variável controla se o nome do mapfile atual será ou não retornado para a aplicação via ajax.
+	 
+	 Quando essa variável for definida como "nao" algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais.
+	*/
+	$expoeMapfile = "nao";
 }
 else //se for linux
 {
@@ -268,5 +276,6 @@ else //se for linux
 	$menutemas = "";
 	$utilizacgi = "sim";
 	$atlasxml = "../menutemas/atlas.xml";
+	$expoeMapfile = "sim";
 }
 ?>

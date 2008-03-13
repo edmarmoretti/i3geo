@@ -82,10 +82,11 @@ objmapa.mapfile='<objeto mapfile>';objmapa.cgi='<objeto cgi>';;objmapa.postgis_c
 
 Essa string é recuperada no lado do javascript com eval().
 
+Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 */
 function iniciaMapa()
 {
-	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi;
+	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile;
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -188,7 +189,10 @@ function iniciaMapa()
 	$r = (isset($R_path)) ? "sim" : "nao";
 	$res .= ";g_r='".$r."'"; //identifica se o r esta instalado
 	$res .= ";g_locmapas='".$locmapas."'"; //identifica se o r esta instalado
-	$res .= ";objmapa.mapfile='".$map_file."'";
+	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
+	{$res .= ";objmapa.mapfile=''";}
+	else
+	{$res .= ";objmapa.mapfile='".$map_file."'";}
 	$res .= ";objmapa.cgi='".$locmapserv."'";
 	$res .= ";objmapa.utilizacgi='".$utilizacgi."'";
 	$res .= ";objmapa.postgis_con='".$postgis_con."'";

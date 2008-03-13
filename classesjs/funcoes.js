@@ -1868,8 +1868,8 @@ Com o entorno ativo, são produzidas imagens no entorno do mapa, no estilo Google
 */
 function ativaEntorno()
 {
-	//if (navn)
-	//{alert("opção em desenvolvimento");return;}
+	if(objmapa.mapfile == "")
+	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 	if (g_entorno == "sim")
 	{
 		var letras=["L","O","N","S"];

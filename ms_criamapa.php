@@ -141,6 +141,7 @@ $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
 $tituloInstituicao_ = $tituloInstituicao;
 $atlasxml_ = $atlasxml;
+$expoeMapfile_ = $expoeMapfile;
 //
 //se houver string de conexão para substituição
 //o modo cgi não irá funcionar
@@ -197,6 +198,7 @@ $_SESSION["navegadoresLocais"] = $navegadoresLocais_;
 $_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["atlasxml"] = $atlasxml;
+$_SESSION["expoeMapfile"] = $expoeMapfile;
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //

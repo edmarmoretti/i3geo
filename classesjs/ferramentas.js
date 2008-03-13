@@ -188,6 +188,8 @@ function abreKml(tema)
 {
 	if(tema == "mapfile")
 	{
+		if(objmapa.mapfile == "")
+		{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 		wdocaf("450px","250px",g_locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml");
 	}
 	else
@@ -607,7 +609,11 @@ Function: salvaMapa
 Salva o map file localmente
 */
 function salvaMapa()
-{wdocaf("300px","180px",g_locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");}
+{
+	if(objmapa.mapfile == "")
+	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+	wdocaf("300px","180px",g_locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");
+}
 /*
 Function: carregaMapa
 
@@ -621,7 +627,11 @@ Function: convertews
 Converte mapa em web service
 */
 function convertews()
-{wdocaf("440px","280px",g_locaplic+"/ferramentas/convertews/index.htm","","","Web service");}
+{
+	if(objmapa.mapfile == "")
+	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+	wdocaf("440px","280px",g_locaplic+"/ferramentas/convertews/index.htm","","","Web service");
+}
 /*
 Function: queryMap
 
