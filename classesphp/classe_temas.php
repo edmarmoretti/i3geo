@@ -695,7 +695,11 @@ $nome - nome que será dado a geometria
 				$fechou = $this->layer->close();
 				$bounds = $shape->bounds;
 				//gera imagem
-				$ext->setextent(($bounds->minx),($bounds->miny),($bounds->maxx),($bounds->maxy));
+				$d = 0.01;
+				//se for do tipo ponto, faz um deslocamento do extent
+				if ($shape->type == 2)
+				{$d = 0;}
+				$ext->setextent(($bounds->minx) - $d,($bounds->miny) - $d,($bounds->maxx) + $d,($bounds->maxy) + $d);
 				$im = gravaImagemMapa($this->mapa);
 				$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem,"imagem"=>$im["url"]);
 				$abriu = $this->layer->open();

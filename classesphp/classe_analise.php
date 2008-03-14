@@ -1445,8 +1445,6 @@ $operacao - Tipo de análise.
 	{
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
-		//if ($postgis_con == "")
-		//{return ("erro. Nao foi definida a conexao com o Postgis.");}
 		$geometrias = array();
 		$valoresoriginais = array();
 		$calculo = array();
@@ -1456,7 +1454,6 @@ $operacao - Tipo de análise.
 			//pega todas as geometrias
 			foreach ($geos["dados"] as $geo)
 			{
-				//$geometrias[] = "GeomFromText('".$geo["wkt"]."')";
 				$geometrias[] = ms_shapeObjFromWkt($geo["wkt"]);
 				$valoresoriginais = array_merge($valoresoriginais,$geo["valores"]);
 			}
@@ -1538,11 +1535,13 @@ $operacao - Tipo de análise.
 	{
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
-		//if ($postgis_con == "")
-		//{return ("erro. Nao foi definida a conexao com o Postgis.");}
 		foreach ($lista as $l)
 		{
 			$geos = &$this->unserializeGeo($dir.$l);
+			//
+			//verifica a versão do mapserver
+			//se for anterior a 5, utiliza a conexão com o postgis para fazer o processamento dos daods
+			//
             $v = versao();
 			if (($v["principal"] != 5) && ($postgis_con == ""))
 			{return ("erro. Nao foi definida a conexao com o Postgis.");}
