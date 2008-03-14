@@ -35,9 +35,11 @@ testamapfile.php?map=bioma
 Parameters:
 
 map - nome do mapfile que será aberto. O arquivo é procurado no caminho indicado e no diretório i3geo/temas
-
+	se map=todos, todos os mapas são desenhados de 10 em 10.
 tipo - (opcional) tipo de retorno mini|grande . A opção mini retorna uma miniatura do mapa
 */
+set_time_limit(300);
+ini_set('max_execution_time', 300);
 include("ms_configura.php");
 include("classesphp/funcoes_gerais.php");
 require_once("classesphp/pega_variaveis.php");
@@ -60,10 +62,39 @@ if(!isset($tipo))
 {$tipo = "";}
 if ($tipo == "")
 {
-	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script><body ><form action="testamapfile.php" method="post" id=f >Nome do arquivo map (deve estar no diretório temas):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit"></form></body></html>';
+	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script><body ><form action="testamapfile.php" method="post" id=f >Nome do arquivo map (deve estar no diretório temas, digite "todos" para testar todos de uma só vez):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit"></form></body></html>';
 }
 if (isset($map) && $map != "")
 {
+	if ($map == "todos")
+	{
+		$tipo = "todos";
+		$arqs = listaArquivos("temas");
+		$conta = 0;
+		echo "<br>Número de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
+		if (!isset($iniciar)){$iniciar = 0;}
+		sort($arqs["arquivos"]);
+		foreach ($arqs["arquivos"] as $arq)
+		{
+			if (($conta >= $iniciar) && ($conta < $iniciar+10))
+			{
+				$temp = explode(".",$arq);
+				if($temp[1] == "map")
+				verifica($arq);
+				else
+				{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
+			}
+			$conta++;
+		}
+		echo "<hr><br><br><a href='testamapfile.php?map=todos&iniciar=".($iniciar+10)."' >Próximos mapas</a>";
+	}
+	else
+	{verifica($map);}	
+}
+function verifica($map)
+{
+	global $tipo;
+	ms_ResetErrorList();
 	$tema = "";
 	$map = str_replace("\\","/",$map);
 	$map = basename($map);
@@ -71,15 +102,21 @@ if (isset($map) && $map != "")
 	{$tema = 'temas/'.$map;}
 	if (file_exists('temas/'.$map.'.map'))
 	{$tema = 'temas/'.$map.".map";}
-	if($tipo == "")
-	echo "<br>Testando: $tema<pre>";
+	if(($tipo == "") || ($tipo == "todos"))
+	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$mapa = ms_newMapObj("aplicmap/geral1windows.map");}
 		else
 		{$mapa = ms_newMapObj("aplicmap/geral1.map");}
-		$nmapa = ms_newMapObj($tema);
+		if(@ms_newMapObj($tema))
+		{$nmapa = ms_newMapObj($tema);}
+		else
+		{
+			echo "erro no arquivo $map <br>";
+			return;
+		}
 		$temasn = $nmapa->getAllLayerNames();
 		foreach ($temasn as $teman)
 		{
@@ -117,29 +154,39 @@ if (isset($map) && $map != "")
 			 $sca = $mapa->scalebar;
 			 $sca->set("status",MS_OFF);
 		}
-
-		$objImagem = $mapa->draw();
+		if($tipo == "todos")
+		{
+		 	 $mapa->setsize(150,150);
+			 $sca = $mapa->scalebar;
+			 $sca->set("status",MS_OFF);
+		}
+		$objImagem = @$mapa->draw();
+		if (!$objImagem)
+		{echo "Problemas ao gerar o mapa<br>";return;}
 		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);
-		if($tipo == "")
+		if(($tipo == "") || ($tipo == "todos"))
 		{
 			echo "<img src=".$nomer." />";
-			echo "<br>Erros:<br>";
-			$error = ms_GetErrorObj();
-			while($error && $error->code != MS_NOERR)
+			if($map != "todos")
 			{
-				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
-				$error = $error->next();
+				echo "<br>Erros:<br>";
+				$error = "";
+				$error = ms_GetErrorObj();
+				while($error && $error->code != MS_NOERR)
+				{
+					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+					$error = $error->next();
+				}
 			}		
 		}
 		else
 		{
-		 Header("Content-type: image/png");
-		 ImagePng(ImageCreateFromPNG($nomec));
+			Header("Content-type: image/png");
+			ImagePng(ImageCreateFromPNG($nomec));
 		}
+		$objImagem->free();
 	}
-	else
-	{echo "<br>Arquivo não existe";}
 }
 ?>
