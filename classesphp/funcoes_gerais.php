@@ -957,7 +957,11 @@ function gravaImagemMapa($mapa)
 {
  	if(is_string($mapa))
  	{$mapa = ms_newMapObj($mapa);}
- 	$imgo = $mapa->draw();
+ 	$imgo = @$mapa->draw();
+	if(!$imgo)
+	{
+		return array("url"=>"","arquivo"=>"");
+	}
 	$nome = ($imgo->imagepath).nomeRandomico().".png";
 	$salva = $imgo->saveImage($nome);
 	if ($salva != -1)
