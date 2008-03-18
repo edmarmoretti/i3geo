@@ -127,7 +127,9 @@ function verifica($map)
 			if ($layern->data == "")
 			$dados = $layern->connection;
 			else
-			$dados = $layern->data;			
+			$dados = $layern->data;
+			
+			zoomTema($layern,$mapa);		
 		}
 		if (isset($postgis_mapa))
 		{
@@ -198,4 +200,32 @@ function verifica($map)
 		$objImagem->free();
 	}
 }
+function zoomTema($layer,&$mapa)
+{
+	$prjMapa = $mapa->getProjection();
+	$prjTema = $layer->getProjection();
+	$extatual = $mapa->extent;
+	$ret = $layer->getmetadata("extensao");
+	$ct = $layer->connectiontype;
+	if(($ret == "") && ($ct != 1))
+	{return;}
+	if ($ret == "")
+	{
+		$ret = $layer->getextent();
+		//reprojeta o retangulo
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
+			$ret->project($projInObj, $projOutObj);
+		}
+		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+	}
+	else
+	{
+		$ret = explode(" ",$ret);
+		$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
+	}
+}
+
 ?>
