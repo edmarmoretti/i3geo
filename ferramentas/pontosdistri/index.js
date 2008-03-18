@@ -41,7 +41,10 @@ comboTemasPt("temasPt",function(retorno)
 		ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='densidade de pontos' /></div><br>"
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='dist&acirc;ncia entre pontos' /></div><br>"
 		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div><div>Desvio padr&atilde;o (sigma):<input class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
+		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDeldir()' ><input id=botaodeldir size=35  type=button value='Delaunay/Voronoi' /></div><br>"
+
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='relat&oacute;rio' /></div><br>"
+
 		$i("guia1obj").innerHTML = ins;
 		YAHOO.example.init = function ()
 		{
@@ -52,6 +55,7 @@ comboTemasPt("temasPt",function(retorno)
 				new YAHOO.widget.Button("botao3");
 				new YAHOO.widget.Button("botao4");
 				new YAHOO.widget.Button("botaokernel");
+				new YAHOO.widget.Button("botaodeldir");
 			}
     		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 		}()
@@ -87,6 +91,23 @@ function mostracores(retorno)
 //abre a paleta de cores
 function corj(obj)
 {window.parent.abreCor("wdocai",obj)}
+
+function analiseDeldir()
+{
+	aguarde("block")
+	var temp = function()
+	{
+		aguarde("none");
+		window.parent.ajaxredesenha("")
+	}
+	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
+	var cp = new cpaint();
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&tipo=deldir&numclasses=&cori=&corf=&sigma=&limitepontos="
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"analiseDeldir",temp);
+}
 
 function analiseKernel()
 {

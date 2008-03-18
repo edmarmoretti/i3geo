@@ -148,8 +148,11 @@ Include:
 		$pontos = array();
 		//pega um shape especifico
 		$layerPt->open();
-		$projInObj = ms_newprojectionobj($prjTema);
-		$projOutObj = ms_newprojectionobj($prjMapa);		
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);		
+		}
 		for ($i = 0; $i < $res_count; $i++)
 		{
 			$result = $layerPt->getResult($i);
@@ -167,12 +170,12 @@ Include:
 		}
 		$layerPt->close();
 		//grava o arquivo com os pontos em x
-		$f = fopen($nomearq."x",w);
+		$f = fopen($nomearq."x","w");
 		foreach ($pontosx as $pt)
 		{fwrite($f,$pt."\n");}
 		fclose($f);
 		//grava o arquivo com os pontos em y
-		$f = fopen($nomearq."y",w);
+		$f = fopen($nomearq."y","w");
 		foreach ($pontosy as $pt)
 		{fwrite($f,$pt."\n");}
 		fclose($f);
@@ -195,6 +198,13 @@ Include:
 		$dimy = "c(".$yi.",".$yf.")";
 		switch ($tipo)
 		{
+			//delaunay e voronoi
+			case "deldir":
+			$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
+			$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
+			$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
+			return "ok";
+			break;
 			case "kernel":
 			$this->mapaKernel($nomearq,$dimx,$dimy,$dir_tmp,$R_path,$locaplic,$sigma);
 			break;
@@ -541,6 +551,295 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'cat(img$dim,file="'.$arqpt.'h",append=TRUE,fill=TRUE)';
 		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
 		return "ok";
+	}
+/*
+function: mapaDeldir
+
+Calcula a triangulação de Delaunay e diagrama de Voronoi.
+
+Para funcionar, é necessário a instalação da biblioteca deldir do R.
+
+http://cran.r-project.org/web/packages/deldir
+
+parameters:
+
+$arqpt - Prefixo dos arquivos em disco com os pontos.
+
+$dir_tmp - Diretório temporário do mapserver.
+
+$R_path - Onde fica o R.
+
+$locaplic - Onde fica o I3Geo.
+*/
+	function mapaDeldir($arqpt,$dir_tmp,$R_path,$locaplic)
+	{
+		$gfile_name = nomeRandomico(20);
+		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
+		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{
+			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
+		}
+		else
+		{
+			if(file_exists($locaplic."/pacotes/rlib/linux"))
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
+		$rcode[] = 'library(deldir)';
+		$rcode[] = 'pt <- deldir(dadosx, dadosy)';
+		$rcode[] = 'write.csv(pt$delsgs,file="'.$arqpt.'delsgs")';
+		$rcode[] = 'write.csv(pt$dirsgs,file="'.$arqpt.'dirsgs")';
+		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		return "ok";
+	}
+/*
+function deldirDel2shp
+
+Lê um arquivo CSV gerado pelo software R com os dados referentes à triangulação de Delaunay.
+
+O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
+
+Parameters:
+
+$nomearq - nome do arquivo CSV
+
+$dir_tmp - diretório temporário do Mapserver
+
+$locaplic - diretório da aplicação i3geo
+*/
+	function deldirDel2shp($nomearq,$dir_tmp,$locaplic)
+	{
+		if (file_exists($nomearq))
+		{
+			require_once "../pacotes/phpxbase/api_conversion.php";
+			//define o nome do novo shapefile que será criado
+			$nomefinal = nomeRandomico();
+			$nomeshp = $this->diretorio."/".$nomefinal;
+			//cria o shape file
+			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
+			// cria o dbf
+			$def[] = array("x1","N","12","5");
+			$def[] = array("y1","N","12","5");
+			$def[] = array("x2","N","12","5");
+			$def[] = array("y2","N","12","5");
+			$def[] = array("ind1","N","5","0");
+			$def[] = array("ind2","N","5","0");
+			$db = xbase_create($nomeshp.".dbf", $def);
+			$dbname = $nomeshp.".dbf";
+			//le o arquivo linha a linha, pulando a primeira
+			//acrescenta os pontos no shape file formando as linhas
+			$abre = fopen($nomearq, "r");
+			$buffer = fgets($abre);
+			$poligonos = array();
+			while (!feof($abre))
+			{
+				$buffer = fgets($abre);
+				$i = explode(",",$buffer);
+				if(is_array($i))
+				{
+					$i1 = floatval($i[1]);
+					$i2 = floatval($i[2]);
+					$i3 = floatval($i[3]);
+					$i4 = floatval($i[4]);
+					$i5 = floatval($i[5]);
+					$i6 = floatval($i[6]);
+					$poPoint1 = ms_newpointobj();
+					$poPoint1->setXY($i1,$i2);
+					$poPoint2 = ms_newpointobj();
+					$poPoint2->setXY($i3, $i4);			
+					$linha = ms_newLineObj();
+					$linha->add($poPoint1);
+					$linha->add($poPoint2);
+					$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
+					$ShapeObj->add($linha);
+					
+					$novoshpf->addShape($ShapeObj);
+					$registro = array($i1,$i2,$i3,$i4,$i5,$i6);
+					xbase_add_record($db,$registro);
+					$linha->free();
+					$ShapeObj->free();
+				}
+			}
+			$novoshpf->free();
+			xbase_close($db);
+			fclose($abre);			
+			//adiciona no mapa atual o novo tema
+			$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Delaunay (".$nomefinal.")"),$metaClasse="SIM");
+			$novolayer->set("data",$nomeshp.".shp");
+			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->set("template","none.htm");
+			$classe = $novolayer->getclass(0);
+			$estilo = $classe->getstyle(0);
+			$estilo->set("symbolname","linha");
+			$estilo->set("size",2);
+			$cor = $estilo->color;
+			$cor->setrgb(255,50,0);
+		}
+	}
+/*
+function deldirDir2shp
+
+Lê um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de Voronoi.
+
+O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
+
+Parameters:
+
+$nomearq - nome do arquivo CSV
+
+$dir_tmp - diretório temporário do Mapserver
+
+$locaplic - diretório da aplicação i3geo
+*/	
+	function deldirDir2shp($nomearq,$dir_tmp,$locaplic)
+	{
+		if (file_exists($nomearq))
+		{
+			require_once "../pacotes/phpxbase/api_conversion.php";
+			//
+			//define os nomes dos novos shapefiles que serão criados
+			//
+			$nomeLinhas = nomeRandomico();
+			$nomePoligonos = nomeRandomico();
+			$nomeshpLinhas = $this->diretorio."/".$nomeLinhas;
+			$nomeshpPoligonos = $this->diretorio."/".$nomePoligonos;
+			//cria o shape file
+			$novoshpLinhas = ms_newShapefileObj($nomeshpLinhas, MS_SHP_ARC);
+			$novoshpPoligonos = ms_newShapefileObj($nomeshpPoligonos, MS_SHP_POLYGON);
+			//
+			// cria o dbf para o shapefile linear
+			//
+			$def[] = array("x1","N","12","5");
+			$def[] = array("y1","N","12","5");
+			$def[] = array("x2","N","12","5");
+			$def[] = array("y2","N","12","5");
+			$def[] = array("ind1","N","5","0");
+			$def[] = array("ind2","N","5","0");
+			$def[] = array("b1","C","6");
+			$def[] = array("b2","C","6");
+			$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);
+			$dbnameLinhas = $nomeshpLinhas.".dbf";
+			//
+			// cria o dbf para o shapefile poligonal
+			//
+			$def = array();
+			$def[] = array("area","N","12","5");
+			$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);
+			$dbnamePoligonos = $nomeshpPoligonos.".dbf";
+			//
+			//constrói as linhas do diagrama
+			//			
+			//le o arquivo linha a linha, pulando a primeira
+			//acrescenta os pontos no shape file formando as linhas
+			//cria o array para criar os polígonos
+			//
+			$abre = fopen($nomearq, "r");
+			$buffer = fgets($abre);
+			$borda = array();//guarda os pontos que ficam na borda
+			$poligonos = array();
+			while (!feof($abre))
+			{
+				$buffer = fgets($abre);
+				$i = explode(",",$buffer);
+				if(is_array($i))
+				{
+					$i1 = floatval($i[1]);
+					$i2 = floatval($i[2]);
+					$i3 = floatval($i[3]);
+					$i4 = floatval($i[4]);
+					$i5 = floatval($i[5]);
+					$i6 = floatval($i[6]);
+					$poPoint1 = ms_newpointobj();
+					$poPoint1->setXY($i1,$i2);
+					$poPoint2 = ms_newpointobj();
+					$poPoint2->setXY($i3, $i4);
+					if(trim($i[7]) == "TRUE")
+					{$borda[] = $poPoint1;}
+					if(trim($i[8]) == "TRUE")
+					{$borda[] = $poPoint2;}	
+					$linha = ms_newLineObj();
+					$linha->add($poPoint1);
+					$linha->add($poPoint2);
+					if($poligonos[$i[5]])
+					$poligonos[$i[5]] = array_merge(array($linha),$poligonos[$i[5]]);
+					else
+					$poligonos[$i[5]] = array($linha);
+					if($poligonos[$i[6]])
+					$poligonos[$i[6]] = array_merge(array($linha),$poligonos[$i[6]]);
+					else
+					$poligonos[$i[6]] = array($linha);
+					$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
+					$ShapeObj->add($linha);
+					$novoshpLinhas->addShape($ShapeObj);
+					$registro = array($i1,$i2,$i3,$i4,$i5,$i6,$i[7],$i[8]);
+					xbase_add_record($dbLinhas,$registro);
+					$ShapeObj->free();
+				}
+			}
+			//
+			//adiciona os poligonos
+			//
+			foreach ($poligonos as $p)
+			{
+				$ShapeObjp = ms_newShapeObj(MS_SHAPE_LINE);
+				foreach ($p as $o)
+				{$ShapeObjp->add($o);}
+				$ns = $ShapeObjp->convexhull();
+				$novoshpPoligonos->addShape($ns);
+				$registro = array($ns->getArea());
+				xbase_add_record($dbPoligonos,$registro);
+				$ShapeObjp->free();	
+			}
+			$novoshpPoligonos->free();
+			xbase_close($dbPoligonos);
+			//
+			//adiciona o layer com os polígonos no mapa
+			//
+			$novolayerp = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Voronoi - poligonos (".$nomePoligonos.")"),$metaClasse="SIM");
+			$novolayerp->set("data",$nomeshpPoligonos.".shp");
+			$novolayerp->setmetadata("DOWNLOAD","SIM");
+			$novolayerp->set("template","none.htm");
+			$classe = $novolayerp->getclass(0);
+			$estilo = $classe->getstyle(0);
+			$cor = $estilo->color;
+			$cor->setrgb(240,240,240);
+			//
+			//adiciona no mapa atual o novo tema com as linhas do diagrama
+			//
+			if (count($borda > 2))
+			{
+				$linha = ms_newLineObj();
+				foreach ($borda as $ponto)
+				{
+					$linha->add($ponto);
+				}
+				$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
+				$ShapeObj->add($linha);
+				$novoshpLinhas->addShape($ShapeObj->convexhull());
+				$registro = array(0,0,0,0,0,0,0,0);
+				xbase_add_record($dbLinhas,$registro);
+				$linha->free();
+				$ShapeObj->free();				
+			}
+			$novoshpLinhas->free();
+			xbase_close($dbLinhas);
+			fclose($abre);			
+			$novolayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,("Voronoi (".$nomeLinhas.")"),$metaClasse="SIM");
+			$novolayer->set("data",$nomeshpLinhas.".shp");
+			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->set("template","none.htm");
+			$classe = $novolayer->getclass(0);
+			$estilo = $classe->getstyle(0);
+			$estilo->set("symbolname","linha");
+			$estilo->set("size",4);
+			$cor = $estilo->color;
+			$cor->setrgb(255,210,0);
+		}
 	}
 /*
 function: pontoEmPoligono
