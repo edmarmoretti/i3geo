@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Produce a plot of the Delaunay triangulation and Dirichlet (Voronoi)
+tesselation of a planar point set, as constructed by the function deldir.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for plot.deldir {deldir}"><tr><td>plot.deldir {deldir}</td><td align="right">R Documentation</td></tr></table>
+<h2>Produce a plot of the Delaunay triangulation and Dirichlet (Voronoi)
+tesselation of a planar point set, as constructed by the function deldir.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This is a method for plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'deldir':
+plot(x,add=FALSE,wlines=c('both','triang','tess'),
+                      wpoints=c('both','real','dummy','none'),
+                      number=FALSE,cex=1,nex=1,col=NULL,lty=NULL,
+                      pch=NULL,xlim=NULL,ylim=NULL,xlab='x',ylab='y',...)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+An object of class "deldir" as constructed by the function deldir.
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+logical argument; should the plot be added to an existing plot?
+</td></tr>
+<tr valign="top"><td><code>wlines</code></td>
+<td>
+"which lines?".  I.e.  should the Delaunay triangulation be plotted
+(wlines='triang'), should the Dirichlet tessellation be plotted
+(wlines='tess'), or should both be plotted (wlines='both', the
+default) ?
+</td></tr>
+<tr valign="top"><td><code>wpoints</code></td>
+<td>
+"which points?".  I.e.  should the real points be plotted
+(wpoints='real'), should the dummy points be plotted
+(wpoints='dummy'), should both be plotted (wpoints='both', the
+default) or should no points be plotted (wpoints='none')?
+</td></tr>
+<tr valign="top"><td><code>number</code></td>
+<td>
+Logical argument, defaulting to <code>FALSE</code>; if <code>TRUE</code> then the
+points plotted will be labelled with their index numbers
+(corresponding to the row numbers of the matrix "summary" in the
+output of deldir).
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+The value of the character expansion argument cex to be used
+with the plotting symbols for plotting the points.
+</td></tr>
+<tr valign="top"><td><code>nex</code></td>
+<td>
+The value of the character expansion argument cex to be used by the
+text function when numbering the points with their indices.  Used only
+if number=<code>TRUE</code>.
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+the colour numbers for plotting the triangulation, the tesselation,
+the data points, the dummy points, and the point numbers, in that
+order; defaults to c(1,1,1,1,1).  If fewer than five numbers are
+given, they are recycled.  (If more than five numbers are given, the
+redundant ones are ignored.)
+</td></tr>
+<tr valign="top"><td><code>lty</code></td>
+<td>
+the line type numbers for plotting the triangulation and the
+tesselation, in that order; defaults to 1:2.  If only one value is
+given it is repeated.  (If more than two numbers are given, the
+redundant ones are ignored.)
+</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+the plotting symbols for plotting the data points and the dummy
+points, in that order; may be either integer or character; defaults
+to 1:2.  If only one value is given it is repeated.  (If more than
+two values are given, the redundant ones are ignored.)
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+the limits on the x-axis.  Defaults to rw[1:2] where rw is the
+rectangular window specification returned by deldir().
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+the limits on the y-axis.  Defaults to rw[3:4] where rw is the
+rectangular window specification returned by deldir().
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+label for the x-axis.  Defaults to <code>x</code>.  Ignored if
+<code>add=TRUE</code>.
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+label for the y-axis.  Defaults to <code>y</code>.  Ignored if
+<code>add=TRUE</code>.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Further plotting parameters to be passed to <code>plot()</code>
+<code>segments()</code> or <code>points()</code>.  Unlikely to be used.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+The points in the set being triangulated are plotted with distinguishing
+symbols.  By default the real points are plotted as circles (pch=1) and the
+dummy points are plotted as triangles (pch=2).
+</p>
+
+
+<h3>Side Effects</h3>
+
+<p>
+A plot of the points being triangulated is produced or added to
+an existing plot.  As well, the edges of the Delaunay
+triangles and/or of the Dirichlet tiles are plotted.  By default
+the triangles are plotted with solid lines (lty=1) and the tiles
+with dotted lines (lty=2).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Rolf Turner
+<a href="mailto:r.turner@auckland.ac.nz">r.turner@auckland.ac.nz</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="deldir.html">deldir</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+try &lt;- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10))
+plot(try)
+#
+deldir(x,y,list(ndx=4,ndy=4),plot=TRUE,add=TRUE,wl='te',
+       col=c(1,1,2,3,4),num=TRUE)
+# Plots the tesselation, but does not save the results.
+try &lt;- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10),plot=TRUE,wl='tr',
+              wp='n')
+# Plots the triangulation, but not the points, and saves the returned
+structure.
+## End(Not run)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>deldir</em> version 0.0-7 <a href="00Index.html">Index]</a></div>
+
+</body></html>

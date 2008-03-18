@@ -1,0 +1,22 @@
+deldir-internal            package:deldir            R Documentation
+
+_I_n_t_e_r_n_a_l _d_e_l_d_i_r _f_u_n_c_t_i_o_n_s
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     Internal deldir functions.
+
+_U_s_a_g_e:
+
+     dumpts(x,y,dpl,rw)
+     ind.dup(x,y,rw=NULL,frac=0.0001)
+     mid.in(x,y,rx,ry)
+     mnnd(x,y)
+     get.cnrind(x,y,rw)
+     acw(xxx)
+
+_D_e_t_a_i_l_s:
+
+     These functions are auxilliary and are not intended to be called
+     by the user.
+

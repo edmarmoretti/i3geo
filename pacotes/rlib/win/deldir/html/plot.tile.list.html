@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Plot Dirchlet/Voronoi tiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for plot.tile.list {deldir}"><tr><td>plot.tile.list {deldir}</td><td align="right">R Documentation</td></tr></table>
+<h2>Plot Dirchlet/Voronoi tiles</h2>
+
+
+<h3>Description</h3>
+
+<p>
+A method for <code>plot</code>.  Plots (sequentially)
+the tiles associated with each point in the set being tessellated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plot.tile.list(x, verbose = FALSE, close=FALSE, pch=1, polycol=NA,
+               showpoints=TRUE, asp=1, ...)
+## S3 method for class 'tile.list':
+plot(x, verbose = FALSE, close=FALSE, pch=1,
+                         polycol=NA, showpoints=TRUE, asp=1, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+A list of the tiles in a tessellation, as produced
+the function <code><a href="tile.list.html">tile.list</a>()</code>.</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+Logical scalar; if <code>TRUE</code> the tiles are
+plotted one at a time (with a ``Go?'' prompt after each)
+so that the process can be watched.</td></tr>
+<tr valign="top"><td><code>close</code></td>
+<td>
+Logical scalar; if <code>TRUE</code> the outer edges of
+of the tiles (i.e. the edges of the enclosing rectangle)
+are drawn.  Otherwise tiles on the periphery of the
+tessellation are left ``open''.</td></tr>
+<tr valign="top"><td><code>pch</code></td>
+<td>
+The plotting character for plotting the points of the
+pattern which was tessellated.  Ignored if <code>showpoints</code>
+is <code>FALSE</code>.</td></tr>
+<tr valign="top"><td><code>polycol</code></td>
+<td>
+Optional vector of integers (or <code>NA</code>s);
+the <i>i</i>-th entry indicates with which colour to fill
+the <i>i</i>-th tile.  Note that an <code>NA</code> indicates
+the use of no colour at all.</td></tr>
+<tr valign="top"><td><code>showpoints</code></td>
+<td>
+Logical scalar; if <code>TRUE</code> the points of
+the pattern which was tesselated are plotted.</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+The aspect ratio of the plot; integer scalar or
+<code>NA</code>.  Set this argument equal to <code>NA</code> to allow the data
+to determine the aspect ratio and hence to make the plot occupy the
+complete plotting region in both <code>x</code> and <code>y</code> directions.
+This is inadvisable; see the <B>Warnings</B>.</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Optional arguments; not used.  There for consistency
+with the generic <code>plot</code> function.</td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+NULL; side effect is a plot.</p>
+
+<h3>Warnings</h3>
+
+<p>
+The default value for <code>verbose</code> was formerly <code>TRUE</code>;
+it is now <code>FALSE</code>.
+</p>
+<p>
+The user is <EM>strongly advised</EM> not to set the value of
+<code>asp</code> but rather to leave <code>asp</code> equal to its default
+value of <code>1</code>.  Any other value distorts the tesselation
+and destroys the perpendicular appearance of lines which are
+indeed perpendicular.  (And conversely can cause lines which
+are not perpendicular to appear as if they are.)
+</p>
+<p>
+The argument <code>asp</code> is present ``just because it can be''.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Rolf Turner
+<a href="mailto:r.turner@auckland.ac.nz">r.turner@auckland.ac.nz</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="tile.list.html">tile.list</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  x &lt;- runif(20)
+  y &lt;- runif(20)
+  z &lt;- deldir(x,y,rw=c(0,1,0,1))
+  w &lt;- tile.list(z)
+  plot(w)
+  ccc &lt;- heat.colors(20) # Or topo.colors(20), or terrain.colors(20)
+                         # or cm.colors(20), or rainbox(20).
+  plot(w,polycol=ccc,close=TRUE)
+</pre>
+
+
+
+<hr><div align="center">[Package <em>deldir</em> version 0.0-7 <a href="00Index.html">Index]</a></div>
+
+</body></html>

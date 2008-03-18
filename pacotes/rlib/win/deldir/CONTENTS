@@ -1,0 +1,29 @@
+Entry: deldir-internal
+Aliases: dumpts ind.dup mid.in mnnd get.cnrind acw
+Keywords: internal
+Description: Internal deldir functions
+URL: ../../../library/deldir/html/deldir-internal.html
+
+Entry: deldir
+Aliases: deldir
+Keywords: spatial
+Description: Construct the Delaunay triangulation and the Dirichlet (Voronoi) tessellation of a planar point set.
+URL: ../../../library/deldir/html/deldir.html
+
+Entry: plot.deldir
+Aliases: plot.deldir
+Keywords: 
+Description: Produce a plot of the Delaunay triangulation and Dirichlet (Voronoi) tesselation of a planar point set, as constructed by the function deldir.
+URL: ../../../library/deldir/html/plot.deldir.html
+
+Entry: plot.tile.list
+Aliases: plot.tile.list
+Keywords: hplot
+Description: Plot Dirchlet/Voronoi tiles
+URL: ../../../library/deldir/html/plot.tile.list.html
+
+Entry: tile.list
+Aliases: tile.list
+Keywords: spatial
+Description: Create a list of tiles in a tessellation.
+URL: ../../../library/deldir/html/tile.list.html

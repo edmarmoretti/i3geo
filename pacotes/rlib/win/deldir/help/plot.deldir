@@ -1,0 +1,118 @@
+plot.deldir              package:deldir              R Documentation
+
+_P_r_o_d_u_c_e _a _p_l_o_t _o_f _t_h_e _D_e_l_a_u_n_a_y _t_r_i_a_n_g_u_l_a_t_i_o_n _a_n_d _D_i_r_i_c_h_l_e_t (_V_o_r_o_n_o_i)
+_t_e_s_s_e_l_a_t_i_o_n _o_f _a _p_l_a_n_a_r _p_o_i_n_t _s_e_t, _a_s _c_o_n_s_t_r_u_c_t_e_d _b_y _t_h_e _f_u_n_c_t_i_o_n _d_e_l_d_i_r.
+
+_D_e_s_c_r_i_p_t_i_o_n:
+
+     This is a method for plot.
+
+_U_s_a_g_e:
+
+     ## S3 method for class 'deldir':
+     plot(x,add=FALSE,wlines=c('both','triang','tess'),
+                           wpoints=c('both','real','dummy','none'),
+                           number=FALSE,cex=1,nex=1,col=NULL,lty=NULL,
+                           pch=NULL,xlim=NULL,ylim=NULL,xlab='x',ylab='y',...)
+
+_A_r_g_u_m_e_n_t_s:
+
+       x: An object of class "deldir" as constructed by the function
+          deldir. 
+
+     add: logical argument; should the plot be added to an existing
+          plot? 
+
+  wlines: "which lines?".  I.e.  should the Delaunay triangulation be
+          plotted (wlines='triang'), should the Dirichlet tessellation
+          be plotted (wlines='tess'), or should both be plotted
+          (wlines='both', the default) ? 
+
+ wpoints: "which points?".  I.e.  should the real points be plotted
+          (wpoints='real'), should the dummy points be plotted
+          (wpoints='dummy'), should both be plotted (wpoints='both',
+          the default) or should no points be plotted (wpoints='none')? 
+
+  number: Logical argument, defaulting to 'FALSE'; if 'TRUE' then the
+          points plotted will be labelled with their index numbers
+          (corresponding to the row numbers of the matrix "summary" in
+          the output of deldir). 
+
+     cex: The value of the character expansion argument cex to be used
+          with the plotting symbols for plotting the points. 
+
+     nex: The value of the character expansion argument cex to be used
+          by the text function when numbering the points with their
+          indices.  Used only if number='TRUE'. 
+
+     col: the colour numbers for plotting the triangulation, the
+          tesselation, the data points, the dummy points, and the point
+          numbers, in that order; defaults to c(1,1,1,1,1).  If fewer
+          than five numbers are given, they are recycled.  (If more
+          than five numbers are given, the redundant ones are ignored.) 
+
+     lty: the line type numbers for plotting the triangulation and the
+          tesselation, in that order; defaults to 1:2.  If only one
+          value is given it is repeated.  (If more than two numbers are
+          given, the redundant ones are ignored.) 
+
+     pch: the plotting symbols for plotting the data points and the
+          dummy points, in that order; may be either integer or
+          character; defaults to 1:2.  If only one value is given it is
+          repeated.  (If more than two values are given, the redundant
+          ones are ignored.) 
+
+    xlim: the limits on the x-axis.  Defaults to rw[1:2] where rw is
+          the rectangular window specification returned by deldir(). 
+
+    ylim: the limits on the y-axis.  Defaults to rw[3:4] where rw is
+          the rectangular window specification returned by deldir(). 
+
+    xlab: label for the x-axis.  Defaults to 'x'.  Ignored if
+          'add=TRUE'. 
+
+    ylab: label for the y-axis.  Defaults to 'y'.  Ignored if
+          'add=TRUE'. 
+
+     ...: Further plotting parameters to be passed to 'plot()'
+          'segments()' or 'points()'.  Unlikely to be used. 
+
+_D_e_t_a_i_l_s:
+
+     The points in the set being triangulated are plotted with
+     distinguishing symbols.  By default the real points are plotted as
+     circles (pch=1) and the dummy points are plotted as triangles
+     (pch=2).
+
+_S_i_d_e _E_f_f_e_c_t_s:
+
+     A plot of the points being triangulated is produced or added to an
+     existing plot.  As well, the edges of the Delaunay triangles
+     and/or of the Dirichlet tiles are plotted.  By default the
+     triangles are plotted with solid lines (lty=1) and the tiles with
+     dotted lines (lty=2).
+
+_A_u_t_h_o_r(_s):
+
+     Rolf Turner r.turner@auckland.ac.nz <URL:
+     http://www.math.unb.ca/~rolf>
+
+_S_e_e _A_l_s_o:
+
+     'deldir()'
+
+_E_x_a_m_p_l_e_s:
+
+     ## Not run: 
+     try <- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10))
+     plot(try)
+     #
+     deldir(x,y,list(ndx=4,ndy=4),plot=TRUE,add=TRUE,wl='te',
+            col=c(1,1,2,3,4),num=TRUE)
+     # Plots the tesselation, but does not save the results.
+     try <- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10),plot=TRUE,wl='tr',
+                   wp='n')
+     # Plots the triangulation, but not the points, and saves the returned
+     structure.
+     ## End(Not run)
+

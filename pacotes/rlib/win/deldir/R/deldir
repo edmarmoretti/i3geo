@@ -1,0 +1,520 @@
+.packageName <- "deldir"
+.First.lib <- function(lib,pkg) {
+	library.dynam("deldir", pkg, lib)
+	ver <- read.dcf(file.path(lib, pkg, "DESCRIPTION"), "Version")
+        cat(paste(pkg, ver, "\n"))
+}
+acw <- function(xxx) {
+xbar <- mean(xxx$x)
+ybar <- mean(xxx$y)
+theta   <- atan2(xxx$y - ybar,xxx$x-xbar)
+theta   <- ifelse(theta > 0, theta, theta + 2 * pi)
+theta.0 <- sort(unique(theta))
+iii     <- match(theta.0, theta)
+xxx$x   <- xxx$x[iii]
+xxx$y   <- xxx$y[iii]
+xxx$bp  <- xxx$bp[iii]
+xxx
+}
+deldir <- function(x,y,dpl=NULL,rw=NULL,eps=1e-9,frac=1e-4,
+                   sort=TRUE,plotit=FALSE,digits=6,...) {
+# Function deldir
+#
+#   Copyright (C) 1996 by T. Rolf Turner
+#
+#   Permission to use, copy, modify, and distribute this software and
+#   its documentation for any purpose and without fee is hereby
+#   granted, provided that the above copyright notice appear in all
+#   copies and that both that copyright notice and this permission
+#   notice appear in supporting documentation.
+#
+# ORIGINALLY PROGRAMMED BY: Rolf Turner in 1987/88, while with the
+# Division of Mathematics and Statistics, CSIRO, Sydney, Australia.
+# Re-programmed by Rolf Turner to adapt the implementation from a
+# stand-alone Fortran program to an S function, while visiting the
+# University of Western Australia, May 1995.  Further revised
+# December 1996.
+# 
+# Function to compute the Delaunay Triangulation (and hence the
+# Dirichlet Tesselation) of a planar point set according to the
+# second (iterative) algorithm of Lee and Schacter, International
+# Journal of Computer and Information Sciences, Vol. 9, No. 3, 1980,
+# pages 219 to 242.
+
+# The triangulation is made to be with respect to the whole plane by
+# `suspending' it from `ideal' points
+# (-R,-R), (R,-R) (R,R), and (-R,R), where R --> infinity.
+
+# It is also enclosed in a finite rectangle (whose boundaries truncate any
+# infinite Dirichlet tiles) with corners (xmin,ymin) etc.  This rectangle
+# is referred to elsewhere as `the' rectangular window.
+
+# If the first argument is a list, extract components x and y:
+if(is.list(x)) {
+	if(all(!is.na(match(c('x','y'),names(x))))) {
+		y <- x$y
+		x <- x$x
+	}
+	else {
+		cat('Error: called with list lacking both x and y elements\n')
+		return()
+	}
+}
+
+# If a data window is specified, get its corner coordinates
+# and truncate the data by this window:
+n <- length(x)
+if(n!=length(y)) stop('data lengths do not match')
+if(!is.null(rw)) {
+	xmin <- rw[1]
+	xmax <- rw[2]
+	ymin <- rw[3]
+	ymax <- rw[4]
+	drop <- (1:n)[x<xmin|x>xmax|y<ymin|y>ymax]
+	if(length(drop)>0) {
+		x <- x[-drop]
+		y <- y[-drop]
+		n <- length(x)
+	}
+}
+
+# If corners of the window are not specified, form them from
+# the minimum and maximum of the data +/- 10%:
+else {
+	xmin <- min(x)
+	xmax <- max(x)
+	ymin <- min(y)
+	ymax <- max(y)
+	xdff <- xmax-xmin
+	ydff <- ymax-ymin
+	xmin <- xmin-0.1*xdff
+	xmax <- xmax+0.1*xdff
+	ymin <- ymin-0.1*ydff
+	ymax <- ymax+0.1*ydff
+	rw   <- c(xmin,xmax,ymin,ymax)
+}
+
+# Add the dummy points:
+if(!is.null(dpl)) {
+	dpts <- dumpts(x,y,dpl,rw)
+	x    <- dpts$x
+	y    <- dpts$y
+}
+
+# Eliminate duplicate points:
+iii <- !ind.dup(x,y,rw,frac)
+ndm <- sum(iii[-(1:n)])
+n   <- sum(iii[1:n])
+x   <- x[iii]
+y   <- y[iii]
+
+# Make space for the total number of points (real and dummy) as
+# well as 4 ideal points and 4 extra corner points which get used
+# (only) by subroutines dirseg and dirout in the ``output'' process
+# (returning a description of the triangulation after it has been
+# calculated):
+npd  <- n + ndm
+ntot <- npd + 4               # ntot includes the 4 ideal points but
+                              # but NOT the 4 extra corners
+x <- c(rep(0,4),x,rep(0,4))
+y <- c(rep(0,4),y,rep(0,4))
+
+# Set up fixed dimensioning constants:
+ntdel  <- 4*npd
+ntdir  <- 3*npd
+
+# Set up dimensioning constants which might need to be increased:
+madj <- max(20,ceiling(3*sqrt(ntot)))
+tadj <- (madj+1)*(ntot+4)
+ndel <- madj*(madj+1)/2
+tdel <- 6*ndel
+ndir <- ndel
+tdir <- 8*ndir
+
+# Call the master subroutine to do the work:
+repeat {
+	tmp <- .Fortran(
+			'master',
+			x=as.double(x),
+			y=as.double(y),
+			sort=as.logical(sort),
+			rw=as.double(rw),
+			npd=as.integer(npd),
+			ntot=as.integer(ntot),
+			nadj=integer(tadj),
+			madj=as.integer(madj),
+			ind=integer(npd),
+			tx=double(npd),
+			ty=double(npd),
+			ilist=integer(npd),
+			eps=as.double(eps),
+			delsgs=double(tdel),
+			ndel=as.integer(ndel),
+			delsum=double(ntdel),
+			dirsgs=double(tdir),
+			ndir=as.integer(ndir),
+			dirsum=double(ntdir),
+			nerror=integer(1),
+			PACKAGE='deldir'
+		)
+	
+# Check for errors:
+	nerror <- tmp$nerror
+	if(nerror < 0) break
+
+	else {
+		if(nerror==4) {
+			cat('nerror =',nerror,'\n')
+			cat('Increasing madj and trying again.\n')
+			madj <- ceiling(1.2*madj)
+			tadj <- (madj+1)*(ntot+4)
+			ndel <- max(ndel,madj*(madj+1)/2)
+			tdel <- 6*ndel
+			ndir <- ndel
+			tdir <- 8*ndir
+			}
+		else if(nerror==14|nerror==15) {
+			cat('nerror =',nerror,'\n')
+			cat('Increasing ndel and ndir and trying again.\n')
+			ndel <- ceiling(1.2*ndel)
+			tdel <- 6*ndel
+	                ndir <- ndel
+	                tdir <- 8*ndir
+		}
+		else {
+			cat('nerror =',nerror,'\n')
+			return(invisible())
+		}
+	}
+}
+
+# Collect up the results for return:
+ndel       <- tmp$ndel
+delsgs     <- round(t(as.matrix(matrix(tmp$delsgs,nrow=6)[,1:ndel])),digits)
+delsum     <- matrix(tmp$delsum,ncol=4)
+del.area   <- sum(delsum[,4])
+delsum     <- round(cbind(delsum,delsum[,4]/del.area),digits)
+del.area   <- round(del.area,digits)
+ndir       <- tmp$ndir
+dirsgs     <- round(t(as.matrix(matrix(tmp$dirsgs,nrow=8)[,1:ndir])),digits)
+dirsgs     <- as.data.frame(dirsgs)
+dirsum     <- matrix(tmp$dirsum,ncol=3)
+dir.area   <- sum(dirsum[,3])
+dirsum     <- round(cbind(dirsum,dirsum[,3]/dir.area),digits)
+dir.area   <- round(dir.area,digits)
+allsum     <- cbind(delsum,dirsum)
+rw         <- round(rw,digits)
+
+# Name the columns of the results:
+dimnames(delsgs) <- list(NULL,c('x1','y1','x2','y2','ind1','ind2'))
+names(dirsgs)    <- c('x1','y1','x2','y2','ind1','ind2','bp1','bp2')
+mode(dirsgs$bp1) <- 'logical'
+mode(dirsgs$bp2) <- 'logical'
+dimnames(allsum) <- list(NULL,c('x','y','n.tri','del.area','del.wts',
+                                'n.tside','nbpt','dir.area','dir.wts'))
+
+# Aw' done!!!
+rslt <- list(delsgs=delsgs,dirsgs=dirsgs,summary=allsum,n.data=n,
+             n.dum=ndm,del.area=del.area,dir.area=dir.area,rw=rw)
+class(rslt) <- 'deldir'
+if(plotit) plot(rslt,...)
+if(plotit) invisible(rslt) else rslt
+}
+dumpts <- function(x,y,dpl,rw) {
+#
+# Function dumpts to append a sequence of dummy points to the
+# data points.
+#
+
+ndm  <- 0
+xd   <- NULL
+yd   <- NULL
+xmin <- rw[1]
+xmax <- rw[2]
+ymin <- rw[3]
+ymax <- rw[4]
+
+# Points on radii of circles emanating from data points:
+if(!is.null(dpl$nrad)) {
+	nrad  <- dpl$nrad # Number of radii from each data point.
+	nper  <- dpl$nper # Number of dummy points per radius.
+	fctr  <- dpl$fctr # Length of each radius = fctr * mean
+                             # interpoint distance.
+	lrad  <- fctr*mnnd(x,y)/nper
+	theta <- 2*pi*(1:nrad)/nrad
+	cs    <- cos(theta)
+	sn    <- sin(theta)
+	xt    <- c(lrad*(1:nper)%o%cs)
+	yt    <- c(lrad*(1:nper)%o%sn)
+	xd    <- c(outer(x,xt,'+'))
+	yd    <- c(outer(y,yt,'+'))
+}
+
+# Ad hoc points passed over as part of dpl:
+if(!is.null(dpl$x)) {
+	xd <- c(xd,dpl$x)
+	yd <- c(yd,dpl$y)
+}
+
+# Delete dummy points outside the rectangular window.
+ndm  <- length(xd)
+if(ndm >0) {
+	drop <- (1:ndm)[xd<xmin|xd>xmax|yd<ymin|yd>ymax]
+	if(length(drop)>0) {
+		xd  <- xd[-drop]
+		yd  <- yd[-drop]
+	}
+}
+
+# Rectangular grid:
+ndx <- dpl$ndx
+okx <- !is.null(ndx) && ndx > 0
+ndy <- dpl$ndy
+oky <- !is.null(ndy) && ndy > 0
+if(okx & oky) {
+	xt  <- if(ndx>1) seq(xmin,xmax,length=ndx) else 0.5*(xmin+xmax)
+	yt  <- if(ndy>1) seq(ymin,ymax,length=ndy) else 0.5*(ymin+ymax)
+	xy <- expand.grid(x=xt,y=yt)
+	xd  <- c(xd,xy$x)
+	yd  <- c(yd,xy$y)
+}
+
+ndm <- length(xd)
+list(x=c(x,xd),y=c(y,yd),ndm=ndm)
+}
+get.cnrind <- function(x,y,rw) {
+x.crnrs <- rw[c(1,2,2,1)]
+y.crnrs <- rw[c(3,3,4,4)]
+M1 <- outer(x,x.crnrs,function(a,b){(a-b)^2})
+M2 <- outer(y,y.crnrs,function(a,b){(a-b)^2})
+MM <- M1 + M2
+apply(MM,2,which.min)
+}
+ind.dup <- function(x,y,rw=NULL,frac=0.0001) {
+#
+# Function ind.dup to calculate the indices of data pairs 
+# which duplicate earlier ones.  (Returns a logical vector;
+# true for such indices, false for the rest.)
+#
+
+if(is.null(rw)) rw <- c(0,1,0,1)
+n <- length(x)
+rslt <- .Fortran(
+		'inddup',
+		x=as.double(x),
+		y=as.double(y),
+		n=as.integer(n),
+		rw=as.double(rw),
+		frac=as.double(frac),
+		dup=logical(n),
+		PACKAGE='deldir'
+	)
+
+rslt$dup
+}
+mid.in <- function(x,y,rx,ry) {
+xm <- 0.5*(x[1]+x[2])
+ym <- 0.5*(y[1]+y[2])
+(rx[1] < xm & xm < rx[2] & ry[1] < ym & ym < ry[2])
+}
+mnnd <- function(x,y) {
+#
+# Function mnnd to calculate the mean nearest neighbour distance
+# between the points whose coordinates are stored in x and y.
+#
+
+n <- length(x)
+if(n!=length(y)) stop('data lengths do not match')
+dmb <- (max(x)-min(x))**2 + (max(y)-min(y))**2
+
+.Fortran(
+	"mnnd",
+	x=as.double(x),
+	y=as.double(y),
+	n=as.integer(n),
+	dmb=as.double(dmb),
+	d=double(1),
+	PACKAGE='deldir'
+	)$d
+}
+plot.deldir <- function(x,add=FALSE,wlines=c('both','triang','tess'),
+                        wpoints=c('both','real','dummy','none'),
+                        number=FALSE,cex=1,nex=1,col=NULL,lty=NULL,
+                        pch=NULL,xlim=NULL,ylim=NULL,xlab='x',ylab='y',...)
+{
+#
+# Function plot.deldir to produce a plot of the Delaunay triangulation
+# and Dirichlet tesselation of a point set, as produced by the
+# function deldir().
+#
+
+wlines  <- match.arg(wlines)
+wpoints <- match.arg(wpoints)
+
+if(is.null(class(x)) || class(x)!='deldir') {
+	cat('Argument is not of class deldir.\n')
+	return(invisible())
+}
+
+col <- if(is.null(col)) c(1,1,1,1,1) else rep(col,length.out=5)
+lty <- if(is.null(lty)) 1:2 else rep(lty,length.out=2)
+pch <- if(is.null(pch)) 1:2 else rep(pch,length.out=2)
+
+plot.del <- switch(wlines,both=TRUE,triang=TRUE,tess=FALSE)
+plot.dir <- switch(wlines,both=TRUE,triang=FALSE,tess=TRUE)
+plot.rl  <- switch(wpoints,both=TRUE,real=TRUE,dummy=FALSE,none=FALSE)
+plot.dum <- switch(wpoints,both=TRUE,real=FALSE,dummy=TRUE,none=FALSE)
+
+delsgs <- x$delsgs
+dirsgs <- x$dirsgs
+n      <- x$n.data
+rw     <- x$rw
+
+if(plot.del) {
+	x1<-delsgs[,1]
+	y1<-delsgs[,2]
+	x2<-delsgs[,3]
+	y2<-delsgs[,4]
+}
+
+if(plot.dir) {
+	u1<-dirsgs[,1]
+	v1<-dirsgs[,2]
+	u2<-dirsgs[,3]
+	v2<-dirsgs[,4]
+}
+
+X<-x$summary[,1]
+Y<-x$summary[,2]
+
+if(!add) {
+	pty.save <- par()$pty
+	on.exit(par(pty=pty.save))
+	par(pty='s')
+	if(is.null(xlim)) xlim <- rw[1:2]
+	if(is.null(ylim)) ylim <- rw[3:4]
+	plot(0,0,type='n',xlim=xlim,ylim=ylim,
+     		xlab=xlab,ylab=ylab,axes=FALSE,...)
+	axis(side=1)
+	axis(side=2)
+}
+
+if(plot.del) segments(x1,y1,x2,y2,col=col[1],lty=lty[1],...)
+if(plot.dir) segments(u1,v1,u2,v2,col=col[2],lty=lty[2],...)
+if(plot.rl) {
+	x.real <- X[1:n]
+	y.real <- Y[1:n]
+	points(x.real,y.real,pch=pch[1],col=col[3],cex=cex,...)
+}
+if(plot.dum) {
+	x.dumm <- X[-(1:n)]
+	y.dumm <- Y[-(1:n)]
+	points(x.dumm,y.dumm,pch=pch[2],col=col[4],cex=cex,...)
+}
+if(number) {
+	xoff <-0.02*diff(range(X))
+	yoff <-0.02*diff(range(Y))
+	text(X+xoff,Y+yoff,1:length(X),cex=nex,col=col[5],...)
+}
+invisible()
+}
+`plot.tile.list` <-
+function (x, verbose = FALSE, close = FALSE, pch = 1, polycol = NA, 
+    showpoints = TRUE, asp = 1, ...) 
+{
+    object <- x
+    if (!inherits(object, "tile.list")) 
+        stop("Argument \"object\" is not of class tile.list.\n")
+    n <- length(object)
+    x.all <- unlist(lapply(object, function(w) {
+        c(w$pt[1], w$x)
+    }))
+    y.all <- unlist(lapply(object, function(w) {
+        c(w$pt[2], w$y)
+    }))
+    x.pts <- unlist(lapply(object, function(w) {
+        w$pt[1]
+    }))
+    y.pts <- unlist(lapply(object, function(w) {
+        w$pt[2]
+    }))
+    rx <- range(x.all)
+    ry <- range(y.all)
+    plot(x.all, y.all, type = "n", asp = asp, xlab = "x", ylab = "y")
+    polycol <- apply(col2rgb(polycol,TRUE),2,
+                     function(x){do.call(rgb,as.list(x/255))})
+    polycol <- rep(polycol, length = length(object))
+    hexbla  <- do.call(rgb,as.list(col2rgb("black",TRUE)/255))
+    hexwhi  <- do.call(rgb,as.list(col2rgb("white",TRUE)/255))
+    ptcol <- ifelse(polycol == hexbla,hexwhi,hexbla)
+    lnwid <- ifelse(polycol == hexbla, 2, 1)
+    for (i in 1:n) {
+        inner <- !any(object[[i]]$bp)
+        if (close | inner) 
+            polygon(object[[i]], col = polycol[i], border = ptcol[i], 
+                lwd = lnwid[i])
+        else {
+            x <- object[[i]]$x
+            y <- object[[i]]$y
+            bp <- object[[i]]$bp
+            ni <- length(x)
+            for (j in 1:ni) {
+                jnext <- if (j < ni) 
+                  j + 1
+                else 1
+                do.it <- mid.in(x[c(j, jnext)], y[c(j, jnext)], 
+                  rx, ry)
+                if (do.it) 
+                  segments(x[j], y[j], x[jnext], y[jnext], col = ptcol[i], 
+                    lwd = lnwid[i])
+            }
+        }
+        if (verbose & showpoints) 
+            points(object[[i]]$pt[1], object[[i]]$pt[2], pch = pch, 
+                col = ptcol[i])
+        if (verbose & i < n) 
+            readline("Go? ")
+    }
+    if (showpoints) 
+        points(x.pts, y.pts, pch = pch, col = ptcol)
+    invisible()
+}
+tile.list <- function (object) 
+{
+    if (!inherits(object, "deldir")) 
+        stop("Argument \"object\" is not of class deldir.\n")
+    rw <- object$rw
+    x.crnrs <- rw[c(1,2,2,1)]
+    y.crnrs <- rw[c(3,3,4,4)]
+    ddd <- object$dirsgs
+    sss <- object$summary
+    npts <- nrow(sss)
+    x <- sss[,"x"]
+    y <- sss[,"y"]
+    i.crnr <- get.cnrind(x,y,rw)
+    rslt <- list()
+    for (i in 1:npts) {
+        m <- as.matrix(rbind(ddd[ddd$ind1 == i, 1:4], ddd[ddd$ind2 == i, 1:4]))
+        bp1 <- c(ddd[ddd$ind1 == i, 7], ddd[ddd$ind2 == i, 7])
+        bp2 <- c(ddd[ddd$ind1 == i, 8], ddd[ddd$ind2 == i, 8])
+        m1 <- cbind(m[, 1:2, drop = FALSE], 0 + bp1)
+        m2 <- cbind(m[, 3:4, drop = FALSE], 0 + bp2)
+        m <- rbind(m1, m2)
+        pt <- sss[i, 1:2]
+        theta <- atan2(m[, 2] - pt[2], m[, 1] - pt[1])
+        theta <- ifelse(theta > 0, theta, theta + 2 * pi)
+        theta.0 <- sort(unique(theta))
+        mm <- m[match(theta.0, theta), ]
+        xx <- mm[, 1]
+        yy <- mm[, 2]
+        bp <- as.logical(mm[, 3])
+# Add corner points if necessary:
+        ii <- i.crnr%in%i
+	xx <- c(xx,x.crnrs[ii])
+	yy <- c(yy,y.crnrs[ii])
+        bp <- c(bp,rep(TRUE,sum(ii)))
+        rslt[[i]] <- acw(list(pt=pt, x = xx, y = yy, bp = bp))
+    }
+    class(rslt) <- "tile.list"
+    rslt
+}

@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Construct the Delaunay triangulation and the Dirichlet
+(Voronoi) tessellation of a planar point set.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../R.css">
+</head><body>
+
+<table width="100%" summary="page for deldir {deldir}"><tr><td>deldir {deldir}</td><td align="right">R Documentation</td></tr></table>
+<h2>Construct the Delaunay triangulation and the Dirichlet
+(Voronoi) tessellation of a planar point set.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+This function computes the Delaunay triangulation (and hence the
+Dirichlet tesselation) of a planar point set according to the second
+(iterative) algorithm of Lee and Schacter &mdash; see REFERENCES.  The
+triangulation is made to be with respect to the whole plane by
+<code>suspending</code> it from so-called ideal points (-Inf,-Inf), (Inf,-Inf)
+(Inf,Inf), and (-Inf,Inf).  The triangulation is also enclosed in a
+finite rectangular window.  A set of dummy points may
+be added, in various ways, to the set of data points being triangulated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+deldir(x, y, dpl=NULL, rw=NULL, eps=1e-09, frac=0.0001,
+       sort=TRUE, plotit=FALSE, digits=6, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x,y</code></td>
+<td>
+The coordinates of the point set being triangulated. These can be
+given by two arguments x and y which are vectors or by a single
+argument x which is a list with components "x" and "y".
+</td></tr>
+<tr valign="top"><td><code>dpl</code></td>
+<td>
+A list describing the structure of the dummy points to be added
+to the data being triangulated.  The addition of these dummy points
+is effected by the auxilliary function dumpts().  The list may have
+components:
+<br>
+ndx: The x-dimension of a rectangular grid; if either ndx or ndy is null,
+no grid is constructed.
+<br>
+ndy: The y-dimension of the aforementioned rectangular grid.
+<br>
+nrad: The number of radii or "spokes", emanating from each data point,
+along which dummy points are to be added.
+<br>
+nper: The number of dummy points per spoke.
+<br>
+fctr: A factor determining the length of each spoke; each spoke is of
+length equal to fctr times the mean nearest neighbour distance of the data.
+(This distance is calculated by the auxilliary function mnnd().)
+<br>
+x: A vector of x-coordinates of "ad hoc" dummy points
+<br>
+y: A vector of the corresponding y-coordinates of "ad hoc" dummy points
+<br>
+</td></tr>
+<tr valign="top"><td><code>rw</code></td>
+<td>
+The coordinates of the corners of the rectangular window enclosing
+the triangulation, in the order (xmin, xmax, ymin, ymax).  Any data
+points (including dummy points) outside this window are discarded.
+If this argument is omitted, it defaults to values given by the range
+of the data, plus and minus 10 percent.
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+A value of epsilon used in testing whether a quantity is zero, mainly
+in the context of whether points are collinear.  If anomalous errors
+arise, it is possible that these may averted by adjusting the value
+of eps upward or downward.
+</td></tr>
+<tr valign="top"><td><code>frac</code></td>
+<td>
+A value specifying the tolerance used in eliminating duplicate
+points; defaults to 0.0001. Points are considered duplicates if
+abs(x1-x2) &lt; frac*(xmax-xmin) AND abs(y1-y2) &lt; frac*(ymax-ymin).
+</td></tr>
+<tr valign="top"><td><code>sort</code></td>
+<td>
+Logical argument; if <code>TRUE</code> (the default) the data (including dummy
+points) are sorted into a sequence of "bins" prior to triangulation;
+this makes the algorithm slightly more efficient.  Normally one would
+set sort equal to <code>FALSE</code> only if one wished to observe some of the
+fine detail of the way in which adding a point to a data set affected
+the triangulation, and therefore wished to make sure that the point
+in question was added last.  Essentially this argument would get used
+only in a de-bugging process.
+</td></tr>
+<tr valign="top"><td><code>plotit</code></td>
+<td>
+Logical argument; if <code>TRUE</code> a plot of the triangulation and tessellation
+is produced; the default is <code>FALSE</code>.
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+The number of decimal places to which all numeric values in the
+returned list should be rounded.  Defaults to 6.
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Auxilliary arguments add, wlines, wpoints, number, nex, col, lty,
+pch, xlim, and ylim (and possibly other plotting parameters) may be
+passed to plot.deldir through "..." if plotit=<code>TRUE</code>.
+</td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This package is a (straightforward) adaptation of the Splus library
+section ``delaunay'' to R.  That library section is an implementation
+of the Lee-Schacter algorithm, which was originally written as a
+stand-alone Fortran program in 1987/88 by Rolf Turner, while with the
+Division of Mathematics and Statistics, CSIRO, Sydney, Australia.  It
+was re-written as an Splus function (using dynamically loaded Fortran
+code), by Rolf Turner while visiting the University of Western
+Australia, May, 1995.
+</p>
+<p>
+Further revisions made December 1996. The author gratefully
+acknowledges the contributions, assistance, and guidance of Mark
+Berman, of D.M.S., CSIRO, in collaboration with whom this project was
+originally undertaken.  The author also acknowledges much useful
+advice from Adrian Baddeley, formerly of D.M.S., CSIRO (now Professor
+of Statistics at the University of Western Australia).  Daryl Tingley
+of the Department of Mathematics and Statistics, University of New
+Brunswick provided some helpful insight.  Special thanks are extended
+to Alan Johnson, of the Alaska Fisheries Science Centre, who supplied
+two data sets which were extremely valuable in tracking down some
+errors in the code.
+</p>
+<p>
+Don MacQueen, of Lawrence Livermore National Lab, wrote an Splus
+driver function for the old stand-alone version of this software.
+That driver, which was available on Statlib, is now deprecated in
+favour of the current package ``delaunay'' package.  Don also
+collaborated in the preparation of that package.
+</p>
+<p>
+Further revisions and bug-fixes were made in 1998, 1999, and 2002.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+A list (of class <code>deldir</code>), invisible if plotit=<code>TRUE</code>, with components:
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>delsgs</code></td>
+<td>
+a matrix with 6 columns.  The first 4 entries of each row are the
+coordinates of the points joined by an edge of a Delaunay
+triangle, in the order (x1,y1,x2,y2).  The last two entries are the
+indices of the two points which are joined.
+</td></tr>
+<tr valign="top"><td><code>dirsgs</code></td>
+<td>
+a data frame with 8 columns.  The first 4 entries of each row are the
+coordinates of the endpoints of one the edges of a Dirichlet tile, in
+the order (x1,y1,x2,y2).  The fifth and sixth entries are the indices
+of the two points, in the set being triangulated, which are separated
+by that edge. The seventh and eighth entries are logical values.  The
+seventh indicates whether the first endpoint of the corresponding
+edge of a Dirichlet tile is a boundary point (a point on the boundary
+of the rectangular window).  Likewise for the eighth entry and the
+second endpoint of the edge.
+</td></tr>
+<tr valign="top"><td><code>summary</code></td>
+<td>
+a matrix with 9 columns, and (n.data + n.dum) rows (see below).
+These rows correspond to the points in the set being triangulated.
+The columns are named "x" (the x-coordinate of the point), "y" (the
+y-coordinate), "n.tri" (the number of Delaunay triangles emanating
+from the point), "del.area" (1/3 of the total area of all the
+Delaunay triangles emanating from the point), "del.wts" (the
+corresponding entry of the "del.area" column divided by the sum of
+this column), "n.tside" (the number of sides &mdash; within the
+rectangular window &mdash; of the Dirichlet tile surrounding the point),
+"nbpt" (the number of points in which the Dirichlet tile intersects
+the boundary of the rectangular window), "dir.area" (the area of the
+Dirichlet tile surrounding the point), and "dir.wts" (the
+corresponding entry of the "dir.area" column divided by the sum of
+this column).  Note that the factor of 1/3 associated with the
+del.area column arises because each triangle occurs three times &mdash;
+once for each corner.
+</td></tr>
+<tr valign="top"><td><code>n.data</code></td>
+<td>
+the number of real (as opposed to dummy) points in the set which was
+triangulated, with any duplicate points eliminated.  The first n.data
+rows of "summary" correspond to real points.
+</td></tr>
+<tr valign="top"><td><code>n.dum</code></td>
+<td>
+the number of dummy points which were added to the set being triangulated,
+with any duplicate points (including any which duplicate real points)
+eliminated.  The last n.dum rows of "summary" correspond to dummy
+points.
+</td></tr>
+<tr valign="top"><td><code>del.area</code></td>
+<td>
+the area of the convex hull of the set of points being triangulated,
+as formed by summing the "del.area" column of "summary".
+</td></tr>
+<tr valign="top"><td><code>dir.area</code></td>
+<td>
+the area of the rectangular window enclosing the points being triangulated,
+as formed by summing the "dir.area" column of "summary".
+</td></tr>
+<tr valign="top"><td><code>rw</code></td>
+<td>
+the specification of the corners of the rectangular window enclosing
+the data, in the order (xmin, xmax, ymin, ymax).
+</td></tr>
+</table>
+
+<h3>Side Effects</h3>
+
+<p>
+If plotit==<code>TRUE</code> a plot of the triangulation and/or tessellation is produced
+or added to an existing plot.
+</p>
+
+
+<h3>Note</h3>
+
+<p>
+If ndx &gt;= 2 and ndy &gt;= 2, then the rectangular window IS the convex
+hull, and so the values of del.area and dir.area are identical.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>
+Rolf Turner
+<a href="mailto:r.turner@auckland.ac.nz">r.turner@auckland.ac.nz</a>
+<a href="http://www.math.unb.ca/~rolf">http://www.math.unb.ca/~rolf</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Lee, D. T., and Schacter, B. J.  "Two algorithms for constructing a
+Delaunay triangulation", Int. J. Computer and Information
+Sciences, Vol. 9, No. 3, 1980, pp. 219 &ndash; 242.
+</p>
+<p>
+Ahuja, N. and Schacter, B. J. (1983). Pattern Models.  New York: Wiley.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+plot.deldir
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x   &lt;- c(2.3,3.0,7.0,1.0,3.0,8.0)
+y   &lt;- c(2.3,3.0,2.0,5.0,8.0,9.0)
+try &lt;- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10))
+# Puts dummy points at the corners of the rectangular
+# window, i.e. at (0,0), (10,0), (10,10), and (0,10)
+## Not run: 
+try &lt;- deldir(x,y,list(ndx=2,ndy=2),c(0,10,0,10),plot=TRUE,wl='tr')
+## End(Not run)
+# Plots the triangulation which was created (but not the tesselation).
+</pre>
+
+
+
+<hr><div align="center">[Package <em>deldir</em> version 0.0-7 <a href="00Index.html">Index]</a></div>
+
+</body></html>
