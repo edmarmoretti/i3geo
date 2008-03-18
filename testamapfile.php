@@ -118,11 +118,16 @@ function verifica($map)
 			return;
 		}
 		$temasn = $nmapa->getAllLayerNames();
+		$dados = "";
 		foreach ($temasn as $teman)
 		{
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
+			if ($layern->data == "")
+			$dados = $layern->connection;
+			else
+			$dados = $layern->data;			
 		}
 		if (isset($postgis_mapa))
 		{
@@ -169,6 +174,10 @@ function verifica($map)
 		if(($tipo == "") || ($tipo == "todos"))
 		{
 			echo "<img src=".$nomer." />";
+			if($tipo == "todos")
+			{
+			 echo "<br>".$dados."<br>";
+			}
 			if($map != "todos")
 			{
 				echo "<br>Erros:<br>";
