@@ -117,6 +117,9 @@ foreach ($_GET as $k=>$v)
 	{$tipo = "metadados";}
 	if(strtolower($k) == "layers")
 	{$tema = $v;}
+	if(strtolower($k) == "layer")
+	{$tema = $v;}
+
 }
 if(isset($tema))
 {$tipo = "";}
