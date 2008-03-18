@@ -4,31 +4,36 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-
-<!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
-arquivos não compactados, bastando substituir por i3geonaocompacto -->
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
-
 <!--
-<style>
-#box1
-{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid green;}
-</style>
+	Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
+	arquivos não compactados, bastando substituir por i3geonaocompacto.js
 -->
-
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<!--
+	<style>
+	#box1
+	{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid green;}
+	</style>
+-->
 </head>
 <body id="i3geo" >
 <center>
 <table id='mst' style='display:none' width=100% cellspacing='0'>
-<!-- Inclui a barra superior. Se vc não quiser o menu, é só comentar -->
-<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<!--
+	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
+-->
+<tr style="border:0px">
+	<td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
 <tr>
 <td>
   <table width=100% cellspacing=0 cellpadding=0 >
    <tr>
    <td title="libera guias" class=tdclaro id=encolheFerramentas style="vertical-align:top;width:5px;text-align:left;"></td>
    <td>
-    <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
+    <!--
+    	Guias principais, não mude o ID, apenas o nome se for desejado
+    -->
     <div class=verdeescuro style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
@@ -40,18 +45,26 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
   </table>
 </td>
 <td style="text-align:right;height:0px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
-<!-- menu suspenso-->
-	 <div id="menus" >
-     </div>    
+	<!--
+		menu suspenso
+	-->
+	 <div id="menus" ></div>    
 </td>
 </tr>
 <tr>
  <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
-  <!-- Esta div acrescenta a lista de propriedades do mapa, caso vc queira colocá-la em um lugar específico
-  <div id=listaPropriedades ></div>
+  <!--
+  	Esta div acrescenta a lista de propriedades do mapa, caso vc queira colocá-la em um lugar específico
   -->
-  <!-- Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico
-  <div id=buscaRapida ></div>
+  <!--<div id=listaPropriedades ></div>-->
+  <!--
+  	Esta div acrescenta a opção de busca rápida, caso vc queira colocá-la em um lugar específico
+  -->
+  <!-- <div id=buscaRapida ></div> -->
+  <!--
+  	As divs guiaNobj guardam o conteúdo que é mostrado quando a guia é clicada
+  	Para cada botão na guia deve haver um div com o conteúdo, pe.
+  	o div com id=guia1 deve ter um div com id=guia1obj
   -->
   <div id='guia1obj' ><div style='left:5px;top:10px;' id=buscaRapida ></div><div id=listaPropriedades style='top:15px;' ></div><div id=listaTemas style='top:15px;'></div></div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
@@ -60,22 +73,27 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
  </td>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
-   <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px -->
+   <!--
+   	Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px
+   -->
    <tr><td  class=verdeclaro id=contemImg >
     <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
   </table>
  </td>
  </tr>
-<!-- Mostra as coordenadas conforme o mouse é movimentado
-  <div class=pcenter10 id='longlat'>Longitude e latitude</div>
+<!--
+Mostra as coordenadas conforme o mouse é movimentado
 -->  
-<!-- Escala gráfica. Pode ser excluída. 
-  <div id="escalaGrafica" style="text-align:left"></div>
+<!-- <div class=pcenter10 id='longlat'>Longitude e latitude</div> -->
+<!--
+Escala gráfica. Pode ser excluída.
+--> 
+<!-- <div id="escalaGrafica" style="text-align:left"></div>-->
+<!--
+vc pode optar por colocar mensagens de ajuda em algum lugar
 -->
-<!--- vc pode optar por colocar mensagens de ajuda em algum lugar 
-<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
--->
+<!--<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>-->
 <tr>
  <td class=tdbranca >
  	<div id=visual ></div>
@@ -86,9 +104,11 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
   <td class=tdbranca ><div id=lugarquadros ></div></td>
   <td class=tdbranca style=text-align:center ><div id=localizarxy >Aguarde...</div></td>
   <td class=tdbranca ><div id=escala ></div></td>
-  <!-- A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
-  que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
-  SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações -->
+  <!--
+  	A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
+  	que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
+  	SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
+  -->
   <td class=tdbranca ><div id=ondeestou ></div></td>
   </tr></table>
  </td>
@@ -97,7 +117,11 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 </table>
 <a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
-<!-- barra de botoes que serão incluídos na janela móvel de navegação -->
+<!--
+	Barra de botoes que serão incluídos na janela móvel de navegação
+	Para excluir um botão é só apagar a linha.
+	Para adicionar um botão, é só criar uma linha e especificar a função que será executada quando o usuário clicar no botão
+-->
 <div id=barraDeBotoes1 style='display:none'> 
    <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
    <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
@@ -112,7 +136,6 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 	<table style="width:100%"><caption style="text-align:center">&nbsp;</caption>
 	<tr><td style='background-color:rgb(250,250,250);'><img title="" alt="" src="../imagens/branco.gif" id='sobeferramentas'/></td></tr>
 	</table>
-
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:6px;'>&nbsp;</p>
 		<img title="reinicia" alt="" src="../imagens/branco.gif" id='reinicia'/>
