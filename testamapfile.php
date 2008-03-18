@@ -129,7 +129,7 @@ function verifica($map)
 			else
 			$dados = $layern->data;
 			
-			zoomTema($layern,$mapa);		
+			$pegarext = $teman;	
 		}
 		if (isset($postgis_mapa))
 		{
@@ -149,6 +149,7 @@ function verifica($map)
 				}
 			}
 		}
+		zoomTema($pegarext,&$mapa);
 		if ($tipo == "mini")
 		{
 		 	 $mapa->setsize(50,50);
@@ -200,8 +201,9 @@ function verifica($map)
 		$objImagem->free();
 	}
 }
-function zoomTema($layer,&$mapa)
+function zoomTema($nomelayer,&$mapa)
 {
+	$layer = $mapa->getlayerbyname($nomelayer);
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;
