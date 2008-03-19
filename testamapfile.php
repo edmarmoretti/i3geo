@@ -128,7 +128,6 @@ function verifica($map)
 			$dados = $layern->connection;
 			else
 			$dados = $layern->data;
-			
 			$pegarext = $teman;	
 		}
 		if (isset($postgis_mapa))
@@ -204,6 +203,8 @@ function verifica($map)
 function zoomTema($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
+	if($layer->type > 2)
+	{return;}
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;
