@@ -295,6 +295,18 @@ pt: "Gerador de links",
 en:"Link generator",
 es:"Generador de enlaces"
 }],
+"u22": [
+{
+pt: "Grade",
+en:"Graticule",
+es:"Grado"
+}],
+"u23": [
+{
+pt: "Ponto",
+en:"Point",
+es:"Punto"
+}],
 //arvore com a lista de temas
 "t1": [
 {
@@ -1241,16 +1253,34 @@ oMenuData = {
 	{ text: $trad("u5"), url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
 	],
 	"analise": [
+    { text: $trad("u22"),url: "#", 
+		submenu:
+		{
+			id: "menugrade", 
+			itemdata: 
+			[
+				{text: $trad("u7"), url: "javascript:gradePol()"},
+				{ text: $trad("u8"), url: "javascript:gradePontos()" },
+				{ text: $trad("u9"), url: "javascript:gradeHex()" }
+			] 
+		}	
+	},
+    { text: $trad("u23"),url: "#", 
+		submenu:
+		{
+			id: "menupontos", 
+			itemdata: 
+			[
+				{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
+				{ text: $trad("u12"), url: "javascript:nptPol()" },
+				{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
+				{ text: $trad("u14"), url: "javascript:pontosdistri()" }
+			] 
+		}	
+	},
 	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
-	{ text: $trad("u7"), url: "javascript:gradePol()" },
-	{ text: $trad("u8"), url: "javascript:gradePontos()" },
-	{ text: $trad("u9"), url: "javascript:gradeHex()" },
 	{ text: $trad("u10"), url: "javascript:buffer()" },
-	{ text: $trad("u11"), url: "javascript:centroide()" },
-	{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
-	{ text: $trad("u12"), url: "javascript:nptPol()" },
-	{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
-	{ text: $trad("u14"), url: "javascript:pontosdistri()" }
+	{ text: $trad("u11"), url: "javascript:centroide()" }
 	]
 };
 oMenuData.janelas = [
