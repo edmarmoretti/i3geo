@@ -105,6 +105,7 @@ File: i3geo/menutemas/menutemas.xml
             <TNOME>Biomas</TNOME>
             <TDESC></TDESC>
             <TLINK></TLINK>
+            <DOWNLOAD>SIM</DOWNLOAD>
          </TEMA>
          <TEMA>
             <TID>biomaerro</TID>

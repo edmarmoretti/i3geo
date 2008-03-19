@@ -80,7 +80,7 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 		$this->xmlsistemas = "";
 		if ($locsistemas != "")
 		$this->xmlsistemas = simplexml_load_file($locsistemas);		
-		if ($map_file != "")
+		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			$this->arquivo = $map_file;

@@ -1476,8 +1476,10 @@ $map_file -Nome do arquivo map file. Inclua o caminho completo no servidor.
 $locaplic - Diretório onde está a aplicação no servidor.
 
 $dir_tmp - Diretório temporário
+
+$nomeRand - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
 */
-function criaSHP($tema,$map_file,$locaplic,$dir_tmp)
+function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 {
 	//para manipular dbf
 	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
@@ -1491,8 +1493,13 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp)
 	$tipol = MS_SHP_POINT;
 	if ($layer->type == MS_LAYER_LINE){$tipol = MS_SHP_ARC;}
 	if ($layer->type == MS_LAYER_POLYGON){$tipol = MS_SHP_POLYGON;}
+	if ($nomeRand)
 	$novonomelayer = nomeRandomico(20);
+	else
+	$novonomelayer = $tema;
 	$nomeshp = $dir_tmp."/".$novonomelayer;
+	if(file_exists($nomeshp.".shp"))
+	{return $nomeshp;}
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
 	else
@@ -1590,12 +1597,12 @@ Include:
 function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 {
 	ini_set("max_execution_time","1800");
-	if (!@ms_newMapObj($map_file)) //a funcao foi chamada do aplicativo datadownload
+	if(file_exists($locaplic."/ms_configura.php"))
+	require_once($locaplic."/ms_configura.php");
+	else	
+	require_once("../ms_configura.php");
+	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
-		if(file_exists($locaplic."/ms_configura.php"))
-		require_once($locaplic."/ms_configura.php");
-		else	
-		require_once("../ms_configura.php");
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}
 		else
@@ -1672,17 +1679,20 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			{$arq = $sp.$dados;}
 			if ($arq != "")
 			{
-				$novonomelayer = nomeRandomico(20);
+				$novonomelayer = $tema; //nomeRandomico(20);
 				$nomeshp = $dir_tmp."/".$novonomelayer;
 				$arq = explode(".shp",$arq);
-				copy($arq[0].".shp",$nomeshp.".shp");
-				copy($arq[0].".shx",$nomeshp.".shx");
-				copy($arq[0].".dbf",$nomeshp.".dbf");
+				if(!file_exists($nomeshp.".shp"))
+				{
+					copy($arq[0].".shp",$nomeshp.".shp");
+					copy($arq[0].".shx",$nomeshp.".shx");
+					copy($arq[0].".dbf",$nomeshp.".dbf");
+				}
 				$resultado[] = str_replace($radtmp,"",$nomeshp);
 			}
 			else
 			{
-				$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp);
+				$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
 				$resultado[] = str_replace($radtmp,"",$restemp);
 			}
 		}

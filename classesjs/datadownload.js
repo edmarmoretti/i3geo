@@ -102,7 +102,7 @@ function DDinicia()
 {
 	if (g_tipo == "menutemas")
 	{
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''";
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -359,7 +359,7 @@ tema - código do tema para download
 function download(tema)
 {
 	document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
-	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=download&tema="+tema;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download&tema="+tema;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -376,7 +376,7 @@ function mostraDownload(retorno)
 	{
 		var retorno = retorno.data
 		var arqs = retorno.split(",")
-		var ins = "<b>Clique nos links para pegar os arquivos:</b><br><br>"
+		var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado.</b><br><br>"
 		for (var arq=0;arq<arqs.length;arq++)
 		{
 			var temp = arqs[arq].split(".");

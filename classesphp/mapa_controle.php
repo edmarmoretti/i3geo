@@ -79,7 +79,7 @@ Include:
 <pega_variaveis.php>, <carrega_ext.php>, <cpaint2.inc.php>, <classe_vermultilayer.php>, <classe_estatistica.php>, <funcoes_gerais.php>
 
 */
-//error_reporting(0);
+error_reporting(0);
 
 //sleep(5);
 
@@ -134,12 +134,22 @@ $_SESSION["ultimopid"] = getmypid();
 if ($funcao == "criaMapa")
 {
 	session_destroy();
-	include("../ms_configura.php");
+	//
+	//primeiro é necessário carregar o ms_configura.php para pegar a variável $locaplic
+	//
+	$d = "";
+	if(!file_exists($d."ms_configura.php"))
+	$d = "../";
+	include($d."ms_configura.php");
+	//
+	//é necessário mudar o diretório em função dos includes que são feitos pelo ms_criamapa.php
+	//
 	chdir($locaplic);
 	$interface = "mashup";
 	include("ms_criamapa.php");
 	$cp->set_data(session_id());
 	$cp->return_data();
+	return;
 }	
 if (!isset($map_file))
 {
@@ -1493,6 +1503,9 @@ Include:
 	case "pegalistadegrupos":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		if(!isset($idmenu)){$idmenu="";}
+		if(!isset($listasistemas)){$listasistemas="nao";}
+		if(!isset($listasgrupos)){$listasgrupos="sim";}
 		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos)));
 	break;
 /*
@@ -2349,6 +2362,7 @@ Lista os arquivos de um diretório.
 }
 if (!connection_aborted())
 {
+	if(isset($map_file) && isset($postgis_mapa))
 	restauraCon($map_file,$postgis_mapa);
 	$cp->return_data();
 }
