@@ -61,10 +61,14 @@ parameters:
 
 $map_file - Endereço do mapfile no servidor.
 */  	
-	function __construct($map_file)
+	function __construct($map_file,$locaplic="")
 	{
   		//error_reporting(E_ALL);
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		require_once($locaplic."/funcoes_gerais.php");
+  		else
   		require_once("funcoes_gerais.php");
+  		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
 		for ($i=0;$i < ($this->mapa->numlayers);$i++)
@@ -139,7 +143,7 @@ string - javascript com os parametros
 				//verifica se o tema pode receber a operação de zoom para o tema
 				//
 				$zoomtema = "sim";
-				if (($ct != 1) && ($oLayer->getmetadata("extencao") == ""))
+				if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
 				{$zoomtema = "nao";}
 				//
 				//verifica se existe restrição de escala
@@ -179,7 +183,10 @@ Include:
 */
 	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
-		require_once("classe_imagem.php");
+  		if(file_exists($this->locaplic."/classe_imagem.php"))
+  		require_once($this->locaplic."/classe_imagem.php");
+  		else
+  		require_once("classe_imagem.php");
 		$nomer = "";
 		$qy = file_exists(($this->arquivo)."qy");
 		$legenda = $this->mapa->legend;
@@ -878,6 +885,9 @@ Include:
 */
 	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain")
 	{
+		if(file_exists($this->locaplic."/wmswfs.php"))
+		require_once($this->locaplic."/wmswfs.php");
+		else
 		require_once("wmswfs.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
@@ -1093,7 +1103,10 @@ $canal - Identificador do canal (ordem em que está no RSS)
 		if (count($resultado) > 0)
 		{
 			//para manipular dbf
-			require_once "../pacotes/phpxbase/api_conversion.php";
+			if (file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			require_once ($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			else
+			require_once ("../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
 			if ($tipog != "envelope"){$tipol = MS_SHP_POINT;}

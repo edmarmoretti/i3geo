@@ -75,10 +75,14 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - Nome do tema que será processado
 */  
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$locaplic)
 	{
   		//error_reporting(E_ALL);
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		require_once($locaplic."/funcoes_gerais.php");
+  		else
   		require_once("funcoes_gerais.php");
+  		$thhis->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "")
@@ -616,6 +620,9 @@ $locaplic - diretório da aplicação i3geo
 	{
 		if (file_exists($nomearq))
 		{
+  			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+  			require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+  			else	
 			require_once "../pacotes/phpxbase/api_conversion.php";
 			//define o nome do novo shapefile que será criado
 			$nomefinal = nomeRandomico();
@@ -700,6 +707,9 @@ $locaplic - diretório da aplicação i3geo
 	{
 		if (file_exists($nomearq))
 		{
+  			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+  			require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+  			else	
 			require_once "../pacotes/phpxbase/api_conversion.php";
 			//
 			//define os nomes dos novos shapefiles que serão criados
@@ -858,6 +868,9 @@ $locaplic - Localização do I3geo.
 */
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
@@ -1000,6 +1013,9 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 {
 	//error_reporting(E_ALL);
 	//para manipular dbf
+	if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+	require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+	else	
 	require_once "../pacotes/phpxbase/api_conversion.php";
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
@@ -1121,8 +1137,10 @@ nome do layer criado com o buffer.
 	function criaBuffer($distancia,$locaplic)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
-		//define o nome do novo shapefile que será criado
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
 		//pega os shapes selecionados
@@ -1216,8 +1234,10 @@ $locaplic - Localização do I3geo.
 	function criaCentroide($locaplic)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
-		//define o nome do novo shapefile que será criado
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		//pega os shapes selecionados
@@ -1304,8 +1324,10 @@ $npty - Número de pontos em Y (opcional)
 	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
-		//define o nome do novo shapefile que será criado
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
 		$this->mapa->preparequery();
@@ -1413,6 +1435,9 @@ $npty - Número de pontos em Y (opcional)
 	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
@@ -1547,6 +1572,9 @@ $npty - Número de pontos em Y (opcional)
 	function gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$nomegrade = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomegrade;
@@ -1684,6 +1712,9 @@ $locaplic - Localização do I3geo
 	function nptPol($temaPt,$temaPo,$locaplic)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$layerPt = $this->mapa->getlayerbyname($temaPt);
 		$layerPt->set("template","none.htm");
@@ -1957,6 +1988,9 @@ $operacao - Tipo de análise.
 		if ($tiposhape == 0){$tiposhapefile = MS_SHP_MULTIPOINT;}
 		if ($tiposhape == 1){$tiposhapefile = MS_SHP_ARC;}
 		//cria o shapefile
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$diretorio = dirname($this->arquivo);
 		$novonomelayer = nomeRandomico();

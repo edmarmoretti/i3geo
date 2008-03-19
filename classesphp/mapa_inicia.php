@@ -161,7 +161,7 @@ function iniciaMapa()
 			//verifica se o tema pode receber a operação de zoom para o tema
 			//
 			$zoomtema = "sim";
-			if (($ct != 1) && ($oLayer->getmetadata("extecao") == ""))
+			if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
 			{$zoomtema = "nao";}
 			//
 			//verifica se existe restrição de escala

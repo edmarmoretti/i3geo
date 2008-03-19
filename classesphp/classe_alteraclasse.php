@@ -71,10 +71,14 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
 */ 
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
+  		if (file_exists($locaplic."/funcoes_gerais.php"))
+  		require_once($locaplic."/funcoes_gerais.php");
+  		else
   		require_once("funcoes_gerais.php");
+  		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
  		$this->layer = $this->mapa->getlayerbyname($tema);
@@ -249,7 +253,10 @@ Include:
 		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
-			require_once("classe_estatistica.php");
+  			if(file_exists($this->locaplic."/classe_estatistica.php"))
+  			require_once($this->locaplic."/classe_estatistica.php");
+  			else
+  			require_once("classe_estatistica.php");
 			$estat = new estatistica();
 			$estat->calcula($valores);
 			$calc = $estat->resultado;
@@ -372,6 +379,9 @@ Include:
 */
 	function alteraCoresClasses($cori,$corf)
 	{
+		if(file_exists($this->locaplic."/class.palette.php"))		
+		include($this->locaplic."/class.palette.php");
+		else
 		include("class.palette.php");
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));

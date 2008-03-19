@@ -54,15 +54,13 @@ File: i3geo/classesphp/atlas_controle.php
 error_reporting(0);
 $tempo = microtime(1);
 //
+// quando as funções abaixo forem utilizadas, é necessário definir $map_file para que o programa continue.
+//
+//
 //pega as variaveis passadas com get ou post
 //
 include_once("pega_variaveis.php");
-//
-// quando as funções abaixo forem utilizadas, é necessário definir $map_file para que o programa continue.
-//
-if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
-{$map_file = "";}
-if (isset ($g_sid))
+if(isset($g_sid))
 {
 	session_name("i3GeoPHP");
 	session_id($g_sid);
@@ -72,6 +70,9 @@ if (isset ($g_sid))
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
 }
+if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
+{$map_file = "";}
+
 if (!isset($atlasxml))
 {
 	include_once("../ms_configura.php");
@@ -81,8 +82,9 @@ if (!isset($atlasxml))
 //ativa o php mapscript e as extensões necessárias
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
-include_once ("carrega_ext.php");
+include_once("carrega_ext.php");
 require_once("../pacotes/cpaint/cpaint2.inc.php");
+
 //
 //cria objeto cpaint para uso com ajax
 //

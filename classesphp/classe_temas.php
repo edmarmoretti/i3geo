@@ -343,7 +343,7 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
 		$extatual = $this->mapa->extent;
-		$ret = $this->layer->getmetadata("extencao");
+		$ret = $this->layer->getmetadata("extensao");
 		if ($ret == "")
 		{
 			$ret = $this->layer->getextent();

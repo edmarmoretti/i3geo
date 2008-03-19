@@ -68,9 +68,10 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
 */
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
+  		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->tema = $tema;
@@ -100,6 +101,9 @@ Nome do tema criado.
 */
 	function criaSHPvazio()
 	{
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$diretorio = dirname($this->arquivo);
 		$tipol = MS_SHP_POINT;
@@ -140,6 +144,9 @@ $projecao - código epsg da projeção das coordenadas
 */
 	function insereSHP($xy,$projecao)
 	{
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$xy = explode(" ",$xy);
 		$data = $this->layer->data;
@@ -295,6 +302,9 @@ $para - linha|poligono
 	function shpPT2shp($locaplic,$para)
 	{
 		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
 		require_once "../pacotes/phpxbase/api_conversion.php";
 		$this->layer->set("template","none.htm");
 		$diretorio = dirname($this->arquivo);

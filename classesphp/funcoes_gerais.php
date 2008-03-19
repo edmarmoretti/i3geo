@@ -1480,6 +1480,9 @@ $dir_tmp - Diretório temporário
 function criaSHP($tema,$map_file,$locaplic,$dir_tmp)
 {
 	//para manipular dbf
+	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
+	require_once($locaplic."/pacotes/phpxbase/api_conversion.php");
+	else	
 	require_once "../pacotes/phpxbase/api_conversion.php";
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
@@ -1589,6 +1592,9 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	ini_set("max_execution_time","1800");
 	if (!@ms_newMapObj($map_file)) //a funcao foi chamada do aplicativo datadownload
 	{
+		if(file_exists($locaplic."/ms_configura.php"))
+		require_once($locaplic."/ms_configura.php");
+		else	
 		require_once("../ms_configura.php");
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1windows.map");}

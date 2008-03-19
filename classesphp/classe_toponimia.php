@@ -72,9 +72,12 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema que será processado
 */
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
+  		if(file_exists($locaplic."/funcoes_gerais.php"))
+  		require_once($locaplic."/funcoes_gerais.php");
+  		else
   		require_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;

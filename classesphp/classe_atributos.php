@@ -71,9 +71,10 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
 */
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$locaplic)
 	{
   		//error_reporting(E_ALL);
+  		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "")
@@ -505,6 +506,9 @@ Include:
 		if (count($valoresn) == 0)
 		{return("erro. Nenhum valor valido");}
 		//faz os calculos
+		if(file_exists($this->locaplic."/classe_estatistica.php"))
+		require_once($this->locaplic."/classe_estatistica.php");
+		else	
 		require_once("classe_estatistica.php");
 		$estat = new estatistica();
 		$resultado = $estat->calcula($valoresn);
