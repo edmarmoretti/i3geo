@@ -445,7 +445,10 @@ function initJanelaMen()
 			novoel.style.display="block";
 			novoel.style.border="1px solid rgb(170,170,170)";
 			novoel.innerHTML = '<div class="hd">&nbsp;</div><div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
-			document.body.appendChild(novoel);
+			if($i("i3geo"))
+			{$i("i3geo").appendChild(novoel);}
+			else
+			{document.body.appendChild(novoel);}
 			var i = ($i("janelaMenTexto")).style;
 			i.textAlign="left";
 			i.fontSize="10px";
@@ -540,7 +543,10 @@ function docaguias()
 			var temp = '<div class="hd">Guias</div>';
 			temp += '<div class="bd" id="conteudojanelaguias"></div>';
 			novoel.innerHTML = temp;
-			document.body.appendChild(novoel);
+			if($i("i3geo"))
+			{$i("i3geo").appendChild(novoel);}
+			else
+			{document.body.appendChild(novoel);}
 			$i("conteudojanelaguias").innerHTML = novono;
 			YAHOO.namespace("janelaguias.xp");
 			YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"268px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
@@ -713,7 +719,10 @@ function mensagemf(m)
 			var novoel = document.createElement("div");
 			novoel.id = 'mensagem';
 			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
-			document.body.appendChild(novoel);
+			if($i("i3geo"))
+			{$i("i3geo").appendChild(novoel);}
+			else
+			{document.body.appendChild(novoel);}
 		}
 		if (m == null)
 		{$i("mensagem").style.visibility = "hidden";}
@@ -764,7 +773,10 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		novoel.id = "wdoca";
 		novoel.style.display="block";
 		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
+		if($i("i3geo"))
+		{$i("i3geo").appendChild(novoel);}
+		else
+		{document.body.appendChild(novoel);}
 		if ($i("wdocai"))
 		{
 			with ($i("wdocai").style){width = "100%";height=waltura;};
