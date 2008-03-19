@@ -251,7 +251,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 Quando essa variável for definida como "nao" algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais.
 	*/
-	$expoeMapfile = "nao";
+	$expoeMapfile = "";
 }
 else //se for linux
 {
