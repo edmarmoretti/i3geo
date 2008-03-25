@@ -1303,6 +1303,7 @@ $locaplic - Localização do I3geo.
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
+		$novolayer->setmetadata("TEMALOCAL","SIM");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
