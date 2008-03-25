@@ -112,7 +112,7 @@ function criaLin()
 {
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
-	//cp.set_debug(2)
+	//cp.set_debug(2) 
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=sphPT2shp&para=linha&tema="+window.parent.g_nomepin;
 	cp.call(p,"sphPT2shp",window.parent.ajaxredesenha);
 }
@@ -132,9 +132,12 @@ function criatemaeditavel()
 	$i("resultado").innerHTML = ""
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
+	cp.set_transfer_mode("POST");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criashpvazio";
-	cp.call(p,"criaSHPvazio",ativanovotema);
+	//var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criashpvazio";
+	//cp.call(p,"criaSHPvazio",ativanovotema);
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
+	cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
 }
 //ativa o tema com o shape vazio
 function ativanovotema(retorno)
