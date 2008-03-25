@@ -1,5 +1,5 @@
-SYMBOLSET /ms4w/apache/htdocs/i3geo/symbols/simbolos.sym
-FONTSET   "/ms4w/apache/htdocs/i3geo/symbols/fontes.txt"
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
 LAYER
   NAME locali # ok
   TYPE point
