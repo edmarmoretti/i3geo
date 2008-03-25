@@ -6,6 +6,15 @@ Processa os array $_GET e $_POST, transformando-as em variáveis conforme as chav
 Deve ser incluído sempre nos programas em PHP, evitando que o parâmetro "REGISTER_GLOBALS" 
 do PHP precise ser definido como "On".
 
+No caso do uso de POST do lado cliente com a biblioteca CPAINT, é feito o processamento
+dos argumentos definidos na chamada call. Para fazer a chamada utilizando-se POST, deve-se seguir o exemplo abaixo:
+
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	cp.set_transfer_mode("POST");
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
+	cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
+
 About: Licença
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
@@ -26,7 +35,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-About: Exemplo
+About: Exemplo 
 
 include("pega_variaveis.php");
 
@@ -46,8 +55,25 @@ if (isset($_POST))
 {
 	foreach(array_keys($_POST) as $k)
 	{
-		if ($_POST[$k] != "''")
+		if (($_POST[$k] != "''"))
 		eval("\$".$k."='".$_POST[$k]."';");
+		if (($_POST[$k] != "''") && ($k == "cpaint_argument"))
+		{
+			foreach($_POST["cpaint_argument"] as $argumento_)
+			{
+				$argumento_ = str_replace("\\\"","",$argumento_);
+				$parametros_ = explode("&",$argumento_);
+				foreach($parametros_ as $parametro_)
+				{	
+					$p_ = explode("=",$parametro_);
+					if($p_[0] != "")
+					eval("\$".$p_[0]."='".$p_[1]."';");
+				}
+			}	
+			
+		}
+		
 	}
+
 }
 ?>
