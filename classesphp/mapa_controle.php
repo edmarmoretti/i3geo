@@ -1187,8 +1187,12 @@ Include:
 	case "analiseDistriPt":
 		include("classe_analise.php");
 		copiaSeguranca($map_file);
+		if(!isset($tema2))
+		{$tema2 = "";}
+		if(!isset($limitepontos))
+		{$limitepontos = "";}
 		$m = new Analise($map_file,$tema);
-		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos));
+		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2));
 		$m->salva();
 	break;
 /*
