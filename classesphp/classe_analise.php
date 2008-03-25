@@ -132,76 +132,29 @@ $limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geográfico dos ponto
 Include:
 <class.palette.php>
 */
-	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE")
+	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="")
 	{
-		$prjMapa = $this->mapa->getProjection();
-		$prjTema = $this->layer->getProjection();
-		$layerPt = $this->layer;
-		$layerPt->set("tolerance",0);
-		$layerPt->set("template","none.htm");
-		$nomefinal = nomeRandomico();
-		$nomearq = $this->diretorio."/".$nomefinal;
-		$itemspt = pegaItens($layerPt);
-		$existesel = "nao";
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
-		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
-		if ($existesel == "nao")
-		{$layerPt->queryByrect($this->mapa->extent);}
-		$res_count = $layerPt->getNumresults();
-		$pontos = array();
-		//pega um shape especifico
-		$layerPt->open();
-		if (($prjTema != "") && ($prjMapa != $prjTema))
+		//
+		//pega os dados do tema dois para as funções que o utilizam
+		//
+		$dados1 = $this->gravaCoordenadasPt($this->nome,$limitepontos);
+		$nomearq = $dados1["prefixoarquivo"];
+		$dimx = $dados1["dimx"];
+		$dimy = $dados1["dimy"];
+		if (isset($tema2) && $tema2 != "")
 		{
-			$projInObj = ms_newprojectionobj($prjTema);
-			$projOutObj = ms_newprojectionobj($prjMapa);		
+			$dados2 = $this->gravaCoordenadasPt($tema2,$limitepontos);
+			$nomearq2 = $dados2["prefixoarquivo"];
+			$dimx2 = $dados2["dimx"];
+			$dimy2 = $dados2["dimy"];
 		}
-		for ($i = 0; $i < $res_count; $i++)
-		{
-			$result = $layerPt->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shape = $layerPt->getshape(-1, $shp_index);
-			$lineo = $shape->line(0);
-			$pt = $lineo->point(0);
-			if (($prjTema != "") && ($prjMapa != $prjTema))
-			{
-				$pt->project($projInObj, $projOutObj);
-			}		
-			$pontos[] = $pt->x."  ".$pt->y."\n";
-			$pontosx[] = $pt->x;
-			$pontosy[] = $pt->y;
-		}
-		$layerPt->close();
-		//grava o arquivo com os pontos em x
-		$f = fopen($nomearq."x","w");
-		foreach ($pontosx as $pt)
-		{fwrite($f,$pt."\n");}
-		fclose($f);
-		//grava o arquivo com os pontos em y
-		$f = fopen($nomearq."y","w");
-		foreach ($pontosy as $pt)
-		{fwrite($f,$pt."\n");}
-		fclose($f);
-		if ($limitepontos == "TRUE")
-		{
-			$xi = (min($pontosx));
-			$xf = (max($pontosx));
-			$yi = (min($pontosy));
-			$yf = (max($pontosy));
-		}
-		else
-		{
-			$ext = $this->mapa->extent;
-			$xi = $ext->minx;
-			$xf = $ext->maxx;
-			$yi = $ext->miny;
-			$yf = $ext->maxy;
-		}
-		$dimx = "c(".$xi.",".$xf.")";
-		$dimy = "c(".$yi.",".$yf.")";
 		switch ($tipo)
 		{
+			//cluster espacial
+			case "cluster":
+			$this->mapaCluster($nomearq,$nomearq2,$dimx,$dimy,$dir_tmp,$R_path,$locaplic);
+			return "ok";
+			break;
 			//delaunay e voronoi
 			case "deldir":
 			$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
@@ -389,6 +342,61 @@ $locaplic - Onde fica o I3Geo.
 		$rcode[] = 'close(zz)';
 		$r = executaR($rcode,$dir_tmp,$R_path);
 	}
+/*
+function: mapaCluster
+
+Gera um mapa de cluster.
+
+Executa script R para gerar os dados.
+
+parameters:
+$arqpt - Prefixo dos arquivos em disco com os pontos.
+
+$dimx - Range em x no formato R c(-54,-53).
+
+$dimy - Range em y no formato R c(-25,-23).
+
+$dir_tmp - Diretório temporário do mapserver.
+
+$R_path - Onde fica o R.
+
+$locaplic - Onde fica o I3Geo.
+
+$sigma - Bandwidth for kernel smoother in "smooth" option.
+*/
+	function mapaCluster($arqpt,$arqpt2,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
+	{
+		$gfile_name = nomeRandomico(20);
+		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
+		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
+		$rcode[] = 'dadosx2<-scan("'.$arqpt2.'x")';
+		$rcode[] = 'dadosy2<-scan("'.$arqpt2.'y")';
+		$rcode[] = 'd1<-data.frame(cbind(dadosx,dadosy))';
+		$rcode[] = 'names(d1)<-(c("x","y"))';
+		$rcode[] = 'd2<-data.frame(cbind(dadosx2,dadosy2))';
+		$rcode[] = 'names(d2)<-(c("col1","col2"))';
+		$rcode[] = 'd2<-as.matrix.data.frame(d2)';
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+		{
+			$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/win")';
+			if(file_exists($locaplic.'/pacotes/rlib/win'))
+			$rcode[] = $lib;
+		}
+		else
+		{
+			if(file_exists($locaplic."/pacotes/rlib/linux"))
+			{
+				$lib = '.libPaths("'.$locaplic.'/pacotes/rlib/linux")';
+				$rcode[] = $lib;
+			}
+		}		
+		$rcode[] = 'library(spatclus)';
+		$rcode[] = 'RES <- clus(d1,d2,limx='.$dimx.',limy='.$dimy.',eps=0.2)';
+		//var_dump($rcode);
+		$r = executaR($rcode,$dir_tmp,$R_path,$gfile_name);
+		return "ok";
+	}
+
 /*
 function: mapaKernel
 
@@ -1291,7 +1299,7 @@ $locaplic - Localização do I3geo.
 		{$mapt = ms_newMapObj($locaplic."\\aplicmap\\novotema.map");}
 		else
 		{$mapt = ms_newMapObj($locaplic."/aplicmap/novotema.map");}
-		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomecentroide.")"),$metaClasse="SIM");
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,("Centróide (".$nomeCentroides.")"),$metaClasse="SIM");
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->set("template","none.htm");
@@ -2029,6 +2037,93 @@ $operacao - Tipo de análise.
 		$this->salva();
 		return($novonomelayer);
 	}
+/*
+function: gravaCoordenadasPt
+
+Lê as coordenadas de um tema pontual e grava em arquivos.
+
+Essa função é utilizada nas opções que utilizam o R para cálculos e necessitam ler as coordenadas dos pontos.
+
+Parameters:
+
+tema - nome do tema com os pontos
+
+limitepontos - FALSE para considerar a extensão geográfica do mapa atual e TRUE para considerar como limite as ocorrências pontuais do tema
+
+return:
+
+array com as dimensões em x e y e nome dos arquivos com x e y gerados.
+*/
+function gravaCoordenadasPt($tema,$limitepontos="TRUE")
+{
+		$prjMapa = $this->mapa->getProjection();
+		$layerPt = $this->mapa->getlayerbyname($tema);
+		$prjTema = $layerPt->getProjection();
+		$layerPt->set("tolerance",0);
+		$layerPt->set("template","none.htm");
+		$nomefinal = nomeRandomico();
+		$nomearq = $this->diretorio."/".$nomefinal;
+		$itemspt = pegaItens($layerPt);
+		$existesel = "nao";
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
+		if ($existesel == "nao")
+		{$layerPt->queryByrect($this->mapa->extent);}
+		$res_count = $layerPt->getNumresults();
+		$pontos = array();
+		//pega um shape especifico
+		$layerPt->open();
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);		
+		}
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $layerPt->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $layerPt->getshape(-1, $shp_index);
+			$lineo = $shape->line(0);
+			$pt = $lineo->point(0);
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$pt->project($projInObj, $projOutObj);
+			}		
+			$pontos[] = $pt->x."  ".$pt->y."\n";
+			$pontosx[] = $pt->x;
+			$pontosy[] = $pt->y;
+		}
+		$layerPt->close();
+		//grava o arquivo com os pontos em x
+		$f = fopen($nomearq."x","w");
+		foreach ($pontosx as $pt)
+		{fwrite($f,$pt."\n");}
+		fclose($f);
+		//grava o arquivo com os pontos em y
+		$f = fopen($nomearq."y","w");
+		foreach ($pontosy as $pt)
+		{fwrite($f,$pt."\n");}
+		fclose($f);
+		if ($limitepontos == "TRUE")
+		{
+			$xi = (min($pontosx));
+			$xf = (max($pontosx));
+			$yi = (min($pontosy));
+			$yf = (max($pontosy));
+		}
+		else
+		{
+			$ext = $this->mapa->extent;
+			$xi = $ext->minx;
+			$xf = $ext->maxx;
+			$yi = $ext->miny;
+			$yf = $ext->maxy;
+		}
+		$dimx = "c(".$xi.",".$xf.")";
+		$dimy = "c(".$yi.",".$yf.")";
+		return array("dimx"=>$dimx,"dimy"=>$dimy,"arqx"=>($nomearq."x"),"arqy"=>($nomearq."y"),"prefixoarquivo"=>$nomearq);
+}		
 /*
 function unserializeGeo
 
