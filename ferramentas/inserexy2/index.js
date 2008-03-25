@@ -75,11 +75,18 @@ function montaComboLocal()
 					new YAHOO.widget.Button("botao6");
 				}
     			YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-			}() 	
+			}()
+			
  			if ($i("temasLocais"))
  			{
+ 	 			$i("temasLocais").value = window.parent.g_nomepin
+ 	 			if($i("temasLocais").value != "")
+ 	 			{
+ 	 				ativaItem($i("temasLocais").value)
+ 	 			}
  	 			$i("temasLocais").onchange = function()
  	 			{
+					ativaItem($i("temasLocais").value)
 					tema = $i("temasLocais").value
 					window.parent.g_nomepin=tema
 					var cp = new cpaint();
@@ -94,6 +101,18 @@ function montaComboLocal()
 	)
 }
 montaComboLocal()
+//monta o combo com a lista de itens
+function ativaItem(tema)
+{
+	$i("opcitens").style.display="block"
+	comboitens(
+		"itemtema",
+		tema,
+		function(retorno)
+		{$i("shapefileitem").innerHTML = "Item: "+retorno.dados+" valor: <input type=text size=20 id=valorItem />"},
+		"shapefileitem"
+	)
+}
 //monta a lista de pontos de um tema
 function listaPontos(retorno)
 {

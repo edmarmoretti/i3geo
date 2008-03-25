@@ -225,11 +225,18 @@ function cliqueInserexy()
 		var ins = doc.getElementById("resultado").innerHTML;
 		ins = ins + "<div style='font-size:12px' >" + objposicaocursor.ddx +" " + objposicaocursor.ddy + "</div><br>";
 		doc.getElementById("resultado").innerHTML = ins;
+		var item = "";
+		var valoritem = "";
+		if((doc.getElementById("valorItem")) && (doc.getElementById("itemtema")))
+		{
+			var item = doc.getElementById("itemtema").value;
+			var valoritem = doc.getElementById("valorItem").value;
+		}
 		if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 		else
 		{
 			objaguarde.abre("ajaxredesenha",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&item="+item+"&valor="+valoritem+"&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
 			cpObj.call(p,"insereSHP",ajaxredesenha);
 		}
 	}

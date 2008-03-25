@@ -1,10 +1,10 @@
-FONTSET "c:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
-SYMBOLSET "c:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
+FONTSET "f:\ms4w\apache\htdocs\i3geo\symbols\fontes.txt"
+SYMBOLSET "f:\ms4w\apache\htdocs\i3geo\symbols\simbolos.sym"
 LAYER
 	NAME estadosl # ok
 	TYPE line
 	STATUS DEFAULT
-	DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\estados.shp"
+	DATA "f:\ms4w\apache\htdocs\i3geo\aplicmap\dados\estados.shp"
 	TEMPLATE "estados.htm"
 	METADATA
 		ITENS "ESTADO"
