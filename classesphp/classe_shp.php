@@ -142,7 +142,7 @@ $xy - X e y do novo ponto, separados por espaços. Pode ser mais de um ponto.
 
 $projecao - código epsg da projeção das coordenadas
 */
-	function insereSHP($xy,$projecao)
+	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -159,7 +159,13 @@ $projecao - código epsg da projeção das coordenadas
 		{
 			$reg = array();
 			foreach ($items as $ni)
-			{$reg[] = "-";}
+			{
+				//verifica se deve acrescentar o valor para um item, caso tenha sido definido
+				if($ni == $item)
+				$reg[] = $valor;
+				else
+				$reg[] = "-";
+			}
 			xbase_add_record($db,$reg);
 		}
 		xbase_close($db);

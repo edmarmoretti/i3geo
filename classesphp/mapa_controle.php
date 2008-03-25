@@ -1312,7 +1312,7 @@ Include:
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema);
 		if (!isset($projecao)){$projecao = "";}
-		$m->insereSHP($xy,$projecao);
+		$m->insereSHP($xy,$projecao,$item,$valor);
 		redesenhaMapa();
 	break;
 /*
