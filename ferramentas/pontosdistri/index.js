@@ -38,12 +38,20 @@ comboTemasPt("temasPt",function(retorno)
 		var ins = "<div style=top:0px;left:0px;text-align:left; >Escolha o tema de pontos que ser&aacute; utilizado:</div><br><br>"
 		ins += retorno.dados
 		ins += "<br><br><div style=top:0px;left:0px;text-align:left; >Restringe a análise aos limites de abrang&ecirc;ncia dos pontos? "+simnao("limitePontos")+"<div>"
-		ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='densidade de pontos' /></div><br>"
-		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='dist&acirc;ncia entre pontos' /></div><br>"
-		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div><div>Desvio padr&atilde;o (sigma):<input class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
+		ins += "<br><br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='Densidade de pontos' /></div><br>"
+		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='Dist&acirc;ncia entre pontos' /></div><br>"
+		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div>"
+		ins += "<div>Desvio padr&atilde;o (sigma):<input class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
+		
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDeldir()' ><input id=botaodeldir size=35  type=button value='Delaunay/Voronoi' /></div><br>"
 
-		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='relat&oacute;rio' /></div><br>"
+		/*
+		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseCluster()' ><input id=botaocluster size=35  type=button value='Cluster espacial' /></div>"
+		var re = new RegExp("temasPt", "g");
+		retorno.dados = retorno.dados.replace(re,"temasPt2")
+		ins += "<div>O tema escolhido acima ser&aacute; considerado como os eventos para o cluster. Selecione na lista abaixo o tema que ser&aacute; utilizado como popula&ccedil;&atilde;o alvo: "+retorno.dados+" </div></div><br>"
+		*/
+		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='Relat&oacute;rio' /></div><br>"
 
 		$i("guia1obj").innerHTML = ins;
 		YAHOO.example.init = function ()
@@ -56,6 +64,7 @@ comboTemasPt("temasPt",function(retorno)
 				new YAHOO.widget.Button("botao4");
 				new YAHOO.widget.Button("botaokernel");
 				new YAHOO.widget.Button("botaodeldir");
+				//new YAHOO.widget.Button("botaocluster");
 			}
     		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 		}()
@@ -92,6 +101,26 @@ function mostracores(retorno)
 function corj(obj)
 {window.parent.abreCor("wdocai",obj)}
 
+function analiseCluster()
+{
+	aguarde("block")
+	var temp = function()
+	{
+		aguarde("none");
+		window.parent.ajaxredesenha("")
+	}
+	var tema = $i("temasPt").value
+	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
+	var tema2 = $i("temasPt2").value
+	if(tema == ""){alert("Escolha o segundo tema");aguarde("none");return}
+	var cp = new cpaint();
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&tipo=cluster&numclasses=&cori=&corf=&sigma=&limitepontos=&tema2="+tema2
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"analiseCluster",temp);
+}
+
+
 function analiseDeldir()
 {
 	aguarde("block")
@@ -103,7 +132,7 @@ function analiseDeldir()
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&tipo=deldir&numclasses=&cori=&corf=&sigma=&limitepontos="
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&tipo=deldir&numclasses=&cori=&corf=&sigma=&limitepontos=&tema2="
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDeldir",temp);
@@ -123,7 +152,7 @@ function analiseKernel()
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&sigma="+$i("sigma").value+"&limitepontos="+$i("limitePontos").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&sigma="+$i("sigma").value+"&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -143,7 +172,7 @@ function analiseDensidade()
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("limitePontos").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -162,7 +191,7 @@ function analiseDistancia()
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("limitePontos").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",temp);
@@ -176,7 +205,7 @@ function analiseRelatorio()
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
 	var cp = new cpaint();
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("limitePontos").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("limitePontos").value
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"analiseDistriPt",abreRelatorio);
