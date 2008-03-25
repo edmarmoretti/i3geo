@@ -307,6 +307,12 @@ pt: "Ponto",
 en:"Point",
 es:"Punto"
 }],
+"u24": [
+{
+pt: "Pol&iacute;gono",
+en:"Polygon",
+es:"Poligonos"
+}],
 //arvore com a lista de temas
 "t1": [
 {
@@ -1278,9 +1284,18 @@ oMenuData = {
 			] 
 		}	
 	},
+    { text: $trad("u24"),url: "#", 
+		submenu:
+		{
+			id: "menupoligonos", 
+			itemdata: 
+			[
+				{ text: $trad("u11"), url: "javascript:centroide()" }
+			] 
+		}	
+	},
 	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
-	{ text: $trad("u10"), url: "javascript:buffer()" },
-	{ text: $trad("u11"), url: "javascript:centroide()" }
+	{ text: $trad("u10"), url: "javascript:buffer()" }
 	]
 };
 oMenuData.janelas = [
