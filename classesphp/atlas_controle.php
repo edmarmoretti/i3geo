@@ -202,6 +202,7 @@ function gravaid()
 	{
 		$l = $m->getlayerbyname($n);
 		$l->setmetadata("ATLAS","nao");
+		$l->setmetadata("TIP","");
 	}
 	$m->save($tmpfname);		
 }
