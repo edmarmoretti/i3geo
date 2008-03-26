@@ -20,7 +20,7 @@ Include:
 
 */
 set_time_limit(180);
-require_once("../../classesjs/cpaint/cpaint2.inc.php");
+require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 require_once('../../pacotes/SOAP/nusoap.php');
 if (isset($g_sid))
