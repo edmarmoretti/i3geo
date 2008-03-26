@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -13,10 +14,10 @@
 		<div id=guia4 >Gr&aacute;ficos</div>
 		<div id=guia5 >Relat&oacute;rios</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 		<div id=resultadotab style="position:relative;top:5px;left:0px"></div>
 		<div id=guia1obj style="width:90%">
-			<table class=lista >
+			<table summary="" class=lista >
 			<tr>
 				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tiporeg CHECKED /></td>
 				<td>Considerar na listagem apenas a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>
@@ -30,12 +31,12 @@
 			<div id=combot style="position:relative;top:5px;left:0px;">
 			</div>
 			<div id=contador style="background-color:rgb(240,240,240);width:90%;position:relative;top:15px;left:0px;text-align:left">
-				de <img style=cursor:pointer onclick='menosf()' src=../../imagens/minus.gif />
+				de <img alt="minus.gif" style=cursor:pointer onclick='menosf()' src=../../imagens/minus.gif />
 				<input type=text class=digitar size=5 value=1 id=inicio />
 				at&eacute;
 				<input type=text class=digitar size=5 value=20 id=fim />
-				<img style=cursor:pointer onclick='maisf()'src=../../imagens/plus.gif />
-				<span style=cursor:pointer onclick='registrosf()' ><img  title='listar dados'  src=../../imagens/tic.png /> Listar</span>
+				<img alt="plus.gif" style=cursor:pointer onclick='maisf()' src=../../imagens/plus.gif />
+				<span style=cursor:pointer onclick='registrosf()' ><img alt="tic.png" title='listar dados'  src=../../imagens/tic.png /> Listar</span>
 			</div>
 			<div id=registros style="position:relative;top:20px;left:0px;text-align:left;">
 			</div>
@@ -113,7 +114,7 @@
 				<input type=hidden id=excluirvalor name=excluirvalor value="" />
 			</form>
 		</div>
-	</span>
+	</div>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>

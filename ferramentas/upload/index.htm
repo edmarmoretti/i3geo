@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body >
 <div style="top:5px;left:10px;display:block;position:absolute">
@@ -15,15 +16,13 @@ shx: <input class=digitar type="file" size=20 name="fileshx">
 dbf: <input class=digitar type="file" size=20 name="filedbf"></pre>
 Proje&ccedil;&atilde;o:
 <div id=listaepsg style='left:0px;overflow:auto;height:60px'></div>
-
 <div onclick='submete()' style='top:10px;left:0px'>
-<input id=botao1 type="button" value="Carregar" size=12 name="submit">
+	<input id=botao1 type="button" value="Carregar" size=12 name="submit" />
+	<input type="hidden" name="MAX_FILE_SIZE" value="10000" />
 </div>
-</div>
-<input type="hidden" name="MAX_FILE_SIZE" value="10000" />
 </form>
 </div>
-</body>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>

@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -12,12 +13,12 @@
 		<div id=guia3 >Por tema</div>
 		<div id=guia4 >Op&ccedil;&otilde;es</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 		<div style=top:1px;left:0px;text-align:center;width:90%; >
-			<img id=selecaopt onclick="tiposel(this)" src="../../imagens/selpt.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid white" /> 
-			<img id=selecaoext onclick="tiposel(this)" src="../../imagens/selext.png" title="Seleciona o que estiver visível no mapa" style="cursor:pointer;border:1px solid gray" /> 
-			<img id=selecaobox onclick="tiposel(this)" src="../../imagens/selbox.png" title="Desenhe um retângulo no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
-			<img id=selecaopoli onclick="tiposel(this)" src="../../imagens/selpoli.png" title="Desenhe um pol&iacute;gono no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
+			<img alt="selpt.png" id=selecaopt onclick="tiposel(this)" src="../../imagens/selpt.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid white" /> 
+			<img alt="selext.png" id=selecaoext onclick="tiposel(this)" src="../../imagens/selext.png" title="Seleciona o que estiver visível no mapa" style="cursor:pointer;border:1px solid gray" /> 
+			<img alt="selbox.png" id=selecaobox onclick="tiposel(this)" src="../../imagens/selbox.png" title="Desenhe um retângulo no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
+			<img alt="selpoli.png" id=selecaopoli onclick="tiposel(this)" src="../../imagens/selpoli.png" title="Desenhe um pol&iacute;gono no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
 		</div>
 			<input type=button id=parapoli style="cursor:pointer;display:none;text-align:center" value="concluir pol&iacute;gono" onclick="concluipoligono()"/>
 		<div id=opc1 style=top:0px;left:10px;text-align:left;width:90%; >
@@ -41,7 +42,7 @@
 		<div id=guia2obj style="width:95%;display:none;left:10px;top:5px">
 			<div id=opc3 style=top:0px;left:0px;text-align:left;display:none;>
 				Utilize as op&ccedil;&otilde;es abaixo para construir a express&ccedil;&atilde;o:
-				<table id="parametros" >
+				<table summary="" id="parametros" >
 				</table>
 				<div onclick="aplicaselecao()" style="text-align:left;position:relative;top:10px;left:0px">
 					<input id=botao2 size=10 type=button value="Aplicar" />
@@ -61,7 +62,7 @@
 			</div>
 		</div>
 		<div id=guia4obj style="width:95%;display:none;left:10px;top:10px">
-			<table class=lista3 width="90%"> 
+			<table summary="" class=lista3 width="90%"> 
 				<tr>  
 					<td>Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):</td>
 					<td><input style="cursor:text" size=4 class=digitar type='text' id=toleranciapt value='0' /></td>
@@ -70,8 +71,9 @@
 
 		</div>
 
-	</span>
-</body>
+	</div>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>

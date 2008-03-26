@@ -4,9 +4,10 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>
+<style type="text/css">
 .yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
 </style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -14,7 +15,7 @@
 		<div id=guia2 >Metadados</div>
 		<div id=guia3 >Temas</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 		<div class=guiaobj id="guia1obj" style="left:5px;top:0px;text-align:left">
 			<div id=men1 style="top:5px;left:0px;">
 				<a href="../../ajuda/The_ArcIMS_OGC_WMS_Connector.pdf" target=blank >Veja como criar web services no ARCIMS</a>
@@ -36,7 +37,7 @@
 				<div id=men2 style="top:5px;left:0px;">
 				Após a conex&atilde;o ser estabelecida e surgir a lista de temas, selecione a camada que ser&aacute; adicionada ao mapa.<br>
 				</div>
-				<span id=textoSLD style="display:none;font-size:10px" >
+				<div id=textoSLD style="display:none;font-size:10px" >
 				<p>Opcionalmente vc pode indicar o tipo de representa&ccedil;&atilde;o que ser&aacute; utilizada.<br>
 				N&atilde;o altere o tipo de representa&ccedil;&atilde;o se a camada escolhida for uma imagem (dados raster) ou se voc&ecirc; tiver d&uacute;vidas sobre ela.<br>
 				<select id=tiporep >
@@ -45,21 +46,21 @@
 				<option value="linear">linear</option>
 				<option value="pontual">pontual</option>
 				</select>
-				</span>
+				</div>
 				 
 			</div>
 			<div id=listatemas style="display:block;position:relative;top:10px;left:0px;">
 			</div>
 		</div>
-	</span>
+	</div>
 	<div id="aguarde">
 		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
 	</div>
-</body>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 
-<script>
+<script type="text/javascript" >
 mensagemAjuda("men1",document.getElementById("men1").innerHTML)
 mensagemAjuda("men2",document.getElementById("men2").innerHTML)
 g_RSSwms = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php")
@@ -97,15 +98,16 @@ function mostraRetornowmsRSS(retorno)
 		var caso = linhas[i].split("#")
 		if (i > 0)
 		{
-			ins += "<p class=clique onclick=\"registraws('"+caso[2]+"')\" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
+			ins += "\<p class=clique onclick=\"registraws('"+caso[2]+"')\" \>\<b\>"+caso[0]+"\<\/b\>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
 			if (caso[4])
-			{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
-			else {ins += "</p>"}
+			{ins += " \<span style=color:gray \>(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")\<\/span>\<\/p\>";}
+			else {ins += "\<\/p\>"}
 		}
 		else
-		{ins += "<p class=clique ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;</p>"}
+		{ins += "\<p class=clique \>\<b\>"+caso[0]+"\<\/b\>&nbsp;"+caso[1]+"&nbsp;\<\/p\>"}
 	}
 	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
 }
 </script>
+</body>
 </html>

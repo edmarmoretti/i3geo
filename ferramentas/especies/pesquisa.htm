@@ -1,4 +1,6 @@
-<STYLE >
+<html>
+<head>
+<STYLE type="text/css" >
 .combo {
 font-family: verdana, arial, sans;
 font-size: 8pt;
@@ -77,9 +79,11 @@ height: 35px;
 </STYLE>
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>
+<style type="text/css">
 .yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
 </style>
+<title></title>
+</head>
 <body class="yui-skin-sam">
 <FONT face=Arial color=#808000 size=4>Busca espécies - NatureServer</FONT><br>
 <FONT face=Arial color=#808000 size=2>
@@ -103,7 +107,7 @@ Banco de dados NatureServer . <a href="http://www.natureserve.org/infonatura/" t
 	</div>
 </DIV>
 <DIV id=pesquisar>
-<INPUT class=combo onclick=executa() type=button value='Criar mapa'></INPUT>
+<INPUT class=combo onclick=executa() type=button value='Criar mapa' />
 <select id=cor >
 	<option value='255,0,0' >cor</option>
 	<option value='255,0,0' >vermelho</option>
@@ -114,10 +118,9 @@ Banco de dados NatureServer . <a href="http://www.natureserve.org/infonatura/" t
 </DIV>
 </form>
 <DIV id=ResultadoPesquisa ></DIV>
-</body>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
-<script>
+<script type="text/javascript" >
 /*
 Title: Formulário de consulta de especies.
 
@@ -153,12 +156,12 @@ function comboBancos()
 {
 	var monta = function(retorno)
 	{
-		var ins = "<select class=combo id=comboFiltros onchange='comboListaFamilias(this.value)' ><option value=''>Nenhum</option>"
+		var ins = "\<select class=combo id=comboFiltros onchange='comboListaFamilias(this.value)' \>\<option value=''\>Nenhum\<\/option\>"
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "<option value="+retorno.data.especies[i].database+" >"+retorno.data.especies[i].nome+"</option>"
+			ins += "\<option value="+retorno.data.especies[i].database+" >"+retorno.data.especies[i].nome+"\<\/option\>"
 		}
-		document.getElementById("tipoFiltro").innerHTML = ins+"</select>"
+		document.getElementById("tipoFiltro").innerHTML = ins+"\<\/select\>"
 	}
 	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaBancos"
 	var cp = new cpaint();
@@ -183,12 +186,12 @@ function comboListaFamilias(banco)
 	document.getElementById("valoresFiltro").innerHTML = "Aguarde..."
 	var monta = function(retorno)
 	{
-		var ins = "<select class=combo id=comboFamilias onchange='comboListaEspecies(this.value)' ><option value=''>---</option>"
+		var ins = "\<select class=combo id=comboFamilias onchange='comboListaEspecies(this.value)' \>\<option value=''\>---\<\/option\>"
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"</option>"
+			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"\<\/option\>"
 		}
-		document.getElementById("valoresFiltro").innerHTML = ins+"</select>"
+		document.getElementById("valoresFiltro").innerHTML = ins+"\<\/select\>"
 	}
 	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaFamilias&banco="+banco
 	var cp = new cpaint();
@@ -214,12 +217,12 @@ function comboListaEspecies(familia)
 	document.getElementById("valoresEspecie").innerHTML = "Aguarde..."
 	var monta = function(retorno)
 	{
-		var ins = "<select class=combo id=comboEspecies ><option value=''>---</option>"
+		var ins = "\<select class=combo id=comboEspecies \>\<option value=''\>---\<\/option\>"
 		for(i=0;i<retorno.data.especies.length;i++)
 		{
-			ins += "<option value='"+retorno.data.especies[i]+"' >"+retorno.data.especies[i]+"</option>"
+			ins += "\<option value='"+retorno.data.especies[i]+"' \>"+retorno.data.especies[i]+"\<\/option\>"
 		}
-		document.getElementById("valoresEspecie").innerHTML = ins+"</select>"
+		document.getElementById("valoresEspecie").innerHTML = ins+"\<\/select\>"
 	}
 	var p = "pesquisa.php?g_sid="+g_sid+"&funcao=listaEspecies&banco="+banco+"&familia="+familia
 	var cp = new cpaint();
@@ -277,4 +280,5 @@ function listaretornof(retorno)
 	{document.getElementById("ResultadoPesquisa").innerHTML = "<b>Nenhum registro encontrado!"}
 }
 </script>
-
+</body>
+</html>

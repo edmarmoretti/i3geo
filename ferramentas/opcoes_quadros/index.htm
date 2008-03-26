@@ -2,7 +2,8 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body>
 <div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.rebobinaf()" >
@@ -11,7 +12,7 @@
 <div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.filmeanimaf();window.parent.janima=0">
   <input  id=botao2 size=10 type=button value="Roda"/>
 </div>
-	<table class=lista3 width="90%"> 
+	<table summary="" class=lista3 width="90%"> 
 		<tr>  
 			<td>Tempo:</td>
 			<td><input  style="cursor:text" size=4 class=digitar type='text' id=tempoanima value='450' /></td>
@@ -21,9 +22,9 @@
 			<td><input  style="cursor:text" size=4 class=digitar type='text' id=nquadros value='' onchange="window.parent.gerafilmef(this.value)"/></td>
 		</tr>
 	</table>
-</body>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script>
+<script type="text/javascript" >
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
@@ -34,4 +35,5 @@ YAHOO.example.init = function ()
 	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
 </script>
+</body>
 </html>

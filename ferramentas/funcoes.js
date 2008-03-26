@@ -647,7 +647,6 @@ function radioepsg(funcao,onde)
 			ins.push("<table class=lista >");
 			ins.push("<tr><td><input size=2 style='cursor:pointer' name='epsg' type=radio checked value='' /></td>");
 			ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
-
 			for (i=1;i<retorno.data.length; i++)
 			{
 				ins.push("<tr><td><input size=2 style='cursor:pointer' name='epsg' type=radio value='"+retorno.data[i].codigo+"' /></td>");

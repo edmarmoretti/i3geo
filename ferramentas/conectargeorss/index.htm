@@ -4,16 +4,17 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>
+<style type="text/css">
 .yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
 </style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
 		<div id=guia1 >Servi&ccedil;os</div>
 		<div id=guia2 >Canais</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 		<div class=guiaobj id="guia1obj" style="text-align:left;top:0px;left:0px">
 			<div id=opc1 style="text-align:left;top:0px;left:0px">
 				Digite o endere&ccedil;o do servi&ccedil;o ou clique da lista abaixo. Utilize as guias acima para ver o resultado do acesso.<br>
@@ -25,11 +26,12 @@
 			<div id=resultadoget style="text-align:left;top:0px;left:0px">
 			</div>
 		</div>
-	</span>
-</body>
+	</div>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
-<script>
+
+<script type="text/javascript" >
 aguarde("block");
 g_RSS = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicosgeorss.xml")
 if (window.location.host == "localhost")
@@ -56,11 +58,11 @@ function mostraRetornoRSS(retorno)
 	for (i=0;i<linhas.length; i++)
 	{
 		var caso = linhas[i].split("#")
-		
-		ins += "<p class=clique onclick=\"registraws('"+caso[2]+"')\" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]
-		if (caso[3] != ""){ins += "&nbsp;("+caso[3]+")</p>"}
+		ins += "\<p class=clique onclick=\"registraws('"+caso[2]+"')\" \>\<b\>"+caso[0]+"\<\/b\>&nbsp;"+caso[1];
+		if (caso[3] != ""){ins += "&nbsp;("+caso[3]+")\<\/p\>"}
 	}
 	document.getElementById("RSS").innerHTML = ins+"<br><br>"
 }
 </script>
+</body>
 </html>

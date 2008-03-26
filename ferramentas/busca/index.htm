@@ -2,15 +2,16 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<title></title>
 </head>
 <body>
 		<div style="top:5px;left:5px;width:300px">
 			<b>Procurar:</b>
 			<input style='cursor:text' class=digitar type=text size=30 id=palavra value=''/>
-			<img onclick="javascript:procurar()" style="cursor:pointer" src="../../imagens/tic.png" title='procurar' />
+			<img alt="tic.png" onclick="javascript:procurar()" style="cursor:pointer" src="../../imagens/tic.png" title='procurar' />
 		</div>
 		<div style="top:20px;left:5px;">
-			<table class=lista3 width="250px">
+			<table summary="Lista de opcoes" class=lista3 width="250px">
 				<tr>
 					<td><input style='cursor:pointer' type=radio id=qualquer name=tipo checked /></td>
 					<td>qualquer lugar do item, ou</td>
@@ -36,7 +37,7 @@
 		</div>
 		<div id="resultado" style="position:absolute;top:5px;left:270px;width:230;overflow:auto;height:315px">
 		</div>
-</body>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>

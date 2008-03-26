@@ -1,7 +1,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<style>
+<style type="text/css">
 body
 {overflow:hidden;}
 div
@@ -19,6 +19,7 @@ div
 #geral
 {position:relative;background-color:white;text-align:center;text-decoration:none;border: 1px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:8px;padding:0;font-weight:normal;top:8px;left:8px;overflow:auto;}
 </style>
+<title></title>
 </head>
 <body>
 <div id=fundo >
@@ -28,7 +29,7 @@ div
 		<div class=guia id=guia3 >&nbsp;Opera&ccedil;&otilde;es&nbsp;</div>
 		<div class=guia id=guia4 style="display:none">&nbsp;Gr&aacute;ficos&nbsp;</div>
 </div>
-	<span id=geral >
+	<div id=geral >
 		<div id=guia1obj>
 			<div style="text-align:center;position:relative;top:5px;left:0px">
 				Guia tal
@@ -52,9 +53,9 @@ div
 			</div>
 		</div>
 
-	</span>
+	</div>
 </div>
-<script>
+<script type="text/javascript">
 //eventos das guias
 document.getElementById("guia1").onclick = function()
 {document.getElementById("guia1obj").style.display="block";}

@@ -3,9 +3,10 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>
+<style type="text/css">
 .yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
 </style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -40,7 +41,7 @@
 			<div id=opc2 style="text-align:left;left:0px">
 			<div onclick='calculo()' style="text-align:left;left:0px">
 				Operações que obtém descrições sobre a geometria, retornando valores que são adicionados aos itens da geometria:<br>
-				<br><input id=botao2 type=buttom size=25 value='C&aacute;lculos' \>&nbsp;
+				<br><input id=botao2 type=buttom size=25 value="C&aacute;lculos" />&nbsp;
 			</div>
 				<select id=calculos style=position:relative;top:-20px;left:120px >
 				<option value="" selected >---</option>
@@ -49,7 +50,7 @@
 				</select><br>
 			<div onclick='funcoes()' style="text-align:left;left:0px">	
 				Operações que criam novas geometrias a partir de duas ou mais geometrias:<br>
-				<br><input id=botao3 type=button size=25 value='Fun&ccedil;&otilde;es nG' \> &nbsp;
+				<br><input id=botao3 type=button size=25 value='Fun&ccedil;&otilde;es nG' /> &nbsp;
 			</div>
 				<select id=funcoes style=position:relative;top:-20px;left:120px >
 				<option value="" selected >---</option>
@@ -61,7 +62,7 @@
 				</select>
 			<div onclick='funcoes1()' style="text-align:left;left:0px">	
 				Operações que atuam sobre uma única geometria:<br>
-				<br><input id=botaof1 type=button size=25 value='Fun&ccedil;&otilde;es 1G' \> &nbsp;
+				<br><input id=botaof1 type=button size=25 value='Fun&ccedil;&otilde;es 1G' /> &nbsp;
 			</div>
 				<select id=funcoes1 style=position:relative;top:-20px;left:120px >
 				<option value="" selected >---</option>
@@ -72,14 +73,13 @@
 			<div id=men2 style="text-align:left;left:0px" >
 			As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.
 			Para maiores informações, veja: <a href='http://www.opengeospatial.org/standards/sfs' target=blank >OGC</a>, <a href='http://postgis.refractions.net/docs/ch06.html' target=blank >PostGis, </a>e <a href='http://www.vividsolutions.com/jts/tests/index.html' target=blank >JTS</a>
-			<br>Algumas fun&ccedil;&oatilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.
+			<br>Algumas fun&ccedil;&otilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.
 			</div>
 		</div>
 	</div>
-</div>
 <!--mantido aqui apenas para compatibilidade-->
 <input type=hidden id=toleranciapt value=0 />
-</body>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>

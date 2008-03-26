@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body class="yui-skin-sam">
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -11,23 +12,23 @@
 		<div id=guia2 >Propriedades</div>
 		<div id=guia3 >?</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;" >
+	<div id=geral style="left:0px;top:0px;" >
 		<div class=guiaobj id="guia1obj" style="display:block;top:0px;left:0px" >
 		</div>
 		<div class=guiaobj id="guia2obj" style="display:none;" >
 				<div>Op&ccedil;&otilde;es de cores e classes do tema resultante:<br><br></div>
-				<table class=lista2 width="90%"> 
+				<table summary="" class=lista2 width="90%"> 
 					<tr>  
 						<td>N&uacute;mero de classes:</td>
 						<td><input  style="cursor:text" size=4 class=digitar type='text' id='numclasses' value='50' /></td>
 					</tr>
 					<tr>
 						<td>Cor inicial:</td>
-						<td><input  style="cursor:text" size=12 class=digitar type='text' id='cori' value='0,0,0' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('cori')" /></td>
+						<td><input  style="cursor:text" size=12 class=digitar type='text' id='cori' value='0,0,0' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('cori')" /></td>
 					</tr>
 					<tr>
 						<td>Cor final:</td>
-						<td><input  style="cursor:text" size=12 class=digitar type='text' id='corf' value='255,255,255' /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('corf')" /></td>
+						<td><input  style="cursor:text" size=12 class=digitar type='text' id='corf' value='255,255,255' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('corf')" /></td>
 					</tr>
 					<tr>
 						<td onclick='vercores()'><input id=botao4 size=15  type=button value='ver cores' /></td>
@@ -45,11 +46,12 @@ As an&aacute;lises podem consumir muito tempo de processamento, portanto, tenha 
 			</div>
 		</div>
 		<div id="resultado" style="display:none;position:relative;top:10px;left:0px;"></div>
-	</span>
+	</div>
 	<input type=hidden id=listadeitens value="" />
 	<input type=hidden id=tema value="" />
 	
-</body>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>

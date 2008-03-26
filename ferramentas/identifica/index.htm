@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -12,7 +13,7 @@
 		<div id=guia3 >Propriedades</div>
 	</div>
 	
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 	
 		<div class=guiaobj id="guia1obj" style="left:1px;90%">
 			<div id="resultado" style="overflow:auto;height:200px;display:block;position:relative;top:-5px;left:0px;width:150px"></div>
@@ -23,7 +24,7 @@
 		<div class=guiaobj id="guia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >
 			Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input type=text class=digitar value=5 id=resolucao size=2 />
 		</div>
-	</span>
+	</div>
 	
 	<div id="aguarde">
 		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
@@ -31,11 +32,10 @@
 	<div id=xy style="display:none;position:relative;top:10px;left:5px">
 	</div>
 
-</div>
-</body>
 <script language="JavaScript" type="text/javascript" src="../../classesjs/compactados/redesenho_compacto.js"></script>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="index.js"></script><script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script><script type="text/javascript" >
 inicializaJanela()
 </script>
+</body>
 </html>

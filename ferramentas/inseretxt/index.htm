@@ -3,7 +3,8 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 <link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style>.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -13,7 +14,7 @@
 		<div id=guia4 >Fundo</div>
 		<div id=guia5 >Geral</div>
 	</div>
-	<span id=geral style="left:0px;top:0px;">
+	<div id=geral style="left:0px;top:0px;">
 		<div id=guia1obj style="width:95%;text-align:left">
 			<div style="width:95%;top:5px;left:0px">
 				<input size=55 class=digitar type=text value="" id=texto />
@@ -37,7 +38,7 @@
 		</div>
 		<div id=guia3obj style="width:90%;display:none">
 			<div style="width:90%;top:5px;left:0px" >
-				<table class=lista2 width="100%"> 
+				<table summary="" class=lista2 width="100%"> 
 					<tr>
 						<td>Fonte:</td>
 						<td><span style="text-align:left" id=listaf ></span></td>
@@ -56,26 +57,26 @@
 					</tr>
 					<tr>
 						<td>Cor do texto (digite os valores em vermelho, verde e azul, p.ex. 20 20 20):</td>
-						<td><input onkeyup="icor(this)" size=11 type=text value="0 0 0" id=frente /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente')" /></td>
+						<td><input onkeyup="icor(this)" size=11 type=text value="0 0 0" id=frente /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente')" /></td>
 					</tr>
 					<tr>
 						<td>Cor da m&aacute;scara de um pixel de entorno:</td>
-						<td><input onkeyup="icor(this)" size=11 type=text value="" id=mascara /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara')" /></td>
+						<td><input onkeyup="icor(this)" size=11 type=text value="" id=mascara /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara')" /></td>
 					</tr>
 					<tr>
 						<td>Posi&ccedil;&atilde;o do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
 						<td>
 							<select id=position >
-								<option value="MS_AUTO" >autom&aacute;tico</option>"
-								<option value="MS_UL" >superior esquerdo</option>"
-								<option value="MS_UC" >superior centro</option>"
-								<option value="MS_UR" >superior direito</option>"
-								<option value="MS_CL" >centro esquerdo</option>"
-								<option value="MS_CC" >centro</option>"
-								<option value="MS_CR" >centro direito</option>"
-								<option value="MS_LL" >inferior esquerdo</option>"
-								<option value="MS_LC" >inferior centro</option>"
-								<option value="MS_LR" >inferior direito</option>"
+								<option value="MS_AUTO" >autom&aacute;tico</option>
+								<option value="MS_UL" >superior esquerdo</option>
+								<option value="MS_UC" >superior centro</option>
+								<option value="MS_UR" >superior direito</option>
+								<option value="MS_CL" >centro esquerdo</option>
+								<option value="MS_CC" >centro</option>
+								<option value="MS_CR" >centro direito</option>
+								<option value="MS_LL" >inferior esquerdo</option>
+								<option value="MS_LC" >inferior centro</option>
+								<option value="MS_LR" >inferior direito</option>
 							</select>
 						</td>
 					</tr>
@@ -84,14 +85,14 @@
 		</div>
 		<div id=guia4obj style="width:90%;display:none">
 			<div style="width:95%;top:5px;left:0px" >
-				<table class=lista2 width="95%"> 
+				<table summary="" class=lista2 width="95%"> 
 					<tr>		
 						<td>Cor do fundo:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=fundoc /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc')" /></td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=fundoc /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc')" /></td>
 					</tr>
 					<tr>
 						<td>Cor da sombra do fundo:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=sombra /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra')" /></td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=sombra /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra')" /></td>
 					</tr>
 					<tr>
 						<td>Desl. da sombra do fundo:</td>
@@ -99,8 +100,9 @@
 					</tr>
 					<tr>
 						<td>Cor da sombra:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=frentes /><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes')" /></td>
+						<td><input onkeyup="icor(this)" size=9 type=text value="" id=frentes /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes')" /></td>
 					</tr>
+					<tr>
 						<td>Deslocamento da sombra:</td>
 						<td>x <input size=1 type=text value="1" id=frentex /> y <input size=1 type=text value="1" id=frentey /></td>
 					</tr>
@@ -109,7 +111,7 @@
 		</div>
 		<div id=guia5obj style="width:90%;display:none">
 			<div style="width:90%;top:5px;left:0px" >
-				<table class=lista2 width="90%"> 
+				<table summary="" class=lista2 width="90%"> 
 					<tr>		
 						<td>For&ccedil;a colis&otilde;es entre textos?:</td>
 						<td>
@@ -139,14 +141,14 @@
 				</table>
 			</div>
 		</div>
-	</span>
+	</div>
 	<div id="aguarde">
 		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
 	</div>
-</div>
 <input type=hidden id="tipoInsere" value="digitando" />
 
-</body>
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
 </html>
