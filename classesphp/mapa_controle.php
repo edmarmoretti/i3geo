@@ -1086,6 +1086,24 @@ Section: Análise geográfica
 Executa operações de análise espacial.
 */
 /*
+Property: dissolvePOligono
+
+Elimina divisas entre polígonos com o mesmo atributo.
+
+Salva o mapa acrescentando um novo layer com o resultado.
+
+Include:
+<classe_analise.php>
+*/
+	case "dissolvePoligono":
+		include("classe_analise.php");
+		copiaSeguranca($map_file);
+		$m = new Analise($map_file,$tema);
+		$cp->set_data($m->dissolvePoligono($item,$locaplic));
+		$m->salva();
+	break;
+
+/*
 Property: pontoEmPoligono
 
 Cruza um tema pontual com temas poligonais ou raster.

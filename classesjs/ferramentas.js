@@ -967,6 +967,13 @@ Gera um tema com os centroides dos elementos selecionados
 function centroide()
 {wdocaf("400px","180px",g_locaplic+"/ferramentas/centroide/index.htm","","","Centróide");}
 /*
+Function: dissolve
+
+Gera um tema dissolvendo as divisas entre polígonos com o mesmo atributo.
+*/
+function dissolve()
+{wdocaf("400px","230px",g_locaplic+"/ferramentas/dissolve/index.htm","","","Dissolve");}
+/*
 Function: analisaGeometrias
 
 Sistema de análise de geometrias

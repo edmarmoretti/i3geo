@@ -82,7 +82,7 @@ $tema - Nome do tema que será processado
   		require_once($locaplic."/funcoes_gerais.php");
   		else
   		require_once("funcoes_gerais.php");
-  		$thhis->locaplic = $locaplic;
+  		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "")
@@ -1764,6 +1764,98 @@ $locaplic - Localização do I3geo
 		$novolayer->set("transparency","80");
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
+		return("ok");
+	}
+/*
+function: dissolvePoligono
+
+Dissolve as bordas entre polígonos com o mesmo atributo.
+
+Salva o mapa acrescentando um novo layer com o resultado.
+
+$item - item utilizado para agregar os polígonos
+
+$locaplic - Localização do I3geo
+*/
+	function dissolvePoligono($item,$locaplic)
+	{
+		//para manipular dbf
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
+		require_once "../pacotes/phpxbase/api_conversion.php";
+		//define o nome do novo shapefile que será criado
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$this->layer->open();
+		$res_count = $this->layer->getNumresults();
+		//
+		//pega os indices dos poligonos por classe de atributo
+		//
+		$indices = array();
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getshape(-1, $shp_index);
+			$valor = $shape->values[$item];
+			if(!isset($indices[$valor]))
+			{
+				$indices[$valor] = array($shp_index);
+			}
+			else
+			$indices[$valor] = array_merge($indices[$valor],array($shp_index));
+		}
+		//var_dump($indices);
+		//
+		//faz o dissolve dos poligonos
+		//
+		$dissolve=array();
+		foreach($indices as $i)
+		{
+			foreach ($i as $indice)
+			{
+				$shape = $this->layer->getshape(-1, $indice);
+				$valor = $shape->values[$item];
+				if (!isset($dissolve[$valor]))
+				{$dissolve[$valor] = $shape;}
+				else
+				{
+					$dissolve[$valor] = $shape->union_geos($dissolve[$valor]);
+				}
+			}
+		}
+		$this->layer->close();
+		//
+		//cria o novo shapefile
+		//
+		$nomefinal = nomeRandomico();
+		$nomeshp = $this->diretorio."/".$nomefinal;
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
+		// cria o dbf
+		$def = array();
+		$def[] = array($item,"C","254");
+		$db = xbase_create($nomeshp.".dbf", $def);
+		$dbname = $nomeshp.".dbf";
+		$classes = array_keys($dissolve);
+		foreach ($classes as $classe)
+		{
+			$novoshpf->addShape($dissolve[$classe]);
+			xbase_add_record($db,array($classe));
+		}
+		$novoshpf->free();
+		xbase_close($db);
+		//
+		//adiciona o novo layer no mapa
+		//	
+		$n = pegaNome($this->layer);	
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Dissolve de ".$n),$metaClasse="SIM");
+		$novolayer->set("data",$nomeshp.".shp");
+		$novolayer->setmetadata("DOWNLOAD","SIM");
+		$novolayer->setmetadata("TEMALOCAL","SIM");
+		if (file_exists(($this->arquivo)."qy"))
+		{unlink (($this->arquivo)."qy");}
+
 		return("ok");
 	}
 /*

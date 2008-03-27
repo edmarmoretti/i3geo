@@ -313,6 +313,12 @@ pt: "Pol&iacute;gono",
 en:"Polygon",
 es:"Poligonos"
 }],
+"u25": [
+{
+pt: "Dissolve",
+en:"Dissolv",
+es:"Dissolve"
+}],
 //arvore com a lista de temas
 "t1": [
 {
@@ -1290,7 +1296,8 @@ oMenuData = {
 			id: "menupoligonos", 
 			itemdata: 
 			[
-				{ text: $trad("u11"), url: "javascript:centroide()" }
+				{ text: $trad("u11"), url: "javascript:centroide()" },
+				{ text: $trad("u25"), url: "javascript:dissolve()" }
 			] 
 		}	
 	},
