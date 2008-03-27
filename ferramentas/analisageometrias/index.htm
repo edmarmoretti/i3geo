@@ -1,12 +1,12 @@
 <html>
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
-<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
-<style type="text/css">
-.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
-</style>
-<title></title>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+	<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
+	<style type="text/css">
+		.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
+	</style>
+	<title></title>
 </head>
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
@@ -16,17 +16,17 @@
 	</div>
 	<div id=geral style="left:0px;top:0px;" >
 		<div id=guia1obj style="width:95%;text-align:left;position:relative;top:0px;left:5px">
-		<div id=opc1 style=left:0px >
-			Escolha o tema que receber&aacute; a sele&ccedil;&atilde;o:
-			<div id="temas" style="width:90%;text-align:left;left:0px">
+			<div id=opc1 style=left:0px >
+				Escolha o tema que receber&aacute; a sele&ccedil;&atilde;o:
+				<div id="temas" style="width:90%;text-align:left;left:0px">
+				</div>
+				<br>Tipo de sele&ccedil;&atilde;o:
+				<div id="operacao" style="width:90%;text-align:left;left:0px">
+				</div>
+				<div onclick="capturageo()" style="width:90%;text-align:left;left:0px">
+					<br><input id=botao1 size=45 type=button value="Capturar as geometrias selecionadas"/><br><br>
+				</div>
 			</div>
-			<br>Tipo de sele&ccedil;&atilde;o:
-			<div id="operacao" style="width:90%;text-align:left;left:0px">
-			</div>
-			<div onclick="capturageo()" style="width:90%;text-align:left;left:0px">
-				<br><input id=botao1 size=45 type=button value="Capturar as geometrias selecionadas"/><br><br>
-			</div>
-		</div>
 			<div id=men1 style="top:5px;left:0px">Ap&oacute;s escolher o tema, clique no mapa para selecionar os elementos desejados, caso vc j&aacute; n&atilde;o tenha feito isso ou caso deseje alterar a sele&ccedil;&atilde;o. Conclu&iacute;da a sele&ccedil;&atilde;o, clique no bot&atilde;o de captura para obter as geometrias. <br>As geometrias capturadas podem ser vistas na segunda guia.
 			</div>
 		</div>
@@ -44,42 +44,42 @@
 				<br><input id=botao2 type=buttom size=25 value="C&aacute;lculos" />&nbsp;
 			</div>
 				<select id=calculos style=position:relative;top:-20px;left:120px >
-				<option value="" selected >---</option>
-				<option value=area >&aacute;rea</option>
-				<option value=perimetro >per&iacute;metro</option>
+					<option value="" selected >---</option>
+					<option value=area >&aacute;rea</option>
+					<option value=perimetro >per&iacute;metro</option>
 				</select><br>
 			<div onclick='funcoes()' style="text-align:left;left:0px">	
 				Operações que criam novas geometrias a partir de duas ou mais geometrias:<br>
 				<br><input id=botao3 type=button size=25 value='Fun&ccedil;&otilde;es nG' /> &nbsp;
 			</div>
 				<select id=funcoes style=position:relative;top:-20px;left:120px >
-				<option value="" selected >---</option>
-				<option value=union_geos >Uni&atilde;o</option>
-				<option value=intersection >Intersec&ccedil;&atilde;o</option>
-				<option value=difference >Diferen&ccedil;a</option>
-				<option value=symdifference >Diferen&ccedil;a inversa</option>
-				<option value=convexhull >Convexo</option>
+					<option value="" selected >---</option>
+					<option value=union_geos >Uni&atilde;o</option>
+					<option value=intersection >Intersec&ccedil;&atilde;o</option>
+					<option value=difference >Diferen&ccedil;a</option>
+					<option value=symdifference >Diferen&ccedil;a inversa</option>
+					<option value=convexhull >Convexo</option>
 				</select>
 			<div onclick='funcoes1()' style="text-align:left;left:0px">	
 				Operações que atuam sobre uma única geometria:<br>
 				<br><input id=botaof1 type=button size=25 value='Fun&ccedil;&otilde;es 1G' /> &nbsp;
 			</div>
 				<select id=funcoes1 style=position:relative;top:-20px;left:120px >
-				<option value="" selected >---</option>
-				<option value=convexhull >convexo</option>
-				<option value=boundary >entorno</option>
+					<option value="" selected >---</option>
+					<option value=convexhull >convexo</option>
+					<option value=boundary >entorno</option>
 				</select>
 			</div>
 			<div id=men2 style="text-align:left;left:0px" >
-			As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.
-			Para maiores informações, veja: <a href='http://www.opengeospatial.org/standards/sfs' target=blank >OGC</a>, <a href='http://postgis.refractions.net/docs/ch06.html' target=blank >PostGis, </a>e <a href='http://www.vividsolutions.com/jts/tests/index.html' target=blank >JTS</a>
-			<br>Algumas fun&ccedil;&otilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.
+				As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.
+				Para maiores informações, veja: <a href='http://www.opengeospatial.org/standards/sfs' target=blank >OGC</a>, <a href='http://postgis.refractions.net/docs/ch06.html' target=blank >PostGis, </a>e <a href='http://www.vividsolutions.com/jts/tests/index.html' target=blank >JTS</a>
+				<br>Algumas fun&ccedil;&otilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.
 			</div>
 		</div>
 	</div>
-<!--mantido aqui apenas para compatibilidade-->
-<input type=hidden id=toleranciapt value=0 />
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="index.js"></script>
+	<!--mantido aqui apenas para compatibilidade-->
+	<input type=hidden id=toleranciapt value=0 />
+	<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+	<script language="JavaScript" type="text/javascript" src="index.js"></script>
 </body>
 </html>

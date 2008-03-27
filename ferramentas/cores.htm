@@ -5,8 +5,8 @@ e o elemento, elemento=xxx
 -->
 <html>
 <head>
-</head>
-<link rel="stylesheet" type="text/css" href="../css/geral.css">
+<title></title>
+
 <style type="text/css">
 div
 {
@@ -18,6 +18,7 @@ div
   font-size:10px;
 }
 </style>
+</head>
 <body style='background-color:white'>
 <div id='cores' >
 Aguarde...
@@ -32,10 +33,10 @@ Aguarde...
 <option value=amarelo >amarelo</option>
 <option value=misto >misto</option>
 </select>
-<img src=../imagens/plus.gif onclick="mais()"/>
-<img src=../imagens/minus.gif onclick="menos()"/>
+<img alt="" src=../imagens/plus.gif onclick="mais()"/>
+<img alt="" src=../imagens/minus.gif onclick="menos()"/>
 </div>
-</body>
+
 <script type="text/javascript" >
 //detecï¿½o do navegador
 navm = false; // IE
@@ -61,12 +62,7 @@ function inicia(esquema)
 		ins += "<tbody><tr>\n";
 		for (colunas = 1; colunas < numc; colunas++)
 		{
-			//if ((r < 256) && (g < 256) && (b < 256))
-			//{
-				ins += "<td onclick='aplicacor(\""+r+","+g+","+b+"\")' width=10 style='padding: 0px; border: 0px; line-height:5pt;cursor:pointer; background-color:rgb("+r+","+g+","+b+")' >&nbsp;</td>\n";
-			//}
-			//else
-			//{ins += "<td></td>\n";}
+			ins += "\<td onclick='aplicacor(\""+r+","+g+","+b+"\")' width=10 style='padding: 0px; border: 0px; line-height:5pt;cursor:pointer; background-color:rgb("+r+","+g+","+b+")' \>&nbsp;\<\/td\>\n";
 			if (esquema == "vermelho") {g = g + intnc;b = b + intnc;}
 			if (esquema == "verde") {r = r + intnc;b = b + intnc;}
 			if (esquema == "azul") {g = g + intnc;r = r + intnc;}
@@ -75,7 +71,7 @@ function inicia(esquema)
 			if (esquema == "amarelo") {g = g + intnc;r = 255; b = 0;}
 			if (esquema == "misto") {g = Math.ceil(Math.random() * 255);r = Math.ceil(Math.random() * 255);b = Math.ceil(Math.random() * 255);}
 		}
-		ins += "</tr></tbody>\n";
+		ins += "\<\/tr\>\<\/tbody>\n";
 		if (esquema == "vermelho"){r = r + intnl; g = 0; b = 0;}
 		if (esquema == "verde"){g = g + intnl; r = 0; b = 0;}
 		if (esquema == "azul"){b = b + intnl; g = 0; r = 0;}
@@ -83,7 +79,7 @@ function inicia(esquema)
 		if (esquema == "ciano"){b = 255; g = linhas; r = 0;}
 		if (esquema == "amarelo"){b = 0; g = linhas; r = 255;}
 	}
-	document.getElementById("cores").innerHTML = "<table cellpadding='0' cellspacing='0' border='0'>"+ins+"</table>"
+	document.getElementById("cores").innerHTML = "\<table cellpadding='0' cellspacing='0' border='0'\>"+ins+"\<\/table\>"
 }
 function muda (e)
 {
@@ -108,3 +104,5 @@ function aplicacor(c)
 	window.parent.wdocafechaf('wdocac')
 }
 </script>
+</body>
+</html>
