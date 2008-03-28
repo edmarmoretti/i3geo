@@ -969,10 +969,18 @@ function centroide()
 /*
 Function: dissolve
 
-Gera um tema dissolvendo as divisas entre polígonos com o mesmo atributo.
+Gera um tema dissolvendo as divisas entre polígonos.
 */
 function dissolve()
 {wdocaf("400px","230px",g_locaplic+"/ferramentas/dissolve/index.htm","","","Dissolve");}
+/*
+Function: agrupaElementos
+
+Gera um tema poligonal agrupando elementos de um tema.
+*/
+function agrupaElementos()
+{wdocaf("400px","230px",g_locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");}
+
 /*
 Function: analisaGeometrias
 

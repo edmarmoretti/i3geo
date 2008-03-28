@@ -1102,7 +1102,23 @@ Include:
 		$cp->set_data($m->dissolvePoligono($item,$locaplic));
 		$m->salva();
 	break;
+/*
+Property: agrupaElementos
 
+Agrupa elementos em um polígono.
+
+Salva o mapa acrescentando um novo layer com o resultado.
+
+Include:
+<classe_analise.php>
+*/
+	case "agrupaElementos":
+		include("classe_analise.php");
+		copiaSeguranca($map_file);
+		$m = new Analise($map_file,$tema);
+		$cp->set_data($m->agrupaElementos($item,$locaplic));
+		$m->salva();
+	break;
 /*
 Property: pontoEmPoligono
 

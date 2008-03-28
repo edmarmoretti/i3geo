@@ -1767,6 +1767,114 @@ $locaplic - Localização do I3geo
 		return("ok");
 	}
 /*
+Function: agrupaElementos
+
+Agrupa elementos em um polígono.
+
+Salva o mapa acrescentando um novo layer com o resultado.
+*/
+	function agrupaElementos($item,$locaplic)
+	{
+		//para manipular dbf
+		if(!isset($item)){$item="";}
+		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		else	
+		require_once "../pacotes/phpxbase/api_conversion.php";
+		//define o nome do novo shapefile que será criado
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$this->layer->open();
+		$res_count = $this->layer->getNumresults();
+		//
+		//pega os indices dos poligonos por classe de atributo
+		//
+		$indices = array();
+		for ($i = 0; $i < $res_count; $i++)
+		{
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getshape(-1, $shp_index);
+			if($item != "")
+			$valor = $shape->values[$item];
+			else
+			$valor = "nenhum";
+			if(!isset($indices[$valor]))
+			{
+				$indices[$valor] = array($shp_index);
+			}
+			else
+			$indices[$valor] = array_merge($indices[$valor],array($shp_index));
+		}
+
+		$dissolve=array();
+		foreach($indices as $i)
+		{
+			foreach ($i as $indice)
+			{
+				$shape = $this->layer->getshape(-1, $indice);
+				if($item != "")
+				$valor = $shape->values[$item];
+				else
+				$valor = "nenhum";
+				if (!isset($dissolve[$valor]))
+				{$dissolve[$valor] = $shape;}
+				else
+				{
+					$tipo = $shape1->type;
+					if($tipo==2)
+					{
+						for($l=0;$l<($shape->numlines);$l++)
+						{
+							$shape1 = $dissolve[$valor];
+							$linha = $shape->line($l);
+							$shape1->add($linha);
+						}
+						$dissolve[$valor] = $shape1;
+					}
+					else
+					{
+						$dissolve[$valor] = $shape->union_geos($dissolve[$valor]);
+					}
+				}
+			}
+		}
+		$this->layer->close();
+		//
+		//cria o novo shapefile
+		//
+		$nomefinal = nomeRandomico();
+		$nomeshp = $this->diretorio."/".$nomefinal;
+		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
+		// cria o dbf
+		$def = array();
+		if($item==""){$item="nenhum";}
+		$def[] = array($item,"C","254");
+		$db = xbase_create($nomeshp.".dbf", $def);
+		$dbname = $nomeshp.".dbf";
+		$classes = array_keys($dissolve);
+		foreach ($classes as $classe)
+		{
+			$novoshpf->addShape($dissolve[$classe]->convexhull());
+			xbase_add_record($db,array($classe));
+		}
+		$novoshpf->free();
+		xbase_close($db);
+		//
+		//adiciona o novo layer no mapa
+		//	
+		$n = pegaNome($this->layer);	
+		$novolayer = criaLayer($this->mapa,MS_LAYER_POLYGON,MS_DEFAULT,("Agrupamento de ".$n),$metaClasse="SIM");
+		$novolayer->set("data",$nomeshp.".shp");
+		$novolayer->setmetadata("DOWNLOAD","SIM");
+		$novolayer->setmetadata("TEMALOCAL","SIM");
+		if (file_exists(($this->arquivo)."qy"))
+		{unlink (($this->arquivo)."qy");}
+
+		return("ok");
+	}
+	
+/*
 function: dissolvePoligono
 
 Dissolve as bordas entre polígonos com o mesmo atributo.
@@ -1820,7 +1928,10 @@ $locaplic - Localização do I3geo
 			foreach ($i as $indice)
 			{
 				$shape = $this->layer->getshape(-1, $indice);
+				if($item != "")
 				$valor = $shape->values[$item];
+				else
+				$valor = "nenhum";
 				if (!isset($dissolve[$valor]))
 				{$dissolve[$valor] = $shape;}
 				else

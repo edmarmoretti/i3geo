@@ -319,6 +319,12 @@ pt: "Dissolve",
 en:"Dissolv",
 es:"Dissolve"
 }],
+"u26": [
+{
+pt: "Agrupa",
+en:"Group",
+es:"Agrupa"
+}],
 //arvore com a lista de temas
 "t1": [
 {
@@ -1302,7 +1308,8 @@ oMenuData = {
 		}	
 	},
 	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
-	{ text: $trad("u10"), url: "javascript:buffer()" }
+	{ text: $trad("u10"), url: "javascript:buffer()" },
+	{ text: $trad("u26"), url: "javascript:agrupaElementos()" }
 	]
 };
 oMenuData.janelas = [
