@@ -486,6 +486,20 @@ function aplicaEstilo()
 	var backgroundcolor = $i("backgroundcolor").value
 	var color = $i("color").value
 	var symbolname = $i("symbolname").value
+	//valida nome do símbolo
+	var simbolos = $i("simbolos").getElementsByTagName("img")
+	var valido = "nao"
+	for (i=0;i<simbolos.length;i++)
+	{
+		if(simbolos[i].title == symbolname)
+		{var valido = "sim"}
+	}
+	if(valido == "nao")
+	{
+		aguarde("none")
+		alert("Nome do simbolo nao encontrado")
+		return;
+	}
 	var size = $i("sizes").value
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=editasimbolo&opcao=aplica&tema="+tema+"&classe="+classe+"&estilo="+estilo+"&outlinecolor="+outlinecolor+"&backgroundcolor="+backgroundcolor+"&color="+color+"&symbolname="+symbolname+"&size="+size
 	var cp = new cpaint();
