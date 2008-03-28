@@ -4406,8 +4406,8 @@ function pegaPosicaoObjeto(obj)
 		{
 			if (obj.offsetParent) {
 				do {
-					curleft += obj.offsetLeft;
-					curtop += obj.offsetTop;
+					curleft += obj.offsetLeft-obj.scrollLeft;
+					curtop += obj.offsetTop-obj.scrollTop;
 				} while (obj = obj.offsetParent);
 			}
 		}
