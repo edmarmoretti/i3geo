@@ -1780,6 +1780,7 @@ $locaplic - Localização do I3geo
 	function dissolvePoligono($item,$locaplic)
 	{
 		//para manipular dbf
+		if(!isset($item)){$item="";}
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
@@ -1798,7 +1799,10 @@ $locaplic - Localização do I3geo
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
 			$shape = $this->layer->getshape(-1, $shp_index);
+			if($item != "")
 			$valor = $shape->values[$item];
+			else
+			$valor = "nenhum";
 			if(!isset($indices[$valor]))
 			{
 				$indices[$valor] = array($shp_index);
@@ -1834,6 +1838,7 @@ $locaplic - Localização do I3geo
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		// cria o dbf
 		$def = array();
+		if($item==""){$item="nenhum";}
 		$def[] = array($item,"C","254");
 		$db = xbase_create($nomeshp.".dbf", $def);
 		$dbname = $nomeshp.".dbf";
