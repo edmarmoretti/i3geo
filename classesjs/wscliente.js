@@ -23,75 +23,85 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-WCservico = "";
-g_tipo = ""
-g_tema = ""
-g_proj = ""
-g_legenda = ""
-g_nometema = ""
-g_funcao = ""
-g_sid = ""
-WClistaDeTemas = ""
-WClistaDeFuncoes = ""
-g_RSSws = new Array() //enderecos dos RSS do tipo WS
-g_RSSwms = new Array() //enderecos dos RSS do tipo WMS
-
-//seta as variáveis navn e navm
-navm = false
-navn = false
-var app = navigator.appName.substring(0,1);
-if (app=='N') navn=true; else navm=true;
 /*
 Function: WCinicia
 
-Monta a árvore de opções e preenche a DIV arvore. Busca a lista de serviços, se existirem RSS cadastrados.
+Monta a árvore de opções e preenche a DIV arvore.
+
+Parameters:
+
+RSSws - Array contendo a lista de endereços com a lista dos serviços do tipo web service. A lista deve estar no formato RSS
+
+RSSwms - Array contendo a lista de endereços com a lista dos serviços do tipo WMS. A lista deve estar no formato RSS
 */
-function WCinicia()
+function i3geo_wscliente_inicia(RSSws,RSSwms)
 {
-	arvore = new Object();
-	arvore = treeviewNew("arvore", "default", "arvoreMenu", null);
-	arvore.createItem("raiz", "Opções", g_locaplic+"/imagens/lc_group.gif", true, true, true, null);
-	WCcriano("ajudawc","Ajuda",g_locaplic+"/imagens/folder-s.gif","raiz","");
-	WCcriano("ajudawc1","<span class=clique onclick='WCativa(\"oquews\")'>Web Services</span>",g_locaplic+"/imagens/new.gif","ajudawc","link");
-	WCcriano("ajudawc2","<span class=clique onclick='WCativa(\"oqueogc\")'>Padrões OGC</span>",g_locaplic+"/imagens/new.gif","ajudawc","link");
-	WCcriano("ajudawc3","<span class=clique onclick='WCativa(\"oquecarto\")'>WS cartográfico</span>",g_locaplic+"/imagens/new.gif","ajudawc","link");
+	/* 
+	Variable: i3geo_wscliente_RSSws
+	
+	Array com a lista de web services do tipo dados
+	 */
+	i3geo_wscliente_RSSws = RSSws;
+	/* 
+	Variable: i3geo_wscliente_RSSwms
+	
+	Array com a lista de web services do tipo wms
+	 */
+	i3geo_wscliente_RSSwms = RSSwms
+	/* 
+	Variable: i3geo_wscliente_tipo
+	
+	Tipo de serviço wms ativo
+	*/
+	i3geo_wscliente_tipo = ""
+	/* 
+	Variable: i3geo_wscliente_tema
+	
+	Código do tema wms escolhido
+	*/
+	i3geo_wscliente_tema = ""
+	/* 
+	Variable: i3geo_wscliente_nometema
+	
+	Nome do tema wms escolhido
+	*/
+	i3geo_wscliente_nometema = ""
+	/* 
+	Variable: i3geo_wscliente_funcao
+	
+	Função do ws escolhida.
+	*/
+	i3geo_wscliente_funcao = ""
+	g_sid = ""
+	//seta as variáveis navn e navm
+	navm = false
+	navn = false
+	var app = navigator.appName.substring(0,1);
+	if (app=='N') navn=true; else navm=true;	
+	
+	var ins = ""
+	var i = "&nbsp;&nbsp;<img style=position:relative;top:3px; src='"+g_locaplic+"/imagens/new.gif' >"
+	var ii = "onmouseover='javascript:this.style.textDecoration=\"underline\"' onmouseout='javascript:this.style.textDecoration=\"none\"'"
+	ins += "<b>&nbsp;Ajuda</b><br>";
+	ins += i+"<span "+ii+" class=clique onclick='i3geo_wscliente_ativa(\"oquews\")'>Web Services</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_ativa(\"oqueogc\")'>Padrões OGC</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_ativa(\"oquecarto\")'>WS cartográfico</span><br><br>";
+	ins += "</table>"
+	ins += "<b>&nbsp;Mapas</b><br>"
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_servicoswms()'>Escolher serviço</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_listatemas()'>Escolher um tema</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_getcapabilities(\"WMS\")'>Resposta XML (WMS)</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_getcapabilities(\"WFS\")'>Resposta XML (WFS)</span><br><br>";
 
-	WCcriano("clientewms","Mapas",g_locaplic+"/imagens/folder-s.gif","raiz","");
-	WCcriano("clientewms1","<span class=clique onclick='WCativa(\"escolherwms\")'>Escolher serviço</span>",g_locaplic+"/imagens/new.gif","clientewms","link");
-	WCcriano("clientewms4","<span class=clique onclick='WClistatemas()'>Escolher um tema</span>",g_locaplic+"/imagens/new.gif","clientewms","link");
-	WCcriano("clientewms2","<span class=clique onclick='WCgetcapabilities(\"WMS\")'>Resposta XML (WMS)</span>",g_locaplic+"/imagens/new.gif","clientewms","link");
-	WCcriano("clientewms3","<span class=clique onclick='WCgetcapabilities(\"WFS\")'>Resposta XML (WFS)</span>",g_locaplic+"/imagens/new.gif","clientewms","link");
+	ins += "<b>&nbsp;Dados</b><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_servicosws()'>Escolher serviço</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_listafuncoes()'>Escolher fun&ccedil;&atilde;o</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_wsdl()'>WSDL</span><br><br>";
 
-	WCcriano("clientedados","Dados",g_locaplic+"/imagens/folder-s.gif","raiz","");
-	WCcriano("clientedados1","<span class=clique onclick='WCativa(\"escolherws\")'>Escolher serviço</span>",g_locaplic+"/imagens/new.gif","clientedados","link");
-	WCcriano("clientedados4","<span class=clique onclick='WClistafuncoes()'>Escolher fun&ccedil;&atilde;o</span>",g_locaplic+"/imagens/new.gif","clientedados","link");
-	WCcriano("clientedados2","<span class=clique onclick='WCwsdl()'>WSDL</span>",g_locaplic+"/imagens/new.gif","clientedados","link");
-
-	WCcriano("listarss","RSS",g_locaplic+"/imagens/xml.gif","raiz","");
-	WCcriano("listarssws","<span class=clique onclick='WClistaServicos(\"ws\")'>Dados</span>",g_locaplic+"/imagens/new.gif","listarss","link");
-	WCcriano("listarsswms","<span class=clique onclick='WClistaServicos(\"wms\")'>Mapas</span>",g_locaplic+"/imagens/new.gif","listarss","link");
-	if (document.getElementById("RSSws"))
-	{
-		if (g_RSSws.length > 0)
-		{
-			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSSws.join("|")+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"listaRSSws",mostraRetornowsRSS);
-		}
-	}
-	if (document.getElementById("RSSwms"))
-	{
-		if (g_RSSwms.length > 0)
-		{
-			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSSwms.join("|")+"&g_sid="+g_sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"listaRSSws",mostraRetornowmsRSS);
-		}
-	}
+	ins += "<b>&nbsp;RSS</b><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_listaServicos(\"ws\")'>Dados</span><br>";
+	ins += i+"<span "+ii+"  class=clique onclick='i3geo_wscliente_listaServicos(\"wms\")'>Mapas</span><br>";
+	document.getElementById("arvoreMenu").innerHTML = ins;
 	/*
 	pega parametros pela url
 	servico,tema
@@ -100,27 +110,25 @@ function WCinicia()
 	parServico = "";
 	parTema = "";
 	parTipo = "";
-	//servico = unescape(((((window.location.href).split("servico="))[1]).split("&"))[0]);
 	parametros = window.location.href.split("?");
 	if (parametros.length > 1)
 	{
 		valores = parametros[1].split(",");
-		//[0]=tipo,[1]=endereco,[2]=tema
-		//abre o servico e lista os temas
 		if (valores.length == 2)
 		{
-			WCservico = valores[1];
+			i3geo_wscliente_WCservico = valores[1];
 			if (parametros.length==3)
-			{WCservico += "?"+parametros[2];}
+			{i3geo_wscliente_WCservico += "?"+parametros[2];}
 			if (valores[0] == "wms")
 			{
-				registrawms(WCservico);
+				document.getElementById("enderecowms").value = nome
+				i3geo_wscliente_listatemas()
 			}
 		}
 	}
 }
 /*
-Function: WClistaServicos
+Function: i3geo_wscliente_listaServicos
 
 Lista os serviços cadastrados.
 
@@ -129,92 +137,115 @@ Parameters:
 tipo - ws/wms
 
 */
-function WClistaServicos(tipo)
+function i3geo_wscliente_listaServicos(tipo)
 {
 	if (tipo == ("ws"))
-	{var lista = g_RSSws}
+	{var lista = i3geo_wscliente_RSSws}
 	else
-	{var lista = g_RSSwms}
+	{var lista = i3geo_wscliente_RSSwms}
 	for (i=0;i<lista.length; i++)
 	{
 		var ins = "<p class=clique onclick=\"window.open('"+lista[i]+"')\" ><img src="+g_locaplic+"/imagens/xml.gif >&nbsp;"+lista[i]+"</p>"
 	}
 	document.getElementById("corpo").innerHTML = ins
 }
-/*
-Function: mostraRetornowsRSS
 
-Lista os ws vindos dos RSS.
+/*
+Function: i3geo_wscliente_servicosws
+
+Lista os web services existentes no arquivo definido na variável i3geo_wscliente_RSSws.
 
 */
-function mostraRetornowsRSS(retorno)
+function i3geo_wscliente_servicosws()
 {
-	var linhas = retorno.data.split("|")
-	var ins = ""
-	for (i=0;i<linhas.length; i++)
+	var monta = function(retorno)
 	{
-		var caso = linhas[i].split("#")
-
-		ins += "<p class=clique onclick=\"registraws('"+caso[2]+"')\" ><b>"+caso[0]+"</b><span style=color:gray ><br>&nbsp;"+caso[1]+"<br>&nbsp;("+caso[3]+")</span>"
-		if (caso[4])
-		{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
-		else {ins += "</p>"}
-	}
-	document.getElementById("RSSws").innerHTML = ins
-}
-/*
-Function: mostraRetornowmsRSS
-
-Lista os wms vindos dos RSS.
-
-*/
-function mostraRetornowmsRSS(retorno)
-{
-	var linhas = retorno.data.split("|")
-	var ins = ""
-	for (i=0;i<linhas.length; i++)
-	{
-		var caso = linhas[i].split("#")
-		if (i > 0)
-		{
-			ins += "<p class=clique onclick=\"registrawms('"+caso[2]+"')\" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
-			if (caso[4])
-			{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
-			else {ins += "</p>"}
-		}
+		var linhas = retorno.data.split("|")
+		var ins = ""
+		if(linhas.length == 1)
+		{var ins = "<br><span style=color:red >"+retorno.data+"</span>"}
 		else
-		{{ins += ""}}
+		{
+			for (i=0;i<linhas.length; i++)
+			{
+				var caso = linhas[i].split("#")
+				var clique = "javascript:document.getElementById(\"enderecows\").value='"+caso[2]+"';document.getElementById('enderecows').value='"+caso[2]+"'"
+				ins += "<p class=clique onclick="+clique+" ><b>"+caso[0]+"</b><span style=color:gray ><br>&nbsp;"+caso[1]+"<br>&nbsp;("+caso[3]+")</span>"
+				if (caso[4])
+				{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
+				else {ins += "</p>"}
+			}
+		}
+		document.getElementById("resultadoRSSws").innerHTML = ins
+		document.getElementById("corpo").style.display="none"
+		document.getElementById("RSSws").style.display="block"
+		aguardeTotal("none");
 	}
-	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
+	if (i3geo_wscliente_RSSws.length > 0)
+	{
+		aguardeTotal("block");
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+i3geo_wscliente_RSSws.join("|")+"&g_sid="+g_sid;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaRSSws",monta);
+	}	
 }
 /*
-Function: WCcriano
+Function: i3geo_wscliente_servicoswms
 
-Cria um nó na árvore de opções
+Lista os web services existentes no arquivo definido na variável RSSwms.
 
-Parâmetros:
+A variável RSSwms deve ser definida no arquivo html que inicia o wscliente.
 
-idnovo - nome do id do novo nó
-
-texto - texto que será incluído
-
-imagem - imagem que será utilizada no nó
-
-pai - id do pai do nó
-
-tipo - tipo de nó (se for vazio é um nó normal, se não é um nó final)
 */
-function WCcriano(idnovo,texto,imagem,pai,tipo)
+function i3geo_wscliente_servicoswms()
 {
-	if (tipo != "")
-	{arvore.createItem(idnovo, texto, imagem, false, true, true, pai);}
-	else
-	{arvore.createItem(idnovo, texto, imagem, true, true, true, pai);}
+	var mostraRetornowmsRSS = function(retorno)
+	{
+		var linhas = retorno.data.split("|")
+		var ins = ""
+		if(linhas.length == 1)
+		{var ins = "<br><span style=color:red>"+retorno.data+"</span>"}
+		else
+		{
+			for (i=0;i<linhas.length; i++)
+			{
+				var caso = linhas[i].split("#")
+				if (i > 0)
+				{
+					var clique = "javascript:document.getElementById(\"enderecowms\").value='"+caso[2]+"';document.getElementById('enderecowms').value='"+caso[2]+"'"
+					ins += "<p class=clique onclick="+clique+" ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
+					if (caso[4])
+					{ins += " <span style=color:gray >(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")</span></p>";}
+					else {ins += "</p>"}
+				}
+				else
+				{{ins += ""}}
+			}
+		}
+		document.getElementById("resultadoRSSwms").innerHTML = ins
+		document.getElementById("corpo").style.display="none"
+		document.getElementById("RSSwms").style.display="block"
+		aguardeTotal("none");
+	}
+	if (document.getElementById("RSSwms"))
+	{
+		if (i3geo_wscliente_RSSwms.length > 0)
+		{
+			aguardeTotal("block");
+			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+i3geo_wscliente_RSSwms.join("|")+"&g_sid="+g_sid;
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"listaRSSws",mostraRetornowmsRSS);
+		}
+	}
 }
 /*
-Function: WCativa
+Function: i3geo_wscliente_ativa
 
-Ativa uma opção.
+Ativa uma opção mostrando o seu respectivo texto.
 
 O conteúdo do div (id) é lido e incluído na div corpo
 
@@ -222,58 +253,13 @@ Parâmetros:
 
 id - id do div com o conteúdo que será ativado
 */
-function WCativa(id)
+function i3geo_wscliente_ativa(id)
 {
 	var novo = document.getElementById(id)
 	document.getElementById("corpo").innerHTML = novo.innerHTML
-	if (id == "escolherwms")
-	{document.getElementById("enderecowms").value = WCservico}
-	if (id == "escolherws")
-	{document.getElementById("enderecows").value = WCservico}
 }
 /*
-Function: registrawms
-
-Copia um link (serviço WMS) para o campo de formulário enderecowms.
-
-Parâmetros:
-
-nome - endereço do serviço
-*/
-function registrawms(nome)
-{
-	document.getElementById("enderecowms").value = nome
-	WCservico = nome
-	WClistaDeTemas = ""
-	WClistatemas()
-}
-/*
-Function: registraws
-
-Copia um link (serviço WS) para o campo de formulário enderecows.
-
-Parâmetros:
-
-nome - endereço do serviço
-*/
-function registraws(nome)
-{
-	document.getElementById("enderecows").value = nome
-	WCservico = nome
-	WClistaDeFuncoes = ""
-	WClistafuncoes()
-}
-/*
-Function: WCaguarde
-
-Gera mensagem de aguarde.
-*/
-function WCaguarde()
-{
-	document.getElementById("corpo").innerHTML = "<p>Aguarde...</p>"
-}
-/*
-Function: WCgetcapabilities
+Function: i3geo_wscliente_getcapabilities
 
 Executa ajax para buscar resultado do getcapabilities.
 
@@ -282,128 +268,110 @@ Parâmetros:
 tipo - tipo de chamada WMS|WFS
 
 */
-function WCgetcapabilities(tipo)
+function i3geo_wscliente_getcapabilities(tipo)
 {
-	if (WCservico != "")
+	var monta = function (retorno)
 	{
-		WCaguarde();
-		var p = g_locaplic+"/classesphp/wscliente.php?funcao=getcapabilities&onlineresource="+WCservico+"&tipo="+tipo+"&g_sid="+g_sid;
+		aguardeTotal("none");
+		document.getElementById("corpo").innerHTML = "<div class=listaAjuda ><p>"+retorno.data+"</div>"
+	}
+	if (document.getElementById("enderecowms").value != "")
+	{
+		aguardeTotal("block");
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=getcapabilities&onlineresource="+document.getElementById("enderecowms").value+"&tipo="+tipo+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"getcapabilities",mostraRetorno);
+		cp.call(p,"getcapabilities",monta);
 	}
 	else
 	document.getElementById("corpo").innerHTML = "<p>Nenhum serviço foi escolhido.</p>"
 }
 /*
-Function: mostraRetorno
-
-Mostra o retorno de uma chamada ajax sem tratamento
-
-*/
-function mostraRetorno(retorno)
-{
-	document.getElementById("corpo").innerHTML = "<p>"+retorno.data
-}
-/*
-Function: WCmostraTemas
-
-Mostra o retorno da chamada ajax que busca a lista de temas
-
-*/
-function WCmostraTemas(retorno)
-{
-	document.cookie = 'i3GeoPHP=; expires=Thu, 2 Aug 2001 20:47:11 UTC; path=/';
-	if (WClistaDeTemas == "")
-	{
-		var ins = "<div style='text-align:left'><p>Selecione a camada que ser&aacute; adicionada ao mapa e depois clique em Aplicar.<br>"
-		ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick="WCverMapa()" />'
-		document.getElementById("corpo").innerHTML = ins+"<p>"+retorno.data+"</div>"
-		WClistaDeTemas = ins+"<p>"+retorno.data
-	}
-	else
-	{document.getElementById("corpo").innerHTML = WClistaDeTemas}
-}
-/*
-Function: WClistatemas
+Function: i3geo_wscliente_listatemas
 
 Busca a lista de temas de um WMS ou WFS
-
 */
-function WClistatemas()
+function i3geo_wscliente_listatemas()
 {
-	if (WCservico != "")
+	var WCservico = document.getElementById('enderecowms').value
+	var WCmostraTemas = function(retorno)
 	{
-		WCaguarde();
-		if (WClistaDeTemas == "")
+		aguardeTotal("none");
+		document.cookie = 'i3GeoPHP=; expires=Thu, 2 Aug 2001 20:47:11 UTC; path=/';
+		var ins = "<div style='text-align:left'><p>Selecione a camada que ser&aacute; adicionada ao mapa e depois clique em Aplicar.<br></div>"
+		ins += '<p><div onclick="i3geo_wscliente_verMapa()" ><input id=botao3 type="button" class=executar value="Aplicar&nbsp;&nbsp;"  /></div>'
+		ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
+		document.getElementById("corpo").innerHTML = ins+"<p>"+retorno.data+"</div>"
+		YAHOO.example.init = function ()
 		{
-			var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=temaswms&servico="+WCservico+"&g_sid="+g_sid
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"temaswms",WCmostraTemas);
-		}
-		else
-		{WCmostraTemas("")}
+			function onPushButtonsMarkupReady()
+			{new YAHOO.widget.Button("botao3");}
+			YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
+		}()		
 	}
-	else
-	document.getElementById("corpo").innerHTML = "<p>Nenhum serviço foi escolhido.</p>"
+	document.getElementById("RSSws").style.display="none"
+	document.getElementById("RSSwms").style.display="none"
+	document.getElementById("corpo").style.display="block"
+	if(WCservico == "")
+	{document.getElementById("corpo").innerHTML = "<p>Nenhum serviço foi escolhido.</p>"}
+	aguardeTotal("block");
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=temaswms&servico="+WCservico+"&g_sid="+g_sid
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"temaswms",WCmostraTemas);
 }
 /*
-Function: WClistafuncoes
+Function: i3geo_wscliente_listafuncoes
 
 Busca a lista de funções de um WS
 
 */
-function WClistafuncoes()
+function i3geo_wscliente_listafuncoes()
 {
+	var WCmostraFuncoes = function(retorno)
+	{
+		aguardeTotal("none");
+		var ins = "<p>Selecione a fun&ccedil;&atilde;o que ser&aacute; acionada depois clique em Aplicar.<br></div>"
+		ins += '<p><div onclick="i3geo_wscliente_selParFuncao()" ><input id=botao4 type="buttom" class=executar value="Aplicar&nbsp;&nbsp;" /></div>'
+		ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
+		if(!retorno.data)
+		{document.getElementById("corpo").innerHTML="<br><span style=color:red ><b>Erro ao acessar o servi&ccedil;o!</span>";return;}
+		var funcs = retorno.data.split("|");
+		for (i=0;i<funcs.length; i++)
+		{
+			var f = funcs[i].split("#")
+			ins += "<br><b><input style='cursor:pointer' type=radio name='funcao' onclick=\"i3geo_wscliente_selParFuncao('"+f[0]+"')\" />&nbsp;"+f[0]+"</b>&nbsp;"+f[3]+"<br>"
+			ins += "<i>Entrada:</i>"+f[1]
+			ins += "<br><i>Sa&iacute;da:</i>"+f[2]+"<br>"
+		}
+		document.getElementById("corpo").innerHTML = ins+"</div>"
+		YAHOO.example.init = function ()
+		{
+			function onPushButtonsMarkupReady()
+			{new YAHOO.widget.Button("botao4");}
+			YAHOO.util.Event.onContentReady("botao4", onPushButtonsMarkupReady);
+		}()		
+		document.getElementById("RSSws").style.display="none"
+		document.getElementById("RSSwms").style.display="none"
+		document.getElementById("corpo").style.display="block"
+	}
+	var WCservico = document.getElementById('enderecows').value
 	if (WCservico != "")
 	{
-		WCaguarde();
-		if (WClistaDeFuncoes == "")
-		{
-			var p = g_locaplic+"/classesphp/wscliente.php?funcao=funcoesws&servico="+WCservico+"&g_sid="+g_sid
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"funcoesws",WCmostraFuncoes);
-		}
-		else
-		{WCmostraFuncoes("")}
+		aguardeTotal("block");
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=funcoesws&servico="+WCservico+"&g_sid="+g_sid
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"funcoesws",WCmostraFuncoes);
 	}
 	else
 	document.getElementById("corpo").innerHTML = "<p>Nenhum serviço foi escolhido.</p>"
 }
 /*
-Function: WCmostraFuncoes
-
-Mostra o retorno da chamada ajax que busca a lista de temas
-
-*/
-function WCmostraFuncoes(retorno)
-{
-	if (WClistaDeFuncoes == "")
-	{
-		var ins = "<p>Selecione a fun&ccedil;&atilde;o que ser&aacute; acionada depois clique em Aplicar.<br>"
-		ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick="WCselParFuncao()" />'
-		ins += "<div style='text-align:left;'>"
-		var funcs = retorno.data.split("|");
-		for (i=0;i<funcs.length; i++)
-		{
-			var f = funcs[i].split("#")
-			ins += "<br><b><input style='cursor:pointer' type=radio name='funcao' onclick=\"WCselParFuncao('"+f[0]+"')\" />&nbsp;"+f[0]+"</b>&nbsp;"+f[3]+"<br>"
-			ins += "<i>Entrada:</i>"+f[1]
-			ins += "<br><i>Sa&iacute;da:</i>"+f[2]+"<br>"
-		}
-		document.getElementById("corpo").innerHTML = ins+"</div>"
-		WClistaDeFuncoes = ins+"</div>"
-	}
-	else
-	{document.getElementById("corpo").innerHTML = WClistaDeFuncoes}
-}
-/*
-Function: WCselParFuncao
+Function: i3geo_wscliente_selParFuncao
 
 Lista os parâmetros de uma função para o usuário digitar os valores.
 
@@ -412,47 +380,54 @@ Parâmetros:
 funcao - função que será chamada
 
 */
-function WCselParFuncao(funcao)
+function i3geo_wscliente_selParFuncao(funcao)
 {
-	WCaguarde();
-	g_funcao = funcao;
-	var p = g_locaplic+"/classesphp/wscliente.php?funcao=parfuncoesws&servico="+WCservico+"&funcaows="+funcao+"&g_sid="+g_sid
+	var WCmostraParFuncoes = function (retorno)
+	{
+		aguardeTotal("none");
+		if (retorno.data == ""){i3geo_wscliente_chamadados(retorno.data)}
+		else
+		{
+			var pars = retorno.data.split("|")
+			var ins = "<p>Digite os valores dos par&acirc;metros e depois em clique em 'Aplicar'.<br>"
+			ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick=i3geo_wscliente_chamadados(\"'+retorno.data+'\") />'
+			ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >'
+			for (i=0;i<pars.length; i++)
+			{
+				var temp = pars[i].split("#")
+				ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text size=20 value='' id=xxx"+temp[0]+" /><br>"
+			}
+			document.getElementById("corpo").innerHTML = ins+"</div>"
+		}
+		document.getElementById("RSSws").style.display="none"
+		document.getElementById("RSSwms").style.display="none"
+		document.getElementById("corpo").style.display="block"
+	}
+	aguardeTotal("block");
+	i3geo_wscliente_funcao = funcao;
+	var p = g_locaplic+"/classesphp/wscliente.php?funcao=parfuncoesws&servico="+document.getElementById("enderecows").value+"&funcaows="+funcao+"&g_sid="+g_sid
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"parFuncoesws",WCmostraParFuncoes);
 }
 /*
-Function: WCmostraParFuncoes
-
-Mostra o retorno da chamada ajax que busca as funcoes de um WS
-
-*/
-function WCmostraParFuncoes(retorno)
-{
-	if (retorno.data == ""){WCchamadados(retorno.data)}
-	else
-	{
-		var pars = retorno.data.split("|")
-		var ins = "<p>Digite os valores dos par&acirc;metros e depois em clique em 'Aplicar'.<br>"
-		ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick=WCchamadados(\"'+retorno.data+'\") />'
-		ins += "<div style='text-align:left;'>"
-		for (i=0;i<pars.length; i++)
-		{
-			var temp = pars[i].split("#")
-			ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text size=20 value='' id=xxx"+temp[0]+" /><br>"
-		}
-		document.getElementById("corpo").innerHTML = ins+"</div>"
-	}
-}
-/*
-Function: WCchamadados
+Function: i3geo_wscliente_chamadados
 
 Busca os dados de uma função de um serviço
 
 */
-function WCchamadados(retorno)
+function i3geo_wscliente_chamadados(retorno)
 {
+	var monta = function (retorno)
+	{
+		aguardeTotal("none");
+		document.getElementById("corpo").innerHTML = "<div style='text-align:left;height:320px;overflow:auto;width:555px;' >"+retorno.data+ "</div>"
+		document.getElementById("RSSws").style.display="none"
+		document.getElementById("RSSwms").style.display="none"
+		document.getElementById("corpo").style.display="block"
+	}
+	aguardeTotal("block");
 	var par = new Array()
 	if (retorno != "")
 	{
@@ -463,22 +438,11 @@ function WCchamadados(retorno)
 			par.push(temp[0]+"*"+document.getElementById("xxx"+temp[0]).value)
 		}
 	}
-	WCaguarde();
-	var p = g_locaplic+"/classesphp/wscliente.php?funcao=dadosws&servico="+WCservico+"&funcaows="+g_funcao+"&param="+par.join("|")+"&g_sid="+g_sid
+	var p = g_locaplic+"/classesphp/wscliente.php?funcao=dadosws&servico="+document.getElementById("enderecowms").value+"&funcaows="+i3geo_wscliente_funcao+"&param="+par.join("|")+"&g_sid="+g_sid
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"dadosWS",WCmostraDados);
-}
-/*
-Function: WCmostraDados
-
-Mostra os dados de uma função de um serviço
-
-*/
-function WCmostraDados(retorno)
-{
-	document.getElementById("corpo").innerHTML = "<div style='text-align:left'>"+retorno.data+ "</div>"
+	cp.call(p,"dadosWS",monta);
 }
 /*
 Function: seltema
@@ -495,19 +459,19 @@ nometema - nome completo do tema
 */
 function seltema(tipo,tema,legenda,nometema)
 {
-	g_tipo = tipo; //tipo de tema
-	g_tema = tema; //tema selecionado do ws
-	g_legenda = legenda; //legenda do tema
-	g_nometema = nometema; //nome do tema
+	i3geo_wscliente_tipo = tipo; //tipo de tema
+	i3geo_wscliente_tema = tema; //tema selecionado do ws
+	i3geo_wscliente_nometema = nometema; //nome do tema
 }
 /*
-Function: WCverMapa
+Function: i3geo_wscliente_verMapa
 
 Mostra o mapa
 
 */
-function WCverMapa()
+function i3geo_wscliente_verMapa()
 {
+	var WCservico = document.getElementById("enderecowms").value
 	var epsg = document.getElementById("proj").value.split(",")
 	var epsg = epsg[0]
 	var epsg = epsg.split(":")
@@ -515,11 +479,11 @@ function WCverMapa()
 	document.getElementById("corpo").innerHTML = "<div style=text-align:left id=mapa ></div><div style=width:550px;text-align:left id=localizarxy ></div><div style=text-align:left ><iframe width=400 id=desc ></iframe></div>"
 	var map = new OpenLayers.Map('mapa');
 	var bounds = new OpenLayers.Bounds(-73,5,-27,-34);
-	if (g_tipo != "estilo")
-	{var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: g_tema, srs: epsg} );}
+	if (i3geo_wscliente_tipo != "estilo")
+	{var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: i3geo_wscliente_tema, srs: epsg} );}
 	else
 	{
-		var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: g_tema, styles: g_nometema, srs: epsg});
+		var wms = new OpenLayers.Layer.WMS( "OpenLayers WMS",WCservico, {layers: i3geo_wscliente_tema, styles: i3geo_wscliente_nometema, srs: epsg});
 	}
 	map.addLayer(wms);
 	map.zoomToExtent(bounds);
@@ -532,7 +496,7 @@ function WCverMapa()
 		{var p = e.xy;}
 		//altera o indicador de localizacao
 		var lonlat = map.getLonLatFromViewPortPx(p);
-		var d = convdmsf(lonlat.lon,lonlat.lat);
+		var d = i3geo_wscliente_convdmsf(lonlat.lon,lonlat.lat);
 	}
 	)
 	map.events.register("click", map, function(e)
@@ -546,7 +510,7 @@ function WCverMapa()
 		var lonlat = map.getLonLatFromViewPortPx(p);
 		var url = wms.getFullRequestString()
 		url = url.replace("GetMap","getfeatureinfo")
-		url += "&QUERY_LAYERS="+g_tema
+		url += "&QUERY_LAYERS="+i3geo_wscliente_tema
 		var bb = map.getExtent()
 		url += "&BBOX="+bb.toBBOX()
 		//var xy = p.split(",")
@@ -560,15 +524,15 @@ function WCverMapa()
 	)
 }
 /*
-Function: WCwsdl
+Function: i3geo_wscliente_wsdl
 
 Abre o servico WSDL em uma nova janela
 
 */
-function WCwsdl()
-{window.open(WCservico)}
+function i3geo_wscliente_wsdl()
+{window.open(document.getElementById("enderecows").value)}
 /*
-Function: convdmsf
+Function: i3geo_wscliente_convdmsf
 
 Converte dd em dms.
 
@@ -582,7 +546,7 @@ Returns:
 
 Array com o valor de x [0] e y [1] no formato dd mm ss
 */
-function convdmsf(x,y) //0ms
+function i3geo_wscliente_convdmsf(x,y) //0ms
 {
 	var m = 0;
 	var s = 0;

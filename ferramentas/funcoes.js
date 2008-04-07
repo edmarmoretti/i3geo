@@ -25,7 +25,9 @@ $i = function(id)
 {return document.getElementById(id);}
 cabecalhojanela = ""; 
 //eventos das guias
-var h = parseInt(window.parent.document.getElementById("wdocai").style.height);
+var h = 0;
+if(window.parent.document.getElementById("wdocai"))
+{var h = parseInt(window.parent.document.getElementById("wdocai").style.height);}
 navm = false; // IE
 navn = false; // netscape
 var app = navigator.appName.substring(0,1);
@@ -84,6 +86,36 @@ function aguarde(tipo)
 	}
 	if (document.getElementById("aguarde"))
 	{document.getElementById("aguarde").style.display = "none";}
+}
+//monta um bloqueio da tela toda
+function aguardeTotal(tipo)
+{
+	var w = parseInt(screen.availWidth);
+	var h = parseInt(screen.availHeight);
+	if (!document.getElementById("aguardeTotal"))
+	{
+		var novoel = document.createElement("div");
+		novoel.style.width = w+"px";
+		novoel.style.height = h+"px";
+		novoel.id = "aguardeTotal";
+		novoel.display = "none";
+		novoel.style.zIndex=10000;
+		novoel.style.position = "absolute";
+		novoel.style.top = 0;
+		novoel.style.left = 0;
+		novoel.style.backgroundColor="gray";
+		if(navn)
+		{novoel.style.opacity = 0.45;}
+		else
+		{novoel.style.filter='alpha(opacity=45)';}
+		if(!g_locaplic)
+		{g_locaplic = "..";}
+		var i = "<div id=aguardeTotal1 style='display:none;padding:5px;border:1px solid black;text-align:center;background-color:white;position:absolute;z-index:10001;left:"+w/2+"px;top:"+((h/2)-200)+"px;'><img src='"+g_locaplic+"/imagens/aguarde.gif' /><span style=color:red >&nbsp;<b>Aguarde...</b></span></div>";
+		document.body.appendChild(novoel);
+		document.body.innerHTML+=i;
+	}
+	document.getElementById("aguardeTotal").style.display=tipo;
+	document.getElementById("aguardeTotal1").style.display=tipo;
 }
 //abre a paleta de cores
 function cor(obj)

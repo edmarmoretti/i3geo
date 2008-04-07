@@ -3,13 +3,14 @@
 span
 {font-family: Verdana, Arial, Helvetica, sans-serif;}
 body
-{background-color:black;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;margin: 0px;z-index:1000;position:relative;}
+{background-color:black;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;margin: 0px;z-index:1000;}
 A
 {text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
 A:hover 
 {color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
 img
 {border: 0px solid #FFFFFF;border-width:0;cursor:pointer}
+
 table 
 {text-align:center;border: 0px solid #FFFFFF;padding: 0px;margin:0px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 div
@@ -26,6 +27,7 @@ input
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: center;cursor: text;}
 select
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: left;cursor: pointer;}
+
 .executar
 {cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
 .inputsb
@@ -121,6 +123,7 @@ div.yui-b p em {color:#000;}
 h1 {padding:.25em .5em;background-color:#ccc;}
 #vertHandleDiv {cursor:pointer; width:20px; height:18px; position:absolute;left:-1;top:0px }
 #vertBGDiv {position:relative;top:0px; width:18px; left:0px;background:url(../imagens/zoombar.png) no-repeat;height:78px; }
+
 .yui-panel-container .yui-resizepanel .bd {
 
     overflow: auto;

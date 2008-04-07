@@ -283,8 +283,7 @@ function Mapa(e,m)
 		{menos = menos + parseInt($i("contemFerramentas").style.width);}
 		if ($i("ferramentas"))
 		{menos = menos + parseInt($i("ferramentas").style.width);}
-		var novow = screen.availWidth - diminuix;
-		var novoh = screen.availHeight - diminuiy;
+		/*
 		if(window.innerWidth)
 		{
 			var novow = window.innerWidth - diminuix;
@@ -295,7 +294,9 @@ function Mapa(e,m)
 			var novow = document.body.offsetWidth - diminuix;
 			var novoh = document.body.offsetHeight - diminuiy;
 		}
-		
+		*/
+		var novow = parseInt(screen.availWidth) - diminuix;
+		var novoh = parseInt(screen.availHeight) - diminuiy;		
 		if (novow >= 1024)
 		{
 			novow = 1000;
@@ -309,8 +310,8 @@ function Mapa(e,m)
 		{
 			if (document.body.style.width < 400)
 			{
-				var novow = screen.availWidth - diminuix;
-				var novoh = screen.availHeight - diminuiy;
+				var novow = parseInt(screen.availWidth) - diminuix;
+				var novoh = parseInt(screen.availHeight) - diminuiy;
 				window.resizeTo(screen.availWidth,screen.availHeight);
 				window.moveTo(0,0);
 			}
