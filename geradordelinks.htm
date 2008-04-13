@@ -13,29 +13,32 @@ P
 </style>
 <script src="pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
 <script type="text/javascript" src="pacotes/openlayers/OpenLayers.js"></script>
+<script type="text/javascript" src="classesjs/compactados/funcoes_compacto.js"></script>
+
 </head>
 <body style="background-color:white;text-align:left;left:0px;">
-<div id=banner style=position:relative;top:0px;left:0px;text-align:left >
+<!--<div id=banner style=position:relative;top:0px;left:0px;text-align:left >
 <img style=left:0px; src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" >
-</div>
-<div style=width:550px;position:relative;top:0px;left:10px >
+</div>-->
+<div style=width:550px;position:relative;top:0px;left:10px;background-color:rgb(250,250,250) >
 <p>Aqui você pode gerar links para abrir o I3Geo de forma personalizada. 
 Os links podem ser incluídos em qualquer página WEB, sendo possível 
 definir quais os temas serão mostrados e qual a extensão geográfica do mapa.</p>
 </div>
-<div style=width:550px;left:10px;text-align:left; >Link (copie e cole ou clique para testar):
-<a href="" id=link target=blanck ></a>
+<div style=width:550px;left:10px;text-align:left; ><p>Este &eacute; o link para abrir o mapa. Copie e cole em sua p&aacute;gina 
+na internet ou clique para testar:
+<a style=color:blue;font-size:12px href="" id=link target=blanck ></a>
 </div>
 <div style='height:230px;width:550px;top:10px;left:10px;text-align:left;border:1px gray solid;' >
 	<div style=margin:10px; >
-		<img style=position:absolute;top:0px;left:505px; src=imagens/question.gif onclick="javascript:document.getElementById('ajuda1').style.display='block'" />
+		<img style=position:absolute;top:0px;left:505px; src=imagens/question.gif onclick="javascript:$i('ajuda1').style.display='block'" />
 		<p><b>Escolha os temas que serão incluídos no mapa (opcional):</b></p>
 		<div id=grupos style=text-align:left; ></div>
 		<div id=subgrupos style=top:5px;text-align:left; ></div>
 		<div id=temas style=top:10px;text-align:left; ></div>
-		<div style=position:absolute;top:35px;left:270px;text-align:left; >
-			Temas que serão adicionados ao mapa:
-			<div id=temasa style='width:250px;border:1px gray solid;height:155px;top:10px;left:0px;text-align:left;overflow:auto' ></div>
+		<div style=position:absolute;top:25px;left:270px;text-align:left; >
+			Temas j&aacute; escolhidos. Os que estiverem marcados, ficar&atilde;o ligados logo ao abrir o mapa:
+			<div id=temasa style='width:250px;border:1px gray solid;height:125px;top:10px;left:0px;text-align:left;overflow:auto' ></div>
 		</div>
 	</div>
 </div>
@@ -51,9 +54,13 @@ que estiverem marcados, aparecerão visíveis no mapa (ligados)</p>
 		<p><b>Se vc quiser, o mapa poderá ser aberto mostrando pontos, digite abaixo as coordenadas 
 dos pontos em décimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b></p>
 		<p>Coordenadas dos pontos:</p>
-		<input type=text size=80 id=pontos value="" onchange="crialink()" />
-		<p>Nome do tema para a legenda do mapa:</p>
-		<input type=text size=80 id=nometemapontos value="" onchange="crialink()" />&nbsp;
+		<div style=padding:5px; id=paiPontos >
+			<input type=text size=80 id=pontos value="" onchange="crialink()" />
+		</div>		
+<p>Nome do tema para a legenda do mapa:</p>
+		<div style=padding:5px; id=paiNometemapontos >
+			<input type=text size=80 id=nometemapontos value="" onchange="crialink()" />&nbsp;
+		</div>
 	</div>
 </div>
 <div style='width:550px;top:20px;left:10px;text-align:left;border:1px gray solid;' >
@@ -61,7 +68,9 @@ dos pontos em décimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b></
 		<p><b>Caso existam perfis definidos na configuração do menu de temas, vc pode restringir a lista 
 		de temas do menu de adição de temas do I3Geo (opcional)</b></p>
 		<p>Perfil:</p>
+		<div style=padding:5px; id=paiPerfil >
 		<input onchange="crialink()" type=text size=80 id=perfil value="" />
+		</div>
 	</div>
 </div>
 <div style='width:550px;top:25px;left:10px;text-align:left;border:1px gray solid;' >
@@ -82,10 +91,22 @@ dos pontos em décimos de grau (exemplo: -54 -12 -54 1 -51 -15) (opcional):</b></
 		<div id=mapa1 style="width:250px;height:250px;border:1px solid blue;display:none"></div>
 		<div style=position:absolute;top:40px;left:270px;text-align:left; >
 			Coordenadas geográficas em décimos de grau:<br><br>
-			Longitude mínima:<br><input onchange="crialink()" type=text size=10 value="" id=xmin /><br>
-			Longitude máxima:<br><input onchange="crialink()" type=text size=10 value="" id=xmax /><br>
-			Latitude mínima:<br><input onchange="crialink()" type=text size=10 value="" id=ymin /><br>
-			Latitude máxima:<br><input onchange="crialink()" type=text size=10 value="" id=ymax /><br><br>
+			Longitude mínima:<br>
+				<div style=padding:5px;width:80px; id=paiXmin >
+				<input onchange="crialink()" type=text size=10 value="" id=xmin />
+				</div><br>
+			Longitude máxima:<br>
+				<div style=padding:5px;width:80px; id=paiXmax >
+				<input onchange="crialink()" type=text size=10 value="" id=xmax />
+				</div><br>
+			Latitude mínima:<br>
+				<div style=padding:5px;width:80px; id=paiYmin >
+				<input onchange="crialink()" type=text size=10 value="" id=ymin />
+				</div><br>
+			Latitude máxima:<br>
+				<div style=padding:5px;width:80px; id=paiYmax >
+				<input onchange="crialink()" type=text size=10 value="" id=ymax />
+				</div><br>
 			<input class=executar type=button value="capturar" onclick="capturageo()" />
 		</div>
 	</div>
@@ -119,35 +140,41 @@ Free Software Foundation, Inc., no endereço
 
 File: i3geo/geradordelinks.htm
 
-Include:
-
-classesjs/cpaint/cpaint2.inc.compressed.js
-pacotes/openlayers/OpenLayers.js
 */
 navm = false
 navn = false
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
+
+$inputText("paiPontos","","pontos","","","")
+$inputText("paiNometemapontos","","nometemapontos","","","")
+$inputText("paiPerfil","","perfil","","","")
+$inputText("paiXmin","","xmin","","","")
+$inputText("paiXmax","","xmax","","","")
+$inputText("paiYmin","","ymin","","","")
+$inputText("paiYmax","","ymax","","","")
+
 /*
 Variable: g_locaplic
 
 Localização da instalação do i3geo.
 */
 g_locaplic = "http://"+window.location.host+"/i3geo";
-seltema("estadosl")
-crialink()
-pegagrupos()
-initOL()
+i3geo_gl_seltema("estadosl")
+i3geo_gl_crialink()
+i3geo_gl_pegagrupos()
+i3geo_gl_init()
+
 /*
-Function: crialink
+Function: i3geo_gl_crialink
 
 Cria o link e mostra na tela.
 
 */
-function crialink()
+function i3geo_gl_crialink()
 {
 	var ins = g_locaplic+"/ms_criamapa.php?";
-	var iguias = document.getElementById("temasa").getElementsByTagName("input");
+	var iguias = $i("temasa").getElementsByTagName("input");
 	var tsl = new Array(); //temas ligados
 	var tsd = new Array(); //temas
 	for (i=0;i<iguias.length; i++)
@@ -163,35 +190,35 @@ function crialink()
 	{ins += "&temasa="+tsd.join(" ")}
 	if(tsl.length > 0)
 	{ins += "&layers="+tsl.join(" ")}
-	if(document.getElementById("pontos").value != "")
+	if($i("pontos").value != "")
 	{
-		ins += "&pontos="+document.getElementById("pontos").value
-		ins += "&nometemapontos="+document.getElementById("nometemapontos").value
+		ins += "&pontos="+$i("pontos").value
+		ins += "&nometemapontos="+$i("nometemapontos").value
 	}
-	if(document.getElementById("perfil").value != "")
+	if($i("perfil").value != "")
 	{
-		ins += "&perfil="+document.getElementById("perfil").value
+		ins += "&perfil="+$i("perfil").value
 	}
-	if(document.getElementById("interface").value != "")
+	if($i("interface").value != "")
 	{
-		ins += "&interface="+document.getElementById("interface").value
+		ins += "&interface="+$i("interface").value
 	}
-	if(document.getElementById("xmin").value != "")
+	if($i("xmin").value != "")
 	{
-		ins += "&mapext="+document.getElementById("xmin").value+" "
-		ins += document.getElementById("ymin").value+" "
-		ins += document.getElementById("xmax").value+" "
-		ins += document.getElementById("ymax").value
+		ins += "&mapext="+$i("xmin").value+" "
+		ins += $i("ymin").value+" "
+		ins += $i("xmax").value+" "
+		ins += $i("ymax").value
 	}
-	document.getElementById("link").href = ins
-	document.getElementById("link").innerHTML = ins
+	$i("link").href = ins
+	$i("link").innerHTML = ins
 }
 /*
-Function: pegagrupos
+Function: i3geo_gl_pegagrupos
 
 Pega a lista de grupos existentes no menu de temas do i3geo.
 */
-function pegagrupos()
+function i3geo_gl_pegagrupos()
 {
 	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''";
 	var cp = new cpaint();
@@ -207,13 +234,13 @@ Monta um combo com a lista de grupos.
 function combogrupos(retorno)
 {
 	obGrupos = retorno.data
-	var ins = "<select style=width:250px onchange='combosubgrupos(this.value)' ><option value='' >Grupos:</option>"
+	var ins = "<select style=width:250px onchange='combosubgrupos(this.value)' ><option value='' >Escolha um grupo:</option>"
 	for (ig=0;ig<obGrupos.grupos.length; ig++)
 	{
 		if(obGrupos.grupos[ig].nome)
 		ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>"
 	}
-	document.getElementById("grupos").innerHTML = ins+"</select>"
+	$i("grupos").innerHTML = ins+"</select>"
 	combosubgrupos(-1)
 }
 /*
@@ -229,7 +256,7 @@ i - id que identifica o grupo escolhido.
 */
 function combosubgrupos(i)
 {
-	var ins = "<select style=width:250px onchange='combotemas("+i+",this.value)' ><option value='' >Sub-grupos:</option>"
+	var ins = "<select style=width:250px onchange='combotemas("+i+",this.value)' ><option value='' >Escolha um sub-grupo:</option>"
 	if (obGrupos.grupos[i])
 	{
 		for (ig=0;ig<obGrupos.grupos[i].subgrupos.length; ig++)
@@ -237,7 +264,7 @@ function combosubgrupos(i)
 			ins += "<option value="+ig+" >"+obGrupos.grupos[i].subgrupos[ig].nome+"</option>"
 		}
 	}
-	document.getElementById("subgrupos").innerHTML = ins+"</select>"
+	$i("subgrupos").innerHTML = ins+"</select>"
 	combotemasgrupo(i)
 }
 /*
@@ -253,7 +280,7 @@ i - id que identifica o grupo escolhido.
 */
 function combotemasgrupo(i)
 {
-	var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
+	var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=i3geo_gl_seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
 	if (obGrupos.grupos[i])
 	{
 		for (ig=0;ig<obGrupos.grupos[i].temasgrupo.length; ig++)
@@ -261,7 +288,7 @@ function combotemasgrupo(i)
 			ins += "<option value="+obGrupos.grupos[i].temasgrupo[ig].tid+" >"+obGrupos.grupos[i].temasgrupo[ig].nome+"</option>"
 		}
 	}
-	document.getElementById("temas").innerHTML = ins+"</select>"
+	$i("temas").innerHTML = ins+"</select>"
 }
 /*
 Function: combotemas
@@ -278,12 +305,12 @@ function combotemas(grupo,sub)
 {
 	var monta = function(retorno)
 	{
-		var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
+		var ins = "<select style=width:250px MULTIPLE SIZE=10 onchange=i3geo_gl_seltema(this.value) ><option value='' >Clique no tema para incluir:</option>"
 		for (ig=0;ig<retorno.data.temas.length; ig++)
 		{
 			ins += "<option value="+retorno.data.temas[ig].tid+" >"+retorno.data.temas[ig].nome+"</option>"
 		}
-		document.getElementById("temas").innerHTML = ins+"</select>"
+		$i("temas").innerHTML = ins+"</select>"
 	}
 	var p = "classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+grupo+"&subgrupo="+sub;
 	var cp = new cpaint();
@@ -292,7 +319,7 @@ function combotemas(grupo,sub)
 	cp.call(p,"pegalistadetemas",monta);	
 }
 /*
-Function seletma
+Function i3geo_gl_seltema
 
 Acrescenta um tema no link.
 
@@ -302,12 +329,12 @@ Parameters:
 
 idtema - codigo do tema que será crescentado
 */
-function seltema(idtema)
+function i3geo_gl_seltema(idtema)
 {
 	var novodiv = document.createElement("div");
 	novodiv.style.textAlign="left"
 	novodiv.id = idtema
-	document.getElementById("temasa").appendChild(novodiv);
+	$i("temasa").appendChild(novodiv);
 	var novoel = document.createElement("img");
 	novoel.title = "excluir"
 	novoel.onclick = excluir
@@ -324,7 +351,7 @@ function seltema(idtema)
 	novoel.onclick = descer
 	novodiv.appendChild(novoel);
 	var novoel = document.createElement("input");
-	novoel.onclick = crialink
+	novoel.onclick = i3geo_gl_crialink
 	novoel.title = "visível/não visível"
 	novoel.type = "checkbox"
 	novoel.style.cursor="pointer"
@@ -337,7 +364,7 @@ function seltema(idtema)
 	novoel.innerHTML = idtema
 	novodiv.appendChild(novoel);
 	novodiv.appendChild(document.createElement("br"));
-	crialink()
+	i3geo_gl_crialink()
 }
 /*
 Function: descer
@@ -354,7 +381,7 @@ function descer(e)
 	divpai = pai.parentNode
 	if(pai.nextSibling)
 		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
-	crialink()
+	i3geo_gl_crialink()
 }
 /*
 Function: subir
@@ -370,7 +397,7 @@ function subir(e)
 	var pai = pegaElementoPai(e)
 	divpai = pai.parentNode
 	divpai.insertBefore(pai,pai.previousSibling)
-	crialink()
+	i3geo_gl_crialink()
 }
 /*
 Function: excluir
@@ -385,7 +412,7 @@ function excluir(e)
 {
 	var pai = pegaElementoPai(e)
 	pai.parentNode.removeChild(pai)
-	crialink()
+	i3geo_gl_crialink()
 }
 /*
 Function: pegaElementoPai
@@ -409,13 +436,13 @@ function pegaElementoPai(e)
 	return(tparent)
 }
 /*
-Function: initOL
+Function: i3geo_gl_init
 
 Inicialliza o OpenLayers para permitir ao usuário escolher a abrangência espacial do link.
 */
-function initOL() 
+function i3geo_gl_init() 
 {
-	document.getElementById("mapa1").style.display = "block";
+	$i("mapa1").style.display = "block";
 	OL = new OpenLayers.Map('mapa1',{controls:[],numZoomLevels: 13});
 	//
 	//layers
@@ -434,7 +461,7 @@ function initOL()
 	//
 	var ls = new OpenLayers.Control.LayerSwitcher()
 	OL.addControl(ls);
-	document.getElementById(ls.id).style.zIndex=2000;
+	$i(ls.id).style.zIndex=2000;
 	OL.setCenter(new OpenLayers.LonLat(-55,-14), 2);
 	var panel = new OpenLayers.Control.NavToolbar();
 	OL.addControl(panel);
@@ -442,10 +469,10 @@ function initOL()
 	panel.div.style.top="-298px";
 	var zb = new OpenLayers.Control.PanZoomBar();
 	OL.addControl(zb);
-	document.getElementById("OpenLayers_Control_PanZoom_pandown").style.display="none"
-	document.getElementById("OpenLayers_Control_PanZoom_panup").style.display="none"
-	document.getElementById("OpenLayers_Control_PanZoom_panleft").style.display="none"
-	document.getElementById("OpenLayers_Control_PanZoom_panright").style.display="none"
+	$i("OpenLayers_Control_PanZoom_pandown").style.display="none"
+	$i("OpenLayers_Control_PanZoom_panup").style.display="none"
+	$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
+	$i("OpenLayers_Control_PanZoom_panright").style.display="none"
 	zb.div.style.left="-8px"
 }
 /*
@@ -456,11 +483,11 @@ Pega as coordenadas geográficas da extensão definida no OpenLayers.
 function capturageo()
 {
 	var b = OL.getExtent();
-	document.getElementById("xmin").value = b.left
-	document.getElementById("xmax").value = b.right
-	document.getElementById("ymin").value = b.bottom
-	document.getElementById("ymax").value = b.top
-	crialink()
+	$i("xmin").value = b.left
+	$i("xmax").value = b.right
+	$i("ymin").value = b.bottom
+	$i("ymax").value = b.top
+	i3geo_gl_crialink()
 }
 </script>
 </html>
