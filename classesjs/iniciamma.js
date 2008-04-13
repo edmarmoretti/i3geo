@@ -651,6 +651,14 @@ function Mapa(e,m)
 				//
 				ativaGuias();
 				//
+				//monta a árvore de temas adicionais se existir a div arvoreAdicionaTema
+				//
+				if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona"))
+				{
+					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
+					cpObj.call(p,"pegalistademenus",pegalistademenus);				
+				}
+				//
 				//calcula a posicao do mapa no browser
 				//
 				if ($i("corpoMapa"))

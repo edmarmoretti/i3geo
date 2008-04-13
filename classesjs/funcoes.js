@@ -25,6 +25,17 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+//
+//verifica se $i existe, se não cria.
+try
+{
+	$i("i3geo");
+}
+catch(e)
+{
+	$i = function(i)
+	{return document.getElementById(i);};
+}
 /*
 Function: $im
 
@@ -652,27 +663,9 @@ function ativaGuias()
 			mostraguiaf(2);
 			if (!$i("buscatema"))
 			{
-				var pegalistademenus = function(retorno)
-				{
-					if (retorno.data == "")
-					{pegaListaDeGrupos("","sim");}
-					else
-					{
-						var j = retorno.data.length-1;
-						if(j >= 0)
-						{
-							do
-							{
-								if(j == retorno.data.length-1)
-								{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
-								else
-								{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
-							}
-							while(j--)
-						}
-					}
-				};
 				//pega a lista de árvores que devem ser montadas
+				//é executado apenas se não existir o id=arvoreAdicionaTema
+				//caso contrário, a árvore é montada na inicialização do i3geo
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
 				cpObj.call(p,"pegalistademenus",pegalistademenus);
 			}
@@ -700,6 +693,34 @@ function ativaGuias()
 		};
 	}
 }
+/* 
+Function: pegalistademenus
+
+Pega a lista de menus que deverão compor a árvore de adição de temas e cria/adiciona os elementos da árvore
+
+A lista de menus é definida em ms_configura.php
+*/
+function pegalistademenus(retorno)
+{
+	if (retorno.data == "")
+	{pegaListaDeGrupos("","sim");}
+	else
+	{
+		var j = retorno.data.length-1;
+		if(j >= 0)
+		{
+			do
+			{
+				if(j == retorno.data.length-1)
+				{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
+				else
+				{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
+			}
+			while(j--)
+		}
+	}
+}
+
 /*
 Function: mensagemf
 
@@ -2688,15 +2709,17 @@ function expandeGrupo(itemID)
 	}
 }
 /*
-Function: pegaListaDeGrupos
+Function: processaGrupos
 
-Pega a lista de grupos de uma árvore de tremas.
+Recebe os dados da função Ajax com a lista de grupos e subgrupos.
+
+Monta a árvore para adição de um novo tema no mapa.
+
+Se existir o id="arvoreAdicionaTema", a árvore será incluída nele, se não, será incluída na guia definida em objmapa.guiaMenu
 
 Parameters:
 
-idmenu - id que identifica a árvore. Esse id é definido no ms_configura, variável $menutemas. Se idmenu for vazio, será considerado o arquivo de menus default do I3Geo, existente no diretório menutemas.
-
-listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
+retorno - string formatada com os dados para montagem da árvore.
 */
 function pegaListaDeGrupos(idmenu,listasistemas)
 {			
@@ -2707,44 +2730,50 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 	{
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
+			if($i(objmapa.guiaMenu+"obj"))
+			{$i(objmapa.guiaMenu+"obj").innerHTML = "";}
+			if(!$i("arvoreAdicionaTema"))
+			{var ondeArvore = objmapa.guiaMenu+"obj";}
+			else
+			{var ondeArvore = "arvoreAdicionaTema";}
+			var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
 			if ($i("buscatema"))
 			{var busca = $i("buscatema").value;}
-			//
-			//monta o input de busca de temas caso esse não exista
-			//
 			if (!document.getElementById("buscatema"))
 			{
-				var insp = "<br><div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
-				insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-				insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /></td><td><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
-				$i(objmapa.guiaMenu+"obj").innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
-			}
-			//
-			//monta as opções adicionais de upload de temas, conexão com wms, etc
-			//
-			if (!$i("uplocal"))
-			{
-				var upload = "";
+				if(!$i("arvoreAdicionaTema"))
+				{
+					var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
+					insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
+					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
+					$i(ondeArvore).innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
+				}
+				else
+				{$i(ondeArvore).innerHTML = "<div id=buscatema ></div>"}
+				var outrasOpcoes = "";
 				if (g_uploadlocal == "sim")
-				{upload += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
+				{outrasOpcoes += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
 				if (g_downloadbase == "sim")
-				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
+				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
 				if (g_conectarwms == "sim")
-				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
+				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
 				if (g_conectargeorss == "sim")
-				{upload += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
-				$i(objmapa.guiaMenu+"obj").innerHTML += upload;
+				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
+				if($i("outrasOpcoesAdiciona"))
+				{$i("outrasOpcoesAdiciona").innerHTML = outrasOpcoes;}
+				else
+				$i(ondeArvore).innerHTML += outrasOpcoes;
 				if (objmapa.navegacaoDir == "sim")
 				{
 					var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
-					$i(objmapa.guiaMenu+"obj").innerHTML += temp;
-				}
+					$i(ondeArvore).innerHTML += temp;
+				}		
 			}
 			//
 			//monta a árvore de menus com os grupos e temas no nível raiz
 			//cria o objeto mytreeview2
 			//
-			mytreeview2 = treeviewNew("mytreeview2"+idmenu, "default", objmapa.guiaMenu+"obj", null);
+			mytreeview2 = treeviewNew("mytreeview2"+idmenu, "default", ondeArvore, null);
 			//
 			//aqui é incluido um atributo na árvore correspondente ao seu codigo
 			//isso é necessário para identificar qual árvore foi clicada e assim, descobrir o código do menu
@@ -4080,6 +4109,8 @@ function criaboxg()
 		document.body.appendChild(novoel);
 	}
 }
+try
+{
 //controle dos painéis que podem ser redimensionados
 YAHOO.widget.ResizePanel = function(el, userConfig)
 {
@@ -4179,6 +4210,8 @@ YAHOO.extend
    		{return "ResizePanel " + this.id;}
 	}
 );
+}
+catch(e){};
 /*
 Function: ativaDragDrop
 
