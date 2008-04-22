@@ -1,0 +1,452 @@
+/*
+Title: i3geo/classesjs/geradordelinks.js
+
+Classe javascript da aplicação de geração de links.
+
+Lê o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
+
+File: i3geo/classesjs/geradordelinks.js
+
+Esse programa possuí as seguintes dependências:
+
+i3geo/pacotes/cpaint/cpaint2.inc.compressed.js
+
+i3geo/pacotes/openlayers/OpenLayers.js
+
+i3geo/classesjs/compactados/funcoes_compacto.js
+
+As dependências são carregadas pelo próprio geradordelinks.js, não sendo necessário incluir no HTML.
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Veja:
+
+<i3geo/geradordelinks.htm>
+
+<i3geo/classesjs/funcoes.js>
+*/
+//
+//carrega as dependências
+//
+var scriptLocation = "";
+var scripts = document.getElementsByTagName('script');
+for (var i = 0; i < scripts.length; i++) {
+	var src = scripts[i].getAttribute('src');
+	if (src) {
+		var index = src.lastIndexOf("geradordelinks.js");
+		// is it found, at the end of the URL?
+		if ((index > -1) && (index + "geradordelinks.js".length == src.length)) {
+			scriptLocation = src.slice(0, -"geradordelinks.js".length);
+			break;
+		}
+	}
+}
+//scripts
+var allScriptTags = "";
+var jsfiles = new Array()
+if(typeof(testafuncoes) == 'undefined')
+{jsfiles[1] = "compactados/funcoes_compacto.js"}
+if(typeof(cpaint) == 'undefined')
+{jsfiles[2] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
+if(typeof(OpenLayers) == 'undefined')
+{jsfiles[3] = "../pacotes/openlayers/OpenLayers.js"}
+for (var i = 0; i < jsfiles.length; i++)
+{
+	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
+	allScriptTags += currentScriptTag;
+}
+document.write(allScriptTags);
+//
+//
+//
+//navm = false
+//navn = false
+//var app = navigator.appName.substring(0,1);
+//if (app=='N') navn=true; else navm=true;
+
+
+/* 
+Classe: i3geo_gl_configura
+
+Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação.
+
+Example:
+
+var i3geo_gl_configura = new i3geo_gl_configura("http://localhost/i3geo","estadosl","temasa","link")
+
+Parameters:
+
+loc_i3geo - endereço web onde está instalado o i3geo.
+
+nomeseltema - identificador do tema inicial que será incluido no link, normalmente estadosl
+
+temasa - Id do elemento HTML onde a lista de temas adicionados, ou seja, os que forem escolhidos pelo usuário, será incluída.
+
+link - Id do elemento HTML do tipo <a> onde será mostrado o link criado para o mapa.
+
+grupo - Id do elemento HTML que receberá o combo com os grupos
+
+subgrupo - Id do elemento HTML que receberá o combo com os subgrupos
+
+tema - Id do elemento HTML que receberá o combo com a lista de temas
+
+buscageo - Id do elemento HTML onde será incluída a opção de busca de coordenadas geográficas
+*/
+function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tema,buscageo)
+{
+	/* 
+	Variable: temasa
+	
+	Id do elemento HTML onde a lista de temas adicionados, ou seja, os que forem escolhidos pelo usuário, será incluída.
+	 */
+	this.temasa = temasa;
+	/* 
+	Variable: link
+	
+	Id do elemento HTML do tipo <a> onde será mostrado o link criado para o mapa.
+	 */
+	this.link = link;
+	/*
+	Variable: nomeseltema
+	
+	Guarda o valor do parâmetro seltema
+	*/
+	this.nomeseltema = nomeseltema;
+	/*
+	Variable: loc_i3geo
+	
+	Guarda o valor do parâmetro loc_i3geo
+	*/
+	this.loc_i3geo = loc_i3geo;
+	/*
+	Variable: grupo
+	
+	Guarda o valor do parâmetro grupo
+	*/
+	this.grupo = grupo;
+	/*
+	Variable: subgrupo
+	
+	Guarda o valor do parâmetro subgrupo
+	*/
+	this.subgrupo = subgrupo;
+	/*
+	Variable: tema
+	
+	Guarda o valor do parâmetro tema
+	*/
+	this.tema = tema;
+	/*
+	Variable: buscageo
+	
+	Guarda o valor do parâmetro buscageo
+	*/
+	this.buscageo = buscageo;
+	/* 
+	Function: seltema
+	
+	Adiciona na lista de temas escolhidos pelo usuário um novo tema.
+	
+	Ativada quando um grupo ou subgrupo é escolhido.
+	
+	Parameters:
+	
+	idtema = identificador do tema conforme definido em menutemas/menutemas.xml
+	 */
+	this.seltema = function(idtema)
+	{
+		var novodiv = document.createElement("div");
+		novodiv.style.textAlign="left"
+		novodiv.id = idtema
+		$i($i3geo_gl.temasa).appendChild(novodiv);
+		var novoel = document.createElement("img");
+		novoel.title = "excluir"
+		//novoel.onclick = excluir
+		eval("novoel.onclick = $i3geo_gl.excluir")
+		novoel.src = "imagens/x.png"
+		novodiv.appendChild(novoel);
+		var novoel = document.createElement("img");
+		novoel.title = "subir"
+		novoel.src = "imagens/sobe.gif"
+		//novoel.onclick = subir
+		eval("novoel.onclick = $i3geo_gl.subir")
+		novodiv.appendChild(novoel);
+		var novoel = document.createElement("img");
+		novoel.title = "descer"
+		novoel.src = "imagens/desce.gif"
+		//novoel.onclick = descer
+		eval("novoel.onclick = $i3geo_gl.descer")
+		novodiv.appendChild(novoel);
+		var novoel = document.createElement("input");
+		eval("novoel.onclick = function(){$i3geo_gl.crialink()}")
+		novoel.title = "visível/não visível"
+		novoel.type = "checkbox"
+		novoel.style.cursor="pointer"
+		novoel.style.top="3px"
+		novoel.style.position="relative"
+		novoel.style.border="0px"
+		novoel.value=idtema
+		novodiv.appendChild(novoel);
+		var novoel = document.createElement("span");
+		novoel.innerHTML = idtema
+		novodiv.appendChild(novoel);
+		novodiv.appendChild(document.createElement("br"));
+		this.crialink()
+	}
+	/*
+	Function: crialink
+
+	Pega os parâmetros especificados pelo usuário e monta o link para mostrar na tela.
+	*/
+	this.crialink = function()
+	{
+		var ins = $i3geo_gl.loc_i3geo+"/ms_criamapa.php?";
+		var iguias = $i($i3geo_gl.temasa).getElementsByTagName("input");
+		var tsl = new Array(); //temas ligados
+		var tsd = new Array(); //temas
+		for (i=0;i<iguias.length; i++)
+		{
+			if (iguias[i].type == "checkbox")
+			{
+				tsd.push(iguias[i].value);
+				if (iguias[i].checked == true)
+				{tsl.push(iguias[i].value);}
+			}
+		}
+		if(tsd.length > 0)
+		{ins += "&temasa="+tsd.join(" ")}
+		if(tsl.length > 0)
+		{ins += "&layers="+tsl.join(" ")}
+		if($i("pontos").value != "")
+		{
+			ins += "&pontos="+$i("pontos").value
+			ins += "&nometemapontos="+$i("nometemapontos").value
+		}
+		if($i("perfil").value != "")
+		{
+			ins += "&perfil="+$i("perfil").value
+		}
+		if($i("interface").value != "")
+		{
+			ins += "&interface="+$i("interface").value
+		}
+		if($i($i3geo_gl.buscageo))
+		{
+			if($i("xmin").value != "")
+			{
+				ins += "&mapext="+$i("xmin").value+" "
+				ins += $i("ymin").value+" "
+				ins += $i("xmax").value+" "
+				ins += $i("ymax").value
+			}
+		}
+		$i($i3geo_gl.link).href = ins
+		$i($i3geo_gl.link).innerHTML = ins
+	}
+	/*
+	Function: combosubgrupos
+
+	Chama a função do i3geo que monta um combo com a lista de subgrupos de um grupo do menu do i3geo
+
+	Parameters:
+
+	idGrupo - id do grupo que será pesquisado
+	*/	
+	this.combosubgrupos = function(idGrupo)
+	{
+		i3geo_comboSubGruposMenu("$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"250","1")
+	}
+	/*
+	Function: combotemas
+
+	Monta um combo com a lista de temas vinculados diretamente a um grupo.
+
+	Chamado pela função combosubgrupos.
+
+	Parameters:
+
+	idGrupo - id que identifica o grupo escolhido.
+	
+	idSubGrupo - id do sibgrupo
+	*/
+	this.combotemas = function (idGrupo,idSubGrupo)
+	{
+		i3geo_comboTemasMenu("$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"250","10")
+	}
+	/*
+	Function: preseltema
+	
+	Compatibiliza a chamada da função i3geo_combotemasMenu com a função this.seltema em termos de número de parâmetros
+	*/
+	this.preseltema = function(idgrupo,idsubgrupo,idtema)
+	{
+		$i3geo_gl.seltema(idtema)
+	}
+	/*
+	Function: descer
+
+	Desce um tema na lista de temas selecionados.
+
+	Parameters:
+
+	e - elemento do DOM do objeto clicado.
+	*/
+	this.descer = function(e)
+	{
+		var pai = i3geo_pegaElementoPai(e)
+		divpai = pai.parentNode
+		if(pai.nextSibling)
+		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
+		$i3geo_gl.crialink();
+	}
+	/*
+	Function: subir
+
+	Sobe um tema na lista de temas selecionados
+
+	Parameters:
+
+	e - elemento do DOM.
+	*/
+	this.subir = function(e)
+	{
+		var pai = i3geo_pegaElementoPai(e)
+		divpai = pai.parentNode
+		divpai.insertBefore(pai,pai.previousSibling)
+		$i3geo_gl.crialink()
+	}
+	/*
+	Function: excluir
+
+	Exclui um tema da lista de temas selecionados
+
+	Parameters:
+
+	e - elemento do DOM.
+	*/
+	this.excluir = function(e)
+	{
+		var pai = i3geo_pegaElementoPai(e)
+		pai.parentNode.removeChild(pai)
+		$i3geo_gl.crialink()
+	}
+	/*
+	Function: buscageo_init
+
+	Inicializa o OpenLayers para permitir ao usuário escolher a abrangência espacial do link.
+	*/
+	this.buscageo_init = function() 
+	{
+		var ins = "<div style=margin:10px;text-align:left; >"
+		ins += "<p><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>"
+		ins += "<div id=mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
+		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >"
+		ins += "Coordenadas geográficas em décimos de grau:<br><br>"
+		ins += "Longitude mínima:<br>"
+		ins += "<div style=padding:5px;width:80px; id=paiXmin >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=xmin />"
+		ins += "</div><br>"
+		ins += "Longitude máxima:<br>"
+		ins += "<div style=padding:5px;width:80px; id=paiXmax >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=xmax />"
+		ins += "</div><br>"
+		ins += "Latitude mínima:<br>"
+		ins += "<div style=padding:5px;width:80px; id=paiYmin >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=ymin />"
+		ins += "</div><br>"
+		ins += "Latitude máxima:<br>"
+		ins += "<div style=padding:5px;width:80px; id=paiYmax >"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=ymax />"
+		ins += "</div><br>"
+		ins += "<input class=executar size='20' type='button' value='capturar   ' onclick='$i3geo_gl.OL.capturageo()' />"
+		ins += "</div></div>"
+		document.getElementById(this.buscageo).innerHTML = ins
+		$i("mapa1").style.display = "block";
+		$i3geo_gl.OL = new OpenLayers.Map('mapa1',{controls:[],numZoomLevels: 13});
+		//
+		//layers
+		//
+		var ol_wms = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'},{isBaseLayer: true} );
+		ol_wms.setVisibility(true);
+		$i3geo_gl.OL.addLayer(ol_wms);
+		var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://wms.jpl.nasa.gov/wms.cgi", {layers: "global_mosaic"},{isBaseLayer: false});
+		jpl_wms.setVisibility(false);
+		$i3geo_gl.OL.addLayer(jpl_wms);
+		var base = new OpenLayers.Layer.WMS( "Cartografia", "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",{layers:'baseraster',transparent:'true',format:'image/png'},{isBaseLayer:false});
+		base.setVisibility(false);
+		$i3geo_gl.OL.addLayer(base);
+		//
+		//zoom e controle de layers
+		//
+		var ls = new OpenLayers.Control.LayerSwitcher()
+		$i3geo_gl.OL.addControl(ls);
+		$i(ls.id).style.zIndex=2000;
+		$i3geo_gl.OL.setCenter(new OpenLayers.LonLat(-55,-14), 2);
+		var panel = new OpenLayers.Control.NavToolbar();
+		$i3geo_gl.OL.addControl(panel);
+		panel.div.style.left="-4px";
+		panel.div.style.top="-298px";
+		var zb = new OpenLayers.Control.PanZoomBar();
+		$i3geo_gl.OL.addControl(zb);
+		$i("OpenLayers_Control_PanZoom_pandown").style.display="none"
+		$i("OpenLayers_Control_PanZoom_panup").style.display="none"
+		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
+		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
+		zb.div.style.left="-8px"
+		$i3geo_gl.OL.capturageo = function()
+		{
+			var b = $i3geo_gl.OL.getExtent();
+			$i("xmin").value = b.left
+			$i("xmax").value = b.right
+			$i("ymin").value = b.bottom
+			$i("ymax").value = b.top
+			$i3geo_gl.crialink()
+		}
+		$inputText("paiXmin","","xmin","","","")
+		$inputText("paiXmax","","xmax","","","")
+		$inputText("paiYmin","","ymin","","","")
+		$inputText("paiYmax","","ymax","","","")
+	}
+}
+/*
+Inicia a interface do gerador de links.
+
+Parameters:
+
+objeto_i3geo_gl_configura - objeto com os parâmentros de configuração criado pela função i3geo_gl_configura
+*/	
+function i3geo_gl_inicia(objeto_i3geo_gl_configura)
+{		
+	/*
+	Variable: $i3geo_gl
+	
+	Contém o objeto
+	*/
+	$i3geo_gl = objeto_i3geo_gl_configura;
+	if(document.getElementById($i3geo_gl.buscageo))
+	$i3geo_gl.buscageo_init()
+	$i3geo_gl.seltema($i3geo_gl.nomeseltema)
+	i3geo_comboGruposMenu("$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","250","1")
+	
+	$inputText("paiPontos","","pontos","","","")
+	$inputText("paiNometemapontos","","nometemapontos","","","")
+	$inputText("paiPerfil","","perfil","","","")
+}
