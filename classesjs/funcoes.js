@@ -703,20 +703,27 @@ A lista de menus é definida em ms_configura.php
 function pegalistademenus(retorno)
 {
 	if (retorno.data == "")
-	{pegaListaDeGrupos("","sim");}
+	{pegaListaDeGrupos("","sim","aberto");}
 	else
 	{
-		var j = retorno.data.length-1;
+		var j = retorno.data.length;
+		var i = 0;
 		if(j >= 0)
 		{
 			do
 			{
-				if(j == retorno.data.length-1)
-				{pegaListaDeGrupos(retorno.data[j].idmenu,"sim");}
+				var status = "aberto";
+				if(retorno.data[i].status)
+				{var status = retorno.data[i].status;}
 				else
-				{pegaListaDeGrupos(retorno.data[j].idmenu,"nao");}
+				{var status = "fechado";}
+				if(i == j-1)
+				{pegaListaDeGrupos(retorno.data[i].idmenu,"sim",status);}
+				else
+				{pegaListaDeGrupos(retorno.data[i].idmenu,"nao",status);}
+				i++;
 			}
-			while(j--)
+			while(i < j)
 		}
 	}
 }
@@ -2719,10 +2726,18 @@ Se existir o id="arvoreAdicionaTema", a árvore será incluída nele, se não, será 
 
 Parameters:
 
-retorno - string formatada com os dados para montagem da árvore.
+idmenu - identificador do menu que será aberto. É definido em ms_configura.php
+
+listasistemas - sim|nao indica se a lista de sistemas será mostrada ou não
+
+status - aberto|fechado indica se a árvore será mostrada aberta ou fechada no menu.
 */
-function pegaListaDeGrupos(idmenu,listasistemas)
+function pegaListaDeGrupos(idmenu,listasistemas,status)
 {			
+	if(status == "aberto"){status = true;}
+	else
+	{status = false;}
+	if(status == undefined){status = true;}
 	//
 	//pega o retorno da chamada ajax com a lista de grupos de um determinado menu de temas
 	//
@@ -2737,6 +2752,9 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 			else
 			{var ondeArvore = "arvoreAdicionaTema";}
 			var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
+			//
+			//monta o campo para busca de temas por palavra chave.
+			//
 			if ($i("buscatema"))
 			{var busca = $i("buscatema").value;}
 			if (!document.getElementById("buscatema"))
@@ -2774,6 +2792,7 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 			//cria o objeto mytreeview2
 			//
 			mytreeview2 = treeviewNew("mytreeview2"+idmenu, "default", ondeArvore, null);
+			$i("mytreeview2"+idmenu).innerHTML += "<br>";
 			//
 			//aqui é incluido um atributo na árvore correspondente ao seu codigo
 			//isso é necessário para identificar qual árvore foi clicada e assim, descobrir o código do menu
@@ -2796,7 +2815,7 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 			{
 				if (retorno.data.grupos[i].nome)
 				{
-					mytreeview2.createItem("g"+i+"_"+idmenu, retorno.data.grupos[i].nome, "folder", true, true, true, "i"+idmenu);
+					mytreeview2.createItem("g"+i+"_"+idmenu, retorno.data.grupos[i].nome, "folder", true, true, status, "i"+idmenu);
 					$i("g"+i+"_"+idmenu).grupo = i+"a";
 				}
 				//
@@ -2821,18 +2840,20 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 							nomeTema = "&nbsp;"+inp+nome+lk;
 							else
 							nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-							mytreeview2.createItem("tema"+i+""+st+"a"+idmenu, nomeTema, imgBranco, false, true, true, "i"+idmenu);
+							mytreeview2.createItem("tema"+i+""+st+"a"+idmenu, nomeTema, imgBranco, false, true, status, "i"+idmenu);
 							st++;
 						}
 						while(st<stlt)
 					}
-					mytreeview2.createItem("", "", imgBranco, false, true, true, "i"+idmenu);
+					mytreeview2.createItem("", "", imgBranco, false, true, status, "i"+idmenu);
 				}
 				i++;
 			}
 			while(retorno.data.grupos[i])
 			if (g_locsistemas != "")
-			{pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);}		
+			{
+				pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);
+			}		
 		}	
 	};
 	//
@@ -2983,6 +3004,7 @@ function pegavalSistemas(sis)
 	{
 		mytreeviewS = new Object();
 		mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
+		$i("mytreeviewS").innerHTML += "<br>";
 		mytreeviewS.createItem("Sitem1", "<b>"+$trad("a11")+"</b>", "foldermapa", true, true, true, null);
 		var iglt = sis.length;
 		var ig=0;
