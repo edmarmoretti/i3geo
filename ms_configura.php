@@ -216,11 +216,16 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Example:
 
 	$menutemas = array(
-		array("idmenu"=>1,"arquivo"=>"http://10.1.1.34/i3geo/menutemas/menutemas.xml"),
-		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml")
+		array("idmenu"=>1,"arquivo"=>"http://10.1.1.34/i3geo/menutemas/menutemas.xml","status"=>"fechado"),
+		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
+		
+	Para usar o menu default, utilize apenas $menutemas = "";
 	*/
-	$menutemas = "";
+	$menutemas = array(
+		array("idmenu"=>GEOPR,"arquivo"=>"../menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>i3Geo,"arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto")
+		);
 	/*
 	Variable: $utilizacgi
 	
