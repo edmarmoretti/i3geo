@@ -2730,7 +2730,7 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 	{
 		if ((retorno.data != "erro") && (retorno.data != undefined))
 		{
-			if($i(objmapa.guiaMenu+"obj"))
+			if($i(objmapa.guiaMenu+"obj") && !$i("buscatema"))
 			{$i(objmapa.guiaMenu+"obj").innerHTML = "";}
 			if(!$i("arvoreAdicionaTema"))
 			{var ondeArvore = objmapa.guiaMenu+"obj";}
@@ -2745,7 +2745,7 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 				{
 					var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
 					insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer'/></td></tr></table><br>";
+					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:4px;position:relative;'/></td></tr></table><br>";
 					$i(ondeArvore).innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 				}
 				else
@@ -2841,6 +2841,133 @@ function pegaListaDeGrupos(idmenu,listasistemas)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas+"&listasgrupos=nao";
 	cpObj.call(p,"pegaListaDeGrupos",processaGrupos);
 }
+/*
+Function: i3geo_comboGruposMenu
+
+Busca a lista de grupos existentes no menu de temas do i3geo e monta um combo com o resultado.
+
+Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do grupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboGruposMenu(funcaoOnchange,idDestino,idCombo,largura,altura)
+{
+	var combo = function (retorno)
+	{
+		obGrupos = retorno.data;
+		var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
+		for (ig=0;ig<obGrupos.grupos.length; ig++)
+		{
+			if(obGrupos.grupos[ig].nome)
+			ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>";
+		}
+		$i(idDestino).innerHTML = ins+"</select>";
+	};
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''&listasgrupos=nao";
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadegrupos",combo);
+}
+/*
+Function: i3geo_comboSubGruposMenu
+
+Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
+
+Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+idGrupo - identificador do grupo que será pesquisado
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboSubGruposMenu(funcaoOnchange,idDestino,idCombo,idGrupo,largura,altura)
+{
+	var combo = function(retorno)
+	{
+		var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
+		if (retorno.data.subgrupo[i])
+		{
+			var sg = retorno.data.subgrupo;
+			for (ig=0;ig<sg.length; ig++)
+			{	
+				ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
+			}
+		}
+		$i(idDestino).innerHTML = ins+"</select>";
+	};
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadeSubgrupos",combo);
+
+}
+/*
+Function: i3geo_comboTemasMenu
+
+Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
+
+Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+idGrupo - identificador do grupo que será pesquisado
+
+idSubGrupo - id do subgrupo
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura)
+{
+	var combo = function(retorno)
+	{
+		var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";
+		if (retorno.data.temas[i])
+		{
+			var sg = retorno.data.temas;
+			for (ig=0;ig<sg.length; ig++)
+			{	
+				ins += "<option value="+sg[ig].tid+" >"+sg[ig].nome+"</option>";
+			}
+		}
+		$i(idDestino).innerHTML = ins+"</select>";
+	};
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+idGrupo+"&subgrupo="+idSubGrupo;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadetemas",combo);
+
+}
+
 /*
 Function: pegavalSistemas
 
@@ -4013,6 +4140,31 @@ function desenhoRichdraw(tipo,objeto,n)
 /*
 Section: outros
 */
+/*
+Function: i3geo_pegaElementoPai
+
+Pega o elemento pai de um elemento clicado para identificar o código do tema.
+
+Parameters:
+
+e - elemento do DOM.
+*/
+function i3geo_pegaElementoPai(e)
+{
+	var targ;
+	if (!e)
+	{var e = window.event;}
+	if (e.target)
+	{targ = e.target;}
+	else
+	if (e.srcElement)
+	{targ = e.srcElement;}
+	if (targ.nodeType == 3)
+   	{targ = targ.parentNode;}
+	var tname;
+	tparent=targ.parentNode;
+	return(tparent);
+}
 /*
 Function: inseremarcaf
 
