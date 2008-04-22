@@ -147,7 +147,7 @@ return:
 
 array
 */
-	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim")
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$menutemas)
 	{
 		$this->xml = "";
 		if (file_exists("../ms_configura.php"))
@@ -161,6 +161,13 @@ array
 			} 
 		}
 		if (($this->xml == "") && ($menutemas == ""))
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		}
+		if ($this->xml == "")
 		{
 			if (file_exists("../menutemas/menutemas.xml"))
 			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
@@ -324,6 +331,13 @@ array
 			} 
 		}
 		if (($this->xml == "") && ($menutemas == ""))
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+		}
+		if ($this->xml == "")
 		{
 			if (file_exists("../menutemas/menutemas.xml"))
 			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}

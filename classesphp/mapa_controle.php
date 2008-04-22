@@ -1544,7 +1544,7 @@ Include:
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
 		if(!isset($listasgrupos)){$listasgrupos="sim";}
-		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos)));
+		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos,$menutemas)));
 	break;
 /*
 Property: pegalistadeSubgrupos
