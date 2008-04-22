@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="menutemas.xsl"?>
+<TEMASGEO>
+   <CABECALHO>Clique no grupo temático para abrir a lista de temas e ative o box relativo aos temas de interesse. Terminada a seleção dos temas, clique em um dos botões de aplicar alterações</CABECALHO>
+   <GRUPO>
+      <GTIPO>Ag&amp;ecirc;ncia Nacional de Energia El&amp;eacute;trica</GTIPO>
+      <DTIPO></DTIPO>
+      <SGRUPO>
+         <SDTIPO>Clima</SDTIPO>
+          <TEMA>
+            <TID>geopr_aneel_reservatorios</TID>
+            <TNOME>Reservat&amp;oacute;rios</TNOME>
+            <TDESC></TDESC>
+            <TLINK></TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+	  </SGRUPO>
+   </GRUPO>
+</TEMASGEO>
