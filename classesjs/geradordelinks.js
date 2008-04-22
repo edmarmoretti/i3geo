@@ -113,49 +113,49 @@ buscageo - Id do elemento HTML onde será incluída a opção de busca de coordenada
 function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tema,buscageo)
 {
 	/* 
-	Variable: temasa
+	Property: temasa
 	
 	Id do elemento HTML onde a lista de temas adicionados, ou seja, os que forem escolhidos pelo usuário, será incluída.
 	 */
 	this.temasa = temasa;
 	/* 
-	Variable: link
+	Property: link
 	
 	Id do elemento HTML do tipo <a> onde será mostrado o link criado para o mapa.
 	 */
 	this.link = link;
 	/*
-	Variable: nomeseltema
+	Property: nomeseltema
 	
 	Guarda o valor do parâmetro seltema
 	*/
 	this.nomeseltema = nomeseltema;
 	/*
-	Variable: loc_i3geo
+	Property: loc_i3geo
 	
 	Guarda o valor do parâmetro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Variable: grupo
+	Property: grupo
 	
 	Guarda o valor do parâmetro grupo
 	*/
 	this.grupo = grupo;
 	/*
-	Variable: subgrupo
+	Property: subgrupo
 	
 	Guarda o valor do parâmetro subgrupo
 	*/
 	this.subgrupo = subgrupo;
 	/*
-	Variable: tema
+	Property: tema
 	
 	Guarda o valor do parâmetro tema
 	*/
 	this.tema = tema;
 	/*
-	Variable: buscageo
+	Property: buscageo
 	
 	Guarda o valor do parâmetro buscageo
 	*/
@@ -250,12 +250,12 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		}
 		if($i($i3geo_gl.buscageo))
 		{
-			if($i("xmin").value != "")
+			if($i("i3geo_gl_xmin").value != "")
 			{
-				ins += "&mapext="+$i("xmin").value+" "
-				ins += $i("ymin").value+" "
-				ins += $i("xmax").value+" "
-				ins += $i("ymax").value
+				ins += "&mapext="+$i("i3geo_gl_xmin").value+" "
+				ins += $i("i3geo_gl_ymin").value+" "
+				ins += $i("i3geo_gl_xmax").value+" "
+				ins += $i("i3geo_gl_ymax").value
 			}
 		}
 		$i($i3geo_gl.link).href = ins
@@ -357,30 +357,30 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	{
 		var ins = "<div style=margin:10px;text-align:left; >"
 		ins += "<p><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>"
-		ins += "<div id=mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
+		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
 		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >"
 		ins += "Coordenadas geográficas em décimos de grau:<br><br>"
 		ins += "Longitude mínima:<br>"
 		ins += "<div style=padding:5px;width:80px; id=paiXmin >"
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=xmin />"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmin />"
 		ins += "</div><br>"
 		ins += "Longitude máxima:<br>"
 		ins += "<div style=padding:5px;width:80px; id=paiXmax >"
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=xmax />"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmax />"
 		ins += "</div><br>"
 		ins += "Latitude mínima:<br>"
 		ins += "<div style=padding:5px;width:80px; id=paiYmin >"
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=ymin />"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymin />"
 		ins += "</div><br>"
 		ins += "Latitude máxima:<br>"
 		ins += "<div style=padding:5px;width:80px; id=paiYmax >"
-		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=ymax />"
+		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymax />"
 		ins += "</div><br>"
 		ins += "<input class=executar size='20' type='button' value='capturar   ' onclick='$i3geo_gl.OL.capturageo()' />"
 		ins += "</div></div>"
 		document.getElementById(this.buscageo).innerHTML = ins
-		$i("mapa1").style.display = "block";
-		$i3geo_gl.OL = new OpenLayers.Map('mapa1',{controls:[],numZoomLevels: 13});
+		$i("i3geo_gl_mapa1").style.display = "block";
+		$i3geo_gl.OL = new OpenLayers.Map('i3geo_gl_mapa1',{controls:[],numZoomLevels: 13});
 		//
 		//layers
 		//
@@ -414,16 +414,16 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$i3geo_gl.OL.capturageo = function()
 		{
 			var b = $i3geo_gl.OL.getExtent();
-			$i("xmin").value = b.left
-			$i("xmax").value = b.right
-			$i("ymin").value = b.bottom
-			$i("ymax").value = b.top
+			$i("i3geo_gl_xmin").value = b.left
+			$i("i3geo_gl_xmax").value = b.right
+			$i("i3geo_gl_ymin").value = b.bottom
+			$i("i3geo_gl_ymax").value = b.top
 			$i3geo_gl.crialink()
 		}
-		$inputText("paiXmin","","xmin","","","")
-		$inputText("paiXmax","","xmax","","","")
-		$inputText("paiYmin","","ymin","","","")
-		$inputText("paiYmax","","ymax","","","")
+		$inputText("paiXmin","","i3geo_gl_xmin","","","")
+		$inputText("paiXmax","","i3geo_gl_xmax","","","")
+		$inputText("paiYmin","","i3geo_gl_ymin","","","")
+		$inputText("paiYmax","","i3geo_gl_ymax","","","")
 	}
 }
 /*
@@ -438,7 +438,7 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	/*
 	Variable: $i3geo_gl
 	
-	Contém o objeto
+	Contém o objeto $i3geo_gl com todas as propriedades e funções de controle da interface
 	*/
 	$i3geo_gl = objeto_i3geo_gl_configura;
 	if(document.getElementById($i3geo_gl.buscageo))
