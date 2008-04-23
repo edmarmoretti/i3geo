@@ -1,21 +1,13 @@
-Format: Development Release 02-10-2007 (1.35 base)
+Format: 1.35
 
 
-Title: I3Geo
-SubTitle: Interface Integrada para Internet de Ferramentas de Geoprocessamento
+# You can add a title and sub-title to your menu like this:
+# Title: [project name]
+# SubTitle: [subtitle]
 
-Footer: http://mapas.mma.gov.br/i3geo
-Timestamp: Última atualização mon day
-#   m     - One or two digit month.  January is "1"
-#   mm    - Always two digit month.  January is "01"
-#   mon   - Short month word.  January is "Jan"
-#   month - Long month word.  January is "January"
-#   d     - One or two digit day.  1 is "1"
-#   dd    - Always two digit day.  1 is "01"
-#   day   - Day with letter extension.  1 is "1st"
-#   yy    - Two digit year.  2006 is "06"
-#   yyyy  - Four digit year.  2006 is "2006"
-#   year  - Four digit year.  2006 is "2006"
+# You can add a footer to your documentation like this:
+# Footer: [text]
+# If you want to add a copyright notice, this would be the place to do it.
 
 
 # --------------------------------------------------------------------------
@@ -38,70 +30,11 @@ Timestamp: Última atualização mon day
 # --------------------------------------------------------------------------
 
 
-Link: I3Geo no MMA  (http://mapas.mma.gov.br/i3geo)
-File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
-File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
-File: Variáveis de Configuração da Interface configura.js.  (no auto-title, classesjs\configura.js)
+File: Ajuda OGC  (ogc.htm)
+File: Aplicativo para acesso a web services  (wscliente.htm)
+File: Aplicativo para download de dados  (datadownload.htm)
 
-Group: Programas especiais  {
-
-   Group: Mobile  {
-
-      File: Abre o mapa  (mobile\inicia.php)
-      File: Adiciona um tema ao mapa  (mobile\adicionatema.php)
-      File: Desliga um tema que está visível no mapa  (mobile\desligar.php)
-      File: i3geo mobile  (mobile\index.php)
-      File: Identifica elementos no mapa em determinada coordenada x e y  (mobile\identifica.php)
-      File: Interface do mapa  (mobile\mobile.php)
-      File: Liga um tema que não está visível no mapa  (mobile\ligar.php)
-      File: Localiza um lugar no mapa.  (mobile\localizar.php)
-      File: Mostra a escala  (mobile\escala.php)
-      File: Mostra a legenda do mapa  (mobile\legenda.php)
-      File: Redirecionador HTM do i3geo mobile  (mobile\index.htm)
-      File: Redirecionador HTML do i3geo mobile  (mobile\index.html)
-      }  # Group: Mobile
-
-   File: Ajuda OGC  (ogc.htm)
-   File: Aplicativo para acesso a web services  (wscliente.htm)
-   File: Aplicativo para download de dados  (datadownload.htm)
-   File: Aplicativo para geração de links  (geradordelinks.htm)
-
-   Group: Atlas  {
-
-      File: Interface normal de abertura da interface Atlas  (atlas\geral.htm)
-      File: Lista de atlas disponíveis  (atlas\index.htm)
-      File: Redirecionador HTML para o index.htm da interface Atlas  (atlas\index.html)
-      }  # Group: Atlas
-
-   File: Gerador automático de web services OGC  (ogc.php)
-   File: Gerador de menu em kml para uso no Google Earth  (kml.php)
-   File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
-   File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
-   File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
-   File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
-   File: Redirecionador para o ms_criamapa.php com extensão HTML  (index.html)
-   File: Registra o IP do usuário para criação do mapa de visitantes.  (ms_registraip.php)
-   File: Testa a instalação do I3Geo.  (testainstal.php)
-   File: Testa um mapfile.  (testamapfile.php)
-   }  # Group: Programas especiais
-
-Group: Exemplos - diretório exemplos  {
-
-   File: Mashup  (exemplos\mashup.htm)
-   }  # Group: Exemplos - diretório exemplos
-
-Group: Interfaces - diretório aplicmap  {
-
-   File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
-   File: Interface minima  (aplicmap\minima.htm)
-   File: Interface normal  (aplicmap\geral.htm)
-   File: Interface simples 1  (aplicmap\simples1.htm)
-   File: Interface simples 2  (aplicmap\simples2.htm)
-   File: Interface zerocal  (aplicmap\zerocal.htm)
-   File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
-   }  # Group: Interfaces - diretório aplicmap
-
-Group: Programas frontend - diretório classesjs  {
+Group: Classesjs  {
 
    File: A - Compacta js e css  (classesjs\compactajs.php)
    File: Administração de mapfiles  (classesjs\i3geoadmin.js)
@@ -112,11 +45,12 @@ Group: Programas frontend - diretório classesjs  {
    File: Ferramentas  (classesjs\ferramentas.js)
    File: Ferramentas da interface de administração  (classesjs\ferramentasadmin.js)
    File: Funções gerais  (classesjs\funcoes.js)
-   File: Funções gerais  (classesjs\temp.js)
+   File: i3geo/classesjs/geradordelinks.js  (classesjs\geradordelinks.js)
    File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
    File: Inicialização do i3geo.  (classesjs\iniciamma.js)
    File: Menu suspenso  (classesjs\menususpenso.js)
    File: Redesenho  (classesjs\redesenho.js)
+   File: Variáveis de Configuração da interface configura.js.  (classesjs\configura.js)
 
    Group: Zerocal  {
 
@@ -135,9 +69,9 @@ Group: Programas frontend - diretório classesjs  {
       File: Redesenho  (classesjs\zerocal\redesenho.js)
       }  # Group: Zerocal
 
-   }  # Group: Programas frontend - diretório classesjs
+   }  # Group: Classesjs
 
-Group: Programas backend - diretório classesphp  {
+Group: Classesphp  {
 
    File: A - Carrega as variáveis passadas como POST ou GET  (classesphp\pega_variaveis.php)
    File: A - Controle das requisições em Ajax feitas pela interface Atlas do i3geo  (classesphp\atlas_controle.php)
@@ -167,11 +101,67 @@ Group: Programas backend - diretório classesphp  {
    File: Temas  (classesphp\classe_temas.php)
    File: Toponímia  (classesphp\classe_toponimia.php)
    File: WS Cliente  (classesphp\wscliente.php)
-   }  # Group: Programas backend - diretório classesphp
+   }  # Group: Classesphp
 
-Class Index: Class Index
-Index: Everything
-File Index: File Index
-Function Index: Function Index
-Property Index: Property Index
-Variable Index: Variable Index
+Group: Aplicmap  {
+
+   File: Administração de mapfiles (experimental)  (aplicmap\admin.htm)
+   File: Interface minima  (aplicmap\minima.htm)
+   File: Interface normal  (aplicmap\geral.htm)
+   File: Interface simples 1  (aplicmap\simples1.htm)
+   File: Interface simples 2  (aplicmap\simples2.htm)
+   File: Interface zerocal  (aplicmap\zerocal.htm)
+   File: OpenLayers (experimental)  (aplicmap\openlayers.htm)
+   }  # Group: Aplicmap
+
+Group: Atlas  {
+
+   File: Interface normal de abertura da interface Atlas  (atlas\geral.htm)
+   File: Lista de atlas disponíveis  (atlas\index.htm)
+   File: Redirecionador HTML para o index.htm da interface Atlas  (atlas\index.html)
+   }  # Group: Atlas
+
+File: Gerador automático de web services OGC  (ogc.php)
+File: Gerador de menu em kml para uso no Google Earth  (kml.php)
+File: i3geo/geradordelinks.htm  (geradordelinks.htm)
+File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
+File: Mashup  (exemplos\mashup.htm)
+File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
+File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
+File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
+File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
+
+Group: Mobile  {
+
+   File: Abre o mapa  (mobile\inicia.php)
+   File: Adiciona um tema ao mapa  (mobile\adicionatema.php)
+   File: Ativa a toponimia de um tema  (mobile\ativatexto.php)
+   File: Desliga um tema que está visível no mapa  (mobile\desligar.php)
+   File: i3geo mobile  (mobile\index.php)
+   File: Identifica elementos no mapa em determinada coordenada x e y  (mobile\identifica.php)
+   File: Interface do mapa  (mobile\mobile.php)
+   File: Liga um tema que não está visível no mapa  (mobile\ligar.php)
+   File: Localiza um lugar no mapa.  (mobile\localizarxy.php)
+   File: Localiza um lugar no mapa.  (mobile\localizar.php)
+   File: Mostra a escala  (mobile\escala.php)
+   File: Mostra a legenda do mapa  (mobile\legenda.php)
+   File: Redirecionador HTM do i3geo mobile  (mobile\index.htm)
+   File: Redirecionador HTML do i3geo mobile  (mobile\index.html)
+   }  # Group: Mobile
+
+File: Redirecionador para o ms_criamapa.php com extensão HTML  (index.html)
+File: Registra o IP do usuário para criação do mapa de visitantes.  (ms_registraip.php)
+File: Testa a instalação do I3Geo.  (testainstal.php)
+File: Testa um mapfile.  (testamapfile.php)
+File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
+
+Group: Index  {
+
+   Index: Everything
+   Class Index: Classes
+   File Index: Files
+   Function Index: Functions
+   Property Index: Properties
+   Variable Index: Variables
+   }  # Group: Index
+
