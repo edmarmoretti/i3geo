@@ -69,11 +69,11 @@ select
 .aplicar
 {visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
 .digitar
-{color:#426252;background-color:#F6F6F6;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{margin:0px;color:#426252;background-color:#F6F6F6;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarMouseclick
-{color:#426252;background-color:white;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{margin:0px;color:#426252;background-color:white;border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarMouseover
-{color:#426252;background-color:rgb(195,226,226);border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{margin:0px;color:#426252;background-color:rgb(195,226,226);border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 
 .legendaTema
 {font-size:10px;text-align:left;}
@@ -381,7 +381,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:10px;
 	height:9px;
 	cursor:pointer;
-	margin:2px;
 	border-left: 1px solid gray;
 	border-bottom:1px solid gray;
 	border-top:1px solid #F8F8F8;
@@ -541,7 +540,11 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 0px -1100px;
 	width:16px;
-	height:16px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .download
 {
@@ -549,7 +552,11 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 0px -1125px;
 	width:16px;
-	height:16px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectarwms
 {
@@ -558,6 +565,10 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1150px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectargeorss
 {
@@ -566,6 +577,10 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1175px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectarservidor
 {
@@ -574,6 +589,10 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1200px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .folder
 {

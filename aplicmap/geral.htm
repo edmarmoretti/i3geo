@@ -18,7 +18,7 @@
 </head>
 <body id="i3geo" >
 <center>
-<table id='mst' style='display:none' width=100% cellspacing='0'>
+<table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
 <!--
 	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
 -->
@@ -66,7 +66,15 @@
   	Para cada botão na guia deve haver um div com o conteúdo, pe.
   	o div com id=guia1 deve ter um div com id=guia1obj
   -->
-  <div id='guia1obj' ><div style='left:5px;top:10px;' id=buscaRapida ></div><div id=listaPropriedades style='top:15px;' ></div><div id=listaTemas style='top:15px;'></div></div>
+  <div id='guia1obj' >
+  	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+  	<div id=listaPropriedades style='top:15px;' ></div>
+  	<div id=listaTemas style='top:15px;'></div>
+ 	<!-- se vc quiser colocar a arvore de adição de temas em um lugar específico, use o div abaixo, caso contrário, a árvore será colocada na guia definida em objmapa.guiaMenu
+  	<div id=arvoreAdicionaTema style='top:25px;' ></div>
+  	<div id=outrasOpcoesAdiciona style='top:25px;' ></div>
+  	-->	
+  </div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
   <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>

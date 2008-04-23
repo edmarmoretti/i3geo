@@ -2763,11 +2763,12 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 				{
 					var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
 					insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:4px;position:relative;'/></td></tr></table><br>";
+					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;'/></td></tr></table><br>";
 					$i(ondeArvore).innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 				}
 				else
 				{$i(ondeArvore).innerHTML = "<div id=buscatema ></div>"}
+				/*
 				var outrasOpcoes = "";
 				if (g_uploadlocal == "sim")
 				{outrasOpcoes += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
@@ -2786,6 +2787,24 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 					var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
 					$i(ondeArvore).innerHTML += temp;
 				}		
+				*/
+				var outrasOpcoes = "<table width='100px' ><tr>";
+				if (g_uploadlocal == "sim")
+				{outrasOpcoes += "<td><div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/></div><td>";}
+				if (g_downloadbase == "sim")
+				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/></div><td>";}
+				if (g_conectarwms == "sim")
+				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/></div><td>";}
+				if (g_conectargeorss == "sim")
+				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";}
+				if (objmapa.navegacaoDir == "sim")
+				{
+					outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
+				}		
+				if($i("outrasOpcoesAdiciona"))
+				{$i("outrasOpcoesAdiciona").innerHTML = outrasOpcoes+"</tr></table>";}
+				else
+				$i(ondeArvore).innerHTML += outrasOpcoes;
 			}
 			//
 			//monta a árvore de menus com os grupos e temas no nível raiz

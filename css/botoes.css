@@ -226,7 +226,6 @@
 	width:10px;
 	height:9px;
 	cursor:pointer;
-	margin:2px;
 	border-left: 1px solid gray;
 	border-bottom:1px solid gray;
 	border-top:1px solid #F8F8F8;
@@ -386,7 +385,11 @@
 	background-repeat: no-repeat;
 	background-position: 0px -1100px;
 	width:16px;
-	height:16px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .download
 {
@@ -394,7 +397,11 @@
 	background-repeat: no-repeat;
 	background-position: 0px -1125px;
 	width:16px;
-	height:16px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectarwms
 {
@@ -403,6 +410,10 @@
 	background-position: 0px -1150px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectargeorss
 {
@@ -411,6 +422,10 @@
 	background-position: 0px -1175px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .conectarservidor
 {
@@ -419,6 +434,10 @@
 	background-position: 0px -1200px;
 	width:14px;
 	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
 }
 .folder
 {
