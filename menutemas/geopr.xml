@@ -6,12 +6,61 @@
       <GTIPO>Ag&amp;ecirc;ncia Nacional de Energia El&amp;eacute;trica</GTIPO>
       <DTIPO></DTIPO>
       <SGRUPO>
-         <SDTIPO>Clima</SDTIPO>
+         <SDTIPO>GSI WMS</SDTIPO>
           <TEMA>
             <TID>geopr_aneel_reservatorios</TID>
             <TNOME>Reservat&amp;oacute;rios</TNOME>
             <TDESC></TDESC>
-            <TLINK></TLINK>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_aneel_linhas</TID>
+            <TNOME>Linhas de transmiss&amp;atilde;o</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_aneel_eolicas</TID>
+            <TNOME>Usinas e&amp;oacute;licas</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_aneel_termeletricas</TID>
+            <TNOME>Usinas termel&amp;eacute;tricas</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_aneel_aproveitamentos</TID>
+            <TNOME>Aproveitamentos hidrel&amp;eacute;tricos</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_aneel_subestacoes</TID>
+            <TNOME>Sub-esta&amp;ccedil;&amp;otilde;es</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+	  </SGRUPO>
+   </GRUPO>
+   <GRUPO>
+      <GTIPO>Instituto Nacional de Pesquisas Espaciais</GTIPO>
+      <DTIPO></DTIPO>
+      <SGRUPO>
+         <SDTIPO>OGC Web Services - DSA-INPE</SDTIPO>
+          <TEMA>
+            <TID>geopr_aneel_reservatorios</TID>
+            <TNOME>Reservat&amp;oacute;rios</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
          </TEMA>
 	  </SGRUPO>
