@@ -223,8 +223,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para usar o menu default, utilize apenas $menutemas = "";
 	*/
 	$menutemas = array(
-		array("idmenu"=>GEOPR,"arquivo"=>"../menutemas/geopr.xml","status"=>"fechado"),
-		array("idmenu"=>i3Geo,"arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto")
+		array("idmenu"=>"GEOPR","arquivo"=>"../menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto")
 		);
 	/*
 	Variable: $utilizacgi
