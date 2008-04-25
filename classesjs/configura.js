@@ -576,9 +576,9 @@ es:"gr&aacute;fico"
 //guia adiciona
 "a1":[
 {
-pt:"procurar:",
-en:"search:",
-es:"Buscar:"
+pt:"procurar tema no menu:",
+en:"search layer:",
+es:"Buscar datos:"
 }],
 "a2":[
 {

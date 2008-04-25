@@ -27,6 +27,8 @@ Free Software Foundation, Inc., no endereço
 */
 //
 //verifica se $i existe, se não cria.
+//isso é necessário nos casos em que funcoes.js é utilizado separadamente
+//
 try
 {
 	$i("i3geo");
@@ -39,7 +41,7 @@ catch(e)
 /*
 Function: $im
 
-Retorna o caminho correto de uma imagem.
+Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
 
 Exemplo: $im("imagem.png")
 
@@ -56,7 +58,7 @@ $im = function(g)
 /*
 Function $inputText
 
-Cria um elemento html do tipo input text
+Cria um elemento html do tipo input text com formatação especial.
 
 Parameters:
 
@@ -131,7 +133,7 @@ $left = function(id,valor)
 /*
 Function: trataErro
 
-Trata o erro de um try cacth.
+Fecha o objeto aguarde quando ocorre um erro.
 */
 function trataErro()
 {
@@ -176,6 +178,13 @@ function pCookie(nome)
 /*
 Section: interface
 */
+/*
+Function: sobeferramentas
+
+Sobe a pilha de ícones na barra de ferramentas.
+
+Utilizado na barra de ferramentas 2.
+*/
 function sobeferramentas()
 {
 	if($i("maisBotoes2"))
@@ -217,8 +226,14 @@ function sobeferramentas()
 			mostra.style.display="none";
 		}
 	}
-
 }
+/*
+Function: desceferramentas
+
+Desce a pilha de ícones na barra de ferramentas.
+
+Utilizado na barra de ferramentas 2.
+*/
 function desceferramentas()
 {
 	var tipo = "inline";
@@ -261,13 +276,17 @@ function desceferramentas()
 	}
 }
 /*
-Function: trocallingua
+Function: trocalingua
 
 Troca a linguagem atual.
 
+O código atual da linguagem é armazenado em um Cookie. Essa função troca o valor do Cookie e redesenha o mapa.
+
+A troca de linguagem é ativada pelo clique nas bandeiras inseridas na parte superior do menu suspenso.
+
 Parameters:
 
-lingua
+l - código da lingua
 */
 function trocalingua(l)
 {
@@ -282,6 +301,10 @@ function trocalingua(l)
 Function: criaContainerRichdraw
 
 Cria os elementos dom necessários ao uso das funções de desenho sobre o mapa.
+
+Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
+
+Essa abstração é necessária devido às diferenças entre os navegadores.
 */
 function criaContainerRichdraw()
 {
@@ -291,12 +314,19 @@ function criaContainerRichdraw()
 		//cria o container para uso da função de desenho usando
 		//svg ou vml
 		//esse container é sobreposto exatamente sobre o mapa
+		//O id do containner é divGeometriasTemp
 		//
 		if (!$i("divGeometriasTemp"))
 		{
+			//
+			//pega a posição da imagem do mapa para posicionar corretamente o container
+			//
 			var pos = [0,0];
 			if($i("img"))
 			var pos = pegaPosicaoObjeto($i("img"));
+			//
+			//cria o container
+			//
 			var novoel = document.createElement("div");
 			novoel.id = "divGeometriasTemp";
 			var ne = novoel.style;
@@ -311,6 +341,9 @@ function criaContainerRichdraw()
 			ne.left=pos[0];
 			document.body.appendChild(novoel);
 		}
+		//
+		//como o container já poderia ter sido criado antes é necessário esvaziá-lo
+		//
 		var divgeo = $i("divGeometriasTemp");
 		divgeo.innerHTML = "";
 		var renderer;
@@ -318,12 +351,8 @@ function criaContainerRichdraw()
 		//cria o objeto renderer conforme o browser em uso
 		//esse objeto será utilizado nas funções de desenho
 		//mais detalhes, veja em pacotes/richdraw
+		//Conforme a resposta do navegador, utiliza-se a criação VML ou SVG
 		//
-		/*
-		if(navm){renderer = new VMLRenderer();}
-		else {renderer = new SVGRenderer();}
-		richdraw = new RichDrawEditor(divgeo, renderer);
-		*/
 		try
 		{
 			renderer = new VMLRenderer();
@@ -334,6 +363,9 @@ function criaContainerRichdraw()
 			renderer = new SVGRenderer();
 			richdraw = new RichDrawEditor(divgeo, renderer);
 		}
+		//
+		//definição dos símbolos default para os elementos gráficos
+		//
 		richdraw.editCommand('fillcolor', 'red');
 		richdraw.editCommand('linecolor', 'gray');
 		richdraw.editCommand('linewidth', '1px');
@@ -352,7 +384,15 @@ function criaContainerRichdraw()
 /*
 Function: mudaVisual
 
-Muda o visual do mapa atual
+Muda o visual do mapa atual.
+
+Busca as imagens existentes na interface aberta e substituí pelas imagens existentes no diretório
+correspondente ao visual selecionado.
+
+As imagens existentes no mapa são comparadas com as existentes no diretório i3geo/imagens/visual/<visual> 
+caso ocorra correspondência são então substituídas.
+
+A lista de visuais disponíveis é obtida na inicialização do i3geo e corresponde à lista de diretórios existentes em i3geo/imagens/visual
 
 Parameters:
 
@@ -360,11 +400,17 @@ visual - nome do novo visual. Obtido na inicialização do I3Geo e armazenado na v
 */
 function mudaVisual(visual)
 {
+	//
+	//refaz o layout conforme os parâmetros obtidos da chamada ajax
+	//
 	var monta = function(retorno)
 	{
 		try
 		{
 			objaguarde.fecha("ajaxredesenha");
+			//
+			//pega todas as imagens da interface
+			//
 			var imgstemp = retorno.data.arquivos;
 			var imgs = new Array();
 			var i = imgstemp.length-1;
@@ -435,6 +481,9 @@ function mudaVisual(visual)
 		}
 		catch(e){alert("Ocorreu um erro. mudaVisual"+e);objaguarde.fecha("ajaxredesenha");}
 	};
+	//
+	//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
+	//
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
 	cpObj.call(p,"mudaQS",monta);
@@ -444,11 +493,17 @@ Function: initJanelaMen
 
 Abre a janela com as mensagens de ajuda ao usuário
 
+Quando essa janela estiver aberta, o resultado da função de etiquetas e de ajuda é mostrado nessa janela.
+
+Se o usuário fechar a janela de mensagens, é definido um cookie para controlar a abertura da janela ou não na próxima vez que oi3geo for utilizado.
 */
 function initJanelaMen()
 {
 	try
 	{
+		//
+		//cria a janela flutuante caso não exista
+		//
 		if (!$i("janelaMen"))
 		{
 			var novoel = document.createElement("div");
@@ -475,6 +530,9 @@ function initJanelaMen()
 			YAHOO.util.Event.addListener(YAHOO.janelaMen.xp.panel.close, "click", escondeMen);
 			iCookie("g_janelaMen","sim");
 		}
+		//
+		//abre a janela
+		//
 		YAHOO.janelaMen.xp.panel.show();
 		var pos = pegaPosicaoObjeto($i("img"));
 		YAHOO.janelaMen.xp.panel.moveTo(pos[0] - 267 ,objmapa.h - 70);
@@ -484,7 +542,7 @@ function initJanelaMen()
 /*
 Function: docaguias
 
-Coloca as guias de navegação em uma janela interna do mapa e altera o tamanho do mapa para ajustar o novo tamanho.
+Coloca as guias de navegação em uma janela interna do mapa e altera o tamanho do mapa para ajustá-lo à nova situação.
 */
 function docaguias()
 {
@@ -544,7 +602,6 @@ function docaguias()
 			}
 		}
 		calcposf();
-		
 		var temp = function()
 		{
 			//carrega janela
@@ -591,6 +648,14 @@ Function: ativaGuias
 
 Ativa as guias principais do mapa, definindo as funções que serão executadas quando a guia é escolhida.
 
+Quando o usuário clica em uma guia, todas as guias são escondidas e a guia clicada é ativada.
+
+Algumas guias só são preenchidas quando o usuário clica nelas pela primeira vez.
+
+O preenchimento sob demanda dessas guias torna necessário a definição da função que será executada.
+
+Essas funções são definidas por default nas guias principais.
+
 As guias principais são definidas nos objetos
 
 objmapa.guiaTemas
@@ -604,18 +669,26 @@ objmapa.guiaListaMapas
 */
 function ativaGuias()
 {
-	//ajusta as guias da versão antiga do YUI
-	//pega o elemento onde estão os tabs
+	//ajusta as guias da versão antiga do YUI para a nova
+	//
+	//pega o elemento onde as guias serão colocadas
+	//
 	for(var g=0;g<12;g++)
 	{
 		if ($i("guia"+g))
 		var gpai = $i("guia"+g).parentNode;
 	}
+	//
+	//monta as guias
+	//
 	if(gpai)
 	{
 		gpai.id = "guiasYUI";
 		gpai.className = "yui-navset";
 		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+		//
+		//define os títulos das guias padrão
+		//
 		if($i(objmapa.guiaTemas))
 		{$i(objmapa.guiaTemas).innerHTML = $trad("g1");}
 		if($i(objmapa.guiaMenu))
@@ -624,17 +697,32 @@ function ativaGuias()
 		{$i(objmapa.guiaLegenda).innerHTML = $trad("g3");}
 		if($i(objmapa.guiaListaMapas))
 		{$i(objmapa.guiaListaMapas).innerHTML = $trad("g4");}
+		//
+		//
 		for(var g=0;g<12;g++)
 		{
 			if ($i("guia"+g))
 			{
+				//
+				//pega os títulos das guias, inclusive as que não são padrão
+				//
 				var tituloguia = $i("guia"+g).innerHTML;
+				//
+				//remove os espaços em branco 
+				//necessário para manter compatibilidade com versões antigas do i3geo
+				//
 				var re = new RegExp("&nbsp;", "g");
 				var tituloguia = tituloguia.replace(re,'');
+				//
+				//monta o título das guias
+				//
 				ins += '<li><a href="#"><em><div id="guia'+g+'" >'+tituloguia+'</div></em></a></li>';
 			}
 		}
 		ins += "</ul>";
+		//
+		//insere as guias em gpai
+		//
 		gpai.innerHTML = ins;
 		for(var g=0;g<12;g++)
 		{
@@ -649,7 +737,9 @@ function ativaGuias()
 			}
 		}
 	}
-	//guias
+	//
+	//define a função que será executada quando o usuário clica em uma guia padrão
+	//
 	if ($i(objmapa.guiaTemas))
 	{
 		$i(objmapa.guiaTemas).onclick = function()
@@ -699,9 +789,15 @@ Function: pegalistademenus
 Pega a lista de menus que deverão compor a árvore de adição de temas e cria/adiciona os elementos da árvore
 
 A lista de menus é definida em ms_configura.php
+
+Para cada menu é montada uma árvore com os grupos e sub-grupos de temas.
 */
 function pegalistademenus(retorno)
 {
+	//
+	//quando retorno for vazio, significa que será usado o menu default(menutemas.xml) e será mostrado sempre aberto
+	//essa verificação é necessária para efeitos de compatibilidade com versões antigas do i3geo que não permitiam mais de um menu
+	//
 	if (retorno.data == "")
 	{pegaListaDeGrupos("","sim","aberto");}
 	else
@@ -712,6 +808,13 @@ function pegalistademenus(retorno)
 		{
 			do
 			{
+				//
+				//o parâmetro status define se a árvre será montada aberta ou fechada
+				//esse parâmetro foi adicionado na versão 4.0 do i3geo
+				//por isso a verificação é necessária
+				//se o parâmetro não existir na variável $menutemas definida em ms_configura.php,
+				//será utilizado aberto
+				//
 				var status = "aberto";
 				if(retorno.data[i].status)
 				{var status = retorno.data[i].status;}
@@ -768,7 +871,9 @@ function mensagemf(m)
 /*
 Function: wdocaf
 
-Abre a janela docável para executar algum programa.
+Abre a janela flutuante para executar algum programa.
+
+A janela flutuante contém um iframa onde o programa, definido no parâmetro wsrc, será carregado.
 
 Parameters:
 
@@ -788,10 +893,14 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 {
 	try
 	{
+		//
+		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
+		//
 		if($i("boxg"))
 		{$i("boxg").style.display = "none";}
 		if($i("boxpin"))
 		{$i("boxpin").style.display = "none";}
+		
 		var wlargura_ = parseInt(wlargura)+0+"px";
 		YAHOO.namespace("janelaDoca.xp");
 		if ($i("wdoca"))
@@ -2695,7 +2804,7 @@ function expandeGrupo(itemID)
 						if ( lk != " ")
 						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 						if(navm)
 						nomeTema = "&nbsp;"+inp+nome+lk;
 						else
@@ -2763,7 +2872,7 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 				{
 					var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
 					insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-					insp = insp + "<p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;'/></td></tr></table><br>";
+					insp = insp + "<p><br>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;'/></td></tr></table><br>";
 					$i(ondeArvore).innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 				}
 				else
@@ -2854,7 +2963,7 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 							if ( lk != " ")
 							{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
 							var tid = no.tid;
-							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\")' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
 							if(navm)
 							nomeTema = "&nbsp;"+inp+nome+lk;
 							else
@@ -3197,6 +3306,9 @@ Chama a função que verifica na lista de temas adicionais.
 */
 function remapaf()
 {
+	//
+	//zera o contador de tempo
+	//
 	clearTimeout(objmapa.tempo);
 	objmapa.tempo = "";
 	objmapa.temaAtivo = "";
@@ -3225,6 +3337,8 @@ function remapaf()
 			if ($i("buscatema"))
 			{
 				var g = $i(objmapa.guiaMenu+"obj");
+				if($i("arvoreAdicionaTema"))
+				{var g = $i("arvoreAdicionaTema");}
 				var iguias = g.getElementsByTagName("input");
 				var ta = new Array();
 				var i = iguias.length-1;
