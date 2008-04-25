@@ -51,6 +51,16 @@ aplicmap/ogcws.map
 
 ---------
 
+A interface padrão utilizada pelo i3geo utiliza o html aplicmap/geral.htm.
+Para customizar essa interface, edite o arquivo html conforme a documentação
+existente no próprio arquivo.
+É uma boa prática fazer suas alterações em uma cópia do geral.htm. Para utilizar a sua
+interface, inicie o i3geo da seguinte forma:
+
+http://hostname/i3geo/ms_criamapa.php?interface=minhainterface.htm
+
+---------
+
 Para configurar a ferramenta google, registre seu servidor e edite o arquivo
 ferramentas/googlemaps.htm para colocar a chave correta
 
