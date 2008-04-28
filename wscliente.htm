@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="css/geral.css">
 <link rel="stylesheet" type="text/css" href="css/i3geo_ferramentas.css">
 <style type="text/css">.yuibutton button{padding-left:2em;background:url(imagens/tic.png) 5% 50% no-repeat;}</style>
-
 <style>
 P 
 {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
@@ -21,7 +20,7 @@ P
 {padding:5px;width:555px;position:absolute;top:60px;left:200px;background:rgb(250,250,250);}
 .corpo
 {padding:5px;width:555px;position:absolute;top:60px;left:200px;background:rgb(250,250,250);}
-#mapa
+#i3geo_wscliente_id_mapa
 {width: 450px;height: 450px;border: 0px solid black;}
 .listaServico
 {border:1px solid black;text-align:center;height:260px;overflow:auto;width:530px;background-color:rgb(250,250,250)}
@@ -30,7 +29,6 @@ P
 </style>
 <!-- Leitura dos programas javaScript. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
 <script type="text/javascript" src="classesjs/wscliente.js"></script>
-<script src="pacotes/openlayers/OpenLayers.js"></script>
 </head>
 <body style="background-color:white" class="yui-navset">
 <div id=banner ><img src="imagens/barrasuperior_wscliente2006.jpg" width="765" ></div>
@@ -87,9 +85,9 @@ atualizados permanentemente.
 <!-- escolher um wms -->
 <div id=RSSwms style='display:none' class=corpo >
 	<p><b>Digite o endereço do serviço ou selecione da lista:</b>
-	<p>(após selecionar o serviço clique em 'listar temas' para ver os temas disponíveis)
-	<p><input type=text value='' name=enderecowms id=enderecowms size=80 onchange="registrawms(this.value)"/>
-	<div onclick='i3geo_wscliente_listatemas()' ><p><input id=botao1 type=button value='Escolher um tema&nbsp;&nbsp;' class=executar size=25  /></div>
+	<p>(após selecionar o serviço clique em 'listar temas' para ver os temas disponíveis)</p>
+	<br><input type=text value='' name=enderecowms id=enderecowms size=80 />
+	<div onclick='$i3geo_wscliente.listatemas()' ><br><input id=botao1 type=button value='Escolher um tema&nbsp;&nbsp;' class=executar size=25  /></div>
 	<p><b>Lista de serviços cartográficos cadastrados (clique para selecionar)</b><br>
 	<div class=listaServico id=resultadoRSSwms ></div>
 </div>
@@ -98,7 +96,7 @@ atualizados permanentemente.
 <div id=RSSws style='display:none;' class=corpo>
 	<p><b>Digite o endereço do serviço ou selecione da lista:</b>(ap&oacute;s selecionar o servi&ccedil;o clique em 'Escolher fun&ccedil;&atilde;o' para ver as op&ccedil;&otilde;es dispon&iacute;veis)
 	<p><input type=text value='' name=enderecows id=enderecows size=80 onchange="registraws(this.value)"/>
-	<div onclick='i3geo_wscliente_listafuncoes()'><p><input id=botao2 type=button value='Escolher fun&ccedil;&atilde;o&nbsp;&nbsp;' class=executar size=25  /></div>
+	<div onclick='$i3geo_wscliente.listafuncoes()'><p><input id=botao2 type=button value='Escolher fun&ccedil;&atilde;o&nbsp;&nbsp;' class=executar size=25  /></div>
 	<p><b>Lista de serviços cadastrados (clique para selecionar)</b><br>
 	<div class=listaServico id=resultadoRSSws ></div>
 </div>
@@ -130,25 +128,24 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
+Veja:
+
+<i3geo/classesjs/wscliente.js>
+
 File: i3geo/wscliente.htm
 
 */
-
-/*
-Variable: g_locaplic
-
-Endereço onde o i3geo está instalado.
-*/
-g_locaplic = "http://"+window.location.host+"/i3geo";
-g_localimg = "http://"+window.location.host+"/i3geo";
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao1");new YAHOO.widget.Button("botao2");}
-   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-   	YAHOO.util.Event.onContentReady("botao2", onPushButtonsMarkupReady);
-}()	
-i3geo_wscliente_inicia(new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicosws.xml"),new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php"))
+var g_locaplic = "http://"+window.location.host+"/i3geo";
+var i3geo_wscliente_configura = new i3geo_wscliente_configura
+(
+	g_locaplic,
+	"corpo",
+	"enderecows",
+	"enderecowms",
+	new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicosws.xml"),
+	new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php")
+)
+i3geo_wscliente_inicia(i3geo_wscliente_configura)
 document.body.style.backgroundColor="white"
 </script>
 </html>
