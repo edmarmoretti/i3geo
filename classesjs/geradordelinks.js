@@ -59,7 +59,6 @@ for (var i = 0; i < scripts.length; i++) {
 		}
 	}
 }
-//scripts
 var allScriptTags = "";
 var jsfiles = new Array()
 if(typeof(testafuncoes) == 'undefined')
@@ -74,15 +73,6 @@ for (var i = 0; i < jsfiles.length; i++)
 	allScriptTags += currentScriptTag;
 }
 document.write(allScriptTags);
-//
-//
-//
-//navm = false
-//navn = false
-//var app = navigator.appName.substring(0,1);
-//if (app=='N') navn=true; else navm=true;
-
-
 /* 
 Classe: i3geo_gl_configura
 

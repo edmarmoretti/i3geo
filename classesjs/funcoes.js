@@ -4067,13 +4067,15 @@ function convdmsf(x,y)
 	res[1] = yv;
 	if ($i("localizarxy"))
 	{
-		$i("xg").value = dx;
-		$i("xm").value = mx;
-		$i("xs").value = sx;
-		$i("yg").value = dy;
-		$i("ym").value = my;
-		$i("ys").value = sy;
-
+		if($i("xg"))
+		{
+			$i("xg").value = dx;
+			$i("xm").value = mx;
+			$i("xs").value = sx;
+			$i("yg").value = dy;
+			$i("ym").value = my;
+			$i("ys").value = sy;
+		}
 	}
 	return res;
 }
