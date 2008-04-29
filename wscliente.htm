@@ -104,7 +104,7 @@ atualizados permanentemente.
 </body>
 <script>
 /*
-Title: Aplicativo para acesso a web services
+Title: i3geo/wscliente.htm
 
 Esse aplicativo permite ao usuário ver a lista de serviços cadastrados no i3geo e acessá-los para testes.
 
@@ -130,12 +130,20 @@ Free Software Foundation, Inc., no endereço
 
 Veja:
 
-<i3geo/classesjs/wscliente.js>
+<wscliente.js>
 
 File: i3geo/wscliente.htm
 
+Note:
+
+Para iniciar o wscliente pode-se incluir na url parâmetros indicando o tipo de serviço e o endereço do mesmo.
+
+Por exemplo
+
+i3geo/wscliente.htm?wms,endereco_servico
+
 */
-var g_locaplic = "http://"+window.location.host+"/i3geo";
+var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 var i3geo_wscliente_configura = new i3geo_wscliente_configura
 (
 	g_locaplic,

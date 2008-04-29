@@ -1,4 +1,4 @@
-Format: 1.35
+Format: Development Release 02-10-2007 (1.35 base)
 
 
 # You can add a title and sub-title to your menu like this:
@@ -8,6 +8,22 @@ Format: 1.35
 # You can add a footer to your documentation like this:
 # Footer: [text]
 # If you want to add a copyright notice, this would be the place to do it.
+
+# You can add a timestamp to your documentation like one of these:
+# Timestamp: Generated on month day, year
+# Timestamp: Updated mm/dd/yyyy
+# Timestamp: Last updated mon day
+#
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
 
 
 # --------------------------------------------------------------------------
@@ -31,7 +47,6 @@ Format: 1.35
 
 
 File: Ajuda OGC  (ogc.htm)
-File: Aplicativo para acesso a web services  (wscliente.htm)
 File: Aplicativo para download de dados  (datadownload.htm)
 
 Group: Classesjs  {
@@ -40,12 +55,12 @@ Group: Classesjs  {
    File: Administração de mapfiles  (classesjs\i3geoadmin.js)
    File: Atlas  (classesjs\atlas.js)
    File: Carrega os scripts do i3geo.  (classesjs\i3geo.js)
-   File: Cliente de web service  (classesjs\wscliente.js)
    File: DataDownLoad  (classesjs\datadownload.js)
    File: Ferramentas  (classesjs\ferramentas.js)
    File: Ferramentas da interface de administração  (classesjs\ferramentasadmin.js)
    File: Funções gerais  (classesjs\funcoes.js)
    File: i3geo/classesjs/geradordelinks.js  (classesjs\geradordelinks.js)
+   File: i3geo/classesjs/wscliente.js  (classesjs\wscliente.js)
    File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
    File: Inicialização do i3geo.  (classesjs\iniciamma.js)
    File: Menu suspenso  (classesjs\menususpenso.js)
@@ -105,13 +120,13 @@ Group: Classesphp  {
 
 Group: Aplicmap  {
 
-   File: Administração de mapfiles (experimental)  (aplicmap\admin.htm)
+   File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
    File: Interface simples 1  (aplicmap\simples1.htm)
    File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)
-   File: OpenLayers (experimental)  (aplicmap\openlayers.htm)
+   File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
    }  # Group: Aplicmap
 
 Group: Atlas  {
@@ -124,6 +139,7 @@ Group: Atlas  {
 File: Gerador automático de web services OGC  (ogc.php)
 File: Gerador de menu em kml para uso no Google Earth  (kml.php)
 File: i3geo/geradordelinks.htm  (geradordelinks.htm)
+File: i3geo/wscliente.htm  (wscliente.htm)
 File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Mashup  (exemplos\mashup.htm)
 File: Página principal com a lista de aplicativos do i3geo  (principal.htm)

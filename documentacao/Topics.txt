@@ -1,4 +1,4 @@
-Format: 1.35
+Format: Development Release 02-10-2007 (1.35 base)
 
 # This is the Natural Docs topics file for this project.  If you change anything
 # here, it will apply to THIS PROJECT ONLY.  If you'd like to change something
@@ -75,7 +75,7 @@ Format: 1.35
 # their behavior or add keywords:
 #
 #    Generic, Class, Interface, Section, File, Group, Function, Variable,
-#    Property, Type, Constant, Enumeration, Event, Delegate, Macro,
+#    Property, Type, Constant, Enumeration, Event, Delegate, Case, Macro,
 #    Database, Database Table, Database View, Database Index, Database
 #    Cursor, Database Trigger, Cookie, Build Target
 

@@ -1,5 +1,5 @@
 /*
-Title: i3geo/classesjs/geradordelinks.js
+Title: geradordelinks.js
 
 Classe javascript da aplicação de geração de links.
 
@@ -73,8 +73,11 @@ for (var i = 0; i < jsfiles.length; i++)
 	allScriptTags += currentScriptTag;
 }
 document.write(allScriptTags);
+/*
+Section: Classes
+*/
 /* 
-Classe: i3geo_gl_configura
+Class: i3geo_gl_configura
 
 Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação.
 
@@ -417,6 +420,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	}
 }
 /*
+Section: Inicialização
+*/
+/*
+Function: i3geo_gl_inicia
+
 Inicia a interface do gerador de links.
 
 Parameters:
