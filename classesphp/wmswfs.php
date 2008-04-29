@@ -261,10 +261,10 @@ function temaswms()
 	{
 		$r = pegaTag($layer);
 		$retorna = imprimeTag($r,$retorna);
-		$query = $q.'/Layer/Layer';
-		$layers1 = $xpath->query($query);
+		$layers1 = $xpath->query('Layer',$layer);
 		foreach ($layers1 as $layer1)
 		{
+			$layers2 = $xpath->query('Layer',$layer1);
 			$r1 = pegaTag($layer1);
 			$camada1 = $r1["nome"];
 			$titulocamada1 = $r1["titulo"];
@@ -272,12 +272,13 @@ function temaswms()
 			if($r1["estilos"])
 			{$retorna = imprimeEstilos($r1["estilos"],$suporta,$retorna,$camada1,$titulocamada1);}
 			else
-			{$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada1 . "\",\"\",\"default\",\"".$camada1." ".$titulocamada1."\",\"".$suporta."\")' value='" . $camada1 . "'/> default<i>".$titulocamada1."</i></span><br>";}
-			
-			$query = $q.'/Layer/Layer/Layer';
-			$layers2 = $xpath->query($query);
+			{
+				if($layers2->length == 0)
+				$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada1 . "\",\"\",\"default\",\"".$camada1." ".$titulocamada1."\",\"".$suporta."\")' value='" . $camada1 . "'/> default<i>".$titulocamada1."</i></span><br>";
+			}
 			foreach ($layers2 as $layer2)
 			{
+				$layers3 = $xpath->query('Layer',$layer2);
 				$r2 = pegaTag($layer2);
 				$camada2 = $r2["nome"];
 				$titulocamada2 = $r2["titulo"];
@@ -285,19 +286,32 @@ function temaswms()
 				if($r2["estilos"])
 				{$retorna = imprimeEstilos($r2["estilos"],$suporta,$retorna,$camada2,$titulocamada2);}
 				else
-				{$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada2 . "\",\"\",\"default\",\"".$camada2." ".$titulocamada2."\",\"".$suporta."\")' value='" . $camada2 . "'/> default <i>".$titulocamada2."</i></span><br>";}
-
-			}		
+				{
+					if($layers3->length == 0)
+					$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada2 . "\",\"\",\"default\",\"".$camada2." ".$titulocamada2."\",\"".$suporta."\")' value='" . $camada2 . "'/> default <i>".$titulocamada2."</i></span><br>";
+				}
+				foreach ($layers3 as $layer3)
+				{
+					$r3 = pegaTag($layer3);
+					$camada3 = $r3["nome"];
+					$titulocamada3 = $r3["titulo"];
+					$retorna = imprimeTag($r3,$retorna);
+					if($r3["estilos"])
+					{$retorna = imprimeEstilos($r3["estilos"],$suporta,$retorna,$camada3,$titulocamada3);}
+					else
+					{
+						$retorna[] = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"tema\",\"" . $camada3 . "\",\"\",\"default\",\"".$camada3." ".$titulocamada3."\",\"".$suporta."\")' value='" . $camada3 . "'/> default <i>".$titulocamada3."</i></span><br>";
+					}
+				}
+			}
+			if(count($layers2) == 1){$retorna[] = "<hr>";}
 		}
-		
 	}	
 	$retorna[] = "<br>Proj.:<input size=30 id=proj type=text class=digitar value='".implode(",",wms_srs($dom))."'/><br>";
 	$retorna[] = "<br>Formatos imagem:<input size=30 id=formatos type=text class=digitar value='".implode(",",wms_formats($dom))."'/><br><br>";
 	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
 	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
 	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
-	//echo "<pre>";
-	//var_dump($retorna);
 	$cp->set_data(implode($retorna));
 }
 function imprimeEstilos($es,$suporta,$retorna,$tval,$tituloalternativo)
