@@ -213,6 +213,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Para mais detalhes veja a documentação específica do arquivo menutemas/menutemas.xml
 	
+	Utilize o caminho completo no servidor para o nome dos wml, assim vc evita problemas em serviços do tipo kml e ogc
+	
 	Example:
 
 	$menutemas = array(
@@ -223,8 +225,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para usar o menu default, utilize apenas $menutemas = "";
 	*/
 	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"../menutemas/geopr.xml","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto")
+		array("idmenu"=>"GEOPR","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 	/*
 	Variable: $utilizacgi
@@ -273,12 +275,10 @@ else //se for linux
 	$postgis_con = "";
 	$srid_area = 1;
 	$postgis_mapa = "";
-	/*
 	$menutemas = array(
-		array("idmenu"=>1,"arquivo"=>"http://mapas.mma.gov.br/i3geo/menutemas/menutemas.xml")
+		array("idmenu"=>"GEOPR","arquivo"=>"/opt/www/html/i3geo/menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"/opt/www/html/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
-	*/
-	$menutemas = "";
 	$utilizacgi = "sim";
 	$atlasxml = "../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
