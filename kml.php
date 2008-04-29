@@ -42,9 +42,13 @@ else
 {
 	foreach($menutemas as $m)
 	{
+		if(file_exists($m))
 		$menus[] = $m["arquivo"];
 	}
 }
+if(!isset($menus))
+$menus = array("/opt/www/html/i3geo/menutemas/menutemas.xml");
+
 echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>";
 foreach ($menus as $menu)
 {
@@ -70,12 +74,15 @@ foreach ($menus as $menu)
 				$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
 				$id = mb_convert_encoding($tema->TID,"auto","auto");
 				$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
+				$tipoa = "";
+				if($tema->TIPOA)
+				$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
 				$ogc = sim;
 				if($tema->TID)
 				{
-					$ogc = mb_convert_encoding($tema->OGC,"auto","auto");
+					$kml = mb_convert_encoding($tema->KML,"auto","auto");
 				}
-				if(strtolower($ogc != "nao"))
+				if(strtolower($kml != "nao") && strtolower($tipoa != "wms"))
 				{
 					echo "<GroundOverlay>";
     				echo "<name>$nome</name>";
