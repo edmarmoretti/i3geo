@@ -267,17 +267,22 @@ function ajaxLegendaHTML(retorno)
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		var s = g_locaplic+"/imagens/solta.gif";
-		$i("legenda").innerHTML = "<img src="+s+" title='clique para liberar'/><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
+		$i("legenda").innerHTML = "<img id=soltaLeg src="+s+" title='clique para liberar'/><br><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
 		g_legendaHTML = retorno.data.legenda;
 		//
 		//verifica se a janela móvel existe e preenche com a legenda se for o caso
 		//
 		if ($i("moveLegi"))
-		{$i("wlegenda").innerHTML = g_legendaHTML;}
+		{
+			$i("wlegenda").innerHTML = g_legendaHTML;
+			var elementos = $i("wlegenda").getElementsByTagName("input");
+			for(i=0;i<elementos.length;i++)
+			{elementos[i].style.display="none";}
+		}
 		//
 		//abre a janela móvel com a legenda quando o usuário clica no ícone solta.gif definido acima
 		//
-		$i("legenda").onclick = function()
+		$i("soltaLeg").onclick = function()
 		{
 			//
 			//cria a janela móvel para a legenda se já não existir
@@ -292,6 +297,9 @@ function ajaxLegendaHTML(retorno)
 				temp += g_legendaHTML+"</div>";
 				novoel.innerHTML = temp;
 				document.body.appendChild(novoel);
+				var elementos = $i("wlegenda").getElementsByTagName("input");
+				for(i=0;i<elementos.length;i++)
+				{elementos[i].style.display="none";}
 				YAHOO.namespace("moveLegi.xp");
 				YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			}

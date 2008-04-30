@@ -3314,7 +3314,14 @@ function remapaf()
 	objmapa.temaAtivo = "";
 	if ($i(objmapa.guiaTemas+"obj"))
 	{
-		var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");
+		//
+		//se g_operacao = 'legenda' significa que o usuário clicou em um tema na guia legenda
+		//nesse caso, a busca dos temas que devem ser ligados e desligados deve ser feita no id='legenda'
+		//
+		if(g_operacao == "legenda")
+		{var iguias = $i("legenda").getElementsByTagName("input");}
+		else
+		{var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");}
 		var tsl = new Array();
 		var tsd = new Array();
 		var i = iguias.length-1;
