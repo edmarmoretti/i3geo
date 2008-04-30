@@ -57,12 +57,61 @@
       <SGRUPO>
          <SDTIPO>OGC Web Services - DSA-INPE</SDTIPO>
           <TEMA>
-            <TID>geopr_aneel_reservatorios</TID>
-            <TNOME>Reservat&amp;oacute;rios</TNOME>
+            <TID>geopr_dsainpe_fortracc120</TID>
+            <TNOME>Fortracc - Previsão 120 minutos</TNOME>
             <TDESC></TDESC>
-            <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
          </TEMA>
-	  </SGRUPO>
+          <TEMA>
+          	<TID>geopr_dsainpe_fortrac</TID>
+          	<TNOME>Fortracc - Estimativa de Chuva Atual</TNOME>
+          	<TDESC></TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_goes10</TID>
+          	<TNOME>Imagem GOES 10</TNOME>
+          	<TDESC></TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_mrg12</TID>
+          	<TNOME>Mapa de Risco de Fogo- GOES-12</TNOME>
+          	<TDESC>Mapa de Risco de ocorrência de fogo produzido diariamente para toda a extensão geográfica de cobertura das imagens do satélite GOES-12</TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_mrp1</TID>
+          	<TNOME>Mapa de Risco - Previsão 1 dia</TNOME>
+          	<TDESC>Previsão do Mapa de Risco de Fogo gerado para amanha, com o Modelo Regional ETA-Climatológico, dados observacionais e Imagens do Satelite GOES-12.</TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_prec_inst</TID>
+          	<TNOME>Precipitação Instantânea</TNOME>
+          	<TDESC>Dados de estimativa de precipiatação obtidos apartir de imagens GOES-10.</TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_focos_2dias</TID>
+          	<TNOME>Focos queimada</TNOME>
+          	<TDESC>Todos os focos de Queimadas de hoje e ontem.</TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+          <TEMA>
+          	<TID>geopr_dsainpe_focos_acumulado</TID>
+          	<TNOME>Focos queimada acumulados no mês</TNOME>
+          	<TDESC>Todos os focos de Queimadas desde o início do mês até a data atual.</TDESC>
+          	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
+          	<TIPOA>WMS</TIPOA>
+          </TEMA>
+      </SGRUPO>
    </GRUPO>
 </TEMASGEO>

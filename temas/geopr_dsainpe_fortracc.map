@@ -11,17 +11,17 @@ LAYER
         "wfs"	"nao"
         "TEXTO"	"NAO"
         "wms_force_separate_request"	"1"
-        "wms_name"	"fortracc120"
+        "wms_name"	"fortracc"
         "formatosinfo"	"text/plain,application/vnd.ogc.gml"
-        "legendawms"	"http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=fortracc120&format=image/png"
+        "legendawms"	"http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=fortracc&format=image/png"
         "wms_formatlist"	"image/png,image/jpeg,image/gif,image/tiff,image/png; mode=24bit,image/wbmp"
         "wms_format"	"image/png"
         "wms_connectiontimeout"	"30"
-        "TEMA"	"Fortracc - Previsão 120 minutos"
+        "TEMA"	"Fortracc - Estimativa de Chuva Atual"
         "wms_server_version"	"1.1.1"
         "wms_style"	"default"
       END
-    NAME "geopr_dsainpe_fortrac120"
+    NAME "geopr_dsainpe_fortrac"
     OFFSITE 255 255 255
     SIZEUNITS PIXELS
     STATUS DEFAULT

@@ -1,0 +1,93 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME vegetacao # ok
+  TYPE Polygon
+  STATUS off
+	TEMPLATE "vegetacao.htm"
+  METADATA
+  	TEMA "Vegetação do Brasil (1:5.000.000)"
+  	CLASSE "SIM"
+		ITENS "nome,tipo,desc_tipo,sigla"
+		ITENSDESC "Nome,Tipo,Descrição,Sigla"
+    TEXTO ""
+		ESCALA "5000000"
+  END
+	TRANSPARENCY 100
+	DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\vegetacao.shp"
+  CLASS
+     Name 'Vegetacao Lenhosa Oligotrofica dos Pantanos e das Acumulacoes Arenosas'
+     EXPRESSION ('[NOME]'eq'Vegetacao Lenhosa Oligotrofica dos Pantanos e das Acumulacoes Arenosas')
+     COLOR 255 255 204
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Estepe'
+     EXPRESSION ('[NOME]'eq'Estepe')
+     COLOR 255 153 0
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Savana'
+     EXPRESSION ('[NOME]'eq'Savana')
+     COLOR 204 102 0
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Savana Estépica'
+     EXPRESSION ('[NOME]'eq'Savana Estepica')
+     COLOR 153 0 0
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Floresta Estacional Decidual'
+     EXPRESSION ('[NOME]'eq'Floresta Estacional Decidual')
+     COLOR 204 255 255
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Floresta Estacional Semidecidual'
+     EXPRESSION ('[NOME]'eq'Floresta Estacional Semidecidual')
+     COLOR 204 255 204
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Floresta Ombrófila Aberta'
+     EXPRESSION ('[NOME]'eq'Floresta Ombrofila Aberta')
+     COLOR 0 255 102
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Floresta Ombrófila Mista'
+     EXPRESSION ('[NOME]'eq'Floresta Ombrofila Mista')
+     COLOR 153 255 153
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Floresta Ombrófila Densa'
+     EXPRESSION ('[NOME]'eq'Floresta Ombrofila Densa')
+     COLOR 0 102 51
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Refúgio Ecológico'
+     EXPRESSION ('[NOME]'eq'Refugio Ecologico')
+     COLOR 255 0 0
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Áreas das Formações Pioneiras'
+     EXPRESSION ('[NOME]'eq'Areas das Formacoes Pioneiras')
+     COLOR 153 153 255
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+  CLASS
+     Name 'Área de Tensão Ecológica'
+     EXPRESSION ('[NOME]'eq'Areas de Tensao Ecologica')
+     COLOR 204 204 204
+     OUTLINECOLOR -1 -1 -1
+  END  # CLASS
+END
+END
+END
+END
