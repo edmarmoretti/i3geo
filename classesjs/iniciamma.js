@@ -871,7 +871,7 @@ function Mapa(e,m)
 	{
 		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
 		{
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&g_sid="+g_sid;
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+g_sid;
 			cpObj.call(p,"criaLegenda",ajaxLegendaHTML);
 		}
 	};

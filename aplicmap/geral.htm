@@ -240,6 +240,19 @@ g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 */
 g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
 /*
+Variable: g_templateLegenda
+
+Template HTML que será utilizado na geração da legenda HTML
+
+A sintaxe do template é definido pelo Mapserver.
+
+O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
+
+Exemplo:
+g_templateLegenda = "legendaseminput.htm";
+*/
+g_templateLegenda = "";
+/*
 	Variable: g_funcaoTip
 	
 	Função ajax que será executada para mostrar informações do tipo TIP.

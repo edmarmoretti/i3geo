@@ -884,6 +884,16 @@ var temp = pCookie("i3geolingua");
 if(temp != undefined)
 {g_linguagem = temp;}
 /*
+Variable: g_templateLegenda
+
+Template HTML que será utilizado na geração da legenda HTML
+
+A sintaxe do template é definido pelo Mapserver.
+
+O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
+*/
+g_templateLegenda = "";
+/*
 Variable: g_kml
 
 Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do link para acesso ao tema via kml.

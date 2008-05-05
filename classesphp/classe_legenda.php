@@ -140,6 +140,11 @@ $template - nome do template para processar a legenda
 			}
   		}
   		if ($template == ""){$template="legenda.htm";}
+  		if(file_exists($template))
+  		{
+  			$this->templateleg = $template;
+  			return;
+  		}
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{$this->templateleg = $locaplic."\\aplicmap\\".$template;}
 		else

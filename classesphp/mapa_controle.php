@@ -2028,7 +2028,9 @@ Include:
 */
 	case "criaLegendaHTML":
 		include("classe_legenda.php");
-		$m = new Legenda($map_file,$locaplic,$tema,$template);
+		//para efeitos de compatibilidade com versões anteriores
+		if(isset($template)){$templateLegenda = $template;}
+		$m = new Legenda($map_file,$locaplic,$tema,$templateLegenda);
 		$r = $m->criaLegenda();
 		if(!$r){$r = "erro. Legenda nao disponivel";}
 		$cp->set_data($r);
