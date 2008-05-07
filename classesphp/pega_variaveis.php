@@ -61,7 +61,10 @@ if (isset($_POST))
 		{
 			foreach($_POST["cpaint_argument"] as $argumento_)
 			{
-				$argumento_ = str_replace("\\\"","",$argumento_);
+				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+				{$argumento_ = str_replace("\\\"","",$argumento_);}
+				else
+				{$argumento_ = str_replace("\"","",$argumento_);}
 				$parametros_ = explode("&",$argumento_);
 				foreach($parametros_ as $parametro_)
 				{	
