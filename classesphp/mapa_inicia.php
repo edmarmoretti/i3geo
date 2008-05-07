@@ -92,7 +92,7 @@ function iniciaMapa()
 	if (!file_exists($map_file))
 	{$cp->set_data("erro. $map_file nao existe (variavel map_file utilize o testainstal.php)");return;}
 	//altera o tamanho do query map para ficar igual ao do mapa
-	include("classe_mapa.php");
+	include_once("classe_mapa.php");
 	$m = new Mapa($map_file);
 	if(!$m->arquivo){$cp->set_data(" erro. Mapfile $map_file nao existe");return;}
 	if(!$m->mapa){$cp->set_data(" erro. Problemas com o mapfile $map_file");return;}

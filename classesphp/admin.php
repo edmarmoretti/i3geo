@@ -32,7 +32,7 @@ File: i3geo/classesphp/admin.php
 Include:
 <carrega_ext.php>, <pega_variaveis.php>, <ms_configura.php>
 */
-require_once("pega_variaveis.php");
+include_once("pega_variaveis.php");
 error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
@@ -47,8 +47,8 @@ foreach(array_keys($_SESSION) as $k)
 //
 include_once ("carrega_ext.php");
 //verifica se o cliente pode editar
-require_once("../ms_configura.php");
-require_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("../ms_configura.php");
+include_once("../pacotes/cpaint/cpaint2.inc.php");
 $editor = "nao";
 foreach ($editores as $e)
 {
@@ -192,7 +192,8 @@ function textoCamadaAtual()
 	$mapa->save($nometemp);
 	$linhas = ms_TokenizeMap($map_file);
 	$texto = "";
-	for ($i=0;$i < count($linhas);$i++)
+	$c = count($linhas);
+	for ($i=0;$i < $c;++$i)
 	{
 		if ($linhas[$i] == "FONTSET")
 		$texto .= "FONTSET ".$linhas[$i+1]."\n";
@@ -211,7 +212,8 @@ function textoCamadaAtual()
 	$textolayer = array();
 	$textos = array();
 	$nome = "";
-	for ($i=0;$i < count($linhas);$i++)
+	$c = count($linhas);
+	for ($i=0;$i < $c;++$i)
 	{
 		if ($linhas[$i] == "LAYER")
 		{$layer = "sim";}

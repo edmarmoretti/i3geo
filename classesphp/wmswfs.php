@@ -345,7 +345,7 @@ function pegaTag($layer)
 {
 	$noslayer = $layer->childNodes;
 	$resultado = array();
-	for ($i = 0; $i < $noslayer->length; $i++)
+	for ($i = 0; $i < $noslayer->length; ++$i)
 	{
 		$tnome = $noslayer->item($i)->tagName;
 		$tvalor = $noslayer->item($i)->nodeValue;
@@ -360,7 +360,8 @@ function pegaTag($layer)
 			if ($tnome == "Style")
 			{
 				$ss = $noslayer->item($i)->childNodes;
-				for ($s = 0; $s < $ss->length; $s++)
+				$ssl = $ss->length;
+				for ($s = 0; $s < $ssl; $s++)
 				{
 					$snome = $ss->item($s)->tagName;
 					$svalor = $ss->item($s)->nodeValue;
@@ -597,7 +598,7 @@ function wms_exceptions ( $dom ) {
 	$ctx = xpath_new_context($dom);
 	$xpnode = xpath_eval($ctx,$xp);
 	$arr = array();
-	for( $i = 0; $i < sizeof($xpnode->nodeset); $i++ ) {
+	for( $i = 0; $i < sizeof($xpnode->nodeset); ++$i ) {
 		$dtnode = $xpnode->nodeset[0]->first_child();
 		array_push($arr,$dtnode->content);
 	}

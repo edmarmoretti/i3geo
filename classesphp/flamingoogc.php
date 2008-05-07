@@ -60,13 +60,13 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
-require_once("carrega_ext.php");
-include("../ms_configura.php");
-include("pega_variaveis.php");
+include_once("carrega_ext.php");
+include_once("../ms_configura.php");
+include_once("pega_variaveis.php");
 //
 //cria o web service
 //
-include("funcoes_gerais.php");
+include_once("funcoes_gerais.php");
 $req = ms_newowsrequestobj();
 $tipo = "";
 foreach ($_GET as $k=>$v)

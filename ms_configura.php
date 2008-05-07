@@ -242,7 +242,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Em alguns casos o uso do cgi torna a aplicação mais rápida.
 	*/
-	$utilizacgi = "sim";
+	$utilizacgi = "nao";
 	/*
 	 Variable: $atlasxml
 	 

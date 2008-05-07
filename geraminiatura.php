@@ -116,7 +116,7 @@ function verifica($map)
 			if ($postgis_mapa != "")
 			{
 				$numlayers = $mapa->numlayers;
-				for ($i=0;$i < $numlayers;$i++)
+				for ($i=0;$i < $numlayers;++$i)
 				{
 					$layer = $mapa->getlayer($i);
 					if ($layer->connectiontype == MS_POSTGIS)

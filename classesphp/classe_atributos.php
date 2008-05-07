@@ -216,7 +216,7 @@ $tipo - Tipo de busca brasil|null
 		$this->layer->open();
 		$registros[] = array();
 		$res_count = $this->layer->getNumresults();
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valitem = array();
 			foreach ($items as $item)
@@ -288,7 +288,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 				if (($res_count >= $fim) && ($fim < $res_count))
 				{$res_count = $fim;}		
 			}
-			for ($i = $inicio; $i < $res_count; $i++)
+			for ($i = $inicio; $i < $res_count; ++$i)
 			{
 				$valitem = array();
 				foreach ($items as $item)
@@ -308,10 +308,10 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		if ($tipolista == "tudo")
 		{
 			$shp_atual = array();
-			for ($i = 0; $i < $res_count;$i++)
+			for ($i = 0; $i < $res_count;++$i)
 			{
 				$rc = $this->layer->getResult($i);
-				$shp_atual[] = $rc->shapeindex;
+				$shp_atual[$rc->shapeindex] = $rc->shapeindex;
 			}
 			$this->layer->close();
 			$chk = "";
@@ -324,7 +324,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					{$res_count = $fim;}		
 				}
 				$this->layer->open();
-				for ($i = $inicio; $i < $res_count; $i++)
+				for ($i = $inicio; $i < $res_count; ++$i)
 				{
 					$valitem = array();
 					foreach ($items as $item)
@@ -341,7 +341,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						{$valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");}
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
 					}
-					if (in_array($shp_index,$shp_atual))
+					//if (in_array($shp_index,$shp_atual))
+					if(isset($shp_atual[$shp_index]))
 					{$chk = "CHECKED";}
 					$registros[] = array("indice"=>$shp_index,"valores"=>$valitem,"status"=>$chk);
 					$chk = "";
@@ -479,7 +480,7 @@ Include:
 		$abriu = $this->layer->open();
 		$res_count = $this->layer->getNumresults();
 		//pega os valores
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
@@ -507,9 +508,9 @@ Include:
 		{return("erro. Nenhum valor valido");}
 		//faz os calculos
 		if(file_exists($this->locaplic."/classe_estatistica.php"))
-		require_once($this->locaplic."/classe_estatistica.php");
+		include_once($this->locaplic."/classe_estatistica.php");
 		else	
-		require_once("classe_estatistica.php");
+		include_once("classe_estatistica.php");
 		$estat = new estatistica();
 		$resultado = $estat->calcula($valoresn);
 		$resultado = $estat->resultado;
@@ -837,7 +838,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 		}
 		$res_count = $layer->getNumresults();
 		$layer->open();
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valori = array();
 			$result = $layer->getResult($i);

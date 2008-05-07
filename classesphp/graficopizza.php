@@ -61,7 +61,7 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$ma
 	////////////////////////////////////////////////////////////////
 	// PHP script made by Rasmus Petersen - http://www.peters1.dk //
 	////////////////////////////////////////////////////////////////
-	require_once("funcoes_gerais.php");
+	include_once("funcoes_gerais.php");
 	//<img src="http://www.domain.dk/piechart.php?data=10*9*11*10&label=Denmark*Germany*USA*Sweden" />
 	$show_label = false; // true = show label, false = don't show label.
 	$show_percent = false; // true = show percentage, false = don't show percentage.
@@ -98,7 +98,8 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$ma
 	$start = 270;
 	$value_counter = 0;
 	$value = 0;
-	for ($i = 0; $i < count($data); $i++)
+	$cd = count($data);
+	for ($i = 0; $i < $cd; ++$i)
 	{
 		$value += $data[$i];
 		$end = ceil(($value/$data_sum)*360) + 270;

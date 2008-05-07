@@ -75,9 +75,9 @@ $tema - nome do tema
 	{
   		//error_reporting(E_ALL);
   		if (file_exists($locaplic."/funcoes_gerais.php"))
-  		require_once($locaplic."/funcoes_gerais.php");
+  		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		require_once("funcoes_gerais.php");
+  		include_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -111,7 +111,7 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 			$classe0->setexpression("");
 			$classe0->set("name"," ");
 			//apaga todas as classes menos a primeira
-			for ($i=1; $i < $numclasses; $i++)
+			for ($i=1; $i < $numclasses; ++$i)
 			{
 				$classe = $this->layer->getClass($i);
 				$classe->set("status",MS_DELETE);
@@ -139,7 +139,8 @@ $exps - lista com as novas expressões
 		$nomes = explode(";",strip_tags($nomes));
 		$exps = explode(";",strip_tags($exps));
 		//pega os layers existentes no array ids e armazena no array t
-		for ($i=0; $i < count($ids); $i++)
+		$c = count($ids);
+		for ($i=0; $i < $c; ++$i)
 		{
 			$tx = explode("-",$ids[$i]);
 			$t[] = $tx[0];
@@ -151,14 +152,15 @@ $exps - lista com as novas expressões
 		{
 			$layer = $this->mapa->getlayerbyname($tema);
 			$nc = $layer->numclasses;
-			for($i=0;$i < $nc;$i++)
+			for($i=0;$i < $nc;++$i)
 			{
 				$class = $layer->getclass($i);
 				$class->set("status",MS_DELETE);
 			}
 		}
 		//acrescenta as classes definidas
-		for ($i=0; $i < count($ids); $i++)
+		$c = count($ids);
+		for ($i=0; $i < $c; ++$i)
 		{
 			$layerc = explode("-",$ids[$i]); //nome do layer é o indice 0 do array
 			$layer = $this->mapa->getlayerbyname($layerc[0]);
@@ -201,14 +203,14 @@ $ignorar - valor que será ignorado na listagem final
 			//apaga todas as classes existentes
 			$classetemp = $this->layer->getClass(0);
 			$estilotemp = $classetemp->getStyle(0);
-			for ($i=0; $i < $numclassesatual; $i++)
+			for ($i=0; $i < $numclassesatual; ++$i)
 			{
 				$classe = $this->layer->getClass($i);
 				$classe->set("status",MS_DELETE);
 			}
 			//adiciona as classes novas
 			$intatual = $min;
-			for ($i=0; $i < $nclasses; $i++)
+			for ($i=0; $i < $nclasses; ++$i)
 			{
 				if ($i == $nclasses - 1)
 				{$expressao = "(([".$item."]>=".$intatual.")and([".$item."]<=".($intatual+$intervalo)."))";}
@@ -254,16 +256,16 @@ Include:
 		if (count($valores) > 0)
 		{
   			if(file_exists($this->locaplic."/classe_estatistica.php"))
-  			require_once($this->locaplic."/classe_estatistica.php");
+  			include_once($this->locaplic."/classe_estatistica.php");
   			else
-  			require_once("classe_estatistica.php");
+  			include_once("classe_estatistica.php");
 			$estat = new estatistica();
 			$estat->calcula($valores);
 			$calc = $estat->resultado;
 			$numclassesatual = $this->layer->numclasses;
 			//apaga todas as classes existentes
 			$classetemp = $this->layer->getClass(0);
-			for ($i=0; $i < $numclassesatual; $i++)
+			for ($i=0; $i < $numclassesatual; ++$i)
 			{
 				$classe = $this->layer->getClass($i);
 				$classe->set("status",MS_DELETE);
@@ -274,7 +276,7 @@ Include:
 			$expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
 			$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
 			$vcor = array(250,230,150,0);
-			for ($i=0;$i < 4;$i++)
+			for ($i=0;$i < 4;++$i)
 			{
 				$classe = ms_newClassObj($this->layer);
 				$novoestilo = ms_newStyleObj($classe);
@@ -319,19 +321,21 @@ $ignorar - valor que será ignorado na listagem final
 		// cria classes
 		$classes = array();
 		$classpadrao = $this->layer->getClass(0);
-		for ($i = 0; $i < $nclassexist; $i++)
+		for ($i = 0; $i < $nclassexist; ++$i)
 		{$classes[$i] = $this->layer->getClass($i);}
-		for ($i = 0; $i < $this->layer->numclasses; $i++) // apaga classes atuais
+		$c = $this->layer->numclasses;
+		for ($i = 0; $i < $c; ++$i) // apaga classes atuais
 		{
 			$cl = $this->layer->getClass($i);
 			$cl->set("status",MS_DELETE);
 		}
-		for ($i = 0; $i < count($valoresu); $i++)
+		$c = count($valoresu);
+		for ($i = 0; $i < $c; ++$i)
 		{
 			$classes[$i] = ms_newClassObj($this->layer);
 			$newstyle = ms_newStyleObj($classes[$i]);
 		}
-		for ($i = 0; $i < count($valoresu); $i++)
+		for ($i = 0; $i < $c; ++$i)
 		{
 			$e = "('[".$item."]'eq'".$valoresu[$i]."')";
 			$c = $classes[$i];
@@ -380,15 +384,15 @@ Include:
 	function alteraCoresClasses($cori,$corf)
 	{
 		if(file_exists($this->locaplic."/class.palette.php"))		
-		include($this->locaplic."/class.palette.php");
+		include_once($this->locaplic."/class.palette.php");
 		else
-		include("class.palette.php");
+		include_once("class.palette.php");
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
 		$numclasses = $this->layer->numclasses;
 		$myPalette=new palette(array($cori,$corf),($numclasses + 1));
 		$cores = $myPalette->colorRGB;
-		for($i=0;$i<$numclasses;$i++)
+		for($i=0;$i<$numclasses;++$i)
 		{
 			$classe = $this->layer->getclass($i);
 			$estilo = $classe->getstyle(0);
@@ -411,7 +415,7 @@ Inverte as cores da legenda de um tema.
 	function inverteCoresClasses()
 	{
 		$numclasses = $this->layer->numclasses;
-		for($i=0;$i<$numclasses;$i++)
+		for($i=0;$i<$numclasses;++$i)
 		{
 			$classe = $this->layer->getclass($i);
 			$estilo = $classe->getstyle(0);
@@ -436,7 +440,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 	function calculaTamanhoClasses()
 	{
 		$numclasses = $this->layer->numclasses;
-		for($i=0;$i<$numclasses;$i++)
+		for($i=0;$i<$numclasses;++$i)
 		{
 			$classe = $this->layer->getclass($i);
 			$estilo = $classe->getstyle(0);

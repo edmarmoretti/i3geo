@@ -66,9 +66,9 @@ $map_file - Endereço do mapfile no servidor.
   		//error_reporting(E_ALL);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		require_once($locaplic."/funcoes_gerais.php");
+  		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		require_once("funcoes_gerais.php");
+  		include_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
   		if(!file_exists($map_file))
   		{return $this->arquivo = false;}
@@ -76,7 +76,8 @@ $map_file - Endereço do mapfile no servidor.
   		{return $this->mapa = false;}
 		$this->mapa = @ms_newMapObj($map_file);
 		$this->arquivo = $map_file;
-		for ($i=0;$i < ($this->mapa->numlayers);$i++)
+		$c = $this->mapa->numlayers;
+		for ($i=0;$i < $c;++$i)
 		{$this->layers[] = $this->mapa->getlayer($i);}
 	}
 /*
@@ -207,9 +208,9 @@ Include:
 	function redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv)
 	{
   		if(file_exists($this->locaplic."/classe_imagem.php"))
-  		require_once($this->locaplic."/classe_imagem.php");
+  		include_once($this->locaplic."/classe_imagem.php");
   		else
-  		require_once("classe_imagem.php");
+  		include_once("classe_imagem.php");
 		$nomer = "";
 		$qy = file_exists(($this->arquivo)."qy");
 		$legenda = $this->mapa->legend;
@@ -794,7 +795,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 								if (count($parametrosClasses) > 0)
 								{
 									$ids = array_keys($parametrosClasses);
-									for($i=0;$i < count($parametrosClasses);$i++)
+									for($i=0;$i < count($parametrosClasses);++$i)
 									{
 										$p = $parametrosClasses[$ids[$i]];
 										//echo "<pre>";var_dump($p);
@@ -860,7 +861,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 								}
 								if ($nummove > 2)
 								{
-									for ($i=0;$i<=($nummove - 3);$i++)
+									for ($i=0;$i<=($nummove - 3);++$i)
 									{
 										$this->mapa->movelayerup($indicel);
 									}
@@ -1004,9 +1005,9 @@ Include:
 	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain")
 	{
 		if(file_exists($this->locaplic."/wmswfs.php"))
-		require_once($this->locaplic."/wmswfs.php");
+		include_once($this->locaplic."/wmswfs.php");
 		else
-		require_once("wmswfs.php");
+		include_once("wmswfs.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
@@ -1222,9 +1223,9 @@ $canal - Identificador do canal (ordem em que está no RSS)
 		{
 			//para manipular dbf
 			if (file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-			require_once ($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+			include_once ($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 			else
-			require_once ("../pacotes/phpxbase/api_conversion.php");
+			include_once ("../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
 			if ($tipog != "envelope"){$tipol = MS_SHP_POINT;}

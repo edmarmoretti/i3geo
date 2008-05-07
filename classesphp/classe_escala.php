@@ -67,9 +67,9 @@ $map_file - Endereço do mapfile no servidor.
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		require_once($locaplic."/funcoes_gerais.php");
+  		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		require_once("funcoes_gerais.php");
+  		include_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;

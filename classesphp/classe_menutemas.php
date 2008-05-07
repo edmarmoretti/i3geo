@@ -86,7 +86,8 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 			$this->arquivo = $map_file;
 			if ($this->mapa)
 			{
-				for ($i=0;$i < ($this->mapa->numlayers);$i++)
+				$c = $this->mapa->numlayers;
+				for ($i=0;$i < $c;++$i)
 				{$this->layers[] = $this->mapa->getlayer($i);}
 			}
 		}
@@ -151,7 +152,7 @@ array
 	{
 		$this->xml = "";
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
 		{
 			foreach ($menutemas as $m)
@@ -321,7 +322,7 @@ array
 	{
 		$this->xml = "";
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
 		{
 			foreach ($menutemas as $m)
@@ -425,7 +426,7 @@ array
 	{
 		$this->xml = "";
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
 		{
 			foreach ($menutemas as $m)
@@ -524,7 +525,7 @@ $procurar - String que será procurada.
 	{
 		$this->xml = array();
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		if ((isset($menutemas)) && ($menutemas != ""))
 		{
 			foreach ($menutemas as $m)
@@ -651,7 +652,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 		}
 		$this->xml = array();
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		if ((isset($menutemas)) && ($menutemas != ""))
 		{
 			foreach ($menutemas as $m)

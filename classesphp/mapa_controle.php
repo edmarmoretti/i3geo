@@ -119,7 +119,7 @@ if (isset($debug) && $debug == "sim")
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once ("carrega_ext.php");
-require_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("../pacotes/cpaint/cpaint2.inc.php");
 //
 //cria objeto cpaint para uso com ajax
 //
@@ -147,13 +147,13 @@ if ($funcao == "criaMapa")
 	$d = "";
 	if(!file_exists($d."ms_configura.php"))
 	$d = "../";
-	include($d."ms_configura.php");
+	include_once($d."ms_configura.php");
 	//
 	//é necessário mudar o diretório em função dos includes que são feitos pelo ms_criamapa.php
 	//
 	chdir($locaplic);
 	$interface = "mashup";
-	include("ms_criamapa.php");
+	include_once("ms_criamapa.php");
 	$cp->set_data(session_id());
 	$cp->return_data();
 	return;
@@ -165,9 +165,9 @@ if (!isset($map_file))
 	$cp->return_data();
 	exit;
 }
-require_once("classe_vermultilayer.php");
-require_once("classe_estatistica.php");
-require_once("funcoes_gerais.php");
+include_once("classe_vermultilayer.php");
+include_once("classe_estatistica.php");
+include_once("funcoes_gerais.php");
 //
 //substitui a string de conexão
 //
@@ -194,7 +194,7 @@ Include:
 <mapa_inicia.php>
 */
 	case "inicia":
-		include("mapa_inicia.php");
+		include_once("mapa_inicia.php");
 		$cp->register('iniciaMapa');
 		$cp->start();
 		if ($cp->get_data() == "")
@@ -294,7 +294,7 @@ Include:
 <classe_analise.php>
 */
 	case "incmapageometrias":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
 		$resultado = $m->incmapageometrias($dir_tmp,$imgdir,$lista);
 		$cp->set_data($resultado);
@@ -309,7 +309,7 @@ Include:
 <classe_analise.php>
 */
 	case "funcoesGeometrias":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
 		$resultado = $m->funcoesGeometrias($dir_tmp,$imgdir,$lista,$operacao);
 		$cp->set_data($resultado);
@@ -324,7 +324,7 @@ Include:
 <classe_analise.php>
 */
 	case "calculaGeometrias":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
 		$resultado = $m->calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao,$postgis_con,$srid_area);
 		$cp->set_data($resultado);
@@ -340,7 +340,7 @@ Include:
 <classe_analise.php>
 */
 	case "listageometrias":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		if(!isset($tema)){$tema = "";}
 		$m = new Temas($map_file,$tema);
 		$resultado = $m->listaGeometrias($dir_tmp,$imgdir);
@@ -357,7 +357,7 @@ Include:
 <classe_analise.php>
 */	
 	case "capturageometrias":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$resultado = $m->capturaGeometrias($dir_tmp,$imgdir,$nome);
 		$cp->set_data($resultado);
@@ -373,7 +373,7 @@ Include:
 <classe_analise.php>
 */	
 	case "removergeometrias":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		if(!isset($tema)){$tema = "";}
 		$m = new Temas($map_file,$tema);
 		$resultado = $m->removerGeometrias($dir_tmp,$imgdir,$lista);
@@ -402,7 +402,7 @@ Include:
 		$cr->set("status",MS_OFF);
 		if (connection_aborted()){exit();}
 		$map->save($map_file);
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = New Mapa($map_file);
 		$par = $m->parametrosTemas();
 		$resultado = array("mapfile"=>$map_file,"mapext"=>$mapext,"locmapserv"=>$locmapserv,"parametros"=>$par);
@@ -417,7 +417,7 @@ Property: pegaMensagens
 Pega as mensagens do metadata 'mensagem'.
 */
 	case "pegaMensagens":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$cp->set_data($m->pegaMensagens());
 				
@@ -455,7 +455,7 @@ Include:
 <classe_mapa.php>
 */
 	case "ativalogo":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ativalogo());
@@ -471,7 +471,7 @@ Include:
 <classe_mapa.php>
 */
 	case "ativalegenda":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ativalegenda());
@@ -492,7 +492,7 @@ Include:
 		$map->setsize($largura,$altura);
 		if (connection_aborted()){exit();}
 		$salvo = $map->save($map_file);
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$m->mudaQS($largura,$altura);
 		$cp->set_data("ok");
@@ -506,7 +506,7 @@ Include:
 <classe_mapa.php>
 */
 	case "gradeCoord":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->gradeCoord($intervalo,$corlinha,$larguralinha,$tipolinha,$tamanhotexto,$cortexto,$incluitexto));
@@ -522,7 +522,7 @@ Include:
 <classe_mapa.php>
 */
 	case "convertews":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		if(!isset($h)){$h = "";}
 		$resultado = $m->converteWS($locmapserv,$h);
@@ -537,7 +537,7 @@ Include:
 <classe_mapa.php>
 */
 	case "querymapcor":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corQM($cor));
@@ -553,7 +553,7 @@ Include:
 <classe_mapa.php>
 */
 	case "pegaquerymapcor":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corQM(""));
 	break;
@@ -566,7 +566,7 @@ Include:
 <classe_mapa.php>
 */
 	case "corfundo":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corfundo($cor));
@@ -582,7 +582,7 @@ Include:
 <classe_mapa.php>
 */
 	case "pegacorfundo":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$cp->set_data($m->corfundo(""));
 	break;	
@@ -606,7 +606,7 @@ Include:
 <classe_mapa.php>
 */
 	case "corpoentorno":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$resultado = $m->redesenhaEntorno();
 		$cp->set_data($resultado);
@@ -620,7 +620,7 @@ Include:
 <classe_mapa.php>
 */
 	case "adicionaTemaGeoRSS":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
@@ -641,7 +641,7 @@ Include:
 <classe_mapa.php>
 */
 	case "adicionaTemaSHP":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaSHP($arq);
@@ -662,7 +662,7 @@ Include:
 <classe_mapa.php>
 */
 	case "adicionaTemaIMG":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$retorno = $m->adicionaTemaIMG($arq);
@@ -683,7 +683,7 @@ Include:
 <classe_mapa.php>
 */	
 	case "listatemas":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$resultado = $m->listaTemas($opcao);
 		$cp->set_data($resultado);
@@ -697,7 +697,7 @@ Include:
 <classe_mapa.php>
 */		
 	case "listatemaslocais":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$resultado = $m->listaTemasLocais();
 		$cp->set_data($resultado);
@@ -711,7 +711,7 @@ Include:
 <classe_mapa.php>
 */	
 	case "listatemasTipo":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		if(!isset($selecao)){$selecao = "nao";}
 		$resultado = $m->listaTemasTipo($tipo,$selecao);
@@ -726,7 +726,7 @@ Include:
 <classe_mapa.php>
 */	
 	case "listatemascomsel":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
 		$resultado = $m->listaTemasComSel();
 		$cp->set_data($resultado);
@@ -740,7 +740,7 @@ Include:
 <classe_mapa.php>
 */		
 	case "ligatemas":
-  		include("classe_mapa.php");
+  		include_once("classe_mapa.php");
   		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->ligaDesligaTemas($ligar,$desligar));
@@ -755,7 +755,7 @@ Include:
 <classe_mapa.php>
 */	
 	case "adtema":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$m->adicionaTema($temas,$locaplic);
@@ -777,7 +777,7 @@ Include:
 <classe_mapa.php>
 */
 	case "excluitema":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$cp->set_data($m->excluiTemas($temas));
@@ -793,7 +793,7 @@ Include:
 <classe_mapa.php>
 */	
 	case "adicionatemawms":
-		include("classe_mapa.php");
+		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 	 	$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo);
@@ -844,7 +844,7 @@ Include:
 <ms_configura.php>
 */
 	case "listaDrives":
-		include("../ms_configura.php");
+		include_once("../ms_configura.php");
 		//verifica se está cadastrado
 		$ipcliente = pegaIPcliente();
 		$retorno = array();
@@ -864,7 +864,7 @@ Include:
 <classe_temas.php>
 */
 	case "alterarepresentacao":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->alteraRepresentacao());
@@ -880,7 +880,7 @@ Include:
 <classe_temas.php>
 */
 	case "geradestaque":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->geraDestaque());
 	break;
@@ -902,7 +902,7 @@ Include:
 <classe_temas.php>
 */
 	case "inserefeature":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,"");
 		if(!isset($marca)){$marca="";}
@@ -919,7 +919,7 @@ Include:
 <classe_temas.php>
 */
 	case "sobetema":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->sobeTema());
@@ -935,7 +935,7 @@ Include:
 <classe_temas.php>
 */
 	case "descetema":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->desceTema());
@@ -951,7 +951,7 @@ Include:
 <classe_temas.php>
 */
 	case "reordenatemas":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file);
 		$cp->set_data($m->reordenatemas($lista));
@@ -967,7 +967,7 @@ Include:
 <classe_temas.php>
 */
 	case "zoomtema":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->zoomTema());
@@ -983,7 +983,7 @@ Include:
 <classe_temas.php>
 */
 	case "inserefiltro":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		if(!isset($testa)){$testa="";}
@@ -1006,7 +1006,7 @@ Include:
 <classe_temas.php>
 */
 	case "pegafiltro":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$cp->set_data($m->pegaFiltro());
 	break;
@@ -1019,7 +1019,7 @@ Include:
 <classe_temas.php>
 */					
 	case "aplicaProcessos":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->aplicaProcessos($lista);
@@ -1035,7 +1035,7 @@ Include:
 <classe_temas.php>
 */					
 	case "mudatransp":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaTransparencia($valor);
@@ -1051,7 +1051,7 @@ Include:
 <classe_temas.php>
 */					
 	case "mudanome":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->mudaNome($valor);
@@ -1072,7 +1072,7 @@ Include:
 <classe_alteraclasse.php>
 */	
 	case "alteraclasse":
-		include("classe_alteraclasse.php");
+		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		if ($opcao == "adicionaclasse")
@@ -1106,7 +1106,7 @@ Include:
 <classe_alteraclasse.php>
 */	
 	case "inverteCoresClasses":
-		include("classe_alteraclasse.php");
+		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->inverteCoresClasses());
@@ -1121,7 +1121,7 @@ Include:
 <classe_alteraclasse.php>
 */	
 	case "calculaTamanhoClasses":
-		include("classe_alteraclasse.php");
+		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->calculaTamanhoClasses());
@@ -1136,7 +1136,7 @@ Include:
 <classe_alteraclasse.php>
 */	
 	case "alteraCoresClasses":
-		include("classe_alteraclasse.php");
+		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->alteraCoresClasses($cori,$corf));
@@ -1151,7 +1151,7 @@ Include:
 <classe_alteraclasse.php>
 */
 	case "inverteStatusClasse":
-		include("classe_alteraclasse.php");
+		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
 		$cp->set_data($m->statusClasse($classe));
@@ -1166,7 +1166,7 @@ Include:
 <class.palette.php>
 */	
 	case "verPaleta":
-		include("class.palette.php");
+		include_once("class.palette.php");
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
 		$myPalette=new palette(array($cori,$corf),($numclasses + 1));
@@ -1192,7 +1192,7 @@ Include:
 <classe_analise.php>
 */
 	case "dissolvePoligono":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->dissolvePoligono($item,$locaplic));
@@ -1209,7 +1209,7 @@ Include:
 <classe_analise.php>
 */
 	case "agrupaElementos":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->agrupaElementos($item,$locaplic));
@@ -1226,7 +1226,7 @@ Include:
 <classe_analise.php>
 */
 	case "pontoEmPoligono":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->pontoEmPoligono($temaPt,$temasPo,$locaplic));
@@ -1243,7 +1243,7 @@ Include:
 <classe_analise.php>
 */
 	case "nptPol":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->nptPol($temaPt,$temaPo,$locaplic));
@@ -1260,7 +1260,7 @@ Include:
 <classe_analise.php>
 */	
 	case "criabuffer":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->criaBuffer($distancia,$locaplic,$unir));
@@ -1280,7 +1280,7 @@ Include:
 <classe_analise.php>
 */	
 	case "distanciaptpt":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$temaorigem);
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
@@ -1298,7 +1298,7 @@ Include:
 <classe_analise.php>
 */	
 	case "criaCentroide":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		$cp->set_data($m->criaCentroide($locaplic));
@@ -1315,7 +1315,7 @@ Include:
 <classe_analise.php>,<class.palette.php>
 */	
 	case "analiseDistriPt":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		if(!isset($tema2))
 		{$tema2 = "";}
@@ -1336,7 +1336,7 @@ Include:
 <classe_analise.php>
 */	
 	case "gradedepontos":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
@@ -1354,7 +1354,7 @@ Include:
 <classe_analise.php>
 */	
 	case "gradedepol":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
@@ -1372,7 +1372,7 @@ Include:
 <classe_analise.php>
 */	
 	case "gradedehex":
-		include("classe_analise.php");
+		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
 		if(!isset($tema)){$tema = "";}
@@ -1395,7 +1395,7 @@ Include:
 <classe_shp.php>
 */
 	case "sphPT2shp":
-		include("classe_shp.php");
+		include_once("classe_shp.php");
 		$m = new SHP($map_file,$tema);
 		$cp->set_data($m->shpPT2shp($locaplic,$para));
 		$m->salva();
@@ -1409,7 +1409,7 @@ Include:
 <classe_shp.php>
 */
 	case "listaPontosShape":
-		include("classe_shp.php");
+		include_once("classe_shp.php");
 		$m = new SHP($map_file,$tema);
 		$cp->set_data($m->listaPontosShape());
 	break;
@@ -1422,7 +1422,7 @@ Include:
 <classe_shp.php>
 */
 	case "criashpvazio":
-		include("classe_shp.php");
+		include_once("classe_shp.php");
 		//se colocar aqui da um erro
 		//copiaSeguranca($map_file);
 		$m = new SHP($map_file);
@@ -1438,7 +1438,7 @@ Include:
 <classe_shp.php>
 */
 	case "insereSHP":
-		include("classe_shp.php");
+		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema);
 		if (!isset($projecao)){$projecao = "";}
@@ -1456,7 +1456,7 @@ Include:
 <classe_shp.php>
 */
 	case "insereSHPgrafico":
-		include("classe_shp.php");
+		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema,$locaplic);
 		$cp->set_data($m->insereSHPgrafico($tipo,$x,$y,$itens,$imgurl,$width,$inclinacao,$shadow_height));
@@ -1483,7 +1483,7 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 
 */					
 	case "graficoSelecao":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->set_data(iniciaDadosGrafico($map_file,$tema,"",$itemclasses,$itemvalores,"xy",false));
 	break;
 /*
@@ -1495,7 +1495,7 @@ Include:
 <classe_temas.php>
 */					
 	case "graficotema":
-		include("classe_temas.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
@@ -1511,7 +1511,7 @@ Include:
 <graficos.php>
 */	
 	case "fusaografico":
-		include("graficos.php");
+		include_once("graficos.php");
 		//$_SESSION["utilizacgi"] = "nao";
 		//$utilizacgi = "nao";
 		restauraCon($map_file,$postgis_mapa);
@@ -1527,7 +1527,7 @@ Include:
 <graficos.php>
 */	
 	case "graficoestrela":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoEstrela');
 		$cp->start();
 	break;
@@ -1540,7 +1540,7 @@ Include:
 <graficos.php>
 */	
 	case "graficoscatter":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoScatter');
 		$cp->start();
 	break;
@@ -1553,7 +1553,7 @@ Include:
 <graficos.php>
 */	
 	case "graficoscatterbins":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoScatterBins');
 		$cp->start();
 	break;
@@ -1566,7 +1566,7 @@ Include:
 <graficos.php>
 */
 	case "graficolinhas":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoLinhas');
 		$cp->start();
 	break;
@@ -1579,7 +1579,7 @@ Include:
 <graficos.php>
 */
 	case "graficohist":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoHist');
 		$cp->start();
 	break;
@@ -1592,7 +1592,7 @@ Include:
 <graficos.php>
 */
 	case "graficobarras":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoBarras');
 		$cp->start();
 	break;
@@ -1605,7 +1605,7 @@ Include:
 <graficos.php>
 */
 	case "graficopizza":
-		include("graficos.php");
+		include_once("graficos.php");
 		$cp->register('graficoPizza');
 		$cp->start();
 	break;
@@ -1621,7 +1621,7 @@ Pega a lista de tags registrados nos menus de temas.
 
 */
 	case "listaTags":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		$cp->set_data($m->listatags($rss,$nrss));
 	break;
@@ -1635,7 +1635,7 @@ Parameters:
 	case "pegalistademenus":
 		$menutemas = "";
 		if (file_exists("../ms_configura.php"))
-		{require_once("../ms_configura.php");}
+		{include_once("../ms_configura.php");}
 		$cp->set_data($menutemas);
 	break;
 /*
@@ -1656,7 +1656,7 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadegrupos":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
@@ -1672,7 +1672,7 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadeSubgrupos":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		$cp->set_data($m->pegaListaDeSubGrupos($grupo,$idmenu));
 	break;
@@ -1685,7 +1685,7 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadetemas":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
 	break;
@@ -1698,7 +1698,7 @@ Include:
 <classe_menutemas.php>
 */
 	case "procurartemas":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil);
 		$cp->set_data($m->procurartemas($procurar));
 	break;
@@ -1713,7 +1713,7 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegaMapas":
-		include("classe_menutemas.php");
+		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil);
 		$cp->set_data($m->pegaListaDeMapas($locmapas));
 	break;	
@@ -1740,7 +1740,7 @@ Include:
 <wmswfs.php>
 */
 	case "getcapabilities":
-		include("wmswfs.php");
+		include_once("wmswfs.php");
 		$cp->register('getcapabilities');
 		restauraCon($map_file,$postgis_mapa);
 		$cp->start();
@@ -1754,7 +1754,7 @@ Include:
 <wmswfs.php>
 */
 	case "getcapabilities2":
-		include("wmswfs.php");
+		include_once("wmswfs.php");
 		$cp->register('getcapabilities2');
 		restauraCon($map_file,$postgis_mapa);
 		$cp->start();
@@ -1768,7 +1768,7 @@ Include:
 <wmswfs.php>
 */
 	case "getcapabilities3":
-		include("wmswfs.php");
+		include_once("wmswfs.php");
 		$cp->register('getcapabilities3');
 		restauraCon($map_file,$postgis_mapa);
 		$cp->start();
@@ -1782,7 +1782,7 @@ Include:
 <wmswfs.php>
 */	
 	case "temaswms":
-		include("wmswfs.php");
+		include_once("wmswfs.php");
 		restauraCon($map_file,$postgis_mapa);
 		$cp->register('temaswms');
 		$cp->start();
@@ -1812,7 +1812,7 @@ Include:
 <classe_atributos.php>
 */
 	case "listaitens":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->listaItens());
 	break;
@@ -1825,7 +1825,7 @@ Include:
 <classe_atributos.php>
 */	
 	case "listavaloresitens":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->buscaRegistros($palavra,$lista,$tipo,$onde));
@@ -1841,7 +1841,7 @@ Include:
 	case "identifica":
 		if (!isset($tema)){$tema = "";}
 		if (!isset($resolucao)){$resolucao = 5;}
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->identifica($opcao,$xy,$resolucao));
 	break;
@@ -1855,7 +1855,7 @@ Include:
 */
 	case "identificaunico":
 		if (!isset($resolucao)){$resolucao = 5;}
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$xy = explode(",",$xy);
 		$cp->set_data($m->identificaQBP($tema,$xy[0],$xy[1],$map_file,$resolucao,$item,$tiporetorno="unico"));
@@ -1869,7 +1869,7 @@ Include:
 <classe_atributos.php>
 */	
 	case "estatistica":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->estatDescritivas($item,$exclui));
 	break;
@@ -1882,7 +1882,7 @@ Include:
 <classe_atributos.php>
 */	
 	case "listatexto":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->itensTexto($tipo));
 	break;
@@ -1895,7 +1895,7 @@ Include:
 <classe_atributos.php>
 */	
 	case "listaregistros":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		if(!isset($tipo)){$tipo = "";}
 		if(!isset($inicio)){$inicio = 0;}
@@ -1913,7 +1913,7 @@ Include:
 <classe_atributos.php>
 */		
 	case "extregistros":
-		include("classe_atributos.php");
+		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->extensaoRegistro($registro));
 		$m->salva();
@@ -1952,7 +1952,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "mudaext":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		if (!isset($ext) || $ext == "" || $ext == " "){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
 		$m = new Navegacao($map_file);
@@ -1969,7 +1969,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "mudaescala":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->mudaEscala($escala);
@@ -1985,7 +1985,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "pan":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->pan($x,$y,$escala,$tipo);
@@ -2001,7 +2001,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "aproxima":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->aproxima($nivel);
@@ -2017,7 +2017,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "afasta":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->afasta($nivel);
@@ -2033,7 +2033,7 @@ Include:
 <classe_navegacao.php>
 */
 	case "crialente":
-		include("classe_navegacao.php");
+		include_once("classe_navegacao.php");
 		$m = new Navegacao($map_file);
 		$m->aplicaResolucao($resolucao);
 		//$m->desabilitaRASTER();
@@ -2070,8 +2070,8 @@ Include:
 <classe_navegacao.php>
 */
 	case "zoomponto":
-		include("classe_navegacao.php");
-		include("classe_temas.php");
+		include_once("classe_navegacao.php");
+		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
 		$m->zoomPonto($xy);
@@ -2095,7 +2095,7 @@ Include:
 <classe_legenda.php>
 */
 	case "editasimbolo":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		copiaSeguranca($map_file);
 		if(!isset($tema)){$tema = "";}
 		$m = new Legenda($map_file,$locaplic,$tema);
@@ -2138,7 +2138,7 @@ Include:
 <classe_legenda.php>
 */
 	case "editalegenda":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda();
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
@@ -2153,7 +2153,7 @@ Include:
 <classe_legenda.php>
 */
 	case "criaLegendaHTML":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		//para efeitos de compatibilidade com versões anteriores
 		if(isset($template)){$templateLegenda = $template;}
 		$m = new Legenda($map_file,$locaplic,$tema,$templateLegenda);
@@ -2170,7 +2170,7 @@ Include:
 <classe_legenda.php>
 */
 	case "contagemclasse":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda("sim");
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
@@ -2185,7 +2185,7 @@ Include:
 <classe_legenda.php>
 */
 	case "criaLegendaImagem":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		$m = new Legenda($map_file);
 		$cp->set_data($m->legendaGrafica());
 	break;
@@ -2198,7 +2198,7 @@ Include:
 <classe_legenda.php>
 */
 	case "pegaParametrosLegImg":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		$m = new Legenda($map_file);
 		$cp->set_data($m->pegaParametrosLegImg());
 	break;
@@ -2211,7 +2211,7 @@ Include:
 <classe_legenda.php>
 */
 	case "aplicaParametrosLegImg":
-		include("classe_legenda.php");
+		include_once("classe_legenda.php");
 		//
 		//no caso da opção de legenda incluida no mapa, o modo cgi não desenha a imagem corretamente
 		//
@@ -2238,7 +2238,7 @@ Include:
 <classe_escala.php>
 */
 	case "escalagrafica":
-		include("classe_escala.php");
+		include_once("classe_escala.php");
 		$m = new Escala($map_file);
 		$cp->set_data($m->retornaBarraEscala());
 	break;
@@ -2251,7 +2251,7 @@ Include:
 <classe_escala.php>
 */
 	case "testaescalagrafica":
-		include("classe_escala.php");
+		include_once("classe_escala.php");
 		$m = new Escala($map_file);
 		$cp->set_data($m->testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor));
 	break;
@@ -2264,7 +2264,7 @@ Include:
 <classe_escala.php>
 */
 	case "escalaparametros":
-		include("classe_escala.php");
+		include_once("classe_escala.php");
 		$m = new Escala($map_file);
 		$cp->set_data($m->parametrosBarraEscala());
 	break;
@@ -2277,7 +2277,7 @@ Include:
 <classe_escala.php>
 */
 	case "mudaescalagrafica":
-		include("classe_escala.php");
+		include_once("classe_escala.php");
 		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
 		$cp->set_data($m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor));
@@ -2296,7 +2296,7 @@ Include:
 <classe_selecao.php>
 */	
 	case "selecaopt":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoPT($xy,$tipo,$tolerancia));
@@ -2310,7 +2310,7 @@ Include:
 <classe_selecao.php>
 */	
 	case "selecaoext":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoEXT($tipo));
@@ -2324,7 +2324,7 @@ Include:
 <classe_selecao.php>
 */	
 	case "selecaobox":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoBOX($tipo,$ext));
@@ -2339,7 +2339,7 @@ Include:
 <classe_selecao.php>
 */
 	case "selecaoatrib":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoAtributos($tipo,$item,$operador,$valor));
@@ -2353,7 +2353,7 @@ Include:
 <classe_selecao.php>
 */
 	case "selecaotema":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoTema($temao,$tipo));
@@ -2384,7 +2384,7 @@ Include:
 <classe_selecao.php>
 */
 	case "limpasel":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecaoLimpa());
 	break;
@@ -2397,7 +2397,7 @@ Include:
 <classe_selecao.php>
 */
 	case "incluisel":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->incluiSel($ids));
 	break;
@@ -2410,7 +2410,7 @@ Include:
 <classe_selecao.php>
 */
 	case "criatemasel":
-		include("classe_selecao.php");
+		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$cp->set_data($m->selecao2tema($locaplic,$dir_tmp));
@@ -2430,7 +2430,7 @@ Include:
 <classe_toponimia.php>
 */	
 	case "criatoponimia":
-		include("classe_toponimia.php");
+		include_once("classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		if(!isset($tipo)){$tipo="";}
@@ -2447,7 +2447,7 @@ Include:
 <classe_toponimia.php>
 */
 	case "ativaEtiquetas":
-		include("classe_toponimia.php");
+		include_once("classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$cp->set_data($m->ativaEtiquetas($item));
@@ -2462,7 +2462,7 @@ Include:
 <classe_toponimia.php>
 */
 	case "removeEtiquetas":
-		include("classe_toponimia.php");
+		include_once("classe_toponimia.php");
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$cp->set_data($m->removeEtiquetas());
@@ -2560,7 +2560,7 @@ Include:
 function selecaoPoli($xs,$ys,$tema,$tipo)
 {
 	global $map_file,$cp;
-	include("classe_selecao.php");
+	include_once("classe_selecao.php");
 	$m = new Selecao($map_file,$tema);
 	$cp->set_data($m->selecaoPorPoligono($tipo,$xs,$ys));
 	$m->salva();

@@ -60,7 +60,7 @@ function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
 	$trans = 250 / ($maxvalor - $minvalor);
 	$intervalo = (($maxvalor*$trans) - ($minvalor*$trans)) / $nclasses;
 	$conta = 0;
-	for ($i=0; $i < $nclasses; $i++)
+	for ($i=0; $i < $nclasses; ++$i)
 	{
 		$expressao = "([pixel]>=".$conta." and [pixel]<".($conta+$intervalo).")";
 		$nomeclasse = ">= ".($conta/$trans)." e < que ".(($conta + $intervalo)/$trans);
@@ -408,7 +408,7 @@ function nomeRandomico($n=10)
 	$nomes = "";
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$max = strlen($a)-1;
-	for($i=0; $i < $n; $i++)
+	for($i=0; $i < $n; ++$i)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
 }
@@ -427,7 +427,8 @@ function listaEpsg()
 		$linhas[] = $buffer;
 	}
 	fclose($abre);
-	for ($i=0;$i < count($linhas);$i=$i+2)
+	$cl = count($linhas);
+	for ($i=0;$i < $cl;$i=$i+2)
 	{
 		$n = $linhas[$i];
 		$n = str_replace("#","",$n);
@@ -656,7 +657,7 @@ function substituiCon($map_file,$postgis_mapa)
 		{
 			$objMap = ms_newMapObj($map_file);
 			$numlayers = $objMap->numlayers;
-			for ($i=0;$i < $numlayers;$i++)
+			for ($i=0;$i < $numlayers;++$i)
 			{
 				$layer = $objMap->getlayer($i);
 				if ($layer->connectiontype == MS_POSTGIS)
@@ -688,7 +689,7 @@ function restauraCon($map_file,$postgis_mapa)
 	{
 		$objMap = ms_newMapObj($map_file);
 		$numlayers = $objMap->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$layer = $objMap->getlayer($i);
 			if ($layer->connectiontype == MS_POSTGIS)
@@ -778,7 +779,7 @@ function retornaReferenciaDinamica()
 	//
 	$objMapa = ms_newMapObj($map_file);
 	$numlayers = $objMapa->numlayers;
-	for ($i=0;$i < $numlayers;$i++)
+	for ($i=0;$i < $numlayers;++$i)
 	{
 		$layer = $objMapa->getlayer($i);
 		$layer->set("status",MS_OFF);
@@ -919,7 +920,7 @@ Objeto map alterado.
 function desligaTemas($objMapa)
 {
 	$numlayers = $objMapa->numlayers;
-	for ($i=0;$i < $numlayers;$i++)
+	for ($i=0;$i < $numlayers;++$i)
 	{
 		$layer = $objMapa->getlayer($i);
 		$layer->set("status",MS_OFF);
@@ -1008,7 +1009,7 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 		$layer->open();
 		$res_count = $layer->getNumresults();
 		$valitem = array();
-		for ($i=0;$i<$res_count;$i++)
+		for ($i=0;$i<$res_count;++$i)
 		{
 			$result = $layer->getResult($i);
 			$shp_index  = $result->shapeindex;
@@ -1070,7 +1071,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 	{
 		$layer->open();
 		$res_count = $layer->getNumresults(); 	
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $layer->getResult($i);
 			$indicesel[] = $result->shapeindex;
@@ -1082,7 +1083,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 	{
 		$layer->open();
 		$res_count = $layer->getNumresults();
-		for ($i=0;$i<$res_count;$i++)
+		for ($i=0;$i<$res_count;++$i)
 		{
 			$result = $layer->getResult($i);
 			$shp_index = $result->shapeindex;
@@ -1203,8 +1204,8 @@ array com o resultado.
 */
 function buscaRapida($servico,$palavra)
 {
-	require_once('../pacotes/SOAP/nusoap.php');
-	//require_once("../pacotes/SOAP/easy_parser.inc");
+	include_once('../pacotes/SOAP/nusoap.php');
+	//include_once("../pacotes/SOAP/easy_parser.inc");
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	if (@$p = $soapclient->getproxy())
 	{
@@ -1236,8 +1237,8 @@ function ip2geo($ip,$locaplic="..")
 	$resultado = array();
 	if (file_exists($locaplic."/pacotes/geoip/geoipcity.inc"))
 	{
-		require_once($locaplic."/pacotes/geoip/geoipcity.inc");
-		require_once($locaplic."/pacotes/geoip/geoipregionvars.php");
+		include_once($locaplic."/pacotes/geoip/geoipcity.inc");
+		include_once($locaplic."/pacotes/geoip/geoipregionvars.php");
 		$gi = geoip_open($locaplic."/pacotes/geoip/GeoLiteCity.dat",GEOIP_STANDARD);
 		$record = geoip_record_by_addr($gi,$ip);
 		$resultado["country_code"] = $record->country_code . " " . $record->country_code3 . " " . $record->country_name;
@@ -1324,7 +1325,8 @@ function xy2wkt($xy)
 	$shplin = ms_newshapeobj(MS_SHAPE_LINE);
 	$shppol = ms_newshapeobj(MS_SHAPE_POLYGON);
 	$lin = ms_newlineobj();
-	for ($i = 0;$i < count($apt); $i = $i + 2)
+	$capt = count($apt);
+	for ($i = 0;$i < $capt; $i = $i + 2)
 	{$lin->addxy($apt[$i],$apt[$i + 1]);}
 	$shppt->add($lin);
 	if (count($apt) < 4)
@@ -1532,9 +1534,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 {
 	//para manipular dbf
 	if(file_exists($locaplic."/pacotes/phpxbase/api_conversion.php"))
-	require_once($locaplic."/pacotes/phpxbase/api_conversion.php");
+	include_once($locaplic."/pacotes/phpxbase/api_conversion.php");
 	else	
-	require_once "../pacotes/phpxbase/api_conversion.php";
+	include_once "../pacotes/phpxbase/api_conversion.php";
 	$map = @ms_newMapObj($map_file);
 	$layer = $map->getlayerbyname($tema);
 	$layer->set("template","none.htm");
@@ -1601,7 +1603,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		if ($res_count > 0)
 		{
 			$abriu = $layer->open();
-			for ($i = 0; $i < $res_count; $i++)
+			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $layer->getResult($i);
 				$shp_index  = $result->shapeindex;
@@ -1647,9 +1649,9 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 {
 	ini_set("max_execution_time","1800");
 	if(file_exists($locaplic."/ms_configura.php"))
-	require_once($locaplic."/ms_configura.php");
+	include_once($locaplic."/ms_configura.php");
 	else	
-	require_once("../ms_configura.php");
+	include_once("../ms_configura.php");
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -1825,7 +1827,8 @@ function versao()
 {
 	$v = "5.0.0";
 	$vs = explode(" ",ms_GetVersion());
-	for ($i=0;$i<(count($vs));$i++)
+	$cvs = count($vs);
+	for ($i=0;$i<$cvs;++$i)
 	{
 		if(trim(strtolower($vs[$i])) == "version")
 		{$v = $vs[$i+1];}
@@ -1947,7 +1950,7 @@ function autoClasses(&$nlayer,$mapa)
 		if (count($parametrosClasses) > 0)
 		{
 			$ids = array_keys($parametrosClasses);
-			for($i=0;$i < count($parametrosClasses);$i++)
+			for($i=0;$i < count($parametrosClasses);++$i)
 			{
 				$p = $parametrosClasses[$ids[$i]];
 				//echo "<pre>";var_dump($p);

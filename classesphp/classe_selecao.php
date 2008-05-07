@@ -116,7 +116,7 @@ $ys - lista de coordenadas y separadas por virgula
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -128,7 +128,7 @@ $ys - lista de coordenadas y separadas por virgula
 		$linha = ms_newLineObj();
 		$xs = explode(",",$xs);
 		$ys = explode(",",$ys);
-		for($i=0;$i<(count($xs));$i++)
+		for($i=0;$i<(count($xs));++$i)
 		{
 			$linha->addxy($xs[$i],$ys[$i]);
 		}
@@ -136,7 +136,7 @@ $ys - lista de coordenadas y separadas por virgula
 		$s->add($linha);
 		$this->layer->querybyshape($s);
 		$res_count = $this->layer->getNumresults();
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $this->layer->getResult($i);
 			$shpi[]  = $result->shapeindex;
@@ -180,7 +180,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($res_counto == 0)
 		{return("erro. O tema de sobreposicao nao possui selecao.");}
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -193,7 +193,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{
 			$layero->open();
 			$res_count = $layero->getNumresults();
-			for ($i = 0; $i < $res_count; $i++)
+			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $layero->getResult($i);
 				$s  = $result->shapeindex;
@@ -256,7 +256,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 					{
 						$this->layer->querybyshape($s);
 						$res_count = $this->layer->getNumresults();
-						for ($i = 0; $i < $res_count; $i++)
+						for ($i = 0; $i < $res_count; ++$i)
 						{
 							$result = $this->layer->getResult($i);
 							$shpi[]  = $result->shapeindex;
@@ -327,7 +327,7 @@ $valor - Valor.
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -340,7 +340,7 @@ $valor - Valor.
 		{$this->layer->querybyattributes($item,'("['.$item.']"'.$operador.'"'.$valor.'")',1);}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $this->layer->getResult($i);
 			$shpi[]  = $result->shapeindex;
@@ -374,7 +374,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -424,7 +424,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{
 			$res_count = $this->layer->getNumresults();
 			$shpi = array();
-			for ($i = 0; $i < $res_count; $i++)
+			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $this->layer->getResult($i);
 				$shpi[]  = $result->shapeindex;
@@ -472,7 +472,7 @@ Inverte seleção do tema.
 		$items = pegaItens($this->layer);
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -484,7 +484,7 @@ Inverte seleção do tema.
 		$this->layer->queryByrect($this->mapa->extent);
 		$res_count = $this->layer->getNumresults();
 		$shp_todos = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_todos[] = $rc->shapeindex;
@@ -617,7 +617,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -630,7 +630,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{
 			$res_count = $this->layer->getNumresults();
 			$shpi = array();
-			for ($i = 0; $i < $res_count; $i++)
+			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $this->layer->getResult($i);
 				$shpi[]  = $result->shapeindex;
@@ -665,7 +665,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
-		for ($i = 0; $i < $res_count;$i++)
+		for ($i = 0; $i < $res_count;++$i)
 		{
 			$rc = $this->layer->getResult($i);
 			$shp_atual[] = $rc->shapeindex;
@@ -683,7 +683,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		{
 			$res_count = $this->layer->getNumresults();
 			$shpi = array();
-			for ($i = 0; $i < $res_count; $i++)
+			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $this->layer->getResult($i);
 				$shpi[]  = $result->shapeindex;

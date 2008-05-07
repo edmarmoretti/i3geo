@@ -91,9 +91,9 @@ $tema - nome do tema que será processado
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		require_once($locaplic."/funcoes_gerais.php");
+  		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		require_once("funcoes_gerais.php");
+  		include_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -239,7 +239,7 @@ Altera a ordem de armazenamento dos layers no mapfile.
 		}
 		foreach ($this->indices as $indice)
 		{
-			for ($i=0;$i<$mover;$i++)
+			for ($i=0;$i<$mover;++$i)
 			{$moveu = $this->mapa->moveLayerUp($indice);}
 		}
 		if ($moveu == MS_TRUE)
@@ -286,7 +286,7 @@ Altera a ordem de armazenamento dos layers no mapfile.
 		}
 		foreach ($indices as $indice)
 		{
-			for ($i=0;$i<$mover;$i++)
+			for ($i=0;$i<$mover;++$i)
 			{$moveu = $this->mapa->moveLayerDown($indice);}
 		}
 		if ($moveu == MS_TRUE)
@@ -314,7 +314,7 @@ lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas 
 		$escondidos = array();
 		foreach ($lista as $l)
 		{
-			for ($i=0;$i<$nlayers;$i++)
+			for ($i=0;$i<$nlayers;++$i)
 			{
 				$la = $this->mapa->getlayer($i);
 				$g = strtoupper($la->group);
@@ -324,7 +324,7 @@ lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas 
 				{$novaordem[] = $i;}
 			}
 		}
-		for ($i=0;$i<$nlayers;$i++)
+		for ($i=0;$i<$nlayers;++$i)
 		{
 			if (!in_array($i,$novaordem))
 			{$novaordem[] = $i;}
@@ -678,7 +678,7 @@ $nome - nome que será dado a geometria
 		$res_count = $this->layer->getNumresults();
 		$final["layer"] = pegaNome($this->layer);
 		$registros = array();
-		for ($i = 0; $i < $res_count; $i++)
+		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valitem = array();
 			$result = $this->layer->getResult($i);
@@ -793,7 +793,7 @@ lista - lista de item e cores de cada parte do grafico
 		$novolayer->setprocessing("CHART_TYPE=$tipo");
 		$novolayer->setprocessing("CHART_SIZE=$tamanho");
 		$nclasses = $novolayer->numclasses;
-		for ($i=0; $i < $nclasses; $i++)
+		for ($i=0; $i < $nclasses; ++$i)
 		{
 			$c = $novolayer->getclass($i);
 			$c->set("status",MS_DELETE);

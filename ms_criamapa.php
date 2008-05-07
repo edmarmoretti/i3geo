@@ -104,16 +104,15 @@ Note: Carrega as extensões PHP
 Carrega as extensões utilizadas no programa de inicialização. 
 A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
 */
-require_once ($caminho."classesphp/carrega_ext.php");
+include_once ($caminho."classesphp/carrega_ext.php");
 /*
 Note: Include dos arquivos PHP.
 
 Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 */
-require_once ($caminho."classesphp/pega_variaveis.php");
-require_once ($caminho."classesphp/funcoes_gerais.php");
-require_once ($caminho."ms_configura.php");
-
+include_once ($caminho."classesphp/pega_variaveis.php");
+include_once ($caminho."classesphp/funcoes_gerais.php");
+include_once ($caminho."ms_configura.php");
 if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else
@@ -367,7 +366,7 @@ $_SESSION["mapext"] = $mapext;
 if (isset($executa))
 {
 	if (file_exists($executa))
-	{include ($executa);}
+	{include_once ($executa);}
 	if (function_exists($executa))
 	{eval($executa."();");}
 }
@@ -434,7 +433,7 @@ Faz alterações em cada layer caso sejam necessárias.
 */
 $mapa = ms_newMapObj($tmpfname);
 $path = $mapa->shapepath;
-for($i=0;$i<($mapa->numlayers);$i++)
+for($i=0;$i<($mapa->numlayers);++$i)
 {
 	$layer = $mapa->getLayer($i);
 	$ok = true;
@@ -512,7 +511,7 @@ function ligaTemas()
 			$grupos = $mapn->getLayersIndexByGroup($l);
 			if(count($grupos) > 0)
 			{
-				for ($i = 0;$i < count($grupos);$i++)
+				for ($i = 0;$i < count($grupos);++$i)
 				{
 					$layern = $mapn->getLayer($grupos[$i]);
 					if(strtolower($layern->group) == strtolower($l))
@@ -562,7 +561,7 @@ function incluiTemasIniciais()
 			else
 			{
 				$maptemp = @ms_newMapObj($arqtemp);
-				for($i=0;$i<($maptemp->numlayers);$i++)
+				for($i=0;$i<($maptemp->numlayers);++$i)
 				{
 					$layern = $maptemp->getLayer($i);
 					if($layern->type == MS_LAYER_RASTER)
@@ -644,7 +643,7 @@ Insere elementos no mapa a partir de uma string definida em wkt
 function insereWKTUrl()
 {
 	global $wkt,$nometemawkt,$dir_tmp,$imgdir,$tmpfname,$locaplic;
-	require_once "pacotes/phpxbase/api_conversion.php";
+	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapontos))
 	{$nometemapontos="WKT";}
 	if ($nometemapontos == "")
@@ -711,7 +710,7 @@ Insere um novo tema com os pontos definidos na variável $pontos
 function inserePontosUrl()
 {
 	global $pontos,$nometemapontos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
-	require_once "pacotes/phpxbase/api_conversion.php";
+	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapontos))
 	{$nometemapontos="Pontos";}
 	if ($nometemapontos == "")
@@ -775,7 +774,7 @@ As linhas devem ter os pontos separados por espaços e cada linha separada por ví
 function insereLinhasUrl()
 {
 	global $linhas,$nometemalinhas,$dir_tmp,$imgdir,$tmpfname,$locaplic;
-	require_once "pacotes/phpxbase/api_conversion.php";
+	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemalinhas))
 	{$nometemalinhas="Linhas";}
 	if ($nometemalinhas == "")
@@ -849,7 +848,7 @@ Os polígonos devem ter os pontos separados por espaços e cada polígono separado 
 function inserePoligonosUrl()
 {
 	global $poligonos,$nometemapoligonos,$dir_tmp,$imgdir,$tmpfname,$locaplic;
-	require_once "pacotes/phpxbase/api_conversion.php";
+	include_once "pacotes/phpxbase/api_conversion.php";
 	if (!isset($nometemapoligonos))
 	{$nometemapoligonos="Poligonos";}
 	if ($nometemapoligonos == "")

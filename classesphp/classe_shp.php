@@ -102,9 +102,9 @@ Nome do tema criado.
 	function criaSHPvazio()
 	{
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
-		require_once "../pacotes/phpxbase/api_conversion.php";
+		include_once "../pacotes/phpxbase/api_conversion.php";
 		$diretorio = dirname($this->arquivo);
 		$tipol = MS_SHP_POINT;
 		$novonomelayer = nomeRandomico();
@@ -145,9 +145,9 @@ $projecao - código epsg da projeção das coordenadas
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
-		require_once "../pacotes/phpxbase/api_conversion.php";
+		include_once "../pacotes/phpxbase/api_conversion.php";
 		$xy = explode(" ",$xy);
 		$data = $this->layer->data;
 		$data = explode(".shp",$data);
@@ -155,7 +155,7 @@ $projecao - código epsg da projeção das coordenadas
 		$items = pegaItens($this->layer);
 		$dbname = $data.".dbf";
 		$db=xbase_open($dbname,2);
-		for($i=0;$i<(count($xy) / 2);$i++)
+		for($i=0;$i<(count($xy) / 2);++$i)
 		{
 			$reg = array();
 			foreach ($items as $ni)
@@ -309,9 +309,9 @@ $para - linha|poligono
 	{
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		require_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
+		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
-		require_once "../pacotes/phpxbase/api_conversion.php";
+		include_once "../pacotes/phpxbase/api_conversion.php";
 		$this->layer->set("template","none.htm");
 		$diretorio = dirname($this->arquivo);
 		$tipol = MS_SHP_ARC;

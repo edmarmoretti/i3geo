@@ -97,7 +97,7 @@ function wms_exceptions ( $dom ) {
   $ctx = xpath_new_context($dom);
   $xpnode = xpath_eval($ctx,$xp);
   $arr = array();
-  for( $i = 0; $i < sizeof($xpnode->nodeset); $i++ ) {
+  for( $i = 0; $i < sizeof($xpnode->nodeset); ++$i ) {
     $dtnode = $xpnode->nodeset[0]->first_child();
     array_push($arr,$dtnode->content);
   }

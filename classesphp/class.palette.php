@@ -60,7 +60,7 @@ $numSteps - número de cores finais
     if(sizeof($this->colors)<2) return(FALSE);
     $steps=floor($this->numSteps/(sizeof($this->colors)-1));
     $steps=ceil(($this->numSteps-sizeof($this->colors))/(sizeof($this->colors)-1))+1;
-    for($i=0;$i<sizeof($this->colors)-1;$i++){
+    for($i=0;$i<sizeof($this->colors)-1;++$i){
       $this->fade($this->colors[$i],$this->colors[$i+1],$steps);
     }
   }
@@ -69,7 +69,7 @@ $numSteps - número de cores finais
     $from=$this->longHexToDec($from);
     if(sizeof($this->colorPath)==0) array_push($this->colorPath,$this->decToLongHex($from));
     $to=$this->longHexToDec($to);
-    for($i=1;$i<$steps;$i++){
+    for($i=1;$i<$steps;++$i){
       $nColor=$this->setColorHue($from,$i/$steps,$to);
       if(sizeof($this->colorPath)<$this->numSteps)
       {
@@ -106,7 +106,7 @@ $numSteps - número de cores finais
 
   public function printTest(){
     $string="<table border=\"1\">\n\t<tr>\n";
-    for($i=0;$i<sizeof($this->colorPath);$i++){
+    for($i=0;$i<sizeof($this->colorPath);++$i){
       $string.="\t\t<td bgcolor=\"#" . $this->colorPath[$i] . "\">" . $this->colorPath[$i] . "</td>\n";
     }
     $string.="\t</tr>\n</table>\n";

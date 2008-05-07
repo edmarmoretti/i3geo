@@ -398,7 +398,7 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	if ($tipo != "xy")
 	{
 		$nnval[] = "n;x";
-		for ($i=0;$i < $nval; $i++)
+		for ($i=0;$i < $nval; ++$i)
 		{
 			if ($dados[$tempm[$i]] > 0)
 			{

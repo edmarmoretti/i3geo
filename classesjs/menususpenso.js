@@ -37,17 +37,20 @@ function montaMenuSuspenso(iddiv)
 	if($i(iddiv))
 	{
 		$i(iddiv).className="yuimenubar yuimenubarnav";
+
 		if(oMenuData.ajudas)
 		{
 			var ins='<div class="bd" style="z-index:2000;" >';
 			ins += '<ul class="first-of-type">';
-
 			ins += '<li class="yuimenubaritemlabel"><a id="menuajuda" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
 			ins += '<li class="yuimenubaritemlabel"><a id="menuanalise" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
  			ins += '<li class="yuimenubaritemlabel"><a id="menujanelas" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
  			ins += '<li class="yuimenubaritemlabel"><a id="menuarquivos" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
+ 			if(objmapa.w >= 500)
 			ins += '<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />&nbsp;<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />&nbsp;<img src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
- 			ins += '</ul>'; ins+='</div>'; $i("menus").innerHTML=ins;
+ 			ins += '</ul>'; 
+ 			ins+='</div>';
+ 			$i("menus").innerHTML=ins;
  		}
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
 		{

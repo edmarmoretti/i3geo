@@ -110,9 +110,9 @@ $template - nome do template para processar a legenda
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
-  		require_once($locaplic."/funcoes_gerais.php");
+  		include_once($locaplic."/funcoes_gerais.php");
   		else
-  		require_once("funcoes_gerais.php");
+  		include_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->localaplicacao = $locaplic;
@@ -181,7 +181,7 @@ string com a legenda HTML
 			{
 				return($this->tabelaLegenda());
 			}
-			for ($i=0;$i < $numlayers;$i++)
+			for ($i=0;$i < $numlayers;++$i)
 			{
 				$la = $this->mapa->getlayer($i);
 				if ($la->name != $this->nome)
@@ -193,7 +193,7 @@ string com a legenda HTML
 		$desligar = array();
 		$conta = 0;
 		$desligar = array();
-		for ($i=0;$i < $numlayers;$i++)
+		for ($i=0;$i < $numlayers;++$i)
 		{
 			$la = $this->mapa->getlayer($i);
 			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM")
@@ -435,7 +435,7 @@ function listaSimbolos($tipo,$dir_tmp,$imgdir)
 		$l = $mapatemp->getlayer(0);
 		$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
 		$this->mapa->setsymbolset($novoss);
-		for ($i=0;$i < $ns;$i++)
+		for ($i=0;$i < $ns;++$i)
 		{
 			$oSymbol = $this->mapa->getSymbolObjectById($i);
 			$nomes = $oSymbol->name;
@@ -459,7 +459,7 @@ function listaSimbolos($tipo,$dir_tmp,$imgdir)
 	else
 	{
 		$res = "";
-		include $dir_tmp."/comum/simbolos".$tipo.".inc";
+		include_once $dir_tmp."/comum/simbolos".$tipo.".inc";
 		return $res;
 	}
 }
@@ -479,7 +479,7 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 		$tipoLayer = $this->layer->type;
 		$classe = $this->layer->getclass($classe);
 		$numestilos = $classe->numstyles;
-		for ($i=0;$i<$numestilos;$i++)
+		for ($i=0;$i<$numestilos;++$i)
 		{
 			$linha = array();
 			$estilo = $classe->getstyle($i);

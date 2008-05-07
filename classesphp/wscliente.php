@@ -34,9 +34,9 @@ Include:
 
 <pega_variaveis.php>, <lews/wms_functions.php>, <classesjs/cpaint/cpaint2.inc.php>
 */
-require_once("pega_variaveis.php");
-include("lews/wms_functions.php");
-require_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("pega_variaveis.php");
+include_once("lews/wms_functions.php");
+include_once("../pacotes/cpaint/cpaint2.inc.php");
 $cp = new cpaint();
 //
 //busca o getcapabilities de um wms
@@ -111,7 +111,7 @@ cp - Objeto CPAINT.
 function funcoesws()
 {
 	global $servico,$cp;
-	require_once('../pacotes/SOAP/nusoap.php');
+	include_once('../pacotes/SOAP/nusoap.php');
 	$service_request = $servico; // . "?wsdl";
 	$service_r = file($service_request);
 	$service_r = implode("",$service_r);
@@ -207,8 +207,8 @@ function dadosWS()
 {
 	global $param,$cp,$servico,$funcaows;
 	//ini_set("memory_limit","28M");
-	require_once('../pacotes/SOAP/nusoap.php');
-	require_once("../pacotes/SOAP/easy_parser.inc");
+	include_once('../pacotes/SOAP/nusoap.php');
+	include_once("../pacotes/SOAP/easy_parser.inc");
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
 	$retorna = "erro";
 	$parametros = "";
@@ -271,7 +271,7 @@ function parFuncoesws()
 {
 	global $cp,$servico,$funcaows;
 	$retorna = array();
-	require_once('../pacotes/SOAP/nusoap.php');
+	include_once('../pacotes/SOAP/nusoap.php');
 	$service_request = $servico; // . "?wsdl";
 	$service_r = file($service_request);
 	$service_r = implode("",$service_r);

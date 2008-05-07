@@ -201,7 +201,7 @@ locaplic - localização do i3geo no servidor
 		}
 		if(count($temasa) > 0)
 		{
-			include("classe_mapa.php");
+			include_once("classe_mapa.php");
 			$mapa = "";
 			$m = new Mapa($map_file);
 			$m->adicionaTema((implode(",",$temasa)),$locaplic,"nao");

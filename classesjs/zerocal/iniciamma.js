@@ -749,8 +749,6 @@ function Mapa(e,m)
 				}
 			}
 			listaF.createItem("","", imgBranco, false, true, false, "listaFraiz");				
-
-
 		}
 	};
 	/*

@@ -83,7 +83,7 @@ if (!isset($atlasxml))
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once("carrega_ext.php");
-require_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("../pacotes/cpaint/cpaint2.inc.php");
 
 //
 //cria objeto cpaint para uso com ajax
@@ -100,8 +100,8 @@ if (!isset($map_file))
 	$cp->return_data();
 	exit;
 }
-require_once("classe_vermultilayer.php");
-require_once("funcoes_gerais.php");
+include_once("classe_vermultilayer.php");
+include_once("funcoes_gerais.php");
 if ($map_file != "")
 {
 	//
@@ -124,7 +124,7 @@ Property: pegaListaDeAtlas
 Pega a lista de Atlas definida no arquivo xml menutemas/atlas.xml.
 */
 	case "pegaListaDeAtlas":
-		include("classe_atlas.php");
+		include_once("classe_atlas.php");
 		$atl = new Atlas($atlasxml);
 		$resultado = $atl->pegaListaDeAtlas($tituloInstituicao);
 		$cp->set_data($resultado);
@@ -138,7 +138,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 
 */
 	case "criaAtlas":
-		include("classe_atlas.php");
+		include_once("classe_atlas.php");
 		$atlasxmltemp = $atlasxml;
 		$atl = new Atlas($atlasxml);
 		$interface = $atl->criaAtlas($atlasId_);
@@ -153,7 +153,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		// a função gravaId será executada no final do processo de geração do mapa (ver ms_criamapa.php)
 		//
 		$executa = "gravaId";
-		include("../ms_criamapa.php");
+		include_once("../ms_criamapa.php");
 		exit;
 	break;
 /*
@@ -163,7 +163,7 @@ Pega a lista de pranchas de um atlas específico.
 
 */
 	case "pegaListaDePranchas":
-		include("classe_atlas.php");
+		include_once("classe_atlas.php");
 		$atl = new Atlas($atlasxml);
 		$resultado = $atl->pegaListaDePranchas($atlasId);
 		$cp->set_data($resultado);
@@ -175,7 +175,7 @@ Ativa uma prancha do atlas.
 
 */
 	case "abrePrancha":
-		include("classe_atlas.php");
+		include_once("classe_atlas.php");
 		$atl = new Atlas($atlasxml);
 		$resultado = $atl->abrePrancha($atlasId,$pranchaId,$map_file,$locaplic);
 		$cp->set_data($resultado);
