@@ -267,7 +267,10 @@ array
 				$f = $layer->getmetadata("wms_formatlist");
 				$f = explode(",",$f);
 				$f = $f[0];
-				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$con."&request=GetLegendGraphic&version=".$ver."&service=wms&layer=".$lwms."&format=".$f."&SLD=".$s);
+				$imgLeg = $con."&request=GetLegendGraphic&version=".$ver."&service=wms&layer=".$lwms."&format=".$f."&SLD=".$s;
+				if ($layer->getmetadata("legendawms") != "")
+				{$imgLeg = $layer->getmetadata("legendawms");}
+				$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","expressao"=>"","imagem"=>$imgLeg);
 			}
 			else
 			{
