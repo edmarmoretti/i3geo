@@ -75,7 +75,7 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - Nome do tema que será processado
 */  
-	function __construct($map_file,$tema="",$locaplic)
+	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))

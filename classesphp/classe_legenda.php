@@ -106,7 +106,7 @@ $tema - nome do tema
 $template - nome do template para processar a legenda
 */
 
-	function __construct($map_file,$locaplic,$tema="",$template="")
+	function __construct($map_file,$locaplic="",$tema="",$template="")
 	{
   		//error_reporting(E_ALL);
   		if(file_exists($locaplic."/funcoes_gerais.php"))

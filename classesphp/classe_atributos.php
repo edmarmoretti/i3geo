@@ -71,7 +71,7 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
 */
-	function __construct($map_file,$tema="",$locaplic)
+	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
   		$this->locaplic = $locaplic;

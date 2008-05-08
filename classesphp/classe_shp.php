@@ -219,7 +219,7 @@ Include:
 		//nome do novo tema
 		$temaedit = nomeRandomico();
 		//pega os valores
-		include_once("classe_atributos.php");
+		include_once($this->locaplic."/classesphp/classe_atributos.php");
 		$m = new Atributos($this->arquivo,$this->tema);
 		$shape = $m->identificaQBP($this->nome,$x,$y,$this->arquivo,0,"","shape");
 		if ((is_array($shape)) && ($shape[0] == " "))
@@ -243,7 +243,7 @@ Include:
 			if ($tipo == "pizza")
 			{
 				//gera a figura
-				include_once("graficopizza.php");
+				include_once($this->locaplic."/classesphp/graficopizza.php");
 				$res = graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$this->arquivo,$temaedit);
 				$img = explode(",",$res);
 			}
