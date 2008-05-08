@@ -34,12 +34,7 @@ LAYER
       NAME " "
       METADATA
       END
-      STYLE
-        ANGLE 360
-        COLOR 200 50 0
-        OUTLINECOLOR 0 0 0
-        SYMBOL 0
-      END
+
     END
   END
 

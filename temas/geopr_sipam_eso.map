@@ -1,0 +1,41 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+    CONNECTION "http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS"
+    CONNECTIONTYPE WMS
+    DATA ""
+      METADATA
+        "wms_srs"	"EPSG:4291"
+        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+        "CLASSE"	"SIM"
+        "wfs"	"nao"
+        "TEXTO"	"NAO"
+        "wms_force_separate_request"	"1"
+        "formatosinfo"	"text/plain,text/html,application/vnd.ogc.gml"
+        "legendawms"	"http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=amazonia:aeroporto&format=image/png"
+        "wms_formatlist"	"image/png,application/atom xml,application/openlayers,application/pdf,application/rss xml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kmz,image/geotiff,image/geotiff8,image/gif,image/jpeg,image/png8,image/svg xml,image/tiff,image/tiff8"
+        "wms_format"	"image/png"
+        "wms_connectiontimeout"	"30"
+        "wms_server_version"	"1.1.1"
+
+        "wms_name"	"amazonia:estacoes_superficie_operacional"
+        "legendawms"	"http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=amazonia:estacoes_superficie_operacional&style=point&format=image/png"
+        "wms_style"	"point"
+        "TEMA"	"Estações de de superfície - Operacional"
+      END
+    NAME "geopr_sipam_eso"
+    OFFSITE 255 255 255
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME " "
+      METADATA
+      END
+
+    END
+  END
+END
