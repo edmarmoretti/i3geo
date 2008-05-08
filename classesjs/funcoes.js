@@ -849,7 +849,7 @@ function mensagemf(m)
 		{
 			var novoel = document.createElement("div");
 			novoel.id = 'mensagem';
-			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="50" value="" /> </td></tr> </table>';
+			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="70" value="" /> </td></tr> </table>';
 			if($i("i3geo"))
 			{$i("i3geo").appendChild(novoel);}
 			else
@@ -863,6 +863,7 @@ function mensagemf(m)
 			$i("mensagem").style.visibility = "visible";
 		}
 		var pos = pegaPosicaoObjeto($i("img"));
+		pos[1] = pos[1] + parseInt($i("img").style.height) - 22;
 		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = pos[0] + g_postpx');
 		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = pos[1] + g_postpx');
 	}
@@ -2897,7 +2898,9 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 					$i(ondeArvore).innerHTML += temp;
 				}		
 				*/
-				var outrasOpcoes = "<table width='100px' ><tr>";
+				var outrasOpcoes = "<table width='120px' ><tr>";
+				if (g_uploaddbf == "sim")
+				{outrasOpcoes += "<td><div id='updbf' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='uploaddbf()'><img class='uploaddbf' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/></div><td>";}
 				if (g_uploadlocal == "sim")
 				{outrasOpcoes += "<td><div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/></div><td>";}
 				if (g_downloadbase == "sim")

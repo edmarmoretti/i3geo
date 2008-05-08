@@ -582,9 +582,15 @@ es:"Buscar datos:"
 }],
 "a2":[
 {
-pt:"Upload de arquivo local",
-en:"Upload local file",
-es:"Upload de archivo local"
+pt:"Upload de shape file",
+en:"Upload shape file",
+es:"Upload de shape file"
+}],
+"a2b":[
+{
+pt:"Upload de arquivo dbf",
+en:"Upload dbf file",
+es:"Upload de archivo dbf"
 }],
 "a3":[
 {
@@ -1028,6 +1034,16 @@ Values:
 sim|nao
 */
 g_uploadlocal = "sim";
+/*
+Variable: g_uploaddbf
+
+Variável que define se na guia 2 será mostrada a opção de upload de arquivo dbf.
+
+Values:
+
+sim|nao
+*/
+g_uploaddbf = "sim";
 /*
 Variable: g_conectarwms
 

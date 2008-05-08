@@ -1325,6 +1325,13 @@ Faz o upload de shape file
 function upload()
 {wdocaf("300px","230px",g_locaplic+"/ferramentas/upload/index.htm","","","Upload");}
 /*
+Function: uploaddbf
+
+Faz o upload de um arquivo dbf e acrescenta como um novo tema
+*/
+function uploaddbf()
+{wdocaf("300px","280px",g_locaplic+"/ferramentas/uploaddbf/index.htm","","","Upload");}
+/*
 Section: navegação
 */
 /*

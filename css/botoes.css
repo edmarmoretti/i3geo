@@ -553,6 +553,18 @@
 	cursor:pointer;
 	margin-right:3px;
 }
+.uploaddbf
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1525px;
+	width:16px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
+}
 
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
