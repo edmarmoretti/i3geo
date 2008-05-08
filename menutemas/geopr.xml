@@ -114,4 +114,96 @@
           </TEMA>
       </SGRUPO>
    </GRUPO>
+   <GRUPO>
+      <GTIPO>Sistema de Protecao da Amazonia</GTIPO>
+      <DTIPO></DTIPO>
+      <SGRUPO>
+         <SDTIPO>OGC - SIPAM</SDTIPO>
+          <TEMA>
+            <TID>geopr_sipam_aeroportos</TID>
+            <TNOME>Aeroportos e pistas de pouso</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_arco</TID>
+            <TNOME>Arco do desmatamento</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_localidades</TID>
+            <TNOME>Localizacao das cidades, vilas e capitais na Amazonia</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_ems</TID>
+            <TNOME>EMS - Estação metereológica de superfície</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_vsat</TID>
+            <TNOME>Estações VSAT</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_raios</TID>
+            <TNOME>Estações de detecção de raios</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_eso</TID>
+            <TNOME>Estações de de superfície - Operacional</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_goes</TID>
+            <TNOME>Área de cobertura - Goes</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>      
+         <TEMA>
+            <TID>geopr_sipam_hfdf</TID>
+            <TNOME>Localização HF DF</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_pcds</TID>
+            <TNOME>PCDs</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_radarm</TID>
+            <TNOME>Radares metereológicos</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>
+         <TEMA>
+            <TID>geopr_sipam_tiros</TID>
+            <TNOME>Localização Tiros</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TIPOA>WMS</TIPOA>
+         </TEMA>   
+
+	  </SGRUPO>
+	</GRUPO>
 </TEMASGEO>
