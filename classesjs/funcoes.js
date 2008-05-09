@@ -3557,6 +3557,12 @@ function capturaposicao(e)
 	{var pos = pegaPosicaoObjeto(targ.parentNode);}
 	else
 	{var pos = pegaPosicaoObjeto(targ);}
+	if((g_entorno == "sim") && (g_panM == "sim"))
+	{
+		pos[0] = pos[0] - objmapa.w;
+		pos[1] = pos[1] - objmapa.h;
+	}
+	//$i("escalanum").value = pos+" "+objmapa.w
 	//
 	//pega a posicao correta do mouse
 	//
@@ -3572,6 +3578,7 @@ function capturaposicao(e)
 		mousey = e.clientY + document.body.scrollTop
 			+ document.documentElement.scrollTop;
 	}
+
 	//
 	//faz os cálculos de posicionamento
 	//fig e reffig são a mesma coisa por enquanto
@@ -3582,7 +3589,6 @@ function capturaposicao(e)
 	var yreffig = yfig;
 	var xtela = mousex;
 	var ytela = mousey;
-	//$i("escalanum").value = mousex+" "+xfig
 	//
 	//celula e extent são necessários para se fazer a
 	//conversão de coordenadas de tela para coordenadas geográficas
