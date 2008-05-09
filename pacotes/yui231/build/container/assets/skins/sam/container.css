@@ -16,11 +16,13 @@
 {*zoom:1;*position:relative;border-style:solid;border-width:0 1px;border-color:#808080;margin:0 -1px;}
 .yui-skin-sam .yui-panel .hd{border-bottom:solid 1px #ccc;}
 .yui-skin-sam .yui-panel .bd,.yui-skin-sam .yui-panel .ft{background-color:#F2F2F2;}
-.yui-skin-sam .yui-panel .hd{padding:0 10px;font-size:70%;line-height:2;*line-height:1.9;font-weight:bold;color:#000;background:url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -200px;}
+.yui-skin-sam .yui-panel .hd{
+padding:0 10px;font-size:70%;line-height:2;*line-height:1.9;font-weight:bold;color:#000;
+background:url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 -200px;}
 .yui-skin-sam .yui-panel .bd{padding:0px;}
 .yui-skin-sam .yui-panel .ft{border-top:solid 1px #808080;padding:5px 10px;font-size:0%;}
 .yui-skin-sam .yui-panel-container.focused .yui-panel .hd{}
-.yui-skin-sam .container-close{z-index:2001;position:absolute;top:1px;right:1px;width:14px;height:15px;background:url(../../../../assets/skins/sam/sprite.png) no-repeat 0 -300px;cursor:pointer;}
+.yui-skin-sam .container-close{z-index:2001;position:absolute;top:1px;right:1px;width:14px;height:15px;background:url(../pacotes/yui231/build/assets/skins/sam/sprite.png) no-repeat 0 -300px;cursor:pointer;}
 .yui-skin-sam .yui-panel-container .underlay{right:-1px;left:-1px;}
 .yui-skin-sam .yui-panel-container.matte{padding:9px 10px;background-color:#fff;}
 .yui-skin-sam .yui-panel-container.shadow{_padding:2px 5px 0 3px;}

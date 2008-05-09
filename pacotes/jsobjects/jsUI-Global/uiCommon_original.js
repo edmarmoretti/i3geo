@@ -6,6 +6,7 @@ if (window.captureEvents) window.captureEvents(Event.KEYPRESS);
 
 function jsUIGblAddSkin(component, skinName, rootDir)
 {
+	/*
 	if (skinName == null || skinName == "")
 		skinName = "default";
 	
@@ -18,6 +19,7 @@ function jsUIGblAddSkin(component, skinName, rootDir)
 	else
 		newStyle.href = rootDir + "/" + component + "/" + skinName + ".css";
 	document.body.appendChild(newStyle);
+	*/
 	return true;
 }
 

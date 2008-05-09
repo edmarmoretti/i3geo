@@ -1,7 +1,7 @@
 .yui-skin-sam .yuimenubar {
 
     border: solid 0px #808080;
-    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 0;
+    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 0;
 
 }
 
@@ -102,7 +102,7 @@
 
 .yui-skin-sam .yuimenubaritem a.selected {
 
-    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -1700px;
+    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 -1700px;
     border-color: #7D98B8;
 }
 
@@ -127,7 +127,7 @@
         "transparent" by the previous rule.
     */
 
-    background: url(../../../../assets/skins/sam/sprite.png) repeat-x -16px -856px;
+    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x -16px -856px;
 
 }
 
@@ -188,7 +188,7 @@
 
     height: 16px;
     border: solid 1px #808080;
-    background: #fff url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;
+    background: #fff url(../pacotes/yui231/build/assets/skins/sam/sprite.png) no-repeat 0 0;
 
 }
 
@@ -260,7 +260,7 @@
     
     position: absolute;
     overflow: hidden;
-    background: url(../../../../assets/skins/sam/sprite.png) no-repeat;
+    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) no-repeat;
 
 }
 
