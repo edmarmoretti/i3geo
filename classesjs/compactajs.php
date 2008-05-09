@@ -107,10 +107,11 @@ $cssfiles = array(
 "../css/reset.css",
 "../css/grids.css",
 "../css/menu.css",
+"../pacotes/yui231/build/autocomplete/assets/skins/sam/autocomplete.css",
 "../pacotes/yui231/build/container/assets/skins/sam/container.css",
-"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
 "../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css",
-"../pacotes/yui231/build/autocomplete/assets/skins/sam/autocomplete.css"
+"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
+"../pacotes/jsobjects/jsUI-Treeview/default.css"
 );
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");

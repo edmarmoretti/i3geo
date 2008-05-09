@@ -13,8 +13,8 @@ Retorno:
 
 object - objeto javaScript
 */
-$i = function(id)
-{return document.getElementById(id);}
+var $i = function(id)
+{return document.getElementById(id);};
 /*
 Function: $trad
 
@@ -24,12 +24,12 @@ Parameters:
 
 id - id que identifica o texto na variável g_linguagem, definida em configura.js
 */
-$trad = function(id)
+var $trad = function(id)
 {
 	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
-}
+};
 
-mostradicasf = function(){}
+var mostradicasf = function(){};
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
 for (var i = 0; i < scripts.length; i++) {
@@ -70,7 +70,7 @@ var jsfiles = new Array(
 "menususpenso.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js"
 );
-for (var i = 0; i < jsfiles.length; i++)
+for (i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
 	allScriptTags += currentScriptTag;
@@ -78,18 +78,9 @@ for (var i = 0; i < jsfiles.length; i++)
 //css
 var allCssTags = "";
 var cssfiles = new Array(
-"../css/geral.css",
-"../css/botoes.css",
-"../css/documentation.css",
-"../css/fonts.css",
-"../css/reset.css",
-"../css/grids.css",
-"../css/menu.css",
-"../pacotes/yui231/build/container/assets/skins/sam/container.css",
-"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
-"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css"
+"../css/i3geo.css.php"
 );
-for (var i = 0; i < cssfiles.length; i++)
+for (i = 0; i < cssfiles.length; i++)
 {
 	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 	allCssTags += currentCssTag;

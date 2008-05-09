@@ -3244,25 +3244,27 @@ altura - altura do combo em linhas
 */
 function i3geo_comboSubGruposMenu(funcaoOnchange,idDestino,idCombo,idGrupo,largura,altura)
 {
-	var combo = function(retorno)
+	if(idGrupo != "")
 	{
-		var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
-		if (retorno.data.subgrupo[i])
+		var combo = function(retorno)
 		{
-			var sg = retorno.data.subgrupo;
-			for (ig=0;ig<sg.length; ig++)
-			{	
-				ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
+			var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
+			if (retorno.data.subgrupo)
+			{
+				var sg = retorno.data.subgrupo;
+				for (ig=0;ig<sg.length; ig++)
+				{	
+					ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
+				}
 			}
-		}
-		$i(idDestino).innerHTML = ins+"</select>";
-	};
-	var p = "classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegalistadeSubgrupos",combo);
-
+			$i(idDestino).innerHTML = ins+"</select>";
+		};
+		var p = "classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"pegalistadeSubgrupos",combo);
+	}
 }
 /*
 Function: i3geo_comboTemasMenu

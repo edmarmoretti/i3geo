@@ -465,10 +465,13 @@ function ajaxredesenha(retorno)
 			if($i("wdocai") && $i("guia5obj"))
 			{
 				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				if(doc.getElementById("guia5obj").style.display=="block")
+				if(doc.getElementById("guia5obj"))
 				{
-					if(window.parent.frames["wdocai"].atualizaGrafico)
-					{window.parent.frames["wdocai"].atualizaGrafico();}
+					if(doc.getElementById("guia5obj").style.display=="block")
+					{
+						if(window.parent.frames["wdocai"].atualizaGrafico)
+						{window.parent.frames["wdocai"].atualizaGrafico();}
+					}
 				}
 			}			
 		}

@@ -42,8 +42,8 @@ Retorno:
 
 object - objeto javaScript
 */
-$i = function(id)
-{return document.getElementById(id);}
+var $i = function(id)
+{return document.getElementById(id);};
 /*
 Function: $trad
 
@@ -53,15 +53,15 @@ Parameters:
 
 id - id que identifica o texto na variável g_linguagem, definida em configura.js
 */
-$trad = function(id)
-{
-	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
-}
+var g_linguagem = "";
+var $trad = function(id)
+{return eval("g_traducao."+id+"[0]."+g_linguagem+";");};
 //necessario para nao dar erro no refresh
-mostradicasf = function(){}
+var mostradicasf = function(){};
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
-for (var i = 0; i < scripts.length; i++) {
+var i = 0;
+for (i = 0; i < scripts.length; i++) {
 	var src = scripts[i].getAttribute('src');
 	if (src) {
 		var index = src.lastIndexOf("i3geo.js");
@@ -74,21 +74,18 @@ for (var i = 0; i < scripts.length; i++) {
 }
 //scripts
 var allScriptTags = "";
-var jsfiles = new Array("i3geo_tudo_compacto.js.php")
-for (var i = 0; i < jsfiles.length; i++)
+//var jsfiles = new Array();
+var jsfiles = ["i3geo_tudo_compacto.js.php"];
+for (i = 0;i < jsfiles.length;i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
 	allScriptTags += currentScriptTag;
 }
 //css
 var allCssTags = "";
-var cssfiles = new Array(
-"../css/i3geo.css.php",
-"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css",
-"../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
-"../pacotes/yui231/build/container/assets/skins/sam/container.css"
-)
-for (var i = 0; i < cssfiles.length; i++)
+//var cssfiles = new Array();
+var cssfiles = ["../css/i3geo.css.php"];
+for (i = 0;i < cssfiles.length;i++)
 {
 	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 	allCssTags += currentCssTag;
