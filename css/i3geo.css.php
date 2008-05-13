@@ -70,8 +70,11 @@ select
 {visibility:visible;color: #2F4632;background:rgb(240,240,240);text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;border-style:outset;border-width:2px;border-color:#cc0000;cursor:pointer;z-index:1000;}
 .digitar
 {margin:0px;color:#426252;background-color:#F6F6F6;border: 1px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.digitarOver
+{margin:0px;color:#426252;background-color:#F6F6F6;border: 1px solid white;border-bottom:1px solid gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+
 .digitarMouseclick
-{margin:0px;color:#426252;background-color:white;border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{margin:0px;color:#426252;background-color:beige;border: 1px solid white;border-bottom:1px solid gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .digitarMouseover
 {margin:0px;color:#426252;background-color:rgb(195,226,226);border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 

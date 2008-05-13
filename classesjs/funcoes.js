@@ -87,7 +87,7 @@ $inputText = function (idPai,larguraIdPai,idInput,titulo,digitos,valor)
 		$i(idPai).onmouseout = function()
 		{this.className = "";};	
 	}
-	var i = "<input onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.value=\"\";this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
+	var i = "<input onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
 	return i;
 };
 /*
