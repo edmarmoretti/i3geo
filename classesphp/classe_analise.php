@@ -134,6 +134,7 @@ Include:
 */
 	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="")
 	{
+		set_time_limit(180);
 		//
 		//pega os dados do tema dois para as funções que o utilizam
 		//
@@ -240,6 +241,7 @@ $locaplic - Onde fica o I3Geo.
 */
 	function mapaRelatorioAnaliseDist($arqpt,$dimx,$dimy,$dir_tmp,$R_path,$locaplic)
 	{
+		set_time_limit(180);
 		$nomedir = dirname($arqpt)."/";
 		$rcode[] = 'dadosx<-scan("'.$arqpt.'x")';
 		$rcode[] = 'dadosy<-scan("'.$arqpt.'y")';
@@ -875,6 +877,7 @@ $locaplic - Localização do I3geo.
 */
 	function pontoEmPoligono($temaPt,$temasPo,$locaplic)
 	{
+		set_time_limit(180);
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
@@ -1018,7 +1021,7 @@ itemdestino - nome do item na tabela de atributos do tema de origem que será acr
 */
 function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino)
 {
-	//error_reporting(E_ALL);
+	set_time_limit(180);
 	//para manipular dbf
 	if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 	include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1145,6 +1148,7 @@ nome do layer criado com o buffer.
 */
 	function criaBuffer($distancia,$locaplic,$unir="nao")
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1203,6 +1207,7 @@ nome do layer criado com o buffer.
 		$items = pegaItens($this->layer);
 		// cria o dbf
 		$def = array();
+		$def[] = array("i3geo","C","254");
 		foreach ($items as $ni)
 		{$def[] = array($ni,"C","254");}
 		$db = xbase_create($nomeshp.".dbf", $def);
@@ -1210,6 +1215,7 @@ nome do layer criado com o buffer.
 		$dbname = $nomeshp.".dbf";
 		for($i = 0;$i < count($buffers);++$i)
 		{
+			$reg[] = $i;
 			foreach ($items as $ni)
 			{$reg[] = $shapes[$i]->values[$ni];}
 			$novoshpf->addShape($buffers[$i]);
@@ -1251,6 +1257,7 @@ $locaplic - Localização do I3geo.
 */
 	function criaCentroide($locaplic)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1342,6 +1349,7 @@ $npty - Número de pontos em Y (opcional)
 */
 	function gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1453,6 +1461,7 @@ $npty - Número de pontos em Y (opcional)
 */
 	function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1590,6 +1599,7 @@ $npty - Número de pontos em Y (opcional)
 */
 	function gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1730,6 +1740,7 @@ $locaplic - Localização do I3geo
 */
 	function nptPol($temaPt,$temaPo,$locaplic)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -1785,6 +1796,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 */
 	function agrupaElementos($item,$locaplic)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
@@ -1897,6 +1909,7 @@ $locaplic - Localização do I3geo
 */
 	function dissolvePoligono($item,$locaplic)
 	{
+		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
