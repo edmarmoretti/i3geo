@@ -76,16 +76,30 @@ if ($lista == "temas")
 		foreach($grupo->SGRUPO as $sgrupo)
 		{
 			echo "&nbsp;&nbsp;&nbsp;".mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto")."<br>";
+			//echo 'kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema<br>';
+			
 			foreach($sgrupo->TEMA as $tema)
 			{
 				if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
 				{
+					
 					echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 					echo "<span style=color:red >".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."</span>";
 					echo "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")." - ";
 					if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
 					{echo "<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
 					echo "<br>";
+					/*
+					echo '"'.($tema->KML).'",';
+					echo '"'.$tema->OGC.'",';
+					echo '"'.$tema->DOWNLOAD.'",';
+					echo '"'.mb_convert_encoding($tema->TAGS,"HTML-ENTITIES","auto").'",';
+					echo '"'.$tema->TIPOA.'",';
+					echo '"'.$tema->TLINK.'",';
+					echo '"'.mb_convert_encoding($tema->TDESC,"HTML-ENTITIES","auto").'",';
+					echo '"'.mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto").'",';
+					echo '"'.$tema->TID.'"<br>';
+					*/
 				}
 			}
 		}
@@ -125,6 +139,9 @@ if(isset($tema))
 {$tipo = "";}
 $req->setParameter("VeRsIoN","1.1.0");
 $oMap = ms_newMapobj("aplicmap/ogcws.map");
+//
+//altera os caminhos das imagens
+//
 if((isset($legenda)) && ($legenda == "sim"))
 {
 	$leg = $oMap->legend;
