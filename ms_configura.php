@@ -273,6 +273,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Se você quiser utilizar a conexão default, baseado no SQLITE, mantenha essa variável vazia.
 	 
 	 O uso do banco de dados não é obrigatório, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
+	
+	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
+	
 	*/
 	$conexaoadmin = "";
 }
