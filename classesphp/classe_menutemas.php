@@ -144,15 +144,22 @@ idmenu - id que identifica o xml que será utilizado (definido na variável $menut
 
 listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
 
+listasgrupos - sim|nao lista também os subgrupos associados
+
+menutemas - variável com a lista de menus (veja o ms_configura.php). Se não for definida, é obtida do ms_configura.php
+
 return:
 
 array
 */
-	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$menutemas)
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$menutemas=null)
 	{
 		$this->xml = "";
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
+		if(isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+		}
 		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
 		{
 			foreach ($menutemas as $m)
