@@ -259,6 +259,22 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Quando essa variável for definida como "nao" algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais.
 	*/
 	$expoeMapfile = "";
+	/*
+	 Variable: $conexaoadmin
+	 
+	 Arquivo PHP que define a string de conexão (PDO) com o banco de dados administrativo.
+	 
+	 Esse arquivo é incluído no programa i3geo/admin/conexao.php
+	 
+	 O banco de dados administrativo é utilizado para definir coisas como a árvore de temas, árvore de mapas, etc.
+	 
+	 O banco de dados, originalmente, é montado em SQLITE, porém, em ambientes corporativos, sugere-se o uso de bancos de daods mais robustos.
+	 
+	 Se você quiser utilizar a conexão default, baseado no SQLITE, mantenha essa variável vazia.
+	 
+	 O uso do banco de dados não é obrigatório, uma vez que os arquivos podem ser mantidos em disco (arquivos XML).
+	*/
+	$conexaoadmin = "";
 }
 else //se for linux
 {
@@ -282,5 +298,6 @@ else //se for linux
 	$utilizacgi = "nao";
 	$atlasxml = "../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
+	$conexaoadmin = $locaplic."/admin/conexao.php";
 }
 ?>
