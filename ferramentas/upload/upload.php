@@ -43,11 +43,11 @@ if (isset($_FILES['fileshp']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['fileshp']['name'])) || (!ereg('\.shp$',$_FILES['fileshp']['name'])) )
+	if( (ereg('[^a-zA-Z0-9_\.]',$_FILES['fileshp']['name'])) || (!ereg('\.shp$',$_FILES['fileshp']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['fileshx']['name'])) || (!ereg('\.shx$',$_FILES['fileshx']['name'])) )
+	if( (ereg('[^a-zA-Z0-9_\.]',$_FILES['fileshx']['name'])) || (!ereg('\.shx$',$_FILES['fileshx']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9\.]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9_\.]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "Arquivos inválidos";exit;}
