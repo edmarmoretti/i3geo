@@ -47,6 +47,13 @@ function pegavalSistemas(xmlDoc)
 		{
 			var sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue
 			var exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue
+			var temp = exec.split('"')
+			if(temp.length == 1)
+			var exec = '"'+exec+'"'
+			var temp = exec.split("?")
+			if(temp.length != 2)
+			exec += '+"?"'
+			exec += '+"'+"&x="+xpt+"&y="+ypt+'"'
 			var t = "blank"
 			if (sis[ig].getElementsByTagName("TARGET")[0])
 			{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue}
