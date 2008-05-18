@@ -741,8 +741,14 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					$nmap = ms_newMapObj($nomemap);
 					$novosnomes = $nmap->getAllLayerNames();
 					//define nomes unicos para os temas
+					//foreach ($novosnomes as $n)
+					//{$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;}
 					foreach ($novosnomes as $n)
-					{$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;}
+					{
+						$temp = $nmap->getlayerbyname($n);
+						if($temp->tileindex != ""){$random = "nao";}
+						$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
+					}
 					//altera os temas para incluir o nome unico
 					foreach ($novosnomes as $n)
 					{
