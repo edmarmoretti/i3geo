@@ -178,7 +178,7 @@ Lista os itens de um tema.
 		{
 			$layer = $this->mapa->getlayerbyname($tema);
 			//pega o nome correto do tema
-			$nometmp = pegaNome($layer);
+			$nometmp = pegaNome($layer,"UTF-8");
 			$nomestemas[] = $nometmp;
 			if ($layer->data != "")
 			{
