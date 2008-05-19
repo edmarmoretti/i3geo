@@ -187,6 +187,12 @@ pt: "Blog",
 en:"Blog",
 es:"Blog"
 }],
+"u5a": [
+{
+pt: "Portal do software p&uacute;blico",
+en:"Portal do software p&uacute;blico",
+es:"Portal do software p&uacute;blico"
+}],
 "u6": [
 {
 pt: "Geometrias",
@@ -1294,7 +1300,8 @@ oMenuData = {
 	{ text: $trad("u2"), url: "javascript:abreDoc()" },
 	{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
 	{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
-	{ text: $trad("u5"), url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
+	{ text: $trad("u5"), url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" },
+	{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" }
 	],
 	"analise": [
     { text: $trad("u22"),url: "#", 
