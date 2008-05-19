@@ -2640,6 +2640,7 @@ function procurartemas()
 		if(!retorno.data)
 		{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";return;}
 		var retorno = retorno.data;
+		var conta = 0;
 		if ((retorno != "erro") && (retorno != undefined))
 		{
 			var ins = "";
@@ -2663,6 +2664,7 @@ function procurartemas()
 								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"'  /> ("+nomeSgrupo+")";
 								var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
 								ins += nomeTema;
+								conta++;
 						}
 					}
 				}
@@ -2670,7 +2672,7 @@ function procurartemas()
 			}
 			if (ins != "")
 			{
-				$i("achados").innerHTML = ins+"<br>";
+				$i("achados").innerHTML = "Total: "+conta+"<br>"+ins+"<br>";
 			}
 			else
 			{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";}
