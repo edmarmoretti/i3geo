@@ -3334,10 +3334,13 @@ function remapaf()
 			{
 				if (iguias[i].type == "checkbox")
 				{
-					if (iguias[i].checked == false)
-					{tsd.push(iguias[i].value);}
-					if (iguias[i].checked == true)
-					{tsl.push(iguias[i].value);}
+					if(iguias[i].name == "layer")
+					{
+						if (iguias[i].checked == false)
+						{tsd.push(iguias[i].value);}
+						if (iguias[i].checked == true)
+						{tsl.push(iguias[i].value);}
+					}
 				}
 			}
 			while(i--)
