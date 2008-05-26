@@ -13,15 +13,33 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
 -->
 <TEMASGEO>
    <CABECALHO>Clique no grupo temático para abrir a lista de temas e ative o box relativo aos temas de interesse. Terminada a seleção dos temas, clique em um dos botões de aplicar alterações</CABECALHO>
+   		<!-- Temas podem ficar dentro de grupos, sub-grupos ou aparecer na raiz da árvore -->
+   		<!-- início de um tema -->
    <TEMA>
+     	<!-- Código do tema. Deve existir um arquivo com este nome e extensão .map no diretório i3geo/temas contendo a definição do layer -->
      <TID>cartobase</TID>
+	 	<!-- Nome do tema que será mostrado no menu de adição de temas -->
      <TNOME>Cartografia básica (raster)</TNOME>
+     	<!-- Descrição complementar. Mostrada quando o usuário passa o mouse sobre o nome -->
      <TDESC>Web service com a cartografia básica</TDESC>
+     	<!-- Link para informações complementares sobre o tema (fonte) -->
      <TLINK>http://mapas.mma.gov.br/i3geo/wscliente.htm</TLINK>
+     	<!-- tipo de acesso aos dados, deve ser definido apenas quando a camada for um web service OGC -->
+     <TIPOA>WMS</TIPOA>
+     	<!-- Palavras chave utilizadas na nuvem de tags. Separe as palavras com espaço em branco -->
+     <TAGS>clima tempo</TAGS>
+     	<!-- sim|nao (por default é nao). Indica se o tema será mostrado na aplicação datadownload.htm, permitindo ou não que o usuário faça o download por essa aplicação. -->
+     <DOWNLOAD>nao</DOWNLOAD>
+     	<!-- sim|nao (por default é sim). Indica se a camada será disponibilizada no formato KML (google)-->
+     <KML>nao</KML>
+     	<!-- sim|nao (por default é sim). Indica se a camada será disponibilizada como um web service nos padrões OGC -->
+     <OGC>nao</OGC>
    </TEMA>
+   		<!-- inicio de um grupo -->
    <GRUPO>
       <GTIPO>Ambiente físico e biodiversidade</GTIPO>
       <DTIPO>Biomas, vegetação, áreas prioritárias para conservação, etc.</DTIPO>
+      	<!-- Início de um sub-grupo -->
       <SGRUPO>
          <SDTIPO>Clima</SDTIPO>
          <TEMA>
@@ -137,4 +155,19 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
          </TEMA>
     	</SGRUPO>
    </GRUPO>
+   <GRUPO>
+      <GTIPO>Edite o arquivo i3geo/menutemas/menutemas.xml!!!</GTIPO>
+      <DTIPO></DTIPO>
+      <SGRUPO>
+         <SDTIPO>Isto é só um exemplo. Veja o sistema de administração i3geo/admin !!!!</SDTIPO>
+         <TEMA>
+            <TID>condtemp</TID>
+            <TNOME>Condição do tempo</TNOME>
+            <TDESC>Web service com a condição do tempo para várias localidades</TDESC>
+            <TLINK></TLINK>
+            <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo</TAGS>
+         </TEMA>
+	  </SGRUPO>
+	</GRUPO>   
 </TEMASGEO>
