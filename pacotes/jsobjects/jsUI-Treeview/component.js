@@ -198,15 +198,15 @@ function TreeviewPvtExpandClick(e)
 					hiddenChildren = true;
 				}
 			}
-			node.src = g_locaplic+"/classesjs/jsobjects" + "/jsUI-Treeview/minus.gif";
+			node.src = g_locaplic+"/pacotes/jsobjects" + "/jsUI-Treeview/minus.gif";
 		}
 		if (!hiddenChildren)
-			node.src = g_locaplic+"/classesjs/jsobjects" + "/jsUI-Treeview/minus.gif";
+			node.src = g_locaplic+"/pacotes/jsobjects" + "/jsUI-Treeview/minus.gif";
 		currTree.itemExpand(this.parentNode.id);
 	}
 	else if (currSrc[1] == "minus.gif")
 	{
-		node.src = g_locaplic+"/classesjs/jsobjects" + "/jsUI-Treeview/plus.gif";
+		node.src = g_locaplic+"/pacotes/jsobjects" + "/jsUI-Treeview/plus.gif";
 		var allArray = getAllDescendants(node.parentNode, "UL");
 		for (var a=0;a<allArray.length;a++)
 		{
