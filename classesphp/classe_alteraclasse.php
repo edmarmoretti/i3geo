@@ -338,9 +338,9 @@ $ignorar - valor que será ignorado na listagem final
 		for ($i = 0; $i < $c; ++$i)
 		{
 			$e = "('[".$item."]'eq'".$valoresu[$i]."')";
-			$c = $classes[$i];
-			$c->setexpression($e);
-			$c->set("name",$valoresu[$i]);
+			$ca = $classes[$i];
+			$ca->setexpression($e);
+			$ca->set("name",$valoresu[$i]);
 			$estilo = $classes[$i]->getStyle(0);
 			$ncor = $estilo->color;
 			$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));
