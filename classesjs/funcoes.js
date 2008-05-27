@@ -4756,24 +4756,29 @@ Retorna a posição x,y de um objeto em relação a tela do navegador
 */
 function pegaPosicaoObjeto(obj)
 {
-	if(obj.style.position == "absolute")
+	if(obj)
 	{
-		return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];
+		if(obj.style.position == "absolute")
+		{
+			return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];
+		}
+		else
+		{
+			var curleft = curtop = 0;
+			if(obj)
+			{
+				if (obj.offsetParent) {
+					do {
+						curleft += obj.offsetLeft-obj.scrollLeft;
+						curtop += obj.offsetTop-obj.scrollTop;
+					} while (obj = obj.offsetParent);
+				}
+			}
+			return [curleft,curtop];
+		}
 	}
 	else
-	{
-		var curleft = curtop = 0;
-		if(obj)
-		{
-			if (obj.offsetParent) {
-				do {
-					curleft += obj.offsetLeft-obj.scrollLeft;
-					curtop += obj.offsetTop-obj.scrollTop;
-				} while (obj = obj.offsetParent);
-			}
-		}
-		return [curleft,curtop];
-	}
+	{return [0,0];}
 }
 /*
 Function: recuperamapa
