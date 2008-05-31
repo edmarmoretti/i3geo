@@ -159,7 +159,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
       <GTIPO>Edite o arquivo i3geo/menutemas/menutemas.xml!!!</GTIPO>
       <DTIPO></DTIPO>
       <SGRUPO>
-         <SDTIPO>Isto é só um exemplo. Veja o sistema de administração i3geo/admin !!!!</SDTIPO>
+         <SDTIPO>Isto é só um exemplo. !!!!</SDTIPO>
          <TEMA>
             <TID>condtemp</TID>
             <TNOME>Condição do tempo</TNOME>
