@@ -1831,28 +1831,30 @@ function initJanelaRef()
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
 		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
 		ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
-
 		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
 		$i("imagemReferencia").style.height = objmapa.refheight+"px";
 	}
-	$i("winRef").style.display = "block";
-	YAHOO.namespace("janelaRef.xp");
-	YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
-	YAHOO.janelaRef.xp.panel.render();
-	var pos = pegaPosicaoObjeto($i("img"));
-	if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-	else
-	{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-	var escondeRef = function()
+	if($i("winRef").style.display != "block")
 	{
-		YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
-		YAHOO.janelaRef.xp.panel.destroy();	
-		iCookie("g_mapaRefDisplay","none");
-	};
-	YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
-	iCookie("g_mapaRefDisplay","block");
+		$i("winRef").style.display = "block";
+		YAHOO.namespace("janelaRef.xp");
+		YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+		YAHOO.janelaRef.xp.panel.render();
+		var pos = pegaPosicaoObjeto($i("img"));
+		if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+		else
+		{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+		var escondeRef = function()
+		{
+			YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
+			YAHOO.janelaRef.xp.panel.destroy();	
+			iCookie("g_mapaRefDisplay","none");
+		};
+		YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+		iCookie("g_mapaRefDisplay","block");
+	}
 	objmapa.atualizaReferencia();
 }
 /*
@@ -1896,7 +1898,7 @@ function mudaboxnf(tipo,obj)
 		var pos = pegaPosicaoObjeto(obj);
 		g_operacao = tipo;
 		clearTimeout(objmapa.tempo);
-		objmapa.tempo = setTimeout('remapaf()',(4000));
+		objmapa.tempo = setTimeout('remapaf()',(g_tempo_aplicar));
 		autoRedesenho("reinicia");
 		if ($i("aplicari"))
 		{

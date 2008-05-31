@@ -916,7 +916,7 @@ function selecao()
 		criaContainerRichdraw();
 		richdraw.lineColor = "red";
 		richdraw.lineWidth = "2px";	
-		wdocaf("420px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+		wdocaf("430px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
 	}
 	else
 	{mudaiconf("pan");}

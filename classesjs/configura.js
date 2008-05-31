@@ -956,6 +956,13 @@ Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador n
 */
 g_autoRedesenho = 0;
 /*
+Variable: g_tempo_aplicar
+
+Tempo que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
+
+*/
+g_tempo_aplicar = 4000;
+/*
 Variable: g_embedLegenda
 
 Indica se a legenda deve ser incluida no corpo do mapa.
