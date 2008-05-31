@@ -422,7 +422,7 @@ function listaSimbolos($tipo,$dir_tmp,$imgdir)
 	if ($tipo == 3){$tipo = 2;} //tipo raster
 	if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
 	{
-		$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc",w);
+		$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc","w");
 		if ($tipo == 2){$t="simpol.map";}
 		if ($tipo == 0){$t="simpt.map";}
 		if ($tipo == 1){$t="simlin.map";}

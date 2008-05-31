@@ -155,6 +155,7 @@ array
 	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$menutemas=null)
 	{
 		$this->xml = "";
+		//echo $menutemas;
 		if(isset($menutemas))
 		{
 			if (file_exists("../ms_configura.php"))

@@ -81,6 +81,8 @@ $tema - nome do tema
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
+  		$this->layer = "";
+  		if($tema != "")
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -364,8 +366,8 @@ A nova classe será uma cópia da classe 0.
 	{
 		$classe = $this->layer->getclass(0);
 		$c = ms_newClassObj($this->layer, $classe);
-		$classe = $this->layer->getclass(0);
-		$nova = $classe->clone;
+		//$classe = $this->layer->getclass(0);
+		//$nova = $classe->clone;
 		return("ok");
 	}
 /*
@@ -467,7 +469,7 @@ Parameters:
 $classe - id da classe
 
 */
-	function statusClasse($classe,$status)
+	function statusClasse($classe)
 	{
 		$classe = $this->layer->getclass($classe);
 		$status = $classe->status;
@@ -475,6 +477,7 @@ $classe - id da classe
 		{$classe->set("status",MS_ON);}
 		else
 		{$classe->set("status",MS_OFF);}
+		return("ok");
 	}
 }
 ?>

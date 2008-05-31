@@ -661,7 +661,7 @@ $incluitexto - sim|nao
 */
 	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$cortexto="0,0,0",$incluitexto="sim")
 	{
-		echo $corlinha;
+		//echo $corlinha;
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
@@ -745,91 +745,20 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					//{$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;}
 					foreach ($novosnomes as $n)
 					{
-						$temp = $nmap->getlayerbyname($n);
-						if($temp->tileindex != ""){$random = "nao";}
+						if(!@$this->mapa->getlayerbyname($n))
+						{$random = "nao";}
 						$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
 					}
 					//altera os temas para incluir o nome unico
+					include_once($locaplic."/classesphp/funcoes_gerais.php");
 					foreach ($novosnomes as $n)
 					{
 						$nlayer = $nmap->getlayerbyname($n);
+						if(function_exists("autoClasses"))
 						autoClasses(&$nlayer,$this->mapa);
 						//
 						//cria as classes com base em atributos
 						//
-						/*
-						if($nlayer->getmetadata("classesitem") != "")
-						{
-							$itemnome = $nlayer->getmetadata("classesnome");
-							$itemid = $nlayer->getmetadata("classesitem");
-							$itemcor = $nlayer->getmetadata("classescor");
-							$itemsimbolo = $nlayer->getmetadata("classesimbolo");
-							$itemtamanho = $nlayer->getmetadata("classestamanho");
-							$classeoriginal = $nlayer->getclass(0);
-							//
-							//pega o número de ocorrências de itemid
-							//
-							$nlayer->open();
-							$status = $nlayer->whichShapes($this->mapa->extent);
-							$parametrosClasses = array();	
-							if ($status == 0)
-							{	
-								while ($shape = $nlayer->nextShape())
-								{
-									$id = trim($shape->values[$itemid]);
-									if (!$parametrosClasses[$id])
-									{
-										$nome = "";
-										if($itemnome != "")
-										$nome = trim($shape->values[$itemnome]);
-										$cor = "";
-										if($itemcor != "")
-										$cor = explode(",",trim($shape->values[$itemcor]));
-										if(count($cor) != 3)
-										$cor = explode(" ",trim($shape->values[$itemcor]));
-										$tamanho = "";
-										if($itemtamanho != "")
-										$tamanho = trim($shape->values[$itemtamanho]);
-										$simbolo = "";
-										if($itemsimbolo != "")
-										$simbolo = trim($shape->values[$itemsimbolo]);
-										$parametrosClasses[$id] = array("nome"=>$nome,"cor"=>$cor,"tamanho"=>$tamanho,"simbolo"=>$simbolo);
-									}
-								}
-								$fechou = $nlayer->close();
-								//echo "<pre>";var_dump($parametrosClasses);
-								if (count($parametrosClasses) > 0)
-								{
-									$ids = array_keys($parametrosClasses);
-									for($i=0;$i < count($parametrosClasses);++$i)
-									{
-										$p = $parametrosClasses[$ids[$i]];
-										//echo "<pre>";var_dump($p);
-										$nclasse = ms_newClassObj($nlayer,$classeoriginal);
-										if($p["nome"] != "")
-										$nclasse->set("name",$p["nome"]);
-										$estilo = $nclasse->getstyle(0);
-										if($p["cor"] != "")
-										{
-											$cor = $p["cor"];
-											$ncor = $estilo->color;
-											if($ncor == "")
-											$ncor = $estilo->outlinecolor;
-											$ncor->setrgb($cor[0],$cor[1],$cor[2]);
-										}
-										if($p["tamanho"] != "")
-										$estilo->set("size",$p["tamanho"]);
-										if($p["simbolo"] != "")
-										$estilo->set("symbolname",$p["simbolo"]);
-										
-										$strE = "('[".$itemid."]'eq'".$ids[$i]."')";
-										$nclasse->setexpression($strE);
-									}
-									$classeoriginal->set("status",MS_DELETE);
-								}
-							}
-						}
-						*/
 						//
 						//muda para RGB para melhorar o desenho da imagem raster
 						//
@@ -842,7 +771,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 						$nlayer->set("name",$nomeunico[$n]);
 						//altera o nome do grupo se existir
-						if ($nlayer->group != " ")
+						if ($nlayer->group != " " && $nlayer->group != "" )
 						{
 							$lr = $nlayer->group;
 							$nlayer->set("group",$nomeunico[$lr]);
@@ -1091,17 +1020,16 @@ Include:
 			$urllegenda = $servico."&service=wms&request=getlegendgraphic&version=".$versao."&service=wms&layer=".$tema."&format=".$im;
 			$layer->setmetadata("legendawms",$urllegenda);
 		}
-
 		$layer->setmetadata("wms_format",$im);
 		$layer->setmetadata("wfs","nao");
 		//verifica se o serviço tem wfs
-		$wfs = existeWFS($servico);
+		$wfs = existeWFS();
 		if ($wfs != "nao")
 		{
-			//verifica se a camada esta no wfs
-			$existeWFS = existeTemaWFS();
-			if ($existeWFS == "sim")
-			{$layer->setmetadata("wfs","sim");}
+			$layer->setmetadata("wfs","sim");
+			//$existeWFS = existeTemaWFS();
+			//if ($existeWFS == "sim")
+			//{$layer->setmetadata("wfs","sim");}
 		}
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);

@@ -989,7 +989,7 @@ Include:
 		if(!isset($testa)){$testa="";}
 		{
 			$cp->set_data($m->insereFiltro($filtro,$testa));
-			$cp->return_data();
+			//$cp->return_data();
 		}
 		if($testa != "sim")
 		{
@@ -1656,6 +1656,8 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadegrupos":
+		if (file_exists("../ms_configura.php"))
+		{include_once("../ms_configura.php");}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
 		if(!isset($idmenu)){$idmenu="";}
@@ -1988,6 +1990,7 @@ Include:
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
+		if(!isset($tipo)){$tipo = "";}
 		$m->pan($x,$y,$escala,$tipo);
 		$m->salva();
 		redesenhaMapa();
@@ -2299,6 +2302,7 @@ Include:
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
+		if(!isset($xy)){$xy = "";}
 		$cp->set_data($m->selecaoPT($xy,$tipo,$tolerancia));
 	break;
 /*
