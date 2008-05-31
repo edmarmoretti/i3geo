@@ -318,7 +318,7 @@ function representacao()
 }
 function mudaLegenda()
 {
-	aguarde("block")
+	//aguarde("block")
 	var tabela = $i("legenda")
 	var trs = tabela.getElementsByTagName("tr")
 	var nomes = new Array()
