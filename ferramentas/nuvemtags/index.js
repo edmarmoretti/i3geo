@@ -71,7 +71,7 @@ $i("resultado").innerHTML = "Aguarde...";
 var cp = new cpaint();
 cp.set_response_type("JSON");
 //cp.set_debug(2)
-var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
+var p = "../../classesphp/mapa_controle.php?funcao=listaTags&rss=&nrss=&g_sid="+g_sid;
 cp.call(p,"listaTags",montaNuvem);
 
 function procurar(texto)
