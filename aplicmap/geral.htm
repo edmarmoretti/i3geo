@@ -159,7 +159,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	</table>
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="reinicia" alt="" src="../imagens/branco.gif" id='imprimir'/>
+		<img title="imprimir" alt="" src="../imagens/branco.gif" id='imprimir'/>
 	</div>
 
 	<div style='display:inline;background-color:rgb(250,250,250);'>
@@ -422,7 +422,7 @@ g_templateLegenda = "";
 	
 	Pode ser "block" ou "none".
 */
-g_mapaRefDisplay = "block"
+g_mapaRefDisplay = "block";
 
 /*
 	Variable: g_docaguias
@@ -583,11 +583,19 @@ Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador n
 g_autoRedesenho = 0;
 
 /*
+Variable: g_tempo_aplicar
+
+Tempo que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
+
+*/
+g_tempo_aplicar = 4000;
+
+/*
 	Variable: objmapa.guiaTemas
 	
 	Define qual div corresponde ao local de listagem das camadas disponíveis no mapa
 */
-objmapa.guiaTemas = "guia1"
+objmapa.guiaTemas = "guia1";
 
 /*
 	Variable: objmapa.guiaMenu
