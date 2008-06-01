@@ -153,6 +153,12 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC></TDESC>
             <TLINK></TLINK>
          </TEMA>
+         <TEMA>
+            <TID>testezoom</TID>
+            <TNOME>Teste de zoom</TNOME>
+            <TDESC></TDESC>
+            <TLINK></TLINK>
+         </TEMA>
     	</SGRUPO>
    </GRUPO>
    <GRUPO>
