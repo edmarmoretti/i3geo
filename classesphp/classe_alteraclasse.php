@@ -138,8 +138,10 @@ $exps - lista com as novas expressões
 	{
 		//prepara os arrays com os valores
 		$ids = explode(";",$ids);
-		$nomes = explode(";",strip_tags($nomes));
-		$exps = explode(";",strip_tags($exps));
+		$nomes = mb_convert_encoding($nomes,"ISO-8859-1","UTF-8");
+		$nomes = explode(";",$nomes);
+		$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
+		$exps = explode(";",$exps);
 		//pega os layers existentes no array ids e armazena no array t
 		$c = count($ids);
 		for ($i=0; $i < $c; ++$i)

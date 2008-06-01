@@ -287,7 +287,11 @@ array
 					$nomeclasse = $classe->name;
 					if (function_exists("mb_convert_encoding"))
 					{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
-					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>($classe->getexpression()),"imagem"=>$i,"proc"=>"");
+					$nomeexp = $classe->getexpression();
+					if (function_exists("mb_convert_encoding"))
+					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
+
+					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"");
 				}
 				if (($totaliza=="sim") && ($nc > 1))
 				{
