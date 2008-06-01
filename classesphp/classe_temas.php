@@ -342,10 +342,17 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 */
 	function zoomTema()
 	{
-		$prjMapa = $this->mapa->getProjection();
-		$prjTema = $this->layer->getProjection();
+		$prjMapa = "";
+		$prjTema = "";
+		if($this->layer->type != MS_LAYER_RASTER)
+		{
+			$prjMapa = $this->mapa->getProjection();
+			$prjTema = $this->layer->getProjection();
+		}	
 		$extatual = $this->mapa->extent;
 		$ret = $this->layer->getmetadata("extensao");
+		if($ret == "" && $this->layer->type == MS_LAYER_RASTER)
+		{$ret = "-75.233614607 -33.7515829981 -27.592958622 5.272156";}
 		if ($ret == "")
 		{
 			$ret = $this->layer->getextent();
