@@ -1,0 +1,291 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  
+LAYER
+    DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/estados"
+    METADATA
+      "CLASSE"	"SIM"
+      "ESCALA"	"250000"
+      "TEMA"	"Brasil"
+      "IDENTIFICA"	"nao"
+	"APLICAEXTENSAO" "sim"
+	"EXTENSAO" "-59.3209846282 -20.7465830515 -42.7452291615 -12.3810873165"
+    END
+    NAME "estados"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TOLERANCE 0
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "TO"
+      EXPRESSION ('[ESTADO]'eq'TO')
+      STYLE
+        ANGLE 360
+        COLOR 140 97 33
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "SP"
+      EXPRESSION ('[ESTADO]'eq'SP')
+      STYLE
+        ANGLE 360
+        COLOR 168 199 86
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "SE"
+      EXPRESSION ('[ESTADO]'eq'SE')
+      STYLE
+        ANGLE 360
+        COLOR 190 102 73
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "SC"
+      EXPRESSION ('[ESTADO]'eq'SC')
+      STYLE
+        ANGLE 360
+        COLOR 176 240 183
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "RS"
+      EXPRESSION ('[ESTADO]'eq'RS')
+      STYLE
+        ANGLE 360
+        COLOR 237 147 165
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "RR"
+      EXPRESSION ('[ESTADO]'eq'RR')
+      STYLE
+        ANGLE 360
+        COLOR 15 141 140
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "RO"
+      EXPRESSION ('[ESTADO]'eq'RO')
+      STYLE
+        ANGLE 360
+        COLOR 10 34 14
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "RN"
+      EXPRESSION ('[ESTADO]'eq'RN')
+      STYLE
+        ANGLE 360
+        COLOR 45 219 196
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "RJ"
+      EXPRESSION ('[ESTADO]'eq'RJ')
+      STYLE
+        ANGLE 360
+        COLOR 53 53 52
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PR"
+      EXPRESSION ('[ESTADO]'eq'PR')
+      STYLE
+        ANGLE 360
+        COLOR 248 167 181
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PI"
+      EXPRESSION ('[ESTADO]'eq'PI')
+      STYLE
+        ANGLE 360
+        COLOR 82 255 85
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PE"
+      EXPRESSION ('[ESTADO]'eq'PE')
+      STYLE
+        ANGLE 360
+        COLOR 180 218 86
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PB"
+      EXPRESSION ('[ESTADO]'eq'PB')
+      STYLE
+        ANGLE 360
+        COLOR 137 38 213
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PA"
+      EXPRESSION ('[ESTADO]'eq'PA')
+      STYLE
+        ANGLE 360
+        COLOR 102 93 162
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "MT"
+      EXPRESSION ('[ESTADO]'eq'MT')
+      STYLE
+        ANGLE 360
+        COLOR 95 70 1
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "MS"
+      EXPRESSION ('[ESTADO]'eq'MS')
+      STYLE
+        ANGLE 360
+        COLOR 225 240 36
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "MG"
+      EXPRESSION ('[ESTADO]'eq'MG')
+      STYLE
+        ANGLE 360
+        COLOR 32 104 157
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "MA"
+      EXPRESSION ('[ESTADO]'eq'MA')
+      STYLE
+        ANGLE 360
+        COLOR 2 166 135
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "GO"
+      EXPRESSION ('[ESTADO]'eq'GO')
+      STYLE
+        ANGLE 360
+        COLOR 88 189 164
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "ES"
+      EXPRESSION ('[ESTADO]'eq'ES')
+      STYLE
+        ANGLE 360
+        COLOR 211 159 69
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "DF"
+      EXPRESSION ('[ESTADO]'eq'DF')
+      STYLE
+        ANGLE 360
+        COLOR 225 158 21
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "CE"
+      EXPRESSION ('[ESTADO]'eq'CE')
+      STYLE
+        ANGLE 360
+        COLOR 82 164 187
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "BA"
+      EXPRESSION ('[ESTADO]'eq'BA')
+      STYLE
+        ANGLE 360
+        COLOR 46 197 86
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "AP"
+      EXPRESSION ('[ESTADO]'eq'AP')
+      STYLE
+        ANGLE 360
+        COLOR 212 114 89
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "AM"
+      EXPRESSION ('[ESTADO]'eq'AM')
+      STYLE
+        ANGLE 360
+        COLOR 114 157 224
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "AL"
+      EXPRESSION ('[ESTADO]'eq'AL')
+      STYLE
+        ANGLE 360
+        COLOR 177 137 242
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "AC"
+      EXPRESSION ('[ESTADO]'eq'AC')
+      STYLE
+        ANGLE 360
+        COLOR 165 15 163
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+  END
+END
