@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FLAMINGO xmlns:fmc="fmc" lang="en" languages="en" tooltipdelay="500">
+<fmc:Logo id="logo"/>
+<fmc:Legend left="right -210" top="40" bottom="bottom -30" right="right -5" listento="map">
+<group label="Groundwater layers" open="true">
+<item canhide="true" infourl="" label="Waterwingebied" listento="groundwatermapservice.103">
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/wtwgbied.jpg"/>
+</item>
+<item canhide="true" infourl="" label="Grondwaterbeschermingsgebied" listento="groundwatermapservice.102">
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/gwtbsmgeb.jpg"/>
+</item>
+<item canhide="true" infourl="" label="Boringsvrije zone" listento="groundwatermapservice.101">
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/brvzne1.jpg" minscale="26.458"/>
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/brvzne2.jpg" maxscale="26.458"/>
+</item>
+<item canhide="true" infourl="" label="100-jaarsaandachtsgebied" listento="groundwatermapservice.100">
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/hdjadgbied1.jpg" minscale="26.458"/>
+<symbol symbolurl="http://www.flamingo-mc.org/modules/tinyd2/legend/hdjadgbied2.jpg" maxscale="26.458"/>
+</item>
+</group>
+<group label="Base map layers" open="false">
+<item canhide="true" label="Aerial photo" listento="groundwatermapservice.32" infourl="javascript:openNewWindow('http://www.flamingo-mc.org/modules/tinyd2/legend/info/aerialphoto.html', 'legwin','width=350,height=400,top=20,left=70,toolbar=no,scrollbars=yes,resizable=yes')"/>
+</group>
+</fmc:Legend>
+<fmc:Coordinates left="right -273" top="bottom -28" decimals="0" listento="map">
+<style id=".xy" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+<string id="xy">
+<en>
+<![CDATA[x:[x]<br>y:[y]]]>
+</en>
+</string>
+</fmc:Coordinates>
+<fmc:Window skin="g" top="60" right="right -100" width="300" bottom="bottom -70" canresize="true" canclose="true" title="Identify results" visible="false">
+<fmc:IdentifyResultsHTML width="100%" height="100%" listento="map">
+<style id=".bold" font-family="verdana" font-size="12px" color="#333333" display="block" font-weight="bold"/>
+<style id=".normal" font-family="verdana" font-size="11px" color="#333333" display="block" font-weight="normal"/>
+<style id=".uitleg" font-family="verdana" font-size="11px" color="#0033cc" display="block" font-weight="normal" font-style="italic"/>
+<string id="groundwatermapservice.103" stripdatabase="true">
+<en>
+<![CDATA[<span class='normal'>
+<img src="http://www.flamingo-mc.org/modules/tinyd2/legend/wtwgbied.jpg" width='24' height='18' hspace='5' vspace='5'><span class='bold'>Waterwingebied</span>
+<textformat tabstops='[80]'>
+Naam\t[GEBIED]
+</textformat>
+</span>
+]]>
+</en>
+</string>
+<string id="groundwatermapservice.102" stripdatabase="true">
+<en>
+<![CDATA[<span class='normal'>
+<img src="http://www.flamingo-mc.org/modules/tinyd2/legend/wtwgbied.jpg" width='24' height='18' hspace='5' vspace='5'><span class='bold'>Grondwaterbeschermingsgebied</span>
+<textformat tabstops='[80]'>
+Naam\t[GEBIED]
+</textformat>
+</span>
+]]>
+</en>
+</string>
+<string id="groundwatermapservice.101" stripdatabase="true">
+<en>
+<![CDATA[<span class='normal'>
+<img src="http://www.flamingo-mc.org/modules/tinyd2/legend/brvzne1.jpg" width='24' height='18' hspace='5' vspace='5'><span class='bold'>Boringsvrije zone</span><br><img src="http://www.flamingo-mc.org/modules/tinyd2/legend/brvzne2.jpg" width='24' height='18' hspace='5' vspace='5'>
+<textformat tabstops='[80]'>
+Naam\t[GEBIED]
+</textformat>
+</span>
+]]>
+</en>
+</string>
+<string id="groundwatermapservice.100" stripdatabase="true">
+<en>
+<![CDATA[<span class='normal'>
+<img src="http://www.flamingo-mc.org/modules/tinyd2/legend/hdjadgbied1.jpg" width='24' height='18' hspace='5' vspace='5'><span class='bold'>100-jaarsaandachtsgebied</span><br><img src="http://www.flamingo-mc.org/modules/tinyd2/legend/hdjadgbied2.jpg" width='24' height='18' hspace='5' vspace='5'>
+<textformat tabstops='[80]'>
+Naam\t[NAAM]
+Waterleidingbedrijf\t[WATERL_BED]
+</textformat>
+</span>
+]]>
+</en>
+</string>
+</fmc:IdentifyResultsHTML>
+</fmc:Window>
+<fmc:ToolGroup left="210" top="0" tool="zoom" listento="map">
+<fmc:ToolZoomin id="zoom" />
+<fmc:ToolZoomout left="30"/>
+<fmc:ToolPan left="60"/>
+<fmc:ToolIdentify left="90"/>
+<fmc:ToolMeasure left="120" units=" m" magicnumber="1" decimals="0"/>
+</fmc:ToolGroup>
+<fmc:ButtonPrev right="408" top="2" listento="map"/>
+<fmc:ButtonNext right="438" top="2" listento="map"/>
+<fmc:ButtonFull right="468" top="2" listento="map"/>
+<fmc:ZoomerV left="174" top="40" height="163" listento="map"/>
+<fmc:MonitorLayer id="monitor" left="230" top="55" listento="map">
+<style id=".text" font-family="verdana" font-size="12px" color="#666666" display="block" font-weight="normal"/>
+</fmc:MonitorLayer>
+<fmc:Container borderwidth="0" bordercolor="#b8b8b8" left="210" top="40" bottom="bottom -30" right="right -218">
+<fmc:BorderNavigation skin="F1" width="100%" height="100%" listento="map"/>
+<fmc:Map id="map" movequality="HIGH" extenthistory="10" width="100%" height="100%" extent="109490,437082,180801,481536" fullextent="109490,437082,180801,481536" minscale="1">
+<fmc:LayerIdentifyIcon/>
+<fmc:LayerArcIMS id="groundwatermapservice" name="Groundwatermap" identifyall="true" server="geocement.esrinl.com" mapservice="grondwater" identifyids="103,102,101,100" />
+</fmc:Map>
+</fmc:Container>
+<fmc:Scalebar left="220" top="bottom -20" width="150" listento="map" units=" m">
+<style id=".label" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+<style id=".units" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+</fmc:Scalebar>
+<fmc:Map id="overview" movequality="HIGH" left="0" top="40" width="168" height="163" extent="109490,437082,180801,481536" fullextent="109490,437082,180801,481536">
+<fmc:LayerOverview listento="map" followfactor="500"/>
+<fmc:LayerImage id="Nederland" imageurl="../assets/nederland.swf" extent="13562,306839,278026,614073" />
+</fmc:Map>
+<fmc:LocationFinder id="locationfinder" controls="true" include="../config/gwmsearchconfig.xml" left="left" top="230" width="200" bottom="bottom" listento="map" />
+</FLAMINGO>

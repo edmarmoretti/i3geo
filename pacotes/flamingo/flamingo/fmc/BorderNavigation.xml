@@ -1,0 +1,10 @@
+<BorderNavigation>
+<string id="tooltip_north" en="up" nl="naar boven"/>
+<string id="tooltip_south" en="down" nl="naar onder"/>
+<string id="tooltip_west" en="left" nl="naar links"/>
+<string id="tooltip_east" en="right" nl="naar rechts"/>
+<string id="tooltip_northwest" en="up/left" nl="naar boven/links"/>
+<string id="tooltip_southwest" en="down/left" nl="naar onder/links"/>
+<string id="tooltip_southeast" en="down/right" nl="naar onder/rechts"/>
+<string id="tooltip_northeast" en="up/right" nl="naar boven/rechts"/>
+</BorderNavigation>

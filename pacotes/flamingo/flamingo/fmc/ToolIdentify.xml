@@ -1,0 +1,7 @@
+<ToolIdentify>
+	<string id="tooltip" nl="informatie opvragen" en="identify"/>
+        <cursor id="cursor" url="fmc/CursorsMap.swf" linkageid="identify"/>
+        <cursor id="click"  url="fmc/CursorsMap.swf" linkageid="identify_click"/>
+        <cursor id="busy" url="fmc/CursorsMap.swf" linkageid="busy" />
+</ToolIdentify>
+

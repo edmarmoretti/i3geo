@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FLAMINGO xmlns:fmc="fmc" lang="en" languages="en,nl" tooltipdelay="500" preloadtitle="IMS and WMS services">
+<style id=".tooltip" font-family="Verdana" font-size="11" color="#880000" display="block"/>
+<style id="text3" font-family="Verdana" font-size="11" color="#333333" display="inline"/>
+<xguide id="xcenter" x="50%"/>
+<yguide id="ycenter" y="40%"/>
+<fmc:Logo id="logo"/>
+<fmc:ToolGroup tool="activetool" listento="Fryslanmap,Groningenmap,Mixedmap" left="xcenter -14">
+<fmc:ToolZoomin id="activetool" />
+<fmc:ToolZoomout top="30"/>
+<fmc:ToolPan top="60"/>
+<fmc:ToolMeasure top="90" units=" m" magicnumber="1" decimals="0"/>
+</fmc:ToolGroup>
+<fmc:Container borderwidth="0" bordercolor="#b8b8b8" right="xcenter -22" bottom="ycenter -6" left="left" top="top">
+<fmc:BorderNavigation width="100%" height="100%" listento="Fryslanmap,Mixedmap,Groningenmap" />
+<fmc:Map id="Fryslanmap" holdonidentify="true" fadesteps="5" movetime="200" movesteps="5" holdonupdate="false" right="right" bottom="bottom" left="left" top="top" fullextent="110000,539000,282000,610000" nrprevextents="10" extent="110000,539000,282000,610000">
+<fmc:LayerArcIMS id="ims" server="geoserver3.esrinl.com" mapservice="wms_ehs" visible="true" hiddenids="" visibleids="" identifyids="" hidelegendids="" fullextent="113453.578947368,539000,227453.563157895,615690.021052632" />
+<fmc:LayerImage id="png1" imageurl="layers/nl.png" extent="13562,306839,282000,614073" />
+</fmc:Map>
+</fmc:Container>
+<fmc:Container borderwidth="0" bordercolor="#b8b8b8" right="right -1" bottom="ycenter -6" left="xcenter 22" top="top">
+<fmc:BorderNavigation width="100%" height="100%" listento="Groningenmap,Mixedmap,Fryslanmap" />
+<fmc:Map id="Groningenmap" holdonidentify="true" fadesteps="5" movetime="200" movesteps="5" holdonupdate="false" right="right" bottom="bottom" left="left" top="top" fullextent="110000,539000,282000,614073" nrprevextents="10" extent="110000,539000,282000,614073">
+<fmc:LayerOGWMS id="wms" visible="true" format="image/png" url="http://groningen.esrinl.com/wmsconnector/com.esri.wms.Esrimap" servicename="g_cehs_ioggeo" service="WMS" version="1.1.1" srs="EPSG:28992" query_layers="" layers="Concept_EHS,Ecologische_verbindingszone,Robuuste_verbindingszone" fullextent="205000,539000,282000,614073" />
+<fmc:LayerImage id="png2" imageurl="layers/nl.png" extent="13562,306839,282000,614073" />
+</fmc:Map>
+</fmc:Container>
+<fmc:Container borderwidth="0" bordercolor="#b8b8b8" right="right" bottom="bottom -2" left="left" top="ycenter 6">
+<fmc:BorderNavigation width="100%" height="100%" listento="Mixedmap,Fryslanmap,Groningenmap" />
+<fmc:Map id="Mixedmap" holdonidentify="true" fadesteps="5" movetime="200" movesteps="5" holdonupdate="false" right="right" bottom="bottom" left="left" top="top" fullextent="110000,539000,282000,614073" nrprevextents="10" extent="110000,539000,282000,614073">
+<fmc:LayerArcIMS id="ims1" server="geoserver3.esrinl.com" mapservice="wms_ehs" visible="true" hiddenids="" visibleids="" identifyids="" hidelegendids="" fullextent="113453.578947368,527562.373684211,227453.563157895,615690.021052632" />
+<fmc:LayerOGWMS id="wms1" visible="true" url="http://groningen.esrinl.com/wmsconnector/com.esri.wms.Esrimap" servicename="g_cehs_ioggeo" service="WMS" version="1.1.1" srs="EPSG:28992" query_layers="" layers="Concept_EHS,Ecologische_verbindingszone,Robuuste_verbindingszone"/>
+<fmc:LayerImage id="png3" imageurl="layers/nl.png" extent="13562,306839,282000,614073" />
+</fmc:Map>
+</fmc:Container>
+</FLAMINGO>

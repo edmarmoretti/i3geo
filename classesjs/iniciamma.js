@@ -342,6 +342,11 @@ function Mapa(e,m)
 		$i("openlayers").style.width = this.w;
 		$i("openlayers").style.height = this.h;
 	}
+	if ($i("flamingo"))
+	{
+		$i("flamingo").style.width = this.w;
+		$i("flamingo").style.height = this.h;
+	}
 	/*
 	Variable: objmapa.navegacaoDir
 	

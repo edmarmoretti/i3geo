@@ -59,6 +59,7 @@ WEB
    "ows_context_fid" "i3geo"
    "ows_context_version" "1.0.0"
    "ows_namespace_uri" "http://www.omsug.ca/osgis2004"
+   "ows_name" "i3geoogc"
   END
  END
  # start of layer definitions

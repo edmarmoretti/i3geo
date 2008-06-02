@@ -452,6 +452,13 @@ function ajaxredesenha(retorno)
 				criaOL(Math.random()+Math.random()+Math.random()+Math.random());
 				objmapa.OL.zoomToExtent(b);
 			}
+			//
+			//utilizado na interface flamingo
+			//
+			if($i("flamingo"))
+			{
+				atualizaFL();
+			}
 		}
 	}
 }
@@ -473,6 +480,13 @@ function ajaxIniciaParametros(retorno)
 		var b = objmapa.OL.getExtent();
 		criaOL(Math.random()+Math.random()+Math.random()+Math.random());
 		objmapa.OL.zoomToExtent(b);
+	}
+	//
+	//utilizado na interface flamingo
+	//
+	if($i("flamingo"))
+	{
+		atualizaFL();
 	}
 	//
 	//limpa os objetos tips da tela

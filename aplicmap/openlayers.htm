@@ -34,7 +34,7 @@
 <tr>
  <td class=tdbranca id=contemFerramentas style="border:0px;vertical-align:top;width:268px;text-align:left;">
   <table width=100% cellspacing=0 cellpadding=0 >
-   <tr><td style="border-bottom:0px solid rgb(230,230,230);height:45px">
+   <tr><td style="background-color:white;border-bottom:0px solid rgb(230,230,230);height:45px">
     <!-- Guias principais, não mude o ID, apenas o nome se for desejado -->
     <div style="top:0px;cursor:pointer;">
 	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
@@ -49,10 +49,10 @@
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
   <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
  </td>
- <td class=verdeclaro style="vertical-align:top;border-width:0px;">
+ <td class=verdeclaro style="background-color:white;vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;">
    <!-- Corpo do mapa. Pode ser reposicionado, mas não mude os IDs -->
-   <tr><td><div id="panel" class="olControlEditingToolbar"></div></td></tr>
+   <tr><td></td></tr>
    <tr><td  class=verdeclaro id=contemImg >
     <div id=openlayers style="text-align:left;background-image:url('../imagens/i3geo1bw.jpg')"></div>
    </td></tr>
@@ -80,6 +80,7 @@
    <table title="confluencias" style="width:100%;border-bottom:3px solid rgb(255,255,255);"><tr><td style='background-color:rgb(250,250,250);'><img title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/></td></tr></table>
    <table id=botao3d title="3d - experimental" style="width:100%;border-bottom:3px solid rgb(255,255,255);"><tr><td style='background-color:rgb(250,250,250);'><img title="3d" alt="" src="../imagens/branco.gif" id='v3d'/></td></tr></table>
 </div>
+<div id="panel" class="olControlEditingToolbar" style="position:absolute;top:12px;left:265px;"></div>
 <div id=botoesadic ></div>
 <!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
@@ -221,14 +222,14 @@ function criaOL(posfixo)
 	objmapa.OL.addControl(new OpenLayers.Control.LayerSwitcher());
 	
 	objmapa.OL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
-
-            var container = document.getElementById("panel");
-            var panel = new OpenLayers.Control.EditingToolbar(
+	if(document.getElementById("panel"))
+	{
+    	var container = document.getElementById("panel");
+        var panel = new OpenLayers.Control.EditingToolbar(
                 vlayer, {div: container}
             );
-            objmapa.OL.addControl(panel);	
-	//objmapa.OL.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
-	
+        objmapa.OL.addControl(panel);
+	}
 	objmapa.OL.addControl(new OpenLayers.Control.KeyboardDefaults());	
 
 	//

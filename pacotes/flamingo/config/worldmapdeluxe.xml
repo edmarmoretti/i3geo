@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FLAMINGO xmlns:fmc="fmc" lang="en" tooltipdelay="500">
+<fmc:Logo id="logo"/>
+<fmc:Container borderwidth="0" bordercolor="#b8b8b8" left="left" top="top" bottom="bottom" right="right">
+<style id=".group" font-family="verdana" font-size="12px" color="#6666cc" display="block" font-weight="normal"/>
+<fmc:Image right="right -10" bottom="bottom -10" width="74" height="47" mask="true" alpha="60" url="http://www.flamingo-mc.org/modules/tinyd2/images/fmclogo.gif"/>
+<fmc:Window right="right -40" top="20" width="220" height="350" skin="g" canresize="true" showresizebutton="true" defocusalpha="70">
+<string id="title" en="legend"/>
+<fmc:Legend width="100%" height="100%" listento="map">
+<string id="outofscale">
+<en>
+<![CDATA[Not visible at current scale<br>Click to zoom to this layer]]>
+</en>
+</string>
+<item label="Worldmap" listento="Worldmap" canhide="true"/>
+<group label="Layers" open="true" listento="Worldmap">
+<item label="Coastlines" listento="Worldmap.Coastlines" canhide="true"/>
+<item label="Waterbodies" listento="Worldmap.Waterbodies" canhide="true"/>
+<item label="Inundated" listento="Worldmap.Inundated" canhide="true"/>
+<item label="Rivers" listento="Worldmap.Rivers" canhide="true"/>
+<item label="Streams" listento="Worldmap.Streams" canhide="true"/>
+<item label="Railroads" listento="Worldmap.Railroads" canhide="true"/>
+<item label="Highways" listento="Worldmap.Highways" canhide="true"/>
+<item label="Roads" listento="Worldmap.Roads" canhide="true"/>
+<item label="Trails" listento="Worldmap.Trails" canhide="true"/>
+<item label="Borders" listento="Worldmap.Borders" canhide="true"/>
+<item label="Cities" listento="Worldmap.Cities" canhide="true"/>
+<item label="Settlements" listento="Worldmap.Settlements" canhide="true"/>
+<item label="Spot elevations" listento="Worldmap.Spot elevations" canhide="true"/>
+<item label="Airports" listento="Worldmap.Airports" canhide="true"/>
+<item label="Ocean features" listento="Worldmap.Ocean features" canhide="true"/>
+</group>
+</fmc:Legend>
+</fmc:Window>
+<fmc:Window left="90" top="10" width="200" height="350" visible="false" skin="g" canclose="true" canresize="true" showresizebutton="true" defocusalpha="70">
+<string id="title" en="identify"/>
+<fmc:Identifyresults width="100%" height="100%" listento="map"/>
+</fmc:Window>
+<fmc:Coordinates left="8" bottom="bottom -6" decimals="4" listento="map">
+<string id="xy" en="lat: [y], lon: [x]"/>
+<style id=".xy" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+</fmc:Coordinates/>
+<fmc:Scalebar id="sbkm" skin="style1" xcenter="50%" bottom="bottom" width="200" units=" km" magicnumber="1000" listento="map">
+<style id=".label" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+<style id=".units" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+</fmc:Scalebar>
+<fmc:Scalebar id="sbmi" skin="style1" xcenter="50%" bottom="bottom -16" width="200" units=" mile" magicnumber="1609.344" listento="map">
+<style id=".label" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+<style id=".units" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
+</fmc:Scalebar>
+<fmc:ToolGroup defaulttool="theactivetool" tool="theactivetool" left="28" top="28" listento="map">
+<fmc:ToolSuperPan id="theactivetool" left="150" visible="false"/>
+<fmc:ToolIdentify left="0" top="0"/>
+</fmc:ToolGroup>
+<fmc:BorderNavigation left="12" top="12" width="60" height="60" offset="0" listento="map"/>
+<fmc:ZoomerV listento="map" left="30" top="75" height="200"/>
+<fmc:MonitorLayer id="monitor" xcenter="50%" ycenter="50%" listento="map">
+<style id=".text" font-family="verdana" font-size="11px" color="#666666" display="block" font-weight="normal"/>
+<string id="waiting" en="Creating new map, please wait..."/>
+<string id="loading" en="Retrieving map [percentage]%, hold on..."/>
+</fmc:MonitorLayer>
+<fmc:Map id="map" movequality="BEST" conformal="true" mapunits="DECIMALDEGREES" width="100%" height="100%" fullextent="-180,-90,180,90" extent="-180,-90,180,90" minscale="100">
+<fmc:LayerIdentifyIcon skin="heartbeat"/>
+<fmc:LayerGrid gridwidth="10" gridheight="10" minscale="11000"/>
+<fmc:LayerGrid gridwidth="5" gridheight="5" minscale="5000" maxscale="11000"/>
+<fmc:LayerGrid gridwidth="2" gridheight="2" minscale="1000" maxscale="5000"/>
+<fmc:LayerGrid gridwidth="1" gridheight="1" minscale= "500" maxscale="1000"/>
+<fmc:LayerGrid gridwidth="0.5" gridheight="0.5" minscale="100" maxscale="500"/>
+<fmc:LayerGrid gridwidth="0.1" gridheight="0.1" maxscale="100"/>
+<fmc:LayerOGWMS id="Worldmap" showerrors="true" format="image/png" url="http://www2.demis.nl/wms/wms.asp?WMS=WorldMap&VERSION=1.1.1&SRS=EPSG:4326&EXCEPTIONS=INIMAGE&BGCOLOR=0xF0F0F0" QUERY_LAYERS="#ALL#" LAYERS="#ALL#"/>
+</fmc:Map>
+</fmc:Container>
+</FLAMINGO>

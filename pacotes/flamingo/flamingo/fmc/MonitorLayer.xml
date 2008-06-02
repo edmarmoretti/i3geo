@@ -1,0 +1,5 @@
+<MonitorLayer>
+  <string id="loading"  en="loading '[layer]' [percentage]%..." nl="'[layer]' laden [percentage]%..."/>
+  <string id="waiting"  en="making layer '[layer]'..." nl="kaartlaag '[layer]' maken..."/>
+  <style  id=".text" font-family="verdana" font-size="12px" color="#666666" display="block" font-weight="normal"/>
+</MonitorLayer>

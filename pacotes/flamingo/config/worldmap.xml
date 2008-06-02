@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FLAMINGO xmlns:fmc="fmc"  lang="en" tooltipdelay="500" >
+<fmc:Logo id="logo"/>
+<fmc:Window left="40" top="40" width="230" height="350" canresize="true" visible="true" skin="g">
+<string id="title" en="legend"/>
+<fmc:Legend width="100%" height="100%"  listento="map" >
+<item label="Worldmap"  listento="OG3" canhide="true"  /> 
+<group label="Layers" open="false" maxscale="11200" listento="OG3">
+<item label="Coastlines"  listento="OG3.Coastlines" canhide="true"/>
+<item label="Waterbodies"  listento="OG3.Waterbodies" canhide="true" /> 
+<item label="Inundated"  listento="OG3.Inundated" canhide="true" /> 
+<item label="Rivers"  listento="OG3.Rivers" canhide="true" /> 
+<item label="Streams"  listento="OG3.Streams" canhide="true" /> 
+<item label="Railroads"  listento="OG3.Railroads" canhide="true" /> 
+<item label="Highways"  listento="OG3.Highways" canhide="true" /> 
+<item label="Roads"  listento="OG3.Roads" canhide="true" /> 
+<item label="Trails"  listento="OG3.Trails" canhide="true" /> 
+<item label="Borders"  listento="OG3.Borders" canhide="true" /> 
+<item label="Cities"  listento="OG3.Cities" canhide="true" /> 
+<item label="Settlements"  listento="OG3.Settlements" canhide="true" /> 
+<item label="Spot elevations"  listento="OG3.Spot elevations" canhide="true" /> 
+<item label="Airports"  listento="OG3.Airports" canhide="true" /> 
+<item label="Ocean features"  listento="OG3.Ocean features" canhide="true" /> 
+</group>
+</fmc:Legend>
+
+</fmc:Window>
+
+<fmc:Window left="10" top="10" width="200" height="200"  visible="false" skin="g" canclose="true">
+<string id="title" en="identify"/>
+<fmc:Identifyresults width="100%" height="100%" listento="map"/>
+</fmc:Window>
+
+
+<fmc:Coordinates  listento="map,map1"  left="x10" top="bottom -40" >
+<string id="xy" en="lat:[y]º&lt;br&gt;lon:[x]º"/>
+</fmc:Coordinates/>
+<fmc:ZoomerV listento="map"  left="10" top="20" height="100"/>
+
+<fmc:ToolGroup  listento="map"  left="10" top="10">
+    <fmc:ToolPan  left="30" clickdelay="0" pandelay="0"/>
+    <fmc:ToolZoomin left="60" zoomdelay="0" clickdelay="0"/>
+    <fmc:ToolZoomout left="90" zoomdelay="0" clickdelay="0"/>
+    <fmc:ToolMeasure  left="120"  units="km" magicnumber="1000" decimals="0" />
+    <fmc:ToolSuperPan  left="150"  />
+    <fmc:ToolIdentify  left="180"  />
+</fmc:ToolGroup>
+
+<fmc:MonitorLayer id="monitor" left="150" top="15" listento="map"/> 
+
+<fmc:Map id="map" movequality="HIGH" conform="true" mapunits="DECIMALDEGREES" left="10" top="10" right="right -10" bottom="50%" fullextent="-180,-90,180,90"  extent="-180,-90,180,90"  >
+    <fmc:LayerIdentifyIcon skin="heartbeat"/> 
+    <fmc:LayerGrid  gridwidth="10" gridheight="10" minscale="11000"/>
+    <fmc:LayerGrid  gridwidth="5" gridheight="5"   minscale="5000" maxscale="11000"/>
+    <fmc:LayerGrid  gridwidth="2" gridheight="2"   minscale="1000" maxscale="5000"/>
+    <fmc:LayerGrid  gridwidth="1" gridheight="1"   minscale = "500" maxscale="1000"/>
+    <fmc:LayerGrid  gridwidth="0.5" gridheight="0.5"  minscale="100"  maxscale="500"/>
+    <fmc:LayerGrid  gridwidth="0.1" gridheight="0.1"    maxscale="100"/>
+    <fmc:LayerOGWMS id="OG3"  format="SWF" url="http://www2.demis.nl/wms/wms.asp?WMS=WorldMap&amp;VERSION=1.1.1&amp;SRS=EPSG:4326&amp;EXCEPTIONS=INIMAGE&amp;BGCOLOR=0xF0F0F0" QUERY_LAYERS="#ALL#" LAYERS="#ALL#" />
+ </fmc:Map>
+
+</FLAMINGO>
+
+
+

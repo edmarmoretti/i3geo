@@ -1,0 +1,14 @@
+<LocationFinder>
+<string id="label"  en="search..." nl="zoek..."/>
+<string id="busy"  en="searching..." nl="zoeken..."/>
+<string id="nohit"  en="nothing found..." nl="niets gevonden..."/>
+<string id="prev"  en="previous   " nl="vorige   "/>
+<string id="next"  en="next" nl="volgende"/>
+<style id=".nohit" font-family="verdana" font-size="10px" color="#cccccc" display="block" font-weight="normal"/>
+<style id=".busy" font-family="verdana" font-size="10px" color="#cccccc" display="block" font-weight="normal" font-style="italic"/>
+<style id=".hint" font-family="verdana" font-size="10px" color="#cccccc" display="block" font-weight="normal" font-style="italic"/>
+<style id=".feature" font-family="verdana" font-size="12px" color="#0066cc" display="block" font-weight="normal"/>
+<style id=".prev" font-family="verdana" font-size="10px" color="#0066cc" display="block" font-weight="bold" text-align="center"/>
+<style id=".next" font-family="verdana" font-size="10px" color="#0066cc" display="block" font-weight="bold" text-align="center"/>
+<style id=".error" font-family="verdana" font-size="12px" color="#ff0000" display="block" font-weight="normal"/>
+</LocationFinder>

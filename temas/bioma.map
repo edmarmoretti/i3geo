@@ -6,17 +6,17 @@ LAYER
   STATUS OFF
   TEMPLATE "none.htm"
   CONNECTIONTYPE postgis
-	CONNECTION "user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432"
-	DATA "the_geom FROM (select * FROM brasil.brareg1) as foo USING UNIQUE gid USING SRID=4291"
+  CONNECTION "user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432"
+#CONNECTION ""
+  DATA "the_geom FROM (select * FROM brasil.brareg1) as foo USING UNIQUE gid USING SRID=4291"
   METADATA
 	ITENS "cd_legenda"
 	ITENSDESC "Nome"
   	TEMA "Bioma"
   	CLASSE "SIM"
       ESCALA "5000000"
-      DOWNLOAD "SIM"
+	EXTENSAO "-75.233614607 -33.7515829981 -27.592958622 5.272156"
   END
-  MINSCALE 50
   TRANSPARENCY 80
   CLASS
     Name 'Amazônia'

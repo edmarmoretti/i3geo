@@ -34,7 +34,7 @@ function busca()
 			{
 				for (i=0;i<retorno.data.geonames.length; i++)
 				{
-					if (i == 0){var ins = "<table>";}
+					if (i == 0){var ins = "<table style=height:500; >";}
 					ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
 					var layer = retorno.data.geonames[i].layer
 					for (j=0;j<retorno.data.geonames[i].lugares.length; j++)

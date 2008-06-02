@@ -1,0 +1,239 @@
+<?xml version = "1.0" encoding="UTF-8" ?>
+<FLAMINGO>
+
+<LOCATIONS id="gemeente">
+  <string id="label" nl="Zoek een gemeente" en="Search a municipality" />
+  <string id="hint" nl="Kies een gemeente..." en="Choose a municipality..." />
+	<LOCATION label="Abcoude" extent="122170,470950,130176,479703"/>
+	<LOCATION label="Amerongen" extent="154295,442382,164862,452215"/>
+	<LOCATION label="Amersfoort" extent="149350,457710,161747,470231"/>
+	<LOCATION label="Baarn" extent="142919,464065,151586,471759"/>
+	<LOCATION label="Breukelen" extent="122220,459347,131768,470911"/>
+	<LOCATION label="Bunnik" extent="138839,445390,147742,454793"/>
+	<LOCATION label="Bunschoten" extent="149660,468501,156283,477848"/>
+	<LOCATION label="De Bilt" extent="134900,455104,144375,468588"/>
+	<LOCATION label="De Ronde Venen" extent="114396,463707,127462,474923"/>
+	<LOCATION label="Doorn" extent="148339,446751,155431,453710"/>
+	<LOCATION label="Driebergen-Rijsenburg" extent="145297,446561,151977,455461"/>
+	<LOCATION label="Eemnes" extent="143679,470023,151853,478123"/>
+	<LOCATION label="Houten" extent="136520,441153,147139,452169"/>
+	<LOCATION label="IJsselstein" extent="126865,444677,133839,452707"/>
+	<LOCATION label="Leersum" extent="153277,445117,161983,452099"/>
+	<LOCATION label="Leusden" extent="149658,455574,163784,463808"/>
+	<LOCATION label="Loenen" extent="127096,466183,133188,478074"/>
+	<LOCATION label="Lopik" extent="116903,438842,132842,448758"/>
+	<LOCATION label="Maarn" extent="151143,448891,158605,455198"/>
+	<LOCATION label="Maarssen" extent="128637,458695,136858,465901"/>
+	<LOCATION label="Montfoort" extent="119309,446850,129777,454829"/>
+	<LOCATION label="Nieuwegein" extent="132623,445411,137518,452811"/>
+	<LOCATION label="Oudewater" extent="114508,444246,123499,453028"/>
+	<LOCATION label="Renswoude" extent="162330,450074,167143,457578"/>
+	<LOCATION label="Rhenen" extent="161713,439344,171610,447901"/>
+	<LOCATION label="Soest" extent="145044,457919,152554,468601"/>
+	<LOCATION label="Utrecht" extent="126324,448605,141940,461720"/>
+	<LOCATION label="Veenendaal" extent="163503,445288,169037,451359"/>
+	<LOCATION label="Vianen" extent="131027,438236,140841,446190"/>
+	<LOCATION label="Wijk bij Duurstede" extent="144972,440624,157024,448859"/>
+	<LOCATION label="Woerden" extent="114141,452938,128906,463973"/>
+	<LOCATION label="Woudenberg" extent="148830,450438,162688,458909"/>
+	<LOCATION label="Zeist" extent="141573,452151,151359,464897"/>
+</LOCATIONS>
+
+<LOCATIONS id="plaats">
+  <string id="label" nl="Zoek een plaats" en="Search a city or village" />
+  <string id="hint" nl="Kies een plaats..." en="Choose a city or village..." />
+	<LOCATION label="'t Goy" extent="143475,445693,143989,446191"/>
+	<LOCATION label="Aalsmeer" extent="110981,473510,114812,476459"/>
+	<LOCATION label="Abcoude" extent="125657,475261,127378,477143"/>
+	<LOCATION label="Achterberg" extent="168351,442352,169535,443108"/>
+	<LOCATION label="Achterveld" extent="161789,460390,163464,461459"/>
+	<LOCATION label="Ameide" extent="124933,440103,127065,441391"/>
+	<LOCATION label="Amerongen" extent="159162,445262,160775,446758"/>
+	<LOCATION label="Amersfoort / Hoogland" extent="151120,460079,157712,468963"/>
+	<LOCATION label="Ammerstol" extent="114486,437400,115649,438492"/>
+	<LOCATION label="Amstelhoek" extent="116613,471236,117624,471988"/>
+	<LOCATION label="Amstelveen" extent="115912,476000,120825,481350"/>
+	<LOCATION label="Amsterdam-Zuidoost" extent="123837,477773,128737,481350"/>
+	<LOCATION label="Ankeveen" extent="134955,474541,135633,475749"/>
+	<LOCATION label="Asch" extent="149462,437766,150033,438263"/>
+	<LOCATION label="Austerlitz" extent="149586,454138,150447,455063"/>
+	<LOCATION label="Baambrugge" extent="127410,472892,128282,473710"/>
+	<LOCATION label="Baarn" extent="145880,467707,149727,470811"/>
+	<LOCATION label="Barneveld" extent="166962,459265,170728,464715"/>
+	<LOCATION label="Bennekom" extent="171785,443758,177048,447267"/>
+	<LOCATION label="Benschop" extent="126545,446143,127557,447034"/>
+	<LOCATION label="Bergambacht" extent="113100,437400,114352,439295"/>
+	<LOCATION label="Beusichem" extent="147285,439286,149484,440937"/>
+	<LOCATION label="Bikbergen" extent="141200,477163,142517,478017"/>
+	<LOCATION label="Bodegraven" extent="110143,453301,112505,456233"/>
+	<LOCATION label="Bosch en Duin" extent="145420,458177,146403,459473"/>
+	<LOCATION label="Breukelen" extent="127532,463119,129390,466706"/>
+	<LOCATION label="Breukeleveen" extent="133047,464724,133481,466265"/>
+	<LOCATION label="Bunnik" extent="141120,452353,143754,454085"/>
+	<LOCATION label="Bunschoten-Spakenburg" extent="152765,470781,155210,474507"/>
+	<LOCATION label="Bussum" extent="138145,474714,143469,478503"/>
+	<LOCATION label="Cabauw" extent="121210,441568,121829,442365"/>
+	<LOCATION label="Cothen" extent="148893,444879,150280,445880"/>
+	<LOCATION label="Culemborg" extent="142093,438601,146351,441858"/>
+	<LOCATION label="De Bilt / Bilthoven / Den Dolder" extent="139778,456743,144291,462518"/>
+	<LOCATION label="De Glind" extent="162691,458772,163495,459447"/>
+	<LOCATION label="De Hoef" extent="115678,468036,116139,468787"/>
+	<LOCATION label="De Kwakel" extent="113746,472179,114868,473025"/>
+	<LOCATION label="Den Dolder" extent="132813,459696,146149,461961"/>
+	<LOCATION label="Doorn" extent="148685,448323,152813,451307"/>
+	<LOCATION label="Driebergen-Rijsenburg" extent="146214,450311,149620,453571"/>
+	<LOCATION label="Driebruggen" extent="114194,450326,115363,451181"/>
+	<LOCATION label="Driemond" extent="128507,479235,130074,480227"/>
+	<LOCATION label="Eck en Wiel" extent="159366,441748,160098,442785"/>
+	<LOCATION label="Ede" extent="170212,447263,176390,452113"/>
+	<LOCATION label="Ederveen" extent="167523,452077,168458,453243"/>
+	<LOCATION label="Eembrugge" extent="149300,470218,150128,471518"/>
+	<LOCATION label="Eemdijk" extent="150412,473585,151441,474498"/>
+	<LOCATION label="Eemnes" extent="145125,473016,147087,474880"/>
+	<LOCATION label="Elst" extent="161215,443348,164086,444998"/>
+	<LOCATION label="Ermelo" extent="169136,477544,172983,481350"/>
+	<LOCATION label="Everdingen" extent="138715,441434,139541,442168"/>
+	<LOCATION label="Garderen" extent="176367,471125,177734,472526"/>
+	<LOCATION label="Gelkenes" extent="117441,438304,118551,439350"/>
+	<LOCATION label="Gouda" extent="109900,445984,111898,448046"/>
+	<LOCATION label="Groenekan" extent="138059,459017,139587,460086"/>
+	<LOCATION label="Groot-Ammers" extent="115656,437400,117114,438083"/>
+	<LOCATION label="Haarzuilens" extent="128134,458996,128600,459619"/>
+	<LOCATION label="Haastrecht" extent="112237,445144,113714,446447"/>
+	<LOCATION label="Hagestein" extent="136177,443082,137588,444105"/>
+	<LOCATION label="Harmelen" extent="124260,455063,126595,457301"/>
+	<LOCATION label="Harskamp" extent="179587,459814,180100,460934"/>
+	<LOCATION label="Heeswijk" extent="125802,451453,126929,452079"/>
+	<LOCATION label="Hei- en Boeicop" extent="133664,439274,134318,439762"/>
+	<LOCATION label="Hekendorp" extent="114956,447351,115644,447898"/>
+	<LOCATION label="Hemmen" extent="176355,438149,176944,438761"/>
+	<LOCATION label="Heteren" extent="179209,440380,180100,441666"/>
+	<LOCATION label="Hilversum" extent="136613,467889,142901,473188"/>
+	<LOCATION label="Hilversumse Meent" extent="137489,475048,138378,476656"/>
+	<LOCATION label="Hoevelaken" extent="158855,464258,161339,466008"/>
+	<LOCATION label="Hollandsche Rading" extent="140045,464396,141236,465719"/>
+	<LOCATION label="Hooglanderveen" extent="157373,466167,158452,467060"/>
+	<LOCATION label="Horst" extent="168335,479480,169972,481350"/>
+	<LOCATION label="Horstermeer" extent="132920,473339,134375,474088"/>
+	<LOCATION label="Houten" extent="137743,446673,142128,450762"/>
+	<LOCATION label="Huis ter Heide" extent="142417,453982,147103,458364"/>
+	<LOCATION label="Huizen" extent="142344,476911,148318,480355"/>
+	<LOCATION label="IJsselstein" extent="129708,446155,132838,449745"/>
+	<LOCATION label="Indoornik" extent="177271,439306,177636,439744"/>
+	<LOCATION label="Ingen" extent="159196,440043,162957,442673"/>
+	<LOCATION label="Jaarsveld" extent="126454,442198,127051,442691"/>
+	<LOCATION label="Kamerik" extent="120678,457674,121774,458992"/>
+	<LOCATION label="Kanis" extent="120791,459416,121414,460018"/>
+	<LOCATION label="Kerklaan" extent="128873,470148,129431,470746"/>
+	<LOCATION label="Kesteren" extent="166783,437559,169374,439201"/>
+	<LOCATION label="Kockengen" extent="124484,461942,125822,462986"/>
+	<LOCATION label="Kootwijkerbroek" extent="173401,461913,174671,462927"/>
+	<LOCATION label="Kortenhoef" extent="135683,471556,137277,475030"/>
+	<LOCATION label="Kudelstaart" extent="110507,471142,112378,473481"/>
+	<LOCATION label="Lage-Vuursche" extent="143483,465395,143981,465993"/>
+	<LOCATION label="Langerak" extent="119215,437555,121720,439225"/>
+	<LOCATION label="Laren" extent="142286,472458,146257,477371"/>
+	<LOCATION label="Leersum" extent="156751,446338,158740,448024"/>
+	<LOCATION label="Leusden-Centrum" extent="156528,458569,159344,462186"/>
+	<LOCATION label="Leusden-Zuid" extent="155926,457901,157667,459523"/>
+	<LOCATION label="Lexmond" extent="130336,441175,131463,442094"/>
+	<LOCATION label="Lienden" extent="162923,438638,164796,440725"/>
+	<LOCATION label="Linschoten" extent="122043,452288,123303,453498"/>
+	<LOCATION label="Loenen" extent="129478,468669,130727,469991"/>
+	<LOCATION label="Loenersloot" extent="128253,471046,128893,471746"/>
+	<LOCATION label="Lopik" extent="123747,442357,126810,444531"/>
+	<LOCATION label="Lopikerkapel" extent="131164,444522,131949,445294"/>
+	<LOCATION label="Lunteren" extent="170063,454258,172038,456281"/>
+	<LOCATION label="Maarn" extent="152677,452336,155032,453878"/>
+	<LOCATION label="Maarsbergen" extent="155787,451600,157032,452727"/>
+	<LOCATION label="Maartensdijk" extent="139618,462355,141193,463989"/>
+	<LOCATION label="Maurik" extent="156162,440764,159126,442288"/>
+	<LOCATION label="Mijdrecht - Wilnis" extent="117888,467291,122720,470362"/>
+	<LOCATION label="Montfoort" extent="123074,448632,125760,451977"/>
+	<LOCATION label="Naarden" extent="137625,478130,141316,480563"/>
+	<LOCATION label="Nederhorst den Berg / Overmeer" extent="131103,473493,132156,476708"/>
+	<LOCATION label="Nederlangbroek" extent="150328,446529,151468,447610"/>
+	<LOCATION label="Nes a/d Amstel" extent="119497,474313,120038,475074"/>
+	<LOCATION label="Nieuw-Loosdrecht" extent="136450,466963,138603,469053"/>
+	<LOCATION label="Nieuwegein" extent="132795,445912,137443,452811"/>
+	<LOCATION label="Nieuwer-Ter-Aa" extent="126846,466750,127446,467358"/>
+	<LOCATION label="Nieuwerbrug" extent="114857,454045,116514,455053"/>
+	<LOCATION label="Nieuwkoop" extent="111936,460216,114077,464249"/>
+	<LOCATION label="Nieuwpoort" extent="118997,438248,119687,439022"/>
+	<LOCATION label="Nieuwveen" extent="110638,466823,112265,468613"/>
+	<LOCATION label="Nigtevecht" extent="130036,475984,130910,476751"/>
+	<LOCATION label="Nijkerk" extent="159549,468860,163086,472828"/>
+	<LOCATION label="Nijkerkerveen" extent="159880,466885,160959,468105"/>
+	<LOCATION label="Noordeinde" extent="112688,466959,113291,467754"/>
+	<LOCATION label="Noorden" extent="116388,463987,117046,464836"/>
+	<LOCATION label="Odijk" extent="143722,450547,145286,452178"/>
+	<LOCATION label="Ommeren" extent="161763,439548,162789,440380"/>
+	<LOCATION label="Oosteinde" extent="113847,475989,115166,477442"/>
+	<LOCATION label="Opheusden" extent="171219,437437,172334,438746"/>
+	<LOCATION label="Oud-Loosdrecht" extent="133035,468261,135146,469096"/>
+	<LOCATION label="Ouderkerk a/d Amstel" extent="121123,478048,123545,479681"/>
+	<LOCATION label="Oudewater" extent="118661,447793,120188,450240"/>
+	<LOCATION label="Overberg" extent="162193,449804,163083,450327"/>
+	<LOCATION label="Polsbroek" extent="117691,443005,118754,443748"/>
+	<LOCATION label="Portengense Brug" extent="125415,463370,126105,464047"/>
+	<LOCATION label="Putten" extent="167814,472872,171480,476187"/>
+	<LOCATION label="Randwijk" extent="176633,440194,177529,440939"/>
+	<LOCATION label="Ravenswaaij" extent="150693,440211,151284,440669"/>
+	<LOCATION label="Remmerden" extent="164404,442212,165687,443231"/>
+	<LOCATION label="Renkum" extent="177611,441806,180100,444627"/>
+	<LOCATION label="Renswoude" extent="164602,453445,166269,454776"/>
+	<LOCATION label="Rhenen" extent="166542,440373,168667,442702"/>
+	<LOCATION label="Rijswijk" extent="152602,440833,153163,441500"/>
+	<LOCATION label="Schalkwijk" extent="140485,444569,142066,445709"/>
+	<LOCATION label="Scherpenzeel" extent="160258,453947,163389,455377"/>
+	<LOCATION label="Schiphol" extent="110352,478056,115954,480959"/>
+	<LOCATION label="Schoonhoven" extent="117028,439351,119371,441127"/>
+	<LOCATION label="Sluipwijk" extent="109900,449919,111057,452226"/>
+	<LOCATION label="Soest" extent="146143,462953,150357,467459"/>
+	<LOCATION label="Soestduinen" extent="148197,461807,149245,462263"/>
+	<LOCATION label="Soesterberg" extent="147207,457647,150043,460019"/>
+	<LOCATION label="Stolwijk" extent="112064,441386,113325,443654"/>
+	<LOCATION label="Stroe" extent="175403,466103,176163,467063"/>
+	<LOCATION label="Terschuur" extent="163454,463771,164345,464778"/>
+	<LOCATION label="Tienhoven" extent="124466,441264,134729,465146"/>
+	<LOCATION label="Tull en 't Waal" extent="137225,445546,137804,446177"/>
+	<LOCATION label="Uithoorn" extent="115069,471217,118520,474370"/>
+	<LOCATION label="Uitweg" extent="129238,443649,129670,444159"/>
+	<LOCATION label="Utrecht" extent="128498,451819,141446,462780"/>
+	<LOCATION label="Veenendaal" extent="163886,445374,168961,451136"/>
+	<LOCATION label="Vianen" extent="132899,442365,136186,445687"/>
+	<LOCATION label="Vinkeveen" extent="122816,468310,125025,471294"/>
+	<LOCATION label="Voorthuizen" extent="168516,465548,171098,467278"/>
+	<LOCATION label="Vreeland" extent="130269,471027,131480,472035"/>
+	<LOCATION label="Vrouwenakker" extent="113542,470956,114177,471576"/>
+	<LOCATION label="Waarder" extent="115725,452121,116596,453197"/>
+	<LOCATION label="Wageningen" extent="171860,440772,176491,444750"/>
+	<LOCATION label="Waverveen" extent="121120,470165,122090,470762"/>
+	<LOCATION label="Weesp" extent="129939,478645,132666,481350"/>
+	<LOCATION label="Wekerom" extent="176939,457807,177929,458805"/>
+	<LOCATION label="Werkhoven" extent="144696,447785,145687,448889"/>
+	<LOCATION label="Westbroek" extent="136650,462143,137518,462870"/>
+	<LOCATION label="Wijk bij Duurstede" extent="149395,442088,152606,444370"/>
+	<LOCATION label="Woerden" extent="118025,453810,123177,456738"/>
+	<LOCATION label="Woerdense Verlaat" extent="118614,462816,119404,463334"/>
+	<LOCATION label="Woudenberg" extent="155812,453930,159825,455780"/>
+	<LOCATION label="Zegveld" extent="116690,457794,118019,459178"/>
+	<LOCATION label="Zeist" extent="145357,452578,148363,456109"/>
+	<LOCATION label="Zetten" extent="176778,437400,178343,438594"/>
+	<LOCATION label="Zevenhoven" extent="113021,465584,114043,466671"/>
+	<LOCATION label="Zijderveld" extent="137502,438838,138356,439672"/>
+	<LOCATION label="Zoelmond" extent="149339,438857,150269,439792"/>
+	<LOCATION label="Zwartebroek" extent="162497,465306,163619,466032"/>
+</LOCATIONS>
+
+<LOCATIONS id="waterwingebied" server="http://geocement.esrinl.com" service="grondwater" layerid="103" searchfield="GEBIED" outputfields="GEBIED">
+<string id="output" nl="Zoom naar [GEBIED]..." en="Zoom to [GEBIED]..."/>
+<string id="label" nl="Zoek een waterwingebied" en="Search a water winning area"/>
+</LOCATIONS>
+
+<LOCATIONS id="straat" server="http://geocement.esrinl.com" service="grondwater" layerid="39" searchfield="FIRST_STT_" outputfields="FIRST_STT_">
+<string id="output" nl="Ga naar [FIRST_STT_]" en="Zoom to [FIRST_STT_]..."/>
+<string id="label" nl="Zoek een straat" en="Search for a street"/>
+</LOCATIONS>
+
+</FLAMINGO>

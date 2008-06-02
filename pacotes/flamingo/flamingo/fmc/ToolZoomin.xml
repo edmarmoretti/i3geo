@@ -1,0 +1,5 @@
+<ToolZoomin>
+	<string id="tooltip" nl="inzoomen" en="zoom in"/>
+        <cursor id="cursor" url="fmc/CursorsMap.swf" linkageid="zoomin"/>
+        <cursor id="busy"   url="fmc/CursorsMap.swf" linkageid="busy"/>
+</ToolZoomin>

@@ -892,6 +892,10 @@ texto - texto que será mostrado no título da janela
 */
 function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 {
+	//
+	//esconde o objeto flamingo (flash) caso a interface atual seja a flamingo.htm
+	//
+	if($i("flamingoi")){$i("flamingoi").style.display="none";}
 	try
 	{
 		//
@@ -944,6 +948,7 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 			if($i("divGeometriasTemp"))
 			{richdraw.fecha();}
 			limpacontainerf();
+			if($i("flamingoi")){$i("flamingoi").style.display="block";}
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
 	}
@@ -1263,12 +1268,18 @@ function aguarde()
 		eval ('YAHOO.aguarde.'+aguardeId+'.body.style.height="20px"');
 		eval ('YAHOO.aguarde.'+aguardeId+'.setHeader("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span>")');
 		eval ('YAHOO.aguarde.'+aguardeId+'.render(document.body)');
-		eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+pos[0]+','+pos[1]+')');
+		if($i("flamingo"))
+		{
+			eval ('YAHOO.aguarde.'+aguardeId+'.moveTo(0,0)');
+		}
+		else
+		{eval ('YAHOO.aguarde.'+aguardeId+'.moveTo('+pos[0]+','+pos[1]+')');}
 		eval ('YAHOO.aguarde.'+aguardeId+'.show()');
 		if($i("wait_mask"))
 		{$i("wait_mask").style.zIndex=5000;}
 		if($i("wait_c"))
 		{$i("wait_c").style.zIndex=6000;}
+		
 	};
 	this.fecha = function(aguardeId)
 	{
@@ -3412,6 +3423,13 @@ function remapaf()
 	}
 	else
 	{remapaAdicNovos();}
+	//
+	//utilizado na interface flamingo para redesenhar o mapa
+	//
+	if($i("flamingo"))
+	{
+		//atualizaFL();
+	}
 }
 /*
 Section: eventos
@@ -3455,6 +3473,8 @@ function calcposf()
 		{var dc = $i("img");}
 		if ($i("openlayers"))
 		{var dc = $i("openlayers");}
+		if ($i("flamingo"))
+		{var dc = $i("flamingo");}
 		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
 		{
 			dc = dc.offsetParent;
@@ -3495,12 +3515,12 @@ Move o ícone que segue o mouse quando da movimentação sobre o mapa
 function movecursor()
 {
 	//
-	//se a interface openlayers estiver sendo usada, o ícone não é mostrado
+	//se a interface openlayers ou flamingo estiver sendo usada, o ícone não é mostrado
 	//'obj' é o elemento que guarda o ícone
 	//
 	if ($i("obj"))
 	{
-		if ($i("openlayers"))
+		if ($i("openlayers") || $i("flamingo"))
 		{$i("obj").style.display = "none";}
 		else
 		{
