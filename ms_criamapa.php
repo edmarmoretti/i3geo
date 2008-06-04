@@ -199,6 +199,9 @@ $_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
+//rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
+$fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
+$_SESSION['fingerprint'] = md5($fingerprint . session_id());
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //
