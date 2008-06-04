@@ -93,25 +93,28 @@ $ts = $nmap->getalllayernames();
 foreach ($ts as $t)
 {
 	$l = $nmap->getlayerbyname($t);
-	$l->setmetadata("ows_title",pegaNome($l));
-	//$l->setmetadata("ows_name",$t);
-	$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
-	//$l->setmetadata("gml_include_items","all");
-	//$l->set("dump",MS_TRUE);
-	$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-	//$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-	$c = $l->getclass(0);
-	if ($c->name == "")
-	{$c->name = " ";}
-	if (isset($postgis_mapa))
+	if($l->connectiontype != MS_WMS)
 	{
-		if ($postgis_mapa != "")
+		$l->setmetadata("ows_title",pegaNome($l));
+		//$l->setmetadata("ows_name",$t);
+		$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+		$l->setmetadata("gml_include_items","all");
+		$l->set("dump",MS_TRUE);
+		$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+		$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+		$c = $l->getclass(0);
+		if ($c->name == "")
+		{$c->name = " ";}
+		if (isset($postgis_mapa))
 		{
-			if ($l->connectiontype == MS_POSTGIS)
+			if ($postgis_mapa != "")
 			{
-				if ($l->connection == " ")
+				if ($l->connectiontype == MS_POSTGIS)
 				{
-					$l->set("connection",$postgis_mapa);
+					if ($l->connection == " ")
+					{
+						$l->set("connection",$postgis_mapa);
+					}
 				}
 			}
 		}

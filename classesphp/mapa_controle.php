@@ -197,6 +197,9 @@ Include:
 Property: montaFlamingo
 
 Gera o arquivo xml de configuração para a interface Flamingo.
+
+O arquivo xml é gravado no diretório temporário do mapserver e contém a string de conexão com o gerador de webservices classesphp/flamingoogc.php
+Esse gerador, recebe como parâmetro o id da seção atual e transforma o mapfile atual em um webservcie capaz de ser entendido pelo flamingo.
 */
 	case "montaFlamingo":
 		$string1 = "<?xml version='1.0' encoding='UTF-8'?>";
@@ -223,11 +226,10 @@ Gera o arquivo xml de configuração para a interface Flamingo.
 <style id=".units" font-family="verdana" font-size="10px" color="#555555" display="block" font-weight="normal"/>
 </fmc:Scalebar>
 <fmc:ToolGroup left="30" top="0" tool="zoom" listento="map">
-<fmc:ToolZoomin id="zoom" />
+<fmc:ToolZoomin id="zoom" title="aproxima"/>
 <fmc:ToolZoomout left="30"/>
 <fmc:ToolSuperPan left="60"/>
-<fmc:ToolIdentify left="90"/>
-<fmc:ToolMeasure left="120" units=" m" magicnumber="1" decimals="0"/>
+<fmc:ToolMeasure left="90" units=" m" magicnumber="1" decimals="0"/>
 </fmc:ToolGroup>
 <fmc:ButtonPrev right="210" top="2" listento="map"/>
 <fmc:ButtonNext right="240" top="2" listento="map"/>
