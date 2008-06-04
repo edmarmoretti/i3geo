@@ -606,6 +606,9 @@ objmapa.guiaListaMapas = "guia5";
 	Inicializa o mapa
 */
 objmapa.inicializa();
+//esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
+if($i("escala") && objmapa.w < 500)
+{$i("escala").style.display="none";}
 </script>
 </body>
 </html>
