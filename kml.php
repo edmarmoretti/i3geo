@@ -31,7 +31,7 @@ error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("ms_configura.php");
 echo '<?xml version="1.0" encoding="UTF-8"?>';
-echo "<kml xmlns='http://earth.google.com/kml/2.2'>";
+echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
@@ -42,14 +42,13 @@ else
 {
 	foreach($menutemas as $m)
 	{
-		if(file_exists($m))
 		$menus[] = $m["arquivo"];
 	}
 }
 if(!isset($menus))
 $menus = array("/opt/www/html/i3geo/menutemas/menutemas.xml");
 
-echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>";
+echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
 foreach ($menus as $menu)
 {
 	$xml = simplexml_load_file($menu);
@@ -57,17 +56,17 @@ foreach ($menus as $menu)
 	{
 		$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
 		$desc = mb_convert_encoding($grupo->DTIPO,"auto","auto");
-		echo "<Folder>";
-		echo "<name>$nome</name>";
-		echo "<description>$desc</description>";
-		echo "<open>0</open><visibility>0</visibility>";
+		echo "<Folder>\n";
+		echo "<name>$nome</name>\n";
+		echo "<description>$desc</description>\n";
+		echo "<open>0</open><visibility>0</visibility>\n";
 		foreach($grupo->SGRUPO as $sgrupo)
 		{
-			echo "<Folder>";
+			echo "<Folder>\n";
 			$nome = mb_convert_encoding($sgrupo->SDTIPO,"auto","auto");
-			echo "<name>$nome</name>";
-			echo "<description></description>";
-			echo "<open>0</open><visibility>0</visibility>";
+			echo "<name>$nome</name>\n";
+			echo "<description></description>\n";
+			echo "<open>0</open><visibility>0</visibility>\n";
 			foreach($sgrupo->TEMA as $tema)
 			{
 				$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
@@ -82,28 +81,27 @@ foreach ($menus as $menu)
 				{
 					$kml = mb_convert_encoding($tema->KML,"auto","auto");
 				}
-				if(strtolower($kml != "nao") && strtolower($tipoa != "wms"))
+				if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
 				{
-					echo "<GroundOverlay>";
-    				echo "<name>$nome</name>";
-    				$fonte = "<a href='$fonte' >Fonte </a>";
-    				$legenda = "<a href='$protocolo1/i3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-					//$legenda = "<a href=http://localhost >Legenda</a>";
-					echo "<description><![CDATA[".$fonte.$legenda.$desc."]]></description>";
-					echo "<visibility>0</visibility>";      
-					echo "<Icon>";
+					echo "<GroundOverlay>\n";
+    					echo "<name>$nome</name>\n";
+    					$fonte = "<a href='$fonte' >Fonte </a>";
+    					$legenda = "<a href='$protocolo1/i3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+					echo "<description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
+					echo "<visibility>0</visibility>\n";      
+					echo "<Icon>\n";
 					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-					echo "<viewRefreshMode>onStop</viewRefreshMode>";
-					echo "<href>$l</href>";
-					echo "</Icon>";
-					echo "<LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>";
-					echo "</GroundOverlay>";
+					echo "<viewRefreshMode>onStop</viewRefreshMode>\n";
+					echo "<href>$l</href>\n";
+					echo "</Icon>\n";
+					echo "<LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
+					echo "</GroundOverlay>\n";
 				}
 			}		
-			echo "</Folder>";	
+			echo "</Folder>\n";	
 		}
-		echo "</Folder>";
+		echo "</Folder>\n";
 	}
 }
-echo "</Document></kml>";
+echo "</Document></kml>\n";
 ?>

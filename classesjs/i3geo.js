@@ -54,8 +54,13 @@ Parameters:
 id - id que identifica o texto na variável g_linguagem, definida em configura.js
 */
 var g_linguagem = "";
+var g_traducao = "";
 var $trad = function(id)
-{return eval("g_traducao."+id+"[0]."+g_linguagem+";");};
+{
+	//return eval("g_traducao."+id+"[0]."+g_linguagem+";");
+	var t = g_traducao[id][0];
+	return t[g_linguagem];
+};
 //necessario para nao dar erro no refresh
 var mostradicasf = function(){};
 var scriptLocation = "";
@@ -73,7 +78,8 @@ for (i = 0; i < scripts.length; i++) {
 	}
 }
 //scripts
-var allScriptTags = "";
+
+/*var allScriptTags = "";
 //var jsfiles = new Array();
 var jsfiles = ["i3geo_tudo_compacto.js.php"];
 for (i = 0;i < jsfiles.length;i++)
@@ -82,6 +88,7 @@ for (i = 0;i < jsfiles.length;i++)
 	allScriptTags += currentScriptTag;
 }
 //css
+
 var allCssTags = "";
 //var cssfiles = new Array();
 var cssfiles = ["../css/i3geo.css.php"];
@@ -90,5 +97,6 @@ for (i = 0;i < cssfiles.length;i++)
 	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 	allCssTags += currentCssTag;
 }
-document.write(allCssTags);
-document.write(allScriptTags);
+*/
+document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo.css.php'></script>");
+document.write("<script src='" + scriptLocation + "i3geo_tudo_compacto.js.php'></script>");

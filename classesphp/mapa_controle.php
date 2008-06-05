@@ -758,7 +758,8 @@ Include:
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$m->adicionaTema($temas,$locaplic);
+		$salvar = $m->adicionaTema($temas,$locaplic);
+		if($salvar)
 		$m->salva();
 		$teste = testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")

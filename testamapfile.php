@@ -4,6 +4,13 @@ Title: Testa um mapfile.
 
 Permite testar um mapfile específico existente no diretório "temas" ou gerar uma imagem miniatura.
 
+As miniaturas são utilizadas na árvore de temas mostrada na opção "adiciona", existente na interface padrão.
+Quando o usuário passa o mouse sobre a palavra "mini" é executado o programa de geração de miniaturas. Caso o
+a miniatura tiver sido gerada previamente, a preferência é por esse arquivo. Isso permite uma performance melhor,
+uma vez que a geração on-line pode ser muito demorada. Para gerar as miniaturas o administrador deve executar o
+programa geraminiatura.php.
+
+
 File: i3geo/testamapfile.php
 
 About: Licença
@@ -36,7 +43,8 @@ Parameters:
 
 map - nome do mapfile que será aberto. O arquivo é procurado no caminho indicado e no diretório i3geo/temas
 	se map=todos, todos os mapas são desenhados de 10 em 10.
-tipo - (opcional) tipo de retorno mini|grande . A opção mini retorna uma miniatura do mapa
+tipo - (opcional) tipo de retorno mini|grande . Controla o tamanho da miniatura que deverá ser mostrada.
+A opção mini retorna uma miniatura do mapa
 */
 set_time_limit(300);
 ini_set('max_execution_time', 300);

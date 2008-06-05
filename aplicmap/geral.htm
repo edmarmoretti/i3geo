@@ -244,7 +244,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 	
 */
-g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -253,7 +253,7 @@ g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
 	
 */
-g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
+var g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
 /*
 Variable: g_templateLegenda
 
@@ -266,7 +266,7 @@ O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor
 Exemplo:
 g_templateLegenda = "legendaseminput.htm";
 */
-g_templateLegenda = "";
+var g_templateLegenda = "";
 /*
 	Variable: g_funcaoTip
 	
@@ -422,7 +422,7 @@ g_templateLegenda = "";
 	
 	Pode ser "block" ou "none".
 */
-g_mapaRefDisplay = "block";
+var g_mapaRefDisplay = "block";
 
 /*
 	Variable: g_docaguias
@@ -530,7 +530,7 @@ g_mapaRefDisplay = "block";
 	
 	Pode ser caminho completo. Se não, busca no aplicmap.
 */
-g_3dmap = "3dmap.map";
+var g_3dmap = "3dmap.map";
 
 /*
 	Variable: g_embedLegenda
@@ -562,7 +562,7 @@ g_mashuppar = "&mapext=-53 -26 -42 -18";
 	g_mensagempadrao = "O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
 */
 
-objmapa = new Mapa();
+var objmapa = new Mapa();
 
 /*
 Variable: g_visual
@@ -571,7 +571,7 @@ Indica qual o tipo de visual para abertura do mapa.
 
 Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
 */
-g_visual = "default";
+var g_visual = "default";
 
 /*
 Variable: g_autoRedesenho
@@ -580,7 +580,7 @@ Ativa o auto redesenho após um determinado tempo (milisegundos).
 
 Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
 */
-g_autoRedesenho = 0;
+var g_autoRedesenho = 0;
 
 /*
 Variable: g_tempo_aplicar
@@ -588,7 +588,7 @@ Variable: g_tempo_aplicar
 Tempo que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
 
 */
-g_tempo_aplicar = 4000;
+var g_tempo_aplicar = 4000;
 
 /*
 	Variable: objmapa.guiaTemas

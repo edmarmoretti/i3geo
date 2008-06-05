@@ -71,6 +71,20 @@ Group: Aplicativos adicionais  {
    File: i3geo/geradordelinks.htm  (geradordelinks.htm)
    File: i3geo/wscliente.htm  (wscliente.htm)
    File: Mashup  (exemplos\mashup.htm)
+   File: Gera miniaturas.  (geraminiatura.php)
+
+   Group: Menutemas  {
+
+      File: Lista de aplicações de identificação  (menutemas\identifica.xml)
+      File: Lista de Atlas  (menutemas\atlas.xml)
+      File: Lista de links para sites de download  (menutemas\linksdownload.xml)
+      File: Lista de mapas  (menutemas\mapas.xml)
+      File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
+      File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
+      File: Lista de sistemas.  (menutemas\sistemas.xml)
+      File: Menu de temas  (menutemas\menutemas.xml)
+      }  # Group: Menutemas
+
    }  # Group: Aplicativos adicionais
 
 Group: Aplicmap  {

@@ -2,9 +2,18 @@
 /*
 Title: Registra o IP do usuário para criação do mapa de visitantes.
 
-Se vc não quiser que essa operação seja executada, basta comentar o código todo ou retirar o include existente em ms_criamapa.php.
+Com esta opção ativada, toda vez que um usuário abre o i3geo seu IP é identificado e a coordenada geográfica é pesquisada 
+no banco de dados pacotes/geoip/GeoLiteCity.dat. A coordenada é então registrada em um banco de dados cuja conexão é definida 
+na variável $conexao.
+Com base nesses registros, é possível criar um tema que mostra a localização dos visitantes registrados.
 
-Para mostrar os visitantes, basta usar o tema temas/visitantes.map. Exemplo:
+Se vc não quiser que essa operação seja executada, basta comentar o código todo ou retirar o include existente em 
+ms_criamapa.php. Se não existir o arquivo pacotes/geoip/GeoLiteCity.dat, o programa também não funcionará.
+
+É preciso também que exista o arquivo pacotes/geoip/GeoLiteCity.dat, que pode ser obtido em http://www.maxmind.com/
+
+
+Para mostrar os visitantes, basta usar o tema temas/visitantes.map. Exemplo
 
 http://host/i3geo/ms_criamapa.php?temasa=visitantes&layers=visitantes
 

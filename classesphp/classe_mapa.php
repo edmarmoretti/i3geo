@@ -63,7 +63,7 @@ $map_file - Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file,$locaplic="")
 	{
-  		//error_reporting(E_ALL);
+  		error_reporting(E_ALL);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
@@ -720,6 +720,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		$temas = explode(",",$temas);
+		$zoomlayer = "";
 		foreach ($temas as $nome)
 		{
 			$nomemap = "";
@@ -778,6 +779,11 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						}
 						ms_newLayerObj($this->mapa, $nlayer);
 						$l = $this->mapa->getlayerbyname($nlayer->name);
+						//
+						//verifica se deve ser feito o zoom para o tema
+						//
+						if(strtolower($l->getmetadata("aplicaextensao")) == "sim")
+						{$zoomlayer = $nlayer->name;}
 						//reposiciona o layer se for o caso
 						if ($l->group == "")
 						{
@@ -807,7 +813,22 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 				}
 			}
 		}
-		return("ok");
+		//
+		//faz o zoom para o tema se for o caso
+		//
+		if($zoomlayer != "")
+		{
+			$this->salva();
+			include_once("classe_temas.php");
+			$mz = new Temas($this->arquivo,$zoomlayer);
+			$mz->zoomTema();
+			$mz->salva();
+			//
+			//marca como falso para não salvar o mapa novamente
+			//
+			return(false);
+		}
+		return(true);
 	}
 /*
 Method: excluiTemas

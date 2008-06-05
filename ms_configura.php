@@ -222,7 +222,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 		
-	Para usar o menu default, utilize apenas $menutemas = "";
+	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
 	$menutemas = array(
 		array("idmenu"=>"GEOPR","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/geopr.xml","status"=>"fechado"),
@@ -277,7 +277,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	*/
-	$conexaoadmin = "";
+	$conexaoadmin = ""; //$locaplic."/admin/conexaomma.php";
 }
 else //se for linux
 {
@@ -301,6 +301,6 @@ else //se for linux
 	$utilizacgi = "nao";
 	$atlasxml = "../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
-	$conexaoadmin = $locaplic."/admin/conexao.php";
+	$conexaoadmin = "";//$locaplic."/admin/conexaomma.php";
 }
 ?>

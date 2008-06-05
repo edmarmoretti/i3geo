@@ -4,7 +4,9 @@ Title: Gera miniaturas.
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
-As imagens são armazenadas no dirtório temporário.
+As imagens são armazenadas no diretório temporário do i3geo e devem ser movidas para o diretório i3geo/temas/miniaturas 
+para poderem ser utilizadas. O programa verifica se a miniatura já existe no diretório temas/miniaturas e gera apenas as que faltarem.
+
 
 File: i3geo/geraminiatura.php
 
