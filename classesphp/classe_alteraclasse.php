@@ -136,8 +136,8 @@ $exps - lista com as novas expressões
 	{
 		//prepara os arrays com os valores
 		$ids = explode(";",$ids);
-		$nomes = explode(";",$nomes);
-		$exps = explode(";",$exps);
+		$nomes = explode(";",strip_tags($nomes));
+		$exps = explode(";",strip_tags($exps));
 		//pega os layers existentes no array ids e armazena no array t
 		for ($i=0; $i < count($ids); $i++)
 		{

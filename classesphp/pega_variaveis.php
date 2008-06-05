@@ -48,7 +48,7 @@ if (isset($_GET))
 	foreach(array_keys($_GET) as $k)
 	{
 		if ($_GET[$k] != "''")
-		eval("\$".$k."='".$_GET[$k]."';");
+		eval("\$".$k."='".(strip_tags($_GET[$k]))."';");
 	}
 }
 if (isset($_POST))
@@ -56,7 +56,7 @@ if (isset($_POST))
 	foreach(array_keys($_POST) as $k)
 	{
 		if (($_POST[$k] != "''"))
-		eval("\$".$k."='".$_POST[$k]."';");
+		eval("\$".$k."='".(strip_tags($_POST[$k]))."';");
 		if (($_POST[$k] != "''") && ($k == "cpaint_argument"))
 		{
 			foreach($_POST["cpaint_argument"] as $argumento_)
@@ -70,7 +70,7 @@ if (isset($_POST))
 				{	
 					$p_ = explode("=",$parametro_);
 					if($p_[0] != "")
-					eval("\$".$p_[0]."='".$p_[1]."';");
+					eval("\$".$p_[0]."='".(strip_tags($p_[1]))."';");	
 				}
 			}	
 			

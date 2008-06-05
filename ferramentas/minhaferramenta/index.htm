@@ -1,0 +1,32 @@
+<html>
+<body>
+Minha ferramenta!
+<div id=exemplos> </div>
+<br>Digite as coordenadas da nova extensão geográfica:<br>
+<input type=text value="-48 -26 -38 -18" id=valor />
+<br><input type=button value="ok" onclick="mudaext()"/>
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script>
+//essa funcao pega valores passados pela URL
+parametrosURL()
+var secao = "<br>A seção atual é :"+ g_sid
+var aplic = "<br>O i3geo está instalado em:"+g_locaplic
+//$i é um alias para pegar um objeto
+$i("exemplos").innerHTML = secao+aplic
+function mudaext()
+{
+	aguarde("block")
+	//essa função só é executada quando ocorrer o retorno da chamada do objeto "cp"
+	var fim = function()
+	{
+		aguarde("none")
+		window.parent.ajaxredesenha("")
+	}
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+$i("valor").value+"&g_sid="+g_sid;
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	cp.call(p,"",fim);
+}
+</script>
+</body>
+</html>
