@@ -60,10 +60,10 @@ function iniciaAtlas()
 		if (retorno.data.tipoguias == "expandida")
 		{
 			var ins = '<ul class="yui-nav" style="width:2000px;border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
-			if(navm)
-			{
+			//if(navm)
+			//{
 				document.getElementById("guiasAtlas").style.width=objmapa.w;
-			}
+			//}
 			document.getElementById("guiasAtlas").style.height="35px";
 		}
 		var texto = "";
