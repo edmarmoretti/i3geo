@@ -1314,7 +1314,9 @@ function ativaClicks(docMapa)
 			if (objmapa.parado!="cancela")
 			{
 				objmapa.parado="nao";
-				verificaTip();
+				//verifica se o mouse está parado e executa as funções baseadas nesse evento
+				//objmapa.verificaMouseParado();
+				setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 			}
 			if ($i("tip"))
 			{$i("tip").style.display="none";}
@@ -1460,6 +1462,54 @@ function ativaClicks(docMapa)
 /*
 Section: navegação
 */
+/*
+Function: pegaCoordenadaUTM
+*/
+/*
+Function: mostraRosaDosVentos
+
+Mostra a rosa dos ventos quando o mouse é estacionado por alguns instantes sobre o mapa.
+*/
+function mostraRosaDosVentos()
+{
+	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela")){return;}
+	//mostra opção sobre o mouse quando está na função pan
+	if (($i("box1")) && (objmapa.parado == "sim") && (document.getElementById("imgh").style.display=="block") && ($i("box1").style.visibility != "visible"))
+	{
+		if ((g_tipoacao == "zoomli") || (g_tipoacao == "zoomlo") || (g_tipoacao == "pan"))
+		{
+			if(g_mostraRosa == "sim")
+			{
+				if (navm)
+				{$i("tip").style.filter = "alpha(opacity=70)";}
+				else
+				{$i("tip").style.opacity="5";}
+				var setas = "<table id='rosaV' ><tr>";
+				if (navm){var s = " style=\"filter:'alpha(opacity=0)'\" ";}
+				if (navn){var s = " style='opacity:0' ";}
+				setas += "<td "+s+" ></td>";
+				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
+				setas += "<td "+s+" ></td></tr>";
+				setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('oeste')\" /></td>";
+				setas += "<td><table><tr>";
+				setas += "<td><img class='rosamais' title='aproxima' onclick='zoomiauto()' src='"+$im("branco.gif")+"' </td>";
+				setas += "<td><img class='rosamenos' title='afasta' onclick='zoomoauto()' src='"+$im("branco.gif")+"' </td>";
+				setas += "</tr></table></td>";
+				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"panFixo('leste')\" /></td></tr>";
+				setas += "<tr><td "+s+" ></td><td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td><td "+s+" ></td></tr></table>";
+				var i = $i("tip");
+				i.innerHTML = setas;
+				i.style.top = objposicaocursor.telay - 27;
+				i.style.left = objposicaocursor.telax - 27;
+				i.style.display="block";
+				mostradicasf('','Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.','');
+				return;
+			}
+		}
+	}
+	//setTimeout('objmapa.verificaMouseParado()',g_tempotip);
+}
+
 /*
 Function: initJanelaZoom
 
@@ -2144,43 +2194,9 @@ function verificaTip()
 		ist.display="block";
 		eval(g_funcaoTip);
 	}
-	//mostra opção sobre o mouse quando está na função pan
-	if (($i("box1")) && (objmapa.parado == "sim") && (document.getElementById("imgh").style.display=="block") && ($i("box1").style.visibility != "visible"))
-	{
-		if ((g_tipoacao == "zoomli") || (g_tipoacao == "zoomlo") || (g_tipoacao == "pan"))
-		{
-			if(g_mostraRosa == "sim")
-			{
-				if (navm)
-				{$i("tip").style.filter = "alpha(opacity=70)";}
-				else
-				{$i("tip").style.opacity="5";}
-				var setas = "<table id='rosaV' ><tr>";
-				if (navm){var s = " style=\"filter:'alpha(opacity=0)'\" ";}
-				if (navn){var s = " style='opacity:0' ";}
-				setas += "<td "+s+" ></td>";
-				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
-				setas += "<td "+s+" ></td></tr>";
-				setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('oeste')\" /></td>";
-				setas += "<td><table><tr>";
-				setas += "<td><img class='rosamais' title='aproxima' onclick='zoomiauto()' src='"+$im("branco.gif")+"' </td>";
-				setas += "<td><img class='rosamenos' title='afasta' onclick='zoomoauto()' src='"+$im("branco.gif")+"' </td>";
-				setas += "</tr></table></td>";
-				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"panFixo('leste')\" /></td></tr>";
-				setas += "<tr><td "+s+" ></td><td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td><td "+s+" ></td></tr></table>";
-				var i = $i("tip");
-				i.innerHTML = setas;
-				i.style.top = objposicaocursor.telay - 27;
-				i.style.left = objposicaocursor.telax - 27;
-				i.style.display="block";
-				mostradicasf('','Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.','');
-				return;
-			}
-		}
-	}
 	if ((objmapa.parado!="cancela") && ($i("tip").style.display!="block"))
 	{objmapa.parado = "sim";}
-	setTimeout('verificaTip()',g_tempotip);
+	setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 }
 /*
 Function: verificaTipDefault

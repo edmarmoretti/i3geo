@@ -1208,6 +1208,17 @@ Indica qual guia do mapa iniciará ativa.
 */
 g_guiaativa = "guia1";
 /*
+Variable: g_funcoesMouseParado
+
+Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa por alguns instantes.
+
+*/
+g_funcoesMouseParado = new Array(
+	"verificaTip()",
+	"mostraRosaDosVentos()",
+	//"pegaCoordenadaUTM()"
+);
+/*
 Variable: g_funcoesClickMapaDefault
 
 Nome das funções padrão que serão executadas quando o usuário clicar no mapa.

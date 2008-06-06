@@ -1151,6 +1151,26 @@ function Mapa(e,m)
 		}
 	};
 	/*
+	Function: verificaMouseParado
+	
+	Verifica se existem funções adicionais que devem ser executadas quando o usuário estaciona o mouse sobre o mapa.
+	*/
+	this.verificaMouseParado = function()
+	{
+		if (g_funcoesMouseParado.length > 0)
+		{
+			var f = g_funcoesMouseParado.length-1;
+			if (f >= 0)
+			{
+				do
+				{
+					eval(g_funcoesMouseParado[f]);
+				}
+				while(f--)
+			}
+		}
+	};
+	/*
 	Function: verificaNavegaMapa
 	
 	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
