@@ -495,7 +495,7 @@ Include:
 		include("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$cp->set_data($m->gradeCoord($intervalo));
+		$cp->set_data($m->gradeCoord($intervalo,$corlinha,$larguralinha,$tipolinha,$tamanhotexto,$cortexto,$incluitexto));
 		$m->salva();
 		redesenhaMapa();
 	break;

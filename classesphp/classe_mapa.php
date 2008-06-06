@@ -622,9 +622,22 @@ A grade é incluida no mapa como um novo layer.
 Parameter:
 
 $intervalo - intervalo entre as linhas da grade.
+
+$corlinha - cor em RGB das linhas da grade
+
+$larguralinha - largura das linhas da grade em pixel
+
+$tipolinha - símbolo das linhas
+
+$tamanhotexto - tamanho do texto
+
+$cortexto - cor do texto
+
+$incluitexto - sim|nao
 */
-	function gradeCoord($intervalo)
+	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$cortexto="0,0,0",$incluitexto="sim")
 	{
+		echo $corlinha;
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
@@ -636,21 +649,26 @@ $intervalo - intervalo entre as linhas da grade.
 		$estilo =$classe->getstyle(0);
 		$estilo->set("maxsize",100);
 		$estilo->set("minsize",1);
-		$estilo->set("size",1);
-		$estilo->set("symbol","linha");
+		$estilo->set("size",$larguralinha);
+		$estilo->set("symbolname",$tipolinha);
 		$cor = $estilo->color;
-		$cor->setrgb(200,200,200);
-		$label = $classe->label;
-		$label->set("size",MS_TINY);
-		$label->set("type",MS_BITMAP);
-		$label->set("buffer",0);
-		$label->set("force",MS_FALSE);
-		$label->set("partials",MS_TRUE);
-		$label->set("position",MS_CC);
-		$corl = $label->color;
-		$corl->setrgb(50,50,50);
-		$label->set("offsetx",0);
-		$label->set("offsety",0);
+		$corlinha = explode(",",$corlinha);
+		$cor->setrgb($corlinha[0],$corlinha[1],$corlinha[2]);
+		if($incluitexto == "sim")
+		{
+			$label = $classe->label;
+			$label->set("size",$tamanhotexto);
+			$label->set("type",MS_BITMAP);
+			$label->set("buffer",0);
+			$label->set("force",MS_FALSE);
+			$label->set("partials",MS_TRUE);
+			$label->set("position",MS_CC);
+			$corl = $label->color;
+			$cortexto = explode(",",$cortexto);
+			$corl->setrgb($cortexto[0],$cortexto[1],$cortexto[2]);
+			$label->set("offsetx",0);
+			$label->set("offsety",0);
+		}
 		return ("ok");
 	}
 /*

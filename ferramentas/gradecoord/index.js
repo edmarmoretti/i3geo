@@ -44,9 +44,17 @@ function executa()
 		aguarde("block")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=gradeCoord"
 		p += "&intervalo="+$i("intervalo").value
+		p += "&corlinha="+$i("corlinha").value
+		p += "&larguralinha="+$i("larguralinha").value
+		p += "&tipolinha="+$i("tipolinha").value
+		p += "&tamanhotexto="+$i("tamanhotexto").value
+		p += "&cortexto="+$i("cortexto").value
+		p += "&incluitexto="+$i("incluitexto").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"gradeCoord",temp);
 	}
 }
+function corj(obj)
+{window.parent.abreCor("wdocai",obj)}

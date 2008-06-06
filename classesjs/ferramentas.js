@@ -1194,7 +1194,7 @@ Function: gradeCoord
 Gera grade de coordenadas
 */
 function gradeCoord()
-{wdocaf("300px","180px",g_locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");}
+{wdocaf("350px","280px",g_locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");}
 /*
 Section: atributos
 */

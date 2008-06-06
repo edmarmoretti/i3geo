@@ -10,8 +10,48 @@
 <div style=top:0px;left:0px;text-align:left; >
 <table summary="" class=lista3 style=width:90% >
 <tr>
-	<td>Intervalo entre as linhas, em d&eacute;cimos de grau:</td>
+	<td>Intervalo em d&eacute;cimos de grau:</td>
 	<td><input  style="cursor:text" size=4 class=digitar type='text' id=intervalo value='2' /></td>
+</tr>
+<tr>
+	<td>Cor das linhas:</td>
+	<td><input style="cursor:text" size=11 class=digitar type='text' id=corlinha value='200,200,200' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('corlinha')" /></td>
+</tr>
+<tr>
+	<td>Largura das linhas:</td>
+	<td><input style="cursor:text" size=11 class=digitar type='text' id=larguralinha value='1' /></td>
+</tr>
+<tr>
+	<td>Tipo de linha:</td>
+	<td>
+		<select id=tipolinha >
+			<option value="linha" >sólido</option>
+			<option value="ferrovia-line2" >tracejado</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>Inclui textos:</td>
+	<td>
+		<select id=incluitexto >
+			<option value="sim" >sim</option>
+			<option value="nao" >não</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>Tamanho do texto:</td>
+	<td>
+		<select id=tamanhotexto >
+			<option value=0 >pequeno</option>
+			<option value=1 >médio</option>
+			<option value=2 >grande</option>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>Cor dos textos:</td>
+	<td><input style="cursor:text" size=11 class=digitar type='text' id=cortexto value='0,0,0' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('cortexto')" /></td>
 </tr>
 </table>
 	<div style=top:10px;left:0px;text-align:left; onclick="executa()">
