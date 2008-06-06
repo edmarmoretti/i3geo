@@ -1889,6 +1889,15 @@ Section: Navegação
 Altera a extensão geográfica do mapa.
 */
 /*
+Property: geo2utm
+
+Retorna coordenadas utm a partir de coordenadas geo
+*/
+	case "geo2utm":
+		$zona = geo2zonaUTM($x);
+		$cp->set_data(geo2utm($x,$y,$zona));
+	break;
+/*
 Property: desativacgi
 
 Desativa o modo cgi.

@@ -1338,6 +1338,47 @@ function xy2wkt($xy)
 	return array("ponto"=>$shppt->toWkt(),"linha"=>$shplin->toWkt(),"poligono"=>$shppol->toWkt());
 }
 /*
+function: geo2zonaUTM
+
+Calcula a zona utm de um par de coordenadas geográficas
+
+Parameters:
+
+$x - longitude
+
+*/
+function geo2zonaUTM($x)
+{
+	$x = $x + 180;
+	$x = $x / 6;
+	return intval($x) + 1;
+}
+/*
+function: geo2utm
+
+Converte coordenadas geográficas para UTM
+
+parameters:
+
+$x - longitude
+
+$y - latitude
+
+$zona - zona UTM
+*/
+function geo2utm($x,$y,$zona)
+{
+	$projInObj = ms_newprojectionobj("proj=latlong");
+	if($y < 0){$ns = "south";}
+	else
+	{$ns = "north";}
+	$projOutObj = ms_newprojectionobj("proj=utm,zone=$zona,$ns,ellps=GRS67,units=m,no_defs");
+	$poPoint = ms_newpointobj();
+	$poPoint->setXY($x, $y);
+	$poPoint->project($projInObj, $projOutObj);
+	return array("x"=>$poPoint->x,"y"=>$poPoint->y,"zona"=>$zona);
+}
+/*
 Section: web services
 */
 /*
