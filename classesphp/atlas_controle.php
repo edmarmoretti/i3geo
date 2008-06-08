@@ -141,7 +141,9 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		include_once("classe_atlas.php");
 		$atlasxmltemp = $atlasxml;
 		$atl = new Atlas($atlasxml);
-		$interface = $atl->criaAtlas($atlasId_);
+		$res = $atl->criaAtlas($atlasId_);
+		$interface = $res["interface"];
+		$base = $res["base"];
 		if ($interface == "")
 		{
 			echo "Erro. Nenhuma interface definida para esse Atlas";

@@ -219,12 +219,12 @@ O arquivo é lido conforma a característica do sistema operacional.
 */
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
-	if (!isset($base)){$base = "geral1windows";}
+	if (!isset($base) || $base == ""){$base = "geral1windows";}
 	$estadosl = "estadoslwindows";
 }
 else
 {
-	if (!isset($base)){$base = "geral1";}
+	if (!isset($base) || $base == ""){$base = "geral1";}
 	$estadosl = "estadosl";
 }
 if (file_exists($base))

@@ -30,6 +30,8 @@ File: i3geo/menutemas/atlas.xml
 		<PRANCHADEFAULT></PRANCHADEFAULT>
 		<!-- tipo de apresentação das guias dos atlas. Pode receber os valores "expandida" ou "automatica"-->
 		<TIPOGUIAS></TIPOGUIAS>
+		<!-- Nome do arquivo mapfile que será utilizado como base para elaboração do mapa. Utilize o caminho completo no servidor.-->
+		<BASEMAPFILE></BASEMAPFILE>
 		<!-- Cada prancha que compõe o Atlas tem aqui seus parâmetros definidos-->
 		<PRANCHAS>
 			<PRANCHA>
@@ -76,6 +78,7 @@ File: i3geo/menutemas/atlas.xml
 		<HABERTURA>380</HABERTURA>
 		<PRANCHADEFAULT></PRANCHADEFAULT>
 		<TIPOGUIAS>expandida</TIPOGUIAS>
+		<BASEMAPFILE>c:\geralteste.map</BASEMAPFILE>
 		<PRANCHAS>
 			<PRANCHA>
 				<ID>1</ID>

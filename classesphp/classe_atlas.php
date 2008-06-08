@@ -90,9 +90,10 @@ atlasId - id do atlas desejado, conforme existente em atlas.xml
 			if ($id == $atlasId)
 			{
 				$interface = ixml($s,"TEMPLATEHTML");
+				$base = ixml($s,"BASEMAPFILE");
 			}
 		}
-		return ($interface);
+		return (array("interface"=>$interface,"base"=>$base));
 	}
 /*
 Method: pegaListaDePranchas
