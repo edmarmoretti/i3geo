@@ -62,7 +62,12 @@ if (!function_exists('ms_GetVersion'))
 }
 ms_ResetErrorList();
 if (!isset($tipo))
-{echo "Utilize ?tipo=mini ou grande ou todos. As imagens são armazenadas.no diretório temporário.";exit;}
+{
+	echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
+	echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
+	echo "<br>As miniaturas são geradas apenas para os arquivos que ainda não existem no diretório temas/miniaturas.";
+	exit;
+}
 $arqs = listaArquivos("temas");
 foreach ($arqs["arquivos"] as $arq)
 {

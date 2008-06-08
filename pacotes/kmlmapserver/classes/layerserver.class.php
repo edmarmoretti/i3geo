@@ -753,7 +753,10 @@ class LayerServer {
         //$icon =& $folder->addChild('Icon');
         $icon =& $this->simplexml_addChild($folder,'Icon');
         //$icon->addChild('href', $link . 'layers=' . $layer->name);
+        if($this->map->tileindex != "")
         $this->simplexml_addChild($icon,'href', $link . 'layers=' . $layer->name);
+        else
+        $this->simplexml_addChild($icon,'href', $link . 'layers=' . $layer->typename);
         //$icon->addChild('viewRefreshMode', 'onStop');
         $this->simplexml_addChild($icon,'viewRefreshMode', 'onStop');
         //$llbox =& $folder->addChild('LatLonBox');

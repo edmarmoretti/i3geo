@@ -98,11 +98,11 @@ FONTSET   "../symbols/fontes.txt"
 
         ANGLE 360
 
-        COLOR 232 220 245
+        COLOR 0 0 246
 
         OPACITY 100
 
-        OUTLINECOLOR 50 50 50
+        OUTLINECOLOR 255 255 255
 
         SYMBOL 0
 
@@ -195,18 +195,6 @@ FONTSET   "../symbols/fontes.txt"
         SYMBOL 0
 
       END
-
-    END
-
-    CLASS
-
-      NAME " "
-
-    END
-
-    CLASS
-
-      NAME " "
 
     END
 

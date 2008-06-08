@@ -63,7 +63,7 @@ $map_file - Endereço do mapfile no servidor.
 */  	
 	function __construct($map_file,$locaplic="")
 	{
-  		error_reporting(E_ALL);
+  		//error_reporting(E_ALL);
   		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");

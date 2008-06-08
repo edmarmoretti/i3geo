@@ -177,9 +177,12 @@ if ($tipo == "")
 			$l->set("dump",MS_TRUE);
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-			$c = $l->getclass(0);
-			if ($c->name == "")
-			{$c->name = " ";}
+			if($l->type == MS_LAYER_RASTER)
+			{
+				$c = $l->getclass(0);
+				if ($c->name == "")
+				{$c->name = " ";}
+			}
 			if (isset($postgis_mapa))
 			{
 				if ($postgis_mapa != "")
