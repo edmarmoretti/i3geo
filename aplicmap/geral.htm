@@ -11,7 +11,7 @@
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geonaocompacto.js
 -->
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 <!--
 	<style>
 	#box1
@@ -113,7 +113,11 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
  <td class=tdbranca >
   <table width=100% ><tr>
   <td class=tdbranca ><div id=lugarquadros ></div></td>
-  <td class=tdbranca style=text-align:center ><div id=localizarxy >Aguarde...</div></td>
+  <td class=tdbranca style=text-align:center >
+  	<div id=localizarxy >
+  	Aguarde...
+  	</div>
+  </td>
   <td class=tdbranca ><div id=escala ></div></td>
   <!--
   	A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
@@ -121,7 +125,11 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
   	SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
   -->
   <td class=tdbranca ><div id=ondeestou ></div></td>
-  </tr></table>
+  </tr>
+  <!-- esta div recebe o cálculo do posicionamento do mouse em coordenadas UTM -->
+  <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
+
+  </table>
  </td>
 </tr>
 <tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>

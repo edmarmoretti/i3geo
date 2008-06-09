@@ -1216,7 +1216,7 @@ Nome das funções padrão que serão executadas quando o usuário estaciona o mouse 
 g_funcoesMouseParado = new Array(
 	"verificaTip()",
 	"mostraRosaDosVentos()",
-	//"pegaCoordenadaUTM()"
+	"pegaCoordenadaUTM()"
 );
 /*
 Variable: g_funcoesClickMapaDefault

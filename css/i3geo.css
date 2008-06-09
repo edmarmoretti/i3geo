@@ -723,7 +723,38 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	border-top:1px solid #F8F8F8;
 	border-right:1px solid #F8F8F8;
 }
-
+.rosanordeste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1550px;
+	width:14px;
+	height:14px;
+}
+.rosasudeste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1575px;
+	width:14px;
+	height:14px;
+}
+.rosanoroeste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1600px;
+	width:14px;
+	height:14px;
+}
+.rosasudoeste
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1625px;
+	width:14px;
+	height:14px;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}

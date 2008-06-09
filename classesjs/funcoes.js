@@ -1315,8 +1315,7 @@ function ativaClicks(docMapa)
 			{
 				objmapa.parado="nao";
 				//verifica se o mouse está parado e executa as funções baseadas nesse evento
-				//objmapa.verificaMouseParado();
-				setTimeout('objmapa.verificaMouseParado()',g_tempotip);
+				objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 			}
 			if ($i("tip"))
 			{$i("tip").style.display="none";}
@@ -1326,6 +1325,7 @@ function ativaClicks(docMapa)
 		{
 			try
 			{
+				if ($i("mostraUTM")){$i("mostraUTM").style.display="none";}
 				if ($i("tip"))
 				{$i("tip").style.display="none";}
 				capturaposicao(exy);
@@ -1464,7 +1464,29 @@ Section: navegação
 */
 /*
 Function: pegaCoordenadaUTM
+
+Mostra as coordenadas do mouse em UTM.
+
+Disparada apenas quando o mouse é estacionado por alguns instantes sobre o mapa.<b> 
+
+Para que esta função seja executada, é necessário existir um DIV com id=mostraUTM
 */
+function pegaCoordenadaUTM()
+{
+	if (objmapa.parado != "sim"){return;}
+	if (!$i("mostraUTM")){return;}
+	var mostra = function(retorno)
+	{
+		$i("mostraUTM").style.display="block";
+		$i("mostraUTM").innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
+	}
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+g_sid;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_persistent_connection(true);
+	cp.set_response_type("JSON");
+	cp.call(p,"geo2utm",mostra);
+}
 /*
 Function: mostraRosaDosVentos
 
@@ -1487,16 +1509,18 @@ function mostraRosaDosVentos()
 				var setas = "<table id='rosaV' ><tr>";
 				if (navm){var s = " style=\"filter:'alpha(opacity=0)'\" ";}
 				if (navn){var s = " style='opacity:0' ";}
-				setas += "<td "+s+" ></td>";
+				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('noroeste')\" /></td>";
 				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
-				setas += "<td "+s+" ></td></tr>";
+				setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('nordeste')\" /></td></tr>";
 				setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('oeste')\" /></td>";
 				setas += "<td><table><tr>";
 				setas += "<td><img class='rosamais' title='aproxima' onclick='zoomiauto()' src='"+$im("branco.gif")+"' </td>";
 				setas += "<td><img class='rosamenos' title='afasta' onclick='zoomoauto()' src='"+$im("branco.gif")+"' </td>";
 				setas += "</tr></table></td>";
 				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"panFixo('leste')\" /></td></tr>";
-				setas += "<tr><td "+s+" ></td><td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td><td "+s+" ></td></tr></table>";
+				setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudoeste')\" /></td>"
+				setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td>";
+				setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudeste')\" /></td></tr></table>";
 				var i = $i("tip");
 				i.innerHTML = setas;
 				i.style.top = objposicaocursor.telay - 27;
@@ -2064,6 +2088,26 @@ function panFixo(direcao)
 	{
 		var x = objmapa.w / 6;
 		var y = objmapa.h / 2;
+	}
+	if (direcao == "nordeste")
+	{
+		var y = objmapa.h / 6;
+		var x = objmapa.w - (objmapa.w / 6);
+	}
+	if (direcao == "sudeste")
+	{
+		var y = objmapa.h - (objmapa.h / 6);
+		var x = objmapa.w - (objmapa.w / 6);
+	}
+	if (direcao == "noroeste")
+	{
+		var y = objmapa.h / 6;
+		var x = objmapa.w / 6;
+	}
+	if (direcao == "sudoeste")
+	{
+		var y = objmapa.h - (objmapa.h / 6);
+		var x = objmapa.w / 6;
 	}
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&x="+x+"&y="+y+"&g_sid="+g_sid;

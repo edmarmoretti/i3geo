@@ -1169,6 +1169,7 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
+		clearTimeout(objmapa.tempoParado);
 	};
 	/*
 	Function: verificaNavegaMapa

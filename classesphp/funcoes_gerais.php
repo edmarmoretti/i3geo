@@ -1376,7 +1376,7 @@ function geo2utm($x,$y,$zona)
 	$poPoint = ms_newpointobj();
 	$poPoint->setXY($x, $y);
 	$poPoint->project($projInObj, $projOutObj);
-	return array("x"=>$poPoint->x,"y"=>$poPoint->y,"zona"=>$zona);
+	return array("x"=>round($poPoint->x,2),"y"=>round($poPoint->y,2),"zona"=>$zona,"datum"=>"SAD-69");
 }
 /*
 Section: web services
