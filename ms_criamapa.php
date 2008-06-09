@@ -75,21 +75,16 @@ poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no m
 
 nometemapoligonos - nome do tema de polígonos
 
+wkt - insere elementos no mapa com coordenadas definidas em wkt
+
+nometemawkt - nome do tema em wkt
+
 debug - ativa o retorno de mensagens de erro do PHP sim|nao
 */
 /*
 Section: Fluxo do código
 */
-/*
-Note: Verifica a variável $debug
-
-Verifica se o debug deve ser ativado, checando a variável $debug
-*/
 $tempo = microtime(1);
-if (!isset($debug))
-{error_reporting(0);$debug="nao";}
-else
-{error_reporting(E_ALL);$debug="sim";}
 /*
 Note: Verifica a variável $caminho
 
@@ -118,6 +113,11 @@ Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 require_once ($caminho."classesphp/pega_variaveis.php");
 require_once ($caminho."classesphp/funcoes_gerais.php");
 require_once ($caminho."ms_configura.php");
+
+if (!isset($debug))
+{error_reporting(0);$debug="nao";}
+else
+{error_reporting(E_ALL);$debug="sim";}
 /*
 Note: Prepara as variáveis que serão incluidas na seção
 
@@ -379,6 +379,15 @@ ms_ResetErrorList();
 /*
 Note: Inclui uma camada de pontos utilizando os parâmetros passados pela URL
 */
+if (isset($wkt))
+{insereWKTUrl();}
+$error = ms_GetErrorObj();
+while($error && $error->code != MS_NOERR)
+{
+	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+	$error = $error->next();
+}
+ms_ResetErrorList();
 if (isset($pontos))
 {inserePontosUrl();}
 $error = ms_GetErrorObj();
@@ -623,6 +632,72 @@ function mostraAguarde()
 		echo "<center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a>";
 		echo '<BODY bgcolor="white" style="background-color:white">';
 	}
+}
+/*
+Function: insereWKTUrl
+
+Insere elementos no mapa a partir de uma string definida em wkt
+*/
+function insereWKTUrl()
+{
+	global $wkt,$nometemawkt,$dir_tmp,$imgdir,$tmpfname,$locaplic;
+	require_once "pacotes/phpxbase/api_conversion.php";
+	if (!isset($nometemapontos))
+	{$nometemapontos="WKT";}
+	if ($nometemapontos == "")
+	{$nometemapontos="WKT";}
+	//
+	//cria o shape file
+	//
+	$shape = ms_shapeObjFromWkt($wkt);
+	$tipol = $shape->type;
+	if($tipol == 0){$tipol = 3;}
+	$nomeshp = $dir_tmp."/".$imgdir."/wkts";
+	// cria o dbf
+	$def = array();
+	$items = array("COORD");
+	foreach ($items as $ni)
+	{$def[] = array($ni,"C","254");}
+	xbase_create($nomeshp.".dbf", $def);
+	$dbname = $nomeshp.".dbf";
+	$db=xbase_open($dbname,2);
+	if ($tipol == 1)
+	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);}
+	if ($tipol == 3)
+	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_MULTIPOINT);}
+	if ($tipol == 2)
+	{$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);}	
+	$reg[] = "";
+	$novoshpf->addShape($shape);
+	xbase_add_record($db,$reg);
+	$novoshpf->free();
+	xbase_close($db);
+	//adiciona o layer
+	$mapa = ms_newMapObj($tmpfname);
+	$layer = ms_newLayerObj($mapa);
+	$layer->set("name","wktins");
+	$layer->set("data",$nomeshp);
+	$layer->setmetadata("tema",$nometemawkt);
+	$layer->setmetadata("classe","sim");
+	$layer->set("type",$shape->type);
+	$layer->set("status",MS_DEFAULT);
+	$classe = ms_newClassObj($layer);
+	$estilo = ms_newStyleObj($classe);
+	if($shape->type == 0)
+	{
+		$estilo->set("symbolname","ponto");
+		$estilo->set("size",6);
+	}
+	if($shape->type == 1)
+	{
+		$estilo->set("symbolname","linha");
+		$estilo->set("size",3);
+	}
+	if($shape->type == 2)
+	{$layer->set("transparency","50");}
+	$cor = $estilo->color;
+	$cor->setRGB(255,0,0);
+	$salvo = $mapa->save($tmpfname);
 }
 /*
 Function: inserePontosUrl
