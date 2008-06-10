@@ -1479,7 +1479,7 @@ function pegaCoordenadaUTM()
 	{
 		$i("mostraUTM").style.display="block";
 		$i("mostraUTM").innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
-	}
+	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -1518,7 +1518,7 @@ function mostraRosaDosVentos()
 				setas += "<td><img class='rosamenos' title='afasta' onclick='zoomoauto()' src='"+$im("branco.gif")+"' </td>";
 				setas += "</tr></table></td>";
 				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"panFixo('leste')\" /></td></tr>";
-				setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudoeste')\" /></td>"
+				setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudoeste')\" /></td>";
 				setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td>";
 				setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudeste')\" /></td></tr></table>";
 				var i = $i("tip");

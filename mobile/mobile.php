@@ -340,7 +340,8 @@ function identifica()
 }
 function capturaposicao(exy)
 {
-	var e = (navn) ? exy : window.event;
+	//var e = (navn) ? exy : window.event;
+	var e = (document) ? exy : window.event;
 	var xfig = e.clientX;
 	var yfig = e.clientY;
 	var obj = document.getElementById("mapa")
