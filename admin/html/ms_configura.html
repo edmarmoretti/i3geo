@@ -1,0 +1,39 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/ms_configura.js" type="text/javascript"></script>
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - ms_configura.php</h1>
+<p><a href="../index.html">voltar</a></p>
+<p>Este programa permite alterar as variáveis de configuração existentes no programa ms_configura.php</p>
+<p>O ms_configura.php é utilizado como um "include" nos programas do i3geo, definindo uma série de parâmetros necessários ao seu funcionamento.</p>
+<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
+dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
+alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
+<p>Da mesma forma, a variável $menutemas não pode ser modificada nesse formulário. Por padrão, essa variável é definida como vazia, forçando o i3geo a montar a árvore de camadas utilizando o banco de dados administrativo.</p>
+<p>Se você quer utilizar um outro mecanismo de montagem do menu de temas, edite manualmente o arquivo ms_configura.php.
+</div>
+
+<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+<br>
+<input onclick="restauraPadrao()" type=button value="Restaura os valores padrão" /><br><br>
+<input onclick="javascript:window.open('../testainstal.php')" type=button value="Testar a instalação" /><br><br>
+
+</body>
+<script>
+/*
+Title: Administração do ms_configura.php
+
+Administração das variáveis de configuração existentes no programa i3geo/ms_configura.php
+
+File: i3geo/admin/ms_configura.htm
+*/
+iniciaAdmin()
+
+</script>
+</html>

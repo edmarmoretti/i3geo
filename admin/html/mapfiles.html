@@ -1,0 +1,37 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/mapfiles.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - mapfiles principais</h1>
+<p><a href="../index.html">voltar</a></p>
+<p>Este programa permite alterar as configurações básicas dos arquivos mapfile existentes em i3geo/aplicmap</p>
+<p>Esses arquivos são os mapas básicos utilizados pelo i3geo na inicialização.</p>
+<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
+dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
+alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
+</div>
+
+<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+<br>
+<input onclick="restauraPadrao()" type=button value="Restaura os valores padrão" /><br><br>
+<input onclick="javascript:window.open('../testainstal.php')" type=button value="Testar a instalação" /><br><br>
+
+</body>
+<script>
+/*
+Title: Administração dos mapfiles básicos
+
+File: i3geo/admin/mapfiles.htm
+*/
+iniciaAdmin()
+document.getElementById("aguarde").style.display="none"
+
+</script>
+</html>

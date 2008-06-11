@@ -1,0 +1,133 @@
+<?php
+/*
+Title: Administração do cadastro de funções da ferramenta identifica
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+File: i3geo/admin/identifica.php
+
+19/6/2007
+
+*/
+include_once("admin.php");
+$cp = new cpaint();
+//faz a busca da função que deve ser executada
+switch ($funcao)
+{
+	//verifica os editores
+	case "verificaEditores":
+	$cp->set_data(verificaEditores($editores));
+	$cp->return_data();
+	break;
+	
+	case "pegaFuncoes":
+	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica'));
+	$cp->return_data();
+	break;
+	
+	case "alterarFuncoes":
+	alterarFuncoes();
+	if($id_i == "")
+	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica'));
+	else
+	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica where id_i = '.$id_i));
+	$cp->return_data();
+	break;
+	
+	case "excluir":
+	$cp->set_data(excluirFuncoes());
+	$cp->return_data();
+	break;
+	
+	case "importarXmlI":
+	$cp->set_data(importarXmlI());
+	$cp->return_data();
+	break;
+}
+/*
+Function: alterarFuncoes
+
+Altera o registro de um WS
+*/
+function alterarFuncoes()
+{
+	global $id_i,$abrir_i,$nome_i,$target_i;
+	try 
+	{
+    	$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
+    	require_once("conexao.php");
+    	if($id_i != "")
+    	$dbh->query("UPDATE i3geoadmin_identifica SET nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    	else
+    	$dbh->query("INSERT INTO i3geoadmin_identifica (nome_i,abrir_i,target_i) VALUES ('','','')");
+    	$dbh = null;
+    	return "ok";
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+function excluirFuncoes()
+{
+	global $id;
+	try 
+	{
+    	include("conexao.php");
+    	$dbh->query("DELETE from i3geoadmin_identifica WHERE id_i = $id");
+    	$dbh = null;
+    	return "ok";
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+function importarXmlI()
+{
+	global $xml;
+	if(!file_exists($xml))
+	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
+	include_once("../../classesphp/funcoes_gerais.php");
+	include("conexao.php");
+	$xml = simplexml_load_file($xml);
+	//
+	//importa os grupos
+	//
+	$wsExistentes = array();
+	$q = $dbh->query("select * from i3geoadmin_identifica");
+	$resultado = $q->fetchAll();
+	foreach($resultado as $r)
+	{$iExistentes[$r["nome_i"]] = 0;}
+	foreach($xml->FUNCAO as $item)
+	{
+		$nome_i = ixml($item,"NOMESIS");
+		$target_i = ixml($item,"TARGET");
+		$abrir_i = ixml($item,"ABRIR");
+		if(!isset($iExistentes[$nome_i]))
+		$dbh->query("INSERT INTO i3geoadmin_identifica (nome_i,target_i,abrir_i) VALUES ('$nome_i','$target_i','$abrir_i')");
+		$iExistentes[$nome_i] = 0;
+	}
+	$dbh = null;
+	return "Dados importados.";
+}
+
+?>

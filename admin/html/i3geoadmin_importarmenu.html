@@ -1,0 +1,24 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/menutemas.js" type="text/javascript"></script>
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - importação de menu XML</h1>
+<p><a href="../index.html">Voltar</a></p>
+<p>Este programa importa as definições do menu de temas armazenadas em um arquivo XML</p>
+<p>O menu é baseado no banco admin.db.</p>
+</div>
+<p>Digite o nome do arquivo xml armazenado no servidor - utilize o caminho completo
+<p>Por padrão, o arquivo utilizado é i3geo/menutemas/menutemas.xml</p>
+<input type=text size=50 id=arquivo />
+<p>Nome do novo menu:</p>
+<input type=text size=50 id=nome /><br><br>
+<input type=button value="Importar" onclick="importarXmlMenu()"/>
+<div id=resultado ></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/mapas.js" type="text/javascript"></script>
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - mapas</h1>
+<p><a href="../index.html">Voltar</a></p>
+<p>Este programa permite editar a lista de mapas</p>
+<p>O menu é baseado no banco admin.db.</p>
+<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
+dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
+alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
+<p>Parâmetros:</p>
+<p>Extensão: extensão geográfica no formato xmin ymin xmax ymax</p>
+<p>Imagem: link para a imagem miniatura</p>
+<p>Direto: link direto com todos os parâmetros de abertura do mapa. Se for usado, os outros parâmetros são desconsiderados</p>
+<p>Outros: outros parâmetros que podem ser utilizados pelo ms_criamapa.php. São encadeados no final da URL de montagem do mapa.</p>
+<p>Temas: códigos dos temas que serão mostrados no mapa</p>
+<p>Ligados: códigos dos temas que estarão ligados no mapa (visíveis). Os códigos devem constar no item Temas</p>
+<p>Perfil: lista de perfis de usuários que podem ver o mapa. Separe com vírgulas</p>
+</div>
+<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+</body>
+<script>
+/*
+Title: Administração da lista de mapas
+
+File: i3geo/admin/mapas.htm
+*/
+var cp = new cpaint();
+//cp.set_async(false);
+cp.set_response_type("JSON");
+temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
+var p = "menutemas.php?funcao=pegaTemas";
+cp.call(p,"pegaMenus",temas);
+document.getElementById("aguarde").style.display="none"
+</script>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/atlas.js" type="text/javascript"></script>
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - Atlas</h1>
+<p><a href="../index.html">Voltar</a></p>
+<p>Este programa permite editar a lista de Atlas</p>
+<p>O menu é baseado no banco admin.db.</p>
+<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
+dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
+alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
+<p>Parâmetros:</p>
+<p>ícone - endereço da imagem que será utilizada para identificar o mapa ou prancha
+<p>link - link na internet que será aberto em uma janela dentro do atlas ou prancha
+<p>template - arquivo HTMML de configuração do i3geo que será utilizado. Se não especificado, será utilizado o default.
+<p>extensão - extensão geográfica que será utilizada em cada prancha, no formato xmin ymin xmax ymax.
+<p>mapfile base - arquivo mapfile que será utilizado como base para montagem do atlas. Utilize o caminho completo no servidor.
+</div>
+<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+</body>
+<script>
+/*
+Title: Administração do Atlas
+
+File: i3geo/admin/atlas.htm
+*/
+var cp = new cpaint();
+//cp.set_async(false);
+cp.set_response_type("JSON");
+temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
+var p = "menutemas.php?funcao=pegaTemas";
+cp.call(p,"pegaMenus",temas);
+document.getElementById("aguarde").style.display="none"
+</script>
+</html>

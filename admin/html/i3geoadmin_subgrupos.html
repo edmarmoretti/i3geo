@@ -1,0 +1,35 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="admin.css">
+<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
+<script src="../js/admin.js" type="text/javascript"></script>
+<script src="../js/menutemas.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - menu de temas</h1>
+<p><a href="../index.html">Voltar</a></p>
+<p>Este programa permite editar a lista de sub-grupos</p>
+<p>O menu é baseado no banco admin.db.</p>
+<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
+dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
+alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
+</div>
+<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+</body>
+<script>
+/*
+Title: Administração da lista de sub-grupos do menu de temas
+
+File: i3geo/admin/i3geoadmin_subgrupos.htm
+*/
+$parametros = {
+	"simples": [
+	{ mensagem: "Adicione, altere ou elimine sub-grupos cadastrados",cabeca: "Sub-grupos",variavel:"subgrupos"}
+	]};
+iniciaAdmin()
+document.getElementById("aguarde").style.display="none"
+</script>
+</html>
