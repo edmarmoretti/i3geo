@@ -136,7 +136,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
 	*/
-	$locsistemas = "http://localhost/i3geo/menutemas/sistemas.xml";
+	$locsistemas = "../menutemas/sistemas.xml";
 	/*
 	Variable: $locidentifica 
 	
@@ -162,7 +162,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo mapas.xml para maiores detalhes.
 	*/
-	$locmapas = "http://localhost/i3geo/menutemas/mapas.xml";
+	$locmapas = "../menutemas/mapas.xml";
 	/*
 	Variable: $R_path
 	
@@ -225,8 +225,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
 	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/geopr.xml","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/menutemas.xml","status"=>"aberto")
+		array("idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
 		);
 	/*
 	Variable: $utilizacgi
