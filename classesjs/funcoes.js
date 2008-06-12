@@ -1,5 +1,5 @@
 /*
-Title: Funções gerais
+Title: funcoes.js
 
 Funções de uso geral para processamento de dados
 

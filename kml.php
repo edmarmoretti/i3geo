@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Gerador de menu em kml para uso no Google Earth
+Title: kml.php
+
+Gerador de menu em kml para uso no Google Earth
 
 Lê o(s) menu(s) de temas e acrescenta os links necessários ao acesso aos dados no Google Earth. Veja mais detalhes em ajuda/googleearth.htm
 

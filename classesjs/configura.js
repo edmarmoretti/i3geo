@@ -1,12 +1,18 @@
 /*
-Title: Variáveis de Configuração da interface configura.js.
+Title: classesjs/configura.js
 
 Definição das variáveis de configuração da interface.
 
-O I3Geo utiliza variáveis (veja o item específico na documentação) globais que possibilitam alterar algumas das características da interface.
-Essas variáveis recebem valores default quando o I3Geo é iniciado mas podem ser alterados antes da inicialização do mapa (método inicializa()).
+O I3Geo utiliza variáveis (veja o item específico na documentação) globais que possibilitam 
+alterar algumas das características da interface.
+Essas variáveis recebem valores default quando o I3Geo é iniciado mas podem ser alterados 
+antes da inicialização do mapa (método objmapa.inicializa()).
 No arquivo aplicmapa/geral.htm existem exemplos de como fazer isso.
 As variáveis globais podem também ser alteradas em tempo de execução.
+
+Pode-se criar interfaces específicas com o i3geo onde essas variáveis são modificadas para atender
+uma necessidade específica. Uma interface é um arquivo HTML que pode ser inicializado diretamente no navegador.
+Veja o diretório i3geo/exemplos onde podem ser encontradas algumas interfaces.
 
 Exemplo:
 
@@ -41,8 +47,12 @@ Free Software Foundation, Inc., no endereço
 /*
 Variable: g_traducao
 
-Termos utilizados na interface conforme a linguagem
+Palavras ou frases utilizados na interface e utilizadas conforme a linguagem escolhida, permitindo a
+tradução do i3geo para outros idiomas. Para utilizar uma palavra ou frase, utilize a função $trad, por exemplo:
 
+<script>
+objeto.innerHTML = $trad("p1");
+</script>
 */
 g_traducao = {
 //texto da janela de mensagens
@@ -894,8 +904,11 @@ es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del 
 /*
 Variable: g_linguagem
 
-Língua utilizada na interface.
+Idioma utilizado na interface.
 
+Ao utilizar a função $trad, o i3geo verifica essa variável para selecionar o texto que será utilizado.
+A lista com os textos é definida na variável g_traducao.
+A linguagem escolhida é também registrada no cookie i3geolingua, permitindo a persistência da escolha do usuário.
 */
 g_linguagem = "pt";
 var temp = pCookie("i3geolingua");
@@ -904,19 +917,25 @@ if(temp != undefined)
 /*
 Variable: g_templateLegenda
 
-Template HTML que será utilizado na geração da legenda HTML
+Template HTML que será utilizado na geração da legenda HTML.
 
-A sintaxe do template é definido pelo Mapserver.
-
+A sintaxe utilizada na montagem do template é baseado na sintaxe do próprio Mapserver.
 O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
+O template serve para definir o layout da legenda que é mostrada quando a guia legenda é ativada.
+Se for definido como "", é utilizado o template i3geo/aplicmapa/legenda.htm.
 */
 g_templateLegenda = "";
 /*
 Variable: g_kml
 
-Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do link para acesso ao tema via kml.
+Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do 
+link para acesso aos dados via kml.
 
-Parameters:
+Veja:
+
+<kml.php>, <funcoes.js>, <ferramentas.js>
+
+Parâmetros:
 
 sim|nao
 */
@@ -924,11 +943,14 @@ g_kml = "sim";
 /*
 Variable: g_qrcode
 
-Indica se o código de barras do tipo QRcode deve ser mostrado.
+Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do 
+link para acesso ao código de barras no formato qrcode.
 
-O link para abertura do qrcode é mostrado na caixa de mensagens e na árvore de adição de temas.
+Veja:
+
+<funcoes.js>, <qr_html.php>
  
-Parameters:
+Parâmetros:
 
 sim|nao
 */
@@ -936,36 +958,54 @@ g_qrcode = "sim";
 /*
 Variable: g_posicaoLenteX
 
-Posicionamento da lente de aumento em x.
+Define o posicionamento da lente de aumento em relação ao corpo do mapa.
 
+Veja:
+
+<redesenho.js>
 */
 g_posicaoLenteX = 0;
 /*
 Variable: g_posicaoLenteY
 
-Posicionamento da lente de aumento em y.
+Define o posicionamento da lente de aumento em relação ao corpo do mapa.
+
+Veja:
+
+<redesenho.js>
 
 */
 g_posicaoLenteY = 0;
 /*
 Variable: g_autoRedesenho
 
-Ativa o auto redesenho após um determinado tempo.
+Ativa o auto redesenho do mapa conforme o intervalo de tempo definido em segundos.
 
 Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador não é ativado.
+
+Veja:
+
+<funcoes.js>
 */
 g_autoRedesenho = 0;
 /*
 Variable: g_tempo_aplicar
 
-Tempo que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
+Tempo, em segundos, que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
 
+Veja:
+
+<funcoes.js>
 */
 g_tempo_aplicar = 4000;
 /*
 Variable: g_embedLegenda
 
 Indica se a legenda deve ser incluida no corpo do mapa.
+
+Veja:
+
+<iniciamma.js>
 
 Values:
 
@@ -977,14 +1017,29 @@ g_embedLegenda = "nao";
 Variable: g_3dmap
 
 Variável que define o nome do map_file que possuí o layer para uso na função 3d.
-Pode ser caminho completo. Se não, busca no aplicmap.
+Pode ser utilizado o caminho completo, se não, busca no diretório aplicmap.
+
+O mapfile deve conter um layer para cálculo dos valores de Z para compor o modelo do relevo
+sobre o qual o mapa será desenhado.
+
+Por padrão, o i3geo utiliza o mapfile aplicmpa/3dmap.map
+
+Veja:
+
+<ferramentas/3d/index.js>
 
 */
 g_3dmap = "";
 /*
 Variable: g_opcoesTemas
 
-Variável que define se as opcoes adicionais de cada tema serao mostradas. As opções são aquelas apresentadas na lista de temas do mapa quando um tema é expandido.
+Variável que define se as opcoes adicionais de cada tema serao mostradas.
+
+As opções são aquelas apresentadas na lista de temas do mapa, quando um tema é expandido.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -995,9 +1050,16 @@ g_opcoesTemas = "sim";
 /*
 Variable: g_mostraRosa
 
-Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse. A rosa dos ventos permite a navegação pelo mapa sem a necessidade de alterar a opção atual. Por exemplo, pode-se navegar pelo mapa mesmo estando na opção de identificação.
+Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse.
+
+A rosa dos ventos permite a navegação pelo mapa sem a necessidade de alterar a opção atual.
+Por exemplo, pode-se navegar pelo mapa mesmo estando na opção de identificação.
 
 O aparecimento da rosa é temporizada.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1009,24 +1071,36 @@ Variable: g_visual
 
 Indica qual o tipo de visual para abertura do mapa.
 
-Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
+Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual.
+
+Veja:
+
+<funcoes.js>, <iniciamma.js>
 */
 g_visual = "default";
 
 /*
 Variable: g_janelaMen
 
-Define se a janela de mensagens começará aberta.
+Define se a janela de mensagens começará aberta ao iniciar o mapa.
+
+Veja:
+
+<funcoes.js>, <iniciamma.js>
 
 Values:
 
-siim|nao
+sim|nao
 */
 g_janelaMen = "sim";
 /*
 Variable: g_downloadbase
 
-Define se na guia 2 será mostrada a opção de download dos dados.
+Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1036,7 +1110,11 @@ g_downloadbase = "sim";
 /*
 Variable: g_conectargeorss
 
-Define se na guia 2 será mostrada a opção de conexão com GeoRSS.
+Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1046,7 +1124,11 @@ g_conectargeorss = "sim";
 /*
 Variable: g_nuvemTags
 
-Variável que define se na guia 2 será mostrada a opção de busca de temas por tags.
+Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1056,7 +1138,11 @@ g_nuvemTags = "sim";
 /*
 Variable: g_uploadlocal
 
-Variável que define se na guia 2 será mostrada a opção de upload.
+Define se na árvore de adição de temas, será mostrada a opção de upload.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1066,7 +1152,11 @@ g_uploadlocal = "sim";
 /*
 Variable: g_uploaddbf
 
-Variável que define se na guia 2 será mostrada a opção de upload de arquivo dbf.
+Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1076,7 +1166,11 @@ g_uploaddbf = "sim";
 /*
 Variable: g_conectarwms
 
-Variável que define se na guia 2 será mostrada a opção de conexão com WMS.
+Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1088,6 +1182,10 @@ Variable: g_docaguias
 
 Variável que define se o mapa deve iniciar com as guias em janela ou não. As guias em janela causam o desenho de um mapa com tamanho extendido.
 
+Veja:
+
+<iniciamma.js>
+
 Values:
 
 sim|nao
@@ -1098,6 +1196,10 @@ Variable: g_barraFerramentas1
 
 Define se a barra de ferramentas 1 será aberta ou não no mapa.
 
+Veja:
+
+<iniciamma.js>
+
 Values:
 
 sim|nao
@@ -1107,6 +1209,10 @@ g_barraFerramentas1 = "sim";
 Variable: g_barraFerramentas2
 
 Define se a barra de ferramentas 2 será aberta ou não no mapa.
+
+Veja:
+
+<iniciamma.js>
 
 Values:
 
@@ -1120,38 +1226,58 @@ Variável interna para a barra de zoom.
 
 */
 g_fatordezoom = 0;
-/*
+/**
 Variable: g_diminuixM
 
 Diminui a largura do mapa em pixels no caso do navegador ser o IE.
+Valores definidos em pixel.
 
+Veja:
+
+<iniciamma.js>
 */
 g_diminuixM = 20;
 /*
 Variable: g_diminuixN
 
 Diminui a largura do mapa em pixels no caso do navegador ser o FF.
+Valores definidos em pixel.
 
+Veja:
+
+<iniciamma.js>
 */
 g_diminuixN = 25;
 /*
 Variable: g_diminuiyM
 
 Diminui a altura do mapa em pixels no caso do navegador ser o IE.
+Valores definidos em pixel.
 
+Veja:
+
+<iniciamma.js>
 */
 g_diminuiyM = 106;
 /*
 Variable: g_diminuiyN
 
 Diminui a altura do mapa em pixels no caso do navegador ser o FF.
+Valores definidos em pixel.
 
+Veja:
+
+<iniciamma.js>
 */
 g_diminuiyN = 103;
 /*
 Variable: g_mapaRefDisplay
 
 Indica a visibilidade do mapa de referência na inicialização
+
+Veja:
+
+<iniciamma.js>
 
 Values:
 
@@ -1162,11 +1288,15 @@ g_mapaRefDisplay = "block";
 /*
 Variable: g_funcaoTip
 
-Função ajax que será executada para mostrar informações do tipo TIP.
+Função ajax que será executada para mostrar informações em etiquetas.
 
 A função é executada pelo CPAINT e avaliada com "eval".
 
 Por padrão a função é a verificaTipDefault
+
+Veja:
+
+<funcoes.js>
 */
 g_funcaoTip = "verificaTipDefault()";
 /*
@@ -1175,12 +1305,20 @@ Variable: g_tempotip
 Tempo utilizado para verificar se o mouse está parado.
 
 Se o mouse estiver parado, a função de mostrar tip é ativada.
+
+Veja:
+
+<funcoes.js>
 */
-g_tempotip = 4500;
+g_tempotip = 2500;
 /*
 Variable: g_tipotip
 
-Define como o tip será mostrado.
+Define como o tip será mostrado. O tipo simples mostra apenas os dados, sem o cabeçalho.
+
+Veja:
+
+<funcoes.js>
 
 Values:
 
@@ -1190,7 +1328,12 @@ g_tipotip = "completo";
 /*
 Variable: g_tipoimagem
 
-Indica o tipo de filtro de imagem que está ativo. O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+Indica o tipo de filtro de imagem que está ativo.
+O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+
+Veja:
+
+<funcoes.js>, <iniciamma.js>, <redesenho.js>
 */
 g_tipoimagem = "nenhum";
 /*
@@ -1203,21 +1346,33 @@ g_sistemas = "";
 /*
 Variable: destacaTamanho
 
-Valor em pixel do retângulo de destaque de temas.
+Valor em pixel do retângulo de destaque de temas utilizado na ferramenta destacatema.
+
+Veja:
+
+<funcoes.js>
 */
 destacaTamanho = 75;
 /*
 Variable: g_mensagempadrao
 
 Mensagem padrão que será mostrada na janela de mensagens.
+
+Veja:
+
+<funcoes.js>
 */
-g_mensagempadrao = $trad("p1");//"O I3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
+g_mensagempadrao = $trad("p1");
 /*
 Variable: g_entorno
 
 Indica se o preenchimento do entorno do mapa está ou não ativo.
 Utilizado para criar o efeito de auto-preenchimento do mapa quando é executada a função pan.
 É alterada em uma opção específica no menu suspenso.
+
+Veja:
+
+<funcoes.js>, <iniciamma.js>, <redesenho.js>
 
 Values:
 
@@ -1228,6 +1383,10 @@ g_entorno = "nao";
 Variable: g_guiaativa
 
 Indica qual guia do mapa iniciará ativa.
+
+Veja:
+
+<funcoes.js>, iniciamma.js>
 */
 g_guiaativa = "guia1";
 /*
@@ -1235,6 +1394,9 @@ Variable: g_funcoesMouseParado
 
 Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa por alguns instantes.
 
+Veja:
+
+<iniciamma.js>
 */
 g_funcoesMouseParado = new Array(
 	"pegaCoordenadaUTM()",
@@ -1249,6 +1411,10 @@ Nome das funções padrão que serão executadas quando o usuário clicar no mapa.
 As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções, além das padrão, utilizando-se o objeto objmapa.funcoesClickMapa
 
 Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
+
+Veja:
+
+<iniciamma.js>
 */
 g_funcoesClickMapaDefault = new Array(
 	"cliqueIdentifica()",
@@ -1269,6 +1435,10 @@ Nome das funções padrão que serão executadas quando o usuário mover o mouse sobr
 As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções
 
 Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
+
+Veja:
+
+<iniciamma.js>
 */
 g_funcoesMousemoveMapaDefault = new Array(
 	"movecursor()",
@@ -1284,6 +1454,9 @@ Variable: g_funcoesNevegaMapaDefault
 
 Nome das funções padrão que serão executadas quando o usuário navegar pelo mapa.
 
+Veja:
+
+<iniciamma.js>
 */
 g_funcoesNevegaMapaDefault = new Array(
 	"atualizagoogle()",
@@ -1294,9 +1467,13 @@ g_funcoesNevegaMapaDefault = new Array(
 /*
 Variable: g_listaPropriedades
 
-Objeo com as funções que são incluidas no item propriedades do mapa
+Objeto com as funções que são incluidas no item propriedades do mapa
 
-Parameters:
+Veja:
+
+<iniciamma.js>
+
+Parâmetros:
 
 text - texto que será mostrado na tela
 
@@ -1321,8 +1498,11 @@ Variable: oMenuData
 
 Itens incluídos no menu suspenso
 
+Veja:
 
-Parameters:
+<iniciamma.js>, <menususpenso.js>
+
+Parâmetros:
 
 text - texto que serámostrado na tela
 
@@ -1402,7 +1582,12 @@ A montagem das operações é feita no iniciamma.js.
 
 As funcionalidades apenas são incluídas se o elemento HTML indicado em iddiv existir. Por isso, caso uma função não seja desejada, basta excluir o div do HTML utilizado no mapa.
 
-Parameters:
+
+Veja:
+
+<iniciamma.js>
+
+Parâmetros:
 
 iddiv - id do elemento onde a ferramenta será incluída
 

@@ -1,5 +1,5 @@
 /*
-Title: Inicialização do i3geo.
+Title: iniciamma.js
 
 Cria o objeto objmapa e inicializa o i3geo.
 
@@ -404,7 +404,7 @@ function Mapa(e,m)
 	*/
 	this.tempo = ""; //
 	/*
-	Variable: objmapa.autoRedesenho
+	Variable: objmapa.tempoRedesenho
 	
 	Inicia o temporizador para redesenhar o mapa automaticamente.
 	

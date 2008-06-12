@@ -1,0 +1,99 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME wwfterr # ok
+  TYPE Polygon
+  STATUS OFF
+  TEMPLATE "wwf_terr.htm"
+  CONNECTIONTYPE postgis
+	CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
+	DATA "the_geom FROM (select * from mundo.munesr18) as foo USING UNIQUE gid USING SRID=4291"
+  METADATA
+	  ITENS "eco_name,ecorregiao"
+	  ITENSDESC "Ecorregião,"
+	  TEMA "Biomas e ecorregiões"
+  	CLASSE "SIM"
+        ESACALA "3000000"
+	EXTENSAO "-109.396349448 -59.3054490089 -9.93532751916 22.1657415108"
+  END
+	TRANSPARENCY 80
+  CLASS
+    Name 'Tropical and subtropical moist broadleaf forest'
+    EXPRESSION ('[biome]'eq'1')
+    COLOR 0 115 0
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Tropical and subtropical dry broadleaf forests'
+    EXPRESSION ('[biome]'eq'2')
+    COLOR 113 235 82
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Tropical and subtropical coniferous forests'
+    EXPRESSION ('[biome]'eq'3')
+    COLOR 148 127 64
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Temperate broadleaf and mixed forests'
+    EXPRESSION ('[biome]'eq'4')
+    COLOR 255 255 0
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Trop. and subtrop. grasslands, savannas and shrublands'
+    EXPRESSION ('[biome]'eq'7')
+    COLOR 209 255 115
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Temperate grasslands, savannas and shrublands'
+    EXPRESSION ('[biome]'eq'8')
+    COLOR 230 152 0
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Flooded grasslands and savannas'
+    EXPRESSION ('[biome]'eq'9')
+    COLOR 190 255 232
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Montane grasslands and shrublands'
+    EXPRESSION ('[biome]'eq'10')
+    COLOR 189 79 74
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Mediterranean forests, woodlands and scrub'
+    EXPRESSION ('[biome]'eq'12')
+    COLOR 237 222 83
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Desert and xeric shrublands'
+    EXPRESSION ('[biome]'eq'13')
+    COLOR 156 156 156
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Mangroves'
+    EXPRESSION ('[biome]'eq'14')
+    COLOR 255 0 197
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Water'
+    EXPRESSION ('[biome]'eq'98')
+    COLOR 0 0 255
+    OUTLINECOLOR 200 200 200
+  END  # CLASS
+  CLASS
+    Name 'Snow, ice, glaciers and rock'
+    EXPRESSION ('[biome]'eq'99')
+    COLOR 255 255 255
+    OUTLINECOLOR 200 200 200
+  END  
+END
+END

@@ -1,5 +1,5 @@
 /*
-Title: Ferramentas
+Title: ferramentas.js
 
 Abre ou executa determinadas operações de manipulação do mapa.
 

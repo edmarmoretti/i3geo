@@ -1,5 +1,5 @@
 /*
-Title: Redesenho
+Title: redesenho.js
 
 Executa as operações de redesenho do mapa.
 
