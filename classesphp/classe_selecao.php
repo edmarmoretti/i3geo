@@ -511,6 +511,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
+		$shp = array_unique($shp);
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
@@ -534,6 +535,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		$indxlayer = $this->layer->index;
 		$this->mapa->freequery($indxlayer);
 		$shp = array_diff($shp_atual,$shpi);
+		$shp = array_unique($shp);
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
@@ -558,6 +560,7 @@ $ids - Ids separados por vírgula correspondendo aos registros.
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$ids = explode(",",$ids);
 		$indxlayer = $this->layer->index;
+		$ids = array_unique($ids);
 		foreach ($ids as $i)
 		{$this->mapa->queryByIndex($indxlayer, -1, $i);}
 		$this->mapa->savequery(($this->arquivo)."qy");
