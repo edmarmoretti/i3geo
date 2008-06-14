@@ -166,5 +166,14 @@ function pegaDados($sql)
     	return "Error!: " . $e->getMessage();
 	}
 }
-
+function array_in_array($needle, $haystack)
+{
+   	//Make sure $needle is an array for foreach
+   	if(!is_array($needle)) $needle = array($needle);
+   	//For each value in $needle, return TRUE if in $haystack
+   	foreach($needle as $pin)
+       	if(in_array($pin, $haystack)) return TRUE;
+   	//Return FALSE if none of the values from $needle are found in $haystack
+   	return FALSE;
+}
 ?>

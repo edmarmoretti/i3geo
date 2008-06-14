@@ -56,10 +56,9 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="")
 	{
-		error_reporting(0);
+		error_reporting(E_ALL);
+		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
-		if(count($this->perfil) == 0)
-		$this->perfil = explode(" ",$perfil);
 		$this->xmlsistemas = "";
 		$this->locaplic = $locaplic;
 		$this->menutemas = $menutemas;
@@ -141,13 +140,17 @@ array
 */
 	function pegaListaDeMapas($locmapas)
 	{
+		$perfilgeral = implode(" ",$this->perfil);
+		if($locmapas == "")
+		{$locmapas = $this->urli3geo."/admin/xmlmapas.php?perfil=".$perfilgeral;}
 		$this->xml = simplexml_load_file($locmapas);
 		$mapas = array();
 		//pega os sistemas checando os perfis
 		foreach($this->xml->MAPA as $s)
 		{
 			$ps = ixml($s,"PERFIL");
-			$perfis = explode(",",$ps);
+			$perfis = str_replace(","," ",$ps);
+			$perfis = explode(" ",$perfis);
 			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 			{
 				$n = ixml($s,"NOME");
@@ -240,7 +243,8 @@ array
 			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
-				$perfis = explode(",",$temp);
+				$perfis = str_replace(","," ",$temp);
+				$perfis = explode(" ",$perfis);
 				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
@@ -276,7 +280,8 @@ array
 						if ($temp != "")
 						{
 							$incluisgrupo = FALSE;
-							$perfis = explode(",",$temp);
+							$perfis = str_replace(","," ",$temp);
+							$perfis = explode(" ",$perfis);
 							if ($this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = TRUE;}
 						}
@@ -312,7 +317,8 @@ array
 			{
 				$nomesis = ixml($s,"NOMESIS");
 				$ps = ixml($s,"PERFIL");
-				$perfis = explode(",",$ps);
+				$perfis = str_replace(","," ",$ps);
+				$perfis = explode(" ",$perfis);
 				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
 					$funcoes = array();
@@ -376,7 +382,8 @@ array
 				if ($temp != "")
 				{
 					$incluigrupo = FALSE;
-					$perfis = explode(",",$temp);
+					$perfis = str_replace(","," ",$temp);
+					$perfis = explode(" ",$perfis);
 					if ($this->array_in_array($this->perfil,$perfis))
 					{$incluigrupo = TRUE;}
 				}
@@ -391,7 +398,8 @@ array
 						if ($temp != "")
 						{
 							$incluisgrupo = FALSE;
-							$perfis = explode(",",$temp);
+							$perfis = str_replace(","," ",$temp);
+							$perfis = explode(" ",$perfis);
 							if ($this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = TRUE;}
 						}
@@ -462,7 +470,9 @@ array
 			if (ixml($g,"PERFIL") != "")
 			{
 				$incluigrupo = FALSE;
-				$perfis = explode(",",ixml($g,"PERFIL"));
+				$temp = ixml($g,"PERFIL");
+				$perfis = str_replace(","," ",$temp);
+				$perfis = explode(" ",$perfis);
 				if ($this->array_in_array($this->perfil,$perfis))
 				{$incluigrupo = TRUE;}
 			}
@@ -477,7 +487,9 @@ array
 						if (ixml($s,"PERFIL") != "")
 						{
 							$incluisgrupo = FALSE;
-							$perfis = explode(",",ixml($s,"PERFIL"));
+							$temp = ixml($s,"PERFIL");
+							$perfis = str_replace(","," ",$temp);
+							$perfis = explode(" ",$perfis);
 							if ($this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = TRUE;}
 						}
@@ -492,7 +504,9 @@ array
 									{
 										
 										$inclui = FALSE;
-										$perfis = explode(",",ixml($tema,"PERFIL"));
+										$temp = ixml($tema,"PERFIL");
+										$perfis = str_replace(","," ",$temp);
+										$perfis = explode(" ",$perfis);
 										if ($this->array_in_array($this->perfil,$perfis))
 										{$inclui = TRUE;}
 									}
@@ -555,7 +569,8 @@ $procurar - String que será procurada.
 				if ($temp != "")
 				{
 					$incluigrupo = FALSE;
-					$perfis = explode(",",$temp);
+					$perfis = str_replace(","," ",$temp);
+					$perfis = explode(" ",$perfis);
 					if ($this->array_in_array($this->perfil,$perfis))
 					{$incluigrupo = TRUE;}
 				}
@@ -567,7 +582,8 @@ $procurar - String que será procurada.
 						if ($this->perfil != "")
 						{
 							$temp = ixml($sgrupo,"PERFIL");
-							$perfis = explode(",",$temp);
+							$perfis = str_replace(","," ",$temp);
+							$perfis = explode(" ",$perfis);
 							if (!$this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = FALSE;}
 						}
@@ -579,7 +595,8 @@ $procurar - String que será procurada.
 								if ($this->perfil != "")
 								{
 									$temp = ixml($tema,"PERFIL");
-									$perfis = explode(",",$temp);
+									$perfis = str_replace(","," ",$temp);
+									$perfis = explode(" ",$perfis);
 									if (!$this->array_in_array($this->perfil,$perfis))
 									{$inclui = FALSE;}
 								}
@@ -691,7 +708,8 @@ nrss - (opcional) número de registros no rss que serão considerados
 						if ($this->perfil != "")
 						{
 							$temp = ixml($sgrupo,"PERFIL");
-							$perfis = explode(",",$temp);
+							$perfis = str_replace(","," ",$temp);
+							$perfis = explode(" ",$perfis);
 							if (!$this->array_in_array($this->perfil,$perfis))
 							{$incluisgrupo = FALSE;}
 						}
@@ -702,8 +720,8 @@ nrss - (opcional) número de registros no rss que serão considerados
 								$inclui = TRUE;
 								if ($this->perfil != "")
 								{
-									$temp = ixml($tema,"PERFIL");
-									$perfis = explode(",",$temp);
+									$perfis = str_replace(","," ",$temp);
+									$perfis = explode(" ",$perfis);
 									if (!$this->array_in_array($this->perfil,$perfis))
 									{$inclui = FALSE;}
 								}

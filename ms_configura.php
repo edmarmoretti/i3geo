@@ -164,8 +164,10 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	A guia "Mapas" mostra uma lista de links que permitem abrir mapas específicos. Essa lista é utilizada também pela versão mobile do i3geo.
 	
 	Veja a documentação específica do arquivo mapas.xml para maiores detalhes.
+
+	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
-	$locmapas = "../menutemas/mapas.xml";
+	$locmapas = "";
 	/*
 	Variable: $R_path
 	

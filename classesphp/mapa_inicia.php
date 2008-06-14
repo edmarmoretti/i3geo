@@ -199,7 +199,7 @@ function iniciaMapa()
 	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';g_locsistemas='".$locsistemas."';g_locidentifica='".$locidentifica."'";
 	$r = (isset($R_path)) ? "sim" : "nao";
 	$res .= ";g_r='".$r."'"; //identifica se o r esta instalado
-	$res .= ";g_locmapas='".$locmapas."'"; //identifica se o r esta instalado
+	$res .= ";g_locmapas='".$locmapas."'";
 	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
 	{$res .= ";objmapa.mapfile=''";}
 	else

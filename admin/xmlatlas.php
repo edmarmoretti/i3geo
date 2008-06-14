@@ -2,8 +2,26 @@
 //
 //$id_menu = id do menu que será montado
 //$perfil = perfis
-include_once("php/admin.php");
-include_once("php/conexao.php");
+if(!isset($locaplic))
+{
+	$locaplic = "";
+	if(file_exists("../../../ms_configura.php"))
+	{include_once("../../../ms_configura.php");}
+	else
+	{
+		if(file_exists("../../ms_configura.php"))
+		{include_once("../../ms_configura.php");}
+		else
+		{
+			if(file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			include_once("ms_configura.php");
+		}	
+	}
+}
+include_once($locaplic."/admin/php/admin.php");
+include_once($locaplic."/admin/php/conexao.php");
 echo "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 //echo "<"."\x3F"."xml-stylesheet type='text/xsl' href='../menutemas/menutemas.xsl'"."\x3F".">";
 echo "\n<RAIZ>\n";
