@@ -57,11 +57,14 @@ function xmlmenu_pegapranchas($id_atlas)
 function xmlmenu_pegatemas($id_prancha)
 {
 	global $dbh;
-	$q = "select * from i3geoadmin_atlast as t where t.id_prancha = $id_prancha ";
-	$qpranchas = $dbh->query($q);
-	foreach($qpranchas as $row)
+	$q = "select tema.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t,i3geoadmin_temas as tema where tema.id_tema = t.id_tema and t.id_prancha = $id_prancha ";
+	//echo $q;
+	$qtemas = $dbh->query($q);
+	foreach($qtemas as $row)
 	{
 		echo "<TEMA>\n";
+		echo "<CODIGO>".$row["codigo_tema"]."</CODIGO>\n";
+		echo "<LIGADO>".$row["ligado_tema"]."</LIGADO>\n";
 		echo "</TEMA>\n";
 	}
 }

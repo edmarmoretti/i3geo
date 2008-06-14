@@ -1,13 +1,35 @@
 <?php
 //
 //$id_menu = id do menu que será montado
-//$perfil = perfis
-//$tipo = subgrupos|temas
-include_once("php/admin.php");
-include_once("php/conexao.php");
+//$perfil = perfis separados por espaços
+//$tipo = gruposeraiz|subgrupos|temas
+error_reporting(0);
+if(!isset($locaplic))
+{
+	$locaplic = "";
+	if(file_exists("../../../ms_configura.php"))
+	{include_once("../../../ms_configura.php");}
+	else
+	{
+		if(file_exists("../../ms_configura.php"))
+		{include_once("../../ms_configura.php");}
+		else
+		{
+			if(file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			include_once("ms_configura.php");
+		}	
+	}
+}
+include_once($locaplic."/admin/php/admin.php");
+include_once($locaplic."/admin/php/conexao.php");
 echo "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 //echo "<"."\x3F"."xml-stylesheet type='text/xsl' href='../menutemas/menutemas.xsl'"."\x3F".">";
 echo "\n<TEMASGEO>\n";
+if(!isset($id_menu))
+echo "<CABECALHO>Utilize ?id_menu=1 por exemplo</CABECALHO>\n";
+else
 echo "<CABECALHO></CABECALHO>\n";
 if (!isset($perfil)){$perfil = "";}
 //
@@ -114,6 +136,9 @@ function xmlmenu_notema($qtemas)
 		echo "<TIPOA>".$row["tipoa_tema"]."</TIPOA>\n";
 		echo "<TAGS>".xmlmenu_prepara($row["tags_tema"])."</TAGS>\n";
 		echo "<KML>".$row["kml_tema"]."</KML>\n";
+		if($row["tipoa_tema"] == "WMS")
+		echo "<OGC>nao</OGC>\n";
+		else
 		echo "<OGC>".$row["ogc_tema"]."</OGC>\n";
 		echo "<DOWNLOAD>".$row["download_tema"]."</DOWNLOAD>\n";
 		echo "</TEMA>\n";
