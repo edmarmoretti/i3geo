@@ -743,10 +743,12 @@ function Mapa(e,m)
 			var temp = g_guiaativa.split("guia");
 			mostraguiaf(temp[1]);
 			//verifica se a guia5 (mapas) deve ou não ser mostrada
+			/*
 			if ($i(objmapa.guiaListaMapas))
 			{
 				if (g_locmapas == ""){$i(objmapa.guiaListaMapas).style.display = "none"}
 			}
+			*/
 			if (pCookie("g_janelaMen")){g_janelaMen = pCookie("g_janelaMen");}
 			if (g_janelaMen == "sim"){initJanelaMen();}
 			if (g_mapaRefDisplay != "none")
