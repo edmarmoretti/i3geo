@@ -114,16 +114,6 @@ function listaTemasLigados()
 		}
 		if (window.parent.objmapa.temaAtivo == "")
 		{
-			/*
-			var temp = ""
-			for (l=0;l<lista.length;l++)
-			{
-				var ltema = lista[l].split("*")
-				if(ltema[1] == 2)
-				{var temp = ltema[0];break;}
-			}
-			window.parent.objmapa.temaAtivo = temp
-			*/
 			var temp = "";
 			for (l=0;l<lista.length;l++)
 			{
