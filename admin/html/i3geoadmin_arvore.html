@@ -55,7 +55,7 @@ var cp = new cpaint();
 //cp.set_async(false);
 cp.set_response_type("JSON");
 //pega os menus
-var p = "menutemas.php?funcao=pegaMenus";
+var p = "../php/menutemas.php?funcao=pegaMenus";
 cp.call(p,"pegaMenus",iniciaMenu);
 //pega os grupos e subgrupos
 
@@ -69,16 +69,16 @@ function pegaParametros()
 	var cp = new cpaint();
 	//cp.set_async(false);
 	cp.set_response_type("JSON");
-	var p = "menutemas.php?funcao=pegaGrupos";
+	var p = "../php/menutemas.php?funcao=pegaGrupos";
 	cp.call(p,"pegaMenus",grupos);
 
-	var p = "menutemas.php?funcao=pegaSubGrupos";
+	var p = "../php/menutemas.php?funcao=pegaSubGrupos";
 	cp.call(p,"pegaMenus",subGrupos);
 
-	var p = "menutemas.php?funcao=pegaTemas";
+	var p = "../php/menutemas.php?funcao=pegaTemas";
 	cp.call(p,"pegaMenus",temas);
 
-	var p = "arvore.php?funcao=pegaTemasRaiz";
+	var p = "../php/arvore.php?funcao=pegaTemasRaiz";
 	cp.call(p,"pegaMenus",temasRaiz);
 }
 

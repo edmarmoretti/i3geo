@@ -27,8 +27,28 @@ File: i3geo/admin/mapfiles.php
 19/6/2007
 
 */
-include_once("../../classesphp/pega_variaveis.php");
+if(!isset($locaplic))
+{
+	$locaplic = "";
+	if(file_exists("../../../ms_configura.php"))
+	{include_once("../../../ms_configura.php");}
+	else
+	{
+		if(file_exists("../../ms_configura.php"))
+		{include_once("../../ms_configura.php");}
+		else
+		{
+			if(file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			include_once("ms_configura.php");
+		}	
+	}
+}
+include_once($locaplic."/classesphp/pega_variaveis.php");
+
 error_reporting(0);
+/*
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -37,12 +57,12 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+*/
 //
 //carrega o phpmapscript
 //
-include_once ("../../classesphp/carrega_ext.php");
-include_once("../../ms_configura.php");
-include_once("../../pacotes/cpaint/cpaint2.inc.php");
+include_once ($locaplic."/classesphp/carrega_ext.php");
+include_once($locaplic."/pacotes/cpaint/cpaint2.inc.php");
 set_time_limit(120);
 //
 //verifica se o cliente pode editar

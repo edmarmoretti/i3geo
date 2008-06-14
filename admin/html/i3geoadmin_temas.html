@@ -42,7 +42,7 @@ var listaTags = function(retorno)
 	var cPaint = new cpaint();
 	//cPaint.set_async("true");
 	cPaint.set_response_type("JSON");
-	var p = "menutemas.php?funcao=pegaTags";
+	var p = "../php/menutemas.php?funcao=pegaTags";
 	cPaint.call(p,"pegaTags",inicia);	
 }
 pegaMapfiles(listaTags)

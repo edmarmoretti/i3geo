@@ -114,7 +114,7 @@ switch ($funcao)
 function adicionarEstilo()
 {
 	global $codigoMap,$codigoLayer,$codigoClasse;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
 	$classObj = $nl->getclass($codigoClasse);
@@ -126,7 +126,7 @@ function adicionarEstilo()
 function excluirClasse()
 {
 	global $codigoMap,$codigoLayer,$codigoClasse;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
 	$classObj = $nl->getclass($codigoClasse);
@@ -138,7 +138,7 @@ function excluirClasse()
 function adicionarClasse()
 {
 	global $codigoMap,$codigoLayer;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
 	$classObj = ms_newClassObj($nl);
@@ -150,7 +150,7 @@ function adicionarClasse()
 function excluirLayer()
 {
 	global $codigoMap,$codigoLayer;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
 	$nl->set("status",MS_DELETE);
@@ -162,7 +162,7 @@ function criarNovoLayer()
 {
 	global $codigoMap;
 	include_once("../../classesphp/funcoes_gerais.php");
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapat = ms_newMapObj("base.map");
 	$layer = $mapat->getlayerbyname("base");
 	$mapa = ms_newMapObj($mapfile);
@@ -174,7 +174,7 @@ function criarNovoLayer()
 }
 function pegaFontes()
 {
-	$arq = "../symbols/fontes.txt";
+	$arq = "../../symbols/fontes.txt";
 	$h = fopen ($arq,"r");
 	while ($i = fscanf ($h, "%s\t%s\t"))
 	{
@@ -186,7 +186,7 @@ function pegaFontes()
 function alteraEstilo()
 {
 	global $codigoMap,$codigoLayer,$classe,$estilo,$parametro,$valor;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($classe);
@@ -224,7 +224,7 @@ function alteraEstilo()
 function alteraClasse()
 {
 	global $codigoMap,$codigoLayer,$classe,$parametro,$valor;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($classe);
@@ -242,7 +242,7 @@ function alteraClasse()
 function alteraClasseLabel()
 {
 	global $codigoMap,$codigoLayer,$classe,$parametro,$valor;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($classe);
@@ -305,7 +305,7 @@ function alteraClasseLabel()
 function alteraMetadados()
 {
 	global $codigoMap,$codigoLayer,$parametro,$valor;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$layer->setmetadata(strtoupper($parametro),$valor);
@@ -319,7 +319,7 @@ function alteraMetadados()
 function alteraLayer()
 {
 	global $codigoMap,$codigoLayer,$parametro,$valor;
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$ok = false;
@@ -376,7 +376,7 @@ function pegaLayers()
 {
 	global $codigoMap;
 	$dados = array();
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layers = $mapa->getalllayernames();
 	$dados["layers"] = $layers;
@@ -386,7 +386,7 @@ function pegaCaracteristicasGerais()
 {
 	global $codigoMap,$codigoLayer;
 	$dados = array();
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$dados["connection"] = $layer->connection;
@@ -429,7 +429,7 @@ function pegaMetadados()
 {
 	global $codigoMap,$codigoLayer;
 	$dados = array();
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$dados["itens"] = $layer->getmetadata("itens");
@@ -456,7 +456,7 @@ function pegaClasses()
 {
 	global $codigoMap,$codigoLayer;
 	$dados = array();
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$nclasses = $layer->numclasses;
@@ -518,7 +518,7 @@ function pegaEstilos()
 {
 	global $codigoMap,$codigoLayer;
 	$dados = array();
-	$mapfile = "../temas/".$codigoMap.".map";
+	$mapfile = "../../temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$nclasses = $layer->numclasses;
@@ -557,11 +557,11 @@ function pegaEstilos()
 function criarNovoMap()
 {
 	global $nome,$codigo;
-	if(!file_exists("../temas/".$codigo.".map"))
+	if(!file_exists("../../temas/".$codigo.".map"))
 	{
 		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		copy("base.map","../temas/".$codigo.".map");
-		$mapfile = "../temas/".$codigo.".map";
+		copy("base.map","../../temas/".$codigo.".map");
+		$mapfile = "../../temas/".$codigo.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$layer = $mapa->getlayerbyname("base");
 		$layer->set("name",$codigo);

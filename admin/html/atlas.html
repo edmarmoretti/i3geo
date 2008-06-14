@@ -34,7 +34,7 @@ var cp = new cpaint();
 //cp.set_async(false);
 cp.set_response_type("JSON");
 temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
-var p = "menutemas.php?funcao=pegaTemas";
+var p = "../php/menutemas.php?funcao=pegaTemas";
 cp.call(p,"pegaMenus",temas);
 document.getElementById("aguarde").style.display="none"
 </script>

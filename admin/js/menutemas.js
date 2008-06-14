@@ -108,7 +108,7 @@ function pegaParametros(tipo)
 		var retornaMenus = function(retorno)
 		{
 			var r = retorno.data
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td>Perfil</td></tr>";
 			for (i=0;i<r.length;i++)
 			{
 				ins += "<tr>"
@@ -118,7 +118,9 @@ function pegaParametros(tipo)
 				ins += "<td><input onchange=this.style.color='blue'  id='descmenu_"+r[i].id_menu+"' type=text size=20 value='"+r[i].desc_menu+"' /></td>"
 				ins += "<td><select onchange=this.style.color='blue'  id='abertomenu_"+r[i].id_menu+"' >"
 				ins += combosimnao(r[i].aberto)
-				ins += "</td></tr>"
+				ins += "</td>"
+				ins += "<td><input onchange=this.style.color='blue'  id='perfilmenu_"+r[i].id_menu+"' type=text size=20 value='"+r[i].perfil_menu+"' /></td>"
+				ins += "</tr>"
 			}
 			ins += "</table>"
 			$i("menus").innerHTML = ins;
@@ -316,18 +318,21 @@ function alterar(prefixo,id)
 				var nome = $i("nomemenu_"+id).value
 				var desc = $i("descmenu_"+id).value
 				var aberto = $i("abertomenu_"+id).value
+				var perfil = $i("perfilmenu_"+id).value
 				if(nome == "null"){var nome = "";}
 				if(desc == "null"){var desc = "";}
 				if(aberto == "null"){var aberto = "";}
+				if(perfil == "null"){var perfil = "";}
 			}
 			else
 			{
 				var nome = "";
 				var desc = "";
 				var aberto = "";
+				var perfil = "";
 			}
 			$i(prefixo).innerHTML =$mensagemAguarde
-			var p = "../php/menutemas.php?funcao=alteraMenus&nome="+nome+"&desc="+desc+"&id="+id+"&aberto="+aberto;
+			var p = "../php/menutemas.php?funcao=alteraMenus&perfil="+perfil+"&nome="+nome+"&desc="+desc+"&id="+id+"&aberto="+aberto;
 		}
 		if(prefixo == "grupos")
 		{
