@@ -43,6 +43,8 @@ intervalo - valor inicial e final com o número de temas que serão mostrados no s
 
 legenda - mostra a legenda no corpo do mapa sim|nao
 
+perfil - perfil utilizado para escolher os menus
+
 About: Exemplos
 
 ogc.php?lista=temas
@@ -65,41 +67,63 @@ if (!function_exists('ms_GetVersion'))
 require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
+include("classesphp/classe_menutemas.php");
+//
+//pega os endereços para compor a url de chamada do gerador de web services
+//ogc.php
+//
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$protocolo = $protocolo[0];
+$protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
+$protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
+//
+//pega a lista de menus que será processada
+//se a variável definida em ms_configura for = "", a busca é feita
+//pelo método Menutemas
+//
+if(!isset($perfil)){$perfil = "";}
+if ($menutemas == "")
+{
+	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
+	foreach($m->pegaListaDeMenus() as $menu)
+	{
+		$menus[] = $menu["url"];
+	}
+}
+else
+{
+	foreach($menutemas as $m)
+	{
+		$menus[] = $m["arquivo"];
+	}
+}
+if(!isset($menus))
+$menus = array("/opt/www/html/i3geo/menutemas/menutemas.xml");
 //pega a lista de grupos
 if ($lista == "temas")
 {
-	$xml = simplexml_load_file("menutemas/menutemas.xml");
 	echo "<b>Lista de temas por grupos e subgrupos (os códigos dos temas estão em vermelho)</b><br><br>";
-	foreach($xml->GRUPO as $grupo)
+	foreach ($menus as $menu)
 	{
-		echo "<br><b>".mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")."</b><br>";
-		foreach($grupo->SGRUPO as $sgrupo)
+		$xml = simplexml_load_file($menu);
+		foreach($xml->GRUPO as $grupo)
 		{
-			echo "&nbsp;&nbsp;&nbsp;".mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto")."<br>";
-			//echo 'kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema<br>';
-			
-			foreach($sgrupo->TEMA as $tema)
+			echo "<br><b>".mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")."</b><br>";
+			foreach($grupo->SGRUPO as $sgrupo)
 			{
-				if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
+				echo "&nbsp;&nbsp;&nbsp;".mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto")."<br>";
+				foreach($sgrupo->TEMA as $tema)
 				{
-					
-					echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-					echo "<span style=color:red >".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."</span>";
-					echo "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")." - ";
-					if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
-					{echo "<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
-					echo "<br>";
-					/*
-					echo '"'.($tema->KML).'",';
-					echo '"'.$tema->OGC.'",';
-					echo '"'.$tema->DOWNLOAD.'",';
-					echo '"'.mb_convert_encoding($tema->TAGS,"HTML-ENTITIES","auto").'",';
-					echo '"'.$tema->TIPOA.'",';
-					echo '"'.$tema->TLINK.'",';
-					echo '"'.mb_convert_encoding($tema->TDESC,"HTML-ENTITIES","auto").'",';
-					echo '"'.mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto").'",';
-					echo '"'.$tema->TID.'"<br>';
-					*/
+					if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
+					{				
+						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						echo "<span style=color:red >".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."</span>";
+						echo "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")." - ";
+						if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
+						{echo "<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
+						echo "<br>";
+					}
 				}
 			}
 		}
@@ -205,51 +229,60 @@ else
 {
 	$conta = 0;
 	$int = explode(",",$intervalo);
-	$xml = simplexml_load_file("menutemas/menutemas.xml");
-	foreach($xml->GRUPO as $grupo)
-	{
-		foreach($grupo->SGRUPO as $sgrupo)
+	foreach ($menus as $menu)
+	{	
+		$xml = simplexml_load_file($menu);
+		foreach($xml->GRUPO as $grupo)
 		{
-			foreach($sgrupo->TEMA as $tm)
+			foreach($grupo->SGRUPO as $sgrupo)
 			{
-				if (iXml($tm->OGC,"OGC") == "")
+				foreach($sgrupo->TEMA as $tm)
 				{
-					if (@ms_newMapobj("temas/".(mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto")).".map"))
+					if (mb_convert_encoding($tm->OGC,"HTML-ENTITIES","auto") == "")
 					{
-						$nmap = ms_newMapobj("temas/".(mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto")).".map");
-						$ts = $nmap->getalllayernames();
-						if (count($ts) == 1)
-						{ 
-							foreach ($ts as $t)
-							{
-								$conta++;
-								if (($conta >= $int[0]) && ($conta <= $int[1]))
+						$codigoTema = mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto");
+						if (@ms_newMapobj("temas/".$codigoTema.".map"))
+						{
+							$nmap = ms_newMapobj("temas/".$codigoTema.".map");
+							$ts = $nmap->getalllayernames();
+							if (count($ts) == 1)
+							{ 
+								foreach ($ts as $t)
 								{
-									$l = $nmap->getlayerbyname($t);
-									$l->setmetadata("ows_title",pegaNome($l));//mb_convert_encoding(pegaNome($l),"HTML-ENTITIES","auto"));
-									$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
-									$l->set("status",MS_OFF);
-									$l->setmetadata("gml_include_items","all");
-									$l->set("dump",MS_TRUE);
-									$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-									$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-									$l->setmetadata("ows_metadataurl_href",mb_convert_encoding($tm->TLINK,"HTML-ENTITIES","auto"));
-									$l->setmetadata("ows_metadataurl_type","TC211");
-									$l->setmetadata("ows_metadataurl_format","text/html");
-									ms_newLayerObj($oMap, $l);
+									if ($oMap->getlayerbyname($t) == "")
+									{
+										$conta++;
+										if (($conta >= $int[0]) && ($conta <= $int[1]))
+										{
+											$l = $nmap->getlayerbyname($t);
+											$l->setmetadata("ows_title",pegaNome($l));
+											$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+											$l->set("status",MS_OFF);
+											$l->setmetadata("gml_include_items","all");
+											$l->set("dump",MS_TRUE);
+											$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+											$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+											$l->setmetadata("ows_metadataurl_href",mb_convert_encoding($tm->TLINK,"HTML-ENTITIES","auto"));
+											$l->setmetadata("ows_metadataurl_type","TC211");
+											$l->setmetadata("ows_metadataurl_format","text/html");
+											ms_newLayerObj($oMap, $l);
+										}
+									}
 								}
 							}
 						}
 					}
 				}
-			}
-		}		
+			}		
+		}
 	}
 }
+
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 header("Content-type: $contenttype");
 ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
+
 ?>

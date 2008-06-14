@@ -87,6 +87,17 @@ Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 function iniciaMapa()
 {
 	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile;
+	//
+	//pega o xml com os sietmas para identificação
+	//
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$protocolo = $protocolo[0];
+	$protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+	$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
+	if($locidentifica == "")
+	{
+		$locidentifica = $urli3geo."/admin/xmlidentifica.php";	
+	}
 	if (!file_exists($locaplic))
 	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
 	if (!file_exists($map_file))
@@ -127,8 +138,6 @@ function iniciaMapa()
 			}
 		}
 	}
-	//if($utilizacgi == "sim")
-	//{$m->ligaDesligaTemas("","todos");}
 	//
 	//cuidado ao mexer aqui
 	//o mapa precisa ser salvo para registrar a extensão geográfica

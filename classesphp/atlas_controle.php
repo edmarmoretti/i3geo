@@ -114,6 +114,14 @@ if ($map_file != "")
 	substituiCon($map_file,$postgis_mapa);
 }
 //
+//identifica qual a url do i3geo
+//
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$urli3geo = str_replace("/classesphp/atlas_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
+if($atlasxml == "")
+{$atlasxml = $urli3geo."/admin/xmlatlas.php";}
+//
 //faz a busca da função que deve ser executada
 //
 switch ($funcao)

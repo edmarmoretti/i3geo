@@ -71,9 +71,15 @@ h1
 </form>
 <input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 <?php
+//
+//identifica qual a url do i3geo
+//
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$urli3geo = str_replace("/mobile/adicionatema.php","",$protocolo.$_SERVER["PHP_SELF"]);
 if ($tipo == "listatemas")
 {
-	$m = new Menutemas($tmpfname,"","nao");
+	$m = new Menutemas("","",$locsistemas,$locaplic,"",$urli3geo);
 	$r = $m->pegaListaDeTemas($grupo,$subgrupo,"");
 	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)
@@ -92,8 +98,8 @@ if($tipo == "adicionatema")
 }
 if ($tipo == "adicionar")
 {
-	$m = new Menutemas($tmpfname,"",$locsistemas);
-	$r = $m->pegaListaDeGrupos("","nao");
+	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo);
+	$r = $m->pegaListaDeGrupos("","","sim");
 	echo "<h1>Escolha o sub-grupo:</h1>";
 	for($rid=0;$rid<count($r);$rid++)
 	{

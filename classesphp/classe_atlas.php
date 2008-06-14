@@ -33,11 +33,6 @@ Class: Atlas
 */
 class Atlas
 {
-	/*
-	Variable: $atlas
-	
-	Objeto Atlas
-	*/
 	public $atlas;
 /*
 Function: __construct
@@ -50,9 +45,9 @@ $atlasxml - Endereço do arquivo xml com as definições do Atlas.
 */  	
 	function __construct($atlasxml)
 	{
-  		
-  		$this->arquivo = $atlasxml;
+  		error_reporting(0);
   		$this->xml = simplexml_load_file($atlasxml);
+  		$this->arquivo = $atlasxml;
 	}
 /*
 Method: pegaListaDeAtlas
@@ -243,7 +238,5 @@ locaplic - localização do i3geo no servidor
 		if($h == ""){$h = 300;}
 		return (array("link"=>$link,"w"=>$w,"h"=>$h));
 	}
-
 }
-
 ?>

@@ -136,7 +136,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
 	*/
-	$locsistemas = "../menutemas/sistemas.xml";
+	$locsistemas = $locaplic."/menutemas/sistemas.xml";
 	/*
 	Variable: $locidentifica 
 	
@@ -149,8 +149,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Por meio dessa lista pode-se disparar programas PHP que executam operações especiais para a obtenção de dados com base em um par de coordenadas xy.
 	
 	Veja a documentação específica do arquivo identifica.xml para maiores detalhes.
+
+	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
+
 	*/
-	$locidentifica = "../../menutemas/identifica.xml";
+	$locidentifica = "";
 	/*
 	Variable: $locmapas 
 	
@@ -218,16 +221,13 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Example:
 
 	$menutemas = array(
-		array("idmenu"=>1,"arquivo"=>"http://10.1.1.34/i3geo/menutemas/menutemas.xml","status"=>"fechado"),
-		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
+		array("idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
 		);
 		
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
-	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
-		);
+	$menutemas = "";
 	/*
 	Variable: $utilizacgi
 	
@@ -248,9 +248,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 Indica o nome do arquivo xml que será utilizado na interface Atlas do i3geo.
 	 
-	 Pode ser utilizado o caminho relativo, tendo como base i3geo/diretorio
+	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
 	*/
-	$atlasxml = "../menutemas/atlas.xml";
+	$atlasxml = "";
 	/*
 	 Variable: $expoeMapfile
 	 
@@ -264,7 +264,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 Arquivo PHP que define a string de conexão (PDO) com o banco de dados administrativo.
 	 
-	 Esse arquivo é incluído no programa i3geo/admin/conexao.php
+	 Esse arquivo é incluído no programa i3geo/admin/conexao.php e deve ser definido com o caminho completo.
 	 
 	 O banco de dados administrativo é utilizado para definir coisas como a árvore de temas, árvore de mapas, etc.
 	 

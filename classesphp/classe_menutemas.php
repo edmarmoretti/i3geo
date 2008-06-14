@@ -35,49 +35,35 @@ Class: Menutemas
 */
 class Menutemas
 {
-	/*
-	Variable: $mapa
-	
-	Objeto mapa
-	*/
-	protected $mapa;
-	/*
-	Variable: $arquivo
-	
-	Arquivo map file
-	*/
-	protected $arquivo;
-	/*
-	Variable: $layers
-	
-	Array com os layers
-	*/
-	protected $layers;
-	/*
-	Variable: $perfil
-	
-	Perfil do usuário atual
-	*/
-	protected $perfil;
-	/*
-	Variable: $xmlsistemas
-	
-	xml com a lista de sistemas
-	*/
-	protected $xmlsistemas;
 /*
 function: __construct
 
 Cria um objeto Menutemas
 
 parameters:
-$map_file - string $map_file Endereço do mapfile no servidor. 
+
+$map_file - (opcional) endereço do mapfile no servidor
+
+$perfil - (opcional) lista dos perfis, separados por espaços, que devem restringir a lista de menus, grupos, temas e etc.
+
+$locsistemas - (opcional) endereço do xml com a lista de sistemas adicionais que serão listados na opção de adiçao de temas
+
+$locaplic - (opcional) endereço físico do i3geo
+
+$menutemas - (opcional) array contendo a lista de menus para compor a árvore de temas (veja o i3geo/ms_configura)
+
+$urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 */  	
-	function __construct($map_file="",$perfil="",$locsistemas="")
+	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="")
 	{
-		//error_reporting(E_ALL);
+		error_reporting(0);
 		$this->perfil = explode(",",$perfil);
+		if(count($this->perfil) == 0)
+		$this->perfil = explode(" ",$perfil);
 		$this->xmlsistemas = "";
+		$this->locaplic = $locaplic;
+		$this->menutemas = $menutemas;
+		$this->urli3geo = $urli3geo;
 		if ($locsistemas != "")
 		$this->xmlsistemas = simplexml_load_file($locsistemas);		
 		if (($map_file != "") && (file_exists($map_file)))
@@ -91,6 +77,53 @@ $map_file - string $map_file Endereço do mapfile no servidor.
 				{$this->layers[] = $this->mapa->getlayer($i);}
 			}
 		}
+	}
+/*
+function: pegaListaDeMenus
+
+Pega a lista de menus do banco de dados de administração.
+
+O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+
+Parameters:
+
+locmapas - endereço do arquivo xml.
+
+return:
+array
+*/
+	function pegaListaDeMenus()
+	{
+		$resultado = array();
+		if($this->menutemas == "")
+		{
+			if(!isset($this->locaplic))
+			{return "locaplic nao foi definido";}
+			if(!isset($this->locaplic))
+			{return "locaplic nao foi definido";}
+			include_once($this->locaplic."/admin/php/conexao.php");
+			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
+    		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+    		$regs = $q->fetchAll();
+    		$dbh = null;
+    		$resultado = array();
+			foreach($regs as $reg)
+			{
+				$status = "fechado";
+				if(strtolower($reg["aberto"]) == "sim")
+				$status = "aberto";
+				$arquivo = "admin/xmlmenutemas.php?id_menu=".$reg["id_menu"]."&perfil=".$reg["perfil_menu"];
+				$url = $this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"]."&perfil=".$reg["perfil_menu"];
+				$resultado[] = array("idmenu"=>$reg["nome_menu"],"arquivo"=>$arquivo,"status"=>$status,"url"=>$url);
+			}
+		}
+		else
+		{$resultado = $this->menutemas;}
+		if(count($resultado) == 0)
+		{
+			$resultado[] = array("idmenu"=>"i3geo (xml)","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto");
+		}
+		return ($resultado);
 	}
 /*
 function: pegaListaDeMapas
@@ -152,42 +185,36 @@ return:
 
 array
 */
-	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$menutemas=null)
+	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim")
 	{
+		//
+		//lê os arquivos xml
+		//"&tipo=gruposeraiz" pega apenas os nomes dos grupos e temas na raiz
+		//
+		if($listasgrupos == "sim")
+		{$tipo = "";}
+		else
+		{$tipo = "&tipo=gruposeraiz";}
 		$this->xml = "";
-		//echo $menutemas;
-		if(isset($menutemas))
+		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			if (file_exists("../ms_configura.php"))
-			{include_once("../ms_configura.php");}
-		}
-		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
-		{
-			foreach ($menutemas as $m)
+			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				if (($m["idmenu"] == $idmenu))
-				{$this->xml = simplexml_load_file($m["arquivo"]);}
-			} 
+				$ondexml = $menu["arquivo"];
+				if(isset($menu["url"])){$ondexml = $menu["url"];}
+				$this->xml = simplexml_load_file($ondexml.$tipo);
+			}
 		}
-		if (($this->xml == "") && ($menutemas == ""))
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
-		}
-		if ($this->xml == "")
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
-		}
+		//
+		//varre o xml para pegar os dados
+		//
 		$sistemas = array();
 		$grupos = array();
 		$temasraiz = array();
+		//
 		//pega os grupos
 		//verifica se existem temas na raiz do menu
+		//
 		foreach($this->xml->TEMA as $temar)
 		{
 			$down = "nao";
@@ -329,29 +356,14 @@ array
 	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
 	{
 		$this->xml = "";
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
-		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
+		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			foreach ($menutemas as $m)
+			if($menu["idmenu"] == $idmenu)
 			{
-				if (($m["idmenu"] == $idmenu))
-				{$this->xml = simplexml_load_file($m["arquivo"]);}
-			} 
-		}
-		if (($this->xml == "") && ($menutemas == ""))
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
-		}
-		if ($this->xml == "")
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+				$ondexml = $menu["arquivo"];
+				if(isset($menu["url"])){$ondexml = $menu["url"];}
+				$this->xml = simplexml_load_file($ondexml."&tipo=subgrupos");
+			}
 		}
 		$conta = 0;
 		$subgrupos[] = array();
@@ -433,22 +445,14 @@ array
 	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
 		$this->xml = "";
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
-		if ((isset($menutemas)) && ($menutemas != "") && ($idmenu != ""))
+		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			foreach ($menutemas as $m)
+			if($menu["idmenu"] == $idmenu)
 			{
-				if (($m["idmenu"] == $idmenu))
-				{$this->xml = simplexml_load_file($m["arquivo"]);}
-			} 
-		}
-		if ($this->xml == "")
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
+				$ondexml = $menu["arquivo"];
+				if(isset($menu["url"])){$ondexml = $menu["url"];}
+				$this->xml = simplexml_load_file($ondexml);
+			}
 		}
 		$contagrupo = 0;
 		$temas = array();
@@ -532,26 +536,18 @@ $procurar - String que será procurada.
 	function procurartemas($procurar)
 	{
 		$this->xml = array();
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
-		if ((isset($menutemas)) && ($menutemas != ""))
+		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			foreach ($menutemas as $m)
-			{
-				$this->xml[] = simplexml_load_file($m["arquivo"]);
-			} 
-		}
-		if ($this->xml == "")
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml[] = simplexml_load_file("../menutemas/menutemas.xml");}
-			else
-			{$this->xml[] = simplexml_load_file("menutemas/menutemas.xml");}
-		}
+			$ondexml = $menu["arquivo"];
+			if(isset($menu["url"])){$ondexml = $menu["url"];}
+			$this->xml[] = simplexml_load_file($ondexml);
+		}	
 		$resultado = array();
-		$listadetemas = array();
+		$texto = array();
 		foreach ($this->xml as $xml)
 		{
+			$listadetemas = array();
+			$subgrupo = array();
 			foreach($xml->GRUPO as $grupo)
 			{
 				$incluigrupo = TRUE;
@@ -595,23 +591,27 @@ $procurar - String que será procurada.
 									{$down = "sim";}
 									$link = ixml($tema,"TLINK");
 									$tid = ixml($tema,"TID");
-									$texto = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
-									$p1 = $this->removeAcentos($procurar);
-									$p1 = $this->removeAcentos(htmlentities($p1));
 									
-									$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
-									$pp1 = $this->removeAcentos($pp1);
-									$pp1 = $this->removeAcentos(htmlentities($pp1));
-									
-									if (stristr($pp1,$p1) || stristr(ixml($tema,"TNOME"),htmlentities($procurar)))
-									{$listadetemas[] = $texto;}
-									
-									if(ixml($tema,"TAGS") != "")
+									if(!isset($texto[$tid]))
 									{
-										$pp1 = ixml($tema,"TAGS");
+										$texto[$tid] = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
+										$p1 = $this->removeAcentos($procurar);
+										$p1 = $this->removeAcentos(htmlentities($p1));
+										$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
 										$pp1 = $this->removeAcentos($pp1);
-										if (stristr($pp1,$p1))
-										{$listadetemas[] = $texto;}	
+										$pp1 = $this->removeAcentos(htmlentities($pp1));
+										if (stristr($pp1,$p1) || stristr(ixml($tema,"TNOME"),htmlentities($procurar)))
+										{
+											$listadetemas[] = $texto[$tid];
+										}
+										else
+										if(ixml($tema,"TAGS") != "")
+										{
+											$pp1 = ixml($tema,"TAGS");
+											$pp1 = $this->removeAcentos($pp1);
+											if (stristr($pp1,$p1))
+											{$listadetemas[] = $texto[$tid];}	
+										}
 									}
 								}
 							}
@@ -619,8 +619,9 @@ $procurar - String que será procurada.
 							{
 								$subgrupo[] = array("subgrupo"=>(ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
 							}
+							$listadetemas = array();
 						}
-						$listadetemas = array();
+						
 					}
 					if (count($subgrupo) > 0)
 					{
@@ -659,21 +660,13 @@ nrss - (opcional) número de registros no rss que serão considerados
 			}	
 		}
 		$this->xml = array();
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
-		if ((isset($menutemas)) && ($menutemas != ""))
+		$menus = $this->pegaListaDeMenus();
+		foreach ($menus as $m)
 		{
-			foreach ($menutemas as $m)
-			{
-				$this->xml[] = simplexml_load_file($m["arquivo"]);
-			} 
-		}
-		if ($this->xml == "")
-		{
-			if (file_exists("../menutemas/menutemas.xml"))
-			{$this->xml[] = simplexml_load_file("../menutemas/menutemas.xml");}
+			if(isset($m["url"]))
+			$this->xml[] = simplexml_load_file($m["url"]);
 			else
-			{$this->xml[] = simplexml_load_file("menutemas/menutemas.xml");}
+			$this->xml[] = simplexml_load_file($m["arquivo"]);
 		}
 		$resultado = array();
 		$noticias = array();
@@ -722,7 +715,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 									{
 										if($tag != "")
 										{
-											if(!$resultado[$tag])
+											if(!isset($resultado[$tag]))
 											{
 												$resultado[$tag] = array($tid);
 												//busca noticias
@@ -735,7 +728,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 														if(in_array(strtolower($t),$titulo))
 														{
 															//echo $noticia["link"]."<br>";
-															if(!$noticias[$tag])
+															if(!isset($noticias[$tag]))
 															$noticias[$tag] = array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]);
 															else
 															$noticias[$tag] = array_merge($noticias[$tag],array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]));
@@ -760,7 +753,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 		foreach(array_keys($resultado) as $k)
 		{
 			
-			if($noticias[$k])
+			if(isset($noticias[$k]))
 			{$not = array($noticias[$k]);}
 			else
 			{$not = array();}
@@ -804,6 +797,5 @@ nrss - (opcional) número de registros no rss que serão considerados
     	//Return FALSE if none of the values from $needle are found in $haystack
     	return FALSE;
 	}
-	
 }
 ?>

@@ -125,19 +125,6 @@ include_once("../pacotes/cpaint/cpaint2.inc.php");
 //
 $cp = new cpaint();
 $cp->set_data("");
-/*
-//
-//grava na sessão o PID do processo PHP
-//
-if ($funcao == "terminaProcesso")
-{
-	$pid = $_SESSION["ultimopid"];
-	@exec("taskkill /f /PID $pid 2>&1");
-	$cp->set_data($pid);
-	$cp->return_data();	
-}
-$_SESSION["ultimopid"] = getmypid();
-*/
 if ($funcao == "criaMapa")
 {
 	session_destroy();
@@ -145,7 +132,7 @@ if ($funcao == "criaMapa")
 	//primeiro é necessário carregar o ms_configura.php para pegar a variável $locaplic
 	//
 	$d = "";
-	if(!file_exists($d."ms_configura.php"))
+	if(!file_exists("ms_configura.php"))
 	$d = "../";
 	include_once($d."ms_configura.php");
 	//
@@ -168,6 +155,12 @@ if (!isset($map_file))
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 include_once("funcoes_gerais.php");
+//
+//identifica qual a url do i3geo
+//
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //substitui a string de conexão
 //
@@ -1623,7 +1616,7 @@ Pega a lista de tags registrados nos menus de temas.
 */
 	case "listaTags":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->listatags($rss,$nrss));
 	break;
 /*
@@ -1634,10 +1627,9 @@ Pega a lista de menus para incluir na guia adiciona.
 Parameters:
 */
 	case "pegalistademenus":
-		$menutemas = "";
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
-		$cp->set_data($menutemas);
+		include_once("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+		$cp->set_data($m->pegaListaDeMenus());
 	break;
 /*
 Property: pegalistadegrupos
@@ -1660,11 +1652,11 @@ Include:
 		if (file_exists("../ms_configura.php"))
 		{include_once("../ms_configura.php");}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
-		if(!isset($listasgrupos)){$listasgrupos="sim";}
-		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos,$menutemas)));
+		if(!isset($listasgrupos)){$listasgrupos="nao";}
+		$cp->set_data(array("grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos)));
 	break;
 /*
 Property: pegalistadeSubgrupos
@@ -1676,7 +1668,7 @@ Include:
 */
 	case "pegalistadeSubgrupos":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->pegaListaDeSubGrupos($grupo,$idmenu));
 	break;
 /*
@@ -1689,7 +1681,7 @@ Include:
 */
 	case "pegalistadetemas":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
 	break;
 /*
@@ -1702,7 +1694,7 @@ Include:
 */
 	case "procurartemas":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->procurartemas($procurar));
 	break;
 /*
@@ -1717,7 +1709,7 @@ Include:
 */
 	case "pegaMapas":
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->pegaListaDeMapas($locmapas));
 	break;	
 /*
