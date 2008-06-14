@@ -1,9 +1,11 @@
 /*
-Title: DataDownLoad
+Title: datadownload.js
 
 Sistema de download de dados geográficos.
 
-A lista de dados pode vir do arquivo menutemas.xml ou de um diretório no servidor.
+Lista os temas configurados no menu de temas e que permitem download.
+
+Para utilizar esse sistema acesse http://localhost/i3geo/datadownload.htm
 
 File: i3geo/classesjs/datadownload.js
 
@@ -29,16 +31,15 @@ Free Software Foundation, Inc., no endereço
 
 Veja:
 
-<Aplicativo para download de dados>
+<datadownload.htm>
 */
-
-var loc = window.location.href;
 /*
 Variable: g_locaplic
 
 Indica a localização do i3geo. Por default, procura no diretório onde foi executada a plicação datadownload.
 No caso do datadownload.htm ser disparado de outro local, é necessário definir essa variável antes de chamar a função DDinicia
 */
+var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0]
 //
@@ -58,7 +59,7 @@ Values:
 
 dir - indica que os dados serão buscados em diretórios no servidor.
 
-menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml
+menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml ou no sistema de administração do i3geo
 */
 g_tipo = "menutemas"
 /*
@@ -87,7 +88,6 @@ g_dirarquivos = "/opt/www/html/geodados/brasil/vegetacao/vegetacao2002"
 g_i3geo = "/i3geo"
 g_locaplic = "http://"+window.location.host+g_i3geo
 */
-
 g_dirbase = ""
 g_dirarquivos = ""
 /*
@@ -96,7 +96,6 @@ Function: DDinicia
 Inicia o aplicativo montando a árvore de opções e preenchendo a DIV arvore.
 
 Deve existir no HTML um DIV com id='arvore'.
-
 */
 function DDinicia()
 {

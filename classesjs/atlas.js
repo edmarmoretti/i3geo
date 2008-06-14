@@ -3,6 +3,10 @@ Title: Atlas
 
 Executa as operações da interface Atlas.
 
+Para abrir os atlas utilize http://localhost/i3geo/atlas
+
+A definição dos atlas é feita em i3geo/menutemas/menutemas.xml ou no sistema de administração do i3geo.
+
 File: i3geo/classesjs/atlas.js
 
 About: Licença
@@ -39,7 +43,6 @@ Variable: atlasxml
 Endereço do arquivo xml com a lista de atlas.
 */
 atlasxml = "";
-
 /*
 Function: iniciaAtlas
 
@@ -126,7 +129,6 @@ function iniciaListaAtlas()
 Function: pegaListaDeAtlas
 
 Pega a lista de Atlas e características principais de cada um.
-
 */
 function pegaListaDeAtlas()
 {
@@ -173,6 +175,10 @@ function pegaListaDeAtlas()
 Function: abreatlas
 
 Abre um Atlas específico escolhido pelo usuário
+
+Parameters:
+
+id - id do atlas que será aberto
 */
 function abreatlas(id)
 {
@@ -184,6 +190,10 @@ function abreatlas(id)
 Function: abrePrancha
 
 Ativa uma prancha, adicionando e ativando as camadas específicas.
+
+Parameters:
+
+id - id da prancha que será aberta
 */
 function abrePrancha(id)
 {
@@ -203,7 +213,7 @@ function abrePrancha(id)
 /*
 Function: atlas2i3geo
 
-Abre o mapa atual no i3geo
+Abre o mapa atualmente aberto no i3geo utilizando a interface padrão.
 */
 function atlas2i3geo()
 {

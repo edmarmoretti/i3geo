@@ -1,7 +1,8 @@
 /*
 Title: ferramentas.js
 
-Abre ou executa determinadas operações de manipulação do mapa.
+Funções que executam determinadas operações de manipulação do mapa ou que abrem janelas internas para
+a realização de operações sobre o mapa.
 
 Normalmente, as funções abrem uma janela interna no i3geo
 
@@ -30,15 +31,20 @@ Free Software Foundation, Inc., no endereço
 /*
 Section: funções de movimentação do mouse sobre o mapa
 */
-/*
+/**
 Function moveMede
 
 Calcula a distância entre pontos e mostra na tela o resultado.
+
+Utiliza os objetos pontosdistobj e objposicaocursor para obter as coordenadas para o cálculo.
+
+O resultado do cálculo é mostrado no DIV com id="mostradistancia_calculo" 
 */
 function moveMede()
 {
 	if (g_tipoacao == "mede")
 	{
+		if($i("mostradistancia"))
 		$i("mostradistancia").style.display="block";
 		var n = pontosdistobj.xpt.length;
 		if (n > 0)
@@ -64,7 +70,7 @@ function moveMede()
 /*
 Function movePan
 
-Desloca cursor de zoom box
+Desloca cursor de zoom por box
 */
 function movePan()
 {
@@ -74,7 +80,9 @@ function movePan()
 /*
 Function moveLonglat
 
-Mostra os valores da coordenada do mouse.
+Mostra os valores da coordenada do mouse em latitude e longitude como uma única string.
+
+Os dados são obtidos do objeto objposicaocursor e incluídos no DIV = "longlat"
 */
 function moveLonglat()
 {
@@ -84,7 +92,9 @@ function moveLonglat()
 /*
 Function moveSelecaoPoli
 
-Cria os elementos necessários à função de seleção por polígono.
+Mostra na tela o polígono desenhado na opção de seleção por polígono.
+
+Os pontos são obtidos dos objetos pontosdistobj e objposicaocursor
 */
 function moveSelecaoPoli()
 {
@@ -183,6 +193,10 @@ function cliqueCapturaPt()
 Function: abreKml
 
 Abre a janela para mostrar o link de acesso a um tema via kml.
+
+Parameters:
+
+tema - código do tema escolhido
 */
 function abreKml(tema)
 {
@@ -211,6 +225,8 @@ function cliqueIdentifica()
 Function: cliqueInserexy
 
 Insere um ponto no mapa na posição clicada
+
+Os pontos são obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 */
 function cliqueInserexy()
 {
@@ -245,6 +261,8 @@ function cliqueInserexy()
 Function: cliqueInseregrafico
 
 Insere um gráfico no mapa na posição clicada
+
+Os pontos são obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 */
 function cliqueInseregrafico()
 {
@@ -294,6 +312,8 @@ function cliqueInseregrafico()
 Function: cliqueInseretoponimo
 
 Insere um texto no mapa na posição clicada
+
+Os pontos são obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 */
 function cliqueInseretoponimo()
 {
@@ -365,7 +385,9 @@ function cliqueInseretoponimo()
 /*
 Function: cliqueSelecao
 
-Seleciona um elemento de um tema do mapa
+Seleciona um elemento de um tema do mapa através do clique no mapa.
+
+Os pontos são obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
 */
 function cliqueSelecao()
 {
@@ -393,7 +415,9 @@ function cliqueSelecao()
 /*
 Function: cliqueMede
 
-Executa as operações de medição de distâncias
+Executa as operações de medição de distâncias.
+
+Os pontos são obtidos do objeto objposicaocursor
 */
 function cliqueMede()
 {
@@ -437,7 +461,7 @@ function cliqueMede()
 /*
 Function: cliqueSelecaoPoli
 
-Executa as operações de seleção por polígono quando o mouse é movido sobre o mapa
+Executa as operações de seleção por polígono quando o mouse é movido sobre o mapa e a opção de cálculo estiver ativa
 */
 function cliqueSelecaoPoli()
 {
@@ -540,7 +564,7 @@ function cliqueSelecaoPoli()
 /*
 Function: cliqueArea
 
-Executa as operações de cálculo de área quando o usuário clica no mapa
+Executa as operações de cálculo de área quando o usuário clica no mapa  e a opção de cálculo estiver ativa
 */
 function cliqueArea()
 {
@@ -610,14 +634,14 @@ Section: propriedades do mapa
 /*
 Function: temporizador
 
-Define o intervalo de tempo para redesenho automático do mapa.
+Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
 */
 function autoredesenha()
 {wdocaf("300px","180px",g_locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador");}
 /*
 Function: salvaMapa
 
-Salva o map file localmente
+Abre a janela para salvar localmente o mapfile utilizado no mapa atual
 */
 function salvaMapa()
 {
@@ -628,14 +652,14 @@ function salvaMapa()
 /*
 Function: carregaMapa
 
-Carrega um map file salvo
+Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
 */
 function carregaMapa()
 {wdocaf("300px","150px",g_locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa");}
 /*
 Function: convertews
 
-Converte mapa em web service
+Abre a janela para converter o mapa atual em web service WMS
 */
 function convertews()
 {
@@ -646,14 +670,14 @@ function convertews()
 /*
 Function: queryMap
 
-Altera as propriedades da exibição dos elementos selecionados.
+Abre a janela que altera as propriedades da exibição dos elementos selecionados.
 */
 function queryMap()
 {wdocaf("210px","170px",g_locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Querymap");}
 /*
 Function: template
 
-Muda o template do mapa atual.
+Abre a janela que muda o template do mapa atual.
 */
 function template()
 {wdocaf("300px","400px",g_locaplic+"/ferramentas/template/index.htm","","","Template");}
@@ -671,21 +695,21 @@ function ativaLogo()
 /*
 Function: tamanho
 
-Muda o tamanho do mapa
+Abre a janela que muda o tamanho do mapa
 */
 function tamanho()
 {wdocaf("150px","170px",g_locaplic+"/ferramentas/opcoes_tamanho/index.htm","","","Tamanho");}
 /*
 Function: tipoimagem
 
-Define um filtro sobre a imagem gerada alterando susas características
+Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
 */
 function tipoimagem()
 {wdocaf("300px","220px",g_locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");}
 /*
 Function: corFundo
 
-Altera a cor do fundo atual.
+Abre a janela que altera a cor do fundo do mapa atual.
 */
 function corFundo()
 {wdocaf("210px","170px",g_locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Fundo");}
@@ -731,7 +755,7 @@ Exclui um tema do mapa
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema.
+tema - código do tema
 */
 function excluitemaf(tema)
 {
@@ -756,7 +780,7 @@ Sobe um tema na ordem de desenho
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema.
+tema - código do tema
 */
 function sobetemaf(tema)
 {
@@ -771,7 +795,7 @@ Desce um tema na ordem de desenho
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema.
+tema - código do tema
 */
 function descetemaf(tema)
 {
@@ -786,7 +810,7 @@ Zoom para o tema
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema.
+tema - código do tema
 */
 function zoomtemaf(tema)
 {
@@ -817,7 +841,7 @@ Muda a transparencia de um tema
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema. Passado para a função pegatema.
+idtema - código do tema
 */
 function mudatranspf(idtema)
 {
@@ -843,7 +867,7 @@ Muda o nome de um tema
 
 Parameters:
 
-idtema - id que identifica o tema conforme definido no map file
+idtema - código do tema
 */
 function mudanomef(idtema)
 {
@@ -870,7 +894,7 @@ Adiciona gráficos automaticamente nos elementos de um tema
 
 Parameters:
 
-idtema - id que identifica o tema conforme definido no map file
+idtema - código do tema
 */
 function graficotema(idtema)
 {wdocaf("350px","340px",g_locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico");}
@@ -882,7 +906,7 @@ Opções de toponímia de um tema.
 
 Parameters:
 
-idtema - id que identifica o tema conforme definido no map file
+idtema - código do tema
 */
 function toponimiaf(idtema)
 {wdocaf("350px","340px",g_locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");}
@@ -893,7 +917,7 @@ Opções de filtragem de um tema.
 
 Parameters:
 
-idtema - id que identifica o tema conforme definido no map file
+idtema - código do tema
 */
 function filtrof(idtema)
 {wdocaf("480px","250px",g_locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");}
@@ -924,7 +948,7 @@ function selecao()
 /*
 Function: pontosdistri
 
-Análises de distribuição de pontos
+Abre a janela para executar análises de distribuição de pontos
 */
 function pontosdistri()
 {
@@ -938,14 +962,14 @@ function pontosdistri()
 /*
 Function: pontoempoligono
 
-Cruza um tema de pontos com um ou mais temas poligonais e gera um novo tema
+Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
 */
 function pontoempoligono()
 {wdocaf("400px","250px",g_locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono");}
 /*
 Function: nptPol
 
-Cruza um tema de pontos com um ou tema poligona e gera um novo tema com o número de pontos em cada polígono
+Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
 */
 function nptPol()
 {wdocaf("400px","200px",g_locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono");}
@@ -959,28 +983,28 @@ function buffer()
 /*
 Function: distanciaptpt
 
-Calcula a distância entre um ponto e outros pontos próximos
+Abre a janela para calcular a distância entre um ponto e outros pontos próximos
 */
 function distanciaptpt()
 {wdocaf("400px","220px",g_locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");}
 /*
 Function: centroide
 
-Gera um tema com os centroides dos elementos selecionados
+Abre a janela que gera um tema com os centroides dos elementos selecionados
 */
 function centroide()
 {wdocaf("400px","180px",g_locaplic+"/ferramentas/centroide/index.htm","","","Centróide");}
 /*
 Function: dissolve
 
-Gera um tema dissolvendo as divisas entre polígonos.
+Abre a janela que gera um tema dissolvendo as divisas entre polígonos.
 */
 function dissolve()
 {wdocaf("400px","230px",g_locaplic+"/ferramentas/dissolve/index.htm","","","Dissolve");}
 /*
 Function: agrupaElementos
 
-Gera um tema poligonal agrupando elementos de um tema.
+Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 */
 function agrupaElementos()
 {wdocaf("400px","230px",g_locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");}
@@ -988,7 +1012,7 @@ function agrupaElementos()
 /*
 Function: analisaGeometrias
 
-Sistema de análise de geometrias
+Abre a janela com o sistema de análise de geometrias
 */
 function analisaGeometrias()
 {
@@ -1001,10 +1025,9 @@ function analisaGeometrias()
 /*
 Function: 
 	
-Botão de medição de área.
+Ativa a opção de medição de área.
 
 A medida é feita quando o usuário clica no mapa com esta opção ativa
-
 */
 function area()
 {
@@ -1063,7 +1086,7 @@ function area()
 /*
 Function: mede
 	
-Botão de medição de distâncias.
+Ativa a opção de medição de distâncias.
 
 A medida é feita quando o usuário clica no mapa com esta opção ativa
 
@@ -1147,7 +1170,7 @@ function inserexy()
 /*
 Function: inseregrafico
 
-Inserção de gráficos.
+Ativa a opção de inserção de gráficos.
 	
 A inserção é feita quando o usuário clica no mapa com esta opção ativa
 	
@@ -1173,21 +1196,21 @@ Section: grades
 /*
 Function: gradePontos
 
-Gera grade de pontos
+Abre a janela que gera grade de pontos
 */
 function gradePontos()
 {wdocaf("400px","250px",g_locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos");}
 /*
 Function: gradePoligonos
 
-Gera grade de poligonos
+Abre a janela que gera grade de poligonos
 */
 function gradePol()
 {wdocaf("400px","250px",g_locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos");}
 /*
 Function: gradeHex
 
-Gera grade de hexágonos
+Abre a janela que gera grade de hexágonos
 */
 function gradeHex()
 {wdocaf("400px","250px",g_locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos");}
@@ -1195,7 +1218,7 @@ function gradeHex()
 /*
 Function: gradeCoord
 
-Gera grade de coordenadas
+Abre a janela que gera grade de coordenadas
 */
 function gradeCoord()
 {wdocaf("350px","280px",g_locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");}
@@ -1205,7 +1228,7 @@ Section: atributos
 /*
 Function: procuraratribf
 
-Procurar atributos na tabela do tema
+Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
 
 Parameters:
 
@@ -1216,7 +1239,7 @@ function procuraratribf(idtema)
 /*
 Function: tabelaf
 
-Abre a tabela de atributos de um tema.
+Abre a tabela com os atributos de um tema.
 
 Parameters:
 
@@ -1227,7 +1250,7 @@ function tabelaf(idtema)
 /*
 Function: etiquetas
 
-Abre a tabela de atributos de um tema.
+Abre a janela de configuração das etiquetas
 
 Parameters:
 
@@ -1241,7 +1264,7 @@ Section: legenda
 /*
 Function: opcoesLegenda
 
-Ativa ou desativa a legenda incluida na imagem do mapa e define seus parâmetros.
+Abre a janela de configuração da legenda do mapa
 
 */
 function opcoesLegenda()
@@ -1262,7 +1285,7 @@ function abreCor(janela,elemento)
 /*
 Function: editaLegenda
 
-Editor de legenda de um tema
+Abre a janela do editor de legenda de um tema
 
 Parameters:
 
@@ -1284,35 +1307,35 @@ function nuvemTags()
 /*
 Function: navegacaoDir
 
-Adiciona temas navegando pelos diretórios do servidor
+Abre a janela para adicionar temas navegando pelos diretórios do servidor
 */
 function navegacaoDir()
 {wdocaf("550px","350px",g_locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");}
 /*
 Function: conectarwms
 
-Adiciona temas tendo como fonte um web service do tipo wms
+Abre a janela para adicionar temas tendo como fonte um web service do tipo wms
 */
 function conectarwms()
 {wdocaf("400px","300px",g_locaplic+"/ferramentas/conectarwms/index.htm","","","WMS");}
 /*
 Function: conectarwfs
 
-Adiciona temas tendo como fonte um web service do tipo wfs
+Abre a janela para adicionar temas tendo como fonte um web service do tipo wfs
 */
 function conectarwfs()
 {wdocaf("400px","300px",g_locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");}
 /*
 Function: conectargeorss
 
-Adiciona temas tendo como fonte um georss
+Abre a janela para adicionar temas tendo como fonte um georss
 */
 function conectargeorss()
 {wdocaf("400px","300px",g_locaplic+"/ferramentas/conectargeorss/index.htm","","","GeoRSS");}
 /*
 Function: abreSistema
 
-Abre um programa definido no menu de sistemas.
+Abre em uma janela o programa escolhido pelo usuário e definido no menu de sistemas.
 
 A lista de sistemas é lida de um arquivo xml definido no ms_configura.php
 
@@ -1332,14 +1355,14 @@ function abreSistema(endereco,w,h)
 /*
 Function: upload
 
-Faz o upload de shape file
+Abre a janela para o upload de shape file
 */
 function upload()
 {wdocaf("300px","230px",g_locaplic+"/ferramentas/upload/index.htm","","","Upload");}
 /*
 Function: uploaddbf
 
-Faz o upload de um arquivo dbf e acrescenta como um novo tema
+Abre a janela para o upload de um arquivo dbf
 */
 function uploaddbf()
 {wdocaf("300px","280px",g_locaplic+"/ferramentas/uploaddbf/index.htm","","","Upload");}
@@ -1356,8 +1379,11 @@ function mostraExten()
 /*
 Function: ativaHistoricoZoom
 	
-Insere a opção para mostrar o zoom anterior ou o próximo.
-	
+Insere na interface a opção para mostrar o zoom anterior ou o próximo.
+
+Parameters:
+
+iddiv - id do elemento HTML que receberá os ícones
 */	
 function ativaHistoricoZoom(iddiv)
 {
@@ -1379,7 +1405,10 @@ function ativaHistoricoZoom(iddiv)
 Function: ativaLocalizarxy
 	
 Insere a opção para mostrar as coordenadas xy e localização de coordenadas.
-	
+
+Parameters:
+
+iddiv - id do elemento HTML que receberá os dados
 */	
 function ativaLocalizarxy(iddiv)
 {
@@ -1402,7 +1431,8 @@ function ativaLocalizarxy(iddiv)
 Function: ativaEscalaNumerica
 	
 Insere a apresentação da escala numérica no mapa.
-	
+
+iddiv - id do elemento HTML que receberá a barra de escala
 */	
 function ativaEscalaNumerica(iddiv)
 {
@@ -1418,7 +1448,8 @@ function ativaEscalaNumerica(iddiv)
 Function: ativaBuscaRapida
 	
 Insere a opção de busca rápida.
-	
+
+iddiv - id do elemento HTML que receberá os dados
 */	
 function ativaBuscaRapida(iddiv)
 {
@@ -1433,7 +1464,7 @@ function ativaBuscaRapida(iddiv)
 /*
 Function: buscaRapida
 
-Realiza a busca por palavra no serviço geonames do MMA
+Abre a janela que realiza a busca por palavra no serviço geonames do MMA
 
 Chama o web service e mostra os resultados na tela
 */
@@ -1549,6 +1580,8 @@ Section: outros
 Function: pegaimagens
 
 Pega as imagens armazenadas nos quadros e mostra em uma nova janela
+
+Os quadros são obtidos do objeto "quadrosfilme"
 */
 function pegaimagens()
 {
@@ -1596,7 +1629,7 @@ function pegaimagens()
 /*
 Function: abreDoc
 
-Abre a documentacao do sistema.
+Abre a documentacao do i3geo.
 */
 function abreDoc()
 {window.open(g_locaplic+"/documentacao/index.html");}
@@ -1604,14 +1637,18 @@ function abreDoc()
 /*
 Function: downloadbase
 
-Lista temas para download
+Abre o aplicativo datadownload
+
+Veja:
+
+<datadownload.htm>
 */
 function downloadbase()
 {window.open(g_locaplic+"/datadownload.htm");}
 /*
 Function: download
 
-Faz o download de um tema
+Abre a janela que faz o download de um tema
 
 Parameters:
 
@@ -1623,7 +1660,7 @@ function download(idtema)
 /*
 Function: opcoesQuadros
 
-Opções de animação dos quadros de armazenamento de imagens.
+Abre a janela para definição das opções de animação dos quadros de armazenamento de imagens.
 */
 function opcoesQuadros()
 {
@@ -1644,14 +1681,14 @@ function opcoesQuadros()
 /*
 Function: opcoesEscala
 
-Opções da barra de escala.
+Abre a janela para definição das opções da barra de escala.
 */
 function opcoesEscala()
 {wdocaf("250px","300px",g_locaplic+"/ferramentas/opcoes_escala/index.htm",objposicaomouse.x - 75,objposicaomouse.y - 260,"Escala");}
 /*
 Function: imprimir
 
-Abre as opções de impressão do mapa
+Abre a janela para definição das opções de impressão do mapa
 */
 function imprimir()
 {wdocaf("320px","180px",g_locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");};
@@ -1695,7 +1732,10 @@ function textofid()
 Function: visual
 
 Adiciona os ícones de escolha do visual do mapa.
-	
+
+Parameters:
+
+iddiv - id do elemento html que receberá os dados
 */
 function visual(iddiv)
 {

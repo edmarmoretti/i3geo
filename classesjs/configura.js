@@ -3,6 +3,10 @@ Title: classesjs/configura.js
 
 Definição das variáveis de configuração da interface.
 
+Aqui é feita a definição dos têrmos utilizados nos vários idiomas suportados pelo i3geo, definição dos
+valores padrão das variáveis de configuração, definição do conteúdo do menu suspenso, definição das funções
+que são executadas quando determinados eventos ocorrem, definição das funcionalidades dos botões, etc. 
+
 O I3Geo utiliza variáveis (veja o item específico na documentação) globais que possibilitam 
 alterar algumas das características da interface.
 Essas variáveis recebem valores default quando o I3Geo é iniciado mas podem ser alterados 
@@ -43,6 +47,9 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+/*
+Section: internacionalização
 */
 /*
 Variable: g_traducao
@@ -900,7 +907,6 @@ en:"Choose look for the buttons and other map's visual characteristics",
 es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del mapa"
 }]
 };
-
 /*
 Variable: g_linguagem
 
@@ -914,6 +920,9 @@ g_linguagem = "pt";
 var temp = pCookie("i3geolingua");
 if(temp != undefined)
 {g_linguagem = temp;}
+/*
+Section: Variáveis de configuração
+*/
 /*
 Variable: g_templateLegenda
 
@@ -1033,7 +1042,7 @@ g_3dmap = "";
 /*
 Variable: g_opcoesTemas
 
-Variável que define se as opcoes adicionais de cada tema serao mostradas.
+Variável que define se as opções adicionais de cada tema serão mostradas.
 
 As opções são aquelas apresentadas na lista de temas do mapa, quando um tema é expandido.
 
@@ -1226,7 +1235,7 @@ Variável interna para a barra de zoom.
 
 */
 g_fatordezoom = 0;
-/**
+/*
 Variable: g_diminuixM
 
 Diminui a largura do mapa em pixels no caso do navegador ser o IE.
@@ -1292,7 +1301,7 @@ Função ajax que será executada para mostrar informações em etiquetas.
 
 A função é executada pelo CPAINT e avaliada com "eval".
 
-Por padrão a função é a verificaTipDefault
+Por padrão a função é a verificaTipDefault. Vc pode especificar uma outra função se for desejado.
 
 Veja:
 
@@ -1340,7 +1349,7 @@ g_tipoimagem = "nenhum";
 Variable: g_sistemas
 
 Nome do arquivo xml com a lista de sistemas que serão mostrados na guia de adição de temas.
-O valor dessa variável é definido no arquivo "ms_configura.php" e é preenchida utilizando o ajax.
+O valor dessa variável é definido no arquivo "ms_configura.php" e é preenchida utilizando o ajax logo na inicialização do i3geo.
 */
 g_sistemas = "";
 /*
@@ -1389,6 +1398,9 @@ Veja:
 <funcoes.js>, iniciamma.js>
 */
 g_guiaativa = "guia1";
+/*
+Section: Eventos
+*/
 /*
 Variable: g_funcoesMouseParado
 
@@ -1493,6 +1505,9 @@ g_listaPropriedades = {
 	{ text: "p11", url: "javascript:template()" },
 	{ text: "p12", url: "javascript:autoredesenha()" }
 ]};
+/*
+Section: Funcionalidades
+*/
 /*
 Variable: oMenuData
 
