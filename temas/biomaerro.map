@@ -1,7 +1,7 @@
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
-  NAME bioma # ok
+  NAME biomaerro # ok
   TYPE Polygon
   STATUS OFF
   TEMPLATE "none.htm"
