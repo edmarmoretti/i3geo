@@ -37,6 +37,8 @@ Include:
 include_once("pega_variaveis.php");
 include_once("lews/wms_functions.php");
 include_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("carrega_ext.php");
+include_once("../ms_configura.php");
 $cp = new cpaint();
 //
 //busca o getcapabilities de um wms
@@ -329,10 +331,72 @@ if ($funcao == "listaRSSws")
 	$cp->return_data();
 	exit;
 }
+if ($funcao == "listaRSSws2")
+{
+	$cp->register('listaRSSws2');
+	$cp->start();
+	$cp->return_data();
+	exit;
+}
+/*
+Function: listaRSSws2
+
+Pega os links de um RSS.
+
+cp - Objeto CPAINT.
+
+rss - Endereços dos RSS.
+
+tipo - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+*/
+function listaRSSws2()
+{
+	global $cp,$rss,$locaplic,$tipo;
+	if(!isset($tipo)){$tipo = "GEORSS";}
+	include_once("funcoes_gerais.php");
+	include_once("../admin/php/xml.php");
+	include_once("../ms_configura.php");
+	$rsss = explode("|",$rss);
+	if(count($rsss) == 0){$rsss = array(" ");}
+	$erro = "Erro. Nao foi possivel ler o arquivo";
+	foreach ($rsss as $r)
+	{
+		if($r == "" || $r == " ")
+		{
+			if($tipo == "GEORSS")
+			$canali = simplexml_load_string(geraXmlGeorss($locaplic));
+			if($tipo == "WMS")
+			$canali = simplexml_load_string(geraXmlWMS($locaplic));
+			if($tipo == "WS")
+			$canali = simplexml_load_string(geraXmlWS($locaplic));
+			if($tipo == "DOWNLOAD")
+			$canali = simplexml_load_string(geraXmlDownload($locaplic));
+
+		}
+		else
+		{$canali = simplexml_load_file($rss);}
+		$linhas[] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>####";
+		foreach ($canali->channel->item as $item)
+		{
+			$linha[] = ixml($item,"title");
+			$linha[] = ixml($item,"description");
+			$linha[] = ixml($item,"link");
+			$linha[] = ixml($item,"author");
+			$linha[] = ixml($item,"ranking");
+			$linha[] = ixml($item,"tempo");
+			$linhas[] = implode("#",$linha);
+			$linha = array();
+		}
+	}
+	$retorna = implode("|",$linhas);
+	$retorna = str_replace("\n","",$retorna);
+	$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");
+	$cp->set_data($retorna);
+}
 /*
 Function: listaRSSws
 
-Pega os links de um RSS WS.
+Pega os links de um RSS usando a biblioteca magpierss (depreciado).
 
 cp - Objeto CPAINT.
 
@@ -342,7 +406,6 @@ function listaRSSws()
 {
 	global $cp,$rss;
 	require('../pacotes/magpierss/rss_fetch.inc');
-	//$rss = fetch_rss("http://localhost/i3geo/menutemas/servicosws.xml");
 	$rsss = explode("|",$rss);
 	$erro = "Erro. Nao foi possivel ler o arquivo";
 	foreach ($rsss as $r)

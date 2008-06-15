@@ -20,5 +20,5 @@ if(!isset($locaplic))
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
-echo geraXmlAtlas($locaplic);
+echo geraXmlGeorss($locaplic);
 ?>

@@ -20,9 +20,7 @@ File: i3geo/menutemas/servicoswms.xml
 
 <item>
 <category/>
-<title>
-FAO - Geonetwork
-</title>
+<title>FAO - Geonetwork</title>
 <description></description>
 <link>
 http://www.fao.org/geonetwork/srv/en/rss.latest?georss=gml

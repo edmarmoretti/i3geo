@@ -45,7 +45,7 @@ foreach(array_keys($_SESSION) as $k)
 //
 //carrega o phpmapscript
 //
-include_once ("carrega_ext.php");
+include_once ("../../classesphp/carrega_ext.php");
 //verifica se o cliente pode editar
 include_once("../ms_configura.php");
 include_once("../pacotes/cpaint/cpaint2.inc.php");

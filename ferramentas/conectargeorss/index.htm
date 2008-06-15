@@ -33,21 +33,16 @@
 
 <script type="text/javascript" >
 aguarde("block");
-g_RSS = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicosgeorss.xml")
-if (window.location.host == "localhost")
-{
-	alert("Vc esta em localhost, sera utilizado o xml local");
-	g_RSS = new Array("http://localhost/i3geo/menutemas/servicosgeorss.xml")
-}
+g_RSS = new Array("")
 if (document.getElementById("RSS"))
 {
 	if (g_RSS.length > 0)
 	{
-		var p = "../../classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSS.join("|");
+		var p = "../../classesphp/wscliente.php?funcao=listaRSSws2&rss="+g_RSS.join("|")+"&tipo=GEORSS";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"listaRSSws",mostraRetornoRSS);
+		cp.call(p,"listaRSSws2",mostraRetornoRSS);
 	}
 }
 function mostraRetornoRSS(retorno)

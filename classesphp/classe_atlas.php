@@ -41,13 +41,13 @@ Cria um objeto atlas
 
 parameters:
 
-$atlasxml - Endereço do arquivo xml com as definições do Atlas.
+$atlasxml - Objeto xml com o atlas.
 */  	
-	function __construct($atlasxml)
+	function __construct($xml,$arquivo)
 	{
   		error_reporting(0);
-  		$this->xml = simplexml_load_file($atlasxml);
-  		$this->arquivo = $atlasxml;
+  		$this->xml = $xml;
+  		$this->arquivo = $arquivo;
 	}
 /*
 Method: pegaListaDeAtlas

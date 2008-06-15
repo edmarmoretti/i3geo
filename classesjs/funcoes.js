@@ -880,15 +880,19 @@ function pegalistademenus(retorno)
 				//se o parâmetro não existir na variável $menutemas definida em ms_configura.php,
 				//será utilizado aberto
 				//
+				if(retorno.data[i].nomemenu)
+				var nome = retorno.data[i].nomemenu;
+				else
+				var nome = retorno.data[i].idmenu;
 				var status = "aberto";
 				if(retorno.data[i].status)
 				{var status = retorno.data[i].status;}
 				else
 				{var status = "fechado";}
 				if(i == j-1)
-				{pegaListaDeGrupos(retorno.data[i].idmenu,"sim",status);}
+				{pegaListaDeGrupos(retorno.data[i].idmenu,"sim",status,nome);}
 				else
-				{pegaListaDeGrupos(retorno.data[i].idmenu,"nao",status);}
+				{pegaListaDeGrupos(retorno.data[i].idmenu,"nao",status,nome);}
 				i++;
 			}
 			while(i < j)
@@ -3051,8 +3055,10 @@ idmenu - identificador do menu que será aberto. É definido em ms_configura.php
 listasistemas - sim|nao indica se a lista de sistemas será mostrada ou não
 
 status - aberto|fechado indica se a árvore será mostrada aberta ou fechada no menu.
+
+nomemenu - nome do menu que será incluído na raiz da árvore
 */
-function pegaListaDeGrupos(idmenu,listasistemas,status)
+function pegaListaDeGrupos(idmenu,listasistemas,status,nomemenu)
 {			
 	if(status == "aberto"){status = true;}
 	else
@@ -3128,7 +3134,7 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 			//cria a raiz da árvore
 			//
 			var nometemas = $trad("a7");
-			if (idmenu != ""){nometemas += " - "+idmenu;}
+			if (idmenu != ""){nometemas += " - "+nomemenu;}
 			mytreeview2.createItem("i"+idmenu, "<b>"+nometemas+"</b>", "foldermapa", true, true, true, null);
 			mytreeview2.itemExpand = expandeGrupo;
 			//

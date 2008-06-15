@@ -41,23 +41,12 @@ if(!isset($locaplic))
 			if(file_exists("../ms_configura.php"))
 			{include_once("../ms_configura.php");}
 			else
-			include_once("ms_configura.php");
+			{include_once("ms_configura.php");}
 		}	
 	}
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
-
 error_reporting(0);
-/*
-session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
-session_start();
-foreach(array_keys($_SESSION) as $k)
-{
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
-*/
 //
 //carrega o phpmapscript
 //
@@ -68,7 +57,7 @@ set_time_limit(120);
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico
 //
-if($funcao !="verificaEditores")
+if($funcao != "verificaEditores")
 {if(verificaEditores($editores) == "nao"){exit;}}
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
@@ -165,15 +154,5 @@ function pegaDados($sql)
 	{
     	return "Error!: " . $e->getMessage();
 	}
-}
-function array_in_array($needle, $haystack)
-{
-   	//Make sure $needle is an array for foreach
-   	if(!is_array($needle)) $needle = array($needle);
-   	//For each value in $needle, return TRUE if in $haystack
-   	foreach($needle as $pin)
-       	if(in_array($pin, $haystack)) return TRUE;
-   	//Return FALSE if none of the values from $needle are found in $haystack
-   	return FALSE;
 }
 ?>

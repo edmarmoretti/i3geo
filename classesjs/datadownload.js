@@ -99,13 +99,34 @@ Deve existir no HTML um DIV com id='arvore'.
 */
 function DDinicia()
 {
+	if(!document.getElementById("arvoreTemas"))
+	{
+		alert("Nao foi encontrado o DIV arvoreTemas");
+		return;
+	}
 	if (g_tipo == "menutemas")
 	{
+		/*
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"pegaListaDeGrupos",processaGrupos);
+		*/	
+		var processaMenus = function(retorno)
+		{
+			var mn = retorno.data.length
+			for (m=0;m<mn; m++)
+			{
+				document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
+				ativaMenus(retorno.data[m].idmenu,retorno.data[m].nomemenu)
+			}
+		}
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"pegaListaDeMenus",processaMenus);
 	}
 	if (g_tipo == "dir")
 	{
@@ -116,6 +137,18 @@ function DDinicia()
 		cp.call(p,"listaDiretorios",processaDiretorios);
 	}
 	dataDownloadLinks(g_RSSl)
+}
+function ativaMenus(id_menu,nome_menu)
+{
+	var pMenu = function(retornoM)
+	{
+		processaGrupos(retornoM,id_menu,nome_menu)
+	}				
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=&idmenu="+id_menu+"&tipo=&listasistemas=nao&listasgrupos=sim";
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegaListaDeGrupos",pMenu);			
 }
 /*
 Function: processaDiretorios
@@ -238,18 +271,13 @@ Parameters:
 
 retorno - string formatada com os dados para montagem da árvore.
 */
-function processaGrupos(retorno)
+function processaGrupos(retorno,id_menu,nome_menu)
 {
-	if(!document.getElementById("arvoreTemas"))
-	{
-		alert("Nao foi encontrado o DIV arvoreTemas");
-		return;
-	}
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2", "default", "arvoreTemas", null);
-		mytreeview2.createItem("item1", "<b>Temas</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
+		mytreeview2 = treeviewNew("mytreeview2", "default","menu_"+id_menu, null);	
+		mytreeview2.createItem("itemMenu"+id_menu, "<b>"+nome_menu+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
 		for (var ig=0;ig<retorno.data.grupos.length; ig++)
 		{
@@ -264,17 +292,17 @@ function processaGrupos(retorno)
 					{down = "sim"}
 				}
 			}
-			if (down == "sim")
+			if (down == "sim" && retorno.data.grupos[ig].nome)
 			{
 				var nomeGrupo = retorno.data.grupos[ig].nome;
-				mytreeview2.createItem("grupo"+ig, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "item1");
+				mytreeview2.createItem("grupo"+ig+"_"+id_menu, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "itemMenu"+id_menu);
 				var cor = "rgb(230,230,230)";
 				for (sg=0;sg<ngSgrupo.length;sg++)
 				{
 					if (ngSgrupo[sg].download != "nao")
 					{
 						var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
-						mytreeview2.createItem("sgrupo_"+ig+"_"+sg, nomeSgrupo, g_locaplic+"/imagens/branco0.gif", true, true, false, "grupo"+ig);
+						mytreeview2.createItem("sgrupo_"+ig+"_"+sg+"_"+id_menu, nomeSgrupo, g_locaplic+"/imagens/branco0.gif", true, true, false, "grupo"+ig+"_"+id_menu);
 						if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
 						else
 						{var cor = "rgb(230,230,230)";}
@@ -301,7 +329,7 @@ function expandeGrupo(itemID)
 	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
 	{
 		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2];
+		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&idmenu="+codigos[3];
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("json");
@@ -433,11 +461,11 @@ function dataDownloadLinks(rss)
 	{
 		if (rss.length > 0)
 		{
-			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+rss.join("|");
+			var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws2&rss="+rss.join("|")+"&tipo=DOWNLOAD";
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
-			cp.call(p,"listaRSSws",monta);
+			cp.call(p,"listaRSSws2",monta);
 		}
 	}
 }

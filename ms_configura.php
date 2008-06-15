@@ -223,8 +223,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Example:
 
 	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
+		array("nomemenu"=>"","idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
+		array("nomemenu"=>"","idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
 		);
 		
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.

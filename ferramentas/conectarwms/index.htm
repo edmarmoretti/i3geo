@@ -63,23 +63,18 @@
 <script type="text/javascript" >
 mensagemAjuda("men1",document.getElementById("men1").innerHTML)
 mensagemAjuda("men2",document.getElementById("men2").innerHTML)
-g_RSSwms = new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php")
+g_RSSwms = new Array("")
 aguarde("block")
-if (window.location.host == "localhost")
-{
-	alert("Vc esta em localhost, sera utilizado o xml local");
-	g_RSSwms = new Array("http://localhost/i3geo/menutemas/servicoswms.xml")
-}
 g_locaplic = window.parent.g_locaplic;
 if (document.getElementById("RSSwms"))
 {
 	if (g_RSSwms.length > 0)
 	{
-		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+g_RSSwms.join("|");
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws2&rss="+g_RSSwms.join("|")+"&tipo=WMS";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"listaRSSws",mostraRetornowmsRSS);
+		cp.call(p,"listaRSSws2",mostraRetornowmsRSS);
 	}
 }
 function mostraRetornowmsRSS(retorno)

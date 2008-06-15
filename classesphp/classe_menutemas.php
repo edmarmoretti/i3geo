@@ -56,7 +56,7 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="")
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->xmlsistemas = "";
@@ -94,12 +94,15 @@ array
 	function pegaListaDeMenus()
 	{
 		$resultado = array();
+		//
+		//se $menutemas estiver "", o i3geo
+		//irá utilizar o sistema de administração para pegar os menus
+		//
 		if($this->menutemas == "")
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
-			if(!isset($this->locaplic))
-			{return "locaplic nao foi definido";}
+			//include_once($this->locaplic."/admin/php/xml.php");
 			include_once($this->locaplic."/admin/php/conexao.php");
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -108,12 +111,13 @@ array
     		$resultado = array();
 			foreach($regs as $reg)
 			{
+				$perfis = str_replace(","," ",$reg["perfil_menu"]); 
+				$perfis = explode(" ",$perfis); 
+				if (($this->array_in_array($this->perfil,$perfis)) || ($reg["perfil_menu"] == ""))
 				$status = "fechado";
 				if(strtolower($reg["aberto"]) == "sim")
 				$status = "aberto";
-				$arquivo = "admin/xmlmenutemas.php?id_menu=".$reg["id_menu"]."&perfil=".$reg["perfil_menu"];
-				$url = $this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"]."&perfil=".$reg["perfil_menu"];
-				$resultado[] = array("idmenu"=>$reg["nome_menu"],"arquivo"=>$arquivo,"status"=>$status,"url"=>$url);
+				$resultado[] = array("nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
 			}
 		}
 		else
@@ -141,9 +145,13 @@ array
 	function pegaListaDeMapas($locmapas)
 	{
 		$perfilgeral = implode(" ",$this->perfil);
-		if($locmapas == "")
-		{$locmapas = $this->urli3geo."/admin/xmlmapas.php?perfil=".$perfilgeral;}
-		$this->xml = simplexml_load_file($locmapas);
+		if($locmapas != "")
+		{$this->xml = simplexml_load_file($locmapas);}
+		else
+		{
+			include_once($this->locaplic."/admin/php/xml.php");
+			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
+		}
 		$mapas = array();
 		//pega os sistemas checando os perfis
 		foreach($this->xml->MAPA as $s)
@@ -194,18 +202,25 @@ array
 		//lê os arquivos xml
 		//"&tipo=gruposeraiz" pega apenas os nomes dos grupos e temas na raiz
 		//
+		include_once($this->locaplic."/admin/php/xml.php");
 		if($listasgrupos == "sim")
 		{$tipo = "";}
 		else
-		{$tipo = "&tipo=gruposeraiz";}
+		{$tipo = "gruposeraiz";}
 		$this->xml = "";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
+				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				if(isset($menu["url"])){$ondexml = $menu["url"];}
-				$this->xml = simplexml_load_file($ondexml.$tipo);
+				if($menu["url"] != ""){$ondexml = $menu["url"];}
+				if($ondexml != "")
+				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				else //pega o xml do sistema de administração
+				{
+					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+				}
 			}
 		}
 		//
@@ -361,14 +376,22 @@ array
 */
 	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
 	{
+		include_once($this->locaplic."/admin/php/xml.php");
+		$tipo = "subgrupos";
 		$this->xml = "";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			if($menu["idmenu"] == $idmenu)
+			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
+				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				if(isset($menu["url"])){$ondexml = $menu["url"];}
-				$this->xml = simplexml_load_file($ondexml."&tipo=subgrupos");
+				if($menu["url"] != ""){$ondexml = $menu["url"];}
+				if($ondexml != "")
+				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				else //pega o xml do sistema de administração
+				{
+					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+				}
 			}
 		}
 		$conta = 0;
@@ -452,14 +475,22 @@ array
 */
 	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
+		include_once($this->locaplic."/admin/php/xml.php");
+		$tipo = "";
 		$this->xml = "";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			if($menu["idmenu"] == $idmenu)
+			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
+				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				if(isset($menu["url"])){$ondexml = $menu["url"];}
-				$this->xml = simplexml_load_file($ondexml);
+				if($menu["url"] != ""){$ondexml = $menu["url"];}
+				if($ondexml != "")
+				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				else //pega o xml do sistema de administração
+				{
+					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+				}
 			}
 		}
 		$contagrupo = 0;
@@ -549,13 +580,21 @@ $procurar - String que será procurada.
 */
 	function procurartemas($procurar)
 	{
-		$this->xml = array();
+		include_once($this->locaplic."/admin/php/xml.php");
+		$tipo = "";
+		$this->xml = "";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
+			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 			$ondexml = $menu["arquivo"];
-			if(isset($menu["url"])){$ondexml = $menu["url"];}
-			$this->xml[] = simplexml_load_file($ondexml);
-		}	
+			if($menu["url"] != ""){$ondexml = $menu["url"];}
+			if($ondexml != "")
+			{$this->xml[] = simplexml_load_file($ondexml."?tipo=".$tipo);}
+			else //pega o xml do sistema de administração
+			{
+				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
+			}
+		}
 		$resultado = array();
 		$texto = array();
 		foreach ($this->xml as $xml)
@@ -664,12 +703,13 @@ nrss - (opcional) número de registros no rss que serão considerados
 */
 	function listaTags($rss="",$nrss="")
 	{
+		$tipo = "";
 		//carrega os títulos e links do rss especificado
 		$noticiasRSS = array(); //guarda as notícias originais do RRS
 		if($rss != "")
 		{
 			$conta = 0;
-			foreach ( simplexml_load_file ($rss)->channel->item as $item )
+			foreach ( simplexml_load_file($rss)->channel->item as $item )
 			{
 				if($conta < $nrss)
 				$noticiasRSS[] = array("desc"=>(ixml($item,"description")),"titulo"=>(ixml($item,"title")),"link"=>(ixml($item,"link")));
@@ -677,14 +717,19 @@ nrss - (opcional) número de registros no rss que serão considerados
 			}	
 		}
 		$this->xml = array();
-		$menus = $this->pegaListaDeMenus();
-		foreach ($menus as $m)
+		foreach($this->pegaListaDeMenus() as $menu)
 		{
-			if(isset($m["url"]))
-			$this->xml[] = simplexml_load_file($m["url"]);
-			else
-			$this->xml[] = simplexml_load_file($m["arquivo"]);
+			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
+			$ondexml = $menu["arquivo"];
+			if($menu["url"] != ""){$ondexml = $menu["url"];}
+			if($ondexml != "")
+			{$this->xml[] = simplexml_load_file($ondexml."?tipo=".$tipo);}
+			else //pega o xml do sistema de administração
+			{
+				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
+			}
 		}
+
 		$resultado = array();
 		$noticias = array();
 		foreach ($this->xml as $xml)

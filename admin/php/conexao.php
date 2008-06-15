@@ -33,16 +33,19 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-if (file_exists("../../ms_configura.php"))
-{include("../../ms_configura.php");}
+if (file_exists("../../../ms_configura.php"))
+{include("../../../ms_configura.php");}
 else
 {
-	if (file_exists("../ms_configura.php"))
-	{include("../ms_configura.php");}
+	if (file_exists("../../ms_configura.php"))
+	{include("../../ms_configura.php");}
 	else
-	if (file_exists("ms_configura.php"))
 	{
-		include("ms_configura.php");
+		if (file_exists("../ms_configura.php"))
+		{include("../ms_configura.php");}
+		else
+		if (file_exists("ms_configura.php"))
+		{include("ms_configura.php");}
 	}
 }
 if($conexaoadmin == "")
@@ -51,5 +54,5 @@ if($conexaoadmin == "")
 	$dbh = new PDO($conAdmin);
 }
 else
-include_once($conexaoadmin);
+include($conexaoadmin);
 ?>
