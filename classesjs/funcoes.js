@@ -3181,10 +3181,7 @@ function pegaListaDeGrupos(idmenu,listasistemas,status,nomemenu)
 				i++;
 			}
 			while(retorno.data.grupos[i])
-			if (g_locsistemas != "")
-			{
-				pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);
-			}		
+			pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);
 		}	
 	};
 	//

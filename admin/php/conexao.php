@@ -51,6 +51,10 @@ else
 if($conexaoadmin == "")
 {
 	$conAdmin = "sqlite:$locaplic/menutemas/admin.db";
+	$conAdminw = "sqlite:$locaplic/menutemas/admin.db";
+	//para escrita
+	$dbhw = new PDO($conAdmin);
+	//para leitura
 	$dbh = new PDO($conAdmin);
 }
 else

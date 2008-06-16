@@ -136,7 +136,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
 	*/
-	$locsistemas = $locaplic."/menutemas/sistemas.xml";
+	$locsistemas = "";
 	/*
 	Variable: $locidentifica 
 	

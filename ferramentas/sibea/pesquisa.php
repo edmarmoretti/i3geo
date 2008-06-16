@@ -19,7 +19,7 @@ Include:
 <"../../classesjs/cpaint/cpaint2.inc.php">, <"../../classesphp/pega_variaveis.php">
 
 */
-require_once("../../classesjs/cpaint/cpaint2.inc.php");
+require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 require_once('../../pacotes/SOAP/nusoap.php');
 if (isset($g_sid))

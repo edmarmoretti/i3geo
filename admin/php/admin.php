@@ -73,8 +73,9 @@ if($funcao == "limpar")
 	include("conexao.php");
 	foreach($tabelas as $t)
 	{
-    	$dbh->query("DELETE from $t");
+    	$dbhw->query("DELETE from $t");
 	}
+    $dbhw = null;
     $dbh = null;
     exit;
 }
@@ -125,8 +126,8 @@ function exclui()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from $tabela WHERE $coluna = $id");
-    	$dbh = null;
+    	$dbhw->query("DELETE from $tabela WHERE $coluna = $id");
+    	$dbhw = null;
     	return "ok";
 	}
 	catch (PDOException $e)

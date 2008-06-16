@@ -24,4 +24,5 @@ echo "<br><br><span style=color:red >Listagem completa</span><br><br>";
 
 var_dump($resultado);
 $dbh = null;
+$dbhw = null;
 ?>

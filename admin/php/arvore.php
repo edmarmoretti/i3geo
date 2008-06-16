@@ -129,9 +129,10 @@ function alteraN3()
 	{
     	require_once("conexao.php");
     	if($id != "")
-    	$dbh->query("UPDATE i3geoadmin_n3 SET id_tema = '$idtema', n3_perfil = '$perfil' WHERE id_n3 = $id");
+    	$dbhw->query("UPDATE i3geoadmin_n3 SET id_tema = '$idtema', n3_perfil = '$perfil' WHERE id_n3 = $id");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil) VALUES ($idsubgrupo,'', '')");
+    	$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil) VALUES ($idsubgrupo,'', '')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -152,9 +153,10 @@ function alteraN2()
 	{
     	require_once("conexao.php");
     	if($id != "")
-    	$dbh->query("UPDATE i3geoadmin_n2 SET id_subgrupo = '$idsubgrupo', n2_perfil = '$perfil' WHERE id_n2 = $id");
+    	$dbhw->query("UPDATE i3geoadmin_n2 SET id_subgrupo = '$idsubgrupo', n2_perfil = '$perfil' WHERE id_n2 = $id");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ($idgrupo,'', '')");
+    	$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ($idgrupo,'', '')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -175,9 +177,10 @@ function alteraN1()
 	{
     	require_once("conexao.php");
     	if($id != "")
-    	$dbh->query("UPDATE i3geoadmin_n1 SET id_grupo = '$idgrupo', n1_perfil = '$perfil' WHERE id_menu = $idmenu and id_n1 = $id");
+    	$dbhw->query("UPDATE i3geoadmin_n1 SET id_grupo = '$idgrupo', n1_perfil = '$perfil' WHERE id_menu = $idmenu and id_n1 = $id");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ($idmenu,'', '')");
+    	$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ($idmenu,'', '')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -198,9 +201,10 @@ function alterarRaiz()
 	{
     	include("conexao.php");
     	if($id_raiz != "")
-    	$dbh->query("UPDATE i3geoadmin_raiz SET id_nivel = '$nivel', nivel = '$nivel', perfil = '$perfil', id_menu = '$id_menu', id_tema = '$id_tema'  WHERE id_raiz = $id_raiz");
+    	$dbhw->query("UPDATE i3geoadmin_raiz SET id_nivel = '$nivel', nivel = '$nivel', perfil = '$perfil', id_menu = '$id_menu', id_tema = '$id_tema'  WHERE id_raiz = $id_raiz");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,id_tema) VALUES ($id_nivel,$nivel,$id_menu,'','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,id_tema) VALUES ($id_nivel,$nivel,$id_menu,'','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}

@@ -128,7 +128,7 @@ function excluiTagTemas($id)
    		$ts = $row['tags_tema'];
    		$i = $row['id_tema'];
    		$ts = str_replace($nometag,"",$ts);
-   		$dbh->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
+   		$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
    	}			
 }
 /*
@@ -177,6 +177,7 @@ function pegaTemas()
 				);
     	}
     	$dbh = null;
+    	$dbh = null;
     	return $resultado;
 	}
 	catch (PDOException $e)
@@ -219,10 +220,11 @@ function alteraMenus()
     	include("conexao.php");
     	if($id != "")
     	{
-    		$dbh->query("UPDATE i3geoadmin_menus SET aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
+    		$dbhw->query("UPDATE i3geoadmin_menus SET aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
     	}
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_menus (nome_menu, desc_menu, aberto, perfil_menu) VALUES ('', '','sim','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_menus (nome_menu, desc_menu, aberto, perfil_menu) VALUES ('', '','sim','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -246,19 +248,20 @@ function alteraTags()
     			$original = "";
     			foreach($dbh->query("select * from i3geoadmin_tags where id_tag = $id") as $row)
     			{$original = $row["nome"];}
-    			$dbh->query("UPDATE i3geoadmin_tags SET nome = '$nome' WHERE id_tag = $id");
+    			$dbhw->query("UPDATE i3geoadmin_tags SET nome = '$nome' WHERE id_tag = $id");
     			//exclui os registros do tag alterado nos temas
     			foreach($dbh->query("select * from i3geoadmin_temas") as $row)
 		    	{
 	        		$ts = $row['tags_tema'];
 	        		$i = $row['id_tema'];
 	        		$ts = str_replace($original,$nome,$ts);
-	        		$dbh->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
+	        		$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
 		    	}			
     		}
 		}
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$nome')");
+    	$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$nome')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -282,10 +285,11 @@ function alteraGrupos()
     	include("conexao.php");
     	if($id != "")
     	{
-    		$dbh->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
+    		$dbhw->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
     	}
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
+    	$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -309,10 +313,11 @@ function alteraSubGrupos()
     	require_once("conexao.php");
     	if($id != "")
     	{
-	    	$dbh->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
+	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
     	}
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
+    	$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -337,19 +342,20 @@ function alteraTemas()
     	require_once("conexao.php");
     	if($id != "")
     	{
-	    	$dbh->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
+	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
     	}
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
     	//verifica se é necessário adicionar algum tag novo
     	$tags = explode(" ",$tags);
     	foreach($tags as $tag)
     	{
     		if(!(verificaDuplicados("select * from i3geoadmin_tags where nome = '$tag'",$dbh)))
     		{
-		    	$dbh->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$tag')");   		
+		    	$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$tag')");   		
     		}	
     	}
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -406,15 +412,15 @@ function importarXmlMenu()
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
 	include("conexao.php");
-	$dbh->query("INSERT INTO i3geoadmin_menus (desc_menu,nome_menu) VALUES ('','$nomemenu')");
-	$id_menu = $dbh->lastInsertId("id_menu");
+	$dbhw->query("INSERT INTO i3geoadmin_menus (desc_menu,nome_menu) VALUES ('','$nomemenu')");
+	$id_menu = $dbhw->lastInsertId("id_menu");
 
 	$xml = simplexml_load_file($xml);
 	//
 	//importa os grupos
 	//
 	$gruposExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_grupos");
+	$q = $dbhw->query("select * from i3geoadmin_grupos");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$gruposExistentes[$r["nome_grupo"]] = 0;}
@@ -423,14 +429,14 @@ function importarXmlMenu()
 		$nome = ixml($grupo,"GTIPO");
 		$descricao = ixml($grupo,"DTIPO");
 		if(!isset($gruposExistentes[$nome]))
-		$dbh->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
+		$dbhw->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
 		$gruposExistentes[$nome] = 0;
 	}
 	//
 	//importa os sub-grupos
 	//
 	$subgruposExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_subgrupos");
+	$q = $dbhw->query("select * from i3geoadmin_subgrupos");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$subgruposExistentes[$r["nome_subgrupo"]] = 0;}
@@ -441,7 +447,7 @@ function importarXmlMenu()
 			$nome = ixml($sgrupo,"SDTIPO");
 			$descricao = "";
 			if(!isset($subgruposExistentes[$nome]))
-			$dbh->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
+			$dbhw->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
 			$subgruposExistentes[$nome] = 0;
 		}
 	}
@@ -449,7 +455,7 @@ function importarXmlMenu()
 	//importa os temas
 	//
 	$temasExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_subgrupos");
+	$q = $dbhw->query("select * from i3geoadmin_subgrupos");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$temasExistentes[$r["codigo_tema"]] = 0;}
@@ -466,7 +472,7 @@ function importarXmlMenu()
 		$ogc = ixml($tema,"OGC");
 		$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 		if(!isset($temasExistentes[$codigo]))
-		$dbh->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+		$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 		$temasExistentes[$codigo] = 0;
 	}
 	foreach($xml->GRUPO as $grupo)
@@ -484,7 +490,7 @@ function importarXmlMenu()
 			$ogc = ixml($tema,"OGC");		
 			$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 			if(!isset($temasExistentes[$codigo]))
-			$dbh->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+			$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 			$temasExistentes[$codigo] = 0;
 		}
 		foreach($grupo->SGRUPO as $sgrupo)
@@ -502,7 +508,7 @@ function importarXmlMenu()
 				$ogc = ixml($tema,"OGC");		
 				$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 				if(!isset($temasExistentes[$codigo]))
-				$dbh->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+				$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 				$temasExistentes[$codigo] = 0;
 			}
 		}		
@@ -517,9 +523,9 @@ function importarXmlMenu()
 	{
 		$codigo = ixml($tema,"TID");
 		$perfil = ixml($tema,"PERFIL");
-		$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
+		$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 		$id_tema = $r->fetchColumn();
-		$dbh->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','0','0','$perfil')");		
+		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','0','0','$perfil')");		
 	}
 	//
 	//registra o restante
@@ -528,34 +534,34 @@ function importarXmlMenu()
 	{
 		$gtipo = ixml($grupo,"GTIPO");
 		$n1_perfil = ixml($grupo,"PERFIL");
-		$r = $dbh->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
+		$r = $dbhw->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
 		$id_grupo = $r->fetchColumn();
-		$dbh->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ('$id_menu','$id_grupo','$n1_perfil')");
-		$id_n1 = $dbh->lastInsertId("id_n1");	
+		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ('$id_menu','$id_grupo','$n1_perfil')");
+		$id_n1 = $dbhw->lastInsertId("id_n1");	
 		foreach($grupo->TEMA as $tema)
 		{
 			$codigo = ixml($tema,"TID");
 			$perfil = ixml($tema,"PERFIL");
-			$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
+			$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 			$id_tema = $r->fetchColumn();
-			$dbh->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','$id_n1','1','$perfil')");		
+			$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','$id_n1','1','$perfil')");		
 		}
 		foreach($grupo->SGRUPO as $subgrupo)
 		{
 			$sdtipo = ixml($subgrupo,"SDTIPO");
 			$n2_perfil = ixml($subgrupo,"PERFIL");
-			$r = $dbh->query("select id_subgrupo from i3geoadmin_subgrupos where nome_subgrupo = '$sdtipo'");
+			$r = $dbhw->query("select id_subgrupo from i3geoadmin_subgrupos where nome_subgrupo = '$sdtipo'");
 			$id_subgrupo = $r->fetchColumn();
 
-			$dbh->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ('$id_n1','$id_subgrupo','$n2_perfil')");
-			$id_n2 = $dbh->lastInsertId("id_n2");	
+			$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ('$id_n1','$id_subgrupo','$n2_perfil')");
+			$id_n2 = $dbhw->lastInsertId("id_n2");	
 			foreach($subgrupo->TEMA as $tema)
 			{
 				$codigo = ixml($tema,"TID");
 				$perfil = ixml($tema,"PERFIL");
-				$r = $dbh->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
+				$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 				$id_tema = $r->fetchColumn();
-				$dbh->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil) VALUES ('$id_n2','$id_tema','$perfil')");		
+				$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil) VALUES ('$id_n2','$id_tema','$perfil')");		
 			}		
 		}
 	}	
@@ -564,8 +570,9 @@ function importarXmlMenu()
 	foreach ($listaDeTags as $t)
 	{
 		if(!(verificaDuplicados("select * from i3geoadmin_tags where nome = '$t'",$dbh)))
-		$dbh->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$t')");			
+		$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$t')");			
 	}
+	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
 }

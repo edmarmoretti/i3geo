@@ -63,8 +63,6 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 		$this->locaplic = $locaplic;
 		$this->menutemas = $menutemas;
 		$this->urli3geo = $urli3geo;
-		if ($locsistemas != "")
-		$this->xmlsistemas = simplexml_load_file($locsistemas);		
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
@@ -328,7 +326,13 @@ array
 		$sistemas = array();
 		if ($listasistemas == "sim")
 		{
-			foreach($this->xmlsistemas->SISTEMA as $s)
+			if ($this->locsistemas != "")
+			{$xmlsistemas = simplexml_load_file($this->locsistemas);}
+			else
+			{
+				$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));	
+			}
+			foreach($xmlsistemas->SISTEMA as $s)
 			{
 				$nomesis = ixml($s,"NOMESIS");
 				$ps = ixml($s,"PERFIL");

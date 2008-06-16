@@ -75,9 +75,10 @@ function alterarFuncoes()
     	$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
     	if($id_i != "")
-    	$dbh->query("UPDATE i3geoadmin_identifica SET nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    	$dbhw->query("UPDATE i3geoadmin_identifica SET nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_identifica (nome_i,abrir_i,target_i) VALUES ('','','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_identifica (nome_i,abrir_i,target_i) VALUES ('','','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -92,7 +93,8 @@ function excluirFuncoes()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_identifica WHERE id_i = $id");
+    	$dbhw->query("DELETE from i3geoadmin_identifica WHERE id_i = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -113,7 +115,7 @@ function importarXmlI()
 	//importa os grupos
 	//
 	$wsExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_identifica");
+	$q = $dbhw->query("select * from i3geoadmin_identifica");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$iExistentes[$r["nome_i"]] = 0;}
@@ -123,9 +125,10 @@ function importarXmlI()
 		$target_i = ixml($item,"TARGET");
 		$abrir_i = ixml($item,"ABRIR");
 		if(!isset($iExistentes[$nome_i]))
-		$dbh->query("INSERT INTO i3geoadmin_identifica (nome_i,target_i,abrir_i) VALUES ('$nome_i','$target_i','$abrir_i')");
+		$dbhw->query("INSERT INTO i3geoadmin_identifica (nome_i,target_i,abrir_i) VALUES ('$nome_i','$target_i','$abrir_i')");
 		$iExistentes[$nome_i] = 0;
 	}
+	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
 }

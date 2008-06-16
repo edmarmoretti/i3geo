@@ -112,9 +112,10 @@ function alterarSistemas()
     	require_once("conexao.php");
 		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	if($id_sistema != "")
-    	$dbh->query("UPDATE i3geoadmin_sistemas SET nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
+    	$dbhw->query("UPDATE i3geoadmin_sistemas SET nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -131,9 +132,10 @@ function alterarFuncoes()
     	require_once("conexao.php");
 		$nomefuncao = mb_convert_encoding($nomefuncao,"UTF-8","ISO-8859-1");
     	if($id_funcao != "")
-    	$dbh->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nomefuncao',perfil_funcao = '$perfil', w_funcao = '$w',h_funcao = '$h', abrir_funcao = '$abrir' WHERE id_sistema = $id_sistema and id_funcao = $id_funcao");
+    	$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nomefuncao',perfil_funcao = '$perfil', w_funcao = '$w',h_funcao = '$h', abrir_funcao = '$abrir' WHERE id_sistema = $id_sistema and id_funcao = $id_funcao");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -148,7 +150,8 @@ function excluirFuncoes()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_sistemasf WHERE id_sistema = $id");
+    	$dbhw->query("DELETE from i3geoadmin_sistemasf WHERE id_sistema = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -163,7 +166,8 @@ function excluirSistemas()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_sistemas WHERE id_sistema = $id");
+    	$dbhw->query("DELETE from i3geoadmin_sistemas WHERE id_sistema = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -184,7 +188,7 @@ function importarXmlSistemas()
 	//importa os grupos
 	//
 	$sistemasExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_sistemas");
+	$q = $dbhw->query("select * from i3geoadmin_sistemas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$sistemasExistentes[$r["nome_sistema"]] = 0;}
@@ -193,7 +197,7 @@ function importarXmlSistemas()
 		$nome = ixml($item,"NOMESIS");
 		$perfil = ixml($item,"PERFIL");
 		if(!isset($sistemasExistentes[$nome]))
-		$dbh->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('$nome','$perfil')");
+		$dbhw->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('$nome','$perfil')");
 		$sistemasExistentes[$nome] = 0;
 		$id_sistema = $dbh->lastInsertId("id_sistema");
 		foreach ($item->FUNCAO as $funcao)
@@ -203,9 +207,10 @@ function importarXmlSistemas()
 			$w_funcao = ixml($funcao,"JANELAW");
 			$h_funcao = ixml($funcao,"JANELAH");
 			$perfil_funcao = ixml($funcao,"PERFIL");
-			$dbh->query("INSERT INTO i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");			
+			$dbhw->query("INSERT INTO i3geoadmin_sistemasf (nome_funcao,abrir_funcao,perfil_funcao,w_funcao,h_funcao,id_sistema) VALUES ('$nome_funcao','$abrir_funcao','$perfil_funcao','$w_funcao','$h_funcao','$id_sistema')");			
 		}
 	}
+	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
 }

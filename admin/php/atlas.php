@@ -131,9 +131,10 @@ function alterarAtlas()
     	$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id_atlas != "")
-    	$dbh->query("UPDATE i3geoadmin_atlas SET basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
+    	$dbhw->query("UPDATE i3geoadmin_atlas SET basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_atlas (basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','$h_atlas','$w_atlas','','','','','$tipoguias_atlas','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_atlas (basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','$h_atlas','$w_atlas','','','','','$tipoguias_atlas','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -151,9 +152,10 @@ function alterarPranchas()
     	$titulo_prancha = mb_convert_encoding($titulo_prancha,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id_prancha != "")
-    	$dbh->query("UPDATE i3geoadmin_atlasp SET mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = $id_prancha and id_atlas='$id_atlas'");
+    	$dbhw->query("UPDATE i3geoadmin_atlasp SET mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = $id_prancha and id_atlas='$id_atlas'");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_atlasp (mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ('','','$h_prancha','$w_prancha','','','','$id_atlas')");
+    	$dbhw->query("INSERT INTO i3geoadmin_atlasp (mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ('','','$h_prancha','$w_prancha','','','','$id_atlas')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -169,9 +171,10 @@ function alterarTemas()
 	{
     	include("conexao.php");
     	if($id_tema != "")
-    	$dbh->query("UPDATE i3geoadmin_atlast SET codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_prancha = $id_prancha and id_tema='$id_tema'");
+    	$dbhw->query("UPDATE i3geoadmin_atlast SET codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_prancha = $id_prancha and id_tema='$id_tema'");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_atlast (codigo_tema,ligado_tema,id_prancha) VALUES ('','','$id_prancha')");
+    	$dbhw->query("INSERT INTO i3geoadmin_atlast (codigo_tema,ligado_tema,id_prancha) VALUES ('','','$id_prancha')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -187,7 +190,8 @@ function excluirPranchas()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_atlasp WHERE id_prancha = $id");
+    	$dbhw->query("DELETE from i3geoadmin_atlasp WHERE id_prancha = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -202,7 +206,8 @@ function excluirTemas()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_atlast WHERE id_tema = $id");
+    	$dbhw->query("DELETE from i3geoadmin_atlast WHERE id_tema = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -217,7 +222,8 @@ function excluirAtlas()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_atlas WHERE id_atlas = $id");
+    	$dbhw->query("DELETE from i3geoadmin_atlas WHERE id_atlas = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -238,7 +244,7 @@ function importarXmlAtlas()
 	//importa os atlas
 	//
 	$atlasExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_atlas");
+	$q = $dbhw->query("select * from i3geoadmin_atlas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$atlasExistentes[$r["titulo_atlas"]] = 0;}
@@ -254,7 +260,7 @@ function importarXmlAtlas()
 		$pranchadefault = ixml($atlas,"PRANCHADEFAULT");
 		$tipoguias = ixml($atlas,"TIPOGUIAS");
 		if(!isset($atlasExistentes[$titulo]))
-		$dbh->query("INSERT INTO i3geoadmin_atlas (desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('$desc','$h','$w','$icone','$link','$pranchadefault','$template','$tipoguias','$titulo')");
+		$dbhw->query("INSERT INTO i3geoadmin_atlas (desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('$desc','$h','$w','$icone','$link','$pranchadefault','$template','$tipoguias','$titulo')");
 		$atlasExistentes[$titulo] = 0;
 		$id_atlas = $dbh->lastInsertId("id_atlas");
 		foreach ($atlas->PRANCHAS->PRANCHA as $prancha)
@@ -266,17 +272,18 @@ function importarXmlAtlas()
 			$w = ixml($prancha,"WABERUTRA");
 			$h = ixml($prancha,"HABERTURA");
 			$mapext = ixml($prancha,"MAPEXT");
-			$dbh->query("INSERT INTO i3geoadmin_atlasp (id_atlas,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,mapext_prancha) VALUES ('$id_atlas','$desc','$h','$w','$icone','$link','$titulo','$mapext')");
+			$dbhw->query("INSERT INTO i3geoadmin_atlasp (id_atlas,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,mapext_prancha) VALUES ('$id_atlas','$desc','$h','$w','$icone','$link','$titulo','$mapext')");
 			$id_prancha = $dbh->lastInsertId("id_prancha");
 			foreach ($prancha->TEMAS->TEMA as $tema)
 			{
 				$codigo = ixml($tema,"CODIGO");
 				$ligado = ixml($tema,"LIGADO");
-				$dbh->query("INSERT INTO i3geoadmin_atlast (id_prancha,codigo_tema,ligado_tema) VALUES ('$id_prancha','$codigo','$ligado')");
+				$dbhw->query("INSERT INTO i3geoadmin_atlast (id_prancha,codigo_tema,ligado_tema) VALUES ('$id_prancha','$codigo','$ligado')");
 			}
 
 		}
 	}
+	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
 }

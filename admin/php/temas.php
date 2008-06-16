@@ -569,6 +569,7 @@ function criarNovoMap()
     	require_once("conexao.php");
     	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
     	$dbh = null;
+    	$dbhw = null;
 
 		return "ok";
 	}

@@ -77,9 +77,10 @@ function alterarWS()
 		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
 		$autor = mb_convert_encoding($autor,"UTF-8","ISO-8859-1");   	
     	if($id_ws != "")
-    	$dbh->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc',nome_ws = '$nome', link_ws = '$link', autor_ws = '$autor', tipo_ws = '$tipo' WHERE id_ws = $id_ws");
+    	$dbhw->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc',nome_ws = '$nome', link_ws = '$link', autor_ws = '$autor', tipo_ws = '$tipo' WHERE id_ws = $id_ws");
     	else
-    	$dbh->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws) VALUES ('','','','','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws) VALUES ('','','','','')");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -94,7 +95,8 @@ function excluirWS()
 	try 
 	{
     	include("conexao.php");
-    	$dbh->query("DELETE from i3geoadmin_ws WHERE id_ws = $id");
+    	$dbhw->query("DELETE from i3geoadmin_ws WHERE id_ws = $id");
+    	$dbhw = null;
     	$dbh = null;
     	return "ok";
 	}
@@ -115,7 +117,7 @@ function importarXmlWS()
 	//importa os grupos
 	//
 	$wsExistentes = array();
-	$q = $dbh->query("select * from i3geoadmin_ws");
+	$q = $dbhw->query("select * from i3geoadmin_ws");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$wsExistentes[$r["nome_ws"]] = 0;}
@@ -128,10 +130,11 @@ function importarXmlWS()
 			$autor = ixml($item,"author");
 			$link = ixml($item,"link");
 			if(!isset($wsExistentes[$nome]))
-			$dbh->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws) VALUES ('$nome','$desc','$autor','$link','$tipo')");
+			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws) VALUES ('$nome','$desc','$autor','$link','$tipo')");
 			$wsExistentes[$nome] = 0;
 		}
 	}
+	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
 }
