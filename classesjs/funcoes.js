@@ -1377,10 +1377,11 @@ function ativaClicks(docMapa)
 		}
 		catch(e){var e = "";}
 	};
-	docMapa.onmousedown = function()
+	docMapa.onmousedown = function(exy)
 	{
 		try
 		{
+			capturaposicao(exy);
 			if ($i("imgh"))
 			$i("imgh").style.display="none";
 			//verifica se esta na opÃ¯Â¿Â½o de zoom box
@@ -1432,6 +1433,9 @@ function ativaClicks(docMapa)
 		{
 			if (g_tipoacao == "zoomli"){zoomboxf("termina");}
 			if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
+			//
+			//realiza o pan (deslocamento) do mapa em função de dois pontos
+			//
 			if ($i("img") && (g_tipoacao == "pan"))
 			{
 				g_panM = "nao";
@@ -1442,7 +1446,7 @@ function ativaClicks(docMapa)
 				var novoxi = (ex[0] * 1) - distx;
 				var novoxf = (ex[2] * 1) - distx;
 				var novoyi = (ex[1] * 1) - disty;
-				var novoyf = (ex[3] * 1) - disty;
+				var novoyf = (ex[3] * 1) - disty;	
 				if ((distx == 0)||(disty == 0))
 				{
 					objaguarde.abre("ajaxredesenha",$trad("o1"));
