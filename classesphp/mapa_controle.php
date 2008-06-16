@@ -1249,7 +1249,7 @@ Include:
 		include("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema);
-		$cp->set_data($m->criaBuffer($distancia,$locaplic));
+		$cp->set_data($m->criaBuffer($distancia,$locaplic,$unir));
 		$m->salva();
 		//limpa selecao
 		if (file_exists($map_file."qy"))

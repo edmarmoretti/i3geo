@@ -671,8 +671,7 @@ $locaplic - diretório da aplicação i3geo
 					$linha->add($poPoint1);
 					$linha->add($poPoint2);
 					$ShapeObj = ms_newShapeObj(MS_SHAPE_LINE);
-					$ShapeObj->add($linha);
-					
+					$ShapeObj->add($linha);	
 					$novoshpf->addShape($ShapeObj);
 					$registro = array($i1,$i2,$i3,$i4,$i5,$i6);
 					xbase_add_record($db,$registro);
@@ -1138,11 +1137,13 @@ $distancia - Distância em km.
 
 $locaplic - Localização do I3geo.
 
+$unir - sim|nao indica se os elementos selecionados deverão ser unidos em um só antes do buffer ser criado
+
 return:
 
 nome do layer criado com o buffer.
 */
-	function criaBuffer($distancia,$locaplic)
+	function criaBuffer($distancia,$locaplic,$unir="nao")
 	{
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
@@ -1186,6 +1187,15 @@ nome do layer criado com o buffer.
 				$shapes[] = $shape;
 			}
 		}
+		//faz a união dos elementos se necessário
+		if($unir == "sim")
+		{
+			$ns = $buffers[0];
+			for($s=1;$s < count($buffers);$s++)
+			{$ns = $ns->union_geos($buffers[$s]);}
+			$buffers = array($ns);
+			$shapes = array($shapes[0]);
+		}		
 		$fechou = $this->layer->close();
 		//gera o novo arquivo shape file
 		// cria o shapefile

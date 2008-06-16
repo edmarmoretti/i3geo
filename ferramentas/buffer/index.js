@@ -42,7 +42,9 @@ function t1()
 function t2()
 {
 	ins = "Dist&acirc;ncia do entorno em metros"
-	ins += "<br><br><input class=digitar id='d' type=text size=10 value='0'/>"
+	ins += "<br><input class=digitar id='d' type=text size=10 value='0'/><br><br>"
+	ins += "Considerar os elementos selecionados como se fossem um s&oacute;?";
+	ins += "<br><select id=unir ><option value=nao selected >n&atilde;o</option><option value=sim >sim</option></select>"
 	mostraOpcao("t1()","t3()",ins,"t2")
 }
 function t3()
@@ -73,7 +75,7 @@ function criarbuffer()
 			else
 			{window.parent.ajaxredesenha("");}
 		}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criabuffer&tema="+tema+"&distancia="+distancia+"&unir="+$i("unir").value
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("JSON");
