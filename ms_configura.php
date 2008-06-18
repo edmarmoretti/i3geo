@@ -136,7 +136,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
 	*/
-	$locsistemas = "";
+	$locsistemas = "http://localhost/i3geo/menutemas/sistemas.xml";
 	/*
 	Variable: $locidentifica 
 	
@@ -153,7 +153,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 
 	*/
-	$locidentifica = "";
+	$locidentifica = "../../menutemas/identifica.xml";
 	/*
 	Variable: $locmapas 
 	
@@ -167,7 +167,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
-	$locmapas = "";
+	$locmapas = "http://localhost/i3geo/menutemas/mapas.xml";
 	/*
 	Variable: $R_path
 	
@@ -229,7 +229,11 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
-	$menutemas = "";
+	$menutemas = array(
+		array("idmenu"=>"GEOPR","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>"i3Geo","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/menutemas.xml","status"=>"aberto")
+		);
+
 	/*
 	Variable: $utilizacgi
 	
@@ -252,7 +256,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
 	*/
-	$atlasxml = "";
+	$atlasxml = "../menutemas/atlas.xml";
 	/*
 	 Variable: $expoeMapfile
 	 
@@ -279,7 +283,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	*/
-	$conexaoadmin = ""; //$locaplic."/admin/conexaomma.php";
+	$conexaoadmin = "";
 }
 else //se for linux
 {

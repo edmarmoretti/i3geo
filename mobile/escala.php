@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Mostra a escala
+Title: escala.php
+
+Mostra a escala
 
 File: i3geo/mobile/escala.php
 

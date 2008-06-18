@@ -1,7 +1,11 @@
-/*
-Title: Menu suspenso
+/**
+Title: menususpenso.js
 
-Monta o menu suspenso.
+Monta o menu suspenso com as opções adicionais do i3geo.
+
+O menu suspenso é criado utilizando-se a biblioteca YUI.
+
+O conteúdo do menu é definido na variável oMenuData, veja configura.js
 
 File: i3geo/classesjs/menususpenso.js
 
@@ -31,6 +35,10 @@ Free Software Foundation, Inc., no endereço
 Function: montaMenuSuspenso
 
 Monta o menu baseado na variável oMenuData
+
+Parameters:
+
+iddiv - id do DIV que receberá o menu
 */
 function montaMenuSuspenso(iddiv)
 { 

@@ -1,6 +1,6 @@
 <?php
 /*
-Title: OGC
+Title: wmswfs.php
 
 Faz a leitura e o processamento de web services nos padrões OGC.
 Atualmente, processa apenas serviços no padrão WMS.

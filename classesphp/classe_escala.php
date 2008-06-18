@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Escala
+Title: classe_escala.php
 
 Manipulação da escala.
 

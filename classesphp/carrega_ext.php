@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Extensões PHP
+Title: carrega_ext.php
 
 Verifica se as extensões do PHP necessárias ao I3Geo estão carregadas.
 Tenta carregar as extensões que não estiverem habilitadas por default.

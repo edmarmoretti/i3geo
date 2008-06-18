@@ -1,5 +1,5 @@
 /*
-Title: Inicialização do i3geo.
+Title: iniciamma.js
 
 Cria o objeto objmapa e inicializa o i3geo.
 

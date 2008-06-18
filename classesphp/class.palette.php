@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Degradê
+Title: class.palette.php
 
 About: Licença
 

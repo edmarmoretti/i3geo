@@ -72,7 +72,7 @@ titulo - texto que vai no title
 
 digitos - numero de dígitos do input
 
-valor - valor do value
+valor - valor do input
 */
 $inputText = function (idPai,larguraIdPai,idInput,titulo,digitos,valor)
 {
@@ -105,10 +105,13 @@ valor - posição em relação ao topo.
 */
 $top = function(id,valor)
 {
-	if (navm)
-	{document.getElementById(id).style.pixelTop=valor;}
-	else
-	{document.getElementById(id).style.top=valor+"px";}
+	if (document.getElementById(id).style)
+	{
+		if (document.getElementById(id).style.pixelTop)
+		{document.getElementById(id).style.pixelTop=valor;}
+		else
+		{document.getElementById(id).style.top=valor+"px";}
+	}
 };
 /*
 Function: $left
@@ -125,10 +128,13 @@ valor - posição em relação a esquerda.
 */
 $left = function(id,valor)
 {
-	if (navm)
-	{document.getElementById(id).style.pixelLeft=valor;}
-	else
-	{document.getElementById(id).style.left=valor+"px";}
+	if (document.getElementById(id).style)
+	{
+		if (document.getElementById(id).style.pixelLeft)
+		{document.getElementById(id).style.pixelLeft=valor;}
+		else
+		{document.getElementById(id).style.left=valor+"px";}
+	}
 };
 /*
 Function: trataErro
@@ -153,7 +159,7 @@ function trataErro()
 /*
 Function: iCookie
 
-Insere um cookie.
+Cria um cookie.
 */
 function iCookie(nome,valor)
 {
@@ -162,7 +168,7 @@ function iCookie(nome,valor)
 /*
 Function: pCookie
 
-Pega um cookie.
+Pega o valor de um cookie.
 */
 function pCookie(nome)
 {
@@ -183,6 +189,11 @@ Function: ativaMensagemBanner
 
 Ativa o letreiro móvel.
 
+A mensagem é incluída em um elemento HTML com id = "bannerMensagem"
+
+As mensagens são obtidas do METADATA "MENSAGEM" que pode ser incluída na configuração dos layers adicionados ao mapa atual.
+
+Veja a função mensagemBanner
 */
 function ativaMensagemBanner()
 {
@@ -222,7 +233,9 @@ Function: mensagemBanner
 
 Mostra uma mensagem na tela como um letriro móvel.
 
-As mensagens são obtidas no metadata mensagem que pode ser colocado em layers.
+As mensagens são obtidas no metadata MENSAGEM que pode ser colocado nos layers disponíveis no i3geo.
+
+Veja a função ativaMensagemBanner
 */
 function mensagemBanner()
 {
@@ -248,7 +261,7 @@ Function: sobeferramentas
 
 Sobe a pilha de ícones na barra de ferramentas.
 
-Utilizado na barra de ferramentas 2.
+Utilizado na barra de ferramentas 2 quando o usuário clica no ícone para subir a lista de ícones.
 */
 function sobeferramentas()
 {
@@ -297,7 +310,7 @@ Function: desceferramentas
 
 Desce a pilha de ícones na barra de ferramentas.
 
-Utilizado na barra de ferramentas 2.
+Utilizado na barra de ferramentas 2 quando o usuário clica no ícone para descer a lista de ícones.
 */
 function desceferramentas()
 {
@@ -343,11 +356,17 @@ function desceferramentas()
 /*
 Function: trocalingua
 
-Troca a linguagem atual.
+Troca o idioma atual utilizado na interface principal.
 
 O código atual da linguagem é armazenado em um Cookie. Essa função troca o valor do Cookie e redesenha o mapa.
 
 A troca de linguagem é ativada pelo clique nas bandeiras inseridas na parte superior do menu suspenso.
+
+Os termos utilizados em cada idioma é definido em configura.js
+
+Adefinição do termo a ser utilizado é definido pela função $trad
+
+See: <configura.js>
 
 Parameters:
 
@@ -365,7 +384,9 @@ function trocalingua(l)
 /*
 Function: criaContainerRichdraw
 
-Cria os elementos dom necessários ao uso das funções de desenho sobre o mapa.
+Cria os elementos 'dom' necessários ao uso das funções de desenho sobre o mapa.
+
+As ferramentas de cálculo de distâncias e áreas utilizam esse container.
 
 Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
 
@@ -449,7 +470,7 @@ function criaContainerRichdraw()
 /*
 Function: mudaVisual
 
-Muda o visual do mapa atual.
+Muda o visual do mapa atual (ícones).
 
 Busca as imagens existentes na interface aberta e substituí pelas imagens existentes no diretório
 correspondente ao visual selecionado.
@@ -556,7 +577,7 @@ function mudaVisual(visual)
 /*
 Function: initJanelaMen
 
-Abre a janela com as mensagens de ajuda ao usuário
+Abre a janela com as mensagens de ajuda ao usuário. Essa janela é mostrada no canto inferior esquerdo e mostra textos de ajuda quando o usuário passa omouse sobre uma opção do i3geo.
 
 Quando essa janela estiver aberta, o resultado da função de etiquetas e de ajuda é mostrado nessa janela.
 
@@ -608,6 +629,8 @@ function initJanelaMen()
 Function: docaguias
 
 Coloca as guias de navegação em uma janela interna do mapa e altera o tamanho do mapa para ajustá-lo à nova situação.
+
+O conteúdo da nova janela é aquele que estiver dentro de um DIV com id= "contemFerramentas"
 */
 function docaguias()
 {
@@ -715,9 +738,9 @@ Ativa as guias principais do mapa, definindo as funções que serão executadas qua
 
 Quando o usuário clica em uma guia, todas as guias são escondidas e a guia clicada é ativada.
 
-Algumas guias só são preenchidas quando o usuário clica nelas pela primeira vez.
+Algumas guias só são preenchidas quando o usuário clicar nelas pela primeira vez.
 
-O preenchimento sob demanda dessas guias torna necessário a definição da função que será executada.
+O preenchimento sob demanda dessas guias torna necessário a definição da função que será executada quando o clique ocorrer.
 
 Essas funções são definidas por default nas guias principais.
 
@@ -851,11 +874,15 @@ function ativaGuias()
 /* 
 Function: pegalistademenus
 
-Pega a lista de menus que deverão compor a árvore de adição de temas e cria/adiciona os elementos da árvore
+Pega a lista de menus que deverão compor a árvore de adição de temas e cria/adiciona os elementos raiz para cada árvore
 
-A lista de menus é definida em ms_configura.php
+A lista de menus é definida em ms_configura.php ou no sistema de administração.
 
 Para cada menu é montada uma árvore com os grupos e sub-grupos de temas.
+
+Parameters:
+
+retorno - objeto JSON no formato CPAINT com a lista de menus
 */
 function pegalistademenus(retorno)
 {
@@ -899,11 +926,12 @@ function pegalistademenus(retorno)
 		}
 	}
 }
-
 /*
 Function: mensagemf
 
 Abre uma mensagem na tela em um DIV.
+
+A mensagem é incluída em um elemento HTML com id ="mensagem"
 
 Parameters:
 
@@ -943,7 +971,9 @@ Function: wdocaf
 
 Abre a janela flutuante para executar algum programa.
 
-A janela flutuante contém um iframa onde o programa, definido no parâmetro wsrc, será carregado.
+A janela flutuante contém um iframe onde o programa, definido no parâmetro wsrc, será carregado.
+
+A janela é criada por meio da biblioteca YUI
 
 Parameters:
 
@@ -974,7 +1004,6 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 		{$i("boxg").style.display = "none";}
 		if($i("boxpin"))
 		{$i("boxpin").style.display = "none";}
-		
 		var wlargura_ = parseInt(wlargura)+0+"px";
 		YAHOO.namespace("janelaDoca.xp");
 		if ($i("wdoca"))
@@ -1026,7 +1055,7 @@ function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
 /*
 Function: redimwdocaf
 
-Redimensiona a janela docável.
+Redimensiona a janela flutuante.
 
 Parameters:
 
@@ -1051,7 +1080,7 @@ function redimwdocaf(wlargura,waltura)
 /*
 Function: wdocaf2
 
-Abre uma segunda janela docável para executar algum programa relativo a outra janela.
+Abre uma segunda janela flutuante.
 
 Parameters:
 
@@ -1102,7 +1131,7 @@ function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 /*
 Function: wdocafechaf
 
-Fecha uma janela docável.
+Fecha uma janela flutuante.
 
 Depreciado
 
@@ -1133,6 +1162,10 @@ Function: mostradicasf
 
 Mostra dicas sobre uma função quando o mouse passa sobre um botão ou outra opção qualquer.
 
+O texto da dica pode ser obtido com a função $trad
+
+Se a janela de mensagens estiver aberta, o texto será colocado nela.
+
 Parameters:
 
 objeto - objeto sobre o qual o mouse está sobreposto.
@@ -1140,7 +1173,6 @@ objeto - objeto sobre o qual o mouse está sobreposto.
 dica - dica que aparece no mapa.
 
 hlpt - depreciado
-
 */
 function mostradicasf(objeto,dica,hlpt)
 {
@@ -1163,11 +1195,16 @@ function mostradicasf(objeto,dica,hlpt)
 	}
 	catch(e){alert("Ocorreu um erro. mostradicasf"+e);}
 }	
-/*
+/**
 Function: mudaiconf
 
 Muda as bordas dos ícones de ferramentas, passando todos para normal.
-Aplica uma borda sobre um ícone específico
+Aplica uma borda sobre um ícone específico e executa outras operações.
+
+Utilizado para indicar que uma determinada opção está em uso.
+
+Como esta função é executada quando um ícone é clicado, algumas operações são definidas aqui
+como por exemplo, definir o ícone que segue o mouse. 
 
 Parameters:
 
@@ -1265,6 +1302,10 @@ Function: mostraguiaf
 
 Ativa a visualização de uma determinada guia.
 
+A ativação consiste em tornar visível os elementos correspondentes a uma determinada guia.
+Esses elementos devem estar contidos em um DIV cujo id deve ser composto pela palavra "guia" seguida do número da
+guia e a palavra "obj", por exemplo, guia9obj.
+
 Parâmetros:
 
 guia - número da guia que será ativada.
@@ -1273,7 +1314,7 @@ function mostraguiaf(guia)
 {
 	if ($i("guia"+guia))
 	{
-		var fs=[1,2,3,4,5,6,7,8,9,10];
+		var fs=[1,2,3,4,5,6,7,8,9,10,11,12];
 		for (var j=0;j<10; j++)
 		{
 			if ($i("guia"+fs[j]))
@@ -1362,12 +1403,18 @@ function aguarde()
 		}
 	};
 }
-/*
+/**
 Function: ativaClicks
 
 Ativa as operações de clique sobre o mapa
 
-Define o que será executado quando o mouse é clicado ou movido sobre o mapa
+Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
+
+Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja configura.js)
+
+Parameters:
+
+docMapa - objeto que será alvo da ativação dos cliques
 */
 function ativaClicks(docMapa)
 {
@@ -1630,10 +1677,12 @@ function pegaCoordenadaUTM()
 Function: mostraRosaDosVentos
 
 Mostra a rosa dos ventos quando o mouse é estacionado por alguns instantes sobre o mapa.
+
+Executado apenas se a variável g_mostraRosa = "sim"
 */
 function mostraRosaDosVentos()
 {
-	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela")){return;}
+	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela") || g_mostraRosa == "nao"){return;}
 	//mostra opção sobre o mouse quando está na função pan
 	if (($i("box1")) && (objmapa.parado == "sim") && (document.getElementById("imgh").style.display=="block") && ($i("box1").style.visibility != "visible"))
 	{
@@ -1669,7 +1718,6 @@ function mostraRosaDosVentos()
 		}
 	}
 }
-
 /*
 Function: initJanelaZoom
 
@@ -1816,7 +1864,6 @@ function initJanelaZoom(qual)
 Function: initJanelaRef
 
 Abre a janela com o mapa de referencia
-
 */
 function initJanelaRef()
 {
@@ -1928,6 +1975,10 @@ function mudaboxnf(tipo,obj)
 Function: movelentef
 
 Move a imagem na lente de aumento conforme o movimento do mouse sobre o mapa.
+
+A lente de aumento é uma ferramenta do i3geo.
+
+Esta função é executada sempre que o mouse é movido sobre o mapa e se o elemento "lente" estiver visível.
 */
 function movelentef()
 {
@@ -1953,7 +2004,7 @@ function movelentef()
 /*
 Function: zoomiauto
 
-Aproxima o mapa tendo o centro como referência.
+Aproxima o mapa tendo o centro do mapa atual como referência.
 */
 function zoomiauto()
 {
@@ -1966,7 +2017,7 @@ function zoomiauto()
 /*
 Function: zoomoauto
 
-Afasta o mapa tendo o centro como referência.
+Afasta o mapa tendo o centro do mapa atual como referência.
 */
 function zoomoauto()
 {
@@ -1989,7 +2040,7 @@ Parameters:
 
 tipo - desloca|termina
 */
-function zoomboxf (tipo)
+function zoomboxf(tipo)
 {
 	var pos = pegaPosicaoObjeto($i("img"));
 	if($i("box1"))
@@ -2100,6 +2151,8 @@ function zoomboxf (tipo)
 Function: zoomIP
 
 Localiza no mapa o usuário baseado em seu número IP.
+
+O ponto de localização é adicionado ao mapa como um novo tema.
 */
 function zoomIP()
 {
@@ -2127,6 +2180,8 @@ function zoomIP()
 Function: zoomPonto
 
 Localiza uma coordenada no mapa e desloca o mapa centralizando no ponto.
+
+O ponto de localização é adicionado ao mapa como um novo tema.
 */
 function zoomPonto()
 {
@@ -2147,15 +2202,12 @@ function zoomPonto()
 Function: clicouRef
 
 Altera a abrangência do mapa quando o mapa de referência é clicado
-
 */
 function clicouRef()
 {
 	try
 	{
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		//objposicaocursor.refx = objposicaocursor.refx - parseInt(YAHOO.janelaRef.xp.panel.element.style.left) - 5;
-		//objposicaocursor.refy = objposicaocursor.refy - parseInt(YAHOO.janelaRef.xp.panel.element.style.top) - 25;
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+g_sid;
 		cpObj.call(p,"pan",ajaxredesenha);
 	}
@@ -2165,7 +2217,6 @@ function clicouRef()
 Function: movimentoRef
 
 Pega a coordenada do cursor sobre o mapa de referência
-
 */
 function movimentoRef(obj)
 {
@@ -2178,6 +2229,8 @@ function movimentoRef(obj)
 Function: aplicaescala
 
 Aplica a escala numerica definida no formulário existente no mapa.
+
+O valor da escala a ser aplicada é obtido do elemento com id="escalanum"
 */
 function aplicaescala()
 {
@@ -2194,6 +2247,8 @@ function aplicaescala()
 Function: zoomtot
 
 Zoom para a extensão default.
+
+O valor da extensão default é obtido de objmapa.extentTotal, cujo valor é definido na inicialização do mapa.
 */
 function zoomtot()
 {
@@ -2206,6 +2261,10 @@ function zoomtot()
 Function: panFixo
 
 Desloca o mapa em uma direção determinada.
+
+Parameters:
+
+direcao - norte|sul|leste|oeste
 */
 function panFixo(direcao)
 {
@@ -2304,7 +2363,8 @@ function ativaEntorno()
 /*
 Function: geraURLentorno
 
-Gera as urls que farão parte dos divs de desenho do entorno do mapa
+Gera as urls que farão parte dos divs de desenho do entorno do mapa.
+Essas URLs utilizam o mapserver no modo CGI
 */
 function geraURLentorno()
 {
@@ -2330,7 +2390,9 @@ function geraURLentorno()
 /*
 Function: ajustaEntorno
 
-Ajusta o tamanho do mapa e das imagens do entorno
+Ajusta o tamanho do mapa e das imagens do entorno, quando a opção de desenho do entorno estiver ativa.
+
+Os valores que definem o tamanho do mapa são obtidos do objeto objmapa (métodos w e h)
 */
 function ajustaEntorno()
 {
@@ -2353,9 +2415,17 @@ Function: verificaTip
 
 Verifica se a opção de identificação está ativa e se o mouse está parado.
 Se o mouse estiver parado, chama a função de mostrar tip.
+
+A função de busca dos dados para a etiqueta é definida na variável de configuração g_funcaoTip
+
+Pode-se definir uma outra função qualquer, sem a necessidade de alteração do código original do i3geo, definindo-se
+no HTML da interface a variável, por exemplo, gfuncaoTip = "minhasEtiquetas()"
+
+Por default, utiliza-se a função verificaTipDefault()
 */
 function verificaTip()
 {
+	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela") || (g_operacao != "identifica")){return;}
 	//insere div para tips
 	if (!$i("tip"))
 	{
@@ -2367,7 +2437,6 @@ function verificaTip()
 		{novoel.style.filter = "alpha(opacity=90)";}
 		document.body.appendChild(novoel);
 	}
-	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela")){return;}
 	if ((objmapa.parado == "sim") && (g_operacao == "identifica") && ($i("tip").style.display!="block"))
 	{
 		var i = $i("tip");
@@ -2384,7 +2453,7 @@ function verificaTip()
 /*
 Function: verificaTipDefault
 
-Executa a operação de identificação para mostrar um TIP.
+Executa a operação de identificação para mostrar uma etiqueta no mapa.
 
 Esta é a função default, definida na variável g_funcaoTip
 */
@@ -2400,13 +2469,13 @@ function verificaTipDefault()
 /*
 Function: mostraTip
 
-Mostra a descrição de um elemento do mapa como um tip na posição do mouse.
+Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
 
-Para que um tema tenha um tip, é necessário configurar o metadata TIP no map file.
+Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
 
 Parameters:
 
-retorno - retorno da função ajax.
+retorno - retorno da função ajax com os dados para montar a etiqueta.
 */
 function mostraTip(retorno)
 {
@@ -2637,10 +2706,19 @@ Section: menu de temas e outras listagens
 Function: procurartemas
 
 Localiza um tema no menu de temas.
+
+O texto para busca é obtido do elemento INPUT com id="buscatema", ou no parâmetro "texto"
+
+Parameters:
+
+texto - (opcional)
 */
-function procurartemas()
+function procurartemas(texto)
 {
+	if (document.getElementById("buscatema"))
 	var procurar = removeAcentos(document.getElementById("buscatema").value);
+	else
+	var procurar = removeAcentos(texto);
 	var resultadoProcurar = function(retorno)
 	{
 		if(!retorno.data)
@@ -2691,11 +2769,15 @@ function procurartemas()
 /*
 Function: expandeTema
 
-Busca dados sobre um tema quando o botão de expandir tema (guia1) é clicado.
+Busca dados sobre um tema quando o botão de expandir tema é clicado.
+
+Os dados obtidos sobre o tema são utilizados para montagem do nó "opções" que é mostrado abaixo do nome do tema.
+
+Algumas das opções apenas serão mostradas se a variável de configuração g_opcoesTemas = "sim"
 
 Parameters:
 
-itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
+itemID - Id do nó que foi expandido
 */
 function expandeTema(itemID)
 {
@@ -3318,7 +3400,6 @@ function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrup
 	cp.call(p,"pegalistadetemas",combo);
 
 }
-
 /*
 Function: pegavalSistemas
 
@@ -3361,12 +3442,15 @@ function pegavalSistemas(sis)
 /*
 Function: pegaMapas
 
-Recebe a lista de mapas (banners) e monta a apresentação.
+Recebe a lista de mapas (banners) e monta a apresentação na guia "mapas".
 
 Adiciona na guia mapas os banners que dão acesso direto a mapas especiais.
 
-A indicação do arquivo xml é feita em ms_configura.php
+A indicação do arquivo xml é feita em ms_configura.php ou no sistema de administração
 
+Parameters:
+
+retorno - objeto JSON com a lista de mapas
 */
 function pegaMapas(retorno)
 {
@@ -3404,7 +3488,7 @@ function pegaMapas(retorno)
 /*
 Function: arvoreclick
 
-Adiciona um tema no mapa quando o usuário clica em um novo tema no menu de adição de temas.
+Marca o checkbox de adição de temas
 
 Parameters:
 
@@ -3641,7 +3725,6 @@ function processevent1(exy1)
 Function: calcposf
 
 Calcula a posição do corpo do mapa e posiciona-o corretamente na tela.
-
 */
 function calcposf()
 {
@@ -3742,7 +3825,7 @@ Function: capturaposicao
 Captura a posição do mouse em função do evento onmousemove sobre o corpo do mapa ou sobre o mapa de referência.
 
 Atualiza o objeto objposicaocursor.
-A função de mostrar TIP é definida como "" quando o mouse é movimentado.
+A função de mostrar etiquetas é definida como "" quando o mouse é movimentado.
 
 Parameters:
 
@@ -3773,7 +3856,6 @@ function capturaposicao(e)
 		pos[0] = pos[0] - objmapa.w;
 		pos[1] = pos[1] - objmapa.h;
 	}
-	//$i("escalanum").value = pos+" "+objmapa.w
 	//
 	//pega a posicao correta do mouse
 	//
@@ -3833,7 +3915,6 @@ function capturaposicao(e)
 	{objmapa.parado = "nao";}
 	ajaxTip = "";
 }
-
 /*
 Section: quadro de animação
 */
@@ -4070,6 +4151,10 @@ Function calculaArea
 Calcula a área de um polígono.
 
 Os pontos são obtidos do objeto pontosdistobj
+
+Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
+
+O cálculo da resolução é feito quando a ferramenta de cálculo é ativada e armazenado na variável g_areapixel
 
 Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
 */
@@ -4416,7 +4501,7 @@ function posicaocursor()
 /*
 Function: pontosdist
 
-Armazena coordenadas no objeto pontosdist para calculo de distancia
+Cria o objeto que irá armazenaa as coordenadas para calculo de distancia
 
 Parameters:
 
@@ -5004,7 +5089,6 @@ function pegaPosicaoObjeto(obj)
 Function: recuperamapa
 
 Tenta recuperar o último mapa, caso tenha ocorrido algum erro.
-
 */
 function recuperamapa()
 {

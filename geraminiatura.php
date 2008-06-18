@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Gera miniaturas.
+Title: geraminiatura.php
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 

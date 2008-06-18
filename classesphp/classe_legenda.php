@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Legenda
+Title: classe_legenda.php
 
 Manipulação da legenda.
 

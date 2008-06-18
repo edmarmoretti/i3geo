@@ -1,5 +1,5 @@
 /*
-Title: classesjs/configura.js
+Title: configura.js
 
 Definição das variáveis de configuração da interface.
 

@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Liga um tema que não está visível no mapa
+Title: ligar.php
+
+Liga um tema que não está visível no mapa
 
 File: i3geo/mobile/ligar.php
 

@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Toponímia
+Title: classe_toponimia.php
 
 Processa a toponímia de um tema.
 

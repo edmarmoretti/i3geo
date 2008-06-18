@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Mostra a legenda do mapa
+Title: legenda.php
+
+Mostra a legenda do mapa
 
 File: i3geo/mobile/legenda.php
 

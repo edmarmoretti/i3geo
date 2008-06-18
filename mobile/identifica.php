@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Identifica elementos no mapa em determinada coordenada x e y
+Title: identifica.php
+
+Identifica elementos no mapa em determinada coordenada x e y
 
 File: i3geo/mobile/adicionatema.php
 

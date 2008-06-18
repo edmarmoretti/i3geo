@@ -1,20 +1,11 @@
 Format: Development Release 02-10-2007 (1.35 base)
 
 
-Title: [i3Geo]
+Title: i3Geo
+SubTitle: Documentação dos códigos
 
-# You can also add a sub-title to your menu like this:
-# SubTitle: [subtitle]
-
-# You can add a footer to your documentation like this:
-# Footer: [text]
-# If you want to add a copyright notice, this would be the place to do it.
-
-# You can add a timestamp to your documentation like one of these:
-# Timestamp: Generated on month day, year
-# Timestamp: Updated mm/dd/yyyy
-# Timestamp: Last updated mon day
-#
+Footer: Para mais informações veja http://softwarepublico.gov.br
+Timestamp: Gerado em day month, year
 #   m     - One or two digit month.  January is "1"
 #   mm    - Always two digit month.  January is "01"
 #   mon   - Short month word.  January is "Jan"
@@ -53,6 +44,12 @@ File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
 File: Testa a instalação do I3Geo.  (testainstal.php)
 File: Testa um mapfile.  (testamapfile.php)
 
+Group: Exemplos de customização  {
+
+   File: mashup.htm  (exemplos\mashup.htm)
+   File: abas.htm  (exemplos\abas.htm)
+   }  # Group: Exemplos de customização
+
 Group: Redirecionadores  {
 
    File: Redirecionador para o ms_criamapa.php com extensão HTML  (index.html)
@@ -63,138 +60,131 @@ Group: Redirecionadores  {
 
 Group: Aplicativos adicionais  {
 
-   File: Registra o IP do usuário para criação do mapa de visitantes.  (ms_registraip.php)
-   File: Aplicativo para download de dados  (datadownload.htm)
-   File: Ajuda OGC  (ogc.htm)
-   File: Gerador automático de web services OGC  (ogc.php)
+   File: ms_registraip.php  (ms_registraip.php)
+   File: datadownload.htm  (datadownload.htm)
+   File: ogc.htm  (ogc.htm)
+   File: ogc.php  (ogc.php)
    File: kml.php  (kml.php)
-   File: i3geo/geradordelinks.htm  (geradordelinks.htm)
-   File: i3geo/wscliente.htm  (wscliente.htm)
-   File: Mashup  (exemplos\mashup.htm)
-   File: Gera miniaturas.  (geraminiatura.php)
+   File: geradordelinks.htm  (geradordelinks.htm)
+   File: wscliente.htm  (wscliente.htm)
+   File: geraminiatura.php  (geraminiatura.php)
 
-   Group: Menutemas  {
+   Group: Zerocal  {
 
-      File: Lista de aplicações de identificação  (menutemas\identifica.xml)
-      File: Lista de Atlas  (menutemas\atlas.xml)
-      File: Lista de links para sites de download  (menutemas\linksdownload.xml)
-      File: Lista de mapas  (menutemas\mapas.xml)
-      File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
-      File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
-      File: Lista de sistemas.  (menutemas\sistemas.xml)
-      File: Menu de temas  (menutemas\menutemas.xml)
-      }  # Group: Menutemas
+      File: compactajs.php  (classesjs\zerocal\compactajs.php)
+      File: configura.js  (classesjs\zerocal\configura.js)
+      File: ferramentas.js  (classesjs\zerocal\ferramentas.js)
+      File: funcoes.js  (classesjs\zerocal\funcoes.js)
+      File: Funções gerais  (classesjs\zerocal\temp.js)
+      File: i3geo.js  (classesjs\zerocal\i3geo.js)
+      File: i3geonaocompacto.js  (classesjs\zerocal\i3geonaocompacto.js)
+      File: iniciamma.js  (classesjs\zerocal\iniciamma.js)
+      File: redesenho.js  (classesjs\zerocal\redesenho.js)
+      }  # Group: Zerocal
 
-   File: Abas  (exemplos\abas.htm)
+   Group: Atlas  {
+
+      File: geral.htm  (atlas\geral.htm)
+      File: index.htm  (atlas\index.htm)
+      File: index.html  (atlas\index.html)
+      }  # Group: Atlas
+
+   Group: Mobile  {
+
+      File: adicionatema.php  (mobile\adicionatema.php)
+      File: ativatexto.php  (mobile\ativatexto.php)
+      File: desligar.php  (mobile\desligar.php)
+      File: escala.php  (mobile\escala.php)
+      File: identifica.php  (mobile\identifica.php)
+      File: index.htm  (mobile\index.htm)
+      File: index.html  (mobile\index.html)
+      File: index.php  (mobile\index.php)
+      File: inicia.php  (mobile\inicia.php)
+      File: legenda.php  (mobile\legenda.php)
+      File: ligar.php  (mobile\ligar.php)
+      File: localizar.php  (mobile\localizar.php)
+      File: localizarxy.php  (mobile\localizarxy.php)
+      File: mobile.php  (mobile\mobile.php)
+      }  # Group: Mobile
+
    }  # Group: Aplicativos adicionais
 
-Group: Aplicmap  {
+Group: Configurações administrativas (menus, mapas, etc.)  {
 
-   File: Administração de mapfiles &lparen;experimental&rparen;  (aplicmap\admin.htm)
+   File: Lista de aplicações de identificação  (menutemas\identifica.xml)
+   File: Lista de Atlas  (menutemas\atlas.xml)
+   File: Lista de links para sites de download  (menutemas\linksdownload.xml)
+   File: Lista de mapas  (menutemas\mapas.xml)
+   File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
+   File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
+   File: Lista de sistemas.  (menutemas\sistemas.xml)
+   File: Menu de temas  (menutemas\menutemas.xml)
+   }  # Group: Configurações administrativas (menus, mapas, etc.)
+
+Group: Interfaces HTML e mapfiles de inicialização e configuração  {
+
    File: Flamingo &lparen;experimental&rparen;  (aplicmap\flamingo.htm)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
-   File: Interface normal  (aplicmap\meumapa.htm)
+   File: Interface normal &lparen;para exemplos&rparen;  (no auto-title, aplicmap\meumapa.htm)
    File: Interface simples 1  (aplicmap\simples1.htm)
    File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)
    File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
-   }  # Group: Aplicmap
+   }  # Group: Interfaces HTML e mapfiles de inicialização e configuração
 
-Group: Classesjs  {
+Group: Programas principais (core)  {
 
-   File: A - Compacta js e css  (classesjs\compactajs.php)
-   File: Administração de mapfiles  (classesjs\i3geoadmin.js)
-   File: Atlas  (classesjs\atlas.js)
-   File: Carrega os scripts do i3geo.  (classesjs\i3geo.js)
-   File: classesjs/configura.js  (classesjs\configura.js)
-   File: DataDownLoad  (classesjs\datadownload.js)
-   File: Ferramentas da interface de administração  (classesjs\ferramentasadmin.js)
-   File: ferramentas.js  (classesjs\ferramentas.js)
-   File: funcoes.js  (classesjs\funcoes.js)
-   File: geradordelinks.js  (classesjs\geradordelinks.js)
-   File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
-   File: iniciamma.js  (classesjs\iniciamma.js)
-   File: Menu suspenso  (classesjs\menususpenso.js)
-   File: Redesenho  (classesjs\redesenho.js)
-   File: wscliente.js  (classesjs\wscliente.js)
+   Group: Programas principais em JavaScript (rodam no navegador)  {
 
-   Group: Zerocal  {
+      File: atlas.js  (classesjs\atlas.js)
+      File: compactajs.js  (classesjs\compactajs.php)
+      File: configura.js  (classesjs\configura.js)
+      File: datadownload.js  (classesjs\datadownload.js)
+      File: ferramentas.js  (classesjs\ferramentas.js)
+      File: funcoes.js  (classesjs\funcoes.js)
+      File: geradordelinks.js  (classesjs\geradordelinks.js)
+      File: i3geo.js  (classesjs\i3geo.js)
+      File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
+      File: iniciamma.js  (classesjs\iniciamma.js)
+      File: montaMenuSuspenso  (classesjs\menususpenso.js)
+      File: redesenho.js  (classesjs\redesenho.js)
+      File: wscliente.js  (classesjs\wscliente.js)
+      }  # Group: Programas principais em JavaScript (rodam no navegador)
 
-      File: Administração de mapfiles  (classesjs\zerocal\i3geoadmin.js)
-      File: Carrega os scripts do i3geo.  (classesjs\zerocal\i3geo.js)
-      File: Cliente de web service  (classesjs\zerocal\wscliente.js)
-      File: Compacta js e css para a interface zerocal  (classesjs\zerocal\compactajs.php)
-      File: Configuração da interface.  (classesjs\zerocal\configura.js)
-      File: DataDownLoad  (classesjs\zerocal\datadownload.js)
-      File: Ferramentas  (classesjs\zerocal\ferramentas.js)
-      File: Ferramentas da interface de administração  (classesjs\zerocal\ferramentasadmin.js)
-      File: Funções gerais  (classesjs\zerocal\temp.js)
-      File: Funções gerais  (classesjs\zerocal\funcoes.js)
-      File: i3geonaocompacto.js  (classesjs\zerocal\i3geonaocompacto.js)
-      File: Inicialização do i3geo.  (classesjs\zerocal\iniciamma.js)
-      File: Redesenho  (classesjs\zerocal\redesenho.js)
-      }  # Group: Zerocal
+   Group: Programas principais em PHP (rodam no servidor)  {
 
-   }  # Group: Classesjs
+      File: atlas_controle.php  (classesphp\atlas_controle.php)
+      File: carrega_ext.php  (classesphp\carrega_ext.php)
+      File: class.palette.php  (classesphp\class.palette.php)
+      File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
+      File: classe_analise.php  (classesphp\classe_analise.php)
+      File: classe_atlas.php  (classesphp\classe_atlas.php)
+      File: classe_atributos  (classesphp\classe_atributos.php)
+      File: classe_escala.php  (classesphp\classe_escala.php)
+      File: classe_estatistica.php  (classesphp\classe_estatistica.php)
+      File: classe_imagem.php  (classesphp\classe_imagem.php)
+      File: classe_legenda.php  (classesphp\classe_legenda.php)
+      File: classe_mapa.php  (classesphp\classe_mapa.php)
+      File: classe_menutemas.php  (classesphp\classe_menutemas.php)
+      File: classe_navegacao.php  (classesphp\classe_navegacao.php)
+      File: classe_selecao.php  (classesphp\classe_selecao.php)
+      File: classe_shp.php  (classesphp\classe_shp.php)
+      File: classe_temas.php  (classesphp\classe_temas.php)
+      File: classe_toponimia.php  (classesphp\classe_toponimia.php)
+      File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
+      File: flamingoogc.php  (classesphp\flamingoogc.php)
+      File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
+      File: graficopizza.php  (classesphp\graficopizza.php)
+      File: graficos.php  (classesphp\graficos.php)
+      File: mapa_controle.php  (classesphp\mapa_controle.php)
+      File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+      File: pega_variaveis.php  (classesphp\pega_variaveis.php)
+      File: wmswfs.php  (classesphp\wmswfs.php)
+      File: wscliente.php  (classesphp\wscliente.php)
+      }  # Group: Programas principais em PHP (rodam no servidor)
 
-Group: Classesphp  {
-
-   File: A - Carrega as variáveis passadas como POST ou GET  (classesphp\pega_variaveis.php)
-   File: A - Controle das requisições em Ajax feitas pela interface Atlas do i3geo  (classesphp\atlas_controle.php)
-   File: A - Controle das requisições em Ajax feitas pelas interfaces normais do i3geo  (classesphp\mapa_controle.php)
-   File: A - Extensões PHP  (classesphp\carrega_ext.php)
-   File: A - Funções compartilhadas  (classesphp\funcoes_gerais.php)
-   File: A - Inicializa o mapa  (classesphp\mapa_inicia.php)
-   File: Administração  (classesphp\admin.php)
-   File: Análise  (classesphp\classe_analise.php)
-   File: Atlas  (classesphp\classe_atlas.php)
-   File: Atributos  (classesphp\classe_atributos.php)
-   File: Classes e estilos  (classesphp\classe_alteraclasse.php)
-   File: Degradê  (classesphp\class.palette.php)
-   File: Escala  (classesphp\classe_escala.php)
-   File: Estatística  (classesphp\classe_estatistica.php)
-   File: Gerador automático de web services OGC para a interface flamingo do i3geo  (classesphp\flamingoogc.php)
-   File: Gráficos R  (classesphp\graficos.php)
-   File: Imagem  (classesphp\classe_imagem.php)
-   File: Legenda  (classesphp\classe_legenda.php)
-   File: Mapa  (classesphp\classe_mapa.php)
-   File: Menu  (classesphp\classe_menutemas.php)
-   File: Multilayer  (classesphp\classe_vermultilayer.php)
-   File: Navegação  (classesphp\classe_navegacao.php)
-   File: OGC  (classesphp\wmswfs.php)
-   File: Pizza  (classesphp\graficopizza.php)
-   File: Seleção  (classesphp\classe_selecao.php)
-   File: Shape  (classesphp\classe_shp.php)
-   File: Temas  (classesphp\classe_temas.php)
-   File: Toponímia  (classesphp\classe_toponimia.php)
-   File: WS Cliente  (classesphp\wscliente.php)
-   }  # Group: Classesphp
-
-Group: Atlas  {
-
-   File: Interface normal de abertura da interface Atlas  (atlas\geral.htm)
-   File: Lista de atlas disponíveis  (atlas\index.htm)
-   File: Redirecionador HTML para o index.htm da interface Atlas  (atlas\index.html)
-   }  # Group: Atlas
-
-Group: Mobile  {
-
-   File: Abre o mapa  (mobile\inicia.php)
-   File: Adiciona um tema ao mapa  (mobile\adicionatema.php)
-   File: Ativa a toponimia de um tema  (mobile\ativatexto.php)
-   File: Desliga um tema que está visível no mapa  (mobile\desligar.php)
-   File: i3geo mobile  (mobile\index.php)
-   File: Identifica elementos no mapa em determinada coordenada x e y  (mobile\identifica.php)
-   File: Interface do mapa  (mobile\mobile.php)
-   File: Liga um tema que não está visível no mapa  (mobile\ligar.php)
-   File: Localiza um lugar no mapa.  (mobile\localizarxy.php)
-   File: Localiza um lugar no mapa.  (mobile\localizar.php)
-   File: Mostra a escala  (mobile\escala.php)
-   File: Mostra a legenda do mapa  (mobile\legenda.php)
-   File: Redirecionador HTM do i3geo mobile  (mobile\index.htm)
-   File: Redirecionador HTML do i3geo mobile  (mobile\index.html)
-   }  # Group: Mobile
+   }  # Group: Programas principais (core)
 
 Group: Index  {
 

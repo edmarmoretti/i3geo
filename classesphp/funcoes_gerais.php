@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Funções compartilhadas
+Title: funcoes_gerais.php
 
 Contém um conjunto de funções que são compartilhadas por outros programas do I3Geo.
 

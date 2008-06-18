@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Atributos
+Title: classe_atributos
 
 Processa a tabela de atributos de um tema.
 

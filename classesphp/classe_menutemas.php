@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Menu
+Title: classe_menutemas.php
 
 Manipulação dos temas do arquivo menutemas.xml.
 
@@ -59,6 +59,7 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
+		$this->locsistemas = $locsistemas;
 		$this->xmlsistemas = "";
 		$this->locaplic = $locaplic;
 		$this->menutemas = $menutemas;
@@ -214,7 +215,7 @@ array
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if($ondexml != "")
-				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
 					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
@@ -391,7 +392,7 @@ array
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if($ondexml != "")
-				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
 					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
@@ -490,7 +491,7 @@ array
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if($ondexml != "")
-				{$this->xml = simplexml_load_file($ondexml."?tipo=".$tipo);}
+				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
 					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
@@ -593,7 +594,7 @@ $procurar - String que será procurada.
 			$ondexml = $menu["arquivo"];
 			if($menu["url"] != ""){$ondexml = $menu["url"];}
 			if($ondexml != "")
-			{$this->xml[] = simplexml_load_file($ondexml."?tipo=".$tipo);}
+			{$this->xml[] = simplexml_load_file($ondexml);}
 			else //pega o xml do sistema de administração
 			{
 				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
@@ -727,7 +728,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 			$ondexml = $menu["arquivo"];
 			if($menu["url"] != ""){$ondexml = $menu["url"];}
 			if($ondexml != "")
-			{$this->xml[] = simplexml_load_file($ondexml."?tipo=".$tipo);}
+			{$this->xml[] = simplexml_load_file($ondexml);}
 			else //pega o xml do sistema de administração
 			{
 				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	

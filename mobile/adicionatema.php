@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Adiciona um tema ao mapa
+Title: adicionatema.php
+
+Adiciona um tema ao mapa
 
 File: i3geo/mobile/adicionatema.php
 

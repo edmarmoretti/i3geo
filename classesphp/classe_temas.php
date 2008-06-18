@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Temas
+Title: classe_temas.php
 
 Manipulação de temas.
 

@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Localiza um lugar no mapa.
+Title: localizarxy.php
+
+Localiza um lugar no mapa.
 
 Utiliza o web service geonames do MMA.
 

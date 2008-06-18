@@ -627,11 +627,14 @@ function mostraAguarde()
 	{
 		echo "<html><head>";
 		echo "<title>".$tituloInstituicao."</title>";
-		echo '<div id="aguarde">';
+		echo '<div id="aguarde"><center>';
 		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...carregando o mapa</p>';
-		echo "<center><img src='".$caminho."imagens/i3geo1.jpg'><br><br>";
-		echo "<center><img src='".$caminho."imagens/mapserv.png'><br><br>";
-		echo "<center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a>";
+		echo '<table><tr>';
+		echo "<td colspan=3 ><center><img src='".$caminho."imagens/i3geo1.jpg'></td></tr>";
+		echo "<tr><td><center><img src='".$caminho."imagens/pspb.png'></td>";
+		echo "<td><center><img src='".$caminho."imagens/mapserv.png'></td>";
+		echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='".$caminho."imagens/somerights20_pt.gif' ></a></td>";
+		echo "</tr></table>";
 		echo '<BODY bgcolor="white" style="background-color:white">';
 	}
 }

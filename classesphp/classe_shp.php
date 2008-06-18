@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Shape
+Title: classe_shp.php
 
 Manipulação de shapefile.
 

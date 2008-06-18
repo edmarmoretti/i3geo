@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Ativa a toponimia de um tema
+Title: ativatexto.php
+
+Ativa a toponimia de um tema
 
 File: i3geo/mobile/desligar.php
 

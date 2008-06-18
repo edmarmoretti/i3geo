@@ -31,7 +31,7 @@ Free Software Foundation, Inc., no endereço
 /*
 Section: funções de movimentação do mouse sobre o mapa
 */
-/**
+/*
 Function moveMede
 
 Calcula a distância entre pontos e mostra na tela o resultado.

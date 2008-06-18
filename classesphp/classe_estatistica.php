@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Estatística
+Title: classe_estatistica.php
 
 Gera cálculos estatísticos de uma série de dados
 

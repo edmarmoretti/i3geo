@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Abre o mapa
+Title: inicia.php
+
+Abre o mapa
 
 Cria o mapa e abre a interface.
 

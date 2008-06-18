@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Registra o IP do usuário para criação do mapa de visitantes.
+Title: ms_registraip.php
 
 Com esta opção ativada, toda vez que um usuário abre o i3geo seu IP é identificado e a coordenada geográfica é pesquisada 
 no banco de dados pacotes/geoip/GeoLiteCity.dat. A coordenada é então registrada em um banco de dados cuja conexão é definida 

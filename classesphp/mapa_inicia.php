@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Inicializa o mapa
+Title: mapa_inicia.php
 
 Inicia o mapa.
 Gera as imagens necessárias para abrir o mapa e calcula um conjunto de variáveis necessárias

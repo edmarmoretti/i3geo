@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Atlas
+Title: classe_atlas.php
 
 Manipulação da interface Atlas.
 
@@ -154,7 +154,6 @@ locaplic - localização do i3geo no servidor
 		foreach ($nomes as $n)
 		{
 			$l = $mapa->getlayerbyname($n);
-			//echo $n." ".$l->getmetadata("ATLAS");
 			if (($l->getmetadata("ATLAS")) != "nao")
 			{$l->set("status",MS_DELETE);}
 		}
@@ -218,7 +217,6 @@ locaplic - localização do i3geo no servidor
 			}
 			$mapa->save($map_file);
 		}
-
 		//verifica extensão geográfica
 		if ($mp != "")
 		{

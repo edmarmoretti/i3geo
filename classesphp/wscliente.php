@@ -1,6 +1,6 @@
 <?php
 /*
-Title: WS Cliente
+Title: wscliente.php
 
 Funções de leitura de web services e montagem da lista de serviços para conexão remota.
 

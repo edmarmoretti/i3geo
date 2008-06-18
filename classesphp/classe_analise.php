@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Análise
+Title: classe_analise.php
 
 Gera análises espaciais, como buffer, calculo de centróides, etc.
 

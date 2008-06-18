@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Gerador automático de web services OGC
+Title: ogc.php
 
 Gera web services nos padrões OGC baseado no menutemas.xml
 

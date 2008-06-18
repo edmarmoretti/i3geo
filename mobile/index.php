@@ -28,7 +28,9 @@ h1
 <?php
 
 /*
-Title: i3geo mobile
+Title: index.php
+
+i3geo mobile
 
 Inicializa a versão do i3geo para dispositivos móveis.
 

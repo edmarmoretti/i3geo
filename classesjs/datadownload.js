@@ -106,20 +106,16 @@ function DDinicia()
 	}
 	if (g_tipo == "menutemas")
 	{
-		/*
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"pegaListaDeGrupos",processaGrupos);
-		*/	
 		var processaMenus = function(retorno)
 		{
 			var mn = retorno.data.length
 			for (m=0;m<mn; m++)
 			{
 				document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
-				ativaMenus(retorno.data[m].idmenu,retorno.data[m].nomemenu)
+				var nomeM = retorno.data[m].idmenu
+				if(retorno.data[m].nomemenu)
+				var nomeM = retorno.data[m].nomemenu
+				ativaMenus(retorno.data[m].idmenu,nomeM)
 			}
 		}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";

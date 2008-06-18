@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Multilayer
+Title: classe_vermultilayer.php
 
 Verifica se o layer e multilayer
 

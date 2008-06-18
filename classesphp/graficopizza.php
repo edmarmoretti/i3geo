@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Pizza
+Title: graficopizza.php
 
 Gera uma imagem com o gráfico de pizza.
 É utilizado pelo I3Geo na inclusão de gráficos diretamente no mapa.

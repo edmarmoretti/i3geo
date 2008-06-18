@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Seleção
+Title: classe_selecao.php
 
 Seleção de elementos de um tema.
 

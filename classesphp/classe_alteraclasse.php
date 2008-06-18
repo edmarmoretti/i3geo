@@ -1,7 +1,8 @@
 <?php
 /*
-Title: Classes e estilos
+Title: classe_alteraclasse.php
 
+Manipulação de classes e estilos de um layer
 
 
 About: Licença

@@ -1,6 +1,8 @@
 <?php
 /*
-Title: A - Controle das requisições em Ajax feitas pela interface Atlas do i3geo
+Title: atlas_controle.php
+
+Controle das requisições em Ajax feitas pela interface Atlas do i3geo
 
 Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
@@ -76,7 +78,7 @@ if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 if (!isset($atlasxml) || $atlasxml == "")
 {
 	include_once("../ms_configura.php");
-	$map_file = "";
+	//$map_file = "";
 }
 //
 //ativa o php mapscript e as extensões necessárias

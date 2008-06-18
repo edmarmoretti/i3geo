@@ -1,5 +1,5 @@
 /*
-Title: Carrega os scripts do i3geo.
+Title: i3geo.js
 
 Lê o conjunto de javascripts para o funcionamento do i3geo.
 

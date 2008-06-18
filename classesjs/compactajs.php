@@ -1,6 +1,6 @@
 <?php
 /*
-Title: A - Compacta js e css
+Title: compactajs.js
 
 Compacta os arquivos js e css utilizados pelo I3Geo.
 

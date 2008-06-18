@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Gráficos R
+Title: graficos.php
 
 Funções de gráficos do software R.
 Gera scripts na linguagem R para ser executados como CGI.

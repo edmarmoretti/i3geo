@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Navegação
+Title: classe_navegacao.php
 
 Operações de navegação que alteram a abrangência do mapa.
 

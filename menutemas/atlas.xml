@@ -11,7 +11,7 @@ File: i3geo/menutemas/atlas.xml
 <!-- Cada atlas deve ter uma entrada aqui com seus parâmetros específicos-->
 	<ATLAS>
 		<!-- identificador numérico e único do Atlas-->
-		<ID></ID>
+		<ID>0</ID>
 		<!-- Aqui vai o título geral do Atlas -->
 		<TITULO>Título do atlas para testes</TITULO>
 		<!-- Aqui vai uma descricao resumida do Atlas -->

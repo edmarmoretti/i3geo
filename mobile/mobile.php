@@ -28,7 +28,9 @@ document.body.innerHTML="";
 
 <?php
 /*
-Title: Interface do mapa
+Title: mobile.php
+
+Interface do mapa
 
 File: i3geo/mobile/mobile.php
 

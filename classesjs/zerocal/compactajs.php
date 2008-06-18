@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Compacta js e css para a interface zerocal
+Title: compactajs.php
 
 Compacta os arquivos js e css utilizados pelo I3Geo.
 

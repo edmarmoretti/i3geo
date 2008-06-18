@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Desliga um tema que está visível no mapa
+Title: desligar.php
+
+Desliga um tema que está visível no mapa
 
 File: i3geo/mobile/desligar.php
 

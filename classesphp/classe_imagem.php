@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Imagem
+Title: classe_imagem.php
 
 Manipulação de imagens.
 

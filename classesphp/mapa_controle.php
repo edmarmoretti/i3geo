@@ -1,6 +1,8 @@
 <?php
 /*
-Title: A - Controle das requisições em Ajax feitas pelas interfaces normais do i3geo
+Title: mapa_controle.php
+
+Controle das requisições em Ajax feitas pelas interfaces normais do i3geo
 
 Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
@@ -1615,6 +1617,13 @@ Pega a lista de tags registrados nos menus de temas.
 
 */
 	case "listaTags":
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->listatags($rss,$nrss));
@@ -1627,6 +1636,13 @@ Pega a lista de menus para incluir na guia adiciona.
 Parameters:
 */
 	case "pegalistademenus":
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->pegaListaDeMenus());
@@ -1649,9 +1665,15 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadegrupos":
-		if (file_exists("../ms_configura.php"))
-		{include_once("../ms_configura.php");}
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
+		if(!isset($urli3geo)){$urli3geo = "";}
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
@@ -1667,6 +1689,13 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadeSubgrupos":
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->pegaListaDeSubGrupos($grupo,$idmenu));
@@ -1680,6 +1709,13 @@ Include:
 <classe_menutemas.php>
 */
 	case "pegalistadetemas":
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
@@ -1693,6 +1729,13 @@ Include:
 <classe_menutemas.php>
 */
 	case "procurartemas":
+		if(!isset($menutemas))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 		$cp->set_data($m->procurartemas($procurar));

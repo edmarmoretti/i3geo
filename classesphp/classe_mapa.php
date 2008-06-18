@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Mapa
+Title: classe_mapa.php
 
 Manipulação do mapa. Altera tamanho, lista temas, etc.
 

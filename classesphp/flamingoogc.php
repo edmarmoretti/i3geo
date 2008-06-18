@@ -1,6 +1,8 @@
 <?php
 /*
-Title: Gerador automático de web services OGC para a interface flamingo do i3geo
+Title: flamingoogc.php
+
+Gerador automático de web services OGC para a interface flamingo do i3geo
 
 About: Licença
 
