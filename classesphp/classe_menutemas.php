@@ -56,7 +56,7 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="")
 	{
-		error_reporting(0);
+		error_reporting(E_ALL);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locsistemas = $locsistemas;
@@ -708,6 +708,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 */
 	function listaTags($rss="",$nrss="")
 	{
+		include_once($this->locaplic."/admin/php/xml.php");
 		$tipo = "";
 		//carrega os títulos e links do rss especificado
 		$noticiasRSS = array(); //guarda as notícias originais do RRS
