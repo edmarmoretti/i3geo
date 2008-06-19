@@ -337,7 +337,12 @@ $valor - Valor.
 		if($this->layer->connectiontype == MS_POSTGIS)
 		{$this->layer->querybyattributes($item,$item." ".$operador." '".$valor."' ",1);}
 		else
-		{$this->layer->querybyattributes($item,'("['.$item.']"'.$operador.'"'.$valor.'")',1);}
+		{		
+			if(!is_numeric($valor))
+			{$this->layer->querybyattributes($item,'("['.$item.']"'.$operador.'"'.$valor.'")',1);}
+			else
+			{$this->layer->querybyattributes($item,'(['.$item.']'.$operador.' '.$valor.' )',1);}
+		}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();
 		for ($i = 0; $i < $res_count; ++$i)
