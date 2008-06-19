@@ -413,7 +413,9 @@ function importarXmlMenu()
 	include_once("../../classesphp/funcoes_gerais.php");
 	include("conexao.php");
 	$dbhw->query("INSERT INTO i3geoadmin_menus (desc_menu,nome_menu) VALUES ('','$nomemenu')");
-	$id_menu = $dbhw->lastInsertId("id_menu");
+	$id_menu = $dbhw->query("SELECT id_menu FROM i3geoadmin_menus");
+	$id_menu = $id_menu->fetchAll();
+	$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
 
 	$xml = simplexml_load_file($xml);
 	//
@@ -537,7 +539,10 @@ function importarXmlMenu()
 		$r = $dbhw->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
 		$id_grupo = $r->fetchColumn();
 		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ('$id_menu','$id_grupo','$n1_perfil')");
-		$id_n1 = $dbhw->lastInsertId("id_n1");	
+		$id_n1 = $dbhw->query("SELECT id_menu FROM i3geoadmin_n1");
+		$id_n1 = $id_n1->fetchAll();
+		$id_n1 = intval($id_n1[count($id_n1)-1]['id_n1']);
+
 		foreach($grupo->TEMA as $tema)
 		{
 			$codigo = ixml($tema,"TID");
@@ -554,7 +559,9 @@ function importarXmlMenu()
 			$id_subgrupo = $r->fetchColumn();
 
 			$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ('$id_n1','$id_subgrupo','$n2_perfil')");
-			$id_n2 = $dbhw->lastInsertId("id_n2");	
+			$id_n2 = $dbhw->query("SELECT id_n2 FROM i3geoadmin_n2");
+			$id_n2 = $id_n2->fetchAll();
+			$id_n2 = intval($id_n2[count($id_n2)-1]['id_n2']);
 			foreach($subgrupo->TEMA as $tema)
 			{
 				$codigo = ixml($tema,"TID");

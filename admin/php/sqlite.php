@@ -16,6 +16,8 @@ foreach($resultado as $r)
 	echo $r["sql"]."<br>";
 }
 echo "<br><br><span style=color:red >SQL no padrão POSTGRES</span><br><br>";
+echo "<br><br>Após criar as tabelas no Postgres, vc deve definir as permissões para os usuários.<br><br>";
+echo "<br><br>Para usar outro banco de dados que não seja o default (SQLITE), você terá de alterar o programa i3geo/admin/php/conexao.php<br><br>";
 foreach($resultado as $r)
 {
 	echo str_ireplace("INTEGER PRIMARY KEY","SERIAL",$r["sql"])."<br>";

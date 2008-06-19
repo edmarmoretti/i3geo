@@ -199,7 +199,9 @@ function importarXmlSistemas()
 		if(!isset($sistemasExistentes[$nome]))
 		$dbhw->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('$nome','$perfil')");
 		$sistemasExistentes[$nome] = 0;
-		$id_sistema = $dbh->lastInsertId("id_sistema");
+		$id_sistema = $dbhw->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+		$id_sistema = $id_sistema->fetchAll();
+		$id_sistema = intval($id_sistema[count($id_sistema)-1]['id_sistema']);
 		foreach ($item->FUNCAO as $funcao)
 		{
 			$abrir_funcao = ixml($funcao,"ABRIR");

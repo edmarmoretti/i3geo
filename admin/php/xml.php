@@ -328,7 +328,8 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 }
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
-	$q = "select tema.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t,i3geoadmin_temas as tema where tema.id_tema = t.id_tema and t.id_prancha = $id_prancha ";
+	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = $id_prancha";
+	//echo $q;
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)
 	{
@@ -337,7 +338,6 @@ function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 		$xml .= "<LIGADO>".$row["ligado_tema"]."</LIGADO>\n";
 		$xml .= "</TEMA>\n";
 	}
-	
 }
 function geraXmlSistemas_pegafuncoes($perfil,&$xml,$id_sistema,$dbh)
 {
@@ -356,7 +356,7 @@ function geraXmlSistemas_pegafuncoes($perfil,&$xml,$id_sistema,$dbh)
 		{
 			$xml .= "<FUNCAO>\n";
 			$xml .= " <NOMEFUNCAO>".xmlTexto_prepara($row["nome_funcao"])."</NOMEFUNCAO>\n";
-			$xml .= " <ABRIR>".$row["abrir_funcao"]."</ABRIR>\n";
+			$xml .= " <ABRIR>".xmlTexto_prepara($row["abrir_funcao"])."</ABRIR>\n";
 			$xml .= " <JANELAW>".$row["w_funcao"]."</JANELAW>\n";
 			$xml .= " <JANELAH>".$row["h_funcao"]."</JANELAH>\n";
 			$xml .= " <PERFIL>".$row["perfil_funcao"]."</PERFIL>\n";
