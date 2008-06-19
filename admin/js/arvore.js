@@ -79,7 +79,7 @@ function pegaTemasRaiz(nivel,id_nivel,onde)
 		{
 			if (nivel == $temasRaiz[i].nivel && id_nivel == $temasRaiz[i].id_nivel && $i("menusel").value == $temasRaiz[i].id_menu)
 			{
-				ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td></tr>";
+				ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td><td></td></tr>";
 				ins += "<tr>"
 				ins += "<td><div class=excluir title='Excluir' onclick='excluirRaiz(\""+nivel+"\",\""+id_nivel+"\",\""+$temasRaiz[i].id_raiz+"\",\""+onde+"\")'/></td>"
 				ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarRaiz(\""+$temasRaiz[i].id_raiz+"\",\""+nivel+"\",\""+id_nivel+"\",\""+onde+"\")'/></td>"
@@ -87,7 +87,12 @@ function pegaTemasRaiz(nivel,id_nivel,onde)
 				ins += comboObjeto($temas,"id_tema","nome_tema",$temasRaiz[i].id_tema)
 				ins += "</select>"
 				ins += "</td>"
-				ins += "<td><input onchange=this.style.color='blue'  id='raizPerfil_"+$temasRaiz[i].id_raiz+"' type=text size=35 value='"+$temasRaiz[i].perfil+"' /></td></tr>"
+				ins += "<td><input onchange=this.style.color='blue'  id='raizPerfil_"+$temasRaiz[i].id_raiz+"' type=text size=35 value='"+$temasRaiz[i].perfil+"' /></td>"
+				var idtemp = 'raizPerfil_'+$temasRaiz[i].id_raiz
+				ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
+				ins += comboObjeto($perfis,"perfil","perfil","")
+				ins += "</select></td></tr>"
+
 				ins += "</table>"
 			}
 		}
@@ -95,6 +100,7 @@ function pegaTemasRaiz(nivel,id_nivel,onde)
 	}
 	$i(onde).innerHTML = ins;
 }
+
 function pegaNosRaiz()
 {
 	$i("nivel1").innerHTML = $mensagemAguarde
@@ -108,7 +114,7 @@ function pegaNosRaiz()
 		{
 			ins += "<div id=n1_"+r[i].id_n1+" ><fieldset style='border:1px solid black;background-color:white' ><legend style='background-color:white;'><b>+- grupo "+r[i].id_n1+"</b></legend>"
 			ins += "<div style=display:none >"
-		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td></tr>";
+		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td><td></td></tr>";
 			ins += "<tr>"
 			ins += "<td><div class=excluir title='Excluir' onclick='excluir(\"n1\",\""+r[i].id_n1+"\",\"id_n1\",\""+r[i].id_n1+"\")'/></td>"
 			ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarGrupo(\""+r[i].id_n1+"\")'/></td>"
@@ -116,7 +122,11 @@ function pegaNosRaiz()
 			ins += comboObjeto($grupos,"id_grupo","nome_grupo",r[i].id_grupo)
 			ins += "</select>"
 			ins += "</td>"
-			ins += "<td><input onchange=this.style.color='blue'  id='perfiln1_"+r[i].id_n1+"' type=text size=35 value='"+r[i].n1_perfil+"' /></td></tr>"
+			ins += "<td><input onchange=this.style.color='blue'  id='perfiln1_"+r[i].id_n1+"' type=text size=35 value='"+r[i].n1_perfil+"' /></td>"
+			var idtemp = 'perfiln1_'+r[i].id_n1
+			ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
+			ins += comboObjeto($perfis,"perfil","perfil","")
+			ins += "</select></td></tr>"
 			ins += "</table>"
 			ins += "<table><tr><td><input style=font-size:10px onclick='alterarRaiz(\"\",\"1\",\""+r[i].id_n1+"\",\"raizn1_"+r[i].id_n1+"\")' type=button value='Adicionar tema na raiz desse n&iacute;vel' /></td>"
 			ins += "<td><input style=font-size:10px; type=button value='Adicionar sub-grupo' onclick='alterarSubGrupo(\""+r[i].id_n1+"\",\"\")'/></td>"
@@ -144,7 +154,7 @@ function pegaNosGrupo(idn1)
 		for (i=0;i<r.length;i++)
 		{
 			ins += "<div id=n2x_"+r[i].id_n2+" ><fieldset><legend style='background-color:white;'><b>subgrupo "+r[i].id_n2+"</b></legend>"
-		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td></tr>";
+		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td><td></td></tr>";
 			ins += "<tr>"
 			ins += "<td><div class=excluir title='Excluir' onclick='excluir(\"n2\",\""+r[i].id_n2+"\",\"id_n2\",\""+idn1+"\")'/></td>"
 			ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarSubGrupo(\""+r[i].id_n2+"\",\""+idn1+"\")'/></td>"
@@ -152,7 +162,12 @@ function pegaNosGrupo(idn1)
 			ins += comboObjeto($subGrupos,"id_subgrupo","nome_subgrupo",r[i].id_subgrupo)
 			ins += "</select>"
 			ins += "</td>"
-			ins += "<td><input onchange=this.style.color='blue'  id='perfiln2_"+r[i].id_n2+"' type=text size=35 value='"+r[i].n2_perfil+"' /></td></tr>"
+			ins += "<td><input onchange=this.style.color='blue'  id='perfiln2_"+r[i].id_n2+"' type=text size=35 value='"+r[i].n2_perfil+"' /></td>"
+			var idtemp = 'perfiln2_'+r[i].id_n2
+			ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
+			ins += comboObjeto($perfis,"perfil","perfil","")
+			ins += "</select></td></tr>"
+
 			ins += "</table>"
 			ins += "<table><tr>"
 			ins += "<td></td>"
@@ -180,7 +195,7 @@ function pegaNosSubGrupo(idn2)
 		for (i=0;i<r.length;i++)
 		{
 			ins += "<div  ><fieldset><legend style='background-color:white;'><b>tema "+r[i].id_n3+"</b></legend>"
-		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td></tr>";
+		    ins += "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Perfis (separe com v&iacute;rgula)</b></td><td></td></tr>";
 			ins += "<tr>"
 			ins += "<td><div class=excluir title='Excluir' onclick='excluir(\"n3\",\""+r[i].id_n3+"\",\"id_n3\",\""+idn2+"\")'/></td>"
 			ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarTema(\""+r[i].id_n3+"\",\""+idn2+"\")'/></td>"
@@ -188,7 +203,12 @@ function pegaNosSubGrupo(idn2)
 			ins += comboObjeto($temas,"id_tema","nome_tema",r[i].id_tema)
 			ins += "</select>"
 			ins += "</td>"
-			ins += "<td><input onchange=this.style.color='blue'  id='perfiln3_"+r[i].id_n3+"' type=text size=35 value='"+r[i].n3_perfil+"' /></td></tr>"
+			ins += "<td><input onchange=this.style.color='blue'  id='perfiln3_"+r[i].id_n3+"' type=text size=35 value='"+r[i].n3_perfil+"' /></td>"
+			var idtemp = 'perfiln3_'+r[i].id_n3
+			ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
+			ins += comboObjeto($perfis,"perfil","perfil","")
+			ins += "</select></td></tr>"
+
 			ins += "</table>"
 			//ins += "<div id=n3_"+r[i].id_n2+" ></div>"
 			ins += "</fieldset></div>"

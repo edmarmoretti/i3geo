@@ -63,12 +63,13 @@ grupos = function(retorno){$grupos = retorno.data;}
 subGrupos = function(retorno){$subGrupos = retorno.data;};
 temas = function(retorno){$temas = retorno.data;}
 temasRaiz = function(retorno){$temasRaiz = retorno.data;}
-
+listaPerfis = function(retorno){$perfis = retorno.data;}
 function pegaParametros()
 {
 	var cp = new cpaint();
 	//cp.set_async(false);
 	cp.set_response_type("JSON");
+	
 	var p = "../php/menutemas.php?funcao=pegaGrupos";
 	cp.call(p,"pegaMenus",grupos);
 
@@ -80,6 +81,9 @@ function pegaParametros()
 
 	var p = "../php/arvore.php?funcao=pegaTemasRaiz";
 	cp.call(p,"pegaMenus",temasRaiz);
+	
+	var p = "../php/menutemas.php?funcao=pegaPerfis";
+	cp.call(p,"pegaMenus",listaPerfis);
 }
 
 document.getElementById("aguarde").style.display="none"

@@ -70,7 +70,6 @@ function montaMapa(retorno,onde)
 			"linhas":[
 			{titulo:"Nome",prefixoid:"nome_",id:"id_mapa",valor:"nome_mapa"},
 			{titulo:"Descrição",prefixoid:"desc_",id:"id_mapa",valor:"desc_mapa"},
-			{titulo:"Perfis",prefixoid:"perfil_",id:"id_mapa",valor:"perfil_mapa"},
 			{titulo:"Extensão",prefixoid:"ext_",id:"id_mapa",valor:"ext_mapa"},
 			{titulo:"Imagem",prefixoid:"imagem_",id:"id_mapa",valor:"imagem_mapa"},
 			{titulo:"Outros",prefixoid:"outros_",id:"id_mapa",valor:"outros_mapa"},
@@ -86,6 +85,21 @@ function montaMapa(retorno,onde)
 		ins += "</select>"
 		ins += "</td>"
 		ins += "</tr>"
+		
+		ins += "<tr>"
+		ins += "<td>Perfis: </td>"
+		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='perfis_"+d[i].id_mapa+"' value='"+d[i].perfil_mapa+"' /></td>"
+		var idtemp = "perfis_"+d[i].id_mapa
+		ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
+		ins += comboObjeto($perfis,"perfil","perfil","")
+		ins += "</select></td></tr>"
+
+		ins += "</select>"
+		ins += "</td>"
+		ins += "</tr>"
+		
+		
+		
 		ins += "<tr>"
 		ins += "<td>Ligados: </td>"
 		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='ligados_"+d[i].id_mapa+"' value='"+d[i].ligados_mapa+"' /></td>"

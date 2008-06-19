@@ -257,16 +257,16 @@ function importarXmlAtlas()
 		$template = ixml($atlas,"TEMPLATEHTML");
 		$w = ixml($atlas,"WABERTURA");
 		$h = ixml($atlas,"HABERTURA");
+		if($w == ""){$w = 'null';}
+		if($h == ""){$h = 'null';}
 		$pranchadefault = ixml($atlas,"PRANCHADEFAULT");
 		$tipoguias = ixml($atlas,"TIPOGUIAS");
 		if(!isset($atlasExistentes[$titulo]))
-		$dbhw->query("INSERT INTO i3geoadmin_atlas (desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('$desc','$h','$w','$icone','$link','$pranchadefault','$template','$tipoguias','$titulo')");
-		$atlasExistentes[$titulo] = 0;
-		
+		$dbhw->query("INSERT INTO i3geoadmin_atlas (desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo')");
+		$atlasExistentes[$titulo] = 0;	
 		$id_atlas = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
 		$id_atlas = $id_atlas->fetchAll();
 		$id_atlas = intval($id_atlas[count($id_atlas)-1]['id_atlas']);
-
 		foreach ($atlas->PRANCHAS->PRANCHA as $prancha)
 		{
 			$titulo = ixml($prancha,"TITULO");
@@ -279,11 +279,9 @@ function importarXmlAtlas()
 			if($h == ""){$h = 'null';}
 			$mapext = ixml($prancha,"MAPEXT");
 			$dbhw->query("INSERT INTO i3geoadmin_atlasp (id_atlas,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,mapext_prancha) VALUES ('$id_atlas','$desc',$h,$w,'$icone','$link','$titulo','$mapext')");
-
 			$id_prancha = $dbhw->query("SELECT id_prancha FROM i3geoadmin_atlasp");
 			$id_prancha = $id_prancha->fetchAll();
 			$id_prancha = intval($id_prancha[count($id_prancha)-1]['id_prancha']);
-
 			foreach ($prancha->TEMAS->TEMA as $tema)
 			{
 				$codigo = ixml($tema,"CODIGO");

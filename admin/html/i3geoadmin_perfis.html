@@ -9,12 +9,9 @@
 </head>
 <body>
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - menu de temas</h1>
+<h1>Administração do i3geo - perfis</h1>
 <p><a href="../index.html">Voltar</a></p>
-<p>Este programa permite editar a lista de menus</p>
-<p>Você pode criar vários menus e depois acrescentar grupos, subgrupos e temas em cada um. 
-A lista de menus que serão utilizados no i3geo é definida no arquivo ms_configura.php.
-<p>O menu é baseado no banco admin.db.</p>
+<p>Este programa permite editar a lista de perfis</p>
 <p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
 dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
 alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
@@ -23,25 +20,15 @@ alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura
 </body>
 <script>
 /*
-Title: Administração da lista de menus do menu de temas
+Title: Administração da lista de perfis
 
-File: i3geo/admin/i3geoadmin_menus.htm
+File: i3geo/admin/i3geoadmin_perfis.htm
 */
 $parametros = {
 	"simples": [
-	{ mensagem: "Adicione, altere ou elimine menus cadastrados",cabeca: "Menus",variavel:"menus"}
+	{ mensagem: "Adicione, altere ou elimine perfis cadastrados",cabeca: "Perfis",variavel:"perfis"}
 	]};
+iniciaAdmin()
 document.getElementById("aguarde").style.display="none"
-var cp = new cpaint();
-//cp.set_async(false);
-cp.set_response_type("JSON");
-listaPerfis = function(retorno){$perfis = retorno.data;iniciaAdmin()}
-var p = "../php/menutemas.php?funcao=pegaPerfis";
-cp.call(p,"pegaMenus",listaPerfis);
-document.getElementById("aguarde").style.display="none"
-
-
-
-
 </script>
 </html>

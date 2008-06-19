@@ -27,7 +27,12 @@ Title: Administração do cadastro de sistemas especiais
 
 File: i3geo/admin/sistemas.htm
 */
-iniciaAdmin()
+var cp = new cpaint();
+//cp.set_async(false);
+cp.set_response_type("JSON");
+listaPerfis = function(retorno){$perfis = retorno.data;iniciaAdmin()}
+var p = "../php/menutemas.php?funcao=pegaPerfis";
+cp.call(p,"pegaMenus",listaPerfis);
 document.getElementById("aguarde").style.display="none"
 </script>
 </html>

@@ -32,12 +32,28 @@ Title: Administração da lista de mapas
 
 File: i3geo/admin/mapas.htm
 */
-var cp = new cpaint();
-//cp.set_async(false);
-cp.set_response_type("JSON");
+var iniciaM = function(retorno)
+{
+	pegaParametros()	
+	iniciaAdmin()
+	document.getElementById("aguarde").style.display="none"
+}
+
 temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
-var p = "../php/menutemas.php?funcao=pegaTemas";
-cp.call(p,"pegaMenus",temas);
-document.getElementById("aguarde").style.display="none"
+listaPerfis = function(retorno){$perfis = retorno.data}
+
+function pegaParametros()
+{
+	var cp = new cpaint();
+	//cp.set_async(false);
+	cp.set_response_type("JSON");
+
+	var p = "../php/menutemas.php?funcao=pegaTemas";
+	cp.call(p,"pegaMenus",temas);
+	var p = "../php/menutemas.php?funcao=pegaPerfis";
+	cp.call(p,"pegaMenus",listaPerfis);
+}
+iniciaM()
+
 </script>
 </html>

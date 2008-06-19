@@ -262,3 +262,11 @@ function geraLinhas2(dados,param,funcao)
 	while(contaParam < nparam)
 	return(resultado)
 }
+function registraPerfil(id,perfil)
+{
+	var perfis = $i(id).value
+	if(perfil == "")
+	$i(id).value = perfil
+	else
+	$i(id).value = $i(id).value+" "+perfil
+}

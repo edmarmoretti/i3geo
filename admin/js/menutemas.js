@@ -81,6 +81,28 @@ Pega os parâmetros do mapfiles.php
 */
 function pegaParametros(tipo)
 {
+	if(tipo == "perfis" || arguments.length == 0 && $i("perfis"))
+	{
+		var retornaPerfis = function(retorno)
+		{
+			var r = retorno.data
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td></td><td></td></tr>";
+			for (i=0;i<r.length;i++)
+			{
+				ins += "<tr>"
+				ins += "<td><div class=excluir title='Excluir' onclick='excluir(\"perfis\",\""+r[i].id_perfil+"\")'/></td>"
+				ins += "<td>"
+				ins += "<div class=aplicar title='Aplicar' onclick='alterar(\"perfis\",\""+r[i].id_perfil+"\")'/>"
+				ins += "</td>"
+				ins += "<td><input onchange=this.style.color='blue' id='nomeperfil_"+r[i].id_perfil+"' type=text size=40 value='"+r[i].perfil+"'/></td>"
+				ins += "</tr>"
+			}
+			ins += "</table>"
+			$i("perfis").innerHTML = ins;
+		}
+		var p = "../php/menutemas.php?funcao=pegaPerfis";
+		cPaint.call(p,"pegaPerfis",retornaPerfis);
+	}
 	if(tipo == "tags" || arguments.length == 0 && $i("tags"))
 	{
 		var retornaTags = function(retorno)
@@ -108,7 +130,7 @@ function pegaParametros(tipo)
 		var retornaMenus = function(retorno)
 		{
 			var r = retorno.data
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td>Perfil</td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td>Perfil</td><td></td></tr>";
 			for (i=0;i<r.length;i++)
 			{
 				ins += "<tr>"
@@ -120,6 +142,12 @@ function pegaParametros(tipo)
 				ins += combosimnao(r[i].aberto)
 				ins += "</td>"
 				ins += "<td><input onchange=this.style.color='blue'  id='perfilmenu_"+r[i].id_menu+"' type=text size=20 value='"+r[i].perfil_menu+"' /></td>"
+				var idtemp = 'perfilmenu_'+r[i].id_menu
+				ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  id='escolhePerfilMenu_"+r[i].id_menu+"' >"
+				ins += comboObjeto($perfis,"perfil","perfil","")
+				ins += "</select>"
+				ins += "</td>"
+
 				ins += "</tr>"
 			}
 			ins += "</table>"
@@ -285,6 +313,7 @@ function registraTag(id,tag)
 	else
 	$i(id).value = $i(id).value+" "+tag
 }
+
 /*
 Function: alterar
 
@@ -296,6 +325,19 @@ function alterar(prefixo,id)
 	//{
 		var retorna = function()
 		{pegaParametros(prefixo);}
+		if(prefixo == "perfis")
+		{
+			if (id != "")
+			{
+				var nome = $i("nomeperfil_"+id).value
+			}
+			else
+			{
+				var nome = "";
+			}
+			$i(prefixo).innerHTML =$mensagemAguarde
+			var p = "../php/menutemas.php?funcao=alteraPerfis&perfil="+nome+"&id="+id;	
+		}
 		if(prefixo == "tags")
 		{
 			if (id != "")
@@ -308,8 +350,7 @@ function alterar(prefixo,id)
 			}
 			$i(prefixo).innerHTML =$mensagemAguarde
 			var p = "../php/menutemas.php?funcao=alteraTags&nome="+nome+"&id="+id;
-			//window.open(p)
-		
+			//window.open(p)		
 		}
 		if(prefixo == "menus")
 		{

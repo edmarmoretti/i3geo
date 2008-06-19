@@ -164,6 +164,7 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		// a função gravaId será executada no final do processo de geração do mapa (ver ms_criamapa.php)
 		//
 		$executa = "gravaId";
+		$temasa = "";
 		include_once("../ms_criamapa.php");
 		exit;
 	break;
