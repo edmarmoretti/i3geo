@@ -64,7 +64,7 @@ function criarbuffer()
 	$i("fim").innerHTML ="";
 	var distancia = $i("d").value
 	tema = $i("temasComSel").value
-	if (distancia*1 > 0)
+	if (distancia*1 != 0)
 	{
 		aguarde("block")
 		var fim = function(retorno)
@@ -82,4 +82,6 @@ function criarbuffer()
 		//cp.set_persistent_connection(true);
 		cp.call(p,"criaBuffer",fim);
 	}
+	else
+	{alert("Distancia invalida")}
 }

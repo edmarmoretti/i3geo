@@ -1180,7 +1180,7 @@ nome do layer criado com o buffer.
 				$dd2->setXY(($poPoint->x + $distancia), $poPoint->y);
 				$dd2->project($projOutObj,$projInObj);
 				$d = $dd1->distanceToPoint($dd2);
-				if ($d < 0){$d = $d * -1;}
+				if ($distancia < 0){$d = $d * -1;}
 				//calcula a distancia 29100
 				//gera o buffer
 				$buffers[] = $shape->buffer($d);
