@@ -1,18 +1,25 @@
 //eventos das guias
 document.getElementById("guia1").onclick = function()
-{document.getElementById("guia1obj").style.display="block";}
+{escondeGuias();document.getElementById("guia1obj").style.display="block";}
 document.getElementById("guia2").onclick = function()
-{document.getElementById("guia2obj").style.display="block";}
+{escondeGuias();document.getElementById("guia2obj").style.display="block";}
 document.getElementById("guia3").onclick = function()
-{document.getElementById("guia3obj").style.display="block";}
+{escondeGuias();document.getElementById("guia3obj").style.display="block";}
 document.getElementById("guia5").onclick = function()
-{document.getElementById("guia5obj").style.display="block";}
+{escondeGuias();document.getElementById("guia5obj").style.display="block";}
 document.getElementById("guia6").onclick = function()
 {
 	window.parent.document.getElementById("wdoca").style.display="none";
 	//window.parent.print(); 
 }
-
+function escondeGuias()
+{
+	document.getElementById("guia1obj").style.display="none";
+	document.getElementById("guia2obj").style.display="none";
+	document.getElementById("guia3obj").style.display="none";
+	document.getElementById("guia5obj").style.display="none";
+	document.getElementById("guia6obj").style.display="none";
+}
 objtitulo = new prop()
 objtitulo.id = "titulo"
 objtitulo.idtopo = "tituloTopo"
