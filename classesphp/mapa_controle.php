@@ -1447,7 +1447,7 @@ Include:
 	case "insereSHPgrafico":
 		include("classe_shp.php");
 		copiaSeguranca($map_file);
-		$m = new SHP($map_file,$tema);
+		$m = new SHP($map_file,$tema,$locaplic);
 		$cp->set_data($m->insereSHPgrafico($tipo,$x,$y,$itens,$imgurl,$width,$inclinacao,$shadow_height));
 	break;
 /*
