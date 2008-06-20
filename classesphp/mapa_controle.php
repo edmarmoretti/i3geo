@@ -79,7 +79,7 @@ Include:
 <pega_variaveis.php>, <carrega_ext.php>, <cpaint2.inc.php>, <classe_vermultilayer.php>, <classe_estatistica.php>, <funcoes_gerais.php>
 
 */
-error_reporting(0);
+error_reporting(E_ALL);
 
 //sleep(5);
 
@@ -103,8 +103,11 @@ if ($funcao != "criaMapa")
 	{
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
-	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
-	{exit;}
+	if(isset($fingerprint))
+	{
+		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
+		{exit;}
+	}
 }
 //
 //verifica se deve ativar o debug
