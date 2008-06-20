@@ -88,6 +88,11 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 	
+	case "pegaTemas2":
+	$cp->set_data(pegaTemas2());
+	$cp->return_data();
+	break;	
+	
 	case "alteraTemas":
 	$cp->set_data(alteraTemas());
 	$cp->return_data();
@@ -241,6 +246,41 @@ function pegaTemas()
 				"ogc_tema"=>$row['ogc_tema'],
 				"kml_tema"=>$row['kml_tema'],
 				"tags_tema"=>$row['tags_tema']
+				);
+    	}
+    	$dbh = null;
+    	$dbh = null;
+    	return $resultado;
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+function pegaTemas2()
+{
+	global $filtro;
+	try 
+	{
+    	$resultado = array();
+    	require_once("conexao.php");
+    	foreach($dbh->query('SELECT codigo_tema,nome_tema from i3geoadmin_temas order by nome_tema') as $row)
+    	{
+        	$continua = true;
+        	if(isset($filtro) && $filtro != "")
+        	{
+        		$continua = false;
+        		if ($row['codigo_tema'] == $filtro)
+        		{$continua = true;}
+        		$testanome = mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+        		if (!stristr($row['nome_tema'],$testanome) === FALSE)
+        		{$continua = true;}
+        	}
+        	if($row['codigo_tema'] == ""){$continua = true;}
+        	if ($continua)
+        	$resultado[] = array(
+				"nome_tema"=>$row['nome_tema'],
+				"codigo_tema"=>$row['codigo_tema']
 				);
     	}
     	$dbh = null;

@@ -29,7 +29,7 @@ Free Software Foundation, Inc., no endereço
 /*
 Variable: $mensagemAguarde
 */
-$mensagemAguarde = "<span style=color:red ><p>Aguarde...</p></span>"
+$mensagemAguarde = "<img src='../../imagens/aguarde.gif' />";//"<span style=color:red ><p>Aguarde...</p></span>"
 
 $i = function(i)
 {return document.getElementById(i);};
@@ -167,14 +167,14 @@ Retorna os itens option de um combo baseado em um objeto json
 function comboObjeto(obj,valor,texto,marcar)
 {
 	var ins = "<option value='' "
-	if (marcar == ""){ins += "selected"}
+	//if (marcar == ""){ins += "selected"}
 	ins += ">---</option>";
 	for (var k=0;k<obj.length;k++)
 	{
 		var v = eval("obj[k]."+valor)
 		var t = eval("obj[k]."+texto)
 		ins += "<option value='"+v+"' "
-		if (marcar == v || marcar == v.toLowerCase()){ins += "selected"}
+		if (marcar == v){ins += "selected"}
 		ins += ">"+t+"</option>";
 	}
 	return(ins)

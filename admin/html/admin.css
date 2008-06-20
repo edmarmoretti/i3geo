@@ -63,8 +63,8 @@ input
 }
 .fieldsetRaiz
 {background-color:rgb(252,210,186);}
-#fieldset
+fieldset
 {
-text-align:left;
-
+	text-align:left;
+	padding: 10px;
 }

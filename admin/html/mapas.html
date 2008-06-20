@@ -8,8 +8,9 @@
 </head>
 <body>
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - mapas</h1>
+<h1>Administração do i3geo - mapas <img src="../imagens/04.png" style="cursor:pointer" onclick="$i('ajuda').style.display='block'"/></h1>
 <p><a href="../index.html">Voltar</a></p>
+<div id=ajuda style="display:none">
 <p>Este programa permite editar a lista de mapas</p>
 <p>O menu é baseado no banco admin.db.</p>
 <p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
@@ -23,8 +24,8 @@ alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura
 <p>Temas: códigos dos temas que serão mostrados no mapa</p>
 <p>Ligados: códigos dos temas que estarão ligados no mapa (visíveis). Os códigos devem constar no item Temas</p>
 <p>Perfil: lista de perfis de usuários que podem ver o mapa. Separe com vírgulas</p>
-</div>
-<div id=aguarde style="color:red" ><p>Aguarde...</p></div>
+</div></div>
+<div id=aguarde style="color:red" ><img src="../../imagens/aguarde.gif" /></div>
 </body>
 <script>
 /*
@@ -32,28 +33,30 @@ Title: Administração da lista de mapas
 
 File: i3geo/admin/mapas.htm
 */
-var iniciaM = function(retorno)
+function iniciaM(retorno)
 {
-	pegaParametros()	
 	iniciaAdmin()
 	document.getElementById("aguarde").style.display="none"
 }
-
-temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
-listaPerfis = function(retorno){$perfis = retorno.data}
-
-function pegaParametros()
+temas = function(retorno){$temas = retorno.data;pegaPerfis()}
+listaPerfis = function(retorno){$perfis = retorno.data;iniciaM()}
+function pegaTemas()
 {
 	var cp = new cpaint();
-	//cp.set_async(false);
+	//cp.set_async("false");
 	cp.set_response_type("JSON");
-
 	var p = "../php/menutemas.php?funcao=pegaTemas";
-	cp.call(p,"pegaMenus",temas);
-	var p = "../php/menutemas.php?funcao=pegaPerfis";
-	cp.call(p,"pegaMenus",listaPerfis);
+	cp.call(p,"pegaTemas",temas);
 }
-iniciaM()
+function pegaPerfis()
+{
+	var cp = new cpaint();
+	//cp.set_async("false");
+	cp.set_response_type("JSON");
+	var p = "../php/menutemas.php?funcao=pegaPerfis";
+	cp.call(p,"pegaPerfis",listaPerfis);
+}
+pegaTemas()
 
 </script>
 </html>
