@@ -53,10 +53,12 @@ $locaplic - (opcional) endereço físico do i3geo
 $menutemas - (opcional) array contendo a lista de menus para compor a árvore de temas (veja o i3geo/ms_configura)
 
 $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
+
+$editores - (opcional) array com os editores cadastrados no ms_configura.php
 */  	
-	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="")
+	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="")
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locsistemas = $locsistemas;
@@ -75,6 +77,14 @@ $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 				{$this->layers[] = $this->mapa->getlayer($i);}
 			}
 		}
+		//
+		//verifica se o ip atual está cadastrado comoum dos editores
+		//editores podem ver as coisas marcadas como não publicado
+		//no sistema de administração
+		//
+		$this->editor = false;
+		if($editores != "")
+		{$this->editor = $this->verificaeditores();}
 	}
 /*
 function: pegaListaDeMenus
@@ -101,7 +111,6 @@ array
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
-			//include_once($this->locaplic."/admin/php/xml.php");
 			include_once($this->locaplic."/admin/php/conexao.php");
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -113,10 +122,15 @@ array
 				$perfis = str_replace(","," ",$reg["perfil_menu"]); 
 				$perfis = explode(" ",$perfis); 
 				if (($this->array_in_array($this->perfil,$perfis)) || ($reg["perfil_menu"] == ""))
-				$status = "fechado";
-				if(strtolower($reg["aberto"]) == "sim")
-				$status = "aberto";
-				$resultado[] = array("nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
+				{
+					if(strtolower($reg["publicado_menu"]) != "nao" || $this->editor)
+					{
+						$status = "fechado";
+						if(strtolower($reg["aberto"]) == "sim")
+						$status = "aberto";
+						$resultado[] = array("publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
+					}
+				}
 			}
 		}
 		else
@@ -865,6 +879,21 @@ nrss - (opcional) número de registros no rss que serão considerados
         	if(in_array($pin, $haystack)) return TRUE;
     	//Return FALSE if none of the values from $needle are found in $haystack
     	return FALSE;
+	}
+	function verificaEditores($editores)
+	{
+		$editor = "nao";
+		foreach ($editores as $e)
+		{
+			$e = gethostbyname($e);
+			$ip = "UNKNOWN";
+			if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+			else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+			else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+			else $ip = "UNKNOWN";
+			if ($e == $ip){$editor="sim";}
+		}
+		return $editor;
 	}
 }
 ?>

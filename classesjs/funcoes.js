@@ -911,6 +911,14 @@ function pegalistademenus(retorno)
 				var nome = retorno.data[i].nomemenu;
 				else
 				var nome = retorno.data[i].idmenu;
+				//
+				//muda a cor se o menu não estiver publicado
+				//
+				if(retorno.data[i].publicado)
+				{
+					if(retorno.data[i].publicado == "NAO")
+					{var nome = "<s>"+nome+"</s>";}
+				}
 				var status = "aberto";
 				if(retorno.data[i].status)
 				{var status = retorno.data[i].status;}

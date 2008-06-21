@@ -136,7 +136,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Veja a documentação específica do arquivo sistemas.xml para maiores detalhes.
 	*/
-	$locsistemas = "http://localhost/i3geo/menutemas/sistemas.xml";
+	$locsistemas = "";
 	/*
 	Variable: $locidentifica 
 	
@@ -153,7 +153,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 
 	*/
-	$locidentifica = "../../menutemas/identifica.xml";
+	$locidentifica = "";
 	/*
 	Variable: $locmapas 
 	
@@ -167,7 +167,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
-	$locmapas = "http://localhost/i3geo/menutemas/mapas.xml";
+	$locmapas = "";
 	/*
 	Variable: $R_path
 	
@@ -229,10 +229,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
-	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/geopr.xml","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"C:/ms4w/Apache/htdocs/i3geo/menutemas/menutemas.xml","status"=>"aberto")
-		);
+	$menutemas = "";
 
 	/*
 	Variable: $utilizacgi
@@ -256,7 +253,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
 	*/
-	$atlasxml = "../menutemas/atlas.xml";
+	$atlasxml = "";
 	/*
 	 Variable: $expoeMapfile
 	 
@@ -293,19 +290,16 @@ else //se for linux
 	$temasaplic = "/opt/www/html/i3geo/aplicmap";
 	$locmapserv = "/cgi-bin/mapserv";
 	$locaplic = "/opt/www/html/i3geo";
-	$locsistemas= "http://mapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
-	$locidentifica = "http://mapas.mma.gov.br/i3geo/menutemas/identifica.xml";
-	$locmapas = "http://mapas.mma.gov.br/abremapa.php?id=xml";
+	$locsistemas= "";//"http://mapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
+	$locidentifica = "";//"http://mapas.mma.gov.br/i3geo/menutemas/identifica.xml";
+	$locmapas = "";//"http://mapas.mma.gov.br/abremapa.php?id=xml";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_con = "";
 	$srid_area = 1;
 	$postgis_mapa = "";
-	$menutemas = array(
-		array("idmenu"=>"GEOPR","arquivo"=>"/opt/www/html/i3geo/menutemas/geopr.xml","status"=>"fechado"),
-		array("idmenu"=>"i3Geo","arquivo"=>"/opt/www/html/i3geo/menutemas/menutemas.xml","status"=>"aberto")
-		);
+	$menutemas = "";
 	$utilizacgi = "nao";
-	$atlasxml = "../menutemas/atlas.xml";
+	$atlasxml = "";//"../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
 	$conexaoadmin = "";//$locaplic."/admin/conexaomma.php";
 }

@@ -319,7 +319,7 @@ Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
 {
-	global $nome,$desc,$id,$aberto,$perfil;
+	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu;
 	try 
 	{
 		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
@@ -327,10 +327,10 @@ function alteraMenus()
     	include("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_menus SET aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
+    		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_menus (nome_menu, desc_menu, aberto, perfil_menu) VALUES ('', '','sim','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','sim','')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";

@@ -130,12 +130,15 @@ function pegaParametros(tipo)
 		var retornaMenus = function(retorno)
 		{
 			var r = retorno.data
-			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td>Perfil</td><td></td></tr>";
+			var ins = "<table class=lista ><tr><td></td><td></td><td><b>Publicado</td><td><b>Nome</td><td><b>Descrição</td><td><b>Aberto</td><td><b>Perfil</td><td></td></tr>";
 			for (i=0;i<r.length;i++)
 			{
 				ins += "<tr>"
 				ins += "<td>id= "+r[i].id_menu+"<div class=excluir title='Excluir' onclick='excluir(\"menus\",\""+r[i].id_menu+"\")'/></td>"
 				ins += "<td><div class=aplicar title='Aplicar' onclick='alterar(\"menus\",\""+r[i].id_menu+"\")'/></td>"
+				ins += "<td><select onchange=this.style.color='blue'  id='publicadomenu_"+r[i].id_menu+"' >"
+				ins += combosimnao(r[i].publicado_menu)
+				ins += "</td>"
 				ins += "<td><input onchange=this.style.color='blue' id='nomemenu_"+r[i].id_menu+"' type=text size=40 value='"+r[i].nome_menu+"'/></td>"
 				ins += "<td><input onchange=this.style.color='blue'  id='descmenu_"+r[i].id_menu+"' type=text size=20 value='"+r[i].desc_menu+"' /></td>"
 				ins += "<td><select onchange=this.style.color='blue'  id='abertomenu_"+r[i].id_menu+"' >"
@@ -147,7 +150,6 @@ function pegaParametros(tipo)
 				ins += comboObjeto($perfis,"perfil","perfil","")
 				ins += "</select>"
 				ins += "</td>"
-
 				ins += "</tr>"
 			}
 			ins += "</table>"
@@ -360,6 +362,7 @@ function alterar(prefixo,id)
 				var desc = $i("descmenu_"+id).value
 				var aberto = $i("abertomenu_"+id).value
 				var perfil = $i("perfilmenu_"+id).value
+				var publicado_menu = $i("publicadomenu_"+id).value
 				if(nome == "null"){var nome = "";}
 				if(desc == "null"){var desc = "";}
 				if(aberto == "null"){var aberto = "";}
@@ -371,9 +374,10 @@ function alterar(prefixo,id)
 				var desc = "";
 				var aberto = "";
 				var perfil = "";
+				var publicado_menu = "";
 			}
 			$i(prefixo).innerHTML =$mensagemAguarde
-			var p = "../php/menutemas.php?funcao=alteraMenus&perfil="+perfil+"&nome="+nome+"&desc="+desc+"&id="+id+"&aberto="+aberto;
+			var p = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil+"&nome="+nome+"&desc="+desc+"&id="+id+"&aberto="+aberto;
 		}
 		if(prefixo == "grupos")
 		{
