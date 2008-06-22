@@ -39,7 +39,7 @@ switch ($funcao)
 	break;
 	
 	case "pegaMapas":
-	$cp->set_data(pegaDados('SELECT id_mapa,nome_mapa from i3geoadmin_mapas order by ordem_mapa'));
+	$cp->set_data(pegaDados('SELECT id_mapa,nome_mapa,publicado_mapa from i3geoadmin_mapas order by ordem_mapa'));
 	$cp->return_data();
 	break;
 
@@ -71,16 +71,16 @@ Altera o registro de um mapa
 */
 function alterarMapa()
 {
-	global $ordem_mapa,$id_mapa,$desc,$ext,$imagem,$outros,$nome,$linkdireto,$temas,$ligados,$perfil;
+	global $publicado_mapa,$ordem_mapa,$id_mapa,$desc,$ext,$imagem,$outros,$nome,$linkdireto,$temas,$ligados,$perfil;
 	try 
 	{
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
     	if($id_mapa != "")
-    	$dbhw->query("UPDATE i3geoadmin_mapas SET ordem_mapa='$ordem_mapa',desc_mapa = '$desc',ext_mapa = '$ext',imagem_mapa = '$imagem',outros_mapa = '$outros',nome_mapa = '$nome', linkdireto_mapa = '$linkdireto',temas_mapa = '$temas',ligados_mapa = '$ligados',perfil_mapa = '$perfil' WHERE id_mapa = $id_mapa");
+    	$dbhw->query("UPDATE i3geoadmin_mapas SET publicado_mapa='$publicado_mapa',ordem_mapa='$ordem_mapa',desc_mapa = '$desc',ext_mapa = '$ext',imagem_mapa = '$imagem',outros_mapa = '$outros',nome_mapa = '$nome', linkdireto_mapa = '$linkdireto',temas_mapa = '$temas',ligados_mapa = '$ligados',perfil_mapa = '$perfil' WHERE id_mapa = $id_mapa");
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_mapas (ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('','','','','','','','','','$nome')");
+    	$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,ordem_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,outros_mapa,temas_mapa,ligados_mapa,nome_mapa) VALUES ('','','','','','','','','','','$nome')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -136,7 +136,7 @@ function importarXmlMapas()
 		$outros = ixml($mapa,"OUTROS");
 		$linkdireto = ixml($mapa,"LINKDIRETO");
 		if(!isset($mapasExistentes[$nome]))
-		$dbhw->query("INSERT INTO i3geoadmin_mapas (perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa,temas_mapa,ligados_mapa) VALUES ('$perfil','$descricao','$extensao','$imagem','$linkdireto','$nome','$outros','$temas','$ligados')");
+		$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa,temas_mapa,ligados_mapa) VALUES ('','$perfil','$descricao','$extensao','$imagem','$linkdireto','$nome','$outros','$temas','$ligados')");
 		$mapasExistentes[$nome] = 0;
 	}
 	$dbhw = null;

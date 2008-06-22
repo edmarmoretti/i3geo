@@ -3430,6 +3430,11 @@ function pegavalSistemas(sis)
 		do
 		{
 			var nomeSis = sis[ig].NOME;
+			if(sis[ig].PUBLICADO)
+			{
+				if(sis[ig].PUBLICADO == "NAO" || sis[ig].PUBLICADO == "nao")
+				{var nomeSis = "<s>"+sis[ig].NOME+"</s>";}
+			}
 			mytreeviewS.createItem("sis"+ig, nomeSis, "folder", true, true, true, "Sitem1");
 			var funcoes = sis[ig].FUNCOES;
 			var tempf = funcoes.length;
@@ -3471,6 +3476,11 @@ function pegaMapas(retorno)
 		do
 		{
 			var nome = mapa[ig1].NOME;
+			if(mapa[ig1].PUBLICADO)
+			{
+				if(mapa[ig1].PUBLICADO == "NAO" || mapa[ig1].PUBLICADO == "nao")
+				{var nome = "<s>"+nome+"</s>";}
+			}
 			var descricao = mapa[ig1].DESCRICAO;
 			var imagem = mapa[ig1].IMAGEM;
 			var temas = mapa[ig1].TEMAS;

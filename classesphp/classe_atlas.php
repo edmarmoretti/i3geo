@@ -64,7 +64,7 @@ tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atla
 		$atlas = array();
 		foreach($this->xml->ATLAS as $s)
 		{
-			$atlas[] =  array("ID"=>ixml($s,"ID"),"TITULO"=>ixml($s,"TITULO"),"DESCRICAO"=>ixml($s,"DESCRICAO"),"ICONE"=>ixml($s,"ICONE"),"W"=>ixml($s,"WABERTURA"),"H"=>ixml($s,"HABERTURA"),"TEMPLATEHTML"=>ixml($s,"TEMPLATEHTML"));
+			$atlas[] =  array("PUBLICADO"=>ixml($s,"PUBLICADO"),"ID"=>ixml($s,"ID"),"TITULO"=>ixml($s,"TITULO"),"DESCRICAO"=>ixml($s,"DESCRICAO"),"ICONE"=>ixml($s,"ICONE"),"W"=>ixml($s,"WABERTURA"),"H"=>ixml($s,"HABERTURA"),"TEMPLATEHTML"=>ixml($s,"TEMPLATEHTML"));
 		}
 		return (array("atlas"=>$atlas,"tituloinstituicao"=>$tituloinstituicao,"atlasxml"=>$this->arquivo));
 	}

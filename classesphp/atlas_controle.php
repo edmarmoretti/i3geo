@@ -75,10 +75,9 @@ if(isset($g_sid))
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 {$map_file = "";}
 
-if (!isset($atlasxml) || $atlasxml == "")
+if (!isset($atlasxml) || $atlasxml == "" || !isset($editores))
 {
 	include_once("../ms_configura.php");
-	//$map_file = "";
 }
 //
 //ativa o php mapscript e as extensões necessárias
@@ -118,7 +117,7 @@ if ($map_file != "")
 if($atlasxml == "")
 {
 	include($locaplic."/admin/php/xml.php");
-	$xml = simplexml_load_string(geraXmlAtlas($locaplic));
+	$xml = simplexml_load_string(geraXmlAtlas($locaplic,$editores));
 }
 else
 $xml = simplexml_load_file($atlasxml);

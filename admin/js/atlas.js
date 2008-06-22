@@ -100,6 +100,14 @@ function pegaDadosAtlas(id_atlas)
 		ins += "</select>"
 		ins += "</td>"
 		ins += "</tr>"
+		
+		ins += "<tr>"
+		ins += "<td>Publicado: </td>"
+		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d.id_atlas+"' >"
+		ins += combosimnao(d.publicado_atlas)
+		ins += "</td></tr>"
+		
+		
 		ins += "</table>"
 		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d.id_atlas+"\")'/></td>"
 		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarAtlas(\""+d.id_atlas+"\",\""+d.id_atlas+"\")'/></td>"
@@ -301,9 +309,11 @@ function alterarAtlas(id_atlas,onde)
 			var tipoguias_atlas = document.getElementById("tipoguias_"+id_atlas).value
 			var basemapfile_atlas = document.getElementById("basemapfile_"+id_atlas).value
 			var ordem_atlas = document.getElementById("ordematlas_"+id_atlas).value
+			var publicado_atlas = document.getElementById("publicado_"+id_atlas).value
 		}
 		else
 		{
+			var publicado_atlas = "";
 			var id_atlas = "";
 			var desc_atlas = ""
 			var h_atlas = "250"
@@ -321,7 +331,7 @@ function alterarAtlas(id_atlas,onde)
   			}
 			var basemapfile_atlas = "";
 		}
-		var p = "../php/atlas.php?funcao=alterarAtlas&ordem_atlas="+ordem_atlas+"&id_atlas="+id_atlas+"&basemapfile_atlas="+basemapfile_atlas+"&titulo_atlas="+titulo_atlas+"&desc_atlas="+desc_atlas+"&h_atlas="+h_atlas+"&w_atlas="+w_atlas+"&icone_atlas="+icone_atlas+"&link_atlas="+link_atlas+"&pranchadefault_atlas="+pranchadefault_atlas+"&template_atlas="+template_atlas+"&tipoguias_atlas="+tipoguias_atlas
+		var p = "../php/atlas.php?funcao=alterarAtlas&publicado_atlas="+publicado_atlas+"&ordem_atlas="+ordem_atlas+"&id_atlas="+id_atlas+"&basemapfile_atlas="+basemapfile_atlas+"&titulo_atlas="+titulo_atlas+"&desc_atlas="+desc_atlas+"&h_atlas="+h_atlas+"&w_atlas="+w_atlas+"&icone_atlas="+icone_atlas+"&link_atlas="+link_atlas+"&pranchadefault_atlas="+pranchadefault_atlas+"&template_atlas="+template_atlas+"&tipoguias_atlas="+tipoguias_atlas
 		cPaint.call(p,"",retorna);	
 	//}
 }

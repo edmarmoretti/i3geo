@@ -77,7 +77,15 @@ function montaSistemas(retorno,onde)
 		var idtemp = "perfil_"+d[i].id_sistema
 		ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
 		ins += comboObjeto($perfis,"perfil","perfil","")
-		ins += "</select></td></tr></table>"
+		ins += "</select></td></tr>"
+		
+		ins += "<tr>"
+		ins += "<td>Publicado: </td>"
+		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d[i].id_sistema+"' >"
+		ins += combosimnao(d[i].publicado_sistema)
+		ins += "</td><td></td></tr>"	
+		
+		ins += "</table>"
 
 		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d[i].id_sistema+"\")'/></td>"
 		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarSistemas(\""+d[i].id_sistema+"\",\""+d[i].id_sistema+"\")'/></td>"
@@ -173,16 +181,18 @@ function alterarSistemas(id_sistema,onde)
 		}
 		if (id_sistema != "")
 		{
-			var nome = $i("nome_"+id_sistema).value
-			var perfil = $i("perfil_"+id_sistema).value
+			var nome = $i("nome_"+id_sistema).value;
+			var perfil = $i("perfil_"+id_sistema).value;
+			var publicado = $i("publicado_"+id_sistema).value;
 		}
 		else
 		{
 			var id_sistema = "";
-			var nome = ""
-			var perfil = ""
+			var nome = "";
+			var perfil = "";
+			var publicado = "";
 		}
-		var p = "../php/sistemas.php?funcao=alterarSistemas&id_sistema="+id_sistema+"&nome="+nome+"&perfil="+perfil
+		var p = "../php/sistemas.php?funcao=alterarSistemas&publicado_sistema="+publicado+"&id_sistema="+id_sistema+"&nome="+nome+"&perfil="+perfil
 		cPaint.call(p,"",retorna);	
 	//}
 }

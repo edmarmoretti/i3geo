@@ -154,7 +154,12 @@ function pegaListaDeAtlas()
 					texto += "</td>";				
 					texto += "<td><div class='titulo' style='cursor:pointer' onclick='abreatlas(\""+listaAtlas[i].ID+"\")' >";
 					texto += "<input style='cursor:pointer' type='radio' name='atlas' value='"+listaAtlas[i].ID+"'/>&nbsp;";
-					texto += listaAtlas[i].TITULO+"</div>";
+					if(listaAtlas[i].PUBLICADO)
+					{
+						if(listaAtlas[i].PUBLICADO == "NAO" || listaAtlas[i].PUBLICADO == "nao")
+						{texto += "<s>";}
+					}
+					texto += listaAtlas[i].TITULO+"</s></div>";
 					texto += "<div class='descricao' >"+listaAtlas[i].DESCRICAO+"</div><br>";
 					texto += "<div class='descricao' >Link: "+inicia+"</div><br></td>";
 					texto += "</tr>";

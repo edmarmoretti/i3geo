@@ -20,6 +20,5 @@ if(!isset($locaplic))
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
-if(!isset($perfil)){$perfil = "";}
-echo geraXmlMapas($perfil,$locaplic,$editores);
+echo geraRSStemas($locaplic,$id);
 ?>

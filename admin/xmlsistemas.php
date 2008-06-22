@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-if(!isset($locaplic))
+if(!isset($locaplic) || !isset($editores))
 {
 	$locaplic = "";
 	if(file_exists("../../../ms_configura.php"))
@@ -21,5 +21,5 @@ if(!isset($locaplic))
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
 if(!isset($perfil)){$perfil = "";}
-echo geraXmlSistemas($perfil,$locaplic);
+echo geraXmlSistemas($perfil,$locaplic,$editores);
 ?>

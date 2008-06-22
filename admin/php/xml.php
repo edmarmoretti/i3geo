@@ -1,6 +1,7 @@
 <?php
-function geraXmlSistemas($perfil,$locaplic)
+function geraXmlSistemas($perfil,$locaplic,$editores)
 {
+	$editor = verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
@@ -19,10 +20,15 @@ function geraXmlSistemas($perfil,$locaplic)
 			$perfilS = explode(" ",str_replace(","," ",$row["perfil_sistema"]));
 			$mostra = array_in_array($perfil,$perfilS);
 		}
+		if(strtolower($row["publicado_sistema"] == "nao"))
+		{$mostra = false;}
+		if($editor)
+		{$mostra = true;}
 		if($mostra)
 		{
 			$xml .= "<SISTEMA>\n";
 			$xml .= " <PERFIL>".$row["perfil_sistema"]."</PERFIL>\n";
+			$xml .= " <PUBLICADO>".$row["publicado_sistema"]."</PUBLICADO>\n";
 			$xml .= " <NOMESIS>".xmlTexto_prepara($row["nome_sistema"])."</NOMESIS>\n";
 			geraXmlSistemas_pegafuncoes($perfil,&$xml,$row["id_sistema"],$dbh);
 			$xml .= "</SISTEMA>\n";
@@ -33,39 +39,55 @@ function geraXmlSistemas($perfil,$locaplic)
 	$dbhw = null;
 	return $xml;	
 }
+function geraRSStemas($locaplic,$id_n2)
+{
+	$sql = "select t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,'' as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = ''"; 
+	return geraXmlRSS($locaplic,$sql,"Lista de temas");
+}
+function geraRSSsubgrupos($locaplic,$id_n1)
+{
+	$sql = "select g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = ''"; 
+	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
+}
+
+function geraRSSgrupos($locaplic)
+{
+	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws from i3geoadmin_n1 as n1,i3geoadmin_grupos as g where g.id_grupo = n1.id_grupo and n1.n1_perfil = ''"; 
+	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
+}
 
 function geraXmlDownload($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'DOWNLOAD' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql);
+	return geraXmlRSS($locaplic,$sql,"Enderecos para download");
 }
 function geraXmlWS($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql);
+	return geraXmlRSS($locaplic,$sql,"Web services");
 }
 function geraXmlWMS($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql);
+	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
 function geraXmlGeorss($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql);
+	return geraXmlRSS($locaplic,$sql,"Georss");
 }
-function geraXmlRSS($locaplic,$sql)
+function geraXmlRSS($locaplic,$sql,$descricao)
 {
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "<rss version='2.0'>";
 	$xml .= "<channel>\n";
-	$xml .= "<title>Geo RSS</title>\n";
-	$xml .= "<description>Links para enderecos Geo RSS gerados pelo i3geo</description>\n";
+	$xml .= "<title>RSS</title>\n";
+	$xml .= "<description>$descricao</description>\n";
 	$xml .= "<link></link>\n";
 	$xml .= "<docs></docs>\n";
-	$xml .= "<copyright></copyright>\n";
+	$xml .= "<copyright>Gerado pelo i3Geo</copyright>\n";
 	$xml .= "<language>pt-br</language>\n";
 	$xml .= "<webmaster></webmaster>\n";
 
@@ -75,11 +97,11 @@ function geraXmlRSS($locaplic,$sql)
 	{
 		$xml .= "<item>\n";
 		$xml .= "<category/>\n";
-		$xml .= "<title>".xmlTexto_prepara($row["nome_ws"])."</title>\n";
-		$xml .= "<description>".xmlTexto_prepara($row["desc_ws"])."</description>\n";
+		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
+		$xml .= "<description>".entity_decode($row["desc_ws"])."</description>\n";
 		$xml .= "<link>".xmlTexto_prepara($row["link_ws"])."</link>\n";
 		$xml .= "<pubDate/>\n";
-		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
+		$xml .= "<author>".entity_decode($row["autor_ws"])."</author>\n";
 		$xml .= "</item>\n";
 	}
 	$xml .= "</channel></rss>\n";
@@ -87,32 +109,43 @@ function geraXmlRSS($locaplic,$sql)
 	$dbhw = null;
 	return $xml;
 }
-function geraXmlAtlas($locaplic)
+function geraXmlAtlas($locaplic,$editores)
 {
+	//error_reporting(E_ALL);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	$xml .= "\n<RAIZ>\n";
 	$q = "select * from i3geoadmin_atlas";
 	$qatlas = $dbh->query($q);
+	$editor = verificaEditores($editores);
 	foreach($qatlas as $row)
 	{
-		$xml .= "<ATLAS>\n";
-		$xml .= " <ID>".$row["id_atlas"]."</ID>\n";
-		$xml .= " <TITULO>".xmlTexto_prepara($row["titulo_atlas"])."</TITULO>\n";
-		$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_atlas"])."</DESCRICAO>\n";
-		$xml .= " <ICONE>".$row["icone_atlas"]."</ICONE>\n";
-		$xml .= " <LINKMAISINFO>".xmlTexto_prepara($row["link_atlas"])."</LINKMAISINFO>\n";
-		$xml .= " <TEMPLATEHTML>".xmlTexto_prepara($row["template_atlas"])."</TEMPLATEHTML>\n";
-		$xml .= " <WABERTURA>".$row["w_atlas"]."</WABERTURA>\n";
-		$xml .= " <HABERTURA>".$row["h_atlas"]."</HABERTURA>\n";
-		$xml .= " <PRANCHADEFAULT>".$row["pranchadefault_atlas"]."</PRANCHADEFAULT>\n";
-		$xml .= " <TIPOGUIAS>".$row["tipoguias_atlas"]."</TIPOGUIAS>\n";
-		$xml .= " <BASEMAPFILE>".$row["basemapfile_atlas"]."</BASEMAPFILE>\n";
-		$xml .= " <PRANCHAS>\n";
-		geraXmlAtlas_pegapranchas(&$xml,$row["id_atlas"],$dbh);
-		$xml .= " </PRANCHAS>\n";
-		$xml .= " </ATLAS>\n";
+		$mostra = true;
+		if(strtolower($row["publicado_atlas"] == "nao"))
+		{$mostra = false;}
+		if($editor)
+		{$mostra = true;}	
+		if($mostra)
+		{
+			$xml .= "<ATLAS>\n";
+			$xml .= " <ID>".$row["id_atlas"]."</ID>\n";
+			$xml .= " <PUBLICADO>".$row["publicado_atlas"]."</PUBLICADO>\n";
+			$xml .= " <TITULO>".xmlTexto_prepara($row["titulo_atlas"])."</TITULO>\n";
+			$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_atlas"])."</DESCRICAO>\n";
+			$xml .= " <ICONE>".$row["icone_atlas"]."</ICONE>\n";
+			$xml .= " <LINKMAISINFO>".xmlTexto_prepara($row["link_atlas"])."</LINKMAISINFO>\n";
+			$xml .= " <TEMPLATEHTML>".xmlTexto_prepara($row["template_atlas"])."</TEMPLATEHTML>\n";
+			$xml .= " <WABERTURA>".$row["w_atlas"]."</WABERTURA>\n";
+			$xml .= " <HABERTURA>".$row["h_atlas"]."</HABERTURA>\n";
+			$xml .= " <PRANCHADEFAULT>".$row["pranchadefault_atlas"]."</PRANCHADEFAULT>\n";
+			$xml .= " <TIPOGUIAS>".$row["tipoguias_atlas"]."</TIPOGUIAS>\n";
+			$xml .= " <BASEMAPFILE>".$row["basemapfile_atlas"]."</BASEMAPFILE>\n";
+			$xml .= " <PRANCHAS>\n";
+			geraXmlAtlas_pegapranchas(&$xml,$row["id_atlas"],$dbh);
+			$xml .= " </PRANCHAS>\n";
+			$xml .= " </ATLAS>\n";
+		}
 	}
 	$xml .= "</RAIZ>\n";
 	$dbh = null;
@@ -145,7 +178,7 @@ function geraXmlIdentifica($perfil,$locaplic)
 	$dbhw = null;
 	return $xml;	
 }
-function geraXmlMapas($perfil,$locaplic)
+function geraXmlMapas($perfil,$locaplic,$editores)
 {
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
@@ -156,15 +189,21 @@ function geraXmlMapas($perfil,$locaplic)
 	$xml .= "\n<MAPAS>\n";
 	$q = "select * from i3geoadmin_mapas";
 	$q = $dbh->query($q);
+	$editor = verificaEditores($editores);
 	foreach($q as $row)
 	{
+		$mostraMapa = false;
 		if($row["perfil_mapa"] == "")
-		$mostraMapa = true;
+		{$mostraMapa = true;}
 		else
 		{
 			$perfilMapa = explode(" ",str_replace(","," ",$row["perfil_mapa"]));
 			$mostraMapa = array_in_array($perfil,$perfilMapa);
-		}
+		}	
+		if(strtolower($row["publicado_mapa"] == "nao"))
+		{$mostraMapa = false;}
+		if($editor)
+		{$mostraMapa = true;}	
 		if($mostraMapa)
 		{	
 			$xml .= "<MAPA>\n";
@@ -177,7 +216,8 @@ function geraXmlMapas($perfil,$locaplic)
 			$xml .= " <EXTENSAO>".$row["ext_mapa"]."</EXTENSAO>\n";
 			$xml .= " <OUTROS>".xmlTexto_prepara($row["outros_mapa"])."</OUTROS>\n";
 			$xml .= " <LINKDIRETO>".xmlTexto_prepara($row["linkdireto_mapa"])."</LINKDIRETO>\n";
-			$xml .= " </MAPA>\n";
+			$xml .= " <PUBLICADO>".$row["publicado_mapa"]."</PUBLICADO>\n";
+			$xml .= "</MAPA>\n";
 		}
 	}
 	$xml .= "</MAPAS>\n";
@@ -378,5 +418,24 @@ function array_in_array($needle, $haystack)
 function xmlTexto_prepara($texto)
 {
 	return str_replace("&","&amp;",$texto);	
+}
+function entity_decode($texto)
+{
+	return html_entity_decode($texto);
+}
+function verificaEditores($editores)
+{
+	$editor = "nao";
+	foreach ($editores as $e)
+	{
+		$e = gethostbyname($e);
+		$ip = "UNKNOWN";
+		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+		else $ip = "UNKNOWN";
+		if ($e == $ip){$editor="sim";}
+	}
+	return $editor;
 }
 ?>

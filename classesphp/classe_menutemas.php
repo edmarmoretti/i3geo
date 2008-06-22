@@ -85,6 +85,7 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 		$this->editor = false;
 		if($editores != "")
 		{$this->editor = $this->verificaeditores();}
+		$this->editores = $editores;
 	}
 /*
 function: pegaListaDeMenus
@@ -163,7 +164,7 @@ array
 		else
 		{
 			include_once($this->locaplic."/admin/php/xml.php");
-			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
+			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
 		}
 		$mapas = array();
 		//pega os sistemas checando os perfis
@@ -181,7 +182,8 @@ array
 				$e = ixml($s,"EXTENSAO");
 				$o = ixml($s,"OUTROS");
 				$k = ixml($s,"LINKDIRETO");
-				$mapas[] =  array("NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
+				$p = ixml($s,"PUBLICADO");
+				$mapas[] =  array("PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
 			}
 		}
 		return (array("mapas"=>$mapas));
@@ -345,28 +347,32 @@ array
 			{$xmlsistemas = simplexml_load_file($this->locsistemas);}
 			else
 			{
-				$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));	
+				$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic,$this->editores));	
 			}
 			foreach($xmlsistemas->SISTEMA as $s)
 			{
-				$nomesis = ixml($s,"NOMESIS");
-				$ps = ixml($s,"PERFIL");
-				$perfis = str_replace(","," ",$ps);
-				$perfis = explode(" ",$perfis);
-				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
+				$publicado = ixml($s,"PUBLICADO");
+				if(strtolower($publicado) != "nao" || $this->editor)
 				{
-					$funcoes = array();
-					foreach($s->FUNCAO as $f)
+					$nomesis = ixml($s,"NOMESIS");
+					$ps = ixml($s,"PERFIL");
+					$perfis = str_replace(","," ",$ps);
+					$perfis = explode(" ",$perfis);
+					if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 					{
-						$n = ixml($f,"NOMEFUNCAO");
-						$a = ixml($f,"ABRIR");
-						$w = ixml($f,"JANELAW");
-						$h = ixml($f,"JANELAH");
-						$p = ixml($f,"PERFIL");
-						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
-						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
+						$funcoes = array();
+						foreach($s->FUNCAO as $f)
+						{
+							$n = ixml($f,"NOMEFUNCAO");
+							$a = ixml($f,"ABRIR");
+							$w = ixml($f,"JANELAW");
+							$h = ixml($f,"JANELAH");
+							$p = ixml($f,"PERFIL");
+							if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
+							{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
+						}
+						$sistemas[] =  array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"FUNCOES"=>$funcoes);
 					}
-					$sistemas[] =  array("NOME"=>$nomesis,"FUNCOES"=>$funcoes);
 				}
 			}
 		}

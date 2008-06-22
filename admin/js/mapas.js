@@ -112,6 +112,14 @@ function pegaDadosMapa(id_mapa)
 		ins += "<td>Ligados: </td>"
 		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='ligados_"+d.id_mapa+"' value='"+d.ligados_mapa+"' /></td>"
 		ins += "</tr>"
+		
+		ins += "<tr>"
+		ins += "<td>Publicado: </td>"
+		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d.id_mapa+"' >"
+		ins += combosimnao(d.publicado_mapa)
+		ins += "</td></tr>"
+		
+		
 		ins += "</table>"
 		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d.id_mapa+"\")'/></td>"
 		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarMapa(\""+d.id_mapa+"\",\""+d.id_mapa+"\")'/></td>"
@@ -149,41 +157,50 @@ function adicionaTema(id,codigo)
 }
 function alterarMapa(id_mapa,onde)
 {
-	//if(confirm("Você realmente quer fazer isso?"))
-	//{
-		var retorna = function(retorno)
-		{
-			if(id_mapa == "")
-			listaMapas(retorno);
-			else
-			{ins = "";pegaDadosMapa(id_mapa)}
-		}
-		if (id_mapa != "")
-		{
-			var nome = $i("nome_"+id_mapa).value
-			var desc = $i("desc_"+id_mapa).value
-			var ext = $i("ext_"+id_mapa).value
-			var imagem = $i("imagem_"+id_mapa).value
-			var outros = $i("outros_"+id_mapa).value
-			var linkdireto = $i("linkdireto_"+id_mapa).value
-			var temas = $i("temas_"+id_mapa).value
-			var ligados = $i("ligados_"+id_mapa).value
-			var perfil = $i("perfis_"+id_mapa).value
-			var ordem_mapa = $i("ordem_"+id_mapa).value
-		}
+	var retorna = function(retorno)
+	{
+		if(id_mapa == "")
+		listaMapas(retorno);
 		else
+		{ins = "";pegaDadosMapa(id_mapa)}
+	}
+	if (id_mapa != "")
+	{
+		var nome = $i("nome_"+id_mapa).value
+		var desc = $i("desc_"+id_mapa).value
+		var ext = $i("ext_"+id_mapa).value
+		var imagem = $i("imagem_"+id_mapa).value
+		var outros = $i("outros_"+id_mapa).value
+		var linkdireto = $i("linkdireto_"+id_mapa).value
+		var temas = $i("temas_"+id_mapa).value
+		var ligados = $i("ligados_"+id_mapa).value
+		var perfil = $i("perfis_"+id_mapa).value
+		var ordem_mapa = $i("ordem_"+id_mapa).value
+		var publicado_mapa = $i("publicado_"+id_mapa).value
+	}
+	else
+	{
+		var nome = ""
+		var desc = ""
+		var ext = ""
+		var imagem = ""
+		var outros = ""
+		var linkdireto = ""
+		var temas = ""
+		var ligados = ""
+		var perfil = ""
+		var ordem_mapa = ""
+		var publicado_mapa = ""
+		var id_mapa = "";
+		var perfil = "";
+		var nome = prompt("Nome do novo Mapa","");
+		if (nome==null || nome=="")
 		{
-			var id_mapa = "";
-			var perfil = "";
-			var nome = prompt("Nome do novo Mapa","");
-			if (nome==null || nome=="")
-  			{
-  				return;
-  			}
+			return;
 		}
-		var p = "../php/mapas.php?funcao=alterarMapa&ordem_mapa="+ordem_mapa+"&id_mapa="+id_mapa+"&nome="+nome+"&desc="+desc+"&ext="+ext+"&imagem="+imagem+"&outros="+outros+"&linkdireto="+linkdireto+"&temas="+temas+"&ligados="+ligados+"&perfil="+perfil
-		cPaint.call(p,"",retorna);	
-	//}
+	}
+	var p = "../php/mapas.php?funcao=alterarMapa&publicado_mapa="+publicado_mapa+"&ordem_mapa="+ordem_mapa+"&id_mapa="+id_mapa+"&nome="+nome+"&desc="+desc+"&ext="+ext+"&imagem="+imagem+"&outros="+outros+"&linkdireto="+linkdireto+"&temas="+temas+"&ligados="+ligados+"&perfil="+perfil
+	cPaint.call(p,"",retorna);	
 }
 function excluir(id)
 {

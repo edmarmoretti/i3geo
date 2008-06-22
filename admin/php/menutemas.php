@@ -730,7 +730,7 @@ function importarXmlMenu()
 		$r = $dbhw->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
 		$id_grupo = $r->fetchColumn();
 		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ('$id_menu','$id_grupo','$n1_perfil')");
-		$id_n1 = $dbhw->query("SELECT id_menu FROM i3geoadmin_n1");
+		$id_n1 = $dbhw->query("SELECT id_n1 FROM i3geoadmin_n1");
 		$id_n1 = $id_n1->fetchAll();
 		$id_n1 = intval($id_n1[count($id_n1)-1]['id_n1']);
 

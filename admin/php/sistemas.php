@@ -106,15 +106,15 @@ Altera o registro de um WS
 */
 function alterarSistemas()
 {
-	global $id_sistema,$perfil,$nome;
+	global $id_sistema,$perfil,$nome,$publicado_sistema;
 	try 
 	{
     	require_once("conexao.php");
 		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	if($id_sistema != "")
-    	$dbhw->query("UPDATE i3geoadmin_sistemas SET nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
+    	$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','','')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -197,7 +197,7 @@ function importarXmlSistemas()
 		$nome = ixml($item,"NOMESIS");
 		$perfil = ixml($item,"PERFIL");
 		if(!isset($sistemasExistentes[$nome]))
-		$dbhw->query("INSERT INTO i3geoadmin_sistemas (nome_sistema,perfil_sistema) VALUES ('$nome','$perfil')");
+		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
 		$sistemasExistentes[$nome] = 0;
 		$id_sistema = $dbhw->query("SELECT id_sistema FROM i3geoadmin_sistemas");
 		$id_sistema = $id_sistema->fetchAll();

@@ -40,7 +40,7 @@ switch ($funcao)
 	break;
 	
 	case "pegaAtlas":
-	$cp->set_data(pegaDados('SELECT id_atlas,titulo_atlas from i3geoadmin_atlas order by ordem_atlas'));
+	$cp->set_data(pegaDados('SELECT id_atlas,titulo_atlas,publicado_atlas from i3geoadmin_atlas order by ordem_atlas'));
 	$cp->return_data();
 	break;
 
@@ -134,16 +134,16 @@ function dadosAtlas()
 }
 function alterarAtlas()
 {
-	global $id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
+	global $publicado_atlas,$id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
 	try 
 	{
-    	//$desc_atlas = mb_convert_encoding($desc_atlas,"UTF-8","ISO-8859-1");
-    	//$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
+    	$desc_atlas = mb_convert_encoding($desc_atlas,"UTF-8","ISO-8859-1");
+    	$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id_atlas != "")
-    	$dbhw->query("UPDATE i3geoadmin_atlas SET ordem_atlas='$ordem_atlas',basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
+    	$dbhw->query("UPDATE i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas='$ordem_atlas',basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_atlas (ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','',null,null,'','','','','$tipoguias_atlas','$titulo_atlas')");
+    	$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','','',null,null,'','','','','$tipoguias_atlas','$titulo_atlas')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -273,7 +273,7 @@ function importarXmlAtlas()
 		$pranchadefault = ixml($atlas,"PRANCHADEFAULT");
 		$tipoguias = ixml($atlas,"TIPOGUIAS");
 		if(!isset($atlasExistentes[$titulo]))
-		$dbhw->query("INSERT INTO i3geoadmin_atlas (desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,ordem_atlas) VALUES ('$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo',$contaAtlas)");
+		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,ordem_atlas) VALUES ('','$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo',$contaAtlas)");
 		$atlasExistentes[$titulo] = 0;	
 		$id_atlas = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
 		$id_atlas = $id_atlas->fetchAll();
