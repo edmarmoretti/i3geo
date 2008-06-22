@@ -44,8 +44,17 @@ function pegavalSistemas(xmlDoc)
 	{
 		var sis = xmlDoc.getElementsByTagName("FUNCAO")
 		for (ig=0;ig<sis.length;ig++)
-		{
+		{	
 			var sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue
+			if(sis[ig].getElementsByTagName("PUBLICADO")[0])
+			{
+				if(sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild)
+				{
+					var pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
+					if(pub == "NAO" || pub == "nao")
+					{var sistema = "<s>"+sistema+"</s>";}
+				}
+			}
 			var exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue
 			var temp = exec.split('"')
 			if(temp.length == 1)

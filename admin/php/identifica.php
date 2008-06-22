@@ -69,15 +69,15 @@ Altera o registro de um WS
 */
 function alterarFuncoes()
 {
-	global $id_i,$abrir_i,$nome_i,$target_i;
+	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i;
 	try 
 	{
     	$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
     	if($id_i != "")
-    	$dbhw->query("UPDATE i3geoadmin_identifica SET nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    	$dbhw->query("UPDATE i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_identifica (nome_i,abrir_i,target_i) VALUES ('','','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','','','')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -125,7 +125,7 @@ function importarXmlI()
 		$target_i = ixml($item,"TARGET");
 		$abrir_i = ixml($item,"ABRIR");
 		if(!isset($iExistentes[$nome_i]))
-		$dbhw->query("INSERT INTO i3geoadmin_identifica (nome_i,target_i,abrir_i) VALUES ('$nome_i','$target_i','$abrir_i')");
+		$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,target_i,abrir_i) VALUES ('','$nome_i','$target_i','$abrir_i')");
 		$iExistentes[$nome_i] = 0;
 	}
 	$dbhw = null;

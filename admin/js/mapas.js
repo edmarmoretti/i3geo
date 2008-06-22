@@ -118,8 +118,7 @@ function pegaDadosMapa(id_mapa)
 		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d.id_mapa+"' >"
 		ins += combosimnao(d.publicado_mapa)
 		ins += "</td></tr>"
-		
-		
+				
 		ins += "</table>"
 		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d.id_mapa+"\")'/></td>"
 		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarMapa(\""+d.id_mapa+"\",\""+d.id_mapa+"\")'/></td>"

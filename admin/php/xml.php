@@ -152,8 +152,9 @@ function geraXmlAtlas($locaplic,$editores)
 	$dbhw = null;
 	return $xml;	
 }
-function geraXmlIdentifica($perfil,$locaplic)
+function geraXmlIdentifica($perfil,$locaplic,$editores)
 {
+	$editor = verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
@@ -165,13 +166,22 @@ function geraXmlIdentifica($perfil,$locaplic)
 	$qi = $dbh->query($q);
 	foreach($qi as $row)
 	{
-		$xml .= " <FUNCAO>\n";
-		$xml .= "  <NOMESIS>".xmlTexto_prepara($row["nome_i"])."</NOMESIS>\n";
-		$xml .= "  <ABRIR>".xmlTexto_prepara($row["abrir_i"])."</ABRIR>\n";
-		$target = $row["target_i"];
-		if($target == ""){$target = "_self";}
-		$xml .= "  <TARGET>".$target."</TARGET>\n";
-		$xml .= " </FUNCAO>\n";
+		$mostra = true;
+		if(strtolower($row["publicado_i"] == "nao"))
+		{$mostra = false;}
+		if($editor)
+		{$mostra = true;}	
+		if($mostra)
+		{
+			$xml .= " <FUNCAO>\n";
+			$xml .= "  <NOMESIS>".xmlTexto_prepara($row["nome_i"])."</NOMESIS>\n";
+			$xml .= "  <ABRIR>".xmlTexto_prepara($row["abrir_i"])."</ABRIR>\n";
+			$xml .= "  <PUBLICADO>".$row["publicado_i"]."</PUBLICADO>\n";
+			$target = $row["target_i"];
+			if($target == ""){$target = "_self";}
+			$xml .= "  <TARGET>".$target."</TARGET>\n";
+			$xml .= " </FUNCAO>\n";
+		}
 	}
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;

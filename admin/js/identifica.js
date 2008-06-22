@@ -69,10 +69,17 @@ function montaFuncoes(retorno,onde)
 			"linhas":[
 			{titulo:"Nome",prefixoid:"nome_",id:"id_i",valor:"nome_i"},
 			{titulo:"Destino",prefixoid:"destino_",id:"id_i",valor:"target_i"},
-			{titulo:"Programa",prefixoid:"abrir_",id:"id_prancha",valor:"abrir_i"}
+			{titulo:"Programa",prefixoid:"abrir_",id:"id_i",valor:"abrir_i"}
 			]
 		}
 		ins += (geraLinhas(d[i],param,2));
+		
+		ins += "<tr>"
+		ins += "<td>Publicado: </td>"
+		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d[i].id_i+"' >"
+		ins += combosimnao(d[i].publicado_i)
+		ins += "</td></tr>"
+		
 		ins += "</table>"
 		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d[i].id_i+"\")'/></td>"
 		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarFuncoes(\""+d[i].id_i+"\",\""+d[i].id_i+"\")'/></td>"
@@ -101,6 +108,7 @@ function alterarFuncoes(id,onde)
 			var nome = $i("nome_"+id).value
 			var destino = $i("destino_"+id).value
 			var abrir = $i("abrir_"+id).value
+			var publicado = $i("publicado_"+id).value
 		}
 		else
 		{
@@ -108,8 +116,9 @@ function alterarFuncoes(id,onde)
 			var destino = ""
 			var abrir = ""
 			var nome = ""
+			var publicado = ""
 		}
-		var p = "../php/identifica.php?funcao=alterarFuncoes&id_i="+id+"&nome_i="+nome+"&target_i="+destino+"&abrir_i="+abrir
+		var p = "../php/identifica.php?funcao=alterarFuncoes&publicado_i="+publicado+"&id_i="+id+"&nome_i="+nome+"&target_i="+destino+"&abrir_i="+abrir
 		cPaint.call(p,"",retorna);	
 	//}
 }

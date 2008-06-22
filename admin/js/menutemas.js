@@ -168,6 +168,7 @@ function pegaParametros(tipo)
 			{
 				ins += montaOpcoes("grupo",r[i].id_grupo,r[i].nome_grupo,r[i].desc_grupo)
 			}
+
 			ins += "</table>"
 			$i("grupos").innerHTML = ins;
 		}
