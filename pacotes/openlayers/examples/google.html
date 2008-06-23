@@ -10,14 +10,14 @@
     </style>
 
     <!-- this gmaps key generated for http://openlayers.org/dev/ -->
-    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script>
+    <!--<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script>-->
     <!-- Localhost key -->
-    <!-- <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTS6gjckBmeABOGXIUiOiZObZESPg'></script>-->
+    <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTS6gjckBmeABOGXIUiOiZObZESPg'></script>
     <script src="../lib/OpenLayers.js"></script>
     <script type="text/javascript">
         <!--
-        var lon = 5;
-        var lat = 40;
+        var lon = -54;
+        var lat = -20;
         var zoom = 17;
         var map, layer;
 
@@ -38,15 +38,17 @@
                       {isBaseLayer: false} );
             layer.setVisibility(false);
             map.addLayer(layer);
- var twms = new OpenLayers.Layer.WMS( "World Map", 
-         "http://world.freemap.in/cgi-bin/mapserv?", 
-                 {map: '/www/freemap.in/world/map/factbooktrans.map', transparent:'true',
-                         layers: 'factbook', 'format':'png'} );
-                         map.addLayer(twms);
+            
+ 			//var twms = new OpenLayers.Layer.WMS( "World Map","http://world.freemap.in/cgi-bin/mapserv?",{map: '/www/freemap.in/world/map/factbooktrans.map', transparent:'true',layers: 'factbook', 'format':'png'} );
+ 			var twms = new OpenLayers.Layer.WMS( "TIs",
+ 				"http://mapas.mma.gov.br/i3geo/ogc.php?tema=indi&",
+ 				{layers: 'indi', transparent:'true','format':'png'} );
+            
+            map.addLayer(twms);
             markers = new OpenLayers.Layer.Markers("markers");
             map.addLayer(markers);
 
-            map.setCenter(new OpenLayers.LonLat(10.205188,48.857593), 5);
+            map.setCenter(new OpenLayers.LonLat(-54,-20), 3);
             map.addControl( new OpenLayers.Control.LayerSwitcher() );
             map.addControl( new OpenLayers.Control.PanZoomBar() );
 

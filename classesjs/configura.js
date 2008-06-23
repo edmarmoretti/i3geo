@@ -1446,7 +1446,7 @@ g_listaFuncoesBotoes = {
 		iddiv:"exten",
 		dica:$trad("d8"),
 		funcaoonclick:function()
-		{mensagemf(objmapa.extent);}
+		{mostraExten();}
 	},
 	{
 		//botão que abre a janela com o mapa de referência

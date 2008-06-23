@@ -1335,6 +1335,13 @@ function uploaddbf()
 Section: navegação
 */
 /*
+Function: mostraExten
+
+Mostra a extensão geográfica atual, permitindo alterá-la digitando-se a nova extensão.
+*/
+function mostraExten()
+{wdocaf("450px","340px",g_locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica");}
+/*
 Function: ativaLocalizarxy
 	
 Insere a opção para mostrar as coordenadas xy e localização de coordenadas.

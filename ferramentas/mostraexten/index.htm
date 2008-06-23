@@ -1,0 +1,62 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css">
+<title></title> 
+<style type="text/css" >.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+</head>
+<body class="yui-skin-sam" >
+	<div id=geral style="left:0px;top:0px;">
+		<div style='left:0px;display:block'>
+		    Extens&atilde;o geográfica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude:
+			<textarea id=extatual rows=3 cols=50 ></textarea>
+		</div>
+		<div style="display:block;top:10px;left:0px">
+			Digite as coordenadas referentes a nova extensão geográfica desejada para o mapa. Utilize coordenadas (graus) negativos para indicar a longitude como oeste e latitude como sul:<br>
+			<br>
+			<table class=lista >
+			<tr>
+				<td>Menor longitude (oeste):</td>
+				<td>
+					<input class=digitar id='xg' title='grau' type=text size=3 value='-00'/>
+					<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>
+					<input class=digitar id='xs' title='segundo' type=text size=3 value='0.0'/>
+				</td>
+			</tr>
+			<tr>
+				<td>Menor latitude (sul):</td>
+				<td>
+					<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
+					<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>
+					<input class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/>
+				</td>
+			</tr>
+			<tr>
+				<td>Maior longitude (leste):</td>
+				<td>
+					<input class=digitar id='xxg' title='grau' type=text size=3 value='-00'/>
+					<input class=digitar id='xxm' title='minuto' type=text size=3 value='00'/>
+					<input class=digitar id='xxs' title='segundo' type=text size=3 value='0.0'/>
+				</td>
+			</tr>
+			<tr>
+				<td>Maior latitude (norte):</td>
+				<td>
+					<input class=digitar id='yyg' title='grau' type=text size=3 value='-00'/>
+					<input class=digitar id='yym' title='minuto' type=text size=3 value='00'/>
+					<input class=digitar id='yys' title='segundo' type=text size=3 value='0.0'/>
+				</td>
+			</tr>
+			</table>
+		</div>
+		<div id=opc2 style="display:block;top:15px;left:0px">
+			<div style=top:0px;left:0px;text-align:left onclick='aplicar()' >
+			<input id=botao1 type='button' size=14 value='Aplicar'  />
+			</div>
+		</div>
+	</div>
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+</body>
+</html>
