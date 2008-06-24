@@ -19,7 +19,19 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-//inicializa
+//pega o elemento boxref para desenhar um retângulo no mapa de referência
+boxref = false
+if (window.parent.document.getElementById("boxRef"))
+{boxref = window.parent.document.getElementById("boxRef")}
+if((boxref) && !window.parent.document.getElementById("refDinamico").checked)
+{
+	boxref.style.display="block";
+	boxref.style.top=0;
+	boxref.style.left=0;
+	boxref.style.width=0;
+	boxref.style.height=0;
+}
+//inicializa alguns parâmetros.
 parametrosURL()
 YAHOO.example.init = function ()
 {
@@ -46,6 +58,8 @@ function aplicar()
 		var yy = window.parent.convdmsddf($i("yyg").value,$i("yym").value,$i("yys").value);
 		if ((x == xx) || (y == yy))
 		{alert("Digite coordenadas válidas");return;}
+		if ((x > xx) || (y > yy))
+		{alert("Digite coordenadas válidas");return;}
 		var cp = new cpaint();
 		cp.set_response_type("JSON");
 		//cp.set_debug(2) 
@@ -53,4 +67,25 @@ function aplicar()
 		cp.call(p,"sphPT2shp",temp);
 	}
 	catch(e){alert("Digite coordenadas válidas");}
+}
+//muda o box no mapa de referência
+function mudabox()
+{
+	if((boxref) && !window.parent.document.getElementById("refDinamico").checked)
+	{
+		var x = window.parent.convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
+		var xx = window.parent.convdmsddf($i("xxg").value,$i("xxm").value,$i("xxs").value);
+		var y = window.parent.convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
+		var yy = window.parent.convdmsddf($i("yyg").value,$i("yym").value,$i("yys").value);
+		if ((x == xx) || (y == yy))
+		{return;}
+		if ((x > xx) || (y > yy))
+		{return;}
+		//calculo da nova posição do box
+		var extr = window.parent.objmapa.extentref.split(" ");
+		boxref.style.left = ((extr[0] - x) / window.parent.g_celularef) * -1
+		boxref.style.width = ((xx - x) / window.parent.g_celularef)
+		boxref.style.top = ((extr[3] - yy) / window.parent.g_celularef)
+		boxref.style.height = ((yy - y) / window.parent.g_celularef)
+	}
 }

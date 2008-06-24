@@ -1701,7 +1701,9 @@ function initJanelaRef()
 		ins += "<img class=menos onclick='"+temp+"' src="+$im("branco.gif")+" />&nbsp;";
 		ins += '<input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
-		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" />';
+		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
+		ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
+
 		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);

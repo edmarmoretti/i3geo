@@ -834,6 +834,7 @@ function Mapa(e,m)
 	this.atualizaReferencia = function(mapexten)
 	{
 		//objaguarde.abre("ajaxreferencia1",$trad("o3"));
+		if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
 		var dinamico = false;
 		if ($i("refDinamico"))
 		{var dinamico = $i("refDinamico").checked;}
