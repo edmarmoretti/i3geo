@@ -1,0 +1,42 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+    CONNECTION "http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map"
+    CONNECTIONTYPE WMS
+      METADATA
+        "wms_srs"	"EPSG:4291"
+        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+        "CLASSE"	"SIM"
+        "wfs"	"nao"
+        "TEXTO"	"NAO"
+        "wms_force_separate_request"	"1"
+        "wms_name"	"nivel01"
+        "formatosinfo"	"text/plain,application/vnd.ogc.gml"
+        "legendawms"	"http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=nivel01&format=image/png"
+        "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+        "wms_format"	"image/png"
+        "wms_connectiontimeout"	"30"
+        "TEMA"	"Região Hidrográfica Nível 1"
+        "wms_server_version"	"1.1.1"
+        "wms_style"	"default"
+      END
+    NAME "geopr_ana_reghidro1"
+    OFFSITE 255 255 255
+    SIZEUNITS PIXELS
+    STATUS DEFAULT
+    TOLERANCE 0
+    TOLERANCEUNITS PIXELS
+    TYPE RASTER
+    CLASS
+      NAME " "
+      METADATA
+      END
+      STYLE
+        ANGLE 360
+        COLOR 200 50 0
+        OUTLINECOLOR 0 0 0
+        SYMBOL 0
+      END
+    END
+  END
+END
