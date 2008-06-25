@@ -1,10 +1,10 @@
 <?php
 /*
-Title: Testa um mapfile.
+Title: Gera miniaturas.
 
-Permite testar um mapfile específico existente no diretório "temas" ou gerar uma imagem miniatura.
+Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
-File: i3geo/testamapfile.php
+File: i3geo/geraminiatura.php
 
 About: Licença
 
@@ -30,13 +30,11 @@ Free Software Foundation, Inc., no endereço
 
 About: Exemplo
 
-testamapfile.php?map=bioma
+geraminiatura.php?tipo=mini
 
 Parameters:
 
-map - nome do mapfile que será aberto. O arquivo é procurado no caminho indicado e no diretório i3geo/temas
-	se map=todos, todos os mapas são desenhados de 10 em 10.
-tipo - (opcional) tipo de retorno mini|grande . A opção mini retorna uma miniatura do mapa
+tipo - tipo de retorno mini|grande
 */
 set_time_limit(300);
 ini_set('max_execution_time', 300);
@@ -58,54 +56,20 @@ if (!function_exists('ms_GetVersion'))
 	{dl('php_mapscript.so');}
 }
 ms_ResetErrorList();
-if(!isset($tipo))
-{$tipo = "";}
-if ($tipo == "")
+if (!isset($tipo))
+{echo "tipo não definido";exit;}
+$arqs = listaArquivos("temas");
+foreach ($arqs["arquivos"] as $arq)
 {
-	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script><body ><form action="testamapfile.php" method="post" id=f >Nome do arquivo map existente no diretório i3geo/temas (digite "todos" para testar todos de uma só vez):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit"></form></body></html>';
-}
-if (isset($map) && $map != "")
-{
-	if ($map == "todos")
-	{
-		$tipo = "todos";
-		$arqs = listaArquivos("temas");
-		$conta = 0;
-		echo "<br>Número de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
-		if (!isset($iniciar)){$iniciar = 0;}
-		sort($arqs["arquivos"]);
-		foreach ($arqs["arquivos"] as $arq)
-		{
-			if (($conta >= $iniciar) && ($conta < $iniciar+10))
-			{
-				$temp = explode(".",$arq);
-				if($temp[1] == "map")
-				verifica($arq);
-				else
-				{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
-			}
-			$conta++;
-		}
-		echo "<hr><br><br><a href='testamapfile.php?map=todos&iniciar=".($iniciar+10)."' >Próximos mapas</a>";
-	}
+	$temp = explode(".",$arq);
+	if($temp[1] == "map")
+	verifica($arq);
 	else
-	{verifica($map);}	
+	{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
 }
 function verifica($map)
 {
 	global $tipo,$locaplic;
-	if ($tipo == "mini" && file_exists('temas/'.$map.".mini.png"))
-	{
-		Header("Content-type: image/png");
-		ImagePng(ImageCreateFromPNG('temas/'.$map.".mini.png"));
-		exit;		
-	}
-	if ($tipo == "grande" && file_exists('temas/'.$map.".grande.png"))
-	{
-		Header("Content-type: image/png");
-		ImagePng(ImageCreateFromPNG('temas/'.$map.".grande.png"));
-		exit;		
-	}
 	ms_ResetErrorList();
 	$tema = "";
 	$map = str_replace("\\","/",$map);
@@ -114,8 +78,10 @@ function verifica($map)
 	{$tema = 'temas/'.$map;}
 	if (file_exists('temas/'.$map.'.map'))
 	{$tema = 'temas/'.$map.".map";}
-	if(($tipo == "") || ($tipo == "todos"))
-	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
+	if($tipo == "mini")
+	{if(file_exists('temas/'.$map.'.mini.png')){exit;}}
+	if($tipo == "grande")
+	{if(file_exists('temas/'.$map.'.grande.png')){exit;}}
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -173,42 +139,14 @@ function verifica($map)
 			 $sca = $mapa->scalebar;
 			 $sca->set("status",MS_OFF);
 		}
-		if($tipo == "todos")
-		{
-		 	 $mapa->setsize(150,150);
-			 $sca = $mapa->scalebar;
-			 $sca->set("status",MS_OFF);
-		}
 		$objImagem = @$mapa->draw();
 		if (!$objImagem)
 		{echo "Problemas ao gerar o mapa<br>";return;}
-		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
+		if($tipo=="mini")
+		$nomec = ($objImagem->imagepath).$map.".mini.png";
+		if($tipo=="grande")
+		$nomec = ($objImagem->imagepath).$map.".grande.png";
 		$objImagem->saveImage($nomec);
-		$nomer = ($objImagem->imageurl).basename($nomec);
-		if(($tipo == "") || ($tipo == "todos"))
-		{
-			echo "<img src=".$nomer." />";
-			if($tipo == "todos")
-			{
-			 echo "<br>".$dados."<br>";
-			}
-			if($map != "todos")
-			{
-				echo "<br>Erros:<br>";
-				$error = "";
-				$error = ms_GetErrorObj();
-				while($error && $error->code != MS_NOERR)
-				{
-					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
-					$error = $error->next();
-				}
-			}		
-		}
-		else
-		{
-			Header("Content-type: image/png");
-			ImagePng(ImageCreateFromPNG($nomec));
-		}
 		$objImagem->free();
 	}
 }
