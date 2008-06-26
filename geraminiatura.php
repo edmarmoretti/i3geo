@@ -4,6 +4,8 @@ Title: Gera miniaturas.
 
 Gera as miniaturas dos mapas baseado nos mapfiles existentes em i3geo/temas. As miniaturas são utilizadas no i3geo na guia temas para mostrar um preview de cada tema.
 
+As imagens são armazenadas no dirtório temporário.
+
 File: i3geo/geraminiatura.php
 
 About: Licença
@@ -34,8 +36,9 @@ geraminiatura.php?tipo=mini
 
 Parameters:
 
-tipo - tipo de retorno mini|grande
+tipo - tipo de retorno mini|grande|todos
 */
+error_reporting(E_ALL);
 set_time_limit(300);
 ini_set('max_execution_time', 300);
 include("ms_configura.php");
@@ -57,15 +60,18 @@ if (!function_exists('ms_GetVersion'))
 }
 ms_ResetErrorList();
 if (!isset($tipo))
-{echo "tipo não definido";exit;}
+{echo "Utilize ?tipo=mini ou grande ou todos. As imagens são armazenadas.no diretório temporário.";exit;}
 $arqs = listaArquivos("temas");
 foreach ($arqs["arquivos"] as $arq)
 {
 	$temp = explode(".",$arq);
-	if($temp[1] == "map")
-	verifica($arq);
-	else
-	{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
+	if($temp[(count($temp) - 1)] == "map")
+	{
+		if($tipo == "mini" || $tipo == "todos")
+		{if(!file_exists('temas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+		if($tipo == "grande"  || $tipo == "todos")
+		{if(!file_exists('temas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+	}
 }
 function verifica($map)
 {
@@ -78,10 +84,6 @@ function verifica($map)
 	{$tema = 'temas/'.$map;}
 	if (file_exists('temas/'.$map.'.map'))
 	{$tema = 'temas/'.$map.".map";}
-	if($tipo == "mini")
-	{if(file_exists('temas/'.$map.'.mini.png')){exit;}}
-	if($tipo == "grande")
-	{if(file_exists('temas/'.$map.'.grande.png')){exit;}}
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -140,12 +142,21 @@ function verifica($map)
 			 $sca->set("status",MS_OFF);
 		}
 		$objImagem = @$mapa->draw();
+		$webo = $mapa->web;
+		$url = $webo->imageurl."/".$map;
+		
 		if (!$objImagem)
 		{echo "Problemas ao gerar o mapa<br>";return;}
-		if($tipo=="mini")
-		$nomec = ($objImagem->imagepath).$map.".mini.png";
-		if($tipo=="grande")
-		$nomec = ($objImagem->imagepath).$map.".grande.png";
+		if($tipo=="mini" || $tipo == "todos")
+		{
+			$nomec = ($objImagem->imagepath).$map.".mini.png";
+			echo "<br><img src='".$url.".mini.png' /><br>";
+		}
+		if($tipo=="grande" || $tipo == "todos")
+		{
+			$nomec = ($objImagem->imagepath).$map.".grande.png";
+			echo "<br><img src='".$url.".grande.png' /><br>";
+		}
 		$objImagem->saveImage($nomec);
 		$objImagem->free();
 	}
