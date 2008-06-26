@@ -34,6 +34,9 @@ $mensagemAguarde = "<img src='../../imagens/aguarde.gif' />";//"<span style=colo
 $i = function(i)
 {return document.getElementById(i);};
 
+
+
+
 /*
 Variable: cPaint
 Objeto cpaint para chamada ajax

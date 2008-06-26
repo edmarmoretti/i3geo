@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Menus</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/menu.js"></script>
+</head>
+<body class=" yui-skin-sam">
+<div style="margin:20px">
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - menu de temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite editar a lista de menus.<br><br>
+		Você pode criar vários menus e depois acrescentar grupos, subgrupos e temas em cada um. 
+		Cada menu é mostrado como uma árvore na guia de adição de temas do i3geo.<br><br>
+		O menu é baseado no banco admin.db e os usuários que não são editores podem 
+		ver apenas os menus publicados.<br><br>
+		Os perfis que podem ser definidos para cada menu, são obtidos da tabela de perfis. Veja
+		o menu principal do sistema de administração para maiores detalhes.<br><br>
+		A lista de IPs dos usuários que podem editar os menu é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo menu" />
+<br>
+<p>Menus existentes: (clique na célula para editar e salve a linha editada)</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+<div id=dialogoContinua style="display:block" ></div>
+
+</body>

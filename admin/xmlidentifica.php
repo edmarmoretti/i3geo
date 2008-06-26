@@ -21,5 +21,6 @@ if(!isset($locaplic) || !isset($editores))
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
 if(!isset($perfil)){$perfil = "";}
+echo header("Content-type: application/xml");
 echo geraXmlIdentifica($perfil,$locaplic,$editores);
 ?>

@@ -27,6 +27,7 @@ File: i3geo/admin/mapfiles.php
 19/6/2007
 
 */
+error_reporting(E_ALL);
 include_once("admin.php");
 $cp = new cpaint();
 //faz a busca da função que deve ser executada
@@ -48,6 +49,12 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 	
+	case "pegaMenusYUI":
+	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
+	echo json_encode($dados);
+	exit;
+	break;
+	
 	case "pegaTags":
 	$cp->set_data(pegaDados('SELECT * from i3geoadmin_tags order by nome'));
 	$cp->return_data();
@@ -56,11 +63,17 @@ switch ($funcao)
 	case "pegaPerfis":
 	$cp->set_data(pegaDados('SELECT * from i3geoadmin_perfis order by perfil'));
 	$cp->return_data();
-	break;	
+	break;
+	
+	case "pegaPerfisYUI":
+	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
+	echo json_encode($dados);
+	exit;
+	break;
 
 	case "alteraMenus":
-	$cp->set_data(alteraMenus());
-	$cp->return_data();
+	alteraMenus();
+	exit;
 	break;
 
 	case "pegaGrupos":
@@ -330,7 +343,7 @@ function alteraMenus()
     		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','sim','')");
+    	$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";

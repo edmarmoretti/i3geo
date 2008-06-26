@@ -23,5 +23,6 @@ include_once($locaplic."/admin/php/xml.php");
 if(!isset($perfil)){$perfil = "";}
 if(!isset($id_menu)){$id_menu = "";}
 if(!isset($tipo)){$tipo = "";}
+echo header("Content-type: application/xml");
 echo geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic);
 ?>

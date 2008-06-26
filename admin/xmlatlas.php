@@ -20,5 +20,6 @@ if(!isset($locaplic) || !isset($editores))
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 include_once($locaplic."/admin/php/xml.php");
+echo header("Content-type: application/xml");
 echo geraXmlAtlas($locaplic,$editores);
 ?>

@@ -71,6 +71,7 @@ function montaParametros()
 		ins += "</fieldset><br>"
 	}
 	document.body.innerHTML += ins
+	$i("aguarde").style.display="none"
 	//pegaParametros()
 }
 /*

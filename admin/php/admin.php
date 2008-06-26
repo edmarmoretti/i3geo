@@ -46,7 +46,7 @@ if(!isset($locaplic))
 	}
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
-error_reporting(0);
+error_reporting(E_ALL);
 //
 //carrega o phpmapscript
 //
