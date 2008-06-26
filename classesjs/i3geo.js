@@ -77,26 +77,5 @@ for (i = 0; i < scripts.length; i++) {
 		}
 	}
 }
-//scripts
-
-/*var allScriptTags = "";
-//var jsfiles = new Array();
-var jsfiles = ["i3geo_tudo_compacto.js.php"];
-for (i = 0;i < jsfiles.length;i++)
-{
-	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
-	allScriptTags += currentScriptTag;
-}
-//css
-
-var allCssTags = "";
-//var cssfiles = new Array();
-var cssfiles = ["../css/i3geo.css.php"];
-for (i = 0;i < cssfiles.length;i++)
-{
-	var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
-	allCssTags += currentCssTag;
-}
-*/
 document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo.css.php'></script>");
 document.write("<script src='" + scriptLocation + "i3geo_tudo_compacto.js.php'></script>");
