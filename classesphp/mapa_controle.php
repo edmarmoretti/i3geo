@@ -412,6 +412,17 @@ Include:
 Section: Mapa
 */
 /*
+Property: pegaMensagens
+
+Pega as mensagens do metadata 'mensagem'.
+*/
+	case "pegaMensagens":
+		include("classe_mapa.php");
+		$m = new Mapa($map_file);
+		$cp->set_data($m->pegaMensagens());
+				
+	break;
+/*
 Property: reiniciaMapa
 
 Reinicia um mapa restaurando a cópia de segurança.

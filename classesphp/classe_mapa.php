@@ -85,6 +85,23 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
+Method: pegaMensagens
+
+Pega as mensagens do metadata mensagem
+*/
+	function pegaMensagens()
+	{
+		$mensagem = "";
+		foreach($this->layers as $l)
+		{
+			$mensagem .= $l->getmetadata("mensagem");
+		}
+		if (function_exists("mb_convert_encoding"))
+		{$mensagem = mb_convert_encoding($mensagem,"UTF-8","ISO-8859-1");}
+		return ($mensagem);
+	}
+
+/*
 Method: gravaImagemCorpo (depreciado)
 
 Grava a imagem do mapa atual

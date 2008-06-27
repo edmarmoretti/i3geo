@@ -677,6 +677,10 @@ function Mapa(e,m)
 					i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
 				}
 				//
+				//ativa as mensagens no banner
+				//
+				ativaMensagemBanner();
+				//
 				//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 				//se não for feito esse cálculo, o mapa fica ajustado à esquerda
 				//

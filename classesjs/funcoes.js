@@ -179,6 +179,59 @@ function pCookie(nome)
 Section: interface
 */
 /*
+Function: ativaMensagemBanner
+
+Ativa o letreiro móvel.
+
+*/
+function ativaMensagemBanner()
+{
+	if($i("bannerMensagem"))
+	{
+		var monta = function(retorno)
+		{
+			if ($i("bannerMensagem").size == 0){$i("bannerMensagem").size = objmapa.w / 8;}
+			BMessage = retorno.data;
+			if (BMessage != "")
+			{
+				BSize = $i("bannerMensagem").size;
+				BPos=BSize;
+				BSpeed = 1;
+				BSpaces = "";
+				mensagemBanner();
+			}
+		};
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegaMensagens&g_sid="+g_sid;
+		cpObj.call(p,"pegaMensagem",monta);	
+	}
+}
+
+/*
+Function: mensagemBanner
+
+Mostra uma mensagem na tela como um letriro móvel.
+
+As mensagens são obtidas no metadata mensagem que pode ser colocado em layers.
+*/
+function mensagemBanner()
+{
+	if($i("bannerMensagem"))
+	{
+		for (count=0; count<BPos; count++)
+		BSpaces+= " ";
+		if (BPos < 1)
+		{
+			$i("bannerMensagem").value = BMessage.substring(Math.abs(BPos), BMessage.length);
+			if (BPos+BMessage.length < 1)
+			{BPos = BSize;}
+		}
+		else
+		$i("bannerMensagem").value = BSpaces + BMessage;
+		BPos-=BSpeed;
+		setTimeout('mensagemBanner();', 140);
+	}
+}
+/*
 Function: sobeferramentas
 
 Sobe a pilha de ícones na barra de ferramentas.

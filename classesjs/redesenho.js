@@ -473,6 +473,7 @@ retorno - string no formato "var variavel='valor'".
 */
 function ajaxIniciaParametros(retorno)
 {
+	ativaMensagemBanner();
 	var tempo = "";
 	if ($i("openlayers"))
 	{

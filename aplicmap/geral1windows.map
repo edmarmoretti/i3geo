@@ -149,6 +149,7 @@ MAP
 			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
 			"TEMA" "Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
 			"IDENTIFICA" "nao"
+			#"MENSAGEM" "Isto é um teste de mensagem"
 		END
 		NAME "zee"
 		SIZEUNITS PIXELS
