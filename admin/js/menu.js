@@ -4,8 +4,7 @@ function initMenu()
 	ativaBotaoAdicionaMenu()
 	core_carregando();
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	pegaMenus();
-	pegaPerfis();
+	core_pegaPerfis("pegaMenus()");
 }
 function ativaBotaoAdicionaMenu()
 {
@@ -28,23 +27,6 @@ function ativaBotaoAdicionaMenu()
 	};
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
-}
-function pegaPerfis()
-{
-	//pega a lista de perfis
-	var sUrl = "../php/menutemas.php?funcao=pegaPerfisYUI";
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{$perfis = YAHOO.lang.JSON.parse(o.responseText);}
-  			catch(e){core_handleFailure(o,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
 }
 function pegaMenus()
 {
@@ -77,15 +59,15 @@ function montaTabela(dados)
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
         };
         var myColumnDefs = [
-            {label:"exclui",formatter:formatExclui},
-            {label:"salva",formatter:formatSalva},
+            {key:"excluir",label:"",formatter:formatExclui},
+            {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_menu", formatter:formatTexto},
 			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto, editor:"textbox"},
 			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto, editor:"textbox"},
+			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox"},
 			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
 			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto, editor:"textbox"}
         ];
@@ -107,7 +89,29 @@ function montaTabela(dados)
         };
         myDataTable.subscribe("cellMouseoverEvent", myDataTable.highlightEditableCell);
         myDataTable.subscribe("cellMouseoutEvent", myDataTable.onEventUnhighlightCell);
-        myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
+        //myDataTable.subscribe("cellClickEvent", myDataTable.onEventShowCellEditor);
+		myDataTable.subscribe('cellClickEvent',function(ev)
+		{
+			var target = YAHOO.util.Event.getTarget(ev);
+			var column = this.getColumn(target);
+			if (column.key == 'excluir')
+			{
+				var record = this.getRecord(target);
+				excluiLinha(record.getData('id_menu'),target);
+			}
+			else
+			{
+				if (column.key == 'perfil_menu')
+				{
+					var record = this.getRecord(target);
+					var selecionados = record.getData('perfil_menu');
+					var selecionados = selecionados.split(",");
+					core_menuCheckBox($perfisArray,$perfisArray,selecionados,target,record,"perfil_menu");
+				}
+				else
+				{this.onEventShowCellEditor(ev);}
+			}
+		});
 
         // Hook into custom event to customize save-flow of "radio" editor
         myDataTable.subscribe("editorUpdateEvent", function(oArgs)
@@ -161,9 +165,8 @@ function excluiLinha(id,row)
   			{
   				try
   				{
-  					pegaMenus();
-  					//ativaBotaoAdicionaMenu();
-  					//core_ativaPainelAjuda("ajuda","botaoAjuda");
+  					myDataTable.deleteRow(row);
+  					YAHOO.example.container.wait.hide();
   				}
   				catch(e){core_handleFailure(o,o.responseText);}
   			},

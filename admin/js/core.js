@@ -183,11 +183,124 @@ botao - id do elemento que deverá ser lcicado para abrir o painel
 */
 function core_ativaPainelAjuda(id,botao)
 {
-	YAHOO.example.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
-	YAHOO.example.container.panelAjuda.render();
+	if(!YAHOO.example.container.panelAjuda)
+	{
+		YAHOO.example.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelAjuda.render();
+	}
 	YAHOO.util.Event.addListener(botao, "click", YAHOO.example.container.panelAjuda.show, YAHOO.example.container.panelAjuda, true);
 }
+/*
+function: core_pegaPerfis
 
+Pega a lista de perfis
+
+Parameters:
+
+funcao - (opcional) string com o nome da funcao que será executada após a chamada ajax ter tido sucesso
+
+Return
+
+$perfis - variável global com o objeto perfis
+
+$perfisArray - array com a lista de perfis
+*/
+function core_pegaPerfis(funcao)
+{
+	if(arguments.length == 0)
+	{var funcao = "";}
+	//pega a lista de perfis
+	var sUrl = "../php/menutemas.php?funcao=pegaPerfisYUI";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				$perfis = YAHOO.lang.JSON.parse(o.responseText);
+  				$perfisArray = new Array();
+  				for (i=0;i<$perfis.length;i++)
+  				{$perfisArray.push($perfis[i].perfil);}
+  				if(funcao != "")
+  				eval(funcao);
+  			}
+  			catch(e){core_handleFailure(o,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: gera uma janela flutuante com opções de escolha baseadas em checkbox
+
+Parameters:
+
+valores - array com os valores de cada checkbox
+
+textos - array com os nomes de cada checkbox
+
+selecionados - array com os valores marcados
+
+target - objeto para receber o resultado
+*/
+function core_menuCheckBox(valores,textos,selecionados,target,record,key)
+{
+	function on_menuCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK")
+		{
+			var cks = $i("core_menuCK_bd").getElementsByTagName("input");
+			var ins = new Array();
+			for (i=0;i<cks.length;i++)
+			{
+				if(cks[i].checked)
+				ins.push(cks[i].value)
+			}
+			target.innerHTML = "<pre ><p>"+ins.toString()+"</pre>"
+			record.setData(key,ins.toString());
+		}
+		YAHOO.example.container.panelCK.destroy();
+	};
+	if(!$i("core_menuCK"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "core_menuCK";
+		var ndiv = document.createElement("div");
+		ndiv.className= "yui-dt-editor";
+		ndiv.style.height = "144px";
+		ndiv.style.overflow = "auto";
+		ndiv.innerHTML = "<div id='okcancel_checkbox'></div><div id='core_menuCK_bd'></div>";
+		novoel.appendChild(ndiv);
+		document.body.appendChild(novoel);
+		var og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		og_core.addButtons([
+            { label: "OK", value: "OK", checked: false},
+            { label: "Cancel", value: "CANCEL", checked: false }
+        ]);
+		og_core.on("checkedButtonChange", on_menuCheckBoxChange);	
+		YAHOO.example.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelCK.render();
+	}
+	var onde = $i("core_menuCK_bd");
+	onde.innerHTML = "";
+	for (i=0;i<valores.length;i++)
+	{
+		var novoCK = document.createElement("div");
+		var ck = "";
+		for(j=0;j<selecionados.length;j++)
+		{
+			if(selecionados[j] == valores[i])
+			var ck = "CHECKED";
+		}
+		var ins = "<input type=checkbox id='CK_"+valores[i]+"' value='"+valores[i]+"' "+ck+" />"+textos[i]+"<br>";
+		novoCK.innerHTML = ins;
+		onde.appendChild(novoCK);
+	}
+	YAHOO.example.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
+	YAHOO.example.container.panelCK.show();
+}
 //
 //define o local correto dos programas
 var scriptLocation = "";
@@ -207,15 +320,19 @@ for (i = 0; i < scripts.length; i++) {
 //
 //arquivos javascript que serão carregados
 //
+/*
+<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
+<?php if(extension_loaded('zlib')){ob_end_flush();}?>
+*/
 var jsfiles = new Array(
-"../../pacotes/yui252/build/utilities/utilities.js",
-"../../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.js",
+"../../pacotes/yui252/build/utilities/utilities.php",
+"../../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.php",
 "../../pacotes/yui252/build/element/element-beta-min.js",
 "../../pacotes/yui252/build/datasource/datasource-beta-min.js",
-"../../pacotes/yui252/build/datatable/datatable-beta-min.js",
-"../../pacotes/yui252/build/button/button-min.js",
-"../../pacotes/yui252/build/dragdrop/dragdrop-min.js",
-"../../pacotes/yui252/build/container/container-min.js",
+"../../pacotes/yui252/build/datatable/datatable-beta-min.php",
+"../../pacotes/yui252/build/button/button-min.php",
+"../../pacotes/yui252/build/dragdrop/dragdrop-min.php",
+"../../pacotes/yui252/build/container/container-min.php",
 "../../pacotes/yui252/build/connection/connection-min.js",
 "../../pacotes/yui252/build/json/json-min.js"
 );

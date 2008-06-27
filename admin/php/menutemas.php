@@ -51,8 +51,7 @@ switch ($funcao)
 	
 	case "pegaMenusYUI":
 	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
-	echo json_encode($dados);
-	exit;
+	retornaJSON($dados);
 	break;
 	
 	case "pegaTags":
@@ -67,8 +66,7 @@ switch ($funcao)
 	
 	case "pegaPerfisYUI":
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
-	echo json_encode($dados);
-	exit;
+	retornaJSON($dados);
 	break;
 
 	case "alteraMenus":
@@ -147,6 +145,13 @@ switch ($funcao)
 	$cp->set_data(listaMapsTemas());
 	$cp->return_data();
 	break;
+}
+function retornaJSON($obj)
+{
+	if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
+	echo json_encode($obj);
+	if(extension_loaded('zlib')){ob_end_flush();}
+	exit;	
 }
 function excluiPerfil($id)
 {
