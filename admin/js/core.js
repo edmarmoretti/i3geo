@@ -43,6 +43,19 @@ object - objeto javaScript
 var $i = function(id)
 {return document.getElementById(id);};
 /*
+Variable: $mapfiles
+
+Armazena o objeto com a lista de mapfiles
+*/
+var $mapfiles = "";
+/*
+Variable: $tags
+
+Armazena o objeto com a lista de tags
+*/
+var $tags = "";
+
+/*
 Function: core_handleSuccess
 
 Processa o retorno da chamada em ajax quando tiver sucesso. Esta é uma
@@ -82,7 +95,7 @@ function core_handleFailure(o,texto)
 {
 	//div onde será mostrado o log
 	if(!$i('logajax'))
-	{document.body.innerHTML += "<div id=logajax ></div>";}
+	{return;}
 	log = $i('logajax');
 	YAHOO.log("The failure handler was called.  tId: " + o.tId + ".", "info", "example");
 	if(o.responseText !== undefined)
@@ -121,8 +134,12 @@ function core_makeRequest(sUrl,callback)
 Function: core_carregando
 
 Mostra uma janela de aguarde
+
+Parameters:
+
+tipo - ativa|desativa|string com uma mensagem
 */
-function core_carregando()
+function core_carregando(tipo)
 {
 	if (!YAHOO.example.container.wait)
 	{
@@ -131,7 +148,13 @@ function core_carregando()
 		YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
 		YAHOO.example.container.wait.render(document.body);
 	}
-	YAHOO.example.container.wait.show();
+	YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/>");		
+	if(tipo == "ativa")
+	{YAHOO.example.container.wait.show();}
+	if(tipo == "desativa")
+	{YAHOO.example.container.wait.hide();}
+	if(tipo != "ativa" && tipo != "desativa")
+	{YAHOO.example.container.wait.setBody("<img src=\"../../imagens/aguarde.gif\"/> "+tipo);}	
 }
 /*
 Function: core_dialogoContinua
@@ -150,8 +173,6 @@ largura - largura do diálogo em px
 */
 function core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 {
-	if(!$i("dialogoContinua"))
-	{document.body.innerHTML += "<div id='dialogoContinua'></div>";}
 	// Instantiate the Dialog
 	YAHOO.namespace("continua.container");
 	YAHOO.continua.container.simpledialog1 = 
@@ -169,7 +190,7 @@ function core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 						  { text:"N&atilde;o",  handler:handleNo } ]
 	} );
 	YAHOO.continua.container.simpledialog1.setHeader("Tem certeza?");
-	YAHOO.continua.container.simpledialog1.render("dialogoContinua");
+	YAHOO.continua.container.simpledialog1.render(document.body);
 	YAHOO.continua.container.simpledialog1.show();
 }
 /*
@@ -210,7 +231,7 @@ function core_pegaPerfis(funcao)
 	if(arguments.length == 0)
 	{var funcao = "";}
 	//pega a lista de perfis
-	var sUrl = "../php/menutemas.php?funcao=pegaPerfisYUI";
+	var sUrl = "../php/menutemas.php?funcao=pegaPerfis";
 	var callback =
 	{
   		success:function(o)
@@ -224,12 +245,131 @@ function core_pegaPerfis(funcao)
   				if(funcao != "")
   				eval(funcao);
   			}
-  			catch(e){core_handleFailure(o,o.responseText);}
+  			catch(e){core_handleFailure(e,o.responseText);}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
-	}; 
+	};
+	core_carregando("buscando perfis...");
 	core_makeRequest(sUrl,callback)
+}
+/*
+function: core_pegaMapfiles
+
+Pega a lista de mapfiles
+
+Parameters:
+
+funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+*/
+function core_pegaMapfiles(funcaoM)
+{
+	if(arguments.length == 0)
+	{var funcao = "";}
+	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas";
+	var callbackM =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				$mapfiles = YAHOO.lang.JSON.parse(o.responseText);
+  				if(funcaoM != "")
+  				eval(funcaoM);
+  			}
+  			catch(e){core_handleFailure(e.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callbackM)
+}
+/*
+Function: core_comboMapfiles
+
+Cria um combo para escolha do mapfile
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+*/
+function core_comboMapfiles(onde,id,marcar)
+{
+	if($mapfiles == "")
+	{
+		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"')")
+	}
+	else
+	{
+		ins = "<select  id='"+id+"' >"
+		ins += core_comboObjeto($mapfiles,"","",marcar)
+		ins += "</select></p>"
+		$i(onde).innerHTML = ins;
+	}
+}
+/*
+function: core_pegaTags
+
+Pega a lista de tags
+
+Parameters:
+
+funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+*/
+function core_pegaTags(funcao)
+{
+	if(arguments.length == 0)
+	{var funcao = "";}
+	var sUrl = "../php/menutemas.php?funcao=pegaTags";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				$tags = YAHOO.lang.JSON.parse(o.responseText);
+  				if(funcao != "")
+  				eval(funcao);
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_comboTags
+
+Cria um combo para escolha de tags
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+change - nome da função do evento onchange
+*/
+function core_comboTags(onde,id,change)
+{
+	if($tags == "")
+	{
+		core_pegaTags("core_comboTags('"+onde+"','"+id+"','"+change+"')")
+	}
+	else
+	{
+		ins = "<select onchange=\""+change+"(this.value)\" id='"+id+"' >"
+		ins += core_comboObjeto($tags,"nome","nome","")
+		ins += "</select></p>"
+		$i(onde).innerHTML = ins;
+	}
 }
 /*
 Function: gera uma janela flutuante com opções de escolha baseadas em checkbox
@@ -243,6 +383,10 @@ textos - array com os nomes de cada checkbox
 selecionados - array com os valores marcados
 
 target - objeto para receber o resultado
+
+record - objeto record
+
+key - chave (nome do item)
 */
 function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 {
@@ -262,8 +406,9 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 			record.setData(key,ins.toString());
 		}
 		YAHOO.example.container.panelCK.destroy();
+		YAHOO.example.container.panelCK = null;
 	};
-	if(!$i("core_menuCK"))
+	if(!YAHOO.example.container.panelCK)
 	{
 		var novoel = document.createElement("div");
 		novoel.id =  "core_menuCK";
@@ -301,8 +446,54 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 	YAHOO.example.container.panelCK.moveTo(YAHOO.util.Dom.getX(target),YAHOO.util.Dom.getY(target));
 	YAHOO.example.container.panelCK.show();
 }
+/*
+Function: core_combosimnao
+
+Retorna os itens option de um combo sim nao
+*/
+function core_combosimnao(marcar)
+{
+	var ins = "<option value='' "
+	if (marcar == ""){ins += "selected"}
+	ins += ">---</option>";
+	ins += "<option value='SIM' "
+	if (marcar == "sim" || marcar == "SIM"){ins += "selected"}
+	ins += ">sim</option>";
+	ins += "<option value='NAO' "
+	if (marcar == "nao" || marcar == "NAO"){ins += "selected"}
+	ins += ">nao</option>";
+	return(ins)
+}
+/*
+Function: core_comboObjeto
+
+Retorna os itens option de um combo baseado em um objeto json
+*/
+function core_comboObjeto(obj,valor,texto,marcar)
+{
+	var ins = "<option value='' "
+	ins += ">---</option>";
+	for (var k=0;k<obj.length;k++)
+	{
+		if(valor != "")
+		var v = eval("obj[k]."+valor);
+		else
+		var v = obj[k];
+		if(texto != "")
+		var t = eval("obj[k]."+texto);
+		else
+		var t = obj[k];
+		ins += "<option value='"+v+"' "
+		if (marcar == v){ins += "selected"}
+		ins += ">"+t+"</option>";
+	}
+	return(ins)
+}
+//
+//carregador de javascript
 //
 //define o local correto dos programas
+//
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
 var i = 0;

@@ -1,7 +1,9 @@
 <?php
 include_once("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
-
+include_once("../../classesphp/carrega_ext.php");
+include_once("../../classesphp/pega_variaveis.php");
+error_reporting(0);
 $objcontype[0] = "MS_INLINE";
 $objcontype[1] = "MS_SHAPEFILE";
 $objcontype[2] = "MS_TILED_SHAPEFILE";
@@ -27,62 +29,189 @@ $objlayertypes[6] = "MS_LAYER_CIRCLE";
 $objlayertypes[7] = "MS_LAYER_TILEINDEX";
 $objlayertypes[8] = "MS_LAYER_CHART";
 
-$dados = array();
 $codigoLayer = $id;
 $mapfile = "../../temas/".$codigoLayer.".map";
 $mapa = ms_newMapObj($mapfile);
-$layers = $mapa->getalllayernames();
-$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
-$xml .= "\n<parsemapfile>\n";
-$xml .= "<tiposconexao>".implode(",",$objcontype)."</tiposconexao>\n";
-$xml .= "<tiposlayer>".implode(",",$objlayertypes)."</tiposlayer>\n";
-foreach ($layers as $layer)
+if(!isset($tipoparse) || $tipoparse=="")
+{mapfile();exit;}
+
+if($tipoparse == "legenda")
 {
-	$xml .= "\n<layer>\n";
-	$layer = $mapa->getlayerbyname($layer);
-	$xml .= "<titulo>".$layer->getmetadata('tema')."</titulo>\n";
-	$xml .= "<connection>\n";
-	$con = $layer->connection;
-	$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
-	$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
-	$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
-	$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
-	$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
-	$xml .= "</connection>\n";
-	$xml .= "<connectiontype>".$objcontype[$layer->connectiontype]."</connectiontype>\n";
-	$d = $layer->data;
-	$xml .= "<data>$d</data>\n";
-	$d = explode("(",$d);
-	$d = explode(")",$d[1]);
-	$xml .= "<select>$d[0]</select>\n";
-	$xml .= "<type>".$objlayertypes[$layer->type]."</type>\n";
-	$xml .= "<filter>".$layer->getfilter()."</filter>\n";
-	$xml .= "<filteritem>$layer->filteritem</filteritem>\n";
-	$xml .= "<group>$layer->group</group>\n";
-	$xml .= "<labelangleitem>$layer->labelangleitem</labelangleitem>\n";
-	$xml .= "<labelitem>$layer->labelitem</labelitem>\n";
-	$xml .= "<labelmaxscale>$layer->labelmaxscale</labelmaxscale>\n";
-	$xml .= "<labelminscale>$layer->labelminscale</labelminscale>\n";
-	$xml .= "<labelsizeitem>$layer->labelsizeitem</labelsizeitem>\n";
-	$xml .= "<maxscale>$layer->maxscale</maxscale>\n";
-	$xml .= "<minscale>$layer->minscale</minscale>\n";
-	$xml .= "<offsite>".$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue."</offsite>\n";
-	$xml .= "<opacity>$layer->opacity</opacity>\n";
-	$xml .= "<symbolscale>$layer->symbolscale</symbolscale>\n";
-	$xml .= "<tileindex>$layer->tileindex</tileindex>\n";
-	$xml .= "<tileitem>$layer->tileitem</tileitem>\n";
-	$xml .= "<tolerance>$layer->tolerance</tolerance>\n";
-	$xml .= "<toleranceunits>$layer->toleranceunits</toleranceunits>\n";
-	$xml .= "<sizeunits>$layer->sizeunits</sizeunits>\n";
-	$xml .= "<projection>$layer->getProjection</projection>\n";
-	$xml .= "<name>$layer->name</name>\n";
-	$xml .= "<classes>\n";
-	$xml .= pegaClasses(&$xml);
-	$xml .= "</classes>\n";
-	$xml .= "</layer>";
+	$tipoLegenda = tipoLegenda($layername);
+	//if($tipoLegenda == "simples")
+	//{legendaSimples($layername);}
+	legendaSimples($layername);
 }
-$xml .= "</parsemapfile>\n";
-echo $xml;
+//
+//verifica o tipo de legenda
+//pode retornar:
+//simples - o layer não terá classes
+//valorunico - as classes são definidas por um item
+//intervalo - as classes são definidas por um intervalo do mesmo item
+//
+function tipoLegenda($layername)
+{
+	global $mapa;
+	$tipolegenda = "";
+	$layer = $mapa->getlayerbyname($layername);
+	$nclasses = $layer->numclasses;
+	if($nclasses == 1)
+	{
+		$classe = $layer->getclass(0);
+		$expressao = $classe->getExpression();
+		if($expressao == "")
+		{return "simples";exit;}
+	}
+	$verItem = array();
+	for($i=0;$i<$nclasses;++$i)
+	{
+		$classe = $layer->getclass($i);
+		$expressao = $classe->getExpression();
+		if(count(explode("[",$expressao)) > 2)
+		{
+			return "intervalo";
+			exit;
+		}
+		//
+		//verifica se os itens são únicos nas expressões
+		//
+		$item = preg_replace('/.*\[|\].*/i','\1', $expressao);
+		$verItem[$item] = 0;
+	}
+	if(count($verItem) == 1)
+	return "valorunico";
+	else
+	return "simples";
+}
+function legendaSimples($layername)
+{
+	global $mapa;
+	$tipolegenda = "";
+	$layer = $mapa->getlayerbyname($layername);
+	$classe = $layer->getclass(0);
+	$estilo = $classe->getstyle(0);
+	$cor = $estilo->color;
+	$outcor = $estilo->outlinecolor;
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	$xml .= "<xml-tag xmlns='http://www.gvsig.gva.es'>\n";
+	$xml .= "<property key='className' value='com.iver.cit.gvsig.fmap.rendering.SingleSymbolLegend'/>\n";
+	$xml .= "<property key='labelFieldName'/>\n";
+	$xml .= "<property key='labelHeightFieldName'/>\n";
+	$xml .= "<property key='labelRotationFieldName'/>\n";
+	$xml .= "<property key='followHeaderEncoding' value='true'/>\n";
+	$xml .= "<xml-tag>\n";
+	$xml .= "<property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/>\n";
+	$xml .= "<property key='m_symbolType' value='4'/>\n";
+	$xml .= "<property key='m_Style' value='1'/>\n";
+	$xml .= "<property key='m_useOutline' value='true'/>\n";
+	$xml .= "<property key='m_Color' value='".$cor->red.",".$cor->green.",".$cor->blue.",255'/>\n";
+	if($outcor->red != -1)
+	$xml .= "<property key='m_outlineColor' value='".$outcor->red.",".$outcor->green.",".$outcor->blue.",255'/>\n";
+	else
+	$xml .= "<property key='m_outlineColor' value='0,0,0,255'/>\n";
+	$xml .= "<property key='m_bUseFontSize' value='true'/>\n";
+	$xml .= "<property key='m_bDrawShape' value='true'/>\n";
+	$xml .= "<property key='m_Size' value='2'/>\n";
+	$xml .= "<property key='m_Rotation' value='0'/>\n";
+	$xml .= "<property key='m_LinePattern' value='0'/>\n";
+	$xml .= "<property key='m_stroke' value='1.0'/>\n";
+	$xml .= "<property key='m_bUseSize' value='false'/>\n";
+	$xml .= "<property key='m_AlingVert' value='0'/>\n";
+	$xml .= "<property key='m_AlingHoriz' value='0'/>\n";
+	$xml .= "<property key='m_Descrip'/>\n";
+	$xml .= "<property key='rgb' value='-14902251'/>\n";
+	$xml .= "</xml-tag>\n";
+	$xml .= "</xml-tag>\n";
+	echo header("Content-type: application/xml");
+	echo $xml;
+	exit;		
+}
+//
+//gera xml com parâmetros do mapfile
+//
+function mapfile()
+{
+	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes;
+	$layers = $mapa->getalllayernames();
+	$dados = array(); 
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	$xml .= "\n<parsemapfile>\n";
+	$xml .= "<tiposconexao>".implode(",",$objcontype)."</tiposconexao>\n";
+	$xml .= "<tiposlayer>".implode(",",$objlayertypes)."</tiposlayer>\n";
+	foreach ($layers as $layer)
+	{
+		$xml .= "\n<layer>\n";
+		$layer = $mapa->getlayerbyname($layer);
+		$xml .= "<titulo>".$layer->getmetadata('tema')."</titulo>\n";
+		$d = $layer->data;
+		$ct = $objcontype[$layer->connectiontype];
+		if ($ct == "MS_SHAPEFILE" || $ct == "" || $ct == "MS_RASTER")
+		{
+			$ct = "MS_WMS";
+			$d = "HTTP://mapas.mma.gov.br/i3geo/ogc.php?tema=".$codigoLayer;
+			$xml .= "<version>1.1.1</version>";
+			$xml .= "<srs>EPSG:4291</srs>";
+			$xml .= "<format>image/png</format>";
+		}
+		else
+		{$xml .= "<geraxmllegenda>parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda</geraxmllegenda>";}	
+		$xml .= "<connectiontype>".$ct."</connectiontype>\n";
+		$xml .= "<data>$d</data>\n";
+		$xml .= "<name>$layer->name</name>\n";
+		if($ct != "MS_WMS")
+		{
+			$xml .= "<connection>\n";
+			$con = $layer->connection;
+			$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
+			$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
+			$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
+			$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
+			$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
+			$xml .= "</connection>\n";
+			$d = explode("(",$d);
+			$d = explode(")",$d[1]);
+			$xml .= "<select>$d[0]</select>\n";
+			$string = preg_replace('/.*from\s*(.+).*/i', '\1', $d[0]);
+			$s = explode("WHERE",$string);
+			if(count($s) == 1)
+			$s = explode("where",$string);
+			$esquemaTabela = explode(".",$s[0]);
+			$xml .= "<esquema>".$esquemaTabela[0]."</esquema>";
+			$xml .= "<tabela>".$esquemaTabela[1]."</tabela>";
+			$xml .= "<where>".$s[1]."</where>";
+			$xml .= "<type>".$objlayertypes[$layer->type]."</type>\n";
+			$xml .= "<filter>".$layer->getfilter()."</filter>\n";
+			$xml .= "<filteritem>$layer->filteritem</filteritem>\n";
+			$xml .= "<labelangleitem>$layer->labelangleitem</labelangleitem>\n";
+			$xml .= "<labelitem>$layer->labelitem</labelitem>\n";
+			$xml .= "<labelmaxscale>$layer->labelmaxscale</labelmaxscale>\n";
+			$xml .= "<labelminscale>$layer->labelminscale</labelminscale>\n";
+			$xml .= "<labelsizeitem>$layer->labelsizeitem</labelsizeitem>\n";
+		}
+		$xml .= "<group>$layer->group</group>\n";
+		$xml .= "<maxscale>$layer->maxscale</maxscale>\n";
+		$xml .= "<minscale>$layer->minscale</minscale>\n";
+		$xml .= "<offsite>".$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue."</offsite>\n";
+		$xml .= "<opacity>$layer->opacity</opacity>\n";
+		if($ct != "MS_WMS")
+		{
+			$xml .= "<symbolscale>$layer->symbolscale</symbolscale>\n";
+			$xml .= "<tileindex>$layer->tileindex</tileindex>\n";
+			$xml .= "<tileitem>$layer->tileitem</tileitem>\n";
+			$xml .= "<tolerance>$layer->tolerance</tolerance>\n";
+			$xml .= "<toleranceunits>$layer->toleranceunits</toleranceunits>\n";
+			$xml .= "<sizeunits>$layer->sizeunits</sizeunits>\n";
+			$xml .= "<projection>$layer->getProjection</projection>\n";
+			$xml .= "<classes>\n";
+			$xml .= pegaClasses(&$xml);
+			$xml .= "</classes>\n";
+		}
+		$xml .= "</layer>";
+	}
+	$xml .= "</parsemapfile>\n";
+	echo header("Content-type: application/xml");
+	echo $xml;
+}
 function pegaClasses($xml)
 {
 	global $layer;

@@ -88,36 +88,6 @@ switch ($funcao)
 	break;
 }
 /*
-Function: verificaFilhos
-
-Verifica se o pai tem filhos
-*/
-function verificaFilhos()
-{
-	global $tabela,$coluna,$id;
-	try 
-	{
-    	$res = false;
-    	if($tabela == "i3geoadmin_n2")
-    	{
-    		$r = pegaDados("select * from i3geoadmin_n3 where id_n2=$id");
-    		if(count($r) > 0)
-    		$res = true;
-    	}
-    	if($tabela == "i3geoadmin_n1")
-    	{
-    		$r = pegaDados("select * from i3geoadmin_n2 where id_n1=$id");
-    		if(count($r) > 0)
-    		$res = true;
-    	}
-    	return $res;
-	}
-	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
-}
-/*
 Function: alteraN3
 
 Altera o registro de um nível 3 (temas)

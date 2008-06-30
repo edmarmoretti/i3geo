@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Menus</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+div{color:yellow}
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+</head>
+<body class=" yui-skin-sam">
+<div id=teste >oi</div>
+<div  >oi</div>
+<div  >oi</div>
+<div  >oi</div>
+<script>
+/*
+var s = "ttttt"
+alert(YAHOO.lang.isNumber(s))
+
+*/
+/*
+alert(YAHOO.lang.substitute('Hello {world}', {'world':'earth'}))
+var processText = function(key, value) {  
+return value.toUpperCase();  
+};  
+alert(YAHOO.lang.substitute('Hello {world}', {'world':'earth'}, processText))
+*/
+/*
+var foo = {
+  count :0,
+  'method' : function(data) {
+    this.count++;
+    if(this.count == 5) {
+      timer.cancel();
+    }
+    document.getElementById("teste").innerHTML += this.count;
+  }
+}  
+var timer = YAHOO.lang.later(100, foo, 'method', [{data:'bar', data2:'zeta'}], true);
+*/
+//YAHOO.util.Dom.batch(document.getElementsByTagName("div"),function(d){d.style.color="red";})
+/*
+ getChildrenBy
+Array getChildrenBy ( node , method )
+Returns an array of HTMLElement childNodes that pass the test method.
+
+Parameters:
+    node <HTMLElement> The HTMLElement to start from 
+    method <Function> A boolean function used to test children that receives the node being tested as its only argument 
+
+Returns: Array
+    A static array of HTMLElements
+
+*/
+alert(YAHOO.util.Dom.getViewportHeight()) //getViewportWidth
+
+</script>
+</body>

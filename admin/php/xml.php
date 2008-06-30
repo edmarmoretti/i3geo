@@ -41,18 +41,18 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 }
 function geraRSStemas($locaplic,$id_n2)
 {
-	$sql = "select t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,'' as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = ''"; 
+	$sql = "select t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
 }
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
-	$sql = "select g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = ''"; 
+	$sql = "select g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
 
 function geraRSSgrupos($locaplic)
 {
-	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws from i3geoadmin_n1 as n1,i3geoadmin_grupos as g where g.id_grupo = n1.id_grupo and n1.n1_perfil = ''"; 
+	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws from i3geoadmin_n1 as n1,i3geoadmin_grupos as g where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
 
@@ -101,7 +101,7 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<description>".entity_decode($row["desc_ws"])."</description>\n";
 		$xml .= "<link>".xmlTexto_prepara($row["link_ws"])."</link>\n";
 		$xml .= "<pubDate/>\n";
-		$xml .= "<author>".entity_decode($row["autor_ws"])."</author>\n";
+		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
 		$xml .= "</item>\n";
 	}
 	$xml .= "</channel></rss>\n";

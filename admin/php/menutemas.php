@@ -43,70 +43,75 @@ switch ($funcao)
 	$cp->set_data(importarXmlMenu());
 	$cp->return_data();
 	break;
-		
-	case "pegaMenus":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_menus order by nome_menu'));
-	$cp->return_data();
-	break;
 	
-	case "pegaMenusYUI":
+	case "pegaMenus":
 	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
 	retornaJSON($dados);
 	break;
 	
 	case "pegaTags":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_tags order by nome'));
-	$cp->return_data();
+	$sql = "SELECT * from i3geoadmin_tags order by nome";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "pegaPerfis":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_perfis order by perfil'));
-	$cp->return_data();
-	break;
-	
-	case "pegaPerfisYUI":
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
 	retornaJSON($dados);
 	break;
 
 	case "alteraMenus":
-	alteraMenus();
+	$novo = alteraMenus();
+	$sql = "SELECT * from i3geoadmin_menus WHERE id_menu = '".$novo."'";
+	retornaJSON(pegaDados($sql));
 	exit;
 	break;
 
 	case "pegaGrupos":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_grupos order by nome_grupo'));
-	$cp->return_data();
+	$dados = pegaDados('SELECT * from i3geoadmin_grupos order by nome_grupo');
+	retornaJSON($dados);
+	exit;
 	break;
-	
+
 	case "alteraGrupos":
-	$cp->set_data(alteraGrupos());
-	$cp->return_data();
+	$novo = alteraGrupos();
+	$sql = "SELECT * from i3geoadmin_grupos WHERE id_grupo = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
-	
+
 	case "pegaSubGrupos":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo'));
-	$cp->return_data();
+	$dados = pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo');
+	retornaJSON($dados);
+	exit;
 	break;
 	
 	case "alteraSubGrupos":
-	$cp->set_data(alteraSubGrupos());
-	$cp->return_data();
+	$novo = alteraSubGrupos();
+	$sql = "SELECT * from i3geoadmin_subgrupos WHERE id_subgrupo = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 
 	case "pegaTemas":
-	$cp->set_data(pegaTemas());
-	$cp->return_data();
+	$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id_tema'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "pegaTemas2":
-	$cp->set_data(pegaTemas2());
-	$cp->return_data();
-	break;	
+	retornaJSON(pegaTemas2());
+	exit;
+	break;
 	
 	case "alteraTemas":
-	$cp->set_data(alteraTemas());
-	$cp->return_data();
+	//$r será igual ao novo id criado, no caso de inserção de um novo tema
+	$r = alteraTemas();
+	if($id == "")
+	retornaJSON($r);
+	else
+	retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = '$id'"));
+	exit;
 	break;
 	
 	case "alteraTags":
@@ -118,32 +123,63 @@ switch ($funcao)
 	$cp->set_data(alteraPerfis());
 	$cp->return_data();
 	break;
-
-	case "pegaSubXGrupos":
-	$cp->set_data(pegaSubXGrupos());
-	$cp->return_data();
-	break;
 	
 	case "excluirRegistro":
 	if($tabela == "grupos")
-	{$tabela = "i3geoadmin_grupos";$coluna = "id_grupo";}
+	{
+		$tabela = "i3geoadmin_grupos";
+		$coluna = "id_grupo";
+		$filhos = verificaFilhos();
+		if($filhos)
+		{
+			retornaJSON("erro");
+			exit;
+		}	
+	}
 	if($tabela == "tags")
 	{excluiTagTemas($id);$tabela = "i3geoadmin_tags";$coluna = "id_tag";}
 	if($tabela == "perfis")
 	{excluiPerfil($perfil);$tabela = "i3geoadmin_perfis";$coluna = "perfil";}
 	if($tabela == "subgrupos")
-	{$tabela = "i3geoadmin_subgrupos";$coluna = "id_subgrupo";}
+	{
+		$tabela = "i3geoadmin_subgrupos";
+		$coluna = "id_subgrupo";
+		$filhos = verificaFilhos();
+		if($filhos)
+		{
+			retornaJSON("erro");
+			exit;
+		}
+	}
 	if($tabela == "temas")
-	{$tabela = "i3geoadmin_temas";$coluna = "id_tema";}
+	{
+		$tabela = "i3geoadmin_temas";
+		$coluna = "id_tema";
+		$filhos = verificaFilhos();
+		if($filhos)
+		{
+			retornaJSON("erro");
+			exit;
+		}
+	}
 	if($tabela == "menus")
-	{$tabela = "i3geoadmin_menus";$coluna = "id_menu";}
-	$cp->set_data(exclui());
-	$cp->return_data();
+	{
+		$tabela = "i3geoadmin_menus";
+		$coluna = "id_menu";
+		$filhos = verificaFilhos();
+		if($filhos)
+		{
+			retornaJSON("erro");
+			exit;
+		}
+	}
+	retornaJSON(exclui());
+	exit;
 	break;
 	
 	case "listaMapsTemas":
-	$cp->set_data(listaMapsTemas());
-	$cp->return_data();
+	retornaJSON(listaMapsTemas());
+	exit;
 	break;
 }
 function retornaJSON($obj)
@@ -282,7 +318,7 @@ function pegaTemas2()
 	{
     	$resultado = array();
     	require_once("conexao.php");
-    	foreach($dbh->query('SELECT codigo_tema,nome_tema from i3geoadmin_temas order by nome_tema') as $row)
+    	foreach($dbh->query('SELECT codigo_tema,nome_tema,id_tema from i3geoadmin_temas order by nome_tema') as $row)
     	{
         	$continua = true;
         	if(isset($filtro) && $filtro != "")
@@ -298,7 +334,8 @@ function pegaTemas2()
         	if ($continua)
         	$resultado[] = array(
 				"nome_tema"=>$row['nome_tema'],
-				"codigo_tema"=>$row['codigo_tema']
+				"codigo_tema"=>$row['codigo_tema'],
+				"id_tema"=>$row['id_tema']
 				);
     	}
     	$dbh = null;
@@ -310,26 +347,6 @@ function pegaTemas2()
     	return "Error!: " . $e->getMessage();
 	}
 }
-
-/*
-Function: pegaSubXGrupos
-
-Pega a lista de sub-grupos por grupos
-*/
-function pegaSubXGrupos()
-{
-/*
-select i3geoadmin_subxgrupos.id_subxgrupo,i3geoadmin_grupos.nome_grupo,i3geoadmin_subgrupos.nome_subgrupo
-from
-i3geoadmin_grupos,i3geoadmin_subgrupos,i3geoadmin_subxgrupos
-where
-i3geoadmin_grupos.id_grupo = i3geoadmin_subxgrupos.id_grupo
-and
-i3geoadmin_subgrupos.id_subgrupo = i3geoadmin_subxgrupos.id_subgrupo
-order by nome_grupo,nome_subgrupo
-*/
-
-}
 /*
 Function: alteraMenus
 
@@ -340,18 +357,26 @@ function alteraMenus()
 	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu;
 	try 
 	{
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		$retorna = "";
     	include("conexao.php");
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
+			$retorna = "ok";
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
+			$id_menu = $dbhw->query("SELECT * FROM i3geoadmin_menus");
+			$id_menu = $id_menu->fetchAll();
+			$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
+			$retorna = $id_menu;
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -448,7 +473,7 @@ function alteraTags()
 	try 
 	{
 		$dbh = "";
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id != "")
 		{
@@ -489,18 +514,26 @@ function alteraGrupos()
 	global $nome,$desc,$id;
 	try 
 	{
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+    	$retorna = "";
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
+    		$retorna = "ok";
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
+			$id_grupo = $dbh->query("SELECT * FROM i3geoadmin_grupos");
+			$id_grupo = $id_grupo->fetchAll();
+			$id_grupo = intval($id_grupo[count($id_grupo)-1]['id_grupo']);
+			$retorna = $id_grupo;
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -517,18 +550,26 @@ function alteraSubGrupos()
 	global $nome,$desc,$id;
 	try 
 	{
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
+    	$retorna = "";
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
+    		$retorna = "ok";
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_subgrupos");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_subgrupo']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -545,16 +586,23 @@ function alteraTemas()
 	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags;
 	try 
 	{
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
-		$tags = mb_convert_encoding($tags,"UTF-8","ISO-8859-1");
+		$retorna = "ok";
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		//$tags = mb_convert_encoding($tags,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_temas");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_tema']);
+			$retorna = $id;    	
+    	}
     	//verifica se é necessário adicionar algum tag novo
     	$tags = explode(" ",$tags);
     	foreach($tags as $tag)
@@ -566,7 +614,7 @@ function alteraTemas()
     	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{

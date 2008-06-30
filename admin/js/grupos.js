@@ -1,18 +1,18 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaMenu()
+	ativaBotaoAdicionaGrupo()
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaPerfis("pegaMenus()");
+	core_pegaPerfis("pegaGrupos()");
 }
-function ativaBotaoAdicionaMenu()
+function ativaBotaoAdicionaGrupo()
 {
 	var adicionalinha = function()
 	{
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=";
+		var sUrl = "../php/menutemas.php?funcao=alteraGrupos";
 		var callback =
 		{
   			success:function(o)
@@ -32,10 +32,10 @@ function ativaBotaoAdicionaMenu()
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
 }
-function pegaMenus()
+function pegaGrupos()
 {
-	core_carregando("buscando menus...");
-	var sUrl = "../php/menutemas.php?funcao=pegaMenus";
+	core_carregando("buscando grupos...");
+	var sUrl = "../php/menutemas.php?funcao=pegaGrupos";
 	var callback =
 	{
   		success:function(o)
@@ -56,8 +56,13 @@ function montaTabela(dados)
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
-            elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
+            elCell.innerHTML = "<p style=width:250px >" + oData + "</p>";
         };
+        var formatTextoId = function(elCell, oRecord, oColumn, oData)
+        {
+            elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
+        };
+
         var formatSalva = function(elCell, oRecord, oColumn)
         {
             elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
@@ -69,18 +74,15 @@ function montaTabela(dados)
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
             {label:"salvar",formatter:formatSalva},
-            {label:"id",key:"id_menu", formatter:formatTexto},
-			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto, editor:"textbox"},
-			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox"},
-			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto, editor:"textbox"}
+            {label:"id",key:"id_grupo", formatter:formatTextoId},
+			{label:"nome",resizeable:true,key:"nome_grupo", formatter:formatTexto, editor:"textbox"},
+			{label:"descrição",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:"textbox"}
         ];
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
         {
-            fields: ["publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
+            fields: ["desc_grupo","id_grupo","nome_grupo"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
@@ -116,20 +118,10 @@ function montaTabela(dados)
 			if (column.key == 'excluir')
 			{
 				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_menu'),target);
+				excluiLinha(record.getData('id_grupo'),target);
 			}
 			else
-			{
-				if (column.key == 'perfil_menu')
-				{
-					var record = this.getRecord(target);
-					var selecionados = record.getData('perfil_menu');
-					var selecionados = selecionados.split(",");
-					core_menuCheckBox($perfisArray,$perfisArray,selecionados,target,record,"perfil_menu");
-				}
-				else
-				{this.onEventShowCellEditor(ev);}
-			}
+			{this.onEventShowCellEditor(ev);}
 		});
         // Hook into custom event to customize save-flow of "radio" editor
         myDataTable.subscribe("editorUpdateEvent", function(oArgs)
@@ -150,15 +142,12 @@ function montaTabela(dados)
 function gravaLinha(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);
-	var publicado_menu = r.getData("publicado_menu");
-	var perfil_menu = r.getData("perfil_menu");
-	var aberto = r.getData("aberto")
-	var desc_menu = r.getData("desc_menu")
-	var id_menu = r.getData("id_menu")
-	var nome_menu = r.getData("nome_menu")
+	var id_grupo = r.getData("id_grupo");
+	var nome_grupo = r.getData("nome_grupo");
+	var desc_grupo = r.getData("desc_grupo");
 	core_carregando("ativa");
-	core_carregando(" gravando registro do id= "+id_menu);
-	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
+	core_carregando(" gravando registro do id= "+id_grupo);
+	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo;
 	var callback =
 	{
   		success:function(o)
@@ -178,7 +167,7 @@ function excluiLinha(id,row)
 		this.hide();
 		core_carregando("ativa");
 		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
+		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
 		var callback =
 		{
   			success:function(o)
@@ -187,7 +176,7 @@ function excluiLinha(id,row)
   				{
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem grupos vinculados a este menu</span>");
+  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem sub-grupos vinculados a este grupo</span>");
   						setTimeout("core_carregando('desativa')",3000)
   					}
   					else

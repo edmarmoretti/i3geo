@@ -156,4 +156,60 @@ function pegaDados($sql)
     	return "Error!: " . $e->getMessage();
 	}
 }
+/*
+Function: verificaFilhos
+
+Verifica se o pai tem filhos
+*/
+function verificaFilhos()
+{
+	global $tabela,$id;
+	try 
+	{
+    	$res = false;
+    	if($tabela == "i3geoadmin_n2")
+    	{
+    		$r = pegaDados("select * from i3geoadmin_n3 where id_n2=$id");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_n1")
+    	{
+    		$r = pegaDados("select * from i3geoadmin_n2 where id_n1=$id");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_menus")
+    	{
+    		$r = pegaDados("select * from i3geoadmin_n1 where id_menu=$id");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_grupos")
+    	{
+    		$r = pegaDados("select n1.id_grupo from i3geoadmin_n1 as n1, i3geoadmin_n2 as n2 where n1.id_n1 = n2.id_n1 and n1.id_grupo = '$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_subgrupos")
+    	{
+    		$r = pegaDados("select n2.id_subgrupo from i3geoadmin_n3 as n3, i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_temas")
+    	{
+    		$r = pegaDados("select id_tema from i3geoadmin_n3 where id_tema = '$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+
+    	return $res;
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+
 ?>
