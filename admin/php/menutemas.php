@@ -120,8 +120,10 @@ switch ($funcao)
 	break;
 	
 	case "alteraPerfis":
-	$cp->set_data(alteraPerfis());
-	$cp->return_data();
+	$novo = alteraPerfis();
+	$sql = "SELECT * from i3geoadmin_perfis WHERE id_perfil = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "excluirRegistro":
@@ -139,7 +141,12 @@ switch ($funcao)
 	if($tabela == "tags")
 	{excluiTagTemas($id);$tabela = "i3geoadmin_tags";$coluna = "id_tag";}
 	if($tabela == "perfis")
-	{excluiPerfil($perfil);$tabela = "i3geoadmin_perfis";$coluna = "perfil";}
+	{
+		$tabela = "i3geoadmin_perfis";
+		$coluna = "id_perfil";
+		if($id != "")
+		excluiPerfil($id);
+	}
 	if($tabela == "subgrupos")
 	{
 		$tabela = "i3geoadmin_subgrupos";
@@ -194,53 +201,67 @@ function excluiPerfil($id)
 	require_once("conexao.php");
     foreach($dbh->query("select * from i3geoadmin_perfis where perfil = $id") as $row)
     {$perfil = $row["perfil"];}
-	foreach($dbh->query("select * from i3geoadmin_mapas") as $row)
+    $q = $dbh->query("select * from i3geoadmin_mapas");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_mapa'];
+   		$t = $row['perfil_mapa'];
    		$i = $row['id_mapa'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_mapas SET perfil_mapa = '$ts' WHERE id_mapa = $i");
-   	}			
-	foreach($dbh->query("select * from i3geoadmin_menus") as $row)
+   	}
+   	$q = $dbh->query("select * from i3geoadmin_menus");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_menu'];
+   		$t = $row['perfil_menu'];
    		$i = $row['id_menu'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_menus SET perfil_menu = '$ts' WHERE id_menu = $i");
-   	}			
-	foreach($dbh->query("select * from i3geoadmin_n1") as $row)
+   	}
+   	$q = $dbh->query("select * from i3geoadmin_n1");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_n1'];
+   		$t = $row['perfil_n1'];
    		$i = $row['id_n1'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_n1 SET perfil_n1 = '$ts' WHERE id_n1 = $i");
-   	}			
-	foreach($dbh->query("select * from i3geoadmin_n2") as $row)
+   	}
+   	$q = $dbh->query("select * from i3geoadmin_n2");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_n2'];
+   		$t = $row['perfil_n2'];
    		$i = $row['id_n2'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_n2 SET perfil_n2 = '$ts' WHERE id_n2 = $i");
-   	}			
-	foreach($dbh->query("select * from i3geoadmin_n3") as $row)
+   	}
+   	$q = $dbh->query("select * from i3geoadmin_n3");	
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_n3'];
+   		$t = $row['perfil_n3'];
    		$i = $row['id_n3'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_n3 SET perfil_n3 = '$ts' WHERE id_n3 = $i");
-   	}			
-	foreach($dbh->query("select * from i3geoadmin_raiz") as $row)
+   	}
+   	$q = $dbh->query("select * from i3geoadmin_raiz");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil'];
+   		$t = $row['perfil'];
    		$i = $row['id_raiz'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_raiz SET perfil = '$ts' WHERE id_raiz = $i");
    	}
-	foreach($dbh->query("select * from i3geoadmin_sistemasf") as $row)
+   	$q = $dbh->query("select * from i3geoadmin_sistemasf");
+	foreach($q as $row)
    	{
-   		$ts = $row['perfil_funcao'];
+   		$t = $row['perfil_funcao'];
    		$i = $row['id_funcao'];
-   		$ts = str_replace($perfil,"",$ts);
+   		$ts = str_replace($perfil,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_sistemasf SET perfil_funcao = '$ts' WHERE id_funcao = $i");
    	}   	
 }
@@ -390,6 +411,7 @@ function alteraPerfis()
 	{
 		$dbh = "";
     	include("conexao.php");
+    	$retorna = "";
     	if($id != "")
 		{
    			$original = "";
@@ -398,69 +420,92 @@ function alteraPerfis()
    			$dbhw->query("UPDATE i3geoadmin_perfis SET perfil = '$perfil' WHERE id_perfil = $id");
 			if($original != "")
 			{
-   				foreach($dbh->query("select * from i3geoadmin_mapas") as $row)
+   				$q = $dbh->query("select * from i3geoadmin_mapas");
+   				foreach($q as $row)
 	    		{
-        			$ts = $row['perfil_mapa'];
+        			$t = $row['perfil_mapa'];
         			$i = $row['id_mapa'];
-        			$ts = str_replace($original,$perfil,$ts);
+        			$ts = str_replace($original,$perfil,$t);
+        			if($t != $ts)
         			$dbhw->query("UPDATE i3geoadmin_mapas SET perfil_mapa = '$ts' WHERE id_mapa = $i");
-	    		}			
-   				foreach($dbh->query("select * from i3geoadmin_menus") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_menus");
+   				foreach($q as $row)
 	    		{
-        			$ts = $row['perfil_menu'];
+        			$t = $row['perfil_menu'];
         			$i = $row['id_menu'];
-        			$ts = str_replace($original,$perfil,$ts);
+        			$ts = str_replace($original,$perfil,$t);
+        			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_menus SET perfil_menu = '$ts' WHERE id_menu = $i");
-	    		}			
-    			foreach($dbh->query("select * from i3geoadmin_n1") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_n1");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil_n1'];
+	       			$t = $row['perfil_n1'];
 	       			$i = $row['id_n1'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_n1 SET perfil_n1 = '$ts' WHERE id_n1 = $i");
-	    		}			
-    			foreach($dbh->query("select * from i3geoadmin_n2") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_n2");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil_n2'];
+	       			$t = $row['perfil_n2'];
 	       			$i = $row['id_n2'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_n2 SET perfil_n2 = '$ts' WHERE id_n2 = $i");
-	    		}			
-    			foreach($dbh->query("select * from i3geoadmin_n3") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_n3");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil_n3'];
+	       			$t = $row['perfil_n3'];
 	       			$i = $row['id_n3'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_n3 SET perfil_n3 = '$ts' WHERE id_n3 = $i");
-	    		}			
-    			foreach($dbh->query("select * from i3geoadmin_raiz") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_raiz");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil'];
+	       			$t = $row['perfil'];
 	       			$i = $row['id_raiz'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_raiz SET perfil = '$ts' WHERE id_raiz = $i");
-	    		}			
-    			foreach($dbh->query("select * from i3geoadmin_sistemas") as $row)
+	    		}
+	    		$q = $dbh->query("select * from i3geoadmin_sistemas");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil_sistema'];
+	       			$t = $row['perfil_sistema'];
 	       			$i = $row['id_sistema'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_sistemas SET perfil_sistema = '$ts' WHERE id_sistema = $i");
 	    		}
-    			foreach($dbh->query("select * from i3geoadmin_sistemasf") as $row)
+	    		$q = $dbh->query("select * from i3geoadmin_sistemasf");
+    			foreach($q as $row)
 	    		{
-	       			$ts = $row['perfil_funcao'];
+	       			$t = $row['perfil_funcao'];
 	       			$i = $row['id_funcao'];
-	       			$ts = str_replace($original,$perfil,$ts);
+	       			$ts = str_replace($original,$perfil,$t);
+	       			if($t != $ts)
 	       			$dbhw->query("UPDATE i3geoadmin_sistemasf SET perfil_funcao = '$ts' WHERE id_funcao = $i");
 	    		}
 			}
+			$retorna = "ok";
     	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_perfis (perfil) VALUES ('$perfil')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_perfis (perfil) VALUES ('$perfil')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_perfis");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_perfil']);
+			$retorna = $id;
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
