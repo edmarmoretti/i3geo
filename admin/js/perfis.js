@@ -149,6 +149,8 @@ function gravaLinha(row)
 	{
   		success:function(o)
   		{
+			var rec = myDataTable.getRecordSet().getRecord(row);
+			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   			core_carregando("desativa");
   		},
   		failure:core_handleFailure,

@@ -79,6 +79,13 @@ if($funcao == "limpar")
     $dbh = null;
     exit;
 }
+function retornaJSON($obj)
+{
+	if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
+	echo json_encode($obj);
+	if(extension_loaded('zlib')){ob_end_flush();}
+	exit;	
+}
 function verificaDuplicados($sql,$dbh)
 {
 	$res = $dbh->query($sql,PDO::FETCH_ASSOC);

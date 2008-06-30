@@ -54,7 +54,12 @@ Variable: $tags
 Armazena o objeto com a lista de tags
 */
 var $tags = "";
+/*
+Variable: $perfis
 
+Armazena o objeto com a lista de perfis
+*/
+var $perfis = "";
 /*
 Function: core_handleSuccess
 
@@ -296,21 +301,61 @@ onde - id do elemento que receberá o combo
 id - id do combo que será criado
 
 marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
 */
-function core_comboMapfiles(onde,id,marcar)
+function core_comboMapfiles(onde,id,marcar,funcao)
 {
+	if(arguments.length == 3)
+	{var funcao = "";}
 	if($mapfiles == "")
 	{
-		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"')")
+		core_pegaMapfiles("core_comboMapfiles('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')")
 	}
 	else
 	{
-		ins = "<select  id='"+id+"' >"
+		if (funcao != "")
+		{var funcao = "onchange='"+funcao+"'";}
+		ins = "<select  id='"+id+"' "+funcao+" >"
 		ins += core_comboObjeto($mapfiles,"","",marcar)
 		ins += "</select></p>"
 		$i(onde).innerHTML = ins;
 	}
 }
+/*
+Function: core_comboPerfis
+
+Cria um combo para escolha de perfil
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
+*/
+function core_comboPerfis(onde,id,marcar,funcao)
+{
+	if(arguments.length == 3)
+	{var funcao = "";}
+	if($perfis == "")
+	{
+		core_pegaPerfis("core_comboPerfis('"+onde+"','"+id+"','"+marcar+"','"+funcao+"')")
+	}
+	else
+	{
+		if (funcao != "")
+		{var funcao = "onchange='"+funcao+"'";}
+		ins = "<select  id='"+id+"' "+funcao+" >"
+		ins += core_comboObjeto($perfis,"perfil","perfil",marcar)
+		ins += "</select></p>"
+		$i(onde).innerHTML = ins;
+	}
+}
+
 /*
 function: core_pegaTags
 

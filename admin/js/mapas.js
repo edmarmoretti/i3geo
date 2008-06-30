@@ -1,224 +1,323 @@
-/*
-Title: Arvore
-
-Funções javascript utilizadas no sistema de administração do menu de mapas
-
-File: i3geo/admin/mapas.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-/*
-Function: iniciaAdmin
-
-Inicializa as variáveis globais e checa o cadastro do editor do sistema de administração
-
-Ao retornar, por default, executa a função montaParametros()
-*/
-function iniciaAdmin()
+YAHOO.namespace("example.container");
+function initMenu()
 {
-	verificaEditores()
+	ativaBotaoAdicionaMapa()
+	core_carregando("ativa");
+	core_ativaPainelAjuda("ajuda","botaoAjuda");
+	//core_pegaPerfis("pegaMapas()");
+	pegaMapas();
 }
-function montaParametros()
+function ativaBotaoAdicionaMapa()
 {
-	if(!$i("resultado"))
-	{document.body.innerHTML += "<div id=resultado ></div>"}
-	listaMapas()
-}
-/*
-Function: listaMapas
-
-Monta o html com os parametros e os divs que receberão os dados dos formulários.
-
-Para cada registro na variável $parameters, é montado um formulário.
-*/
-function listaMapas()
-{
-	$i("resultado").innerHTML = $mensagemAguarde
-	var ins = "<fieldset><legend>Mapas</legend>"
-	var comboMapas = function(retorno)
+	var adicionalinha = function()
 	{
-		var d = retorno.data;
-		var nm = retorno.data.length
-		ins += "<p><table><tr><td><b>Selecione o mapa:</b></td><td></td></tr>"
-		ins += "<tr><td><input style=font-size:10px onclick='alterarMapa(\"\")' type=button value='Adicionar um novo mapa' /></td><td><select onchange='pegaDadosMapa(this.value)'>"
-		ins += "<option>---</option>"
-		for (i=0;i<nm;i++)
+		core_carregando("ativa");
+		core_carregando(" adicionando um novo registro");
+		var sUrl = "../php/mapas.php?funcao=alterarMapa";
+		var callback =
 		{
-			ins += "<option value='"+d[i].id_mapa+"'>"+d[i].nome_mapa+"</option>"
-		}
-		$i("resultado").innerHTML = ins+"</select></tr></table></p><p><div id='dadosMapa'></div></fieldset>"
-	}
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	var p = "../php/mapas.php?funcao=pegaMapas";
-	cp.call(p,"pegaMapas",comboMapas);
+  			success:function(o)
+  			{
+  				try
+  				{
+  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
+  					core_carregando("desativa");
+  				}
+  				catch(e){core_handleFailure(e,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	//cria o botão de adição de um novo menu
+	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
 }
-function pegaDadosMapa(id_mapa)
+function pegaMapas()
 {
-	$i("dadosMapa").innerHTML = $mensagemAguarde
-	var retorna = function(retorno)
+	core_carregando("buscando mapas...");
+	var sUrl = "../php/mapas.php?funcao=pegaMapas";
+	var callback =
 	{
-	    var d = retorno.data.mapa[0]  
-	    var ins = "<table class=lista ><tr><td></td><td></td></tr>";
-		var param = {
-			"linhas":[
-			{titulo:"Nome",prefixoid:"nome_",id:"id_mapa",valor:"nome_mapa"},
-			{titulo:"Descrição",prefixoid:"desc_",id:"id_mapa",valor:"desc_mapa"},
-			{titulo:"Extensão",prefixoid:"ext_",id:"id_mapa",valor:"ext_mapa"},
-			{titulo:"Imagem",prefixoid:"imagem_",id:"id_mapa",valor:"imagem_mapa"},
-			{titulo:"Outros",prefixoid:"outros_",id:"id_mapa",valor:"outros_mapa"},
-			{titulo:"Direto",prefixoid:"linkdireto_",id:"id_mapa",valor:"linkdireto_mapa"},
-			{titulo:"Ordem",prefixoid:"ordem_",id:"id_mapa",valor:"ordem_mapa"}
-			]
+  		success:function(o)
+  		{
+  			try
+  			{montaTabela(YAHOO.lang.JSON.parse(o.responseText));}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+function montaTabela(dados)
+{
+    YAHOO.example.InlineCellEditing = new function()
+    {
+        // Custom formatter for "address" column to preserve line breaks
+        var formatTextoId = function(elCell, oRecord, oColumn, oData)
+        {
+            elCell.innerHTML = "<p>" + oData + "</p>";
+        };
+
+        var formatMais = function(elCell, oRecord, oColumn)
+        {
+            elCell.innerHTML = "<div class=mais style='text-align:center' ></div>";
+        };
+        var formatExclui = function(elCell, oRecord, oColumn)
+        {
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
+        };
+        var myColumnDefs = [
+            {key:"excluir",label:"excluir",formatter:formatExclui},
+            {key:"mais",label:"mais",formatter:formatMais},
+            {label:"id",key:"id_mapa", formatter:formatTextoId},
+            {label:"nome",key:"nome_mapa", formatter:formatTextoId},
+            {label:"ordem",key:"ordem_mapa", formatter:formatTextoId}
+        ];
+        myDataSource = new YAHOO.util.DataSource(dados);
+        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+        myDataSource.responseSchema =
+        {
+            fields: ["id_mapa","nome_mapa","ordem_mapa"]
+        };
+        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
+        // Set up editing flow
+		myDataTable.subscribe('cellClickEvent',function(ev)
+		{
+			var target = YAHOO.util.Event.getTarget(ev);
+			var column = this.getColumn(target);
+			if (column.key == 'excluir')
+			{
+				var record = this.getRecord(target);
+				excluiLinha(record.getData('id_mapa'),target);
+			}
+			if (column.key == 'mais')
+			{
+				var record = this.getRecord(target);
+				core_carregando("ativa");
+				core_carregando("buscando dados...");
+				$clicouId = record.getData('id_mapa');
+				$recordid = record.getId();
+				var sUrl = "../php/mapas.php?funcao=pegaDadosMapa&id_mapa="+record.getData('id_mapa');
+				var callback =
+				{
+  					success:function(o)
+  					{
+  						try
+  						{
+  							montaEditorMapa(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
+  						}
+  						catch(e){core_handleFailure(e,o.responseText);}
+  					},
+  					failure:core_handleFailure,
+  					argument: { foo:"foo", bar:"bar" }
+				}; 
+				core_makeRequest(sUrl,callback)
+			}
+
+		});
+        // Hook into custom event to customize save-flow of "radio" editor
+        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
+        {
+            if(oArgs.editor.column.key === "active")
+            {
+                this.saveCellEditor();  
+            }
+        });
+        myDataTable.subscribe("editorBlurEvent", function(oArgs)
+        {
+            this.cancelCellEditor();
+        });
+    };
+    core_carregando("desativa");
+}
+function montaEditorMapa(dados,id,recordid)
+{
+	function on_editorCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK")
+		{
+			gravaDadosMapa(id,recordid);
 		}
-		ins += (geraLinhas(d,param,3));
-		ins += "<tr>"
-		ins += "<td>Temas: </td>"
-		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='temas_"+d.id_mapa+"' value='"+d.temas_mapa+"' /></td>"
-		ins += "<td><select onchange='adicionaTema(\""+d.id_mapa+"\",this.value)'>"
-		ins += comboObjeto($temas,"codigo_tema","nome_tema","")
-		ins += "</select>"
-		ins += "</td>"
-		ins += "</tr>"	
-		ins += "<tr>"
-		ins += "<td>Perfis: </td>"
-		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='perfis_"+d.id_mapa+"' value='"+d.perfil_mapa+"' /></td>"
-		var idtemp = "perfis_"+d.id_mapa
-		ins += "<td><select onchange=\"registraPerfil('"+idtemp+"',this.value);this.style.color='blue'\"  >"
-		ins += comboObjeto($perfis,"perfil","perfil","")
-		ins += "</select></td></tr>"
-		ins += "</select>"
-		ins += "</td>"
-		ins += "</tr>"
-		ins += "<tr>"
-		ins += "<td>Ligados: </td>"
-		ins += "<td><input size=30 onchange='this.style.color=\"blue\"' type=text id='ligados_"+d.id_mapa+"' value='"+d.ligados_mapa+"' /></td>"
-		ins += "</tr>"
-		
-		ins += "<tr>"
-		ins += "<td>Publicado: </td>"
-		ins += "<td><select onchange=this.style.color='blue'  id='publicado_"+d.id_mapa+"' >"
-		ins += combosimnao(d.publicado_mapa)
-		ins += "</td></tr>"
-				
-		ins += "</table>"
-		ins += "<table><tr><td><div class=excluir title='Excluir' onclick='excluir(\""+d.id_mapa+"\")'/></td>"
-		ins += "<td><div class=aplicar title='Aplicar alterações' onclick='alterarMapa(\""+d.id_mapa+"\",\""+d.id_mapa+"\")'/></td>"
-		ins += "</tr></table>"
-		if(d.linkdireto_mapa != "")
-		{var l = d.linkdireto_mapa;}
 		else
 		{
-			var l = "../ms_criamapa.php?temasa="+d.temas_mapa+"&layers="+d.ligados_mapa
-			if (d.ext_mapa != "")
-			{l += "&mapext="+d.ext_mapa}
-			if (d.outros_mapa != "")
-			{l += "&"+d.outros_mapa}
+			YAHOO.example.container.panelEditorMapa.destroy();
+			YAHOO.example.container.panelEditorMapa = null;
 		}
-		ins += "<br>Testar: <a href='"+l+"' target=blank >"+l+"</a>"
-		if(d.imagem_mapa != "")
-		ins += "<br><img src='"+d.imagem_mapa+"' />"
-		ins += "</div></fieldset><br>"
-		if(!$i(d.id_mapa))
-		ins += "</div>"
-		$i("dadosMapa").innerHTML = ins
+	};
+	if(!YAHOO.example.container.panelEditorMapa)
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "janela_editor";
+		var ins = '<div class="hd">Editor</div>';
+		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		editorBotoes.addButtons([
+            { label: "Salva", value: "OK", checked: false},
+            { label: "Cancela", value: "CANCEL", checked: false }
+        ]);
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		YAHOO.example.container.panelEditorMapa = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditorMapa.render();
 	}
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	var p = "../php/mapas.php?funcao=pegaDadosMapa&id_mapa="+id_mapa;
-	cp.call(p,"pegaDadosMapa",retorna);
+	YAHOO.example.container.panelEditorMapa.show();
+	//carrega os dados na janela
+	$i("editor_bd").innerHTML = montaDivMapas(dados[0])
+	core_carregando("desativa");
+	//
+	//preenche a div com a lista de mapfiles e perfis
+	//
+	core_comboMapfiles("comboMapfiles","Etemas_mapa","",'registraMapfile(this.value,\"Etemas_mapa\")');
+	core_comboPerfis("comboPerfis","Eperfil_mapa","","registraPerfil(this.value)");
 }
-function adicionaTema(id,codigo)
+function registraPerfil(valor)
 {
-	var valor = $i("temas_"+id).value
-	if(valor == "")
-	$i("temas_"+id).value = codigo
+	var inp = $i("Eperfil_mapa")
+	var perfis = inp.value
+	if(perfis == "")
+	inp.value = valor
 	else
-	$i("temas_"+id).value += " "+codigo
+	inp.value = perfis+" "+valor
 }
-function alterarMapa(id_mapa,onde)
+
+function registraMapfile(valor,onde)
 {
-	var retorna = function(retorno)
-	{
-		if(id_mapa == "")
-		listaMapas(retorno);
-		else
-		{ins = "";pegaDadosMapa(id_mapa)}
-	}
-	if (id_mapa != "")
-	{
-		var nome = $i("nome_"+id_mapa).value
-		var desc = $i("desc_"+id_mapa).value
-		var ext = $i("ext_"+id_mapa).value
-		var imagem = $i("imagem_"+id_mapa).value
-		var outros = $i("outros_"+id_mapa).value
-		var linkdireto = $i("linkdireto_"+id_mapa).value
-		var temas = $i("temas_"+id_mapa).value
-		var ligados = $i("ligados_"+id_mapa).value
-		var perfil = $i("perfis_"+id_mapa).value
-		var ordem_mapa = $i("ordem_"+id_mapa).value
-		var publicado_mapa = $i("publicado_"+id_mapa).value
-	}
+	var inp = $i(onde)
+	var temas = inp.value
+	if(temas == "")
+	inp.value = valor
 	else
-	{
-		var nome = ""
-		var desc = ""
-		var ext = ""
-		var imagem = ""
-		var outros = ""
-		var linkdireto = ""
-		var temas = ""
-		var ligados = ""
-		var perfil = ""
-		var ordem_mapa = ""
-		var publicado_mapa = ""
-		var id_mapa = "";
-		var perfil = "";
-		var nome = prompt("Nome do novo Mapa","");
-		if (nome==null || nome=="")
-		{
-			return;
-		}
-	}
-	var p = "../php/mapas.php?funcao=alterarMapa&publicado_mapa="+publicado_mapa+"&ordem_mapa="+ordem_mapa+"&id_mapa="+id_mapa+"&nome="+nome+"&desc="+desc+"&ext="+ext+"&imagem="+imagem+"&outros="+outros+"&linkdireto="+linkdireto+"&temas="+temas+"&ligados="+ligados+"&perfil="+perfil
-	cPaint.call(p,"",retorna);	
+	inp.value = temas+" "+valor
 }
-function excluir(id)
+function montaDivMapas(i)
 {
-	if(confirm("Você realmente quer fazer isso?"))
-	{
-		$i("resultado").innerHTML = $mensagemAguarde;
-		var retorna = function()
-		{
-			montaParametros()	
-		}
-		var p = "../php/mapas.php?funcao=excluir&id="+id;
-		cPaint.call(p,"",retorna);	
-	}
+	var ins = ""
+
+	//ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
+	//ins += "<div id=comboMapfiles >Buscando...</div>";
+	ins += "<p>Ordem de apresentação do mapa:<br>";
+	ins += "<input size=10 type=text id=Eordem_mapa value='"+i.ordem_mapa+"' /></p>"
+
+	ins += "<p>Nome do mapa:<br>";
+	ins += "<input size=50 type=text id=Enome_mapa value='"+i.nome_mapa+"' /></p>"
+
+	ins += "<p>Publicado?<br>"
+	ins += "<select  id='Epublicado_mapa' >"
+	ins += core_combosimnao(i.publicado_mapa)
+	ins += "</select></p>"
+
+	ins += "<p>Descrição:<br>";
+	ins += "<input size=50 type=text id=Edesc_mapa value='"+i.desc_mapa+"' /></p>"
+
+	ins += "<p>Extensão geográfica:<br>";
+	ins += "<input size=50 type=text id=Eext_mapa value='"+i.ext_mapa+"' /></p>"
+
+	ins += "<p>URL da imagem miniatura:<br>";
+	ins += "<input size=50 type=text id=Eimagem_mapa value='"+i.imagem_mapa+"' /></p>"
+	ins += "<img src='"+i.imagem_mapa+"' />"
+
+	ins += "<p>Temas que serão incluídos nesse mapa (utilize os códigos dos mapfiles mostrados na lista abaixo): </p>"
+	ins += "<input size=50 type=text id='Etemas_mapa' value='"+i.temas_mapa+"' /></p>"
+	ins += "<div id=comboMapfiles >Buscando...</div>";
+
+	ins += "<p>Temas que serão ligados. Devem constar na lista de temas incluídos: </p>"
+	ins += "<input size=50 type=text id='Eligados_mapa' value='"+i.ligados_mapa+"' /></p>"
+	//ins += "<div id=comboMapfilesLigados >Buscando...</div>";
+
+	ins += "<p>Perfis que podem ver este mapa: </p>"
+	ins += "<input size=50 type=text id='Eperfil_mapa' value='"+i.perfil_mapa+"' /></p>"
+	ins += "<div id=comboPerfis >Buscando...</div>";
+
+	ins += "<p>Outros parâmetros (separe com '&'):<br>";
+	ins += "<input size=50 type=text id=Eoutros_mapa value='"+i.outros_mapa+"' /></p>"
+
+	ins += "<p>Link direto para abertura do mapa (despreza os outros parâmetros):<br>";
+	ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>"
+	return(ins)
 }
-function importarXmlMapas()
+function excluiLinha(id,row)
 {
-	$i("resultado").innerHTML = $mensagemAguarde
-	var retorna = function(retorno)
-	{$i("resultado").innerHTML = retorno.data}
-	var p = "../php/mapas.php?funcao=importarXmlMapas&xml="+$i("arquivo").value;
-	cPaint.call(p,"",retorna);
+	//dialogo
+	// Define various event handlers for Dialog
+	var handleYes = function() {
+		this.hide();
+		core_carregando("ativa");
+		core_carregando(" excluindo o registro do id= "+id);
+		var sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  					{
+  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem elementos vinculados a este mapa</span>");
+  						setTimeout("core_carregando('desativa')",3000)
+  					}
+  					else
+  					{
+  						myDataTable.deleteRow(row);
+  						core_carregando("desativa");
+  					}
+  				}
+  				catch(e){core_handleFailure(e,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	var handleNo = function()
+	{
+		this.hide();
+	};
+	var mensagem = "Exclui o registro?";
+	var largura = "300"
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
 }
+function gravaDadosMapa(id,recordid)
+{
+	var campos = new Array("publicado","ordem","perfil","ligados","temas","desc","ext","imagem","linkdireto","nome","outros")
+	var par = ""
+	for (i=0;i<campos.length;i++)
+	{
+		par += "&"+campos[i]+"_mapa="+($i("E"+campos[i]+"_mapa").value)
+	}
+	par += "&id_mapa="+id
+	core_carregando("ativa");
+	core_carregando(" gravando o registro do id= "+id);
+	var sUrl = "../php/mapas.php?funcao=alterarMapa"+par;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  				{
+  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem víncilos com outros elementos</span>");
+  					setTimeout("core_carregando('desativa')",3000)
+  				}
+  				else
+  				{
+  					var rec = myDataTable.getRecordSet().getRecord(recordid);
+  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					core_carregando("desativa");
+  				}
+				YAHOO.example.container.panelEditorMapa.destroy();
+				YAHOO.example.container.panelEditorMapa = null;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+YAHOO.util.Event.addListener(window, "load", initMenu);

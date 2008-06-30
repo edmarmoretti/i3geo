@@ -1,18 +1,18 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaMenu()
+	ativaBotaoAdicionaTag();
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaPerfis("pegaMenus()");
+	pegaTags();
 }
-function ativaBotaoAdicionaMenu()
+function ativaBotaoAdicionaTag()
 {
 	var adicionalinha = function()
 	{
 		core_carregando("ativa");
 		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=";
+		var sUrl = "../php/menutemas.php?funcao=alteraTags";
 		var callback =
 		{
   			success:function(o)
@@ -32,10 +32,10 @@ function ativaBotaoAdicionaMenu()
 	//cria o botão de adição de um novo menu
 	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
 }
-function pegaMenus()
+function pegaTags()
 {
-	core_carregando("buscando menus...");
-	var sUrl = "../php/menutemas.php?funcao=pegaMenus";
+	core_carregando("buscando tags...");
+	var sUrl = "../php/menutemas.php?funcao=pegaTags";
 	var callback =
 	{
   		success:function(o)
@@ -56,31 +56,32 @@ function montaTabela(dados)
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
-            elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
+            elCell.innerHTML = "<p style=width:250px >" + oData + "</p>";
         };
+        var formatTextoId = function(elCell, oRecord, oColumn, oData)
+        {
+            elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
+        };
+
         var formatSalva = function(elCell, oRecord, oColumn)
         {
             elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
             {label:"salvar",formatter:formatSalva},
-            {label:"id",key:"id_menu", formatter:formatTexto},
-			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto, editor:"textbox"},
-			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox"},
-			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto, editor:"textbox"}
+            {label:"id",key:"id_tag", formatter:formatTextoId},
+			{label:"nome",resizeable:true,key:"nome", formatter:formatTexto, editor:"textbox"}
         ];
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
         {
-            fields: ["publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
+            fields: ["id_tag","nome"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
@@ -88,7 +89,6 @@ function montaTabela(dados)
         {
             var elCell = oArgs.target;
             var column = myDataTable.getColumn(oArgs.target);
-            //if(column.editor != "null")
             if(!YAHOO.lang.isNull(column.editor))
             {
 				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
@@ -116,20 +116,10 @@ function montaTabela(dados)
 			if (column.key == 'excluir')
 			{
 				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_menu'),target);
+				excluiLinha(record.getData('id_tag'),target);
 			}
 			else
-			{
-				if (column.key == 'perfil_menu')
-				{
-					var record = this.getRecord(target);
-					var selecionados = record.getData('perfil_menu');
-					var selecionados = selecionados.split(",");
-					core_menuCheckBox($perfisArray,$perfisArray,selecionados,target,record,"perfil_menu");
-				}
-				else
-				{this.onEventShowCellEditor(ev);}
-			}
+			{this.onEventShowCellEditor(ev);}
 		});
         // Hook into custom event to customize save-flow of "radio" editor
         myDataTable.subscribe("editorUpdateEvent", function(oArgs)
@@ -150,15 +140,11 @@ function montaTabela(dados)
 function gravaLinha(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);
-	var publicado_menu = r.getData("publicado_menu");
-	var perfil_menu = r.getData("perfil_menu");
-	var aberto = r.getData("aberto")
-	var desc_menu = r.getData("desc_menu")
-	var id_menu = r.getData("id_menu")
-	var nome_menu = r.getData("nome_menu")
+	var id_tag = r.getData("id_tag");
+	var nome = r.getData("nome");
 	core_carregando("ativa");
-	core_carregando(" gravando registro do id= "+id_menu);
-	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
+	core_carregando(" gravando registro do id= "+id_tag);
+	var sUrl = "../php/menutemas.php?funcao=alteraTags&nome="+nome+"&id="+id_tag;
 	var callback =
 	{
   		success:function(o)
@@ -180,7 +166,7 @@ function excluiLinha(id,row)
 		this.hide();
 		core_carregando("ativa");
 		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
+		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=tags";
 		var callback =
 		{
   			success:function(o)
@@ -189,7 +175,7 @@ function excluiLinha(id,row)
   				{
   					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
   					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem grupos vinculados a este menu</span>");
+  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem itens vinculados a este tag</span>");
   						setTimeout("core_carregando('desativa')",3000)
   					}
   					else

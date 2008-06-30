@@ -47,6 +47,7 @@ switch ($funcao)
 	case "pegaMenus":
 	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
 	retornaJSON($dados);
+	exit;
 	break;
 	
 	case "pegaTags":
@@ -115,8 +116,10 @@ switch ($funcao)
 	break;
 	
 	case "alteraTags":
-	$cp->set_data(alteraTags());
-	$cp->return_data();
+	$novo = alteraTags();
+	$sql = "SELECT * from i3geoadmin_tags WHERE id_tag = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "alteraPerfis":
@@ -139,12 +142,15 @@ switch ($funcao)
 		}	
 	}
 	if($tabela == "tags")
-	{excluiTagTemas($id);$tabela = "i3geoadmin_tags";$coluna = "id_tag";}
+	{
+		$tabela = "i3geoadmin_tags";
+		$coluna = "id_tag";
+		excluiTagTemas($id);
+	}
 	if($tabela == "perfis")
 	{
 		$tabela = "i3geoadmin_perfis";
 		$coluna = "id_perfil";
-		if($id != "")
 		excluiPerfil($id);
 	}
 	if($tabela == "subgrupos")
@@ -189,18 +195,13 @@ switch ($funcao)
 	exit;
 	break;
 }
-function retornaJSON($obj)
-{
-	if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
-	echo json_encode($obj);
-	if(extension_loaded('zlib')){ob_end_flush();}
-	exit;	
-}
 function excluiPerfil($id)
 {
 	require_once("conexao.php");
     foreach($dbh->query("select * from i3geoadmin_perfis where perfil = $id") as $row)
     {$perfil = $row["perfil"];}
+    if($perfil == "")
+    {return;}
     $q = $dbh->query("select * from i3geoadmin_mapas");
 	foreach($q as $row)
    	{
@@ -270,11 +271,14 @@ function excluiTagTemas($id)
 	require_once("conexao.php");
     foreach($dbh->query("select * from i3geoadmin_tags where id_tag = $id") as $row)
     {$nometag = $row["nome"];}
-	foreach($dbh->query("select * from i3geoadmin_temas") as $row)
+    if($nometag == ""){return;}
+    $q = $dbh->query("select * from i3geoadmin_temas");
+	foreach($q as $row)
    	{
-   		$ts = $row['tags_tema'];
+   		$t = $row['tags_tema'];
    		$i = $row['id_tema'];
-   		$ts = str_replace($nometag,"",$ts);
+   		$ts = str_replace($nometag,"",$t);
+   		if($t != $ts)
    		$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
    	}			
 }
@@ -385,7 +389,7 @@ function alteraMenus()
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
-			$retorna = "ok";
+			$retorna = $id;
     	}
     	else
     	{
@@ -493,7 +497,7 @@ function alteraPerfis()
 	       			$dbhw->query("UPDATE i3geoadmin_sistemasf SET perfil_funcao = '$ts' WHERE id_funcao = $i");
 	    		}
 			}
-			$retorna = "ok";
+			$retorna = $id;
     	}
     	else
     	{
@@ -520,29 +524,42 @@ function alteraTags()
 		$dbh = "";
 		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+    	$retorna = "";
     	if($id != "")
 		{
     		if(!verificaDuplicados("select * from i3geoadmin_tags where nome = '$nome'",$dbh))
     		{
     			$original = "";
-    			foreach($dbh->query("select * from i3geoadmin_tags where id_tag = $id") as $row)
+    			$q = $dbh->query("select * from i3geoadmin_tags where id_tag = $id");
+    			foreach($q as $row)
     			{$original = $row["nome"];}
     			$dbhw->query("UPDATE i3geoadmin_tags SET nome = '$nome' WHERE id_tag = $id");
     			//exclui os registros do tag alterado nos temas
-    			foreach($dbh->query("select * from i3geoadmin_temas") as $row)
-		    	{
-	        		$ts = $row['tags_tema'];
-	        		$i = $row['id_tema'];
-	        		$ts = str_replace($original,$nome,$ts);
-	        		$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
-		    	}			
+    			if($original != "")
+    			{
+    				$q = $dbh->query("select * from i3geoadmin_temas");
+    				foreach($q as $row)
+		    		{
+	        			$ts = $row['tags_tema'];
+	        			$i = $row['id_tema'];
+	        			$ts = str_replace($original,$nome,$ts);
+	        			$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
+		    		}
+    			}		
     		}
+    		$retorna = $id;		
 		}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$nome')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$nome')");
+			$id = $dbh->query("SELECT * FROM i3geoadmin_tags");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_tag']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -566,7 +583,7 @@ function alteraGrupos()
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
-    		$retorna = "ok";
+    		$retorna = $id;
     	}
     	else
     	{
@@ -602,7 +619,7 @@ function alteraSubGrupos()
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
-    		$retorna = "ok";
+    		$retorna = $id;
     	}
     	else
     	{
@@ -639,6 +656,7 @@ function alteraTemas()
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
+    		$retorna = $id;
     	}
     	else
     	{
