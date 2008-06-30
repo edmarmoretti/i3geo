@@ -616,6 +616,12 @@ pt:"Conectar com GeoRss",
 en:"GeoRss connection",
 es:"Conectar con GeoRss"
 }],
+"a5a":[
+{
+pt:"Nuvem de tags",
+en:"Tags cloud",
+es:"Tags"
+}],
 "a6":[
 {
 pt:"Acesso aos arquivos do servidor",
@@ -1030,6 +1036,16 @@ Values:
 sim|nao
 */
 g_conectargeorss = "sim";
+/*
+Variable: g_nuvemTags
+
+Variável que define se na guia 2 será mostrada a opção de busca de temas por tags.
+
+Values:
+
+sim|nao;
+*/
+g_nuvemTags = "sim";
 /*
 Variable: g_uploadlocal
 

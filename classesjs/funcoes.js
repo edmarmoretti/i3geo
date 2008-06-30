@@ -188,10 +188,14 @@ function ativaMensagemBanner()
 {
 	if($i("bannerMensagem"))
 	{
+		if($i("bannerMensagem").style.display=="none"){return;}
+		$i("bannerMensagem").style.cursor="pointer";
 		var monta = function(retorno)
 		{
 			if ($i("bannerMensagem").size == 0){$i("bannerMensagem").size = objmapa.w / 8;}
-			BMessage = retorno.data;
+			BMessage = retorno.data + " ---Clique para parar--- ";
+			$i("bannerMensagem").onclick = function()
+			{$i("bannerMensagem").style.display = "none";};
 			if (BMessage != "")
 			{
 				BSize = $i("bannerMensagem").size;
@@ -2602,6 +2606,8 @@ function procurartemas()
 			{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";}
 		}
 	};
+	$i("achados").innerHTML = "<span style='color:green'>Procurando...<br><br></span>";
+	
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+g_sid;
 	cpObj.call(p,"procurartemas",resultadoProcurar);
 }
@@ -3009,26 +3015,6 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 				}
 				else
 				{$i(ondeArvore).innerHTML = "<div id=buscatema ></div>"}
-				/*
-				var outrasOpcoes = "";
-				if (g_uploadlocal == "sim")
-				{outrasOpcoes += "<div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a2")+"</div>";}
-				if (g_downloadbase == "sim")
-				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a3")+"</div>";}
-				if (g_conectarwms == "sim")
-				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a4")+"</div>";}
-				if (g_conectargeorss == "sim")
-				{outrasOpcoes += "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a5")+"</div>";}
-				if($i("outrasOpcoesAdiciona"))
-				{$i("outrasOpcoesAdiciona").innerHTML = outrasOpcoes;}
-				else
-				$i(ondeArvore).innerHTML += outrasOpcoes;
-				if (objmapa.navegacaoDir == "sim")
-				{
-					var temp = "<div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  />&nbsp;"+$trad("a6")+"</div>";
-					$i(ondeArvore).innerHTML += temp;
-				}		
-				*/
 				var outrasOpcoes = "<table width='120px' ><tr>";
 				if (g_uploaddbf == "sim")
 				{outrasOpcoes += "<td><div id='updbf' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='uploaddbf()'><img class='uploaddbf' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/></div><td>";}
@@ -3040,10 +3026,14 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/></div><td>";}
 				if (g_conectargeorss == "sim")
 				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";}
+				if (g_nuvemTags == "sim")	
+				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='nuvemTags()'><img class='nuvemtags' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/></div><td>";}
+
 				if (objmapa.navegacaoDir == "sim")
 				{
 					outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
-				}		
+				}
+
 				if($i("outrasOpcoesAdiciona"))
 				{$i("outrasOpcoesAdiciona").innerHTML = outrasOpcoes+"</tr></table>";}
 				else

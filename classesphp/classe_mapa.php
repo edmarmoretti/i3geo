@@ -94,7 +94,8 @@ Pega as mensagens do metadata mensagem
 		$mensagem = "";
 		foreach($this->layers as $l)
 		{
-			$mensagem .= $l->getmetadata("mensagem");
+			if($l->status == MS_DEFAULT)
+			{$mensagem .= $l->getmetadata("mensagem");}
 		}
 		if (function_exists("mb_convert_encoding"))
 		{$mensagem = mb_convert_encoding($mensagem,"UTF-8","ISO-8859-1");}

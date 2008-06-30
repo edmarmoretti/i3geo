@@ -1605,6 +1605,17 @@ Section: Menu de temas
 Obtém a lista de temas, grupos e sub-grupos.
 */
 /*
+Property: listaTags
+
+Pega a lista de tags registrados nos menus de temas.
+
+*/
+	case "listaTags":
+		include("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locsistemas);
+		$cp->set_data($m->listatags());
+	break;
+/*
 Property: pegalistademenus
 
 Pega a lista de menus para incluir na guia adiciona.

@@ -1270,6 +1270,14 @@ function editaLegenda(idtema)
 Section: adição de temas
 */
 /*
+Function: nuvemTags
+
+Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas
+*/
+function nuvemTags()
+{wdocaf("350px","350px",g_locaplic+"/ferramentas/nuvemtags/index.htm","","","Nuvem de tags");}
+
+/*
 Function: navegacaoDir
 
 Adiciona temas navegando pelos diretórios do servidor

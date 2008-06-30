@@ -522,83 +522,203 @@ $procurar - String que ser· procurada.
 */
 	function procurartemas($procurar)
 	{
-		if (file_exists("../menutemas/menutemas.xml"))
-		{$this->xml = simplexml_load_file("../menutemas/menutemas.xml");}
-		else
-		{$this->xml = simplexml_load_file("menutemas/menutemas.xml");}
-		$listadetemas = array();
-		$resultado = array();
-		foreach($this->xml->GRUPO as $grupo)
+		$this->xml = array();
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		if ((isset($menutemas)) && ($menutemas != ""))
 		{
-			$incluigrupo = TRUE;
-			$temp = ixml($grupo,"PERFIL");
-			if ($temp != "")
+			foreach ($menutemas as $m)
 			{
-				$incluigrupo = FALSE;
-				$perfis = explode(",",$temp);
-				if ($this->array_in_array($this->perfil,$perfis))
-				{$incluigrupo = TRUE;}
-			}
-			if ($incluigrupo == TRUE)
+				$this->xml[] = simplexml_load_file($m["arquivo"]);
+			} 
+		}
+		if ($this->xml == "")
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml[] = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml[] = simplexml_load_file("menutemas/menutemas.xml");}
+		}
+		$resultado = array();
+		$listadetemas = array();
+		foreach ($this->xml as $xml)
+		{
+			foreach($xml->GRUPO as $grupo)
 			{
-				foreach($grupo->SGRUPO as $sgrupo)
+				$incluigrupo = TRUE;
+				$temp = ixml($grupo,"PERFIL");
+				if ($temp != "")
 				{
-					$incluisgrupo = TRUE;
-					if ($this->perfil != "")
+					$incluigrupo = FALSE;
+					$perfis = explode(",",$temp);
+					if ($this->array_in_array($this->perfil,$perfis))
+					{$incluigrupo = TRUE;}
+				}
+				if ($incluigrupo == TRUE)
+				{
+					foreach($grupo->SGRUPO as $sgrupo)
 					{
-						$temp = ixml($sgrupo,"PERFIL");
-						$perfis = explode(",",$temp);
-						if (!$this->array_in_array($this->perfil,$perfis))
-						{$incluisgrupo = FALSE;}
-					}
-					if ($incluisgrupo == TRUE)
-					{
-						foreach($sgrupo->TEMA as $tema)
+						$incluisgrupo = TRUE;
+						if ($this->perfil != "")
 						{
-							$inclui = TRUE;
-							if ($this->perfil != "")
+							$temp = ixml($sgrupo,"PERFIL");
+							$perfis = explode(",",$temp);
+							if (!$this->array_in_array($this->perfil,$perfis))
+							{$incluisgrupo = FALSE;}
+						}
+						if ($incluisgrupo == TRUE)
+						{
+							foreach($sgrupo->TEMA as $tema)
 							{
-								$temp = ixml($tema,"PERFIL");
-								$perfis = explode(",",$temp);
-								if (!$this->array_in_array($this->perfil,$perfis))
-								{$inclui = FALSE;}
+								$inclui = TRUE;
+								if ($this->perfil != "")
+								{
+									$temp = ixml($tema,"PERFIL");
+									$perfis = explode(",",$temp);
+									if (!$this->array_in_array($this->perfil,$perfis))
+									{$inclui = FALSE;}
+								}
+								if ($inclui == TRUE)
+								{
+									$down = "nao";
+									$temp = ixml($tema,"DOWNLOAD");
+									if (($temp == "sim") || ($temp == "SIM"))
+									{$down = "sim";}
+									$link = ixml($tema,"TLINK");
+									$tid = ixml($tema,"TID");
+									$texto = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
+									$p1 = $this->removeAcentos($procurar);
+									$p1 = $this->removeAcentos(htmlentities($p1));
+									
+									$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
+									$pp1 = $this->removeAcentos($pp1);
+									$pp1 = $this->removeAcentos(htmlentities($pp1));
+									
+									if (stristr($pp1,$p1) || stristr(ixml($tema,"TNOME"),htmlentities($procurar)))
+									{$listadetemas[] = $texto;}
+									
+									if(ixml($tema,"TAGS") != "")
+									{
+										$pp1 = ixml($tema,"TAGS");
+										$pp1 = $this->removeAcentos($pp1);
+										if (stristr($pp1,$p1))
+										{$listadetemas[] = $texto;}	
+									}
+								}
 							}
-							if ($inclui == TRUE)
+							if (count($listadetemas) > 0)
 							{
-								$down = "nao";
-								$temp = ixml($tema,"DOWNLOAD");
-								if (($temp == "sim") || ($temp == "SIM"))
-								{$down = "sim";}
-								$link = ixml($tema,"TLINK");
-								$tid = ixml($tema,"TID");
-								$texto = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
-								$p1 = $this->removeAcentos($procurar);
-								$p1 = $this->removeAcentos(htmlentities($p1));
-								
-								$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
-								$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
-								$pp1 = $this->removeAcentos(htmlentities($pp1));
-								if (stristr($pp1,$p1))
-								{$listadetemas[] = $texto;}
+								$subgrupo[] = array("subgrupo"=>(ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
 							}
 						}
-						if (count($listadetemas) > 0)
-						{
-							$subgrupo[] = array("subgrupo"=>(ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
-						}
+						$listadetemas = array();
 					}
-					$listadetemas = array();
+					if (count($subgrupo) > 0)
+					{
+						$resultado[] = array("grupo"=>(ixml($grupo,"GTIPO")),"subgrupos"=>$subgrupo);
+					}
+					$subgrupo = array();
 				}
-				if (count($subgrupo) > 0)
-				{
-					$resultado[] = array("grupo"=>(ixml($grupo,"GTIPO")),"subgrupos"=>$subgrupo);
-				}
-				$subgrupo = array();
 			}
-			
 		}
 		return ($resultado);
 	}
+/*
+function: listaTags
+
+Lista os tags registrados nos menus de temas.
+
+*/
+	function listaTags()
+	{
+		$this->xml = array();
+		if (file_exists("../ms_configura.php"))
+		{require_once("../ms_configura.php");}
+		if ((isset($menutemas)) && ($menutemas != ""))
+		{
+			foreach ($menutemas as $m)
+			{
+				$this->xml[] = simplexml_load_file($m["arquivo"]);
+			} 
+		}
+		if ($this->xml == "")
+		{
+			if (file_exists("../menutemas/menutemas.xml"))
+			{$this->xml[] = simplexml_load_file("../menutemas/menutemas.xml");}
+			else
+			{$this->xml[] = simplexml_load_file("menutemas/menutemas.xml");}
+		}
+		$resultado = array();
+		foreach ($this->xml as $xml)
+		{
+			foreach($xml->GRUPO as $grupo)
+			{
+				$incluigrupo = TRUE;
+				$temp = ixml($grupo,"PERFIL");
+				if ($temp != "")
+				{
+					$incluigrupo = FALSE;
+					$perfis = explode(",",$temp);
+					if ($this->array_in_array($this->perfil,$perfis))
+					{$incluigrupo = TRUE;}
+				}
+				if ($incluigrupo == TRUE)
+				{
+					foreach($grupo->SGRUPO as $sgrupo)
+					{
+						$incluisgrupo = TRUE;
+						if ($this->perfil != "")
+						{
+							$temp = ixml($sgrupo,"PERFIL");
+							$perfis = explode(",",$temp);
+							if (!$this->array_in_array($this->perfil,$perfis))
+							{$incluisgrupo = FALSE;}
+						}
+						if ($incluisgrupo == TRUE)
+						{
+							foreach($sgrupo->TEMA as $tema)
+							{
+								$inclui = TRUE;
+								if ($this->perfil != "")
+								{
+									$temp = ixml($tema,"PERFIL");
+									$perfis = explode(",",$temp);
+									if (!$this->array_in_array($this->perfil,$perfis))
+									{$inclui = FALSE;}
+								}
+								if ($inclui == TRUE)
+								{
+									$tid = ixml($tema,"TID");
+									$tags = explode(" ",ixml($tema,"TAGS"));
+									foreach ($tags as $tag)
+									{
+										if($tag != "")
+										{
+											if(!$resultado[$tag])
+											{
+												$resultado[$tag] = array($tid);	
+											}
+											else
+											{
+												$resultado[$tag] = array_merge($resultado[$tag],array($tid));
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		ksort($resultado);
+		foreach(array_keys($resultado) as $k)
+		{
+			$final[] = array("tag"=>$k,"temas"=>$resultado[$k]);
+		}
+		return ($final);
+	}
+	
 	function removeAcentos($s)
 	{
 		$s = ereg_replace("[·‡‚„]","a",$s);
@@ -613,8 +733,11 @@ $procurar - String que ser· procurada.
 		$s = ereg_replace("[⁄Ÿ€]","U",$s);
 		$s = str_replace("Á","c",$s);
 		$s = str_replace("«","C",$s);
-		//$s = ereg_replace(" ","",$s); 
-		return $s;
+		//$str = htmlentities($s);
+		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
+		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);
+		$str = preg_replace("/\s+/i", ' ', $str);
+		return $str;
 	}
 	/*
 	Function: array_in_array

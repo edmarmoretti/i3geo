@@ -259,6 +259,8 @@ MAP
       "TEMA"	"Base cartografica"
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
+	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
+
     END
     NAME "baserasterwms"
     OFFSITE 255 255 255

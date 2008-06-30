@@ -30,6 +30,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Web service com a condição do tempo para várias localidades</TDESC>
             <TLINK></TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo</TAGS>
          </TEMA>
          <TEMA>
             <TID>cobnuv</TID>
@@ -37,6 +38,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Web service com a cobertura de nuvens</TDESC>
             <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo nuvens</TAGS>
          </TEMA>
          <TEMA>
             <TID>weather</TID>
@@ -44,6 +46,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Web service com a previsão do tempo para várias localidades</TDESC>
             <TLINK>http://maps.customweather.com/image?request=GetCapabilities</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo previsão</TAGS>
          </TEMA>
          <TEMA>
             <TID>ratmin</TID>
@@ -51,6 +54,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Temperatura mínima nas últimas 24 horas</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-mintemp.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo temperatura</TAGS>
          </TEMA>
          <TEMA>
             <TID>ratmax</TID>
@@ -58,6 +62,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Temperatura máxima nas últimas 24 horas</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-maxtemp.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo temperatura</TAGS>
          </TEMA>
          <TEMA>
             <TID>rprain</TID>
@@ -65,6 +70,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Chuva na data atual</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-precip.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo chuva</TAGS>
          </TEMA>
          <TEMA>
             <TID>rbpxxl</TID>
@@ -72,6 +78,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Pressão barométrica ao nivel do mar em mbar na data atual</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-slpr.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo pressão</TAGS>
          </TEMA>
          <TEMA>
             <TID>revxxp</TID>
@@ -79,6 +86,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Evaporação na data atual em W/sq m.</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-evap.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo evaporação</TAGS>
          </TEMA>
          <TEMA>
             <TID>rcosat</TID>
@@ -86,6 +94,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Imagem de satélite mostrando nuvens, oceano e terra</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-infrared.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>nuvens oceano terra satélite</TAGS>
          </TEMA>
          <TEMA>
             <TID>rcoxxr</TID>
@@ -93,6 +102,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Cobertura de nuvens prevista</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-clouds.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>nuvens satélite</TAGS>
          </TEMA>
          <TEMA>
             <TID>rprxxr</TID>
@@ -100,6 +110,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC>Chuva estimada</TDESC>
             <TLINK>http://viz.globe.gov/viz-bin/show.cgi?page=help-refdoc-trmm.ht</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>clima tempo chuva</TAGS>
          </TEMA>
       </SGRUPO>
       <SGRUPO>
@@ -110,6 +121,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TDESC></TDESC>
             <TLINK></TLINK>
             <DOWNLOAD>SIM</DOWNLOAD>
+            <TAGS>bioma vegetação biodiversidade</TAGS>
          </TEMA>
          <TEMA>
             <TID>biomaerro</TID>

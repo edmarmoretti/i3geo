@@ -755,6 +755,18 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:14px;
 	height:14px;
 }
+.nuvemtags
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1650px;
+	width:14px;
+	height:14px;
+	border-left: 1px solid gray;
+	border-bottom:1px solid gray;
+	border-top:1px solid #F8F8F8;
+	border-right:1px solid #F8F8F8;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}

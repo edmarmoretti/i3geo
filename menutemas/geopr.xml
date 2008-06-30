@@ -13,6 +13,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>reservatório água energia</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_aneel_linhas</TID>
@@ -20,6 +21,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>energia linhão</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_aneel_eolicas</TID>
@@ -27,6 +29,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>energia eólica</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_aneel_termeletricas</TID>
@@ -34,6 +37,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>energia térmica</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_aneel_aproveitamentos</TID>
@@ -41,6 +45,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>energia hidrelétrica</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_aneel_subestacoes</TID>
@@ -48,6 +53,7 @@
             <TDESC></TDESC>
             <TLINK>http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>energia subestação</TAGS>
          </TEMA>
 	  </SGRUPO>
    </GRUPO>
@@ -62,6 +68,7 @@
             <TDESC></TDESC>
             <TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;service=wms&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>tempo previsão</TAGS>
          </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_fortrac</TID>
@@ -69,6 +76,7 @@
           	<TDESC></TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>tempo previsão chuva</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_goes10</TID>
@@ -76,6 +84,7 @@
           	<TDESC></TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>imagem goes satélite</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_mrg12</TID>
@@ -83,6 +92,7 @@
           	<TDESC>Mapa de Risco de ocorrência de fogo produzido diariamente para toda a extensão geográfica de cobertura das imagens do satélite GOES-12</TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>risco fogo goes</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_mrp1</TID>
@@ -90,6 +100,7 @@
           	<TDESC>Previsão do Mapa de Risco de Fogo gerado para amanha, com o Modelo Regional ETA-Climatológico, dados observacionais e Imagens do Satelite GOES-12.</TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>previsão fogo risco</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_prec_inst</TID>
@@ -97,6 +108,7 @@
           	<TDESC>Dados de estimativa de precipiatação obtidos apartir de imagens GOES-10.</TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>tempo chuva</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_focos_2dias</TID>
@@ -104,6 +116,7 @@
           	<TDESC>Todos os focos de Queimadas de hoje e ontem.</TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>calor queimada</TAGS>
           </TEMA>
           <TEMA>
           	<TID>geopr_dsainpe_focos_acumulado</TID>
@@ -111,6 +124,7 @@
           	<TDESC>Todos os focos de Queimadas desde o início do mês até a data atual.</TDESC>
           	<TLINK>http://moingatu.cptec.inpe.br/cgi-bin/mapserv?map=/extra/www/html/webservice/ogc_fm.map&amp;amp;service=wms&amp;amp;request=getcapabilities&amp;amp;version=1.1.1</TLINK>
           	<TIPOA>WMS</TIPOA>
+          	<TAGS>calor queimada</TAGS>
           </TEMA>
       </SGRUPO>
    </GRUPO>
@@ -125,6 +139,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>aeroporto</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_arco</TID>
@@ -132,6 +147,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>desmatamento</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_localidades</TID>
@@ -139,6 +155,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>localidade</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_ems</TID>
@@ -146,6 +163,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>estação meteorológica</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_vsat</TID>
@@ -153,6 +171,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>vsat</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_raios</TID>
@@ -160,6 +179,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>raios</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_eso</TID>
@@ -174,6 +194,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>goes</TAGS>
          </TEMA>      
          <TEMA>
             <TID>geopr_sipam_hfdf</TID>
@@ -209,6 +230,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>solos</TAGS>
          </TEMA>   
          <TEMA>
             <TID>geopr_sipam_solospt</TID>
@@ -216,6 +238,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>solos</TAGS>
          </TEMA>
          <TEMA>
             <TID>geopr_sipam_vege</TID>
@@ -223,6 +246,7 @@
             <TDESC></TDESC>
             <TLINK>http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>vegetação</TAGS>
          </TEMA>  
 	  </SGRUPO>
 	</GRUPO>
@@ -237,6 +261,7 @@
             <TDESC></TDESC>
             <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>rio</TAGS>
          </TEMA>
           <TEMA>
             <TID>geopr_ana_microbacias</TID>
@@ -244,6 +269,7 @@
             <TDESC></TDESC>
             <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>bacia</TAGS>
          </TEMA>
           <TEMA>
             <TID>geopr_ana_federais</TID>
@@ -251,6 +277,7 @@
             <TDESC></TDESC>
             <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
             <TIPOA>WMS</TIPOA>
+            <TAGS>rio</TAGS>
          </TEMA>
       </SGRUPO>
     </GRUPO>
