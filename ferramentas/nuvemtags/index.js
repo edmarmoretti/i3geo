@@ -25,13 +25,18 @@ parametrosURL()
 
 var montaNuvem = function(retorno)
 {
-	var tags = ""
-	for (i=0;i<retorno.data.length;i++)
+	if(retorno.data)
 	{
-		//eval("var h = retorno.data."+tag)
-		var h = retorno.data[i].temas.length*1 + 7
-		tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb(98,186,192);font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span"
+		var tags = ""
+		for (i=0;i<retorno.data.length;i++)
+		{
+			//eval("var h = retorno.data."+tag)
+			var h = retorno.data[i].temas.length*1 + 7
+			tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb(98,186,192);font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span"
+		}
 	}
+	else
+	{var tags = "Nenhum tag encontrado"}
 	$i("resultado").innerHTML = tags;
 	aguarde("none")
 }
