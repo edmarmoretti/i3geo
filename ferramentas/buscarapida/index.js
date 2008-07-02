@@ -34,7 +34,7 @@ function busca()
 			{
 				for (i=0;i<retorno.data.geonames.length; i++)
 				{
-					if (i == 0){var ins = "<table style=height:500; >";}
+					if (i == 0){var ins = "<table >";}
 					ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
 					var layer = retorno.data.geonames[i].layer
 					for (j=0;j<retorno.data.geonames[i].lugares.length; j++)
@@ -51,6 +51,7 @@ function busca()
 			ins += "</table>"
 		}
 		$i("resultado").innerHTML = ins
+		aguarde("none")
 		//var palavra = window.parent.document.getElementById("valorBuscaRapida").value
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+palavra+"&g_sid="+g_sid;
 		var cp = new cpaint();
@@ -59,6 +60,7 @@ function busca()
 		cp.call(p,"procurartemas",resultadoTemas);
 		
 	}
+	aguarde("block")
 	$i("resultado").innerHTML = "Aguarde..."
 	var palavra = window.parent.document.getElementById("valorBuscaRapida").value
 	palavra = removeAcentos(palavra);
