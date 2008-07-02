@@ -199,7 +199,11 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		novoel.value=idtema
 		novodiv.appendChild(novoel);
 		var novoel = document.createElement("span");
+		novoel.style.cursor="pointer";
+		novoel.title="preview";
+		novoel.style.textDecoration = "underline";
 		novoel.innerHTML = idtema
+		eval("novoel.onclick = $i3geo_gl.preview")
 		novodiv.appendChild(novoel);
 		novodiv.appendChild(document.createElement("br"));
 		this.crialink()
@@ -292,6 +296,20 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.preseltema = function(idgrupo,idsubgrupo,idtema)
 	{
 		$i3geo_gl.seltema(idtema)
+	}
+	/*
+	Function: preview
+
+	Mostra um preview do tema clicado.
+
+	Parameters:
+
+	e - elemento do DOM do objeto clicado.
+	*/
+	this.preview = function(e)
+	{
+		var id = i3geo_pegaElementoPai(e).id
+		window.open("testamapfile.php?map="+id+".map&tipo=grande")
 	}
 	/*
 	Function: descer

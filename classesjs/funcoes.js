@@ -192,11 +192,12 @@ function ativaMensagemBanner()
 		$i("bannerMensagem").style.cursor="pointer";
 		var monta = function(retorno)
 		{
-			if ($i("bannerMensagem").size == 0){$i("bannerMensagem").size = objmapa.w / 8;}
+			if ($i("bannerMensagem").size == 1)
+			{$i("bannerMensagem").size = objmapa.w / 8;}
 			BMessage = retorno.data + " ---Clique para parar--- ";
 			$i("bannerMensagem").onclick = function()
 			{$i("bannerMensagem").style.display = "none";};
-			if (BMessage != "")
+			if (BMessage != " ---Clique para parar--- ")
 			{
 				BSize = $i("bannerMensagem").size;
 				BPos=BSize;
