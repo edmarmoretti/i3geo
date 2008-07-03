@@ -534,6 +534,35 @@ function core_comboObjeto(obj,valor,texto,marcar)
 	}
 	return(ins)
 }
+/*
+Function: core_geraLinhas
+
+Gera campos de formulário
+
+Parameters:
+
+dados - objeto no formato {"linhas":[{titulo:"Nome do tema:",size:"50",id:"Enome_tema",value:i.nome_tema,tipo:"text",div:""}]}
+*/
+function core_geraLinhas(dados)
+{
+	var nparam = dados.linhas.length;
+	var contaParam = 0
+	var resultado = "";
+	do
+	{
+		var p = dados.linhas[contaParam];
+		if(p.tipo == "text")
+		{
+			resultado += "<p>"+p.titulo+"<br>";
+			resultado += "<input size="+p.size+" type=text id="+p.id+" value='"+p.value+"' /></p>"
+			resultado += p.div;
+		}
+		contaParam++
+	}
+	while(contaParam < nparam)
+	return(resultado)
+}
+
 //
 //carregador de javascript
 //

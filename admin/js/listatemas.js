@@ -188,9 +188,16 @@ function registraTag(valor)
 }
 function montaDivTemas(i)
 {
+	var param = {
+		"linhas":[
+		{titulo:"Nome do tema:",id:"Enome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
+		]
+	}
 	var ins = ""
-	ins += "<p>Nome do tema:<br>";
-	ins += "<input size=50 type=text id=Enome_tema value='"+i.nome_tema+"' /></p>"
+	ins += core_geraLinhas(param)	
+
+	//ins += "<p>Nome do tema:<br>";
+	//ins += "<input size=50 type=text id=Enome_tema value='"+i.nome_tema+"' /></p>"
 
 	ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
 	ins += "<div id=comboMapfiles >Buscando...</div>";
