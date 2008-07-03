@@ -22,17 +22,23 @@ Free Software Foundation, Inc., no endereço
 //inicializa
 aguarde("block")
 parametrosURL()
-
-var montaNuvem = function(retorno)
+inicio = 0;
+function montaNuvem(r)
 {
+	retorno = r;
 	if(retorno.data)
 	{
-		var tags = ""
+		var tags ="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio+2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>menos</span><span>&nbsp;</span>"
+		tags +="<span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='javascript:inicio = inicio-2;montaNuvem(retorno);' style='cursor:pointer;vertical-align:middle;color:navy;font-size:'12'pt;'>mais</span><br><br>"
+		if((inicio < 0) || (inicio > retorno.data.length)){return;}
 		for (i=0;i<retorno.data.length;i++)
 		{
-			//eval("var h = retorno.data."+tag)
-			var h = retorno.data[i].temas.length*1 + 7
-			tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb(98,186,192);font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span"
+			if(retorno.data[i].temas.length*1 >= inicio)
+			{
+				var h = retorno.data[i].temas.length*1 + 6
+				if(h > 23){var h = 23;}
+				tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb(98,186,192);font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"
+			}
 		}
 	}
 	else
