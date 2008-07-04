@@ -188,6 +188,11 @@ function ativaMensagemBanner()
 {
 	if($i("bannerMensagem"))
 	{
+		try
+		{
+			clearTimeout(BTempo);
+		}
+		catch(e){BTempo = "";}
 		if($i("bannerMensagem").style.display=="none"){return;}
 		$i("bannerMensagem").style.cursor="pointer";
 		var monta = function(retorno)
@@ -199,6 +204,7 @@ function ativaMensagemBanner()
 			{$i("bannerMensagem").style.display = "none";};
 			if (BMessage != " ---Clique para parar--- ")
 			{
+				BQuantas = 0;
 				BSize = $i("bannerMensagem").size;
 				BPos=BSize;
 				BSpeed = 1;
@@ -228,12 +234,13 @@ function mensagemBanner()
 		{
 			$i("bannerMensagem").value = BMessage.substring(Math.abs(BPos), BMessage.length);
 			if (BPos+BMessage.length < 1)
-			{BPos = BSize;}
+			{BPos = BSize;BQuantas = BQuantas + 1;}
 		}
 		else
 		$i("bannerMensagem").value = BSpaces + BMessage;
 		BPos-=BSpeed;
-		setTimeout('mensagemBanner();', 140);
+		if (BQuantas < 2)
+		BTempo = setTimeout('mensagemBanner();', 140);
 	}
 }
 /*
