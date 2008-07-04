@@ -568,6 +568,7 @@ function incluiTemasIniciais()
 					if ($layern->name == "estadosl")
 					{$layern->set("data",$temasaplic."/dados/estados.shp");}
 					$layern->setmetadata("NOMEORIGINAL",$layern->name);
+					autoClasses(&$layern,$mapn);
 					ms_newLayerObj(&$mapn, $layern);
 				}
 			}	

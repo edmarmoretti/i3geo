@@ -123,7 +123,9 @@ function verifica($map)
 		else
 		{$mapa = ms_newMapObj("aplicmap/geral1.map");}
 		if(@ms_newMapObj($tema))
-		{$nmapa = ms_newMapObj($tema);}
+		{
+			$nmapa = ms_newMapObj($tema);
+		}
 		else
 		{
 			echo "erro no arquivo $map <br>";
@@ -135,6 +137,7 @@ function verifica($map)
 		{
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
+			autoClasses(&$layern,$nmapa);
 			ms_newLayerObj($mapa, $layern);
 			if ($layern->data == "")
 			$dados = $layern->connection;

@@ -104,6 +104,7 @@ function verifica($map)
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
 			ms_newLayerObj($mapa, $layern);
+			autoClasses(&$layern,$mapa);
 			if ($layern->data == "")
 			$dados = $layern->connection;
 			else

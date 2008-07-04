@@ -176,6 +176,7 @@ if ($tipo == "")
 					}
 				}
 			}
+			autoClasses(&$l,$oMap);
 			ms_newLayerObj($oMap, $l);
 		}
 	}

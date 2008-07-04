@@ -741,6 +741,83 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					foreach ($novosnomes as $n)
 					{
 						$nlayer = $nmap->getlayerbyname($n);
+						autoClasses(&$nlayer,$this->mapa);
+						//
+						//cria as classes com base em atributos
+						//
+						/*
+						if($nlayer->getmetadata("classesitem") != "")
+						{
+							$itemnome = $nlayer->getmetadata("classesnome");
+							$itemid = $nlayer->getmetadata("classesitem");
+							$itemcor = $nlayer->getmetadata("classescor");
+							$itemsimbolo = $nlayer->getmetadata("classesimbolo");
+							$itemtamanho = $nlayer->getmetadata("classestamanho");
+							$classeoriginal = $nlayer->getclass(0);
+							//
+							//pega o número de ocorrências de itemid
+							//
+							$nlayer->open();
+							$status = $nlayer->whichShapes($this->mapa->extent);
+							$parametrosClasses = array();	
+							if ($status == 0)
+							{	
+								while ($shape = $nlayer->nextShape())
+								{
+									$id = trim($shape->values[$itemid]);
+									if (!$parametrosClasses[$id])
+									{
+										$nome = "";
+										if($itemnome != "")
+										$nome = trim($shape->values[$itemnome]);
+										$cor = "";
+										if($itemcor != "")
+										$cor = explode(",",trim($shape->values[$itemcor]));
+										if(count($cor) != 3)
+										$cor = explode(" ",trim($shape->values[$itemcor]));
+										$tamanho = "";
+										if($itemtamanho != "")
+										$tamanho = trim($shape->values[$itemtamanho]);
+										$simbolo = "";
+										if($itemsimbolo != "")
+										$simbolo = trim($shape->values[$itemsimbolo]);
+										$parametrosClasses[$id] = array("nome"=>$nome,"cor"=>$cor,"tamanho"=>$tamanho,"simbolo"=>$simbolo);
+									}
+								}
+								$fechou = $nlayer->close();
+								//echo "<pre>";var_dump($parametrosClasses);
+								if (count($parametrosClasses) > 0)
+								{
+									$ids = array_keys($parametrosClasses);
+									for($i=0;$i < count($parametrosClasses);$i++)
+									{
+										$p = $parametrosClasses[$ids[$i]];
+										//echo "<pre>";var_dump($p);
+										$nclasse = ms_newClassObj($nlayer,$classeoriginal);
+										if($p["nome"] != "")
+										$nclasse->set("name",$p["nome"]);
+										$estilo = $nclasse->getstyle(0);
+										if($p["cor"] != "")
+										{
+											$cor = $p["cor"];
+											$ncor = $estilo->color;
+											if($ncor == "")
+											$ncor = $estilo->outlinecolor;
+											$ncor->setrgb($cor[0],$cor[1],$cor[2]);
+										}
+										if($p["tamanho"] != "")
+										$estilo->set("size",$p["tamanho"]);
+										if($p["simbolo"] != "")
+										$estilo->set("symbolname",$p["simbolo"]);
+										
+										$strE = "('[".$itemid."]'eq'".$ids[$i]."')";
+										$nclasse->setexpression($strE);
+									}
+									$classeoriginal->set("status",MS_DELETE);
+								}
+							}
+						}
+						*/
 						//
 						//muda para RGB para melhorar o desenho da imagem raster
 						//

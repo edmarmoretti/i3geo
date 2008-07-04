@@ -58,7 +58,7 @@ function iniciamobile()
 	$eb->set("style",0);
 	$eb->set("position",MS_LL);
 	$cornb = $eb->backgroundcolor;
-	$n = explode(",",$bcor);
+	//$n = explode(",",$bcor);
 	$cornb->setrgb(255,0,0);
 	$mapa->save($tmpfname);
 	//$tipo = "inicia";
