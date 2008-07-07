@@ -1,0 +1,26 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME bioma # ok
+  TYPE Polygon
+  STATUS OFF
+  TEMPLATE "none.htm"
+  DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
+  METADATA
+	ITENS "cd_legenda"
+	ITENSDESC "Nome"
+  	TEMA "Bioma"
+  	CLASSE "SIM"
+      ESCALA "5000000"
+	EXTENSAO "-75.233614607 -33.7515829981 -27.592958622 5.272156"
+	CLASSESNOME "CD_LEGENDA"
+	CLASSESITEM "ID"
+	CLASSESCOR "COR"
+	CLASSESSIMBOLO ""
+	CLASSESTAMANHO ""
+  END
+  CLASS
+    OUTLINECOLOR 50 50 50
+  END  # CLASS
+END
+END
