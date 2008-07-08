@@ -681,6 +681,10 @@ function Mapa(e,m)
 				//
 				ativaMensagemBanner();
 				//
+				//ativa o timer para verificar se o mouse está parado
+				//
+				objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
+				//
 				//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 				//se não for feito esse cálculo, o mapa fica ajustado à esquerda
 				//
@@ -1162,6 +1166,11 @@ function Mapa(e,m)
 	*/
 	this.verificaMouseParado = function()
 	{
+		try
+		{
+			clearTimeout(objmapa.tempoParado);
+		}
+		catch(e){objmapa.tempoParado = "";}
 		if (g_funcoesMouseParado.length > 0)
 		{
 			var f = g_funcoesMouseParado.length-1;
@@ -1174,7 +1183,8 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
-		clearTimeout(objmapa.tempoParado);
+		//clearTimeout(objmapa.tempoParado);
+		objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 	};
 	/*
 	Function: verificaNavegaMapa

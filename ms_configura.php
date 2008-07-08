@@ -279,7 +279,7 @@ else //se for linux
 		array("idmenu"=>"GEOPR","arquivo"=>"/opt/www/html/i3geo/menutemas/geopr.xml","status"=>"fechado"),
 		array("idmenu"=>"i3Geo","arquivo"=>"/opt/www/html/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
-	$utilizacgi = "sim";
+	$utilizacgi = "nao";
 	$atlasxml = "../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
 }

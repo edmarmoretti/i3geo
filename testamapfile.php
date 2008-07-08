@@ -94,16 +94,16 @@ if (isset($map) && $map != "")
 function verifica($map)
 {
 	global $tipo,$locaplic;
-	if ($tipo == "mini" && file_exists('temas/'.$map.".mini.png"))
+	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png"))
 	{
 		Header("Content-type: image/png");
-		ImagePng(ImageCreateFromPNG('temas/'.$map.".mini.png"));
+		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".mini.png"));
 		exit;		
 	}
-	if ($tipo == "grande" && file_exists('temas/'.$map.".grande.png"))
+	if ($tipo == "grande" && file_exists('temas/miniaturas/'.$map.".grande.png"))
 	{
 		Header("Content-type: image/png");
-		ImagePng(ImageCreateFromPNG('temas/'.$map.".grande.png"));
+		ImagePng(ImageCreateFromPNG('temas/miniaturas/'.$map.".grande.png"));
 		exit;		
 	}
 	ms_ResetErrorList();

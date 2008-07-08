@@ -628,9 +628,25 @@ function: listaTags
 
 Lista os tags registrados nos menus de temas.
 
+Parameters:
+
+rss - (opcional) endereço de um RSS para cruzar com as tags.
+
 */
-	function listaTags()
+	function listaTags($rss="")
 	{
+		//carrega os títulos e links do rss especificado
+		$noticiasRSS = array(); //guarda as notícias originais do RRS
+		if($rss != "")
+		{
+			$conta = 0;
+			foreach ( simplexml_load_file ($rss)->channel->item as $item )
+			{
+				if($conta < 20)
+				$noticiasRSS[] = array("desc"=>$item->description,"titulo"=>$item->title,"link"=>$item->link);
+				$conta++;
+			}			
+		}
 		$this->xml = array();
 		if (file_exists("../ms_configura.php"))
 		{require_once("../ms_configura.php");}
@@ -649,6 +665,7 @@ Lista os tags registrados nos menus de temas.
 			{$this->xml[] = simplexml_load_file("menutemas/menutemas.xml");}
 		}
 		$resultado = array();
+		$noticias = array();
 		foreach ($this->xml as $xml)
 		{
 			foreach($xml->GRUPO as $grupo)
@@ -696,7 +713,20 @@ Lista os tags registrados nos menus de temas.
 										{
 											if(!$resultado[$tag])
 											{
-												$resultado[$tag] = array($tid);	
+												$resultado[$tag] = array($tid);
+												//busca noticias
+												if($rrs != "")
+												{
+													foreach($noticiasRSS as $noticia)
+													{
+														$titulo = explode(" ",strtolower(removeAcentos($noticia["desc"])));
+														$t = removeAcentos($tag);
+														if(in_array(strtolower($t),$titulo))
+														{
+															$noticias[$tag] = array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]);
+														}
+													}	
+												}
 											}
 											else
 											{
@@ -714,7 +744,11 @@ Lista os tags registrados nos menus de temas.
 		ksort($resultado);
 		foreach(array_keys($resultado) as $k)
 		{
-			$final[] = array("tag"=>$k,"temas"=>$resultado[$k]);
+			if($noticias[$k])
+			{$not = $noticias[$k];}
+			else
+			{$not = "";}
+			$final[] = array("tag"=>$k,"temas"=>$resultado[$k],"noticias"=>$not);
 		}
 		return ($final);
 	}

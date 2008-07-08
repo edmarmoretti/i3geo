@@ -1842,6 +1842,23 @@ function ixml($no,$nome)
 {
 	return mb_convert_encoding($no->$nome,"HTML-ENTITIES","auto");
 }
+/*
+Function: autoClasses
+
+Gera as classes do layer com base em valores definidos na tabela de atributos.
+
+Os parâmetros para montagem das classes são definidos em metadados do layer.
+
+Parameters:
+
+nlayer - objeto layer que será processado
+
+mapa - objeto mapa que será processado
+
+Return:
+
+Objeto layer modificado
+*/
 function autoClasses(&$nlayer,$mapa)
 {
 	if($nlayer->getmetadata("classesitem") == "")

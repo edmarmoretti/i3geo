@@ -1379,8 +1379,6 @@ function ativaClicks(docMapa)
 			if (objmapa.parado!="cancela")
 			{
 				objmapa.parado="nao";
-				//verifica se o mouse está parado e executa as funções baseadas nesse evento
-				objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 			}
 			if ($i("tip"))
 			{$i("tip").style.display="none";}
@@ -1600,7 +1598,6 @@ function mostraRosaDosVentos()
 			}
 		}
 	}
-	//setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 }
 
 /*
@@ -2311,7 +2308,6 @@ function verificaTip()
 	}
 	if ((objmapa.parado!="cancela") && ($i("tip").style.display!="block"))
 	{objmapa.parado = "sim";}
-	setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 }
 /*
 Function: verificaTipDefault

@@ -1613,7 +1613,7 @@ Pega a lista de tags registrados nos menus de temas.
 	case "listaTags":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
-		$cp->set_data($m->listatags());
+		$cp->set_data($m->listatags($rss));
 	break;
 /*
 Property: pegalistademenus

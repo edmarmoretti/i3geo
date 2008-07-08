@@ -68,9 +68,9 @@ foreach ($arqs["arquivos"] as $arq)
 	if($temp[(count($temp) - 1)] == "map")
 	{
 		if($tipo == "mini" || $tipo == "todos")
-		{if(!file_exists('temas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+		{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq);}}
 		if($tipo == "grande"  || $tipo == "todos")
-		{if(!file_exists('temas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+		{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq);}}
 	}
 }
 function verifica($map)
