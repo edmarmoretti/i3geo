@@ -20,6 +20,12 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
+YAHOO.example.init = function ()
+{
+	function onPushButtonsMarkupReady()
+	{new YAHOO.widget.Button("botao1");}
+   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+}()	
 aguarde("block")
 parametrosURL()
 inicio = 0;
@@ -35,9 +41,23 @@ function montaNuvem(r)
 		{
 			if(retorno.data[i].temas.length*1 >= inicio)
 			{
+				var cor = "98,186,192";
 				var h = retorno.data[i].temas.length*1 + 6
 				if(h > 23){var h = 23;}
-				tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb(98,186,192);font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"
+				{
+					var linkrss = "";
+					if(retorno.data[i].noticias.length > 0)
+					{
+						var cor = "255,0,0";
+						for (r=0;r<retorno.data[i].noticias.length;r++)
+						{
+							linkrss += "<span><a href='"+retorno.data[i].noticias[r].link+"' target=blanck ><img style=cursor:pointer src='../../imagens/mais.png' title='"+retorno.data[i].noticias[r].titulo+"'/></a></span>" ;
+						}
+						
+					}
+
+					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(this)' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss
+				}
 			}
 		}
 	}
@@ -46,13 +66,12 @@ function montaNuvem(r)
 	$i("resultado").innerHTML = tags;
 	aguarde("none")
 }
-
 //pega a lista de tags
 $i("resultado").innerHTML = "Aguarde...";
 var cp = new cpaint();
 cp.set_response_type("JSON");
 //cp.set_debug(2)
-var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&sid="+g_sid;
+var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&rss=&g_sid="+g_sid;
 cp.call(p,"listaTags",montaNuvem);
 
 function procurar(texto)
@@ -62,4 +81,17 @@ function procurar(texto)
 		window.parent.document.getElementById("buscatema").value = texto.innerHTML
 		window.parent.procurartemas()
 	}
+}
+
+function buscarss()
+{
+	var rss = $i("texto").value
+	if (rss == ""){alert("Digite um endereco RSS");return;}
+	aguarde("block")
+	$i("resultado").innerHTML = "Aguarde...";
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	//cp.set_debug(2)
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaTags&g_sid="+g_sid+"&rss="+rss;
+	cp.call(p,"listaTags",montaNuvem);	
 }

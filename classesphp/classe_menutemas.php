@@ -643,9 +643,9 @@ rss - (opcional) endereço de um RSS para cruzar com as tags.
 			foreach ( simplexml_load_file ($rss)->channel->item as $item )
 			{
 				if($conta < 20)
-				$noticiasRSS[] = array("desc"=>$item->description,"titulo"=>$item->title,"link"=>$item->link);
+				$noticiasRSS[] = array("desc"=>(ixml($item,"description")),"titulo"=>(ixml($item,"title")),"link"=>(ixml($item,"link")));
 				$conta++;
-			}			
+			}	
 		}
 		$this->xml = array();
 		if (file_exists("../ms_configura.php"))
@@ -715,15 +715,19 @@ rss - (opcional) endereço de um RSS para cruzar com as tags.
 											{
 												$resultado[$tag] = array($tid);
 												//busca noticias
-												if($rrs != "")
+												if(count($noticiasRSS) > 0)
 												{
 													foreach($noticiasRSS as $noticia)
 													{
-														$titulo = explode(" ",strtolower(removeAcentos($noticia["desc"])));
-														$t = removeAcentos($tag);
+														$titulo = explode(" ",strtolower($this->removeAcentos($noticia["desc"])));
+														$t = $this->removeAcentos($tag);
 														if(in_array(strtolower($t),$titulo))
 														{
+															//echo $noticia["link"]."<br>";
+															if(!$noticias[$tag])
 															$noticias[$tag] = array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]);
+															else
+															$noticias[$tag] = array_merge($noticias[$tag],array("titulo"=>$noticia["titulo"],"link"=>$noticia["link"]));
 														}
 													}	
 												}
@@ -744,10 +748,11 @@ rss - (opcional) endereço de um RSS para cruzar com as tags.
 		ksort($resultado);
 		foreach(array_keys($resultado) as $k)
 		{
+			
 			if($noticias[$k])
-			{$not = $noticias[$k];}
+			{$not = array($noticias[$k]);}
 			else
-			{$not = "";}
+			{$not = array();}
 			$final[] = array("tag"=>$k,"temas"=>$resultado[$k],"noticias"=>$not);
 		}
 		return ($final);
