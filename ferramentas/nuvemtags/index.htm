@@ -1,28 +1,75 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+      <link rel="stylesheet" type="text/css" href="../../css/i3geo.css">
       <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
 	  <style type="text/css">
 	  	.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}
+	  	
+	  	/* custom styles for multiple stacked instances */
+		#textoautocomplete
+		{
+    		width:18em; /* set width here */
+    		padding-bottom:2em;
+    		left:5px;
+    		top:10px;
+		}
+		#textoautocomplete
+		{
+    		z-index:9000; /* z-index needed on top instance for ie & sf absolute inside relative issue */
+		}
+		#texto
+		{
+    	_position:relative; /* abs pos needed for ie quirks */
+		}
 	  </style>
 <title></title>
   </head>
-  <body class="yui-skin-sam;" style="overflow:auto;">
-	<div style="width:95%;top:5px;left:0px">
+  <body class="yui-skin-sam" style="overflow:auto;">
+	<div style="width:95%;top:5px;left:5px">
 		Voc&ecirc; pode cruzar a nuvem de tags com um RSS de notícias. Digite abaixo o endere&ccedil;o do RSS:
-		<table class=lista >
-		<tr>
-			<td>
-				<input size=45 class=digitar type=text value="" id=texto />
-			</td>
-			<td>
-				<div onclick='buscarss()' style='text-align:left;left:0px'><input id=botao1 size=18 class=executar type='buttom' value='Cruzar' /></div>
-			</td>
-		</tr>
-		</table>		
-	</div>	
-    <br><div style="top:2px;left:5px;display:block;width:90%"  id="resultado" >Aguarde...</div>
+	</div>
+	<div id="textoautocomplete"> 
+		<input id="texto" style="text-align:left" type="text"> 
+		<div id="textocontainer" style="top:1.4em;left:-10px"></div> 
+	</div>
+	<div style="width:10px;position:relative;top:-15px;left:225px">
+		<input title="número de notícias" type=text class=digitar id=nrss value="20" size=2 />
+	</div>
+	<div onclick='buscarss()' style='width:10px;position:relative;text-align:left;left:250px;top:-35px'>
+		<input id=botao1 size=18 class=executar type='buttom' value='Cruzar' />
+	</div>
+    <div style="top:-20px;left:5px;display:block;width:90%;text-align:justify"  id="resultado" >Aguarde...</div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script>
+YAHOO.example.linksRSS = [ 
+	    "http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
+	    "http://www.estadao.com.br/rss/ultimas.xml",
+	    "http://www.estadao.com.br/rss/vidae.xml",
+	    "http://feeds.folha.uol.com.br/folha/emcimadahora/rss091.xml"
+	];
+	
+	YAHOO.example.ACJSArray = new function() {
+    // Instantiate first JS Array DataSource
+    this.oACDS = new YAHOO.widget.DS_JSArray(YAHOO.example.linksRSS);
+
+    // Instantiate first AutoComplete
+    this.oAutoComp = new YAHOO.widget.AutoComplete('texto','textocontainer', this.oACDS);
+    this.oAutoComp.prehighlightClassName = "yui-ac-prehighlight";
+    this.oAutoComp.typeAhead = true;
+    this.oAutoComp.useShadow = true;
+    this.oAutoComp.minQueryLength = 0;
+    this.oAutoComp.textboxFocusEvent.subscribe(function(){
+        var sInputValue = YAHOO.util.Dom.get('texto').value;
+        if(sInputValue.length === 0) {
+            var oSelf = this;
+            setTimeout(function(){oSelf.sendQuery(sInputValue);},0);
+        }
+    });
+};
+
+	
+</script>
 </body>
 </html>
