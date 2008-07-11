@@ -11,7 +11,7 @@ version: 2.2.2
     border-width:1px 0;
     border-style:solid;
     border-color:#999;
-    background:#ecece3 url('../../imagens/visual/default/backgroundbotaoaplicar.png') left center;
+    background:#ecece3 url('../imagens/visual/default/backgroundbotaoaplicar.png') left center;
     margin:auto .25em;
 }
 
@@ -19,7 +19,7 @@ version: 2.2.2
 
     /* Give the transparent background image to IE 6 */
     background-image:none;
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../imagens/visual/default/backgroundbotaoaplicar.png', sizingMethod = 'scale');
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../imagens/visual/default/backgroundbotaoaplicar.png', sizingMethod = 'scale');
 
 }
 

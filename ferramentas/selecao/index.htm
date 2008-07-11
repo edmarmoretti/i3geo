@@ -11,10 +11,11 @@
 		<div id=guia1 >Pegar no mapa</div>
 		<div id=guia2 >Por atributo</div>
 		<div id=guia3 >Por tema</div>
+		<div id=guia5 >Gr&aacute;ficos</div>
 		<div id=guia4 >Op&ccedil;&otilde;es</div>
 	</div>
 	<div id=geral style="left:0px;top:0px;">
-		<div style=top:1px;left:0px;text-align:center;width:90%; >
+		<div id="botoesopc" style=top:1px;left:0px;text-align:center;width:90%; >
 			<img alt="selpt.png" id=selecaopt onclick="tiposel(this)" src="../../imagens/selpt.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid white" /> 
 			<img alt="selext.png" id=selecaoext onclick="tiposel(this)" src="../../imagens/selext.png" title="Seleciona o que estiver visível no mapa" style="cursor:pointer;border:1px solid gray" /> 
 			<img alt="selbox.png" id=selecaobox onclick="tiposel(this)" src="../../imagens/selbox.png" title="Desenhe um retângulo no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
@@ -67,13 +68,64 @@
 					<td>Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):</td>
 					<td><input style="cursor:text" size=4 class=digitar type='text' id=toleranciapt value='0' /></td>
 				</tr>
+				<tr>  
+					<td>Esquema de cores para o gr&aacute;fico:</td>
+					<td>
+            			<select id="colorScheme" >
+                			<option value="Blue">Azul</option>
+                			<option value="Red">Vermelho</option>
+                			<option value="Green">Verde</option>
+                			<option value="Purple">Roxo</option>
+                			<option value="Cyan">Ciano</option>
+                			<option value="Orange">Laranja</option>
+            			</select>					
+					</td>
+				<tr>
+				</tr>
+					<td>Tipo de gr&aacute;fico</td>
+					<td>
+						<select id="chartStyle">
+                			<option value="bar">Barras</option>
+                			<option value="line">Linhas</option>
+                			<option value="pie">Pizza</option>
+            			</select>
+            		</td>
+				</tr>
 			</table>
-
+		</div>
+		<div id=guia5obj style="width:95%;display:block;left:10px;top:5px">
+			<div id=opcgr style=top:0px;left:0px;text-align:left;display:block;>
+				Defina as colunas que compor&atilde;o os eixos x e y do gr&aacute;fico:
+				<table summary="" id="itensgrafico" >
+				<tr>
+					<td>Eixo X (Classes)</td><td>Eixo Y (Valores)</td><td onclick="atualizaGrafico()"><input id=botaoGr size=10 type=button value="Gerar"></td>
+				</tr>
+				<tr>
+					<td id=lugarComboX ></td><td id=lugarComboY ></td><td></td>
+				</tr>
+				</table>
+			</div>
+			<div id=lugarGrafico style="text-align:center;left:5px;width:95%" ></div>
 		</div>
 
 	</div>
-
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<!---
+O Mochikit possui uma incompatibilidade com o CPAINT
+Para resolver o problema, foi criado uma cópia de cpaint2.inc.js
+no diretório desta ferramenta.
+Por isso, a carga dos js é feita de cada componente
+--->
+<script src="../funcoes_compacto.js"></script>
+<script src="../../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js"></script>
+<script src="../../pacotes/yui231/build/element/element-beta-min.js"></script>
+<script src="../../pacotes/yui231/build/button/button-beta.js"></script>
+<script src="../../pacotes/yui231/build/tabview/tabview-min.js"></script>
+<script src="../../pacotes/yui231/build/animation/animation-min.js"></script>
+<script src="cpaint2.inc.js"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script src="../../pacotes/MochiKit/packed/MochiKit/MochiKit.js" type="text/javascript"></script>
+<script src="../../pacotes/plotkit/PlotKit/excanvas.js" type="text/javascript"></script>
+<script src="../../pacotes/plotkit/PlotKit/PlotKit.js" type="text/javascript"></script>
+
 </body>
 </html>

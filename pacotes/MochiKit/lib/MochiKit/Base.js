@@ -416,6 +416,7 @@ MochiKit.Base.update(MochiKit.Base, {
         if (fn === null) {
             fn = m.operator.truth;
         }
+        
         if (typeof(Array.prototype.filter) == 'function') {
             // Mozilla fast-path
             return Array.prototype.filter.call(lst, fn, self);
@@ -434,6 +435,7 @@ MochiKit.Base.update(MochiKit.Base, {
                 }
             }
         }
+        
         return rval;
     },
 

@@ -632,8 +632,10 @@ Parameters:
 
 rss - (opcional) endereço de um RSS para cruzar com as tags.
 
+nrss - (opcional) número de registros no rss que serão considerados
+
 */
-	function listaTags($rss="")
+	function listaTags($rss="",$nrss="")
 	{
 		//carrega os títulos e links do rss especificado
 		$noticiasRSS = array(); //guarda as notícias originais do RRS
@@ -642,7 +644,7 @@ rss - (opcional) endereço de um RSS para cruzar com as tags.
 			$conta = 0;
 			foreach ( simplexml_load_file ($rss)->channel->item as $item )
 			{
-				if($conta < 20)
+				if($conta < $nrss)
 				$noticiasRSS[] = array("desc"=>(ixml($item,"description")),"titulo"=>(ixml($item,"title")),"link"=>(ixml($item,"link")));
 				$conta++;
 			}	

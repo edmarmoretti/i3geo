@@ -9,10 +9,11 @@
 	  	/* custom styles for multiple stacked instances */
 		#textoautocomplete
 		{
+    		position:absolute;
     		width:18em; /* set width here */
     		padding-bottom:2em;
     		left:5px;
-    		top:10px;
+    		top:45px;
 		}
 		#textoautocomplete
 		{
@@ -20,7 +21,7 @@
 		}
 		#texto
 		{
-    	_position:relative; /* abs pos needed for ie quirks */
+    	position:absolute; /* abs pos needed for ie quirks */
 		}
 	  </style>
 <title></title>
@@ -29,17 +30,17 @@
 	<div style="width:95%;top:5px;left:5px">
 		Voc&ecirc; pode cruzar a nuvem de tags com um RSS de notícias. Digite abaixo o endere&ccedil;o do RSS:
 	</div>
-	<div id="textoautocomplete"> 
+	<div id="textoautocomplete" style="text-align:left;"> 
 		<input id="texto" style="text-align:left" type="text"> 
 		<div id="textocontainer" style="top:1.4em;left:-10px"></div> 
 	</div>
-	<div style="width:10px;position:relative;top:-15px;left:225px">
+	<div style="width:10px;position:absolute;top:45px;left:225px">
 		<input title="número de notícias" type=text class=digitar id=nrss value="20" size=2 />
 	</div>
-	<div onclick='buscarss()' style='width:10px;position:relative;text-align:left;left:250px;top:-35px'>
+	<div onclick='buscarss()' style='width:10px;position:absolute;text-align:left;left:250px;top:40px'>
 		<input id=botao1 size=18 class=executar type='buttom' value='Cruzar' />
 	</div>
-    <div style="top:-20px;left:5px;display:block;width:90%;text-align:justify"  id="resultado" >Aguarde...</div>
+    <div style="position:absolute;top:70px;left:5px;display:block;width:90%;text-align:justify"  id="resultado" >Aguarde...</div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 <script>

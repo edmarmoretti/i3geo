@@ -19,6 +19,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
@@ -26,8 +27,10 @@ YAHOO.example.init = function ()
 		new YAHOO.widget.Button("botao1");
 		new YAHOO.widget.Button("botao2");
 		new YAHOO.widget.Button("botao3");
+		new YAHOO.widget.Button("botao4");
+		new YAHOO.widget.Button("botaoGr");
 	}
-    YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
+    YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
 
 //inicializa
@@ -40,12 +43,14 @@ comboi = ""
 tema = ""
 //eventos das guias
 $i("guia1").onclick = function()
-{mostraGuia("guia1")}
+{mostraGuia("guia1");$i("opc1").style.display="block";$i("botoesopc").style.display="block";}
 $i("guia2").onclick = function()
 {
 	mostraGuia("guia2");
 	if ($i("comboTemas").value == "")
 	{alert("Escolha um tema");}
+	$i("opc1").style.display="block";
+	$i("botoesopc").style.display="block";
 }
 $i("guia3").onclick = function()
 {
@@ -54,10 +59,41 @@ $i("guia3").onclick = function()
 	{
  		$i("overlay").innerHTML = retorno.dados
 	},"overlay")
+	$i("opc1").style.display="block";
+	$i("botoesopc").style.display="block";
 }
 $i("guia4").onclick = function()
 {
  	mostraGuia("guia4")
+ 	$i("opc1").style.display="block";
+ 	$i("botoesopc").style.display="block";
+}
+$i("guia5").onclick = function()
+{
+ 	mostraGuia("guia5")
+	$i("opc1").style.display="none";
+	$i("botoesopc").style.display="none";
+	if ($i("comboTemas").value == "")
+	{alert("Escolha um tema");}
+	else
+	{
+		if(!$i("itemX"))
+		{
+			comboitens("itemX",$i("comboTemas").value,function(retorno)
+			{
+	 			$i("lugarComboX").innerHTML = retorno.dados;
+			},"lugarComboX")
+		}
+		if(!$i("itemY"))
+		{
+			comboitens("itemY",$i("comboTemas").value,function(retorno)
+			{
+	 			$i("lugarComboY").innerHTML = retorno.dados;
+			},"lugarComboY")
+		}
+		if($i("itemX") && $i("itemY"))
+		{atualizaGrafico();}
+	}
 }
 
 //combo com o tipo de operacao
@@ -123,12 +159,15 @@ function tiposel(obj)
 }
 
 //cria combo com os temas
+
 comboTemasLigados("comboTemas",function(retorno)
 {
  	$i("temas").innerHTML = retorno.dados
  	aguarde("none")
  	$i("comboTemas").onchange = function()
 	{
+	 	$i("lugarComboX").innerHTML = "";
+	 	$i("lugarComboY").innerHTML = "";
 	 	window.parent.objmapa.temaAtivo = $i("comboTemas").value
 		comboitens("selItem",$i("comboTemas").value,function(retorno)
 		{
@@ -147,6 +186,7 @@ comboTemasLigados("comboTemas",function(retorno)
 		}
 	}
 },"temas")
+
 //adiciona uma linha de parametros
 function adicionalinha()
 {
@@ -319,4 +359,47 @@ function concluipoligono()
 	}
 	else
 	{alert("Sao necessarios pelo menos tres pontos");}
+}
+function atualizaGrafico()
+{
+	var monta = function(retorno)
+	{
+		$i("lugarGrafico").innerHTML = "<canvas id='canvasTest' width='350' height='180' style='border: 1px solid #eee;'></canvas>"
+		var dados = retorno.data.dados;
+		var values = new Array();
+		var labels = new Array();
+		for (i=1;i<dados.length; i++)
+		{
+			var celula = dados[i].split(";");
+			values.push(eval("["+i+","+celula[1]+"]"));
+			var temp = '{v:'+(i)+',label:'+'"'+celula[0]+'"}';
+			labels.push(temp);
+		}
+		var options = {
+			"colorScheme": "",
+			"padding": {left: 2, right: 2, top: 5, bottom: 2},
+			"xTicks": eval("["+labels+"]")
+		};
+		layout = new Layout("bar", options);
+		renderer = new SweetCanvasRenderer($('canvasTest'), layout, options);
+		var chartStyle = "bar"; //document.forms["options"].chartStyle[chartStyleSelected].value;
+		var colorScheme = "Blue"; //document.forms["options"].colorScheme[colorSchemeSelected].value;
+		// setup layout options
+		var themeName = "office" + $i("colorScheme").value;
+		var theme = PlotKit.Base[themeName]();
+		MochiKit.Base.update(options, theme);        
+		layout.style = $i("chartStyle").value;
+		MochiKit.Base.update(layout.options, options);
+		MochiKit.Base.update(renderer.options, options);
+		layout.addDataset("data", values);  
+		layout.evaluate();
+		renderer.clear();
+		renderer.render();
+	}
+	if($i("itemX").value == "" || $i("itemY").value == "")
+	{alert("Escolha as colunas primeiro");}
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficoSelecao&tema="+$i("comboTemas").value+"&itemclasses="+$i("itemX").value+"&itemvalores="+$i("itemY").value
+	var cp = new cpaint();
+	cp.set_response_type("JSON");
+	cp.call(p,"graficoSelecao",monta);
 }

@@ -380,9 +380,13 @@ function cliqueSelecao()
 		//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 		if ((tipo != "limpa") && (tipo != "inverte"))
 		{
+			var retorna = function(retorno)
+			{
+				ajaxredesenha(retorno);
+			};
 			objaguarde.abre("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+g_sid;
-			cpObj.call(p,"selecaoPT",ajaxredesenha);
+			cpObj.call(p,"selecaoPT",retorna);
 		}
 	}
 }
@@ -912,7 +916,7 @@ function selecao()
 		criaContainerRichdraw();
 		richdraw.lineColor = "red";
 		richdraw.lineWidth = "2px";	
-		wdocaf("360px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+		wdocaf("420px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
 	}
 	else
 	{mudaiconf("pan");}

@@ -1477,6 +1477,16 @@ Section: Gráficos
 Criação de representações gráficas de dados estatísticos.
 */
 /*
+Property: graficoSelecao
+
+Pega os dados necessários para a geração dos gráficos da ferramenta seleção
+
+*/					
+	case "graficoSelecao":
+		include("graficos.php");
+		$cp->set_data(iniciaDadosGrafico($map_file,$tema,"",$itemclasses,$itemvalores,"xy",false));
+	break;
+/*
 Property: graficotema
 
 Gera graficos automaticamente para os elementos de um tema
@@ -1613,7 +1623,7 @@ Pega a lista de tags registrados nos menus de temas.
 	case "listaTags":
 		include("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas);
-		$cp->set_data($m->listatags($rss));
+		$cp->set_data($m->listatags($rss,$nrss));
 	break;
 /*
 Property: pegalistademenus

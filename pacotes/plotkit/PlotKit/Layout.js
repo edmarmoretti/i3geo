@@ -284,15 +284,16 @@ PlotKit.Layout.prototype._evaluateLimits = function() {
     var listMax = MochiKit.Base.listMax;
     var isNil = MochiKit.Base.isUndefinedOrNull;
 
-
     var all = collapse(map(itemgetter(1), items(this.datasets)));
+    
     if (isNil(this.options.xAxis)) {
         if (this.options.xOriginIsZero)
             this.minxval = 0;
         else
             this.minxval = listMin(map(parseFloat, map(itemgetter(0), all)));
 
-        this.maxxval = listMax(map(parseFloat, map(itemgetter(0), all)));
+        this.maxxval = listMax(map(parseFloat, map(itemgetter(0), all)));//
+
     }
     else {
         this.minxval = this.options.xAxis[0];
@@ -313,7 +314,6 @@ PlotKit.Layout.prototype._evaluateLimits = function() {
         this.maxyval = this.options.yAxis[1];
         this.yscale = this.maxyval - this.minyval;
     }
-
 };
 
 PlotKit.Layout.prototype._evaluateScales = function() {

@@ -81,6 +81,7 @@ $jsfiles = array(
 "../pacotes/yui231/build/element/element-beta-min.js",
 "../pacotes/yui231/build/tabview/tabview-min.js",
 "../pacotes/yui231/build/utilities/utilities_packer.js",
+"../pacotes/yui231/build/autocomplete/autocomplete-min.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
 "../pacotes/jsobjects/jsUI-Global/common_compacto.js",
 "../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
@@ -108,7 +109,8 @@ $cssfiles = array(
 "../css/menu.css",
 "../pacotes/yui231/build/container/assets/skins/sam/container.css",
 "../pacotes/yui231/build/menu/assets/skins/sam/menu-skin.css",
-"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css"
+"../pacotes/yui231/build/tabview/assets/skins/sam/tabview.css",
+"../pacotes/yui231/build/autocomplete/assets/skins/sam/autocomplete.css"
 );
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
@@ -126,6 +128,8 @@ $jsfiles = array(
 "../pacotes/yui231/build/element/element-beta.js",
 "../pacotes/yui231/build/button/button-beta.js",
 "../pacotes/yui231/build/tabview/tabview.js",
+"../pacotes/yui231/build/animation/animation-min.js",
+"../pacotes/yui231/build/autocomplete/autocomplete-min.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";

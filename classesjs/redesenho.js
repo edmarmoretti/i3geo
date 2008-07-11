@@ -459,6 +459,15 @@ function ajaxredesenha(retorno)
 			{
 				atualizaFL();
 			}
+			//
+			//verifica se está na opção de seleção e se o gráfico está ativo para atualizá-lo
+			//
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if(doc.getElementById("guia5obj").style.display=="block")
+			{
+				if(window.parent.frames["wdocai"].atualizaGrafico)
+				{window.parent.frames["wdocai"].atualizaGrafico();}
+			}			
 		}
 	}
 }

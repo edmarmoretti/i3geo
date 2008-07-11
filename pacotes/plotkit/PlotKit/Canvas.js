@@ -378,10 +378,20 @@ PlotKit.CanvasRenderer.prototype._renderAxis = function() {
                 context.lineTo(x - this.options.axisTickSize, y);
                 context.closePath();
                 context.stroke();
-
-                var label = DIV(labelStyle, tick[1]);
-                label.style.top = (y - this.options.axisLabelFontSize) + "px";
-                label.style.left = (x - this.options.padding.left - this.options.axisTickSize) + "px";
+				//
+				//adicionado por Edmar Moretti
+				//substitui o label por um símbolo com ALT
+				//
+				var label = DIV(labelStyle, "");
+				var novoimg = document.createElement("img");
+				novoimg.src= '../../imagens/dot.gif';
+				novoimg.title=tick[1];
+				label.appendChild(novoimg);
+				//
+				//
+                //var label = DIV(labelStyle, tick[1]);
+                label.style.top = (y - this.options.axisLabelFontSize) + 5 + "px";
+                label.style.left = (x - this.options.padding.left - this.options.axisTickSize) + 9 + "px";
                 label.style.textAlign = "right";
                 label.style.width = (this.options.padding.left - this.options.axisTickSize * 2) + "px";
                 MochiKit.DOM.appendChildNodes(this.container, label);
@@ -410,8 +420,18 @@ PlotKit.CanvasRenderer.prototype._renderAxis = function() {
                 context.lineTo(x, y + this.options.axisTickSize);
                 context.closePath();
                 context.stroke();
-
-                var label = DIV(labelStyle, tick[1]);
+				//
+				//adicionado por Edmar Moretti
+				//substitui o label por um símbolo com ALT
+				//
+				var label = DIV(labelStyle, "");
+				var novoimg = document.createElement("img");
+				novoimg.src= '../../imagens/dot.gif';
+				novoimg.title=tick[1];
+				label.appendChild(novoimg);
+				//
+				//
+                //var label = DIV(labelStyle, tick[1]);//original
                 label.style.top = (y + this.options.axisTickSize) + "px";
                 label.style.left = (x - this.options.axisLabelWidth/2) + "px";
                 label.style.textAlign = "center";
