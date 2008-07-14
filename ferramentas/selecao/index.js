@@ -362,9 +362,9 @@ function concluipoligono()
 }
 function atualizaGrafico()
 {
+	$i("lugarGrafico").innerHTML = ""
 	var monta = function(retorno)
-	{
-		$i("lugarGrafico").innerHTML = "<canvas id='canvasTest' width='350' height='180' style='border: 1px solid #eee;'></canvas>"
+	{	
 		var dados = retorno.data.dados;
 		var values = new Array();
 		var labels = new Array();
@@ -396,10 +396,19 @@ function atualizaGrafico()
 		renderer.clear();
 		renderer.render();
 	}
-	if($i("itemX").value == "" || $i("itemY").value == "")
-	{alert("Escolha as colunas primeiro");}
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficoSelecao&tema="+$i("comboTemas").value+"&itemclasses="+$i("itemX").value+"&itemvalores="+$i("itemY").value
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	cp.call(p,"graficoSelecao",monta);
+	if(!$i("canvasTest"))
+	$i("lugarGrafico").innerHTML = "<canvas id='canvasTest' width='350' height='180' style='border: 1px solid #eee;'></canvas>"
+	if ($i("canvasTest").getContext)
+	{
+		if($i("itemX").value == "" || $i("itemY").value == "")
+		{alert("Escolha as colunas primeiro");}
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficoSelecao&tema="+$i("comboTemas").value+"&itemclasses="+$i("itemX").value+"&itemvalores="+$i("itemY").value
+		var cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"graficoSelecao",monta);
+	}
+	else
+	{
+		$i("lugarGrafico").innerHTML = "<span style=color:red >Voc&ecirc; precisa atuallizar seu navegador para que o gr&aacute;fico possa ser mostrado</span>";
+	}
 }
