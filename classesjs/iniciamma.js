@@ -1171,7 +1171,7 @@ function Mapa(e,m)
 			clearTimeout(objmapa.tempoParado);
 		}
 		catch(e){objmapa.tempoParado = "";}
-		if (g_funcoesMouseParado.length > 0)
+		if (g_funcoesMouseParado.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0)
 		{
 			var f = g_funcoesMouseParado.length-1;
 			if (f >= 0)

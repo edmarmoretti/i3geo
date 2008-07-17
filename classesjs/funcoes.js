@@ -2594,7 +2594,7 @@ function procurartemas()
 								if ( ngTema[st].link != " ")
 								{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
 								var tid = ngTema[st].tid;
-								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"' onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" /> ("+nomeSgrupo+")";
+								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"'  /> ("+nomeSgrupo+")";
 								var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
 								ins += nomeTema;
 						}
@@ -2611,7 +2611,6 @@ function procurartemas()
 		}
 	};
 	$i("achados").innerHTML = "<span style='color:green'>Procurando...<br><br></span>";
-	
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+g_sid;
 	cpObj.call(p,"procurartemas",resultadoProcurar);
 }
@@ -2872,7 +2871,7 @@ function expandeGrupo(itemID)
 							//
 							//inclui o link para abrir o qrcode e kml
 							//
-							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
+							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+"  />";
 							var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 							var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 							var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
@@ -2919,9 +2918,9 @@ function expandeGrupo(itemID)
 					do
 					{
 						if (navm)
-						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
+						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+ngSgrupo[sg].nome+"</span>";
 						else
-						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' ><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+ngSgrupo[sg].nome+"</span>";
+						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" ><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+ngSgrupo[sg].nome+"</span>";
 						mytreeview2.createItem(itemID+"_"+sg, nomeSgrupo, imgBranco, true, true, true, itemID);
 						$i(itemID+"_"+sg).subgrupo = sg+"a";
 						$i(itemID+"_"+sg).grupo = grupo+"a";
@@ -3012,10 +3011,10 @@ function pegaListaDeGrupos(idmenu,listasistemas,status)
 			{
 				if(!$i("arvoreAdicionaTema"))
 				{
-					var insp = "<div style='text-align:left;'><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
-					insp = insp + "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-					insp = insp + "<p><br>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;'/></td></tr></table><br>";
-					$i(ondeArvore).innerHTML = insp+"<div style='text-align:left;font-size:10px;' id='achados' ></div></div>";
+					var insp = "<table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
+					insp += "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
+					insp += "<br><p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;' /></p></td></tr></table><br>";
+					$i(ondeArvore).innerHTML = insp+"<div onmouseover=\"javascript:mostradicasf(this,'Clique no box ao lado de cada tema para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" style='text-align:left;font-size:10px;' id='achados' ></div></div>";
 				}
 				else
 				{$i(ondeArvore).innerHTML = "<div id=buscatema ></div>"}

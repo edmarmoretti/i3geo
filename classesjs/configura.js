@@ -582,7 +582,7 @@ es:"gr&aacute;fico"
 //guia adiciona
 "a1":[
 {
-pt:"procurar tema no menu:",
+pt:"procurar tema:",
 en:"search layer:",
 es:"Buscar datos:"
 }],
@@ -636,7 +636,7 @@ es:"Temas"
 }],
 "a8":[
 {
-pt:"Clique para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
+pt:"Clique no box ao lado do tema para ligar ou desligar, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.",
 en:"Click to connect or disconnect layer, showing it or not on the map. After changing the layer status, wait a few moments to be redesigned the map, or click in the button apply that will be shown.",
 es:"Haga clic para conectar o desconectar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de alterar el estado del tema, espere algunos instantes para que el mapa sea redise&ntilde;ado, o haga clic en el bot&oacute;n aplicar que aparecer&aacute;"
 }],
