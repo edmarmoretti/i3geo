@@ -93,7 +93,7 @@ if (isset($map) && $map != "")
 }
 function verifica($map)
 {
-	global $tipo,$locaplic;
+	global $tipo,$locaplic,$postgis_mapa;
 	if ($tipo == "mini" && file_exists('temas/miniaturas/'.$map.".mini.png"))
 	{
 		Header("Content-type: image/png");
@@ -137,6 +137,13 @@ function verifica($map)
 		{
 			$layern = $nmapa->getLayerByName($teman);
 			$layern->set("status",MS_DEFAULT);
+			if ($layern->connectiontype == MS_POSTGIS)
+			{
+				if ($layern->connection == " ")
+				{
+					$layern->set("connection",$postgis_mapa);
+				}
+			}			
 			autoClasses(&$layern,$nmapa);
 			ms_newLayerObj($mapa, $layern);
 			if ($layern->data == "")
