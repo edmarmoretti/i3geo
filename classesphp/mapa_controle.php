@@ -2576,7 +2576,7 @@ Include:
 function redesenhaMapa()
 {
 	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
-	if($tipoimagem != "nenhum")
+	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
