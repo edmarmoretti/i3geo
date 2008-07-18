@@ -1861,6 +1861,17 @@ Objeto layer modificado
 */
 function autoClasses(&$nlayer,$mapa)
 {
+	$postgis_mapa = "";
+	$substituicon = "nao";
+	include_once("../ms_configura.php");
+	if ($nlayer->connectiontype == MS_POSTGIS)
+	{
+		if ($nlayer->connection == " ")
+		{
+			$nlayer->set("connection",$postgis_mapa);
+			$substituicon = "sim";
+		}
+	}	
 	if($nlayer->getmetadata("classesitem") == "")
 	{return;}
 	$itemnome = $nlayer->getmetadata("classesnome");
@@ -1951,6 +1962,7 @@ function autoClasses(&$nlayer,$mapa)
 			$classeoriginal->set("status",MS_DELETE);
 		}
 	}
+	if($substituicon == "sim"){$nlayer->set("connection"," ");}
 	return;
 }
 ?>
