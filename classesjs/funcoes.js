@@ -3339,10 +3339,10 @@ function pegavalSistemas(sis)
 			var tempf = funcoes.length;
 			for (var ig2=0;ig2<tempf;ig2++)
 			{
-				var nomeFunc = funcoes[ig2].NOME;
 				var executar = funcoes[ig2].ABRIR;
 				var w = funcoes[ig2].W;
 				var h = funcoes[ig2].H;
+				var nomeFunc = "<span onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")'>"+funcoes[ig2].NOME+"</span>";
 				var inp = "<img class='folder' title='"+$trad("a12")+"' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
 				mytreeviewS.createItem("sis"+ig+"func"+ig2, inp+nomeFunc, imgBranco, false, true, false, "sis"+ig);
 			}
