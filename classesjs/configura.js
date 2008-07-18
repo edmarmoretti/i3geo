@@ -1411,6 +1411,12 @@ constroiconteudo - função que ativará a opção. Essa opção atua como a opção cont
 g_listaFuncoesBotoes = {
 	"botoes": [
 	{
+		//Insere a opção de zoom anterior e posterior.
+		iddiv:"historicozoom",
+		dica:$trad("d1"),
+		constroiconteudo:'ativaHistoricoZoom("historicozoom")'
+	},
+	{
 		//Insere a opção de localização de coordenadas.
 		iddiv:"localizarxy",
 		dica:$trad("d1"),

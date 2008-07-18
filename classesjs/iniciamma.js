@@ -137,6 +137,13 @@ Essas operações são controladas pela função ajaxiniciaparametros.
 */
 g_operacao = "";
 /*
+Variable: g_zoomProximo
+
+Array com as extensões geográficas da função de zoom anterior e zoom próximo.
+
+*/
+g_zoomProximo = new Array();
+/*
 Variable: g_nomepin
 
 Nome do tema atual que irá receber dados pontuais ou toponimia.

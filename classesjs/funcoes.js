@@ -1530,6 +1530,71 @@ function ativaClicks(docMapa)
 Section: navegação
 */
 /*
+Function: zoomAnterior
+
+Retorna ao zoom anterior do mapa.
+
+A memória das extensões geográficas são mantidas nos quador s de animação (objeto quadrosfilme).
+*/
+function zoomAnterior()
+{
+	try
+	{
+		var n = quadrosfilme.length;
+		//
+		//pega o quadro anterior com extensão diferente da atual
+		//
+		var muda = 0;
+		for (var i = (n - 1); i > 0; i--)
+		{
+			if (quadrosfilme[i].extensao != ' ' && quadrosfilme[i].extensao == objmapa.extent)
+			{
+				var muda = i - 1;break;
+			}
+		}
+		function retorna(retorno)
+		{
+			ajaxredesenha(retorno);
+			//
+			//zera os novos quadros adicionados
+			//
+			for (var i = n-1; i > muda; i--)
+			{
+				$i("f"+(i)).className = "quadro";
+				var qu = new quadrofilme();
+				quadrosfilme[i] = qu;
+			}
+		}
+		g_zoomProximo.push(objmapa.extent);
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[muda].extensao+"&g_sid="+g_sid;
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		cpObj.call(p,"mudaExtensao",retorna);
+	}
+	catch(e){var e = "";}
+}
+/*
+Function: zoomProximo
+
+Avança para o zoom definido antes de aplciar o zoom anterior.
+
+A memória das extensões geográficas são mantidas no array g_zoomProximo.
+*/
+function zoomProximo()
+{
+	try
+	{
+		var n = g_zoomProximo.length;
+		if (n > 0 && g_zoomProximo[n-1] != objmapa.extent)
+		{
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+g_zoomProximo[n-1]+"&g_sid="+g_sid;
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			cpObj.call(p,"mudaExtensao",ajaxredesenha);
+			g_zoomProximo.pop();
+		}
+	}
+	catch(e){var e = "";}	
+}
+/*
 Function: pegaCoordenadaUTM
 
 Mostra as coordenadas do mouse em UTM.
@@ -3812,12 +3877,23 @@ function gravaQuadro(variavel,valor)
 		if ($i("lugarquadros"))
 		{
 			var nquadros = quadrosfilme.length;
+			//
+			//verifica se todos os quadros estão cheios
+			//
 			if (quadrosfilme[nquadros - 1].imagem != " ")
-			{rebobinaf();}
+			{
+				//
+				//se estiverem cheios, esvazia o primeiro e acrescenta o novo
+				//
+				//rebobinaf();
+				quadrosfilme.shift();
+				var qu = new quadrofilme();
+				quadrosfilme.push(qu);
+			}
 			for (var i = 0; i < nquadros; i++)
 			{
 				if ((eval("quadrosfilme["+i+"]."+variavel+" == ' '")) && (muda < 0))
-				{muda = i;}
+				{var muda = i;}
 			}
 			if (eval("quadrosfilme["+(muda)+"]"))
 			{eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");}
@@ -3838,12 +3914,10 @@ function avancaQuadro()
 		if ($i("lugarquadros"))
 		{
 			var nquadros = quadrosfilme.length;
-			if (quadrosfilme[nquadros - 1].imagem != " ")
-			{rebobinaf();}
 			for (var i = 0; i < nquadros; i++)
 			{
 				if ((quadrosfilme[i].imagem == " ") && (muda < 0))
-				{muda = i;}
+				{var muda = i;}
 			}
 			$i("f"+muda).className = "quadro1";
 		}
@@ -3898,11 +3972,14 @@ Muda a extensão geográfica do mapa conforme o valor armazenado em um quado de an
 
 Parameters:
 
-o - quadro
+o - objeto quadro ou número do quadro
 */
 function filmezf(o)
 {
-	var quadro = (o.id).replace("f","");
+	if(o.id)
+	{var quadro = (o.id).replace("f","");}
+	else
+	{var quadro = o;}
 	if (quadrosfilme[quadro].extensao != " ")
 	{
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
@@ -3914,7 +3991,7 @@ function filmezf(o)
 /*
 Function: filmeanimaf
 
-Carrega as imagens armazenadas nos quadros de animação quadros.
+Carrega as imagens armazenadas nos quadros de animação.
 */
 function filmeanimaf()
 {

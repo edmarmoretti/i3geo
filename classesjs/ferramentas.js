@@ -1354,6 +1354,25 @@ Mostra a extensão geográfica atual, permitindo alterá-la digitando-se a nova ext
 function mostraExten()
 {wdocaf("450px","340px",g_locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica");}
 /*
+Function: ativaHistoricoZoom
+	
+Insere a opção para mostrar o zoom anterior ou o próximo.
+	
+*/	
+function ativaHistoricoZoom(iddiv)
+{
+	if($i(iddiv))
+	{
+		var ins = "<table style='text-align:center;position:relative;left:6px;'><tr>";
+		ins += "<td><img  class='zoomAnterior' title='anterior' onclick='zoomAnterior()' src='"+$im("branco.gif")+"'  /></td>";
+		ins += "<td>&nbsp;</td>";
+		ins += "<td><img  class='zoomProximo' title='proximo' onclick='zoomProximo()' src='"+$im("branco.gif")+"'  /></td>";
+		ins += "</tr></table>";
+		$i(iddiv).innerHTML = ins;
+	}
+}
+
+/*
 Function: ativaLocalizarxy
 	
 Insere a opção para mostrar as coordenadas xy e localização de coordenadas.

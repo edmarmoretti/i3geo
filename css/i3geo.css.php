@@ -767,6 +767,24 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	border-top:1px solid #F8F8F8;
 	border-right:1px solid #F8F8F8;
 }
+.zoomAnterior
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1675px;
+	width:10px;
+	height:11px;
+	cursor:pointer;
+}
+.zoomProximo
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1700px;
+	width:10px;
+	height:11px;
+	cursor:pointer;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
