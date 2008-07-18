@@ -1954,7 +1954,7 @@ Include:
 	case "mudaext":
 		include("classe_navegacao.php");
 		copiaSeguranca($map_file);
-		if (!isset($ext)){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
+		if (!isset($ext) || $ext == "" || $ext == " "){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
 		$m = new Navegacao($map_file);
 		$m->mudaExtensao($ext);
 		$m->salva();

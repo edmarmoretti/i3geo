@@ -1565,10 +1565,13 @@ function zoomAnterior()
 				quadrosfilme[i] = qu;
 			}
 		}
-		g_zoomProximo.push(objmapa.extent);
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[muda].extensao+"&g_sid="+g_sid;
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		cpObj.call(p,"mudaExtensao",retorna);
+		if(quadrosfilme[muda].extensao != " ")
+		{
+			g_zoomProximo.push(objmapa.extent);
+			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[muda].extensao+"&g_sid="+g_sid;
+			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			cpObj.call(p,"mudaExtensao",retorna);
+		}
 	}
 	catch(e){var e = "";}
 }
