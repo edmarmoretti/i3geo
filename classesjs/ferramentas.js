@@ -1363,8 +1363,11 @@ function ativaHistoricoZoom(iddiv)
 {
 	if($i(iddiv))
 	{
-		var ins = "<table style='text-align:center;position:relative;left:6px;'><tr>";
-		ins += "<td><img  class='zoomAnterior' title='anterior' onclick='zoomAnterior()' src='"+$im("branco.gif")+"'  /></td>";
+		var ins = "<table style='text-align:center;position:relative;left:";
+		if(navm){ins += "0px;'>";}
+		else
+		{ins += "6px;'>";}
+		ins += "<tr><td><img  class='zoomAnterior' title='anterior' onclick='zoomAnterior()' src='"+$im("branco.gif")+"'  /></td>";
 		ins += "<td>&nbsp;</td>";
 		ins += "<td><img  class='zoomProximo' title='proximo' onclick='zoomProximo()' src='"+$im("branco.gif")+"'  /></td>";
 		ins += "</tr></table>";
