@@ -1863,6 +1863,9 @@ function autoClasses(&$nlayer,$mapa)
 {
 	$postgis_mapa = "";
 	$substituicon = "nao";
+	if(file_exists("ms_configura.php"))
+	include_once("ms_configura.php");
+	else
 	include_once("../ms_configura.php");
 	if ($nlayer->connectiontype == MS_POSTGIS)
 	{
