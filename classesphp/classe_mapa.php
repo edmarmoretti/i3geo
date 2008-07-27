@@ -44,7 +44,7 @@ class Mapa
 	
 	Arquivo map file
 	*/
-	protected $arquivo;
+	public $arquivo;
 	/*
 	Variable: $layers
 	
@@ -64,13 +64,18 @@ $map_file - Endereço do mapfile no servidor.
 	function __construct($map_file,$locaplic="")
 	{
   		//error_reporting(E_ALL);
+  		if (!function_exists('ms_newMapObj')) {return false;}
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		require_once($locaplic."/funcoes_gerais.php");
   		else
   		require_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
+  		if(!file_exists($map_file))
+  		{return $this->arquivo = false;}
+  		if(!@ms_newMapObj($map_file))
+  		{return $this->mapa = false;}
+		$this->mapa = @ms_newMapObj($map_file);
+		$this->arquivo = $map_file;
 		for ($i=0;$i < ($this->mapa->numlayers);$i++)
 		{$this->layers[] = $this->mapa->getlayer($i);}
 	}

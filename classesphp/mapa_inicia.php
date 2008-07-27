@@ -94,6 +94,8 @@ function iniciaMapa()
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include("classe_mapa.php");
 	$m = new Mapa($map_file);
+	if(!$m->arquivo){$cp->set_data(" erro. Mapfile $map_file nao existe");return;}
+	if(!$m->mapa){$cp->set_data(" erro. Problemas com o mapfile $map_file");return;}
 	$m->mudaQS($w,$h);
 	$m = new Mapa($map_file);
 	$m->mapa->setsize($w,$h);
