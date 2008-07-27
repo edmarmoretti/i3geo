@@ -251,6 +251,8 @@ Note: Diretórios temporários
 Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
 */
 $diretorios = criaDirMapa($dir_tmp);
+if(!$diretorios)
+{echo "<p style=color:red ><b>N&atilde;o foi po&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
 $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 criaIndex();
