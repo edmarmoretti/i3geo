@@ -1637,13 +1637,11 @@ function mostraRosaDosVentos()
 		{
 			if(g_mostraRosa == "sim")
 			{
-				if (navm)
-				{$i("tip").style.filter = "alpha(opacity=70)";}
+				if($i("tip").style.opacity)
+				{$i("tip").style.opacity=".7";}
 				else
-				{$i("tip").style.opacity="5";}
+				{$i("tip").style.filter = "alpha(opacity=70)";}		
 				var setas = "<table id='rosaV' ><tr>";
-				if (navm){var s = " style=\"filter:'alpha(opacity=0)'\" ";}
-				if (navn){var s = " style='opacity:0' ";}
 				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('noroeste')\" /></td>";
 				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
 				setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('nordeste')\" /></td></tr>";
