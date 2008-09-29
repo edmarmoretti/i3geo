@@ -1,53 +1,14 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaTag();
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTags","adiciona")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	pegaTags();
 }
-function ativaBotaoAdicionaTag()
-{
-	var adicionalinha = function()
-	{
-		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/menutemas.php?funcao=alteraTags";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
-}
 function pegaTags()
 {
-	core_carregando("buscando tags...");
-	var sUrl = "../php/menutemas.php?funcao=pegaTags";
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{montaTabela(YAHOO.lang.JSON.parse(o.responseText));}
-  			catch(e){core_handleFailure(o,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_pegaDados("buscando tags...","../php/menutemas.php?funcao=pegaTags","montaTabela")
 }
 function montaTabela(dados)
 {
@@ -143,60 +104,14 @@ function gravaLinha(row)
 	var id_tag = r.getData("id_tag");
 	var nome = r.getData("nome");
 	core_carregando("ativa");
-	core_carregando(" gravando registro do id= "+id_tag);
+	var mensagem " gravando registro do id= "+id_tag;
 	var sUrl = "../php/menutemas.php?funcao=alteraTags&nome="+nome+"&id="+id_tag;
-	var callback =
-	{
-  		success:function(o)
-  		{
-			var rec = myDataTable.getRecordSet().getRecord(row);
-			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
-  			core_carregando("desativa");
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_gravaLinha(mensagem,row,sUrl)
 }
 function excluiLinha(id,row)
 {
-	//dialogo
-	// Define various event handlers for Dialog
-	var handleYes = function() {
-		this.hide();
-		core_carregando("ativa");
-		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=tags";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem itens vinculados a este tag</span>");
-  						setTimeout("core_carregando('desativa')",3000)
-  					}
-  					else
-  					{
-  						myDataTable.deleteRow(row);
-  						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	var handleNo = function()
-	{
-		this.hide();
-	};
-	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var mensagem = " excluindo o registro do id= "+id;
+	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=tags";
+	core_excluiLinha(sUrl,row,mensagem)
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

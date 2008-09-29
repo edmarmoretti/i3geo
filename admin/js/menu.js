@@ -1,53 +1,14 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaMenu()
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaMenus()");
 }
-function ativaBotaoAdicionaMenu()
-{
-	var adicionalinha = function()
-	{
-		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
-}
 function pegaMenus()
 {
-	core_carregando("buscando menus...");
-	var sUrl = "../php/menutemas.php?funcao=pegaMenus";
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{montaTabela(YAHOO.lang.JSON.parse(o.responseText));}
-  			catch(e){core_handleFailure(o,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela")
 }
 function montaTabela(dados)
 {
@@ -157,60 +118,13 @@ function gravaLinha(row)
 	var id_menu = r.getData("id_menu")
 	var nome_menu = r.getData("nome_menu")
 	core_carregando("ativa");
-	core_carregando(" gravando registro do id= "+id_menu);
 	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
-	var callback =
-	{
-  		success:function(o)
-  		{
-			var rec = myDataTable.getRecordSet().getRecord(row);
-			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
-  			core_carregando("desativa");
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_gravaLinha(mensagem,row,sUrl)
 }
 function excluiLinha(id,row)
 {
-	//dialogo
-	// Define various event handlers for Dialog
-	var handleYes = function() {
-		this.hide();
-		core_carregando("ativa");
-		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem grupos vinculados a este menu</span>");
-  						setTimeout("core_carregando('desativa')",3000)
-  					}
-  					else
-  					{
-  						myDataTable.deleteRow(row);
-  						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(o,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	var handleNo = function()
-	{
-		this.hide();
-	};
-	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var mensagem = " excluindo o registro do id= "+id;
+	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
+	core_excluiLinha(sUrl,row,mensagem)
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

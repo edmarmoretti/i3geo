@@ -1,54 +1,15 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaMapa()
+	core_ativaBotaoAdicionaLinha("../php/mapas.php?funcao=alterarMapa")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	//core_pegaPerfis("pegaMapas()");
 	pegaMapas();
 }
-function ativaBotaoAdicionaMapa()
-{
-	var adicionalinha = function()
-	{
-		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/mapas.php?funcao=alterarMapa";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
-}
 function pegaMapas()
 {
-	core_carregando("buscando mapas...");
-	var sUrl = "../php/mapas.php?funcao=pegaMapas";
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{montaTabela(YAHOO.lang.JSON.parse(o.responseText));}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_pegaDados("buscando mapas...","../php/mapas.php?funcao=pegaMapas","montaTabela")
 }
 function montaTabela(dados)
 {
@@ -242,44 +203,9 @@ function montaDivMapas(i)
 }
 function excluiLinha(id,row)
 {
-	//dialogo
-	// Define various event handlers for Dialog
-	var handleYes = function() {
-		this.hide();
-		core_carregando("ativa");
-		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem elementos vinculados a este mapa</span>");
-  						setTimeout("core_carregando('desativa')",3000)
-  					}
-  					else
-  					{
-  						myDataTable.deleteRow(row);
-  						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	var handleNo = function()
-	{
-		this.hide();
-	};
-	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var mensagem = " excluindo o registro do id= "+id;
+	var sUrl = "../php/mapas.php?funcao=excluirMapa&id="+id;
+	core_excluiLinha(sUrl,row,mensagem)
 }
 function gravaDadosMapa(id,recordid)
 {

@@ -34,27 +34,26 @@ switch ($funcao)
 {
 	//verifica os editores
 	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
+	retornaJSON(verificaEditores($editores));
+	exit;
 	break;
 	
 	case "pegaFuncoes":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica'));
-	$cp->return_data();
+	$dados = pegaDados('SELECT * from i3geoadmin_identifica');
+	retornaJSON($dados);
+	exit;
 	break;
 	
 	case "alterarFuncoes":
-	alterarFuncoes();
-	if($id_i == "")
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica'));
-	else
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_identifica where id_i = '.$id_i));
-	$cp->return_data();
+	$novo = alterarFuncoes();
+	$sql = "SELECT * from i3geoadmin_identifica WHERE id_i = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "excluir":
-	$cp->set_data(excluirFuncoes());
-	$cp->return_data();
+	retornaJSON(excluirFuncoes());
+	exit;
 	break;
 	
 	case "importarXmlI":
@@ -72,15 +71,24 @@ function alterarFuncoes()
 	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i;
 	try 
 	{
-    	$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
+    	//$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
     	if($id_i != "")
-    	$dbhw->query("UPDATE i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
+    		$retorna = $id_i;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','','','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','','','')");
+			$id_i = $dbhw->query("SELECT id_i FROM i3geoadmin_identifica");
+			$id_i = $id_i->fetchAll();
+			$id_i = intval($id_i[count($id_i)-1]['id_i']);
+			$retorna = $id_i;
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{

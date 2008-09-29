@@ -35,8 +35,8 @@ switch ($funcao)
 {
 	//verifica os editores
 	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
+	retornaJSON(verificaEditores($editores));
+	exit;
 	break;
 	
 	case "importarXmlMenu":
@@ -269,7 +269,8 @@ function excluiPerfil($id)
 function excluiTagTemas($id)
 {
 	require_once("conexao.php");
-    foreach($dbh->query("select * from i3geoadmin_tags where id_tag = $id") as $row)
+	$q1 = $dbh->query("select * from i3geoadmin_tags where id_tag = $id");
+    foreach($q1 as $row)
     {$nometag = $row["nome"];}
     if($nometag == ""){return;}
     $q = $dbh->query("select * from i3geoadmin_temas");

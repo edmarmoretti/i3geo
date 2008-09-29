@@ -1,53 +1,14 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaTema()
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTemas","adiciona")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaTemas()");
 }
-function ativaBotaoAdicionaTema()
-{
-	var adicionalinha = function()
-	{
-		core_carregando("ativa");
-		core_carregando(" adicionando um novo registro");
-		var sUrl = "../php/menutemas.php?funcao=alteraTemas";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
-  					core_carregando("desativa");
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	//cria o botão de adição de um novo menu
-	var adiciona = new YAHOO.widget.Button("adiciona",{ onclick: { fn: adicionalinha } });
-}
 function pegaTemas()
 {
-	core_carregando("buscando temas...");
-	var sUrl = "../php/menutemas.php?funcao=pegaTemas2";
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			try
-  			{montaTabela(YAHOO.lang.JSON.parse(o.responseText));}
-  			catch(e){core_handleFailure(e,o.responseText);}
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_pegaDados("buscando temas...","../php/menutemas.php?funcao=pegaTemas2","montaTabela")
 }
 function montaTabela(dados)
 {
@@ -243,60 +204,15 @@ function gravaLinha(row)
 	var id_grupo = r.getData("id_grupo");
 	var nome_grupo = r.getData("nome_grupo");
 	var desc_grupo = r.getData("desc_grupo");
-	core_carregando("ativa");
-	core_carregando(" gravando registro do id= "+id_grupo);
+	var mensagem = " gravando registro do id= "+id_grupo;
 	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo;
-	var callback =
-	{
-  		success:function(o)
-  		{
-  			core_carregando("desativa");
-  		},
-  		failure:core_handleFailure,
-  		argument: { foo:"foo", bar:"bar" }
-	}; 
-	core_makeRequest(sUrl,callback)
+	core_gravaLinha(mensagem,row,sUrl)
 }
 function excluiLinha(id,row)
 {
-	//dialogo
-	// Define various event handlers for Dialog
-	var handleYes = function() {
-		this.hide();
-		core_carregando("ativa");
-		core_carregando(" excluindo o registro do id= "+id);
-		var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=temas";
-		var callback =
-		{
-  			success:function(o)
-  			{
-  				try
-  				{
-  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
-  					{
-  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
-  						setTimeout("core_carregando('desativa')",3000)
-  					}
-  					else
-  					{
-  						myDataTable.deleteRow(row);
-  						core_carregando("desativa");
-  					}
-  				}
-  				catch(e){core_handleFailure(e,o.responseText);}
-  			},
-  			failure:core_handleFailure,
-  			argument: { foo:"foo", bar:"bar" }
-		}; 
-		core_makeRequest(sUrl,callback)
-	};
-	var handleNo = function()
-	{
-		this.hide();
-	};
-	var mensagem = "Exclui o registro?";
-	var largura = "300"
-	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+	var mensagem = " excluindo o registro do id= "+id;
+	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=temas";
+	core_excluiLinha(sUrl,row,mensagem)
 }
 function gravaDadosTema(id,recordid)
 {

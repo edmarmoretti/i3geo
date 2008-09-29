@@ -562,7 +562,165 @@ function core_geraLinhas(dados)
 	while(contaParam < nparam)
 	return(resultado)
 }
+/*
+Function: core_ativaBotaoAdicionaLinha
 
+Ativa o botão que adiciona uma linha em uma tabela no banco de dados e na interface HTML
+
+Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+
+Parameters:
+
+myDataTable - objeto dataTable do YUI
+
+sUrl - url com o programa que será executado no servidor
+
+idBotao - id do elemento com o botão
+*/
+function core_ativaBotaoAdicionaLinha(sUrl,idBotao)
+{
+	if(arguments.length == 1)
+	{var idBotao = "adiciona";}
+	var adicionalinha = function()
+	{
+		core_carregando("ativa");
+		core_carregando(" adicionando um novo registro");
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
+  					core_carregando("desativa");
+  				}
+  				catch(e){core_handleFailure(e,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	//cria o botão de adição de um novo menu
+	var adiciona = new YAHOO.widget.Button(idBotao,{ onclick: { fn: adicionalinha } });
+}
+/*
+Function: core_pegaDados
+
+Busca dados no servidor via Ajax e executa uma função de retorno com os daods
+
+Parameters:
+
+mensagem - mensagem que será mostrada na tela
+
+sUrl - url do programa que será executado no servidor
+
+funcaoRetorno - funcao que será executada ao terminar a busca pelos dados
+*/
+function core_pegaDados(mensagem,sUrl,funcaoRetorno)
+{
+	core_carregando(mensagem);
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
+  			catch(e){core_handleFailure(o,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_gravaLinha
+
+Grava um registro no banco de dados e atualiza o datatable atual
+
+Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+
+Parameters:
+
+mensagem - mensagem que será mostrada na tela
+
+row - objeto row que foi clicado pelo usuário. Utilizado para se obter os daods do recordset
+
+sUrl - url do programa que será executado
+*/
+function core_gravaLinha(mensagem,row,sUrl)
+{
+	core_carregando("ativa");
+	core_carregando(mensagem);
+	var callback =
+	{
+  		success:function(o)
+  		{
+			var rec = myDataTable.getRecordSet().getRecord(row);
+			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  			core_carregando("desativa");
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_excluiLinha
+
+Excluí um registro no banco de dados e atualiza o datatable.
+
+Essa função utiliza o objeto datatable que deve estar armazenado na variável myDataTable
+
+Parameters:
+
+sUrl - url do programa que será executado
+
+row - objeto row de um datatable
+
+mensagem -
+*/
+function core_excluiLinha(sUrl,row,mensagem)
+{
+	//dialogo
+	// Define various event handlers for Dialog
+	var handleYes = function()
+	{
+		this.hide();
+		core_carregando("ativa");
+		core_carregando(mensagem);
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  					{
+  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
+  						setTimeout("core_carregando('desativa')",3000)
+  					}
+  					else
+  					{
+  						myDataTable.deleteRow(row);
+  						core_carregando("desativa");
+  					}
+  				}
+  				catch(e){core_handleFailure(o,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	var handleNo = function()
+	{
+		this.hide();
+	};
+	var mensagem = "Exclui o registro?";
+	var largura = "300"
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+}
 //
 //carregador de javascript
 //
