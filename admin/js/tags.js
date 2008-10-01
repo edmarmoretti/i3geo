@@ -104,7 +104,7 @@ function gravaLinha(row)
 	var id_tag = r.getData("id_tag");
 	var nome = r.getData("nome");
 	core_carregando("ativa");
-	var mensagem " gravando registro do id= "+id_tag;
+	var mensagem = " gravando registro do id= "+id_tag;
 	var sUrl = "../php/menutemas.php?funcao=alteraTags&nome="+nome+"&id="+id_tag;
 	core_gravaLinha(mensagem,row,sUrl)
 }

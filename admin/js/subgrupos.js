@@ -107,13 +107,13 @@ function gravaLinha(row)
 	var nome_subgrupo = r.getData("nome_subgrupo");
 	var desc_subgrupo = r.getData("desc_subgrupo");
 	core_carregando("ativa");
-	var mensagem " gravando registro do id= "+id_subgrupo;
+	var mensagem = " gravando registro do id= "+id_subgrupo;
 	var sUrl = "../php/menutemas.php?funcao=alteraSubGrupos&nome="+nome_subgrupo+"&desc="+desc_subgrupo+"&id="+id_subgrupo;
 	core_gravaLinha(mensagem,row,sUrl)
 }
 function excluiLinha(id,row)
 {
-	var mensagem " excluindo o registro do id= "+id;
+	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=subgrupos";
 	core_excluiLinha(sUrl,row,mensagem)
 }

@@ -119,6 +119,7 @@ function gravaLinha(row)
 	var nome_menu = r.getData("nome_menu")
 	core_carregando("ativa");
 	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
+	var mensagem = " gravando registro "+id_menu
 	core_gravaLinha(mensagem,row,sUrl)
 }
 function excluiLinha(id,row)

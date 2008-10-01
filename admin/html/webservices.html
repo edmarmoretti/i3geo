@@ -1,37 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="admin.css">
-<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script src="../js/admin.js" type="text/javascript"></script>
-<script src="../js/webservices.js" type="text/javascript"></script>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Web Services</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/webservices.js"></script>
 </head>
-<body>
+<body class=" yui-skin-sam">
+<div style="margin:20px">
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - cadastro de web services <img src="../imagens/04.png" style="cursor:pointer" onclick="$i('ajuda').style.display='block'"/></h1>
-<p><a href="../index.html">Voltar</a></p>
-<div id=ajuda style="display:none">
-<p>Este programa permite editar o cadastro de web services</p>
-<p>O menu é baseado no banco admin.db.</p>
-<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
-dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
-alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
-<p>Tipos:</p>
-<p>WS - web service convencional utilizado no cliente de web service (i3geo/wscliente.htm)></p>
-<p>WMS - web map service, utilizado na ferramenta de conexão com servidor remoto e no cliente de web service</p>
-<p>GEORSS - RSS com padrão GEO, utilizado na ferramenta de adição de temas baseados em GEORSS</p>
-<p>DOWNLOAD - endereço que será adicionado na aplicação datadownload.htm. Trata-se de um link para endereço na web com dados para download.
-</div></div>
-<div id=aguarde style="color:red" ><img src="../../imagens/aguarde.gif" /></div>
-</body>
-<script>
-/*
-Title: Administração do cadastro de web services
+<h1>Administração do i3geo - web Services <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
 
-File: i3geo/admin/webservices.htm
-*/
-tipos = ['WS','WMS','WFS','GEORSS','DOWNLOAD']
-iniciaAdmin()
-document.getElementById("aguarde").style.display="none"
-</script>
-</html>
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite editar o cadastro de Web Services.<br><br>
+		O i3Geo acessa Web Services e serviços para obtenção de dados nos padrões WMS, RSS, GEORSS e endereços de sistemas de download de dados.
+		Todos os endereços são cadastrados e organizados por tipos. A lista de WMS e GEORSS é utilizada na guia de adição de temas já os 
+		Web Services convencionais, são utilizados no aplicativo WSCLIENTE. Pode-se ainda cadastrar endereços para
+		sítios na internet que possibilitam o download de dados, esse cadastro é utilizado no aplicativo DATADOWNLOAD.<br><br>
+		A lista de Web Services é baseada no banco admin.db.<br><br>
+		A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo endereço" />
+<br>
+<p>Temas existentes:</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+</body>

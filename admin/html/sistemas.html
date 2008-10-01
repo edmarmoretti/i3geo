@@ -1,39 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="admin.css">
-<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script src="../js/admin.js" type="text/javascript"></script>
-<script src="../js/sistemas.js" type="text/javascript"></script>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Sistemas especiais</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/sistemas.js"></script>
 </head>
-<body style=background-color:white >
+<body class=" yui-skin-sam">
+<div style="margin:20px">
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - sistemas especiais <img src="../imagens/04.png" style="cursor:pointer" onclick="$i('ajuda').style.display='block'"/></h1>
-<p><a href="../index.html">Voltar</a></p>
-<div id=ajuda style="display:none">
-<p>Este programa permite editar a lista de sistemas especiais que adicionam camadas ao mapa</p>
-<p>O menu é baseado no banco admin.db.</p>
-<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
-dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
-alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
-<p>A lista de perfis deve ser sepada por ",". Em abrir programa, inclua o endereço no servidro 
-do programa que será aberto em umajanela no i3geo. Cada sistema pode ter uma ou mais funções, que serão mostradas 
-em uma árvore hierárquica no i3geo.</p>
-</div></div>
-<div id=aguarde style="color:red" ><img src="../../imagens/aguarde.gif" /></div>
-</body>
-<script>
-/*
-Title: Administração do cadastro de sistemas especiais
+<h1>Administração do i3geo - sistemas especiais <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
 
-File: i3geo/admin/sistemas.htm
-*/
-var cp = new cpaint();
-//cp.set_async(false);
-cp.set_response_type("JSON");
-listaPerfis = function(retorno){$perfis = retorno.data;iniciaAdmin()}
-var p = "../php/menutemas.php?funcao=pegaPerfis";
-cp.call(p,"pegaMenus",listaPerfis);
-document.getElementById("aguarde").style.display="none"
-</script>
-</html>
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite editar a lista de sistemas especiais.<br><br>
+		Sistemas especiais são utilizados para incluir camadas no i3geo tendo como base
+		programas que interagem com o usuário de alguma forma específica.<br><br>
+		Cada sistema pode ter um objetivo específico e uma interface própria. Normalmente são utilizados
+		para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa.<br><br>
+		Esses sistemas podem por exemplo, consultar bancos de dados estatísticos para gerar cartogramas.<br><br>
+		A lista de sistemas é baseada no banco admin.db.<br><br>
+		A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo sistema" />
+<br>
+<p>Sistemas existentes:</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+</body>

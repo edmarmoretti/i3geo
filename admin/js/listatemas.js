@@ -22,7 +22,7 @@ function montaTabela(dados)
 
         var formatMais = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=mais style='text-align:center' ></div>";
+            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
@@ -30,7 +30,7 @@ function montaTabela(dados)
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
-            {key:"mais",label:"mais",formatter:formatMais},
+            {key:"mais",label:"editar",formatter:formatMais},
             {label:"id",key:"id_tema", formatter:formatTextoId},
             {label:"codigo (mapfile)",key:"codigo_tema", formatter:formatTextoId},
             {label:"nome",key:"nome_tema", formatter:formatTextoId},
@@ -157,9 +157,6 @@ function montaDivTemas(i)
 	var ins = ""
 	ins += core_geraLinhas(param)	
 
-	//ins += "<p>Nome do tema:<br>";
-	//ins += "<input size=50 type=text id=Enome_tema value='"+i.nome_tema+"' /></p>"
-
 	ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
 	ins += "<div id=comboMapfiles >Buscando...</div>";
 	
@@ -198,16 +195,6 @@ function montaDivTemas(i)
 	ins += "</select></p>"
 	return(ins)
 }
-function gravaLinha(row)
-{
-	var r = myDataTable.getRecordSet().getRecord(row);
-	var id_grupo = r.getData("id_grupo");
-	var nome_grupo = r.getData("nome_grupo");
-	var desc_grupo = r.getData("desc_grupo");
-	var mensagem = " gravando registro do id= "+id_grupo;
-	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo;
-	core_gravaLinha(mensagem,row,sUrl)
-}
 function excluiLinha(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
@@ -219,9 +206,7 @@ function gravaDadosTema(id,recordid)
 	var campos = new Array("nome","codigo","desc","link","tags","tipo","ogc","download","kml")
 	var par = ""
 	for (i=0;i<campos.length;i++)
-	{
-		par += "&"+campos[i]+"="+($i("E"+campos[i]+"_tema").value)
-	}
+	{par += "&"+campos[i]+"="+($i("E"+campos[i]+"_tema").value)}
 	par += "&id="+id
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);

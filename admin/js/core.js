@@ -721,6 +721,64 @@ function core_excluiLinha(sUrl,row,mensagem)
 	var largura = "300"
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
 }
+/*
+Function: core_excluiNoTree
+
+Excluí um registro no banco de dados e atualiza o treeview.
+
+Essa função utiliza o objeto treeview que deve estar armazenado na variável tree
+
+Parameters:
+
+sUrl - url do programa que será executado
+
+no - objeto no de um treeview
+
+mensagem -
+*/
+function core_excluiNoTree(sUrl,no,mensagem)
+{
+	//dialogo
+	// Define various event handlers for Dialog
+	var handleYes = function()
+	{
+		this.hide();
+		core_carregando("ativa");
+		core_carregando(mensagem);
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+  					if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  					{
+  						core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem outras tabelas com registros vinculados a este</span>");
+  						setTimeout("core_carregando('desativa')",3000)
+  					}
+  					else
+  					{
+						tree.removeNode(no);
+						tree.draw()
+  						core_carregando("desativa");
+  					}
+  				}
+  				catch(e){core_handleFailure(o,o.responseText);}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		}; 
+		core_makeRequest(sUrl,callback)
+	};
+	var handleNo = function()
+	{
+		this.hide();
+	};
+	var mensagem = "Exclui o registro?";
+	var largura = "300"
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
+}
+
 //
 //carregador de javascript
 //
@@ -757,6 +815,7 @@ var jsfiles = new Array(
 "../../pacotes/yui252/build/dragdrop/dragdrop-min.php",
 "../../pacotes/yui252/build/container/container-min.php",
 "../../pacotes/yui252/build/connection/connection-min.js",
+"../../pacotes/yui252/build/treeview/treeview-min.js",
 "../../pacotes/yui252/build/json/json-min.js"
 );
 //
@@ -767,7 +826,8 @@ var cssfiles =new Array(
 "../../pacotes/yui252/build/fonts/fonts-min.css",
 "../../pacotes/yui252/build/datatable/assets/skins/sam/datatable.css",
 "../../pacotes/yui252/build/button/assets/skins/sam/button.css",
-"../../pacotes/yui252/build/container/assets/skins/sam/container.css"
+"../../pacotes/yui252/build/container/assets/skins/sam/container.css",
+"../../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css"
 );
 //
 //carrega os arquivos js

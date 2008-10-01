@@ -1967,8 +1967,8 @@ function mudaboxnf(tipo,obj)
 			var t = pos[1]-5;
 			if (navn)
 			{
-				i.left = l;
-				i.top = t;
+				i.left = l+document.body.scrollLeft;
+				i.top = t+document.body.scrollTop;
 			}			
 			else
 			{

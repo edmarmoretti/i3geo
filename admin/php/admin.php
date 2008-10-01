@@ -210,7 +210,12 @@ function verificaFilhos()
     		if(count($r) > 0)
     		$res = true;
     	}
-
+    	if($tabela == "i3geoadmin_sistemas")
+    	{
+    		$r = pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
     	return $res;
 	}
 	catch (PDOException $e)

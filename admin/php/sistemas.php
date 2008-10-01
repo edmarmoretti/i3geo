@@ -34,64 +34,58 @@ switch ($funcao)
 {
 	//verifica os editores
 	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
+	retornaJSON(verificaEditores($editores));
+	exit;
 	break;
 	
 	case "pegaSistemas":
-	$sis = pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema');
-	for($i=0;$i<count($sis);++$i)
-	{
-		$funcoes = 	pegaDados('SELECT * from i3geoadmin_sistemasf where id_sistema ='.($sis[$i]["id_sistema"]));
-		$sis[$i]["funcoes"] = $funcoes;
-	}
-	$cp->set_data($sis);
-	$cp->return_data();
+	retornaJSON(pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema'));
+	exit;
 	break;
+
+	case "pegaFuncoes":	
+	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
+	exit;
+	break;
+
+	case "pegaFuncao":	
+	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_funcao ='$id_funcao'"));
+	exit;
+	break;
+
 	
 	case "alterarSistemas":
-	alterarSistemas();
-	if($id_sistema == "")
-	$sis = pegaDados('SELECT * from i3geoadmin_sistemas');
-	else
-	$sis = pegaDados('SELECT * from i3geoadmin_sistemas where id_sistema ='.$id_sistema);
-	for($i=0;$i<count($sis);++$i)
-	{
-		$funcoes = 	pegaDados('SELECT * from i3geoadmin_sistemasf where id_sistema ='.($sis[$i]["id_sistema"]));
-		$sis[$i]["funcoes"] = $funcoes;
-	}
-	$cp->set_data($sis);
-	$cp->return_data();
+	$novo = alterarSistemas();
+	$sql = "SELECT * from i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 
 	case "alterarFuncoes":
-	alterarFuncoes();
-	if($id_funcao == "")
-	$sis = pegaDados('SELECT * from i3geoadmin_sistemas');
-	else
-	$sis = pegaDados('SELECT * from i3geoadmin_sistemas where id_sistema ='.$id_sistema);
-	for($i=0;$i<count($sis);++$i)
-	{
-		$funcoes = 	pegaDados('SELECT * from i3geoadmin_sistemasf where id_sistema ='.($sis[$i]["id_sistema"]));
-		$sis[$i]["funcoes"] = $funcoes;
-	}
-	$cp->set_data($sis);
-	$cp->return_data();
+	$novo = alterarFuncoes();
+	$sql = "SELECT * from i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
+	retornaJSON(pegaDados($sql));	
+	exit;
 	break;
-
 	
-	case "excluir":
+	case "excluirSistema":
+	$tabela = "i3geoadmin_sistemas";
 	$f = verificaFilhos();
 	if(!$f)
-	$cp->set_data(excluirSistemas());
+	{
+		retornaJSON(excluirSistemas());
+		exit;
+	}
 	else
-	$cp->set_data("erro");
-	$cp->return_data();
+	{
+		retornaJSON("erro");
+		exit;
+	}
 	break;
 	
-	case "excluirFuncoes":
-	$cp->set_data(excluirFuncoes());
-	$cp->return_data();
+	case "excluirFuncao":
+	retornaJSON(excluirFuncoes());
+	exit;
 	break;
 	
 	case "importarXmlSistemas":
@@ -110,14 +104,23 @@ function alterarSistemas()
 	try 
 	{
     	require_once("conexao.php");
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	if($id_sistema != "")
-    	$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
+    		$retorna = $id_sistema;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','','')");
+			$id = $dbhw->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_sistema']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -126,18 +129,27 @@ function alterarSistemas()
 }
 function alterarFuncoes()
 {
-	global $id_sistema,$id_funcao,$perfil,$nomefuncao,$w,$h,$abrir;
+	global $id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
 	try 
 	{
     	require_once("conexao.php");
-		$nomefuncao = mb_convert_encoding($nomefuncao,"UTF-8","ISO-8859-1");
+		//$nomefuncao = mb_convert_encoding($nomefuncao,"UTF-8","ISO-8859-1");
     	if($id_funcao != "")
-    	$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nomefuncao',perfil_funcao = '$perfil', w_funcao = '$w',h_funcao = '$h', abrir_funcao = '$abrir' WHERE id_sistema = $id_sistema and id_funcao = $id_funcao");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nome_funcao',perfil_funcao = '$perfil_funcao', w_funcao = '$w_funcao',h_funcao = '$h_funcao', abrir_funcao = '$abrir_funcao' WHERE id_funcao = $id_funcao");
+    		$retorna = $id_funcao;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
+			$id = $dbhw->query("SELECT id_funcao FROM i3geoadmin_sistemasf");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_funcao']);
+			$retorna = $id;    		
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
@@ -150,7 +162,7 @@ function excluirFuncoes()
 	try 
 	{
     	include("conexao.php");
-    	$dbhw->query("DELETE from i3geoadmin_sistemasf WHERE id_sistema = $id");
+    	$dbhw->query("DELETE from i3geoadmin_sistemasf WHERE id_funcao = $id");
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -169,7 +181,7 @@ function excluirSistemas()
     	$dbhw->query("DELETE from i3geoadmin_sistemas WHERE id_sistema = $id");
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $id;
 	}
 	catch (PDOException $e)
 	{
@@ -216,21 +228,4 @@ function importarXmlSistemas()
 	$dbh = null;
 	return "Dados importados.";
 }
-function verificaFilhos()
-{
-	try 
-	{
-    	global $id;
-    	$res = false;
-   		$r = pegaDados("select * from  i3geoadmin_sistemasf where id_sistema=$id");
-   		if(count($r) > 0)
-   		$res = true;
-    	return $res;
-	}
-	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
-}
-
 ?>

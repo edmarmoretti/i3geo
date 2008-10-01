@@ -48,6 +48,15 @@ input
 	width: 20px;
 	height: 20px;
 }
+.editar
+{
+	background-image:URL('../imagens/06.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor:pointer;
+	width: 20px;
+	height: 20px;
+}
 .mostrar
 {
 	background-image:URL('../imagens/03.png');

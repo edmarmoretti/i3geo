@@ -27,34 +27,31 @@ File: i3geo/admin/webservices.php
 19/6/2007
 
 */
+error_reporting(E_ALL);
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
+	case "pegaWS":
+	retornaJSON(pegaDados('SELECT id_ws,nome_ws,tipo_ws from i3geoadmin_ws order by tipo_ws,nome_ws'));
+	exit;
 	break;
 	
-	case "pegaWS":
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_ws order by tipo_ws'));
-	$cp->return_data();
+	case "pegaDados":
+	retornaJSON(pegaDados("SELECT * from i3geoadmin_ws where id_ws='$id_ws'"));
+	exit;
 	break;
 	
 	case "alterarWS":
-	alterarWS();
-	if($id_ws == "")
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_ws'));
-	else
-	$cp->set_data(pegaDados('SELECT * from i3geoadmin_ws where id_ws = '.$id_ws));
-	$cp->return_data();
+	$novo = alterarWS();
+	$sql = "SELECT * from i3geoadmin_ws WHERE id_ws = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
 	break;
 	
 	case "excluir":
-	$cp->set_data(excluirWS());
-	$cp->return_data();
+	retornaJSON(excluirWS());
+	exit;
 	break;
 	
 	case "importarXmlWS":
@@ -69,20 +66,29 @@ Altera o registro de um WS
 */
 function alterarWS()
 {
-	global $id_ws,$desc,$nome,$link,$autor,$tipo;
+	global $id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
 	try 
 	{
     	require_once("conexao.php");
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
-		$autor = mb_convert_encoding($autor,"UTF-8","ISO-8859-1");   	
+		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		//$autor = mb_convert_encoding($autor,"UTF-8","ISO-8859-1");   	
     	if($id_ws != "")
-    	$dbhw->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc',nome_ws = '$nome', link_ws = '$link', autor_ws = '$autor', tipo_ws = '$tipo' WHERE id_ws = $id_ws");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
+    		$retorna = $id_ws;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws) VALUES ('','','','','')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws) VALUES ('','','','','')");
+			$id = $dbhw->query("SELECT id_ws FROM i3geoadmin_ws");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_ws']);
+			$retorna = $id;
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
