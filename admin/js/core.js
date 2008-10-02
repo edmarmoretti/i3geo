@@ -778,6 +778,52 @@ function core_excluiNoTree(sUrl,no,mensagem)
 	var largura = "300"
 	core_dialogoContinua(handleYes,handleNo,mensagem,largura)	
 }
+/**
+Function: core_montaEditor
+
+Monta uma janela flutuante com um formulário.
+
+O editor possui um div com id=editor_bd que deve ser usado para incluir o formulário.
+
+Parameters:
+
+funcaoOK - string com o nome da função que será executada quando o botão OK for pressionado.
+*/
+function core_montaEditor(funcaoOK)
+{	
+	function on_editorCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK")
+		{
+			eval(funcaoOK);
+		}
+		else
+		{
+			YAHOO.example.container.panelEditor.destroy();
+			YAHOO.example.container.panelEditor = null;
+		}
+	};
+	if(!YAHOO.example.container.panelEditor)
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "janela_editor";
+		var ins = '<div class="hd">Editor</div>';
+		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		editorBotoes.addButtons([
+            { label: "Salva", value: "OK", checked: false},
+            { label: "Cancela", value: "CANCEL", checked: false }
+        ]);
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditor.render();
+	}
+	YAHOO.example.container.panelEditor.show();
+}
 
 //
 //carregador de javascript

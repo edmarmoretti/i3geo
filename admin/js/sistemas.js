@@ -76,15 +76,15 @@ function montaArvore(dados)
         {
 			tree = new YAHOO.widget.TreeView("tabela");
 			tree.setDynamicLoad(loadNodeData, currentIconMode);
-			adicionaNosRaiz(dados)
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = true;
-			tree.draw();
 			core_carregando("desativa");
         }
     	buildTree();
 	}();
+   	adicionaNosRaiz(dados)
+   	tree.draw();
 }
 function adicionaNos(no,dados,redesenha)
 {
@@ -105,7 +105,7 @@ function adicionaNosRaiz(dados,redesenha)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('sistema','"+dados[i].id_sistema+"')\" title=excluir src=\"../imagens/01.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarFuncao('"+dados[i].id_sistema+"')\" title='adiciona função' src=\"../imagens/05.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;"+dados[i].nome_sistema
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('sistema','"+dados[i].id_sistema+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].nome_sistema+"</span>"
 		var d = {html:conteudo,id_sistema:dados[i].id_sistema,tipo:"sistema"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 	}
@@ -134,61 +134,67 @@ function editar(tipo,id)
 		var sUrl = "../php/sistemas.php?funcao=pegaFuncao&id_funcao="+id;
 		core_makeRequest(sUrl,callback)
 	}
+	if(tipo == "sistema")
+	{
+		core_carregando("ativa");
+		core_carregando(" buscando dados");
+		var callback =
+		{
+			success:function(o)
+			{
+				try
+				{
+					montaEditorSistemas(YAHOO.lang.JSON.parse(o.responseText)[0],id);
+					core_carregando("desativa");
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
+		}; 
+		var sUrl = "../php/sistemas.php?funcao=pegaSistema&id_sistema="+id;
+		core_makeRequest(sUrl,callback)
+	}
+}
+function montaEditorSistemas(dados,id)
+{
+	core_montaEditor("gravaDadosSistema('"+id+"')")
+	$i("editor_bd").innerHTML = montaDivSistemas(dados)
+	core_carregando("desativa");
+	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_sistema\")")
 }
 function montaEditorFuncoes(dados,id)
 {
-	function on_editorCheckBoxChange(p_oEvent)
-	{
-		var ins = "";
-		if(p_oEvent.newValue.get("value") == "OK")
-		{
-			gravaDadosFuncao(id);
-		}
-		else
-		{
-			YAHOO.example.container.panelEditorFuncao.destroy();
-			YAHOO.example.container.panelEditorFuncao = null;
-		}
-	};
-	if(!YAHOO.example.container.panelEditorFuncao)
-	{
-		var novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
-		var ins = '<div class="hd">Editor</div>';
-		ins += "<div class='bd' style='height:354px;overflow:auto'>";
-		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
-		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
-		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditorFuncao = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
-		YAHOO.example.container.panelEditorFuncao.render();
-	}
-	YAHOO.example.container.panelEditorFuncao.show();
-	//carrega os dados na janela
+	core_montaEditor("gravaDadosFuncao('"+id+"')")
 	$i("editor_bd").innerHTML = montaDivFuncoes(dados)
 	core_carregando("desativa");
-	//
-	//preenche a div com a lista de tags
-	//
-	//core_comboTags("comboTags","Etags_tema","registraTag");
-	//
-	//preenche a div com a lista de mapfiles
-	//
-	//core_comboMapfiles("comboMapfiles","Ecodigo_tema",dados[0].codigo_tema);
+	core_comboPerfis("comboPerfis","selPerfil","","registraPerfil(this.value,\"Eperfil_funcao\")")
 }
-function registraTag(valor)
+function registraPerfil(valor,id)
 {
-	var inp = $i("Etags_tema")
+	var inp = $i(id)
 	var tags = inp.value
 	if(tags == "")
 	inp.value = valor
 	else
 	inp.value = tags+" "+valor
+}
+function montaDivSistemas(i)
+{
+	var param =
+	{
+		"linhas":[
+		{titulo:"Nome:",id:"Enome_sistema",size:"50",value:i.nome_sistema,tipo:"text",div:""},
+		{titulo:"Perfis - escolha da lista abaixo:",id:"Eperfil_sistema",size:"50",value:i.perfil_sistema,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
+		]
+	}
+	var ins = ""
+	ins += core_geraLinhas(param)
+	ins += "<br>Publicado?<br>"
+	ins += "<select id='Epublicado_sistema' >"
+	ins += core_combosimnao(i.publicado_sistema)
+	ins += "</select>"	
+	return(ins)
 }
 function montaDivFuncoes(i)
 {
@@ -199,7 +205,7 @@ function montaDivFuncoes(i)
 		{titulo:"Programa que será executado:",id:"Eabrir_funcao",size:"50",value:i.abrir_funcao,tipo:"text",div:""},
 		{titulo:"Largura da janela onde o programa será aberto:",id:"Ew_funcao",size:"5",value:i.w_funcao,tipo:"text",div:""},
 		{titulo:"Altura da janela:",id:"Eh_funcao",size:"5",value:i.h_funcao,tipo:"text",div:""},
-		{titulo:"Perfis:",id:"Eperfil_funcao",size:"50",value:i.perfil_funcao,tipo:"text",div:""}
+		{titulo:"Perfis - escolha da lista abaixo:",id:"Eperfil_funcao",size:"50",value:i.perfil_funcao,tipo:"text",div:"<div id=comboPerfis >Buscando...</div>"}
 		]
 	}
 	var ins = ""
@@ -262,14 +268,49 @@ function gravaDadosFuncao(id)
   				}
   				else
   				{
-  					//var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					//myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   					var no = tree.getNodeByProperty("id_funcao",id)
   					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_funcao").value
   					core_carregando("desativa");
   				}
-				YAHOO.example.container.panelEditorFuncao.destroy();
-				YAHOO.example.container.panelEditorFuncao = null;
+				YAHOO.example.container.panelEditor.destroy();
+				YAHOO.example.container.panelEditor = null;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+function gravaDadosSistema(id)
+{
+	var campos = new Array("perfil","nome","publicado")
+	var par = ""
+	for (i=0;i<campos.length;i++)
+	{par += "&"+campos[i]+"_sistema="+($i("E"+campos[i]+"_sistema").value)}
+	par += "&id_sistema="+id
+	core_carregando("ativa");
+	core_carregando(" gravando o registro do id= "+id);
+	var sUrl = "../php/sistemas.php?funcao=alterarSistemas"+par;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+  				{
+  					core_carregando("<span style=color:red >Não foi possível excluir. Verifique se não existem menus vinculados a este tema</span>");
+  					setTimeout("core_carregando('desativa')",3000)
+  				}
+  				else
+  				{
+  					var no = tree.getNodeByProperty("id_sistema",id)
+  					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_sistema").value
+  					core_carregando("desativa");
+  				}
+				YAHOO.example.container.panelEditor.destroy();
+				YAHOO.example.container.panelEditor = null;
   			}
   			catch(e){core_handleFailure(e,o.responseText);}
   		},

@@ -138,6 +138,23 @@ function mapfile()
 	$xml .= "\n<parsemapfile>\n";
 	$xml .= "<tiposconexao>".implode(",",$objcontype)."</tiposconexao>\n";
 	$xml .= "<tiposlayer>".implode(",",$objlayertypes)."</tiposlayer>\n";
+	//verifica se tem grupos
+	$nlayers = array();
+	foreach ($layers as $layer)
+	{
+		if($objcontype[$layer->connectiontype] != "MS_WMS")
+		{
+			$layer = $mapa->getlayerbyname($layer);
+			if($layer->group == "")
+			{$nlayers[] = $layer->name;}
+			else
+			{
+				if($layer->group == $layer->name)
+				{$nlayers[] = $layer->name;}	
+			}
+			$layers = $nlayers;
+		}
+	}
 	foreach ($layers as $layer)
 	{
 		$xml .= "\n<layer>\n";
@@ -145,19 +162,48 @@ function mapfile()
 		$xml .= "<titulo>".$layer->getmetadata('tema')."</titulo>\n";
 		$d = $layer->data;
 		$ct = $objcontype[$layer->connectiontype];
-		if ($ct == "MS_SHAPEFILE" || $ct == "" || $ct == "MS_RASTER")
+		$tagLegenda = "parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda";
+		$nomeLayer = $layer->name;
+		if ($ct == "MS_SHAPEFILE" || $ct == "" || $ct == "MS_RASTER" && $ct != "MS_WMS")
 		{
 			$ct = "MS_WMS";
-			$d = "HTTP://mapas.mma.gov.br/i3geo/ogc.php?tema=".$codigoLayer;
+			$d =  "http://".$_SERVER['HTTP_HOST'].str_replace("/admin/php/parsemapfile.php","",$_SERVER['PHP_SELF'])."/ogc.php?tema=".$codigoLayer;
 			$xml .= "<version>1.1.1</version>";
 			$xml .= "<srs>EPSG:4291</srs>";
 			$xml .= "<format>image/png</format>";
+			$xml .= "<style>default</style>";
+			$tagLegenda = "";
 		}
-		else
-		{$xml .= "<geraxmllegenda>parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda</geraxmllegenda>";}	
+		else if($ct == "MS_WMS")
+		{
+			$d = $layer->connection;
+			$v = $layer->getmetadata("wms_server_version");
+			$e = $layer->getmetadata("wms_srs");
+			$i = $layer->getmetadata("wms_format");
+			$s = $layer->getmetadata("wms_style");
+			$nomeLayer = $layer->getmetadata("wms_name");
+			if($nomeLayer == "")
+			$nomeLayer = $layer->getmetadata("ows_name");
+			if($v == "")
+			$v = $layer->getmetadata("ows_server_version");
+			if($e == "")
+			$e = $layer->getmetadata("ows_srs");
+			if($i == "")
+			$i = $layer->getmetadata("ows_format");
+			if($s == "")
+			$s = $layer->getmetadata("ows_style");
+			if($s == "")
+			{$s = "default";}
+			$xml .= "<version>$v</version>";
+			$xml .= "<srs>$e</srs>";
+			$xml .= "<format>$i</format>";
+			$xml .= "<style>$s</style>";
+			$tagLegenda = "";
+		}	
+		$xml .= "<geraxmllegenda>$tagLegenda</geraxmllegenda>";
 		$xml .= "<connectiontype>".$ct."</connectiontype>\n";
 		$xml .= "<data>$d</data>\n";
-		$xml .= "<name>$layer->name</name>\n";
+		$xml .= "<name>$nomeLayer</name>\n";
 		if($ct != "MS_WMS")
 		{
 			$xml .= "<connection>\n";

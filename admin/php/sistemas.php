@@ -43,6 +43,11 @@ switch ($funcao)
 	exit;
 	break;
 
+	case "pegaSistema":
+	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemas where id_sistema='$id_sistema'"));
+	exit;
+	break;
+
 	case "pegaFuncoes":	
 	retornaJSON(pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id_sistema'"));
 	exit;
@@ -100,14 +105,14 @@ Altera o registro de um WS
 */
 function alterarSistemas()
 {
-	global $id_sistema,$perfil,$nome,$publicado_sistema;
+	global $id_sistema,$perfil_sistema,$nome_sistema,$publicado_sistema;
 	try 
 	{
     	require_once("conexao.php");
 		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	if($id_sistema != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome',perfil_sistema = '$perfil' WHERE id_sistema = $id_sistema");
+    		$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome_sistema',perfil_sistema = '$perfil_sistema' WHERE id_sistema = $id_sistema");
     		$retorna = $id_sistema;
     	}
     	else
