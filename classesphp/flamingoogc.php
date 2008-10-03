@@ -90,6 +90,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+$postgis_mapa = $_SESSION["postgis_mapa"];
 $nmap = ms_newMapobj($map_file);
 $ts = $nmap->getalllayernames();
 foreach ($ts as $t)
@@ -115,7 +116,10 @@ foreach ($ts as $t)
 				{
 					if ($l->connection == " ")
 					{
+						if(!is_array($postgis_mapa))
 						$l->set("connection",$postgis_mapa);
+						else
+						$l->set("connection",$postgis_mapa[$l->connection]);
 					}
 				}
 			}

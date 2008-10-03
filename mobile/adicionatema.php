@@ -31,7 +31,7 @@ Parameters:
 tmpfname - nome do mapfile em uso
 */
 
-error_reporting(0);
+error_reporting(E_ALL);
 require_once("../classesphp/funcoes_gerais.php");
 include_once ("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
@@ -81,7 +81,7 @@ $protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVE
 $urli3geo = str_replace("/mobile/adicionatema.php","",$protocolo.$_SERVER["PHP_SELF"]);
 if ($tipo == "listatemas")
 {
-	$m = new Menutemas("","",$locsistemas,$locaplic,"",$urli3geo);
+	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo);
 	$r = $m->pegaListaDeTemas($grupo,$subgrupo,"");
 	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)

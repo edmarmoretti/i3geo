@@ -33,32 +33,59 @@ $cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
-	break;
-	
 	case "pegaAtlas":
-	$cp->set_data(pegaDados('SELECT id_atlas,titulo_atlas,publicado_atlas from i3geoadmin_atlas order by ordem_atlas'));
-	$cp->return_data();
+	retornaJSON(pegaDados('SELECT id_atlas,titulo_atlas from i3geoadmin_atlas order by ordem_atlas'));
+	exit;
 	break;
-
-	case "pegaDadosAtlas":
-	$dadosAtlas = pegaDados('SELECT * from i3geoadmin_atlas where id_atlas ='.$id_atlas);
-	$pranchas = pegaDados("SELECT id_prancha,titulo_prancha from i3geoadmin_atlasp where id_atlas = $id_atlas order by ordem_prancha");
-	$cp->set_data(array("atlas"=>$dadosAtlas,"pranchas"=>$pranchas));
-	$cp->return_data();
+	case "pegaPranchas":
+	retornaJSON(pegaDados("SELECT id_prancha,titulo_prancha from i3geoadmin_atlasp where id_atlas='$id_atlas' order by ordem_prancha"));
+	exit;
 	break;
-
-	case "pegaTemas":
-	$cp->set_data(pegaDados("SELECT * from i3geoadmin_atlast where id_prancha = '$id_prancha' order by ordem_tema"));
-	$cp->return_data();
-	break;
-	
 	case "alterarAtlas":
-	$cp->set_data(alterarAtlas());
-	$cp->return_data();
+	$novo = alterarAtlas();
+	$sql = "SELECT * from i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	exit;
+	break;
+	case "excluirAtlas":
+	$tabela = "i3geoadmin_atlas";
+	$f = verificaFilhos();
+	if(!$f)
+	retornaJSON(excluirAtlas());
+	else
+	retornaJSON("erro");	
+	exit;
+	break;
+	case "excluirPrancha":
+	$tabela = "i3geoadmin_atlasp";	
+	$f = verificaFilhos();
+	if(!$f)
+	retornaJSON(excluirPrancha());
+	else
+	retornaJSON("erro");	
+	exit;
+	break;
+	case "alterarPrancha":
+	$novo = alterarPrancha();
+	$sql = "SELECT * from i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	break;
+	case "pegaTemas":
+	retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_prancha = '$id_prancha' order by ordem_tema"));
+	exit;
+	break;
+	case "alterarTema":
+	$novo = alterarTema();
+	$sql = "SELECT * from i3geoadmin_atlast WHERE id_tema = '".$novo."'";
+	retornaJSON(pegaDados($sql));
+	break;
+	case "excluirTema":
+	retornaJSON(excluirTema());
+	exit;
+	break;
+	case "pegaDadosAtlas":
+	retornaJSON(pegaDados('SELECT * from i3geoadmin_atlas where id_atlas ='.$id_atlas));
+	exit;
 	break;
 
 	case "pegaDadosPranchas":
@@ -67,41 +94,6 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 
-	case "alterarPranchas":
-	$cp->set_data(alterarPranchas());
-	$cp->return_data();
-	break;
-	
-	case "alterarTemas":
-	$cp->set_data(alterarTemas());
-	$cp->return_data();
-	break;
-
-	case "excluir":
-	$tabela = "i3geoadmin_atlas";	
-	$f = verificaFilhos();
-	if(!$f)
-	$cp->set_data(excluirAtlas());
-	else
-	$cp->set_data("erro");	
-	$cp->return_data();
-	break;
-	
-	case "excluirPranchas":
-	$tabela = "i3geoadmin_atlasp";	
-	$f = verificaFilhos();
-	if(!$f)
-	$cp->set_data(excluirPranchas());
-	else
-	$cp->set_data("erro");	
-	$cp->return_data();
-	break;
-
-	case "excluirTemas":
-	$cp->set_data(excluirTemas());
-	$cp->return_data();
-	break;
-	
 	case "importarXmlAtlas":
 	$cp->set_data(importarXmlAtlas());
 	$cp->return_data();
@@ -137,64 +129,90 @@ function alterarAtlas()
 	global $publicado_atlas,$id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
 	try 
 	{
-    	$desc_atlas = mb_convert_encoding($desc_atlas,"UTF-8","ISO-8859-1");
-    	$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
+    	//$desc_atlas = mb_convert_encoding($desc_atlas,"UTF-8","ISO-8859-1");
+    	//$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id_atlas != "")
-    	$dbhw->query("UPDATE i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas='$ordem_atlas',basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas='$ordem_atlas',basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
+    		$retorna = $id_atlas;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','','',null,null,'','','','','$tipoguias_atlas','$titulo_atlas')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','','',null,null,'','','','','','')");
+			$id = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_atlas']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
     	return "Error!: " . $e->getMessage();
 	}
 }
-function alterarPranchas()
+function alterarPrancha()
 {
 	global $mapext_prancha,$id_atlas,$id_prancha,$desc_prancha,$h_prancha,$w_prancha,$icone_prancha,$link_prancha,$titulo_prancha,$ordem_prancha;
 	try 
 	{
-    	$desc_prancha = mb_convert_encoding($desc_prancha,"UTF-8","ISO-8859-1");
-    	$titulo_prancha = mb_convert_encoding($titulo_prancha,"UTF-8","ISO-8859-1");
+    	//$desc_prancha = mb_convert_encoding($desc_prancha,"UTF-8","ISO-8859-1");
+    	//$titulo_prancha = mb_convert_encoding($titulo_prancha,"UTF-8","ISO-8859-1");
     	include("conexao.php");
     	if($id_prancha != "")
-    	$dbhw->query("UPDATE i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = $id_prancha and id_atlas='$id_atlas'");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = $id_prancha and id_atlas='$id_atlas'");
+    		$retorna = $id_prancha;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ('','','','$h_prancha','$w_prancha','','','$titulo_prancha','$id_atlas')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ('','','','$h_prancha','$w_prancha','','','$titulo_prancha','$id_atlas')");
+    		$id = $dbhw->query("SELECT id_prancha FROM i3geoadmin_atlasp");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_prancha']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
     	return "Error!: " . $e->getMessage();
 	}
 }
-function alterarTemas()
+function alterarTema()
 {
 	global $id_tema,$id_prancha,$codigo_tema,$ligado_tema,$ordem_tema;
 	try 
 	{
     	include("conexao.php");
     	if($id_tema != "")
-    	$dbhw->query("UPDATE i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_prancha = $id_prancha and id_tema='$id_tema'");
+    	{
+    		$dbhw->query("UPDATE i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_prancha = $id_prancha and id_tema='$id_tema'");
+    		$retorna = $id_tema;
+    	}
     	else
-    	$dbhw->query("INSERT INTO i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ('','','','$id_prancha')");
+    	{
+    		$dbhw->query("INSERT INTO i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ('','','','$id_prancha')");
+			$id = $dbhw->query("SELECT id_tema FROM i3geoadmin_atlast");
+			$id = $id->fetchAll();
+			$id = intval($id[count($id)-1]['id_tema']);
+			$retorna = $id;    	
+    	}
     	$dbhw = null;
     	$dbh = null;
-    	return "ok";
+    	return $retorna;
 	}
 	catch (PDOException $e)
 	{
     	return "Error!: " . $e->getMessage();
 	}
 }
-
-function excluirPranchas()
+function excluirPrancha()
 {
 	global $id;
 	try 
@@ -210,7 +228,7 @@ function excluirPranchas()
     	return "Error!: " . $e->getMessage();
 	}
 }
-function excluirTemas()
+function excluirTema()
 {
 	global $id;
 	try 
@@ -310,30 +328,4 @@ function importarXmlAtlas()
 	$dbh = null;
 	return "Dados importados.";
 }
-function verificaFilhos()
-{
-	global $tabela,$id;
-	try 
-	{
-    	$res = false;
-    	if($tabela == "i3geoadmin_atlas")
-    	{
-    		$r = pegaDados("select * from i3geoadmin_atlasp where id_atlas=$id");
-    		if(count($r) > 0)
-    		$res = true;
-    	}
-    	if($tabela == "i3geoadmin_atlasp")
-    	{
-    		$r = pegaDados("select * from i3geoadmin_atlast where id_prancha=$id");
-    		if(count($r) > 0)
-    		$res = true;
-    	}
-    	return $res;
-	}
-	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
-}
-
 ?>

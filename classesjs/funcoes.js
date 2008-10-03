@@ -1967,13 +1967,13 @@ function mudaboxnf(tipo,obj)
 			var t = pos[1]-5;
 			if (navn)
 			{
-				i.left = l+document.body.scrollLeft;
-				i.top = t+document.body.scrollTop;
+				i.left = l; //+document.body.scrollLeft;
+				i.top = t; //+document.body.scrollTop;
 			}			
 			else
 			{
-				i.pixelLeft = l+document.body.scrollLeft;
-				i.pixelTop = t+document.body.scrollTop;
+				i.pixelLeft = l; //+document.body.scrollLeft;
+				i.pixelTop = t; //+document.body.scrollTop;
 			}
 		}
 	}
@@ -5097,7 +5097,7 @@ function pegaPosicaoObjeto(obj)
 					} while (obj = obj.offsetParent);
 				}
 			}
-			return [curleft,curtop];
+			return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
 		}
 	}
 	else

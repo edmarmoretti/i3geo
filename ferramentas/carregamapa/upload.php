@@ -39,6 +39,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+$postgis_mapa = $_SESSION["postgis_mapa"];
 $exts = get_loaded_extensions();
 if (array_search( "MapScript", $exts) != TRUE)
 {

@@ -103,8 +103,10 @@ if ($funcao != "criaMapa")
 	session_start();
 	foreach(array_keys($_SESSION) as $k)
 	{
+		if(!is_array($_SESSION[$k]))
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
+	$postgis_mapa = $_SESSION["postgis_mapa"];
 	if(isset($fingerprint))
 	{
 		if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
@@ -1698,6 +1700,7 @@ Include:
 		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		if(!isset($idmenu)){$idmenu = "";}
 		$cp->set_data($m->pegaListaDeSubGrupos($grupo,$idmenu));
 	break;
 /*
@@ -1718,6 +1721,7 @@ Include:
 		}
 		include_once("classe_menutemas.php");
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		if(!isset($idmenu)){$idmenu = "";}
 		$cp->set_data(array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu)));
 	break;
 /*
@@ -2575,7 +2579,7 @@ Lista os arquivos de um diretório.
 }
 if (!connection_aborted())
 {
-	if(isset($map_file) && isset($postgis_mapa))
+	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
 	restauraCon($map_file,$postgis_mapa);
 	$cp->return_data();
 }

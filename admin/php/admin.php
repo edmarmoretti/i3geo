@@ -212,7 +212,19 @@ function verificaFilhos()
     	}
     	if($tabela == "i3geoadmin_sistemas")
     	{
-    		$r = pegaDados("SELECT * from i3geoadmin_sistemasf where id_sistema ='$id'");
+    		$r = pegaDados("SELECT id_sistema from i3geoadmin_sistemasf where id_sistema ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_atlas")
+    	{
+    		$r = pegaDados("SELECT id_atlas from i3geoadmin_atlasp where id_atlas ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_atlasp")
+    	{
+    		$r = pegaDados("SELECT id_prancha from i3geoadmin_atlast where id_prancha ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}

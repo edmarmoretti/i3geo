@@ -30,6 +30,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+$postgis_mapa = $_SESSION["postgis_mapa"];
 //
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //

@@ -1,42 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="admin.css">
-<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script src="../js/admin.js" type="text/javascript"></script>
-<script src="../js/atlas.js" type="text/javascript"></script>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Atlas</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/atlas.js"></script>
 </head>
-<body>
+<body class=" yui-skin-sam">
+<div style="margin:20px">
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - Atlas <img src="../imagens/04.png" style="cursor:pointer" onclick="$i('ajuda').style.display='block'"/></h1>
-<p><a href="../index.html">Voltar</a></p>
-<div id=ajuda style="display:none">
-<p>Este programa permite editar a lista de Atlas</p>
-<p>O menu é baseado no banco admin.db.</p>
-<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
-dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
-alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
-<p>Parâmetros:</p>
-<p>ícone - endereço da imagem que será utilizada para identificar o mapa ou prancha
-<p>link - link na internet que será aberto em uma janela dentro do atlas ou prancha
-<p>template - arquivo HTMML de configuração do i3geo que será utilizado. Se não especificado, será utilizado o default.
-<p>extensão - extensão geográfica que será utilizada em cada prancha, no formato xmin ymin xmax ymax.
-<p>mapfile base - arquivo mapfile que será utilizado como base para montagem do atlas. Utilize o caminho completo no servidor.
-</div></div>
-<br>
-<div id=resultado ><img src="../../imagens/aguarde.gif" /></div>
-</body>
-<script>
-/*
-Title: Administração do Atlas
+<h1>Administração do i3geo - Atlas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
 
-File: i3geo/admin/atlas.htm
-*/
-var temas = function(retorno){$temas = retorno.data;iniciaAdmin()}
-var cp = new cpaint();
-//cp.set_async("false");
-cp.set_response_type("JSON");
-var p = "../php/menutemas.php?funcao=pegaTemas";
-cp.call(p,"pegaMenus",temas);
-</script>
-</html>
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite editar a lista de Atlas.<br><br>
+		O cadastro de Atlas é utilizado na interface "Atlas" do i3geo. Essa interface
+		pode ser vista em http://host/i3geo/atlas<br><br>
+		Cada Atlas possuí uma lista de pranchas e cada prancha uma lista de temas e outros
+		parâmetros<br><br>
+		A lista de atlas é baseada no banco admin.db.<br><br>
+		A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<input onclick="adicionaLinha()" type=button id=adiciona value="Adicionar um novo atlas" />
+<br>
+<p>Atlas existentes:</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+</body>

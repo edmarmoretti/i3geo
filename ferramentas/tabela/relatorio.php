@@ -7,6 +7,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
+$postgis_mapa = $_SESSION["postgis_mapa"];
 include("../../classesphp/carrega_ext.php");
 include("../../classesphp/pega_variaveis.php");
 $temp = explode(",",$nomesrel);

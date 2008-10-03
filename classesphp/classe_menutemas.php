@@ -78,13 +78,13 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 			}
 		}
 		//
-		//verifica se o ip atual está cadastrado comoum dos editores
+		//verifica se o ip atual está cadastrado como um dos editores
 		//editores podem ver as coisas marcadas como não publicado
 		//no sistema de administração
 		//
 		$this->editor = false;
 		if($editores != "")
-		{$this->editor = $this->verificaeditores();}
+		{$this->editor = $this->verificaeditores($editores);}
 		$this->editores = $editores;
 	}
 /*
@@ -124,6 +124,8 @@ array
 				$perfis = explode(" ",$perfis); 
 				if (($this->array_in_array($this->perfil,$perfis)) || ($reg["perfil_menu"] == ""))
 				{
+					if(!in_array("publicado_menu",array_keys($reg)))
+					{$reg["publicado_menu"] = "sim";}
 					if(strtolower($reg["publicado_menu"]) != "nao" || $this->editor)
 					{
 						$status = "fechado";

@@ -206,6 +206,7 @@ $_SESSION['fingerprint'] = md5($fingerprint . session_id());
 //
 foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
+$postgis_mapa = $postgis_mapa_;
 /*
 Note: Define os arquivos .map 
 

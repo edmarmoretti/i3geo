@@ -198,7 +198,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: $postgis_mapa
 	
-	String de conexão para acesso aos dados (opcional).
+	String|array de conexão para acesso aos dados (opcional).
 	
 	Com o uso opcional dessa variável é possível esconder a string de conexão com o banco de dados. O Mapserver
 	não permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substituição.
@@ -206,9 +206,13 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Se não for desejado a substituição, deixe essa variável em branco.
 	Se vc especificar essa variável, o mapa será forçado a recusar o modo de operação CGI.
 	
+	Até a versão 4.0, é possível definir apenas uma string como parâmetro de substituição.
+	Da versão 4.1 em diante, pode-se definir um array onde a chave do array é a palavra
+	que será utilizada no item CONNECTION do mapfile.
+	
 	Para mais detalhes veja a função substituiCon em classesphp/funcoes_gerais.php
 	*/
-	$postgis_mapa = ""; //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
+	$postgis_mapa["geodados"] = "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432";
 	/*
 	Variable: $menutemas
 	
@@ -253,7 +257,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
 	*/
-	$atlasxml = "";
+	$atlasxml = "../menutemas/atlas.xml";
 	/*
 	 Variable: $expoeMapfile
 	 
@@ -296,7 +300,7 @@ else //se for linux
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_con = "";
 	$srid_area = 1;
-	$postgis_mapa = "";
+	$postgis_mapa["cnuc"] = "port=5432 dbname=adsi user=cnuc password=cnuc";
 	$menutemas = "";
 	$utilizacgi = "nao";
 	$atlasxml = "";//"../menutemas/atlas.xml";

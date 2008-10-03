@@ -32,12 +32,6 @@ $cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	retornaJSON(verificaEditores($editores));
-	exit;
-	break;
-	
 	case "pegaSistemas":
 	retornaJSON(pegaDados('SELECT * from i3geoadmin_sistemas order by nome_sistema'));
 	exit;

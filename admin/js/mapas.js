@@ -23,7 +23,7 @@ function montaTabela(dados)
 
         var formatMais = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=mais style='text-align:center' ></div>";
+            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {

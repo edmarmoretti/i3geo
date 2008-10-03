@@ -662,9 +662,22 @@ function substituiCon($map_file,$postgis_mapa)
 				$layer = $objMap->getlayer($i);
 				if ($layer->connectiontype == MS_POSTGIS)
 				{
-					if (($layer->connection == " ") || ($layer->connection == ""))
+					$lcon = $layer->connection;
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 					{
-						$layer->set("connection",$postgis_mapa);
+						//
+						//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+						//				
+						if(($lcon == " ") || ($lcon == ""))
+						{
+							$layer->set("connection",$postgis_mapa);
+							$layer->setmetadata("CONEXAOORIGINAL",$lcon);
+						}
+						else
+						{
+							$layer->set("connection",$postgis_mapa[$lcon]);
+							$layer->setmetadata("CONEXAOORIGINAL",$lcon);
+						}					
 					}
 				}
 			}
@@ -685,6 +698,7 @@ postgis_mapa - string de conexão com o banco
 */
 function restauraCon($map_file,$postgis_mapa)
 {
+	if(!@ms_newMapObj($map_file)){return;}
 	if (isset($postgis_mapa) && $postgis_mapa != "")
 	{
 		$objMap = ms_newMapObj($map_file);
@@ -694,10 +708,10 @@ function restauraCon($map_file,$postgis_mapa)
 			$layer = $objMap->getlayer($i);
 			if ($layer->connectiontype == MS_POSTGIS)
 			{
-				if ($layer->connection == $postgis_mapa)
-				{
-					$layer->set("connection"," ");
-				}
+				if (!is_array($postgis_mapa) && $layer->connection == $postgis_mapa)
+				{$layer->set("connection"," ");}
+				if($layer->getmetadata("conexaooriginal") != "")
+				{$layer->set("connection",$layer->getmetadata("conexaooriginal"));}
 			}
 		}
 		$objMap->save($map_file);

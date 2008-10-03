@@ -147,10 +147,13 @@ function verifica($map)
 			$layern->set("status",MS_DEFAULT);
 			if ($layern->connectiontype == MS_POSTGIS)
 			{
-				if ($layern->connection == " ")
+				if ($layern->connection == " " || $layern->connection == "")
 				{
-					$layern->set("connection",$postgis_mapa);
-				}
+					if(!is_array($postgis_mapa))
+					$l->set("connection",$postgis_mapa);
+					else
+					$l->set("connection",$postgis_mapa[$l->connection]);
+				}				
 			}			
 			autoClasses(&$layern,$nmapa);
 			ms_newLayerObj($mapa, $layern);

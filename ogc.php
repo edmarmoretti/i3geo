@@ -213,10 +213,10 @@ if ($tipo == "")
 				{
 					if ($l->connectiontype == MS_POSTGIS)
 					{
-						if ($l->connection == " ")
-						{
-							$l->set("connection",$postgis_mapa);
-						}
+						if(!is_array($postgis_mapa))
+						$l->set("connection",$postgis_mapa);
+						else
+						$l->set("connection",$postgis_mapa[$l->connection]);
 					}
 				}
 			}

@@ -71,6 +71,7 @@ if(isset($g_sid))
 	{
 		eval("\$".$k."='".$_SESSION[$k]."';");
 	}
+	$postgis_mapa = $_SESSION["postgis_mapa"];
 }
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 {$map_file = "";}
@@ -196,7 +197,10 @@ Ativa uma prancha do atlas.
 
 if (!connection_aborted())
 {
-	restauraCon($map_file,$postgis_mapa);
+	if ($map_file != "")
+	{
+		restauraCon($map_file,$postgis_mapa);
+	}
 	$cp->return_data();
 }
 else

@@ -32,7 +32,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
-
+$postgis_mapa = $_SESSION["postgis_mapa"];
 require_once("../../classesphp/funcoes_gerais.php");
 //
 //carrega o phpmapscript
