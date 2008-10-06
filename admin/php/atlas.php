@@ -34,70 +34,124 @@ $cp = new cpaint();
 switch ($funcao)
 {
 	case "pegaAtlas":
-	retornaJSON(pegaDados('SELECT id_atlas,titulo_atlas from i3geoadmin_atlas order by ordem_atlas'));
-	exit;
+		retornaJSON(pegaDados('SELECT id_atlas,titulo_atlas from i3geoadmin_atlas order by ordem_atlas'));
+		exit;
 	break;
 	case "pegaPranchas":
-	retornaJSON(pegaDados("SELECT id_prancha,titulo_prancha from i3geoadmin_atlasp where id_atlas='$id_atlas' order by ordem_prancha"));
-	exit;
-	break;
-	case "alterarAtlas":
-	$novo = alterarAtlas();
-	$sql = "SELECT * from i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
-	break;
-	case "excluirAtlas":
-	$tabela = "i3geoadmin_atlas";
-	$f = verificaFilhos();
-	if(!$f)
-	retornaJSON(excluirAtlas());
-	else
-	retornaJSON("erro");	
-	exit;
-	break;
-	case "excluirPrancha":
-	$tabela = "i3geoadmin_atlasp";	
-	$f = verificaFilhos();
-	if(!$f)
-	retornaJSON(excluirPrancha());
-	else
-	retornaJSON("erro");	
-	exit;
-	break;
-	case "alterarPrancha":
-	$novo = alterarPrancha();
-	$sql = "SELECT * from i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
-	retornaJSON(pegaDados($sql));
+		retornaJSON(pegaDados("SELECT id_prancha,titulo_prancha from i3geoadmin_atlasp where id_atlas='$id_atlas' order by ordem_prancha"));
+		exit;
 	break;
 	case "pegaTemas":
-	retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_prancha = '$id_prancha' order by ordem_tema"));
-	exit;
-	break;
-	case "alterarTema":
-	$novo = alterarTema();
-	$sql = "SELECT * from i3geoadmin_atlast WHERE id_tema = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	break;
-	case "excluirTema":
-	retornaJSON(excluirTema());
-	exit;
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_prancha = '$id_prancha' order by ordem_tema"));
+		exit;
 	break;
 	case "pegaDadosAtlas":
-	retornaJSON(pegaDados('SELECT * from i3geoadmin_atlas where id_atlas ='.$id_atlas));
-	exit;
+		retornaJSON(pegaDados('SELECT * from i3geoadmin_atlas where id_atlas ='.$id_atlas));
+		exit;
 	break;
-
-	case "pegaDadosPranchas":
-	$dadosPrancha = pegaDados("SELECT * from i3geoadmin_atlasp where id_atlas ='$id_atlas' and id_prancha = '$id_prancha'");
-	$cp->set_data(array("prancha"=>$dadosPrancha));
-	$cp->return_data();
+	case "pegaDadosPrancha":
+		retornaJSON(pegaDados('SELECT * from i3geoadmin_atlasp where id_prancha ='.$id_prancha));
+		exit;
+	break;
+	case "pegaDadosTema":
+		retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_tema = '$id_tema'"));
+		exit;
+	break;
+	case "alterarAtlas":
+		$novo = alterarAtlas();
+		$sql = "SELECT * from i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
+	break;
+	case "alterarPrancha":
+		$novo = alterarPrancha();
+		$sql = "SELECT * from i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
+	break;
+	case "alterarTema":
+		$novo = alterarTema();
+		$sql = "SELECT * from i3geoadmin_atlast WHERE id_tema = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+	break;
+	case "excluirAtlas":
+		$tabela = "i3geoadmin_atlas";
+		$f = verificaFilhos();
+		if(!$f)
+		retornaJSON(excluirAtlas());
+		else
+		retornaJSON("erro");	
+		exit;
+	break;
+	case "excluirPrancha":
+		$tabela = "i3geoadmin_atlasp";	
+		$f = verificaFilhos();
+		if(!$f)
+		retornaJSON(excluirPrancha());
+		else
+		retornaJSON("erro");	
+		exit;
+	break;
+	case "excluirTema":
+		retornaJSON(excluirTema());
+		exit;
+	break;
+	case "movimentaNo":
+		movimentaNo();	
+		retornaJSON("ok");
+		exit;
 	break;
 
 	case "importarXmlAtlas":
-	$cp->set_data(importarXmlAtlas());
-	$cp->return_data();
+		$cp->set_data(importarXmlAtlas());
+		$cp->return_data();
 	break;
+}
+function movimentaNo()
+{
+	global $tipo,$movimento,$id;
+	if($tipo == "tema")
+	{
+		//pega a ordem atual
+		$ordematual = pegaDados("SELECT ordem_tema from i3geoadmin_atlast where id_tema = '$id'");
+		$ordematual = $ordematual[0]["ordem_tema"];
+		$posfixo = "tema";
+		$tabela = "atlast";
+	}
+	if($tipo == "prancha")
+	{
+		//pega a ordem atual
+		$ordematual = pegaDados("SELECT ordem_prancha from i3geoadmin_atlasp where id_prancha = '$id'");
+		$ordematual = $ordematual[0]["ordem_prancha"];
+		$posfixo = "prancha";
+		$tabela = "atlasp";
+	}
+	if($tipo == "atlas")
+	{
+		//pega a ordem atual
+		$ordematual = pegaDados("SELECT ordem_atlas from i3geoadmin_atlas where id_atlas = '$id'");
+		$ordematual = $ordematual[0]["ordem_atlas"];
+		$posfixo = "atlas";
+		$tabela = "atlas";
+	}
+	include("conexao.php");
+	if($movimento == "sobe")
+	{
+		$menos = $ordematual - 1;
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $ordematual where ordem_$posfixo = '$menos'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $menos where id_$posfixo = '$id'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = (ordem_$posfixo - 1) where ordem_$posfixo < $menos and ordem_$posfixo > 1");
+	}	
+	if($movimento == "desce")
+	{
+		$mais = $ordematual + 1;
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $ordematual where ordem_$posfixo = '$mais'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $mais where id_$posfixo = '$id'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = (ordem_$posfixo + 1) where ordem_$posfixo > $mais and ordem_$posfixo > 1");
+	}			
+   	$dbhw = null;
+   	$dbh = null;
+   	return "ok";
 }
 function dadosAtlas()
 {
@@ -139,11 +193,11 @@ function alterarAtlas()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('','','','',null,null,'','','','','','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('',1,'','',null,null,'','','','','','')");
 			$id = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_atlas']);
-			$retorna = $id;    	
+			$retorna = $id;
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -164,12 +218,12 @@ function alterarPrancha()
     	include("conexao.php");
     	if($id_prancha != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = $id_prancha and id_atlas='$id_atlas'");
+    		$dbhw->query("UPDATE i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = '$id_prancha'");
     		$retorna = $id_prancha;
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ('','','','$h_prancha','$w_prancha','','','$titulo_prancha','$id_atlas')");
+    		$dbhw->query("INSERT INTO i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES (1,'','','$h_prancha','$w_prancha','','','$titulo_prancha','$id_atlas')");
     		$id = $dbhw->query("SELECT id_prancha FROM i3geoadmin_atlasp");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_prancha']);
@@ -192,12 +246,12 @@ function alterarTema()
     	include("conexao.php");
     	if($id_tema != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_prancha = $id_prancha and id_tema='$id_tema'");
+    		$dbhw->query("UPDATE i3geoadmin_atlast SET ordem_tema='$ordem_tema',codigo_tema='$codigo_tema',ligado_tema='$ligado_tema' WHERE id_tema='$id_tema'");
     		$retorna = $id_tema;
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ('','','','$id_prancha')");
+    		$dbhw->query("INSERT INTO i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES (1,'','','$id_prancha')");
 			$id = $dbhw->query("SELECT id_tema FROM i3geoadmin_atlast");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_tema']);

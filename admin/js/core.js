@@ -61,6 +61,53 @@ Armazena o objeto com a lista de perfis
 */
 var $perfis = "";
 /*
+Function: core_movimentaNo
+
+Movimenta um nó para cima ou para baixo na árvore.
+
+Essa função utiliza uma árvore que deve estar armazenada no objeto tree
+
+Parameters:
+
+tipo - sobe|desce
+
+no - objeto no que será movimentado
+
+Return:
+
+true|false - se o movimento ocorreu
+*/
+function core_movimentaNo(tipo,no)
+{
+	var movimenta = false
+	if(tipo == "sobe")
+	{
+		var noanterior = no.previousSibling
+		if(noanterior)
+		{
+			if(noanterior.previousSibling)
+			{
+				tree.popNode(no)
+				no.insertBefore(noanterior)
+				tree.draw()
+				var movimenta = true
+			}	 
+		}
+	}
+	if(tipo == "desce")
+	{
+		var noseguinte = no.nextSibling
+		if(noseguinte)
+		{
+			tree.popNode(no)
+			no.insertAfter(noseguinte)
+			tree.draw()
+			var movimenta = true
+		}
+	}
+	return movimenta;
+}
+/*
 Function: core_handleSuccess
 
 Processa o retorno da chamada em ajax quando tiver sucesso. Esta é uma
@@ -130,9 +177,11 @@ sUrl - url que será executada
 
 callback - função que processará o retorno
 */
-function core_makeRequest(sUrl,callback)
+function core_makeRequest(sUrl,callback,tipo)
 {
-	var request = YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+	if(arguments.length == 2)
+	{var tipo = "GET";}
+	var request = YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
 	YAHOO.log("Initiating request; tId: " + request.tId + ".", "info", "example");
 }
 /*
@@ -354,6 +403,47 @@ function core_comboPerfis(onde,id,marcar,funcao)
 		ins += "</select></p>"
 		$i(onde).innerHTML = ins;
 	}
+}
+/*
+Function: core_comboPranchas
+
+Cria um combo para escolha de pranchas de um atlas
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
+*/
+function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
+{
+	var sUrl = "../php/atlas.php?funcao=pegaPranchas&id_atlas="+id_atlas;
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+				if(arguments.length == 3)
+				{var funcao = "";}
+				if (funcao != "")
+				{var funcao = "onchange='"+funcao+"'";}
+				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar)
+				ins += "</select></p>"
+				$i(onde).innerHTML = ins;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback)
 }
 
 /*

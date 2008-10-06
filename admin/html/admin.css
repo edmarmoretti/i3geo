@@ -57,6 +57,20 @@ input
 	width: 20px;
 	height: 20px;
 }
+.sobe
+{
+	background-image:URL('../imagens/34.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor:pointer;
+}
+.desce
+{
+	background-image:URL('../imagens/35.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor:pointer;
+}
 .mostrar
 {
 	background-image:URL('../imagens/03.png');
