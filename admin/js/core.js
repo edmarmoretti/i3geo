@@ -85,7 +85,7 @@ function core_movimentaNo(tipo,no)
 		var noanterior = no.previousSibling
 		if(noanterior)
 		{
-			if(noanterior.previousSibling)
+			if(noanterior.previousSibling && noanterior.data.tipo != "etiqueta")
 			{
 				tree.popNode(no)
 				no.insertBefore(noanterior)
@@ -435,6 +435,129 @@ function core_comboPranchas(onde,id,marcar,funcao,id_atlas)
 				{var funcao = "onchange='"+funcao+"'";}
 				ins = "<select  id='"+id+"' "+funcao+" >"
 				ins += core_comboObjeto(valores,"id_prancha","titulo_prancha",marcar)
+				ins += "</select></p>"
+				$i(onde).innerHTML = ins;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_comboGrupos
+
+Cria um combo para escolha de um grupo
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
+*/
+function core_comboGrupos(onde,id,marcar,funcao)
+{
+	var sUrl = "../php/menutemas.php?funcao=pegaGrupos";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+				if(arguments.length == 3)
+				{var funcao = "";}
+				if (funcao != "")
+				{var funcao = "onchange='"+funcao+"'";}
+				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar)
+				ins += "</select></p>"
+				$i(onde).innerHTML = ins;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_comboSubGrupos
+
+Cria um combo para escolha de um sub-grupo
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
+*/
+function core_comboSubGrupos(onde,id,marcar,funcao)
+{
+	var sUrl = "../php/menutemas.php?funcao=pegaSubGrupos";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+				if(arguments.length == 3)
+				{var funcao = "";}
+				if (funcao != "")
+				{var funcao = "onchange='"+funcao+"'";}
+				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar)
+				ins += "</select></p>"
+				$i(onde).innerHTML = ins;
+  			}
+  			catch(e){core_handleFailure(e,o.responseText);}
+  		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback)
+}
+/*
+Function: core_comboTemas
+
+Cria um combo para escolha de um tema
+
+Parameters:
+
+onde - id do elemento que receberá o combo
+
+id - id do combo que será criado
+
+marcar - valor que será marcado como selecionado
+
+funcao - string com o nome da função que será executada no evento onchange
+*/
+function core_comboTemas(onde,id,marcar,funcao)
+{
+	var sUrl = "../php/menutemas.php?funcao=pegaTemas2";
+	var callback =
+	{
+  		success:function(o)
+  		{
+  			try
+  			{
+  				var valores = YAHOO.lang.JSON.parse(o.responseText);
+				if(arguments.length == 3)
+				{var funcao = "";}
+				if (funcao != "")
+				{var funcao = "onchange='"+funcao+"'";}
+				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar)
 				ins += "</select></p>"
 				$i(onde).innerHTML = ins;
   			}

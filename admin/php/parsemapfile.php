@@ -104,6 +104,7 @@ function legendaSimples($layername)
 	$xml .= "<property key='m_symbolType' value='4'/>\n";
 	$xml .= "<property key='m_Style' value='1'/>\n";
 	$xml .= "<property key='m_useOutline' value='true'/>\n";
+	if($cor->red != -1)
 	$xml .= "<property key='m_Color' value='".$cor->red.",".$cor->green.",".$cor->blue.",255'/>\n";
 	if($outcor->red != -1)
 	$xml .= "<property key='m_outlineColor' value='".$outcor->red.",".$outcor->green.",".$outcor->blue.",255'/>\n";

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Árvore de temas</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/arvore.js"></script>
+</head>
+<body class=" yui-skin-sam">
+<div style="margin:20px">
+<div style=width:80%;text-align:center;>
+<h1>Administração do i3geo - Árvore de temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
+
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite editar árvore de temas dos menus disponíveis.<br><br>
+		A árvore define os grupos, sub-grupos e temas existentes em cada menu.
+		As árvores são mostradas na guia de adição de temas do i3geo.<br><br>
+		A lista de atlas é baseada no banco admin.db.<br><br>
+		A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<br>
+<p>Menus existentes Para editar os menus clique <a href="menus.html" >aqui</a>):</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+</body>

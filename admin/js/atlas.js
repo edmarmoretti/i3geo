@@ -1,12 +1,12 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	ativaBotaoAdicionaRaiz("../php/atlas.php?funcao=alterarAtlas","adiciona")
+	ativaBotaoAdicionaAtlas("../php/atlas.php?funcao=alterarAtlas","adiciona")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaAtlas()");
 }
-function ativaBotaoAdicionaRaiz(sUrl,idBotao)
+function ativaBotaoAdicionaAtlas(sUrl,idBotao)
 {
 	var adiciona = function()
 	{
@@ -18,7 +18,7 @@ function ativaBotaoAdicionaRaiz(sUrl,idBotao)
   			{
   				try
   				{
-  					adicionaNosRaiz(YAHOO.lang.JSON.parse(o.responseText),true);
+  					adicionaNosAtlas(YAHOO.lang.JSON.parse(o.responseText),true);
   					core_carregando("desativa");
   				}
   				catch(e){core_handleFailure(e,o.responseText);}
@@ -56,7 +56,7 @@ function montaArvore(dados)
                 success: function(oResponse)
                 {
                     var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-					adicionaNos(node,dados,false)
+					adicionaNosPranchas(node,dados,false)
                     oResponse.argument.fnLoadComplete();
                 },
                 failure: function(oResponse)
@@ -83,14 +83,15 @@ function montaArvore(dados)
         }
     	buildTree();
 	}();
-   	adicionaNosRaiz(dados)
+   	adicionaNosAtlas(dados)
    	tree.draw();
 }
 function adicionaNosTemas(no,dados,redesenha)
 {
 	if(!redesenha)
 	{
-		var d = {html:"<i>Temas:</i>"}
+		var conteudo = "<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"adicionarTema('"+no.data.id_prancha+"')\" title='adiciona tema' width='10px' heigth='10px' src=\"../imagens/05.png\" />"
+		var d = {html:conteudo+"<i>Temas:</i>"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -106,7 +107,7 @@ function adicionaNosTemas(no,dados,redesenha)
 	}
 	if(redesenha){tree.draw();}
 }
-function adicionaNos(no,dados,redesenha)
+function adicionaNosPranchas(no,dados,redesenha)
 {
 	function temaIconMode()
 	{
@@ -140,7 +141,8 @@ function adicionaNos(no,dados,redesenha)
     }
     if(!redesenha)
     {
-		var d = {html:"<i>Pranchas:</i>"}
+		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarPrancha('"+no.data.id_atlas+"')\" title='adiciona prancha' src=\"../imagens/05.png\" />"
+		var d = {html:conteudo+"<i>Pranchas:</i>"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -149,7 +151,6 @@ function adicionaNos(no,dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','prancha','"+dados[i].id_prancha+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','prancha','"+dados[i].id_prancha+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('prancha','"+dados[i].id_prancha+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"adicionarTema('"+dados[i].id_prancha+"')\" title='adiciona tema' width='10px' heigth='10px' src=\"../imagens/05.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('prancha','"+dados[i].id_prancha+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].titulo_prancha+"</span>"
 		var d = {html:conteudo,id_prancha:dados[i].id_prancha,tipo:"prancha"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -159,7 +160,7 @@ function adicionaNos(no,dados,redesenha)
 	if(redesenha){tree.draw();}
 }
 
-function adicionaNosRaiz(dados,redesenha)
+function adicionaNosAtlas(dados,redesenha)
 {
 	var root = tree.getRoot();
 	for (var i=0, j=dados.length; i<j; i++)
@@ -167,7 +168,6 @@ function adicionaNosRaiz(dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','atlas','"+dados[i].id_atlas+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','atlas','"+dados[i].id_atlas+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('atlas','"+dados[i].id_atlas+"')\" title=excluir src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionarPrancha('"+dados[i].id_atlas+"')\" title='adiciona prancha' src=\"../imagens/05.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editar('atlas','"+dados[i].id_atlas+"')\" title=editar src=\"../imagens/06.png\" /><b>&nbsp;<span>"+dados[i].titulo_atlas+"</span>"
 		var d = {html:conteudo,id_atlas:dados[i].id_atlas,tipo:"atlas"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
@@ -224,21 +224,15 @@ function editar(tipo,id)
 }
 function montaDivTema(i)
 {
-	var param =
-	{
-		"linhas":[
-		{titulo:"Ordem de desenho:",id:"Eordem_tema",size:"5",value:i.ordem_tema,tipo:"text",div:""}
-		]
-	}
 	var ins = ""
 	ins += "<br>Código do tema:<br>"
 	ins += "<div id=comboTemaIni ></div>"
 
-	ins += core_geraLinhas(param)
 	ins += "Ligado (ao abrir a prancha, esse tema estará visível)?<br>"
 	ins += "<select id='Eligado_tema' >"
 	ins += core_combosimnao(i.ligado_tema)
 	ins += "</select>"
+	ins += "<input type=hidden value='"+i.ordem_tema+"' id='Eordem_tema' />"
 	return(ins)
 }
 function montaDivPrancha(i)
@@ -252,12 +246,13 @@ function montaDivPrancha(i)
 		{titulo:"Largura da janela do texto inicial:",id:"Ew_prancha",size:"5",value:i.w_prancha,tipo:"text",div:""},
 		{titulo:"Altura:",id:"Eh_prancha",size:"5",value:i.h_prancha,tipo:"text",div:""},
 		{titulo:"(opcional) Ícone que será utilizado na apresentação da prancha:",id:"Eicone_prancha",size:"50",value:i.icone_prancha,tipo:"text",div:""},
-		{titulo:"Extensão geográfica:",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""},
-		{titulo:"Ordem de apresentação na lista de pranchas:",id:"Eordem_prancha",size:"5",value:i.ordem_prancha,tipo:"text",div:""}
+		{titulo:"Extensão geográfica:",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
 	ins += core_geraLinhas(param)
+	ins += "<input type=hidden value='"+i.ordem_prancha+"' id='Eordem_prancha' />"
+	
 	return(ins)
 }
 function montaDivAtlas(i)
@@ -272,8 +267,7 @@ function montaDivAtlas(i)
 		{titulo:"Altura:",id:"Eh_atlas",size:"5",value:i.h_atlas,tipo:"text",div:""},
 		{titulo:"(opcional) Mapfile inicial (mapfile que será usado como base para montagem do mapa inicial. Se não for definido, será usado o default do i3geo. Utilize o endereço completo do aquivo mapfile no servidor.):",id:"Ebasemapfile_atlas",size:"50",value:i.basemapfile_atlas,tipo:"text",div:""},
 		{titulo:"(opcional) Ícone que será utilizado na montagem da lista de todos os Atlas:",id:"Eicone_atlas",size:"50",value:i.icone_atlas,tipo:"text",div:""},
-		{titulo:"(opcional) Template HTML (se não for especificado, será usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",id:"Etemplate_atlas",size:"50",value:i.template_atlas,tipo:"text",div:""},
-		{titulo:"Ordem de apresentação na lista de atlas:",id:"Eordem_atlas",size:"5",value:i.ordem_atlas,tipo:"text",div:""}
+		{titulo:"(opcional) Template HTML (se não for especificado, será usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",id:"Etemplate_atlas",size:"50",value:i.template_atlas,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
@@ -293,6 +287,8 @@ function montaDivAtlas(i)
 	ins += "<select id='Epublicado_atlas' >"
 	ins += core_combosimnao(i.publicado_atlas)
 	ins += "</select>"
+	ins += "<input type=hidden value='"+i.ordem_atlas+"' id='Eordem_atlas' />"
+
 	return(ins)
 }
 function sobeDesce(movimento,tipo,id)
@@ -374,7 +370,7 @@ function adicionarPrancha(id)
     	success: function(oResponse)
 		{
 			var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-			adicionaNos(no,dados,true)
+			adicionaNosPranchas(no,dados,true)
 		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

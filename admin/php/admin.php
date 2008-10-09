@@ -84,7 +84,7 @@ function retornaJSON($obj)
 	if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
 	echo json_encode($obj);
 	if(extension_loaded('zlib')){ob_end_flush();}
-	exit;	
+	exit;
 }
 function verificaDuplicados($sql,$dbh)
 {
@@ -225,6 +225,21 @@ function verificaFilhos()
     	if($tabela == "i3geoadmin_atlasp")
     	{
     		$r = pegaDados("SELECT id_prancha from i3geoadmin_atlast where id_prancha ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_n2")
+    	{
+    		$r = pegaDados("SELECT id_n3 from i3geoadmin_n3 where id_n2 ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    	}
+    	if($tabela == "i3geoadmin_n1")
+    	{
+    		$r = pegaDados("SELECT id_n2 from i3geoadmin_n2 where id_n1 ='$id'");
+    		if(count($r) > 0)
+    		$res = true;
+    		$r = pegaDados("SELECT id_raiz from i3geoadmin_raiz where nivel='1' and id_nivel ='$id'");
     		if(count($r) > 0)
     		$res = true;
     	}
