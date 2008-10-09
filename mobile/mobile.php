@@ -182,7 +182,7 @@ ImagePNG($img, $nome);
 if(!isset($maparef)){$maparef = "";}
 ?>
 <div id='botoes' style="position:relative;top:1px;left:1px" >
-	<select id='op' name='op' onchange='op(this.value)'>
+	<select tabindex=13 id='op' name='op' onchange='op(this.value)'>
 		<option value=''>Op&ccedil;&otilde;es</option>
 		<option value='reiniciar'>reiniciar</option>
 		<option value='ligar'>ligar camadas</option>
@@ -193,7 +193,14 @@ if(!isset($maparef)){$maparef = "";}
 		<option value='localizar'>localizar lugares</option>
 		<option value='localizarxy'>localizar coordenada</option>
 	</select>
-	<div id=mensagem >utilize 'tab' para acessar as opções ou clique</div>
+	<div id=mensagem style=font-size:10pt; >
+		<a href=# title="aproxima" onclick="zoommais()">+</a>&nbsp;
+		<a href=# onclick="zoommenos()">-</a>&nbsp;
+		<a href=# onclick="norte()">N</a>&nbsp;
+		<a href=# onclick="sul()">S</a>&nbsp;
+		<a href=# onclick="leste()">L</a>&nbsp;
+		<a href=# onclick="oeste()">O</a>&nbsp;
+	</div>
 </div>
 <form id='f' action='mobile.php?' method='get'>
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname;?>' />
@@ -203,7 +210,7 @@ if(!isset($maparef)){$maparef = "";}
 	<input id='referencia' type=hidden name='maparef' value='<?php echo $maparef;?>' />
 </form>
 <map name="sample">
-<area tabindex=1  onblur="mensagem('')" onfocus="mensagem('aproxima')" shape="rect" coords="0,0,40,23" onclick='zoommais()'>
+<area tabindex=1 onblur="mensagem('')" onfocus="mensagem('aproxima')" shape="rect" coords="0,0,40,23" onclick='zoommais()'>
 <area tabindex=8 onblur="mensagem('')" onfocus="mensagem('aproxima+')" shape="rect" coords="0,24,40,31" onclick='zoommais1()'>
 <area tabindex=9 onblur="mensagem('')" onfocus="mensagem('aproxima++')" shape="rect" coords="0,32,40,38" onclick='zoommais2()'>
 <area tabindex=2 onblur="mensagem('')" onfocus="mensagem('afasta')" shape="rect" coords="0,57,40,77" onclick='zoommenos()'>
@@ -216,9 +223,9 @@ if(!isset($maparef)){$maparef = "";}
 <area tabindex=6 onblur="mensagem('')" onfocus="mensagem('oeste')" shape="rect" coords="0,91,18,105" onclick='oeste()'>
 <area tabindex=7 onblur="mensagem('')" onfocus="mensagem('identifica')" shape="rect" coords="0,120,40,150" onclick='identifica()'>
 </map>
-<img id='mapa' onclick='autopan(event)' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
+<img id='mapa' tabindex=0 onclick='autopan(event)' style="position:relative;top:1px;left:1px;z-index:0;" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
 <br>
-<a href=# onclick="maparef()">Ativar/desativar mapa de referência</a>
+<a href=# tabindex=12 onclick="maparef()">Ativar/desativar mapa de referência</a>
 <?php
 if ((isset($maparef)) && ($maparef == "sim"))
 {
@@ -241,6 +248,7 @@ if (app=='N') navn=true; else navm=true;
 pan = ""
 function mensagem(m)
 {
+	if(m == ""){var m = "-";}
 	document.getElementById("mensagem").innerHTML = m
 }
 function zoommais()
