@@ -193,6 +193,7 @@ if(!isset($maparef)){$maparef = "";}
 		<option value='localizar'>localizar lugares</option>
 		<option value='localizarxy'>localizar coordenada</option>
 	</select>
+	<div id=mensagem >utilize 'tab' para acessar as opções ou clique</div>
 </div>
 <form id='f' action='mobile.php?' method='get'>
 	<input type='hidden' name='tmpfname' value='<?php echo $tmpfname;?>' />
@@ -202,18 +203,18 @@ if(!isset($maparef)){$maparef = "";}
 	<input id='referencia' type=hidden name='maparef' value='<?php echo $maparef;?>' />
 </form>
 <map name="sample">
-<area shape="rect" coords="0,0,40,23" onclick='zoommais()'>
-<area shape="rect" coords="0,24,40,31" onclick='zoommais1()'>
-<area shape="rect" coords="0,32,40,38" onclick='zoommais2()'>
-<area shape="rect" coords="0,57,40,77" onclick='zoommenos()'>
-<area shape="rect" coords="0,43,40,49" onclick='zoommenos2()'>
-<area shape="rect" coords="0,50,40,56" onclick='zoommenos1()'>
+<area tabindex=1  onblur="mensagem('')" onfocus="mensagem('aproxima')" shape="rect" coords="0,0,40,23" onclick='zoommais()'>
+<area tabindex=8 onblur="mensagem('')" onfocus="mensagem('aproxima+')" shape="rect" coords="0,24,40,31" onclick='zoommais1()'>
+<area tabindex=9 onblur="mensagem('')" onfocus="mensagem('aproxima++')" shape="rect" coords="0,32,40,38" onclick='zoommais2()'>
+<area tabindex=2 onblur="mensagem('')" onfocus="mensagem('afasta')" shape="rect" coords="0,57,40,77" onclick='zoommenos()'>
+<area tabindex=10 onblur="mensagem('')" onfocus="mensagem('afasta+')" shape="rect" coords="0,43,40,49" onclick='zoommenos2()'>
+<area tabindex=11 onblur="mensagem('')" onfocus="mensagem('afasta++')" shape="rect" coords="0,50,40,56" onclick='zoommenos1()'>
 
-<area shape="rect" coords="0,78,40,90" onclick='norte()'>
-<area shape="rect" coords="22,91,40,104" onclick='leste()'>
-<area shape="rect" coords="0,106,40,119" onclick='sul()'>
-<area shape="rect" coords="0,91,18,105" onclick='oeste()'>
-<area shape="rect" coords="0,120,40,150" onclick='identifica()'>
+<area tabindex=3 onblur="mensagem('')" onfocus="mensagem('norte')" shape="rect" coords="0,78,40,90" onclick='norte()'>
+<area tabindex=4 onblur="mensagem('')" onfocus="mensagem('leste')" shape="rect" coords="22,91,40,104" onclick='leste()'>
+<area tabindex=5 onblur="mensagem('')" onfocus="mensagem('sul')" shape="rect" coords="0,106,40,119" onclick='sul()'>
+<area tabindex=6 onblur="mensagem('')" onfocus="mensagem('oeste')" shape="rect" coords="0,91,18,105" onclick='oeste()'>
+<area tabindex=7 onblur="mensagem('')" onfocus="mensagem('identifica')" shape="rect" coords="0,120,40,150" onclick='identifica()'>
 </map>
 <img id='mapa' onclick='autopan(event)' style="position:relative;top:1px;left:1px" src='<?php echo $nomeimagem; ?>' usemap="#sample" />
 <br>
@@ -238,6 +239,10 @@ navm = false
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 pan = ""
+function mensagem(m)
+{
+	document.getElementById("mensagem").innerHTML = m
+}
 function zoommais()
 {
 	document.getElementById('tipo').value = 'zoommais';
