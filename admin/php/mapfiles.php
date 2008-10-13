@@ -32,11 +32,6 @@ $cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
-	break;
 	//pega os parâmetros do ms_configura
 	case "pegaParametrosConfigura":
 	$vs = array(
@@ -67,8 +62,8 @@ switch ($funcao)
   			}    		
 		}
 	}
-	$cp->set_data($par);
-	$cp->return_data();
+	retornaJSON($par);
+	exit;
 	break;
 	
 	//retorna o mapfile atual como texto
@@ -82,10 +77,9 @@ switch ($funcao)
 	
 	//salva um novo valor para uma variável do ms_configura
 	case "salvaConfigura":
-	$cp->register('salvaConfigura');
 	salvaConfigura($variavel,$valor,$mapfile,$temasaplic);
-	$cp->set_data("ok");
-	$cp->return_data();
+	retornaJSON("ok");
+	exit;
 	break;
 }
 /*

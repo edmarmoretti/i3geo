@@ -30,19 +30,47 @@ File: i3geo/admin/sistemas.php
 include_once("admin.php");
 include_once("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
+	case "pegaMapfiles":
+		retornaJSON(pegaLayers());
+		exit;
 	case "criarNovoMap":
-	$cp->set_data(criarNovoMap());
-	$cp->return_data();
+		retornaJSON(criarNovoMap());
+		exit;
 	break;
 	case "pegaLayers":
-	$cp->set_data(pegaLayers());
-	$cp->return_data();
+		retornaJSON(pegaLayers());
+		exit;
+	break;
+	case "excluirMapfile":
+		$tabela = "mapfiles";
+		$id = $codigoMap;
+		$f = verificaFilhos();
+		if($f)
+		{
+			retornaJSON("erro");
+			exit;
+		}
+		else
+		{
+			unlink("../../temas/".$codigoMap.".map");
+			retornaJSON("ok");
+			exit;
+		}
+	break;
+	case "criarNovoLayer":
+		retornaJSON(criarNovoLayer());
+		exit;
+	break;
+	case "excluirLayer":
+		retornaJSON(excluirLayer());
+		exit;
 	break;	
+	
+	
+	
 	case "pegaCaracteristicasGerais":
 	$cp->set_data(pegaCaracteristicasGerais());
 	$cp->return_data();
@@ -87,14 +115,7 @@ switch ($funcao)
 	$cp->set_data(pegaFontes());
 	$cp->return_data();
 	break;
-	case "criarNovoLayer":
-	$cp->set_data(criarNovoLayer());
-	$cp->return_data();
-	break;
-	case "excluirLayer":
-	$cp->set_data(excluirLayer());
-	$cp->return_data();
-	break;
+
 	case "adicionarClasse":
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(adicionarClasse());
@@ -149,8 +170,8 @@ function adicionarClasse()
 }
 function excluirLayer()
 {
-	global $codigoMap,$codigoLayer;
-	$mapfile = "../../temas/".$codigoMap.".map";
+	global $codigoMap,$codigoLayer,$locaplic;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
 	$nl->set("status",MS_DELETE);
@@ -160,17 +181,16 @@ function excluirLayer()
 }
 function criarNovoLayer()
 {
-	global $codigoMap;
+	global $locaplic,$codigoMap;
 	include_once("../../classesphp/funcoes_gerais.php");
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapat = ms_newMapObj("base.map");
-	$layer = $mapat->getlayerbyname("base");
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
-	$nl = ms_newLayerObj($mapa,$layer);
+	$nl = ms_newLayerObj($mapa);
 	$nl->set("name",nomeRandomico());
+	$nl->set("type",MS_LAYER_LINE);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
-	return "ok";
+	return array("layers"=>(array($nl->name)));
 }
 function pegaFontes()
 {
@@ -557,20 +577,29 @@ function pegaEstilos()
 function criarNovoMap()
 {
 	global $nome,$codigo;
-	if(!file_exists("../../temas/".$codigo.".map"))
+	$arq = "../../temas/".$codigo.".map";
+	if(!file_exists($arq))
 	{
-		$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		copy("base.map","../../temas/".$codigo.".map");
-		$mapfile = "../../temas/".$codigo.".map";
-		$mapa = ms_newMapObj($mapfile);
-		$layer = $mapa->getlayerbyname("base");
-		$layer->set("name",$codigo);
-		$mapa->save($mapfile);
+		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
+		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
+		$dados[] = "LAYER";
+		$dados[] = "	NAME base";
+		$dados[] = "	TYPE line";
+		$dados[] = '	DATA ""';
+		$dados[] = '	METADATA';
+		$dados[] = '		TEMA "'.$nome.'"';
+		$dados[] = '	METADATA';
+		$dados[] = "END";
+		$dados[] = "END";
+		$fp = fopen($arq,"w");
+		foreach ($dados as $dado)
+		{
+			fwrite($fp,$dado."\n");
+		}
     	require_once("conexao.php");
     	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
     	$dbh = null;
     	$dbhw = null;
-
 		return "ok";
 	}
 	return "erro";

@@ -30,15 +30,9 @@ File: i3geo/admin/ms_configura.php
 
 */
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
-	break;
 	//pega os parâmetros do ms_configura
 	case "pegaParametrosConfigura":
 	$vs = array(
@@ -71,25 +65,16 @@ switch ($funcao)
 			$par[$v] = $s;
 		}
 		else
-		$par[$v] = mb_convert_encoding($s,"UTF-8","ISO-8859-1");
+		$par[$v] = $s;
 	}
-	$cp->set_data($par);
-	$cp->return_data();
-	break;
-	//retorna o mapfile atual como texto
-	case "restauraConfigura":
-	$cp->register('restauraConfigura');
-	unlink("../../ms_configura.php");
-	copy ("../../ms_configura.default","../../ms_configura.php");
-	$cp->set_data("ok");
-	$cp->return_data();
+	retornaJSON($par);
+	exit;
 	break;
 	//salva um novo valor para uma variável do ms_configura
 	case "salvaConfigura":
-	$cp->register('salvaConfigura');
-	salvaConfigura($variavel,mb_convert_encoding($valor,"ISO-8859-1","UTF-8"));
-	$cp->set_data("ok");
-	$cp->return_data();
+	salvaConfigura($variavel,$valor);
+	retornaJSON("ok");
+	exit;
 	break;
 }
 /*

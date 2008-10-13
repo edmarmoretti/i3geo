@@ -1,44 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="admin.css">
-<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script src="../js/admin.js" type="text/javascript"></script>
-<script src="../js/temas.js" type="text/javascript"></script>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title>Menus</title>
+    <style type="text/css">
+        /*margin and padding on body element
+          can introduce errors in determining
+          element position and are not recommended;
+          we turn them off as a foundation for YUI
+          CSS treatments. */
+        body {
+            margin:0;
+        	padding:0;
+        }
+	</style>
+	<script type="text/javascript" src="../js/core.js"></script>
+	<script type="text/javascript" src="../js/temas.js"></script>
 </head>
-<body>
+<body class=" yui-skin-sam">
+<div style="margin:20px">
 <div style=width:80%;text-align:center;>
-<h1>Administração do i3geo - Temas <img src="../imagens/04.png" style="cursor:pointer" onclick="$i('ajuda').style.display='block'"/></h1>
-<p><a href="../index.html">Voltar</a></p>
-<div id=ajuda style="display:none">
-<p>Este programa permite criar ou editar os arquivos mapfile que compõem temas no i3geo.</p>
-<p>O menu é baseado no banco admin.db.</p>
-<p>A lista de IPs dos usuários que podem editar os arquivos de configuração do i3geo e 
-dos que podem navegar pelos diretórios do servidor, não são mostradas aqui. Para 
-alterar essas variáveis, vc deve editar diretamente o arquivo i3geo/ms_configura.php.</p>
-<p>A lista de arquivos editáveis é baseada no banco de dados administrativo. Para que um arquivo apareça na
-listagem, ele deve ter sido incluído no banco por meio da opção "Editar a lista de temas"</p>
+<h1>Administração do i3geo - mapfiles dos temas <img src="../imagens/04.png" style="cursor:pointer" id=botaoAjuda /></h1>
 
-</div></div>
-<fieldset>
-	<legend>Arquivo em edição</legend>
-	<p>Escolha o arquivo para editar (a lista de arquivos é baseada no banco de dados administrativo)</p>
-	<div id=arquivoAtivo ><p style=color:red >Aguarde...</p></div>
-	<p><input onclick=testarMap() type=button value="Testar" /></p>
-
-	<p>Ou crie um novo (o código é uma palavra sem espaços que identifica o arquivo de forma única dentro do diretório i3geo/temas):</p>
-	<p>Código:</p>
-	<p><input type=text size=20 value="" id=codigoNovoMap /></p>
-	<p>Nome:</p>
-	<p><input type=text size=20 value="" id=nomeNovoMap /></p>
-	<p><input onclick=criarNovoMap() type=button value="Criar" id=nomeNovoMap /></p>
-</fieldset>
-<p><input onclick=adicionarLayer() type=button value="Adicionar um novo layer" /></p>
-<div id=forms style=display:none ></div>
-
+</div>
+<div id="ajuda">
+	<div class="hd">Ajuda</div>
+	<div class="bd" style="height:144px;overflow:auto">
+		Este programa permite criar ou editar os arquivos mapfile que compõem temas no i3geo.<br>
+		Os arquivo .map são armazenados no diretório i3geo/temas e podem também ser editados manualmente.<br>
+		Cada arquivo contém layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos são as
+		estruturas básicas utilizadas pelo i3geo na apresentação de dados e montagem das camadas que são vistas no mapa.<br>
+		Após criados os mapfiles, deve-se ainda definir as características de cada tema.<br>
+		A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php	
+	</div>
+	<div class="ft"></div>
+</div>
+<input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
+<br><br>
+Além de criar os mapfiles, deve-se definir as características de cada tema antes de montar os menus. Para definir essas 
+características, clique <a href="listatemas.html" >aqui.</a><br>
+<p>Mapfiles:</p>
+<div id="tabela" style="left:-5px;"></div>
+</div>
+<div id=logajax style="display:block" ></div>
+<div id=dialogoContinua style="display:block" ></div>
 
 </body>
-<script>
-iniciaAdmin()
-</script>
-</html>

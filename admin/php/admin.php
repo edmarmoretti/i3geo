@@ -51,7 +51,6 @@ error_reporting(E_ALL);
 //carrega o phpmapscript
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
-include_once($locaplic."/pacotes/cpaint/cpaint2.inc.php");
 set_time_limit(120);
 //
 //verifica se o cliente pode editar
@@ -242,6 +241,12 @@ function verificaFilhos()
     		$r = pegaDados("SELECT id_raiz from i3geoadmin_raiz where nivel='1' and id_nivel ='$id'");
     		if(count($r) > 0)
     		$res = true;
+    	}
+    	if($tabela == "mapfiles")
+    	{
+    		$r = pegaDados("SELECT id_tema from i3geoadmin_temas where codigo_tema ='$id'");
+    		if(count($r) > 0)
+   			$res = true;
     	}
     	return $res;
 	}

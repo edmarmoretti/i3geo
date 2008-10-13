@@ -115,7 +115,7 @@ foreach ($menus as $menu)
 					echo "<description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
 					echo "<visibility>0</visibility>\n";      
 					echo "<Icon>\n";
-					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 					echo "<viewRefreshMode>onStop</viewRefreshMode>\n";
 					echo "<href>$l</href>\n";
 					echo "</Icon>\n";

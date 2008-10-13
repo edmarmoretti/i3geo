@@ -43,7 +43,7 @@ Free Software Foundation, Inc., no endereço
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
-$mensagemInicia = "I3Geo versão 4.1";
+$mensagemInicia = 'I3Geo versÃ£o 4.1';
 /*
 	Variable: $tituloInstituicao
 	
@@ -167,7 +167,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
-	$locmapas = "";
+	$locmapas = "../menutemas/mapas.xml";
 	/*
 	Variable: $R_path
 	

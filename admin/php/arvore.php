@@ -28,7 +28,6 @@ File: i3geo/admin/arvore.php
 
 */
 require_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {

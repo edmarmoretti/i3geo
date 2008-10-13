@@ -1,7 +1,6 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
-	//ativaBotaoAdicionaAtlas("../php/atlas.php?funcao=alterarAtlas","adiciona")
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaMenus()");

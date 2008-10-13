@@ -4,6 +4,7 @@ include_once("../../classesphp/funcoes_gerais.php");
 include_once("../../classesphp/carrega_ext.php");
 include_once("../../classesphp/pega_variaveis.php");
 error_reporting(0);
+if(!isset($forcawms)){$forcawms = "nao";}
 $objcontype[0] = "MS_INLINE";
 $objcontype[1] = "MS_SHAPEFILE";
 $objcontype[2] = "MS_TILED_SHAPEFILE";
@@ -38,9 +39,10 @@ if(!isset($tipoparse) || $tipoparse=="")
 if($tipoparse == "legenda")
 {
 	$tipoLegenda = tipoLegenda($layername);
-	//if($tipoLegenda == "simples")
-	//{legendaSimples($layername);}
-	legendaSimples($layername);
+	if($tipoLegenda == "simples")
+	{legendaSimples($layername);}
+	if($tipoLegenda == "valorunico")
+	legendaValorUnico($layername);
 }
 //
 //verifica o tipo de legenda
@@ -60,6 +62,12 @@ function tipoLegenda($layername)
 		$classe = $layer->getclass(0);
 		$expressao = $classe->getExpression();
 		if($expressao == "")
+		{return "simples";exit;}
+		$expressao = str_replace("'eq'","=");
+		$expressao = str_replace("'eq '","=");
+		$expressao = str_replace("' eq'","=");
+		$expressao = str_replace("' eq '","=");
+		if(count(explode("=",$expressao)) != 2)
 		{return "simples";exit;}
 	}
 	$verItem = array();
@@ -82,6 +90,95 @@ function tipoLegenda($layername)
 	return "valorunico";
 	else
 	return "simples";
+}
+function legendaValorUnico($layername)
+{
+	global $mapa;
+	$tipolegenda = "";
+	$layer = $mapa->getlayerbyname($layername);
+	$nclasses = $layer->numclasses;
+	$outlinecolor = array();
+	$color = array();
+	$nomes = array();
+	$valor = array();
+	//
+	$classe = $layer->getclass(0);
+	$expressao = $classe->getExpression();
+	$item = preg_replace('/.*\[|\].*/i','\1', $expressao);
+	for($i=0;$i<$nclasses;++$i)
+	{
+		$classe = $layer->getclass($i);
+		$estilo = $classe->getstyle(0);
+		$nomes[] = $classe->name;
+		$cor = $estilo->outlinecolor;
+		$outlinecolor[] = "'".$cor->red.",".$cor->green.",".$cor->blue.",255'";
+		$cor = $estilo->color;
+		$color[] = "'".$cor->red.",".$cor->green.",".$cor->blue.",255'";
+		$expressao = $classe->getExpression();
+		$expressao = str_replace("'eq","=",$expressao);
+		$expressao = str_replace("'eq ","=",$expressao);
+		$expressao = str_replace("' eq","=",$expressao);
+		$expressao = str_replace("' eq ","=",$expressao);	
+		$temp = explode("=",$expressao);
+		$temp = trim($temp[1]);
+		$temp = trim(str_replace("'","",$temp));
+		$temp = trim(str_replace(")","",$temp));
+		$valor[] = trim(str_replace("'","",$temp));
+	}
+	//
+	//monta o xml
+	//
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	$xml .= "<xml-tag xmlns='http://www.gvsig.gva.es'>\n";
+	$xml .= "<property key='className' value='com.iver.cit.gvsig.fmap.rendering.VectorialUniqueValueLegend'/>\n";
+	$xml .= "<property key='fieldName' value='$item'/>\n";
+	$xml .= "<property key='labelfield'/><property key='labelFieldHeight'/><property key='labelFieldRotation'/><property key='useDefaultSymbol' value='true'/><property key='sorter' value='true'/>\n";
+	$xml .= "<property key='numKeys' value='".(count($valor) + 1)."'/>\n";
+	$xml .= "<property key='tipoValueKeys' value='com.hardcode.gdbms.engine.values.StringValue'/>\n";
+	$xml .= "<property key='keys' value='Default ,".implode(" ,",$nomes)."'/>\n";
+	$xml .= "<property key='values' value='Default ,".implode(" ,",$valor)."'/>\n";
+	$temp = array();
+	$temp[] = "1111";
+	foreach($valor as $v)
+	{$temp[] = "-1";}
+	$temp = implode(" ,",$temp);
+	//$temp = "1111 ,-1 ,-1 ,-1 ,-1 ,-1 ,-1";
+	$xml .= "<property key='typeKeys' value='$temp'/>\n";
+    $xml .= "<property key='typeValues' value='$temp'/>\n";
+	$xml .= "<property key='followHeaderEncoding' value='true'/>\n";
+	$xml .= "<xml-tag><property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/><property key='m_symbolType' value='4'/><property key='m_Style' value='1'/><property key='m_useOutline' value='true'/><property key='m_Color' value='150,150,150,255'/><property key='m_outlineColor' value='255,255,255,255'/><property key='m_bUseFontSize' value='true'/><property key='m_bDrawShape' value='true'/><property key='m_Size' value='2'/><property key='m_Rotation' value='0'/><property key='m_LinePattern' value='0'/><property key='m_stroke' value='1.0'/><property key='m_bUseSize' value='false'/><property key='m_AlingVert' value='0'/><property key='m_AlingHoriz' value='0'/><property key='m_Descrip' value='Default'/><property key='rgb' value='-14902251'/></xml-tag>";
+	$xml .= "<xml-tag><property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/><property key='m_symbolType' value='4'/><property key='m_Style' value='1'/><property key='m_useOutline' value='true'/><property key='m_Color' value='150,150,150,255'/><property key='m_outlineColor' value='255,255,255,255'/><property key='m_bUseFontSize' value='true'/><property key='m_bDrawShape' value='true'/><property key='m_Size' value='2'/><property key='m_Rotation' value='0'/><property key='m_LinePattern' value='0'/><property key='m_stroke' value='1.0'/><property key='m_bUseSize' value='false'/><property key='m_AlingVert' value='0'/><property key='m_AlingHoriz' value='0'/><property key='m_Descrip' value='Default'/><property key='rgb' value='-14902251'/></xml-tag>\n";
+	$c = count($valor);
+	for($i=0;$i<$c;++$i)
+	{
+		$xml .= "<xml-tag>\n";
+		$xml .= "<property key='className' value='com.iver.cit.gvsig.fmap.core.v02.FSymbol'/>\n";
+		$xml .= "<property key='m_symbolType' value='4'/>\n";
+		$xml .= "<property key='m_Style' value='1'/>\n";
+		$temp = "true";
+		if($outlinecolor[$i] == "'-1,-1,-1,255'"){$temp = "false";}
+		$xml .= "<property key='m_useOutline' value='$temp'/>\n";
+		if($color[$i] != "'-1,-1,-1,255'")
+		$xml .= "<property key='m_Color' value=$color[$i]/>\n";
+		if($temp != "false")
+		$xml .= "<property key='m_outlineColor' value=$outlinecolor[$i]/>\n";
+		$xml .= "<property key='m_bUseFontSize' value='true'/>\n";
+		$xml .= "<property key='m_bDrawShape' value='true'/>\n";
+		$xml .= "<property key='m_Size' value='2'/>\n";
+		$xml .= "<property key='m_Rotation' value='0'/>\n";
+		$xml .= "<property key='m_LinePattern' value='0'/>\n";
+		$xml .= "<property key='m_stroke' value='1.0'/>\n";
+		$xml .= "<property key='m_bUseSize' value='false'/>\n";
+		$xml .= "<property key='m_AlingVert' value='0'/>\n";
+		$xml .= "<property key='m_AlingHoriz' value='0'/>\n";
+		$xml .= "<property key='m_Descrip' value='$nomes[$i]'/>\n";
+		$xml .= "<property key='rgb' value='-16145084'/>\n";
+		$xml .= "</xml-tag>\n";
+	}
+	$xml .= "</xml-tag>\n";
+	echo header("Content-type: application/xml");
+	echo $xml;
+	exit;		
 }
 function legendaSimples($layername)
 {
@@ -132,7 +229,7 @@ function legendaSimples($layername)
 //
 function mapfile()
 {
-	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes;
+	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms;
 	$layers = $mapa->getalllayernames();
 	$dados = array(); 
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
@@ -165,7 +262,7 @@ function mapfile()
 		$ct = $objcontype[$layer->connectiontype];
 		$tagLegenda = "parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda";
 		$nomeLayer = $layer->name;
-		if ($ct == "MS_SHAPEFILE" || $ct == "" || $ct == "MS_RASTER" && $ct != "MS_WMS")
+		if ($forcawms == "sim" || $ct == "MS_SHAPEFILE" || $ct == "" || $ct == "MS_RASTER" && $ct != "MS_WMS")
 		{
 			$ct = "MS_WMS";
 			$d =  "http://".$_SERVER['HTTP_HOST'].str_replace("/admin/php/parsemapfile.php","",$_SERVER['PHP_SELF'])."/ogc.php?tema=".$codigoLayer;

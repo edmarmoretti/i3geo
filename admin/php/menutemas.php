@@ -29,7 +29,6 @@ File: i3geo/admin/mapfiles.php
 */
 error_reporting(0);
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
