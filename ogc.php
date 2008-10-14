@@ -157,7 +157,6 @@ foreach ($_GET as $k=>$v)
 	{$tema = $v;}
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
-
 }
 if(isset($tema))
 {$tipo = "";}
@@ -211,13 +210,27 @@ if ($tipo == "")
 			{
 				if ($postgis_mapa != "")
 				{
-					if ($l->connectiontype == MS_POSTGIS)
+				if ($layer->connectiontype == MS_POSTGIS)
+				{
+					$lcon = $l->connection;
+					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 					{
-						if(!is_array($postgis_mapa))
-						$l->set("connection",$postgis_mapa);
+						//
+						//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+						//				
+						if(($lcon == " ") || ($lcon == ""))
+						{
+							$l->set("connection",$postgis_mapa);
+							$l->setmetadata("CONEXAOORIGINAL",$lcon);
+						}
 						else
-						$l->set("connection",$postgis_mapa[$l->connection]);
+						{
+							$l->set("connection",$postgis_mapa[$lcon]);
+							$l->setmetadata("CONEXAOORIGINAL",$lcon);
+						}					
 					}
+				}
+
 				}
 			}
 			autoClasses(&$l,$oMap);
@@ -277,12 +290,10 @@ else
 		}
 	}
 }
-
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 header("Content-type: $contenttype");
 ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
-
 ?>
