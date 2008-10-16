@@ -18,13 +18,13 @@ FONTSET   "../symbols/fontes.txt"
 
       "wms_force_separate_request"	"1"
 
-      "formatosinfo"	"text/plain,application/vnd.ogc.gml"
-
       "wms_name"	"bioma"
 
-      "wms_format"	"image/png"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml"
 
       "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+
+      "wms_format"	"image/png"
 
       "wms_connectiontimeout"	"30"
 
@@ -65,6 +65,10 @@ FONTSET   "../symbols/fontes.txt"
         SYMBOL 0
 
       END
+
+    END
+
+    CLASS
 
     END
 

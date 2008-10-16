@@ -1,16 +1,17 @@
-YAHOO.namespace("example.container");
-function initMenu()
+//YAHOO.namespace("example.container");
+function initEditorMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=")
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu")
 	core_carregando("ativa");
-	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaPerfis("pegaMenus()");
+	//core_ativaPainelAjuda("ajuda","botaoAjuda");
+	//core_pegaPerfis("pegaMenus_M()");
+	pegaMenus_M()
 }
-function pegaMenus()
+function pegaMenus_M()
 {
-	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela")
+	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela_M")
 }
-function montaTabela(dados)
+function montaTabela_M(dados)
 {
     YAHOO.example.InlineCellEditing = new function()
     {
@@ -21,11 +22,11 @@ function montaTabela(dados)
         };
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
@@ -77,7 +78,7 @@ function montaTabela(dados)
 			if (column.key == 'excluir')
 			{
 				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_menu'),target);
+				excluiLinha_M(record.getData('id_menu'),target);
 			}
 			else
 			{
@@ -108,7 +109,7 @@ function montaTabela(dados)
     };
     core_carregando("desativa");
 }
-function gravaLinha(row)
+function gravaLinha_M(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);
 	var publicado_menu = r.getData("publicado_menu");
@@ -122,10 +123,10 @@ function gravaLinha(row)
 	var mensagem = " gravando registro "+id_menu
 	core_gravaLinha(mensagem,row,sUrl)
 }
-function excluiLinha(id,row)
+function excluiLinha_M(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=menus";
 	core_excluiLinha(sUrl,row,mensagem)
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);
+//YAHOO.util.Event.addListener(window, "load", initMenu);

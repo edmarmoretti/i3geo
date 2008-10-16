@@ -1,17 +1,18 @@
-YAHOO.namespace("example.container");
-function initMenu()
+//YAHOO.namespace("example.container");
+function initEditorGrupos()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos")
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraGrupos","adicionaNovoGrupo")
 	core_carregando("ativa");
-	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaPerfis("pegaGrupos()");
+	//core_ativaPainelAjuda("ajuda","botaoAjuda");
+	//core_pegaPerfis("pegaGrupos()");
+	pegaGrupos_G()
 }
 //core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela")
-function pegaGrupos()
+function pegaGrupos_G()
 {
-	core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela")
+	core_pegaDados("buscando grupos...","../php/menutemas.php?funcao=pegaGrupos","montaTabela_G")
 }
-function montaTabela(dados)
+function montaTabela_G(dados)
 {
     YAHOO.example.InlineCellEditing = new function()
     {
@@ -27,11 +28,11 @@ function montaTabela(dados)
 
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha_G(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
@@ -101,7 +102,7 @@ function montaTabela(dados)
     };
     core_carregando("desativa");
 }
-function gravaLinha(row)
+function gravaLinha_G(row)
 {
 	var r = myDataTable.getRecordSet().getRecord(row);
 	var id_grupo = r.getData("id_grupo");
@@ -112,10 +113,10 @@ function gravaLinha(row)
 	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo;
 	core_gravaLinha(mensagem,row,sUrl)
 }
-function excluiLinha(id,row)
+function excluiLinha_G(id,row)
 {
 	var mensagem = " excluindo o registro do id= "+id;
 	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=grupos";
 	core_excluiLinha(sUrl,row,mensagem)
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);
+//YAHOO.util.Event.addListener(window, "load", initMenu);

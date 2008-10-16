@@ -68,7 +68,23 @@ switch ($funcao)
 		retornaJSON(excluirLayer());
 		exit;
 	break;	
-	
+	case "listaClasses":
+		retornaJSON(listaClasses());
+		exit;
+	break;
+	case "criarNovaClasse":
+		retornaJSON(criarNovaClasse());
+		exit;
+	break;
+	case "excluirClasse":
+		excluirClasse();
+		retornaJSON(listaClasses());
+		exit;
+	break;
+	case "listaEstilos":
+		retornaJSON(listaEstilos());
+		exit;
+	break;	
 	
 	
 	case "pegaCaracteristicasGerais":
@@ -83,10 +99,6 @@ switch ($funcao)
 	$cp->set_data(pegaClasses());
 	$cp->return_data();
 	break;		
-	case "pegaEstilos":
-	$cp->set_data(pegaEstilos());
-	$cp->return_data();
-	break;
 	case "alteraLayer":
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(alteraLayer());
@@ -116,68 +128,41 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 
-	case "adicionarClasse":
-	substituiCon($map_file,$postgis_mapa);
-	$cp->set_data(adicionarClasse());
-	$cp->return_data();
-	break;
-	case "excluirClasse":
-	substituiCon($map_file,$postgis_mapa);
-	$cp->set_data(excluirClasse());
-	$cp->return_data();
-	break;
 	case "adicionarEstilo":
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(adicionarEstilo());
 	$cp->return_data();
 	break;
 }
-function adicionarEstilo()
+function criarNovoMap()
 {
-	global $codigoMap,$codigoLayer,$codigoClasse;
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = $nl->getclass($codigoClasse);
-	$nestilo = ms_newStyleObj($classObj);
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
-}
-function excluirClasse()
-{
-	global $codigoMap,$codigoLayer,$codigoClasse;
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = $nl->getclass($codigoClasse);
-	$classObj->set("status",MS_DELETE);
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
-}
-function adicionarClasse()
-{
-	global $codigoMap,$codigoLayer;
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = ms_newClassObj($nl);
-	$classObj->set("name"," ");
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
-}
-function excluirLayer()
-{
-	global $codigoMap,$codigoLayer,$locaplic;
-	$mapfile = $locaplic."/temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$nl = $mapa->getlayerbyname($codigoLayer);
-	$nl->set("status",MS_DELETE);
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
+	global $nome,$codigo;
+	$arq = "../../temas/".$codigo.".map";
+	if(!file_exists($arq))
+	{
+		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
+		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
+		$dados[] = "LAYER";
+		$dados[] = "	NAME base";
+		$dados[] = "	TYPE line";
+		$dados[] = '	DATA ""';
+		$dados[] = '	METADATA';
+		$dados[] = '		TEMA "'.$nome.'"';
+		$dados[] = '	METADATA';
+		$dados[] = "END";
+		$dados[] = "END";
+		$fp = fopen($arq,"w");
+		foreach ($dados as $dado)
+		{
+			fwrite($fp,$dado."\n");
+		}
+    	require_once("conexao.php");
+    	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
+    	$dbh = null;
+    	$dbhw = null;
+		return "ok";
+	}
+	return "erro";
 }
 function criarNovoLayer()
 {
@@ -192,6 +177,118 @@ function criarNovoLayer()
 	removeCabecalho($mapfile);
 	return array("layers"=>(array($nl->name)));
 }
+function criarNovaClasse()
+{
+	global $codigoMap,$codigoLayer,$locaplic;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$nl = $mapa->getlayerbyname($codigoLayer);
+	$nclasses = $nl->numclasses;
+	$classe = ms_newClassObj($nl);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	$dados[] = array("indice"=>($nclasses),"nome"=>(""));
+	return $dados;
+}
+function pegaLayers()
+{
+	global $codigoMap,$locaplic;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layers = $mapa->getalllayernames();
+	$dados["layers"] = $layers;
+	return $dados;
+}
+function listaClasses()
+{
+	global $codigoMap,$codigoLayer,$locaplic;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$nclasses = $layer->numclasses;
+	for($i=0;$i<$nclasses;++$i)
+	{
+		$classe = $layer->getclass($i);
+		$dados[] = array("indice"=>$i,"nome"=>($classe->name));
+	}
+	return $dados;
+}
+function listaEstilos()
+{
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$classe = $layer->getclass($indiceClasse);
+	$numestilos = $classe->numstyles;
+	for($i=0;$i<$numestilos;++$i)
+	{
+		$dados[] = array("estilo"=>$i);
+	}
+	return $dados;
+}
+
+function excluirLayer()
+{
+	global $codigoMap,$codigoLayer,$locaplic;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$nl = $mapa->getlayerbyname($codigoLayer);
+	$nl->set("status",MS_DELETE);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
+function excluirClasse()
+{
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$nl = $mapa->getlayerbyname($codigoLayer);
+	$classObj = $nl->getclass($indiceClasse);
+	$classObj->set("status",MS_DELETE);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function adicionarEstilo()
+{
+	global $codigoMap,$codigoLayer,$codigoClasse;
+	$mapfile = "../../temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$nl = $mapa->getlayerbyname($codigoLayer);
+	$classObj = $nl->getclass($codigoClasse);
+	$nestilo = ms_newStyleObj($classObj);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
+
+
 function pegaFontes()
 {
 	$arq = "../../symbols/fontes.txt";
@@ -364,6 +461,11 @@ function alteraLayer()
 	removeCabecalho($mapfile);
 	return "ok";
 }
+
+
+
+
+
 function removeCabecalho($arq)
 {
 	global $postgis_mapa;
@@ -391,16 +493,6 @@ function removeCabecalho($arq)
 		fwrite($handle,$f);
 	}
 	fclose($handle);
-}
-function pegaLayers()
-{
-	global $codigoMap;
-	$dados = array();
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$layers = $mapa->getalllayernames();
-	$dados["layers"] = $layers;
-	return $dados;
 }
 function pegaCaracteristicasGerais()
 {
@@ -472,18 +564,18 @@ function pegaMetadados()
 	$dados["aplicaextensao"] = $layer->getmetadata("aplicaextensao");
 	return $dados;
 }
-function pegaClasses()
+function pegaDadosClasse()
 {
-	global $codigoMap,$codigoLayer;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
-	$mapfile = "../../temas/".$codigoMap.".map";
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$nclasses = $layer->numclasses;
 	for($i=0;$i<$nclasses;++$i)
 	{
 		$classe = $layer->getclass($i);
-		$temp["name"] = mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1");
+		$temp["name"] = $classe->name;
 		$temp["expression"] = $classe->getExpression();
 		$temp["keyimage"] = $classe->keyimage;
 		$temp["maxscale"] = $classe->maxscale;
@@ -493,7 +585,7 @@ function pegaClasses()
 		$temp["size"] = $classe->size;
 		$temp["status"] = $classe->status;
 		$temp["symbolname"] = $classe->symbolname;
-		$temp["text"] = mb_convert_encoding(($classe->getTextString()),"UTF-8","ISO-8859-1");
+		$temp["text"] = $classe->getTextString();
 		$temp["type"] = $classe->type;
 		$label = $classe->label;
 		if ($label != "")
@@ -534,7 +626,7 @@ function pegaClasses()
 	}
 	return $dados;
 }
-function pegaEstilos()
+function pegaDadosEstilo()
 {
 	global $codigoMap,$codigoLayer;
 	$dados = array();
@@ -574,34 +666,5 @@ function pegaEstilos()
 	}
 	return $dados;
 }
-function criarNovoMap()
-{
-	global $nome,$codigo;
-	$arq = "../../temas/".$codigo.".map";
-	if(!file_exists($arq))
-	{
-		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
-		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
-		$dados[] = "LAYER";
-		$dados[] = "	NAME base";
-		$dados[] = "	TYPE line";
-		$dados[] = '	DATA ""';
-		$dados[] = '	METADATA';
-		$dados[] = '		TEMA "'.$nome.'"';
-		$dados[] = '	METADATA';
-		$dados[] = "END";
-		$dados[] = "END";
-		$fp = fopen($arq,"w");
-		foreach ($dados as $dado)
-		{
-			fwrite($fp,$dado."\n");
-		}
-    	require_once("conexao.php");
-    	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
-    	$dbh = null;
-    	$dbhw = null;
-		return "ok";
-	}
-	return "erro";
-}
+
 ?>

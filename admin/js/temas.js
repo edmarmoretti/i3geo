@@ -177,8 +177,8 @@ function montaNosRaiz(redesenha)
 	var nos = new Array()
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
-		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluir('mapfile','"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
-		var d = {html:conteudo,codigoMap:$mapfiles[i]};
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
+		var d = {html:conteudo,id:$mapfiles[i],codigoMap:$mapfiles[i]};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 		nos.push(tempNode)
 	}
@@ -188,6 +188,7 @@ function montaNosRaiz(redesenha)
 }
 function montaRaizTema(no,dados)
 {
+	var codigoMap = no.data.codigoMap;
 	function iconMode()
 	{
 		var newVal = parseInt(this.value);
@@ -196,13 +197,13 @@ function montaRaizTema(no,dados)
 	}
     function loadLayerData(node, fnLoadComplete)
     {
-		var sUrl = "../php/arvore.php?funcao=pegaTemas&id_n2="+node.data.id_n2;
+		var sUrl = "../php/temas.php?funcao=listaClasses&codigoMap="+node.data.codigoMap+"&codigoLayer="+node.data.codigoLayer;
 		var callback =
 		{
             success: function(oResponse)
             {
                 var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-				//montaTemas(idmenu,node,dados,false)
+				montaParametrosTemas(node,dados,false)
                 oResponse.argument.fnLoadComplete();
             },
             failure: function(oResponse)
@@ -230,12 +231,115 @@ function montaRaizTema(no,dados)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+no.data.codigoMap+"','"+dados.layers[i]+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+dados.layers[i]+"</span>"
-		var d = {html:conteudo,id:no.data.codigoMap+"_"+dados.layers[i]}
+		var d = {html:conteudo,id:codigoMap+"_"+dados.layers[i],codigoMap:codigoMap,codigoLayer:dados.layers[i]}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.setDynamicLoad(loadLayerData, iconMode);
+		tempNode.isLeaf = false;
 	}
 	tree.draw();
 }
+function montaParametrosTemas(no,dados,redesenha)
+{
+	var codigoMap = no.data.codigoMap;
+	var codigoLayer = no.data.codigoLayer
+	function iconMode()
+	{
+		var newVal = parseInt(this.value);
+		if (newVal != currentIconMode)
+		{currentIconMode = newVal;}
+	}
+    function loadClasseData(node, fnLoadComplete)
+    {
+		var indiceClasse = node.data.indiceClasse;
+		var sUrl = "../php/temas.php?funcao=listaEstilos&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+		var callback =
+		{
+            success: function(oResponse)
+            {
+                var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
+				montaParametrosClasses(node,dados,false)
+                oResponse.argument.fnLoadComplete();
+            },
+            failure: function(oResponse)
+            {
+                oResponse.argument.fnLoadComplete();
+            },
+            argument:
+            {
+                "node": node,
+                "fnLoadComplete": fnLoadComplete
+            },
+            timeout: 7000
+        };
+        YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
+    }
+    if(!tree.getNodeByProperty("etiquetaConexao",no.data.id))
+    {
+		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorConexao('"+codigoMap+"','"+codigoLayer+"')\" title='edita conexão' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaConexao",etiquetaConexao:no.data.id,html:conteudo+" Editar conexão"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+    if(!tree.getNodeByProperty("etiquetaMetadados",no.data.id))
+    {
+		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" title='edita metadados' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:no.data.id,html:conteudo+" Editar metadados"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+    if(!tree.getNodeByProperty("etiquetaGeral",no.data.id))
+    {
+		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorGeral('"+codigoMap+"','"+codigoLayer+"')\" title='parâmetros gerais' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaGeral",etiquetaGeral:no.data.id,html:conteudo+" Editar dados gerais"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+    if(!tree.getNodeByProperty("etiquetaClasses",no.data.id))
+    {
+		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaClasse('"+codigoMap+"','"+codigoLayer+"')\" title='adiciona classe' src=\"../imagens/05.png\" />&nbsp;"
+		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasses('"+codigoMap+"','"+codigoLayer+"')\" title='classes' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaClasses",etiquetaClasses:no.data.id,html:conteudo+"<i>&nbsp;Classes:</i>"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	for (var i=0, j=dados.length; i<j; i++)
+	{
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;"
+		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
+		var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+dados[i].indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:dados[i].indice}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.setDynamicLoad(loadClasseData, iconMode);
+		tempNode.isLeaf = false;
+	}
+	tree.draw();
+}
+function montaParametrosClasses(no,dados,redesenha)
+{
+	var codigoMap = no.data.codigoMap;
+	var codigoLayer = no.data.codigoLayer
+	var indiceClasse = no.data.indiceClasse
+    if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
+    {
+		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='adiciona estilo' src=\"../imagens/05.png\" />&nbsp;"
+		var d = {tipo:"etiquetaEstilo",etiquetaEstilo:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+"<i>Estilos:</i>"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	for (var i=0, j=dados.length; i<j; i++)
+	{
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;"
+		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].estilo+"</span>"
+		var d = {html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+"_"+indiceClasse+"_"+dados[i].estilo,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indiceClasse,indiceEstilo:dados[i].estilo}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+	tree.draw();
+}
+
 function adicionaNovoMapfile()
 {
 	core_carregando("ativa");
@@ -263,9 +367,9 @@ function adicionaNovoMapfile()
 					nos[0].insertBefore(noi);
 					tree.draw();
 					core_carregando("desativa");
+					YAHOO.example.container.panelEditor.destroy();
+					YAHOO.example.container.panelEditor = null;
 				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
 			}
 			catch(e){core_handleFailure(e,o.responseText);}
 		},
@@ -297,8 +401,6 @@ function adicionaNovoLayer(codigoMap)
 					montaRaizTema(no,dados)
 					core_carregando("desativa");
 				}
-				YAHOO.example.container.panelEditor.destroy();
-				YAHOO.example.container.panelEditor = null;
 			}
 			catch(e){core_handleFailure(e,o.responseText);}
 		},
@@ -307,12 +409,85 @@ function adicionaNovoLayer(codigoMap)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
-
+function adicionaClasse(codigoMap,codigoLayer,indiceClasse)
+{
+	core_carregando("ativa");
+	core_carregando(" adicionando uma nova classe");
+	sUrl = "../php/temas.php?funcao=criarNovaClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
+	var callback =
+	{
+		success:function(o)
+		{
+			try
+			{
+				if(YAHOO.lang.JSON.parse(o.responseText) == "erro")
+				{
+					core_carregando("<span style=color:red >Erro</span>");
+					setTimeout("core_carregando('desativa')",3000)
+				}
+				else
+				{
+					var dados = YAHOO.lang.JSON.parse(o.responseText)				
+					var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
+					montaParametrosTemas(no,dados)
+					core_carregando("desativa");
+				}
+			}
+			catch(e){core_handleFailure(e,o.responseText);}
+		},
+		failure:core_handleFailure,
+		argument: { foo:"foo", bar:"bar" }
+	}; 
+	core_makeRequest(sUrl,callback)
+}
+function excluirMapfile(codigoMap)
+{
+	var mensagem = " excluindo "+codigoMap;
+	var no = tree.getNodeByProperty("id",codigoMap)
+	var sUrl = "../php/temas.php?funcao=excluirMapfile&codigoMap="+codigoMap;
+	core_excluiNoTree(sUrl,no,mensagem)	
+}
 function excluirLayer(codigoMap,codigoLayer)
 {
 	var mensagem = " excluindo "+codigoLayer;
 	var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
 	var sUrl = "../php/temas.php?funcao=excluirLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_excluiNoTree(sUrl,no,mensagem)	
+}
+function excluirClasse(codigoMap,codigoLayer,indiceClasse)
+{
+	var handleYes = function()
+	{
+		this.hide();
+		core_carregando("ativa");
+		var mensagem = " excluindo "+indiceClasse;
+		core_carregando(mensagem);
+		var sUrl = "../php/temas.php?funcao=excluirClasse&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+		var callback =
+		{
+			success:function(o)
+			{
+				try
+				{
+					var dados = YAHOO.lang.JSON.parse(o.responseText)
+					var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer)
+					for (var i=0, j=nos.length; i<j; i++)
+					{tree.removeNode(nos[i],false)}
+					var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
+					core_carregando("desativa");
+					montaParametrosTemas(no,dados)
+				}
+				catch(e){core_handleFailure(e,o.responseText);}
+			},
+			failure:core_handleFailure,
+			argument: { foo:"foo", bar:"bar" }
+		};	
+		core_makeRequest(sUrl,callback)
+	}
+	var handleNo = function()
+	{this.hide();};
+	var mensagem = "Exclui a classe?";
+	var largura = "300"
+	core_dialogoContinua(handleYes,handleNo,mensagem,largura)
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

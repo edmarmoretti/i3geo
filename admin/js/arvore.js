@@ -1,12 +1,39 @@
 YAHOO.namespace("example.container");
 function initMenu()
 {
+	var editorDeMenus = function()
+	{
+		core_montaEditor("","600px","500px")
+		YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", pegaMenus);
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		initEditorMenu()
+	};
+	var editorDeGrupos = function()
+	{
+		core_montaEditor("","600px","500px")
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		initEditorGrupos()
+	};
+	var editorDeSubGrupos = function()
+	{
+		core_montaEditor("","600px","500px")
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		initEditorSubGrupos()
+	};
+
+	var botao1 = new YAHOO.widget.Button("botaoEditorMenu",{ onclick: { fn: editorDeMenus } });
+	var botao2 = new YAHOO.widget.Button("botaoEditorGrupo",{ onclick: { fn: editorDeGrupos } });
+	var botao3 = new YAHOO.widget.Button("botaoEditorSubGrupo",{ onclick: { fn: editorDeSubGrupos } });
+
 	core_carregando("ativa");
 	core_ativaPainelAjuda("ajuda","botaoAjuda");
 	core_pegaPerfis("pegaMenus()");
 }
 function pegaMenus()
 {
+	try
+	{YAHOO.util.Event.removeListener(YAHOO.example.container.panelEditor.close, "click");}
+	catch(e){}
 	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaArvore")
 }
 function montaArvore(dados)
@@ -48,7 +75,7 @@ function montaArvore(dados)
         }
         function buildTree()
         {
-			tree = new YAHOO.widget.TreeView("tabela");
+			tree = new YAHOO.widget.TreeView("arvoreMenus");
 			tree.setDynamicLoad(loadNodeData, currentIconMode);
 			var root = tree.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);

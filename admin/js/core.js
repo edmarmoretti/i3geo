@@ -674,16 +674,16 @@ function core_menuCheckBox(valores,textos,selecionados,target,record,key)
 		ndiv.className= "yui-dt-editor";
 		ndiv.style.height = "144px";
 		ndiv.style.overflow = "auto";
-		ndiv.innerHTML = "<div id='okcancel_checkbox'></div><div id='core_menuCK_bd'></div>";
+		ndiv.innerHTML = "<div id='core_menuCK_bd'></div>";
 		novoel.appendChild(ndiv);
 		document.body.appendChild(novoel);
-		var og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		var og_core = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:"okcancel_checkbox_id", container:"core_menuCK_bd" });
 		og_core.addButtons([
             { label: "OK", value: "OK", checked: false},
             { label: "Cancel", value: "CANCEL", checked: false }
         ]);
 		og_core.on("checkedButtonChange", on_menuCheckBoxChange);	
-		YAHOO.example.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelCK = new YAHOO.widget.Overlay("core_menuCK", { zindex:"100",close:false,underlay:false,width:"200px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelCK.render();
 	}
 	var onde = $i("core_menuCK_bd");
@@ -1002,21 +1002,35 @@ Parameters:
 
 funcaoOK - string com o nome da função que será executada quando o botão OK for pressionado.
 */
-function core_montaEditor(funcaoOK)
+function core_montaEditor(funcaoOK,w,h)
 {	
-	function on_editorCheckBoxChange(p_oEvent)
+	if(arguments.length == 0)
 	{
-		var ins = "";
-		if(p_oEvent.newValue.get("value") == "OK")
+		var funcaoOK = "";
+		var w = "400px";
+		var h = w;
+	}
+	if(arguments.length < 2)
+	{
+		var w = "400px";
+		var h = w;
+	}
+	if(funcaoOK != "")
+	{
+		function on_editorCheckBoxChange(p_oEvent)
 		{
-			eval(funcaoOK);
-		}
-		else
-		{
-			YAHOO.example.container.panelEditor.destroy();
-			YAHOO.example.container.panelEditor = null;
-		}
-	};
+			var ins = "";
+			if(p_oEvent.newValue.get("value") == "OK")
+			{
+				eval(funcaoOK);
+			}
+			else
+			{
+				YAHOO.example.container.panelEditor.destroy();
+				YAHOO.example.container.panelEditor = null;
+			}
+		};
+	}
 	if(!YAHOO.example.container.panelEditor)
 	{
 		var novoel = document.createElement("div");
@@ -1026,13 +1040,16 @@ function core_montaEditor(funcaoOK)
 		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
-		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
-		editorBotoes.addButtons([
-            { label: "Salva", value: "OK", checked: false},
-            { label: "Cancela", value: "CANCEL", checked: false }
-        ]);
-		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		if(funcaoOK != "")
+		{
+			var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+			editorBotoes.addButtons([
+            	{ label: "Salva", value: "OK", checked: false},
+            	{ label: "Cancela", value: "CANCEL", checked: false }
+        	]);
+			editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		}
+		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditor.render();
 	}
 	YAHOO.example.container.panelEditor.show();
