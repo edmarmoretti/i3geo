@@ -51,13 +51,12 @@ error_reporting(E_ALL);
 //carrega o phpmapscript
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
-set_time_limit(120);
 //
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico
 //
 if($funcao != "verificaEditores")
-{if(verificaEditores($editores) == "nao"){exit;}}
+{if(verificaEditores($editores) == "nao"){echo "vc nao e um editor cadastrado";exit;}}
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$mapfile = "geral1windows";
@@ -80,9 +79,22 @@ if($funcao == "limpar")
 }
 function retornaJSON($obj)
 {
-	if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
-	echo json_encode($obj);
-	if(extension_loaded('zlib')){ob_end_flush();}
+	global $locaplic;
+	//
+	//para os casos em que json não está habilitado
+	//
+	if (!function_exists("json_encode"))
+	{
+		include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
+		$j = new Services_JSON();
+		echo $j->encode($obj);
+	}
+	else
+	{
+		if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
+		echo json_encode($obj);
+		if(extension_loaded('zlib')){ob_end_flush();}
+	}
 	exit;
 }
 function verificaDuplicados($sql,$dbh)

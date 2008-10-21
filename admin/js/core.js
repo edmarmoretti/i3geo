@@ -794,7 +794,11 @@ function core_geraLinhas(dados)
 			if(p.texto)
 			resultado += "<span style=color:gray >"+p.texto+"</span</p>"
 			if(p.id != "")
-			resultado += "<input size="+p.size+" type=text id="+p.id+" value='"+p.value+"' /></p>"
+			{
+				if(!p.value)
+				p.value = ""
+				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" /></p>"
+			}
 			if(p.div)
 			{resultado += p.div;}
 		}

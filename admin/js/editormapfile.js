@@ -299,7 +299,7 @@ function montaParametrosTemas(no,dados,redesenha)
     if(!tree.getNodeByProperty("etiquetaClasses",no.data.id))
     {
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" title='adiciona classe' src=\"../imagens/05.png\" />&nbsp;"
-		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasses('"+codigoMap+"','"+codigoLayer+"')\" title='classes' src=\"../imagens/06.png\" />"
+		//conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasses('"+codigoMap+"','"+codigoLayer+"')\" title='classes' src=\"../imagens/06.png\" />"
 		var d = {tipo:"etiquetaClasses",etiquetaClasses:no.data.id,html:conteudo+"<i>&nbsp;Classes:</i>"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -308,8 +308,8 @@ function montaParametrosTemas(no,dados,redesenha)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;"
-		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
+		//conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
 		var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+dados[i].indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:dados[i].indice}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.setDynamicLoad(loadClasseData, iconMode);
@@ -322,6 +322,21 @@ function montaParametrosClasses(no,dados,redesenha)
 	var codigoMap = no.data.codigoMap;
 	var codigoLayer = no.data.codigoLayer
 	var indiceClasse = no.data.indiceClasse
+    if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
+    {
+		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='edita características da classe' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar características gerais"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+    if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
+    {
+		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='edita características da classe' src=\"../imagens/06.png\" />"
+		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar etiquetas"}
+		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
+		tempNode.isLeaf = true;
+	}
+
     if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
     {
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='adiciona estilo' src=\"../imagens/05.png\" />&nbsp;"
@@ -618,6 +633,18 @@ function editorGeral(codigoMap,codigoLayer)
 	var sUrl = "../php/editormapfile.php?funcao=pegaGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorGeral")
 }
+function editorClasseGeral(codigoMap,codigoLayer,indiceClasse)
+{
+	core_montaEditor("","600px","500px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaClasseGeral&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseGeral")
+}
+function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
+{
+	core_montaEditor("","600px","500px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel")
+}
 function montaEditorConexao(dados)
 {
 	var param = {
@@ -801,6 +828,70 @@ function montaEditorGeral(dados)
 	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
+function montaEditorClasseGeral(dados)
+{
+	var param = {
+		"linhas":[
+		{ajuda:"Nome da classe para ser mostrada na legenda",
+		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
+		{ajuda:"Sets the current display status of the class. Default turns the class on",
+		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
+		{ajuda:"Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer",
+		titulo:"Expression",id:"expression",value:dados.expression,tipo:"text"},
+		{ajuda:"Full filename of the legend image for the CLASS. This image is used when building a legend (or requesting a legend icon via MapScript or the CGI application).",
+		titulo:"Keyimage",id:"keyimage",value:dados.keyimage,tipo:"text"},
+		{ajuda:"Maximum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+		titulo:"Maxscale",id:"maxscale",value:dados.maxscale,tipo:"text"},
+		{ajuda:"Minimum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
+		titulo:"Minscale",id:"minscale",value:dados.minscale,tipo:"text"}
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	if(dados.colunas != "")
+	{
+		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += dados.colunas+"</p>"
+	}
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins
+		
+	temp = "<p><select id='status' >"
+	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
+	temp += "</select>"
+	$i("cStatus").innerHTML = temp	
+
+	var temp = function()
+	{salvarDadosEditor('classeGeral',dados.codigoMap,dados.codigoLayer,dados.indiceClasse)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
+function montaEditorClasseLabel(dados)
+{
+	var param = {
+		"linhas":[
+		{ajuda:"Nome da classe para ser mostrada na legenda",
+		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	if(dados.colunas != "")
+	{
+		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
+		ins += dados.colunas+"</p>"
+	}
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins
+/*		
+	temp = "<p><select id='status' >"
+	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
+	temp += "</select>"
+	$i("cStatus").innerHTML = temp	
+*/
+	var temp = function()
+	{salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+}
 
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
@@ -822,7 +913,12 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarGeral"
 	}
-
+	if(tipo == "classeGeral")
+	{
+		var campos = new Array("status","minscale","maxscale","name","expression","keyimage")
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
+		var prog = "../php/editormapfile.php?funcao=alterarClasseGeral"	
+	}
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]).value)}
 	core_carregando("ativa");
@@ -857,6 +953,8 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 							YAHOO.example.container.panelEditor = null;  							
   						}
   					}
+  					if(tipo=="classeGeral")
+  					{montaEditorClasseGeral(YAHOO.lang.JSON.parse(o.responseText));}
 
   					core_carregando("desativa");
   				}

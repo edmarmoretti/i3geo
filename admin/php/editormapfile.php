@@ -35,33 +35,6 @@ error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	case "pegaTextoMapfile":
-		$arquivo = $locaplic."/temas/".$codigoMap.".map";
-		$handle = fopen($arquivo, "r");
-    	$final = "";
-    	while (!feof($handle)) 
-    	{
-        	$linha = fgets($handle);
-        	$final .= rtrim($linha, "\r\n") . PHP_EOL;
-    	}
-    	fclose($handle);
-		retornaJSON($final);
-		exit;
-	break;
-	case "salvaTextoMapfile":
-		$texto = str_replace('\"\"','" "',$texto);
-		$texto = str_replace('\"','"',$texto);
-		$texto = str_replace('xxxxxxxx',PHP_EOL,$texto);
-		/*
-		$arquivo = $locaplic."/temas/".$codigoMap.".map";
-		$fp = fopen($arquivo, 'w');
-		fwrite($fp, $texto);
-		fclose($fp);
-		retornaJSON(file_get_contents($arquivo));
-		*/
-		retornaJSON($texto);
-		exit;
-	break;
 	case "pegaMapfiles":
 		retornaJSON(pegaLayers());
 		exit;
@@ -150,6 +123,19 @@ switch ($funcao)
 		alterarGeral();
 		$codigoLayer = $name;
 		retornaJSON(pegaGeral());
+		exit;
+	break;
+	case "pegaClasseGeral":
+		retornaJSON(pegaClasseGeral());
+		exit;
+	break;
+	case "alterarClasseGeral":
+		alterarClasseGeral();
+		retornaJSON(pegaClasseGeral());
+		exit;
+	break;
+	case "pegaClasseLabel":
+		retornaJSON(pegaClasseLabel());
 		exit;
 	break;
 }
@@ -443,7 +429,6 @@ function pegaGeral()
 	}
 	if($dados["projection"] == "null")
 	$dados["projection"] = "";
-	
 	$dados["colunas"] = $colunas;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
@@ -493,8 +478,109 @@ function alterarGeral()
 	removeCabecalho($mapfile);
 	return "ok";	
 }
-
-
+function pegaClasseGeral()
+{
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$classe = $layer->getclass($indiceClasse);
+	$dados["name"] = $classe->name;
+	$dados["expression"] = $classe->getExpression();
+	$dados["keyimage"] = $classe->keyimage;
+	$dados["maxscale"] = $classe->maxscale;
+	$dados["minscale"] = $classe->minscale;
+	$dados["status"] = $classe->status;
+	$dados["text"] = $classe->getTextString();
+	$dados["codigoMap"] = $codigoMap;
+	$dados["codigoLayer"] = $codigoLayer;
+	$dados["indiceClasse"] = $indiceClasse;
+	$colunas = "";
+	if($layer->type < 3)
+	{
+		if(@$layer->open())
+		{
+			$layer->open();
+			$colunas = implode(", ",$layer->getitems());
+			$layer->close();
+		}
+	}
+	return $dados;
+}
+function alterarClasseGeral()
+{
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic,$status,$minscale,$maxscale,$name,$expression,$keyimage;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$classe = $layer->getclass($indiceClasse);
+	$classe->set("name",$name);
+	$classe->setexpression($expression);
+	$classe->set("keyimage",$keyimage);
+	$classe->set("maxscale",$maxscale);
+	$classe->set("minscale",$minscale);
+	$classe->set("status",$status);
+	$mapa->save($mapfile);
+	removeCabecalho($mapfile);
+	return "ok";
+}
+function pegaClasseLabel()
+{
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	$dados = array();
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$classe = $layer->getclass($indiceClasse);
+	$label = $classe->label;
+	if ($label != "")
+	{
+		$dados["font"] = $label->font;
+		$dados["type"] = $label->type;
+		$dados["backgroundcolor"] = $label->backgroundcolor->red.",".$label->backgroundcolor->green.",".$label->backgroundcolor->blue;
+		$dados["backgroundshadowcolor"] = $label->backgroundshadowcolor->red.",".$label->backgroundshadowcolor->green.",".$label->backgroundshadowcolor->blue;
+		$dados["color"] = $label->color->red.",".$label->color->green.",".$label->color->blue;
+		$dados["outlinecolor"] = $label->outlinecolor->red.",".$label->outlinecolor->green.",".$label->outlinecolor->blue;
+		$dados["shadowcolor"] = $label->shadowcolor->red.",".$label->shadowcolor->green.",".$label->shadowcolor->blue;
+		$dados["shadowsizex"] = $label->shadowsizex;
+		$dados["shadowsizey"] = $label->shadowsizey;
+		$dados["backgroundshadowsizex"] = $label->backgroundshadowsizex;
+		$dados["backgroundshadowsizey"] = $label->backgroundshadowsizey;
+		$dados["size"] = $label->size;
+		$dados["minsize"] = $label->minsize;
+		$dados["maxsize"] = $label->maxsize;
+		$dados["position"] = $label->position;
+		$dados["offsetx"] = $label->offsetx;
+		$dados["offsety"] = $label->offsety;
+		$dados["angle"] = $label->angle;
+		$dados["autoangle"] = $label->autoangle;
+		$dados["buffer"] = $label->buffer;
+		$dados["antialias"] = $label->antialias;
+		$dados["wrap"] = $label->wrap;
+		$dados["minfeaturesize"] = $label->minfeaturesize;
+		$dados["autominfeaturesize"] = $label->autominfeaturesize;
+		$dados["mindistance"] = $label->mindistance;
+		$dados["partials"] = $label->partials;
+		$dados["force"] = $label->force;
+		$dados["encoding"] = $label->encoding;		
+	}
+	$dados["codigoMap"] = $codigoMap;
+	$dados["codigoLayer"] = $codigoLayer;
+	$dados["indiceClasse"] = $indiceClasse;
+	$colunas = "";
+	if($layer->type < 3)
+	{
+		if(@$layer->open())
+		{
+			$layer->open();
+			$colunas = implode(", ",$layer->getitems());
+			$layer->close();
+		}
+	}
+	return $dados;
+}
 
 
 
@@ -562,24 +648,7 @@ function alteraEstilo()
 	removeCabecalho($mapfile);
 	return "ok";
 }
-function alteraClasse()
-{
-	global $codigoMap,$codigoLayer,$classe,$parametro,$valor;
-	$mapfile = "../../temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$layer = $mapa->getlayerbyname($codigoLayer);
-	$classe = $layer->getclass($classe);
-	if($parametro == "text")
-	{$classe->settext($valor);}
-	elseif
-	($parametro == "expression")
-	{$classe->setexpression($valor);}	
-	else
-	$classe->set($parametro,$valor);
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
-}
+
 function alteraClasseLabel()
 {
 	global $codigoMap,$codigoLayer,$classe,$parametro,$valor;
@@ -672,68 +741,6 @@ function removeCabecalho($arq)
 	fclose($handle);
 }
 
-function pegaDadosClasse()
-{
-	global $codigoMap,$codigoLayer,$locaplic;
-	$dados = array();
-	$mapfile = $locaplic."/temas/".$codigoMap.".map";
-	$mapa = ms_newMapObj($mapfile);
-	$layer = $mapa->getlayerbyname($codigoLayer);
-	$nclasses = $layer->numclasses;
-	for($i=0;$i<$nclasses;++$i)
-	{
-		$classe = $layer->getclass($i);
-		$temp["name"] = $classe->name;
-		$temp["expression"] = $classe->getExpression();
-		$temp["keyimage"] = $classe->keyimage;
-		$temp["maxscale"] = $classe->maxscale;
-		$temp["minscale"] = $classe->minscale;
-		$temp["maxsize"] = $classe->maxsize;
-		$temp["minsize"] = $classe->minsize;
-		$temp["size"] = $classe->size;
-		$temp["status"] = $classe->status;
-		$temp["symbolname"] = $classe->symbolname;
-		$temp["text"] = $classe->getTextString();
-		$temp["type"] = $classe->type;
-		$label = $classe->label;
-		if ($label != "")
-		{
-			$t["font"] = $label->font;
-			$t["type"] = $label->type;
-			$t["backgroundcolor"] = $label->backgroundcolor->red.",".$label->backgroundcolor->green.",".$label->backgroundcolor->blue;
-			$t["backgroundshadowcolor"] = $label->backgroundshadowcolor->red.",".$label->backgroundshadowcolor->green.",".$label->backgroundshadowcolor->blue;
-			$t["color"] = $label->color->red.",".$label->color->green.",".$label->color->blue;
-			$t["outlinecolor"] = $label->outlinecolor->red.",".$label->outlinecolor->green.",".$label->outlinecolor->blue;
-			$t["shadowcolor"] = $label->shadowcolor->red.",".$label->shadowcolor->green.",".$label->shadowcolor->blue;
-			$t["shadowsizex"] = $label->shadowsizex;
-			$t["shadowsizey"] = $label->shadowsizey;
-			$t["backgroundshadowsizex"] = $label->backgroundshadowsizex;
-			$t["backgroundshadowsizey"] = $label->backgroundshadowsizey;
-			$t["size"] = $label->size;
-			$t["minsize"] = $label->minsize;
-			$t["maxsize"] = $label->maxsize;
-			$t["position"] = $label->position;
-			$t["offsetx"] = $label->offsetx;
-			$t["offsety"] = $label->offsety;
-			$t["angle"] = $label->angle;
-			$t["autoangle"] = $label->autoangle;
-			$t["buffer"] = $label->buffer;
-			$t["antialias"] = $label->antialias;
-			$t["wrap"] = $label->wrap;
-			$t["minfeaturesize"] = $label->minfeaturesize;
-			$t["autominfeaturesize"] = $label->autominfeaturesize;
-			$t["mindistance"] = $label->mindistance;
-			$t["partials"] = $label->partials;
-			$t["force"] = $label->force;
-			$t["encoding"] = $label->encoding;
-			$temp["label"] = $t;			
-		}
-		else
-		$temp["label"] = array();	
-		$dados[] = array("id"=>$i,"dados"=>$temp);
-	}
-	return $dados;
-}
 function pegaDadosEstilo()
 {
 	global $codigoMap,$codigoLayer;

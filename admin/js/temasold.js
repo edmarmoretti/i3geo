@@ -25,195 +25,12 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-contaN = 0;
-objcontype = [
-	{texto:"MS_INLINE",valor:"0"},
-	{texto:"MS_SHAPEFILE",valor:"1"},
-	{texto:"MS_TILED_SHAPEFILE",valor:"2"},
-	{texto:"MS_SDE",valor:"3"},
-	{texto:"MS_OGR",valor:"4"},
-	{texto:"MS_TILED_OGR",valor:"5"},
-	{texto:"MS_POSTGIS",valor:"6"},
-	{texto:"MS_WMS",valor:"7"},
-	{texto:"MS_ORACLESPATIAL",valor:"8"},
-	{texto:"MS_WFS",valor:"9"},
-	{texto:"MS_GRATICULE",valor:"10"},
-	{texto:"MS_MYGIS",valor:"11"},
-	{texto:"MS_RASTER",valor:"12"},
-	{texto:"MS_PLUGIN",valor:"13"}
-];
-objbool_tf = [
-	{texto:"MS_TRUE",valor:"0"},
-	{texto:"MS_FALSE",valor:"1"}
-];
-objbool_of = [
-	{texto:"MS_ON",valor:"2"},
-	{texto:"MS_OFF",valor:"3"}
-];
-objbool_yn = [
-	{texto:"MS_YES",valor:"4"},
-	{texto:"MS_NO",valor:"5"}
-];
-objmapunits = [
-	{texto:"MS_INCHES",valor:"0"},
-	{texto:"MS_FEET",valor:"1"},
-	{texto:"MS_MILES",valor:"2"},
-	{texto:"MS_METERS",valor:"3"},
-	{texto:"MS_KILOMETERS",valor:"4"},
-	{texto:"MS_DD",valor:"5"},
-	{texto:"MS_PIXELS",valor:"6"}
-];
-objlayertypes = [
-	{texto:"MS_LAYER_POINT",valor:"0"},
-	{texto:"MS_LAYER_LINE",valor:"1"},
-	{texto:"MS_LAYER_POLYGON",valor:"2"},
-	{texto:"MS_LAYER_RASTER",valor:"3"},
-	{texto:"MS_LAYER_ANNOTATION",valor:"4"},
-	{texto:"MS_LAYER_QUERY",valor:"5"},
-	{texto:"MS_LAYER_CIRCLE",valor:"6"},
-	{texto:"MS_LAYER_TILEINDEX",valor:"7"},
-	{texto:"MS_LAYER_CHART",valor:"8"}
-];
-objstatus = [
-	{texto:"MS_ON",valor:"1"},
-	{texto:"MS_OFF",valor:"0"},
-	{texto:"MS_DEFAULT",valor:"2"}
-];
-objfonttypes = [
-	{texto:"MS_TRUETYPE",valor:"0"},
-	{texto:"MS_BITMAP",valor:"1"}
-];
-objposition = [
-	{texto:"MS_UL",valor:"0"},
-	{texto:"MS_LR",valor:"1"},
-	{texto:"MS_UR",valor:"2"},
-	{texto:"MS_LL",valor:"3"},
-	{texto:"MS_CR",valor:"4"},
-	{texto:"MS_CL",valor:"5"},
-	{texto:"MS_UC",valor:"6"},
-	{texto:"MS_WMS",valor:"7"},
-	{texto:"MS_LC",valor:"8"},
-	{texto:"MS_CC",valor:"9"},
-	{texto:"MS_AUTO",valor:"10"},
-	{texto:"MS_XY",valor:"11"},
-	{texto:"MS_FOLLOW",valor:"12"}
-];
-objfontstyle = [
-	{texto:"MS_TINY",valor:"0"},
-	{texto:"MS_SMALL",valor:"1"},
-	{texto:"MS_MEDIUM",valor:"2"},
-	{texto:"MS_LARGE",valor:"3"},
-	{texto:"MS_GIANT",valor:"4"},
-];
-objshapetype = [
-	{texto:"MS_SHAPE_POINT",valor:"0"},
-	{texto:"MS_SHAPE_LINE",valor:"1"},
-	{texto:"MS_SHAPE_POLYGON",valor:"2"},
-	{texto:"MS_SHAPE_NULL",valor:"3"}
-];
-objshapefiletype = [
-	{texto:"MS_SHP_POINT",valor:"0"},
-	{texto:"MS_SHP_ARC",valor:"1"},
-	{texto:"MS_SHP_POLYGON",valor:"2"},
-	{texto:"MS_SHP_MULTIPOINT",valor:"3"}
-];
-objalignment = [
-	{texto:"MS_ALIGN_LEFT",valor:"0"},
-	{texto:"MS_ALIGN_CENTER",valor:"1"},
-	{texto:"MS_ALIGN_RIGHT",valor:"2"}
-];
 
 $i = function(i)
 {return document.getElementById(i);};
 
 YAHOO.namespace("example.container");
 
-/*
-var retorna = function(retorno)
-{
-	fontes = retorno.data;
-}
-var p = "../php/temas.php?funcao=pegaFontes";
-cPaint.call(p,"",retorna);
-*/
-
-function iniciaMenu()
-{
-	verificaEditores()
-}
-function montaParametros()
-{
-	var retorna = function(retorno)
-	{
-		ins = "<select id=temaAtivo onchange='ativaTema(this.value)'>"
-		ins += comboObjeto(retorno.data,"codigo_tema","nome_tema","")
-		ins += "</select>"
-		$i("arquivoAtivo").innerHTML = ins
-	}
-	var p = "../php/menutemas.php?funcao=pegaTemas";
-	cPaint.call(p,"",retorna);	
-}
-function adicionarLayer()
-{
-	var codigoMap = $i("temaAtivo").value
-	if(codigoMap != "")
-	{
-		var retorna = function(retorno)
-		{
-			ativaTema(codigoMap)
-		}
-		var p = "../php/temas.php?funcao=criarNovoLayer&codigoMap="+codigoMap;
-		cPaint.call(p,"",retorna);		
-	}
-}
-function criarNovoMap()
-{
-	var nome = $i("nomeNovoMap").value
-	var codigo = $i("codigoNovoMap").value
-	if(nome != "" && codigo != "")
-	{
-		var retorna = function(retorno)
-		{
-			$i("nomeNovoMap").value = ""
-			$i("codigoNovoMap").value = ""
-			$i("forms").style.display="none"
-			montaParametros()
-		}
-		var p = "../php/temas.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo;
-		cPaint.call(p,"",retorna);		
-	}
-}
-function ativaTema(codigoMap)
-{
-	var retorna = function(retorno)
-	{
-		var cl = retorno.data.layers
-		var ins = ""
-		for(c=0;c<cl.length;c++)
-		{
-			ins += "<br><fieldset><legend>+- "+cl[c]+"</legend><div >"
-			ins += "<div id='geral_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
-			ins += "<div id='metadados_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
-			ins += "<div id='classes_"+cl[c]+"_"+codigoMap+"'  >"
-			ins += "</div>"
-
-			ins += "</div></fieldset>"
-		}
-		$i("forms").innerHTML = ins
-		var ins = ""
-		for(c=0;c<cl.length;c++)
-		{
-			pegaCaracteristicasGerais(codigoMap,cl[c])
-			pegaMetadados(codigoMap,cl[c])
-			pegaClasses(codigoMap,cl[c])
-		}
-	}
-	$i("forms").style.display="block"
-	var p = "../php/temas.php?funcao=pegaLayers&codigoMap="+codigoMap;
-	cPaint.call(p,"",retorna);	
-}
 function pegaClasses(codigoMap,codigoLayer)
 {
 	var ins = "<br><fieldset style='background-color:beige'><legend>+- Classes</legend><div style=display:none >"
@@ -227,47 +44,11 @@ function pegaClasses(codigoMap,codigoLayer)
 		for(c=0;c<nc;c++)
 		{
 			d = retorna.data[c]
-			var param = {
-				"linhas":[
-					{texto:"Nome da classe para ser mostrada na legenda",
-					titulo:"name",prefixoid:"name_",id:codigoLayer+"_"+d.id,valor:"name"}
-				]
-			}
 					
-			ins += "<br><fieldset><legend>+- "+d.id+"</legend><div style=display:none >"
-			ins += "<p><input onclick=excluirClasse('"+codigoLayer+"','"+d.id+"',this) type=button value='Excluir classe' /></p>"
-			ins += "<br><fieldset><legend>+- status</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Sets the current display status of the class. Default turns the class on.</p>"
-			ins += "<p><select onchange='this.style.color=\"blue\"' id='status_"+codigoLayer+"_"+d.id+"' >"
-			ins += comboObjeto(objstatus,"valor","texto",d.dados.status)
-			ins += "</select>"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"status\",this)'/>"
-			ins += "</p></div></fieldset>"
-			
-			ins += "<br><fieldset><legend>+- expression</legend><div style=display:none >"
-			ins += "<p class=textoAjuda style='background-color:rgb(250,250,250);'>Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer.</p>"
-			ins += "<p><input type=text onchange='this.style.color=\"blue\"' id='expression_"+codigoLayer+"_"+d.id+"' value=\""+d.dados.expression+"\" />"
-			ins += "<img src=../imagens/02.png style=cursor:pointer title='Aplicar' onclick='salvarClasse(\""+codigoLayer+"_"+d.id+"\",\"expression\",this)'/>"
-			ins += "</p></div></fieldset>"
-
 			ins += (geraLinhas2(d.dados,param,"salvarClasse"));
 
 			var param = {
 				"linhas":[
-					{texto:"Full filename of the legend image for the CLASS. This image is used when building a legend (or requesting a legend icon via MapScript or the CGI application).",
-					titulo:"keyimage",prefixoid:"keyimage_",id:codigoLayer+"_"+d.id,valor:"keyimage"},
-					{texto:"Maximum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-					titulo:"maxscale",prefixoid:"maxscale_",id:codigoLayer+"_"+d.id,valor:"maxscale"},
-					{texto:"Minimum scale at which this CLASS is drawn. Scale is given as the denominator of the actual scale fraction, for example for a map at a scale of 1:24,000 use 24000.",
-					titulo:"minscale",prefixoid:"minscale_",id:codigoLayer+"_"+d.id,valor:"minscale"},
-					{texto:"Maximum size in pixels to draw a symbol. Default is 50.",
-					titulo:"maxsize",prefixoid:"maxsize_",id:codigoLayer+"_"+d.id,valor:"maxsize"},
-					{texto:"Minimum size in pixels to draw a symbol. Default is 0.",
-					titulo:"minsize",prefixoid:"minsize_",id:codigoLayer+"_"+d.id,valor:"minsize"},
-					{texto:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. For vector (and ellipse) symbol types the default size is based on the range of Y values in the POINTS defining the symbol. For pixmaps, the default is the vertical size of the image. Default size is 1 for TTF symbols.",
-					titulo:"size",prefixoid:"size_",id:codigoLayer+"_"+d.id,valor:"size"},
-					{texto:"Static text to label features in this class with. This overrides values obtained from the LABELTIEM. The string may be given as an expression delimited using the ()'s. This allows you to concatenate multiple attributes into a single label. For example: ([FIRSTNAME],[LASTNAME]).",
-					titulo:"text",prefixoid:"text_",id:codigoLayer+"_"+d.id,valor:"text"}
 				]
 			}
 
