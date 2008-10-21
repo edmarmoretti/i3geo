@@ -1,0 +1,52 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  LAYER
+    CONNECTION "http://mapas.mma.gov.br/i3geo/ogc.php?tema=bioma"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4291 EPSG:4326"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "tip"	""
+      "CLASSE"	"SIM"
+      "itensdesc"	""
+      "itenslink"	""
+      "escala"	""
+      "classesnome"	""
+      "wms_force_separate_request"	"1"
+      "wms_name"	"bioma"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml"
+      "extensao"	""
+      "mensagem"	""
+      "classessimbolo"	""
+      "classesitem"	""
+      "escondido"	""
+      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
+      "wms_format"	"image/png"
+      "download"	""
+      "classescor"	""
+      "classestamanho"	""
+      "wms_connectiontimeout"	"30"
+      "itens"	""
+      "TEMA"	"Biomas segundo IBGE-MMA"
+      "wms_server_version"	"1.1.0"
+      "identifica"	""
+      "aplicaextensao"	""
+      "wms_style"	"default"
+    END
+    NAME "atlas_biomas"
+    OFFSITE 255 255 255
+    STATUS OFF
+    TOLERANCE 0
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME "testevvvvv"
+      KEYIMAGE ""
+    END
+    CLASS
+    END
+  END
+
+END
+
