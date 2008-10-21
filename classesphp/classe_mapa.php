@@ -908,6 +908,7 @@ $desligar - lista separada por vírgula dos temas que serão desligados. Se for ig
 				foreach ($ls as $l)
 				{
 					$l = $this->mapa->getlayerbyname($l);
+					if($l)
 					$l->set("status",2);
 				}
 			}
@@ -927,6 +928,7 @@ $desligar - lista separada por vírgula dos temas que serão desligados. Se for ig
 				foreach ($ls as $l)
 				{
 					$l = $this->mapa->getlayerbyname($l);
+					if($l)
 					$l->set("status",0);
 				}
 			}
