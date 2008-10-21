@@ -314,7 +314,8 @@ class Services_JSON
                 
                 // treat as a JSON object  
                 if (is_array($var) && count($var) && (array_keys($var) !== range(0, sizeof($var) - 1))) {
-                    return "{/*Array*/" .
+                    //return "{/*Array*/" .
+                    return "{".
                            join(',', array_map(array($this, 'name_value'),
                                                array_keys($var),
                                                array_values($var)))
