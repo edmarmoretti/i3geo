@@ -13,9 +13,10 @@
             margin:0;
         	padding:0;
         }
+        #ctx { background:orange;width:200px;height:200px; }
 	</style>
 	<script type="text/javascript" src="../js/core.js"></script>
-	<script type="text/javascript" src="../js/temas.js"></script>
+	<script type="text/javascript" src="../js/editormapfile.js"></script>
 </head>
 <body class=" yui-skin-sam">
 <div style="margin:20px">
@@ -38,7 +39,7 @@
 </div>
 <input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
 <br><br>
-Além de criar os mapfiles, deve-se definir as características de cada tema antes de montar os menus.<b>
+Além de criar os mapfiles, deve-se definir as características de cada tema antes de montar os menus.<br>
 Para definir ou alterar essas características, clique <a href="listatemas.html" >aqui.</a> para abrir o editor de temas.<br>
 Para excluir um mapfile, vc deve primeiro excluir o registro na lista de temas, caso exista.<br>
 <p>Mapfiles:</p>
@@ -46,5 +47,4 @@ Para excluir um mapfile, vc deve primeiro excluir o registro na lista de temas, 
 </div>
 <div id=logajax style="display:block" ></div>
 <div id=dialogoContinua style="display:block" ></div>
-
 </body>

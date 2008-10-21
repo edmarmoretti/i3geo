@@ -263,7 +263,23 @@ function core_ativaPainelAjuda(id,botao)
 		YAHOO.example.container.panelAjuda = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelAjuda.render();
 	}
+	if(arguments.length == 2)
 	YAHOO.util.Event.addListener(botao, "click", YAHOO.example.container.panelAjuda.show, YAHOO.example.container.panelAjuda, true);
+	else
+	YAHOO.example.container.panelAjuda.show();
+}
+/*
+Function: core_ativaPainelTexto
+
+Parameters:
+
+id - id do elemento que receberá o painel
+*/
+function core_ativaPainelTexto(id)
+{
+	YAHOO.example.container.panelTexto = new YAHOO.widget.Panel(id, { width:"350px", height:"200px",overflow:"auto", visible:false,constraintoviewport:true } );
+	YAHOO.example.container.panelTexto.render();
+	YAHOO.example.container.panelTexto.show();
 }
 /*
 function: core_pegaPerfis
@@ -766,9 +782,21 @@ function core_geraLinhas(dados)
 		var p = dados.linhas[contaParam];
 		if(p.tipo == "text")
 		{
-			resultado += "<p>"+p.titulo+"<br>";
+			if(!p.size){p.size = "50";}
+			if(p.ajuda)
+			{
+				var temp = "$i('"+contaParam+"_ajuda').style.display='block' "
+				resultado += "<p><div onclick =\""+temp+"\" style=cursor:pointer title='ajuda' ><b>"+p.titulo+"</b></div><br>"
+				resultado += "<div id='"+contaParam+"_ajuda' style=display:none >"+p.ajuda+"</div>"
+			}
+			else
+			resultado += "<p><b>"+p.titulo+"</b><br>";
+			if(p.texto)
+			resultado += "<span style=color:gray >"+p.texto+"</span</p>"
+			if(p.id != "")
 			resultado += "<input size="+p.size+" type=text id="+p.id+" value='"+p.value+"' /></p>"
-			resultado += p.div;
+			if(p.div)
+			{resultado += p.div;}
 		}
 		contaParam++
 	}
@@ -1092,7 +1120,9 @@ var jsfiles = new Array(
 "../../pacotes/yui252/build/container/container-min.php",
 "../../pacotes/yui252/build/connection/connection-min.js",
 "../../pacotes/yui252/build/treeview/treeview-min.js",
-"../../pacotes/yui252/build/json/json-min.js"
+"../../pacotes/yui252/build/json/json-min.js",
+"../../pacotes/yui252/build/menu/menu-min.js",
+"../../pacotes/yui252/build/editor/editor-beta-min.js"
 );
 //
 //arquivos css
@@ -1103,7 +1133,8 @@ var cssfiles =new Array(
 "../../pacotes/yui252/build/datatable/assets/skins/sam/datatable.css",
 "../../pacotes/yui252/build/button/assets/skins/sam/button.css",
 "../../pacotes/yui252/build/container/assets/skins/sam/container.css",
-"../../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css"
+"../../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css",
+"../../pacotes/yui252/build/editor/assets/skins/sam/editor.css"
 );
 //
 //carrega os arquivos js
