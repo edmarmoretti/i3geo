@@ -259,6 +259,10 @@ function mapfile()
 		$layer = $mapa->getlayerbyname($layer);
 		$xml .= "<titulo>".$layer->getmetadata('tema')."</titulo>\n";
 		$d = $layer->data;
+		if (@$layer->open() == MS_SUCCESS)
+		{$colunas = implode(",",$layer->getItems());}
+		else
+		{$colunas = "*";}		
 		$ct = $objcontype[$layer->connectiontype];
 		$tagLegenda = "parsemapfile.php?id=".$codigoLayer."&amp;layername=".$layer->name."&amp;tipoparse=legenda";
 		$nomeLayer = $layer->name;
@@ -314,7 +318,10 @@ function mapfile()
 			$xml .= "</connection>\n";
 			$d = explode("(",$d);
 			$d = explode(")",$d[1]);
-			$xml .= "<select>$d[0]</select>\n";
+			$dstring = $d[0];
+			$dstring = str_replace("the_geom","",$dstring);
+			$dstring = str_replace("*",$colunas,$dstring);
+			$xml .= "<select>$dstring</select>\n";
 			$string = preg_replace('/.*from\s*(.+).*/i', '\1', $d[0]);
 			$s = explode("WHERE",$string);
 			if(count($s) == 1)
