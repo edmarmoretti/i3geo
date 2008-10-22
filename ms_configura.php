@@ -43,7 +43,7 @@ Free Software Foundation, Inc., no endereço
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
-$mensagemInicia = 'I3Geo versÃ£o 4.1';
+$mensagemInicia = 'I3Geo versão 4.1';
 /*
 	Variable: $tituloInstituicao
 	
