@@ -35,7 +35,7 @@ if (app=='N') navn=true; else navm=true;
 if (!$i("mascaraaguarde"))
 {
 	if (navm){var s = "filter:'alpha(opacity=20)'";}
-	if (navn){var s = "opacity:.2'";}
+	if (navn){var s = "opacity:.2";}
 	document.body.innerHTML += "<div id=mascaraaguarde style=display:none;position:absolute;top:0px;left:0px;width:120%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >&nbsp;</div>";
 }
 if (navn)

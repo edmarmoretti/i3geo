@@ -1,7 +1,7 @@
  g_sid=window.parent.g_sid;$i=function(id){return document.getElementById(id);}
 cabecalhojanela="";var h=0;if(window.parent.document.getElementById("wdocai")){var h=parseInt(window.parent.document.getElementById("wdocai").style.height);}
 navm=false;navn=false;var app=navigator.appName.substring(0,1);if(app=='N')navn=true;else navm=true;if(!$i("mascaraaguarde")){ if(navm){var s="filter:'alpha(opacity=20)'";}
- if(navn){var s="opacity:.2'";}
+ if(navn){var s="opacity:.2";}
  document.body.innerHTML+="<div id=mascaraaguarde style=display:none;position:absolute;top:0px;left:0px;width:120%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >&nbsp;</div>";}
 if(navn){ if(document.getElementById("fundo")){ document.getElementById("fundo").style.width="100%"; document.getElementById("fundo").style.height="100%";}
  if(document.getElementById("geral")){ document.getElementById("geral").style.height="90%"; document.getElementById("geral").style.width="97%";}}
