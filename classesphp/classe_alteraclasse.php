@@ -83,7 +83,7 @@ $tema - nome do tema
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->layer = "";
-  		if($tema != "")
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -106,6 +106,7 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 */
 	function simbolounico()
 	{
+		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		if ($numclasses > 0)
 		{
@@ -197,6 +198,7 @@ $ignorar - valor que será ignorado na listagem final
 */
 	function intervalosiguais($item,$nclasses,$ignorar)
 	{
+		if(!$this->layer){return "erro";}
 		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
@@ -257,6 +259,7 @@ Include:
 */
 	function quartis($item,$ignorar)
 	{
+		if(!$this->layer){return "erro";}
 		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{
@@ -315,6 +318,7 @@ $ignorar - valor que será ignorado na listagem final
 */
 	function valorunico($item,$ignorar)
 	{
+		if(!$this->layer){return "erro";}
 		// pega valores
 		$valoresu = array_unique(pegaValores($this->mapa,$this->layer,$item,false,$ignorar));
 		// processa array com os valores
@@ -367,6 +371,7 @@ A nova classe será uma cópia da classe 0.
 */
 	function adicionaclasse()
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass(0);
 		$c = ms_newClassObj($this->layer, $classe);
 		//$classe = $this->layer->getclass(0);
@@ -388,6 +393,7 @@ Include:
 */
 	function alteraCoresClasses($cori,$corf)
 	{
+		if(!$this->layer){return "erro";}
 		if(file_exists($this->locaplic."/class.palette.php"))		
 		include_once($this->locaplic."/class.palette.php");
 		else
@@ -419,6 +425,7 @@ Inverte as cores da legenda de um tema.
 */
 	function inverteCoresClasses()
 	{
+		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		for($i=0;$i<$numclasses;++$i)
 		{
@@ -444,6 +451,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 */
 	function calculaTamanhoClasses()
 	{
+		if(!$this->layer){return "erro";}
 		$numclasses = $this->layer->numclasses;
 		for($i=0;$i<$numclasses;++$i)
 		{
@@ -474,6 +482,7 @@ $classe - id da classe
 */
 	function statusClasse($classe)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$status = $classe->status;
 		if ($status == MS_OFF)

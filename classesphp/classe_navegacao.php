@@ -140,10 +140,10 @@ Desliga o status das camadas raster
 */
 	function desabilitaRASTER()
 	{
-	 	$ls = $this->mapa->getalllayernames();
-	 	foreach ($ls as $l)
-	 	{
-	 		$layer = $this->mapa->getlayerbyname($l);
+		$c = $this->mapa->numlayers;
+		for ($i=0;$i < $c;++$i)
+		{
+			$layer = $this->mapa->getlayer($i);
 	 		if ($layer->type == MS_LAYER_RASTER)
 	 		{$layer->set("status",MS_OFF);}
 	 	}

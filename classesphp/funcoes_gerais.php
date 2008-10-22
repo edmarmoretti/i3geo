@@ -1020,7 +1020,8 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 	$layer->setfilter("");
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
-		$layer->open();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults();
 		$valitem = array();
 		for ($i=0;$i<$res_count;++$i)
@@ -1083,7 +1084,8 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 	//pega os valores dos indices dos elementos selecionados para comparacao posterior
 	if ($selecionados == "sim")
 	{
-		$layer->open();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $layer->getNumresults(); 	
 		for ($i = 0; $i < $res_count; ++$i)
 		{
@@ -1095,7 +1097,9 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 	$valores = array();	
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
-		$layer->open();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+
 		$res_count = $layer->getNumresults();
 		for ($i=0;$i<$res_count;++$i)
 		{
@@ -1616,7 +1620,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$res_count = $layer->getNumresults();
 		if ($res_count > 0)
 		{
-			$abriu = $layer->open();
+			$sopen = $layer->open();
+			if($sopen == MS_FAILURE){return "erro";}
+
 			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $layer->getResult($i);
@@ -1932,7 +1938,9 @@ function autoClasses(&$nlayer,$mapa)
 		$ret->setextent($temp[0],$temp[1],$temp[2],$temp[3]);
 	}
 	//	
-	$nlayer->open();
+	$sopen = $nlayer->open();
+	if($sopen == MS_FAILURE){return "erro";}
+
 	$status = $nlayer->whichShapes($ret);
 	$parametrosClasses = array();	
 	if ($status == 0)

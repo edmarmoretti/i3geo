@@ -85,7 +85,7 @@ $tema - Nome do tema que será processado
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-  		if($tema != "")
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
   		$this->diretorio = dirname($this->arquivo);
@@ -906,7 +906,8 @@ $locaplic - Localização do I3geo.
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
 		//pega um shape especifico
-		$layerPt->open();
+		$sopen = $layerPt->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$result = $layerPt->getResult($i);
@@ -947,7 +948,8 @@ $locaplic - Localização do I3geo.
 		$dbname = $nomeshp.".dbf";
 		foreach($pontos as $ponto)
 		{
-			$layerPt->open();
+			$sopen = $layerPt->open();
+			if($sopen == MS_FAILURE){return "erro";}
 			foreach ($itemspt as $ni)
 			{$reg[] = $ponto->values[$ni];}
 			$layerPt->close();
@@ -963,7 +965,8 @@ $locaplic - Localização do I3geo.
 				$ident = @$layer->queryByPoint($pt, 0, 0);
 				$itens = pegaItens($layer);
 				$res_count = $layer->getNumresults();
-				$layer->open();
+				$sopen = $layer->open();
+				if($sopen == MS_FAILURE){return "erro";}
 				if ($res_count > 0)
 				{
 					$result = $layer->getResult(0);
@@ -1037,38 +1040,30 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
 	$layerdestino = $this->mapa->getlayerbyname($temadestino);
 	$layeroverlay = $this->mapa->getlayerbyname($temaoverlay);
-	if (@$layerorigem->open() == MS_SUCCESS)
+	$sopen = $layerorigem->open();
+	if($sopen == MS_FAILURE){return "erro";}
+	$res_count = $layerorigem->getNumresults();
+	for ($i = 0; $i < $res_count; ++$i)
 	{
-		$layerorigem->open();
-		$res_count = $layerorigem->getNumresults();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			$result = $layerorigem->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);
-		}
-		$layerorigem->close();
+		$result = $layerorigem->getResult($i);
+		$shp_index  = $result->shapeindex;
+		$shapesorigem[] = $layerorigem->getshape(-1, $shp_index);
 	}
-	else
-	{return "erro";}
+	$layerorigem->close();
 	$layeroverlay->set("tolerance",0);
 	$layerdestino->set("tolerance",0);
 	$layeroverlay->queryByrect($this->mapa->extent);
 	$layerdestino->queryByFeatures($layeroverlay->index);
-	if (@$layerdestino->open() == MS_SUCCESS)
+	$sopen = $layerdestino->open();
+	if($sopen == MS_FAILURE){return "erro";}
+	$res_count = $layerdestino->getNumresults();
+	for ($i = 0; $i < $res_count; ++$i)
 	{
-		$layerdestino->open();
-		$res_count = $layerdestino->getNumresults();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
-			$result = $layerdestino->getResult($i);
-			$shp_index  = $result->shapeindex;
-			$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
-		}
-		$layerdestino->close();
+		$result = $layerdestino->getResult($i);
+		$shp_index  = $result->shapeindex;
+		$shapesdestino[] = $layerdestino->getshape(-1, $shp_index);
 	}
-	else
-	{return "erro";}
+	$layerdestino->close();
 	$rect = $this->mapa->extent;
 	$projInObj = $layerorigem->getProjection();
 	if ($projInObj == "")
@@ -1148,6 +1143,7 @@ nome do layer criado com o buffer.
 */
 	function criaBuffer($distancia,$locaplic,$unir="nao")
 	{
+		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
@@ -1159,37 +1155,36 @@ nome do layer criado com o buffer.
 		//pega os shapes selecionados
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
-		if (@$this->layer->open() == MS_SUCCESS)
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$items = pegaItens($this->layer);
+		$this->layer->open();
+		$res_count = $this->layer->getNumresults();
+		$buffers = array();
+		//pega um shape especifico
+		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$items = pegaItens($this->layer);
-			$this->layer->open();
-			$res_count = $this->layer->getNumresults();
-			$buffers = array();
-			//pega um shape especifico
-			for ($i = 0; $i < $res_count; ++$i)
-			{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getshape(-1, $shp_index);
-				//calcula a extensão geografica
-				$rect = $shape->bounds;
-				$projInObj = ms_newprojectionobj("proj=latlong");
-				$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
-				$poPoint = ms_newpointobj();
-				$poPoint->setXY($rect->minx, $rect->miny);
-				$dd1 = ms_newpointobj();
-				$dd1->setXY($rect->minx, $rect->miny);
-				$poPoint->project($projInObj, $projOutObj);
-				$dd2 = ms_newpointobj();
-				$dd2->setXY(($poPoint->x + $distancia), $poPoint->y);
-				$dd2->project($projOutObj,$projInObj);
-				$d = $dd1->distanceToPoint($dd2);
-				if ($distancia < 0){$d = $d * -1;}
-				//calcula a distancia 29100
-				//gera o buffer
-				$buffers[] = $shape->buffer($d);
-				$shapes[] = $shape;
-			}
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getshape(-1, $shp_index);
+			//calcula a extensão geografica
+			$rect = $shape->bounds;
+			$projInObj = ms_newprojectionobj("proj=latlong");
+			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=".$rect->miny.",lon_0=".$rect->minx.",x_0=5000000,y_0=10000000");
+			$poPoint = ms_newpointobj();
+			$poPoint->setXY($rect->minx, $rect->miny);
+			$dd1 = ms_newpointobj();
+			$dd1->setXY($rect->minx, $rect->miny);
+			$poPoint->project($projInObj, $projOutObj);
+			$dd2 = ms_newpointobj();
+			$dd2->setXY(($poPoint->x + $distancia), $poPoint->y);
+			$dd2->project($projOutObj,$projInObj);
+			$d = $dd1->distanceToPoint($dd2);
+			if ($distancia < 0){$d = $d * -1;}
+			//calcula a distancia 29100
+			//gera o buffer
+			$buffers[] = $shape->buffer($d);
+			$shapes[] = $shape;
 		}
 		//faz a união dos elementos se necessário
 		if($unir == "sim")
@@ -1241,7 +1236,6 @@ nome do layer criado com o buffer.
 		$cor->setrgb(255,0,0);
 		$coro = $estilo->outlinecolor;
 		$coro->setrgb(255,0,0);
-
 		return($novolayer->name);
 	}
 /*
@@ -1257,6 +1251,7 @@ $locaplic - Localização do I3geo.
 */
 	function criaCentroide($locaplic)
 	{
+		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
@@ -1268,26 +1263,25 @@ $locaplic - Localização do I3geo.
 		//pega os shapes selecionados
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
-		if (@$this->layer->open() == MS_SUCCESS)
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$items = pegaItens($this->layer);
+		$this->layer->open();
+		$res_count = $this->layer->getNumresults();
+		$centroides = array();
+		$shapes = array();
+		//pega um shape especifico
+		for ($i = 0; $i < $res_count; ++$i)
 		{
-			$items = pegaItens($this->layer);
-			$this->layer->open();
-			$res_count = $this->layer->getNumresults();
-			$centroides = array();
-			$shapes = array();
-			//pega um shape especifico
-			for ($i = 0; $i < $res_count; ++$i)
-			{
-				$result = $this->layer->getResult($i);
-				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getshape(-1, $shp_index);
-				$LineObj = ms_newLineObj();
-				$LineObj->add($shape->getCentroid());
-				$ShapeObj = ms_newShapeObj(MS_SHAPE_POINT);
-				$ShapeObj->add($LineObj);
-				$centroides[] = $ShapeObj;
-				$shapes[] = $shape;
-			}
+			$result = $this->layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $this->layer->getshape(-1, $shp_index);
+			$LineObj = ms_newLineObj();
+			$LineObj->add($shape->getCentroid());
+			$ShapeObj = ms_newShapeObj(MS_SHAPE_POINT);
+			$ShapeObj->add($LineObj);
+			$centroides[] = $ShapeObj;
+			$shapes[] = $shape;
 		}
 		$fechou = $this->layer->close();
 		//gera o novo arquivo shape file
@@ -1763,7 +1757,8 @@ $locaplic - Localização do I3geo
 		$def[] = array("npontos","N","10","0");
 		$db = xbase_create($nomeshp.".dbf", $def);
 		$dbname = $nomeshp.".dbf";
-		$layerPo->open();
+		$sopen = $layerPo->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$layerPo->whichShapes($this->mapa->extent);
 		while ($shape = $layerPo->nextShape())
 		{
@@ -1796,6 +1791,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 */
 	function agrupaElementos($item,$locaplic)
 	{
+		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
@@ -1806,7 +1802,8 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		//define o nome do novo shapefile que será criado
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
-		$this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
 		//
 		//pega os indices dos poligonos por classe de atributo
@@ -1909,6 +1906,7 @@ $locaplic - Localização do I3geo
 */
 	function dissolvePoligono($item,$locaplic)
 	{
+		if(!$this->layer){return "erro";}
 		set_time_limit(180);
 		//para manipular dbf
 		if(!isset($item)){$item="";}
@@ -1919,7 +1917,8 @@ $locaplic - Localização do I3geo
 		//define o nome do novo shapefile que será criado
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
-		$this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
 		//
 		//pega os indices dos poligonos por classe de atributo
@@ -2305,7 +2304,9 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE")
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
 		//pega um shape especifico
-		$layerPt->open();
+		$sopen = $layerPt->open();
+		if($sopen == MS_FAILURE){return "erro";}
+
 		if (($prjTema != "") && ($prjMapa != $prjTema))
 		{
 			$projInObj = ms_newprojectionobj($prjTema);

@@ -75,13 +75,11 @@ $tema - nome do tema
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->tema = $tema;
-  		if ($tema != "")
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
   		{
   			$this->layer = $this->mapa->getlayerbyname($tema);
-  			$this->nome = $tema;
   		}
-  		else
-  		{$this->layer = "";}
+  		$this->nome = $tema;
 	}
 /*
 function: salva
@@ -146,8 +144,7 @@ $projecao - código epsg da projeção das coordenadas
 */
 	function insereSHP($xy,$projecao,$item="",$valor="")
 	{
-		if($this->layer == "")
-		{return("erro");}
+		if(!$this->layer){return "erro";}
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
@@ -287,9 +284,9 @@ string - xy
 */
 	function listaPontosShape()
 	{
-		if($this->layer == "")
-		{return("erro");}		
-		$this->layer->open();
+		if(!$this->layer){return "erro";}		
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$this->layer->whichShapes($this->mapa->extent);
 		$xy = array();
 		while ($shape = $this->layer->nextShape())
@@ -318,8 +315,7 @@ $para - linha|poligono
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
-		if($this->layer == "")
-		{return("erro");}
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$diretorio = dirname($this->arquivo);
 		$tipol = MS_SHP_ARC;

@@ -76,6 +76,7 @@ $tema - nome do tema
   		//error_reporting(E_ALL);
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -104,6 +105,7 @@ $ys - lista de coordenadas y separadas por virgula
 */
 	function selecaoPorPoligono($tipo,$xs,$ys)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -160,6 +162,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 */
 	function selecaoTema($temao,$tipo)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return($this->selecaoLimpa());}
@@ -191,7 +194,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$selecao = "";
 		if (($selecao != "ok") && ($layero->data != ""))
 		{
-			$layero->open();
+			$sopen = $layero->open();
+			if($sopen == MS_FAILURE){return "erro";}
 			$res_count = $layero->getNumresults();
 			for ($i = 0; $i < $res_count; ++$i)
 			{
@@ -245,7 +249,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if (($selecao != "ok") && ($layero->data == ""))
 		{
 			$layero->queryByRect($this->mapa->extent);
-			$layero->open();
+			$sopen = $layero->open();
+			if($sopen == MS_FAILURE){return "erro";}
 			$conta = $layero->getNumresults();
 			for ($k = 0; $k < $conta; $k++)
 			{
@@ -319,6 +324,7 @@ $valor - Valor.
 		{return($this->selecaoLimpa());}
 		if ($tipo == "inverte")
 		{return($this->selecaoInverte());}
+		if(!$this->layer){return "erro";}
 		$operador = explode(",",$operador);
 		$operador = $operador[1];
 		$this->layer->set("template","none.htm");
@@ -373,6 +379,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
@@ -449,6 +456,7 @@ Limpa a seleção do tema.
 	{
 		if ($this->nome != "") //limpa de um tema
 		{
+			if(!$this->layer){return "erro";}
 			if (file_exists(($this->arquivo)."qy"))
 			{$this->mapa->loadquery(($this->arquivo)."qy");}
 			$indxlayer = $this->layer->index;
@@ -470,6 +478,7 @@ Inverte seleção do tema.
 */
 	function selecaoInverte()
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
@@ -513,6 +522,7 @@ $shp_atual - Indices dos elementos já selecionados.
 */
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
@@ -536,6 +546,7 @@ $shp_atual - Indices dos elementos já selecionados.
 */
 	function selecaoRetira($shpi,$shp_atual)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$this->mapa->freequery($indxlayer);
@@ -560,6 +571,7 @@ $ids - Ids separados por vírgula correspondendo aos registros.
 */
 	function incluiSel($ids)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		if (file_exists(($this->arquivo)."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
@@ -583,6 +595,7 @@ $dir_tmp - localização do diretório temporário
 */
 	function selecao2tema($locaplic,$dir_tmp)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp);
@@ -611,6 +624,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 */
 	function selecaoEXT($tipo)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}
@@ -659,6 +673,7 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 */
 	function selecaoBOX($tipo,$ext)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
 		if ($tipo == "limpa")
 		{return ($this->selecaoLimpa());}

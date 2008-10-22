@@ -92,10 +92,10 @@ foreach(array_keys($_SESSION) as $k)
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $nmap = ms_newMapobj($map_file);
-$ts = $nmap->getalllayernames();
-foreach ($ts as $t)
+$c = $nmap->numlayers;
+for ($i=0;$i < $c;++$i)
 {
-	$l = $nmap->getlayerbyname($t);
+	$l = $nmap->getlayer($i);}
 	if($l->connectiontype != MS_WMS)
 	{
 		$l->setmetadata("ows_title",pegaNome($l));

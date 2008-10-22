@@ -212,10 +212,10 @@ function gravaid()
 	$_SESSION["utilizacgi"] = "nao";
 	$_SESSION["atlasxml"] = $atlasxmltemp;
 	$m = ms_newMapObj($tmpfname);
-	$nomes = $m->getalllayernames();
-	foreach($nomes as $n)
+	$c = $m->numlayers;
+	for ($i=0;$i < $c;++$i)
 	{
-		$l = $m->getlayerbyname($n);
+		$l = $m->getlayer($i);
 		$l->setmetadata("ATLAS","nao");
 		$l->setmetadata("TIP","");
 	}

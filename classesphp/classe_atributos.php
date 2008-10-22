@@ -77,7 +77,7 @@ $tema - nome do tema
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-  		if($tema != "")
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -106,6 +106,7 @@ xmin ymin xmax ymax separados por espaço.
 */
 	function extensaoShape($shape)
 	{
+		if(!$this->layer){return "erro";}
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
 		$ret = $shape->bounds;
@@ -141,6 +142,7 @@ $registro - Índice do registro que será consultado.
 */
 	function extensaoRegistro($registro)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$ext = "";
@@ -201,6 +203,7 @@ $tipo - Tipo de busca brasil|null
 */
 	function itensTexto($tipo)
 	{
+		if(!$this->layer){return "erro";}
 		if ($tipo == "brasil")
 		{$this->mapa = extPadrao($this->mapa);}
 		$this->layer->set("template","none.htm");
@@ -213,7 +216,8 @@ $tipo - Tipo de busca brasil|null
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{$this->layer->querybyrect($this->mapa->extent);}
-		$this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$registros[] = array();
 		$res_count = $this->layer->getNumresults();
 		for ($i = 0; $i < $res_count; ++$i)
@@ -256,6 +260,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 */
 	function listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista)
 	{
+		if(!$this->layer){return "erro";}
 		$resultadoFinal = array();
 		if ((!isset($tipolista)) || ($tipolista=="")){$tipolista = "tudo";}
 		if (!isset($inicio)){$inicio = 0;}
@@ -276,7 +281,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$indxlayer = $this->layer->index;
-		$this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
 		$registros = array();
 		//lista apenas os selecionados
@@ -323,7 +329,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					if (($res_count >= $fim) && ($fim < $res_count))
 					{$res_count = $fim;}		
 				}
-				$this->layer->open();
+				$sopen = $this->layer->open();
+				if($sopen == MS_FAILURE){return "erro";}
 				for ($i = $inicio; $i < $res_count; ++$i)
 				{
 					$valitem = array();
@@ -406,7 +413,8 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
 			$trocas = "AAOOOaaaaoooouuieec";
-			$l->open();
+			$sopen = $l->open();
+			if($sopen == MS_FAILURE){return "erro";}
 			$l->whichShapes($this->mapa->extent);
 			$fr = array();
 			while ($shape = $l->nextShape())
@@ -465,6 +473,7 @@ Include:
 */
 	function estatDescritivas($item,$exclui)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$items = pegaItens($this->layer);
 		$valores = array();
@@ -477,7 +486,8 @@ Include:
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{$this->layer->queryByrect($this->mapa->extent);}
-		$abriu = $this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
 		//pega os valores
 		for ($i = 0; $i < $res_count; ++$i)
@@ -837,7 +847,8 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 			}
 		}
 		$res_count = $layer->getNumresults();
-		$layer->open();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 		for ($i = 0; $i < $res_count; ++$i)
 		{
 			$valori = array();

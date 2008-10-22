@@ -81,6 +81,7 @@ $tema - nome do tema que será processado
   		include_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
 	}
@@ -144,6 +145,7 @@ $tipo Tipo teste|
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo)
 	{
+		if(!$this->layer){return "erro";}
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
 		{
@@ -230,6 +232,7 @@ $item Item que será utilizado.
 */
 	function ativaEtiquetas($item)
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->setmetadata("TIP",$item);
 		return("ok");
 	}
@@ -241,6 +244,7 @@ remove a inclusão de etiquetas em um tema.
 */
 	function removeEtiquetas()
 	{
+		if(!$this->layer){return "erro";}
 		$this->layer->setmetadata("TIP","");
 		return("ok");
 	}

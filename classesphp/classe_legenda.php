@@ -116,7 +116,7 @@ $template - nome do template para processar a legenda
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		$this->localaplicacao = $locaplic;
-   		if ($tema != "")
+   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
   		{
   			$this->layer = $this->mapa->getlayerbyname($tema);
   			$this->nome = $tema;
@@ -296,7 +296,8 @@ array
 				if (($totaliza=="sim") && ($nc > 1))
 				{
 					$layer->set("template","none.htm");
-					$layer->open();
+					$sopen = $layer->open();
+					if($sopen == MS_FAILURE){return "erro";}
 					$itens = $layer->getitems();
 					$total = 0;
 					$nreg = array();
@@ -354,6 +355,7 @@ Exclui um estilo de uma classe.
 */
 	function excluiEstilo($classe,$estilo)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->deletestyle($estilo);
 	}
@@ -367,6 +369,7 @@ objeto estilo
 */
 	function adicionaEstilo($classe,$estilo)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$estilo = $classe->getstyle($estilo);
 		$e = ms_newStyleObj($classe,$estilo);
@@ -384,6 +387,7 @@ $estilo - Índice do estilo de uma classe que será clonado.
 */
 	function sobeEstilo($classe,$estilo)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyleup($estilo);
 	}
@@ -399,6 +403,7 @@ $estilo - Índice do estilo de uma classe que será clonado.
 */
 	function desceEstilo($classe,$estilo)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyledown($estilo);
 	}
@@ -480,6 +485,7 @@ string com o tipo do layer,id do estilo,outlinecolor,backgroundcolor,color,symbo
 */
 	function pegaParametros($classe)
 	{
+		if(!$this->layer){return "erro";}
 		$tipoLayer = $this->layer->type;
 		$classe = $this->layer->getclass($classe);
 		$numestilos = $classe->numstyles;
@@ -520,6 +526,7 @@ $size - Tamanho que será aplicado ao símbolo.
 */
 	function aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size)
 	{
+		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$estilo = $classe->getstyle($estilo);
 		if (isset($outlinecolor))

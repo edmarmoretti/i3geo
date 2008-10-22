@@ -97,9 +97,9 @@ $tema - nome do tema que será processado
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
-  		if (isset($tema))
+  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
   		{
-  			$this->layer = @$this->mapa->getlayerbyname($tema);
+  			$this->layer = $this->mapa->getlayerbyname($tema);
   			$this->nome = $tema;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($map_file,$tema);
@@ -136,6 +136,7 @@ $lista - lista de processos separados por |
 */
 	function aplicaProcessos($lista)
 	{
+		if(!$this->layer){return "erro";}
 		if ($this->layer->num_processing > 0)
 		{$this->layer->clearProcessing();}
 		$lista = str_replace('"',"",$lista);
@@ -342,6 +343,7 @@ Calcula a extensão geográfica de um tema e ajusta o mapa para essa extensão.
 */
 	function zoomTema()
 	{
+		if(!$this->layer){return "erro";}
 		$prjMapa = "";
 		$prjTema = "";
 		if($this->layer->type != MS_LAYER_RASTER)
@@ -382,6 +384,7 @@ string Filtro.
 */
 	function pegaFiltro()
 	{
+		if(!$this->layer){return "erro";}
 		$fil = $this->layer->getfilter();
 		if ($this->layer->getfilter() == '"(null)"'){return " ";}
 		if (function_exists("mb_convert_encoding"))
@@ -402,6 +405,7 @@ $testa - Testa o filtro e retorna uma imagem.
 */
 	function insereFiltro($filtro,$testa="")
 	{
+		if(!$this->layer){return "erro";}
 		$fil = $this->layer->getfilter();
 		$filtro = str_replace("|","'",$filtro);
 		if ($this->layer->connectiontype == MS_POSTGIS)
@@ -536,7 +540,7 @@ $fonte - Fonte.
 		//verifica se j'a existe um layer criado anteriormente com o mesmo nome e apaga se existir
 		if ($tipo == "limpaponto")
 		{
-			if ($this->layer != "")
+			if ($this->layer)
 			{
 				$this->layer->set("status",MS_DELETE);
 				$this->layer->set("name","pindelete");
@@ -544,7 +548,7 @@ $fonte - Fonte.
 			}
 		}
 		//se o novo layer nao existir, cria um novo copiando o layer "pin" que ja deve existir no map file (no map file que iniciou a aplicacao)
-		if ($this->layer == "")
+		if (!$this->layer)
 		{
 			$pinlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Ins",$metaClasse="SIM");
 			$c = $pinlayer->getclass(0);
@@ -674,6 +678,7 @@ $nome - nome que será dado a geometria
 */
 	function capturaGeometrias($dir_tmp,$imgdir,$nome="")
 	{
+		if(!$this->layer){return "erro";}
 		$this->mapa->setsize(30,30);
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
@@ -681,7 +686,9 @@ $nome - nome que será dado a geometria
 		if (file_exists($this->arquivo."qy"))
 		{$this->mapa->loadquery(($this->arquivo)."qy");}
 		$items = pegaItens($this->layer);
-		$this->layer->open();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+
 		$res_count = $this->layer->getNumresults();
 		$final["layer"] = pegaNome($this->layer);
 		$registros = array();
@@ -791,6 +798,7 @@ lista - lista de item e cores de cada parte do grafico
 */
 	function graficotema($lista,$tamanho="50",$tipo="PIE",$outlinecolor="",$offset=0)
 	{
+		if(!$this->layer){return "erro";}
 		$nome = pegaNome($this->layer);
 		$novolayer = ms_newLayerObj($this->mapa, $this->layer);
 		$nomer = nomeRandomico();

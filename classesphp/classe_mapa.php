@@ -142,10 +142,13 @@ string - javascript com os parametros
 			$sel = "nao";
 			if ($qy) //verifica se existe alguma selecao no tema
 			{
-				$oLayer->open();
-				$res_count = $oLayer->getNumresults();
-				$oLayer->close();
-				if ($res_count > 0){$sel = "sim";$existesel = true;}
+				$sopen = $oLayer->open();
+				if($sopen != MS_FAILURE)
+				{			
+					$res_count = $oLayer->getNumresults();
+					$oLayer->close();
+					if ($res_count > 0){$sel = "sim";$existesel = true;}
+				}
 			}
 			if ((strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($oLayer->getmetadata("escondido") == ""))
 			{
