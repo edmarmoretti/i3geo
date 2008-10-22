@@ -1187,7 +1187,8 @@ function Mapa(e,m)
 			{
 				do
 				{
-					eval(g_funcoesMouseParado[f]);
+					if(objposicaocursor.imgx > 0)
+					{eval(g_funcoesMouseParado[f]);}
 				}
 				while(f--)
 			}

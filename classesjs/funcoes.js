@@ -1700,8 +1700,6 @@ function mostraRosaDosVentos()
 		novoel.id = "tip";
 		novoel.style.position="absolute";
 		novoel.style.zIndex=5000;
-		if (navm)
-		{novoel.style.filter = "alpha(opacity=90)";}
 		document.body.appendChild(novoel);
 	}
 	//mostra opção sobre o mouse quando está na função pan
@@ -1718,7 +1716,8 @@ function mostraRosaDosVentos()
 					else
 					{$i("tip").style.filter = "alpha(opacity=70)";}		
 				}
-				var setas = "<table id='rosaV' ><tr>";
+				var setas = "<table id='rosaV' >";
+				setas += "<tr onclick=\"javascript:g_mostraRosa='nao'\"><td></td><td></td><td style=cursor:pointer >x</td></tr><tr>";
 				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('noroeste')\" /></td>";
 				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
 				setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('nordeste')\" /></td></tr>";
