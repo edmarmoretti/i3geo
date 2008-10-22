@@ -1450,6 +1450,10 @@ function ativaClicks(docMapa)
 				if ($i("mostraUTM")){$i("mostraUTM").style.display="none";}
 				if ($i("tip"))
 				{$i("tip").style.display="none";}
+				try
+				{clearTimeout(objmapa.tempoParado);}
+				catch(e){var a = e;}
+				objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 				capturaposicao(exy);
 				if (g_destaca != "")
 				{$i("imgh").style.display="none";$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
@@ -1667,7 +1671,6 @@ Para que esta função seja executada, é necessário existir um DIV com id=mostraUT
 */
 function pegaCoordenadaUTM()
 {
-	if (objmapa.parado != "sim"){return;}
 	if (!$i("mostraUTM")){return;}
 	var mostra = function(retorno)
 	{
@@ -1690,18 +1693,31 @@ Executado apenas se a variável g_mostraRosa = "sim"
 */
 function mostraRosaDosVentos()
 {
-	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela") || g_mostraRosa == "nao"){return;}
+	if (g_mostraRosa == "nao"){return;}
+	if (!$i("tip"))
+	{
+		var novoel = document.createElement("div");
+		novoel.id = "tip";
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		document.body.appendChild(novoel);
+	}
 	//mostra opção sobre o mouse quando está na função pan
-	if (($i("box1")) && (objmapa.parado == "sim") && (document.getElementById("imgh").style.display=="block") && ($i("box1").style.visibility != "visible"))
+	if (($i("box1")) &&  (document.getElementById("imgh").style.display=="block") && ($i("box1").style.visibility != "visible"))
 	{
 		if ((g_tipoacao == "zoomli") || (g_tipoacao == "zoomlo") || (g_tipoacao == "pan"))
 		{
 			if(g_mostraRosa == "sim")
 			{
-				if($i("tip").style.opacity)
-				{$i("tip").style.opacity=".7";}
-				else
-				{$i("tip").style.filter = "alpha(opacity=70)";}		
+				if($i("tip"))
+				{
+					if($i("tip").style.opacity)
+					{$i("tip").style.opacity=".7";}
+					else
+					{$i("tip").style.filter = "alpha(opacity=70)";}		
+				}
 				var setas = "<table id='rosaV' ><tr>";
 				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('noroeste')\" /></td>";
 				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
@@ -2433,7 +2449,7 @@ Por default, utiliza-se a função verificaTipDefault()
 */
 function verificaTip()
 {
-	if ((objmapa.parado == "parar") || (objmapa.parado=="cancela") || (g_operacao != "identifica")){return;}
+	if (g_operacao != "identifica"){return;}
 	//insere div para tips
 	if (!$i("tip"))
 	{
@@ -2445,7 +2461,7 @@ function verificaTip()
 		{novoel.style.filter = "alpha(opacity=90)";}
 		document.body.appendChild(novoel);
 	}
-	if ((objmapa.parado == "sim") && (g_operacao == "identifica") && ($i("tip").style.display!="block"))
+	if ((g_operacao == "identifica") && ($i("tip").style.display!="block"))
 	{
 		var i = $i("tip");
 		var ist = i.style;
@@ -2455,8 +2471,6 @@ function verificaTip()
 		ist.display="block";
 		eval(g_funcaoTip);
 	}
-	if ((objmapa.parado!="cancela") && ($i("tip").style.display!="block"))
-	{objmapa.parado = "sim";}
 }
 /*
 Function: verificaTipDefault
@@ -3929,8 +3943,9 @@ function capturaposicao(e)
 	//toda vez que o mouse é movimentado o tip é zerado
 	//e é identificado que o mouse não está parado, obviamente
 	//
-	if (objmapa.parado!="cancela")
-	{objmapa.parado = "nao";}
+	//objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
+	//if (objmapa.parado!="cancela")
+	//{objmapa.parado = "nao";}
 	ajaxTip = "";
 }
 /*

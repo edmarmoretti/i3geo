@@ -1192,8 +1192,6 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
-		//clearTimeout(objmapa.tempoParado);
-		objmapa.tempoParado = setTimeout('objmapa.verificaMouseParado()',g_tempotip);
 	};
 	/*
 	Function: verificaNavegaMapa
