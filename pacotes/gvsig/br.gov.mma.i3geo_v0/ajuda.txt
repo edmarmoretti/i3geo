@@ -1,0 +1,14 @@
+plugin i3geo2gvsig - versão 1.0 - outubro de 2008
+
+Utilize este plugin para acessar os dados que estão disponíveis na instalação do i3geo no endereço especificado na opção "Servidor". O endereço definido corresponde a um local na internet onde está disponível um arquivo no formato RSS que irá listar os grupos temáticos disponíveis.
+
+Por padrão o endereço do RSS é definido como "http://mapas.mma.gov.br/i3geo/admin/gruposrss.php", esse endereço lista os dados disponíveis no servidor i3geo do Ministério do Meio Ambiente. Para alterar o endereço padrão, basta digitar um novo ou então editar o arquivo de configuração distribuído junto com o plugin.
+
+Para acessar uma camada escolha o grupo, sub-grupo e tema. Após escolhido o tema, clique em "Carregar" para acessar a camada.
+
+Dependendo das características de cada camada, a legenda poderá ou não ser definida, reproduzindo as definições feitas no i3geo. Em alguns casos a aplicação da legenda poderá falhar, nesses casos, desabilite a opção "aplicar legenda".
+
+Também em alguns casos a camada é adicionada como WMS, limitando algumas das operações possíveis no GVSIG. Se vc está acessando os dados remotamente, ou seja, sem acesso direto ao banco de dados utilizado pelo i3geo, utilize a opção "Forçar WMS".
+
+-------------------------------------------------
+i3geo2gvsig é software livre, licenciado sob GPL e distribuído com o i3geo. Para maiores informações, acesse http://softwarepublico.gov.br
