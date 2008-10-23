@@ -7,31 +7,15 @@ FONTSET   "../symbols/fontes.txt"
     METADATA
       "wms_srs"	"EPSG:4291 EPSG:4326"
       "wms_exceptions_format"	"application/vnd.ogc.se_xml"
-      "tip"	""
       "CLASSE"	"SIM"
-      "itensdesc"	""
-      "itenslink"	""
-      "escala"	""
-      "classesnome"	""
       "wms_force_separate_request"	"1"
       "wms_name"	"bioma"
       "formatosinfo"	"text/plain,application/vnd.ogc.gml"
-      "extensao"	""
-      "mensagem"	""
-      "classessimbolo"	""
-      "classesitem"	""
-      "escondido"	""
       "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff"
       "wms_format"	"image/png"
-      "download"	""
-      "classescor"	""
-      "classestamanho"	""
       "wms_connectiontimeout"	"30"
-      "itens"	""
       "TEMA"	"Biomas segundo IBGE-MMA"
       "wms_server_version"	"1.1.0"
-      "identifica"	""
-      "aplicaextensao"	""
       "wms_style"	"default"
     END
     NAME "atlas_biomas"
@@ -43,8 +27,6 @@ FONTSET   "../symbols/fontes.txt"
     CLASS
       NAME "testevvvvv"
       KEYIMAGE ""
-    END
-    CLASS
     END
   END
 

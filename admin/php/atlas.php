@@ -29,7 +29,6 @@ File: i3geo/admin/sistemas.php
 */
 
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -103,8 +102,8 @@ switch ($funcao)
 	break;
 
 	case "importarXmlAtlas":
-		$cp->set_data(importarXmlAtlas());
-		$cp->return_data();
+		retornaJSON(importarXmlAtlas());
+		exit;
 	break;
 }
 function movimentaNo()

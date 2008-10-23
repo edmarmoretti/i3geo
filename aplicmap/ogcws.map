@@ -39,6 +39,7 @@ WEB
   TEMPLATE "none.htm"
   METADATA
    "ows_title" "I3Geo Brasil MMA"
+   "wms_title" "I3Geo Brasil MMA"
    "ows_abstract" "Web services gerados da base de dados do I3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando ogc.php?ajuda="
    "ows_keywordlist" ""
    "ows_onlineresource" ""

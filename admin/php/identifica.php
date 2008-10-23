@@ -28,7 +28,6 @@ File: i3geo/admin/identifica.php
 
 */
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -57,8 +56,8 @@ switch ($funcao)
 	break;
 	
 	case "importarXmlI":
-	$cp->set_data(importarXmlI());
-	$cp->return_data();
+	retornaJSON(importarXmlI());
+	exit;;
 	break;
 }
 /*

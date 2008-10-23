@@ -177,8 +177,8 @@ function montaNosRaiz(redesenha)
 	var nos = new Array()
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
-		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
-		//conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorDeTexto('"+$mapfiles[i]+"')\" title='editor de texto' src=\"../imagens/06.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
+		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i]+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
 
 		var d = {html:conteudo,id:$mapfiles[i],codigoMap:$mapfiles[i]};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
@@ -187,6 +187,10 @@ function montaNosRaiz(redesenha)
 	if(redesenha=="sim")
 	tree.draw();
 	return nos;
+}
+function testarMapfile(codigoMap)
+{
+	window.open("../../testamapfile.php?map="+codigoMap+".map")
 }
 function montaRaizTema(no,dados)
 {
@@ -230,8 +234,8 @@ function montaRaizTema(no,dados)
 	}
 	for (var i=0, j=dados.layers.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','layer','"+no.data.codigoMap+"','"+dados.layers[i]+"')\" title=sobe src=\"../imagens/34.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','layer','"+no.data.codigoMap+"','"+dados.layers[i]+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirLayer('"+no.data.codigoMap+"','"+dados.layers[i]+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+dados.layers[i]+"</span>"
 		var d = {html:conteudo,id:codigoMap+"_"+dados.layers[i],codigoMap:codigoMap,codigoLayer:dados.layers[i]}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -306,8 +310,8 @@ function montaParametrosTemas(no,dados,redesenha)
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','classe','"+no.data.codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=sobe src=\"../imagens/34.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','classe','"+no.data.codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
 		//conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasse('"+codigoMap+"','"+codigoLayer+"','"+dados[i].indice+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].indice+" "+dados[i].nome+"</span>"
 		var d = {classes:codigoMap+"_"+codigoLayer,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+dados[i].indice,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:dados[i].indice}
@@ -332,11 +336,10 @@ function montaParametrosClasses(no,dados,redesenha)
     if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
     {
 		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='edita características da classe' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar etiquetas"}
+		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar etiquetas"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-
     if(!tree.getNodeByProperty("etiquetaEstilo",no.data.id))
     {
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaNovoEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='adiciona estilo' src=\"../imagens/05.png\" />&nbsp;"
@@ -346,8 +349,8 @@ function montaParametrosClasses(no,dados,redesenha)
 	}
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe')\" title=sobe src=\"../imagens/34.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce')\" title=desce src=\"../imagens/33.png\" />"
+		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','estilo','"+no.data.codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title=sobe src=\"../imagens/34.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','estilo','"+no.data.codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluirEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />&nbsp;"
 		conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorEstilo('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"','"+dados[i].estilo+"')\" title='classes' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].estilo+"</span>"
 		var d = {estilos:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo,id:codigoMap+"_"+codigoLayer+"_"+indiceClasse+"_"+dados[i].estilo,codigoMap:codigoMap,codigoLayer:codigoLayer,indiceClasse:indiceClasse,indiceEstilo:dados[i].estilo}
@@ -645,6 +648,12 @@ function editorClasseLabel(codigoMap,codigoLayer,indiceClasse)
 	var sUrl = "../php/editormapfile.php?funcao=pegaClasseLabel&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse;
 	core_pegaDados("Obtendo dados...",sUrl,"montaEditorClasseLabel")
 }
+function editorEstilo(codigoMap,codigoLayer,indiceClasse,indiceEstilo)
+{
+	core_montaEditor("","600px","500px")
+	var sUrl = "../php/editormapfile.php?funcao=pegaEstilo&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;
+	core_pegaDados("Obtendo dados...",sUrl,"montaEditorEstilo")
+}
 function montaEditorConexao(dados)
 {
 	var param = {
@@ -869,8 +878,60 @@ function montaEditorClasseLabel(dados)
 {
 	var param = {
 		"linhas":[
-		{ajuda:"Nome da classe para ser mostrada na legenda",
-		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
+		{ajuda:"Color to draw text with.",
+		titulo:"Color",id:"color",value:dados.color,tipo:"text"},
+		{ajuda:"Text size. Use integer to give the size in pixels of your TrueType font based label, or any of theother 5 listed keywords to bitmap fonts.",
+		titulo:"Size",id:"size",value:dados.size,tipo:"text"},
+		{ajuda:"Position of the label relative to the labeling point (layers only). First letter is Y position, second letter is X position. Auto tells MapServer to calculate a label position that will not interfere with other labels. With points and polygons, MapServer selects from the 8 outer positions (i.e. excluding cc). With lines, it only uses lc or uc, until it finds a position that doesn't collide with labels that have already been drawn. If all positions cause a conflict, then the label is not drawn (Unless the label's FORCE a parameter is set to true). Auto placement is only available with cached labels.",
+		titulo:"Position",id:"position",value:dados.position,tipo:"text"},
+		{ajuda:"Padding, in pixels, around labels. Useful for maintaining spacing around text to enhance readability. Available only for cached labels. Default is 0.",
+		titulo:"Buffer",id:"buffer",value:dados.buffer,tipo:"text"},
+		{ajuda:"Font alias (as defined in the FONTSET) to use for labeling",
+		titulo:"Font",id:"",value:dados.font,tipo:"text",div:"<div id=cFont ></div>"},
+		{ajuda:"Type of font to use. Generally bitmap fonts are faster to draw then TrueType fonts. However,TrueType fonts are scalable and available in a variety of faces. Be sure to set the FONT parameter ifyou select TrueType",
+		titulo:"Type",id:"",value:dados.type,tipo:"text",div:"<div id=cType ></div>"},
+		{ajuda:"Can text run off the edge of the map? Default is true",
+		titulo:"Partials",id:"",value:dados.partials,tipo:"text",div:"<div id=cPartials ></div>"},
+		{ajuda:"Forces labels for a particular class on, regardless of collisions. Available only for cached labels. Default is false.",
+		titulo:"Force",id:"",value:dados.force,tipo:"text",div:"<div id=cForce ></div>"},
+		{ajuda:"Color to draw a background rectangle (i.e. billboard). Off by default.",
+		titulo:"Backgroundcolor",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"text"},
+		{ajuda:"Color to draw a background rectangle (i.e. billboard) shadow. Off by default.",
+		titulo:"Backgroundshadowcolor",id:"backgroundshadowcolor",value:dados.backgroundshadowcolor,tipo:"text"},
+		{ajuda:"Color to draw a one pixel outline around the text.",
+		titulo:"Outlinecolor",id:"outlinecolor",value:dados.outlinecolor,tipo:"text"},
+		{ajuda:"Color of drop shadow.",
+		titulo:"Shadowcolor",id:"shadowcolor",value:dados.shadowcolor,tipo:"text"},
+		{ajuda:"Shadow offset in pixels.",
+		titulo:"Shadowsizex",id:"shadowsizex",value:dados.shadowsizex,tipo:"text"},
+		{ajuda:"Shadow offset in pixels.",
+		titulo:"Shadowsizey",id:"shadowsizey",value:dados.shadowsizey,tipo:"text"},
+		{ajuda:"How far should the background rectangle be offset? Default is 1.",
+		titulo:"Backgroundshadowsizex",id:"backgroundshadowsizex",value:dados.backgroundshadowsizex,tipo:"text"},
+		{ajuda:"How far should the background rectangle be offset? Default is 1.",
+		titulo:"Backgroundshadowsizey",id:"backgroundshadowsizey",value:dados.backgroundshadowsizey,tipo:"text"},
+		{ajuda:"Minimum font size to use when scaling text (pixels). Default is 4.",
+		titulo:"Minsize",id:"minsize",value:dados.minsize,tipo:"text"},
+		{ajuda:"Maximum font size to use when scaling text (pixels). Default is 256.",
+		titulo:"Maxsize",id:"maxsize",value:dados.maxsize,tipo:"text"},
+		{ajuda:"Offset values for labels, relative to the lower left hand corner of the label and the label point. Given in pixels. In the case of rotated text specify the values as if all labels are horizontal and any rotation will be compensated for.",
+		titulo:"Offsetx",id:"offsetx",value:dados.offsetx,tipo:"text"},
+		{ajuda:"Offset values for labels, relative to the lower left hand corner of the label and the label point. Given in pixels. In the case of rotated text specify the values as if all labels are horizontal and any rotation will be compensated for.",
+		titulo:"Offsety",id:"offsety",value:dados.offsety,tipo:"text"},
+		{ajuda:"Angle, given in degrees, to draw the label or AUTO to allow the software to compute the angle, AUTO is valid for LINE layers only. FOLLOW was introduced in version 4.10 and tells map server to compute a curved label for appropriate linear features",
+		titulo:"Angle (utilize MS_FOLLOW para textos curvos)",id:"angle",value:dados.angle,tipo:"text"},
+		{ajuda:"Cálculo automático do ângulo quando os elementos forem lineares",
+		titulo:"Autoangle",id:"",value:dados.angle,tipo:"text",div:"<div id=cAutoangle ></div>"},
+		{ajuda:"Should text be antialiased? Note that this requires more available colors, decreased drawing performance, and results in slightly larger output images.",
+		titulo:"Antialias",id:"antialias",value:dados.antialias,tipo:"text"},
+		{ajuda:"Character that represents an end-of-line condition in label text, thus resulting in a multi-line label.",
+		titulo:"Wrap",id:"wrap",value:dados.wrap,tipo:"text"},
+		{ajuda:"Minimum size a feature must be to be labeled. Given in pixels. For line data the overall length of the displayed line is used, for polygons features the smallest dimension of the bounding box is used. Auto keyword tells MapServer to only label features that are larger than their corresponding label. Available for cached labels only.",
+		titulo:"Minfeaturesize",id:"minfeaturesize",value:dados.minfeaturesize,tipo:"text"},
+		{ajuda:"Minimum distance between duplicate labels. Given in pixels.",
+		titulo:"Mindistance",id:"mindistance",value:dados.mindistance,tipo:"text"},
+		{ajuda:"Supported encoding format to be used for labels. If the format is not supported, the label will not be drawn. Requires the iconv library (present on most systems). The library is always detected if present on the system, but if not the label will not be drawn. Required for displaying international characters in MapServer. More information can be found at: http://www.foss4g.org/FOSS4G/MAPSERVER/mpsnf-i18n-en.html.",
+		titulo:"Encoding",id:"encoding",value:dados.encoding,tipo:"text"}
 		]
 	}
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
@@ -882,17 +943,78 @@ function montaEditorClasseLabel(dados)
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
-/*		
-	temp = "<p><select id='status' >"
-	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
+
+	temp = "<p><select id='font' >"
+	temp += core_comboObjeto(dados.fontes,"","",dados.font)
 	temp += "</select>"
-	$i("cStatus").innerHTML = temp	
-*/
+	$i("cFont").innerHTML = temp
+	
+	temp = "<p><select id='type' >"
+	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type)
+	temp += "</select>"
+	$i("cType").innerHTML = temp	
+
+	temp = "<p><select id='partials' >"
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials)
+	temp += "</select>"
+	$i("cPartials").innerHTML = temp	
+
+	temp = "<p><select id='force' >"
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.force)
+	temp += "</select>"
+	$i("cForce").innerHTML = temp	
+
+	temp = "<p><select id='autoangle' >"
+	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle)
+	temp += "</select>"
+	$i("cAutoangle").innerHTML = temp
+
 	var temp = function()
 	{salvarDadosEditor('classeLabel',dados.codigoMap,dados.codigoLayer,dados.indiceClasse)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 }
-
+function montaEditorEstilo(dados)
+{
+	var param = {
+		"linhas":[
+			{ajuda:"The symbol name or number to use for all features if attribute tables are not used. The number is the index of the symbol in the symbol file, starting at 1, the 5th symbol in the file is therefore symbol number 5. You can also give your symbols names using the NAME keyword in the symbol definition file, and use those to refer to them. Default is 0, which results in a single pixel, single width line, or solid polygon fill, depending on layer type.You can also specify a gif or png filename. The path is relative to the location of the mapfile.",
+			titulo:"Symbolname",id:"symbolname",value:dados.symbolname,tipo:"text"},
+			{ajuda:"Color to use for drawing features.",
+			titulo:"Color",id:"color",value:dados.color,tipo:"text"},
+			{ajuda:"Background-color to use for drawing features.",
+			titulo:"Backgroundcolorolor",id:"backgroundcolor",value:dados.backgroundcolor,tipo:"text"},
+			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			titulo:"Size",id:"size",value:dados.size,tipo:"text"},
+			{ajuda:"Color to use for outlining polygons and certain marker symbols. Line symbols do not support outline colors.",
+			titulo:"Outlinecolor",id:"outlinecolor",value:dados.outlinecolor,tipo:"text"},
+			{ajuda:"Width refers to the thickness of line work drawn, in pixels. Default is 1. For symbols of Type HATCH, the WIDTH is how thick the hatched lines are. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			titulo:"Width",id:"width",value:dados.width,tipo:"text"},
+			{ajuda:"Height, in pixels, of the symbol/pattern to be used. Only useful with scalable symbols. Default is 1. For symbols of Type HATCH, the SIZE is the distance between hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			titulo:"Minsize",id:"minsize",value:dados.minsize,tipo:"text"},
+			{ajuda:"Maximum size in pixels to draw a symbol. Default is 50.",
+			titulo:"Maxsize",id:"maxsize",value:dados.maxsize,tipo:"text"},
+			{ajuda:"Offset values for shadows, hollow symbols, etc ...",
+			titulo:"Offsetx",id:"offsetx",value:dados.offsetx,tipo:"text"},
+			{ajuda:"Offset values for shadows, hollow symbols, etc ...",
+			titulo:"Offsety",id:"offsety",value:dados.offsety,tipo:"text"},
+			{ajuda:"Should TrueType fonts and Cartoline symbols be antialiased.",
+			titulo:"Antialias",id:"antialias",value:dados.antialias,tipo:"text"},
+			{ajuda:"Minimum width in pixels to draw the line work.",
+			titulo:"Minwidth",id:"minwidth",value:dados.minwidth,tipo:"text"},
+			{ajuda:"Maximun width in pixels to draw the line work.",
+			titulo:"Maxwidth",id:"maxwidth",value:dados.maxwidth,tipo:"text"},
+			{ajuda:"Angle, given in degrees, to draw the line work. Default is 0. For symbols of Type HATCH, this is the angle of the hatched lines. For its use with hatched lines, see Example#8 in the SYMBOL examples.",
+			titulo:"Angle",id:"angle",value:dados.angle,tipo:"text"}
+		]
+	}
+	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += core_geraLinhas(param)
+	ins += "<br><br><br>"
+	$i("editor_bd").innerHTML = ins	
+	var temp = function()
+	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
+	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});	
+}
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 {
 	if(tipo == "conexao")
@@ -919,6 +1041,19 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
 		var prog = "../php/editormapfile.php?funcao=alterarClasseGeral"	
 	}
+	if(tipo == "classeLabel")
+	{
+		var campos = new Array("encoding","force","partials","mindistance","minfeaturesize","wrap","antialias","buffer","autoangle","angle","offsety","offsetx","position","maxsize","minsize","size","backgroundshadowsizey","backgroundshadowsizex","shadowsizey","shadowsizex","shadowcolor","outlinecolor","color","backgroundshadowcolor","backgroundcolor","type","font")
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
+		var prog = "../php/editormapfile.php?funcao=alterarClasseLabel"	
+	}
+	if(tipo == "estilo")
+	{
+		var campos = new Array("angle","maxwidth","minwidth","width","outlinecolor","backgroundcolor","antialias","offsety","offsetx","maxsize","minsize","size","color","symbolname")
+		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo
+		var prog = "../php/editormapfile.php?funcao=alterarEstilo"	
+	}
+
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]).value)}
 	core_carregando("ativa");
@@ -945,7 +1080,6 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
   					{
   						var d = YAHOO.lang.JSON.parse(o.responseText)
   						montaEditorGeral(d);
-  						//var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
   						if(d.name != codigoLayer)
   						{
   							core_pegaMapfiles("montaArvore()")
@@ -955,7 +1089,10 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
   					}
   					if(tipo=="classeGeral")
   					{montaEditorClasseGeral(YAHOO.lang.JSON.parse(o.responseText));}
-
+  					if(tipo=="classeLabel")
+  					{montaEditorClasseLabel(YAHOO.lang.JSON.parse(o.responseText));}
+  					if(tipo=="estilo")
+  					{montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));}
   					core_carregando("desativa");
   				}
   			}
@@ -966,5 +1103,55 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	}; 
 	core_makeRequest(sUrl,callback,'POST')
 }
+function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
+{
+	if(tipo == "layer")
+	{
+		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer);
+		var movimenta = core_movimentaNo(movimento,no);
+		var indiceClasse = "";
+		var indiceEstilo = "";
+	}
+	if(tipo == "classe")
+	{
+		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse);
+		var movimenta = true;
+		var indiceEstilo = "";
+	}
+	if(tipo == "estilo")
+	{
+		var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse+"_"+indiceEstilo);
+		var movimenta = true;
+	}
 
+	var callback =
+	{
+    	success: function(o)
+		{
+			core_carregando("desativa");
+			if(tipo == "classe")
+			{
+				var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
+				tree.removeChildren(no)  
+				no.expand();
+			}
+			if(tipo == "estilo")
+			{
+				var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer+"_"+indiceClasse)
+				tree.removeChildren(no)  
+				no.expand();
+			}
+
+		},
+  		failure:core_handleFailure,
+  		argument: { foo:"foo", bar:"bar" }
+	};
+	if(movimenta)
+	{
+		var sUrl = "../php/editormapfile.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo;		
+		core_carregando("ativa");
+		core_carregando(" modificando a ordem");
+		core_makeRequest(sUrl,callback)
+	}
+}
 YAHOO.util.Event.addListener(window, "load", initMenu);

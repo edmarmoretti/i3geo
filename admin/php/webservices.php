@@ -27,7 +27,7 @@ File: i3geo/admin/webservices.php
 19/6/2007
 
 */
-error_reporting(E_ALL);
+error_reporting(0);
 include_once("admin.php");
 //faz a busca da função que deve ser executada
 switch ($funcao)
@@ -55,8 +55,8 @@ switch ($funcao)
 	break;
 	
 	case "importarXmlWS":
-	$cp->set_data(importarXmlWS());
-	$cp->return_data();
+	retornaJSON(importarXmlWS());
+	exit;
 	break;
 }
 /*

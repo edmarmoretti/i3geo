@@ -39,6 +39,15 @@ input
 	width: 20px;
 	height: 20px;
 }
+.testar
+{
+	background-image:URL('../imagens/41.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor:pointer;
+	width: 20px;
+	height: 20px;
+}
 .mais
 {
 	background-image:URL('../imagens/05.png');

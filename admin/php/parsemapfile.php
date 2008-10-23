@@ -321,6 +321,7 @@ function mapfile()
 			$dstring = $d[0];
 			$dstring = str_replace("the_geom","",$dstring);
 			$dstring = str_replace("*",$colunas,$dstring);
+			$xml .= "<colunas>$colunas</colunas>";
 			$xml .= "<select>$dstring</select>\n";
 			$string = preg_replace('/.*from\s*(.+).*/i', '\1', $d[0]);
 			$s = explode("WHERE",$string);

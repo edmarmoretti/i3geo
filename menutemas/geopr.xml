@@ -6,7 +6,7 @@
       <GTIPO>Agência Nacional de Energia Elétrica</GTIPO>
       <DTIPO></DTIPO>
       <SGRUPO>
-         <SDTIPO>GSI WMS</SDTIPO>
+         <SDTIPO>ANEEL</SDTIPO>
           <TEMA>
             <TID>geopr_aneel_reservatorios</TID>
             <TNOME>Reservat&amp;oacute;rios</TNOME>
@@ -259,7 +259,7 @@
             <TID>geopr_ana_reghidro1</TID>
             <TNOME>Região Hidrográfica Nível 1</TNOME>
             <TDESC></TDESC>
-            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1&amp;service=wms</TLINK>
             <TIPOA>WMS</TIPOA>
             <TAGS>rio</TAGS>
          </TEMA>
@@ -267,7 +267,7 @@
             <TID>geopr_ana_microbacias</TID>
             <TNOME>Micro-bacias</TNOME>
             <TDESC></TDESC>
-            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1&amp;service=wms</TLINK>
             <TIPOA>WMS</TIPOA>
             <TAGS>bacia</TAGS>
          </TEMA>
@@ -275,7 +275,7 @@
             <TID>geopr_ana_federais</TID>
             <TNOME>Rios Federais</TNOME>
             <TDESC></TDESC>
-            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1</TLINK>
+            <TLINK>http://200.140.135.184/cgi-bin/mapserv?map=/usr/local/www/apache22/data/hidro/wshidro.map&amp;request=getcapabilities&amp;version=1.1.1&amp;service=wms</TLINK>
             <TIPOA>WMS</TIPOA>
             <TAGS>rio</TAGS>
          </TEMA>

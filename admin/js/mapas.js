@@ -199,6 +199,7 @@ function montaDivMapas(i)
 
 	ins += "<p>Link direto para abertura do mapa (despreza os outros parâmetros):<br>";
 	ins += "<input size=50 type=text id=Elinkdireto_mapa value='"+i.linkdireto_mapa+"' /></p>"
+	ins += "<br><br><br>"
 	return(ins)
 }
 function excluiLinha(id,row)

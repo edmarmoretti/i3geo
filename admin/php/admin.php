@@ -51,6 +51,7 @@ error_reporting(E_ALL);
 //carrega o phpmapscript
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
+include_once ($locaplic."/classesphp/funcoes_gerais.php");
 //
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico

@@ -192,7 +192,7 @@ function montaDivTemas(i)
 	ins += "<p>Permite acesso via kml?<br>"
 	ins += "<select  id='Ekml_tema' >"
 	ins += core_combosimnao(i.kml_tema)
-	ins += "</select></p>"
+	ins += "</select></p><br><br><br>"
 	return(ins)
 }
 function excluiLinha(id,row)

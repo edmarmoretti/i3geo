@@ -871,7 +871,7 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   		{
   			try
   			{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
-  			catch(e){core_handleFailure(o,o.responseText);}
+  			catch(e){core_carregando("desativa");core_handleFailure(o,o.responseText);}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

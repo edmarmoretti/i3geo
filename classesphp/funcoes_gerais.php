@@ -1197,13 +1197,20 @@ $layer - objeto layer
 */
 function pegaItens($layer)
 {
-	global $locaplic,$imgdir,$dir_tmp;
+	$sopen = $layer->open();
+	if($sopen != MS_FAILURE)
+	$items = $layer->getItems();
+	else
+	$items = array();
+	return $items;
+/*
 	if ($layer->type != 3)
 	{$layer->open();}
 	$items = $layer->getItems();
 	if ($layer->type != 3)
 	{$layer->close();}
-	return $items;	
+	return $items;
+*/	
 }
 /*
 function: buscaRapida

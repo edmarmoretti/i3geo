@@ -39,8 +39,8 @@ switch ($funcao)
 	break;
 	
 	case "importarXmlMenu":
-	$cp->set_data(importarXmlMenu());
-	$cp->return_data();
+	retornaJSON(importarXmlMenu());
+	exit;
 	break;
 	
 	case "pegaMenus":
@@ -57,6 +57,7 @@ switch ($funcao)
 	
 	case "pegaPerfis":
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
+	if(count($dados) == 0){$dados[] = "nenhum";}
 	retornaJSON($dados);
 	break;
 
@@ -777,10 +778,13 @@ function importarXmlMenu()
 	//importa os temas
 	//
 	$temasExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_subgrupos");
+	$q = $dbhw->query("select * from i3geoadmin_temas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
-	{$temasExistentes[$r["codigo_tema"]] = 0;}
+	{
+		if($r["codigo_tema"])
+		$temasExistentes[$r["codigo_tema"]] = 0;
+	}
 	foreach($xml->TEMA as $tema)
 	{
 		$nome = ixml($tema,"TNOME");
@@ -896,7 +900,7 @@ function importarXmlMenu()
 	$listaDeTags = array_unique($listaDeTags);
 	foreach ($listaDeTags as $t)
 	{
-		if(!(verificaDuplicados("select * from i3geoadmin_tags where nome = '$t'",$dbh)))
+		if($t != "" && !(verificaDuplicados("select * from i3geoadmin_tags where nome = '$t'",$dbh)))
 		$dbhw->query("INSERT INTO i3geoadmin_tags (nome) VALUES ('$t')");			
 	}
 	$dbhw = null;

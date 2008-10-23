@@ -28,7 +28,6 @@ File: i3geo/admin/sistemas.php
 
 */
 include_once("admin.php");
-$cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -88,8 +87,8 @@ switch ($funcao)
 	break;
 	
 	case "importarXmlSistemas":
-	$cp->set_data(importarXmlSistemas());
-	$cp->return_data();
+	retornaJSON(importarXmlSistemas());
+	exit;
 	break;
 }
 /*

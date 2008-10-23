@@ -16,11 +16,12 @@
 Você precisará se inscrever no Portal e ingressar na comunidade i3geo. Na página da comunidade, existem vários documentos que explicam como instalar e configurar o i3geo.</p>
 <p>De forma geral, você deverá seguir as seguintes etapas na configuração:</p>
 <p>1 - instalação e configuração
-<p>2 - criação das camadas (layers)
-<p>3 - organização das camadas em grupos e sub-grupos
-<p>4 - configuração de mapas e atlas
-<p>5 - edição do cadastro de web services e sistemas especiais
-<p>6 - customização das ferramentas e interface
+<p>2 - criação dos mapfiles no editor de mapfiles
+<p>3 - Edição dos temas, vinculando um tema a um detereminado mapfile
+<p>4 - organização das camadas em grupos e sub-grupos
+<p>5 - configuração de mapas e atlas
+<p>6 - edição do cadastro de web services e sistemas especiais
+<p>7 - customização das ferramentas e interface
 <p>Antes da versão 4.0 o i3geo utilizava arquivos armazenados em disco (arquivos XML) para organizar 
 as camadas e outras listagens. 
 Com a nova estrutura de administração, esses arquivos podem ser substituídos por registros em bancos de dados.
@@ -59,7 +60,7 @@ dos arquivos XML.
 </fieldset>
 <br>
 <fieldset>
-<legend>Editor de temas</legend>
+<legend>Editor de mapfiles</legend>
 <div id=a8 style=display:none;background-color:beige >
 	<p>As camadas disponíveis no i3geo são mantidas em arquivos na estrutura mapfile armazenados no diretório i3geo/temas
 	<p>Esses arquivos são utilizados na formação da árvore de adição de temas e em vários aplicativos do i3geo.
@@ -87,7 +88,7 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/tags.html')"><td><div class=aplicar ></div></td><td>Editar a lista de tags (palavras-chave)</td></tr>
 <tr onclick="abre('html/listatemas.html')"><td><div class=aplicar ></div></td><td>Editar a lista de temas</td></tr>
 <tr onclick="abre('html/arvore.html')"><td><div class=aplicar ></div></td><td>Editar a árvore dos menus</td></tr>
-<tr onclick="abre('html/i3geoadmin_importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
+<tr onclick="abre('html/importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </fieldset>
 <br>
@@ -171,7 +172,7 @@ que por sua vez contém temas.</p>
 <table class=lista1 >
 <tr onclick="abre('php/sqlite.php')"><td><div class=aplicar ></div></td><td>Descrição do banco padrão (SQLITE)</td></tr>
 <tr onclick="abre('../geraminiatura.php')"><td><div class=aplicar ></div></td><td>Gera as miniaturas (thumbnails) para os temas existentes no diretório i3geo/temas</td></tr>
-<tr onclick="abre('xmlmenutemas.php')"><td><div class=aplicar ></div></td><td>Ver xml com a árvore de temas</td></tr>
+<tr onclick="abre('xmlmenutemas.php?id_menu=0')"><td><div class=aplicar ></div></td><td>Ver xml com a árvore de temas</td></tr>
 <tr onclick="abre('xmlatlas.php')"><td><div class=aplicar ></div></td><td>Ver xml com os Atlas</td></tr>
 <tr onclick="abre('xmlidentifica.php')"><td><div class=aplicar ></div></td><td>Ver xml com os sistemas utilizados na ferramenta de identificação</td></tr>
 <tr onclick="abre('xmlmapas.php')"><td><div class=aplicar ></div></td><td>Ver xml com a lista de mapas</td></tr>

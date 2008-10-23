@@ -31,12 +31,6 @@ include_once("admin.php");
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
-	//verifica os editores
-	case "verificaEditores":
-	$cp->set_data(verificaEditores($editores));
-	$cp->return_data();
-	break;
-	
 	case "pegaMapas":
 	retornaJSON(pegaDados('SELECT id_mapa,nome_mapa,ordem_mapa from i3geoadmin_mapas order by ordem_mapa'));
 	exit;
@@ -61,8 +55,8 @@ switch ($funcao)
 	break;
 	
 	case "importarXmlMapas":
-	$cp->set_data(importarXmlMapas());
-	$cp->return_data();
+	retornaJSON(importarXmlMapas());
+	exit;
 	break;
 }
 /*
