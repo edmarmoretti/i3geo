@@ -146,7 +146,7 @@ $expoeMapfile_ = $expoeMapfile;
 //o modo cgi não irá funcionar
 //
 if($postgis_mapa != "")
-{$utilizacgi = "nao";echo "<br>O mapa não poderá utilizar o modo CGI.</br>";}
+{$utilizacgi = "nao";}
 if(!isset($perfil)){$perfil="";}
 $perfil_ = $perfil;
 $utilizacgi_ = $utilizacgi;
@@ -468,7 +468,7 @@ interface = arquivo html que será aberto
 */
 if ($interface != "mashup")
 {
-	echo "<br><br><span style='color:gray' >segundos: ".((microtime(1) - $tempo))."<span>";
+	echo "<br><br><span style='color:gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;' >Tempo de processamento no servidor em segundos: ".((microtime(1) - $tempo))."<span>";
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))
@@ -629,7 +629,7 @@ function mostraAguarde()
 		echo "<html><head>";
 		echo "<title>".$tituloInstituicao."</title>";
 		echo '<div id="aguarde"><center>';
-		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...carregando o mapa</p>';
+		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...preparando o mapa</p>';
 		echo '<table><tr>';
 		echo "<td colspan=3 ><center><img src='".$caminho."imagens/i3geo1.jpg'></td></tr>";
 		echo "<tr><td><center><img src='".$caminho."imagens/pspb.png'></td>";
