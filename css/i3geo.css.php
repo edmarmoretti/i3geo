@@ -325,7 +325,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -500px;
+	background-position: 3px -500px;
 	width:52px;
 	height:12px;
 }
@@ -333,7 +333,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -525px;
+	background-position: 3px -525px;
 	width:52px;
 	height:12px;
 }
@@ -341,7 +341,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -550px;
+	background-position: 3px -550px;
 	width:52px;
 	height:12px;
 }
@@ -349,7 +349,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -575px;
+	background-position: 3px -575px;
 	width:52px;
 	height:12px;
 }
@@ -805,339 +805,37 @@ th	{font-family: verdana;font-size: 8pt;}
 input { font-size: 11px; }
 select { font-size: 11px; }
 
-/*
-Copyright (c) 2006, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.net/yui/license.txt
-version: 0.11.3
-*/
-
-/**
- * 84.5% for !IE, keywords for IE
- * Percents could work for IE, but for backCompat purposes, we are using
- keywords.
- * x-small is for IE < 6 and IE6 quirks mode.
- *
- */
-body {font:13px arial,helvetica,clean,sans-serif;*font-size:small;*font:x-
-small;}
-table {font-size:inherit;font:100%;}
-
-/**
- * 99% for safari; 100% is too large
- */
-select, input, textarea {font:99% arial,helvetica,clean,sans-serif;}
-
-/**
- * Bump up !IE to get to 13px equivalent
- */
-pre, code {font:115% monospace;*font-size:100%;}
-
-/**
- * Default line-height based on font-size rather than "computed-value"
- * see: http://www.w3.org/TR/CSS21/visudet.html#line-height
- */
-body * {line-height:1.22em;}
-
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
 
-/*
-Copyright (c) 2006, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.net/yui/license.txt
-version: 0.11.3
-*/
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
-table{border-collapse:collapse;border-spacing:0;}
-fieldset,img{border:0;}
-address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
-ol,ul {list-style:none;}
-caption,th {text-align:left;}
-h1,h2,h3,h4,h5,h6{font-size:100%;}
-q:before,q:after{content:'';}
-/*
-Copyright (c) 2006, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.net/yui/license.txt
-version: 0.11.3
-*/
-body {
-   text-align:center;
-}
-
-#doc {
-   width:57.69em;
-   *width:56.3em; /* IE */
-   min-width:750px;
-   margin:auto;
-   text-align:right;
-}
-
-#hd,#bd {margin-bottom:1em;text-align:right;}
-#ft {font-size:77%;font-family:verdana;clear:both;}
-
-/* rules for main templates */
-.yui-t1 #yui-main .yui-b, .yui-t2 #yui-main .yui-b, .yui-t3 #yui-main .yui-b,
-.yui-t4 .yui-b, .yui-t5 .yui-b, .yui-t6 .yui-b {float:right;}
-.yui-t1 .yui-b, .yui-t2 .yui-b, .yui-t3 .yui-b, .yui-t4 #yui-main .yui-b, .yui-
-t5 #yui-main .yui-b, .yui-t6 #yui-main .yui-b {float:right;}
-
-/* t1: L160 */
-.yui-t1 #yui-main .yui-b {width:76%;min-width:570px;}
-.yui-t1 .yui-b {width:21.33%;min-width:160px;}
-
-/* t2 & t4: L180 & R180 */
-.yui-t2 #yui-main .yui-b, .yui-t4 #yui-main .yui-b {width:73.4%;min-
-width:550px;}
-.yui-t2 .yui-b, .yui-t4 .yui-b {width:24%;min-width:180px;}
-
-/* t3 & t6: L300 & R300 */
-.yui-t3 #yui-main .yui-b, .yui-t6 #yui-main .yui-b {width:57.6%;min-
-width:430px;}
-.yui-t3 .yui-b, .yui-t6 .yui-b {width:40%;min-width:300px;}
-
-/* t5: R240 */
-.yui-t5 #yui-main .yui-b {width:65.4%;min-width:490px;}
-.yui-t5 .yui-b {width:32%;min-width:240px;}
-
-/* t7: 750 */
-
-
-
-/*	grid-generic rules for all templates */
-
-/* all modules and grids nested in a grid get floated */
-.yui-g .yui-u, .yui-g .yui-g, .yui-ge .yui-u, .yui-gf .yui-u {
-   float:right;
-   display:inline;   /* IE */
-}
-
-/* float right and kill margin on first for added flex */
-.yui-g .first, .yui-gd .first, .yui-ge .first, .yui-gf .first {float:right; }
-
-/* 2 col */
-.yui-g .yui-u, .yui-g .yui-g {width:49.1%;}
-.yui-g .yui-g .yui-u {width:48.1%;} /* smaller for nested to preserve margins */
-
-/* 3 col */
-.yui-gb .yui-u, .yui-gc .yui-u, .yui-gd .yui-u {
-   float:right; /* need to reverse the order for 3 */
-   margin-right:2%; *margin-right:1.895%;
-   width:32%;
-}
-
-.yui-gb .first, .yui-gc .first, .yui-gd .first {margin-right:0;}
-
-/* colspan 2 */
-.yui-gc .first, .yui-gd .yui-u {width:66%;}
-.yui-gd .first {width:32%;}
-
-/* colspan 3 */
-.yui-ge .yui-u {width:24%;}
-.yui-ge .first, .yui-gf .yui-u {width:74.2%;}
-.yui-gf .first {width:24%;}
-.yui-ge .first {width:74.2%;}
-
-/* self clear floated parent containers */
-#bd:after, .yui-g:after, .yui-gb:after, .yui-gc:after, .yui-gd:after, .yui-
-ge:after, .yui-gf:after
-{content:".";display:block;height:0;clear:both;visibility:hidden;}
-#bd, .yui-g, .yui-gb, .yui-gc, .yui-gd, .yui-ge, .yui-gf {zoom:1;} /* IE */
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}table {font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+body{text-align:center;}#ft{clear:both;}#doc,#doc2,#doc3,#doc4,.yui-t1,.yui-t2,.yui-t3,.yui-t4,.yui-t5,.yui-t6,.yui-t7{margin:auto;text-align:left;width:57.69em;*width:56.25em;min-width:750px;}#doc2{width:73.076em;*width:71.25em;}#doc3{margin:auto 10px;width:auto;}#doc4{width:74.923em;*width:73.05em;}.yui-b{position:relative;}.yui-b{_position:static;}#yui-main .yui-b{position:static;}#yui-main{width:100%;}.yui-t1 #yui-main,.yui-t2 #yui-main,.yui-t3 #yui-main{float:right;margin-left:-25em;}.yui-t4 #yui-main,.yui-t5 #yui-main,.yui-t6 #yui-main{float:left;margin-right:-25em;}.yui-t1 .yui-b{float:left;width:12.30769em;*width:12.00em;}.yui-t1 #yui-main .yui-b{margin-left:13.30769em;*margin-left:13.05em;}.yui-t2 .yui-b{float:left;width:13.8461em;*width:13.50em;}.yui-t2 #yui-main .yui-b{margin-left:14.8461em;*margin-left:14.55em;}.yui-t3 .yui-b{float:left;width:23.0769em;*width:22.50em;}.yui-t3 #yui-main .yui-b{margin-left:24.0769em;*margin-left:23.62em;}.yui-t4 .yui-b{float:right;width:13.8456em;*width:13.50em;}.yui-t4 #yui-main .yui-b{margin-right:14.8456em;*margin-right:14.55em;}.yui-t5 .yui-b{float:right;width:18.4615em;*width:18.00em;}.yui-t5 #yui-main .yui-b{margin-right:19.4615em;*margin-right:19.125em;}.yui-t6 .yui-b{float:right;width:23.0769em;*width:22.50em;}.yui-t6 #yui-main .yui-b{margin-right:24.0769em;*margin-right:23.62em;}.yui-t7 #yui-main .yui-b{display:block;margin:0 0 1em 0;}#yui-main .yui-b{float:none;width:auto;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u{float:right;}.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf{width:49.1%;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{width:32%;margin-left:1.99%;}.yui-gb .yui-u{*margin-left:1.9%;*width:31.9%;}.yui-gc div.first,.yui-gd .yui-u{width:66%;}.yui-gd div.first{width:32%;}.yui-ge div.first,.yui-gf .yui-u{width:74.2%;}.yui-ge .yui-u,.yui-gf div.first{width:24%;}.yui-g .yui-gb div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first{margin-left:0;}.yui-g .yui-g .yui-u,.yui-gb .yui-g .yui-u,.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u,.yui-ge .yui-g .yui-u,.yui-gf .yui-g .yui-u{width:49%;*width:48.1%;*margin-left:0;}.yui-g .yui-gb div.first,.yui-gb .yui-gb div.first{*margin-right:0;*width:32%;_width:31.7%;}.yui-g .yui-gc div.first,.yui-gd .yui-g{width:66%;}.yui-gb .yui-g div.first{*margin-right:4%;_margin-right:1.3%;}.yui-gb .yui-gc div.first,.yui-gb .yui-gd div.first{*margin-right:0;}.yui-gb .yui-gb .yui-u,.yui-gb .yui-gc .yui-u{*margin-left:1.8%;_margin-left:4%;}.yui-g .yui-gb .yui-u{_margin-left:1.0%;}.yui-gb .yui-gd .yui-u{*width:66%;_width:61.2%;}.yui-gb .yui-gd div.first{*width:31%;_width:29.5%;}.yui-g .yui-gc .yui-u,.yui-gb .yui-gc .yui-u{width:32%;_float:right;margin-right:0;_margin-left:0;}.yui-gb .yui-gc div.first{width:66%;*float:left;*margin-left:0;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf .yui-u{margin:0;}.yui-gb .yui-gb .yui-u{_margin-left:.7%;}.yui-gb .yui-g div.first,.yui-gb .yui-gb div.first{*margin-left:0;}.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u{*width:48.1%;*margin-left:0;}s .yui-gb .yui-gd div.first{width:32%;}.yui-g .yui-gd div.first{_width:29.9%;}.yui-ge .yui-g{width:24%;}.yui-gf .yui-g{width:74.2%;}.yui-gb .yui-ge div.yui-u,.yui-gb .yui-gf div.yui-u{float:right;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf div.first{float:left;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf div.first{*width:24%;_width:20%;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf .yui-u{*width:73.5%;_width:65.5%;}.yui-ge div.first .yui-gd .yui-u{width:65%;}.yui-ge div.first .yui-gd div.first{width:32%;}#bd:after,.yui-g:after,.yui-gb:after,.yui-gc:after,.yui-gd:after,.yui-ge:after,.yui-gf:after{content:".";display:block;height:0;clear:both;visibility:hidden;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+body{text-align:center;}#ft{clear:both;}#doc,#doc2,#doc3,#doc4,.yui-t1,.yui-t2,.yui-t3,.yui-t4,.yui-t5,.yui-t6,.yui-t7{margin:auto;text-align:left;width:57.69em;*width:56.25em;min-width:750px;}#doc2{width:73.076em;*width:71.25em;}#doc3{margin:auto 10px;width:auto;}#doc4{width:74.923em;*width:73.05em;}.yui-b{position:relative;}.yui-b{_position:static;}#yui-main .yui-b{position:static;}#yui-main{width:100%;}.yui-t1 #yui-main,.yui-t2 #yui-main,.yui-t3 #yui-main{float:right;margin-left:-25em;}.yui-t4 #yui-main,.yui-t5 #yui-main,.yui-t6 #yui-main{float:left;margin-right:-25em;}.yui-t1 .yui-b{float:left;width:12.30769em;*width:12.00em;}.yui-t1 #yui-main .yui-b{margin-left:13.30769em;*margin-left:13.05em;}.yui-t2 .yui-b{float:left;width:13.8461em;*width:13.50em;}.yui-t2 #yui-main .yui-b{margin-left:14.8461em;*margin-left:14.55em;}.yui-t3 .yui-b{float:left;width:23.0769em;*width:22.50em;}.yui-t3 #yui-main .yui-b{margin-left:24.0769em;*margin-left:23.62em;}.yui-t4 .yui-b{float:right;width:13.8456em;*width:13.50em;}.yui-t4 #yui-main .yui-b{margin-right:14.8456em;*margin-right:14.55em;}.yui-t5 .yui-b{float:right;width:18.4615em;*width:18.00em;}.yui-t5 #yui-main .yui-b{margin-right:19.4615em;*margin-right:19.125em;}.yui-t6 .yui-b{float:right;width:23.0769em;*width:22.50em;}.yui-t6 #yui-main .yui-b{margin-right:24.0769em;*margin-right:23.62em;}.yui-t7 #yui-main .yui-b{display:block;margin:0 0 1em 0;}#yui-main .yui-b{float:none;width:auto;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf,.yui-gc .yui-u,.yui-gd .yui-g,.yui-g .yui-gc .yui-u,.yui-ge .yui-u,.yui-ge .yui-g,.yui-gf .yui-g,.yui-gf .yui-u{float:right;}.yui-g div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first,.yui-ge div.first,.yui-gf div.first,.yui-g .yui-gc div.first,.yui-g .yui-ge div.first,.yui-gc div.first div.first{float:left;}.yui-g .yui-u,.yui-g .yui-g,.yui-g .yui-gb,.yui-g .yui-gc,.yui-g .yui-gd,.yui-g .yui-ge,.yui-g .yui-gf{width:49.1%;}.yui-gb .yui-u,.yui-g .yui-gb .yui-u,.yui-gb .yui-g,.yui-gb .yui-gb,.yui-gb .yui-gc,.yui-gb .yui-gd,.yui-gb .yui-ge,.yui-gb .yui-gf,.yui-gc .yui-u,.yui-gc .yui-g,.yui-gd .yui-u{width:32%;margin-left:1.99%;}.yui-gb .yui-u{*margin-left:1.9%;*width:31.9%;}.yui-gc div.first,.yui-gd .yui-u{width:66%;}.yui-gd div.first{width:32%;}.yui-ge div.first,.yui-gf .yui-u{width:74.2%;}.yui-ge .yui-u,.yui-gf div.first{width:24%;}.yui-g .yui-gb div.first,.yui-gb div.first,.yui-gc div.first,.yui-gd div.first{margin-left:0;}.yui-g .yui-g .yui-u,.yui-gb .yui-g .yui-u,.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u,.yui-ge .yui-g .yui-u,.yui-gf .yui-g .yui-u{width:49%;*width:48.1%;*margin-left:0;}.yui-g .yui-gb div.first,.yui-gb .yui-gb div.first{*margin-right:0;*width:32%;_width:31.7%;}.yui-g .yui-gc div.first,.yui-gd .yui-g{width:66%;}.yui-gb .yui-g div.first{*margin-right:4%;_margin-right:1.3%;}.yui-gb .yui-gc div.first,.yui-gb .yui-gd div.first{*margin-right:0;}.yui-gb .yui-gb .yui-u,.yui-gb .yui-gc .yui-u{*margin-left:1.8%;_margin-left:4%;}.yui-g .yui-gb .yui-u{_margin-left:1.0%;}.yui-gb .yui-gd .yui-u{*width:66%;_width:61.2%;}.yui-gb .yui-gd div.first{*width:31%;_width:29.5%;}.yui-g .yui-gc .yui-u,.yui-gb .yui-gc .yui-u{width:32%;_float:right;margin-right:0;_margin-left:0;}.yui-gb .yui-gc div.first{width:66%;*float:left;*margin-left:0;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf .yui-u{margin:0;}.yui-gb .yui-gb .yui-u{_margin-left:.7%;}.yui-gb .yui-g div.first,.yui-gb .yui-gb div.first{*margin-left:0;}.yui-gc .yui-g .yui-u,.yui-gd .yui-g .yui-u{*width:48.1%;*margin-left:0;}s .yui-gb .yui-gd div.first{width:32%;}.yui-g .yui-gd div.first{_width:29.9%;}.yui-ge .yui-g{width:24%;}.yui-gf .yui-g{width:74.2%;}.yui-gb .yui-ge div.yui-u,.yui-gb .yui-gf div.yui-u{float:right;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf div.first{float:left;}.yui-gb .yui-ge .yui-u,.yui-gb .yui-gf div.first{*width:24%;_width:20%;}.yui-gb .yui-ge div.first,.yui-gb .yui-gf .yui-u{*width:73.5%;_width:65.5%;}.yui-ge div.first .yui-gd .yui-u{width:65%;}.yui-ge div.first .yui-gd div.first{width:32%;}#bd:after,.yui-g:after,.yui-gb:after,.yui-gc:after,.yui-gd:after,.yui-ge:after,.yui-gf:after{content:".";display:block;height:0;clear:both;visibility:hidden;}#bd,.yui-g,.yui-gb,.yui-gc,.yui-gd,.yui-ge,.yui-gf{zoom:1;}
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+.yuimenubar{visibility:visible;position:static;}.yuimenu .yuimenu,.yuimenubar .yuimenu{visibility:hidden;position:absolute;top:-10000px;left:-10000px;}.yuimenubar li,.yuimenu li{list-style-type:none;}.yuimenubar ul,.yuimenu ul,.yuimenubar li,.yuimenu li,.yuimenu h6,.yuimenubar h6{margin:0;padding:0;}.yuimenuitemlabel,.yuimenubaritemlabel{text-align:left;white-space:nowrap;}.yuimenubar ul{*zoom:1;}.yuimenubar .yuimenu ul{*zoom:normal;}.yuimenubar>.bd>ul:after{content:".";display:block;clear:both;visibility:hidden;height:0;line-height:0;}.yuimenubaritem{float:left;}.yuimenubaritemlabel,.yuimenuitemlabel{display:block;}.yuimenuitemlabel .helptext{font-style:normal;display:block;margin:-1em 0 0 10em;}.yui-menu-shadow{position:absolute;visibility:hidden;z-index:-1;}.yui-menu-shadow-visible{top:2px;right:-3px;left:-3px;bottom:-3px;visibility:visible;}.hide-scrollbars *{overflow:hidden;}.hide-scrollbars select{display:none;}.yuimenu.show-scrollbars,.yuimenubar.show-scrollbars{overflow:visible;}.yuimenu.hide-scrollbars .yui-menu-shadow,.yuimenubar.hide-scrollbars .yui-menu-shadow{overflow:hidden;}.yuimenu.show-scrollbars .yui-menu-shadow,.yuimenubar.show-scrollbars .yui-menu-shadow{overflow:auto;}.yui-skin-sam .yuimenubar{font-size:93%;line-height:2;*line-height:1.9;border:solid 1px #808080;background:url(../../../../assets/skins/sam/sprite.png) repeat-x 0 0;}.yui-skin-sam .yuimenubarnav .yuimenubaritem{border-right:solid 1px #ccc;}.yui-skin-sam .yuimenubaritemlabel{padding:0 10px;color:#000;text-decoration:none;cursor:default;border-style:solid;border-color:#808080;border-width:1px 0;*position:relative;margin:-1px 0;}.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel{padding-right:20px;*display:inline-block;}.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu{background:url(menubaritem_submenuindicator.png) right center no-repeat;}.yui-skin-sam .yuimenubaritem-selected{background:url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -1700px;}.yui-skin-sam .yuimenubaritemlabel-selected{border-color:#7D98B8;}.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-selected{border-left-width:1px;margin-left:-1px;*left:-1px;}.yui-skin-sam .yuimenubaritemlabel-disabled{cursor:default;color:#A6A6A6;}.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu-disabled{background-image:url(menubaritem_submenuindicator_disabled.png);}.yui-skin-sam .yuimenu{font-size:93%;line-height:1.5;*line-height:1.45;}.yui-skin-sam .yuimenubar .yuimenu,.yui-skin-sam .yuimenu .yuimenu{font-size:100%;}.yui-skin-sam .yuimenu .bd{border:solid 1px #808080;background-color:#fff;}.yui-skin-sam .yuimenu ul{padding:3px 0;border-width:1px 0 0 0;border-color:#ccc;border-style:solid;}.yui-skin-sam .yuimenu ul.first-of-type{border-width:0;}.yui-skin-sam .yuimenu h6{font-weight:bold;border-style:solid;border-color:#ccc;border-width:1px 0 0 0;color:#a4a4a4;padding:3px 10px 0 10px;}.yui-skin-sam .yuimenu ul.hastitle,.yui-skin-sam .yuimenu h6.first-of-type{border-width:0;}.yui-skin-sam .yuimenu .yui-menu-body-scrolled{border-color:#ccc #808080;overflow:hidden;}.yui-skin-sam .yuimenu .topscrollbar,.yui-skin-sam .yuimenu .bottomscrollbar{height:16px;border:solid 1px #808080;background:#fff url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;}.yui-skin-sam .yuimenu .topscrollbar{border-bottom-width:0;background-position:center -950px;}.yui-skin-sam .yuimenu .topscrollbar_disabled{background-position:center -975px;}.yui-skin-sam .yuimenu .bottomscrollbar{border-top-width:0;background-position:center -850px;}.yui-skin-sam .yuimenu .bottomscrollbar_disabled{background-position:center -875px;}.yui-skin-sam .yuimenuitem{_border-bottom:solid 1px #fff;}.yui-skin-sam .yuimenuitemlabel{padding:0 20px;color:#000;text-decoration:none;cursor:default;}.yui-skin-sam .yuimenuitemlabel .helptext{margin-top:-1.5em;*margin-top:-1.45em;}.yui-skin-sam .yuimenuitem-hassubmenu{background-image:url(menuitem_submenuindicator.png);background-position:right center;background-repeat:no-repeat;}.yui-skin-sam .yuimenuitem-checked{background-image:url(menuitem_checkbox.png);background-position:left center;background-repeat:no-repeat;}.yui-skin-sam .yui-menu-shadow-visible{background-color:#000;opacity:.12;*filter:alpha(opacity=12);}.yui-skin-sam .yuimenuitem-selected{background-color:#B3D4FF;}.yui-skin-sam .yuimenuitemlabel-disabled{cursor:default;color:#A6A6A6;}.yui-skin-sam .yuimenuitem-hassubmenu-disabled{background-image:url(menuitem_submenuindicator_disabled.png);}.yui-skin-sam .yuimenuitem-checked-disabled{background-image:url(menuitem_checkbox_disabled.png);}
 
-/*
-Copyright (c) 2006, Yahoo! Inc. All rights reserved.
-Code licensed under the BSD License:
-http://developer.yahoo.com/yui/license.txt
-Version: 0.11.3
-*/
-/* Menu styles */
-div.yuimenu {
-    visibility:hidden;
-    background-color:#f6f7ee;
-    border:solid 1px #c4c4be;
-    padding:1px;
-    z-index:3000;
-    
-}
-/* MenuBar Styles */
-div.yuimenubar {
-    background-color:#f6f7ee;
-    z-index:1000;
-}
-/*
-    Application of "zoom:1" triggers "haslayout" in IE so that the module's
-    body clears its floated elements
-*/
-div.yuimenubar div.bd {
-    zoom:1;
-    z-index:1000;
-    
-}
-/*
-    Clear the module body for other browsers
-*/
-div.yuimenubar div.bd:after {
-    content:'.';
-    display:block;
-    clear:both;
-    visibility:hidden;
-    height:0;
-    
-}
-/* Matches the UL inside a Menu or MenuBar instance */
-div.yuimenubar ul {
-    list-style-type:none;
-    margin:0;
-    padding:0;
-    
-}
-div.yuimenu ul {
-    list-style-type:none;
-    border:solid 1px #c4c4be;
-    border-width:1px 0 0 0;
-    margin:0;
-    padding:10px 0;
-    
-}
-div.yuimenu ul.first-of-type, 
-div.yuimenu ul.hastitle,
-div.yuimenu h6.first-of-type {
-    border-width:0;
-    
-}
-/* MenuItem and MenuBarItem styles */
-div.yuimenu li,
-div.yuimenubar li {
-    font-size:85%;
-    cursor:pointer;
-    cursor:hand;
-    white-space:nowrap;
-    text-align:left;
-    
-}
-div.yuimenu li.yuimenuitem {
-    padding:2px 20px;
-    
-}
-div.yuimenu li li,
-div.yuimenubar li li {
-    font-size:100%;
-    
-}
-/* Matches the help text for a menu item */
-div.yuimenu li em {
-    font-style:normal;
-    margin:0 0 0 40px;
-    
-}
-div.yuimenu li a em {
-    margin:0;
-    
-}
-div.yuimenu li a,
-div.yuimenubar li a {  
-    /*
-        "zoom:1" triggers "haslayout" in IE to ensure that the mouseover and 
-        mouseout events bubble to the parent LI in IE.
-    */
-    zoom:1;
-    color:#000;
-    text-decoration:none;
-    
-}
-div.yuimenu li.hassubmenu,
-div.yuimenu li.hashelptext {
-    text-align:right;
-    
-}
-div.yuimenu li.hassubmenu a.hassubmenu,
-div.yuimenu li.hashelptext a.hashelptext {
-    float:left;
-    display:inline; /* Prevent margin doubling in IE */
-    text-align:left;
-    
-}
-/* Matches focused and selected menu items */
-div.yuimenu li.selected,
-div.yuimenubar li.selected {
-    background-color:#8c8ad0;
-    
-}
-
-div.yuimenu li.selected a.selected,
-div.yuimenubar li.selected a.selected {
-    text-decoration:underline;
-    
-}
-div.yuimenu li.selected a.selected,
-div.yuimenu li.selected em.selected, 
-div.yuimenubar li.selected a.selected {
-    color:#fff;
-    
-}
-/* Matches disabled menu items */
-div.yuimenu li.disabled, 
-div.yuimenubar li.disabled {
-    cursor:default;
-    
-}
-div.yuimenu li.disabled a.disabled,
-div.yuimenu li.disabled em.disabled,
-div.yuimenubar li.disabled a.disabled {
-    color:#b9b9b9;
-   cursor:default;
-   
-}
-div.yuimenubar li.yuimenubaritem {
-    float:right;
-    display:inline; /* Prevent margin doubling in IE */
-    border-width:0 0 0 1px;
-    border-style:solid;
-    border-color:#c4c4be;
-    padding:4px 24px;
-    margin:0;
-    
-}
-div.yuimenubar li.yuimenubaritem.first-of-type {
-    border-width:0;
-    
-}
-/* Matches the submenu indicator for menu items */
-div.yuimenubar li.yuimenubaritem img {
-    height:8px;
-    width:8px;
-    margin:0 0 0 10px;
-    vertical-align:middle;
-    
-}
-div.yuimenu li.yuimenuitem img {
-    height:8px;
-    width:8px;
-    margin:0 -16px 0 10px;
-    border:0;
-    *margin-left:0;
-    *border-left-width:10px;
-    *border-style:solid;
-    *border-color:#f6f7ee;
-    
-}
-div.yuimenu li.yuimenuitem.selected img.selected {
-    *border-color:#8c8ad0;
-}
-div.yuimenu li.checked {
-    position:relative;
-    
-}
-div.yuimenu li.checked img.checked {
-    height:8px;
-    width:8px;
-    margin:0;
-    border:0;
-    position:absolute;
-    left:6px;
-    _left:-16px; /* Underscore hack b/c this is for IE 5.5 and IE 6 only */
-    top:.5em;
-    
-}
 /*
 Copyright (c) 2007, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
@@ -1178,343 +876,12 @@ background:url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 -
 .yui-skin-sam .yui-dialog .ft{border-top:none;padding:0 10px 10px 10px;font-size:100%;}.yui-skin-sam .yui-dialog .ft .button-group{display:block;text-align:right;}.yui-skin-sam .yui-dialog .ft .default{border-color:#304369;background-position:0 -1400px;}.yui-skin-sam .yui-dialog .ft .default .first-child{border-color:#304369;}.yui-skin-sam .yui-dialog .ft .default button{color:#fff;}.yui-skin-sam .yui-simple-dialog .bd .yui-icon{background:url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;width:16px;height:16px;margin-right:10px;float:left;}.yui-skin-sam .yui-simple-dialog .bd span.blckicon{background-position:0 -1100px;}.yui-skin-sam .yui-simple-dialog .bd span.alrticon{background-position:0 -1050px;}.yui-skin-sam .yui-simple-dialog .bd span.hlpicon{background-position:0 -1150px;}.yui-skin-sam .yui-simple-dialog .bd span.infoicon{background-position:0 -1200px;}.yui-skin-sam .yui-simple-dialog .bd span.warnicon{background-position:0 -1900px;}.yui-skin-sam .yui-simple-dialog .bd span.tipicon{background-position:0 -1250px;}.yui-skin-sam .yui-tt .bd{position:relative;top:0;left:0;z-index:1;color:#000;padding:2px 5px;border-color:#D4C237 #A6982B #A6982B #A6982B;border-width:1px;border-style:solid;background-color:#FFEE69;}.yui-skin-sam .yui-tt.show-scrollbars .bd{overflow:auto;}.yui-skin-sam .yui-tt-shadow{top:2px;right:-3px;left:-3px;bottom:-3px;background-color:#000;}.yui-skin-sam .yui-tt-shadow-visible{opacity:.12;*filter:alpha(opacity=12);}
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
-.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{margin:0 0.5em 0 0;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{margin:0 0 0.5em;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{width:6em;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{width:auto;}.yui-navset .yui-navset-left,.yui-navset-left{padding:0 0 0 6em;}.yui-navset-right{padding:0 6em 0 0;}.yui-navset-top,.yui-navset-bottom{padding:auto;}.yui-nav,.yui-nav li{margin:0;padding:0;list-style:none;}.yui-navset li em{font-style:normal;}.yui-navset{position:relative;zoom:1;}.yui-navset .yui-content{zoom:1;}.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{display:inline-block;display:-moz-inline-stack;*display:inline;vertical-align:bottom;cursor:pointer;zoom:1;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{display:block;}.yui-navset .yui-nav a{position:relative;}.yui-navset .yui-nav li a,.yui-navset-top .yui-nav li a,.yui-navset-bottom .yui-nav li a{display:block;display:inline-block;vertical-align:bottom;zoom:1;}.yui-navset-left .yui-nav li a,.yui-navset-right .yui-nav li a{display:block;}.yui-navset-bottom .yui-nav li a{vertical-align:text-top;}.yui-navset .yui-nav li a em,.yui-navset-top .yui-nav li a em,.yui-navset-bottom .yui-nav li a em{display:block;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{position:absolute;z-index:1;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{position:static;}.yui-navset .yui-navset-left .yui-nav,.yui-navset-left .yui-nav{left:0;right:auto;}.yui-navset .yui-navset-right .yui-nav,.yui-navset-right .yui-nav{right:0;left:auto;}.yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{border:solid #2647a0;border-width:0 0 5px;Xposition:relative;zoom:1;}.yui-skin-sam .yui-navset .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav li{margin:0 0.16em 0 0;padding:1px 0 0;zoom:1;}.yui-skin-sam .yui-navset .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected{margin:0 0.16em -1px 0;}.yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a{background:#d8d8d8 ;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}.yui-skin-sam .yui-navset .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em{border:solid #a3a3a3;border-width:1px 0 0;cursor:hand;padding:0.25em .75em;left:0;right:0;bottom:0;top:-1px;position:relative;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover{background:#2647a0 ;color:#fff;}.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{background:#bfdaff ;outline:0;}.yui-skin-sam .yui-navset .yui-nav .selected a em{padding:0.35em 0.75em;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a em{border-color:#243356;}.yui-skin-sam .yui-navset .yui-content{background:#edf5ff;}.yui-skin-sam .yui-navset .yui-content,.yui-skin-sam .yui-navset .yui-navset-top .yui-content{border:1px solid #808080;border-top-color:#243356;padding:0.25em 0.5em;}.yui-skin-sam .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 5px 0 0;Xposition:absolute;top:0;bottom:0;}.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 0 0 5px;}.yui-skin-sam .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset-right .yui-nav li{margin:0 0 0.16em;padding:0 0 0 1px;}.yui-skin-sam .yui-navset-right .yui-nav li{padding:0 1px 0 0;}.yui-skin-sam .yui-navset-left .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav .selected{margin:0 -1px 0.16em 0;}.yui-skin-sam .yui-navset-right .yui-nav .selected{margin:0 0 0.16em -1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav a{border-width:1px 0;}.yui-skin-sam .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 0 0 1px;padding:0.2em .75em;top:auto;left:-1px;}.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 1px 0 0;left:auto;right:-1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-left .yui-nav .selected a,.yui-skin-sam .yui-navset-left .yui-nav a:hover,.yui-skin-sam .yui-navset-right .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav .selected a,.yui-skin-sam .yui-navset-right .yui-nav a:hover,.yui-skin-sam .yui-navset-bottom .yui-nav a,.yui-skin-sam .yui-navset-bottom .yui-nav .selected a,.yui-skin-sam .yui-navset-bottom .yui-nav a:hover{background-image:none;}.yui-skin-sam .yui-navset-left .yui-content{border:1px solid #808080;border-left-color:#243356;}.yui-skin-sam .yui-navset-bottom .yui-nav,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav{border-width:5px 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav .selected,.yui-skin-sam .yui-navset-bottom .yui-nav .selected{margin:-1px 0.16em 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav li,.yui-skin-sam .yui-navset-bottom .yui-nav li{padding:0 0 1px 0;vertical-align:top;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav li a,.yui-skin-sam .yui-navset-bottom .yui-nav li a{}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav a em,.yui-skin-sam .yui-navset-bottom .yui-nav a em{border-width:0 0 1px;top:auto;bottom:-1px;}.yui-skin-sam .yui-navset-bottom .yui-content,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-content{border:1px solid #808080;border-bottom-color:#243356;}
-
-.yui-skin-sam .yuimenubar {
-
-    border: solid 0px #808080;
-    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 0;
-
-}
-
-/* 
-    The following two style rules cause a MenuBar's UL to clear its 
-    floating LIs.
-*/
-
-.yui-skin-sam .yuimenubar .bd,
-.yui-skin-sam .yuimenubar ul {
-
-    *zoom: 1;   /* For IE */
-}
-
-.yui-skin-sam .yuimenubar>.bd>ul:after {
-
-    content: ".";
-    display: block;
-    clear: both;
-    visibility: hidden;
-    height: 0;
-    line-height: 0;
-
-}
-
-
-/* MenuBarItem style rules */
-
-.yui-skin-sam .yuimenubaritem {
-
-    float: left;
-
-}
-
-.yui-skin-sam .yuimenubarnav .yuimenubaritem {
-
-    border-right: solid 1px #ccc;
-
-}
-
-.yui-skin-sam .yuimenubaritemlabel {
-
-    display: block;
-    *display: inline-block; /* For IE */
-    font-size: 93%;  /* 12px */
-    line-height: 1.5;  /* ~24px */
-    *line-height: 1.7; /* For IE */
-    padding: 0 0px;
-    color: #000;
-    text-decoration: none;
-    outline: none;
-    cursor: pointer;
-    border-style: solid;
-    border-color: #808080;
-    border-width: 0px 0;
-    position: relative;
-    margin: -1px 0;
-
-}
-
-.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel {
-
-    padding-right: 20px;
-
-}
-
-.yui-skin-sam .yuimenubaritemlabel .submenuindicator {
-    
-    /*
-        Set height and width to 1px so screen readers announce the content of 
-        the element.
-    */
-
-    width: 1px;
-    height: 1px;
-    top: 0;
-    left: 0;
-
-}
-
-.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel .submenuindicator {
-    
-    top: 50%;
-    right: 8px;
-    left: auto; /* Override "left" property set by previous style rule */
-    margin-top: -3px;
-    height: 4px;
-    width: 7px;
-    text-indent: 8px;
-    background-position: -16px -856px;
-
-}
-
-
-/* MenuBarItem states */
-
-/* Selected MenuBarItem */
-
-.yui-skin-sam .yuimenubaritem a.selected {
-
-    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x 0 -1700px;
-    border-color: #7D98B8;
-}
-
-.yui-skin-sam .yuimenubarnav .yuimenubaritem a.selected {
-
-    border-left-width: 1px;
-    margin-left: -1px;
-    *left: -1px;    /* For IE */
-
-}
-
-.yui-skin-sam .yuimenubar a.selected .submenuindicator {
-
-    background: transparent;
-
-}
-
-.yui-skin-sam .yuimenubarnav a.selected .submenuindicator {
-
-    /*
-        Reset the value of the "background" property since it is set to 
-        "transparent" by the previous rule.
-    */
-
-    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) repeat-x -16px -856px;
-
-}
-
-
-/* Disabled  MenuBarItem */
-
-.yui-skin-sam .yuimenubaritem a.disabled {
-
-    cursor: default;
-    color: #A6A6A6;
-
-}
-
-.yui-skin-sam .yuimenubarnav .yuimenubaritem a.disabled .submenuindicator {
-
-    background-position: -16px -881px;
-
-}
-
-
-/* Menu style rules */
-
-.yui-skin-sam .yuimenu .bd {
-
-    border: solid 0px #808080;
-	border-top: solid 0px gray;
-    background-color: rgb(240,240,240);
-}
-
-.yui-skin-sam .yuimenu ul {
-
-    padding: 3px 0;
-    border-width: 1px 0 0 0;
-    border-color: #ccc;
-    border-style: solid;
-	*width: 0px;
-}
-
-.yui-skin-sam .yuimenu ul.first-of-type {
-
-    border-width: 0;
-}
-
-
-
-
-/* Top and bottom scroll controls */
-
-.yui-skin-sam .yuimenu .yui-menu-body-scrolled {
-
-    border-color: #ccc #808080;
-    overflow: hidden;
-
-}
-
-.yui-skin-sam .yuimenu .topscrollbar,
-.yui-skin-sam .yuimenu .bottomscrollbar {
-
-    height: 16px;
-    border: solid 1px #808080;
-    background: #fff url(../pacotes/yui231/build/assets/skins/sam/sprite.png) no-repeat 0 0;
-
-}
-
-.yui-skin-sam .yuimenu .topscrollbar {
-
-    border-bottom-width: 0;
-    background-position: center -950px;
-
-}
-
-.yui-skin-sam .yuimenu .topscrollbar_disabled {
-
-    background-position: center -975px;
-
-}
-
-.yui-skin-sam .yuimenu .bottomscrollbar {
-
-    border-top-width: 0;
-    background-position: center -850px;
-
-}
-
-.yui-skin-sam .yuimenu .bottomscrollbar_disabled {
-
-    background-position: center -875px;
-
-}
-
-
-/* MenuItem style rules */
-
-.yui-skin-sam .yuimenuitemlabel {
-
-    font-size: 93%;  /* 12px */
-    line-height: 1.5;  /* 18px */
-    *line-height: 1.45; /* For IE */
-    padding: 0 0px;
-    display: block;
-    color: #000;
-    text-decoration: none;
-    outline: none;
-    position: relative;
-    /* 
-        Need to set the "position" property to "static" for IE otherwise the
-        MenuItem instances will not respect the value of the "overflow" 
-        property that is applied to its body element (see the above 
-        ".yui-skin-sam .yuimenu .yui-menu-body-scrolled" rule) when it 
-        is scrolled.
-    */
-
-    *position: static;
-    cursor: default;
-
-}
-
-.yui-skin-sam .yuimenuitemlabel .helptext {
-
-    font-style: normal;
-    display: block;
-    margin: -1.5em 0 0 10em;
-    *margin-top: -1.45em;  /* For IE*/
-    
-}
-
-.yui-skin-sam .yuimenuitemlabel .submenuindicator,
-.yui-skin-sam .yuimenuitemlabel .checkedindicator,
-.yui-skin-sam .yuimenubaritemlabel .submenuindicator {
-    
-    position: absolute;
-    overflow: hidden;
-    background: url(../pacotes/yui231/build/assets/skins/sam/sprite.png) no-repeat;
-
-}
-
-.yui-skin-sam .yui-menu-shadow-visible {
-
-    top: 2px;
-    right: -3px;
-    left: -3px;
-    bottom: -3px;
-    background-color: #000;
-    opacity: .12;
-    *filter: alpha(opacity=12);  /* For IE */
-    visibility: hidden;
-display:none;
-}
-
-.yui-skin-sam .visible .bd,
-.yui-skin-sam .visible .yuimenuitem {
-
-    _zoom: 1;   /* For IE 7 Quirks Mode and IE 6 Standards and Quirks Mode */
-}
-
-.yui-skin-sam .visible .yuimenuitemlabel {
-
-    *zoom: 1;   /* For IE */
-left:-15px;
-}
-
-
-/* MenuItem states */
-
-/* Selected MenuItem */
-
-.yui-skin-sam .yuimenuitem a.selected {
-
-    /*
-        Use "background" over "background-color" to clear background image 
-        set by the ".yuimenubaritem a.selected" rule.
-    */
-
-    background: #B3D4FF;
-	width:130%;
-	left:-15px;
-}
-
-
-/*
-    Remove borders and margin added by the style rule 
-    ".yui-skin-sam .yuimenubarnav .yuimenubaritem a.selected"
-*/
-
-.yui-skin-sam .yuimenubarnav .yuimenuitem a.selected {
-
-    border-width: 0;
-    margin: 0;
-    *left: 0;   /* For IE */
-
-}
-
-
-/* Disabled MenuItem */
-
-.yui-skin-sam .yuimenuitem a.disabled {
-
-    cursor: default;
-    color: #A6A6A6;
-}
+.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{margin:0 0.5em 0 0;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{margin:0 0 0.5em;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{width:6em;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{width:auto;}.yui-navset .yui-navset-left,.yui-navset-left{padding:0 0 0 6em;}.yui-navset-right{padding:0 6em 0 0;}.yui-navset-top,.yui-navset-bottom{padding:auto;}.yui-nav,.yui-nav li{margin:0;padding:0;list-style:none;}.yui-navset li em{font-style:normal;}.yui-navset{position:relative;zoom:1;}.yui-navset .yui-content{zoom:1;}.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{display:inline-block;display:-moz-inline-stack;*display:inline;vertical-align:bottom;cursor:pointer;zoom:1;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{display:block;}.yui-navset .yui-nav a{position:relative;}.yui-navset .yui-nav li a,.yui-navset-top .yui-nav li a,.yui-navset-bottom .yui-nav li a{display:block;display:inline-block;vertical-align:bottom;zoom:1;}.yui-navset-left .yui-nav li a,.yui-navset-right .yui-nav li a{display:block;}.yui-navset-bottom .yui-nav li a{vertical-align:text-top;}.yui-navset .yui-nav li a em,.yui-navset-top .yui-nav li a em,.yui-navset-bottom .yui-nav li a em{display:block;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{position:absolute;z-index:1;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{position:static;}.yui-navset .yui-navset-left .yui-nav,.yui-navset-left .yui-nav{left:0;right:auto;}.yui-navset .yui-navset-right .yui-nav,.yui-navset-right .yui-nav{right:0;left:auto;}.yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{border:solid #2647a0;border-width:0 0 5px;Xposition:relative;zoom:1;}.yui-skin-sam .yui-navset .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav li{margin:0 0.16em 0 0;padding:1px 0 0;zoom:1;}.yui-skin-sam .yui-navset .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected{margin:0 0.16em -1px 0;}.yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a{background:#d8d8d8 url(../../../../assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}.yui-skin-sam .yui-navset .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em{border:solid #a3a3a3;border-width:1px 0 0;cursor:hand;padding:0.25em .75em;left:0;right:0;bottom:0;top:-1px;position:relative;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover{background:#2647a0 url(../../../../assets/skins/sam/sprite.png) repeat-x left -1400px;color:#fff;}.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{background:#bfdaff url(../../../../assets/skins/sam/sprite.png) repeat-x left -1300px;outline:0;}.yui-skin-sam .yui-navset .yui-nav .selected a em{padding:0.35em 0.75em;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a em{border-color:#243356;}.yui-skin-sam .yui-navset .yui-content{background:#edf5ff;}.yui-skin-sam .yui-navset .yui-content,.yui-skin-sam .yui-navset .yui-navset-top .yui-content{border:1px solid #808080;border-top-color:#243356;padding:0.25em 0.5em;}.yui-skin-sam .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 5px 0 0;Xposition:absolute;top:0;bottom:0;}.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 0 0 5px;}.yui-skin-sam .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset-right .yui-nav li{margin:0 0 0.16em;padding:0 0 0 1px;}.yui-skin-sam .yui-navset-right .yui-nav li{padding:0 1px 0 0;}.yui-skin-sam .yui-navset-left .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav .selected{margin:0 -1px 0.16em 0;}.yui-skin-sam .yui-navset-right .yui-nav .selected{margin:0 0 0.16em -1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav a{border-width:1px 0;}.yui-skin-sam .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 0 0 1px;padding:0.2em .75em;top:auto;left:-1px;}.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 1px 0 0;left:auto;right:-1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-left .yui-nav .selected a,.yui-skin-sam .yui-navset-left .yui-nav a:hover,.yui-skin-sam .yui-navset-right .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav .selected a,.yui-skin-sam .yui-navset-right .yui-nav a:hover,.yui-skin-sam .yui-navset-bottom .yui-nav a,.yui-skin-sam .yui-navset-bottom .yui-nav .selected a,.yui-skin-sam .yui-navset-bottom .yui-nav a:hover{background-image:none;}.yui-skin-sam .yui-navset-left .yui-content{border:1px solid #808080;border-left-color:#243356;}.yui-skin-sam .yui-navset-bottom .yui-nav,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav{border-width:5px 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav .selected,.yui-skin-sam .yui-navset-bottom .yui-nav .selected{margin:-1px 0.16em 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav li,.yui-skin-sam .yui-navset-bottom .yui-nav li{padding:0 0 1px 0;vertical-align:top;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav li a,.yui-skin-sam .yui-navset-bottom .yui-nav li a{}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav a em,.yui-skin-sam .yui-navset-bottom .yui-nav a em{border-width:0 0 1px;top:auto;bottom:-1px;}.yui-skin-sam .yui-navset-bottom .yui-content,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-content{border:1px solid #808080;border-bottom-color:#243356;}
 
 .TreeviewMain
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 11px;margin-left: -15px;}
@@ -1526,5 +893,97 @@ left:-15px;
 {cursor:pointer;}
 .TreeviewItemTextOver
 {cursor:pointer;}
+.yui-skin-sam .yuimenubar {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0;
+border:1px solid #808080;
+font-size:93%;
+line-height:2;
+}
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
+background:transparent url(../pacotes/yui252/build/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
+}
+.yui-skin-sam .yuimenubaritem-selected {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -1700px;
+}
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu-disabled {
+background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png);
+}
+
+.yui-skin-sam .yuimenu .topscrollbar, .yui-skin-sam .yuimenu .bottomscrollbar {
+background:#FFFFFF url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+border:1px solid #808080;
+height:16px;
+}
+
+.yui-skin-sam .yuimenuitem-hassubmenu {
+background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menuitem_submenuindicator.png);
+background-position:right center;
+background-repeat:no-repeat;
+}
+
+.yui-skin-sam .yuimenuitem-checked {
+background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menuitem_checkbox.png);
+background-position:left center;
+background-repeat:no-repeat;
+}
+
+.yui-skin-sam .yuimenuitem-hassubmenu-disabled {
+background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menuitem_submenuindicator_disabled.png);
+}
+
+.yui-skin-sam .yuimenuitem-checked-disabled {
+background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menuitem_checkbox_disabled.png);
+}
+
+.yui-skin-sam .yui-panel .hd {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -200px;
+color:#000000;
+font-size:70%;
+font-weight:bold;
+line-height:2;
+padding:0 10px;
+}
+
+.yui-skin-sam .container-close {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 10 -300px;
+cursor:pointer;
+height:15px;
+position:absolute;
+right:1px;
+top:1px;
+width:14px;
+z-index:2001;
+}
+
+.yui-skin-sam .yui-simple-dialog .bd .yui-icon {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
+float:left;
+height:16px;
+margin-right:10px;
+width:16px;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
+    background:#d8d8d8 url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x; /* tab background */
+    border:solid #a3a3a3;
+    border-width:0 1px;
+    color:#000;
+    position:relative;
+    text-decoration:none;
+}
+
+.yui-skin-sam .yui-navset .yui-nav .selected a,
+.yui-skin-sam .yui-navset .yui-nav .selected a:focus, /* no focus effect for selected */
+.yui-skin-sam .yui-navset .yui-nav .selected a:hover { /* no hover effect for selected */
+    background:#2647a0 url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x left -1400px; /* selected tab background */
+    color:#fff;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a:hover,
+.yui-skin-sam .yui-navset .yui-nav a:focus {
+    background:#bfdaff url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
+    outline:0;
+}
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

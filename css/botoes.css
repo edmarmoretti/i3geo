@@ -167,7 +167,7 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -500px;
+	background-position: 3px -500px;
 	width:52px;
 	height:12px;
 }
@@ -175,7 +175,7 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -525px;
+	background-position: 3px -525px;
 	width:52px;
 	height:12px;
 }
@@ -183,7 +183,7 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -550px;
+	background-position: 3px -550px;
 	width:52px;
 	height:12px;
 }
@@ -191,7 +191,7 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -575px;
+	background-position: 3px -575px;
 	width:52px;
 	height:12px;
 }
