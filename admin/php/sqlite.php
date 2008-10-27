@@ -1,4 +1,9 @@
 <?php
+if(!file_exists("../../menutemas/admin.db"))
+{
+	echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
+	exit;
+}
 echo "<pre>";
 $dbh = new PDO('sqlite:../../menutemas/admin.db');
 echo "<br><br><span style=color:red >Lista de tabelas</span><br><br>";

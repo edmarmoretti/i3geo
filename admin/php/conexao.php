@@ -50,12 +50,26 @@ else
 }
 if($conexaoadmin == "")
 {
-	$conAdmin = "sqlite:$locaplic/menutemas/admin.db";
-	$conAdminw = "sqlite:$locaplic/menutemas/admin.db";
-	//para escrita
-	$dbhw = new PDO($conAdmin);
-	//para leitura
-	$dbh = new PDO($conAdmin);
+	$arquivosqlite = "$locaplic/menutemas/admin.db";
+	if(!file_exists($arquivosqlite))
+	{
+		echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criasqlite.php para criar o banco de dados SQLITE.";
+		exit;
+	}
+	$conAdmin = "sqlite:$arquivosqlite";
+	$conAdminw = "sqlite:$arquivosqlite";
+	try
+	{
+		//para escrita
+		$dbhw = new PDO($conAdmin);
+		//para leitura
+		$dbh = new PDO($conAdmin);
+	}
+	catch (PDOException $e)
+	{
+    	print "Erro ao criar o objeto PDO!: " . $e->getMessage() . "<br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
+    	die();
+	}
 }
 else
 include($conexaoadmin);
