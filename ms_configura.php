@@ -167,7 +167,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 
 	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
-	$locmapas = "../menutemas/mapas.xml";
+	$locmapas = "";
 	/*
 	Variable: $R_path
 	
@@ -257,7 +257,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
 	*/
-	$atlasxml = "../menutemas/atlas.xml";
+	$atlasxml = "";
 	/*
 	 Variable: $expoeMapfile
 	 
