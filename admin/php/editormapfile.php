@@ -31,7 +31,7 @@ File: i3geo/admin/sistemas.php
 include_once("admin.php");
 include_once("../../ms_configura.php");
 include_once("../../classesphp/funcoes_gerais.php");
-error_reporting(E_ALL);
+error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
