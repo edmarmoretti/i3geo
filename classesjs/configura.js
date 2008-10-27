@@ -348,6 +348,12 @@ pt: "Agrupa",
 en:"Group",
 es:"Agrupa"
 }],
+"u27": [
+{
+pt: "Outros",
+en:"Others",
+es:"Otros"
+}],
 //arvore com a lista de temas
 "t1": [
 {
@@ -1532,42 +1538,19 @@ oMenuData = {
 	{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" }
 	],
 	"analise": [
-    { text: $trad("u22"),url: "#", 
-		submenu:
-		{
-			id: "menugrade", 
-			itemdata: 
-			[
-				{text: $trad("u7"), url: "javascript:gradePol()"},
-				{ text: $trad("u8"), url: "javascript:gradePontos()" },
-				{ text: $trad("u9"), url: "javascript:gradeHex()" }
-			] 
-		}	
-	},
-    { text: $trad("u23"),url: "#", 
-		submenu:
-		{
-			id: "menupontos", 
-			itemdata: 
-			[
-				{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
-				{ text: $trad("u12"), url: "javascript:nptPol()" },
-				{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
-				{ text: $trad("u14"), url: "javascript:pontosdistri()" }
-			] 
-		}	
-	},
-    { text: $trad("u24"),url: "#", 
-		submenu:
-		{
-			id: "menupoligonos", 
-			itemdata: 
-			[
-				{ text: $trad("u11"), url: "javascript:centroide()" },
-				{ text: $trad("u25"), url: "javascript:dissolve()" }
-			] 
-		}	
-	},
+    { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
+	{ text: $trad("u7"), url: "javascript:gradePol()"},
+	{ text: $trad("u8"), url: "javascript:gradePontos()" },
+	{ text: $trad("u9"), url: "javascript:gradeHex()" },
+    { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
+	{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
+	{ text: $trad("u12"), url: "javascript:nptPol()" },
+	{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
+	{ text: $trad("u14"), url: "javascript:pontosdistri()" },
+    { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
+	{ text: $trad("u11"), url: "javascript:centroide()" },
+	{ text: $trad("u25"), url: "javascript:dissolve()" },
+    { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
 	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
 	{ text: $trad("u10"), url: "javascript:buffer()" },
 	{ text: $trad("u26"), url: "javascript:agrupaElementos()" }

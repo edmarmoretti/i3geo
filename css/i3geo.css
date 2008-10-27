@@ -5,7 +5,7 @@ span
 body
 {background-color:black;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;margin: 0px;z-index:1000;}
 A
-{text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
+{text-align:left;font-size: 11px;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
 A:hover 
 {color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
 img
@@ -371,10 +371,18 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -625px;
 	width:20px;
 	height:10px;
-	top:-13px;
-	left:25px;
 	cursor:pointer;
 }
+#espanhol
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1400px;
+	width:20px;
+	height:10px;
+	cursor:pointer;
+}
+
 /*ícone de aplicar*/
 .tic
 {
@@ -653,17 +661,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	width:10px;
 	height:20px;
 }
-#espanhol
-{
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -1400px;
-	width:20px;
-	height:10px;
-	top:-13px;
-	left:25px;
-	cursor:pointer;
-}
 #buscafotos
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -893,14 +890,9 @@ version: 2.5.2
 {cursor:pointer;}
 .TreeviewItemTextOver
 {cursor:pointer;}
-.yui-skin-sam .yuimenubar {
-background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0;
-border:1px solid #808080;
-font-size:93%;
-line-height:2;
-}
+
 .yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
-background:transparent url(../pacotes/yui252/build/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
+background:transparent url(../pacotes/yui252/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
 }
 .yui-skin-sam .yuimenubaritem-selected {
 background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -1700px;
@@ -909,7 +901,24 @@ background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) 
 background-image:url(../pacotes/yui252/build/menu/assets/skins/sam/menubaritem_submenuindicator_disabled.png);
 }
 
-.yui-skin-sam .yuimenu .topscrollbar, .yui-skin-sam .yuimenu .bottomscrollbar {
+.yuimenubaritem {
+float:right;
+border-left: 1px solid gray;
+}
+
+.yui-skin-sam .yuimenubaritemlabel
+{
+border-color:#808080;
+border-style:solid;
+border-width:1px 0;
+color:#000000;
+cursor:default;
+margin:-1px 0;
+padding:0 20px;
+text-decoration:none;
+}
+
+.yui-skin-sam .topscrollbar, .yui-skin-sam .bottomscrollbar {
 background:#FFFFFF url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
 border:1px solid #808080;
 height:16px;
@@ -945,13 +954,13 @@ padding:0 10px;
 }
 
 .yui-skin-sam .container-close {
-background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 10 -300px;
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
 cursor:pointer;
 height:15px;
 position:absolute;
 right:1px;
 top:1px;
-width:14px;
+width:25px;
 z-index:2001;
 }
 
@@ -962,6 +971,12 @@ height:16px;
 margin-right:10px;
 width:16px;
 }
+
+.yui-navset{
+    background:#d8d8d8 url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x; /* tab background */
+	z-index:3000;
+}
+
 
 .yui-skin-sam .yui-navset .yui-nav a,
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
@@ -976,12 +991,19 @@ width:16px;
 .yui-skin-sam .yui-navset .yui-nav .selected a,
 .yui-skin-sam .yui-navset .yui-nav .selected a:focus, /* no focus effect for selected */
 .yui-skin-sam .yui-navset .yui-nav .selected a:hover { /* no hover effect for selected */
-    background:#2647a0 url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x left -1400px; /* selected tab background */
-    color:#fff;
+    background:white;
+    outline:0;
 }
 
-.yui-skin-sam .yui-navset .yui-nav a:hover,
-.yui-skin-sam .yui-navset .yui-nav a:focus {
+.yui-skin-sam .yui-navset .yui-nav a:hover{
     background:#bfdaff url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
     outline:0;
-}
+}
+
+.yui-skin-sam .yui-navset .yui-nav a:active,
+.yui-skin-sam .yui-navset .yui-nav a:focus
+{
+    background:white;
+    outline:0;
+}
+

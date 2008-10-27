@@ -773,7 +773,7 @@ function ativaGuias()
 	{
 		gpai.id = "guiasYUI";
 		gpai.className = "yui-navset";
-		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
 		//
 		//define os títulos das guias padrão
 		//
@@ -817,6 +817,20 @@ function ativaGuias()
 			if ($i("guia"+g))
 			{
 				eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
+				$i("guia"+g).onmouseover = function()
+				{
+					var bcg = this.parentNode.parentNode.style;
+					var cor = bcg.background.split(" ")[0];
+					if(cor != "white")
+					bcg.background = "#bfdaff";
+				};
+				$i("guia"+g).onmouseout = function()
+				{
+					var bcg = this.parentNode.parentNode.style;
+					var cor = bcg.background.split(" ")[0];
+					if(cor != "white")
+					bcg.background = "transparent";
+				};
 				if($i("guia"+g+"obj"))
 				{
 					$i("guia"+g+"obj").style.overflow="auto";
@@ -831,7 +845,9 @@ function ativaGuias()
 	if ($i(objmapa.guiaTemas))
 	{
 		$i(objmapa.guiaTemas).onclick = function()
-		{g_guiaativa = objmapa.guiaTemas;mostraguiaf(1);};
+		{
+			g_guiaativa = objmapa.guiaTemas;mostraguiaf(1);
+		};
 	}
 	if ($i(objmapa.guiaMenu))
 	{
@@ -1330,12 +1346,16 @@ function mostraguiaf(guia)
 				jj = fs[j];
 				if ($i("guia"+jj+"obj"))
 				{$i("guia"+jj+"obj").style.display="none";}
+				$i("guia"+fs[j]).parentNode.parentNode.style.background="transparent";
 			}
 		}
 		if ($i("guia"+guia+"obj"))
-		{$i("guia"+guia+"obj").style.display="block";}
+		{
+			$i("guia"+guia+"obj").style.display="block";
+		}
 		else
 		{alert("O objeto guia"+guia+"obj nao existe.");}
+		$i("guia"+guia).parentNode.parentNode.style.background="white";
 	}
 }
 /*

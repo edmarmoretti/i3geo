@@ -633,7 +633,7 @@ function Mapa(e,m)
 				//ativa os botões  das funções
 				//
 				var l = g_listaFuncoesBotoes.botoes;
-				var lle = l.length;
+				//var lle = l.length;
 				var b = l.length-1;
 				if (b >= 0)
 				{
@@ -700,7 +700,6 @@ function Mapa(e,m)
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				if($i("mst"))
 				{$i("mst").style.width=objmapa.w + temp + "px";}
-				
 				if($i("contemImg"))
 				{
 					var i = $i("contemImg").style;
@@ -742,13 +741,13 @@ function Mapa(e,m)
 			//ativa a guia correta
 			var temp = g_guiaativa.split("guia");
 			mostraguiaf(temp[1]);
-			//verifica se a guia5 (mapas) deve ou não ser mostrada
-			/*
-			if ($i(objmapa.guiaListaMapas))
+			//
+			//ativa a cor da guia
+			//
+			if ($i("guia"+temp[1]))
 			{
-				if (g_locmapas == ""){$i(objmapa.guiaListaMapas).style.display = "none"}
+				$i("guia"+temp[1]).parentNode.parentNode.focus();
 			}
-			*/
 			if (pCookie("g_janelaMen")){g_janelaMen = pCookie("g_janelaMen");}
 			if (g_janelaMen == "sim"){initJanelaMen();}
 			if (g_mapaRefDisplay != "none")

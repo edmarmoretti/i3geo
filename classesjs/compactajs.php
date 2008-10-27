@@ -99,6 +99,7 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
 //gera um único css
 //
+
 $cssfiles = array(
 "../css/geral.css",
 "../css/botoes.css",
@@ -111,8 +112,9 @@ $cssfiles = array(
 "../pacotes/yui231/build/container/assets/skins/sam/container.css",
 "../pacotes/yui252/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/jsobjects/jsUI-Treeview/default.css",
-"../css/corrigeyui_geral.css",
-);
+"../css/corrigeyui_geral.css"
+); 
+
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 

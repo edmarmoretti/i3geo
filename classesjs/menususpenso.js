@@ -42,67 +42,59 @@ iddiv - id do DIV que receberá o menu
 */
 function montaMenuSuspenso(iddiv)
 { 
-	idstemp = new Array();
 	if($i(iddiv))
 	{
-		$i(iddiv).className="yuimenubar yuimenubarnav";
-
+		$i(iddiv).className="yuimenubar";
 		if(oMenuData.ajudas)
 		{
 			var ins = "";
-			ins += '<div class="bd" style="align:right;border: 0px solid white;z-index:2000;line-height:1.4" >';
+			ins += '<div class="bd" style="align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 			ins += '<ul class="first-of-type" style="border:0px solid white;top:10px;">';
  			if(objmapa.w >= 500)
  			{
-				ins += '<li class="yuimenubaritem" style="border: 0px solid white;" >';
-				ins += '<img style="border: 0px solid white;padding-right:0px;padding:1px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" /></li>';
-				ins += '<li class="yuimenubaritem" ><img style="border: 0px solid white;padding-right:0px;padding:1px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" /></li>';
-				ins += '<li class="yuimenubaritem" ><img style="border: 0px solid white;padding-right:0px;padding:1px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" /></li>';
+				ins += '<li class="yuimenubaritem first-of-type" style="float:left;border: 0px solid white;" >';
+				ins += '&nbsp;<img  style="border: 0px solid white;top:-7px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />';
+				ins += '</li><li class="yuimenubaritem" style="float:left;border: 0px solid white;padding-left:10px;padding-right:10px;" >&nbsp;<img  style="top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />';
+				ins += '</li><li class="yuimenubaritem" style="float:left;border: 0px solid white;" >&nbsp;<img  style="top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
+				ins += '</li>';
 			}
- 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
- 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
+			ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
-			ins += '<li class="yuimenubaritem first-of-type" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
+ 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
+ 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
  			ins += '</ul>'; 
- 			ins+='</div>';
+ 			ins += '</div>';
  			$i("menus").innerHTML=ins;
  		}
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
 		{
 			if(objmapa.w >= 500)
-			{var conta = 6;}
-			else
 			{var conta = 3;}
+			else
+			{var conta = 0;}
 			for(var nomeMenu in oMenuData)
 			{
 				var v="this.getItem("+conta+").cfg.setProperty('submenu',{id:'"+nomeMenu+"',itemdata: oMenuData['"+nomeMenu+"']})";
-				idstemp.push(nomeMenu);
 				eval(v);
-				var conta=conta-1;
+				var conta=conta+1;
 			}
 		}
-	}
-	else{return;}
- 	var oMenuBar=new YAHOO.widget.MenuBar(iddiv,{autosubmenudisplay: true, showdelay: 250, hidedelay: 750, lazyload: true});
- 	oMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
- 	oMenuBar.render();
-	//
-	//corrige problemas de estilo
-	//
-	var temp = $i("menus").style;
-	temp.backgroundRepeat = "scroll";
-	temp.backgroundPosition = "0px -5px";
-	temp.border = "0px solid white";
-	var temp = $i(iddiv).style;
-	temp.backgroundRepeat = "scroll";
-	temp.backgroundPosition = "0px -5px";
-	temp.border = "0px solid white";
-	if($i("contemMenu"))
-	{
-		var temp = $i("contemMenu").style;
-		temp.backgroundRepeat = "scroll";
-		temp.backgroundPosition = "0px 0px";
+ 		var oMenuBar=new YAHOO.widget.MenuBar(iddiv,{autosubmenudisplay: true, showdelay: 150, hidedelay: 250, lazyload: false});
+ 		oMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
+ 		oMenuBar.render();
+		//
+		//corrige problemas de estilo
+		//
+		var temp = $i("menus").style;
+		temp.backgroundPosition = "0px -5px";
 		temp.border = "0px solid white";
+		var temp = $i(iddiv).style;
+		temp.backgroundPosition = "0px -5px";
+		temp.border = "0px solid white";
+		if($i("contemMenu"))
+		{
+			$i("contemMenu").className="yui-navset";
+		}
 	}
 }
 function testamenususpenso(){}
