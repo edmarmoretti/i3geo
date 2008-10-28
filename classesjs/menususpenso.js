@@ -50,12 +50,14 @@ function montaMenuSuspenso(iddiv)
 			var ins = "";
 			ins += '<div class="bd" style="align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 			ins += '<ul class="first-of-type" style="border:0px solid white;top:10px;">';
+ 			var sobe = "";
+ 			if(navn){var sobe = "line-height:0px;";}
  			if(objmapa.w >= 500)
  			{
-				ins += '<li class="yuimenubaritem first-of-type" style="float:left;border: 0px solid white;" >';
-				ins += '&nbsp;<img  style="border: 0px solid white;top:-7px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />';
-				ins += '</li><li class="yuimenubaritem" style="float:left;border: 0px solid white;padding-left:10px;padding-right:10px;" >&nbsp;<img  style="top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />';
-				ins += '</li><li class="yuimenubaritem" style="float:left;border: 0px solid white;" >&nbsp;<img  style="top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
+				ins += '<li class="yuimenubaritem first-of-type" style="'+sobe+'float:left;border: 0px solid white;" >';
+				ins += '&nbsp;<img  style="border: 0px solid white;padding:0 0px;top:-7px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
 				ins += '</li>';
 			}
 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
