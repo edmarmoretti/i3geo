@@ -33,24 +33,29 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
 */
-if (file_exists("../../../ms_configura.php"))
-{include("../../../ms_configura.php");}
+if(isset($locaplic) && $locaplic != "")
+{include($locaplic."/ms_configura.php");}
 else
 {
-	if (file_exists("../../ms_configura.php"))
-	{include("../../ms_configura.php");}
+	if (file_exists("../../../ms_configura.php"))
+	{include("../../../ms_configura.php");}
 	else
 	{
-		if (file_exists("../ms_configura.php"))
-		{include("../ms_configura.php");}
+		if (file_exists("../../ms_configura.php"))
+		{include("../../ms_configura.php");}
 		else
-		if (file_exists("ms_configura.php"))
-		{include("ms_configura.php");}
+		{
+			if (file_exists("../ms_configura.php"))
+			{include("../ms_configura.php");}
+			else
+			if (file_exists("ms_configura.php"))
+			{include("ms_configura.php");}
+		}
 	}
 }
 if($conexaoadmin == "")
 {
-	$arquivosqlite = "$locaplic/menutemas/admin.db";
+	$arquivosqlite = $locaplic."/menutemas/admin.db";
 	if(!file_exists($arquivosqlite))
 	{
 		echo "O arquivo menutemas/admin.db não existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE.";
@@ -70,6 +75,7 @@ if($conexaoadmin == "")
     	print "Erro ao criar o objeto PDO!: " . $e->getMessage() . "<br/> Talvez exista alguma incompatibilidade entre o PHP e o banco admin.db. Vc pode apagar o arquivo menutemas/admin.db e recria-lo com admin/php/criasqlite.php";
     	die();
 	}
+
 }
 else
 include($conexaoadmin);

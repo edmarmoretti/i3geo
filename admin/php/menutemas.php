@@ -57,7 +57,7 @@ switch ($funcao)
 	
 	case "pegaPerfis":
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
-	if(count($dados) == 0){$dados[] = "nenhum";}
+	if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
 	retornaJSON($dados);
 	break;
 
@@ -145,7 +145,7 @@ switch ($funcao)
 	{
 		$tabela = "i3geoadmin_tags";
 		$coluna = "id_tag";
-		excluiTagTemas($id);
+		//excluiTagTemas($id);
 	}
 	if($tabela == "perfis")
 	{
@@ -198,7 +198,8 @@ switch ($funcao)
 function excluiPerfil($id)
 {
 	require_once("conexao.php");
-    foreach($dbh->query("select * from i3geoadmin_perfis where perfil = $id") as $row)
+	$perfil = "";
+    foreach($dbh->query("select * from i3geoadmin_perfis where perfil = '$id'") as $row)
     {$perfil = $row["perfil"];}
     if($perfil == "")
     {return;}

@@ -32,7 +32,7 @@ function montaTabela_G(dados)
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha_G(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
@@ -81,7 +81,7 @@ function montaTabela_G(dados)
 			if (column.key == 'excluir')
 			{
 				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_grupo'),target);
+				excluiLinha_G(record.getData('id_grupo'),target);
 			}
 			else
 			{this.onEventShowCellEditor(ev);}

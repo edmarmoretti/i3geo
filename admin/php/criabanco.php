@@ -1,6 +1,7 @@
 <?php
 $funcao = "";
 include_once("admin.php");
+verificaEditores($editores);
 $tabelas = array(
 "CREATE TABLE i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT)",
 "CREATE TABLE i3geoadmin_sistemasf (abrir_funcao TEXT, h_funcao NUMERIC, id_funcao INTEGER PRIMARY KEY, id_sistema NUMERIC, nome_funcao TEXT, perfil_funcao TEXT, w_funcao NUMERIC)",
@@ -21,7 +22,7 @@ $tabelas = array(
 "CREATE TABLE i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 "CREATE TABLE i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)"
 );
-if($conexaoadmin != "")
+if($conexaoadmin == "")
 {
 	if(file_exists("../../menutemas/admin.db"))
 	{echo "Arquivo menutemas/admin.db ja existe";exit;}

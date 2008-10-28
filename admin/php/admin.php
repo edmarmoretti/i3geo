@@ -56,7 +56,7 @@ include_once ($locaplic."/classesphp/funcoes_gerais.php");
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico
 //
-if($funcao != "verificaEditores")
+if(isset($funcao) && $funcao != "verificaEditores")
 {if(verificaEditores($editores) == "nao"){echo "vc nao e um editor cadastrado";exit;}}
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
@@ -66,7 +66,7 @@ else
 {
 	$mapfile = "geral1";
 }
-if($funcao == "limpar")
+if(isset($funcao) && $funcao == "limpar")
 {
 	$tabelas = array("i3geoadmin_atlas","i3geoadmin_atlasp","i3geoadmin_atlast","i3geoadmin_grupos","i3geoadmin_identifica","i3geoadmin_mapas","i3geoadmin_menus","i3geoadmin_n1","i3geoadmin_n2","i3geoadmin_n3","i3geoadmin_raiz","i3geoadmin_sistemas","i3geoadmin_sistemasf","i3geoadmin_subgrupos","i3geoadmin_tags","i3geoadmin_temas","i3geoadmin_ws");
 	include("conexao.php");
@@ -159,12 +159,15 @@ Function: pegaDados
 
 Executa um sql de busca de dados
 */
-function pegaDados($sql)
+function pegaDados($sql,$locaplic="")
 {
 	try 
 	{
     	$resultado = array();
+    	if($locaplic == "")
     	include("conexao.php");
+    	else
+    	include("$locaplic./admin/php/conexao.php");
     	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     	$resultado = $q->fetchAll();
     	$dbh = null;
