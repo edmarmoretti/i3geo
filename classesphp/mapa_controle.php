@@ -117,7 +117,7 @@ if ($funcao != "criaMapa")
 //verifica se deve ativar o debug
 //
 if (isset($debug) && $debug == "sim")
-{error_reporting(E_ALL);}
+{error_reporting(0);}
 //
 //ativa o php mapscript e as extensões necessárias
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido

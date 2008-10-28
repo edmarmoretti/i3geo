@@ -58,7 +58,7 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="")
 	{
-		error_reporting(0);
+		error_reporting(E_ALL);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locsistemas = $locsistemas;
@@ -104,6 +104,8 @@ array
 	function pegaListaDeMenus()
 	{
 		$resultado = array();
+		//necessário por conta da inclusao do conexao.php
+		$locaplic = $this->locaplic;
 		//
 		//se $menutemas estiver "", o i3geo
 		//irá utilizar o sistema de administração para pegar os menus
@@ -112,7 +114,7 @@ array
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
-			include_once($this->locaplic."/admin/php/conexao.php");
+			include($this->locaplic."/admin/php/conexao.php");
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     		$regs = $q->fetchAll();
@@ -160,6 +162,8 @@ array
 */
 	function pegaListaDeMapas($locmapas)
 	{
+		//necessário por conta da inclusao do conexao.php
+		$locaplic = $this->locaplic;
 		$perfilgeral = implode(" ",$this->perfil);
 		if($locmapas != "")
 		{$this->xml = simplexml_load_file($locmapas);}
@@ -219,13 +223,16 @@ array
 		//lê os arquivos xml
 		//"&tipo=gruposeraiz" pega apenas os nomes dos grupos e temas na raiz
 		//
+		//necessário por conta da inclusao do conexao.php
+		$locaplic = $this->locaplic;
 		include_once($this->locaplic."/admin/php/xml.php");
 		if($listasgrupos == "sim")
 		{$tipo = "";}
 		else
 		{$tipo = "gruposeraiz";}
 		$this->xml = "";
-		foreach($this->pegaListaDeMenus() as $menu)
+		$tempm = $this->pegaListaDeMenus(); 
+		foreach($tempm as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
@@ -403,6 +410,7 @@ array
 */
 	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
 	{
+		$locaplic=$this->locaplic;
 		include_once($this->locaplic."/admin/php/xml.php");
 		$tipo = "subgrupos";
 		$this->xml = "";
