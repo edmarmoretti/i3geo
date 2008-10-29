@@ -25,7 +25,7 @@
     var map = new GMap(document.getElementById("map"));
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-    map.setMapType(G_SATELLITE_TYPE);
+    map.setMapType(G_SATELLITE_MAP);
     map.centerAndZoom(new GPoint(pt1,pt2), 7);
     GEvent.addListener(map, "moveend", function() {
     	ondegoogle(map);
