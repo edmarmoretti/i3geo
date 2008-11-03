@@ -53,6 +53,9 @@ else
 		}
 	}
 }
+if(!isset($conexaoadmin))
+{$conexaoadmin = "";}
+
 if($conexaoadmin == "")
 {
 	$arquivosqlite = $locaplic."/menutemas/admin.db";

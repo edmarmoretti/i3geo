@@ -100,6 +100,28 @@ switch ($funcao)
 	exit;
 	break;
 	
+	case "pegaTemaPorMapfile":
+	$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
+	$dados = pegaDados($sql);
+	if(count($dados) == 0)
+	{
+		$id = alteraTemas();
+		$nome = "";
+		$desc = "";
+		$codigo = $codigo_tema;
+		$tipoa = "";
+		$download = "SIM";
+		$ogc = "SIM";
+		$kml = "SIM";
+		$link = "";
+		$tags = "";
+		alteraTemas();
+		$dados = pegaDados($sql);
+	}
+	retornaJSON($dados);
+	exit;
+	break;	
+	
 	case "pegaTemas2":
 	retornaJSON(pegaTemas2());
 	exit;
@@ -654,7 +676,7 @@ function alteraTemas()
 		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
 		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
 		//$tags = mb_convert_encoding($tags,"UTF-8","ISO-8859-1");
-    	require_once("conexao.php");
+    	include("conexao.php");
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
@@ -662,7 +684,7 @@ function alteraTemas()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_temas");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
 			$id = $dbh->query("SELECT * FROM i3geoadmin_temas");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_tema']);
@@ -750,8 +772,8 @@ function importarXmlMenu()
 	{$gruposExistentes[$r["nome_grupo"]] = 0;}
 	foreach($xml->GRUPO as $grupo)
 	{
-		$nome = ixml($grupo,"GTIPO");
-		$descricao = ixml($grupo,"DTIPO");
+		$nome = html_entity_decode(ixml($grupo,"GTIPO"));
+		$descricao = html_entity_decode(ixml($grupo,"DTIPO"));
 		if(!isset($gruposExistentes[$nome]))
 		$dbhw->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
 		$gruposExistentes[$nome] = 0;
@@ -768,7 +790,7 @@ function importarXmlMenu()
 	{
 		foreach($grupo->SGRUPO as $sgrupo)
 		{
-			$nome = ixml($sgrupo,"SDTIPO");
+			$nome = html_entity_decode(ixml($sgrupo,"SDTIPO"));
 			$descricao = "";
 			if(!isset($subgruposExistentes[$nome]))
 			$dbhw->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
@@ -788,8 +810,8 @@ function importarXmlMenu()
 	}
 	foreach($xml->TEMA as $tema)
 	{
-		$nome = ixml($tema,"TNOME");
-		$descricao = ixml($tema,"TDESC");
+		$nome = html_entity_decode(ixml($tema,"TNOME"));
+		$descricao = html_entity_decode(ixml($tema,"TDESC"));
 		$codigo = ixml($tema,"TID");
 		$link = ixml($tema,"TLINK");
 		$tipo = ixml($tema,"TIPOA");
@@ -806,8 +828,8 @@ function importarXmlMenu()
 	{
 		foreach($grupo->TEMA as $tema)
 		{
-			$nome = ixml($tema,"TNOME");
-			$descricao = ixml($tema,"TDESC");
+			$nome = html_entity_decode(ixml($tema,"TNOME"));
+			$descricao = html_entity_decode(ixml($tema,"TDESC"));
 			$codigo = ixml($tema,"TID");
 			$link = ixml($tema,"TLINK");
 			$tipo = ixml($tema,"TIPOA");
@@ -824,8 +846,8 @@ function importarXmlMenu()
 		{
 			foreach($sgrupo->TEMA as $tema)
 			{
-				$nome = ixml($tema,"TNOME");
-				$descricao = ixml($tema,"TDESC");
+				$nome = html_entity_decode(ixml($tema,"TNOME"));
+				$descricao = html_entity_decode(ixml($tema,"TDESC"));
 				$codigo = ixml($tema,"TID");
 				$link = ixml($tema,"TLINK");
 				$tipo = ixml($tema,"TIPOA");

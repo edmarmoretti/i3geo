@@ -167,7 +167,7 @@ function pegaDados($sql,$locaplic="")
     	if($locaplic == "")
     	include("conexao.php");
     	else
-    	include("$locaplic./admin/php/conexao.php");
+    	include("$locaplic/admin/php/conexao.php");
     	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     	$resultado = $q->fetchAll();
     	$dbh = null;

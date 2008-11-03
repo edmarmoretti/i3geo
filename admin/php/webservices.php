@@ -131,8 +131,8 @@ function importarXmlWS()
 	{
 		foreach($c->item as $item)
 		{
-			$descricao = ixml($item,"description");
-			$nome = ixml($item,"title");
+			$descricao = html_entity_decode(ixml($item,"description"));
+			$nome = html_entity_decode(ixml($item,"title"));
 			$autor = ixml($item,"author");
 			$link = ixml($item,"link");
 			if(!isset($wsExistentes[$nome]))

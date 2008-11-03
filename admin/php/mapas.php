@@ -130,9 +130,9 @@ function importarXmlMapas()
 	foreach($xml->MAPA as $mapa)
 	{
 		$perfil = ixml($mapa,"PERFIL");
-		$descricao = ixml($mapa,"DESCRICAO");
+		$descricao = html_entity_decode(ixml($mapa,"DESCRICAO"));
 		//$descricao = mb_convert_encoding($descricao,"UTF-8","ISO-8859-1");
-		$nome = ixml($mapa,"NOME");
+		$nome = html_entity_decode(ixml($mapa,"NOME"));
 		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
 		$imagem = ixml($mapa,"IMAGEM");
 		$temas = ixml($mapa,"TEMAS");

@@ -346,8 +346,8 @@ function importarXmlAtlas()
 	$contaAtlas = 0;
 	foreach($xml->ATLAS as $atlas)
 	{
-		$titulo = ixml($atlas,"TITULO");
-		$desc = ixml($atlas,"DESCRICAO");
+		$titulo = html_entity_decode(ixml($atlas,"TITULO"));
+		$desc = html_entity_decode(ixml($atlas,"DESCRICAO"));
 		$icone = ixml($atlas,"ICONE");
 		$link = ixml($atlas,"LINKMAISINFO");
 		$template = ixml($atlas,"TEMPLATEHTML");
@@ -367,8 +367,8 @@ function importarXmlAtlas()
 		$contaPrancha = 0;
 		foreach ($atlas->PRANCHAS->PRANCHA as $prancha)
 		{
-			$titulo = ixml($prancha,"TITULO");
-			$desc = ixml($prancha,"DESCRICAO");
+			$titulo = html_entity_decode(ixml($prancha,"TITULO"));
+			$desc = html_entity_decode(ixml($prancha,"DESCRICAO"));
 			$icone = ixml($prancha,"ICONE");
 			$link = ixml($prancha,"LINKMAISINFO");
 			$w = ixml($prancha,"WABERUTRA");

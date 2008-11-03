@@ -204,7 +204,7 @@ function importarXmlSistemas()
 	{$sistemasExistentes[$r["nome_sistema"]] = 0;}
 	foreach($xml->SISTEMA as $item)
 	{
-		$nome = ixml($item,"NOMESIS");
+		$nome = html_entity_decode(ixml($item,"NOMESIS"));
 		$perfil = ixml($item,"PERFIL");
 		if(!isset($sistemasExistentes[$nome]))
 		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
@@ -215,7 +215,7 @@ function importarXmlSistemas()
 		foreach ($item->FUNCAO as $funcao)
 		{
 			$abrir_funcao = ixml($funcao,"ABRIR");
-			$nome_funcao = ixml($funcao,"NOMEFUNCAO");
+			$nome_funcao = html_entity_decode(ixml($funcao,"NOMEFUNCAO"));
 			$w_funcao = ixml($funcao,"JANELAW");
 			$h_funcao = ixml($funcao,"JANELAH");
 			$perfil_funcao = ixml($funcao,"PERFIL");

@@ -128,7 +128,7 @@ function importarXmlI()
 	{$iExistentes[$r["nome_i"]] = 0;}
 	foreach($xml->FUNCAO as $item)
 	{
-		$nome_i = ixml($item,"NOMESIS");
+		$nome_i = html_entity_decode(ixml($item,"NOMESIS"));
 		$target_i = ixml($item,"TARGET");
 		$abrir_i = ixml($item,"ABRIR");
 		if(!isset($iExistentes[$nome_i]))
