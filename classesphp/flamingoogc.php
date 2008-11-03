@@ -51,7 +51,7 @@ ogc.php?tema=bioma
 
 ogc.php?intervalo=0,50
 */
-error_reporting(0);
+error_reporting(E_ALL);
 if (!function_exists('ms_GetVersion'))
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -95,7 +95,7 @@ $nmap = ms_newMapobj($map_file);
 $c = $nmap->numlayers;
 for ($i=0;$i < $c;++$i)
 {
-	$l = $nmap->getlayer($i);}
+	$l = $nmap->getlayer($i);
 	if($l->connectiontype != MS_WMS)
 	{
 		$l->setmetadata("ows_title",pegaNome($l));
@@ -105,9 +105,9 @@ for ($i=0;$i < $c;++$i)
 		$l->set("dump",MS_TRUE);
 		$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 		$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-		$c = $l->getclass(0);
-		if ($c->name == "")
-		{$c->name = " ";}
+		$classe = $l->getclass(0);
+		if ($classe->name == "")
+		{$classe->name = " ";}
 		if (isset($postgis_mapa))
 		{
 			if ($postgis_mapa != "")
