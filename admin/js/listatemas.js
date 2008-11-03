@@ -1,105 +1,15 @@
-YAHOO.namespace("example.container");
-function initMenu()
+function editorTemaMapfile(mapfile)
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraTemas","adiciona")
-	core_carregando("ativa");
-	core_ativaPainelAjuda("ajuda","botaoAjuda");
-	core_pegaPerfis("pegaTemas()");
+	core_pegaDados("buscando dados...","../php/menutemas.php?funcao=pegaTemaPorMapfile&codigo_tema="+mapfile,"montaEditorTema")
 }
-function pegaTemas()
-{
-	core_pegaDados("buscando temas...","../php/menutemas.php?funcao=pegaTemas2","montaTabela")
-}
-function montaTabela(dados)
-{
-    YAHOO.example.InlineCellEditing = new function()
-    {
-        // Custom formatter for "address" column to preserve line breaks
-        var formatTextoId = function(elCell, oRecord, oColumn, oData)
-        {
-            elCell.innerHTML = "<p>" + oData + "</p>";
-        };
-
-        var formatMais = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=editar style='text-align:center' ></div>";
-        };
-        var formatExclui = function(elCell, oRecord, oColumn)
-        {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
-        };
-        var myColumnDefs = [
-            {key:"excluir",label:"excluir",formatter:formatExclui},
-            {key:"mais",label:"editar",formatter:formatMais},
-            {label:"id",key:"id_tema", formatter:formatTextoId},
-            {label:"codigo (mapfile)",key:"codigo_tema", formatter:formatTextoId},
-            {label:"nome",key:"nome_tema", formatter:formatTextoId},
-        ];
-        myDataSource = new YAHOO.util.DataSource(dados);
-        myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-        myDataSource.responseSchema =
-        {
-            fields: ["nome_tema","codigo_tema","id_tema"]
-        };
-        myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
-        // Set up editing flow
-		myDataTable.subscribe('cellClickEvent',function(ev)
-		{
-			var target = YAHOO.util.Event.getTarget(ev);
-			var column = this.getColumn(target);
-			if (column.key == 'excluir')
-			{
-				var record = this.getRecord(target);
-				excluiLinha(record.getData('id_tema'),target);
-			}
-			if (column.key == 'mais')
-			{
-				var record = this.getRecord(target);
-				core_carregando("ativa");
-				core_carregando("buscando dados...");
-				$clicouId = record.getData('id_tema');
-				$recordid = record.getId();
-				var sUrl = "../php/menutemas.php?funcao=pegaTemas&id_tema="+record.getData('id_tema');
-				var callback =
-				{
-  					success:function(o)
-  					{
-  						try
-  						{
-  							montaEditorTema(YAHOO.lang.JSON.parse(o.responseText),$clicouId,$recordid);
-  						}
-  						catch(e){core_handleFailure(e,o.responseText);}
-  					},
-  					failure:core_handleFailure,
-  					argument: { foo:"foo", bar:"bar" }
-				}; 
-				core_makeRequest(sUrl,callback)
-			}
-
-		});
-        // Hook into custom event to customize save-flow of "radio" editor
-        myDataTable.subscribe("editorUpdateEvent", function(oArgs)
-        {
-            if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();  
-            }
-        });
-        myDataTable.subscribe("editorBlurEvent", function(oArgs)
-        {
-            this.cancelCellEditor();
-        });
-    };
-    core_carregando("desativa");
-}
-function montaEditorTema(dados,id,recordid)
+function montaEditorTema(dados)
 {
 	function on_editorCheckBoxChange(p_oEvent)
 	{
 		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
-			gravaDadosTema(id,recordid);
+			gravaDadosTema(dados.id_tema);
 		}
 		else
 		{
@@ -122,7 +32,7 @@ function montaEditorTema(dados,id,recordid)
             { label: "Cancela", value: "CANCEL", checked: false }
         ]);
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
-		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:false,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorTema.render();
 	}
 	YAHOO.example.container.panelEditorTema.show();
@@ -132,15 +42,11 @@ function montaEditorTema(dados,id,recordid)
 	//
 	//preenche a div com a lista de tags
 	//
-	core_comboTags("comboTags","Etags_tema","registraTag");
-	//
-	//preenche a div com a lista de mapfiles
-	//
-	core_comboMapfiles("comboMapfiles","Ecodigo_tema",dados[0].codigo_tema);
+	core_comboTags("comboTags","tags_tema","registraTagTema");
 }
-function registraTag(valor)
+function registraTagTema(valor)
 {
-	var inp = $i("Etags_tema")
+	var inp = $i("tags_tema")
 	var tags = inp.value
 	if(tags == "")
 	inp.value = valor
@@ -151,27 +57,24 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome do tema:",id:"Enome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
+		{titulo:"Nome do tema que será mostrado na árvore de menus:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
 	ins += core_geraLinhas(param)	
-
-	ins += "<p>Mapfile (código do mapfile que será utilizado para criar a camada no i3geo):"
-	ins += "<div id=comboMapfiles >Buscando...</div>";
 	
 	ins += "<p>Descrição:<br>";
-	ins += "<input size=50 type=text id=Edesc_tema value='"+i.desc_tema+"' /></p>"
+	ins += "<input size=50 type=text id=desc_tema value='"+i.desc_tema+"' /></p>"
 	
 	ins += "<p>Link para a fonte:<br>";
-	ins += "<input size=50 type=text id=Elink_tema value='"+i.link_tema+"' /></p>"
+	ins += "<input size=50 type=text id=link_tema value='"+i.link_tema+"' /></p>"
 	
 	ins += "<p>Tags (separe com espaço). Você pode digitar novos tags ou pegar da lista abaixo:"
-	ins += "<input type=text size=50 value='"+i.tags_tema+"' id='Etags_tema' ><br>"
+	ins += "<input type=text size=50 value='"+i.tags_tema+"' id='tags_tema' ><br>"
 	ins += "<div id=comboTags >Buscando...</div>";
 	
-	ins += "<p>Tipo:<br>"
-	ins += "<select  id='Etipo_tema' />"
+	ins += "<p>Tipo (preencha apenas se for do tipo WMS):<br>"
+	ins += "<select  id='tipo_tema' />"
 	ins += "<option value='' "
 	if (i.tipoa_tema == ""){ins += "selected";}
 	ins += ">Normal</option>"
@@ -180,33 +83,27 @@ function montaDivTemas(i)
 	ins += " >WMS<option></select></p>"
 	
 	ins += "<p>Permite acesso via WMS/WFS?<br>"
-	ins += "<select  id='Eogc_tema' >"
+	ins += "<select  id='ogc_tema' >"
 	ins += core_combosimnao(i.ogc_tema)
 	ins += "</select></p>"
 	
 	ins += "<p>Permite o download na aplicação datadownload.htm?<br>"
-	ins += "<select  id='Edownload_tema' >"
+	ins += "<select  id='download_tema' >"
 	ins += core_combosimnao(i.download_tema)
 	ins += "</select></p>"
 
 	ins += "<p>Permite acesso via kml?<br>"
-	ins += "<select  id='Ekml_tema' >"
+	ins += "<select  id='kml_tema' >"
 	ins += core_combosimnao(i.kml_tema)
 	ins += "</select></p><br><br><br>"
 	return(ins)
 }
-function excluiLinha(id,row)
-{
-	var mensagem = " excluindo o registro do id= "+id;
-	var sUrl = "../php/menutemas.php?funcao=excluirRegistro&id="+id+"&tabela=temas";
-	core_excluiLinha(sUrl,row,mensagem)
-}
-function gravaDadosTema(id,recordid)
+function gravaDadosTema(id)
 {
 	var campos = new Array("nome","codigo","desc","link","tags","tipo","ogc","download","kml")
 	var par = ""
 	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"="+($i("E"+campos[i]+"_tema").value)}
+	{par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)}
 	par += "&id="+id
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
@@ -238,4 +135,3 @@ function gravaDadosTema(id,recordid)
 	}; 
 	core_makeRequest(sUrl,callback)
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);

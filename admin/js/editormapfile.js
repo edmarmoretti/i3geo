@@ -178,6 +178,7 @@ function montaNosRaiz(redesenha)
 	for (var i=0, j=$mapfiles.length; i<j; i++)
 	{
 		conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"excluirMapfile('"+$mapfiles[i]+"')\" title=excluir src=\"../imagens/01.png\" />"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"editorTemaMapfile('"+$mapfiles[i]+"')\" title='editar tema associado' src=\"../imagens/06.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"testarMapfile('"+$mapfiles[i]+"')\" title='testar!' src=\"../imagens/41.png\" /><b>&nbsp;<span>"+$mapfiles[i]+"</span>"
 
 		var d = {html:conteudo,id:$mapfiles[i],codigoMap:$mapfiles[i]};
