@@ -2008,4 +2008,31 @@ function autoClasses(&$nlayer,$mapa)
 	if($substituicon == "sim"){$nlayer->set("connection"," ");}
 	return;
 }
+/*
+Function: removeAcentos
+
+Remove os acentos de uma string
+
+Parameters:
+
+var - string
+
+Return:
+
+palavra sem acento
+*/
+function removeAcentos($var)
+{
+	$var = ereg_replace("[ÁÀÂÃ]","A",$var);
+	$var = ereg_replace("[áàâãª]","a",$var);
+	$var = ereg_replace("[ÉÈÊ]","E",$var);
+	$var = ereg_replace("[éèê]","e",$var);
+	$var = ereg_replace("[ÓÒÔÕ]","O",$var);
+	$var = ereg_replace("[óòôõº]","o",$var);
+	$var = ereg_replace("[ÚÙÛ]","U",$var);
+	$var = ereg_replace("[úùû]","u",$var);
+	$var = str_replace("Ç","C",$var);
+	$var = str_replace("ç","c",$var);
+	return $var;
+}
 ?>
