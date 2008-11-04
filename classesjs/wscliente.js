@@ -41,7 +41,7 @@ Veja:
 
 <i3geo/wscliente.htm>
 
-<i3geo/classesjs/funcoes.js>
+<i3geo/classesjs/wscliente.js>
 */
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
@@ -59,11 +59,11 @@ for (var i = 0; i < scripts.length; i++) {
 var allScriptTags = "";
 var jsfiles = new Array()
 if(typeof(testafuncoes) == 'undefined')
-{jsfiles[1] = "compactados/funcoes_compacto.js"}
+{jsfiles[0] = "compactados/funcoes_compacto.js"}
 if(typeof(cpaint) == 'undefined')
-{jsfiles[2] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
+{jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
 if(typeof(OpenLayers) == 'undefined')
-{jsfiles[3] = "../pacotes/openlayers/OpenLayers.js"}
+{jsfiles[2] = "../pacotes/openlayers/OpenLayers.js"}
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
