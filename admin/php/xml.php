@@ -296,7 +296,8 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 }
 function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 {
-	$q = "select subgrupos.id_subgrupo,nome_subgrupo,id_n2,n2.n2_perfil as perfil from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as subgrupos where n2.id_n2 = $id_n1 and n2.id_subgrupo = subgrupos.id_subgrupo ";
+	$q = "select subgrupos.id_subgrupo,nome_subgrupo,id_n2,n2.n2_perfil as perfil from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as subgrupos where n2.id_n1 = $id_n1 and n2.id_subgrupo = subgrupos.id_subgrupo ";
+	//echo $q;exit;
 	$qsgrupos = $dbh->query($q);
 	foreach($qsgrupos as $row)
 	{
