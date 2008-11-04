@@ -55,6 +55,33 @@ switch ($funcao)
 	exit;
 	break;
 	
+	case "pegaTagsPorMapfile":
+    $q = pegaDados("select link_tema,tags_tema,codigo_tema,nome_tema from i3geoadmin_temas");
+    $temas = array();
+    $temaExiste = array();
+    foreach($q as $row)
+	{
+		$ts = html_entity_decode($row['tags_tema']);
+		$i = $row['codigo_tema'];
+		$nome = $row['nome_tema'];
+		$link = $row['link_tema'];
+		$tags = explode(" ",$ts);
+		foreach($tags as $t)
+		{
+			if (removeAcentos($t) == $tag)
+			{
+				if(!isset($temaExiste[$i]))
+				{
+					$temas[] = array("codigoMap"=>$i,"nome"=>$nome,"link"=>$link);
+					$temaExiste[$i] = 0;
+				}
+			}
+		}
+	}
+	retornaJSON($temas);
+	exit;
+	break;	
+	
 	case "pegaPerfis":
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
 	if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
@@ -561,7 +588,7 @@ function alteraTags()
     			//exclui os registros do tag alterado nos temas
     			if($original != "")
     			{
-    				$q = $dbh->query("select * from i3geoadmin_temas");
+    				$q = $dbh->query("select tags_tema,id_tema from i3geoadmin_temas");
     				foreach($q as $row)
 		    		{
 	        			$ts = $row['tags_tema'];

@@ -864,6 +864,7 @@ funcaoRetorno - funcao que será executada ao terminar a busca pelos dados
 */
 function core_pegaDados(mensagem,sUrl,funcaoRetorno)
 {
+	if("mensagem" != "")
 	core_carregando(mensagem);
 	var callback =
 	{
@@ -871,7 +872,12 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   		{
   			try
   			{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
-  			catch(e){core_carregando("desativa");core_handleFailure(o,o.responseText);}
+  			catch(e)
+  			{
+  				if("mensagem" != "")
+  				core_carregando("desativa");
+  				core_handleFailure(o,o.responseText);
+  			}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

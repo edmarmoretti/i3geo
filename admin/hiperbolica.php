@@ -5,41 +5,60 @@ $xml .= "<capa>";
 include("../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
 $menus = pegaDados("SELECT * from i3geoadmin_menus order by nome_menu ",$locaplic);
-$xml .= '<termo id="00" nome="i3Geo">';
+$xml .= '<termo id="00" nome="Disseminação de dados">';
 $contador = 0;
 $xml .= '<item id="'.$contador.'" tipo="TE1" nome="Menus" familia="1" />  '."\n";
 foreach ($menus as $menu)
 {
 	$id = $menu["id_menu"];
-	$nome = str_replace("&","&amp;",$menu["nome_menu"]);
+	$nome = html_entity_decode($menu["nome_menu"]);
+	//menu
 	$xml .= '<item id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 	$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id' order by ordem",$locaplic);
 	for($i=0;$i < count($grupos);++$i)
 	{
 		$contador++;
-		$nome = str_replace("&","&amp;",$grupos[$i]["nome_grupo"]);
+		$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
 		$idgrupo = $grupos[$i]["id_n1"];
+		//grupo
 		$xml .= '<item id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
+		$contador++;
+		$xml .= '<item id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";
+		
 		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$idgrupo' order by ordem",$locaplic);
 		for($j=0;$j < count($subgrupos);++$j)
 		{
 			$contador++;
-			$nome = str_replace("&","&amp;",$subgrupos[$j]["nome_subgrupo"]);
-			$xml .= '<item id="'.$contador.'" tipo="TE4" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
+			$nome = html_entity_decode($subgrupos[$j]["nome_subgrupo"]);
+			//subgrupo
+			$xml .= '<item id="'.$contador.'" tipo="TE5" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
+			$contador++;
+			$xml .= '<item id="'.$contador.'" tipo="TE6" nome="TEMAS" familia="'.$id.'" />  '."\n";
 			$id_n2 = $subgrupos[$j]["id_n2"];
-			$temas = pegaDados("select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3 from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem",$locaplic);
+			$temas = pegaDados("select i3geoadmin_temas.tags_tema,i3geoadmin_temas.nome_tema,i3geoadmin_temas.codigo_tema,i3geoadmin_n3.id_n3 from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem",$locaplic);
 			for($k=0;$k < count($temas);++$k)
 			{
 				$contador++;
-				$nome = str_replace("&","&amp;",$temas[$k]["nome_tema"]);
-				$xml .= '<item id="'.$contador.'" tipo="TE5" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
-				$tags = explode(" ",$temas[$k]["tags_tema"]);
-				foreach($tags as $tag)
+				$nome = html_entity_decode($temas[$k]["nome_tema"]);
+				$nid = "tema,".$temas[$k]["codigo_tema"];
+				if($nome != "")
 				{
+					//tema
+					$xml .= '<item id="'.$contador.'" tipo="TE7" nome="'.$nome.'" familia="'.$nid.'" />  '."\n";
 					$contador++;
-					$tag = str_replace("&","&amp;",$tag);
-					if($tag != "")
-					$xml .= '<item id="'.$contador.'" tipo="TE6" nome="'.$tag.'" familia="'.$id.'" />  '."\n";
+					$tags = explode(" ",$temas[$k]["tags_tema"]);
+					if(count($tags) > 0)
+					{
+						//tags
+						$xml .= '<item id="'.$contador.'" tipo="TE8" nome="TAGs" familia="'.$id.'" />  '."\n";
+						foreach($tags as $tag)
+						{
+							$contador++;
+							$tag = html_entity_decode($tag);
+							if($tag != "")
+							$xml .= '<item id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
+						}
+					}
 				}
 			}
 		}
@@ -52,7 +71,7 @@ $grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from i3ge
 for($i=0;$i < count($grupos);++$i)
 {
 	$contador++;
-	$nome = str_replace("&","&amp;",$grupos[$i]["nome_grupo"]);
+	$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
 	$idgrupo = $grupos[$i]["id_n1"];
 	$xml .= '<item id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 	$temastag = pegaDados("select d.tags_tema as tags,d.id_tema as tema from i3geoadmin_n2 as b,i3geoadmin_n1 as a,i3geoadmin_n3 as c,i3geoadmin_temas as d where a.id_grupo = '$idgrupo' and a.id_n1 = b.id_n1 and c.id_n2 = b.id_n2 and c.id_tema = d.id_tema group by tema",$locaplic);
@@ -63,12 +82,17 @@ for($i=0;$i < count($grupos);++$i)
 	}
 	$arrayTag = array_unique($arrayTag);
 	//var_dump($arrayTag);
-	foreach($arrayTag as $tag)
+	if(count($arrayTag > 0))
 	{
-		$tag = str_replace("&","&amp;",$tag);
 		$contador++;
-		if($tag != "")
-		$xml .= '<item id="'.$contador.'" tipo="TE3" nome="'.$tag.'" familia="'.$id.'" />  '."\n";	
+		$xml .= '<item id="'.$contador.'" tipo="TE4" nome="TAGs" familia="'.$id.'" />  '."\n";	
+		foreach($arrayTag as $tag)
+		{
+			$tag = html_entity_decode($tag);
+			$contador++;
+			if($tag != "")
+			$xml .= '<item id="'.$contador.'" tipo="TE5" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";	
+		}
 	}		
 }	
 $id = $contador;
@@ -82,7 +106,7 @@ foreach ($tipos as $tipo)
 	foreach($ws as $w)
 	{
 		$contador++;
-		$nome = str_replace("&","&amp;",$w["nome_ws"]);
+		$nome = html_entity_decode($w["nome_ws"]);
 		if($nome != "")
 		$xml .= '<item id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].'" />  '."\n";		
 	}
