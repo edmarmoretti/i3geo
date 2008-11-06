@@ -58,7 +58,7 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="")
 	{
-		error_reporting(E_ALL);
+		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locsistemas = $locsistemas;
@@ -334,7 +334,7 @@ array
 								$temp = ixml($tema,"DOWNLOAD");
 								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
-								$temp = ixml($temar,"OGC");
+								$temp = ixml($tema,"OGC");
 								if (($temp != "nao") || ($temp != "NAO"))
 								{$ogc = "sim";}
 							}
@@ -425,7 +425,8 @@ array
 				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
-					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));
+					//echo geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic);exit;	
 				}
 			}
 		}
@@ -470,26 +471,25 @@ array
 						}
 					}
 				}
-					$temas = array();
-					foreach($grupo->TEMA as $temar)
-					{
-						$down = "nao";
-						$ogc = "sim";
-						$temp = ixml($temar,"DOWNLOAD");
-						if (($temp == "sim") || ($temp == "SIM"))
-						{$down = "sim";}
-						$temp = ixml($temar,"OGC");
-						if (($temp == "nao") || ($temp == "NAO"))
-						{$ogc = "nao";}
-						$link = " ";
-						$temp = ixml($temar,"TLINK");
-						if ($temp != "")
-						{$link = $temp;}
-						$tid = ixml($temar,"TID");
-						$nome = ixml($temar,"TNOME");
-						$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
-					}
-
+				$temas = array();
+				foreach($grupo->TEMA as $temar)
+				{
+					$down = "nao";
+					$ogc = "sim";
+					$temp = ixml($temar,"DOWNLOAD");
+					if (($temp == "sim") || ($temp == "SIM"))
+					{$down = "sim";}
+					$temp = ixml($temar,"OGC");
+					if (($temp == "nao") || ($temp == "NAO"))
+					{$ogc = "nao";}
+					$link = " ";
+					$temp = ixml($temar,"TLINK");
+					if ($temp != "")
+					{$link = $temp;}
+					$tid = ixml($temar,"TID");
+					$nome = ixml($temar,"TNOME");
+					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+				}
 			}
 			$conta = $conta + 1;
 		}
