@@ -82,7 +82,8 @@ function salva(variavel)
 {
 	var original = $i(variavel).value;
 	$i(variavel).value = "gravando..."
-	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+$i(variavel).value,"")
+	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+original,"")
+	
 	$i(variavel).style.color = ""
 	$i(variavel).value = original
 }
