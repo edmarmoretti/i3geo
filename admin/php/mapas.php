@@ -28,6 +28,7 @@ File: i3geo/admin/mapas.php
 
 */
 include_once("admin.php");
+error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -69,9 +70,12 @@ function alterarMapa()
 	global $publicado_mapa,$ordem_mapa,$id_mapa,$desc_mapa,$ext_mapa,$imagem_mapa,$outros_mapa,$nome_mapa,$linkdireto_mapa,$temas_mapa,$ligados_mapa,$perfil_mapa;
 	try 
 	{
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
+		if($convUTF)
+		{
+			$nome_mapa = utf8_encode($nome_mapa);
+			$desc_mapa = utf8_encode($desc_mapa);
+		}
     	$retorna = "";
     	if($id_mapa != "")
     	{
@@ -131,9 +135,12 @@ function importarXmlMapas()
 	{
 		$perfil = ixml($mapa,"PERFIL");
 		$descricao = html_entity_decode(ixml($mapa,"DESCRICAO"));
-		//$descricao = mb_convert_encoding($descricao,"UTF-8","ISO-8859-1");
 		$nome = html_entity_decode(ixml($mapa,"NOME"));
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$descricao = utf8_encode($descricao);
+		}
 		$imagem = ixml($mapa,"IMAGEM");
 		$temas = ixml($mapa,"TEMAS");
 		$ligados = ixml($mapa,"LIGADOS");

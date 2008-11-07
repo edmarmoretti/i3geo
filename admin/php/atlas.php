@@ -185,9 +185,12 @@ function alterarAtlas()
 	global $publicado_atlas,$id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
 	try 
 	{
-    	//$desc_atlas = mb_convert_encoding($desc_atlas,"UTF-8","ISO-8859-1");
-    	//$titulo_atlas = mb_convert_encoding($titulo_atlas,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+		if($convUTF)
+		{
+			$desc_atlas = utf8_encode($desc_atlas);
+			$titulo_atlas = utf8_encode($titulo_atlas);
+		}
     	if($id_atlas != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_atlas SET publicado_atlas='$publicado_atlas',ordem_atlas='$ordem_atlas',basemapfile_atlas='$basemapfile_atlas',desc_atlas='$desc_atlas',h_atlas='$h_atlas',w_atlas='$w_atlas',icone_atlas='$icone_atlas',link_atlas='$link_atlas',pranchadefault_atlas='$pranchadefault_atlas',template_atlas='$template_atlas',tipoguias_atlas='$tipoguias_atlas',titulo_atlas='$titulo_atlas' WHERE id_atlas = $id_atlas");
@@ -218,9 +221,12 @@ function alterarPrancha()
 	global $mapext_prancha,$id_atlas,$id_prancha,$desc_prancha,$h_prancha,$w_prancha,$icone_prancha,$link_prancha,$titulo_prancha,$ordem_prancha;
 	try 
 	{
-    	//$desc_prancha = mb_convert_encoding($desc_prancha,"UTF-8","ISO-8859-1");
-    	//$titulo_prancha = mb_convert_encoding($titulo_prancha,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+		if($convUTF)
+		{
+			$desc_prancha = utf8_encode($desc_prancha);
+			$titulo_prancha = utf8_encode($titulo_prancha);
+		}
     	if($id_prancha != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_atlasp SET ordem_prancha='$ordem_prancha', mapext_prancha='$mapext_prancha',desc_prancha='$desc_prancha',h_prancha='$h_prancha',w_prancha='$w_prancha',icone_prancha='$icone_prancha',link_prancha='$link_prancha',titulo_prancha='$titulo_prancha' WHERE id_prancha = '$id_prancha'");
@@ -330,6 +336,7 @@ function excluirAtlas()
 function importarXmlAtlas()
 {
 	global $xml,$tipo;
+	set_time_limit(180);
 	if(!file_exists($xml))
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
@@ -348,6 +355,11 @@ function importarXmlAtlas()
 	{
 		$titulo = html_entity_decode(ixml($atlas,"TITULO"));
 		$desc = html_entity_decode(ixml($atlas,"DESCRICAO"));
+		if($convUTF)
+		{
+			$titulo = utf8_encode($titulo);
+			$desc = utf8_encode($desc);
+		}
 		$icone = ixml($atlas,"ICONE");
 		$link = ixml($atlas,"LINKMAISINFO");
 		$template = ixml($atlas,"TEMPLATEHTML");
@@ -369,6 +381,11 @@ function importarXmlAtlas()
 		{
 			$titulo = html_entity_decode(ixml($prancha,"TITULO"));
 			$desc = html_entity_decode(ixml($prancha,"DESCRICAO"));
+			if($convUTF)
+			{
+				$titulo = utf8_encode($titulo);
+				$desc = utf8_encode($desc);
+			}
 			$icone = ixml($prancha,"ICONE");
 			$link = ixml($prancha,"LINKMAISINFO");
 			$w = ixml($prancha,"WABERUTRA");

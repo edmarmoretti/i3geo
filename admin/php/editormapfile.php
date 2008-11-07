@@ -362,7 +362,10 @@ function pegaConexao()
 	$dados["tileindex"] = $layer->tileindex;
 	$dados["tileitem"] = $layer->tileitem;
 	if($dados["tileindex"] == ""){$dados["tileitem"] = "";}
+	if(is_array($postgis_mapa))
 	$dados["postgis_mapa"] = array_keys($postgis_mapa);
+	else
+	$dados["postgis_mapa"] = $postgis_mapa;
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	return $dados;

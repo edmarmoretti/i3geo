@@ -419,16 +419,19 @@ function gravaDados(tipo,id)
   					{
   						var no = tree.getNodeByProperty("id_atlas",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_atlas").value
+  						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "prancha")
   					{
   						var no = tree.getNodeByProperty("id_prancha",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Etitulo_prancha").value
+  						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "tema")
   					{
   						var no = tree.getNodeByProperty("id_tema",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Ecodigo_tema").value
+  						no.html = no.getContentEl().innerHTML;
   					}
   					core_carregando("desativa");
   				}

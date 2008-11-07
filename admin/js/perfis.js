@@ -80,17 +80,25 @@ function montaTabela(dados)
 				excluiLinha(record.getData('id_perfil'),target);
 			}
 			else
-			{this.onEventShowCellEditor(ev);}
+			{
+				this.onEventShowCellEditor(ev);
+			}
 		});
         // Hook into custom event to customize save-flow of "radio" editor
         myDataTable.subscribe("editorUpdateEvent", function(oArgs)
         {
             if(oArgs.editor.column.key === "active")
             {
-                this.saveCellEditor();
-                
+                this.saveCellEditor();               
             }
         });
+        myDataTable.subscribe("editorSaveEvent", function(oArgs)
+        {
+			if(oArgs.newData != oArgs.oldData)
+			var linha = myDataTable.getTrEl(oArgs.editor.record)
+			linha.style.color = "blue";
+        });
+        
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
         {
             this.cancelCellEditor();

@@ -65,7 +65,7 @@ switch ($funcao)
 			$par[$v] = $s;
 		}
 		else
-		$par[$v] = $s;
+		$par[$v] = utf8_encode($s);
 	}
 	retornaJSON($par);
 	exit;
@@ -90,6 +90,7 @@ valor - novo valor
 */
 function salvaConfigura($variavel,$valor)
 {
+	//$valor = resolveAcentos($valor,"html");
 	$handle = fopen ("../../ms_configura.php", "r");
 	$linhas = array();
 	while (!feof ($handle)) {

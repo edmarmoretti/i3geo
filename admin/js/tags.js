@@ -95,6 +95,13 @@ function montaTabela(dados)
         {
             this.cancelCellEditor();
         });
+        myDataTable.subscribe("editorSaveEvent", function(oArgs)
+        {
+			if(oArgs.newData != oArgs.oldData)
+			var linha = myDataTable.getTrEl(oArgs.editor.record)
+			linha.style.color = "blue";
+        });
+
     };
     core_carregando("desativa");
 }

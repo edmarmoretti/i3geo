@@ -56,6 +56,11 @@ else
 if(!isset($conexaoadmin))
 {$conexaoadmin = "";}
 
+//
+//indica se deve ser feita a conversão para UTF8 ao gravar os dados
+//
+$convUTF = true;
+
 if($conexaoadmin == "")
 {
 	$arquivosqlite = $locaplic."/menutemas/admin.db";

@@ -96,8 +96,11 @@ function salva(variavel)
 	{alert("erro")}
 	else
 	{
-		core_pegaDados("gravando...","../php/ms_configura.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+$i(variavel).value,function(){core_carregando("desativa");})
+		var original = $i(variavel).value;
+		$i(variavel).value = "gravando...";
+		core_pegaDados("gravando...","../php/ms_configura.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+$i(variavel).value,"")
 		$i(variavel).style.color = ""
+		$i(variavel).value = original;
 	}
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);

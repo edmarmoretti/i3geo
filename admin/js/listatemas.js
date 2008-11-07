@@ -9,7 +9,7 @@ function montaEditorTema(dados)
 		var ins = "";
 		if(p_oEvent.newValue.get("value") == "OK")
 		{
-			gravaDadosTema(dados.id_tema);
+			gravaDadosTema(dados[0].id_tema);
 		}
 		else
 		{
@@ -57,7 +57,7 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome do tema que será mostrado na árvore de menus:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
+		{titulo:"Nome que será mostrado na árvore de menus:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
@@ -100,7 +100,7 @@ function montaDivTemas(i)
 }
 function gravaDadosTema(id)
 {
-	var campos = new Array("nome","codigo","desc","link","tags","tipo","ogc","download","kml")
+	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml")
 	var par = ""
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)}
@@ -133,5 +133,5 @@ function gravaDadosTema(id)
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
 	}; 
-	core_makeRequest(sUrl,callback)
+	core_makeRequest(sUrl,callback,"POST")
 }

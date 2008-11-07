@@ -28,6 +28,7 @@ File: i3geo/admin/sistemas.php
 
 */
 include_once("admin.php");
+error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -102,7 +103,10 @@ function alterarSistemas()
 	try 
 	{
     	require_once("conexao.php");
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
+		if($convUTF)
+		{
+			$nome_sistema = utf8_encode($nome_sistema);
+		}
     	if($id_sistema != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_sistemas SET publicado_sistema='$publicado_sistema',nome_sistema = '$nome_sistema',perfil_sistema = '$perfil_sistema' WHERE id_sistema = $id_sistema");
@@ -131,7 +135,10 @@ function alterarFuncoes()
 	try 
 	{
     	require_once("conexao.php");
-		//$nomefuncao = mb_convert_encoding($nomefuncao,"UTF-8","ISO-8859-1");
+		if($convUTF)
+		{
+			$nome_funcao = utf8_encode($nome_funcao);
+		}
     	if($id_funcao != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_sistemasf SET nome_funcao = '$nome_funcao',perfil_funcao = '$perfil_funcao', w_funcao = '$w_funcao',h_funcao = '$h_funcao', abrir_funcao = '$abrir_funcao' WHERE id_funcao = $id_funcao");
@@ -205,6 +212,10 @@ function importarXmlSistemas()
 	foreach($xml->SISTEMA as $item)
 	{
 		$nome = html_entity_decode(ixml($item,"NOMESIS"));
+		if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+		}
 		$perfil = ixml($item,"PERFIL");
 		if(!isset($sistemasExistentes[$nome]))
 		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
@@ -216,6 +227,10 @@ function importarXmlSistemas()
 		{
 			$abrir_funcao = ixml($funcao,"ABRIR");
 			$nome_funcao = html_entity_decode(ixml($funcao,"NOMEFUNCAO"));
+			if($convUTF)
+			{
+				$nome_funcao = utf8_encode($nome_funcao);
+			}
 			$w_funcao = ixml($funcao,"JANELAW");
 			$h_funcao = ixml($funcao,"JANELAH");
 			$perfil_funcao = ixml($funcao,"PERFIL");

@@ -70,9 +70,12 @@ function alterarWS()
 	try 
 	{
     	require_once("conexao.php");
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
-		//$autor = mb_convert_encoding($autor,"UTF-8","ISO-8859-1");   	
+		if($convUTF)
+		{
+			$nome_ws = utf8_encode($nome_ws);
+			$desc_ws = utf8_encode($desc_ws);
+			$autor_ws = utf8_encode($autor_ws);
+		}
     	if($id_ws != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_ws SET desc_ws = '$desc_ws',nome_ws = '$nome_ws', link_ws = '$link_ws', autor_ws = '$autor_ws', tipo_ws = '$tipo_ws' WHERE id_ws = $id_ws");
@@ -114,6 +117,7 @@ function excluirWS()
 function importarXmlWS()
 {
 	global $xml,$tipo;
+	set_time_limit(180);
 	if(!file_exists($xml))
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
@@ -131,10 +135,16 @@ function importarXmlWS()
 	{
 		foreach($c->item as $item)
 		{
-			$descricao = html_entity_decode(ixml($item,"description"));
+			$desc = html_entity_decode(ixml($item,"description"));
 			$nome = html_entity_decode(ixml($item,"title"));
-			$autor = ixml($item,"author");
+			$autor = html_entity_decode(ixml($item,"author"));
 			$link = ixml($item,"link");
+			if($convUTF)
+			{
+				$nome = utf8_encode($nome);
+				$desc = utf8_encode($desc);
+				$autor = utf8_encode($autor);
+			}
 			if(!isset($wsExistentes[$nome]))
 			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws) VALUES ('$nome','$desc','$autor','$link','$tipo')");
 			$wsExistentes[$nome] = 0;

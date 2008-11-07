@@ -57,7 +57,7 @@ function montaArvore(dados)
                 success: function(oResponse)
                 {
                     var dados = YAHOO.lang.JSON.parse(oResponse.responseText)
-					montaNosGrupos(node.data.id_menu,node,dados,false)
+					montaNosGrupos(node.data.id_menu,node,dados,true)
                     oResponse.argument.fnLoadComplete();
                 },
                 failure: function(oResponse)
@@ -156,7 +156,6 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('grupo','"+dados.grupos[i].id_n1+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.grupos[i].nome_grupo+"</span>"
 		var d = {html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
-		//tempNode.isLeaf = true;
 		tempNode.setDynamicLoad(loadSubgruposData, temaIconMode);
 	}
 	if(redesenha){tree.draw();}
@@ -289,7 +288,7 @@ function novoTemaRaiz(id)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
-	core_carregando("mensagem");
+	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("id_menu",id)
 	var noEtiquetaGrupo = tree.getNodeByProperty("etiquetaGrupo","menu_"+id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id;
@@ -313,7 +312,7 @@ function novoTemaRaizGrupo(idmenu,id)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
-	core_carregando("mensagem");
+	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("id_n1",id)
 	var noEtiquetaSubGrupo = tree.getNodeByProperty("etiquetaTemasSubGrupo",id)
 	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu;
@@ -341,7 +340,7 @@ function novoGrupo(id_menu)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando grupo...";
-	core_carregando("mensagem");
+	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarGrupo&id_menu="+id_menu;
 	var callback =
 	{
@@ -365,7 +364,7 @@ function novoSubGrupo(idmenu,id_n1)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando Sub-grupo...";
-	core_carregando("mensagem");
+	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarSubGrupo&id_n1="+id_n1;
 	var callback =
 	{
@@ -389,7 +388,7 @@ function novoTema(idmenu,id_n2)
 {
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
-	core_carregando("mensagem");
+	core_carregando(mensagem);
 	var sUrl = "../php/arvore.php?funcao=adicionarTema&id_n2="+id_n2;
 	var callback =
 	{
@@ -502,8 +501,7 @@ function montaDivGrupo(i)
 	ins += "<select id='Epublicado' >"
 	ins += core_combosimnao(i.publicado)
 	ins += "</select>"
-	ins += "<br><br>Para criar um novo grupo clique <a href='grupos.html' >aqui</a>."
-	ins += "<br><br>Para criar um novo perfil clique <a href='perfis.html' >aqui</a>."
+	ins += "<br><br><br><br>"
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }
@@ -518,8 +516,7 @@ function montaDivSubGrupo(i)
 	ins += "<select id='Epublicado' >"
 	ins += core_combosimnao(i.publicado)
 	ins += "</select>"
-	ins += "<br><br>Para criar um novo sub-grupo clique <a href='subgrupos.html' >aqui</a>."
-	ins += "<br><br>Para criar um novo perfil clique <a href='perfis.html' >aqui</a>."
+	ins += "<br><br><br><br>"
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }
@@ -612,6 +609,7 @@ function gravaDados(tipo,id)
   						var texto = obj.options[obj.selectedIndex].text
   						var no = tree.getNodeByProperty("id_n1",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "subgrupo")
   					{
@@ -619,6 +617,7 @@ function gravaDados(tipo,id)
   						var texto = obj.options[obj.selectedIndex].text
   						var no = tree.getNodeByProperty("id_n2",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						no.html = no.getContentEl().innerHTML; 					
   					}
   					if(tipo == "tema")
   					{
@@ -626,6 +625,7 @@ function gravaDados(tipo,id)
   						var texto = obj.options[obj.selectedIndex].text
   						var no = tree.getNodeByProperty("id_n3",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						no.html = no.getContentEl().innerHTML;
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")
   					{
@@ -633,6 +633,7 @@ function gravaDados(tipo,id)
   						var texto = obj.options[obj.selectedIndex].text
   						var no = tree.getNodeByProperty("id_raiz",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						no.html = no.getContentEl().innerHTML;
   					}		
   					core_carregando("desativa");
   				}

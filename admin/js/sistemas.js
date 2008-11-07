@@ -270,6 +270,7 @@ function gravaDadosFuncao(id)
   				{
   					var no = tree.getNodeByProperty("id_funcao",id)
   					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_funcao").value
+  					no.html = no.getContentEl().innerHTML;
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditor.destroy();
@@ -307,6 +308,7 @@ function gravaDadosSistema(id)
   				{
   					var no = tree.getNodeByProperty("id_sistema",id)
   					no.getContentEl().getElementsByTagName("span")[0].innerHTML = document.getElementById("Enome_sistema").value
+  					no.html = no.getContentEl().innerHTML;
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditor.destroy();

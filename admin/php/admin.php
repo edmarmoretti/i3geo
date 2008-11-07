@@ -88,12 +88,18 @@ function retornaJSON($obj)
 	{
 		include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
 		$j = new Services_JSON();
-		echo $j->encode($obj);
+		$texto = $j->encode($obj);
+		if (!mb_detect_encoding($texto,"UTF-8",true))
+		$texto = utf8_encode($texto);
+		echo $texto;
 	}
 	else
 	{
 		if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
-		echo json_encode($obj);
+		$texto = json_encode($obj);
+		if (!mb_detect_encoding($texto,"UTF-8",true))
+		$texto = utf8_encode($texto);
+		echo $texto;
 		if(extension_loaded('zlib')){ob_end_flush();}
 	}
 	exit;
@@ -122,6 +128,7 @@ string - sim|nao
 function verificaEditores($editores)
 {
 	$editor = "nao";
+	if($editores == ""){return $editor;}
 	foreach ($editores as $e)
 	{
 		$e = gethostbyname($e);
@@ -271,5 +278,20 @@ function verificaFilhos()
     	return "Error!: " . $e->getMessage();
 	}
 }
-
+function resolveAcentos($palavra,$tipo)
+{
+	if($tipo == "ISO")
+	{
+		$palavra = mb_convert_encoding($palavra,"AUTO","ISO-8859-1");
+	}
+	if($tipo == "UTF")
+	{
+		$palavra = mb_convert_encoding($palavra,"AUTO","UTF-8");
+	}
+	if($tipo == "html")
+	$palavra = htmlentities($palavra);
+	if($tipo == "palno")
+	$palavra = urldecode($palavra);
+	return $palavra;
+}
 ?>

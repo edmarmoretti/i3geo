@@ -28,6 +28,7 @@ File: i3geo/admin/identifica.php
 
 */
 include_once("admin.php");
+error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -72,6 +73,10 @@ function alterarFuncoes()
 	{
     	//$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
+		if($convUTF)
+		{
+			$nome_i = utf8_encode($nome_i);
+		}
     	if($id_i != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_identifica SET publicado_i = '$publicado_i',nome_i = '$nome_i',abrir_i = '$abrir_i', target_i = '$target_i' WHERE id_i = $id_i");
@@ -129,6 +134,10 @@ function importarXmlI()
 	foreach($xml->FUNCAO as $item)
 	{
 		$nome_i = html_entity_decode(ixml($item,"NOMESIS"));
+		if($convUTF)
+		{
+			$nome_i = utf8_encode($nome_i);
+		}
 		$target_i = ixml($item,"TARGET");
 		$abrir_i = ixml($item,"ABRIR");
 		if(!isset($iExistentes[$nome_i]))

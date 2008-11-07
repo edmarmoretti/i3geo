@@ -150,16 +150,16 @@ function montaDiv(i)
 	ins += ">---</option>"
 	ins += "<option value='WMS' "
 	if (i.tipo_ws == "WMS"){ins += "selected";}
-	ins += " >WMS<option>"
+	ins += " >WMS</option>"
 	ins += "<option value='GEORSS' "
 	if (i.tipo_ws == "GEORSS"){ins += "selected";}
-	ins += " >GEORSS<option>"
+	ins += " >GEORSS</option>"
 	ins += "<option value='WS' "
 	if (i.tipo_ws == "WS"){ins += "selected";}
-	ins += " >WS<option>"
+	ins += " >WS</option>"
 	ins += "<option value='DOWNLOAD' "
 	if (i.tipo_ws == "DOWNLOAD"){ins += "selected";}
-	ins += " >DOWNLOAD<option>"
+	ins += " >DOWNLOAD</option>"
 	ins += "</select></p>"
 	return(ins)
 }

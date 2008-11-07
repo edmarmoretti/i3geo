@@ -146,6 +146,7 @@ o - string retornada pelo ajax
 function core_handleFailure(o,texto)
 {
 	//div onde será mostrado o log
+	alert(texto)
 	if(!$i('logajax'))
 	{return;}
 	log = $i('logajax');
@@ -315,7 +316,7 @@ function core_pegaPerfis(funcao)
   				if(funcao != "")
   				eval(funcao);
   			}
-  			catch(e){core_handleFailure(e,o.responseText);}
+  			catch(e){core_handleFailure(o,o.responseText);}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -347,7 +348,7 @@ function core_pegaMapfiles(funcaoM)
   				if(funcaoM != "")
   				eval(funcaoM);
   			}
-  			catch(e){core_handleFailure(e.responseText);}
+  			catch(e){core_handleFailure(o,o.responseText);}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -871,7 +872,12 @@ function core_pegaDados(mensagem,sUrl,funcaoRetorno)
   		success:function(o)
   		{
   			try
-  			{eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");}
+  			{
+  				if(funcaoRetorno != "")
+  				eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");
+  				else
+  				core_carregando("desativa");
+  			}
   			catch(e)
   			{
   				if("mensagem" != "")
@@ -910,6 +916,9 @@ function core_gravaLinha(mensagem,row,sUrl)
 			var rec = myDataTable.getRecordSet().getRecord(row);
 			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   			core_carregando("desativa");
+  			var linha = myDataTable.getTrEl(rec)
+			linha.style.color = "";
+  			
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }
@@ -1089,6 +1098,11 @@ function core_montaEditor(funcaoOK,w,h)
 		}
 		YAHOO.example.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:w, overflow:"auto",modal: true,visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditor.render();
+	}
+	else
+	{
+		if($i("editor_bd"))
+		$i("editor_bd").innerHTML == ""
 	}
 	YAHOO.example.container.panelEditor.show();
 }

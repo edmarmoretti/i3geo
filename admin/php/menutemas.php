@@ -433,10 +433,13 @@ function alteraMenus()
 	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu;
 	try 
 	{
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
 		$retorna = "";
     	include("conexao.php");
+		if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$desc = utf8_encode($desc);
+		}
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
@@ -462,10 +465,13 @@ function alteraMenus()
 function alteraPerfis()
 {
 	global $perfil,$id;
+	//$perfil = resolveAcentos($perfil,"html");
+	
 	try 
 	{
 		$dbh = "";
     	include("conexao.php");
+    	if($convUTF) $perfil = utf8_encode($perfil);  	
     	$retorna = "";
     	if($id != "")
 		{
@@ -496,29 +502,29 @@ function alteraPerfis()
 	    		$q = $dbh->query("select * from i3geoadmin_n1");
     			foreach($q as $row)
 	    		{
-	       			$t = $row['perfil_n1'];
+	       			$t = $row['n1_perfil'];
 	       			$i = $row['id_n1'];
 	       			$ts = str_replace($original,$perfil,$t);
 	       			if($t != $ts)
-	       			$dbhw->query("UPDATE i3geoadmin_n1 SET perfil_n1 = '$ts' WHERE id_n1 = $i");
+	       			$dbhw->query("UPDATE i3geoadmin_n1 SET n1_perfil = '$ts' WHERE id_n1 = $i");
 	    		}
 	    		$q = $dbh->query("select * from i3geoadmin_n2");
     			foreach($q as $row)
 	    		{
-	       			$t = $row['perfil_n2'];
+	       			$t = $row['n2_perfil'];
 	       			$i = $row['id_n2'];
 	       			$ts = str_replace($original,$perfil,$t);
 	       			if($t != $ts)
-	       			$dbhw->query("UPDATE i3geoadmin_n2 SET perfil_n2 = '$ts' WHERE id_n2 = $i");
+	       			$dbhw->query("UPDATE i3geoadmin_n2 SET n2_perfil = '$ts' WHERE id_n2 = $i");
 	    		}
 	    		$q = $dbh->query("select * from i3geoadmin_n3");
     			foreach($q as $row)
 	    		{
-	       			$t = $row['perfil_n3'];
+	       			$t = $row['n3_perfil'];
 	       			$i = $row['id_n3'];
 	       			$ts = str_replace($original,$perfil,$t);
 	       			if($t != $ts)
-	       			$dbhw->query("UPDATE i3geoadmin_n3 SET perfil_n3 = '$ts' WHERE id_n3 = $i");
+	       			$dbhw->query("UPDATE i3geoadmin_n3 SET n3_perfil = '$ts' WHERE id_n3 = $i");
 	    		}
 	    		$q = $dbh->query("select * from i3geoadmin_raiz");
     			foreach($q as $row)
@@ -572,9 +578,11 @@ function alteraTags()
 	global $nome,$id;
 	try 
 	{
+		
 		$dbh = "";
 		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+    	if($convUTF) $nome = utf8_encode($nome);
     	$retorna = "";
     	if($id != "")
 		{
@@ -586,6 +594,7 @@ function alteraTags()
     			{$original = $row["nome"];}
     			$dbhw->query("UPDATE i3geoadmin_tags SET nome = '$nome' WHERE id_tag = $id");
     			//exclui os registros do tag alterado nos temas
+    			/*
     			if($original != "")
     			{
     				$q = $dbh->query("select tags_tema,id_tema from i3geoadmin_temas");
@@ -596,7 +605,8 @@ function alteraTags()
 	        			$ts = str_replace($original,$nome,$ts);
 	        			$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema = '$ts' WHERE id_tema = $i");
 		    		}
-    			}		
+    			}
+    			*/	
     		}
     		$retorna = $id;		
 		}
@@ -627,9 +637,12 @@ function alteraGrupos()
 	global $nome,$desc,$id;
 	try 
 	{
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+    	if($convUTF)
+    	{
+			$nome = utf8_encode($nome);
+			$desc = utf8_encode($desc);    		
+    	}
     	$retorna = "";
     	if($id != "")
     	{
@@ -663,9 +676,12 @@ function alteraSubGrupos()
 	global $nome,$desc,$id;
 	try 
 	{
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
     	require_once("conexao.php");
+    	if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$desc = utf8_encode($desc);			
+		}
     	$retorna = "";
     	if($id != "")
     	{
@@ -700,10 +716,13 @@ function alteraTemas()
 	try 
 	{
 		$retorna = "ok";
-		//$nome = mb_convert_encoding($nome,"UTF-8","ISO-8859-1");
-		//$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
-		//$tags = mb_convert_encoding($tags,"UTF-8","ISO-8859-1");
     	include("conexao.php");
+    	if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$desc = utf8_encode($desc);
+			$tags = utf8_encode($tags);		
+		}
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
@@ -778,16 +797,17 @@ Importa um arquivo xml do tipo "menutemas" para o banco de dados
 function importarXmlMenu()
 {
 	global $nomemenu,$xml;
+	set_time_limit(180);
 	$listaDeTags = array();
 	if(!file_exists($xml))
 	{return "<br><b>Arquivo $xml n&atilde;o encontrado";}
 	include_once("../../classesphp/funcoes_gerais.php");
 	include("conexao.php");
+	if($convUTF) $nomemenu = utf8_encode($nomemenu);
 	$dbhw->query("INSERT INTO i3geoadmin_menus (desc_menu,nome_menu) VALUES ('','$nomemenu')");
 	$id_menu = $dbhw->query("SELECT id_menu FROM i3geoadmin_menus");
 	$id_menu = $id_menu->fetchAll();
 	$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
-
 	$xml = simplexml_load_file($xml);
 	//
 	//importa os grupos
@@ -801,8 +821,17 @@ function importarXmlMenu()
 	{
 		$nome = html_entity_decode(ixml($grupo,"GTIPO"));
 		$descricao = html_entity_decode(ixml($grupo,"DTIPO"));
+		if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$descricao = utf8_encode($descricao);
+		}
 		if(!isset($gruposExistentes[$nome]))
-		$dbhw->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
+		{
+			$nome = str_replace("'","",$nome);
+			$descricao = str_replace("'","",$descricao);
+			$dbhw->query("INSERT INTO i3geoadmin_grupos (desc_grupo,nome_grupo) VALUES ('$descricao','$nome')");
+		}
 		$gruposExistentes[$nome] = 0;
 	}
 	//
@@ -818,10 +847,18 @@ function importarXmlMenu()
 		foreach($grupo->SGRUPO as $sgrupo)
 		{
 			$nome = html_entity_decode(ixml($sgrupo,"SDTIPO"));
+			if($convUTF)
+			{
+				$nome = utf8_encode($nome);
+			}
 			$descricao = "";
 			if(!isset($subgruposExistentes[$nome]))
-			$dbhw->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
-			$subgruposExistentes[$nome] = 0;
+			{
+				$nome = str_replace("'","",$nome);
+				$descricao = str_replace("'","",$descricao);
+				$dbhw->query("INSERT INTO i3geoadmin_subgrupos (desc_subgrupo,nome_subgrupo) VALUES ('$descricao','$nome')");
+				$subgruposExistentes[$nome] = 0;
+			}
 		}
 	}
 	//
@@ -839,16 +876,26 @@ function importarXmlMenu()
 	{
 		$nome = html_entity_decode(ixml($tema,"TNOME"));
 		$descricao = html_entity_decode(ixml($tema,"TDESC"));
+		if($convUTF)
+		{
+			$nome = utf8_encode($nome);
+			$descricao = utf8_encode($descricao);
+		}
 		$codigo = ixml($tema,"TID");
 		$link = ixml($tema,"TLINK");
 		$tipo = ixml($tema,"TIPOA");
 		$tags = ixml($tema,"TAGS");
+		if($convUTF) $tags = utf8_encode($tags);
 		$down = ixml($tema,"DOWNLOAD");
 		$kml = ixml($tema,"KML");
 		$ogc = ixml($tema,"OGC");
 		$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 		if(!isset($temasExistentes[$codigo]))
-		$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+		{
+			$nome = str_replace("'","",$nome);
+			$descricao = str_replace("'","",$descricao);
+			$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+		}
 		$temasExistentes[$codigo] = 0;
 	}
 	foreach($xml->GRUPO as $grupo)
@@ -857,16 +904,26 @@ function importarXmlMenu()
 		{
 			$nome = html_entity_decode(ixml($tema,"TNOME"));
 			$descricao = html_entity_decode(ixml($tema,"TDESC"));
+			if($convUTF)
+			{
+				$nome = utf8_encode($nome);
+				$descricao = utf8_encode($descricao);
+			}
 			$codigo = ixml($tema,"TID");
 			$link = ixml($tema,"TLINK");
 			$tipo = ixml($tema,"TIPOA");
 			$tags = ixml($tema,"TAGS");
+			if($convUTF) $tags = utf8_encode($tags);
 			$down = ixml($tema,"DOWNLOAD");
 			$kml = ixml($tema,"KML");
 			$ogc = ixml($tema,"OGC");		
 			$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 			if(!isset($temasExistentes[$codigo]))
-			$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+			{
+				$nome = str_replace("'","",$nome);
+				$descricao = str_replace("'","",$descricao);
+				$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+			}
 			$temasExistentes[$codigo] = 0;
 		}
 		foreach($grupo->SGRUPO as $sgrupo)
@@ -875,16 +932,26 @@ function importarXmlMenu()
 			{
 				$nome = html_entity_decode(ixml($tema,"TNOME"));
 				$descricao = html_entity_decode(ixml($tema,"TDESC"));
+				if($convUTF)
+				{
+					$nome = utf8_encode($nome);
+					$descricao = utf8_encode($descricao);
+				}
 				$codigo = ixml($tema,"TID");
 				$link = ixml($tema,"TLINK");
 				$tipo = ixml($tema,"TIPOA");
-				$tags = ixml($tema,"TAGS");
+				$tags = html_entity_decode(ixml($tema,"TAGS"));
+				if($convUTF) $tags = utf8_encode($tags);
 				$down = ixml($tema,"DOWNLOAD");
 				$kml = ixml($tema,"KML");
 				$ogc = ixml($tema,"OGC");		
 				$listaDeTags = array_merge($listaDeTags,explode(" ",$tags));		
 				if(!isset($temasExistentes[$codigo]))
-				$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+				{
+					$nome = str_replace("'","",$nome);
+					$descricao = str_replace("'","",$descricao);
+					$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+				}
 				$temasExistentes[$codigo] = 0;
 			}
 		}		
@@ -908,7 +975,8 @@ function importarXmlMenu()
 	//
 	foreach($xml->GRUPO as $grupo)
 	{
-		$gtipo = ixml($grupo,"GTIPO");
+		$gtipo = html_entity_decode(ixml($grupo,"GTIPO"));
+		if($convUTF) $gtipo = utf8_encode($gtipo);
 		$n1_perfil = ixml($grupo,"PERFIL");
 		$r = $dbhw->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
 		$id_grupo = $r->fetchColumn();
@@ -916,7 +984,6 @@ function importarXmlMenu()
 		$id_n1 = $dbhw->query("SELECT id_n1 FROM i3geoadmin_n1");
 		$id_n1 = $id_n1->fetchAll();
 		$id_n1 = intval($id_n1[count($id_n1)-1]['id_n1']);
-
 		foreach($grupo->TEMA as $tema)
 		{
 			$codigo = ixml($tema,"TID");
@@ -927,7 +994,8 @@ function importarXmlMenu()
 		}
 		foreach($grupo->SGRUPO as $subgrupo)
 		{
-			$sdtipo = ixml($subgrupo,"SDTIPO");
+			$sdtipo = html_entity_decode(ixml($subgrupo,"SDTIPO"));
+			if($convUTF) $sdtipo = utf8_encode($sdtipo);
 			$n2_perfil = ixml($subgrupo,"PERFIL");
 			$r = $dbhw->query("select id_subgrupo from i3geoadmin_subgrupos where nome_subgrupo = '$sdtipo'");
 			$id_subgrupo = $r->fetchColumn();

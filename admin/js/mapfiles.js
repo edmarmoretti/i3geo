@@ -80,7 +80,10 @@ Salva o novo valor de uma variável
 */
 function salva(variavel)
 {
-	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+$i(variavel).value)
+	var original = $i(variavel).value;
+	$i(variavel).value = "gravando..."
+	core_pegaDados("gravando...","../php/mapfiles.php?funcao=salvaConfigura&variavel="+variavel+"&valor="+$i(variavel).value,"")
 	$i(variavel).style.color = ""
+	$i(variavel).value = original
 }
 YAHOO.util.Event.addListener(window, "load", initMenu);
