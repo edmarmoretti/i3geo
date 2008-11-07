@@ -46,7 +46,7 @@ if(!isset($locaplic))
 	}
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
-error_reporting(E_ALL);
+error_reporting(0);
 //
 //carrega o phpmapscript
 //
@@ -91,6 +91,7 @@ function retornaJSON($obj)
 		$texto = $j->encode($obj);
 		if (!mb_detect_encoding($texto,"UTF-8",true))
 		$texto = utf8_encode($texto);
+		header("Content-type: text/ascii; charset=UTF-8");
 		echo $texto;
 	}
 	else

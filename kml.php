@@ -36,6 +36,7 @@ error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");
 include_once ("ms_configura.php");
+echo header("Content-type: application/xml");
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 //
@@ -47,86 +48,144 @@ $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/kml.php","",$protocolo.$_SERVER["PHP_SELF"]);
-//
-//pega a lista de menus que será processada
-//se a variável definida em ms_configura for = "", a busca é feita
-//pelo método Menutemas
-//
+
 if(!isset($perfil)){$perfil = "";}
-if ($menutemas == "")
-{
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
-	foreach($m->pegaListaDeMenus() as $menu)
-	{
-		$menus[] = $menu["url"];
-	}
-}
-else
-{
-	foreach($menutemas as $m)
-	{
-		$menus[] = $m["arquivo"];
-	}
-}
-if(!isset($menus))
-$menus = array("/opt/www/html/i3geo/menutemas/menutemas.xml");
 //
 //monta o xml
 //
 echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
-foreach ($menus as $menu)
+//
+//no caso do arquivo com o meu vir de um arquivo XML
+//
+if ($menutemas != "" || is_array($menutemas))
 {
-	$xml = simplexml_load_file($menu);
-	foreach($xml->GRUPO as $grupo)
+	//
+	//para manter a compatibilidade entre as versões do i3geo
+	//é necessário verificar se a variável $menutemas é um array ou não
+	//
+	if(is_array($menutemas))
 	{
-		$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
-		$desc = mb_convert_encoding($grupo->DTIPO,"auto","auto");
-		echo "<Folder>\n";
-		echo "<name>".str_replace("&","&amp;",$nome)."</name>\n";
-		echo "<description>".str_replace("&","&amp;",$desc)."</description>\n";
-		echo "<open>0</open><visibility>0</visibility>\n";
-		foreach($grupo->SGRUPO as $sgrupo)
+		foreach($menutemas as $m)
+		{$menus[] = $m["arquivo"];}
+	}
+	else
+	$menu[] = $menutemas;
+
+	foreach ($menus as $menu)
+	{
+		$xml = simplexml_load_file($menu);
+		foreach($xml->GRUPO as $grupo)
 		{
-			echo "<Folder>\n";
-			$nome = mb_convert_encoding($sgrupo->SDTIPO,"auto","auto");
-			echo "<name>".str_replace("&","&amp;",$nome)."</name>\n";
-			echo "<description></description>\n";
-			echo "<open>0</open><visibility>0</visibility>\n";
-			foreach($sgrupo->TEMA as $tema)
+			$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
+			$desc = mb_convert_encoding($grupo->DTIPO,"auto","auto");
+			kml_cabecalho($nome,$desc);
+			foreach($grupo->SGRUPO as $sgrupo)
 			{
-				$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
-				$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
-				$id = mb_convert_encoding($tema->TID,"auto","auto");
-				$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
-				$tipoa = "";
-				if($tema->TIPOA)
-				$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
-				$ogc = sim;
-				if($tema->TID)
+				$nome = mb_convert_encoding($sgrupo->SDTIPO,"auto","auto");
+				kml_folder($nome);
+				foreach($sgrupo->TEMA as $tema)
 				{
-					$kml = mb_convert_encoding($tema->KML,"auto","auto");
-				}
-				if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
-				{
-					echo "<GroundOverlay>\n";
-    				echo "<name>".str_replace("&","&amp;",$nome)."</name>\n";
-    				$fonte = "<a href='$fonte' >Fonte </a>";
-    				$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-					echo "<description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
-					echo "<visibility>0</visibility>\n";      
-					echo "<Icon>\n";
-					$l = $protocolo."/i3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-					echo "<viewRefreshMode>onStop</viewRefreshMode>\n";
-					echo "<href>$l</href>\n";
-					echo "</Icon>\n";
-					echo "<LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
-					echo "</GroundOverlay>\n";
-				}
-			}		
-			echo "</Folder>\n";	
+					$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
+					$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
+					$id = mb_convert_encoding($tema->TID,"auto","auto");
+					$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
+					$tipoa = "";
+					if($tema->TIPOA)
+					$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
+					$ogc = sim;
+					if($tema->TID)
+					{
+						$kml = mb_convert_encoding($tema->KML,"auto","auto");
+					}
+					if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
+					{
+    					$fonte = "<a href='$fonte' >Fonte </a>";
+    					$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+						$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+						kml_servico($nome,$fonte,$legenda,$desc,$href);
+					}
+				}		
+				echo "</Folder>\n";	
+			}
+			echo "</Folder>\n";
+		}
+	}
+}
+//
+//no caso do menu vir do sistema de administração
+//
+if($menutemas == "")
+{
+	//include("admin/php/conexao.php");
+	include("admin/php/admin.php");
+	$grupos = pegaDados("SELECT * from i3geoadmin_grupos order by nome_grupo");
+	foreach($grupos as $grupo)
+	{
+		kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
+		$id_grupo = $grupo["id_grupo"];
+		$sql = "select s.nome_subgrupo,n2.id_n2 from i3geoadmin_n2 as n2,i3geoadmin_n1 as n1, i3geoadmin_subgrupos as s ";
+		$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
+		$sql .= "and n2.id_n1 = n1.id_n1 ";
+		$sql .= "and n1.n1_perfil = '' and n2.n2_perfil = '' ";
+		//$sql .= "and n1.publicado != 'nao' and n2.publicado != 'nao' ";
+		$sql .= "order by s.nome_subgrupo";
+		//echo $sql;exit;
+		$subgrupos = pegaDados($sql);	
+		foreach ($subgrupos as $subgrupo)
+		{
+			kml_folder($subgrupo["nome_subgrupo"]);
+			$id_n2 = $subgrupo["id_n2"];
+			$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
+			$sql .= "n3.id_n2='$id_n2' ";
+			$sql .= "and n3.id_tema = t.id_tema ";
+			$sql .= "and n3_perfil = '' ";
+			$sql .= "and t.kml_tema != 'nao' ";
+			$sql .= "and t.tipoa_tema = ''";
+			//echo $sql;exit;
+			$temas = pegadados($sql);
+			foreach ($temas as $tema)
+			{
+				$fonte = $tema["link_tema"];
+				$nome = $tema["nome_tema"];
+				$id = $tema["codigo_tema"];
+				$desc = $tema["desc_tema"];
+				$fonte = "<a href='$fonte' >Fonte </a>";
+    			$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+				$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+				kml_servico($nome,$fonte,$legenda,$desc,$href);
+			}
+			echo "</Folder>\n";
 		}
 		echo "</Folder>\n";
 	}
+	
 }
 echo "</Document></kml>\n";
+function kml_cabecalho($nome,$desc)
+{
+	echo "<Folder>\n";
+	echo " <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo " <description>".str_replace("&","&amp;",$desc)."</description>\n";
+	echo " <open>0</open><visibility>0</visibility>\n";	
+}
+function kml_folder($nome)
+{
+	echo " <Folder>\n";
+	echo "  <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "  <description></description>\n";
+	echo "  <open>0</open><visibility>0</visibility>\n";
+}
+function kml_servico($nome,$fonte,$legenda,$desc,$href)
+{
+	echo "   <GroundOverlay>\n";
+	echo "    <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
+	echo "    <visibility>0</visibility>\n";      
+	echo "    <Icon>\n";
+	echo "    <viewRefreshMode>onStop</viewRefreshMode>\n";
+	echo "    <href>$href</href>\n";
+	echo "    </Icon>\n";
+	echo "    <LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
+	echo "   </GroundOverlay>\n";
+}
 ?>
