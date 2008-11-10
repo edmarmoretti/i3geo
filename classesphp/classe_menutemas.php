@@ -275,6 +275,7 @@ array
 			$nome = ixml($temar,"TNOME");
 			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 		}
+		//var_dump($this->xml->GRUPO);
 		foreach($this->xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;

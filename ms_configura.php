@@ -43,7 +43,7 @@ Free Software Foundation, Inc., no endereço
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
-$mensagemInicia = 'I3Geo versão 4.1';
+$mensagemInicia = 'gravando...';
 /*
 	Variable: $tituloInstituicao
 	
@@ -149,9 +149,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Por meio dessa lista pode-se disparar programas PHP que executam operações especiais para a obtenção de dados com base em um par de coordenadas xy.
 	
 	Veja a documentação específica do arquivo identifica.xml para maiores detalhes.
-
-	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
-
 	*/
 	$locidentifica = "";
 	/*
@@ -164,8 +161,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	A guia "Mapas" mostra uma lista de links que permitem abrir mapas específicos. Essa lista é utilizada também pela versão mobile do i3geo.
 	
 	Veja a documentação específica do arquivo mapas.xml para maiores detalhes.
-
-	Para usar as funções default, utilize apenas $menutemas = ""; nesse caso, as funções serão obtidas do banco de dados de administração.
 	*/
 	$locmapas = "";
 	/*
@@ -198,7 +193,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: $postgis_mapa
 	
-	String|array de conexão para acesso aos dados (opcional).
+	String de conexão para acesso aos dados (opcional).
 	
 	Com o uso opcional dessa variável é possível esconder a string de conexão com o banco de dados. O Mapserver
 	não permite esconder essa string, por isso, no i3geo, foi implementado um esquema de substituição.
@@ -206,13 +201,9 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Se não for desejado a substituição, deixe essa variável em branco.
 	Se vc especificar essa variável, o mapa será forçado a recusar o modo de operação CGI.
 	
-	Até a versão 4.0, é possível definir apenas uma string como parâmetro de substituição.
-	Da versão 4.1 em diante, pode-se definir um array onde a chave do array é a palavra
-	que será utilizada no item CONNECTION do mapfile.
-	
 	Para mais detalhes veja a função substituiCon em classesphp/funcoes_gerais.php
 	*/
-	$postgis_mapa["geodados"] = "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432";
+	$postgis_mapa = ""; //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
 	/*
 	Variable: $menutemas
 	
@@ -227,14 +218,13 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Example:
 
 	$menutemas = array(
-		array("nomemenu"=>"","idmenu"=>"GEOPR","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=2","status"=>"fechado"),
-		array("nomemenu"=>"","idmenu"=>"i3Geo","arquivo"=>"http://localhost/i3geo/admin/xmlmenutemas.php?id_menu=1","status"=>"aberto")
+		array("idmenu"=>1,"arquivo"=>"http://localhost/i3geo/menutemas/geopr.xml","status"=>"fechado"),
+		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 		
 	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
 	$menutemas = "";
-
 	/*
 	Variable: $utilizacgi
 	
@@ -255,7 +245,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 Indica o nome do arquivo xml que será utilizado na interface Atlas do i3geo.
 	 
-	Para usar o menu default, utilize apenas $atlasxml = "";, nesse caso, os Atlas serão obtidos do banco de dados de administração.
+	 Pode ser utilizado o caminho relativo, tendo como base i3geo/diretorio
 	*/
 	$atlasxml = "";
 	/*
@@ -271,7 +261,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 Arquivo PHP que define a string de conexão (PDO) com o banco de dados administrativo.
 	 
-	 Esse arquivo é incluído no programa i3geo/admin/conexao.php e deve ser definido com o caminho completo.
+	 Esse arquivo é incluído no programa i3geo/admin/conexao.php
 	 
 	 O banco de dados administrativo é utilizado para definir coisas como a árvore de temas, árvore de mapas, etc.
 	 
@@ -284,27 +274,27 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	*/
-	$conexaoadmin = "";
+	$conexaoadmin = ""; //$locaplic."/admin/conexaomma.php";
 }
 else //se for linux
 {
-	$editores = array("");
+	$editores = array("10.1.11.159","10.1.2.51");
 	$dir_tmp = "/var/tmp/ms_tmp";
 	$temasdir = "/opt/www/html/i3geo/temas";
 	$temasaplic = "/opt/www/html/i3geo/aplicmap";
 	$locmapserv = "/cgi-bin/mapserv";
 	$locaplic = "/opt/www/html/i3geo";
-	$locsistemas= "";//"http://mapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
-	$locidentifica = "";//"http://mapas.mma.gov.br/i3geo/menutemas/identifica.xml";
-	$locmapas = "";//"http://mapas.mma.gov.br/abremapa.php?id=xml";
+	$locsistemas= "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/sistemas.xml";
+	$locidentifica = "";//"http://dsvmapas.mma.gov.br/i3geo/menutemas/identifica.xml";
+	$locmapas = "";//"http://dsvmapas.mma.gov.br/abremapa.php?id=xml";
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_con = "";
 	$srid_area = 1;
 	$postgis_mapa["cnuc"] = "port=5432 dbname=adsi user=cnuc password=cnuc";
-	$menutemas = "";
+	$menutemas = ""; 
 	$utilizacgi = "nao";
 	$atlasxml = "";//"../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
-	$conexaoadmin = "";//$locaplic."/admin/conexaomma.php";
+	$conexaoadmin = "";//$locaplic."/admin/php/conexaomma.php";
 }
 ?>

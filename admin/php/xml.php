@@ -80,6 +80,9 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 {
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	if($convUTF)
+	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "<rss version='2.0'>";
 	$xml .= "<channel>\n";

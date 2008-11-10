@@ -244,6 +244,8 @@ class Services_JSON
                 return (float) $var;
                 
             case 'string':
+		//if (!mb_detect_encoding($var,"UTF-8",true))
+		//$var = utf8_encode($var);		
 		$arg = $var;
 		$l = strlen($var);
           	$s = '"';

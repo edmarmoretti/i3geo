@@ -1,11 +1,10 @@
 <?php
-error_reporting(E_ALL);
-$xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
-$xml .= "<capa>";
+error_reporting(0);
+$xml = "<capa>";
 include("../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
 $menus = pegaDados("SELECT * from i3geoadmin_menus order by nome_menu ",$locaplic);
-$xml .= '<termo id="00" nome="Disseminação de dados">';
+$xml .= '<termo id="00" nome="Dados geo">';
 $contador = 0;
 $xml .= '<item id="'.$contador.'" tipo="TE1" nome="Menus" familia="1" />  '."\n";
 foreach ($menus as $menu)
@@ -119,6 +118,10 @@ $xml .= "</capa>";
 //header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . 'GMT');
 //header('Cache-Control: no-cache, must-revalidate');
 //header('Pragma: no-cache');
+header("Content-type: application/xml");
+if($convUTF)
+header("Content-type: text/xml; charset=UTF-8");
+else
 header("Content-type: text/xml; charset=ISO-8859-1");
 echo $xml;
 ?> 

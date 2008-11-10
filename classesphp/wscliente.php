@@ -390,7 +390,7 @@ function listaRSSws2()
 	}
 	$retorna = implode("|",$linhas);
 	$retorna = str_replace("\n","",$retorna);
-	$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");
+	//$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");
 	$cp->set_data($retorna);
 }
 /*
