@@ -1,8 +1,14 @@
 <?php
 error_reporting(0);
-$xml = "<capa>";
 include("../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
+include("$locaplic/admin/php/conexao.php");
+if($convUTF)
+$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+else$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+
+
+$xml .= "<capa>";
 $menus = pegaDados("SELECT * from i3geoadmin_menus order by nome_menu ",$locaplic);
 $xml .= '<termo id="00" nome="Dados geo">';
 $contador = 0;
@@ -73,7 +79,7 @@ for($i=0;$i < count($grupos);++$i)
 	$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
 	$idgrupo = $grupos[$i]["id_n1"];
 	$xml .= '<item id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
-	$temastag = pegaDados("select d.tags_tema as tags,d.id_tema as tema from i3geoadmin_n2 as b,i3geoadmin_n1 as a,i3geoadmin_n3 as c,i3geoadmin_temas as d where a.id_grupo = '$idgrupo' and a.id_n1 = b.id_n1 and c.id_n2 = b.id_n2 and c.id_tema = d.id_tema group by tema",$locaplic);
+	$temastag = pegaDados("select d.tags_tema as tags,d.id_tema as tema from i3geoadmin_n2 as b,i3geoadmin_n1 as a,i3geoadmin_n3 as c,i3geoadmin_temas as d where a.id_grupo = '$idgrupo' and a.id_n1 = b.id_n1 and c.id_n2 = b.id_n2 and c.id_tema = d.id_tema group by tema,d.tags_tema",$locaplic);
 	$arrayTag = array();
 	foreach($temastag as $tematag)
 	{
@@ -119,9 +125,6 @@ $xml .= "</capa>";
 //header('Cache-Control: no-cache, must-revalidate');
 //header('Pragma: no-cache');
 header("Content-type: application/xml");
-if($convUTF)
-header("Content-type: text/xml; charset=UTF-8");
-else
-header("Content-type: text/xml; charset=ISO-8859-1");
+
 echo $xml;
 ?> 

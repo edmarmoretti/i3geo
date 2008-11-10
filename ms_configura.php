@@ -274,7 +274,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	*/
-	$conexaoadmin = ""; //$locaplic."/admin/conexaomma.php";
+	$conexaoadmin = $locaplic."/admin/php/conexaomma.php";
 }
 else //se for linux
 {
@@ -295,6 +295,6 @@ else //se for linux
 	$utilizacgi = "nao";
 	$atlasxml = "";//"../menutemas/atlas.xml";
 	$expoeMapfile = "sim";
-	$conexaoadmin = "";//$locaplic."/admin/php/conexaomma.php";
+	$conexaoadmin = "";
 }
 ?>

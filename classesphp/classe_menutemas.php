@@ -114,6 +114,7 @@ array
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
+			$locaplic = $this->locaplic;
 			include($this->locaplic."/admin/php/conexao.php");
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);

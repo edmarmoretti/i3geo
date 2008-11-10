@@ -27,8 +27,9 @@ File: i3geo/admin/mapfiles.php
 19/6/2007
 
 */
-error_reporting(0);
+
 include_once("admin.php");
+error_reporting(E_ALL);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -804,7 +805,7 @@ function importarXmlMenu()
 	include_once("../../classesphp/funcoes_gerais.php");
 	include("conexao.php");
 	if($convUTF) $nomemenu = utf8_encode($nomemenu);
-	$dbhw->query("INSERT INTO i3geoadmin_menus (desc_menu,nome_menu) VALUES ('','$nomemenu')");
+	$dbhw->query("INSERT INTO i3geoadmin_menus (perfil_menu,desc_menu,nome_menu) VALUES ('','','$nomemenu')");
 	$id_menu = $dbhw->query("SELECT id_menu FROM i3geoadmin_menus");
 	$id_menu = $id_menu->fetchAll();
 	$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);

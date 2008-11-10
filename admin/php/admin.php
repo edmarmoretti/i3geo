@@ -84,25 +84,32 @@ function retornaJSON($obj)
 	//
 	//para os casos em que json não está habilitado
 	//
-	if (!function_exists("json_encode"))
-	{
+	//if (!function_exists("json_encode"))
+	//{
 		include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
+		error_reporting(0);
 		$j = new Services_JSON();
 		$texto = $j->encode($obj);
 		if (!mb_detect_encoding($texto,"UTF-8",true))
 		$texto = utf8_encode($texto);
 		header("Content-type: text/ascii; charset=UTF-8");
 		echo $texto;
+	/*
 	}
 	else
 	{
 		if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
 		$texto = json_encode($obj);
-		if (!mb_detect_encoding($texto,"UTF-8",true))
-		$texto = utf8_encode($texto);
+		if (mb_detect_encoding($texto,"UTF-8",false)!="UTF-8")
+		{
+			$texto = utf8_encode($texto);
+		}
+		//header("Content-type: application/ascii");
+		//header("Content-type: text/ascii; charset=UTF-8");
 		echo $texto;
 		if(extension_loaded('zlib')){ob_end_flush();}
 	}
+	*/
 	exit;
 }
 function verificaDuplicados($sql,$dbh)

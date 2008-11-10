@@ -7,7 +7,10 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<SISTEMAS>\n";
 	$q = "select * from i3geoadmin_sistemas";
 	$qatlas = $dbh->query($q);
@@ -117,7 +120,10 @@ function geraXmlAtlas($locaplic,$editores)
 	//error_reporting(E_ALL);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<RAIZ>\n";
 	$q = "select * from i3geoadmin_atlas";
 	$qatlas = $dbh->query($q);
@@ -163,7 +169,10 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<SISTEMAS>\n";
 	$q = "select * from i3geoadmin_identifica ";
 	$qi = $dbh->query($q);
@@ -198,7 +207,10 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
+	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<MAPAS>\n";
 	$q = "select * from i3geoadmin_mapas";
 	$q = $dbh->query($q);
@@ -252,7 +264,10 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
+	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	else
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<TEMASGEO>\n";
 	if(!isset($id_menu))
 	$xml .= "<CABECALHO>Utilize ?id_menu=1 por exemplo</CABECALHO>\n";
@@ -269,7 +284,9 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	foreach($qgrupos as $row)
 	{
 		if($row["perfil"] == "")
-		$mostra = true;
+		{
+			$mostra = true;
+		}
 		else
 		{
 			$perfilatual = explode(" ",str_replace(","," ",$row["perfil"]));

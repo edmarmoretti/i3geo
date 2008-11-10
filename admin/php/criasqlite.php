@@ -1,13 +1,16 @@
 <?php
 $funcao = "";
 include_once("admin.php");
-error_reporting(E_ALL);
-verificaEditores($editores);
+if(file_exists("../../menutemas/admin.db"))
+{echo "Arquivo menutemas/admin.db ja existe";exit;}
+$banco = sqlite_open("../../menutemas/admin.db",0666);
+$banco = null;
+$dbh = new PDO('sqlite:../../menutemas/admin.db');
 $tabelas = array(
 "CREATE TABLE i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT)",
 "CREATE TABLE i3geoadmin_sistemasf (abrir_funcao TEXT, h_funcao NUMERIC, id_funcao INTEGER PRIMARY KEY, id_sistema NUMERIC, nome_funcao TEXT, perfil_funcao TEXT, w_funcao NUMERIC)",
 "CREATE TABLE i3geoadmin_subgrupos (desc_subgrupo TEXT, id_subgrupo INTEGER PRIMARY KEY, nome_subgrupo TEXT)",
-"CREATE TABLE i3geoadmin_temas (id_tema INTEGER PRIMARY KEY, kml_tema TEXT, ogc_tema TEXT, download_tema TEXT, tags_tema TEXT, tipoa_tema TEXT, link_tema TEXT, desc_tema TEXT, nome_tema TEXT, codigo_tema TEXT)",
+"CREATE TABLE i3geoadmin_temas (id_tema INTEGER PRIMARY KEY, kml_tema , ogc_tema , download_tema , tags_tema , tipoa_tema , link_tema , desc_tema , nome_tema , codigo_tema )",
 "CREATE TABLE i3geoadmin_ws (autor_ws TEXT, desc_ws TEXT, id_ws INTEGER PRIMARY KEY, link_ws TEXT, nome_ws TEXT, tipo_ws TEXT)",
 "CREATE TABLE i3geoadmin_tags (id_tag INTEGER PRIMARY KEY, nome TEXT)",
 "CREATE TABLE i3geoadmin_perfis (id_perfil INTEGER PRIMARY KEY, perfil TEXT)",
@@ -23,49 +26,9 @@ $tabelas = array(
 "CREATE TABLE i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 "CREATE TABLE i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)"
 );
-if($conexaoadmin == "")
-{
-	if(file_exists("../../menutemas/admin.db"))
-	{echo "Arquivo menutemas/admin.db ja existe";exit;}
-	$banco = sqlite_open("../../menutemas/admin.db",0666);
-	$banco = null;
-	$dbhw = new PDO('sqlite:../../menutemas/admin.db');
-}
-else
-{
-	include($conexaoadmin);	
-}
 foreach($tabelas as $tabela)
 {
-	if($dbh->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
-	{
-		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
-	}
-	//echo $tabela."<br>";
-	$q = $dbhw->query($tabela);
-	/*
-GRANT SELECT ON TABLE i3geoadmin_atlas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlasp TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlast TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_grupos TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_identifica TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_mapas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_menus TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n1 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n2 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_n3 TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_perfis TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_raiz TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_sistemas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_sistemasf TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_subgrupos TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_atlas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_tags TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_temas TO geodados;
-GRANT SELECT ON TABLE i3geoadmin_ws TO geodados;	
-	*/
-	
+	$q = $dbh->query($tabela);
 }
 $banco = null;
-echo "Banco criado!!!";
 ?>
