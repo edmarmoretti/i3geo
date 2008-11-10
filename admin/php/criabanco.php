@@ -35,4 +35,5 @@ foreach($tabelas as $tabela)
 	$q = $dbhw->query($tabela);
 }
 $banco = null;
+echo "Banco criado!!!";
 ?>
