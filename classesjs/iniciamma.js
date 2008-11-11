@@ -748,11 +748,11 @@ function Mapa(e,m)
 			{
 				$i("guia"+temp[1]).parentNode.parentNode.focus();
 			}
-			if (pCookie("g_janelaMen")){g_janelaMen = pCookie("g_janelaMen");}
+			if (i3GEO.util.pegaCookie("g_janelaMen")){g_janelaMen = i3GEO.util.pegaCookie("g_janelaMen");}
 			if (g_janelaMen == "sim"){initJanelaMen();}
 			if (g_mapaRefDisplay != "none")
 			{
-				if (pCookie("g_mapaRefDisplay")){g_mapaRefDisplay = pCookie("g_mapaRefDisplay");}
+				if (i3GEO.util.pegaCookie("g_mapaRefDisplay")){g_mapaRefDisplay = i3GEO.util.pegaCookie("g_mapaRefDisplay");}
 				if (g_mapaRefDisplay == "block"){initJanelaRef();}
 			}
 			if($i("img")){g_quadrooriginal = $i("img").src;}

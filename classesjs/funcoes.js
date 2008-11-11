@@ -157,29 +157,24 @@ function trataErro()
 	objaguarde.fecha("ajaxCorpoMapa1");
 }
 /*
-Function: iCookie
+Function: iCookie (depreciado)
+
+Utilize i3GEO.util
 
 Cria um cookie.
 */
 function iCookie(nome,valor)
 {
-	document.cookie = nome+"="+valor;
+	i3GEO.util.insereCookie(nome,valor);
 }
 /*
-Function: pCookie
+Function: pCookie (depreciado)
 
-Pega o valor de um cookie.
+Utilize i3GEO.util.pegaCookie
 */
 function pCookie(nome)
 {
-	var cookies = document.cookie;
-	var i = cookies.indexOf(nome);
-	if(i == -1)
-	{return null;}
-	var fim = cookies.indexOf(";",i);
-	if (fim == -1)
-	{var fim = cookies.length;}
-	return (unescape(cookies.substring(i,fim))).split("=")[1];
+	i3GEO.util.pegaCookie(nome);
 }
 /*
 Section: interface
@@ -354,32 +349,13 @@ function desceferramentas()
 	}
 }
 /*
-Function: trocalingua
+Function: trocalingua (depreciado)
 
-Troca o idioma atual utilizado na interface principal.
-
-O código atual da linguagem é armazenado em um Cookie. Essa função troca o valor do Cookie e redesenha o mapa.
-
-A troca de linguagem é ativada pelo clique nas bandeiras inseridas na parte superior do menu suspenso.
-
-Os termos utilizados em cada idioma é definido em configura.js
-
-Adefinição do termo a ser utilizado é definido pela função $trad
-
-See: <configura.js>
-
-Parameters:
-
-l - código da lingua
+Utilize i3GEO.idioma.trocaIdioma
 */
 function trocalingua(l)
 {
-	try
-	{
-		iCookie("i3geolingua",l);
-		window.location.reload(true)	
-	}
-	catch(e){alert("Erro ao mudar lingua");}
+	i3GEO.idioma.trocaIdioma(l);
 }
 /*
 Function: criaContainerRichdraw
@@ -611,10 +587,10 @@ function initJanelaMen()
 			{
 				YAHOO.util.Event.removeListener(YAHOO.janelaMen.xp.panel.close, "click");
 				YAHOO.janelaMen.xp.panel.destroy();	
-				iCookie("g_janelaMen","nao");	
+				i3GEO.util.insereCookie("g_janelaMen","nao");
 			};
 			YAHOO.util.Event.addListener(YAHOO.janelaMen.xp.panel.close, "click", escondeMen);
-			iCookie("g_janelaMen","sim");
+			i3GEO.util.insereCookie("g_janelaMen","sim");
 		}
 		//
 		//abre a janela
@@ -1944,10 +1920,10 @@ function initJanelaRef()
 		{
 			YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 			YAHOO.janelaRef.xp.panel.destroy();	
-			iCookie("g_mapaRefDisplay","none");
+			i3GEO.util.insereCookie("g_mapaRefDisplay","none");
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
-		iCookie("g_mapaRefDisplay","block");
+		i3GEO.util.insereCookie("g_mapaRefDisplay","block");
 	}
 	objmapa.atualizaReferencia();
 }

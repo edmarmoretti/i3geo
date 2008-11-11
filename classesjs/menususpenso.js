@@ -55,9 +55,9 @@ function montaMenuSuspenso(iddiv)
  			if(objmapa.w >= 500)
  			{
 				ins += '<li class="yuimenubaritem first-of-type" style="'+sobe+'float:left;border: 0px solid white;" >';
-				ins += '&nbsp;<img  style="border: 0px solid white;padding:0 0px;top:-7px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'pt\')" id="brasil" />';
-				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'en\')" id="uk" />';
-				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="trocalingua(\'es\')" id="espanhol" />';
+				ins += '&nbsp;<img  style="border: 0px solid white;padding:0 0px;top:-7px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'pt\')" id="brasil" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'en\')" id="uk" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'es\')" id="espanhol" />';
 				ins += '</li>';
 			}
 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';

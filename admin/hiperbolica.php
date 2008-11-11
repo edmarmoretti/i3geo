@@ -26,7 +26,7 @@ foreach ($menus as $menu)
 		$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
 		$idgrupo = $grupos[$i]["id_n1"];
 		//grupo
-		$xml .= '<item id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
+		$xml .= '<item cor="#4148A4" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 		$contador++;
 		$xml .= '<item id="'.$contador.'" tipo="TE4" nome="SUBGRUPOS" familia="'.$id.'" />  '."\n";
 		

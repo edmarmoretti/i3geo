@@ -107,6 +107,7 @@ Group: Aplicativos adicionais  {
       File: mobile.php  (mobile\mobile.php)
       }  # Group: Mobile
 
+   File: Redirecionador para o pacotes/arvorehiper/index.php com extensão HTML  (hiperbolica.html)
    }  # Group: Aplicativos adicionais
 
 Group: Configurações administrativas (menus, mapas, etc.)  {
@@ -131,6 +132,8 @@ Group: Interfaces HTML e mapfiles de inicialização e configuração  {
    File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)
    File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
+   File: Redirecionador para o ms_criamapa.php com extensão HTM  (aplicmap\index.htm)
+   File: Redirecionador para o ms_criamapa.php com extensão HTML  (aplicmap\index.html)
    }  # Group: Interfaces HTML e mapfiles de inicialização e configuração
 
 Group: Programas principais (core)  {
@@ -143,8 +146,10 @@ Group: Programas principais (core)  {
       File: datadownload.js  (classesjs\datadownload.js)
       File: ferramentas.js  (classesjs\ferramentas.js)
       File: funcoes.js  (classesjs\funcoes.js)
+      File: g_traducao  (classesjs\traducao.js)
       File: geradordelinks.js  (classesjs\geradordelinks.js)
       File: i3geo.js  (classesjs\i3geo.js)
+      File: i3geo_idiomas.js  (classesjs\i3geo_idiomas.js)
       File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
       File: iniciamma.js  (classesjs\iniciamma.js)
       File: montaMenuSuspenso  (classesjs\menususpenso.js)

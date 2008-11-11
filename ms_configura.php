@@ -43,7 +43,7 @@ Free Software Foundation, Inc., no endereço
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
-$mensagemInicia = 'gravando...';
+$mensagemInicia = 'Versão 4.1 beta';
 /*
 	Variable: $tituloInstituicao
 	
