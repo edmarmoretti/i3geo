@@ -1,0 +1,31 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  LAYER
+    CONNECTION "http://200.252.81.121/cgi-bin/mapserv?map=/usr/mapfiles/incra.map"
+    CONNECTIONTYPE WMS
+    DATA ""
+    METADATA
+      "wms_srs"	"EPSG:4291"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "TEXTO"	"NAO"
+      "wms_force_separate_request"	"1"
+      "wms_name"	"TERRITORIOS_QUILOMBOLA"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml"
+      "legendawms"	"http://200.252.81.121/cgi-bin/mapserv?map=/usr/mapfiles/incra.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=TERRITORIOS_QUILOMBOLA&format=image/png"
+      "nomeoriginal"	"TERRITORIOS_QUILOMBOLA"
+      "wms_formatlist"	"image/gif,image/png,image/png; mode=24bit,image/wbmp,image/tiff"
+      "wms_format"	"image/png"
+      "wms_connectiontimeout"	"30"
+      "TEMA"	"TERRITORIOS_QUILOMBOLA"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"default"
+    END
+
+    NAME "geopr_incra_quilombola"
+    OFFSITE 255 255 255
+    STATUS DEFAULT
+    TOLERANCE 0
+    TYPE RASTER
+    UNITS METERS
+  END
+END

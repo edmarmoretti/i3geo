@@ -281,4 +281,27 @@
          </TEMA>
       </SGRUPO>
     </GRUPO>
+   <GRUPO>
+      <GTIPO>INCRA</GTIPO>
+      <DTIPO></DTIPO>
+      <SGRUPO>
+         <SDTIPO>OGC - INCRA</SDTIPO>
+          <TEMA>
+            <TID>geopr_incra_assentamentos</TID>
+            <TNOME>Assentamentos</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://200.252.81.121/cgi-bin/mapserv?map=/usr/mapfiles/incra.map&amp;request=getcapabilities&amp;version=1.1.1&amp;service=wms</TLINK>
+            <TIPOA>WMS</TIPOA>
+            <TAGS>reforma agrária agricultura rural terra</TAGS>
+         </TEMA>
+          <TEMA>
+            <TID>geopr_incra_quilombola</TID>
+            <TNOME>Territórios quilombola</TNOME>
+            <TDESC></TDESC>
+            <TLINK>http://200.252.81.121/cgi-bin/mapserv?map=/usr/mapfiles/incra.map&amp;request=getcapabilities&amp;version=1.1.1&amp;service=wms</TLINK>
+            <TIPOA>WMS</TIPOA>
+            <TAGS>quilombo terra comunidade tradicional</TAGS>
+         </TEMA>
+      </SGRUPO>
+    </GRUPO>
 </TEMASGEO>
