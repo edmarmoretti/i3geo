@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin-config>
+	<depends plugin-name="com.iver.cit.gvsig" />
+	<libraries library-dir="."/>
+	<resourceBundle name="text"/>
+	<extensions>
+		<extension class-name="br.gov.mma.i3geo.I3GeoClientExtension"
+			description="Plugin i3Geo para seleção de visões"
+			active="true"
+			priority="1">
+		</extension>
+	</extensions>
+</plugin-config>
