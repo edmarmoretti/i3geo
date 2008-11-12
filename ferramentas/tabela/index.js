@@ -561,8 +561,8 @@ function t4()
 		{itensEstrela = tsl.toString(",")}
 	}
 	ins = "<div onclick='geraG(\"mostraG\")' style=position:absolute;top:0px;left:0px;text-align:left; ><input id=botao7 type=button value='Gera em uma nova janela' size=15 /></div>"
-	ins += "<div onclick='geraG(\"mostraI\")' style=position:absolute;top:0px;left:158px;text-align:left; ><input id=botao10 type=button value='Gera nessa janela' size=15 /></div>"
-	ins += "<div onclick='fusaoG()' style=position:absolute;top:0px;left:280px;text-align:left; ><input id=botao8 type=button value='Fus&atilde;o com o mapa' size=25  /></div>"
+	ins += "<div onclick='geraG(\"mostraI\")' style=position:absolute;top:0px;left:178px;text-align:left; ><input id=botao10 type=button value='Nessa janela' size=15 /></div>"
+	ins += "<div onclick='fusaoG()' style=position:absolute;top:0px;left:300px;text-align:left; ><input id=botao8 type=button value='Fus&atilde;o' size=30  /></div>"
 
 	ins += "<div id=imgG style=position:relative;top:30px; ></div>"
 	ins += "<br><br><table class=lista >"
