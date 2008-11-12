@@ -157,6 +157,9 @@ foreach ($_GET as $k=>$v)
 	{$tema = $v;}
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
+	//if(strtolower($k) == "srs")
+	//{$SRS = $v;}
+	
 }
 if(isset($tema))
 {$tipo = "";}
