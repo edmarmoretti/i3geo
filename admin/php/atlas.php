@@ -369,8 +369,9 @@ function importarXmlAtlas()
 		if($h == ""){$h = 'null';}
 		$pranchadefault = ixml($atlas,"PRANCHADEFAULT");
 		$tipoguias = ixml($atlas,"TIPOGUIAS");
+		$base = ixml($atlas,"BASEMAPFILE");
 		if(!isset($atlasExistentes[$titulo]))
-		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,ordem_atlas) VALUES ('','$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo',$contaAtlas)");
+		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,ordem_atlas,basemapfile_atlas) VALUES ('','$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo',$contaAtlas,'$base')");
 		$atlasExistentes[$titulo] = 0;	
 		$id_atlas = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
 		$id_atlas = $id_atlas->fetchAll();

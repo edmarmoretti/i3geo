@@ -175,7 +175,7 @@ function alteraN3()
 			$o = $dbhw->query("SELECT MAX(ordem) as o FROM i3geoadmin_n3 where id_n2 = '$id_n2'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil,ordem) VALUES ($id_n2,'', '',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,n3_perfil,ordem) VALUES ($id_n2,'',$o)");
 			$id = $dbhw->query("SELECT id_n3 FROM i3geoadmin_n3");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n3']);
@@ -209,7 +209,7 @@ function alteraN2()
 			$o = $dbhw->query("SELECT MAX(ordem) as o FROM i3geoadmin_n2 where id_n1 = '$id_n1'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil,ordem) VALUES ($id_n1,'', '',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem) VALUES ($id_n1,'',$o)");
 			$id = $dbhw->query("SELECT id_n2 FROM i3geoadmin_n2");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n2']);
@@ -245,7 +245,7 @@ function alteraN1()
 			$o = $dbhw->query("SELECT MAX(ordem) as o FROM i3geoadmin_n1 where id_menu = '$id_menu'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n1 (publicado,id_menu,id_grupo,n1_perfil,ordem) VALUES ('',$id_menu,'', '',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n1 (publicado,id_menu,n1_perfil,ordem) VALUES ('',$id_menu,'',$o)");
 			$id = $dbhw->query("SELECT id_n1 FROM i3geoadmin_n1");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n1']);
@@ -281,7 +281,7 @@ function alterarRaiz()
 			$o = $dbhw->query("SELECT MAX(ordem) as o FROM i3geoadmin_raiz where id_menu = '$id_menu' and nivel = '$nivel' and id_nivel = '$id_nivel'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,id_tema,ordem) VALUES ($id_nivel,$nivel,$id_menu,'','',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_nivel,nivel,id_menu,perfil,ordem) VALUES ($id_nivel,$nivel,$id_menu,'',$o)");
 			$id = $dbhw->query("SELECT id_raiz FROM i3geoadmin_raiz");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_raiz']);

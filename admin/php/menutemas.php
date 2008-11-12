@@ -805,7 +805,7 @@ function importarXmlMenu()
 	include_once("../../classesphp/funcoes_gerais.php");
 	include("conexao.php");
 	if($convUTF) $nomemenu = utf8_encode($nomemenu);
-	$dbhw->query("INSERT INTO i3geoadmin_menus (perfil_menu,desc_menu,nome_menu) VALUES ('','','$nomemenu')");
+	$dbhw->query("INSERT INTO i3geoadmin_menus (perfil_menu,desc_menu,nome_menu,publicado_menu,aberto) VALUES ('','','$nomemenu','SIM','NAO')");
 	$id_menu = $dbhw->query("SELECT id_menu FROM i3geoadmin_menus");
 	$id_menu = $id_menu->fetchAll();
 	$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
@@ -969,7 +969,7 @@ function importarXmlMenu()
 		$perfil = ixml($tema,"PERFIL");
 		$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 		$id_tema = $r->fetchColumn();
-		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','0','0','$perfil')");		
+		$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil,ordem) VALUES ('$id_tema','$id_menu','0','0','$perfil','0')");		
 	}
 	//
 	//registra o restante
@@ -981,7 +981,7 @@ function importarXmlMenu()
 		$n1_perfil = ixml($grupo,"PERFIL");
 		$r = $dbhw->query("select id_grupo from i3geoadmin_grupos where nome_grupo = '$gtipo'");
 		$id_grupo = $r->fetchColumn();
-		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,id_grupo,n1_perfil) VALUES ('$id_menu','$id_grupo','$n1_perfil')");
+		$dbhw->query("INSERT INTO i3geoadmin_n1 (ordem,publicado,id_menu,id_grupo,n1_perfil) VALUES ('0','SIM','$id_menu','$id_grupo','$n1_perfil')");
 		$id_n1 = $dbhw->query("SELECT id_n1 FROM i3geoadmin_n1");
 		$id_n1 = $id_n1->fetchAll();
 		$id_n1 = intval($id_n1[count($id_n1)-1]['id_n1']);
@@ -991,7 +991,7 @@ function importarXmlMenu()
 			$perfil = ixml($tema,"PERFIL");
 			$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 			$id_tema = $r->fetchColumn();
-			$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil) VALUES ('$id_tema','$id_menu','$id_n1','1','$perfil')");		
+			$dbhw->query("INSERT INTO i3geoadmin_raiz (id_tema,id_menu,id_nivel,nivel,perfil,ordem) VALUES ('$id_tema','$id_menu','$id_n1','1','$perfil','0')");		
 		}
 		foreach($grupo->SGRUPO as $subgrupo)
 		{
@@ -1001,7 +1001,7 @@ function importarXmlMenu()
 			$r = $dbhw->query("select id_subgrupo from i3geoadmin_subgrupos where nome_subgrupo = '$sdtipo'");
 			$id_subgrupo = $r->fetchColumn();
 
-			$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,id_subgrupo,n2_perfil) VALUES ('$id_n1','$id_subgrupo','$n2_perfil')");
+			$dbhw->query("INSERT INTO i3geoadmin_n2 (publicado,ordem,id_n1,id_subgrupo,n2_perfil) VALUES ('SIM','0','$id_n1','$id_subgrupo','$n2_perfil')");
 			$id_n2 = $dbhw->query("SELECT id_n2 FROM i3geoadmin_n2");
 			$id_n2 = $id_n2->fetchAll();
 			$id_n2 = intval($id_n2[count($id_n2)-1]['id_n2']);
@@ -1011,7 +1011,7 @@ function importarXmlMenu()
 				$perfil = ixml($tema,"PERFIL");
 				$r = $dbhw->query("select id_tema from i3geoadmin_temas where codigo_tema = '$codigo'");
 				$id_tema = $r->fetchColumn();
-				$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,id_tema,n3_perfil) VALUES ('$id_n2','$id_tema','$perfil')");		
+				$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,ordem,id_n2,id_tema,n3_perfil) VALUES ('SIM','0','$id_n2','$id_tema','$perfil')");		
 			}		
 		}
 	}	

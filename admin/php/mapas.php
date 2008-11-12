@@ -131,6 +131,7 @@ function importarXmlMapas()
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$mapasExistentes[$r["nome_mapa"]] = 0;}
+	$conta = 1;
 	foreach($xml->MAPA as $mapa)
 	{
 		$perfil = ixml($mapa,"PERFIL");
@@ -148,8 +149,9 @@ function importarXmlMapas()
 		$outros = ixml($mapa,"OUTROS");
 		$linkdireto = ixml($mapa,"LINKDIRETO");
 		if(!isset($mapasExistentes[$nome]))
-		$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa,temas_mapa,ligados_mapa) VALUES ('','$perfil','$descricao','$extensao','$imagem','$linkdireto','$nome','$outros','$temas','$ligados')");
+		$dbhw->query("INSERT INTO i3geoadmin_mapas (publicado_mapa,perfil_mapa,desc_mapa,ext_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa,temas_mapa,ligados_mapa,ordem_mapa) VALUES ('','$perfil','$descricao','$extensao','$imagem','$linkdireto','$nome','$outros','$temas','$ligados',$conta)");
 		$mapasExistentes[$nome] = 0;
+		$conta++;
 	}
 	$dbhw = null;
 	$dbh = null;
