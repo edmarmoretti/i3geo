@@ -68,7 +68,7 @@ function montaArvore(dados)
                     "node": node,
                     "fnLoadComplete": fnLoadComplete
                 },
-                timeout: 7000
+                timeout: 25000
             };
             YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
         }

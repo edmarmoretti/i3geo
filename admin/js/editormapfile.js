@@ -153,7 +153,7 @@ function montaArvore()
                     "node": node,
                     "fnLoadComplete": fnLoadComplete
                 },
-                timeout: 7000
+                timeout: 25000
             };
             YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
         }
@@ -221,7 +221,7 @@ function montaRaizTema(no,dados)
                 "node": node,
                 "fnLoadComplete": fnLoadComplete
             },
-            timeout: 7000
+            timeout: 25000
         };
         YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
     }
@@ -275,7 +275,7 @@ function montaParametrosTemas(no,dados,redesenha)
                 "node": node,
                 "fnLoadComplete": fnLoadComplete
             },
-            timeout: 7000
+            timeout: 25000
         };
         YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
     }

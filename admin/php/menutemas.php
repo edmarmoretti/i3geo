@@ -714,6 +714,7 @@ Altera o registro de um tema. Se id for vazio acrescenta o registro
 function alteraTemas()
 {
 	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags;
+	//error_reporting(E_ALL);
 	try 
 	{
 		$retorna = "ok";
@@ -739,6 +740,7 @@ function alteraTemas()
     	}
     	//verifica se é necessário adicionar algum tag novo
     	$tags = explode(" ",$tags);
+    	
     	foreach($tags as $tag)
     	{
     		if(!(verificaDuplicados("select * from i3geoadmin_tags where nome = '$tag'",$dbh)))

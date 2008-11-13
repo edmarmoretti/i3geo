@@ -1104,6 +1104,12 @@ function core_montaEditor(funcaoOK,w,h)
 		if($i("editor_bd"))
 		$i("editor_bd").innerHTML == ""
 	}
+	var fecha = function()
+	{
+		YAHOO.example.container.panelEditor.destroy();
+		YAHOO.example.container.panelEditor = null;
+	}
+	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
 	YAHOO.example.container.panelEditor.show();
 }
 

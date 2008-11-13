@@ -4,7 +4,6 @@ function initMenu()
 	var editorDeMenus = function()
 	{
 		core_montaEditor("","600px","500px")
-		YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", pegaMenus);
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorMenu()
 	};
@@ -69,7 +68,7 @@ function montaArvore(dados)
                     "node": node,
                     "fnLoadComplete": fnLoadComplete
                 },
-                timeout: 7000
+                timeout: 25000
             };
             YAHOO.util.Connect.asyncRequest('GET', sUrl, callback);
         }

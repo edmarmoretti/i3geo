@@ -96,11 +96,13 @@ function montaDivTemas(i)
 	ins += "<select  id='kml_tema' >"
 	ins += core_combosimnao(i.kml_tema)
 	ins += "</select></p><br><br><br>"
+	
+	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>"
 	return(ins)
 }
 function gravaDadosTema(id)
 {
-	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml")
+	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo")
 	var par = ""
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)}
@@ -121,8 +123,8 @@ function gravaDadosTema(id)
   				}
   				else
   				{
-  					var rec = myDataTable.getRecordSet().getRecord(recordid);
-  					myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  					//var rec = myDataTable.getRecordSet().getRecord(recordid);
+  					//myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   					core_carregando("desativa");
   				}
 				YAHOO.example.container.panelEditorTema.destroy();

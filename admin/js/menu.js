@@ -3,8 +3,6 @@ function initEditorMenu()
 {
 	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu")
 	core_carregando("ativa");
-	//core_ativaPainelAjuda("ajuda","botaoAjuda");
-	//core_pegaPerfis("pegaMenus_M()");
 	pegaMenus_M()
 }
 function pegaMenus_M()
@@ -112,7 +110,7 @@ function montaTabela_M(dados)
 			var linha = myDataTable.getTrEl(oArgs.editor.record)
 			linha.style.color = "blue";
         });
-
+		//destroy
     };
     core_carregando("desativa");
 }
