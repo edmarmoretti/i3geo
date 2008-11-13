@@ -116,49 +116,51 @@ if ($menutemas != "" || is_array($menutemas))
 //
 if($menutemas == "")
 {
-	//include("admin/php/conexao.php");
 	include("admin/php/admin.php");
-	$grupos = pegaDados("SELECT * from i3geoadmin_grupos order by nome_grupo");
-	foreach($grupos as $grupo)
+	$menus = pegaDados("SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' order by nome_menu ");
+	foreach($menus as $menu)
 	{
-		kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
-		$id_grupo = $grupo["id_grupo"];
-		$sql = "select s.nome_subgrupo,n2.id_n2 from i3geoadmin_n2 as n2,i3geoadmin_n1 as n1, i3geoadmin_subgrupos as s ";
-		$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
-		$sql .= "and n2.id_n1 = n1.id_n1 ";
-		$sql .= "and n1.n1_perfil = '' and n2.n2_perfil = '' ";
-		//$sql .= "and n1.publicado != 'nao' and n2.publicado != 'nao' ";
-		$sql .= "order by s.nome_subgrupo";
-		//echo $sql;exit;
-		$subgrupos = pegaDados($sql);	
-		foreach ($subgrupos as $subgrupo)
+		kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
+		$id_menu = $menu["id_menu"];
+		$grupos = pegaDados("SELECT nome_grupo,n1.id_grupo,gr.desc_grupo from i3geoadmin_n1 as n1,i3geoadmin_grupos as gr where n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
+		foreach($grupos as $grupo)
 		{
-			kml_folder($subgrupo["nome_subgrupo"]);
-			$id_n2 = $subgrupo["id_n2"];
-			$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
-			$sql .= "n3.id_n2='$id_n2' ";
-			$sql .= "and n3.id_tema = t.id_tema ";
-			$sql .= "and n3_perfil = '' ";
-			$sql .= "and t.kml_tema != 'nao' ";
-			$sql .= "and t.tipoa_tema = ''";
-			//echo $sql;exit;
-			$temas = pegadados($sql);
-			foreach ($temas as $tema)
+			kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
+			$id_grupo = $grupo["id_grupo"];
+			$sql = "select s.nome_subgrupo,n2.id_n2 from i3geoadmin_n2 as n2,i3geoadmin_n1 as n1, i3geoadmin_subgrupos as s ";
+			$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
+			$sql .= "and n2.id_n1 = n1.id_n1 ";
+			$sql .= "and n1.n1_perfil = '' and n2.n2_perfil = '' ";
+			$sql .= "order by s.nome_subgrupo";
+			$subgrupos = pegaDados($sql);	
+			foreach ($subgrupos as $subgrupo)
 			{
-				$fonte = $tema["link_tema"];
-				$nome = $tema["nome_tema"];
-				$id = $tema["codigo_tema"];
-				$desc = $tema["desc_tema"];
-				$fonte = "<a href='$fonte' >Fonte </a>";
-    			$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-				$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-				kml_servico($nome,$fonte,$legenda,$desc,$href);
+				kml_folder($subgrupo["nome_subgrupo"]);
+				$id_n2 = $subgrupo["id_n2"];
+				$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
+				$sql .= "n3.id_n2='$id_n2' ";
+				$sql .= "and n3.id_tema = t.id_tema ";
+				$sql .= "and n3_perfil = '' ";
+				$sql .= "and t.kml_tema != 'nao' ";
+				$sql .= "and t.tipoa_tema = ''";
+				$temas = pegadados($sql);
+				foreach ($temas as $tema)
+				{
+					$fonte = $tema["link_tema"];
+					$nome = $tema["nome_tema"];
+					$id = $tema["codigo_tema"];
+					$desc = $tema["desc_tema"];
+					$fonte = "<a href='$fonte' >Fonte </a>";
+    				$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+					$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+					kml_servico($nome,$fonte,$legenda,$desc,$href);
+				}
+				echo "</Folder>\n";
 			}
 			echo "</Folder>\n";
 		}
 		echo "</Folder>\n";
 	}
-	
 }
 echo "</Document></kml>\n";
 function kml_cabecalho($nome,$desc)
