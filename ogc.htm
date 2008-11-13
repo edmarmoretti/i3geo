@@ -75,12 +75,45 @@ Free Software Foundation, Inc., no endereço
 */
 g_locaplic = "."
 g_arvoreClicks = ""
-var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''&listasgrupos=sim";
+var processaMenus = function(retorno)
+{
+	var mn = retorno.data.length
+	for (m=0;m<mn; m++)
+	{
+		var publicado = "sim";
+		if(retorno.data[m].publicado)
+		{
+			if(retorno.data[m].publicado == "NAO")
+			var publicado = "nao"
+		}
+		if(publicado == "sim")
+		{
+			document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
+			var nomeM = retorno.data[m].idmenu
+			if(retorno.data[m].nomemenu)
+			var nomeM = retorno.data[m].nomemenu
+			montaGrupos(retorno.data[m].idmenu,nomeM)
+		}
+	}
+}
+var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");
-cp.call(p,"pegaListaDeGrupos",processaGrupos);
+cp.call(p,"pegaListaDeMenus",processaMenus);
 
+function montaGrupos(idmenu,nomemenu)
+{
+	var pMenu = function(retorno)
+	{
+		processaGrupos(retorno,idmenu,nomemenu)
+	}
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&idmenu="+idmenu+"&map_file=''&listasgrupos=sim&listasistemas=nao";
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegaListaDeGrupos",pMenu);
+}
 /*
 Function: processaGrupos
 
@@ -92,13 +125,13 @@ Parameters:
 
 retorno - string formatada com os dados para montagem da árvore.
 */
-function processaGrupos(retorno)
+function processaGrupos(retorno,id_menu,nome_menu)
 {
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2", "default", "arvoreTemas", null);
-		mytreeview2.createItem("item1", "<b>Temas</b>", "imagens/temas.png", true, true, true, null);
+		mytreeview2 = treeviewNew("mytreeview2", "default", "menu_"+id_menu, null);
+		mytreeview2.createItem("itemMenu"+id_menu, "<b>"+nome_menu+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
 		mytreeview2.itemExpand = expandeGrupo;
 		for (ig=0;ig<retorno.data.grupos.length; ig++)
 		{
@@ -118,14 +151,14 @@ function processaGrupos(retorno)
 				if (ogc == "sim")
 				{
 					var nomeGrupo = retorno.data.grupos[ig].nome;
-					mytreeview2.createItem("grupo"+ig, nomeGrupo, "imagens/folder-s.gif", true, true, true, "item1");
+					mytreeview2.createItem("grupo"+ig+"_"+id_menu, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "itemMenu"+id_menu);
 					var cor = "rgb(230,230,230)";
 					for (sg=0;sg<ngSgrupo.length;sg++)
 					{
 						if (ngSgrupo[sg].ogc == "sim")
 						{
 							var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
-							mytreeview2.createItem("sgrupo_"+ig+"_"+sg, nomeSgrupo, "imagens/branco0.gif", true, true, false, "grupo"+ig);
+							mytreeview2.createItem("sgrupo_"+ig+"_"+sg+"_"+id_menu, nomeSgrupo, g_locaplic+"/imagens/branco0.gif", true, true, false, "grupo"+ig+"_"+id_menu);
 							if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
 							else
 							{var cor = "rgb(230,230,230)";}
@@ -151,7 +184,7 @@ function expandeGrupo(itemID)
 	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
 	{
 		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2];
+		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&idmenu="+codigos[3];
 		var cp = new cpaint();
 		//cp.set_debug(2);
 		cp.set_response_type("json");
@@ -211,7 +244,7 @@ function endereco(tema)
 	var re = new RegExp(".htm", "g");
 	var servico = window.location.href.replace(re,'.php?tema=')+tema	
 	ins += "<p>"+servico
-	ins += "<p><a target=blank href='"+servico+"&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar</a>"
+	ins += "<p><a target=blank href='"+servico+"&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers="+tema+"' />testar</a>"
 	document.getElementById("corpo").innerHTML = ins
 }
 
