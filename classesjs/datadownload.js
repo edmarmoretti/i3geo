@@ -111,11 +111,20 @@ function DDinicia()
 			var mn = retorno.data.length
 			for (m=0;m<mn; m++)
 			{
-				document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
-				var nomeM = retorno.data[m].idmenu
-				if(retorno.data[m].nomemenu)
-				var nomeM = retorno.data[m].nomemenu
-				ativaMenus(retorno.data[m].idmenu,nomeM)
+				var publicado = "sim";
+				if(retorno.data[m].publicado)
+				{
+					if(retorno.data[m].publicado == "NAO")
+					var publicado = "nao"
+				}
+				if(publicado == "sim")
+				{
+					document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
+					var nomeM = retorno.data[m].idmenu
+					if(retorno.data[m].nomemenu)
+					var nomeM = retorno.data[m].nomemenu
+					ativaMenus(retorno.data[m].idmenu,nomeM)
+				}
 			}
 		}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";
