@@ -69,7 +69,8 @@ include("../ms_configura.php");
 echo $tituloInstituicao;
 if (!isset($temasa)){$temasa = "";}
 if (!isset($layers)){$layers = $temasa;}
-$m = new Menutemas($tmpfname,"");
+error_reporting(E_ALL);
+$m = new Menutemas("","","",$locaplic,$menutemas,"",$editores);
 $mapas = $m->pegaListaDeMapas($locmapas);
 echo "<h1>Escolha um dos mapas:</h1>";
 foreach($mapas["mapas"] as $obj)

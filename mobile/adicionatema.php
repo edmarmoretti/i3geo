@@ -70,6 +70,7 @@ h1
 	<input id='grupo' type=hidden name='grupo' value='' />
 	<input id='subgrupo' type=hidden name='subgrupo' value='' />
 	<input id='tid' type=hidden name='tid' value='' />
+	<input id='idmenu' type=hidden name='idmenu' value='' />
 </form>
 <input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 <?php
@@ -81,8 +82,8 @@ $protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVE
 $urli3geo = str_replace("/mobile/adicionatema.php","",$protocolo.$_SERVER["PHP_SELF"]);
 if ($tipo == "listatemas")
 {
-	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo);
-	$r = $m->pegaListaDeTemas($grupo,$subgrupo,"");
+	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+	$r = $m->pegaListaDeTemas($grupo,$subgrupo,$idmenu);
 	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)
 	{
@@ -100,23 +101,28 @@ if($tipo == "adicionatema")
 }
 if ($tipo == "adicionar")
 {
-	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo);
-	$r = $m->pegaListaDeGrupos("","","sim");
 	echo "<h1>Escolha o sub-grupo:</h1>";
-	for($rid=0;$rid<count($r);$rid++)
+	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+	$menus = $m->pegaListaDeMenus();
+	foreach ($menus as $menu)
 	{
-		$g = $r[$rid];
-		echo $g["nome"]."<br>";
-		$sub = $g["subgrupos"];
-		for($sid=0;$sid<count($sub);$sid++)
+		if($menu["publicado"] != "NAO")
 		{
-			$s = $sub[$sid];
-			echo "<input type='radio' onclick='listatemas(\"".$rid."\",\"".$sid."\")' /><span style='color:gray;font-size:12pt;'>".$s["nome"]."</span><br>";
+			$r = $m->pegaListaDeGrupos($menu["idmenu"],"","sim");
+			for($rid=0;$rid<count($r);$rid++)
+			{
+				$g = $r[$rid];
+				echo $g["nome"]."<br>";
+				$sub = $g["subgrupos"];
+				for($sid=0;$sid<count($sub);$sid++)
+				{
+					$s = $sub[$sid];
+					echo "<input type='radio' onclick='listatemas(\"".$rid."\",\"".$sid."\",\"".$menu["idmenu"]."\")' /><span style='color:gray;font-size:12pt;'>".$s["nome"]."</span><br>";
+				}
+			}
 		}
 	}
 }
-
-	
 ?>
 <input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 </body>
@@ -127,11 +133,12 @@ function retorno()
 	document.getElementById('f').action = 'mobile.php';
 	document.getElementById('f').submit();
 }
-function listatemas(grupo,sub)
+function listatemas(grupo,sub,menu)
 {
 	document.getElementById("tipo").value = "listatemas";
 	document.getElementById("grupo").value = grupo;
 	document.getElementById("subgrupo").value = sub;
+	document.getElementById("idmenu").value = menu;
 	document.getElementById('f').submit();	
 }
 function adicionatema(tid)
