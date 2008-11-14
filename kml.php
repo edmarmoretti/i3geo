@@ -48,14 +48,14 @@ $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/kml.php","",$protocolo.$_SERVER["PHP_SELF"]);
-
+//error_reporting(E_ALL);
 if(!isset($perfil)){$perfil = "";}
 //
 //monta o xml
 //
 echo "<Document><name>Menu i3geo</name><open>0</open><description></description><visibility>0</visibility>\n";
 //
-//no caso do arquivo com o meu vir de um arquivo XML
+//no caso do arquivo com o menu vir de um arquivo XML
 //
 if ($menutemas != "" || is_array($menutemas))
 {
@@ -70,7 +70,6 @@ if ($menutemas != "" || is_array($menutemas))
 	}
 	else
 	$menu[] = $menutemas;
-
 	foreach ($menus as $menu)
 	{
 		$xml = simplexml_load_file($menu);
