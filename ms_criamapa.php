@@ -757,6 +757,7 @@ function inserePontosUrl()
 	$layer->set("data",$nomeshp);
 	$layer->setmetadata("tema",$nometemapontos);
 	$layer->setmetadata("classe","sim");
+	$layer->setmetadata("ATLAS","nao");
 	$layer->set("type",MS_LAYER_POINT);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
@@ -831,6 +832,7 @@ function insereLinhasUrl()
 	$layer->set("data",$nomeshp);
 	$layer->setmetadata("tema",$nometemalinhas);
 	$layer->setmetadata("classe","sim");
+	$layer->setmetadata("ATLAS","nao");
 	$layer->set("type",MS_LAYER_LINE);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
@@ -906,6 +908,7 @@ function inserePoligonosUrl()
 	$layer->set("data",$nomeshp);
 	$layer->setmetadata("tema",$nometemapoligonos);
 	$layer->setmetadata("classe","sim");
+	$layer->setmetadata("ATLAS","nao");
 	$layer->set("type",MS_LAYER_POLYGON);
 	$layer->set("transparency","50");
 	$layer->set("status",MS_DEFAULT);
