@@ -890,6 +890,14 @@ version: 2.5.2
 {cursor:pointer;}
 .TreeviewItemTextOver
 {cursor:pointer;}
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+.ygtvitem{}.ygtvitem table{margin-bottom:0;border:none;}.ygtvitem td{border:none;padding:0;}.ygtvtn{width:18px;height:22px;background:url(treeview-sprite.gif) 0 -5600px no-repeat;}.ygtvtm{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -4000px no-repeat;}.ygtvtmh{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -4800px no-repeat;}.ygtvtp{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -6400px no-repeat;}.ygtvtph{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -7200px no-repeat;}.ygtvln{width:18px;height:22px;background:url(treeview-sprite.gif) 0 -1600px no-repeat;}.ygtvlm{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 0px no-repeat;}.ygtvlmh{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -800px no-repeat;}.ygtvlp{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -2400px no-repeat;}.ygtvlph{width:18px;height:22px;cursor:pointer;background:url(treeview-sprite.gif) 0 -3200px no-repeat;}.ygtvloading{width:18px;height:22px;background:url(treeview-loading.gif) 0 0 no-repeat;}.ygtvdepthcell{width:18px;height:22px;background:url(treeview-sprite.gif) 0 -8000px no-repeat;}.ygtvblankdepthcell{width:18px;height:22px;}.ygtvchildren{}* html .ygtvchildren{height:2%;}.ygtvlabel,.ygtvlabel:link,.ygtvlabel:visited,.ygtvlabel:hover{margin-left:2px;text-decoration:none;background-color:white;}.ygtvspacer{height:22px;width:12px;}
+
 
 .yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
 background:transparent url(../pacotes/yui252/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
@@ -1006,6 +1014,89 @@ width:16px;
     background:white;
     outline:0;
 }
-
+
+.ygtvtn
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -5600px;
+	height:22px;
+	width:18px;
+}
+.ygtvln
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -1600px;
+	height:22px;
+	width:18px;
+}
+.ygtvtp
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -6400px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvtph
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -7200px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+
+.ygtvlp
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -2400px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvlph
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -3200px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+
+.ygtvloading
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-loading.gif) no-repeat scroll 0 0;
+	height:22px;
+	width:18px;
+}
+.ygtvlm
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 0;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvlmh
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -800px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvdepthcell 
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -8000px;
+	height:22px;
+	width:18px;
+}
+.ygtvtm
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4000px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvtmh
+{
+	background:transparent url(../pacotes/yui252/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -4800px;
+	cursor:pointer;
+	height:22px;
+	width:18px;
+}
+.ygtvhtml{text-align:left;}
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

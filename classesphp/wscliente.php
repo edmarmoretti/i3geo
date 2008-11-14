@@ -353,9 +353,9 @@ function listaRSSws2()
 {
 	global $cp,$rss,$locaplic,$tipo;
 	if(!isset($tipo)){$tipo = "GEORSS";}
-	include_once("funcoes_gerais.php");
-	include_once("../admin/php/xml.php");
-	include_once("../ms_configura.php");
+	include_once("$locaplic/classesphp/funcoes_gerais.php");
+	include_once("$locaplic/admin/php/xml.php");
+	include_once("$locaplic/ms_configura.php");
 	$rsss = explode("|",$rss);
 	if(count($rsss) == 0){$rsss = array(" ");}
 	$erro = "Erro. Nao foi possivel ler o arquivo";
@@ -371,11 +371,11 @@ function listaRSSws2()
 			$canali = simplexml_load_string(geraXmlWS($locaplic));
 			if($tipo == "DOWNLOAD")
 			$canali = simplexml_load_string(geraXmlDownload($locaplic));
-
 		}
 		else
 		{$canali = simplexml_load_file($rss);}
 		$linhas[] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>####";
+		//var_dump($canali);
 		foreach ($canali->channel->item as $item)
 		{
 			$linha[] = ixml($item,"title");

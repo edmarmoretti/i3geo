@@ -116,7 +116,10 @@ array
 			{return "locaplic nao foi definido";}
 			$locaplic = $this->locaplic;
 			include($this->locaplic."/admin/php/conexao.php");
+			if($this->editor)
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
+			else
+			$sql = "SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' order by nome_menu";
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     		$regs = $q->fetchAll();
     		$dbh = null;
@@ -134,7 +137,7 @@ array
 						$status = "fechado";
 						if(strtolower($reg["aberto"]) == "sim")
 						$status = "aberto";
-						$resultado[] = array("publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
+						$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
 					}
 				}
 			}
@@ -232,7 +235,8 @@ array
 		else
 		{$tipo = "gruposeraiz";}
 		$this->xml = "";
-		$tempm = $this->pegaListaDeMenus(); 
+		$tempm = $this->pegaListaDeMenus();
+		$xmls = array();
 		foreach($tempm as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
@@ -241,24 +245,26 @@ array
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if($ondexml != "")
-				{$this->xml = simplexml_load_file($ondexml);}
+				{
+					$xml = simplexml_load_file($ondexml);
+					$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
+				}
 				else //pega o xml do sistema de administração
 				{
-					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					$xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
 				}
 			}
 		}
-		//
-		//varre o xml para pegar os dados
-		//
+		return ($grupos);
+	}
+	function retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos)
+	{
 		$sistemas = array();
 		$grupos = array();
 		$temasraiz = array();
-		//
-		//pega os grupos
-		//verifica se existem temas na raiz do menu
-		//
-		foreach($this->xml->TEMA as $temar)
+
+		foreach($xml->TEMA as $temar)
 		{
 			$down = "nao";
 			$ogc = "sim";
@@ -276,8 +282,7 @@ array
 			$nome = ixml($temar,"TNOME");
 			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
 		}
-		//var_dump($this->xml->GRUPO);
-		foreach($this->xml->GRUPO as $grupo)
+		foreach($xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
 			$temp = ixml($grupo,"PERFIL");
@@ -389,7 +394,8 @@ array
 		}
 		$grupos[] = array("idmenu"=>$idmenu);
 		$grupos[] = array("sistemas"=>$sistemas);
-		return ($grupos);
+		return($grupos);		
+		
 	}
 /*
 function: pegaListaDeSubGrupos
@@ -900,7 +906,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 	}
 	function verificaEditores($editores)
 	{
-		$editor = "nao";
+		$editor = false;
 		foreach ($editores as $e)
 		{
 			$e = gethostbyname($e);
@@ -909,7 +915,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 			else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
 			else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 			else $ip = "UNKNOWN";
-			if ($e == $ip){$editor="sim";}
+			if ($e == $ip){$editor=true;}
 		}
 		return $editor;
 	}

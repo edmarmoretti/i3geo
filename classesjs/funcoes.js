@@ -836,8 +836,11 @@ function ativaGuias()
 				//pega a lista de árvores que devem ser montadas
 				//é executado apenas se não existir o id=arvoreAdicionaTema
 				//caso contrário, a árvore é montada na inicialização do i3geo
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
-				cpObj.call(p,"pegalistademenus",pegalistademenus);
+				if(!$i("arvoreAdicionaTema"))
+				{var ondeArvore = objmapa.guiaMenu+"obj";}
+				else
+				{var ondeArvore = "arvoreAdicionaTema";}
+				i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore);
 			}
 		};
 	}

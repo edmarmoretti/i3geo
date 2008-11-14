@@ -76,7 +76,7 @@ if(isset($g_sid))
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas"))
 {$map_file = "";}
 
-if (!isset($atlasxml) || $atlasxml == "" || !isset($editores))
+if (!isset($atlasxml) || $atlasxml == "")// || !isset($editores))
 {
 	include_once("../ms_configura.php");
 }

@@ -667,8 +667,11 @@ function Mapa(e,m)
 				//
 				if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona"))
 				{
-					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
-					cpObj.call(p,"pegalistademenus",pegalistademenus);				
+					if(!$i("arvoreAdicionaTema"))
+					{var ondeArvore = objmapa.guiaMenu+"obj";}
+					else
+					{var ondeArvore = "arvoreAdicionaTema";}
+					i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore);
 				}
 				//
 				//calcula a posicao do mapa no browser

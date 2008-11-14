@@ -96,8 +96,6 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 	$xml .= "<copyright>Gerado pelo i3Geo</copyright>\n";
 	$xml .= "<language>pt-br</language>\n";
 	$xml .= "<webmaster></webmaster>\n";
-
-	//$q = "select * from i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
 	$qatlas = $dbh->query($sql);
 	foreach($qatlas as $row)
 	{

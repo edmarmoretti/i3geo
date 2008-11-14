@@ -158,6 +158,15 @@ i3GEO.idioma = {
 		for (k in novodic) { this.DICIONARIO[k] = novodic[k]; }
 	},
 	/*
+	Function: mostraDicionario
+	Abre uma nova janela do navegador com a lista de palavras do dicionário.
+	*/
+	mostraDicionario: function() {
+		var w = window.open();
+		for (k in this.DICIONARIO) { w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>"); }
+	},
+
+	/*
 	Function: trocaIdioma
 	Troca o idioma atual por outro.
 	
@@ -216,4 +225,3 @@ try {
 	{i3GEO.idioma.defineDicionario(g_traducao);}
 }
 catch(e){alert(e);};
-i3GEO.idioma.listaIdiomas();

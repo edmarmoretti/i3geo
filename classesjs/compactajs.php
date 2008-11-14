@@ -52,6 +52,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
 packer("classe_util.js","compactados/classe_util_compacto.js","Normal");
 packer("dicionario.js","compactados/dicionario_compacto.js","Normal");
 packer("classe_idioma.js","compactados/classe_idioma_compacto.js","Normal");
@@ -86,6 +87,7 @@ $jsfiles = array(
 "../pacotes/yui231/build/utilities/utilities_packer.js",
 "../pacotes/yui231/build/autocomplete/autocomplete-min.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
+"../pacotes/yui252/build/treeview/treeview-min.js",
 "../pacotes/jsobjects/jsUI-Global/common_compacto.js",
 "../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
 "../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
@@ -94,6 +96,7 @@ $jsfiles = array(
 "compactados/dicionario_compacto.js",
 "compactados/classe_util_compacto.js",
 "compactados/classe_idioma_compacto.js",
+"compactados/classe_arvoredetemas_compacto.js",
 "compactados/configura_compacto.js",
 "compactados/ferramentas_compacto.js",
 "compactados/redesenho_compacto.js",
@@ -118,6 +121,7 @@ $cssfiles = array(
 "../pacotes/yui231/build/container/assets/skins/sam/container.css",
 "../pacotes/yui252/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/jsobjects/jsUI-Treeview/default.css",
+"../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css",
 "../css/corrigeyui_geral.css"
 ); 
 
