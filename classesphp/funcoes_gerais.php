@@ -1448,7 +1448,7 @@ function reSLD($map_file,$tema,$sld)
 	fclose($fp);
 }
 /*
-function: georssCanais
+function: georssCanais (depreciado)
 
 Lista os canais de um GeoRss.
 
@@ -1464,15 +1464,15 @@ $locaplic - Localização do I3geo
 function georssCanais($servico,$map_file,$dir_tmp,$locaplic)
 {
 	$xml = simplexml_load_file($servico);
+	//var_dump($xml);
 	foreach($xml->channel as $c)
 	{
-		$resultado[] = $c->title."#".$c->link."#".$c->description."#".$c->category;
+		$resultado[] = array("title"=>(ixml($c,"title")),"link"=>(ixml($c,"link")),"description"=>(ixml($c,"description")),"category"=>(ixml($c,"category")));
 	}
-	if (function_exists("mb_convert_encoding"))
-	{return(mb_convert_encoding(implode("*",$resultado),"HTML-ENTITIES","auto"));}
-	else
-	{return(implode("*",$resultado));}
+	//var_dump($resultado);
+	return $resultado;
 }
+
 /*
 Section: tema
 */

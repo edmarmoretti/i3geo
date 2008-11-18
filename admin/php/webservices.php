@@ -83,7 +83,7 @@ function alterarWS()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws) VALUES ('','','','','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('','','','','','','')");
 			$id = $dbhw->query("SELECT id_ws FROM i3geoadmin_ws");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_ws']);
@@ -108,6 +108,27 @@ function excluirWS()
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+function adicionaAcesso($id_ws,$sucesso)
+{
+	try
+	{
+    	//error_reporting(E_ALL);
+    	include("conexao.php");
+    	$dados = pegaDados("select * from i3geoadmin_ws WHERE id_ws = $id_ws");
+    	$acessos = $dados[0]["nacessos"] + 1;
+    	if($sucesso)
+    	$ok = $dados[0]["nacessosok"] + 1;
+    	else
+    	$ok = $dados[0]["nacessosok"];
+   		$dbhw->query("UPDATE i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
+    	$dbhw = null;
+    	$dbh = null;
 	}
 	catch (PDOException $e)
 	{
@@ -146,7 +167,7 @@ function importarXmlWS()
 				$autor = utf8_encode($autor);
 			}
 			if(!isset($wsExistentes[$nome]))
-			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws) VALUES ('$nome','$desc','$autor','$link','$tipo')");
+			$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,link_ws,tipo_ws,nacessos,nacessosok) VALUES ('$nome','$desc','$autor','$link','$tipo',0,0)");
 			$wsExistentes[$nome] = 0;
 		}
 	}

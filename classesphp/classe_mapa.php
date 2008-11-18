@@ -1134,9 +1134,10 @@ $canal - Identificador do canal (ordem em que está no RSS)
 		{
 			$env = array();
 			//define o tipo
-			$tipog = "envelope";
+			$tipog = "";
 			if ($item->xpath('geo:lat')){$tipog = "geo";}
 			if ($item->xpath('georss:point')){$tipog = "georsspoint";}
+			if ($item->xpath('georss:where')){$tipog = "envelope";}
 			if ($tipog == "envelope")
 			{
 				foreach ($item->xpath('georss:where') as $w)
@@ -1175,7 +1176,7 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			}
 			if (count($env) > 0)
 			{
-				$resultado[] = array($item->title,$item->link,$item->description,$item->category,$env);
+				$resultado[] = array(ixml($item,"title"),ixml($item,"link"),ixml($item,"description"),ixml($item,"category"),$env);
 			}
 		}
 		//cria o shapefile com os dados
@@ -1254,6 +1255,7 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			}
 			//$layer->set("transparency",50);
 			$layer->setmetadata("nomeoriginal",basename($nomeshp));
+			//echo $tipol;
 			return("ok");
 		}
 		return("erro");

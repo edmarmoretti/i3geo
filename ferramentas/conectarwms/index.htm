@@ -63,6 +63,7 @@
 <script type="text/javascript" >
 mensagemAjuda("men1",document.getElementById("men1").innerHTML)
 mensagemAjuda("men2",document.getElementById("men2").innerHTML)
+g_RSSwms = new Array("")
 
 aguarde("block")
 g_locaplic = window.parent.g_locaplic;
@@ -70,36 +71,34 @@ if (document.getElementById("RSSwms"))
 {
 	if (g_RSSwms.length > 0)
 	{
-		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSws2&rss="+g_RSSwms.join("|")+"&tipo=WMS";
+		var p = g_locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSSwms.join("|")+"&tipo=WMS";
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"listaRSSws2",mostraRetornowmsRSS);
+		cp.call(p,"listaRSSwsARRAY",mostraRetornowmsRSS);
 	}
 }
 function mostraRetornowmsRSS(retorno)
 {
 	aguarde("none")
 	var reg = /Erro/gi;
-	if (retorno.data.search(reg) != -1)
+	if (retorno.data.rss.search(reg) != -1)
 	{
 		alert("OOps! Ocorreu um erro\n"+retorno.data);
 		return;
 	}
-	var linhas = retorno.data.split("|")
-	var ins = ""
-	for (i=0;i<linhas.length; i++)
+	var canais = retorno.data.canais
+	var ncanais = canais.length
+	var ins = "<br>"+retorno.data.rss
+	for (i=0;i<ncanais; i++)
 	{
-		var caso = linhas[i].split("#")
-		if (i > 0)
+		var caso = canais[i]
+		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+		if(caso.nacessos > 0)
 		{
-			ins += "\<p class=clique onclick=\"registraws('"+caso[2]+"')\" \>\<b\>"+caso[0]+"\<\/b\>&nbsp;"+caso[1]+"&nbsp;("+caso[3]+")"
-			if (caso[4])
-			{ins += " \<span style=color:gray \>(disponibilidade: "+parseInt(caso[4])+"%, dias considerados: "+caso[5]+")\<\/span>\<\/p\>";}
-			else {ins += "\<\/p\>"}
+			var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+			ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
 		}
-		else
-		{ins += "\<p class=clique \>\<b\>"+caso[0]+"\<\/b\>&nbsp;"+caso[1]+"&nbsp;\<\/p\>"}
 	}
 	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
 }

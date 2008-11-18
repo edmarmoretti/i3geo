@@ -338,8 +338,15 @@ if ($funcao == "listaRSSws2")
 	$cp->return_data();
 	exit;
 }
+if ($funcao == "listaRSSwsARRAY")
+{
+	$cp->register('listaRSSwsARRAY');
+	$cp->start();
+	$cp->return_data();
+	exit;
+}
 /*
-Function: listaRSSws2
+Function: listaRSSws2 (depreciado)
 
 Pega os links de um RSS.
 
@@ -393,6 +400,74 @@ function listaRSSws2()
 	//$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");
 	$cp->set_data($retorna);
 }
+/*
+Function: listaRSSwsARRAY
+
+Pega os links de um RSS e retorna o resultado como um array.
+
+cp - Objeto CPAINT.
+
+rss - Endereços dos RSS.
+
+tipo - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+*/
+function listaRSSwsARRAY()
+{
+	global $cp,$rss,$locaplic,$tipo;
+	if(!isset($tipo)){$tipo = "GEORSS";}
+	include_once("$locaplic/classesphp/funcoes_gerais.php");
+	include_once("$locaplic/admin/php/xml.php");
+	include_once("$locaplic/ms_configura.php");
+	$rsss = explode("|",$rss);
+	if(count($rsss) == 0){$rsss = array(" ");}
+	$erro = "Erro. Nao foi possivel ler o arquivo";
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$urli3geo = $protocolo[0]."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
+	foreach ($rsss as $r)
+	{
+		if($r == "" || $r == " ")
+		{
+			
+			if($tipo == "GEORSS")
+			{
+				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
+				$linkrss = $urli3geo."/admin/xmlgeorss.php";
+			}
+			if($tipo == "WMS")
+			{
+				$canali = simplexml_load_string(geraXmlWMS($locaplic));
+				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
+			}
+			if($tipo == "WS")
+			{
+				$canali = simplexml_load_string(geraXmlWS($locaplic));
+				$linkrss = $urli3geo."/admin/xmlservicosws.php";
+			}	
+			if($tipo == "DOWNLOAD")
+			{
+				$canali = simplexml_load_string(geraXmlDownload($locaplic));
+				$linkrss = $urli3geo."/admin/xmllinksdownload.php";
+			}
+		}
+		else
+		{$canali = simplexml_load_file($rss);}
+		if($r != "")
+		$linhas["rss"] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>";
+		else
+		{
+			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img src='imagens/rss.gif' /></a>";			
+		}
+		//var_dump($canali);
+		$canais = array();
+		foreach ($canali->channel->item as $item)
+		{
+			$canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")));
+		}
+		$linhas["canais"] = $canais;
+	}
+	$cp->set_data($linhas);
+}
+
 /*
 Function: listaRSSws
 

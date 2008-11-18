@@ -90,10 +90,12 @@ parameters:
 $servico - Endereço do web service.
 
 $cp - Objeto CPAINT.
+
+$id_ws - id do wms se estiver sendo utilizado o banco de administração do i3geo
 */
 function getcapabilities()
 {
-	global $servico,$cp;
+	global $servico,$cp,$id_ws;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&version=1.1.0";
@@ -227,7 +229,7 @@ $cp - Objeto CPAINT.
 */
 function temaswms()
 {
-	global $servico,$cp;
+	global $servico,$cp,$id_ws;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
@@ -235,10 +237,20 @@ function temaswms()
 	# Test that the capabilites file has successfully downloaded.
 	#
 	//$wms_service_request = "c://temp//teste.xml";
+	include_once("../admin/php/webservices.php");
 	if( !($wms_capabilities = file($wms_service_request)) ) {
 		# Cannot download the capabilities file.
+		//registra a tentativa de acesso
+		if(isset($id_ws))
+		{
+			adicionaAcesso($id_ws,false);
+		}
 		$cp->set_data("Erro de acesso");
 		return;
+	}
+	if(isset($id_ws))
+	{
+		adicionaAcesso($id_ws,true);
 	}
 	$wms_capabilities = implode("",$wms_capabilities);
 	$dom = new DomDocument();

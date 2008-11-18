@@ -51,9 +51,13 @@ function clickGuia2()
 		cp.call(p,"georssCanais",listaCanais);
 	}
 }
-function registraws(nome)
+function registraws(nome,id_ws)
 {
 	$i("servico").value = nome;
+	if(arguments.length == 2)
+	g_idws = id_ws
+	else
+	g_idws = ""
 	clickGuia2()
 }
 function listaCanais(retorno)
@@ -61,15 +65,13 @@ function listaCanais(retorno)
 	var ins = "Clique no bot&atilde;o 'mapa' para incluir os dados do canal desejado<br>"
 	if (retorno.data != undefined)
 	{
-		var retorno = (retorno.data).split("*")
+		var retorno = retorno.data
 		for (i=0;i<retorno.length; i++)
 		{
-			var canal = retorno[i]
-			var descs = canal.split("#")
-			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+descs[0]+ "</b></p>"
-			ins += "<br><a href="+descs[1]+" target=blank >"+descs[1]+"</a>"
-			ins += "<br><i>Descri&ccedil;&atilde;o:</i> "+descs[2]
-			ins += "<br><i>Categoria: </i>"+descs[3]
+			ins += "<p style=cursor:pointer onclick=adicionatema('"+i+"') ><input type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>"
+			ins += "<br><a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>"
+			ins += "<br><i>Descri&ccedil;&atilde;o:</i> "+retorno[i].description
+			ins += "<br><i>Categoria: </i>"+retorno[i].category
 		}
 		$i("resultadoget").innerHTML = ins
 	}

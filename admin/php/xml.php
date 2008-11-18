@@ -106,6 +106,9 @@ function geraXmlRSS($locaplic,$sql,$descricao)
 		$xml .= "<link>".xmlTexto_prepara($row["link_ws"])."</link>\n";
 		$xml .= "<pubDate/>\n";
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
+		$xml .= "<nacessos>".xmlTexto_prepara($row["nacessos"])."</nacessos>\n";
+		$xml .= "<nacessosok>".xmlTexto_prepara($row["nacessosok"])."</nacessosok>\n";
+		$xml .= "<id>".xmlTexto_prepara($row["id_ws"])."</id>\n";
 		$xml .= "</item>\n";
 	}
 	$xml .= "</channel></rss>\n";
