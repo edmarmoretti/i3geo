@@ -99,6 +99,11 @@ function SelecionaTema(id) {
 		var sUrl = "<?php echo $i3geo;?>/admin/php/menutemas.php?funcao=pegaTagsPorMapfile&tag="+removeAcentos(myarray[1])
 		core_pegaDados("",sUrl,"listaTemasPorTag")
 	}
+	if(myarray[0] == "GEORSS" || myarray[0] == "DOWNLOAD" || myarray[0] == "WS")
+	{window.open(myarray[1])}
+	if(myarray[0] == "WMS")
+	{window.open(myarray[1]+"&service=wms&request=getcapabilities")}
+
 }
 function listaTemasPorTag(dados)
 {
