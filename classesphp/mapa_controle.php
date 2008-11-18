@@ -1617,6 +1617,24 @@ Include:
 		$cp->set_data(array("idmenu"=>$idmenu,"grupos"=>$m->pegaListaDeGrupos($idmenu,$listasistemas,$listasgrupos)));
 	break;
 /*
+Property: pegaSistemas
+
+Pega a lista de sistemas.
+*/
+	case "pegaSistemas":
+		if(!isset($locsistemas) || !isset($editores))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
+		include_once("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,"","",$editores);
+		$cp->set_data($m->pegaSistemas());
+	break;
+
+/*
 Property: pegalistadeSubgrupos
 
 Pega a lista de subgrupos de um grupo do menu.

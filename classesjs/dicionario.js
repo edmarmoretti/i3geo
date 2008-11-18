@@ -79,6 +79,12 @@ pt: "Propriedades do mapa",
 en:"Map properties",
 es:"Propiedades del mapa"
 }],
+"p14": [
+{
+pt: "Aplicar",
+en:"Apply",
+es:"Aplicar"
+}],
 //itens do menu suspenso
 "s1": [
 {

@@ -216,7 +216,12 @@ function iniciaMapa()
 	{$visual = implode(",",listaDiretorios($locaplic."/imagens/visual"));}
 	$res .= ";objmapa.listavisual='".$visual."'";
 	//pega os usuários navegadores
+	//para efeitos de compatibilidade
 	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."'";
+	if($navegadoresLocais == "sim")
+	$res .= ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true";
+	else
+	$res .= ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=false";
 	//
 	//verifica se o pacote geoip está instalado ou não
 	//

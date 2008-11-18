@@ -231,89 +231,35 @@ sim|nao
 */
 g_janelaMen = "sim";
 /*
-Variable: g_downloadbase
+Variable: g_downloadbase (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
 */
-g_downloadbase = "sim";
 /*
-Variable: g_conectargeorss
+Variable: g_conectargeorss (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
 */
-g_conectargeorss = "sim";
 /*
-Variable: g_nuvemTags
+Variable: g_nuvemTags (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao;
 */
-g_nuvemTags = "sim";
 /*
-Variable: g_uploadlocal
+Variable: g_uploadlocal (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de upload.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
 */
-g_uploadlocal = "sim";
 /*
-Variable: g_uploaddbf
+Variable: g_uploaddbf (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
 */
-g_uploaddbf = "sim";
 /*
-Variable: g_conectarwms
+Variable: g_conectarwms (depreciado)
 
 Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
 */
-g_conectarwms = "sim";
 /*
 Variable: g_docaguias
 

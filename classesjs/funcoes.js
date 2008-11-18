@@ -831,17 +831,22 @@ function ativaGuias()
 		{
 			g_guiaativa = objmapa.guiaMenu;
 			mostraguiaf(2);
-			if (!$i("buscatema"))
+			//pega a lista de árvores que devem ser montadas
+			//é executado apenas se não existir o id=arvoreAdicionaTema
+			//caso contrário, a árvore é montada na inicialização do i3geo
+			if(!$i("arvoreAdicionaTema"))
+			{var ondeArvore = objmapa.guiaMenu+"obj";}
+			else
+			{var ondeArvore = "arvoreAdicionaTema";}
+			//
+			//para efeitos de compatibilidade
+			//
+			if(document.getElementById("outrasOpcoesAdiciona"))
 			{
-				//pega a lista de árvores que devem ser montadas
-				//é executado apenas se não existir o id=arvoreAdicionaTema
-				//caso contrário, a árvore é montada na inicialização do i3geo
-				if(!$i("arvoreAdicionaTema"))
-				{var ondeArvore = objmapa.guiaMenu+"obj";}
-				else
-				{var ondeArvore = "arvoreAdicionaTema";}
-				i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore);
+				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde = "outrasOpcoesAdiciona";
+				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
 			}
+			i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore,"mudaboxnf\('adicionatema',this,'remapaf'\)");
 		};
 	}
 	if ($i(objmapa.guiaLegenda))
@@ -1940,58 +1945,22 @@ Parâmetros:
 tipo - de onde veio a requisicao ligadesliga|adicionatema
 
 obj - objeto que foi clicado
+
+nomeFuncao - Nome da função que será executada quando o usuário clicar o botão Aplicar
 */
-function mudaboxnf(tipo,obj)
+function mudaboxnf(tipo,obj,nomeFuncao)
 {
 	try
 	{
-		//
-		//insere botao dinamico de aplicar se ainda não existir
-		//
-		if (!$i("aplicari"))
-		{
-			var novoel = document.createElement("input");
-			novoel.id = 'aplicari';
-			novoel.type = 'button';
-			novoel.value = 'Aplicar';
-			novoel.style.cursor="pointer";
-			novoel.style.fontSize="10px";
-			novoel.style.zIndex = 15000;
-			novoel.style.position="absolute";
-			novoel.style.display="none";
-			novoel.onclick=function()
-			{
-				remapaf();
-				this.style.display="none"
-			};
-			novoel.onmouseover = function(){this.style.display="block";};
-			novoel.onmouseout = function(){this.style.display="none";};
-			document.body.appendChild(novoel);
-		}
-		var pos = pegaPosicaoObjeto(obj);
+		if(arguments.length == 2)
+		{var nomeFuncao = "remapaf";}
+		var botao = i3GEO.util.criaBotaoAplicar(nomeFuncao,$trad("p14"),"i3geoBotaoAplicar",obj)
 		g_operacao = tipo;
 		clearTimeout(objmapa.tempo);
 		objmapa.tempo = setTimeout('remapaf()',(g_tempo_aplicar));
 		autoRedesenho("reinicia");
-		if ($i("aplicari"))
-		{
-			var i = $i("aplicari").style;
-			i.display="block";
-			var l = pos[0];
-			var t = pos[1]-5;
-			if (navn)
-			{
-				i.left = l; //+document.body.scrollLeft;
-				i.top = t; //+document.body.scrollTop;
-			}			
-			else
-			{
-				i.pixelLeft = l; //+document.body.scrollLeft;
-				i.pixelTop = t; //+document.body.scrollTop;
-			}
-		}
 	}
-	catch(e){var e = "";}
+	catch(e){alert(e);}
 }
 /*
 Function: movelentef
@@ -2723,69 +2692,12 @@ function atualizawiki()
 Section: menu de temas e outras listagens
 */
 /*
-Function: procurartemas
+Function: procurartemas (depreciado)
 
 Localiza um tema no menu de temas.
-
-O texto para busca é obtido do elemento INPUT com id="buscatema", ou no parâmetro "texto"
-
-Parameters:
-
-texto - (opcional)
 */
 function procurartemas(texto)
-{
-	if (document.getElementById("buscatema"))
-	var procurar = removeAcentos(document.getElementById("buscatema").value);
-	else
-	var procurar = removeAcentos(texto);
-	var resultadoProcurar = function(retorno)
-	{
-		if(!retorno.data)
-		{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";return;}
-		var retorno = retorno.data;
-		var conta = 0;
-		if ((retorno != "erro") && (retorno != undefined))
-		{
-			var ins = "";
-			var ig = retorno.length-1;
-			if(ig >= 0)
-			{
-				do
-				{
-					var ngSgrupo = retorno[ig].subgrupos;
-					var tempn = ngSgrupo.length;
-					for (var sg=0;sg<tempn;sg++)
-					{
-						var nomeSgrupo = ngSgrupo[sg].subgrupo;
-						var ngTema = ngSgrupo[sg].temas;
-						var tempng = ngTema.length;
-						for (var st=0;st<tempng;st++)
-						{
-								if ( ngTema[st].link != " ")
-								{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
-								var tid = ngTema[st].tid;
-								var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value='"+tid+"'  /> ("+nomeSgrupo+")";
-								var nomeTema = inp+(ngTema[st].nome)+lk+"<br>";
-								ins += nomeTema;
-								conta++;
-						}
-					}
-				}
-				while(ig--)
-			}
-			if (ins != "")
-			{
-				$i("achados").innerHTML = "Total: "+conta+"<br>"+ins+"<br>";
-			}
-			else
-			{$i("achados").innerHTML = "<span style='color:red'>Nada encontrado<br><br></span>";}
-		}
-	};
-	$i("achados").innerHTML = "<span style='color:green'>Procurando...<br><br></span>";
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+g_sid;
-	cpObj.call(p,"procurartemas",resultadoProcurar);
-}
+{}
 /*
 Function: expandeTema
 
@@ -3051,9 +2963,11 @@ function expandeGrupo(itemID)
 							var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 							var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
 							var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
+							
 							var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
 							if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
 							{var kml = "";}
+							
 							var mini = "";
 							var lkmini = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=mini";
 							var lkmini1 = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=grande";
@@ -3421,49 +3335,12 @@ function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrup
 
 }
 /*
-Function: pegavalSistemas
+Function: pegavalSistemas (depreciado)
 
 Adiciona uma árvore no menu de adição de temas, contendo os sistemas que podem ser executados.
-
-Parameters:
-
-sis - objeto com a lista de sistemas.
 */
 function pegavalSistemas(sis)
-{
-	if(sis.length > 0)
-	{
-		mytreeviewS = new Object();
-		mytreeviewS = treeviewNew("mytreeviewS", "default", objmapa.guiaMenu+"obj", null);
-		$i("mytreeviewS").innerHTML += "<br>";
-		mytreeviewS.createItem("Sitem1", "<b>"+$trad("a11")+"</b>", "foldermapa", true, true, true, null);
-		var iglt = sis.length;
-		var ig=0;
-		do
-		{
-			var nomeSis = sis[ig].NOME;
-			if(sis[ig].PUBLICADO)
-			{
-				if(sis[ig].PUBLICADO == "NAO" || sis[ig].PUBLICADO == "nao")
-				{var nomeSis = "<s>"+sis[ig].NOME+"</s>";}
-			}
-			mytreeviewS.createItem("sis"+ig, nomeSis, "folder", true, true, true, "Sitem1");
-			var funcoes = sis[ig].FUNCOES;
-			var tempf = funcoes.length;
-			for (var ig2=0;ig2<tempf;ig2++)
-			{
-				var executar = funcoes[ig2].ABRIR;
-				var w = funcoes[ig2].W;
-				var h = funcoes[ig2].H;
-				var nomeFunc = "<span onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")'>"+funcoes[ig2].NOME+"</span>";
-				var inp = "<img class='folder' title='"+$trad("a12")+"' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")' />&nbsp;";
-				mytreeviewS.createItem("sis"+ig+"func"+ig2, inp+nomeFunc, imgBranco, false, true, false, "sis"+ig);
-			}
-			ig++;
-		}
-		while(ig<iglt)
-	}
-}
+{alert("Funcao pegavalSistemas foi depreciada - veja i3GEO.arvoreDeTemas");}
 /*
 Function: pegaMapas
 
@@ -3628,6 +3505,29 @@ function remapaf()
 	clearTimeout(objmapa.tempo);
 	objmapa.tempo = "";
 	objmapa.temaAtivo = "";
+	//
+	//pega os temas ativados na árvore de menus
+	//
+	var tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();
+	i3GEO.arvoreDeTemas.desativaCheckbox();
+	//
+	//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
+	//
+	if(tsl.length > 0){
+		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		var temp = function(retorno){
+			objaguarde.fecha("ajaxredesenha");
+			if(retorno.data.erro){
+				alert(retorno.data.erro);
+				return;
+			}
+			ajaxredesenha("");					
+		};
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(tsl.toString())+"&g_sid="+g_sid;
+		cpObj.call(p,"adicionaTema",temp);	
+	}
+	else //isso aqui precisa ser refeito
+	{
 	if ($i(objmapa.guiaTemas+"obj"))
 	{
 		//
@@ -3716,6 +3616,7 @@ function remapaf()
 		};
 		if ((tsd.length > 0) || (tsl.length > 0))
 		{
+			alert(tsl.toString());return;
 			objaguarde.abre("remapa",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid;
 			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
@@ -3731,6 +3632,7 @@ function remapaf()
 	if($i("flamingo"))
 	{
 		//atualizaFL();
+	}
 	}
 }
 /*

@@ -172,8 +172,9 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {top:0px;position:absolute;visibility: hidden;}
 #mensagem
 {background-color:white;position:absolute;visibility:hidden}
-#aplicari
+.i3geoBotaoAplicar
 {display:none;position:absolute;cursor:pointer;z-index:1000;background-color:#F6F6F6;color:#426252;}
+
 #img,#imgL,#imgO,#imgN,#imgS
 {border: 0px solid black;cursor:crosshair;top:0px;left:0px;}
 #img_d
@@ -1097,4 +1098,5 @@ width:16px;
 	height:22px;
 	width:18px;
 }
-.ygtvhtml{text-align:left;}
+.ygtvhtml{text-align:left;}
+.ygtvitem{text-align:left;}

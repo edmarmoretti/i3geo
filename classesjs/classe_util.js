@@ -78,7 +78,7 @@ i3GEO.util = {
 	Parameters:
 	obj - {Object}
 
-	Returns:
+	Return:
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
@@ -87,5 +87,87 @@ i3GEO.util = {
    			keys.push(key);
 		}
 		return keys;
+	},
+	/*
+	Function: criaBotaoAplicar
+	Cria um botão flutuante do tipo aplicar.
+	
+	O novo botão é adicionado no DOM com ID "i3geo_aplicar"
+   
+	Parameters:
+	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
+	
+	titulo (opcional) - {String} Título que será mostrado no botão
+	
+	classe (opcional) - {String} Nome da classe (estilo) que será aplicado ao botão.
+	
+	obj ((opcional) - {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
+
+	Return:
+	(Object) - Objeto DOM criado.
+
+	*/
+	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
+		if(arguments.length == 1)
+		{var titulo = "Aplicar";}
+		if(arguments.length == 1 || arguments.length == 2)
+		{var classe = "i3geoBotaoAplicar";}
+		if (!document.getElementById("i3geo_aplicar"))
+		{
+			var novoel = document.createElement("input");
+			novoel.id = 'i3geo_aplicar';
+			novoel.type = 'button';
+			novoel.value = titulo;
+			novoel.style.cursor="pointer";
+			novoel.style.fontSize="10px";
+			novoel.style.zIndex = 15000;
+			novoel.style.position="absolute";
+			novoel.style.display="none";
+			novoel.onmouseover = function(){this.style.display="block";};
+			novoel.onmouseout = function(){this.style.display="none";};
+			novoel.className = classe;
+			document.body.appendChild(novoel);
+		}
+		else
+		{var novoel = document.getElementById("i3geo_aplicar");}
+		novoel.onclick = function(){
+			this.style.display='none';
+			eval(nomeFuncao+"\(\)");
+		}
+		//reposiciona o botao
+		if(arguments.length == 4){
+			novoel.style.display="block";
+			var xy = YAHOO.util.Dom.getXY(obj);
+			YAHOO.util.Dom.setXY(novoel,xy);
+		}
+		return (novoel);
+	},
+	/*
+	Function: removeAcentos
+
+	Remove acentos de uma palavra ou frase
+
+	Parameters:
+
+	palavra {String}
+	
+	Return:
+	
+	{String}
+	*/
+	removeAcentos: function(palavra) {
+		var re = /ã|á|à|â/gi;
+		palavra = palavra.replace(re,"a");
+		var re = /é/gi;
+		palavra = palavra.replace(re,"e");
+		var re = /í/gi;
+		palavra = palavra.replace(re,"i");
+		var re = /ó|õ/gi;
+		palavra = palavra.replace(re,"o");
+		var re = /ç/gi;
+		palavra = palavra.replace(re,"c");
+		var re = /ú/gi;
+		palavra = palavra.replace(re,"u");
+		return(palavra);
 	}
 };
