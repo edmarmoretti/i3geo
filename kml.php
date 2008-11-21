@@ -116,9 +116,11 @@ if ($menutemas != "" || is_array($menutemas))
 if($menutemas == "")
 {
 	include("admin/php/admin.php");
-	$menus = pegaDados("SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' order by nome_menu ");
+	$menus = pegaDados("SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu ");
+	echo $sql;
 	foreach($menus as $menu)
 	{
+		echo $menu["nome_menu"];
 		kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
 		$id_menu = $menu["id_menu"];
 		$grupos = pegaDados("SELECT nome_grupo,n1.id_grupo,gr.desc_grupo from i3geoadmin_n1 as n1,i3geoadmin_grupos as gr where n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
