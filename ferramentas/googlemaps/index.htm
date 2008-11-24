@@ -32,20 +32,22 @@
     	pt1 = "-54";
     	pt2 = "-12";
     }
-    var map = new GMap(document.getElementById("map"));
+    map = new GMap2(document.getElementById("map"));
     map.setMapType(G_SATELLITE_MAP);
     map.addMapType(G_SATELLITE_3D_MAP);
-    
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
-
-    map.centerAndZoom(new GPoint(pt1,pt2), 11);
+    map.setCenter(new GLatLng(pt2,pt1), 11);
     GEvent.addListener(map, "moveend", function() {
     	ondegoogle(map);
     });
+	//var kml = new GGeoXml("http://mapas.mma.gov.br/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml");
+	//map.addOverlay(kml)
+	//kml.initialize(map)
     GEvent.addListener(map, "zoomend", function() {
     	ondegoogle();
     });
+
     function moveMapa(bd)
     {
     	nex = bd.minX+" "+bd.minY+" "+bd.maxX+" "+bd.maxY
@@ -60,9 +62,11 @@
     {
     	if(window.parent.objmapa)
     	{
-    		var bd = map.getBoundsLatLng();
-    		var xyMin = window.parent.convddtela(bd.minX,bd.minY,window.parent.document);
-    		var xyMax = window.parent.convddtela(bd.maxX,bd.maxY,window.parent.document);
+    		var bd = map.getBounds();
+    		var so = bd.getSouthWest();
+    		var ne = bd.getNorthEast();
+    		var xyMin = window.parent.convddtela(so.lng(),so.lat(),window.parent.document);
+    		var xyMax = window.parent.convddtela(ne.lng(),ne.lat(),window.parent.document);
 			var box = window.parent.$i("boxg")
 			var w = xyMax[0]-xyMin[0]
 			var h = xyMin[1]-xyMax[1]
@@ -83,7 +87,9 @@
     	ret = pol.split(" ");
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-    	map.centerAndZoom(new GPoint(pt1,pt2),map.getZoomLevel());
+    	//map.centerAndZoom(new GLatLng(pt2,pt1),map.getZoom());
+    	//map.setZoom(level)
+    	map.panTo(new GLatLng(pt2,pt1))
     }
     ondegoogle(map);
     </script>
