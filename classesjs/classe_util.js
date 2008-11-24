@@ -1,17 +1,9 @@
 /*
-Title: i3geo.util
+Class:: i3GEO.util
 
 Utilitários.
 
 Funções gerais de processamento.
-
-Namespace:
-
-i3GEO.util
-
-Exemplos:
-
-
 
 File: i3geo/classesjs/classe_util.js
 
@@ -92,22 +84,26 @@ i3GEO.util = {
 	Function: criaBotaoAplicar
 	Cria um botão flutuante do tipo aplicar.
 	
-	O novo botão é adicionado no DOM com ID "i3geo_aplicar"
+	O novo botão é adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
    
 	Parameters:
+	
 	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
 	
-	titulo (opcional) - {String} Título que será mostrado no botão
+	titulo - (opcional) {String} Título que será mostrado no botão
 	
-	classe (opcional) - {String} Nome da classe (estilo) que será aplicado ao botão.
+	classe - (opcional) {String} Nome da classe (estilo) que será aplicado ao botão.
 	
-	obj ((opcional) - {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
+	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
 
 	Return:
 	(Object) - Objeto DOM criado.
 
 	*/
 	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
+		clearTimeout(objmapa.tempo);
+		objmapa.tempo = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
+		autoRedesenho("reinicia");
 		if(arguments.length == 1)
 		{var titulo = "Aplicar";}
 		if(arguments.length == 1 || arguments.length == 2)
@@ -131,9 +127,11 @@ i3GEO.util = {
 		else
 		{var novoel = document.getElementById("i3geo_aplicar");}
 		novoel.onclick = function(){
+			clearTimeout(objmapa.tempo);
+			objmapa.tempo = "";
 			this.style.display='none';
 			eval(nomeFuncao+"\(\)");
-		}
+		};
 		//reposiciona o botao
 		if(arguments.length == 4){
 			novoel.style.display="block";
@@ -141,6 +139,52 @@ i3GEO.util = {
 			YAHOO.util.Dom.setXY(novoel,xy);
 		}
 		return (novoel);
+	},
+	/*
+	Function: arvore
+	
+	Cria uma árvore combaseem um objeto contendo aspropriedades.
+	
+	Parameters:
+	
+	titulo - {String} cabeçaljo da árvore
+	
+	onde - {String} nome do id doelemento que conterá a árvore
+	
+	obj - {Object} objeto contendo os parâmetros, exemplo
+	
+		g_listaPropriedades = {
+	
+		"propriedades": [
+	
+		{ text: "p2", url: "javascript:tipoimagem()" }
+	
+		]}
+	
+	*/
+	arvore: function(titulo,onde,obj){
+		var currentIconMode;
+		YAHOO.example.treeExample = new function(){
+        	function buildTree(){
+				arvore = new YAHOO.widget.TreeView(onde);
+				root = arvore.getRoot();
+				var tempNode = new YAHOO.widget.TextNode('', root, false);
+				tempNode.isLeaf = false;
+        	}
+    		buildTree();
+		}();
+		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td><img style='position:relative;top:-3px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' /></td></tr></table>";
+		var d = {html:titulo};
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+		var c = obj.propriedades.length;
+		for (var i=0, j=c; i<j; i++){
+			var linha = obj.propriedades[i];
+			var conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
+			var d = {html:conteudo};
+			var temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+		}
+		arvore.collapseAll();
+   		arvore.draw();
 	},
 	/*
 	Function: removeAcentos

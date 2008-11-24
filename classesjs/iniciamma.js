@@ -263,9 +263,6 @@ function Mapa(e,m)
 	objaguarde = new aguarde();
 	objposicaocursor = new posicaocursor();
 	objposicaomouse = new posicaomouse();
-	//faz o cache das imagens para desenhar mais rápido
-	imgBranco = new Image();
-	imgBranco.src = g_locaplic+"/imagens/branco.gif";
 	//calcula o tamanho do mapa
 	var diminuix = (navm) ? g_diminuixM : g_diminuixN;
 	var diminuiy = (navm) ? g_diminuiyM : g_diminuiyN;
@@ -290,18 +287,6 @@ function Mapa(e,m)
 		{menos = menos + parseInt($i("contemFerramentas").style.width);}
 		if ($i("ferramentas"))
 		{menos = menos + parseInt($i("ferramentas").style.width);}
-		/*
-		if(window.innerWidth)
-		{
-			var novow = window.innerWidth - diminuix;
-			var novoh = window.innerHeight - diminuiy;
-		}
-		else
-		{
-			var novow = document.body.offsetWidth - diminuix;
-			var novoh = document.body.offsetHeight - diminuiy;
-		}
-		*/
 		var novow = parseInt(screen.availWidth) - diminuix;
 		var novoh = parseInt(screen.availHeight) - diminuiy;		
 		if (novow >= 1024)
@@ -442,13 +427,12 @@ function Mapa(e,m)
 	*/
 	this.scale = 50000;
 	/*
-	Variable: objmapa.temas
+	Variable: objmapa.temas (depreciado)
+
+	Utilize i3GEO.arvoreDeCamadas.CAMADAS
 	
 	Temas disponíveis no mapa atual.
-	
-	Guarda a lista de temas e suas características. É definida quando o mapa é inicializado ou redesenhado.
 	*/
-	this.temas = "";
 	/*
 	Variable: objmapa.legenda
 	
@@ -542,17 +526,6 @@ function Mapa(e,m)
 		}
 		else
 		{
-			//	
-			//testa se os javascripts foram carregados
-			//
-			if (!window.testafuncoes)
-			{alert("funcoes.js com problemas");}
-			if (!window.testamenususpenso)
-			{alert("menususpenso.js com problemas");}
-			if (!window.testaferramentas)
-			{alert("ferramentas.js com problemas");}
-			if (!window.testaajax)
-			{alert("redesenho.js com problemas");}
 			//
 			//inicia o mapa
 			//
@@ -572,11 +545,7 @@ function Mapa(e,m)
 	*/
 	this.montaMapa = function (retorno)
 	{
-		if (retorno.data.search(" erro.") > -1)
-		{
-			alert(retorno.data);
-		}
-		if (retorno.data == "linkquebrado")
+		if (retorno.data.erro)
 		{
 			objaguarde.fecha("montaMapa");
 			document.body.style.backgroundColor="white";
@@ -585,14 +554,14 @@ function Mapa(e,m)
 		}
 		else
 		{
-			if ((retorno.data != "erro") && (retorno.data != undefined))
+			if (retorno.data.variaveis)
 			{
 				//
 				//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
 				//
 				var tempo = "";
 				var titulo = "";
-				eval(retorno.data);
+				eval(retorno.data.variaveis);
 				try
 				{
 					if (titulo != "")
@@ -614,13 +583,12 @@ function Mapa(e,m)
 				//
 				//gera a lista de temas da guia temas
 				//
-				objmapa.atualizaListaTemas(temas);
+				i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,g_sid,g_locaplic);
 				//
 				//gera o mapa de referencia e outros elementos do mapa
 				//
 				objmapa.atualizaReferencia(mapexten);
 				objmapa.scale = parseInt(mapscale);
-				objmapa.temas = temas;
 				objmapa.cellsize = g_celula;
 				objmapa.extent = mapexten;
 				objmapa.extentTotal = mapexten;
@@ -665,14 +633,8 @@ function Mapa(e,m)
 				//
 				//monta a árvore de temas adicionais se existir a div arvoreAdicionaTema
 				//
-				if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona"))
-				{
-					if(!$i("arvoreAdicionaTema"))
-					{var ondeArvore = objmapa.guiaMenu+"obj";}
-					else
-					{var ondeArvore = "arvoreAdicionaTema";}
-					i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore);
-				}
+				if($i("arvoreAdicionaTema"))
+				i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,"");
 				//
 				//calcula a posicao do mapa no browser
 				//
@@ -783,30 +745,7 @@ function Mapa(e,m)
 	this.ativaListaPropriedades = function(id)
 	{
 		if ($i(id))
-		{
-			listaPr = new Object();
-			listaPr = treeviewNew("listaPr", "default", id, null);
-			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", "foldermapa1", true, false, true, null);
-			var im = "";
-			if (navn)
-			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
-			var l = g_listaPropriedades.propriedades.length-1;
-			if (l >= 0)
-			{
-				do
-				{
-					if(g_listaPropriedades.propriedades[l])
-					{
-						var temp = g_listaPropriedades.propriedades[l].text;
-						var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-						tnome = "<span onmouseover=\"javascript:this.style.textDecoration='underline';\" onmouseout=\"javascript:this.style.textDecoration='none';\" onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  class='ticPropriedades' src='"+g_locaplic+"/imagens/visual/"+g_visual+"/branco.gif' />"+temp+" </span>";
-						listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
-					}
-				}
-				while(l--)
-			}
-			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
-		}
+		{i3GEO.util.arvore("<b>"+$trad("p13")+"</b>",id,i3GEO.configura.listaDePropriedadesDoMapa);}
 	};
 	/*
 	Function: criaEscalaGrafica
@@ -852,7 +791,6 @@ function Mapa(e,m)
 	*/
 	this.atualizaReferencia = function(mapexten)
 	{
-		//objaguarde.abre("ajaxreferencia1",$trad("o3"));
 		if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
 		var dinamico = false;
 		if ($i("refDinamico"))
@@ -876,7 +814,6 @@ function Mapa(e,m)
 					var re = new RegExp("&mode=map", "g");
 					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
 					gravaQuadro("referencia",$i("imagemReferencia").src);
-					//objaguarde.fecha("ajaxreferencia1");
 				}
 			}
 		}
@@ -884,7 +821,6 @@ function Mapa(e,m)
 		{
 			if($i("imagemReferencia"))
 			gravaQuadro("referencia",$i("imagemReferencia").src);
-			//objaguarde.fecha("ajaxreferencia1");
 		}		
 	};
 	/*
@@ -915,108 +851,15 @@ function Mapa(e,m)
 		}
 	};
 	/*
-	Function: atualizaListaTemas
+	Function: atualizaListaTemas (depreciado)
 	
 	Atualiza a lista de temas disponíveis no mapa (guia com a lista de temas)
-	
-	Parameters:
-	
-	temas - lista de temas. Se vazio, utiliza o objeto objmapa.temas
 	*/
 	this.atualizaListaTemas = function(temas)
-	{
-		if($i("listaTemas"))
-		{
-			if ( (objmapa.temas != temas) || (!$i("listaTemas").hasChildNodes()) )
-			{
-				$i("listaTemas").innerHTML = "";
-				var lista = temas.split(";");
-				mytreeview1 = new Object();
-				mytreeview1 = treeviewNew("mytreeview1", "default", "listaTemas", null);
-				var titulo = "<b>"+$trad("t1")+"</b><img id='lixeira' style='position:relative;top:5px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' />";
-				mytreeview1.createItem("g1",titulo, "foldermapa", true, true, true, null);
-				mytreeview1.itemExpand = expandeTema;
-				var cor = "rgb(250,250,250)";
-				//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-				var lle = lista.length;
-				var l = 0;
-				if (lle >= 0)
-				{
-					do
-					{
-						var ltema = lista[l].split("*");
-						var ck = "";
-						if(ltema[1] == 2){ck = 'CHECKED';}
-						//ltema[8]==sim indica que e um tema com features
-						if (ltema[8] == undefined){ltema[8] = "nao";}
-						tnome = "<span id='arrastar_"+ltema[0]+"'><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+ltema[0]+"' "+ ck +" onclick='mudaboxnf(\"ligadesliga\",this)'/>";
-						//verifica se existe contexto de desenho baseado na escala
-						if (ltema[12] == "sim")
-						{tnome += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
-						if (ltema[5] == "sim") //o tema tem selecao
-						{tnome += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(this)' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-						//verifica se e um wms que tem wfs
-						if ((ltema[10] == "sim") || (ltema[10] == "SIM"))
-						{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t6")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-						if ((ltema[7] == "sim") || (ltema[7] == "SIM"))
-						{tnome += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-						if (navm)
-						{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
-						else
-						{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
-						mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
-						tnome = "<img width=0px src="+$im("branco.gif") + " />";
-						mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
-						if (cor == "rgb(250,250,250)"){var cor = "none";}
-						else
-						{var cor = "rgb(250,250,250)";}
-						l++;
-					}
-					while(l<lle)
-				}
-			}
-		}
-		ativaDragDrop();
-	};
+	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
 	/*
-	Function: atualizaFarol
-	
-	Atualiza o farol de cada tema.
-	
-	O farol identifica a compatibilidade da escala do mapa com a escala de cada tema
-	
-	Parameters:
-	
-	mapscale - escala de comparação com a escala de cada tema
+	Function: atualizaFarol (depreciado)
 	*/
-	this.atualizaFarol = function(mapscale)
-	{
-		//mapscale é o valor da escala do novo mapa
-		if (objmapa.scale != mapscale)
-		{
-			var lista = (objmapa.temas).split(";");
-			var farol = "maisamarelo.png";
-			var l = lista.length-1;
-			if (l >= 0)
-			{
-				do
-				{
-					var ltema = lista[l].split("*");
-					if (ltema[6]*1 < mapscale*1)
-					{var farol = "maisverde.png";}
-					if (ltema[6]*1 > mapscale*1)
-					{var farol = "maisvermelho.png";}
-					if (ltema[6]*1 == 0)
-					{var farol = "maisamarelo.png";}
-					if ($i("farol"+ltema[0]))
-					{
-						$i("farol"+ltema[0]).src = g_locaplic+"/imagens/"+farol;
-					}
-				}
-				while(l--)
-			}
-		}
-	};
 	/*
 	Function: criaCorpoMapa
 	

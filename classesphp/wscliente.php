@@ -422,7 +422,7 @@ function listaRSSwsARRAY()
 	if(count($rsss) == 0){$rsss = array(" ");}
 	$erro = "Erro. Nao foi possivel ler o arquivo";
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$urli3geo = $protocolo[0]."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
+	$urli3geo = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
 	foreach ($rsss as $r)
 	{
 		if($r == "" || $r == " ")

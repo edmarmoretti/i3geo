@@ -825,13 +825,13 @@ Limpa a selecao do tema
 
 Parameters:
 
-celula - objeto que foi clicado nas opções de um tema. Passado para a função pegatema.
+tema - ID (name) do tema clicado
 */
-function limpaseltemaf(celula)
+function limpaseltemaf(tema)
 {
 	g_operacao = "limpasel";
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+pegaTema(celula)+"&g_sid="+g_sid;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"selecaoLimpa",ajaxredesenha);
 }
 /*

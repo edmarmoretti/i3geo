@@ -846,7 +846,10 @@ function ativaGuias()
 				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde = "outrasOpcoesAdiciona";
 				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
 			}
-			i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore,"mudaboxnf\('adicionatema',this,'remapaf'\)");
+			//
+			//cria a árvore
+			//
+			i3GEO.arvoreDeTemas.cria(g_sid,g_locaplic,ondeArvore);
 		};
 	}
 	if ($i(objmapa.guiaLegenda))
@@ -872,68 +875,10 @@ function ativaGuias()
 	}
 }
 /* 
-Function: pegalistademenus
-
-Pega a lista de menus que deverão compor a árvore de adição de temas e cria/adiciona os elementos raiz para cada árvore
-
-A lista de menus é definida em ms_configura.php ou no sistema de administração.
-
-Para cada menu é montada uma árvore com os grupos e sub-grupos de temas.
-
-Parameters:
-
-retorno - objeto JSON no formato CPAINT com a lista de menus
+Function: pegalistademenus (depreciado)
 */
 function pegalistademenus(retorno)
-{
-	//
-	//quando retorno for vazio, significa que será usado o menu default(menutemas.xml) e será mostrado sempre aberto
-	//essa verificação é necessária para efeitos de compatibilidade com versões antigas do i3geo que não permitiam mais de um menu
-	//
-	if (retorno.data == "")
-	{pegaListaDeGrupos("","sim","aberto");}
-	else
-	{
-		var j = retorno.data.length;
-		var i = 0;
-		if(j >= 0)
-		{
-			do
-			{
-				//
-				//o parâmetro status define se a árvre será montada aberta ou fechada
-				//esse parâmetro foi adicionado na versão 4.0 do i3geo
-				//por isso a verificação é necessária
-				//se o parâmetro não existir na variável $menutemas definida em ms_configura.php,
-				//será utilizado aberto
-				//
-				if(retorno.data[i].nomemenu)
-				var nome = retorno.data[i].nomemenu;
-				else
-				var nome = retorno.data[i].idmenu;
-				//
-				//muda a cor se o menu não estiver publicado
-				//
-				if(retorno.data[i].publicado)
-				{
-					if(retorno.data[i].publicado == "NAO")
-					{var nome = "<s>"+nome+"</s>";}
-				}
-				var status = "aberto";
-				if(retorno.data[i].status)
-				{var status = retorno.data[i].status;}
-				else
-				{var status = "fechado";}
-				if(i == j-1)
-				{pegaListaDeGrupos(retorno.data[i].idmenu,"sim",status,nome);}
-				else
-				{pegaListaDeGrupos(retorno.data[i].idmenu,"nao",status,nome);}
-				i++;
-			}
-			while(i < j)
-		}
-	}
-}
+{alert("Funcao pegalistademenus foi depreciado. Utilize i3GEO.arvoreDeTemas");}
 /*
 Function: mensagemf
 
@@ -1936,7 +1881,7 @@ function initJanelaRef()
 	objmapa.atualizaReferencia();
 }
 /*
-Function: mudaboxnf
+Function: mudaboxnf (depreciado)
 
 Posiciona o botao aplicar quando o check box que liga/desliga um tema é pressionado.
 
@@ -1950,17 +1895,7 @@ nomeFuncao - Nome da função que será executada quando o usuário clicar o botão A
 */
 function mudaboxnf(tipo,obj,nomeFuncao)
 {
-	try
-	{
-		if(arguments.length == 2)
-		{var nomeFuncao = "remapaf";}
-		var botao = i3GEO.util.criaBotaoAplicar(nomeFuncao,$trad("p14"),"i3geoBotaoAplicar",obj)
-		g_operacao = tipo;
-		clearTimeout(objmapa.tempo);
-		objmapa.tempo = setTimeout('remapaf()',(g_tempo_aplicar));
-		autoRedesenho("reinicia");
-	}
-	catch(e){alert(e);}
+	alert("mudaboxnf foi depreciado");
 }
 /*
 Function: movelentef
@@ -2586,19 +2521,9 @@ function legendaGrafico(par)
 	catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
 }
 /*
-Function: inverteStatusClasse
-
-Ativa ou desativa a visualização de uma classe de um tema.
-
-Parameters:
-
-leg - objeto input clicado no mapa
+Function: inverteStatusClasse (depreciado)
 */
-function inverteStatusClasse(leg)
-{
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inverteStatusClasse&g_sid="+g_sid+"&tema="+leg.name+"&classe="+leg.value;
-	cpObj.call(p,"inverteStatusClasse",ajaxredesenha);
-}
+
 /*
 Section: sistemas de busca e navegação
 */
@@ -2699,205 +2624,15 @@ Localiza um tema no menu de temas.
 function procurartemas(texto)
 {}
 /*
-Function: expandeTema
+Function: expandeTema (depreciado)
 
-Busca dados sobre um tema quando o botão de expandir tema é clicado.
-
-Os dados obtidos sobre o tema são utilizados para montagem do nó "opções" que é mostrado abaixo do nome do tema.
-
-Algumas das opções apenas serão mostradas se a variável de configuração g_opcoesTemas = "sim"
-
-Parameters:
-
-itemID - Id do nó que foi expandido
 */
 function expandeTema(itemID)
 {
-	var lista = (objmapa.temas).split(";");
-	if (!document.getElementById("idx"+itemID))
-	{
-		var l = lista.length-1;
-		if(l >= 0)
-		{
-			do
-			{
-				var ltema = lista[l].split("*");
-				//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs
-				if (ltema[0] == itemID)
-				{
-					var farol = "maisamarelo.png";
-					if (ltema[8] == undefined){ltema[8] = "nao";}
-					if (ltema[6]*1 < objmapa.scale*1)
-					{
-				 		var farol = "maisverde.png";
-				 		var mfarol = $trad("t9");
-					}
-					if (ltema[6]*1 > objmapa.scale*1)
-					{
-				 		var farol = "maisvermelho.png";
-						var mfarol = $trad("t10");
-					}
-					if (ltema[6] == 0)
-					{
-				 		var farol = "maisamarelo.png";
-						var mfarol = $trad("t11");
-					}
-					tnome = "&nbsp;<img id='farol"+ltema[0]+"' src='"+$im(farol)+"' title='"+mfarol+"' \>";
-					tnome += "&nbsp;<img  id='idx"+ltema[0]+"' class='x' src='"+$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-					tnome += "&nbsp;<img class='sobe' src='"+$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-					tnome += "&nbsp;<img class='desce' src='"+$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-					//a operação de zoom para o tema não funciona na interface flamingo
-					if( (ltema[11] == "sim") && (!$i("flamingo")))
-					{tnome += "&nbsp;<img class='extent' src='"+$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema[0]+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
-					mytreeview1.createItem("temap0"+ltema[0], tnome, imgBranco, false, true, true, ltema[0]);
-					if (g_opcoesTemas == "sim")
-					{mytreeview1.createItem("opc"+ltema[0], $trad("t18a"), imgBranco, true, true, true, ltema[0]);}
-					mytreeview1.createItem("legenda"+ltema[0], $trad("t18b"), imgBranco, true, true, true, ltema[0]);
-					if (g_opcoesTemas == "sim")
-					{
-						var im = "";
-						if (navn)
-						{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='13' />";}
-						//transparencia
-						if ((ltema[4] != 0) || (ltema[8] == "sim"))
-						{
-							tnome = "<span onclick='mudatranspf(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src='"+$im("branco.gif")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"+$trad("t20")+" </span>"+$inputText("","","tr"+ltema[0],"","3",ltema[3])+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema[0]+"\")' src='"+$im("branco.gif")+"' />";
-							mytreeview1.createItem("temap1"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						}
-						//muda nome
-						tnome = "<span onclick='mudanomef(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src='"+$im("branco.gif")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"+$trad("t21")+" </span>"+$inputText("","","nn"+ltema[0],"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='mudanomef(\""+ltema[0]+"\")' src='"+$im("branco.gif")+"' />";
-						mytreeview1.createItem("temap2"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						if ((ltema[4] < 3) && (ltema[9] != 7))
-						{
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t22")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='procuraratribf(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif")+" />"+$trad("t23")+" </span>";
-							mytreeview1.createItem("temap3"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t24")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='toponimiaf(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif") + " />"+$trad("t25")+" </span>";
-							mytreeview1.createItem("temap4"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t26")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='etiquetas(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif") + " />"+$trad("t27")+" </span>";
-							mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t28")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='filtrof(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif") + " />"+$trad("t29")+" </span>";
-							mytreeview1.createItem("temap5"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='tabelaf(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif") + " />"+$trad("t31")+" </span>";
-							mytreeview1.createItem("temap6"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							if(objmapa.versaoms > 4)
-							{
-								tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t37")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='graficotema(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src="+$im("branco.gif") + " />"+$trad("t37")+" </span>";
-								mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-							}
-						}
-						if (ltema[4] < 4)
-						{
-							tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t32")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='editaLegenda(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src='"+$im("branco.gif") + "' />"+$trad("t33")+" </span>";
-							mytreeview1.createItem("temap7"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-						}
-						tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t34")+"','');this.style.textDecoration='underline';\" onmouseout=\"javascript:mostradicasf(this,'');this.style.textDecoration='none';\" onclick='destacaTema(\""+ltema[0]+"\")'>"+im+"<img class='ticOpcoesTemas' src='"+$im("branco.gif") + "' />"+$trad("t35")+" </span>";
-						mytreeview1.createItem("temap8"+ltema[0], tnome, imgBranco, false, true, false, "opc"+ltema[0]);
-					}
-					mytreeview1.createItem("","", imgBranco, false, true, true, ltema[0]);
-					break;
-				}
-			}
-			while(l--)
-		}
-	}
 	//verifica se clicou para expandir a legenda
 	var tema = itemID.split("legenda");
 	if (tema.length == 2)
 	{
-		var expandeLegendaVer = function (retorno)
-		{
-			if (retorno.data != undefined)
-			{
-				var original = retorno;
-				//é um tema normal
-				if (retorno.data.legenda)
-				{
-					var retorno = retorno.data.legenda;
-					if (retorno[0])
-					{
-						if ((navn) && (!retorno[0].imagem))
-						{tabela = retorno;}
-						else
-						{
-							var i = retorno[0].imagem;
-							var re = new RegExp("tiff", "g");
-							var i = i.replace(re,'png');
-							var tabela = "<img src='"+i+"' />";
-						}					
-						retorno = "";
-					}
-					else
-					{
-						var linhas = retorno.split("#");
-						if (linhas.length > 1)
-						{
-							var linhas = retorno.split("|");
-							var tabela = "<table >";
-							var linha = linhas.length-1;
-							if(linha >= 0)
-							{
-								do
-								{
-									var colunas = linhas[linha].split("#");
-									var id = colunas[0]+"-"+colunas[1];
-									var re = new RegExp("'", "g");
-									var exp = colunas[3].replace(re,'"');
-									tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
-								}
-								while(linha--)
-							}
-							tabela += "</table><br>";
-						}
-						else
-						{tabela = retorno;}
-					}
-				}
-				else //o tema é um wms
-				{
-					var tabela = "<img src='"+retorno.data[0].imagem+"' />";
-				}
-				if (!$i(g_arvoreClick+"verdiv"))
-				{
-					incluir = "<div style='text-align:left' id='"+g_arvoreClick+"verdiv"+"'>"+tabela+"</div>";
-					mytreeview1.createItem(g_arvoreClick+"ver", incluir, imgBranco, false, true, true, g_arvoreClick);
-				}
-				else
-				{
-					$i(g_arvoreClick+"verdiv").innerHTML = tabela;
-				}
-				//desliga os checkbox que foram desativados
-				//pega os objetos input
-				var elementos = $i(g_arvoreClick+"verdiv").getElementsByTagName("input");
-				var nelementos = elementos.length;
-				var inputs = new Array();
-				var i = 0;
-				if (nelementos > 0)
-				{
-					do
-					{
-						if (elementos[i].type == "checkbox")
-						{inputs.push(elementos[i]);}
-						i++;
-					}
-					while(i < nelementos)
-				}
-				if(original.data.desativar)
-				{
-					var desativar = original.data.desativar;
-					var nindices = desativar.length;
-					var i = 0;
-					if (nindices > 0)
-					{
-						do
-						{
-							inputs[desativar[i]].checked = false;
-							i++;
-						}
-						while(i < nindices)
-					}
-				}	
-			}
-		};
 		g_arvoreClick = itemID;
 		tema = tema[1];
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&template=legenda2.htm&tema="+tema+"&g_sid="+g_sid;
@@ -2905,307 +2640,11 @@ function expandeTema(itemID)
 	}
 }
 /*
-Function: expandeGrupo
-
-Chama a função ajax que pega a lista de temas de um subgrupo no menu de temas.
-
-Parameters:
-
-itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
+Function: expandeGrupo (depreciado)
 */
-function expandeGrupo(itemID)
-{
-	var idmenu = (TreeviewPvtFindRootObject($i(itemID)).idmenu);
-	//
-	//o codigo do grupo é sempre somado +1, para pegar o correto é necessário subtrair 1
-	//
-	var item = $i(itemID);
-	if (item.grupo)
-	{
-		if(item.grupo == "0a"){var grupo = "0";}
-		else
-		{var grupo = parseInt(item.grupo);}
-	}
-	else
-	{var grupo = "";}
-	if (item.subgrupo)
-	{
-		if(item.subgrupo == "0a"){var subgrupo = "0";}
-		else
-		{var subgrupo = parseInt(item.subgrupo);}
-	}
-	else
-	{var subgrupo = "";}
-	if (item.getElementsByTagName("ul").length == 0)
-	{
-		if (subgrupo != "")
-		{
-			var processaTemas = function(retorno)
-			{
-				if ((retorno.data != "erro") && (retorno.data != undefined))
-				{
-					var cor = "rgb(251,246,184)";
-					var stlt = retorno.data.temas.length;
-					if(stlt > 0)
-					{
-						var st = 0;
-						do
-						{
-							var nome = retorno.data.temas[st].nome;
-							var lk = retorno.data.temas[st].link;
-							if ( lk != " ")
-							{var lk = "<a href="+lk+" target='blank'>&nbsp;"+$trad("a9")+"</a>";}
-							var tid = retorno.data.temas[st].tid;
-							//
-							//inclui o link para abrir o qrcode e kml
-							//
-							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+"  />";
-							var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
-							var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+tid;
-							var qrcode = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >qrcode</a>";	
-							
-							var kml = "&nbsp;<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+tid+"\")' target='blank' >kml</span>";	
-							if ((g_kml != "sim") && (retorno.data.temas[st].ogc != "nao"))
-							{var kml = "";}
-							
-							var mini = "";
-							var lkmini = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=mini";
-							var lkmini1 = g_locaplic+"/testamapfile.php?map="+tid+".map&tipo=grande";
-							var mini = "&nbsp;<a onmouseover='mostradicasf(this,\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >mini</a>";	
-							if (g_qrcode == "nao"){qrcode = "";}
-							if(navm)
-							nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'>"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
-							else
-							nomeTema = "<span style='background-color:"+cor+"' title='"+$trad("a10")+" "+tid+"'><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+"<br>"+lk+qrcode+kml+mini+"</span>";
-							mytreeview2.createItem("t_"+itemID+"_"+st, nomeTema, imgBranco, false, true, true, itemID);
-							if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
-							else
-							{var cor = "rgb(251,246,184)";}
-							st++;
-						}
-						while(st<stlt)
-					}
-					//inclui um item em branco
-					mytreeview2.createItem("vazio", "", imgBranco, false, true, true, g_arvoreClick);
-				}
-			};
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&grupo="+grupo+"&subgrupo="+subgrupo+"&g_sid="+g_sid+"&idmenu="+idmenu;
-			cpObj.call(p,"pegaListaDeTemas",processaTemas);
-		}
-		else if (grupo != "")
-		{
-			//
-			//processa o resultado da chamada ajax para montar a árvore de sub-grupos
-			//
-			var processaSubgrupos = function (retorno)
-			{	
-				var ngSgrupo = retorno.data.subgrupo;
-				var cor = "rgb(230,230,230)";
-				var sglt = ngSgrupo.length;
-				if (sglt>0)
-				{
-					var sg = 0;
-					do
-					{
-						if (navm)
-						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+ngSgrupo[sg].nome+"</span>";
-						else
-						var nomeSgrupo = "<span style='text-align:left;background-color:"+cor+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" ><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+ngSgrupo[sg].nome+"</span>";
-						mytreeview2.createItem(itemID+"_"+sg, nomeSgrupo, imgBranco, true, true, true, itemID);
-						$i(itemID+"_"+sg).subgrupo = sg+"a";
-						$i(itemID+"_"+sg).grupo = grupo+"a";
-						if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
-						else
-						{var cor = "rgb(230,230,230)";}
-						sg++;
-					}
-					while(sg<sglt)
-					mytreeview2.createItem("","", imgBranco, false, true, true, itemID);
-				}
-				var ngtSgrupo = retorno.data.temasgrupo;
-				var sgtlt = ngtSgrupo.length;
-				if(sgtlt > 0)
-				{
-					var sgt=0;
-					do
-					{
-						var no = ngtSgrupo[sgt];
-						var nome = no.nome;
-						var lk = no.link;
-						if ( lk != " ")
-						{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
-						var tid = no.tid;
-						var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-						if(navm)
-						nomeTema = "&nbsp;"+inp+nome+lk;
-						else
-						nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-						mytreeview2.createItem(itemID+"tema_"+sgt, nomeTema, imgBranco, false, true, true, itemID);
-						sgt++;
-					}
-					while(sgt<sgtlt)
-					mytreeview2.createItem("","", imgBranco, false, true, true, itemID);
-				}		
-			};		
-			//
-			//faz a cahamada ajax para pegar a lista de sub-grupos de um grupo
-			//
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&grupo="+grupo+"&g_sid="+g_sid+"&idmenu="+idmenu;
-			cpObj.call(p,"pegaListaDeSubgrupos",processaSubgrupos);
-		}
-	}
-}
 /*
-Function: processaGrupos
-
-Recebe os dados da função Ajax com a lista de grupos e subgrupos.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Se existir o id="arvoreAdicionaTema", a árvore será incluída nele, se não, será incluída na guia definida em objmapa.guiaMenu
-
-Parameters:
-
-idmenu - identificador do menu que será aberto. É definido em ms_configura.php
-
-listasistemas - sim|nao indica se a lista de sistemas será mostrada ou não
-
-status - aberto|fechado indica se a árvore será mostrada aberta ou fechada no menu.
-
-nomemenu - nome do menu que será incluído na raiz da árvore
+Function: processaGrupos (depreciado)
 */
-function pegaListaDeGrupos(idmenu,listasistemas,status,nomemenu)
-{			
-	if(status == "aberto"){status = true;}
-	else
-	{status = false;}
-	if(status == undefined){status = true;}
-	//
-	//pega o retorno da chamada ajax com a lista de grupos de um determinado menu de temas
-	//
-	var processaGrupos = function(retorno)
-	{
-		if ((retorno.data != "erro") && (retorno.data != undefined))
-		{
-			if($i(objmapa.guiaMenu+"obj") && !$i("buscatema"))
-			{$i(objmapa.guiaMenu+"obj").innerHTML = "";}
-			if(!$i("arvoreAdicionaTema"))
-			{var ondeArvore = objmapa.guiaMenu+"obj";}
-			else
-			{var ondeArvore = "arvoreAdicionaTema";}
-			var idarvore = retorno.data.grupos[retorno.data.grupos.length - 2].idmenu;
-			//
-			//monta o campo para busca de temas por palavra chave.
-			//
-			if ($i("buscatema"))
-			{var busca = $i("buscatema").value;}
-			if (!document.getElementById("buscatema"))
-			{
-				if(!$i("arvoreAdicionaTema"))
-				{
-					var insp = "<table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
-					insp += "<img src='"+g_locaplic+"/imagens/branco.gif'  height=0 />";
-					insp += "<br><p>&nbsp;"+$trad("a1")+"<input class='digitar' type='text' id='buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='procurartemas()' style='cursor:pointer;top:2px;position:relative;' /></p></td></tr></table><br>";
-					$i(ondeArvore).innerHTML = insp+"<div onmouseover=\"javascript:mostradicasf(this,'Clique no box ao lado de cada tema para ligar ou desligar esse tema, mostrando-o ou não no mapa. Após alterar o estado do tema, aguarde alguns instantes para o mapa ser redesenhado, ou clique no botão aplicar que será mostrado.','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" style='text-align:left;font-size:10px;' id='achados' ></div></div>";
-				}
-				else
-				{$i(ondeArvore).innerHTML = "<div id=buscatema ></div>"}
-				var outrasOpcoes = "<table width='120px' ><tr>";
-				if (g_uploaddbf == "sim")
-				{outrasOpcoes += "<td><div id='updbf' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='uploaddbf()'><img class='uploaddbf' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/></div><td>";}
-				if (g_uploadlocal == "sim")
-				{outrasOpcoes += "<td><div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/></div><td>";}
-				if (g_downloadbase == "sim")
-				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/></div><td>";}
-				if (g_conectarwms == "sim")
-				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/></div><td>";}
-				if (g_conectargeorss == "sim")
-				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";}
-				if (g_nuvemTags == "sim")	
-				{outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='nuvemTags()'><img class='nuvemtags' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/></div><td>";}
-
-				if (objmapa.navegacaoDir == "sim")
-				{
-					outrasOpcoes += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
-				}
-
-				if($i("outrasOpcoesAdiciona"))
-				{$i("outrasOpcoesAdiciona").innerHTML = outrasOpcoes+"</tr></table>";}
-				else
-				$i(ondeArvore).innerHTML += outrasOpcoes;
-			}
-			//
-			//monta a árvore de menus com os grupos e temas no nível raiz
-			//cria o objeto mytreeview2
-			//
-			mytreeview2 = treeviewNew("mytreeview2"+idmenu, "default", ondeArvore, null);
-			$i("mytreeview2"+idmenu).innerHTML += "<br>";
-			//
-			//aqui é incluido um atributo na árvore correspondente ao seu codigo
-			//isso é necessário para identificar qual árvore foi clicada e assim, descobrir o código do menu
-			//isso é necessário pq podem existir mais de uma árvore de menus
-			//
-			$i("mytreeview2"+idmenu).idmenu = idmenu;
-			//
-			//cria a raiz da árvore
-			//
-			var nometemas = $trad("a7");
-			if (idmenu != ""){nometemas += " - "+nomemenu;}
-			mytreeview2.createItem("i"+idmenu, "<b>"+nometemas+"</b>", "foldermapa", true, true, true, null);
-			mytreeview2.itemExpand = expandeGrupo;
-			//
-			//monta a árvore de grupos
-			//
-			var ilt = retorno.data.grupos.length;
-			var i = 0;
-			do
-			{
-				if (retorno.data.grupos[i].nome)
-				{
-					mytreeview2.createItem("g"+i+"_"+idmenu, retorno.data.grupos[i].nome, "folder", true, true, status, "i"+idmenu);
-					$i("g"+i+"_"+idmenu).grupo = i+"a";
-				}
-				//
-				//acrescenta os temas que ficam no nível da raiz da árvore
-				//
-				if (retorno.data.grupos[i].temasraiz)
-				{
-					var stlt = retorno.data.grupos[i].temasraiz.length;
-					var st = 0;
-					if(stlt > 0)
-					{
-						do
-						{
-							var no = retorno.data.grupos[i].temasraiz[st];
-							var nome = no.nome;
-							var lk = no.link;
-							if ( lk != " ")
-							{var lk = "<a href="+lk+" target='blank'>&nbsp;fonte</a>";}
-							var tid = no.tid;
-							var inp = "<input style='text-align:left;cursor:pointer;' onclick='mudaboxnf(\"adiciona\",this)' class='inputsb' style='cursor:pointer' type='checkbox' value="+tid+" onmouseover=\"javascript:mostradicasf(this,'"+$trad("a8")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />";
-							if(navm)
-							nomeTema = "&nbsp;"+inp+nome+lk;
-							else
-							nomeTema = "<span><img src='"+g_locaplic+"/imagens/branco.gif' width='0' height='15' />"+inp+nome+lk+"</span>";
-							mytreeview2.createItem("tema"+i+""+st+"a"+idmenu, nomeTema, imgBranco, false, true, status, "i"+idmenu);
-							st++;
-						}
-						while(st<stlt)
-					}
-					mytreeview2.createItem("", "", imgBranco, false, true, status, "i"+idmenu);
-				}
-				i++;
-			}
-			while(retorno.data.grupos[i])
-			pegavalSistemas(retorno.data.grupos[retorno.data.grupos.length - 1].sistemas);
-		}	
-	};
-	//
-	//faz a chamada em ajax para pegar a lista de grupos de um menu
-	//
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+idmenu+"&listasistemas="+listasistemas+"&listasgrupos=nao";
-	cpObj.call(p,"pegaListaDeGrupos",processaGrupos);
-}
 /*
 Function: i3geo_comboGruposMenu
 
@@ -3505,29 +2944,6 @@ function remapaf()
 	clearTimeout(objmapa.tempo);
 	objmapa.tempo = "";
 	objmapa.temaAtivo = "";
-	//
-	//pega os temas ativados na árvore de menus
-	//
-	var tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();
-	i3GEO.arvoreDeTemas.desativaCheckbox();
-	//
-	//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
-	//
-	if(tsl.length > 0){
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
-		var temp = function(retorno){
-			objaguarde.fecha("ajaxredesenha");
-			if(retorno.data.erro){
-				alert(retorno.data.erro);
-				return;
-			}
-			ajaxredesenha("");					
-		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(tsl.toString())+"&g_sid="+g_sid;
-		cpObj.call(p,"adicionaTema",temp);	
-	}
-	else //isso aqui precisa ser refeito
-	{
 	if ($i(objmapa.guiaTemas+"obj"))
 	{
 		//
@@ -3616,7 +3032,6 @@ function remapaf()
 		};
 		if ((tsd.length > 0) || (tsl.length > 0))
 		{
-			alert(tsl.toString());return;
 			objaguarde.abre("remapa",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid;
 			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
@@ -3626,14 +3041,6 @@ function remapaf()
 	}
 	else
 	{remapaAdicNovos();}
-	//
-	//utilizado na interface flamingo para redesenhar o mapa
-	//
-	if($i("flamingo"))
-	{
-		//atualizaFL();
-	}
-	}
 }
 /*
 Section: eventos
@@ -3826,6 +3233,7 @@ function capturaposicao(e)
 		var c = g_celularef;
 		var ex = objmapa.extentref;
 	}
+	//$i("visual").innerHTML=c
 	var teladd = calcddf(xfig,yfig,c,ex);
 	var teladms = convdmsf(teladd[0],teladd[1]);
 	objposicaocursor.ddx = teladd[0];
@@ -4779,189 +4187,10 @@ YAHOO.extend
 }
 catch(e){};
 /*
-Function: ativaDragDrop
+Function: ativaDragDrop (depreciado)
 
 Ativa a funcionalidade de arrastar e soltar para alteração da ordem de desenho dos temas e para excluir um tema do mapa.
 */
-function ativaDragDrop()
-{
-	var Dom = YAHOO.util.Dom;
-	var Event = YAHOO.util.Event;
-	var DDM = YAHOO.util.DragDropMgr;
-	YAHOO.example.DDList = "";
-	YAHOO.example.DDApp = 
-	{
-    	init: function() 
-    	{
-        	if($i("lixeira"))
-        	{new YAHOO.util.DDTarget("lixeira");}
-        	var lista = objmapa.temas.split(";");
-        	var i = lista.length-1;
-        	if (i >= 0)
-        	{
-	        	do
-	        	{
-               		var ltema = lista[i].split("*");
-               		if($i("arrastar_"+ltema[0]))
-               		{new YAHOO.example.DDList("arrastar_"+ltema[0]);}
-        		}
-        		while(i--)
-        	}
-    	}
-	};
-	YAHOO.example.DDList = function(id, sGroup, config) 
-	{
-	    YAHOO.example.DDList.superclass.constructor.call(this, id, sGroup, config);
-	    this.logger = this.logger || YAHOO;
-    	var el = this.getDragEl();
-    	Dom.setStyle(el, "opacity", 0.67); // The proxy is slightly transparent
-	    this.goingUp = false;
-   		this.lastY = 0;
-	};
-	YAHOO.extend
-	(
-		YAHOO.example.DDList, YAHOO.util.DDProxy, 
-		{
-	    	startDrag: function(x, y) 
-	    	{
-        		this.logger.log(this.id + " startDrag");
-	        	// make the proxy look like the source element
-    	    	var dragEl = this.getDragEl();
-        		var clickEl = this.getEl();
-        		Dom.setStyle(clickEl, "visibility", "hidden");
-	        	dragEl.innerHTML = clickEl.innerHTML;
-	        	Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
-   		    	Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
-    	    	Dom.setStyle(dragEl, "border", "4px solid gray");
-    	    	Dom.setStyle(dragEl, "z-index", "5000");
-    		},
-	    	endDrag: function(e) 
-	    	{
-	        	var srcEl = this.getEl();
-    	    	var proxy = this.getDragEl();
-	        	// Show the proxy element and animate it to the src element's location
-    	    	Dom.setStyle(proxy, "visibility", "");
-        		var a = new YAHOO.util.Motion
-        		( 
-           			proxy,
-            		{ 
-                		points:
-                		{to: Dom.getXY(srcEl)}
-    	        	}, 
-        	   	 	0.2, 
-            		YAHOO.util.Easing.easeOut
-        		);
-        		var proxyid = proxy.id;
-        		var thisid = this.id;
-	        	// Hide the proxy and show the source element when finished with the animation
-	        	a.onComplete.subscribe
-	        	(
-	        		function() 
-	        		{
-                		Dom.setStyle(proxyid, "visibility", "hidden");
-                		Dom.setStyle(thisid, "visibility", "");
-            		}
-            	);
-	        	a.animate();
-	        	if ($i("lixeira"))
-	        	{$i("lixeira").style.border = "0px solid blue";} 	
-    		},
-	    	onDragDrop: function(e, id)
-	    	{
-	        	// If there is one drop interaction, the li was dropped either on the list,
-	        	// or it was dropped on the current location of the source element.
-	        	if (DDM.interactionInfo.drop.length === 1)
-	        	{
-	            	// The position of the cursor at the time of the drop (YAHOO.util.Point)
-	            	var pt = DDM.interactionInfo.point; 
-	            	// The region occupied by the source element at the time of the drop
-	            	var region = DDM.interactionInfo.sourceRegion; 
-	            	// Check to see if we are over the source element's location.  We will
-	            	// append to the bottom of the list once we are sure it was a drop in
-	            	// the negative space (the area of the list without any list items)
-	            	if (!region.intersect(pt))
-	            	{
-                		var destEl = Dom.get(id);
-                		//var destDD = DDM.getDDById(id);
-                		if(DDM.getDDById(id).id != "lixeira")
-                		{
-                 			if(navn)
-							{
-								 var brd = document.createElement("br");
-	                			 brd.appendChild(this.getEl());
-    	            			 destEl.appendChild(brd);
-							}
-							else
-							{destEl.appendChild(this.getEl());}		
-                		}
-                		//destDD.isEmpty = false;
-                		DDM.refreshCache();
-                		//exclui tema
-                		if(DDM.getDDById(id).id == "lixeira")
-                		{
-                			var tema = (this.getEl()).id.split("arrastar_")[1];
-                			objaguarde.abre("ajaxredesenha",$trad("o1"));
-							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
-							cpObj.call(p,"excluiTemas",ajaxredesenha);
-							objmapa.temaAtivo = "";
-						}
-						//muda ordem de desenho do tema
-						else
-						{
- 							var els = $i("mytreeview1").getElementsByTagName("input");
- 							var lista = new Array();
- 							var tempie = els.length;
- 							for (var i=0;i<tempie;i=i+1)
- 							{
- 								if(els[i].type == "checkbox")
- 								{
- 									var itema = els[i].value;
- 									lista.push(itema);
- 								}								
- 							}
- 							var lista = lista.join(',');
- 							if($i("listaTemas")){$i("listaTemas").innerHTML = "";}
-							var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reordenatemas&lista="+lista+"&g_sid="+g_sid;
-							var cp = new cpaint();
-							//cp.set_debug(2)
-							cp.set_response_type("JSON");
-							cp.call(p,"reordenatemas",ajaxredesenha);
-						}
-            		}
-	        	}
-	    	},
-	    	onDrag: function(e) 
-	    	{
-	        	// Keep track of the direction of the drag for use during onDragOver
-	        	var y = Event.getPageY(e);
-	        	if (y < this.lastY) 
-	        	{this.goingUp = true;}
-        		else
-        		if (y > this.lastY)
-        		{this.goingUp = false;}
-	        	this.lastY = y;
-	    	},
-	    	onDragOver: function(e, id) 
-	    	{
-	        	var srcEl = this.getEl();
-	        	var destEl = Dom.get(id);
-	        	// We are only concerned with list items, we ignore the dragover
-	        	// notifications for the list.
-	        	if ($i("lixeira") && id == "lixeira")
-	        	{$i("lixeira").style.border = "1px solid red";}
-	        	else
-	        	{
-	        		destEl.style.textDecoration="underline";
-	        	}
-	    	},
-	    	onDragOut: function(e, id)
-	    	{
-	    		$i(id).style.textDecoration="none";
-	    	}
-		}
-	);
-	Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
-}
 /*
 Function: removeAcentos
 

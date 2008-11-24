@@ -337,6 +337,7 @@ retorno - string no formato "var mapimagem='nome da imagem'".
 */
 function ajaxCorpoMapa(retorno)
 {
+	i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
 	if($i("mst"))
 	{$i("mst").style.display="block";}
 	if (!$i("img")){return;}
@@ -344,7 +345,8 @@ function ajaxCorpoMapa(retorno)
 	{
 		objaguarde.abre("ajaxCorpoMapa1",$trad("o3"));
 		//retorno não é um objeto CPAINT
-		if (retorno.data){retorno = retorno.data;}
+		if(retorno.data){var retorno = retorno.data;}
+		if (retorno.variaveis){var retorno = retorno.variaveis;}
 		if ((retorno != "erro") && (retorno != undefined))
 		{
 			eval(retorno);
@@ -378,6 +380,7 @@ function ajaxCorpoMapa(retorno)
 	}
 	catch(e)
 	{
+		alert("Erro na funcao ajaxCorpoMapa: "+e);
 		calcposf();
 		trataErro();
 		if(g_recupera == 0)
@@ -411,16 +414,12 @@ retorno - string indicando se houve erro na função que chamou.
 */
 function ajaxredesenha(retorno)
 {
+	//limpa o objeto richdraw
+	try{richdraw.clearWorkspace();}catch(e){};
 	try
-	{richdraw.clearWorkspace();}catch(e){};
-	var original = retorno;
-	if (retorno.data)
-	{var retorno = retorno.data;}
-	else {retorno = "";}
-	if ((retorno != "erro") && (retorno != undefined))
 	{
-		if (retorno.search("var mapimagem=") > -1)
-		{objaguarde.abre("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(original);}
+		if(retorno && retorno.data.temas)
+		{objaguarde.abre("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
 		else
 		{
 			//algumas variï¿½eis nï¿½ sï¿½ retornadas, conforme o programa, entï¿½ devem ser declaradas
@@ -476,6 +475,7 @@ function ajaxredesenha(retorno)
 			}			
 		}
 	}
+	catch(e){alert("ajaxredesenha "+e);}
 }
 /*
 Function: ajaxIniciaParametros
@@ -484,7 +484,7 @@ Refaz o mapa e os elementos marginais, como legenda, escala, lista de temas, etc
 
 Parameters:
 
-retorno - string no formato "var variavel='valor'".
+retorno - objeto JSON.
 */
 function ajaxIniciaParametros(retorno)
 {
@@ -501,9 +501,7 @@ function ajaxIniciaParametros(retorno)
 	//utilizado na interface flamingo
 	//
 	if($i("flamingo"))
-	{
-		atualizaFL();
-	}
+	{atualizaFL();}
 	//
 	//limpa os objetos tips da tela
 	//
@@ -533,9 +531,7 @@ function ajaxIniciaParametros(retorno)
 	//
 	if($i("imgh"))
 	{$i("imgh").style.display="block";}
-	if(retorno.data)
-	{var retorno = retorno.data;}
-	if ((retorno != "erro") && (retorno != undefined))
+	try
 	{
 		if ($i("imgL"))
 		{
@@ -543,11 +539,9 @@ function ajaxIniciaParametros(retorno)
 			for (var l=0;l<4; l++)
 			{$i("img"+letras[l]).src="";}
 		}
-		temas = "";
 		mapscale = "";
 		mapexten = "";
-		if (retorno != "")
-		{eval(retorno);}
+		eval(retorno.data.variaveis);
 		if($i("img"))
 		{
 			if (!$i("imgtemp"))
@@ -581,11 +575,12 @@ function ajaxIniciaParametros(retorno)
 		//
 		//verifica se precisa mudar a lista de temas
 		//
-		objmapa.atualizaListaTemas(temas);
+		i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
 		//
 		//atualiza o indicador de compatibilidade de escala se houve um processo de navegacao
 		//
-		objmapa.atualizaFarol(mapscale);
+		if (objmapa.scale != mapscale)
+		i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);
 		//
 		//atualiza mapa de referencia
 		//
@@ -595,10 +590,9 @@ function ajaxIniciaParametros(retorno)
 		//
 		objmapa.scale = mapscale;
 		g_operacao = "";
-		objmapa.temas = temas;
+		i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 		objmapa.cellsize = g_celula;
 		objmapa.extent = mapexten;
-		objmapa.temas = temas;
 		//
 		//arredonda o valor da escala numerica e mostra no mapa se for o caso
 		//
@@ -641,6 +635,7 @@ function ajaxIniciaParametros(retorno)
 			ajustaEntorno();
 		}
 	}
+	catch(e){alert("ajaxIniciaParametros "+e);}
 	mostradicasf("","Tempo de redesenho em segundos: "+tempo,"");
 }
 /*

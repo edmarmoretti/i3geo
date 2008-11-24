@@ -63,36 +63,6 @@ Se for definido como "", é utilizado o template i3geo/aplicmapa/legenda.htm.
 */
 g_templateLegenda = "";
 /*
-Variable: g_kml
-
-Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do 
-link para acesso aos dados via kml.
-
-Veja:
-
-<kml.php>, <funcoes.js>, <ferramentas.js>
-
-Parâmetros:
-
-sim|nao
-*/
-g_kml = "sim";
-/*
-Variable: g_qrcode
-
-Indica se ao lado de cada tema, no menu de adição de temas, será mostrada a opção de geração do 
-link para acesso ao código de barras no formato qrcode.
-
-Veja:
-
-<funcoes.js>, <qr_html.php>
- 
-Parâmetros:
-
-sim|nao
-*/
-g_qrcode = "sim";
-/*
 Variable: g_posicaoLenteX
 
 Define o posicionamento da lente de aumento em relação ao corpo do mapa.
@@ -126,15 +96,8 @@ Veja:
 */
 g_autoRedesenho = 0;
 /*
-Variable: g_tempo_aplicar
-
-Tempo, em segundos, que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
-
-Veja:
-
-<funcoes.js>
+Variable: g_tempo_aplicar (depreciado)
 */
-g_tempo_aplicar = 4000;
 /*
 Variable: g_embedLegenda
 
@@ -167,23 +130,6 @@ Veja:
 
 */
 g_3dmap = "";
-/*
-Variable: g_opcoesTemas
-
-Variável que define se as opções adicionais de cada tema serão mostradas.
-
-As opções são aquelas apresentadas na lista de temas do mapa, quando um tema é expandido.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
-
-*/
-g_opcoesTemas = "sim";
 /*
 Variable: g_mostraRosa
 
@@ -551,34 +497,8 @@ g_funcoesNevegaMapaDefault = new Array(
 	"atualizaconfluence()"
 );
 /*
-Variable: g_listaPropriedades
-
-Objeto com as funções que são incluidas no item propriedades do mapa
-
-Veja:
-
-<iniciamma.js>
-
-Parâmetros:
-
-text - texto que será mostrado na tela
-
-url - função que será executada
+Variable: g_listaPropriedades (depreciado)
 */
-g_listaPropriedades = {
-	"propriedades": [
-	{ text: "p2", url: "javascript:tipoimagem()" },
-	{ text: "p3", url: "javascript:opcoesLegenda()" },
-	{ text: "p4", url: "javascript:opcoesEscala()" },
-	{ text: "p5", url: "javascript:tamanho()" },
-	{ text: "p6", url: "javascript:ativaEntorno()" },
-	{ text: "p7", url: "javascript:ativaLogo()" },
-	{ text: "p8", url: "javascript:queryMap()" },
-	{ text: "p9", url: "javascript:corFundo()" },
-	{ text: "p10", url: "javascript:gradeCoord()" },
-	{ text: "p11", url: "javascript:template()" },
-	{ text: "p12", url: "javascript:autoredesenha()" }
-]};
 /*
 Section: Funcionalidades
 */

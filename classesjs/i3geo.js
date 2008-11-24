@@ -53,13 +53,11 @@ Parameters:
 
 id - id que identifica o texto na variável g_linguagem, definida em configura.js
 */
-var g_linguagem = "";
-var g_traducao = "";
+//var g_linguagem = "";
+//var g_traducao = "";
 var $trad = function(id)
 {
-	//return eval("g_traducao."+id+"[0]."+g_linguagem+";");
-	var t = g_traducao[id][0];
-	return t[g_linguagem];
+	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
 };
 //necessario para nao dar erro no refresh
 var mostradicasf = function(){};

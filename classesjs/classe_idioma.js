@@ -1,5 +1,5 @@
 /*
-Title: i3geo.idioma
+Class: i3geo.idioma
 
 Tradução da interface principal.
 
@@ -11,7 +11,7 @@ Se você está customizando o i3geo,acrescentandonovas funcionalidades,
 utilize o método alteraDicionario para acrescentar novas traduções, dessa forma,
 quandoo usuário escolher oidioma ainterface será adaptada corretamente.
 
-Namespace:
+Class:
 
 i3GEO.idioma
 

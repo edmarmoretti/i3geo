@@ -92,21 +92,12 @@ function iniciaMapa()
 	//
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$protocolo = $protocolo[0];
-	$protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+	$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 	$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
-	if($locidentifica == "")
-	{
-		$locidentifica = $urli3geo."/admin/xmlidentifica.php";	
-	}
-	if (!file_exists($locaplic))
-	{$cp->set_data("erro. $locaplic nao existe (variavel locaplic - corrija o ms_configura.php)");return;}
-	if (!file_exists($map_file))
-	{$cp->set_data("erro. $map_file nao existe (variavel map_file utilize o testainstal.php)");return;}
+	$locidentifica = ($locidentifica == "") ? $urli3geo."/admin/xmlidentifica.php" : $locidentifica;
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
 	$m = new Mapa($map_file);
-	if(!$m->arquivo){$cp->set_data(" erro. Mapfile $map_file nao existe");return;}
-	if(!$m->mapa){$cp->set_data(" erro. Problemas com o mapfile $map_file");return;}
 	$m->mudaQS($w,$h);
 	$m = new Mapa($map_file);
 	$m->mapa->setsize($w,$h);
@@ -114,10 +105,7 @@ function iniciaMapa()
 	//verifica se a legenda deve ser embebida no mapa
 	//
 	$legenda = $m->mapa->legend;
-	if ($embedLegenda == "sim")
-	{$legenda->set("status",MS_EMBED);}
-	else
-	{$legenda->set("status",MS_OFF);}
+	$embedLegenda == "sim" ? $legenda->set("status",MS_EMBED) : $legenda->set("status",MS_OFF);
 	//
 	//salva as alterações feitas
 	//
@@ -146,45 +134,14 @@ function iniciaMapa()
 	$m->salva($map_file);
 	$e = $m->mapa->extent;
 	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+	$escalaMapa = $m->mapa->scale;
+	$celula = $m->mapa->cellsize;
 	//
 	//pega os parametros de cada tema
 	//
 	$arqsel = (file_exists($map_file."qy")) ? true : false;
-	foreach ($m->layers as $oLayer)
-	{
-		if ((strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($oLayer->getmetadata("ESCONDIDO") == ""))
-		{
-			$sel = "nao";
-			if ($arqsel) //verifica se existe alguma selecao
-			{
-				$oLayer->open();
-				$res_count = $oLayer->getNumresults();
-				$oLayer->close();
-				if ($res_count > 0){$sel = "sim";}
-			}
-			$escala = $oLayer->getmetadata("escala");
-			if ($escala == ""){$escala = 0;}
-			$down = $oLayer->getmetadata("download");
-			$ct = $oLayer->connectiontype;
-			
-			if ($oLayer->getmetadata("tema") != "")
-			//
-			//verifica se o tema pode receber a operação de zoom para o tema
-			//
-			$zoomtema = "sim";
-			if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
-			{$zoomtema = "nao";}
-			//
-			//verifica se existe restrição de escala
-			//
-			$contextoescala = "nao";
-			if(($oLayer->minscale > 0) || ($oLayer->maxscale > 0))
-			{$contextoescala = "sim";}
-			//codigo,status,nome,transparencia,tipo,selecao,escala,download,tem features,conexao,tem wfs,permite zoom para o tema
-			$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*nao*".$ct."*nao*".$zoomtema."*".$contextoescala;
-		}
-	}
-	$temas = implode(";",array_reverse($temas));
+	$m = New Mapa($map_file);
+	$temas = $m->parametrosTemas();
 	$nomes = nomeRandomico(12);
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 	$imgo->saveImage($nomer);
@@ -194,7 +151,7 @@ function iniciaMapa()
 	{$nomer = ($imgo->imageurl).basename($nomer);}
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
-	$res = "var temas='".$temas."';var mapexten= '".$ext."';var mapscale=".$m->mapa->scale.";var mapres=".$m->mapa->resolution.";g_celula=".$m->mapa->cellsize.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
+	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 	$res .= ";var refimagem='';var refwidth=0;objmapa.refheight=".$irefH.";var refpath='';var refurl=''";
 	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';g_locsistemas='".$locsistemas."';g_locidentifica='".$locidentifica."'";
 	$r = (isset($R_path)) ? "sim" : "nao";
@@ -211,17 +168,12 @@ function iniciaMapa()
 	$versao = versao();
 	$res .= ";objmapa.versaoms ='".$versao["principal"]."'";
 	//Pega os estilos disponíveis
-	$visual = "";
-	if (file_exists($locaplic."/imagens/visual"))
-	{$visual = implode(",",listaDiretorios($locaplic."/imagens/visual"));}
+	$visual = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
 	$res .= ";objmapa.listavisual='".$visual."'";
 	//pega os usuários navegadores
 	//para efeitos de compatibilidade
 	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."'";
-	if($navegadoresLocais == "sim")
-	$res .= ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true";
-	else
-	$res .= ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=false";
+	$res .= ($navegadoresLocais == "sim") ? ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true" : ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=false";
 	//
 	//verifica se o pacote geoip está instalado ou não
 	//
@@ -230,14 +182,10 @@ function iniciaMapa()
 	{$geoip = "sim";}
 	$res .= ";objmapa.geoip='".$geoip."';";
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
-	if (function_exists("mb_convert_encoding"))
-	{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
-	
 	//
 	//salva uma copia para opção de reiniciar o mapa
 	//
-	//$salvoreinc = $m->mapa->save(str_replace(".map","reinc.map",$map_file));
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
-	$cp->set_data($res);
+	$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));
 }
 ?>

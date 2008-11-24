@@ -119,7 +119,7 @@ array
 			if($this->editor)
 			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
 			else
-			$sql = "SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' order by nome_menu";
+			$sql = "SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
     		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     		$regs = $q->fetchAll();
     		$dbh = null;
@@ -137,7 +137,8 @@ array
 						$status = "fechado";
 						if(strtolower($reg["aberto"]) == "sim")
 						$status = "aberto";
-						$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>"");
+						$url = $this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
+						$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
 					}
 				}
 			}
@@ -243,7 +244,8 @@ array
 			{
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				if($menu["url"] != ""){$ondexml = $menu["url"];}
+				//if($menu["url"] != ""){$ondexml = $menu["url"];}
+				if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
 				if($ondexml != "")
 				{
 					$xml = simplexml_load_file($ondexml);

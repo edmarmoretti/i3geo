@@ -178,17 +178,27 @@ string - javascript com os parametros
 				$contextoescala = "nao";
 				if(($oLayer->minscale > 0) || ($oLayer->maxscale > 0))
 				{$contextoescala = "sim";}
-				$temas[] = ($oLayer->name)."*".($oLayer->status)."*".$oLayer->getmetadata("tema")."*".$oLayer->transparency."*".$oLayer->type."*".$sel."*".$escala."*".$down."*".$f."*".$ct."*nao*".$zoomtema."*".$contextoescala;
+				$temas[] = array(
+					"name"=>($oLayer->name),
+					"status"=>($oLayer->status),
+					"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
+					"transparency"=>($oLayer->transparency),
+					"type"=>($oLayer->type),
+					"sel"=>$sel,
+					"escala"=>$escala,
+					"download"=>$down,
+					"features"=>$f,
+					"connectiontype"=>$ct,
+					"zoomtema"=>$zoomtema,
+					"contextoescala"=>$contextoescala
+				);
 			}
 		}
 		//apaga o arquivo qy se não for necessário
 		if (!$existesel && $qy)
 		{unlink(($this->arquivo)."qy");}
 		$temas = array_reverse($temas);
-		$res = "var temas='".implode(";",$temas)."'";
-		if (function_exists("mb_convert_encoding"))
-		{$res = mb_convert_encoding($res,"UTF-8","ISO-8859-1");}
-		return $res;
+		return $temas;
 	}
 /*
 Method: redesenhaCorpo

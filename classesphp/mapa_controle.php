@@ -152,7 +152,7 @@ if ($funcao == "criaMapa")
 if (!isset($map_file))
 {
 	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
-	$cp->set_data("linkquebrado");
+	$cp->set_data(array("erro"=>"linkquebrado"));
 	$cp->return_data();
 	exit;
 }
@@ -163,7 +163,7 @@ include_once("funcoes_gerais.php");
 //identifica qual a url do i3geo
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-$protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //substitui a string de conexão
@@ -2601,6 +2601,6 @@ function redesenhaMapa()
 	if (($par == "") || ($imagem == ""))
 	{$cp->set_data("erro");}
 	else
-	{$cp->set_data($imagem.";".$par.";var tempo=".(microtime(1) - $tempo));}
+	{$cp->set_data(array("variaveis"=>($imagem.";".$par.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par));}
 }
 ?>
