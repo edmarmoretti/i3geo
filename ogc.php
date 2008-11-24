@@ -74,8 +74,8 @@ include("classesphp/classe_menutemas.php");
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $protocolo = $protocolo[0];
-$protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
-$protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
+$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //pega a lista de menus que será processada
@@ -83,19 +83,20 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //pelo método Menutemas
 //
 if(!isset($perfil)){$perfil = "";}
-if ($menutemas == "")
+if($menutemas != "" || is_array($menutemas))
+{
+	foreach($menutemas as $m)
+	{
+		$menus[] = $m["arquivo"];
+	}
+
+}
+else
 {
 	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
 	foreach($m->pegaListaDeMenus() as $menu)
 	{
 		$menus[] = $menu["url"];
-	}
-}
-else
-{
-	foreach($menutemas as $m)
-	{
-		$menus[] = $m["arquivo"];
 	}
 }
 if(!isset($menus))
@@ -245,6 +246,8 @@ else
 {
 	$conta = 0;
 	$int = explode(",",$intervalo);
+	$codigosTema = array();
+	//var_dump($menus);exit;
 	foreach ($menus as $menu)
 	{	
 		$xml = simplexml_load_file($menu);
@@ -256,40 +259,43 @@ else
 				{
 					if (mb_convert_encoding($tm->OGC,"HTML-ENTITIES","auto") == "")
 					{
-						$codigoTema = mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto");
-						if (@ms_newMapobj("temas/".$codigoTema.".map"))
-						{
-							$nmap = ms_newMapobj("temas/".$codigoTema.".map");
-							$ts = $nmap->getalllayernames();
-							if (count($ts) == 1)
-							{ 
-								foreach ($ts as $t)
-								{
-									if ($oMap->getlayerbyname($t) == "")
-									{
-										$conta++;
-										if (($conta >= $int[0]) && ($conta <= $int[1]))
-										{
-											$l = $nmap->getlayerbyname($t);
-											$l->setmetadata("ows_title",pegaNome($l));
-											$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
-											$l->set("status",MS_OFF);
-											$l->setmetadata("gml_include_items","all");
-											$l->set("dump",MS_TRUE);
-											$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-											$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-											$l->setmetadata("ows_metadataurl_href",mb_convert_encoding($tm->TLINK,"HTML-ENTITIES","auto"));
-											$l->setmetadata("ows_metadataurl_type","TC211");
-											$l->setmetadata("ows_metadataurl_format","text/html");
-											ms_newLayerObj($oMap, $l);
-										}
-									}
-								}
-							}
-						}
+						$codigosTema[] = mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto");
 					}
 				}
 			}		
+		}
+	}
+	foreach($codigosTema as $codigoTema)
+	{
+		if (@ms_newMapobj("temas/".$codigoTema.".map"))
+		{
+			$nmap = ms_newMapobj("temas/".$codigoTema.".map");
+			$ts = $nmap->getalllayernames();
+			if (count($ts) == 1)
+			{ 
+				foreach ($ts as $t)
+				{
+					if ($oMap->getlayerbyname($t) == "")
+					{
+						$conta++;
+						if (($conta >= $int[0]) && ($conta <= $int[1]))
+						{
+							$l = $nmap->getlayerbyname($t);
+							$l->setmetadata("ows_title",pegaNome($l));
+							$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+							$l->set("status",MS_OFF);
+							$l->setmetadata("gml_include_items","all");
+							$l->set("dump",MS_TRUE);
+							$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+							$l->setmetadata("ows_metadataurl_href",mb_convert_encoding($tm->TLINK,"HTML-ENTITIES","auto"));
+							$l->setmetadata("ows_metadataurl_type","TC211");
+							$l->setmetadata("ows_metadataurl_format","text/html");
+							ms_newLayerObj($oMap, $l);
+						}
+					}
+				}
+			}
 		}
 	}
 }

@@ -345,7 +345,7 @@ Note: Configura os endereços corretos no mapfile.
 
 Altera as propriedades imagepath e imageurl corrigindo os caminhos padrão conforme o diretório criado para armazenar o mapa de trabalho.
 */
-$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$protocolo = strtolower(explode("/",$_SERVER['SERVER_PROTOCOL']));
 $w = $mapn->web;
 $atual = $w->imagepath;
 $w->set("imagepath",$atual.$diretorios[2]."/");
@@ -620,6 +620,15 @@ Function: MostraAguarde
 
 Mostra a mensagem de aguarde
 
+Globals:
+
+$interface
+
+$caminho
+
+$mensagemInicia
+
+$tituloInstituicao
 */
 function mostraAguarde()
 {
@@ -643,6 +652,12 @@ function mostraAguarde()
 Function: insereWKTUrl
 
 Insere elementos no mapa a partir de uma string definida em wkt
+
+Globals:
+
+$wkt - string no formato wkt
+
+$nometemawkt - nome do tema que será criado
 */
 function insereWKTUrl()
 {
@@ -708,7 +723,13 @@ function insereWKTUrl()
 /*
 Function: inserePontosUrl
 
-Insere um novo tema com os pontos definidos na variável $pontos
+Insere um tema do tipo ponto
+
+Globals:
+
+$pontos - lista de coordenadas x,y
+
+$nometemapontos - nome do tema que será criado
 
 */
 function inserePontosUrl()
@@ -734,6 +755,8 @@ function inserePontosUrl()
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 	$pontos = explode(" ",trim($pontos));
+	if(count($pontos) == 0)
+	$pontos = explode(",",trim($pontos));
 	foreach ($pontos as $p)
 	{if (is_numeric($p)){$pontosn[] = $p;}}
 	$pontos = $pontosn;
@@ -771,10 +794,15 @@ function inserePontosUrl()
 /*
 Function: insereLinhasUrl
 
-Insere um novo tema com as linhas definidas na variável $linhas
+Insere um tema do tipo linear
 
 As linhas devem ter os pontos separados por espaços e cada linha separada por vírgula
 
+Globals:
+
+$linhas - lista de coordenadas
+
+$nometemalinhas - nome do tema que será criado
 */
 function insereLinhasUrl()
 {
@@ -846,9 +874,15 @@ function insereLinhasUrl()
 /*
 Function: inserePoligonosUrl
 
-Insere um novo tema com os poligonos definidas na variável $poligonos
+Insere um tema poligonal.
 
 Os polígonos devem ter os pontos separados por espaços e cada polígono separado por vírgula
+
+Globals:
+
+$poligonos - lista de coordenadas
+
+$nometemapoligonos - nome do tema que será criado
 
 */
 function inserePoligonosUrl()

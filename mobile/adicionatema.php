@@ -78,7 +78,7 @@ h1
 //identifica qual a url do i3geo
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-$protocolo = $protocolo[0] . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/mobile/adicionatema.php","",$protocolo.$_SERVER["PHP_SELF"]);
 if ($tipo == "listatemas")
 {

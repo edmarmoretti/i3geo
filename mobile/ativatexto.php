@@ -105,20 +105,12 @@ if ($tema == '')
 	include("../classesphp/classe_mapa.php");
 	$m = New Mapa($tmpfname);
 	$par = $m->parametrosTemas();
-	//var_dump($par);
-	$par = mb_convert_encoding($par,"ISO-8859-1","UTF-8");
-	$par = explode("'",$par);
-	$par = explode(";",$par[1]);
 	echo "<h1>Escolha o tema que vc quer mostrar os textos no mapa:</h1>";
-	$existe = false;
 	foreach($par as $p)
 	{
-		$p = explode("*",$p);
-		if(($p[1] == 2) && ($p[4] < 3 ))
-		{
-			$existe=true;
-			echo "<input type=radio value='$p[0]' onclick='ativartema(this.value)' />".$p[2]."<br>";
-		}
+		$existe=true;
+		$titulo = mb_convert_encoding($p["tema"],"ISO-8859-1","UTF-8");
+		echo "<input type=radio value='".$p["name"]."' onclick='ativartema(this.value)' />".$titulo."<br>";
 	}
 	if (!$existe)
 	echo "<span style='color:red' >Nenhum tema dispon&iacute;vel.</br>";
