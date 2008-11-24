@@ -206,6 +206,7 @@ function inverteCores()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}
 	aguarde("block")
@@ -221,6 +222,7 @@ function calculaTamanho()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}
 	aguarde("block")
@@ -243,6 +245,7 @@ function valorU()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
@@ -258,6 +261,7 @@ function simbU()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
@@ -276,6 +280,7 @@ function valorC()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -296,6 +301,7 @@ function valorQ()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
@@ -311,6 +317,7 @@ function representacao()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "outras"
@@ -364,6 +371,7 @@ function aplicaRedesenha()
 {
  	mostralegenda()
  	window.parent.ajaxredesenha('')
+ 	window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 }
 //adiciona totalização no nome da classe
 function adicionaConta()
@@ -507,6 +515,7 @@ function aplicaEstilo()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -562,6 +571,7 @@ function paleta()
 	{
 		aguarde("none")
 		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}
 	var ci = $i("acori").value
