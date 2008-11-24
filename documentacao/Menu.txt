@@ -140,21 +140,26 @@ Group: Programas principais (core)  {
 
    Group: Programas principais em JavaScript (rodam no navegador)  {
 
+      File: classe_arvoredecamadas.js  (no auto-title, classesjs\classe_arvoredetemas.js)
+      File: classe_arvoredetemas.js  (no auto-title, classesjs\classe_arvoredecamadas.js)
+      File: classe_util.js  (no auto-title, classesjs\classe_util.js)
+      File: classe_idioma.js  (no auto-title, classesjs\classe_idioma.js)
       File: atlas.js  (classesjs\atlas.js)
       File: compactajs.js  (classesjs\compactajs.php)
       File: configura.js  (classesjs\configura.js)
       File: datadownload.js  (classesjs\datadownload.js)
       File: ferramentas.js  (classesjs\ferramentas.js)
       File: funcoes.js  (classesjs\funcoes.js)
-      File: g_traducao  (classesjs\traducao.js)
       File: geradordelinks.js  (classesjs\geradordelinks.js)
+      File: i3geo.idioma  (classesjs\classe_idioma.js)
       File: i3geo.js  (classesjs\i3geo.js)
-      File: i3geo_idiomas.js  (classesjs\i3geo_idiomas.js)
+      File: classe_util.js  (classesjs\classe_util.js)
       File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
       File: iniciamma.js  (classesjs\iniciamma.js)
       File: montaMenuSuspenso  (classesjs\menususpenso.js)
       File: redesenho.js  (classesjs\redesenho.js)
       File: wscliente.js  (classesjs\wscliente.js)
+      File: i3GEO.arvoreDeCamadas  (classesjs\classe_arvoredecamadas.js)
       }  # Group: Programas principais em JavaScript (rodam no navegador)
 
    Group: Programas principais em PHP (rodam no servidor)  {
