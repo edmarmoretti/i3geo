@@ -1140,11 +1140,11 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			{$canal = $c;}
 		}
 		$resultado = array();
+		$tipog = "";
 		foreach ($canal->item as $item)
 		{
 			$env = array();
 			//define o tipo
-			$tipog = "";
 			if ($item->xpath('geo:lat')){$tipog = "geo";}
 			if ($item->xpath('georss:point')){$tipog = "georsspoint";}
 			if ($item->xpath('georss:where')){$tipog = "envelope";}
@@ -1199,15 +1199,16 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			include_once ("../pacotes/phpxbase/api_conversion.php");
 			$diretorio = dirname($this->arquivo);
 			$tipol = MS_SHP_POLYGON;
-			if ($tipog != "envelope"){$tipol = MS_SHP_POINT;}
+			if ($tipog == "georsspoint"){$tipol = MS_SHP_POINT;}
+			if ($tipog == "geo"){$tipol = MS_SHP_POINT;}
 			$novonomelayer = nomeRandomico(10)."georss";
 			$nomeshp = $diretorio."/".$novonomelayer;
 			$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 			$novoshpf->free();
-			$def[] = array("titulo","C","254");
-			$def[] = array("link","C","254");
-			$def[] = array("desc","C","254");
-			$def[] = array("categoria","C","254");
+			$def[] = array("TITULO","C","254");
+			$def[] = array("LINK","C","254");
+			$def[] = array("DESC","C","254");
+			$def[] = array("CATEGORIA","C","254");
 			$db = xbase_create($nomeshp.".dbf", $def);
 			$dbname = $nomeshp.".dbf";
 			$reg = array();
@@ -1241,12 +1242,10 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			}
 			xbase_close($db);
 			$novoshpf->free();
-			if ($tipol == MS_SHP_POINT)
+			if ($tipog == "georsspoint" || $tipog == "geo")
 			{$tipol = MS_LAYER_POINT;}
-			if ($tipol == MS_SHP_POLYGON)
+			else
 			{$tipol = MS_LAYER_POLYGON;}
-			if ($tipol == MS_SHP_LINE)
-			{$tipol = MS_LAYER_LINE;}
 			$layer = criaLayer($this->mapa,$tipol,MS_DEFAULT,"GeoRSS","SIM");
 			$layer->set("data",$nomeshp.".shp");
 			$layer->set("name",basename($nomeshp));
