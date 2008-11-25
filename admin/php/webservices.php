@@ -83,7 +83,7 @@ function alterarWS()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('','','','','','','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('','','','','',0,0)");
 			$id = $dbhw->query("SELECT id_ws FROM i3geoadmin_ws");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_ws']);
