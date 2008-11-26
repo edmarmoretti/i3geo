@@ -5,34 +5,26 @@
 <meta name="description" content="OGC"> 
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
 <meta name="robots" content="index,follow">
-<!-- Leitura dos arquivos de estilos -->
-<link rel="stylesheet" type="text/css" href="css/geral.css">
-<link rel="stylesheet" type="text/css" href="pacotes/jsobjects/documentation.css">
+<script type="text/javascript" src="classesjs/i3geo.js"></script>
 <style>
 P 
-{COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{padding-top:12px;COLOR: #2F4632;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 #banner
 {position:absolute;top:0px;left:0px;}
 #arvoreTemas
 {overflow:auto;height:400px;width:280px;position:absolute;top:30px;left:0px;}
 #corpo
-{width:425px;position:absolute;top:30px;left:285px;background:rgb(250,250,250);}
+{text-align:left;font-size:12px;width:425px;position:absolute;top:30px;left:285px;background:rgb(250,250,250);}
 </style>
-<!-- Leitura dos programas javaScript. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
-<script src="pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script type="text/javascript" src="pacotes/jsobjects/jsUI-Global/common.js"></script>
-<script type="text/javascript" src="pacotes/jsobjects/jsUI-Global/uiCommon.js"></script>
-<script type="text/javascript" src="pacotes/jsobjects/jsUI-Treeview/component.js"></script>
+
+
 </head>
-<body style="background-color:white">
+<body class="yui-skin-sam" style="background-color:white">
 
 <div id=banner ><img src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" ></div>
 
 <!-- aqui vai o menu de opções -->
 <div id=arvoreTemas >
-<!--<span style='text-align:left' >Veja também os dados referentes ao mapeamento dos remanescentes de vegetação dos biomas brasileiros:
-<a href="http://mapas.mma.gov.br/mapas/aplic/probio/datadownload.htm" >link</a>
-</span><br><br> -->
 </div>
 <!-- aqui vai o corpo da aplicação -->
 <div id=corpo style="background-color:rgb(250,250,250)">
@@ -75,160 +67,10 @@ Free Software Foundation, Inc., no endereço
 */
 g_locaplic = "."
 g_arvoreClicks = ""
-var processaMenus = function(retorno)
-{
-	var mn = retorno.data.length
-	for (m=0;m<mn; m++)
-	{
-		var publicado = "sim";
-		if(retorno.data[m].publicado)
-		{
-			if(retorno.data[m].publicado == "NAO")
-			var publicado = "nao"
-		}
-		if(publicado == "sim")
-		{
-			document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
-			var nomeM = retorno.data[m].idmenu
-			if(retorno.data[m].nomemenu)
-			var nomeM = retorno.data[m].nomemenu
-			montaGrupos(retorno.data[m].idmenu,nomeM)
-		}
-	}
-}
-var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";
-var cp = new cpaint();
-//cp.set_debug(2)
-cp.set_response_type("JSON");
-cp.call(p,"pegaListaDeMenus",processaMenus);
-
-function montaGrupos(idmenu,nomemenu)
-{
-	var pMenu = function(retorno)
-	{
-		processaGrupos(retorno,idmenu,nomemenu)
-	}
-	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&idmenu="+idmenu+"&map_file=''&listasgrupos=sim&listasistemas=nao";
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegaListaDeGrupos",pMenu);
-}
-/*
-Function: processaGrupos
-
-Recebe os dados da função Ajax com a lista de grupos e subgrupos.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaGrupos(retorno,id_menu,nome_menu)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2", "default", "menu_"+id_menu, null);
-		mytreeview2.createItem("itemMenu"+id_menu, "<b>"+nome_menu+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
-		mytreeview2.itemExpand = expandeGrupo;
-		for (ig=0;ig<retorno.data.grupos.length; ig++)
-		{
-			ogc = "nao";
-			//verifica se existe no grupo temas para download
-			if (retorno.data.grupos[ig].subgrupos)
-			{
-				var ngSgrupo = retorno.data.grupos[ig].subgrupos;
-				if (retorno.data.grupos[ig].subgrupos)
-				{
-					for (sg=0;sg<ngSgrupo.length;sg++)
-					{
-						if (ngSgrupo[sg].ogc == "sim")
-						{ogc = "sim"}
-					}
-				}
-				if (ogc == "sim")
-				{
-					var nomeGrupo = retorno.data.grupos[ig].nome;
-					mytreeview2.createItem("grupo"+ig+"_"+id_menu, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "itemMenu"+id_menu);
-					var cor = "rgb(230,230,230)";
-					for (sg=0;sg<ngSgrupo.length;sg++)
-					{
-						if (ngSgrupo[sg].ogc == "sim")
-						{
-							var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
-							mytreeview2.createItem("sgrupo_"+ig+"_"+sg+"_"+id_menu, nomeSgrupo, g_locaplic+"/imagens/branco0.gif", true, true, false, "grupo"+ig+"_"+id_menu);
-							if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
-							else
-							{var cor = "rgb(230,230,230)";}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-/*
-Function: expandeGrupo
-
-Chama a função ajax que pega a lista de temas de um subgrupo no menu de temas.
-
-Parameters:
-
-itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
-*/
-function expandeGrupo(itemID)
-{
-	g_arvoreClick = itemID;
-	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
-	{
-		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&idmenu="+codigos[3];
-		var cp = new cpaint();
-		//cp.set_debug(2);
-		cp.set_response_type("json");
-		cp.call(p,"pegaListaDeTemas",processaTemas);
-	}
-}
-/*
-Function: processaTemas
-
-Recebe os dados da função Ajax com a lista de temas de um subgrupo.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaTemas(retorno)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		var cor = "rgb(251,246,184)";
-		for (st=0;st<retorno.data.temas.length; st++)
-		{
-			var inp = "";
-			var nome = retorno.data.temas[st].nome;
-			var lk = "";
-			if (retorno.data.temas[st].link != " ")
-			{var lk = "<a href="+retorno.data.temas[st].link+" target=blank>&nbsp;fonte</a>";}
-			if (retorno.data.temas[st].ogc=="sim")
-			{
-				var inp = "<img style='text-align:left;' src="+g_locaplic+"/imagens/tic.png  />";
-				nomeTema = "<span title='clique para ver' onclick='endereco(\""+retorno.data.temas[st].tid+"\")' style='text-align:left;cursor:pointer;background-color:"+cor+"' >"+inp+nome+lk+"</span>";
-				mytreeview2.createItem("tema"+ig+""+sg+""+st, nomeTema, g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
-				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
-				else
-				{var cor = "rgb(251,246,184)";}
-			}
-		}
-		//inclui um item em branco
-		mytreeview2.createItem("vazio", "", g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
-		g_arvoreClicks += ","+g_arvoreClick;
-	}
-}
+i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
+i3GEO.arvoreDeTemas.FILTRAOGC = true
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
+i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this.value\)");
 /*
 Function: endereco
 
@@ -238,7 +80,7 @@ Parameters:
 
 tema - tema para download
 */
-function endereco(tema)
+function ogc_endereco(tema)
 {
 	ins = "<H1>Endere&ccedil;o do web service:</H1><br>"
 	var re = new RegExp(".htm", "g");

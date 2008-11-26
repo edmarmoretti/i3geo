@@ -152,54 +152,6 @@ array
 		return ($resultado);
 	}
 /*
-function: pegaListaDeMapas
-
-Le o arquivo xml com a lista de mapas existente no xml $locmapas.
-
-O perfil do usuário é armazenado na seção na inicialização do I3Geo.
-
-Parameters:
-
-locmapas - endereço do arquivo xml.
-
-return:
-array
-*/
-	function pegaListaDeMapas($locmapas)
-	{
-		//necessário por conta da inclusao do conexao.php
-		$locaplic = $this->locaplic;
-		$perfilgeral = implode(" ",$this->perfil);
-		if($locmapas != "")
-		{$this->xml = simplexml_load_file($locmapas);}
-		else
-		{
-			include_once($this->locaplic."/admin/php/xml.php");
-			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
-		}
-		$mapas = array();
-		//pega os sistemas checando os perfis
-		foreach($this->xml->MAPA as $s)
-		{
-			$ps = ixml($s,"PERFIL");
-			$perfis = str_replace(","," ",$ps);
-			$perfis = explode(" ",$perfis);
-			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
-			{
-				$n = ixml($s,"NOME");
-				$i = ixml($s,"IMAGEM");
-				$t = ixml($s,"TEMAS");
-				$l = ixml($s,"LIGADOS");
-				$e = ixml($s,"EXTENSAO");
-				$o = ixml($s,"OUTROS");
-				$k = ixml($s,"LINKDIRETO");
-				$p = ixml($s,"PUBLICADO");
-				$mapas[] =  array("PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
-			}
-		}
-		return (array("mapas"=>$mapas));
-	}
-/*
 function: pegaListaDeGrupos
 
 Pega a lista de grupos, subgrupos e sistemas adicionais.
@@ -244,7 +196,6 @@ array
 			{
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				//if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
 				if($ondexml != "")
 				{
@@ -265,6 +216,9 @@ array
 		$sistemas = array();
 		$grupos = array();
 		$temasraiz = array();
+		//
+		//pega os temas na raiz
+		//
 		foreach($xml->TEMA as $temar)
 		{
 			$down = "nao";
@@ -274,18 +228,19 @@ array
 			{$down = "sim";}
 			$temp = ixml($temar,"OGC");
 			if (($temp == "nao") || ($temp == "NAO"))
-			{$down = "nao";}
+			{$ogc = "nao";}
 			$link = " ";
 			$temp = ixml($temar,"TLINK");
 			if ($temp != "")
 			{$link = $temp;}
 			$tid = ixml($temar,"TID");
 			$nome = ixml($temar,"TNOME");
-			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 		}
 		foreach($xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
+			//filtra pelo perfil
 			$temp = ixml($grupo,"PERFIL");
 			if ($temp != "")
 			{
@@ -315,7 +270,21 @@ array
 					{$link = $temp;}
 					$tid = ixml($temar,"TID");
 					$nome = ixml($temar,"TNOME");
-					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
+				}
+				$grupodown = "nao";
+				$grupoogc = "nao";
+				foreach($grupo->SGRUPO as $sgrupo)
+				{
+					foreach($sgrupo->TEMA as $tema)
+					{
+						$temp = ixml($tema,"DOWNLOAD");
+						if (($temp == "sim") || ($temp == "SIM"))
+						{$grupodown = "sim";}						
+						$temp = ixml($tema,"OGC");
+						if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
+						{$grupoogc = "sim";}						
+					}
 				}
 				$subgrupos = array();
 				if($listasgrupos=="sim")
@@ -343,7 +312,7 @@ array
 								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
 								$temp = ixml($tema,"OGC");
-								if (($temp != "nao") || ($temp != "NAO"))
+								if (($temp == "") || ($temp != "sim") || ($temp != "SIM"))
 								{$ogc = "sim";}
 							}
 							$nome = ixml($sgrupo,"SDTIPO");
@@ -352,7 +321,7 @@ array
 					}
 				}
 				$nome = ixml($grupo,"GTIPO");
-				$grupos[] = array("nome"=>$nome,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
+				$grupos[] = array("nome"=>$nome,"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
@@ -442,8 +411,17 @@ array
 						{
 							$down = "nao";
 							$ogc = "nao";
+							foreach($sgrupo->TEMA as $tema)
+							{
+								$temp = ixml($tema,"DOWNLOAD");
+								if (($temp == "sim") || ($temp == "SIM"))
+								{$down = "sim";}
+								$temp = ixml($tema,"OGC");
+								if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
+								{$ogc = "sim";}						
+							}
 							$nome = ixml($sgrupo,"SDTIPO");
-							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
+							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
@@ -451,20 +429,20 @@ array
 				foreach($grupo->TEMA as $temar)
 				{
 					$down = "nao";
-					$ogc = "sim";
+					$ogc = "nao";
 					$temp = ixml($temar,"DOWNLOAD");
 					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
 					$temp = ixml($temar,"OGC");
-					if (($temp == "nao") || ($temp == "NAO"))
-					{$ogc = "nao";}
+					if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
+					{$ogc = "sim";}
 					$link = " ";
 					$temp = ixml($temar,"TLINK");
 					if ($temp != "")
 					{$link = $temp;}
 					$tid = ixml($temar,"TID");
 					$nome = ixml($temar,"TNOME");
-					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 				}
 			}
 			$conta = $conta + 1;
@@ -565,7 +543,7 @@ array
 										{$link = ixml($tema,"TLINK");}
 										$tid = ixml($tema,"TID");
 										$nome = ixml($tema,"TNOME");
-										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"down"=>$down,"ogc"=>$ogc);
+										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 									}
 								}
 							}
@@ -578,6 +556,54 @@ array
 		}
 		return ($temas);
 	}
+/*
+function: pegaListaDeMapas
+
+Le o arquivo xml com a lista de mapas existente no xml $locmapas.
+
+O perfil do usuário é armazenado na seção na inicialização do I3Geo.
+
+Parameters:
+
+locmapas - endereço do arquivo xml.
+
+return:
+array
+*/
+	function pegaListaDeMapas($locmapas)
+	{
+		//necessário por conta da inclusao do conexao.php
+		$locaplic = $this->locaplic;
+		$perfilgeral = implode(" ",$this->perfil);
+		if($locmapas != "")
+		{$this->xml = simplexml_load_file($locmapas);}
+		else
+		{
+			include_once($this->locaplic."/admin/php/xml.php");
+			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic,$this->editores));
+		}
+		$mapas = array();
+		//pega os sistemas checando os perfis
+		foreach($this->xml->MAPA as $s)
+		{
+			$ps = ixml($s,"PERFIL");
+			$perfis = str_replace(","," ",$ps);
+			$perfis = explode(" ",$perfis);
+			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
+			{
+				$n = ixml($s,"NOME");
+				$i = ixml($s,"IMAGEM");
+				$t = ixml($s,"TEMAS");
+				$l = ixml($s,"LIGADOS");
+				$e = ixml($s,"EXTENSAO");
+				$o = ixml($s,"OUTROS");
+				$k = ixml($s,"LINKDIRETO");
+				$p = ixml($s,"PUBLICADO");
+				$mapas[] =  array("PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
+			}
+		}
+		return (array("mapas"=>$mapas));
+	}	
 /*
 function: pegaSistemas
 

@@ -106,32 +106,10 @@ function DDinicia()
 	}
 	if (g_tipo == "menutemas")
 	{
-		var processaMenus = function(retorno)
-		{
-			var mn = retorno.data.length
-			for (m=0;m<mn; m++)
-			{
-				var publicado = "sim";
-				if(retorno.data[m].publicado)
-				{
-					if(retorno.data[m].publicado == "NAO")
-					var publicado = "nao"
-				}
-				if(publicado == "sim")
-				{
-					document.getElementById("arvoreTemas").innerHTML += "<div style=text-align:left id='menu_"+retorno.data[m].idmenu+"'></div>"
-					var nomeM = retorno.data[m].idmenu
-					if(retorno.data[m].nomemenu)
-					var nomeM = retorno.data[m].nomemenu
-					ativaMenus(retorno.data[m].idmenu,nomeM)
-				}
-			}
-		}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&map_file=";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"pegaListaDeMenus",processaMenus);
+		i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
+		i3GEO.arvoreDeTemas.FILTRADOWNLOAD = true
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
+		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this.value\)");
 	}
 	if (g_tipo == "dir")
 	{
@@ -142,18 +120,6 @@ function DDinicia()
 		cp.call(p,"listaDiretorios",processaDiretorios);
 	}
 	dataDownloadLinks(g_RSSl)
-}
-function ativaMenus(id_menu,nome_menu)
-{
-	var pMenu = function(retornoM)
-	{
-		processaGrupos(retornoM,id_menu,nome_menu)
-	}				
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=&idmenu="+id_menu+"&tipo=&listasistemas=nao&listasgrupos=sim";
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegaListaDeGrupos",pMenu);			
 }
 /*
 Function: processaDiretorios
@@ -168,7 +134,7 @@ retorno - string formatada com os dados para montagem da árvore.
 */
 function processaDiretorios(retorno)
 {
-	if(!document.getElementById("arvoreTemas"))
+	if(!document.getElementById("arvoreDir"))
 	{
 		alert("Nao foi encontrado o DIV arvoreTemas");
 		return;
@@ -264,122 +230,6 @@ function listaArquivos(dir)
 	cp.call(p,"listaDiretorios",volta);
 }
 /*
-Function: processaGrupos
-
-Recebe os dados da função Ajax com a lista de grupos e subgrupos.
-
-Monta a árvore de navegação baseada no menutemas.xml.
-
-No HTML da interface deve existir um DIV com id='arvoreTemas'. Esse div receberá a árvore de navegação.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaGrupos(retorno,id_menu,nome_menu)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		mytreeview2 = new Object();
-		mytreeview2 = treeviewNew("mytreeview2", "default","menu_"+id_menu, null);	
-		mytreeview2.createItem("itemMenu"+id_menu, "<b>"+nome_menu+"</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
-		mytreeview2.itemExpand = expandeGrupo;
-		for (var ig=0;ig<retorno.data.grupos.length; ig++)
-		{
-			var down = "nao";
-			//verifica se existe no grupo temas para download
-			var ngSgrupo = retorno.data.grupos[ig].subgrupos;
-			if (retorno.data.grupos[ig].subgrupos)
-			{
-				for (sg=0;sg<ngSgrupo.length;sg++)
-				{
-					if (ngSgrupo[sg].download == "sim")
-					{down = "sim"}
-				}
-			}
-			if (down == "sim" && retorno.data.grupos[ig].nome)
-			{
-				var nomeGrupo = retorno.data.grupos[ig].nome;
-				mytreeview2.createItem("grupo"+ig+"_"+id_menu, nomeGrupo, g_locaplic+"/imagens/folder-s.gif", true, true, true, "itemMenu"+id_menu);
-				var cor = "rgb(230,230,230)";
-				for (sg=0;sg<ngSgrupo.length;sg++)
-				{
-					if (ngSgrupo[sg].download != "nao")
-					{
-						var nomeSgrupo = "<span style='background-color:"+cor+"' >"+ngSgrupo[sg].nome+"</span>";
-						mytreeview2.createItem("sgrupo_"+ig+"_"+sg+"_"+id_menu, nomeSgrupo, g_locaplic+"/imagens/branco0.gif", true, true, false, "grupo"+ig+"_"+id_menu);
-						if (cor == "rgb(230,230,230)"){var cor = "rgb(255,255,255)";}
-						else
-						{var cor = "rgb(230,230,230)";}
-					}
-				}
-			}
-		}
-	}
-}
-/*
-Function: expandeGrupo
-
-Chama a função ajax que pega a lista de temas de um subgrupo no menu de temas.
-
-Essa função é definida na função processaGrupos.
-
-Parameters:
-
-itemID - string Id do nó que foi expandido na árvore de grupos e subgrupos.
-*/
-function expandeGrupo(itemID)
-{
-	g_arvoreClick = itemID;
-	if ((itemID.search("sgrupo") > -1) && (g_arvoreClicks.search(itemID) == -1 ))
-	{
-		var codigos = itemID.split("_");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=''&funcao=pegalistadetemas&grupo="+codigos[1]+"&subgrupo="+codigos[2]+"&idmenu="+codigos[3];
-		var cp = new cpaint();
-		//cp.set_debug(2);
-		cp.set_response_type("json");
-		cp.call(p,"pegaListaDeTemas",processaTemas);
-	}
-}
-/*
-Function: processaTemas
-
-Recebe os dados da função Ajax com a lista de temas de um sub-grupo.
-
-Monta a árvore para adição de um novo tema no mapa.
-
-Parameters:
-
-retorno - string formatada com os dados para montagem da árvore.
-*/
-function processaTemas(retorno)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		var cor = "rgb(251,246,184)";
-		for (var st=0;st<retorno.data.temas.length; st++)
-		{
-			var inp = "";
-			var nome = retorno.data.temas[st].nome;
-			var lk = "";
-			if (retorno.data.temas[st].link != " ")
-			{var lk = "<a href="+retorno.data.temas[st].link+" target=blank>&nbsp;fonte</a>";}
-			if (retorno.data.temas[st].down=="sim")
-			{
-				var inp = "<img src="+g_locaplic+"/imagens/down1.gif style='text-align:left;cursor:pointer;' onclick='download(\""+retorno.data.temas[st].tid+"\")' />";
-				nomeTema = "<span style='background-color:"+cor+"' >"+inp+nome+lk+"</span>";
-				mytreeview2.createItem("tema"+g_arvoreClick+""+sg+""+st, nomeTema, g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
-				if (cor == "rgb(251,246,184)"){var cor = "rgb(255,255,255)";}
-				else
-				{var cor = "rgb(251,246,184)";}
-			}
-		}
-		//inclui um item em branco
-		mytreeview2.createItem("vazio", "", g_locaplic+"/imagens/branco0.gif", false, true, true, g_arvoreClick);
-		g_arvoreClicks += ","+g_arvoreClick;
-	}
-}
-/*
 Function: download
 
 Gera os arquivos para download do shape file de um tema.
@@ -388,7 +238,7 @@ Parameters:
 
 tema - código do tema para download
 */
-function download(tema)
+function datadownload_download(tema)
 {
 	document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
 	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download&tema="+tema;

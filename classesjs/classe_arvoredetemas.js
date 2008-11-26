@@ -101,6 +101,25 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUISISTEMAS: true,
 	/*
+	Property: FILTRADOWNLOAD
+	
+	Não mostra na árvore os nós que não possuem temas para download
+	
+	Type:
+	{Boolean}
+	*/
+	FILTRADOWNLOAD: false,
+	/*
+	Property: FILTRAOGC
+	
+	Não mostra na árvore os nós que não permitem a geração de WMS
+	
+	Type:
+	{Boolean}
+	*/
+	FILTRAOGC: false,
+
+	/*
 	Property: ATIVATEMA
 	
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
@@ -263,7 +282,10 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 			funcao.call();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+id_menu+"&listasistemas=nao&listasgrupos=nao";
+		var listasgrupos = "nao";
+		if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD || i3GEO.arvoreDeTemas.FILTRAOGC)
+		var listasgrupos = "sim";
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+id_menu+"&listasistemas=nao&listasgrupos="+listasgrupos;
 		var cp = new cpaint();
 		cp.set_async("true");
 		cp.set_response_type("JSON");
@@ -442,6 +464,8 @@ i3GEO.arvoreDeTemas = {
 		for (var i=0, j=c; i<j; i++)
 		{
 			var desc = dados[i].desc;
+			if(!dados[i].nomemenu)
+			dados[i].nomemenu = dados[i].idmenu;
 			if(dados[i].publicado != "NAO")
 			var conteudo = "<b>&nbsp;<span title='"+desc+"'>"+dados[i].nomemenu+"</span>";
 			else
@@ -503,16 +527,31 @@ i3GEO.arvoreDeTemas = {
 			var raiz = grupos[c].temasraiz;
 			var nraiz = raiz.length;
 			for (i=0;i<nraiz; i++){
-				var html = i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i]);
-				var d = {html:html};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				tempNode.isLeaf = true;
+				var mostra = true;
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && raiz[i].download == "nao")
+				{var mostra = false;}				
+				if(i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc == "nao")
+				{var mostra = false;}				
+				if(mostra){
+					var html = i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i]);
+					var d = {html:html};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					tempNode.isLeaf = true;
+				}
 			}
 			for (i=0;i<c; i++){
-				var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:i};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos, 1);
-				tempNode.isLeaf = false;
+				var mostra = true;
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && grupos[i].download == "nao")
+				{var mostra = false;}
+				if(i3GEO.arvoreDeTemas.FILTRAOGC && grupos[i].ogc == "nao")
+				{var mostra = false;}
+
+				if(mostra){
+					var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:i};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos, 1);
+					tempNode.isLeaf = false;
+				}
 			}
 			node.loadComplete();
 		};
@@ -530,18 +569,34 @@ i3GEO.arvoreDeTemas = {
 			var c = subgrupos.length;
 			var raiz = i3GEO.arvoreDeTemas.SUBGRUPOS.temasgrupo;
 			var nraiz = raiz.length;
+			
 			for (i=0;i<nraiz; i++){
-				var html = i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i]);
-				var d = {html:html};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				tempNode.isLeaf = true;
-			}
+				var mostra = true;
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && raiz[i].download == "nao")
+				{var mostra = false;}
+				if(i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc == "nao")
+				{var mostra = false;}
 
+				if(mostra){
+					var html = i3GEO.arvoreDeTemas.montaTextoTema("gray",raiz[i]);
+					var d = {html:html};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					tempNode.isLeaf = true;
+				}
+			}
 			for (i=0;i<c; i++){
-				var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
-				tempNode.isLeaf = false;
+				var mostra = true;
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && subgrupos[i].download == "nao")
+				{var mostra = false;}
+				if(i3GEO.arvoreDeTemas.FILTRAOGC && subgrupos[i].ogc == "nao")
+				{var mostra = false;}
+
+				if(mostra){
+					var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
+					tempNode.isLeaf = false;
+				}
 			}
 			node.loadComplete();
 		};
@@ -557,14 +612,22 @@ i3GEO.arvoreDeTemas = {
 			var c = temas.length;
 			var cor = "rgb(51, 102, 102)";
 			for (i=0;i<c; i++){
-				htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
-				var d = {html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
-				tempNode.isLeaf = false;
-				if(cor == "rgb(51, 102, 102)")
-				{var cor = "rgb(47, 70, 50)";}
-				else{var cor = "rgb(51, 102, 102)";}
+				var mostra = true;
+				if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && temas[i].download == "nao")
+				{var mostra = false;}
+				if(i3GEO.arvoreDeTemas.FILTRAOGC && temas[i].ogc == "nao")
+				{var mostra = false;}
+
+				if(mostra){
+					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
+					var d = {html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
+					tempNode.isLeaf = false;
+					if(cor == "rgb(51, 102, 102)")
+					{var cor = "rgb(47, 70, 50)";}
+					else{var cor = "rgb(51, 102, 102)";}
+				}
 			}
 			node.loadComplete();
 		};
@@ -605,10 +668,12 @@ i3GEO.arvoreDeTemas = {
 	*/
 	propTemas: function(node){		
 		var g_locaplic = i3GEO.arvoreDeTemas.LOCAPLIC;
-		html = "<a href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
-		var d = {html:html};
-		var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-		tempNode.isLeaf = true;
+		if(node.data.fonte != "" && node.data.fonte != " "){
+			var html = "<a href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
+			var d = {html:html};
+			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+			tempNode.isLeaf = true;
+		}
 		
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.mini == true){
 			var lkmini = g_locaplic+"/testamapfile.php?map="+node.data.idtema+".map&tipo=mini";
@@ -621,7 +686,7 @@ i3GEO.arvoreDeTemas = {
 
 		if (node.data.ogc != "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml == true){
-				var html = "<span style='cursor:pointer;text-decoration:underline;' onclick='abreKml(\""+node.data.idtema+"\")' target='blank' >Kml</span>";		
+				var html = "<a href='#' onclick='abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
 				var d = {html:html};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.isLeaf = true;
@@ -735,14 +800,21 @@ i3GEO.arvoreDeTemas = {
 								var ngTema = ngSgrupo[sg].temas;
 								var tempng = ngTema.length;
 								for (var st=0;st<tempng;st++){
-									//var tid = ngTema[st].tid;
-									var d = i3GEO.arvoreDeTemas.montaTextoTema("gray",ngTema[st]);
-									var lk = "";
-									if ( ngTema[st].link != " ")
-									{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
-									d += " ("+nomeSgrupo+") "+lk;
-									var tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra, false,true);
-									tempNode.isLeaf = true;
+									var mostra = true;
+									if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && ngTema[st].download == "nao")
+									{var mostra = false;}
+									if(i3GEO.arvoreDeTemas.FILTRAOGC && ngTema[st].ogc == "nao")
+									{var mostra = false;}
+
+									if(mostra){
+										var d = i3GEO.arvoreDeTemas.montaTextoTema("gray",ngTema[st]);
+										var lk = "";
+										if ( ngTema[st].link != " ")
+										{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
+										d += " ("+nomeSgrupo+") "+lk;
+										var tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra, false,true);
+										tempNode.isLeaf = true;
+									}
 									conta++;
 								}
 							}
