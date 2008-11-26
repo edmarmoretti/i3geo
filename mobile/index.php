@@ -75,6 +75,7 @@ $mapas = $m->pegaListaDeMapas($locmapas);
 echo "<h1>Escolha um dos mapas:</h1>";
 foreach($mapas["mapas"] as $obj)
 {
+	if($obj["TEMAS"] != "") 
 	echo "<input type=radio onclick='ligar(\"".$obj["TEMAS"]."\",\"".$obj["LIGADOS"]."\")' />".$obj["NOME"]."<br><br>";
 }
 echo "<h1>ou uma das op&ccedil;&otilde;es:</h1>";

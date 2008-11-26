@@ -92,27 +92,31 @@ if ($tipo == 'executa')
 		$layer = $linha["layer"];
 		foreach ($lugares as $lugar)
 		{
+			$x = array();
+			$y = array();
 			$wkt = $lugar["limite"];
-			$wkt = str_replace("POLYGON","",$wkt);
-			$wkt = explode("(",$wkt);
-			$wkt = explode(")",$wkt[2]);
-			$wkt = explode(",",$wkt[0]);
+			$wkt = str_replace("POLYGON((","",$wkt);
+			$wkt = str_replace("))","",$wkt);
+			$wkt = explode(",",$wkt);
+			//echo "<br>".var_dump($wkt);
 			for($w=0;$w<count($wkt); $w++)
 			{
  				$temp = explode(" ",$wkt[$w]);
  				$x[] = $temp[0];
  				$y[] = $temp[1];
 			}
+
 			$xMin = min($x);
 			$xMax = max($x);
 			$yMin = min($y);
 			$yMax = max($y);
+
 			$wkt = $xMin.",".$yMin.",".$xMax.",".$yMax;
+			//echo "<br>Final ".$wkt."<br>";
 			$gid = $lugar["gid"];
 			$nome = mb_convert_encoding($lugar["nome"],"ISO-8859-1","UTF-8");
 			echo "<input type='radio' onclick=\"zoom('".$wkt."','".$layer."','".$gid."','".$nome."')\" />".$nome."<br>";
 		}
-		
 	}
 }
 if($tipo == "zoom")
