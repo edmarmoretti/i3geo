@@ -106,9 +106,9 @@ es:"Ventanas"
 }],
 "s4": [
 {
-pt: "Arquivo",
+pt: "Arquivos",
 en:"Files",
-es:"Archivo"
+es:"Archivos"
 }],
 "s5": [
 {

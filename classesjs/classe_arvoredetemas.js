@@ -174,6 +174,16 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ARVORE: null,
 	/*
+	Variable: DRIVES
+	
+	Objeto JSON com a lista de drives no servidor que podem ser abertos na opção de navegação pelos diretórios
+	
+	Type:
+	{JSON}
+	*/
+	DRIVES: null,
+
+	/*
 	Variable: SISTEMAS
 	
 	Objeto JSON com a lista de sistemas existentes
@@ -379,7 +389,32 @@ i3GEO.arvoreDeTemas = {
 		cp.set_response_type("JSON");
 		cp.call(p,"pegasistemas",retorno);
 	},
+	/*
+	Method: listaDrives
+	Lista os endereços no servidor dos drives que podem ser abertos pela opção de navegação em arquivos no servidor.
+	
+	Alista de drives deve ser definida emi3geo/ms_configura.php
+	
+	Parameters:
+	
+	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
+	g_locaplic - {String} Endereço da aplicação (i3geo) onde fica o diretório classesphp
+
+	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
+	*/
+	listaDrives: function(g_sid,g_locaplic,funcao) {
+		var retorno = function(retorno) {
+			i3GEO.arvoreDeTemas.DRIVES = retorno.data[0];
+			if(funcao != "")
+			funcao.call();
+		};
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaDrives";
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaDrives",retorno);
+	},
 	/*
 	Method: cria
 	Cria a árvore com os menus disponíveis.
@@ -455,6 +490,24 @@ i3GEO.arvoreDeTemas = {
 			var d = {html:outrasOpcoes+"&nbsp;<br>"};
 			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 			tempNode.isLeaf = true;
+			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true){
+				var retorno = function(){
+					var conteudo = "&nbsp;"+$trad("a6");;
+					var d = {html:conteudo};
+					var tempNode = new YAHOO.widget.HTMLNode(d,root, false,true);
+					var drives = i3GEO.arvoreDeTemas.DRIVES;
+					var iglt = drives.length;
+					var ig=0;
+					do{
+						var d = {html:drives[ig].nome,caminho:drives[ig].caminho};
+						var drive = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+						drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
+						ig++;
+					}
+					while(ig<iglt)
+				};
+				i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,retorno);
+			}
 		}
 		//
 		//adiciona na árvore a raiz de cada menu
@@ -633,6 +686,38 @@ i3GEO.arvoreDeTemas = {
 		};
 		i3GEO.arvoreDeTemas.listaTemas(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,node.data.idmenu,node.data.idgrupo,node.data.idsubgrupo,temp)
 	},
+	montaDir: function(node){
+		var montaLista = function(retorno)
+		{
+			var dirs = retorno.data.diretorios;
+			for (ig=0;ig<dirs.length;ig++)
+			{
+				var conteudo = dirs[ig];
+				var d = {html:conteudo,caminho:node.data.caminho+"/"+conteudo};
+				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
+			}
+			var arquivos = retorno.data.arquivos;
+			for (ig=0;ig<arquivos.length;ig++)
+			{
+				var conteudo = arquivos[ig];
+				if(conteudo.search(".tif") > 1 || conteudo.search(".TIF") > 1 || conteudo.search(".shp") > 1 || conteudo.search(".SHP") > 1)
+				{
+					var conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='incluir(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
+					var d = {html:conteudo,caminho:node.data.caminho+"/"+conteudo};
+					var nodeSHP = new YAHOO.widget.HTMLNode(d, node, false,true);
+					nodeSHP.isLeaf = true;
+				}
+			}
+			node.loadComplete();
+		}
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.arvoreDeTemas.SID+"&funcao=listaArquivos&diretorio="+node.data.caminho;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaDrives",montaLista);
+	},
+	
 	/*
 	Function: montaTextoTema
 	Monta o texto com o título do tema.
@@ -730,8 +815,8 @@ i3GEO.arvoreDeTemas = {
 		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags == true)
 		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='nuvemTags()'><img class='nuvemtags' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/></div><td>";
-		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
-		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
+		//if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
+		//ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
 		ins += "</tr></table>";
 		return(ins);
 	},

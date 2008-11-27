@@ -3963,6 +3963,29 @@ function desenhoRichdraw(tipo,objeto,n)
 Section: outros
 */
 /*
+Function: incluir
+
+Inclui um arquivo shapefile no mapa atual como uma nova camada
+
+Parameters:
+
+path - caminho completo do shapefile
+*/
+function incluir(path)
+{
+	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	var temp = path.split(".")
+	if ((temp[1] == "SHP") || (temp[1] == "shp"))
+	{var f = "adicionaTemaSHP";}
+	else
+	{var f = "adicionaTemaIMG";}
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao="+f+"&arq="+path;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,f,ajaxredesenha);
+}
+/*
 Function: i3geo_pegaElementoPai
 
 Pega o elemento pai de um elemento clicado para identificar o código do tema.
