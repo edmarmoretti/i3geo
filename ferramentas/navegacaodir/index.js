@@ -1,23 +1,37 @@
-parametrosURL()
-mytreeview2 = new Object();
-aguarde("block")
-listaDrives();
+
 function listaDrives()
 {
 	var montaListaDrives = function(retorno)
 	{
-		retorno = retorno.data[0];
-		if ((retorno != "erro") && (retorno != undefined))
-		{
-			mytreeview2 = treeviewNew("mytreeview2", "default", "arvoreL", null);
-			mytreeview2.createItem("drives", "<b>Drives</b>", g_locaplic+"/imagens/temas.png", true, true, true, null);
-			mytreeview2.itemExpand = expandeItem;
-			for (ig=0;ig<retorno.length;ig++)
-			{
-				mytreeview2.createItem(retorno[ig].caminho, retorno[ig].nome, g_locaplic+"/imagens/folder-s.gif", true, true, true, "drives");
+		var currentIconMode;
+		YAHOO.example.treeExample = new function(){
+			function changeIconMode(){
+				var newVal = parseInt(this.value);
+				if (newVal != currentIconMode)
+				{currentIconMode = newVal;}
+				buildTree();
 			}
+        	function buildTree(){
+				arvore = new YAHOO.widget.TreeView("arvoreL");
+				var root = arvore.getRoot();
+				var tempNode = new YAHOO.widget.TextNode('', root, false);
+				tempNode.isLeaf = false;
+        	}
+    		buildTree();
+		}();
+		var root = arvore.getRoot();
+		//
+		//adiciona na árvore a raiz de cada menu
+		//
+		var c = retorno.data[0];
+		for (ig=0;ig<c.length;ig++)
+		{
+			var conteudo = c[ig].nome;
+			var d = {html:conteudo,caminho:c[ig].caminho};
+			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+			tempNode.setDynamicLoad(expandeItem, currentIconMode);
 		}
-		aguarde("none")
+   		arvore.draw();
 	}
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaDrives";
 	var cp = new cpaint();
@@ -25,24 +39,22 @@ function listaDrives()
 	cp.set_response_type("JSON");
 	cp.call(p,"listaDrives",montaListaDrives);
 }
-function expandeItem(itemID)
+function expandeItem(node)
 {
-	aguarde("block")
 	var montaLista = function(retorno)
 	{
-		if ((retorno.data != "erro") && (retorno.data != undefined))
+		var dirs = retorno.data
+		for (ig=0;ig<dirs.length;ig++)
 		{
-			for (ig=0;ig<retorno.data.length;ig++)
-			{
-				if (!$i(itemID+"/"+retorno.data[ig]))
-				var id = itemID+"/"+retorno.data[ig]
-				var nome = "<span style=cursor:pointer;color:blue title='Clique para ver os arquivos' onclick='listaarquivos(\""+id+"\")'>"+retorno.data[ig]+"</span>"
-				mytreeview2.createItem(id, nome, g_locaplic+"/imagens/folder-s.gif", true, true, true, itemID);
-			}
+			var conteudo = dirs[ig];
+			var d = {html:conteudo,caminho:node.data.caminho+"/"+conteudo};
+			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+			tempNode.setDynamicLoad(expandeItem, 1);
 		}
-		listaarquivos(itemID)
+		node.loadComplete();
+		//listaarquivos(itemID)
 	}
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaDiretorios&diretorio="+itemID;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaDiretorios&diretorio="+node.data.caminho;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
