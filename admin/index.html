@@ -8,24 +8,15 @@
 <body>
 <div style=width:80%;text-align:left;>
 <h1>Administração do i3geo</h1>
-<div id=indice ></div>
-
 <fieldset>
-<legend>Observações</legend>
-<p>Para mais informações sobre a administração do i3geo, veja a documentação no <a href="www.softwarepublico.gov.br">Portal do Software Público Brasileiro (PSPB).</a>
-Você precisará se inscrever no Portal e ingressar na comunidade i3geo. Na página da comunidade, existem vários documentos que explicam como instalar e configurar o i3geo.</p>
-<p>De forma geral, você deverá seguir as seguintes etapas na configuração:</p>
-<p>1 - instalação e configuração
-<p>2 - criação dos mapfiles no editor de mapfiles
-<p>3 - Edição dos temas, vinculando um tema a um detereminado mapfile
-<p>4 - organização das camadas em grupos e sub-grupos
-<p>5 - configuração de mapas e atlas
-<p>6 - edição do cadastro de web services e sistemas especiais
-<p>7 - customização das ferramentas e interface
-<p>Antes da versão 4.0 o i3geo utilizava arquivos armazenados em disco (arquivos XML) para organizar 
-as camadas e outras listagens. 
+<legend>Leia-me</legend>
+<div style=display:none; >
+<p>Antes da versão 4.0 o i3geo utilizava arquivos armazenados em disco (arquivos XML) para configurar as 
+árvores deadição de camadas, listagens de endereços, lista de mapas, etc.  
 Com a nova estrutura de administração, esses arquivos podem ser substituídos por registros em bancos de dados.
-Se você opotar por usar um banco de dados, os arquivos antigos poderão ser importados para o banco (veja as opções de importação abaixo).</p>
+Se você optar por usar um banco de dados, os arquivos antigos poderão ser importados para o banco 
+(veja as opções de importação). Se vc desejar continuar utilizando os arquivos XML emdisco, basta editar as variáveis 
+de configuração existentes emi3geo/ms_configura.php.</p>
 <p>Para possibilitar a distribuição do i3geo de forma independente de banco de dados, optou-se pelo uso do gerenciador 
 SQLITE, cujo arquivo com os dados fica armazenado em i3geo/menutemas/admin.db. Os programas em PHP que gerenciam esse banco 
 utilizam o pacote PDO, possibilitando que seja utilizado outro gerenciador, como o POSTGRESQL, entre outros.</p>
@@ -40,11 +31,13 @@ O controle sobre a fonte desses XMLs é feito por meio da definição de variáveis 
 Quando se utiliza a estrutura padrão das tabelas, como pode ser visto no banco SQLITE, o i3geo fornece programas PHP 
 que geram os arquivos XML em sua formatação correta (veja os arquivos XML existentes no diretório i3geo/menutemas). 
 Caso você queira utilizar uma estrutura de banco de dados diferente, será necessário criar os programas em PHP para a geração 
-dos arquivos XML. 
+dos arquivos XML.
+</div> 
 </fieldset>
 <br>
 <fieldset>
 <legend>Configuração geral</legend>
+<div style=display:none; >
 <div id=a1 style=display:none;background-color:beige >
 	<p>Após instalar o i3geo, tente abrí-lo no navegador e faça o teste de instalação para ver se está tudo funcionando bem.</p>
 	<p>Caso seja identificado algum problema, experimente alterar as variáveis de configuração e os parâmetros dos arquivos mapfiles utilizados na inicialização do i3geo.</p>
@@ -57,10 +50,12 @@ dos arquivos XML.
 <tr onclick="abre('html/ms_configura.html')"><td><div class=aplicar ></div></td><td>Editar variáveis de configuração (ms_configura.php)</td></tr>
 <tr onclick="abre('html/mapfiles.html')"><td><div class=aplicar ></div></td><td>Editar os arquivos mapfile básicos utilizados na inicialização</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Editor de mapfiles</legend>
+<div style=display:none; >
 <div id=a8 style=display:none;background-color:beige >
 	<p>As camadas disponíveis no i3geo são mantidas em arquivos na estrutura mapfile armazenados no diretório i3geo/temas
 	<p>Esses arquivos são utilizados na formação da árvore de adição de temas e em vários aplicativos do i3geo.
@@ -70,10 +65,12 @@ dos arquivos XML.
 <tr onclick="ajuda('a8',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/editormapfile.html')"><td><div class=aplicar ></div></td><td>Edição</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Edição das tabelas auxiliares e do menu de adição de temas</legend>
+<div style=display:none; >
 <div id=a2 style=display:none;background-color:beige >
 	<p>Para editar o menu de temas é necessário primeiro ter a lista de grupos, sub-grupos e temas. Essas listas são utilizadas para compor a árvore hierárquica de temas, onde grupos contém sub-grupos 
 que por sua vez contém temas.</p>
@@ -89,10 +86,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/arvore.html')"><td><div class=aplicar ></div></td><td>Editar a árvore dos menus</td></tr>
 <tr onclick="abre('html/importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Mapas</legend>
+<div style=display:none; >
 <div id=a3 style=display:none;background-color:beige >
 	<p>Mapas são links especiais que abrem o i3geo com parâmetros específicos, como a extensão geográfica, temas ligados e temas desligados.</p>
 	<p>A lista de mapas é utilizada na guia "mapas" do i3geo e também na versão mobile.</p>
@@ -102,10 +101,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/mapas.html')"><td><div class=aplicar ></div></td><td>Edição dos mapas</td></tr>
 <tr onclick="abre('html/mapas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Atlas</legend>
+<div style=display:none; >
 <div id=a7 style=display:none;background-color:beige >
 	<p>A interface Atlas é uma forma especial de apresentar as camadas organizadas no i3geo. 
 	Um atlas é composto de pranchas que por sua vez contém camadas pré-definidas. Cada Atlas e cada prancha pode ter um texto explicativo, mostrado ao usuário em uma janela interna do i3geo.</p>
@@ -118,10 +119,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/atlas.html')"><td><div class=aplicar ></div></td><td>Edição dos atlas</td></tr>
 <tr onclick="abre('html/atlas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Cadastro de web services e links para download</legend>
+<div style=display:none; >
 <div id=a4 style=display:none;background-color:beige >
 	<p>O i3geo possibilita o acesso a dados por meio da tecnologia de web services.</p>
 	<p>Dessa forma, é possível incluir camadas no mapa que estão em servidores de dados remotos.</p>
@@ -136,10 +139,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/webservices.html')"><td><div class=aplicar ></div></td><td>Edição do cadastro</td></tr>
 <tr onclick="abre('html/webservices_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Sistemas especiais de identificação</legend>
+<div style=display:none; >
 <div id=a5 style=display:none;background-color:beige >
 	<p>A ferramenta de identificação do i3geo, que mostra informações de acordo com um ponto clicado pelo usuário no mapa, permite a inclusão de sistemas de busca especiais.</p>
 	<p>Essas funções de busca são programas independentes, em PHP por exemplo, executados via URL e com parâmetros que identificam o x e y clicado no mapa.</p> 
@@ -149,10 +154,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/identifica.html')"><td><div class=aplicar ></div></td><td>Edição dos sistemas</td></tr>
 <tr onclick="abre('html/identifica_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Sistemas especiais que adicionam camadas</legend>
+<div style=display:none; >
 <div id=a6 style=display:none;background-color:beige >
 	<p>A adição de camadas no mapa mostrado no i3geo normalmente é feita por meio da escolha das camadas disponíveis na guia de adição de temas.</p>
 	<p>Para permitir a integração do i3geo com outros sistemas, pode-se selecionar programas especiais que permitem a interação com o usuário e a montagem de camadas baseadas em sistemas diversos.</p>
@@ -164,10 +171,12 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('html/sistemas.html')"><td><div class=aplicar ></div></td><td>Edição dos sistemas</td></tr>
 <tr onclick="abre('html/sistemas_importar.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 <fieldset>
 <legend>Outras opções</legend>
+<div style=display:none; >
 <table class=lista1 >
 <tr onclick="abre('php/sqlite.php')"><td><div class=aplicar ></div></td><td>Descrição do banco padrão (SQLITE)</td></tr>
 <tr onclick="abre('php/criabanco.php')"><td><div class=aplicar ></div></td><td>Criar banco de dados</td></tr>
@@ -183,6 +192,7 @@ que por sua vez contém temas.</p>
 <tr onclick="abre('rssgrupos.php')"><td><div class=aplicar ></div></td><td>Ver RSS com os grupos, subgrupos e temas</td></tr>
 <tr onclick="abre('hiperbolica.php')"><td><div class=aplicar ></div></td><td>Ver XML para árvorehiperbólica</td></tr>
 </table>
+</div>
 </fieldset>
 <br>
 </div>
@@ -198,7 +208,7 @@ Menu principal do sistema de administração
 
 File: i3geo/admin/index.html
 */
-ativaIndice("indice")
+//ativaIndice("indice")
 ativaTR()
 ativaLegenda()
 

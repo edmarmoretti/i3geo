@@ -89,8 +89,20 @@ i3GEO.arvoreDeTemas = {
 		incluibusca: true,
 		kml: true,
 		qrcode: true,
-		mini: true
+		mini: true,
+		estrelas: true
 	},
+	/*
+	Property: FATORESTRELA
+	
+	Valor que será utilizado para dividir o valor bruto do número de acessos de cada tema.
+	
+	A divisão é utilizada para definir quantas estrelas serão mostradas na árvore de opções adicionais.<b> 
+
+	Type:
+	{Numeric}
+	*/
+	FATORESTRELA: 1,
 	/*
 	Property: INCLUISISTEMAS
 	
@@ -657,7 +669,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaTemas
-	Monta a lista de temas de um nó do tipo sub-grupo. 
+	Monta a lista de temas de um nó. 
 	*/
 	montaTemas: function(node){		
 		var temp=function(){
@@ -673,7 +685,7 @@ i3GEO.arvoreDeTemas = {
 
 				if(mostra){
 					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
-					var d = {html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
+					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
 					tempNode.isLeaf = false;
@@ -787,6 +799,17 @@ i3GEO.arvoreDeTemas = {
 			var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
 			var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
 			var html = "<a onmouseover='mostradicasf(this,\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>";	
+			var d = {html:html};
+			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+			tempNode.isLeaf = true;
+		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.estrelas == true){
+			var n = parseInt(node.data.nacessos / i3GEO.arvoreDeTemas.FATORESTRELA);		
+			if(n >= 5){var n = 5;}
+			if(n > 0)
+			var html = "<img src='"+$im("e"+n+".png")+"'/>";
+			else
+			var html = "<img src='"+$im("e0.png")+"'/>";
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;

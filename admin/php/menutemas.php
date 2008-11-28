@@ -27,9 +27,11 @@ File: i3geo/admin/mapfiles.php
 19/6/2007
 
 */
-
-include_once("admin.php");
-error_reporting(E_ALL);
+error_reporting(0);
+if(isset($funcao))
+{include_once("admin.php");}
+else
+{$funcao = "";}
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -897,7 +899,7 @@ function importarXmlMenu()
 		{
 			$nome = str_replace("'","",$nome);
 			$descricao = str_replace("'","",$descricao);
-			$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+			$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 		}
 		$temasExistentes[$codigo] = 0;
 	}
@@ -925,7 +927,7 @@ function importarXmlMenu()
 			{
 				$nome = str_replace("'","",$nome);
 				$descricao = str_replace("'","",$descricao);
-				$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+				$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 			}
 			$temasExistentes[$codigo] = 0;
 		}
@@ -953,7 +955,7 @@ function importarXmlMenu()
 				{
 					$nome = str_replace("'","",$nome);
 					$descricao = str_replace("'","",$descricao);
-					$dbhw->query("INSERT INTO i3geoadmin_temas (kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES ('$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+					$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 				}
 				$temasExistentes[$codigo] = 0;
 			}

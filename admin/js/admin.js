@@ -50,7 +50,7 @@ function ativaIndice(onde)
 	var f = document.getElementsByTagName("fieldset")
 	for(t = 0;t < f.length;t++)
 	{
-		f[t].innerHTML += "<p><a href='#indice'>índice</a></p>"
+		//f[t].innerHTML += "<p><a href='#indice'>índice</a></p>"
 	}
 	var etrs = document.getElementsByTagName("legend")
 	var ins = "<fieldset><legend><a name='indice' ><b>Índice</b></a></legend>"

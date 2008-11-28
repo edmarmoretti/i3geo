@@ -729,6 +729,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 */
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
+		error_reporting(0);
+		include_once($locaplic."/admin/php/menutemas.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
@@ -736,6 +738,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 		$zoomlayer = "";
 		foreach ($temas as $nome)
 		{
+			$this->adicionaAcesso($nome,$locaplic);
 			$nomemap = "";
 			//
 			//verifica se o tema é um arquivo php
@@ -755,8 +758,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 					$nmap = ms_newMapObj($nomemap);
 					$novosnomes = $nmap->getAllLayerNames();
 					//define nomes unicos para os temas
-					//foreach ($novosnomes as $n)
-					//{$random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;}
 					foreach ($novosnomes as $n)
 					{
 						if(!@$this->mapa->getlayerbyname($n))
@@ -1317,6 +1318,22 @@ $arq - Nome do arquivo.
 			$layer->setmetadata("TEMALOCAL","NAO");
 		}
 		return("ok");
+	}
+	function adicionaAcesso($codigo_tema,$locaplic)
+	{
+    	$resultado = array();
+    	include("$locaplic/admin/php/conexao.php");
+    	$sql = "select nacessos from i3geoadmin_temas WHERE codigo_tema = '$codigo_tema' and not(nacessos isnull)";
+    	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+    	$dados = $q->fetchAll();
+    	//var_dump($dados);
+    	if(count($dados[0])>0)
+    	$nacessos = $dados[0]["nacessos"] + 1;
+    	else
+    	$nacessos = 1;
+   		$dbhw->query("UPDATE i3geoadmin_temas SET nacessos = $nacessos WHERE codigo_tema = '$codigo_tema'");
+    	$dbh = null;
+    	$dbhw = null;
 	}
 }
 ?>

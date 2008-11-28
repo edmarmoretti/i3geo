@@ -277,17 +277,16 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	//
 	//pega os temas na raiz
 	//
-	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.id_nivel = 0 and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
+	$q = "select nacessos,nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.id_nivel = 0 and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
 	$qtemasraiz = $dbh->query($q);
 	geraXmlMenutemas_notema($qtemasraiz,&$xml,$perfil);
 	$q = "select nome_grupo,desc_grupo,n1.id_grupo,n1.id_n1,n1.n1_perfil as perfil from i3geoadmin_n1 as n1,i3geoadmin_grupos as grupos where n1.id_menu = $id_menu and n1.id_grupo = grupos.id_grupo ";
 	$qgrupos = $dbh->query($q);
 	foreach($qgrupos as $row)
 	{
+		//filtra pelo perfil
 		if($row["perfil"] == "")
-		{
-			$mostra = true;
-		}
+		{$mostra = true;}
 		else
 		{
 			$perfilatual = explode(" ",str_replace(","," ",$row["perfil"]));
@@ -300,7 +299,7 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 			//
 			//pega temas na raiz
 			//
-			$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.nivel = 1 and r.id_nivel = ".$row["id_n1"]." and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
+			$q = "select nacessos,nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,r.perfil as perfil from i3geoadmin_raiz as r,i3geoadmin_temas as temas where r.nivel = 1 and r.id_nivel = ".$row["id_n1"]." and r.id_tema = temas.id_tema and r.id_menu = $id_menu ";
 			$qtemasraiz = $dbh->query($q);
 			geraXmlMenutemas_notema($qtemasraiz,&$xml,$perfil);
 			if(isset($tipo) && ($tipo == "subgrupos") || ($tipo == ""))
@@ -342,7 +341,7 @@ function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 }
 function geraXmlMenutemas_pegatemas($id_n2,$xml,$dbh,$perfil)
 {
-	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,n3.n3_perfil as perfil from i3geoadmin_n3 as n3,i3geoadmin_temas as temas where n3.id_n2 = $id_n2 and n3.id_tema = temas.id_tema ";
+	$q = "select nacessos,nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,n3.n3_perfil as perfil from i3geoadmin_n3 as n3,i3geoadmin_temas as temas where n3.id_n2 = $id_n2 and n3.id_tema = temas.id_tema ";
 	$qtemas = $dbh->query($q);
 	geraXmlMenutemas_notema($qtemas,&$xml,$perfil);
 }
@@ -373,6 +372,7 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 			else
 			$xml .= "<OGC>".$row["ogc_tema"]."</OGC>\n";
 			$xml .= "<DOWNLOAD>".$row["download_tema"]."</DOWNLOAD>\n";
+			$xml .= "<NACESSOS>".$row["nacessos"]."</NACESSOS>\n";
 			$xml .= "</TEMA>\n";
 		}
 	}

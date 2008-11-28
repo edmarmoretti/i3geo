@@ -543,7 +543,7 @@ array
 										{$link = ixml($tema,"TLINK");}
 										$tid = ixml($tema,"TID");
 										$nome = ixml($tema,"TNOME");
-										$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
+										$temas[] = array("nacessos"=>(ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 									}
 								}
 							}
