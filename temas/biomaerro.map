@@ -6,7 +6,7 @@ LAYER
   STATUS OFF
   TEMPLATE "none.htm"
   CONNECTIONTYPE postgis
-	CONNECTION "user=geodadosx password=geodados dbname=geodados host=10.1.1.36 port=5432"
+	CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
 	DATA "the_geom FROM (select * FROM brasil.brareg1) as foo USING UNIQUE gid USING SRID=4291"
   METADATA
 	ITENS "cd_legenda"

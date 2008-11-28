@@ -128,7 +128,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Onde fica o xml que será utilizado para complementar a lista de temas disponíveis na árvore de adição de temas.
 	
-	Se for "" não será feita nenhuma inclusão.
+	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).
 	
 	Com base no arquivo xml é montada uma árvore de opções que é adicionada à arvore de temas mostrada na guia "Adiciona" do i3geo.
 	
@@ -142,7 +142,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Onde fica o xml que será utilizado para complementar a lista de temas dispponíveis na ferramenta de identificação.
 	
-	Se for "" não será feita nenhuma inclusão.
+	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).		
 	
 	Com base no arquivo xml é montada uma lista de opções que é adicionada à lista de temas mostrada ferramenta de identificação de elementos no mapa.
 	
@@ -156,7 +156,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Onde fica o xml, para preencher a guia mapas.
 	
-	Se for vazio a guia não será mostrada no mapa.
+	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).	
 	
 	A guia "Mapas" mostra uma lista de links que permitem abrir mapas específicos. Essa lista é utilizada também pela versão mobile do i3geo.
 	
@@ -222,7 +222,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 		
-	Para usar o menu default, utilize apenas $menutemas = "";, nesse caso, os menus serão obtidos do banco de dados de administração.
+	Para usar o menu default, utilize apenas $menutemas = ""; nesse caso, os menus serão obtidos do banco de dados de administração.
 	*/
 	$menutemas = "";
 	/*
@@ -274,7 +274,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 O programa PHP que estabelece a conexão deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php para maiores detalhes.
 	
 	*/
-	$conexaoadmin = $locaplic."/admin/php/conexaomma.php";
+	$conexaoadmin = "";//$locaplic."/admin/php/conexaomma.php";
 }
 else //se for linux
 {

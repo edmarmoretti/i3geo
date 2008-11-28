@@ -70,7 +70,7 @@ g_arvoreClicks = ""
 i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
 i3GEO.arvoreDeTemas.FILTRAOGC = true
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
-i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this.value\)");
+i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this\)");
 /*
 Function: endereco
 
@@ -82,6 +82,8 @@ tema - tema para download
 */
 function ogc_endereco(tema)
 {
+	tema.checked = false
+	tema = tema.value
 	ins = "<H1>Endere&ccedil;o do web service:</H1><br>"
 	var re = new RegExp(".htm", "g");
 	var servico = window.location.href.replace(re,'.php?tema=')+tema	

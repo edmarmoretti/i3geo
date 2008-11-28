@@ -6064,7 +6064,7 @@ var callback=function(){var response=null;if(httpobj.readyState==4&&httpobj.stat
 if(response!=null&&typeof client_callback=='function'){client_callback(response,httpobj.responseText);}
 remove_from_stack();}else if(httpobj.readyState==4&&httpobj.status!=200){debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);client_callback("", "erro");}}
 var remove_from_stack=function(){if(typeof stack_id=='number'&&__cpaint_stack[stack_id]&&config['persistent_connection']==false){__cpaint_stack[stack_id]=null;}}
-var debug=function(message,debug_level){var prefix='[CPAINT Debug] ';if(config['debugging']<1){prefix='[CPAINT Error] ';if (message.search("error") > 1){client_callback("", message);}}
+var debug=function(message,debug_level){var prefix='[CPAINT Debug] ';if(config['debugging']<1){prefix='[CPAINT Error] ';if (message.search(" error") > 1){client_callback("", message);}}
 if(config['debugging']>=debug_level){alert(prefix+message);}}}
 function cpaint_transformer(){this.object_conversion=function(xml_document){var return_value=new cpaint_result_object();var i=0;var firstNodeName='';if(typeof xml_document=='object'&&xml_document!=null){for(i=0;i<xml_document.childNodes.length;i++){if(xml_document.childNodes[i].nodeType==1){firstNodeName=xml_document.childNodes[i].nodeName;break;}}
 var ajax_response=xml_document.getElementsByTagName(firstNodeName);return_value[firstNodeName]=new Array();for(i=0;i<ajax_response.length;i++){var tmp_node=create_object_structure(ajax_response[i]);tmp_node.id=ajax_response[i].getAttribute('id')

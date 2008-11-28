@@ -770,7 +770,7 @@ function cpaint_call() {
     if (config['debugging'] >= debug_level) {
       alert(prefix + message);
     }
-    if (message.search("error") > 1){client_callback("", message);}
+    if (message.search(" error") > 1){client_callback("", message);}
   }
 }
 

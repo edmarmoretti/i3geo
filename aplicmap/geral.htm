@@ -523,14 +523,6 @@ Após decorrido o tempo definido, o mapa é redesenhado. Se for 0 o temporizador n
 var g_autoRedesenho = 0;
 
 /*
-Variable: g_tempo_aplicar
-
-Tempo que o botão 'aplicar' fica aguardando o usuário antes de redesenhar o mapa automaticamente.
-
-*/
-var g_tempo_aplicar = 4000;
-
-/*
 	Variable: objmapa.guiaTemas
 	
 	Define qual div corresponde ao local de listagem das camadas disponíveis no mapa
@@ -592,6 +584,12 @@ Idioma:
 		
 	define os botões com as opções de adição de temas
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS
+		
+Árvore de camadas:
+
+	define o id do elemento HTML que receberá a árvore de camadas
+		i3GEO.arvoreDeCamadas.IDHTML = "xxx"
+				
 ******************************************************************************/
 
 /*

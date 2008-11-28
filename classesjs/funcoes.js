@@ -3974,7 +3974,7 @@ path - caminho completo do shapefile
 function incluir(path)
 {
 	objaguarde.abre("ajaxredesenha",$trad("o1"));
-	var temp = path.split(".")
+	var temp = path.split(".");
 	if ((temp[1] == "SHP") || (temp[1] == "shp"))
 	{var f = "adicionaTemaSHP";}
 	else

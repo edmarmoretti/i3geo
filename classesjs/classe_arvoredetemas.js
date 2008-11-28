@@ -102,7 +102,7 @@ i3GEO.arvoreDeTemas = {
 	Type:
 	{Numeric}
 	*/
-	FATORESTRELA: 1,
+	FATORESTRELA: "1",
 	/*
 	Property: INCLUISISTEMAS
 	
@@ -722,7 +722,7 @@ i3GEO.arvoreDeTemas = {
 				}
 			}
 			node.loadComplete();
-		}
+		};
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.arvoreDeTemas.SID+"&funcao=listaArquivos&diretorio="+node.data.caminho;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -788,7 +788,6 @@ i3GEO.arvoreDeTemas = {
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.isLeaf = true;
 			}
-
 			var ogc = g_locaplic+"/ogc.php?tema="+node.data.idtema+"&service=wms&request=getcapabilities";
 			var html = "<a href='"+ogc+"' target='blank' >WMS - OGC</a>";	
 			var d = {html:html};
@@ -804,7 +803,7 @@ i3GEO.arvoreDeTemas = {
 			tempNode.isLeaf = true;
 		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.estrelas == true){
-			var n = parseInt(node.data.nacessos / i3GEO.arvoreDeTemas.FATORESTRELA);		
+			var n = parseInt(node.data.nacessos / (i3GEO.arvoreDeTemas.FATORESTRELA*1));		
 			if(n >= 5){var n = 5;}
 			if(n > 0)
 			var html = "<img src='"+$im("e"+n+".png")+"'/>";
@@ -838,8 +837,6 @@ i3GEO.arvoreDeTemas = {
 		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags == true)
 		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='nuvemTags()'><img class='nuvemtags' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/></div><td>";
-		//if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir == true)
-		//ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='navegacaoDir()'><img class='conectarservidor' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a6")+"'/></div><td>";
 		ins += "</tr></table>";
 		return(ins);
 	},
