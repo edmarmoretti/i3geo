@@ -50,6 +50,17 @@ $mensagemInicia = 'Versão 4.1 beta';
 	Nome que será utilizado em alguns cabçalhos e títulos de páginas
 */
 $tituloInstituicao = "MMA - Ministerio do Meio Ambiente";
+/*
+	Variable: $googleApiKey
+	
+	Chave utilizada pela API do Google maps.
+	
+	A API do Google maps é utilizada em algumas funcionalidades do i3geo. Vc deve registrar uma chave
+	no site do Google para o seu endereço de servidor web. veja como fazer em:
+	http://code.google.com/apis/maps/signup.html
+*/
+$googleApiKey = "ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA";
+
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	/*

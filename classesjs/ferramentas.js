@@ -1508,9 +1508,9 @@ function google()
 {
 	criaboxg();
 	g_operacao = "navega";
-	if(navn){wdocaf("350px","350px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
+	if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",g_locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 	else
-	{wdocaf("370px","370px",g_locaplic+"/ferramentas/googlemaps/index.htm","","","Google maps");}
+	{wdocaf("500px","380px",g_locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 }
 /*
 Function: scielo

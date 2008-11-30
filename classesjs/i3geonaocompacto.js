@@ -1,34 +1,3 @@
-/*
-Function: $i
-
-Pega um objeto do documento.
-
-Exemplo: $i("box1")
-
-Parâmetros:
-
-id - id do objeto
-
-Retorno:
-
-object - objeto javaScript
-*/
-var $i = function(id)
-{return document.getElementById(id);};
-/*
-Function: $trad
-
-Pega o termo traduzido para uma lingua específica
-
-Parameters:
-
-id - id que identifica o texto na variável g_linguagem, definida em configura.js
-*/
-var $trad = function(id)
-{
-	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
-};
-
 var mostradicasf = function(){};
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');

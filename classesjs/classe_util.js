@@ -30,6 +30,22 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Function: $i
+
+Obtém um elemento DOM a partir de seu id
+  
+Parameters:
+
+id - {String} ID do elemento.
+    
+Returns:
+
+{Object} Objeto.
+*/
+$i = function(id)
+{return document.getElementById(id);};
+
 i3GEO.util = {
 	/*
 	Function: insereCookie
