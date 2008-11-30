@@ -1,0 +1,98 @@
+Guia de migração do i3Geo para a versão 4.1
+
+Sistema de administração
+
+	A administração do i3geo pode ser feita através de um sistema de formulários desde que vc opte por isso.
+	
+	Se vc quiser continuar usando os arquivos XML existentes em i3geo/menutemas, não tem problema, mas nesse
+	caso o sistema de administração não lhe será útil.
+	
+	A opção pelo uso do sistema de administração é default na versão 4.1. Se vc não quiser usá-la, deverá
+	editar o arquivo i3geo/ms_configura.php e colocar os nomes dos arquivos XML nas opções desejadas. Esse
+	arquivo está documentado, basta ler para entender o que deve ser feito.
+	
+	O sistema de administração é acessível no endereço i3geo/admin (http://localhost/i3geo/admin). Apenas editores
+	cadastrados podem usar esse sistema. O cadastramento é feito por número IP (veja i3geo/ms_configura.php).
+	Por default, "localhost" é um editor cadastrado.
+	
+	Os arquivos mapfiles existentes em i3geo/temas continuam sendo necessários e vc pode editá-los manualmente
+	ou por meio do sistema de administração.
+	
+	Os arquivos XML que vc já possuí em i3geo/menutemas devem ser importados para o sistema de administração.
+	Utilize as opções existentes em i3geo/admin para fazer isso.
+	
+	O banco de dados default do i3geo é em SQLITE e fica em i3geo/menutemas/admin.db.
+	Vc deve apagar esse arquivo e criar outro antes de importar seus arquivos XML. No sistema de administração
+	existe uma opção para criar o banco, o que deve ser feito depois que vc apagar o arquivo que vai com o i3geo.
+	
+	Se vc não quiser usar o SQLITE vc deve criar um arquivo de conexão com seu banco de dados e registrar o endereço
+	desse arquivo em uma variável no i3geo/ms_configura.php. Um exemplo de arquivo de configuração para POSTGRE
+	pode ser visto em i3geo/admin/php/conexaomm.php. AO usar a opção de criação do banco existente no sistema
+	de administração, as tabelas serão criadas no banco de dados indicado.
+	
+PHP
+
+	O sistema de administração do i3geo é baseado na biblioteca PHP chamada "PDO". Nas versões mais recentes do
+	PHP e no MS4W essa biblioteca já vem habilitada. Se no seu PHP não existir o PDO vc deverá instalá-lo.
+	
+YAHOO
+
+	A bibblioteca do YAHOO (YUI) foi atualizada. A versão antiga continua em i3geo/pacotes. Se vc desenvolveu
+	programas baseados na versão antiga, é bom verificar se tudo funcionará corretamente pois o arquivo
+	i3geo/classesjs/i3geo.js agora utiliza essa nova versão da YUI.
+	
+JSOBJECTS
+
+	Essa biblioteca não será mais utilizada pelo i3geo, sendo substituída pelo YUI. Se vc utilizava as funcionalidades
+	dessa biblioteca, embutida no i3geo.js, deverá verificar seu código ou então embutir novamente essa
+	biblioteca no i3geo.js. Para isso vc deve alterar o programa i3geo/classesjs/compactajs.php e executá-lo
+	para gerar os arquivos compactados do i3geo.
+	
+Classes JS e namespaces
+
+	O modelo de desenvolvimento dos programas javascript estão sendo migrados aos poucos para estruturas
+	baseadas em classes. Isso facilitará a compreensão dos códigos e sua documentação, facilitando a vida
+	dos desenvolvedores e permitindo uma melhor evolução dos códigos.
+	
+	As classes desenvolvidas ficarão em arquivos únicos de cada classe e devem usar onamespace i3GEO. Essa
+	regra evitará conflitos entre bibliotecas javascript adicionadas ao i3geo.
+	Exemplo, para remover a acentuação de uma palavra vc pode usar a classe i3GEO.util:
+	
+	var palavraAcentuada = "coração";
+	var palavraSemAcento = i3GEO.util.removeAcentos(palavraAcentuada);
+	
+Googlemapas
+
+	A chave de registro da API do Google agora deve ser incluída no arquivo i3geo/ms_configura.php na
+	variável $googleApiKey.
+	
+	Isso foi necessário por que a API do Google será utilizada em outras ferramentas do i3geo.
+	
+	A ferramenta googlemaps agora é chamada com ferramentas/googlemaps/index.php e seu tamanho
+	é calculado automaticamente conforme asproporções do mapa aberto no i3geo
+
+Idiomas
+
+	A lista de palavras e suas traduções foram retiradas do arquivo i3geo/classesjs/configura.js e incluidas no
+	novo arquivo i3geo/classesjs/dicionario.js
+	
+	Foi criada uma classe específicapara manipular a internacionalização. Veja a documentação em
+	http://localhost/i3geo/documentacao/files/classesjs/classe_idioma-js.html
+	
+Árvore de temas
+
+	A árvore de temas, que aparece na guia "Adiciona", agora é montada com a biblioteca YUI. Foi criada uma classe
+	javascript específica para manipular essa árvore. Veja a documentação em 
+	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredecamadas-js.html
+	Os aplicativos que usam árvores também utilizam agora essa classe, como o i3geo/datadownload.htm
+
+Árvore de camadas
+
+	A árvore de camadas, que aparece na guia "Temas", agora é montada com a biblioteca YUI. Foi criada uma classe
+	javascript específica para manipular essa árvore. Veja a documentação em 
+	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredetemas-js.html
+
+Utilitários
+
+	Foi criada uma classe específica com funções de uso geral. Veja em:
+	http://localhost/i3geo/documentacao/files/classesjs/classe_util-js.html
