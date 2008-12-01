@@ -4,7 +4,7 @@ include_once("../../ms_configura.php");
 <html>
 <head>
 <script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo $googleApiKey; ?>">
+<script language="JavaScript" type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<?php echo $googleApiKey; ?>">
 </script>
 <title></title>
   </head>
@@ -12,6 +12,7 @@ include_once("../../ms_configura.php");
     <div id="map" style="width: 440px; height: 340px"></div>
   
     <script type="text/javascript" >
+    counterClick = 0
     var m = document.getElementById("map")
     m.style.width = window.parent.objmapa.w / 2
     m.style.height = window.parent.objmapa.h / 2
@@ -77,6 +78,7 @@ include_once("../../ms_configura.php");
     botaoI3geo.prototype = new GControl();
     botaoI3geo.prototype.initialize = function(map) {
       var container = document.createElement("div");
+ 
       var i3geo = document.createElement("div");
       this.setButtonStyle_(i3geo);
       container.appendChild(i3geo);
@@ -84,11 +86,19 @@ include_once("../../ms_configura.php");
       GEvent.addDomListener(i3geo, "click", function() {
         ativaI3geo();
       });
+
+      var rota = document.createElement("div");
+      this.setButtonStyle_(rota);
+      container.appendChild(rota);
+      rota.appendChild(document.createTextNode("Rota"));
+      GEvent.addDomListener(rota, "click", function() {
+        ativaI3geoRota();
+      });
       map.getContainer().appendChild(container);
       return container;
     }
     botaoI3geo.prototype.getDefaultPosition = function() {
-      return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(70, 6));
+      return new GControlPosition(G_ANCHOR_TOP_LEFT, new GSize(50, 50));
     }
     botaoI3geo.prototype.setButtonStyle_ = function(button) {
       button.style.textDecoration = "none";
@@ -180,6 +190,133 @@ include_once("../../ms_configura.php");
 			map.addOverlay(wmsmap);
     	}
     }
+    function ativaI3geoRota()
+    {
+   		rotaEvento = GEvent.addListener(map, "click", parametrosRota);
+   		alert("Clique o ponto de origem da rota");
+   		counterClick++;
+	}
+    function parametrosRota(overlay,latlng)
+    {
+    	if(counterClick == 1)
+    	{	
+    		counterClick++;
+    		alert("Clique o ponto de destino da rota");
+    		pontoRota1 = latlng
+    		return;
+    	}
+    	if(counterClick == 2)
+    	{
+    		pontoRota2 = latlng
+    		counterClick = 0;
+    		GEvent.removeListener(rotaEvento)
+    		constroiRota()
+    	}
+    }
+    
+    function constroiRota()
+    {
+    	geocoder = new GClientGeocoder();
+    	var pt2 = function(response)
+    	{
+  			if (!response || response.Status.code != 200) {
+    			alert("Status Code:" + response.Status.code);
+  			} else {
+    			place = response.Placemark[0];
+    			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
+    			marker = new GMarker(point);
+    			map.addOverlay(marker);
+    			/*
+    			marker.openInfoWindowHtml(
+        			'<b>orig latlng:</b>' + response.name + '<br/>' + 
+        			'<b>latlng:</b>' + place.Point.coordinates[0] + "," + place.Point.coordinates[1] + '<br>' +
+        			'<b>Status Code:</b>' + response.Status.code + '<br>' +
+        			'<b>Status Request:</b>' + response.Status.request + '<br>' +
+        			'<b>Address:</b>' + place.address + '<br>' +
+        			'<b>Accuracy:</b>' + place.AddressDetails.Accuracy + '<br>' +
+        			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
+    			*/
+    			endereco2 = place.address;
+    			montaRota()
+    		}
+    	}
+    	
+    	var pt1 = function(response)
+    	{  	
+  			map.clearOverlays();
+  			if (!response || response.Status.code != 200) {
+    			alert("Status Code:" + response.Status.code);
+  			} else {
+    			place = response.Placemark[0];
+    			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
+    			marker = new GMarker(point);
+    			map.addOverlay(marker);
+    			/*
+    			marker.openInfoWindowHtml(
+        			'<b>orig latlng:</b>' + response.name + '<br/>' + 
+        			'<b>latlng:</b>' + place.Point.coordinates[0] + "," + place.Point.coordinates[1] + '<br>' +
+        			'<b>Status Code:</b>' + response.Status.code + '<br>' +
+        			'<b>Status Request:</b>' + response.Status.request + '<br>' +
+        			'<b>Address:</b>' + place.address + '<br>' +
+        			'<b>Accuracy:</b>' + place.AddressDetails.Accuracy + '<br>' +
+        			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
+    			*/
+    			endereco1 = place.address;
+    		}
+    		geocoder.getLocations(pontoRota2, pt2);
+    		
+    	}
+    	geocoder.getLocations(pontoRota1, pt1);
+    }
+	function montaRota()
+	{
+		if(!document.getElementById("descrota"))
+		{
+			var descrota = document.createElement("div");
+			descrota.id = "descrota"
+			document.body.appendChild(descrota);
+		}
+		else
+		{
+			descrota = document.getElementById("descrota")
+			descrota.innerHTML = ""
+		}
+		directions = new GDirections(map, descrota);
+		directions.load("from: "+endereco1+" to: "+endereco2);
+		GEvent.addListener(directions, "load", function() {
+			var linha = directions.getPolyline();
+			var nvertices = linha.getVertexCount();
+			pontos = new Array()
+			for(i=0;i<nvertices;i++)
+			{
+				var vertice = linha.getVertex(i);
+				pontos.push(vertice.lng()+" "+vertice.lat())
+			}
+			function ativanovotema(retorno)
+			{
+				var temaNovo = retorno.data
+				var converteParaLinha = function()
+				{
+					var cp = new cpaint();
+					cp.set_response_type("JSON");
+					//cp.set_debug(2) 
+					var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
+					cp.call(p,"sphPT2shp",window.parent.ajaxredesenha);
+				}
+				var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid+"&funcao=insereSHP&tema="+retorno.data+"&xy="+pontos.join(" ");
+				var cp = new cpaint();
+				//cp.set_debug(2)
+				cp.set_response_type("JSON");
+				cp.call(p,"insereSHP",converteParaLinha);
+			}
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.set_transfer_mode("POST");
+			var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid;
+			cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
+			
+    	});
+	}    
     ondegoogle(map);
     </script>
     </body>
