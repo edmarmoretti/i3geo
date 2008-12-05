@@ -730,7 +730,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
 		error_reporting(0);
-		include_once($locaplic."/admin/php/menutemas.php");
+		//include_once($locaplic."/admin/php/menutemas.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}

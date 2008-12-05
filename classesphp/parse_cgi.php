@@ -41,14 +41,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-error_reporting(E_ALL);
+error_reporting(0);
 include_once("pega_variaveis.php");
-
 include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
+$temp = $mapext;
 session_name("i3GeoPHP");
 session_id($g_sid);
 session_start();
+$mapext = $temp;
 $map_file = $_SESSION["map_file"];
 include_once("../ms_configura.php");
 if(isset($fingerprint))
@@ -86,6 +87,8 @@ if(isset($mapext))
 	$mapext = explode(" ",$mapext);
 	$map->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
+$s = $map->scalebar;
+$s->set("status",MS_OFF);
 $map_imagecolor = explode(" ",$map_imagecolor);
 $imgcolor = $map->imagecolor;
 $imgcolor->setrgb($map_imagecolor[0],$map_imagecolor[1],$map_imagecolor[2]);
@@ -95,7 +98,7 @@ $o->set("transparent",MS_ON);
 else
 $o->set("transparent",MS_OFF);
 $img = $map->draw();
-
 echo header("Content-type: " . $map->outputformat->mimetype  . "\n\n");
 $img->saveImage("");
+unlink($map_filen);
 ?>

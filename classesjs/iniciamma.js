@@ -509,6 +509,8 @@ function Mapa(e,m)
 		{document.body.id = "i3geo";}
 		//altera a classe do corpo do HTML. Utilizada pelo YUI.
 		$i("i3geo").className = "yui-skin-sam";
+		if($i("mst"))
+		$i("mst").style.visibility ="hidden";
 		//
 		//se g_sid="", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa
@@ -713,8 +715,22 @@ function Mapa(e,m)
 			{
 				$i("guia"+temp[1]).parentNode.parentNode.focus();
 			}
-			if (i3GEO.util.pegaCookie("g_janelaMen")){g_janelaMen = i3GEO.util.pegaCookie("g_janelaMen");}
-			if (g_janelaMen == "sim"){initJanelaMen();}
+			//
+			//ativa a janela de mensagens se for o caso
+			//
+			if(document.getElementById("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
+			{i3GEO.ajuda.DIVAJUDA = "ajuda";}
+			var abreJM = "sim";
+			if (i3GEO.util.pegaCookie("g_janelaMen")){
+				var abreJM = i3GEO.util.pegaCookie("g_janelaMen");
+				if(abreJM == "sim")
+				i3GEO.configura.iniciaJanelaMensagens = true;
+				else
+				i3GEO.configura.iniciaJanelaMensagens = false;
+			}
+			if(i3GEO.configura.iniciaJanelaMensagens == true)
+			{i3GEO.ajuda.abreJanela();}
+			
 			if (g_mapaRefDisplay != "none")
 			{
 				if (i3GEO.util.pegaCookie("g_mapaRefDisplay")){g_mapaRefDisplay = i3GEO.util.pegaCookie("g_mapaRefDisplay");}
@@ -732,6 +748,8 @@ function Mapa(e,m)
 		//zera os quadros de animação
 		//
 		rebobinaf();
+		if($i("mst"))
+		$i("mst").style.visibility ="visible";
 	};
 	/*
 	Function: ativaListaPropriedades

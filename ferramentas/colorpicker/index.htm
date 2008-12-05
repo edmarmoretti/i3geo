@@ -14,17 +14,17 @@ body {
 }
 </style>
 
-<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/fonts/fonts-min.css" />
-<link rel="stylesheet" type="text/css" href="../../pacotes/yui231/build/colorpicker/assets/skins/sam/colorpicker.css" />
-<script type="text/javascript" src="../../pacotes/yui231/build/utilities/utilities.js"></script>
-<script type="text/javascript" src="../../pacotes/yui231/build/slider/slider.js"></script>
-<script type="text/javascript" src="../../pacotes/yui231/build/colorpicker/colorpicker-beta.js"></script>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui252/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui252/build/colorpicker/assets/skins/sam/colorpicker.css" />
+<script type="text/javascript" src="../../pacotes/yui252/build/utilities/utilities.js"></script>
+<script type="text/javascript" src="../../pacotes/yui252/build/slider/slider.js"></script>
+<script type="text/javascript" src="../../pacotes/yui252/build/colorpicker/colorpicker.js"></script>
 
 
 <!--begin custom header content for this example-->
 
 <style type="text/css">
-  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 420px; height:220px; }
+  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 380px; height:200px; }
 </style>
 
 
@@ -55,8 +55,8 @@ API -->
                     showhsvcontrols: true,
                     showhexcontrols: true,
 					images: {
-						PICKER_THUMB: "../../pacotes/yui231/examples/colorpicker/assets/picker_thumb.png",
-						HUE_THUMB: "../../pacotes/yui231/examples/colorpicker/assets/hue_thumb.png"
+						PICKER_THUMB: window.parent.g_locaplic+"/pacotes/yui252/build/colorpicker/assets/picker_thumb.png",
+						HUE_THUMB: window.parent.g_locaplic+"/pacotes/yui252/build/colorpicker/assets/hue_thumb.png"
     				}
                 });
 			YAHOO.log("Finished creating Color Picker.", "info", "example");
@@ -103,10 +103,6 @@ function aplicarCor()
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
 	var ncor = document.getElementById("yui-picker-r").value+","+document.getElementById("yui-picker-g").value+","+document.getElementById("yui-picker-b").value
 	doc.getElementById(elemento).value = ncor;
-	window.parent.$i("wdoca2").style.display = "none";
-	window.parent.$i("wdocai2").src = "";
-	window.parent.YAHOO.util.Event.removeListener(window.parent.YAHOO.janelaDoca2.xp.panel.close, "click");
-	window.parent.YAHOO.janelaDoca2.xp.panel.destroy();
 }
 </script>
 

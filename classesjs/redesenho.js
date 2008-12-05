@@ -711,6 +711,7 @@ function ajaxdestaca(retorno)
 		$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
 	}
 	$i("div_d").innerHTML = "";
+	$i("div_d").style.display="block";
 	var novoel = document.createElement("input");
 	novoel.id = "img_d";
 	novoel.style.position = "relative";

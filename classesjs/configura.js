@@ -163,19 +163,8 @@ Veja:
 g_visual = "default";
 
 /*
-Variable: g_janelaMen
-
-Define se a janela de mensagens começará aberta ao iniciar o mapa.
-
-Veja:
-
-<funcoes.js>, <iniciamma.js>
-
-Values:
-
-sim|nao
+Variable: g_janelaMen (depreciado)
 */
-g_janelaMen = "sim";
 /*
 Variable: g_downloadbase (depreciado)
 
@@ -382,16 +371,6 @@ Veja:
 <funcoes.js>
 */
 destacaTamanho = 75;
-/*
-Variable: g_mensagempadrao
-
-Mensagem padrão que será mostrada na janela de mensagens.
-
-Veja:
-
-<funcoes.js>
-*/
-g_mensagempadrao = $trad("p1");
 /*
 Variable: g_entorno
 

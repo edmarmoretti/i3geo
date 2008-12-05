@@ -36,8 +36,7 @@ i3GEO.configura = {
 	/*
 	Variable: listaDePropriedadesDoMapa
 	
-	Lista com as funções que são incluídas no item "Propriedades do mapa"
-	
+	Lista com as funções que são incluídas no item "Propriedades do mapa"	
 	*/
 	listaDePropriedadesDoMapa: {
 		"propriedades": [
@@ -64,6 +63,14 @@ i3GEO.configura = {
 	*/
 	tempoAplicar: 4000,
 	/*
+	Variable: iniciaJanelaMensagens
+	
+	Inicia o i3geo com a janela de mensagens aberta ou fechada.
+	
+	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
+	*/
+	iniciaJanelaMensagens: true,
+	/*
 	Function: alteraVariavel
 	*/
 	/*
@@ -80,5 +87,10 @@ catch(e){};
 try {
 	if (g_tempo_aplicar)
 	{i3GEO.configura.tempoAplicar = g_tempo_aplicar;}
+}
+catch(e){};
+try {
+	if (g_janelaMen == "nao")
+	{i3GEO.configura.iniciaJanelaMensagens = false;}
 }
 catch(e){};

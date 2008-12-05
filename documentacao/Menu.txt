@@ -154,12 +154,13 @@ Group: Programas principais (core)  {
       File: i3geo.idioma  (classesjs\classe_idioma.js)
       File: i3geo.js  (classesjs\i3geo.js)
       File: classe_util.js  (classesjs\classe_util.js)
-      File: i3geonaocompacto.js  (classesjs\i3geonaocompacto.js)
       File: iniciamma.js  (classesjs\iniciamma.js)
       File: montaMenuSuspenso  (classesjs\menususpenso.js)
       File: redesenho.js  (classesjs\redesenho.js)
       File: wscliente.js  (classesjs\wscliente.js)
       File: i3GEO.arvoreDeCamadas  (classesjs\classe_arvoredecamadas.js)
+      File: classe_configura.js  (classesjs\classe_configura.js)
+      File: classe_janela.js  (classesjs\classe_janela.js)
       }  # Group: Programas principais em JavaScript (rodam no navegador)
 
    Group: Programas principais em PHP (rodam no servidor)  {
@@ -189,6 +190,7 @@ Group: Programas principais (core)  {
       File: graficos.php  (classesphp\graficos.php)
       File: mapa_controle.php  (classesphp\mapa_controle.php)
       File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+      File: parse_cgi.php  (classesphp\parse_cgi.php)
       File: pega_variaveis.php  (classesphp\pega_variaveis.php)
       File: wmswfs.php  (classesphp\wmswfs.php)
       File: wscliente.php  (classesphp\wscliente.php)

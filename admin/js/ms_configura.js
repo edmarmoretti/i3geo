@@ -40,6 +40,7 @@ function initMenu()
 	{ mensagem: "Mensagem mostrada sempre que o i3geo é inicializado.",cabeca: "Mensagem de inicialização", variavel: "$mensagemInicia"},
 	{ mensagem: "Texto mostrado na barra superior do navegador e em alguns aplicativos do i3geo, como a versão mobile.",cabeca: "Título", variavel: "$tituloInstituicao"},
 	{ mensagem: "Diretório (caminho absoluto) utilizado para armazenar os mapfiles temporários e outros arquivos utilizados durante a operação do i3geo. Em sistemas Linux, você pode criar um link simbólico para esse diretório.",cabeca: "Diretório temporário", variavel: "$dir_tmp"},
+	{ mensagem: "Chave utilizada pelo Google Maps",cabeca: "Google maps", variavel: "$googleApiKey"},
 	{ mensagem: "Local no servidor (caminho absoluto) onde o i3geo está armazenado.",cabeca: "Localização do i3geo", variavel: "$locaplic"},
 	{ mensagem: "Diretório onde ficam os arquivos mapfiles dos temas disponíveis para uso na guia de adição de temas.",cabeca: "Diretório com os temas", variavel: "$temasdir"},
 	{ mensagem: "Diretório onde ficam armazenados os arquivos de template HTML e mapfiles iniciais",cabeca: "Diretório aplicmap", variavel: "$temasaplic"},

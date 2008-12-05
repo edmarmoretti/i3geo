@@ -27,11 +27,10 @@ File: i3geo/admin/mapfiles.php
 19/6/2007
 
 */
-error_reporting(0);
-if(isset($funcao))
-{include_once("admin.php");}
-else
+include_once("admin.php");
+if(!isset($funcao))
 {$funcao = "";}
+
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {

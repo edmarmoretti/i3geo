@@ -9,7 +9,7 @@
 	Os códigos do i3geo são compactados para tornar o carregamento mais rápido.
 	Se vc alterar os códigos originais, não se esqueça de compactá-los com classesjs/compactajs.php.
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
-	o arquivo i3geo.js por i3geonaocompacto.js
+	o arquivo i3geo.js por i3geo.js
 -->
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 <!--
@@ -104,7 +104,9 @@ Escala gráfica. Pode ser excluída.
 <!--
 vc pode optar por colocar mensagens de ajuda em algum lugar
 -->
-<!--<tr><td colspan=2 ><div id=ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>-->
+<!--
+<tr><td colspan=2 ><div id=i3geo_ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
+-->
 <tr>
  <td class=tdbranca >
  	<div id=visual ></div>
@@ -432,16 +434,6 @@ var g_mapaRefDisplay = "block";
 	Default:
 	
 	g_docaguias = "nao";
-*/
-
-/*
-	Variable: g_janelaMen
-	
-	Variável que define se a janela de mensagens começará aberta.
-	
-	Default:
-	
-	g_janelaMen = "sim";
 */
 /*
 	Variable: g_mostraRosa

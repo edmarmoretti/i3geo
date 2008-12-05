@@ -547,7 +547,7 @@ i3GEO.arvoreDeCamadas = {
 		var ck = "";
 		if(tema.status == 2){var ck = ' CHECKED ';}
 		var html = "<span id='arrastar_"+tema.name+"'>";
-		html += "<table><tr><td><input class=inputsb style='cursor:pointer' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+		html += "<td><input class=inputsb style='cursor:pointer;vertical-align:top;padding-top:5px;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
 		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
 		else
@@ -560,8 +560,8 @@ i3GEO.arvoreDeCamadas = {
 		if ((tema.download == "sim") || (tema.download == "SIM"))
 		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
 		
-		html += "<td style='text-align:left;padding-left:3px;cursor:pointer' >"+tema.tema;
-		html += "</td></tr></table></span>";
+		html += "<td style='vertical-align:top;padding-top:4px;text-align:left;padding-left:3px;cursor:pointer' >"+tema.tema;
+		html += "</td></span>";
 		return(html);
 	},
 	/*

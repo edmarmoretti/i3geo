@@ -687,6 +687,7 @@ i3GEO.arvoreDeTemas = {
 					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
 					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					//tempNode.nowrap = true;
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
 					tempNode.isLeaf = false;
 					if(cor == "rgb(51, 102, 102)")
@@ -745,14 +746,14 @@ i3GEO.arvoreDeTemas = {
 	{String} - texto formatado
 	*/
 	montaTextoTema: function(cor,tema){
-		var html = "<table><tr><td><span ><input style='cursor:pointer;border:solid 0 white;' ";
+		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		if(i3GEO.arvoreDeTemas.ATIVATEMA != "")
 		html += "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";
 		else
 		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";
-		html += " type='checkbox' value='"+tema.tid+"' /></td><td style='text-align:left;color:"+cor+";padding-left:3px;' >";
+		html += " type='checkbox' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:top;text-align:left;color:"+cor+";padding-left:3px;' >";
 		html += tema.nome;
-		html += "</td></tr></table></span>";
+		html += "</td></span>";
 		return(html);
 	},
 	/*

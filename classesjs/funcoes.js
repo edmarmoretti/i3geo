@@ -551,56 +551,10 @@ function mudaVisual(visual)
 	cpObj.call(p,"mudaQS",monta);
 }
 /*
-Function: initJanelaMen
-
-Abre a janela com as mensagens de ajuda ao usuário. Essa janela é mostrada no canto inferior esquerdo e mostra textos de ajuda quando o usuário passa omouse sobre uma opção do i3geo.
-
-Quando essa janela estiver aberta, o resultado da função de etiquetas e de ajuda é mostrado nessa janela.
-
-Se o usuário fechar a janela de mensagens, é definido um cookie para controlar a abertura da janela ou não na próxima vez que oi3geo for utilizado.
+Function: initJanelaMen (depreciado)
 */
 function initJanelaMen()
-{
-	try
-	{
-		//
-		//cria a janela flutuante caso não exista
-		//
-		if (!$i("janelaMen"))
-		{
-			var novoel = document.createElement("div");
-			novoel.id = "janelaMen";
-			novoel.style.display="block";
-			novoel.style.border="1px solid rgb(170,170,170)";
-			novoel.innerHTML = '<div class="hd">&nbsp;</div><div class="bd" ><div id="janelaMenTexto" style="color:rgb(170,170,170)">'+g_mensagempadrao+'</div></div>';
-			if($i("i3geo"))
-			{$i("i3geo").appendChild(novoel);}
-			else
-			{document.body.appendChild(novoel);}
-			var i = ($i("janelaMenTexto")).style;
-			i.textAlign="left";
-			i.fontSize="10px";
-			YAHOO.namespace("janelaMen.xp");
-			YAHOO.janelaMen.xp.panel = new YAHOO.widget.Panel("janelaMen", { width:"266px", height:"auto", fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-			YAHOO.janelaMen.xp.panel.render();
-			var escondeMen = function()
-			{
-				YAHOO.util.Event.removeListener(YAHOO.janelaMen.xp.panel.close, "click");
-				YAHOO.janelaMen.xp.panel.destroy();	
-				i3GEO.util.insereCookie("g_janelaMen","nao");
-			};
-			YAHOO.util.Event.addListener(YAHOO.janelaMen.xp.panel.close, "click", escondeMen);
-			i3GEO.util.insereCookie("g_janelaMen","sim");
-		}
-		//
-		//abre a janela
-		//
-		YAHOO.janelaMen.xp.panel.show();
-		var pos = pegaPosicaoObjeto($i("img"));
-		YAHOO.janelaMen.xp.panel.moveTo(pos[0] - 267 ,objmapa.h - 70);
-	}
-	catch(e){alert("Nao foi possivel criar a janela de mensagens. initJanelaMen"+e);}
-}
+{i3GEO.ajuda.abreJanela();}
 /*
 Function: docaguias
 
@@ -920,234 +874,33 @@ function mensagemf(m)
 	catch(e){alert("Impossivel criar mensagem."+e);}
 }
 /*
-Function: wdocaf
-
-Abre a janela flutuante para executar algum programa.
-
-A janela flutuante contém um iframe onde o programa, definido no parâmetro wsrc, será carregado.
-
-A janela é criada por meio da biblioteca YUI
-
-Parameters:
-
-wlargura - largura da nova janela
-
-waltura - altura da nova janela
-
-wsrc - endereço do conteúdo que será aberto
-
-nx - posição da janela em x. Pode ser definido como "center"
-
-ny - posição da janela em y
-
-texto - texto que será mostrado no título da janela
+Function: wdocaf (depreciado)
 */
 function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
-{
-	//
-	//esconde o objeto flamingo (flash) caso a interface atual seja a flamingo.htm
-	//
-	if($i("flamingoi")){$i("flamingoi").style.display="none";}
-	try
-	{
-		//
-		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
-		//
-		if($i("boxg"))
-		{$i("boxg").style.display = "none";}
-		if($i("boxpin"))
-		{$i("boxpin").style.display = "none";}
-		var wlargura_ = parseInt(wlargura)+0+"px";
-		YAHOO.namespace("janelaDoca.xp");
-		if ($i("wdoca"))
-		{YAHOO.janelaDoca.xp.panel.destroy();}
-		var ins = '<div class="hd">'+texto+'</div><div class="bd"><iframe name="wdocai" id="wdocai" valign="top" style="border:0px white solid"></iframe></div>';
-		var novoel = document.createElement("div");
-		novoel.id = "wdoca";
-		novoel.style.display="block";
-		novoel.innerHTML = ins;
-		if($i("i3geo"))
-		{$i("i3geo").appendChild(novoel);}
-		else
-		{document.body.appendChild(novoel);}
-		if ($i("wdocai"))
-		{
-			with ($i("wdocai").style){width = "100%";height=waltura;};
-			$i("wdoca").style.display = "block";
-			$i("wdocai").src = wsrc;
-		}
-		var fix = false;
-		var pos = pegaPosicaoObjeto($i("img"));
-		if(nx == "center"){var fix = true;}
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel("wdoca", { width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
-		YAHOO.janelaDoca.xp.panel.render();
-		var escondeWdoca = function()
-		{
-			$i("wdoca").style.display = "none";
-			$i("wdocai").src = "";
-			YAHOO.util.Event.removeListener(YAHOO.janelaDoca.xp.panel.close, "click");
-			YAHOO.janelaDoca.xp.panel.destroy();
-			if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-			{mudaiconf("pan");}
-			//esconde o box do google
-			if ($i("boxg"))
-			{$i("boxg").style.display = "none";}
-			if ($i("boxpin"))
-			{$i("boxpin").style.display = "none";}
-			//fecha o container de desenho de elementos na tela
-			if($i("divGeometriasTemp"))
-			{richdraw.fecha();}
-			limpacontainerf();
-			if($i("flamingoi")){$i("flamingoi").style.display="block";}
-		};
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", escondeWdoca);
-	}
-	catch(e){alert("Ocorreu um erro. wdocaf"+e);}
-}
+{var janela = i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto);}
 /*
-Function: redimwdocaf
-
-Redimensiona a janela flutuante.
-
-Parameters:
-
-wlargura - largura da nova janela
-
-waltura - altura da nova janela
-
+Function: redimwdocaf (depreciado)
 */
-function redimwdocaf(wlargura,waltura)
-{
-	try
-	{
-		if ($i("wdoca"))
-		{
-			var i = $i("wdoca");
-			i.style.width = wlargura;
-			i.style.height = waltura;
-		}
-	}
-	catch(e){alert("Ocorreu um erro. redimwdocaf"+e);}
-}
+function redimwdocaf(w,h)
+{i3GEO.janela.alteraTamanho(w,h);}
 /*
-Function: wdocaf2
-
-Abre uma segunda janela flutuante.
-
-Parameters:
-
-wlargura - largura da nova janela
-
-waltura - altura da nova janela
-
-wsrc - endereço do conteúdo que será aberto
-
-nx - posição da janela em x
-
-ny - posição da janela em y
-
-texto - texto que será mostrado no título da janela
+Function: wdocaf2 (depreciado)
 */
 function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
 {
-	try
-	{
-		if (!$i("wdoca2"))
-		{
-			var ins = '<div class="hd">&nbsp;</div><div class="bd"><iframe name="wdocai2" id="wdocai2"  valign="top" ></iframe></div></div>';
-			var novoel = document.createElement("div");
-			novoel.id = "wdoca2";
-			novoel.style.display="none";
-			novoel.innerHTML = ins;
-			document.body.appendChild(novoel);
-		}
-		var pos = pegaPosicaoObjeto($i("img"));
-		YAHOO.namespace("janelaDoca2.xp");
-		YAHOO.janelaDoca2.xp.panel = new YAHOO.widget.Panel("wdoca2", {width:wlargura, fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:true } );
-		YAHOO.janelaDoca2.xp.panel.moveTo(pos[0],pos[1]);
-		YAHOO.janelaDoca2.xp.panel.render();
-		YAHOO.janelaDoca2.xp.panel.show();
-		with ($i("wdocai2").style){width = "100%";height = waltura;}
-		$i("wdoca2").style.display = "block";
-		$i("wdocai2").src = wsrc;
-		var escondeWdoca2 = function()
-		{
-			$i("wdoca2").style.display = "none";
-			$i("wdocai2").src = "";
-			YAHOO.util.Event.removeListener(YAHOO.janelaDoca2.xp.panel.close, "click");
-		};
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca2.xp.panel.close, "click", escondeWdoca2);
-	}
-	catch(e){alert("Ocorreu um erro. wdocaf2"+e);}
+	var id = YAHOO.util.Dom.generateId();
+	i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto,id,true);
 }
 /*
-Function: wdocafechaf
-
-Fecha uma janela flutuante.
-
-Depreciado
-
-Parameters:
-
-odoca - objeto janela
+Function: wdocafechaf (depreciado)
 */
 function wdocafechaf(odoca)
-{
-	try
-	{
-		$i(odoca).style.display="none";
-		if ((odoca != "wdocaref") && (odoca != "wdocac"))
-		{
-			if($i("wdocain")){$i("wdocain").value = "";}
-			if($i("wdocadiv")){$i("wdocadiv").innerHTML = "";$i("wdocadiv").display="none";}
-			if ($i("temp")){$i("temp").value == "";}
-			$i("wdocai").src = "";
-			$i("imgh").style.visibility="visible";
-		}
-		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-		{mudaiconf("pan");}
-	}
-	catch(e){alert("Ocorreu um erro. wdocafechaf"+e);}
-}
+{alert("wdocafechaf foi depreciado");}
 /*
-Function: mostradicasf
-
-Mostra dicas sobre uma função quando o mouse passa sobre um botão ou outra opção qualquer.
-
-O texto da dica pode ser obtido com a função $trad
-
-Se a janela de mensagens estiver aberta, o texto será colocado nela.
-
-Parameters:
-
-objeto - objeto sobre o qual o mouse está sobreposto.
-
-dica - dica que aparece no mapa.
-
-hlpt - depreciado
+Function: mostradicasf (depreciado)
 */
 function mostradicasf(objeto,dica,hlpt)
-{
-	try
-	{
-		if ($i("ajuda"))
-		{
-			if (dica == ""){$i("ajuda").innerHTML="-";}
-			else
-			{
-				g_hlpt = hlpt;
-				$i("ajuda").innerHTML= "<b>"+dica+" </b>";
-			}
-		}
-		if ($i("janelaMenTexto"))
-		{
-			if (dica == ""){dica = g_mensagempadrao;}
-			$i("janelaMenTexto").innerHTML= "<b>"+dica+" </b>";
-		}
-	}
-	catch(e){alert("Ocorreu um erro. mostradicasf"+e);}
-}	
+{i3GEO.ajuda.mostraJanela(dica);}	
 /**
 Function: mudaiconf
 

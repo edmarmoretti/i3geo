@@ -54,7 +54,8 @@ switch ($funcao)
 		"\$atlasxml",
 		"\$expoeMapfile",
 		"\$menutemas",
-		"\$conexaoadmin"
+		"\$conexaoadmin",
+		"\$googleApiKey"
 	);
 	$par = array();
 	foreach ($vs as $v)

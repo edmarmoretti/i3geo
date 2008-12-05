@@ -727,6 +727,9 @@ tema - id ue identifica o tema no map file.
 */
 function destacaTema(tema)
 {
+	var verifica = $i("div_d");
+	if(verifica && verifica.style.display == "block")
+	{document.body.removeChild(verifica);g_destaca = "";return;}
 	if ($i("img_d"))
 	{$i("img_d").src = "";}
 	if ($i(objmapa.guiaTemas+"obj"))
@@ -878,8 +881,6 @@ function mudanomef(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		var p = $i("nometema"+idtema);
-		$i("nometema"+idtema).innerHTML = valor;
 		objaguarde.abre("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		cpObj.call(p,"mudaNome",ajaxredesenha);
@@ -1281,7 +1282,9 @@ janela - id da janela que disparou a janela de cores
 elemento - elemento da janela que receberá os valores de cor selecionada
 */
 function abreCor(janela,elemento)
-{wdocaf2("390px","230px",g_locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor");}
+{
+	i3GEO.janela.cria("400","240",g_locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+}
 /*
 Function: editaLegenda
 
