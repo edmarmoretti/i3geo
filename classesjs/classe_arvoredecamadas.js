@@ -257,7 +257,7 @@ i3GEO.arvoreDeCamadas = {
 	                		//exclui tema
    		             		if(DDM.getDDById(id).id == "i3geo_lixeira"){
                 				var tema = (this.getEl()).id.split("arrastar_")[1];
-                				objaguarde.abre("ajaxredesenha",$trad("o1"));
+                				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 								var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 								cpObj.call(p,"excluiTemas",objmapa.atualizaCorpoMapa);
 								objmapa.temaAtivo = "";
@@ -273,7 +273,7 @@ i3GEO.arvoreDeCamadas = {
 								var cp = new cpaint();
 								//cp.set_debug(2)
 								cp.set_response_type("JSON");
-								cp.call(p,"reordenatemas",objmapa.atualizaCorpoMapa);
+								cp.call(p,"reordenatemas",ajaxredesenha);
 							}
         	    		}
 	    	    	}
@@ -546,22 +546,22 @@ i3GEO.arvoreDeCamadas = {
 	montaTextoTema: function(tema){
 		var ck = "";
 		if(tema.status == 2){var ck = ' CHECKED ';}
-		var html = "<span id='arrastar_"+tema.name+"'>";
-		html += "<td><input class=inputsb style='cursor:pointer;vertical-align:top;padding-top:5px;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+		var html = "";
+		html += "<div id='arrastar_"+tema.name+"' style=text-align:left ><input class=inputsb style='cursor:pointer;position:relative;top:2px;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
 		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
 		else
 		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";
-		html += " /></td>";
+		html += " />";
 		if (tema.contextoescala == "sim")
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}				
+		{html += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
 		if (tema.sel == "sim") //o tema tem selecao
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
+		{html += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 		if ((tema.download == "sim") || (tema.download == "SIM"))
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
-		
-		html += "<td style='vertical-align:top;padding-top:4px;text-align:left;padding-left:3px;cursor:pointer' >"+tema.tema;
-		html += "</td></span>";
+		{html += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		html += "&nbsp;<span style='cursor:move'>"+tema.tema+"</span>";
+		html += "</div>";
 		return(html);
 	},
 	/*
@@ -612,7 +612,7 @@ i3GEO.arvoreDeCamadas = {
 		};
 		clearTimeout(objmapa.tempo);
 		objmapa.tempo = "";
-		objaguarde.abre("redesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(t[1].toString())+"&ligar="+(t[0].toString())+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
 		var cp = new cpaint();
 		cp.set_async("true");
@@ -710,3 +710,30 @@ try {
 	{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
 }
 catch(e){};
+
+
+/*
+	montaTextoTema: function(tema){
+		var ck = "";
+		if(tema.status == 2){var ck = ' CHECKED ';}
+		var html = "";
+		html += "<span id='arrastar_"+tema.name+"'><div style='position:absolute;vertical-align:top;padding-top:5px;'><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+
+		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
+		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
+		else
+		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";
+		html += " /></div>";
+		if (tema.contextoescala == "sim")
+		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}				
+		if (tema.sel == "sim") //o tema tem selecao
+		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
+		if ((tema.download == "sim") || (tema.download == "SIM"))
+		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
+		
+		html += "<div style='width:210px;position:relative;left:12px;padding-left:2px;padding-top:4px;vertical-align:top;text-align:left;cursor:pointer' >"+tema.tema;
+
+		html += "</div></span>";
+		return(html);
+	},
+*/

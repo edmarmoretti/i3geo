@@ -251,7 +251,7 @@ function cliqueInserexy()
 		if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 		else
 		{
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&item="+item+"&valor="+valoritem+"&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
 			cpObj.call(p,"insereSHP",ajaxredesenha);
 		}
@@ -301,7 +301,7 @@ function cliqueInseregrafico()
 			{alert("Nenhum item foi escolhido");}
 			else
 			{
-				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&tipo=pizza&tema="+tema+"&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&itens="+itens+"&shadow_height="+shadow_height+"&width="+width+"&inclinacao="+inclinacao+"&g_sid="+g_sid;
 				cpObj.call(p,"insereSHPgrafico",ajaxredesenha);
 			}
@@ -355,12 +355,12 @@ function cliqueInseretoponimo()
 			//se texto for igual a vazio é pq o valor foi pego de um atributo
 			if(texto == "")
 			{
-				objaguarde.fecha("ajaxredesenha");
+				i3GEO.janela.fechaAguarde("ajaxredesenha");
 				texto = retorno.data;
 			}
 			if (texto != " ")
 			{
-				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
 				cpObj.call(p,"insereFeature",ajaxredesenha);
 			}
@@ -375,7 +375,7 @@ function cliqueInseretoponimo()
 			{
 				var tema = doc.getElementById("temasLigados").value;
 				var item = doc.getElementById("itemsel").value;
-				objaguarde.abre("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+g_sid;
 				cpObj.call(p,"identificaunico",digi);
 			}			
@@ -406,7 +406,7 @@ function cliqueSelecao()
 			{
 				ajaxredesenha(retorno);
 			};
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+g_sid;
 			cpObj.call(p,"selecaoPT",retorna);
 		}
@@ -522,10 +522,10 @@ function cliqueSelecaoPoli()
 					var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
 					var retorna = function()
 					{
-						objaguarde.fecha("ajaxredesenha",$trad("o1"));
+						i3GEO.janela.fechaAguarde("ajaxredesenha",$trad("o1"));
 						remapaf();
 					};
-					objaguarde.abre("ajaxredesenha",$trad("o1"));
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 					var cp = new cpaint();
 					//cp.set_debug(2)
 					cp.set_transfer_mode('POST');
@@ -548,10 +548,10 @@ function cliqueSelecaoPoli()
 			var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoPoli";
 			var retorna = function()
 			{
-				objaguarde.fecha("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.fechaAguarde("ajaxredesenha",$trad("o1"));
 				remapaf();
 			};
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_transfer_mode('POST');
@@ -746,7 +746,7 @@ function destacaTema(tema)
 			while(i--)
 		}
 	}
-	objaguarde.abre("ajaxdestaca","Aguarde...gerando imagem");
+	i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
 	g_destaca = tema;
 	var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"geraDestaque",ajaxdestaca);
@@ -771,7 +771,7 @@ function excluitemaf(tema)
 	}
 	while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"excluiTemas",ajaxredesenha);
 	objmapa.temaAtivo = "";
@@ -787,7 +787,7 @@ tema - código do tema
 */
 function sobetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"sobeTema",ajaxredesenha);
 }
@@ -802,7 +802,7 @@ tema - código do tema
 */
 function descetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"desceTema",ajaxredesenha);
 }
@@ -817,7 +817,7 @@ tema - código do tema
 */
 function zoomtemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"zoomTema",ajaxredesenha);
 }
@@ -833,7 +833,7 @@ tema - ID (name) do tema clicado
 function limpaseltemaf(tema)
 {
 	g_operacao = "limpasel";
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+tema+"&g_sid="+g_sid;
 	cpObj.call(p,"selecaoLimpa",ajaxredesenha);
 }
@@ -856,7 +856,7 @@ function mudatranspf(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		cpObj.call(p,"mudaTransparencia",ajaxredesenha);
 	}
@@ -881,7 +881,7 @@ function mudanomef(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		cpObj.call(p,"mudaNome",ajaxredesenha);
 	}
@@ -1059,7 +1059,7 @@ function area()
 		YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", escondeWdocaarea);
 		var temp = function(retorno)
 		{
-			objaguarde.fecha("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			g_areapixel = retorno.data;
 			if (g_areapixel < 0)
 			{alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.");}
@@ -1074,7 +1074,7 @@ function area()
 				richdraw.lineWidth = "2px";
 			}
 		};
-		objaguarde.abre("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=areaPixel&celsize="+g_celula+"&g_sid="+g_sid;
 		cpObj.call(p,"areaPixel",temp);			
 	}
@@ -1571,7 +1571,7 @@ function lenteDeAumento()
 	else
 	{
 		g_lenteaberta = "sim";
-		objaguarde.abre("ajaxabrelente",$trad("o1"));
+		i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 		cpObj.call(p,"lente",ajaxabrelente);
 	}
@@ -1702,7 +1702,7 @@ Reinicia o mapa atual
 */
 function reiniciaMapa()
 {
-	objaguarde.abre("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
 	cpObj.call(p,"reiniciaMapa",ajaxredesenha);
 }

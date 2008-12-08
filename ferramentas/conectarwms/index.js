@@ -63,13 +63,17 @@ function clickGuia2()
 function clickGuia3()
 {
 	mostraGuia("guia3")
-	$i("listatemas").innerHTML = "";
-	aguarde("block")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&&id_ws="+g_idws+"&servico="+$i("servico").value
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"temaswms",listatemas);
+	if ($i("servico").value == ""){alert("Serviço não definido");}
+	else
+	{
+		$i("listatemas").innerHTML = "";
+		aguarde("block")
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&&id_ws="+g_idws+"&servico="+$i("servico").value
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"temaswms",listatemas);
+	}
 }
 function registraws(nome,id_ws)
 {
@@ -141,7 +145,7 @@ function adiciona()
 			if(retorno.data != "ok")
 			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
 			else
-			{window.parent.remapaf()}
+			{window.parent.ajaxredesenha()}
 		}
 		aguarde("block");
 		var tiporep = $i("tiporep").value

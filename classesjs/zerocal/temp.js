@@ -527,17 +527,17 @@ Trata o erro de um try cacth.
 */
 function trataErro()
 {
-	objaguarde.fecha("ajaxdestaca");
-	objaguarde.fecha("ajaxabrelente");
-	objaguarde.fecha("ajaxiniciaParametros");
-	objaguarde.fecha("ajaxredesenha");
-	objaguarde.fecha("ajaxCorpoMapaEntorno");
-	objaguarde.fecha("ajaxCorpoMapa");
-	objaguarde.fecha("ajaxLegenda");
-	objaguarde.fecha("ajaxReferencia");
-	objaguarde.fecha("ajaxEscalaGrafica");
-	objaguarde.fecha("montaMapa");
-	objaguarde.fecha("aguardedoc");
+	i3GEO.janela.fechaAguarde("ajaxdestaca");
+	i3GEO.janela.fechaAguarde("ajaxabrelente");
+	i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+	i3GEO.janela.fechaAguarde("ajaxredesenha");
+	i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
+	i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
+	i3GEO.janela.fechaAguarde("ajaxLegenda");
+	i3GEO.janela.fechaAguarde("ajaxReferencia");
+	i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
+	i3GEO.janela.fechaAguarde("montaMapa");
+	i3GEO.janela.fechaAguarde("aguardedoc");
 }
 /*
 Function: iCookie
@@ -580,7 +580,7 @@ function mudaVisual(visual)
 {
 	var monta = function(retorno)
 	{
-		objaguarde.fecha("ajaxredesenha");
+		i3GEO.janela.fechaAguarde("ajaxredesenha");
 		var imgstemp = retorno.data.arquivos;
 		var imgs = new Array();
 		for (i=0;i < imgstemp.length; i++)
@@ -625,7 +625,7 @@ function mudaVisual(visual)
 		}
 		g_visual = visual;
 	};
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+g_sid+"&diretorio=imagens/visual/"+visual;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -730,7 +730,7 @@ function docaguias()
 			}
 		}
 		calcposf();
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -1487,7 +1487,7 @@ function ativaClicks(docMapa)
 			if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 			else
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2);
@@ -1513,7 +1513,7 @@ function ativaClicks(docMapa)
 				{alert("Nenhum item foi escolhido");}
 				else
 				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&tipo=pizza&tema="+tema+"&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&itens="+itens+"&shadow_height="+shadow_height+"&width="+width+"&inclinacao="+inclinacao+"&g_sid="+g_sid;
 					var cp = new cpaint();
 					//cp.set_debug(2);
@@ -1556,7 +1556,7 @@ function ativaClicks(docMapa)
 			var oy = doc.getElementById("offsety").value;
 			var pl = doc.getElementById("partials").value;
 			var pos = doc.getElementById("position").value;
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2);
@@ -1574,7 +1574,7 @@ function ativaClicks(docMapa)
 			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 			if ((tipo != "limpa") && (tipo != "inverte"))
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
@@ -1601,7 +1601,7 @@ function ativaClicks(docMapa)
 			var novoyf = (ex[3] * 1) - disty;
 			if ((distx == 0)||(disty == 0))
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
@@ -1610,7 +1610,7 @@ function ativaClicks(docMapa)
 				return;
 			}
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex+"&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -1875,7 +1875,7 @@ Aproxima o mapa tendo o centro como referência.
 */
 function zoomiauto()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid;
 	var cp = new cpaint();
@@ -1891,7 +1891,7 @@ Afasta o mapa tendo o centro como referência.
 */
 function zoomoauto()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	g_fatordezoom = 0;
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid;
 	var cp = new cpaint();
@@ -1976,7 +1976,7 @@ function zoomboxf (tipo)
 			if (x1 != x2)
 			{
 				objmapa.extent=v;
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+v+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
@@ -1996,7 +1996,7 @@ function zoomboxf (tipo)
 				//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 				if ((tipo != "limpa") && (tipo != "inverte"))
 				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+g_sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
 					var cp = new cpaint();
 					//cp.set_debug(2)
@@ -2023,7 +2023,7 @@ function zoomIP()
 	{
 		if (retorno.data.latitude != null)
 		{
-			objaguarde.abre("ajaxredesenha","Aguarde...");
+			i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -2050,7 +2050,7 @@ function zoomPonto()
 	{
 		var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
 		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -2099,7 +2099,7 @@ function aplicaescala()
 	{var nova = $i("escalanum").value;}
 	else
 	{ var nova = objmapa.scale;}
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+nova+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -2114,7 +2114,7 @@ Zoom para a extensão default.
 */
 function zoomtot()
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -2149,7 +2149,7 @@ function panFixo(direcao)
 		var x = objmapa.w / 6;
 		var y = objmapa.h / 2;
 	}
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&x="+x+"&y="+y+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -3161,7 +3161,7 @@ function remapaf()
 				}
 				if (ta.length > 0)
 				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 					var temp = function()
 					{ajaxredesenha("");};
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+g_sid;
@@ -3172,20 +3172,20 @@ function remapaf()
 				}
 				else
 				{
-					objaguarde.abre("ajaxredesenha","Aguarde...");
+					i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 					ajaxredesenha("");
 				}
 			}
 			else
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				ajaxredesenha("");
 			}
-			objaguarde.fecha("remapa");
+			i3GEO.janela.fechaAguarde("remapa");
 		};
 		if ((tsd.length > 0) || (tsl.length > 0))
 		{
-			objaguarde.abre("remapa","Aguarde...refazendo o mapa");
+			i3GEO.janela.abreAguarde("remapa","Aguarde...refazendo o mapa");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -3486,7 +3486,7 @@ function filmezf(o)
 	{
 		ext = quadrosfilme[quadro].extensao;
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+ext+"&g_sid="+g_sid;
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -4149,7 +4149,7 @@ function destacaTema(tema)
 			{alert("Desligue o tema antes de destacar");return;}
 		}
 	}
-	objaguarde.abre("ajaxdestaca","Aguarde...gerando imagem");
+	i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
 	g_destaca = tema;
 	var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+g_sid;
 	var cp = new cpaint();
@@ -4178,7 +4178,7 @@ function excluitemaf(tema)
 		p.removeChild(p.childNodes[0]);
 	} while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -4197,7 +4197,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function sobetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -4215,7 +4215,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function descetemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -4233,7 +4233,7 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function zoomtemaf(tema)
 {
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2);
@@ -4252,7 +4252,7 @@ celula - objeto que foi clicado nas opções de um tema. Passado para a função peg
 function limpaseltemaf(celula)
 {
 	g_operacao = "limpasel";
-	objaguarde.abre("ajaxredesenha","Aguarde...");
+	i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+pegaTema(celula)+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2);
@@ -4278,7 +4278,7 @@ function mudatranspf(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -4309,7 +4309,7 @@ function mudanomef(idtema)
 		var p = $i("nometema"+idtema);
 		$i("nometema"+idtema).innerHTML = valor;
 		//valor = htmlAcentos(valor);
-		objaguarde.abre("ajaxredesenha","Aguarde...");
+		i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2);
@@ -4973,7 +4973,7 @@ function ajaxCorpoMapa(retorno)
 {
 	$i("mst").style.display="block";
 	if (!$i("img")){return;}
-	objaguarde.abre("ajaxCorpoMapa1","Lendo imagem...");
+	i3GEO.janela.abreAguarde("ajaxCorpoMapa1","Lendo imagem...");
 	//retorno não é um objeto CPAINT
 	if (retorno.data){retorno = retorno.data;}
 	if ((retorno != "erro") && (retorno != undefined))
@@ -4992,7 +4992,7 @@ function ajaxCorpoMapa(retorno)
 			$i("img").style.width = objmapa.w;
 			$i("img").style.height = objmapa.h;
 			calcposf();
-			objaguarde.fecha("ajaxCorpoMapa1");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
 			if ($i("imgtemp"))
 			{$i("imgtemp").style.display="none";}
 			$i("img").onload = "";
@@ -5024,7 +5024,7 @@ function ajaxredesenha(retorno)
 	if ((retorno != "erro") && (retorno != undefined))
 	{
 		if (retorno.search("var mapimagem=") > -1)
-		{objaguarde.abre("ajaxiniciaParametros","Aguarde...");ajaxIniciaParametros(original);}
+		{i3GEO.janela.abreAguarde("ajaxiniciaParametros","Aguarde...");ajaxIniciaParametros(original);}
 		else
 		{
 			//algumas variï¿½eis nï¿½ sï¿½ retornadas, conforme o programa, entï¿½ devem ser declaradas
@@ -5032,14 +5032,14 @@ function ajaxredesenha(retorno)
 			//pega os parametros do mapa e redesenha
 			if($i("img"))
 			{
-				objaguarde.abre("ajaxiniciaParametros","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxiniciaParametros","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+g_tipoimagem+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
 				cp.call(p,"redesenhaCorpo",ajaxIniciaParametros);
 			}
-			objaguarde.fecha("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			if ($i("img_d"))
 			{$i("img_d").style.display = "none";}
 			g_destaca = "";
@@ -5180,12 +5180,12 @@ function ajaxIniciaParametros(retorno)
 			//
 			//fecha as janelas de aguarde
 			//
-			objaguarde.fecha("ajaxiniciaParametros");
-			objaguarde.fecha("aguardedoc");
-			objaguarde.fecha("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+			i3GEO.janela.fechaAguarde("aguardedoc");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			if (g_lenteaberta == "sim")
 			{
-				objaguarde.abre("ajaxabrelente","Aguarde...abrindo lente");
+				i3GEO.janela.abreAguarde("ajaxabrelente","Aguarde...abrindo lente");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2);
@@ -5243,7 +5243,7 @@ function ajaxabrelente(retorno)
 		oboxlente.style.visibility='visible';
 		olente.style.display='block';
 		olente.style.visibility='visible';
-		objaguarde.fecha("ajaxabrelente");
+		i3GEO.janela.fechaAguarde("ajaxabrelente");
 	}
 	catch(e){trataErro();}
 }
@@ -5290,7 +5290,7 @@ function ajaxdestaca(retorno)
 	novoel.src = m.src;
 	novoel.style.display = "block";
 	$i("div_d").appendChild(novoel);
-	objaguarde.fecha("ajaxdestaca");
+	i3GEO.janela.fechaAguarde("ajaxdestaca");
 }
 //testa se esse script foi carregado
 function testaajax()
@@ -6117,7 +6117,7 @@ function Mapa(e,m)
 		{alert("redesenho.js com problemas");}
 		//
 		//objeto que guarda os parametros de posicionamento do cursor
-		objaguarde.abre("montaMapa","Aguarde...iniciando o mapa");
+		i3GEO.janela.abreAguarde("montaMapa","Aguarde...iniciando o mapa");
 		var cp = new cpaint();
 		cp.set_response_type("JSON");
 		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
@@ -6140,7 +6140,7 @@ function Mapa(e,m)
 		}
 		if (retorno.data == "linkquebrado")
 		{
-			objaguarde.fecha("montaMapa");
+			i3GEO.janela.fechaAguarde("montaMapa");
 			document.body.style.backgroundColor="white";
 			document.body.innerHTML = "<br>Para abrir o mapa utilize o link:<br><a href="+g_locaplic+"/ms_criamapa.php >"+g_locaplic+"/ms_criamapa.php</a>";
 			return("linkquebrado");
@@ -6332,7 +6332,7 @@ function Mapa(e,m)
 			if (pCookie("g_mapaRefDisplay")){g_mapaRefDisplay = pCookie("g_mapaRefDisplay");}
 			if (g_mapaRefDisplay == "block"){initJanelaRef();}
 			if($i("img")){g_quadrooriginal = $i("img").src;}
-			objaguarde.fecha("montaMapa");
+			i3GEO.janela.fechaAguarde("montaMapa");
 			if (g_docaguias == "sim"){docaguias();}
 			if (document.getElementById("botao3d"))
 			{
@@ -6726,7 +6726,7 @@ function Mapa(e,m)
 				else
 				{
 					g_lenteaberta = "sim";
-					objaguarde.abre("ajaxabrelente","Aguarde...");
+					i3GEO.janela.abreAguarde("ajaxabrelente","Aguarde...");
 					var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 					var cp = new cpaint();
 					//cp.set_debug(2)
@@ -6830,7 +6830,7 @@ function Mapa(e,m)
 		{
 			$i(id).onclick =function()
 			{
-				objaguarde.abre("ajaxredesenha","Aguarde...");
+				i3GEO.janela.abreAguarde("ajaxredesenha","Aguarde...");
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2);
@@ -7120,7 +7120,7 @@ function Mapa(e,m)
 	{
 		if ($i("escalaGrafica"))
 		{
-			//objaguarde.abre("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
+			//i3GEO.janela.abreAguarde("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -7182,7 +7182,7 @@ function Mapa(e,m)
 	{
 		if ($i("legenda"))
 		{
-			//objaguarde.abre("ajaxLegenda","Aguarde...atualizando a legenda");
+			//i3GEO.janela.abreAguarde("ajaxLegenda","Aguarde...atualizando a legenda");
 			var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)
@@ -7349,7 +7349,7 @@ function Mapa(e,m)
 		}
 		this.atualizaCorpoMapa = function()
 		{
-			objaguarde.abre("ajaxCorpoMapa","Aguarde...");
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa","Aguarde...");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2)

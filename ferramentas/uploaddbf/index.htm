@@ -6,10 +6,8 @@
 <style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
 <title></title>
 </head>
-<body >
+<body style="overflow:auto">
 <div style="top:5px;left:10px;display:block;position:absolute">
-Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF. Os valores de x e y devem utilizar "." como separador de decimal.
-<br>
 <form id=f action="upload.php" method="post" ENCTYPE="multipart/form-data">
   <pre style="font-size:14px">
 dbf: <input class=digitar type="file" size=20 name="filedbf">
@@ -24,6 +22,17 @@ Proje&ccedil;&atilde;o:
 </div>
 </form>
 </div>
+<div id=men1 style=left:0px;width:100%;top:220px; >
+Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF.
+Os valores de x e y devem utilizar "." como separador de decimal. Se as coordenadas estiverem na proje&ccedil;&atilde;o
+geogr&aacute;fica, os valores dever&atilde;o estar em d&eacute;cimos de grau, com sinal negativo para pontos ao
+sul do equador e oeste do meridiano 0.<br>
+O arquivo DBF será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que
+os arquivos temporários sejam apagados. Não utilize essa opção se existir alguma restrição ao uso do arquivo e se
+a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatível
+com essas restri&ccedil;&otilde;es
+</div>  
+
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 </body>

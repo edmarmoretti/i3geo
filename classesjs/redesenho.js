@@ -230,7 +230,7 @@ retorno - string no formato "var refimagem='nome da imagem'".
 */
 function ajaxReferencia(retorno)
 {
-	objaguarde.fecha("ajaxreferencia1");
+	i3GEO.janela.fechaAguarde("ajaxreferencia1");
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
 		eval(retorno.data);
@@ -343,7 +343,7 @@ function ajaxCorpoMapa(retorno)
 	if (!$i("img")){return;}
 	try
 	{
-		objaguarde.abre("ajaxCorpoMapa1",$trad("o3"));
+		i3GEO.janela.abreAguarde("ajaxCorpoMapa1",$trad("o3"));
 		//retorno não é um objeto CPAINT
 		if(retorno.data){var retorno = retorno.data;}
 		if (retorno.variaveis){var retorno = retorno.variaveis;}
@@ -363,12 +363,13 @@ function ajaxCorpoMapa(retorno)
 				$i("img").style.width = objmapa.w;
 				$i("img").style.height = objmapa.h;
 				calcposf();
-				objaguarde.fecha("ajaxCorpoMapa1");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
 				if ($i("imgtemp"))
 				{$i("imgtemp").style.display="none";}
 				$i("img").onload = "";
 			};
 			$i("img").src=mapimagem;
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
 		}
 		else
 		{
@@ -419,7 +420,7 @@ function ajaxredesenha(retorno)
 	try
 	{
 		if(retorno && retorno.data.temas)
-		{objaguarde.abre("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
+		{i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
 		else
 		{
 			//algumas variï¿½eis nï¿½ sï¿½ retornadas, conforme o programa, entï¿½ devem ser declaradas
@@ -427,14 +428,14 @@ function ajaxredesenha(retorno)
 			//pega os parametros do mapa e redesenha
 			if($i("img"))
 			{
-				objaguarde.abre("ajaxiniciaParametros",$trad("o1"));
+				i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+g_tipoimagem+"&g_sid="+g_sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
 				cp.call(p,"redesenhaCorpo",ajaxIniciaParametros);
 			}
-			objaguarde.fecha("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			if ($i("img_d"))
 			{$i("img_d").style.display = "none";}
 			g_destaca = "";
@@ -488,7 +489,7 @@ retorno - objeto JSON.
 */
 function ajaxIniciaParametros(retorno)
 {
-	ativaMensagemBanner();
+	i3GEO.ajuda.ativaLetreiro(g_locaplic,g_sid);
 	var tempo = "";
 	if ($i("openlayers"))
 	{
@@ -610,12 +611,12 @@ function ajaxIniciaParametros(retorno)
 		//
 		//fecha as janelas de aguarde
 		//
-		objaguarde.fecha("ajaxiniciaParametros");
-		objaguarde.fecha("aguardedoc");
-		objaguarde.fecha("ajaxredesenha");
+		i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+		i3GEO.janela.fechaAguarde("aguardedoc");
+		i3GEO.janela.fechaAguarde("ajaxredesenha");
 		if (g_lenteaberta == "sim")
 		{
-			objaguarde.abre("ajaxabrelente",$trad("o4"));
+			i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o4"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
 			var cp = new cpaint();
 			//cp.set_debug(2);
@@ -673,7 +674,7 @@ function ajaxabrelente(retorno)
 		oboxlente.style.visibility='visible';
 		olente.style.display='block';
 		olente.style.visibility='visible';
-		objaguarde.fecha("ajaxabrelente");
+		i3GEO.janela.fechaAguarde("ajaxabrelente");
 	}
 	catch(e){trataErro();}
 }
@@ -721,7 +722,7 @@ function ajaxdestaca(retorno)
 	novoel.src = m.src;
 	novoel.style.display = "block";
 	$i("div_d").appendChild(novoel);
-	objaguarde.fecha("ajaxdestaca");
+	i3GEO.janela.fechaAguarde("ajaxdestaca");
 }
 //testa se esse script foi carregado
 function testaajax()

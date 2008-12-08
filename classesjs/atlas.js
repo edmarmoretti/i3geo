@@ -202,10 +202,10 @@ id - id da prancha que será aberta
 */
 function abrePrancha(id)
 {
-	objaguarde.abre("Atlas","Atlas");
+	i3GEO.janela.abreAguarde("Atlas","Atlas");
 	var monta = function(retorno)
 	{
-		objaguarde.fecha("Atlas");
+		i3GEO.janela.fechaAguarde("Atlas");
 		if(retorno.data.link != "")
 		{
 			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");

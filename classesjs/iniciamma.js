@@ -531,7 +531,7 @@ function Mapa(e,m)
 			//
 			//inicia o mapa
 			//
-			objaguarde.abre("montaMapa",$trad("o5"));
+			i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
 			cpObj.call(p,"iniciaMapa",this.montaMapa);
 		}
@@ -549,7 +549,7 @@ function Mapa(e,m)
 	{
 		if (retorno.data.erro)
 		{
-			objaguarde.fecha("montaMapa");
+			i3GEO.janela.fechaAguarde("montaMapa");
 			document.body.style.backgroundColor="white";
 			document.body.innerHTML = "<br>Para abrir o mapa utilize o link:<br><a href="+g_locaplic+"/ms_criamapa.php >"+g_locaplic+"/ms_criamapa.php</a>";
 			return("linkquebrado");
@@ -653,7 +653,7 @@ function Mapa(e,m)
 				//
 				//ativa as mensagens no banner
 				//
-				ativaMensagemBanner();
+				i3GEO.ajuda.ativaLetreiro(g_locaplic,g_sid);
 				//
 				//ativa o timer para verificar se o mouse está parado
 				//
@@ -737,7 +737,7 @@ function Mapa(e,m)
 				if (g_mapaRefDisplay == "block"){initJanelaRef();}
 			}
 			if($i("img")){g_quadrooriginal = $i("img").src;}
-			objaguarde.fecha("montaMapa");
+			i3GEO.janela.fechaAguarde("montaMapa");
 			if (g_docaguias == "sim"){docaguias();}
 			if (document.getElementById("botao3d"))
 			{
@@ -784,7 +784,7 @@ function Mapa(e,m)
 	{
 		if ($i("escalaGrafica"))
 		{
-			//objaguarde.abre("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
+			//i3GEO.janela.abreAguarde("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+g_sid;
 			cpObj.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
 		}
@@ -863,7 +863,7 @@ function Mapa(e,m)
 	{
 		if ($i("legenda"))
 		{
-			//objaguarde.abre("ajaxLegenda","Aguarde...atualizando a legenda");
+			//i3GEO.janela.abreAguarde("ajaxLegenda","Aguarde...atualizando a legenda");
 			var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+g_sid;
 			cpObj.call(p,"legendaGrafica",ajaxLegendaImagem);
 		}
@@ -956,7 +956,7 @@ function Mapa(e,m)
 		}
 		this.atualizaCorpoMapa = function()
 		{
-			objaguarde.abre("ajaxCorpoMapa",$trad("o1"));
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid+"&tipoimagem="+g_tipoimagem;
 			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
 		};

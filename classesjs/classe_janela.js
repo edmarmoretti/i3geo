@@ -212,5 +212,55 @@ i3GEO.janela = {
 			i.style.width = w;
 			i.style.height = h;
 		}
+	},
+	/*
+	Function: abreAguarde
+	
+	Abre uma janela com a mensagem de agurde e bloqueia cliques nomapa
+	
+	Parameters:
+	
+	id {String} - id danovajanela
+	
+	texto {String} - texto da janela
+	*/
+	abreAguarde: function(id,texto){
+		if($i(id+"_mask"))
+		{document.body.removeChild($i(id+"_mask"));}
+		if($i(id+"_c"))
+		{document.body.removeChild($i(id+"_c"));}
+		YAHOO.namespace("aguarde."+id);
+		var pos = [0,0];
+		if($i("corpoMapa"))
+		{var pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
+		else if ($i("contemImg"))
+		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
+		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
+		eval ('YAHOO.aguarde.'+id+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
+		eval ('YAHOO.aguarde.'+id+'.body.style.height="20px"');
+		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img src=\'"+g_locaplic+"/imagens/aguarde.gif\' /></span>")');
+		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
+		if($i("flamingo"))
+		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}
+		else
+		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
+		eval ('YAHOO.aguarde.'+id+'.show()');
+		if($i(id+"_mask"))
+		{$i(id+"_mask").style.zIndex=5000;}
+		if($i(id+"_c"))
+		{$i(id+"_c").style.zIndex=6000;}	
+	},
+	/*
+	Function: fechaAguarde
+	
+	Fecha uma janela do tipo aguarde
+	
+	Paremeters:
+	
+	id {String} - id da janela que será fechada
+	*/
+	fechaAguarde: function(id){
+		try{eval('YAHOO.aguarde.'+id+'.destroy()');}
+		catch(e){};
 	}
 }

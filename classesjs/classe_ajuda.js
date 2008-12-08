@@ -66,7 +66,21 @@ i3GEO.ajuda = {
 	{String}
 	*/
 	DIVAJUDA: "i3geo_ajuda",
+	/*
+	Property: DIVLETREIRO
 	
+	Id do elemento HTML onde será incluído o banner (letreiro) de mensagens.
+	
+	Esse tipo de mensagem é obtida do METADATA "MENSAGEM" que pode ser incluído em um layer.
+	
+	Default "bannerMensagem"
+	
+	Type:
+	{String}
+	*/
+	DIVLETREIRO: "i3geo_letreiro",
+	
+		
 	mostraTip: function(){
 	},
 	/*
@@ -106,7 +120,7 @@ i3GEO.ajuda = {
 					var nx = pos[0] - 267;
 					var ny = objmapa.h - 70;
 				}
-				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(170,170,170)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
+				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
 				var janela = i3GEO.janela.cria("266","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
 				janela[2].innerHTML = texto;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
@@ -144,7 +158,75 @@ i3GEO.ajuda = {
 	desativaCookie: function(){
 		i3GEO.util.insereCookie("g_janelaMen","nao");
 	},
+	
 	reposicionaJanela: function(){
+	},
+	
+	/*
+	Function: ativaLetreiro
+	
+	Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
+	
+	Se existirem mensagens, as mesmas são incluídas no letreiro.
+	
+	O letreiro deve ser um elemento do tipo INPUT (text).
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo para a chamada ajax
+	
+	sid {String} - códigoda seção no servidor
+	*/
+	ativaLetreiro: function(locaplic,sid){
+		if($i(i3GEO.ajuda.DIVLETREIRO))
+		{
+			try
+			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
+			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
+			var l= $i(i3GEO.ajuda.DIVLETREIRO);
+			if(l.style.display=="none"){return;}
+			l.style.cursor="pointer";
+			var montaLetreiro = function(retorno)
+			{
+				if(retorno.data == ""){
+					l.value = "";
+					return;
+				}
+				if (l.size == 1)
+				{l.size = objmapa.w / 8;}
+				BMessage = retorno.data + " ---Clique para parar--- ";
+				l.onclick = function()
+				{l.style.display = "none";};
+				if (BMessage != " ---Clique para parar--- ")
+				{
+					BQuantas = 0;
+					BSize = l.size;
+					BPos=BSize;
+					BSpeed = 1;
+					BSpaces = "";
+					i3GEO.ajuda.mostraLetreiro();
+				}
+			};
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			var p = locaplic+"/classesphp/mapa_controle.php?funcao=pegaMensagens&g_sid="+sid;
+			cp.call(p,"pegaMensagem",montaLetreiro);	
+		}
+	},
+	mostraLetreiro: function(){
+		for (count=0; count<BPos; count++)
+		{BSpaces+= " ";}
+		if (BPos < 1){
+			$i(i3GEO.ajuda.DIVLETREIRO).value = BMessage.substring(Math.abs(BPos), BMessage.length);
+			if (BPos+BMessage.length < 1)
+			{BPos = BSize;BQuantas = BQuantas + 1;}
+		}
+		else
+		{$i(i3GEO.ajuda.DIVLETREIRO).value = BSpaces + BMessage;}
+		BPos-=BSpeed;
+		if (BQuantas < 2)
+		i3GEO.ajuda.tempoLetreiro = setTimeout('i3GEO.ajuda.mostraLetreiro();', 140);
 	}
 };
 //
@@ -159,3 +241,5 @@ if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
 	}
 	catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
 }
+if(document.getElementById("bannerMensagem"))
+{i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}

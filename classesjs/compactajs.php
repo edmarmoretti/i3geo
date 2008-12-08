@@ -52,6 +52,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("depreciados.js","compactados/depreciados_compacto.js","Normal");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
 packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
 packer("classe_util.js","compactados/classe_util_compacto.js","Normal");
@@ -96,6 +97,7 @@ $jsfiles = array(
 //"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
 //"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
+"compactados/depreciados_compacto.js",
 "compactados/funcoes_compacto.js",
 "compactados/classe_configura_compacto.js",
 "compactados/dicionario_compacto.js",

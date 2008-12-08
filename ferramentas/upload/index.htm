@@ -6,7 +6,7 @@
 <style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
 <title></title>
 </head>
-<body >
+<body style=overflow:auto; >
 <div style="top:5px;left:10px;display:block;position:absolute">
 <form id=f action="upload.php" method="post" ENCTYPE="multipart/form-data">
   Arquivos para upload:<br>
@@ -21,6 +21,12 @@ Proje&ccedil;&atilde;o:
 	<input type="hidden" name="MAX_FILE_SIZE" value="10000" />
 </div>
 </form>
+</div>
+<div id=men1 style=left:0px;width:100%;top:220px; >
+O arquivo shapefile será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que
+os arquivos temporários sejam apagados. Não utilize essa opção se existir alguma restrição ao uso do arquivo e se
+a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatível
+com essas restri&ccedil;&otilde;es
 </div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>

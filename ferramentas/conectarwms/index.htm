@@ -80,7 +80,7 @@ if (document.getElementById("RSSwms"))
 }
 function mostraRetornowmsRSS(retorno)
 {
-	aguarde("none")
+	
 	var reg = /Erro/gi;
 	if (retorno.data.rss.search(reg) != -1)
 	{
@@ -101,6 +101,7 @@ function mostraRetornowmsRSS(retorno)
 		}
 	}
 	document.getElementById("RSSwms").innerHTML = ins+"<br><br>"
+	aguarde("none")
 }
 </script>
 </body>

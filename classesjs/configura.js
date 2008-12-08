@@ -525,7 +525,7 @@ oMenuData = {
 };
 oMenuData.janelas = [
 	{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
-	{ text: $trad("u16"), url: "javascript:initJanelaMen()" }        
+	{ text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 	];
 oMenuData.arquivo = [
 	{ text: $trad("u17"), url: "javascript:salvaMapa()" },

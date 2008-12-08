@@ -36,7 +36,9 @@ if (!$i("mascaraaguarde"))
 {
 	if (navm){var s = "filter:'alpha(opacity=20)'";}
 	if (navn){var s = "opacity:.2";}
-	document.body.innerHTML += "<div id=mascaraaguarde style=display:none;position:absolute;top:0px;left:0px;width:120%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >&nbsp;</div>";
+	var ins = "<div id=mascaraaguarde style=color:red;display:none;position:absolute;top:0px;left:0px;width:120%;height:"+h+"px;background-color:gray;border-size:0px;z-index:6000;"+s+" >";
+	ins += "&nbsp;</div>";
+	document.body.innerHTML += ins 
 }
 if (navn)
 {
@@ -70,17 +72,10 @@ function aguarde(tipo)
 {
 	if (tipo == "block")
 	{
-		if (window.parent.document.getElementById("wdoca_h"))
-		{
-			cabecalhojanela = window.parent.document.getElementById("wdoca_h").innerHTML;
-			window.parent.document.getElementById("wdoca_h").innerHTML = "<img src=\'"+window.parent.g_locaplic+"/imagens/aguarde.gif\' /><span style=color:red >&nbsp;Aguarde...</span>";
-			$i("mascaraaguarde").style.display = "block";
-		}	
+		$i("mascaraaguarde").style.display = "block";
 	}
 	if (tipo == "none")
 	{
-		if (window.parent.document.getElementById("wdoca_h"))
-		{window.parent.document.getElementById("wdoca_h").innerHTML = cabecalhojanela;}
 		if ($i("mascaraaguarde"))
 		{$i("mascaraaguarde").style.display="none";}
 	}

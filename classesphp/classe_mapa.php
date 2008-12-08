@@ -1060,6 +1060,7 @@ Include:
 		$layer->setmetadata("wms_format",$im);
 		$layer->setmetadata("wfs","nao");
 		//verifica se o serviço tem wfs
+		/*
 		$wfs = existeWFS();
 		if ($wfs != "nao")
 		{
@@ -1068,6 +1069,8 @@ Include:
 			//if ($existeWFS == "sim")
 			//{$layer->setmetadata("wfs","sim");}
 		}
+		*/
+		$layer->setmetadata("wfs","nao");
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
 		ms_newLayerObj($this->mapa, $layer);

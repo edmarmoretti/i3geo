@@ -977,9 +977,9 @@ i3GEO.arvoreDeTemas = {
 		//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
 		//
 		if(tsl.length > 0){
-			objaguarde.abre("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 			var temp = function(retorno){
-				objaguarde.fecha("ajaxredesenha");
+				i3GEO.janela.fechaAguarde("ajaxredesenha");
 				if(retorno.data.erro){
 					alert(retorno.data.erro);
 					return;

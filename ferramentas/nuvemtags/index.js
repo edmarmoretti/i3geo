@@ -23,8 +23,13 @@ Free Software Foundation, Inc., no endereço
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao1");}
+	{
+		botao1 = new YAHOO.widget.Button("botao1");
+		botao1.on("click", buscarss);
+	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+   	
+   	
 }()	
 aguarde("block")
 parametrosURL()

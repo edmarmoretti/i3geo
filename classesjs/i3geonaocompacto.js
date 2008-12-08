@@ -29,6 +29,7 @@ var jsfiles = new Array(
 "../pacotes/yui252/build/utilities/utilities.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
 "../pacotes/yui252/build/treeview/treeview-min.js",
+"depreciados.js",
 "classe_util.js",
 "classe_configura.js",
 "dicionario.js",
