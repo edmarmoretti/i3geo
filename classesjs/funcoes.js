@@ -1031,9 +1031,7 @@ function ativaClicks(docMapa)
 					return;
 				}
 				var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+nex+"&g_sid="+g_sid;
-				cpObj.call(p,"mudaExtensao",ajaxredesenha);
+				i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,nex);
 			}
 		}
 		catch(e){var e = "";}
@@ -1065,25 +1063,16 @@ function zoomAnterior()
 				var muda = i - 1;break;
 			}
 		}
-		function retorna(retorno)
+		if(quadrosfilme[muda].extensao != " ")
 		{
-			ajaxredesenha(retorno);
-			//
-			//zera os novos quadros adicionados
-			//
+			g_zoomProximo.push(objmapa.extent);
+			i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,quadrosfilme[muda].extensao);
 			for (var i = n-1; i > muda; i--)
 			{
 				$i("f"+(i)).className = "quadro";
 				var qu = new quadrofilme();
 				quadrosfilme[i] = qu;
 			}
-		}
-		if(quadrosfilme[muda].extensao != " ")
-		{
-			g_zoomProximo.push(objmapa.extent);
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[muda].extensao+"&g_sid="+g_sid;
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			cpObj.call(p,"mudaExtensao",retorna);
 		}
 	}
 	catch(e){var e = "";}
@@ -1102,9 +1091,7 @@ function zoomProximo()
 		var n = g_zoomProximo.length;
 		if (n > 0 && g_zoomProximo[n-1] != objmapa.extent)
 		{
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+g_zoomProximo[n-1]+"&g_sid="+g_sid;
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			cpObj.call(p,"mudaExtensao",ajaxredesenha);
+			i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,g_zoomProximo[n-1]);
 			g_zoomProximo.pop();
 		}
 	}
@@ -1168,18 +1155,18 @@ function mostraRosaDosVentos()
 				}
 				var setas = "<table id='rosaV' >";
 				setas += "<tr onclick=\"javascript:g_mostraRosa='nao'\"><td></td><td></td><td style=cursor:pointer >x</td></tr><tr>";
-				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('noroeste')\" /></td>";
-				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"panFixo('norte')\" /></td>";
-				setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('nordeste')\" /></td></tr>";
-				setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('oeste')\" /></td>";
+				setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','noroeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+				setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','norte','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+				setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','nordeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+				setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','oeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
 				setas += "<td><table><tr>";
-				setas += "<td><img class='rosamais' title='aproxima' onclick='zoomiauto()' src='"+$im("branco.gif")+"' </td>";
-				setas += "<td><img class='rosamenos' title='afasta' onclick='zoomoauto()' src='"+$im("branco.gif")+"' </td>";
+				setas += "<td><img class='rosamais' title='aproxima' onclick='i3GEO.navega.zoomin()' src='"+$im("branco.gif")+"' </td>";
+				setas += "<td><img class='rosamenos' title='afasta' onclick='i3GEO.navega.zoomout()' src='"+$im("branco.gif")+"' </td>";
 				setas += "</tr></table></td>";
-				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"panFixo('leste')\" /></td></tr>";
-				setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudoeste')\" /></td>";
-				setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"panFixo('sul')\" /></td>";
-				setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"panFixo('sudeste')\" /></td></tr></table>";
+				setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','leste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+				setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','sudoeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+				setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','sul','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+				setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+g_locaplic+"','"+g_sid+"','sudeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr></table>";
 				var i = $i("tip");
 				i.innerHTML = setas;
 				i.style.top = objposicaocursor.telay - 27;
@@ -1295,8 +1282,8 @@ function initJanelaZoom(qual)
 				$i("img").style.height = nh;
 				$top("img",nt);
 				$left("img",nl);
-				if ($i("escalanum"))
-				{$i("escalanum").value=ns;}
+				if ($i("i3geo_escalanum"))
+				{$i("i3geo_escalanum").value=ns;}
 			};
 		}		
 		return;
@@ -1412,32 +1399,7 @@ function movelentef()
 	}
 	catch(e){var e = "";}
 }
-/*
-Function: zoomiauto
 
-Aproxima o mapa tendo o centro do mapa atual como referência.
-*/
-function zoomiauto()
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	g_fatordezoom = 0;
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel=2&g_sid="+g_sid;
-	g_operacao = "navega";
-	cpObj.call(p,"aproxima",ajaxredesenha);
-}
-/*
-Function: zoomoauto
-
-Afasta o mapa tendo o centro do mapa atual como referência.
-*/
-function zoomoauto()
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	g_fatordezoom = 0;
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel=2&g_sid="+g_sid;
-	g_operacao = "navega";
-	cpObj.call(p,"afasta",ajaxredesenha);
-}
 /*
 Function: zoomboxf
 
@@ -1524,9 +1486,7 @@ function zoomboxf(tipo)
 			if (x1 != x2)
 			{
 				objmapa.extent=v;
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+v+"&g_sid="+g_sid;
-				cpObj.call(p,"mudaExtensao",ajaxredesenha);
+				i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,v);
 			}
 		}
 		else
@@ -1559,57 +1519,6 @@ function zoomboxf(tipo)
 	}
 }
 /*
-Function: zoomIP
-
-Localiza no mapa o usuário baseado em seu número IP.
-
-O ponto de localização é adicionado ao mapa como um novo tema.
-*/
-function zoomIP()
-{
-	try
-	{
-		var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-		var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		var mostraIP = function(retorno)
-		{
-			if (retorno.data.latitude != null)
-			{
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&tamanho=14&xy="+retorno.data.longitude+" "+retorno.data.latitude+"&g_sid="+g_sid;
-				cpObj.call(p,"zoomPonto",ajaxredesenha);
-			}
-			else
-			{alert("Nao foi possivel identificar a localizacao.");}
-		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+g_sid;
-		cpObj.call(p,"localizaIP",mostraIP);	
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: zoomPonto
-
-Localiza uma coordenada no mapa e desloca o mapa centralizando no ponto.
-
-O ponto de localização é adicionado ao mapa como um novo tema.
-*/
-function zoomPonto()
-{
-	try
-	{
-		if ($i("xg"))
-		{
-			var xxx = convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-			var yyy = convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+xxx+" "+yyy+"&g_sid="+g_sid;
-			cpObj.call(p,"zoomPonto",ajaxredesenha);
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
 Function: clicouRef
 
 Altera a abrangência do mapa quando o mapa de referência é clicado
@@ -1635,94 +1544,6 @@ function movimentoRef(obj)
 	{
 		capturaposicao(exy);
 	};
-}
-/*
-Function: aplicaescala
-
-Aplica a escala numerica definida no formulário existente no mapa.
-
-O valor da escala a ser aplicada é obtido do elemento com id="escalanum"
-*/
-function aplicaescala()
-{
-	if ($i("escalanum"))
-	{var nova = $i("escalanum").value;}
-	else
-	{var nova = objmapa.scale;}
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+nova+"&g_sid="+g_sid;
-	g_operacao = "outras";
-	cpObj.call(p,"mudaEscala",ajaxredesenha);
-}
-/*
-Function: zoomtot
-
-Zoom para a extensão default.
-
-O valor da extensão default é obtido de objmapa.extentTotal, cujo valor é definido na inicialização do mapa.
-*/
-function zoomtot()
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+objmapa.extentTotal+"&g_sid="+g_sid;
-	g_operacao = "navega";
-	cpObj.call(p,"mudaExtensao",ajaxredesenha);
-}
-/*
-Function: panFixo
-
-Desloca o mapa em uma direção determinada.
-
-Parameters:
-
-direcao - norte|sul|leste|oeste
-*/
-function panFixo(direcao)
-{
-	if (direcao == "norte")
-	{
-		var y = objmapa.h / 6;
-		var x = objmapa.w / 2;
-	}
-	if (direcao == "sul")
-	{
-		var y = objmapa.h - (objmapa.h / 6);
-		var x = objmapa.w / 2;
-	}
-	if (direcao == "leste")
-	{
-		var x = objmapa.w - (objmapa.w / 6);
-		var y = objmapa.h / 2;
-	}
-	if (direcao == "oeste")
-	{
-		var x = objmapa.w / 6;
-		var y = objmapa.h / 2;
-	}
-	if (direcao == "nordeste")
-	{
-		var y = objmapa.h / 6;
-		var x = objmapa.w - (objmapa.w / 6);
-	}
-	if (direcao == "sudeste")
-	{
-		var y = objmapa.h - (objmapa.h / 6);
-		var x = objmapa.w - (objmapa.w / 6);
-	}
-	if (direcao == "noroeste")
-	{
-		var y = objmapa.h / 6;
-		var x = objmapa.w / 6;
-	}
-	if (direcao == "sudoeste")
-	{
-		var y = objmapa.h - (objmapa.h / 6);
-		var x = objmapa.w / 6;
-	}
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&x="+x+"&y="+y+"&g_sid="+g_sid;
-	g_operacao = "navega";
-	cpObj.call(p,"pan",ajaxredesenha);
 }
 /*
 Function: ativaEntorno
@@ -2847,9 +2668,7 @@ function filmezf(o)
 	{var quadro = o;}
 	if (quadrosfilme[quadro].extensao != " ")
 	{
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+g_tipoimagem+"&ext="+quadrosfilme[quadro].extensao+"&g_sid="+g_sid;
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		cpObj.call(p,"mudaExtensao",ajaxredesenha);
+		i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,quadrosfilme[quadro].extensao);
 	}
 	else{alert("Extensao nao definida");}
 }
@@ -3001,43 +2820,7 @@ function calculadistancia(lga,lta,lgb,ltb) //0ms
 	}
 	catch(e){return (0);}
 }
-/*
-Function: convdmsddf
 
-Converte dms em dd.
-
-Parameters:
-
-cd - grau.
-
-cm - minuto.
-
-cs - segundo
-
-Returns:
-
-Coordenada em dd.
-*/
-function convdmsddf(cd,cm,cs)
-{
-	try
-	{
-		//converte dms em dd
-		var sinal = 'positivo';
-		if (cd < 0)
-		{
-			cd = cd * -1;
-			sinal = 'negativo';
-		}
-		spm = cs / 3600;
-		mpg = cm / 60;
-		var dd = (cd * 1) + (mpg * 1) + (spm * 1);
-		if (sinal == 'negativo')
-		{dd = dd * -1;}
-		return (dd);
-	}
-	catch(e){return (0);}
-}
 /*
 Function: calcddf
 
@@ -3163,18 +2946,6 @@ function convdmsf(x,y)
 	var res = new Array();
 	res[0] = xv;
 	res[1] = yv;
-	if ($i("localizarxy"))
-	{
-		if($i("xg"))
-		{
-			$i("xg").value = dx;
-			$i("xm").value = mx;
-			$i("xs").value = sx;
-			$i("yg").value = dy;
-			$i("ym").value = my;
-			$i("ys").value = sy;
-		}
-	}
 	return res;
 }
 /*
@@ -3204,7 +2975,6 @@ function convddtela(vx,vy,docmapa)
 		var dc = docmapa.getElementById("contemImg");
 		else
 		var dc = docmapa.getElementById("img");
-		
 		var pos = pegaPosicaoObjeto(dc);
 		var imgext = objmapa.extent;
 		var imgext = imgext.split(" ");
@@ -3539,109 +3309,6 @@ function criaboxg()
 		document.body.appendChild(novoel);
 	}
 }
-try
-{
-//controle dos painéis que podem ser redimensionados
-YAHOO.widget.ResizePanel = function(el, userConfig)
-{
-    if (arguments.length > 0) 
-    {YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
-};
-YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";
-YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE = "resizehandle";
-YAHOO.extend
-(
-	YAHOO.widget.ResizePanel, YAHOO.widget.Panel,
-	{
-   		init: function(el, userConfig) 
-   		{
-    		YAHOO.widget.ResizePanel.superclass.init.call(this, el);
-       		this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
-       		var Dom = YAHOO.util.Dom,
-           		Event = YAHOO.util.Event,
-           		oInnerElement = this.innerElement,
-           		oResizeHandle = document.createElement("DIV"),
-           		sResizeHandleId = this.id + "_resizehandle";
-       		oResizeHandle.id = sResizeHandleId;
-       		oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
-       		Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
-       		this.resizeHandle = oResizeHandle;
-       		function initResizeFunctionality()
-       		{
-           		var me = this,
-               		oHeader = this.header,
-               		oBody = this.body,
-               		oFooter = this.footer,
-               		nStartWidth,
-               		nStartHeight,
-               		aStartPos,
-               		nBodyBorderTopWidth,
-               		nBodyBorderBottomWidth,
-               		nBodyTopPadding,
-               		nBodyBottomPadding,
-               		nBodyOffset;
-           		oInnerElement.appendChild(oResizeHandle);
-           		this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
-           		this.ddResize.setHandleElId(sResizeHandleId);
-           		this.ddResize.onMouseDown = function(e)
-           		{
-               		nStartWidth = oInnerElement.offsetWidth;
-               		nStartHeight = oInnerElement.offsetHeight;
-               		if (YAHOO.env.ua.ie && document.compatMode == "BackCompat")
-               		{nBodyOffset = 0;}
-               		else
-               		{
-                   		nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10),
-                   		nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10),
-                   		nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10),
-                   		nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10),
-                   		nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
-               		}
-               		me.cfg.setProperty("width", nStartWidth + "px");
-               		aStartPos = [Event.getPageX(e), Event.getPageY(e)];
-           		};
-           		this.ddResize.onDrag = function(e)
-           		{
-               		var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
-                   		nOffsetX = aNewPos[0] - aStartPos[0],
-                   		nOffsetY = aNewPos[1] - aStartPos[1],
-                   		nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
-                   		nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
-                   		nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
-               		me.cfg.setProperty("width", nNewWidth + "px");
-               		if (nBodyHeight < 0)
-               		{nBodyHeight = 0;}
-               		oBody.style.height =  nBodyHeight + "px";
-               		if ($i("wdocai"))
-               		{$i("wdocai").style.height = nBodyHeight;}
-           		};
-       		};
-       		function onBeforeShow()
-       		{
-       			initResizeFunctionality.call(this);
-       			this.unsubscribe("beforeShow", onBeforeShow);
-       		};
-       		function onBeforeRender()
-       		{
-           		if (!this.footer)
-           		{this.setFooter("");}
-           		if (this.cfg.getProperty("visible"))
-           		{initResizeFunctionality.call(this);}
-           		else
-           		{this.subscribe("beforeShow", onBeforeShow);}
-       			this.unsubscribe("beforeRender", onBeforeRender);
-       		};
-       		this.subscribe("beforeRender", onBeforeRender);
-       		if (userConfig)
-       		{this.cfg.applyConfig(userConfig, true);}
-       		this.initEvent.fire(YAHOO.widget.ResizePanel);
-   		},
-   		toString: function()
-   		{return "ResizePanel " + this.id;}
-	}
-);
-}
-catch(e){};
 
 
 /*

@@ -1417,17 +1417,32 @@ function ativaLocalizarxy(iddiv)
 {
 	if($i(iddiv))
 	{
-		var ins = "<table style='text-align:center'><tr>";
-		ins += "<td>localiza X:&nbsp;</td>";
-		ins += "<td>"+$inputText(iddiv,"315","xg","grau","3","-00")+"&nbsp;</td>";
-		ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
-		ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
-		ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
-		ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
-		ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-		ins += "<td><img  class='tic' title='zoom' onclick='zoomPonto()' src='"+$im("branco.gif")+"' id=procurarxy /></td>";
-		ins += "</tr></table>";
-		$i(iddiv).innerHTML = ins;
+		if(!$i("xm")){
+			var ins = "<table style='text-align:center'><tr>";
+			ins += "<td>localiza X:&nbsp;</td>";
+			ins += "<td>"+$inputText(iddiv,"315","xg","grau","3","-00")+"&nbsp;</td>";
+			ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
+			ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
+			ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
+			ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
+			ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+			var temp = 'var xxx = i3GEO.util.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
+			temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
+			temp +=	'i3GEO.navega.zoomponto(g_locaplic,g_sid,xxx,yyy);';		
+			ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+$im("branco.gif")+"' id=procurarxy /></td>";
+			ins += "</tr></table>";
+			$i(iddiv).innerHTML = ins;
+		}
+		atualizaLocalizarxy = function(){
+			var x = objposicaocursor.dmsx.split(" ");
+			var y = objposicaocursor.dmsy.split(" ");
+			$i("xg").value = x[0];
+			$i("xm").value = x[1];
+			$i("xs").value = x[2];
+			$i("yg").value = y[0];
+			$i("ym").value = y[1];
+			$i("ys").value = y[2];
+		};
 	}
 }
 /*
@@ -1441,10 +1456,21 @@ function ativaEscalaNumerica(iddiv)
 {
 	if($i(iddiv))
 	{
-		var i = $inputText(iddiv,"138","escalanum","digite o denominador da escala","19","");
-		var ins = "<table><tr><td>1:"+i;
-		ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='aplicaescala()' /></td></tr></table>";
-		$i(iddiv).innerHTML = ins;
+		if(!$i("i3geo_escalanum"))
+		{
+			var i = $inputText(iddiv,"138","i3geo_escalanum","digite o denominador da escala","19","");
+			var ins = "<table><tr><td>1:"+i;
+			var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
+			temp += 'i3GEO.navega.aplicaEscala(g_locaplic,g_sid,nova);';
+			ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+			$i(iddiv).innerHTML = ins;
+		}
+		atualizaEscalaNumerica = function(escala){
+			if(arguments.length == 1)
+			$i("i3geo_escalanum").value = escala;
+			else
+			$i("i3geo_escalanum").value = parseInt(objmapa.scale);
+		};
 	}
 }
 /*

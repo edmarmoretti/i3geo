@@ -597,8 +597,8 @@ function ajaxIniciaParametros(retorno)
 		//
 		//arredonda o valor da escala numerica e mostra no mapa se for o caso
 		//
-		if ($i("escalanum"))
-		{$i("escalanum").value=parseInt(mapscale);}
+		if ($i("i3geo_escalanum"))
+		{$i("i3geo_escalanum").value=parseInt(mapscale);}
 		//
 		//atualiza a janela com o valor da extensão geográfica do mapa se for o caso
 		//

@@ -450,7 +450,7 @@ function alteraMenus()
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
-			$id_menu = $dbhw->query("SELECT * FROM i3geoadmin_menus");
+			$id_menu = $dbhw->query("SELECT id_menu FROM i3geoadmin_menus");
 			$id_menu = $id_menu->fetchAll();
 			$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
 			$retorna = $id_menu;
@@ -733,11 +733,11 @@ function alteraTemas()
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_temas");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema) VALUES ('')");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
 			$id = $dbh->query("SELECT * FROM i3geoadmin_temas");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_tema']);
-			$retorna = $id;    	
+			$retorna = $id;  	
     	}
     	//verifica se é necessário adicionar algum tag novo
     	$tags = explode(" ",$tags);

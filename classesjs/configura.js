@@ -458,7 +458,8 @@ g_funcoesMousemoveMapaDefault = new Array(
 	"movelentef()",
 	"moveLonglat()",
 	"moveSelecaoPoli()",
-	"moveArea()"
+	"moveArea()",
+	"atualizaLocalizarxy()"
 );
 /*
 Variable: g_funcoesNevegaMapaDefault
@@ -473,7 +474,8 @@ g_funcoesNevegaMapaDefault = new Array(
 	"atualizagoogle()",
 	"atualizascielo()",
 	"atualizawiki()",
-	"atualizaconfluence()"
+	"atualizaconfluence()",
+	"atualizaEscalaNumerica()"
 );
 /*
 Variable: g_listaPropriedades (depreciado)
@@ -582,7 +584,7 @@ g_listaFuncoesBotoes = {
 		//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
 		iddiv:"zoomtot",
 		dica:$trad("d2"),
-		funcaoonclick:function(){zoomtot();}
+		funcaoonclick:function(){i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,objmapa.extentTotal);}
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom interativo.
@@ -602,15 +604,13 @@ g_listaFuncoesBotoes = {
 		//botão que realiza a operação de zoom in.
 		iddiv:"zoomiauto",
 		dica:$trad("d5"),
-		funcaoonclick:function()
-		{zoomiauto();}
+		funcaoonclick:function(){i3GEO.navega.zoomin(g_locaplic,g_sid);}
 	},
 	{
 		//botão que realiza a operação de zoom out
 		iddiv:"zoomoauto",
 		dica:$trad("d6"),
-		funcaoonclick:function()
-		{zoomoauto();}
+		funcaoonclick:function(){i3GEO.navega.zoomout(g_locaplic,g_sid);}
 	},
 	{
 		//botão que abre a função de identificação.
@@ -665,7 +665,7 @@ g_listaFuncoesBotoes = {
 		iddiv:"ondeestou",
 		dica:$trad("d13"),
 		funcaoonclick:function()
-		{zoomIP();}
+		{i3GEO.navega.zoomIP(g_locaplic,g_sid);}
 	},
 	{
 		//abre a opção de geração de um modelo virtual de elevação

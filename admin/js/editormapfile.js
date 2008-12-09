@@ -421,6 +421,10 @@ function adicionaNovoMapfile()
 				}
 				else
 				{
+					YAHOO.example.container.panelEditor.destroy();
+					YAHOO.example.container.panelEditor = null;
+					core_pegaMapfiles("montaArvore()")
+					/*
 					$mapfiles = [codigo];
 					var nos = montaNosRaiz("nao");
 					tree.popNode(nos[0])
@@ -430,6 +434,7 @@ function adicionaNovoMapfile()
 					core_carregando("desativa");
 					YAHOO.example.container.panelEditor.destroy();
 					YAHOO.example.container.panelEditor = null;
+					*/
 				}
 			}
 			catch(e){core_handleFailure(e,o.responseText);}

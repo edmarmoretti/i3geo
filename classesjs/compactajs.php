@@ -62,6 +62,7 @@ packer("classe_idioma.js","compactados/classe_idioma_compacto.js","Normal");
 packer("classe_ajuda.js","compactados/classe_ajuda_compacto.js","Normal");
 packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("classe_configura.js","compactados/classe_configura_compacto.js","Normal");
+packer("classe_navega.js","compactados/classe_navega_compacto.js","Normal");
 packer("redesenho.js","compactados/redesenho_compacto.js","Normal");
 packer("iniciamma.js","compactados/iniciamma_compacto.js","Normal");
 packer("ferramentas.js","compactados/ferramentas_compacto.js","Normal");
@@ -108,6 +109,7 @@ $jsfiles = array(
 "compactados/classe_arvoredecamadas_compacto.js",
 "compactados/classe_arvoredetemas_compacto.js",
 "compactados/configura_compacto.js",
+"compactados/classe_navega_compacto.js",
 "compactados/ferramentas_compacto.js",
 "compactados/redesenho_compacto.js",
 "compactados/iniciamma_compacto.js",

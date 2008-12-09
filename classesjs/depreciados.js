@@ -202,3 +202,41 @@ function aguarde()
 		i3GEO.janela.fechaAguarde(aguardeId);
 	};
 }
+/*
+Function: zoomiauto (depreciado)
+*/
+function zoomiauto()
+{i3GEO.navega.zoomin(g_locaplic,g_sid);}
+/*
+Function: zoomoauto (depreciado)
+*/
+function zoomoauto()
+{i3GEO.navega.zoomout(g_locaplic,g_sid);}
+/*
+Function: convdmsddf (depreciado)
+*/
+function convdmsddf(cd,cm,cs)
+{return (i3GEO.util.dsm2dd(cd,cm,cs));}
+/*
+Function: zoomPonto (depreciado)
+*/
+function zoomPonto()
+{alert("utilize i3GEO.navega.zoomponto");}
+/*
+Function: zoomIP (depreciado)
+*/
+function zoomIP()
+{alert("zoomIP foi depreciado. Utilize i3GEO.navega.zoomIP");}
+/*
+Function: zoomtot
+*/
+function zoomtot()
+{alert("zoomtot foi depreciado. Utilize i3GEO.navega.zoomExt");}
+/*
+Function: atualizaFarol (depreciado)
+*/
+/*
+Function: panFixo (depreciado)
+*/
+function panFixo(direcao,w,h,escala)
+{alert("panFixo foi depreciado. Utilize i3GEO.navega.panFixo");}

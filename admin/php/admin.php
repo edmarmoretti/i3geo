@@ -275,7 +275,7 @@ function verificaFilhos()
     	}
     	if($tabela == "mapfiles")
     	{
-    		$r = pegaDados("SELECT id_tema from i3geoadmin_temas where codigo_tema ='$id'");
+    		$r = pegaDados("SELECT id_tema from i3geoadmin_n3 where id_tema ='$id'");
     		if(count($r) > 0)
    			$res = true;
     	}

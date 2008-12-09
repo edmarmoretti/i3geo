@@ -48,8 +48,11 @@ switch ($funcao)
 		exit;
 	break;
 	case "excluirMapfile":
+		//pega oid do tema
+		$dados = pegaDados("SELECT id_tema from i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
+		$id = $dados[0]["id_tema"];
 		$tabela = "mapfiles";
-		$id = $codigoMap;
+		$coluna = "id_tema";
 		$f = verificaFilhos();
 		if($f)
 		{
@@ -59,6 +62,8 @@ switch ($funcao)
 		else
 		{
 			unlink("../../temas/".$codigoMap.".map");
+			$tabela = "i3geoadmin_temas";
+			exclui();
 			retornaJSON("ok");
 			exit;
 		}
@@ -217,7 +222,7 @@ function criarNovoMap()
 		$dados[] = '	DATA ""';
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
-		$dados[] = '	METADATA';
+		$dados[] = '	END';
 		$dados[] = "END";
 		$dados[] = "END";
 		$fp = fopen($arq,"w");
@@ -226,7 +231,7 @@ function criarNovoMap()
 			fwrite($fp,$dado."\n");
 		}
     	require_once("conexao.php");
-    	$dbh->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
+    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','', '','','','','','$nome','$codigo')");
     	$dbh = null;
     	$dbhw = null;
 		return "ok";

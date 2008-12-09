@@ -607,6 +607,7 @@ function core_pegaTags(funcao)
   			try
   			{
   				$tags = YAHOO.lang.JSON.parse(o.responseText);
+  				if($tags == ""){$tags = " ";}
   				if(funcao != "")
   				eval(funcao);
   			}
@@ -1048,8 +1049,10 @@ O editor possui um div com id=editor_bd que deve ser usado para incluir o formul
 Parameters:
 
 funcaoOK - string com o nome da função que será executada quando o botão OK for pressionado.
+
+funcaoClose - nome da funcao que será executada quando a janela for fechada
 */
-function core_montaEditor(funcaoOK,w,h)
+function core_montaEditor(funcaoOK,w,h,funcaoClose)
 {	
 	if(arguments.length == 0)
 	{
@@ -1108,6 +1111,9 @@ function core_montaEditor(funcaoOK,w,h)
 	{
 		YAHOO.example.container.panelEditor.destroy();
 		YAHOO.example.container.panelEditor = null;
+		try{
+		eval(funcaoClose+"()");}
+		catch(e){};
 	}
 	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
 	YAHOO.example.container.panelEditor.show();

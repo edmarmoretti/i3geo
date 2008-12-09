@@ -37,6 +37,7 @@ var jsfiles = new Array(
 "classe_ajuda.js",
 "classe_janela.js",
 "classe_arvoredecamadas.js",
+"classe_navega.js",
 "funcoes.js",
 "classe_arvoredetemas.js",
 "configura.js",

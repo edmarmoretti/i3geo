@@ -229,5 +229,41 @@ i3GEO.util = {
 		var re = /ú/gi;
 		palavra = palavra.replace(re,"u");
 		return(palavra);
+	},
+	/*
+	Function: dms2dd
+	
+	Converte coordenadas formatadas em DMS para DD
+	
+	Parameters:
+	
+	cd {Numeric} - grau
+	
+	cm {Numeric} - minuto
+	
+	cs {Numeric} - segundo
+	
+	Return:
+	
+	{Numeric} - Coordenada em décimos de grau.
+	*/
+	dms2dd: function(cd,cm,cs){
+		try
+		{
+			//converte dms em dd
+			var sinal = 'positivo';
+			if (cd < 0)
+			{
+				cd = cd * -1;
+				sinal = 'negativo';
+			}
+			spm = cs / 3600;
+			mpg = cm / 60;
+			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
+			if (sinal == 'negativo')
+			{dd = dd * -1;}
+			return (dd);
+		}
+		catch(e){return (0);}
 	}
 };

@@ -3,7 +3,7 @@ function initMenu()
 {
 	var editorDeMenus = function()
 	{
-		core_montaEditor("","600px","500px")
+		core_montaEditor("","600px","500px","pegaMenus")
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorMenu()
 	};
@@ -530,8 +530,6 @@ function montaDivTema(i)
 	ins += "<select id='Epublicado' >"
 	ins += core_combosimnao(i.publicado)
 	ins += "</select>"
-	ins += "<br><br>Para criar um novo tema clique <a href='temas.html' >aqui</a>."
-	ins += "<br><br>Para criar um novo perfil clique <a href='perfis.html' >aqui</a>."
 	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }

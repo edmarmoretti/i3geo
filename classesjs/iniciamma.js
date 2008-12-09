@@ -699,7 +699,7 @@ function Mapa(e,m)
 					ajustaEntorno();
 				}
 				autoRedesenho("ativa");
-				if ($i("escalanum")){$i("escalanum").value = objmapa.scale;}
+				if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = objmapa.scale;}
 				if ((objmapa.geoip == "nao") && ($i("ondeestou")))
 				{$i("ondeestou").style.display="none";}
 			}
@@ -876,9 +876,6 @@ function Mapa(e,m)
 	this.atualizaListaTemas = function(temas)
 	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
 	/*
-	Function: atualizaFarol (depreciado)
-	*/
-	/*
 	Function: criaCorpoMapa
 	
 	Cria os objetos para preenchimento com a imagem do corpo do mapa.
@@ -1025,6 +1022,8 @@ function Mapa(e,m)
 			{
 				do
 				{
+					var temp = g_funcoesMousemoveMapaDefault[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
 					eval(g_funcoesMousemoveMapaDefault[f]);
 				}
 				while(f--)
@@ -1071,6 +1070,8 @@ function Mapa(e,m)
 			{
 				do
 				{
+					var temp = g_funcoesNevegaMapaDefault[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
 					eval(g_funcoesNevegaMapaDefault[f]);
 				}
 				while(f--)

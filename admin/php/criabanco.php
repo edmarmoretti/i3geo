@@ -37,7 +37,7 @@ else
 }
 foreach($tabelas as $tabela)
 {
-	if($dbh->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
+	if($dbhw->getAttribute(PDO::ATTR_DRIVER_NAME) == "pgsql")
 	{
 		$tabela = str_replace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$tabela);
 	}
