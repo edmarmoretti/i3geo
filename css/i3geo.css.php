@@ -783,6 +783,17 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	height:11px;
 	cursor:pointer;
 }
+#italiano
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1725px;
+	width:20px;
+	height:10px;
+	top:-13px;
+	left:25px;
+	cursor:pointer;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}
 ul	{text-align:left;list-style-type:none;padding-left: 15px;margin-left:5px; margin-top:15px;}
