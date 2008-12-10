@@ -74,7 +74,7 @@ if($conexaoadmin == "")
 	try
 	{
 		//para escrita
-		$dbhw = new PDO($conAdmin);
+		$dbhw = new PDO($conAdminw);
 		//para leitura
 		$dbh = new PDO($conAdmin);
 	}
