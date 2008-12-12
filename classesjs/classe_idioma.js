@@ -63,7 +63,7 @@ i3GEO.idioma = {
 	codigo - {String} Código do idioma.
 	*/
 	define: function(codigo) {
-		this.ATUAL = codigo;
+		i3GEO.idioma.ATUAL = codigo;
 		i3GEO.util.insereCookie("i3geolingua",codigo);
 	},
 	/*
@@ -74,7 +74,7 @@ i3GEO.idioma = {
 	{string} Código do idioma.
 	*/	
 	retornaAtual: function() {
-		return (this.ATUAL);
+		return (i3GEO.idioma.ATUAL);
 	},
 	/*
 	Function: defineDicionario
@@ -100,7 +100,7 @@ i3GEO.idioma = {
 	}
 	*/
 	defineDicionario: function(obj) {
-		this.DICIONARIO = obj;
+		i3GEO.idioma.DICIONARIO = obj;
 	},
 	/*
 	Function: alteraDicionario
@@ -112,7 +112,7 @@ i3GEO.idioma = {
      
 	*/
 	alteraDicionario: function(id,novo) {
-		this.DICIONARIO[id][0][this.ATUAL] = novo;
+		i3GEO.idioma.DICIONARIO[id][0][i3GEO.idioma.ATUAL] = novo;
 	},
 	/*
 	Function: traduzir
@@ -125,9 +125,9 @@ i3GEO.idioma = {
 	{String} Texto traduzido.
 	*/
 	traduzir: function(id) {
-		if(this.DICIONARIO[id]){
-			var t = this.DICIONARIO[id][0];
-			return t[this.ATUAL];
+		if(i3GEO.idioma.DICIONARIO[id]){
+			var t = i3GEO.idioma.DICIONARIO[id][0];
+			return t[i3GEO.idioma.ATUAL];
 		}
 		else return;
 	},
@@ -155,7 +155,7 @@ i3GEO.idioma = {
 	alert($trad("pp"))
 	*/
 	adicionaDicionario: function(novodic) {
-		for (k in novodic) { this.DICIONARIO[k] = novodic[k]; }
+		for (k in novodic) { i3GEO.idioma.DICIONARIO[k] = novodic[k]; }
 	},
 	/*
 	Function: mostraDicionario
@@ -163,7 +163,7 @@ i3GEO.idioma = {
 	*/
 	mostraDicionario: function() {
 		var w = window.open();
-		for (k in this.DICIONARIO) { w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>"); }
+		for (k in i3GEO.idioma.DICIONARIO) { w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>"); }
 	},
 
 	/*
@@ -187,8 +187,8 @@ i3GEO.idioma = {
 	{Array} Array com os códigos de idioma disponíveis.
 	*/
 	listaIdiomas: function() {
-		for (k in this.DICIONARIO){
-			return (i3GEO.util.listaChaves(this.DICIONARIO[k][0]));
+		for (k in i3GEO.idioma.DICIONARIO){
+			return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));
 		}
 	}
 };
@@ -224,4 +224,4 @@ try {
 	if(typeof('g_traducao') != "undefined")
 	{i3GEO.idioma.defineDicionario(g_traducao);}
 }
-catch(e){alert(e);};
+catch(e){alert("Problemas com idiomas "+e);};

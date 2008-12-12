@@ -711,10 +711,12 @@ function Mapa(e,m)
 			//
 			//ativa a cor da guia
 			//
+			/*
 			if ($i("guia"+temp[1]))
 			{
 				$i("guia"+temp[1]).parentNode.parentNode.focus();
 			}
+			*/
 			//
 			//ativa a janela de mensagens se for o caso
 			//

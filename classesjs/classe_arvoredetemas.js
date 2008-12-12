@@ -827,17 +827,17 @@ i3GEO.arvoreDeTemas = {
 	outrasOpcoesHTML: function(){
 		var ins = "<table width='120px' ><tr>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf == true)
-		ins += "<td><div id='updbf' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='uploaddbf()'><img class='uploaddbf' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/></div><td>";
+		ins += "<td><img class='uploaddbf' onclick='uploaddbf()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadlocal == true)
-		ins += "<td><div id='uplocal' style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='upload()'><img class='upload' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/></div><td>";
+		ins += "<td><img class='upload' onclick='upload()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.downloadbase == true)
-		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='downloadbase()'><img class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/></div><td>";
+		ins += "<td><img onclick='downloadbase()' class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwms == true)
-		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectarwms()'><img class='conectarwms' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/></div><td>";
+		ins += "<td><img class='conectarwms' onclick='conectarwms()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss == true)
-		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='conectargeorss()'><img class='conectargeorss' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/></div><td>";
+		ins += "<td><img class='conectargeorss' onclick='conectargeorss()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags == true)
-		ins += "<td><div style='width:98%;left:5px;cursor:pointer;text-align:left;font-size:11px;' onclick='nuvemTags()'><img class='nuvemtags' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/></div><td>";
+		ins += "<td><img class='nuvemtags' onclick='nuvemTags()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 		ins += "</tr></table>";
 		return(ins);
 	},

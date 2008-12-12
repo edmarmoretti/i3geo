@@ -3,6 +3,8 @@ Class: i3GEO.arvoreDeCamadas
 
 Monta a árvore com os temas existentes no mapa atual.
 
+Permite controlar quais as opções que serão mostradas na árvore.
+
 Dependências:
 
 pacotes/yui252/build/treeview/treeview-min.js
@@ -11,7 +13,7 @@ pacotes/yui252/build/treeview/assets/skins/sam/treeview.css
 
 classesjs/i3geo_util.js
 
-File: i3geo/classesjs/classe_camadas.js
+File: i3geo/classesjs/classe_arvoredecamadas.js
 
 About: Licença
 
@@ -40,7 +42,42 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Variable: CAMADAS
 	
-	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou redesenho do mapa.
+	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
+	
+	Este objeto é construído nas operações em PHP de inicialização ou redesenhodo mapa.
+	
+	Exemplo:
+	
+	"temas":[
+		
+		{
+		
+			"name":"estadosl", //código do layer
+			
+			"status":2, //ver constante MS_STATUS do Mapserver
+			
+			"tema":"Limite Estadual",
+			
+			"transparency":100,
+			
+			"type":1, //ver constante MS_TYPE do Mapserver
+			
+			"sel":"nao",
+			
+			"escala":"250000",
+			
+			"download":"",
+			
+			"features":"nao",
+			
+			"connectiontype":1, //ver constante MS_CONNECTIONTYPE do Mapserver
+			
+			"zoomtema":"sim",
+			
+			"contextoescala":"nao"
+			
+		}
+	]
 	
 	Type:
 	{JSON}
@@ -67,7 +104,7 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Property: OPCOESTEMAS
 	
-	Inclui ou não o nó com as opções de manipulação de um tema.
+	Inclui ou não o nó com as opções de manipulação de cada tema.
 	
 	Type:
 	{Boolean}
@@ -104,6 +141,8 @@ i3GEO.arvoreDeCamadas = {
 	Property: LOCAPLIC
 	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
+	
+	Exemplo: 'http://localhost/i3geo'
 
 	Type:
 	{String}
@@ -111,6 +150,7 @@ i3GEO.arvoreDeCamadas = {
 	LOCAPLIC: null,
 	/*
 	Function: cria
+	
 	Cria a árvore com as opções de manipulação das camadas existentes no mapa
 	
 	Parameters:
@@ -134,13 +174,18 @@ i3GEO.arvoreDeCamadas = {
 		if(this.IDHTML == ""){return;}
 		this.atualiza(temas);
 	},
-	/*
+	/**
 	Function: atualiza
+	
 	Atualiza a árvore de camadas.
+	
+	Antes de executar a atualização, essa função verifica se é necessário fazê-lo.
+	O objeto CAMADAS é comparado com o parâmetro "temas" para verificar se existem diferenças que
+	justifiquem a atualização.
 	
 	Parameters:
 	
-	temas - {JSON} Objetocom a lista de camadas e propriedades
+	temas - {JSON} Objeto com a lista de camadas e propriedades (veja CAMADAS)
 	*/
 	atualiza: function(temas){
 		if(this.comparaTemas(temas,this.CAMADAS)){return;		}
@@ -163,7 +208,7 @@ i3GEO.arvoreDeCamadas = {
     		buildTree();
 		}();
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td><img style='position:relative;top:-3px' id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' /></td></tr></table>";
+		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td><img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' /></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		var c = temas.length;
@@ -256,14 +301,18 @@ i3GEO.arvoreDeCamadas = {
 	                		DDM.refreshCache();
 	                		//exclui tema
    		             		if(DDM.getDDById(id).id == "i3geo_lixeira"){
+                				i3GEO.janela.abreAguarde("ajaxCorpoMapa1",$trad("o1"));
                 				var tema = (this.getEl()).id.split("arrastar_")[1];
-                				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 								var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
-								cpObj.call(p,"excluiTemas",objmapa.atualizaCorpoMapa);
+								var cp = new cpaint();
+								//cp.set_debug(2)
+								cp.set_response_type("JSON");
+								cp.call(p,"excluiTemas",objmapa.atualizaCorpoMapa);
 								objmapa.temaAtivo = "";
 							}
 							//muda ordem de desenho do tema
 							else{
+	                			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 	                			var destEl = Dom.get(id);
    		             			var noid = id.split("arrastar_")[1];
    	    	         			destEl.appendChild(this.getEl()); 
@@ -305,7 +354,10 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: montaOpcoes
-	Abre o segundo nível da árvore de temas, mostrando as opções disponíveis
+	
+	Abre o segundo nível da árvore de temas, mostrando as opções disponíveis para cada tema.
+	
+	Nesse segundo nível são mostrados alguns ícones como o farol, excluir, etc, além do nó de opções e legenda.
 	
 	Parameters:
 	
@@ -353,6 +405,7 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: mostraOpcoes
+	
 	Monta os nós filhos do nó "opções"
 	
 	Parameter:
@@ -412,6 +465,7 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: mostraLegenda
+	
 	Monta os nós filhos do nó "legenda"
 	
 	Parameter:
@@ -497,7 +551,10 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: atualizaLegenda
-	Atualiza a legenda de um tema 
+	
+	Atualiza a legenda de um tema.
+	
+	A legenda precisa ser atualizada emalgumas circunstâncias, como quando é feitoumzoom no mapa.
 	
 	Parameter:
 	
@@ -516,6 +573,7 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Function: inverteStatusClasse
+	
 	Liga ou desliga uma classe da legenda.
 	
 	A chamada dessa função é definida em aplicmap/legenda2.htm
@@ -533,7 +591,9 @@ i3GEO.arvoreDeCamadas = {
 	},	
 	/*
 	Function: montaTextoTema
-	Monta o texto com o título do tema.
+	
+	Monta o texto com o título do tema. Esse texto é o que será mostrado nos nós principais da árvore e
+	contém o checkbox para ligar e desligar o tema.
 	
 	Parameters:
 	
@@ -547,7 +607,7 @@ i3GEO.arvoreDeCamadas = {
 		var ck = "";
 		if(tema.status == 2){var ck = ' CHECKED ';}
 		var html = "";
-		html += "<div id='arrastar_"+tema.name+"' style=text-align:left ><input class=inputsb style='cursor:pointer;position:relative;top:2px;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+		html += "<p id='arrastar_"+tema.name+"' style='text-align:left;font-size:11px;' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
 		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
@@ -561,7 +621,7 @@ i3GEO.arvoreDeCamadas = {
 		if ((tema.download == "sim") || (tema.download == "SIM"))
 		{html += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 		html += "&nbsp;<span style='cursor:move'>"+tema.tema+"</span>";
-		html += "</div>";
+		html += "</p>";
 		return(html);
 	},
 	/*
@@ -621,6 +681,7 @@ i3GEO.arvoreDeCamadas = {
 	},
 	/*
 	Method: listaLigadosDesligados
+	
 	Lista os temas que estão ligados e os que estão desligados.
 	
 	Return:
@@ -710,30 +771,3 @@ try {
 	{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
 }
 catch(e){};
-
-
-/*
-	montaTextoTema: function(tema){
-		var ck = "";
-		if(tema.status == 2){var ck = ' CHECKED ';}
-		var html = "";
-		html += "<span id='arrastar_"+tema.name+"'><div style='position:absolute;vertical-align:top;padding-top:5px;'><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
-
-		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
-		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
-		else
-		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";
-		html += " /></div>";
-		if (tema.contextoescala == "sim")
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}				
-		if (tema.sel == "sim") //o tema tem selecao
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
-		if ((tema.download == "sim") || (tema.download == "SIM"))
-		{html += "<td style='text-align:left;padding-left:3px;'><img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \></td>";}
-		
-		html += "<div style='width:210px;position:relative;left:12px;padding-left:2px;padding-top:4px;vertical-align:top;text-align:left;cursor:pointer' >"+tema.tema;
-
-		html += "</div></span>";
-		return(html);
-	},
-*/

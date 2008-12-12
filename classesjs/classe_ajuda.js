@@ -3,7 +3,8 @@ Class: i3GEO.ajuda
 
 Manipulação das janelas de ajuda e outras coisas relacionadas.
 
-Permite definir a mensagem padrão da janela de mensagens. Abria a janela e definir seu conteúdo.
+Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conteúdo.
+Controla também o letreiro móvel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
 
 File: i3geo/classesjs/classe_ajuda.js
 
@@ -34,7 +35,8 @@ i3GEO.ajuda = {
 	/*
 	Property: MENSAGEMPADRAO
 	
-	Mensagem que será incluída ao iniciar a janela de mensagens.
+	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
+	mensagem definida para o elemento sobre o qual o mouse estaciona.
 	
 	Default ""
 	
@@ -56,7 +58,7 @@ i3GEO.ajuda = {
 	/*
 	Property: DIVAJUDA
 	
-	Nome do elemento HTML do tipo DIV que irá conter os textos de ajuda.
+	Nome do elemento HTML, do tipo DIV, que irá conter os textos de ajuda.
 	
 	Se esse DIV for encontrado no mapa, os textos serão mostrados em seu interior.
 	
@@ -86,11 +88,11 @@ i3GEO.ajuda = {
 	/*
 	Function: mostraJanela
 	
-	Mostra um texto dentro da janela de mensagens
+	Mostra um texto dentro da janela de mensagens padrão.
 	
 	Parameters:
 	
-	texto {String} - tetxo a ser incluído
+	texto {String} - texto a ser mostrado
 	*/
 	mostraJanela: function(texto){
 		if ($i(i3GEO.ajuda.DIVAJUDA)){
@@ -143,6 +145,8 @@ i3GEO.ajuda = {
 	
 	Ativa o cookie g_janelaMen e inclui o valor "sim".
 	
+	Toda a vez que a janela é aberta, o cookie é ativado.
+	
 	Ativando-se o cookie, a janela de mensagens será aberta automaticamente a próxima vez que o i3geo for iniciado
 	*/
 	ativaCookie: function(){
@@ -152,6 +156,8 @@ i3GEO.ajuda = {
 	Function: desativaCookie
 	
 	Desativa o cookie g_janelaMen.
+	
+	Toda a vez que a janela é fechada, o cookie é desativado.
 
 	Desativando-se o cookie, a janela de mensagens não será aberta automaticamente a próxima vez que o i3geo for iniciado
 	*/
@@ -214,6 +220,14 @@ i3GEO.ajuda = {
 			cp.call(p,"pegaMensagem",montaLetreiro);	
 		}
 	},
+	/*
+	Function: mostraLetreiro
+	
+	Preenche o elemento INPUT com a mesnagem de texto e faz a movimentação das letras.
+	
+	O aparecimento das letrasé controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
+	desde o início do redesenho do mapa.
+	*/
 	mostraLetreiro: function(){
 		for (count=0; count<BPos; count++)
 		{BSpaces+= " ";}

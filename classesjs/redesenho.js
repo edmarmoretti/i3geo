@@ -343,7 +343,7 @@ function ajaxCorpoMapa(retorno)
 	if (!$i("img")){return;}
 	try
 	{
-		i3GEO.janela.abreAguarde("ajaxCorpoMapa1",$trad("o3"));
+		i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o3"));
 		//retorno não é um objeto CPAINT
 		if(retorno.data){var retorno = retorno.data;}
 		if (retorno.variaveis){var retorno = retorno.variaveis;}
@@ -363,13 +363,13 @@ function ajaxCorpoMapa(retorno)
 				$i("img").style.width = objmapa.w;
 				$i("img").style.height = objmapa.h;
 				calcposf();
-				i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 				if ($i("imgtemp"))
 				{$i("imgtemp").style.display="none";}
 				$i("img").onload = "";
 			};
 			$i("img").src=mapimagem;
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 		}
 		else
 		{

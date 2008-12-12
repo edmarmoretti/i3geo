@@ -504,7 +504,8 @@ oMenuData = {
 	{ text: $trad("u2"), url: "javascript:abreDoc()" },
 	{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
 	{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
-	{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" }
+	{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" },
+	{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
 	],
 	"analise": [
     { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 

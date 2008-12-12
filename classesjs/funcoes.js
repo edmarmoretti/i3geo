@@ -2380,7 +2380,7 @@ function movecursor()
 {
 	//
 	//se a interface openlayers ou flamingo estiver sendo usada, o ícone não é mostrado
-	//'obj' é o elemento que guarda o ícone
+	//'obj' é o elemento que guarda o ícone que segue o mouse
 	//
 	if ($i("obj"))
 	{
@@ -2391,8 +2391,8 @@ function movecursor()
 			var obje = $i("obj").style;
 			if ($i("img"))
 			{
-				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 5 + g_postpx");
-				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 5 + g_postpx");
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 9 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 9 + g_postpx");
 			}
 			else
 			{

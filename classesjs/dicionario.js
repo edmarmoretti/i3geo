@@ -747,7 +747,7 @@ it:"Temi"
 pt:"Adiciona",
 en:"Add",
 es:"Agrega",
-it:"Aggiunge",
+it:"Aggiunge"
 }],
 "g3":[
 {

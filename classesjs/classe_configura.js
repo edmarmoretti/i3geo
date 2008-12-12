@@ -32,7 +32,6 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 i3GEO.configura = {
-
 	/*
 	Variable: listaDePropriedadesDoMapa
 	
@@ -40,16 +39,16 @@ i3GEO.configura = {
 	*/
 	listaDePropriedadesDoMapa: {
 		"propriedades": [
-		{ text: "p2", url: "javascript:tipoimagem()" },
-		{ text: "p3", url: "javascript:opcoesLegenda()" },
-		{ text: "p4", url: "javascript:opcoesEscala()" },
-		{ text: "p5", url: "javascript:tamanho()" },
-		{ text: "p6", url: "javascript:ativaEntorno()" },
-		{ text: "p7", url: "javascript:ativaLogo()" },
-		{ text: "p8", url: "javascript:queryMap()" },
-		{ text: "p9", url: "javascript:corFundo()" },
-		{ text: "p10", url: "javascript:gradeCoord()" },
-		{ text: "p11", url: "javascript:template()" },
+		{ text: "p2", url: "javascript:tipoimagem()"},
+		{ text: "p3", url: "javascript:opcoesLegenda()"},
+		{ text: "p4", url: "javascript:opcoesEscala()"},
+		{ text: "p5", url: "javascript:tamanho()"},
+		{ text: "p6", url: "javascript:ativaEntorno()"},
+		{ text: "p7", url: "javascript:ativaLogo()"},
+		{ text: "p8", url: "javascript:queryMap()"},
+		{ text: "p9", url: "javascript:corFundo()"},
+		{ text: "p10", url: "javascript:gradeCoord()"},
+		{ text: "p11", url: "javascript:template()"},
 		{ text: "p12", url: "javascript:autoredesenha()"}
 		]
 	},
@@ -69,7 +68,7 @@ i3GEO.configura = {
 	
 	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
 	*/
-	iniciaJanelaMensagens: true,
+	iniciaJanelaMensagens: true
 	/*
 	Function: alteraVariavel
 	*/

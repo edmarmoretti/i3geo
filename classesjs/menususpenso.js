@@ -55,10 +55,10 @@ function montaMenuSuspenso(iddiv)
  			if(objmapa.w >= 500)
  			{
 				ins += '<li class="yuimenubaritem first-of-type" style="'+sobe+'float:left;border: 0px solid white;" >';
-				ins += '&nbsp;<img  style="border: 0px solid white;padding:0 0px;top:-7px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'pt\')" id="brasil" alt="Portugues"/>';
-				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'en\')" alt"Ingles" id="uk" />';
-				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'es\')" id="espanhol" alt="Espanhol" />';
-				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 0px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'it\')" id="italiano" alt="Italiano" />';
+				ins += '&nbsp;<img  style="border: 1px solid white;padding:0 0px;top:-7px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'pt\')" id="brasil" alt="Portugues"/>';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 1px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'en\')" alt"Ingles" id="uk" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 1px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'es\')" id="espanhol" alt="Espanhol" />';
+				ins += '</li><li class="yuimenubaritem" style="'+sobe+'float:left;border: 1px solid white;" >&nbsp;<img  style="padding:0 0px;top:-7px;border: 0px solid white;padding-right:0px;" src="'+$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'it\')" id="italiano" alt="Italiano" />';
 				ins += '</li>';
 			}
 			ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';

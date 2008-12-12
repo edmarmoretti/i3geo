@@ -790,8 +790,6 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1725px;
 	width:20px;
 	height:10px;
-	top:-13px;
-	left:25px;
 	cursor:pointer;
 }
 #encolheFerramentas
