@@ -329,6 +329,7 @@ function Mapa(e,m)
 		this.w = document.body.offsetWidth - parseInt($i("contemFerramentas").style.width) - diminuix;
 		this.h = document.body.offsetHeight - diminuiy;
 	}
+	YAHOO.log("Reposicionou a janela do navegador", "i3geo");
 	if ($i("openlayers"))
 	{
 		$i("openlayers").style.width = this.w;
@@ -502,6 +503,7 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
+		YAHOO.log("Inicializando o i3geo", "i3geo");
 		//
 		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
 		//
@@ -531,6 +533,7 @@ function Mapa(e,m)
 			//
 			//inicia o mapa
 			//
+			YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
 			i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
 			cpObj.call(p,"iniciaMapa",this.montaMapa);
@@ -547,6 +550,7 @@ function Mapa(e,m)
 	*/
 	this.montaMapa = function (retorno)
 	{
+		YAHOO.log("Mapa obtido", "i3geo");
 		if (retorno.data.erro)
 		{
 			i3GEO.janela.fechaAguarde("montaMapa");
@@ -602,6 +606,7 @@ function Mapa(e,m)
 				//
 				//ativa os botões  das funções
 				//
+				YAHOO.log("Ativando os botões", "i3geo");
 				var l = g_listaFuncoesBotoes.botoes;
 				//var lle = l.length;
 				var b = l.length-1;
@@ -677,7 +682,7 @@ function Mapa(e,m)
 				//
 				//reposiciona a janela de botoes
 				//
-				var imagemxy = pegaPosicaoObjeto($i("corpoMapa"));
+				var imagemxy = i3GEO.util.pegaPosicaoObjeto($i("corpoMapa"));
 				if ($i("maisBotoes1")){YAHOO.janelaBotoes1.xp.panel.moveTo(imagemxy[0]+40,imagemxy[1]+10);}
 				if ($i("maisBotoes2")){YAHOO.janelaBotoes2.xp.panel.moveTo(imagemxy[0],imagemxy[1]+10);}
 				else
@@ -752,6 +757,7 @@ function Mapa(e,m)
 		rebobinaf();
 		if($i("mst"))
 		$i("mst").style.visibility ="visible";
+		YAHOO.log("Fim objmapa.inicializa", "i3geo");
 	};
 	/*
 	Function: ativaListaPropriedades
@@ -817,6 +823,7 @@ function Mapa(e,m)
 		{var dinamico = $i("refDinamico").checked;}
 		if ($i("mapaReferencia") && objmapa.extent != mapexten)
 		{
+			YAHOO.log("Atualizando o mapa de referência", "i3geo");
 			if(dinamico)
 			{
 				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+g_sid+"&zoom="+g_zoomRefDinamico;
@@ -852,6 +859,7 @@ function Mapa(e,m)
 	{
 		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
 		{
+			YAHOO.log("Iniciando atualização da legenda HTML", "i3geo");
 			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+g_sid;
 			cpObj.call(p,"criaLegenda",ajaxLegendaHTML);
 		}
@@ -885,6 +893,7 @@ function Mapa(e,m)
 	*/
 	this.criaCorpoMapa = function()
 	{
+		YAHOO.log("Criando o corpo do mapa", "i3geo");
 		if ($i("corpoMapa"))
 		{
 			var ins = "<table>";
@@ -981,6 +990,7 @@ function Mapa(e,m)
 			}
 			while(i--)
 		}
+		YAHOO.log("Concluído o corpo do mapa", "i3geo");
 	};
 	/*
 	Function: verificaClickMapa
@@ -989,6 +999,7 @@ function Mapa(e,m)
 	*/
 	this.verificaClickMapa = function()
 	{
+		YAHOO.log("Verificando clicks no mapa", "i3geo");
 		if (this.funcoesClickMapa.length > 0)
 		{
 			var f = this.funcoesClickMapa.length-1;
@@ -1009,6 +1020,7 @@ function Mapa(e,m)
 				eval(g_funcoesClickMapaDefault[f]);
 			}
 		}
+		YAHOO.log("Fim verificando clicks no mapa", "i3geo");
 	};
 	/*
 	Function: verificaMousemoveMapa
@@ -1017,6 +1029,7 @@ function Mapa(e,m)
 	*/
 	this.verificaMousemoveMapa = function()
 	{
+		YAHOO.log("Verificando movimento domouse no mapa", "i3geo");
 		if (g_funcoesMousemoveMapaDefault.length > 0)
 		{
 			var f = g_funcoesMousemoveMapaDefault.length-1;
@@ -1031,6 +1044,7 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
+		YAHOO.log("Fim verificando movimento domouse no mapa", "i3geo");
 	};
 	/*
 	Function: verificaMouseParado
@@ -1039,6 +1053,7 @@ function Mapa(e,m)
 	*/
 	this.verificaMouseParado = function()
 	{
+		YAHOO.log("Verificando mouse parado", "i3geo");
 		try
 		{
 			clearTimeout(objmapa.tempoParado);
@@ -1057,6 +1072,7 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
+		YAHOO.log("Fim verificando mouse parado", "i3geo");
 	};
 	/*
 	Function: verificaNavegaMapa
@@ -1065,6 +1081,7 @@ function Mapa(e,m)
 	*/
 	this.verificaNavegaMapa = function()
 	{
+		YAHOO.log("Verificando navegação", "i3geo");
 		if (g_funcoesNevegaMapaDefault.length > 0)
 		{
 			var f = g_funcoesNevegaMapaDefault.length-1;
@@ -1079,5 +1096,6 @@ function Mapa(e,m)
 				while(f--)
 			}
 		}
+		YAHOO.log("Concluído verificando navegação", "i3geo");
 	};
 }

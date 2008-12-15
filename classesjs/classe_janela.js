@@ -113,6 +113,7 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
 		//executa as funções de preparação
+		YAHOO.log("Cria janela", "janela");
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -163,6 +164,7 @@ i3GEO.janela = {
 		}
 		YAHOO.janelaDoca.xp.panel.render();
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
+		YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	fecha: function(){
@@ -225,6 +227,7 @@ i3GEO.janela = {
 	texto {String} - texto da janela
 	*/
 	abreAguarde: function(id,texto){
+		YAHOO.log("abreAguarde", "janela");
 		if($i(id+"_mask"))
 		{document.body.removeChild($i(id+"_mask"));}
 		if($i(id+"_c"))
@@ -248,7 +251,8 @@ i3GEO.janela = {
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=5000;}
 		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex=6000;}	
+		{$i(id+"_c").style.zIndex=6000;}
+		YAHOO.log("Fim abreAguarde", "janela");	
 	},
 	/*
 	Function: fechaAguarde

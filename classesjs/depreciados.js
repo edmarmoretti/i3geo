@@ -1,3 +1,6 @@
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
 /*
 Function: iCookie (depreciado)
 
@@ -240,3 +243,38 @@ Function: panFixo (depreciado)
 */
 function panFixo(direcao,w,h,escala)
 {alert("panFixo foi depreciado. Utilize i3GEO.navega.panFixo");}
+/*
+Function: protocolo (depreciado)
+
+Utilize i3GEO.util
+*/
+function protocolo()
+{i3GEO.util.protocolo();}
+//Mantido aqui apenas para fins de compatibilidade
+function borra()
+{}
+/*
+Function: pegaPosicaoObjeto (depreciado)
+*/
+function pegaPosicaoObjeto(obj)
+{i3GEO.util.pegaPosicaoObjeto(obj);}
+/*
+Function: i3geo_pegaElementoPai (depreciado)
+*/
+function i3geo_pegaElementoPai(e)
+{i3GEO.util.pegaElementoPai(e);}
+/*
+Function: convddtela (depreciado)
+*/
+function convddtela(vx,vy,docmapa)
+{i3GEO.util.dd2tela(vx,vy,docmapa,objmapa.extent,objmapa.cellsize);}
+/*
+Function: convdmsf (depreciado)
+*/
+function convdmsf(x,y)
+{i3GEO.util.dd2dms(x,y);}
+/*
+Function: calcddf (depreciado)
+*/
+function calcddf(xfign,yfign,g_celula,imgext)
+{i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext);}

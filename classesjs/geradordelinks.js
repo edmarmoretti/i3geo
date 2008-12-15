@@ -308,7 +308,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.preview = function(e)
 	{
-		var id = i3geo_pegaElementoPai(e).id
+		var id = i3GEO.util.pegaElementoPai(e).id
 		window.open("testamapfile.php?map="+id+".map&tipo=grande")
 	}
 	/*

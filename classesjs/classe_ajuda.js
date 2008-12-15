@@ -95,6 +95,7 @@ i3GEO.ajuda = {
 	texto {String} - texto a ser mostrado
 	*/
 	mostraJanela: function(texto){
+		YAHOO.log("mostraJanela", "i3geo");
 		if ($i(i3GEO.ajuda.DIVAJUDA)){
 			if (texto == ""){$i(i3GEO.ajuda.DIVAJUDA).innerHTML="-";}
 			else
@@ -104,6 +105,7 @@ i3GEO.ajuda = {
 			if ($i("janelaMenTexto"))
 			{$i("janelaMenTexto").innerHTML= texto;}
 		}
+		YAHOO.log("Fim mostraJanela", "i3geo");
 	},
 	/*
 	Function: abreJanela
@@ -113,6 +115,7 @@ i3GEO.ajuda = {
 	*/
 	abreJanela: function(){
 		try	{
+			YAHOO.log("abreJanela", "i3geo");
 			if(i3GEO.ajuda.ATIVAJANELA == false){return;}
 			if (!$i("janelaMenTexto")){
 				var nx = "";
@@ -128,6 +131,7 @@ i3GEO.ajuda = {
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
 			}
+			YAHOO.log("Fim abreJanela", "i3geo");
 		}
 		catch(e){}
 	},
@@ -137,8 +141,10 @@ i3GEO.ajuda = {
 	Fecha a janela de ajuda.
 	*/
 	fechaJanela: function(){
+		YAHOO.log("fechaJanela", "i3geo");
 		i3GEO.ajuda.desativaCookie();
 		document.body.removeChild($i("i3geo_janelaMensagens_c"));
+		YAHOO.log("Fiim fechaJanela", "i3geo");
 	},
 	/*
 	Function: ativaCookie
@@ -186,6 +192,7 @@ i3GEO.ajuda = {
 	ativaLetreiro: function(locaplic,sid){
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
+			YAHOO.log("ativaLetreiro", "i3geo");
 			try
 			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
 			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
@@ -211,6 +218,7 @@ i3GEO.ajuda = {
 					BSpeed = 1;
 					BSpaces = "";
 					i3GEO.ajuda.mostraLetreiro();
+					YAHOO.log("Fim ativaLetreiro", "i3geo");
 				}
 			};
 			var cp = new cpaint();

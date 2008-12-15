@@ -942,6 +942,8 @@ function selecao()
 		richdraw.lineColor = "red";
 		richdraw.lineWidth = "2px";	
 		wdocaf("430px","320px",g_locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+		if(g_funcoesClickMapaDefault.toString().search("cliqueSelecao()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueSelecao()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -1043,6 +1045,10 @@ function area()
 		novoel.innerHTML = ins;
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
+		if(g_funcoesClickMapaDefault.toString().search("cliqueArea()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueArea()");}
+		if(g_funcoesMousemoveMapaDefault.toString().search("moveArea()") < 0)
+		{g_funcoesMousemoveMapaDefault.push("moveArea()");}		
 	}
 	if (g_tipoacao != "area")
 	{
@@ -1114,6 +1120,10 @@ function mede()
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
 		$i('pararraios').checked=true;
+		if(g_funcoesClickMapaDefault.toString().search("cliqueMede()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueMede()");}
+		if(g_funcoesMousemoveMapaDefault.toString().search("moveMede()") < 0)
+		{g_funcoesMousemoveMapaDefault.push("moveMede()");}
 	}
 	if (g_tipoacao != "mede")
 	{
@@ -1164,6 +1174,8 @@ function inserexy()
 		mudaiconf("inserexy");
 		pontosdistobj = new pontosdist();
 		wdocaf("400px","300px",g_locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
+		if(g_funcoesClickMapaDefault.toString().search("cliqueInserexy()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueInserexy()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -1187,6 +1199,8 @@ function inseregrafico()
 		g_nomepin = "pin"+temp[1];
 		mudaiconf("inseregrafico");
 		wdocaf("400px","300px",g_locaplic+'/ferramentas/inseregrafico/index.htm',"","","Insere");
+		if(g_funcoesClickMapaDefault.toString().search("cliqueInseregrafico()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueInseregrafico()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -1516,6 +1530,8 @@ function wiki()
 {
 	g_operacao = "navega";
 	wdocaf("450px","190px",g_locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
+	if(g_funcoesNevegaMapaDefault.toString().search("atualizawiki()") < 0)
+	{g_funcoesNevegaMapaDefault.push("atualizawiki()");}
 }
 /*
 Function: buscafotos
@@ -1540,6 +1556,8 @@ function google()
 	if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",g_locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 	else
 	{wdocaf("500px","380px",g_locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+	if(g_funcoesNevegaMapaDefault.toString().search("atualizagoogle()") < 0)
+	{g_funcoesNevegaMapaDefault.push("atualizagoogle()");}
 }
 /*
 Function: scielo
@@ -1550,6 +1568,8 @@ function scielo()
 {
 	g_operacao = "navega";
 	wdocaf("450px","190px",g_locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
+	if(g_funcoesNevegaMapaDefault.toString().search("atualizascielo()") < 0)
+	{g_funcoesNevegaMapaDefault.push("atualizascielo()");}
 }
 /*
 Function: confluence
@@ -1561,6 +1581,8 @@ function confluence()
 	g_operacao = "navega";
 	wdocaf("250px","190px",g_locaplic+"/ferramentas/confluence/index.htm","","","confluence");
 	criaboxg();
+	if(g_funcoesNevegaMapaDefault.toString().search("atualizaconfluence()") < 0)
+	{g_funcoesNevegaMapaDefault.push("atualizaconfluence()");}
 }
 /*
 Function: lenteDeAumento
@@ -1585,6 +1607,9 @@ function lenteDeAumento()
 		var novoel = document.createElement("div");
 		novoel.id = 'boxlente';
 		document.body.appendChild(novoel);
+		if(g_funcoesMousemoveMapaDefault.toString().search("movelentef()") < 0)
+		{g_funcoesMousemoveMapaDefault.push("movelentef()");}		
+
 	}
 	with($i('boxlente').style){borderWidth='1' + g_postpx;borderColor="red";}
 	if (g_lenteaberta == "sim")
@@ -1753,6 +1778,8 @@ function textofid()
 		pontosdistobj = new pontosdist();
 		g_tipoacao = "textofid";
 		wdocaf("360px","250px",g_locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
+		if(g_funcoesClickMapaDefault.toString().search("cliqueInseretoponimo()") < 0)
+		{g_funcoesClickMapaDefault.push("cliqueInseretoponimo()");}
 	}
 	else
 	{mudaiconf("pan");}

@@ -428,13 +428,6 @@ Veja:
 <iniciamma.js>
 */
 g_funcoesClickMapaDefault = new Array(
-	"cliqueIdentifica()",
-	"cliqueInserexy()",
-	"cliqueInseregrafico()",
-	"cliqueInseretoponimo()",
-	"cliqueSelecao()",
-	"cliqueMede()",
-	"cliqueArea()",
 	"cliqueSelecaoPoli()",
 	"cliqueCapturaPt()"
 );
@@ -454,11 +447,8 @@ Veja:
 g_funcoesMousemoveMapaDefault = new Array(
 	"movecursor()",
 	"movePan()",
-	"moveMede()",
-	"movelentef()",
 	"moveLonglat()",
 	"moveSelecaoPoli()",
-	"moveArea()",
 	"atualizaLocalizarxy()"
 );
 /*
@@ -471,10 +461,6 @@ Veja:
 <iniciamma.js>
 */
 g_funcoesNevegaMapaDefault = new Array(
-	"atualizagoogle()",
-	"atualizascielo()",
-	"atualizawiki()",
-	"atualizaconfluence()",
 	"atualizaEscalaNumerica()"
 );
 /*
@@ -618,7 +604,11 @@ g_listaFuncoesBotoes = {
 		iddiv:"identifica",
 		dica:$trad("d7"),
 		funcaoonclick:function()
-		{mudaiconf('identifica');g_operacao='identifica';}
+		{	mudaiconf('identifica');
+			g_operacao='identifica';
+			if(g_funcoesClickMapaDefault.toString().search("cliqueIdentifica()") < 0)
+			{g_funcoesClickMapaDefault.push("cliqueIdentifica()");}
+		}
 	},
 	{
 		//botão que abre a janela com o valor da extensão geográfica do mapa atual

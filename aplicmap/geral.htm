@@ -18,6 +18,14 @@
 	{font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid green;}
 	</style>
 -->
+	<style> 
+	.yui-log .i3geo {background-color:yellow;} /* customize a color */
+	.yui-log .redesenho {background-color:yellow;} /* customize a color */
+	.yui-log .janela {background-color:yellow;} /* customize a color */
+	.yui-log-bd {text-align:left;}
+	.yui-log-entry yui-log-verbose, p{text-align:left;}
+	 .info {text-align:left;}
+	</style> 
 </head>
 <body id="i3geo" >
 <center>
@@ -246,7 +254,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 	
 */
-var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -255,7 +263,7 @@ var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
 	
 */
-var g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 /*
 Variable: g_templateLegenda
 
@@ -584,10 +592,16 @@ Idioma:
 				
 ******************************************************************************/
 
+//Log
+
+var myContainer = document.body.appendChild(document.createElement("div")); 
+myContainer.style.textAlign="left";
+i3geoLog = new YAHOO.widget.LogReader(myContainer);
+i3geoLog.show(); 
+
 /*
 	Inicializa o mapa
 */
-
 objmapa.inicializa();
 //esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
 if($i("escala") && objmapa.w < 500)

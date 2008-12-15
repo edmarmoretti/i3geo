@@ -164,6 +164,7 @@ i3GEO.arvoreDeCamadas = {
 	funcaoTema - {String} (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
 	*/
 	cria: function(onde,temas,g_sid,g_locaplic,funcaoTema){
+		YAHOO.log("Criando a árvore de camadas", "i3geo");
 		if(arguments.length == 5){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
 		}
@@ -188,7 +189,8 @@ i3GEO.arvoreDeCamadas = {
 	temas - {JSON} Objeto com a lista de camadas e propriedades (veja CAMADAS)
 	*/
 	atualiza: function(temas){
-		if(this.comparaTemas(temas,this.CAMADAS)){return;		}
+		if(this.comparaTemas(temas,this.CAMADAS)){return;}
+		YAHOO.log("Atualizando a árvore de camadas", "i3geo");
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 		this.CAMADAS = temas;
 		var currentIconMode;
@@ -223,6 +225,7 @@ i3GEO.arvoreDeCamadas = {
    		this.ativaDragDrop();
 	},
 	ativaDragDrop: function(){
+		YAHOO.log("Ativando drag-drop da árvore de camadas", "i3geo");
 		var Dom = YAHOO.util.Dom;
 		var Event = YAHOO.util.Event;
 		var DDM = YAHOO.util.DragDropMgr;
@@ -364,6 +367,7 @@ i3GEO.arvoreDeCamadas = {
 	node - {YAHOO.widget.HTMLNode} Nó que foi clicado
 	*/
 	montaOpcoes: function(node){
+		YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
 		var idtema = node.data.id;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		var farol = "maisamarelo.png";
@@ -401,7 +405,8 @@ i3GEO.arvoreDeCamadas = {
 			var opcoesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			opcoesNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);
 		}	
-		node.loadComplete();		
+		node.loadComplete();
+		YAHOO.log("Opções OK", "i3geo");	
 	},
 	/*
 	Function: mostraOpcoes
@@ -413,6 +418,7 @@ i3GEO.arvoreDeCamadas = {
 	node - {YAHOO.widget.HTMLNode}
 	*/
 	mostraOpcoes: function(node){
+		YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
 		var idtema = node.data.idopcoes;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+$trad("t20")+"</span> "+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema.name+"\")' src='"+$im("branco.gif")+"' />";
@@ -462,6 +468,7 @@ i3GEO.arvoreDeCamadas = {
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
 		node.loadComplete();
+		YAHOO.log("Opções OK", "i3geo");
 	},
 	/*
 	Function: mostraLegenda
@@ -473,6 +480,7 @@ i3GEO.arvoreDeCamadas = {
 	node - {YAHOO.widget.HTMLNode}
 	*/
 	mostraLegenda: function(node){
+		YAHOO.log("Mostrando a legenda da árvore de camadas", "i3geo");
 		var idtema = node.data.idlegenda;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		var retorna = function(retorno){
@@ -561,6 +569,7 @@ i3GEO.arvoreDeCamadas = {
 	id - {String} ID (name) do tema
 	*/
 	atualizaLegenda: function(idtema){
+		YAHOO.log("Atualizando a legenda da árvore de camadas", "i3geo");
 		if(document.getElementById(idtema+"verdiv"))
 		{
 			var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idlegenda",idtema);
@@ -570,6 +579,7 @@ i3GEO.arvoreDeCamadas = {
 				this.mostraLegenda(node);
 			}
 		}
+		YAHOO.log("Legenda OK", "i3geo");
 	},
 	/*
 	Function: inverteStatusClasse
@@ -584,6 +594,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	*/
 	inverteStatusClasse: function (leg){
+		YAHOO.log("Invertendo o status da árvore de camadas", "i3geo");
 		var temp = function()
 		{ajaxredesenha("");};
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=inverteStatusClasse&g_sid="+i3GEO.arvoreDeCamadas.SID+"&tema="+leg.name+"&classe="+leg.value;
@@ -637,6 +648,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	atualizaFarol: function(mapscale)
 	{
+		YAHOO.log("Atualizando o farol da árvore de camadas", "i3geo");
 		var farol = "maisamarelo.png";
 		var l = i3GEO.arvoreDeCamadas.CAMADAS.length-1;
 		if (l >= 0){
@@ -655,6 +667,7 @@ i3GEO.arvoreDeCamadas = {
 			}
 			while(l--)
 		}
+		YAHOO.log("Farol OK", "i3geo");
 	},
 	/*
 	Function: aplicaTemas
@@ -663,6 +676,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	*/
 	aplicaTemas: function(){
+		YAHOO.log("Mudando status ligado/desligado de um tema", "i3geo");
 		var t = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 		//
 		//zera o contador de tempo

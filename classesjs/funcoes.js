@@ -284,7 +284,7 @@ function criaContainerRichdraw()
 			//
 			var pos = [0,0];
 			if($i("img"))
-			var pos = pegaPosicaoObjeto($i("img"));
+			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 			//
 			//cria o container
 			//
@@ -581,6 +581,7 @@ objmapa.guiaListaMapas
 */
 function ativaGuias()
 {
+	YAHOO.log("ativaGuias", "i3geo");
 	//ajusta as guias da versão antiga do YUI para a nova
 	//
 	//pega o elemento onde as guias serão colocadas
@@ -721,6 +722,7 @@ function ativaGuias()
 			{alert("id banners nao encontrado");}
 		};
 	}
+	YAHOO.log("Fim ativaGuias", "i3geo");
 }
 /**
 Function: mudaiconf
@@ -741,6 +743,7 @@ function mudaiconf(i)
 {
 	try
 	{
+		YAHOO.log("mudaiconf", "i3geo");
 		//limpa o container com os tips fixos na tela
 		if(objmapa.objtips.length > 0)
 		{
@@ -821,6 +824,7 @@ function mudaiconf(i)
 			if($i("img")){$i("img").title = "";}
 			break;
 		}
+		YAHOO.log("Fim mudaiconf", "i3geo");
 	}
 	catch(e){alert("Ocorreu um erro. mudaiconf"+e);}
 }
@@ -878,6 +882,7 @@ function ativaClicks(docMapa)
 {
 	docMapa.onmouseover = function()
 	{
+		YAHOO.log("ativaClicks", "i3geo");
 		try
 		{
 			if ($i("imgh")){$i("imgh").style.display="block";}
@@ -1036,6 +1041,7 @@ function ativaClicks(docMapa)
 		}
 		catch(e){var e = "";}
 	};
+	YAHOO.log("Fim ativaClicks", "i3geo");
 }
 /*
 Section: navegação
@@ -1108,11 +1114,13 @@ Para que esta função seja executada, é necessário existir um DIV com id=mostraUT
 */
 function pegaCoordenadaUTM()
 {
+	YAHOO.log("pegaCoordenadaUTM", "i3geo");
 	if (!$i("mostraUTM")){return;}
 	var mostra = function(retorno)
 	{
 		$i("mostraUTM").style.display="block";
 		$i("mostraUTM").innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
+		YAHOO.log("Fiim pegaCoordenadaUTM", "i3geo");
 	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+g_sid;
 	var cp = new cpaint();
@@ -1131,6 +1139,7 @@ Executado apenas se a variável g_mostraRosa = "sim"
 function mostraRosaDosVentos()
 {
 	if (g_mostraRosa == "nao"){return;}
+	YAHOO.log("mostraRosaDosVentos", "i3geo");
 	if (!$i("tip"))
 	{
 		var novoel = document.createElement("div");
@@ -1177,6 +1186,7 @@ function mostraRosaDosVentos()
 			}
 		}
 	}
+	YAHOO.log("Fim mostraRosaDosVentos", "i3geo");
 }
 /*
 Function: initJanelaZoom
@@ -1189,6 +1199,7 @@ qual - Qual janela (1 ou 2)
 */
 function initJanelaZoom(qual)
 {
+	YAHOO.log("Janela de botões", "i3geo");
 	//janela de botoes 1
 	var wj = "36px";
 	var recuo = "0px";
@@ -1319,6 +1330,7 @@ function initJanelaZoom(qual)
 	}
 	if ((qual == 2) && ($i("maisBotoes2")))
 	{YAHOO.janelaBotoes2.xp.panel.show();}
+	YAHOO.log("Fim Janela de botões", "i3geo");
 }
 /*
 Function: initJanelaRef
@@ -1327,6 +1339,7 @@ Abre a janela com o mapa de referencia
 */
 function initJanelaRef()
 {
+	YAHOO.log("initJanelaRef", "i3geo");
 	if (!$i("winRef"))
 	{
 		var novoel = document.createElement("div");
@@ -1353,7 +1366,7 @@ function initJanelaRef()
 		YAHOO.namespace("janelaRef.xp");
 		YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
 		YAHOO.janelaRef.xp.panel.render();
-		var pos = pegaPosicaoObjeto($i("img"));
+		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 		if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
 		else
 		{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
@@ -1366,6 +1379,7 @@ function initJanelaRef()
 		YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
 		i3GEO.util.insereCookie("g_mapaRefDisplay","block");
 	}
+	YAHOO.log("Fiim initJanelaRef", "i3geo");
 	objmapa.atualizaReferencia();
 }
 
@@ -1386,7 +1400,7 @@ function movelentef()
 		{
 			if ($i("lente").style.visibility=="visible")
 			{
-				var pos = pegaPosicaoObjeto($i("img"));
+				var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 				var esq = (objposicaocursor.telax - pos[0]) * 2.25;
 				var topo = (objposicaocursor.telay - pos[1]) * 2.25;
 				var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
@@ -1415,7 +1429,8 @@ tipo - desloca|termina
 */
 function zoomboxf(tipo)
 {
-	var pos = pegaPosicaoObjeto($i("img"));
+	YAHOO.log("zoomboxf", "i3geo");
+	var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 	if($i("box1"))
 	{
 		var bx = $i("box1");
@@ -1517,6 +1532,7 @@ function zoomboxf(tipo)
 		document.getElementById("imgh").style.display="block";
 		break;
 	}
+	YAHOO.log("Fim zoomboxf", "i3geo");
 }
 /*
 Function: clicouRef
@@ -1689,6 +1705,7 @@ Esta é a função default, definida na variável g_funcaoTip
 */
 function verificaTipDefault()
 {
+	YAHOO.log("verificaTipDefault", "i3geo");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -1773,6 +1790,7 @@ function mostraTip(retorno)
 			}
 		}
 	}
+	YAHOO.log("Fim mostraTip", "i3geo");
 }
 /*
 Section: legenda
@@ -1838,6 +1856,7 @@ Atualiza o box do google se a função google estiver ativa
 */
 function atualizagoogle()
 {
+	YAHOO.log("atualizagoogle", "i3geo");
 	if (frames["wdocai"])
 	{
 		if (navn)
@@ -1859,6 +1878,7 @@ function atualizagoogle()
 			}
 		}
 	}
+	YAHOO.log("Fiim atualizagoogle", "i3geo");
 }
 /*
 Function: atualizascielo
@@ -1867,6 +1887,7 @@ Atualiza a lista de dados na opção de busca Scielo
 */
 function atualizascielo()
 {
+	YAHOO.log("atualizascielo", "i3geo");
 	if ($i("wdocai"))
 	{
 		if (window.parent.frames["wdocai"])
@@ -1878,6 +1899,7 @@ function atualizascielo()
 			}
 		}
 	}
+	YAHOO.log("Fim atualizascielo", "i3geo");
 }	
 /*
 Function: atualizaconfluence
@@ -1886,6 +1908,7 @@ Atualiza a lista de dados na opção de busca confluence
 */
 function atualizaconfluence()
 {
+	YAHOO.log("atualizaconfluence", "i3geo");
 	if($i("wdocai"))
 	{
 		if (window.parent.frames["wdocai"])
@@ -1897,6 +1920,7 @@ function atualizaconfluence()
 			}
 		}
 	}
+	YAHOO.log("Fim atualizaconfluence", "i3geo");
 }
 /*
 Function: atualizawiki
@@ -1905,6 +1929,7 @@ Atualiza a lista de dados na opção de busca wiki
 */
 function atualizawiki()
 {
+	YAHOO.log("atualizawiki", "i3geo");
 	if ($i("wdocai"))
 	{
 		if (window.parent.frames["wdocai"])
@@ -1916,6 +1941,7 @@ function atualizawiki()
 			}
 		}
 	}
+	YAHOO.log("Fim atualizawiki", "i3geo");
 }
 /*
 Section: menu de temas e outras listagens
@@ -2100,7 +2126,7 @@ function pegaMapas(retorno)
 	$i("banners").innerHTML = ins;
 }
 /*
-Function: arvoreclick
+Function: arvoreclick (depreciado)
 
 Marca o checkbox de adição de temas
 
@@ -2119,7 +2145,7 @@ function arvoreclick(itemID)
 	}
 }
 /*
-Function: pegaTema
+Function: pegaTema (depreciado)
 
 Pega o tema de um no na guia de temas.
 
@@ -2209,6 +2235,7 @@ function remapaf()
 	//
 	//zera o contador de tempo
 	//
+	YAHOO.log("remapaf", "i3geo");
 	clearTimeout(objmapa.tempo);
 	objmapa.tempo = "";
 	objmapa.temaAtivo = "";
@@ -2309,6 +2336,7 @@ function remapaf()
 	}
 	else
 	{remapaAdicNovos();}
+	YAHOO.log("FIm remapaf", "i3geo");
 }
 /*
 Section: eventos
@@ -2323,6 +2351,7 @@ function calcposf()
 {
 	try
 	{
+		YAHOO.log("calcposf", "i3geo");
 		imagemxi = 0;
 		imagemyi = 0;
 		imagemxref = 0;
@@ -2368,6 +2397,7 @@ function calcposf()
 			$top("aguarde",imagemyi);
 			$left("aguarde",imagemxi);
 		}
+		YAHOO.log("Fim calcposf", "i3geo");
 	}
 	catch(e){alert("Ocorreu um erro. calcposf"+e);}
 }
@@ -2426,6 +2456,7 @@ exy - objeto evento.
 */
 function capturaposicao(e)
 {
+	YAHOO.log("capturaposicao", "i3geo");
 	if (!e) var e = window.event;
 	//
 	//verifica sob qual objeto o mouse está se movendo
@@ -2441,9 +2472,9 @@ function capturaposicao(e)
 	//se não for feito assim, o deslocamento do mapa não é capturado
 	//
 	if (g_panM == "sim")
-	{var pos = pegaPosicaoObjeto(targ.parentNode);}
+	{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
 	else
-	{var pos = pegaPosicaoObjeto(targ);}
+	{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
 	if((g_entorno == "sim") && (g_panM == "sim"))
 	{
 		pos[0] = pos[0] - objmapa.w;
@@ -2488,8 +2519,8 @@ function capturaposicao(e)
 		var ex = objmapa.extentref;
 	}
 	//$i("visual").innerHTML=c
-	var teladd = calcddf(xfig,yfig,c,ex);
-	var teladms = convdmsf(teladd[0],teladd[1]);
+	var teladd = i3GEO.util.tela2dd(xfig,yfig,c,ex);
+	var teladms = i3GEO.util.dd2dms(teladd[0],teladd[1]);
 	objposicaocursor.ddx = teladd[0];
 	objposicaocursor.ddy = teladd[1];
 	objposicaocursor.dmsx = teladms[0];
@@ -2509,6 +2540,7 @@ function capturaposicao(e)
 	//if (objmapa.parado!="cancela")
 	//{objmapa.parado = "nao";}
 	ajaxTip = "";
+	YAHOO.log("Fiim capturaposicao", "i3geo");
 }
 /*
 Section: quadro de animação
@@ -2820,172 +2852,6 @@ function calculadistancia(lga,lta,lgb,ltb) //0ms
 	}
 	catch(e){return (0);}
 }
-
-/*
-Function: calcddf
-
-Converte o x,y de unidades de tela para décimo de grau.
-
-Parameters:
-
-xfign - x em valores de imagem.
-
-yfign - y em coordenadas de imagem.
-
-g_celula - tamanho no terreno do pixel da imagem.
-
-imgext - extensão geográfica do mapa.
-
-Returns:
-
-Coordena em dd.
-*/
-function calcddf(xfign,yfign,g_celula,imgext)
-{
-	try
-	{
-		if (navm)
-		{
-		 xfign = xfign - 2.2;
-		 yfign = yfign - 2.7;
-		}
-		if (navn)
-		{
-		 xfign = xfign - 0.12;
-		 yfign = yfign - 1.05;
-		}
-		var nx = g_celula * xfign;
-		var ny = g_celula * yfign;
-		var amext = imgext.split(" ");
-		var longdd = (amext[0] * 1) + nx;
-		var latdd = (amext[3] * 1) - ny;
-		var res = new Array();
-		res[0] = longdd;
-		res[1] = latdd;
-		return (res);
-	}
-	catch(e){return(0);}
-}
-/*
-Function: convdmsf
-
-Converte dd em dms.
-
-Parameters:
-
-x - coordenada x.
-
-y - coordenada y.
-
-Returns:
-
-Array com o valor de x [0] e y [1] no formato dd mm ss
-*/
-function convdmsf(x,y)
-{
-	var m = 0;
-	var s = 0;
-	var dx = parseInt(x);
-	if (dx > 0)
-	{var restod = x - dx;}
-	if (dx < 0)
-	{restod = (x * -1) - (dx * -1);}
-	dx = dx;
-	if (restod != 0)
-	{
-		var mm = restod * 60;
-		var m = parseInt(restod * 60);
-		var restos = mm - m;
-		var mx = m;
-		if (restos != 0)
-		{
-			var s = restos * 60;
-			var s = (s+"_").substring(0,5);
-			var sx = s;
-		}
-		else  { s = "00.00" }
-	}
-	else
-	{
-		var mx = "00";
-		var sx = "00.00";
-	}
-	if (m.length == 2){m = "0"+m+"";}
-	if (s*1 < 10){s = "0"+s;}
-	var xv = dx+" "+mx+" "+sx;
-	var m = 0;
-	var s = 0;
-	var dy = parseInt(y);
-	if (dy > 0)
-	{var restod = y - dy;}
-	if (dy < 0)
-	{var restod = (y * -1) - (dy * -1);}
-	dy = dy;
-	if (restod != 0)
-	{
-		var mm = restod * 60;
-		var m = parseInt(restod * 60);
-		var restos = mm - m;
-		var my = m;
-		if (restos != 0)
-		{
-			var s = restos * 60;
-			s = (s+"_").substring(0,5);
-			var sy = s;
-		}
-		else  { var s = "00.00";}
-	}
-	else
-	{
-		var my = "00";
-		var sy = "00.00";
-	}
-	if (m.length == 2){m = "0"+m;}
-	if (s*1 < 10){s = "0"+s;}
-	var yv = dy+" "+my+" "+sy;
-	var res = new Array();
-	res[0] = xv;
-	res[1] = yv;
-	return res;
-}
-/*
-Function: convddtela
-
-Converte coordenadas dd em coordenadas de tela.
-
-Parameters:
-
-vx - coordenada x.
-
-vy - coordenada y.
-
-docmapa - objeto que contém o objeto imagem.
-
-Returns:
-
-Array com o valor de x [0] e y [1]
-*/
-function convddtela(vx,vy,docmapa)
-{
-	try
-	{
-		if(!docmapa)
-		{var docmapa = window.document;}
-		if(docmapa.getElementById("contemImg"))
-		var dc = docmapa.getElementById("contemImg");
-		else
-		var dc = docmapa.getElementById("img");
-		var pos = pegaPosicaoObjeto(dc);
-		var imgext = objmapa.extent;
-		var imgext = imgext.split(" ");
-		vx = (vx * 1) - (imgext[0] * 1);
-		vy = (vy * -1) + (imgext[3] * 1);
-		c = objmapa.cellsize * 1;
-		xy = new Array();
-		return [(vx  / c) + pos[0],(vy / c) + pos[1]];
-	}
-	catch(e){return(new Array());}
-}
 /*
 Function: posicaomouse
 
@@ -3096,7 +2962,7 @@ function desenhoRichdraw(tipo,objeto,n)
 {
 	if (richdraw && $i("img"))
 	{
-		var pos = pegaPosicaoObjeto($i("img"));
+		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 		//
 		//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 		//
@@ -3187,31 +3053,6 @@ function incluir(path)
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,f,ajaxredesenha);
-}
-/*
-Function: i3geo_pegaElementoPai
-
-Pega o elemento pai de um elemento clicado para identificar o código do tema.
-
-Parameters:
-
-e - elemento do DOM.
-*/
-function i3geo_pegaElementoPai(e)
-{
-	var targ;
-	if (!e)
-	{var e = window.event;}
-	if (e.target)
-	{targ = e.target;}
-	else
-	if (e.srcElement)
-	{targ = e.srcElement;}
-	if (targ.nodeType == 3)
-   	{targ = targ.parentNode;}
-	var tname;
-	tparent=targ.parentNode;
-	return(tparent);
 }
 /*
 Function: inseremarcaf
@@ -3309,39 +3150,6 @@ function criaboxg()
 		document.body.appendChild(novoel);
 	}
 }
-
-
-/*
-Function: pegaPosicaoObjeto
-
-Retorna a posição x,y de um objeto em relação a tela do navegador
-*/
-function pegaPosicaoObjeto(obj)
-{
-	if(obj)
-	{
-		if(obj.style.position == "absolute")
-		{
-			return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];
-		}
-		else
-		{
-			var curleft = curtop = 0;
-			if(obj)
-			{
-				if (obj.offsetParent) {
-					do {
-						curleft += obj.offsetLeft-obj.scrollLeft;
-						curtop += obj.offsetTop-obj.scrollTop;
-					} while (obj = obj.offsetParent);
-				}
-			}
-			return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
-		}
-	}
-	else
-	{return [0,0];}
-}
 /*
 Function: recuperamapa
 
@@ -3356,20 +3164,6 @@ function recuperamapa()
 	cp.set_response_type("JSON");
 	cp.call(p,"recuperamapa",remapaf);
 }
-/*
-Function: protocolo
-
-Retorna o protocolo utilizado na url.
-*/
-function protocolo()
-{
-	var u = window.location.href;
-	var u = u.split(":");
-	return (u[0]);
-}
-//Mantido aqui apenas para fins de compatibilidade
-function borra()
-{}
 //testa se esse script foi carregado
 function testafuncoes()
 {}

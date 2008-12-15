@@ -126,7 +126,9 @@ i3GEO.idioma = {
 	*/
 	traduzir: function(id) {
 		if(i3GEO.idioma.DICIONARIO[id]){
+			//YAHOO.log("traduzir", "i3geo");
 			var t = i3GEO.idioma.DICIONARIO[id][0];
+			//YAHOO.log("Fim traduzir", "i3geo");
 			return t[i3GEO.idioma.ATUAL];
 		}
 		else return;

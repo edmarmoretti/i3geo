@@ -212,7 +212,7 @@ function listafotoslocr(retorno)
 function mostraxy(xy)
 {
 	var xy = xy.split(",")
- 	var xy = window.parent.convddtela(xy[1]*1,xy[0]*1,window.parent.document)
+ 	var xy = window.parent.i3GEO.util.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
 	var box = window.parent.$i("boxpin")
 	box.style.display = "block"
 	box.style.width = "21px"

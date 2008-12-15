@@ -98,7 +98,6 @@ $jsfiles = array(
 //"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
 //"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"compactados/depreciados_compacto.js",
 "compactados/funcoes_compacto.js",
 "compactados/classe_configura_compacto.js",
 "compactados/dicionario_compacto.js",
@@ -113,7 +112,8 @@ $jsfiles = array(
 "compactados/ferramentas_compacto.js",
 "compactados/redesenho_compacto.js",
 "compactados/iniciamma_compacto.js",
-"compactados/menususpenso_compacto.js"
+"compactados/menususpenso_compacto.js",
+"compactados/depreciados_compacto.js"
 );
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
@@ -125,6 +125,7 @@ $cssfiles = array(
 "../css/geral.css",
 "../css/botoes.css",
 "../css/documentation.css",
+"../pacotes/yui252/build/logger/assets/skins/sam/logger.css",
 "../pacotes/yui252/build/fonts/fonts-min.css",
 "../pacotes/yui252/build/reset-fonts-grids/reset-fonts-grids.css",
 "../pacotes/yui252/build/grids/grids-min.css",

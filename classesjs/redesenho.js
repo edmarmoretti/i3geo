@@ -251,7 +251,10 @@ function ajaxReferencia(retorno)
 			}
 		}
 		gravaQuadro("referencia",refimagem);
+		YAHOO.log("Concluída imagem de referência", "redesenho");
 	}
+	else
+	{YAHOO.log("Erro na imagem de referência", "redesenho");}
 }
 /*
 Function: ajaxLegendaHTML
@@ -306,7 +309,10 @@ function ajaxLegendaHTML(retorno)
 			YAHOO.moveLegi.xp.panel.render();
 			YAHOO.moveLegi.xp.panel.show();
 		};
+		YAHOO.log("Concluída legenda HTML", "redesenho");
 	}
+	else
+	{YAHOO.log("Erro na legenda HTML", "redesenho");}
 }
 /*
 Function: ajaxLegendaImagem
@@ -338,6 +344,7 @@ retorno - string no formato "var mapimagem='nome da imagem'".
 function ajaxCorpoMapa(retorno)
 {
 	i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
+	YAHOO.log("ajaxCorpoMapa", "redesenho");
 	if($i("mst"))
 	{$i("mst").style.display="block";}
 	if (!$i("img")){return;}
@@ -403,6 +410,7 @@ function ajaxCorpoMapa(retorno)
 			}		
 		}
 	}
+	YAHOO.log("Fim ajaxCorpoMapa", "redesenho");
 }
 /*
 Function: ajaxredesenha
@@ -419,6 +427,7 @@ function ajaxredesenha(retorno)
 	try{richdraw.clearWorkspace();}catch(e){};
 	try
 	{
+		YAHOO.log("ajaxredesenha", "redesenho");
 		if(retorno && retorno.data.temas)
 		{i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
 		else
@@ -475,6 +484,7 @@ function ajaxredesenha(retorno)
 				}
 			}			
 		}
+		YAHOO.log("Fim ajaxredesenha", "redesenho");
 	}
 	catch(e){alert("ajaxredesenha "+e);}
 }
@@ -489,6 +499,7 @@ retorno - objeto JSON.
 */
 function ajaxIniciaParametros(retorno)
 {
+	YAHOO.log("ajaxIniciaParametros", "redesenho");
 	i3GEO.ajuda.ativaLetreiro(g_locaplic,g_sid);
 	var tempo = "";
 	if ($i("openlayers"))
@@ -635,6 +646,7 @@ function ajaxIniciaParametros(retorno)
 			geraURLentorno();
 			ajustaEntorno();
 		}
+		YAHOO.log("Fim ajaxIniciaParametros", "redesenho");
 	}
 	catch(e){alert("ajaxIniciaParametros "+e);}
 	mostradicasf("","Tempo de redesenho em segundos: "+tempo,"");
@@ -652,6 +664,7 @@ function ajaxabrelente(retorno)
 {
 	try
 	{
+		YAHOO.log("ajaxabrelente", "redesenho");
 		var retorno = retorno.data;
 		if (retorno == "erro"){alert("A lente nao pode ser criada");return;}
 		var volta = retorno.split(",");
@@ -665,7 +678,7 @@ function ajaxabrelente(retorno)
 		olente.style.zIndex=1000;
 		olenteimg.style.zIndex=1000;
 		oboxlente.style.zIndex=1000;
-		var pos = pegaPosicaoObjeto($i("corpoMapa"));
+		var pos = i3GEO.util.pegaPosicaoObjeto($i("corpoMapa"));
 		eval ("olente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
 		eval ("olente.style." + g_tipotop + " = pos[1] + g_posicaoLenteY + g_postpx");
 		eval ("oboxlente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
@@ -675,6 +688,7 @@ function ajaxabrelente(retorno)
 		olente.style.display='block';
 		olente.style.visibility='visible';
 		i3GEO.janela.fechaAguarde("ajaxabrelente");
+		YAHOO.log("Fim ajaxabrelente", "redesenho");
 	}
 	catch(e){trataErro();}
 }
@@ -689,6 +703,7 @@ retorno - nome da imagem.
 */
 function ajaxdestaca(retorno)
 {
+	YAHOO.log("ajaxdestaca", "redesenho");
 	var retorno = retorno.data;
 	var m = new Image();
 	m.src = retorno;
@@ -723,6 +738,7 @@ function ajaxdestaca(retorno)
 	novoel.style.display = "block";
 	$i("div_d").appendChild(novoel);
 	i3GEO.janela.fechaAguarde("ajaxdestaca");
+	YAHOO.log("Fim ajaxdestaca", "redesenho");
 }
 //testa se esse script foi carregado
 function testaajax()

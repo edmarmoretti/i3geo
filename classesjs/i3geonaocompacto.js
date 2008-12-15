@@ -29,7 +29,6 @@ var jsfiles = new Array(
 "../pacotes/yui252/build/utilities/utilities.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
 "../pacotes/yui252/build/treeview/treeview-min.js",
-"depreciados.js",
 "classe_configura.js",
 "classe_util.js",
 "dicionario.js",
@@ -45,7 +44,8 @@ var jsfiles = new Array(
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
-"../pacotes/richdraw/richdraw_tudo_compacto.js"
+"../pacotes/richdraw/richdraw_tudo_compacto.js",
+"depreciados.js"
 );
 for (i = 0; i < jsfiles.length; i++)
 {

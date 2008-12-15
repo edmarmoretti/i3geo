@@ -52,6 +52,7 @@ i3GEO.navega = {
 	sid {String} - código da seção aberta no servidor pelo i3geo
 	*/
 	zoomin: function(locaplic,sid){
+		YAHOO.log("zoomin", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
 		//g_operacao = "navega";
@@ -72,6 +73,7 @@ i3GEO.navega = {
 	sid {String} - código da seção aberta no servidor pelo i3geo
 	*/
 	zoomout: function(locaplic,sid){
+		YAHOO.log("zoomout", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
 		//g_operacao = "navega";
@@ -96,6 +98,7 @@ i3GEO.navega = {
 	y {Numeric} - coordenada em décimos de grau da latitude
 	*/
 	zoomponto: function(locaplic,sid,x,y){
+		YAHOO.log("zoomponto", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+sid;
 		var cp = new cpaint();
@@ -117,6 +120,7 @@ i3GEO.navega = {
 	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
 	*/	
 	localizaIP: function(locaplic,sid,funcao){
+		YAHOO.log("localizaIP", "i3geo");
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+sid;
 		var cp = new cpaint();
 		cp.set_async("true");
@@ -166,6 +170,7 @@ i3GEO.navega = {
 	ext {String} - Extensão geográfica no formato xmin ymin xmax ymax
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
+		YAHOO.log("zoomExt", "i3geo");
 		if(tipoimagem == "")
 		{var tipoimagem = "nenhum";}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
@@ -189,6 +194,7 @@ i3GEO.navega = {
 	escala {Numeric} - denominador da escala
 	*/	
 	aplicaEscala: function(locaplic,sid,escala){
+		YAHOO.log("aplicaescala", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+sid;
 		var cp = new cpaint();
@@ -216,6 +222,7 @@ i3GEO.navega = {
 	escala {Numeric} - escala do mapa
 	*/
 	panFixo: function(locaplic,sid,direcao,w,h,escala){
+		YAHOO.log("panfixo", "i3geo");
 		if (direcao == "norte"){
 			var y = h / 6;
 			var x = w / 2;
