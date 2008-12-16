@@ -249,7 +249,7 @@ Function: protocolo (depreciado)
 Utilize i3GEO.util
 */
 function protocolo()
-{i3GEO.util.protocolo();}
+{return(i3GEO.util.protocolo());}
 //Mantido aqui apenas para fins de compatibilidade
 function borra()
 {}
@@ -257,24 +257,24 @@ function borra()
 Function: pegaPosicaoObjeto (depreciado)
 */
 function pegaPosicaoObjeto(obj)
-{i3GEO.util.pegaPosicaoObjeto(obj);}
+{return(i3GEO.util.pegaPosicaoObjeto(obj));}
 /*
 Function: i3geo_pegaElementoPai (depreciado)
 */
 function i3geo_pegaElementoPai(e)
-{i3GEO.util.pegaElementoPai(e);}
+{return(i3GEO.util.pegaElementoPai(e));}
 /*
 Function: convddtela (depreciado)
 */
 function convddtela(vx,vy,docmapa)
-{i3GEO.util.dd2tela(vx,vy,docmapa,objmapa.extent,objmapa.cellsize);}
+{return(i3GEO.util.dd2tela(vx,vy,docmapa,objmapa.extent,objmapa.cellsize));}
 /*
 Function: convdmsf (depreciado)
 */
 function convdmsf(x,y)
-{i3GEO.util.dd2dms(x,y);}
+{return(i3GEO.util.dd2dms(x,y));}
 /*
 Function: calcddf (depreciado)
 */
 function calcddf(xfign,yfign,g_celula,imgext)
-{i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext);}
+{return(i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext));}

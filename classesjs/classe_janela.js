@@ -156,9 +156,9 @@ i3GEO.janela = {
 		}
 		
 		var fix = false;
-		if(nx == ""){var fix = true;}
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		if(nx != ""){
+		if(nx == "" || nx == "center"){var fix = true;}
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		if(nx != "" && nx != "center"){
 			var pos = new Array(nx,ny);
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}

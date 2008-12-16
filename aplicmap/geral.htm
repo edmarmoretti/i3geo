@@ -254,7 +254,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 	
 */
-var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -593,11 +593,12 @@ Idioma:
 ******************************************************************************/
 
 //Log
-
+/*
 var myContainer = document.body.appendChild(document.createElement("div")); 
 myContainer.style.textAlign="left";
 i3geoLog = new YAHOO.widget.LogReader(myContainer);
-i3geoLog.show(); 
+i3geoLog.show();
+*/
 
 /*
 	Inicializa o mapa
