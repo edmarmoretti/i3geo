@@ -452,6 +452,7 @@ function alterarMetadados()
 function pegaGeral()
 {
 	global $codigoMap,$codigoLayer,$locaplic;
+	$v = versao();
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -470,7 +471,7 @@ function pegaGeral()
 	$dados["maxscale"] = $layer->maxscale;
 	$dados["minscale"] = $layer->minscale;
 	$dados["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
-	$dados["opacity"] = $layer->opacity;
+	$v["principal"] == "4" ? $dados["opacity"] = $layer->transparency : $dados["opacity"] = $layer->opacity;
 	$dados["symbolscale"] = $layer->symbolscale;
 	$dados["tolerance"] = $layer->tolerance;
 	$dados["toleranceunits"] = $layer->toleranceunits;
@@ -488,6 +489,8 @@ function pegaGeral()
 function alterarGeral()
 {
 	global $codigoMap,$codigoLayer,$locaplic,$name,$projection,$sizeunits,$status,$toleranceunits,$tolerance,$symbolscale,$opacity,$offsite,$minscale,$maxscale,$labelsizeitem,$labelminscale,$labelmaxscale,$labelitem,$group,$filteritem,$type,$filter;
+	error_reporting(E_ALL);
+	$v = versao();
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -513,7 +516,8 @@ function alterarGeral()
 	$c = explode(" ",$offsite);
 	$cor->setrgb($c[0],$c[1],$c[2]);
 	$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
-	$layer->set("opacity",$opacity);
+	$v["principal"] == "4" ? $layer->set("transparency",$opacity) : $layer->set("opacity",$opacity);
+
 	$layer->set("symbolscale",$symbolscale);
 	$layer->set("tolerance",$tolerance);
 	$layer->set("toleranceunits",$toleranceunits);
@@ -532,18 +536,25 @@ function alterarGeral()
 function pegaClasseGeral()
 {
 	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	
+	error_reporting(E_ALL);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
 	$dados["name"] = $classe->name;
-	$dados["expression"] = $classe->getExpression();
+	$temp = $classe->getExpression();
+	$temp = str_replace("[","_C",$temp);
+	$temp = str_replace("]","C_",$temp);
+	$temp = str_replace("'","_A_",$temp);
+	//substitui caracteres que dão problemas
+	$dados["expression"] = $temp;
 	$dados["keyimage"] = $classe->keyimage;
 	$dados["maxscale"] = $classe->maxscale;
 	$dados["minscale"] = $classe->minscale;
 	$dados["status"] = $classe->status;
-	$dados["text"] = $classe->getTextString();
+	//$dados["text"] = $classe->getTextString();
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["indiceClasse"] = $indiceClasse;
@@ -559,7 +570,10 @@ function alterarClasseGeral()
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
 	$classe->set("name",$name);
-	$classe->setexpression($expression);
+	$temp = str_replace("_C","[",$expression);
+	$temp = str_replace("C_","]",$temp);
+	$temp = str_replace("_A_","'",$temp);	
+	$classe->setexpression($temp);
 	$classe->set("keyimage",$keyimage);
 	$classe->set("maxscale",$maxscale);
 	$classe->set("minscale",$minscale);

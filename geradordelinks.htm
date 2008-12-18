@@ -10,6 +10,7 @@
 P 
 {COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 </style>
+<script type="text/javascript" src="classesjs/classe_util.js"></script>
 <script type="text/javascript" src="classesjs/geradordelinks.js"></script>
 </head>
 <body style="background-color:white;text-align:left;left:0px;">
@@ -120,7 +121,7 @@ Veja:
 File: i3geo/geradordelinks.htm
 
 */
-var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+var g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 var i3geo_gl_configura = new i3geo_gl_configura(
 	g_locaplic,
 	"estadosl",

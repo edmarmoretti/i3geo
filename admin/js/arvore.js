@@ -530,7 +530,8 @@ function montaDivTema(i)
 	ins += "<select id='Epublicado' >"
 	ins += core_combosimnao(i.publicado)
 	ins += "</select>"
-	ins += "<input type=hidden value="+i.ordem+" id='Eordem' />"
+	ins += "<br>Ordem<br>"
+	ins += "<input size=10 type=text value="+i.ordem+" id='Eordem' />"
 	return(ins)
 }
 function montaDivRaiz(i)

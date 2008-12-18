@@ -304,7 +304,7 @@ i3GEO.arvoreDeCamadas = {
 	                		DDM.refreshCache();
 	                		//exclui tema
    		             		if(DDM.getDDById(id).id == "i3geo_lixeira"){
-                				i3GEO.janela.abreAguarde("ajaxCorpoMapa1",$trad("o1"));
+                				i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
                 				var tema = (this.getEl()).id.split("arrastar_")[1];
 								var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
 								var cp = new cpaint();
@@ -683,6 +683,7 @@ i3GEO.arvoreDeCamadas = {
 		//
 		var temp = function(){
 			objmapa.atualizaCorpoMapa();
+			i3GEO.janela.fechaAguarde("redesenha");
 		};
 		clearTimeout(objmapa.tempo);
 		objmapa.tempo = "";

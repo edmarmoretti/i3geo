@@ -161,13 +161,13 @@ Altera o registro de um nível 3 (temas)
 */
 function alteraN3()
 {
-	global $publicado,$n3_perfil,$id,$id_n2,$id_tema;
+	global $publicado,$n3_perfil,$id,$id_n2,$id_tema,$ordem;
 	try 
 	{
     	require_once("conexao.php");
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_n3 SET publicado = '$publicado',id_tema = '$id_tema', n3_perfil = '$n3_perfil' WHERE id_n3 = $id");
+    		$dbhw->query("UPDATE i3geoadmin_n3 SET ordem = $ordem, publicado = '$publicado',id_tema = '$id_tema', n3_perfil = '$n3_perfil' WHERE id_n3 = $id");
     		$retorna = $id;
     	}
     	else

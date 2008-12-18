@@ -844,6 +844,12 @@ function montaEditorGeral(dados)
 }
 function montaEditorClasseGeral(dados)
 {
+	var re = /C_/g;
+	dados.expression = dados.expression.replace(re,"]");
+	var re = /_C/g;
+	dados.expression = dados.expression.replace(re,"[");
+	var re = /_A_/g;
+	dados.expression = dados.expression.replace(re,"'");
 	var param = {
 		"linhas":[
 		{ajuda:"Nome da classe para ser mostrada na legenda",
@@ -1042,8 +1048,16 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 	}
 	if(tipo == "classeGeral")
 	{
-		var campos = new Array("status","minscale","maxscale","name","expression","keyimage")
+		var campos = new Array("status","minscale","maxscale","name","keyimage")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
+		var temp = $i("expression").value;
+		var re = /]/g;
+		var temp = temp.replace(re,"C_");
+		var re = "[";
+		var temp = temp.replace(re,"_C");
+		var re = /'/g;
+		var temp = temp.replace(re,"_A_");
+		par += "&expression="+temp;
 		var prog = "../php/editormapfile.php?funcao=alterarClasseGeral"	
 	}
 	if(tipo == "classeLabel")

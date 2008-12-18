@@ -237,7 +237,12 @@ include_once("../../ms_configura.php");
         			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
     			*/
     			endereco2 = place.address;
-    			montaRota()
+    			endereco2 = window.prompt("Endereco do final",endereco2)
+    			if (endereco2!=null && endereco2!="")
+    			{
+    				map.addOverlay(marker);
+    				montaRota();
+    			}
     		}
     	}
     	
@@ -250,7 +255,7 @@ include_once("../../ms_configura.php");
     			place = response.Placemark[0];
     			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
     			marker = new GMarker(point);
-    			map.addOverlay(marker);
+    			
     			/*
     			marker.openInfoWindowHtml(
         			'<b>orig latlng:</b>' + response.name + '<br/>' + 
@@ -262,8 +267,14 @@ include_once("../../ms_configura.php");
         			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
     			*/
     			endereco1 = place.address;
+    			endereco1 = window.prompt("Endereco do inicio",endereco1)
+    			if (endereco1!=null && endereco1!="")
+    			{
+    				map.addOverlay(marker);
+    				geocoder.getLocations(pontoRota2, pt2);
+    			}
     		}
-    		geocoder.getLocations(pontoRota2, pt2);
+    		
     		
     	}
     	geocoder.getLocations(pontoRota1, pt1);
