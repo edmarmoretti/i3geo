@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>WP-Cumulus example</title>
+	<meta http-equiv="Content-Type" content="text/html" />
+	<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ -->
+	<script type="text/javascript" src="swfobject.js"></script>
+	<style type="text/css">
+		body { background-color: #eee; padding: 20px; } 
+	</style>
+</head>
+
+<body>
+
+	<div id="flashcontent">This will be shown to users with no Flash or Javascript.</div>
+
+	<script type="text/javascript">
+		var so = new SWFObject("tagcloud.swf", "tagcloud", "600", "400", "7", "#ffffff");
+		// uncomment next line to enable transparency
+		//so.addParam("wmode", "transparent");
+		so.addVariable("tcolor", "0x333333");
+		so.addVariable("mode", "tags");
+		so.addVariable("distr", "true");
+		so.addVariable("tspeed", "100");
+		so.addVariable("tagcloud", "<tags><a href='http://www.roytanck.com' style='22'>WordPress</a><a href='http://www.roytanck.com' style='12'>Flash</a><a href='http://www.roytanck.com' style='16'>Plugin</a><a href='http://www.roytanck.com' style='14'>WP-Cumulus</a><a href='http://www.roytanck.com' style='12'>3D</a><a href='http://www.roytanck.com' style='12'>Tag cloud</a><a href='http://www.roytanck.com' style='9'>Roy Tanck</a><a href='http://www.roytanck.com' style='10'>SWFObject</a><a href='http://www.roytanck.com' style='10'>Example</a><a href='http://www.roytanck.com' style='12'>Click</a><a href='http://www.roytanck.com' style='12'>Animation</a></tags>");
+		so.write("flashcontent");
+	</script>
+
+</body>
+
+</html>
