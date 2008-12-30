@@ -2,7 +2,9 @@
 $funcao = "";
 include_once("admin.php");
 error_reporting(E_ALL);
-verificaEditores($editores);
+if(verificaEditores($editores) == "nao")
+{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+
 $tabelas = array(
 "CREATE TABLE i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT)",
 "CREATE TABLE i3geoadmin_sistemasf (abrir_funcao TEXT, h_funcao NUMERIC, id_funcao INTEGER PRIMARY KEY, id_sistema NUMERIC, nome_funcao TEXT, perfil_funcao TEXT, w_funcao NUMERIC)",

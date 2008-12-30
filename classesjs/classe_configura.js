@@ -3,7 +3,7 @@ Class:: i3GEO.configura
 
 Configuração do i3geo
 
-Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classeamaioria dos parâmetros que controlam
+Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
 o funcionamento do i3geo.
 
 File: i3geo/classesjs/classe_configura.js
@@ -33,9 +33,67 @@ if(typeof(i3GEO) == 'undefined'){
 }
 i3GEO.configura = {
 	/*
+	Variable: sid
+	
+	Código da seção aberta pelo i3Geo no servidor.
+	
+	O código é gerado na inicialização do i3Geo pelo programa ms_criamapa.php
+	
+	Type:
+	{String}
+	*/
+	sid: "",
+	/*
+	Variable: locaplic
+	
+	Localização da instalação do i3geo (URI)
+	
+	Por default, é definida na inicialização do i3Geo com o uso do i3GEO.util
+
+	Type:
+	{URI}
+	*/
+	locaplic: "",
+	/*
+	Variable: visual
+	
+	Tipo de visual que será utilizado no mapa.
+	
+	A lista de visuais existentes é obtida na inicialização do i3geo.
+	
+	Veja o diretório i3geo/imagens/visual
+
+	Type:
+	{String}
+	*/
+	visual: "default",
+	/*
+	Variable: cursores
+	
+	Imagens utilizadas para os cursores do mouse mostrados no mapa	
+
+	Type:
+	{JSON}
+	*/
+	cursores: {
+		"identifica":
+		{ff:"/imagens/cursores/identifica.png",ie:"/imagens/cursores/identifica.cur"},
+		"pan":
+		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
+		"area":
+		{ff:"/imagens/cursores/area.png",ie:"/imagens/cursores/area.cur"},
+		"distancia":
+		{ff:"/imagens/cursores/distancia.png",ie:"/imagens/cursores/distancia.cur"},
+		"zoom":
+		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
+	},
+	/*
 	Variable: listaDePropriedadesDoMapa
 	
 	Lista com as funções que são incluídas no item "Propriedades do mapa"	
+
+	Type:
+	{JSON}
 	*/
 	listaDePropriedadesDoMapa: {
 		"propriedades": [
@@ -59,16 +117,41 @@ i3GEO.configura = {
 	
 	Utilizado no botão Aplicar, quando o usuário liga/desliga ou adiciona umtema
 	
+	Type:
+	{Numeric}
 	*/
 	tempoAplicar: 4000,
+	/*
+	Variable: tempoMouseParado
+	
+	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
+	
+	Controla o lapso de tempo utilizado para disparar as funções que ocorrem quando o mouse está parado sobre o mapa
+	
+	Type:
+	{Numeric}
+	*/
+	tempoMouseParado: 2500,
 	/*
 	Variable: iniciaJanelaMensagens
 	
 	Inicia o i3geo com a janela de mensagens aberta ou fechada.
 	
 	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
+
+	Type:
+	{Boolean}
 	*/
-	iniciaJanelaMensagens: true
+	iniciaJanelaMensagens: true,
+	/*
+	Variable: mostraRosaDosVentos
+	
+	Mostra ou não a rosa dos ventos sob o mouse quando estiver parado.
+
+	Type:
+	{sim|nao}
+	*/	
+	mostraRosaDosVentos: "sim"
 	/*
 	Function: alteraVariavel
 	*/
@@ -93,3 +176,37 @@ try {
 	{i3GEO.configura.iniciaJanelaMensagens = false;}
 }
 catch(e){};
+try {
+	if (g_locaplic)
+	{i3GEO.configura.locaplic = g_locaplic;}
+}
+catch(e){};
+try {
+	if (g_tempotip)
+	{i3GEO.configura.tempoMouseParado = g_tempotip;}
+}
+catch(e){};
+try {
+	if (g_mostraRosa)
+	{i3GEO.configura.mostraRosaDosVentos = g_mostraRosa;}
+}
+catch(e){};
+try {
+	if (g_visual)
+	{i3GEO.configura.visual = g_visual;}
+}
+catch(e){};
+//
+//define a variável sid
+if (window.location.href.split("?")[1])
+{
+	g_sid = window.location.href.split("?")[1];
+	//
+	//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
+	//
+	if (g_sid.split("#")[0])
+	{g_sid = g_sid.split("#")[0];}
+}
+else
+{g_sid = "";}
+i3GEO.configura.sid = g_sid;

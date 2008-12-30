@@ -54,6 +54,8 @@ switch ($funcao)
 
 	
 	case "alterarSistemas":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$novo = alterarSistemas();
 	$sql = "SELECT * from i3geoadmin_sistemas WHERE id_sistema = '".$novo."'";
 	retornaJSON(pegaDados($sql));
@@ -61,6 +63,8 @@ switch ($funcao)
 	break;
 
 	case "alterarFuncoes":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$novo = alterarFuncoes();
 	$sql = "SELECT * from i3geoadmin_sistemasf WHERE id_funcao = '".$novo."'";
 	retornaJSON(pegaDados($sql));	
@@ -68,6 +72,8 @@ switch ($funcao)
 	break;
 	
 	case "excluirSistema":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$tabela = "i3geoadmin_sistemas";
 	$f = verificaFilhos();
 	if(!$f)
@@ -83,11 +89,15 @@ switch ($funcao)
 	break;
 	
 	case "excluirFuncao":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(excluirFuncoes());
 	exit;
 	break;
 	
 	case "importarXmlSistemas":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(importarXmlSistemas());
 	exit;
 	break;
@@ -115,7 +125,7 @@ function alterarSistemas()
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','','')");
-			$id = $dbhw->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+			$id = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_sistema']);
 			$retorna = $id;    	
@@ -147,7 +157,7 @@ function alterarFuncoes()
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_sistemasf (id_sistema,nome_funcao,perfil_funcao,w_funcao,h_funcao,abrir_funcao) VALUES ('$id_sistema','','','$w','$h','')");
-			$id = $dbhw->query("SELECT id_funcao FROM i3geoadmin_sistemasf");
+			$id = $dbh->query("SELECT id_funcao FROM i3geoadmin_sistemasf");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_funcao']);
 			$retorna = $id;    		
@@ -205,7 +215,7 @@ function importarXmlSistemas()
 	//importa os grupos
 	//
 	$sistemasExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_sistemas");
+	$q = $dbh->query("select * from i3geoadmin_sistemas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$sistemasExistentes[$r["nome_sistema"]] = 0;}
@@ -220,7 +230,7 @@ function importarXmlSistemas()
 		if(!isset($sistemasExistentes[$nome]))
 		$dbhw->query("INSERT INTO i3geoadmin_sistemas (publicado_sistema,nome_sistema,perfil_sistema) VALUES ('','$nome','$perfil')");
 		$sistemasExistentes[$nome] = 0;
-		$id_sistema = $dbhw->query("SELECT id_sistema FROM i3geoadmin_sistemas");
+		$id_sistema = $dbh->query("SELECT id_sistema FROM i3geoadmin_sistemas");
 		$id_sistema = $id_sistema->fetchAll();
 		$id_sistema = intval($id_sistema[count($id_sistema)-1]['id_sistema']);
 		foreach ($item->FUNCAO as $funcao)

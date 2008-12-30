@@ -253,10 +253,10 @@ function Mapa(e,m)
 	objposicaomouse = new posicaomouse();
 	//faz o cache das imagens para desenhar mais rápido
 	imgBranco = new Image();
-	imgBranco.src = g_locaplic+"/imagens/branco.gif";
+	imgBranco.src = i3GEO.configura.locaplic+"/imagens/branco.gif";
 	var temp = new Image();
-	temp.src = g_locaplic+"/pacotes/jsobjects/jsUI-Treeview/plus.gif";
-	temp.src = g_locaplic+"/pacotes/jsobjects/jsUI-Treeview/minus.gif";
+	temp.src = i3GEO.configura.locaplic+"/pacotes/jsobjects/jsUI-Treeview/plus.gif";
+	temp.src = i3GEO.configura.locaplic+"/pacotes/jsobjects/jsUI-Treeview/minus.gif";
 	//calcula o tamanho do mapa
 	var diminuix = (navm) ? g_diminuixM : g_diminuixN;
 	var diminuiy = (navm) ? g_diminuiyM : g_diminuiyN;
@@ -516,7 +516,7 @@ function Mapa(e,m)
 				g_sid = retorno.data;
 				objmapa.inicializa();
 			};
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa"+g_mashuppar;
 			cpObj.call(p,"",mashup);
 			return;
 		}
@@ -533,7 +533,7 @@ function Mapa(e,m)
 		//inicia o mapa
 		//
 		i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+g_sid;
 		cpObj.call(p,"iniciaMapa",this.montaMapa);
 	};
 	/*
@@ -555,7 +555,7 @@ function Mapa(e,m)
 		{
 			i3GEO.janela.fechaAguarde("montaMapa");
 			document.body.style.backgroundColor="white";
-			document.body.innerHTML = "<br>Para abrir o mapa utilize o link:<br><a href="+g_locaplic+"/ms_criamapa.php >"+g_locaplic+"/ms_criamapa.php</a>";
+			document.body.innerHTML = "<br>Para abrir o mapa utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
 			return("linkquebrado");
 		}
 		else
@@ -718,12 +718,12 @@ function Mapa(e,m)
 			listaPr.createItem("propriedadesRaiz", "<b>"+$trad("p13")+"</b>", "foldermapa1", true, false, true, null);
 			var im = "";
 			if (navn)
-			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
+			{var im = "<img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' width=0 height=13 />";}
 			for (l=0;l<g_listaPropriedades.propriedades.length; l++)
 			{
 				var temp = g_listaPropriedades.propriedades[l].text;
 				var temp = eval("g_traducao."+temp+"[0]."+g_linguagem);
-				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
+				tnome = "<span onclick='"+g_listaPropriedades.propriedades[l].url+"'>"+im+"<img  src='"+i3GEO.configura.locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
 				listaPr.createItem("propriedadesMapa"+l, tnome, imgBranco, false, true, false, "propriedadesRaiz");
 			}
 			listaPr.createItem("","", imgBranco, false, true, false, "propriedadesRaiz");				
@@ -734,7 +734,7 @@ function Mapa(e,m)
 			listaF.createItem("listaFraiz", "<b>Fun&ccedil;&otilde;es</b>", "foldermapa1", true, false, true, null);
 			var im = "";
 			if (navn)
-			{var im = "<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=13 />";}
+			{var im = "<img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' width=0 height=13 />";}
 			var conta = 0;
 			for(nomeMenu in oMenuData)
 			{
@@ -743,7 +743,7 @@ function Mapa(e,m)
 				for (j=0;j<o.length; j++)
 				{
 					var temp = o[j].text;
-					tnome = "<span onclick='"+o[j].url+"'>"+im+"<img  src='"+g_locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
+					tnome = "<span onclick='"+o[j].url+"'>"+im+"<img  src='"+i3GEO.configura.locaplic+"/imagens/tic.png' />&nbsp;"+temp+" </span>";
 					listaPr.createItem("funcoesMapa"+l, tnome, imgBranco, false, true, false, "listaFraiz");
 					tnome = ""
 				}
@@ -771,7 +771,7 @@ function Mapa(e,m)
 		if ($i("escalaGrafica"))
 		{
 			//i3GEO.janela.abreAguarde("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+g_sid;
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+g_sid;
 			cpObj.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
 		}
 	};
@@ -794,7 +794,7 @@ function Mapa(e,m)
 		{
 			if(($i("imagemReferencia").src == "") || (objmapa.utilizacgi != "sim"))
 			{
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+g_sid;
 				cpObj.call(p,"retornaReferencia",ajaxReferencia);
 			}
 			else
@@ -813,7 +813,7 @@ function Mapa(e,m)
 	{
 		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
 		{
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&g_sid="+g_sid;
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&g_sid="+g_sid;
 			cpObj.call(p,"criaLegenda",ajaxLegendaHTML);
 		}
 	};
@@ -827,7 +827,7 @@ function Mapa(e,m)
 		if ($i("legenda"))
 		{
 			//i3GEO.janela.abreAguarde("ajaxLegenda","Aguarde...atualizando a legenda");
-			var p =g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+g_sid;
+			var p =i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+g_sid;
 			cpObj.call(p,"legendaGrafica",ajaxLegendaImagem);
 		}
 	};
@@ -871,7 +871,7 @@ function Mapa(e,m)
 				if (navm)
 				{tnome += "<span title='"+$trad("t7")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" + ltema[2]+"</span></span>";}
 				else
-				{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+g_locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
+				{tnome += "<span title='"+$trad("t8")+"' style='background-color:"+cor+"' id=nometema"+ltema[0]+">&nbsp;" +"<img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' width=0 height=15 />" +ltema[2]+"</span></div>";}
 				mytreeview1.createItem(ltema[0], tnome, null, true, true, true, "g1");
 				tnome = "<img width=0px src="+$im("branco.gif") + " />";
 				mytreeview1.createItem("", tnome, imgBranco, false, true, false, ltema[0]);
@@ -910,7 +910,7 @@ function Mapa(e,m)
 				{var farol = "maisamarelo.png";}
 				if ($i("farol"+ltema[0]))
 				{
-					$i("farol"+ltema[0]).src = g_locaplic+"/imagens/"+farol;
+					$i("farol"+ltema[0]).src = i3GEO.configura.locaplic+"/imagens/"+farol;
 				}
 			}
 		}
@@ -939,7 +939,7 @@ function Mapa(e,m)
 		var novoimg = document.createElement("img");
 		with(novoimg)
 		{
-			src= g_locaplic+"/imagens/pan.gif";
+			src= i3GEO.configura.locaplic+"/imagens/pan.gif";
 			name="imgh";
 			id='imgh';
 			style.width = "15px";
@@ -1001,7 +1001,7 @@ function Mapa(e,m)
 		this.atualizaCorpoMapa = function()
 		{
 			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+g_sid;
 			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
 		};
 		if (objmapa.finaliza)

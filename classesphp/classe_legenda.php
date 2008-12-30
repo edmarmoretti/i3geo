@@ -189,6 +189,7 @@ string com a legenda HTML
 				if ($la->group == $this->nome)
 				{$la->set("status",MS_DEFAULT);}
 			}
+			$this->layer->set("status",MS_DEFAULT);
 		}
 		$desligar = array();
 		$conta = 0;

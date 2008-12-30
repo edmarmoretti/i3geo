@@ -98,8 +98,11 @@ function aplicarCor()
 	navn = false; // netscape
 	var app = navigator.appName.substring(0,1);
 	if (app=='N') navn=true; else navm=true;
-	var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
-	var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+	try{
+		var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
+		var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+	}
+	catch(e){var doc = window.parent.document;}
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
 	var ncor = document.getElementById("yui-picker-r").value+","+document.getElementById("yui-picker-g").value+","+document.getElementById("yui-picker-b").value
 	doc.getElementById(elemento).value = ncor;

@@ -42,9 +42,9 @@ $abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
 $escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
 $jsfiles = array(
-"../pacotes/richdraw/richdraw_compacto.js",
-"../pacotes/richdraw/svgrenderer_compacto.js",
-"../pacotes/richdraw/vmlrenderer_compacto.js"
+"../pacotes/richdraw/richdraw.js",
+"../pacotes/richdraw/svgrenderer.js",
+"../pacotes/richdraw/vmlrenderer.js"
 );
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js");
@@ -52,7 +52,7 @@ salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("depreciados.js","compactados/depreciados_compacto.js","Normal");
+packer("depreciados.js","compactados/depreciados_compacto.js","None");
 packer("classe_arvoredecamadas.js","compactados/classe_arvoredecamadas_compacto.js","Normal");
 packer("classe_arvoredetemas.js","compactados/classe_arvoredetemas_compacto.js","Normal");
 packer("classe_util.js","compactados/classe_util_compacto.js","Normal");
@@ -68,53 +68,54 @@ packer("iniciamma.js","compactados/iniciamma_compacto.js","Normal");
 packer("ferramentas.js","compactados/ferramentas_compacto.js","Normal");
 packer("funcoes.js","compactados/funcoes_compacto.js","Normal");
 packer("menususpenso.js","compactados/menususpenso_compacto.js","Normal");
-packer("../pacotes/jsobjects/jsUI-Treeview/component_i3geo.js","../pacotes/jsobjects/jsUI-Treeview/component_compacto.js","Normal");
-packer("../pacotes/jsobjects/jsUI-Global/uiCommon.js","../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js","Normal");
-packer("../pacotes/jsobjects/jsUI-Global/common.js","../pacotes/jsobjects/jsUI-Global/common_compacto.js","Normal");
-packer("../pacotes/yui231/build/yahoo/yahoo-min.js","../pacotes/yui231/build/yahoo/yahoo-min_packer.js","Normal");
-packer("../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js","../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js","None");
-packer("../pacotes/yui231/build/utilities/utilities.js","../pacotes/yui231/build/utilities/utilities_packer.js");
+packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
+packer("classe_eventos.js","compactados/classe_eventos_compacto.js","Normal");
+packer("classe_barradebotoes.js","compactados/classe_barradebotoes_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
-"../pacotes/yui231/build/yahoo/yahoo-min_packer.js",
-"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event_packer.js",
-"../pacotes/yui231/build/dom/dom-min.js",
-"../pacotes/yui231/build/container/container_core-min.js",
-"../pacotes/yui252/build/menu/menu-min.js",
-"../pacotes/yui231/build/logger/logger-min.js",
-"../pacotes/yui231/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui231/build/slider/slider-min.js",
-"../pacotes/yui231/build/animation/animation-min.js",
-"../pacotes/yui231/build/container/container-min.js",
-"../pacotes/yui231/build/element/element-beta-min.js",
-"../pacotes/yui252/build/tabview/tabview-min.js",
-"../pacotes/yui231/build/utilities/utilities_packer.js",
-"../pacotes/yui231/build/autocomplete/autocomplete-min.js",
+"../pacotes/yui231/build/yahoo/yahoo.js",
+"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui231/build/dom/dom.js",
+"../pacotes/yui231/build/container/container_core.js",
+"../pacotes/yui252/build/menu/menu.js",
+"../pacotes/yui231/build/logger/logger.js",
+"../pacotes/yui231/build/dragdrop/dragdrop.js",
+"../pacotes/yui231/build/slider/slider.js",
+"../pacotes/yui231/build/animation/animation.js",
+"../pacotes/yui231/build/container/container.js",
+"../pacotes/yui231/build/element/element-beta.js",
+"../pacotes/yui252/build/tabview/tabview.js",
+"../pacotes/yui231/build/utilities/utilities.js",
+"../pacotes/yui231/build/autocomplete/autocomplete.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
-"../pacotes/yui252/build/treeview/treeview-min.js",
+"../pacotes/yui252/build/treeview/treeview.js",
 //"../pacotes/jsobjects/jsUI-Global/common_compacto.js",
 //"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
 //"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"compactados/funcoes_compacto.js",
-"compactados/classe_configura_compacto.js",
-"compactados/dicionario_compacto.js",
-"compactados/classe_janela_compacto.js",
-"compactados/classe_util_compacto.js",
-"compactados/classe_idioma_compacto.js",
-"compactados/classe_ajuda_compacto.js",
-"compactados/classe_arvoredecamadas_compacto.js",
-"compactados/classe_arvoredetemas_compacto.js",
-"compactados/configura_compacto.js",
-"compactados/classe_navega_compacto.js",
-"compactados/ferramentas_compacto.js",
-"compactados/redesenho_compacto.js",
-"compactados/iniciamma_compacto.js",
-"compactados/menususpenso_compacto.js",
-"compactados/depreciados_compacto.js"
+"funcoes.js",
+"classe_configura.js",
+"dicionario.js",
+"classe_janela.js",
+"classe_util.js",
+"classe_idioma.js",
+"classe_ajuda.js",
+"classe_eventos.js",
+"classe_arvoredecamadas.js",
+"classe_arvoredetemas.js",
+"classe_gadgets.js",
+"configura.js",
+"classe_barradebotoes.js",
+"classe_navega.js",
+"ferramentas.js",
+"redesenho.js",
+"iniciamma.js",
+"menususpenso.js",
+"depreciados.js"
 );
+
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
@@ -207,7 +208,7 @@ function packer($src,$out,$tipo="None")
 	require_once '../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
 	$t1 = microtime(true);
-	$packer = new JavaScriptPacker($script, $tipo, true, false);
+	$packer = new JavaScriptPacker($script, 0, true, false);
 	$packed = $packer->pack();
 	$t2 = microtime(true);
 	$time = sprintf('%.4f', ($t2 - $t1) );
@@ -237,7 +238,6 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
 	else
 	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
-
 	while (!feof($abre))
 	{$buffer .= fgets($abre);}
 	fclose($abre);

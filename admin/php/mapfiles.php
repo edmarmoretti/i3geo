@@ -67,6 +67,8 @@ switch ($funcao)
 	
 	//retorna o mapfile atual como texto
 	case "restauraConfigura":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$cp->register('restauraConfigura');
 	unlink($temasaplic."/".$mapfile.".map");
 	copy ($temasaplic."/".$mapfile.".default",$temasaplic."/".$mapfile.".map");
@@ -76,6 +78,8 @@ switch ($funcao)
 	
 	//salva um novo valor para uma variável do ms_configura
 	case "salvaConfigura":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	salvaConfigura($variavel,$valor,$mapfile,$temasaplic);
 	retornaJSON("ok");
 	exit;

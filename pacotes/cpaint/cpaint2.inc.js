@@ -732,7 +732,7 @@ function cpaint_call() {
       && httpobj.status != 200) {
       // HTTP error of some kind
       debug('invalid HTTP response code \'' + Number(httpobj.status) + '\'', 0);
-      //client_callback("", "erro");
+      //client_callback("", "");
     }
   }
 

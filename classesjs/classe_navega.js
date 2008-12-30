@@ -53,9 +53,12 @@ i3GEO.navega = {
 	*/
 	zoomin: function(locaplic,sid){
 		YAHOO.log("zoomin", "i3geo");
+		if(arguments.length == 0){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
-		//g_operacao = "navega";
 		var cp = new cpaint();
 		cp.set_async("true");
 		cp.set_response_type("JSON");
@@ -74,6 +77,10 @@ i3GEO.navega = {
 	*/
 	zoomout: function(locaplic,sid){
 		YAHOO.log("zoomout", "i3geo");
+		if(arguments.length == 0){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
 		//g_operacao = "navega";
@@ -141,6 +148,10 @@ i3GEO.navega = {
 	zoomIP: function(locaplic,sid){
 		try
 		{
+			if(arguments.length == 0){
+				var locaplic = i3GEO.configura.locaplic;
+				var sid = i3GEO.configura.sid;
+			}
 			var mostraIP = function(retorno)
 			{
 				if (retorno.data.latitude != null)
@@ -261,5 +272,62 @@ i3GEO.navega = {
 		cp.set_async("true");
 		cp.set_response_type("JSON");
 		cp.call(p,"pan",ajaxredesenha);
+	},
+	/*
+	Function: mostraRosaDosVentos
+	
+	Mostra sobre o mapa a rosa dos ventos.
+	
+	A rosa permite que o usuário navegue no mapa sem ter de alterar a opção atual de navegação.
+	
+	A rosa é mostrada apenas se a variável i3GEO.configura.mostraRosaDosVentos for = a "sim".<b> 
+
+	Para que a rosa seja mostrada, é necessário que esta função esteja registrada em
+	
+	i3GEO.eventos.MOUSEPARADO
+	*/
+	mostraRosaDosVentos: function(){
+		try{if (i3GEO.configura.mostraRosaDosVentos == "nao"){return;}}
+		catch(e){};
+		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
+		{return;}
+		if (!$i("i3geo_rosa")){
+			var novoel = document.createElement("div");
+			novoel.id = "i3geo_rosa";
+			novoel.style.position="absolute";
+			novoel.style.zIndex=5000;
+			if(navn)
+			{novoel.style.opacity=".7";}
+			else
+			{novoel.style.filter = "alpha(opacity=70)";}
+			document.body.appendChild(novoel);
+		}
+		var setas = "<table id='rosaV' >";
+		setas += "<tr onclick=\"javascript:i3GEO.configura.mostraRosaDosVentos='nao'\"><td></td><td></td><td style=cursor:pointer >x</td></tr><tr>";
+		setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','noroeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','norte','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','nordeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+		setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','oeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><table><tr>";
+		setas += "<td><img class='rosamais' title='aproxima' onclick=\"i3GEO.navega.zoomin('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
+		setas += "<td><img class='rosamenos' title='afasta' onclick=\"i3GEO.navega.zoomout('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
+		setas += "</tr></table></td>";
+		setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','leste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+		setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudoeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sul','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr></table>";
+		var i = $i("i3geo_rosa");
+		i.innerHTML = setas;	
+		i.style.top = objposicaocursor.telay - 27;
+		i.style.left = objposicaocursor.telax - 27;
+		i.style.display="block";
+		var temp = function(){
+			var i = $i("i3geo_rosa");
+			i.style.display="none";
+			$i("img").removeEventListener('mousemove',temp,false);
+		}
+		if($i("img"))
+		$i("img").addEventListener('mousemove',temp,false)
+		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
 	}
 };

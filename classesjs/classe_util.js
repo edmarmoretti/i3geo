@@ -48,6 +48,22 @@ $i = function(id)
 
 i3GEO.util = {
 	/*
+	Variable: PINS
+	Elementos IMG criados na função criaPin
+	
+	Type:
+	{Array}
+	*/
+	PINS: new Array(),
+	/*
+	Variable: BOXES
+	Elementos DIV criados na função criaBox
+	
+	Type:
+	{Array}
+	*/
+	BOXES: new Array(),	
+	/*
 	Function: insereCookie
 	Cria um novo cookie. 
    
@@ -482,12 +498,12 @@ i3GEO.util = {
 		try
 		{
 			if (navm){
-			xfign = xfign - 2.2;
-			yfign = yfign - 2.7;
+				xfign = xfign - 2.2;
+				yfign = yfign - 2.7;
 			}
 			else{
-			xfign = xfign - 0.12;
-			yfign = yfign - 1.05;
+				xfign = xfign - 0.12;
+				yfign = yfign - 1.05;
 			}
 			var nx = g_celula * xfign;
 			var ny = g_celula * yfign;
@@ -500,5 +516,114 @@ i3GEO.util = {
 			return (res);
 		}
 		catch(e){return(0);}
+	},
+	/*
+	Function: mudaCursor
+	
+	Altera o cursor do ponteiro do mouse.
+	
+	Os cursores disponíveis são definidos por default em classe_configura.js
+	
+	Parameters:
+	
+	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
+	
+	tipo {String} - tipo de cursor disponível em cursores
+	
+	idobjeto {String} - id do objeto que terá o estilo alterado para o cursor desejado
+	
+	locaplic {String} - onde está instalado o i3Geo
+	*/
+	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
+		var o = document.getElementById(idobjeto);
+		if(o){
+			if(navm){
+				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+			}
+			else{
+				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
+			}			
+		}
+	},
+	/*
+	Function: criaBox
+	
+	Cria um elemento div na página atual.
+	
+	Esse elemento pode ser utilizado para desenhar retângulos sobre o mapa
+	
+	Parameters:
+	
+	id {String} - id do elemento que será criado. Por default, será 'boxg'
+	*/
+	criaBox: function(id){
+		if(arguments.length == 0)
+		{var id = "boxg"}
+		if (!$i(id))
+		{
+			var novoel = document.createElement("div");
+			novoel.id = id;
+			novoel.style.zIndex=1;
+			novoel.innerHTML = '<font face="Arial" size=0></font>';
+			document.body.appendChild(novoel);
+			novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
+			i3GEO.util.BOXES.push(id);
+		}
+	},
+	/*
+	Function: escondeBox
+	
+	Esconde os BOXES com IDs registrados em i3GEO.util.BOXES
+	
+	Os ids são criado pela função criaBox
+	*/
+	escondeBox: function(){
+		var l = i3GEO.util.BOXES.length;
+		for (i=0; i<l; i++){
+			if($i(i3GEO.util.BOXES[i]))
+			{$i(i3GEO.util.BOXES[i]).style.display = "none";}
+		}
+	},
+	/*
+	Function: criaPin
+	
+	Cria um elemento imagem na página atual.
+	
+	Esse elemento pode ser utilizado para desenhar pontos sobre o mapa
+	
+	Parameters:
+	
+	id {String} - id do elemento que será criado. Por default, será 'boxpin'
+	*/
+	criaPin: function(id){
+		if(arguments.length == 0)
+		{var id = "boxpin"}	
+		if (!$i(id))
+		{
+			var novoel = document.createElement("img");
+			novoel.id = id;
+			novoel.style.zIndex=10000;
+			novoel.style.position="absolute";
+			novoel.style.width="21px";
+			novoel.style.height="25px";
+			novoel.src = i3GEO.configura.locaplic+'/imagens/marker.png';
+			novoel.onmouseover = function(){$i("boxpin").style.display="none";};
+			document.body.appendChild(novoel);
+			i3GEO.util.PINS.push(id);
+		}	
+	},
+	/*
+	Function: escondePin
+	
+	Esconde os PINS com IDs registrados em i3GEO.util.PINS
+	
+	Os ids são criado pela função criaPin
+	*/
+	escondePin: function(){
+		var l = i3GEO.util.PINS.length;
+		for (i=0; i<l; i++){
+			if($i(i3GEO.util.PINS[i]))
+			{$i(i3GEO.util.PINS[i]).style.display = "none";}
+		}
 	}
 };

@@ -278,3 +278,151 @@ Function: calcddf (depreciado)
 */
 function calcddf(xfign,yfign,g_celula,imgext)
 {return(i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext));}
+/*
+Function: movecursor (depreciado)
+
+Move o ícone que segue o mouse quando da movimentação sobre o mapa
+*/
+function movecursor()
+{
+	//
+	//se a interface openlayers ou flamingo estiver sendo usada, o ícone não é mostrado
+	//'obj' é o elemento que guarda o ícone que segue o mouse
+	//
+	if ($i("obj"))
+	{
+		if ($i("openlayers") || $i("flamingo"))
+		{$i("obj").style.display = "none";}
+		else
+		{
+			var obje = $i("obj").style;
+			if ($i("img"))
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 9 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 9 + g_postpx");
+			}
+			else
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+			}
+		}
+	}
+	if($i("box1"))
+	{
+		var bx = $i("box1");
+		if (bx.style.visibility != "visible")
+		{
+			//move o box para a posição correta
+			bx.style.left = objposicaocursor.telax + g_postpx;
+			bx.style.top = objposicaocursor.telay + g_postpx;
+		}
+	}
+}
+/*
+Variable: g_janelaMen (depreciado)
+*/
+/*
+Variable: g_downloadbase (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
+*/
+/*
+Variable: g_conectargeorss (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
+*/
+/*
+Variable: g_nuvemTags (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
+*/
+/*
+Variable: g_uploadlocal (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de upload.
+*/
+/*
+Variable: g_uploaddbf (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
+*/
+/*
+Variable: g_conectarwms (depreciado)
+
+Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
+*/
+/*
+Variable: g_funcoesMouseParado (depreciado)
+*/
+/*
+Variable: g_tempotip (depreciado)
+*/
+/*
+Variable: g_mostraRosa (depreciado)
+*/
+
+/*
+Function: pegaCoordenadaUTM (depreciado)
+*/
+function pegaCoordenadaUTM()
+{i3GEO.gadgets.mostraCoordenadasUTM(g_locaplic,"mostraUTM");}
+/*
+Function: ativaLocalizarxy (depreciado)
+*/	
+function ativaLocalizarxy(iddiv)
+{i3GEO.gadgets.mostraCoordenadasGEO(iddiv);}
+/*
+Function: ativaEscalaNumerica (depreciado)
+*/	
+function ativaEscalaNumerica(iddiv)
+{i3GEO.gadgets.mostraEscalaNumerica(iddiv);}
+/*
+Function: ativaBuscaRapida (depreciado)
+*/	
+function ativaBuscaRapida(iddiv)
+{i3GEO.gadgets.mostraBuscaRapida(iddiv);}
+/*
+Function: buscaRapida (depreciado)
+*/
+function buscaRapida()
+{i3geo_buscarapida()}
+/*
+Function: criaboxg (depreciado)
+*/
+function criaboxg()
+{
+	i3GEO.util.criaBox();
+	i3GEO.util.criaPin();
+}
+/*
+Function: initJanelaZoom (depreciado)
+*/
+function initJanelaZoom(qual)
+{alert("initJanelaZoom foi depreciado. Utilize i3GEO.barraDeBotoes");}
+/*
+Function: sobeferramentas(depreciado)
+*/
+function sobeferramentas()
+{}
+/*
+Function: desceferramentas (depreciado)
+*/
+function desceferramentas()
+{}
+/*
+Function: mostraRosaDosVentos (depreciado)
+*/
+function mostraRosaDosVentos()
+{i3GEO.navega.mostraRosaDosVentos();}
+/*
+Function: mudaVisual (depreciado)
+*/
+function mudaVisual(visual)
+{i3GEO.gadgets.visual.troca(visual);}
+/*
+Function: visual (depreciado)
+*/
+function visual(iddiv)
+{i3GEO.gadgets.visual.inicia(iddiv);}
+

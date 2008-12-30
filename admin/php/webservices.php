@@ -43,6 +43,8 @@ switch ($funcao)
 	break;
 	
 	case "alterarWS":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$novo = alterarWS();
 	$sql = "SELECT * from i3geoadmin_ws WHERE id_ws = '".$novo."'";
 	retornaJSON(pegaDados($sql));
@@ -50,11 +52,15 @@ switch ($funcao)
 	break;
 	
 	case "excluir":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(excluirWS());
 	exit;
 	break;
 	
 	case "importarXmlWS":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(importarXmlWS());
 	exit;
 	break;
@@ -84,7 +90,7 @@ function alterarWS()
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_ws (nome_ws,desc_ws,autor_ws,tipo_ws,link_ws,nacessos,nacessosok) VALUES ('','','','','',0,0)");
-			$id = $dbhw->query("SELECT id_ws FROM i3geoadmin_ws");
+			$id = $dbh->query("SELECT id_ws FROM i3geoadmin_ws");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_ws']);
 			$retorna = $id;
@@ -148,7 +154,7 @@ function importarXmlWS()
 	//importa os grupos
 	//
 	$wsExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_ws");
+	$q = $dbh->query("select * from i3geoadmin_ws");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$wsExistentes[$r["nome_ws"]] = 0;}

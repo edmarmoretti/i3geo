@@ -269,7 +269,7 @@ function ajaxLegendaHTML(retorno)
 {
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{
-		var s = g_locaplic+"/imagens/solta.gif";
+		var s = i3GEO.configura.locaplic+"/imagens/solta.gif";
 		$i("legenda").innerHTML = "<img id=soltaLeg src="+s+" title='clique para liberar'/><br><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
 		g_legendaHTML = retorno.data.legenda;
 		//
@@ -359,6 +359,7 @@ function ajaxCorpoMapa(retorno)
 			eval(retorno);
 			$i("img").onload =  function()
 			{
+				$i("img").onload = "";
 				//atualiza quadro
 				avancaQuadro();
 				gravaQuadro("imagem",mapimagem);
@@ -367,16 +368,19 @@ function ajaxCorpoMapa(retorno)
 				{$i("banners").style.height = objmapa.h;}
 				if ($i("legenda"))
 				{$i("legenda").style.height = objmapa.h;}
-				$i("img").style.width = objmapa.w;
-				$i("img").style.height = objmapa.h;
-				calcposf();
+				//$i("img").style.width = objmapa.w;
+				//$i("img").style.height = objmapa.h;
+				//calcposf();
 				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 				if ($i("imgtemp"))
 				{$i("imgtemp").style.display="none";}
-				$i("img").onload = "";
+				//necessário na função de zoom por slide
+				if ($i("imgClone"))
+				$i("imgClone").style.display = "none";
+				$i("img").style.display = "block";			
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			};
 			$i("img").src=mapimagem;
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 		}
 		else
 		{
@@ -402,7 +406,7 @@ function ajaxCorpoMapa(retorno)
 			if (g_recupera == 1)
 			{
 				g_recupera = 2;
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+i3GEO.configura.sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
@@ -438,7 +442,7 @@ function ajaxredesenha(retorno)
 			if($i("img"))
 			{
 				i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));
-				var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+g_tipoimagem+"&g_sid="+g_sid;
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+g_tipoimagem+"&g_sid="+i3GEO.configura.sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
@@ -500,7 +504,7 @@ retorno - objeto JSON.
 function ajaxIniciaParametros(retorno)
 {
 	YAHOO.log("ajaxIniciaParametros", "redesenho");
-	i3GEO.ajuda.ativaLetreiro(g_locaplic,g_sid);
+	i3GEO.ajuda.ativaLetreiro(i3GEO.configura.locaplic,i3GEO.configura.sid);
 	var tempo = "";
 	if ($i("openlayers"))
 	{
@@ -541,8 +545,6 @@ function ajaxIniciaParametros(retorno)
 	//
 	//mostra a figura que segue o mouse
 	//
-	if($i("imgh"))
-	{$i("imgh").style.display="block";}
 	try
 	{
 		if ($i("imgL"))
@@ -573,9 +575,9 @@ function ajaxIniciaParametros(retorno)
 				$i("imgtemp").style.display="block";
 				$i("imgtemp").style.backgroundImage = 'url("'+$i("img").src+'")';
 			}		
-			$i("img").style.width = 0;
-			$i("img").style.height = 0;
-			$i("img").src = "";
+			//$i("img").style.width = 0;
+			//$i("img").style.height = 0;
+			//$i("img").src = "";
 			$i("img").style.left = 0;
 			$i("img").style.top = 0;
 			ajaxCorpoMapa(retorno);
@@ -628,7 +630,7 @@ function ajaxIniciaParametros(retorno)
 		if (g_lenteaberta == "sim")
 		{
 			i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o4"));
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid;
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+i3GEO.configura.sid;
 			var cp = new cpaint();
 			//cp.set_debug(2);
 			cp.set_response_type("JSON");

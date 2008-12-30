@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * CPAINT (Cross-Platform Asynchronous INterface Toolkit)
 *

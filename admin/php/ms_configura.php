@@ -30,6 +30,9 @@ File: i3geo/admin/ms_configura.php
 
 */
 include_once("admin.php");
+if(verificaEditores($editores) == "nao")
+{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {

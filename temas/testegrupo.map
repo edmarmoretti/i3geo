@@ -1,0 +1,110 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME regioesecapitais # ok
+  TYPE polygon
+  STATUS off
+GROUP "regioesecapitais"
+  CONNECTIONTYPE postgis
+	CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
+	DATA "the_geom FROM (select * FROM brasil.bralim13) as foo USING UNIQUE gid USING SRID=4291"
+	TEMPLATE "none.htm"
+  METADATA
+	ITENS "regiao,id"
+	ITENSDESC "Região,Código IBGE"
+  	TEMA "Regiões do Brasil"
+  	CLASSE "SIM"
+      TEXTO "SIM"
+      ESCALA "250000"
+      EXTENSAO "-75.233614607 -33.7515829981 -27.592958622 5.272156"
+  END
+	TRANSPARENCY 100
+     CLASS
+      NAME "Sul"
+      EXPRESSION ('[regiao]'eq'Sul')
+      STYLE
+      OUTLINECOLOR 137 139 126
+      WIDTH 4
+END
+    END
+    CLASS
+      NAME "Sudeste"
+      EXPRESSION ('[regiao]'eq'Sudeste')
+      STYLE
+      OUTLINECOLOR 255 159 64
+      WIDTH 4
+END
+    END
+    CLASS
+      NAME "Centro-Oeste"
+      EXPRESSION ('[regiao]'eq'Centro-Oeste')
+      STYLE
+      OUTLINECOLOR 248 248 54
+      WIDTH 4
+END
+    END
+    CLASS
+      NAME "Norte"
+      EXPRESSION ('[regiao]'eq'Norte')
+      STYLE
+      OUTLINECOLOR 16 142 160
+      WIDTH 4
+END
+    END
+    CLASS
+      NAME "Nordeste"
+      EXPRESSION ('[regiao]'eq'Nordeste')
+      STYLE
+      OUTLINECOLOR 156 54 197
+      WIDTH 4
+END
+END  # CLASS
+END  # LAYER
+	LAYER
+GROUP "regioesecapitais"
+  		NAME capitais_br # ok
+  		TYPE point
+  		STATUS default #
+  		TOLERANCE 5
+  		CONNECTIONTYPE postgis
+		CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
+		DATA "the_geom FROM (select * FROM brasil.bralim2) as foo USING UNIQUE gid USING SRID=4291"
+		TEMPLATE "none.htm"
+		LABELITEM "nomeloc"
+  		METADATA
+	  		ITENS "nomemun,tipo,nomeloc,anocria,estado"
+			ITENSDESC "Município,Tipo,Localidade,Criação,Estado"
+			TPSHP "POINT"
+  			TEMA "Capitais"
+  			ALTTEMA "Cidades"
+  			CLASSE "SIM"
+ESCONDIDO "SIM"
+    		TEXTO "SIM"
+			ESCALA "250000"
+  		END
+  		CLASS
+     		NAME 'Capitais'
+     		EXPRESSION ('[tipo]'eq'Capital')
+     		STYLE
+	     		SYMBOL 'capital'
+    	 		COLOR 0 0 0
+     	 		SIZE 6
+     		END
+     		STYLE
+	     		SYMBOL 'ponto'
+    	 		COLOR 255 255 255
+     	 		SIZE 2
+     		END
+     		LABEL
+				FONT arial
+				TYPE truetype
+				SIZE 8
+				COLOR 0 0 0
+				POSITION auto
+			END 
+  		END  # CLASS
+	END  # LAYER
+END
+
+
+

@@ -37,14 +37,17 @@ var jsfiles = new Array(
 "classe_janela.js",
 "classe_arvoredecamadas.js",
 "classe_navega.js",
+"classe_eventos.js",
 "funcoes.js",
 "classe_arvoredetemas.js",
 "configura.js",
+"classe_barradebotoes.js",
 "ferramentas.js",
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
+"classe_gadgets.js",
 "depreciados.js"
 );
 for (i = 0; i < jsfiles.length; i++)

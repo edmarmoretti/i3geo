@@ -28,14 +28,14 @@ File: i3geo/admin/sistemas.php
 
 */
 include_once("admin.php");
-include_once("../../ms_configura.php");
-include_once("../../classesphp/funcoes_gerais.php");
 $cp = new cpaint();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
 	//verifica os editores
 	case "criarNovoMap":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$cp->set_data(criarNovoMap());
 	$cp->return_data();
 	break;
@@ -60,25 +60,35 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 	case "alteraLayer":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(alteraLayer());
 	$cp->return_data();
 	break;
 	case "alteraMetadados":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$cp->set_data(alteraMetadados());
 	$cp->return_data();
 	break;
 	case "alteraClasse":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(alteraClasse());
 	$cp->return_data();
 	break;
 	case "alteraClasseLabel":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(alteraClasseLabel());
 	$cp->return_data();
 	break;
 	case "alteraEstilo":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(alteraEstilo());
 	$cp->return_data();
@@ -88,24 +98,34 @@ switch ($funcao)
 	$cp->return_data();
 	break;
 	case "criarNovoLayer":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$cp->set_data(criarNovoLayer());
 	$cp->return_data();
 	break;
 	case "excluirLayer":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$cp->set_data(excluirLayer());
 	$cp->return_data();
 	break;
 	case "adicionarClasse":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(adicionarClasse());
 	$cp->return_data();
 	break;
 	case "excluirClasse":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(excluirClasse());
 	$cp->return_data();
 	break;
 	case "adicionarEstilo":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	substituiCon($map_file,$postgis_mapa);
 	$cp->set_data(adicionarEstilo());
 	$cp->return_data();

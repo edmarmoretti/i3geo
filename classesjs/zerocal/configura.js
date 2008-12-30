@@ -1053,7 +1053,7 @@ g_listaFuncoesBotoes = {
 		iddiv:"v3d",
 		dica:$trad("d14"),
 		funcaoonclick:function()
-		{wdocaf("400px","200px",g_locaplic+"/ferramentas/3d/index.htm","","","3d");}
+		{wdocaf("400px","200px",i3GEO.configura.locaplic+"/ferramentas/3d/index.htm","","","3d");}
 	},
 	{
 		//Ativa o botão que realiza a operação de de busca no Google

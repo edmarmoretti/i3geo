@@ -32,7 +32,6 @@ YAHOO.example.init = function ()
 }()
 function submete()
 {
-	//$i("filen").value = $i("fileshp").value
 	$i("f").submit()
 }
 radioepsg

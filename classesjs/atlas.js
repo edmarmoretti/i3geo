@@ -110,7 +110,7 @@ function iniciaAtlas()
 		{abrePrancha(retorno.data.pranchadefault)}
 		calcposf();
 	}
-	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+g_sid;
+	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
 }
 /*
@@ -212,7 +212,7 @@ function abrePrancha(id)
 		}
 		remapaf();
 	}
-	var p = g_locaplic+"/classesphp/atlas_controle.php?g_sid="+g_sid+"&funcao=abrePrancha&pranchaId="+id;
+	var p = g_locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);
 }
 /*

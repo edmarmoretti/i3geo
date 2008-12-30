@@ -56,8 +56,8 @@ include_once ($locaplic."/classesphp/funcoes_gerais.php");
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico
 //
-if(isset($funcao) && $funcao != "verificaEditores")
-{if(verificaEditores($editores) == "nao"){echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php (variavel \$editores) podem acessar o sistema de administracao.";exit;}}
+//if(isset($funcao) && $funcao != "verificaEditores")
+//{if(verificaEditores($editores) == "nao"){echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php (variavel \$editores) podem acessar o sistema de administracao.";exit;}}
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$mapfile = "geral1windows";

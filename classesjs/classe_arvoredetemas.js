@@ -917,7 +917,7 @@ i3GEO.arvoreDeTemas = {
 										var lk = "";
 										if ( ngTema[st].link != " ")
 										{var lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
-										d += " ("+nomeSgrupo+") "+lk;
+										d += "<td style='text-allign:left'> ("+nomeSgrupo+") "+lk+"</td>";
 										var tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra, false,true);
 										tempNode.isLeaf = true;
 									}
@@ -994,6 +994,7 @@ i3GEO.arvoreDeTemas = {
 //
 //para efeitos de compatibilidade, as opções são definidas aqui
 //
+
 if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona"))
 {
 	if(!$i("arvoreAdicionaTema"))

@@ -34,31 +34,37 @@ switch ($funcao)
 {
 	//verifica os editores
 	case "verificaEditores":
-	retornaJSON(verificaEditores($editores));
-	exit;
+		retornaJSON(verificaEditores($editores));
+		exit;
 	break;
 	
 	case "pegaFuncoes":
-	$dados = pegaDados('SELECT * from i3geoadmin_identifica');
+		$dados = pegaDados('SELECT * from i3geoadmin_identifica');
 	retornaJSON($dados);
-	exit;
+		exit;
 	break;
 	
 	case "alterarFuncoes":
-	$novo = alterarFuncoes();
-	$sql = "SELECT * from i3geoadmin_identifica WHERE id_i = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alterarFuncoes();
+		$sql = "SELECT * from i3geoadmin_identifica WHERE id_i = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
 	break;
 	
 	case "excluir":
-	retornaJSON(excluirFuncoes());
-	exit;
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(excluirFuncoes());
+		exit;
 	break;
 	
 	case "importarXmlI":
-	retornaJSON(importarXmlI());
-	exit;;
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(importarXmlI());
+		exit;;
 	break;
 }
 /*
@@ -85,7 +91,7 @@ function alterarFuncoes()
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_identifica (publicado_i,nome_i,abrir_i,target_i) VALUES ('','','','')");
-			$id_i = $dbhw->query("SELECT id_i FROM i3geoadmin_identifica");
+			$id_i = $dbh->query("SELECT id_i FROM i3geoadmin_identifica");
 			$id_i = $id_i->fetchAll();
 			$id_i = intval($id_i[count($id_i)-1]['id_i']);
 			$retorna = $id_i;
@@ -127,7 +133,7 @@ function importarXmlI()
 	//importa os grupos
 	//
 	$wsExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_identifica");
+	$q = $dbh->query("select * from i3geoadmin_identifica");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$iExistentes[$r["nome_i"]] = 0;}

@@ -57,23 +57,31 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarAtlas":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarAtlas();
 		$sql = "SELECT * from i3geoadmin_atlas WHERE id_atlas = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	case "alterarPrancha":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarPrancha();
 		$sql = "SELECT * from i3geoadmin_atlasp WHERE id_prancha = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
 	case "alterarTema":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarTema();
 		$sql = "SELECT * from i3geoadmin_atlast WHERE id_tema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 	break;
 	case "excluirAtlas":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$tabela = "i3geoadmin_atlas";
 		$f = verificaFilhos();
 		if(!$f)
@@ -83,6 +91,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "excluirPrancha":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$tabela = "i3geoadmin_atlasp";	
 		$f = verificaFilhos();
 		if(!$f)
@@ -92,16 +102,21 @@ switch ($funcao)
 		exit;
 	break;
 	case "excluirTema":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirTema());
 		exit;
 	break;
 	case "movimentaNo":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		movimentaNo();	
 		retornaJSON("ok");
 		exit;
 	break;
-
 	case "importarXmlAtlas":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(importarXmlAtlas());
 		exit;
 	break;
@@ -142,14 +157,14 @@ function movimentaNo()
 	if($movimento == "sobe")
 	{
 		$menos = $ordematual - 1;
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $ordematual where $where ordem_$posfixo = '$menos'");
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $menos where id_$posfixo = '$id'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$menos'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem_$posfixo = $menos where id_$posfixo = '$id'");
 	}	
 	if($movimento == "desce")
 	{
 		$mais = $ordematual + 1;
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $ordematual where $where ordem_$posfixo = '$mais'");
-		$dbhw->query("UPDATE i3geoadmin_$tabela SET 'ordem_$posfixo' = $mais where id_$posfixo = '$id'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem_$posfixo = $ordematual where $where ordem_$posfixo = '$mais'");
+		$dbhw->query("UPDATE i3geoadmin_$tabela SET ordem_$posfixo = $mais where id_$posfixo = '$id'");
 	}			
    	$dbhw = null;
    	$dbh = null;
@@ -198,11 +213,11 @@ function alterarAtlas()
     	}
     	else
     	{
-			$o = $dbhw->query("SELECT MAX(ordem_atlas) as o FROM i3geoadmin_atlas");
+			$o = $dbh->query("SELECT MAX(ordem_atlas) as o FROM i3geoadmin_atlas");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
     		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas) VALUES ('',$o,'','',null,null,'','','','','','')");
-			$id = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
+			$id = $dbh->query("SELECT id_atlas FROM i3geoadmin_atlas");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_atlas']);
 			$retorna = $id;
@@ -234,12 +249,12 @@ function alterarPrancha()
     	}
     	else
     	{
-			$o = $dbhw->query("SELECT MAX(ordem_prancha) as o FROM i3geoadmin_atlasp WHERE id_atlas = '$id_atlas'");
+			$o = $dbh->query("SELECT MAX(ordem_prancha) as o FROM i3geoadmin_atlasp WHERE id_atlas = '$id_atlas'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 
     		$dbhw->query("INSERT INTO i3geoadmin_atlasp (ordem_prancha,mapext_prancha,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,id_atlas) VALUES ($o,'','','$h_prancha','$w_prancha','','','$titulo_prancha','$id_atlas')");
-    		$id = $dbhw->query("SELECT id_prancha FROM i3geoadmin_atlasp");
+    		$id = $dbh->query("SELECT id_prancha FROM i3geoadmin_atlasp");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_prancha']);
 			$retorna = $id;    	
@@ -266,12 +281,12 @@ function alterarTema()
     	}
     	else
     	{
-			$o = $dbhw->query("SELECT MAX(ordem_tema) as o FROM i3geoadmin_atlast where id_prancha = '$id_prancha'");
+			$o = $dbh->query("SELECT MAX(ordem_tema) as o FROM i3geoadmin_atlast where id_prancha = '$id_prancha'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
 
     		$dbhw->query("INSERT INTO i3geoadmin_atlast (ordem_tema,codigo_tema,ligado_tema,id_prancha) VALUES ($o,'','','$id_prancha')");
-			$id = $dbhw->query("SELECT id_tema FROM i3geoadmin_atlast");
+			$id = $dbh->query("SELECT id_tema FROM i3geoadmin_atlast");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_tema']);
 			$retorna = $id;    	
@@ -346,7 +361,7 @@ function importarXmlAtlas()
 	//importa os atlas
 	//
 	$atlasExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_atlas");
+	$q = $dbh->query("select * from i3geoadmin_atlas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$atlasExistentes[$r["titulo_atlas"]] = 0;}
@@ -373,7 +388,7 @@ function importarXmlAtlas()
 		if(!isset($atlasExistentes[$titulo]))
 		$dbhw->query("INSERT INTO i3geoadmin_atlas (publicado_atlas,desc_atlas,h_atlas,w_atlas,icone_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,ordem_atlas,basemapfile_atlas) VALUES ('','$desc',$h,$w,'$icone','$link','$pranchadefault','$template','$tipoguias','$titulo',$contaAtlas,'$base')");
 		$atlasExistentes[$titulo] = 0;	
-		$id_atlas = $dbhw->query("SELECT id_atlas FROM i3geoadmin_atlas");
+		$id_atlas = $dbh->query("SELECT id_atlas FROM i3geoadmin_atlas");
 		$id_atlas = $id_atlas->fetchAll();
 		$id_atlas = intval($id_atlas[count($id_atlas)-1]['id_atlas']);
 		$contaAtlas++;
@@ -395,7 +410,7 @@ function importarXmlAtlas()
 			if($h == ""){$h = 'null';}
 			$mapext = ixml($prancha,"MAPEXT");
 			$dbhw->query("INSERT INTO i3geoadmin_atlasp (id_atlas,desc_prancha,h_prancha,w_prancha,icone_prancha,link_prancha,titulo_prancha,mapext_prancha,ordem_prancha) VALUES ('$id_atlas','$desc',$h,$w,'$icone','$link','$titulo','$mapext',$contaPrancha)");
-			$id_prancha = $dbhw->query("SELECT id_prancha FROM i3geoadmin_atlasp");
+			$id_prancha = $dbh->query("SELECT id_prancha FROM i3geoadmin_atlasp");
 			$id_prancha = $id_prancha->fetchAll();
 			$id_prancha = intval($id_prancha[count($id_prancha)-1]['id_prancha']);
 			$contaPrancha++;

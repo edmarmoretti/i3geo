@@ -27,7 +27,7 @@
 	 .info {text-align:left;}
 	</style> 
 </head>
-<body id="i3geo" >
+<body id="i3geo"  >
 <center>
 <table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
 <!--
@@ -247,14 +247,11 @@ http://<host>/i3geo/ms_criamapa.php
 
 */
 /*
-	Variable: g_locaplic
-	
 	Indica a localização correta do i3geo.
 	
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-	
 */
-var g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.locaplic = protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -444,16 +441,6 @@ var g_mapaRefDisplay = "block";
 	g_docaguias = "nao";
 */
 /*
-	Variable: g_mostraRosa
-	
-	Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse
-	
-	Default:
-	
-	g_mostraRosa = "sim"
-*/
-
-/*
 	Variable: g_opcoesTemas
 	
 	Variável que define se as opcoes adicionais de cada tema serao mostradas.
@@ -501,18 +488,7 @@ g_mashuppar = "&mapext=-53 -26 -42 -18";
 
 	g_mensagempadrao = "O I3Geo é software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blanck >aqui</a>";
 */
-
 var objmapa = new Mapa();
-
-/*
-Variable: g_visual
-
-Indica qual o tipo de visual para abertura do mapa.
-
-Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual na inicialização do i3geo.
-*/
-var g_visual = "default";
-
 /*
 Variable: g_autoRedesenho
 

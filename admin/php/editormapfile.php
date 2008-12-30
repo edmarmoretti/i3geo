@@ -29,8 +29,6 @@ File: i3geo/admin/sistemas.php
 */
 
 include_once("admin.php");
-include_once("../../ms_configura.php");
-include_once("../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
@@ -40,6 +38,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "criarNovoMap":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoMap());
 		exit;
 	break;
@@ -48,6 +48,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "excluirMapfile":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		//pega oid do tema
 		$dados = pegaDados("SELECT id_tema from i3geoadmin_temas WHERE codigo_tema = '".$codigoMap."'");
 		$id = $dados[0]["id_tema"];
@@ -69,10 +71,14 @@ switch ($funcao)
 		}
 	break;
 	case "criarNovoLayer":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoLayer());
 		exit;
 	break;
 	case "excluirLayer":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirLayer());
 		exit;
 	break;	
@@ -81,10 +87,14 @@ switch ($funcao)
 		exit;
 	break;
 	case "criarNovaClasse":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovaClasse());
 		exit;
 	break;
 	case "excluirClasse":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		excluirClasse();
 		retornaJSON(listaClasses());
 		exit;
@@ -94,10 +104,14 @@ switch ($funcao)
 		exit;
 	break;	
 	case "criarNovoEstilo":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoEstilo());
 		exit;
 	break;	
 	case "excluirEstilo":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		excluirEstilo();
 		retornaJSON(listaEstilos());
 		exit;
@@ -107,15 +121,21 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarEstilo":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarEstilo();
 		retornaJSON(pegaEstilo());
 		exit;
 	break;
 	case "pegaConexao":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(pegaConexao());
 		exit;
 	break;	
 	case "alterarConexao":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarConexao();
 		retornaJSON(pegaConexao());
 		exit;
@@ -125,6 +145,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarMetadados":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarMetadados();
 		retornaJSON(pegaMetadados());
 		exit;
@@ -134,6 +156,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarGeral":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarGeral();
 		$codigoLayer = $name;
 		retornaJSON(pegaGeral());
@@ -144,6 +168,8 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarClasseGeral":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarClasseGeral();
 		retornaJSON(pegaClasseGeral());
 		exit;
@@ -153,11 +179,15 @@ switch ($funcao)
 		exit;
 	break;
 	case "alterarClasseLabel":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarClasseLabel();
 		retornaJSON(pegaClasseLabel());
 		exit;
 	break;
 	case "movimentaNo":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$res = sobeDesce();
 		retornaJSON($res);
 		exit;
@@ -222,6 +252,7 @@ function criarNovoMap()
 		$dados[] = '	DATA ""';
 		$dados[] = '	METADATA';
 		$dados[] = '		TEMA "'.$nome.'"';
+		$dados[] = '		CLASSE "SIM"';
 		$dados[] = '	END';
 		$dados[] = "END";
 		$dados[] = "END";
@@ -775,7 +806,7 @@ function removeCabecalho($arq)
 		$teste = str_replace("'","",$teste);
 		$teste = str_replace('"',"",$teste);
 		$teste = preg_replace('/[\n\r\t ]*/', '', $teste);
-      	$testar = array("SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA");
+      	$testar = array("KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA");
 		$passou = true;
 		foreach ($testar as $t)
 		{if($teste == $t){$passou = false;}}
@@ -783,5 +814,6 @@ function removeCabecalho($arq)
 		fwrite($handle,$f);
 	}
 	fclose($handle);
+	chmod($arq, 0666);
 }
 ?>

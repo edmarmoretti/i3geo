@@ -782,7 +782,7 @@ function core_geraLinhas(dados)
 	do
 	{
 		var p = dados.linhas[contaParam];
-		if(p.tipo == "text")
+		if(p.tipo == "text" || p.tipo == "cor")
 		{
 			if(!p.size){p.size = "50";}
 			if(p.ajuda)
@@ -799,7 +799,12 @@ function core_geraLinhas(dados)
 			{
 				if(!p.value)
 				p.value = ""
-				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" /></p>"
+				resultado += "<input size="+p.size+" type=text id="+p.id+" value=\""+p.value+"\" />"
+				if(p.tipo == "cor")
+				{
+					resultado += "&nbsp;<img src='../../imagens/aquarela.gif' style='cursor:pointer;' onclick='core_abreCor(\"\",\""+p.id+"\");' />";
+				}
+				resultado += "</p>";
 			}
 			if(p.div)
 			{resultado += p.div;}
@@ -1118,7 +1123,10 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
 	YAHOO.example.container.panelEditor.show();
 }
-
+function core_abreCor(janela,elemento)
+{
+	i3GEO.janela.cria("420","230px","../../ferramentas/colorpicker/index.htm?doc=&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+}
 //
 //carregador de javascript
 //

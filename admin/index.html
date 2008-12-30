@@ -69,22 +69,32 @@ dos arquivos XML.
 </fieldset>
 <br>
 <fieldset>
-<legend>Edição das tabelas auxiliares e do menu de adição de temas</legend>
+<legend>Edição dos menus de adição de temas</legend>
 <div style=display:none; >
 <div id=a2 style=display:none;background-color:beige >
-	<p>Para editar o menu de temas é necessário primeiro ter a lista de grupos, sub-grupos e temas. Essas listas são utilizadas para compor a árvore hierárquica de temas, onde grupos contém sub-grupos 
-que por sua vez contém temas.</p>
-	<p>Com base nas listas, é feita a montagem da hierarquia da árvore de menus.</p>
-	<p>O menu de temas é utilizado na guia "adiciona" do i3geo e nas aplicações de download de dados, gerador de kml e gerador de webservices ogc.</p>
-	<p>Por padrão, o i3geo utiliza arquivos xml armazenados em disco para compor o menu. Se você quiser continuar utilizando esses arquivos, não será possível utilizar esse administrador, uma vez que este utiliza um banco de dados para guardar os parâmetros necessários à montagem da árvore.</p>
-	<p>Os menus que serão utilizados no i3geo são especificados no arquivo i3geo/ms_configura.php, na variável $menutemas. Por padrão, essa variável é definida como vazia, forçando a busca pelos menus no banco de dados de administração.</p>
+	<p>Utilize essa opção para editar as árvores de menus.
+	<p>O i3Geo pode ter mais de um menu, que são mostradas na forma de árvores de grupos, sub-grupos e temas.
+	<p>Os temas são baseados nos arquivos mapfiles que definem as características de conexão com os dados, simbologia, etc.
+	<p>Apenas os mapfiles cadastrados como temas podem ser incluídos nas árvores de menus.
+</div>
+<table class=lista1 >
+<tr onclick="ajuda('a2',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
+<tr onclick="abre('html/arvore.html')"><td><div class=aplicar ></div></td><td>Editar a árvore dos menus</td></tr>
+<tr onclick="abre('html/importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
+</table>
+</div>
+</fieldset>
+<br>
+<fieldset>
+<legend>Edição das tabelas auxiliares</legend>
+<div style=display:none; >
+<div id=a2 style=display:none;background-color:beige >
+	<p>Utilize essa opção para construir as listas de opções correspondentes às TAGS e PERFIS
 </div>
 <table class=lista1 >
 <tr onclick="ajuda('a2',this)"><td><div class=ajuda  ></div></td><td>Ajuda</td></tr>
 <tr onclick="abre('html/perfis.html')"><td><div class=aplicar ></div></td><td>Editar a lista de perfis</td></tr>
 <tr onclick="abre('html/tags.html')"><td><div class=aplicar ></div></td><td>Editar a lista de tags (palavras-chave)</td></tr>
-<tr onclick="abre('html/arvore.html')"><td><div class=aplicar ></div></td><td>Editar a árvore dos menus</td></tr>
-<tr onclick="abre('html/importarmenu.html')"><td><div class=aplicar ></div></td><td>Importar XML</td></tr>
 </table>
 </div>
 </fieldset>

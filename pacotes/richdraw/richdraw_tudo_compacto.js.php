@@ -1,8 +1,858 @@
-<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('5 f(z,e){3.g=z;3.k=10;3.j=10;3.s=0;3.t=0;3.r=\'\';3.I=\'\';3.F=\'\';3.B=\'\';3.8=w;3.N={x:0,y:0,11:0,W:0};3.1t=5(){};3.1f=5(){};3.e=e;3.e.1n(3.g);3.1B=5(){1A=1z 1y();z.1p="";z.1h.1q="1j";9(1C=="1K"){1I("1J")}9(1o.Q("1k")){1o.Q("1k").1h.1q="1j"}}}f.7.1H=5(){3.g.1p=\'\'};f.7.1x=5(){9(3.8){3.e.M(3.g.1i.Q(\'14\'));3.e.M(3.8);3.8=w}};f.7.C=5(z){9(z==3.8)h;3.8=z;3.e.T(3.8);3.1t(3)};f.7.K=5(){9(3.8){3.e.M(3.g.1i.Q(\'14\'));3.8=w;3.1f(3)}};f.7.1F=5(){h 3.8};f.7.1E=5(1c,15){3.k=1c;3.j=15};f.7.12=5(l,A){9(l==\'r\'){3.r=A}v 9(3.8==w){9(l==\'1b\'){3.I=A}v 9(l==\'17\'){3.F=A}v 9(l==\'19\'){3.B=1l(A)+\'1G\'}}v{3.e.12(3.8,l,A)}};f.7.U=5(l){9(l==\'r\'){h 3.r}v 9(3.8==w){9(l==\'1b\'){h 3.I}v 9(l==\'17\'){h 3.F}v 9(l==\'19\'){h 3.B}}v{h 3.e.U(3.8,l)}};f.7.1D=5(b){h X};f.7.1M=5(b){a d=G.H(3.g);a o=m.p((c.E(b)-d[0])/3.k)*3.k;a n=m.p((c.D(b)-d[1])/3.j)*3.j;9(3.r!=\'C\'){3.K();3.s=o;3.t=n;3.8=3.e.V(3.r,3.I,3.F,3.B,3.s,3.t,1,1);3.8.18=\'u:\'+S();c.J(3.8,"R",3.1a);c.J(3.g,"R",3.13)}v{9(3.s!=o||3.t!=n)3.K()}h X};f.7.20=5(b){a d=G.H(3.g);a o=m.p((c.E(b)-d[0])/3.k)*3.k;a n=m.p((c.D(b)-d[1])/3.j)*3.j;9(3.r!=\'C\'){3.K();3.s=o;3.t=n;3.8=3.e.V(3.r,3.I,3.F,3.B,3.s,3.t,1,1);3.8.18=\'u:\'+S();c.J(3.8,"21",3.1a);c.J(3.g,"R",3.13)}v{9(3.s!=o||3.t!=n)3.K()}h X};f.7.26=5(b){c.1e(3.g,"1d",3.13);c.1e(3.g,"1d",3.1w);9(3.r!=\'C\'){3.8=w}};f.7.1Z=5(b){a d=G.H(3.g);a o=m.p((c.E(b)-d[0])/3.k)*3.k;a n=m.p((c.D(b)-d[1])/3.j)*3.j;a O=o-3.s;a P=n-3.t;3.e.1u(3.8,3.N.x+O,3.N.y+P);3.e.T(3.8)};f.7.1Y=5(b){a d=G.H(3.g);a o=m.p((c.E(b)-d[0])/3.k)*3.k;a n=m.p((c.D(b)-d[1])/3.j)*3.j;a O=o-3.s;a P=n-3.t;3.e.1s(22,O,P);25()};f.7.24=5(b){9(3.8==w)h;a d=G.H(3.g);a o=m.p((c.E(b)-d[0])/3.k)*3.k;a n=m.p((c.D(b)-d[1])/3.j)*3.j;3.e.1g(3.8,3.s,3.t,o,n)};f.7.1L=5(b){9(3.r==\'C\'){3.C(c.1X(b));3.N=3.e.1m(3.8);a d=G.H(3.g);3.s=m.p((c.E(b)-d[0])/3.k)*3.k;3.t=m.p((c.D(b)-d[1])/3.j)*3.j;c.J(3.g,"R",3.1w)}};5 S(){h[4,2,2,2,6].1Q(5(Z){a Y="";1R(a i=0;i<Z;i++){a L=1l((m.1U()*1T)).1S(16);9(L.Z==1)L="0"+L;Y+=L}h Y}).1P(\'-\')}5 q(){};q.7.1n=5(z){};q.7.1m=5(u){h{x:0,y:0,11:0,W:0}};q.7.V=5(u,I,F,B,1v,1r,11,W){};q.7.M=5(u){};q.7.1u=5(u,1v,1r){};q.7.1s=5(u){};q.7.1g=5(u,1N,1O,1W,1V){};q.7.12=5(u,l,A){};q.7.U=5(u,l){};q.7.T=5(u){};q.7.23=5(){h w};',62,131,'|||this||function||prototype|selected|if|var|event|Event|offset|renderer|RichDrawEditor|container|return||gridY|gridX|cmd|Math|snappedY|snappedX|round|AbstractRenderer|mode|mouseDownX|mouseDownY|shape|else|null|||elem|value|lineWidth|select|pointerY|pointerX|lineColor|Position|cumulativeOffset|fillColor|observe|unselect|uuidchar|remove|selectedBounds|deltaX|deltaY|getElementById|mousemove|createUUID|showTracker|queryCommand|create|height|false|uuidpart|length||width|editCommand|onDrawListener|tracker|vertical||linecolor|id|linewidth|onHitListener|fillcolor|horizontal|mouseup|stopObserving|onunselect|resize|style|ownerDocument|none|mostradistancia|parseInt|bounds|init|document|innerHTML|display|top|track|onselect|move|left|onDragListener|deleteSelection|pontosdist|new|pontosdistobj|fecha|g_tipoacao|onSelectStart|setGrid|getSelectedElement|px|clearWorkspace|mudaiconf|pan|mede|onHit|onClick|fromX|fromY|join|map|for|toString|256|random|toY|toX|element|onResize|onDrag|onMouseDown|mousedown|handle|getMarkup|onDraw|show_tracker|onMouseUp'.split('|'),0,{}))
+<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>/*----------------------------------------------------------------------------
+ RICHDRAW 1.0
+ Vector Graphics Drawing Script
+ -----------------------------------------------------------------------------
+ Created by Mark Finkle (mark.finkle@gmail.com)
+ Implementation of simple vector graphic drawing control using SVG or VML.
+ -----------------------------------------------------------------------------
+ Copyright (c) 2006 Mark Finkle
+
+ This program is  free software;  you can redistribute  it and/or  modify it
+ under the terms of the MIT License.
+
+ Permission  is hereby granted,  free of charge, to  any person  obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the  Software without restriction,  including without limitation
+ the  rights to use, copy, modify,  merge, publish, distribute,  sublicense,
+ and/or  sell copies  of the  Software, and to  permit persons to  whom  the
+ Software is  furnished  to do  so, subject  to  the  following  conditions:
+ The above copyright notice and this  permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS",  WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED,  INCLUDING BUT NOT LIMITED TO  THE WARRANTIES  OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR  COPYRIGHT  HOLDERS BE  LIABLE FOR  ANY CLAIM,  DAMAGES OR OTHER
+ LIABILITY, WHETHER  IN AN  ACTION OF CONTRACT, TORT OR  OTHERWISE,  ARISING
+ FROM,  OUT OF OR  IN  CONNECTION  WITH  THE  SOFTWARE OR THE  USE OR  OTHER
+ DEALINGS IN THE SOFTWARE.
+ -----------------------------------------------------------------------------
+ Dependencies: (SVG or VML rendering implementations)
+ History:
+ 2006-04-05 | Created
+ --------------------------------------------------------------------------*/
+
+
+function RichDrawEditor(elem, renderer) {
+  this.container = elem;
+	this.gridX = 10;
+	this.gridY = 10;
+  this.mouseDownX = 0;
+  this.mouseDownY = 0;
+  this.mode = '';
+  this.fillColor = '';
+  this.lineColor = '';
+  this.lineWidth = '';
+  this.selected = null;
+  this.selectedBounds = { x:0, y:0, width:0, height: 0 };
+
+	this.onselect = function() {};
+	this.onunselect = function() {};
+
+  this.renderer = renderer;
+  this.renderer.init(this.container);
+  this.fecha = function()
+  {
+  	pontosdistobj = new pontosdist();
+  	elem.innerHTML = "";
+  	elem.style.display="none";
+  	if(g_tipoacao == "mede")
+  	{mudaiconf("pan");}
+  	if(document.getElementById("mostradistancia"))
+  	{document.getElementById("mostradistancia").style.display="none";}
+  }
+
+/*
+  //this.onMouseDownListener = this.onMouseDown.bindAsEventListener(this);
+  this.onClickListener = this.onClick.bindAsEventListener(this);
+  this.onMouseUpListener = this.onMouseUp.bindAsEventListener(this);
+  this.onDragListener = this.onDrag.bindAsEventListener(this);
+  this.onResizeListener = this.onResize.bindAsEventListener(this);
+  this.onDrawListener = this.onDraw.bindAsEventListener(this);
+
+  this.onHitListener = this.onHit.bindAsEventListener(this);
+
+  this.onSelectStartListener = this.onSelectStart.bindAsEventListener(this);
+
+  //Event.observe(this.container, "mousedown", this.onMouseDownListener);
+  Event.observe(this.container, "mouseclick", this.onClickListener);
+  Event.observe(this.container, "mouseup", this.onMouseUpListener);
+  Event.observe(this.container, "selectstart", this.onSelectStartListener);  
+*/
+}
+
+
+RichDrawEditor.prototype.clearWorkspace = function() {
+	this.container.innerHTML = '';
+};
+
+
+RichDrawEditor.prototype.deleteSelection = function() {
+  if (this.selected) {
+    this.renderer.remove(this.container.ownerDocument.getElementById('tracker'));
+    this.renderer.remove(this.selected);
+    this.selected = null;
+  }
+};
+
+
+RichDrawEditor.prototype.select = function(elem) {
+  if (elem == this.selected)
+    return;
+
+  this.selected = elem;
+  this.renderer.showTracker(this.selected);
+  this.onselect(this);
+};
+
+
+RichDrawEditor.prototype.unselect = function() {
+  if (this.selected) {
+    this.renderer.remove(this.container.ownerDocument.getElementById('tracker'));
+    this.selected = null;
+    this.onunselect(this);
+  }
+};
+
+
+RichDrawEditor.prototype.getSelectedElement = function() {
+  return this.selected;
+};
+
+
+RichDrawEditor.prototype.setGrid = function(horizontal, vertical) {
+  this.gridX = horizontal;
+  this.gridY = vertical;
+};
+
+
+RichDrawEditor.prototype.editCommand = function(cmd, value)
+{
+  if (cmd == 'mode') {
+    this.mode = value;
+  }
+  else if (this.selected == null) {
+    if (cmd == 'fillcolor') {
+      this.fillColor = value;
+    }
+    else if (cmd == 'linecolor') {
+      this.lineColor = value;
+    }
+    else if (cmd == 'linewidth') {
+      this.lineWidth = parseInt(value) + 'px';
+    }
+  }
+  else {
+    this.renderer.editCommand(this.selected, cmd, value);
+  }
+};
+
+
+RichDrawEditor.prototype.queryCommand = function(cmd)
+{
+  if (cmd == 'mode') {
+    return this.mode;
+  }
+  else if (this.selected == null) {
+    if (cmd == 'fillcolor') {
+      return this.fillColor;
+    }
+    else if (cmd == 'linecolor') {
+      return this.lineColor;
+    }
+    else if (cmd == 'linewidth') {
+      return this.lineWidth;
+    }
+  }
+  else {
+    return this.renderer.queryCommand(this.selected, cmd);
+  }
+};
+
+
+RichDrawEditor.prototype.onSelectStart = function(event) {
+  return false;
+};
+
+RichDrawEditor.prototype.onClick = function(event) {
+  var offset = Position.cumulativeOffset(this.container);
+  var snappedX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+  var snappedY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+  if (this.mode != 'select') {
+    this.unselect();
+    this.mouseDownX = snappedX;
+    this.mouseDownY = snappedY;
+    this.selected = this.renderer.create(this.mode, this.fillColor, this.lineColor, this.lineWidth, this.mouseDownX, this.mouseDownY, 1, 1);
+    this.selected.id = 'shape:' + createUUID();
+    Event.observe(this.selected, "mousemove", this.onHitListener);  
+    Event.observe(this.container, "mousemove", this.onDrawListener);  
+  
+  }
+  else {
+    if (this.mouseDownX != snappedX || this.mouseDownY != snappedY)
+      this.unselect();
+  }
+  
+  return false;
+};
+
+
+RichDrawEditor.prototype.onMouseDown = function(event) {
+  var offset = Position.cumulativeOffset(this.container);
+  var snappedX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+  var snappedY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+  if (this.mode != 'select') {
+    this.unselect();
+    this.mouseDownX = snappedX;
+    this.mouseDownY = snappedY;
+    this.selected = this.renderer.create(this.mode, this.fillColor, this.lineColor, this.lineWidth, this.mouseDownX, this.mouseDownY, 1, 1);
+    this.selected.id = 'shape:' + createUUID();
+    Event.observe(this.selected, "mousedown", this.onHitListener);  
+    Event.observe(this.container, "mousemove", this.onDrawListener);  
+  }
+  else {
+    if (this.mouseDownX != snappedX || this.mouseDownY != snappedY)
+      this.unselect();
+  }
+  
+  return false;
+};
+
+
+RichDrawEditor.prototype.onMouseUp = function(event) {
+  Event.stopObserving(this.container, "mouseup", this.onDrawListener);  
+  Event.stopObserving(this.container, "mouseup", this.onDragListener);  
+
+  if (this.mode != 'select') {
+    this.selected = null;
+  }
+};
+
+
+RichDrawEditor.prototype.onDrag = function(event) {
+  var offset = Position.cumulativeOffset(this.container);
+  var snappedX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+  var snappedY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+
+  var deltaX = snappedX - this.mouseDownX;
+  var deltaY = snappedY - this.mouseDownY;
+  this.renderer.move(this.selected, this.selectedBounds.x + deltaX, this.selectedBounds.y + deltaY);
+  // Update selection tracker
+  this.renderer.showTracker(this.selected);
+//  hide_tracker();
+};
+
+
+RichDrawEditor.prototype.onResize = function(event) {
+  var offset = Position.cumulativeOffset(this.container);
+  var snappedX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+  var snappedY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+
+  var deltaX = snappedX - this.mouseDownX;
+  var deltaY = snappedY - this.mouseDownY;
+
+  this.renderer.track(handle, deltaX, deltaY);
+
+  // Update selection tracker
+  show_tracker();
+//  hide_tracker();
+};
+
+//
+//o elemento está sendo desenhado
+//
+RichDrawEditor.prototype.onDraw = function(event) {
+  if (this.selected == null)
+    return;
+
+  var offset = Position.cumulativeOffset(this.container);
+  var snappedX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+  var snappedY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+  this.renderer.resize(this.selected, this.mouseDownX, this.mouseDownY, snappedX, snappedY);
+};
+
+
+RichDrawEditor.prototype.onHit = function(event) {
+  if (this.mode == 'select') {
+    this.select(Event.element(event));
+    this.selectedBounds = this.renderer.bounds(this.selected);
+    
+    var offset = Position.cumulativeOffset(this.container);
+    this.mouseDownX = Math.round((Event.pointerX(event) - offset[0]) / this.gridX) * this.gridX;
+    this.mouseDownY = Math.round((Event.pointerY(event) - offset[1]) / this.gridY) * this.gridY;
+
+    Event.observe(this.container, "mousemove", this.onDragListener);  
+  }
+};
+
+
+function createUUID()
+{
+  return [4, 2, 2, 2, 6].map(function(length) {
+    var uuidpart = "";
+    for (var i=0; i<length; i++) {
+      var uuidchar = parseInt((Math.random() * 256)).toString(16);
+      if (uuidchar.length == 1)
+        uuidchar = "0" + uuidchar;
+      uuidpart += uuidchar;
+    }
+    return uuidpart;
+  }).join('-');
+}
+
+//----------------------------------------------------------------------------
+// AbstractRenderer
+//
+// Abstract base class defining the drawing API. Can not be used directly.
+//----------------------------------------------------------------------------
+
+function AbstractRenderer() {
+
+};
+
+AbstractRenderer.prototype.init = function(elem) {};
+AbstractRenderer.prototype.bounds = function(shape) { return { x:0, y:0, width:0, height: 0 }; };
+AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {};
+AbstractRenderer.prototype.remove = function(shape) {};
+AbstractRenderer.prototype.move = function(shape, left, top) {};
+AbstractRenderer.prototype.track = function(shape) {};
+AbstractRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {};
+AbstractRenderer.prototype.editCommand = function(shape, cmd, value) {};
+AbstractRenderer.prototype.queryCommand = function(shape, cmd) {};
+AbstractRenderer.prototype.showTracker = function(shape) {};
+AbstractRenderer.prototype.getMarkup = function() { return null; };
 
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('i f(){b.1h=14;b.D=3}f.h=1c 14;f.h.1j=i(16){b.p=16;b.p.13.1i=\'s\';e n=\'Y://U.V.W/S/6\';b.D=b.p.v.u(n,"6");b.p.R(b.D)};f.h.1f=i(5){e o=1c 1g();e r=5.z();o[\'x\']=r.x;o[\'y\']=r.y;o[\'9\']=r.9;o[\'c\']=r.c;O o};f.h.1m=i(5,Q,P,18,k,l,9,c){e n=\'Y://U.V.W/S/6\';e 6;8(5==\'o\'){6=b.p.v.u(n,\'o\');6.4(3,\'x\',k+\'7\');6.4(3,\'y\',l+\'7\');6.4(3,\'9\',9+\'7\');6.4(3,\'c\',c+\'7\')}a 8(5==\'C\'){6=b.p.v.u(n,\'C\');6.4(3,\'F\',(k+9/2)+\'7\');6.4(3,\'E\',(l+c/2)+\'7\');6.4(3,\'A\',(9/2)+\'7\');6.4(3,\'G\',(c/2)+\'7\')}a 8(5==\'1l\'){6=b.p.v.u(n,\'C\');6.4(3,\'F\',k+\'7\');6.4(3,\'E\',l+\'7\');6.4(3,\'A\',9+\'7\');6.4(3,\'G\',9+\'7\')}a 8(5==\'1k\'){6=b.p.v.u(n,\'o\');6.4(3,\'x\',k+\'7\');6.4(3,\'y\',l+\'7\');6.4(3,\'A\',\'17\');6.4(3,\'G\',\'17\');6.4(3,\'9\',9+\'7\');6.4(3,\'c\',c+\'7\')}a 8(5==\'J\'){6=b.p.v.u(n,\'J\');6.4(3,\'12\',k+\'7\');6.4(3,\'11\',l+\'7\');6.4(3,\'X\',9+\'7\');6.4(3,\'T\',c+\'7\')}6.13.1n=\'1o\';8(Q.Z==0)Q=\'s\';6.4(3,\'B\',Q);8(P.Z==0)P=\'s\';6.4(3,\'q\',P);6.4(3,\'q-9\',18);b.D.R(6);O 6};f.h.1d=i(5){5.1r.1C(5)};f.h.1z=i(5,k,l){8(5.H==\'J\'){e m=5.z().9;e j=5.z().c;5.4(3,\'12\',k);5.4(3,\'11\',l);5.4(3,\'X\',k+m);5.4(3,\'T\',l+j)}a 8(5.H==\'C\'){5.4(3,\'F\',k+(5.z().9/2));5.4(3,\'E\',l+(5.z().c/2))}a{5.4(3,\'x\',k);5.4(3,\'y\',l)}};f.h.1A=i(5){};f.h.1B=i(5,I,L,N,M){e m=N-I;e j=M-L;8(5.H==\'J\'){5.4(3,\'X\',N);5.4(3,\'T\',M)}a 8(5.H==\'C\'){8(m<0){5.4(3,\'F\',(I+m/2)+\'7\');5.4(3,\'A\',(-m/2)+\'7\')}a{5.4(3,\'F\',(I+m/2)+\'7\');5.4(3,\'A\',(m/2)+\'7\')}8(j<0){5.4(3,\'E\',(L+j/2)+\'7\');5.4(3,\'G\',(-j/2)+\'7\')}a{5.4(3,\'E\',(L+j/2)+\'7\');5.4(3,\'G\',(j/2)+\'7\')}}a{8(m<0){5.4(3,\'x\',N+\'7\');5.4(3,\'9\',-m+\'7\')}a{5.4(3,\'9\',m+\'7\')}8(j<0){5.4(3,\'y\',M+\'7\');5.4(3,\'c\',-j+\'7\')}a{5.4(3,\'c\',j+\'7\')}}};f.h.1y=i(5,t,w){8(5!=3){8(t==\'1e\'){8(w!=\'\')5.4(3,\'B\',w);a 5.4(3,\'B\',\'s\')}a 8(t==\'19\'){8(w!=\'\')5.4(3,\'q\',w);a 5.4(3,\'q\',\'s\')}a 8(t==\'15\'){5.4(3,\'q-9\',1w(w)+\'7\')}}};f.h.1p=i(5,t){e g=\'\';8(5!=3){8(t==\'1e\'){g=5.K(3,\'B\');8(g==\'s\')g=\'\'}a 8(t==\'19\'){g=5.K(3,\'q\');8(g==\'s\')g=\'\'}a 8(t==\'15\'){g=5.K(3,\'q\');8(g==\'s\')g=\'\';a g=5.K(3,\'q-9\')}}O g};f.h.1q=i(5){e r=5.z();e d=1b.1s(\'d\');8(d){b.1d(d)}e n=\'Y://U.V.W/S/6\';d=1b.u(n,\'o\');d.4(3,\'1t\',\'d\');d.4(3,\'x\',r.x-10);d.4(3,\'y\',r.y-10);d.4(3,\'9\',r.9+1a);d.4(3,\'c\',r.c+1a);d.4(3,\'B\',\'s\');d.4(3,\'q\',\'1v\');d.4(3,\'q-9\',\'1\');b.D.R(d)};f.h.1u=i(){O b.p.1x};',62,101,'|||null|setAttributeNS|shape|svg|px|if|width|else|this|height|tracker|var|SVGRenderer|result|prototype|function|deltaY|left|top|deltaX|svgNamespace|rect|container|stroke|box|none|cmd|createElementNS|ownerDocument|value|||getBBox|rx|fill|ellipse|svgRoot|cy|cx|ry|tagName|fromX|line|getAttributeNS|fromY|toY|toX|return|lineColor|fillColor|appendChild|2000|y2|www|w3|org|x2|http|length||y1|x1|style|AbstractRenderer|linewidth|elem|20px|lineWidth|linecolor|20|document|new|remove|fillcolor|bounds|Object|base|MozUserSelect|init|roundrect|circ|create|position|absolute|queryCommand|showTracker|parentNode|getElementById|id|getMarkup|blue|parseInt|innerHTML|editCommand|move|track|resize|removeChild'.split('|'),0,{}))
+/*----------------------------------------------------------------------------
+ SVGRENDERER 1.0
+ SVG Renderer For RichDraw
+ -----------------------------------------------------------------------------
+ Created by Mark Finkle (mark.finkle@gmail.com)
+ Implementation of SVG based renderer.
+ -----------------------------------------------------------------------------
+ Copyright (c) 2006 Mark Finkle
+
+ This program is  free software;  you can redistribute  it and/or  modify it
+ under the terms of the MIT License.
+
+ Permission  is hereby granted,  free of charge, to  any person  obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the  Software without restriction,  including without limitation
+ the  rights to use, copy, modify,  merge, publish, distribute,  sublicense,
+ and/or  sell copies  of the  Software, and to  permit persons to  whom  the
+ Software is  furnished  to do  so, subject  to  the  following  conditions:
+ The above copyright notice and this  permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS",  WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED,  INCLUDING BUT NOT LIMITED TO  THE WARRANTIES  OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR  COPYRIGHT  HOLDERS BE  LIABLE FOR  ANY CLAIM,  DAMAGES OR OTHER
+ LIABILITY, WHETHER  IN AN  ACTION OF CONTRACT, TORT OR  OTHERWISE,  ARISING
+ FROM,  OUT OF OR  IN  CONNECTION  WITH  THE  SOFTWARE OR THE  USE OR  OTHER
+ DEALINGS IN THE SOFTWARE.
+ -----------------------------------------------------------------------------
+ Dependencies:
+ History:
+ 2006-04-05 | Created
+ --------------------------------------------------------------------------*/
+
+
+function SVGRenderer() {
+	this.base = AbstractRenderer;
+	this.svgRoot = null;
+}
+
+
+SVGRenderer.prototype = new AbstractRenderer;
+
+
+SVGRenderer.prototype.init = function(elem) {
+  this.container = elem;
+
+  this.container.style.MozUserSelect = 'none';
+    
+  var svgNamespace = 'http://www.w3.org/2000/svg';
+  this.svgRoot = this.container.ownerDocument.createElementNS(svgNamespace, "svg");
+  this.container.appendChild(this.svgRoot);
+};
+
+
+SVGRenderer.prototype.bounds = function(shape) {
+  var rect = new Object();
+  var box = shape.getBBox();
+  rect['x'] = box.x;
+  rect['y'] = box.y;
+  rect['width'] =  box.width;
+  rect['height'] = box.height;
+  return rect;
+};
+
+
+SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+  var svgNamespace = 'http://www.w3.org/2000/svg';
+  var svg;
+
+  if (shape == 'rect') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'rect');
+    svg.setAttributeNS(null, 'x', left + 'px');
+    svg.setAttributeNS(null, 'y', top + 'px');
+    svg.setAttributeNS(null, 'width', width + 'px');
+    svg.setAttributeNS(null, 'height', height + 'px');
+  }
+  else if (shape == 'ellipse') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'ellipse');
+    svg.setAttributeNS(null, 'cx', (left + width / 2) + 'px');
+    svg.setAttributeNS(null, 'cy', (top + height / 2) + 'px');
+    svg.setAttributeNS(null, 'rx', (width / 2) + 'px');
+    svg.setAttributeNS(null, 'ry', (height / 2) + 'px');
+  }
+  else if (shape == 'circ') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'ellipse');
+    svg.setAttributeNS(null, 'cx', left + 'px');
+    svg.setAttributeNS(null, 'cy', top + 'px');
+    svg.setAttributeNS(null, 'rx', width + 'px');
+    svg.setAttributeNS(null, 'ry', width + 'px');
+  }
+  else if (shape == 'roundrect') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'rect');
+    svg.setAttributeNS(null, 'x', left + 'px');
+    svg.setAttributeNS(null, 'y', top + 'px');
+    svg.setAttributeNS(null, 'rx', '20px');
+    svg.setAttributeNS(null, 'ry', '20px');
+    svg.setAttributeNS(null, 'width', width + 'px');
+    svg.setAttributeNS(null, 'height', height + 'px');
+  }
+  else if (shape == 'line') {
+    svg = this.container.ownerDocument.createElementNS(svgNamespace, 'line');
+    svg.setAttributeNS(null, 'x1', left + 'px');
+    svg.setAttributeNS(null, 'y1', top + 'px');
+    svg.setAttributeNS(null, 'x2', width + 'px');
+    svg.setAttributeNS(null, 'y2', height + 'px');
+  }
+
+  svg.style.position = 'absolute';
+
+  if (fillColor.length == 0)
+    fillColor = 'none';
+  svg.setAttributeNS(null, 'fill', fillColor);
+
+  if (lineColor.length == 0)
+    lineColor = 'none';
+  svg.setAttributeNS(null, 'stroke', lineColor);
+  svg.setAttributeNS(null, 'stroke-width', lineWidth);
+      
+  this.svgRoot.appendChild(svg);
+  
+  return svg;
+};
+
+
+SVGRenderer.prototype.remove = function(shape) {
+  shape.parentNode.removeChild(shape);
+};
+
+
+SVGRenderer.prototype.move = function(shape, left, top) {
+  if (shape.tagName == 'line') {
+    var deltaX = shape.getBBox().width;
+    var deltaY = shape.getBBox().height;
+    shape.setAttributeNS(null, 'x1', left);
+    shape.setAttributeNS(null, 'y1', top);
+    shape.setAttributeNS(null, 'x2', left + deltaX);
+    shape.setAttributeNS(null, 'y2', top + deltaY);
+  }
+  else if (shape.tagName == 'ellipse') {
+    shape.setAttributeNS(null, 'cx', left + (shape.getBBox().width / 2));
+    shape.setAttributeNS(null, 'cy', top + (shape.getBBox().height / 2));
+  }
+  else {
+    shape.setAttributeNS(null, 'x', left);
+    shape.setAttributeNS(null, 'y', top);
+  }
+};
+
+
+SVGRenderer.prototype.track = function(shape) {
+  // TODO
+};
+
+
+SVGRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
+  var deltaX = toX - fromX;
+  var deltaY = toY - fromY;
+
+  if (shape.tagName == 'line') {
+    shape.setAttributeNS(null, 'x2', toX);
+    shape.setAttributeNS(null, 'y2', toY);
+  }
+  else if (shape.tagName == 'ellipse') {
+    if (deltaX < 0) {
+      shape.setAttributeNS(null, 'cx', (fromX + deltaX / 2) + 'px');
+      shape.setAttributeNS(null, 'rx', (-deltaX / 2) + 'px');
+    }
+    else {
+      shape.setAttributeNS(null, 'cx', (fromX + deltaX / 2) + 'px');
+      shape.setAttributeNS(null, 'rx', (deltaX / 2) + 'px');
+    }
+  
+    if (deltaY < 0) {
+      shape.setAttributeNS(null, 'cy', (fromY + deltaY / 2) + 'px');
+      shape.setAttributeNS(null, 'ry', (-deltaY / 2) + 'px');
+    }
+    else {
+      shape.setAttributeNS(null, 'cy', (fromY + deltaY / 2) + 'px');
+      shape.setAttributeNS(null, 'ry', (deltaY / 2) + 'px');
+    }
+  }
+  else { 
+    if (deltaX < 0) {
+      shape.setAttributeNS(null, 'x', toX + 'px');
+      shape.setAttributeNS(null, 'width', -deltaX + 'px');
+    }
+    else {
+      shape.setAttributeNS(null, 'width', deltaX + 'px');
+    }
+  
+    if (deltaY < 0) {
+      shape.setAttributeNS(null, 'y', toY + 'px');
+      shape.setAttributeNS(null, 'height', -deltaY + 'px');
+    }
+    else {
+      shape.setAttributeNS(null, 'height', deltaY + 'px');
+    }
+  }
+};
+
+
+SVGRenderer.prototype.editCommand = function(shape, cmd, value)
+{
+  if (shape != null) {
+    if (cmd == 'fillcolor') {
+      if (value != '')
+        shape.setAttributeNS(null, 'fill', value);
+      else
+        shape.setAttributeNS(null, 'fill', 'none');
+    }
+    else if (cmd == 'linecolor') {
+      if (value != '')
+        shape.setAttributeNS(null, 'stroke', value);
+      else
+        shape.setAttributeNS(null, 'stroke', 'none');
+    }
+    else if (cmd == 'linewidth') {
+      shape.setAttributeNS(null, 'stroke-width', parseInt(value) + 'px');
+    }
+  }
+};
+
+
+SVGRenderer.prototype.queryCommand = function(shape, cmd)
+{
+  var result = '';
+  
+  if (shape != null) {
+    if (cmd == 'fillcolor') {
+      result = shape.getAttributeNS(null, 'fill');
+      if (result == 'none')
+        result = '';
+    }
+    else if (cmd == 'linecolor') {
+      result = shape.getAttributeNS(null, 'stroke');
+      if (result == 'none')
+        result = '';
+    }
+    else if (cmd == 'linewidth') {
+      result = shape.getAttributeNS(null, 'stroke');
+      if (result == 'none')
+        result = '';
+      else
+        result = shape.getAttributeNS(null, 'stroke-width');
+    }
+  }
+  
+  return result;
+};
+
+
+SVGRenderer.prototype.showTracker = function(shape) {
+  var box = shape.getBBox();
+
+  var tracker = document.getElementById('tracker');
+  if (tracker) {
+    this.remove(tracker);
+  }
+
+  var svgNamespace = 'http://www.w3.org/2000/svg';
+
+  tracker = document.createElementNS(svgNamespace, 'rect');
+  tracker.setAttributeNS(null, 'id', 'tracker');
+  tracker.setAttributeNS(null, 'x', box.x - 10);
+  tracker.setAttributeNS(null, 'y', box.y - 10);
+  tracker.setAttributeNS(null, 'width', box.width + 20);
+  tracker.setAttributeNS(null, 'height', box.height + 20);
+  tracker.setAttributeNS(null, 'fill', 'none');
+  tracker.setAttributeNS(null, 'stroke', 'blue');
+  tracker.setAttributeNS(null, 'stroke-width', '1');
+  this.svgRoot.appendChild(tracker);
+};
+
+
+SVGRenderer.prototype.getMarkup = function() {
+  return this.container.innerHTML;
+};
 
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('a 8(){7.1d=H}8.9=N H;8.9.1b=a(w){7.b=w;7.b.3.19=\'1a\';w.j.1e.1f("v","1j:1i-1h-1g:1");s 3=w.j.17();3.Y(\'v\\\\:*\',"X: W(#U#V);")};8.9.S=a(0){s c=N 11();c[\'x\']=0.16;c[\'y\']=0.15;c[\'k\']=0.14;c[\'m\']=0.12;f c};8.9.13=a(0,B,D,M,e,d,k,m){s 1;2(0==\'c\'){1=7.b.j.q(\'v:c\')}4 2(0==\'F\'){1=7.b.j.q(\'v:F\')}4 2(0==\'1l\'){1=7.b.j.q(\'v:G\')}4 2(0==\'1C\'){1=7.b.j.q(\'v:G\')}4 2(0==\'z\'){1=7.b.j.q(\'v:z\')}2(0!=\'z\'){1.3.E=\'C\';1.3.e=e;1.3.d=d;1.3.k=k;1.3.m=m;2(B!=\'\'){1.6(\'r\',\'n\');1.6(\'o\',B)}4{1.6(\'r\',\'g\')}}4{1.3.E=\'C\';1.6(\'1A\',e+\'h,\'+d+\'h\');1.6(\'K\',k+\'h,\'+m+\'h\')}2(D!=\'\'){1.6(\'l\',\'n\');1.6(\'t\',D);1.6(\'A\',M)}4{1.6(\'l\',\'g\')}7.b.R(1);f 1};8.9.Q=a(0){0.1G(n)};8.9.1H=a(0,e,d){2(0.1F==\'z\'){0.3.1z=e;0.3.1y=d}4{0.3.e=e;0.3.d=d}};8.9.1q=a(0){};8.9.1p=a(0,1o,1m,O,L){0.6(\'K\',O+\'h,\'+L+\'h\')};8.9.1x=a(0,i,p){2(0!=J){2(i==\'o\'){2(p!=\'\'){0.r=\'n\';0.o=p}4{0.r=\'g\';0.o=\'\'}}4 2(i==\'P\'){2(p!=\'\'){0.l=\'n\';0.t=p}4{0.l=\'g\';0.t=\'\'}}4 2(i==\'I\'){0.A=1w(p)+\'h\'}}};8.9.1t=a(0,i){2(0!=J){2(i==\'o\'){2(0.r==\'g\')f\'\';4 f 0.o}4 2(i==\'P\'){2(0.l==\'g\')f\'\';4 f 0.t}4 2(i==\'I\'){2(0.l==\'g\'){f\'\'}4{f(1B(0.A)*(18.1n/1D))+\'h\'}}}};8.9.1u=a(0){s u=7.S(0);s 5=1s.1r(\'5\');2(5){7.Q(5)}5=7.b.j.q(\'v:c\');5.1E=\'5\';5.3.E=\'C\';5.3.e=u.x-10;5.3.d=u.y-10;5.3.k=u.k+T;5.3.m=u.m+T;5.6(\'r\',\'g\');5.6(\'l\',\'n\');5.6(\'t\',\'1k\');5.6(\'A\',\'Z\');7.b.R(5)};8.9.1c=a(){f 7.b.1v};',62,106,'shape|vml|if|style|else|tracker|setAttribute|this|VMLRenderer|prototype|function|container|rect|top|left|return|false|px|cmd|ownerDocument|width|stroked|height|true|fillcolor|value|createElement|filled|var|strokecolor|box||elem|||line|strokeweight|fillColor|absolute|lineColor|position|roundrect|oval|AbstractRenderer|linewidth|null|to|toY|lineWidth|new|toX|linecolor|remove|appendChild|bounds|20|default|VML|url|behavior|addRule|1px||Object|offsetHeight|create|offsetWidth|offsetTop|offsetLeft|createStyleSheet|screen|overflow|hidden|init|getMarkup|base|namespaces|add|com|microsoft|schemas|urn|blue|ellipse|fromY|logicalXDPI|fromX|resize|track|getElementById|document|queryCommand|showTracker|innerHTML|parseInt|editCommand|marginTop|marginLeft|from|parseFloat|circ|72|id|tagName|removeNode|move'.split('|'),0,{}))
+/*----------------------------------------------------------------------------
+ VMLRENDERER 1.0
+ VML Renderer For RichDraw
+ -----------------------------------------------------------------------------
+ Created by Mark Finkle (mark.finkle@gmail.com)
+ Implementation of VML based renderer.
+ -----------------------------------------------------------------------------
+ Copyright (c) 2006 Mark Finkle
+
+ This program is  free software;  you can redistribute  it and/or  modify it
+ under the terms of the MIT License.
+
+ Permission  is hereby granted,  free of charge, to  any person  obtaining a
+ copy of this software and associated documentation files (the "Software"),
+ to deal in the  Software without restriction,  including without limitation
+ the  rights to use, copy, modify,  merge, publish, distribute,  sublicense,
+ and/or  sell copies  of the  Software, and to  permit persons to  whom  the
+ Software is  furnished  to do  so, subject  to  the  following  conditions:
+ The above copyright notice and this  permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS",  WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED,  INCLUDING BUT NOT LIMITED TO  THE WARRANTIES  OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR  COPYRIGHT  HOLDERS BE  LIABLE FOR  ANY CLAIM,  DAMAGES OR OTHER
+ LIABILITY, WHETHER  IN AN  ACTION OF CONTRACT, TORT OR  OTHERWISE,  ARISING
+ FROM,  OUT OF OR  IN  CONNECTION  WITH  THE  SOFTWARE OR THE  USE OR  OTHER
+ DEALINGS IN THE SOFTWARE.
+ -----------------------------------------------------------------------------
+ Dependencies:
+ History:
+ 2006-04-05 | Created
+ --------------------------------------------------------------------------*/
+
+
+function VMLRenderer() {
+	this.base = AbstractRenderer;
+}
+
+
+VMLRenderer.prototype = new AbstractRenderer;
+
+
+VMLRenderer.prototype.init = function(elem) {
+  this.container = elem;
+  
+  this.container.style.overflow = 'hidden';
+  
+	// Add VML includes and namespace
+  elem.ownerDocument.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+
+	var style = elem.ownerDocument.createStyleSheet();
+	style.addRule('v\\:*', "behavior: url(#default#VML);");
+};
+
+
+VMLRenderer.prototype.bounds = function(shape) {
+  var rect = new Object();
+  rect['x'] = shape.offsetLeft;
+  rect['y'] = shape.offsetTop;
+  rect['width'] =  shape.offsetWidth;
+  rect['height'] = shape.offsetHeight;
+  return rect;
+};
+
+
+VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+  var vml;
+  if (shape == 'rect') {
+    vml = this.container.ownerDocument.createElement('v:rect');
+  }
+  else if (shape == 'roundrect') {
+    vml = this.container.ownerDocument.createElement('v:roundrect');
+  }
+  else if (shape == 'ellipse') {
+    vml = this.container.ownerDocument.createElement('v:oval');
+  }
+  else if (shape == 'circ') {
+	vml = this.container.ownerDocument.createElement('v:oval');
+  }
+  else if (shape == 'line') {
+    vml = this.container.ownerDocument.createElement('v:line');
+  }
+
+  if (shape != 'line') {  
+    vml.style.position = 'absolute';
+    vml.style.left = left;
+    vml.style.top = top;
+    vml.style.width = width;
+    vml.style.height = height;
+
+    if (fillColor != '') {
+      vml.setAttribute('filled', 'true');
+      vml.setAttribute('fillcolor', fillColor);
+    }
+    else {
+      vml.setAttribute('filled', 'false');
+    }
+  }
+  else {
+    vml.style.position = 'absolute';
+    vml.setAttribute('from', left + 'px,' + top + 'px');
+    vml.setAttribute('to', width + 'px,' + height + 'px');
+  }
+
+  if (lineColor != '') {
+    vml.setAttribute('stroked', 'true');
+    vml.setAttribute('strokecolor', lineColor);
+    vml.setAttribute('strokeweight', lineWidth);
+  }
+  else {
+    vml.setAttribute('stroked', 'false');
+  }
+
+  this.container.appendChild(vml);
+  return vml;
+};
+
+
+VMLRenderer.prototype.remove = function(shape) {
+  shape.removeNode(true);
+};
+
+
+VMLRenderer.prototype.move = function(shape, left, top) {
+  if (shape.tagName == 'line') {
+    shape.style.marginLeft = left;
+    shape.style.marginTop = top;
+  }
+  else {
+    shape.style.left = left;
+    shape.style.top = top;
+  }
+};
+
+
+VMLRenderer.prototype.track = function(shape) {
+  // TODO
+};
+
+
+VMLRenderer.prototype.resize = function(shape, fromX, fromY, toX, toY) {
+  shape.setAttribute('to', toX + 'px,' + toY + 'px');
+  /*
+  var deltaX = toX - fromX;
+  var deltaY = toY - fromY;
+  if (shape.tagName == 'line') {
+	shape.setAttribute('to', toX + 'px,' + toY + 'px');
+  }
+  else {
+    if (deltaX < 0) {
+      shape.style.left = toX + 'px';
+      shape.style.width = -deltaX + 'px';
+    }
+    else {
+      shape.style.width = deltaX + 'px';
+    } 
+    if (deltaY < 0) {
+      shape.style.top = toY + 'px';
+      shape.style.height = -deltaY + 'px';
+    }
+    else {
+      shape.style.height = deltaY + 'px';
+    }
+  }
+  */
+};
+
+VMLRenderer.prototype.editCommand = function(shape, cmd, value)
+{
+  if (shape != null) {
+    if (cmd == 'fillcolor') {
+      if (value != '') {
+        shape.filled = 'true';
+        shape.fillcolor = value;
+      }
+      else {
+        shape.filled = 'false';
+        shape.fillcolor = '';
+      }
+    }
+    else if (cmd == 'linecolor') {
+      if (value != '') {
+        shape.stroked = 'true';
+        shape.strokecolor = value;
+      }
+      else {
+        shape.stroked = 'false';
+        shape.strokecolor = '';
+      }
+    }
+    else if (cmd == 'linewidth') {
+      shape.strokeweight = parseInt(value) + 'px';
+    }
+  }
+};
+
+
+VMLRenderer.prototype.queryCommand = function(shape, cmd)
+{
+  if (shape != null) {
+    if (cmd == 'fillcolor') {
+      if (shape.filled == 'false')
+        return '';
+      else
+        return shape.fillcolor;
+    }
+    else if (cmd == 'linecolor') {
+      if (shape.stroked == 'false')
+        return '';
+      else
+        return shape.strokecolor;
+    }
+    else if (cmd == 'linewidth') {
+      if (shape.stroked == 'false') {
+        return '';
+      }
+      else {
+        // VML always transforms the pixels to points, so we have to convert them back
+        return (parseFloat(shape.strokeweight) * (screen.logicalXDPI / 72)) + 'px';
+      }
+    }
+  }
+};
+
+
+VMLRenderer.prototype.showTracker = function(shape) {
+  var box = this.bounds(shape);
+
+  var tracker = document.getElementById('tracker');
+  if (tracker) {
+    this.remove(tracker);
+  }
+
+  tracker = this.container.ownerDocument.createElement('v:rect');
+  tracker.id = 'tracker';
+  tracker.style.position = 'absolute';
+  tracker.style.left = box.x - 10;
+  tracker.style.top = box.y - 10;
+  tracker.style.width = box.width + 20;
+  tracker.style.height = box.height + 20;
+  tracker.setAttribute('filled', 'false');
+  tracker.setAttribute('stroked', 'true');
+  tracker.setAttribute('strokecolor', 'blue');
+  tracker.setAttribute('strokeweight', '1px');
+  this.container.appendChild(tracker);
+};
+
+
+VMLRenderer.prototype.getMarkup = function() {
+  return this.container.innerHTML;
+};
 
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

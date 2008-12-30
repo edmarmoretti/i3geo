@@ -131,71 +131,6 @@ Veja:
 */
 g_3dmap = "";
 /*
-Variable: g_mostraRosa
-
-Variável que define se a rosa dos ventos deve ser mostrada junto ao mouse.
-
-A rosa dos ventos permite a navegação pelo mapa sem a necessidade de alterar a opção atual.
-Por exemplo, pode-se navegar pelo mapa mesmo estando na opção de identificação.
-
-O aparecimento da rosa é temporizada.
-
-Veja:
-
-<funcoes.js>
-
-Values:
-
-sim|nao
-*/
-g_mostraRosa = "sim";
-/*
-Variable: g_visual
-
-Indica qual o tipo de visual para abertura do mapa.
-
-Os visuais disponíveis são obtidos do diretório i3geo/imagens/visual.
-
-Veja:
-
-<funcoes.js>, <iniciamma.js>
-*/
-g_visual = "default";
-
-/*
-Variable: g_janelaMen (depreciado)
-*/
-/*
-Variable: g_downloadbase (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
-*/
-/*
-Variable: g_conectargeorss (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
-*/
-/*
-Variable: g_nuvemTags (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
-*/
-/*
-Variable: g_uploadlocal (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de upload.
-*/
-/*
-Variable: g_uploaddbf (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
-*/
-/*
-Variable: g_conectarwms (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
-*/
-/*
 Variable: g_docaguias
 
 Variável que define se o mapa deve iniciar com as guias em janela ou não. As guias em janela causam o desenho de um mapa com tamanho extendido.
@@ -318,18 +253,6 @@ Veja:
 */
 g_funcaoTip = "verificaTipDefault()";
 /*
-Variable: g_tempotip
-
-Tempo utilizado para verificar se o mouse está parado.
-
-Se o mouse estiver parado, a função de mostrar tip é ativada.
-
-Veja:
-
-<funcoes.js>
-*/
-g_tempotip = 2500;
-/*
 Variable: g_tipotip
 
 Define como o tip será mostrado. O tipo simples mostra apenas os dados, sem o cabeçalho.
@@ -401,20 +324,6 @@ g_guiaativa = "guia1";
 Section: Eventos
 */
 /*
-Variable: g_funcoesMouseParado
-
-Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa por alguns instantes.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesMouseParado = new Array(
-	"pegaCoordenadaUTM()",
-	"verificaTip()",
-	"mostraRosaDosVentos()"
-);
-/*
 Variable: g_funcoesClickMapaDefault
 
 Nome das funções padrão que serão executadas quando o usuário clicar no mapa.
@@ -445,14 +354,12 @@ Veja:
 <iniciamma.js>
 */
 g_funcoesMousemoveMapaDefault = new Array(
-	"movecursor()",
 	"movePan()",
 	"moveLonglat()",
-	"moveSelecaoPoli()",
-	"atualizaLocalizarxy()"
+	"moveSelecaoPoli()"
 );
 /*
-Variable: g_funcoesNevegaMapaDefault
+Variable: g_funcoesNavegaMapaDefault
 
 Nome das funções padrão que serão executadas quando o usuário navegar pelo mapa.
 
@@ -460,7 +367,7 @@ Veja:
 
 <iniciamma.js>
 */
-g_funcoesNevegaMapaDefault = new Array(
+g_funcoesNavegaMapaDefault = new Array(
 	"atualizaEscalaNumerica()"
 );
 /*
@@ -558,54 +465,78 @@ g_listaFuncoesBotoes = {
 	{
 		//Insere a opção de zoom anterior e posterior.
 		iddiv:"historicozoom",
+		tipo:"",
 		dica:$trad("d1"),
 		constroiconteudo:'ativaHistoricoZoom("historicozoom")'
 	},
 	{
-		//Insere a opção de localização de coordenadas.
-		iddiv:"localizarxy",
-		dica:$trad("d1"),
-		constroiconteudo:'ativaLocalizarxy("localizarxy")'
-	},
-	{
 		//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
 		iddiv:"zoomtot",
+		tipo:"",
 		dica:$trad("d2"),
-		funcaoonclick:function(){i3GEO.navega.zoomExt(g_locaplic,g_sid,g_tipoimagem,objmapa.extentTotal);}
+		funcaoonclick:function(){i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,objmapa.extentTotal);}
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom interativo.
 		iddiv:"zoomli",
+		tipo:"dinamico",
 		dica:$trad("d3"),
-		funcaoonclick:function()
-		{mudaiconf('zoomli');g_operacao='navega';}
+		funcaoonclick:function(){
+			g_operacao='navega';
+			g_tipoacao='zoomli';
+			i3GEO.barraDeBotoes.ativaIcone("zoomli");
+			if($i("img")){
+				$i("img").title = "";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
+			}
+		}
 	},
 	{
 		//Ativa o botão que realiza a operação de deslocamento (pan).
 		iddiv:"pan",
+		tipo:"dinamico",
 		dica:$trad("d4"),
-		funcaoonclick:function()
-		{mudaiconf('pan');g_tipoacao='pan';g_operacao='navega';}
+		funcaoonclick:function(){
+			g_tipoacao='pan';
+			g_operacao='navega';
+			i3GEO.barraDeBotoes.ativaIcone("pan");
+			if($i("img")){
+				$i("img").title = "";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan","img",i3GEO.configura.locaplic);
+			}
+		}
 	},
 	{
 		//botão que realiza a operação de zoom in.
 		iddiv:"zoomiauto",
+		tipo:"",
 		dica:$trad("d5"),
-		funcaoonclick:function(){i3GEO.navega.zoomin(g_locaplic,g_sid);}
+		funcaoonclick:function(){i3GEO.navega.zoomin(i3GEO.configura.locaplic,i3GEO.configura.sid);}
 	},
 	{
 		//botão que realiza a operação de zoom out
 		iddiv:"zoomoauto",
+		tipo:"",
 		dica:$trad("d6"),
-		funcaoonclick:function(){i3GEO.navega.zoomout(g_locaplic,g_sid);}
+		funcaoonclick:function(){i3GEO.navega.zoomout(i3GEO.configura.locaplic,i3GEO.configura.sid);}
 	},
 	{
 		//botão que abre a função de identificação.
 		iddiv:"identifica",
+		tipo:"dinamico",
 		dica:$trad("d7"),
 		funcaoonclick:function()
-		{	mudaiconf('identifica');
-			g_operacao='identifica';
+		{
+			if($i("img")){
+				$i("img").title = "";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"identifica","img",i3GEO.configura.locaplic);
+			}
+			i3GEO.barraDeBotoes.ativaIcone("identifica");
+			g_tipoacao='identifica';
+			cliqueIdentifica = function(){
+				if (g_tipoacao == "identifica")
+				{wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");}
+			};
 			if(g_funcoesClickMapaDefault.toString().search("cliqueIdentifica()") < 0)
 			{g_funcoesClickMapaDefault.push("cliqueIdentifica()");}
 		}
@@ -613,82 +544,110 @@ g_listaFuncoesBotoes = {
 	{
 		//botão que abre a janela com o valor da extensão geográfica do mapa atual
 		iddiv:"exten",
+		tipo:"",
 		dica:$trad("d8"),
 		funcaoonclick:function()
-		{mostraExten();}
+		{wdocaf("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica");}
 	},
 	{
 		//botão que abre a janela com o mapa de referência
 		iddiv:"referencia",
+		tipo:"",
 		dica:$trad("d9"),
 		funcaoonclick:function()
 		{initJanelaRef();}
 	},
 	{
-		//apresentação da escala numérica
-		iddiv:"escala",
-		dica:$trad("d10"),
-		constroiconteudo:'ativaEscalaNumerica("escala")'
-	},
-	{
 		//botão de busca na wikipedia
 		iddiv:"wiki",
+		tipo:"",
 		dica:$trad("d11"),
-		funcaoonclick:function()
-		{wiki();}
+		funcaoonclick:function(){
+			g_operacao = "navega";
+			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
+			if(g_funcoesNavegaMapaDefault.toString().search("atualizawiki()") < 0)
+			{g_funcoesNavegaMapaDefault.push("atualizawiki()");}		
+		}
 	},
 	{
 		//botão de busca de fotos
 		iddiv:"buscafotos",
+		tipo:"",
 		dica:"Fotos",
-		funcaoonclick:function()
-		{buscafotos();}
+		funcaoonclick:function(){
+			g_operacao = "navega";
+			wdocaf("550px","400px",i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.htm","","","Fotos");
+			i3GEO.util.criaPin();
+		}
 	},
 	{
 		//botão de impressão
 		iddiv:"imprimir",
+		tipo:"",
 		dica:$trad("d12"),
 		funcaoonclick:function()
-		{imprimir();}
+		{wdocaf("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");}
 	},
 	{
 		//botão de localização do usuário pelo IP
 		iddiv:"ondeestou",
+		tipo:"",
 		dica:$trad("d13"),
 		funcaoonclick:function()
-		{i3GEO.navega.zoomIP(g_locaplic,g_sid);}
+		{i3GEO.navega.zoomIP(i3GEO.configura.locaplic,i3GEO.configura.sid);}
 	},
 	{
 		//abre a opção de geração de um modelo virtual de elevação
 		iddiv:"v3d",
+		tipo:"",
 		dica:$trad("d14"),
 		funcaoonclick:function()
-		{wdocaf("400px","200px",g_locaplic+"/ferramentas/3d/index.htm","","","3d");}
+		{wdocaf("400px","200px",i3GEO.configura.locaplic+"/ferramentas/3d/index.htm","","","3d");}
 	},
 	{
 		//Ativa o botão que realiza a operação de de busca no Google
 		iddiv:"google",
+		tipo:"",
 		dica:$trad("d15"),
-		funcaoonclick:function()
-		{google();}
+		funcaoonclick:function(){
+			i3GEO.util.criaBox();
+			g_operacao = "navega";
+			if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+			else
+			{wdocaf("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+			if(g_funcoesNavegaMapaDefault.toString().search("atualizagoogle()") < 0)
+			{g_funcoesNavegaMapaDefault.push("atualizagoogle()");}		
+		}
 	},
 	{
 		//Ativa o botão que realiza a operação de de busca no site Scielo
 		iddiv:"scielo",
+		tipo:"",
 		dica:$trad("d16"),
-		funcaoonclick:function()
-		{scielo();}
+		funcaoonclick:function(){
+			g_operacao = "navega";
+			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
+			if(g_funcoesNavegaMapaDefault.toString().search("atualizascielo()") < 0)
+			{g_funcoesNavegaMapaDefault.push("atualizascielo()");}
+		}
 	},
 	{
 		//Ativa o botão que realiza a operação de de busca no site confluence
 		iddiv:"confluence",
+		tipo:"",
 		dica:$trad("d17"),
-		funcaoonclick:function()
-		{confluence();}
+		funcaoonclick:function(){
+			g_operacao = "navega";
+			wdocaf("250px","190px",i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm","","","confluence");
+			i3GEO.util.criaBox();
+			if(g_funcoesNavegaMapaDefault.toString().search("atualizaconfluence()") < 0)
+			{g_funcoesNavegaMapaDefault.push("atualizaconfluence()");}		
+		}
 	},
 	{
 		//Ativa o botão que abre a lente de aumento
 		iddiv:"lentei",
+		tipo:"",
 		dica:$trad("d18"),
 		funcaoonclick:function()
 		{lenteDeAumento();}
@@ -696,6 +655,7 @@ g_listaFuncoesBotoes = {
 	{
 		//Coloca as guias em uma janela móvel
 		iddiv:"encolheFerramentas",
+		tipo:"",
 		dica:$trad("d19"),
 		funcaoonclick:function()
 		{docaguias();}
@@ -703,79 +663,104 @@ g_listaFuncoesBotoes = {
 	{
 		//botão de reinicialização do mapa que restaura as condições iniciais do mapa
 		iddiv:"reinicia",
+		tipo:"",
 		dica:$trad("d20"),
-		funcaoonclick:function()
-		{reiniciaMapa();}
+		funcaoonclick:function(){
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+i3GEO.configura.sid;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"reiniciaMapa",ajaxredesenha);
+		}
 	},
 	{
 		//botão de medição de distâncias
 		iddiv:"mede",
+		tipo:"dinamico",
 		dica:$trad("d21"),
-		funcaoonclick:function()
-		{mede();}
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("mede");
+			if($i("img")){
+				$i("img").title = "";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
+			}
+			mede();
+		}
 	},
 	{
 		//botão de medição de área
 		iddiv:"area",
+		tipo:"dinamico",
 		dica:$trad("d21a"),
-		funcaoonclick:function()
-		{area();}
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("area");
+			if($i("img")){
+				$i("img").title = "";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area","img",i3GEO.configura.locaplic);
+			}
+			area();
+		}
 	},
 	{
 		//botão de digitalização
 		iddiv:"inserexy",
+		tipo:"dinamico",
 		dica:$trad("d22"),
-		funcaoonclick:function()
-		{inserexy();}
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("inserexy");
+			inserexy();
+			if($i("img")){
+				$i("img").title = "clique para inserir um ponto";
+				$i("img").style.cursor="crosshair";
+			}
+		}
 	},
 	{
 		//botão de inclusão de gráficos
 		iddiv:"inseregrafico",
+		tipo:"dinamico",
 		dica:$trad("d23"),
-		funcaoonclick:function()
-		{inseregrafico();}
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
+			inseregrafico();
+			if($i("img")){
+				$i("img").title = "clique para incluir o gráfico";
+				$i("img").style.cursor="pointer";
+			}		
+		}
 	},
 	{
 		//botão de seleção
 		iddiv:"selecao",
+		tipo:"dinamico",
 		dica:$trad("d24"),
-		funcaoonclick:function()
-		{selecao();}
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("selecao");
+			selecao();
+			if($i("img")){
+				$i("img").title = "";
+				$i("img").style.cursor="pointer";
+			}
+		}
 	},
 	{
 		//botão de inserção de toponímia
 		iddiv:"textofid",
+		tipo:"dinamico",
 		dica:$trad("d25"),
-		funcaoonclick:function()
-		{textofid();}
-	},
-	{
-		//opções de alteração do visual do mapa
-		iddiv:"visual",
-		dica:$trad("d26"),
-		funcaoonclick:"",
-		constroiconteudo:'visual("visual")'
+		funcaoonclick:function(){
+			i3GEO.barraDeBotoes.ativaIcone("textofid");
+			textofid();
+			if($i("img")){
+				$i("img").title = "clique para inserir o texto";
+				$i("img").style.cursor="pointer";
+			}
+		}
 	},
 	{
 		//monta o menu suspenso
 		iddiv:"menus",
+		tipo:"",
 		constroiconteudo:'montaMenuSuspenso("menus")'
-	},
-	{
-		//ativa as opções de busca rápida
-		iddiv:"buscaRapida",
-		constroiconteudo:'ativaBuscaRapida("buscaRapida")'
-	},
-	{
-		//sobe os botoes da barra de ferramentas
-		iddiv:"sobeferramentas",
-		funcaoonclick:function()
-		{sobeferramentas();}
-	},
-	{
-		//desce os botoes da barra de ferramentas
-		iddiv:"desceferramentas",
-		funcaoonclick:function()
-		{desceferramentas();}
 	}	
 ]};

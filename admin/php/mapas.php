@@ -44,6 +44,8 @@ switch ($funcao)
 	break;
 
 	case "alterarMapa":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$novo = alterarMapa();
 	$sql = "SELECT * from i3geoadmin_mapas WHERE id_mapa = '".$novo."'";
 	retornaJSON(pegaDados($sql));
@@ -51,11 +53,15 @@ switch ($funcao)
 	break;
 	
 	case "excluirMapa":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(excluirMapa());
 	exit;
 	break;
 	
 	case "importarXmlMapas":
+	if(verificaEditores($editores) == "nao")
+	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(importarXmlMapas());
 	exit;
 	break;
@@ -127,7 +133,7 @@ function importarXmlMapas()
 	//importa os grupos
 	//
 	$mapasExistentes = array();
-	$q = $dbhw->query("select * from i3geoadmin_mapas");
+	$q = $dbh->query("select * from i3geoadmin_mapas");
 	$resultado = $q->fetchAll();
 	foreach($resultado as $r)
 	{$mapasExistentes[$r["nome_mapa"]] = 0;}

@@ -136,6 +136,7 @@ function mostraxy(wkt)
 	yMax = y[(y.length)-1]
  	var xyMin = window.parent.i3GEO.util.dd2tela(xMin,yMin,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
  	var xyMax = window.parent.i3GEO.util.dd2tela(xMax,yMax,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+	window.parent.i3GEO.util.criaBox("boxg")
 	var box = window.parent.$i("boxg")
 	var w = xyMax[0]-xyMin[0]
 	var h = xyMin[1]-xyMax[1]
@@ -144,7 +145,6 @@ function mostraxy(wkt)
 	box.style.height = h
 	box.style.top = xyMax[1]+"px"
 	box.style.left = xyMin[0]+"px"
-	
 }
 function zoom(wkt,layer,gid,nm)
 {
