@@ -210,7 +210,7 @@ i3GEO.arvoreDeCamadas = {
     		buildTree();
 		}();
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td><img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' /></td></tr></table>";
+		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td><img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' /></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		var c = temas.length;
@@ -383,13 +383,13 @@ i3GEO.arvoreDeCamadas = {
 	 		var farol = "maisamarelo.png";
 			var mfarol = $trad("t11");
 		}
-		tnome = "&nbsp;<img id='farol"+ltema.name+"' src='"+$im(farol)+"' title='"+mfarol+"' \>";
-		tnome += "&nbsp;<img  id='idx"+ltema.name+"' class='x' src='"+$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-		tnome += "&nbsp;<img class='sobe' src='"+$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-		tnome += "&nbsp;<img class='desce' src='"+$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+		tnome = "&nbsp;<img id='farol"+ltema.name+"' src='"+i3GEO.util.$im(farol)+"' title='"+mfarol+"' \>";
+		tnome += "&nbsp;<img  id='idx"+ltema.name+"' class='x' src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+		tnome += "&nbsp;<img class='sobe' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+		tnome += "&nbsp;<img class='desce' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
 		//a operação de zoom para o tema não funciona na interface flamingo
 		if( (ltema.zoomtema == "sim") && (!$i("flamingo")))
-		{tnome += "&nbsp;<img class='extent' src='"+$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{tnome += "&nbsp;<img class='extent' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 		var d = {html:tnome};
 		var iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 		iconesNode.isLeaf = true;
@@ -421,11 +421,11 @@ i3GEO.arvoreDeCamadas = {
 		YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
 		var idtema = node.data.idopcoes;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
-		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+$trad("t20")+"</span> "+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema.name+"\")' src='"+$im("branco.gif")+"' />";
+		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+$trad("t20")+"</span> "+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
-		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"+$trad("t21")+" </span>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='mudanomef(\""+ltema.name+"\")' src='"+$im("branco.gif")+"' />";
+		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"+$trad("t21")+" </span>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='mudanomef(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
@@ -626,11 +626,11 @@ i3GEO.arvoreDeCamadas = {
 		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";
 		html += " />";
 		if (tema.contextoescala == "sim")
-		{html += "&nbsp;<img src="+$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
+		{html += "&nbsp;<img src="+i3GEO.util.$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
 		if (tema.sel == "sim") //o tema tem selecao
-		{html += "&nbsp;<img src="+$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{html += "&nbsp;<img src="+i3GEO.util.$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 		if ((tema.download == "sim") || (tema.download == "SIM"))
-		{html += "&nbsp;<img src="+$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{html += "&nbsp;<img src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
 		html += "&nbsp;<span style='cursor:move'>"+tema.tema+"</span>";
 		html += "</p>";
 		return(html);

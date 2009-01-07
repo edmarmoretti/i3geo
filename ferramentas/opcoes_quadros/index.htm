@@ -6,10 +6,10 @@
 <title></title>
 </head>
 <body>
-<div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.rebobinaf()" >
+<div style="top:0px;left:0px;text-align:left" onclick="limpa()" >
   <input id=botao1 size=10  type=button value="Limpa"/><br>
 </div><br>
-<div style="top:0px;left:0px;text-align:left" onclick="javascript:window.parent.filmeanimaf();window.parent.janima=0">
+<div style="top:0px;left:0px;text-align:left" onclick="anima()">
   <input  id=botao2 size=10 type=button value="Roda"/>
 </div>
 	<table summary="" class=lista3 width="90%"> 
@@ -19,7 +19,7 @@
 		</tr>
 		<tr>	
 			<td>N. de quadros:</td>
-			<td><input  style="cursor:text" size=4 class=digitar type='text' id=nquadros value='' onchange="window.parent.gerafilmef(this.value)"/></td>
+			<td><input  style="cursor:text" size=4 class=digitar type='text' id=nquadros value='' onchange="window.parent.i3GEO.gadgets.quadros.inicia(this.value);window.parent.i3GEO.gadgets.quadros.quadroatual = -1;"/></td>
 		</tr>
 	</table>
 
@@ -34,6 +34,16 @@ YAHOO.example.init = function ()
 	}
 	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
+function limpa()
+{
+	var doc = window.parent
+	doc.i3GEO.gadgets.quadros.inicia(doc.i3GEO.gadgets.quadros.quadrosfilme.length)
+	doc.i3GEO.gadgets.quadros.quadroatual = -1
+}
+function anima()
+{
+	window.parent.i3GEO.gadgets.quadros.anima();
+}
 </script>
 </body>
 </html>

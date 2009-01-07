@@ -452,7 +452,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			{var p = new OpenLayers.Pixel(e.x,e.y);}
 			//altera o indicador de localizacao
 			var lonlat = map.getLonLatFromViewPortPx(p);
-			var d = i3GEO.util.dd2dms(lonlat.lon,lonlat.lat);
+			var d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 			$i("localizarxy").innerHTML = d[0]+" , "+d[1]
 		})
 		map.events.register("click", map, function(e)

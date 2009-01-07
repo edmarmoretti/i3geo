@@ -179,20 +179,6 @@ Indica se o mapa deve ou não ser deslocado.
 */
 g_panM = "nao";
 /*
-Variable: quadrofilme
-
-Array que guarda os objetos do quadro de animação.
-Cada elemento guarda um objeto com parâmetros específicos da classe quadrofilme
-*/
-quadrosfilme = new Array();
-/*
-Variable: g_quadrooriginal
-
-Guarda a URL da imagem do mapa atual.
-É utilizada para recuperar a imagem correta do corpo do mapa atual, uma vez que ao mover de um objeto quadofilme para outro, a imagem do corpo do mapa é alterada.
-*/
-g_quadrooriginal = "";
-/*
 Variable: g_r
 
 Indica se o software R esta instalado (sim ou nao). É preenchida na inicialização do mapa via AJAX.
@@ -566,7 +552,8 @@ function Mapa(e,m)
 				//
 				//gera os ícones para animação
 				//
-				gerafilmef(10);
+				i3GEO.gadgets.quadros.inicia(10);
+				i3GEO.gadgets.quadros.grava("extensao",mapexten);
 				//
 				//gera a lista de temas da guia temas
 				//
@@ -716,7 +703,6 @@ function Mapa(e,m)
 				if (i3GEO.util.pegaCookie("g_mapaRefDisplay")){g_mapaRefDisplay = i3GEO.util.pegaCookie("g_mapaRefDisplay");}
 				if (g_mapaRefDisplay == "block"){initJanelaRef();}
 			}
-			if($i("img")){g_quadrooriginal = $i("img").src;}
 			i3GEO.janela.fechaAguarde("montaMapa");
 			if (g_docaguias == "sim"){docaguias();}
 			if (document.getElementById("botao3d"))
@@ -813,14 +799,14 @@ function Mapa(e,m)
 				{
 					var re = new RegExp("&mode=map", "g");
 					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
-					gravaQuadro("referencia",$i("imagemReferencia").src);
+					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 				}
 			}
 		}
 		else
 		{
 			if($i("imagemReferencia"))
-			gravaQuadro("referencia",$i("imagemReferencia").src);
+			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 		}		
 	};
 	/*

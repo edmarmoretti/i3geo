@@ -490,7 +490,7 @@ i3GEO.arvoreDeTemas = {
 		//opção de busca de temas
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca == true){
 			var insp = "<br><br><table  cellspacing='0' cellpadding='0' ><tr><td style='text-align:left;font-size:10px;'>";
-			insp += "<span style='font-size:12px'>&nbsp;"+$trad("a1")+"</span><input class='digitar' type='text' id='i3geo_buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema(document.getElementById(\"i3geo_buscatema\").value)' style='cursor:pointer;top:2px;position:relative;' /></p></td></tr></table>&nbsp;";
+			insp += "<span style='font-size:12px'>&nbsp;"+$trad("a1")+"</span><input class='digitar' type='text' id='i3geo_buscatema' size='15' value=''  /><img  class='tic' title='"+$trad("a1")+"' src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema(document.getElementById(\"i3geo_buscatema\").value)' style='cursor:pointer;top:2px;position:relative;' /></p></td></tr></table>&nbsp;";
 			var d = {html:insp};
 			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,false);
 		}
@@ -807,9 +807,9 @@ i3GEO.arvoreDeTemas = {
 			var n = parseInt(node.data.nacessos / (i3GEO.arvoreDeTemas.FATORESTRELA*1));		
 			if(n >= 5){var n = 5;}
 			if(n > 0)
-			var html = "<img src='"+$im("e"+n+".png")+"'/>";
+			var html = "<img src='"+i3GEO.util.$im("e"+n+".png")+"'/>";
 			else
-			var html = "<img src='"+$im("e0.png")+"'/>";
+			var html = "<img src='"+i3GEO.util.$im("e0.png")+"'/>";
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
@@ -827,17 +827,17 @@ i3GEO.arvoreDeTemas = {
 	outrasOpcoesHTML: function(){
 		var ins = "<table width='120px' ><tr>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf == true)
-		ins += "<td><img class='uploaddbf' onclick='uploaddbf()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
+		ins += "<td><img class='uploaddbf' onclick='uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadlocal == true)
-		ins += "<td><img class='upload' onclick='upload()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
+		ins += "<td><img class='upload' onclick='upload()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.downloadbase == true)
-		ins += "<td><img onclick='downloadbase()' class='download' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
+		ins += "<td><img onclick='downloadbase()' class='download' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwms == true)
-		ins += "<td><img class='conectarwms' onclick='conectarwms()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
+		ins += "<td><img class='conectarwms' onclick='conectarwms()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss == true)
-		ins += "<td><img class='conectargeorss' onclick='conectargeorss()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
+		ins += "<td><img class='conectargeorss' onclick='conectargeorss()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags == true)
-		ins += "<td><img class='nuvemtags' onclick='nuvemTags()' src='"+$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
+		ins += "<td><img class='nuvemtags' onclick='nuvemTags()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 		ins += "</tr></table>";
 		return(ins);
 	},

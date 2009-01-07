@@ -50,7 +50,9 @@ i3GEO.gadgets = {
 		"mostraBuscaRapida":
 		{idhtml:"buscaRapida"},
 		"mostraVisual":
-		{idhtml:"visual"}
+		{idhtml:"visual"},
+		"mostraQuadros":
+		{idhtml:"lugarquadros"}
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -140,10 +142,10 @@ i3GEO.gadgets = {
 				ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
 				ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
 				ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-				var temp = 'var xxx = i3GEO.util.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
+				var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
 				temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
 				temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
-				ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+$im("branco.gif")+"' id=procurarxy /></td>";
+				ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
 				ins += "</tr></table>";
 				$i(id).innerHTML = ins;
 				$i3geo_temp_xg = $i("xg");
@@ -187,7 +189,7 @@ i3GEO.gadgets = {
 				var ins = "<table><tr><td>1:"+i;
 				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
-				ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}
 			if(g_funcoesNavegaMapaDefault.toString().search("atualizaEscalaNumerica()") < 0)
@@ -218,11 +220,34 @@ i3GEO.gadgets = {
 			}
 			var i = $inputText(id,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
 			var ins = "<table><tr><td>"+i;
-			ins += "</td><td><img src='"+$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
+			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
 			$i(id).innerHTML = ins;
 		}	
 	},
+	/*
+	Function: visual
+	
+	Gera os ícones e controla as opções de modificação do visual do mapa.
+	
+	O visual consiste na definição dos ícones utilizados no mapa. O visual pode
+	ser modificado na inicialização ou então escolhido pelo usuário.
+	
+	Os visuais disponíveis são definidos no servidor e consistem em diretórios localizados
+	em i3geo/imagens/visual. A lista de visuais disponíveis é obtida na inicialização do i3geo.
+	
+	Os ícones para mudança do visual são incluídos no elemento HTML definido em
+	i3geo.gadgets.PARAMETROS.visual
+	*/
 	visual: {
+		/*
+		Property: visual.inicia
+		
+		Constrói os ícones de escolha do visual.
+		
+		Parameters:
+		
+		id {String} - id do elemento que receberá os ícones (opcional)
+		*/
 		inicia: function(id){
 			if(arguments.length == 0)
 			{var id = i3GEO.gadgets.PARAMETROS.mostraVisual.idhtml;}
@@ -241,6 +266,15 @@ i3GEO.gadgets = {
 				}		
 			}
 		},
+		/*
+		Property: visual.troca
+		
+		Troca o visual atual. A lista de visuais disponíveis é obtida em objmapa.listavisual
+		
+		Parameters:
+		
+		visual {String} - nome do visual que será utilizado.
+		*/
 		troca: function(visual){
 			var monta = function(retorno){
 				try{
@@ -286,22 +320,19 @@ i3GEO.gadgets = {
 						while(j--)
 					}
 					//faz a troca em bg
-					var elementos = new Array("vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
+					var elementos = new Array("barraSuperior","barraInferior","vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
 					var i = elementos.length-1;
 					if(i >= 0){
 						do{
 							if ($i(elementos[i])){
-								$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
-								for (var j=0;j < imgs.length; j++){
-									var busca = imgs[j].split(".");
-									if (busca[0] == elementos[i])
-									{$i(elementos[i]).style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
-								}				
+								var nimagem = $i(elementos[i]).style.backgroundImage.replace(i3GEO.configura.visual,visual);
+								$i(elementos[i]).style.backgroundImage = nimagem;
+								//$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
 							}
 						}
 						while(i--)
 					}
-					g_visual = visual;
+					i3GEO.configura.visual = visual;
 				}
 				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("ajaxredesenha");}
 			};
@@ -313,6 +344,233 @@ i3GEO.gadgets = {
 			var cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"mudaVisual",monta);
+		}
+	},
+	/*
+	Function: quadros
+	
+	Cria e controla o funcionamento dos quadros de animação.
+	
+	Os quadros são mostrados no mapa como uma sequência de quadros de um filme.
+	As imagens que são produzidas no mapa são armazenadas em cada quadro, permitindo sua recuperação.
+	
+	Os quadros armazenam também a extensão geográfica de cada imagem, permitindo sua recuperação.
+	*/
+	quadros: {
+		/*
+		Variable: quadrosfilme
+		
+		Armazena cada quadro individualmente com as suas propriedades
+		
+		Type:
+		{Array}
+		*/
+		quadrosfilme: new Array(),
+		/*
+		Variable: quadroatual
+		
+		Valor do índice do quadro atual
+		
+		Type:
+		{Integer}
+		*/
+		quadroatual: 0,
+		/*
+		Property: inicia
+		
+		Gera os quadros e inicializa os objetos para armazenar as imagens
+		
+		Parameters:
+		
+		qs {Integer} - número de quadros
+		
+		lugarquadros {String} - id do elemento HTML que receberá os quadros (opcional)
+		*/
+		inicia: function(qs,lugarquadros){
+			if(arguments.length == 1)
+			{var lugarquadros = i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml;}
+			var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='i3GEO.gadgets.quadros.opcoes(this)' style='cursor:pointer'></div></td>";
+			for (var i = 0; i < qs; i++){
+				q += "<td><img class='quadro' src=\""+i3GEO.configura.locaplic+"/imagens/branco.gif\" id='quadro"+i+"' ";
+				q += "onmouseover='i3GEO.gadgets.quadros.trocaMapa(this.id);i3GEO.ajuda.mostraJanela(\"Clique para aplicar a extensão geográfica do quadro ao mapa\")' ";
+				q += "onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" ";
+				q += "onclick='i3GEO.gadgets.quadros.zoom(this.id)' /></td>";
+				i3GEO.gadgets.quadros.quadrosfilme[i] = new Array();
+			}
+			q += "</tr></table>";
+			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml)){
+				document.getElementById(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).innerHTML = q;
+				$i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).onmouseout = function(){
+					if($i("imgClone")){
+						$i("imgClone").style.display = "none";
+						$i("img").style.display = "block";
+					}
+				};
+			}
+			i3GEO.gadgets.quadros.quadroatual = 0;
+		},
+		/*
+		Property: grava
+
+		Armazena um determinado valor em uma determinada característica de um objeto quadro.
+
+		Parameters:
+
+		variavel {String} - parâmetro do objeto quadro.
+
+		valor - {String} valor que será aplicado.
+		*/
+		grava: function(variavel,valor){
+			eval("i3GEO.gadgets.quadros.quadrosfilme["+i3GEO.gadgets.quadros.quadroatual+"]."+variavel+" = '"+valor+"'");
+			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml))
+			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
+		},
+		/*
+		Property: avanca
+
+		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
+		*/		
+		avanca: function(){
+			try{
+				var nquadros = i3GEO.gadgets.quadros.quadrosfilme.length;
+				if ((nquadros - 1) == (i3GEO.gadgets.quadros.quadroatual))
+				{i3GEO.gadgets.quadros.inicia(nquadros);}
+				else{i3GEO.gadgets.quadros.quadroatual++;}
+			}
+			catch(e){var e = "";}		
+		},
+		/*
+		Property: zoom
+		
+		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
+		
+		Parameter:
+		
+		quadro {String} - id do quadro que será utilizado
+		*/
+		zoom: function(quadro){
+			var indice = quadro.replace("quadro","");
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[indice].extensao)
+		},
+		/*
+		Property: trocaMapa
+		
+		Troca a imagem do mapa atual pela que estiver armazenada em quadro
+		
+		A imagem mostrada no mapa é um clone do mapa atual, preservando o mapa.
+		
+		Parameters:
+		
+		quadro {String} - id do quadro que terá a imagem recuperada
+		*/
+		trocaMapa: function(quadro){
+			var indice = quadro.replace("quadro","");
+			var i = $i("img");
+			var c = $i("imgClone");
+			if(i){
+				if(!c){
+					var iclone=document.createElement('IMG');
+					iclone.style.position = "relative";
+					iclone.id = "imgClone";
+					iclone.style.border="1px solid blue";
+					i.parentNode.appendChild(iclone);
+					iclone.src = corpo.src;
+					iclone.style.width = objmapa.w;
+					iclone.style.heigth = objmapa.h;
+					iclone.style.top = corpo.style.top;
+					iclone.style.left = corpo.style.left;		
+				}
+				try{
+					if(!i3GEO.gadgets.quadros.quadrosfilme[indice].imagem){return;}
+					c.src = i3GEO.gadgets.quadros.quadrosfilme[indice].imagem;
+					c.style.display = "block";
+					i.style.display = "none";
+				}
+				catch(e){var e = "";}
+			}
+		},
+		/*
+		Property: opcoes
+		
+		Abre a janela de opções que controla as características do quado e permite disparar a animação.
+		
+		Parameters:
+		
+		obj {Object} - objeto clicado
+		*/
+		opcoes: function(obj){
+			if (objmapa.utilizacgi == "sim"){
+				objmapa.utilizacgi = "nao";
+				var volta = function(){
+					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
+				};
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"desativacgi",volta);
+			}
+			else
+			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
+		},
+		/*
+		Property: anima
+		
+		Mostra as imagens armazenadas nos quadros em uma sequência animada
+		
+		Parameters:
+		
+		Qanima {Integer} - quadro atual na sequência de animação
+		
+		t {Numeric} - tempo em milisegundos entre cada quadro
+		*/
+		anima: function(Qanima,t){
+			if(arguments.length == 0){
+				Qanima = 0;
+				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				var t = doc.getElementById("tempoanima").value;
+			}
+			if(Qanima > i3GEO.gadgets.quadros.quadrosfilme.length){
+				clearTimeout(tAnima);
+				$i("imgClone").style.display = "none";	
+				$i("img").style.display="block";
+				return;
+			}
+			//$i("img").src = preLoad[janima].src;
+			//$i("f"+janima).className = "quadro1";
+			i3GEO.gadgets.quadros.trocaMapa("quadro"+Qanima);
+			Qanima++;
+			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
+		},
+		listaImagens: function(){
+			if (objmapa.utilizacgi == "sim"){
+				objmapa.utilizacgi = "nao";
+				var volta = function()
+				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"desativacgi",volta);
+			}
+			else{
+				var wi = window.open("");//"",null,"width=550,height=650,resizable=yes,scrollbars=yes");
+				//pega os dados do objeto quadrosfilme e escreve na nova janela
+				var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
+				wi.document.write("<html><body><p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
+				var i = i3GEO.gadgets.quadros.quadrosfilme.length-1;
+				if(i >= 0){
+					do{
+						if (i3GEO.gadgets.quadros.quadrosfilme[i].imagem){
+							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
+							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrangência: "+i3GEO.gadgets.quadros.quadrosfilme[i].extensao+"<br>");
+							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].imagem+"' />");
+							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].referencia+"' />");
+						}
+						i--
+					}
+					while(i>=0)
+				}
+				wi.document.write("<br>Fim</body></html>");
+			}
 		}
 	}
 };

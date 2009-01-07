@@ -175,7 +175,7 @@ i3GEO.util = {
 	/*
 	Function: arvore
 	
-	Cria uma árvore combaseem um objeto contendo aspropriedades.
+	Cria uma árvore com base em um objeto contendo aspropriedades.
 	
 	Parameters:
 	
@@ -206,7 +206,7 @@ i3GEO.util = {
         	}
     		buildTree();
 		}();
-		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td><img style='position:relative;top:-3px' title='"+$trad("t2")+"'  src='"+$im("branco.gif")+"' /></td></tr></table>";
+		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		var c = obj.propriedades.length;
@@ -247,44 +247,6 @@ i3GEO.util = {
 		var re = /ú/gi;
 		palavra = palavra.replace(re,"u");
 		return(palavra);
-	},
-	/*
-	Function: dms2dd
-	
-	Converte coordenadas formatadas em DMS para DD
-	
-	Parameters:
-	
-	cd {Numeric} - grau
-	
-	cm {Numeric} - minuto
-	
-	cs {Numeric} - segundo
-	
-	Return:
-	
-	{Numeric} - Coordenada em décimos de grau.
-	*/
-	dms2dd: function(cd,cm,cs){
-		try
-		{
-			YAHOO.log("dms2dd", "i3geo");
-			//converte dms em dd
-			var sinal = 'positivo';
-			if (cd < 0)
-			{
-				cd = cd * -1;
-				sinal = 'negativo';
-			}
-			spm = cs / 3600;
-			mpg = cm / 60;
-			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
-			if (sinal == 'negativo')
-			{dd = dd * -1;}
-			YAHOO.log("Fim dms2dd", "i3geo");
-			return (dd);
-		}
-		catch(e){return (0);}
 	},
 	/*
 	Function protocolo
@@ -361,161 +323,6 @@ i3GEO.util = {
 		var tname;
 		tparent=targ.parentNode;
 		return(tparent);
-	},
-	/*
-	Function: dd2tela
-
-	Converte coordenadas dd em coordenadas de tela.
-
-	Parameters:
-
-	vx {Numeric} - coordenada x.
-
-	vy {Numeric} - coordenada y.
-
-	docmapa - objeto DOM que contém o objeto imagem
-	
-	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
-	
-	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1]
-	*/
-	dd2tela: function (vx,vy,docmapa,ext,cellsize){
-		try
-		{
-			if(!docmapa)
-			{var docmapa = window.document;}
-			var dc = docmapa.getElementsByTagName("img")[0];
-			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = objmapa.extent;
-			var imgext = imgext.split(" ");
-			vx = (vx * 1) - (imgext[0] * 1);
-			vy = (vy * -1) + (imgext[3] * 1);
-			c = cellsize * 1;
-			xy = new Array();
-			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
-		}
-		catch(e){return(new Array());}
-	},
-	/*
-	Function: dd2dms
-
-	Converte coordenadas de dd em dms.
-
-	Parameters:
-
-	x {Numeric} - coordenada x.
-
-	y {Numeric} - coordenada y.
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
-	*/
-	dd2dms: function(x,y){
-		var m = 0;
-		var s = 0;
-		var dx = parseInt(x);
-		if (dx > 0)
-		{var restod = x - dx;}
-		if (dx < 0)
-		{restod = (x * -1) - (dx * -1);}
-		dx = dx;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var mx = m;
-			if (restos != 0){
-				var s = restos * 60;
-				var s = (s+"_").substring(0,5);
-				var sx = s;
-			}
-			else  { s = "00.00" }
-		}
-		else{
-			var mx = "00";
-			var sx = "00.00";
-		}
-		if (m.length == 2){m = "0"+m+"";}
-		if (s*1 < 10){s = "0"+s;}
-		var xv = dx+" "+mx+" "+sx;
-		var m = 0;
-		var s = 0;
-		var dy = parseInt(y);
-		if (dy > 0)
-		{var restod = y - dy;}
-		if (dy < 0)
-		{var restod = (y * -1) - (dy * -1);}
-		dy = dy;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var my = m;
-			if (restos != 0){
-				var s = restos * 60;
-				s = (s+"_").substring(0,5);
-				var sy = s;
-			}
-			else  { var s = "00.00";}
-		}
-		else{
-			var my = "00";
-			var sy = "00.00";
-		}
-		if (m.length == 2){m = "0"+m;}
-		if (s*1 < 10){s = "0"+s;}
-		var yv = dy+" "+my+" "+sy;
-		var res = new Array();
-		res[0] = xv;
-		res[1] = yv;
-		return res;
-	},
-	/*
-	Function: tela2dd
-
-	Converte o x,y de unidades de tela para décimo de grau.
-
-	Parameters:
-
-	xfign {Numeric} - x em valores de imagem.
-
-	yfign {Numeric} - y em coordenadas de imagem.
-
-	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
-
-	imgext {String} - extensão geográfica do mapa.
-
-	Returns:
-
-	{Array} - Coordena em dd x[0] e y[1].
-	*/
-	tela2dd: function(xfign,yfign,g_celula,imgext){
-		try
-		{
-			if (navm){
-				xfign = xfign - 2.2;
-				yfign = yfign - 2.7;
-			}
-			else{
-				xfign = xfign - 0.12;
-				yfign = yfign - 1.05;
-			}
-			var nx = g_celula * xfign;
-			var ny = g_celula * yfign;
-			var amext = imgext.split(" ");
-			var longdd = (amext[0] * 1) + nx;
-			var latdd = (amext[3] * 1) - ny;
-			var res = new Array();
-			res[0] = longdd;
-			res[1] = latdd;
-			return (res);
-		}
-		catch(e){return(0);}
 	},
 	/*
 	Function: mudaCursor
@@ -625,5 +432,114 @@ i3GEO.util = {
 			if($i(i3GEO.util.PINS[i]))
 			{$i(i3GEO.util.PINS[i]).style.display = "none";}
 		}
+	},
+	/*
+	Function: $im ou nome curto $im
+
+	Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
+
+	Exemplo: $im("imagem.png")
+
+	Parâmetros:
+
+	g {String} - nome da imagem
+
+	Retorno:
+
+	string - caminho para a imagem
+	*/
+	$im: function(g){
+		return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;
+	},
+	/*
+	Function $inputText ou nome curto $inputText
+
+	Cria um elemento html do tipo input text com formatação especial.
+
+	Parameters:
+
+	idPai {String} - id do elemento pai do input
+
+	larguraIdPai {Integer} - largura em pixel
+
+	idInput {String} - id do objeto input
+
+	titulo {String} - texto que vai no title
+
+	digitos {Integer} - numero de dígitos do input
+
+	valor {String} - valor do input
+	*/
+	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor) {
+		if(idPai != "")
+		{
+			if(larguraIdPai != "")
+			{$i(idPai).style.width=larguraIdPai+"px";}
+			$i(idPai).style.padding="3";
+			$i(idPai).style.textAlign="center";
+			$i(idPai).onmouseover = function()
+			{this.className = "digitarMouseover";};
+			$i(idPai).onmouseout = function()
+			{this.className = "";};	
+		}
+		var i = "<input onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
+		return i;
+	},
+	/*
+	Function: $top ou nome curto $top
+
+	Muda a posição (superior) de um objeto tanto no IE como no Firefox.
+
+	Exemplo: $top("imagem",100)
+
+	Parâmetros:
+
+	id - identificador do objeto
+
+	valor - posição em relação ao topo.
+	*/
+	$top: function(id,valor){
+		if (document.getElementById(id).style){
+			if (document.getElementById(id).style.pixelTop)
+			{document.getElementById(id).style.pixelTop=valor;}
+			else
+			{document.getElementById(id).style.top=valor+"px";}
+		}
+	},
+	/*
+	Function: $left ou nome curto $left
+
+	Muda a posição (esquerda) de um objeto tanto no IE como no Firefox.
+
+	Exemplo: $left("imagem",100)
+
+	Parâmetros:
+
+	id - identificador do objeto
+
+	valor - posição em relação a esquerda.
+	*/
+	$left: function(id,valor){
+		if (document.getElementById(id).style){
+			if (document.getElementById(id).style.pixelLeft)
+			{document.getElementById(id).style.pixelLeft=valor;}
+			else
+			{document.getElementById(id).style.left=valor+"px";}
+		}
 	}
+};
+//
+//alias
+//
+$im = function(g){
+	return i3GEO.util.$im(g);
+};
+$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor){
+	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor);
+};
+$top = function(id,valor){
+	i3GEO.util.$top(id,valor);
+};
+$left = function(id,valor){
+	i3GEO.util.$left(id,valor);
 };

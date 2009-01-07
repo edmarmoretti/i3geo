@@ -426,7 +426,7 @@ oMenuData.janelas = [
 oMenuData.arquivo = [
 	{ text: $trad("u17"), url: "javascript:salvaMapa()" },
 	{ text: $trad("u18"), url: "javascript:carregaMapa()" },
-	{ text: $trad("u19"), url: "javascript:pegaimagens()" },
+	{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
 	{ text: $trad("u20"), url: "javascript:convertews()" },
 	//{ text: $trad("u20a"), url: "javascript:abreKml('mapfile')" },
 	{ text: $trad("u21"), url: "../geradordelinks.htm" }
@@ -474,7 +474,10 @@ g_listaFuncoesBotoes = {
 		iddiv:"zoomtot",
 		tipo:"",
 		dica:$trad("d2"),
-		funcaoonclick:function(){i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,objmapa.extentTotal);}
+		funcaoonclick:function(){
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,objmapa.extentTotal);
+			marcadorZoom = "";
+		}
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom interativo.
@@ -489,6 +492,7 @@ g_listaFuncoesBotoes = {
 				$i("img").title = "";
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
 			}
+			marcadorZoom = "";
 		}
 	},
 	{
@@ -504,6 +508,7 @@ g_listaFuncoesBotoes = {
 				$i("img").title = "";
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan","img",i3GEO.configura.locaplic);
 			}
+			marcadorZoom = "";
 		}
 	},
 	{
@@ -511,14 +516,20 @@ g_listaFuncoesBotoes = {
 		iddiv:"zoomiauto",
 		tipo:"",
 		dica:$trad("d5"),
-		funcaoonclick:function(){i3GEO.navega.zoomin(i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		funcaoonclick:function(){
+			i3GEO.navega.zoomin(i3GEO.configura.locaplic,i3GEO.configura.sid);
+			marcadorZoom = "";
+		}
 	},
 	{
 		//botão que realiza a operação de zoom out
 		iddiv:"zoomoauto",
 		tipo:"",
 		dica:$trad("d6"),
-		funcaoonclick:function(){i3GEO.navega.zoomout(i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		funcaoonclick:function(){
+			i3GEO.navega.zoomout(i3GEO.configura.locaplic,i3GEO.configura.sid);
+			marcadorZoom = "";
+		}
 	},
 	{
 		//botão que abre a função de identificação.

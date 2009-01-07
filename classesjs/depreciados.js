@@ -425,4 +425,119 @@ Function: visual (depreciado)
 */
 function visual(iddiv)
 {i3GEO.gadgets.visual.inicia(iddiv);}
+/*
+Function: arvoreclick (depreciado)
 
+Marca o checkbox de adição de temas
+
+Parameters:
+
+itemID - ID que identifica qual tema foi clicado. O ID é definido no arquivo .map e no arquivo menutemas/menutemas.xml
+*/
+function arvoreclick(itemID)
+{
+	if (itemID.search("tema") == 0)
+	{
+		if ($i(itemID).checked == true)
+		{$i(itemID).checked = false;}
+		else
+		{$i(itemID).checked = true;}
+	}
+}
+/*
+Function: pegaTema (depreciado)
+
+Pega o tema de um no na guia de temas.
+
+Utilizado nas opções que operam sobre um tema específico.
+
+Parameters:
+
+celula - objeto que foi clicado
+
+Returns:
+
+Id do tema.
+*/
+function pegaTema(celula)
+{
+	var nos = celula.parentNode.childNodes;
+	var tempi = nos.length;
+	for (var no=0;no<tempi; no++){if (nos[no].type == "checkbox"){return nos[no].value;}}
+}
+/*
+Function: gerafilmef (depreciado)
+*/
+function gerafilmef(qs)
+{}
+/*
+Function: gravaQuadro (depreciado)
+*/
+function gravaQuadro(variavel,valor)
+{i3GEO.gadgets.quadros.grava(variavel,valor);}
+/*
+Function: avancaQuadro (depreciado)
+*/
+function avancaQuadro()
+{i3GEO.gadgets.quadros.avanca();}
+/*
+Function: zoomAnterior (depreciado)
+*/
+function zoomAnterior(){
+}
+/*
+Function: zoomProximo (depreciado)
+
+*/
+function zoomProximo(){
+}
+/*
+Function: opcoesQuadros (depreciado)
+*/
+function opcoesQuadros()
+{}
+/*
+Function: filmef
+*/
+function filmef(o)
+{}
+/*
+Function: rebobinaf (depreciado)
+*/
+function rebobinaf()
+{}
+/*
+Function: filmezf (depreciado)
+*/
+function filmezf(o)
+{}
+/*
+Function: quadrofilme (depreciado)
+*/
+function quadrofilme()
+{}
+/*
+Function: filmeanimaf (depreciado)
+*/
+function filmeanimaf()
+{}
+/*
+Function: filmeanimarodaf (depreciado)
+*/
+function filmeanimarodaf(janima)
+{}
+/*
+Function: pegaimagens (depreciado)
+*/
+function pegaimagens()
+{}
+/*
+Function calculaArea (depreciado)
+*/
+function calculaArea(pontos,pixel)
+{}
+/*
+Function: calculadistancia (depreciado)
+*/
+function calculadistancia(lga,lta,lgb,ltb) //0ms
+{}

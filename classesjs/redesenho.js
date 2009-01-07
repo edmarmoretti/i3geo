@@ -215,7 +215,7 @@ function ajaxEscalaGrafica(retorno)
 			m.src = scaimagem;
 			$i("imagemEscalaGrafica").src=m.src;
 			//atualiza quadro
-			gravaQuadro("escala",scaimagem);
+			i3GEO.gadgets.quadros.grava("escala",scaimagem);
 		}
 	}
 }
@@ -250,7 +250,7 @@ function ajaxReferencia(retorno)
 				$i("refmensagem").style.fontSize="0px";
 			}
 		}
-		gravaQuadro("referencia",refimagem);
+		i3GEO.gadgets.quadros.grava("referencia",refimagem);
 		YAHOO.log("Concluída imagem de referência", "redesenho");
 	}
 	else
@@ -329,7 +329,7 @@ function ajaxLegendaImagem(retorno)
 	{
 		eval(retorno.data);
 		if ($i("lugarquadros"))
-		{gravaQuadro("legenda",legimagem);}
+		{i3GEO.gadgets.quadros.grava("legenda",legimagem);}
 	}
 }
 /*
@@ -361,9 +361,7 @@ function ajaxCorpoMapa(retorno)
 			{
 				$i("img").onload = "";
 				//atualiza quadro
-				avancaQuadro();
-				gravaQuadro("imagem",mapimagem);
-				g_quadrooriginal = mapimagem;
+				i3GEO.gadgets.quadros.grava("imagem",mapimagem);
 				if ($i("banners"))
 				{$i("banners").style.height = objmapa.h;}
 				if ($i("legenda"))
@@ -431,6 +429,7 @@ function ajaxredesenha(retorno)
 	try{richdraw.clearWorkspace();}catch(e){};
 	try
 	{
+		i3GEO.gadgets.quadros.avanca();
 		YAHOO.log("ajaxredesenha", "redesenho");
 		if(retorno && retorno.data.temas)
 		{i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
@@ -620,7 +619,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//grava a extensao geográfica nova no quadro de animação
 		//
-		gravaQuadro("extensao",mapexten);
+		i3GEO.gadgets.quadros.grava("extensao",mapexten);
 		//
 		//fecha as janelas de aguarde
 		//

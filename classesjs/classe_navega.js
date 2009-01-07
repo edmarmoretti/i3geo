@@ -287,9 +287,12 @@ i3GEO.navega = {
 	i3GEO.eventos.MOUSEPARADO
 	*/
 	mostraRosaDosVentos: function(){
-		try{if (i3GEO.configura.mostraRosaDosVentos == "nao"){return;}}
+		try{
+			if(i3GEO.configura.mostraRosaDosVentos == "nao"){return;}
+			if(g_tipoacao == "area"){return;}
+		}
 		catch(e){};
-		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
+		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10 || objposicaocursor.imgy > (objmapa.h - 10))
 		{return;}
 		if (!$i("i3geo_rosa")){
 			var novoel = document.createElement("div");

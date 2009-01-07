@@ -39,104 +39,6 @@ catch(e)
 	{return document.getElementById(i);};
 }
 /*
-Function: $im
-
-Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
-
-Exemplo: $im("imagem.png")
-
-Parâmetros:
-
-g - nome da imagem
-
-Retorno:
-
-string - caminho para a imagem
-*/
-$im = function(g)
-{return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;};
-/*
-Function $inputText
-
-Cria um elemento html do tipo input text com formatação especial.
-
-Parameters:
-
-idPai - id do elemento pai do input
-
-larguraIdPai - largura em pixel
-
-idInput - id do objeto input
-
-titulo - texto que vai no title
-
-digitos - numero de dígitos do input
-
-valor - valor do input
-*/
-$inputText = function (idPai,larguraIdPai,idInput,titulo,digitos,valor)
-{
-	if(idPai != "")
-	{
-		if(larguraIdPai != "")
-		{$i(idPai).style.width=larguraIdPai+"px";}
-		$i(idPai).style.padding="3";
-		$i(idPai).style.textAlign="center";
-		$i(idPai).onmouseover = function()
-		{this.className = "digitarMouseover";};
-		$i(idPai).onmouseout = function()
-		{this.className = "";};	
-	}
-	var i = "<input onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
-	return i;
-};
-/*
-Function: $top
-
-Muda a posição (superior) de um objeto tanto no IE como no Firefox.
-
-Exemplo: $top("imagem",100)
-
-Parâmetros:
-
-id - identificador do objeto
-
-valor - posição em relação ao topo.
-*/
-$top = function(id,valor)
-{
-	if (document.getElementById(id).style)
-	{
-		if (document.getElementById(id).style.pixelTop)
-		{document.getElementById(id).style.pixelTop=valor;}
-		else
-		{document.getElementById(id).style.top=valor+"px";}
-	}
-};
-/*
-Function: $left
-
-Muda a posição (esquerda) de um objeto tanto no IE como no Firefox.
-
-Exemplo: $left("imagem",100)
-
-Parâmetros:
-
-id - identificador do objeto
-
-valor - posição em relação a esquerda.
-*/
-$left = function(id,valor)
-{
-	if (document.getElementById(id).style)
-	{
-		if (document.getElementById(id).style.pixelLeft)
-		{document.getElementById(id).style.pixelLeft=valor;}
-		else
-		{document.getElementById(id).style.left=valor+"px";}
-	}
-};
-/*
 Function: trataErro
 
 Fecha o objeto aguarde quando ocorre um erro.
@@ -624,7 +526,6 @@ function ativaClicks(docMapa)
 		{
 			if ($i("janelaMenu"))
 			{$i("janelaMenu").style.display="none";}
-			this.src=g_quadrooriginal;
 			//verifica se o mouse esta parado
 			if (objmapa.parado!="cancela")
 			{
@@ -752,6 +653,7 @@ function ativaClicks(docMapa)
 			//
 			if ($i("img") && (g_tipoacao == "pan"))
 			{
+				marcadorZoom = "";
 				g_panM = "nao";
 				var disty = (ddinicialy * -1) + objposicaocursor.ddy; //teladd[1]
 				var distx = (ddinicialx * -1) + objposicaocursor.ddx; //teladd[0]
@@ -776,66 +678,6 @@ function ativaClicks(docMapa)
 	};
 }
 /*
-Section: navegação
-*/
-/*
-Function: zoomAnterior
-
-Retorna ao zoom anterior do mapa.
-
-A memória das extensões geográficas são mantidas nos quador s de animação (objeto quadrosfilme).
-*/
-function zoomAnterior()
-{
-	try
-	{
-		var n = quadrosfilme.length;
-		//
-		//pega o quadro anterior com extensão diferente da atual
-		//
-		var muda = 0;
-		for (var i = (n - 1); i > 0; i--)
-		{
-			if (quadrosfilme[i].extensao != ' ' && quadrosfilme[i].extensao == objmapa.extent)
-			{
-				var muda = i - 1;break;
-			}
-		}
-		if(quadrosfilme[muda].extensao != " ")
-		{
-			g_zoomProximo.push(objmapa.extent);
-			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,quadrosfilme[muda].extensao);
-			for (var i = n-1; i > muda; i--)
-			{
-				$i("f"+(i)).className = "quadro";
-				var qu = new quadrofilme();
-				quadrosfilme[i] = qu;
-			}
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: zoomProximo
-
-Avança para o zoom definido antes de aplciar o zoom anterior.
-
-A memória das extensões geográficas são mantidas no array g_zoomProximo.
-*/
-function zoomProximo()
-{
-	try
-	{
-		var n = g_zoomProximo.length;
-		if (n > 0 && g_zoomProximo[n-1] != objmapa.extent)
-		{
-			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,g_zoomProximo[n-1]);
-			g_zoomProximo.pop();
-		}
-	}
-	catch(e){var e = "";}	
-}
-/*
 Function: initJanelaRef
 
 Abre a janela com o mapa de referencia
@@ -851,9 +693,9 @@ function initJanelaRef()
 		novoel.style.borderColor="gray";
 		var ins = '<div class="hd">';
 		var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=mais onclick='"+temp+"' src="+$im("branco.gif")+" />";
+		ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 		var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=menos onclick='"+temp+"' src="+$im("branco.gif")+" />&nbsp;";
+		ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
 		ins += '<input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
 		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
 		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
@@ -1628,46 +1470,6 @@ function pegaMapas(retorno)
 	$i("banners").innerHTML = ins;
 }
 /*
-Function: arvoreclick (depreciado)
-
-Marca o checkbox de adição de temas
-
-Parameters:
-
-itemID - ID que identifica qual tema foi clicado. O ID é definido no arquivo .map e no arquivo menutemas/menutemas.xml
-*/
-function arvoreclick(itemID)
-{
-	if (itemID.search("tema") == 0)
-	{
-		if ($i(itemID).checked == true)
-		{$i(itemID).checked = false;}
-		else
-		{$i(itemID).checked = true;}
-	}
-}
-/*
-Function: pegaTema (depreciado)
-
-Pega o tema de um no na guia de temas.
-
-Utilizado nas opções que operam sobre um tema específico.
-
-Parameters:
-
-celula - objeto que foi clicado
-
-Returns:
-
-Id do tema.
-*/
-function pegaTema(celula)
-{
-	var nos = celula.parentNode.childNodes;
-	var tempi = nos.length;
-	for (var no=0;no<tempi; no++){if (nos[no].type == "checkbox"){return nos[no].value;}}
-}
-/*
 Section: redesenho do mapa
 */
 /*
@@ -1973,14 +1775,18 @@ function capturaposicao(e)
 	// 
 	var c = g_celula;
 	var ex = objmapa.extent;
-	if(targ.id == "imagemReferencia")
-	{
-		var c = g_celularef;
-		var ex = objmapa.extentref;
+	try{
+		if(targ.id == "imagemReferencia"){
+			var c = g_celularef;
+			var ex = objmapa.extentref;
+			var r = $i("i3geo_rosa");
+			if(r)
+			r.style.display = "none"
+		}
 	}
-	//$i("visual").innerHTML=c
-	var teladd = i3GEO.util.tela2dd(xfig,yfig,c,ex);
-	var teladms = i3GEO.util.dd2dms(teladd[0],teladd[1]);
+	catch(e){g_celularef = 0;}
+	var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+	var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
 	objposicaocursor.ddx = teladd[0];
 	objposicaocursor.ddy = teladd[1];
 	objposicaocursor.dmsx = teladms[0];
@@ -1994,315 +1800,8 @@ function capturaposicao(e)
 	ajaxTip = "";
 }
 /*
-Section: quadro de animação
-*/
-/*
-Function: gerafilmef
-
-Cria os quadros que serão utilizados na função de animação e mostrados no mapa.
-
-Cada novo quadro é criado como um objeto quadrofilme. Os quadros criados são armazenados no
-array global quadrosfilme.
-
-Parameters:
-
-qs - número de quadros
-*/
-function gerafilmef(qs)
-{
-	try
-	{
-		if ($i("lugarquadros"))
-		{
-			var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='opcoesQuadros()' style='cursor:pointer'></div></td>";
-			for (var i = 0; i < qs; i++)
-			{
-				q = q + "<td><img class='quadro' src=\""+g_localimg+"/branco.gif\" id=f"+i+"  onmouseover='filmef(this);mostradicasf(this,\"Quadro - clique para restaurar\",\"quadro\")' onmouseout=\"javascript:mostradicasf(this,'')\" onclick='filmezf(this)' /></td>";
-				var qu = new quadrofilme();
-				quadrosfilme[i] = qu;
-			}
-			var finalq = "</tr></table>";
-			document.getElementById("lugarquadros").innerHTML = q+finalq;
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: gravaQuadro
-
-Armazena um determinado valor em uma determinada característica de um objeto quadro.
-
-Parameters:
-
-variavel - parâmetro do objeto quadro.
-
-valor - valor que será aplicado.
-*/
-function gravaQuadro(variavel,valor)
-{
-	try
-	{
-		var muda = -1;
-		if ($i("lugarquadros"))
-		{
-			var nquadros = quadrosfilme.length;
-			//
-			//verifica se todos os quadros estão cheios
-			//
-			if (quadrosfilme[nquadros - 1].imagem != " ")
-			{
-				//
-				//se estiverem cheios, esvazia o primeiro e acrescenta o novo
-				//
-				//rebobinaf();
-				quadrosfilme.shift();
-				var qu = new quadrofilme();
-				quadrosfilme.push(qu);
-			}
-			for (var i = 0; i < nquadros; i++)
-			{
-				if ((eval("quadrosfilme["+i+"]."+variavel+" == ' '")) && (muda < 0))
-				{var muda = i;}
-			}
-			if (eval("quadrosfilme["+(muda)+"]"))
-			{eval("quadrosfilme["+(muda)+"]."+variavel+"='"+ valor+"'");}
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: avancaQuadro
-
-Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
-*/
-function avancaQuadro()
-{
-	try
-	{
-		var muda = -1;
-		if ($i("lugarquadros"))
-		{
-			var nquadros = quadrosfilme.length;
-			for (var i = 0; i < nquadros; i++)
-			{
-				if ((quadrosfilme[i].imagem == " ") && (muda < 0))
-				{var muda = i;}
-			}
-			$i("f"+muda).className = "quadro1";
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: filmef
-
-Mostra a imagem armazenada em um quadro no lugar do corpo do mapa.
-
-Parameters:
-
-o - quadro
-*/
-function filmef(o)
-{
-	try
-	{
-		if ($i("lugarquadros"))
-		{
-			var v = (o.id).replace("f","");
-			if (quadrosfilme[v].imagem != " ")
-			{$i("img").src = quadrosfilme[v].imagem;}
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: rebobinaf
-
-Rebobina as imagens dos quadros, limpando os parâmetros armazenados.
-*/
-function rebobinaf()
-{
-	try
-	{
-		janima = 0;
-		var nquadros = quadrosfilme.length;
-		for (var i = 0; i < nquadros; i++)
-		{
-			$i("f"+i).className = "quadro";
-			with (quadrosfilme[i]){imagem = " ";escala = " ";legenda = " ";extensao = " ";referencia = " ";}
-		}
-	}
-	catch(e){var e = "";}
-}
-/*
-Function: filmezf
-
-Muda a extensão geográfica do mapa conforme o valor armazenado em um quado de animação.
-
-Parameters:
-
-o - objeto quadro ou número do quadro
-*/
-function filmezf(o)
-{
-	if(o.id)
-	{var quadro = (o.id).replace("f","");}
-	else
-	{var quadro = o;}
-	if (quadrosfilme[quadro].extensao != " ")
-	{
-		i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,quadrosfilme[quadro].extensao);
-	}
-	else{alert("Extensao nao definida");}
-}
-/*
-Function: filmeanimaf
-
-Carrega as imagens armazenadas nos quadros de animação.
-*/
-function filmeanimaf()
-{
-	preLoad = new Array();
-	var tempi = quadrosfilme.length;
-	for (var i = 0; i < tempi; i++)
-	{
-		$i("f"+i).className = "quadro";
-		if (quadrosfilme[i].imagem != " ")
-		{
-			preLoad[i] = new Image();
-			preLoad[i].src = quadrosfilme[i].imagem;
-		}
-	}
-	filmeanimarodaf(0);
-}
-/*
-Function: filmeanimarodaf
-
-Roda a animacao usando as imagens armazenadas nos quadros de animação quadros.
-*/
-function filmeanimarodaf(janima)
-{
-	if (janima < quadrosfilme.length)
-	{
-		$i("img").src = preLoad[janima].src;
-		$i("f"+janima).className = "quadro1";
-		janima = janima + 1;
-		var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-		var ti = doc.getElementById("tempoanima").value;
-		t = setTimeout('filmeanimarodaf('+janima+')',ti);
-	}
-}
-/*
-Function: quadrofilme
-
-Cria um objeto quadro de animação. Cada quadro é utilizado para armazenar parâmetros de um mapa que foi visto na tela.
-É utilizado pela função que lista as imagens já vistas no mapa e pela função que retorna a um determinado zoom do mapa.
-
-Methods:
-
-imagem - URL da imagem
-
-escala - escala do mapa
-
-legenda - URL da legenda do mapa
-
-extensao - extensão geográfica do mapa com valores separados por espaço
-
-referencia - URL do mapa de referência
-*/
-function quadrofilme()
-{
-	this.imagem = " ";
-	this.escala = " ";
-	this.legenda = " ";
-	this.extensao = " ";
-	this.referencia = " ";
-}
-/*
 Section: calculos
 */
-/*
-Function calculaArea
-
-Calcula a área de um polígono.
-
-Os pontos são obtidos do objeto pontosdistobj
-
-Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
-
-O cálculo da resolução é feito quando a ferramenta de cálculo é ativada e armazenado na variável g_areapixel
-
-Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
-*/
-function calculaArea()
-{
-	try
-	{
-		if(pontosdistobj.xpt.length > 2)
-		{
-			var $array_length = pontosdistobj.xpt.length;
-			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-			pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
-			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-			pontosdistobj.ytela.push(pontosdistobj.ytela[1]);
-			var $polygon_area = 0;
-			for (var $i=0;$i <= $array_length;$i++)
-			{
-				$polygon_area += ((pontosdistobj.xtela[$i] * pontosdistobj.ytela[$i+1])-(pontosdistobj.ytela[$i] * pontosdistobj.xtela[$i+1]));
-			}
-			$polygon_area = Math.abs($polygon_area) / 2;
-		}
-		else
-		{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
-		//g_areapixel precisa estar definida
-		return $polygon_area*g_areapixel;
-	}
-	catch(e){return (0);}
-}
-/*
-Function: calculadistancia
-
-Calcula a distância entre dois pontos.
-
-Parameters:
-
-lga - x inicial.
-
-lta - y inicial
-
-lgb - x final
-
-ltb - y final
-*/
-function calculadistancia(lga,lta,lgb,ltb) //0ms
-{
-	//calculo baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
-	try
-	{
-		var er = 6366.707;
-		var radlat1 = Math.PI * lta/180;
-		var radlat2 = Math.PI * ltb/180;
-		var radlong1 = Math.PI * lga/180;
-		var radlong2 = Math.PI * lgb/180;
-		if (lta > 0) {radlat1=Math.PI/2-radlat1;}
-		if (lta < 0) {radlat1=Math.PI/2+radlat1;}
-		if (lga < 0) {radlong1=Math.PI*2-radlong1;}
-		if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
-		if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
-		if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
-		var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
-		var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
-		var z1 = er * Math.cos(radlat1);
-		var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
-		var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
-		var z2 = er * Math.cos(radlat2);
-		var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-		//side, side, side, law of cosines and arccos
-		var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
-		return theta*er;
-	}
-	catch(e){return (0);}
-}
 /*
 Function: posicaomouse
 
