@@ -425,30 +425,6 @@ function Mapa(e,m)
 	*/
 	this.finaliza="";
 	/*
-	Variable: objmapa.guiaTemas
-	
-	Define qual a guia para listar os temas do mapa
-	*/
-	this.guiaTemas = "guia1";
-	/*
-	Variable: objmapa.guiaMenu
-	
-	Define qual a guia que receberá o menu de seleção de temas
-	*/
-	this.guiaMenu = "guia2";
-	/*
-	Variable: objmapa.guiaLegenda
-	
-	Define qual a guia receberá a legenda do mapa
-	*/
-	this.guiaLegenda = "guia4";
-	/*
-	Variable: objmapa.guiaListaMapas
-	
-	Define a guia que receberá a lista de mapas
-	*/
-	this.guiaListaMapas = "guia5";
-	/*
 	Variable: objmapa.cgi
 	
 	Indica a localização do mapserver cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
@@ -477,6 +453,25 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
+		//
+		//para efeitos de compatibilidade com versões antigas
+		//
+		i3GEOmantemCompatibilidade();
+		/*
+			Gera o div para função de etiquetas para efeitos de compatibilidade
+		*/
+		if (!$i("tip")){
+			var novoel = document.createElement("div");
+			novoel.id = "tip";
+			novoel.style.position="absolute";
+			novoel.style.zIndex=5000;
+			if (navm)
+			{novoel.style.filter = "alpha(opacity=90)";}
+			document.body.appendChild(novoel);
+		}
+		//
+		//
+		//
 		YAHOO.log("Inicializando o i3geo", "i3geo");
 		//
 		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
@@ -561,7 +556,7 @@ function Mapa(e,m)
 				//
 				//gera o mapa de referencia e outros elementos do mapa
 				//
-				objmapa.atualizaReferencia(mapexten);
+				i3GEO.maparef.atualiza();
 				objmapa.scale = parseInt(mapscale);
 				objmapa.cellsize = g_celula;
 				objmapa.extent = mapexten;
@@ -582,7 +577,8 @@ function Mapa(e,m)
 				//
 				//ativa as guias
 				//
-				ativaGuias();
+				//ativaGuias();
+				i3GEO.guias.cria();
 				//
 				//monta a árvore de temas adicionais se existir a div arvoreAdicionaTema
 				//
@@ -663,25 +659,13 @@ function Mapa(e,m)
 					}
 					ajustaEntorno();
 				}
-				autoRedesenho("ativa");
+				i3GEO.navega.autoRedesenho.ativa();
 				if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = objmapa.scale;}
 				if ((objmapa.geoip == "nao") && ($i("ondeestou")))
 				{$i("ondeestou").style.display="none";}
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
-			//ativa a guia correta
-			var temp = g_guiaativa.split("guia");
-			mostraguiaf(temp[1]);
-			//
-			//ativa a cor da guia
-			//
-			/*
-			if ($i("guia"+temp[1]))
-			{
-				$i("guia"+temp[1]).parentNode.parentNode.focus();
-			}
-			*/
 			//
 			//ativa a janela de mensagens se for o caso
 			//
@@ -696,15 +680,14 @@ function Mapa(e,m)
 				i3GEO.configura.iniciaJanelaMensagens = false;
 			}
 			if(i3GEO.configura.iniciaJanelaMensagens == true)
-			{i3GEO.ajuda.abreJanela();}
-			
-			if (g_mapaRefDisplay != "none")
+			{i3GEO.ajuda.abreJanela();}		
+			if (i3GEO.configura.mapaRefDisplay != "none")
 			{
-				if (i3GEO.util.pegaCookie("g_mapaRefDisplay")){g_mapaRefDisplay = i3GEO.util.pegaCookie("g_mapaRefDisplay");}
-				if (g_mapaRefDisplay == "block"){initJanelaRef();}
+				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
+				if (i3GEO.configura.mapaRefDisplay == "block"){i3GEO.maparef.inicia();}
 			}
 			i3GEO.janela.fechaAguarde("montaMapa");
-			if (g_docaguias == "sim"){docaguias();}
+			if (i3GEO.configura.liberaGuias == "sim"){i3GEO.guias.libera();}
 			if (document.getElementById("botao3d"))
 			{
 				if (g_3dmap == ""){document.getElementById("botao3d").style.display="none";}
@@ -713,7 +696,6 @@ function Mapa(e,m)
 		//
 		//zera os quadros de animação
 		//
-		rebobinaf();
 		if($i("mst"))
 		$i("mst").style.visibility ="visible";
 		YAHOO.log("Fim objmapa.inicializa", "i3geo");
@@ -757,66 +739,13 @@ function Mapa(e,m)
 		}
 	};
 	/*
-	Function: atualizaReferencia
-	
-	Atualiza o mapa de referência.
-	
-	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
-	
-	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
-	
-	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
-	
-	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
-
-	Parameters:
-	
-	mapexten - extensão geográfica do retângulo que será desenhado no mapa de referência. 
-	Esse valor é utilizado apenas para comparar a extensão geográfica do mapa atual com a extensão geográfica do mapa seguinte.
-	*/
-	this.atualizaReferencia = function(mapexten)
-	{
-		if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
-		var dinamico = false;
-		if ($i("refDinamico"))
-		{var dinamico = $i("refDinamico").checked;}
-		if ($i("mapaReferencia") && objmapa.extent != mapexten)
-		{
-			YAHOO.log("Atualizando o mapa de referência", "i3geo");
-			if(dinamico)
-			{
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+g_zoomRefDinamico;
-				cpObj.call(p,"retornaReferenciaDinamica",ajaxReferencia);
-			}
-			else
-			{
-				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
-				{
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
-					cpObj.call(p,"retornaReferencia",ajaxReferencia);
-				}
-				else
-				{
-					var re = new RegExp("&mode=map", "g");
-					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
-					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-				}
-			}
-		}
-		else
-		{
-			if($i("imagemReferencia"))
-			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-		}		
-	};
-	/*
 	Function: atualizaLegendaHTML
 	
 	Atualiza a legenda, em HTML, nos ids legenda e moveLegi
 	*/
 	this.atualizaLegendaHTML = function()
 	{
-		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
+		if  (($i("moveLegi")) || (i3GEO.guias.ATUAL == "legenda"))
 		{
 			YAHOO.log("Iniciando atualização da legenda HTML", "i3geo");
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+i3GEO.configura.sid;
@@ -912,102 +841,6 @@ function Mapa(e,m)
 		};
 		if (objmapa.finaliza)
 		{eval(objmapa.finaliza);}
-		//
-		//altera o tamanho das guias
-		//
-		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
-		var i = temp.length-1;
-		if (i >= 0)
-		{
-			do
-			{
-				eval("var s = objmapa."+temp[i]+"obj"); 
-				if ($i(s))
-				{
-					var d = $i(s).style;
-					d.style.overflow="auto";
-					d.style.height = objmapa.h-13;
-					d.style.width = "100%";
-				}
-			}
-			while(i--)
-		}
 		YAHOO.log("Concluído o corpo do mapa", "i3geo");
-	};
-	/*
-	Function: verificaClickMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário clica no mapa.
-	*/
-	this.verificaClickMapa = function()
-	{
-		YAHOO.log("Verificando clicks no mapa", "i3geo");
-		if (this.funcoesClickMapa.length > 0)
-		{
-			var f = this.funcoesClickMapa.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					eval(this.funcoesClickMapa[f]);
-				}
-				while(f--)
-			}
-		}
-		if (g_funcoesClickMapaDefault.length > 0)
-		{
-			var lle = g_funcoesClickMapaDefault.length;
-			for (var f=0;f<lle; f++)
-			{
-				eval(g_funcoesClickMapaDefault[f]);
-			}
-		}
-		YAHOO.log("Fim verificando clicks no mapa", "i3geo");
-	};
-	/*
-	Function: verificaMousemoveMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
-	*/
-	this.verificaMousemoveMapa = function()
-	{
-		if (g_funcoesMousemoveMapaDefault.length > 0)
-		{
-			var f = g_funcoesMousemoveMapaDefault.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					var temp = g_funcoesMousemoveMapaDefault[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(g_funcoesMousemoveMapaDefault[f]);
-				}
-				while(f--)
-			}
-		}
-	};
-	/*
-	Function: verificaNavegaMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
-	*/
-	this.verificaNavegaMapa = function()
-	{
-		YAHOO.log("Verificando navegação", "i3geo");
-		if (g_funcoesNavegaMapaDefault.length > 0)
-		{
-			var f = g_funcoesNavegaMapaDefault.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					var temp = g_funcoesNavegaMapaDefault[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(g_funcoesNavegaMapaDefault[f]);
-				}
-				while(f--)
-			}
-		}
-		YAHOO.log("Concluído verificando navegação", "i3geo");
 	};
 }

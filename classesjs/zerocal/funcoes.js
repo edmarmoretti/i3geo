@@ -698,7 +698,7 @@ function ativaClicks(docMapa)
 					{var t = parseInt($i("i3geo").style.top);}
 					$i("img").style.top = ny - t;
 			}
-			objmapa.verificaMousemoveMapa();
+			i3GEO.eventos.mousemoveMapa();
 		};
 	};
 	docMapa.onmouseout = function()

@@ -97,6 +97,7 @@ i3GEO.gadgets = {
 		{
 			temp.style.display="block";
 			temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
+			tempoUTM = setTimeout("$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';clearTimeout(tempoUTM)",3400);
 			return (retorno.data);
 		};
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+sid;
@@ -120,44 +121,47 @@ i3GEO.gadgets = {
 	i3GEO.gadgets.PARAMETROS
 	*/	
 	mostraCoordenadasGEO: function(id){
-		if(arguments.length == 0)
-		{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
-		atualizaLocalizarxy = function(){
-			var x = objposicaocursor.dmsx.split(" ");
-			var y = objposicaocursor.dmsy.split(" ");
-			$i3geo_temp_xg.value = x[0];
-			$i3geo_temp_xm.value = x[1];
-			$i3geo_temp_xs.value = x[2];
-			$i3geo_temp_yg.value = y[0];
-			$i3geo_temp_ym.value = y[1];
-			$i3geo_temp_ys.value = y[2];
-		};
-		if($i(id)){
-			if(!$i("xm")){
-				var ins = "<table style='text-align:center'><tr>";
-				ins += "<td>localiza X:&nbsp;</td>";
-				ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
-				ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-				var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
-				temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
-				temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
-				ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
-				ins += "</tr></table>";
-				$i(id).innerHTML = ins;
-				$i3geo_temp_xg = $i("xg");
-				$i3geo_temp_xm = $i("xm");
-				$i3geo_temp_xs = $i("xs");
-				$i3geo_temp_yg = $i("yg");
-				$i3geo_temp_ym = $i("ym");
-				$i3geo_temp_ys = $i("ys");
-				if($i("img"))
-				{$i("img").addEventListener('mousemove',atualizaLocalizarxy,false);}
+		try{
+			if(arguments.length == 0)
+			{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
+			if($i(id)){
+				if(!$i("xm")){
+					var ins = "<table style='text-align:center'><tr>";
+					ins += "<td>localiza X:&nbsp;</td>";
+					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
+					ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+					var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
+					temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
+					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
+					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
+					ins += "</tr></table>";
+					$i(id).innerHTML = ins;
+					$i3geo_temp_xg = $i("xg");
+					$i3geo_temp_xm = $i("xm");
+					$i3geo_temp_xs = $i("xs");
+					$i3geo_temp_yg = $i("yg");
+					$i3geo_temp_ym = $i("ym");
+					$i3geo_temp_ys = $i("ys");
+					atualizaLocalizarxy = function(){
+						var x = objposicaocursor.dmsx.split(" ");
+						var y = objposicaocursor.dmsy.split(" ");
+						$i3geo_temp_xg.value = x[0];
+						$i3geo_temp_xm.value = x[1];
+						$i3geo_temp_xs.value = x[2];
+						$i3geo_temp_yg.value = y[0];
+						$i3geo_temp_ym.value = y[1];
+						$i3geo_temp_ys.value = y[2];
+					};
+					if($i("img"))
+					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}
+				}
 			}
 		}
+		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
 	},
 	/*
 	Function: mostraEscalaNumerica
@@ -192,8 +196,8 @@ i3GEO.gadgets = {
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizaEscalaNumerica()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizaEscalaNumerica()");}		
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
 		}
 	},
 	/*

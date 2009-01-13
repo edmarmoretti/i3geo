@@ -246,17 +246,121 @@ i3GEO.janela = {
 		YAHOO.log("Fim abreAguarde", "janela");	
 	},
 	/*
+	Function: tip
+	
+	Cria um DIV e posiciona sobre o mapa na posição do mouse.
+	
+	Return:
+	
+	ID do DIV criado
+	*/
+	tip: function(){
+		var Nid = YAHOO.util.Dom.generateId();
+		var i = $i("i3geo_rosa");
+		if(i)
+		i.style.display="none";
+		if ($i("img"))
+		{$i("img").title = "";}
+		//insere div para tips
+		var novoel = document.createElement("div");
+		novoel.id = Nid;
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		novoel.style.textAlign="left";
+		novoel.style.background="white";
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		else
+		{novoel.style.opacity = ".9";}
+		document.body.appendChild(novoel);
+		objmapa.objtips.push($i(Nid));
+		//
+		//monta o TIP com o id único criado
+		//quando o usuário escolhe a opção de fixar,
+		//o div é incluido no array objmapa.objtips
+		//quando o mapa é redesenhado, esses elementos são excluídos do mapa
+		//
+		var res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
+		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >fixar</span></div>";
+		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
+		ist = novoel.style;
+		ist.top = objposicaocursor.telay - 10;
+		ist.left = objposicaocursor.telax - 20;
+		ist.display="block";
+		//
+		//registra a função de eliminação dos tips
+		//
+		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.excluiTips('todos')") < 0)
+		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.excluiTips('todos')");}	
+		if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.janela.excluiTips('naofixos')") < 0)
+		{i3GEO.eventos.MOUSEMOVE.push("i3GEO.janela.excluiTips('naofixos')");}		
+
+		//
+		return(Nid);
+	},
+	/*
+	Function: excluiTips
+	
+	Exclui os tips armazenados na variável objmapa.objtips
+	
+	Parameters:
+	
+	tipo {String} - todos|naofixos tipos de tips que serão excluídos
+	*/
+	excluiTips: function(tipo){
+		
+		if(objmapa.objtips.length > 0){
+			var ot = objmapa.objtips.length-1;
+			if (ot >= 0){
+				do{
+					if(tipo == 'todos'){
+						if(objmapa.objtips[ot]){
+							var i = $i(objmapa.objtips[ot].id);
+							document.body.removeChild(i);
+						}
+					}
+					if(tipo == 'naofixos'){
+						if (objmapa.objtips[ot]){
+							if($i(objmapa.objtips[ot].id+"cabecatip").innerHTML != ""){
+								document.body.removeChild(objmapa.objtips[ot]);
+							}
+						}
+					}
+				}
+				while(ot--)
+				if(tipo == "todos")
+				{objmapa.objtips = new Array();}
+			}
+		}
+	},
+	/*
 	Function: fechaAguarde
 	
 	Fecha uma janela do tipo aguarde
 	
 	Paremeters:
 	
-	id {String} - id da janela que será fechada
+	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
-		try{eval('YAHOO.aguarde.'+id+'.destroy()');}
-		catch(e){};
+		if(arguments.length > 0){
+			try{eval('YAHOO.aguarde.'+id+'.destroy()');}
+			catch(e){};
+		}
+		else{
+			i3GEO.janela.fechaAguarde("ajaxdestaca");
+			i3GEO.janela.fechaAguarde("ajaxabrelente");
+			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
+			i3GEO.janela.fechaAguarde("ajaxLegenda");
+			i3GEO.janela.fechaAguarde("ajaxReferencia");
+			i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
+			i3GEO.janela.fechaAguarde("montaMapa");
+			i3GEO.janela.fechaAguarde("aguardedoc");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");		
+		}
 	}
 };
 try{

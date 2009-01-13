@@ -5,7 +5,7 @@ Funções de uso geral para processamento de dados
 
 File: i3geo/classesjs/funcoes.js
 
-About: Licençamento
+About: Licenciamento
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -37,26 +37,6 @@ catch(e)
 {
 	$i = function(i)
 	{return document.getElementById(i);};
-}
-/*
-Function: trataErro
-
-Fecha o objeto aguarde quando ocorre um erro.
-*/
-function trataErro()
-{
-	i3GEO.janela.fechaAguarde("ajaxdestaca");
-	i3GEO.janela.fechaAguarde("ajaxabrelente");
-	i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-	i3GEO.janela.fechaAguarde("ajaxredesenha");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
-	i3GEO.janela.fechaAguarde("ajaxLegenda");
-	i3GEO.janela.fechaAguarde("ajaxReferencia");
-	i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
-	i3GEO.janela.fechaAguarde("montaMapa");
-	i3GEO.janela.fechaAguarde("aguardedoc");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
 }
 /*
 Section: interface
@@ -147,281 +127,6 @@ function criaContainerRichdraw()
 	}
 	catch(e){alert("Erro ao tentar criar container richdraw");}
 }
-/*
-Function: docaguias
-
-Coloca as guias de navegação em uma janela interna do mapa e altera o tamanho do mapa para ajustá-lo à nova situação.
-
-O conteúdo da nova janela é aquele que estiver dentro de um DIV com id= "contemFerramentas"
-*/
-function docaguias()
-{
-	if (!$i("conteudojanelaguias"))
-	{
-		if($i("guiasYUI")){$i("guiasYUI").style.display="none";}
-		if (!$i("contemFerramentas")){return;}
-		var novono = $i("contemFerramentas").innerHTML;
-		$i("contemFerramentas").innerHTML = "";
-		var wef = 0;
-		if ($i("encolheFerramentas"))
-		{wef = parseInt($i("encolheFerramentas").style.width);}
-		var w = parseInt($i("contemFerramentas").style.width) - wef;
-		$i("contemFerramentas").style.width="0px";
-		if ($i("visual"))
-		{$i("visual").style.width="0px";$i("visual").innerHTML="";}
-		var pos = "px";
-		var a = objmapa.h;
-		var l = objmapa.w + w;
-		objmapa.h = a;
-		objmapa.w = l;
-		if (navm){pos = "";}
-		$i("img").style.width= l+pos;
-		$i("img").style.height= a+pos;
-		$i("corpoMapa").style.width= l+pos;
-		$i("corpoMapa").style.height= a+pos;
-		$i("corpoMapa").style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')';
-		$i("mst").style.width = l + 1 + wef + pos;
-		$i("contemImg").style.height= a+pos;
-		$i("contemImg").style.width= l+pos;
-		// entorno
-		if (g_entorno == "sim")
-		{
-			var letras=["L","O"];
-			for (var l=0;l<2; l++)
-			{
-				if ($i("img"+letras[l]))
-				{
-					$i("img"+letras[l]).style.width = objmapa.w+pos;
-					$i("img"+letras[l]).style.height = objmapa.h+pos;
-					$i("corpoMapa"+letras[l]).style.width=objmapa.w+pos;
-					$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos+pos;
-					$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-				}
-			}
-			var letras=["N","S"];
-			for (var l=0;l<2; l++)
-			{
-				if ($i("img"+letras[l]))
-				{
-					$i("img"+letras[l]).style.width = objmapa.w * 2+pos;
-					$i("img"+letras[l]).style.height = objmapa.h * 2+pos;
-					$i("corpoMapa"+letras[l]).style.width=objmapa.w * 3+pos;
-					$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos;
-					$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-				}
-			}
-		}
-		calcposf();
-		var temp = function()
-		{
-			//carrega janela
-			var novoel = document.createElement("div");
-			novoel.id = "janelaguias";
-			novoel.style.display="block";
-			var temp = '<div class="hd">Guias</div>';
-			temp += '<div class="bd" id="conteudojanelaguias"></div>';
-			novoel.innerHTML = temp;
-			if($i("i3geo"))
-			{$i("i3geo").appendChild(novoel);}
-			else
-			{document.body.appendChild(novoel);}
-			$i("conteudojanelaguias").innerHTML = novono;
-			YAHOO.namespace("janelaguias.xp");
-			YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"268px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-			YAHOO.janelaguias.xp.panel.render();
-			if($i(objmapa.guiaMenu+"obj"))
-			{
-				$i(objmapa.guiaMenu+"obj").innerHTML = "";
-			}
-			//ativaGuias();
-			if($i("listaTemas"))
-			{$i("listaTemas").innerHTML = "";}
-			if($i("listaPropriedades"))
-			{$i("listaPropriedades").innerHTML = "";objmapa.ativaListaPropriedades("listaPropriedades");}
-			remapaf();
-		};	
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaQS",temp);
-	}
-	else
-	{
-		YAHOO.janelaguias.xp.panel.render();
-		YAHOO.janelaguias.xp.panel.show();
-	}
-}
-/*
-Function: ativaGuias
-
-Ativa as guias principais do mapa, definindo as funções que serão executadas quando a guia é escolhida.
-
-Quando o usuário clica em uma guia, todas as guias são escondidas e a guia clicada é ativada.
-
-Algumas guias só são preenchidas quando o usuário clicar nelas pela primeira vez.
-
-O preenchimento sob demanda dessas guias torna necessário a definição da função que será executada quando o clique ocorrer.
-
-Essas funções são definidas por default nas guias principais.
-
-As guias principais são definidas nos objetos
-
-objmapa.guiaTemas
-
-objmapa.guiaMenu
-
-objmapa.guiaLegenda
-
-objmapa.guiaListaMapas
-
-*/
-function ativaGuias()
-{
-	YAHOO.log("ativaGuias", "i3geo");
-	//ajusta as guias da versão antiga do YUI para a nova
-	//
-	//pega o elemento onde as guias serão colocadas
-	//
-	for(var g=0;g<12;g++)
-	{
-		if ($i("guia"+g))
-		var gpai = $i("guia"+g).parentNode;
-	}
-	//
-	//monta as guias
-	//
-	if(gpai)
-	{
-		gpai.id = "guiasYUI";
-		gpai.className = "yui-navset";
-		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		//
-		//define os títulos das guias padrão
-		//
-		if($i(objmapa.guiaTemas))
-		{$i(objmapa.guiaTemas).innerHTML = $trad("g1");}
-		if($i(objmapa.guiaMenu))
-		{$i(objmapa.guiaMenu).innerHTML = $trad("g2");}
-		if($i(objmapa.guiaLegenda))
-		{$i(objmapa.guiaLegenda).innerHTML = $trad("g3");}
-		if($i(objmapa.guiaListaMapas))
-		{$i(objmapa.guiaListaMapas).innerHTML = $trad("g4");}
-		//
-		//
-		for(var g=0;g<12;g++)
-		{
-			if ($i("guia"+g))
-			{
-				//
-				//pega os títulos das guias, inclusive as que não são padrão
-				//
-				var tituloguia = $i("guia"+g).innerHTML;
-				//
-				//remove os espaços em branco 
-				//necessário para manter compatibilidade com versões antigas do i3geo
-				//
-				var re = new RegExp("&nbsp;", "g");
-				var tituloguia = tituloguia.replace(re,'');
-				//
-				//monta o título das guias
-				//
-				ins += '<li><a href="#"><em><div id="guia'+g+'" >'+tituloguia+'</div></em></a></li>';
-			}
-		}
-		ins += "</ul>";
-		//
-		//insere as guias em gpai
-		//
-		gpai.innerHTML = ins;
-		for(var g=0;g<12;g++)
-		{
-			if ($i("guia"+g))
-			{
-				eval('$i("guia'+g+'").onclick = function(){g_guiaativa = "guia'+g+'";mostraguiaf('+g+');}');
-				$i("guia"+g).onmouseover = function()
-				{
-					var bcg = this.parentNode.parentNode.style;
-					var cor = bcg.background.split(" ")[0];
-					if(cor != "white")
-					bcg.background = "#bfdaff";
-				};
-				$i("guia"+g).onmouseout = function()
-				{
-					var bcg = this.parentNode.parentNode.style;
-					var cor = bcg.background.split(" ")[0];
-					if(cor != "white")
-					bcg.background = "transparent";
-				};
-				if($i("guia"+g+"obj"))
-				{
-					$i("guia"+g+"obj").style.overflow="auto";
-					$i("guia"+g+"obj").style.height = objmapa.h;
-				}
-			}
-		}
-	}
-	//
-	//define a função que será executada quando o usuário clica em uma guia padrão
-	//
-	if ($i(objmapa.guiaTemas))
-	{
-		$i(objmapa.guiaTemas).onclick = function()
-		{
-			g_guiaativa = objmapa.guiaTemas;mostraguiaf(1);
-		};
-	}
-	if ($i(objmapa.guiaMenu))
-	{
-		$i(objmapa.guiaMenu).onclick = function()
-		{
-			g_guiaativa = objmapa.guiaMenu;
-			mostraguiaf(2);
-			//pega a lista de árvores que devem ser montadas
-			//é executado apenas se não existir o id=arvoreAdicionaTema
-			//caso contrário, a árvore é montada na inicialização do i3geo
-			if(!$i("arvoreAdicionaTema"))
-			{var ondeArvore = objmapa.guiaMenu+"obj";}
-			else
-			{var ondeArvore = "arvoreAdicionaTema";}
-			//
-			//para efeitos de compatibilidade
-			//
-			if(document.getElementById("outrasOpcoesAdiciona"))
-			{
-				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde = "outrasOpcoesAdiciona";
-				i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
-			}
-			//
-			//cria a árvore
-			//
-			i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,ondeArvore);
-		};
-	}
-	if ($i(objmapa.guiaLegenda))
-	{
-		$i(objmapa.guiaLegenda).onclick = function()
-		{g_guiaativa = objmapa.guiaLegenda;mostraguiaf(4);objmapa.atualizaLegendaHTML();};
-	}
-	if ($i(objmapa.guiaListaMapas))
-	{
-		$i(objmapa.guiaListaMapas).onclick = function()
-		{
-			g_guiaativa = objmapa.guiaListaMapas;
-			mostraguiaf(5);
-			if ($i("banners"))
-			{
-				$i("banners").innerHTML == $trad("o1");
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
-				cpObj.call(p,"pegaMapas",pegaMapas);
-			}
-			else
-			{alert("id banners nao encontrado");}
-		};
-	}
-	YAHOO.log("Fim ativaGuias", "i3geo");
-}
 /**
 Function: mudaiconf
 
@@ -469,43 +174,6 @@ function mudaiconf(i)
 	catch(e){alert("Ocorreu um erro. mudaiconf"+e);}
 }
 /*
-Function: mostraguiaf
-
-Ativa a visualização de uma determinada guia.
-
-A ativação consiste em tornar visível os elementos correspondentes a uma determinada guia.
-Esses elementos devem estar contidos em um DIV cujo id deve ser composto pela palavra "guia" seguida do número da
-guia e a palavra "obj", por exemplo, guia9obj.
-
-Parâmetros:
-
-guia - número da guia que será ativada.
-*/
-function mostraguiaf(guia)
-{
-	if ($i("guia"+guia))
-	{
-		var fs=[1,2,3,4,5,6,7,8,9,10,11,12];
-		for (var j=0;j<10; j++)
-		{
-			if ($i("guia"+fs[j]))
-			{
-				jj = fs[j];
-				if ($i("guia"+jj+"obj"))
-				{$i("guia"+jj+"obj").style.display="none";}
-				$i("guia"+fs[j]).parentNode.parentNode.style.background="transparent";
-			}
-		}
-		if ($i("guia"+guia+"obj"))
-		{
-			$i("guia"+guia+"obj").style.display="block";
-		}
-		else
-		{alert("O objeto guia"+guia+"obj nao existe.");}
-		$i("guia"+guia).parentNode.parentNode.style.background="white";
-	}
-}
-/**
 Function: ativaClicks
 
 Ativa as operações de clique sobre o mapa
@@ -522,66 +190,21 @@ function ativaClicks(docMapa)
 {
 	docMapa.onmouseover = function()
 	{
-		try
-		{
-			if ($i("janelaMenu"))
-			{$i("janelaMenu").style.display="none";}
-			//verifica se o mouse esta parado
-			if (objmapa.parado!="cancela")
-			{
-				objmapa.parado="nao";
-			}
-			if ($i("tip"))
-			{$i("tip").style.display="none";}
-		}
-		catch(e){var e = "";}
 		this.onmousemove=function(exy)
 		{
 			try
 			{
-				if ($i("mostraUTM")){$i("mostraUTM").style.display="none";}
-				if ($i("tip"))
-				{$i("tip").style.display="none";}
 				try
-				{clearTimeout(objmapa.tempoParado);}
+				{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 				catch(e){var a = e;}
-				objmapa.tempoParado = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
+				i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
 				capturaposicao(exy);
 				if (g_destaca != "")
 				{$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
-				if ($i("img") && (g_panM == "sim"))
-				{
-					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
-					var ny = objposicaocursor.telay - topinicial - clicinicialy;
-					if (g_entorno == "nao")
-					{
-						var l = 0;
-						if (parseInt($i("i3geo").style.left))
-						{var l = parseInt($i("i3geo").style.left);}
-						$i("img").style.left = nx - l;
-						var t = 0;
-						if (parseInt($i("i3geo").style.top))
-						{var t = parseInt($i("i3geo").style.top);}
-						$i("img").style.top = ny - t;
-					}
-					else
-					{
-						$left("img",objmapa.w*-1 + nx);
-						$left("imgS",objmapa.w*-1 + nx);
-						$left("imgL",objmapa.w + nx);
-						$left("imgO",objmapa.w*-3 + nx);
-						$left("imgN",objmapa.w*-1 + nx);
-						$top("img",objmapa.h*-1 + ny);
-						$top("imgS",objmapa.h*-1 + ny);
-						$top("imgL",objmapa.h*-1 + ny);
-						$top("imgN",objmapa.h*-1 + ny);
-						$top("imgO",objmapa.h*-1 + ny);
-					}
-				}
 			}
 			catch(e){var e = "";}
 			try
-			{objmapa.verificaMousemoveMapa();}
+			{i3GEO.eventos.mousemoveMapa();}
 			catch(e){var e = "";}
 		};
 	};
@@ -602,7 +225,6 @@ function ativaClicks(docMapa)
 			//verifica se esta na opÃ¯Â¿Â½o de zoom box
 			if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
 			{
-				// inicia retÃ¯Â¿Â½gulo de zoom
 				if($i("box1"))
 				{
 					var i = $i("box1").style;
@@ -618,28 +240,14 @@ function ativaClicks(docMapa)
 				tamanhox = 0;
 				tamanhoy = 0;
 			}
-			if ($i("img") && (g_tipoacao == "pan"))
-			{
-				g_panM = "sim";
-				if($i("corpoMapa"))
-				{
-					leftinicial = parseInt($i("corpoMapa").style.left);
-					topinicial = parseInt($i("corpoMapa").style.top);
-				}
-				clicinicialx = objposicaocursor.imgx;
-				clicinicialy = objposicaocursor.imgy;
-				ddinicialx = objposicaocursor.ddx;
-				ddinicialy = objposicaocursor.ddy;
-			}
+			i3GEO.eventos.mousedownMapa();
 		}
 		catch(e){var e = "";}
 	};
 	docMapa.onclick = function()
 	{
 		try
-		{
-			objmapa.verificaClickMapa();
-		}
+		{i3GEO.eventos.mousecliqueMapa();}
 		catch(e){var e = "";}
 	};
 	docMapa.onmouseup = function()
@@ -648,86 +256,11 @@ function ativaClicks(docMapa)
 		{
 			if (g_tipoacao == "zoomli"){zoomboxf("termina");}
 			if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
-			//
-			//realiza o pan (deslocamento) do mapa em função de dois pontos
-			//
-			if ($i("img") && (g_tipoacao == "pan"))
-			{
-				marcadorZoom = "";
-				g_panM = "nao";
-				var disty = (ddinicialy * -1) + objposicaocursor.ddy; //teladd[1]
-				var distx = (ddinicialx * -1) + objposicaocursor.ddx; //teladd[0]
-				var ex = objmapa.extent;
-				var ex = ex.split(" ");
-				var novoxi = (ex[0] * 1) - distx;
-				var novoxf = (ex[2] * 1) - distx;
-				var novoyi = (ex[1] * 1) - disty;
-				var novoyf = (ex[3] * 1) - disty;	
-				if ((distx == 0)||(disty == 0))
-				{
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+i3GEO.configura.sid;
-					cpObj.call(p,"pan",ajaxredesenha);
-					return;
-				}
-				var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,nex);
-			}
+			i3GEO.eventos.mouseupMapa();
 		}
 		catch(e){var e = "";}
 	};
 }
-/*
-Function: initJanelaRef
-
-Abre a janela com o mapa de referencia
-*/
-function initJanelaRef()
-{
-	YAHOO.log("initJanelaRef", "i3geo");
-	if (!$i("winRef"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "winRef";
-		novoel.style.display="none";
-		novoel.style.borderColor="gray";
-		var ins = '<div class="hd">';
-		var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
-		var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
-		ins += '<input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
-		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
-		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
-		ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
-		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
-		$i("imagemReferencia").style.height = objmapa.refheight+"px";
-	}
-	if($i("winRef").style.display != "block")
-	{
-		$i("winRef").style.display = "block";
-		YAHOO.namespace("janelaRef.xp");
-		YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
-		YAHOO.janelaRef.xp.panel.render();
-		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-		if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-		else
-		{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-		var escondeRef = function()
-		{
-			YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
-			YAHOO.janelaRef.xp.panel.destroy();	
-			i3GEO.util.insereCookie("g_mapaRefDisplay","none");
-		};
-		YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
-		i3GEO.util.insereCookie("g_mapaRefDisplay","block");
-	}
-	YAHOO.log("Fiim initJanelaRef", "i3geo");
-	objmapa.atualizaReferencia();
-}
-
 /*
 Function: movelentef
 
@@ -876,33 +409,7 @@ function zoomboxf(tipo)
 		break;
 	}
 }
-/*
-Function: clicouRef
 
-Altera a abrangência do mapa quando o mapa de referência é clicado
-*/
-function clicouRef()
-{
-	try
-	{
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+i3GEO.configura.sid;
-		cpObj.call(p,"pan",ajaxredesenha);
-	}
-	catch(e){var e = "";i3GEO.janela.fechaAguarde("ajaxredesenha");}
-}
-/*
-Function: movimentoRef
-
-Pega a coordenada do cursor sobre o mapa de referência
-*/
-function movimentoRef(obj)
-{
-	obj.onmousemove =function(exy)
-	{
-		capturaposicao(exy);
-	};
-}
 /*
 Function: ativaEntorno
 
@@ -996,296 +503,6 @@ function ajustaEntorno()
 	$top("imgL",objmapa.h*-1);
 	$top("imgN",objmapa.h*-1);
 	$top("imgO",objmapa.h*-1);
-}
-/*
-Section: atributos
-*/
-/*
-Function: verificaTip
-
-Verifica se a opção de identificação está ativa e se o mouse está parado.
-Se o mouse estiver parado, chama a função de mostrar tip.
-
-A função de busca dos dados para a etiqueta é definida na variável de configuração g_funcaoTip
-
-Pode-se definir uma outra função qualquer, sem a necessidade de alteração do código original do i3geo, definindo-se
-no HTML da interface a variável, por exemplo, gfuncaoTip = "minhasEtiquetas()"
-
-Por default, utiliza-se a função verificaTipDefault()
-*/
-function verificaTip()
-{
-	if (g_operacao != "identifica"){return;}
-	//insere div para tips
-	if (!$i("tip"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "tip";
-		novoel.style.position="absolute";
-		novoel.style.zIndex=5000;
-		if (navm)
-		{novoel.style.filter = "alpha(opacity=90)";}
-		document.body.appendChild(novoel);
-	}
-	if ((g_operacao == "identifica") && ($i("tip").style.display!="block"))
-	{
-		var i = $i("tip");
-		var ist = i.style;
-		ist.top = objposicaocursor.telay +20;
-		ist.left = objposicaocursor.telax;
-		i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>Pesquisando...</td></tr></table>";
-		ist.display="block";
-		eval(g_funcaoTip);
-	}
-}
-/*
-Function: verificaTipDefault
-
-Executa a operação de identificação para mostrar uma etiqueta no mapa.
-
-Esta é a função default, definida na variável g_funcaoTip
-*/
-function verificaTipDefault()
-{
-	YAHOO.log("verificaTipDefault", "i3geo");
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_persistent_connection(true);
-	cp.set_response_type("JSON");
-	cp.call(p,"identifica",mostraTip);
-}
-/*
-Function: mostraTip
-
-Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
-
-Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
-
-Parameters:
-
-retorno - retorno da função ajax com os dados para montar a etiqueta.
-*/
-function mostraTip(retorno)
-{
-	var mostra = false;
-	var retorno = retorno.data;
-	if ((retorno != "erro") && (retorno != undefined))
-	{
-		if ($i("img"))
-		{$i("img").title = "";}
-		if (retorno != "")
-		{
-			var res = "<div id='cabecatip' style='text-align:left;background-color:rgb(240,240,240)'><span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.parado=\"cancela\"'>parar&nbsp;&nbsp;</span>";
-			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
-			var temas = retorno.split("!");
-			var tema = temas.length-1;
-			if(tema >= 0)
-			{
-				do
-				{
-					var titulo = temas[tema].split("@");
-					if (g_tipotip == "completo")
-					{
-						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
-					}
-					var ocorrencias = titulo[1].split("*");
-					var ocorrencia = ocorrencias.length-1;
-					if(ocorrencia >= 0)
-					{
-						do
-						{
-							if (ocorrencias[ocorrencia] != "")
-							{
-								var pares = ocorrencias[ocorrencia].split("##");
-								var paresi = pares.length;
-								for (var par=0;par<paresi; par++)
-								{
-									var valores = pares[par].split("#");
-									if (g_tipotip == "completo")
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-									else
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-								}
-							}
-						}
-						while(ocorrencia--)
-					}
-				}
-				while(tema--)
-			}
-			if(!mostra){$i("tip").style.display="none";return;}
-			if ($i("janelaMen"))
-			{
-				$i("janelaMenTexto").innerHTML = res;
-			}
-			else
-			{
-				var i = $i("tip");
-				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
-				ist = i.style;
-				ist.top = objposicaocursor.telay - 10;
-				ist.left = objposicaocursor.telax - 20;
-				ist.display="block";
-			}
-		}
-	}
-	YAHOO.log("Fim mostraTip", "i3geo");
-}
-/*
-Section: legenda
-*/
-/*
-Function: legendaGrafico
-
-Mostra a legenda dos gráficos adicionados no mapa.
-
-Chamado pela ferramenta de inclusão de gráficos
-
-Parâmetros:
-
-par - string com os parâmetros item*r,g,b*item....
-*/
-function legendaGrafico(par)
-{
-	try
-	{
-		var temp = par.split("*");
-		var par = "<table>";
-		var i = temp.length-1;
-		if(i >= 0)
-		{
-			do
-			{
-				var t = temp[i];
-				var t = t.split(",");
-				par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
-			}
-			while(i--)
-		}
-		par += "</table>";
-		if (!$i("legendagr"))
-		{
-			var novoel = document.createElement("div");
-			var temp = '<div class="hd">Legenda</div>';
-			temp += '<div class="bd">';
-			temp += '<div id="contemleggr" ></div></div>';
-			novoel.id = "legendagr";
-			novoel.style.display="block";
-			novoel.style.textAlign="left";
-			novoel.innerHTML = temp;
-			document.body.appendChild(novoel);
-			YAHOO.namespace("legendagr.xp");
-			YAHOO.legendagr.xp.panel = new YAHOO.widget.Panel("legendagr", {width:"250px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-		}
-		$i("contemleggr").innerHTML = par;
-		YAHOO.legendagr.xp.panel.render();
-		YAHOO.legendagr.xp.panel.show();
-	}
-	catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
-}
-/*
-Section: sistemas de busca e navegação
-*/
-/*
-Function: atualizagoogle
-
-Atualiza o box do google se a função google estiver ativa
-*/
-function atualizagoogle()
-{
-	YAHOO.log("atualizagoogle", "i3geo");
-	if (frames["wdocai"])
-	{
-		if (navn)
-		{
-			if ($i("wdocai"))
-			{var doc = $i("wdocai").contentDocument;}
-		}
-		else
-		{
-			if(document.frames("wdocai"))
-			{var doc = document.frames("wdocai").document;}
-		}
-		if(doc)
-		{
-			if (doc.getElementById("map"))
-			{
-				if(window.parent.frames["wdocai"].panTogoogle)
-				{window.parent.frames["wdocai"].panTogoogle();}
-			}
-		}
-	}
-	YAHOO.log("Fim atualizagoogle", "i3geo");
-}
-/*
-Function: atualizascielo
-
-Atualiza a lista de dados na opção de busca Scielo
-*/
-function atualizascielo()
-{
-	YAHOO.log("atualizascielo", "i3geo");
-	if ($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoscielo"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizascielo", "i3geo");
-}	
-/*
-Function: atualizaconfluence
-
-Atualiza a lista de dados na opção de busca confluence
-*/
-function atualizaconfluence()
-{
-	YAHOO.log("atualizaconfluence", "i3geo");
-	if($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoconfluence"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizaconfluence", "i3geo");
-}
-/*
-Function: atualizawiki
-
-Atualiza a lista de dados na opção de busca wiki
-*/
-function atualizawiki()
-{
-	YAHOO.log("atualizawiki", "i3geo");
-	if ($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadowiki"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizawiki", "i3geo");
 }
 /*
 Section: menu de temas e outras listagens
@@ -1416,114 +633,10 @@ function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrup
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"pegalistadetemas",combo);
-
-}
-/*
-Function: pegaMapas
-
-Recebe a lista de mapas (banners) e monta a apresentação na guia "mapas".
-
-Adiciona na guia mapas os banners que dão acesso direto a mapas especiais.
-
-A indicação do arquivo xml é feita em ms_configura.php ou no sistema de administração
-
-Parameters:
-
-retorno - objeto JSON com a lista de mapas
-*/
-function pegaMapas(retorno)
-{
-	var ins = "<br>";
-	var mapa = retorno.data.mapas;
-	var ig1lt = mapa.length;
-	var ig1=0;
-	if(ig1lt > 0)
-	{
-		do
-		{
-			var nome = mapa[ig1].NOME;
-			if(mapa[ig1].PUBLICADO)
-			{
-				if(mapa[ig1].PUBLICADO == "NAO" || mapa[ig1].PUBLICADO == "nao")
-				{var nome = "<s>"+nome+"</s>";}
-			}
-			var descricao = mapa[ig1].DESCRICAO;
-			var imagem = mapa[ig1].IMAGEM;
-			var temas = mapa[ig1].TEMAS;
-			var ligados = mapa[ig1].LIGADOS;
-			var extensao = mapa[ig1].EXTENSAO;
-			var outros = mapa[ig1].OUTROS;
-			var lkd = mapa[ig1].LINK;
-			var link = i3GEO.configura.locaplic+"/ms_criamapa.php?temasa="+temas+"&layers="+ligados;
-			if (extensao != "")
-			{link += "&mapext="+extensao;}
-			if (outros != "")
-			{link += "&"+outros;}
-			if (lkd != "")
-			{var link = lkd;}
-			ins += "<div><a href='"+link+"'><img src='"+imagem+"'></a></div><br>";
-			ins += "<div><p>"+nome+"</p></div><br>";
-			ig1++;
-		}
-		while(ig1<ig1lt)
-	}
-	$i("banners").innerHTML = ins;
 }
 /*
 Section: redesenho do mapa
 */
-/*
-Function: autoRedesenho
-
-Controla a opção de redesenho automático temporizado
-
-Para funcionar, a variável de inicialização g_autoRedesenho deve ser > 0
-
-Parameters:
-
-opcao: ativa|desativa|redesenha
-*/
-function autoRedesenho(opcao)
-{
-	if (opcao == "desativa")
-	{
-		g_autoRedesenho = 0;
-		clearTimeout(objmapa.tempoRedesenho);
-		clearTimeout(objmapa.contaTempoRedesenho);
-		objmapa.tempoRedesenho = "";
-		objmapa.contaTempoRedesenho = "";
-		objmapa.tempoRedesenho = "";
-		if ($i("tempoRedesenho"))
-		{$i("tempoRedesenho").style.display = "none";}
-	}
-	if (opcao == "ativa")
-	{
-		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
-		{$i("tempoRedesenho").style.display = "block";}
-		if (g_autoRedesenho > 0)
-		{objmapa.tempoRedesenho = setTimeout('autoRedesenho("redesenha")',g_autoRedesenho);}
-		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
-		{
-			$i("tempoRedesenho").innerHTML = g_autoRedesenho/1000;
-			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
-		}
-	}
-	if (opcao == "redesenha")
-	{
-		clearTimeout(objmapa.tempoRedesenho);
-		clearTimeout(objmapa.contaTempoRedesenho);
-		remapaf();
-		autoRedesenho("ativa");
-	}
-	if (opcao == "contagem")
-	{
-		if ($i("tempoRedesenho"))
-		{
-			$i("tempoRedesenho").innerHTML = parseInt($i("tempoRedesenho").innerHTML) - 1;
-			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
-		}
-	}
-}
 /*
 Function: remapaf
 
@@ -1573,7 +686,7 @@ function remapaf()
 			}
 			while(i--)
 		}
-		var remapaAdicNovos = function remapaAdicNovos(retorno)
+		var remapaAdicNovos = function (retorno)
 		{
 			if ($i("buscatema"))
 			{
@@ -1639,8 +752,8 @@ function remapaf()
 		i3GEO.janela.fechaAguarde("remapa");
 	}
 	else
-	{remapaAdicNovos();}
-	YAHOO.log("FIm remapaf", "i3geo");
+	{eval(remapaAdicNovos);}
+	YAHOO.log("Fim remapaf", "i3geo");
 }
 /*
 Section: eventos

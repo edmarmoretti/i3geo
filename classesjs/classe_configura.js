@@ -55,6 +55,15 @@ i3GEO.configura = {
 	*/
 	locaplic: "",
 	/*
+	Variable: mapaRefDisplay
+	
+	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
+	
+	Type:
+	{style.display}
+	*/
+	mapaRefDisplay: "block",
+	/*
 	Variable: visual
 	
 	Tipo de visual que será utilizado no mapa.
@@ -131,7 +140,7 @@ i3GEO.configura = {
 	Type:
 	{Numeric}
 	*/
-	tempoMouseParado: 2500,
+	tempoMouseParado: 3500,
 	/*
 	Variable: iniciaJanelaMensagens
 	
@@ -151,7 +160,16 @@ i3GEO.configura = {
 	Type:
 	{sim|nao}
 	*/	
-	mostraRosaDosVentos: "sim"
+	mostraRosaDosVentos: "sim",
+	/*
+	Variable: liberaGuias
+	
+	Indica se as guias serão montadas em uma janela flutuante sobre o mapa
+	
+	Type:
+	{sim|nao}
+	*/
+	liberaGuias: "nao"
 	/*
 	Function: alteraVariavel
 	*/
@@ -159,54 +177,3 @@ i3GEO.configura = {
 	Function: adicionaVariavel
 	*/
 };
-//
-//para efeitos de compatibilidade
-try {
-	if (g_listaPropriedades)
-	{i3GEO.configura.listaDePropriedadesDoMapa = g_listaPropriedades;}
-}
-catch(e){};
-try {
-	if (g_tempo_aplicar)
-	{i3GEO.configura.tempoAplicar = g_tempo_aplicar;}
-}
-catch(e){};
-try {
-	if (g_janelaMen == "nao")
-	{i3GEO.configura.iniciaJanelaMensagens = false;}
-}
-catch(e){};
-try {
-	if (g_locaplic)
-	{i3GEO.configura.locaplic = g_locaplic;}
-}
-catch(e){};
-try {
-	if (g_tempotip)
-	{i3GEO.configura.tempoMouseParado = g_tempotip;}
-}
-catch(e){};
-try {
-	if (g_mostraRosa)
-	{i3GEO.configura.mostraRosaDosVentos = g_mostraRosa;}
-}
-catch(e){};
-try {
-	if (g_visual)
-	{i3GEO.configura.visual = g_visual;}
-}
-catch(e){};
-//
-//define a variável sid
-if (window.location.href.split("?")[1])
-{
-	g_sid = window.location.href.split("?")[1];
-	//
-	//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
-	//
-	if (g_sid.split("#")[0])
-	{g_sid = g_sid.split("#")[0];}
-}
-else
-{g_sid = "";}
-i3GEO.configura.sid = g_sid;

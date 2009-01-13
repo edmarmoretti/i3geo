@@ -134,8 +134,8 @@ function mostraxy(wkt)
 	y.sort(sortNumber)
 	yMin = y[0]
 	yMax = y[(y.length)-1]
- 	var xyMin = window.parent.i3GEO.util.dd2tela(xMin,yMin,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
- 	var xyMax = window.parent.i3GEO.util.dd2tela(xMax,yMax,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
 	window.parent.i3GEO.util.criaBox("boxg")
 	var box = window.parent.$i("boxg")
 	var w = xyMax[0]-xyMin[0]

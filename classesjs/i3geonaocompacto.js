@@ -30,11 +30,15 @@ var jsfiles = new Array(
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
 "../pacotes/yui252/build/treeview/treeview-min.js",
 "classe_configura.js",
+"depreciados.js",
 "classe_util.js",
+"classe_calculo.js",
+"classe_maparef.js",
 "dicionario.js",
 "classe_idioma.js",
 "classe_ajuda.js",
 "classe_janela.js",
+"classe_guias.js",
 "classe_arvoredecamadas.js",
 "classe_navega.js",
 "classe_eventos.js",
@@ -47,8 +51,7 @@ var jsfiles = new Array(
 "iniciamma.js",
 "menususpenso.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"classe_gadgets.js",
-"depreciados.js"
+"classe_gadgets.js"
 );
 for (i = 0; i < jsfiles.length; i++)
 {

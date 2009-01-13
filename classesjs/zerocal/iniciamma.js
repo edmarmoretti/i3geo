@@ -1047,20 +1047,4 @@ function Mapa(e,m)
 			}
 		}
 	};
-	/*
-	Function: verificaMousemoveMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
-	*/
-	this.verificaMousemoveMapa = function()
-	{
-		if (g_funcoesMousemoveMapaDefault.length > 0)
-		{
-			for (f=0;f<g_funcoesMousemoveMapaDefault.length; f++)
-			{
-				eval(g_funcoesMousemoveMapaDefault[f]);
-			}
-		}
-	};
-
 }

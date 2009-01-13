@@ -132,8 +132,8 @@ include_once("../../ms_configura.php");
     		var bd = map.getBounds();
     		var so = bd.getSouthWest();
     		var ne = bd.getNorthEast();
-    		var xyMin = window.parent.i3GEO.util.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
-    		var xyMax = window.parent.i3GEO.util.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
+    		var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
+    		var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
 			var box = window.parent.$i("boxg")
 			var w = xyMax[0]-xyMin[0]
 			var h = xyMin[1]-xyMax[1]

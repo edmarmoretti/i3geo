@@ -329,9 +329,3 @@ i3GEO.barraDeBotoes = {
 		YAHOO.janelaBotoes.xp.panel.show();		
 	}
 }
-//para efeitos de compatibilidade
-try{
-	if(g_tipoacao != "")
-	{i3GEO.barraDeBotoes.BOTAOPADRAO = g_tipoacao;}
-}
-catch(e){}

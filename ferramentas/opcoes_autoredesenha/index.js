@@ -19,7 +19,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-$i("t").value = window.parent.g_autoRedesenho
+$i("t").value = window.parent.i3GEO.navega.autoRedesenho.INTERVALO
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
@@ -28,12 +28,12 @@ YAHOO.example.init = function ()
 }()
 function executaf()
 {
-	window.parent.autoRedesenho("desativa")
-	window.parent.g_autoRedesenho = $i("t").value * 1000
+	window.parent.i3GEO.navega.autoRedesenho.desativa()
+	window.parent.i3GEO.navega.autoRedesenho.INTERVALO = $i("t").value * 1000
 	if (($i("t").value == 0) || ($i("t").value == ""))
-	{window.parent.autoRedesenho("desativa")}
+	{window.parent.i3GEO.navega.autoRedesenho.desativa()}
 	else
 	{
-		window.parent.autoRedesenho("ativa")
+		window.parent.i3GEO.navega.autoRedesenho.ativa()
 	}
 }

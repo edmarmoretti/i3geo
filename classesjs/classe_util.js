@@ -45,7 +45,16 @@ Returns:
 */
 $i = function(id)
 {return document.getElementById(id);};
+/*
+Function: Array.remove()
 
+Extende os métodos de um objeto Array, permitindo remover um elemento.
+
+*/
+Array.prototype.remove=function(s){
+	var i = this.indexOf(s);
+	if(i != -1) this.splice(i, 1);
+};
 i3GEO.util = {
 	/*
 	Variable: PINS
@@ -373,7 +382,10 @@ i3GEO.util = {
 			novoel.style.zIndex=1;
 			novoel.innerHTML = '<font face="Arial" size=0></font>';
 			document.body.appendChild(novoel);
-			novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
+			//YAHOO.util.Event.addListener($i(id),"mouseover", "this.style.display='none'");
+			//novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
+			novoel.onmouseover = function(){novoel.style.display='none';};
+			novoel.onmouseout = function(){novoel.style.display='block';};
 			i3GEO.util.BOXES.push(id);
 		}
 	},

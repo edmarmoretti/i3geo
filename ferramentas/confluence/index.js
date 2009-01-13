@@ -79,7 +79,7 @@ function buscaconfluence()
 function mostraxy(xy)
 {
 	var xy = xy.split(",")
- 	var xy = window.parent.i3GEO.util.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
 	var box = window.parent.$i("boxg")
 	box.style.display = "block"
 	box.style.width = "5px"

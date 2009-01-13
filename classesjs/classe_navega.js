@@ -114,6 +114,68 @@ i3GEO.navega = {
 		cp.call(p,"zoomPonto",ajaxredesenha);
 	},
 	/*
+	Function: zoompontoIMG
+	
+	Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	x {Numeric} - coordenada x da imagem
+	
+	y {Numeric} - coordenada y da imagem
+	*/
+	zoompontoIMG: function(locaplic,sid,x,y){
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+x+"&y="+y+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"zoomPonto",ajaxredesenha);
+	},
+	/*
+	Function: xy2xy
+	
+	Desloca o mapa de um ponto de coordenadas xy para um segundo ponto
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	xi {Numeric} - coordenada x inicial
+	
+	yi {Numeric} - coordenada y inicial
+	
+	xf {Numeric} - coordenada x final
+	
+	yf {Numeric} - coordenada y final
+	
+	ext {String} - extensão geográfica do mapa
+	
+	tipoimagem {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
+	*/
+	xy2xy: function(locaplic,sid,xi,yi,xf,yf,ext,tipoimagem){
+		var disty = (yi * -1) + yf;
+		var distx = (xi * -1) + xf;
+		var ex = ext.split(" ");
+		var novoxi = (ex[0] * 1) - distx;
+		var novoxf = (ex[2] * 1) - distx;
+		var novoyi = (ex[1] * 1) - disty;
+		var novoyf = (ex[3] * 1) - disty;
+		if ((distx == 0)||(disty == 0))
+		{return false;}
+		else{
+			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
+			i3GEO.navega.zoomExt(locaplic,sid,tipoimagem,nex);
+			return true;
+		}
+	},	
+	/*
 	Function: localizaIP
 	
 	Localiza as coordenadas baseadas no número IP do usuário.
@@ -324,13 +386,48 @@ i3GEO.navega = {
 		i.style.top = objposicaocursor.telay - 27;
 		i.style.left = objposicaocursor.telax - 27;
 		i.style.display="block";
-		var temp = function(){
+		var escondeRosa = function(){
 			var i = $i("i3geo_rosa");
 			i.style.display="none";
-			$i("img").removeEventListener('mousemove',temp,false);
+			YAHOO.util.Event.removeListener(escondeRosa);
 		}
 		if($i("img"))
-		$i("img").addEventListener('mousemove',temp,false)
+		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
+	},
+	autoRedesenho: {
+		INTERVALO: 0,
+		ID: "tempoRedesenho",
+		ativa: function(id){
+			if(arguments.length == 0){var id = "tempoRedesenho";}
+			i3GEO.navega.autoRedesenho.ID = id;
+			if (($i(id)) && i3GEO.navega.autoRedesenho.INTERVALO > 0)
+			{$i(id).style.display = "block";}
+			if (i3GEO.navega.autoRedesenho.INTERVALO > 0)
+			{i3GEO.navega.tempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.redesenha()',i3GEO.navega.autoRedesenho.INTERVALO);}
+			if (($i(id)) && (i3GEO.navega.autoRedesenho.INTERVALO > 0)){
+				$i(id).innerHTML = i3GEO.navega.autoRedesenho.INTERVALO/1000;
+				i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
+			}
+		},
+		desativa:function(){
+			i3GEO.navega.autoRedesenho.INTERVALO = 0;
+			clearTimeout(i3GEO.navega.tempoRedesenho);
+			clearTimeout(i3GEO.navega.contaTempoRedesenho);
+			i3GEO.navega.tempoRedesenho = "";
+			i3GEO.navega.contaTempoRedesenho = "";
+			if ($i(i3GEO.navega.autoRedesenho.ID))
+			{$i(i3GEO.navega.autoRedesenho.ID).style.display = "none";}
+		},
+		redesenha: function(){
+			clearTimeout(i3GEO.navega.tempoRedesenho);
+			clearTimeout(i3GEO.navega.contaTempoRedesenho);
+			ajaxredesenha("");
+			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
+		},
+		contagem: function(){
+			if ($i(i3GEO.navega.autoRedesenho.ID)){$i(i3GEO.navega.autoRedesenho.ID).innerHTML = parseInt($i(i3GEO.navega.autoRedesenho.ID).innerHTML) - 1;}
+			i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
+		}
 	}
 };

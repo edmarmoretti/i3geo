@@ -168,9 +168,9 @@ function: pan
 Desloca a visualização de um mapa (pan).
 
 parameters:
-$x - Valor de x em décimos de grau.
+$x - Valor de x em coordenadas de imagem.
 
-$y - Valor de y em décimos de grau.
+$y - Valor de y em coordenadas de imagem.
 
 $escala - Valor da escala (utilizado quando o clique é feito sobre o mapa de referência).
 

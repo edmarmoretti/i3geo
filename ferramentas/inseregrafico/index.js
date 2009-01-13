@@ -87,8 +87,29 @@ function corj(obj)
 function legenda()
 {
 	pegaitens()
-	var temp = $i("listadeitens").value
-	window.parent.legendaGrafico(temp)	
+	var par = $i("listadeitens").value
+	try
+	{
+		var temp = par.split("*");
+		var par = "<table>";
+		var i = temp.length-1;
+		if(i >= 0)
+		{
+			do
+			{
+				var t = temp[i];
+				var t = t.split(",");
+				par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
+			}
+			while(i--)
+		}
+		par += "</table>";
+		var w = window.parent.i3GEO.janela.cria(200,200,"","center","center","Legenda","FlegendaGr");
+		var w = w[2].id
+		window.parent.document.getElementById(w).innerHTML = par;
+		window.parent.i3GEO.janela.ANTESFECHA = new Array();
+	}
+	catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
 }
 //pega os itens
 function pegaitens()

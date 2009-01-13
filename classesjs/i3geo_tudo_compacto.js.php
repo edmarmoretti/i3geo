@@ -1,9 +1,9 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>$i = function(id){return document.getElementById(id);};
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 /**
  * The YAHOO object is the single global object used by YUI Library.  It
@@ -54,7 +54,15 @@ version: 2.3.1
  * @see yuiloader
  */
 
-if (typeof YAHOO == "undefined") {
+/**
+ * Forces the use of the supplied locale where applicable in the library
+ * @property locale
+ * @type string
+ * @static
+ * @default undefined
+ */
+
+if (typeof YAHOO == "undefined" || !YAHOO) {
     /**
      * The YAHOO global namespace object.  If YAHOO is already defined, the
      * existing YAHOO object will not be overwritten so that defined
@@ -265,16 +273,44 @@ YAHOO.env.ua = function() {
          * Safari 2.0.4:         418     <-- preventDefault fixed
          * Safari 2.0.4 (419.3): 418.9.1 <-- One version of Safari may run
          *                                   different versions of webkit
-         * Safari 2.0.4 (419.3): 419     <-- Current Safari release
-         * Webkit 212 nightly:   522+    <-- Safari 3.0 (with native SVG) should
-         *                                   be higher than this
+         * Safari 2.0.4 (419.3): 419     <-- Tiger installations that have been
+         *                                   updated, but not updated
+         *                                   to the latest patch.
+         * Webkit 212 nightly:   522+    <-- Safari 3.0 precursor (with native SVG
+         *                                   and many major issues fixed).  
+         * 3.x yahoo.com, flickr:422     <-- Safari 3.x hacks the user agent
+         *                                   string when hitting yahoo.com and 
+         *                                   flickr.com.
+         * Safari 3.0.4 (523.12):523.12  <-- First Tiger release - automatic update
+         *                                   from 2.x via the 10.4.11 OS patch
+         * Webkit nightly 1/2008:525+    <-- Supports DOMContentLoaded event.
+         *                                   yahoo.com user agent hack removed.
          *                                   
          * </pre>
          * http://developer.apple.com/internet/safari/uamatrix.html
          * @property webkit
          * @type float
          */
-        webkit:0
+        webkit: 0,
+
+        /**
+         * The mobile property will be set to a string containing any relevant
+         * user agent information when a modern mobile browser is detected.
+         * Currently limited to Safari on the iPhone/iPod Touch, Nokia N-series
+         * devices with the WebKit-based browser, and Opera Mini.  
+         * @property mobile 
+         * @type string
+         */
+        mobile: null,
+
+        /**
+         * Adobe AIR version number or 0.  Only populated if webkit is detected.
+         * Example: 1.0
+         * @property air
+         * @type float
+         */
+        air: 0
+
     };
 
     var ua=navigator.userAgent, m;
@@ -287,6 +323,22 @@ YAHOO.env.ua = function() {
     m=ua.match(/AppleWebKit\/([^\s]*)/);
     if (m&&m[1]) {
         o.webkit=parseFloat(m[1]);
+
+        // Mobile browser check
+        if (/ Mobile\//.test(ua)) {
+            o.mobile = "Apple"; // iPhone or iPod Touch
+        } else {
+            m=ua.match(/NokiaN[^\/]*/);
+            if (m) {
+                o.mobile = m[0]; // Nokia N-series, ex: NokiaN95
+            }
+        }
+
+        m=ua.match(/AdobeAIR\/([^\s]*)/);
+        if (m) {
+            o.air = m[0]; // Adobe AIR 1.0 or better
+        }
+
     }
 
     if (!o.webkit) { // not webkit
@@ -294,6 +346,10 @@ YAHOO.env.ua = function() {
         m=ua.match(/Opera[\s\/]([^\s]*)/);
         if (m&&m[1]) {
             o.opera=parseFloat(m[1]);
+            m=ua.match(/Opera Mini[^;]*/);
+            if (m) {
+                o.mobile = m[0]; // ex: Opera Mini/2.0.4509/1316
+            }
         } else { // not opera or webkit
             m=ua.match(/MSIE\s([^;]*)/);
             if (m&&m[1]) {
@@ -346,7 +402,17 @@ YAHOO.env.ua = function() {
  * Provides the language utilites and extensions used by the library
  * @class YAHOO.lang
  */
-YAHOO.lang = {
+YAHOO.lang = YAHOO.lang || {};
+
+(function() {
+
+var L = YAHOO.lang,
+
+    // ADD = ["toString", "valueOf", "hasOwnProperty"],
+    ADD = ["toString", "valueOf"],
+
+    OB = {
+
     /**
      * Determines whether or not the provided object is an array.
      * Testing typeof/instanceof/constructor of arrays across frame 
@@ -356,14 +422,11 @@ YAHOO.lang = {
      * properties.
      * @method isArray
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isArray: function(o) { 
-
         if (o) {
-           var l = YAHOO.lang;
-           return l.isNumber(o.length) && l.isFunction(o.splice) && 
-                  !l.hasOwnProperty(o.length);
+           return L.isNumber(o.length) && L.isFunction(o.splice);
         }
         return false;
     },
@@ -372,7 +435,7 @@ YAHOO.lang = {
      * Determines whether or not the provided object is a boolean
      * @method isBoolean
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isBoolean: function(o) {
         return typeof o === 'boolean';
@@ -382,7 +445,7 @@ YAHOO.lang = {
      * Determines whether or not the provided object is a function
      * @method isFunction
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isFunction: function(o) {
         return typeof o === 'function';
@@ -392,7 +455,7 @@ YAHOO.lang = {
      * Determines whether or not the provided object is null
      * @method isNull
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isNull: function(o) {
         return o === null;
@@ -402,7 +465,7 @@ YAHOO.lang = {
      * Determines whether or not the provided object is a legal number
      * @method isNumber
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isNumber: function(o) {
         return typeof o === 'number' && isFinite(o);
@@ -413,17 +476,17 @@ YAHOO.lang = {
      * or function
      * @method isObject
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */  
     isObject: function(o) {
-return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
+return (o && (typeof o === 'object' || L.isFunction(o))) || false;
     },
         
     /**
      * Determines whether or not the provided object is a string
      * @method isString
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isString: function(o) {
         return typeof o === 'string';
@@ -433,40 +496,12 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      * Determines whether or not the provided object is undefined
      * @method isUndefined
      * @param {any} o The object being testing
-     * @return Boolean
+     * @return {boolean} the result
      */
     isUndefined: function(o) {
         return typeof o === 'undefined';
     },
     
-    /**
-     * Determines whether or not the property was added
-     * to the object instance.  Returns false if the property is not present
-     * in the object, or was inherited from the prototype.
-     * This abstraction is provided to enable hasOwnProperty for Safari 1.3.x.
-     * There is a discrepancy between YAHOO.lang.hasOwnProperty and
-     * Object.prototype.hasOwnProperty when the property is a primitive added to
-     * both the instance AND prototype with the same value:
-     * <pre>
-     * var A = function() {};
-     * A.prototype.foo = 'foo';
-     * var a = new A();
-     * a.foo = 'foo';
-     * alert(a.hasOwnProperty('foo')); // true
-     * alert(YAHOO.lang.hasOwnProperty(a, 'foo')); // false when using fallback
-     * </pre>
-     * @method hasOwnProperty
-     * @param {any} o The object being testing
-     * @return Boolean
-     */
-    hasOwnProperty: function(o, prop) {
-        if (Object.prototype.hasOwnProperty) {
-            return o.hasOwnProperty(prop);
-        }
-        
-        return !YAHOO.lang.isUndefined(o[prop]) && 
-                o.constructor.prototype[prop] !== o[prop];
-    },
  
     /**
      * IE will not enumerate native functions in a derived object even if the
@@ -478,17 +513,14 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      * @static
      * @private
      */
-    _IEEnumFix: function(r, s) {
-        if (YAHOO.env.ua.ie) {
-            var add=["toString", "valueOf"], i;
-            for (i=0;i<add.length;i=i+1) {
-                var fname=add[i],f=s[fname];
-                if (YAHOO.lang.isFunction(f) && f!=Object.prototype[fname]) {
+    _IEEnumFix: (YAHOO.env.ua.ie) ? function(r, s) {
+            for (var i=0;i<ADD.length;i=i+1) {
+                var fname=ADD[i],f=s[fname];
+                if (L.isFunction(f) && f!=Object.prototype[fname]) {
                     r[fname]=f;
                 }
             }
-        }
-    },
+    } : function(){},
        
     /**
      * Utility to set up the prototype, constructor and superclass properties to
@@ -506,7 +538,7 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      */
     extend: function(subc, superc, overrides) {
         if (!superc||!subc) {
-            throw new Error("YAHOO.lang.extend failed, please check that " +
+            throw new Error("extend failed, please check that " +
                             "all dependencies are included.");
         }
         var F = function() {};
@@ -520,10 +552,12 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
     
         if (overrides) {
             for (var i in overrides) {
-                subc.prototype[i]=overrides[i];
+                if (L.hasOwnProperty(overrides, i)) {
+                    subc.prototype[i]=overrides[i];
+                }
             }
 
-            YAHOO.lang._IEEnumFix(subc.prototype, overrides);
+            L._IEEnumFix(subc.prototype, overrides);
         }
     },
    
@@ -560,12 +594,12 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
             }
         } else { // take everything, overwriting only if the third parameter is true
             for (p in s) { 
-                if (override || !r[p]) {
+                if (override || !(p in r)) {
                     r[p] = s[p];
                 }
             }
             
-            YAHOO.lang._IEEnumFix(r, s);
+            L._IEEnumFix(r, s);
         }
     },
  
@@ -592,7 +626,7 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
         for (var i=2;i<arguments.length;i=i+1) {
             a.push(arguments[i]);
         }
-        YAHOO.lang.augmentObject.apply(this, a);
+        L.augmentObject.apply(this, a);
     },
 
       
@@ -608,30 +642,30 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      * @return {String} the dump result
      */
     dump: function(o, d) {
-        var l=YAHOO.lang,i,len,s=[],OBJ="{...}",FUN="f(){...}",
+        var i,len,s=[],OBJ="{...}",FUN="f(){...}",
             COMMA=', ', ARROW=' => ';
 
         // Cast non-objects to string
         // Skip dates because the std toString is what we want
         // Skip HTMLElement-like objects because trying to dump 
         // an element will cause an unhandled exception in FF 2.x
-        if (!l.isObject(o)) {
+        if (!L.isObject(o)) {
             return o + "";
         } else if (o instanceof Date || ("nodeType" in o && "tagName" in o)) {
             return o;
-        } else if  (l.isFunction(o)) {
+        } else if  (L.isFunction(o)) {
             return FUN;
         }
 
         // dig into child objects the depth specifed. Default 3
-        d = (l.isNumber(d)) ? d : 3;
+        d = (L.isNumber(d)) ? d : 3;
 
         // arrays [1, 2, 3]
-        if (l.isArray(o)) {
+        if (L.isArray(o)) {
             s.push("[");
             for (i=0,len=o.length;i<len;i=i+1) {
-                if (l.isObject(o[i])) {
-                    s.push((d > 0) ? l.dump(o[i], d-1) : OBJ);
+                if (L.isObject(o[i])) {
+                    s.push((d > 0) ? L.dump(o[i], d-1) : OBJ);
                 } else {
                     s.push(o[i]);
                 }
@@ -645,10 +679,10 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
         } else {
             s.push("{");
             for (i in o) {
-                if (l.hasOwnProperty(o, i)) {
+                if (L.hasOwnProperty(o, i)) {
                     s.push(i + ARROW);
-                    if (l.isObject(o[i])) {
-                        s.push((d > 0) ? l.dump(o[i], d-1) : OBJ);
+                    if (L.isObject(o[i])) {
+                        s.push((d > 0) ? L.dump(o[i], d-1) : OBJ);
                     } else {
                         s.push(o[i]);
                     }
@@ -688,7 +722,7 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      * @return {String} the substituted string
      */
     substitute: function (s, o, f) {
-        var i, j, k, key, v, meta, l=YAHOO.lang, saved=[], token, 
+        var i, j, k, key, v, meta, saved=[], token, 
             DUMP='dump', SPACE=' ', LBRACE='{', RBRACE='}';
 
 
@@ -720,9 +754,9 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
                 v = f(key, v, meta);
             }
 
-            if (l.isObject(v)) {
-                if (l.isArray(v)) {
-                    v = l.dump(v, parseInt(meta, 10));
+            if (L.isObject(v)) {
+                if (L.isArray(v)) {
+                    v = L.dump(v, parseInt(meta, 10));
                 } else {
                     meta = meta || "";
 
@@ -735,12 +769,12 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
                     // use the toString if it is not the Object toString 
                     // and the 'dump' meta info was not found
                     if (v.toString===Object.prototype.toString||dump>-1) {
-                        v = l.dump(v, parseInt(meta, 10));
+                        v = L.dump(v, parseInt(meta, 10));
                     } else {
                         v = v.toString();
                     }
                 }
-            } else if (!l.isString(v) && !l.isNumber(v)) {
+            } else if (!L.isString(v) && !L.isNumber(v)) {
                 // This {block} has no replace string. Save it for later.
                 v = "~-" + saved.length + "-~";
                 saved[saved.length] = token;
@@ -788,18 +822,69 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      * @return the new merged object
      */
     merge: function() {
-        var o={}, a=arguments, i;
-        for (i=0; i<a.length; i=i+1) {
-            YAHOO.lang.augmentObject(o, a[i], true);
-            /*
-            for (var j in a[i]) {
-                o[j] = a[i][j];
-            }
-            */
+        var o={}, a=arguments;
+        for (var i=0, l=a.length; i<l; i=i+1) {
+            L.augmentObject(o, a[i], true);
         }
         return o;
     },
 
+    /**
+     * Executes the supplied function in the context of the supplied 
+     * object 'when' milliseconds later.  Executes the function a 
+     * single time unless periodic is set to true.
+     * @method later
+     * @since 2.4.0
+     * @param when {int} the number of milliseconds to wait until the fn 
+     * is executed
+     * @param o the context object
+     * @param fn {Function|String} the function to execute or the name of 
+     * the method in the 'o' object to execute
+     * @param data [Array] data that is provided to the function.  This accepts
+     * either a single item or an array.  If an array is provided, the
+     * function is executed with one parameter for each array item.  If
+     * you need to pass a single array parameter, it needs to be wrapped in
+     * an array [myarray]
+     * @param periodic {boolean} if true, executes continuously at supplied 
+     * interval until canceled
+     * @return a timer object. Call the cancel() method on this object to 
+     * stop the timer.
+     */
+    later: function(when, o, fn, data, periodic) {
+        when = when || 0; 
+        o = o || {};
+        var m=fn, d=data, f, r;
+
+        if (L.isString(fn)) {
+            m = o[fn];
+        }
+
+        if (!m) {
+            throw new TypeError("method undefined");
+        }
+
+        if (!L.isArray(d)) {
+            d = [data];
+        }
+
+        f = function() {
+            m.apply(o, d);
+        };
+
+        r = (periodic) ? setInterval(f, when) : setTimeout(f, when);
+
+        return {
+            interval: periodic,
+            cancel: function() {
+                if (this.interval) {
+                    clearInterval(r);
+                } else {
+                    clearTimeout(r);
+                }
+            }
+        };
+    },
+    
     /**
      * A convenience method for detecting a legitimate non-null value.
      * Returns false for null/undefined/NaN, true for other values, 
@@ -811,17 +896,48 @@ return (o && (typeof o === 'object' || YAHOO.lang.isFunction(o))) || false;
      */
     isValue: function(o) {
         // return (o || o === false || o === 0 || o === ''); // Infinity fails
-        var l = YAHOO.lang;
-return (l.isObject(o) || l.isString(o) || l.isNumber(o) || l.isBoolean(o));
+return (L.isObject(o) || L.isString(o) || L.isNumber(o) || L.isBoolean(o));
     }
 
 };
+
+/**
+ * Determines whether or not the property was added
+ * to the object instance.  Returns false if the property is not present
+ * in the object, or was inherited from the prototype.
+ * This abstraction is provided to enable hasOwnProperty for Safari 1.3.x.
+ * There is a discrepancy between YAHOO.lang.hasOwnProperty and
+ * Object.prototype.hasOwnProperty when the property is a primitive added to
+ * both the instance AND prototype with the same value:
+ * <pre>
+ * var A = function() {};
+ * A.prototype.foo = 'foo';
+ * var a = new A();
+ * a.foo = 'foo';
+ * alert(a.hasOwnProperty('foo')); // true
+ * alert(YAHOO.lang.hasOwnProperty(a, 'foo')); // false when using fallback
+ * </pre>
+ * @method hasOwnProperty
+ * @param {any} o The object being testing
+ * @param prop {string} the name of the property to test
+ * @return {boolean} the result
+ */
+L.hasOwnProperty = (Object.prototype.hasOwnProperty) ?
+    function(o, prop) {
+        return o && o.hasOwnProperty(prop);
+    } : function(o, prop) {
+        return !L.isUndefined(o[prop]) && 
+                o.constructor.prototype[prop] !== o[prop];
+    };
+
+// new lang wins
+OB.augmentObject(L, OB, true);
 
 /*
  * An alias for <a href="YAHOO.lang.html">YAHOO.lang</a>
  * @class YAHOO.util.Lang
  */
-YAHOO.util.Lang = YAHOO.lang;
+YAHOO.util.Lang = L;
  
 /**
  * Same as YAHOO.lang.augmentObject, except it only applies prototype 
@@ -839,7 +955,7 @@ YAHOO.util.Lang = YAHOO.lang;
  *        be applied and will overwrite an existing property in
  *        the receiver
  */
-YAHOO.lang.augment = YAHOO.lang.augmentProto;
+L.augment = L.augmentProto;
 
 /**
  * An alias for <a href="YAHOO.lang.html#augment">YAHOO.lang.augment</a>
@@ -853,7 +969,7 @@ YAHOO.lang.augment = YAHOO.lang.augmentProto;
  *        in the supplier will be used unless it would
  *        overwrite an existing property in the receiver
  */
-YAHOO.augment = YAHOO.lang.augmentProto;
+YAHOO.augment = L.augmentProto;
        
 /**
  * An alias for <a href="YAHOO.lang.html#extend">YAHOO.lang.extend</a>
@@ -865,39 +981,29 @@ YAHOO.augment = YAHOO.lang.augmentProto;
  *        subclass prototype.  These will override the
  *        matching items obtained from the superclass if present.
  */
-YAHOO.extend = YAHOO.lang.extend;
+YAHOO.extend = L.extend;
 
-YAHOO.register("yahoo", YAHOO, {version: "2.3.1", build: "541"});
-
-if(typeof YAHOO=="undefined"){var YAHOO={};}
-YAHOO.namespace=function(){var A=arguments,E=null,C,B,D;for(C=0;C<A.length;C=C+1){D=A[C].split(".");E=YAHOO;for(B=(D[0]=="YAHOO")?1:0;B<D.length;B=B+1){E[D[B]]=E[D[B]]||{};E=E[D[B]];}}return E;};YAHOO.log=function(D,A,C){var B=YAHOO.widget.Logger;if(B&&B.log){return B.log(D,A,C);}else{return false;}};YAHOO.register=function(A,E,D){var I=YAHOO.env.modules;if(!I[A]){I[A]={versions:[],builds:[]};}var B=I[A],H=D.version,G=D.build,F=YAHOO.env.listeners;B.name=A;B.version=H;B.build=G;B.versions.push(H);B.builds.push(G);B.mainClass=E;for(var C=0;C<F.length;C=C+1){F[C](B);}if(E){E.VERSION=H;E.BUILD=G;}else{YAHOO.log("mainClass is undefined for module "+A,"warn");}};YAHOO.env=YAHOO.env||{modules:[],listeners:[]};YAHOO.env.getVersion=function(A){return YAHOO.env.modules[A]||null;};YAHOO.env.ua=function(){var C={ie:0,opera:0,gecko:0,webkit:0};var B=navigator.userAgent,A;if((/KHTML/).test(B)){C.webkit=1;}A=B.match(/AppleWebKit\/([^\s]*)/);if(A&&A[1]){C.webkit=parseFloat(A[1]);}if(!C.webkit){A=B.match(/Opera[\s\/]([^\s]*)/);if(A&&A[1]){C.opera=parseFloat(A[1]);}else{A=B.match(/MSIE\s([^;]*)/);if(A&&A[1]){C.ie=parseFloat(A[1]);}else{A=B.match(/Gecko\/([^\s]*)/);if(A){C.gecko=1;A=B.match(/rv:([^\s\)]*)/);if(A&&A[1]){C.gecko=parseFloat(A[1]);}}}}}return C;}();(function(){YAHOO.namespace("util","widget","example");if("undefined"!==typeof YAHOO_config){var B=YAHOO_config.listener,A=YAHOO.env.listeners,D=true,C;if(B){for(C=0;C<A.length;C=C+1){if(A[C]==B){D=false;break;}}if(D){A.push(B);}}}})();
-YAHOO.lang={isArray:function(B){if(B)
-{var A=YAHOO.lang;return A.isNumber(B.length)&&A.isFunction(B.splice)&&!A.hasOwnProperty(B.length);}
-return false;}
-,isBoolean:function(A){return typeof A==="boolean";},isFunction:function(A)
-{return typeof A==="function";},isNull:function(A){return A===null;},
-isNumber:function(A){return typeof A==="number"&&isFinite(A);},
-isObject:function(A)
-{return(A&&(typeof A==="object"||YAHOO.lang.isFunction(A)))||false;},
-isString:function(A){return typeof A==="string";},
-isUndefined:function(A){return typeof A==="undefined";},
-hasOwnProperty:function(A,B){if(Object.prototype.hasOwnProperty){return A.hasOwnProperty(B);}
-return !YAHOO.lang.isUndefined(A[B])&&A.constructor.prototype[B]!==A[B];},
-_IEEnumFix:function(C,B){if(YAHOO.env.ua.ie){var E=["toString","valueOf"],A;for(A=0;A<E.length;A=A+1)
-{var F=E[A],D=B[F];if(YAHOO.lang.isFunction(D)&&D!=Object.prototype[F]){C[F]=D;}}}},extend:
-function(D,E,C){if(!E||!D)
-{throw new Error("YAHOO.lang.extend failed, please check that all dependencies are included.");}
-var B=function()
-{};B.prototype=E.prototype;D.prototype=new B();D.prototype.constructor=D;D.superclass=E.prototype;if(E.prototype.constructor==Object.prototype.constructor){E.prototype.constructor=E;}if(C){for(var A in C){D.prototype[A]=C[A];}YAHOO.lang._IEEnumFix(D.prototype,C);}},augmentObject:function(E,D){if(!D||!E){throw new Error("Absorb failed, verify dependencies.");}var A=arguments,C,F,B=A[2];if(B&&B!==true){for(C=2;C<A.length;C=C+1){E[A[C]]=D[A[C]];}}else{for(F in D){if(B||!E[F]){E[F]=D[F];}}YAHOO.lang._IEEnumFix(E,D);}},augmentProto:function(D,C){if(!C||!D){throw new Error("Augment failed, verify dependencies.");}var A=[D.prototype,C.prototype];for(var B=2;B<arguments.length;B=B+1){A.push(arguments[B]);}YAHOO.lang.augmentObject.apply(this,A);},dump:function(A,G){var C=YAHOO.lang,D,F,I=[],J="{...}",B="f(){...}",H=", ",E=" => ";if(!C.isObject(A)){return A+"";}else{if(A instanceof Date||("nodeType" in A&&"tagName" in A)){return A;}else{if(C.isFunction(A)){return B;}}}G=(C.isNumber(G))?G:3;if(C.isArray(A)){I.push("[");for(D=0,F=A.length;D<F;D=D+1){if(C.isObject(A[D])){I.push((G>0)?C.dump(A[D],G-1):J);}else{I.push(A[D]);}I.push(H);}if(I.length>1){I.pop();}I.push("]");}else{I.push("{");for(D in A){if(C.hasOwnProperty(A,D)){I.push(D+E);if(C.isObject(A[D])){I.push((G>0)?C.dump(A[D],G-1):J);}else{I.push(A[D]);}I.push(H);}}if(I.length>1){I.pop();}I.push("}");}return I.join("");},substitute:function(Q,B,J){var G,F,E,M,N,P,D=YAHOO.lang,L=[],C,H="dump",K=" ",A="{",O="}";for(;;){G=Q.lastIndexOf(A);if(G<0){break;}F=Q.indexOf(O,G);if(G+1>=F){break;}C=Q.substring(G+1,F);M=C;P=null;E=M.indexOf(K);if(E>-1){P=M.substring(E+1);M=M.substring(0,E);}N=B[M];if(J){N=J(M,N,P);}if(D.isObject(N)){if(D.isArray(N)){N=D.dump(N,parseInt(P,10));}else{P=P||"";var I=P.indexOf(H);if(I>-1){P=P.substring(4);}if(N.toString===Object.prototype.toString||I>-1){N=D.dump(N,parseInt(P,10));}else{N=N.toString();}}}else{if(!D.isString(N)&&!D.isNumber(N)){N="~-"+L.length+"-~";L[L.length]=C;}}Q=Q.substring(0,G)+N+Q.substring(F+1);}for(G=L.length-1;G>=0;G=G-1){Q=Q.replace(new RegExp("~-"+G+"-~"),"{"+L[G]+"}","g");}return Q;},trim:function(A){try{return A.replace(/^\s+|\s+$/g,"");}catch(B){return A;}},merge:function(){var C={},A=arguments,B;for(B=0;B<A.length;B=B+1){YAHOO.lang.augmentObject(C,A[B],true);}return C;},isValue:function(B){var A=YAHOO.lang;return(A.isObject(B)||A.isString(B)||A.isNumber(B)||A.isBoolean(B));}};YAHOO.util.Lang=YAHOO.lang;YAHOO.lang.augment=YAHOO.lang.augmentProto;YAHOO.augment=YAHOO.lang.augmentProto;YAHOO.extend=YAHOO.lang.extend;YAHOO.register("yahoo",YAHOO,{version:"2.3.1",build:"541"});(function(){var B=YAHOO.util,K,I,H=0,J={},F={};var C=YAHOO.env.ua.opera,L=YAHOO.env.ua.webkit,A=YAHOO.env.ua.gecko,G=YAHOO.env.ua.ie;var E={HYPHEN:/(-[a-z])/i,ROOT_TAG:/^body|html$/i};var M=function(O){if(!E.HYPHEN.test(O)){return O;}if(J[O]){return J[O];}var P=O;while(E.HYPHEN.exec(P)){P=P.replace(RegExp.$1,RegExp.$1.substr(1).toUpperCase());}J[O]=P;return P;};var N=function(P){var O=F[P];if(!O){O=new RegExp("(?:^|\\s+)"+P+"(?:\\s+|$)");F[P]=O;}return O;};if(document.defaultView&&document.defaultView.getComputedStyle){K=function(O,R){var Q=null;if(R=="float"){R="cssFloat";}var P=document.defaultView.getComputedStyle(O,"");if(P){Q=P[M(R)];}return O.style[R]||Q;};}else{if(document.documentElement.currentStyle&&G){K=function(O,Q){switch(M(Q)){case"opacity":var S=100;try{S=O.filters["DXImageTransform.Microsoft.Alpha"].opacity;}catch(R){try{S=O.filters("alpha").opacity;}catch(R){}}return S/100;case"float":Q="styleFloat";default:var P=O.currentStyle?O.currentStyle[Q]:null;return(O.style[Q]||P);}};}else{K=function(O,P){return O.style[P];};}}if(G){I=function(O,P,Q){switch(P){case"opacity":if(YAHOO.lang.isString(O.style.filter)){O.style.filter="alpha(opacity="+Q*100+")";if(!O.currentStyle||!O.currentStyle.hasLayout){O.style.zoom=1;}}break;case"float":P="styleFloat";default:O.style[P]=Q;}};}else{I=function(O,P,Q){if(P=="float"){P="cssFloat";}O.style[P]=Q;};}var D=function(O,P){return O&&O.nodeType==1&&(!P||P(O));};YAHOO.util.Dom={get:function(Q){if(Q&&(Q.tagName||Q.item)){return Q;}if(YAHOO.lang.isString(Q)||!Q){return document.getElementById(Q);}if(Q.length!==undefined){var R=[];for(var P=0,O=Q.length;P<O;++P){R[R.length]=B.Dom.get(Q[P]);}return R;}return Q;},getStyle:function(O,Q){Q=M(Q);var P=function(R){return K(R,Q);};return B.Dom.batch(O,P,B.Dom,true);},setStyle:function(O,Q,R){Q=M(Q);var P=function(S){I(S,Q,R);};B.Dom.batch(O,P,B.Dom,true);},getXY:function(O){var P=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=document.body){return false;}var Q=null;var V=[];var S;var T=R.ownerDocument;if(R.getBoundingClientRect){S=R.getBoundingClientRect();return[S.left+B.Dom.getDocumentScrollLeft(R.ownerDocument),S.top+B.Dom.getDocumentScrollTop(R.ownerDocument)];}else{V=[R.offsetLeft,R.offsetTop];Q=R.offsetParent;var U=this.getStyle(R,"position")=="absolute";if(Q!=R){while(Q){V[0]+=Q.offsetLeft;V[1]+=Q.offsetTop;if(L&&!U&&this.getStyle(Q,"position")=="absolute"){U=true;}Q=Q.offsetParent;}}if(L&&U){V[0]-=R.ownerDocument.body.offsetLeft;V[1]-=R.ownerDocument.body.offsetTop;}}Q=R.parentNode;while(Q.tagName&&!E.ROOT_TAG.test(Q.tagName)){if(B.Dom.getStyle(Q,"display").search(/^inline|table-row.*$/i)){V[0]-=Q.scrollLeft;V[1]-=Q.scrollTop;}Q=Q.parentNode;}return V;};return B.Dom.batch(O,P,B.Dom,true);},getX:function(O){var P=function(Q){return B.Dom.getXY(Q)[0];};return B.Dom.batch(O,P,B.Dom,true);},getY:function(O){var P=function(Q){return B.Dom.getXY(Q)[1];};return B.Dom.batch(O,P,B.Dom,true);},setXY:function(O,R,Q){var P=function(U){var T=this.getStyle(U,"position");if(T=="static"){this.setStyle(U,"position","relative");T="relative";}var W=this.getXY(U);if(W===false){return false;}var V=[parseInt(this.getStyle(U,"left"),10),parseInt(this.getStyle(U,"top"),10)];if(isNaN(V[0])){V[0]=(T=="relative")?0:U.offsetLeft;}if(isNaN(V[1])){V[1]=(T=="relative")?0:U.offsetTop;}if(R[0]!==null){U.style.left=R[0]-W[0]+V[0]+"px";}if(R[1]!==null){U.style.top=R[1]-W[1]+V[1]+"px";}if(!Q){var S=this.getXY(U);if((R[0]!==null&&S[0]!=R[0])||(R[1]!==null&&S[1]!=R[1])){this.setXY(U,R,true);}}};B.Dom.batch(O,P,B.Dom,true);},setX:function(P,O){B.Dom.setXY(P,[O,null]);},setY:function(O,P){B.Dom.setXY(O,[null,P]);},getRegion:function(O){var P=function(Q){if((Q.parentNode===null||Q.offsetParent===null||this.getStyle(Q,"display")=="none")&&Q!=document.body){return false;}var R=B.Region.getRegion(Q);return R;};return B.Dom.batch(O,P,B.Dom,true);},getClientWidth:function(){return B.Dom.getViewportWidth();},getClientHeight:function(){return B.Dom.getViewportHeight();},getElementsByClassName:function(S,W,T,U){W=W||"*";T=(T)?B.Dom.get(T):null||document;if(!T){return[];}var P=[],O=T.getElementsByTagName(W),V=N(S);for(var Q=0,R=O.length;Q<R;++Q){if(V.test(O[Q].className)){P[P.length]=O[Q];if(U){U.call(O[Q],O[Q]);}}}return P;},hasClass:function(Q,P){var O=N(P);var R=function(S){return O.test(S.className);};return B.Dom.batch(Q,R,B.Dom,true);},addClass:function(P,O){var Q=function(R){if(this.hasClass(R,O)){return false;}R.className=YAHOO.lang.trim([R.className,O].join(" "));return true;};return B.Dom.batch(P,Q,B.Dom,true);},removeClass:function(Q,P){var O=N(P);var R=function(S){if(!this.hasClass(S,P)){return false;}var T=S.className;S.className=T.replace(O," ");if(this.hasClass(S,P)){this.removeClass(S,P);}S.className=YAHOO.lang.trim(S.className);return true;};return B.Dom.batch(Q,R,B.Dom,true);},replaceClass:function(R,P,O){if(!O||P===O){return false;}var Q=N(P);var S=function(T){if(!this.hasClass(T,P)){this.addClass(T,O);return true;}T.className=T.className.replace(Q," "+O+" ");if(this.hasClass(T,P)){this.replaceClass(T,P,O);}T.className=YAHOO.lang.trim(T.className);return true;};return B.Dom.batch(R,S,B.Dom,true);},generateId:function(O,Q){Q=Q||"yui-gen";var P=function(R){if(R&&R.id){return R.id;}var S=Q+H++;if(R){R.id=S;}return S;};return B.Dom.batch(O,P,B.Dom,true)||P.apply(B.Dom,arguments);},isAncestor:function(P,Q){P=B.Dom.get(P);if(!P||!Q){return false;}var O=function(R){if(P.contains&&R.nodeType&&!L){return P.contains(R);}else{if(P.compareDocumentPosition&&R.nodeType){return !!(P.compareDocumentPosition(R)&16);}else{if(R.nodeType){return !!this.getAncestorBy(R,function(S){return S==P;});}}}return false;};return B.Dom.batch(Q,O,B.Dom,true);},inDocument:function(O){var P=function(Q){if(L){while(Q=Q.parentNode){if(Q==document.documentElement){return true;}}return false;}return this.isAncestor(document.documentElement,Q);};return B.Dom.batch(O,P,B.Dom,true);},getElementsBy:function(V,P,Q,S){P=P||"*";
-Q=(Q)?B.Dom.get(Q):null||document;if(!Q){return[];}var R=[],U=Q.getElementsByTagName(P);for(var T=0,O=U.length;T<O;++T){if(V(U[T])){R[R.length]=U[T];if(S){S(U[T]);}}}return R;},batch:function(S,V,U,Q){S=(S&&(S.tagName||S.item))?S:B.Dom.get(S);if(!S||!V){return false;}var R=(Q)?U:window;if(S.tagName||S.length===undefined){return V.call(R,S,U);}var T=[];for(var P=0,O=S.length;P<O;++P){T[T.length]=V.call(R,S[P],U);}return T;},getDocumentHeight:function(){var P=(document.compatMode!="CSS1Compat")?document.body.scrollHeight:document.documentElement.scrollHeight;var O=Math.max(P,B.Dom.getViewportHeight());return O;},getDocumentWidth:function(){var P=(document.compatMode!="CSS1Compat")?document.body.scrollWidth:document.documentElement.scrollWidth;var O=Math.max(P,B.Dom.getViewportWidth());return O;},getViewportHeight:function(){var O=self.innerHeight;var P=document.compatMode;if((P||G)&&!C){O=(P=="CSS1Compat")?document.documentElement.clientHeight:document.body.clientHeight;}return O;},getViewportWidth:function(){var O=self.innerWidth;var P=document.compatMode;if(P||G){O=(P=="CSS1Compat")?document.documentElement.clientWidth:document.body.clientWidth;}return O;},getAncestorBy:function(O,P){while(O=O.parentNode){if(D(O,P)){return O;}}return null;},getAncestorByClassName:function(P,O){P=B.Dom.get(P);if(!P){return null;}var Q=function(R){return B.Dom.hasClass(R,O);};return B.Dom.getAncestorBy(P,Q);},getAncestorByTagName:function(P,O){P=B.Dom.get(P);if(!P){return null;}var Q=function(R){return R.tagName&&R.tagName.toUpperCase()==O.toUpperCase();};return B.Dom.getAncestorBy(P,Q);},getPreviousSiblingBy:function(O,P){while(O){O=O.previousSibling;if(D(O,P)){return O;}}return null;},getPreviousSibling:function(O){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getPreviousSiblingBy(O);},getNextSiblingBy:function(O,P){while(O){O=O.nextSibling;if(D(O,P)){return O;}}return null;},getNextSibling:function(O){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getNextSiblingBy(O);},getFirstChildBy:function(O,Q){var P=(D(O.firstChild,Q))?O.firstChild:null;return P||B.Dom.getNextSiblingBy(O.firstChild,Q);},getFirstChild:function(O,P){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getFirstChildBy(O);},getLastChildBy:function(O,Q){if(!O){return null;}var P=(D(O.lastChild,Q))?O.lastChild:null;return P||B.Dom.getPreviousSiblingBy(O.lastChild,Q);},getLastChild:function(O){O=B.Dom.get(O);return B.Dom.getLastChildBy(O);},getChildrenBy:function(P,R){var Q=B.Dom.getFirstChildBy(P,R);var O=Q?[Q]:[];B.Dom.getNextSiblingBy(Q,function(S){if(!R||R(S)){O[O.length]=S;}return false;});return O;},getChildren:function(O){O=B.Dom.get(O);if(!O){}return B.Dom.getChildrenBy(O);},getDocumentScrollLeft:function(O){O=O||document;return Math.max(O.documentElement.scrollLeft,O.body.scrollLeft);},getDocumentScrollTop:function(O){O=O||document;return Math.max(O.documentElement.scrollTop,O.body.scrollTop);},insertBefore:function(P,O){P=B.Dom.get(P);O=B.Dom.get(O);if(!P||!O||!O.parentNode){return null;}return O.parentNode.insertBefore(P,O);},insertAfter:function(P,O){P=B.Dom.get(P);O=B.Dom.get(O);if(!P||!O||!O.parentNode){return null;}if(O.nextSibling){return O.parentNode.insertBefore(P,O.nextSibling);}else{return O.parentNode.appendChild(P);}}};})();YAHOO.util.Region=function(C,D,A,B){this.top=C;this[1]=C;this.right=D;this.bottom=A;this.left=B;this[0]=B;};YAHOO.util.Region.prototype.contains=function(A){return(A.left>=this.left&&A.right<=this.right&&A.top>=this.top&&A.bottom<=this.bottom);};YAHOO.util.Region.prototype.getArea=function(){return((this.bottom-this.top)*(this.right-this.left));};YAHOO.util.Region.prototype.intersect=function(E){var C=Math.max(this.top,E.top);var D=Math.min(this.right,E.right);var A=Math.min(this.bottom,E.bottom);var B=Math.max(this.left,E.left);if(A>=C&&D>=B){return new YAHOO.util.Region(C,D,A,B);}else{return null;}};YAHOO.util.Region.prototype.union=function(E){var C=Math.min(this.top,E.top);var D=Math.max(this.right,E.right);var A=Math.max(this.bottom,E.bottom);var B=Math.min(this.left,E.left);return new YAHOO.util.Region(C,D,A,B);};YAHOO.util.Region.prototype.toString=function(){return("Region {top: "+this.top+", right: "+this.right+", bottom: "+this.bottom+", left: "+this.left+"}");};YAHOO.util.Region.getRegion=function(D){var F=YAHOO.util.Dom.getXY(D);var C=F[1];var E=F[0]+D.offsetWidth;var A=F[1]+D.offsetHeight;var B=F[0];return new YAHOO.util.Region(C,E,A,B);};YAHOO.util.Point=function(A,B){if(YAHOO.lang.isArray(A)){B=A[1];A=A[0];}this.x=this.right=this.left=this[0]=A;this.y=this.top=this.bottom=this[1]=B;};YAHOO.util.Point.prototype=new YAHOO.util.Region();YAHOO.register("dom",YAHOO.util.Dom,{version:"2.3.1",build:"541"});YAHOO.util.CustomEvent=function(D,B,C,A){this.type=D;this.scope=B||window;this.silent=C;this.signature=A||YAHOO.util.CustomEvent.LIST;this.subscribers=[];if(!this.silent){}var E="_YUICEOnSubscribe";if(D!==E){this.subscribeEvent=new YAHOO.util.CustomEvent(E,this,true);}this.lastError=null;};YAHOO.util.CustomEvent.LIST=0;YAHOO.util.CustomEvent.FLAT=1;YAHOO.util.CustomEvent.prototype={subscribe:function(B,C,A){if(!B){throw new Error("Invalid callback for subscriber to '"+this.type+"'");}if(this.subscribeEvent){this.subscribeEvent.fire(B,C,A);}this.subscribers.push(new YAHOO.util.Subscriber(B,C,A));},unsubscribe:function(D,F){if(!D){return this.unsubscribeAll();}var E=false;for(var B=0,A=this.subscribers.length;B<A;++B){var C=this.subscribers[B];if(C&&C.contains(D,F)){this._delete(B);E=true;}}return E;},fire:function(){var E=this.subscribers.length;if(!E&&this.silent){return true;}var H=[],G=true,D,I=false;for(D=0;D<arguments.length;++D){H.push(arguments[D]);}var A=H.length;if(!this.silent){}for(D=0;D<E;++D){var L=this.subscribers[D];if(!L){I=true;}else{if(!this.silent){}var K=L.getScope(this.scope);if(this.signature==YAHOO.util.CustomEvent.FLAT){var B=null;if(H.length>0){B=H[0];}try{G=L.fn.call(K,B,L.obj);}catch(F){this.lastError=F;}}else{try{G=L.fn.call(K,this.type,H,L.obj);}catch(F){this.lastError=F;}}if(false===G){if(!this.silent){}return false;}}}if(I){var J=[],C=this.subscribers;for(D=0,E=C.length;D<E;D=D+1){J.push(C[D]);}this.subscribers=J;}return true;},unsubscribeAll:function(){for(var B=0,A=this.subscribers.length;B<A;++B){this._delete(A-1-B);}this.subscribers=[];return B;},_delete:function(A){var B=this.subscribers[A];if(B){delete B.fn;delete B.obj;}this.subscribers[A]=null;},toString:function(){return"CustomEvent: '"+this.type+"', scope: "+this.scope;}};YAHOO.util.Subscriber=function(B,C,A){this.fn=B;this.obj=YAHOO.lang.isUndefined(C)?null:C;this.override=A;};YAHOO.util.Subscriber.prototype.getScope=function(A){if(this.override){if(this.override===true){return this.obj;}else{return this.override;}}return A;};YAHOO.util.Subscriber.prototype.contains=function(A,B){if(B){return(this.fn==A&&this.obj==B);}else{return(this.fn==A);}};YAHOO.util.Subscriber.prototype.toString=function(){return"Subscriber { obj: "+this.obj+", override: "+(this.override||"no")+" }";};if(!YAHOO.util.Event){YAHOO.util.Event=function(){var H=false;var J=false;var I=[];var K=[];var G=[];var E=[];var C=0;var F=[];var B=[];var A=0;var D={63232:38,63233:40,63234:37,63235:39};return{POLL_RETRYS:4000,POLL_INTERVAL:10,EL:0,TYPE:1,FN:2,WFN:3,UNLOAD_OBJ:3,ADJ_SCOPE:4,OBJ:5,OVERRIDE:6,lastError:null,isSafari:YAHOO.env.ua.webkit,webkit:YAHOO.env.ua.webkit,isIE:YAHOO.env.ua.ie,_interval:null,startInterval:function(){if(!this._interval){var L=this;var M=function(){L._tryPreloadAttach();};this._interval=setInterval(M,this.POLL_INTERVAL);}},onAvailable:function(N,L,O,M){F.push({id:N,fn:L,obj:O,override:M,checkReady:false});C=this.POLL_RETRYS;this.startInterval();},onDOMReady:function(L,N,M){if(J){setTimeout(function(){var O=window;if(M){if(M===true){O=N;}else{O=M;}}L.call(O,"DOMReady",[],N);},0);}else{this.DOMReadyEvent.subscribe(L,N,M);}},onContentReady:function(N,L,O,M){F.push({id:N,fn:L,obj:O,override:M,checkReady:true});C=this.POLL_RETRYS;this.startInterval();},addListener:function(N,L,W,R,M){if(!W||!W.call){return false;}if(this._isValidCollection(N)){var X=true;for(var S=0,U=N.length;S<U;++S){X=this.on(N[S],L,W,R,M)&&X;}return X;}else{if(YAHOO.lang.isString(N)){var Q=this.getEl(N);if(Q){N=Q;}else{this.onAvailable(N,function(){YAHOO.util.Event.on(N,L,W,R,M);});return true;}}}if(!N){return false;}if("unload"==L&&R!==this){K[K.length]=[N,L,W,R,M];return true;}var Z=N;if(M){if(M===true){Z=R;}else{Z=M;}}var O=function(a){return W.call(Z,YAHOO.util.Event.getEvent(a,N),R);};var Y=[N,L,W,O,Z,R,M];var T=I.length;I[T]=Y;if(this.useLegacyEvent(N,L)){var P=this.getLegacyIndex(N,L);if(P==-1||N!=G[P][0]){P=G.length;B[N.id+L]=P;G[P]=[N,L,N["on"+L]];E[P]=[];N["on"+L]=function(a){YAHOO.util.Event.fireLegacyEvent(YAHOO.util.Event.getEvent(a),P);};}E[P].push(Y);}else{try{this._simpleAdd(N,L,O,false);}catch(V){this.lastError=V;this.removeListener(N,L,W);return false;}}return true;},fireLegacyEvent:function(P,N){var R=true,L,T,S,U,Q;T=E[N];for(var M=0,O=T.length;M<O;++M){S=T[M];if(S&&S[this.WFN]){U=S[this.ADJ_SCOPE];Q=S[this.WFN].call(U,P);R=(R&&Q);}}L=G[N];if(L&&L[2]){L[2](P);}return R;},getLegacyIndex:function(M,N){var L=this.generateId(M)+N;if(typeof B[L]=="undefined"){return -1;}else{return B[L];}},useLegacyEvent:function(M,N){if(this.webkit&&("click"==N||"dblclick"==N)){var L=parseInt(this.webkit,10);if(!isNaN(L)&&L<418){return true;}}return false;},removeListener:function(M,L,U){var P,S,W;if(typeof M=="string"){M=this.getEl(M);}else{if(this._isValidCollection(M)){var V=true;for(P=0,S=M.length;P<S;++P){V=(this.removeListener(M[P],L,U)&&V);}return V;}}if(!U||!U.call){return this.purgeElement(M,false,L);}if("unload"==L){for(P=0,S=K.length;P<S;P++){W=K[P];if(W&&W[0]==M&&W[1]==L&&W[2]==U){K[P]=null;return true;}}return false;}var Q=null;var R=arguments[3];if("undefined"===typeof R){R=this._getCacheIndex(M,L,U);}if(R>=0){Q=I[R];}if(!M||!Q){return false;}if(this.useLegacyEvent(M,L)){var O=this.getLegacyIndex(M,L);var N=E[O];if(N){for(P=0,S=N.length;P<S;++P){W=N[P];if(W&&W[this.EL]==M&&W[this.TYPE]==L&&W[this.FN]==U){N[P]=null;break;}}}}else{try{this._simpleRemove(M,L,Q[this.WFN],false);}catch(T){this.lastError=T;return false;}}delete I[R][this.WFN];delete I[R][this.FN];I[R]=null;return true;},getTarget:function(N,M){var L=N.target||N.srcElement;return this.resolveTextNode(L);},resolveTextNode:function(L){if(L&&3==L.nodeType){return L.parentNode;}else{return L;}},getPageX:function(M){var L=M.pageX;if(!L&&0!==L){L=M.clientX||0;if(this.isIE){L+=this._getScrollLeft();}}return L;},getPageY:function(L){var M=L.pageY;if(!M&&0!==M){M=L.clientY||0;if(this.isIE){M+=this._getScrollTop();}}return M;},getXY:function(L){return[this.getPageX(L),this.getPageY(L)];
-},getRelatedTarget:function(M){var L=M.relatedTarget;if(!L){if(M.type=="mouseout"){L=M.toElement;}else{if(M.type=="mouseover"){L=M.fromElement;}}}return this.resolveTextNode(L);},getTime:function(N){if(!N.time){var M=new Date().getTime();try{N.time=M;}catch(L){this.lastError=L;return M;}}return N.time;},stopEvent:function(L){this.stopPropagation(L);this.preventDefault(L);},stopPropagation:function(L){if(L.stopPropagation){L.stopPropagation();}else{L.cancelBubble=true;}},preventDefault:function(L){if(L.preventDefault){L.preventDefault();}else{L.returnValue=false;}},getEvent:function(Q,O){var P=Q||window.event;if(!P){var R=this.getEvent.caller;while(R){P=R.arguments[0];if(P&&Event==P.constructor){break;}R=R.caller;}}if(P&&this.isIE){try{var N=P.srcElement;if(N){var M=N.type;}}catch(L){P.target=O;}}return P;},getCharCode:function(M){var L=M.keyCode||M.charCode||0;if(YAHOO.env.ua.webkit&&(L in D)){L=D[L];}return L;},_getCacheIndex:function(P,Q,O){for(var N=0,M=I.length;N<M;++N){var L=I[N];if(L&&L[this.FN]==O&&L[this.EL]==P&&L[this.TYPE]==Q){return N;}}return -1;},generateId:function(L){var M=L.id;if(!M){M="yuievtautoid-"+A;++A;L.id=M;}return M;},_isValidCollection:function(M){try{return(typeof M!=="string"&&M.length&&!M.tagName&&!M.alert&&typeof M[0]!=="undefined");}catch(L){return false;}},elCache:{},getEl:function(L){return(typeof L==="string")?document.getElementById(L):L;},clearCache:function(){},DOMReadyEvent:new YAHOO.util.CustomEvent("DOMReady",this),_load:function(M){if(!H){H=true;var L=YAHOO.util.Event;L._ready();L._tryPreloadAttach();}},_ready:function(M){if(!J){J=true;var L=YAHOO.util.Event;L.DOMReadyEvent.fire();L._simpleRemove(document,"DOMContentLoaded",L._ready);}},_tryPreloadAttach:function(){if(this.locked){return false;}if(this.isIE){if(!J){this.startInterval();return false;}}this.locked=true;var Q=!H;if(!Q){Q=(C>0);}var P=[];var R=function(T,U){var S=T;if(U.override){if(U.override===true){S=U.obj;}else{S=U.override;}}U.fn.call(S,U.obj);};var M,L,O,N;for(M=0,L=F.length;M<L;++M){O=F[M];if(O&&!O.checkReady){N=this.getEl(O.id);if(N){R(N,O);F[M]=null;}else{P.push(O);}}}for(M=0,L=F.length;M<L;++M){O=F[M];if(O&&O.checkReady){N=this.getEl(O.id);if(N){if(H||N.nextSibling){R(N,O);F[M]=null;}}else{P.push(O);}}}C=(P.length===0)?0:C-1;if(Q){this.startInterval();}else{clearInterval(this._interval);this._interval=null;}this.locked=false;return true;},purgeElement:function(O,P,R){var Q=this.getListeners(O,R),N,L;if(Q){for(N=0,L=Q.length;N<L;++N){var M=Q[N];this.removeListener(O,M.type,M.fn,M.index);}}if(P&&O&&O.childNodes){for(N=0,L=O.childNodes.length;N<L;++N){this.purgeElement(O.childNodes[N],P,R);}}},getListeners:function(N,L){var Q=[],M;if(!L){M=[I,K];}else{if(L=="unload"){M=[K];}else{M=[I];}}for(var P=0;P<M.length;P=P+1){var T=M[P];if(T&&T.length>0){for(var R=0,S=T.length;R<S;++R){var O=T[R];if(O&&O[this.EL]===N&&(!L||L===O[this.TYPE])){Q.push({type:O[this.TYPE],fn:O[this.FN],obj:O[this.OBJ],adjust:O[this.OVERRIDE],scope:O[this.ADJ_SCOPE],index:R});}}}}return(Q.length)?Q:null;},_unload:function(S){var R=YAHOO.util.Event,P,O,M,L,N;for(P=0,L=K.length;P<L;++P){M=K[P];if(M){var Q=window;if(M[R.ADJ_SCOPE]){if(M[R.ADJ_SCOPE]===true){Q=M[R.UNLOAD_OBJ];}else{Q=M[R.ADJ_SCOPE];}}M[R.FN].call(Q,R.getEvent(S,M[R.EL]),M[R.UNLOAD_OBJ]);K[P]=null;M=null;Q=null;}}K=null;if(I&&I.length>0){O=I.length;while(O){N=O-1;M=I[N];if(M){R.removeListener(M[R.EL],M[R.TYPE],M[R.FN],N);}O=O-1;}M=null;R.clearCache();}for(P=0,L=G.length;P<L;++P){G[P][0]=null;G[P]=null;}G=null;R._simpleRemove(window,"unload",R._unload);},_getScrollLeft:function(){return this._getScroll()[1];},_getScrollTop:function(){return this._getScroll()[0];},_getScroll:function(){var L=document.documentElement,M=document.body;if(L&&(L.scrollTop||L.scrollLeft)){return[L.scrollTop,L.scrollLeft];}else{if(M){return[M.scrollTop,M.scrollLeft];}else{return[0,0];}}},regCE:function(){},_simpleAdd:function(){if(window.addEventListener){return function(N,O,M,L){N.addEventListener(O,M,(L));};}else{if(window.attachEvent){return function(N,O,M,L){N.attachEvent("on"+O,M);};}else{return function(){};}}}(),_simpleRemove:function(){if(window.removeEventListener){return function(N,O,M,L){N.removeEventListener(O,M,(L));};}else{if(window.detachEvent){return function(M,N,L){M.detachEvent("on"+N,L);};}else{return function(){};}}}()};}();(function(){var D=YAHOO.util.Event;D.on=D.addListener;if(D.isIE){YAHOO.util.Event.onDOMReady(YAHOO.util.Event._tryPreloadAttach,YAHOO.util.Event,true);var B,E=document,A=E.body;if(("undefined"!==typeof YAHOO_config)&&YAHOO_config.injecting){B=document.createElement("script");var C=E.getElementsByTagName("head")[0]||A;C.insertBefore(B,C.firstChild);}else{E.write("<script id=\"_yui_eu_dr\" defer=\"true\" src=\"//:\"></script>");B=document.getElementById("_yui_eu_dr");}if(B){B.onreadystatechange=function(){if("complete"===this.readyState){this.parentNode.removeChild(this);YAHOO.util.Event._ready();}};}else{}B=null;}else{if(D.webkit){D._drwatch=setInterval(function(){var F=document.readyState;if("loaded"==F||"complete"==F){clearInterval(D._drwatch);D._drwatch=null;D._ready();}},D.POLL_INTERVAL);}else{D._simpleAdd(document,"DOMContentLoaded",D._ready);}}D._simpleAdd(window,"load",D._load);D._simpleAdd(window,"unload",D._unload);D._tryPreloadAttach();})();}YAHOO.util.EventProvider=function(){};YAHOO.util.EventProvider.prototype={__yui_events:null,__yui_subscribers:null,subscribe:function(A,C,F,E){this.__yui_events=this.__yui_events||{};var D=this.__yui_events[A];if(D){D.subscribe(C,F,E);}else{this.__yui_subscribers=this.__yui_subscribers||{};var B=this.__yui_subscribers;if(!B[A]){B[A]=[];}B[A].push({fn:C,obj:F,override:E});}},unsubscribe:function(C,E,G){this.__yui_events=this.__yui_events||{};var A=this.__yui_events;if(C){var F=A[C];if(F){return F.unsubscribe(E,G);}}else{var B=true;for(var D in A){if(YAHOO.lang.hasOwnProperty(A,D)){B=B&&A[D].unsubscribe(E,G);}}return B;}return false;},unsubscribeAll:function(A){return this.unsubscribe(A);},createEvent:function(G,D){this.__yui_events=this.__yui_events||{};
-var A=D||{};var I=this.__yui_events;if(I[G]){}else{var H=A.scope||this;var E=(A.silent);var B=new YAHOO.util.CustomEvent(G,H,E,YAHOO.util.CustomEvent.FLAT);I[G]=B;if(A.onSubscribeCallback){B.subscribeEvent.subscribe(A.onSubscribeCallback);}this.__yui_subscribers=this.__yui_subscribers||{};var F=this.__yui_subscribers[G];if(F){for(var C=0;C<F.length;++C){B.subscribe(F[C].fn,F[C].obj,F[C].override);}}}return I[G];},fireEvent:function(E,D,A,C){this.__yui_events=this.__yui_events||{};var G=this.__yui_events[E];if(!G){return null;}var B=[];for(var F=1;F<arguments.length;++F){B.push(arguments[F]);}return G.fire.apply(G,B);},hasEvent:function(A){if(this.__yui_events){if(this.__yui_events[A]){return true;}}return false;}};YAHOO.util.KeyListener=function(A,F,B,C){if(!A){}else{if(!F){}else{if(!B){}}}if(!C){C=YAHOO.util.KeyListener.KEYDOWN;}var D=new YAHOO.util.CustomEvent("keyPressed");this.enabledEvent=new YAHOO.util.CustomEvent("enabled");this.disabledEvent=new YAHOO.util.CustomEvent("disabled");if(typeof A=="string"){A=document.getElementById(A);}if(typeof B=="function"){D.subscribe(B);}else{D.subscribe(B.fn,B.scope,B.correctScope);}function E(K,J){if(!F.shift){F.shift=false;}if(!F.alt){F.alt=false;}if(!F.ctrl){F.ctrl=false;}if(K.shiftKey==F.shift&&K.altKey==F.alt&&K.ctrlKey==F.ctrl){var H;var G;if(F.keys instanceof Array){for(var I=0;I<F.keys.length;I++){H=F.keys[I];if(H==K.charCode){D.fire(K.charCode,K);break;}else{if(H==K.keyCode){D.fire(K.keyCode,K);break;}}}}else{H=F.keys;if(H==K.charCode){D.fire(K.charCode,K);}else{if(H==K.keyCode){D.fire(K.keyCode,K);}}}}}this.enable=function(){if(!this.enabled){YAHOO.util.Event.addListener(A,C,E);this.enabledEvent.fire(F);}this.enabled=true;};this.disable=function(){if(this.enabled){YAHOO.util.Event.removeListener(A,C,E);this.disabledEvent.fire(F);}this.enabled=false;};this.toString=function(){return"KeyListener ["+F.keys+"] "+A.tagName+(A.id?"["+A.id+"]":"");};};YAHOO.util.KeyListener.KEYDOWN="keydown";YAHOO.util.KeyListener.KEYUP="keyup";YAHOO.register("event",YAHOO.util.Event,{version:"2.3.1",build:"541"});YAHOO.register("yahoo-dom-event", YAHOO, {version: "2.3.1", build: "541"});
+})();
+YAHOO.register("yahoo", YAHOO, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
+*/
+if(typeof YAHOO=="undefined"||!YAHOO){var YAHOO={};}YAHOO.namespace=function(){var A=arguments,E=null,C,B,D;for(C=0;C<A.length;C=C+1){D=A[C].split(".");E=YAHOO;for(B=(D[0]=="YAHOO")?1:0;B<D.length;B=B+1){E[D[B]]=E[D[B]]||{};E=E[D[B]];}}return E;};YAHOO.log=function(D,A,C){var B=YAHOO.widget.Logger;if(B&&B.log){return B.log(D,A,C);}else{return false;}};YAHOO.register=function(A,E,D){var I=YAHOO.env.modules;if(!I[A]){I[A]={versions:[],builds:[]};}var B=I[A],H=D.version,G=D.build,F=YAHOO.env.listeners;B.name=A;B.version=H;B.build=G;B.versions.push(H);B.builds.push(G);B.mainClass=E;for(var C=0;C<F.length;C=C+1){F[C](B);}if(E){E.VERSION=H;E.BUILD=G;}else{YAHOO.log("mainClass is undefined for module "+A,"warn");}};YAHOO.env=YAHOO.env||{modules:[],listeners:[]};YAHOO.env.getVersion=function(A){return YAHOO.env.modules[A]||null;};YAHOO.env.ua=function(){var C={ie:0,opera:0,gecko:0,webkit:0,mobile:null,air:0};var B=navigator.userAgent,A;if((/KHTML/).test(B)){C.webkit=1;}A=B.match(/AppleWebKit\/([^\s]*)/);if(A&&A[1]){C.webkit=parseFloat(A[1]);if(/ Mobile\//.test(B)){C.mobile="Apple";}else{A=B.match(/NokiaN[^\/]*/);if(A){C.mobile=A[0];}}A=B.match(/AdobeAIR\/([^\s]*)/);if(A){C.air=A[0];}}if(!C.webkit){A=B.match(/Opera[\s\/]([^\s]*)/);if(A&&A[1]){C.opera=parseFloat(A[1]);A=B.match(/Opera Mini[^;]*/);if(A){C.mobile=A[0];}}else{A=B.match(/MSIE\s([^;]*)/);if(A&&A[1]){C.ie=parseFloat(A[1]);}else{A=B.match(/Gecko\/([^\s]*)/);if(A){C.gecko=1;A=B.match(/rv:([^\s\)]*)/);if(A&&A[1]){C.gecko=parseFloat(A[1]);}}}}}return C;}();(function(){YAHOO.namespace("util","widget","example");if("undefined"!==typeof YAHOO_config){var B=YAHOO_config.listener,A=YAHOO.env.listeners,D=true,C;if(B){for(C=0;C<A.length;C=C+1){if(A[C]==B){D=false;break;}}if(D){A.push(B);}}}})();YAHOO.lang=YAHOO.lang||{};(function(){var A=YAHOO.lang,C=["toString","valueOf"],B={isArray:function(D){if(D){return A.isNumber(D.length)&&A.isFunction(D.splice);}return false;},isBoolean:function(D){return typeof D==="boolean";},isFunction:function(D){return typeof D==="function";},isNull:function(D){return D===null;},isNumber:function(D){return typeof D==="number"&&isFinite(D);},isObject:function(D){return(D&&(typeof D==="object"||A.isFunction(D)))||false;},isString:function(D){return typeof D==="string";},isUndefined:function(D){return typeof D==="undefined";},_IEEnumFix:(YAHOO.env.ua.ie)?function(F,E){for(var D=0;D<C.length;D=D+1){var H=C[D],G=E[H];if(A.isFunction(G)&&G!=Object.prototype[H]){F[H]=G;}}}:function(){},extend:function(H,I,G){if(!I||!H){throw new Error("extend failed, please check that "+"all dependencies are included.");}var E=function(){};E.prototype=I.prototype;H.prototype=new E();H.prototype.constructor=H;H.superclass=I.prototype;if(I.prototype.constructor==Object.prototype.constructor){I.prototype.constructor=I;}if(G){for(var D in G){if(A.hasOwnProperty(G,D)){H.prototype[D]=G[D];}}A._IEEnumFix(H.prototype,G);}},augmentObject:function(H,G){if(!G||!H){throw new Error("Absorb failed, verify dependencies.");}var D=arguments,F,I,E=D[2];if(E&&E!==true){for(F=2;F<D.length;F=F+1){H[D[F]]=G[D[F]];}}else{for(I in G){if(E||!(I in H)){H[I]=G[I];}}A._IEEnumFix(H,G);}},augmentProto:function(G,F){if(!F||!G){throw new Error("Augment failed, verify dependencies.");}var D=[G.prototype,F.prototype];for(var E=2;E<arguments.length;E=E+1){D.push(arguments[E]);}A.augmentObject.apply(this,D);},dump:function(D,I){var F,H,K=[],L="{...}",E="f(){...}",J=", ",G=" => ";if(!A.isObject(D)){return D+"";}else{if(D instanceof Date||("nodeType" in D&&"tagName" in D)){return D;}else{if(A.isFunction(D)){return E;}}}I=(A.isNumber(I))?I:3;if(A.isArray(D)){K.push("[");for(F=0,H=D.length;F<H;F=F+1){if(A.isObject(D[F])){K.push((I>0)?A.dump(D[F],I-1):L);}else{K.push(D[F]);}K.push(J);}if(K.length>1){K.pop();}K.push("]");}else{K.push("{");for(F in D){if(A.hasOwnProperty(D,F)){K.push(F+G);if(A.isObject(D[F])){K.push((I>0)?A.dump(D[F],I-1):L);}else{K.push(D[F]);}K.push(J);}}if(K.length>1){K.pop();}K.push("}");}return K.join("");},substitute:function(S,E,L){var I,H,G,O,P,R,N=[],F,J="dump",M=" ",D="{",Q="}";for(;;){I=S.lastIndexOf(D);if(I<0){break;}H=S.indexOf(Q,I);if(I+1>=H){break;}F=S.substring(I+1,H);O=F;R=null;G=O.indexOf(M);if(G>-1){R=O.substring(G+1);O=O.substring(0,G);}P=E[O];if(L){P=L(O,P,R);}if(A.isObject(P)){if(A.isArray(P)){P=A.dump(P,parseInt(R,10));}else{R=R||"";var K=R.indexOf(J);if(K>-1){R=R.substring(4);}if(P.toString===Object.prototype.toString||K>-1){P=A.dump(P,parseInt(R,10));}else{P=P.toString();}}}else{if(!A.isString(P)&&!A.isNumber(P)){P="~-"+N.length+"-~";N[N.length]=F;}}S=S.substring(0,I)+P+S.substring(H+1);}for(I=N.length-1;I>=0;I=I-1){S=S.replace(new RegExp("~-"+I+"-~"),"{"+N[I]+"}","g");}return S;},trim:function(D){try{return D.replace(/^\s+|\s+$/g,"");}catch(E){return D;}},merge:function(){var G={},E=arguments;for(var F=0,D=E.length;F<D;F=F+1){A.augmentObject(G,E[F],true);}return G;},later:function(K,E,L,G,H){K=K||0;E=E||{};var F=L,J=G,I,D;if(A.isString(L)){F=E[L];}if(!F){throw new TypeError("method undefined");}if(!A.isArray(J)){J=[G];}I=function(){F.apply(E,J);};D=(H)?setInterval(I,K):setTimeout(I,K);return{interval:H,cancel:function(){if(this.interval){clearInterval(D);}else{clearTimeout(D);}}};},isValue:function(D){return(A.isObject(D)||A.isString(D)||A.isNumber(D)||A.isBoolean(D));}};A.hasOwnProperty=(Object.prototype.hasOwnProperty)?function(D,E){return D&&D.hasOwnProperty(E);}:function(D,E){return !A.isUndefined(D[E])&&D.constructor.prototype[E]!==D[E];};B.augmentObject(A,B,true);YAHOO.util.Lang=A;A.augment=A.augmentProto;YAHOO.augment=A.augmentProto;YAHOO.extend=A.extend;})();YAHOO.register("yahoo",YAHOO,{version:"2.5.2",build:"1076"});(function(){var B=YAHOO.util,K,I,J={},F={},M=window.document;YAHOO.env._id_counter=YAHOO.env._id_counter||0;var C=YAHOO.env.ua.opera,L=YAHOO.env.ua.webkit,A=YAHOO.env.ua.gecko,G=YAHOO.env.ua.ie;var E={HYPHEN:/(-[a-z])/i,ROOT_TAG:/^body|html$/i,OP_SCROLL:/^(?:inline|table-row)$/i};var N=function(P){if(!E.HYPHEN.test(P)){return P;}if(J[P]){return J[P];}var Q=P;while(E.HYPHEN.exec(Q)){Q=Q.replace(RegExp.$1,RegExp.$1.substr(1).toUpperCase());}J[P]=Q;return Q;};var O=function(Q){var P=F[Q];if(!P){P=new RegExp("(?:^|\\s+)"+Q+"(?:\\s+|$)");F[Q]=P;}return P;};if(M.defaultView&&M.defaultView.getComputedStyle){K=function(P,S){var R=null;if(S=="float"){S="cssFloat";}var Q=P.ownerDocument.defaultView.getComputedStyle(P,"");if(Q){R=Q[N(S)];}return P.style[S]||R;};}else{if(M.documentElement.currentStyle&&G){K=function(P,R){switch(N(R)){case"opacity":var T=100;try{T=P.filters["DXImageTransform.Microsoft.Alpha"].opacity;}catch(S){try{T=P.filters("alpha").opacity;}catch(S){}}return T/100;case"float":R="styleFloat";default:var Q=P.currentStyle?P.currentStyle[R]:null;return(P.style[R]||Q);}};}else{K=function(P,Q){return P.style[Q];};}}if(G){I=function(P,Q,R){switch(Q){case"opacity":if(YAHOO.lang.isString(P.style.filter)){P.style.filter="alpha(opacity="+R*100+")";if(!P.currentStyle||!P.currentStyle.hasLayout){P.style.zoom=1;}}break;case"float":Q="styleFloat";default:P.style[Q]=R;}};}else{I=function(P,Q,R){if(Q=="float"){Q="cssFloat";}P.style[Q]=R;};}var D=function(P,Q){return P&&P.nodeType==1&&(!Q||Q(P));};YAHOO.util.Dom={get:function(R){if(R&&(R.nodeType||R.item)){return R;}if(YAHOO.lang.isString(R)||!R){return M.getElementById(R);}if(R.length!==undefined){var S=[];for(var Q=0,P=R.length;Q<P;++Q){S[S.length]=B.Dom.get(R[Q]);}return S;}return R;},getStyle:function(P,R){R=N(R);var Q=function(S){return K(S,R);};return B.Dom.batch(P,Q,B.Dom,true);},setStyle:function(P,R,S){R=N(R);var Q=function(T){I(T,R,S);};B.Dom.batch(P,Q,B.Dom,true);},getXY:function(P){var Q=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=R.ownerDocument.body){return false;}return H(R);};return B.Dom.batch(P,Q,B.Dom,true);},getX:function(P){var Q=function(R){return B.Dom.getXY(R)[0];};return B.Dom.batch(P,Q,B.Dom,true);},getY:function(P){var Q=function(R){return B.Dom.getXY(R)[1];};return B.Dom.batch(P,Q,B.Dom,true);},setXY:function(P,S,R){var Q=function(V){var U=this.getStyle(V,"position");if(U=="static"){this.setStyle(V,"position","relative");U="relative";}var X=this.getXY(V);if(X===false){return false;}var W=[parseInt(this.getStyle(V,"left"),10),parseInt(this.getStyle(V,"top"),10)];if(isNaN(W[0])){W[0]=(U=="relative")?0:V.offsetLeft;}if(isNaN(W[1])){W[1]=(U=="relative")?0:V.offsetTop;}if(S[0]!==null){V.style.left=S[0]-X[0]+W[0]+"px";}if(S[1]!==null){V.style.top=S[1]-X[1]+W[1]+"px";}if(!R){var T=this.getXY(V);if((S[0]!==null&&T[0]!=S[0])||(S[1]!==null&&T[1]!=S[1])){this.setXY(V,S,true);}}};B.Dom.batch(P,Q,B.Dom,true);},setX:function(Q,P){B.Dom.setXY(Q,[P,null]);},setY:function(P,Q){B.Dom.setXY(P,[null,Q]);},getRegion:function(P){var Q=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=R.ownerDocument.body){return false;}var S=B.Region.getRegion(R);return S;};return B.Dom.batch(P,Q,B.Dom,true);},getClientWidth:function(){return B.Dom.getViewportWidth();},getClientHeight:function(){return B.Dom.getViewportHeight();},getElementsByClassName:function(T,X,U,V){X=X||"*";U=(U)?B.Dom.get(U):null||M;if(!U){return[];}var Q=[],P=U.getElementsByTagName(X),W=O(T);for(var R=0,S=P.length;R<S;++R){if(W.test(P[R].className)){Q[Q.length]=P[R];if(V){V.call(P[R],P[R]);}}}return Q;},hasClass:function(R,Q){var P=O(Q);var S=function(T){return P.test(T.className);};return B.Dom.batch(R,S,B.Dom,true);},addClass:function(Q,P){var R=function(S){if(this.hasClass(S,P)){return false;}S.className=YAHOO.lang.trim([S.className,P].join(" "));return true;};return B.Dom.batch(Q,R,B.Dom,true);},removeClass:function(R,Q){var P=O(Q);var S=function(T){if(!Q||!this.hasClass(T,Q)){return false;}var U=T.className;T.className=U.replace(P," ");if(this.hasClass(T,Q)){this.removeClass(T,Q);}T.className=YAHOO.lang.trim(T.className);return true;};return B.Dom.batch(R,S,B.Dom,true);},replaceClass:function(S,Q,P){if(!P||Q===P){return false;}var R=O(Q);var T=function(U){if(!this.hasClass(U,Q)){this.addClass(U,P);return true;}U.className=U.className.replace(R," "+P+" ");if(this.hasClass(U,Q)){this.replaceClass(U,Q,P);}U.className=YAHOO.lang.trim(U.className);return true;};return B.Dom.batch(S,T,B.Dom,true);},generateId:function(P,R){R=R||"yui-gen";var Q=function(S){if(S&&S.id){return S.id;}var T=R+YAHOO.env._id_counter++;if(S){S.id=T;}return T;};return B.Dom.batch(P,Q,B.Dom,true)||Q.apply(B.Dom,arguments);},isAncestor:function(P,Q){P=B.Dom.get(P);Q=B.Dom.get(Q);if(!P||!Q){return false;}if(P.contains&&Q.nodeType&&!L){return P.contains(Q);}else{if(P.compareDocumentPosition&&Q.nodeType){return !!(P.compareDocumentPosition(Q)&16);}else{if(Q.nodeType){return !!this.getAncestorBy(Q,function(R){return R==P;});}}}return false;},inDocument:function(P){return this.isAncestor(M.documentElement,P);},getElementsBy:function(W,Q,R,T){Q=Q||"*";R=(R)?B.Dom.get(R):null||M;if(!R){return[];}var S=[],V=R.getElementsByTagName(Q);for(var U=0,P=V.length;U<P;++U){if(W(V[U])){S[S.length]=V[U];if(T){T(V[U]);}}}return S;},batch:function(T,W,V,R){T=(T&&(T.tagName||T.item))?T:B.Dom.get(T);if(!T||!W){return false;}var S=(R)?V:window;if(T.tagName||T.length===undefined){return W.call(S,T,V);}var U=[];for(var Q=0,P=T.length;Q<P;++Q){U[U.length]=W.call(S,T[Q],V);}return U;},getDocumentHeight:function(){var Q=(M.compatMode!="CSS1Compat")?M.body.scrollHeight:M.documentElement.scrollHeight;var P=Math.max(Q,B.Dom.getViewportHeight());return P;},getDocumentWidth:function(){var Q=(M.compatMode!="CSS1Compat")?M.body.scrollWidth:M.documentElement.scrollWidth;var P=Math.max(Q,B.Dom.getViewportWidth());return P;},getViewportHeight:function(){var P=self.innerHeight;
+var Q=M.compatMode;if((Q||G)&&!C){P=(Q=="CSS1Compat")?M.documentElement.clientHeight:M.body.clientHeight;}return P;},getViewportWidth:function(){var P=self.innerWidth;var Q=M.compatMode;if(Q||G){P=(Q=="CSS1Compat")?M.documentElement.clientWidth:M.body.clientWidth;}return P;},getAncestorBy:function(P,Q){while(P=P.parentNode){if(D(P,Q)){return P;}}return null;},getAncestorByClassName:function(Q,P){Q=B.Dom.get(Q);if(!Q){return null;}var R=function(S){return B.Dom.hasClass(S,P);};return B.Dom.getAncestorBy(Q,R);},getAncestorByTagName:function(Q,P){Q=B.Dom.get(Q);if(!Q){return null;}var R=function(S){return S.tagName&&S.tagName.toUpperCase()==P.toUpperCase();};return B.Dom.getAncestorBy(Q,R);},getPreviousSiblingBy:function(P,Q){while(P){P=P.previousSibling;if(D(P,Q)){return P;}}return null;},getPreviousSibling:function(P){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getPreviousSiblingBy(P);},getNextSiblingBy:function(P,Q){while(P){P=P.nextSibling;if(D(P,Q)){return P;}}return null;},getNextSibling:function(P){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getNextSiblingBy(P);},getFirstChildBy:function(P,R){var Q=(D(P.firstChild,R))?P.firstChild:null;return Q||B.Dom.getNextSiblingBy(P.firstChild,R);},getFirstChild:function(P,Q){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getFirstChildBy(P);},getLastChildBy:function(P,R){if(!P){return null;}var Q=(D(P.lastChild,R))?P.lastChild:null;return Q||B.Dom.getPreviousSiblingBy(P.lastChild,R);},getLastChild:function(P){P=B.Dom.get(P);return B.Dom.getLastChildBy(P);},getChildrenBy:function(Q,S){var R=B.Dom.getFirstChildBy(Q,S);var P=R?[R]:[];B.Dom.getNextSiblingBy(R,function(T){if(!S||S(T)){P[P.length]=T;}return false;});return P;},getChildren:function(P){P=B.Dom.get(P);if(!P){}return B.Dom.getChildrenBy(P);},getDocumentScrollLeft:function(P){P=P||M;return Math.max(P.documentElement.scrollLeft,P.body.scrollLeft);},getDocumentScrollTop:function(P){P=P||M;return Math.max(P.documentElement.scrollTop,P.body.scrollTop);},insertBefore:function(Q,P){Q=B.Dom.get(Q);P=B.Dom.get(P);if(!Q||!P||!P.parentNode){return null;}return P.parentNode.insertBefore(Q,P);},insertAfter:function(Q,P){Q=B.Dom.get(Q);P=B.Dom.get(P);if(!Q||!P||!P.parentNode){return null;}if(P.nextSibling){return P.parentNode.insertBefore(Q,P.nextSibling);}else{return P.parentNode.appendChild(Q);}},getClientRegion:function(){var R=B.Dom.getDocumentScrollTop(),Q=B.Dom.getDocumentScrollLeft(),S=B.Dom.getViewportWidth()+Q,P=B.Dom.getViewportHeight()+R;return new B.Region(R,S,P,Q);}};var H=function(){if(M.documentElement.getBoundingClientRect){return function(Q){var R=Q.getBoundingClientRect();var P=Q.ownerDocument;return[R.left+B.Dom.getDocumentScrollLeft(P),R.top+B.Dom.getDocumentScrollTop(P)];};}else{return function(R){var S=[R.offsetLeft,R.offsetTop];var Q=R.offsetParent;var P=(L&&B.Dom.getStyle(R,"position")=="absolute"&&R.offsetParent==R.ownerDocument.body);if(Q!=R){while(Q){S[0]+=Q.offsetLeft;S[1]+=Q.offsetTop;if(!P&&L&&B.Dom.getStyle(Q,"position")=="absolute"){P=true;}Q=Q.offsetParent;}}if(P){S[0]-=R.ownerDocument.body.offsetLeft;S[1]-=R.ownerDocument.body.offsetTop;}Q=R.parentNode;while(Q.tagName&&!E.ROOT_TAG.test(Q.tagName)){if(Q.scrollTop||Q.scrollLeft){if(!E.OP_SCROLL.test(B.Dom.getStyle(Q,"display"))){if(!C||B.Dom.getStyle(Q,"overflow")!=="visible"){S[0]-=Q.scrollLeft;S[1]-=Q.scrollTop;}}}Q=Q.parentNode;}return S;};}}();})();YAHOO.util.Region=function(C,D,A,B){this.top=C;this[1]=C;this.right=D;this.bottom=A;this.left=B;this[0]=B;};YAHOO.util.Region.prototype.contains=function(A){return(A.left>=this.left&&A.right<=this.right&&A.top>=this.top&&A.bottom<=this.bottom);};YAHOO.util.Region.prototype.getArea=function(){return((this.bottom-this.top)*(this.right-this.left));};YAHOO.util.Region.prototype.intersect=function(E){var C=Math.max(this.top,E.top);var D=Math.min(this.right,E.right);var A=Math.min(this.bottom,E.bottom);var B=Math.max(this.left,E.left);if(A>=C&&D>=B){return new YAHOO.util.Region(C,D,A,B);}else{return null;}};YAHOO.util.Region.prototype.union=function(E){var C=Math.min(this.top,E.top);var D=Math.max(this.right,E.right);var A=Math.max(this.bottom,E.bottom);var B=Math.min(this.left,E.left);return new YAHOO.util.Region(C,D,A,B);};YAHOO.util.Region.prototype.toString=function(){return("Region {"+"top: "+this.top+", right: "+this.right+", bottom: "+this.bottom+", left: "+this.left+"}");};YAHOO.util.Region.getRegion=function(D){var F=YAHOO.util.Dom.getXY(D);var C=F[1];var E=F[0]+D.offsetWidth;var A=F[1]+D.offsetHeight;var B=F[0];return new YAHOO.util.Region(C,E,A,B);};YAHOO.util.Point=function(A,B){if(YAHOO.lang.isArray(A)){B=A[1];A=A[0];}this.x=this.right=this.left=this[0]=A;this.y=this.top=this.bottom=this[1]=B;};YAHOO.util.Point.prototype=new YAHOO.util.Region();YAHOO.register("dom",YAHOO.util.Dom,{version:"2.5.2",build:"1076"});YAHOO.util.CustomEvent=function(D,B,C,A){this.type=D;this.scope=B||window;this.silent=C;this.signature=A||YAHOO.util.CustomEvent.LIST;this.subscribers=[];if(!this.silent){}var E="_YUICEOnSubscribe";if(D!==E){this.subscribeEvent=new YAHOO.util.CustomEvent(E,this,true);}this.lastError=null;};YAHOO.util.CustomEvent.LIST=0;YAHOO.util.CustomEvent.FLAT=1;YAHOO.util.CustomEvent.prototype={subscribe:function(B,C,A){if(!B){throw new Error("Invalid callback for subscriber to '"+this.type+"'");}if(this.subscribeEvent){this.subscribeEvent.fire(B,C,A);}this.subscribers.push(new YAHOO.util.Subscriber(B,C,A));},unsubscribe:function(D,F){if(!D){return this.unsubscribeAll();}var E=false;for(var B=0,A=this.subscribers.length;B<A;++B){var C=this.subscribers[B];if(C&&C.contains(D,F)){this._delete(B);E=true;}}return E;},fire:function(){this.lastError=null;var K=[],E=this.subscribers.length;if(!E&&this.silent){return true;}var I=[].slice.call(arguments,0),G=true,D,J=false;if(!this.silent){}var C=this.subscribers.slice(),A=YAHOO.util.Event.throwErrors;for(D=0;D<E;++D){var M=C[D];if(!M){J=true;}else{if(!this.silent){}var L=M.getScope(this.scope);if(this.signature==YAHOO.util.CustomEvent.FLAT){var B=null;if(I.length>0){B=I[0];}try{G=M.fn.call(L,B,M.obj);}catch(F){this.lastError=F;if(A){throw F;}}}else{try{G=M.fn.call(L,this.type,I,M.obj);}catch(H){this.lastError=H;if(A){throw H;}}}if(false===G){if(!this.silent){}break;}}}return(G!==false);},unsubscribeAll:function(){for(var A=this.subscribers.length-1;A>-1;A--){this._delete(A);}this.subscribers=[];return A;},_delete:function(A){var B=this.subscribers[A];if(B){delete B.fn;delete B.obj;}this.subscribers.splice(A,1);},toString:function(){return"CustomEvent: "+"'"+this.type+"', "+"scope: "+this.scope;}};YAHOO.util.Subscriber=function(B,C,A){this.fn=B;this.obj=YAHOO.lang.isUndefined(C)?null:C;this.override=A;};YAHOO.util.Subscriber.prototype.getScope=function(A){if(this.override){if(this.override===true){return this.obj;}else{return this.override;}}return A;};YAHOO.util.Subscriber.prototype.contains=function(A,B){if(B){return(this.fn==A&&this.obj==B);}else{return(this.fn==A);}};YAHOO.util.Subscriber.prototype.toString=function(){return"Subscriber { obj: "+this.obj+", override: "+(this.override||"no")+" }";};if(!YAHOO.util.Event){YAHOO.util.Event=function(){var H=false;var I=[];var J=[];var G=[];var E=[];var C=0;var F=[];var B=[];var A=0;var D={63232:38,63233:40,63234:37,63235:39,63276:33,63277:34,25:9};return{POLL_RETRYS:2000,POLL_INTERVAL:20,EL:0,TYPE:1,FN:2,WFN:3,UNLOAD_OBJ:3,ADJ_SCOPE:4,OBJ:5,OVERRIDE:6,lastError:null,isSafari:YAHOO.env.ua.webkit,webkit:YAHOO.env.ua.webkit,isIE:YAHOO.env.ua.ie,_interval:null,_dri:null,DOMReady:false,throwErrors:false,startInterval:function(){if(!this._interval){var K=this;var L=function(){K._tryPreloadAttach();};this._interval=setInterval(L,this.POLL_INTERVAL);}},onAvailable:function(P,M,Q,O,N){var K=(YAHOO.lang.isString(P))?[P]:P;for(var L=0;L<K.length;L=L+1){F.push({id:K[L],fn:M,obj:Q,override:O,checkReady:N});}C=this.POLL_RETRYS;this.startInterval();},onContentReady:function(M,K,N,L){this.onAvailable(M,K,N,L,true);},onDOMReady:function(K,M,L){if(this.DOMReady){setTimeout(function(){var N=window;if(L){if(L===true){N=M;}else{N=L;}}K.call(N,"DOMReady",[],M);},0);}else{this.DOMReadyEvent.subscribe(K,M,L);}},addListener:function(M,K,V,Q,L){if(!V||!V.call){return false;}if(this._isValidCollection(M)){var W=true;for(var R=0,T=M.length;R<T;++R){W=this.on(M[R],K,V,Q,L)&&W;}return W;}else{if(YAHOO.lang.isString(M)){var P=this.getEl(M);if(P){M=P;}else{this.onAvailable(M,function(){YAHOO.util.Event.on(M,K,V,Q,L);});return true;}}}if(!M){return false;}if("unload"==K&&Q!==this){J[J.length]=[M,K,V,Q,L];return true;}var Y=M;if(L){if(L===true){Y=Q;}else{Y=L;}}var N=function(Z){return V.call(Y,YAHOO.util.Event.getEvent(Z,M),Q);};var X=[M,K,V,N,Y,Q,L];var S=I.length;I[S]=X;if(this.useLegacyEvent(M,K)){var O=this.getLegacyIndex(M,K);if(O==-1||M!=G[O][0]){O=G.length;B[M.id+K]=O;G[O]=[M,K,M["on"+K]];E[O]=[];M["on"+K]=function(Z){YAHOO.util.Event.fireLegacyEvent(YAHOO.util.Event.getEvent(Z),O);};}E[O].push(X);}else{try{this._simpleAdd(M,K,N,false);}catch(U){this.lastError=U;this.removeListener(M,K,V);return false;}}return true;},fireLegacyEvent:function(O,M){var Q=true,K,S,R,T,P;S=E[M].slice();for(var L=0,N=S.length;L<N;++L){R=S[L];if(R&&R[this.WFN]){T=R[this.ADJ_SCOPE];P=R[this.WFN].call(T,O);Q=(Q&&P);}}K=G[M];if(K&&K[2]){K[2](O);}return Q;},getLegacyIndex:function(L,M){var K=this.generateId(L)+M;if(typeof B[K]=="undefined"){return -1;}else{return B[K];}},useLegacyEvent:function(L,M){if(this.webkit&&("click"==M||"dblclick"==M)){var K=parseInt(this.webkit,10);if(!isNaN(K)&&K<418){return true;}}return false;},removeListener:function(L,K,T){var O,R,V;if(typeof L=="string"){L=this.getEl(L);}else{if(this._isValidCollection(L)){var U=true;for(O=L.length-1;O>-1;O--){U=(this.removeListener(L[O],K,T)&&U);}return U;}}if(!T||!T.call){return this.purgeElement(L,false,K);}if("unload"==K){for(O=J.length-1;O>-1;O--){V=J[O];if(V&&V[0]==L&&V[1]==K&&V[2]==T){J.splice(O,1);return true;}}return false;}var P=null;var Q=arguments[3];if("undefined"===typeof Q){Q=this._getCacheIndex(L,K,T);}if(Q>=0){P=I[Q];}if(!L||!P){return false;}if(this.useLegacyEvent(L,K)){var N=this.getLegacyIndex(L,K);var M=E[N];if(M){for(O=0,R=M.length;O<R;++O){V=M[O];if(V&&V[this.EL]==L&&V[this.TYPE]==K&&V[this.FN]==T){M.splice(O,1);break;}}}}else{try{this._simpleRemove(L,K,P[this.WFN],false);}catch(S){this.lastError=S;return false;}}delete I[Q][this.WFN];delete I[Q][this.FN];I.splice(Q,1);return true;},getTarget:function(M,L){var K=M.target||M.srcElement;return this.resolveTextNode(K);},resolveTextNode:function(L){try{if(L&&3==L.nodeType){return L.parentNode;}}catch(K){}return L;},getPageX:function(L){var K=L.pageX;if(!K&&0!==K){K=L.clientX||0;if(this.isIE){K+=this._getScrollLeft();}}return K;},getPageY:function(K){var L=K.pageY;if(!L&&0!==L){L=K.clientY||0;if(this.isIE){L+=this._getScrollTop();}}return L;
+},getXY:function(K){return[this.getPageX(K),this.getPageY(K)];},getRelatedTarget:function(L){var K=L.relatedTarget;if(!K){if(L.type=="mouseout"){K=L.toElement;}else{if(L.type=="mouseover"){K=L.fromElement;}}}return this.resolveTextNode(K);},getTime:function(M){if(!M.time){var L=new Date().getTime();try{M.time=L;}catch(K){this.lastError=K;return L;}}return M.time;},stopEvent:function(K){this.stopPropagation(K);this.preventDefault(K);},stopPropagation:function(K){if(K.stopPropagation){K.stopPropagation();}else{K.cancelBubble=true;}},preventDefault:function(K){if(K.preventDefault){K.preventDefault();}else{K.returnValue=false;}},getEvent:function(M,K){var L=M||window.event;if(!L){var N=this.getEvent.caller;while(N){L=N.arguments[0];if(L&&Event==L.constructor){break;}N=N.caller;}}return L;},getCharCode:function(L){var K=L.keyCode||L.charCode||0;if(YAHOO.env.ua.webkit&&(K in D)){K=D[K];}return K;},_getCacheIndex:function(O,P,N){for(var M=0,L=I.length;M<L;M=M+1){var K=I[M];if(K&&K[this.FN]==N&&K[this.EL]==O&&K[this.TYPE]==P){return M;}}return -1;},generateId:function(K){var L=K.id;if(!L){L="yuievtautoid-"+A;++A;K.id=L;}return L;},_isValidCollection:function(L){try{return(L&&typeof L!=="string"&&L.length&&!L.tagName&&!L.alert&&typeof L[0]!=="undefined");}catch(K){return false;}},elCache:{},getEl:function(K){return(typeof K==="string")?document.getElementById(K):K;},clearCache:function(){},DOMReadyEvent:new YAHOO.util.CustomEvent("DOMReady",this),_load:function(L){if(!H){H=true;var K=YAHOO.util.Event;K._ready();K._tryPreloadAttach();}},_ready:function(L){var K=YAHOO.util.Event;if(!K.DOMReady){K.DOMReady=true;K.DOMReadyEvent.fire();K._simpleRemove(document,"DOMContentLoaded",K._ready);}},_tryPreloadAttach:function(){if(F.length===0){C=0;clearInterval(this._interval);this._interval=null;return ;}if(this.locked){return ;}if(this.isIE){if(!this.DOMReady){this.startInterval();return ;}}this.locked=true;var Q=!H;if(!Q){Q=(C>0&&F.length>0);}var P=[];var R=function(T,U){var S=T;if(U.override){if(U.override===true){S=U.obj;}else{S=U.override;}}U.fn.call(S,U.obj);};var L,K,O,N,M=[];for(L=0,K=F.length;L<K;L=L+1){O=F[L];if(O){N=this.getEl(O.id);if(N){if(O.checkReady){if(H||N.nextSibling||!Q){M.push(O);F[L]=null;}}else{R(N,O);F[L]=null;}}else{P.push(O);}}}for(L=0,K=M.length;L<K;L=L+1){O=M[L];R(this.getEl(O.id),O);}C--;if(Q){for(L=F.length-1;L>-1;L--){O=F[L];if(!O||!O.id){F.splice(L,1);}}this.startInterval();}else{clearInterval(this._interval);this._interval=null;}this.locked=false;},purgeElement:function(O,P,R){var M=(YAHOO.lang.isString(O))?this.getEl(O):O;var Q=this.getListeners(M,R),N,K;if(Q){for(N=Q.length-1;N>-1;N--){var L=Q[N];this.removeListener(M,L.type,L.fn);}}if(P&&M&&M.childNodes){for(N=0,K=M.childNodes.length;N<K;++N){this.purgeElement(M.childNodes[N],P,R);}}},getListeners:function(M,K){var P=[],L;if(!K){L=[I,J];}else{if(K==="unload"){L=[J];}else{L=[I];}}var R=(YAHOO.lang.isString(M))?this.getEl(M):M;for(var O=0;O<L.length;O=O+1){var T=L[O];if(T){for(var Q=0,S=T.length;Q<S;++Q){var N=T[Q];if(N&&N[this.EL]===R&&(!K||K===N[this.TYPE])){P.push({type:N[this.TYPE],fn:N[this.FN],obj:N[this.OBJ],adjust:N[this.OVERRIDE],scope:N[this.ADJ_SCOPE],index:Q});}}}}return(P.length)?P:null;},_unload:function(Q){var K=YAHOO.util.Event,N,M,L,P,O,R=J.slice();for(N=0,P=J.length;N<P;++N){L=R[N];if(L){var S=window;if(L[K.ADJ_SCOPE]){if(L[K.ADJ_SCOPE]===true){S=L[K.UNLOAD_OBJ];}else{S=L[K.ADJ_SCOPE];}}L[K.FN].call(S,K.getEvent(Q,L[K.EL]),L[K.UNLOAD_OBJ]);R[N]=null;L=null;S=null;}}J=null;if(I){for(M=I.length-1;M>-1;M--){L=I[M];if(L){K.removeListener(L[K.EL],L[K.TYPE],L[K.FN],M);}}L=null;}G=null;K._simpleRemove(window,"unload",K._unload);},_getScrollLeft:function(){return this._getScroll()[1];},_getScrollTop:function(){return this._getScroll()[0];},_getScroll:function(){var K=document.documentElement,L=document.body;if(K&&(K.scrollTop||K.scrollLeft)){return[K.scrollTop,K.scrollLeft];}else{if(L){return[L.scrollTop,L.scrollLeft];}else{return[0,0];}}},regCE:function(){},_simpleAdd:function(){if(window.addEventListener){return function(M,N,L,K){M.addEventListener(N,L,(K));};}else{if(window.attachEvent){return function(M,N,L,K){M.attachEvent("on"+N,L);};}else{return function(){};}}}(),_simpleRemove:function(){if(window.removeEventListener){return function(M,N,L,K){M.removeEventListener(N,L,(K));};}else{if(window.detachEvent){return function(L,M,K){L.detachEvent("on"+M,K);};}else{return function(){};}}}()};}();(function(){var EU=YAHOO.util.Event;EU.on=EU.addListener;
+/* DOMReady: based on work by: Dean Edwards/John Resig/Matthias Miller */
+if(EU.isIE){YAHOO.util.Event.onDOMReady(YAHOO.util.Event._tryPreloadAttach,YAHOO.util.Event,true);var n=document.createElement("p");EU._dri=setInterval(function(){try{n.doScroll("left");clearInterval(EU._dri);EU._dri=null;EU._ready();n=null;}catch(ex){}},EU.POLL_INTERVAL);}else{if(EU.webkit&&EU.webkit<525){EU._dri=setInterval(function(){var rs=document.readyState;if("loaded"==rs||"complete"==rs){clearInterval(EU._dri);EU._dri=null;EU._ready();}},EU.POLL_INTERVAL);}else{EU._simpleAdd(document,"DOMContentLoaded",EU._ready);}}EU._simpleAdd(window,"load",EU._load);EU._simpleAdd(window,"unload",EU._unload);EU._tryPreloadAttach();})();}YAHOO.util.EventProvider=function(){};YAHOO.util.EventProvider.prototype={__yui_events:null,__yui_subscribers:null,subscribe:function(A,C,F,E){this.__yui_events=this.__yui_events||{};var D=this.__yui_events[A];if(D){D.subscribe(C,F,E);}else{this.__yui_subscribers=this.__yui_subscribers||{};var B=this.__yui_subscribers;if(!B[A]){B[A]=[];}B[A].push({fn:C,obj:F,override:E});}},unsubscribe:function(C,E,G){this.__yui_events=this.__yui_events||{};var A=this.__yui_events;if(C){var F=A[C];if(F){return F.unsubscribe(E,G);}}else{var B=true;for(var D in A){if(YAHOO.lang.hasOwnProperty(A,D)){B=B&&A[D].unsubscribe(E,G);}}return B;}return false;},unsubscribeAll:function(A){return this.unsubscribe(A);},createEvent:function(G,D){this.__yui_events=this.__yui_events||{};var A=D||{};var I=this.__yui_events;
+if(I[G]){}else{var H=A.scope||this;var E=(A.silent);var B=new YAHOO.util.CustomEvent(G,H,E,YAHOO.util.CustomEvent.FLAT);I[G]=B;if(A.onSubscribeCallback){B.subscribeEvent.subscribe(A.onSubscribeCallback);}this.__yui_subscribers=this.__yui_subscribers||{};var F=this.__yui_subscribers[G];if(F){for(var C=0;C<F.length;++C){B.subscribe(F[C].fn,F[C].obj,F[C].override);}}}return I[G];},fireEvent:function(E,D,A,C){this.__yui_events=this.__yui_events||{};var G=this.__yui_events[E];if(!G){return null;}var B=[];for(var F=1;F<arguments.length;++F){B.push(arguments[F]);}return G.fire.apply(G,B);},hasEvent:function(A){if(this.__yui_events){if(this.__yui_events[A]){return true;}}return false;}};YAHOO.util.KeyListener=function(A,F,B,C){if(!A){}else{if(!F){}else{if(!B){}}}if(!C){C=YAHOO.util.KeyListener.KEYDOWN;}var D=new YAHOO.util.CustomEvent("keyPressed");this.enabledEvent=new YAHOO.util.CustomEvent("enabled");this.disabledEvent=new YAHOO.util.CustomEvent("disabled");if(typeof A=="string"){A=document.getElementById(A);}if(typeof B=="function"){D.subscribe(B);}else{D.subscribe(B.fn,B.scope,B.correctScope);}function E(J,I){if(!F.shift){F.shift=false;}if(!F.alt){F.alt=false;}if(!F.ctrl){F.ctrl=false;}if(J.shiftKey==F.shift&&J.altKey==F.alt&&J.ctrlKey==F.ctrl){var G;if(F.keys instanceof Array){for(var H=0;H<F.keys.length;H++){G=F.keys[H];if(G==J.charCode){D.fire(J.charCode,J);break;}else{if(G==J.keyCode){D.fire(J.keyCode,J);break;}}}}else{G=F.keys;if(G==J.charCode){D.fire(J.charCode,J);}else{if(G==J.keyCode){D.fire(J.keyCode,J);}}}}}this.enable=function(){if(!this.enabled){YAHOO.util.Event.addListener(A,C,E);this.enabledEvent.fire(F);}this.enabled=true;};this.disable=function(){if(this.enabled){YAHOO.util.Event.removeListener(A,C,E);this.disabledEvent.fire(F);}this.enabled=false;};this.toString=function(){return"KeyListener ["+F.keys+"] "+A.tagName+(A.id?"["+A.id+"]":"");};};YAHOO.util.KeyListener.KEYDOWN="keydown";YAHOO.util.KeyListener.KEYUP="keyup";YAHOO.util.KeyListener.KEY={ALT:18,BACK_SPACE:8,CAPS_LOCK:20,CONTROL:17,DELETE:46,DOWN:40,END:35,ENTER:13,ESCAPE:27,HOME:36,LEFT:37,META:224,NUM_LOCK:144,PAGE_DOWN:34,PAGE_UP:33,PAUSE:19,PRINTSCREEN:44,RIGHT:39,SCROLL_LOCK:145,SHIFT:16,SPACE:32,TAB:9,UP:38};YAHOO.register("event",YAHOO.util.Event,{version:"2.5.2",build:"1076"});YAHOO.register("yahoo-dom-event", YAHOO, {version: "2.5.2", build: "1076"});
+
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
 */
 /**
  * The dom module provides helper methods for manipulating Dom elements.
@@ -909,10 +1015,12 @@ version: 2.3.1
     var Y = YAHOO.util,     // internal shorthand
         getStyle,           // for load time browser branching
         setStyle,           // ditto
-        id_counter = 0,     // for use with generateId
         propertyCache = {}, // for faster hyphen converts
-        reClassNameCache = {}; // cache regexes for className
+        reClassNameCache = {},          // cache regexes for className
+        document = window.document;     // cache for faster lookups
     
+    YAHOO.env._id_counter = YAHOO.env._id_counter || 0;     // for use with generateId (global to save state if Dom is overwritten)
+
     // brower detection
     var isOpera = YAHOO.env.ua.opera,
         isSafari = YAHOO.env.ua.webkit, 
@@ -922,7 +1030,8 @@ version: 2.3.1
     // regex cache
     var patterns = {
         HYPHEN: /(-[a-z])/i, // to normalize get/setStyle
-        ROOT_TAG: /^body|html$/i // body for quirks mode, html for standards
+        ROOT_TAG: /^body|html$/i, // body for quirks mode, html for standards,
+        OP_SCROLL:/^(?:inline|table-row)$/i
     };
 
     var toCamel = function(property) {
@@ -964,7 +1073,7 @@ version: 2.3.1
                 property = 'cssFloat';
             }
 
-            var computed = document.defaultView.getComputedStyle(el, '');
+            var computed = el.ownerDocument.defaultView.getComputedStyle(el, '');
             if (computed) { // test computed before touching for safari
                 value = computed[toCamel(property)];
             }
@@ -1024,7 +1133,7 @@ version: 2.3.1
             el.style[property] = val;
         };
     }
-    
+
     var testElement = function(node, method) {
         return node && node.nodeType == 1 && ( !method || method(node) );
     };
@@ -1042,11 +1151,11 @@ version: 2.3.1
          * @return {HTMLElement | Array} A DOM reference to an HTML element or an array of HTMLElements.
          */
         get: function(el) {
-            if (el && (el.tagName || el.item)) { // HTMLElement, or HTMLCollection
+            if (el && (el.nodeType || el.item)) { // Node, or NodeList
                 return el;
             }
 
-            if (YAHOO.lang.isString(el) || !el) { // HTMLElement or null
+            if (YAHOO.lang.isString(el) || !el) { // id or null
                 return document.getElementById(el);
             }
             
@@ -1105,63 +1214,13 @@ version: 2.3.1
          */
         getXY: function(el) {
             var f = function(el) {
-    
-            // has to be part of document to have pageXY
+                // has to be part of document to have pageXY
                 if ( (el.parentNode === null || el.offsetParent === null ||
-                        this.getStyle(el, 'display') == 'none') && el != document.body) {
+                        this.getStyle(el, 'display') == 'none') && el != el.ownerDocument.body) {
                     return false;
                 }
                 
-                var parentNode = null;
-                var pos = [];
-                var box;
-                var doc = el.ownerDocument; 
-
-                if (el.getBoundingClientRect) { // IE
-                    box = el.getBoundingClientRect();
-                    return [box.left + Y.Dom.getDocumentScrollLeft(el.ownerDocument), box.top + Y.Dom.getDocumentScrollTop(el.ownerDocument)];
-                }
-                else { // safari, opera, & gecko
-                    pos = [el.offsetLeft, el.offsetTop];
-                    parentNode = el.offsetParent;
-
-                    // safari: if el is abs or any parent is abs, subtract body offsets
-                    var hasAbs = this.getStyle(el, 'position') == 'absolute';
-
-                    if (parentNode != el) {
-                        while (parentNode) {
-                            pos[0] += parentNode.offsetLeft;
-                            pos[1] += parentNode.offsetTop;
-                            if (isSafari && !hasAbs && 
-                                    this.getStyle(parentNode,'position') == 'absolute' ) {
-                                hasAbs = true; // we need to offset if any parent is absolutely positioned
-                            }
-                            parentNode = parentNode.offsetParent;
-                        }
-                    }
-
-                    if (isSafari && hasAbs) { //safari doubles in this case
-                        pos[0] -= el.ownerDocument.body.offsetLeft;
-                        pos[1] -= el.ownerDocument.body.offsetTop;
-                    } 
-                }
-                
-                parentNode = el.parentNode;
-
-                // account for any scrolled ancestors
-                while ( parentNode.tagName && !patterns.ROOT_TAG.test(parentNode.tagName) ) 
-                {
-                   // work around opera inline/table scrollLeft/Top bug
-                   if (Y.Dom.getStyle(parentNode, 'display').search(/^inline|table-row.*$/i)) { 
-                        pos[0] -= parentNode.scrollLeft;
-                        pos[1] -= parentNode.scrollTop;
-                    }
-                    
-                    parentNode = parentNode.parentNode; 
-                }
-       
-                
-                return pos;
+                return getXY(el);
             };
             
             return Y.Dom.batch(el, f, Y.Dom, true);
@@ -1278,7 +1337,7 @@ version: 2.3.1
         getRegion: function(el) {
             var f = function(el) {
                 if ( (el.parentNode === null || el.offsetParent === null ||
-                        this.getStyle(el, 'display') == 'none') && el != document.body) {
+                        this.getStyle(el, 'display') == 'none') && el != el.ownerDocument.body) {
                     return false;
                 }
 
@@ -1391,7 +1450,7 @@ version: 2.3.1
             var re = getClassRegEx(className);
             
             var f = function(el) {
-                if (!this.hasClass(el, className)) {
+                if (!className || !this.hasClass(el, className)) {
                     return false; // not present
                 }                 
 
@@ -1460,7 +1519,7 @@ version: 2.3.1
                     return el.id;
                 } 
 
-                var id = prefix + id_counter++;
+                var id = prefix + YAHOO.env._id_counter++;
 
                 if (el) {
                     el.id = id;
@@ -1482,24 +1541,24 @@ version: 2.3.1
          */
         isAncestor: function(haystack, needle) {
             haystack = Y.Dom.get(haystack);
-            if (!haystack || !needle) { return false; }
+            needle = Y.Dom.get(needle);
             
-            var f = function(node) {
-                if (haystack.contains && node.nodeType && !isSafari) { // safari contains is broken
-                    return haystack.contains(node);
-                }
-                else if ( haystack.compareDocumentPosition && node.nodeType ) {
-                    return !!(haystack.compareDocumentPosition(node) & 16);
-                } else if (node.nodeType) {
-                    // fallback to crawling up (safari)
-                    return !!this.getAncestorBy(node, function(el) {
-                        return el == haystack; 
-                    }); 
-                }
+            if (!haystack || !needle) {
                 return false;
-            };
-            
-            return Y.Dom.batch(needle, f, Y.Dom, true);      
+            }
+
+            if (haystack.contains && needle.nodeType && !isSafari) { // safari contains is broken
+                return haystack.contains(needle);
+            }
+            else if ( haystack.compareDocumentPosition && needle.nodeType ) {
+                return !!(haystack.compareDocumentPosition(needle) & 16);
+            } else if (needle.nodeType) {
+                // fallback to crawling up (safari)
+                return !!this.getAncestorBy(needle, function(el) {
+                    return el == haystack; 
+                }); 
+            }
+            return false;
         },
         
         /**
@@ -1509,19 +1568,7 @@ version: 2.3.1
          * @return {Boolean} Whether or not the element is present in the current document
          */
         inDocument: function(el) {
-            var f = function(el) { // safari contains fails for body so crawl up
-                if (isSafari) {
-                    while (el = el.parentNode) { // note assignment
-                        if (el == document.documentElement) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-                return this.isAncestor(document.documentElement, el);
-            };
-            
-            return Y.Dom.batch(el, f, Y.Dom, true);
+            return this.isAncestor(document.documentElement, el);
         },
         
         /**
@@ -1921,8 +1968,80 @@ version: 2.3.1
             } else {
                 return referenceNode.parentNode.appendChild(newNode);
             }
+        },
+
+        /**
+         * Creates a Region based on the viewport relative to the document. 
+         * @method getClientRegion
+         * @return {Region} A Region object representing the viewport which accounts for document scroll
+         */
+        getClientRegion: function() {
+            var t = Y.Dom.getDocumentScrollTop(),
+                l = Y.Dom.getDocumentScrollLeft(),
+                r = Y.Dom.getViewportWidth() + l,
+                b = Y.Dom.getViewportHeight() + t;
+
+            return new Y.Region(t, r, b, l);
         }
     };
+    
+    var getXY = function() {
+        if (document.documentElement.getBoundingClientRect) { // IE
+            return function(el) {
+                var box = el.getBoundingClientRect();
+
+                var rootNode = el.ownerDocument;
+                return [box.left + Y.Dom.getDocumentScrollLeft(rootNode), box.top +
+                        Y.Dom.getDocumentScrollTop(rootNode)];
+            };
+        } else {
+            return function(el) { // manually calculate by crawling up offsetParents
+                var pos = [el.offsetLeft, el.offsetTop];
+                var parentNode = el.offsetParent;
+
+                // safari: subtract body offsets if el is abs (or any offsetParent), unless body is offsetParent
+                var accountForBody = (isSafari &&
+                        Y.Dom.getStyle(el, 'position') == 'absolute' &&
+                        el.offsetParent == el.ownerDocument.body);
+
+                if (parentNode != el) {
+                    while (parentNode) {
+                        pos[0] += parentNode.offsetLeft;
+                        pos[1] += parentNode.offsetTop;
+                        if (!accountForBody && isSafari && 
+                                Y.Dom.getStyle(parentNode,'position') == 'absolute' ) { 
+                            accountForBody = true;
+                        }
+                        parentNode = parentNode.offsetParent;
+                    }
+                }
+
+                if (accountForBody) { //safari doubles in this case
+                    pos[0] -= el.ownerDocument.body.offsetLeft;
+                    pos[1] -= el.ownerDocument.body.offsetTop;
+                } 
+                parentNode = el.parentNode;
+
+                // account for any scrolled ancestors
+                while ( parentNode.tagName && !patterns.ROOT_TAG.test(parentNode.tagName) ) 
+                {
+                    if (parentNode.scrollTop || parentNode.scrollLeft) {
+                        // work around opera inline/table scrollLeft/Top bug (false reports offset as scroll)
+                        if (!patterns.OP_SCROLL.test(Y.Dom.getStyle(parentNode, 'display'))) { 
+                            if (!isOpera || Y.Dom.getStyle(parentNode, 'overflow') !== 'visible') { // opera inline-block misreports when visible
+                                pos[0] -= parentNode.scrollLeft;
+                                pos[1] -= parentNode.scrollTop;
+                            }
+                        }
+                    }
+                    
+                    parentNode = parentNode.parentNode; 
+                }
+
+                return pos;
+            };
+        }
+    }() // NOTE: Executing for loadtime branching
 })();
 /**
  * A region is a representation of an object on a grid.  It is defined
@@ -2109,13 +2228,13 @@ YAHOO.util.Point = function(x, y) {
 
 YAHOO.util.Point.prototype = new YAHOO.util.Region();
 
-YAHOO.register("dom", YAHOO.util.Dom, {version: "2.3.1", build: "541"});
+YAHOO.register("dom", YAHOO.util.Dom, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 (function () {
 
@@ -2131,25 +2250,19 @@ version: 2.3.1
     * @param {Object} owner The owner Object to which this Config Object belongs
     */
     YAHOO.util.Config = function (owner) {
-    
+
         if (owner) {
-    
             this.init(owner);
-    
         }
-    
-        if (!owner) { 
-        
-    
-        }
-    
+
+
     };
 
 
     var Lang = YAHOO.lang,
-        CustomEvent = YAHOO.util.CustomEvent,        
+        CustomEvent = YAHOO.util.CustomEvent,
         Config = YAHOO.util.Config;
-    
+
 
     /**
      * Constant representing the CustomEvent type for the config changed event.
@@ -2466,7 +2579,7 @@ version: 2.3.1
                         if (queueItem) {
                             queueItemKey = queueItem[0];
                             queueItemValue = queueItem[1];
-                            
+
                             if (queueItemKey == key) {
     
                                 /*
@@ -2494,37 +2607,37 @@ version: 2.3.1
                 }
         
                 if (property.supercedes) {
-        
+
                     sLen = property.supercedes.length;
-        
+
                     for (s = 0; s < sLen; s++) {
-        
+
                         supercedesCheck = property.supercedes[s];
                         qLen = this.eventQueue.length;
-        
+
                         for (q = 0; q < qLen; q++) {
                             queueItemCheck = this.eventQueue[q];
-        
+
                             if (queueItemCheck) {
                                 queueItemCheckKey = queueItemCheck[0];
                                 queueItemCheckValue = queueItemCheck[1];
-                                
+
                                 if (queueItemCheckKey == 
                                     supercedesCheck.toLowerCase() ) {
-    
+
                                     this.eventQueue.push([queueItemCheckKey, 
                                         queueItemCheckValue]);
-    
+
                                     this.eventQueue[q] = null;
                                     break;
-    
+
                                 }
                             }
                         }
                     }
                 }
 
-        
+
                 return true;
             } else {
                 return false;
@@ -2573,37 +2686,23 @@ version: 2.3.1
         applyConfig: function (userConfig, init) {
         
             var sKey,
-                oValue,
                 oConfig;
 
             if (init) {
-
                 oConfig = {};
-
                 for (sKey in userConfig) {
-                
                     if (Lang.hasOwnProperty(userConfig, sKey)) {
-
                         oConfig[sKey.toLowerCase()] = userConfig[sKey];
-
                     }
-                
                 }
-
                 this.initialConfig = oConfig;
-
             }
 
             for (sKey in userConfig) {
-            
                 if (Lang.hasOwnProperty(userConfig, sKey)) {
-            
                     this.queueProperty(sKey, userConfig[sKey]);
-                
                 }
-
             }
-
         },
         
         /**
@@ -2670,19 +2769,12 @@ version: 2.3.1
             var property = this.config[key.toLowerCase()];
     
             if (property && property.event) {
-    
                 if (!Config.alreadySubscribed(property.event, handler, obj)) {
-    
                     property.event.subscribe(handler, obj, override);
-    
                 }
-    
                 return true;
-    
             } else {
-    
                 return false;
-    
             }
     
         },
@@ -2802,28 +2894,20 @@ version: 2.3.1
             i;
 
         if (nSubscribers > 0) {
-
             i = nSubscribers - 1;
-        
             do {
-
                 subsc = evt.subscribers[i];
-
                 if (subsc && subsc.obj == obj && subsc.fn == fn) {
-        
                     return true;
-        
-                }    
-            
+                }
             }
             while (i--);
-        
         }
-    
+
         return false;
-    
+
     };
-    
+
     YAHOO.lang.augmentProto(Config, YAHOO.util.EventProvider);
 
 }());
@@ -2885,7 +2969,6 @@ version: 2.3.1
         * @type Object
         */
         EVENT_TYPES = {
-        
             "BEFORE_INIT": "beforeInit",
             "INIT": "init",
             "APPEND": "append",
@@ -2900,7 +2983,6 @@ version: 2.3.1
             "SHOW": "show",
             "BEFORE_HIDE": "beforeHide",
             "HIDE": "hide"
-        
         },
             
         /**
@@ -2970,7 +3052,7 @@ version: 2.3.1
     * @type String
     */
     Module.CSS_HEADER = "hd";
-    
+
     /**
     * Constant representing the module body
     * @property YAHOO.widget.Module.CSS_BODY
@@ -3354,7 +3436,7 @@ version: 2.3.1
         */
         init: function (el, userConfig) {
 
-            var elId, i, child;
+            var elId, child;
 
             this.initEvents();
             this.beforeInitEvent.fire(Module);
@@ -3429,11 +3511,30 @@ version: 2.3.1
         },
 
         /**
-        * Initialized an empty IFRAME that is placed out of the visible area 
+        * Initialize an empty IFRAME that is placed out of the visible area 
         * that can be used to detect text resize.
         * @method initResizeMonitor
         */
         initResizeMonitor: function () {
+
+            var isGeckoWin = (YAHOO.env.ua.gecko && this.platform == "windows");
+            if (isGeckoWin) {
+                // Help prevent spinning loading icon which 
+                // started with FireFox 2.0.0.8/Win
+                var self = this;
+                setTimeout(function(){self._initResizeMonitor();}, 0);
+            } else {
+                this._initResizeMonitor();
+            }
+        },
+
+        /**
+         * Create and initialize the text resize monitoring iframe.
+         * 
+         * @protected
+         * @method _initResizeMonitor
+         */
+        _initResizeMonitor : function() {
 
             var oDoc, 
                 oIFrame, 
@@ -3446,6 +3547,8 @@ version: 2.3.1
             if (!YAHOO.env.ua.opera) {
                 oIFrame = Dom.get("_yuiResizeMonitor");
 
+                var supportsCWResize = this._supportsCWResize();
+
                 if (!oIFrame) {
                     oIFrame = document.createElement("iframe");
 
@@ -3453,22 +3556,17 @@ version: 2.3.1
                         oIFrame.src = Module.RESIZE_MONITOR_SECURE_URL;
                     }
 
-                    /*
-                        Need to set "src" attribute of the iframe to 
-                        prevent the browser from reporting duplicate 
-                        cookies. (See SourceForge bug #1721755)
-                    */
-                    if (YAHOO.env.ua.gecko) {
-                        sHTML = "<html><head><script " +
-                                "type=\"text/javascript\">" + 
-                                "window.onresize=function(){window.parent." +
-                                "YAHOO.widget.Module.textResizeEvent." +
-                                "fire();};window.parent.YAHOO.widget.Module." +
-                                "textResizeEvent.fire();</script></head>" + 
-                                "<body></body></html>";
+                    if (!supportsCWResize) {
+                        // Can't monitor on contentWindow, so fire from inside iframe
+                        sHTML = ["<html><head><script ",
+                                 "type=\"text/javascript\">",
+                                 "window.onresize=function(){window.parent.",
+                                 "YAHOO.widget.Module.textResizeEvent.",
+                                 "fire();};<",
+                                 "\/script></head>",
+                                 "<body></body></html>"].join('');
 
-                        oIFrame.src = "data:text/html;charset=utf-8," + 
-                            encodeURIComponent(sHTML);
+                        oIFrame.src = "data:text/html;charset=utf-8," + encodeURIComponent(sHTML);
                     }
 
                     oIFrame.id = "_yuiResizeMonitor";
@@ -3481,11 +3579,12 @@ version: 2.3.1
                     oIFrame.style.position = "absolute";
                     oIFrame.style.visibility = "hidden";
 
-                    var fc = document.body.firstChild;
+                    var db = document.body,
+                        fc = db.firstChild;
                     if (fc) {
-                        document.body.insertBefore(oIFrame, fc);
+                        db.insertBefore(oIFrame, fc);
                     } else {
-                        document.body.appendChild(oIFrame);
+                        db.appendChild(oIFrame);
                     }
 
                     oIFrame.style.width = "10em";
@@ -3495,6 +3594,10 @@ version: 2.3.1
                     oIFrame.style.borderWidth = "0";
                     oIFrame.style.visibility = "visible";
 
+                    /*
+                       Don't open/close the document for Gecko like we used to, since it
+                       leads to duplicate cookies. (See SourceForge bug #1721755)
+                    */
                     if (YAHOO.env.ua.webkit) {
                         oDoc = oIFrame.contentWindow.document;
                         oDoc.open();
@@ -3506,13 +3609,15 @@ version: 2.3.1
                     Module.textResizeEvent.subscribe(this.onDomResize, this, true);
 
                     if (!Module.textResizeInitialized) {
-                        if (!Event.on(oIFrame.contentWindow, "resize", fireTextResize)) {
-                            /*
-                                 This will fail in IE if document.domain has 
-                                 changed, so we must change the listener to 
-                                 use the oIFrame element instead
-                            */
-                            Event.on(oIFrame, "resize", fireTextResize);
+                        if (supportsCWResize) {
+                            if (!Event.on(oIFrame.contentWindow, "resize", fireTextResize)) {
+                                /*
+                                     This will fail in IE if document.domain has 
+                                     changed, so we must change the listener to 
+                                     use the oIFrame element instead
+                                */
+                                Event.on(oIFrame, "resize", fireTextResize);
+                            }
                         }
                         Module.textResizeInitialized = true;
                     }
@@ -3522,104 +3627,144 @@ version: 2.3.1
         },
 
         /**
+         * Text resize monitor helper method.
+         * Determines if the browser supports resize events on iframe content windows.
+         * 
+         * @private
+         * @method _supportsCWResize
+         */
+        _supportsCWResize : function() {
+            /*
+                Gecko 1.8.0 (FF1.5), 1.8.1.0-5 (FF2) won't fire resize on contentWindow.
+                Gecko 1.8.1.6+ (FF2.0.0.6+) and all other browsers will fire resize on contentWindow.
+
+                We don't want to start sniffing for patch versions, so fire textResize the same
+                way on all FF, until 1.9 (3.x) is out
+             */
+            var bSupported = true;
+            if (YAHOO.env.ua.gecko && YAHOO.env.ua.gecko <= 1.8) {
+                bSupported = false;
+                /*
+                var v = navigator.userAgent.match(/rv:([^\s\)]*)/); // From YAHOO.env.ua
+                if (v && v[0]) {
+                    var sv = v[0].match(/\d\.\d\.(\d)/);
+                    if (sv && sv[1]) {
+                        if (parseInt(sv[1], 10) > 0) {
+                            bSupported = true;
+                        }
+                    }
+                }
+                */
+            }
+            return bSupported;
+        },
+
+        /**
         * Event handler fired when the resize monitor element is resized.
         * @method onDomResize
         * @param {DOMEvent} e The DOM resize event
         * @param {Object} obj The scope object passed to the handler
         */
         onDomResize: function (e, obj) {
-        
+
             var nLeft = -1 * this.resizeMonitor.offsetWidth,
                 nTop = -1 * this.resizeMonitor.offsetHeight;
         
             this.resizeMonitor.style.top = nTop + "px";
             this.resizeMonitor.style.left =  nLeft + "px";
-        
+
         },
-        
+
         /**
-        * Sets the Module's header content to the HTML specified, or appends 
+        * Sets the Module's header content to the string specified, or appends 
         * the passed element to the header. If no header is present, one will 
-        * be automatically created.
+        * be automatically created. An empty string can be passed to the method
+        * to clear the contents of the header.
+        * 
         * @method setHeader
-        * @param {String} headerContent The HTML used to set the header 
+        * @param {String} headerContent The string used to set the header.
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the header innerHTML
+        * set to their default toString implementations.
         * <em>OR</em>
         * @param {HTMLElement} headerContent The HTMLElement to append to 
-        * the header
+        * <em>OR</em>
+        * @param {DocumentFragment} headerContent The document fragment 
+        * containing elements which are to be added to the header
         */
         setHeader: function (headerContent) {
-
             var oHeader = this.header || (this.header = createHeader());
-        
-            if (typeof headerContent == "string") {
 
-                oHeader.innerHTML = headerContent;
-
-            } else {
-
+            if (headerContent.nodeName) {
                 oHeader.innerHTML = "";
                 oHeader.appendChild(headerContent);
-
+            } else {
+                oHeader.innerHTML = headerContent;
             }
-        
+
             this.changeHeaderEvent.fire(headerContent);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Appends the passed element to the header. If no header is present, 
         * one will be automatically created.
         * @method appendToHeader
-        * @param {HTMLElement} element The element to append to the header
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the header. In the case of a document fragment, the
+        * children of the fragment will be appended to the header.
         */
         appendToHeader: function (element) {
-
             var oHeader = this.header || (this.header = createHeader());
-        
+
             oHeader.appendChild(element);
 
             this.changeHeaderEvent.fire(element);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Sets the Module's body content to the HTML specified, or appends the
         * passed element to the body. If no body is present, one will be 
-        * automatically created.
+        * automatically created. An empty string can be passed to the method
+        * to clear the contents of the body.
         * @method setBody
-        * @param {String} bodyContent The HTML used to set the body <em>OR</em>
+        * @param {String} bodyContent The HTML used to set the body. 
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the body innerHTML
+        * set to their default toString implementations.
+        * <em>OR</em>
         * @param {HTMLElement} bodyContent The HTMLElement to append to the body
+        * <em>OR</em>
+        * @param {DocumentFragment} bodyContent The document fragment 
+        * containing elements which are to be added to the body
         */
         setBody: function (bodyContent) {
-
             var oBody = this.body || (this.body = createBody());
-        
-            if (typeof bodyContent == "string") {
 
-                oBody.innerHTML = bodyContent;
-
-            } else {
-
+            if (bodyContent.nodeName) {
                 oBody.innerHTML = "";
                 oBody.appendChild(bodyContent);
-
+            } else {
+                oBody.innerHTML = bodyContent;
             }
-        
+
             this.changeBodyEvent.fire(bodyContent);
             this.changeContentEvent.fire();
-
         },
-        
+
         /**
         * Appends the passed element to the body. If no body is present, one 
         * will be automatically created.
         * @method appendToBody
-        * @param {HTMLElement} element The element to append to the body
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the body. In the case of a document fragment, the
+        * children of the fragment will be appended to the body.
+        * 
         */
         appendToBody: function (element) {
-
             var oBody = this.body || (this.body = createBody());
         
             oBody.appendChild(element);
@@ -3632,50 +3777,54 @@ version: 2.3.1
         /**
         * Sets the Module's footer content to the HTML specified, or appends 
         * the passed element to the footer. If no footer is present, one will 
-        * be automatically created.
+        * be automatically created. An empty string can be passed to the method
+        * to clear the contents of the footer.
         * @method setFooter
         * @param {String} footerContent The HTML used to set the footer 
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the footer innerHTML
+        * set to their default toString implementations.
         * <em>OR</em>
         * @param {HTMLElement} footerContent The HTMLElement to append to 
         * the footer
+        * <em>OR</em>
+        * @param {DocumentFragment} footerContent The document fragment containing 
+        * elements which are to be added to the footer
         */
         setFooter: function (footerContent) {
 
             var oFooter = this.footer || (this.footer = createFooter());
-        
-            if (typeof footerContent == "string") {
 
-                oFooter.innerHTML = footerContent;
-
-            } else {
-
+            if (footerContent.nodeName) {
                 oFooter.innerHTML = "";
                 oFooter.appendChild(footerContent);
-
+            } else {
+                oFooter.innerHTML = footerContent;
             }
-        
+
             this.changeFooterEvent.fire(footerContent);
             this.changeContentEvent.fire();
-
         },
-        
+
         /**
         * Appends the passed element to the footer. If no footer is present, 
         * one will be automatically created.
         * @method appendToFooter
-        * @param {HTMLElement} element The element to append to the footer
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the footer. In the case of a document fragment, the
+        * children of the fragment will be appended to the footer
         */
         appendToFooter: function (element) {
 
             var oFooter = this.footer || (this.footer = createFooter());
-        
+
             oFooter.appendChild(element);
 
             this.changeFooterEvent.fire(element);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Renders the Module by inserting the elements that are not already 
         * in the main Module into their correct places. Optionally appends 
@@ -3801,7 +3950,7 @@ version: 2.3.1
             }
 
         },
-        
+
         /**
         * Shows the Module element by setting the visible configuration 
         * property to true. Also fires two events: beforeShowEvent prior to 
@@ -3811,7 +3960,7 @@ version: 2.3.1
         show: function () {
             this.cfg.setProperty("visible", true);
         },
-        
+
         /**
         * Hides the Module element by setting the visible configuration 
         * property to false. Also fires two events: beforeHideEvent prior to 
@@ -3868,7 +4017,7 @@ version: 2.3.1
         },
 
         /**
-         * This method is a private helper, used when constructing the DOM structure for the module 
+         * This method is a protected helper, used when constructing the DOM structure for the module 
          * to account for situations which may cause Operation Aborted errors in IE. It should not 
          * be used for general DOM construction.
          * <p>
@@ -3947,10 +4096,8 @@ version: 2.3.1
         * @type Object
         */
         EVENT_TYPES = {
-        
             "BEFORE_MOVE": "beforeMove",
             "MOVE": "move"
-        
         },
 
         /**
@@ -3961,21 +4108,21 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-        
+
             "X": { 
                 key: "x", 
                 validator: Lang.isNumber, 
                 suppressEvent: true, 
-                supercedes: ["iframe"] 
+                supercedes: ["iframe"]
             },
-        
+
             "Y": { 
                 key: "y", 
                 validator: Lang.isNumber, 
                 suppressEvent: true, 
-                supercedes: ["iframe"] 
+                supercedes: ["iframe"]
             },
-        
+
             "XY": { 
                 key: "xy", 
                 suppressEvent: true, 
@@ -4005,18 +4152,18 @@ version: 2.3.1
                 key: "height", 
                 suppressEvent: true, 
                 supercedes: ["context", "fixedcenter", "iframe"] 
-            }, 
+            },
 
             "ZINDEX": { 
                 key: "zindex", 
                 value: null 
-            }, 
+            },
 
             "CONSTRAIN_TO_VIEWPORT": { 
                 key: "constraintoviewport", 
                 value: false, 
                 validator: Lang.isBoolean, 
-                supercedes: ["iframe", "x", "y", "xy"] 
+                supercedes: ["iframe", "x", "y", "xy"]
             }, 
 
             "IFRAME": { 
@@ -4038,7 +4185,7 @@ version: 2.3.1
 
     /**
     * Number representing how much the iframe shim should be offset from each 
-    * side of an Overlay instance.
+    * side of an Overlay instance, in pixels.
     * @property YAHOO.widget.Overlay.IFRAME_SRC
     * @default 3
     * @static
@@ -4046,7 +4193,18 @@ version: 2.3.1
     * @type Number
     */
     Overlay.IFRAME_OFFSET = 3;
-    
+
+    /**
+    * Number representing the minimum distance an Overlay instance should be 
+    * positioned relative to the boundaries of the browser's viewport, in pixels.
+    * @property YAHOO.widget.Overlay.VIEWPORT_OFFSET
+    * @default 10
+    * @static
+    * @final
+    * @type Number
+    */
+    Overlay.VIEWPORT_OFFSET = 10;
+
     /**
     * Constant representing the top left corner of an element, used for 
     * configuring the context element alignment
@@ -4056,7 +4214,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.TOP_LEFT = "tl";
-    
+
     /**
     * Constant representing the top right corner of an element, used for 
     * configuring the context element alignment
@@ -4066,7 +4224,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.TOP_RIGHT = "tr";
-    
+
     /**
     * Constant representing the top bottom left corner of an element, used for 
     * configuring the context element alignment
@@ -4076,7 +4234,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.BOTTOM_LEFT = "bl";
-    
+
     /**
     * Constant representing the bottom right corner of an element, used for 
     * configuring the context element alignment
@@ -4086,7 +4244,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.BOTTOM_RIGHT = "br";
-    
+
     /**
     * Constant representing the default CSS class used for an Overlay
     * @property YAHOO.widget.Overlay.CSS_OVERLAY
@@ -4095,22 +4253,21 @@ version: 2.3.1
     * @type String
     */
     Overlay.CSS_OVERLAY = "yui-overlay";
-    
-    
+
     /**
     * A singleton CustomEvent used for reacting to the DOM event for 
     * window scroll
     * @event YAHOO.widget.Overlay.windowScrollEvent
     */
     Overlay.windowScrollEvent = new CustomEvent("windowScroll");
-    
+
     /**
     * A singleton CustomEvent used for reacting to the DOM event for
     * window resize
     * @event YAHOO.widget.Overlay.windowResizeEvent
     */
     Overlay.windowResizeEvent = new CustomEvent("windowResize");
-    
+
     /**
     * The DOM event handler used to fire the CustomEvent for window scroll
     * @method YAHOO.widget.Overlay.windowScrollHandler
@@ -4118,13 +4275,13 @@ version: 2.3.1
     * @param {DOMEvent} e The DOM scroll event
     */
     Overlay.windowScrollHandler = function (e) {
-    
+
         if (YAHOO.env.ua.ie) {
 
             if (! window.scrollEnd) {
                 window.scrollEnd = -1;
             }
-    
+
             clearTimeout(window.scrollEnd);
     
             window.scrollEnd = setTimeout(function () { 
@@ -4158,7 +4315,7 @@ version: 2.3.1
             Overlay.windowResizeEvent.fire();
         }
     };
-    
+
     /**
     * A boolean that indicated whether the window resize and scroll events have 
     * already been subscribed to.
@@ -4167,7 +4324,7 @@ version: 2.3.1
     * @type Boolean
     */
     Overlay._initialized = null;
-    
+
     if (Overlay._initialized === null) {
         Event.on(window, "scroll", Overlay.windowScrollHandler);
         Event.on(window, "resize", Overlay.windowResizeHandler);
@@ -4176,7 +4333,7 @@ version: 2.3.1
     }
 
     YAHOO.extend(Overlay, Module, {
-    
+
         /**
         * The Overlay initialization method, which is executed for Overlay and  
         * all of its subclasses. This method is automatically called by the 
@@ -4197,7 +4354,7 @@ version: 2.3.1
             */
     
             Overlay.superclass.init.call(this, el/*, userConfig*/);  
-            
+
             this.beforeInitEvent.fire(Overlay);
             
             Dom.addClass(this.element, Overlay.CSS_OVERLAY);
@@ -4285,7 +4442,7 @@ version: 2.3.1
                 supercedes: DEFAULT_CONFIG.X.supercedes
     
             });
-    
+
             /**
             * The absolute y-coordinate position of the Overlay
             * @config y
@@ -4293,12 +4450,12 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.Y.key, {
-    
+
                 handler: this.configY, 
                 validator: DEFAULT_CONFIG.Y.validator, 
                 suppressEvent: DEFAULT_CONFIG.Y.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.Y.supercedes
-    
+
             });
     
             /**
@@ -4332,7 +4489,7 @@ version: 2.3.1
                 supercedes: DEFAULT_CONFIG.CONTEXT.supercedes
             
             });
-    
+
             /**
             * True if the Overlay should be anchored to the center of 
             * the viewport.
@@ -4356,13 +4513,13 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.WIDTH.key, {
-            
+
                 handler: this.configWidth, 
                 suppressEvent: DEFAULT_CONFIG.WIDTH.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.WIDTH.supercedes
-            
+
             });
-            
+
             /**
             * CSS height of the Overlay.
             * @config height
@@ -4370,7 +4527,7 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.HEIGHT.key, {
-            
+
                 handler: this.configHeight, 
                 suppressEvent: DEFAULT_CONFIG.HEIGHT.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.HEIGHT.supercedes
@@ -4384,12 +4541,12 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.ZINDEX.key, {
-    
+
                 handler: this.configzIndex,
                 value: DEFAULT_CONFIG.ZINDEX.value
-    
+
             });
-            
+
             /**
             * True if the Overlay should be prevented from being positioned 
             * out of the viewport.
@@ -4398,14 +4555,14 @@ version: 2.3.1
             * @default false
             */
             this.cfg.addProperty(DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.key, {
-            
+
                 handler: this.configConstrainToViewport, 
                 value: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.value, 
                 validator: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.validator, 
                 supercedes: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.supercedes
-            
+
             });
-            
+
             /**
             * @config iframe
             * @description Boolean indicating whether or not the Overlay should 
@@ -4417,7 +4574,7 @@ version: 2.3.1
             * @default true for IE6 and below, false for all other browsers.
             */
             this.cfg.addProperty(DEFAULT_CONFIG.IFRAME.key, {
-            
+
                 handler: this.configIframe, 
                 value: DEFAULT_CONFIG.IFRAME.value, 
                 validator: DEFAULT_CONFIG.IFRAME.validator, 
@@ -4434,9 +4591,7 @@ version: 2.3.1
         * @param {Number} y The Overlay's new y position
         */
         moveTo: function (x, y) {
-    
             this.cfg.setProperty("xy", [x, y]);
-    
         },
 
         /**
@@ -4488,64 +4643,64 @@ version: 2.3.1
                 eff, ei, e, i, j, k, h,
                 nEffects,
                 nEffectInstances;
-    
+
             if (currentVis == "inherit") {
                 e = this.element.parentNode;
-    
+
                 while (e.nodeType != 9 && e.nodeType != 11) {
                     currentVis = Dom.getStyle(e, "visibility");
-    
+
                     if (currentVis != "inherit") { 
                         break; 
                     }
-    
+
                     e = e.parentNode;
                 }
-    
+
                 if (currentVis == "inherit") {
                     currentVis = "visible";
                 }
             }
-    
+
             if (effect) {
                 if (effect instanceof Array) {
                     nEffects = effect.length;
-    
+
                     for (i = 0; i < nEffects; i++) {
                         eff = effect[i];
                         effectInstances[effectInstances.length] = 
                             eff.effect(this, eff.duration);
-    
+
                     }
                 } else {
                     effectInstances[effectInstances.length] = 
                         effect.effect(this, effect.duration);
                 }
             }
-    
-        
+
+
             if (visible) { // Show
                 if (isMacGecko) {
                     this.showMacGeckoScrollbars();
                 }
-    
+
                 if (effect) { // Animate in
                     if (visible) { // Animate in if not showing
                         if (currentVis != "visible" || currentVis === "") {
                             this.beforeShowEvent.fire();
                             nEffectInstances = effectInstances.length;
-    
+
                             for (j = 0; j < nEffectInstances; j++) {
                                 ei = effectInstances[j];
                                 if (j === 0 && !alreadySubscribed(
                                         ei.animateInCompleteEvent, 
                                         this.showEvent.fire, this.showEvent)) {
-    
+
                                     /*
                                          Delegate showEvent until end 
                                          of animateInComplete
                                     */
-    
+
                                     ei.animateInCompleteEvent.subscribe(
                                      this.showEvent.fire, this.showEvent, true);
                                 }
@@ -4556,15 +4711,15 @@ version: 2.3.1
                 } else { // Show
                     if (currentVis != "visible" || currentVis === "") {
                         this.beforeShowEvent.fire();
-    
+
                         Dom.setStyle(this.element, "visibility", "visible");
-    
+
                         this.cfg.refireEvent("iframe");
                         this.showEvent.fire();
                     }
                 }
             } else { // Hide
-    
+
                 if (isMacGecko) {
                     this.hideMacGeckoScrollbars();
                 }
@@ -4592,13 +4747,13 @@ version: 2.3.1
                             }
                             h.animateOut();
                         }
-    
+
                     } else if (currentVis === "") {
                         Dom.setStyle(this.element, "visibility", "hidden");
                     }
-    
+
                 } else { // Simple hide
-    
+
                     if (currentVis == "visible" || currentVis === "") {
                         this.beforeHideEvent.fire();
                         Dom.setStyle(this.element, "visibility", "hidden");
@@ -4630,30 +4785,30 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configFixedCenter: function (type, args, obj) {
-    
+
             var val = args[0],
                 alreadySubscribed = Config.alreadySubscribed,
                 windowResizeEvent = Overlay.windowResizeEvent,
                 windowScrollEvent = Overlay.windowScrollEvent;
-            
+
             if (val) {
                 this.center();
 
                 if (!alreadySubscribed(this.beforeShowEvent, this.center, this)) {
                     this.beforeShowEvent.subscribe(this.center);
                 }
-            
+
                 if (!alreadySubscribed(windowResizeEvent, this.doCenterOnDOMEvent, this)) {
                     windowResizeEvent.subscribe(this.doCenterOnDOMEvent, this, true);
                 }
-            
+
                 if (!alreadySubscribed(windowScrollEvent, this.doCenterOnDOMEvent, this)) {
                     windowScrollEvent.subscribe(this.doCenterOnDOMEvent, this, true);
                 }
-    
+
             } else {
                 this.beforeShowEvent.unsubscribe(this.center);
-    
+
                 windowResizeEvent.unsubscribe(this.doCenterOnDOMEvent, this);
                 windowScrollEvent.unsubscribe(this.doCenterOnDOMEvent, this);
             }
@@ -4669,14 +4824,14 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configHeight: function (type, args, obj) {
-    
+
             var height = args[0],
                 el = this.element;
-    
+
             Dom.setStyle(el, "height", height);
             this.cfg.refireEvent("iframe");
         },
-        
+
         /**
         * The default event handler fired when the "width" property is changed.
         * @method configWidth
@@ -4687,7 +4842,7 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configWidth: function (type, args, obj) {
-    
+
             var width = args[0],
                 el = this.element;
     
@@ -4776,18 +4931,18 @@ version: 2.3.1
             this.cfg.setProperty("y", y, true);
 
             this.beforeMoveEvent.fire([x, y]);
-            
+
             x = this.cfg.getProperty("x");
             y = this.cfg.getProperty("y");
             
             Dom.setX(this.element, x, true);
-            
+
             this.cfg.setProperty("xy", [x, y], true);
-           
+
             this.cfg.refireEvent("iframe");
             this.moveEvent.fire([x, y]);
         },
-        
+
         /**
         * The default event handler fired when the "y" property is changed.
         * @method configY
@@ -4889,7 +5044,7 @@ version: 2.3.1
          * </p>
          * @method stackIframe
          */
-        stackIframe: function() {
+        stackIframe: function () {
             if (this.iframe) {
                 var overlayZ = Dom.getStyle(this.element, "zIndex");
                 if (!YAHOO.lang.isUndefined(overlayZ) && !isNaN(overlayZ)) {
@@ -4915,8 +5070,7 @@ version: 2.3.1
 
                 var oIFrame = this.iframe,
                     oElement = this.element,
-                    oParent,
-                    aXY;
+                    oParent;
 
                 if (!oIFrame) {
                     if (!m_oIFrameTemplate) {
@@ -5017,6 +5171,26 @@ version: 2.3.1
         },
 
         /**
+         * Set's the container's XY value from DOM if not already set.
+         * 
+         * Differs from syncPosition, in that the XY value is only sync'd with DOM if 
+         * not already set. The method also refire's the XY config property event, so any
+         * beforeMove, Move event listeners are invoked.
+         * 
+         * @method _primeXYFromDOM
+         * @protected
+         */
+        _primeXYFromDOM : function() {
+            if (YAHOO.lang.isUndefined(this.cfg.getProperty("xy"))) {
+                // Set CFG XY based on DOM XY
+                this.syncPosition();
+                // Account for XY being set silently in syncPosition (no moveTo fired/called)
+                this.cfg.refireEvent("xy");
+                this.beforeShowEvent.unsubscribe(this._primeXYFromDOM);
+            }
+        },
+
+        /**
         * The default event handler fired when the "constraintoviewport" 
         * property is changed.
         * @method configConstrainToViewport
@@ -5028,24 +5202,22 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configConstrainToViewport: function (type, args, obj) {
-    
             var val = args[0];
-    
+
             if (val) {
-                if (! Config.alreadySubscribed(this.beforeMoveEvent, 
-                    this.enforceConstraints, this)) {
-    
-                    this.beforeMoveEvent.subscribe(this.enforceConstraints, 
-                        this, true);
-    
+                if (! Config.alreadySubscribed(this.beforeMoveEvent, this.enforceConstraints, this)) {
+                    this.beforeMoveEvent.subscribe(this.enforceConstraints, this, true);
+                }
+                if (! Config.alreadySubscribed(this.beforeShowEvent, this._primeXYFromDOM)) {
+                    this.beforeShowEvent.subscribe(this._primeXYFromDOM);
                 }
             } else {
+                this.beforeShowEvent.unsubscribe(this._primeXYFromDOM);
                 this.beforeMoveEvent.unsubscribe(this.enforceConstraints, this);
             }
-    
         },
-        
-        /**
+
+         /**
         * The default event handler fired when the "context" property 
         * is changed.
         * @method configContext
@@ -5061,39 +5233,28 @@ version: 2.3.1
                 contextEl,
                 elementMagnetCorner,
                 contextMagnetCorner;
-            
+
             if (contextArgs) {
-            
                 contextEl = contextArgs[0];
                 elementMagnetCorner = contextArgs[1];
                 contextMagnetCorner = contextArgs[2];
                 
                 if (contextEl) {
-    
                     if (typeof contextEl == "string") {
-    
                         this.cfg.setProperty("context", 
                             [document.getElementById(contextEl), 
                                 elementMagnetCorner, contextMagnetCorner], 
                                 true);
-    
                     }
                     
                     if (elementMagnetCorner && contextMagnetCorner) {
-    
                         this.align(elementMagnetCorner, contextMagnetCorner);
-    
                     }
-    
                 }
-    
             }
-    
         },
-        
-        
+
         // END BUILT-IN PROPERTY EVENT HANDLERS //
-        
         /**
         * Aligns the Overlay to its context element using the specified corner 
         * points (represented by the constants TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, 
@@ -5105,14 +5266,13 @@ version: 2.3.1
         * that the elementAlign corner should stick to.
         */
         align: function (elementAlign, contextAlign) {
-    
+
             var contextArgs = this.cfg.getProperty("context"),
                 me = this,
                 context,
                 element,
                 contextRegion;
-    
-    
+
             function doAlign(v, h) {
     
                 switch (elementAlign) {
@@ -5144,47 +5304,33 @@ version: 2.3.1
                 me = this;
                 
                 if (! elementAlign) {
-    
                     elementAlign = contextArgs[1];
-    
                 }
                 
                 if (! contextAlign) {
-    
                     contextAlign = contextArgs[2];
-    
                 }
                 
                 if (element && context) {
-    
                     contextRegion = Dom.getRegion(context);
-                    
+
                     switch (contextAlign) {
     
                     case Overlay.TOP_LEFT:
-    
                         doAlign(contextRegion.top, contextRegion.left);
-    
                         break;
     
                     case Overlay.TOP_RIGHT:
-    
                         doAlign(contextRegion.top, contextRegion.right);
-    
                         break;
     
                     case Overlay.BOTTOM_LEFT:
-    
                         doAlign(contextRegion.bottom, contextRegion.left);
-    
                         break;
     
                     case Overlay.BOTTOM_RIGHT:
-    
                         doAlign(contextRegion.bottom, contextRegion.right);
-    
                         break;
-    
                     }
     
                 }
@@ -5192,7 +5338,7 @@ version: 2.3.1
             }
             
         },
-        
+
         /**
         * The default event handler executed when the moveEvent is fired, if the 
         * "constraintoviewport" is set to true.
@@ -5204,70 +5350,96 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         enforceConstraints: function (type, args, obj) {
-    
-            var pos = args[0],
-                x = pos[0],
-                y = pos[1],
-                offsetHeight = this.element.offsetHeight,
-                offsetWidth = this.element.offsetWidth,
+            var pos = args[0];
+            var cXY = this.getConstrainedXY(pos[0], pos[1]);
+            this.cfg.setProperty("x", cXY[0], true);
+            this.cfg.setProperty("y", cXY[1], true);
+            this.cfg.setProperty("xy", cXY, true);
+        },
+
+        /**
+         * Given x, y coordinate values, returns the calculated coordinates required to 
+         * position the Overlay if it is to be constrained to the viewport, based on the 
+         * current element size, viewport dimensions and scroll values.
+         *
+         * @param {Number} x The X coordinate value to be constrained
+         * @param {Number} y The Y coordinate value to be constrained
+         * @return {Array} The constrained x and y coordinates at index 0 and 1 respectively;
+         */
+        getConstrainedXY: function(x, y) {
+
+            var nViewportOffset = Overlay.VIEWPORT_OFFSET,
                 viewPortWidth = Dom.getViewportWidth(),
                 viewPortHeight = Dom.getViewportHeight(),
+                offsetHeight = this.element.offsetHeight,
+                offsetWidth = this.element.offsetWidth,
                 scrollX = Dom.getDocumentScrollLeft(),
-                scrollY = Dom.getDocumentScrollTop(),
-                topConstraint = scrollY + 10,
-                leftConstraint = scrollX + 10,
-                bottomConstraint = scrollY + viewPortHeight - offsetHeight - 10,
-                rightConstraint = scrollX + viewPortWidth - offsetWidth - 10;
-        
-    
-            if (x < leftConstraint) {
-    
-                x = leftConstraint;
-    
-            } else if (x > rightConstraint) {
-    
-                x = rightConstraint;
-    
+                scrollY = Dom.getDocumentScrollTop();
+
+            var xNew = x;
+            var yNew = y;
+
+            if (offsetWidth + nViewportOffset < viewPortWidth) {
+
+                var leftConstraint = scrollX + nViewportOffset;
+                var rightConstraint = scrollX + viewPortWidth - offsetWidth - nViewportOffset;
+
+                if (x < leftConstraint) {
+                    xNew = leftConstraint;
+                } else if (x > rightConstraint) {
+                    xNew = rightConstraint;
+                }
+            } else {
+                xNew = nViewportOffset + scrollX;
             }
-            
-            if (y < topConstraint) {
-    
-                y = topConstraint;
-    
-            } else if (y > bottomConstraint) {
-    
-                y = bottomConstraint;
-    
+
+            if (offsetHeight + nViewportOffset < viewPortHeight) {
+
+                var topConstraint = scrollY + nViewportOffset;
+                var bottomConstraint = scrollY + viewPortHeight - offsetHeight - nViewportOffset;
+
+                if (y < topConstraint) {
+                    yNew  = topConstraint;
+                } else if (y  > bottomConstraint) {
+                    yNew  = bottomConstraint;
+                }
+            } else {
+                yNew = nViewportOffset + scrollY;
             }
-            
-            this.cfg.setProperty("x", x, true);
-            this.cfg.setProperty("y", y, true);
-            this.cfg.setProperty("xy", [x, y], true);
-    
+
+            return [xNew, yNew];
         },
-        
+
         /**
         * Centers the container in the viewport.
         * @method center
         */
         center: function () {
-    
-            var scrollX = Dom.getDocumentScrollLeft(),
-                scrollY = Dom.getDocumentScrollTop(),
-    
-                viewPortWidth = Dom.getClientWidth(),
-                viewPortHeight = Dom.getClientHeight(),
+
+            var nViewportOffset = Overlay.VIEWPORT_OFFSET,
                 elementWidth = this.element.offsetWidth,
                 elementHeight = this.element.offsetHeight,
-                x = (viewPortWidth / 2) - (elementWidth / 2) + scrollX,
-                y = (viewPortHeight / 2) - (elementHeight / 2) + scrollY;
-            
+                viewPortWidth = Dom.getViewportWidth(),
+                viewPortHeight = Dom.getViewportHeight(),
+                x,
+                y;
+
+            if (elementWidth < viewPortWidth) {
+                x = (viewPortWidth / 2) - (elementWidth / 2) + Dom.getDocumentScrollLeft();
+            } else {
+                x = nViewportOffset + Dom.getDocumentScrollLeft();
+            }
+
+            if (elementHeight < viewPortHeight) {
+                y = (viewPortHeight / 2) - (elementHeight / 2) + Dom.getDocumentScrollTop();
+            } else {
+                y = nViewportOffset + Dom.getDocumentScrollTop();
+            }
+
             this.cfg.setProperty("xy", [parseInt(x, 10), parseInt(y, 10)]);
-            
             this.cfg.refireEvent("iframe");
-    
         },
-        
+
         /**
         * Synchronizes the Panel's "xy", "x", and "y" properties with the 
         * Panel's position in the DOM. This is primarily used to update  
@@ -5275,15 +5447,15 @@ version: 2.3.1
         * @method syncPosition
         */
         syncPosition: function () {
-    
+
             var pos = Dom.getXY(this.element);
-    
+
             this.cfg.setProperty("x", pos[0], true);
             this.cfg.setProperty("y", pos[1], true);
             this.cfg.setProperty("xy", pos, true);
-    
+
         },
-        
+
         /**
         * Event handler fired when the resize monitor element is resized.
         * @method onDomResize
@@ -5291,11 +5463,11 @@ version: 2.3.1
         * @param {Object} obj The scope object
         */
         onDomResize: function (e, obj) {
-    
+
             var me = this;
-    
+
             Overlay.superclass.onDomResize.call(this, e, obj);
-    
+
             setTimeout(function () {
                 me.syncPosition();
                 me.cfg.refireEvent("iframe");
@@ -5309,83 +5481,71 @@ version: 2.3.1
         * YAHOO.widget.Overlay.
         * @method bringToTop
         */
-        bringToTop: function() {
-    
+        bringToTop: function () {
+
             var aOverlays = [],
                 oElement = this.element;
-    
+
             function compareZIndexDesc(p_oOverlay1, p_oOverlay2) {
-        
+
                 var sZIndex1 = Dom.getStyle(p_oOverlay1, "zIndex"),
-        
                     sZIndex2 = Dom.getStyle(p_oOverlay2, "zIndex"),
-        
-                    nZIndex1 = (!sZIndex1 || isNaN(sZIndex1)) ? 
-                        0 : parseInt(sZIndex1, 10),
-        
-                    nZIndex2 = (!sZIndex2 || isNaN(sZIndex2)) ? 
-                        0 : parseInt(sZIndex2, 10);
-        
+
+                    nZIndex1 = (!sZIndex1 || isNaN(sZIndex1)) ? 0 : parseInt(sZIndex1, 10),
+                    nZIndex2 = (!sZIndex2 || isNaN(sZIndex2)) ? 0 : parseInt(sZIndex2, 10);
+
                 if (nZIndex1 > nZIndex2) {
-        
                     return -1;
-        
                 } else if (nZIndex1 < nZIndex2) {
-        
                     return 1;
-        
                 } else {
-        
                     return 0;
-        
                 }
-        
             }
-        
+
             function isOverlayElement(p_oElement) {
-        
+
                 var oOverlay = Dom.hasClass(p_oElement, Overlay.CSS_OVERLAY),
                     Panel = YAHOO.widget.Panel;
-            
+
                 if (oOverlay && !Dom.isAncestor(oElement, oOverlay)) {
-                
                     if (Panel && Dom.hasClass(p_oElement, Panel.CSS_PANEL)) {
-        
                         aOverlays[aOverlays.length] = p_oElement.parentNode;
-                    
-                    }
-                    else {
-        
+                    } else {
                         aOverlays[aOverlays.length] = p_oElement;
-        
                     }
-                
                 }
-            
             }
-            
+
             Dom.getElementsBy(isOverlayElement, "DIV", document.body);
-    
+
             aOverlays.sort(compareZIndexDesc);
-            
+
             var oTopOverlay = aOverlays[0],
                 nTopZIndex;
-            
+
             if (oTopOverlay) {
-    
                 nTopZIndex = Dom.getStyle(oTopOverlay, "zIndex");
-    
-                if (!isNaN(nTopZIndex) && oTopOverlay != oElement) {
-    
-                    this.cfg.setProperty("zindex", 
-                        (parseInt(nTopZIndex, 10) + 2));
-    
+
+                if (!isNaN(nTopZIndex)) {
+                    var bRequiresBump = false;
+
+                    if (oTopOverlay != oElement) {
+                        bRequiresBump = true;
+                    } else if (aOverlays.length > 1) {
+                        var nNextZIndex = Dom.getStyle(aOverlays[1], "zIndex");
+                        // Don't rely on DOM order to stack if 2 overlays are at the same zindex.
+                        if (!isNaN(nNextZIndex) && (nTopZIndex == nNextZIndex)) {
+                            bRequiresBump = true;
+                        }
+                    }
+                    if (bRequiresBump) {
+                        this.cfg.setProperty("zindex", (parseInt(nTopZIndex, 10) + 2));
+                    }
                 }
-            
             }
-        
         },
-        
+
         /**
         * Removes the Overlay element from the DOM and sets all child 
         * elements to null.
@@ -5394,11 +5554,9 @@ version: 2.3.1
         destroy: function () {
 
             if (this.iframe) {
-    
                 this.iframe.parentNode.removeChild(this.iframe);
-    
             }
-        
+
             this.iframe = null;
         
             Overlay.windowResizeEvent.unsubscribe(
@@ -5625,7 +5783,7 @@ version: 2.3.1
                     i = nOverlays - 1;
 
                     do {
-                        this.overlays[i].blur();                    
+                        this.overlays[i].blur();
                     }
                     while(i--);
                 }
@@ -5786,22 +5944,33 @@ version: 2.3.1
                 aOverlays.sort(this.compareZIndexDesc);
 
                 oTopOverlay = aOverlays[0];
-                
-                if (oTopOverlay) {
 
+                if (oTopOverlay) {
                     nTopZIndex = Dom.getStyle(oTopOverlay.element, "zIndex");
-    
-                    if (!isNaN(nTopZIndex) && oTopOverlay != oOverlay) {
-    
-                        oOverlay.cfg.setProperty("zIndex", 
-                            (parseInt(nTopZIndex, 10) + 2));
-    
+
+                    if (!isNaN(nTopZIndex)) {
+
+                        var bRequiresBump = false;
+
+                        if (oTopOverlay !== oOverlay) {
+                            bRequiresBump = true;
+                        } else if (aOverlays.length > 1) {
+                            var nNextZIndex = Dom.getStyle(aOverlays[1].element, "zIndex");
+                            // Don't rely on DOM order to stack if 2 overlays are at the same zindex.
+                            if (!isNaN(nNextZIndex) && (nTopZIndex == nNextZIndex)) {
+                                bRequiresBump = true;
+                            }
+                        }
+
+                        if (bRequiresBump) {
+                            oOverlay.cfg.setProperty("zindex", (parseInt(nTopZIndex, 10) + 2));
+                        }
                     }
                     aOverlays.sort(this.compareZIndexDesc);
                 }
             }
         },
-        
+
         /**
         * Attempts to locate an Overlay by instance or ID.
         * @method find
@@ -5811,7 +5980,7 @@ version: 2.3.1
         * cannot be located.
         */
         find: function (overlay) {
-        
+
             var aOverlays = this.overlays,
                 nOverlays = aOverlays.length,
                 i;
@@ -5884,7 +6053,7 @@ version: 2.3.1
                 while(i--);
             }
         },
-        
+
         /**
         * Hides all Overlays in the manager.
         * @method hideAll
@@ -5903,7 +6072,7 @@ version: 2.3.1
                 while(i--);
             }
         },
-        
+
         /**
         * Returns a string representation of the object.
         * @method toString
@@ -6001,67 +6170,69 @@ version: 2.3.1
     * @return {YAHOO.widget.ContainerEffect} The configured ContainerEffect object
     */
     ContainerEffect.FADE = function (overlay, dur) {
-    
-        var fade = new ContainerEffect(overlay, 
-        
-            { attributes: { opacity: { from: 0, to: 1 } }, 
-                duration: dur, 
-                method: Easing.easeIn }, 
-            
-            { attributes: { opacity: { to: 0 } },
-                duration: dur, 
-                method: Easing.easeOut }, 
-            
-            overlay.element);
-        
-    
+
+        var fin = {
+            attributes: {opacity:{from:0, to:1}},
+            duration: dur,
+            method: Easing.easeIn
+        };
+
+        var fout = {
+            attributes: {opacity:{to:0}},
+            duration: dur,
+            method: Easing.easeOut
+        };
+
+        var fade = new ContainerEffect(overlay, fin, fout, overlay.element);
+
+        fade.handleUnderlayStart = function() {
+            var underlay = this.overlay.underlay;
+            if (underlay && YAHOO.env.ua.ie) {
+                var hasFilters = (underlay.filters && underlay.filters.length > 0);
+                if(hasFilters) {
+                    Dom.addClass(overlay.element, "yui-effect-fade");
+                }
+            }
+        };
+
+        fade.handleUnderlayComplete = function() {
+            var underlay = this.overlay.underlay;
+            if (underlay && YAHOO.env.ua.ie) {
+                Dom.removeClass(overlay.element, "yui-effect-fade");
+            }
+        };
+
         fade.handleStartAnimateIn = function (type,args,obj) {
             Dom.addClass(obj.overlay.element, "hide-select");
-        
-            if (! obj.overlay.underlay) {
+
+            if (!obj.overlay.underlay) {
                 obj.overlay.cfg.refireEvent("underlay");
             }
-        
-            if (obj.overlay.underlay) {
-    
-                obj.initialUnderlayOpacity = 
-                    Dom.getStyle(obj.overlay.underlay, "opacity");
-    
-                obj.overlay.underlay.style.filter = null;
-    
-            }
-        
+
+            obj.handleUnderlayStart();
+
             Dom.setStyle(obj.overlay.element, "visibility", "visible");
             Dom.setStyle(obj.overlay.element, "opacity", 0);
         };
-        
-    
+
         fade.handleCompleteAnimateIn = function (type,args,obj) {
             Dom.removeClass(obj.overlay.element, "hide-select");
-        
+
             if (obj.overlay.element.style.filter) {
                 obj.overlay.element.style.filter = null;
             }
-        
-            if (obj.overlay.underlay) {
-                Dom.setStyle(obj.overlay.underlay, "opacity", 
-                    obj.initialUnderlayOpacity);
-            }
-        
+
+            obj.handleUnderlayComplete();
+
             obj.overlay.cfg.refireEvent("iframe");
             obj.animateInCompleteEvent.fire();
         };
-        
-    
+
         fade.handleStartAnimateOut = function (type, args, obj) {
             Dom.addClass(obj.overlay.element, "hide-select");
-        
-            if (obj.overlay.underlay) {
-                obj.overlay.underlay.style.filter = null;
-            }
+            obj.handleUnderlayStart();
         };
-        
-    
+
         fade.handleCompleteAnimateOut =  function (type, args, obj) {
             Dom.removeClass(obj.overlay.element, "hide-select");
             if (obj.overlay.element.style.filter) {
@@ -6069,12 +6240,13 @@ version: 2.3.1
             }
             Dom.setStyle(obj.overlay.element, "visibility", "hidden");
             Dom.setStyle(obj.overlay.element, "opacity", 1);
-        
+
+            obj.handleUnderlayComplete();
+
             obj.overlay.cfg.refireEvent("iframe");
-        
             obj.animateOutCompleteEvent.fire();
         };
-        
+
         fade.init();
         return fade;
     };
@@ -6146,11 +6318,9 @@ version: 2.3.1
     
             var vw = Dom.getViewportWidth(),
                 pos = Dom.getXY(obj.overlay.element),
-                yso = pos[1],
-                currentTo = obj.animOut.attributes.points.to;
+                yso = pos[1];
     
             obj.animOut.attributes.points.to = [(vw + 25), yso];
-    
         };
         
         slide.handleTweenAnimateOut = function (type, args, obj) {
@@ -6307,7 +6477,7 @@ version: 2.3.1
 
 })();
 
-YAHOO.register("container_core", YAHOO.widget.Module, {version: "2.3.1", build: "541"});
+YAHOO.register("containercore", YAHOO.widget.Module, {version: "2.5.2", build: "1076"});
 
 /*
 Copyright (c) 2008, Yahoo! Inc. All rights reserved.
@@ -15333,10 +15503,10 @@ toString: function() {
 YAHOO.register("menu", YAHOO.widget.Menu, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 /****************************************************************************/
 /****************************************************************************/
@@ -15349,62 +15519,54 @@ version: 2.3.1
  * @constructor
  * @param oConfigs {Object} Object literal of configuration params.
  */
- YAHOO.widget.LogMsg = function(oConfigs) {
+YAHOO.widget.LogMsg = function(oConfigs) {
     // Parse configs
+    /**
+     * Log message.
+     *
+     * @property msg
+     * @type String
+     */
+    this.msg =
+    /**
+     * Log timestamp.
+     *
+     * @property time
+     * @type Date
+     */
+    this.time =
+
+    /**
+     * Log category.
+     *
+     * @property category
+     * @type String
+     */
+    this.category =
+
+    /**
+     * Log source. The first word passed in as the source argument.
+     *
+     * @property source
+     * @type String
+     */
+    this.source =
+
+    /**
+     * Log source detail. The remainder of the string passed in as the source argument, not
+     * including the first word (if any).
+     *
+     * @property sourceDetail
+     * @type String
+     */
+    this.sourceDetail = null;
+
     if (oConfigs && (oConfigs.constructor == Object)) {
         for(var param in oConfigs) {
             this[param] = oConfigs[param];
         }
     }
- };
- 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Public member variables
-//
-/////////////////////////////////////////////////////////////////////////////
-
-/**
- * Log message.
- *
- * @property msg
- * @type String
- */
-YAHOO.widget.LogMsg.prototype.msg = null;
- 
-/**
- * Log timestamp.
- *
- * @property time
- * @type Date
- */
-YAHOO.widget.LogMsg.prototype.time = null;
-
-/**
- * Log category.
- *
- * @property category
- * @type String
- */
-YAHOO.widget.LogMsg.prototype.category = null;
-
-/**
- * Log source. The first word passed in as the source argument.
- *
- * @property source
- * @type String
- */
-YAHOO.widget.LogMsg.prototype.source = null;
-
-/**
- * Log source detail. The remainder of the string passed in as the source argument, not
- * including the first word (if any).
- *
- * @property sourceDetail
- * @type String
- */
-YAHOO.widget.LogMsg.prototype.sourceDetail = null;
-
+};
 
 /****************************************************************************/
 /****************************************************************************/
@@ -15556,493 +15718,545 @@ YAHOO.widget.LogReader = function(elContainer, oConfigs) {
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Static member variables
+//
+/////////////////////////////////////////////////////////////////////////////
+YAHOO.lang.augmentObject(YAHOO.widget.LogReader, {
+    /**
+     * Internal class member to index multiple LogReader instances.
+     *
+     * @property _memberName
+     * @static
+     * @type Number
+     * @default 0
+     * @private
+     */
+    _index : 0,
+
+    /**
+     * Node template for the log entries
+     * @property ENTRY_TEMPLATE
+     * @static
+     * @type {HTMLElement}
+     * @default PRE.yui-log-entry element
+     */
+    ENTRY_TEMPLATE : (function () {
+        var t = document.createElement('pre');
+        YAHOO.util.Dom.addClass(t,'yui-log-entry');
+        return t;
+    })(),
+
+    /**
+     * Template used for innerHTML of verbose entry output.
+     * @property VERBOSE_TEMPLATE
+     * @static
+     * @default "<span class='{category}'>{label}</span>{totalTime}ms (+{elapsedTime}) {localTime}:</p><p>{sourceAndDetail}</p><p>{message}</p>"
+     */
+    VERBOSE_TEMPLATE : "<span class='{category}'>{label}</span>{totalTime}ms (+{elapsedTime}) {localTime}:</p><p>{sourceAndDetail}</p><p>{message}</p>",
+
+    /**
+     * Template used for innerHTML of compact entry output.
+     * @property BASIC_TEMPLATE
+     * @static
+     * @default "<p><span class='{category}'>{label}</span>{totalTime}ms (+{elapsedTime}) {localTime}: {sourceAndDetail}: {message}</p>"
+     */
+    BASIC_TEMPLATE : "<p><span class='{category}'>{label}</span>{totalTime}ms (+{elapsedTime}) {localTime}: {sourceAndDetail}: {message}</p>"
+});
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // Public member variables
 //
 /////////////////////////////////////////////////////////////////////////////
 
-/**
- * Whether or not LogReader is enabled to output log messages.
- *
- * @property logReaderEnabled
- * @type Boolean
- * @default true
- */
-YAHOO.widget.LogReader.prototype.logReaderEnabled = true;
+YAHOO.widget.LogReader.prototype = {
+    /**
+     * Whether or not LogReader is enabled to output log messages.
+     *
+     * @property logReaderEnabled
+     * @type Boolean
+     * @default true
+     */
+    logReaderEnabled : true,
 
-/**
- * Public member to access CSS width of the LogReader container.
- *
- * @property width
- * @type String
- */
-YAHOO.widget.LogReader.prototype.width = null;
+    /**
+     * Public member to access CSS width of the LogReader container.
+     *
+     * @property width
+     * @type String
+     */
+    width : null,
 
-/**
- * Public member to access CSS height of the LogReader container.
- *
- * @property height
- * @type String
- */
-YAHOO.widget.LogReader.prototype.height = null;
+    /**
+     * Public member to access CSS height of the LogReader container.
+     *
+     * @property height
+     * @type String
+     */
+    height : null,
 
-/**
- * Public member to access CSS top position of the LogReader container.
- *
- * @property top
- * @type String
- */
-YAHOO.widget.LogReader.prototype.top = null;
+    /**
+     * Public member to access CSS top position of the LogReader container.
+     *
+     * @property top
+     * @type String
+     */
+    top : null,
 
-/**
- * Public member to access CSS left position of the LogReader container.
- *
- * @property left
- * @type String
- */
-YAHOO.widget.LogReader.prototype.left = null;
+    /**
+     * Public member to access CSS left position of the LogReader container.
+     *
+     * @property left
+     * @type String
+     */
+    left : null,
 
-/**
- * Public member to access CSS right position of the LogReader container.
- *
- * @property right
- * @type String
- */
-YAHOO.widget.LogReader.prototype.right = null;
+    /**
+     * Public member to access CSS right position of the LogReader container.
+     *
+     * @property right
+     * @type String
+     */
+    right : null,
 
-/**
- * Public member to access CSS bottom position of the LogReader container.
- *
- * @property bottom
- * @type String
- */
-YAHOO.widget.LogReader.prototype.bottom = null;
+    /**
+     * Public member to access CSS bottom position of the LogReader container.
+     *
+     * @property bottom
+     * @type String
+     */
+    bottom : null,
 
-/**
- * Public member to access CSS font size of the LogReader container.
- *
- * @property fontSize
- * @type String
- */
-YAHOO.widget.LogReader.prototype.fontSize = null;
+    /**
+     * Public member to access CSS font size of the LogReader container.
+     *
+     * @property fontSize
+     * @type String
+     */
+    fontSize : null,
 
-/**
- * Whether or not the footer UI is enabled for the LogReader.
- *
- * @property footerEnabled
- * @type Boolean
- * @default true
- */
-YAHOO.widget.LogReader.prototype.footerEnabled = true;
+    /**
+     * Whether or not the footer UI is enabled for the LogReader.
+     *
+     * @property footerEnabled
+     * @type Boolean
+     * @default true
+     */
+    footerEnabled : true,
 
-/**
- * Whether or not output is verbose (more readable). Setting to true will make
- * output more compact (less readable).
- *
- * @property verboseOutput
- * @type Boolean
- * @default true
- */
-YAHOO.widget.LogReader.prototype.verboseOutput = true;
+    /**
+     * Whether or not output is verbose (more readable). Setting to true will make
+     * output more compact (less readable).
+     *
+     * @property verboseOutput
+     * @type Boolean
+     * @default true
+     */
+    verboseOutput : true,
 
-/**
- * Whether or not newest message is printed on top.
- *
- * @property newestOnTop
- * @type Boolean
- */
-YAHOO.widget.LogReader.prototype.newestOnTop = true;
+    /**
+     * Custom output format for log messages.  Defaults to null, which falls
+     * back to verboseOutput param deciding between LogReader.VERBOSE_TEMPLATE
+     * and LogReader.BASIC_TEMPLATE.  Use bracketed place holders to mark where
+     * message info should go.  Available place holder names include:
+     * <ul>
+     *  <li>category</li>
+     *  <li>label</li>
+     *  <li>sourceAndDetail</li>
+     *  <li>message</li>
+     *  <li>localTime</li>
+     *  <li>elapsedTime</li>
+     *  <li>totalTime</li>
+     * </ul>
+     *
+     * @property entryFormat
+     * @type String
+     * @default null
+     */
+    entryFormat : null,
 
-/**
- * Output timeout buffer in milliseconds.
- *
- * @property outputBuffer
- * @type Number
- * @default 100
- */
-YAHOO.widget.LogReader.prototype.outputBuffer = 100;
+    /**
+     * Whether or not newest message is printed on top.
+     *
+     * @property newestOnTop
+     * @type Boolean
+     */
+    newestOnTop : true,
 
-/**
- * Maximum number of messages a LogReader console will display.
- *
- * @property thresholdMax
- * @type Number
- * @default 500
- */
-YAHOO.widget.LogReader.prototype.thresholdMax = 500;
+    /**
+     * Output timeout buffer in milliseconds.
+     *
+     * @property outputBuffer
+     * @type Number
+     * @default 100
+     */
+    outputBuffer : 100,
 
-/**
- * When a LogReader console reaches its thresholdMax, it will clear out messages
- * and print out the latest thresholdMin number of messages.
- *
- * @property thresholdMin
- * @type Number
- * @default 100
- */
-YAHOO.widget.LogReader.prototype.thresholdMin = 100;
+    /**
+     * Maximum number of messages a LogReader console will display.
+     *
+     * @property thresholdMax
+     * @type Number
+     * @default 500
+     */
+    thresholdMax : 500,
 
-/**
- * True when LogReader is in a collapsed state, false otherwise.
- *
- * @property isCollapsed
- * @type Boolean
- * @default false
- */
-YAHOO.widget.LogReader.prototype.isCollapsed = false;
+    /**
+     * When a LogReader console reaches its thresholdMax, it will clear out messages
+     * and print out the latest thresholdMin number of messages.
+     *
+     * @property thresholdMin
+     * @type Number
+     * @default 100
+     */
+    thresholdMin : 100,
 
-/**
- * True when LogReader is in a paused state, false otherwise.
- *
- * @property isPaused
- * @type Boolean
- * @default false
- */
-YAHOO.widget.LogReader.prototype.isPaused = false;
+    /**
+     * True when LogReader is in a collapsed state, false otherwise.
+     *
+     * @property isCollapsed
+     * @type Boolean
+     * @default false
+     */
+    isCollapsed : false,
 
-/**
- * Enables draggable LogReader if DragDrop Utility is present.
- *
- * @property draggable
- * @type Boolean
- * @default true
- */
-YAHOO.widget.LogReader.prototype.draggable = true;
+    /**
+     * True when LogReader is in a paused state, false otherwise.
+     *
+     * @property isPaused
+     * @type Boolean
+     * @default false
+     */
+    isPaused : false,
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Public methods
-//
-/////////////////////////////////////////////////////////////////////////////
+    /**
+     * Enables draggable LogReader if DragDrop Utility is present.
+     *
+     * @property draggable
+     * @type Boolean
+     * @default true
+     */
+    draggable : true,
 
- /**
- * Public accessor to the unique name of the LogReader instance.
- *
- * @method toString
- * @return {String} Unique name of the LogReader instance.
- */
-YAHOO.widget.LogReader.prototype.toString = function() {
-    return "LogReader instance" + this._sName;
-};
-/**
- * Pauses output of log messages. While paused, log messages are not lost, but
- * get saved to a buffer and then output upon resume of LogReader.
- *
- * @method pause
- */
-YAHOO.widget.LogReader.prototype.pause = function() {
-    this.isPaused = true;
-    this._btnPause.value = "Resume";
-    this._timeout = null;
-    this.logReaderEnabled = false;
-};
+    /////////////////////////////////////////////////////////////////////////////
+    //
+    // Public methods
+    //
+    /////////////////////////////////////////////////////////////////////////////
 
-/**
- * Resumes output of log messages, including outputting any log messages that
- * have been saved to buffer while paused.
- *
- * @method resume
- */
-YAHOO.widget.LogReader.prototype.resume = function() {
-    this.isPaused = false;
-    this._btnPause.value = "Pause";
-    this.logReaderEnabled = true;
-    this._printBuffer();
-};
+     /**
+     * Public accessor to the unique name of the LogReader instance.
+     *
+     * @method toString
+     * @return {String} Unique name of the LogReader instance.
+     */
+    toString : function() {
+        return "LogReader instance" + this._sName;
+    },
+    /**
+     * Pauses output of log messages. While paused, log messages are not lost, but
+     * get saved to a buffer and then output upon resume of LogReader.
+     *
+     * @method pause
+     */
+    pause : function() {
+        this.isPaused = true;
+        this._btnPause.value = "Resume";
+        this._timeout = null;
+        this.logReaderEnabled = false;
+    },
 
-/**
- * Hides UI of LogReader. Logging functionality is not disrupted.
- *
- * @method hide
- */
-YAHOO.widget.LogReader.prototype.hide = function() {
-    this._elContainer.style.display = "none";
-};
+    /**
+     * Resumes output of log messages, including outputting any log messages that
+     * have been saved to buffer while paused.
+     *
+     * @method resume
+     */
+    resume : function() {
+        this.isPaused = false;
+        this._btnPause.value = "Pause";
+        this.logReaderEnabled = true;
+        this._printBuffer();
+    },
 
-/**
- * Shows UI of LogReader. Logging functionality is not disrupted.
- *
- * @method show
- */
-YAHOO.widget.LogReader.prototype.show = function() {
-    this._elContainer.style.display = "block";
-};
+    /**
+     * Hides UI of LogReader. Logging functionality is not disrupted.
+     *
+     * @method hide
+     */
+    hide : function() {
+        this._elContainer.style.display = "none";
+    },
 
-/**
- * Collapses UI of LogReader. Logging functionality is not disrupted.
- *
- * @method collapse
- */
-YAHOO.widget.LogReader.prototype.collapse = function() {
-    this._elConsole.style.display = "none";
-    if(this._elFt) {
-        this._elFt.style.display = "none";
-    }
-    this._btnCollapse.value = "Expand";
-    this.isCollapsed = true;
-};
+    /**
+     * Shows UI of LogReader. Logging functionality is not disrupted.
+     *
+     * @method show
+     */
+    show : function() {
+        this._elContainer.style.display = "block";
+    },
 
-/**
- * Expands UI of LogReader. Logging functionality is not disrupted.
- *
- * @method expand
- */
-YAHOO.widget.LogReader.prototype.expand = function() {
-    this._elConsole.style.display = "block";
-    if(this._elFt) {
-        this._elFt.style.display = "block";
-    }
-    this._btnCollapse.value = "Collapse";
-    this.isCollapsed = false;
-};
-
-/**
- * Returns related checkbox element for given filter (i.e., category or source).
- *
- * @method getCheckbox
- * @param {String} Category or source name.
- * @return {Array} Array of all filter checkboxes.
- */
-YAHOO.widget.LogReader.prototype.getCheckbox = function(filter) {
-    return this._filterCheckboxes[filter];
-};
-
-/**
- * Returns array of enabled categories.
- *
- * @method getCategories
- * @return {String[]} Array of enabled categories.
- */
-YAHOO.widget.LogReader.prototype.getCategories = function() {
-    return this._categoryFilters;
-};
-
-/**
- * Shows log messages associated with given category.
- *
- * @method showCategory
- * @param {String} Category name.
- */
-YAHOO.widget.LogReader.prototype.showCategory = function(sCategory) {
-    var filtersArray = this._categoryFilters;
-    // Don't do anything if category is already enabled
-    // Use Array.indexOf if available...
-    if(filtersArray.indexOf) {
-         if(filtersArray.indexOf(sCategory) >  -1) {
-            return;
+    /**
+     * Collapses UI of LogReader. Logging functionality is not disrupted.
+     *
+     * @method collapse
+     */
+    collapse : function() {
+        this._elConsole.style.display = "none";
+        if(this._elFt) {
+            this._elFt.style.display = "none";
         }
-    }
-    // ...or do it the old-fashioned way
-    else {
-        for(var i=0; i<filtersArray.length; i++) {
-           if(filtersArray[i] === sCategory){
+        this._btnCollapse.value = "Expand";
+        this.isCollapsed = true;
+    },
+
+    /**
+     * Expands UI of LogReader. Logging functionality is not disrupted.
+     *
+     * @method expand
+     */
+    expand : function() {
+        this._elConsole.style.display = "block";
+        if(this._elFt) {
+            this._elFt.style.display = "block";
+        }
+        this._btnCollapse.value = "Collapse";
+        this.isCollapsed = false;
+    },
+
+    /**
+     * Returns related checkbox element for given filter (i.e., category or source).
+     *
+     * @method getCheckbox
+     * @param {String} Category or source name.
+     * @return {Array} Array of all filter checkboxes.
+     */
+    getCheckbox : function(filter) {
+        return this._filterCheckboxes[filter];
+    },
+
+    /**
+     * Returns array of enabled categories.
+     *
+     * @method getCategories
+     * @return {String[]} Array of enabled categories.
+     */
+    getCategories : function() {
+        return this._categoryFilters;
+    },
+
+    /**
+     * Shows log messages associated with given category.
+     *
+     * @method showCategory
+     * @param {String} Category name.
+     */
+    showCategory : function(sCategory) {
+        var filtersArray = this._categoryFilters;
+        // Don't do anything if category is already enabled
+        // Use Array.indexOf if available...
+        if(filtersArray.indexOf) {
+             if(filtersArray.indexOf(sCategory) >  -1) {
                 return;
             }
         }
-    }
-
-    this._categoryFilters.push(sCategory);
-    this._filterLogs();
-    var elCheckbox = this.getCheckbox(sCategory);
-    if(elCheckbox) {
-        elCheckbox.checked = true;
-    }
-};
-
-/**
- * Hides log messages associated with given category.
- *
- * @method hideCategory
- * @param {String} Category name.
- */
-YAHOO.widget.LogReader.prototype.hideCategory = function(sCategory) {
-    var filtersArray = this._categoryFilters;
-    for(var i=0; i<filtersArray.length; i++) {
-        if(sCategory == filtersArray[i]) {
-            filtersArray.splice(i, 1);
-            break;
+        // ...or do it the old-fashioned way
+        else {
+            for(var i=0; i<filtersArray.length; i++) {
+               if(filtersArray[i] === sCategory){
+                    return;
+                }
+            }
         }
-    }
-    this._filterLogs();
-    var elCheckbox = this.getCheckbox(sCategory);
-    if(elCheckbox) {
-        elCheckbox.checked = false;
-    }
-};
 
-/**
- * Returns array of enabled sources.
- *
- * @method getSources
- * @return {Array} Array of enabled sources.
- */
-YAHOO.widget.LogReader.prototype.getSources = function() {
-    return this._sourceFilters;
-};
-
-/**
- * Shows log messages associated with given source.
- *
- * @method showSource
- * @param {String} Source name.
- */
-YAHOO.widget.LogReader.prototype.showSource = function(sSource) {
-    var filtersArray = this._sourceFilters;
-    // Don't do anything if category is already enabled
-    // Use Array.indexOf if available...
-    if(filtersArray.indexOf) {
-         if(filtersArray.indexOf(sSource) >  -1) {
-            return;
+        this._categoryFilters.push(sCategory);
+        this._filterLogs();
+        var elCheckbox = this.getCheckbox(sCategory);
+        if(elCheckbox) {
+            elCheckbox.checked = true;
         }
-    }
-    // ...or do it the old-fashioned way
-    else {
+    },
+
+    /**
+     * Hides log messages associated with given category.
+     *
+     * @method hideCategory
+     * @param {String} Category name.
+     */
+    hideCategory : function(sCategory) {
+        var filtersArray = this._categoryFilters;
         for(var i=0; i<filtersArray.length; i++) {
-           if(sSource == filtersArray[i]){
+            if(sCategory == filtersArray[i]) {
+                filtersArray.splice(i, 1);
+                break;
+            }
+        }
+        this._filterLogs();
+        var elCheckbox = this.getCheckbox(sCategory);
+        if(elCheckbox) {
+            elCheckbox.checked = false;
+        }
+    },
+
+    /**
+     * Returns array of enabled sources.
+     *
+     * @method getSources
+     * @return {Array} Array of enabled sources.
+     */
+    getSources : function() {
+        return this._sourceFilters;
+    },
+
+    /**
+     * Shows log messages associated with given source.
+     *
+     * @method showSource
+     * @param {String} Source name.
+     */
+    showSource : function(sSource) {
+        var filtersArray = this._sourceFilters;
+        // Don't do anything if category is already enabled
+        // Use Array.indexOf if available...
+        if(filtersArray.indexOf) {
+             if(filtersArray.indexOf(sSource) >  -1) {
                 return;
             }
         }
-    }
-    filtersArray.push(sSource);
-    this._filterLogs();
-    var elCheckbox = this.getCheckbox(sSource);
-    if(elCheckbox) {
-        elCheckbox.checked = true;
-    }
-};
-
-/**
- * Hides log messages associated with given source.
- *
- * @method hideSource
- * @param {String} Source name.
- */
-YAHOO.widget.LogReader.prototype.hideSource = function(sSource) {
-    var filtersArray = this._sourceFilters;
-    for(var i=0; i<filtersArray.length; i++) {
-        if(sSource == filtersArray[i]) {
-            filtersArray.splice(i, 1);
-            break;
+        // ...or do it the old-fashioned way
+        else {
+            for(var i=0; i<filtersArray.length; i++) {
+               if(sSource == filtersArray[i]){
+                    return;
+                }
+            }
         }
-    }
-    this._filterLogs();
-    var elCheckbox = this.getCheckbox(sSource);
-    if(elCheckbox) {
-        elCheckbox.checked = false;
-    }
-};
+        filtersArray.push(sSource);
+        this._filterLogs();
+        var elCheckbox = this.getCheckbox(sSource);
+        if(elCheckbox) {
+            elCheckbox.checked = true;
+        }
+    },
 
-/**
- * Does not delete any log messages, but clears all printed log messages from
- * the console. Log messages will be printed out again if user re-filters. The
- * static method YAHOO.widget.Logger.reset() should be called in order to
- * actually delete log messages.
- *
- * @method clearConsole
- */
-YAHOO.widget.LogReader.prototype.clearConsole = function() {
-    // Clear the buffer of any pending messages
-    this._timeout = null;
-    this._buffer = [];
-    this._consoleMsgCount = 0;
+    /**
+     * Hides log messages associated with given source.
+     *
+     * @method hideSource
+     * @param {String} Source name.
+     */
+    hideSource : function(sSource) {
+        var filtersArray = this._sourceFilters;
+        for(var i=0; i<filtersArray.length; i++) {
+            if(sSource == filtersArray[i]) {
+                filtersArray.splice(i, 1);
+                break;
+            }
+        }
+        this._filterLogs();
+        var elCheckbox = this.getCheckbox(sSource);
+        if(elCheckbox) {
+            elCheckbox.checked = false;
+        }
+    },
 
-    var elConsole = this._elConsole;
-    while(elConsole.hasChildNodes()) {
-        elConsole.removeChild(elConsole.firstChild);
-    }
-};
+    /**
+     * Does not delete any log messages, but clears all printed log messages from
+     * the console. Log messages will be printed out again if user re-filters. The
+     * static method YAHOO.widget.Logger.reset() should be called in order to
+     * actually delete log messages.
+     *
+     * @method clearConsole
+     */
+    clearConsole : function() {
+        // Clear the buffer of any pending messages
+        this._timeout = null;
+        this._buffer = [];
+        this._consoleMsgCount = 0;
 
-/**
- * Updates title to given string.
- *
- * @method setTitle
- * @param sTitle {String} New title.
- */
-YAHOO.widget.LogReader.prototype.setTitle = function(sTitle) {
-    this._title.innerHTML = this.html2Text(sTitle);
-};
+        var elConsole = this._elConsole;
+        elConsole.innerHTML = '';
+    },
 
-/**
- * Gets timestamp of the last log.
- *
- * @method getLastTime
- * @return {Date} Timestamp of the last log.
- */
-YAHOO.widget.LogReader.prototype.getLastTime = function() {
-    return this._lastTime;
-};
+    /**
+     * Updates title to given string.
+     *
+     * @method setTitle
+     * @param sTitle {String} New title.
+     */
+    setTitle : function(sTitle) {
+        this._title.innerHTML = this.html2Text(sTitle);
+    },
 
-/**
- * Formats message string to HTML for output to console.
- *
- * @method formatMsg
- * @param oLogMsg {Object} Log message object.
- * @return {String} HTML-formatted message for output to console.
- */
-YAHOO.widget.LogReader.prototype.formatMsg = function(oLogMsg) {
-    var category = oLogMsg.category;
-    
-    // Label for color-coded display
-    var label = category.substring(0,4).toUpperCase();
+    /**
+     * Gets timestamp of the last log.
+     *
+     * @method getLastTime
+     * @return {Date} Timestamp of the last log.
+     */
+    getLastTime : function() {
+        return this._lastTime;
+    },
 
-    // Calculate the elapsed time to be from the last item that passed through the filter,
-    // not the absolute previous item in the stack
+    formatMsg : function (entry) {
+        var Static      = YAHOO.widget.LogReader,
+            entryFormat = this.entryFormat || (this.verboseOutput ?
+                          Static.VERBOSE_TEMPLATE : Static.BASIC_TEMPLATE),
+            info        = {
+                category : entry.category,
 
-    var time = oLogMsg.time;
-    if (time.toLocaleTimeString) {
-        var localTime  = time.toLocaleTimeString();
-    }
-    else {
-        localTime = time.toString();
-    }
+                // Label for color-coded display
+                label : entry.category.substring(0,4).toUpperCase(),
 
-    var msecs = time.getTime();
-    var startTime = YAHOO.widget.Logger.getStartTime();
-    var totalTime = msecs - startTime;
-    var elapsedTime = msecs - this.getLastTime();
+                sourceAndDetail : entry.sourceDetail ?
+                                  entry.source + " " + entry.sourceDetail :
+                                  entry.source,
 
-    var source = oLogMsg.source;
-    var sourceDetail = oLogMsg.sourceDetail;
-    var sourceAndDetail = (sourceDetail) ?
-        source + " " + sourceDetail : source;
-        
-    
-    // Escape HTML entities in the log message itself for output to console
-    //var msg = this.html2Text(oLogMsg.msg); //TODO: delete
-    var msg = this.html2Text(YAHOO.lang.dump(oLogMsg.msg));
+                // Escape HTML entities in the log message itself for output
+                // to console
+                message : this.html2Text(entry.msg || entry.message || '')
+            };
 
-    // Verbose output includes extra line breaks
-    var output =  (this.verboseOutput) ?
-        ["<pre class=\"yui-log-verbose\"><p><span class='", category, "'>", label, "</span> ",
-        totalTime, "ms (+", elapsedTime, ") ",
-        localTime, ": ",
-        "</p><p>",
-        sourceAndDetail,
-        ": </p><p>",
-        msg,
-        "</p></pre>"] :
+        // Add time info
+        if (entry.time && entry.time.getTime) {
+            info.localTime = entry.time.toLocaleTimeString ?
+                             entry.time.toLocaleTimeString() :
+                             entry.time.toString();
 
-        ["<pre><p><span class='", category, "'>", label, "</span> ",
-        totalTime, "ms (+", elapsedTime, ") ",
-        localTime, ": ",
-        sourceAndDetail, ": ",
-        msg, "</p></pre>"];
+            // Calculate the elapsed time to be from the last item that
+            // passed through the filter, not the absolute previous item
+            // in the stack
+            info.elapsedTime = entry.time.getTime() - this.getLastTime();
 
-    return output.join("");
-};
+            info.totalTime = entry.time.getTime() -
+                               YAHOO.widget.Logger.getStartTime();
+        }
 
-/**
- * Converts input chars "<", ">", and "&" to HTML entities.
- *
- * @method html2Text
- * @param sHtml {String} String to convert.
- * @private
- */
-YAHOO.widget.LogReader.prototype.html2Text = function(sHtml) {
-    if(sHtml) {
-        sHtml += "";
-        return sHtml.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;");
-    }
-    return "";
-};
+        var msg = Static.ENTRY_TEMPLATE.cloneNode(true);
+        if (this.verboseOutput) {
+            msg.className += ' yui-log-verbose';
+        }
+
+        msg.innerHTML = YAHOO.lang.substitute(entryFormat, info);
+
+        return msg;
+    },
+
+    /**
+     * Converts input chars "<", ">", and "&" to HTML entities.
+     *
+     * @method html2Text
+     * @param sHtml {String} String to convert.
+     * @private
+     */
+    html2Text : function(sHtml) {
+        if(sHtml) {
+            sHtml += "";
+            return sHtml.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;");
+        }
+        return "";
+    },
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -16050,631 +16264,635 @@ YAHOO.widget.LogReader.prototype.html2Text = function(sHtml) {
 //
 /////////////////////////////////////////////////////////////////////////////
 
-/**
- * Internal class member to index multiple LogReader instances.
- *
- * @property _memberName
- * @static
- * @type Number
- * @default 0
- * @private
- */
-YAHOO.widget.LogReader._index = 0;
+    /**
+     * Name of LogReader instance.
+     *
+     * @property _sName
+     * @type String
+     * @private
+     */
+    _sName : null,
 
-/**
- * Name of LogReader instance.
- *
- * @property _sName
- * @type String
- * @private
- */
-YAHOO.widget.LogReader.prototype._sName = null;
+    //TODO: remove
+    /**
+     * A class member shared by all LogReaders if a container needs to be
+     * created during instantiation. Will be null if a container element never needs to
+     * be created on the fly, such as when the implementer passes in their own element.
+     *
+     * @property _elDefaultContainer
+     * @type HTMLElement
+     * @private
+     */
+    //YAHOO.widget.LogReader._elDefaultContainer = null;
 
-//TODO: remove
-/**
- * A class member shared by all LogReaders if a container needs to be
- * created during instantiation. Will be null if a container element never needs to
- * be created on the fly, such as when the implementer passes in their own element.
- *
- * @property _elDefaultContainer
- * @type HTMLElement
- * @private
- */
-//YAHOO.widget.LogReader._elDefaultContainer = null;
+    /**
+     * Buffer of log message objects for batch output.
+     *
+     * @property _buffer
+     * @type Object[]
+     * @private
+     */
+    _buffer : null,
 
-/**
- * Buffer of log message objects for batch output.
- *
- * @property _buffer
- * @type Object[]
- * @private
- */
-YAHOO.widget.LogReader.prototype._buffer = null;
+    /**
+     * Number of log messages output to console.
+     *
+     * @property _consoleMsgCount
+     * @type Number
+     * @default 0
+     * @private
+     */
+    _consoleMsgCount : 0,
 
-/**
- * Number of log messages output to console.
- *
- * @property _consoleMsgCount
- * @type Number
- * @default 0
- * @private
- */
-YAHOO.widget.LogReader.prototype._consoleMsgCount = 0;
+    /**
+     * Date of last output log message.
+     *
+     * @property _lastTime
+     * @type Date
+     * @private
+     */
+    _lastTime : null,
 
-/**
- * Date of last output log message.
- *
- * @property _lastTime
- * @type Date
- * @private
- */
-YAHOO.widget.LogReader.prototype._lastTime = null;
+    /**
+     * Batched output timeout ID.
+     *
+     * @property _timeout
+     * @type Number
+     * @private
+     */
+    _timeout : null,
 
-/**
- * Batched output timeout ID.
- *
- * @property _timeout
- * @type Number
- * @private
- */
-YAHOO.widget.LogReader.prototype._timeout = null;
+    /**
+     * Hash of filters and their related checkbox elements.
+     *
+     * @property _filterCheckboxes
+     * @type Object
+     * @private
+     */
+    _filterCheckboxes : null,
 
-/**
- * Hash of filters and their related checkbox elements.
- *
- * @property _filterCheckboxes
- * @type Object
- * @private
- */
-YAHOO.widget.LogReader.prototype._filterCheckboxes = null;
+    /**
+     * Array of filters for log message categories.
+     *
+     * @property _categoryFilters
+     * @type String[]
+     * @private
+     */
+    _categoryFilters : null,
 
-/**
- * Array of filters for log message categories.
- *
- * @property _categoryFilters
- * @type String[]
- * @private
- */
-YAHOO.widget.LogReader.prototype._categoryFilters = null;
+    /**
+     * Array of filters for log message sources.
+     *
+     * @property _sourceFilters
+     * @type String[]
+     * @private
+     */
+    _sourceFilters : null,
 
-/**
- * Array of filters for log message sources.
- *
- * @property _sourceFilters
- * @type String[]
- * @private
- */
-YAHOO.widget.LogReader.prototype._sourceFilters = null;
+    /**
+     * LogReader container element.
+     *
+     * @property _elContainer
+     * @type HTMLElement
+     * @private
+     */
+    _elContainer : null,
 
-/**
- * LogReader container element.
- *
- * @property _elContainer
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elContainer = null;
+    /**
+     * LogReader header element.
+     *
+     * @property _elHd
+     * @type HTMLElement
+     * @private
+     */
+    _elHd : null,
 
-/**
- * LogReader header element.
- *
- * @property _elHd
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elHd = null;
+    /**
+     * LogReader collapse element.
+     *
+     * @property _elCollapse
+     * @type HTMLElement
+     * @private
+     */
+    _elCollapse : null,
 
-/**
- * LogReader collapse element.
- *
- * @property _elCollapse
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elCollapse = null;
+    /**
+     * LogReader collapse button element.
+     *
+     * @property _btnCollapse
+     * @type HTMLElement
+     * @private
+     */
+    _btnCollapse : null,
 
-/**
- * LogReader collapse button element.
- *
- * @property _btnCollapse
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._btnCollapse = null;
+    /**
+     * LogReader title header element.
+     *
+     * @property _title
+     * @type HTMLElement
+     * @private
+     */
+    _title : null,
 
-/**
- * LogReader title header element.
- *
- * @property _title
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._title = null;
+    /**
+     * LogReader console element.
+     *
+     * @property _elConsole
+     * @type HTMLElement
+     * @private
+     */
+    _elConsole : null,
 
-/**
- * LogReader console element.
- *
- * @property _elConsole
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elConsole = null;
+    /**
+     * LogReader footer element.
+     *
+     * @property _elFt
+     * @type HTMLElement
+     * @private
+     */
+    _elFt : null,
 
-/**
- * LogReader footer element.
- *
- * @property _elFt
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elFt = null;
+    /**
+     * LogReader buttons container element.
+     *
+     * @property _elBtns
+     * @type HTMLElement
+     * @private
+     */
+    _elBtns : null,
 
-/**
- * LogReader buttons container element.
- *
- * @property _elBtns
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elBtns = null;
+    /**
+     * Container element for LogReader category filter checkboxes.
+     *
+     * @property _elCategoryFilters
+     * @type HTMLElement
+     * @private
+     */
+    _elCategoryFilters : null,
 
-/**
- * Container element for LogReader category filter checkboxes.
- *
- * @property _elCategoryFilters
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elCategoryFilters = null;
+    /**
+     * Container element for LogReader source filter checkboxes.
+     *
+     * @property _elSourceFilters
+     * @type HTMLElement
+     * @private
+     */
+    _elSourceFilters : null,
 
-/**
- * Container element for LogReader source filter checkboxes.
- *
- * @property _elSourceFilters
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._elSourceFilters = null;
+    /**
+     * LogReader pause button element.
+     *
+     * @property _btnPause
+     * @type HTMLElement
+     * @private
+     */
+    _btnPause : null,
 
-/**
- * LogReader pause button element.
- *
- * @property _btnPause
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._btnPause = null;
+    /**
+     * Clear button element.
+     *
+     * @property _btnClear
+     * @type HTMLElement
+     * @private
+     */
+    _btnClear : null,
 
-/**
- * Clear button element.
- *
- * @property _btnClear
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.LogReader.prototype._btnClear = null;
+    /////////////////////////////////////////////////////////////////////////////
+    //
+    // Private methods
+    //
+    /////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// Private methods
-//
-/////////////////////////////////////////////////////////////////////////////
-
-/**
- * Initializes the primary container element.
- *
- * @method _initContainerEl
- * @param elContainer {HTMLElement} Container element by reference or string ID.
- * @private
- */
-YAHOO.widget.LogReader.prototype._initContainerEl = function(elContainer) {
-    // Validate container
-    elContainer = YAHOO.util.Dom.get(elContainer);
-    // Attach to existing container...
-    if(elContainer && elContainer.tagName && (elContainer.tagName.toLowerCase() == "div")) {
-        this._elContainer = elContainer;
-        YAHOO.util.Dom.addClass(this._elContainer,"yui-log");
-    }
-    // ...or create container from scratch
-    else {
-        this._elContainer = document.body.appendChild(document.createElement("div"));
-        //this._elContainer.id = "yui-log" + this._sName;
-        YAHOO.util.Dom.addClass(this._elContainer,"yui-log");
-        YAHOO.util.Dom.addClass(this._elContainer,"yui-log-container");
-
-        //YAHOO.widget.LogReader._elDefaultContainer = this._elContainer;
-
-        // If implementer has provided container values, trust and set those
-        var containerStyle = this._elContainer.style;
-        if(this.width) {
-            containerStyle.width = this.width;
+    /**
+     * Initializes the primary container element.
+     *
+     * @method _initContainerEl
+     * @param elContainer {HTMLElement} Container element by reference or string ID.
+     * @private
+     */
+    _initContainerEl : function(elContainer) {
+        // Validate container
+        elContainer = YAHOO.util.Dom.get(elContainer);
+        // Attach to existing container...
+        if(elContainer && elContainer.tagName && (elContainer.tagName.toLowerCase() == "div")) {
+            this._elContainer = elContainer;
+            YAHOO.util.Dom.addClass(this._elContainer,"yui-log");
         }
-        if(this.right) {
-            containerStyle.right = this.right;
+        // ...or create container from scratch
+        else {
+            this._elContainer = document.body.appendChild(document.createElement("div"));
+            //this._elContainer.id = "yui-log" + this._sName;
+            YAHOO.util.Dom.addClass(this._elContainer,"yui-log");
+            YAHOO.util.Dom.addClass(this._elContainer,"yui-log-container");
+
+            //YAHOO.widget.LogReader._elDefaultContainer = this._elContainer;
+
+            // If implementer has provided container values, trust and set those
+            var containerStyle = this._elContainer.style;
+            if(this.width) {
+                containerStyle.width = this.width;
+            }
+            if(this.right) {
+                containerStyle.right = this.right;
+            }
+            if(this.top) {
+                containerStyle.top = this.top;
+            }
+             if(this.left) {
+                containerStyle.left = this.left;
+                containerStyle.right = "auto";
+            }
+            if(this.bottom) {
+                containerStyle.bottom = this.bottom;
+                containerStyle.top = "auto";
+            }
+           if(this.fontSize) {
+                containerStyle.fontSize = this.fontSize;
+            }
+            // For Opera
+            if(navigator.userAgent.toLowerCase().indexOf("opera") != -1) {
+                document.body.style += '';
+            }
         }
-        if(this.top) {
-            containerStyle.top = this.top;
-        }
-         if(this.left) {
-            containerStyle.left = this.left;
-            containerStyle.right = "auto";
-        }
-        if(this.bottom) {
-            containerStyle.bottom = this.bottom;
-            containerStyle.top = "auto";
-        }
-       if(this.fontSize) {
-            containerStyle.fontSize = this.fontSize;
-        }
-        // For Opera
-        if(navigator.userAgent.toLowerCase().indexOf("opera") != -1) {
-            document.body.style += '';
-        }
-    }
-};
+    },
 
-/**
- * Initializes the header element.
- *
- * @method _initHeaderEl
- * @private
- */
-YAHOO.widget.LogReader.prototype._initHeaderEl = function() {
-    var oSelf = this;
+    /**
+     * Initializes the header element.
+     *
+     * @method _initHeaderEl
+     * @private
+     */
+    _initHeaderEl : function() {
+        var oSelf = this;
 
-    // Destroy header
-    if(this._elHd) {
-        // Unhook DOM events
-        YAHOO.util.Event.purgeElement(this._elHd, true);
-
-        // Remove DOM elements
-        this._elHd.innerHTML = "";
-    }
-    
-    // Create header
-    this._elHd = this._elContainer.appendChild(document.createElement("div"));
-    this._elHd.id = "yui-log-hd" + this._sName;
-    this._elHd.className = "yui-log-hd";
-
-    this._elCollapse = this._elHd.appendChild(document.createElement("div"));
-    this._elCollapse.className = "yui-log-btns";
-
-    this._btnCollapse = document.createElement("input");
-    this._btnCollapse.type = "button";
-    //this._btnCollapse.style.fontSize =
-    //    YAHOO.util.Dom.getStyle(this._elContainer,"fontSize");
-    this._btnCollapse.className = "yui-log-button";
-    this._btnCollapse.value = "Collapse";
-    this._btnCollapse = this._elCollapse.appendChild(this._btnCollapse);
-    YAHOO.util.Event.addListener(
-        oSelf._btnCollapse,'click',oSelf._onClickCollapseBtn,oSelf);
-
-    this._title = this._elHd.appendChild(document.createElement("h4"));
-    this._title.innerHTML = "Logger Console";
-};
-
-/**
- * Initializes the console element.
- *
- * @method _initConsoleEl
- * @private
- */
-YAHOO.widget.LogReader.prototype._initConsoleEl = function() {
-    // Destroy console
-    if(this._elConsole) {
-        // Unhook DOM events
-        YAHOO.util.Event.purgeElement(this._elConsole, true);
-
-        // Remove DOM elements
-        this._elConsole.innerHTML = "";
-    }
-
-    // Ceate console
-    this._elConsole = this._elContainer.appendChild(document.createElement("div"));
-    this._elConsole.className = "yui-log-bd";
-
-    // If implementer has provided console, trust and set those
-    if(this.height) {
-        this._elConsole.style.height = this.height;
-    }
-};
-
-/**
- * Initializes the footer element.
- *
- * @method _initFooterEl
- * @private
- */
-YAHOO.widget.LogReader.prototype._initFooterEl = function() {
-    var oSelf = this;
-
-    // Don't create footer elements if footer is disabled
-    if(this.footerEnabled) {
-        // Destroy console
-        if(this._elFt) {
+        // Destroy header
+        if(this._elHd) {
             // Unhook DOM events
-            YAHOO.util.Event.purgeElement(this._elFt, true);
+            YAHOO.util.Event.purgeElement(this._elHd, true);
 
             // Remove DOM elements
-            this._elFt.innerHTML = "";
+            this._elHd.innerHTML = "";
         }
+        
+        // Create header
+        this._elHd = this._elContainer.appendChild(document.createElement("div"));
+        this._elHd.id = "yui-log-hd" + this._sName;
+        this._elHd.className = "yui-log-hd";
 
-        this._elFt = this._elContainer.appendChild(document.createElement("div"));
-        this._elFt.className = "yui-log-ft";
+        this._elCollapse = this._elHd.appendChild(document.createElement("div"));
+        this._elCollapse.className = "yui-log-btns";
 
-        this._elBtns = this._elFt.appendChild(document.createElement("div"));
-        this._elBtns.className = "yui-log-btns";
-
-        this._btnPause = document.createElement("input");
-        this._btnPause.type = "button";
-        //this._btnPause.style.fontSize =
+        this._btnCollapse = document.createElement("input");
+        this._btnCollapse.type = "button";
+        //this._btnCollapse.style.fontSize =
         //    YAHOO.util.Dom.getStyle(this._elContainer,"fontSize");
-        this._btnPause.className = "yui-log-button";
-        this._btnPause.value = "Pause";
-        this._btnPause = this._elBtns.appendChild(this._btnPause);
+        this._btnCollapse.className = "yui-log-button";
+        this._btnCollapse.value = "Collapse";
+        this._btnCollapse = this._elCollapse.appendChild(this._btnCollapse);
         YAHOO.util.Event.addListener(
-            oSelf._btnPause,'click',oSelf._onClickPauseBtn,oSelf);
+            oSelf._btnCollapse,'click',oSelf._onClickCollapseBtn,oSelf);
 
-        this._btnClear = document.createElement("input");
-        this._btnClear.type = "button";
-        //this._btnClear.style.fontSize =
-        //    YAHOO.util.Dom.getStyle(this._elContainer,"fontSize");
-        this._btnClear.className = "yui-log-button";
-        this._btnClear.value = "Clear";
-        this._btnClear = this._elBtns.appendChild(this._btnClear);
-        YAHOO.util.Event.addListener(
-            oSelf._btnClear,'click',oSelf._onClickClearBtn,oSelf);
+        this._title = this._elHd.appendChild(document.createElement("h4"));
+        this._title.innerHTML = "Logger Console";
+    },
 
-        this._elCategoryFilters = this._elFt.appendChild(document.createElement("div"));
-        this._elCategoryFilters.className = "yui-log-categoryfilters";
-        this._elSourceFilters = this._elFt.appendChild(document.createElement("div"));
-        this._elSourceFilters.className = "yui-log-sourcefilters";
-    }
-};
+    /**
+     * Initializes the console element.
+     *
+     * @method _initConsoleEl
+     * @private
+     */
+    _initConsoleEl : function() {
+        // Destroy console
+        if(this._elConsole) {
+            // Unhook DOM events
+            YAHOO.util.Event.purgeElement(this._elConsole, true);
 
-/**
- * Initializes Drag and Drop on the header element.
- *
- * @method _initDragDrop
- * @private
- */
-YAHOO.widget.LogReader.prototype._initDragDrop = function() {
-    // If Drag and Drop utility is available...
-    // ...and draggable is true...
-    // ...then make the header draggable
-    if(YAHOO.util.DD && this.draggable && this._elHd) {
-        var ylog_dd = new YAHOO.util.DD(this._elContainer);
-        ylog_dd.setHandleElId(this._elHd.id);
-        //TODO: use class name
-        this._elHd.style.cursor = "move";
-    }
-};
-
-/**
- * Initializes category filters.
- *
- * @method _initCategories
- * @private
- */
-YAHOO.widget.LogReader.prototype._initCategories = function() {
-    // Initialize category filters
-    this._categoryFilters = [];
-    var aInitialCategories = YAHOO.widget.Logger.categories;
-
-    for(var j=0; j < aInitialCategories.length; j++) {
-        var sCategory = aInitialCategories[j];
-
-        // Add category to the internal array of filters
-        this._categoryFilters.push(sCategory);
-
-        // Add checkbox element if UI is enabled
-        if(this._elCategoryFilters) {
-            this._createCategoryCheckbox(sCategory);
+            // Remove DOM elements
+            this._elConsole.innerHTML = "";
         }
-    }
-};
 
-/**
- * Initializes source filters.
- *
- * @method _initSources
- * @private
- */
-YAHOO.widget.LogReader.prototype._initSources = function() {
-    // Initialize source filters
-    this._sourceFilters = [];
-    var aInitialSources = YAHOO.widget.Logger.sources;
+        // Ceate console
+        this._elConsole = this._elContainer.appendChild(document.createElement("div"));
+        this._elConsole.className = "yui-log-bd";
 
-    for(var j=0; j < aInitialSources.length; j++) {
-        var sSource = aInitialSources[j];
-
-        // Add source to the internal array of filters
-        this._sourceFilters.push(sSource);
-
-        // Add checkbox element if UI is enabled
-        if(this._elSourceFilters) {
-            this._createSourceCheckbox(sSource);
+        // If implementer has provided console, trust and set those
+        if(this.height) {
+            this._elConsole.style.height = this.height;
         }
-    }}
-;
+    },
 
-/**
- * Creates the UI for a category filter in the LogReader footer element.
- *
- * @method _createCategoryCheckbox
- * @param sCategory {String} Category name.
- * @private
- */
-YAHOO.widget.LogReader.prototype._createCategoryCheckbox = function(sCategory) {
-    var oSelf = this;
+    /**
+     * Initializes the footer element.
+     *
+     * @method _initFooterEl
+     * @private
+     */
+    _initFooterEl : function() {
+        var oSelf = this;
 
-    if(this._elFt) {
-        var elParent = this._elCategoryFilters;
-        var elFilter = elParent.appendChild(document.createElement("span"));
-        elFilter.className = "yui-log-filtergrp";
-        
-        // Append el at the end so IE 5.5 can set "type" attribute
-        // and THEN set checked property
-        var chkCategory = document.createElement("input");
-        chkCategory.id = "yui-log-filter-" + sCategory + this._sName;
-        chkCategory.className = "yui-log-filter-" + sCategory;
-        chkCategory.type = "checkbox";
-        chkCategory.category = sCategory;
-        chkCategory = elFilter.appendChild(chkCategory);
-        chkCategory.checked = true;
+        // Don't create footer elements if footer is disabled
+        if(this.footerEnabled) {
+            // Destroy console
+            if(this._elFt) {
+                // Unhook DOM events
+                YAHOO.util.Event.purgeElement(this._elFt, true);
 
-        // Subscribe to the click event
-        YAHOO.util.Event.addListener(chkCategory,'click',oSelf._onCheckCategory,oSelf);
-
-        // Create and class the text label
-        var lblCategory = elFilter.appendChild(document.createElement("label"));
-        lblCategory.htmlFor = chkCategory.id;
-        lblCategory.className = sCategory;
-        lblCategory.innerHTML = sCategory;
-        
-        this._filterCheckboxes[sCategory] = chkCategory;
-    }
-};
-
-/**
- * Creates a checkbox in the LogReader footer element to filter by source.
- *
- * @method _createSourceCheckbox
- * @param sSource {String} Source name.
- * @private
- */
-YAHOO.widget.LogReader.prototype._createSourceCheckbox = function(sSource) {
-    var oSelf = this;
-
-    if(this._elFt) {
-        var elParent = this._elSourceFilters;
-        var elFilter = elParent.appendChild(document.createElement("span"));
-        elFilter.className = "yui-log-filtergrp";
-
-        // Append el at the end so IE 5.5 can set "type" attribute
-        // and THEN set checked property
-        var chkSource = document.createElement("input");
-        chkSource.id = "yui-log-filter" + sSource + this._sName;
-        chkSource.className = "yui-log-filter" + sSource;
-        chkSource.type = "checkbox";
-        chkSource.source = sSource;
-        chkSource = elFilter.appendChild(chkSource);
-        chkSource.checked = true;
-
-        // Subscribe to the click event
-        YAHOO.util.Event.addListener(chkSource,'click',oSelf._onCheckSource,oSelf);
-
-        // Create and class the text label
-        var lblSource = elFilter.appendChild(document.createElement("label"));
-        lblSource.htmlFor = chkSource.id;
-        lblSource.className = sSource;
-        lblSource.innerHTML = sSource;
-        
-        this._filterCheckboxes[sSource] = chkSource;
-    }
-};
-
-/**
- * Reprints all log messages in the stack through filters.
- *
- * @method _filterLogs
- * @private
- */
-YAHOO.widget.LogReader.prototype._filterLogs = function() {
-    // Reprint stack with new filters
-    if (this._elConsole !== null) {
-        this.clearConsole();
-        this._printToConsole(YAHOO.widget.Logger.getStack());
-    }
-};
-
-/**
- * Sends buffer of log messages to output and clears buffer.
- *
- * @method _printBuffer
- * @private
- */
-YAHOO.widget.LogReader.prototype._printBuffer = function() {
-    this._timeout = null;
-
-    if(this._elConsole !== null) {
-        var thresholdMax = this.thresholdMax;
-        thresholdMax = (thresholdMax && !isNaN(thresholdMax)) ? thresholdMax : 500;
-        if(this._consoleMsgCount < thresholdMax) {
-            var entries = [];
-            for (var i=0; i<this._buffer.length; i++) {
-                entries[i] = this._buffer[i];
+                // Remove DOM elements
+                this._elFt.innerHTML = "";
             }
-            this._buffer = [];
-            this._printToConsole(entries);
-        }
-        else {
-            this._filterLogs();
-        }
-        
-        if(!this.newestOnTop) {
-            this._elConsole.scrollTop = this._elConsole.scrollHeight;
-        }
-    }
-};
 
-/**
- * Cycles through an array of log messages, and outputs each one to the console
- * if its category has not been filtered out.
- *
- * @method _printToConsole
- * @param aEntries {Object[]} Array of LogMsg objects to output to console.
- * @private
- */
-YAHOO.widget.LogReader.prototype._printToConsole = function(aEntries) {
-    // Manage the number of messages displayed in the console
-    var entriesLen = aEntries.length;
-    var thresholdMin = this.thresholdMin;
-    if(isNaN(thresholdMin) || (thresholdMin > this.thresholdMax)) {
-        thresholdMin = 0;
-    }
-    var entriesStartIndex = (entriesLen > thresholdMin) ? (entriesLen - thresholdMin) : 0;
-    
-    // Iterate through all log entries 
-    var sourceFiltersLen = this._sourceFilters.length;
-    var categoryFiltersLen = this._categoryFilters.length;
-    for(var i=entriesStartIndex; i<entriesLen; i++) {
-        // Print only the ones that filter through
-        var okToPrint = false;
-        var okToFilterCats = false;
+            this._elFt = this._elContainer.appendChild(document.createElement("div"));
+            this._elFt.className = "yui-log-ft";
 
-        // Get log message details
-        var entry = aEntries[i];
-        var source = entry.source;
-        var category = entry.category;
+            this._elBtns = this._elFt.appendChild(document.createElement("div"));
+            this._elBtns.className = "yui-log-btns";
 
-        for(var j=0; j<sourceFiltersLen; j++) {
-            if(source == this._sourceFilters[j]) {
-                okToFilterCats = true;
-                break;
+            this._btnPause = document.createElement("input");
+            this._btnPause.type = "button";
+            //this._btnPause.style.fontSize =
+            //    YAHOO.util.Dom.getStyle(this._elContainer,"fontSize");
+            this._btnPause.className = "yui-log-button";
+            this._btnPause.value = "Pause";
+            this._btnPause = this._elBtns.appendChild(this._btnPause);
+            YAHOO.util.Event.addListener(
+                oSelf._btnPause,'click',oSelf._onClickPauseBtn,oSelf);
+
+            this._btnClear = document.createElement("input");
+            this._btnClear.type = "button";
+            //this._btnClear.style.fontSize =
+            //    YAHOO.util.Dom.getStyle(this._elContainer,"fontSize");
+            this._btnClear.className = "yui-log-button";
+            this._btnClear.value = "Clear";
+            this._btnClear = this._elBtns.appendChild(this._btnClear);
+            YAHOO.util.Event.addListener(
+                oSelf._btnClear,'click',oSelf._onClickClearBtn,oSelf);
+
+            this._elCategoryFilters = this._elFt.appendChild(document.createElement("div"));
+            this._elCategoryFilters.className = "yui-log-categoryfilters";
+            this._elSourceFilters = this._elFt.appendChild(document.createElement("div"));
+            this._elSourceFilters.className = "yui-log-sourcefilters";
+        }
+    },
+
+    /**
+     * Initializes Drag and Drop on the header element.
+     *
+     * @method _initDragDrop
+     * @private
+     */
+    _initDragDrop : function() {
+        // If Drag and Drop utility is available...
+        // ...and draggable is true...
+        // ...then make the header draggable
+        if(YAHOO.util.DD && this.draggable && this._elHd) {
+            var ylog_dd = new YAHOO.util.DD(this._elContainer);
+            ylog_dd.setHandleElId(this._elHd.id);
+            //TODO: use class name
+            this._elHd.style.cursor = "move";
+        }
+    },
+
+    /**
+     * Initializes category filters.
+     *
+     * @method _initCategories
+     * @private
+     */
+    _initCategories : function() {
+        // Initialize category filters
+        this._categoryFilters = [];
+        var aInitialCategories = YAHOO.widget.Logger.categories;
+
+        for(var j=0; j < aInitialCategories.length; j++) {
+            var sCategory = aInitialCategories[j];
+
+            // Add category to the internal array of filters
+            this._categoryFilters.push(sCategory);
+
+            // Add checkbox element if UI is enabled
+            if(this._elCategoryFilters) {
+                this._createCategoryCheckbox(sCategory);
             }
         }
-        if(okToFilterCats) {
-            for(var k=0; k<categoryFiltersLen; k++) {
-                if(category == this._categoryFilters[k]) {
-                    okToPrint = true;
+    },
+
+    /**
+     * Initializes source filters.
+     *
+     * @method _initSources
+     * @private
+     */
+    _initSources : function() {
+        // Initialize source filters
+        this._sourceFilters = [];
+        var aInitialSources = YAHOO.widget.Logger.sources;
+
+        for(var j=0; j < aInitialSources.length; j++) {
+            var sSource = aInitialSources[j];
+
+            // Add source to the internal array of filters
+            this._sourceFilters.push(sSource);
+
+            // Add checkbox element if UI is enabled
+            if(this._elSourceFilters) {
+                this._createSourceCheckbox(sSource);
+            }
+        }
+    },
+
+    /**
+     * Creates the UI for a category filter in the LogReader footer element.
+     *
+     * @method _createCategoryCheckbox
+     * @param sCategory {String} Category name.
+     * @private
+     */
+    _createCategoryCheckbox : function(sCategory) {
+        var oSelf = this;
+
+        if(this._elFt) {
+            var elParent = this._elCategoryFilters;
+            var elFilter = elParent.appendChild(document.createElement("span"));
+            elFilter.className = "yui-log-filtergrp";
+            
+            // Append el at the end so IE 5.5 can set "type" attribute
+            // and THEN set checked property
+            var chkCategory = document.createElement("input");
+            chkCategory.id = "yui-log-filter-" + sCategory + this._sName;
+            chkCategory.className = "yui-log-filter-" + sCategory;
+            chkCategory.type = "checkbox";
+            chkCategory.category = sCategory;
+            chkCategory = elFilter.appendChild(chkCategory);
+            chkCategory.checked = true;
+
+            // Subscribe to the click event
+            YAHOO.util.Event.addListener(chkCategory,'click',oSelf._onCheckCategory,oSelf);
+
+            // Create and class the text label
+            var lblCategory = elFilter.appendChild(document.createElement("label"));
+            lblCategory.htmlFor = chkCategory.id;
+            lblCategory.className = sCategory;
+            lblCategory.innerHTML = sCategory;
+            
+            this._filterCheckboxes[sCategory] = chkCategory;
+        }
+    },
+
+    /**
+     * Creates a checkbox in the LogReader footer element to filter by source.
+     *
+     * @method _createSourceCheckbox
+     * @param sSource {String} Source name.
+     * @private
+     */
+    _createSourceCheckbox : function(sSource) {
+        var oSelf = this;
+
+        if(this._elFt) {
+            var elParent = this._elSourceFilters;
+            var elFilter = elParent.appendChild(document.createElement("span"));
+            elFilter.className = "yui-log-filtergrp";
+
+            // Append el at the end so IE 5.5 can set "type" attribute
+            // and THEN set checked property
+            var chkSource = document.createElement("input");
+            chkSource.id = "yui-log-filter" + sSource + this._sName;
+            chkSource.className = "yui-log-filter" + sSource;
+            chkSource.type = "checkbox";
+            chkSource.source = sSource;
+            chkSource = elFilter.appendChild(chkSource);
+            chkSource.checked = true;
+
+            // Subscribe to the click event
+            YAHOO.util.Event.addListener(chkSource,'click',oSelf._onCheckSource,oSelf);
+
+            // Create and class the text label
+            var lblSource = elFilter.appendChild(document.createElement("label"));
+            lblSource.htmlFor = chkSource.id;
+            lblSource.className = sSource;
+            lblSource.innerHTML = sSource;
+            
+            this._filterCheckboxes[sSource] = chkSource;
+        }
+    },
+
+    /**
+     * Reprints all log messages in the stack through filters.
+     *
+     * @method _filterLogs
+     * @private
+     */
+    _filterLogs : function() {
+        // Reprint stack with new filters
+        if (this._elConsole !== null) {
+            this.clearConsole();
+            this._printToConsole(YAHOO.widget.Logger.getStack());
+        }
+    },
+
+    /**
+     * Sends buffer of log messages to output and clears buffer.
+     *
+     * @method _printBuffer
+     * @private
+     */
+    _printBuffer : function() {
+        this._timeout = null;
+
+        if(this._elConsole !== null) {
+            var thresholdMax = this.thresholdMax;
+            thresholdMax = (thresholdMax && !isNaN(thresholdMax)) ? thresholdMax : 500;
+            if(this._consoleMsgCount < thresholdMax) {
+                var entries = [];
+                for (var i=0; i<this._buffer.length; i++) {
+                    entries[i] = this._buffer[i];
+                }
+                this._buffer = [];
+                this._printToConsole(entries);
+            }
+            else {
+                this._filterLogs();
+            }
+            
+            if(!this.newestOnTop) {
+                this._elConsole.scrollTop = this._elConsole.scrollHeight;
+            }
+        }
+    },
+
+    /**
+     * Cycles through an array of log messages, and outputs each one to the console
+     * if its category has not been filtered out.
+     *
+     * @method _printToConsole
+     * @param aEntries {Object[]} Array of LogMsg objects to output to console.
+     * @private
+     */
+    _printToConsole : function(aEntries) {
+        // Manage the number of messages displayed in the console
+        var entriesLen         = aEntries.length,
+            df                 = document.createDocumentFragment(),
+            msgHTML            = [],
+            thresholdMin       = this.thresholdMin,
+            sourceFiltersLen   = this._sourceFilters.length,
+            categoryFiltersLen = this._categoryFilters.length,
+            entriesStartIndex,
+            i, j, msg, before;
+
+        if(isNaN(thresholdMin) || (thresholdMin > this.thresholdMax)) {
+            thresholdMin = 0;
+        }
+        entriesStartIndex = (entriesLen > thresholdMin) ? (entriesLen - thresholdMin) : 0;
+        
+        // Iterate through all log entries 
+        for(i=entriesStartIndex; i<entriesLen; i++) {
+            // Print only the ones that filter through
+            var okToPrint = false;
+            var okToFilterCats = false;
+
+            // Get log message details
+            var entry = aEntries[i];
+            var source = entry.source;
+            var category = entry.category;
+
+            for(j=0; j<sourceFiltersLen; j++) {
+                if(source == this._sourceFilters[j]) {
+                    okToFilterCats = true;
                     break;
                 }
             }
-        }
-        if(okToPrint) {
-            var output = this.formatMsg(entry);
-            if(this.newestOnTop) {
-                this._elConsole.innerHTML = output + this._elConsole.innerHTML;
+            if(okToFilterCats) {
+                for(j=0; j<categoryFiltersLen; j++) {
+                    if(category == this._categoryFilters[j]) {
+                        okToPrint = true;
+                        break;
+                    }
+                }
             }
-            else {
-                this._elConsole.innerHTML += output;
+            if(okToPrint) {
+                msg = this.formatMsg(entry);
+                if (typeof msg === 'string') {
+                    msgHTML[msgHTML.length] = msg;
+                } else {
+                    df.insertBefore(msg, this.newestOnTop ?
+                        df.firstChild || null : null);
+                }
+                this._consoleMsgCount++;
+                this._lastTime = entry.time.getTime();
             }
-            this._consoleMsgCount++;
-            this._lastTime = entry.time.getTime();
         }
-    }
-};
+
+        if (msgHTML.length) {
+            msgHTML.splice(0,0,this._elConsole.innerHTML);
+            this._elConsole.innerHTML = this.newestOnTop ?
+                                            msgHTML.reverse().join('') :
+                                            msgHTML.join('');
+        } else if (df.firstChild) {
+            this._elConsole.insertBefore(df, this.newestOnTop ?
+                        this._elConsole.firstChild || null : null);
+        }
+    },
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -16682,157 +16900,158 @@ YAHOO.widget.LogReader.prototype._printToConsole = function(aEntries) {
 //
 /////////////////////////////////////////////////////////////////////////////
 
-/**
- * Handles Logger's categoryCreateEvent.
- *
- * @method _onCategoryCreate
- * @param sType {String} The event.
- * @param aArgs {Object[]} Data passed from event firer.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onCategoryCreate = function(sType, aArgs, oSelf) {
-    var category = aArgs[0];
-    
-    // Add category to the internal array of filters
-    oSelf._categoryFilters.push(category);
+    /**
+     * Handles Logger's categoryCreateEvent.
+     *
+     * @method _onCategoryCreate
+     * @param sType {String} The event.
+     * @param aArgs {Object[]} Data passed from event firer.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onCategoryCreate : function(sType, aArgs, oSelf) {
+        var category = aArgs[0];
+        
+        // Add category to the internal array of filters
+        oSelf._categoryFilters.push(category);
 
-    if(oSelf._elFt) {
-        oSelf._createCategoryCheckbox(category);
-    }
-};
+        if(oSelf._elFt) {
+            oSelf._createCategoryCheckbox(category);
+        }
+    },
 
-/**
- * Handles Logger's sourceCreateEvent.
- *
- * @method _onSourceCreate
- * @param sType {String} The event.
- * @param aArgs {Object[]} Data passed from event firer.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onSourceCreate = function(sType, aArgs, oSelf) {
-    var source = aArgs[0];
-    
-    // Add source to the internal array of filters
-    oSelf._sourceFilters.push(source);
+    /**
+     * Handles Logger's sourceCreateEvent.
+     *
+     * @method _onSourceCreate
+     * @param sType {String} The event.
+     * @param aArgs {Object[]} Data passed from event firer.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onSourceCreate : function(sType, aArgs, oSelf) {
+        var source = aArgs[0];
+        
+        // Add source to the internal array of filters
+        oSelf._sourceFilters.push(source);
 
-    if(oSelf._elFt) {
-        oSelf._createSourceCheckbox(source);
-    }
-};
+        if(oSelf._elFt) {
+            oSelf._createSourceCheckbox(source);
+        }
+    },
 
-/**
- * Handles check events on the category filter checkboxes.
- *
- * @method _onCheckCategory
- * @param v {HTMLEvent} The click event.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onCheckCategory = function(v, oSelf) {
-    var category = this.category;
-    if(!this.checked) {
-        oSelf.hideCategory(category);
-    }
-    else {
-        oSelf.showCategory(category);
-    }
-};
+    /**
+     * Handles check events on the category filter checkboxes.
+     *
+     * @method _onCheckCategory
+     * @param v {HTMLEvent} The click event.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onCheckCategory : function(v, oSelf) {
+        var category = this.category;
+        if(!this.checked) {
+            oSelf.hideCategory(category);
+        }
+        else {
+            oSelf.showCategory(category);
+        }
+    },
 
-/**
- * Handles check events on the category filter checkboxes.
- *
- * @method _onCheckSource
- * @param v {HTMLEvent} The click event.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onCheckSource = function(v, oSelf) {
-    var source = this.source;
-    if(!this.checked) {
-        oSelf.hideSource(source);
-    }
-    else {
-        oSelf.showSource(source);
-    }
-};
+    /**
+     * Handles check events on the category filter checkboxes.
+     *
+     * @method _onCheckSource
+     * @param v {HTMLEvent} The click event.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onCheckSource : function(v, oSelf) {
+        var source = this.source;
+        if(!this.checked) {
+            oSelf.hideSource(source);
+        }
+        else {
+            oSelf.showSource(source);
+        }
+    },
 
-/**
- * Handles click events on the collapse button.
- *
- * @method _onClickCollapseBtn
- * @param v {HTMLEvent} The click event.
- * @param oSelf {Object} The LogReader instance
- * @private
- */
-YAHOO.widget.LogReader.prototype._onClickCollapseBtn = function(v, oSelf) {
-    if(!oSelf.isCollapsed) {
-        oSelf.collapse();
-    }
-    else {
-        oSelf.expand();
-    }
-};
+    /**
+     * Handles click events on the collapse button.
+     *
+     * @method _onClickCollapseBtn
+     * @param v {HTMLEvent} The click event.
+     * @param oSelf {Object} The LogReader instance
+     * @private
+     */
+    _onClickCollapseBtn : function(v, oSelf) {
+        if(!oSelf.isCollapsed) {
+            oSelf.collapse();
+        }
+        else {
+            oSelf.expand();
+        }
+    },
 
-/**
- * Handles click events on the pause button.
- *
- * @method _onClickPauseBtn
- * @param v {HTMLEvent} The click event.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onClickPauseBtn = function(v, oSelf) {
-    if(!oSelf.isPaused) {
-        oSelf.pause();
+    /**
+     * Handles click events on the pause button.
+     *
+     * @method _onClickPauseBtn
+     * @param v {HTMLEvent} The click event.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onClickPauseBtn : function(v, oSelf) {
+        if(!oSelf.isPaused) {
+            oSelf.pause();
+        }
+        else {
+            oSelf.resume();
+        }
+    },
+
+    /**
+     * Handles click events on the clear button.
+     *
+     * @method _onClickClearBtn
+     * @param v {HTMLEvent} The click event.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onClickClearBtn : function(v, oSelf) {
+        oSelf.clearConsole();
+    },
+
+    /**
+     * Handles Logger's newLogEvent.
+     *
+     * @method _onNewLog
+     * @param sType {String} The event.
+     * @param aArgs {Object[]} Data passed from event firer.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onNewLog : function(sType, aArgs, oSelf) {
+        var logEntry = aArgs[0];
+        oSelf._buffer.push(logEntry);
+
+        if (oSelf.logReaderEnabled === true && oSelf._timeout === null) {
+            oSelf._timeout = setTimeout(function(){oSelf._printBuffer();}, oSelf.outputBuffer);
+        }
+    },
+
+    /**
+     * Handles Logger's resetEvent.
+     *
+     * @method _onReset
+     * @param sType {String} The event.
+     * @param aArgs {Object[]} Data passed from event firer.
+     * @param oSelf {Object} The LogReader instance.
+     * @private
+     */
+    _onReset : function(sType, aArgs, oSelf) {
+        oSelf._filterLogs();
     }
-    else {
-        oSelf.resume();
-    }
-};
-
-/**
- * Handles click events on the clear button.
- *
- * @method _onClickClearBtn
- * @param v {HTMLEvent} The click event.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onClickClearBtn = function(v, oSelf) {
-    oSelf.clearConsole();
-};
-
-/**
- * Handles Logger's newLogEvent.
- *
- * @method _onNewLog
- * @param sType {String} The event.
- * @param aArgs {Object[]} Data passed from event firer.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onNewLog = function(sType, aArgs, oSelf) {
-    var logEntry = aArgs[0];
-    oSelf._buffer.push(logEntry);
-
-    if (oSelf.logReaderEnabled === true && oSelf._timeout === null) {
-        oSelf._timeout = setTimeout(function(){oSelf._printBuffer();}, oSelf.outputBuffer);
-    }
-};
-
-/**
- * Handles Logger's resetEvent.
- *
- * @method _onReset
- * @param sType {String} The event.
- * @param aArgs {Object[]} Data passed from event firer.
- * @param oSelf {Object} The LogReader instance.
- * @private
- */
-YAHOO.widget.LogReader.prototype._onReset = function(sType, aArgs, oSelf) {
-    oSelf._filterLogs();
 };
 
  /**
@@ -16874,7 +17093,9 @@ if(!YAHOO.widget.Logger) {
         _stack: [], // holds all log msgs
         maxStackEntries: 2500,
         _startTime: new Date().getTime(), // static start timestamp
-        _lastTime: null // timestamp of last logged message
+        _lastTime: null, // timestamp of last logged message
+        _windowErrorsHandled: false,
+        _origOnWindowError: null
     };
 
     /////////////////////////////////////////////////////////////////////////////
@@ -17085,6 +17306,53 @@ if(!YAHOO.widget.Logger) {
         YAHOO.log("Logger output to the function console.log() has been enabled.");
     };
 
+    /**
+     * Surpresses native JavaScript errors and outputs to console. By default,
+     * Logger does not handle JavaScript window error events.
+     * NB: Not all browsers support the window.onerror event.
+     *
+     * @method handleWindowErrors
+     */
+    YAHOO.widget.Logger.handleWindowErrors = function() {
+        if(!YAHOO.widget.Logger._windowErrorsHandled) {
+            // Save any previously defined handler to call
+            if(window.error) {
+                YAHOO.widget.Logger._origOnWindowError = window.onerror;
+            }
+            window.onerror = YAHOO.widget.Logger._onWindowError;
+            YAHOO.widget.Logger._windowErrorsHandled = true;
+            YAHOO.log("Logger handling of window.onerror has been enabled.");
+        }
+        else {
+            YAHOO.log("Logger handling of window.onerror had already been enabled.");
+        }
+    };
+
+    /**
+     * Unsurpresses native JavaScript errors. By default,
+     * Logger does not handle JavaScript window error events.
+     * NB: Not all browsers support the window.onerror event.
+     *
+     * @method unhandleWindowErrors
+     */
+    YAHOO.widget.Logger.unhandleWindowErrors = function() {
+        if(YAHOO.widget.Logger._windowErrorsHandled) {
+            // Revert to any previously defined handler to call
+            if(YAHOO.widget.Logger._origOnWindowError) {
+                window.onerror = YAHOO.widget.Logger._origOnWindowError;
+                YAHOO.widget.Logger._origOnWindowError = null;
+            }
+            else {
+                window.onerror = null;
+            }
+            YAHOO.widget.Logger._windowErrorsHandled = false;
+            YAHOO.log("Logger handling of window.onerror has been disabled.");
+        }
+        else {
+            YAHOO.log("Logger handling of window.onerror had already been disabled.");
+        }
+    };
+    
     /////////////////////////////////////////////////////////////////////////////
     //
     // Public events
@@ -17203,8 +17471,9 @@ if(!YAHOO.widget.Logger) {
             var label = oEntry.category.substring(0,4).toUpperCase();
 
             var time = oEntry.time;
+            var localTime;
             if (time.toLocaleTimeString) {
-                var localTime  = time.toLocaleTimeString();
+                localTime  = time.toLocaleTimeString();
             }
             else {
                 localTime = time.toString();
@@ -17218,10 +17487,9 @@ if(!YAHOO.widget.Logger) {
             var output =
                 localTime + " (" +
                 elapsedTime + "ms): " +
-                oEntry.source + ": " +
-                oEntry.msg;
+                oEntry.source + ": ";
 
-            console.log(output);
+            console.log(output, oEntry.msg);
         }
     };
 
@@ -17255,19 +17523,6 @@ if(!YAHOO.widget.Logger) {
 
     /////////////////////////////////////////////////////////////////////////////
     //
-    // Enable handling of native JavaScript errors
-    // NB: Not all browsers support the window.onerror event
-    //
-    /////////////////////////////////////////////////////////////////////////////
-
-    if(window.onerror) {
-        // Save any previously defined handler to call
-        YAHOO.widget.Logger._origOnWindowError = window.onerror;
-    }
-    window.onerror = YAHOO.widget.Logger._onWindowError;
-
-    /////////////////////////////////////////////////////////////////////////////
-    //
     // First log
     //
     /////////////////////////////////////////////////////////////////////////////
@@ -17276,13 +17531,13 @@ if(!YAHOO.widget.Logger) {
 }
 
 
-YAHOO.register("logger", YAHOO.widget.Logger, {version: "2.3.1", build: "541"});
+YAHOO.register("logger", YAHOO.widget.Logger, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 /**
  * The drag and drop utility provides a framework for building drag and drop
@@ -17313,7 +17568,6 @@ YAHOO.util.DragDropMgr = function() {
     var Event = YAHOO.util.Event;
 
     return {
-
         /**
          * Two dimensional Array of registered DragDrop objects.  The first 
          * dimension is the DragDrop item group, the second the DragDrop 
@@ -17625,6 +17879,16 @@ YAHOO.util.DragDropMgr = function() {
         startY: 0,
 
         /**
+         * Flag to determine if the drag event was fired from the click timeout and
+         * not the mouse move threshold.
+         * @property fromTimeout
+         * @type boolean
+         * @private
+         * @static
+         */
+        fromTimeout: false,
+
+        /**
          * Each DragDrop instance must be registered with the DragDropMgr.  
          * This is executed in DragDrop.init()
          * @method regDragDrop
@@ -17825,7 +18089,8 @@ YAHOO.util.DragDropMgr = function() {
             this.clickTimeout = setTimeout( 
                     function() { 
                         var DDM = YAHOO.util.DDM;
-                        DDM.startDrag(DDM.startX, DDM.startY); 
+                        DDM.startDrag(DDM.startX, DDM.startY);
+                        DDM.fromTimeout = true;
                     }, 
                     this.clickTimeThresh );
         },
@@ -17841,11 +18106,13 @@ YAHOO.util.DragDropMgr = function() {
         startDrag: function(x, y) {
             clearTimeout(this.clickTimeout);
             var dc = this.dragCurrent;
-            if (dc) {
+            if (dc && dc.events.b4StartDrag) {
                 dc.b4StartDrag(x, y);
+                dc.fireEvent('b4StartDragEvent', { x: x, y: y });
             }
-            if (dc) {
+            if (dc && dc.events.startDrag) {
                 dc.startDrag(x, y);
+                dc.fireEvent('startDragEvent', { x: x, y: y });
             }
             this.dragThreshMet = true;
         },
@@ -17863,6 +18130,11 @@ YAHOO.util.DragDropMgr = function() {
                 clearTimeout(this.clickTimeout);
 
                 if (this.dragThreshMet) {
+                    if (this.fromTimeout) {
+                        this.fromTimeout = false;
+                        this.handleMouseMove(e);
+                    }
+                    this.fromTimeout = false;
                     this.fireEvents(e, true);
                 } else {
                 }
@@ -17908,15 +18180,23 @@ YAHOO.util.DragDropMgr = function() {
          * @static
          */
         stopDrag: function(e, silent) {
-
+            var dc = this.dragCurrent;
             // Fire the drag end event for the item that was dragged
-            if (this.dragCurrent && !silent) {
+            if (dc && !silent) {
                 if (this.dragThreshMet) {
-                    this.dragCurrent.b4EndDrag(e);
-                    this.dragCurrent.endDrag(e);
+                    if (dc.events.b4EndDrag) {
+                        dc.b4EndDrag(e);
+                        dc.fireEvent('b4EndDragEvent', { e: e });
+                    }
+                    if (dc.events.endDrag) {
+                        dc.endDrag(e);
+                        dc.fireEvent('endDragEvent', { e: e });
+                    }
                 }
-
-                this.dragCurrent.onMouseUp(e);
+                if (dc.events.mouseUp) {
+                    dc.onMouseUp(e);
+                    dc.fireEvent('mouseUpEvent', { e: e });
+                }
             }
 
             this.dragCurrent = null;
@@ -17948,6 +18228,13 @@ YAHOO.util.DragDropMgr = function() {
                 if (YAHOO.util.Event.isIE && !e.button) {
                     this.stopEvent(e);
                     return this.handleMouseUp(e);
+                } else {
+                    if (e.clientX < 0 || e.clientY < 0) {
+                        //This will stop the element from leaving the viewport in FF, Opera & Safari
+                        //Not turned on yet
+                        //this.stopEvent(e);
+                        //return false;
+                    }
                 }
 
                 if (!this.dragThreshMet) {
@@ -17960,9 +18247,13 @@ YAHOO.util.DragDropMgr = function() {
                 }
 
                 if (this.dragThreshMet) {
-                    dc.b4Drag(e);
-                    if (dc) {
+                    if (dc && dc.events.b4Drag) {
+                        dc.b4Drag(e);
+                        dc.fireEvent('b4DragEvent', { e: e});
+                    }
+                    if (dc && dc.events.drag) {
                         dc.onDrag(e);
+                        dc.fireEvent('dragEvent', { e: e});
                     }
                     if (dc) {
                         this.fireEvents(e, false);
@@ -17972,7 +18263,7 @@ YAHOO.util.DragDropMgr = function() {
                 this.stopEvent(e);
             }
         },
-
+        
         /**
          * Iterates over all of the DragDrop elements to find ones we are 
          * hovering over or dropping on
@@ -17987,7 +18278,8 @@ YAHOO.util.DragDropMgr = function() {
 
             // If the user did the mouse up outside of the window, we could 
             // get here even though we have ended the drag.
-            if (!dc || dc.isLocked()) {
+            // If the config option dragOnly is true, bail out and don't fire the events
+            if (!dc || dc.isLocked() || dc.dragOnly) {
                 return;
             }
 
@@ -17996,16 +18288,21 @@ YAHOO.util.DragDropMgr = function() {
                 pt = new YAHOO.util.Point(x,y),
                 pos = dc.getTargetCoord(pt.x, pt.y),
                 el = dc.getDragEl(),
+                events = ['out', 'over', 'drop', 'enter'],
                 curRegion = new YAHOO.util.Region( pos.y, 
                                                pos.x + el.offsetWidth,
                                                pos.y + el.offsetHeight, 
                                                pos.x ),
             
                 oldOvers = [], // cache the previous dragOver array
-                outEvts   = [],
-                overEvts  = [],
-                dropEvts  = [],
-                enterEvts = [];
+                inGroupsObj  = {},
+                inGroups  = [],
+                data = {
+                    outEvts: [],
+                    overEvts: [],
+                    dropEvts: [],
+                    enterEvts: []
+                };
 
 
             // Check to see if the object(s) we were hovering over is no longer 
@@ -18017,9 +18314,8 @@ YAHOO.util.DragDropMgr = function() {
                 if (! this.isTypeOfDD(ddo)) {
                     continue;
                 }
-
                 if (! this.isOverTarget(pt, ddo, this.mode, curRegion)) {
-                    outEvts.push( ddo );
+                    data.outEvts.push( ddo );
                 }
 
                 oldOvers[i] = true;
@@ -18040,18 +18336,19 @@ YAHOO.util.DragDropMgr = function() {
 
                     if (oDD.isTarget && !oDD.isLocked() && oDD != dc) {
                         if (this.isOverTarget(pt, oDD, this.mode, curRegion)) {
+                            inGroupsObj[sGroup] = true;
                             // look for drop interactions
                             if (isDrop) {
-                                dropEvts.push( oDD );
+                                data.dropEvts.push( oDD );
                             // look for drag enter and drag over interactions
                             } else {
 
                                 // initial drag over: dragEnter fires
                                 if (!oldOvers[oDD.id]) {
-                                    enterEvts.push( oDD );
+                                    data.enterEvts.push( oDD );
                                 // subsequent drag overs: dragOver fires
                                 } else {
-                                    overEvts.push( oDD );
+                                    data.overEvts.push( oDD );
                                 }
 
                                 this.dragOvers[oDD.id] = oDD;
@@ -18062,97 +18359,64 @@ YAHOO.util.DragDropMgr = function() {
             }
 
             this.interactionInfo = {
-                out:       outEvts,
-                enter:     enterEvts,
-                over:      overEvts,
-                drop:      dropEvts,
+                out:       data.outEvts,
+                enter:     data.enterEvts,
+                over:      data.overEvts,
+                drop:      data.dropEvts,
                 point:     pt,
                 draggedRegion:    curRegion,
                 sourceRegion: this.locationCache[dc.id],
                 validDrop: isDrop
             };
 
-            // notify about a drop that did not find a target
-            if (isDrop && !dropEvts.length) {
-                this.interactionInfo.validDrop = false;
-                dc.onInvalidDrop(e);
+            
+            for (var inG in inGroupsObj) {
+                inGroups.push(inG);
             }
 
+            // notify about a drop that did not find a target
+            if (isDrop && !data.dropEvts.length) {
+                this.interactionInfo.validDrop = false;
+                if (dc.events.invalidDrop) {
+                    dc.onInvalidDrop(e);
+                    dc.fireEvent('invalidDropEvent', { e: e });
+                }
+            }
 
-            if (this.mode) {
-                if (outEvts.length) {
-                    dc.b4DragOut(e, outEvts);
-                    if (dc) {
-                        dc.onDragOut(e, outEvts);
+            for (i = 0; i < events.length; i++) {
+                var tmp = null;
+                if (data[events[i] + 'Evts']) {
+                    tmp = data[events[i] + 'Evts'];
+                }
+                if (tmp && tmp.length) {
+                    var type = events[i].charAt(0).toUpperCase() + events[i].substr(1),
+                        ev = 'onDrag' + type,
+                        b4 = 'b4Drag' + type,
+                        cev = 'drag' + type + 'Event',
+                        check = 'drag' + type;
+                    
+                    if (this.mode) {
+                        if (dc.events[b4]) {
+                            dc[b4](e, tmp, inGroups);
+                            dc.fireEvent(b4 + 'Event', { event: e, info: tmp, group: inGroups });
+                        }
+                        if (dc.events[check]) {
+                            dc[ev](e, tmp, inGroups);
+                            dc.fireEvent(cev, { event: e, info: tmp, group: inGroups });
+                        }
+                    } else {
+                        for (var b = 0, len = tmp.length; b < len; ++b) {
+                            if (dc.events[b4]) {
+                                dc[b4](e, tmp[b].id, inGroups[0]);
+                                dc.fireEvent(b4 + 'Event', { event: e, info: tmp[b].id, group: inGroups[0] });
+                            }
+                            if (dc.events[check]) {
+                                dc[ev](e, tmp[b].id, inGroups[0]);
+                                dc.fireEvent(cev, { event: e, info: tmp[b].id, group: inGroups[0] });
+                            }
+                        }
                     }
                 }
-
-                if (enterEvts.length) {
-                    if (dc) {
-                        dc.onDragEnter(e, enterEvts);
-                    }
-                }
-
-                if (overEvts.length) {
-                    if (dc) {
-                        dc.b4DragOver(e, overEvts);
-                    }
-
-                    if (dc) {
-                        dc.onDragOver(e, overEvts);
-                    }
-                }
-
-                if (dropEvts.length) {
-                    if (dc) {
-                        dc.b4DragDrop(e, dropEvts);
-                    }
-                    if (dc) {
-                        dc.onDragDrop(e, dropEvts);
-                    }
-                }
-
-            } else {
-                // fire dragout events
-                var len = 0;
-                for (i=0, len=outEvts.length; i<len; ++i) {
-                    if (dc) {
-                        dc.b4DragOut(e, outEvts[i].id);
-                    }
-                    if (dc) {
-                        dc.onDragOut(e, outEvts[i].id);
-                    }
-                }
-                 
-                // fire enter events
-                for (i=0,len=enterEvts.length; i<len; ++i) {
-                    // dc.b4DragEnter(e, oDD.id);
-
-                    if (dc) {
-                        dc.onDragEnter(e, enterEvts[i].id);
-                    }
-                }
-         
-                // fire over events
-                for (i=0,len=overEvts.length; i<len; ++i) {
-                    if (dc) {
-                        dc.b4DragOver(e, overEvts[i].id);
-                    }
-                    if (dc) {
-                        dc.onDragOver(e, overEvts[i].id);
-                    }
-                }
-
-                // fire drop events
-                for (i=0, len=dropEvts.length; i<len; ++i) {
-                    if (dc) {
-                        dc.b4DragDrop(e, dropEvts[i].id);
-                    }
-                    if (dc) {
-                        dc.onDragDrop(e, dropEvts[i].id);
-                    }
-                }
-
             }
         },
 
@@ -18745,7 +19009,20 @@ YAHOO.util.DragDrop = function(id, sGroup, config) {
 };
 
 YAHOO.util.DragDrop.prototype = {
-
+    /**
+     * An Object Literal containing the events that we will be using: mouseDown, b4MouseDown, mouseUp, b4StartDrag, startDrag, b4EndDrag, endDrag, mouseUp, drag, b4Drag, invalidDrop, b4DragOut, dragOut, dragEnter, b4DragOver, dragOver, b4DragDrop, dragDrop
+     * By setting any of these to false, then event will not be fired.
+     * @property events
+     * @type object
+     */
+    events: null,
+    /**
+    * @method on
+    * @description Shortcut for EventProvider.subscribe, see <a href="YAHOO.util.EventProvider.html#subscribe">YAHOO.util.EventProvider.subscribe</a>
+    */
+    on: function() {
+        this.subscribe.apply(this, arguments);
+    },
     /**
      * The id of the element associated with this object.  This is what we 
      * refer to as the "linked element" because the size and position of 
@@ -18858,7 +19135,7 @@ YAHOO.util.DragDrop.prototype = {
     /**
      * By default, all instances can be a drop target.  This can be disabled by
      * setting isTarget to false.
-     * @method isTarget
+     * @property isTarget
      * @type boolean
      */
     isTarget: true,
@@ -18866,10 +19143,16 @@ YAHOO.util.DragDrop.prototype = {
     /**
      * The padding configured for this drag and drop object for calculating
      * the drop zone intersection with this object.
-     * @method padding
+     * @property padding
      * @type int[]
      */
     padding: null,
+    /**
+     * If this flag is true, do not fire drop events. The element is a drag only element (for movement not dropping)
+     * @property dragOnly
+     * @type Boolean
+     */
+    dragOnly: false,
 
     /**
      * Cached reference to the linked element
@@ -19215,7 +19498,12 @@ YAHOO.util.DragDrop.prototype = {
         this.initTarget(id, sGroup, config);
         Event.on(this._domRef || this.id, "mousedown", 
                         this.handleMouseDown, this, true);
+
         // Event.on(this.id, "selectstart", Event.preventDefault);
+        for (var i in this.events) {
+            this.createEvent(i + 'Event');
+        }
+        
     },
 
     /**
@@ -19230,6 +19518,8 @@ YAHOO.util.DragDrop.prototype = {
 
         // configuration attributes 
         this.config = config || {};
+
+        this.events = {};
 
         // create a local reference to the drag and drop manager
         this.DDM = YAHOO.util.DDM;
@@ -19278,6 +19568,34 @@ YAHOO.util.DragDrop.prototype = {
      * @method applyConfig
      */
     applyConfig: function() {
+        this.events = {
+            mouseDown: true,
+            b4MouseDown: true,
+            mouseUp: true,
+            b4StartDrag: true,
+            startDrag: true,
+            b4EndDrag: true,
+            endDrag: true,
+            drag: true,
+            b4Drag: true,
+            invalidDrop: true,
+            b4DragOut: true,
+            dragOut: true,
+            dragEnter: true,
+            b4DragOver: true,
+            dragOver: true,
+            b4DragDrop: true,
+            dragDrop: true
+        };
+        
+        if (this.config.events) {
+            for (var i in this.config.events) {
+                if (this.config.events[i] === false) {
+                    this.events[i] = false;
+                }
+            }
+        }
+
 
         // configurable properties: 
         //    padding, isTarget, maintainOffset, primaryButtonOnly
@@ -19285,7 +19603,7 @@ YAHOO.util.DragDrop.prototype = {
         this.isTarget          = (this.config.isTarget !== false);
         this.maintainOffset    = (this.config.maintainOffset);
         this.primaryButtonOnly = (this.config.primaryButtonOnly !== false);
-
+        this.dragOnly = ((this.config.dragOnly === true) ? true : false);
     },
 
     /**
@@ -19333,6 +19651,9 @@ YAHOO.util.DragDrop.prototype = {
         var el = this.getEl();
 
         if (!this.DDM.verifyEl(el)) {
+            if (el && el.style && (el.style.display == 'none')) {
+            } else {
+            }
             return;
         }
 
@@ -19483,8 +19804,18 @@ YAHOO.util.DragDrop.prototype = {
 
 
         // firing the mousedown events prior to calculating positions
-        this.b4MouseDown(e);
-        this.onMouseDown(e);
+        var b4Return = this.b4MouseDown(e);
+        if (this.events.b4MouseDown) {
+            b4Return = this.fireEvent('b4MouseDownEvent', e);
+        }
+        var mDownReturn = this.onMouseDown(e);
+        if (this.events.mouseDown) {
+            mDownReturn = this.fireEvent('mouseDownEvent', e);
+        }
+
+        if ((b4Return === false) || (mDownReturn === false)) {
+            return;
+        }
 
         this.DDM.refreshCache(this.groups);
         // var self = this;
@@ -19518,8 +19849,14 @@ YAHOO.util.DragDrop.prototype = {
         }
     },
 
+    /**
+     * @method clickValidator
+     * @description Method validates that the clicked element
+     * was indeed the handle or a valid child of the handle
+     * @param {Event} e 
+     */
     clickValidator: function(e) {
-        var target = Event.getTarget(e);
+        var target = YAHOO.util.Event.getTarget(e);
         return ( this.isValidHandleChild(target) &&
                     (this.id == this.handleElId || 
                         this.DDM.handleWasClicked(target, this.id)) );
@@ -19861,7 +20198,100 @@ YAHOO.util.DragDrop.prototype = {
     }
 
 };
+YAHOO.augment(YAHOO.util.DragDrop, YAHOO.util.EventProvider);
 
+/**
+* @event mouseDownEvent
+* @description Provides access to the mousedown event. The mousedown does not always result in a drag operation.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4MouseDownEvent
+* @description Provides access to the mousedown event, before the mouseDownEvent gets fired. Returning false will cancel the drag.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event mouseUpEvent
+* @description Fired from inside DragDropMgr when the drag operation is finished.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4StartDragEvent
+* @description Fires before the startDragEvent, returning false will cancel the startDrag Event.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event startDragEvent
+* @description Occurs after a mouse down and the drag threshold has been met. The drag threshold default is either 3 pixels of mouse movement or 1 full second of holding the mousedown. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4EndDragEvent
+* @description Fires before the endDragEvent. Returning false will cancel.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event endDragEvent
+* @description Fires on the mouseup event after a drag has been initiated (startDrag fired).
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event dragEvent
+* @description Occurs every mousemove event while dragging.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragEvent
+* @description Fires before the dragEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event invalidDropEvent
+* @description Fires when the dragged objects is dropped in a location that contains no drop targets.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOutEvent
+* @description Fires before the dragOutEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOutEvent
+* @description Fires when a dragged object is no longer over an object that had the onDragEnter fire. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragEnterEvent
+* @description Occurs when the dragged object first interacts with another targettable drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOverEvent
+* @description Fires before the dragOverEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOverEvent
+* @description Fires every mousemove event while over a drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragDropEvent 
+* @description Fires before the dragDropEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragDropEvent
+* @description Fires when the dragged objects is dropped on another.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
 })();
 /**
  * A DragDrop implementation where the linked element follows the 
@@ -19885,7 +20315,7 @@ YAHOO.extend(YAHOO.util.DD, YAHOO.util.DragDrop, {
 
     /**
      * When set to true, the utility automatically tries to scroll the browser
-     * window wehn a drag and drop element is dragged near the viewport boundary.
+     * window when a drag and drop element is dragged near the viewport boundary.
      * Defaults to true.
      * @property scroll
      * @type boolean
@@ -19961,7 +20391,10 @@ YAHOO.extend(YAHOO.util.DD, YAHOO.util.DragDrop, {
         }
         
         this.cachePosition(oCoord.x, oCoord.y);
-        this.autoScroll(oCoord.x, oCoord.y, el.offsetHeight, el.offsetWidth);
+        var self = this;
+        setTimeout(function() {
+            self.autoScroll.call(self, oCoord.x, oCoord.y, el.offsetHeight, el.offsetWidth);
+        }, 0);
     },
 
     /**
@@ -20121,6 +20554,98 @@ YAHOO.extend(YAHOO.util.DD, YAHOO.util.DragDrop, {
 
     */
 
+/**
+* @event mouseDownEvent
+* @description Provides access to the mousedown event. The mousedown does not always result in a drag operation.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4MouseDownEvent
+* @description Provides access to the mousedown event, before the mouseDownEvent gets fired. Returning false will cancel the drag.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event mouseUpEvent
+* @description Fired from inside DragDropMgr when the drag operation is finished.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4StartDragEvent
+* @description Fires before the startDragEvent, returning false will cancel the startDrag Event.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event startDragEvent
+* @description Occurs after a mouse down and the drag threshold has been met. The drag threshold default is either 3 pixels of mouse movement or 1 full second of holding the mousedown. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4EndDragEvent
+* @description Fires before the endDragEvent. Returning false will cancel.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event endDragEvent
+* @description Fires on the mouseup event after a drag has been initiated (startDrag fired).
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event dragEvent
+* @description Occurs every mousemove event while dragging.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragEvent
+* @description Fires before the dragEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event invalidDropEvent
+* @description Fires when the dragged objects is dropped in a location that contains no drop targets.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOutEvent
+* @description Fires before the dragOutEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOutEvent
+* @description Fires when a dragged object is no longer over an object that had the onDragEnter fire. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragEnterEvent
+* @description Occurs when the dragged object first interacts with another targettable drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOverEvent
+* @description Fires before the dragOverEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOverEvent
+* @description Fires every mousemove event while over a drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragDropEvent 
+* @description Fires before the dragDropEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragDropEvent
+* @description Fires when the dragged objects is dropped on another.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
 });
 /**
  * A DragDrop implementation that inserts an empty, bordered div into
@@ -20216,6 +20741,27 @@ YAHOO.extend(YAHOO.util.DDProxy, YAHOO.util.DD, {
             Dom.setStyle(_data, 'background-color', '#ccc');
             Dom.setStyle(_data, 'opacity', '0');
             div.appendChild(_data);
+
+            /**
+            * It seems that IE will fire the mouseup event if you pass a proxy element over a select box
+            * Placing the IFRAME element inside seems to stop this issue
+            */
+            if (YAHOO.env.ua.ie) {
+                //Only needed for Internet Explorer
+                var ifr = document.createElement('iframe');
+                ifr.setAttribute('src', 'javascript:');
+                ifr.setAttribute('scrolling', 'no');
+                ifr.setAttribute('frameborder', '0');
+                div.insertBefore(ifr, div.firstChild);
+                Dom.setStyle(ifr, 'height', '100%');
+                Dom.setStyle(ifr, 'width', '100%');
+                Dom.setStyle(ifr, 'position', 'absolute');
+                Dom.setStyle(ifr, 'top', '0');
+                Dom.setStyle(ifr, 'left', '0');
+                Dom.setStyle(ifr, 'opacity', '0');
+                Dom.setStyle(ifr, 'zIndex', '-1');
+                Dom.setStyle(ifr.nextSibling, 'zIndex', '2');
+            }
 
             // appendChild can blow up IE if invoked prior to the window load event
             // while rendering a table.  It is possible there are other scenarios 
@@ -20347,6 +20893,98 @@ YAHOO.extend(YAHOO.util.DDProxy, YAHOO.util.DD, {
     toString: function() {
         return ("DDProxy " + this.id);
     }
+/**
+* @event mouseDownEvent
+* @description Provides access to the mousedown event. The mousedown does not always result in a drag operation.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4MouseDownEvent
+* @description Provides access to the mousedown event, before the mouseDownEvent gets fired. Returning false will cancel the drag.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event mouseUpEvent
+* @description Fired from inside DragDropMgr when the drag operation is finished.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4StartDragEvent
+* @description Fires before the startDragEvent, returning false will cancel the startDrag Event.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event startDragEvent
+* @description Occurs after a mouse down and the drag threshold has been met. The drag threshold default is either 3 pixels of mouse movement or 1 full second of holding the mousedown. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event b4EndDragEvent
+* @description Fires before the endDragEvent. Returning false will cancel.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event endDragEvent
+* @description Fires on the mouseup event after a drag has been initiated (startDrag fired).
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+
+/**
+* @event dragEvent
+* @description Occurs every mousemove event while dragging.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragEvent
+* @description Fires before the dragEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event invalidDropEvent
+* @description Fires when the dragged objects is dropped in a location that contains no drop targets.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOutEvent
+* @description Fires before the dragOutEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOutEvent
+* @description Fires when a dragged object is no longer over an object that had the onDragEnter fire. 
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragEnterEvent
+* @description Occurs when the dragged object first interacts with another targettable drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragOverEvent
+* @description Fires before the dragOverEvent.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragOverEvent
+* @description Fires every mousemove event while over a drag and drop object.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event b4DragDropEvent 
+* @description Fires before the dragDropEvent
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
+/**
+* @event dragDropEvent
+* @description Fires when the dragged objects is dropped on another.
+* @type YAHOO.util.CustomEvent See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a> for more information on listening for this event.
+*/
 
 });
 /**
@@ -20376,13 +21014,13 @@ YAHOO.extend(YAHOO.util.DDTarget, YAHOO.util.DragDrop, {
         return ("DDTarget " + this.id);
     }
 });
-YAHOO.register("dragdrop", YAHOO.util.DragDropMgr, {version: "2.3.1", build: "541"});
+YAHOO.register("dragdrop", YAHOO.util.DragDropMgr, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 /**
  * The Slider component is a UI control that enables the user to adjust 
@@ -20498,6 +21136,14 @@ YAHOO.widget.Slider.ANIM_AVAIL = false;
 YAHOO.extend(YAHOO.widget.Slider, YAHOO.util.DragDrop, {
 
     /**
+     * Override the default setting of dragOnly to true.
+     * @property dragOnly
+     * @type boolean
+     * @default true
+     */
+    dragOnly : true,
+
+    /**
      * Initializes the slider.  Executed in the constructor
      * @method initSlider
      * @param {string} sType the type of slider (horiz, vert, region)
@@ -20576,7 +21222,7 @@ YAHOO.extend(YAHOO.widget.Slider, YAHOO.util.DragDrop, {
 
         /**
          * Specifies the number of pixels the arrow keys will move the slider.
-         * Default is 25.
+         * Default is 20.
          * @property keyIncrement
          * @type int
          */
@@ -21384,6 +22030,7 @@ YAHOO.extend(YAHOO.widget.Slider, YAHOO.util.DragDrop, {
             var x = YAHOO.util.Event.getPageX(e);
             var y = YAHOO.util.Event.getPageY(e);
             this.moveThumb(x, y, true, true);
+            this.fireEvents();
         }
     },
 
@@ -21541,6 +22188,14 @@ YAHOO.extend(YAHOO.widget.SliderThumb, YAHOO.util.DD, {
      * @type [int, int]
      */
     startOffset: null,
+
+    /**
+     * Override the default setting of dragOnly to true.
+     * @property dragOnly
+     * @type boolean
+     * @default true
+     */
+    dragOnly : true,
 
     /**
      * Flag used to figure out if this is a horizontal or vertical slider
@@ -21727,14 +22382,549 @@ YAHOO.extend(YAHOO.widget.SliderThumb, YAHOO.util.DD, {
 
 });
 
-YAHOO.register("slider", YAHOO.widget.Slider, {version: "2.3.1", build: "541"});
+/**
+ * A slider with two thumbs, one that represents the min value and 
+ * the other the max.  Actually a composition of two sliders, both with
+ * the same background.  The constraints for each slider are adjusted
+ * dynamically so that the min value of the max slider is equal or greater
+ * to the current value of the min slider, and the max value of the min
+ * slider is the current value of the max slider.
+ * Constructor assumes both thumbs are positioned absolutely at the 0 mark on
+ * the background.
+ *
+ * @namespace YAHOO.widget
+ * @class DualSlider
+ * @uses YAHOO.util.EventProvider
+ * @constructor
+ * @param {Slider} minSlider The Slider instance used for the min value thumb
+ * @param {Slider} maxSlider The Slider instance used for the max value thumb
+ * @param {int}    range The number of pixels the thumbs may move within
+ * @param {Array}  initVals (optional) [min,max] Initial thumb placement
+ */
+YAHOO.widget.DualSlider = function(minSlider, maxSlider, range, initVals) {
+
+    var self = this,
+        lang = YAHOO.lang;
+
+    /**
+     * A slider instance that keeps track of the lower value of the range.
+     * <strong>read only</strong>
+     * @property minSlider
+     * @type Slider
+     */
+    this.minSlider = minSlider;
+
+    /**
+     * A slider instance that keeps track of the upper value of the range.
+     * <strong>read only</strong>
+     * @property maxSlider
+     * @type Slider
+     */
+    this.maxSlider = maxSlider;
+
+    /**
+     * The currently active slider (min or max). <strong>read only</strong>
+     * @property activeSlider
+     * @type Slider
+     */
+    this.activeSlider = minSlider;
+
+    /**
+     * Is the DualSlider oriented horizontally or vertically?
+     * <strong>read only</strong>
+     * @property isHoriz
+     * @type boolean
+     */
+    this.isHoriz = minSlider.thumb._isHoriz;
+
+    // Validate initial values
+    initVals = YAHOO.lang.isArray(initVals) ? initVals : [0,range];
+    initVals[0] = Math.min(Math.max(parseInt(initVals[0],10)|0,0),range);
+    initVals[1] = Math.max(Math.min(parseInt(initVals[1],10)|0,range),0);
+    // Swap initVals if min > max
+    if (initVals[0] > initVals[1]) {
+        initVals.splice(0,2,initVals[1],initVals[0]);
+    }
+
+    var ready = { min : false, max : false };
+
+    this.minSlider.thumb.onAvailable = function () {
+        minSlider.setStartSliderState();
+        ready.min = true;
+        if (ready.max) {
+            minSlider.setValue(initVals[0],true,true,true);
+            maxSlider.setValue(initVals[1],true,true,true);
+            self.updateValue(true);
+            self.fireEvent('ready',self);
+        }
+    };
+    this.maxSlider.thumb.onAvailable = function () {
+        maxSlider.setStartSliderState();
+        ready.max = true;
+        if (ready.min) {
+            minSlider.setValue(initVals[0],true,true,true);
+            maxSlider.setValue(initVals[1],true,true,true);
+            self.updateValue(true);
+            self.fireEvent('ready',self);
+        }
+    };
+
+    // dispatch mousedowns to the active slider
+    minSlider.onMouseDown = function(e) {
+        self._handleMouseDown(e);
+    };
+
+    // we can safely ignore a mousedown on one of the sliders since
+    // they share a background
+    maxSlider.onMouseDown = function(e) { 
+        YAHOO.util.Event.stopEvent(e); 
+    };
+
+    // Fix the drag behavior so that only the active slider
+    // follows the drag
+    minSlider.onDrag =
+    maxSlider.onDrag = function(e) {
+        self._handleDrag(e);
+    };
+
+    // The core events for each slider are handled so we can expose a single
+    // event for when the event happens on either slider
+    minSlider.subscribe("change", this._handleMinChange, minSlider, this);
+    minSlider.subscribe("slideStart", this._handleSlideStart, minSlider, this);
+    minSlider.subscribe("slideEnd", this._handleSlideEnd, minSlider, this);
+
+    maxSlider.subscribe("change", this._handleMaxChange, maxSlider, this);
+    maxSlider.subscribe("slideStart", this._handleSlideStart, maxSlider, this);
+    maxSlider.subscribe("slideEnd", this._handleSlideEnd, maxSlider, this);
+
+    /**
+     * Event that fires when the slider is finished setting up
+     * @event ready
+     * @param {DualSlider} dualslider the DualSlider instance
+     */
+    this.createEvent("ready", this);
+
+    /**
+     * Event that fires when either the min or max value changes
+     * @event change
+     * @param {DualSlider} dualslider the DualSlider instance
+     */
+    this.createEvent("change", this);
+
+    /**
+     * Event that fires when one of the thumbs begins to move
+     * @event slideStart
+     * @param {Slider} activeSlider the moving slider
+     */
+    this.createEvent("slideStart", this);
+
+    /**
+     * Event that fires when one of the thumbs finishes moving
+     * @event slideEnd
+     * @param {Slider} activeSlider the moving slider
+     */
+    this.createEvent("slideEnd", this);
+};
+
+YAHOO.widget.DualSlider.prototype = {
+
+    /**
+     * The current value of the min thumb. <strong>read only</strong>.
+     * @property minVal
+     * @type int
+     */
+    minVal : -1,
+
+    /**
+     * The current value of the max thumb. <strong>read only</strong>.
+     * @property maxVal
+     * @type int
+     */
+    maxVal : -1,
+
+    /**
+     * Pixel distance to maintain between thumbs.
+     * @property minRange
+     * @type int
+     * @default 0
+     */
+    minRange : 0,
+
+    /**
+     * Executed when one of the sliders fires the slideStart event
+     * @method _handleSlideStart
+     * @private
+     */
+    _handleSlideStart: function(data, slider) {
+        this.fireEvent("slideStart", slider);
+    },
+
+    /**
+     * Executed when one of the sliders fires the slideEnd event
+     * @method _handleSlideEnd
+     * @private
+     */
+    _handleSlideEnd: function(data, slider) {
+        this.fireEvent("slideEnd", slider);
+    },
+
+    /**
+     * Overrides the onDrag method for both sliders
+     * @method _handleDrag
+     * @private
+     */
+    _handleDrag: function(e) {
+        YAHOO.widget.Slider.prototype.onDrag.call(this.activeSlider, e);
+    },
+
+    /**
+     * Executed when the min slider fires the change event
+     * @method _handleMinChange
+     * @private
+     */
+    _handleMinChange: function() {
+        this.activeSlider = this.minSlider;
+        this.updateValue();
+    },
+
+    /**
+     * Executed when the max slider fires the change event
+     * @method _handleMaxChange
+     * @private
+     */
+    _handleMaxChange: function() {
+        this.activeSlider = this.maxSlider;
+        this.updateValue();
+    },
+
+    /**
+     * Sets the min and max thumbs to new values.
+     * @method setValues
+     * @param min {int} Pixel offset to assign to the min thumb
+     * @param max {int} Pixel offset to assign to the max thumb
+     * @param skipAnim {boolean} (optional) Set to true to skip thumb animation.
+     * Default false
+     * @param force {boolean} (optional) ignore the locked setting and set
+     * value anyway. Default false
+     * @param silent {boolean} (optional) Set to true to skip firing change
+     * events.  Default false
+     */
+    setValues : function (min, max, skipAnim, force, silent) {
+        var mins = this.minSlider,
+            maxs = this.maxSlider,
+            mint = mins.thumb,
+            maxt = maxs.thumb,
+            self = this,
+            done = { min : false, max : false };
+
+        // Clear constraints to prevent animated thumbs from prematurely
+        // stopping when hitting a constraint that's moving with the other
+        // thumb.
+        if (mint._isHoriz) {
+            mint.setXConstraint(mint.leftConstraint,maxt.rightConstraint,mint.tickSize);
+            maxt.setXConstraint(mint.leftConstraint,maxt.rightConstraint,maxt.tickSize);
+        } else {
+            mint.setYConstraint(mint.topConstraint,maxt.bottomConstraint,mint.tickSize);
+            maxt.setYConstraint(mint.topConstraint,maxt.bottomConstraint,maxt.tickSize);
+        }
+
+        // Set up one-time slideEnd callbacks to call updateValue when both
+        // thumbs have been set
+        this._oneTimeCallback(mins,'slideEnd',function () {
+            done.min = true;
+            if (done.max) {
+                self.updateValue(silent);
+                // Clean the slider's slideEnd events on a timeout since this
+                // will be executed from inside the event's fire
+                setTimeout(function () {
+                    self._cleanEvent(mins,'slideEnd');
+                    self._cleanEvent(maxs,'slideEnd');
+                },0);
+            }
+        });
+
+        this._oneTimeCallback(maxs,'slideEnd',function () {
+            done.max = true;
+            if (done.min) {
+                self.updateValue(silent);
+                // Clean both sliders' slideEnd events on a timeout since this
+                // will be executed from inside one of the event's fire
+                setTimeout(function () {
+                    self._cleanEvent(mins,'slideEnd');
+                    self._cleanEvent(maxs,'slideEnd');
+                },0);
+            }
+        });
+
+        mins.setValue(min,skipAnim,force,silent);
+        maxs.setValue(max,skipAnim,force,silent);
+    },
+
+    /**
+     * Set the min thumb position to a new value.
+     * @method setMinValue
+     * @param min {int} Pixel offset for min thumb
+     * @param skipAnim {boolean} (optional) Set to true to skip thumb animation.
+     * Default false
+     * @param force {boolean} (optional) ignore the locked setting and set
+     * value anyway. Default false
+     * @param silent {boolean} (optional) Set to true to skip firing change
+     * events.  Default false
+     */
+    setMinValue : function (min, skipAnim, force, silent) {
+        var mins = this.minSlider;
+
+        this.activeSlider = mins;
+
+        // Use a one-time event callback to delay the updateValue call
+        // until after the slide operation is done
+        var self = this;
+        this._oneTimeCallback(mins,'slideEnd',function () {
+            self.updateValue(silent);
+            // Clean the slideEnd event on a timeout since this
+            // will be executed from inside the event's fire
+            setTimeout(function () { self._cleanEvent(mins,'slideEnd'); }, 0);
+        });
+
+        mins.setValue(min, skipAnim, force, silent);
+    },
+
+    /**
+     * Set the max thumb position to a new value.
+     * @method setMaxValue
+     * @param max {int} Pixel offset for max thumb
+     * @param skipAnim {boolean} (optional) Set to true to skip thumb animation.
+     * Default false
+     * @param force {boolean} (optional) ignore the locked setting and set
+     * value anyway. Default false
+     * @param silent {boolean} (optional) Set to true to skip firing change
+     * events.  Default false
+     */
+    setMaxValue : function (max, skipAnim, force, silent) {
+        var maxs = this.maxSlider;
+
+        this.activeSlider = maxs;
+
+        // Use a one-time event callback to delay the updateValue call
+        // until after the slide operation is done
+        var self = this;
+        this._oneTimeCallback(maxs,'slideEnd',function () {
+            self.updateValue(silent);
+            // Clean the slideEnd event on a timeout since this
+            // will be executed from inside the event's fire
+            setTimeout(function () { self._cleanEvent(maxs,'slideEnd'); }, 0);
+        });
+
+        maxs.setValue(max, skipAnim, force, silent);
+    },
+
+    /**
+     * Executed when one of the sliders is moved
+     * @method updateValue
+     * @param silent {boolean} (optional) Set to true to skip firing change
+     * events.  Default false
+     * @private
+     */
+    updateValue: function(silent) {
+        var min     = this.minSlider.getValue(),
+            max     = this.maxSlider.getValue(),
+            changed = false;
+
+        if (min != this.minVal || max != this.maxVal) {
+            changed = true;
+
+            var mint = this.minSlider.thumb;
+            var maxt = this.maxSlider.thumb;
+
+            var thumbInnerWidth = this.minSlider.thumbCenterPoint.x +
+                                  this.maxSlider.thumbCenterPoint.x;
+
+            // Establish barriers within the respective other thumb's edge, less
+            // the minRange.  Limit to the Slider's range in the case of
+            // negative minRanges.
+            var minConstraint = Math.max(max-thumbInnerWidth-this.minRange,0);
+            var maxConstraint = Math.min(-min-thumbInnerWidth-this.minRange,0);
+
+            if (this.isHoriz) {
+                minConstraint = Math.min(minConstraint,maxt.rightConstraint);
+
+                mint.setXConstraint(mint.leftConstraint,minConstraint, mint.tickSize);
+
+                maxt.setXConstraint(maxConstraint,maxt.rightConstraint, maxt.tickSize);
+            } else {
+                minConstraint = Math.min(minConstraint,maxt.bottomConstraint);
+                mint.setYConstraint(mint.leftConstraint,minConstraint, mint.tickSize);
+
+                maxt.setYConstraint(maxConstraint,maxt.bottomConstraint, maxt.tickSize);
+            }
+        }
+
+        this.minVal = min;
+        this.maxVal = max;
+
+        if (changed && !silent) {
+            this.fireEvent("change", this);
+        }
+    },
+
+    /**
+     * A background click will move the slider thumb nearest to the click.
+     * Override if you need different behavior.
+     * @method selectActiveSlider
+     * @param e {Event} the mousedown event
+     * @private
+     */
+    selectActiveSlider: function(e) {
+        var min = this.minSlider.getValue(),
+            max = this.maxSlider.getValue(),
+            d;
+
+        if (this.isHoriz) {
+            d = YAHOO.util.Event.getPageX(e) - this.minSlider.initPageX -
+                this.minSlider.thumbCenterPoint.x;
+        } else {
+            d = YAHOO.util.Event.getPageY(e) - this.minSlider.initPageY -
+                this.minSlider.thumbCenterPoint.y;
+        }
+                
+        // Below the minSlider thumb.  Move the minSlider thumb
+        if (d < min) {
+            this.activeSlider = this.minSlider;
+        // Above the maxSlider thumb.  Move the maxSlider thumb
+        } else if (d > max) {
+            this.activeSlider = this.maxSlider;
+        // Split the difference between thumbs
+        } else {
+            this.activeSlider = d*2 > max+min ? this.maxSlider : this.minSlider;
+        }
+    },
+
+    /**
+     * Overrides the onMouseDown for both slider, only moving the active slider
+     * @method handleMouseDown
+     * @private
+     */
+    _handleMouseDown: function(e) {
+        this.selectActiveSlider(e);
+        YAHOO.widget.Slider.prototype.onMouseDown.call(this.activeSlider, e);
+    },
+
+    /**
+     * Schedule an event callback that will execute once, then unsubscribe
+     * itself.
+     * @method _oneTimeCallback
+     * @param o {EventProvider} Object to attach the event to
+     * @param evt {string} Name of the event
+     * @param fn {Function} function to execute once
+     * @private
+     */
+    _oneTimeCallback : function (o,evt,fn) {
+        o.subscribe(evt,function () {
+            // Unsubscribe myself
+            o.unsubscribe(evt,arguments.callee);
+            // Pass the event handler arguments to the one time callback
+            fn.apply({},[].slice.apply(arguments));
+        });
+    },
+
+    /**
+     * Clean up the slideEnd event subscribers array, since each one-time
+     * callback will be replaced in the event's subscribers property with
+     * null.  This will cause memory bloat and loss of performance.
+     * @method _cleanEvent
+     * @param o {EventProvider} object housing the CustomEvent
+     * @param evt {string} name of the CustomEvent
+     * @private
+     */
+    _cleanEvent : function (o,evt) {
+        if (o.__yui_events && o.events[evt]) {
+            var ce, i, len;
+            for (i = o.__yui_events.length; i >= 0; --i) {
+                if (o.__yui_events[i].type === evt) {
+                    ce = o.__yui_events[i];
+                    break;
+                }
+            }
+            if (ce) {
+                var subs    = ce.subscribers,
+                    newSubs = [],
+                    j = 0;
+                for (i = 0, len = subs.length; i < len; ++i) {
+                    if (subs[i]) {
+                        newSubs[j++] = subs[i];
+                    }
+                }
+                ce.subscribers = newSubs;
+            }
+        }
+    }
+
+};
+
+YAHOO.augment(YAHOO.widget.DualSlider, YAHOO.util.EventProvider);
+
+
+/**
+ * Factory method for creating a horizontal dual-thumb slider
+ * @for YAHOO.widget.Slider
+ * @method YAHOO.widget.Slider.getHorizDualSlider
+ * @static
+ * @param {String} bg the id of the slider's background element
+ * @param {String} minthumb the id of the min thumb
+ * @param {String} maxthumb the id of the thumb thumb
+ * @param {int} range the number of pixels the thumbs can move within
+ * @param {int} iTickSize (optional) the element should move this many pixels
+ * at a time
+ * @param {Array}  initVals (optional) [min,max] Initial thumb placement
+ * @return {DualSlider} a horizontal dual-thumb slider control
+ */
+YAHOO.widget.Slider.getHorizDualSlider = 
+    function (bg, minthumb, maxthumb, range, iTickSize, initVals) {
+        var mint, maxt;
+        var YW = YAHOO.widget, Slider = YW.Slider, Thumb = YW.SliderThumb;
+
+        mint = new Thumb(minthumb, bg, 0, range, 0, 0, iTickSize);
+        maxt = new Thumb(maxthumb, bg, 0, range, 0, 0, iTickSize);
+
+        return new YW.DualSlider(new Slider(bg, bg, mint, "horiz"), new Slider(bg, bg, maxt, "horiz"), range, initVals);
+};
+
+/**
+ * Factory method for creating a vertical dual-thumb slider.
+ * @for YAHOO.widget.Slider
+ * @method YAHOO.widget.Slider.getVertDualSlider
+ * @static
+ * @param {String} bg the id of the slider's background element
+ * @param {String} minthumb the id of the min thumb
+ * @param {String} maxthumb the id of the thumb thumb
+ * @param {int} range the number of pixels the thumbs can move within
+ * @param {int} iTickSize (optional) the element should move this many pixels
+ * at a time
+ * @param {Array}  initVals (optional) [min,max] Initial thumb placement
+ * @return {DualSlider} a vertical dual-thumb slider control
+ */
+YAHOO.widget.Slider.getVertDualSlider = 
+    function (bg, minthumb, maxthumb, range, iTickSize, initVals) {
+        var mint, maxt;
+        var YW = YAHOO.widget, Slider = YW.Slider, Thumb = YW.SliderThumb;
+
+        mint = new Thumb(minthumb, bg, 0, 0, 0, range, iTickSize);
+        maxt = new Thumb(maxthumb, bg, 0, 0, 0, range, iTickSize);
+
+        return new YW.DualSlider(new Slider(bg, bg, mint, "vert"), new Slider(bg, bg, maxt, "vert"), range, initVals);
+};
+YAHOO.register("slider", YAHOO.widget.Slider, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
+(function() {
+
+var Y = YAHOO.util;
+
 /*
 Copyright (c) 2006, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
@@ -21768,22 +22958,24 @@ http://developer.yahoo.net/yui/license.txt
  * @param {Function} method (optional, defaults to YAHOO.util.Easing.easeNone) Computes the values that are applied to the attributes per frame (generally a YAHOO.util.Easing method)
  */
 
-YAHOO.util.Anim = function(el, attributes, duration, method) {
+var Anim = function(el, attributes, duration, method) {
     if (!el) {
     }
     this.init(el, attributes, duration, method); 
 };
 
-YAHOO.util.Anim.prototype = {
+Anim.NAME = 'Anim';
+
+Anim.prototype = {
     /**
      * Provides a readable name for the Anim instance.
      * @method toString
      * @return {String}
      */
     toString: function() {
-        var el = this.getEl();
-        var id = el.id || el.tagName || el;
-        return ("Anim " + id);
+        var el = this.getEl() || {};
+        var id = el.id || el.tagName;
+        return (this.constructor.NAME + ': ' + id);
     },
     
     patterns: { // cached for performance
@@ -21817,7 +23009,7 @@ YAHOO.util.Anim.prototype = {
             val = (val > 0) ? val : 0;
         }
 
-        YAHOO.util.Dom.setStyle(this.getEl(), attr, val + unit);
+        Y.Dom.setStyle(this.getEl(), attr, val + unit);
     },                        
     
     /**
@@ -21828,7 +23020,7 @@ YAHOO.util.Anim.prototype = {
      */
     getAttribute: function(attr) {
         var el = this.getEl();
-        var val = YAHOO.util.Dom.getStyle(el, attr);
+        var val = Y.Dom.getStyle(el, attr);
 
         if (val !== 'auto' && !this.patterns.offsetUnit.test(val)) {
             return parseFloat(val);
@@ -21839,7 +23031,7 @@ YAHOO.util.Anim.prototype = {
         var box = !!( a[2] ); // width or height
         
         // use offsets for width/height and abs pos top/left
-        if ( box || (YAHOO.util.Dom.getStyle(el, 'position') == 'absolute' && pos) ) {
+        if ( box || (Y.Dom.getStyle(el, 'position') == 'absolute' && pos) ) {
             val = el['offset' + a[0].charAt(0).toUpperCase() + a[0].substr(1)];
         } else { // default to zero for other 'auto'
             val = 0;
@@ -21950,7 +23142,7 @@ YAHOO.util.Anim.prototype = {
          * @private
          * @type HTMLElement
          */
-        el = YAHOO.util.Dom.get(el);
+        el = Y.Dom.get(el);
         
         /**
          * The collection of attributes to be animated.  
@@ -21977,7 +23169,7 @@ YAHOO.util.Anim.prototype = {
          * @property method
          * @type Function
          */
-        this.method = method || YAHOO.util.Easing.easeNone;
+        this.method = method || Y.Easing.easeNone;
 
         /**
          * Whether or not the duration should be treated as seconds.
@@ -22001,14 +23193,14 @@ YAHOO.util.Anim.prototype = {
          * @property totalFrames
          * @type Int
          */
-        this.totalFrames = YAHOO.util.AnimMgr.fps;
+        this.totalFrames = Y.AnimMgr.fps;
         
         /**
          * Changes the animated element
          * @method setEl
          */
         this.setEl = function(element) {
-            el = YAHOO.util.Dom.get(element);
+            el = Y.Dom.get(element);
         };
         
         /**
@@ -22051,12 +23243,12 @@ YAHOO.util.Anim.prototype = {
             
             this.currentFrame = 0;
             
-            this.totalFrames = ( this.useSeconds ) ? Math.ceil(YAHOO.util.AnimMgr.fps * this.duration) : this.duration;
+            this.totalFrames = ( this.useSeconds ) ? Math.ceil(Y.AnimMgr.fps * this.duration) : this.duration;
     
-            if (this.duration === 0 && this.useSeconds) {
-                this.totalFrames = 1; // jump to last frame if no duration
+            if (this.duration === 0 && this.useSeconds) { // jump to last frame if zero second duration 
+                this.totalFrames = 1; 
             }
-            YAHOO.util.AnimMgr.registerElement(this);
+            Y.AnimMgr.registerElement(this);
             return true;
         };
           
@@ -22066,11 +23258,15 @@ YAHOO.util.Anim.prototype = {
          * @param {Boolean} finish (optional) If true, animation will jump to final frame.
          */ 
         this.stop = function(finish) {
+            if (!this.isAnimated()) { // nothing to stop
+                return false;
+            }
+
             if (finish) {
                  this.currentFrame = this.totalFrames;
                  this._onTween.fire();
             }
-            YAHOO.util.AnimMgr.stop(this);
+            Y.AnimMgr.stop(this);
         };
         
         var onStart = function() {            
@@ -22141,39 +23337,39 @@ YAHOO.util.Anim.prototype = {
          * Custom event that fires after onStart, useful in subclassing
          * @private
          */    
-        this._onStart = new YAHOO.util.CustomEvent('_start', this, true);
+        this._onStart = new Y.CustomEvent('_start', this, true);
 
         /**
          * Custom event that fires when animation begins
          * Listen via subscribe method (e.g. myAnim.onStart.subscribe(someFunction)
          * @event onStart
          */    
-        this.onStart = new YAHOO.util.CustomEvent('start', this);
+        this.onStart = new Y.CustomEvent('start', this);
         
         /**
          * Custom event that fires between each frame
          * Listen via subscribe method (e.g. myAnim.onTween.subscribe(someFunction)
          * @event onTween
          */
-        this.onTween = new YAHOO.util.CustomEvent('tween', this);
+        this.onTween = new Y.CustomEvent('tween', this);
         
         /**
          * Custom event that fires after onTween
          * @private
          */
-        this._onTween = new YAHOO.util.CustomEvent('_tween', this, true);
+        this._onTween = new Y.CustomEvent('_tween', this, true);
         
         /**
          * Custom event that fires when animation ends
          * Listen via subscribe method (e.g. myAnim.onComplete.subscribe(someFunction)
          * @event onComplete
          */
-        this.onComplete = new YAHOO.util.CustomEvent('complete', this);
+        this.onComplete = new Y.CustomEvent('complete', this);
         /**
          * Custom event that fires after onComplete
          * @private
          */
-        this._onComplete = new YAHOO.util.CustomEvent('_complete', this, true);
+        this._onComplete = new Y.CustomEvent('_complete', this, true);
 
         this._onStart.subscribe(onStart);
         this._onTween.subscribe(onTween);
@@ -22181,6 +23377,8 @@ YAHOO.util.Anim.prototype = {
     }
 };
 
+    Y.Anim = Anim;
+})();
 /**
  * Handles animation queueing and threading.
  * Used by Anim and subclasses.
@@ -22251,12 +23449,12 @@ YAHOO.util.AnimMgr = new function() {
      * @private
      */
     this.unRegister = function(tween, index) {
-        tween._onComplete.fire();
         index = index || getIndex(tween);
-        if (index == -1) {
+        if (!tween.isAnimated() || index == -1) {
             return false;
         }
         
+        tween._onComplete.fire();
         queue.splice(index, 1);
 
         tweenCount -= 1;
@@ -22289,9 +23487,7 @@ YAHOO.util.AnimMgr = new function() {
             clearInterval(thread);
             
             for (var i = 0, len = queue.length; i < len; ++i) {
-                if ( queue[0].isAnimated() ) {
-                    this.unRegister(queue[0], 0);  
-                }
+                this.unRegister(queue[0], 0);  
             }
 
             queue = [];
@@ -22421,23 +23617,19 @@ YAHOO.util.Bezier = new function() {
  * @param {Number} duration (optional, defaults to 1 second) Length of animation (frames or seconds), defaults to time-based
  * @param {Function} method (optional, defaults to YAHOO.util.Easing.easeNone) Computes the values that are applied to the attributes per frame (generally a YAHOO.util.Easing method)
  */
-    YAHOO.util.ColorAnim = function(el, attributes, duration,  method) {
-        YAHOO.util.ColorAnim.superclass.constructor.call(this, el, attributes, duration, method);
+    var ColorAnim = function(el, attributes, duration,  method) {
+        ColorAnim.superclass.constructor.call(this, el, attributes, duration, method);
     };
     
-    YAHOO.extend(YAHOO.util.ColorAnim, YAHOO.util.Anim);
-    
+    ColorAnim.NAME = 'ColorAnim';
+
     // shorthand
     var Y = YAHOO.util;
-    var superclass = Y.ColorAnim.superclass;
-    var proto = Y.ColorAnim.prototype;
-    
-    proto.toString = function() {
-        var el = this.getEl();
-        var id = el.id || el.tagName;
-        return ("ColorAnim " + id);
-    };
+    YAHOO.extend(ColorAnim, Y.Anim);
 
+    var superclass = ColorAnim.superclass;
+    var proto = ColorAnim.prototype;
+    
     proto.patterns.color = /color$/i;
     proto.patterns.rgb            = /^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)$/i;
     proto.patterns.hex            = /^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;
@@ -22533,8 +23725,10 @@ YAHOO.util.Bezier = new function() {
             this.runtimeAttributes[attr].end = end;
         }
     };
+
+    Y.ColorAnim = ColorAnim;
 })();
-/*
+/*!
 TERMS OF USE - EASING EQUATIONS
 Open source under the BSD License.
 Copyright 2001 Robert Penner All rights reserved.
@@ -22884,7 +24078,7 @@ YAHOO.util.Easing = {
  * @requires YAHOO.util.Event
  * @requires YAHOO.util.CustomEvent 
  * @constructor
- * @extends YAHOO.util.Anim
+ * @extends YAHOO.util.ColorAnim
  * @param {String | HTMLElement} el Reference to the element that will be animated
  * @param {Object} attributes The attribute(s) to be animated.  
  * Each attribute is an object with at minimum a "to" or "by" member defined.  
@@ -22893,25 +24087,22 @@ YAHOO.util.Easing = {
  * @param {Number} duration (optional, defaults to 1 second) Length of animation (frames or seconds), defaults to time-based
  * @param {Function} method (optional, defaults to YAHOO.util.Easing.easeNone) Computes the values that are applied to the attributes per frame (generally a YAHOO.util.Easing method)
  */
-    YAHOO.util.Motion = function(el, attributes, duration,  method) {
+    var Motion = function(el, attributes, duration,  method) {
         if (el) { // dont break existing subclasses not using YAHOO.extend
-            YAHOO.util.Motion.superclass.constructor.call(this, el, attributes, duration, method);
+            Motion.superclass.constructor.call(this, el, attributes, duration, method);
         }
     };
 
-    YAHOO.extend(YAHOO.util.Motion, YAHOO.util.ColorAnim);
-    
+
+    Motion.NAME = 'Motion';
+
     // shorthand
     var Y = YAHOO.util;
-    var superclass = Y.Motion.superclass;
-    var proto = Y.Motion.prototype;
-
-    proto.toString = function() {
-        var el = this.getEl();
-        var id = el.id || el.tagName;
-        return ("Motion " + id);
-    };
+    YAHOO.extend(Motion, Y.ColorAnim);
     
+    var superclass = Motion.superclass;
+    var proto = Motion.prototype;
+
     proto.patterns.points = /^points$/i;
     
     proto.setAttribute = function(attr, val, unit) {
@@ -23020,6 +24211,8 @@ YAHOO.util.Easing = {
     var isset = function(prop) {
         return (typeof prop !== 'undefined');
     };
+
+    Y.Motion = Motion;
 })();
 (function() {
 /**
@@ -23035,7 +24228,7 @@ YAHOO.util.Easing = {
  * @requires YAHOO.util.Dom
  * @requires YAHOO.util.Event
  * @requires YAHOO.util.CustomEvent 
- * @extends YAHOO.util.Anim
+ * @extends YAHOO.util.ColorAnim
  * @constructor
  * @param {String or HTMLElement} el Reference to the element that will be animated
  * @param {Object} attributes The attribute(s) to be animated.  
@@ -23045,24 +24238,20 @@ YAHOO.util.Easing = {
  * @param {Number} duration (optional, defaults to 1 second) Length of animation (frames or seconds), defaults to time-based
  * @param {Function} method (optional, defaults to YAHOO.util.Easing.easeNone) Computes the values that are applied to the attributes per frame (generally a YAHOO.util.Easing method)
  */
-    YAHOO.util.Scroll = function(el, attributes, duration,  method) {
+    var Scroll = function(el, attributes, duration,  method) {
         if (el) { // dont break existing subclasses not using YAHOO.extend
-            YAHOO.util.Scroll.superclass.constructor.call(this, el, attributes, duration, method);
+            Scroll.superclass.constructor.call(this, el, attributes, duration, method);
         }
     };
 
-    YAHOO.extend(YAHOO.util.Scroll, YAHOO.util.ColorAnim);
-    
+    Scroll.NAME = 'Scroll';
+
     // shorthand
     var Y = YAHOO.util;
-    var superclass = Y.Scroll.superclass;
-    var proto = Y.Scroll.prototype;
-
-    proto.toString = function() {
-        var el = this.getEl();
-        var id = el.id || el.tagName;
-        return ("Scroll " + id);
-    };
+    YAHOO.extend(Scroll, Y.ColorAnim);
+    
+    var superclass = Scroll.superclass;
+    var proto = Scroll.prototype;
 
     proto.doMethod = function(attr, start, end) {
         var val = null;
@@ -23102,14 +24291,16 @@ YAHOO.util.Easing = {
             superclass.setAttribute.call(this, attr, val, unit);
         }
     };
+
+    Y.Scroll = Scroll;
 })();
-YAHOO.register("animation", YAHOO.util.Anim, {version: "2.3.1", build: "541"});
+YAHOO.register("animation", YAHOO.util.Anim, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 (function () {
 
@@ -23125,25 +24316,19 @@ version: 2.3.1
     * @param {Object} owner The owner Object to which this Config Object belongs
     */
     YAHOO.util.Config = function (owner) {
-    
+
         if (owner) {
-    
             this.init(owner);
-    
         }
-    
-        if (!owner) { 
-        
-    
-        }
-    
+
+
     };
 
 
     var Lang = YAHOO.lang,
-        CustomEvent = YAHOO.util.CustomEvent,        
+        CustomEvent = YAHOO.util.CustomEvent,
         Config = YAHOO.util.Config;
-    
+
 
     /**
      * Constant representing the CustomEvent type for the config changed event.
@@ -23460,7 +24645,7 @@ version: 2.3.1
                         if (queueItem) {
                             queueItemKey = queueItem[0];
                             queueItemValue = queueItem[1];
-                            
+
                             if (queueItemKey == key) {
     
                                 /*
@@ -23488,37 +24673,37 @@ version: 2.3.1
                 }
         
                 if (property.supercedes) {
-        
+
                     sLen = property.supercedes.length;
-        
+
                     for (s = 0; s < sLen; s++) {
-        
+
                         supercedesCheck = property.supercedes[s];
                         qLen = this.eventQueue.length;
-        
+
                         for (q = 0; q < qLen; q++) {
                             queueItemCheck = this.eventQueue[q];
-        
+
                             if (queueItemCheck) {
                                 queueItemCheckKey = queueItemCheck[0];
                                 queueItemCheckValue = queueItemCheck[1];
-                                
+
                                 if (queueItemCheckKey == 
                                     supercedesCheck.toLowerCase() ) {
-    
+
                                     this.eventQueue.push([queueItemCheckKey, 
                                         queueItemCheckValue]);
-    
+
                                     this.eventQueue[q] = null;
                                     break;
-    
+
                                 }
                             }
                         }
                     }
                 }
 
-        
+
                 return true;
             } else {
                 return false;
@@ -23567,37 +24752,23 @@ version: 2.3.1
         applyConfig: function (userConfig, init) {
         
             var sKey,
-                oValue,
                 oConfig;
 
             if (init) {
-
                 oConfig = {};
-
                 for (sKey in userConfig) {
-                
                     if (Lang.hasOwnProperty(userConfig, sKey)) {
-
                         oConfig[sKey.toLowerCase()] = userConfig[sKey];
-
                     }
-                
                 }
-
                 this.initialConfig = oConfig;
-
             }
 
             for (sKey in userConfig) {
-            
                 if (Lang.hasOwnProperty(userConfig, sKey)) {
-            
                     this.queueProperty(sKey, userConfig[sKey]);
-                
                 }
-
             }
-
         },
         
         /**
@@ -23664,19 +24835,12 @@ version: 2.3.1
             var property = this.config[key.toLowerCase()];
     
             if (property && property.event) {
-    
                 if (!Config.alreadySubscribed(property.event, handler, obj)) {
-    
                     property.event.subscribe(handler, obj, override);
-    
                 }
-    
                 return true;
-    
             } else {
-    
                 return false;
-    
             }
     
         },
@@ -23796,28 +24960,20 @@ version: 2.3.1
             i;
 
         if (nSubscribers > 0) {
-
             i = nSubscribers - 1;
-        
             do {
-
                 subsc = evt.subscribers[i];
-
                 if (subsc && subsc.obj == obj && subsc.fn == fn) {
-        
                     return true;
-        
-                }    
-            
+                }
             }
             while (i--);
-        
         }
-    
+
         return false;
-    
+
     };
-    
+
     YAHOO.lang.augmentProto(Config, YAHOO.util.EventProvider);
 
 }());
@@ -23879,7 +25035,6 @@ version: 2.3.1
         * @type Object
         */
         EVENT_TYPES = {
-        
             "BEFORE_INIT": "beforeInit",
             "INIT": "init",
             "APPEND": "append",
@@ -23894,7 +25049,6 @@ version: 2.3.1
             "SHOW": "show",
             "BEFORE_HIDE": "beforeHide",
             "HIDE": "hide"
-        
         },
             
         /**
@@ -23905,13 +25059,13 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-
+        
             "VISIBLE": { 
                 key: "visible", 
                 value: true, 
                 validator: YAHOO.lang.isBoolean 
             },
-
+        
             "EFFECT": { 
                 key: "effect", 
                 suppressEvent: true, 
@@ -23964,7 +25118,7 @@ version: 2.3.1
     * @type String
     */
     Module.CSS_HEADER = "hd";
-    
+
     /**
     * Constant representing the module body
     * @property YAHOO.widget.Module.CSS_BODY
@@ -24348,7 +25502,7 @@ version: 2.3.1
         */
         init: function (el, userConfig) {
 
-            var elId, i, child;
+            var elId, child;
 
             this.initEvents();
             this.beforeInitEvent.fire(Module);
@@ -24423,11 +25577,30 @@ version: 2.3.1
         },
 
         /**
-        * Initialized an empty IFRAME that is placed out of the visible area 
+        * Initialize an empty IFRAME that is placed out of the visible area 
         * that can be used to detect text resize.
         * @method initResizeMonitor
         */
         initResizeMonitor: function () {
+
+            var isGeckoWin = (YAHOO.env.ua.gecko && this.platform == "windows");
+            if (isGeckoWin) {
+                // Help prevent spinning loading icon which 
+                // started with FireFox 2.0.0.8/Win
+                var self = this;
+                setTimeout(function(){self._initResizeMonitor();}, 0);
+            } else {
+                this._initResizeMonitor();
+            }
+        },
+
+        /**
+         * Create and initialize the text resize monitoring iframe.
+         * 
+         * @protected
+         * @method _initResizeMonitor
+         */
+        _initResizeMonitor : function() {
 
             var oDoc, 
                 oIFrame, 
@@ -24440,6 +25613,8 @@ version: 2.3.1
             if (!YAHOO.env.ua.opera) {
                 oIFrame = Dom.get("_yuiResizeMonitor");
 
+                var supportsCWResize = this._supportsCWResize();
+
                 if (!oIFrame) {
                     oIFrame = document.createElement("iframe");
 
@@ -24447,22 +25622,17 @@ version: 2.3.1
                         oIFrame.src = Module.RESIZE_MONITOR_SECURE_URL;
                     }
 
-                    /*
-                        Need to set "src" attribute of the iframe to 
-                        prevent the browser from reporting duplicate 
-                        cookies. (See SourceForge bug #1721755)
-                    */
-                    if (YAHOO.env.ua.gecko) {
-                        sHTML = "<html><head><script " +
-                                "type=\"text/javascript\">" + 
-                                "window.onresize=function(){window.parent." +
-                                "YAHOO.widget.Module.textResizeEvent." +
-                                "fire();};window.parent.YAHOO.widget.Module." +
-                                "textResizeEvent.fire();</script></head>" + 
-                                "<body></body></html>";
+                    if (!supportsCWResize) {
+                        // Can't monitor on contentWindow, so fire from inside iframe
+                        sHTML = ["<html><head><script ",
+                                 "type=\"text/javascript\">",
+                                 "window.onresize=function(){window.parent.",
+                                 "YAHOO.widget.Module.textResizeEvent.",
+                                 "fire();};<",
+                                 "\/script></head>",
+                                 "<body></body></html>"].join('');
 
-                        oIFrame.src = "data:text/html;charset=utf-8," + 
-                            encodeURIComponent(sHTML);
+                        oIFrame.src = "data:text/html;charset=utf-8," + encodeURIComponent(sHTML);
                     }
 
                     oIFrame.id = "_yuiResizeMonitor";
@@ -24475,11 +25645,12 @@ version: 2.3.1
                     oIFrame.style.position = "absolute";
                     oIFrame.style.visibility = "hidden";
 
-                    var fc = document.body.firstChild;
+                    var db = document.body,
+                        fc = db.firstChild;
                     if (fc) {
-                        document.body.insertBefore(oIFrame, fc);
+                        db.insertBefore(oIFrame, fc);
                     } else {
-                        document.body.appendChild(oIFrame);
+                        db.appendChild(oIFrame);
                     }
 
                     oIFrame.style.width = "10em";
@@ -24489,6 +25660,10 @@ version: 2.3.1
                     oIFrame.style.borderWidth = "0";
                     oIFrame.style.visibility = "visible";
 
+                    /*
+                       Don't open/close the document for Gecko like we used to, since it
+                       leads to duplicate cookies. (See SourceForge bug #1721755)
+                    */
                     if (YAHOO.env.ua.webkit) {
                         oDoc = oIFrame.contentWindow.document;
                         oDoc.open();
@@ -24500,13 +25675,15 @@ version: 2.3.1
                     Module.textResizeEvent.subscribe(this.onDomResize, this, true);
 
                     if (!Module.textResizeInitialized) {
-                        if (!Event.on(oIFrame.contentWindow, "resize", fireTextResize)) {
-                            /*
-                                 This will fail in IE if document.domain has 
-                                 changed, so we must change the listener to 
-                                 use the oIFrame element instead
-                            */
-                            Event.on(oIFrame, "resize", fireTextResize);
+                        if (supportsCWResize) {
+                            if (!Event.on(oIFrame.contentWindow, "resize", fireTextResize)) {
+                                /*
+                                     This will fail in IE if document.domain has 
+                                     changed, so we must change the listener to 
+                                     use the oIFrame element instead
+                                */
+                                Event.on(oIFrame, "resize", fireTextResize);
+                            }
                         }
                         Module.textResizeInitialized = true;
                     }
@@ -24516,104 +25693,144 @@ version: 2.3.1
         },
 
         /**
+         * Text resize monitor helper method.
+         * Determines if the browser supports resize events on iframe content windows.
+         * 
+         * @private
+         * @method _supportsCWResize
+         */
+        _supportsCWResize : function() {
+            /*
+                Gecko 1.8.0 (FF1.5), 1.8.1.0-5 (FF2) won't fire resize on contentWindow.
+                Gecko 1.8.1.6+ (FF2.0.0.6+) and all other browsers will fire resize on contentWindow.
+
+                We don't want to start sniffing for patch versions, so fire textResize the same
+                way on all FF, until 1.9 (3.x) is out
+             */
+            var bSupported = true;
+            if (YAHOO.env.ua.gecko && YAHOO.env.ua.gecko <= 1.8) {
+                bSupported = false;
+                /*
+                var v = navigator.userAgent.match(/rv:([^\s\)]*)/); // From YAHOO.env.ua
+                if (v && v[0]) {
+                    var sv = v[0].match(/\d\.\d\.(\d)/);
+                    if (sv && sv[1]) {
+                        if (parseInt(sv[1], 10) > 0) {
+                            bSupported = true;
+                        }
+                    }
+                }
+                */
+            }
+            return bSupported;
+        },
+
+        /**
         * Event handler fired when the resize monitor element is resized.
         * @method onDomResize
         * @param {DOMEvent} e The DOM resize event
         * @param {Object} obj The scope object passed to the handler
         */
         onDomResize: function (e, obj) {
-        
+
             var nLeft = -1 * this.resizeMonitor.offsetWidth,
                 nTop = -1 * this.resizeMonitor.offsetHeight;
         
             this.resizeMonitor.style.top = nTop + "px";
             this.resizeMonitor.style.left =  nLeft + "px";
-        
+
         },
-        
+
         /**
-        * Sets the Module's header content to the HTML specified, or appends 
+        * Sets the Module's header content to the string specified, or appends 
         * the passed element to the header. If no header is present, one will 
-        * be automatically created.
+        * be automatically created. An empty string can be passed to the method
+        * to clear the contents of the header.
+        * 
         * @method setHeader
-        * @param {String} headerContent The HTML used to set the header 
+        * @param {String} headerContent The string used to set the header.
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the header innerHTML
+        * set to their default toString implementations.
         * <em>OR</em>
         * @param {HTMLElement} headerContent The HTMLElement to append to 
-        * the header
+        * <em>OR</em>
+        * @param {DocumentFragment} headerContent The document fragment 
+        * containing elements which are to be added to the header
         */
         setHeader: function (headerContent) {
-
             var oHeader = this.header || (this.header = createHeader());
-        
-            if (typeof headerContent == "string") {
 
-                oHeader.innerHTML = headerContent;
-
-            } else {
-
+            if (headerContent.nodeName) {
                 oHeader.innerHTML = "";
                 oHeader.appendChild(headerContent);
-
+            } else {
+                oHeader.innerHTML = headerContent;
             }
-        
+
             this.changeHeaderEvent.fire(headerContent);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Appends the passed element to the header. If no header is present, 
         * one will be automatically created.
         * @method appendToHeader
-        * @param {HTMLElement} element The element to append to the header
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the header. In the case of a document fragment, the
+        * children of the fragment will be appended to the header.
         */
         appendToHeader: function (element) {
-
             var oHeader = this.header || (this.header = createHeader());
-        
+
             oHeader.appendChild(element);
 
             this.changeHeaderEvent.fire(element);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Sets the Module's body content to the HTML specified, or appends the
         * passed element to the body. If no body is present, one will be 
-        * automatically created.
+        * automatically created. An empty string can be passed to the method
+        * to clear the contents of the body.
         * @method setBody
-        * @param {String} bodyContent The HTML used to set the body <em>OR</em>
+        * @param {String} bodyContent The HTML used to set the body. 
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the body innerHTML
+        * set to their default toString implementations.
+        * <em>OR</em>
         * @param {HTMLElement} bodyContent The HTMLElement to append to the body
+        * <em>OR</em>
+        * @param {DocumentFragment} bodyContent The document fragment 
+        * containing elements which are to be added to the body
         */
         setBody: function (bodyContent) {
-
             var oBody = this.body || (this.body = createBody());
-        
-            if (typeof bodyContent == "string") {
 
-                oBody.innerHTML = bodyContent;
-
-            } else {
-
+            if (bodyContent.nodeName) {
                 oBody.innerHTML = "";
                 oBody.appendChild(bodyContent);
-
+            } else {
+                oBody.innerHTML = bodyContent;
             }
-        
+
             this.changeBodyEvent.fire(bodyContent);
             this.changeContentEvent.fire();
-
         },
-        
+
         /**
         * Appends the passed element to the body. If no body is present, one 
         * will be automatically created.
         * @method appendToBody
-        * @param {HTMLElement} element The element to append to the body
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the body. In the case of a document fragment, the
+        * children of the fragment will be appended to the body.
+        * 
         */
         appendToBody: function (element) {
-
             var oBody = this.body || (this.body = createBody());
         
             oBody.appendChild(element);
@@ -24626,50 +25843,54 @@ version: 2.3.1
         /**
         * Sets the Module's footer content to the HTML specified, or appends 
         * the passed element to the footer. If no footer is present, one will 
-        * be automatically created.
+        * be automatically created. An empty string can be passed to the method
+        * to clear the contents of the footer.
         * @method setFooter
         * @param {String} footerContent The HTML used to set the footer 
+        * As a convenience, non HTMLElement objects can also be passed into 
+        * the method, and will be treated as strings, with the footer innerHTML
+        * set to their default toString implementations.
         * <em>OR</em>
         * @param {HTMLElement} footerContent The HTMLElement to append to 
         * the footer
+        * <em>OR</em>
+        * @param {DocumentFragment} footerContent The document fragment containing 
+        * elements which are to be added to the footer
         */
         setFooter: function (footerContent) {
 
             var oFooter = this.footer || (this.footer = createFooter());
-        
-            if (typeof footerContent == "string") {
 
-                oFooter.innerHTML = footerContent;
-
-            } else {
-
+            if (footerContent.nodeName) {
                 oFooter.innerHTML = "";
                 oFooter.appendChild(footerContent);
-
+            } else {
+                oFooter.innerHTML = footerContent;
             }
-        
+
             this.changeFooterEvent.fire(footerContent);
             this.changeContentEvent.fire();
-
         },
-        
+
         /**
         * Appends the passed element to the footer. If no footer is present, 
         * one will be automatically created.
         * @method appendToFooter
-        * @param {HTMLElement} element The element to append to the footer
+        * @param {HTMLElement | DocumentFragment} element The element to 
+        * append to the footer. In the case of a document fragment, the
+        * children of the fragment will be appended to the footer
         */
         appendToFooter: function (element) {
 
             var oFooter = this.footer || (this.footer = createFooter());
-        
+
             oFooter.appendChild(element);
 
             this.changeFooterEvent.fire(element);
             this.changeContentEvent.fire();
 
         },
-        
+
         /**
         * Renders the Module by inserting the elements that are not already 
         * in the main Module into their correct places. Optionally appends 
@@ -24782,11 +26003,10 @@ version: 2.3.1
             this.footer = null;
 
             Module.textResizeEvent.unsubscribe(this.onDomResize, this);
-			if(this.cfg)
-			{
+
             this.cfg.destroy();
             this.cfg = null;
-			}
+
             this.destroyEvent.fire();
         
             for (e in this) {
@@ -24796,7 +26016,7 @@ version: 2.3.1
             }
 
         },
-        
+
         /**
         * Shows the Module element by setting the visible configuration 
         * property to true. Also fires two events: beforeShowEvent prior to 
@@ -24806,7 +26026,7 @@ version: 2.3.1
         show: function () {
             this.cfg.setProperty("visible", true);
         },
-        
+
         /**
         * Hides the Module element by setting the visible configuration 
         * property to false. Also fires two events: beforeHideEvent prior to 
@@ -24814,7 +26034,6 @@ version: 2.3.1
         * @method hide
         */
         hide: function () {
-            if(this.cfg)
             this.cfg.setProperty("visible", false);
         },
         
@@ -24864,7 +26083,7 @@ version: 2.3.1
         },
 
         /**
-         * This method is a private helper, used when constructing the DOM structure for the module 
+         * This method is a protected helper, used when constructing the DOM structure for the module 
          * to account for situations which may cause Operation Aborted errors in IE. It should not 
          * be used for general DOM construction.
          * <p>
@@ -24943,10 +26162,8 @@ version: 2.3.1
         * @type Object
         */
         EVENT_TYPES = {
-        
             "BEFORE_MOVE": "beforeMove",
             "MOVE": "move"
-        
         },
 
         /**
@@ -24957,21 +26174,21 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-        
+
             "X": { 
                 key: "x", 
                 validator: Lang.isNumber, 
                 suppressEvent: true, 
-                supercedes: ["iframe"] 
+                supercedes: ["iframe"]
             },
-        
+
             "Y": { 
                 key: "y", 
                 validator: Lang.isNumber, 
                 suppressEvent: true, 
-                supercedes: ["iframe"] 
+                supercedes: ["iframe"]
             },
-        
+
             "XY": { 
                 key: "xy", 
                 suppressEvent: true, 
@@ -25001,18 +26218,18 @@ version: 2.3.1
                 key: "height", 
                 suppressEvent: true, 
                 supercedes: ["context", "fixedcenter", "iframe"] 
-            }, 
+            },
 
             "ZINDEX": { 
                 key: "zindex", 
                 value: null 
-            }, 
+            },
 
             "CONSTRAIN_TO_VIEWPORT": { 
                 key: "constraintoviewport", 
                 value: false, 
                 validator: Lang.isBoolean, 
-                supercedes: ["iframe", "x", "y", "xy"] 
+                supercedes: ["iframe", "x", "y", "xy"]
             }, 
 
             "IFRAME": { 
@@ -25034,7 +26251,7 @@ version: 2.3.1
 
     /**
     * Number representing how much the iframe shim should be offset from each 
-    * side of an Overlay instance.
+    * side of an Overlay instance, in pixels.
     * @property YAHOO.widget.Overlay.IFRAME_SRC
     * @default 3
     * @static
@@ -25042,7 +26259,18 @@ version: 2.3.1
     * @type Number
     */
     Overlay.IFRAME_OFFSET = 3;
-    
+
+    /**
+    * Number representing the minimum distance an Overlay instance should be 
+    * positioned relative to the boundaries of the browser's viewport, in pixels.
+    * @property YAHOO.widget.Overlay.VIEWPORT_OFFSET
+    * @default 10
+    * @static
+    * @final
+    * @type Number
+    */
+    Overlay.VIEWPORT_OFFSET = 10;
+
     /**
     * Constant representing the top left corner of an element, used for 
     * configuring the context element alignment
@@ -25052,7 +26280,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.TOP_LEFT = "tl";
-    
+
     /**
     * Constant representing the top right corner of an element, used for 
     * configuring the context element alignment
@@ -25062,7 +26290,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.TOP_RIGHT = "tr";
-    
+
     /**
     * Constant representing the top bottom left corner of an element, used for 
     * configuring the context element alignment
@@ -25072,7 +26300,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.BOTTOM_LEFT = "bl";
-    
+
     /**
     * Constant representing the bottom right corner of an element, used for 
     * configuring the context element alignment
@@ -25082,7 +26310,7 @@ version: 2.3.1
     * @type String
     */
     Overlay.BOTTOM_RIGHT = "br";
-    
+
     /**
     * Constant representing the default CSS class used for an Overlay
     * @property YAHOO.widget.Overlay.CSS_OVERLAY
@@ -25091,22 +26319,21 @@ version: 2.3.1
     * @type String
     */
     Overlay.CSS_OVERLAY = "yui-overlay";
-    
-    
+
     /**
     * A singleton CustomEvent used for reacting to the DOM event for 
     * window scroll
     * @event YAHOO.widget.Overlay.windowScrollEvent
     */
     Overlay.windowScrollEvent = new CustomEvent("windowScroll");
-    
+
     /**
     * A singleton CustomEvent used for reacting to the DOM event for
     * window resize
     * @event YAHOO.widget.Overlay.windowResizeEvent
     */
     Overlay.windowResizeEvent = new CustomEvent("windowResize");
-    
+
     /**
     * The DOM event handler used to fire the CustomEvent for window scroll
     * @method YAHOO.widget.Overlay.windowScrollHandler
@@ -25114,13 +26341,13 @@ version: 2.3.1
     * @param {DOMEvent} e The DOM scroll event
     */
     Overlay.windowScrollHandler = function (e) {
-    
+
         if (YAHOO.env.ua.ie) {
 
             if (! window.scrollEnd) {
                 window.scrollEnd = -1;
             }
-    
+
             clearTimeout(window.scrollEnd);
     
             window.scrollEnd = setTimeout(function () { 
@@ -25154,7 +26381,7 @@ version: 2.3.1
             Overlay.windowResizeEvent.fire();
         }
     };
-    
+
     /**
     * A boolean that indicated whether the window resize and scroll events have 
     * already been subscribed to.
@@ -25163,7 +26390,7 @@ version: 2.3.1
     * @type Boolean
     */
     Overlay._initialized = null;
-    
+
     if (Overlay._initialized === null) {
         Event.on(window, "scroll", Overlay.windowScrollHandler);
         Event.on(window, "resize", Overlay.windowResizeHandler);
@@ -25172,7 +26399,7 @@ version: 2.3.1
     }
 
     YAHOO.extend(Overlay, Module, {
-    
+
         /**
         * The Overlay initialization method, which is executed for Overlay and  
         * all of its subclasses. This method is automatically called by the 
@@ -25193,7 +26420,7 @@ version: 2.3.1
             */
     
             Overlay.superclass.init.call(this, el/*, userConfig*/);  
-            
+
             this.beforeInitEvent.fire(Overlay);
             
             Dom.addClass(this.element, Overlay.CSS_OVERLAY);
@@ -25281,7 +26508,7 @@ version: 2.3.1
                 supercedes: DEFAULT_CONFIG.X.supercedes
     
             });
-    
+
             /**
             * The absolute y-coordinate position of the Overlay
             * @config y
@@ -25289,12 +26516,12 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.Y.key, {
-    
+
                 handler: this.configY, 
                 validator: DEFAULT_CONFIG.Y.validator, 
                 suppressEvent: DEFAULT_CONFIG.Y.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.Y.supercedes
-    
+
             });
     
             /**
@@ -25328,7 +26555,7 @@ version: 2.3.1
                 supercedes: DEFAULT_CONFIG.CONTEXT.supercedes
             
             });
-    
+
             /**
             * True if the Overlay should be anchored to the center of 
             * the viewport.
@@ -25352,13 +26579,13 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.WIDTH.key, {
-            
+
                 handler: this.configWidth, 
                 suppressEvent: DEFAULT_CONFIG.WIDTH.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.WIDTH.supercedes
-            
+
             });
-            
+
             /**
             * CSS height of the Overlay.
             * @config height
@@ -25366,7 +26593,7 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.HEIGHT.key, {
-            
+
                 handler: this.configHeight, 
                 suppressEvent: DEFAULT_CONFIG.HEIGHT.suppressEvent, 
                 supercedes: DEFAULT_CONFIG.HEIGHT.supercedes
@@ -25380,12 +26607,12 @@ version: 2.3.1
             * @default null
             */
             this.cfg.addProperty(DEFAULT_CONFIG.ZINDEX.key, {
-    
+
                 handler: this.configzIndex,
                 value: DEFAULT_CONFIG.ZINDEX.value
-    
+
             });
-            
+
             /**
             * True if the Overlay should be prevented from being positioned 
             * out of the viewport.
@@ -25394,14 +26621,14 @@ version: 2.3.1
             * @default false
             */
             this.cfg.addProperty(DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.key, {
-            
+
                 handler: this.configConstrainToViewport, 
                 value: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.value, 
                 validator: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.validator, 
                 supercedes: DEFAULT_CONFIG.CONSTRAIN_TO_VIEWPORT.supercedes
-            
+
             });
-            
+
             /**
             * @config iframe
             * @description Boolean indicating whether or not the Overlay should 
@@ -25413,7 +26640,7 @@ version: 2.3.1
             * @default true for IE6 and below, false for all other browsers.
             */
             this.cfg.addProperty(DEFAULT_CONFIG.IFRAME.key, {
-            
+
                 handler: this.configIframe, 
                 value: DEFAULT_CONFIG.IFRAME.value, 
                 validator: DEFAULT_CONFIG.IFRAME.validator, 
@@ -25430,9 +26657,7 @@ version: 2.3.1
         * @param {Number} y The Overlay's new y position
         */
         moveTo: function (x, y) {
-    
             this.cfg.setProperty("xy", [x, y]);
-    
         },
 
         /**
@@ -25484,64 +26709,64 @@ version: 2.3.1
                 eff, ei, e, i, j, k, h,
                 nEffects,
                 nEffectInstances;
-    
+
             if (currentVis == "inherit") {
                 e = this.element.parentNode;
-    
+
                 while (e.nodeType != 9 && e.nodeType != 11) {
                     currentVis = Dom.getStyle(e, "visibility");
-    
+
                     if (currentVis != "inherit") { 
                         break; 
                     }
-    
+
                     e = e.parentNode;
                 }
-    
+
                 if (currentVis == "inherit") {
                     currentVis = "visible";
                 }
             }
-    
+
             if (effect) {
                 if (effect instanceof Array) {
                     nEffects = effect.length;
-    
+
                     for (i = 0; i < nEffects; i++) {
                         eff = effect[i];
                         effectInstances[effectInstances.length] = 
                             eff.effect(this, eff.duration);
-    
+
                     }
                 } else {
                     effectInstances[effectInstances.length] = 
                         effect.effect(this, effect.duration);
                 }
             }
-    
-        
+
+
             if (visible) { // Show
                 if (isMacGecko) {
                     this.showMacGeckoScrollbars();
                 }
-    
+
                 if (effect) { // Animate in
                     if (visible) { // Animate in if not showing
                         if (currentVis != "visible" || currentVis === "") {
                             this.beforeShowEvent.fire();
                             nEffectInstances = effectInstances.length;
-    
+
                             for (j = 0; j < nEffectInstances; j++) {
                                 ei = effectInstances[j];
                                 if (j === 0 && !alreadySubscribed(
                                         ei.animateInCompleteEvent, 
                                         this.showEvent.fire, this.showEvent)) {
-    
+
                                     /*
                                          Delegate showEvent until end 
                                          of animateInComplete
                                     */
-    
+
                                     ei.animateInCompleteEvent.subscribe(
                                      this.showEvent.fire, this.showEvent, true);
                                 }
@@ -25552,15 +26777,15 @@ version: 2.3.1
                 } else { // Show
                     if (currentVis != "visible" || currentVis === "") {
                         this.beforeShowEvent.fire();
-    
+
                         Dom.setStyle(this.element, "visibility", "visible");
-    
+
                         this.cfg.refireEvent("iframe");
                         this.showEvent.fire();
                     }
                 }
             } else { // Hide
-    
+
                 if (isMacGecko) {
                     this.hideMacGeckoScrollbars();
                 }
@@ -25588,13 +26813,13 @@ version: 2.3.1
                             }
                             h.animateOut();
                         }
-    
+
                     } else if (currentVis === "") {
                         Dom.setStyle(this.element, "visibility", "hidden");
                     }
-    
+
                 } else { // Simple hide
-    
+
                     if (currentVis == "visible" || currentVis === "") {
                         this.beforeHideEvent.fire();
                         Dom.setStyle(this.element, "visibility", "hidden");
@@ -25626,30 +26851,30 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configFixedCenter: function (type, args, obj) {
-    
+
             var val = args[0],
                 alreadySubscribed = Config.alreadySubscribed,
                 windowResizeEvent = Overlay.windowResizeEvent,
                 windowScrollEvent = Overlay.windowScrollEvent;
-            
+
             if (val) {
                 this.center();
 
                 if (!alreadySubscribed(this.beforeShowEvent, this.center, this)) {
                     this.beforeShowEvent.subscribe(this.center);
                 }
-            
+
                 if (!alreadySubscribed(windowResizeEvent, this.doCenterOnDOMEvent, this)) {
                     windowResizeEvent.subscribe(this.doCenterOnDOMEvent, this, true);
                 }
-            
+
                 if (!alreadySubscribed(windowScrollEvent, this.doCenterOnDOMEvent, this)) {
                     windowScrollEvent.subscribe(this.doCenterOnDOMEvent, this, true);
                 }
-    
+
             } else {
                 this.beforeShowEvent.unsubscribe(this.center);
-    
+
                 windowResizeEvent.unsubscribe(this.doCenterOnDOMEvent, this);
                 windowScrollEvent.unsubscribe(this.doCenterOnDOMEvent, this);
             }
@@ -25665,14 +26890,14 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configHeight: function (type, args, obj) {
-    
+
             var height = args[0],
                 el = this.element;
-    
+
             Dom.setStyle(el, "height", height);
             this.cfg.refireEvent("iframe");
         },
-        
+
         /**
         * The default event handler fired when the "width" property is changed.
         * @method configWidth
@@ -25683,7 +26908,7 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configWidth: function (type, args, obj) {
-    
+
             var width = args[0],
                 el = this.element;
     
@@ -25772,18 +26997,18 @@ version: 2.3.1
             this.cfg.setProperty("y", y, true);
 
             this.beforeMoveEvent.fire([x, y]);
-            
+
             x = this.cfg.getProperty("x");
             y = this.cfg.getProperty("y");
             
             Dom.setX(this.element, x, true);
-            
+
             this.cfg.setProperty("xy", [x, y], true);
-           
+
             this.cfg.refireEvent("iframe");
             this.moveEvent.fire([x, y]);
         },
-        
+
         /**
         * The default event handler fired when the "y" property is changed.
         * @method configY
@@ -25885,7 +27110,7 @@ version: 2.3.1
          * </p>
          * @method stackIframe
          */
-        stackIframe: function() {
+        stackIframe: function () {
             if (this.iframe) {
                 var overlayZ = Dom.getStyle(this.element, "zIndex");
                 if (!YAHOO.lang.isUndefined(overlayZ) && !isNaN(overlayZ)) {
@@ -25911,8 +27136,7 @@ version: 2.3.1
 
                 var oIFrame = this.iframe,
                     oElement = this.element,
-                    oParent,
-                    aXY;
+                    oParent;
 
                 if (!oIFrame) {
                     if (!m_oIFrameTemplate) {
@@ -26013,6 +27237,26 @@ version: 2.3.1
         },
 
         /**
+         * Set's the container's XY value from DOM if not already set.
+         * 
+         * Differs from syncPosition, in that the XY value is only sync'd with DOM if 
+         * not already set. The method also refire's the XY config property event, so any
+         * beforeMove, Move event listeners are invoked.
+         * 
+         * @method _primeXYFromDOM
+         * @protected
+         */
+        _primeXYFromDOM : function() {
+            if (YAHOO.lang.isUndefined(this.cfg.getProperty("xy"))) {
+                // Set CFG XY based on DOM XY
+                this.syncPosition();
+                // Account for XY being set silently in syncPosition (no moveTo fired/called)
+                this.cfg.refireEvent("xy");
+                this.beforeShowEvent.unsubscribe(this._primeXYFromDOM);
+            }
+        },
+
+        /**
         * The default event handler fired when the "constraintoviewport" 
         * property is changed.
         * @method configConstrainToViewport
@@ -26024,24 +27268,22 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configConstrainToViewport: function (type, args, obj) {
-    
             var val = args[0];
-    
+
             if (val) {
-                if (! Config.alreadySubscribed(this.beforeMoveEvent, 
-                    this.enforceConstraints, this)) {
-    
-                    this.beforeMoveEvent.subscribe(this.enforceConstraints, 
-                        this, true);
-    
+                if (! Config.alreadySubscribed(this.beforeMoveEvent, this.enforceConstraints, this)) {
+                    this.beforeMoveEvent.subscribe(this.enforceConstraints, this, true);
+                }
+                if (! Config.alreadySubscribed(this.beforeShowEvent, this._primeXYFromDOM)) {
+                    this.beforeShowEvent.subscribe(this._primeXYFromDOM);
                 }
             } else {
+                this.beforeShowEvent.unsubscribe(this._primeXYFromDOM);
                 this.beforeMoveEvent.unsubscribe(this.enforceConstraints, this);
             }
-    
         },
-        
-        /**
+
+         /**
         * The default event handler fired when the "context" property 
         * is changed.
         * @method configContext
@@ -26057,39 +27299,28 @@ version: 2.3.1
                 contextEl,
                 elementMagnetCorner,
                 contextMagnetCorner;
-            
+
             if (contextArgs) {
-            
                 contextEl = contextArgs[0];
                 elementMagnetCorner = contextArgs[1];
                 contextMagnetCorner = contextArgs[2];
                 
                 if (contextEl) {
-    
                     if (typeof contextEl == "string") {
-    
                         this.cfg.setProperty("context", 
                             [document.getElementById(contextEl), 
                                 elementMagnetCorner, contextMagnetCorner], 
                                 true);
-    
                     }
                     
                     if (elementMagnetCorner && contextMagnetCorner) {
-    
                         this.align(elementMagnetCorner, contextMagnetCorner);
-    
                     }
-    
                 }
-    
             }
-    
         },
-        
-        
+
         // END BUILT-IN PROPERTY EVENT HANDLERS //
-        
         /**
         * Aligns the Overlay to its context element using the specified corner 
         * points (represented by the constants TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, 
@@ -26101,14 +27332,13 @@ version: 2.3.1
         * that the elementAlign corner should stick to.
         */
         align: function (elementAlign, contextAlign) {
-    
+
             var contextArgs = this.cfg.getProperty("context"),
                 me = this,
                 context,
                 element,
                 contextRegion;
-    
-    
+
             function doAlign(v, h) {
     
                 switch (elementAlign) {
@@ -26140,47 +27370,33 @@ version: 2.3.1
                 me = this;
                 
                 if (! elementAlign) {
-    
                     elementAlign = contextArgs[1];
-    
                 }
                 
                 if (! contextAlign) {
-    
                     contextAlign = contextArgs[2];
-    
                 }
                 
                 if (element && context) {
-    
                     contextRegion = Dom.getRegion(context);
-                    
+
                     switch (contextAlign) {
     
                     case Overlay.TOP_LEFT:
-    
                         doAlign(contextRegion.top, contextRegion.left);
-    
                         break;
     
                     case Overlay.TOP_RIGHT:
-    
                         doAlign(contextRegion.top, contextRegion.right);
-    
                         break;
     
                     case Overlay.BOTTOM_LEFT:
-    
                         doAlign(contextRegion.bottom, contextRegion.left);
-    
                         break;
     
                     case Overlay.BOTTOM_RIGHT:
-    
                         doAlign(contextRegion.bottom, contextRegion.right);
-    
                         break;
-    
                     }
     
                 }
@@ -26188,7 +27404,7 @@ version: 2.3.1
             }
             
         },
-        
+
         /**
         * The default event handler executed when the moveEvent is fired, if the 
         * "constraintoviewport" is set to true.
@@ -26200,70 +27416,96 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         enforceConstraints: function (type, args, obj) {
-    
-            var pos = args[0],
-                x = pos[0],
-                y = pos[1],
-                offsetHeight = this.element.offsetHeight,
-                offsetWidth = this.element.offsetWidth,
+            var pos = args[0];
+            var cXY = this.getConstrainedXY(pos[0], pos[1]);
+            this.cfg.setProperty("x", cXY[0], true);
+            this.cfg.setProperty("y", cXY[1], true);
+            this.cfg.setProperty("xy", cXY, true);
+        },
+
+        /**
+         * Given x, y coordinate values, returns the calculated coordinates required to 
+         * position the Overlay if it is to be constrained to the viewport, based on the 
+         * current element size, viewport dimensions and scroll values.
+         *
+         * @param {Number} x The X coordinate value to be constrained
+         * @param {Number} y The Y coordinate value to be constrained
+         * @return {Array} The constrained x and y coordinates at index 0 and 1 respectively;
+         */
+        getConstrainedXY: function(x, y) {
+
+            var nViewportOffset = Overlay.VIEWPORT_OFFSET,
                 viewPortWidth = Dom.getViewportWidth(),
                 viewPortHeight = Dom.getViewportHeight(),
+                offsetHeight = this.element.offsetHeight,
+                offsetWidth = this.element.offsetWidth,
                 scrollX = Dom.getDocumentScrollLeft(),
-                scrollY = Dom.getDocumentScrollTop(),
-                topConstraint = scrollY + 10,
-                leftConstraint = scrollX + 10,
-                bottomConstraint = scrollY + viewPortHeight - offsetHeight - 10,
-                rightConstraint = scrollX + viewPortWidth - offsetWidth - 10;
-        
-    
-            if (x < leftConstraint) {
-    
-                x = leftConstraint;
-    
-            } else if (x > rightConstraint) {
-    
-                x = rightConstraint;
-    
+                scrollY = Dom.getDocumentScrollTop();
+
+            var xNew = x;
+            var yNew = y;
+
+            if (offsetWidth + nViewportOffset < viewPortWidth) {
+
+                var leftConstraint = scrollX + nViewportOffset;
+                var rightConstraint = scrollX + viewPortWidth - offsetWidth - nViewportOffset;
+
+                if (x < leftConstraint) {
+                    xNew = leftConstraint;
+                } else if (x > rightConstraint) {
+                    xNew = rightConstraint;
+                }
+            } else {
+                xNew = nViewportOffset + scrollX;
             }
-            
-            if (y < topConstraint) {
-    
-                y = topConstraint;
-    
-            } else if (y > bottomConstraint) {
-    
-                y = bottomConstraint;
-    
+
+            if (offsetHeight + nViewportOffset < viewPortHeight) {
+
+                var topConstraint = scrollY + nViewportOffset;
+                var bottomConstraint = scrollY + viewPortHeight - offsetHeight - nViewportOffset;
+
+                if (y < topConstraint) {
+                    yNew  = topConstraint;
+                } else if (y  > bottomConstraint) {
+                    yNew  = bottomConstraint;
+                }
+            } else {
+                yNew = nViewportOffset + scrollY;
             }
-            
-            this.cfg.setProperty("x", x, true);
-            this.cfg.setProperty("y", y, true);
-            this.cfg.setProperty("xy", [x, y], true);
-    
+
+            return [xNew, yNew];
         },
-        
+
         /**
         * Centers the container in the viewport.
         * @method center
         */
         center: function () {
-    
-            var scrollX = Dom.getDocumentScrollLeft(),
-                scrollY = Dom.getDocumentScrollTop(),
-    
-                viewPortWidth = Dom.getClientWidth(),
-                viewPortHeight = Dom.getClientHeight(),
+
+            var nViewportOffset = Overlay.VIEWPORT_OFFSET,
                 elementWidth = this.element.offsetWidth,
                 elementHeight = this.element.offsetHeight,
-                x = (viewPortWidth / 2) - (elementWidth / 2) + scrollX,
-                y = (viewPortHeight / 2) - (elementHeight / 2) + scrollY;
-            
+                viewPortWidth = Dom.getViewportWidth(),
+                viewPortHeight = Dom.getViewportHeight(),
+                x,
+                y;
+
+            if (elementWidth < viewPortWidth) {
+                x = (viewPortWidth / 2) - (elementWidth / 2) + Dom.getDocumentScrollLeft();
+            } else {
+                x = nViewportOffset + Dom.getDocumentScrollLeft();
+            }
+
+            if (elementHeight < viewPortHeight) {
+                y = (viewPortHeight / 2) - (elementHeight / 2) + Dom.getDocumentScrollTop();
+            } else {
+                y = nViewportOffset + Dom.getDocumentScrollTop();
+            }
+
             this.cfg.setProperty("xy", [parseInt(x, 10), parseInt(y, 10)]);
-            
             this.cfg.refireEvent("iframe");
-    
         },
-        
+
         /**
         * Synchronizes the Panel's "xy", "x", and "y" properties with the 
         * Panel's position in the DOM. This is primarily used to update  
@@ -26271,15 +27513,15 @@ version: 2.3.1
         * @method syncPosition
         */
         syncPosition: function () {
-    
+
             var pos = Dom.getXY(this.element);
-    
+
             this.cfg.setProperty("x", pos[0], true);
             this.cfg.setProperty("y", pos[1], true);
             this.cfg.setProperty("xy", pos, true);
-    
+
         },
-        
+
         /**
         * Event handler fired when the resize monitor element is resized.
         * @method onDomResize
@@ -26287,11 +27529,11 @@ version: 2.3.1
         * @param {Object} obj The scope object
         */
         onDomResize: function (e, obj) {
-    
+
             var me = this;
-    
+
             Overlay.superclass.onDomResize.call(this, e, obj);
-    
+
             setTimeout(function () {
                 me.syncPosition();
                 me.cfg.refireEvent("iframe");
@@ -26305,83 +27547,71 @@ version: 2.3.1
         * YAHOO.widget.Overlay.
         * @method bringToTop
         */
-        bringToTop: function() {
-    
+        bringToTop: function () {
+
             var aOverlays = [],
                 oElement = this.element;
-    
+
             function compareZIndexDesc(p_oOverlay1, p_oOverlay2) {
-        
+
                 var sZIndex1 = Dom.getStyle(p_oOverlay1, "zIndex"),
-        
                     sZIndex2 = Dom.getStyle(p_oOverlay2, "zIndex"),
-        
-                    nZIndex1 = (!sZIndex1 || isNaN(sZIndex1)) ? 
-                        0 : parseInt(sZIndex1, 10),
-        
-                    nZIndex2 = (!sZIndex2 || isNaN(sZIndex2)) ? 
-                        0 : parseInt(sZIndex2, 10);
-        
+
+                    nZIndex1 = (!sZIndex1 || isNaN(sZIndex1)) ? 0 : parseInt(sZIndex1, 10),
+                    nZIndex2 = (!sZIndex2 || isNaN(sZIndex2)) ? 0 : parseInt(sZIndex2, 10);
+
                 if (nZIndex1 > nZIndex2) {
-        
                     return -1;
-        
                 } else if (nZIndex1 < nZIndex2) {
-        
                     return 1;
-        
                 } else {
-        
                     return 0;
-        
                 }
-        
             }
-        
+
             function isOverlayElement(p_oElement) {
-        
+
                 var oOverlay = Dom.hasClass(p_oElement, Overlay.CSS_OVERLAY),
                     Panel = YAHOO.widget.Panel;
-            
+
                 if (oOverlay && !Dom.isAncestor(oElement, oOverlay)) {
-                
                     if (Panel && Dom.hasClass(p_oElement, Panel.CSS_PANEL)) {
-        
                         aOverlays[aOverlays.length] = p_oElement.parentNode;
-                    
-                    }
-                    else {
-        
+                    } else {
                         aOverlays[aOverlays.length] = p_oElement;
-        
                     }
-                
                 }
-            
             }
-            
+
             Dom.getElementsBy(isOverlayElement, "DIV", document.body);
-    
+
             aOverlays.sort(compareZIndexDesc);
-            
+
             var oTopOverlay = aOverlays[0],
                 nTopZIndex;
-            
+
             if (oTopOverlay) {
-    
                 nTopZIndex = Dom.getStyle(oTopOverlay, "zIndex");
-    
-                if (!isNaN(nTopZIndex) && oTopOverlay != oElement) {
-    
-                    this.cfg.setProperty("zindex", 
-                        (parseInt(nTopZIndex, 10) + 2));
-    
+
+                if (!isNaN(nTopZIndex)) {
+                    var bRequiresBump = false;
+
+                    if (oTopOverlay != oElement) {
+                        bRequiresBump = true;
+                    } else if (aOverlays.length > 1) {
+                        var nNextZIndex = Dom.getStyle(aOverlays[1], "zIndex");
+                        // Don't rely on DOM order to stack if 2 overlays are at the same zindex.
+                        if (!isNaN(nNextZIndex) && (nTopZIndex == nNextZIndex)) {
+                            bRequiresBump = true;
+                        }
+                    }
+                    if (bRequiresBump) {
+                        this.cfg.setProperty("zindex", (parseInt(nTopZIndex, 10) + 2));
+                    }
                 }
-            
             }
-        
         },
-        
+
         /**
         * Removes the Overlay element from the DOM and sets all child 
         * elements to null.
@@ -26390,11 +27620,9 @@ version: 2.3.1
         destroy: function () {
 
             if (this.iframe) {
-    
                 this.iframe.parentNode.removeChild(this.iframe);
-    
             }
-        
+
             this.iframe = null;
         
             Overlay.windowResizeEvent.unsubscribe(
@@ -26621,7 +27849,7 @@ version: 2.3.1
                     i = nOverlays - 1;
 
                     do {
-                        this.overlays[i].blur();                    
+                        this.overlays[i].blur();
                     }
                     while(i--);
                 }
@@ -26782,22 +28010,33 @@ version: 2.3.1
                 aOverlays.sort(this.compareZIndexDesc);
 
                 oTopOverlay = aOverlays[0];
-                
-                if (oTopOverlay) {
 
+                if (oTopOverlay) {
                     nTopZIndex = Dom.getStyle(oTopOverlay.element, "zIndex");
-    
-                    if (!isNaN(nTopZIndex) && oTopOverlay != oOverlay) {
-    
-                        oOverlay.cfg.setProperty("zIndex", 
-                            (parseInt(nTopZIndex, 10) + 2));
-    
+
+                    if (!isNaN(nTopZIndex)) {
+
+                        var bRequiresBump = false;
+
+                        if (oTopOverlay !== oOverlay) {
+                            bRequiresBump = true;
+                        } else if (aOverlays.length > 1) {
+                            var nNextZIndex = Dom.getStyle(aOverlays[1].element, "zIndex");
+                            // Don't rely on DOM order to stack if 2 overlays are at the same zindex.
+                            if (!isNaN(nNextZIndex) && (nTopZIndex == nNextZIndex)) {
+                                bRequiresBump = true;
+                            }
+                        }
+
+                        if (bRequiresBump) {
+                            oOverlay.cfg.setProperty("zindex", (parseInt(nTopZIndex, 10) + 2));
+                        }
                     }
                     aOverlays.sort(this.compareZIndexDesc);
                 }
             }
         },
-        
+
         /**
         * Attempts to locate an Overlay by instance or ID.
         * @method find
@@ -26807,7 +28046,7 @@ version: 2.3.1
         * cannot be located.
         */
         find: function (overlay) {
-        
+
             var aOverlays = this.overlays,
                 nOverlays = aOverlays.length,
                 i;
@@ -26880,7 +28119,7 @@ version: 2.3.1
                 while(i--);
             }
         },
-        
+
         /**
         * Hides all Overlays in the manager.
         * @method hideAll
@@ -26899,7 +28138,7 @@ version: 2.3.1
                 while(i--);
             }
         },
-        
+
         /**
         * Returns a string representation of the object.
         * @method toString
@@ -26929,19 +28168,17 @@ version: 2.3.1
     * documentation for more details.
     */
     YAHOO.widget.Tooltip = function (el, userConfig) {
-    
         YAHOO.widget.Tooltip.superclass.constructor.call(this, el, userConfig);
-    
     };
-
 
     var Lang = YAHOO.lang,
         Event = YAHOO.util.Event,
+        CustomEvent = YAHOO.util.CustomEvent,
         Dom = YAHOO.util.Dom,
         Tooltip = YAHOO.widget.Tooltip,
-    
+
         m_oShadowTemplate,
-        
+
         /**
         * Constant representing the Tooltip's configuration properties
         * @property DEFAULT_CONFIG
@@ -26950,44 +28187,61 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-        
+
             "PREVENT_OVERLAP": { 
                 key: "preventoverlap", 
                 value: true, 
                 validator: Lang.isBoolean, 
                 supercedes: ["x", "y", "xy"] 
             },
-        
+
             "SHOW_DELAY": { 
                 key: "showdelay", 
                 value: 200, 
                 validator: Lang.isNumber 
             }, 
-        
+
             "AUTO_DISMISS_DELAY": { 
                 key: "autodismissdelay", 
                 value: 5000, 
                 validator: Lang.isNumber 
             }, 
-        
+
             "HIDE_DELAY": { 
                 key: "hidedelay", 
                 value: 250, 
                 validator: Lang.isNumber 
             }, 
-        
+
             "TEXT": { 
                 key: "text", 
                 suppressEvent: true 
             }, 
-        
+
             "CONTAINER": { 
                 key: "container"
+            },
+
+            "DISABLED": {
+                key: "disabled",
+                value: false,
+                suppressEvent: true
             }
-        
+        },
+
+        /**
+        * Constant representing the name of the Tooltip's events
+        * @property EVENT_TYPES
+        * @private
+        * @final
+        * @type Object
+        */
+        EVENT_TYPES = {
+            "CONTEXT_MOUSE_OVER": "contextMouseOver",
+            "CONTEXT_MOUSE_OUT": "contextMouseOut",
+            "CONTEXT_TRIGGER": "contextTrigger"
         };
 
-    
     /**
     * Constant representing the Tooltip CSS class
     * @property YAHOO.widget.Tooltip.CSS_TOOLTIP
@@ -26997,13 +28251,11 @@ version: 2.3.1
     */
     Tooltip.CSS_TOOLTIP = "yui-tt";
 
-
     /* 
         "hide" event handler that sets a Tooltip instance's "width"
         configuration property back to its original value before 
         "setWidthToOffsetWidth" was called.
     */
-    
     function restoreOriginalWidth(p_sType, p_aArgs, p_oObject) {
 
         var sOriginalWidth = p_oObject[0],
@@ -27012,13 +28264,10 @@ version: 2.3.1
             sCurrentWidth = oConfig.getProperty("width");
 
         if (sCurrentWidth == sNewWidth) {
-            
             oConfig.setProperty("width", sOriginalWidth);
-        
         }
 
         this.unsubscribe("hide", this._onHide, p_oObject);
-    
     }
 
     /* 
@@ -27035,7 +28284,6 @@ version: 2.3.1
             sNewWidth,
             oClone;
 
-        
         if ((!sOriginalWidth || sOriginalWidth == "auto") && 
             (oConfig.getProperty("container") != oBody || 
             oConfig.getProperty("x") >= Dom.getViewportWidth() || 
@@ -27045,47 +28293,35 @@ version: 2.3.1
             oClone.style.visibility = "hidden";
             oClone.style.top = "0px";
             oClone.style.left = "0px";
-            
+
             oBody.appendChild(oClone);
 
             sNewWidth = (oClone.offsetWidth + "px");
-            
+
             oBody.removeChild(oClone);
-            
             oClone = null;
 
             oConfig.setProperty("width", sNewWidth);
-            
             oConfig.refireEvent("xy");
-            
-            this.subscribe("hide", restoreOriginalWidth, 
-                [(sOriginalWidth || ""), sNewWidth]);
-        
+
+            this.subscribe("hide", restoreOriginalWidth, [(sOriginalWidth || ""), sNewWidth]);
         }
-
     }
-
 
     // "onDOMReady" that renders the ToolTip
 
     function onDOMReady(p_sType, p_aArgs, p_oObject) {
-    
         this.render(p_oObject);
-    
     }
-
 
     //  "init" event handler that automatically renders the Tooltip
 
     function onInit() {
-
         Event.onDOMReady(onDOMReady, this.cfg.getProperty("container"), this);
-
     }
 
-    
     YAHOO.extend(Tooltip, YAHOO.widget.Overlay, { 
-    
+
         /**
         * The Tooltip initialization method. This method is automatically 
         * called by the constructor. A Tooltip is automatically rendered by 
@@ -27099,33 +28335,94 @@ version: 2.3.1
         * See configuration documentation for more details.
         */
         init: function (el, userConfig) {
-    
-    
+
+
             Tooltip.superclass.init.call(this, el);
-    
+
             this.beforeInitEvent.fire(Tooltip);
-    
+
             Dom.addClass(this.element, Tooltip.CSS_TOOLTIP);
-    
+
             if (userConfig) {
-
                 this.cfg.applyConfig(userConfig, true);
-
             }
-    
+
             this.cfg.queueProperty("visible", false);
             this.cfg.queueProperty("constraintoviewport", true);
-    
+
             this.setBody("");
 
             this.subscribe("beforeShow", setWidthToOffsetWidth);
             this.subscribe("init", onInit);
             this.subscribe("render", this.onRender);
-    
-            this.initEvent.fire(Tooltip);
 
+            this.initEvent.fire(Tooltip);
         },
-        
+
+        /**
+        * Initializes the custom events for Tooltip
+        * @method initEvents
+        */
+        initEvents: function () {
+
+            Tooltip.superclass.initEvents.call(this);
+            var SIGNATURE = CustomEvent.LIST;
+
+            /**
+            * CustomEvent fired when user mouses over a context element. Returning false from
+            * a subscriber to this event will prevent the tooltip from being displayed for
+            * the current context element.
+            * 
+            * @event contextMouseOverEvent
+            * @param {HTMLElement} context The context element which the user just moused over
+            * @param {DOMEvent} e The DOM event object, associated with the mouse over
+            */
+            this.contextMouseOverEvent = this.createEvent(EVENT_TYPES.CONTEXT_MOUSE_OVER);
+            this.contextMouseOverEvent.signature = SIGNATURE;
+
+            /**
+            * CustomEvent fired when the user mouses out of a context element.
+            * 
+            * @event contextMouseOutEvent
+            * @param {HTMLElement} context The context element which the user just moused out of
+            * @param {DOMEvent} e The DOM event object, associated with the mouse out
+            */
+            this.contextMouseOutEvent = this.createEvent(EVENT_TYPES.CONTEXT_MOUSE_OUT);
+            this.contextMouseOutEvent.signature = SIGNATURE;
+
+            /**
+            * CustomEvent fired just before the tooltip is displayed for the current context.
+            * <p>
+            *  You can subscribe to this event if you need to set up the text for the 
+            *  tooltip based on the context element for which it is about to be displayed.
+            * </p>
+            * <p>This event differs from the beforeShow event in following respects:</p>
+            * <ol>
+            *   <li>
+            *    When moving from one context element to another, if the tooltip is not
+            *    hidden (the <code>hidedelay</code> is not reached), the beforeShow and Show events will not
+            *    be fired when the tooltip is displayed for the new context since it is already visible.
+            *    However the contextTrigger event is always fired before displaying the tooltip for
+            *    a new context.
+            *   </li>
+            *   <li>
+            *    The trigger event provides access to the context element, allowing you to 
+            *    set the text of the tooltip based on context element for which the tooltip is
+            *    triggered.
+            *   </li>
+            * </ol>
+            * <p>
+            *  It is not possible to prevent the tooltip from being displayed
+            *  using this event. You can use the contextMouseOverEvent if you need to prevent
+            *  the tooltip from being displayed.
+            * </p>
+            * @event contextTriggerEvent
+            * @param {HTMLElement} context The context element for which the tooltip is triggered
+            */
+            this.contextTriggerEvent = this.createEvent(EVENT_TYPES.CONTEXT_TRIGGER);
+            this.contextTriggerEvent.signature = SIGNATURE;
+        },
+
         /**
         * Initializes the class's configurable properties which can be 
         * changed using the Overlay's Config object (cfg).
@@ -27134,7 +28431,7 @@ version: 2.3.1
         initDefaultConfig: function () {
 
             Tooltip.superclass.initDefaultConfig.call(this);
-        
+
             /**
             * Specifies whether the Tooltip should be kept from overlapping 
             * its context element.
@@ -27147,7 +28444,7 @@ version: 2.3.1
                 validator: DEFAULT_CONFIG.PREVENT_OVERLAP.validator, 
                 supercedes: DEFAULT_CONFIG.PREVENT_OVERLAP.supercedes
             });
-        
+
             /**
             * The number of milliseconds to wait before showing a Tooltip 
             * on mouseover.
@@ -27160,7 +28457,7 @@ version: 2.3.1
                 value: 200, 
                 validator: DEFAULT_CONFIG.SHOW_DELAY.validator
             });
-        
+
             /**
             * The number of milliseconds to wait before automatically 
             * dismissing a Tooltip after the mouse has been resting on the 
@@ -27174,7 +28471,7 @@ version: 2.3.1
                 value: DEFAULT_CONFIG.AUTO_DISMISS_DELAY.value,
                 validator: DEFAULT_CONFIG.AUTO_DISMISS_DELAY.validator
             });
-        
+
             /**
             * The number of milliseconds to wait before hiding a Tooltip 
             * on mouseover.
@@ -27187,9 +28484,9 @@ version: 2.3.1
                 value: DEFAULT_CONFIG.HIDE_DELAY.value, 
                 validator: DEFAULT_CONFIG.HIDE_DELAY.validator
             });
-        
+
             /**
-            * Specifies the Tooltip's text.
+            * Specifies the Tooltip's text. 
             * @config text
             * @type String
             * @default null
@@ -27210,7 +28507,23 @@ version: 2.3.1
                 handler: this.configContainer,
                 value: document.body
             });
-        
+
+            /**
+            * Specifies whether or not the tooltip is disabled. Disabled tooltips
+            * will not be displayed. If the tooltip is driven by the title attribute
+            * of the context element, the title attribute will still be removed for 
+            * disabled tooltips, to prevent default tooltip behavior.
+            * 
+            * @config disabled
+            * @type Boolean
+            * @default false
+            */
+            this.cfg.addProperty(DEFAULT_CONFIG.DISABLED.key, {
+                handler: this.configContainer,
+                value: DEFAULT_CONFIG.DISABLED.value,
+                supressEvent: DEFAULT_CONFIG.DISABLED.suppressEvent
+            });
+
             /**
             * Specifies the element or elements that the Tooltip should be 
             * anchored to on mouseover.
@@ -27269,16 +28582,11 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configContainer: function (type, args, obj) {
-
             var container = args[0];
 
             if (typeof container == 'string') {
-
-                this.cfg.setProperty("container", 
-                    document.getElementById(container), true);
-
+                this.cfg.setProperty("container", document.getElementById(container), true);
             }
-
         },
         
         /**
@@ -27293,36 +28601,20 @@ version: 2.3.1
                 nElements,
                 oElement,
                 i;
-        
-            
+
             if (aElements) {
-        
                 nElements = aElements.length;
-                
                 if (nElements > 0) {
-                
                     i = nElements - 1;
-                    
                     do {
-        
                         oElement = aElements[i];
-        
-                        Event.removeListener(oElement, "mouseover", 
-                            this.onContextMouseOver);
-
-                        Event.removeListener(oElement, "mousemove", 
-                            this.onContextMouseMove);
-
-                        Event.removeListener(oElement, "mouseout", 
-                            this.onContextMouseOut);
-                    
+                        Event.removeListener(oElement, "mouseover", this.onContextMouseOver);
+                        Event.removeListener(oElement, "mousemove", this.onContextMouseMove);
+                        Event.removeListener(oElement, "mouseout", this.onContextMouseOut);
                     }
                     while (i--);
-                
                 }
-        
             }
-        
         },
         
         /**
@@ -27342,72 +28634,47 @@ version: 2.3.1
                 nElements,
                 oElement,
                 i;
-            
-        
+
             if (context) {
-        
+
                 // Normalize parameter into an array
                 if (! (context instanceof Array)) {
-
                     if (typeof context == "string") {
-
-                        this.cfg.setProperty("context", 
-                            [document.getElementById(context)], true);
-
+                        this.cfg.setProperty("context", [document.getElementById(context)], true);
                     } else { // Assuming this is an element
-
                         this.cfg.setProperty("context", [context], true);
-
                     }
-
                     context = this.cfg.getProperty("context");
-
                 }
-        
-        
+
                 // Remove any existing mouseover/mouseout listeners
                 this._removeEventListeners();
-        
+
                 // Add mouseover/mouseout listeners to context elements
                 this._context = context;
-        
+
                 aElements = this._context;
-                
+
                 if (aElements) {
-            
                     nElements = aElements.length;
-                    
                     if (nElements > 0) {
-                    
                         i = nElements - 1;
-                        
                         do {
-            
                             oElement = aElements[i];
-            
-                            Event.on(oElement, "mouseover", 
-                                this.onContextMouseOver, this);
-
-                            Event.on(oElement, "mousemove", 
-                                this.onContextMouseMove, this);
-
-                            Event.on(oElement, "mouseout", 
-                                this.onContextMouseOut, this);
-                        
+                            Event.on(oElement, "mouseover", this.onContextMouseOver, this);
+                            Event.on(oElement, "mousemove", this.onContextMouseMove, this);
+                            Event.on(oElement, "mouseout", this.onContextMouseOut, this);
                         }
                         while (i--);
-                    
                     }
-            
                 }
-        
             }
         },
-        
+
         // END BUILT-IN PROPERTY EVENT HANDLERS //
-        
+
         // BEGIN BUILT-IN DOM EVENT HANDLERS //
-        
+
         /**
         * The default event handler fired when the user moves the mouse while 
         * over the context element.
@@ -27418,9 +28685,8 @@ version: 2.3.1
         onContextMouseMove: function (e, obj) {
             obj.pageX = Event.getPageX(e);
             obj.pageY = Event.getPageY(e);
-        
         },
-        
+
         /**
         * The default event handler fired when the user mouses over the 
         * context element.
@@ -27429,34 +28695,34 @@ version: 2.3.1
         * @param {Object} obj The object argument
         */
         onContextMouseOver: function (e, obj) {
-        
             var context = this;
-        
-            if (obj.hideProcId) {
 
-                clearTimeout(obj.hideProcId);
-
-
-                obj.hideProcId = null;
-
-            }
-        
-            Event.on(context, "mousemove", obj.onContextMouseMove, obj);
-        
             if (context.title) {
                 obj._tempTitle = context.title;
                 context.title = "";
             }
-        
-            /**
-            * The unique process ID associated with the thread responsible 
-            * for showing the Tooltip.
-            * @type int
-            */
-            obj.showProcId = obj.doShow(e, context);
 
+            // Fire first, to honor disabled set in the listner
+            if (obj.fireEvent("contextMouseOver", context, e) !== false 
+                    && !obj.cfg.getProperty("disabled")) {
+
+                // Stop the tooltip from being hidden (set on last mouseout)
+                if (obj.hideProcId) {
+                    clearTimeout(obj.hideProcId);
+                    obj.hideProcId = null;
+                }
+
+                Event.on(context, "mousemove", obj.onContextMouseMove, obj);
+
+                /**
+                * The unique process ID associated with the thread responsible 
+                * for showing the Tooltip.
+                * @type int
+                */
+                obj.showProcId = obj.doShow(e, context);
+            }
         },
-        
+
         /**
         * The default event handler fired when the user mouses out of 
         * the context element.
@@ -27466,32 +28732,31 @@ version: 2.3.1
         */
         onContextMouseOut: function (e, obj) {
             var el = this;
-        
+
             if (obj._tempTitle) {
                 el.title = obj._tempTitle;
                 obj._tempTitle = null;
             }
-        
+
             if (obj.showProcId) {
                 clearTimeout(obj.showProcId);
                 obj.showProcId = null;
             }
-        
+
             if (obj.hideProcId) {
                 clearTimeout(obj.hideProcId);
                 obj.hideProcId = null;
             }
-        
-        
+
+            obj.fireEvent("contextMouseOut", el, e);
+
             obj.hideProcId = setTimeout(function () {
                 obj.hide();
-    
             }, obj.cfg.getProperty("hidedelay"));
-    
         },
-        
+
         // END BUILT-IN DOM EVENT HANDLERS //
-        
+
         /**
         * Processes the showing of the Tooltip by setting the timeout delay 
         * and offset of the Tooltip.
@@ -27501,42 +28766,43 @@ version: 2.3.1
         * with doShow
         */
         doShow: function (e, context) {
-        
+
             var yOffset = 25,
                 me = this;
-        
+
             if (YAHOO.env.ua.opera && context.tagName && 
                 context.tagName.toUpperCase() == "A") {
-
                 yOffset += 12;
-
             }
-        
+
             return setTimeout(function () {
-        
-                if (me._tempTitle) {
+
+                var txt = me.cfg.getProperty("text");
+
+                // title does not over-ride text
+                if (me._tempTitle && (txt === "" || YAHOO.lang.isUndefined(txt) || YAHOO.lang.isNull(txt))) {
                     me.setBody(me._tempTitle);
                 } else {
                     me.cfg.refireEvent("text");
                 }
-        
+
                 me.moveTo(me.pageX, me.pageY + yOffset);
 
                 if (me.cfg.getProperty("preventoverlap")) {
                     me.preventOverlap(me.pageX, me.pageY);
                 }
-        
-                Event.removeListener(context, "mousemove", 
-                    me.onContextMouseMove);
-        
+
+                Event.removeListener(context, "mousemove", me.onContextMouseMove);
+
+                me.contextTriggerEvent.fire(context);
+
                 me.show();
+
                 me.hideProcId = me.doHide();
 
-
             }, this.cfg.getProperty("showdelay"));
-        
         },
-        
+
         /**
         * Sets the timeout for the auto-dismiss delay, which by default is 5 
         * seconds, meaning that a tooltip will automatically dismiss itself 
@@ -27544,16 +28810,16 @@ version: 2.3.1
         * @method doHide
         */
         doHide: function () {
-        
+
             var me = this;
-        
-        
+
+
             return setTimeout(function () {
-        
+
                 me.hide();
-        
+
             }, this.cfg.getProperty("autodismissdelay"));
-        
+
         },
         
         /**
@@ -27597,29 +28863,21 @@ version: 2.3.1
                     oShadow = this._shadow;
             
                 if (oShadow) {
-            
                     oShadow.style.width = (oElement.offsetWidth + 6) + "px";
                     oShadow.style.height = (oElement.offsetHeight + 1) + "px"; 
-            
                 }
             
             }
 
-
             function addShadowVisibleClass() {
-            
                 Dom.addClass(this._shadow, "yui-tt-shadow-visible");
-            
             }
             
 
             function removeShadowVisibleClass() {
-        
                 Dom.removeClass(this._shadow, "yui-tt-shadow-visible");
-            
             }
-    
-    
+
             function createShadow() {
     
                 var oShadow = this._shadow,
@@ -27634,73 +28892,49 @@ version: 2.3.1
                     Module = YAHOO.widget.Module;
                     nIE = YAHOO.env.ua.ie;
                     me = this;
-    
+
                     if (!m_oShadowTemplate) {
-        
                         m_oShadowTemplate = document.createElement("div");
                         m_oShadowTemplate.className = "yui-tt-shadow";
-                    
                     }
-        
+
                     oShadow = m_oShadowTemplate.cloneNode(false);
-        
+
                     oElement.appendChild(oShadow);
-                    
+
                     this._shadow = oShadow;
-    
+
                     addShadowVisibleClass.call(this);
-        
+
                     this.subscribe("beforeShow", addShadowVisibleClass);
                     this.subscribe("beforeHide", removeShadowVisibleClass);
 
-                    if (nIE == 6 || 
-                        (nIE == 7 && document.compatMode == "BackCompat")) {
-                
+                    if (nIE == 6 || (nIE == 7 && document.compatMode == "BackCompat")) {
                         window.setTimeout(function () { 
-        
                             sizeShadow.call(me); 
-        
                         }, 0);
     
                         this.cfg.subscribeToConfigEvent("width", sizeShadow);
                         this.cfg.subscribeToConfigEvent("height", sizeShadow);
                         this.subscribe("changeContent", sizeShadow);
-    
-                        Module.textResizeEvent.subscribe(sizeShadow, 
-                                                            this, true);
-                        
+
+                        Module.textResizeEvent.subscribe(sizeShadow, this, true);
                         this.subscribe("destroy", function () {
-                        
-                            Module.textResizeEvent.unsubscribe(sizeShadow, 
-                                                                    this);
-                        
+                            Module.textResizeEvent.unsubscribe(sizeShadow, this);
                         });
-                
                     }
-                
                 }
-    
             }
-    
-    
+
             function onBeforeShow() {
-            
                 createShadow.call(this);
-    
                 this.unsubscribe("beforeShow", onBeforeShow);
-            
             }
-    
-    
+
             if (this.cfg.getProperty("visible")) {
-    
                 createShadow.call(this);
-            
-            }
-            else {
-    
+            } else {
                 this.subscribe("beforeShow", onBeforeShow);
-            
             }
         
         },
@@ -27714,7 +28948,7 @@ version: 2.3.1
         
             // Remove any existing mouseover/mouseout listeners
             this._removeEventListeners();
-        
+
             Tooltip.superclass.destroy.call(this);  
         
         },
@@ -27772,11 +29006,9 @@ version: 2.3.1
         * @type Object
         */
         EVENT_TYPES = {
-        
             "SHOW_MASK": "showMask",
             "HIDE_MASK": "hideMask",
             "DRAG": "drag"
-        
         },
 
         /**
@@ -27787,7 +29019,7 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-        
+
             "CLOSE": { 
                 key: "close", 
                 value: true, 
@@ -27800,6 +29032,13 @@ version: 2.3.1
                 value: (DD ? true : false), 
                 validator: Lang.isBoolean, 
                 supercedes: ["visible"]  
+            },
+
+            "DRAG_ONLY" : {
+                key: "dragonly",
+                value: false,
+                validator: Lang.isBoolean,
+                supercedes: ["draggable"]
             },
 
             "UNDERLAY": { 
@@ -27815,10 +29054,10 @@ version: 2.3.1
                 supercedes: ["visible", "zindex"]
             },
 
-            "KEY_LISTENERS": { 
-                key: "keylisteners", 
-                suppressEvent: true, 
-                supercedes: ["visible"] 
+            "KEY_LISTENERS": {
+                key: "keylisteners",
+                suppressEvent: true,
+                supercedes: ["visible"]
             }
         };
 
@@ -27841,6 +29080,22 @@ version: 2.3.1
     */
     Panel.CSS_PANEL_CONTAINER = "yui-panel-container";
 
+    /**
+     * Constant representing the default set of focusable elements 
+     * on the pagewhich Modal Panels will prevent access to, when
+     * the modal mask is displayed
+     * 
+     * @property YAHOO.widget.Panel.FOCUSABLE
+     * @static
+     * @type Array
+     */
+    Panel.FOCUSABLE = [
+        "a",
+        "button",
+        "select",
+        "textarea",
+        "input"
+    ];
 
     // Private CustomEvent listeners
 
@@ -27851,7 +29106,7 @@ version: 2.3.1
     */
 
     function createHeader(p_sType, p_aArgs) {
-        if (!this.header) {
+        if (!this.header && this.cfg.getProperty("draggable")) {
             this.setHeader("&#160;");
         }
     }
@@ -27907,88 +29162,8 @@ version: 2.3.1
         }
     }
 
-    /* 
-        "focus" event handler for a focuable element.  Used to automatically 
-        blur the element when it receives focus to ensure that a Panel 
-        instance's modality is not compromised.
-    */
-
-    function onElementFocus() {
-        this.blur();
-    }
-
-    /* 
-        "showMask" event handler that adds a "focus" event handler to all
-        focusable elements in the document to enforce a Panel instance's 
-        modality from being compromised.
-    */
-
-    function addFocusEventHandlers(p_sType, p_aArgs) {
-
-        var me = this;
-
-        function isFocusable(el) {
-
-            var sTagName = el.tagName.toUpperCase(),
-                bFocusable = false;
-            
-            switch (sTagName) {
-            
-            case "A":
-            case "BUTTON":
-            case "SELECT":
-            case "TEXTAREA":
-
-                if (!Dom.isAncestor(me.element, el)) {
-                    Event.on(el, "focus", onElementFocus, el, true);
-                    bFocusable = true;
-                }
-
-                break;
-
-            case "INPUT":
-
-                if (el.type != "hidden" && 
-                    !Dom.isAncestor(me.element, el)) {
-
-                    Event.on(el, "focus", onElementFocus, el, true);
-                    bFocusable = true;
-
-                }
-
-                break;
-            
-            }
-
-            return bFocusable;
-
-        }
-
-        this.focusableElements = Dom.getElementsBy(isFocusable);
-    
-    }
-
-    /* 
-        "hideMask" event handler that removes all "focus" event handlers added 
-        by the "addFocusEventHandlers" method.
-    */
-    
-    function removeFocusEventHandlers(p_sType, p_aArgs) {
-
-        var aElements = this.focusableElements,
-            nElements = aElements.length,
-            el2,
-            i;
-
-        for (i = 0; i < nElements; i++) {
-            el2 = aElements[i];
-            Event.removeListener(el2, "focus", onElementFocus);
-        }
-
-    }
-
     YAHOO.extend(Panel, Overlay, {
-    
+
         /**
         * The Overlay initialization method, which is executed for Overlay and 
         * all of its subclasses. This method is automatically called by the 
@@ -28009,31 +29184,97 @@ version: 2.3.1
             */
 
             Panel.superclass.init.call(this, el/*, userConfig*/);  
-        
+
             this.beforeInitEvent.fire(Panel);
-        
+
             Dom.addClass(this.element, Panel.CSS_PANEL);
-        
+
             this.buildWrapper();
-        
+
             if (userConfig) {
                 this.cfg.applyConfig(userConfig, true);
             }
-        
-            this.subscribe("showMask", addFocusEventHandlers);
-            this.subscribe("hideMask", removeFocusEventHandlers);
 
-            // We also set up a beforeRender handler
-            // in configDraggable, but we need to check here, 
-            // since configDraggable won't get called until
-            // after the first render
-            if (this.cfg.getProperty("draggable")) {
-                this.subscribe("beforeRender", createHeader);
-            }
+            this.subscribe("showMask", this._addFocusHandlers);
+            this.subscribe("hideMask", this._removeFocusHandlers);
+            this.subscribe("beforeRender", createHeader);
 
             this.initEvent.fire(Panel);
         },
-        
+
+        /**
+         * @method _onElementFocus 
+         * @private
+         * 
+         * "focus" event handler for a focuable element. Used to automatically 
+         * blur the element when it receives focus to ensure that a Panel 
+         * instance's modality is not compromised.
+         * 
+         * @param {Event} e The DOM event object
+         */
+        _onElementFocus : function(e){
+            this.blur();
+        },
+
+        /** 
+         *  @method _addFocusHandlers
+         *  @protected
+         *  
+         *  "showMask" event handler that adds a "focus" event handler to all
+         *  focusable elements in the document to enforce a Panel instance's 
+         *  modality from being compromised.
+         *  
+         *  @param p_sType {String} Custom event type
+         *  @param p_aArgs {Array} Custom event arguments
+         */
+        _addFocusHandlers: function(p_sType, p_aArgs) {
+            var me = this,
+                focus = "focus",
+                hidden = "hidden";
+
+            function isFocusable(el) {
+                // NOTE: if e.type is undefined that's fine, want to avoid perf 
+                // impact of tagName check to filter for inputs
+                if (el.type !== hidden && !Dom.isAncestor(me.element, el)) {
+                    Event.on(el, focus, me._onElementFocus);
+                    return true;
+                }
+                return false;
+            }
+
+            var focusable = Panel.FOCUSABLE,
+                l = focusable.length,
+                arr = [];
+
+            for (var i = 0; i < l; i++) {
+                arr = arr.concat(Dom.getElementsBy(isFocusable, focusable[i]));
+            }
+
+            this.focusableElements = arr;
+        },
+
+        /** 
+         *  @method _removeFocusHandlers
+         *  @protected
+         *  
+         *  "hideMask" event handler that removes all "focus" event handlers added 
+         *  by the "addFocusEventHandlers" method.
+         *  
+         *  @param p_sType {String} Event type
+         *  @param p_aArgs {Array} Event Arguments
+         */
+        _removeFocusHandlers: function(p_sType, p_aArgs) {
+            var aElements = this.focusableElements,
+                nElements = aElements.length,
+                focus = "focus";
+
+            if (aElements) {
+                for (var i = 0; i < nElements; i++) {
+                    Event.removeListener(aElements[i], focus, this._onElementFocus);
+                }
+            }
+        },
+
         /**
         * Initializes the custom events for Module which are fired 
         * automatically at appropriate times by the Module class.
@@ -28117,7 +29358,34 @@ version: 2.3.1
                 validator: DEFAULT_CONFIG.DRAGGABLE.validator, 
                 supercedes: DEFAULT_CONFIG.DRAGGABLE.supercedes 
             });
-        
+
+            /**
+            * Boolean specifying if the draggable Panel should be drag only, not interacting with drop 
+            * targets on the page.
+            * <p>
+            * When set to true, draggable Panels will not check to see if they are over drop targets,
+            * or fire the DragDrop events required to support drop target interaction (onDragEnter, 
+            * onDragOver, onDragOut, onDragDrop etc.).
+            * If the Panel is not designed to be dropped on any target elements on the page, then this 
+            * flag can be set to true to improve performance.
+            * </p>
+            * <p>
+            * When set to false, all drop target related events will be fired.
+            * </p>
+            * <p>
+            * The property is set to false by default to maintain backwards compatibility but should be 
+            * set to true if drop target interaction is not required for the Panel, to improve performance.</p>
+            * 
+            * @config dragOnly
+            * @type Boolean
+            * @default false
+            */
+            this.cfg.addProperty(DEFAULT_CONFIG.DRAG_ONLY.key, { 
+                value: DEFAULT_CONFIG.DRAG_ONLY.value, 
+                validator: DEFAULT_CONFIG.DRAG_ONLY.validator, 
+                supercedes: DEFAULT_CONFIG.DRAG_ONLY.supercedes 
+            });
+
             /**
             * Sets the type of underlay to display for the Panel. Valid values 
             * are "shadow," "matte," and "none".  <strong>PLEASE NOTE:</strong> 
@@ -28238,9 +29506,6 @@ version: 2.3.1
                     this.registerDragDrop();
                 }
 
-                if (!Config.alreadySubscribed(this.beforeRenderEvent, createHeader, null)) {
-                    this.subscribe("beforeRender", createHeader);
-                }
                 this.subscribe("beforeShow", setWidthToOffsetWidth);
 
             } else {
@@ -28253,7 +29518,6 @@ version: 2.3.1
                     Dom.setStyle(this.header,"cursor","auto");
                 }
 
-                this.unsubscribe("beforeRender", createHeader);
                 this.unsubscribe("beforeShow", setWidthToOffsetWidth);
             }
         },
@@ -28269,17 +29533,29 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configUnderlay: function (type, args, obj) {
-    
+
             var UA = YAHOO.env.ua,
                 bMacGecko = (this.platform == "mac" && UA.gecko),
+                bIEQuirks = (UA.ie == 6 || (UA.ie == 7 && document.compatMode == "BackCompat")),
                 sUnderlay = args[0].toLowerCase(),
                 oUnderlay = this.underlay,
                 oElement = this.element;
+                
+            function fixWebkitUnderlay() {
+                // Webkit 419.3 (Safari 2.x) does not update
+                // it's Render Tree for the Container when content changes. 
+                // We need to force it to update using this contentChange 
+                // listener
+
+                // Webkit 523.6 doesn't have this problem and doesn't 
+                // need the fix
+                var u = this.underlay;
+                Dom.addClass(u, "yui-force-redraw");
+                window.setTimeout(function(){Dom.removeClass(u, "yui-force-redraw");}, 0);
+            }
 
             function createUnderlay() {
-
-                var nIE;
-
+                var bNew = false;
                 if (!oUnderlay) { // create if not already in DOM
 
                     if (!m_oUnderlayTemplate) {
@@ -28289,39 +29565,33 @@ version: 2.3.1
 
                     oUnderlay = m_oUnderlayTemplate.cloneNode(false);
                     this.element.appendChild(oUnderlay);
-                    
+
                     this.underlay = oUnderlay;
 
-                    nIE = UA.ie;
-
-                    if (nIE == 6 || 
-                        (nIE == 7 && document.compatMode == "BackCompat")) {
-                            
+                    if (bIEQuirks) {
                         this.sizeUnderlay();
-
-                        this.cfg.subscribeToConfigEvent("width", 
-                            this.sizeUnderlay);
-
-                        this.cfg.subscribeToConfigEvent("height", 
-                            this.sizeUnderlay);
-
+                        this.cfg.subscribeToConfigEvent("width", this.sizeUnderlay);
+                        this.cfg.subscribeToConfigEvent("height",this.sizeUnderlay);
                         this.changeContentEvent.subscribe(this.sizeUnderlay);
-
-                        YAHOO.widget.Module.textResizeEvent.subscribe(
-                            this.sizeUnderlay, this, true);
-                    
+                        YAHOO.widget.Module.textResizeEvent.subscribe(this.sizeUnderlay, this, true);
                     }
 
+                    if (UA.webkit && UA.webkit < 420) {
+                        this.changeContentEvent.subscribe(fixWebkitUnderlay);
+                    }
+                    bNew = true;
                 }
-
             }
 
             function onBeforeShow() {
-                createUnderlay.call(this);
+                var bNew = createUnderlay.call(this);
+                if (!bNew && bIEQuirks) {
+                    this.sizeUnderlay();
+                }
                 this._underlayDeferred = false;
                 this.beforeShowEvent.unsubscribe(onBeforeShow);
             }
-            
+
             function destroyUnderlay() {
                 if (this._underlayDeferred) {
                     this.beforeShowEvent.unsubscribe(onBeforeShow);
@@ -28329,72 +29599,52 @@ version: 2.3.1
                 }
 
                 if (oUnderlay) {
-
-                    this.cfg.unsubscribeFromConfigEvent("width", 
-                        this.sizeUnderlay);
-
-                    this.cfg.unsubscribeFromConfigEvent("height", 
-                        this.sizeUnderlay);
-
+                    this.cfg.unsubscribeFromConfigEvent("width", this.sizeUnderlay);
+                    this.cfg.unsubscribeFromConfigEvent("height",this.sizeUnderlay);
                     this.changeContentEvent.unsubscribe(this.sizeUnderlay);
-
-                    YAHOO.widget.Module.textResizeEvent.unsubscribe(
-                        this.sizeUnderlay, this, true);
+                    this.changeContentEvent.unsubscribe(fixWebkitUnderlay);
+                    YAHOO.widget.Module.textResizeEvent.unsubscribe(this.sizeUnderlay, this, true);
 
                     this.element.removeChild(oUnderlay);
 
                     this.underlay = null;
                 }
             }
-        
 
             switch (sUnderlay) {
-    
-            case "shadow":
-
-                Dom.removeClass(oElement, "matte");
-                Dom.addClass(oElement, "shadow");
-
-                break;
-
-            case "matte":
-
-                if (!bMacGecko) {
-                    destroyUnderlay.call(this);
-                }
-
-                Dom.removeClass(oElement, "shadow");
-                Dom.addClass(oElement, "matte");
-
-                break;
-            default:
-
-                if (!bMacGecko) {
-
-                    destroyUnderlay.call(this);
-
-                }
-            
-                Dom.removeClass(oElement, "shadow");
-                Dom.removeClass(oElement, "matte");
-
-                break;
+                case "shadow":
+                    Dom.removeClass(oElement, "matte");
+                    Dom.addClass(oElement, "shadow");
+                    break;
+                case "matte":
+                    if (!bMacGecko) {
+                        destroyUnderlay.call(this);
+                    }
+                    Dom.removeClass(oElement, "shadow");
+                    Dom.addClass(oElement, "matte");
+                    break;
+                default:
+                    if (!bMacGecko) {
+                        destroyUnderlay.call(this);
+                    }
+                    Dom.removeClass(oElement, "shadow");
+                    Dom.removeClass(oElement, "matte");
+                    break;
             }
 
-
             if ((sUnderlay == "shadow") || (bMacGecko && !oUnderlay)) {
-                
                 if (this.cfg.getProperty("visible")) {
-                    createUnderlay.call(this);
-                }
-                else {
+                    var bNew = createUnderlay.call(this);
+                    if (!bNew && bIEQuirks) {
+                        this.sizeUnderlay();
+                    }
+                } else {
                     if (!this._underlayDeferred) {
                         this.beforeShowEvent.subscribe(onBeforeShow);
                         this._underlayDeferred = true;
                     }
                 }
             }
-    
         },
         
         /**
@@ -28617,44 +29867,39 @@ version: 2.3.1
         * @method buildWrapper
         */
         buildWrapper: function () {
-    
+
             var elementParent = this.element.parentNode,
                 originalElement = this.element,
                 wrapper = document.createElement("div");
-    
+
             wrapper.className = Panel.CSS_PANEL_CONTAINER;
             wrapper.id = originalElement.id + "_c";
-        
+
             if (elementParent) {
                 elementParent.insertBefore(wrapper, originalElement);
             }
-        
+
             wrapper.appendChild(originalElement);
-        
+
             this.element = wrapper;
             this.innerElement = originalElement;
-        
+
             Dom.setStyle(this.innerElement, "visibility", "inherit");
         },
-        
+
         /**
         * Adjusts the size of the shadow based on the size of the element.
         * @method sizeUnderlay
         */
         sizeUnderlay: function () {
-
             var oUnderlay = this.underlay,
                 oElement;
 
             if (oUnderlay) {
-
                 oElement = this.element;
-
                 oUnderlay.style.width = oElement.offsetWidth + "px";
                 oUnderlay.style.height = oElement.offsetHeight + "px";
-
             }
-
         },
 
         
@@ -28663,101 +29908,95 @@ version: 2.3.1
         * @method registerDragDrop
         */
         registerDragDrop: function () {
-    
+
             var me = this;
-    
+
             if (this.header) {
-        
+
                 if (!DD) {
-        
-        
                     return;
-                
                 }
-        
-                this.dd = new DD(this.element.id, this.id);
-        
+
+                var bDragOnly = (this.cfg.getProperty("dragonly") === true);
+                this.dd = new DD(this.element.id, this.id, {dragOnly: bDragOnly});
+
                 if (!this.header.id) {
                     this.header.id = this.id + "_h";
                 }
-        
-    
+
                 this.dd.startDrag = function () {
-        
+
                     var offsetHeight,
                         offsetWidth,
                         viewPortWidth,
                         viewPortHeight,
                         scrollX,
-                        scrollY,
-                        topConstraint,
-                        leftConstraint,
-                        bottomConstraint,
-                        rightConstraint;
-    
+                        scrollY;
+
                     if (YAHOO.env.ua.ie == 6) {
                         Dom.addClass(me.element,"drag");
                     }
-        
+
                     if (me.cfg.getProperty("constraintoviewport")) {
-    
+
+                        var nViewportOffset = Overlay.VIEWPORT_OFFSET;
+
                         offsetHeight = me.element.offsetHeight;
                         offsetWidth = me.element.offsetWidth;
-                        
+
                         viewPortWidth = Dom.getViewportWidth();
                         viewPortHeight = Dom.getViewportHeight();
-                        
+
                         scrollX = Dom.getDocumentScrollLeft();
                         scrollY = Dom.getDocumentScrollTop();
-                        
-                        topConstraint = scrollY + 10;
-                        leftConstraint = scrollX + 10;
 
-                        bottomConstraint = 
-                            scrollY + viewPortHeight - offsetHeight - 10;
+                        if (offsetHeight + nViewportOffset < viewPortHeight) {
+                            this.minY = scrollY + nViewportOffset;
+                            this.maxY = scrollY + viewPortHeight - offsetHeight - nViewportOffset;
+                        } else {
+                            this.minY = scrollY + nViewportOffset;
+                            this.maxY = scrollY + nViewportOffset;
+                        }
 
-                        rightConstraint = 
-                            scrollX + viewPortWidth - offsetWidth - 10;
-        
-                        this.minX = leftConstraint;
-                        this.maxX = rightConstraint;
+                        if (offsetWidth + nViewportOffset < viewPortWidth) {
+                            this.minX = scrollX + nViewportOffset;
+                            this.maxX = scrollX + viewPortWidth - offsetWidth - nViewportOffset;
+                        } else {
+                            this.minX = scrollX + nViewportOffset;
+                            this.maxX = scrollX + nViewportOffset;
+                        }
+
                         this.constrainX = true;
-        
-                        this.minY = topConstraint;
-                        this.maxY = bottomConstraint;
                         this.constrainY = true;
-    
                     } else {
-    
                         this.constrainX = false;
                         this.constrainY = false;
-    
                     }
-        
+
                     me.dragEvent.fire("startDrag", arguments);
                 };
-        
+
                 this.dd.onDrag = function () {
                     me.syncPosition();
                     me.cfg.refireEvent("iframe");
                     if (this.platform == "mac" && YAHOO.env.ua.gecko) {
                         this.showMacGeckoScrollbars();
                     }
-        
+
                     me.dragEvent.fire("onDrag", arguments);
                 };
-        
+
                 this.dd.endDrag = function () {
 
                     if (YAHOO.env.ua.ie == 6) {
                         Dom.removeClass(me.element,"drag");
                     }
-        
+
                     me.dragEvent.fire("endDrag", arguments);
                     me.moveEvent.fire(me.cfg.getProperty("xy"));
-                    
+
                 };
-        
+
                 this.dd.setHandleElId(this.header.id);
                 this.dd.addInvalidHandleType("INPUT");
                 this.dd.addInvalidHandleType("SELECT");
@@ -28784,6 +30023,10 @@ version: 2.3.1
                 document.body.insertBefore(oMask, document.body.firstChild);
 
                 this.mask = oMask;
+
+                if (YAHOO.env.ua.gecko && this.platform == "mac") {
+                    Dom.addClass(this.mask, "block-scrollbars");
+                }
 
                 // Stack mask based on the element zindex
                 this.stackMask();
@@ -28907,12 +30150,22 @@ version: 2.3.1
 (function () {
 
     /**
+    * <p>
     * Dialog is an implementation of Panel that can be used to submit form 
-    * data. Built-in functionality for buttons with event handlers is included, 
-    * and button sets can be build dynamically, or the preincluded ones for 
-    * Submit/Cancel and OK/Cancel can be utilized. Forms can be processed in 3
-    * ways -- via an asynchronous Connection utility call, a simple form 
-    * POST or GET, or manually.
+    * data.
+    * </p>
+    * <p>
+    * Built-in functionality for buttons with event handlers is included. 
+    * If the optional YUI Button dependancy is included on the page, the buttons
+    * created will be instances of YAHOO.widget.Button, otherwise regular HTML buttons
+    * will be created.
+    * </p>
+    * <p>
+    * Forms can be processed in 3 ways -- via an asynchronous Connection utility call, 
+    * a simple form POST or GET, or manually. The YUI Connection utility should be
+    * included if you're using the default "async" postmethod, but is not required if
+    * you're using any of the other postmethod values.
+    * </p>
     * @namespace YAHOO.widget
     * @class Dialog
     * @extends YAHOO.widget.Panel
@@ -28924,11 +30177,8 @@ version: 2.3.1
     * documentation for more details.
     */
     YAHOO.widget.Dialog = function (el, userConfig) {
-    
         YAHOO.widget.Dialog.superclass.constructor.call(this, el, userConfig);
-    
     };
-
 
     var Event = YAHOO.util.Event,
         CustomEvent = YAHOO.util.CustomEvent,
@@ -28955,7 +30205,7 @@ version: 2.3.1
             "CANCEL": "cancel"
         
         },
-        
+
         /**
         * Constant representing the Dialog's configuration properties
         * @property DEFAULT_CONFIG
@@ -28964,17 +30214,22 @@ version: 2.3.1
         * @type Object
         */
         DEFAULT_CONFIG = {
-        
+
             "POST_METHOD": { 
                 key: "postmethod", 
                 value: "async" 
             },
-            
+
             "BUTTONS": { 
                 key: "buttons", 
                 value: "none" 
+            },
+
+            "HIDEAFTERSUBMIT" : {
+                key: "hideaftersubmit",
+                value: true
             }
-        };    
+        };
 
     /**
     * Constant representing the default CSS class used for a Dialog
@@ -29015,7 +30270,6 @@ version: 2.3.1
     
     YAHOO.extend(Dialog, YAHOO.widget.Panel, { 
 
-        
         /**
         * @property form
         * @description Object reference to the Dialog's 
@@ -29033,23 +30287,28 @@ version: 2.3.1
         */
         initDefaultConfig: function () {
             Dialog.superclass.initDefaultConfig.call(this);
-        
+
             /**
             * The internally maintained callback object for use with the 
-            * Connection utility
+            * Connection utility. The format of the callback object is 
+            * similar to Connection Manager's callback object and is 
+            * simply passed through to Connection Manager when the async 
+            * request is made.
             * @property callback
             * @type Object
             */
             this.callback = {
-    
+
                 /**
                 * The function to execute upon success of the 
-                * Connection submission
+                * Connection submission (when the form does not
+                * contain a file input element).
+                * 
                 * @property callback.success
                 * @type Function
                 */
                 success: null,
-    
+
                 /**
                 * The function to execute upon failure of the 
                 * Connection submission
@@ -29057,7 +30316,27 @@ version: 2.3.1
                 * @type Function
                 */
                 failure: null,
-    
+
+                /**
+                 *<p>
+                * The function to execute upon success of the 
+                * Connection submission, when the form contains
+                * a file input element.
+                * </p>
+                * <p>
+                * <em>NOTE:</em> Connection manager will not
+                * invoke the success or failure handlers for the file
+                * upload use case. This will be the only callback
+                * handler invoked.
+                * </p>
+                * <p>
+                * For more information, see the <a href="http://developer.yahoo.com/yui/connection/#file">
+                * Connection Manager documenation on file uploads</a>.
+                * </p>
+                * @property callback.upload
+                * @type Function
+                */
+
                 /**
                 * The arbitraty argument or arguments to pass to the Connection 
                 * callback functions
@@ -29065,12 +30344,10 @@ version: 2.3.1
                 * @type Object
                 */
                 argument: null
-    
+
             };
-        
 
             // Add form dialog config properties //
-            
             /**
             * The method to use for posting the Dialog's form. Possible values 
             * are "async", "form", and "manual".
@@ -29090,15 +30367,28 @@ version: 2.3.1
                     }
                 }
             });
-            
+
+            /**
+            * This property is used to configure whether or not the 
+            * dialog should be automatically hidden after submit.
+            * 
+            * @config hideaftersubmit
+            * @type Boolean
+            * @default true
+            */
+            this.cfg.addProperty(DEFAULT_CONFIG.HIDEAFTERSUBMIT.key, {
+                value: DEFAULT_CONFIG.HIDEAFTERSUBMIT.value
+            }); 
+
             /**
             * Array of object literals, each containing a set of properties 
             * defining a button to be appended into the Dialog's footer.
+            * 
             * Each button object in the buttons array can have three properties:
             * <dt>text:</dt>
-            * <dd>The text that will display on the face of the button.  <em>
-            * Please note:</em> As of version 2.3, the text can include 
-            * HTML.</dd>
+            * <dd>The text that will display on the face of the button. The text can 
+            * include HTML, as long as it is compliant with HTML Button specifications.
+            * </dd>
             * <dt>handler:</dt>
             * <dd>Can be either:
             *     <ol>
@@ -29106,18 +30396,23 @@ version: 2.3.1
             * button is clicked.  (In this case scope of this function is 
             * always its Dialog instance.)</li>
             *         <li>An object literal representing the code to be 
-            * executed when the button is clicked.  Format:<br> <code> {<br>  
+            * executed when the button is clicked.  Format:<br> <code> {<br>
             * <strong>fn:</strong> Function,   &#47;&#47; The handler to call 
-            * when  the event fires.<br> <strong>obj:</strong> Object, 
+            * when  the event fires.<br> <strong>obj:</strong> Object,
             * &#47;&#47; An  object to pass back to the handler.<br> <strong>
             * scope:</strong>  Object &#47;&#47; The object to use for the 
-            * scope of the handler. <br> } </code> <br><em>Please note: this 
-            * functionality was added in version 2.3.</em></li>
+            * scope of the handler. <br> } </code> <br></li>
             *     </ol>
             * </dd>
             * <dt>isDefault:</dt>
             * <dd>An optional boolean value that specifies that a button 
             * should be highlighted and focused by default.</dd>
+            * 
+            * <em>NOTE:</em>If the YUI Button Widget is included on the page, 
+            * the buttons created will be instances of YAHOO.widget.Button. 
+            * Otherwise, HTML Buttons (<code>&#60;BUTTON&#62;</code>) will be 
+            * created.
+            * 
             * @config buttons
             * @type {Array|String}
             * @default "none"
@@ -29126,9 +30421,9 @@ version: 2.3.1
                 handler: this.configButtons,
                 value: DEFAULT_CONFIG.BUTTONS.value
             }); 
-            
+
         },
-        
+
         /**
         * Initializes the custom events for Dialog which are fired 
         * automatically at appropriate times by the Dialog class.
@@ -29136,9 +30431,9 @@ version: 2.3.1
         */
         initEvents: function () {
             Dialog.superclass.initEvents.call(this);
-        
+
             var SIGNATURE = CustomEvent.LIST;
-        
+
             /**
             * CustomEvent fired prior to submission
             * @event beforeSubmitEvent
@@ -29248,7 +30543,6 @@ version: 2.3.1
                 i,
                 sMethod;
 
-
             switch (this.cfg.getProperty("postmethod")) {
     
             case "async":
@@ -29257,36 +30551,24 @@ version: 2.3.1
                 nElements = aElements.length;
 
                 if (nElements > 0) {
-                
                     i = nElements - 1;
-                
                     do {
-                    
                         if (aElements[i].type == "file") {
-                        
                             bUseFileUpload = true;
                             break;
-                        
                         }
-                    
                     }
                     while(i--);
-                
                 }
 
                 if (bUseFileUpload && YAHOO.env.ua.ie && this.isSecure) {
-
                     bUseSecureFileUpload = true;
-                
                 }
 
-                sMethod = 
-                    (oForm.getAttribute("method") || "POST").toUpperCase();
+                sMethod = (oForm.getAttribute("method") || "POST").toUpperCase();
 
                 Connect.setForm(oForm, bUseFileUpload, bUseSecureFileUpload);
-
-                Connect.asyncRequest(sMethod, oForm.getAttribute("action"), 
-                    this.callback);
+                Connect.asyncRequest(sMethod, oForm.getAttribute("action"), this.callback);
 
                 this.asyncSubmitEvent.fire();
 
@@ -29599,14 +30881,12 @@ version: 2.3.1
 
             this.cfg.refireEvent("iframe");
             this.cfg.refireEvent("underlay");
-
         },
-
 
         /**
         * @method getButtons
         * @description Returns an array containing each of the Dialog's 
-        * buttons, by default an array of HTML <code>&#60;BUTTON&#60;</code> 
+        * buttons, by default an array of HTML <code>&#60;BUTTON&#62;</code> 
         * elements.  If the Dialog's buttons were created using the 
         * YAHOO.widget.Button class (via the inclusion of the optional Button 
         * dependancy on the page), an array of YAHOO.widget.Button instances 
@@ -29614,17 +30894,11 @@ version: 2.3.1
         * @return {Array}
         */
         getButtons: function () {
-        
             var aButtons = this._aButtons;
-            
             if (aButtons) {
-            
                 return aButtons;
-            
             }
-        
         },
-
         
         /**
         * Sets focus to the first element in the Dialog's form or the first 
@@ -29638,41 +30912,27 @@ version: 2.3.1
                 oEvent;
 
             if (args) {
-
                 oEvent = args[1];
-
                 if (oEvent) {
-
                     Event.stopEvent(oEvent);
-
                 }
-
             }
-        
 
             if (oElement) {
-
                 /*
                     Place the call to the "focus" method inside a try/catch
                     block to prevent IE from throwing JavaScript errors if
                     the element is disabled or hidden.
                 */
-
                 try {
-
                     oElement.focus();
-
                 }
                 catch(oException) {
-
                 }
 
             } else {
-
                 this.focusDefaultButton();
-
             }
-
         },
         
         /**
@@ -29687,25 +30947,16 @@ version: 2.3.1
                 oEvent;
     
             if (args) {
-
                 oEvent = args[1];
-
                 if (oEvent) {
-
                     Event.stopEvent(oEvent);
-
                 }
-
             }
             
             if (aButtons && Lang.isArray(aButtons)) {
-
                 this.focusLastButton();
-
             } else {
-
                 if (oElement) {
-
                     /*
                         Place the call to the "focus" method inside a try/catch
                         block to prevent IE from throwing JavaScript errors if
@@ -29713,18 +30964,11 @@ version: 2.3.1
                     */
     
                     try {
-    
                         oElement.focus();
-    
+                    } catch(oException) {
                     }
-                    catch(oException) {
-    
-                    }
-
                 }
-
             }
-
         },
         
         /**
@@ -29744,14 +30988,9 @@ version: 2.3.1
                     block to prevent IE from throwing JavaScript errors if
                     the element is disabled or hidden.
                 */
-
                 try {
-
                     oElement.focus();
-                
-                }
-                catch(oException) {
-                
+                } catch(oException) {
                 }
 
             }
@@ -29779,7 +31018,6 @@ version: 2.3.1
                     i = (nButtons - 1);
                     
                     do {
-                    
                         oButton = aButtons[i];
                         
                         if (oButton) {
@@ -29787,35 +31025,22 @@ version: 2.3.1
                             oElement = oButton.htmlButton;
 
                             if (oElement) {
-
                                 /*
                                     Place the call to the "blur" method inside  
                                     a try/catch block to prevent IE from  
                                     throwing JavaScript errors if the element 
                                     is disabled or hidden.
                                 */
-    
                                 try {
-            
                                     oElement.blur();
-                                
+                                } catch(oException) {
                                 }
-                                catch(oException) {
-                                
-                                
-                                }
-                            
                             }
-
                         }
                     
-                    }
-                    while(i--);
-                
+                    } while(i--);
                 }
-            
             }
-
         },
         
         /**
@@ -29847,19 +31072,12 @@ version: 2.3.1
                         */
     
                         try {
-    
                             oElement.focus();
-                        
                         }
                         catch(oException) {
-                        
-                        
                         }
-                    
                     }
-
                 }
-
             }
         },
         
@@ -29880,15 +31098,11 @@ version: 2.3.1
                 nButtons = aButtons.length;
                 
                 if (nButtons > 0) {
-
                     oButton = aButtons[(nButtons - 1)];
                     
                     if (oButton) {
-                    
                         oElement = oButton.htmlButton;
-
                         if (oElement) {
-
                             /*
                                 Place the call to the "focus" method inside a 
                                 try/catch block to prevent IE from throwing 
@@ -29897,23 +31111,13 @@ version: 2.3.1
                             */
         
                             try {
-        
                                 oElement.focus();
-                            
+                            } catch(oException) {
                             }
-                            catch(oException) {
-                            
-                            
-                            }
-                        
                         }
-                    
                     }
-                
                 }
-            
             }
-
         },
         
         /**
@@ -29927,11 +31131,7 @@ version: 2.3.1
         * this will usually equal the owner.
         */
         configPostMethod: function (type, args, obj) {
-    
-            var postmethod = args[0];
-        
             this.registerForm();
-    
         },
         
         // END BUILT-IN PROPERTY EVENT HANDLERS //
@@ -29948,8 +31148,12 @@ version: 2.3.1
         },
         
         /**
-        * Executes a submit of the Dialog followed by a hide, if validation 
-        * is successful.
+        * Executes a submit of the Dialog if validation 
+        * is successful. By default the Dialog is hidden
+        * after submission, but you can set the "hideaftersubmit"
+        * configuration property to false, to prevent the Dialog
+        * from being hidden.
+        * 
         * @method submit
         */
         submit: function () {
@@ -29957,13 +31161,17 @@ version: 2.3.1
                 this.beforeSubmitEvent.fire();
                 this.doSubmit();
                 this.submitEvent.fire();
-                this.hide();
+
+                if (this.cfg.getProperty("hideaftersubmit")) {
+                    this.hide();
+                }
+
                 return true;
             } else {
                 return false;
             }
         },
-        
+
         /**
         * Executes the cancel of the Dialog followed by a hide.
         * @method cancel
@@ -30609,67 +31817,69 @@ version: 2.3.1
     * @return {YAHOO.widget.ContainerEffect} The configured ContainerEffect object
     */
     ContainerEffect.FADE = function (overlay, dur) {
-    
-        var fade = new ContainerEffect(overlay, 
-        
-            { attributes: { opacity: { from: 0, to: 1 } }, 
-                duration: dur, 
-                method: Easing.easeIn }, 
-            
-            { attributes: { opacity: { to: 0 } },
-                duration: dur, 
-                method: Easing.easeOut }, 
-            
-            overlay.element);
-        
-    
+
+        var fin = {
+            attributes: {opacity:{from:0, to:1}},
+            duration: dur,
+            method: Easing.easeIn
+        };
+
+        var fout = {
+            attributes: {opacity:{to:0}},
+            duration: dur,
+            method: Easing.easeOut
+        };
+
+        var fade = new ContainerEffect(overlay, fin, fout, overlay.element);
+
+        fade.handleUnderlayStart = function() {
+            var underlay = this.overlay.underlay;
+            if (underlay && YAHOO.env.ua.ie) {
+                var hasFilters = (underlay.filters && underlay.filters.length > 0);
+                if(hasFilters) {
+                    Dom.addClass(overlay.element, "yui-effect-fade");
+                }
+            }
+        };
+
+        fade.handleUnderlayComplete = function() {
+            var underlay = this.overlay.underlay;
+            if (underlay && YAHOO.env.ua.ie) {
+                Dom.removeClass(overlay.element, "yui-effect-fade");
+            }
+        };
+
         fade.handleStartAnimateIn = function (type,args,obj) {
             Dom.addClass(obj.overlay.element, "hide-select");
-        
-            if (! obj.overlay.underlay) {
+
+            if (!obj.overlay.underlay) {
                 obj.overlay.cfg.refireEvent("underlay");
             }
-        
-            if (obj.overlay.underlay) {
-    
-                obj.initialUnderlayOpacity = 
-                    Dom.getStyle(obj.overlay.underlay, "opacity");
-    
-                obj.overlay.underlay.style.filter = null;
-    
-            }
-        
+
+            obj.handleUnderlayStart();
+
             Dom.setStyle(obj.overlay.element, "visibility", "visible");
             Dom.setStyle(obj.overlay.element, "opacity", 0);
         };
-        
-    
+
         fade.handleCompleteAnimateIn = function (type,args,obj) {
             Dom.removeClass(obj.overlay.element, "hide-select");
-        
+
             if (obj.overlay.element.style.filter) {
                 obj.overlay.element.style.filter = null;
             }
-        
-            if (obj.overlay.underlay) {
-                Dom.setStyle(obj.overlay.underlay, "opacity", 
-                    obj.initialUnderlayOpacity);
-            }
-        
+
+            obj.handleUnderlayComplete();
+
             obj.overlay.cfg.refireEvent("iframe");
             obj.animateInCompleteEvent.fire();
         };
-        
-    
+
         fade.handleStartAnimateOut = function (type, args, obj) {
             Dom.addClass(obj.overlay.element, "hide-select");
-        
-            if (obj.overlay.underlay) {
-                obj.overlay.underlay.style.filter = null;
-            }
+            obj.handleUnderlayStart();
         };
-        
-    
+
         fade.handleCompleteAnimateOut =  function (type, args, obj) {
             Dom.removeClass(obj.overlay.element, "hide-select");
             if (obj.overlay.element.style.filter) {
@@ -30677,12 +31887,13 @@ version: 2.3.1
             }
             Dom.setStyle(obj.overlay.element, "visibility", "hidden");
             Dom.setStyle(obj.overlay.element, "opacity", 1);
-        
+
+            obj.handleUnderlayComplete();
+
             obj.overlay.cfg.refireEvent("iframe");
-        
             obj.animateOutCompleteEvent.fire();
         };
-        
+
         fade.init();
         return fade;
     };
@@ -30754,11 +31965,9 @@ version: 2.3.1
     
             var vw = Dom.getViewportWidth(),
                 pos = Dom.getXY(obj.overlay.element),
-                yso = pos[1],
-                currentTo = obj.animOut.attributes.points.to;
+                yso = pos[1];
     
             obj.animOut.attributes.points.to = [(vw + 25), yso];
-    
         };
         
         slide.handleTweenAnimateOut = function (type, args, obj) {
@@ -30915,13 +32124,13 @@ version: 2.3.1
 
 })();
 
-YAHOO.register("container", YAHOO.widget.Module, {version: "2.3.1", build: "541"});
+YAHOO.register("container", YAHOO.widget.Module, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
 /**
  * Provides Attribute configurations.
@@ -31702,7 +32911,7 @@ YAHOO.util.Element.prototype = {
 
         // set based on configOrder
         for (var i = 0, len = this._configOrder.length; i < len; ++i) {
-            if (map[this._configOrder[i]]) {
+            if (map[this._configOrder[i]] !== undefined) {
                 this.set(this._configOrder[i], map[this._configOrder[i]], silent);
             }
         }
@@ -31879,11 +33088,36 @@ var _registerHTMLAttr = function(key, map) {
  * @event contentReady
  */
 
+/**
+ * Fires before the Element is appended to another Element.
+ * <p>See: <a href="#addListener">Element.addListener</a></p>
+ * <p><strong>Event fields:</strong><br>
+ * <code>&lt;String&gt; type</code> beforeAppendTo<br>
+ * <code>&lt;HTMLElement/Element&gt;
+ * target</code> the HTMLElement/Element being appended to 
+ * <p><strong>Usage:</strong><br>
+ * <code>var handler = function(e) {var target = e.target};<br>
+ * myTabs.addListener('beforeAppendTo', handler);</code></p>
+ * @event beforeAppendTo
+ */
+
+/**
+ * Fires after the Element is appended to another Element.
+ * <p>See: <a href="#addListener">Element.addListener</a></p>
+ * <p><strong>Event fields:</strong><br>
+ * <code>&lt;String&gt; type</code> appendTo<br>
+ * <code>&lt;HTMLElement/Element&gt;
+ * target</code> the HTMLElement/Element being appended to 
+ * <p><strong>Usage:</strong><br>
+ * <code>var handler = function(e) {var target = e.target};<br>
+ * myTabs.addListener('appendTo', handler);</code></p>
+ * @event appendTo
+ */
 
 YAHOO.augment(YAHOO.util.Element, AttributeProvider);
 })();
 
-YAHOO.register("element", YAHOO.util.Element, {version: "2.3.1", build: "541"});
+YAHOO.register("element", YAHOO.util.Element, {version: "2.5.2", build: "1076"});
 
 /*
 Copyright (c) 2008, Yahoo! Inc. All rights reserved.
@@ -32776,27 +34010,48 @@ version: 2.5.2
 YAHOO.register("tabview", YAHOO.widget.TabView, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
-if(typeof YAHOO=="undefined"){var YAHOO={};}YAHOO.namespace=function(){var A=arguments,E=null,C,B,D;for(C=0;C<A.length;C=C+1){D=A[C].split(".");E=YAHOO;for(B=(D[0]=="YAHOO")?1:0;B<D.length;B=B+1){E[D[B]]=E[D[B]]||{};E=E[D[B]];}}return E;};YAHOO.log=function(D,A,C){var B=YAHOO.widget.Logger;if(B&&B.log){return B.log(D,A,C);}else{return false;}};YAHOO.register=function(A,E,D){var I=YAHOO.env.modules;if(!I[A]){I[A]={versions:[],builds:[]};}var B=I[A],H=D.version,G=D.build,F=YAHOO.env.listeners;B.name=A;B.version=H;B.build=G;B.versions.push(H);B.builds.push(G);B.mainClass=E;for(var C=0;C<F.length;C=C+1){F[C](B);}if(E){E.VERSION=H;E.BUILD=G;}else{YAHOO.log("mainClass is undefined for module "+A,"warn");}};YAHOO.env=YAHOO.env||{modules:[],listeners:[]};YAHOO.env.getVersion=function(A){return YAHOO.env.modules[A]||null;};YAHOO.env.ua=function(){var C={ie:0,opera:0,gecko:0,webkit:0};var B=navigator.userAgent,A;if((/KHTML/).test(B)){C.webkit=1;}A=B.match(/AppleWebKit\/([^\s]*)/);if(A&&A[1]){C.webkit=parseFloat(A[1]);}if(!C.webkit){A=B.match(/Opera[\s\/]([^\s]*)/);if(A&&A[1]){C.opera=parseFloat(A[1]);}else{A=B.match(/MSIE\s([^;]*)/);if(A&&A[1]){C.ie=parseFloat(A[1]);}else{A=B.match(/Gecko\/([^\s]*)/);if(A){C.gecko=1;A=B.match(/rv:([^\s\)]*)/);if(A&&A[1]){C.gecko=parseFloat(A[1]);}}}}}return C;}();(function(){YAHOO.namespace("util","widget","example");if("undefined"!==typeof YAHOO_config){var B=YAHOO_config.listener,A=YAHOO.env.listeners,D=true,C;if(B){for(C=0;C<A.length;C=C+1){if(A[C]==B){D=false;break;}}if(D){A.push(B);}}}})();YAHOO.lang={isArray:function(B){if(B){var A=YAHOO.lang;return A.isNumber(B.length)&&A.isFunction(B.splice)&&!A.hasOwnProperty(B.length);}return false;},isBoolean:function(A){return typeof A==="boolean";},isFunction:function(A){return typeof A==="function";},isNull:function(A){return A===null;},isNumber:function(A){return typeof A==="number"&&isFinite(A);},isObject:function(A){return(A&&(typeof A==="object"||YAHOO.lang.isFunction(A)))||false;},isString:function(A){return typeof A==="string";},isUndefined:function(A){return typeof A==="undefined";},hasOwnProperty:function(A,B){if(Object.prototype.hasOwnProperty){return A.hasOwnProperty(B);}return !YAHOO.lang.isUndefined(A[B])&&A.constructor.prototype[B]!==A[B];},_IEEnumFix:function(C,B){if(YAHOO.env.ua.ie){var E=["toString","valueOf"],A;for(A=0;A<E.length;A=A+1){var F=E[A],D=B[F];if(YAHOO.lang.isFunction(D)&&D!=Object.prototype[F]){C[F]=D;}}}},extend:function(D,E,C){if(!E||!D){throw new Error("YAHOO.lang.extend failed, please check that all dependencies are included.");}var B=function(){};B.prototype=E.prototype;D.prototype=new B();D.prototype.constructor=D;D.superclass=E.prototype;if(E.prototype.constructor==Object.prototype.constructor){E.prototype.constructor=E;}if(C){for(var A in C){D.prototype[A]=C[A];}YAHOO.lang._IEEnumFix(D.prototype,C);}},augmentObject:function(E,D){if(!D||!E){throw new Error("Absorb failed, verify dependencies.");}var A=arguments,C,F,B=A[2];if(B&&B!==true){for(C=2;C<A.length;C=C+1){E[A[C]]=D[A[C]];}}else{for(F in D){if(B||!E[F]){E[F]=D[F];}}YAHOO.lang._IEEnumFix(E,D);}},augmentProto:function(D,C){if(!C||!D){throw new Error("Augment failed, verify dependencies.");}var A=[D.prototype,C.prototype];for(var B=2;B<arguments.length;B=B+1){A.push(arguments[B]);}YAHOO.lang.augmentObject.apply(this,A);},dump:function(A,G){var C=YAHOO.lang,D,F,I=[],J="{...}",B="f(){...}",H=", ",E=" => ";if(!C.isObject(A)){return A+"";}else{if(A instanceof Date||("nodeType" in A&&"tagName" in A)){return A;}else{if(C.isFunction(A)){return B;}}}G=(C.isNumber(G))?G:3;if(C.isArray(A)){I.push("[");for(D=0,F=A.length;D<F;D=D+1){if(C.isObject(A[D])){I.push((G>0)?C.dump(A[D],G-1):J);}else{I.push(A[D]);}I.push(H);}if(I.length>1){I.pop();}I.push("]");}else{I.push("{");for(D in A){if(C.hasOwnProperty(A,D)){I.push(D+E);if(C.isObject(A[D])){I.push((G>0)?C.dump(A[D],G-1):J);}else{I.push(A[D]);}I.push(H);}}if(I.length>1){I.pop();}I.push("}");}return I.join("");},substitute:function(Q,B,J){var G,F,E,M,N,P,D=YAHOO.lang,L=[],C,H="dump",K=" ",A="{",O="}";for(;;){G=Q.lastIndexOf(A);if(G<0){break;}F=Q.indexOf(O,G);if(G+1>=F){break;}C=Q.substring(G+1,F);M=C;P=null;E=M.indexOf(K);if(E>-1){P=M.substring(E+1);M=M.substring(0,E);}N=B[M];if(J){N=J(M,N,P);}if(D.isObject(N)){if(D.isArray(N)){N=D.dump(N,parseInt(P,10));}else{P=P||"";var I=P.indexOf(H);if(I>-1){P=P.substring(4);}if(N.toString===Object.prototype.toString||I>-1){N=D.dump(N,parseInt(P,10));}else{N=N.toString();}}}else{if(!D.isString(N)&&!D.isNumber(N)){N="~-"+L.length+"-~";L[L.length]=C;}}Q=Q.substring(0,G)+N+Q.substring(F+1);}for(G=L.length-1;G>=0;G=G-1){Q=Q.replace(new RegExp("~-"+G+"-~"),"{"+L[G]+"}","g");}return Q;},trim:function(A){try{return A.replace(/^\s+|\s+$/g,"");}catch(B){return A;}},merge:function(){var C={},A=arguments,B;for(B=0;B<A.length;B=B+1){YAHOO.lang.augmentObject(C,A[B],true);}return C;},isValue:function(B){var A=YAHOO.lang;return(A.isObject(B)||A.isString(B)||A.isNumber(B)||A.isBoolean(B));}};YAHOO.util.Lang=YAHOO.lang;YAHOO.lang.augment=YAHOO.lang.augmentProto;YAHOO.augment=YAHOO.lang.augmentProto;YAHOO.extend=YAHOO.lang.extend;YAHOO.register("yahoo",YAHOO,{version:"2.3.1",build:"541"});(function(){var B=YAHOO.util,K,I,H=0,J={},F={};var C=YAHOO.env.ua.opera,L=YAHOO.env.ua.webkit,A=YAHOO.env.ua.gecko,G=YAHOO.env.ua.ie;var E={HYPHEN:/(-[a-z])/i,ROOT_TAG:/^body|html$/i};var M=function(O){if(!E.HYPHEN.test(O)){return O;}if(J[O]){return J[O];}var P=O;while(E.HYPHEN.exec(P)){P=P.replace(RegExp.$1,RegExp.$1.substr(1).toUpperCase());}J[O]=P;return P;};var N=function(P){var O=F[P];if(!O){O=new RegExp("(?:^|\\s+)"+P+"(?:\\s+|$)");F[P]=O;}return O;};if(document.defaultView&&document.defaultView.getComputedStyle){K=function(O,R){var Q=null;if(R=="float"){R="cssFloat";}var P=document.defaultView.getComputedStyle(O,"");if(P){Q=P[M(R)];}return O.style[R]||Q;};}else{if(document.documentElement.currentStyle&&G){K=function(O,Q){switch(M(Q)){case"opacity":var S=100;try{S=O.filters["DXImageTransform.Microsoft.Alpha"].opacity;}catch(R){try{S=O.filters("alpha").opacity;}catch(R){}}return S/100;case"float":Q="styleFloat";default:var P=O.currentStyle?O.currentStyle[Q]:null;return(O.style[Q]||P);}};}else{K=function(O,P){return O.style[P];};}}if(G){I=function(O,P,Q){switch(P){case"opacity":if(YAHOO.lang.isString(O.style.filter)){O.style.filter="alpha(opacity="+Q*100+")";if(!O.currentStyle||!O.currentStyle.hasLayout){O.style.zoom=1;}}break;case"float":P="styleFloat";default:O.style[P]=Q;}};}else{I=function(O,P,Q){if(P=="float"){P="cssFloat";}O.style[P]=Q;};}var D=function(O,P){return O&&O.nodeType==1&&(!P||P(O));};YAHOO.util.Dom={get:function(Q){if(Q&&(Q.tagName||Q.item)){return Q;}if(YAHOO.lang.isString(Q)||!Q){return document.getElementById(Q);}if(Q.length!==undefined){var R=[];for(var P=0,O=Q.length;P<O;++P){R[R.length]=B.Dom.get(Q[P]);}return R;}return Q;},getStyle:function(O,Q){Q=M(Q);var P=function(R){return K(R,Q);};return B.Dom.batch(O,P,B.Dom,true);},setStyle:function(O,Q,R){Q=M(Q);var P=function(S){I(S,Q,R);};B.Dom.batch(O,P,B.Dom,true);},getXY:function(O){var P=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=document.body){return false;}var Q=null;var V=[];var S;var T=R.ownerDocument;if(R.getBoundingClientRect){S=R.getBoundingClientRect();return[S.left+B.Dom.getDocumentScrollLeft(R.ownerDocument),S.top+B.Dom.getDocumentScrollTop(R.ownerDocument)];}else{V=[R.offsetLeft,R.offsetTop];Q=R.offsetParent;var U=this.getStyle(R,"position")=="absolute";if(Q!=R){while(Q){V[0]+=Q.offsetLeft;V[1]+=Q.offsetTop;if(L&&!U&&this.getStyle(Q,"position")=="absolute"){U=true;}Q=Q.offsetParent;}}if(L&&U){V[0]-=R.ownerDocument.body.offsetLeft;V[1]-=R.ownerDocument.body.offsetTop;}}Q=R.parentNode;while(Q.tagName&&!E.ROOT_TAG.test(Q.tagName)){if(B.Dom.getStyle(Q,"display").search(/^inline|table-row.*$/i)){V[0]-=Q.scrollLeft;V[1]-=Q.scrollTop;}Q=Q.parentNode;}return V;};return B.Dom.batch(O,P,B.Dom,true);},getX:function(O){var P=function(Q){return B.Dom.getXY(Q)[0];};return B.Dom.batch(O,P,B.Dom,true);},getY:function(O){var P=function(Q){return B.Dom.getXY(Q)[1];};return B.Dom.batch(O,P,B.Dom,true);},setXY:function(O,R,Q){var P=function(U){var T=this.getStyle(U,"position");if(T=="static"){this.setStyle(U,"position","relative");T="relative";}var W=this.getXY(U);if(W===false){return false;}var V=[parseInt(this.getStyle(U,"left"),10),parseInt(this.getStyle(U,"top"),10)];if(isNaN(V[0])){V[0]=(T=="relative")?0:U.offsetLeft;}if(isNaN(V[1])){V[1]=(T=="relative")?0:U.offsetTop;}if(R[0]!==null){U.style.left=R[0]-W[0]+V[0]+"px";}if(R[1]!==null){U.style.top=R[1]-W[1]+V[1]+"px";}if(!Q){var S=this.getXY(U);if((R[0]!==null&&S[0]!=R[0])||(R[1]!==null&&S[1]!=R[1])){this.setXY(U,R,true);}}};B.Dom.batch(O,P,B.Dom,true);},setX:function(P,O){B.Dom.setXY(P,[O,null]);},setY:function(O,P){B.Dom.setXY(O,[null,P]);},getRegion:function(O){var P=function(Q){if((Q.parentNode===null||Q.offsetParent===null||this.getStyle(Q,"display")=="none")&&Q!=document.body){return false;}var R=B.Region.getRegion(Q);return R;};return B.Dom.batch(O,P,B.Dom,true);},getClientWidth:function(){return B.Dom.getViewportWidth();},getClientHeight:function(){return B.Dom.getViewportHeight();},getElementsByClassName:function(S,W,T,U){W=W||"*";T=(T)?B.Dom.get(T):null||document;if(!T){return[];}var P=[],O=T.getElementsByTagName(W),V=N(S);for(var Q=0,R=O.length;Q<R;++Q){if(V.test(O[Q].className)){P[P.length]=O[Q];if(U){U.call(O[Q],O[Q]);}}}return P;},hasClass:function(Q,P){var O=N(P);var R=function(S){return O.test(S.className);};return B.Dom.batch(Q,R,B.Dom,true);},addClass:function(P,O){var Q=function(R){if(this.hasClass(R,O)){return false;}R.className=YAHOO.lang.trim([R.className,O].join(" "));return true;};return B.Dom.batch(P,Q,B.Dom,true);},removeClass:function(Q,P){var O=N(P);var R=function(S){if(!this.hasClass(S,P)){return false;}var T=S.className;S.className=T.replace(O," ");if(this.hasClass(S,P)){this.removeClass(S,P);}S.className=YAHOO.lang.trim(S.className);return true;};return B.Dom.batch(Q,R,B.Dom,true);},replaceClass:function(R,P,O){if(!O||P===O){return false;}var Q=N(P);var S=function(T){if(!this.hasClass(T,P)){this.addClass(T,O);return true;}T.className=T.className.replace(Q," "+O+" ");if(this.hasClass(T,P)){this.replaceClass(T,P,O);}T.className=YAHOO.lang.trim(T.className);return true;};return B.Dom.batch(R,S,B.Dom,true);},generateId:function(O,Q){Q=Q||"yui-gen";var P=function(R){if(R&&R.id){return R.id;}var S=Q+H++;if(R){R.id=S;}return S;};return B.Dom.batch(O,P,B.Dom,true)||P.apply(B.Dom,arguments);},isAncestor:function(P,Q){P=B.Dom.get(P);if(!P||!Q){return false;}var O=function(R){if(P.contains&&R.nodeType&&!L){return P.contains(R);}else{if(P.compareDocumentPosition&&R.nodeType){return !!(P.compareDocumentPosition(R)&16);}else{if(R.nodeType){return !!this.getAncestorBy(R,function(S){return S==P;});}}}return false;};return B.Dom.batch(Q,O,B.Dom,true);},inDocument:function(O){var P=function(Q){if(L){while(Q=Q.parentNode){if(Q==document.documentElement){return true;}}return false;}return this.isAncestor(document.documentElement,Q);};return B.Dom.batch(O,P,B.Dom,true);},getElementsBy:function(V,P,Q,S){P=P||"*";
-Q=(Q)?B.Dom.get(Q):null||document;if(!Q){return[];}var R=[],U=Q.getElementsByTagName(P);for(var T=0,O=U.length;T<O;++T){if(V(U[T])){R[R.length]=U[T];if(S){S(U[T]);}}}return R;},batch:function(S,V,U,Q){S=(S&&(S.tagName||S.item))?S:B.Dom.get(S);if(!S||!V){return false;}var R=(Q)?U:window;if(S.tagName||S.length===undefined){return V.call(R,S,U);}var T=[];for(var P=0,O=S.length;P<O;++P){T[T.length]=V.call(R,S[P],U);}return T;},getDocumentHeight:function(){var P=(document.compatMode!="CSS1Compat")?document.body.scrollHeight:document.documentElement.scrollHeight;var O=Math.max(P,B.Dom.getViewportHeight());return O;},getDocumentWidth:function(){var P=(document.compatMode!="CSS1Compat")?document.body.scrollWidth:document.documentElement.scrollWidth;var O=Math.max(P,B.Dom.getViewportWidth());return O;},getViewportHeight:function(){var O=self.innerHeight;var P=document.compatMode;if((P||G)&&!C){O=(P=="CSS1Compat")?document.documentElement.clientHeight:document.body.clientHeight;}return O;},getViewportWidth:function(){var O=self.innerWidth;var P=document.compatMode;if(P||G){O=(P=="CSS1Compat")?document.documentElement.clientWidth:document.body.clientWidth;}return O;},getAncestorBy:function(O,P){while(O=O.parentNode){if(D(O,P)){return O;}}return null;},getAncestorByClassName:function(P,O){P=B.Dom.get(P);if(!P){return null;}var Q=function(R){return B.Dom.hasClass(R,O);};return B.Dom.getAncestorBy(P,Q);},getAncestorByTagName:function(P,O){P=B.Dom.get(P);if(!P){return null;}var Q=function(R){return R.tagName&&R.tagName.toUpperCase()==O.toUpperCase();};return B.Dom.getAncestorBy(P,Q);},getPreviousSiblingBy:function(O,P){while(O){O=O.previousSibling;if(D(O,P)){return O;}}return null;},getPreviousSibling:function(O){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getPreviousSiblingBy(O);},getNextSiblingBy:function(O,P){while(O){O=O.nextSibling;if(D(O,P)){return O;}}return null;},getNextSibling:function(O){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getNextSiblingBy(O);},getFirstChildBy:function(O,Q){var P=(D(O.firstChild,Q))?O.firstChild:null;return P||B.Dom.getNextSiblingBy(O.firstChild,Q);},getFirstChild:function(O,P){O=B.Dom.get(O);if(!O){return null;}return B.Dom.getFirstChildBy(O);},getLastChildBy:function(O,Q){if(!O){return null;}var P=(D(O.lastChild,Q))?O.lastChild:null;return P||B.Dom.getPreviousSiblingBy(O.lastChild,Q);},getLastChild:function(O){O=B.Dom.get(O);return B.Dom.getLastChildBy(O);},getChildrenBy:function(P,R){var Q=B.Dom.getFirstChildBy(P,R);var O=Q?[Q]:[];B.Dom.getNextSiblingBy(Q,function(S){if(!R||R(S)){O[O.length]=S;}return false;});return O;},getChildren:function(O){O=B.Dom.get(O);if(!O){}return B.Dom.getChildrenBy(O);},getDocumentScrollLeft:function(O){O=O||document;return Math.max(O.documentElement.scrollLeft,O.body.scrollLeft);},getDocumentScrollTop:function(O){O=O||document;return Math.max(O.documentElement.scrollTop,O.body.scrollTop);},insertBefore:function(P,O){P=B.Dom.get(P);O=B.Dom.get(O);if(!P||!O||!O.parentNode){return null;}return O.parentNode.insertBefore(P,O);},insertAfter:function(P,O){P=B.Dom.get(P);O=B.Dom.get(O);if(!P||!O||!O.parentNode){return null;}if(O.nextSibling){return O.parentNode.insertBefore(P,O.nextSibling);}else{return O.parentNode.appendChild(P);}}};})();YAHOO.util.Region=function(C,D,A,B){this.top=C;this[1]=C;this.right=D;this.bottom=A;this.left=B;this[0]=B;};YAHOO.util.Region.prototype.contains=function(A){return(A.left>=this.left&&A.right<=this.right&&A.top>=this.top&&A.bottom<=this.bottom);};YAHOO.util.Region.prototype.getArea=function(){return((this.bottom-this.top)*(this.right-this.left));};YAHOO.util.Region.prototype.intersect=function(E){var C=Math.max(this.top,E.top);var D=Math.min(this.right,E.right);var A=Math.min(this.bottom,E.bottom);var B=Math.max(this.left,E.left);if(A>=C&&D>=B){return new YAHOO.util.Region(C,D,A,B);}else{return null;}};YAHOO.util.Region.prototype.union=function(E){var C=Math.min(this.top,E.top);var D=Math.max(this.right,E.right);var A=Math.max(this.bottom,E.bottom);var B=Math.min(this.left,E.left);return new YAHOO.util.Region(C,D,A,B);};YAHOO.util.Region.prototype.toString=function(){return("Region {top: "+this.top+", right: "+this.right+", bottom: "+this.bottom+", left: "+this.left+"}");};YAHOO.util.Region.getRegion=function(D){var F=YAHOO.util.Dom.getXY(D);var C=F[1];var E=F[0]+D.offsetWidth;var A=F[1]+D.offsetHeight;var B=F[0];return new YAHOO.util.Region(C,E,A,B);};YAHOO.util.Point=function(A,B){if(YAHOO.lang.isArray(A)){B=A[1];A=A[0];}this.x=this.right=this.left=this[0]=A;this.y=this.top=this.bottom=this[1]=B;};YAHOO.util.Point.prototype=new YAHOO.util.Region();YAHOO.register("dom",YAHOO.util.Dom,{version:"2.3.1",build:"541"});YAHOO.util.CustomEvent=function(D,B,C,A){this.type=D;this.scope=B||window;this.silent=C;this.signature=A||YAHOO.util.CustomEvent.LIST;this.subscribers=[];if(!this.silent){}var E="_YUICEOnSubscribe";if(D!==E){this.subscribeEvent=new YAHOO.util.CustomEvent(E,this,true);}this.lastError=null;};YAHOO.util.CustomEvent.LIST=0;YAHOO.util.CustomEvent.FLAT=1;YAHOO.util.CustomEvent.prototype={subscribe:function(B,C,A){if(!B){throw new Error("Invalid callback for subscriber to '"+this.type+"'");}if(this.subscribeEvent){this.subscribeEvent.fire(B,C,A);}this.subscribers.push(new YAHOO.util.Subscriber(B,C,A));},unsubscribe:function(D,F){if(!D){return this.unsubscribeAll();}var E=false;for(var B=0,A=this.subscribers.length;B<A;++B){var C=this.subscribers[B];if(C&&C.contains(D,F)){this._delete(B);E=true;}}return E;},fire:function(){var E=this.subscribers.length;if(!E&&this.silent){return true;}var H=[],G=true,D,I=false;for(D=0;D<arguments.length;++D){H.push(arguments[D]);}var A=H.length;if(!this.silent){}for(D=0;D<E;++D){var L=this.subscribers[D];if(!L){I=true;}else{if(!this.silent){}var K=L.getScope(this.scope);if(this.signature==YAHOO.util.CustomEvent.FLAT){var B=null;if(H.length>0){B=H[0];}try{G=L.fn.call(K,B,L.obj);}catch(F){this.lastError=F;}}else{try{G=L.fn.call(K,this.type,H,L.obj);}catch(F){this.lastError=F;}}if(false===G){if(!this.silent){}return false;}}}if(I){var J=[],C=this.subscribers;for(D=0,E=C.length;D<E;D=D+1){J.push(C[D]);}this.subscribers=J;}return true;},unsubscribeAll:function(){for(var B=0,A=this.subscribers.length;B<A;++B){this._delete(A-1-B);}this.subscribers=[];return B;},_delete:function(A){var B=this.subscribers[A];if(B){delete B.fn;delete B.obj;}this.subscribers[A]=null;},toString:function(){return"CustomEvent: '"+this.type+"', scope: "+this.scope;}};YAHOO.util.Subscriber=function(B,C,A){this.fn=B;this.obj=YAHOO.lang.isUndefined(C)?null:C;this.override=A;};YAHOO.util.Subscriber.prototype.getScope=function(A){if(this.override){if(this.override===true){return this.obj;}else{return this.override;}}return A;};YAHOO.util.Subscriber.prototype.contains=function(A,B){if(B){return(this.fn==A&&this.obj==B);}else{return(this.fn==A);}};YAHOO.util.Subscriber.prototype.toString=function(){return"Subscriber { obj: "+this.obj+", override: "+(this.override||"no")+" }";};if(!YAHOO.util.Event){YAHOO.util.Event=function(){var H=false;var J=false;var I=[];var K=[];var G=[];var E=[];var C=0;var F=[];var B=[];var A=0;var D={63232:38,63233:40,63234:37,63235:39};return{POLL_RETRYS:4000,POLL_INTERVAL:10,EL:0,TYPE:1,FN:2,WFN:3,UNLOAD_OBJ:3,ADJ_SCOPE:4,OBJ:5,OVERRIDE:6,lastError:null,isSafari:YAHOO.env.ua.webkit,webkit:YAHOO.env.ua.webkit,isIE:YAHOO.env.ua.ie,_interval:null,startInterval:function(){if(!this._interval){var L=this;var M=function(){L._tryPreloadAttach();};this._interval=setInterval(M,this.POLL_INTERVAL);}},onAvailable:function(N,L,O,M){F.push({id:N,fn:L,obj:O,override:M,checkReady:false});C=this.POLL_RETRYS;this.startInterval();},onDOMReady:function(L,N,M){if(J){setTimeout(function(){var O=window;if(M){if(M===true){O=N;}else{O=M;}}L.call(O,"DOMReady",[],N);},0);}else{this.DOMReadyEvent.subscribe(L,N,M);}},onContentReady:function(N,L,O,M){F.push({id:N,fn:L,obj:O,override:M,checkReady:true});C=this.POLL_RETRYS;this.startInterval();},addListener:function(N,L,W,R,M){if(!W||!W.call){return false;}if(this._isValidCollection(N)){var X=true;for(var S=0,U=N.length;S<U;++S){X=this.on(N[S],L,W,R,M)&&X;}return X;}else{if(YAHOO.lang.isString(N)){var Q=this.getEl(N);if(Q){N=Q;}else{this.onAvailable(N,function(){YAHOO.util.Event.on(N,L,W,R,M);});return true;}}}if(!N){return false;}if("unload"==L&&R!==this){K[K.length]=[N,L,W,R,M];return true;}var Z=N;if(M){if(M===true){Z=R;}else{Z=M;}}var O=function(a){return W.call(Z,YAHOO.util.Event.getEvent(a,N),R);};var Y=[N,L,W,O,Z,R,M];var T=I.length;I[T]=Y;if(this.useLegacyEvent(N,L)){var P=this.getLegacyIndex(N,L);if(P==-1||N!=G[P][0]){P=G.length;B[N.id+L]=P;G[P]=[N,L,N["on"+L]];E[P]=[];N["on"+L]=function(a){YAHOO.util.Event.fireLegacyEvent(YAHOO.util.Event.getEvent(a),P);};}E[P].push(Y);}else{try{this._simpleAdd(N,L,O,false);}catch(V){this.lastError=V;this.removeListener(N,L,W);return false;}}return true;},fireLegacyEvent:function(P,N){var R=true,L,T,S,U,Q;T=E[N];for(var M=0,O=T.length;M<O;++M){S=T[M];if(S&&S[this.WFN]){U=S[this.ADJ_SCOPE];Q=S[this.WFN].call(U,P);R=(R&&Q);}}L=G[N];if(L&&L[2]){L[2](P);}return R;},getLegacyIndex:function(M,N){var L=this.generateId(M)+N;if(typeof B[L]=="undefined"){return -1;}else{return B[L];}},useLegacyEvent:function(M,N){if(this.webkit&&("click"==N||"dblclick"==N)){var L=parseInt(this.webkit,10);if(!isNaN(L)&&L<418){return true;}}return false;},removeListener:function(M,L,U){var P,S,W;if(typeof M=="string"){M=this.getEl(M);}else{if(this._isValidCollection(M)){var V=true;for(P=0,S=M.length;P<S;++P){V=(this.removeListener(M[P],L,U)&&V);}return V;}}if(!U||!U.call){return this.purgeElement(M,false,L);}if("unload"==L){for(P=0,S=K.length;P<S;P++){W=K[P];if(W&&W[0]==M&&W[1]==L&&W[2]==U){K[P]=null;return true;}}return false;}var Q=null;var R=arguments[3];if("undefined"===typeof R){R=this._getCacheIndex(M,L,U);}if(R>=0){Q=I[R];}if(!M||!Q){return false;}if(this.useLegacyEvent(M,L)){var O=this.getLegacyIndex(M,L);var N=E[O];if(N){for(P=0,S=N.length;P<S;++P){W=N[P];if(W&&W[this.EL]==M&&W[this.TYPE]==L&&W[this.FN]==U){N[P]=null;break;}}}}else{try{this._simpleRemove(M,L,Q[this.WFN],false);}catch(T){this.lastError=T;return false;}}delete I[R][this.WFN];delete I[R][this.FN];I[R]=null;return true;},getTarget:function(N,M){var L=N.target||N.srcElement;return this.resolveTextNode(L);},resolveTextNode:function(L){if(L&&3==L.nodeType){return L.parentNode;}else{return L;}},getPageX:function(M){var L=M.pageX;if(!L&&0!==L){L=M.clientX||0;if(this.isIE){L+=this._getScrollLeft();}}return L;},getPageY:function(L){var M=L.pageY;if(!M&&0!==M){M=L.clientY||0;if(this.isIE){M+=this._getScrollTop();}}return M;},getXY:function(L){return[this.getPageX(L),this.getPageY(L)];
-},getRelatedTarget:function(M){var L=M.relatedTarget;if(!L){if(M.type=="mouseout"){L=M.toElement;}else{if(M.type=="mouseover"){L=M.fromElement;}}}return this.resolveTextNode(L);},getTime:function(N){if(!N.time){var M=new Date().getTime();try{N.time=M;}catch(L){this.lastError=L;return M;}}return N.time;},stopEvent:function(L){this.stopPropagation(L);this.preventDefault(L);},stopPropagation:function(L){if(L.stopPropagation){L.stopPropagation();}else{L.cancelBubble=true;}},preventDefault:function(L){if(L.preventDefault){L.preventDefault();}else{L.returnValue=false;}},getEvent:function(Q,O){var P=Q||window.event;if(!P){var R=this.getEvent.caller;while(R){P=R.arguments[0];if(P&&Event==P.constructor){break;}R=R.caller;}}if(P&&this.isIE){try{var N=P.srcElement;if(N){var M=N.type;}}catch(L){P.target=O;}}return P;},getCharCode:function(M){var L=M.keyCode||M.charCode||0;if(YAHOO.env.ua.webkit&&(L in D)){L=D[L];}return L;},_getCacheIndex:function(P,Q,O){for(var N=0,M=I.length;N<M;++N){var L=I[N];if(L&&L[this.FN]==O&&L[this.EL]==P&&L[this.TYPE]==Q){return N;}}return -1;},generateId:function(L){var M=L.id;if(!M){M="yuievtautoid-"+A;++A;L.id=M;}return M;},_isValidCollection:function(M){try{return(typeof M!=="string"&&M.length&&!M.tagName&&!M.alert&&typeof M[0]!=="undefined");}catch(L){return false;}},elCache:{},getEl:function(L){return(typeof L==="string")?document.getElementById(L):L;},clearCache:function(){},DOMReadyEvent:new YAHOO.util.CustomEvent("DOMReady",this),_load:function(M){if(!H){H=true;var L=YAHOO.util.Event;L._ready();L._tryPreloadAttach();}},_ready:function(M){if(!J){J=true;var L=YAHOO.util.Event;L.DOMReadyEvent.fire();L._simpleRemove(document,"DOMContentLoaded",L._ready);}},_tryPreloadAttach:function(){if(this.locked){return false;}if(this.isIE){if(!J){this.startInterval();return false;}}this.locked=true;var Q=!H;if(!Q){Q=(C>0);}var P=[];var R=function(T,U){var S=T;if(U.override){if(U.override===true){S=U.obj;}else{S=U.override;}}U.fn.call(S,U.obj);};var M,L,O,N;for(M=0,L=F.length;M<L;++M){O=F[M];if(O&&!O.checkReady){N=this.getEl(O.id);if(N){R(N,O);F[M]=null;}else{P.push(O);}}}for(M=0,L=F.length;M<L;++M){O=F[M];if(O&&O.checkReady){N=this.getEl(O.id);if(N){if(H||N.nextSibling){R(N,O);F[M]=null;}}else{P.push(O);}}}C=(P.length===0)?0:C-1;if(Q){this.startInterval();}else{clearInterval(this._interval);this._interval=null;}this.locked=false;return true;},purgeElement:function(O,P,R){var Q=this.getListeners(O,R),N,L;if(Q){for(N=0,L=Q.length;N<L;++N){var M=Q[N];this.removeListener(O,M.type,M.fn,M.index);}}if(P&&O&&O.childNodes){for(N=0,L=O.childNodes.length;N<L;++N){this.purgeElement(O.childNodes[N],P,R);}}},getListeners:function(N,L){var Q=[],M;if(!L){M=[I,K];}else{if(L=="unload"){M=[K];}else{M=[I];}}for(var P=0;P<M.length;P=P+1){var T=M[P];if(T&&T.length>0){for(var R=0,S=T.length;R<S;++R){var O=T[R];if(O&&O[this.EL]===N&&(!L||L===O[this.TYPE])){Q.push({type:O[this.TYPE],fn:O[this.FN],obj:O[this.OBJ],adjust:O[this.OVERRIDE],scope:O[this.ADJ_SCOPE],index:R});}}}}return(Q.length)?Q:null;},_unload:function(S){var R=YAHOO.util.Event,P,O,M,L,N;for(P=0,L=K.length;P<L;++P){M=K[P];if(M){var Q=window;if(M[R.ADJ_SCOPE]){if(M[R.ADJ_SCOPE]===true){Q=M[R.UNLOAD_OBJ];}else{Q=M[R.ADJ_SCOPE];}}M[R.FN].call(Q,R.getEvent(S,M[R.EL]),M[R.UNLOAD_OBJ]);K[P]=null;M=null;Q=null;}}K=null;if(I&&I.length>0){O=I.length;while(O){N=O-1;M=I[N];if(M){R.removeListener(M[R.EL],M[R.TYPE],M[R.FN],N);}O=O-1;}M=null;R.clearCache();}for(P=0,L=G.length;P<L;++P){G[P][0]=null;G[P]=null;}G=null;R._simpleRemove(window,"unload",R._unload);},_getScrollLeft:function(){return this._getScroll()[1];},_getScrollTop:function(){return this._getScroll()[0];},_getScroll:function(){var L=document.documentElement,M=document.body;if(L&&(L.scrollTop||L.scrollLeft)){return[L.scrollTop,L.scrollLeft];}else{if(M){return[M.scrollTop,M.scrollLeft];}else{return[0,0];}}},regCE:function(){},_simpleAdd:function(){if(window.addEventListener){return function(N,O,M,L){N.addEventListener(O,M,(L));};}else{if(window.attachEvent){return function(N,O,M,L){N.attachEvent("on"+O,M);};}else{return function(){};}}}(),_simpleRemove:function(){if(window.removeEventListener){return function(N,O,M,L){N.removeEventListener(O,M,(L));};}else{if(window.detachEvent){return function(M,N,L){M.detachEvent("on"+N,L);};}else{return function(){};}}}()};}();(function(){var D=YAHOO.util.Event;D.on=D.addListener;if(D.isIE){YAHOO.util.Event.onDOMReady(YAHOO.util.Event._tryPreloadAttach,YAHOO.util.Event,true);var B,E=document,A=E.body;if(("undefined"!==typeof YAHOO_config)&&YAHOO_config.injecting){B=document.createElement("script");var C=E.getElementsByTagName("head")[0]||A;C.insertBefore(B,C.firstChild);}else{E.write("<script id=\"_yui_eu_dr\" defer=\"true\" src=\"//:\"></script>");B=document.getElementById("_yui_eu_dr");}if(B){B.onreadystatechange=function(){if("complete"===this.readyState){this.parentNode.removeChild(this);YAHOO.util.Event._ready();}};}else{}B=null;}else{if(D.webkit){D._drwatch=setInterval(function(){var F=document.readyState;if("loaded"==F||"complete"==F){clearInterval(D._drwatch);D._drwatch=null;D._ready();}},D.POLL_INTERVAL);}else{D._simpleAdd(document,"DOMContentLoaded",D._ready);}}D._simpleAdd(window,"load",D._load);D._simpleAdd(window,"unload",D._unload);D._tryPreloadAttach();})();}YAHOO.util.EventProvider=function(){};YAHOO.util.EventProvider.prototype={__yui_events:null,__yui_subscribers:null,subscribe:function(A,C,F,E){this.__yui_events=this.__yui_events||{};var D=this.__yui_events[A];if(D){D.subscribe(C,F,E);}else{this.__yui_subscribers=this.__yui_subscribers||{};var B=this.__yui_subscribers;if(!B[A]){B[A]=[];}B[A].push({fn:C,obj:F,override:E});}},unsubscribe:function(C,E,G){this.__yui_events=this.__yui_events||{};var A=this.__yui_events;if(C){var F=A[C];if(F){return F.unsubscribe(E,G);}}else{var B=true;for(var D in A){if(YAHOO.lang.hasOwnProperty(A,D)){B=B&&A[D].unsubscribe(E,G);}}return B;}return false;},unsubscribeAll:function(A){return this.unsubscribe(A);},createEvent:function(G,D){this.__yui_events=this.__yui_events||{};
-var A=D||{};var I=this.__yui_events;if(I[G]){}else{var H=A.scope||this;var E=(A.silent);var B=new YAHOO.util.CustomEvent(G,H,E,YAHOO.util.CustomEvent.FLAT);I[G]=B;if(A.onSubscribeCallback){B.subscribeEvent.subscribe(A.onSubscribeCallback);}this.__yui_subscribers=this.__yui_subscribers||{};var F=this.__yui_subscribers[G];if(F){for(var C=0;C<F.length;++C){B.subscribe(F[C].fn,F[C].obj,F[C].override);}}}return I[G];},fireEvent:function(E,D,A,C){this.__yui_events=this.__yui_events||{};var G=this.__yui_events[E];if(!G){return null;}var B=[];for(var F=1;F<arguments.length;++F){B.push(arguments[F]);}return G.fire.apply(G,B);},hasEvent:function(A){if(this.__yui_events){if(this.__yui_events[A]){return true;}}return false;}};YAHOO.util.KeyListener=function(A,F,B,C){if(!A){}else{if(!F){}else{if(!B){}}}if(!C){C=YAHOO.util.KeyListener.KEYDOWN;}var D=new YAHOO.util.CustomEvent("keyPressed");this.enabledEvent=new YAHOO.util.CustomEvent("enabled");this.disabledEvent=new YAHOO.util.CustomEvent("disabled");if(typeof A=="string"){A=document.getElementById(A);}if(typeof B=="function"){D.subscribe(B);}else{D.subscribe(B.fn,B.scope,B.correctScope);}function E(K,J){if(!F.shift){F.shift=false;}if(!F.alt){F.alt=false;}if(!F.ctrl){F.ctrl=false;}if(K.shiftKey==F.shift&&K.altKey==F.alt&&K.ctrlKey==F.ctrl){var H;var G;if(F.keys instanceof Array){for(var I=0;I<F.keys.length;I++){H=F.keys[I];if(H==K.charCode){D.fire(K.charCode,K);break;}else{if(H==K.keyCode){D.fire(K.keyCode,K);break;}}}}else{H=F.keys;if(H==K.charCode){D.fire(K.charCode,K);}else{if(H==K.keyCode){D.fire(K.keyCode,K);}}}}}this.enable=function(){if(!this.enabled){YAHOO.util.Event.addListener(A,C,E);this.enabledEvent.fire(F);}this.enabled=true;};this.disable=function(){if(this.enabled){YAHOO.util.Event.removeListener(A,C,E);this.disabledEvent.fire(F);}this.enabled=false;};this.toString=function(){return"KeyListener ["+F.keys+"] "+A.tagName+(A.id?"["+A.id+"]":"");};};YAHOO.util.KeyListener.KEYDOWN="keydown";YAHOO.util.KeyListener.KEYUP="keyup";YAHOO.register("event",YAHOO.util.Event,{version:"2.3.1",build:"541"});YAHOO.util.Connect={_msxml_progid:["Microsoft.XMLHTTP","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP"],_http_headers:{},_has_http_headers:false,_use_default_post_header:true,_default_post_header:"application/x-www-form-urlencoded; charset=UTF-8",_default_form_header:"application/x-www-form-urlencoded",_use_default_xhr_header:true,_default_xhr_header:"XMLHttpRequest",_has_default_headers:true,_default_headers:{},_isFormSubmit:false,_isFileUpload:false,_formNode:null,_sFormData:null,_poll:{},_timeOut:{},_polling_interval:50,_transaction_id:0,_submitElementValue:null,_hasSubmitListener:(function(){if(YAHOO.util.Event){YAHOO.util.Event.addListener(document,"click",function(q){try{var S=YAHOO.util.Event.getTarget(q);if(S.type.toLowerCase()=="submit"){YAHOO.util.Connect._submitElementValue=encodeURIComponent(S.name)+"="+encodeURIComponent(S.value);}}catch(q){}});return true;}return false;})(),startEvent:new YAHOO.util.CustomEvent("start"),completeEvent:new YAHOO.util.CustomEvent("complete"),successEvent:new YAHOO.util.CustomEvent("success"),failureEvent:new YAHOO.util.CustomEvent("failure"),uploadEvent:new YAHOO.util.CustomEvent("upload"),abortEvent:new YAHOO.util.CustomEvent("abort"),_customEvents:{onStart:["startEvent","start"],onComplete:["completeEvent","complete"],onSuccess:["successEvent","success"],onFailure:["failureEvent","failure"],onUpload:["uploadEvent","upload"],onAbort:["abortEvent","abort"]},setProgId:function(S){this._msxml_progid.unshift(S);},setDefaultPostHeader:function(S){if(typeof S=="string"){this._default_post_header=S;}else{if(typeof S=="boolean"){this._use_default_post_header=S;}}},setDefaultXhrHeader:function(S){if(typeof S=="string"){this._default_xhr_header=S;}else{this._use_default_xhr_header=S;}},setPollingInterval:function(S){if(typeof S=="number"&&isFinite(S)){this._polling_interval=S;}},createXhrObject:function(w){var m,S;try{S=new XMLHttpRequest();m={conn:S,tId:w};}catch(R){for(var q=0;q<this._msxml_progid.length;++q){try{S=new ActiveXObject(this._msxml_progid[q]);m={conn:S,tId:w};break;}catch(R){}}}finally{return m;}},getConnectionObject:function(S){var R;var m=this._transaction_id;try{if(!S){R=this.createXhrObject(m);}else{R={};R.tId=m;R.isUpload=true;}if(R){this._transaction_id++;}}catch(q){}finally{return R;}},asyncRequest:function(w,q,m,S){var R=(this._isFileUpload)?this.getConnectionObject(true):this.getConnectionObject();if(!R){return null;}else{if(m&&m.customevents){this.initCustomEvents(R,m);}if(this._isFormSubmit){if(this._isFileUpload){this.uploadFile(R,m,q,S);return R;}if(w.toUpperCase()=="GET"){if(this._sFormData.length!==0){q+=((q.indexOf("?")==-1)?"?":"&")+this._sFormData;}else{q+="?"+this._sFormData;}}else{if(w.toUpperCase()=="POST"){S=S?this._sFormData+"&"+S:this._sFormData;}}}R.conn.open(w,q,true);if(this._use_default_xhr_header){if(!this._default_headers["X-Requested-With"]){this.initHeader("X-Requested-With",this._default_xhr_header,true);}}if(this._isFormSubmit==false&&this._use_default_post_header){this.initHeader("Content-Type",this._default_post_header);}if(this._has_default_headers||this._has_http_headers){this.setHeader(R);}this.handleReadyState(R,m);R.conn.send(S||null);this.startEvent.fire(R);if(R.startEvent){R.startEvent.fire(R);}return R;}},initCustomEvents:function(S,R){for(var q in R.customevents){if(this._customEvents[q][0]){S[this._customEvents[q][0]]=new YAHOO.util.CustomEvent(this._customEvents[q][1],(R.scope)?R.scope:null);S[this._customEvents[q][0]].subscribe(R.customevents[q]);}}},handleReadyState:function(q,R){var S=this;if(R&&R.timeout){this._timeOut[q.tId]=window.setTimeout(function(){S.abort(q,R,true);},R.timeout);}this._poll[q.tId]=window.setInterval(function(){if(q.conn&&q.conn.readyState===4){window.clearInterval(S._poll[q.tId]);delete S._poll[q.tId];if(R&&R.timeout){window.clearTimeout(S._timeOut[q.tId]);delete S._timeOut[q.tId];}S.completeEvent.fire(q);if(q.completeEvent){q.completeEvent.fire(q);}S.handleTransactionResponse(q,R);}},this._polling_interval);},handleTransactionResponse:function(w,V,S){var R,q;try{if(w.conn.status!==undefined&&w.conn.status!==0){R=w.conn.status;}else{R=13030;}}catch(m){R=13030;}if(R>=200&&R<300||R===1223){q=this.createResponseObject(w,(V&&V.argument)?V.argument:undefined);if(V){if(V.success){if(!V.scope){V.success(q);}else{V.success.apply(V.scope,[q]);}}}this.successEvent.fire(q);if(w.successEvent){w.successEvent.fire(q);}}else{switch(R){case 12002:case 12029:case 12030:case 12031:case 12152:case 13030:q=this.createExceptionObject(w.tId,(V&&V.argument)?V.argument:undefined,(S?S:false));if(V){if(V.failure){if(!V.scope){V.failure(q);}else{V.failure.apply(V.scope,[q]);}}}break;default:q=this.createResponseObject(w,(V&&V.argument)?V.argument:undefined);if(V){if(V.failure){if(!V.scope){V.failure(q);}else{V.failure.apply(V.scope,[q]);}}}}this.failureEvent.fire(q);if(w.failureEvent){w.failureEvent.fire(q);}}this.releaseObject(w);q=null;},createResponseObject:function(S,d){var m={};var T={};try{var R=S.conn.getAllResponseHeaders();var V=R.split("\n");for(var w=0;w<V.length;w++){var q=V[w].indexOf(":");if(q!=-1){T[V[w].substring(0,q)]=V[w].substring(q+2);}}}catch(N){}m.tId=S.tId;m.status=(S.conn.status==1223)?204:S.conn.status;m.statusText=(S.conn.status==1223)?"No Content":S.conn.statusText;m.getResponseHeader=T;m.getAllResponseHeaders=R;m.responseText=S.conn.responseText;m.responseXML=S.conn.responseXML;if(typeof d!==undefined){m.argument=d;}return m;},createExceptionObject:function(N,m,S){var V=0;var d="communication failure";var R=-1;var q="transaction aborted";var w={};w.tId=N;if(S){w.status=R;w.statusText=q;}else{w.status=V;w.statusText=d;}if(m){w.argument=m;}return w;},initHeader:function(S,m,R){var q=(R)?this._default_headers:this._http_headers;q[S]=m;if(R){this._has_default_headers=true;}else{this._has_http_headers=true;}},setHeader:function(S){if(this._has_default_headers){for(var q in this._default_headers){if(YAHOO.lang.hasOwnProperty(this._default_headers,q)){S.conn.setRequestHeader(q,this._default_headers[q]);}}}if(this._has_http_headers){for(var q in this._http_headers){if(YAHOO.lang.hasOwnProperty(this._http_headers,q)){S.conn.setRequestHeader(q,this._http_headers[q]);}}delete this._http_headers;this._http_headers={};this._has_http_headers=false;}},resetDefaultHeaders:function(){delete this._default_headers;this._default_headers={};this._has_default_headers=false;},setForm:function(M,w,q){this.resetFormState();var f;if(typeof M=="string"){f=(document.getElementById(M)||document.forms[M]);}else{if(typeof M=="object"){f=M;}else{return ;}}if(w){var V=this.createFrame(q?q:null);this._isFormSubmit=true;this._isFileUpload=true;this._formNode=f;return ;}var S,T,d,p;var N=false;for(var m=0;m<f.elements.length;m++){S=f.elements[m];p=f.elements[m].disabled;T=f.elements[m].name;d=f.elements[m].value;if(!p&&T){switch(S.type){case "select-one":case "select-multiple":for(var R=0;R<S.options.length;R++){if(S.options[R].selected){if(window.ActiveXObject){this._sFormData+=encodeURIComponent(T)+"="+encodeURIComponent(S.options[R].attributes["value"].specified?S.options[R].value:S.options[R].text)+"&";}else{this._sFormData+=encodeURIComponent(T)+"="+encodeURIComponent(S.options[R].hasAttribute("value")?S.options[R].value:S.options[R].text)+"&";}}}break;case "radio":case "checkbox":if(S.checked){this._sFormData+=encodeURIComponent(T)+"="+encodeURIComponent(d)+"&";}break;case "file":case undefined:case "reset":case "button":break;case "submit":if(N===false){if(this._hasSubmitListener&&this._submitElementValue){this._sFormData+=this._submitElementValue+"&";}else{this._sFormData+=encodeURIComponent(T)+"="+encodeURIComponent(d)+"&";}N=true;}break;default:this._sFormData+=encodeURIComponent(T)+"="+encodeURIComponent(d)+"&";}}}this._isFormSubmit=true;this._sFormData=this._sFormData.substr(0,this._sFormData.length-1);this.initHeader("Content-Type",this._default_form_header);return this._sFormData;},resetFormState:function(){this._isFormSubmit=false;this._isFileUpload=false;this._formNode=null;this._sFormData="";},createFrame:function(S){var q="yuiIO"+this._transaction_id;var R;if(window.ActiveXObject){R=document.createElement("<iframe id=\""+q+"\" name=\""+q+"\" />");if(typeof S=="boolean"){R.src="javascript:false";}else{if(typeof secureURI=="string"){R.src=S;}}}else{R=document.createElement("iframe");R.id=q;R.name=q;}R.style.position="absolute";R.style.top="-1000px";R.style.left="-1000px";document.body.appendChild(R);},appendPostData:function(S){var m=[];var q=S.split("&");for(var R=0;R<q.length;R++){var w=q[R].indexOf("=");if(w!=-1){m[R]=document.createElement("input");m[R].type="hidden";m[R].name=q[R].substring(0,w);m[R].value=q[R].substring(w+1);this._formNode.appendChild(m[R]);}}return m;},uploadFile:function(m,p,w,R){var N="yuiIO"+m.tId;var T="multipart/form-data";var f=document.getElementById(N);var U=this;var q={action:this._formNode.getAttribute("action"),method:this._formNode.getAttribute("method"),target:this._formNode.getAttribute("target")};this._formNode.setAttribute("action",w);this._formNode.setAttribute("method","POST");this._formNode.setAttribute("target",N);if(this._formNode.encoding){this._formNode.setAttribute("encoding",T);}else{this._formNode.setAttribute("enctype",T);}if(R){var M=this.appendPostData(R);}this._formNode.submit();this.startEvent.fire(m);if(m.startEvent){m.startEvent.fire(m);}if(p&&p.timeout){this._timeOut[m.tId]=window.setTimeout(function(){U.abort(m,p,true);},p.timeout);}if(M&&M.length>0){for(var d=0;d<M.length;d++){this._formNode.removeChild(M[d]);}}for(var S in q){if(YAHOO.lang.hasOwnProperty(q,S)){if(q[S]){this._formNode.setAttribute(S,q[S]);}else{this._formNode.removeAttribute(S);}}}this.resetFormState();var V=function(){if(p&&p.timeout){window.clearTimeout(U._timeOut[m.tId]);delete U._timeOut[m.tId];}U.completeEvent.fire(m);if(m.completeEvent){m.completeEvent.fire(m);}var v={};v.tId=m.tId;v.argument=p.argument;try{v.responseText=f.contentWindow.document.body?f.contentWindow.document.body.innerHTML:f.contentWindow.document.documentElement.textContent;v.responseXML=f.contentWindow.document.XMLDocument?f.contentWindow.document.XMLDocument:f.contentWindow.document;}catch(u){}if(p&&p.upload){if(!p.scope){p.upload(v);}else{p.upload.apply(p.scope,[v]);}}U.uploadEvent.fire(v);if(m.uploadEvent){m.uploadEvent.fire(v);}YAHOO.util.Event.removeListener(f,"load",V);setTimeout(function(){document.body.removeChild(f);U.releaseObject(m);},100);};YAHOO.util.Event.addListener(f,"load",V);},abort:function(m,V,S){var R;if(m.conn){if(this.isCallInProgress(m)){m.conn.abort();window.clearInterval(this._poll[m.tId]);delete this._poll[m.tId];if(S){window.clearTimeout(this._timeOut[m.tId]);delete this._timeOut[m.tId];}R=true;}}else{if(m.isUpload===true){var q="yuiIO"+m.tId;var w=document.getElementById(q);if(w){YAHOO.util.Event.removeListener(w,"load",uploadCallback);document.body.removeChild(w);if(S){window.clearTimeout(this._timeOut[m.tId]);delete this._timeOut[m.tId];}R=true;}}else{R=false;}}if(R===true){this.abortEvent.fire(m);if(m.abortEvent){m.abortEvent.fire(m);}this.handleTransactionResponse(m,V,true);}return R;},isCallInProgress:function(q){if(q&&q.conn){return q.conn.readyState!==4&&q.conn.readyState!==0;}else{if(q&&q.isUpload===true){var S="yuiIO"+q.tId;return document.getElementById(S)?true:false;}else{return false;}}},releaseObject:function(S){if(S.conn){S.conn=null;}S=null;}};YAHOO.register("connection",YAHOO.util.Connect,{version:"2.3.1",build:"541"});YAHOO.util.Anim=function(B,A,C,D){if(!B){}this.init(B,A,C,D);};YAHOO.util.Anim.prototype={toString:function(){var A=this.getEl();var B=A.id||A.tagName||A;return("Anim "+B);},patterns:{noNegatives:/width|height|opacity|padding/i,offsetAttribute:/^((width|height)|(top|left))$/,defaultUnit:/width|height|top$|bottom$|left$|right$/i,offsetUnit:/\d+(em|%|en|ex|pt|in|cm|mm|pc)$/i},doMethod:function(A,C,B){return this.method(this.currentFrame,C,B-C,this.totalFrames);},setAttribute:function(A,C,B){if(this.patterns.noNegatives.test(A)){C=(C>0)?C:0;}YAHOO.util.Dom.setStyle(this.getEl(),A,C+B);},getAttribute:function(A){var C=this.getEl();var E=YAHOO.util.Dom.getStyle(C,A);if(E!=="auto"&&!this.patterns.offsetUnit.test(E)){return parseFloat(E);}var B=this.patterns.offsetAttribute.exec(A)||[];var F=!!(B[3]);var D=!!(B[2]);if(D||(YAHOO.util.Dom.getStyle(C,"position")=="absolute"&&F)){E=C["offset"+B[0].charAt(0).toUpperCase()+B[0].substr(1)];}else{E=0;}return E;},getDefaultUnit:function(A){if(this.patterns.defaultUnit.test(A)){return"px";}return"";},setRuntimeAttribute:function(B){var G;var C;var D=this.attributes;this.runtimeAttributes[B]={};var F=function(H){return(typeof H!=="undefined");};if(!F(D[B]["to"])&&!F(D[B]["by"])){return false;}G=(F(D[B]["from"]))?D[B]["from"]:this.getAttribute(B);if(F(D[B]["to"])){C=D[B]["to"];}else{if(F(D[B]["by"])){if(G.constructor==Array){C=[];for(var E=0,A=G.length;E<A;++E){C[E]=G[E]+D[B]["by"][E]*1;}}else{C=G+D[B]["by"]*1;}}}this.runtimeAttributes[B].start=G;this.runtimeAttributes[B].end=C;this.runtimeAttributes[B].unit=(F(D[B].unit))?D[B]["unit"]:this.getDefaultUnit(B);return true;},init:function(C,H,G,A){var B=false;var D=null;var F=0;C=YAHOO.util.Dom.get(C);this.attributes=H||{};this.duration=!YAHOO.lang.isUndefined(G)?G:1;this.method=A||YAHOO.util.Easing.easeNone;this.useSeconds=true;this.currentFrame=0;this.totalFrames=YAHOO.util.AnimMgr.fps;this.setEl=function(K){C=YAHOO.util.Dom.get(K);};this.getEl=function(){return C;};this.isAnimated=function(){return B;};this.getStartTime=function(){return D;};this.runtimeAttributes={};this.animate=function(){if(this.isAnimated()){return false;}this.currentFrame=0;this.totalFrames=(this.useSeconds)?Math.ceil(YAHOO.util.AnimMgr.fps*this.duration):this.duration;if(this.duration===0&&this.useSeconds){this.totalFrames=1;}YAHOO.util.AnimMgr.registerElement(this);return true;};this.stop=function(K){if(K){this.currentFrame=this.totalFrames;this._onTween.fire();}YAHOO.util.AnimMgr.stop(this);};var J=function(){this.onStart.fire();this.runtimeAttributes={};for(var K in this.attributes){this.setRuntimeAttribute(K);}B=true;F=0;D=new Date();};var I=function(){var M={duration:new Date()-this.getStartTime(),currentFrame:this.currentFrame};M.toString=function(){return("duration: "+M.duration+", currentFrame: "+M.currentFrame);};this.onTween.fire(M);var L=this.runtimeAttributes;for(var K in L){this.setAttribute(K,this.doMethod(K,L[K].start,L[K].end),L[K].unit);}F+=1;};var E=function(){var K=(new Date()-D)/1000;var L={duration:K,frames:F,fps:F/K};L.toString=function(){return("duration: "+L.duration+", frames: "+L.frames+", fps: "+L.fps);};B=false;F=0;this.onComplete.fire(L);};this._onStart=new YAHOO.util.CustomEvent("_start",this,true);this.onStart=new YAHOO.util.CustomEvent("start",this);this.onTween=new YAHOO.util.CustomEvent("tween",this);this._onTween=new YAHOO.util.CustomEvent("_tween",this,true);this.onComplete=new YAHOO.util.CustomEvent("complete",this);this._onComplete=new YAHOO.util.CustomEvent("_complete",this,true);this._onStart.subscribe(J);this._onTween.subscribe(I);this._onComplete.subscribe(E);}};YAHOO.util.AnimMgr=new function(){var C=null;var B=[];var A=0;this.fps=1000;this.delay=1;this.registerElement=function(F){B[B.length]=F;A+=1;F._onStart.fire();this.start();};this.unRegister=function(G,F){G._onComplete.fire();F=F||E(G);if(F==-1){return false;}B.splice(F,1);A-=1;if(A<=0){this.stop();}return true;};this.start=function(){if(C===null){C=setInterval(this.run,this.delay);}};this.stop=function(H){if(!H){clearInterval(C);for(var G=0,F=B.length;G<F;++G){if(B[0].isAnimated()){this.unRegister(B[0],0);}}B=[];C=null;A=0;}else{this.unRegister(H);}};this.run=function(){for(var H=0,F=B.length;H<F;++H){var G=B[H];if(!G||!G.isAnimated()){continue;}if(G.currentFrame<G.totalFrames||G.totalFrames===null){G.currentFrame+=1;if(G.useSeconds){D(G);}G._onTween.fire();}else{YAHOO.util.AnimMgr.stop(G,H);}}};var E=function(H){for(var G=0,F=B.length;G<F;++G){if(B[G]==H){return G;}}return -1;};var D=function(G){var J=G.totalFrames;var I=G.currentFrame;var H=(G.currentFrame*G.duration*1000/G.totalFrames);var F=(new Date()-G.getStartTime());var K=0;if(F<G.duration*1000){K=Math.round((F/H-1)*G.currentFrame);}else{K=J-(I+1);}if(K>0&&isFinite(K)){if(G.currentFrame+K>=J){K=J-(I+1);}G.currentFrame+=K;}};};YAHOO.util.Bezier=new function(){this.getPosition=function(E,D){var F=E.length;var C=[];for(var B=0;B<F;++B){C[B]=[E[B][0],E[B][1]];}for(var A=1;A<F;++A){for(B=0;B<F-A;++B){C[B][0]=(1-D)*C[B][0]+D*C[parseInt(B+1,10)][0];C[B][1]=(1-D)*C[B][1]+D*C[parseInt(B+1,10)][1];}}return[C[0][0],C[0][1]];};};(function(){YAHOO.util.ColorAnim=function(E,D,F,G){YAHOO.util.ColorAnim.superclass.constructor.call(this,E,D,F,G);};YAHOO.extend(YAHOO.util.ColorAnim,YAHOO.util.Anim);var B=YAHOO.util;var C=B.ColorAnim.superclass;var A=B.ColorAnim.prototype;A.toString=function(){var D=this.getEl();var E=D.id||D.tagName;return("ColorAnim "+E);};A.patterns.color=/color$/i;A.patterns.rgb=/^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)$/i;A.patterns.hex=/^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;A.patterns.hex3=/^#?([0-9A-F]{1})([0-9A-F]{1})([0-9A-F]{1})$/i;A.patterns.transparent=/^transparent|rgba\(0, 0, 0, 0\)$/;A.parseColor=function(D){if(D.length==3){return D;}var E=this.patterns.hex.exec(D);if(E&&E.length==4){return[parseInt(E[1],16),parseInt(E[2],16),parseInt(E[3],16)];}E=this.patterns.rgb.exec(D);if(E&&E.length==4){return[parseInt(E[1],10),parseInt(E[2],10),parseInt(E[3],10)];
-}E=this.patterns.hex3.exec(D);if(E&&E.length==4){return[parseInt(E[1]+E[1],16),parseInt(E[2]+E[2],16),parseInt(E[3]+E[3],16)];}return null;};A.getAttribute=function(D){var F=this.getEl();if(this.patterns.color.test(D)){var G=YAHOO.util.Dom.getStyle(F,D);if(this.patterns.transparent.test(G)){var E=F.parentNode;G=B.Dom.getStyle(E,D);while(E&&this.patterns.transparent.test(G)){E=E.parentNode;G=B.Dom.getStyle(E,D);if(E.tagName.toUpperCase()=="HTML"){G="#fff";}}}}else{G=C.getAttribute.call(this,D);}return G;};A.doMethod=function(E,I,F){var H;if(this.patterns.color.test(E)){H=[];for(var G=0,D=I.length;G<D;++G){H[G]=C.doMethod.call(this,E,I[G],F[G]);}H="rgb("+Math.floor(H[0])+","+Math.floor(H[1])+","+Math.floor(H[2])+")";}else{H=C.doMethod.call(this,E,I,F);}return H;};A.setRuntimeAttribute=function(E){C.setRuntimeAttribute.call(this,E);if(this.patterns.color.test(E)){var G=this.attributes;var I=this.parseColor(this.runtimeAttributes[E].start);var F=this.parseColor(this.runtimeAttributes[E].end);if(typeof G[E]["to"]==="undefined"&&typeof G[E]["by"]!=="undefined"){F=this.parseColor(G[E].by);for(var H=0,D=I.length;H<D;++H){F[H]=I[H]+F[H];}}this.runtimeAttributes[E].start=I;this.runtimeAttributes[E].end=F;}};})();YAHOO.util.Easing={easeNone:function(B,A,D,C){return D*B/C+A;},easeIn:function(B,A,D,C){return D*(B/=C)*B+A;},easeOut:function(B,A,D,C){return -D*(B/=C)*(B-2)+A;},easeBoth:function(B,A,D,C){if((B/=C/2)<1){return D/2*B*B+A;}return -D/2*((--B)*(B-2)-1)+A;},easeInStrong:function(B,A,D,C){return D*(B/=C)*B*B*B+A;},easeOutStrong:function(B,A,D,C){return -D*((B=B/C-1)*B*B*B-1)+A;},easeBothStrong:function(B,A,D,C){if((B/=C/2)<1){return D/2*B*B*B*B+A;}return -D/2*((B-=2)*B*B*B-2)+A;},elasticIn:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F)==1){return A+G;}if(!E){E=F*0.3;}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}return -(B*Math.pow(2,10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E))+A;},elasticOut:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F)==1){return A+G;}if(!E){E=F*0.3;}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}return B*Math.pow(2,-10*C)*Math.sin((C*F-D)*(2*Math.PI)/E)+G+A;},elasticBoth:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F/2)==2){return A+G;}if(!E){E=F*(0.3*1.5);}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}if(C<1){return -0.5*(B*Math.pow(2,10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E))+A;}return B*Math.pow(2,-10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E)*0.5+G+A;},backIn:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}return E*(B/=D)*B*((C+1)*B-C)+A;},backOut:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}return E*((B=B/D-1)*B*((C+1)*B+C)+1)+A;},backBoth:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}if((B/=D/2)<1){return E/2*(B*B*(((C*=(1.525))+1)*B-C))+A;}return E/2*((B-=2)*B*(((C*=(1.525))+1)*B+C)+2)+A;},bounceIn:function(B,A,D,C){return D-YAHOO.util.Easing.bounceOut(C-B,0,D,C)+A;},bounceOut:function(B,A,D,C){if((B/=C)<(1/2.75)){return D*(7.5625*B*B)+A;}else{if(B<(2/2.75)){return D*(7.5625*(B-=(1.5/2.75))*B+0.75)+A;}else{if(B<(2.5/2.75)){return D*(7.5625*(B-=(2.25/2.75))*B+0.9375)+A;}}}return D*(7.5625*(B-=(2.625/2.75))*B+0.984375)+A;},bounceBoth:function(B,A,D,C){if(B<C/2){return YAHOO.util.Easing.bounceIn(B*2,0,D,C)*0.5+A;}return YAHOO.util.Easing.bounceOut(B*2-C,0,D,C)*0.5+D*0.5+A;}};(function(){YAHOO.util.Motion=function(G,F,H,I){if(G){YAHOO.util.Motion.superclass.constructor.call(this,G,F,H,I);}};YAHOO.extend(YAHOO.util.Motion,YAHOO.util.ColorAnim);var D=YAHOO.util;var E=D.Motion.superclass;var B=D.Motion.prototype;B.toString=function(){var F=this.getEl();var G=F.id||F.tagName;return("Motion "+G);};B.patterns.points=/^points$/i;B.setAttribute=function(F,H,G){if(this.patterns.points.test(F)){G=G||"px";E.setAttribute.call(this,"left",H[0],G);E.setAttribute.call(this,"top",H[1],G);}else{E.setAttribute.call(this,F,H,G);}};B.getAttribute=function(F){if(this.patterns.points.test(F)){var G=[E.getAttribute.call(this,"left"),E.getAttribute.call(this,"top")];}else{G=E.getAttribute.call(this,F);}return G;};B.doMethod=function(F,J,G){var I=null;if(this.patterns.points.test(F)){var H=this.method(this.currentFrame,0,100,this.totalFrames)/100;I=D.Bezier.getPosition(this.runtimeAttributes[F],H);}else{I=E.doMethod.call(this,F,J,G);}return I;};B.setRuntimeAttribute=function(O){if(this.patterns.points.test(O)){var G=this.getEl();var I=this.attributes;var F;var K=I["points"]["control"]||[];var H;var L,N;if(K.length>0&&!(K[0] instanceof Array)){K=[K];}else{var J=[];for(L=0,N=K.length;L<N;++L){J[L]=K[L];}K=J;}if(D.Dom.getStyle(G,"position")=="static"){D.Dom.setStyle(G,"position","relative");}if(C(I["points"]["from"])){D.Dom.setXY(G,I["points"]["from"]);}else{D.Dom.setXY(G,D.Dom.getXY(G));}F=this.getAttribute("points");if(C(I["points"]["to"])){H=A.call(this,I["points"]["to"],F);var M=D.Dom.getXY(this.getEl());for(L=0,N=K.length;L<N;++L){K[L]=A.call(this,K[L],F);}}else{if(C(I["points"]["by"])){H=[F[0]+I["points"]["by"][0],F[1]+I["points"]["by"][1]];for(L=0,N=K.length;L<N;++L){K[L]=[F[0]+K[L][0],F[1]+K[L][1]];}}}this.runtimeAttributes[O]=[F];if(K.length>0){this.runtimeAttributes[O]=this.runtimeAttributes[O].concat(K);}this.runtimeAttributes[O][this.runtimeAttributes[O].length]=H;}else{E.setRuntimeAttribute.call(this,O);}};var A=function(F,H){var G=D.Dom.getXY(this.getEl());F=[F[0]-G[0]+H[0],F[1]-G[1]+H[1]];return F;};var C=function(F){return(typeof F!=="undefined");};})();(function(){YAHOO.util.Scroll=function(E,D,F,G){if(E){YAHOO.util.Scroll.superclass.constructor.call(this,E,D,F,G);}};YAHOO.extend(YAHOO.util.Scroll,YAHOO.util.ColorAnim);var B=YAHOO.util;var C=B.Scroll.superclass;var A=B.Scroll.prototype;A.toString=function(){var D=this.getEl();var E=D.id||D.tagName;return("Scroll "+E);};A.doMethod=function(D,G,E){var F=null;if(D=="scroll"){F=[this.method(this.currentFrame,G[0],E[0]-G[0],this.totalFrames),this.method(this.currentFrame,G[1],E[1]-G[1],this.totalFrames)];
-}else{F=C.doMethod.call(this,D,G,E);}return F;};A.getAttribute=function(D){var F=null;var E=this.getEl();if(D=="scroll"){F=[E.scrollLeft,E.scrollTop];}else{F=C.getAttribute.call(this,D);}return F;};A.setAttribute=function(D,G,F){var E=this.getEl();if(D=="scroll"){E.scrollLeft=G[0];E.scrollTop=G[1];}else{C.setAttribute.call(this,D,G,F);}};})();YAHOO.register("animation",YAHOO.util.Anim,{version:"2.3.1",build:"541"});if(!YAHOO.util.DragDropMgr){YAHOO.util.DragDropMgr=function(){var A=YAHOO.util.Event;return{ids:{},handleIds:{},dragCurrent:null,dragOvers:{},deltaX:0,deltaY:0,preventDefault:true,stopPropagation:true,initialized:false,locked:false,interactionInfo:null,init:function(){this.initialized=true;},POINT:0,INTERSECT:1,STRICT_INTERSECT:2,mode:0,_execOnAll:function(D,C){for(var E in this.ids){for(var B in this.ids[E]){var F=this.ids[E][B];if(!this.isTypeOfDD(F)){continue;}F[D].apply(F,C);}}},_onLoad:function(){this.init();A.on(document,"mouseup",this.handleMouseUp,this,true);A.on(document,"mousemove",this.handleMouseMove,this,true);A.on(window,"unload",this._onUnload,this,true);A.on(window,"resize",this._onResize,this,true);},_onResize:function(B){this._execOnAll("resetConstraints",[]);},lock:function(){this.locked=true;},unlock:function(){this.locked=false;},isLocked:function(){return this.locked;},locationCache:{},useCache:true,clickPixelThresh:3,clickTimeThresh:1000,dragThreshMet:false,clickTimeout:null,startX:0,startY:0,regDragDrop:function(C,B){if(!this.initialized){this.init();}if(!this.ids[B]){this.ids[B]={};}this.ids[B][C.id]=C;},removeDDFromGroup:function(D,B){if(!this.ids[B]){this.ids[B]={};}var C=this.ids[B];if(C&&C[D.id]){delete C[D.id];}},_remove:function(C){for(var B in C.groups){if(B&&this.ids[B][C.id]){delete this.ids[B][C.id];}}delete this.handleIds[C.id];},regHandle:function(C,B){if(!this.handleIds[C]){this.handleIds[C]={};}this.handleIds[C][B]=B;},isDragDrop:function(B){return(this.getDDById(B))?true:false;},getRelated:function(G,C){var F=[];for(var E in G.groups){for(var D in this.ids[E]){var B=this.ids[E][D];if(!this.isTypeOfDD(B)){continue;}if(!C||B.isTarget){F[F.length]=B;}}}return F;},isLegalTarget:function(F,E){var C=this.getRelated(F,true);for(var D=0,B=C.length;D<B;++D){if(C[D].id==E.id){return true;}}return false;},isTypeOfDD:function(B){return(B&&B.__ygDragDrop);},isHandle:function(C,B){return(this.handleIds[C]&&this.handleIds[C][B]);},getDDById:function(C){for(var B in this.ids){if(this.ids[B][C]){return this.ids[B][C];}}return null;},handleMouseDown:function(D,C){this.currentTarget=YAHOO.util.Event.getTarget(D);this.dragCurrent=C;var B=C.getEl();this.startX=YAHOO.util.Event.getPageX(D);this.startY=YAHOO.util.Event.getPageY(D);this.deltaX=this.startX-B.offsetLeft;this.deltaY=this.startY-B.offsetTop;this.dragThreshMet=false;this.clickTimeout=setTimeout(function(){var E=YAHOO.util.DDM;E.startDrag(E.startX,E.startY);},this.clickTimeThresh);},startDrag:function(B,D){clearTimeout(this.clickTimeout);var C=this.dragCurrent;if(C){C.b4StartDrag(B,D);}if(C){C.startDrag(B,D);}this.dragThreshMet=true;},handleMouseUp:function(B){if(this.dragCurrent){clearTimeout(this.clickTimeout);if(this.dragThreshMet){this.fireEvents(B,true);}else{}this.stopDrag(B);this.stopEvent(B);}},stopEvent:function(B){if(this.stopPropagation){YAHOO.util.Event.stopPropagation(B);}if(this.preventDefault){YAHOO.util.Event.preventDefault(B);}},stopDrag:function(C,B){if(this.dragCurrent&&!B){if(this.dragThreshMet){this.dragCurrent.b4EndDrag(C);this.dragCurrent.endDrag(C);}this.dragCurrent.onMouseUp(C);}this.dragCurrent=null;this.dragOvers={};},handleMouseMove:function(E){var B=this.dragCurrent;if(B){if(YAHOO.util.Event.isIE&&!E.button){this.stopEvent(E);return this.handleMouseUp(E);}if(!this.dragThreshMet){var D=Math.abs(this.startX-YAHOO.util.Event.getPageX(E));var C=Math.abs(this.startY-YAHOO.util.Event.getPageY(E));if(D>this.clickPixelThresh||C>this.clickPixelThresh){this.startDrag(this.startX,this.startY);}}if(this.dragThreshMet){B.b4Drag(E);if(B){B.onDrag(E);}if(B){this.fireEvents(E,false);}}this.stopEvent(E);}},fireEvents:function(Q,H){var S=this.dragCurrent;if(!S||S.isLocked()){return ;}var J=YAHOO.util.Event.getPageX(Q),I=YAHOO.util.Event.getPageY(Q),K=new YAHOO.util.Point(J,I),F=S.getTargetCoord(K.x,K.y),C=S.getDragEl(),P=new YAHOO.util.Region(F.y,F.x+C.offsetWidth,F.y+C.offsetHeight,F.x),E=[],G=[],B=[],R=[],O=[];for(var M in this.dragOvers){var T=this.dragOvers[M];if(!this.isTypeOfDD(T)){continue;}if(!this.isOverTarget(K,T,this.mode,P)){G.push(T);}E[M]=true;delete this.dragOvers[M];}for(var L in S.groups){if("string"!=typeof L){continue;}for(M in this.ids[L]){var D=this.ids[L][M];if(!this.isTypeOfDD(D)){continue;}if(D.isTarget&&!D.isLocked()&&D!=S){if(this.isOverTarget(K,D,this.mode,P)){if(H){R.push(D);}else{if(!E[D.id]){O.push(D);}else{B.push(D);}this.dragOvers[D.id]=D;}}}}}this.interactionInfo={out:G,enter:O,over:B,drop:R,point:K,draggedRegion:P,sourceRegion:this.locationCache[S.id],validDrop:H};if(H&&!R.length){this.interactionInfo.validDrop=false;S.onInvalidDrop(Q);}if(this.mode){if(G.length){S.b4DragOut(Q,G);if(S){S.onDragOut(Q,G);}}if(O.length){if(S){S.onDragEnter(Q,O);}}if(B.length){if(S){S.b4DragOver(Q,B);}if(S){S.onDragOver(Q,B);}}if(R.length){if(S){S.b4DragDrop(Q,R);}if(S){S.onDragDrop(Q,R);}}}else{var N=0;for(M=0,N=G.length;M<N;++M){if(S){S.b4DragOut(Q,G[M].id);}if(S){S.onDragOut(Q,G[M].id);}}for(M=0,N=O.length;M<N;++M){if(S){S.onDragEnter(Q,O[M].id);}}for(M=0,N=B.length;M<N;++M){if(S){S.b4DragOver(Q,B[M].id);}if(S){S.onDragOver(Q,B[M].id);}}for(M=0,N=R.length;M<N;++M){if(S){S.b4DragDrop(Q,R[M].id);}if(S){S.onDragDrop(Q,R[M].id);}}}},getBestMatch:function(D){var F=null;var C=D.length;if(C==1){F=D[0];}else{for(var E=0;E<C;++E){var B=D[E];if(this.mode==this.INTERSECT&&B.cursorIsOver){F=B;break;}else{if(!F||!F.overlap||(B.overlap&&F.overlap.getArea()<B.overlap.getArea())){F=B;}}}}return F;},refreshCache:function(C){var E=C||this.ids;for(var B in E){if("string"!=typeof B){continue;}for(var D in this.ids[B]){var F=this.ids[B][D];if(this.isTypeOfDD(F)){var G=this.getLocation(F);if(G){this.locationCache[F.id]=G;}else{delete this.locationCache[F.id];}}}}},verifyEl:function(C){try{if(C){var B=C.offsetParent;if(B){return true;}}}catch(D){}return false;},getLocation:function(G){if(!this.isTypeOfDD(G)){return null;}var E=G.getEl(),J,D,C,L,K,M,B,I,F;try{J=YAHOO.util.Dom.getXY(E);}catch(H){}if(!J){return null;
-}D=J[0];C=D+E.offsetWidth;L=J[1];K=L+E.offsetHeight;M=L-G.padding[0];B=C+G.padding[1];I=K+G.padding[2];F=D-G.padding[3];return new YAHOO.util.Region(M,B,I,F);},isOverTarget:function(J,B,D,E){var F=this.locationCache[B.id];if(!F||!this.useCache){F=this.getLocation(B);this.locationCache[B.id]=F;}if(!F){return false;}B.cursorIsOver=F.contains(J);var I=this.dragCurrent;if(!I||(!D&&!I.constrainX&&!I.constrainY)){return B.cursorIsOver;}B.overlap=null;if(!E){var G=I.getTargetCoord(J.x,J.y);var C=I.getDragEl();E=new YAHOO.util.Region(G.y,G.x+C.offsetWidth,G.y+C.offsetHeight,G.x);}var H=E.intersect(F);if(H){B.overlap=H;return(D)?true:B.cursorIsOver;}else{return false;}},_onUnload:function(C,B){this.unregAll();},unregAll:function(){if(this.dragCurrent){this.stopDrag();this.dragCurrent=null;}this._execOnAll("unreg",[]);this.ids={};},elementCache:{},getElWrapper:function(C){var B=this.elementCache[C];if(!B||!B.el){B=this.elementCache[C]=new this.ElementWrapper(YAHOO.util.Dom.get(C));}return B;},getElement:function(B){return YAHOO.util.Dom.get(B);},getCss:function(C){var B=YAHOO.util.Dom.get(C);return(B)?B.style:null;},ElementWrapper:function(B){this.el=B||null;this.id=this.el&&B.id;this.css=this.el&&B.style;},getPosX:function(B){return YAHOO.util.Dom.getX(B);},getPosY:function(B){return YAHOO.util.Dom.getY(B);},swapNode:function(D,B){if(D.swapNode){D.swapNode(B);}else{var E=B.parentNode;var C=B.nextSibling;if(C==D){E.insertBefore(D,B);}else{if(B==D.nextSibling){E.insertBefore(B,D);}else{D.parentNode.replaceChild(B,D);E.insertBefore(D,C);}}}},getScroll:function(){var D,B,E=document.documentElement,C=document.body;if(E&&(E.scrollTop||E.scrollLeft)){D=E.scrollTop;B=E.scrollLeft;}else{if(C){D=C.scrollTop;B=C.scrollLeft;}else{}}return{top:D,left:B};},getStyle:function(C,B){return YAHOO.util.Dom.getStyle(C,B);},getScrollTop:function(){return this.getScroll().top;},getScrollLeft:function(){return this.getScroll().left;},moveToEl:function(B,D){var C=YAHOO.util.Dom.getXY(D);YAHOO.util.Dom.setXY(B,C);},getClientHeight:function(){return YAHOO.util.Dom.getViewportHeight();},getClientWidth:function(){return YAHOO.util.Dom.getViewportWidth();},numericSort:function(C,B){return(C-B);},_timeoutCount:0,_addListeners:function(){var B=YAHOO.util.DDM;if(YAHOO.util.Event&&document){B._onLoad();}else{if(B._timeoutCount>2000){}else{setTimeout(B._addListeners,10);if(document&&document.body){B._timeoutCount+=1;}}}},handleWasClicked:function(B,D){if(this.isHandle(D,B.id)){return true;}else{var C=B.parentNode;while(C){if(this.isHandle(D,C.id)){return true;}else{C=C.parentNode;}}}return false;}};}();YAHOO.util.DDM=YAHOO.util.DragDropMgr;YAHOO.util.DDM._addListeners();}(function(){var A=YAHOO.util.Event;var B=YAHOO.util.Dom;YAHOO.util.DragDrop=function(E,C,D){if(E){this.init(E,C,D);}};YAHOO.util.DragDrop.prototype={id:null,config:null,dragElId:null,handleElId:null,invalidHandleTypes:null,invalidHandleIds:null,invalidHandleClasses:null,startPageX:0,startPageY:0,groups:null,locked:false,lock:function(){this.locked=true;},unlock:function(){this.locked=false;},isTarget:true,padding:null,_domRef:null,__ygDragDrop:true,constrainX:false,constrainY:false,minX:0,maxX:0,minY:0,maxY:0,deltaX:0,deltaY:0,maintainOffset:false,xTicks:null,yTicks:null,primaryButtonOnly:true,available:false,hasOuterHandles:false,cursorIsOver:false,overlap:null,b4StartDrag:function(C,D){},startDrag:function(C,D){},b4Drag:function(C){},onDrag:function(C){},onDragEnter:function(C,D){},b4DragOver:function(C){},onDragOver:function(C,D){},b4DragOut:function(C){},onDragOut:function(C,D){},b4DragDrop:function(C){},onDragDrop:function(C,D){},onInvalidDrop:function(C){},b4EndDrag:function(C){},endDrag:function(C){},b4MouseDown:function(C){},onMouseDown:function(C){},onMouseUp:function(C){},onAvailable:function(){},getEl:function(){if(!this._domRef){this._domRef=B.get(this.id);}return this._domRef;},getDragEl:function(){return B.get(this.dragElId);},init:function(E,C,D){this.initTarget(E,C,D);A.on(this._domRef||this.id,"mousedown",this.handleMouseDown,this,true);},initTarget:function(E,C,D){this.config=D||{};this.DDM=YAHOO.util.DDM;this.groups={};if(typeof E!=="string"){this._domRef=E;E=B.generateId(E);}this.id=E;this.addToGroup((C)?C:"default");this.handleElId=E;A.onAvailable(E,this.handleOnAvailable,this,true);this.setDragElId(E);this.invalidHandleTypes={A:"A"};this.invalidHandleIds={};this.invalidHandleClasses=[];this.applyConfig();},applyConfig:function(){this.padding=this.config.padding||[0,0,0,0];this.isTarget=(this.config.isTarget!==false);this.maintainOffset=(this.config.maintainOffset);this.primaryButtonOnly=(this.config.primaryButtonOnly!==false);},handleOnAvailable:function(){this.available=true;this.resetConstraints();this.onAvailable();},setPadding:function(E,C,F,D){if(!C&&0!==C){this.padding=[E,E,E,E];}else{if(!F&&0!==F){this.padding=[E,C,E,C];}else{this.padding=[E,C,F,D];}}},setInitPosition:function(F,E){var G=this.getEl();if(!this.DDM.verifyEl(G)){return ;}var D=F||0;var C=E||0;var H=B.getXY(G);this.initPageX=H[0]-D;this.initPageY=H[1]-C;this.lastPageX=H[0];this.lastPageY=H[1];this.setStartPosition(H);},setStartPosition:function(D){var C=D||B.getXY(this.getEl());this.deltaSetXY=null;this.startPageX=C[0];this.startPageY=C[1];},addToGroup:function(C){this.groups[C]=true;this.DDM.regDragDrop(this,C);},removeFromGroup:function(C){if(this.groups[C]){delete this.groups[C];}this.DDM.removeDDFromGroup(this,C);},setDragElId:function(C){this.dragElId=C;},setHandleElId:function(C){if(typeof C!=="string"){C=B.generateId(C);}this.handleElId=C;this.DDM.regHandle(this.id,C);},setOuterHandleElId:function(C){if(typeof C!=="string"){C=B.generateId(C);}A.on(C,"mousedown",this.handleMouseDown,this,true);this.setHandleElId(C);this.hasOuterHandles=true;},unreg:function(){A.removeListener(this.id,"mousedown",this.handleMouseDown);this._domRef=null;this.DDM._remove(this);},isLocked:function(){return(this.DDM.isLocked()||this.locked);},handleMouseDown:function(F,E){var C=F.which||F.button;
-if(this.primaryButtonOnly&&C>1){return ;}if(this.isLocked()){return ;}this.b4MouseDown(F);this.onMouseDown(F);this.DDM.refreshCache(this.groups);var D=new YAHOO.util.Point(A.getPageX(F),A.getPageY(F));if(!this.hasOuterHandles&&!this.DDM.isOverTarget(D,this)){}else{if(this.clickValidator(F)){this.setStartPosition();this.DDM.handleMouseDown(F,this);this.DDM.stopEvent(F);}else{}}},clickValidator:function(D){var C=A.getTarget(D);return(this.isValidHandleChild(C)&&(this.id==this.handleElId||this.DDM.handleWasClicked(C,this.id)));},getTargetCoord:function(E,D){var C=E-this.deltaX;var F=D-this.deltaY;if(this.constrainX){if(C<this.minX){C=this.minX;}if(C>this.maxX){C=this.maxX;}}if(this.constrainY){if(F<this.minY){F=this.minY;}if(F>this.maxY){F=this.maxY;}}C=this.getTick(C,this.xTicks);F=this.getTick(F,this.yTicks);return{x:C,y:F};},addInvalidHandleType:function(C){var D=C.toUpperCase();this.invalidHandleTypes[D]=D;},addInvalidHandleId:function(C){if(typeof C!=="string"){C=B.generateId(C);}this.invalidHandleIds[C]=C;},addInvalidHandleClass:function(C){this.invalidHandleClasses.push(C);},removeInvalidHandleType:function(C){var D=C.toUpperCase();delete this.invalidHandleTypes[D];},removeInvalidHandleId:function(C){if(typeof C!=="string"){C=B.generateId(C);}delete this.invalidHandleIds[C];},removeInvalidHandleClass:function(D){for(var E=0,C=this.invalidHandleClasses.length;E<C;++E){if(this.invalidHandleClasses[E]==D){delete this.invalidHandleClasses[E];}}},isValidHandleChild:function(F){var E=true;var H;try{H=F.nodeName.toUpperCase();}catch(G){H=F.nodeName;}E=E&&!this.invalidHandleTypes[H];E=E&&!this.invalidHandleIds[F.id];for(var D=0,C=this.invalidHandleClasses.length;E&&D<C;++D){E=!B.hasClass(F,this.invalidHandleClasses[D]);}return E;},setXTicks:function(F,C){this.xTicks=[];this.xTickSize=C;var E={};for(var D=this.initPageX;D>=this.minX;D=D-C){if(!E[D]){this.xTicks[this.xTicks.length]=D;E[D]=true;}}for(D=this.initPageX;D<=this.maxX;D=D+C){if(!E[D]){this.xTicks[this.xTicks.length]=D;E[D]=true;}}this.xTicks.sort(this.DDM.numericSort);},setYTicks:function(F,C){this.yTicks=[];this.yTickSize=C;var E={};for(var D=this.initPageY;D>=this.minY;D=D-C){if(!E[D]){this.yTicks[this.yTicks.length]=D;E[D]=true;}}for(D=this.initPageY;D<=this.maxY;D=D+C){if(!E[D]){this.yTicks[this.yTicks.length]=D;E[D]=true;}}this.yTicks.sort(this.DDM.numericSort);},setXConstraint:function(E,D,C){this.leftConstraint=parseInt(E,10);this.rightConstraint=parseInt(D,10);this.minX=this.initPageX-this.leftConstraint;this.maxX=this.initPageX+this.rightConstraint;if(C){this.setXTicks(this.initPageX,C);}this.constrainX=true;},clearConstraints:function(){this.constrainX=false;this.constrainY=false;this.clearTicks();},clearTicks:function(){this.xTicks=null;this.yTicks=null;this.xTickSize=0;this.yTickSize=0;},setYConstraint:function(C,E,D){this.topConstraint=parseInt(C,10);this.bottomConstraint=parseInt(E,10);this.minY=this.initPageY-this.topConstraint;this.maxY=this.initPageY+this.bottomConstraint;if(D){this.setYTicks(this.initPageY,D);}this.constrainY=true;},resetConstraints:function(){if(this.initPageX||this.initPageX===0){var D=(this.maintainOffset)?this.lastPageX-this.initPageX:0;var C=(this.maintainOffset)?this.lastPageY-this.initPageY:0;this.setInitPosition(D,C);}else{this.setInitPosition();}if(this.constrainX){this.setXConstraint(this.leftConstraint,this.rightConstraint,this.xTickSize);}if(this.constrainY){this.setYConstraint(this.topConstraint,this.bottomConstraint,this.yTickSize);}},getTick:function(I,F){if(!F){return I;}else{if(F[0]>=I){return F[0];}else{for(var D=0,C=F.length;D<C;++D){var E=D+1;if(F[E]&&F[E]>=I){var H=I-F[D];var G=F[E]-I;return(G>H)?F[D]:F[E];}}return F[F.length-1];}}},toString:function(){return("DragDrop "+this.id);}};})();YAHOO.util.DD=function(C,A,B){if(C){this.init(C,A,B);}};YAHOO.extend(YAHOO.util.DD,YAHOO.util.DragDrop,{scroll:true,autoOffset:function(C,B){var A=C-this.startPageX;var D=B-this.startPageY;this.setDelta(A,D);},setDelta:function(B,A){this.deltaX=B;this.deltaY=A;},setDragElPos:function(C,B){var A=this.getDragEl();this.alignElWithMouse(A,C,B);},alignElWithMouse:function(B,F,E){var D=this.getTargetCoord(F,E);if(!this.deltaSetXY){var G=[D.x,D.y];YAHOO.util.Dom.setXY(B,G);var C=parseInt(YAHOO.util.Dom.getStyle(B,"left"),10);var A=parseInt(YAHOO.util.Dom.getStyle(B,"top"),10);this.deltaSetXY=[C-D.x,A-D.y];}else{YAHOO.util.Dom.setStyle(B,"left",(D.x+this.deltaSetXY[0])+"px");YAHOO.util.Dom.setStyle(B,"top",(D.y+this.deltaSetXY[1])+"px");}this.cachePosition(D.x,D.y);this.autoScroll(D.x,D.y,B.offsetHeight,B.offsetWidth);},cachePosition:function(B,A){if(B){this.lastPageX=B;this.lastPageY=A;}else{var C=YAHOO.util.Dom.getXY(this.getEl());this.lastPageX=C[0];this.lastPageY=C[1];}},autoScroll:function(J,I,E,K){if(this.scroll){var L=this.DDM.getClientHeight();var B=this.DDM.getClientWidth();var N=this.DDM.getScrollTop();var D=this.DDM.getScrollLeft();var H=E+I;var M=K+J;var G=(L+N-I-this.deltaY);var F=(B+D-J-this.deltaX);var C=40;var A=(document.all)?80:30;if(H>L&&G<C){window.scrollTo(D,N+A);}if(I<N&&N>0&&I-N<C){window.scrollTo(D,N-A);}if(M>B&&F<C){window.scrollTo(D+A,N);}if(J<D&&D>0&&J-D<C){window.scrollTo(D-A,N);}}},applyConfig:function(){YAHOO.util.DD.superclass.applyConfig.call(this);this.scroll=(this.config.scroll!==false);},b4MouseDown:function(A){this.setStartPosition();this.autoOffset(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},b4Drag:function(A){this.setDragElPos(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},toString:function(){return("DD "+this.id);}});YAHOO.util.DDProxy=function(C,A,B){if(C){this.init(C,A,B);this.initFrame();}};YAHOO.util.DDProxy.dragElId="ygddfdiv";YAHOO.extend(YAHOO.util.DDProxy,YAHOO.util.DD,{resizeFrame:true,centerFrame:false,createFrame:function(){var B=this,A=document.body;if(!A||!A.firstChild){setTimeout(function(){B.createFrame();},50);return ;}var F=this.getDragEl(),E=YAHOO.util.Dom;if(!F){F=document.createElement("div");F.id=this.dragElId;var D=F.style;
-D.position="absolute";D.visibility="hidden";D.cursor="move";D.border="2px solid #aaa";D.zIndex=999;D.height="25px";D.width="25px";var C=document.createElement("div");E.setStyle(C,"height","100%");E.setStyle(C,"width","100%");E.setStyle(C,"background-color","#ccc");E.setStyle(C,"opacity","0");F.appendChild(C);A.insertBefore(F,A.firstChild);}},initFrame:function(){this.createFrame();},applyConfig:function(){YAHOO.util.DDProxy.superclass.applyConfig.call(this);this.resizeFrame=(this.config.resizeFrame!==false);this.centerFrame=(this.config.centerFrame);this.setDragElId(this.config.dragElId||YAHOO.util.DDProxy.dragElId);},showFrame:function(E,D){var C=this.getEl();var A=this.getDragEl();var B=A.style;this._resizeProxy();if(this.centerFrame){this.setDelta(Math.round(parseInt(B.width,10)/2),Math.round(parseInt(B.height,10)/2));}this.setDragElPos(E,D);YAHOO.util.Dom.setStyle(A,"visibility","visible");},_resizeProxy:function(){if(this.resizeFrame){var H=YAHOO.util.Dom;var B=this.getEl();var C=this.getDragEl();var G=parseInt(H.getStyle(C,"borderTopWidth"),10);var I=parseInt(H.getStyle(C,"borderRightWidth"),10);var F=parseInt(H.getStyle(C,"borderBottomWidth"),10);var D=parseInt(H.getStyle(C,"borderLeftWidth"),10);if(isNaN(G)){G=0;}if(isNaN(I)){I=0;}if(isNaN(F)){F=0;}if(isNaN(D)){D=0;}var E=Math.max(0,B.offsetWidth-I-D);var A=Math.max(0,B.offsetHeight-G-F);H.setStyle(C,"width",E+"px");H.setStyle(C,"height",A+"px");}},b4MouseDown:function(B){this.setStartPosition();var A=YAHOO.util.Event.getPageX(B);var C=YAHOO.util.Event.getPageY(B);this.autoOffset(A,C);},b4StartDrag:function(A,B){this.showFrame(A,B);},b4EndDrag:function(A){YAHOO.util.Dom.setStyle(this.getDragEl(),"visibility","hidden");},endDrag:function(D){var C=YAHOO.util.Dom;var B=this.getEl();var A=this.getDragEl();C.setStyle(A,"visibility","");C.setStyle(B,"visibility","hidden");YAHOO.util.DDM.moveToEl(B,A);C.setStyle(A,"visibility","hidden");C.setStyle(B,"visibility","");},toString:function(){return("DDProxy "+this.id);}});YAHOO.util.DDTarget=function(C,A,B){if(C){this.initTarget(C,A,B);}};YAHOO.extend(YAHOO.util.DDTarget,YAHOO.util.DragDrop,{toString:function(){return("DDTarget "+this.id);}});YAHOO.register("dragdrop",YAHOO.util.DragDropMgr,{version:"2.3.1",build:"541"});YAHOO.util.Attribute=function(B,A){if(A){this.owner=A;this.configure(B,true);}};YAHOO.util.Attribute.prototype={name:undefined,value:null,owner:null,readOnly:false,writeOnce:false,_initialConfig:null,_written:false,method:null,validator:null,getValue:function(){return this.value;},setValue:function(F,B){var E;var A=this.owner;var C=this.name;var D={type:C,prevValue:this.getValue(),newValue:F};if(this.readOnly||(this.writeOnce&&this._written)){return false;}if(this.validator&&!this.validator.call(A,F)){return false;}if(!B){E=A.fireBeforeChangeEvent(D);if(E===false){return false;}}if(this.method){this.method.call(A,F);}this.value=F;this._written=true;D.type=C;if(!B){this.owner.fireChangeEvent(D);}return true;},configure:function(B,C){B=B||{};this._written=false;this._initialConfig=this._initialConfig||{};for(var A in B){if(A&&YAHOO.lang.hasOwnProperty(B,A)){this[A]=B[A];if(C){this._initialConfig[A]=B[A];}}}},resetValue:function(){return this.setValue(this._initialConfig.value);},resetConfig:function(){this.configure(this._initialConfig);},refresh:function(A){this.setValue(this.value,A);}};(function(){var A=YAHOO.util.Lang;YAHOO.util.AttributeProvider=function(){};YAHOO.util.AttributeProvider.prototype={_configs:null,get:function(C){this._configs=this._configs||{};var B=this._configs[C];if(!B){return undefined;}return B.value;},set:function(D,E,B){this._configs=this._configs||{};var C=this._configs[D];if(!C){return false;}return C.setValue(E,B);},getAttributeKeys:function(){this._configs=this._configs;var D=[];var B;for(var C in this._configs){B=this._configs[C];if(A.hasOwnProperty(this._configs,C)&&!A.isUndefined(B)){D[D.length]=C;}}return D;},setAttributes:function(D,B){for(var C in D){if(A.hasOwnProperty(D,C)){this.set(C,D[C],B);}}},resetValue:function(C,B){this._configs=this._configs||{};if(this._configs[C]){this.set(C,this._configs[C]._initialConfig.value,B);return true;}return false;},refresh:function(E,C){this._configs=this._configs;E=((A.isString(E))?[E]:E)||this.getAttributeKeys();for(var D=0,B=E.length;D<B;++D){if(this._configs[E[D]]&&!A.isUndefined(this._configs[E[D]].value)&&!A.isNull(this._configs[E[D]].value)){this._configs[E[D]].refresh(C);}}},register:function(B,C){this.setAttributeConfig(B,C);},getAttributeConfig:function(C){this._configs=this._configs||{};var B=this._configs[C]||{};var D={};for(C in B){if(A.hasOwnProperty(B,C)){D[C]=B[C];}}return D;},setAttributeConfig:function(B,C,D){this._configs=this._configs||{};C=C||{};if(!this._configs[B]){C.name=B;this._configs[B]=this.createAttribute(C);}else{this._configs[B].configure(C,D);}},configureAttribute:function(B,C,D){this.setAttributeConfig(B,C,D);},resetAttributeConfig:function(B){this._configs=this._configs||{};this._configs[B].resetConfig();},subscribe:function(B,C){this._events=this._events||{};if(!(B in this._events)){this._events[B]=this.createEvent(B);}YAHOO.util.EventProvider.prototype.subscribe.apply(this,arguments);},on:function(){this.subscribe.apply(this,arguments);},addListener:function(){this.subscribe.apply(this,arguments);},fireBeforeChangeEvent:function(C){var B="before";B+=C.type.charAt(0).toUpperCase()+C.type.substr(1)+"Change";C.type=B;return this.fireEvent(C.type,C);},fireChangeEvent:function(B){B.type+="Change";return this.fireEvent(B.type,B);},createAttribute:function(B){return new YAHOO.util.Attribute(B,this);}};YAHOO.augment(YAHOO.util.AttributeProvider,YAHOO.util.EventProvider);})();(function(){var D=YAHOO.util.Dom,F=YAHOO.util.AttributeProvider;YAHOO.util.Element=function(G,H){if(arguments.length){this.init(G,H);}};YAHOO.util.Element.prototype={DOM_EVENTS:null,appendChild:function(G){G=G.get?G.get("element"):G;this.get("element").appendChild(G);},getElementsByTagName:function(G){return this.get("element").getElementsByTagName(G);},hasChildNodes:function(){return this.get("element").hasChildNodes();},insertBefore:function(G,H){G=G.get?G.get("element"):G;H=(H&&H.get)?H.get("element"):H;this.get("element").insertBefore(G,H);},removeChild:function(G){G=G.get?G.get("element"):G;this.get("element").removeChild(G);return true;},replaceChild:function(G,H){G=G.get?G.get("element"):G;H=H.get?H.get("element"):H;return this.get("element").replaceChild(G,H);},initAttributes:function(G){},addListener:function(K,J,L,I){var H=this.get("element");I=I||this;H=this.get("id")||H;var G=this;if(!this._events[K]){if(this.DOM_EVENTS[K]){YAHOO.util.Event.addListener(H,K,function(M){if(M.srcElement&&!M.target){M.target=M.srcElement;}G.fireEvent(K,M);},L,I);}this.createEvent(K,this);}YAHOO.util.EventProvider.prototype.subscribe.apply(this,arguments);},on:function(){this.addListener.apply(this,arguments);},subscribe:function(){this.addListener.apply(this,arguments);},removeListener:function(H,G){this.unsubscribe.apply(this,arguments);},addClass:function(G){D.addClass(this.get("element"),G);},getElementsByClassName:function(H,G){return D.getElementsByClassName(H,G,this.get("element"));},hasClass:function(G){return D.hasClass(this.get("element"),G);},removeClass:function(G){return D.removeClass(this.get("element"),G);},replaceClass:function(H,G){return D.replaceClass(this.get("element"),H,G);},setStyle:function(I,H){var G=this.get("element");if(!G){return this._queue[this._queue.length]=["setStyle",arguments];}return D.setStyle(G,I,H);},getStyle:function(G){return D.getStyle(this.get("element"),G);},fireQueue:function(){var H=this._queue;for(var I=0,G=H.length;I<G;++I){this[H[I][0]].apply(this,H[I][1]);}},appendTo:function(H,I){H=(H.get)?H.get("element"):D.get(H);this.fireEvent("beforeAppendTo",{type:"beforeAppendTo",target:H});I=(I&&I.get)?I.get("element"):D.get(I);var G=this.get("element");if(!G){return false;}if(!H){return false;}if(G.parent!=H){if(I){H.insertBefore(G,I);}else{H.appendChild(G);}}this.fireEvent("appendTo",{type:"appendTo",target:H});},get:function(G){var I=this._configs||{};var H=I.element;if(H&&!I[G]&&!YAHOO.lang.isUndefined(H.value[G])){return H.value[G];}return F.prototype.get.call(this,G);},setAttributes:function(L,H){var K=this.get("element");
-for(var J in L){if(!this._configs[J]&&!YAHOO.lang.isUndefined(K[J])){this.setAttributeConfig(J);}}for(var I=0,G=this._configOrder.length;I<G;++I){if(L[this._configOrder[I]]){this.set(this._configOrder[I],L[this._configOrder[I]],H);}}},set:function(H,J,G){var I=this.get("element");if(!I){this._queue[this._queue.length]=["set",arguments];if(this._configs[H]){this._configs[H].value=J;}return ;}if(!this._configs[H]&&!YAHOO.lang.isUndefined(I[H])){C.call(this,H);}return F.prototype.set.apply(this,arguments);},setAttributeConfig:function(G,I,J){var H=this.get("element");if(H&&!this._configs[G]&&!YAHOO.lang.isUndefined(H[G])){C.call(this,G,I);}else{F.prototype.setAttributeConfig.apply(this,arguments);}this._configOrder.push(G);},getAttributeKeys:function(){var H=this.get("element");var I=F.prototype.getAttributeKeys.call(this);for(var G in H){if(!this._configs[G]){I[G]=I[G]||H[G];}}return I;},createEvent:function(H,G){this._events[H]=true;F.prototype.createEvent.apply(this,arguments);},init:function(H,G){A.apply(this,arguments);}};var A=function(H,G){this._queue=this._queue||[];this._events=this._events||{};this._configs=this._configs||{};this._configOrder=[];G=G||{};G.element=G.element||H||null;this.DOM_EVENTS={"click":true,"dblclick":true,"keydown":true,"keypress":true,"keyup":true,"mousedown":true,"mousemove":true,"mouseout":true,"mouseover":true,"mouseup":true,"focus":true,"blur":true,"submit":true};var I=false;if(YAHOO.lang.isString(H)){C.call(this,"id",{value:G.element});}if(D.get(H)){I=true;E.call(this,G);B.call(this,G);}YAHOO.util.Event.onAvailable(G.element,function(){if(!I){E.call(this,G);}this.fireEvent("available",{type:"available",target:G.element});},this,true);YAHOO.util.Event.onContentReady(G.element,function(){if(!I){B.call(this,G);}this.fireEvent("contentReady",{type:"contentReady",target:G.element});},this,true);};var E=function(G){this.setAttributeConfig("element",{value:D.get(G.element),readOnly:true});};var B=function(G){this.initAttributes(G);this.setAttributes(G,true);this.fireQueue();};var C=function(G,I){var H=this.get("element");I=I||{};I.name=G;I.method=I.method||function(J){H[G]=J;};I.value=I.value||H[G];this._configs[G]=new YAHOO.util.Attribute(I,this);};YAHOO.augment(YAHOO.util.Element,F);})();YAHOO.register("element",YAHOO.util.Element,{version:"2.3.1",build:"541"});YAHOO.register("utilities", YAHOO, {version: "2.3.1", build: "541"});
+if(typeof YAHOO=="undefined"||!YAHOO){var YAHOO={};}YAHOO.namespace=function(){var A=arguments,E=null,C,B,D;for(C=0;C<A.length;C=C+1){D=A[C].split(".");E=YAHOO;for(B=(D[0]=="YAHOO")?1:0;B<D.length;B=B+1){E[D[B]]=E[D[B]]||{};E=E[D[B]];}}return E;};YAHOO.log=function(D,A,C){var B=YAHOO.widget.Logger;if(B&&B.log){return B.log(D,A,C);}else{return false;}};YAHOO.register=function(A,E,D){var I=YAHOO.env.modules;if(!I[A]){I[A]={versions:[],builds:[]};}var B=I[A],H=D.version,G=D.build,F=YAHOO.env.listeners;B.name=A;B.version=H;B.build=G;B.versions.push(H);B.builds.push(G);B.mainClass=E;for(var C=0;C<F.length;C=C+1){F[C](B);}if(E){E.VERSION=H;E.BUILD=G;}else{YAHOO.log("mainClass is undefined for module "+A,"warn");}};YAHOO.env=YAHOO.env||{modules:[],listeners:[]};YAHOO.env.getVersion=function(A){return YAHOO.env.modules[A]||null;};YAHOO.env.ua=function(){var C={ie:0,opera:0,gecko:0,webkit:0,mobile:null,air:0};var B=navigator.userAgent,A;if((/KHTML/).test(B)){C.webkit=1;}A=B.match(/AppleWebKit\/([^\s]*)/);if(A&&A[1]){C.webkit=parseFloat(A[1]);if(/ Mobile\//.test(B)){C.mobile="Apple";}else{A=B.match(/NokiaN[^\/]*/);if(A){C.mobile=A[0];}}A=B.match(/AdobeAIR\/([^\s]*)/);if(A){C.air=A[0];}}if(!C.webkit){A=B.match(/Opera[\s\/]([^\s]*)/);if(A&&A[1]){C.opera=parseFloat(A[1]);A=B.match(/Opera Mini[^;]*/);if(A){C.mobile=A[0];}}else{A=B.match(/MSIE\s([^;]*)/);if(A&&A[1]){C.ie=parseFloat(A[1]);}else{A=B.match(/Gecko\/([^\s]*)/);if(A){C.gecko=1;A=B.match(/rv:([^\s\)]*)/);if(A&&A[1]){C.gecko=parseFloat(A[1]);}}}}}return C;}();(function(){YAHOO.namespace("util","widget","example");if("undefined"!==typeof YAHOO_config){var B=YAHOO_config.listener,A=YAHOO.env.listeners,D=true,C;if(B){for(C=0;C<A.length;C=C+1){if(A[C]==B){D=false;break;}}if(D){A.push(B);}}}})();YAHOO.lang=YAHOO.lang||{};(function(){var A=YAHOO.lang,C=["toString","valueOf"],B={isArray:function(D){if(D){return A.isNumber(D.length)&&A.isFunction(D.splice);}return false;},isBoolean:function(D){return typeof D==="boolean";},isFunction:function(D){return typeof D==="function";},isNull:function(D){return D===null;},isNumber:function(D){return typeof D==="number"&&isFinite(D);},isObject:function(D){return(D&&(typeof D==="object"||A.isFunction(D)))||false;},isString:function(D){return typeof D==="string";},isUndefined:function(D){return typeof D==="undefined";},_IEEnumFix:(YAHOO.env.ua.ie)?function(F,E){for(var D=0;D<C.length;D=D+1){var H=C[D],G=E[H];if(A.isFunction(G)&&G!=Object.prototype[H]){F[H]=G;}}}:function(){},extend:function(H,I,G){if(!I||!H){throw new Error("extend failed, please check that "+"all dependencies are included.");}var E=function(){};E.prototype=I.prototype;H.prototype=new E();H.prototype.constructor=H;H.superclass=I.prototype;if(I.prototype.constructor==Object.prototype.constructor){I.prototype.constructor=I;}if(G){for(var D in G){if(A.hasOwnProperty(G,D)){H.prototype[D]=G[D];}}A._IEEnumFix(H.prototype,G);}},augmentObject:function(H,G){if(!G||!H){throw new Error("Absorb failed, verify dependencies.");}var D=arguments,F,I,E=D[2];if(E&&E!==true){for(F=2;F<D.length;F=F+1){H[D[F]]=G[D[F]];}}else{for(I in G){if(E||!(I in H)){H[I]=G[I];}}A._IEEnumFix(H,G);}},augmentProto:function(G,F){if(!F||!G){throw new Error("Augment failed, verify dependencies.");}var D=[G.prototype,F.prototype];for(var E=2;E<arguments.length;E=E+1){D.push(arguments[E]);}A.augmentObject.apply(this,D);},dump:function(D,I){var F,H,K=[],L="{...}",E="f(){...}",J=", ",G=" => ";if(!A.isObject(D)){return D+"";}else{if(D instanceof Date||("nodeType" in D&&"tagName" in D)){return D;}else{if(A.isFunction(D)){return E;}}}I=(A.isNumber(I))?I:3;if(A.isArray(D)){K.push("[");for(F=0,H=D.length;F<H;F=F+1){if(A.isObject(D[F])){K.push((I>0)?A.dump(D[F],I-1):L);}else{K.push(D[F]);}K.push(J);}if(K.length>1){K.pop();}K.push("]");}else{K.push("{");for(F in D){if(A.hasOwnProperty(D,F)){K.push(F+G);if(A.isObject(D[F])){K.push((I>0)?A.dump(D[F],I-1):L);}else{K.push(D[F]);}K.push(J);}}if(K.length>1){K.pop();}K.push("}");}return K.join("");},substitute:function(S,E,L){var I,H,G,O,P,R,N=[],F,J="dump",M=" ",D="{",Q="}";for(;;){I=S.lastIndexOf(D);if(I<0){break;}H=S.indexOf(Q,I);if(I+1>=H){break;}F=S.substring(I+1,H);O=F;R=null;G=O.indexOf(M);if(G>-1){R=O.substring(G+1);O=O.substring(0,G);}P=E[O];if(L){P=L(O,P,R);}if(A.isObject(P)){if(A.isArray(P)){P=A.dump(P,parseInt(R,10));}else{R=R||"";var K=R.indexOf(J);if(K>-1){R=R.substring(4);}if(P.toString===Object.prototype.toString||K>-1){P=A.dump(P,parseInt(R,10));}else{P=P.toString();}}}else{if(!A.isString(P)&&!A.isNumber(P)){P="~-"+N.length+"-~";N[N.length]=F;}}S=S.substring(0,I)+P+S.substring(H+1);}for(I=N.length-1;I>=0;I=I-1){S=S.replace(new RegExp("~-"+I+"-~"),"{"+N[I]+"}","g");}return S;},trim:function(D){try{return D.replace(/^\s+|\s+$/g,"");}catch(E){return D;}},merge:function(){var G={},E=arguments;for(var F=0,D=E.length;F<D;F=F+1){A.augmentObject(G,E[F],true);}return G;},later:function(K,E,L,G,H){K=K||0;E=E||{};var F=L,J=G,I,D;if(A.isString(L)){F=E[L];}if(!F){throw new TypeError("method undefined");}if(!A.isArray(J)){J=[G];}I=function(){F.apply(E,J);};D=(H)?setInterval(I,K):setTimeout(I,K);return{interval:H,cancel:function(){if(this.interval){clearInterval(D);}else{clearTimeout(D);}}};},isValue:function(D){return(A.isObject(D)||A.isString(D)||A.isNumber(D)||A.isBoolean(D));}};A.hasOwnProperty=(Object.prototype.hasOwnProperty)?function(D,E){return D&&D.hasOwnProperty(E);}:function(D,E){return !A.isUndefined(D[E])&&D.constructor.prototype[E]!==D[E];};B.augmentObject(A,B,true);YAHOO.util.Lang=A;A.augment=A.augmentProto;YAHOO.augment=A.augmentProto;YAHOO.extend=A.extend;})();YAHOO.register("yahoo",YAHOO,{version:"2.5.2",build:"1076"});YAHOO.util.Get=function(){var M={},L=0,Q=0,E=false,N=YAHOO.env.ua,R=YAHOO.lang;var J=function(V,S,W){var T=W||window,X=T.document,Y=X.createElement(V);for(var U in S){if(S[U]&&YAHOO.lang.hasOwnProperty(S,U)){Y.setAttribute(U,S[U]);}}return Y;};var H=function(S,T,V){var U=V||"utf-8";return J("link",{"id":"yui__dyn_"+(Q++),"type":"text/css","charset":U,"rel":"stylesheet","href":S},T);
+};var O=function(S,T,V){var U=V||"utf-8";return J("script",{"id":"yui__dyn_"+(Q++),"type":"text/javascript","charset":U,"src":S},T);};var A=function(S,T){return{tId:S.tId,win:S.win,data:S.data,nodes:S.nodes,msg:T,purge:function(){D(this.tId);}};};var B=function(S,V){var T=M[V],U=(R.isString(S))?T.win.document.getElementById(S):S;if(!U){P(V,"target node not found: "+S);}return U;};var P=function(V,U){var S=M[V];if(S.onFailure){var T=S.scope||S.win;S.onFailure.call(T,A(S,U));}};var C=function(V){var S=M[V];S.finished=true;if(S.aborted){var U="transaction "+V+" was aborted";P(V,U);return ;}if(S.onSuccess){var T=S.scope||S.win;S.onSuccess.call(T,A(S));}};var G=function(U,Y){var T=M[U];if(T.aborted){var W="transaction "+U+" was aborted";P(U,W);return ;}if(Y){T.url.shift();if(T.varName){T.varName.shift();}}else{T.url=(R.isString(T.url))?[T.url]:T.url;if(T.varName){T.varName=(R.isString(T.varName))?[T.varName]:T.varName;}}var b=T.win,a=b.document,Z=a.getElementsByTagName("head")[0],V;if(T.url.length===0){if(T.type==="script"&&N.webkit&&N.webkit<420&&!T.finalpass&&!T.varName){var X=O(null,T.win,T.charset);X.innerHTML='YAHOO.util.Get._finalize("'+U+'");';T.nodes.push(X);Z.appendChild(X);}else{C(U);}return ;}var S=T.url[0];if(T.type==="script"){V=O(S,b,T.charset);}else{V=H(S,b,T.charset);}F(T.type,V,U,S,b,T.url.length);T.nodes.push(V);if(T.insertBefore){var c=B(T.insertBefore,U);if(c){c.parentNode.insertBefore(V,c);}}else{Z.appendChild(V);}if((N.webkit||N.gecko)&&T.type==="css"){G(U,S);}};var K=function(){if(E){return ;}E=true;for(var S in M){var T=M[S];if(T.autopurge&&T.finished){D(T.tId);delete M[S];}}E=false;};var D=function(Z){var W=M[Z];if(W){var Y=W.nodes,S=Y.length,X=W.win.document,V=X.getElementsByTagName("head")[0];if(W.insertBefore){var U=B(W.insertBefore,Z);if(U){V=U.parentNode;}}for(var T=0;T<S;T=T+1){V.removeChild(Y[T]);}}W.nodes=[];};var I=function(T,S,U){var W="q"+(L++);U=U||{};if(L%YAHOO.util.Get.PURGE_THRESH===0){K();}M[W]=R.merge(U,{tId:W,type:T,url:S,finished:false,nodes:[]});var V=M[W];V.win=V.win||window;V.scope=V.scope||V.win;V.autopurge=("autopurge" in V)?V.autopurge:(T==="script")?true:false;R.later(0,V,G,W);return{tId:W};};var F=function(b,W,V,T,X,Y,a){var Z=a||G;if(N.ie){W.onreadystatechange=function(){var c=this.readyState;if("loaded"===c||"complete"===c){Z(V,T);}};}else{if(N.webkit){if(b==="script"){if(N.webkit>=420){W.addEventListener("load",function(){Z(V,T);});}else{var S=M[V];if(S.varName){var U=YAHOO.util.Get.POLL_FREQ;S.maxattempts=YAHOO.util.Get.TIMEOUT/U;S.attempts=0;S._cache=S.varName[0].split(".");S.timer=R.later(U,S,function(h){var e=this._cache,d=e.length,c=this.win,f;for(f=0;f<d;f=f+1){c=c[e[f]];if(!c){this.attempts++;if(this.attempts++>this.maxattempts){var g="Over retry limit, giving up";S.timer.cancel();P(V,g);}else{}return ;}}S.timer.cancel();Z(V,T);},null,true);}else{R.later(YAHOO.util.Get.POLL_FREQ,null,Z,[V,T]);}}}}else{W.onload=function(){Z(V,T);};}}};return{POLL_FREQ:10,PURGE_THRESH:20,TIMEOUT:2000,_finalize:function(S){R.later(0,null,C,S);},abort:function(T){var U=(R.isString(T))?T:T.tId;var S=M[U];if(S){S.aborted=true;}},script:function(S,T){return I("script",S,T);},css:function(S,T){return I("css",S,T);}};}();YAHOO.register("get",YAHOO.util.Get,{version:"2.5.2",build:"1076"});(function(){var Y=YAHOO,util=Y.util,lang=Y.lang,env=Y.env,PROV="_provides",SUPER="_supersedes",REQ="expanded",AFTER="_after";var YUI={dupsAllowed:{"yahoo":true,"get":true},info:{"base":"http://yui.yahooapis.com/2.5.2/build/","skin":{"defaultSkin":"sam","base":"assets/skins/","path":"skin.css","after":["reset","fonts","grids","base"],"rollup":3},dupsAllowed:["yahoo","get"],"moduleInfo":{"animation":{"type":"js","path":"animation/animation-min.js","requires":["dom","event"]},"autocomplete":{"type":"js","path":"autocomplete/autocomplete-min.js","requires":["dom","event"],"optional":["connection","animation"],"skinnable":true},"base":{"type":"css","path":"base/base-min.css","after":["reset","fonts","grids"]},"button":{"type":"js","path":"button/button-min.js","requires":["element"],"optional":["menu"],"skinnable":true},"calendar":{"type":"js","path":"calendar/calendar-min.js","requires":["event","dom"],"skinnable":true},"charts":{"type":"js","path":"charts/charts-experimental-min.js","requires":["element","json","datasource"]},"colorpicker":{"type":"js","path":"colorpicker/colorpicker-min.js","requires":["slider","element"],"optional":["animation"],"skinnable":true},"connection":{"type":"js","path":"connection/connection-min.js","requires":["event"]},"container":{"type":"js","path":"container/container-min.js","requires":["dom","event"],"optional":["dragdrop","animation","connection"],"supersedes":["containercore"],"skinnable":true},"containercore":{"type":"js","path":"container/container_core-min.js","requires":["dom","event"],"pkg":"container"},"cookie":{"type":"js","path":"cookie/cookie-beta-min.js","requires":["yahoo"]},"datasource":{"type":"js","path":"datasource/datasource-beta-min.js","requires":["event"],"optional":["connection"]},"datatable":{"type":"js","path":"datatable/datatable-beta-min.js","requires":["element","datasource"],"optional":["calendar","dragdrop"],"skinnable":true},"dom":{"type":"js","path":"dom/dom-min.js","requires":["yahoo"]},"dragdrop":{"type":"js","path":"dragdrop/dragdrop-min.js","requires":["dom","event"]},"editor":{"type":"js","path":"editor/editor-beta-min.js","requires":["menu","element","button"],"optional":["animation","dragdrop"],"supersedes":["simpleeditor"],"skinnable":true},"element":{"type":"js","path":"element/element-beta-min.js","requires":["dom","event"]},"event":{"type":"js","path":"event/event-min.js","requires":["yahoo"]},"fonts":{"type":"css","path":"fonts/fonts-min.css"},"get":{"type":"js","path":"get/get-min.js","requires":["yahoo"]},"grids":{"type":"css","path":"grids/grids-min.css","requires":["fonts"],"optional":["reset"]},"history":{"type":"js","path":"history/history-min.js","requires":["event"]},"imagecropper":{"type":"js","path":"imagecropper/imagecropper-beta-min.js","requires":["dom","event","dragdrop","element","resize"],"skinnable":true},"imageloader":{"type":"js","path":"imageloader/imageloader-min.js","requires":["event","dom"]},"json":{"type":"js","path":"json/json-min.js","requires":["yahoo"]},"layout":{"type":"js","path":"layout/layout-beta-min.js","requires":["dom","event","element"],"optional":["animation","dragdrop","resize","selector"],"skinnable":true},"logger":{"type":"js","path":"logger/logger-min.js","requires":["event","dom"],"optional":["dragdrop"],"skinnable":true},"menu":{"type":"js","path":"menu/menu-min.js","requires":["containercore"],"skinnable":true},"profiler":{"type":"js","path":"profiler/profiler-beta-min.js","requires":["yahoo"]},"profilerviewer":{"type":"js","path":"profilerviewer/profilerviewer-beta-min.js","requires":["profiler","yuiloader","element"],"skinnable":true},"reset":{"type":"css","path":"reset/reset-min.css"},"reset-fonts-grids":{"type":"css","path":"reset-fonts-grids/reset-fonts-grids.css","supersedes":["reset","fonts","grids","reset-fonts"],"rollup":4},"reset-fonts":{"type":"css","path":"reset-fonts/reset-fonts.css","supersedes":["reset","fonts"],"rollup":2},"resize":{"type":"js","path":"resize/resize-beta-min.js","requires":["dom","event","dragdrop","element"],"optional":["animation"],"skinnable":true},"selector":{"type":"js","path":"selector/selector-beta-min.js","requires":["yahoo","dom"]},"simpleeditor":{"type":"js","path":"editor/simpleeditor-beta-min.js","requires":["element"],"optional":["containercore","menu","button","animation","dragdrop"],"skinnable":true,"pkg":"editor"},"slider":{"type":"js","path":"slider/slider-min.js","requires":["dragdrop"],"optional":["animation"]},"tabview":{"type":"js","path":"tabview/tabview-min.js","requires":["element"],"optional":["connection"],"skinnable":true},"treeview":{"type":"js","path":"treeview/treeview-min.js","requires":["event"],"skinnable":true},"uploader":{"type":"js","path":"uploader/uploader-experimental.js","requires":["element"]},"utilities":{"type":"js","path":"utilities/utilities.js","supersedes":["yahoo","event","dragdrop","animation","dom","connection","element","yahoo-dom-event","get","yuiloader","yuiloader-dom-event"],"rollup":8},"yahoo":{"type":"js","path":"yahoo/yahoo-min.js"},"yahoo-dom-event":{"type":"js","path":"yahoo-dom-event/yahoo-dom-event.js","supersedes":["yahoo","event","dom"],"rollup":3},"yuiloader":{"type":"js","path":"yuiloader/yuiloader-beta-min.js","supersedes":["yahoo","get"]},"yuiloader-dom-event":{"type":"js","path":"yuiloader-dom-event/yuiloader-dom-event.js","supersedes":["yahoo","dom","event","get","yuiloader","yahoo-dom-event"],"rollup":5},"yuitest":{"type":"js","path":"yuitest/yuitest-min.js","requires":["logger"],"skinnable":true}}},ObjectUtil:{appendArray:function(o,a){if(a){for(var i=0;
+i<a.length;i=i+1){o[a[i]]=true;}}},keys:function(o,ordered){var a=[],i;for(i in o){if(lang.hasOwnProperty(o,i)){a.push(i);}}return a;}},ArrayUtil:{appendArray:function(a1,a2){Array.prototype.push.apply(a1,a2);},indexOf:function(a,val){for(var i=0;i<a.length;i=i+1){if(a[i]===val){return i;}}return -1;},toObject:function(a){var o={};for(var i=0;i<a.length;i=i+1){o[a[i]]=true;}return o;},uniq:function(a){return YUI.ObjectUtil.keys(YUI.ArrayUtil.toObject(a));}}};YAHOO.util.YUILoader=function(o){this._internalCallback=null;this._useYahooListener=false;this.onSuccess=null;this.onFailure=Y.log;this.onProgress=null;this.scope=this;this.data=null;this.insertBefore=null;this.charset=null;this.varName=null;this.base=YUI.info.base;this.ignore=null;this.force=null;this.allowRollup=true;this.filter=null;this.required={};this.moduleInfo=lang.merge(YUI.info.moduleInfo);this.rollups=null;this.loadOptional=false;this.sorted=[];this.loaded={};this.dirty=true;this.inserted={};var self=this;env.listeners.push(function(m){if(self._useYahooListener){self.loadNext(m.name);}});this.skin=lang.merge(YUI.info.skin);this._config(o);};Y.util.YUILoader.prototype={FILTERS:{RAW:{"searchExp":"-min\\.js","replaceStr":".js"},DEBUG:{"searchExp":"-min\\.js","replaceStr":"-debug.js"}},SKIN_PREFIX:"skin-",_config:function(o){if(o){for(var i in o){if(lang.hasOwnProperty(o,i)){if(i=="require"){this.require(o[i]);}else{this[i]=o[i];}}}}var f=this.filter;if(lang.isString(f)){f=f.toUpperCase();if(f==="DEBUG"){this.require("logger");}if(!Y.widget.LogWriter){Y.widget.LogWriter=function(){return Y;};}this.filter=this.FILTERS[f];}},addModule:function(o){if(!o||!o.name||!o.type||(!o.path&&!o.fullpath)){return false;}o.ext=("ext" in o)?o.ext:true;o.requires=o.requires||[];this.moduleInfo[o.name]=o;this.dirty=true;return true;},require:function(what){var a=(typeof what==="string")?arguments:what;this.dirty=true;YUI.ObjectUtil.appendArray(this.required,a);},_addSkin:function(skin,mod){var name=this.formatSkin(skin),info=this.moduleInfo,sinf=this.skin,ext=info[mod]&&info[mod].ext;if(!info[name]){this.addModule({"name":name,"type":"css","path":sinf.base+skin+"/"+sinf.path,"after":sinf.after,"rollup":sinf.rollup,"ext":ext});}if(mod){name=this.formatSkin(skin,mod);if(!info[name]){var mdef=info[mod],pkg=mdef.pkg||mod;this.addModule({"name":name,"type":"css","after":sinf.after,"path":pkg+"/"+sinf.base+skin+"/"+mod+".css","ext":ext});}}return name;},getRequires:function(mod){if(!mod){return[];}if(!this.dirty&&mod.expanded){return mod.expanded;}mod.requires=mod.requires||[];var i,d=[],r=mod.requires,o=mod.optional,info=this.moduleInfo,m;for(i=0;i<r.length;i=i+1){d.push(r[i]);m=info[r[i]];YUI.ArrayUtil.appendArray(d,this.getRequires(m));}if(o&&this.loadOptional){for(i=0;i<o.length;i=i+1){d.push(o[i]);YUI.ArrayUtil.appendArray(d,this.getRequires(info[o[i]]));}}mod.expanded=YUI.ArrayUtil.uniq(d);return mod.expanded;},getProvides:function(name,notMe){var addMe=!(notMe),ckey=(addMe)?PROV:SUPER,m=this.moduleInfo[name],o={};if(!m){return o;}if(m[ckey]){return m[ckey];}var s=m.supersedes,done={},me=this;var add=function(mm){if(!done[mm]){done[mm]=true;lang.augmentObject(o,me.getProvides(mm));}};if(s){for(var i=0;i<s.length;i=i+1){add(s[i]);}}m[SUPER]=o;m[PROV]=lang.merge(o);m[PROV][name]=true;return m[ckey];},calculate:function(o){if(this.dirty){this._config(o);this._setup();this._explode();if(this.allowRollup){this._rollup();}this._reduce();this._sort();this.dirty=false;}},_setup:function(){var info=this.moduleInfo,name,i,j;for(name in info){var m=info[name];if(m&&m.skinnable){var o=this.skin.overrides,smod;if(o&&o[name]){for(i=0;i<o[name].length;i=i+1){smod=this._addSkin(o[name][i],name);}}else{smod=this._addSkin(this.skin.defaultSkin,name);}m.requires.push(smod);}}var l=lang.merge(this.inserted);if(!this._sandbox){l=lang.merge(l,env.modules);}if(this.ignore){YUI.ObjectUtil.appendArray(l,this.ignore);}if(this.force){for(i=0;i<this.force.length;i=i+1){if(this.force[i] in l){delete l[this.force[i]];}}}for(j in l){if(lang.hasOwnProperty(l,j)){lang.augmentObject(l,this.getProvides(j));}}this.loaded=l;},_explode:function(){var r=this.required,i,mod;for(i in r){mod=this.moduleInfo[i];if(mod){var req=this.getRequires(mod);if(req){YUI.ObjectUtil.appendArray(r,req);}}}},_skin:function(){},formatSkin:function(skin,mod){var s=this.SKIN_PREFIX+skin;if(mod){s=s+"-"+mod;}return s;},parseSkin:function(mod){if(mod.indexOf(this.SKIN_PREFIX)===0){var a=mod.split("-");return{skin:a[1],module:a[2]};}return null;},_rollup:function(){var i,j,m,s,rollups={},r=this.required,roll;if(this.dirty||!this.rollups){for(i in this.moduleInfo){m=this.moduleInfo[i];if(m&&m.rollup){rollups[i]=m;}}this.rollups=rollups;}for(;;){var rolled=false;for(i in rollups){if(!r[i]&&!this.loaded[i]){m=this.moduleInfo[i];s=m.supersedes;roll=false;if(!m.rollup){continue;}var skin=(m.ext)?false:this.parseSkin(i),c=0;if(skin){for(j in r){if(i!==j&&this.parseSkin(j)){c++;roll=(c>=m.rollup);if(roll){break;}}}}else{for(j=0;j<s.length;j=j+1){if(this.loaded[s[j]]&&(!YUI.dupsAllowed[s[j]])){roll=false;break;}else{if(r[s[j]]){c++;roll=(c>=m.rollup);if(roll){break;}}}}}if(roll){r[i]=true;rolled=true;this.getRequires(m);}}}if(!rolled){break;}}},_reduce:function(){var i,j,s,m,r=this.required;for(i in r){if(i in this.loaded){delete r[i];}else{var skinDef=this.parseSkin(i);if(skinDef){if(!skinDef.module){var skin_pre=this.SKIN_PREFIX+skinDef.skin;for(j in r){m=this.moduleInfo[j];var ext=m&&m.ext;if(!ext&&j!==i&&j.indexOf(skin_pre)>-1){delete r[j];}}}}else{m=this.moduleInfo[i];s=m&&m.supersedes;if(s){for(j=0;j<s.length;j=j+1){if(s[j] in r){delete r[s[j]];}}}}}}},_sort:function(){var s=[],info=this.moduleInfo,loaded=this.loaded,checkOptional=!this.loadOptional,me=this;var requires=function(aa,bb){if(loaded[bb]){return false;}var ii,mm=info[aa],rr=mm&&mm.expanded,after=mm&&mm.after,other=info[bb],optional=mm&&mm.optional;if(rr&&YUI.ArrayUtil.indexOf(rr,bb)>-1){return true;}if(after&&YUI.ArrayUtil.indexOf(after,bb)>-1){return true;
+}if(checkOptional&&optional&&YUI.ArrayUtil.indexOf(optional,bb)>-1){return true;}var ss=info[bb]&&info[bb].supersedes;if(ss){for(ii=0;ii<ss.length;ii=ii+1){if(requires(aa,ss[ii])){return true;}}}if(mm.ext&&mm.type=="css"&&(!other.ext)){return true;}return false;};for(var i in this.required){s.push(i);}var p=0;for(;;){var l=s.length,a,b,j,k,moved=false;for(j=p;j<l;j=j+1){a=s[j];for(k=j+1;k<l;k=k+1){if(requires(a,s[k])){b=s.splice(k,1);s.splice(j,0,b[0]);moved=true;break;}}if(moved){break;}else{p=p+1;}}if(!moved){break;}}this.sorted=s;},toString:function(){var o={type:"YUILoader",base:this.base,filter:this.filter,required:this.required,loaded:this.loaded,inserted:this.inserted};lang.dump(o,1);},insert:function(o,type){this.calculate(o);if(!type){var self=this;this._internalCallback=function(){self._internalCallback=null;self.insert(null,"js");};this.insert(null,"css");return ;}this._loading=true;this.loadType=type;this.loadNext();},sandbox:function(o,type){if(o){}else{}this._config(o);if(!this.onSuccess){throw new Error("You must supply an onSuccess handler for your sandbox");}this._sandbox=true;var self=this;if(!type||type!=="js"){this._internalCallback=function(){self._internalCallback=null;self.sandbox(null,"js");};this.insert(null,"css");return ;}if(!util.Connect){var ld=new YAHOO.util.YUILoader();ld.insert({base:this.base,filter:this.filter,require:"connection",insertBefore:this.insertBefore,charset:this.charset,onSuccess:function(){this.sandbox(null,"js");},scope:this},"js");return ;}this._scriptText=[];this._loadCount=0;this._stopCount=this.sorted.length;this._xhr=[];this.calculate();var s=this.sorted,l=s.length,i,m,url;for(i=0;i<l;i=i+1){m=this.moduleInfo[s[i]];if(!m){this.onFailure.call(this.scope,{msg:"undefined module "+m,data:this.data});for(var j=0;j<this._xhr.length;j=j+1){this._xhr[j].abort();}return ;}if(m.type!=="js"){this._loadCount++;continue;}url=m.fullpath||this._url(m.path);var xhrData={success:function(o){var idx=o.argument[0],name=o.argument[2];this._scriptText[idx]=o.responseText;if(this.onProgress){this.onProgress.call(this.scope,{name:name,scriptText:o.responseText,xhrResponse:o,data:this.data});}this._loadCount++;if(this._loadCount>=this._stopCount){var v=this.varName||"YAHOO";var t="(function() {\n";var b="\nreturn "+v+";\n})();";var ref=eval(t+this._scriptText.join("\n")+b);this._pushEvents(ref);if(ref){this.onSuccess.call(this.scope,{reference:ref,data:this.data});}else{this.onFailure.call(this.scope,{msg:this.varName+" reference failure",data:this.data});}}},failure:function(o){this.onFailure.call(this.scope,{msg:"XHR failure",xhrResponse:o,data:this.data});},scope:this,argument:[i,url,s[i]]};this._xhr.push(util.Connect.asyncRequest("GET",url,xhrData));}},loadNext:function(mname){if(!this._loading){return ;}if(mname){if(mname!==this._loading){return ;}this.inserted[mname]=true;if(this.onProgress){this.onProgress.call(this.scope,{name:mname,data:this.data});}}var s=this.sorted,len=s.length,i,m;for(i=0;i<len;i=i+1){if(s[i] in this.inserted){continue;}if(s[i]===this._loading){return ;}m=this.moduleInfo[s[i]];if(!m){this.onFailure.call(this.scope,{msg:"undefined module "+m,data:this.data});return ;}if(!this.loadType||this.loadType===m.type){this._loading=s[i];var fn=(m.type==="css")?util.Get.css:util.Get.script,url=m.fullpath||this._url(m.path),self=this,c=function(o){self.loadNext(o.data);};if(env.ua.webkit&&env.ua.webkit<420&&m.type==="js"&&!m.varName){c=null;this._useYahooListener=true;}fn(url,{data:s[i],onSuccess:c,insertBefore:this.insertBefore,charset:this.charset,varName:m.varName,scope:self});return ;}}this._loading=null;if(this._internalCallback){var f=this._internalCallback;this._internalCallback=null;f.call(this);}else{if(this.onSuccess){this._pushEvents();this.onSuccess.call(this.scope,{data:this.data});}}},_pushEvents:function(ref){var r=ref||YAHOO;if(r.util&&r.util.Event){r.util.Event._load();}},_url:function(path){var u=this.base||"",f=this.filter;u=u+path;if(f){u=u.replace(new RegExp(f.searchExp),f.replaceStr);}return u;}};})();(function(){var B=YAHOO.util,K,I,J={},F={},M=window.document;YAHOO.env._id_counter=YAHOO.env._id_counter||0;var C=YAHOO.env.ua.opera,L=YAHOO.env.ua.webkit,A=YAHOO.env.ua.gecko,G=YAHOO.env.ua.ie;var E={HYPHEN:/(-[a-z])/i,ROOT_TAG:/^body|html$/i,OP_SCROLL:/^(?:inline|table-row)$/i};var N=function(P){if(!E.HYPHEN.test(P)){return P;}if(J[P]){return J[P];}var Q=P;while(E.HYPHEN.exec(Q)){Q=Q.replace(RegExp.$1,RegExp.$1.substr(1).toUpperCase());}J[P]=Q;return Q;};var O=function(Q){var P=F[Q];if(!P){P=new RegExp("(?:^|\\s+)"+Q+"(?:\\s+|$)");F[Q]=P;}return P;};if(M.defaultView&&M.defaultView.getComputedStyle){K=function(P,S){var R=null;if(S=="float"){S="cssFloat";}var Q=P.ownerDocument.defaultView.getComputedStyle(P,"");if(Q){R=Q[N(S)];}return P.style[S]||R;};}else{if(M.documentElement.currentStyle&&G){K=function(P,R){switch(N(R)){case"opacity":var T=100;try{T=P.filters["DXImageTransform.Microsoft.Alpha"].opacity;}catch(S){try{T=P.filters("alpha").opacity;}catch(S){}}return T/100;case"float":R="styleFloat";default:var Q=P.currentStyle?P.currentStyle[R]:null;return(P.style[R]||Q);}};}else{K=function(P,Q){return P.style[Q];};}}if(G){I=function(P,Q,R){switch(Q){case"opacity":if(YAHOO.lang.isString(P.style.filter)){P.style.filter="alpha(opacity="+R*100+")";if(!P.currentStyle||!P.currentStyle.hasLayout){P.style.zoom=1;}}break;case"float":Q="styleFloat";default:P.style[Q]=R;}};}else{I=function(P,Q,R){if(Q=="float"){Q="cssFloat";}P.style[Q]=R;};}var D=function(P,Q){return P&&P.nodeType==1&&(!Q||Q(P));};YAHOO.util.Dom={get:function(R){if(R&&(R.nodeType||R.item)){return R;}if(YAHOO.lang.isString(R)||!R){return M.getElementById(R);}if(R.length!==undefined){var S=[];for(var Q=0,P=R.length;Q<P;++Q){S[S.length]=B.Dom.get(R[Q]);}return S;}return R;},getStyle:function(P,R){R=N(R);var Q=function(S){return K(S,R);};return B.Dom.batch(P,Q,B.Dom,true);},setStyle:function(P,R,S){R=N(R);var Q=function(T){I(T,R,S);};B.Dom.batch(P,Q,B.Dom,true);},getXY:function(P){var Q=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=R.ownerDocument.body){return false;}return H(R);};return B.Dom.batch(P,Q,B.Dom,true);},getX:function(P){var Q=function(R){return B.Dom.getXY(R)[0];};return B.Dom.batch(P,Q,B.Dom,true);},getY:function(P){var Q=function(R){return B.Dom.getXY(R)[1];};return B.Dom.batch(P,Q,B.Dom,true);},setXY:function(P,S,R){var Q=function(V){var U=this.getStyle(V,"position");if(U=="static"){this.setStyle(V,"position","relative");U="relative";}var X=this.getXY(V);if(X===false){return false;}var W=[parseInt(this.getStyle(V,"left"),10),parseInt(this.getStyle(V,"top"),10)];if(isNaN(W[0])){W[0]=(U=="relative")?0:V.offsetLeft;}if(isNaN(W[1])){W[1]=(U=="relative")?0:V.offsetTop;}if(S[0]!==null){V.style.left=S[0]-X[0]+W[0]+"px";}if(S[1]!==null){V.style.top=S[1]-X[1]+W[1]+"px";}if(!R){var T=this.getXY(V);if((S[0]!==null&&T[0]!=S[0])||(S[1]!==null&&T[1]!=S[1])){this.setXY(V,S,true);}}};B.Dom.batch(P,Q,B.Dom,true);},setX:function(Q,P){B.Dom.setXY(Q,[P,null]);},setY:function(P,Q){B.Dom.setXY(P,[null,Q]);},getRegion:function(P){var Q=function(R){if((R.parentNode===null||R.offsetParent===null||this.getStyle(R,"display")=="none")&&R!=R.ownerDocument.body){return false;}var S=B.Region.getRegion(R);return S;};return B.Dom.batch(P,Q,B.Dom,true);},getClientWidth:function(){return B.Dom.getViewportWidth();},getClientHeight:function(){return B.Dom.getViewportHeight();},getElementsByClassName:function(T,X,U,V){X=X||"*";U=(U)?B.Dom.get(U):null||M;if(!U){return[];}var Q=[],P=U.getElementsByTagName(X),W=O(T);for(var R=0,S=P.length;R<S;++R){if(W.test(P[R].className)){Q[Q.length]=P[R];if(V){V.call(P[R],P[R]);}}}return Q;},hasClass:function(R,Q){var P=O(Q);var S=function(T){return P.test(T.className);};return B.Dom.batch(R,S,B.Dom,true);},addClass:function(Q,P){var R=function(S){if(this.hasClass(S,P)){return false;}S.className=YAHOO.lang.trim([S.className,P].join(" "));return true;};return B.Dom.batch(Q,R,B.Dom,true);},removeClass:function(R,Q){var P=O(Q);var S=function(T){if(!Q||!this.hasClass(T,Q)){return false;}var U=T.className;T.className=U.replace(P," ");if(this.hasClass(T,Q)){this.removeClass(T,Q);}T.className=YAHOO.lang.trim(T.className);return true;};return B.Dom.batch(R,S,B.Dom,true);},replaceClass:function(S,Q,P){if(!P||Q===P){return false;}var R=O(Q);var T=function(U){if(!this.hasClass(U,Q)){this.addClass(U,P);return true;}U.className=U.className.replace(R," "+P+" ");if(this.hasClass(U,Q)){this.replaceClass(U,Q,P);}U.className=YAHOO.lang.trim(U.className);return true;};return B.Dom.batch(S,T,B.Dom,true);},generateId:function(P,R){R=R||"yui-gen";var Q=function(S){if(S&&S.id){return S.id;}var T=R+YAHOO.env._id_counter++;if(S){S.id=T;}return T;};return B.Dom.batch(P,Q,B.Dom,true)||Q.apply(B.Dom,arguments);},isAncestor:function(P,Q){P=B.Dom.get(P);Q=B.Dom.get(Q);if(!P||!Q){return false;}if(P.contains&&Q.nodeType&&!L){return P.contains(Q);}else{if(P.compareDocumentPosition&&Q.nodeType){return !!(P.compareDocumentPosition(Q)&16);}else{if(Q.nodeType){return !!this.getAncestorBy(Q,function(R){return R==P;});}}}return false;},inDocument:function(P){return this.isAncestor(M.documentElement,P);},getElementsBy:function(W,Q,R,T){Q=Q||"*";R=(R)?B.Dom.get(R):null||M;if(!R){return[];}var S=[],V=R.getElementsByTagName(Q);for(var U=0,P=V.length;U<P;++U){if(W(V[U])){S[S.length]=V[U];if(T){T(V[U]);}}}return S;},batch:function(T,W,V,R){T=(T&&(T.tagName||T.item))?T:B.Dom.get(T);if(!T||!W){return false;}var S=(R)?V:window;if(T.tagName||T.length===undefined){return W.call(S,T,V);}var U=[];for(var Q=0,P=T.length;Q<P;++Q){U[U.length]=W.call(S,T[Q],V);}return U;},getDocumentHeight:function(){var Q=(M.compatMode!="CSS1Compat")?M.body.scrollHeight:M.documentElement.scrollHeight;var P=Math.max(Q,B.Dom.getViewportHeight());return P;},getDocumentWidth:function(){var Q=(M.compatMode!="CSS1Compat")?M.body.scrollWidth:M.documentElement.scrollWidth;var P=Math.max(Q,B.Dom.getViewportWidth());return P;},getViewportHeight:function(){var P=self.innerHeight;
+var Q=M.compatMode;if((Q||G)&&!C){P=(Q=="CSS1Compat")?M.documentElement.clientHeight:M.body.clientHeight;}return P;},getViewportWidth:function(){var P=self.innerWidth;var Q=M.compatMode;if(Q||G){P=(Q=="CSS1Compat")?M.documentElement.clientWidth:M.body.clientWidth;}return P;},getAncestorBy:function(P,Q){while(P=P.parentNode){if(D(P,Q)){return P;}}return null;},getAncestorByClassName:function(Q,P){Q=B.Dom.get(Q);if(!Q){return null;}var R=function(S){return B.Dom.hasClass(S,P);};return B.Dom.getAncestorBy(Q,R);},getAncestorByTagName:function(Q,P){Q=B.Dom.get(Q);if(!Q){return null;}var R=function(S){return S.tagName&&S.tagName.toUpperCase()==P.toUpperCase();};return B.Dom.getAncestorBy(Q,R);},getPreviousSiblingBy:function(P,Q){while(P){P=P.previousSibling;if(D(P,Q)){return P;}}return null;},getPreviousSibling:function(P){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getPreviousSiblingBy(P);},getNextSiblingBy:function(P,Q){while(P){P=P.nextSibling;if(D(P,Q)){return P;}}return null;},getNextSibling:function(P){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getNextSiblingBy(P);},getFirstChildBy:function(P,R){var Q=(D(P.firstChild,R))?P.firstChild:null;return Q||B.Dom.getNextSiblingBy(P.firstChild,R);},getFirstChild:function(P,Q){P=B.Dom.get(P);if(!P){return null;}return B.Dom.getFirstChildBy(P);},getLastChildBy:function(P,R){if(!P){return null;}var Q=(D(P.lastChild,R))?P.lastChild:null;return Q||B.Dom.getPreviousSiblingBy(P.lastChild,R);},getLastChild:function(P){P=B.Dom.get(P);return B.Dom.getLastChildBy(P);},getChildrenBy:function(Q,S){var R=B.Dom.getFirstChildBy(Q,S);var P=R?[R]:[];B.Dom.getNextSiblingBy(R,function(T){if(!S||S(T)){P[P.length]=T;}return false;});return P;},getChildren:function(P){P=B.Dom.get(P);if(!P){}return B.Dom.getChildrenBy(P);},getDocumentScrollLeft:function(P){P=P||M;return Math.max(P.documentElement.scrollLeft,P.body.scrollLeft);},getDocumentScrollTop:function(P){P=P||M;return Math.max(P.documentElement.scrollTop,P.body.scrollTop);},insertBefore:function(Q,P){Q=B.Dom.get(Q);P=B.Dom.get(P);if(!Q||!P||!P.parentNode){return null;}return P.parentNode.insertBefore(Q,P);},insertAfter:function(Q,P){Q=B.Dom.get(Q);P=B.Dom.get(P);if(!Q||!P||!P.parentNode){return null;}if(P.nextSibling){return P.parentNode.insertBefore(Q,P.nextSibling);}else{return P.parentNode.appendChild(Q);}},getClientRegion:function(){var R=B.Dom.getDocumentScrollTop(),Q=B.Dom.getDocumentScrollLeft(),S=B.Dom.getViewportWidth()+Q,P=B.Dom.getViewportHeight()+R;return new B.Region(R,S,P,Q);}};var H=function(){if(M.documentElement.getBoundingClientRect){return function(Q){var R=Q.getBoundingClientRect();var P=Q.ownerDocument;return[R.left+B.Dom.getDocumentScrollLeft(P),R.top+B.Dom.getDocumentScrollTop(P)];};}else{return function(R){var S=[R.offsetLeft,R.offsetTop];var Q=R.offsetParent;var P=(L&&B.Dom.getStyle(R,"position")=="absolute"&&R.offsetParent==R.ownerDocument.body);if(Q!=R){while(Q){S[0]+=Q.offsetLeft;S[1]+=Q.offsetTop;if(!P&&L&&B.Dom.getStyle(Q,"position")=="absolute"){P=true;}Q=Q.offsetParent;}}if(P){S[0]-=R.ownerDocument.body.offsetLeft;S[1]-=R.ownerDocument.body.offsetTop;}Q=R.parentNode;while(Q.tagName&&!E.ROOT_TAG.test(Q.tagName)){if(Q.scrollTop||Q.scrollLeft){if(!E.OP_SCROLL.test(B.Dom.getStyle(Q,"display"))){if(!C||B.Dom.getStyle(Q,"overflow")!=="visible"){S[0]-=Q.scrollLeft;S[1]-=Q.scrollTop;}}}Q=Q.parentNode;}return S;};}}();})();YAHOO.util.Region=function(C,D,A,B){this.top=C;this[1]=C;this.right=D;this.bottom=A;this.left=B;this[0]=B;};YAHOO.util.Region.prototype.contains=function(A){return(A.left>=this.left&&A.right<=this.right&&A.top>=this.top&&A.bottom<=this.bottom);};YAHOO.util.Region.prototype.getArea=function(){return((this.bottom-this.top)*(this.right-this.left));};YAHOO.util.Region.prototype.intersect=function(E){var C=Math.max(this.top,E.top);var D=Math.min(this.right,E.right);var A=Math.min(this.bottom,E.bottom);var B=Math.max(this.left,E.left);if(A>=C&&D>=B){return new YAHOO.util.Region(C,D,A,B);}else{return null;}};YAHOO.util.Region.prototype.union=function(E){var C=Math.min(this.top,E.top);var D=Math.max(this.right,E.right);var A=Math.max(this.bottom,E.bottom);var B=Math.min(this.left,E.left);return new YAHOO.util.Region(C,D,A,B);};YAHOO.util.Region.prototype.toString=function(){return("Region {"+"top: "+this.top+", right: "+this.right+", bottom: "+this.bottom+", left: "+this.left+"}");};YAHOO.util.Region.getRegion=function(D){var F=YAHOO.util.Dom.getXY(D);var C=F[1];var E=F[0]+D.offsetWidth;var A=F[1]+D.offsetHeight;var B=F[0];return new YAHOO.util.Region(C,E,A,B);};YAHOO.util.Point=function(A,B){if(YAHOO.lang.isArray(A)){B=A[1];A=A[0];}this.x=this.right=this.left=this[0]=A;this.y=this.top=this.bottom=this[1]=B;};YAHOO.util.Point.prototype=new YAHOO.util.Region();YAHOO.register("dom",YAHOO.util.Dom,{version:"2.5.2",build:"1076"});YAHOO.util.CustomEvent=function(D,B,C,A){this.type=D;this.scope=B||window;this.silent=C;this.signature=A||YAHOO.util.CustomEvent.LIST;this.subscribers=[];if(!this.silent){}var E="_YUICEOnSubscribe";if(D!==E){this.subscribeEvent=new YAHOO.util.CustomEvent(E,this,true);}this.lastError=null;};YAHOO.util.CustomEvent.LIST=0;YAHOO.util.CustomEvent.FLAT=1;YAHOO.util.CustomEvent.prototype={subscribe:function(B,C,A){if(!B){throw new Error("Invalid callback for subscriber to '"+this.type+"'");}if(this.subscribeEvent){this.subscribeEvent.fire(B,C,A);}this.subscribers.push(new YAHOO.util.Subscriber(B,C,A));},unsubscribe:function(D,F){if(!D){return this.unsubscribeAll();}var E=false;for(var B=0,A=this.subscribers.length;B<A;++B){var C=this.subscribers[B];if(C&&C.contains(D,F)){this._delete(B);E=true;}}return E;},fire:function(){this.lastError=null;var K=[],E=this.subscribers.length;if(!E&&this.silent){return true;}var I=[].slice.call(arguments,0),G=true,D,J=false;if(!this.silent){}var C=this.subscribers.slice(),A=YAHOO.util.Event.throwErrors;for(D=0;D<E;++D){var M=C[D];if(!M){J=true;}else{if(!this.silent){}var L=M.getScope(this.scope);if(this.signature==YAHOO.util.CustomEvent.FLAT){var B=null;if(I.length>0){B=I[0];}try{G=M.fn.call(L,B,M.obj);}catch(F){this.lastError=F;if(A){throw F;}}}else{try{G=M.fn.call(L,this.type,I,M.obj);}catch(H){this.lastError=H;if(A){throw H;}}}if(false===G){if(!this.silent){}break;}}}return(G!==false);},unsubscribeAll:function(){for(var A=this.subscribers.length-1;A>-1;A--){this._delete(A);}this.subscribers=[];return A;},_delete:function(A){var B=this.subscribers[A];if(B){delete B.fn;delete B.obj;}this.subscribers.splice(A,1);},toString:function(){return"CustomEvent: "+"'"+this.type+"', "+"scope: "+this.scope;}};YAHOO.util.Subscriber=function(B,C,A){this.fn=B;this.obj=YAHOO.lang.isUndefined(C)?null:C;this.override=A;};YAHOO.util.Subscriber.prototype.getScope=function(A){if(this.override){if(this.override===true){return this.obj;}else{return this.override;}}return A;};YAHOO.util.Subscriber.prototype.contains=function(A,B){if(B){return(this.fn==A&&this.obj==B);}else{return(this.fn==A);}};YAHOO.util.Subscriber.prototype.toString=function(){return"Subscriber { obj: "+this.obj+", override: "+(this.override||"no")+" }";};if(!YAHOO.util.Event){YAHOO.util.Event=function(){var H=false;var I=[];var J=[];var G=[];var E=[];var C=0;var F=[];var B=[];var A=0;var D={63232:38,63233:40,63234:37,63235:39,63276:33,63277:34,25:9};return{POLL_RETRYS:2000,POLL_INTERVAL:20,EL:0,TYPE:1,FN:2,WFN:3,UNLOAD_OBJ:3,ADJ_SCOPE:4,OBJ:5,OVERRIDE:6,lastError:null,isSafari:YAHOO.env.ua.webkit,webkit:YAHOO.env.ua.webkit,isIE:YAHOO.env.ua.ie,_interval:null,_dri:null,DOMReady:false,throwErrors:false,startInterval:function(){if(!this._interval){var K=this;var L=function(){K._tryPreloadAttach();};this._interval=setInterval(L,this.POLL_INTERVAL);}},onAvailable:function(P,M,Q,O,N){var K=(YAHOO.lang.isString(P))?[P]:P;for(var L=0;L<K.length;L=L+1){F.push({id:K[L],fn:M,obj:Q,override:O,checkReady:N});}C=this.POLL_RETRYS;this.startInterval();},onContentReady:function(M,K,N,L){this.onAvailable(M,K,N,L,true);},onDOMReady:function(K,M,L){if(this.DOMReady){setTimeout(function(){var N=window;if(L){if(L===true){N=M;}else{N=L;}}K.call(N,"DOMReady",[],M);},0);}else{this.DOMReadyEvent.subscribe(K,M,L);}},addListener:function(M,K,V,Q,L){if(!V||!V.call){return false;}if(this._isValidCollection(M)){var W=true;for(var R=0,T=M.length;R<T;++R){W=this.on(M[R],K,V,Q,L)&&W;}return W;}else{if(YAHOO.lang.isString(M)){var P=this.getEl(M);if(P){M=P;}else{this.onAvailable(M,function(){YAHOO.util.Event.on(M,K,V,Q,L);});return true;}}}if(!M){return false;}if("unload"==K&&Q!==this){J[J.length]=[M,K,V,Q,L];return true;}var Y=M;if(L){if(L===true){Y=Q;}else{Y=L;}}var N=function(Z){return V.call(Y,YAHOO.util.Event.getEvent(Z,M),Q);};var X=[M,K,V,N,Y,Q,L];var S=I.length;I[S]=X;if(this.useLegacyEvent(M,K)){var O=this.getLegacyIndex(M,K);if(O==-1||M!=G[O][0]){O=G.length;B[M.id+K]=O;G[O]=[M,K,M["on"+K]];E[O]=[];M["on"+K]=function(Z){YAHOO.util.Event.fireLegacyEvent(YAHOO.util.Event.getEvent(Z),O);};}E[O].push(X);}else{try{this._simpleAdd(M,K,N,false);}catch(U){this.lastError=U;this.removeListener(M,K,V);return false;}}return true;},fireLegacyEvent:function(O,M){var Q=true,K,S,R,T,P;S=E[M].slice();for(var L=0,N=S.length;L<N;++L){R=S[L];if(R&&R[this.WFN]){T=R[this.ADJ_SCOPE];P=R[this.WFN].call(T,O);Q=(Q&&P);}}K=G[M];if(K&&K[2]){K[2](O);}return Q;},getLegacyIndex:function(L,M){var K=this.generateId(L)+M;if(typeof B[K]=="undefined"){return -1;}else{return B[K];}},useLegacyEvent:function(L,M){if(this.webkit&&("click"==M||"dblclick"==M)){var K=parseInt(this.webkit,10);if(!isNaN(K)&&K<418){return true;}}return false;},removeListener:function(L,K,T){var O,R,V;if(typeof L=="string"){L=this.getEl(L);}else{if(this._isValidCollection(L)){var U=true;for(O=L.length-1;O>-1;O--){U=(this.removeListener(L[O],K,T)&&U);}return U;}}if(!T||!T.call){return this.purgeElement(L,false,K);}if("unload"==K){for(O=J.length-1;O>-1;O--){V=J[O];if(V&&V[0]==L&&V[1]==K&&V[2]==T){J.splice(O,1);return true;}}return false;}var P=null;var Q=arguments[3];if("undefined"===typeof Q){Q=this._getCacheIndex(L,K,T);}if(Q>=0){P=I[Q];}if(!L||!P){return false;}if(this.useLegacyEvent(L,K)){var N=this.getLegacyIndex(L,K);var M=E[N];if(M){for(O=0,R=M.length;O<R;++O){V=M[O];if(V&&V[this.EL]==L&&V[this.TYPE]==K&&V[this.FN]==T){M.splice(O,1);break;}}}}else{try{this._simpleRemove(L,K,P[this.WFN],false);}catch(S){this.lastError=S;return false;}}delete I[Q][this.WFN];delete I[Q][this.FN];I.splice(Q,1);return true;},getTarget:function(M,L){var K=M.target||M.srcElement;return this.resolveTextNode(K);},resolveTextNode:function(L){try{if(L&&3==L.nodeType){return L.parentNode;}}catch(K){}return L;},getPageX:function(L){var K=L.pageX;if(!K&&0!==K){K=L.clientX||0;if(this.isIE){K+=this._getScrollLeft();}}return K;},getPageY:function(K){var L=K.pageY;if(!L&&0!==L){L=K.clientY||0;if(this.isIE){L+=this._getScrollTop();}}return L;
+},getXY:function(K){return[this.getPageX(K),this.getPageY(K)];},getRelatedTarget:function(L){var K=L.relatedTarget;if(!K){if(L.type=="mouseout"){K=L.toElement;}else{if(L.type=="mouseover"){K=L.fromElement;}}}return this.resolveTextNode(K);},getTime:function(M){if(!M.time){var L=new Date().getTime();try{M.time=L;}catch(K){this.lastError=K;return L;}}return M.time;},stopEvent:function(K){this.stopPropagation(K);this.preventDefault(K);},stopPropagation:function(K){if(K.stopPropagation){K.stopPropagation();}else{K.cancelBubble=true;}},preventDefault:function(K){if(K.preventDefault){K.preventDefault();}else{K.returnValue=false;}},getEvent:function(M,K){var L=M||window.event;if(!L){var N=this.getEvent.caller;while(N){L=N.arguments[0];if(L&&Event==L.constructor){break;}N=N.caller;}}return L;},getCharCode:function(L){var K=L.keyCode||L.charCode||0;if(YAHOO.env.ua.webkit&&(K in D)){K=D[K];}return K;},_getCacheIndex:function(O,P,N){for(var M=0,L=I.length;M<L;M=M+1){var K=I[M];if(K&&K[this.FN]==N&&K[this.EL]==O&&K[this.TYPE]==P){return M;}}return -1;},generateId:function(K){var L=K.id;if(!L){L="yuievtautoid-"+A;++A;K.id=L;}return L;},_isValidCollection:function(L){try{return(L&&typeof L!=="string"&&L.length&&!L.tagName&&!L.alert&&typeof L[0]!=="undefined");}catch(K){return false;}},elCache:{},getEl:function(K){return(typeof K==="string")?document.getElementById(K):K;},clearCache:function(){},DOMReadyEvent:new YAHOO.util.CustomEvent("DOMReady",this),_load:function(L){if(!H){H=true;var K=YAHOO.util.Event;K._ready();K._tryPreloadAttach();}},_ready:function(L){var K=YAHOO.util.Event;if(!K.DOMReady){K.DOMReady=true;K.DOMReadyEvent.fire();K._simpleRemove(document,"DOMContentLoaded",K._ready);}},_tryPreloadAttach:function(){if(F.length===0){C=0;clearInterval(this._interval);this._interval=null;return ;}if(this.locked){return ;}if(this.isIE){if(!this.DOMReady){this.startInterval();return ;}}this.locked=true;var Q=!H;if(!Q){Q=(C>0&&F.length>0);}var P=[];var R=function(T,U){var S=T;if(U.override){if(U.override===true){S=U.obj;}else{S=U.override;}}U.fn.call(S,U.obj);};var L,K,O,N,M=[];for(L=0,K=F.length;L<K;L=L+1){O=F[L];if(O){N=this.getEl(O.id);if(N){if(O.checkReady){if(H||N.nextSibling||!Q){M.push(O);F[L]=null;}}else{R(N,O);F[L]=null;}}else{P.push(O);}}}for(L=0,K=M.length;L<K;L=L+1){O=M[L];R(this.getEl(O.id),O);}C--;if(Q){for(L=F.length-1;L>-1;L--){O=F[L];if(!O||!O.id){F.splice(L,1);}}this.startInterval();}else{clearInterval(this._interval);this._interval=null;}this.locked=false;},purgeElement:function(O,P,R){var M=(YAHOO.lang.isString(O))?this.getEl(O):O;var Q=this.getListeners(M,R),N,K;if(Q){for(N=Q.length-1;N>-1;N--){var L=Q[N];this.removeListener(M,L.type,L.fn);}}if(P&&M&&M.childNodes){for(N=0,K=M.childNodes.length;N<K;++N){this.purgeElement(M.childNodes[N],P,R);}}},getListeners:function(M,K){var P=[],L;if(!K){L=[I,J];}else{if(K==="unload"){L=[J];}else{L=[I];}}var R=(YAHOO.lang.isString(M))?this.getEl(M):M;for(var O=0;O<L.length;O=O+1){var T=L[O];if(T){for(var Q=0,S=T.length;Q<S;++Q){var N=T[Q];if(N&&N[this.EL]===R&&(!K||K===N[this.TYPE])){P.push({type:N[this.TYPE],fn:N[this.FN],obj:N[this.OBJ],adjust:N[this.OVERRIDE],scope:N[this.ADJ_SCOPE],index:Q});}}}}return(P.length)?P:null;},_unload:function(Q){var K=YAHOO.util.Event,N,M,L,P,O,R=J.slice();for(N=0,P=J.length;N<P;++N){L=R[N];if(L){var S=window;if(L[K.ADJ_SCOPE]){if(L[K.ADJ_SCOPE]===true){S=L[K.UNLOAD_OBJ];}else{S=L[K.ADJ_SCOPE];}}L[K.FN].call(S,K.getEvent(Q,L[K.EL]),L[K.UNLOAD_OBJ]);R[N]=null;L=null;S=null;}}J=null;if(I){for(M=I.length-1;M>-1;M--){L=I[M];if(L){K.removeListener(L[K.EL],L[K.TYPE],L[K.FN],M);}}L=null;}G=null;K._simpleRemove(window,"unload",K._unload);},_getScrollLeft:function(){return this._getScroll()[1];},_getScrollTop:function(){return this._getScroll()[0];},_getScroll:function(){var K=document.documentElement,L=document.body;if(K&&(K.scrollTop||K.scrollLeft)){return[K.scrollTop,K.scrollLeft];}else{if(L){return[L.scrollTop,L.scrollLeft];}else{return[0,0];}}},regCE:function(){},_simpleAdd:function(){if(window.addEventListener){return function(M,N,L,K){M.addEventListener(N,L,(K));};}else{if(window.attachEvent){return function(M,N,L,K){M.attachEvent("on"+N,L);};}else{return function(){};}}}(),_simpleRemove:function(){if(window.removeEventListener){return function(M,N,L,K){M.removeEventListener(N,L,(K));};}else{if(window.detachEvent){return function(L,M,K){L.detachEvent("on"+M,K);};}else{return function(){};}}}()};}();(function(){var EU=YAHOO.util.Event;EU.on=EU.addListener;
+/* DOMReady: based on work by: Dean Edwards/John Resig/Matthias Miller */
+if(EU.isIE){YAHOO.util.Event.onDOMReady(YAHOO.util.Event._tryPreloadAttach,YAHOO.util.Event,true);var n=document.createElement("p");EU._dri=setInterval(function(){try{n.doScroll("left");clearInterval(EU._dri);EU._dri=null;EU._ready();n=null;}catch(ex){}},EU.POLL_INTERVAL);}else{if(EU.webkit&&EU.webkit<525){EU._dri=setInterval(function(){var rs=document.readyState;if("loaded"==rs||"complete"==rs){clearInterval(EU._dri);EU._dri=null;EU._ready();}},EU.POLL_INTERVAL);}else{EU._simpleAdd(document,"DOMContentLoaded",EU._ready);}}EU._simpleAdd(window,"load",EU._load);EU._simpleAdd(window,"unload",EU._unload);EU._tryPreloadAttach();})();}YAHOO.util.EventProvider=function(){};YAHOO.util.EventProvider.prototype={__yui_events:null,__yui_subscribers:null,subscribe:function(A,C,F,E){this.__yui_events=this.__yui_events||{};var D=this.__yui_events[A];if(D){D.subscribe(C,F,E);}else{this.__yui_subscribers=this.__yui_subscribers||{};var B=this.__yui_subscribers;if(!B[A]){B[A]=[];}B[A].push({fn:C,obj:F,override:E});}},unsubscribe:function(C,E,G){this.__yui_events=this.__yui_events||{};var A=this.__yui_events;if(C){var F=A[C];if(F){return F.unsubscribe(E,G);}}else{var B=true;for(var D in A){if(YAHOO.lang.hasOwnProperty(A,D)){B=B&&A[D].unsubscribe(E,G);}}return B;}return false;},unsubscribeAll:function(A){return this.unsubscribe(A);},createEvent:function(G,D){this.__yui_events=this.__yui_events||{};var A=D||{};var I=this.__yui_events;
+if(I[G]){}else{var H=A.scope||this;var E=(A.silent);var B=new YAHOO.util.CustomEvent(G,H,E,YAHOO.util.CustomEvent.FLAT);I[G]=B;if(A.onSubscribeCallback){B.subscribeEvent.subscribe(A.onSubscribeCallback);}this.__yui_subscribers=this.__yui_subscribers||{};var F=this.__yui_subscribers[G];if(F){for(var C=0;C<F.length;++C){B.subscribe(F[C].fn,F[C].obj,F[C].override);}}}return I[G];},fireEvent:function(E,D,A,C){this.__yui_events=this.__yui_events||{};var G=this.__yui_events[E];if(!G){return null;}var B=[];for(var F=1;F<arguments.length;++F){B.push(arguments[F]);}return G.fire.apply(G,B);},hasEvent:function(A){if(this.__yui_events){if(this.__yui_events[A]){return true;}}return false;}};YAHOO.util.KeyListener=function(A,F,B,C){if(!A){}else{if(!F){}else{if(!B){}}}if(!C){C=YAHOO.util.KeyListener.KEYDOWN;}var D=new YAHOO.util.CustomEvent("keyPressed");this.enabledEvent=new YAHOO.util.CustomEvent("enabled");this.disabledEvent=new YAHOO.util.CustomEvent("disabled");if(typeof A=="string"){A=document.getElementById(A);}if(typeof B=="function"){D.subscribe(B);}else{D.subscribe(B.fn,B.scope,B.correctScope);}function E(J,I){if(!F.shift){F.shift=false;}if(!F.alt){F.alt=false;}if(!F.ctrl){F.ctrl=false;}if(J.shiftKey==F.shift&&J.altKey==F.alt&&J.ctrlKey==F.ctrl){var G;if(F.keys instanceof Array){for(var H=0;H<F.keys.length;H++){G=F.keys[H];if(G==J.charCode){D.fire(J.charCode,J);break;}else{if(G==J.keyCode){D.fire(J.keyCode,J);break;}}}}else{G=F.keys;if(G==J.charCode){D.fire(J.charCode,J);}else{if(G==J.keyCode){D.fire(J.keyCode,J);}}}}}this.enable=function(){if(!this.enabled){YAHOO.util.Event.addListener(A,C,E);this.enabledEvent.fire(F);}this.enabled=true;};this.disable=function(){if(this.enabled){YAHOO.util.Event.removeListener(A,C,E);this.disabledEvent.fire(F);}this.enabled=false;};this.toString=function(){return"KeyListener ["+F.keys+"] "+A.tagName+(A.id?"["+A.id+"]":"");};};YAHOO.util.KeyListener.KEYDOWN="keydown";YAHOO.util.KeyListener.KEYUP="keyup";YAHOO.util.KeyListener.KEY={ALT:18,BACK_SPACE:8,CAPS_LOCK:20,CONTROL:17,DELETE:46,DOWN:40,END:35,ENTER:13,ESCAPE:27,HOME:36,LEFT:37,META:224,NUM_LOCK:144,PAGE_DOWN:34,PAGE_UP:33,PAUSE:19,PRINTSCREEN:44,RIGHT:39,SCROLL_LOCK:145,SHIFT:16,SPACE:32,TAB:9,UP:38};YAHOO.register("event",YAHOO.util.Event,{version:"2.5.2",build:"1076"});YAHOO.util.Connect={_msxml_progid:["Microsoft.XMLHTTP","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP"],_http_headers:{},_has_http_headers:false,_use_default_post_header:true,_default_post_header:"application/x-www-form-urlencoded; charset=UTF-8",_default_form_header:"application/x-www-form-urlencoded",_use_default_xhr_header:true,_default_xhr_header:"XMLHttpRequest",_has_default_headers:true,_default_headers:{},_isFormSubmit:false,_isFileUpload:false,_formNode:null,_sFormData:null,_poll:{},_timeOut:{},_polling_interval:50,_transaction_id:0,_submitElementValue:null,_hasSubmitListener:(function(){if(YAHOO.util.Event){YAHOO.util.Event.addListener(document,"click",function(B){var A=YAHOO.util.Event.getTarget(B);if(A.nodeName.toLowerCase()=="input"&&(A.type&&A.type.toLowerCase()=="submit")){YAHOO.util.Connect._submitElementValue=encodeURIComponent(A.name)+"="+encodeURIComponent(A.value);}});return true;}return false;})(),startEvent:new YAHOO.util.CustomEvent("start"),completeEvent:new YAHOO.util.CustomEvent("complete"),successEvent:new YAHOO.util.CustomEvent("success"),failureEvent:new YAHOO.util.CustomEvent("failure"),uploadEvent:new YAHOO.util.CustomEvent("upload"),abortEvent:new YAHOO.util.CustomEvent("abort"),_customEvents:{onStart:["startEvent","start"],onComplete:["completeEvent","complete"],onSuccess:["successEvent","success"],onFailure:["failureEvent","failure"],onUpload:["uploadEvent","upload"],onAbort:["abortEvent","abort"]},setProgId:function(A){this._msxml_progid.unshift(A);YAHOO.log("ActiveX Program Id  "+A+" added to _msxml_progid.","info","Connection");},setDefaultPostHeader:function(A){if(typeof A=="string"){this._default_post_header=A;YAHOO.log("Default POST header set to  "+A,"info","Connection");}else{if(typeof A=="boolean"){this._use_default_post_header=A;}}},setDefaultXhrHeader:function(A){if(typeof A=="string"){this._default_xhr_header=A;YAHOO.log("Default XHR header set to  "+A,"info","Connection");}else{this._use_default_xhr_header=A;}},setPollingInterval:function(A){if(typeof A=="number"&&isFinite(A)){this._polling_interval=A;YAHOO.log("Default polling interval set to "+A+"ms","info","Connection");}},createXhrObject:function(E){var D,A;try{A=new XMLHttpRequest();D={conn:A,tId:E};YAHOO.log("XHR object created for transaction "+E,"info","Connection");}catch(C){for(var B=0;B<this._msxml_progid.length;++B){try{A=new ActiveXObject(this._msxml_progid[B]);D={conn:A,tId:E};YAHOO.log("ActiveX XHR object created for transaction "+E,"info","Connection");break;}catch(C){}}}finally{return D;}},getConnectionObject:function(A){var C;var D=this._transaction_id;try{if(!A){C=this.createXhrObject(D);}else{C={};C.tId=D;C.isUpload=true;}if(C){this._transaction_id++;}}catch(B){}finally{return C;}},asyncRequest:function(F,C,E,A){var D=(this._isFileUpload)?this.getConnectionObject(true):this.getConnectionObject();var B=(E&&E.argument)?E.argument:null;if(!D){YAHOO.log("Unable to create connection object.","error","Connection");return null;}else{if(E&&E.customevents){this.initCustomEvents(D,E);}if(this._isFormSubmit){if(this._isFileUpload){this.uploadFile(D,E,C,A);return D;}if(F.toUpperCase()=="GET"){if(this._sFormData.length!==0){C+=((C.indexOf("?")==-1)?"?":"&")+this._sFormData;}}else{if(F.toUpperCase()=="POST"){A=A?this._sFormData+"&"+A:this._sFormData;}}}if(F.toUpperCase()=="GET"&&(E&&E.cache===false)){C+=((C.indexOf("?")==-1)?"?":"&")+"rnd="+new Date().valueOf().toString();}D.conn.open(F,C,true);if(this._use_default_xhr_header){if(!this._default_headers["X-Requested-With"]){this.initHeader("X-Requested-With",this._default_xhr_header,true);YAHOO.log("Initialize transaction header X-Request-Header to XMLHttpRequest.","info","Connection");}}if((F.toUpperCase()=="POST"&&this._use_default_post_header)&&this._isFormSubmit===false){this.initHeader("Content-Type",this._default_post_header);YAHOO.log("Initialize header Content-Type to application/x-www-form-urlencoded; UTF-8 for POST transaction.","info","Connection");}if(this._has_default_headers||this._has_http_headers){this.setHeader(D);}this.handleReadyState(D,E);D.conn.send(A||"");YAHOO.log("Transaction "+D.tId+" sent.","info","Connection");if(this._isFormSubmit===true){this.resetFormState();}this.startEvent.fire(D,B);if(D.startEvent){D.startEvent.fire(D,B);}return D;}},initCustomEvents:function(A,C){for(var B in C.customevents){if(this._customEvents[B][0]){A[this._customEvents[B][0]]=new YAHOO.util.CustomEvent(this._customEvents[B][1],(C.scope)?C.scope:null);YAHOO.log("Transaction-specific Custom Event "+A[this._customEvents[B][1]]+" created.","info","Connection");A[this._customEvents[B][0]].subscribe(C.customevents[B]);YAHOO.log("Transaction-specific Custom Event "+A[this._customEvents[B][1]]+" subscribed.","info","Connection");}}},handleReadyState:function(C,D){var B=this;var A=(D&&D.argument)?D.argument:null;if(D&&D.timeout){this._timeOut[C.tId]=window.setTimeout(function(){B.abort(C,D,true);},D.timeout);}this._poll[C.tId]=window.setInterval(function(){if(C.conn&&C.conn.readyState===4){window.clearInterval(B._poll[C.tId]);delete B._poll[C.tId];if(D&&D.timeout){window.clearTimeout(B._timeOut[C.tId]);delete B._timeOut[C.tId];}B.completeEvent.fire(C,A);if(C.completeEvent){C.completeEvent.fire(C,A);}B.handleTransactionResponse(C,D);}},this._polling_interval);},handleTransactionResponse:function(F,G,A){var D,C;var B=(G&&G.argument)?G.argument:null;try{if(F.conn.status!==undefined&&F.conn.status!==0){D=F.conn.status;}else{D=13030;}}catch(E){D=13030;}if(D>=200&&D<300||D===1223){C=this.createResponseObject(F,B);if(G&&G.success){if(!G.scope){G.success(C);YAHOO.log("Success callback. HTTP code is "+D,"info","Connection");}else{G.success.apply(G.scope,[C]);YAHOO.log("Success callback with scope. HTTP code is "+D,"info","Connection");}}this.successEvent.fire(C);if(F.successEvent){F.successEvent.fire(C);}}else{switch(D){case 12002:case 12029:case 12030:case 12031:case 12152:case 13030:C=this.createExceptionObject(F.tId,B,(A?A:false));if(G&&G.failure){if(!G.scope){G.failure(C);
+YAHOO.log("Failure callback. Exception detected. Status code is "+D,"warn","Connection");}else{G.failure.apply(G.scope,[C]);YAHOO.log("Failure callback with scope. Exception detected. Status code is "+D,"warn","Connection");}}break;default:C=this.createResponseObject(F,B);if(G&&G.failure){if(!G.scope){G.failure(C);YAHOO.log("Failure callback. HTTP status code is "+D,"warn","Connection");}else{G.failure.apply(G.scope,[C]);YAHOO.log("Failure callback with scope. HTTP status code is "+D,"warn","Connection");}}}this.failureEvent.fire(C);if(F.failureEvent){F.failureEvent.fire(C);}}this.releaseObject(F);C=null;},createResponseObject:function(A,G){var D={};var I={};try{var C=A.conn.getAllResponseHeaders();var F=C.split("\n");for(var E=0;E<F.length;E++){var B=F[E].indexOf(":");if(B!=-1){I[F[E].substring(0,B)]=F[E].substring(B+2);}}}catch(H){}D.tId=A.tId;D.status=(A.conn.status==1223)?204:A.conn.status;D.statusText=(A.conn.status==1223)?"No Content":A.conn.statusText;D.getResponseHeader=I;D.getAllResponseHeaders=C;D.responseText=A.conn.responseText;D.responseXML=A.conn.responseXML;if(G){D.argument=G;}return D;},createExceptionObject:function(H,D,A){var F=0;var G="communication failure";var C=-1;var B="transaction aborted";var E={};E.tId=H;if(A){E.status=C;E.statusText=B;}else{E.status=F;E.statusText=G;}if(D){E.argument=D;}return E;},initHeader:function(A,D,C){var B=(C)?this._default_headers:this._http_headers;B[A]=D;if(C){this._has_default_headers=true;}else{this._has_http_headers=true;}},setHeader:function(A){if(this._has_default_headers){for(var B in this._default_headers){if(YAHOO.lang.hasOwnProperty(this._default_headers,B)){A.conn.setRequestHeader(B,this._default_headers[B]);YAHOO.log("Default HTTP header "+B+" set with value of "+this._default_headers[B],"info","Connection");}}}if(this._has_http_headers){for(var B in this._http_headers){if(YAHOO.lang.hasOwnProperty(this._http_headers,B)){A.conn.setRequestHeader(B,this._http_headers[B]);YAHOO.log("HTTP header "+B+" set with value of "+this._http_headers[B],"info","Connection");}}delete this._http_headers;this._http_headers={};this._has_http_headers=false;}},resetDefaultHeaders:function(){delete this._default_headers;this._default_headers={};this._has_default_headers=false;},setForm:function(K,E,B){this.resetFormState();var J;if(typeof K=="string"){J=(document.getElementById(K)||document.forms[K]);}else{if(typeof K=="object"){J=K;}else{YAHOO.log("Unable to create form object "+K,"warn","Connection");return ;}}if(E){var F=this.createFrame((window.location.href.toLowerCase().indexOf("https")===0||B)?true:false);this._isFormSubmit=true;this._isFileUpload=true;this._formNode=J;return ;}var A,I,G,L;var H=false;for(var D=0;D<J.elements.length;D++){A=J.elements[D];L=A.disabled;I=A.name;G=A.value;if(!L&&I){switch(A.type){case"select-one":case"select-multiple":for(var C=0;C<A.options.length;C++){if(A.options[C].selected){if(window.ActiveXObject){this._sFormData+=encodeURIComponent(I)+"="+encodeURIComponent(A.options[C].attributes["value"].specified?A.options[C].value:A.options[C].text)+"&";}else{this._sFormData+=encodeURIComponent(I)+"="+encodeURIComponent(A.options[C].hasAttribute("value")?A.options[C].value:A.options[C].text)+"&";}}}break;case"radio":case"checkbox":if(A.checked){this._sFormData+=encodeURIComponent(I)+"="+encodeURIComponent(G)+"&";}break;case"file":case undefined:case"reset":case"button":break;case"submit":if(H===false){if(this._hasSubmitListener&&this._submitElementValue){this._sFormData+=this._submitElementValue+"&";}else{this._sFormData+=encodeURIComponent(I)+"="+encodeURIComponent(G)+"&";}H=true;}break;default:this._sFormData+=encodeURIComponent(I)+"="+encodeURIComponent(G)+"&";}}}this._isFormSubmit=true;this._sFormData=this._sFormData.substr(0,this._sFormData.length-1);YAHOO.log("Form initialized for transaction. HTML form POST message is: "+this._sFormData,"info","Connection");this.initHeader("Content-Type",this._default_form_header);YAHOO.log("Initialize header Content-Type to application/x-www-form-urlencoded for setForm() transaction.","info","Connection");return this._sFormData;},resetFormState:function(){this._isFormSubmit=false;this._isFileUpload=false;this._formNode=null;this._sFormData="";},createFrame:function(A){var B="yuiIO"+this._transaction_id;var C;if(window.ActiveXObject){C=document.createElement('<iframe id="'+B+'" name="'+B+'" />');if(typeof A=="boolean"){C.src="javascript:false";}}else{C=document.createElement("iframe");C.id=B;C.name=B;}C.style.position="absolute";C.style.top="-1000px";C.style.left="-1000px";document.body.appendChild(C);YAHOO.log("File upload iframe created. Id is:"+B,"info","Connection");},appendPostData:function(A){var D=[];var B=A.split("&");for(var C=0;C<B.length;C++){var E=B[C].indexOf("=");if(E!=-1){D[C]=document.createElement("input");D[C].type="hidden";D[C].name=B[C].substring(0,E);D[C].value=B[C].substring(E+1);this._formNode.appendChild(D[C]);}}return D;},uploadFile:function(D,M,E,C){var N=this;var H="yuiIO"+D.tId;var I="multipart/form-data";var K=document.getElementById(H);var J=(M&&M.argument)?M.argument:null;var B={action:this._formNode.getAttribute("action"),method:this._formNode.getAttribute("method"),target:this._formNode.getAttribute("target")};this._formNode.setAttribute("action",E);this._formNode.setAttribute("method","POST");this._formNode.setAttribute("target",H);if(YAHOO.env.ua.ie){this._formNode.setAttribute("encoding",I);}else{this._formNode.setAttribute("enctype",I);}if(C){var L=this.appendPostData(C);}this._formNode.submit();this.startEvent.fire(D,J);if(D.startEvent){D.startEvent.fire(D,J);}if(M&&M.timeout){this._timeOut[D.tId]=window.setTimeout(function(){N.abort(D,M,true);},M.timeout);}if(L&&L.length>0){for(var G=0;G<L.length;G++){this._formNode.removeChild(L[G]);}}for(var A in B){if(YAHOO.lang.hasOwnProperty(B,A)){if(B[A]){this._formNode.setAttribute(A,B[A]);}else{this._formNode.removeAttribute(A);}}}this.resetFormState();var F=function(){if(M&&M.timeout){window.clearTimeout(N._timeOut[D.tId]);
+delete N._timeOut[D.tId];}N.completeEvent.fire(D,J);if(D.completeEvent){D.completeEvent.fire(D,J);}var P={};P.tId=D.tId;P.argument=M.argument;try{P.responseText=K.contentWindow.document.body?K.contentWindow.document.body.innerHTML:K.contentWindow.document.documentElement.textContent;P.responseXML=K.contentWindow.document.XMLDocument?K.contentWindow.document.XMLDocument:K.contentWindow.document;}catch(O){}if(M&&M.upload){if(!M.scope){M.upload(P);YAHOO.log("Upload callback.","info","Connection");}else{M.upload.apply(M.scope,[P]);YAHOO.log("Upload callback with scope.","info","Connection");}}N.uploadEvent.fire(P);if(D.uploadEvent){D.uploadEvent.fire(P);}YAHOO.util.Event.removeListener(K,"load",F);setTimeout(function(){document.body.removeChild(K);N.releaseObject(D);YAHOO.log("File upload iframe destroyed. Id is:"+H,"info","Connection");},100);};YAHOO.util.Event.addListener(K,"load",F);},abort:function(E,G,A){var D;var B=(G&&G.argument)?G.argument:null;if(E&&E.conn){if(this.isCallInProgress(E)){E.conn.abort();window.clearInterval(this._poll[E.tId]);delete this._poll[E.tId];if(A){window.clearTimeout(this._timeOut[E.tId]);delete this._timeOut[E.tId];}D=true;}}else{if(E&&E.isUpload===true){var C="yuiIO"+E.tId;var F=document.getElementById(C);if(F){YAHOO.util.Event.removeListener(F,"load");document.body.removeChild(F);YAHOO.log("File upload iframe destroyed. Id is:"+C,"info","Connection");if(A){window.clearTimeout(this._timeOut[E.tId]);delete this._timeOut[E.tId];}D=true;}}else{D=false;}}if(D===true){this.abortEvent.fire(E,B);if(E.abortEvent){E.abortEvent.fire(E,B);}this.handleTransactionResponse(E,G,true);YAHOO.log("Transaction "+E.tId+" aborted.","info","Connection");}return D;},isCallInProgress:function(B){if(B&&B.conn){return B.conn.readyState!==4&&B.conn.readyState!==0;}else{if(B&&B.isUpload===true){var A="yuiIO"+B.tId;return document.getElementById(A)?true:false;}else{return false;}}},releaseObject:function(A){if(A&&A.conn){A.conn=null;YAHOO.log("Connection object for transaction "+A.tId+" destroyed.","info","Connection");A=null;}}};YAHOO.register("connection",YAHOO.util.Connect,{version:"2.5.2",build:"1076"});(function(){var B=YAHOO.util;var A=function(D,C,E,F){if(!D){}this.init(D,C,E,F);};A.NAME="Anim";A.prototype={toString:function(){var C=this.getEl()||{};var D=C.id||C.tagName;return(this.constructor.NAME+": "+D);},patterns:{noNegatives:/width|height|opacity|padding/i,offsetAttribute:/^((width|height)|(top|left))$/,defaultUnit:/width|height|top$|bottom$|left$|right$/i,offsetUnit:/\d+(em|%|en|ex|pt|in|cm|mm|pc)$/i},doMethod:function(C,E,D){return this.method(this.currentFrame,E,D-E,this.totalFrames);},setAttribute:function(C,E,D){if(this.patterns.noNegatives.test(C)){E=(E>0)?E:0;}B.Dom.setStyle(this.getEl(),C,E+D);},getAttribute:function(C){var E=this.getEl();var G=B.Dom.getStyle(E,C);if(G!=="auto"&&!this.patterns.offsetUnit.test(G)){return parseFloat(G);}var D=this.patterns.offsetAttribute.exec(C)||[];var H=!!(D[3]);var F=!!(D[2]);if(F||(B.Dom.getStyle(E,"position")=="absolute"&&H)){G=E["offset"+D[0].charAt(0).toUpperCase()+D[0].substr(1)];}else{G=0;}return G;},getDefaultUnit:function(C){if(this.patterns.defaultUnit.test(C)){return"px";}return"";},setRuntimeAttribute:function(D){var I;var E;var F=this.attributes;this.runtimeAttributes[D]={};var H=function(J){return(typeof J!=="undefined");};if(!H(F[D]["to"])&&!H(F[D]["by"])){return false;}I=(H(F[D]["from"]))?F[D]["from"]:this.getAttribute(D);if(H(F[D]["to"])){E=F[D]["to"];}else{if(H(F[D]["by"])){if(I.constructor==Array){E=[];for(var G=0,C=I.length;G<C;++G){E[G]=I[G]+F[D]["by"][G]*1;}}else{E=I+F[D]["by"]*1;}}}this.runtimeAttributes[D].start=I;this.runtimeAttributes[D].end=E;this.runtimeAttributes[D].unit=(H(F[D].unit))?F[D]["unit"]:this.getDefaultUnit(D);return true;},init:function(E,J,I,C){var D=false;var F=null;var H=0;E=B.Dom.get(E);this.attributes=J||{};this.duration=!YAHOO.lang.isUndefined(I)?I:1;this.method=C||B.Easing.easeNone;this.useSeconds=true;this.currentFrame=0;this.totalFrames=B.AnimMgr.fps;this.setEl=function(M){E=B.Dom.get(M);};this.getEl=function(){return E;};this.isAnimated=function(){return D;};this.getStartTime=function(){return F;};this.runtimeAttributes={};this.animate=function(){if(this.isAnimated()){return false;}this.currentFrame=0;this.totalFrames=(this.useSeconds)?Math.ceil(B.AnimMgr.fps*this.duration):this.duration;if(this.duration===0&&this.useSeconds){this.totalFrames=1;}B.AnimMgr.registerElement(this);return true;};this.stop=function(M){if(!this.isAnimated()){return false;}if(M){this.currentFrame=this.totalFrames;this._onTween.fire();}B.AnimMgr.stop(this);};var L=function(){this.onStart.fire();this.runtimeAttributes={};for(var M in this.attributes){this.setRuntimeAttribute(M);}D=true;H=0;F=new Date();};var K=function(){var O={duration:new Date()-this.getStartTime(),currentFrame:this.currentFrame};O.toString=function(){return("duration: "+O.duration+", currentFrame: "+O.currentFrame);};this.onTween.fire(O);var N=this.runtimeAttributes;for(var M in N){this.setAttribute(M,this.doMethod(M,N[M].start,N[M].end),N[M].unit);}H+=1;};var G=function(){var M=(new Date()-F)/1000;var N={duration:M,frames:H,fps:H/M};N.toString=function(){return("duration: "+N.duration+", frames: "+N.frames+", fps: "+N.fps);};D=false;H=0;this.onComplete.fire(N);};this._onStart=new B.CustomEvent("_start",this,true);this.onStart=new B.CustomEvent("start",this);this.onTween=new B.CustomEvent("tween",this);this._onTween=new B.CustomEvent("_tween",this,true);this.onComplete=new B.CustomEvent("complete",this);this._onComplete=new B.CustomEvent("_complete",this,true);this._onStart.subscribe(L);this._onTween.subscribe(K);this._onComplete.subscribe(G);}};B.Anim=A;})();YAHOO.util.AnimMgr=new function(){var C=null;var B=[];var A=0;this.fps=1000;this.delay=1;this.registerElement=function(F){B[B.length]=F;A+=1;F._onStart.fire();this.start();};this.unRegister=function(G,F){F=F||E(G);if(!G.isAnimated()||F==-1){return false;}G._onComplete.fire();B.splice(F,1);A-=1;if(A<=0){this.stop();}return true;};this.start=function(){if(C===null){C=setInterval(this.run,this.delay);}};this.stop=function(H){if(!H){clearInterval(C);for(var G=0,F=B.length;G<F;++G){this.unRegister(B[0],0);}B=[];C=null;A=0;}else{this.unRegister(H);}};this.run=function(){for(var H=0,F=B.length;H<F;++H){var G=B[H];if(!G||!G.isAnimated()){continue;}if(G.currentFrame<G.totalFrames||G.totalFrames===null){G.currentFrame+=1;if(G.useSeconds){D(G);}G._onTween.fire();}else{YAHOO.util.AnimMgr.stop(G,H);}}};var E=function(H){for(var G=0,F=B.length;G<F;++G){if(B[G]==H){return G;}}return -1;};var D=function(G){var J=G.totalFrames;var I=G.currentFrame;var H=(G.currentFrame*G.duration*1000/G.totalFrames);var F=(new Date()-G.getStartTime());var K=0;if(F<G.duration*1000){K=Math.round((F/H-1)*G.currentFrame);}else{K=J-(I+1);}if(K>0&&isFinite(K)){if(G.currentFrame+K>=J){K=J-(I+1);}G.currentFrame+=K;}};};YAHOO.util.Bezier=new function(){this.getPosition=function(E,D){var F=E.length;var C=[];for(var B=0;B<F;++B){C[B]=[E[B][0],E[B][1]];}for(var A=1;A<F;++A){for(B=0;B<F-A;++B){C[B][0]=(1-D)*C[B][0]+D*C[parseInt(B+1,10)][0];C[B][1]=(1-D)*C[B][1]+D*C[parseInt(B+1,10)][1];}}return[C[0][0],C[0][1]];};};(function(){var A=function(F,E,G,H){A.superclass.constructor.call(this,F,E,G,H);};A.NAME="ColorAnim";var C=YAHOO.util;YAHOO.extend(A,C.Anim);var D=A.superclass;var B=A.prototype;B.patterns.color=/color$/i;B.patterns.rgb=/^rgb\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\)$/i;B.patterns.hex=/^#?([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;B.patterns.hex3=/^#?([0-9A-F]{1})([0-9A-F]{1})([0-9A-F]{1})$/i;B.patterns.transparent=/^transparent|rgba\(0, 0, 0, 0\)$/;B.parseColor=function(E){if(E.length==3){return E;}var F=this.patterns.hex.exec(E);if(F&&F.length==4){return[parseInt(F[1],16),parseInt(F[2],16),parseInt(F[3],16)];}F=this.patterns.rgb.exec(E);if(F&&F.length==4){return[parseInt(F[1],10),parseInt(F[2],10),parseInt(F[3],10)];}F=this.patterns.hex3.exec(E);if(F&&F.length==4){return[parseInt(F[1]+F[1],16),parseInt(F[2]+F[2],16),parseInt(F[3]+F[3],16)];}return null;};B.getAttribute=function(E){var G=this.getEl();if(this.patterns.color.test(E)){var H=YAHOO.util.Dom.getStyle(G,E);
+if(this.patterns.transparent.test(H)){var F=G.parentNode;H=C.Dom.getStyle(F,E);while(F&&this.patterns.transparent.test(H)){F=F.parentNode;H=C.Dom.getStyle(F,E);if(F.tagName.toUpperCase()=="HTML"){H="#fff";}}}}else{H=D.getAttribute.call(this,E);}return H;};B.doMethod=function(F,J,G){var I;if(this.patterns.color.test(F)){I=[];for(var H=0,E=J.length;H<E;++H){I[H]=D.doMethod.call(this,F,J[H],G[H]);}I="rgb("+Math.floor(I[0])+","+Math.floor(I[1])+","+Math.floor(I[2])+")";}else{I=D.doMethod.call(this,F,J,G);}return I;};B.setRuntimeAttribute=function(F){D.setRuntimeAttribute.call(this,F);if(this.patterns.color.test(F)){var H=this.attributes;var J=this.parseColor(this.runtimeAttributes[F].start);var G=this.parseColor(this.runtimeAttributes[F].end);if(typeof H[F]["to"]==="undefined"&&typeof H[F]["by"]!=="undefined"){G=this.parseColor(H[F].by);for(var I=0,E=J.length;I<E;++I){G[I]=J[I]+G[I];}}this.runtimeAttributes[F].start=J;this.runtimeAttributes[F].end=G;}};C.ColorAnim=A;})();
+/*
+TERMS OF USE - EASING EQUATIONS
+Open source under the BSD License.
+Copyright 2001 Robert Penner All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * Neither the name of the author nor the names of contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+YAHOO.util.Easing={easeNone:function(B,A,D,C){return D*B/C+A;},easeIn:function(B,A,D,C){return D*(B/=C)*B+A;},easeOut:function(B,A,D,C){return -D*(B/=C)*(B-2)+A;},easeBoth:function(B,A,D,C){if((B/=C/2)<1){return D/2*B*B+A;}return -D/2*((--B)*(B-2)-1)+A;},easeInStrong:function(B,A,D,C){return D*(B/=C)*B*B*B+A;},easeOutStrong:function(B,A,D,C){return -D*((B=B/C-1)*B*B*B-1)+A;},easeBothStrong:function(B,A,D,C){if((B/=C/2)<1){return D/2*B*B*B*B+A;}return -D/2*((B-=2)*B*B*B-2)+A;},elasticIn:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F)==1){return A+G;}if(!E){E=F*0.3;}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}return -(B*Math.pow(2,10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E))+A;},elasticOut:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F)==1){return A+G;}if(!E){E=F*0.3;}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}return B*Math.pow(2,-10*C)*Math.sin((C*F-D)*(2*Math.PI)/E)+G+A;},elasticBoth:function(C,A,G,F,B,E){if(C==0){return A;}if((C/=F/2)==2){return A+G;}if(!E){E=F*(0.3*1.5);}if(!B||B<Math.abs(G)){B=G;var D=E/4;}else{var D=E/(2*Math.PI)*Math.asin(G/B);}if(C<1){return -0.5*(B*Math.pow(2,10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E))+A;}return B*Math.pow(2,-10*(C-=1))*Math.sin((C*F-D)*(2*Math.PI)/E)*0.5+G+A;},backIn:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}return E*(B/=D)*B*((C+1)*B-C)+A;},backOut:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}return E*((B=B/D-1)*B*((C+1)*B+C)+1)+A;},backBoth:function(B,A,E,D,C){if(typeof C=="undefined"){C=1.70158;}if((B/=D/2)<1){return E/2*(B*B*(((C*=(1.525))+1)*B-C))+A;}return E/2*((B-=2)*B*(((C*=(1.525))+1)*B+C)+2)+A;},bounceIn:function(B,A,D,C){return D-YAHOO.util.Easing.bounceOut(C-B,0,D,C)+A;},bounceOut:function(B,A,D,C){if((B/=C)<(1/2.75)){return D*(7.5625*B*B)+A;}else{if(B<(2/2.75)){return D*(7.5625*(B-=(1.5/2.75))*B+0.75)+A;}else{if(B<(2.5/2.75)){return D*(7.5625*(B-=(2.25/2.75))*B+0.9375)+A;}}}return D*(7.5625*(B-=(2.625/2.75))*B+0.984375)+A;},bounceBoth:function(B,A,D,C){if(B<C/2){return YAHOO.util.Easing.bounceIn(B*2,0,D,C)*0.5+A;}return YAHOO.util.Easing.bounceOut(B*2-C,0,D,C)*0.5+D*0.5+A;}};(function(){var A=function(H,G,I,J){if(H){A.superclass.constructor.call(this,H,G,I,J);}};A.NAME="Motion";var E=YAHOO.util;YAHOO.extend(A,E.ColorAnim);var F=A.superclass;var C=A.prototype;C.patterns.points=/^points$/i;C.setAttribute=function(G,I,H){if(this.patterns.points.test(G)){H=H||"px";F.setAttribute.call(this,"left",I[0],H);F.setAttribute.call(this,"top",I[1],H);}else{F.setAttribute.call(this,G,I,H);}};C.getAttribute=function(G){if(this.patterns.points.test(G)){var H=[F.getAttribute.call(this,"left"),F.getAttribute.call(this,"top")];}else{H=F.getAttribute.call(this,G);}return H;};C.doMethod=function(G,K,H){var J=null;if(this.patterns.points.test(G)){var I=this.method(this.currentFrame,0,100,this.totalFrames)/100;J=E.Bezier.getPosition(this.runtimeAttributes[G],I);}else{J=F.doMethod.call(this,G,K,H);}return J;};C.setRuntimeAttribute=function(P){if(this.patterns.points.test(P)){var H=this.getEl();var J=this.attributes;var G;var L=J["points"]["control"]||[];var I;var M,O;if(L.length>0&&!(L[0] instanceof Array)){L=[L];}else{var K=[];for(M=0,O=L.length;M<O;++M){K[M]=L[M];}L=K;}if(E.Dom.getStyle(H,"position")=="static"){E.Dom.setStyle(H,"position","relative");}if(D(J["points"]["from"])){E.Dom.setXY(H,J["points"]["from"]);}else{E.Dom.setXY(H,E.Dom.getXY(H));}G=this.getAttribute("points");if(D(J["points"]["to"])){I=B.call(this,J["points"]["to"],G);
+var N=E.Dom.getXY(this.getEl());for(M=0,O=L.length;M<O;++M){L[M]=B.call(this,L[M],G);}}else{if(D(J["points"]["by"])){I=[G[0]+J["points"]["by"][0],G[1]+J["points"]["by"][1]];for(M=0,O=L.length;M<O;++M){L[M]=[G[0]+L[M][0],G[1]+L[M][1]];}}}this.runtimeAttributes[P]=[G];if(L.length>0){this.runtimeAttributes[P]=this.runtimeAttributes[P].concat(L);}this.runtimeAttributes[P][this.runtimeAttributes[P].length]=I;}else{F.setRuntimeAttribute.call(this,P);}};var B=function(G,I){var H=E.Dom.getXY(this.getEl());G=[G[0]-H[0]+I[0],G[1]-H[1]+I[1]];return G;};var D=function(G){return(typeof G!=="undefined");};E.Motion=A;})();(function(){var D=function(F,E,G,H){if(F){D.superclass.constructor.call(this,F,E,G,H);}};D.NAME="Scroll";var B=YAHOO.util;YAHOO.extend(D,B.ColorAnim);var C=D.superclass;var A=D.prototype;A.doMethod=function(E,H,F){var G=null;if(E=="scroll"){G=[this.method(this.currentFrame,H[0],F[0]-H[0],this.totalFrames),this.method(this.currentFrame,H[1],F[1]-H[1],this.totalFrames)];}else{G=C.doMethod.call(this,E,H,F);}return G;};A.getAttribute=function(E){var G=null;var F=this.getEl();if(E=="scroll"){G=[F.scrollLeft,F.scrollTop];}else{G=C.getAttribute.call(this,E);}return G;};A.setAttribute=function(E,H,G){var F=this.getEl();if(E=="scroll"){F.scrollLeft=H[0];F.scrollTop=H[1];}else{C.setAttribute.call(this,E,H,G);}};B.Scroll=D;})();YAHOO.register("animation",YAHOO.util.Anim,{version:"2.5.2",build:"1076"});if(!YAHOO.util.DragDropMgr){YAHOO.util.DragDropMgr=function(){var A=YAHOO.util.Event;return{ids:{},handleIds:{},dragCurrent:null,dragOvers:{},deltaX:0,deltaY:0,preventDefault:true,stopPropagation:true,initialized:false,locked:false,interactionInfo:null,init:function(){this.initialized=true;},POINT:0,INTERSECT:1,STRICT_INTERSECT:2,mode:0,_execOnAll:function(D,C){for(var E in this.ids){for(var B in this.ids[E]){var F=this.ids[E][B];if(!this.isTypeOfDD(F)){continue;}F[D].apply(F,C);}}},_onLoad:function(){this.init();A.on(document,"mouseup",this.handleMouseUp,this,true);A.on(document,"mousemove",this.handleMouseMove,this,true);A.on(window,"unload",this._onUnload,this,true);A.on(window,"resize",this._onResize,this,true);},_onResize:function(B){this._execOnAll("resetConstraints",[]);},lock:function(){this.locked=true;},unlock:function(){this.locked=false;},isLocked:function(){return this.locked;},locationCache:{},useCache:true,clickPixelThresh:3,clickTimeThresh:1000,dragThreshMet:false,clickTimeout:null,startX:0,startY:0,fromTimeout:false,regDragDrop:function(C,B){if(!this.initialized){this.init();}if(!this.ids[B]){this.ids[B]={};}this.ids[B][C.id]=C;},removeDDFromGroup:function(D,B){if(!this.ids[B]){this.ids[B]={};}var C=this.ids[B];if(C&&C[D.id]){delete C[D.id];}},_remove:function(C){for(var B in C.groups){if(B&&this.ids[B][C.id]){delete this.ids[B][C.id];}}delete this.handleIds[C.id];},regHandle:function(C,B){if(!this.handleIds[C]){this.handleIds[C]={};}this.handleIds[C][B]=B;},isDragDrop:function(B){return(this.getDDById(B))?true:false;},getRelated:function(G,C){var F=[];for(var E in G.groups){for(var D in this.ids[E]){var B=this.ids[E][D];if(!this.isTypeOfDD(B)){continue;}if(!C||B.isTarget){F[F.length]=B;}}}return F;},isLegalTarget:function(F,E){var C=this.getRelated(F,true);for(var D=0,B=C.length;D<B;++D){if(C[D].id==E.id){return true;}}return false;},isTypeOfDD:function(B){return(B&&B.__ygDragDrop);},isHandle:function(C,B){return(this.handleIds[C]&&this.handleIds[C][B]);},getDDById:function(C){for(var B in this.ids){if(this.ids[B][C]){return this.ids[B][C];}}return null;},handleMouseDown:function(D,C){this.currentTarget=YAHOO.util.Event.getTarget(D);this.dragCurrent=C;var B=C.getEl();this.startX=YAHOO.util.Event.getPageX(D);this.startY=YAHOO.util.Event.getPageY(D);this.deltaX=this.startX-B.offsetLeft;this.deltaY=this.startY-B.offsetTop;this.dragThreshMet=false;this.clickTimeout=setTimeout(function(){var E=YAHOO.util.DDM;E.startDrag(E.startX,E.startY);E.fromTimeout=true;},this.clickTimeThresh);},startDrag:function(B,D){clearTimeout(this.clickTimeout);var C=this.dragCurrent;if(C&&C.events.b4StartDrag){C.b4StartDrag(B,D);C.fireEvent("b4StartDragEvent",{x:B,y:D});}if(C&&C.events.startDrag){C.startDrag(B,D);C.fireEvent("startDragEvent",{x:B,y:D});}this.dragThreshMet=true;},handleMouseUp:function(B){if(this.dragCurrent){clearTimeout(this.clickTimeout);if(this.dragThreshMet){if(this.fromTimeout){this.fromTimeout=false;this.handleMouseMove(B);}this.fromTimeout=false;this.fireEvents(B,true);}else{}this.stopDrag(B);this.stopEvent(B);}},stopEvent:function(B){if(this.stopPropagation){YAHOO.util.Event.stopPropagation(B);}if(this.preventDefault){YAHOO.util.Event.preventDefault(B);}},stopDrag:function(D,C){var B=this.dragCurrent;if(B&&!C){if(this.dragThreshMet){if(B.events.b4EndDrag){B.b4EndDrag(D);B.fireEvent("b4EndDragEvent",{e:D});}if(B.events.endDrag){B.endDrag(D);B.fireEvent("endDragEvent",{e:D});}}if(B.events.mouseUp){B.onMouseUp(D);B.fireEvent("mouseUpEvent",{e:D});}}this.dragCurrent=null;this.dragOvers={};},handleMouseMove:function(E){var B=this.dragCurrent;if(B){if(YAHOO.util.Event.isIE&&!E.button){this.stopEvent(E);return this.handleMouseUp(E);}else{if(E.clientX<0||E.clientY<0){}}if(!this.dragThreshMet){var D=Math.abs(this.startX-YAHOO.util.Event.getPageX(E));var C=Math.abs(this.startY-YAHOO.util.Event.getPageY(E));if(D>this.clickPixelThresh||C>this.clickPixelThresh){this.startDrag(this.startX,this.startY);}}if(this.dragThreshMet){if(B&&B.events.b4Drag){B.b4Drag(E);B.fireEvent("b4DragEvent",{e:E});}if(B&&B.events.drag){B.onDrag(E);B.fireEvent("dragEvent",{e:E});}if(B){this.fireEvents(E,false);}}this.stopEvent(E);}},fireEvents:function(U,K){var Z=this.dragCurrent;if(!Z||Z.isLocked()||Z.dragOnly){return ;}var M=YAHOO.util.Event.getPageX(U),L=YAHOO.util.Event.getPageY(U),O=new YAHOO.util.Point(M,L),J=Z.getTargetCoord(O.x,O.y),E=Z.getDragEl(),D=["out","over","drop","enter"],T=new YAHOO.util.Region(J.y,J.x+E.offsetWidth,J.y+E.offsetHeight,J.x),H=[],C={},P=[],a={outEvts:[],overEvts:[],dropEvts:[],enterEvts:[]};for(var R in this.dragOvers){var c=this.dragOvers[R];if(!this.isTypeOfDD(c)){continue;}if(!this.isOverTarget(O,c,this.mode,T)){a.outEvts.push(c);}H[R]=true;delete this.dragOvers[R];}for(var Q in Z.groups){if("string"!=typeof Q){continue;}for(R in this.ids[Q]){var F=this.ids[Q][R];if(!this.isTypeOfDD(F)){continue;}if(F.isTarget&&!F.isLocked()&&F!=Z){if(this.isOverTarget(O,F,this.mode,T)){C[Q]=true;if(K){a.dropEvts.push(F);}else{if(!H[F.id]){a.enterEvts.push(F);}else{a.overEvts.push(F);}this.dragOvers[F.id]=F;}}}}}this.interactionInfo={out:a.outEvts,enter:a.enterEvts,over:a.overEvts,drop:a.dropEvts,point:O,draggedRegion:T,sourceRegion:this.locationCache[Z.id],validDrop:K};for(var B in C){P.push(B);}if(K&&!a.dropEvts.length){this.interactionInfo.validDrop=false;if(Z.events.invalidDrop){Z.onInvalidDrop(U);Z.fireEvent("invalidDropEvent",{e:U});}}for(R=0;R<D.length;R++){var X=null;if(a[D[R]+"Evts"]){X=a[D[R]+"Evts"];}if(X&&X.length){var G=D[R].charAt(0).toUpperCase()+D[R].substr(1),W="onDrag"+G,I="b4Drag"+G,N="drag"+G+"Event",V="drag"+G;if(this.mode){if(Z.events[I]){Z[I](U,X,P);Z.fireEvent(I+"Event",{event:U,info:X,group:P});}if(Z.events[V]){Z[W](U,X,P);Z.fireEvent(N,{event:U,info:X,group:P});}}else{for(var Y=0,S=X.length;Y<S;++Y){if(Z.events[I]){Z[I](U,X[Y].id,P[0]);Z.fireEvent(I+"Event",{event:U,info:X[Y].id,group:P[0]});}if(Z.events[V]){Z[W](U,X[Y].id,P[0]);Z.fireEvent(N,{event:U,info:X[Y].id,group:P[0]});
+}}}}}},getBestMatch:function(D){var F=null;var C=D.length;if(C==1){F=D[0];}else{for(var E=0;E<C;++E){var B=D[E];if(this.mode==this.INTERSECT&&B.cursorIsOver){F=B;break;}else{if(!F||!F.overlap||(B.overlap&&F.overlap.getArea()<B.overlap.getArea())){F=B;}}}}return F;},refreshCache:function(C){var E=C||this.ids;for(var B in E){if("string"!=typeof B){continue;}for(var D in this.ids[B]){var F=this.ids[B][D];if(this.isTypeOfDD(F)){var G=this.getLocation(F);if(G){this.locationCache[F.id]=G;}else{delete this.locationCache[F.id];}}}}},verifyEl:function(C){try{if(C){var B=C.offsetParent;if(B){return true;}}}catch(D){}return false;},getLocation:function(G){if(!this.isTypeOfDD(G)){return null;}var E=G.getEl(),J,D,C,L,K,M,B,I,F;try{J=YAHOO.util.Dom.getXY(E);}catch(H){}if(!J){return null;}D=J[0];C=D+E.offsetWidth;L=J[1];K=L+E.offsetHeight;M=L-G.padding[0];B=C+G.padding[1];I=K+G.padding[2];F=D-G.padding[3];return new YAHOO.util.Region(M,B,I,F);},isOverTarget:function(J,B,D,E){var F=this.locationCache[B.id];if(!F||!this.useCache){F=this.getLocation(B);this.locationCache[B.id]=F;}if(!F){return false;}B.cursorIsOver=F.contains(J);var I=this.dragCurrent;if(!I||(!D&&!I.constrainX&&!I.constrainY)){return B.cursorIsOver;}B.overlap=null;if(!E){var G=I.getTargetCoord(J.x,J.y);var C=I.getDragEl();E=new YAHOO.util.Region(G.y,G.x+C.offsetWidth,G.y+C.offsetHeight,G.x);}var H=E.intersect(F);if(H){B.overlap=H;return(D)?true:B.cursorIsOver;}else{return false;}},_onUnload:function(C,B){this.unregAll();},unregAll:function(){if(this.dragCurrent){this.stopDrag();this.dragCurrent=null;}this._execOnAll("unreg",[]);this.ids={};},elementCache:{},getElWrapper:function(C){var B=this.elementCache[C];if(!B||!B.el){B=this.elementCache[C]=new this.ElementWrapper(YAHOO.util.Dom.get(C));}return B;},getElement:function(B){return YAHOO.util.Dom.get(B);},getCss:function(C){var B=YAHOO.util.Dom.get(C);return(B)?B.style:null;},ElementWrapper:function(B){this.el=B||null;this.id=this.el&&B.id;this.css=this.el&&B.style;},getPosX:function(B){return YAHOO.util.Dom.getX(B);},getPosY:function(B){return YAHOO.util.Dom.getY(B);},swapNode:function(D,B){if(D.swapNode){D.swapNode(B);}else{var E=B.parentNode;var C=B.nextSibling;if(C==D){E.insertBefore(D,B);}else{if(B==D.nextSibling){E.insertBefore(B,D);}else{D.parentNode.replaceChild(B,D);E.insertBefore(D,C);}}}},getScroll:function(){var D,B,E=document.documentElement,C=document.body;if(E&&(E.scrollTop||E.scrollLeft)){D=E.scrollTop;B=E.scrollLeft;}else{if(C){D=C.scrollTop;B=C.scrollLeft;}else{}}return{top:D,left:B};},getStyle:function(C,B){return YAHOO.util.Dom.getStyle(C,B);},getScrollTop:function(){return this.getScroll().top;},getScrollLeft:function(){return this.getScroll().left;},moveToEl:function(B,D){var C=YAHOO.util.Dom.getXY(D);YAHOO.util.Dom.setXY(B,C);},getClientHeight:function(){return YAHOO.util.Dom.getViewportHeight();},getClientWidth:function(){return YAHOO.util.Dom.getViewportWidth();},numericSort:function(C,B){return(C-B);},_timeoutCount:0,_addListeners:function(){var B=YAHOO.util.DDM;if(YAHOO.util.Event&&document){B._onLoad();}else{if(B._timeoutCount>2000){}else{setTimeout(B._addListeners,10);if(document&&document.body){B._timeoutCount+=1;}}}},handleWasClicked:function(B,D){if(this.isHandle(D,B.id)){return true;}else{var C=B.parentNode;while(C){if(this.isHandle(D,C.id)){return true;}else{C=C.parentNode;}}}return false;}};}();YAHOO.util.DDM=YAHOO.util.DragDropMgr;YAHOO.util.DDM._addListeners();}(function(){var A=YAHOO.util.Event;var B=YAHOO.util.Dom;YAHOO.util.DragDrop=function(E,C,D){if(E){this.init(E,C,D);}};YAHOO.util.DragDrop.prototype={events:null,on:function(){this.subscribe.apply(this,arguments);},id:null,config:null,dragElId:null,handleElId:null,invalidHandleTypes:null,invalidHandleIds:null,invalidHandleClasses:null,startPageX:0,startPageY:0,groups:null,locked:false,lock:function(){this.locked=true;},unlock:function(){this.locked=false;},isTarget:true,padding:null,dragOnly:false,_domRef:null,__ygDragDrop:true,constrainX:false,constrainY:false,minX:0,maxX:0,minY:0,maxY:0,deltaX:0,deltaY:0,maintainOffset:false,xTicks:null,yTicks:null,primaryButtonOnly:true,available:false,hasOuterHandles:false,cursorIsOver:false,overlap:null,b4StartDrag:function(C,D){},startDrag:function(C,D){},b4Drag:function(C){},onDrag:function(C){},onDragEnter:function(C,D){},b4DragOver:function(C){},onDragOver:function(C,D){},b4DragOut:function(C){},onDragOut:function(C,D){},b4DragDrop:function(C){},onDragDrop:function(C,D){},onInvalidDrop:function(C){},b4EndDrag:function(C){},endDrag:function(C){},b4MouseDown:function(C){},onMouseDown:function(C){},onMouseUp:function(C){},onAvailable:function(){},getEl:function(){if(!this._domRef){this._domRef=B.get(this.id);}return this._domRef;},getDragEl:function(){return B.get(this.dragElId);},init:function(F,C,D){this.initTarget(F,C,D);A.on(this._domRef||this.id,"mousedown",this.handleMouseDown,this,true);for(var E in this.events){this.createEvent(E+"Event");}},initTarget:function(E,C,D){this.config=D||{};this.events={};this.DDM=YAHOO.util.DDM;this.groups={};if(typeof E!=="string"){this._domRef=E;E=B.generateId(E);}this.id=E;this.addToGroup((C)?C:"default");this.handleElId=E;A.onAvailable(E,this.handleOnAvailable,this,true);this.setDragElId(E);this.invalidHandleTypes={A:"A"};this.invalidHandleIds={};this.invalidHandleClasses=[];this.applyConfig();},applyConfig:function(){this.events={mouseDown:true,b4MouseDown:true,mouseUp:true,b4StartDrag:true,startDrag:true,b4EndDrag:true,endDrag:true,drag:true,b4Drag:true,invalidDrop:true,b4DragOut:true,dragOut:true,dragEnter:true,b4DragOver:true,dragOver:true,b4DragDrop:true,dragDrop:true};if(this.config.events){for(var C in this.config.events){if(this.config.events[C]===false){this.events[C]=false;}}}this.padding=this.config.padding||[0,0,0,0];this.isTarget=(this.config.isTarget!==false);this.maintainOffset=(this.config.maintainOffset);this.primaryButtonOnly=(this.config.primaryButtonOnly!==false);this.dragOnly=((this.config.dragOnly===true)?true:false);
+},handleOnAvailable:function(){this.available=true;this.resetConstraints();this.onAvailable();},setPadding:function(E,C,F,D){if(!C&&0!==C){this.padding=[E,E,E,E];}else{if(!F&&0!==F){this.padding=[E,C,E,C];}else{this.padding=[E,C,F,D];}}},setInitPosition:function(F,E){var G=this.getEl();if(!this.DDM.verifyEl(G)){if(G&&G.style&&(G.style.display=="none")){}else{}return ;}var D=F||0;var C=E||0;var H=B.getXY(G);this.initPageX=H[0]-D;this.initPageY=H[1]-C;this.lastPageX=H[0];this.lastPageY=H[1];this.setStartPosition(H);},setStartPosition:function(D){var C=D||B.getXY(this.getEl());this.deltaSetXY=null;this.startPageX=C[0];this.startPageY=C[1];},addToGroup:function(C){this.groups[C]=true;this.DDM.regDragDrop(this,C);},removeFromGroup:function(C){if(this.groups[C]){delete this.groups[C];}this.DDM.removeDDFromGroup(this,C);},setDragElId:function(C){this.dragElId=C;},setHandleElId:function(C){if(typeof C!=="string"){C=B.generateId(C);}this.handleElId=C;this.DDM.regHandle(this.id,C);},setOuterHandleElId:function(C){if(typeof C!=="string"){C=B.generateId(C);}A.on(C,"mousedown",this.handleMouseDown,this,true);this.setHandleElId(C);this.hasOuterHandles=true;},unreg:function(){A.removeListener(this.id,"mousedown",this.handleMouseDown);this._domRef=null;this.DDM._remove(this);},isLocked:function(){return(this.DDM.isLocked()||this.locked);},handleMouseDown:function(H,G){var D=H.which||H.button;if(this.primaryButtonOnly&&D>1){return ;}if(this.isLocked()){return ;}var C=this.b4MouseDown(H);if(this.events.b4MouseDown){C=this.fireEvent("b4MouseDownEvent",H);}var E=this.onMouseDown(H);if(this.events.mouseDown){E=this.fireEvent("mouseDownEvent",H);}if((C===false)||(E===false)){return ;}this.DDM.refreshCache(this.groups);var F=new YAHOO.util.Point(A.getPageX(H),A.getPageY(H));if(!this.hasOuterHandles&&!this.DDM.isOverTarget(F,this)){}else{if(this.clickValidator(H)){this.setStartPosition();this.DDM.handleMouseDown(H,this);this.DDM.stopEvent(H);}else{}}},clickValidator:function(D){var C=YAHOO.util.Event.getTarget(D);return(this.isValidHandleChild(C)&&(this.id==this.handleElId||this.DDM.handleWasClicked(C,this.id)));},getTargetCoord:function(E,D){var C=E-this.deltaX;var F=D-this.deltaY;if(this.constrainX){if(C<this.minX){C=this.minX;}if(C>this.maxX){C=this.maxX;}}if(this.constrainY){if(F<this.minY){F=this.minY;}if(F>this.maxY){F=this.maxY;}}C=this.getTick(C,this.xTicks);F=this.getTick(F,this.yTicks);return{x:C,y:F};},addInvalidHandleType:function(C){var D=C.toUpperCase();this.invalidHandleTypes[D]=D;},addInvalidHandleId:function(C){if(typeof C!=="string"){C=B.generateId(C);}this.invalidHandleIds[C]=C;},addInvalidHandleClass:function(C){this.invalidHandleClasses.push(C);},removeInvalidHandleType:function(C){var D=C.toUpperCase();delete this.invalidHandleTypes[D];},removeInvalidHandleId:function(C){if(typeof C!=="string"){C=B.generateId(C);}delete this.invalidHandleIds[C];},removeInvalidHandleClass:function(D){for(var E=0,C=this.invalidHandleClasses.length;E<C;++E){if(this.invalidHandleClasses[E]==D){delete this.invalidHandleClasses[E];}}},isValidHandleChild:function(F){var E=true;var H;try{H=F.nodeName.toUpperCase();}catch(G){H=F.nodeName;}E=E&&!this.invalidHandleTypes[H];E=E&&!this.invalidHandleIds[F.id];for(var D=0,C=this.invalidHandleClasses.length;E&&D<C;++D){E=!B.hasClass(F,this.invalidHandleClasses[D]);}return E;},setXTicks:function(F,C){this.xTicks=[];this.xTickSize=C;var E={};for(var D=this.initPageX;D>=this.minX;D=D-C){if(!E[D]){this.xTicks[this.xTicks.length]=D;E[D]=true;}}for(D=this.initPageX;D<=this.maxX;D=D+C){if(!E[D]){this.xTicks[this.xTicks.length]=D;E[D]=true;}}this.xTicks.sort(this.DDM.numericSort);},setYTicks:function(F,C){this.yTicks=[];this.yTickSize=C;var E={};for(var D=this.initPageY;D>=this.minY;D=D-C){if(!E[D]){this.yTicks[this.yTicks.length]=D;E[D]=true;}}for(D=this.initPageY;D<=this.maxY;D=D+C){if(!E[D]){this.yTicks[this.yTicks.length]=D;E[D]=true;}}this.yTicks.sort(this.DDM.numericSort);},setXConstraint:function(E,D,C){this.leftConstraint=parseInt(E,10);this.rightConstraint=parseInt(D,10);this.minX=this.initPageX-this.leftConstraint;this.maxX=this.initPageX+this.rightConstraint;if(C){this.setXTicks(this.initPageX,C);}this.constrainX=true;},clearConstraints:function(){this.constrainX=false;this.constrainY=false;this.clearTicks();},clearTicks:function(){this.xTicks=null;this.yTicks=null;this.xTickSize=0;this.yTickSize=0;},setYConstraint:function(C,E,D){this.topConstraint=parseInt(C,10);this.bottomConstraint=parseInt(E,10);this.minY=this.initPageY-this.topConstraint;this.maxY=this.initPageY+this.bottomConstraint;if(D){this.setYTicks(this.initPageY,D);}this.constrainY=true;},resetConstraints:function(){if(this.initPageX||this.initPageX===0){var D=(this.maintainOffset)?this.lastPageX-this.initPageX:0;var C=(this.maintainOffset)?this.lastPageY-this.initPageY:0;this.setInitPosition(D,C);}else{this.setInitPosition();}if(this.constrainX){this.setXConstraint(this.leftConstraint,this.rightConstraint,this.xTickSize);}if(this.constrainY){this.setYConstraint(this.topConstraint,this.bottomConstraint,this.yTickSize);}},getTick:function(I,F){if(!F){return I;}else{if(F[0]>=I){return F[0];}else{for(var D=0,C=F.length;D<C;++D){var E=D+1;if(F[E]&&F[E]>=I){var H=I-F[D];var G=F[E]-I;return(G>H)?F[D]:F[E];}}return F[F.length-1];}}},toString:function(){return("DragDrop "+this.id);}};YAHOO.augment(YAHOO.util.DragDrop,YAHOO.util.EventProvider);})();YAHOO.util.DD=function(C,A,B){if(C){this.init(C,A,B);}};YAHOO.extend(YAHOO.util.DD,YAHOO.util.DragDrop,{scroll:true,autoOffset:function(C,B){var A=C-this.startPageX;var D=B-this.startPageY;this.setDelta(A,D);},setDelta:function(B,A){this.deltaX=B;this.deltaY=A;},setDragElPos:function(C,B){var A=this.getDragEl();this.alignElWithMouse(A,C,B);},alignElWithMouse:function(C,G,F){var E=this.getTargetCoord(G,F);if(!this.deltaSetXY){var H=[E.x,E.y];YAHOO.util.Dom.setXY(C,H);var D=parseInt(YAHOO.util.Dom.getStyle(C,"left"),10);var B=parseInt(YAHOO.util.Dom.getStyle(C,"top"),10);this.deltaSetXY=[D-E.x,B-E.y];
+}else{YAHOO.util.Dom.setStyle(C,"left",(E.x+this.deltaSetXY[0])+"px");YAHOO.util.Dom.setStyle(C,"top",(E.y+this.deltaSetXY[1])+"px");}this.cachePosition(E.x,E.y);var A=this;setTimeout(function(){A.autoScroll.call(A,E.x,E.y,C.offsetHeight,C.offsetWidth);},0);},cachePosition:function(B,A){if(B){this.lastPageX=B;this.lastPageY=A;}else{var C=YAHOO.util.Dom.getXY(this.getEl());this.lastPageX=C[0];this.lastPageY=C[1];}},autoScroll:function(J,I,E,K){if(this.scroll){var L=this.DDM.getClientHeight();var B=this.DDM.getClientWidth();var N=this.DDM.getScrollTop();var D=this.DDM.getScrollLeft();var H=E+I;var M=K+J;var G=(L+N-I-this.deltaY);var F=(B+D-J-this.deltaX);var C=40;var A=(document.all)?80:30;if(H>L&&G<C){window.scrollTo(D,N+A);}if(I<N&&N>0&&I-N<C){window.scrollTo(D,N-A);}if(M>B&&F<C){window.scrollTo(D+A,N);}if(J<D&&D>0&&J-D<C){window.scrollTo(D-A,N);}}},applyConfig:function(){YAHOO.util.DD.superclass.applyConfig.call(this);this.scroll=(this.config.scroll!==false);},b4MouseDown:function(A){this.setStartPosition();this.autoOffset(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},b4Drag:function(A){this.setDragElPos(YAHOO.util.Event.getPageX(A),YAHOO.util.Event.getPageY(A));},toString:function(){return("DD "+this.id);}});YAHOO.util.DDProxy=function(C,A,B){if(C){this.init(C,A,B);this.initFrame();}};YAHOO.util.DDProxy.dragElId="ygddfdiv";YAHOO.extend(YAHOO.util.DDProxy,YAHOO.util.DD,{resizeFrame:true,centerFrame:false,createFrame:function(){var B=this,A=document.body;if(!A||!A.firstChild){setTimeout(function(){B.createFrame();},50);return ;}var G=this.getDragEl(),E=YAHOO.util.Dom;if(!G){G=document.createElement("div");G.id=this.dragElId;var D=G.style;D.position="absolute";D.visibility="hidden";D.cursor="move";D.border="2px solid #aaa";D.zIndex=999;D.height="25px";D.width="25px";var C=document.createElement("div");E.setStyle(C,"height","100%");E.setStyle(C,"width","100%");E.setStyle(C,"background-color","#ccc");E.setStyle(C,"opacity","0");G.appendChild(C);if(YAHOO.env.ua.ie){var F=document.createElement("iframe");F.setAttribute("src","javascript:");F.setAttribute("scrolling","no");F.setAttribute("frameborder","0");G.insertBefore(F,G.firstChild);E.setStyle(F,"height","100%");E.setStyle(F,"width","100%");E.setStyle(F,"position","absolute");E.setStyle(F,"top","0");E.setStyle(F,"left","0");E.setStyle(F,"opacity","0");E.setStyle(F,"zIndex","-1");E.setStyle(F.nextSibling,"zIndex","2");}A.insertBefore(G,A.firstChild);}},initFrame:function(){this.createFrame();},applyConfig:function(){YAHOO.util.DDProxy.superclass.applyConfig.call(this);this.resizeFrame=(this.config.resizeFrame!==false);this.centerFrame=(this.config.centerFrame);this.setDragElId(this.config.dragElId||YAHOO.util.DDProxy.dragElId);},showFrame:function(E,D){var C=this.getEl();var A=this.getDragEl();var B=A.style;this._resizeProxy();if(this.centerFrame){this.setDelta(Math.round(parseInt(B.width,10)/2),Math.round(parseInt(B.height,10)/2));}this.setDragElPos(E,D);YAHOO.util.Dom.setStyle(A,"visibility","visible");},_resizeProxy:function(){if(this.resizeFrame){var H=YAHOO.util.Dom;var B=this.getEl();var C=this.getDragEl();var G=parseInt(H.getStyle(C,"borderTopWidth"),10);var I=parseInt(H.getStyle(C,"borderRightWidth"),10);var F=parseInt(H.getStyle(C,"borderBottomWidth"),10);var D=parseInt(H.getStyle(C,"borderLeftWidth"),10);if(isNaN(G)){G=0;}if(isNaN(I)){I=0;}if(isNaN(F)){F=0;}if(isNaN(D)){D=0;}var E=Math.max(0,B.offsetWidth-I-D);var A=Math.max(0,B.offsetHeight-G-F);H.setStyle(C,"width",E+"px");H.setStyle(C,"height",A+"px");}},b4MouseDown:function(B){this.setStartPosition();var A=YAHOO.util.Event.getPageX(B);var C=YAHOO.util.Event.getPageY(B);this.autoOffset(A,C);},b4StartDrag:function(A,B){this.showFrame(A,B);},b4EndDrag:function(A){YAHOO.util.Dom.setStyle(this.getDragEl(),"visibility","hidden");},endDrag:function(D){var C=YAHOO.util.Dom;var B=this.getEl();var A=this.getDragEl();C.setStyle(A,"visibility","");C.setStyle(B,"visibility","hidden");YAHOO.util.DDM.moveToEl(B,A);C.setStyle(A,"visibility","hidden");C.setStyle(B,"visibility","");},toString:function(){return("DDProxy "+this.id);}});YAHOO.util.DDTarget=function(C,A,B){if(C){this.initTarget(C,A,B);}};YAHOO.extend(YAHOO.util.DDTarget,YAHOO.util.DragDrop,{toString:function(){return("DDTarget "+this.id);}});YAHOO.register("dragdrop",YAHOO.util.DragDropMgr,{version:"2.5.2",build:"1076"});YAHOO.util.Attribute=function(B,A){if(A){this.owner=A;this.configure(B,true);}};YAHOO.util.Attribute.prototype={name:undefined,value:null,owner:null,readOnly:false,writeOnce:false,_initialConfig:null,_written:false,method:null,validator:null,getValue:function(){return this.value;},setValue:function(F,B){var E;var A=this.owner;var C=this.name;var D={type:C,prevValue:this.getValue(),newValue:F};if(this.readOnly||(this.writeOnce&&this._written)){return false;}if(this.validator&&!this.validator.call(A,F)){return false;}if(!B){E=A.fireBeforeChangeEvent(D);if(E===false){return false;}}if(this.method){this.method.call(A,F);}this.value=F;this._written=true;D.type=C;if(!B){this.owner.fireChangeEvent(D);}return true;},configure:function(B,C){B=B||{};this._written=false;this._initialConfig=this._initialConfig||{};for(var A in B){if(A&&YAHOO.lang.hasOwnProperty(B,A)){this[A]=B[A];if(C){this._initialConfig[A]=B[A];}}}},resetValue:function(){return this.setValue(this._initialConfig.value);},resetConfig:function(){this.configure(this._initialConfig);},refresh:function(A){this.setValue(this.value,A);}};(function(){var A=YAHOO.util.Lang;YAHOO.util.AttributeProvider=function(){};YAHOO.util.AttributeProvider.prototype={_configs:null,get:function(C){this._configs=this._configs||{};var B=this._configs[C];if(!B){return undefined;}return B.value;},set:function(D,E,B){this._configs=this._configs||{};var C=this._configs[D];if(!C){return false;}return C.setValue(E,B);},getAttributeKeys:function(){this._configs=this._configs;var D=[];var B;for(var C in this._configs){B=this._configs[C];if(A.hasOwnProperty(this._configs,C)&&!A.isUndefined(B)){D[D.length]=C;}}return D;},setAttributes:function(D,B){for(var C in D){if(A.hasOwnProperty(D,C)){this.set(C,D[C],B);}}},resetValue:function(C,B){this._configs=this._configs||{};if(this._configs[C]){this.set(C,this._configs[C]._initialConfig.value,B);return true;}return false;},refresh:function(E,C){this._configs=this._configs;E=((A.isString(E))?[E]:E)||this.getAttributeKeys();for(var D=0,B=E.length;D<B;++D){if(this._configs[E[D]]&&!A.isUndefined(this._configs[E[D]].value)&&!A.isNull(this._configs[E[D]].value)){this._configs[E[D]].refresh(C);}}},register:function(B,C){this.setAttributeConfig(B,C);},getAttributeConfig:function(C){this._configs=this._configs||{};var B=this._configs[C]||{};var D={};for(C in B){if(A.hasOwnProperty(B,C)){D[C]=B[C];}}return D;},setAttributeConfig:function(B,C,D){this._configs=this._configs||{};C=C||{};if(!this._configs[B]){C.name=B;this._configs[B]=this.createAttribute(C);}else{this._configs[B].configure(C,D);}},configureAttribute:function(B,C,D){this.setAttributeConfig(B,C,D);},resetAttributeConfig:function(B){this._configs=this._configs||{};this._configs[B].resetConfig();},subscribe:function(B,C){this._events=this._events||{};if(!(B in this._events)){this._events[B]=this.createEvent(B);}YAHOO.util.EventProvider.prototype.subscribe.apply(this,arguments);},on:function(){this.subscribe.apply(this,arguments);},addListener:function(){this.subscribe.apply(this,arguments);},fireBeforeChangeEvent:function(C){var B="before";B+=C.type.charAt(0).toUpperCase()+C.type.substr(1)+"Change";C.type=B;return this.fireEvent(C.type,C);},fireChangeEvent:function(B){B.type+="Change";return this.fireEvent(B.type,B);},createAttribute:function(B){return new YAHOO.util.Attribute(B,this);}};YAHOO.augment(YAHOO.util.AttributeProvider,YAHOO.util.EventProvider);})();(function(){var D=YAHOO.util.Dom,F=YAHOO.util.AttributeProvider;YAHOO.util.Element=function(G,H){if(arguments.length){this.init(G,H);}};YAHOO.util.Element.prototype={DOM_EVENTS:null,appendChild:function(G){G=G.get?G.get("element"):G;this.get("element").appendChild(G);},getElementsByTagName:function(G){return this.get("element").getElementsByTagName(G);},hasChildNodes:function(){return this.get("element").hasChildNodes();},insertBefore:function(G,H){G=G.get?G.get("element"):G;H=(H&&H.get)?H.get("element"):H;this.get("element").insertBefore(G,H);},removeChild:function(G){G=G.get?G.get("element"):G;this.get("element").removeChild(G);return true;},replaceChild:function(G,H){G=G.get?G.get("element"):G;H=H.get?H.get("element"):H;return this.get("element").replaceChild(G,H);},initAttributes:function(G){},addListener:function(K,J,L,I){var H=this.get("element");I=I||this;H=this.get("id")||H;var G=this;if(!this._events[K]){if(this.DOM_EVENTS[K]){YAHOO.util.Event.addListener(H,K,function(M){if(M.srcElement&&!M.target){M.target=M.srcElement;}G.fireEvent(K,M);},L,I);}this.createEvent(K,this);}YAHOO.util.EventProvider.prototype.subscribe.apply(this,arguments);},on:function(){this.addListener.apply(this,arguments);},subscribe:function(){this.addListener.apply(this,arguments);},removeListener:function(H,G){this.unsubscribe.apply(this,arguments);},addClass:function(G){D.addClass(this.get("element"),G);},getElementsByClassName:function(H,G){return D.getElementsByClassName(H,G,this.get("element"));},hasClass:function(G){return D.hasClass(this.get("element"),G);},removeClass:function(G){return D.removeClass(this.get("element"),G);},replaceClass:function(H,G){return D.replaceClass(this.get("element"),H,G);},setStyle:function(I,H){var G=this.get("element");if(!G){return this._queue[this._queue.length]=["setStyle",arguments];}return D.setStyle(G,I,H);},getStyle:function(G){return D.getStyle(this.get("element"),G);},fireQueue:function(){var H=this._queue;for(var I=0,G=H.length;I<G;++I){this[H[I][0]].apply(this,H[I][1]);}},appendTo:function(H,I){H=(H.get)?H.get("element"):D.get(H);this.fireEvent("beforeAppendTo",{type:"beforeAppendTo",target:H});I=(I&&I.get)?I.get("element"):D.get(I);var G=this.get("element");if(!G){return false;}if(!H){return false;}if(G.parent!=H){if(I){H.insertBefore(G,I);}else{H.appendChild(G);}}this.fireEvent("appendTo",{type:"appendTo",target:H});},get:function(G){var I=this._configs||{};var H=I.element;if(H&&!I[G]&&!YAHOO.lang.isUndefined(H.value[G])){return H.value[G];}return F.prototype.get.call(this,G);},setAttributes:function(L,H){var K=this.get("element");
+for(var J in L){if(!this._configs[J]&&!YAHOO.lang.isUndefined(K[J])){this.setAttributeConfig(J);}}for(var I=0,G=this._configOrder.length;I<G;++I){if(L[this._configOrder[I]]!==undefined){this.set(this._configOrder[I],L[this._configOrder[I]],H);}}},set:function(H,J,G){var I=this.get("element");if(!I){this._queue[this._queue.length]=["set",arguments];if(this._configs[H]){this._configs[H].value=J;}return ;}if(!this._configs[H]&&!YAHOO.lang.isUndefined(I[H])){C.call(this,H);}return F.prototype.set.apply(this,arguments);},setAttributeConfig:function(G,I,J){var H=this.get("element");if(H&&!this._configs[G]&&!YAHOO.lang.isUndefined(H[G])){C.call(this,G,I);}else{F.prototype.setAttributeConfig.apply(this,arguments);}this._configOrder.push(G);},getAttributeKeys:function(){var H=this.get("element");var I=F.prototype.getAttributeKeys.call(this);for(var G in H){if(!this._configs[G]){I[G]=I[G]||H[G];}}return I;},createEvent:function(H,G){this._events[H]=true;F.prototype.createEvent.apply(this,arguments);},init:function(H,G){A.apply(this,arguments);}};var A=function(H,G){this._queue=this._queue||[];this._events=this._events||{};this._configs=this._configs||{};this._configOrder=[];G=G||{};G.element=G.element||H||null;this.DOM_EVENTS={"click":true,"dblclick":true,"keydown":true,"keypress":true,"keyup":true,"mousedown":true,"mousemove":true,"mouseout":true,"mouseover":true,"mouseup":true,"focus":true,"blur":true,"submit":true};var I=false;if(YAHOO.lang.isString(H)){C.call(this,"id",{value:G.element});}if(D.get(H)){I=true;E.call(this,G);B.call(this,G);}YAHOO.util.Event.onAvailable(G.element,function(){if(!I){E.call(this,G);}this.fireEvent("available",{type:"available",target:G.element});},this,true);YAHOO.util.Event.onContentReady(G.element,function(){if(!I){B.call(this,G);}this.fireEvent("contentReady",{type:"contentReady",target:G.element});},this,true);};var E=function(G){this.setAttributeConfig("element",{value:D.get(G.element),readOnly:true});};var B=function(G){this.initAttributes(G);this.setAttributes(G,true);this.fireQueue();};var C=function(G,I){var H=this.get("element");I=I||{};I.name=G;I.method=I.method||function(J){H[G]=J;};I.value=I.value||H[G];this._configs[G]=new YAHOO.util.Attribute(I,this);};YAHOO.augment(YAHOO.util.Element,F);})();YAHOO.register("element",YAHOO.util.Element,{version:"2.5.2",build:"1076"});YAHOO.register("utilities", YAHOO, {version: "2.5.2", build: "1076"});
 
 /*
-Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
 Code licensed under the BSD License:
 http://developer.yahoo.net/yui/license.txt
-version: 2.3.1
+version: 2.5.2
 */
  /**
  * The AutoComplete control provides the front-end logic for text-entry suggestion and
@@ -32804,7 +34059,7 @@ version: 2.3.1
  *
  * @module autocomplete
  * @requires yahoo, dom, event, datasource
- * @optional animation, connection
+ * @optional animation, connection, get
  * @namespace YAHOO.widget
  * @title AutoComplete Widget
  */
@@ -32847,15 +34102,15 @@ YAHOO.widget.AutoComplete = function(elInput,elContainer,oDataSource,oConfigs) {
         if(YAHOO.util.Dom.inDocument(elInput)) {
             if(YAHOO.lang.isString(elInput)) {
                     this._sName = "instance" + YAHOO.widget.AutoComplete._nIndex + " " + elInput;
-                    this._oTextbox = document.getElementById(elInput);
+                    this._elTextbox = document.getElementById(elInput);
             }
             else {
                 this._sName = (elInput.id) ?
                     "instance" + YAHOO.widget.AutoComplete._nIndex + " " + elInput.id:
                     "instance" + YAHOO.widget.AutoComplete._nIndex;
-                this._oTextbox = elInput;
+                this._elTextbox = elInput;
             }
-            YAHOO.util.Dom.addClass(this._oTextbox, "yui-ac-input");
+            YAHOO.util.Dom.addClass(this._elTextbox, "yui-ac-input");
         }
         else {
             return;
@@ -32864,16 +34119,16 @@ YAHOO.widget.AutoComplete = function(elInput,elContainer,oDataSource,oConfigs) {
         // Validate container element
         if(YAHOO.util.Dom.inDocument(elContainer)) {
             if(YAHOO.lang.isString(elContainer)) {
-                    this._oContainer = document.getElementById(elContainer);
+                    this._elContainer = document.getElementById(elContainer);
             }
             else {
-                this._oContainer = elContainer;
+                this._elContainer = elContainer;
             }
-            if(this._oContainer.style.display == "none") {
+            if(this._elContainer.style.display == "none") {
             }
             
             // For skinning
-            var elParent = this._oContainer.parentNode;
+            var elParent = this._elContainer.parentNode;
             var elTag = elParent.tagName.toLowerCase();
             if(elTag == "div") {
                 YAHOO.util.Dom.addClass(elParent, "yui-ac");
@@ -32902,23 +34157,21 @@ YAHOO.widget.AutoComplete = function(elInput,elContainer,oDataSource,oConfigs) {
 
         // Set up events
         var oSelf = this;
-        var oTextbox = this._oTextbox;
+        var elTextbox = this._elTextbox;
         // Events are actually for the content module within the container
-        var oContent = this._oContainer._oContent;
+        var elContent = this._elContent;
 
         // Dom events
-        YAHOO.util.Event.addListener(oTextbox,"keyup",oSelf._onTextboxKeyUp,oSelf);
-        YAHOO.util.Event.addListener(oTextbox,"keydown",oSelf._onTextboxKeyDown,oSelf);
-        YAHOO.util.Event.addListener(oTextbox,"focus",oSelf._onTextboxFocus,oSelf);
-        YAHOO.util.Event.addListener(oTextbox,"blur",oSelf._onTextboxBlur,oSelf);
-        YAHOO.util.Event.addListener(oContent,"mouseover",oSelf._onContainerMouseover,oSelf);
-        YAHOO.util.Event.addListener(oContent,"mouseout",oSelf._onContainerMouseout,oSelf);
-        YAHOO.util.Event.addListener(oContent,"scroll",oSelf._onContainerScroll,oSelf);
-        YAHOO.util.Event.addListener(oContent,"resize",oSelf._onContainerResize,oSelf);
-        if(oTextbox.form) {
-            YAHOO.util.Event.addListener(oTextbox.form,"submit",oSelf._onFormSubmit,oSelf);
-        }
-        YAHOO.util.Event.addListener(oTextbox,"keypress",oSelf._onTextboxKeyPress,oSelf);
+        YAHOO.util.Event.addListener(elTextbox,"keyup",oSelf._onTextboxKeyUp,oSelf);
+        YAHOO.util.Event.addListener(elTextbox,"keydown",oSelf._onTextboxKeyDown,oSelf);
+        YAHOO.util.Event.addListener(elTextbox,"focus",oSelf._onTextboxFocus,oSelf);
+        YAHOO.util.Event.addListener(elTextbox,"blur",oSelf._onTextboxBlur,oSelf);
+        YAHOO.util.Event.addListener(elContent,"mouseover",oSelf._onContainerMouseover,oSelf);
+        YAHOO.util.Event.addListener(elContent,"mouseout",oSelf._onContainerMouseout,oSelf);
+        YAHOO.util.Event.addListener(elContent,"scroll",oSelf._onContainerScroll,oSelf);
+        YAHOO.util.Event.addListener(elContent,"resize",oSelf._onContainerResize,oSelf);
+        YAHOO.util.Event.addListener(elTextbox,"keypress",oSelf._onTextboxKeyPress,oSelf);
+        YAHOO.util.Event.addListener(window,"unload",oSelf._onWindowUnload,oSelf);
 
         // Custom events
         this.textboxFocusEvent = new YAHOO.util.CustomEvent("textboxFocus", this);
@@ -32939,7 +34192,7 @@ YAHOO.widget.AutoComplete = function(elInput,elContainer,oDataSource,oConfigs) {
         this.textboxBlurEvent = new YAHOO.util.CustomEvent("textboxBlur", this);
         
         // Finish up
-        oTextbox.setAttribute("autocomplete","off");
+        elTextbox.setAttribute("autocomplete","off");
         YAHOO.widget.AutoComplete._nIndex++;
     }
     // Required arguments were not found
@@ -33195,15 +34448,16 @@ YAHOO.widget.AutoComplete.prototype.getListItemData = function(oListItem) {
  * @param sHeader {String} HTML markup for results container header.
  */
 YAHOO.widget.AutoComplete.prototype.setHeader = function(sHeader) {
-    if(sHeader) {
-        if(this._oContainer._oContent._oHeader) {
-            this._oContainer._oContent._oHeader.innerHTML = sHeader;
-            this._oContainer._oContent._oHeader.style.display = "block";
+    if(this._elHeader) {
+        var elHeader = this._elHeader;
+        if(sHeader) {
+            elHeader.innerHTML = sHeader;
+            elHeader.style.display = "block";
         }
-    }
-    else {
-        this._oContainer._oContent._oHeader.innerHTML = "";
-        this._oContainer._oContent._oHeader.style.display = "none";
+        else {
+            elHeader.innerHTML = "";
+            elHeader.style.display = "none";
+        }
     }
 };
 
@@ -33215,15 +34469,16 @@ YAHOO.widget.AutoComplete.prototype.setHeader = function(sHeader) {
  * @param sFooter {String} HTML markup for results container footer.
  */
 YAHOO.widget.AutoComplete.prototype.setFooter = function(sFooter) {
-    if(sFooter) {
-        if(this._oContainer._oContent._oFooter) {
-            this._oContainer._oContent._oFooter.innerHTML = sFooter;
-            this._oContainer._oContent._oFooter.style.display = "block";
+    if(this._elFooter) {
+        var elFooter = this._elFooter;
+        if(sFooter) {
+                elFooter.innerHTML = sFooter;
+                elFooter.style.display = "block";
         }
-    }
-    else {
-        this._oContainer._oContent._oFooter.innerHTML = "";
-        this._oContainer._oContent._oFooter.style.display = "none";
+        else {
+            elFooter.innerHTML = "";
+            elFooter.style.display = "none";
+        }
     }
 };
 
@@ -33235,18 +34490,19 @@ YAHOO.widget.AutoComplete.prototype.setFooter = function(sFooter) {
  * @param sBody {String} HTML markup for results container body.
  */
 YAHOO.widget.AutoComplete.prototype.setBody = function(sBody) {
-    if(sBody) {
-        if(this._oContainer._oContent._oBody) {
-            this._oContainer._oContent._oBody.innerHTML = sBody;
-            this._oContainer._oContent._oBody.style.display = "block";
-            this._oContainer._oContent.style.display = "block";
+    if(this._elBody) {
+        var elBody = this._elBody;
+        if(sBody) {
+                elBody.innerHTML = sBody;
+                elBody.style.display = "block";
+                elBody.style.display = "block";
         }
+        else {
+            elBody.innerHTML = "";
+            elBody.style.display = "none";
+        }
+        this._maxResultsDisplayed = 0;
     }
-    else {
-        this._oContainer._oContent._oBody.innerHTML = "";
-        this._oContainer._oContent.style.display = "none";
-    }
-    this._maxResultsDisplayed = 0;
 };
 
 /**
@@ -33275,13 +34531,13 @@ YAHOO.widget.AutoComplete.prototype.formatResult = function(oResultItem, sQuery)
  * and DOM elements.
  *
  * @method doBeforeExpandContainer
- * @param oTextbox {HTMLElement} The text input box.
- * @param oContainer {HTMLElement} The container element.
+ * @param elTextbox {HTMLElement} The text input box.
+ * @param elContainer {HTMLElement} The container element.
  * @param sQuery {String} The query string.
  * @param aResults {Object[]}  An array of query results.
  * @return {Boolean} Return true to continue expanding container, false to cancel the expand.
  */
-YAHOO.widget.AutoComplete.prototype.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) {
+YAHOO.widget.AutoComplete.prototype.doBeforeExpandContainer = function(elTextbox, elContainer, sQuery, aResults) {
     return true;
 };
 
@@ -33316,26 +34572,26 @@ YAHOO.widget.AutoComplete.prototype.doBeforeSendQuery = function(sQuery) {
  */
 YAHOO.widget.AutoComplete.prototype.destroy = function() {
     var instanceName = this.toString();
-    var elInput = this._oTextbox;
-    var elContainer = this._oContainer;
+    var elInput = this._elTextbox;
+    var elContainer = this._elContainer;
 
     // Unhook custom events
-    this.textboxFocusEvent.unsubscribe();
-    this.textboxKeyEvent.unsubscribe();
-    this.dataRequestEvent.unsubscribe();
-    this.dataReturnEvent.unsubscribe();
-    this.dataErrorEvent.unsubscribe();
-    this.containerExpandEvent.unsubscribe();
-    this.typeAheadEvent.unsubscribe();
-    this.itemMouseOverEvent.unsubscribe();
-    this.itemMouseOutEvent.unsubscribe();
-    this.itemArrowToEvent.unsubscribe();
-    this.itemArrowFromEvent.unsubscribe();
-    this.itemSelectEvent.unsubscribe();
-    this.unmatchedItemSelectEvent.unsubscribe();
-    this.selectionEnforceEvent.unsubscribe();
-    this.containerCollapseEvent.unsubscribe();
-    this.textboxBlurEvent.unsubscribe();
+    this.textboxFocusEvent.unsubscribeAll();
+    this.textboxKeyEvent.unsubscribeAll();
+    this.dataRequestEvent.unsubscribeAll();
+    this.dataReturnEvent.unsubscribeAll();
+    this.dataErrorEvent.unsubscribeAll();
+    this.containerExpandEvent.unsubscribeAll();
+    this.typeAheadEvent.unsubscribeAll();
+    this.itemMouseOverEvent.unsubscribeAll();
+    this.itemMouseOutEvent.unsubscribeAll();
+    this.itemArrowToEvent.unsubscribeAll();
+    this.itemArrowFromEvent.unsubscribeAll();
+    this.itemSelectEvent.unsubscribeAll();
+    this.unmatchedItemSelectEvent.unsubscribeAll();
+    this.selectionEnforceEvent.unsubscribeAll();
+    this.containerCollapseEvent.unsubscribeAll();
+    this.textboxBlurEvent.unsubscribeAll();
 
     // Unhook DOM events
     YAHOO.util.Event.purgeElement(elInput, true);
@@ -33533,11 +34789,74 @@ YAHOO.widget.AutoComplete.prototype._sName = null;
 /**
  * Text input field DOM element.
  *
- * @property _oTextbox
+ * @property _elTextbox
  * @type HTMLElement
  * @private
  */
-YAHOO.widget.AutoComplete.prototype._oTextbox = null;
+YAHOO.widget.AutoComplete.prototype._elTextbox = null;
+
+/**
+ * Container DOM element.
+ *
+ * @property _elContainer
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elContainer = null;
+
+/**
+ * Reference to content element within container element.
+ *
+ * @property _elContent
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elContent = null;
+
+/**
+ * Reference to header element within content element.
+ *
+ * @property _elHeader
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elHeader = null;
+
+/**
+ * Reference to body element within content element.
+ *
+ * @property _elBody
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elBody = null;
+
+/**
+ * Reference to footer element within content element.
+ *
+ * @property _elFooter
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elFooter = null;
+
+/**
+ * Reference to shadow element within container element.
+ *
+ * @property _elShadow
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elShadow = null;
+
+/**
+ * Reference to iframe element within container element.
+ *
+ * @property _elIFrame
+ * @type HTMLElement
+ * @private
+ */
+YAHOO.widget.AutoComplete.prototype._elIFrame = null;
 
 /**
  * Whether or not the input field is currently in focus. If query results come back
@@ -33557,15 +34876,6 @@ YAHOO.widget.AutoComplete.prototype._bFocused = true;
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._oAnim = null;
-
-/**
- * Container DOM element.
- *
- * @property _oContainer
- * @type HTMLElement
- * @private
- */
-YAHOO.widget.AutoComplete.prototype._oContainer = null;
 
 /**
  * Whether or not the results container is currently open.
@@ -33740,7 +35050,7 @@ YAHOO.widget.AutoComplete.prototype._initProps = function() {
             this.animSpeed = 0.3;
         }
         if(!this._oAnim ) {
-            this._oAnim = new YAHOO.util.Anim(this._oContainer._oContent, {}, this.animSpeed);
+            this._oAnim = new YAHOO.util.Anim(this._elContent, {}, this.animSpeed);
         }
         else {
             this._oAnim.duration = this.animSpeed;
@@ -33758,21 +35068,21 @@ YAHOO.widget.AutoComplete.prototype._initProps = function() {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._initContainerHelpers = function() {
-    if(this.useShadow && !this._oContainer._oShadow) {
-        var oShadow = document.createElement("div");
-        oShadow.className = "yui-ac-shadow";
-        this._oContainer._oShadow = this._oContainer.appendChild(oShadow);
+    if(this.useShadow && !this._elShadow) {
+        var elShadow = document.createElement("div");
+        elShadow.className = "yui-ac-shadow";
+        this._elShadow = this._elContainer.appendChild(elShadow);
     }
-    if(this.useIFrame && !this._oContainer._oIFrame) {
-        var oIFrame = document.createElement("iframe");
-        oIFrame.src = this._iFrameSrc;
-        oIFrame.frameBorder = 0;
-        oIFrame.scrolling = "no";
-        oIFrame.style.position = "absolute";
-        oIFrame.style.width = "100%";
-        oIFrame.style.height = "100%";
-        oIFrame.tabIndex = -1;
-        this._oContainer._oIFrame = this._oContainer.appendChild(oIFrame);
+    if(this.useIFrame && !this._elIFrame) {
+        var elIFrame = document.createElement("iframe");
+        elIFrame.src = this._iFrameSrc;
+        elIFrame.frameBorder = 0;
+        elIFrame.scrolling = "no";
+        elIFrame.style.position = "absolute";
+        elIFrame.style.width = "100%";
+        elIFrame.style.height = "100%";
+        elIFrame.tabIndex = -1;
+        this._elIFrame = this._elContainer.appendChild(elIFrame);
     }
 };
 
@@ -33783,28 +35093,28 @@ YAHOO.widget.AutoComplete.prototype._initContainerHelpers = function() {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._initContainer = function() {
-    YAHOO.util.Dom.addClass(this._oContainer, "yui-ac-container");
+    YAHOO.util.Dom.addClass(this._elContainer, "yui-ac-container");
     
-    if(!this._oContainer._oContent) {
-        // The oContent div helps size the iframe and shadow properly
-        var oContent = document.createElement("div");
-        oContent.className = "yui-ac-content";
-        oContent.style.display = "none";
-        this._oContainer._oContent = this._oContainer.appendChild(oContent);
+    if(!this._elContent) {
+        // The elContent div helps size the iframe and shadow properly
+        var elContent = document.createElement("div");
+        elContent.className = "yui-ac-content";
+        elContent.style.display = "none";
+        this._elContent = this._elContainer.appendChild(elContent);
 
-        var oHeader = document.createElement("div");
-        oHeader.className = "yui-ac-hd";
-        oHeader.style.display = "none";
-        this._oContainer._oContent._oHeader = this._oContainer._oContent.appendChild(oHeader);
+        var elHeader = document.createElement("div");
+        elHeader.className = "yui-ac-hd";
+        elHeader.style.display = "none";
+        this._elHeader = this._elContent.appendChild(elHeader);
 
-        var oBody = document.createElement("div");
-        oBody.className = "yui-ac-bd";
-        this._oContainer._oContent._oBody = this._oContainer._oContent.appendChild(oBody);
+        var elBody = document.createElement("div");
+        elBody.className = "yui-ac-bd";
+        this._elBody = this._elContent.appendChild(elBody);
 
-        var oFooter = document.createElement("div");
-        oFooter.className = "yui-ac-ft";
-        oFooter.style.display = "none";
-        this._oContainer._oContent._oFooter = this._oContainer._oContent.appendChild(oFooter);
+        var elFooter = document.createElement("div");
+        elFooter.className = "yui-ac-ft";
+        elFooter.style.display = "none";
+        this._elFooter = this._elContent.appendChild(elFooter);
     }
     else {
     }
@@ -33820,18 +35130,18 @@ YAHOO.widget.AutoComplete.prototype._initContainer = function() {
  */
 YAHOO.widget.AutoComplete.prototype._initList = function() {
     this._aListItems = [];
-    while(this._oContainer._oContent._oBody.hasChildNodes()) {
+    while(this._elBody.hasChildNodes()) {
         var oldListItems = this.getListItems();
         if(oldListItems) {
             for(var oldi = oldListItems.length-1; oldi >= 0; oldi--) {
                 oldListItems[oldi] = null;
             }
         }
-        this._oContainer._oContent._oBody.innerHTML = "";
+        this._elBody.innerHTML = "";
     }
 
     var oList = document.createElement("ul");
-    oList = this._oContainer._oContent._oBody.appendChild(oList);
+    oList = this._elBody.appendChild(oList);
     for(var i=0; i<this.maxResultsDisplayed; i++) {
         var oItem = document.createElement("li");
         oItem = oList.appendChild(oItem);
@@ -33879,7 +35189,7 @@ YAHOO.widget.AutoComplete.prototype._onIMEDetected = function(oSelf) {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._enableIntervalDetection = function() {
-    var currValue = this._oTextbox.value;
+    var currValue = this._elTextbox.value;
     var lastValue = this._sLastTextboxValue;
     if(currValue != lastValue) {
         this._sLastTextboxValue = currValue;
@@ -34017,7 +35327,7 @@ YAHOO.widget.AutoComplete.prototype._populateList = function(sQuery, aResults, o
     }
 
     var isOpera = (navigator.userAgent.toLowerCase().indexOf("opera") != -1);
-    var contentStyle = oSelf._oContainer._oContent.style;
+    var contentStyle = oSelf._elContent.style;
     contentStyle.width = (!isOpera) ? null : "";
     contentStyle.height = (!isOpera) ? null : "";
 
@@ -34056,7 +35366,7 @@ YAHOO.widget.AutoComplete.prototype._populateList = function(sQuery, aResults, o
         }
 
         // Expand the container
-        var ok = oSelf.doBeforeExpandContainer(oSelf._oTextbox, oSelf._oContainer, sQuery, aResults);
+        var ok = oSelf.doBeforeExpandContainer(oSelf._elTextbox, oSelf._elContainer, sQuery, aResults);
         oSelf._toggleContainer(ok);
         
         if(oSelf.autoHighlight) {
@@ -34086,16 +35396,16 @@ YAHOO.widget.AutoComplete.prototype._populateList = function(sQuery, aResults, o
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._clearSelection = function() {
-    var sValue = this._oTextbox.value;
+    var sValue = this._elTextbox.value;
     var sChar = (this.delimChar) ? this.delimChar[0] : null;
     var nIndex = (sChar) ? sValue.lastIndexOf(sChar, sValue.length-2) : -1;
     if(nIndex > -1) {
-        this._oTextbox.value = sValue.substring(0,nIndex);
+        this._elTextbox.value = sValue.substring(0,nIndex);
     }
     else {
-         this._oTextbox.value = "";
+         this._elTextbox.value = "";
     }
-    this._sSavedQuery = this._oTextbox.value;
+    this._sSavedQuery = this._elTextbox.value;
 
     // Fire custom event
     this.selectionEnforceEvent.fire(this);
@@ -34139,20 +35449,20 @@ YAHOO.widget.AutoComplete.prototype._typeAhead = function(oItem, sQuery) {
         return;
     }
 
-    var oTextbox = this._oTextbox;
-    var sValue = this._oTextbox.value; // any saved queries plus what user has typed
+    var elTextbox = this._elTextbox;
+    var sValue = this._elTextbox.value; // any saved queries plus what user has typed
 
     // Don't update with type-ahead if text selection is not supported
-    if(!oTextbox.setSelectionRange && !oTextbox.createTextRange) {
+    if(!elTextbox.setSelectionRange && !elTextbox.createTextRange) {
         return;
     }
 
     // Select the portion of text that the user has not typed
     var nStart = sValue.length;
     this._updateValue(oItem);
-    var nEnd = oTextbox.value.length;
-    this._selectText(oTextbox,nStart,nEnd);
-    var sPrefill = oTextbox.value.substr(nStart,nEnd);
+    var nEnd = elTextbox.value.length;
+    this._selectText(elTextbox,nStart,nEnd);
+    var sPrefill = elTextbox.value.substr(nStart,nEnd);
     this.typeAheadEvent.fire(this,sQuery,sPrefill);
 };
 
@@ -34160,23 +35470,23 @@ YAHOO.widget.AutoComplete.prototype._typeAhead = function(oItem, sQuery) {
  * Selects text in the input field.
  *
  * @method _selectText
- * @param oTextbox {HTMLElement} Text input box element in which to select text.
+ * @param elTextbox {HTMLElement} Text input box element in which to select text.
  * @param nStart {Number} Starting index of text string to select.
  * @param nEnd {Number} Ending index of text selection.
  * @private
  */
-YAHOO.widget.AutoComplete.prototype._selectText = function(oTextbox, nStart, nEnd) {
-    if(oTextbox.setSelectionRange) { // For Mozilla
-        oTextbox.setSelectionRange(nStart,nEnd);
+YAHOO.widget.AutoComplete.prototype._selectText = function(elTextbox, nStart, nEnd) {
+    if(elTextbox.setSelectionRange) { // For Mozilla
+        elTextbox.setSelectionRange(nStart,nEnd);
     }
-    else if(oTextbox.createTextRange) { // For IE
-        var oTextRange = oTextbox.createTextRange();
+    else if(elTextbox.createTextRange) { // For IE
+        var oTextRange = elTextbox.createTextRange();
         oTextRange.moveStart("character", nStart);
-        oTextRange.moveEnd("character", nEnd-oTextbox.value.length);
+        oTextRange.moveEnd("character", nEnd-elTextbox.value.length);
         oTextRange.select();
     }
     else {
-        oTextbox.select();
+        elTextbox.select();
     }
 };
 
@@ -34189,29 +35499,29 @@ YAHOO.widget.AutoComplete.prototype._selectText = function(oTextbox, nStart, nEn
  */
 YAHOO.widget.AutoComplete.prototype._toggleContainerHelpers = function(bShow) {
     var bFireEvent = false;
-    var width = this._oContainer._oContent.offsetWidth + "px";
-    var height = this._oContainer._oContent.offsetHeight + "px";
+    var width = this._elContent.offsetWidth + "px";
+    var height = this._elContent.offsetHeight + "px";
 
-    if(this.useIFrame && this._oContainer._oIFrame) {
+    if(this.useIFrame && this._elIFrame) {
         bFireEvent = true;
         if(bShow) {
-            this._oContainer._oIFrame.style.width = width;
-            this._oContainer._oIFrame.style.height = height;
+            this._elIFrame.style.width = width;
+            this._elIFrame.style.height = height;
         }
         else {
-            this._oContainer._oIFrame.style.width = 0;
-            this._oContainer._oIFrame.style.height = 0;
+            this._elIFrame.style.width = 0;
+            this._elIFrame.style.height = 0;
         }
     }
-    if(this.useShadow && this._oContainer._oShadow) {
+    if(this.useShadow && this._elShadow) {
         bFireEvent = true;
         if(bShow) {
-            this._oContainer._oShadow.style.width = width;
-            this._oContainer._oShadow.style.height = height;
+            this._elShadow.style.width = width;
+            this._elShadow.style.height = height;
         }
         else {
-           this._oContainer._oShadow.style.width = 0;
-            this._oContainer._oShadow.style.height = 0;
+           this._elShadow.style.width = 0;
+            this._elShadow.style.height = 0;
         }
     }
 };
@@ -34224,7 +35534,7 @@ YAHOO.widget.AutoComplete.prototype._toggleContainerHelpers = function(bShow) {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
-    var oContainer = this._oContainer;
+    var elContainer = this._elContainer;
 
     // Implementer has container always open so don't mess with it
     if(this.alwaysShowContainer && this._bContainerOpen) {
@@ -34233,7 +35543,7 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
     
     // Clear contents of container
     if(!bShow) {
-        this._oContainer._oContent.scrollTop = 0;
+        this._elContent.scrollTop = 0;
         var aItems = this._aListItems;
 
         if(aItems && (aItems.length > 0)) {
@@ -34253,7 +35563,7 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
 
     // Container is already closed
     if(!bShow && !this._bContainerOpen) {
-        oContainer._oContent.style.display = "none";
+        this._elContent.style.display = "none";
         return;
     }
 
@@ -34271,8 +35581,8 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
         }
 
         // Clone container to grab current size offscreen
-        var oClone = oContainer._oContent.cloneNode(true);
-        oContainer.appendChild(oClone);
+        var oClone = this._elContent.cloneNode(true);
+        elContainer.appendChild(oClone);
         oClone.style.top = "-9000px";
         oClone.style.display = "block";
 
@@ -34291,16 +35601,16 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
 
         // If opening anew, set to a collapsed size...
         if(bShow && !this._bContainerOpen) {
-            oContainer._oContent.style.width = wColl+"px";
-            oContainer._oContent.style.height = hColl+"px";
+            this._elContent.style.width = wColl+"px";
+            this._elContent.style.height = hColl+"px";
         }
         // Else, set it to its last known size.
         else {
-            oContainer._oContent.style.width = wExp+"px";
-            oContainer._oContent.style.height = hExp+"px";
+            this._elContent.style.width = wExp+"px";
+            this._elContent.style.height = hExp+"px";
         }
 
-        oContainer.removeChild(oClone);
+        elContainer.removeChild(oClone);
         oClone = null;
 
     	var oSelf = this;
@@ -34312,14 +35622,14 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
                 oSelf.containerExpandEvent.fire(oSelf);
             }
             else {
-                oContainer._oContent.style.display = "none";
+                oSelf._elContent.style.display = "none";
                 oSelf.containerCollapseEvent.fire(oSelf);
             }
             oSelf._toggleContainerHelpers(bShow);
      	};
 
         // Display container and animate it
-        oContainer._oContent.style.display = "block";
+        this._elContent.style.display = "block";
         oAnim.onComplete.subscribe(onAnimComplete);
         oAnim.animate();
         this._bContainerOpen = bShow;
@@ -34327,11 +35637,11 @@ YAHOO.widget.AutoComplete.prototype._toggleContainer = function(bShow) {
     // Else don't animate, just show or hide
     else {
         if(bShow) {
-            oContainer._oContent.style.display = "block";
+            this._elContent.style.display = "block";
             this.containerExpandEvent.fire(this);
         }
         else {
-            oContainer._oContent.style.display = "none";
+            this._elContent.style.display = "none";
             this.containerCollapseEvent.fire(this);
         }
         this._toggleContainerHelpers(bShow);
@@ -34396,34 +35706,34 @@ YAHOO.widget.AutoComplete.prototype._togglePrehighlight = function(oNewItem, sTy
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._updateValue = function(oItem) {
-    var oTextbox = this._oTextbox;
+    var elTextbox = this._elTextbox;
     var sDelimChar = (this.delimChar) ? (this.delimChar[0] || this.delimChar) : null;
     var sSavedQuery = this._sSavedQuery;
     var sResultKey = oItem._sResultKey;
-    oTextbox.focus();
+    elTextbox.focus();
 
     // First clear text field
-    oTextbox.value = "";
+    elTextbox.value = "";
     // Grab data to put into text field
     if(sDelimChar) {
         if(sSavedQuery) {
-            oTextbox.value = sSavedQuery;
+            elTextbox.value = sSavedQuery;
         }
-        oTextbox.value += sResultKey + sDelimChar;
+        elTextbox.value += sResultKey + sDelimChar;
         if(sDelimChar != " ") {
-            oTextbox.value += " ";
+            elTextbox.value += " ";
         }
     }
-    else { oTextbox.value = sResultKey; }
+    else { elTextbox.value = sResultKey; }
 
     // scroll to bottom of textarea if necessary
-    if(oTextbox.type == "textarea") {
-        oTextbox.scrollTop = oTextbox.scrollHeight;
+    if(elTextbox.type == "textarea") {
+        elTextbox.scrollTop = elTextbox.scrollHeight;
     }
 
     // move cursor to end
-    var end = oTextbox.value.length;
-    this._selectText(oTextbox,end,end);
+    var end = elTextbox.value.length;
+    this._selectText(elTextbox,end,end);
 
     this._oCurItem = oItem;
 };
@@ -34495,14 +35805,14 @@ YAHOO.widget.AutoComplete.prototype._moveSelection = function(nKeyCode) {
            // Go back to query (remove type-ahead string)
             if(this.delimChar && this._sSavedQuery) {
                 if(!this._textMatchesOption()) {
-                    this._oTextbox.value = this._sSavedQuery;
+                    this._elTextbox.value = this._sSavedQuery;
                 }
                 else {
-                    this._oTextbox.value = this._sSavedQuery + this._sCurQuery;
+                    this._elTextbox.value = this._sSavedQuery + this._sCurQuery;
                 }
             }
             else {
-                this._oTextbox.value = this._sCurQuery;
+                this._elTextbox.value = this._sCurQuery;
             }
             this._oCurItem = null;
             return;
@@ -34516,36 +35826,36 @@ YAHOO.widget.AutoComplete.prototype._moveSelection = function(nKeyCode) {
         var oNewItem = this._aListItems[nNewItemIndex];
 
         // Scroll the container if necessary
-        var oContent = this._oContainer._oContent;
-        var scrollOn = ((YAHOO.util.Dom.getStyle(oContent,"overflow") == "auto") ||
-            (YAHOO.util.Dom.getStyle(oContent,"overflowY") == "auto"));
+        var elContent = this._elContent;
+        var scrollOn = ((YAHOO.util.Dom.getStyle(elContent,"overflow") == "auto") ||
+            (YAHOO.util.Dom.getStyle(elContent,"overflowY") == "auto"));
         if(scrollOn && (nNewItemIndex > -1) &&
         (nNewItemIndex < this._nDisplayedItems)) {
             // User is keying down
             if(nKeyCode == 40) {
                 // Bottom of selected item is below scroll area...
-                if((oNewItem.offsetTop+oNewItem.offsetHeight) > (oContent.scrollTop + oContent.offsetHeight)) {
+                if((oNewItem.offsetTop+oNewItem.offsetHeight) > (elContent.scrollTop + elContent.offsetHeight)) {
                     // Set bottom of scroll area to bottom of selected item
-                    oContent.scrollTop = (oNewItem.offsetTop+oNewItem.offsetHeight) - oContent.offsetHeight;
+                    elContent.scrollTop = (oNewItem.offsetTop+oNewItem.offsetHeight) - elContent.offsetHeight;
                 }
                 // Bottom of selected item is above scroll area...
-                else if((oNewItem.offsetTop+oNewItem.offsetHeight) < oContent.scrollTop) {
+                else if((oNewItem.offsetTop+oNewItem.offsetHeight) < elContent.scrollTop) {
                     // Set top of selected item to top of scroll area
-                    oContent.scrollTop = oNewItem.offsetTop;
+                    elContent.scrollTop = oNewItem.offsetTop;
 
                 }
             }
             // User is keying up
             else {
                 // Top of selected item is above scroll area
-                if(oNewItem.offsetTop < oContent.scrollTop) {
+                if(oNewItem.offsetTop < elContent.scrollTop) {
                     // Set top of scroll area to top of selected item
-                    this._oContainer._oContent.scrollTop = oNewItem.offsetTop;
+                    this._elContent.scrollTop = oNewItem.offsetTop;
                 }
                 // Top of selected item is below scroll area
-                else if(oNewItem.offsetTop > (oContent.scrollTop + oContent.offsetHeight)) {
+                else if(oNewItem.offsetTop > (elContent.scrollTop + elContent.offsetHeight)) {
                     // Set bottom of selected item to bottom of scroll area
-                    this._oContainer._oContent.scrollTop = (oNewItem.offsetTop+oNewItem.offsetHeight) - oContent.offsetHeight;
+                    this._elContent.scrollTop = (oNewItem.offsetTop+oNewItem.offsetHeight) - elContent.offsetHeight;
                 }
             }
         }
@@ -34653,7 +35963,7 @@ YAHOO.widget.AutoComplete.prototype._onContainerMouseout = function(v,oSelf) {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._onContainerScroll = function(v,oSelf) {
-    oSelf._oTextbox.focus();
+    oSelf._elTextbox.focus();
 };
 
 /**
@@ -34682,30 +35992,34 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyDown = function(v,oSelf) {
 
     switch (nKeyCode) {
         case 9: // tab
-            // select an item or clear out
-            if(oSelf._oCurItem) {
-                if(oSelf.delimChar && (oSelf._nKeyCode != nKeyCode)) {
-                    if(oSelf._bContainerOpen) {
-                        YAHOO.util.Event.stopEvent(v);
+            if((navigator.userAgent.toLowerCase().indexOf("mac") == -1)) {
+                // select an item or clear out
+                if(oSelf._oCurItem) {
+                    if(oSelf.delimChar && (oSelf._nKeyCode != nKeyCode)) {
+                        if(oSelf._bContainerOpen) {
+                            YAHOO.util.Event.stopEvent(v);
+                        }
                     }
+                    oSelf._selectItem(oSelf._oCurItem);
                 }
-                oSelf._selectItem(oSelf._oCurItem);
-            }
-            else {
-                oSelf._toggleContainer(false);
+                else {
+                    oSelf._toggleContainer(false);
+                }
             }
             break;
         case 13: // enter
-            if(oSelf._oCurItem) {
-                if(oSelf._nKeyCode != nKeyCode) {
-                    if(oSelf._bContainerOpen) {
-                        YAHOO.util.Event.stopEvent(v);
+            if((navigator.userAgent.toLowerCase().indexOf("mac") == -1)) {
+                if(oSelf._oCurItem) {
+                    if(oSelf._nKeyCode != nKeyCode) {
+                        if(oSelf._bContainerOpen) {
+                            YAHOO.util.Event.stopEvent(v);
+                        }
                     }
+                    oSelf._selectItem(oSelf._oCurItem);
                 }
-                oSelf._selectItem(oSelf._oCurItem);
-            }
-            else {
-                oSelf._toggleContainer(false);
+                else {
+                    oSelf._toggleContainer(false);
+                }
             }
             break;
         case 27: // esc
@@ -34738,14 +36052,20 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyPress = function(v,oSelf) {
     var nKeyCode = v.keyCode;
 
         //Expose only to Mac browsers, where stopEvent is ineffective on keydown events (bug 790337)
-        var isMac = (navigator.userAgent.toLowerCase().indexOf("mac") != -1);
-        if(isMac) {
+        if((navigator.userAgent.toLowerCase().indexOf("mac") != -1)) {
             switch (nKeyCode) {
             case 9: // tab
+                // select an item or clear out
                 if(oSelf._oCurItem) {
                     if(oSelf.delimChar && (oSelf._nKeyCode != nKeyCode)) {
-                        YAHOO.util.Event.stopEvent(v);
+                        if(oSelf._bContainerOpen) {
+                            YAHOO.util.Event.stopEvent(v);
+                        }
                     }
+                    oSelf._selectItem(oSelf._oCurItem);
+                }
+                else {
+                    oSelf._toggleContainer(false);
                 }
                 break;
             case 13: // enter
@@ -34755,11 +36075,11 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyPress = function(v,oSelf) {
                             YAHOO.util.Event.stopEvent(v);
                         }
                     }
+                    oSelf._selectItem(oSelf._oCurItem);
                 }
-                break;
-            case 38: // up
-            case 40: // down
-                YAHOO.util.Event.stopEvent(v);
+                else {
+                    oSelf._toggleContainer(false);
+                }
                 break;
             default:
                 break;
@@ -34786,6 +36106,7 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyUp = function(v,oSelf) {
     oSelf._initProps();
 
     var nKeyCode = v.keyCode;
+
     oSelf._nKeyCode = nKeyCode;
     var sText = this.value; //string in textbox
 
@@ -34827,7 +36148,7 @@ YAHOO.widget.AutoComplete.prototype._onTextboxKeyUp = function(v,oSelf) {
  * @private
  */
 YAHOO.widget.AutoComplete.prototype._onTextboxFocus = function (v,oSelf) {
-    oSelf._oTextbox.setAttribute("autocomplete","off");
+    oSelf._elTextbox.setAttribute("autocomplete","off");
     oSelf._bFocused = true;
     if(!oSelf._bItemSelected) {
         oSelf.textboxFocusEvent.fire(oSelf);
@@ -34878,19 +36199,16 @@ YAHOO.widget.AutoComplete.prototype._onTextboxBlur = function (v,oSelf) {
 };
 
 /**
- * Handles form submission event.
+ * Handles window unload event.
  *
- * @method _onFormSubmit
- * @param v {HTMLEvent} The submit event.
+ * @method _onWindowUnload
+ * @param v {HTMLEvent} The unload event.
  * @param oSelf {YAHOO.widget.AutoComplete} The AutoComplete instance.
  * @private
  */
-YAHOO.widget.AutoComplete.prototype._onFormSubmit = function(v,oSelf) {
-    if(oSelf.allowBrowserAutocomplete) {
-        oSelf._oTextbox.setAttribute("autocomplete","on");
-    }
-    else {
-        oSelf._oTextbox.setAttribute("autocomplete","off");
+YAHOO.widget.AutoComplete.prototype._onWindowUnload = function(v,oSelf) {
+    if(oSelf && oSelf._elTextbox && oSelf.allowBrowserAutocomplete) {
+        oSelf._elTextbox.setAttribute("autocomplete","on");
     }
 };
 
@@ -35420,8 +36738,7 @@ YAHOO.widget.DS_XHR.ERROR_DATAXHR = "XHR response failed";
 /////////////////////////////////////////////////////////////////////////////
 
 /**
- * Alias to YUI Connection Manager. Allows implementers to specify their own
- * subclasses of the YUI Connection Manager utility.
+ * Alias to YUI Connection Manager, to allow implementers to customize the utility.
  *
  * @property connMgr
  * @type Object
@@ -35603,9 +36920,27 @@ YAHOO.widget.DS_XHR.prototype.parseResponse = function(sQuery, oResponse, oParen
     switch (this.responseType) {
         case YAHOO.widget.DS_XHR.TYPE_JSON:
             var jsonList, jsonObjParsed;
-            // Check for JSON lib but divert KHTML clients
-            var isNotMac = (navigator.userAgent.toLowerCase().indexOf('khtml')== -1);
-            if(oResponse.parseJSON && isNotMac) {
+            // Check for YUI JSON
+            if(YAHOO.lang.JSON) {
+                // Use the JSON utility if available
+                jsonObjParsed = YAHOO.lang.JSON.parse(oResponse);
+                if(!jsonObjParsed) {
+                    bError = true;
+                    break;
+                }
+                else {
+                    try {
+                        // eval is necessary here since aSchema[0] is of unknown depth
+                        jsonList = eval("jsonObjParsed." + aSchema[0]);
+                    }
+                    catch(e) {
+                        bError = true;
+                        break;
+                   }
+                }
+            }
+            // Check for JSON lib
+            else if(oResponse.parseJSON) {
                 // Use the new JSON utility if available
                 jsonObjParsed = oResponse.parseJSON();
                 if(!jsonObjParsed) {
@@ -35622,8 +36957,8 @@ YAHOO.widget.DS_XHR.prototype.parseResponse = function(sQuery, oResponse, oParen
                    }
                 }
             }
-            else if(window.JSON && isNotMac) {
-                // Use older JSON lib if available
+            // Use older JSON lib if available
+            else if(window.JSON) {
                 jsonObjParsed = JSON.parse(oResponse);
                 if(!jsonObjParsed) {
                     bError = true;
@@ -35685,7 +37020,7 @@ YAHOO.widget.DS_XHR.prototype.parseResponse = function(sQuery, oResponse, oParen
             if(!YAHOO.lang.isArray(jsonList)) {
                 jsonList = [jsonList];
             }
-            
+
             // Loop through the array of all responses...
             for(var i = jsonList.length-1; i >= 0 ; i--) {
                 var aResultItem = [];
@@ -35750,9 +37085,13 @@ YAHOO.widget.DS_XHR.prototype.parseResponse = function(sQuery, oResponse, oParen
                 if(oResponse.substr(newLength) == aSchema[0]) {
                     oResponse = oResponse.substr(0, newLength);
                 }
-                var aRecords = oResponse.split(aSchema[0]);
-                for(var n = aRecords.length-1; n >= 0; n--) {
-                    aResults[n] = aRecords[n].split(aSchema[1]);
+                if(oResponse.length > 0) {
+                    var aRecords = oResponse.split(aSchema[0]);
+                    for(var n = aRecords.length-1; n >= 0; n--) {
+                        if(aRecords[n].length > 0) {
+                            aResults[n] = aRecords[n].split(aSchema[1]);
+                        }
+                    }
                 }
             }
             break;
@@ -35784,6 +37123,285 @@ YAHOO.widget.DS_XHR.prototype.parseResponse = function(sQuery, oResponse, oParen
  * @private
  */
 YAHOO.widget.DS_XHR.prototype._oConn = null;
+
+
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+
+/**
+ * Implementation of YAHOO.widget.DataSource using the Get Utility to generate
+ * dynamic SCRIPT nodes for data retrieval.
+ *
+ * @class DS_ScriptNode
+ * @constructor
+ * @extends YAHOO.widget.DataSource
+ * @param sUri {String} URI to the script location that will return data.
+ * @param aSchema {String[]} Data schema definition of results.
+ * @param oConfigs {Object} (optional) Object literal of config params.
+ */
+YAHOO.widget.DS_ScriptNode = function(sUri, aSchema, oConfigs) {
+    // Set any config params passed in to override defaults
+    if(oConfigs && (oConfigs.constructor == Object)) {
+        for(var sConfig in oConfigs) {
+            this[sConfig] = oConfigs[sConfig];
+        }
+    }
+
+    // Initialization sequence
+    if(!YAHOO.lang.isArray(aSchema) || !YAHOO.lang.isString(sUri)) {
+        return;
+    }
+
+    this.schema = aSchema;
+    this.scriptURI = sUri;
+
+    this._init();
+};
+
+YAHOO.widget.DS_ScriptNode.prototype = new YAHOO.widget.DataSource();
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Public member variables
+//
+/////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Alias to YUI Get Utility. Allows implementers to specify their own
+ * subclasses of the YUI Get Utility.
+ *
+ * @property getUtility
+ * @type Object
+ * @default YAHOO.util.Get
+ */
+YAHOO.widget.DS_ScriptNode.prototype.getUtility = YAHOO.util.Get;
+
+/**
+ * URI to the script that returns data.
+ *
+ * @property scriptURI
+ * @type String
+ */
+YAHOO.widget.DS_ScriptNode.prototype.scriptURI = null;
+
+/**
+ * Query string parameter name sent to scriptURI. For instance, requests will be
+ * sent to &#60;scriptURI&#62;?&#60;scriptQueryParam&#62;=queryString
+ *
+ * @property scriptQueryParam
+ * @type String
+ * @default "query"
+ */
+YAHOO.widget.DS_ScriptNode.prototype.scriptQueryParam = "query";
+
+/**
+ * Defines request/response management in the following manner:
+ * <dl>
+ *     <!--<dt>queueRequests</dt>
+ *     <dd>If a request is already in progress, wait until response is returned before sending the next request.</dd>
+ *     <dt>cancelStaleRequests</dt>
+ *     <dd>If a request is already in progress, cancel it before sending the next request.</dd>-->
+ *     <dt>ignoreStaleResponses</dt>
+ *     <dd>Send all requests, but handle only the response for the most recently sent request.</dd>
+ *     <dt>allowAll</dt>
+ *     <dd>Send all requests and handle all responses.</dd>
+ * </dl>
+ *
+ * @property asyncMode
+ * @type String
+ * @default "allowAll"
+ */
+YAHOO.widget.DS_ScriptNode.prototype.asyncMode = "allowAll";
+
+/**
+ * Callback string parameter name sent to scriptURI. For instance, requests will be
+ * sent to &#60;scriptURI&#62;?&#60;scriptCallbackParam&#62;=callbackFunction
+ *
+ * @property scriptCallbackParam
+ * @type String
+ * @default "callback"
+ */
+YAHOO.widget.DS_ScriptNode.prototype.scriptCallbackParam = "callback";
+
+/**
+ * Global array of callback functions, one for each request sent.
+ *
+ * @property callbacks
+ * @type Function[]
+ * @static
+ */
+YAHOO.widget.DS_ScriptNode.callbacks = [];
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Private member variables
+//
+/////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Unique ID to track requests.
+ *
+ * @property _nId
+ * @type Number
+ * @private
+ * @static
+ */
+YAHOO.widget.DS_ScriptNode._nId = 0;
+
+/**
+ * Counter for pending requests. When this is 0, it is safe to purge callbacks
+ * array.
+ *
+ * @property _nPending
+ * @type Number
+ * @private
+ * @static
+ */
+YAHOO.widget.DS_ScriptNode._nPending = 0;
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Public methods
+//
+/////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Queries the live data source. Results are passed back to a callback function.
+ *
+ * @method doQuery
+ * @param oCallbackFn {HTMLFunction} Callback function defined by oParent object to which to return results.
+ * @param sQuery {String} Query string.
+ * @param oParent {Object} The object instance that has requested data.
+ */
+YAHOO.widget.DS_ScriptNode.prototype.doQuery = function(oCallbackFn, sQuery, oParent) {
+    var oSelf = this;
+    
+    // If there are no global pending requests, it is safe to purge global callback stack and global counter
+    if(YAHOO.widget.DS_ScriptNode._nPending === 0) {
+        YAHOO.widget.DS_ScriptNode.callbacks = [];
+        YAHOO.widget.DS_ScriptNode._nId = 0;
+    }
+    
+    // ID for this request
+    var id = YAHOO.widget.DS_ScriptNode._nId;
+    YAHOO.widget.DS_ScriptNode._nId++;
+
+    // Dynamically add handler function with a closure to the callback stack
+    YAHOO.widget.DS_ScriptNode.callbacks[id] = function(oResponse) {
+        if((oSelf.asyncMode !== "ignoreStaleResponses")||
+                (id === YAHOO.widget.DS_ScriptNode.callbacks.length-1)) { // Must ignore stale responses
+            oSelf.handleResponse(oResponse, oCallbackFn, sQuery, oParent);
+        }
+        else {
+        }
+
+        delete YAHOO.widget.DS_ScriptNode.callbacks[id];
+    };
+
+    // We are now creating a request
+    YAHOO.widget.DS_ScriptNode._nPending++;
+
+    var sUri = this.scriptURI+"&"+ this.scriptQueryParam+"="+sQuery+"&"+
+            this.scriptCallbackParam+"=YAHOO.widget.DS_ScriptNode.callbacks["+id+"]";
+    this.getUtility.script(sUri,
+            {autopurge:true,
+            onsuccess:YAHOO.widget.DS_ScriptNode._bumpPendingDown,
+            onfail:YAHOO.widget.DS_ScriptNode._bumpPendingDown});
+};
+
+/**
+ * Parses JSON response data into an array of result objects and passes it to
+ * the callback function.
+ *
+ * @method handleResponse
+ * @param oResponse {Object} The raw response data to parse.
+ * @param oCallbackFn {HTMLFunction} Callback function defined by oParent object to which to return results.
+ * @param sQuery {String} Query string.
+ * @param oParent {Object} The object instance that has requested data.
+ */
+YAHOO.widget.DS_ScriptNode.prototype.handleResponse = function(oResponse, oCallbackFn, sQuery, oParent) {
+    var aSchema = this.schema;
+    var aResults = [];
+    var bError = false;
+
+    var jsonList, jsonObjParsed;
+
+    // Parse the JSON response as a string
+    try {
+        // Grab the object member that contains an array of all reponses...
+        // ...eval is necessary here since aSchema[0] is of unknown depth
+        jsonList = eval("(oResponse." + aSchema[0]+")");
+    }
+    catch(e) {
+        bError = true;
+   }
+
+    if(!jsonList) {
+        bError = true;
+        jsonList = [];
+    }
+
+    else if(!YAHOO.lang.isArray(jsonList)) {
+        jsonList = [jsonList];
+    }
+
+    // Loop through the array of all responses...
+    for(var i = jsonList.length-1; i >= 0 ; i--) {
+        var aResultItem = [];
+        var jsonResult = jsonList[i];
+        // ...and loop through each data field value of each response
+        for(var j = aSchema.length-1; j >= 1 ; j--) {
+            // ...and capture data into an array mapped according to the schema...
+            var dataFieldValue = jsonResult[aSchema[j]];
+            if(!dataFieldValue) {
+                dataFieldValue = "";
+            }
+            aResultItem.unshift(dataFieldValue);
+        }
+        // If schema isn't well defined, pass along the entire result object
+        if(aResultItem.length == 1) {
+            aResultItem.push(jsonResult);
+        }
+        // Capture the array of data field values in an array of results
+        aResults.unshift(aResultItem);
+    }
+
+    if(bError) {
+        aResults = null;
+    }
+
+    if(aResults === null) {
+        this.dataErrorEvent.fire(this, oParent, sQuery, YAHOO.widget.DataSource.ERROR_DATAPARSE);
+        aResults = [];
+    }
+    else {
+        var resultObj = {};
+        resultObj.query = decodeURIComponent(sQuery);
+        resultObj.results = aResults;
+        this._addCacheElem(resultObj);
+        
+        this.getResultsEvent.fire(this, oParent, sQuery, aResults);
+    }
+
+    oCallbackFn(sQuery, aResults, oParent);
+};
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Private methods
+//
+/////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Any success/failure response should decrement counter.
+ *
+ * @method _bumpPendingDown
+ * @private
+ */
+YAHOO.widget.DS_ScriptNode._bumpPendingDown = function() {
+    YAHOO.widget.DS_ScriptNode._nPending--;
+};
 
 
 /****************************************************************************/
@@ -35868,6 +37486,7 @@ YAHOO.widget.DS_JSFunction.prototype.doQuery = function(oCallbackFn, sQuery, oPa
     oCallbackFn(sQuery, aResults, oParent);
     return;
 };
+
 
 /****************************************************************************/
 /****************************************************************************/
@@ -35985,7 +37604,7 @@ YAHOO.widget.DS_JSArray.prototype.doQuery = function(oCallbackFn, sQuery, oParen
     oCallbackFn(sQuery, aResults, oParent);
 };
 
-YAHOO.register("autocomplete", YAHOO.widget.AutoComplete, {version: "2.3.1", build: "541"});
+YAHOO.register("autocomplete", YAHOO.widget.AutoComplete, {version: "2.5.2", build: "1076"});
 
 function cpaint(){this.version='2.0.3';var config=new Array();config['debugging']=-1;config['proxy_url']='';config['transfer_mode']='GET';config['async']=true;config['response_type']='OBJECT';config['persistent_connection']=false;config['use_cpaint_api']=true;var stack_count=0;this.capable=test_ajax_capability();this.set_debug=function(){if(typeof arguments[0]=='boolean'){if(arguments[0]===true){config['debugging']=1;}else{config['debugging']=0;}}else if(typeof arguments[0]=='number'){config['debugging']=Math.round(arguments[0]);}}
 this.set_proxy_url=function(){if(typeof arguments[0]=='string'){config['proxy_url']=arguments[0];}}
@@ -39921,6 +41540,14 @@ function ativaClicks(docMapa)
 			}
 			if ($i("tip"))
 			{$i("tip").style.display="none";}
+			var n = objmapa.objtips.length;
+			for(i=0;i<n;i++){
+				var o = $i(objmapa.objtips[i]);
+				if(o){
+					o.style.display="none";
+					o.innerHTML = "";
+				}
+			}
 		}
 		catch(e){var e = "";}
 		this.onmousemove=function(exy)
@@ -40065,61 +41692,6 @@ function ativaClicks(docMapa)
 		catch(e){var e = "";}
 	};
 }
-/*
-Section: navegação
-*/
-
-/*
-Function: initJanelaRef
-
-Abre a janela com o mapa de referencia
-*/
-function initJanelaRef()
-{
-	YAHOO.log("initJanelaRef", "i3geo");
-	if (!$i("winRef"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "winRef";
-		novoel.style.display="none";
-		novoel.style.borderColor="gray";
-		var ins = '<div class="hd">';
-		var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
-		var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;objmapa.atualizaReferencia();";
-		ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
-		ins += '<input style="cursor:pointer" onclick="javascript:objmapa.atualizaReferencia()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
-		ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="javascript:movimentoRef(this)" onclick="javascript:clicouRef()">';
-		ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
-		ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
-		ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
-		novoel.innerHTML = ins;
-		document.body.appendChild(novoel);
-		$i("imagemReferencia").style.height = objmapa.refheight+"px";
-	}
-	if($i("winRef").style.display != "block")
-	{
-		$i("winRef").style.display = "block";
-		YAHOO.namespace("janelaRef.xp");
-		YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
-		YAHOO.janelaRef.xp.panel.render();
-		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-		if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-		else
-		{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-		var escondeRef = function()
-		{
-			YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
-			YAHOO.janelaRef.xp.panel.destroy();	
-			i3GEO.util.insereCookie("g_mapaRefDisplay","none");
-		};
-		YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
-		i3GEO.util.insereCookie("g_mapaRefDisplay","block");
-	}
-	YAHOO.log("Fiim initJanelaRef", "i3geo");
-	objmapa.atualizaReferencia();
-}
-
 /*
 Function: movelentef
 
@@ -40268,33 +41840,7 @@ function zoomboxf(tipo)
 		break;
 	}
 }
-/*
-Function: clicouRef
 
-Altera a abrangência do mapa quando o mapa de referência é clicado
-*/
-function clicouRef()
-{
-	try
-	{
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+i3GEO.configura.sid;
-		cpObj.call(p,"pan",ajaxredesenha);
-	}
-	catch(e){var e = "";i3GEO.janela.fechaAguarde("ajaxredesenha");}
-}
-/*
-Function: movimentoRef
-
-Pega a coordenada do cursor sobre o mapa de referência
-*/
-function movimentoRef(obj)
-{
-	obj.onmousemove =function(exy)
-	{
-		capturaposicao(exy);
-	};
-}
 /*
 Function: ativaEntorno
 
@@ -40388,147 +41934,6 @@ function ajustaEntorno()
 	$top("imgL",objmapa.h*-1);
 	$top("imgN",objmapa.h*-1);
 	$top("imgO",objmapa.h*-1);
-}
-/*
-Section: atributos
-*/
-/*
-Function: verificaTip
-
-Verifica se a opção de identificação está ativa e se o mouse está parado.
-Se o mouse estiver parado, chama a função de mostrar tip.
-
-A função de busca dos dados para a etiqueta é definida na variável de configuração g_funcaoTip
-
-Pode-se definir uma outra função qualquer, sem a necessidade de alteração do código original do i3geo, definindo-se
-no HTML da interface a variável, por exemplo, gfuncaoTip = "minhasEtiquetas()"
-
-Por default, utiliza-se a função verificaTipDefault()
-*/
-function verificaTip()
-{
-	if (g_operacao != "identifica"){return;}
-	//insere div para tips
-	if (!$i("tip"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "tip";
-		novoel.style.position="absolute";
-		novoel.style.zIndex=5000;
-		if (navm)
-		{novoel.style.filter = "alpha(opacity=90)";}
-		document.body.appendChild(novoel);
-	}
-	if ((g_operacao == "identifica") && ($i("tip").style.display!="block"))
-	{
-		var i = $i("tip");
-		var ist = i.style;
-		ist.top = objposicaocursor.telay +20;
-		ist.left = objposicaocursor.telax;
-		i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>Pesquisando...</td></tr></table>";
-		ist.display="block";
-		eval(g_funcaoTip);
-	}
-}
-/*
-Function: verificaTipDefault
-
-Executa a operação de identificação para mostrar uma etiqueta no mapa.
-
-Esta é a função default, definida na variável g_funcaoTip
-*/
-function verificaTipDefault()
-{
-	YAHOO.log("verificaTipDefault", "i3geo");
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_persistent_connection(true);
-	cp.set_response_type("JSON");
-	cp.call(p,"identifica",mostraTip);
-}
-/*
-Function: mostraTip
-
-Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
-
-Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
-
-Parameters:
-
-retorno - retorno da função ajax com os dados para montar a etiqueta.
-*/
-function mostraTip(retorno)
-{
-	var mostra = false;
-	var retorno = retorno.data;
-	if ((retorno != "erro") && (retorno != undefined))
-	{
-		if ($i("img"))
-		{$i("img").title = "";}
-		if (retorno != "")
-		{
-			var res = "<div id='cabecatip' style='text-align:left;background-color:rgb(240,240,240)'><span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.parado=\"cancela\"'>parar&nbsp;&nbsp;</span>";
-			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
-			var temas = retorno.split("!");
-			var tema = temas.length-1;
-			if(tema >= 0)
-			{
-				do
-				{
-					var titulo = temas[tema].split("@");
-					if (g_tipotip == "completo")
-					{
-						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
-					}
-					var ocorrencias = titulo[1].split("*");
-					var ocorrencia = ocorrencias.length-1;
-					if(ocorrencia >= 0)
-					{
-						do
-						{
-							if (ocorrencias[ocorrencia] != "")
-							{
-								var pares = ocorrencias[ocorrencia].split("##");
-								var paresi = pares.length;
-								for (var par=0;par<paresi; par++)
-								{
-									var valores = pares[par].split("#");
-									if (g_tipotip == "completo")
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-									else
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-								}
-							}
-						}
-						while(ocorrencia--)
-					}
-				}
-				while(tema--)
-			}
-			if(!mostra){$i("tip").style.display="none";return;}
-			if ($i("janelaMen"))
-			{
-				$i("janelaMenTexto").innerHTML = res;
-			}
-			else
-			{
-				var i = $i("tip");
-				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
-				ist = i.style;
-				ist.top = objposicaocursor.telay - 10;
-				ist.left = objposicaocursor.telax - 20;
-				ist.display="block";
-			}
-		}
-	}
-	YAHOO.log("Fim mostraTip", "i3geo");
 }
 /*
 Section: legenda
@@ -41167,14 +42572,18 @@ function capturaposicao(e)
 	// 
 	var c = g_celula;
 	var ex = objmapa.extent;
-	if(targ.id == "imagemReferencia")
-	{
-		var c = g_celularef;
-		var ex = objmapa.extentref;
+	try{
+		if(targ.id == "imagemReferencia"){
+			var c = g_celularef;
+			var ex = objmapa.extentref;
+			var r = $i("i3geo_rosa");
+			if(r)
+			r.style.display = "none"
+		}
 	}
-	//$i("visual").innerHTML=c
-	var teladd = i3GEO.util.tela2dd(xfig,yfig,c,ex);
-	var teladms = i3GEO.util.dd2dms(teladd[0],teladd[1]);
+	catch(e){g_celularef = 0;}
+	var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+	var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
 	objposicaocursor.ddx = teladd[0];
 	objposicaocursor.ddy = teladd[1];
 	objposicaocursor.dmsx = teladms[0];
@@ -41190,88 +42599,6 @@ function capturaposicao(e)
 /*
 Section: calculos
 */
-/*
-Function calculaArea
-
-Calcula a área de um polígono.
-
-Os pontos são obtidos do objeto pontosdistobj
-
-Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
-
-O cálculo da resolução é feito quando a ferramenta de cálculo é ativada e armazenado na variável g_areapixel
-
-Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
-*/
-function calculaArea()
-{
-	try
-	{
-		if(pontosdistobj.xpt.length > 2)
-		{
-			var $array_length = pontosdistobj.xpt.length;
-			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-			pontosdistobj.ytela.push(pontosdistobj.ytela[0]);
-			pontosdistobj.xtela.push(pontosdistobj.xtela[0]);
-			pontosdistobj.ytela.push(pontosdistobj.ytela[1]);
-			var $polygon_area = 0;
-			for (var $i=0;$i <= $array_length;$i++)
-			{
-				$polygon_area += ((pontosdistobj.xtela[$i] * pontosdistobj.ytela[$i+1])-(pontosdistobj.ytela[$i] * pontosdistobj.xtela[$i+1]));
-			}
-			$polygon_area = Math.abs($polygon_area) / 2;
-		}
-		else
-		{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
-		//g_areapixel precisa estar definida
-		return $polygon_area*g_areapixel;
-	}
-	catch(e){return (0);}
-}
-/*
-Function: calculadistancia
-
-Calcula a distância entre dois pontos.
-
-Parameters:
-
-lga - x inicial.
-
-lta - y inicial
-
-lgb - x final
-
-ltb - y final
-*/
-function calculadistancia(lga,lta,lgb,ltb) //0ms
-{
-	//calculo baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
-	try
-	{
-		var er = 6366.707;
-		var radlat1 = Math.PI * lta/180;
-		var radlat2 = Math.PI * ltb/180;
-		var radlong1 = Math.PI * lga/180;
-		var radlong2 = Math.PI * lgb/180;
-		if (lta > 0) {radlat1=Math.PI/2-radlat1;}
-		if (lta < 0) {radlat1=Math.PI/2+radlat1;}
-		if (lga < 0) {radlong1=Math.PI*2-radlong1;}
-		if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
-		if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
-		if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
-		var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
-		var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
-		var z1 = er * Math.cos(radlat1);
-		var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
-		var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
-		var z2 = er * Math.cos(radlat2);
-		var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-		//side, side, side, law of cosines and arccos
-		var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
-		return theta*er;
-	}
-	catch(e){return (0);}
-}
 /*
 Function: posicaomouse
 
@@ -41613,6 +42940,15 @@ i3GEO.configura = {
 	*/
 	locaplic: "",
 	/*
+	Variable: mapaRefDisplay
+	
+	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
+	
+	Type:
+	{style.display}
+	*/
+	mapaRefDisplay: "block",
+	/*
 	Variable: visual
 	
 	Tipo de visual que será utilizado no mapa.
@@ -41752,6 +43088,11 @@ catch(e){};
 try {
 	if (g_visual)
 	{i3GEO.configura.visual = g_visual;}
+}
+catch(e){};
+try {
+	if (g_mapaRefDisplay)
+	{i3GEO.configura.mapaRefDisplay = g_mapaRefDisplay;}
 }
 catch(e){};
 //
@@ -42769,361 +44110,6 @@ it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive del
 };
 
 /*
-Class:: i3GEO.janela
-
-Abre janelas flutuantes
-
-As janelas são criadas por meio da biblioteca YUI
-
-File: i3geo/classesjs/classe_janela.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-i3GEO.janela = {
-	/*
-	Property: ANTESCRIA
-	
-	Lista com os nomes das funções que serão executadas antes de abrir a janela.
-	
-	Este é um array que pode ser modificado utilizando-se as funções javascript de
-	manipulação de arrays.
-	
-	Por default, ao criar uma janela é executada a função i3GEO.janela.prepara
-
-	Type:
-	{Array}
-	*/
-	ANTESCRIA: new Array(
-		"i3GEO.janela.prepara()"
-	),
-	/*
-	Property: ANTESFECHA
-	
-	Lista com os nomes das funções que serão executadas após fechar a janela.
-	
-	Este é um array que pode ser modificado utilizando-se as funções javascript de
-	manipulação de arrays.
-	
-	Por default, ao fechar uma janela é executada a função i3GEO.janela.fecha
-
-	Type:
-	{Array}
-	*/
-	ANTESFECHA: new Array(),
-	/*
-	Function: prepara
-	
-	Executa funções default antes de abrir a janela
-	*/
-	prepara: function(){
-		//
-		//esconde o mapa na interface flamingo se estiver ativa
-		//isso é necessário pq em flash as janelas não ficam por cima
-		//
-		if($i("flamingoi")){$i("flamingoi").style.display="none";}
-		//
-		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
-		//
-		i3GEO.util.escondePin();
-		i3GEO.util.escondeBox();
-	},
-	/*
-	Function: cria
-	
-	Cria uma janela flutuante.
-	
-	Vc pode obter o elemento HTML interno da janela por meio de:
-	
-	{retorno}[2].innerHTML
-	
-	Parameters:
-	
-	wlargura {integer} - largura da janela em pixels
-	
-	waltura {integer} - altura da janela em pixels
-	
-	wsrc {String} - URL que será incluída no SRC do iframe interno da janela. Se for "", o iframe não será criado
-	
-	nx {Integer} - posição x da janela em pixels. Se for "" será fixada no centro
-	
-	ny {Integer} - posição y da janela em pixels. Se for "" será fixada no centro
-
-	id {String} - (opcional) nome que será dado ao id que conterá a janela. Se não for definido, será usado o id="wdoca". O
-		id do iframe interno é sempre igual ao id + a letra i. Por default, será "wdocai".
-		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo"
-	
-	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
-	
-	Return:
-	
-	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
-	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
-		//executa as funções de preparação
-		YAHOO.log("Cria janela", "janela");
-		if(i3GEO.janela.ANTESCRIA){
-			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
-			{eval(i3GEO.janela.ANTESCRIA[i]);}
-		}
-		//
-		//por default o id será 'wdoca'
-		//
-		if (arguments.length < 7 || id == ""){
-			var id = "wdoca";
-			var modal = false;
-		}
-		if (arguments.length == 7){
-			var modal = false;
-		}
-		var wlargura_ = parseInt(wlargura)+0+"px";
-		YAHOO.namespace("janelaDoca.xp");
-		if ($i(id))
-		{YAHOO.janelaDoca.xp.panel.destroy();}
-		var ins = '<div id="'+id+'_cabecalho" class="hd">'+texto+'</div><div id="'+id+'_corpo" class="bd">';
-		if(wsrc != "")
-		ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
-		ins += '</div>';
-		var novoel = document.createElement("div");
-		novoel.id = id;
-		novoel.style.display="block";
-		novoel.innerHTML = ins;
-		if($i("i3geo"))
-		{$i("i3geo").appendChild(novoel);}
-		else
-		{document.body.appendChild(novoel);}
-		var wdocaiframe = $i(id+"i");
-		if (wdocaiframe)
-		{
-			with (wdocaiframe.style){width = "100%";height=waltura;};
-			wdocaiframe.style.display = "block";
-			wdocaiframe.src = wsrc;
-			i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
-		}
-		var fix = false;
-		if(nx == "" || nx == "center"){var fix = true;}
-		if(waltura == "auto")
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { zIndex:5000, modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );	
-		else
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
-		if(nx != "" && nx != "center"){
-			var pos = new Array(nx,ny);
-			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
-		}
-		YAHOO.janelaDoca.xp.panel.render();
-		if(modal == false)
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
-		YAHOO.log("Fim cria janela", "janela");
-		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
-	},
-	fecha: function(){
-		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-		{mudaiconf("pan");}
-		//esconde o box do google
-		i3GEO.util.escondePin();
-		i3GEO.util.escondeBox();
-		//fecha o container de desenho de elementos na tela
-		if($i("divGeometriasTemp"))
-		{richdraw.fecha();}
-		limpacontainerf();
-		if($i("flamingoi")){$i("flamingoi").style.display="block";}
-		//executa as funções de fechamento
-		if(i3GEO.janela.ANTESFECHA){
-			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
-			{eval(i3GEO.janela.ANTESFECHA[i]);}
-		}
-	},
-	/*
-	Function: alteraTamanho
-	
-	Altera o tamanho de uma janela aberta
-	
-	Parameters:
-	
-	w {Integer} - nova largura
-	
-	h {Integer} - nova altura
-	
-	id {String} - (opcional) id que identifica a janela aberta, por padrão utiliza "wdoca"
-	*/
-	alteraTamanho: function(w,h,id){
-		if(arguments.length == 3)
-		{var i = $i(id);}
-		else
-		{var i = $i("wdoca");}
-		if(i){
-			i.style.width = w;
-			i.style.height = h;
-		}
-	},
-	/*
-	Function: abreAguarde
-	
-	Abre uma janela com a mensagem de agurde e bloqueia cliques nomapa
-	
-	Parameters:
-	
-	id {String} - id danovajanela
-	
-	texto {String} - texto da janela
-	*/
-	abreAguarde: function(id,texto){
-		YAHOO.log("abreAguarde", "janela");
-		if($i(id+"_mask"))
-		{document.body.removeChild($i(id+"_mask"));}
-		if($i(id+"_c"))
-		{document.body.removeChild($i(id+"_c"));}
-		YAHOO.namespace("aguarde."+id);
-		var pos = [0,0];
-		if($i("corpoMapa"))
-		{var pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
-		else if ($i("contemImg"))
-		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
-		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
-		eval ('YAHOO.aguarde.'+id+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
-		eval ('YAHOO.aguarde.'+id+'.body.style.height="20px"');
-		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>")');
-		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
-		if($i("flamingo"))
-		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}
-		else
-		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
-		eval ('YAHOO.aguarde.'+id+'.show()');
-		if($i(id+"_mask"))
-		{$i(id+"_mask").style.zIndex=5000;}
-		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex=6000;}
-		YAHOO.log("Fim abreAguarde", "janela");	
-	},
-	/*
-	Function: fechaAguarde
-	
-	Fecha uma janela do tipo aguarde
-	
-	Paremeters:
-	
-	id {String} - id da janela que será fechada
-	*/
-	fechaAguarde: function(id){
-		try{eval('YAHOO.aguarde.'+id+'.destroy()');}
-		catch(e){};
-	}
-};
-try{
-	//controle dos painéis que podem ser redimensionados
-	YAHOO.widget.ResizePanel = function(el, userConfig)
-	{
-    	if (arguments.length > 0) 
-    	{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
-	};
-	YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";
-	YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE = "resizehandle";
-	YAHOO.extend(
-		YAHOO.widget.ResizePanel, YAHOO.widget.Panel,{
-   			init: function(el, userConfig){
-    			YAHOO.widget.ResizePanel.superclass.init.call(this, el);
-       			this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
-       			var Dom = YAHOO.util.Dom,
-           			Event = YAHOO.util.Event,
-           			oInnerElement = this.innerElement,
-           			oResizeHandle = document.createElement("DIV"),
-           			sResizeHandleId = this.id + "_resizehandle";
-       			oResizeHandle.id = sResizeHandleId;
-       			oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
-       			Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
-       			this.resizeHandle = oResizeHandle;
-       			function initResizeFunctionality(){
-           			var me = this,
-               			oHeader = this.header,
-               			oBody = this.body,
-               			oFooter = this.footer,
-               			nStartWidth,
-               			nStartHeight,
-               			aStartPos,
-               			nBodyBorderTopWidth,
-               			nBodyBorderBottomWidth,
-               			nBodyTopPadding,
-               			nBodyBottomPadding,
-               			nBodyOffset;
-           			oInnerElement.appendChild(oResizeHandle);
-           			this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
-           			this.ddResize.setHandleElId(sResizeHandleId);
-           			this.ddResize.onMouseDown = function(e){
-               			nStartWidth = oInnerElement.offsetWidth;
-               			nStartHeight = oInnerElement.offsetHeight;
-               			if (YAHOO.env.ua.ie && document.compatMode == "BackCompat")
-               			{nBodyOffset = 0;}
-               			else{
-                   			nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10);
-                   			nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10);
-                   			nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10);
-                   			nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
-                   			nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
-               			}
-               			me.cfg.setProperty("width", nStartWidth + "px");
-               			aStartPos = [Event.getPageX(e), Event.getPageY(e)];
-           			};
-           			this.ddResize.onDrag = function(e){
-               			var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
-                   			nOffsetX = aNewPos[0] - aStartPos[0],
-                   			nOffsetY = aNewPos[1] - aStartPos[1],
-                   			nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
-                   			nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
-                   			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
-               			me.cfg.setProperty("width", nNewWidth + "px");
-               			if (nBodyHeight < 0)
-               			{nBodyHeight = 0;}
-               			oBody.style.height =  nBodyHeight + "px";
-               			if ($i("wdocai"))
-               			{$i("wdocai").style.height = nBodyHeight;}
-           			};
-       			};
-       			function onBeforeShow(){
-       				initResizeFunctionality.call(this);
-       				this.unsubscribe("beforeShow", onBeforeShow);
-       			};
-       			function onBeforeRender(){
-           			if (!this.footer)
-           			{this.setFooter("");}
-           			if (this.cfg.getProperty("visible"))
-           			{initResizeFunctionality.call(this);}
-           			else
-           			{this.subscribe("beforeShow", onBeforeShow);}
-       				this.unsubscribe("beforeRender", onBeforeRender);
-       			};
-       			this.subscribe("beforeRender", onBeforeRender);
-       			if (userConfig)
-       			{this.cfg.applyConfig(userConfig, true);}
-       			this.initEvent.fire(YAHOO.widget.ResizePanel);
-   			},
-   			toString: function()
-   			{return "ResizePanel " + this.id;}
-		}
-	);
-}
-catch(e){};
-
-/*
 Class:: i3GEO.util
 
 Utilitários.
@@ -43374,44 +44360,6 @@ i3GEO.util = {
 		return(palavra);
 	},
 	/*
-	Function: dms2dd
-	
-	Converte coordenadas formatadas em DMS para DD
-	
-	Parameters:
-	
-	cd {Numeric} - grau
-	
-	cm {Numeric} - minuto
-	
-	cs {Numeric} - segundo
-	
-	Return:
-	
-	{Numeric} - Coordenada em décimos de grau.
-	*/
-	dms2dd: function(cd,cm,cs){
-		try
-		{
-			YAHOO.log("dms2dd", "i3geo");
-			//converte dms em dd
-			var sinal = 'positivo';
-			if (cd < 0)
-			{
-				cd = cd * -1;
-				sinal = 'negativo';
-			}
-			spm = cs / 3600;
-			mpg = cm / 60;
-			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
-			if (sinal == 'negativo')
-			{dd = dd * -1;}
-			YAHOO.log("Fim dms2dd", "i3geo");
-			return (dd);
-		}
-		catch(e){return (0);}
-	},
-	/*
 	Function protocolo
 	
 	Obtém o protocoloutilizado na URL atual
@@ -43486,161 +44434,6 @@ i3GEO.util = {
 		var tname;
 		tparent=targ.parentNode;
 		return(tparent);
-	},
-	/*
-	Function: dd2tela
-
-	Converte coordenadas dd em coordenadas de tela.
-
-	Parameters:
-
-	vx {Numeric} - coordenada x.
-
-	vy {Numeric} - coordenada y.
-
-	docmapa - objeto DOM que contém o objeto imagem
-	
-	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
-	
-	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1]
-	*/
-	dd2tela: function (vx,vy,docmapa,ext,cellsize){
-		try
-		{
-			if(!docmapa)
-			{var docmapa = window.document;}
-			var dc = docmapa.getElementsByTagName("img")[0];
-			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = objmapa.extent;
-			var imgext = imgext.split(" ");
-			vx = (vx * 1) - (imgext[0] * 1);
-			vy = (vy * -1) + (imgext[3] * 1);
-			c = cellsize * 1;
-			xy = new Array();
-			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
-		}
-		catch(e){return(new Array());}
-	},
-	/*
-	Function: dd2dms
-
-	Converte coordenadas de dd em dms.
-
-	Parameters:
-
-	x {Numeric} - coordenada x.
-
-	y {Numeric} - coordenada y.
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
-	*/
-	dd2dms: function(x,y){
-		var m = 0;
-		var s = 0;
-		var dx = parseInt(x);
-		if (dx > 0)
-		{var restod = x - dx;}
-		if (dx < 0)
-		{restod = (x * -1) - (dx * -1);}
-		dx = dx;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var mx = m;
-			if (restos != 0){
-				var s = restos * 60;
-				var s = (s+"_").substring(0,5);
-				var sx = s;
-			}
-			else  { s = "00.00" }
-		}
-		else{
-			var mx = "00";
-			var sx = "00.00";
-		}
-		if (m.length == 2){m = "0"+m+"";}
-		if (s*1 < 10){s = "0"+s;}
-		var xv = dx+" "+mx+" "+sx;
-		var m = 0;
-		var s = 0;
-		var dy = parseInt(y);
-		if (dy > 0)
-		{var restod = y - dy;}
-		if (dy < 0)
-		{var restod = (y * -1) - (dy * -1);}
-		dy = dy;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var my = m;
-			if (restos != 0){
-				var s = restos * 60;
-				s = (s+"_").substring(0,5);
-				var sy = s;
-			}
-			else  { var s = "00.00";}
-		}
-		else{
-			var my = "00";
-			var sy = "00.00";
-		}
-		if (m.length == 2){m = "0"+m;}
-		if (s*1 < 10){s = "0"+s;}
-		var yv = dy+" "+my+" "+sy;
-		var res = new Array();
-		res[0] = xv;
-		res[1] = yv;
-		return res;
-	},
-	/*
-	Function: tela2dd
-
-	Converte o x,y de unidades de tela para décimo de grau.
-
-	Parameters:
-
-	xfign {Numeric} - x em valores de imagem.
-
-	yfign {Numeric} - y em coordenadas de imagem.
-
-	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
-
-	imgext {String} - extensão geográfica do mapa.
-
-	Returns:
-
-	{Array} - Coordena em dd x[0] e y[1].
-	*/
-	tela2dd: function(xfign,yfign,g_celula,imgext){
-		try
-		{
-			if (navm){
-				xfign = xfign - 2.2;
-				yfign = yfign - 2.7;
-			}
-			else{
-				xfign = xfign - 0.12;
-				yfign = yfign - 1.05;
-			}
-			var nx = g_celula * xfign;
-			var ny = g_celula * yfign;
-			var amext = imgext.split(" ");
-			var longdd = (amext[0] * 1) + nx;
-			var latdd = (amext[3] * 1) - ny;
-			var res = new Array();
-			res[0] = longdd;
-			res[1] = latdd;
-			return (res);
-		}
-		catch(e){return(0);}
 	},
 	/*
 	Function: mudaCursor
@@ -43860,6 +44653,492 @@ $top = function(id,valor){
 };
 $left = function(id,valor){
 	i3GEO.util.$left(id,valor);
+};
+/*
+Class:: i3GEO.calculo
+
+Utilitários.
+
+Funções gerais de cálculo.
+
+File: i3geo/classesjs/classe_calculo.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+i3GEO.calculo = {
+	/*
+	Function: dms2dd
+	
+	Converte coordenadas formatadas em DMS para DD
+	
+	Parameters:
+	
+	cd {Numeric} - grau
+	
+	cm {Numeric} - minuto
+	
+	cs {Numeric} - segundo
+	
+	Return:
+	
+	{Numeric} - Coordenada em décimos de grau.
+	*/
+	dms2dd: function(cd,cm,cs){
+		try
+		{
+			YAHOO.log("dms2dd", "i3geo");
+			//converte dms em dd
+			var sinal = 'positivo';
+			if (cd < 0)
+			{
+				cd = cd * -1;
+				sinal = 'negativo';
+			}
+			spm = cs / 3600;
+			mpg = cm / 60;
+			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
+			if (sinal == 'negativo')
+			{dd = dd * -1;}
+			YAHOO.log("Fim dms2dd", "i3geo");
+			return (dd);
+		}
+		catch(e){return (0);}
+	},
+	/*
+	Function: dd2tela
+
+	Converte coordenadas dd em coordenadas de tela.
+
+	Parameters:
+
+	vx {Numeric} - coordenada x.
+
+	vy {Numeric} - coordenada y.
+
+	docmapa - objeto DOM que contém o objeto imagem
+	
+	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
+	
+	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
+
+	Returns:
+
+	{Array} - Array com o valor de x [0] e y [1]
+	*/
+	dd2tela: function (vx,vy,docmapa,ext,cellsize){
+		try
+		{
+			if(!docmapa)
+			{var docmapa = window.document;}
+			var dc = docmapa.getElementsByTagName("img")[0];
+			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
+			var imgext = objmapa.extent;
+			var imgext = imgext.split(" ");
+			vx = (vx * 1) - (imgext[0] * 1);
+			vy = (vy * -1) + (imgext[3] * 1);
+			c = cellsize * 1;
+			xy = new Array();
+			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
+		}
+		catch(e){return(new Array());}
+	},
+	/*
+	Function: dd2dms
+
+	Converte coordenadas de dd em dms.
+
+	Parameters:
+
+	x {Numeric} - coordenada x.
+
+	y {Numeric} - coordenada y.
+
+	Returns:
+
+	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
+	*/
+	dd2dms: function(x,y){
+		var m = 0;
+		var s = 0;
+		var dx = parseInt(x);
+		if (dx > 0)
+		{var restod = x - dx;}
+		if (dx < 0)
+		{restod = (x * -1) - (dx * -1);}
+		dx = dx;
+		if (restod != 0){
+			var mm = restod * 60;
+			var m = parseInt(restod * 60);
+			var restos = mm - m;
+			var mx = m;
+			if (restos != 0){
+				var s = restos * 60;
+				var s = (s+"_").substring(0,5);
+				var sx = s;
+			}
+			else  { s = "00.00" }
+		}
+		else{
+			var mx = "00";
+			var sx = "00.00";
+		}
+		if (m.length == 2){m = "0"+m+"";}
+		if (s*1 < 10){s = "0"+s;}
+		var xv = dx+" "+mx+" "+sx;
+		var m = 0;
+		var s = 0;
+		var dy = parseInt(y);
+		if (dy > 0)
+		{var restod = y - dy;}
+		if (dy < 0)
+		{var restod = (y * -1) - (dy * -1);}
+		dy = dy;
+		if (restod != 0){
+			var mm = restod * 60;
+			var m = parseInt(restod * 60);
+			var restos = mm - m;
+			var my = m;
+			if (restos != 0){
+				var s = restos * 60;
+				s = (s+"_").substring(0,5);
+				var sy = s;
+			}
+			else  { var s = "00.00";}
+		}
+		else{
+			var my = "00";
+			var sy = "00.00";
+		}
+		if (m.length == 2){m = "0"+m;}
+		if (s*1 < 10){s = "0"+s;}
+		var yv = dy+" "+my+" "+sy;
+		var res = new Array();
+		res[0] = xv;
+		res[1] = yv;
+		return res;
+	},
+	/*
+	Function: tela2dd
+
+	Converte o x,y de unidades de tela para décimo de grau.
+
+	Parameters:
+
+	xfign {Numeric} - x em valores de imagem.
+
+	yfign {Numeric} - y em coordenadas de imagem.
+
+	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
+
+	imgext {String} - extensão geográfica do mapa.
+
+	Returns:
+
+	{Array} - Coordena em dd x[0] e y[1].
+	*/
+	tela2dd: function(xfign,yfign,g_celula,imgext){
+		try
+		{
+			if (navm){
+				xfign = xfign - 2.2;
+				yfign = yfign - 2.7;
+			}
+			else{
+				xfign = xfign - 0.12;
+				yfign = yfign - 1.05;
+			}
+			var nx = g_celula * xfign;
+			var ny = g_celula * yfign;
+			var amext = imgext.split(" ");
+			var longdd = (amext[0] * 1) + nx;
+			var latdd = (amext[3] * 1) - ny;
+			var res = new Array();
+			res[0] = longdd;
+			res[1] = latdd;
+			return (res);
+		}
+		catch(e){return(0);}
+	},
+	/*
+	Function area
+
+	Calcula a área de um polígono.
+
+	Os pontos são obtidos do objeto pontos
+
+	Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
+
+	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
+	
+	Parameters:
+	
+	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
+	
+	pixel {Numeric} - área de cada pixel no mapa
+	
+	Return:
+	
+	Type:
+	{Numeric}
+	*/
+	area: function(pontos,pixel){
+		try{
+			if(pontos.xpt.length > 2){
+				var $array_length = pontos.xpt.length;
+				pontos.xtela.push(pontos.xtela[0]);
+				pontos.ytela.push(pontos.ytela[0]);
+				pontos.xtela.push(pontos.xtela[0]);
+				pontos.ytela.push(pontos.ytela[1]);
+				var $polygon_area = 0;
+				for (var $i=0;$i <= $array_length;$i++)
+				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
+				$polygon_area = Math.abs($polygon_area) / 2;
+			}
+			else
+			{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
+			return $polygon_area*pixel;
+		}
+		catch(e){return (0);}
+	},
+	/*
+	Function: distancia
+
+	Calcula a distância entre dois pontos.
+	
+	Baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
+
+	Parameters:
+
+	lga {Numeric} - x inicial.
+
+	lta {Numeric} - y inicial
+
+	lgb {Numeric} - x final
+
+	ltb {Numeric} - y final
+	
+	Return:
+	
+	Type:
+	{Numeric}
+	*/	
+	distancia: function(lga,lta,lgb,ltb){
+		try{
+			var er = 6366.707;
+			var radlat1 = Math.PI * lta/180;
+			var radlat2 = Math.PI * ltb/180;
+			var radlong1 = Math.PI * lga/180;
+			var radlong2 = Math.PI * lgb/180;
+			if (lta > 0) {radlat1=Math.PI/2-radlat1;}
+			if (lta < 0) {radlat1=Math.PI/2+radlat1;}
+			if (lga < 0) {radlong1=Math.PI*2-radlong1;}
+			if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
+			if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
+			if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
+			var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
+			var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
+			var z1 = er * Math.cos(radlat1);
+			var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
+			var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
+			var z2 = er * Math.cos(radlat2);
+			var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
+			//side, side, side, law of cosines and arccos
+			var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
+			return theta*er;
+		}
+		catch(e){return (0);}
+	}
+};
+
+/*
+Class:: i3GEO.maparef
+
+Cria e processa o mapa de referência
+
+File: i3geo/classesjs/classe_maparef.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+
+i3GEO.maparef = {
+	inicia: function(){
+		YAHOO.log("initJanelaRef", "i3geo");
+		if (!$i("i3geo_winRef")){
+			var novoel = document.createElement("div");
+			novoel.id = "i3geo_winRef";
+			novoel.style.display="none";
+			novoel.style.borderColor="gray";
+			var ins = '<div class="hd">';
+			var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+			ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
+			var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
+			ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
+			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){capturaposicao(exy)}" onclick="javascript:i3GEO.maparef.click()">';
+			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
+			//ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
+			ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
+			novoel.innerHTML = ins;
+			document.body.appendChild(novoel);
+			//$i("imagemReferencia").style.height = objmapa.refheight+"px";
+		}
+		if($i("i3geo_winRef").style.display != "block"){
+			$i("i3geo_winRef").style.display = "block";
+			YAHOO.namespace("janelaRef.xp");
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaRef.xp.panel.render();
+			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+			if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+			else
+			{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+			var escondeRef = function(){
+				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
+				YAHOO.janelaRef.xp.panel.destroy();	
+				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
+			};
+			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
+			if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml)
+			YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);
+		}
+		YAHOO.log("Fim initJanelaRef", "i3geo");
+		this.atualiza();
+	},
+	/*
+	Function: atualiza
+	
+	Atualiza o mapa de referência.
+
+	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
+	
+	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
+	
+	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
+	
+	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
+	*/
+	atualiza: function(mapexten){
+		//if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
+		var dinamico = false;
+		if ($i("refDinamico"))
+		{var dinamico = $i("refDinamico").checked;}
+		if ($i("mapaReferencia")){
+			YAHOO.log("Atualizando o mapa de referência", "i3geo");
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			if(dinamico){
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+g_zoomRefDinamico;
+				cp.call(p,"retornaReferenciaDinamica",this.processaImagem);
+			}
+			else{
+				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim")){
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
+					cp.call(p,"retornaReferencia",this.processaImagem);
+				}
+				else{
+					var re = new RegExp("&mode=map", "g");
+					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
+					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
+				}
+			}
+		}
+		else{
+			if($i("imagemReferencia"))
+			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
+		}
+	},
+	/*
+	Function: processaImagem
+		
+	Substituí a imagem do mapa de referência pela última gerada.
+
+	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
+	
+	Parameters:
+
+	retorno - string no formato "var refimagem='nome da imagem'".
+	*/
+	processaImagem: function(retorno){
+		i3GEO.janela.fechaAguarde("ajaxreferencia1");
+		if ((retorno.data != "erro") && (retorno.data != undefined)){
+			eval(retorno.data);
+			if ($i("imagemReferencia")){
+				var m = new Image();
+				m.src = refimagem;
+				$i("imagemReferencia").src=m.src;
+				if ((objmapa.scale < 15000000) && (objmapa.scale > 10000000)){
+					$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia.";
+					$i("refmensagem").style.fontSize="10px";
+				}
+				else{
+					$i("refmensagem").innerHTML = "";
+					$i("refmensagem").style.fontSize="0px";
+				}
+			}
+			i3GEO.gadgets.quadros.grava("referencia",refimagem);
+			YAHOO.log("Concluída imagem de referência", "redesenho");
+		}
+		else
+		{YAHOO.log("Erro na imagem de referência", "redesenho");}
+	},
+	/*
+	Function: click
+	
+	Ocorre quando o usuário clica sobre o mapa de referência, alterando a extensão geográfica do mapa principal
+	*/
+	click: function(){
+		try{
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+i3GEO.configura.sid;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"pan",ajaxredesenha);
+		}
+		catch(e)
+		{var e = "";i3GEO.janela.fechaAguarde("ajaxredesenha");}	
+	}
 };
 /*
 Class: i3geo.idioma
@@ -44359,6 +45638,399 @@ if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
 if(document.getElementById("bannerMensagem"))
 {i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
 /*
+Class:: i3GEO.janela
+
+Abre janelas flutuantes
+
+As janelas são criadas por meio da biblioteca YUI
+
+File: i3geo/classesjs/classe_janela.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+i3GEO.janela = {
+	/*
+	Property: ANTESCRIA
+	
+	Lista com os nomes das funções que serão executadas antes de abrir a janela.
+	
+	Este é um array que pode ser modificado utilizando-se as funções javascript de
+	manipulação de arrays.
+	
+	Por default, ao criar uma janela é executada a função i3GEO.janela.prepara
+
+	Type:
+	{Array}
+	*/
+	ANTESCRIA: new Array(
+		"i3GEO.janela.prepara()"
+	),
+	/*
+	Property: ANTESFECHA
+	
+	Lista com os nomes das funções que serão executadas após fechar a janela.
+	
+	Este é um array que pode ser modificado utilizando-se as funções javascript de
+	manipulação de arrays.
+	
+	Por default, ao fechar uma janela é executada a função i3GEO.janela.fecha
+
+	Type:
+	{Array}
+	*/
+	ANTESFECHA: new Array(),
+	/*
+	Function: prepara
+	
+	Executa funções default antes de abrir a janela
+	*/
+	prepara: function(){
+		//
+		//esconde o mapa na interface flamingo se estiver ativa
+		//isso é necessário pq em flash as janelas não ficam por cima
+		//
+		if($i("flamingoi")){$i("flamingoi").style.display="none";}
+		//
+		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
+		//
+		i3GEO.util.escondePin();
+		i3GEO.util.escondeBox();
+	},
+	/*
+	Function: cria
+	
+	Cria uma janela flutuante.
+	
+	Vc pode obter o elemento HTML interno da janela por meio de:
+	
+	{retorno}[2].innerHTML
+	
+	Parameters:
+	
+	wlargura {integer} - largura da janela em pixels
+	
+	waltura {integer} - altura da janela em pixels
+	
+	wsrc {String} - URL que será incluída no SRC do iframe interno da janela. Se for "", o iframe não será criado
+	
+	nx {Integer} - posição x da janela em pixels. Se for "" será fixada no centro
+	
+	ny {Integer} - posição y da janela em pixels. Se for "" será fixada no centro
+
+	id {String} - (opcional) nome que será dado ao id que conterá a janela. Se não for definido, será usado o id="wdoca". O
+		id do iframe interno é sempre igual ao id + a letra i. Por default, será "wdocai".
+		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo"
+	
+	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
+	
+	Return:
+	
+	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
+	*/
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
+		//executa as funções de preparação
+		YAHOO.log("Cria janela", "janela");
+		if(i3GEO.janela.ANTESCRIA){
+			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
+			{eval(i3GEO.janela.ANTESCRIA[i]);}
+		}
+		//
+		//por default o id será 'wdoca'
+		//
+		if (arguments.length < 7 || id == ""){
+			var id = "wdoca";
+			var modal = false;
+		}
+		if (arguments.length == 7){
+			var modal = false;
+		}
+		var wlargura_ = parseInt(wlargura)+0+"px";
+		YAHOO.namespace("janelaDoca.xp");
+		if ($i(id))
+		{YAHOO.janelaDoca.xp.panel.destroy();}
+		var ins = '<div id="'+id+'_cabecalho" class="hd">'+texto+'</div><div id="'+id+'_corpo" class="bd">';
+		if(wsrc != "")
+		ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
+		ins += '</div>';
+		var novoel = document.createElement("div");
+		novoel.id = id;
+		novoel.style.display="block";
+		novoel.innerHTML = ins;
+		if($i("i3geo"))
+		{$i("i3geo").appendChild(novoel);}
+		else
+		{document.body.appendChild(novoel);}
+		var wdocaiframe = $i(id+"i");
+		if (wdocaiframe)
+		{
+			with (wdocaiframe.style){width = "100%";height=waltura;};
+			wdocaiframe.style.display = "block";
+			wdocaiframe.src = wsrc;
+			i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
+		}
+		var fix = false;
+		if(nx == "" || nx == "center"){var fix = true;}
+		if(waltura == "auto")
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { zIndex:5000, modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );	
+		else
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		if(nx != "" && nx != "center"){
+			var pos = new Array(nx,ny);
+			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
+		}
+		YAHOO.janelaDoca.xp.panel.render();
+		if(modal == false)
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
+		YAHOO.log("Fim cria janela", "janela");
+		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
+	},
+	fecha: function(){
+		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+		{mudaiconf("pan");}
+		//esconde o box do google
+		i3GEO.util.escondePin();
+		i3GEO.util.escondeBox();
+		//fecha o container de desenho de elementos na tela
+		if($i("divGeometriasTemp"))
+		{richdraw.fecha();}
+		limpacontainerf();
+		if($i("flamingoi")){$i("flamingoi").style.display="block";}
+		//executa as funções de fechamento
+		if(i3GEO.janela.ANTESFECHA){
+			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
+			{eval(i3GEO.janela.ANTESFECHA[i]);}
+		}
+	},
+	/*
+	Function: alteraTamanho
+	
+	Altera o tamanho de uma janela aberta
+	
+	Parameters:
+	
+	w {Integer} - nova largura
+	
+	h {Integer} - nova altura
+	
+	id {String} - (opcional) id que identifica a janela aberta, por padrão utiliza "wdoca"
+	*/
+	alteraTamanho: function(w,h,id){
+		if(arguments.length == 3)
+		{var i = $i(id);}
+		else
+		{var i = $i("wdoca");}
+		if(i){
+			i.style.width = w;
+			i.style.height = h;
+		}
+	},
+	/*
+	Function: abreAguarde
+	
+	Abre uma janela com a mensagem de agurde e bloqueia cliques nomapa
+	
+	Parameters:
+	
+	id {String} - id danovajanela
+	
+	texto {String} - texto da janela
+	*/
+	abreAguarde: function(id,texto){
+		YAHOO.log("abreAguarde", "janela");
+		if($i(id+"_mask"))
+		{document.body.removeChild($i(id+"_mask"));}
+		if($i(id+"_c"))
+		{document.body.removeChild($i(id+"_c"));}
+		YAHOO.namespace("aguarde."+id);
+		var pos = [0,0];
+		if($i("corpoMapa"))
+		{var pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
+		else if ($i("contemImg"))
+		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
+		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
+		eval ('YAHOO.aguarde.'+id+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
+		eval ('YAHOO.aguarde.'+id+'.body.style.height="20px"');
+		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>")');
+		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
+		if($i("flamingo"))
+		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}
+		else
+		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
+		eval ('YAHOO.aguarde.'+id+'.show()');
+		if($i(id+"_mask"))
+		{$i(id+"_mask").style.zIndex=5000;}
+		if($i(id+"_c"))
+		{$i(id+"_c").style.zIndex=6000;}
+		YAHOO.log("Fim abreAguarde", "janela");	
+	},
+	/*
+	Function: tip
+	
+	Cria um DIV e posiciona sobre o mapa na posição do mouse.
+	
+	Return:
+	
+	ID do DIV criado
+	*/
+	tip: function(){
+		var Nid = YAHOO.util.Dom.generateId();
+		var i = $i("i3geo_rosa");
+		if(i)
+		i.style.display="none";
+		if ($i("img"))
+		{$i("img").title = "";}
+		//insere div para tips
+		var novoel = document.createElement("div");
+		novoel.id = Nid;
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		novoel.style.textAlign="left";
+		novoel.style.background="white";
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		else
+		{novoel.style.opacity = ".9";}
+		eval("novoel.onmouseout = function(){if(!$i('"+Nid+"cabecatip')){return;};if($i('"+Nid+"cabecatip').innerHTML != ''){document.body.removeChild($i('"+Nid+"'));}};");
+		document.body.appendChild(novoel);
+		var res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
+		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\""+Nid+"\"));$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >fixar</span></div>";
+		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
+		ist = novoel.style;
+		ist.top = objposicaocursor.telay - 10;
+		ist.left = objposicaocursor.telax - 20;
+		ist.display="block";
+		return(Nid);
+	},
+	/*
+	Function: fechaAguarde
+	
+	Fecha uma janela do tipo aguarde
+	
+	Paremeters:
+	
+	id {String} - id da janela que será fechada
+	*/
+	fechaAguarde: function(id){
+		try{eval('YAHOO.aguarde.'+id+'.destroy()');}
+		catch(e){};
+	}
+};
+try{
+	//controle dos painéis que podem ser redimensionados
+	YAHOO.widget.ResizePanel = function(el, userConfig)
+	{
+    	if (arguments.length > 0) 
+    	{YAHOO.widget.ResizePanel.superclass.constructor.call(this, el, userConfig);}
+	};
+	YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE = "yui-resizepanel";
+	YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE = "resizehandle";
+	YAHOO.extend(
+		YAHOO.widget.ResizePanel, YAHOO.widget.Panel,{
+   			init: function(el, userConfig){
+    			YAHOO.widget.ResizePanel.superclass.init.call(this, el);
+       			this.beforeInitEvent.fire(YAHOO.widget.ResizePanel);
+       			var Dom = YAHOO.util.Dom,
+           			Event = YAHOO.util.Event,
+           			oInnerElement = this.innerElement,
+           			oResizeHandle = document.createElement("DIV"),
+           			sResizeHandleId = this.id + "_resizehandle";
+       			oResizeHandle.id = sResizeHandleId;
+       			oResizeHandle.className = YAHOO.widget.ResizePanel.CSS_RESIZE_HANDLE;
+       			Dom.addClass(oInnerElement, YAHOO.widget.ResizePanel.CSS_PANEL_RESIZE);
+       			this.resizeHandle = oResizeHandle;
+       			function initResizeFunctionality(){
+           			var me = this,
+               			oHeader = this.header,
+               			oBody = this.body,
+               			oFooter = this.footer,
+               			nStartWidth,
+               			nStartHeight,
+               			aStartPos,
+               			nBodyBorderTopWidth,
+               			nBodyBorderBottomWidth,
+               			nBodyTopPadding,
+               			nBodyBottomPadding,
+               			nBodyOffset;
+           			oInnerElement.appendChild(oResizeHandle);
+           			this.ddResize = new YAHOO.util.DragDrop(sResizeHandleId, this.id);
+           			this.ddResize.setHandleElId(sResizeHandleId);
+           			this.ddResize.onMouseDown = function(e){
+               			nStartWidth = oInnerElement.offsetWidth;
+               			nStartHeight = oInnerElement.offsetHeight;
+               			if (YAHOO.env.ua.ie && document.compatMode == "BackCompat")
+               			{nBodyOffset = 0;}
+               			else{
+                   			nBodyBorderTopWidth = parseInt(Dom.getStyle(oBody, "borderTopWidth"), 10);
+                   			nBodyBorderBottomWidth = parseInt(Dom.getStyle(oBody, "borderBottomWidth"), 10);
+                   			nBodyTopPadding = parseInt(Dom.getStyle(oBody, "paddingTop"), 10);
+                   			nBodyBottomPadding = parseInt(Dom.getStyle(oBody, "paddingBottom"), 10);
+                   			nBodyOffset = nBodyBorderTopWidth + nBodyBorderBottomWidth + nBodyTopPadding + nBodyBottomPadding;
+               			}
+               			me.cfg.setProperty("width", nStartWidth + "px");
+               			aStartPos = [Event.getPageX(e), Event.getPageY(e)];
+           			};
+           			this.ddResize.onDrag = function(e){
+               			var aNewPos = [Event.getPageX(e), Event.getPageY(e)],
+                   			nOffsetX = aNewPos[0] - aStartPos[0],
+                   			nOffsetY = aNewPos[1] - aStartPos[1],
+                   			nNewWidth = Math.max(nStartWidth + nOffsetX, 10),
+                   			nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
+                   			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
+               			me.cfg.setProperty("width", nNewWidth + "px");
+               			if (nBodyHeight < 0)
+               			{nBodyHeight = 0;}
+               			oBody.style.height =  nBodyHeight + "px";
+               			if ($i("wdocai"))
+               			{$i("wdocai").style.height = nBodyHeight;}
+           			};
+       			};
+       			function onBeforeShow(){
+       				initResizeFunctionality.call(this);
+       				this.unsubscribe("beforeShow", onBeforeShow);
+       			};
+       			function onBeforeRender(){
+           			if (!this.footer)
+           			{this.setFooter("");}
+           			if (this.cfg.getProperty("visible"))
+           			{initResizeFunctionality.call(this);}
+           			else
+           			{this.subscribe("beforeShow", onBeforeShow);}
+       				this.unsubscribe("beforeRender", onBeforeRender);
+       			};
+       			this.subscribe("beforeRender", onBeforeRender);
+       			if (userConfig)
+       			{this.cfg.applyConfig(userConfig, true);}
+       			this.initEvent.fire(YAHOO.widget.ResizePanel);
+   			},
+   			toString: function()
+   			{return "ResizePanel " + this.id;}
+		}
+	);
+}
+catch(e){};
+
+/*
 Class:: i3GEO.eventos
 
 Controla as operações que são executadas em eventos que ocorrem no mapa.
@@ -44401,7 +46073,6 @@ i3GEO.eventos = {
 	*/
 	MOUSEPARADO: new Array(
 		"i3GEO.gadgets.mostraCoordenadasUTM()",
-		"verificaTip()",
 		"i3GEO.navega.mostraRosaDosVentos()"
 	),
 	/*
@@ -46387,44 +48058,47 @@ i3GEO.gadgets = {
 	i3GEO.gadgets.PARAMETROS
 	*/	
 	mostraCoordenadasGEO: function(id){
-		if(arguments.length == 0)
-		{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
-		atualizaLocalizarxy = function(){
-			var x = objposicaocursor.dmsx.split(" ");
-			var y = objposicaocursor.dmsy.split(" ");
-			$i3geo_temp_xg.value = x[0];
-			$i3geo_temp_xm.value = x[1];
-			$i3geo_temp_xs.value = x[2];
-			$i3geo_temp_yg.value = y[0];
-			$i3geo_temp_ym.value = y[1];
-			$i3geo_temp_ys.value = y[2];
-		};
-		if($i(id)){
-			if(!$i("xm")){
-				var ins = "<table style='text-align:center'><tr>";
-				ins += "<td>localiza X:&nbsp;</td>";
-				ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
-				ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
-				ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-				var temp = 'var xxx = i3GEO.util.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
-				temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
-				temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
-				ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
-				ins += "</tr></table>";
-				$i(id).innerHTML = ins;
-				$i3geo_temp_xg = $i("xg");
-				$i3geo_temp_xm = $i("xm");
-				$i3geo_temp_xs = $i("xs");
-				$i3geo_temp_yg = $i("yg");
-				$i3geo_temp_ym = $i("ym");
-				$i3geo_temp_ys = $i("ys");
-				if($i("img"))
-				{$i("img").addEventListener('mousemove',atualizaLocalizarxy,false);}
+		try{
+			if(arguments.length == 0)
+			{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
+			if($i(id)){
+				if(!$i("xm")){
+					var ins = "<table style='text-align:center'><tr>";
+					ins += "<td>localiza X:&nbsp;</td>";
+					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
+					ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+					var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
+					temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
+					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
+					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
+					ins += "</tr></table>";
+					$i(id).innerHTML = ins;
+					$i3geo_temp_xg = $i("xg");
+					$i3geo_temp_xm = $i("xm");
+					$i3geo_temp_xs = $i("xs");
+					$i3geo_temp_yg = $i("yg");
+					$i3geo_temp_ym = $i("ym");
+					$i3geo_temp_ys = $i("ys");
+					atualizaLocalizarxy = function(){
+						var x = objposicaocursor.dmsx.split(" ");
+						var y = objposicaocursor.dmsy.split(" ");
+						$i3geo_temp_xg.value = x[0];
+						$i3geo_temp_xm.value = x[1];
+						$i3geo_temp_xs.value = x[2];
+						$i3geo_temp_yg.value = y[0];
+						$i3geo_temp_ym.value = y[1];
+						$i3geo_temp_ys.value = y[2];
+					};
+					if($i("img"))
+					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}
+				}
 			}
 		}
+		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
 	},
 	/*
 	Function: mostraEscalaNumerica
@@ -47067,21 +48741,6 @@ Veja:
 */
 g_diminuiyN = 103;
 /*
-Variable: g_mapaRefDisplay
-
-Indica a visibilidade do mapa de referência na inicialização
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-block|none
-
-*/
-g_mapaRefDisplay = "block";
-/*
 Variable: g_funcaoTip
 
 Função ajax que será executada para mostrar informações em etiquetas.
@@ -47387,12 +49046,80 @@ g_listaFuncoesBotoes = {
 			}
 			i3GEO.barraDeBotoes.ativaIcone("identifica");
 			g_tipoacao='identifica';
+			g_operacao='identifica';
 			cliqueIdentifica = function(){
 				if (g_tipoacao == "identifica")
 				{wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");}
 			};
+			verificaTip = function(){
+				if (g_operacao != "identifica"){return;}
+				//funcao default para pegar os dados
+				verificaTipDefault = function(){
+					var retorna = function(retorno){
+						var i = $i("i3geo_rosa");
+						if(i){i.style.display="none";}			
+						var mostra = false;
+						try{
+							var retorno = retorno.data;
+							if ($i("img"))
+							{$i("img").title = "";}
+							if (retorno != ""){
+								var res = "";
+								var temas = retorno.split("!");
+								var tema = temas.length-1;
+								if(tema >= 0){
+									do{
+										var titulo = temas[tema].split("@");
+										if (g_tipotip == "completo")
+										{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
+										var ocorrencias = titulo[1].split("*");
+										var ocorrencia = ocorrencias.length-1;
+										if(ocorrencia >= 0){
+											do{
+												if (ocorrencias[ocorrencia] != ""){
+													var pares = ocorrencias[ocorrencia].split("##");
+													var paresi = pares.length;
+													for (var par=0;par<paresi; par++){
+														var valores = pares[par].split("#");
+														if (g_tipotip == "completo"){
+															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+															var mostra = true;
+														}
+														else{
+															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+															var mostra = true;
+														}
+													}
+												}
+											}
+											while(ocorrencia--)
+										}
+									}
+									while(tema--)
+								}
+								if(!mostra){$i("tip").style.display="none";return;}
+								else{		
+									var n = i3GEO.janela.tip();
+									$i(n).innerHTML += res;
+								}
+							}
+						}
+						catch(e){}
+					};
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+					var cp = new cpaint();
+					cp.set_persistent_connection(true);
+					cp.set_response_type("JSON");
+					cp.call(p,"identifica",retorna);
+				};				
+				if (g_operacao == "identifica"){
+					eval(g_funcaoTip);
+				}
+			};
 			if(g_funcoesClickMapaDefault.toString().search("cliqueIdentifica()") < 0)
 			{g_funcoesClickMapaDefault.push("cliqueIdentifica()");}
+			if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
+			{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
 		}
 	},
 	{
@@ -47409,7 +49136,7 @@ g_listaFuncoesBotoes = {
 		tipo:"",
 		dica:$trad("d9"),
 		funcaoonclick:function()
-		{initJanelaRef();}
+		{i3GEO.maparef.inicia();}
 	},
 	{
 		//botão de busca na wikipedia
@@ -48245,7 +49972,10 @@ i3GEO.navega = {
 	i3GEO.eventos.MOUSEPARADO
 	*/
 	mostraRosaDosVentos: function(){
-		try{if (i3GEO.configura.mostraRosaDosVentos == "nao"){return;}}
+		try{
+			if(i3GEO.configura.mostraRosaDosVentos == "nao"){return;}
+			if(g_tipoacao == "area"){return;}
+		}
 		catch(e){};
 		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10 || objposicaocursor.imgy > (objmapa.h - 10))
 		{return;}
@@ -48279,13 +50009,13 @@ i3GEO.navega = {
 		i.style.top = objposicaocursor.telay - 27;
 		i.style.left = objposicaocursor.telax - 27;
 		i.style.display="block";
-		var temp = function(){
+		var escondeRosa = function(){
 			var i = $i("i3geo_rosa");
 			i.style.display="none";
-			$i("img").removeEventListener('mousemove',temp,false);
+			YAHOO.util.Event.removeListener(escondeRosa);
 		}
 		if($i("img"))
-		$i("img").addEventListener('mousemove',temp,false)
+		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
 	}
 };
@@ -48341,7 +50071,7 @@ function moveMede()
 		var n = pontosdistobj.xpt.length;
 		if (n > 0)
 		{
-			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 			if (objmapa.scale > 500000)
 			{var d = parseInt(d);}
 			else
@@ -48395,7 +50125,7 @@ function moveSelecaoPoli()
 		var n = pontosdistobj.xpt.length;
 		if (n > 0)
 		{
-			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			var d = i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 			if (objmapa.scale > 500000)
 			{var d = parseInt(d);}
 			else
@@ -48427,7 +50157,7 @@ function moveArea()
 			//
 			//conforme a escala, os dados são arredondados
 			// 
-			var d = calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			var d = i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 			if (objmapa.scale > 500000)
 			{var d = parseInt(d);}
 			else
@@ -48721,7 +50451,7 @@ function cliqueMede()
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 		if (n > 0)
 		{
-			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			if($i("pararraios") && $i("pararraios").checked == true )
 			{
@@ -48734,6 +50464,8 @@ function cliqueMede()
 		{
 			richdraw.fecha();
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
+			if($i("pan"))
+			$i("pan").onclick.call();
 		};
 		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
 	}
@@ -48785,7 +50517,7 @@ function cliqueSelecaoPoli()
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 		if (n > 0)
 		{
-			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			//verifica se deve terminar
 			if (d < 3)
@@ -48883,27 +50615,28 @@ function cliqueArea()
 			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
-		var m = calculaArea();
+		var m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 		if($i("mostraarea_calculo"))
 		{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m+"<br><b>km2</b>= "+m/1000000+"<br><b>ha</b>= "+m/10000;}
-		
 		if (n > 3)
 		{
-			var d = parseInt(calculadistancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			//verifica se deve terminar
 			if (d < 3)
 			{
 				richdraw.fecha();
 				limpacontainerf();
-				mudaiconf("pan");
+				if($i("pan"))
+				$i("pan").onclick.call();
 			}
 		}
 		var temp = function()
 		{
 			richdraw.fecha();
 			limpacontainerf();
-			mudaiconf("pan");
+			if($i("pan"))
+			$i("pan").onclick.call();
 		};
 		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
 	}
@@ -50048,43 +51781,6 @@ function ajaxEscalaGrafica(retorno)
 	}
 }
 /*
-Function: ajaxReferencia
-
-Substituí a imagem do mapa de referência pela última gerada.
-
-Parameters:
-
-retorno - string no formato "var refimagem='nome da imagem'".
-*/
-function ajaxReferencia(retorno)
-{
-	i3GEO.janela.fechaAguarde("ajaxreferencia1");
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		eval(retorno.data);
-		if ($i("imagemReferencia"))
-		{
-			var m = new Image();
-			m.src = refimagem;
-			$i("imagemReferencia").src=m.src;
-			if ((objmapa.scale < 15000000) && (objmapa.scale > 10000000))
-			{
-				$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia.";
-				$i("refmensagem").style.fontSize="10px";
-			}
-			else
-			{
-				$i("refmensagem").innerHTML = "";
-				$i("refmensagem").style.fontSize="0px";
-			}
-		}
-		i3GEO.gadgets.quadros.grava("referencia",refimagem);
-		YAHOO.log("Concluída imagem de referência", "redesenho");
-	}
-	else
-	{YAHOO.log("Erro na imagem de referência", "redesenho");}
-}
-/*
 Function: ajaxLegendaHTML
 
 Substituí a legenda do mapa pela última gerada.
@@ -50348,18 +52044,12 @@ function ajaxIniciaParametros(retorno)
 	//
 	//limpa os objetos tips da tela
 	//
-	if(objmapa.objtips.length > 0)
-	{
+	if(objmapa.objtips.length > 0){
 		var ot = objmapa.objtips.length-1;
-		if (ot >= 0)
-		{
-			do
-			{
+		if (ot >= 0){
+			do{
 				if (objmapa.objtips[ot])
-				{	
-					objmapa.objtips[ot].innerHTML = "";
-					objmapa.objtips[ot].style.display="none";
-				}
+				{document.body.removeChild(objmapa.objtips[ot]);}
 			}
 			while(ot--)
 		}
@@ -50425,7 +52115,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza mapa de referencia
 		//
-		objmapa.atualizaReferencia(mapexten);
+		i3GEO.maparef.atualiza();
 		//
 		//atualliza os valores do objmapa
 		//
@@ -51051,6 +52741,18 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
+	/*
+	Gera o div para função de etiquetas para efeitos de compatibilidade
+	*/
+		if (!$i("tip")){
+			var novoel = document.createElement("div");
+			novoel.id = "tip";
+			novoel.style.position="absolute";
+			novoel.style.zIndex=5000;
+			if (navm)
+			{novoel.style.filter = "alpha(opacity=90)";}
+			document.body.appendChild(novoel);
+		}
 		YAHOO.log("Inicializando o i3geo", "i3geo");
 		//
 		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
@@ -51135,7 +52837,7 @@ function Mapa(e,m)
 				//
 				//gera o mapa de referencia e outros elementos do mapa
 				//
-				objmapa.atualizaReferencia(mapexten);
+				i3GEO.maparef.atualiza();
 				objmapa.scale = parseInt(mapscale);
 				objmapa.cellsize = g_celula;
 				objmapa.extent = mapexten;
@@ -51270,12 +52972,11 @@ function Mapa(e,m)
 				i3GEO.configura.iniciaJanelaMensagens = false;
 			}
 			if(i3GEO.configura.iniciaJanelaMensagens == true)
-			{i3GEO.ajuda.abreJanela();}
-			
-			if (g_mapaRefDisplay != "none")
+			{i3GEO.ajuda.abreJanela();}		
+			if (i3GEO.configura.mapaRefDisplay != "none")
 			{
-				if (i3GEO.util.pegaCookie("g_mapaRefDisplay")){g_mapaRefDisplay = i3GEO.util.pegaCookie("g_mapaRefDisplay");}
-				if (g_mapaRefDisplay == "block"){initJanelaRef();}
+				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
+				if (i3GEO.configura.mapaRefDisplay == "block"){i3GEO.maparef.inicia();}
 			}
 			i3GEO.janela.fechaAguarde("montaMapa");
 			if (g_docaguias == "sim"){docaguias();}
@@ -51329,59 +53030,6 @@ function Mapa(e,m)
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+i3GEO.configura.sid;
 			cpObj.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
 		}
-	};
-	/*
-	Function: atualizaReferencia
-	
-	Atualiza o mapa de referência.
-	
-	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
-	
-	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
-	
-	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
-	
-	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
-
-	Parameters:
-	
-	mapexten - extensão geográfica do retângulo que será desenhado no mapa de referência. 
-	Esse valor é utilizado apenas para comparar a extensão geográfica do mapa atual com a extensão geográfica do mapa seguinte.
-	*/
-	this.atualizaReferencia = function(mapexten)
-	{
-		if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
-		var dinamico = false;
-		if ($i("refDinamico"))
-		{var dinamico = $i("refDinamico").checked;}
-		if ($i("mapaReferencia") && objmapa.extent != mapexten)
-		{
-			YAHOO.log("Atualizando o mapa de referência", "i3geo");
-			if(dinamico)
-			{
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+g_zoomRefDinamico;
-				cpObj.call(p,"retornaReferenciaDinamica",ajaxReferencia);
-			}
-			else
-			{
-				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim"))
-				{
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
-					cpObj.call(p,"retornaReferencia",ajaxReferencia);
-				}
-				else
-				{
-					var re = new RegExp("&mode=map", "g");
-					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
-					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-				}
-			}
-		}
-		else
-		{
-			if($i("imagemReferencia"))
-			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-		}		
 	};
 	/*
 	Function: atualizaLegendaHTML
@@ -51963,7 +53611,7 @@ function convddtela(vx,vy,docmapa)
 Function: convdmsf (depreciado)
 */
 function convdmsf(x,y)
-{return(i3GEO.util.dd2dms(x,y));}
+{return(i3GEO.calculo.dd2dms(x,y));}
 /*
 Function: calcddf (depreciado)
 */
@@ -52221,6 +53869,140 @@ function filmeanimarodaf(janima)
 Function: pegaimagens (depreciado)
 */
 function pegaimagens()
-{}
+{}
+/*
+Function calculaArea (depreciado)
+*/
+function calculaArea(pontos,pixel)
+{return (i3GEO.calculo.area(pontos,pixel));}
+/*
+Function: calculadistancia (depreciado)
+*/
+function calculadistancia(lga,lta,lgb,ltb) //0ms
+{return (i3GEO.calculo.distancia(lga,lta,lgb,ltb));}
+/*
+Function: initJanelaRef (depreciado)
+*/
+function initJanelaRef()
+{i3GEO.maparef.inicia();}
+/*
+Variable: g_mapaRefDisplay (depreciado)
+*/
+/*
+Function: atualizaReferencia (depreciado)
+*/
+/*
+Function: ajaxReferencia (depreciado)
+*/
+function ajaxReferencia(retorno)
+{i3GEO.maparef.processaImagem(retorno)}
+/*
+Function: clicouRef (depreciado)
+
+Altera a abrangência do mapa quando o mapa de referência é clicado
+*/
+function clicouRef()
+{}
+/*
+Function: movimentoRef (depreciado)
+
+Pega a coordenada do cursor sobre o mapa de referência
+*/
+function movimentoRef(obj)
+{}
+/*
+Function: mostraTip (depreciado)
+
+Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
+
+Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
+
+Parameters:
+
+retorno - retorno da função ajax com os dados para montar a etiqueta.
+*/
+function mostraTip(retorno)
+{
+	//insere div para tips
+	if (!$i("tip")){
+		var novoel = document.createElement("div");
+		novoel.id = "tip";
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		document.body.appendChild(novoel);
+	}
+	var i = $i("i3geo_rosa");
+	if(i)
+	i.style.display="none";
+	var mostra = false;
+	var retorno = retorno.data;
+	if ((retorno != "erro") && (retorno != undefined))
+	{
+		if ($i("img"))
+		{$i("img").title = "";}
+		if (retorno != "")
+		{
+			var res = "<div id='cabecatip' style='text-align:left;background-color:rgb(240,240,240)'><span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.parado=\"cancela\"'>parar&nbsp;&nbsp;</span>";
+			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
+			var temas = retorno.split("!");
+			var tema = temas.length-1;
+			if(tema >= 0)
+			{
+				do
+				{
+					var titulo = temas[tema].split("@");
+					if (g_tipotip == "completo")
+					{
+						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
+					}
+					var ocorrencias = titulo[1].split("*");
+					var ocorrencia = ocorrencias.length-1;
+					if(ocorrencia >= 0)
+					{
+						do
+						{
+							if (ocorrencias[ocorrencia] != "")
+							{
+								var pares = ocorrencias[ocorrencia].split("##");
+								var paresi = pares.length;
+								for (var par=0;par<paresi; par++)
+								{
+									var valores = pares[par].split("#");
+									if (g_tipotip == "completo")
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+										var mostra = true;
+									}
+									else
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+										var mostra = true;
+									}
+								}
+							}
+						}
+						while(ocorrencia--)
+					}
+				}
+				while(tema--)
+			}
+			if(!mostra){$i("tip").style.display="none";return;}
+			if ($i("janelaMen"))
+			{$i("janelaMenTexto").innerHTML = res;}
+			else
+			{
+				var i = $i("tip");
+				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
+				ist = i.style;
+				ist.top = objposicaocursor.telay - 10;
+				ist.left = objposicaocursor.telax - 20;
+				ist.display="block";
+			}
+		}
+	}
+}
+
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

@@ -56,6 +56,12 @@ if(typeof(i3GEO) == 'undefined'){
 }
 i3GEO.idioma = {
 	/*
+	Variable: DICIONARIO
+	
+	Define o objeto com o dicionário utilizado
+	*/
+	DICIONARIO: g_traducao,
+	/*
 	Function: define
 	Define qual o idioma em uso. O default é "pt". 
    
@@ -205,25 +211,23 @@ Returns:
 {String} Texto traduzido.
 */
 var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
+
 //
-//para efeitos de compatibilidade define as variaveis g_traducao e g_linguagem
-//define pt como default
-//
-try {
-	var c = i3GEO.util.pegaCookie("i3geolingua");
-	if(c) {
-		i3GEO.idioma.define(c);
-		g_linguagem = c;
-	}
-	else {
-		if(typeof(g_linguagem) != "undefined")
-		{i3GEO.idioma.define(g_linguagem);}
-		else {
-			g_linguagem = "pt";
-			i3GEO.idioma.define("pt");
+	try {
+		var c = i3GEO.util.pegaCookie("i3geolingua");
+		if(c) {
+			i3GEO.idioma.define(c);
+			g_linguagem = c;
 		}
+		else {
+			if(typeof(g_linguagem) != "undefined")
+			{i3GEO.idioma.define(g_linguagem);}
+			else {
+				g_linguagem = "pt";
+				i3GEO.idioma.define("pt");
+			}
+		}
+		if(typeof('g_traducao') != "undefined")
+		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
-	if(typeof('g_traducao') != "undefined")
-	{i3GEO.idioma.defineDicionario(g_traducao);}
-}
-catch(e){alert("Problemas com idiomas "+e);};
+	catch(e){alert("Problemas com idiomas "+e);};

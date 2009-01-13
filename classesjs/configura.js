@@ -131,48 +131,6 @@ Veja:
 */
 g_3dmap = "";
 /*
-Variable: g_docaguias
-
-Variável que define se o mapa deve iniciar com as guias em janela ou não. As guias em janela causam o desenho de um mapa com tamanho extendido.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_docaguias = "nao";
-/*
-Variable: g_barraFerramentas1
-
-Define se a barra de ferramentas 1 será aberta ou não no mapa.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas1 = "sim";
-/*
-Variable: g_barraFerramentas2
-
-Define se a barra de ferramentas 2 será aberta ou não no mapa.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas2 = "sim";
-/*
 Variable: g_fatordezoom
 
 Variável interna para a barra de zoom.
@@ -223,21 +181,6 @@ Veja:
 <iniciamma.js>
 */
 g_diminuiyN = 103;
-/*
-Variable: g_mapaRefDisplay
-
-Indica a visibilidade do mapa de referência na inicialização
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-block|none
-
-*/
-g_mapaRefDisplay = "block";
 /*
 Variable: g_funcaoTip
 
@@ -310,66 +253,6 @@ Values:
 sim|nao
 */
 g_entorno = "nao";
-/*
-Variable: g_guiaativa
-
-Indica qual guia do mapa iniciará ativa.
-
-Veja:
-
-<funcoes.js>, iniciamma.js>
-*/
-g_guiaativa = "guia1";
-/*
-Section: Eventos
-*/
-/*
-Variable: g_funcoesClickMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário clicar no mapa.
-
-As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções, além das padrão, utilizando-se o objeto objmapa.funcoesClickMapa
-
-Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesClickMapaDefault = new Array(
-	"cliqueSelecaoPoli()",
-	"cliqueCapturaPt()"
-);
-/*
-Variable: g_funcoesMousemoveMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário mover o mouse sobre o mapa.
-
-As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções
-
-Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesMousemoveMapaDefault = new Array(
-	"movePan()",
-	"moveLonglat()",
-	"moveSelecaoPoli()"
-);
-/*
-Variable: g_funcoesNavegaMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário navegar pelo mapa.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesNavegaMapaDefault = new Array(
-	"atualizaEscalaNumerica()"
-);
 /*
 Variable: g_listaPropriedades (depreciado)
 */
@@ -509,6 +392,61 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan","img",i3GEO.configura.locaplic);
 			}
 			marcadorZoom = "";
+			panMapaInicia = function(){
+				if ($i("img") && (g_tipoacao == "pan")){
+					g_panM = "sim";
+					if($i("corpoMapa")){
+						leftinicial = parseInt($i("corpoMapa").style.left);
+						topinicial = parseInt($i("corpoMapa").style.top);
+					}
+					clicinicialx = objposicaocursor.imgx;
+					clicinicialy = objposicaocursor.imgy;
+					ddinicialx = objposicaocursor.ddx;
+					ddinicialy = objposicaocursor.ddy;
+				}
+			};
+			panMapaDesloca = function(){
+				if ($i("img") && (g_panM == "sim")){
+					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
+					var ny = objposicaocursor.telay - topinicial - clicinicialy;
+					if (g_entorno == "nao"){
+						var l = 0;
+						if (parseInt($i("i3geo").style.left))
+						{var l = parseInt($i("i3geo").style.left);}
+						$i("img").style.left = nx - l;
+						var t = 0;
+						if (parseInt($i("i3geo").style.top))
+						{var t = parseInt($i("i3geo").style.top);}
+						$i("img").style.top = ny - t;
+					}
+					else{
+						$left("img",objmapa.w*-1 + nx);
+						$left("imgS",objmapa.w*-1 + nx);
+						$left("imgL",objmapa.w + nx);
+						$left("imgO",objmapa.w*-3 + nx);
+						$left("imgN",objmapa.w*-1 + nx);
+						$top("img",objmapa.h*-1 + ny);
+						$top("imgS",objmapa.h*-1 + ny);
+						$top("imgL",objmapa.h*-1 + ny);
+						$top("imgN",objmapa.h*-1 + ny);
+						$top("imgO",objmapa.h*-1 + ny);
+					}
+				}
+			};
+			panMapaTermina = function(){
+				if ($i("img") && (g_tipoacao == "pan")){
+					marcadorZoom = "";
+					g_panM = "nao";
+					var res = i3GEO.navega.xy2xy(i3GEO.configura.locaplic,i3GEO.configura.sid,ddinicialx,ddinicialy,objposicaocursor.ddx,objposicaocursor.ddy,objmapa.extent,g_tipoimagem);
+					if(res == false){i3GEO.navega.zoompontoIMG(i3GEO.configura.locaplic,i3GEO.configura.sid,objposicaocursor.imgx,objposicaocursor.imgy)}
+				}
+			};
+			if(i3GEO.eventos.MOUSEDOWN.toString().search("panMapaInicia()") < 0)
+			{i3GEO.eventos.MOUSEDOWN.push("panMapaInicia()");}
+			if(i3GEO.eventos.MOUSEMOVE.toString().search("panMapaDesloca()") < 0)
+			{i3GEO.eventos.MOUSEMOVE.push("panMapaDesloca()");}
+			if(i3GEO.eventos.MOUSEUP.toString().search("panMapaTermina()") < 0)
+			{i3GEO.eventos.MOUSEUP.push("panMapaTermina()");}
 		}
 	},
 	{
@@ -544,12 +482,80 @@ g_listaFuncoesBotoes = {
 			}
 			i3GEO.barraDeBotoes.ativaIcone("identifica");
 			g_tipoacao='identifica';
+			g_operacao='identifica';
 			cliqueIdentifica = function(){
 				if (g_tipoacao == "identifica")
 				{wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");}
 			};
-			if(g_funcoesClickMapaDefault.toString().search("cliqueIdentifica()") < 0)
-			{g_funcoesClickMapaDefault.push("cliqueIdentifica()");}
+			verificaTip = function(){
+				if (g_operacao != "identifica"){return;}
+				//funcao default para pegar os dados
+				verificaTipDefault = function(){
+					var retorna = function(retorno){
+						var i = $i("i3geo_rosa");
+						if(i){i.style.display="none";}			
+						var mostra = false;
+						try{
+							var retorno = retorno.data;
+							if ($i("img"))
+							{$i("img").title = "";}
+							if (retorno != ""){
+								var res = "";
+								var temas = retorno.split("!");
+								var tema = temas.length-1;
+								if(tema >= 0){
+									do{
+										var titulo = temas[tema].split("@");
+										if (g_tipotip == "completo")
+										{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
+										var ocorrencias = titulo[1].split("*");
+										var ocorrencia = ocorrencias.length-1;
+										if(ocorrencia >= 0){
+											do{
+												if (ocorrencias[ocorrencia] != ""){
+													var pares = ocorrencias[ocorrencia].split("##");
+													var paresi = pares.length;
+													for (var par=0;par<paresi; par++){
+														var valores = pares[par].split("#");
+														if (g_tipotip == "completo"){
+															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+															var mostra = true;
+														}
+														else{
+															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+															var mostra = true;
+														}
+													}
+												}
+											}
+											while(ocorrencia--)
+										}
+									}
+									while(tema--)
+								}
+								if(!mostra){$i("tip").style.display="none";return;}
+								else{		
+									var n = i3GEO.janela.tip();
+									$i(n).innerHTML += res;
+								}
+							}
+						}
+						catch(e){}
+					};
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+					var cp = new cpaint();
+					cp.set_persistent_connection(true);
+					cp.set_response_type("JSON");
+					cp.call(p,"identifica",retorna);
+				};				
+				if (g_operacao == "identifica"){
+					eval(g_funcaoTip);
+				}
+			};
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
+			if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
+			{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
 		}
 	},
 	{
@@ -566,7 +572,7 @@ g_listaFuncoesBotoes = {
 		tipo:"",
 		dica:$trad("d9"),
 		funcaoonclick:function()
-		{initJanelaRef();}
+		{i3GEO.maparef.inicia();}
 	},
 	{
 		//botão de busca na wikipedia
@@ -576,8 +582,15 @@ g_listaFuncoesBotoes = {
 		funcaoonclick:function(){
 			g_operacao = "navega";
 			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizawiki()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizawiki()");}		
+			atualizawiki = function(){
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadowiki"))
+				{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";}
+				else
+				{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizawiki()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizawiki()");}		
 		}
 	},
 	{
@@ -626,8 +639,25 @@ g_listaFuncoesBotoes = {
 			if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 			else
 			{wdocaf("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizagoogle()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizagoogle()");}		
+			atualizagoogle = function(){
+				try{
+					if (navn){
+						if ($i("wdocai"))
+						{var doc = $i("wdocai").contentDocument;}
+					}
+					else{
+						if(document.frames("wdocai"))
+						{var doc = document.frames("wdocai").document;}
+					}
+					if(window.parent.frames["wdocai"].panTogoogle)
+					{window.parent.frames["wdocai"].panTogoogle();}
+					else{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
+					
+				}
+				catch(e){}
+			};		
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}		
 		}
 	},
 	{
@@ -638,8 +668,18 @@ g_listaFuncoesBotoes = {
 		funcaoonclick:function(){
 			g_operacao = "navega";
 			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizascielo()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizascielo()");}
+			atualizascielo = function(){
+				try{
+					var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+					if (docel.getElementById("resultadoscielo"))
+					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";}
+					else
+					{i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
+				}
+				catch(e){}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizascielo()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizascielo()");}
 		}
 	},
 	{
@@ -651,8 +691,15 @@ g_listaFuncoesBotoes = {
 			g_operacao = "navega";
 			wdocaf("250px","190px",i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm","","","confluence");
 			i3GEO.util.criaBox();
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizaconfluence()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizaconfluence()");}		
+			atualizaconfluence = function(){
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadoconfluence"))
+				{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";}
+				else
+				{i3GEO.eventos.NAVEGAMAPA.remove("atualizaconfluence()")}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaconfluence()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaconfluence()");}		
 		}
 	},
 	{
@@ -696,6 +743,7 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
 			}
 			mede();
+			g_tipoacao = "mede";
 		}
 	},
 	{

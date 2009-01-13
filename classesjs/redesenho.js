@@ -220,43 +220,6 @@ function ajaxEscalaGrafica(retorno)
 	}
 }
 /*
-Function: ajaxReferencia
-
-Substituí a imagem do mapa de referência pela última gerada.
-
-Parameters:
-
-retorno - string no formato "var refimagem='nome da imagem'".
-*/
-function ajaxReferencia(retorno)
-{
-	i3GEO.janela.fechaAguarde("ajaxreferencia1");
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		eval(retorno.data);
-		if ($i("imagemReferencia"))
-		{
-			var m = new Image();
-			m.src = refimagem;
-			$i("imagemReferencia").src=m.src;
-			if ((objmapa.scale < 15000000) && (objmapa.scale > 10000000))
-			{
-				$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia.";
-				$i("refmensagem").style.fontSize="10px";
-			}
-			else
-			{
-				$i("refmensagem").innerHTML = "";
-				$i("refmensagem").style.fontSize="0px";
-			}
-		}
-		i3GEO.gadgets.quadros.grava("referencia",refimagem);
-		YAHOO.log("Concluída imagem de referência", "redesenho");
-	}
-	else
-	{YAHOO.log("Erro na imagem de referência", "redesenho");}
-}
-/*
 Function: ajaxLegendaHTML
 
 Substituí a legenda do mapa pela última gerada.
@@ -383,7 +346,7 @@ function ajaxCorpoMapa(retorno)
 		else
 		{
 			calcposf();
-			trataErro();
+			i3GEO.janelas.fechaAguarde();
 			alert("Erro no mapa");
 		}
 		g_recupera = 0;
@@ -392,7 +355,7 @@ function ajaxCorpoMapa(retorno)
 	{
 		alert("Erro na funcao ajaxCorpoMapa: "+e);
 		calcposf();
-		trataErro();
+		i3GEO.janelas.fechaAguarde();
 		if(g_recupera == 0)
 		{
 			alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
@@ -518,26 +481,6 @@ function ajaxIniciaParametros(retorno)
 	if($i("flamingo"))
 	{atualizaFL();}
 	//
-	//limpa os objetos tips da tela
-	//
-	if(objmapa.objtips.length > 0)
-	{
-		var ot = objmapa.objtips.length-1;
-		if (ot >= 0)
-		{
-			do
-			{
-				if (objmapa.objtips[ot])
-				{	
-					objmapa.objtips[ot].innerHTML = "";
-					objmapa.objtips[ot].style.display="none";
-				}
-			}
-			while(ot--)
-		}
-	}
-	objmapa.objtips = new Array();
-	//
 	//limpa os pontos digitados no calculo de distancia
 	//
 	limpacontainerf();
@@ -597,7 +540,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza mapa de referencia
 		//
-		objmapa.atualizaReferencia(mapexten);
+		i3GEO.maparef.atualiza();
 		//
 		//atualliza os valores do objmapa
 		//
@@ -638,7 +581,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza as ferramentas de consulta que dependem da extensão geográfica
 		//
-		objmapa.verificaNavegaMapa();
+		i3GEO.eventos.navegaMapa();
 		//
 		//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
 		//
@@ -691,7 +634,7 @@ function ajaxabrelente(retorno)
 		i3GEO.janela.fechaAguarde("ajaxabrelente");
 		YAHOO.log("Fim ajaxabrelente", "redesenho");
 	}
-	catch(e){trataErro();}
+	catch(e){i3GEO.janelas.fechaAguarde();}
 }
 /*
 Function: ajaxdestaca

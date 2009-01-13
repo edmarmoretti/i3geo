@@ -781,8 +781,3 @@ i3GEO.arvoreDeCamadas = {
 //
 //para efeitos de compatibilidade
 i3GEO.arvoreDeCamadas.IDHTML = "listaTemas";
-try {
-	if (g_opcoesTemas == "nao")
-	{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
-}
-catch(e){};
