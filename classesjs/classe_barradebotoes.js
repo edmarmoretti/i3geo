@@ -110,8 +110,8 @@ i3GEO.barraDeBotoes = {
 					if(l[b].conteudo)
 					{eval('$i(l[b].iddiv).innerHTML = "'+l[b].conteudo+'"');}
 					if(l[b].dica){
-						eval('$i("'+l[b].iddiv+'").onmouseover = function(){mostradicasf(this,"'+l[b].dica+'","");}');
-						eval('$i("'+l[b].iddiv+'").onmouseout = function(){mostradicasf(this,"");};');
+						eval('$i("'+l[b].iddiv+'").onmouseover = function(){i3GEO.ajuda.mostraJanela("'+l[b].dica+'","");}');
+						eval('$i("'+l[b].iddiv+'").onmouseout = function(){i3GEO.ajuda.mostraJanela("");};');
 					}
 					if(l[b].funcaoonclick){
 						$i(l[b].iddiv).onclick = l[b].funcaoonclick;
@@ -152,7 +152,7 @@ i3GEO.barraDeBotoes = {
 		novoel.innerHTML = temp;
 		//necessároi para impedir o desenho da rosa dos ventos
 		novoel.onmouseover = function(){
-			objposicaocursor.imgx = 0;
+			//objposicaocursor.imgx = 0;
 			if($i("i3geo_rosa"))
 			{$i("i3geo_rosa").style.display="none";}
 		};

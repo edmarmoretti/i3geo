@@ -66,9 +66,7 @@ i3GEO.eventos = {
 	{Array}
 	*/
 	MOUSEMOVE: new Array(
-		"movePan()",
-		"moveLonglat()",
-		"moveSelecaoPoli()"
+		"moveLonglat()"
 	),
 	/*
 	Variable: MOUSEDOWN
@@ -97,7 +95,6 @@ i3GEO.eventos = {
 	{Array}
 	*/
 	MOUSECLIQUE: new Array(
-		"cliqueSelecaoPoli()",
 		"cliqueCapturaPt()"	
 	),
 	/*
@@ -129,7 +126,7 @@ i3GEO.eventos = {
 				do
 				{
 					if(objposicaocursor.imgx > 0)
-					{eval(i3GEO.eventos.MOUSEPARADO[f]);}
+					{YAHOO.log("mouseParado", "i3geo");eval(i3GEO.eventos.MOUSEPARADO[f]);}
 				}
 				while(f--)
 			}
@@ -146,8 +143,10 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					var temp = i3GEO.eventos.NAVEGAMAPA[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(i3GEO.eventos.NAVEGAMAPA[f]);
+					if(eval('typeof ' + temp) == 'function'){
+						eval(i3GEO.eventos.NAVEGAMAPA[f]);
+						YAHOO.log("navegaMapa", "i3geo");
+					}
 				}
 				while(f--)
 			}
@@ -164,8 +163,10 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					var temp = i3GEO.eventos.MOUSEMOVE[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(i3GEO.eventos.MOUSEMOVE[f]);
+					if(eval('typeof ' + temp) == 'function'){
+						eval(i3GEO.eventos.MOUSEMOVE[f]);
+						//YAHOO.log("mousemoveMapa", "i3geo");
+					}
 				}
 				while(f--)
 			}
@@ -182,8 +183,10 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					var temp = i3GEO.eventos.MOUSEDOWN[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(i3GEO.eventos.MOUSEDOWN[f]);
+					if(eval('typeof ' + temp) == 'function'){
+						eval(i3GEO.eventos.MOUSEDOWN[f]);
+						YAHOO.log("mousedownMapa", "i3geo");
+					}
 				}
 				while(f--)
 			}
@@ -200,8 +203,10 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					var temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(i3GEO.eventos.MOUSEUP[f]);
+					if(eval('typeof ' + temp) == 'function'){
+						eval(i3GEO.eventos.MOUSEUP[f]);
+						YAHOO.log("mouseupMapa", "i3geo");
+					}
 				}
 				while(f--)
 			}
@@ -218,16 +223,177 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					eval(i3GEO.eventos.MOUSECLIQUE[f]);
+					YAHOO.log("mousecliqueMapa", "i3geo");
 				}
 				while(f--)
 			}
 		}
-		if (i3GEO.eventos.MOUSECLIQUE.length > 0){
-			var lle = i3GEO.eventos.MOUSECLIQUE.length;
-			for (var f=0;f<lle; f++){
-				eval(i3GEO.eventos.MOUSECLIQUE[f]);
+	},
+	/*
+	Function posicaoMouseMapa
+	
+	Captura a posição do mouse sobre um mapa. O cálculo pode ser feito sobre o corpo do mapa principal ou sob o corpo do mapa de referência
+	
+	O resultado dos cálculos são armazenados no objeto objposicaocursor
+	esse objeto terá as seguintes propriedades:
+	
+			propriedades.ddx valor de x em décimos de grau
+			
+			propriedades.ddy valor de y em décimos de grau
+			
+			propriedades.dmsx valor de x em dms
+			
+			propriedades.dmsy valor de y em dms
+			
+			propriedades.telax posicao x na tela em pixels
+			
+			propriedades.telay posicao y na tela em pixels
+			
+			propriedades.imgx posicao x no mapa em pixels
+			
+			propriedades.imgy: posicao y no mapa em pixels
+			
+			propriedades.refx: posicao x no mapa de referência em pixels
+			
+			propriedades.refy: posicao x no mapa de referência em pixels
+	
+	Parameters:
+	
+	e {Event object} - objeto do tipo evento disparado sobre o objeto em foco
+	*/
+	posicaoMouseMapa: function(e){
+		if (!e) var e = window.event;
+		//
+		//verifica sob qual objeto o mouse está se movendo
+		//
+		if (e.target)
+		{var targ = e.target;}
+		else if (e.srcElement) var targ = e.srcElement;
+		if(targ.id == "" && $i("img"))
+		{var targ = $i("img");}
+		//
+		//se estiver no modo pan, o movimento deve ser obtido do elemento
+		//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
+		//se não for feito assim, o deslocamento do mapa não é capturado
+		//
+		try{
+			if (g_panM == "sim")
+			{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
+			else
+			{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+			if((i3GEO.configura.entorno == "sim") && (g_panM == "sim")){
+				pos[0] = pos[0] - objmapa.w;
+				pos[1] = pos[1] - objmapa.h;
 			}
 		}
-	
-	}
-}
+		catch(m){var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+		//
+		//pega a posicao correta do mouse
+		//
+		var mousex = 0;
+		var mousey = 0;
+		if (e.pageX || e.pageY){
+			var mousex = e.pageX;
+			var mousey = e.pageY;
+		}
+		else if (e.clientX || e.clientY){
+			mousex = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+			mousey = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
+		}
+		//
+		//faz os cálculos de posicionamento
+		//fig e reffig são a mesma coisa por enquanto
+		//
+		var xfig = mousex - pos[0];
+		var yfig = mousey - pos[1];
+		var xreffig = xfig;
+		var yreffig = yfig;
+		var xtela = mousex;
+		var ytela = mousey;
+		//
+		//celula e extent são necessários para se fazer a
+		//conversão de coordenadas de tela para coordenadas geográficas
+		//esses valores são obtidos das funções ajax que redesenham ou inicializam o mapa
+		// 
+		var c = g_celula;
+		var ex = objmapa.extent;
+		try{
+			if(targ.id == "imagemReferencia"){
+				var c = g_celularef;
+				var ex = objmapa.extentref;
+				var r = $i("i3geo_rosa");
+				if(r)
+				r.style.display = "none"
+			}
+		}
+		catch(e){g_celularef = 0;}
+		var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+		var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
+		objposicaocursor = {
+			ddx: teladd[0],
+			ddy: teladd[1],
+			dmsx: teladms[0],
+			dmsy: teladms[1],
+			telax: xtela,
+			telay: ytela,
+			imgx: xfig,
+			imgy: yfig,
+			refx: xreffig,
+			refy: yreffig
+		};
+	},
+	/*
+	Function: ativa
+
+	Ativa as operações de clique sobre o mapa
+
+	Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
+
+	Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja configura.js)
+
+	Parameters:
+
+	docMapa {DOM node} - objeto que será alvo da ativação dos cliques
+	*/
+	ativa: function(docMapa){
+		docMapa.onmouseover = function(){
+			this.onmousemove=function(exy){
+				i3GEO.eventos.posicaoMouseMapa(exy);
+				try{
+					try
+					{clearTimeout(i3GEO.eventos.TIMERPARADO);}
+					catch(e){var a = e;}
+					i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
+				}
+				catch(e){var e = "";}
+				try
+				{i3GEO.eventos.mousemoveMapa();}
+				catch(e){var e = "";}
+			};
+		};
+		docMapa.onmouseout = function(){
+			try
+			{objmapa.parado="parar";}
+			catch(e){var e = "";}
+		};
+		docMapa.onmousedown = function(exy){
+			try{
+				i3GEO.eventos.posicaoMouseMapa(exy);
+				i3GEO.eventos.mousedownMapa();
+			}
+			catch(e){var e = "";}
+		};
+		docMapa.onclick = function(){
+			try
+			{i3GEO.eventos.mousecliqueMapa();}
+			catch(e){var e = "";}
+		};
+		docMapa.onmouseup = function(){
+			try
+			{i3GEO.eventos.mouseupMapa();}
+			catch(e){var e = "";}
+		};
+	}	
+};

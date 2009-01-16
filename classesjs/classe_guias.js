@@ -53,7 +53,12 @@ i3GEO.guias = {
 			click: function(){
 				i3GEO.guias.mostra("adiciona");
 				if(!$i("arvoreAdicionaTema"))
-				{var ondeArvore = objmapa.guiaMenu+"obj";}
+				{
+					if (objmapa.guiaMenu != undefined)
+					var ondeArvore = objmapa.guiaMenu+"obj";
+					else
+					var ondeArvore = "guia2obj";
+				}
 				else
 				{var ondeArvore = "arvoreAdicionaTema";}
 				//para efeitos de compatibilidade
@@ -223,6 +228,7 @@ i3GEO.guias = {
 			}
 		}
 		i3GEO.guias.mostra(i3GEO.guias.ATUAL);
+		i3GEO.guias.ativa(i3GEO.guias.ATUAL);
 	},
 	/*
 	Mostra no mapa uma determinada guia
@@ -240,11 +246,27 @@ i3GEO.guias = {
 			if($i(i3GEO.guias.CONFIGURA[guias[g]].id))
 			$i(i3GEO.guias.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";
 		}
+		//
+		//verifica se o nome da guia passado como parametro está correto ou é o id da guia
+		//
+		if(i3GEO.guias.CONFIGURA.toString().search(guia) < 0){
+			for(g=0;g<nguias;g++){
+				if(i3GEO.guias.CONFIGURA[guias[g]].id == guia)
+				{var guia = guias[g];}
+			}
+		}
 		if($i(i3GEO.guias.CONFIGURA[guia].idconteudo)){
 			$i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display="block";
 			$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
 			i3GEO.guias.ATUAL = guia;
 		}
+	},
+	ativa: function(guia){
+		try{
+			if(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click != "")
+			{i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click.call();}
+		}
+		catch(e){};
 	},
 	/*
 	Function: libera
@@ -285,7 +307,7 @@ i3GEO.guias = {
 				i.style.height= a+pos;
 				i.style.width= l+pos;
 			}
-			if (g_entorno == "sim"){
+			if (i3GEO.configura.entorno == "sim"){
 				var letras=["L","O"];
 				for (var l=0;l<2; l++){
 					if ($i("img"+letras[l])){
@@ -307,7 +329,7 @@ i3GEO.guias = {
 					}
 				}
 			}
-			calcposf();
+			i3GEO.mapa.ajustaPosicao();
 			var temp = function(retorno){
 				//carrega janela
 				var novoel = document.createElement("div");

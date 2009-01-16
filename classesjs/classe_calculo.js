@@ -51,7 +51,7 @@ i3GEO.calculo = {
 	dms2dd: function(cd,cm,cs){
 		try
 		{
-			YAHOO.log("dms2dd", "i3geo");
+			//YAHOO.log("dms2dd", "i3geo");
 			//converte dms em dd
 			var sinal = 'positivo';
 			if (cd < 0)
@@ -64,7 +64,7 @@ i3GEO.calculo = {
 			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
 			if (sinal == 'negativo')
 			{dd = dd * -1;}
-			YAHOO.log("Fim dms2dd", "i3geo");
+			//YAHOO.log("Fim dms2dd", "i3geo");
 			return (dd);
 		}
 		catch(e){return (0);}
@@ -312,5 +312,43 @@ i3GEO.calculo = {
 			return theta*er;
 		}
 		catch(e){return (0);}
+	},
+	/*
+	Function: rect2ext
+	
+	Calcula a extensão geográfica de um retângulo desenhado sobre o mapa.
+	*/
+	rect2ext: function(idrect,mapext,pixel){
+		eval ('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ")");
+		eval ('piy = parseInt(document.getElementById("'+idrect+'").style.' + g_tipotop + ")");
+		if($i(idrect)){
+			var bx = $i(idrect);
+			var bxs = bx.style;
+		}
+		else
+		{alert("Box nao encontrado");return;}
+		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+		var xfig0 = parseInt(bxs.width) - pos[0];
+		var yfig0 = parseInt(bxs.height) - pos[1];
+		var xfig = pix + (parseInt(bxs.width)) - pos[0];
+		var yfig = piy + (parseInt(bxs.height)) - pos[1];
+		var amext = mapext.split(" ");
+		var dx = ((amext[0] * -1) - (amext[2] * -1)) / -1;
+		var dy = ((amext[1] * 1) - (amext[3] * 1)) / -1;
+		if (dy < 0) dy=dy * -1;
+		var nx = pixel * xfig;
+		var ny = pixel * yfig;
+		var x1 = (amext[0] * 1) + nx;
+		var y1 = (amext[3] * 1) - ny;
+		var xfig = pix - pos[0];
+		var yfig = piy - pos[1];
+		if (dy < 0) dy=dy * -1;
+		var nx = g_celula * xfig;
+		var ny = g_celula * yfig;
+		var x2 = (amext[0] * 1) + nx;
+		var y2 = (amext[3] * 1) - ny;
+		var v = x2+" "+y2+" "+x1+" "+y1;
+		var res = new Array(v,x1,y1,x2,y2);
+		return (res);
 	}
 };

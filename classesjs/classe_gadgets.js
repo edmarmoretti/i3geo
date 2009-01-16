@@ -147,14 +147,17 @@ i3GEO.gadgets = {
 					$i3geo_temp_ym = $i("ym");
 					$i3geo_temp_ys = $i("ys");
 					atualizaLocalizarxy = function(){
-						var x = objposicaocursor.dmsx.split(" ");
-						var y = objposicaocursor.dmsy.split(" ");
-						$i3geo_temp_xg.value = x[0];
-						$i3geo_temp_xm.value = x[1];
-						$i3geo_temp_xs.value = x[2];
-						$i3geo_temp_yg.value = y[0];
-						$i3geo_temp_ym.value = y[1];
-						$i3geo_temp_ys.value = y[2];
+						try{
+							var x = objposicaocursor.dmsx.split(" ");
+							var y = objposicaocursor.dmsy.split(" ");
+							$i3geo_temp_xg.value = x[0];
+							$i3geo_temp_xm.value = x[1];
+							$i3geo_temp_xs.value = x[2];
+							$i3geo_temp_yg.value = y[0];
+							$i3geo_temp_ym.value = y[1];
+							$i3geo_temp_ys.value = y[2];
+						}
+						catch(m){};
 					};
 					if($i("img"))
 					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}

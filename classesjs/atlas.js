@@ -108,7 +108,7 @@ function iniciaAtlas()
 		{wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");}
 		if(retorno.data.pranchadefault != "")
 		{abrePrancha(retorno.data.pranchadefault)}
-		calcposf();
+		i3GEO.mapa.ajustaPosicao();
 	}
 	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);

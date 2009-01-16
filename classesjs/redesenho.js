@@ -272,7 +272,7 @@ function ajaxLegendaHTML(retorno)
 			YAHOO.moveLegi.xp.panel.render();
 			YAHOO.moveLegi.xp.panel.show();
 		};
-		YAHOO.log("Concluída legenda HTML", "redesenho");
+		//YAHOO.log("Concluída legenda HTML", "redesenho");
 	}
 	else
 	{YAHOO.log("Erro na legenda HTML", "redesenho");}
@@ -307,7 +307,7 @@ retorno - string no formato "var mapimagem='nome da imagem'".
 function ajaxCorpoMapa(retorno)
 {
 	i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
-	YAHOO.log("ajaxCorpoMapa", "redesenho");
+	//YAHOO.log("ajaxCorpoMapa", "redesenho");
 	if($i("mst"))
 	{$i("mst").style.display="block";}
 	if (!$i("img")){return;}
@@ -345,7 +345,7 @@ function ajaxCorpoMapa(retorno)
 		}
 		else
 		{
-			calcposf();
+			i3GEO.mapa.ajustaPosicao();
 			i3GEO.janelas.fechaAguarde();
 			alert("Erro no mapa");
 		}
@@ -354,7 +354,7 @@ function ajaxCorpoMapa(retorno)
 	catch(e)
 	{
 		alert("Erro na funcao ajaxCorpoMapa: "+e);
-		calcposf();
+		i3GEO.mapa.ajustaPosicao();
 		i3GEO.janelas.fechaAguarde();
 		if(g_recupera == 0)
 		{
@@ -375,7 +375,7 @@ function ajaxCorpoMapa(retorno)
 			}		
 		}
 	}
-	YAHOO.log("Fim ajaxCorpoMapa", "redesenho");
+	//YAHOO.log("Fim ajaxCorpoMapa", "redesenho");
 }
 /*
 Function: ajaxredesenha
@@ -393,7 +393,7 @@ function ajaxredesenha(retorno)
 	try
 	{
 		i3GEO.gadgets.quadros.avanca();
-		YAHOO.log("ajaxredesenha", "redesenho");
+		//YAHOO.log("ajaxredesenha", "redesenho");
 		if(retorno && retorno.data.temas)
 		{i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));ajaxIniciaParametros(retorno);}
 		else
@@ -411,9 +411,6 @@ function ajaxredesenha(retorno)
 				cp.call(p,"redesenhaCorpo",ajaxIniciaParametros);
 			}
 			i3GEO.janela.fechaAguarde("ajaxredesenha");
-			if ($i("img_d"))
-			{$i("img_d").style.display = "none";}
-			g_destaca = "";
 			//
 			//utilizado na interface openlayers
 			//
@@ -450,7 +447,7 @@ function ajaxredesenha(retorno)
 				}
 			}			
 		}
-		YAHOO.log("Fim ajaxredesenha", "redesenho");
+		//YAHOO.log("Fim ajaxredesenha", "redesenho");
 	}
 	catch(e){alert("ajaxredesenha "+e);}
 }
@@ -465,7 +462,7 @@ retorno - objeto JSON.
 */
 function ajaxIniciaParametros(retorno)
 {
-	YAHOO.log("ajaxIniciaParametros", "redesenho");
+	//YAHOO.log("ajaxIniciaParametros", "redesenho");
 	i3GEO.ajuda.ativaLetreiro(i3GEO.configura.locaplic,i3GEO.configura.sid);
 	var tempo = "";
 	if ($i("openlayers"))
@@ -483,7 +480,11 @@ function ajaxIniciaParametros(retorno)
 	//
 	//limpa os pontos digitados no calculo de distancia
 	//
-	limpacontainerf();
+	i3GEO.util.insereMarca.limpa();
+	if ($i("mostradistancia"))
+	{$i("mostradistancia").style.display="none";}
+	try{richdraw.fecha();}
+	catch(e){};
 	//
 	//mostra a figura que segue o mouse
 	//
@@ -569,15 +570,6 @@ function ajaxIniciaParametros(retorno)
 		i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
 		i3GEO.janela.fechaAguarde("aguardedoc");
 		i3GEO.janela.fechaAguarde("ajaxredesenha");
-		if (g_lenteaberta == "sim")
-		{
-			i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o4"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			//cp.set_debug(2);
-			cp.set_response_type("JSON");
-			cp.call(p,"lente",ajaxabrelente);
-		}
 		//
 		//atualiza as ferramentas de consulta que dependem da extensão geográfica
 		//
@@ -585,104 +577,15 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
 		//
-		if (g_entorno == "sim")
+		if (i3GEO.configura.entorno == "sim")
 		{
-			geraURLentorno();
-			ajustaEntorno();
+			i3GEO.navega.entorno.geraURL();
+			i3GEO.navega.entorno.ajustaPosicao();
 		}
-		YAHOO.log("Fim ajaxIniciaParametros", "redesenho");
+		//YAHOO.log("Fim ajaxIniciaParametros", "redesenho");
 	}
 	catch(e){alert("ajaxIniciaParametros "+e);}
-	mostradicasf("","Tempo de redesenho em segundos: "+tempo,"");
-}
-/*
-Function: ajaxabrelente
-
-Substituí a imagem da lente de aumento e mostra no mapa.
-
-Parameters:
-
-retorno - string no formato "largura,altura,imagem".
-*/
-function ajaxabrelente(retorno)
-{
-	try
-	{
-		YAHOO.log("ajaxabrelente", "redesenho");
-		var retorno = retorno.data;
-		if (retorno == "erro"){alert("A lente nao pode ser criada");return;}
-		var volta = retorno.split(",");
-		var nimg = volta[2];
-		var olente = $i('lente');
-		var oboxlente = $i('boxlente');
-		var olenteimg = $i('lenteimg');
-		olenteimg.src = nimg;
-		olenteimg.style.width=volta[0] * 1.5;
-		olenteimg.style.height=volta[1] * 1.5;
-		olente.style.zIndex=1000;
-		olenteimg.style.zIndex=1000;
-		oboxlente.style.zIndex=1000;
-		var pos = i3GEO.util.pegaPosicaoObjeto($i("corpoMapa"));
-		eval ("olente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
-		eval ("olente.style." + g_tipotop + " = pos[1] + g_posicaoLenteY + g_postpx");
-		eval ("oboxlente.style." + g_tipoleft + " = pos[0] + g_posicaoLenteX + g_postpx");
-		eval ("oboxlente.style." + g_tipotop + " = pos[1] + g_posicaoLenteY + g_postpx");
-		oboxlente.style.display='block';
-		oboxlente.style.visibility='visible';
-		olente.style.display='block';
-		olente.style.visibility='visible';
-		i3GEO.janela.fechaAguarde("ajaxabrelente");
-		YAHOO.log("Fim ajaxabrelente", "redesenho");
-	}
-	catch(e){i3GEO.janelas.fechaAguarde();}
-}
-/*
-Function: ajaxdestaca
-
-Prepara a imagem utilizada na opção de abertura de um tema em uma janela.
-
-Parameters:
-
-retorno - nome da imagem.
-*/
-function ajaxdestaca(retorno)
-{
-	YAHOO.log("ajaxdestaca", "redesenho");
-	var retorno = retorno.data;
-	var m = new Image();
-	m.src = retorno;
-	if (!$i("img_d"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = "div_d";
-		document.body.appendChild(novoel);
-		$i("div_d").innerHTML = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d' />";
-		$i("div_d").style.left = parseInt($i("corpoMapa").style.left);
-		$i("div_d").style.top = parseInt($i("corpoMapa").style.top);
-		$i("img_d").style.left = 0;
-		$i("img_d").style.top = 0;
-		$i("img_d").style.width = objmapa.w;
-		$i("img_d").style.height = objmapa.h;
-		$i("div_d").style.clip = 'rect(0 75 75 0)';
-		$i("img_d").src=retorno;
-		var novoeli = document.createElement("div");
-		novoeli.id = "div_di";
-		novoel.appendChild(novoeli);
-		$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
-	}
-	$i("div_d").innerHTML = "";
-	$i("div_d").style.display="block";
-	var novoel = document.createElement("input");
-	novoel.id = "img_d";
-	novoel.style.position = "relative";
-	novoel.style.top = "0px";
-	novoel.style.left = "0px";
-	novoel.type = "image";
-	novoel.src = m.src;
-	novoel.style.display = "block";
-	$i("div_d").appendChild(novoel);
-	i3GEO.janela.fechaAguarde("ajaxdestaca");
-	YAHOO.log("Fim ajaxdestaca", "redesenho");
+	i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+tempo,"");
 }
 //testa se esse script foi carregado
 function testaajax()

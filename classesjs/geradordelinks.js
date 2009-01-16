@@ -269,7 +269,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/	
 	this.combosubgrupos = function(idGrupo)
 	{
-		i3geo_comboSubGruposMenu("$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"250","1")
+		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"250","1")
 	}
 	/*
 	Function: combotemas
@@ -286,7 +286,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.combotemas = function (idGrupo,idSubGrupo)
 	{
-		i3geo_comboTemasMenu("$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"250","10")
+		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"250","10")
 	}
 	/*
 	Function: preseltema
@@ -460,7 +460,7 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	if(document.getElementById($i3geo_gl.buscageo))
 	$i3geo_gl.buscageo_init()
 	$i3geo_gl.seltema($i3geo_gl.nomeseltema)
-	i3geo_comboGruposMenu("$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","250","1")
+	i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","250","1")
 	
 	$inputText("paiPontos","","pontos","","","")
 	$inputText("paiNometemapontos","","nometemapontos","","","")

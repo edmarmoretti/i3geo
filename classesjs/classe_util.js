@@ -204,7 +204,7 @@ i3GEO.util = {
 	
 	*/
 	arvore: function(titulo,onde,obj){
-		YAHOO.log("arvore", "i3geo");
+		//YAHOO.log("arvore", "i3geo");
 		var currentIconMode;
 		YAHOO.example.treeExample = new function(){
         	function buildTree(){
@@ -227,7 +227,7 @@ i3GEO.util = {
 		}
 		arvore.collapseAll();
    		arvore.draw();
-   		YAHOO.log("Fim arvore", "i3geo");
+   		//YAHOO.log("Fim arvore", "i3geo");
 	},
 	/*
 	Function: removeAcentos
@@ -538,6 +538,107 @@ i3GEO.util = {
 			else
 			{document.getElementById(id).style.left=valor+"px";}
 		}
+	},
+	/*
+	Function: insereMarca
+
+	Insere ou remove pontos no mapa.
+	*/
+	insereMarca:{
+		/*
+		Variable: CONTAINER
+		
+		Armazena o valor do ID do div criado para inserir pontos
+		
+		Type:
+		{Array}
+		*/
+		CONTAINER: new Array(),
+		/*
+		Function: cria
+		
+		Insere um ponto no mapa
+		
+		Os pontos são inseridos em um contaier de pontos e mostrados temporáriamente
+
+		Parameters:
+
+		xi {Numeric} - coordenada x.
+
+		yi {Numeric} - coordenada y.
+
+		funcaoOnclick {String} - funcao que sera executada quando a marca 
+		for clicada, se for "", o container será esvaziado ao ser clicado na marca
+	
+		container {String} - id do container que receberá os pontos
+		*/
+		cria:function(xi,yi,funcaoOnclick,container){
+			try{
+				i3GEO.util.insereMarca.CONTAINER.push(container);
+				//verifica se existe o container para os pontos
+				if (!$i(container)){
+					var novoel = document.createElement("div");
+					novoel.id = container;
+					var i = novoel.style;
+					i.position = "absolute";
+					i.top = parseInt($i("img").style.top);
+					i.left = parseInt($i("img").style.left);
+					document.body.appendChild(novoel);
+				}
+				var container = $i(container);
+				var novoel = document.createElement("div");
+				var i = novoel.style;
+				i.position = "absolute";
+				i.zIndex=2000;
+				i.top=(yi - 4)+"px";
+				i.left=(xi - 4)+"px";
+				i.width="4px";
+				i.height="4px";
+				var novoimg = document.createElement("img");
+				if (funcaoOnclick != "")
+				{novoimg.onclick = funcaoOnclick;}
+				else
+				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();}}
+				novoimg.src=i3GEO.configura.locaplic+"/imagens/dot1.gif";
+				with (novoimg.style){width="6px";height="6px";zIndex=2000;}
+				novoel.appendChild(novoimg);
+				container.appendChild(novoel);
+			}
+			catch(e){alert("Ocorreu um erro. inseremarca"+e);}
+		},
+		limpa: function(){
+			try{
+				var n = i3GEO.util.insereMarca.CONTAINER.length;
+				for(i=0;i<n;i++){
+					if($i(i3GEO.util.insereMarca.CONTAINER[i]))
+					$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";
+				}
+				i3GEO.util.insereMarca.CONTAINER = new Array();
+			}
+			catch(e){}
+		}
+	},
+	/*
+	Function: adicionaSHP
+
+	Inclui um arquivo shapefile no mapa atual como uma nova camada
+
+	Parameters:
+
+	path {String} - caminho completo do shapefile
+	*/	
+	adicionaSHP: function(path){
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var temp = path.split(".");
+		if ((temp[1] == "SHP") || (temp[1] == "shp"))
+		{var f = "adicionaTemaSHP";}
+		else
+		{var f = "adicionaTemaIMG";}
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao="+f+"&arq="+path;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,f,ajaxredesenha);
 	}
 };
 //

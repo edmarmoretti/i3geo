@@ -31,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 
 i3GEO.maparef = {
 	inicia: function(){
-		YAHOO.log("initJanelaRef", "i3geo");
+		//YAHOO.log("initJanelaRef", "i3geo");
 		if (!$i("i3geo_winRef")){
 			var novoel = document.createElement("div");
 			novoel.id = "i3geo_winRef";
@@ -43,7 +43,7 @@ i3GEO.maparef = {
 			var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
 			ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
-			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){capturaposicao(exy)}" onclick="javascript:i3GEO.maparef.click()">';
+			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
 			//ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
 			ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
@@ -70,7 +70,7 @@ i3GEO.maparef = {
 			if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml)
 			YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);
 		}
-		YAHOO.log("Fim initJanelaRef", "i3geo");
+		//YAHOO.log("Fim initJanelaRef", "i3geo");
 		this.atualiza();
 	},
 	/*
@@ -92,7 +92,7 @@ i3GEO.maparef = {
 		if ($i("refDinamico"))
 		{var dinamico = $i("refDinamico").checked;}
 		if ($i("mapaReferencia")){
-			YAHOO.log("Atualizando o mapa de referência", "i3geo");
+			//YAHOO.log("Atualizando o mapa de referência", "i3geo");
 			var cp = new cpaint();
 			cp.set_response_type("JSON");
 			if(dinamico){
@@ -145,7 +145,7 @@ i3GEO.maparef = {
 				}
 			}
 			i3GEO.gadgets.quadros.grava("referencia",refimagem);
-			YAHOO.log("Concluída imagem de referência", "redesenho");
+			//YAHOO.log("Concluída imagem de referência", "redesenho");
 		}
 		else
 		{YAHOO.log("Erro na imagem de referência", "redesenho");}

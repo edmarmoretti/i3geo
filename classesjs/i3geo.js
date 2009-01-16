@@ -60,7 +60,7 @@ var $trad = function(id)
 	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
 };
 //necessario para nao dar erro no refresh
-var mostradicasf = function(){};
+
 var scriptLocation = "";
 var scripts = document.getElementsByTagName('script');
 var i = 0;

@@ -110,7 +110,7 @@ i3GEO.configura = {
 		{ text: "p3", url: "javascript:opcoesLegenda()"},
 		{ text: "p4", url: "javascript:opcoesEscala()"},
 		{ text: "p5", url: "javascript:tamanho()"},
-		{ text: "p6", url: "javascript:ativaEntorno()"},
+		{ text: "p6", url: "javascript:i3GEO.navega.entorno.ativaDesativa()"},
 		{ text: "p7", url: "javascript:ativaLogo()"},
 		{ text: "p8", url: "javascript:queryMap()"},
 		{ text: "p9", url: "javascript:corFundo()"},
@@ -169,11 +169,16 @@ i3GEO.configura = {
 	Type:
 	{sim|nao}
 	*/
-	liberaGuias: "nao"
+	liberaGuias: "nao",
 	/*
-	Function: alteraVariavel
+	Variable: entorno
+	
+	Define se o entorno do mapa será desenhado também
+	
+	O desenho do entorno permite a navegação no mapa no estilo "tiles"
+	
+	Type:
+	{sim|nao}
 	*/
-	/*
-	Function: adicionaVariavel
-	*/
+	entorno: "nao"
 };

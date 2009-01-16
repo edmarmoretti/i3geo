@@ -232,6 +232,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	</div>
    <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
 </div>
+
 <!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*
@@ -251,7 +252,7 @@ http://<host>/i3geo/ms_criamapa.php
 	
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 */
-i3GEO.configura.locaplic = protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 /*
 	Variable: g_localimg
 	
@@ -287,11 +288,11 @@ i3geoLog.show();
 /*
 	Inicializa o mapa
 */
+//i3GEO.guias.ATUAL = "legenda"
 objmapa.inicializa();
 //esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
 if($i("escala") && objmapa.w < 500)
 {$i("escala").style.display="none";}
-
 </script>
 </body>
 </html>

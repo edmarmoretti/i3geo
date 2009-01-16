@@ -1,17 +1,9 @@
 /*
-Class: i3GEO.arvoreDeCamadas
+Class: i3GEO.arvoreDeCamadas.js
 
-Monta a árvore com os temas existentes no mapa atual.
+Monta a árvore com os temas existentes no mapa atual. A árvore contém as opções de ligar e desligar temas.
 
 Permite controlar quais as opções que serão mostradas na árvore.
-
-Dependências:
-
-pacotes/yui252/build/treeview/treeview-min.js
-
-pacotes/yui252/build/treeview/assets/skins/sam/treeview.css
-
-classesjs/i3geo_util.js
 
 File: i3geo/classesjs/classe_arvoredecamadas.js
 
@@ -40,11 +32,35 @@ if(typeof(i3GEO) == 'undefined'){
 }
 i3GEO.arvoreDeCamadas = {
 	/*
-	Variable: CAMADAS
+	Property: i3GEO.arvoreDeCamadas.OPCOESTEMAS
+	
+	Inclui ou não o nó com as opções de manipulação de cada tema.
+	
+	Default:
+	true
+	
+	Type:
+	{Boolean}
+	*/
+	OPCOESTEMAS: true,
+	/*
+	Property: i3GEO.arvoreDeCamadas.OPCOESLEGENDA
+	
+	Inclui ou não o nó para mostrar a legenda do tema.
+	
+	Default:
+	true
+	
+	Type:
+	{Boolean}
+	*/
+	OPCOESLEGENDA: true,
+	/*
+	Variable: i3GEO.arvoreDeCamadas.CAMADAS
 	
 	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
 	
-	Este objeto é construído nas operações em PHP de inicialização ou redesenhodo mapa.
+	Este objeto é construído nas operações em PHP de inicialização ou redesenho do mapa.
 	
 	Exemplo:
 	
@@ -84,7 +100,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	CAMADAS: "",
 	/*
-	Variable: ARVORE
+	Variable: i3GEO.arvoreDeCamadas.ARVORE
 	
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
@@ -93,7 +109,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ARVORE: null,
 	/*
-	Property: IDHTML
+	Variable: i3GEO.arvoreDeCamadas.IDHTML
 	
 	Armazena o ID do elemento DOM onde a árvore foi inserida.
 	
@@ -102,25 +118,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	IDHTML: null,
 	/*
-	Property: OPCOESTEMAS
-	
-	Inclui ou não o nó com as opções de manipulação de cada tema.
-	
-	Type:
-	{Boolean}
-	*/
-	OPCOESTEMAS: true,
-	/*
-	Property: OPCOESLEGENDA
-	
-	Inclui ou não o nó para mostrar a legenda do tema.
-	
-	Type:
-	{Boolean}
-	*/
-	OPCOESLEGENDA: true,
-	/*
-	Property: SID
+	Variable: i3GEO.arvoreDeCamadas.SID
 	
 	Código da seção aberta no servidor pelo i3Geo
 
@@ -129,7 +127,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	SID: null,
 	/*
-	Property: ATIVATEMA
+	Variable: i3GEO.arvoreDeCamadas.ATIVATEMA
 	
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
 	
@@ -138,7 +136,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ATIVATEMA: "",
 	/*
-	Property: LOCAPLIC
+	Variable: i3GEO.arvoreDeCamadas.LOCAPLIC
 	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 	
@@ -149,22 +147,22 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	LOCAPLIC: null,
 	/*
-	Function: cria
+	Function: i3GEO.arvoreDeCamadas.cria
 	
 	Cria a árvore com as opções de manipulação das camadas existentes no mapa
 	
 	Parameters:
 	
-	onde - {String} ID do elemento DOM onde a árvore será inserida. Se for definido como "" o id será buscado da variável IDHTML.
+	onde {String} - ID do elemento DOM onde a árvore será inserida. Se for definido como "" o id será buscado da variável IDHTML.
 	
-	temas - {JSON} Objeto JSON com as camadas e propriedades
+	temas {JSON} - Objeto JSON com as camadas e propriedades
 	
-	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
+	g_sid {String} -  Código da seção PHP criada ao abrir o i3Geo
 
-	funcaoTema - {String} (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
+	funcaoTema {String} - (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
 	*/
 	cria: function(onde,temas,g_sid,g_locaplic,funcaoTema){
-		YAHOO.log("Criando a árvore de camadas", "i3geo");
+		//YAHOO.log("Criando a árvore de camadas", "i3geo");
 		if(arguments.length == 5){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
 		}
@@ -175,8 +173,8 @@ i3GEO.arvoreDeCamadas = {
 		if(this.IDHTML == ""){return;}
 		this.atualiza(temas);
 	},
-	/**
-	Function: atualiza
+	/*
+	Function: i3GEO.arvoreDeCamadas.atualiza
 	
 	Atualiza a árvore de camadas.
 	
@@ -186,11 +184,11 @@ i3GEO.arvoreDeCamadas = {
 	
 	Parameters:
 	
-	temas - {JSON} Objeto com a lista de camadas e propriedades (veja CAMADAS)
+	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS)
 	*/
 	atualiza: function(temas){
 		if(this.comparaTemas(temas,this.CAMADAS)){return;}
-		YAHOO.log("Atualizando a árvore de camadas", "i3geo");
+		//YAHOO.log("Atualizando a árvore de camadas", "i3geo");
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 		this.CAMADAS = temas;
 		var currentIconMode;
@@ -225,7 +223,7 @@ i3GEO.arvoreDeCamadas = {
    		this.ativaDragDrop();
 	},
 	ativaDragDrop: function(){
-		YAHOO.log("Ativando drag-drop da árvore de camadas", "i3geo");
+		//YAHOO.log("Ativando drag-drop da árvore de camadas", "i3geo");
 		var Dom = YAHOO.util.Dom;
 		var Event = YAHOO.util.Event;
 		var DDM = YAHOO.util.DragDropMgr;
@@ -356,7 +354,7 @@ i3GEO.arvoreDeCamadas = {
 		Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);
 	},
 	/*
-	Function: montaOpcoes
+	Private: i3GEO.arvoreDeCamadas.montaOpcoes
 	
 	Abre o segundo nível da árvore de temas, mostrando as opções disponíveis para cada tema.
 	
@@ -364,10 +362,10 @@ i3GEO.arvoreDeCamadas = {
 	
 	Parameters:
 	
-	node - {YAHOO.widget.HTMLNode} Nó que foi clicado
+	node {YAHOO.widget.HTMLNode} - Nó que foi clicado
 	*/
 	montaOpcoes: function(node){
-		YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
+		//YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
 		var idtema = node.data.id;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		var farol = "maisamarelo.png";
@@ -384,12 +382,12 @@ i3GEO.arvoreDeCamadas = {
 			var mfarol = $trad("t11");
 		}
 		tnome = "&nbsp;<img id='farol"+ltema.name+"' src='"+i3GEO.util.$im(farol)+"' title='"+mfarol+"' \>";
-		tnome += "&nbsp;<img  id='idx"+ltema.name+"' class='x' src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-		tnome += "&nbsp;<img class='sobe' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
-		tnome += "&nbsp;<img class='desce' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t16")+"','desce')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";
+		tnome += "&nbsp;<img  id='idx"+ltema.name+"' class='x' src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='excluitemaf(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
+		tnome += "&nbsp;<img class='sobe' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='sobetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
+		tnome += "&nbsp;<img class='desce' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='descetemaf(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t16")+"','desce')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 		//a operação de zoom para o tema não funciona na interface flamingo
 		if( (ltema.zoomtema == "sim") && (!$i("flamingo")))
-		{tnome += "&nbsp;<img class='extent' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t18")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{tnome += "&nbsp;<img class='extent' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='zoomtemaf(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t18")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
 		var d = {html:tnome};
 		var iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 		iconesNode.isLeaf = true;
@@ -406,72 +404,72 @@ i3GEO.arvoreDeCamadas = {
 			opcoesNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);
 		}	
 		node.loadComplete();
-		YAHOO.log("Opções OK", "i3geo");	
+		//YAHOO.log("Opções OK", "i3geo");	
 	},
 	/*
-	Function: mostraOpcoes
+	Private: i3GEO.arvoreDeCamadas.mostraOpcoes
 	
 	Monta os nós filhos do nó "opções"
 	
 	Parameter:
 	
-	node - {YAHOO.widget.HTMLNode}
+	node {YAHOO.widget.HTMLNode}
 	*/
 	mostraOpcoes: function(node){
-		YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
+		//YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
 		var idtema = node.data.idopcoes;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
-		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t19")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" >"+$trad("t20")+"</span> "+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
+		var tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t19")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+$trad("t20")+"</span> "+$inputText("","","tr"+ltema.name,"","3",ltema.transparency)+"<img  class='tic' style='position:relative;top:3px;' onclick='mudatranspf(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
-		var tnome = "<span onmouseover=\"javascript:mostradicasf(this,'"+$trad("t21a")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"+$trad("t21")+" </span>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='mudanomef(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
+		var tnome = "<span onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t21a")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />"+$trad("t21")+" </span>"+$inputText("","","nn"+ltema.name,"","10","")+"<img  class='tic' style='position:relative;top:3px;' onclick='mudanomef(\""+ltema.name+"\")' src='"+i3GEO.util.$im("branco.gif")+"' />";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
 		if ((ltema.type < 3) && (ltema.connectiontype != 7)){
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t22")+"','');\" onclick='procuraratribf(\""+ltema.name+"\")'>"+$trad("t23")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t22")+"','');\" onclick='procuraratribf(\""+ltema.name+"\")'>"+$trad("t23")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t24")+"','');\" onclick='toponimiaf(\""+ltema.name+"\")'>"+$trad("t25")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t24")+"','');\" onclick='toponimiaf(\""+ltema.name+"\")'>"+$trad("t25")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t26")+"','');\" onclick='etiquetas(\""+ltema.name+"\")'>"+$trad("t27")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t26")+"','');\" onclick='etiquetas(\""+ltema.name+"\")'>"+$trad("t27")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t28")+"','');\" onclick='filtrof(\""+ltema.name+"\")'>"+$trad("t29")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t28")+"','');\" onclick='filtrof(\""+ltema.name+"\")'>"+$trad("t29")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t30")+"','');\" onclick='tabelaf(\""+ltema.name+"\")'>"+$trad("t31")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t30")+"','');\" onclick='tabelaf(\""+ltema.name+"\")'>"+$trad("t31")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
 			if(objmapa.versaoms > 4){
-				var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t37")+"','');\" onclick='graficotema(\""+ltema.name+"\")'>"+$trad("t37")+" </a>";
+				var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t37")+"','');\" onclick='graficotema(\""+ltema.name+"\")'>"+$trad("t37")+" </a>";
 				var d = {html:tnome};
 				var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 				n.isLeaf = true;
 			}
 		}
 		if (ltema.type < 4){
-			var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t32")+"','');\" onclick='editaLegenda(\""+ltema.name+"\")'>"+$trad("t33")+" </a>";
+			var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t32")+"','');\" onclick='editaLegenda(\""+ltema.name+"\")'>"+$trad("t33")+" </a>";
 			var d = {html:tnome};
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
 		}
-		var tnome = "<a href='#' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t34")+"','');\" onclick='destacaTema(\""+ltema.name+"\")'>"+$trad("t35")+" </a>";
+		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t34")+"','');\" onclick='i3GEO.navega.destacaTema.inicia(\""+ltema.name+"\")'>"+$trad("t35")+" </a>";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
 		node.loadComplete();
-		YAHOO.log("Opções OK", "i3geo");
+		//YAHOO.log("Opções OK", "i3geo");
 	},
 	/*
-	Function: mostraLegenda
+	Private: i3GEO.arvoreDeCamadas.mostraLegenda
 	
 	Monta os nós filhos do nó "legenda"
 	
@@ -480,7 +478,7 @@ i3GEO.arvoreDeCamadas = {
 	node - {YAHOO.widget.HTMLNode}
 	*/
 	mostraLegenda: function(node){
-		YAHOO.log("Mostrando a legenda da árvore de camadas", "i3geo");
+		//YAHOO.log("Mostrando a legenda da árvore de camadas", "i3geo");
 		var idtema = node.data.idlegenda;
 		var ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		var retorna = function(retorno){
@@ -558,7 +556,7 @@ i3GEO.arvoreDeCamadas = {
 		cp.call(p,"criaLegenda",retorna);
 	},
 	/*
-	Function: atualizaLegenda
+	Function: i3GEO.arvoreDeCamadas.atualizaLegenda
 	
 	Atualiza a legenda de um tema.
 	
@@ -566,10 +564,10 @@ i3GEO.arvoreDeCamadas = {
 	
 	Parameter:
 	
-	id - {String} ID (name) do tema
+	id {String} - ID (name) do tema
 	*/
 	atualizaLegenda: function(idtema){
-		YAHOO.log("Atualizando a legenda da árvore de camadas", "i3geo");
+		//YAHOO.log("Atualizando a legenda da árvore de camadas", "i3geo");
 		if(document.getElementById(idtema+"verdiv"))
 		{
 			var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idlegenda",idtema);
@@ -579,10 +577,10 @@ i3GEO.arvoreDeCamadas = {
 				this.mostraLegenda(node);
 			}
 		}
-		YAHOO.log("Legenda OK", "i3geo");
+		//YAHOO.log("Legenda OK", "i3geo");
 	},
 	/*
-	Function: inverteStatusClasse
+	Private: i3GEO.arvoreDeCamadas.inverteStatusClasse
 	
 	Liga ou desliga uma classe da legenda.
 	
@@ -594,14 +592,14 @@ i3GEO.arvoreDeCamadas = {
 	
 	*/
 	inverteStatusClasse: function (leg){
-		YAHOO.log("Invertendo o status da árvore de camadas", "i3geo");
+		//YAHOO.log("Invertendo o status da árvore de camadas", "i3geo");
 		var temp = function()
 		{ajaxredesenha("");};
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=inverteStatusClasse&g_sid="+i3GEO.arvoreDeCamadas.SID+"&tema="+leg.name+"&classe="+leg.value;
 		cpObj.call(p,"inverteStatusClasse",temp);
 	},	
 	/*
-	Function: montaTextoTema
+	Private: i3GEO.arvoreDeCamadas.montaTextoTema
 	
 	Monta o texto com o título do tema. Esse texto é o que será mostrado nos nós principais da árvore e
 	contém o checkbox para ligar e desligar o tema.
@@ -618,7 +616,7 @@ i3GEO.arvoreDeCamadas = {
 		var ck = "";
 		if(tema.status == 2){var ck = ' CHECKED ';}
 		var html = "";
-		html += "<p id='arrastar_"+tema.name+"' style='text-align:left;font-size:11px;' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+		html += "<p id='arrastar_"+tema.name+"' style='text-align:left;font-size:11px;' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA != "")
 		html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";
@@ -626,17 +624,17 @@ i3GEO.arvoreDeCamadas = {
 		html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";
 		html += " />";
 		if (tema.contextoescala == "sim")
-		{html += "&nbsp;<img src="+i3GEO.util.$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t36")+"','')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}				
+		{html += "&nbsp;<img src="+i3GEO.util.$im("contextoescala.png")+" title='"+$trad("t36")+"' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t36")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}				
 		if (tema.sel == "sim") //o tema tem selecao
-		{html += "&nbsp;<img src="+i3GEO.util.$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{html += "&nbsp;<img src="+i3GEO.util.$im("estasel.png")+" title='"+$trad("t4")+"' onclick='limpaseltemaf(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
 		if ((tema.download == "sim") || (tema.download == "SIM"))
-		{html += "&nbsp;<img src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:mostradicasf(this,'"+$trad("t7")+"','download')\" onmouseout=\"javascript:mostradicasf(this,'')\" \>";}
+		{html += "&nbsp;<img src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='download(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
 		html += "&nbsp;<span style='cursor:move'>"+tema.tema+"</span>";
 		html += "</p>";
 		return(html);
 	},
 	/*
-	Function: atualizaFarol
+	Function: i3GEO.arvoreDeCamadas.atualizaFarol
 	
 	Atualiza o farol de cada tema.
 	
@@ -644,11 +642,11 @@ i3GEO.arvoreDeCamadas = {
 	
 	Parameters:
 	
-	mapscale - escala de comparação com a escala de cada tema
+	mapscale {Numeric} - escala de comparação com a escala de cada tema
 	*/
 	atualizaFarol: function(mapscale)
 	{
-		YAHOO.log("Atualizando o farol da árvore de camadas", "i3geo");
+		//YAHOO.log("Atualizando o farol da árvore de camadas", "i3geo");
 		var farol = "maisamarelo.png";
 		var l = i3GEO.arvoreDeCamadas.CAMADAS.length-1;
 		if (l >= 0){
@@ -667,16 +665,15 @@ i3GEO.arvoreDeCamadas = {
 			}
 			while(l--)
 		}
-		YAHOO.log("Farol OK", "i3geo");
+		//YAHOO.log("Farol OK", "i3geo");
 	},
 	/*
-	Function: aplicaTemas
+	Function: i3GEO.arvoreDeCamadas.aplicaTemas
 	
 	Refaz o mapa ligando e desligando os temas conforme consta na árvore de camadas
-	
 	*/
 	aplicaTemas: function(){
-		YAHOO.log("Mudando status ligado/desligado de um tema", "i3geo");
+		//YAHOO.log("Mudando status ligado/desligado de um tema", "i3geo");
 		var t = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 		//
 		//zera o contador de tempo
@@ -695,7 +692,7 @@ i3GEO.arvoreDeCamadas = {
 		cp.call(p,"ligaDesligaTemas",temp);
 	},
 	/*
-	Method: listaLigadosDesligados
+	Function: i3GEO.arvoreDeCamadas.listaLigadosDesligados
 	
 	Lista os temas que estão ligados e os que estão desligados.
 	
@@ -731,17 +728,16 @@ i3GEO.arvoreDeCamadas = {
 		var lista = new Array(ligados,desligados,todos);
 		return (lista);
 	},
-	
 	/*
-	Function: comparaTemas
+	Function: i3GEO.arvoreDeCamadas.comparaTemas
 	
 	Compara se dois objetos com as camadas são iguais
 	
 	Parameters:
 	
-	novo - {JSON} objeto novo
+	novo {JSON} - objeto novo
 	
-	atual - {JSON} objeto atual
+	atual {JSON} - objeto atual
 	
 	Return:
 	
@@ -758,7 +754,7 @@ i3GEO.arvoreDeCamadas = {
 		return(true);
 	},
 	/*
-	Function: pegaTema
+	Function: i3GEO.arvoreDeCamadas.pegaTema
 	
 	Procura um tema no objeto CAMADAS.
 	

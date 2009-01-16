@@ -74,6 +74,8 @@ packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
 packer("classe_eventos.js","compactados/classe_eventos_compacto.js","Normal");
 packer("classe_barradebotoes.js","compactados/classe_barradebotoes_compacto.js","Normal");
 packer("classe_guias.js","compactados/classe_guias_compacto.js","Normal");
+packer("classe_selecao.js","compactados/classe_selecao_compacto.js","Normal");
+packer("classe_mapa.js","compactados/classe_mapa_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -98,28 +100,32 @@ $jsfiles = array(
 //"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
 //"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"funcoes.js",
+"../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
+"../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 "classe_configura.js",
-"dicionario.js",
+"depreciados.js",
 "classe_util.js",
 "classe_calculo.js",
+"classe_mapa.js",
 "classe_maparef.js",
+"dicionario.js",
 "classe_idioma.js",
 "classe_ajuda.js",
 "classe_janela.js",
-"classe_eventos.js",
 "classe_guias.js",
 "classe_arvoredecamadas.js",
+"classe_navega.js",
+"classe_selecao.js",
+"classe_eventos.js",
+"funcoes.js",
 "classe_arvoredetemas.js",
-"classe_gadgets.js",
 "configura.js",
 "classe_barradebotoes.js",
-"classe_navega.js",
 "ferramentas.js",
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
-"depreciados.js"
+"classe_gadgets.js"
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";

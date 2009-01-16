@@ -68,16 +68,6 @@ function moveMede()
 	}
 }
 /*
-Function movePan
-
-Desloca cursor de zoom por box
-*/
-function movePan()
-{
-	if (((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox")) && ($i("box1").style.visibility == "visible"))
-	{zoomboxf("desloca");}
-}
-/*
 Function moveLonglat
 
 Mostra os valores da coordenada do mouse em latitude e longitude como uma única string.
@@ -89,37 +79,7 @@ function moveLonglat()
 	if ($i("longlat"))
 	{$i("longlat").innerHTML = objposicaocursor.dmsx + "   " +  objposicaocursor.dmsy;}
 }
-/*
-Function moveSelecaoPoli
 
-Mostra na tela o polígono desenhado na opção de seleção por polígono.
-
-Os pontos são obtidos dos objetos pontosdistobj e objposicaocursor
-*/
-function moveSelecaoPoli()
-{
-	if (g_tipoacao == "selecaopoli")
-	{
-		var n = pontosdistobj.xpt.length;
-		if (n > 0)
-		{
-			var d = i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-			if (objmapa.scale > 500000)
-			{var d = parseInt(d);}
-			else
-			{
-				d= d + "";
-				d = d.split(".");
-				var decimal = d[1].substr(0,3);
-				d = d[0]+"."+decimal;
-				d = d * 1;
-			}
-			var da = d + pontosdistobj.dist[n-1];
-			if(navn){desenhoRichdraw("resizePoligono",pontosdistobj.linhastemp,0);}
-			desenhoRichdraw("resizePoligono",pontosdistobj.linhas[n-1],n);
-		}
-	}
-}
 /*
 Function moveArea
 
@@ -371,36 +331,6 @@ function cliqueInseretoponimo()
 	}
 }
 /*
-Function: cliqueSelecao
-
-Seleciona um elemento de um tema do mapa através do clique no mapa.
-
-Os pontos são obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-*/
-function cliqueSelecao()
-{
-	if (g_tipoacao == "selecao")
-	{
-		var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-		var tipo = "adiciona";
-		//pega o tipo de operacao da janela de selecao
-		if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
-		if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-		var tolerancia = doc.getElementById("toleranciapt").value;
-		//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-		if ((tipo != "limpa") && (tipo != "inverte"))
-		{
-			var retorna = function(retorno)
-			{
-				ajaxredesenha(retorno);
-			};
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"selecaoPT",retorna);
-		}
-	}
-}
-/*
 Function: cliqueMede
 
 Executa as operações de medição de distâncias.
@@ -441,114 +371,12 @@ function cliqueMede()
 		var temp = function()
 		{
 			richdraw.fecha();
+			i3GEO.util.insereMarca.limpa();
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
 			if($i("pan"))
 			$i("pan").onclick.call();
 		};
-		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
-	}
-}
-/*
-Function: cliqueSelecaoPoli
-
-Executa as operações de seleção por polígono quando o mouse é movido sobre o mapa e a opção de cálculo estiver ativa
-*/
-function cliqueSelecaoPoli()
-{
-	if (g_tipoacao == "selecaopoli")
-	{
-		var n = pontosdistobj.xpt.length;
-		pontosdistobj.xpt[n] = objposicaocursor.ddx;
-		pontosdistobj.ypt[n] = objposicaocursor.ddy;
-		pontosdistobj.xtela[n] = objposicaocursor.telax;
-		pontosdistobj.ytela[n] = objposicaocursor.telay;
-		pontosdistobj.ximg[n] = objposicaocursor.imgx;
-		pontosdistobj.yimg[n] = objposicaocursor.imgy;
-		pontosdistobj.dist[n] = 0;
-		//inclui a linha para ligar com o ponto inicial
-		if (n == 0)
-		{
-			try
-			{
-				if (navn)
-				{
-					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
-				}
-				else
-				{
-					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	
-				}				
-			}
-			catch(e){window.status="";}
-		}
-		try
-		{
-			if (navn)
-			{
-				pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);
-			}
-			else
-			{
-				pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
-			}				
-		}
-		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
-		if (n > 0)
-		{
-			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-			//verifica se deve terminar
-			if (d < 3)
-			{
-				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				var pontos = pontosdistobj;
-				richdraw.fecha();
-				var n = pontos.xpt.length;
-				objmapa.temaAtivo = doc.getElementById("comboTemas").value;
-				if (n > 2)
-				{
-					var xs = pontos.xpt.toString(",");
-					var ys = pontos.ypt.toString(",");
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
-					var retorna = function()
-					{
-						i3GEO.janela.fechaAguarde("ajaxredesenha",$trad("o1"));
-						remapaf();
-					};
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var cp = new cpaint();
-					//cp.set_debug(2)
-					cp.set_transfer_mode('POST');
-					cp.set_response_type("JSON");
-					cp.call(p,"selecaoPoli",retorna,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
-				}
-				else
-				{alert("Sao necessarios pelo menos tres pontos");}
-			}
-		}
-		var temp = function()
-		{
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var pontos = pontosdistobj;
-			richdraw.fecha();
-			var n = pontos.xpt.length;
-			objmapa.temaAtivo = doc.getElementById("comboTemas").value;
-			var xs = pontos.xpt.toString(",");
-			var ys = pontos.ypt.toString(",");
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
-			var retorna = function()
-			{
-				i3GEO.janela.fechaAguarde("ajaxredesenha",$trad("o1"));
-				remapaf();
-			};
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_transfer_mode('POST');
-			cp.set_response_type("JSON");
-			cp.call(p,"selecaoPoli",retorna,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
-		};
-		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
+		i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,temp,"pontosins");
 	}
 }
 /*
@@ -604,7 +432,7 @@ function cliqueArea()
 			if (d < 3)
 			{
 				richdraw.fecha();
-				limpacontainerf();
+				i3GEO.util.insereMarca.limpa();
 				if($i("pan"))
 				$i("pan").onclick.call();
 			}
@@ -612,11 +440,11 @@ function cliqueArea()
 		var temp = function()
 		{
 			richdraw.fecha();
-			limpacontainerf();
+			i3GEO.util.insereMarca.limpa();
 			if($i("pan"))
 			$i("pan").onclick.call();
 		};
-		inseremarcaf(objposicaocursor.telax,objposicaocursor.telay,temp);
+		i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,temp,"pontosArea");
 	}
 }
 /*
@@ -707,41 +535,6 @@ function corFundo()
 /*
 Section: propriedades de um tema
 */
-/*
-Function: destacaTema
-
-Cria imagem de destaque
-
-Parameters:
-
-tema - id ue identifica o tema no map file.
-*/
-function destacaTema(tema)
-{
-	var verifica = $i("div_d");
-	if(verifica && verifica.style.display == "block")
-	{document.body.removeChild(verifica);g_destaca = "";return;}
-	if ($i("img_d"))
-	{$i("img_d").src = "";}
-	if ($i(objmapa.guiaTemas+"obj"))
-	{
-		var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");
-		var i = iguias.length-1;
-		if(i >= 0)
-		{
-			do
-			{
-				if ((iguias[i].type == "checkbox") && (iguias[i].value == tema) && (iguias[i].checked == true))
-				{alert("Desligue o tema antes de destacar");return;}
-			}
-			while(i--)
-		}
-	}
-	i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
-	g_destaca = tema;
-	var p =i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"geraDestaque",ajaxdestaca);
-}
 /*
 Function: excluitemaf
 
@@ -915,29 +708,6 @@ function filtrof(idtema)
 Section: análise geográfica
 */
 /*
-Function selecao
-
-Abre a janela com as opções de seleção de elementos no mapa
-*/
-function selecao()
-{
-	if (g_tipoacao != "selecao")
-	{
-		g_tipoacao = "selecao";
-		mudaiconf("selecao");
-		pontosdistobj = new pontosdist();
-		objmapa.temaAtivo = "";
-		criaContainerRichdraw();
-		richdraw.lineColor = "red";
-		richdraw.lineWidth = "2px";	
-		wdocaf("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueSelecao()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("cliqueSelecao()");}
-	}
-	else
-	{mudaiconf("pan");}
-}
-/*
 Function: pontosdistri
 
 Abre a janela para executar análises de distribuição de pontos
@@ -1009,8 +779,8 @@ Abre a janela com o sistema de análise de geometrias
 function analisaGeometrias()
 {
 	g_tipoacao = "selecao";
-	mudaiconf("selecao");
-	pontosdistobj = new pontosdist();
+	//i3GEO.barraDeBotoes.ativaIcone("selecao");
+	//pontosdistobj = new pontosdist();
 	objmapa.temaAtivo = "";
 	wdocaf("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
 }
@@ -1061,9 +831,8 @@ function area()
 			else
 			{
 				alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
-				mudaiconf("area");
+				i3GEO.barraDeBotoes.ativaIcone("area");
 				g_tipoacao = "area";
-				pontosdistobj = new pontosdist();
 				criaContainerRichdraw();
 				richdraw.lineColor = "green";
 				richdraw.lineWidth = "2px";
@@ -1075,7 +844,7 @@ function area()
 	}
 	else
 	{
-		mudaiconf("pan");
+		//i3GEO.barraDeBotoes.ativaIcone("pan");
 		richdraw.fecha();
 	}
 }
@@ -1123,24 +892,24 @@ function mede()
 		var escondeWdocamede = function()
 		{
 			richdraw.fecha();
+			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", escondeWdocamede);
-		mudaiconf("mede");
-		pontosdistobj = new pontosdist();
 		$i("mostradistancia").style.display="block";
 		//
 		//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
 		//
 		criaContainerRichdraw();
 		richdraw.lineColor = "black";
-		richdraw.lineWidth = "1px";	
+		richdraw.lineWidth = "1px";
+		g_tipoacao = "mede";
 	}
 	else
 	{
-		mudaiconf("pan");
 		richdraw.fecha();
 		if($i("mostradistancia")){$i("mostradistancia").style.display="none";}
+		if($i("pontosins")){$i("pontosins").style.display="none";}
 	}
 }
 /*
@@ -1160,14 +929,14 @@ function inserexy()
 		var temp = Math.random() + "a";
 		temp = temp.split(".");
 		g_nomepin = "pin"+temp[1];
-		mudaiconf("inserexy");
-		pontosdistobj = new pontosdist();
+		i3GEO.barraDeBotoes.ativaIcone("inserexy");
+		//pontosdistobj = new pontosdist();
 		wdocaf("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInserexy()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInserexy()");}
 	}
-	else
-	{mudaiconf("pan");}
+	//else
+	//{i3GEO.barraDeBotoes.ativaIcone("pan");}
 }
 /*
 Function: inseregrafico
@@ -1186,13 +955,13 @@ function inseregrafico()
 		var temp = Math.random() + "gr";
 		temp = temp.split(".");
 		g_nomepin = "pin"+temp[1];
-		mudaiconf("inseregrafico");
+		i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
 		wdocaf("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inseregrafico/index.htm',"","","Insere");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInseregrafico()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInseregrafico()");}
 	}
-	else
-	{mudaiconf("pan");}
+	//else
+	//{i3GEO.barraDeBotoes.ativaIcone("pan");}
 }
 /*
 Section: grades
@@ -1421,49 +1190,6 @@ function ativaHistoricoZoom(iddiv)
 	}
 }
 /*
-Function: lenteDeAumento
-
-Cria a lente de aumento.
-
-A lente de aumento permite visualizar a mesma imagem do mapa de forma ampliada, porém, em uma janela menor. A imagem é mostrada conforme a posição do mouse sobre o corpo do mapa.
-*/
-function lenteDeAumento()
-{
-	//insere lente de aumento
-	if (!$i("lente"))
-	{
-		var novoel = document.createElement("div");
-		novoel.id = 'lente';
-		novoel.style.clip='rect(0px,0px,0px,0px)';
-		var novoimg = document.createElement("img");
-		novoimg.src="";
-		novoimg.id='lenteimg';
-		novoel.appendChild(novoimg);
-		document.body.appendChild(novoel);
-		var novoel = document.createElement("div");
-		novoel.id = 'boxlente';
-		document.body.appendChild(novoel);
-		if(i3GEO.eventos.MOUSEMOVE.toString().search("movelentef()") < 0)
-		{i3GEO.eventos.MOUSEMOVE.push("movelentef()");}		
-
-	}
-	with($i('boxlente').style){borderWidth='1' + g_postpx;borderColor="red";}
-	if (g_lenteaberta == "sim")
-	{
-		$i("lente").style.display = "none";
-		$i("boxlente").style.display = "none";
-		$i('boxlente').style.borderWidth = 0;
-		g_lenteaberta = "nao";
-	}
-	else
-	{
-		g_lenteaberta = "sim";
-		i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+i3GEO.configura.sid;
-		cpObj.call(p,"lente",ajaxabrelente);
-	}
-}
-/*
 Section: outros
 */
 /*
@@ -1503,7 +1229,7 @@ Function: opcoesEscala
 Abre a janela para definição das opções da barra de escala.
 */
 function opcoesEscala()
-{wdocaf("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm",objposicaomouse.x - 75,objposicaomouse.y - 260,"Escala");}
+{wdocaf("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm","center","center","Escala");}
 /*
 Function: textofid
 
@@ -1521,15 +1247,15 @@ function textofid()
 		var temp = Math.random() + "b";
 		temp = temp.split(".");
 		g_nomepin = "pin"+temp[1];
-		mudaiconf("textofid");
-		pontosdistobj = new pontosdist();
+		i3GEO.barraDeBotoes.ativaIcone("textofid");
+		//pontosdistobj = new pontosdist();
 		g_tipoacao = "textofid";
 		wdocaf("360px","250px",i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInseretoponimo()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInseretoponimo()");}
 	}
-	else
-	{mudaiconf("pan");}
+	//else
+	//{i3GEO.barraDeBotoes.ativaIcone("pan");}
 }
 //testa se esse script foi carregado
 function testaferramentas()

@@ -111,11 +111,15 @@ function mudaicone()
 	$i("selecaoext").style.border = "1px solid gray"
 	$i("selecaobox").style.border = "1px solid gray"
 	$i("selecaopoli").style.border = "1px solid gray"
+	if(window.parent.richdraw)
+	window.parent.richdraw.fecha()
+	window.parent.$i("img").style.cursor="pointer";
 }
 //botoes de tipo
 function tiposel(obj)
 {
 	window.parent.objmapa.temaAtivo = $i("comboTemas").value;
+	window.parent.i3GEO.eventos.MOUSEDOWN.remove("i3GEO.selecao.box.inicia()")
 	$i("parapoli").style.display = "none";
 	var fim = function()
 	{aguarde("none");window.parent.ajaxredesenha("");}
@@ -135,26 +139,26 @@ function tiposel(obj)
 	{
 		mudaicone()
 		obj.style.border = "1px solid white"
-		window.parent.g_tipoacao = "selecaobox";	
+		window.parent.g_tipoacao = "selecaobox";
+		window.parent.i3GEO.selecao.box.criaBox();
+		if(window.parent.i3GEO.eventos.MOUSEDOWN.toString().search("i3GEO.selecao.box.inicia()") < 0)
+		{window.parent.i3GEO.eventos.MOUSEDOWN.push("i3GEO.selecao.box.inicia()");}
+		
 	}
 	if (obj.id == "selecaopt")
 	{
 		mudaicone()
 		obj.style.border = "1px solid white"
-		window.parent.g_tipoacao = "selecao";	
+		window.parent.g_tipoacao = "selecao";
+		if(window.parent.i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
+		{window.parent.i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}	
 	}
 	if (obj.id == "selecaopoli")
 	{
-		window.parent.richdraw.fecha()
-		window.parent.limpacontainerf()
 		mudaicone()
 		obj.style.border = "1px solid white"
 		window.parent.g_tipoacao = "selecaopoli";
-		alert("Clique no mapa para desenhar o polígono. Clique duas vezes para parar.")
-		//$i("parapoli").style.display = "block";
-		window.parent.criaContainerRichdraw();
-		window.parent.richdraw.lineColor = "red";
-		window.parent.richdraw.lineWidth = "2px";
+		window.parent.i3GEO.selecao.poligono.inicia()
 	}
 }
 

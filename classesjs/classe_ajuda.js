@@ -33,23 +33,11 @@ if(typeof(i3GEO) == 'undefined'){
 }
 i3GEO.ajuda = {
 	/*
-	Property: MENSAGEMPADRAO
-	
-	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
-	mensagem definida para o elemento sobre o qual o mouse estaciona.
-	
-	Default ""
-	
-	Type:
-	{String}
-	*/
-	MENSAGEMPADRAO: "",
-	/*
 	Property: ATIVAJANELA
 	
 	Define se a janela de mensagens pode ou não ser aberta.
 	
-	Default true
+	Default: true
 	
 	Type:
 	{Boolean}
@@ -62,7 +50,8 @@ i3GEO.ajuda = {
 	
 	Se esse DIV for encontrado no mapa, os textos serão mostrados em seu interior.
 	
-	Default "i3geo_ajuda"
+	Default:
+	"i3geo_ajuda"
 	
 	Type:
 	{String}
@@ -75,47 +64,33 @@ i3GEO.ajuda = {
 	
 	Esse tipo de mensagem é obtida do METADATA "MENSAGEM" que pode ser incluído em um layer.
 	
-	Default "bannerMensagem"
+	Default:
+	"bannerMensagem"
 	
 	Type:
 	{String}
 	*/
 	DIVLETREIRO: "i3geo_letreiro",
-	
-		
-	mostraTip: function(){
-	},
 	/*
-	Function: mostraJanela
+	Property: MENSAGEMPADRAO
 	
-	Mostra um texto dentro da janela de mensagens padrão.
+	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
+	mensagem definida para o elemento sobre o qual o mouse estaciona.
 	
-	Parameters:
+	Default:
+	""
 	
-	texto {String} - texto a ser mostrado
+	Type:
+	{String}
 	*/
-	mostraJanela: function(texto){
-		YAHOO.log("mostraJanela", "i3geo");
-		if ($i(i3GEO.ajuda.DIVAJUDA)){
-			if (texto == ""){$i(i3GEO.ajuda.DIVAJUDA).innerHTML="-";}
-			else
-			{$i(i3GEO.ajuda.DIVAJUDA).innerHTML= texto;}
-		}
-		else{
-			if ($i("janelaMenTexto"))
-			{$i("janelaMenTexto").innerHTML= texto;}
-		}
-		YAHOO.log("Fim mostraJanela", "i3geo");
-	},
+	MENSAGEMPADRAO: "",	
 	/*
-	Function: abreJanela
+	Function: i3GEO.ajuda.abreJanela
 	
 	Abre a janela flutuante para mostrar as mensagens de ajuda.
-	
 	*/
 	abreJanela: function(){
 		try	{
-			YAHOO.log("abreJanela", "i3geo");
 			if(i3GEO.ajuda.ATIVAJANELA == false){return;}
 			if (!$i("janelaMenTexto")){
 				var nx = "";
@@ -131,23 +106,11 @@ i3GEO.ajuda = {
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
 			}
-			YAHOO.log("Fim abreJanela", "i3geo");
 		}
 		catch(e){}
 	},
 	/*
-	Function: fechaJanela
-	
-	Fecha a janela de ajuda.
-	*/
-	fechaJanela: function(){
-		YAHOO.log("fechaJanela", "i3geo");
-		i3GEO.ajuda.desativaCookie();
-		document.body.removeChild($i("i3geo_janelaMensagens_c"));
-		YAHOO.log("Fiim fechaJanela", "i3geo");
-	},
-	/*
-	Function: ativaCookie
+	Function: i3GEO.ajuda.ativaCookie
 	
 	Ativa o cookie g_janelaMen e inclui o valor "sim".
 	
@@ -159,23 +122,7 @@ i3GEO.ajuda = {
 		i3GEO.util.insereCookie("g_janelaMen","sim");
 	},
 	/*
-	Function: desativaCookie
-	
-	Desativa o cookie g_janelaMen.
-	
-	Toda a vez que a janela é fechada, o cookie é desativado.
-
-	Desativando-se o cookie, a janela de mensagens não será aberta automaticamente a próxima vez que o i3geo for iniciado
-	*/
-	desativaCookie: function(){
-		i3GEO.util.insereCookie("g_janelaMen","nao");
-	},
-	
-	reposicionaJanela: function(){
-	},
-	
-	/*
-	Function: ativaLetreiro
+	Function: i3GEO.ajuda.ativaLetreiro
 	
 	Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
 	
@@ -192,7 +139,6 @@ i3GEO.ajuda = {
 	ativaLetreiro: function(locaplic,sid){
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
-			YAHOO.log("ativaLetreiro", "i3geo");
 			try
 			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
 			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
@@ -218,7 +164,6 @@ i3GEO.ajuda = {
 					BSpeed = 1;
 					BSpaces = "";
 					i3GEO.ajuda.mostraLetreiro();
-					YAHOO.log("Fim ativaLetreiro", "i3geo");
 				}
 			};
 			var cp = new cpaint();
@@ -229,11 +174,52 @@ i3GEO.ajuda = {
 		}
 	},
 	/*
-	Function: mostraLetreiro
+	Function: i3GEO.ajuda.desativaCookie
+	
+	Desativa o cookie g_janelaMen.
+	
+	Toda a vez que a janela é fechada, o cookie é desativado.
+
+	Desativando-se o cookie, a janela de mensagens não será aberta automaticamente a próxima vez que o i3geo for iniciado
+	*/
+	desativaCookie: function(){
+		i3GEO.util.insereCookie("g_janelaMen","nao");
+	},
+	/**
+	Function: i3GEO.ajuda.fechaJanela. 
+	
+	Fecha a janela de ajuda.
+	*/
+	fechaJanela: function(){
+		i3GEO.ajuda.desativaCookie();
+		document.body.removeChild($i("i3geo_janelaMensagens_c"));
+	},
+	/*
+	Function: i3GEO.ajuda.mostraJanela
+	
+	Mostra um texto dentro da janela de mensagens padrão.
+	
+	Parameters:
+	
+	texto {String} - texto a ser mostrado
+	*/
+	mostraJanela: function(texto){
+		if ($i(i3GEO.ajuda.DIVAJUDA)){
+			if (texto == ""){$i(i3GEO.ajuda.DIVAJUDA).innerHTML="-";}
+			else
+			{$i(i3GEO.ajuda.DIVAJUDA).innerHTML= texto;}
+		}
+		else{
+			if ($i("janelaMenTexto"))
+			{$i("janelaMenTexto").innerHTML= texto;}
+		}
+	},
+	/*
+	Private: i3GEO.ajuda.mostraLetreiro
 	
 	Preenche o elemento INPUT com a mesnagem de texto e faz a movimentação das letras.
 	
-	O aparecimento das letrasé controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
+	O aparecimento das letras é controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
 	desde o início do redesenho do mapa.
 	*/
 	mostraLetreiro: function(){

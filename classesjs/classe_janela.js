@@ -111,7 +111,7 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
 		//executa as funções de preparação
-		YAHOO.log("Cria janela", "janela");
+		//YAHOO.log("Cria janela", "janela");
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -163,19 +163,18 @@ i3GEO.janela = {
 		YAHOO.janelaDoca.xp.panel.render();
 		if(modal == false)
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
-		YAHOO.log("Fim cria janela", "janela");
+		//YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	fecha: function(){
-		if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-		{mudaiconf("pan");}
+		//if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
+		//{i3GEO.barraDeBotoes.ativaIcone("pan");}
 		//esconde o box do google
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
 		//fecha o container de desenho de elementos na tela
 		if($i("divGeometriasTemp"))
 		{richdraw.fecha();}
-		limpacontainerf();
 		if($i("flamingoi")){$i("flamingoi").style.display="block";}
 		//executa as funções de fechamento
 		if(i3GEO.janela.ANTESFECHA){
@@ -218,7 +217,7 @@ i3GEO.janela = {
 	texto {String} - texto da janela
 	*/
 	abreAguarde: function(id,texto){
-		YAHOO.log("abreAguarde", "janela");
+		//YAHOO.log("abreAguarde", "janela");
 		if($i(id+"_mask"))
 		{document.body.removeChild($i(id+"_mask"));}
 		if($i(id+"_c"))
@@ -243,18 +242,23 @@ i3GEO.janela = {
 		{$i(id+"_mask").style.zIndex=5000;}
 		if($i(id+"_c"))
 		{$i(id+"_c").style.zIndex=6000;}
-		YAHOO.log("Fim abreAguarde", "janela");	
+		//YAHOO.log("Fim abreAguarde", "janela");	
 	},
 	/*
 	Function: tip
 	
 	Cria um DIV e posiciona sobre o mapa na posição do mouse.
 	
+	Parameters:
+	
+	cabecalho {String} - texto que será usado no cabeçalho (opção fixar) (opcional)
+	
 	Return:
 	
 	ID do DIV criado
 	*/
-	tip: function(){
+	tip: function(cabecalho){
+		if(arguments.length == 0){var cabecalho = "fixar";}
 		var Nid = YAHOO.util.Dom.generateId();
 		var i = $i("i3geo_rosa");
 		if(i)
@@ -281,11 +285,11 @@ i3GEO.janela = {
 		//quando o mapa é redesenhado, esses elementos são excluídos do mapa
 		//
 		var res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
-		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >fixar</span></div>";
+		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
 		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 		ist = novoel.style;
 		ist.top = objposicaocursor.telay - 10;
-		ist.left = objposicaocursor.telax - 20;
+		ist.left = objposicaocursor.telax - 4;
 		ist.display="block";
 		//
 		//registra a função de eliminação dos tips
@@ -294,7 +298,6 @@ i3GEO.janela = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.excluiTips('todos')");}	
 		if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.janela.excluiTips('naofixos')") < 0)
 		{i3GEO.eventos.MOUSEMOVE.push("i3GEO.janela.excluiTips('naofixos')");}		
-
 		//
 		return(Nid);
 	},
@@ -308,7 +311,6 @@ i3GEO.janela = {
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/
 	excluiTips: function(tipo){
-		
 		if(objmapa.objtips.length > 0){
 			var ot = objmapa.objtips.length-1;
 			if (ot >= 0){
@@ -320,9 +322,9 @@ i3GEO.janela = {
 						}
 					}
 					if(tipo == 'naofixos'){
-						if (objmapa.objtips[ot]){
+						if ($i(objmapa.objtips[ot])){
 							if($i(objmapa.objtips[ot].id+"cabecatip").innerHTML != ""){
-								document.body.removeChild(objmapa.objtips[ot]);
+								document.body.removeChild($i(objmapa.objtips[ot].id));
 							}
 						}
 					}

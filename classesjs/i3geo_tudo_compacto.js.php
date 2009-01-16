@@ -41005,14 +41005,1124 @@ VMLRenderer.prototype.getMarkup = function() {
 };
 
 
+/* 
+This file contains the default configuration options.  
+Default options can be edited in this file or changed after the Balloon object is 
+initiliazed as follows:
+
+  var balloon = new Balloon;
+  balloon.fontColor   = 'black';
+  balloon.fontFamily  = 'Arial, sans-serif';
+  balloon.fontSize    = '12pt';
+
+*/
+
+// Adds all the instance variables to the balloon object.
+// Edit the values as required for your implementation.
+BalloonConfig = function(balloon) {
+
+  // ID of element to which balloon should be added
+  // default = none (document.body is used)
+  // This option may be required for mediawiki or other
+  // implementations with complex stylesheets
+  balloon.parentID = null;
+
+  // properties of fonts contained in basic balloons (default black)
+  balloon.fontColor   = 'black';
+  balloon.fontFamily  = 'Arial, sans-serif';
+  balloon.fontSize    = '12pt';
+
+  // minimum allowed balloon width (px)
+  balloon.minWidth = 150;
+
+  // maximum allowed balloon width (px)
+  balloon.maxWidth = 600;
+
+  // Delay before balloon is displayed (msec)
+  balloon.delayTime = 500;
+
+  // If fade-in/out is allowed
+  balloon.allowFade = false;
+
+  // time interval for fade-in (msec)
+  balloon.fadeIn    = 300;
+
+  // time interval for fade-out (msec)
+  balloon.fadeOut   = 300;  
+
+  // Vertical Distance from cursor location (px)
+  balloon.vOffset  = 1;
+
+  // text-padding within the balloon (px)
+  balloon.padding  = 10;
+
+  // How long to display mousover balloons (msec)
+  // false = 'always on'
+  balloon.displayTime = 10000;
+
+  // width of shadow (space aroung whole balloon; px)
+  // Balloon can be zero if there is no shadow and the
+  // edges of the balloon are also the edges of the image
+  balloon.shadow   = 20;
+
+  // images of balloon body.  If the browser is IE < 7, png alpha
+  // channels will not work.  An optional alternative image can be 
+  // provided.  It should have the same dimensions as the default png image
+  balloon.images        = i3GEO.configura.locaplic+'/pacotes/balloon-tooltips/htdocs/images/';
+  balloon.balloonImage  = 'balloon.png';    // with alpha channels
+  balloon.ieImage       = 'balloon_ie.png'; // indexed color, transparent background
+
+  // whether the balloon should have a stem
+  balloon.stem          = true;
+
+  // The height (px) of the stem and the extent to which the 
+  // stem image should overlaps the balloon image.
+  balloon.stemHeight  = 32;  
+  balloon.stemOverlap = 3;
+  
+  // A stem for each of the four orientations
+  balloon.upLeftStem    = 'up_left.png';
+  balloon.downLeftStem  = 'down_left.png';
+  balloon.upRightStem   = 'up_right.png';
+  balloon.downRightStem = 'down_right.png';
+
+  // A close button for sticky balloons
+  // specify the width of your button image
+  // if you do not use the default image provided
+  balloon.closeButton   = 'close.png';
+  balloon.closeButtonWidth = 16;
+
+
+  
+  /* 
+    This section allows support for AJAX, iframes and JavaScript in balloons
+    If you have concerns about XSS vulnerabilities, set some or all of these
+    values to false;
+  */
+
+  /// URL for default AJAX request handler
+  balloon.helpUrl            = false;
+
+  // Should AJAX be allowed at all?
+  balloon.allowAJAX          = true;
+
+  // Allow iframe elements in balloons?
+  balloon.allowIframes       = true;
+
+  // Allow javascript event handlers in balloons?
+  balloon.allowEventHandlers = false;
+
+  // Allow <script> elements in balloons?
+  balloon.allowScripts       = false;
+
+  // Escape all HTML characters -- this will be very
+  // unnattractive unless your AJAX request returns plain
+  // text.  short of disallowing AJAX entirely, This is the safe 
+  // way to go if you must have AJAX in an environment where 
+  // outside users can send text to the browser/balloon
+  balloon.escapeHTML         = false;
+}
+
+// simple Box alternative
+BoxConfig = function(box) {
+  box.isBox = true;
+
+  // ID of element to which box should be added
+  // default = none (document.body is used)
+  // This option may be required for mediawiki or other
+  // implementations with complex stylesheets
+  box.parentID = null;
+
+  // properties of fonts contained in basic boxes (default black)
+  box.fontColor   = 'black';
+  box.fontFamily  = 'Arial, sans-serif';
+  box.fontSize    = '12pt';
+
+  // border and bgcolor for plain box
+  box.bgColor     = 'whitesmoke';
+  box.borderStyle = '1px solid black'; 
+
+  // minimum allowed box width (px)
+  box.minWidth = 150;
+
+  // maximum allowed box width (px)
+  box.maxWidth = 600;
+
+  // Delay before box is displayed (msec)
+  box.delayTime = 500;
+
+  // If fade-in/out is allowed
+  box.allowFade = false;
+
+  // time interval for fade-in (msec)
+  box.fadeIn    = 300;
+
+  // time interval for fade-out (msec)
+  box.fadeOut   = 300;  
+
+  // Vertical Distance from cursor location (px)
+  box.vOffset  = 5;
+
+  // text-padding within the box (px)
+  box.padding  = 10;
+
+  // How long to display mousover boxes (msec)
+  // false = 'always on'
+  box.displayTime = 10000;
+
+  // no shadows for plain box
+  box.shadow   = 0;
+
+  // no stem for boxes
+  box.stem        = false;
+
+  // A close button for sticky boxes
+  // specify the width of your button image
+  // if you do not use the default image provided
+  box.images        =  '/images/balloons';
+  box.closeButton   = 'close.png';
+  box.closeButtonWidth = 16;
+
+  /* 
+    This section allows support for AJAX, iframes and JavaScript in boxes
+    If you have concerns about XSS vulnerabilities, set some or all of these
+    values to false;
+  */
+
+  /// URL for default AJAX request handler
+  box.helpUrl            = false;
+
+  // Should AJAX be allowed at all?
+  box.allowAJAX          = true;
+
+  // Allow iframe elements in boxes?
+  box.allowIframes       = true;
+
+  // Allow javascript event handlers in boxes?
+  box.allowEventHandlers = false;
+
+  // Allow <script> elements in boxes?
+  box.allowScripts       = false;
+
+  // Escape all HTML characters -- this will be very
+  // unnattractive unless your AJAX request returns plain
+  // text.  short of disallowing AJAX entirely, This is the safe 
+  // way to go if you must have AJAX in an environment where 
+  // outside users can send text to the browser/box
+  box.escapeHTML         = false;
+}
+
+
+/*
+ balloon.js -- a DHTML library for balloon tooltips
+
+ $Id: balloon.js,v 1.41 2008/09/23 16:33:17 sheldon_mckay Exp $
+
+ See http://www.gmod.org/wiki/index.php/Popup_Balloons
+ for documentation.
+
+ Copyright (c) 2007,2008 Sheldon McKay, Cold Spring Harbor Laboratory
+
+ This balloon tooltip package and associated files not otherwise copyrighted are 
+ distributed under the MIT-style license:
+ 
+ http://opensource.org/licenses/mit-license.php
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+
+*/
+
+// These global variables are necessary to avoid losing scope when
+//setting the balloon timeout and for inter-object communication
+var currentBalloonClass;
+var balloonIsVisible;
+var balloonIsSticky;
+var balloonInvisibleSelects;
+var balloonIsSuppressed;
+var tooltipIsSuppressed;
+
+
+//////////////////////////////////////////////////////////////////////////
+// This is constructor that is called to initialize the Balloon object  //
+//////////////////////////////////////////////////////////////////////////
+var Balloon = function () {
+
+  // Get default configuration from balloon.config.js
+  BalloonConfig(this);
+
+  // Track the cursor every time the mouse moves
+  document.onmousemove = this.setActiveCoordinates;
+
+  // scrolling aborts unsticky balloons
+  document.onscroll    = Balloon.prototype.hideTooltip;
+
+  // make balloons go away if the page is unloading or waiting
+  // to unload.
+  window.onbeforeunload = function(){
+    Balloon.prototype.hideTooltip(1);
+    balloonIsSuppressed = true;
+  };
+
+  // for IE, the balloons can;t start until the page is finished loading
+  // set a flag that will get toggled when loading is finished
+  if (this.isIE()) {
+    this.suppress = true;
+  }
+
+  return this;
+}
+
+//////////////////////////////////////////////////////////////////////////
+// This is the function that is called on mouseover.  It has a built-in //
+// delay time to avoid balloons popping up on rapid mouseover events    //
+//////////////////////////////////////////////////////////////////////////
+Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
+  // Awful IE bug, page load aborts if the balloon is fired
+  // before the page is fully loaded.
+  if (this.isIE() && document.readyState.match(/complete/i)) {
+    this.suppress = false;
+  }
+
+  // All balloons have been suppressed, go no further
+  if (this.suppress || balloonIsSuppressed) {
+    return false;
+  }
+
+  // Non-sticky balloons suppressed
+  if (tooltipIsSuppressed && !sticky) {
+    return false;
+  }
+
+  // Sorry Konqueror, no fade-in for you!
+  if (this.isKonqueror()) this.allowFade = false;
+
+  // Check for mouseover (vs. mousedown or click)
+  var mouseOver = evt.type.match('mouseover','i');  
+
+  // if the firing event is a click, fade-in and a non-sticky balloon make no sense
+  if (!mouseOver) {
+    sticky = true;
+    this.fadeOK = false;
+  }
+  else {
+    this.fadeOK = this.allowFade;
+  }
+
+  // Don't fire on mouseover if a non-sticky balloon is visible
+  if (balloonIsVisible && !balloonIsSticky && mouseOver) return false;
+
+  // Don't start a non-sticky balloon if a sticky one is visible
+  if (balloonIsVisible && balloonIsSticky && !sticky) return false;
+  
+  // Ignore repeated firing of mouseover->mouseout events on 
+  // the same element (Safari)
+  var el = this.getEventTarget(evt);
+  if (sticky && mouseOver && this.isSameElement(el,this.currentElement)) return false;
+  this.firingElement = el;
+
+  // A new sticky balloon can erase an old one
+  if (sticky) this.hideTooltip(1);
+
+  // attach a mouseout event handler to the target element
+  var closeBalloon = function() { 
+    var override = balloonIsSticky && !balloonIsVisible;
+    Balloon.prototype.hideTooltip(override)
+  }
+  if (!mouseOver) el.onmouseup  = function() {return false};
+  el.onmouseout = closeBalloon;
+
+  balloonIsSticky = sticky;
+
+  // force balloon width and/or height if requested
+  this.width  = width;
+
+  this.hideTooltip();
+
+  // request the contents synchronously (ie wait for result)
+  this.currentHelpText = this.getAndCheckContents(caption);
+
+  // no contents? abort.
+  if (!this.currentHelpText) {
+    return false;
+  }
+
+  // Put the balloon contents and images into a visible (but offscreen)
+  // element so they will be preloaded and have a layout to 
+  // calculate the balloon dimensions
+  if (!this.container) {
+    this.container = document.createElement('div');
+    document.body.appendChild(this.container);
+    this.setStyle(this.container,'position','absolute');
+    this.setStyle(this.container,'top',-8888);
+    this.setStyle(this.container,'display','inline');
+    this.setStyle(this.container,'z-index',2);
+    this.setStyle(this.container,'color',this.fontColor);
+    this.setStyle(this.container,'font-family',this.fontFamily);
+    this.setStyle(this.container,'font-size',this.fontSize);
+  }
+  else {
+    this.setStyle(this.container,'display','inline');
+  }
+
+  this.container.innerHTML = unescape(this.currentHelpText);
+
+  // make sure balloon image path is complete
+  if (this.images) {
+    // main background image
+    this.balloonImage  = this.balloonImage  ? this.images +'/'+ this.balloonImage  : false;
+    this.ieImage       = this.ieImage       ? this.images +'/'+ this.ieImage       : false;
+
+    // optional stems
+    this.upLeftStem    = this.upLeftStem    ? this.images +'/'+ this.upLeftStem    : false;
+    this.upRightStem   = this.upRightStem   ? this.images +'/'+ this.upRightStem   : false;
+    this.downLeftStem  = this.downLeftStem  ? this.images +'/'+ this.downLeftStem  : false;
+    this.downRightStem = this.downRightStem ? this.images +'/'+ this.downRightStem : false;
+
+    this.closeButton   = this.closeButton   ? this.images +'/'+ this.closeButton   : false;
+
+    this.images        = false;
+  }
+
+  // if this is IE < 7 use an alternative image (if provided)
+  if (this.isOldIE() && this.ieImage) {
+    this.balloonImage = this.ieImage;
+  }
+
+  // preload balloon images 
+  if (!this.preloadedImages) {
+    var images = new Array(this.balloonImage, this.closeButton);
+    if (this.ieImage) {
+      images.push(this.ieImage);
+    }
+    if (this.stem) {
+      images.push(this.upLeftStem,this.upRightStem,this.downLeftStem,this.downRightStem);
+    }
+    var len = images.length;
+    for (var i=0;i<len;i++) {
+      if ( images[i] ) {
+        this.preload(images[i]);
+      }
+    }
+    this.preloadedImages = true;
+  }
+
+  currentBalloonClass = this;
+
+  // Capture coordinates for mousedown or click
+  if (!mouseOver) this.setActiveCoordinates(evt);
+
+  // Remember which event started this
+  this.currentEvent = evt;
+
+  // Make delay time short for onmousedown
+  var delay = mouseOver ? this.delayTime : 1;
+  this.timeoutTooltip = window.setTimeout(this.doShowTooltip,delay);
+}
+
+
+// Preload the balloon background images
+Balloon.prototype.preload = function(src) {
+  var i = new Image;
+  i.src = src;
+
+  // append to the DOM tree so the images have a layout,
+  // then remove.
+  this.setStyle(i,'position','absolute');
+  this.setStyle(i,'top',-8000);
+  document.body.appendChild(i);
+  document.body.removeChild(i);
+}
+
+
+/////////////////////////////////////////////////////////////////////
+// Tooltip rendering function
+/////////////////////////////////////////////////////////////////////
+Balloon.prototype.doShowTooltip = function() {
+  var self = currentBalloonClass;
+
+  // Stop firing if a balloon is already being displayed
+  if (balloonIsVisible) return false;  
+
+  if (!self.parent) {
+    if (self.parentID) {
+      self.parent = document.getElementById(self.parentID);
+    }
+    else {
+      self.parent = document.body;
+    }
+    self.xOffset = self.getLoc(self.parent, 'x1');
+    self.yOffset = self.getLoc(self.parent, 'y1');
+  }
+
+  // a short delay time might cause some intereference
+  // with fade-out
+  window.clearTimeout(self.timeoutFade);
+  self.setStyle('balloon','display','none');
+
+  // make sure user-configured numbers are not strings
+  self.parseIntAll();
+
+  // create the balloon object
+  var balloon = self.makeBalloon();
+
+  // window dimensions
+  var pageWidth   = YAHOO.util.Dom.getViewportWidth();
+  var pageCen     = Math.round(pageWidth/2);
+  var pageHeight  = YAHOO.util.Dom.getViewportHeight();
+  var pageLeft    = YAHOO.util.Dom.getDocumentScrollLeft();
+  var pageTop     = YAHOO.util.Dom.getDocumentScrollTop();
+  var pageMid     = pageTop + Math.round(pageHeight/2);
+  self.pageBottom = pageTop + pageHeight;
+  self.pageTop    = pageTop;
+
+  // do we have a cursor position?
+  if (!(self.activeTop && self.activeRight)) {
+    self.setActiveCoordinates();
+  }
+
+  // balloon orientation
+  var vOrient = self.activeTop > pageMid ? 'up' : 'down';
+  var hOrient = self.activeRight > pageCen ? 'left' : 'right';
+  
+  // get the preloaded balloon contents
+  var helpText = self.container.innerHTML;
+
+  self.contents.innerHTML = helpText;
+
+  // how and where to draw the balloon
+  self.setBalloonStyle(vOrient,hOrient,pageWidth,pageLeft);
+
+  // close control for balloon or box
+  if (balloonIsSticky) {
+    self.addCloseButton();
+  }
+
+  balloonIsVisible = true;
+  
+  // in IE < 7, hide <select> elements
+  self.showHide();
+
+  self.fade(0,95,self.fadeIn);
+}
+
+Balloon.prototype.addCloseButton = function () {
+  var self         = currentBalloonClass;
+  var margin       = Math.round(self.padding/2);
+  var closeWidth   = self.closeButtonWidth || 16;
+  var balloonTop   = self.getLoc('balloon','y1') + margin + self.shadow;
+  var BalloonLeft  = self.getLoc('topRight','x2') - self.closeButtonWidth - self.shadow - margin;
+  var closeButton  = document.getElementById('closeButton');
+
+  if (!closeButton) {
+    closeButton = new Image;
+    closeButton.setAttribute('id','closeButton');
+    closeButton.setAttribute('src',self.closeButton);
+    closeButton.onclick = function() {
+      Balloon.prototype.hideTooltip(1);
+    };
+    self.setStyle(closeButton,'position','absolute');
+    document.body.appendChild(closeButton);
+  }
+
+  self.setStyle(closeButton,'top',balloonTop);
+  self.setStyle(closeButton,'left',BalloonLeft);
+  self.setStyle(closeButton,'display','inline');
+  self.setStyle(closeButton,'cursor','pointer');
+  self.setStyle(closeButton,'z-index',999999999);
+}
+
+// use a fresh object every time to make sure style 
+// is not polluted
+Balloon.prototype.makeBalloon = function() {
+  var self = currentBalloonClass;
+
+  var balloon = document.getElementById('balloon');
+  if (balloon) self.parent.removeChild(balloon);
+
+  balloon = document.createElement('div');
+  balloon.setAttribute('id','balloon');
+  self.parent.appendChild(balloon);
+  self.activeBalloon = balloon;
+
+  self.parts = new Array(balloon);
+  var parts = new Array('contents','topRight','bottomRight','bottomLeft');
+  for (var i=0;i<parts.length;i++) {
+    var child = document.createElement('div');
+    child.setAttribute('id',parts[i]);
+    balloon.appendChild(child);
+    if (parts[i] == 'contents') self.contents = child;
+    self.parts.push(child);
+  }
+
+  self.setStyle('contents','z-index',2);
+  self.setStyle('contents','color',self.fontColor);
+  self.setStyle('contents','font-family',self.fontFamily);
+  self.setStyle('contents','font-size',self.fontSize);
+
+  if (balloonIsSticky) {
+    self.setStyle('contents','margin-right',10); 
+  }
+  else if (self.displayTime)  {
+      self.timeoutAutoClose = window.setTimeout(this.hideTooltip,self.displayTime);
+  }
+  return balloon;
+}
+
+
+Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft) {
+  var self = currentBalloonClass;
+  var balloon = self.activeBalloon;
+
+  if (typeof(self.shadow) != 'number') self.shadow = 0;
+  if (!self.stem) self.stemHeight = 0;
+
+  var fullPadding   = self.padding + self.shadow;
+  var insidePadding = self.padding;
+
+  self.setStyle(balloon,'background','url('+self.balloonImage+') top left no-repeat');
+  self.setStyle(balloon,'position','absolute');
+  self.setStyle(balloon,'padding-top',fullPadding);
+  self.setStyle(balloon,'padding-left',fullPadding);
+  self.setStyle(balloon,'top',-9999);
+  self.setStyle(balloon,'z-index',1000000);
+  
+
+  self.setStyle('bottomRight','background','url('+self.balloonImage+') bottom right no-repeat');
+  self.setStyle('bottomRight','position','absolute');
+  self.setStyle('bottomRight','right',0-fullPadding);
+  self.setStyle('bottomRight','bottom',0-fullPadding);
+  self.setStyle('bottomRight','height',fullPadding);
+  self.setStyle('bottomRight','width',fullPadding);
+  self.setStyle('bottomRight','z-index',-1);
+
+  self.setStyle('topRight','background','url('+self.balloonImage+') top right no-repeat');
+  self.setStyle('topRight','position','absolute');
+  self.setStyle('topRight','right',0-fullPadding);
+  self.setStyle('topRight','top',0);
+  self.setStyle('topRight','width',fullPadding);
+
+  self.setStyle('bottomLeft','background','url('+self.balloonImage+') bottom left no-repeat');
+  self.setStyle('bottomLeft','position','absolute');
+  self.setStyle('bottomLeft','left',0);
+  self.setStyle('bottomLeft','bottom',0-fullPadding);
+  self.setStyle('bottomLeft','height',fullPadding);
+  self.setStyle('bottomLeft','z-index',-1);
+
+  if (this.stem) {
+    var stem = document.createElement('img');
+    self.setStyle(stem,'position','absolute');
+    balloon.appendChild(stem);    
+
+    if (vOrient == 'up' && hOrient == 'left') {  
+      stem.src = self.upLeftStem;
+      var height = self.stemHeight + insidePadding - self.stemOverlap;
+      self.setStyle(stem,'bottom',0-height);
+      self.setStyle(stem,'right',0);             
+    }
+    else if (vOrient == 'down' && hOrient == 'left') {
+      stem.src = self.downLeftStem;
+      var height = self.stemHeight - (self.shadow + self.stemOverlap);
+      self.setStyle(stem,'top',0-height);
+      self.setStyle(stem,'right',0);
+    }
+    else if (vOrient == 'up' && hOrient == 'right') {
+      stem.src = self.upRightStem;
+      var height = self.stemHeight + insidePadding - self.stemOverlap;
+      self.setStyle(stem,'bottom',0-height);
+      self.setStyle(stem,'left',self.shadow);
+    }
+    else if (vOrient == 'down' && hOrient == 'right') {
+      stem.src = self.downRightStem;
+      var height = self.stemHeight - (self.shadow + self.stemOverlap);
+      self.setStyle(stem,'top',0-height);
+      self.setStyle(stem,'left',self.shadow);
+    }
+
+  }
+
+  // flip left or right, as required
+  if (hOrient == 'left') {
+    var activeRight = pageWidth - self.activeLeft;
+    self.setStyle(balloon,'right',activeRight);// - self.xOffset);
+  }
+  else {
+    self.setStyle(balloon,'left',self.activeRight - self.xOffset);
+  }
+
+  if (!self.width) {
+    var width = self.getLoc('contents','width');
+    if (self.isIE()) width += 50;
+    if (width > self.maxWidth) width = self.maxWidth + 50;
+    if (width < self.minWidth) width = self.minWidth;
+    self.setStyle(balloon,'width',width);
+  }
+  else {
+    self.setStyle(balloon,'width',self.width);
+  }
+
+  // Make sure the balloon is not offscreen
+  var balloonPad   = self.padding + self.shadow;
+  var balloonLeft  = self.getLoc(balloon,'x1');
+  var balloonRight = self.getLoc(balloon,'x2');
+  if (hOrient == 'left')  balloonLeft  += balloonPad;
+  if (hOrient == 'right') balloonRight += balloonPad;
+  var pageRight    = pageLeft + pageWidth;
+
+  if (hOrient == 'right' && balloonRight > (pageRight-30)) {
+    self.setStyle(balloon,'width',(pageRight - balloonLeft) - 50);
+  }
+  else if (hOrient == 'left' && balloonLeft < (pageLeft+30)) {
+    self.setStyle(balloon,'width',(balloonRight - pageLeft) - 50);
+  }
+
+  // Set the width/height for the right and bottom outlines
+  var lineWidth  = self.getLoc(balloon,'width');
+  var lineHeight = self.getLoc(balloon,'height');
+
+  self.setStyle('topRight','height',lineHeight);
+  self.setStyle('bottomLeft','width',lineWidth);
+
+  // IE7 quirk -- look for unwanted overlap cause by an off by 1px error
+  var vOverlap = self.isOverlap('topRight','bottomRight');
+  var hOverlap = self.isOverlap('bottomLeft','bottomRight');
+  if (vOverlap) self.setStyle('topRight','height',lineHeight-vOverlap[1]);
+  if (hOverlap) self.setStyle('bottomLeft','width',lineWidth-hOverlap[0]);
+
+  if (vOrient == 'up') {
+    var activeTop = self.activeTop - self.vOffset - self.stemHeight - lineHeight;
+    self.setStyle(balloon,'top',activeTop - self.yOffset);
+    self.setStyle(balloon,'display','inline');
+  }
+  else {
+    var activeTop = self.activeTop + self.vOffset + self.stemHeight;
+    self.setStyle(balloon,'top',activeTop - self.yOffset);
+  }
+
+  self.setOpacity(1);
+}
+
+// Fade method adapted from an example on 
+// http://brainerror.net/scripts/javascript/blendtrans/
+Balloon.prototype.fade = function(opacStart, opacEnd, millisec) {
+  var self = currentBalloonClass || new Balloon;
+
+  //speed for each frame
+  var speed = Math.round(millisec / 100);
+  var timer = 0;
+  if(opacStart > opacEnd) {
+    if (self.fadeOK) {
+      for(o = opacStart; o >= opacEnd; o--) {
+        self.timeoutFade = setTimeout('Balloon.prototype.setOpacity('+o+')',(timer*speed));
+        timer++;
+      }
+      setTimeout("Balloon.prototype.setStyle('balloon','display','none')",millisec);
+    }
+    else {
+      self.setStyle('balloon','display','none')
+    }
+  }
+  else if(opacStart < opacEnd && self.fadeOK) {
+    for(o = opacStart; o <= opacEnd; o++) {
+      self.timeoutFade = setTimeout('Balloon.prototype.setOpacity('+o+')',(timer*speed));
+      timer++;
+    }
+  }
+}
+
+Balloon.prototype.setOpacity = function(opc) {
+  var self = currentBalloonClass;
+  if (!self || !self.fadeOK) return false;
+
+  var o = parseFloat((opc||0)/100);
+  
+  /////////////////////////////////////////////////////////////
+  // Very irritating IE deficiency: it can't handle changing //
+  // opacity of child elements.  Just fade balloon contents  //
+  // for IE and the whole balloon for less obtuse browsers.  //
+  var el = self.isIE() ? 'contents' : 'balloon';             //
+  /////////////////////////////////////////////////////////////
+
+  var b  = document.getElementById(el);
+  if (!b) return false;
+
+  // CSS standards-compliant browsers!
+  self.setStyle(b,'opacity',o);
+  // old IE
+  self.setStyle(b,'filter','alpha(opacity= '+opc+')');
+  // old Mozilla/NN
+  self.setStyle(b,'MozOpacity',o);
+  // old Safari
+  self.setStyle(b,'KhtmlOpacity',o);
+
+}
+
+Balloon.prototype.hideTooltip = function(override) {
+  // some browsers pass the event object == we don't want it
+  if (override && typeof override == 'object') override = false;
+  if (balloonIsSticky && !override) return false;
+  
+  var self = currentBalloonClass;
+
+  if (self) {
+    window.clearTimeout(self.timeoutTooltip);
+    window.clearTimeout(self.timeoutAutoClose);
+  }
+
+  if (balloonIsSticky && self) self.currentElement = null;
+
+  balloonIsVisible = false;
+  balloonIsSticky  = false;
+
+  var closeButton = document.getElementById('closeButton');
+  if (closeButton) {
+    YAHOO.util.Dom.setStyle(closeButton,'display','none');
+  }
+
+  if (!self) {
+    var hideBalloon  = document.getElementById('balloon');
+    if (hideBalloon) Balloon.prototype.setStyle(hideBalloon,'display','none');
+  }
+  else if (self.activeBalloon) {
+    if (!override && self.fadeOK && !self.isIE()) self.fade(95,0,self.fadeOut);
+    else self.setStyle(self.activeBalloon,'display','none');
+  }
+  Balloon.prototype.showHide(1);
+}
+
+// this function is meant to be called externally to clear
+// any open balloons
+hideAllTooltips = function() {
+  var self = currentBalloonClass;
+  if (!self) return;
+  window.clearTimeout(self.timeoutTooltip);
+  if (self.activeBalloon) self.setStyle(self.activeBalloon,'display','none');
+  balloonIsVisible    = false;
+  balloonIsSticky     = false;
+  currentBalloonClass = null;
+}
+
+
+// Track the active mouseover coordinates
+Balloon.prototype.setActiveCoordinates = function(event) {
+ 
+  var self = currentBalloonClass;
+  if (!self) return false;
+  var b = self.activeBalloon;
+
+  var evt = event || window.event || self.currentEvent;
+  if (!evt) {
+    return false;
+  }
+  var XY = self.eventXY(evt);
+  self.activeTop    = XY[1] - 10;
+  self.activeLeft   = XY[0] - 10;
+  self.activeRight  = self.activeLeft + 20;
+  self.activeBottom = self.activeTop  + 20;
+
+  return true;
+}
+
+////
+// event XY and getEventTarget Functions based on examples by Peter-Paul
+// Koch http://www.quirksmode.org/js/events_properties.html
+Balloon.prototype.eventXY = function(event) {
+  var XY = new Array(2);
+  var e = event || window.event;
+
+  if (e.pageX || e.pageY) {
+    XY[0] = e.pageX;
+    XY[1] = e.pageY;
+  }
+  else if ( e.clientX || e.clientY ) {
+    XY[0] = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    XY[1] = e.clientY + document.body.scrollTop  + document.documentElement.scrollTop;
+  }
+  return XY;
+}
+
+Balloon.prototype.getEventTarget = function(event) {
+  var targ;
+  var e = event || window.event;
+  if (e.target) targ = e.target;
+  else if (e.srcElement) targ = e.srcElement;
+  if (targ.nodeType == 3) targ = targ.parentNode; // Safari
+  return targ;
+}
+////
+
+
+Balloon.prototype.setStyle = function(el,att,val) {
+  if (!el) return false;
+  if (val && att.match(/left|top|bottom|right|width|height|padding|margin/)) val += 'px'; 
+  if (typeof(el) != 'object') el = document.getElementById(el);
+
+  // z-index does not work as expected
+  if (att == 'z-index') {
+    if (el.style) {
+      el.style.zIndex = parseInt(val);
+    }
+  }
+  else {
+    YAHOO.util.Dom.setStyle(el,att,val);
+  }
+}
+
+// Uses YAHOO's region class for element coordinates
+Balloon.prototype.getLoc = function(el,request) {
+  var region = YAHOO.util.Dom.getRegion(el);
+
+  switch(request) {
+    case ('y1') : return parseInt(region.top);
+    case ('y2') : return parseInt(region.bottom);
+    case ('x1') : return parseInt(region.left);
+    case ('x2') : return parseInt(region.right);
+    case ('width')  : return (parseInt(region.right)  - parseInt(region.left));
+    case ('height') : return (parseInt(region.bottom) - parseInt(region.top));
+    case ('region') : return region; 
+ }
+}
+
+// We don't know if numbers are overridden with strings
+// so play it safe
+Balloon.prototype.parseIntAll = function() {
+  this.padding     = parseInt(this.padding);
+  this.shadow      = parseInt(this.shadow);
+  this.stemHeight  = parseInt(this.stemHeight);
+  this.stemOverlap = parseInt(this.stemOverlap);
+  this.vOffset     = parseInt(this.vOffset);
+  this.delayTime   = parseInt(this.delayTime);
+  this.width       = parseInt(this.width);
+  this.maxWidth    = parseInt(this.maxWidth);
+  this.minWidth    = parseInt(this.minWidth);
+  this.fadeIn      = parseInt(this.fadeIn);
+  this.fadeOut     = parseInt(this.fadeOut);  
+}
+
+
+// show/hide select elements in older IE
+// plus user-defined elements
+Balloon.prototype.showHide = function(visible) {
+  var self = currentBalloonClass || new Balloon;
+
+  // IE z-index bug fix (courtesy of Lincoln Stein)
+  if (self.isOldIE()) {
+    if (!visible) {
+      var balloonSelects = document.getElementById('contents').getElementsByTagName('select');
+      var myHash = new Object();
+      for (var i=0; i<balloonSelects.length; i++) {
+        var id = balloonSelects[i].id || balloonSelects[i].name;
+        myHash[id] = 1;
+      }
+      balloonInvisibleSelects = new Array();
+      var allSelects = document.getElementsByTagName('select');
+      for (var i=0; i<allSelects.length; i++) {
+        var id = allSelects[i].id || allSelects[i].name;
+        if (self.isOverlap(allSelects[i],self.activeBalloon) && !myHash[id]) {
+          balloonInvisibleSelects.push(allSelects[i]);
+          self.setStyle(allSelects[i],'visibility','hidden');
+        }
+      }
+    }
+    else if (balloonInvisibleSelects) {
+      for (var i=0; i < balloonInvisibleSelects.length; i++) {
+        var id = balloonInvisibleSelects[i].id || balloonInvisibleSelects[i].name;
+        self.setStyle(balloonInvisibleSelects[i],'visibility','visible');
+     }
+     balloonInvisibleSelects = null;
+    }
+  }
+
+  // show/hide any user-specified elements that overlap the balloon
+  if (self.hide) {
+    var display = visible ? 'inline' : 'none';
+    for (var n=0;n<self.hide.length;n++) {
+      if (self.isOverlap(self.activeBalloon,self.hide[n])) {
+        self.setStyle(self.hide[n],'display',display);
+      }
+    }
+  }
+}
+
+// Try to find overlap
+Balloon.prototype.isOverlap = function(el1,el2) {
+  if (!el1 || !el2) return false;
+  var R1 = this.getLoc(el1,'region');
+  var R2 = this.getLoc(el2,'region');
+  if (!R1 || !R2) return false;
+  var intersect = R1.intersect(R2);
+  if (intersect) {
+    // extent of overlap;
+    intersect = new Array((intersect.right - intersect.left),(intersect.bottom - intersect.top));
+  }
+  return intersect;
+}
+
+// Coordinate-based test for the same element
+Balloon.prototype.isSameElement = function(el1,el2) {
+  if (!el1 || !el2) return false;
+  var R1 = this.getLoc(el1,'region');
+  var R2 = this.getLoc(el2,'region');
+  var same = R1.contains(R2) && R2.contains(R1);
+  return same ? true : false;
+}
+
+
+///////////////////////////////////////////////////////
+// Security -- get the balloon contents while checking 
+// for disallowed elements.
+//////////////////////////////////////////////////////
+Balloon.prototype.getAndCheckContents = function(caption) {
+  var originalCaption = caption;
+  var notAllowed = 'are not allowed in popup balloons in this web site.Please contact the site administrator for assistance.';
+  var notSupported = 'AJAX is not supported for popup balloons in this web site. Please contact the site administrator for assistance.';
+  
+  // no Help Url without AJAX
+  if (this.helpUrl && !this.allowAJAX) {
+    alert('Sorry, you have specified help URL '+this.helpUrl+' but '+notSupported);
+    return null;
+  }
+
+  // look for a url in the balloon contents
+  if (caption.match(/^url:/)) {
+    this.activeUrl = caption.replace(/^url:/,'');
+    caption = '';
+  }
+  // or if the text is a bare hyperlink
+  else if (caption.match(/^(https?:|\/|ftp:)\S+$/i)) {
+    this.activeUrl = caption;
+    caption = '';
+  }
+
+  // Make sure AJAX is allowed
+  if (this.activeUrl && !this.allowAJAX) {
+    alert('Sorry, you asked for '+originalCaption+' but '+notSupported);
+    return null;
+  }  
+
+  // check if the contents are to be retrieved from an element
+  if (caption.match(/^load:/)) {
+    var load = caption.split(':');
+    if (!document.getElementById(load[1])) alert ('problem locating element '+load[1]);
+    caption = document.getElementById(load[1]).innerHTML;
+    this.loadedFromElement = true;
+  }
+
+  // check if iframes are allowed
+  if (caption.match(/\<\s*iframe/i) && !this.allowIframes) {
+    alert('Sorry: iframe elements '+notAllowed);
+    return null;
+  }
+
+  // check if event handlers are allowed
+  if (caption.match(/\bon(load|mouse|click|unload|before)[^=]*=/i) && !this.allowEventHandlers) {
+    alert('Sorry: JavaScript event handlers '+notAllowed);
+    return null;
+  }
+
+  // check for script elements
+  if (caption.match(/\<\s*script/i) && !this.allowScripts) {
+    alert('Sorry: <script> elements '+notAllowed);
+    return null;
+  }
+
+  // request the contents
+  this.currentHelpText = this.getContents(caption);
+  this.loadedFromElement = false;
+  
+  return this.currentHelpText;;
+}
+
+
+///////////////////////////////////////////////////////
+// AJAX widget to fill the balloons
+// requires prototype.js
+///////////////////////////////////////////////////////
+Balloon.prototype.getContents = function(section) {
+
+  // just pass it back if no AJAX handler is required.
+  if (!this.helpUrl && !this.activeUrl) return section;
+
+  // or if the contents are already loaded from another element
+  if (this.loadedFromElement) return section;
+
+  // inline URL takes precedence
+  var url = this.activeUrl || this.helpUrl;
+  url    += this.activeUrl ? '' : '?section='+section;
+
+  // activeUrl is meant to be single-use only
+  this.activeUrl = null;
+
+  var ajax;
+  if (window.XMLHttpRequest) {
+    ajax = new XMLHttpRequest();
+  } else {
+    ajax = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  if (ajax) {
+    ajax.open("GET", url, false);
+    ajax.onreadystatechange=function() {
+      //alert(ajax.readyState);
+    };
+    try {
+      ajax.send(null);
+    }
+    catch (e) {
+    // alert(e);
+    }
+    var txt = this.escapeHTML ? escape(ajax.responseText) : ajax.responseText;
+    return  txt || section;
+  }
+  else {
+    return section;
+  }
+}
+
+
+// test for internet explorer
+Balloon.prototype.isIE = function() {
+  return document.all && !window.opera;
+}
+
+// test for internet explorer (but not IE7)
+Balloon.prototype.isOldIE = function() {
+  if (navigator.appVersion.indexOf("MSIE") == -1) return false;
+  var temp=navigator.appVersion.split("MSIE");
+  return parseFloat(temp[1]) < 7;
+}
+
+// test for Konqueror
+Balloon.prototype.isKonqueror = function() {
+  return navigator.userAgent.indexOf( 'Konqueror' ) != -1;
+}
+
 /*
-Title: funcoes.js
+Class:: i3GEO.configura
 
-Funções de uso geral para processamento de dados
+Configuração do i3geo
 
-File: i3geo/classesjs/funcoes.js
+Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
+o funcionamento do i3geo.
 
-About: Licençamento
+File: i3geo/classesjs/classe_configura.js
+
+About: Licença
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -41032,257 +42142,995 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+i3GEO.configura = {
+	/*
+	Variable: sid
+	
+	Código da seção aberta pelo i3Geo no servidor.
+	
+	O código é gerado na inicialização do i3Geo pelo programa ms_criamapa.php
+	
+	Type:
+	{String}
+	*/
+	sid: "",
+	/*
+	Variable: locaplic
+	
+	Localização da instalação do i3geo (URI)
+	
+	Por default, é definida na inicialização do i3Geo com o uso do i3GEO.util
+
+	Type:
+	{URI}
+	*/
+	locaplic: "",
+	/*
+	Variable: mapaRefDisplay
+	
+	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
+	
+	Type:
+	{style.display}
+	*/
+	mapaRefDisplay: "block",
+	/*
+	Variable: visual
+	
+	Tipo de visual que será utilizado no mapa.
+	
+	A lista de visuais existentes é obtida na inicialização do i3geo.
+	
+	Veja o diretório i3geo/imagens/visual
+
+	Type:
+	{String}
+	*/
+	visual: "default",
+	/*
+	Variable: cursores
+	
+	Imagens utilizadas para os cursores do mouse mostrados no mapa	
+
+	Type:
+	{JSON}
+	*/
+	cursores: {
+		"identifica":
+		{ff:"/imagens/cursores/identifica.png",ie:"/imagens/cursores/identifica.cur"},
+		"pan":
+		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
+		"area":
+		{ff:"/imagens/cursores/area.png",ie:"/imagens/cursores/area.cur"},
+		"distancia":
+		{ff:"/imagens/cursores/distancia.png",ie:"/imagens/cursores/distancia.cur"},
+		"zoom":
+		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
+	},
+	/*
+	Variable: listaDePropriedadesDoMapa
+	
+	Lista com as funções que são incluídas no item "Propriedades do mapa"	
+
+	Type:
+	{JSON}
+	*/
+	listaDePropriedadesDoMapa: {
+		"propriedades": [
+		{ text: "p2", url: "javascript:tipoimagem()"},
+		{ text: "p3", url: "javascript:opcoesLegenda()"},
+		{ text: "p4", url: "javascript:opcoesEscala()"},
+		{ text: "p5", url: "javascript:tamanho()"},
+		{ text: "p6", url: "javascript:ativaEntorno()"},
+		{ text: "p7", url: "javascript:ativaLogo()"},
+		{ text: "p8", url: "javascript:queryMap()"},
+		{ text: "p9", url: "javascript:corFundo()"},
+		{ text: "p10", url: "javascript:gradeCoord()"},
+		{ text: "p11", url: "javascript:template()"},
+		{ text: "p12", url: "javascript:autoredesenha()"}
+		]
+	},
+	/*
+	Variable: tempoAplicar
+	
+	Tempo em milisegundos que será esperado até que o mapa seja desenhado automaticamente.
+	
+	Utilizado no botão Aplicar, quando o usuário liga/desliga ou adiciona umtema
+	
+	Type:
+	{Numeric}
+	*/
+	tempoAplicar: 4000,
+	/*
+	Variable: tempoMouseParado
+	
+	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
+	
+	Controla o lapso de tempo utilizado para disparar as funções que ocorrem quando o mouse está parado sobre o mapa
+	
+	Type:
+	{Numeric}
+	*/
+	tempoMouseParado: 3500,
+	/*
+	Variable: iniciaJanelaMensagens
+	
+	Inicia o i3geo com a janela de mensagens aberta ou fechada.
+	
+	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
+
+	Type:
+	{Boolean}
+	*/
+	iniciaJanelaMensagens: true,
+	/*
+	Variable: mostraRosaDosVentos
+	
+	Mostra ou não a rosa dos ventos sob o mouse quando estiver parado.
+
+	Type:
+	{sim|nao}
+	*/	
+	mostraRosaDosVentos: "sim",
+	/*
+	Variable: liberaGuias
+	
+	Indica se as guias serão montadas em uma janela flutuante sobre o mapa
+	
+	Type:
+	{sim|nao}
+	*/
+	liberaGuias: "nao"
+	/*
+	Function: alteraVariavel
+	*/
+	/*
+	Function: adicionaVariavel
+	*/
+};
 //
-//verifica se $i existe, se não cria.
-//isso é necessário nos casos em que funcoes.js é utilizado separadamente
+//acerta algumas variáveis para efeitos de compatibilidade
 //
-try
-{
-	$i("i3geo");
+function i3GEOmantemCompatibilidade(){
+	try {
+		if (g_opcoesTemas == "nao")
+		{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
+	}
+	catch(e){};
+	if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona")){
+		if(!$i("arvoreAdicionaTema"))
+		{i3GEO.arvoreDeCamadas.IDHTML = objmapa.guiaMenu+"obj";}
+		else
+		{i3GEO.arvoreDeCamadas.IDHTML = "arvoreAdicionaTema";}				
+	}
+	try {
+		if (g_uploaddbf == "nao")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf = false;}
+	}
+	catch(e){};
+	try {
+		if (g_uploadlocal == "nao")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadlocal = false;}
+	}
+	catch(e){};
+	try {
+		if (g_downloadbase == "nao")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.downloadbase = false;}
+	}
+	catch(e){};
+	try {
+		if (g_conectarwms == "nao")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwms = false;}
+	}
+	catch(e){};
+	try {
+		if (g_conectargeorss == "nao")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss = false;}
+	}
+	catch(e){};
+	try {
+		if (g_nuvemTags == "nao")	
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags = false;}
+	}
+	catch(e){};
+	try {
+		if (g_kml == "nao")	
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml = false;}
+	}
+	catch(e){};
+	try {
+		if (g_qrcode == "nao")	
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode = false;}
+	}
+	catch(e){};
+	try{
+		if(g_tipoacao != "")
+		{i3GEO.barraDeBotoes.BOTAOPADRAO = g_tipoacao;}
+	}
+	catch(e){}			
+	try {
+		if (g_listaPropriedades)
+		{i3GEO.configura.listaDePropriedadesDoMapa = g_listaPropriedades;}
+	}
+	catch(e){};
+	try {
+		if (g_tempo_aplicar)
+		{i3GEO.configura.tempoAplicar = g_tempo_aplicar;}
+	}
+	catch(e){};
+	try {
+		if (g_janelaMen == "nao")
+		{i3GEO.configura.iniciaJanelaMensagens = false;}
+	}
+	catch(e){};
+	try {
+		if (g_locaplic)
+		{i3GEO.configura.locaplic = g_locaplic;}
+	}
+	catch(e){};
+	try {
+		if (g_tempotip)
+		{i3GEO.configura.tempoMouseParado = g_tempotip;}
+	}
+	catch(e){};
+	try {
+		if (g_mostraRosa)
+		{i3GEO.configura.mostraRosaDosVentos = g_mostraRosa;}
+	}
+	catch(e){};
+	try {
+		if (g_visual)
+		{i3GEO.configura.visual = g_visual;}
+	}
+	catch(e){};
+	try {
+		if (g_mapaRefDisplay)
+		{i3GEO.configura.mapaRefDisplay = g_mapaRefDisplay;}
+	}
+	catch(e){};
+	try {
+		if (g_docaguias)
+		{i3GEO.configura.liberaGUias = g_docaguias;}
+	}
+	catch(e){};
+	if (window.location.href.split("?")[1]){
+		g_sid = window.location.href.split("?")[1];
+		if (g_sid.split("#")[0])
+		{g_sid = g_sid.split("#")[0];}
+	}
+	else
+	{g_sid = "";}
+	i3GEO.configura.sid = g_sid;
+	try{
+		i3GEO.guias.ATUAL = g_guiaativa;
+	}
+	catch(e){}
+	try{
+		i3GEO.navega.autoRedesenho.INTERVALO = g_autoRedesenho;
+	}
+	catch(e){}
+	try{
+		i3GEO.eventos.NAVEGAMAPA = g_funcoesNavegaMapaDefault;
+	}
+	catch(e){}
+	try{
+		i3GEO.eventos.MOUSEMOVE = g_funcoesMousemoveMapaDefault;
+	}
+	catch(e){}
+	try{
+		i3GEO.eventos.MOUSECLIQUE = g_funcoesClickMapaDefault;
+	}
+	catch(e){}
 }
-catch(e)
+//
+//
+//
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+//
+//funcoes depreciadas
+//
+/*
+Function: iCookie (depreciado)
+
+Utilize i3GEO.util
+
+Cria um cookie.
+*/
+function iCookie(nome,valor)
 {
-	$i = function(i)
-	{return document.getElementById(i);};
+	i3GEO.util.insereCookie(nome,valor);
 }
 /*
-Function: trataErro
+Function: pCookie (depreciado)
 
-Fecha o objeto aguarde quando ocorre um erro.
+Utilize i3GEO.util.pegaCookie
 */
-function trataErro()
+function pCookie(nome)
 {
-	i3GEO.janela.fechaAguarde("ajaxdestaca");
-	i3GEO.janela.fechaAguarde("ajaxabrelente");
-	i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-	i3GEO.janela.fechaAguarde("ajaxredesenha");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
-	i3GEO.janela.fechaAguarde("ajaxLegenda");
-	i3GEO.janela.fechaAguarde("ajaxReferencia");
-	i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
-	i3GEO.janela.fechaAguarde("montaMapa");
-	i3GEO.janela.fechaAguarde("aguardedoc");
-	i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+	i3GEO.util.pegaCookie(nome);
 }
 /*
-Section: interface
+Function: trocalingua (depreciado)
+
+Utilize i3GEO.idioma.trocaIdioma
+*/
+function trocalingua(l)
+{
+	i3GEO.idioma.trocaIdioma(l);
+}
+/*
+Function: initJanelaMen (depreciado)
+*/
+function initJanelaMen()
+{i3GEO.ajuda.abreJanela();}
+/* 
+Function: pegalistademenus (depreciado)
+*/
+function pegalistademenus(retorno)
+{alert("Funcao pegalistademenus foi depreciado. Utilize i3GEO.arvoreDeTemas");}
+/*
+Function: wdocaf (depreciado)
+*/
+function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
+{var janela = i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto);}
+/*
+Function: redimwdocaf (depreciado)
+*/
+function redimwdocaf(w,h)
+{i3GEO.janela.alteraTamanho(w,h);}
+/*
+Function: wdocaf2 (depreciado)
+*/
+function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
+{
+	var id = YAHOO.util.Dom.generateId();
+	i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto,id,true);
+}
+/*
+Function: wdocafechaf (depreciado)
+*/
+function wdocafechaf(odoca)
+{alert("wdocafechaf foi depreciado");}
+/*
+Function: mostradicasf (depreciado)
+*/
+function mostradicasf(objeto,dica,hlpt)
+{i3GEO.ajuda.mostraJanela(dica);}	
+/*
+Function: mudaboxnf (depreciado)
+*/
+function mudaboxnf(tipo,obj,nomeFuncao)
+{
+	alert("mudaboxnf foi depreciado");
+}
+/*
+Function: inverteStatusClasse (depreciado)
 */
 /*
-Function: criaContainerRichdraw
+Function: procurartemas (depreciado)
 
-Cria os elementos 'dom' necessários ao uso das funções de desenho sobre o mapa.
-
-As ferramentas de cálculo de distâncias e áreas utilizam esse container.
-
-Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
-
-Essa abstração é necessária devido às diferenças entre os navegadores.
+Localiza um tema no menu de temas.
 */
-function criaContainerRichdraw()
+function procurartemas(texto)
+{}
+/*
+Function: expandeTema (depreciado)
+
+*/
+function expandeTema(itemID)
+{
+	//verifica se clicou para expandir a legenda
+	var tema = itemID.split("legenda");
+	if (tema.length == 2)
+	{
+		g_arvoreClick = itemID;
+		tema = tema[1];
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&template=legenda2.htm&tema="+tema+"&g_sid="+g_sid;
+		cpObj.call(p,"criaLegenda",expandeLegendaVer);
+	}
+}
+/*
+Function: expandeGrupo (depreciado)
+*/
+/*
+Function: processaGrupos (depreciado)
+*/
+/*
+Function: pegavalSistemas (depreciado)
+
+Adiciona uma árvore no menu de adição de temas, contendo os sistemas que podem ser executados.
+*/
+function pegavalSistemas(sis)
+{alert("Funcao pegavalSistemas foi depreciada - veja i3GEO.arvoreDeTemas");}
+/*
+Function: processevent1 (depreciado)
+
+Captura a posição do mouse tendo como referência o navegador.
+
+Atualiza o objeto objposicaomouse e movimenta as janelas docáveis.
+
+Recalcula a posição correta da imagem do mapa.
+
+Parameters:
+
+exy1 - objeto evento.
+*/
+function processevent1(exy1)
+{}
+/*
+Function: ativaDragDrop (depreciado)
+
+Ativa a funcionalidade de arrastar e soltar para alteração da ordem de desenho dos temas e para excluir um tema do mapa.
+*/
+/*
+Function: removeAcentos (depreciado)
+*/
+function removeAcentos(palavra)
+{
+	return(i3GEO.util.removeAcentos(palavra));
+}
+/*
+Function: ativaMensagemBanner (depreciado
+*/
+function ativaMensagemBanner()
+{alert("veja i3GEO.ajuda");}
+/*
+Function: mensagemBanner (depreciado)
+*/
+function mensagemBanner()
+{}
+/*
+Function: mensagemf (depreciado)
+
+Abre uma mensagem na tela em um DIV.
+
+A mensagem é incluída em um elemento HTML com id ="mensagem"
+
+Parameters:
+
+m - mensagem que será mostrada.
+*/
+function mensagemf(m)
 {
 	try
 	{
-		//
-		//cria o container para uso da função de desenho usando
-		//svg ou vml
-		//esse container é sobreposto exatamente sobre o mapa
-		//O id do containner é divGeometriasTemp
-		//
-		if (!$i("divGeometriasTemp"))
+		//insere o div para mensagens
+		if (!$i("mensagem"))
 		{
-			//
-			//pega a posição da imagem do mapa para posicionar corretamente o container
-			//
-			var pos = [0,0];
-			if($i("img"))
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-			//
-			//cria o container
-			//
 			var novoel = document.createElement("div");
-			novoel.id = "divGeometriasTemp";
-			var ne = novoel.style;
-			ne.cursor="crosshair";
-			ne.zIndex=0;
-			ne.position="absolute";
-			ne.width=objmapa.w;
-			ne.height=objmapa.h;
-			ne.border="1px solid black";
-			ne.display="none";
-			ne.top=pos[1];
-			ne.left=pos[0];
-			document.body.appendChild(novoel);
-		}
-		//
-		//como o container já poderia ter sido criado antes é necessário esvaziá-lo
-		//
-		var divgeo = $i("divGeometriasTemp");
-		divgeo.innerHTML = "";
-		var renderer;
-		//
-		//cria o objeto renderer conforme o browser em uso
-		//esse objeto será utilizado nas funções de desenho
-		//mais detalhes, veja em pacotes/richdraw
-		//Conforme a resposta do navegador, utiliza-se a criação VML ou SVG
-		//
-		try
-		{
-			renderer = new VMLRenderer();
-			richdraw = new RichDrawEditor(divgeo, renderer);
-		}
-		catch(e)
-		{
-			renderer = new SVGRenderer();
-			richdraw = new RichDrawEditor(divgeo, renderer);
-		}
-		//
-		//definição dos símbolos default para os elementos gráficos
-		//
-		richdraw.editCommand('fillcolor', 'red');
-		richdraw.editCommand('linecolor', 'gray');
-		richdraw.editCommand('linewidth', '1px');
-		richdraw.editCommand('mode', 'line');
-		divgeo.style.display="block";
-		//
-		//após o container ser criado, é necessário que as funções
-		//de clique sobre o mapa sejam ativadas
-		//para funcionarem sobre o container
-		//
-		ativaClicks(divgeo);
-		
-	}
-	catch(e){alert("Erro ao tentar criar container richdraw");}
-}
-/*
-Function: docaguias
-
-Coloca as guias de navegação em uma janela interna do mapa e altera o tamanho do mapa para ajustá-lo à nova situação.
-
-O conteúdo da nova janela é aquele que estiver dentro de um DIV com id= "contemFerramentas"
-*/
-function docaguias()
-{
-	if (!$i("conteudojanelaguias"))
-	{
-		if($i("guiasYUI")){$i("guiasYUI").style.display="none";}
-		if (!$i("contemFerramentas")){return;}
-		var novono = $i("contemFerramentas").innerHTML;
-		$i("contemFerramentas").innerHTML = "";
-		var wef = 0;
-		if ($i("encolheFerramentas"))
-		{wef = parseInt($i("encolheFerramentas").style.width);}
-		var w = parseInt($i("contemFerramentas").style.width) - wef;
-		$i("contemFerramentas").style.width="0px";
-		if ($i("visual"))
-		{$i("visual").style.width="0px";$i("visual").innerHTML="";}
-		var pos = "px";
-		var a = objmapa.h;
-		var l = objmapa.w + w;
-		objmapa.h = a;
-		objmapa.w = l;
-		if (navm){pos = "";}
-		$i("img").style.width= l+pos;
-		$i("img").style.height= a+pos;
-		$i("corpoMapa").style.width= l+pos;
-		$i("corpoMapa").style.height= a+pos;
-		$i("corpoMapa").style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')';
-		$i("mst").style.width = l + 1 + wef + pos;
-		$i("contemImg").style.height= a+pos;
-		$i("contemImg").style.width= l+pos;
-		// entorno
-		if (g_entorno == "sim")
-		{
-			var letras=["L","O"];
-			for (var l=0;l<2; l++)
-			{
-				if ($i("img"+letras[l]))
-				{
-					$i("img"+letras[l]).style.width = objmapa.w+pos;
-					$i("img"+letras[l]).style.height = objmapa.h+pos;
-					$i("corpoMapa"+letras[l]).style.width=objmapa.w+pos;
-					$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos+pos;
-					$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-				}
-			}
-			var letras=["N","S"];
-			for (var l=0;l<2; l++)
-			{
-				if ($i("img"+letras[l]))
-				{
-					$i("img"+letras[l]).style.width = objmapa.w * 2+pos;
-					$i("img"+letras[l]).style.height = objmapa.h * 2+pos;
-					$i("corpoMapa"+letras[l]).style.width=objmapa.w * 3+pos;
-					$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos;
-					$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
-				}
-			}
-		}
-		calcposf();
-		var temp = function()
-		{
-			//carrega janela
-			var novoel = document.createElement("div");
-			novoel.id = "janelaguias";
-			novoel.style.display="block";
-			var temp = '<div class="hd">Guias</div>';
-			temp += '<div class="bd" id="conteudojanelaguias"></div>';
-			novoel.innerHTML = temp;
+			novoel.id = 'mensagem';
+			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="70" value="" /> </td></tr> </table>';
 			if($i("i3geo"))
 			{$i("i3geo").appendChild(novoel);}
 			else
 			{document.body.appendChild(novoel);}
-			$i("conteudojanelaguias").innerHTML = novono;
-			YAHOO.namespace("janelaguias.xp");
-			YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"268px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-			YAHOO.janelaguias.xp.panel.render();
-			if($i(objmapa.guiaMenu+"obj"))
-			{
-				$i(objmapa.guiaMenu+"obj").innerHTML = "";
-			}
-			//ativaGuias();
-			if($i("listaTemas"))
-			{$i("listaTemas").innerHTML = "";}
-			if($i("listaPropriedades"))
-			{$i("listaPropriedades").innerHTML = "";objmapa.ativaListaPropriedades("listaPropriedades");}
-			remapaf();
-		};	
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaQS",temp);
+		}
+		if (m == null)
+		{$i("mensagem").style.visibility = "hidden";}
+		else
+		{
+			$i("mensagemt").value = m;
+			$i("mensagem").style.visibility = "visible";
+		}
+		var pos = pegaPosicaoObjeto($i("img"));
+		pos[1] = pos[1] + parseInt($i("img").style.height) - 22;
+		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = pos[0] + g_postpx');
+		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = pos[1] + g_postpx');
 	}
-	else
+	catch(e){alert("Impossivel criar mensagem."+e);}
+}
+/*
+Function: aguarde (depreciado)
+*/
+function aguarde()
+{
+	this.abre = function(aguardeId,texto)
 	{
-		YAHOO.janelaguias.xp.panel.render();
-		YAHOO.janelaguias.xp.panel.show();
+		i3GEO.janela.abreAguarde(aguardeId,texto);		
+	};
+	this.fecha = function(aguardeId)
+	{
+		i3GEO.janela.fechaAguarde(aguardeId);
+	};
+}
+/*
+Function: zoomiauto (depreciado)
+*/
+function zoomiauto()
+{i3GEO.navega.zoomin(g_locaplic,g_sid);}
+/*
+Function: zoomoauto (depreciado)
+*/
+function zoomoauto()
+{i3GEO.navega.zoomout(g_locaplic,g_sid);}
+/*
+Function: convdmsddf (depreciado)
+*/
+function convdmsddf(cd,cm,cs)
+{return (i3GEO.util.dsm2dd(cd,cm,cs));}
+/*
+Function: zoomPonto (depreciado)
+*/
+function zoomPonto()
+{alert("utilize i3GEO.navega.zoomponto");}
+/*
+Function: zoomIP (depreciado)
+*/
+function zoomIP()
+{alert("zoomIP foi depreciado. Utilize i3GEO.navega.zoomIP");}
+/*
+Function: zoomtot
+*/
+function zoomtot()
+{alert("zoomtot foi depreciado. Utilize i3GEO.navega.zoomExt");}
+/*
+Function: atualizaFarol (depreciado)
+*/
+/*
+Function: panFixo (depreciado)
+*/
+function panFixo(direcao,w,h,escala)
+{alert("panFixo foi depreciado. Utilize i3GEO.navega.panFixo");}
+/*
+Function: protocolo (depreciado)
+
+Utilize i3GEO.util
+*/
+function protocolo()
+{return(i3GEO.util.protocolo());}
+//Mantido aqui apenas para fins de compatibilidade
+function borra()
+{}
+/*
+Function: pegaPosicaoObjeto (depreciado)
+*/
+function pegaPosicaoObjeto(obj)
+{return(i3GEO.util.pegaPosicaoObjeto(obj));}
+/*
+Function: i3geo_pegaElementoPai (depreciado)
+*/
+function i3geo_pegaElementoPai(e)
+{return(i3GEO.util.pegaElementoPai(e));}
+/*
+Function: convddtela (depreciado)
+*/
+function convddtela(vx,vy,docmapa)
+{return(i3GEO.util.dd2tela(vx,vy,docmapa,objmapa.extent,objmapa.cellsize));}
+/*
+Function: convdmsf (depreciado)
+*/
+function convdmsf(x,y)
+{return(i3GEO.calculo.dd2dms(x,y));}
+/*
+Function: calcddf (depreciado)
+*/
+function calcddf(xfign,yfign,g_celula,imgext)
+{return(i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext));}
+/*
+Function: movecursor (depreciado)
+
+Move o ícone que segue o mouse quando da movimentação sobre o mapa
+*/
+function movecursor()
+{
+	//
+	//se a interface openlayers ou flamingo estiver sendo usada, o ícone não é mostrado
+	//'obj' é o elemento que guarda o ícone que segue o mouse
+	//
+	if ($i("obj"))
+	{
+		if ($i("openlayers") || $i("flamingo"))
+		{$i("obj").style.display = "none";}
+		else
+		{
+			var obje = $i("obj").style;
+			if ($i("img"))
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 9 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 9 + g_postpx");
+			}
+			else
+			{
+				eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
+				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+			}
+		}
+	}
+	if($i("box1"))
+	{
+		var bx = $i("box1");
+		if (bx.style.visibility != "visible")
+		{
+			//move o box para a posição correta
+			bx.style.left = objposicaocursor.telax + g_postpx;
+			bx.style.top = objposicaocursor.telay + g_postpx;
+		}
 	}
 }
 /*
-Function: ativaGuias
+Variable: g_janelaMen (depreciado)
+*/
+/*
+Variable: g_downloadbase (depreciado)
 
-Ativa as guias principais do mapa, definindo as funções que serão executadas quando a guia é escolhida.
+Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
+*/
+/*
+Variable: g_conectargeorss (depreciado)
 
-Quando o usuário clica em uma guia, todas as guias são escondidas e a guia clicada é ativada.
+Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
+*/
+/*
+Variable: g_nuvemTags (depreciado)
 
-Algumas guias só são preenchidas quando o usuário clicar nelas pela primeira vez.
+Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
+*/
+/*
+Variable: g_uploadlocal (depreciado)
 
-O preenchimento sob demanda dessas guias torna necessário a definição da função que será executada quando o clique ocorrer.
+Define se na árvore de adição de temas, será mostrada a opção de upload.
+*/
+/*
+Variable: g_uploaddbf (depreciado)
 
-Essas funções são definidas por default nas guias principais.
+Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
+*/
+/*
+Variable: g_conectarwms (depreciado)
 
-As guias principais são definidas nos objetos
+Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
+*/
+/*
+Variable: g_funcoesMouseParado (depreciado)
+*/
+/*
+Variable: g_tempotip (depreciado)
+*/
+/*
+Variable: g_mostraRosa (depreciado)
+*/
 
-objmapa.guiaTemas
+/*
+Function: pegaCoordenadaUTM (depreciado)
+*/
+function pegaCoordenadaUTM()
+{i3GEO.gadgets.mostraCoordenadasUTM(g_locaplic,"mostraUTM");}
+/*
+Function: ativaLocalizarxy (depreciado)
+*/	
+function ativaLocalizarxy(iddiv)
+{i3GEO.gadgets.mostraCoordenadasGEO(iddiv);}
+/*
+Function: ativaEscalaNumerica (depreciado)
+*/	
+function ativaEscalaNumerica(iddiv)
+{i3GEO.gadgets.mostraEscalaNumerica(iddiv);}
+/*
+Function: ativaBuscaRapida (depreciado)
+*/	
+function ativaBuscaRapida(iddiv)
+{i3GEO.gadgets.mostraBuscaRapida(iddiv);}
+/*
+Function: buscaRapida (depreciado)
+*/
+function buscaRapida()
+{i3geo_buscarapida()}
+/*
+Function: criaboxg (depreciado)
+*/
+function criaboxg()
+{
+	i3GEO.util.criaBox();
+	i3GEO.util.criaPin();
+}
+/*
+Function: initJanelaZoom (depreciado)
+*/
+function initJanelaZoom(qual)
+{alert("initJanelaZoom foi depreciado. Utilize i3GEO.barraDeBotoes");}
+/*
+Function: sobeferramentas(depreciado)
+*/
+function sobeferramentas()
+{}
+/*
+Function: desceferramentas (depreciado)
+*/
+function desceferramentas()
+{}
+/*
+Function: mostraRosaDosVentos (depreciado)
+*/
+function mostraRosaDosVentos()
+{i3GEO.navega.mostraRosaDosVentos();}
+/*
+Function: mudaVisual (depreciado)
+*/
+function mudaVisual(visual)
+{i3GEO.gadgets.visual.troca(visual);}
+/*
+Function: visual (depreciado)
+*/
+function visual(iddiv)
+{i3GEO.gadgets.visual.inicia(iddiv);}
+/*
+Function: arvoreclick (depreciado)
 
-objmapa.guiaMenu
+Marca o checkbox de adição de temas
 
-objmapa.guiaLegenda
+Parameters:
 
-objmapa.guiaListaMapas
+itemID - ID que identifica qual tema foi clicado. O ID é definido no arquivo .map e no arquivo menutemas/menutemas.xml
+*/
+function arvoreclick(itemID)
+{
+	if (itemID.search("tema") == 0)
+	{
+		if ($i(itemID).checked == true)
+		{$i(itemID).checked = false;}
+		else
+		{$i(itemID).checked = true;}
+	}
+}
+/*
+Function: pegaTema (depreciado)
 
+Pega o tema de um no na guia de temas.
+
+Utilizado nas opções que operam sobre um tema específico.
+
+Parameters:
+
+celula - objeto que foi clicado
+
+Returns:
+
+Id do tema.
+*/
+function pegaTema(celula)
+{
+	var nos = celula.parentNode.childNodes;
+	var tempi = nos.length;
+	for (var no=0;no<tempi; no++){if (nos[no].type == "checkbox"){return nos[no].value;}}
+}
+/*
+Function: gerafilmef (depreciado)
+*/
+function gerafilmef(qs)
+{}
+/*
+Function: gravaQuadro (depreciado)
+*/
+function gravaQuadro(variavel,valor)
+{i3GEO.gadgets.quadros.grava(variavel,valor);}
+/*
+Function: avancaQuadro (depreciado)
+*/
+function avancaQuadro()
+{i3GEO.gadgets.quadros.avanca();}
+/*
+Function: zoomAnterior (depreciado)
+*/
+function zoomAnterior(){
+}
+/*
+Function: zoomProximo (depreciado)
+
+*/
+function zoomProximo(){
+}
+/*
+Function: opcoesQuadros (depreciado)
+*/
+function opcoesQuadros()
+{}
+/*
+Function: filmef
+*/
+function filmef(o)
+{}
+/*
+Function: rebobinaf (depreciado)
+*/
+function rebobinaf()
+{}
+/*
+Function: filmezf (depreciado)
+*/
+function filmezf(o)
+{}
+/*
+Function: quadrofilme (depreciado)
+*/
+function quadrofilme()
+{}
+/*
+Function: filmeanimaf (depreciado)
+*/
+function filmeanimaf()
+{}
+/*
+Function: filmeanimarodaf (depreciado)
+*/
+function filmeanimarodaf(janima)
+{}
+/*
+Function: pegaimagens (depreciado)
+*/
+function pegaimagens()
+{}
+/*
+Function calculaArea (depreciado)
+*/
+function calculaArea(pontos,pixel)
+{return (i3GEO.calculo.area(pontos,pixel));}
+/*
+Function: calculadistancia (depreciado)
+*/
+function calculadistancia(lga,lta,lgb,ltb) //0ms
+{return (i3GEO.calculo.distancia(lga,lta,lgb,ltb));}
+/*
+Function: initJanelaRef (depreciado)
+*/
+function initJanelaRef()
+{i3GEO.maparef.inicia();}
+/*
+Variable: g_mapaRefDisplay (depreciado)
+*/
+/*
+Function: atualizaReferencia (depreciado)
+*/
+/*
+Function: ajaxReferencia (depreciado)
+*/
+function ajaxReferencia(retorno)
+{i3GEO.maparef.processaImagem(retorno)}
+/*
+Function: clicouRef (depreciado)
+
+Altera a abrangência do mapa quando o mapa de referência é clicado
+*/
+function clicouRef()
+{}
+/*
+Function: movimentoRef (depreciado)
+
+Pega a coordenada do cursor sobre o mapa de referência
+*/
+function movimentoRef(obj)
+{}
+/*
+Function: mostraTip (depreciado)
+
+Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
+
+Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
+
+Parameters:
+
+retorno - retorno da função ajax com os dados para montar a etiqueta.
+*/
+function mostraTip(retorno)
+{
+	//insere div para tips
+	if (!$i("tip")){
+		var novoel = document.createElement("div");
+		novoel.id = "tip";
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		document.body.appendChild(novoel);
+	}
+	var i = $i("i3geo_rosa");
+	if(i)
+	i.style.display="none";
+	var mostra = false;
+	var retorno = retorno.data;
+	if ((retorno != "erro") && (retorno != undefined))
+	{
+		if ($i("img"))
+		{$i("img").title = "";}
+		if (retorno != "")
+		{
+			var res = "<div id='cabecatip' style='text-align:left;background-color:rgb(240,240,240)'><span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.parado=\"cancela\"'>parar&nbsp;&nbsp;</span>";
+			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
+			var temas = retorno.split("!");
+			var tema = temas.length-1;
+			if(tema >= 0)
+			{
+				do
+				{
+					var titulo = temas[tema].split("@");
+					if (g_tipotip == "completo")
+					{
+						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
+					}
+					var ocorrencias = titulo[1].split("*");
+					var ocorrencia = ocorrencias.length-1;
+					if(ocorrencia >= 0)
+					{
+						do
+						{
+							if (ocorrencias[ocorrencia] != "")
+							{
+								var pares = ocorrencias[ocorrencia].split("##");
+								var paresi = pares.length;
+								for (var par=0;par<paresi; par++)
+								{
+									var valores = pares[par].split("#");
+									if (g_tipotip == "completo")
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+										var mostra = true;
+									}
+									else
+									{
+										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+										var mostra = true;
+									}
+								}
+							}
+						}
+						while(ocorrencia--)
+					}
+				}
+				while(tema--)
+			}
+			if(!mostra){$i("tip").style.display="none";return;}
+			if ($i("janelaMen"))
+			{$i("janelaMenTexto").innerHTML = res;}
+			else
+			{
+				var i = $i("tip");
+				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
+				ist = i.style;
+				ist.top = objposicaocursor.telay - 10;
+				ist.left = objposicaocursor.telax - 20;
+				ist.display="block";
+			}
+		}
+	}
+}
+/*
+Function: trataErro (depreciado)
+*/
+function trataErro()
+{i3GEO.janelas.fechaAguarde();}
+/*
+Function: mostraguiaf (depreciado)
+*/
+function mostraguiaf(guia)
+{
+	if ($i("guia"+guia))
+	{
+		var fs=[1,2,3,4,5,6,7,8,9,10,11,12];
+		for (var j=0;j<10; j++)
+		{
+			if ($i("guia"+fs[j]))
+			{
+				jj = fs[j];
+				if ($i("guia"+jj+"obj"))
+				{$i("guia"+jj+"obj").style.display="none";}
+				$i("guia"+fs[j]).parentNode.parentNode.style.background="transparent";
+			}
+		}
+		if ($i("guia"+guia+"obj"))
+		{
+			$i("guia"+guia+"obj").style.display="block";
+		}
+		else
+		{alert("O objeto guia"+guia+"obj nao existe.");}
+		$i("guia"+guia).parentNode.parentNode.style.background="white";
+	}
+}
+/*
+Function: ativaGuias (depreciado)
 */
 function ativaGuias()
 {
@@ -41429,1469 +43277,48 @@ function ativaGuias()
 	}
 	YAHOO.log("Fim ativaGuias", "i3geo");
 }
-/**
-Function: mudaiconf
-
-Muda as bordas dos ícones de ferramentas, passando todos para normal.
-Aplica uma borda sobre um ícone específico e executa outras operações.
-
-Utilizado para indicar que uma determinada opção está em uso.
-
-Como esta função é executada quando um ícone é clicado, algumas operações são definidas aqui
-como por exemplo, definir o ícone que segue o mouse. 
-
-Parameters:
-
-i - id do ícone que receberá a borda.
-*/
-function mudaiconf(i)
-{
-	try
-	{
-		YAHOO.log("mudaiconf", "i3geo");
-		//limpa o container com os tips fixos na tela
-		if(objmapa.objtips.length > 0)
-		{
-			var ot = objmapa.objtips.length-1;
-			if(ot >= 0)
-			{
-				do
-				{
-					if (objmapa.objtips[ot])
-					{
-						objmapa.objtips[ot].innerHTML = "";
-						objmapa.objtips[ot].style.display="none";
-					}
-				}
-				while(ot--)
-			}
-		}
-		objmapa.objtips = new Array();
-		limpacontainerf();
-		g_tipoacao = i;
-		if ($i("divGeometriasTemp"))
-		{$i("divGeometriasTemp").style.display = "none";}
-		YAHOO.log("Fim mudaiconf", "i3geo");
-	}
-	catch(e){alert("Ocorreu um erro. mudaiconf"+e);}
-}
 /*
-Function: mostraguiaf
-
-Ativa a visualização de uma determinada guia.
-
-A ativação consiste em tornar visível os elementos correspondentes a uma determinada guia.
-Esses elementos devem estar contidos em um DIV cujo id deve ser composto pela palavra "guia" seguida do número da
-guia e a palavra "obj", por exemplo, guia9obj.
-
-Parâmetros:
-
-guia - número da guia que será ativada.
-*/
-function mostraguiaf(guia)
-{
-	if ($i("guia"+guia))
-	{
-		var fs=[1,2,3,4,5,6,7,8,9,10,11,12];
-		for (var j=0;j<10; j++)
-		{
-			if ($i("guia"+fs[j]))
-			{
-				jj = fs[j];
-				if ($i("guia"+jj+"obj"))
-				{$i("guia"+jj+"obj").style.display="none";}
-				$i("guia"+fs[j]).parentNode.parentNode.style.background="transparent";
-			}
-		}
-		if ($i("guia"+guia+"obj"))
-		{
-			$i("guia"+guia+"obj").style.display="block";
-		}
-		else
-		{alert("O objeto guia"+guia+"obj nao existe.");}
-		$i("guia"+guia).parentNode.parentNode.style.background="white";
-	}
-}
-/**
-Function: ativaClicks
-
-Ativa as operações de clique sobre o mapa
-
-Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
-
-Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja configura.js)
-
-Parameters:
-
-docMapa - objeto que será alvo da ativação dos cliques
-*/
-function ativaClicks(docMapa)
-{
-	docMapa.onmouseover = function()
-	{
-		try
-		{
-			if ($i("janelaMenu"))
-			{$i("janelaMenu").style.display="none";}
-			//verifica se o mouse esta parado
-			if (objmapa.parado!="cancela")
-			{
-				objmapa.parado="nao";
-			}
-			if ($i("tip"))
-			{$i("tip").style.display="none";}
-			var n = objmapa.objtips.length;
-			for(i=0;i<n;i++){
-				var o = $i(objmapa.objtips[i]);
-				if(o){
-					o.style.display="none";
-					o.innerHTML = "";
-				}
-			}
-		}
-		catch(e){var e = "";}
-		this.onmousemove=function(exy)
-		{
-			try
-			{
-				if ($i("mostraUTM")){$i("mostraUTM").style.display="none";}
-				if ($i("tip"))
-				{$i("tip").style.display="none";}
-				try
-				{clearTimeout(objmapa.tempoParado);}
-				catch(e){var a = e;}
-				objmapa.tempoParado = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
-				capturaposicao(exy);
-				if (g_destaca != "")
-				{$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
-				if ($i("img") && (g_panM == "sim"))
-				{
-					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
-					var ny = objposicaocursor.telay - topinicial - clicinicialy;
-					if (g_entorno == "nao")
-					{
-						var l = 0;
-						if (parseInt($i("i3geo").style.left))
-						{var l = parseInt($i("i3geo").style.left);}
-						$i("img").style.left = nx - l;
-						var t = 0;
-						if (parseInt($i("i3geo").style.top))
-						{var t = parseInt($i("i3geo").style.top);}
-						$i("img").style.top = ny - t;
-					}
-					else
-					{
-						$left("img",objmapa.w*-1 + nx);
-						$left("imgS",objmapa.w*-1 + nx);
-						$left("imgL",objmapa.w + nx);
-						$left("imgO",objmapa.w*-3 + nx);
-						$left("imgN",objmapa.w*-1 + nx);
-						$top("img",objmapa.h*-1 + ny);
-						$top("imgS",objmapa.h*-1 + ny);
-						$top("imgL",objmapa.h*-1 + ny);
-						$top("imgN",objmapa.h*-1 + ny);
-						$top("imgO",objmapa.h*-1 + ny);
-					}
-				}
-			}
-			catch(e){var e = "";}
-			try
-			{objmapa.verificaMousemoveMapa();}
-			catch(e){var e = "";}
-		};
-	};
-	docMapa.onmouseout = function()
-	{
-		try
-		{
-			objmapa.parado="parar";
-			mostradicasf(this,'');
-		}
-		catch(e){var e = "";}
-	};
-	docMapa.onmousedown = function(exy)
-	{
-		try
-		{
-			capturaposicao(exy);
-			//verifica se esta na opÃ¯Â¿Â½o de zoom box
-			if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
-			{
-				// inicia retÃ¯Â¿Â½gulo de zoom
-				if($i("box1"))
-				{
-					var i = $i("box1").style;
-					i.width=0;
-					i.height=0;
-					i.visibility="visible";
-					i.display="none";
-					i.left = objposicaocursor.telax + g_postpx;
-					i.top = objposicaocursor.telay + g_postpx;
-				}
-				boxxini = objposicaocursor.telax;
-				boxyini = objposicaocursor.telay;
-				tamanhox = 0;
-				tamanhoy = 0;
-			}
-			if ($i("img") && (g_tipoacao == "pan"))
-			{
-				g_panM = "sim";
-				if($i("corpoMapa"))
-				{
-					leftinicial = parseInt($i("corpoMapa").style.left);
-					topinicial = parseInt($i("corpoMapa").style.top);
-				}
-				clicinicialx = objposicaocursor.imgx;
-				clicinicialy = objposicaocursor.imgy;
-				ddinicialx = objposicaocursor.ddx;
-				ddinicialy = objposicaocursor.ddy;
-			}
-		}
-		catch(e){var e = "";}
-	};
-	docMapa.onclick = function()
-	{
-		try
-		{
-			objmapa.verificaClickMapa();
-		}
-		catch(e){var e = "";}
-	};
-	docMapa.onmouseup = function()
-	{
-		try
-		{
-			if (g_tipoacao == "zoomli"){zoomboxf("termina");}
-			if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
-			//
-			//realiza o pan (deslocamento) do mapa em função de dois pontos
-			//
-			if ($i("img") && (g_tipoacao == "pan"))
-			{
-				marcadorZoom = "";
-				g_panM = "nao";
-				var disty = (ddinicialy * -1) + objposicaocursor.ddy; //teladd[1]
-				var distx = (ddinicialx * -1) + objposicaocursor.ddx; //teladd[0]
-				var ex = objmapa.extent;
-				var ex = ex.split(" ");
-				var novoxi = (ex[0] * 1) - distx;
-				var novoxf = (ex[2] * 1) - distx;
-				var novoyi = (ex[1] * 1) - disty;
-				var novoyf = (ex[3] * 1) - disty;	
-				if ((distx == 0)||(disty == 0))
-				{
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+objposicaocursor.imgx+"&y="+objposicaocursor.imgy+"&g_sid="+i3GEO.configura.sid;
-					cpObj.call(p,"pan",ajaxredesenha);
-					return;
-				}
-				var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,nex);
-			}
-		}
-		catch(e){var e = "";}
-	};
-}
-/*
-Function: movelentef
-
-Move a imagem na lente de aumento conforme o movimento do mouse sobre o mapa.
-
-A lente de aumento é uma ferramenta do i3geo.
-
-Esta função é executada sempre que o mouse é movido sobre o mapa e se o elemento "lente" estiver visível.
-*/
-function movelentef()
-{
-	try
-	{
-		if ($i("lente"))
-		{
-			if ($i("lente").style.visibility=="visible")
-			{
-				var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-				var esq = (objposicaocursor.telax - pos[0]) * 2.25;
-				var topo = (objposicaocursor.telay - pos[1]) * 2.25;
-				var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
-				var i = $i("lente").style;
-				i.clip = clipt;
-				eval("i." + g_tipotop + "= (pos[1] - (topo - 40)) + g_postpx");
-				eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
-			}
-		}
-	}
-	catch(e){var e = "";}
-}
-
-/*
-Function: zoomboxf
-
-Faz o zoom no mapa utilizando a opção de desenhar um retângulo.
-
-As coordenadas de tela devem estar no objeto "objposicaocursor".
-A opção "desloca" altera a posição do box (box1) na tela. A opção "termina", pega as coordenadas
-de tela do box1 e chama a função ajax que redesenha o mapa.
-
-Parameters:
-
-tipo - desloca|termina
-*/
-function zoomboxf(tipo)
-{
-	var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-	if($i("box1"))
-	{
-		var bx = $i("box1");
-		var bxs = bx.style;
-	}
-	else
-	{alert("Box nao encontrado");return;}
-	switch(tipo)
-	{
-		case "desloca":
-		// muda o retï¿½gulo de zoom conforme deslocamento do mouse
-		bxs.display="block";
-		ppx = objposicaocursor.telax;
-		py = objposicaocursor.telay;
-		if (navm)
-		{
-			if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
-			{bxs.width = ppx - boxxini - 2;}
-			if ((py > boxyini) && ((py - boxyini - 2) > 0))
-			{
-				bxs.height = py - boxyini - 2;
-			}
-			if (ppx < boxxini)
-			{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
-			if (py < boxyini)
-			{bxs.top = py;bxs.height = boxyini - py + 2;}
-		}
-		else
-		{
-			if (ppx > boxxini)
-			{bxs.width = ppx - boxxini + "px";}
-			if (py > boxyini)
-			{bxs.height = py - boxyini + "px";}
-			if (ppx < boxxini)
-			{bxs.left = ppx + "px";bxs.width = boxxini - ppx + "px";}
-			if (py < boxyini)
-			{bxs.top = py + "px";bxs.height = boxyini - py + "px";}
-		}
-		break;
-		case "termina":
-		// finaliza o retï¿½gulo de zoom
-		md = 1;
-		eval ('pix = parseInt(document.getElementById("box1").style.' + g_tipoleft + ")");
-		eval ('piy = parseInt(document.getElementById("box1").style.' + g_tipotop + ")");
-		xfig0 = parseInt(bxs.width) - pos[0];
-		yfig0 = parseInt(bxs.height) - pos[1];
-		xfig = pix + (parseInt(bxs.width)) - pos[0];
-		yfig = piy + (parseInt(bxs.height)) - pos[1];
-		amext = objmapa.extent.split(" ");
-		dx = ((amext[0] * -1) - (amext[2] * -1)) / (tamanhox - 1);
-		dy = ((amext[1] * 1) - (amext[3] * 1)) / (tamanhoy - 1);
-		if (dy < 0) dy=dy * -1;
-		nx = g_celula * xfig;
-		ny = g_celula * yfig;
-		x1 = (amext[0] * 1) + nx;
-		y1 = (amext[3] * 1) - ny;
-		xfig = pix - pos[0];
-		yfig = piy - pos[1];
-		if (dy < 0) dy=dy * -1;
-		nx = g_celula * xfig;
-		ny = g_celula * yfig;
-		x2 = (amext[0] * 1) + nx;
-		y2 = (amext[3] * 1) - ny;
-		v = x2+" "+y2+" "+x1+" "+y1;
-		// se o retangulo for negativo pula essa parte para nï¿½ gerar erro
-		if (g_tipoacao != "selecaobox")
-		{
-			if (x1 != x2)
-			{
-				objmapa.extent=v;
-				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,v);
-			}
-		}
-		else
-		{
-			if (x1 != x2)
-			{
-				try
-				{
-					var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-					var tipo = "adiciona";
-					//pega o tipo de operacao da janela de selecao
-					if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
-					if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-					//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-					if ((tipo != "limpa") && (tipo != "inverte"))
-					{
-						i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-						var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
-						cpObj.call(p,"selecaobox",ajaxredesenha);
-					}
-				}
-				catch(e){var e = "";}
-			}
-		}		
-		bxs.visibility="hidden";
-		bxs.width = 0;
-		bxs.height = 0;
-		break;
-	}
-}
-
-/*
-Function: ativaEntorno
-
-Ativa ou desativa a carga do entorno.
-
-Com o entorno ativo, são produzidas imagens no entorno do mapa, no estilo Google.
-*/
-function ativaEntorno()
-{
-	if(objmapa.mapfile == "")
-	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-	if (g_entorno == "sim")
-	{
-		var letras=["L","O","N","S"];
-		for (var l=0;l<4; l++)
-		{
-			if ($i("img"+letras[l]))
-			{
-				$i("img"+letras[l]).style.display = "none";
-				$i("img"+letras[l]).src = "";
-			}
-		}
-		$left("img",0);
-		$top("img",0);
-		g_entorno = "nao";
-		alert("Entorno desativado");
-		$i("img").style.visibility = "visible";
-		$i("img").style.display = "block";
-	}
-	else
-	{
-		geraURLentorno();
-		var letras=["L","O","N","S"];
-		for (var l=0;l<4; l++)
-		{
-			if ($i("img"+letras[l]))
-			{
-				$i("img"+letras[l]).style.width = objmapa.w;
-				$i("img"+letras[l]).style.height = objmapa.h;
-				$i("img"+letras[l]).style.display = "block";
-			}
-		}
-		g_entorno = "sim";
-		ajustaEntorno();
-		alert("Entorno ativado. o desenho do mapa pode demorar mais.");
-	}
-}
-/*
-Function: geraURLentorno
-
-Gera as urls que farão parte dos divs de desenho do entorno do mapa.
-Essas URLs utilizam o mapserver no modo CGI
-*/
-function geraURLentorno()
-{
-	var nny = (objmapa.h / 2) * -1;
-	var nnx = objmapa.w / 2;
-	var sy = objmapa.h + (objmapa.h / 2);
-	var sx = objmapa.w / 2;
-	var lx = objmapa.w + (objmapa.w / 2);
-	var ly = objmapa.h / 2;
-	var ox = (parseInt(objmapa.w/2)) * -1;
-	var oy = objmapa.h / 2;
-	var u = window.location.protocol+"\/\/"+window.location.host+objmapa.cgi+"?map="+objmapa.mapfile;
-	u += "&mode=map&imgext="+objmapa.extent+"&mapsize="+nnx+" "+oy;
-	var sul = u+"&imgxy="+sx/2+" "+sy/2;
-	var norte = u+"&imgxy="+nnx/2+" "+nny/2;
-	var leste = u+"&imgxy="+lx/2+" "+ly/2;
-	var oeste = u+"&imgxy="+ox/2+" "+oy/2;
-	$i("imgS").src=sul;
-	$i("imgN").src=norte;
-	$i("imgL").src=leste;
-	$i("imgO").src=oeste;
-}
-/*
-Function: ajustaEntorno
-
-Ajusta o tamanho do mapa e das imagens do entorno, quando a opção de desenho do entorno estiver ativa.
-
-Os valores que definem o tamanho do mapa são obtidos do objeto objmapa (métodos w e h)
-*/
-function ajustaEntorno()
-{
-	$left("img",objmapa.w*-1);
-	$left("imgS",objmapa.w*-1);
-	$left("imgL",objmapa.w);
-	$left("imgO",objmapa.w*-3);
-	$left("imgN",objmapa.w*-1);
-	$top("img",objmapa.h*-1);
-	$top("imgS",objmapa.h*-1);
-	$top("imgL",objmapa.h*-1);
-	$top("imgN",objmapa.h*-1);
-	$top("imgO",objmapa.h*-1);
-}
-/*
-Section: legenda
-*/
-/*
-Function: legendaGrafico
-
-Mostra a legenda dos gráficos adicionados no mapa.
-
-Chamado pela ferramenta de inclusão de gráficos
-
-Parâmetros:
-
-par - string com os parâmetros item*r,g,b*item....
-*/
-function legendaGrafico(par)
-{
-	try
-	{
-		var temp = par.split("*");
-		var par = "<table>";
+		//
+		//altera o tamanho das guias
+		//
+		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
 		var i = temp.length-1;
-		if(i >= 0)
-		{
-			do
-			{
-				var t = temp[i];
-				var t = t.split(",");
-				par += "<tr style='text-align:left'><td style='background-color:rgb("+t[1]+","+t[2]+","+t[3]+")'>&nbsp;&nbsp;</td><td style='text-align:left'>"+t[0]+"</td></tr>";
-			}
-			while(i--)
-		}
-		par += "</table>";
-		if (!$i("legendagr"))
-		{
-			var novoel = document.createElement("div");
-			var temp = '<div class="hd">Legenda</div>';
-			temp += '<div class="bd">';
-			temp += '<div id="contemleggr" ></div></div>';
-			novoel.id = "legendagr";
-			novoel.style.display="block";
-			novoel.style.textAlign="left";
-			novoel.innerHTML = temp;
-			document.body.appendChild(novoel);
-			YAHOO.namespace("legendagr.xp");
-			YAHOO.legendagr.xp.panel = new YAHOO.widget.Panel("legendagr", {width:"250px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-		}
-		$i("contemleggr").innerHTML = par;
-		YAHOO.legendagr.xp.panel.render();
-		YAHOO.legendagr.xp.panel.show();
-	}
-	catch(e){alert("Ocorreu um erro. legendaGrafico"+e);}
-}
-/*
-Section: sistemas de busca e navegação
-*/
-/*
-Function: atualizagoogle
-
-Atualiza o box do google se a função google estiver ativa
-*/
-function atualizagoogle()
-{
-	YAHOO.log("atualizagoogle", "i3geo");
-	if (frames["wdocai"])
-	{
-		if (navn)
-		{
-			if ($i("wdocai"))
-			{var doc = $i("wdocai").contentDocument;}
-		}
-		else
-		{
-			if(document.frames("wdocai"))
-			{var doc = document.frames("wdocai").document;}
-		}
-		if(doc)
-		{
-			if (doc.getElementById("map"))
-			{
-				if(window.parent.frames["wdocai"].panTogoogle)
-				{window.parent.frames["wdocai"].panTogoogle();}
-			}
-		}
-	}
-	YAHOO.log("Fim atualizagoogle", "i3geo");
-}
-/*
-Function: atualizascielo
-
-Atualiza a lista de dados na opção de busca Scielo
-*/
-function atualizascielo()
-{
-	YAHOO.log("atualizascielo", "i3geo");
-	if ($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoscielo"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizascielo", "i3geo");
-}	
-/*
-Function: atualizaconfluence
-
-Atualiza a lista de dados na opção de busca confluence
-*/
-function atualizaconfluence()
-{
-	YAHOO.log("atualizaconfluence", "i3geo");
-	if($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadoconfluence"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizaconfluence", "i3geo");
-}
-/*
-Function: atualizawiki
-
-Atualiza a lista de dados na opção de busca wiki
-*/
-function atualizawiki()
-{
-	YAHOO.log("atualizawiki", "i3geo");
-	if ($i("wdocai"))
-	{
-		if (window.parent.frames["wdocai"])
-		{
-			var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if (docel.getElementById("resultadowiki"))
-			{
-				$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";
-			}
-		}
-	}
-	YAHOO.log("Fim atualizawiki", "i3geo");
-}
-/*
-Section: menu de temas e outras listagens
-*/
-/*
-Function: i3geo_comboGruposMenu
-
-Busca a lista de grupos existentes no menu de temas do i3geo e monta um combo com o resultado.
-
-Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do grupo.
-
-Parameters:
-
-funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
-
-idDestino - id do elemento HTML que receberá o combo
-
-idCombo - id do combo que será criado
-
-largura - largura em pixels do combo
-
-altura - altura do combo em linhas
-*/
-function i3geo_comboGruposMenu(funcaoOnchange,idDestino,idCombo,largura,altura)
-{
-	var combo = function (retorno)
-	{
-		obGrupos = retorno.data;
-		var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
-		for (ig=0;ig<obGrupos.grupos.length; ig++)
-		{
-			if(obGrupos.grupos[ig].nome)
-			ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>";
-		}
-		$i(idDestino).innerHTML = ins+"</select>";
-	};
-	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''&listasgrupos=nao";
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegalistadegrupos",combo);
-}
-/*
-Function: i3geo_comboSubGruposMenu
-
-Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
-
-Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
-
-Parameters:
-
-funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
-
-idDestino - id do elemento HTML que receberá o combo
-
-idCombo - id do combo que será criado
-
-idGrupo - identificador do grupo que será pesquisado
-
-largura - largura em pixels do combo
-
-altura - altura do combo em linhas
-*/
-function i3geo_comboSubGruposMenu(funcaoOnchange,idDestino,idCombo,idGrupo,largura,altura)
-{
-	if(idGrupo != "")
-	{
-		var combo = function(retorno)
-		{
-			var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
-			if (retorno.data.subgrupo)
-			{
-				var sg = retorno.data.subgrupo;
-				for (ig=0;ig<sg.length; ig++)
-				{	
-					ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
-				}
-			}
-			$i(idDestino).innerHTML = ins+"</select>";
-		};
-		var p = "classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadeSubgrupos",combo);
-	}
-}
-/*
-Function: i3geo_comboTemasMenu
-
-Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
-
-Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
-
-Parameters:
-
-funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
-
-idDestino - id do elemento HTML que receberá o combo
-
-idCombo - id do combo que será criado
-
-idGrupo - identificador do grupo que será pesquisado
-
-idSubGrupo - id do subgrupo
-
-largura - largura em pixels do combo
-
-altura - altura do combo em linhas
-*/
-function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura)
-{
-	var combo = function(retorno)
-	{
-		var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";
-		if (retorno.data.temas[i])
-		{
-			var sg = retorno.data.temas;
-			for (ig=0;ig<sg.length; ig++)
-			{	
-				ins += "<option value="+sg[ig].tid+" >"+sg[ig].nome+"</option>";
-			}
-		}
-		$i(idDestino).innerHTML = ins+"</select>";
-	};
-	var p = "classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+idGrupo+"&subgrupo="+idSubGrupo;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"pegalistadetemas",combo);
-
-}
-/*
-Function: pegaMapas
-
-Recebe a lista de mapas (banners) e monta a apresentação na guia "mapas".
-
-Adiciona na guia mapas os banners que dão acesso direto a mapas especiais.
-
-A indicação do arquivo xml é feita em ms_configura.php ou no sistema de administração
-
-Parameters:
-
-retorno - objeto JSON com a lista de mapas
-*/
-function pegaMapas(retorno)
-{
-	var ins = "<br>";
-	var mapa = retorno.data.mapas;
-	var ig1lt = mapa.length;
-	var ig1=0;
-	if(ig1lt > 0)
-	{
-		do
-		{
-			var nome = mapa[ig1].NOME;
-			if(mapa[ig1].PUBLICADO)
-			{
-				if(mapa[ig1].PUBLICADO == "NAO" || mapa[ig1].PUBLICADO == "nao")
-				{var nome = "<s>"+nome+"</s>";}
-			}
-			var descricao = mapa[ig1].DESCRICAO;
-			var imagem = mapa[ig1].IMAGEM;
-			var temas = mapa[ig1].TEMAS;
-			var ligados = mapa[ig1].LIGADOS;
-			var extensao = mapa[ig1].EXTENSAO;
-			var outros = mapa[ig1].OUTROS;
-			var lkd = mapa[ig1].LINK;
-			var link = i3GEO.configura.locaplic+"/ms_criamapa.php?temasa="+temas+"&layers="+ligados;
-			if (extensao != "")
-			{link += "&mapext="+extensao;}
-			if (outros != "")
-			{link += "&"+outros;}
-			if (lkd != "")
-			{var link = lkd;}
-			ins += "<div><a href='"+link+"'><img src='"+imagem+"'></a></div><br>";
-			ins += "<div><p>"+nome+"</p></div><br>";
-			ig1++;
-		}
-		while(ig1<ig1lt)
-	}
-	$i("banners").innerHTML = ins;
-}
-/*
-Section: redesenho do mapa
-*/
-/*
-Function: autoRedesenho
-
-Controla a opção de redesenho automático temporizado
-
-Para funcionar, a variável de inicialização g_autoRedesenho deve ser > 0
-
-Parameters:
-
-opcao: ativa|desativa|redesenha
-*/
-function autoRedesenho(opcao)
-{
-	if (opcao == "desativa")
-	{
-		g_autoRedesenho = 0;
-		clearTimeout(objmapa.tempoRedesenho);
-		clearTimeout(objmapa.contaTempoRedesenho);
-		objmapa.tempoRedesenho = "";
-		objmapa.contaTempoRedesenho = "";
-		objmapa.tempoRedesenho = "";
-		if ($i("tempoRedesenho"))
-		{$i("tempoRedesenho").style.display = "none";}
-	}
-	if (opcao == "ativa")
-	{
-		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
-		{$i("tempoRedesenho").style.display = "block";}
-		if (g_autoRedesenho > 0)
-		{objmapa.tempoRedesenho = setTimeout('autoRedesenho("redesenha")',g_autoRedesenho);}
-		if (($i("tempoRedesenho")) && (g_autoRedesenho > 0))
-		{
-			$i("tempoRedesenho").innerHTML = g_autoRedesenho/1000;
-			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
-		}
-	}
-	if (opcao == "redesenha")
-	{
-		clearTimeout(objmapa.tempoRedesenho);
-		clearTimeout(objmapa.contaTempoRedesenho);
-		remapaf();
-		autoRedesenho("ativa");
-	}
-	if (opcao == "contagem")
-	{
-		if ($i("tempoRedesenho"))
-		{
-			$i("tempoRedesenho").innerHTML = parseInt($i("tempoRedesenho").innerHTML) - 1;
-			objmapa.contaTempoRedesenho = setTimeout('autoRedesenho("contagem")',1000);
-		}
-	}
-}
-/*
-Function: remapaf
-
-Prepara o redesenho do mapa de acordo com o que esta visivel ou nao.
-
-Chamado por algumas funções que necessitam refazer o desenho do mapa.
-
-Verifica na lista de temas já adicionados, os temas que estão ligados e desligados,
-Chama a função que verifica na lista de temas adicionais.
-*/
-function remapaf()
-{
-	//
-	//zera o contador de tempo
-	//
-	YAHOO.log("remapaf", "i3geo");
-	clearTimeout(objmapa.tempo);
-	objmapa.tempo = "";
-	objmapa.temaAtivo = "";
-	if ($i(objmapa.guiaTemas+"obj"))
-	{
-		//
-		//se g_operacao = 'legenda' significa que o usuário clicou em um tema na guia legenda
-		//nesse caso, a busca dos temas que devem ser ligados e desligados deve ser feita no id='legenda'
-		//
-		if(g_operacao == "legenda")
-		{var iguias = $i("legenda").getElementsByTagName("input");}
-		else
-		{var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");}
-		var tsl = new Array();
-		var tsd = new Array();
-		var i = iguias.length-1;
 		if (i >= 0)
 		{
 			do
 			{
-				if (iguias[i].type == "checkbox")
+				eval("var s = objmapa."+temp[i]+"obj"); 
+				if ($i(s))
 				{
-					if(iguias[i].name == "layer")
-					{
-						if (iguias[i].checked == false)
-						{tsd.push(iguias[i].value);}
-						if (iguias[i].checked == true)
-						{tsl.push(iguias[i].value);}
-					}
+					var d = $i(s).style;
+					d.style.overflow="auto";
+					d.style.height = objmapa.h-13;
+					d.style.width = "100%";
 				}
 			}
 			while(i--)
 		}
-		var remapaAdicNovos = function remapaAdicNovos(retorno)
-		{
-			if ($i("buscatema"))
-			{
-				var g = $i(objmapa.guiaMenu+"obj");
-				if($i("arvoreAdicionaTema"))
-				{var g = $i("arvoreAdicionaTema");}
-				var iguias = g.getElementsByTagName("input");
-				var ta = new Array();
-				var i = iguias.length-1;
-				if (i >= 0)
-				{
-					do
-					{
-						if (iguias[i].type == "checkbox")
-						{
-							if (iguias[i].checked == true)
-							{
-								ta.push(iguias[i].value);
-								iguias[i].checked = false;
-							}
-						}
-					}
-					while(i--)
-				}
-				if (ta.length > 0)
-				{
-					i3GEO.janela.fechaAguarde("remapa");
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var temp = function(retorno)
-					{
-						i3GEO.janela.fechaAguarde("ajaxredesenha");
-						if(retorno.data.erro)
-						{
-							alert(retorno.data.erro);
-							return;
-						}
-						ajaxredesenha("");					
-					};
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+i3GEO.configura.sid;
-					cpObj.call(p,"adicionaTema",temp);
-				}
-				else
-				{
-					i3GEO.janela.fechaAguarde("remapa");
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					ajaxredesenha("");
-				}
-			}
-			else
-			{
-				i3GEO.janela.fechaAguarde("remapa");
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				ajaxredesenha("");
-			}
-		};
-		if ((tsd.length > 0) || (tsl.length > 0))
-		{
-			i3GEO.janela.abreAguarde("remapa",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
-		}
-		else{remapaAdicNovos();}
-		i3GEO.janela.fechaAguarde("remapa");
-	}
-	else
-	{remapaAdicNovos();}
-	YAHOO.log("FIm remapaf", "i3geo");
-}
-/*
-Section: eventos
-*/
-
-/*
-Function: calcposf
-
-Calcula a posição do corpo do mapa e posiciona-o corretamente na tela.
-*/
-function calcposf()
-{
-	try
-	{
-		YAHOO.log("calcposf", "i3geo");
-		imagemxi = 0;
-		imagemyi = 0;
-		imagemxref = 0;
-		imagemyref = 0;
-		if(!$i("i3geo")){return;}
-		if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
-		if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
-		var dc = $i("i3geo");
-		if ($i("contemImg"))
-		{var dc = $i("contemImg");}
-		else
-		{var dc = $i("img");}
-		if ($i("openlayers"))
-		{var dc = $i("openlayers");}
-		if ($i("flamingo"))
-		{var dc = $i("flamingo");}
-		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
-		{
-			dc = dc.offsetParent;
-			imagemxi = imagemxi + dc.offsetLeft;
-			imagemyi = imagemyi + dc.offsetTop;
-		}
-		if ($i("corpoMapa"))
-		{
-			$i("corpoMapa").style.position="absolute";
-			$left("corpoMapa",imagemxi);
-			$top("corpoMapa",imagemyi);
-			if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
-			if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
-		}
-		if ($i("ref"))
-		{
-			var dc = $i("ref");
-			while (dc.offsetParent.id != "i3geo")
-			{
-				dc = dc.offsetParent;
-				imagemxref = imagemxref + dc.offsetLeft;
-				imagemyref = imagemyref + dc.offsetTop;
-			}
-		}
-		if ($i("aguarde"))
-		{
-			$top("aguarde",imagemyi);
-			$left("aguarde",imagemxi);
-		}
-		YAHOO.log("Fim calcposf", "i3geo");
-	}
-	catch(e){alert("Ocorreu um erro. calcposf"+e);}
-}
-/*
-Function: capturaposicao
-
-Captura a posição do mouse em função do evento onmousemove sobre o corpo do mapa ou sobre o mapa de referência.
-
-Atualiza o objeto objposicaocursor.
-A função de mostrar etiquetas é definida como "" quando o mouse é movimentado.
-
-Parameters:
-
-exy - objeto evento.
-*/
-function capturaposicao(e)
-{
-	if (!e) var e = window.event;
-	//
-	//verifica sob qual objeto o mouse está se movendo
-	//
-	if (e.target)
-	{var targ = e.target;}
-	else if (e.srcElement) var targ = e.srcElement;
-	if(targ.id == "" && $i("img"))
-	{var targ = $i("img");}
-	//
-	//se estiver no modo pan, o movimento deve ser obtido do elemento
-	//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
-	//se não for feito assim, o deslocamento do mapa não é capturado
-	//
-	if (g_panM == "sim")
-	{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
-	else
-	{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
-	if((g_entorno == "sim") && (g_panM == "sim"))
-	{
-		pos[0] = pos[0] - objmapa.w;
-		pos[1] = pos[1] - objmapa.h;
-	}
-	//
-	//pega a posicao correta do mouse
-	//
-	var mousex = 0;
-	var mousey = 0;
-	if (e.pageX || e.pageY) 	{
-		mousex = e.pageX;
-		mousey = e.pageY;
-	}
-	else if (e.clientX || e.clientY) 	{
-		mousex = e.clientX + document.body.scrollLeft
-			+ document.documentElement.scrollLeft;
-		mousey = e.clientY + document.body.scrollTop
-			+ document.documentElement.scrollTop;
-	}
-
-	//
-	//faz os cálculos de posicionamento
-	//fig e reffig são a mesma coisa por enquanto
-	//
-	var xfig = mousex - pos[0];
-	var yfig = mousey - pos[1];
-	var xreffig = xfig;
-	var yreffig = yfig;
-	var xtela = mousex;
-	var ytela = mousey;
-	//
-	//celula e extent são necessários para se fazer a
-	//conversão de coordenadas de tela para coordenadas geográficas
-	//esses valores são obtidos das funções ajax que redesenham ou inicializam o mapa
-	// 
-	var c = g_celula;
-	var ex = objmapa.extent;
-	try{
-		if(targ.id == "imagemReferencia"){
-			var c = g_celularef;
-			var ex = objmapa.extentref;
-			var r = $i("i3geo_rosa");
-			if(r)
-			r.style.display = "none"
-		}
-	}
-	catch(e){g_celularef = 0;}
-	var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
-	var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
-	objposicaocursor.ddx = teladd[0];
-	objposicaocursor.ddy = teladd[1];
-	objposicaocursor.dmsx = teladms[0];
-	objposicaocursor.dmsy = teladms[1];
-	objposicaocursor.telax = xtela;
-	objposicaocursor.telay = ytela;
-	objposicaocursor.imgx = xfig;
-	objposicaocursor.imgy = yfig;
-	objposicaocursor.refx = xreffig;
-	objposicaocursor.refy = yreffig;
-	ajaxTip = "";
-}
-/*
-Section: calculos
 */
 /*
-Function: posicaomouse
-
-Cria um objeto que guarda a posição do mouse na tela. A posição é medida em relação a janela do navegador.
-
-Methods:
-
-x - coordenada x em valores de tela
-
-y - coordenada y em valores de tela
+Function: docaguias (depreciado)
 */
-function posicaomouse()
-{
-	this.x = 0;
-	this.y = 0;
-}
+function docaguias()
+{i3GEO.guias.libera();}
 /*
-Function: posicaocursor
-
-Cria um objeto que guarda a posição do mouse no corpo do mapa. A posição é medida em relação à posição do mapa no navegador.
-
-Methods:
-
-ddx - coordenada x em décimo de grau
-
-ddy - coordenada y em décimo de grau
-
-dmsx - coordenada x em grau, minuto e segundo
-
-dmsy - coordenada y em grau, minuto e segundo
-
-telax - coordenada x em valores de tela
-
-telay - coordenada y em valores de tela
-
-imgx - coordenada x em relação ao mapa
-
-imgy - coordenada y em relação ao mapa
-
-refx - coordenada x em relação ao mapa de referência
-
-refy - coordenada y em relação ao mapa de referência
+Function: autoRedesenho (depreciado)
 */
-function posicaocursor()
-{
-	this.ddx = 0;
-	this.ddy = 0;
-	this.dmsx = '';
-	this.dmsy = '';
-	this.telax = 0;
-	this.telay = 0;
-	this.imgx = 0;
-	this.imgy = 0;
-	this.refx = 0;
-	this.refy = 0;
-}
-/*
-Function: pontosdist
-
-Cria o objeto que irá armazenaa as coordenadas para calculo de distancia
-
-Parameters:
-
-xpt - coordenadas x em dd
-
-ypt - coordenadas y em dd
-
-dist - distância entre os dois últimos pontos
-
-xtela - coordenada x na tela
-
-ytela - coordenada y na tela
-
-ximg - coordenada x na imagem do mapa
-
-yimg - coordenada y na imagem do mapa
-
-linhas - lista de objetos criados pela biblioteca richdraw utilizados no desenho da linha de medição
-*/
-function pontosdist()
-{
-	this.xpt = new Array();
-	this.ypt = new Array();
-	this.dist = new Array();
-	this.xtela = new Array();
-	this.ytela = new Array();
-	this.ximg = new Array();
-	this.yimg = new Array();
-	this.linhas = new Array();
-}
-/*
-Section: desenho sobre o mapa
-*/
-/*
-Function: desenhoRichdraw
-
-Desenha elementos na tela usando a biblioteca richdraw
-
-Parameters:
-
-tipo - tipo de operação
-
-objeto - objeto gráfico do container richdraw
-
-n - índice do elemento no array pontosdistobj
-*/
-function desenhoRichdraw(tipo,objeto,n)
-{
-	if (richdraw && $i("img"))
-	{
-		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-		//
-		//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
-		//
-		if((tipo=="resizeLinha") || (tipo=="resizePoligono") && navn)
-		{
-			try
-			{richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-			catch(e){window.status=n+" erro ao movimentar a linha ";}
-		}
-		if((tipo=="resizeLinha") && navm)
-		{
-			try
-			{
-				//
-				//no caso do ie, a linha tem de ser removida e desenhada novamente
-				//
-				var r = $i(richdraw.container.id);
-				r.removeChild(r.lastChild);
-				var dy = objposicaocursor.imgy;
-				var dx = objposicaocursor.imgx - (objmapa.w/2);
-				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
-			}
-			catch(e){window.status=n+" erro ao movimentar a linha ";}			
-		}
-		if((tipo=="resizePoligono") && navm)
-		{
-			try
-			{
-				var r = $i(richdraw.container.id);
-				r.removeChild(r.lastChild);
-				r.removeChild(r.lastChild);
-				var dy = objposicaocursor.imgy;
-				var dx = objposicaocursor.imgx - (objmapa.w/2);
-				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
-				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[0])-(objmapa.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
-			}
-			catch(e){window.status=n+" erro ao movimentar a linha ";}			
-		}
-		if(tipo=="insereCirculo")
-		{
-			if (navn)
-			{
-				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-				var w = Math.sqrt(dx + dy);
-				try
-				{
-					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
-				}
-				catch(e){window.status=n+" erro ao desenhar o raio";}
-			}
-			else
-			{
-				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-				var w = Math.sqrt(dx + dy);
-				try
-				{
-					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
-				}
-				catch(e){window.status=n+" erro ao desenhar o raio";}
-			}
-		}
-	}
-}
-/*
-Section: outros
-*/
-/*
-Function: incluir
-
-Inclui um arquivo shapefile no mapa atual como uma nova camada
-
-Parameters:
-
-path - caminho completo do shapefile
-*/
-function incluir(path)
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var temp = path.split(".");
-	if ((temp[1] == "SHP") || (temp[1] == "shp"))
-	{var f = "adicionaTemaSHP";}
-	else
-	{var f = "adicionaTemaIMG";}
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao="+f+"&arq="+path;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,f,ajaxredesenha);
-}
-/*
-Function: inseremarcaf
-
-Insere um ponto no mapa.
-
-Os pontos são inseridos em um contaier de pontos e mostrados temporáriamente como uma imagem.
-Utilizado pela função de medição de distâncias.
-
-Parameters:
-
-xi - coordenada x.
-
-yi - coordenada y.
-
-funcaoonclick - funcao que sera executada quando a marca for clicada
-*/
-function inseremarcaf(xi,yi,funcaoOnclick)
-{
-	try
-	{
-		//verifica se existe o container para os pontos
-		if (!$i("pontosins") )
-		{
-			var novoel = document.createElement("div");
-			novoel.id = "pontosins";
-			var i = novoel.style;
-			i.position = "absolute";
-			i.top = parseInt($i("img").style.top);
-			i.left = parseInt($i("img").style.left);
-			document.body.appendChild(novoel);
-		}
-		var container = $i("pontosins");
-		var novoel = document.createElement("div");
-		var i = novoel.style;
-		i.position = "absolute";
-		i.zIndex=2000;
-		i.top=(yi - 4)+"px";
-		i.left=(xi - 4)+"px";
-		i.width="4px";
-		i.height="4px";
-		var novoimg = document.createElement("img");
-		if (arguments.length == 2)
-		{funcaoOnclick = "";}
-		if (funcaoOnclick != "")
-		{novoimg.onclick = funcaoOnclick;}
-		novoimg.src=i3GEO.configura.locaplic+"/imagens/dot1.gif";
-		with (novoimg.style){width="6px";height="6px";zIndex=2000;}
-		novoel.appendChild(novoimg);
-		container.appendChild(novoel);
-	}
-	catch(e){alert("Ocorreu um erro. inseremarcaf"+e);}
-}
-/*
-Function: limpacontainerf
-
-Limpa o container de pontos.
-*/
-function limpacontainerf()
-{
-	if ($i("pontosins"))
-	{$i("pontosins").innerHTML = "";}
-	if ($i("mostradistancia"))
-	{$i("mostradistancia").style.display="none";}
-}
-/*
-Function: recuperamapa
-
-Tenta recuperar o último mapa, caso tenha ocorrido algum erro.
-*/
-function recuperamapa()
-{
-	g_recupera = 1;
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=recuperamapa&g_sid="+i3GEO.configura.sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"recuperamapa",remapaf);
-}
-//testa se esse script foi carregado
-function testafuncoes()
+function autoRedesenho(opcao)
 {}
+
 
 /*
-Class:: i3GEO.configura
+Class:: i3GEO.util
 
-Configuração do i3geo
+Utilitários.
 
-Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
-o funcionamento do i3geo.
+Funções gerais de processamento.
 
-File: i3geo/classesjs/classe_configura.js
+File: i3geo/classesjs/classe_util.js
 
 About: Licença
 
@@ -42916,199 +43343,1017 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
-i3GEO.configura = {
-	/*
-	Variable: sid
-	
-	Código da seção aberta pelo i3Geo no servidor.
-	
-	O código é gerado na inicialização do i3Geo pelo programa ms_criamapa.php
-	
-	Type:
-	{String}
-	*/
-	sid: "",
-	/*
-	Variable: locaplic
-	
-	Localização da instalação do i3geo (URI)
-	
-	Por default, é definida na inicialização do i3Geo com o uso do i3GEO.util
+/*
+Function: $i
 
-	Type:
-	{URI}
-	*/
-	locaplic: "",
-	/*
-	Variable: mapaRefDisplay
-	
-	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
-	
-	Type:
-	{style.display}
-	*/
-	mapaRefDisplay: "block",
-	/*
-	Variable: visual
-	
-	Tipo de visual que será utilizado no mapa.
-	
-	A lista de visuais existentes é obtida na inicialização do i3geo.
-	
-	Veja o diretório i3geo/imagens/visual
+Obtém um elemento DOM a partir de seu id
+  
+Parameters:
 
-	Type:
-	{String}
-	*/
-	visual: "default",
-	/*
-	Variable: cursores
-	
-	Imagens utilizadas para os cursores do mouse mostrados no mapa	
+id - {String} ID do elemento.
+    
+Returns:
 
+{Object} Objeto.
+*/
+$i = function(id)
+{return document.getElementById(id);};
+/*
+Function: Array.remove()
+
+Extende os métodos de um objeto Array, permitindo remover um elemento.
+
+*/
+Array.prototype.remove=function(s){
+	var i = this.indexOf(s);
+	if(i != -1) this.splice(i, 1);
+};
+i3GEO.util = {
+	/*
+	Variable: PINS
+	Elementos IMG criados na função criaPin
+	
 	Type:
-	{JSON}
+	{Array}
 	*/
-	cursores: {
-		"identifica":
-		{ff:"/imagens/cursores/identifica.png",ie:"/imagens/cursores/identifica.cur"},
-		"pan":
-		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
-		"area":
-		{ff:"/imagens/cursores/area.png",ie:"/imagens/cursores/area.cur"},
-		"distancia":
-		{ff:"/imagens/cursores/distancia.png",ie:"/imagens/cursores/distancia.cur"},
-		"zoom":
-		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
+	PINS: new Array(),
+	/*
+	Variable: BOXES
+	Elementos DIV criados na função criaBox
+	
+	Type:
+	{Array}
+	*/
+	BOXES: new Array(),	
+	/*
+	Function: insereCookie
+	Cria um novo cookie. 
+   
+	Parameters:
+	nome - {String} Nome do cookie.
+	
+	valor - (String) Valor do cookie
+	*/
+	insereCookie: function(nome,valor) {
+		document.cookie = nome+"="+valor;
 	},
 	/*
-	Variable: listaDePropriedadesDoMapa
-	
-	Lista com as funções que são incluídas no item "Propriedades do mapa"	
+	Function: pegaCookie
+	Pega o valor de um cookie. 
+   
+	Parameters:
+	nome - {String} Nome do cookie.
 
-	Type:
-	{JSON}
+	Returns:
+	(String) - valor do cookie
 	*/
-	listaDePropriedadesDoMapa: {
+	pegaCookie: function(nome){
+		var cookies = document.cookie;
+		var i = cookies.indexOf(nome);
+		if(i == -1)
+		{return null;}
+		var fim = cookies.indexOf(";",i);
+		if (fim == -1)
+		{var fim = cookies.length;}
+		return (unescape(cookies.substring(i,fim))).split("=")[1];
+	},
+	/*
+	Function: listaChaves
+	Lista as chaves de um objeto. 
+   
+	Parameters:
+	obj - {Object}
+
+	Return:
+	(Array) - array com as chaves.
+	*/
+	listaChaves: function (obj) {
+		var keys = [];
+		for(var key in obj){
+   			keys.push(key);
+		}
+		return keys;
+	},
+	/*
+	Function: criaBotaoAplicar
+	Cria um botão flutuante do tipo aplicar.
+	
+	O novo botão é adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
+   
+	Parameters:
+	
+	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
+	
+	titulo - (opcional) {String} Título que será mostrado no botão
+	
+	classe - (opcional) {String} Nome da classe (estilo) que será aplicado ao botão.
+	
+	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
+
+	Return:
+	(Object) - Objeto DOM criado.
+
+	*/
+	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
+		clearTimeout(objmapa.tempo);
+		objmapa.tempo = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
+		autoRedesenho("reinicia");
+		if(arguments.length == 1)
+		{var titulo = "Aplicar";}
+		if(arguments.length == 1 || arguments.length == 2)
+		{var classe = "i3geoBotaoAplicar";}
+		if (!document.getElementById("i3geo_aplicar"))
+		{
+			var novoel = document.createElement("input");
+			novoel.id = 'i3geo_aplicar';
+			novoel.type = 'button';
+			novoel.value = titulo;
+			novoel.style.cursor="pointer";
+			novoel.style.fontSize="10px";
+			novoel.style.zIndex = 15000;
+			novoel.style.position="absolute";
+			novoel.style.display="none";
+			novoel.onmouseover = function(){this.style.display="block";};
+			novoel.onmouseout = function(){this.style.display="none";};
+			novoel.className = classe;
+			document.body.appendChild(novoel);
+		}
+		else
+		{var novoel = document.getElementById("i3geo_aplicar");}
+		novoel.onclick = function(){
+			clearTimeout(objmapa.tempo);
+			objmapa.tempo = "";
+			this.style.display='none';
+			eval(nomeFuncao+"\(\)");
+		};
+		//reposiciona o botao
+		if(arguments.length == 4){
+			novoel.style.display="block";
+			var xy = YAHOO.util.Dom.getXY(obj);
+			YAHOO.util.Dom.setXY(novoel,xy);
+		}
+		return (novoel);
+	},
+	/*
+	Function: arvore
+	
+	Cria uma árvore com base em um objeto contendo aspropriedades.
+	
+	Parameters:
+	
+	titulo - {String} cabeçaljo da árvore
+	
+	onde - {String} nome do id doelemento que conterá a árvore
+	
+	obj - {Object} objeto contendo os parâmetros, exemplo
+	
+		g_listaPropriedades = {
+	
 		"propriedades": [
-		{ text: "p2", url: "javascript:tipoimagem()"},
-		{ text: "p3", url: "javascript:opcoesLegenda()"},
-		{ text: "p4", url: "javascript:opcoesEscala()"},
-		{ text: "p5", url: "javascript:tamanho()"},
-		{ text: "p6", url: "javascript:ativaEntorno()"},
-		{ text: "p7", url: "javascript:ativaLogo()"},
-		{ text: "p8", url: "javascript:queryMap()"},
-		{ text: "p9", url: "javascript:corFundo()"},
-		{ text: "p10", url: "javascript:gradeCoord()"},
-		{ text: "p11", url: "javascript:template()"},
-		{ text: "p12", url: "javascript:autoredesenha()"}
-		]
+	
+		{ text: "p2", url: "javascript:tipoimagem()" }
+	
+		]}
+	
+	*/
+	arvore: function(titulo,onde,obj){
+		YAHOO.log("arvore", "i3geo");
+		var currentIconMode;
+		YAHOO.example.treeExample = new function(){
+        	function buildTree(){
+				arvore = new YAHOO.widget.TreeView(onde);
+				root = arvore.getRoot();
+				var tempNode = new YAHOO.widget.TextNode('', root, false);
+				tempNode.isLeaf = false;
+        	}
+    		buildTree();
+		}();
+		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
+		var d = {html:titulo};
+		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+		var c = obj.propriedades.length;
+		for (var i=0, j=c; i<j; i++){
+			var linha = obj.propriedades[i];
+			var conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
+			var d = {html:conteudo};
+			var temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+		}
+		arvore.collapseAll();
+   		arvore.draw();
+   		YAHOO.log("Fim arvore", "i3geo");
 	},
 	/*
-	Variable: tempoAplicar
-	
-	Tempo em milisegundos que será esperado até que o mapa seja desenhado automaticamente.
-	
-	Utilizado no botão Aplicar, quando o usuário liga/desliga ou adiciona umtema
-	
-	Type:
-	{Numeric}
-	*/
-	tempoAplicar: 4000,
-	/*
-	Variable: tempoMouseParado
-	
-	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
-	
-	Controla o lapso de tempo utilizado para disparar as funções que ocorrem quando o mouse está parado sobre o mapa
-	
-	Type:
-	{Numeric}
-	*/
-	tempoMouseParado: 2500,
-	/*
-	Variable: iniciaJanelaMensagens
-	
-	Inicia o i3geo com a janela de mensagens aberta ou fechada.
-	
-	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
+	Function: removeAcentos
 
-	Type:
-	{Boolean}
-	*/
-	iniciaJanelaMensagens: true,
-	/*
-	Variable: mostraRosaDosVentos
-	
-	Mostra ou não a rosa dos ventos sob o mouse quando estiver parado.
+	Remove acentos de uma palavra ou frase
 
-	Type:
-	{sim|nao}
-	*/	
-	mostraRosaDosVentos: "sim"
-	/*
-	Function: alteraVariavel
+	Parameters:
+
+	palavra {String}
+	
+	Return:
+	
+	{String}
 	*/
+	removeAcentos: function(palavra) {
+		var re = /ã|á|à|â/gi;
+		palavra = palavra.replace(re,"a");
+		var re = /é/gi;
+		palavra = palavra.replace(re,"e");
+		var re = /í/gi;
+		palavra = palavra.replace(re,"i");
+		var re = /ó|õ/gi;
+		palavra = palavra.replace(re,"o");
+		var re = /ç/gi;
+		palavra = palavra.replace(re,"c");
+		var re = /ú/gi;
+		palavra = palavra.replace(re,"u");
+		return(palavra);
+	},
 	/*
-	Function: adicionaVariavel
+	Function protocolo
+	
+	Obtém o protocoloutilizado na URL atual
+	
+	Return:
+	
+	{String} - protocolo
 	*/
+	protocolo: function(){
+		var u = window.location.href;
+		var u = u.split(":");
+		return (u[0]);	
+	},
+	/*
+	Function: pegaPosicaoObjeto
+
+	Retorna a posição x,y de um objeto em relação a tela do navegador
+	
+	Parameters:
+	
+	obj {Object} - objeto dom
+	
+	Return:
+	
+	{Array} - array com a posição [x,y]
+	*/
+	pegaPosicaoObjeto: function(obj){
+		if(obj)
+		{
+			if(obj.style.position == "absolute")
+			{return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];}
+			else{
+				var curleft = curtop = 0;
+				if(obj){
+					if (obj.offsetParent) {
+						do {
+							curleft += obj.offsetLeft-obj.scrollLeft;
+							curtop += obj.offsetTop-obj.scrollTop;
+						} while (obj = obj.offsetParent);
+					}
+				}
+				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
+			}
+		}
+		else
+		{return [0,0];}
+	},
+	/*
+		Function: i3geo_pegaElementoPai
+
+		Pega o elemento pai de um elemento clicado para identificar o código do tema.
+
+		Parameters:
+
+		e - elemento do DOM.
+		
+		Return:
+		
+		{Node} - objeto DOM
+	*/
+	pegaElementoPai: function(e){
+		var targ;
+		if (!e)
+		{var e = window.event;}
+		if (e.target)
+		{targ = e.target;}
+		else
+		if (e.srcElement)
+		{targ = e.srcElement;}
+		if (targ.nodeType == 3)
+   		{targ = targ.parentNode;}
+		var tname;
+		tparent=targ.parentNode;
+		return(tparent);
+	},
+	/*
+	Function: mudaCursor
+	
+	Altera o cursor do ponteiro do mouse.
+	
+	Os cursores disponíveis são definidos por default em classe_configura.js
+	
+	Parameters:
+	
+	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
+	
+	tipo {String} - tipo de cursor disponível em cursores
+	
+	idobjeto {String} - id do objeto que terá o estilo alterado para o cursor desejado
+	
+	locaplic {String} - onde está instalado o i3Geo
+	*/
+	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
+		var o = document.getElementById(idobjeto);
+		if(o){
+			if(navm){
+				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+			}
+			else{
+				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
+			}			
+		}
+	},
+	/*
+	Function: criaBox
+	
+	Cria um elemento div na página atual.
+	
+	Esse elemento pode ser utilizado para desenhar retângulos sobre o mapa
+	
+	Parameters:
+	
+	id {String} - id do elemento que será criado. Por default, será 'boxg'
+	*/
+	criaBox: function(id){
+		if(arguments.length == 0)
+		{var id = "boxg"}
+		if (!$i(id))
+		{
+			var novoel = document.createElement("div");
+			novoel.id = id;
+			novoel.style.zIndex=1;
+			novoel.innerHTML = '<font face="Arial" size=0></font>';
+			document.body.appendChild(novoel);
+			//YAHOO.util.Event.addListener($i(id),"mouseover", "this.style.display='none'");
+			//novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
+			novoel.onmouseover = function(){novoel.style.display='none';};
+			novoel.onmouseout = function(){novoel.style.display='block';};
+			i3GEO.util.BOXES.push(id);
+		}
+	},
+	/*
+	Function: escondeBox
+	
+	Esconde os BOXES com IDs registrados em i3GEO.util.BOXES
+	
+	Os ids são criado pela função criaBox
+	*/
+	escondeBox: function(){
+		var l = i3GEO.util.BOXES.length;
+		for (i=0; i<l; i++){
+			if($i(i3GEO.util.BOXES[i]))
+			{$i(i3GEO.util.BOXES[i]).style.display = "none";}
+		}
+	},
+	/*
+	Function: criaPin
+	
+	Cria um elemento imagem na página atual.
+	
+	Esse elemento pode ser utilizado para desenhar pontos sobre o mapa
+	
+	Parameters:
+	
+	id {String} - id do elemento que será criado. Por default, será 'boxpin'
+	*/
+	criaPin: function(id){
+		if(arguments.length == 0)
+		{var id = "boxpin"}	
+		if (!$i(id))
+		{
+			var novoel = document.createElement("img");
+			novoel.id = id;
+			novoel.style.zIndex=10000;
+			novoel.style.position="absolute";
+			novoel.style.width="21px";
+			novoel.style.height="25px";
+			novoel.src = i3GEO.configura.locaplic+'/imagens/marker.png';
+			novoel.onmouseover = function(){$i("boxpin").style.display="none";};
+			document.body.appendChild(novoel);
+			i3GEO.util.PINS.push(id);
+		}	
+	},
+	/*
+	Function: escondePin
+	
+	Esconde os PINS com IDs registrados em i3GEO.util.PINS
+	
+	Os ids são criado pela função criaPin
+	*/
+	escondePin: function(){
+		var l = i3GEO.util.PINS.length;
+		for (i=0; i<l; i++){
+			if($i(i3GEO.util.PINS[i]))
+			{$i(i3GEO.util.PINS[i]).style.display = "none";}
+		}
+	},
+	/*
+	Function: $im ou nome curto $im
+
+	Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
+
+	Exemplo: $im("imagem.png")
+
+	Parâmetros:
+
+	g {String} - nome da imagem
+
+	Retorno:
+
+	string - caminho para a imagem
+	*/
+	$im: function(g){
+		return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;
+	},
+	/*
+	Function $inputText ou nome curto $inputText
+
+	Cria um elemento html do tipo input text com formatação especial.
+
+	Parameters:
+
+	idPai {String} - id do elemento pai do input
+
+	larguraIdPai {Integer} - largura em pixel
+
+	idInput {String} - id do objeto input
+
+	titulo {String} - texto que vai no title
+
+	digitos {Integer} - numero de dígitos do input
+
+	valor {String} - valor do input
+	*/
+	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor) {
+		if(idPai != "")
+		{
+			if(larguraIdPai != "")
+			{$i(idPai).style.width=larguraIdPai+"px";}
+			$i(idPai).style.padding="3";
+			$i(idPai).style.textAlign="center";
+			$i(idPai).onmouseover = function()
+			{this.className = "digitarMouseover";};
+			$i(idPai).onmouseout = function()
+			{this.className = "";};	
+		}
+		var i = "<input onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
+		return i;
+	},
+	/*
+	Function: $top ou nome curto $top
+
+	Muda a posição (superior) de um objeto tanto no IE como no Firefox.
+
+	Exemplo: $top("imagem",100)
+
+	Parâmetros:
+
+	id - identificador do objeto
+
+	valor - posição em relação ao topo.
+	*/
+	$top: function(id,valor){
+		if (document.getElementById(id).style){
+			if (document.getElementById(id).style.pixelTop)
+			{document.getElementById(id).style.pixelTop=valor;}
+			else
+			{document.getElementById(id).style.top=valor+"px";}
+		}
+	},
+	/*
+	Function: $left ou nome curto $left
+
+	Muda a posição (esquerda) de um objeto tanto no IE como no Firefox.
+
+	Exemplo: $left("imagem",100)
+
+	Parâmetros:
+
+	id - identificador do objeto
+
+	valor - posição em relação a esquerda.
+	*/
+	$left: function(id,valor){
+		if (document.getElementById(id).style){
+			if (document.getElementById(id).style.pixelLeft)
+			{document.getElementById(id).style.pixelLeft=valor;}
+			else
+			{document.getElementById(id).style.left=valor+"px";}
+		}
+	}
 };
 //
-//para efeitos de compatibilidade
-try {
-	if (g_listaPropriedades)
-	{i3GEO.configura.listaDePropriedadesDoMapa = g_listaPropriedades;}
-}
-catch(e){};
-try {
-	if (g_tempo_aplicar)
-	{i3GEO.configura.tempoAplicar = g_tempo_aplicar;}
-}
-catch(e){};
-try {
-	if (g_janelaMen == "nao")
-	{i3GEO.configura.iniciaJanelaMensagens = false;}
-}
-catch(e){};
-try {
-	if (g_locaplic)
-	{i3GEO.configura.locaplic = g_locaplic;}
-}
-catch(e){};
-try {
-	if (g_tempotip)
-	{i3GEO.configura.tempoMouseParado = g_tempotip;}
-}
-catch(e){};
-try {
-	if (g_mostraRosa)
-	{i3GEO.configura.mostraRosaDosVentos = g_mostraRosa;}
-}
-catch(e){};
-try {
-	if (g_visual)
-	{i3GEO.configura.visual = g_visual;}
-}
-catch(e){};
-try {
-	if (g_mapaRefDisplay)
-	{i3GEO.configura.mapaRefDisplay = g_mapaRefDisplay;}
-}
-catch(e){};
+//alias
 //
-//define a variável sid
-if (window.location.href.split("?")[1])
-{
-	g_sid = window.location.href.split("?")[1];
-	//
-	//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
-	//
-	if (g_sid.split("#")[0])
-	{g_sid = g_sid.split("#")[0];}
+$im = function(g){
+	return i3GEO.util.$im(g);
+};
+$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor){
+	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor);
+};
+$top = function(id,valor){
+	i3GEO.util.$top(id,valor);
+};
+$left = function(id,valor){
+	i3GEO.util.$left(id,valor);
+};
+/*
+Class:: i3GEO.calculo
+
+Utilitários.
+
+Funções gerais de cálculo.
+
+File: i3geo/classesjs/classe_calculo.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
 }
-else
-{g_sid = "";}
-i3GEO.configura.sid = g_sid;
+i3GEO.calculo = {
+	/*
+	Function: dms2dd
+	
+	Converte coordenadas formatadas em DMS para DD
+	
+	Parameters:
+	
+	cd {Numeric} - grau
+	
+	cm {Numeric} - minuto
+	
+	cs {Numeric} - segundo
+	
+	Return:
+	
+	{Numeric} - Coordenada em décimos de grau.
+	*/
+	dms2dd: function(cd,cm,cs){
+		try
+		{
+			YAHOO.log("dms2dd", "i3geo");
+			//converte dms em dd
+			var sinal = 'positivo';
+			if (cd < 0)
+			{
+				cd = cd * -1;
+				sinal = 'negativo';
+			}
+			spm = cs / 3600;
+			mpg = cm / 60;
+			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
+			if (sinal == 'negativo')
+			{dd = dd * -1;}
+			YAHOO.log("Fim dms2dd", "i3geo");
+			return (dd);
+		}
+		catch(e){return (0);}
+	},
+	/*
+	Function: dd2tela
+
+	Converte coordenadas dd em coordenadas de tela.
+
+	Parameters:
+
+	vx {Numeric} - coordenada x.
+
+	vy {Numeric} - coordenada y.
+
+	docmapa - objeto DOM que contém o objeto imagem
+	
+	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
+	
+	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
+
+	Returns:
+
+	{Array} - Array com o valor de x [0] e y [1]
+	*/
+	dd2tela: function (vx,vy,docmapa,ext,cellsize){
+		try
+		{
+			if(!docmapa)
+			{var docmapa = window.document;}
+			var dc = docmapa.getElementsByTagName("img")[0];
+			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
+			var imgext = objmapa.extent;
+			var imgext = imgext.split(" ");
+			vx = (vx * 1) - (imgext[0] * 1);
+			vy = (vy * -1) + (imgext[3] * 1);
+			c = cellsize * 1;
+			xy = new Array();
+			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
+		}
+		catch(e){return(new Array());}
+	},
+	/*
+	Function: dd2dms
+
+	Converte coordenadas de dd em dms.
+
+	Parameters:
+
+	x {Numeric} - coordenada x.
+
+	y {Numeric} - coordenada y.
+
+	Returns:
+
+	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
+	*/
+	dd2dms: function(x,y){
+		var m = 0;
+		var s = 0;
+		var dx = parseInt(x);
+		if (dx > 0)
+		{var restod = x - dx;}
+		if (dx < 0)
+		{restod = (x * -1) - (dx * -1);}
+		dx = dx;
+		if (restod != 0){
+			var mm = restod * 60;
+			var m = parseInt(restod * 60);
+			var restos = mm - m;
+			var mx = m;
+			if (restos != 0){
+				var s = restos * 60;
+				var s = (s+"_").substring(0,5);
+				var sx = s;
+			}
+			else  { s = "00.00" }
+		}
+		else{
+			var mx = "00";
+			var sx = "00.00";
+		}
+		if (m.length == 2){m = "0"+m+"";}
+		if (s*1 < 10){s = "0"+s;}
+		var xv = dx+" "+mx+" "+sx;
+		var m = 0;
+		var s = 0;
+		var dy = parseInt(y);
+		if (dy > 0)
+		{var restod = y - dy;}
+		if (dy < 0)
+		{var restod = (y * -1) - (dy * -1);}
+		dy = dy;
+		if (restod != 0){
+			var mm = restod * 60;
+			var m = parseInt(restod * 60);
+			var restos = mm - m;
+			var my = m;
+			if (restos != 0){
+				var s = restos * 60;
+				s = (s+"_").substring(0,5);
+				var sy = s;
+			}
+			else  { var s = "00.00";}
+		}
+		else{
+			var my = "00";
+			var sy = "00.00";
+		}
+		if (m.length == 2){m = "0"+m;}
+		if (s*1 < 10){s = "0"+s;}
+		var yv = dy+" "+my+" "+sy;
+		var res = new Array();
+		res[0] = xv;
+		res[1] = yv;
+		return res;
+	},
+	/*
+	Function: tela2dd
+
+	Converte o x,y de unidades de tela para décimo de grau.
+
+	Parameters:
+
+	xfign {Numeric} - x em valores de imagem.
+
+	yfign {Numeric} - y em coordenadas de imagem.
+
+	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
+
+	imgext {String} - extensão geográfica do mapa.
+
+	Returns:
+
+	{Array} - Coordena em dd x[0] e y[1].
+	*/
+	tela2dd: function(xfign,yfign,g_celula,imgext){
+		try
+		{
+			if (navm){
+				xfign = xfign - 2.2;
+				yfign = yfign - 2.7;
+			}
+			else{
+				xfign = xfign - 0.12;
+				yfign = yfign - 1.05;
+			}
+			var nx = g_celula * xfign;
+			var ny = g_celula * yfign;
+			var amext = imgext.split(" ");
+			var longdd = (amext[0] * 1) + nx;
+			var latdd = (amext[3] * 1) - ny;
+			var res = new Array();
+			res[0] = longdd;
+			res[1] = latdd;
+			return (res);
+		}
+		catch(e){return(0);}
+	},
+	/*
+	Function area
+
+	Calcula a área de um polígono.
+
+	Os pontos são obtidos do objeto pontos
+
+	Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
+
+	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
+	
+	Parameters:
+	
+	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
+	
+	pixel {Numeric} - área de cada pixel no mapa
+	
+	Return:
+	
+	Type:
+	{Numeric}
+	*/
+	area: function(pontos,pixel){
+		try{
+			if(pontos.xpt.length > 2){
+				var $array_length = pontos.xpt.length;
+				pontos.xtela.push(pontos.xtela[0]);
+				pontos.ytela.push(pontos.ytela[0]);
+				pontos.xtela.push(pontos.xtela[0]);
+				pontos.ytela.push(pontos.ytela[1]);
+				var $polygon_area = 0;
+				for (var $i=0;$i <= $array_length;$i++)
+				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
+				$polygon_area = Math.abs($polygon_area) / 2;
+			}
+			else
+			{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
+			return $polygon_area*pixel;
+		}
+		catch(e){return (0);}
+	},
+	/*
+	Function: distancia
+
+	Calcula a distância entre dois pontos.
+	
+	Baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
+
+	Parameters:
+
+	lga {Numeric} - x inicial.
+
+	lta {Numeric} - y inicial
+
+	lgb {Numeric} - x final
+
+	ltb {Numeric} - y final
+	
+	Return:
+	
+	Type:
+	{Numeric}
+	*/	
+	distancia: function(lga,lta,lgb,ltb){
+		try{
+			var er = 6366.707;
+			var radlat1 = Math.PI * lta/180;
+			var radlat2 = Math.PI * ltb/180;
+			var radlong1 = Math.PI * lga/180;
+			var radlong2 = Math.PI * lgb/180;
+			if (lta > 0) {radlat1=Math.PI/2-radlat1;}
+			if (lta < 0) {radlat1=Math.PI/2+radlat1;}
+			if (lga < 0) {radlong1=Math.PI*2-radlong1;}
+			if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
+			if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
+			if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
+			var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
+			var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
+			var z1 = er * Math.cos(radlat1);
+			var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
+			var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
+			var z2 = er * Math.cos(radlat2);
+			var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
+			//side, side, side, law of cosines and arccos
+			var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
+			return theta*er;
+		}
+		catch(e){return (0);}
+	}
+};
+
+/*
+Class:: i3GEO.maparef
+
+Cria e processa o mapa de referência
+
+File: i3geo/classesjs/classe_maparef.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+
+i3GEO.maparef = {
+	inicia: function(){
+		YAHOO.log("initJanelaRef", "i3geo");
+		if (!$i("i3geo_winRef")){
+			var novoel = document.createElement("div");
+			novoel.id = "i3geo_winRef";
+			novoel.style.display="none";
+			novoel.style.borderColor="gray";
+			var ins = '<div class="hd">';
+			var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+			ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
+			var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
+			ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
+			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){capturaposicao(exy)}" onclick="javascript:i3GEO.maparef.click()">';
+			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
+			//ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
+			ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
+			novoel.innerHTML = ins;
+			document.body.appendChild(novoel);
+			//$i("imagemReferencia").style.height = objmapa.refheight+"px";
+		}
+		if($i("i3geo_winRef").style.display != "block"){
+			$i("i3geo_winRef").style.display = "block";
+			YAHOO.namespace("janelaRef.xp");
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaRef.xp.panel.render();
+			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+			if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+			else
+			{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
+			var escondeRef = function(){
+				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
+				YAHOO.janelaRef.xp.panel.destroy();	
+				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
+			};
+			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
+			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
+			if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml)
+			YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);
+		}
+		YAHOO.log("Fim initJanelaRef", "i3geo");
+		this.atualiza();
+	},
+	/*
+	Function: atualiza
+	
+	Atualiza o mapa de referência.
+
+	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
+	
+	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
+	
+	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
+	
+	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
+	*/
+	atualiza: function(mapexten){
+		//if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
+		var dinamico = false;
+		if ($i("refDinamico"))
+		{var dinamico = $i("refDinamico").checked;}
+		if ($i("mapaReferencia")){
+			YAHOO.log("Atualizando o mapa de referência", "i3geo");
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			if(dinamico){
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+g_zoomRefDinamico;
+				cp.call(p,"retornaReferenciaDinamica",this.processaImagem);
+			}
+			else{
+				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim")){
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
+					cp.call(p,"retornaReferencia",this.processaImagem);
+				}
+				else{
+					var re = new RegExp("&mode=map", "g");
+					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
+					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
+				}
+			}
+		}
+		else{
+			if($i("imagemReferencia"))
+			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
+		}
+	},
+	/*
+	Function: processaImagem
+		
+	Substituí a imagem do mapa de referência pela última gerada.
+
+	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
+	
+	Parameters:
+
+	retorno - string no formato "var refimagem='nome da imagem'".
+	*/
+	processaImagem: function(retorno){
+		i3GEO.janela.fechaAguarde("ajaxreferencia1");
+		if ((retorno.data != "erro") && (retorno.data != undefined)){
+			eval(retorno.data);
+			if ($i("imagemReferencia")){
+				var m = new Image();
+				m.src = refimagem;
+				$i("imagemReferencia").src=m.src;
+				if ((objmapa.scale < 15000000) && (objmapa.scale > 10000000)){
+					$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia.";
+					$i("refmensagem").style.fontSize="10px";
+				}
+				else{
+					$i("refmensagem").innerHTML = "";
+					$i("refmensagem").style.fontSize="0px";
+				}
+			}
+			i3GEO.gadgets.quadros.grava("referencia",refimagem);
+			YAHOO.log("Concluída imagem de referência", "redesenho");
+		}
+		else
+		{YAHOO.log("Erro na imagem de referência", "redesenho");}
+	},
+	/*
+	Function: click
+	
+	Ocorre quando o usuário clica sobre o mapa de referência, alterando a extensão geográfica do mapa principal
+	*/
+	click: function(){
+		try{
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+i3GEO.configura.sid;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"pan",ajaxredesenha);
+		}
+		catch(e)
+		{var e = "";i3GEO.janela.fechaAguarde("ajaxredesenha");}	
+	}
+};
 g_traducao = {
 //texto da janela de mensagens
 "p1": [
@@ -44110,1037 +45355,6 @@ it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive del
 };
 
 /*
-Class:: i3GEO.util
-
-Utilitários.
-
-Funções gerais de processamento.
-
-File: i3geo/classesjs/classe_util.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-/*
-Function: $i
-
-Obtém um elemento DOM a partir de seu id
-  
-Parameters:
-
-id - {String} ID do elemento.
-    
-Returns:
-
-{Object} Objeto.
-*/
-$i = function(id)
-{return document.getElementById(id);};
-
-i3GEO.util = {
-	/*
-	Variable: PINS
-	Elementos IMG criados na função criaPin
-	
-	Type:
-	{Array}
-	*/
-	PINS: new Array(),
-	/*
-	Variable: BOXES
-	Elementos DIV criados na função criaBox
-	
-	Type:
-	{Array}
-	*/
-	BOXES: new Array(),	
-	/*
-	Function: insereCookie
-	Cria um novo cookie. 
-   
-	Parameters:
-	nome - {String} Nome do cookie.
-	
-	valor - (String) Valor do cookie
-	*/
-	insereCookie: function(nome,valor) {
-		document.cookie = nome+"="+valor;
-	},
-	/*
-	Function: pegaCookie
-	Pega o valor de um cookie. 
-   
-	Parameters:
-	nome - {String} Nome do cookie.
-
-	Returns:
-	(String) - valor do cookie
-	*/
-	pegaCookie: function(nome){
-		var cookies = document.cookie;
-		var i = cookies.indexOf(nome);
-		if(i == -1)
-		{return null;}
-		var fim = cookies.indexOf(";",i);
-		if (fim == -1)
-		{var fim = cookies.length;}
-		return (unescape(cookies.substring(i,fim))).split("=")[1];
-	},
-	/*
-	Function: listaChaves
-	Lista as chaves de um objeto. 
-   
-	Parameters:
-	obj - {Object}
-
-	Return:
-	(Array) - array com as chaves.
-	*/
-	listaChaves: function (obj) {
-		var keys = [];
-		for(var key in obj){
-   			keys.push(key);
-		}
-		return keys;
-	},
-	/*
-	Function: criaBotaoAplicar
-	Cria um botão flutuante do tipo aplicar.
-	
-	O novo botão é adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
-   
-	Parameters:
-	
-	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
-	
-	titulo - (opcional) {String} Título que será mostrado no botão
-	
-	classe - (opcional) {String} Nome da classe (estilo) que será aplicado ao botão.
-	
-	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
-
-	Return:
-	(Object) - Objeto DOM criado.
-
-	*/
-	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
-		clearTimeout(objmapa.tempo);
-		objmapa.tempo = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
-		autoRedesenho("reinicia");
-		if(arguments.length == 1)
-		{var titulo = "Aplicar";}
-		if(arguments.length == 1 || arguments.length == 2)
-		{var classe = "i3geoBotaoAplicar";}
-		if (!document.getElementById("i3geo_aplicar"))
-		{
-			var novoel = document.createElement("input");
-			novoel.id = 'i3geo_aplicar';
-			novoel.type = 'button';
-			novoel.value = titulo;
-			novoel.style.cursor="pointer";
-			novoel.style.fontSize="10px";
-			novoel.style.zIndex = 15000;
-			novoel.style.position="absolute";
-			novoel.style.display="none";
-			novoel.onmouseover = function(){this.style.display="block";};
-			novoel.onmouseout = function(){this.style.display="none";};
-			novoel.className = classe;
-			document.body.appendChild(novoel);
-		}
-		else
-		{var novoel = document.getElementById("i3geo_aplicar");}
-		novoel.onclick = function(){
-			clearTimeout(objmapa.tempo);
-			objmapa.tempo = "";
-			this.style.display='none';
-			eval(nomeFuncao+"\(\)");
-		};
-		//reposiciona o botao
-		if(arguments.length == 4){
-			novoel.style.display="block";
-			var xy = YAHOO.util.Dom.getXY(obj);
-			YAHOO.util.Dom.setXY(novoel,xy);
-		}
-		return (novoel);
-	},
-	/*
-	Function: arvore
-	
-	Cria uma árvore com base em um objeto contendo aspropriedades.
-	
-	Parameters:
-	
-	titulo - {String} cabeçaljo da árvore
-	
-	onde - {String} nome do id doelemento que conterá a árvore
-	
-	obj - {Object} objeto contendo os parâmetros, exemplo
-	
-		g_listaPropriedades = {
-	
-		"propriedades": [
-	
-		{ text: "p2", url: "javascript:tipoimagem()" }
-	
-		]}
-	
-	*/
-	arvore: function(titulo,onde,obj){
-		YAHOO.log("arvore", "i3geo");
-		var currentIconMode;
-		YAHOO.example.treeExample = new function(){
-        	function buildTree(){
-				arvore = new YAHOO.widget.TreeView(onde);
-				root = arvore.getRoot();
-				var tempNode = new YAHOO.widget.TextNode('', root, false);
-				tempNode.isLeaf = false;
-        	}
-    		buildTree();
-		}();
-		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
-		var d = {html:titulo};
-		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
-		var c = obj.propriedades.length;
-		for (var i=0, j=c; i<j; i++){
-			var linha = obj.propriedades[i];
-			var conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
-			var d = {html:conteudo};
-			var temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-		}
-		arvore.collapseAll();
-   		arvore.draw();
-   		YAHOO.log("Fim arvore", "i3geo");
-	},
-	/*
-	Function: removeAcentos
-
-	Remove acentos de uma palavra ou frase
-
-	Parameters:
-
-	palavra {String}
-	
-	Return:
-	
-	{String}
-	*/
-	removeAcentos: function(palavra) {
-		var re = /ã|á|à|â/gi;
-		palavra = palavra.replace(re,"a");
-		var re = /é/gi;
-		palavra = palavra.replace(re,"e");
-		var re = /í/gi;
-		palavra = palavra.replace(re,"i");
-		var re = /ó|õ/gi;
-		palavra = palavra.replace(re,"o");
-		var re = /ç/gi;
-		palavra = palavra.replace(re,"c");
-		var re = /ú/gi;
-		palavra = palavra.replace(re,"u");
-		return(palavra);
-	},
-	/*
-	Function protocolo
-	
-	Obtém o protocoloutilizado na URL atual
-	
-	Return:
-	
-	{String} - protocolo
-	*/
-	protocolo: function(){
-		var u = window.location.href;
-		var u = u.split(":");
-		return (u[0]);	
-	},
-	/*
-	Function: pegaPosicaoObjeto
-
-	Retorna a posição x,y de um objeto em relação a tela do navegador
-	
-	Parameters:
-	
-	obj {Object} - objeto dom
-	
-	Return:
-	
-	{Array} - array com a posição [x,y]
-	*/
-	pegaPosicaoObjeto: function(obj){
-		if(obj)
-		{
-			if(obj.style.position == "absolute")
-			{return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];}
-			else{
-				var curleft = curtop = 0;
-				if(obj){
-					if (obj.offsetParent) {
-						do {
-							curleft += obj.offsetLeft-obj.scrollLeft;
-							curtop += obj.offsetTop-obj.scrollTop;
-						} while (obj = obj.offsetParent);
-					}
-				}
-				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
-			}
-		}
-		else
-		{return [0,0];}
-	},
-	/*
-		Function: i3geo_pegaElementoPai
-
-		Pega o elemento pai de um elemento clicado para identificar o código do tema.
-
-		Parameters:
-
-		e - elemento do DOM.
-		
-		Return:
-		
-		{Node} - objeto DOM
-	*/
-	pegaElementoPai: function(e){
-		var targ;
-		if (!e)
-		{var e = window.event;}
-		if (e.target)
-		{targ = e.target;}
-		else
-		if (e.srcElement)
-		{targ = e.srcElement;}
-		if (targ.nodeType == 3)
-   		{targ = targ.parentNode;}
-		var tname;
-		tparent=targ.parentNode;
-		return(tparent);
-	},
-	/*
-	Function: mudaCursor
-	
-	Altera o cursor do ponteiro do mouse.
-	
-	Os cursores disponíveis são definidos por default em classe_configura.js
-	
-	Parameters:
-	
-	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
-	
-	tipo {String} - tipo de cursor disponível em cursores
-	
-	idobjeto {String} - id do objeto que terá o estilo alterado para o cursor desejado
-	
-	locaplic {String} - onde está instalado o i3Geo
-	*/
-	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
-		var o = document.getElementById(idobjeto);
-		if(o){
-			if(navm){
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
-			}
-			else{
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
-			}			
-		}
-	},
-	/*
-	Function: criaBox
-	
-	Cria um elemento div na página atual.
-	
-	Esse elemento pode ser utilizado para desenhar retângulos sobre o mapa
-	
-	Parameters:
-	
-	id {String} - id do elemento que será criado. Por default, será 'boxg'
-	*/
-	criaBox: function(id){
-		if(arguments.length == 0)
-		{var id = "boxg"}
-		if (!$i(id))
-		{
-			var novoel = document.createElement("div");
-			novoel.id = id;
-			novoel.style.zIndex=1;
-			novoel.innerHTML = '<font face="Arial" size=0></font>';
-			document.body.appendChild(novoel);
-			novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
-			i3GEO.util.BOXES.push(id);
-		}
-	},
-	/*
-	Function: escondeBox
-	
-	Esconde os BOXES com IDs registrados em i3GEO.util.BOXES
-	
-	Os ids são criado pela função criaBox
-	*/
-	escondeBox: function(){
-		var l = i3GEO.util.BOXES.length;
-		for (i=0; i<l; i++){
-			if($i(i3GEO.util.BOXES[i]))
-			{$i(i3GEO.util.BOXES[i]).style.display = "none";}
-		}
-	},
-	/*
-	Function: criaPin
-	
-	Cria um elemento imagem na página atual.
-	
-	Esse elemento pode ser utilizado para desenhar pontos sobre o mapa
-	
-	Parameters:
-	
-	id {String} - id do elemento que será criado. Por default, será 'boxpin'
-	*/
-	criaPin: function(id){
-		if(arguments.length == 0)
-		{var id = "boxpin"}	
-		if (!$i(id))
-		{
-			var novoel = document.createElement("img");
-			novoel.id = id;
-			novoel.style.zIndex=10000;
-			novoel.style.position="absolute";
-			novoel.style.width="21px";
-			novoel.style.height="25px";
-			novoel.src = i3GEO.configura.locaplic+'/imagens/marker.png';
-			novoel.onmouseover = function(){$i("boxpin").style.display="none";};
-			document.body.appendChild(novoel);
-			i3GEO.util.PINS.push(id);
-		}	
-	},
-	/*
-	Function: escondePin
-	
-	Esconde os PINS com IDs registrados em i3GEO.util.PINS
-	
-	Os ids são criado pela função criaPin
-	*/
-	escondePin: function(){
-		var l = i3GEO.util.PINS.length;
-		for (i=0; i<l; i++){
-			if($i(i3GEO.util.PINS[i]))
-			{$i(i3GEO.util.PINS[i]).style.display = "none";}
-		}
-	},
-	/*
-	Function: $im ou nome curto $im
-
-	Retorna o caminho correto de uma imagem incluindo o endereço da aplicação e do visual em uso.
-
-	Exemplo: $im("imagem.png")
-
-	Parâmetros:
-
-	g {String} - nome da imagem
-
-	Retorno:
-
-	string - caminho para a imagem
-	*/
-	$im: function(g){
-		return i3GEO.configura.locaplic+"/imagens/visual/"+i3GEO.configura.visual+"/"+g;
-	},
-	/*
-	Function $inputText ou nome curto $inputText
-
-	Cria um elemento html do tipo input text com formatação especial.
-
-	Parameters:
-
-	idPai {String} - id do elemento pai do input
-
-	larguraIdPai {Integer} - largura em pixel
-
-	idInput {String} - id do objeto input
-
-	titulo {String} - texto que vai no title
-
-	digitos {Integer} - numero de dígitos do input
-
-	valor {String} - valor do input
-	*/
-	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor) {
-		if(idPai != "")
-		{
-			if(larguraIdPai != "")
-			{$i(idPai).style.width=larguraIdPai+"px";}
-			$i(idPai).style.padding="3";
-			$i(idPai).style.textAlign="center";
-			$i(idPai).onmouseover = function()
-			{this.className = "digitarMouseover";};
-			$i(idPai).onmouseout = function()
-			{this.className = "";};	
-		}
-		var i = "<input onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
-		return i;
-	},
-	/*
-	Function: $top ou nome curto $top
-
-	Muda a posição (superior) de um objeto tanto no IE como no Firefox.
-
-	Exemplo: $top("imagem",100)
-
-	Parâmetros:
-
-	id - identificador do objeto
-
-	valor - posição em relação ao topo.
-	*/
-	$top: function(id,valor){
-		if (document.getElementById(id).style){
-			if (document.getElementById(id).style.pixelTop)
-			{document.getElementById(id).style.pixelTop=valor;}
-			else
-			{document.getElementById(id).style.top=valor+"px";}
-		}
-	},
-	/*
-	Function: $left ou nome curto $left
-
-	Muda a posição (esquerda) de um objeto tanto no IE como no Firefox.
-
-	Exemplo: $left("imagem",100)
-
-	Parâmetros:
-
-	id - identificador do objeto
-
-	valor - posição em relação a esquerda.
-	*/
-	$left: function(id,valor){
-		if (document.getElementById(id).style){
-			if (document.getElementById(id).style.pixelLeft)
-			{document.getElementById(id).style.pixelLeft=valor;}
-			else
-			{document.getElementById(id).style.left=valor+"px";}
-		}
-	}
-};
-//
-//alias
-//
-$im = function(g){
-	return i3GEO.util.$im(g);
-};
-$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor){
-	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor);
-};
-$top = function(id,valor){
-	i3GEO.util.$top(id,valor);
-};
-$left = function(id,valor){
-	i3GEO.util.$left(id,valor);
-};
-/*
-Class:: i3GEO.calculo
-
-Utilitários.
-
-Funções gerais de cálculo.
-
-File: i3geo/classesjs/classe_calculo.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-i3GEO.calculo = {
-	/*
-	Function: dms2dd
-	
-	Converte coordenadas formatadas em DMS para DD
-	
-	Parameters:
-	
-	cd {Numeric} - grau
-	
-	cm {Numeric} - minuto
-	
-	cs {Numeric} - segundo
-	
-	Return:
-	
-	{Numeric} - Coordenada em décimos de grau.
-	*/
-	dms2dd: function(cd,cm,cs){
-		try
-		{
-			YAHOO.log("dms2dd", "i3geo");
-			//converte dms em dd
-			var sinal = 'positivo';
-			if (cd < 0)
-			{
-				cd = cd * -1;
-				sinal = 'negativo';
-			}
-			spm = cs / 3600;
-			mpg = cm / 60;
-			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
-			if (sinal == 'negativo')
-			{dd = dd * -1;}
-			YAHOO.log("Fim dms2dd", "i3geo");
-			return (dd);
-		}
-		catch(e){return (0);}
-	},
-	/*
-	Function: dd2tela
-
-	Converte coordenadas dd em coordenadas de tela.
-
-	Parameters:
-
-	vx {Numeric} - coordenada x.
-
-	vy {Numeric} - coordenada y.
-
-	docmapa - objeto DOM que contém o objeto imagem
-	
-	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
-	
-	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1]
-	*/
-	dd2tela: function (vx,vy,docmapa,ext,cellsize){
-		try
-		{
-			if(!docmapa)
-			{var docmapa = window.document;}
-			var dc = docmapa.getElementsByTagName("img")[0];
-			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = objmapa.extent;
-			var imgext = imgext.split(" ");
-			vx = (vx * 1) - (imgext[0] * 1);
-			vy = (vy * -1) + (imgext[3] * 1);
-			c = cellsize * 1;
-			xy = new Array();
-			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
-		}
-		catch(e){return(new Array());}
-	},
-	/*
-	Function: dd2dms
-
-	Converte coordenadas de dd em dms.
-
-	Parameters:
-
-	x {Numeric} - coordenada x.
-
-	y {Numeric} - coordenada y.
-
-	Returns:
-
-	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
-	*/
-	dd2dms: function(x,y){
-		var m = 0;
-		var s = 0;
-		var dx = parseInt(x);
-		if (dx > 0)
-		{var restod = x - dx;}
-		if (dx < 0)
-		{restod = (x * -1) - (dx * -1);}
-		dx = dx;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var mx = m;
-			if (restos != 0){
-				var s = restos * 60;
-				var s = (s+"_").substring(0,5);
-				var sx = s;
-			}
-			else  { s = "00.00" }
-		}
-		else{
-			var mx = "00";
-			var sx = "00.00";
-		}
-		if (m.length == 2){m = "0"+m+"";}
-		if (s*1 < 10){s = "0"+s;}
-		var xv = dx+" "+mx+" "+sx;
-		var m = 0;
-		var s = 0;
-		var dy = parseInt(y);
-		if (dy > 0)
-		{var restod = y - dy;}
-		if (dy < 0)
-		{var restod = (y * -1) - (dy * -1);}
-		dy = dy;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var my = m;
-			if (restos != 0){
-				var s = restos * 60;
-				s = (s+"_").substring(0,5);
-				var sy = s;
-			}
-			else  { var s = "00.00";}
-		}
-		else{
-			var my = "00";
-			var sy = "00.00";
-		}
-		if (m.length == 2){m = "0"+m;}
-		if (s*1 < 10){s = "0"+s;}
-		var yv = dy+" "+my+" "+sy;
-		var res = new Array();
-		res[0] = xv;
-		res[1] = yv;
-		return res;
-	},
-	/*
-	Function: tela2dd
-
-	Converte o x,y de unidades de tela para décimo de grau.
-
-	Parameters:
-
-	xfign {Numeric} - x em valores de imagem.
-
-	yfign {Numeric} - y em coordenadas de imagem.
-
-	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
-
-	imgext {String} - extensão geográfica do mapa.
-
-	Returns:
-
-	{Array} - Coordena em dd x[0] e y[1].
-	*/
-	tela2dd: function(xfign,yfign,g_celula,imgext){
-		try
-		{
-			if (navm){
-				xfign = xfign - 2.2;
-				yfign = yfign - 2.7;
-			}
-			else{
-				xfign = xfign - 0.12;
-				yfign = yfign - 1.05;
-			}
-			var nx = g_celula * xfign;
-			var ny = g_celula * yfign;
-			var amext = imgext.split(" ");
-			var longdd = (amext[0] * 1) + nx;
-			var latdd = (amext[3] * 1) - ny;
-			var res = new Array();
-			res[0] = longdd;
-			res[1] = latdd;
-			return (res);
-		}
-		catch(e){return(0);}
-	},
-	/*
-	Function area
-
-	Calcula a área de um polígono.
-
-	Os pontos são obtidos do objeto pontos
-
-	Para o cálculo da área, é feito o cálculo do número de pixel abrangido pelo polígono e multiplicado pela resolução de cada pixel.
-
-	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
-	
-	Parameters:
-	
-	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
-	
-	pixel {Numeric} - área de cada pixel no mapa
-	
-	Return:
-	
-	Type:
-	{Numeric}
-	*/
-	area: function(pontos,pixel){
-		try{
-			if(pontos.xpt.length > 2){
-				var $array_length = pontos.xpt.length;
-				pontos.xtela.push(pontos.xtela[0]);
-				pontos.ytela.push(pontos.ytela[0]);
-				pontos.xtela.push(pontos.xtela[0]);
-				pontos.ytela.push(pontos.ytela[1]);
-				var $polygon_area = 0;
-				for (var $i=0;$i <= $array_length;$i++)
-				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
-				$polygon_area = Math.abs($polygon_area) / 2;
-			}
-			else
-			{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
-			return $polygon_area*pixel;
-		}
-		catch(e){return (0);}
-	},
-	/*
-	Function: distancia
-
-	Calcula a distância entre dois pontos.
-	
-	Baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
-
-	Parameters:
-
-	lga {Numeric} - x inicial.
-
-	lta {Numeric} - y inicial
-
-	lgb {Numeric} - x final
-
-	ltb {Numeric} - y final
-	
-	Return:
-	
-	Type:
-	{Numeric}
-	*/	
-	distancia: function(lga,lta,lgb,ltb){
-		try{
-			var er = 6366.707;
-			var radlat1 = Math.PI * lta/180;
-			var radlat2 = Math.PI * ltb/180;
-			var radlong1 = Math.PI * lga/180;
-			var radlong2 = Math.PI * lgb/180;
-			if (lta > 0) {radlat1=Math.PI/2-radlat1;}
-			if (lta < 0) {radlat1=Math.PI/2+radlat1;}
-			if (lga < 0) {radlong1=Math.PI*2-radlong1;}
-			if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
-			if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
-			if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
-			var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
-			var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
-			var z1 = er * Math.cos(radlat1);
-			var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
-			var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
-			var z2 = er * Math.cos(radlat2);
-			var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-			//side, side, side, law of cosines and arccos
-			var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
-			return theta*er;
-		}
-		catch(e){return (0);}
-	}
-};
-
-/*
-Class:: i3GEO.maparef
-
-Cria e processa o mapa de referência
-
-File: i3geo/classesjs/classe_maparef.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-
-i3GEO.maparef = {
-	inicia: function(){
-		YAHOO.log("initJanelaRef", "i3geo");
-		if (!$i("i3geo_winRef")){
-			var novoel = document.createElement("div");
-			novoel.id = "i3geo_winRef";
-			novoel.style.display="none";
-			novoel.style.borderColor="gray";
-			var ins = '<div class="hd">';
-			var temp = "javascript:if(g_zoomRefDinamico == -1){g_zoomRefDinamico = 1};g_zoomRefDinamico = g_zoomRefDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-			ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
-			var temp = "javascript:if(g_zoomRefDinamico == 1){g_zoomRefDinamico = -1};g_zoomRefDinamico = g_zoomRefDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
-			ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
-			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){capturaposicao(exy)}" onclick="javascript:i3GEO.maparef.click()">';
-			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
-			//ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
-			ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
-			novoel.innerHTML = ins;
-			document.body.appendChild(novoel);
-			//$i("imagemReferencia").style.height = objmapa.refheight+"px";
-		}
-		if($i("i3geo_winRef").style.display != "block"){
-			$i("i3geo_winRef").style.display = "block";
-			YAHOO.namespace("janelaRef.xp");
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
-			YAHOO.janelaRef.xp.panel.render();
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-			if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-			else
-			{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+objmapa.w-160),pos[1]+4);}
-			var escondeRef = function(){
-				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
-				YAHOO.janelaRef.xp.panel.destroy();	
-				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
-			};
-			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
-			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
-			if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml)
-			YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);
-		}
-		YAHOO.log("Fim initJanelaRef", "i3geo");
-		this.atualiza();
-	},
-	/*
-	Function: atualiza
-	
-	Atualiza o mapa de referência.
-
-	Se o modo cgi estiver ativado, o mapa de referência é desenhado utilizando-se como src da imagem o programa cgi do Mapserver.
-	
-	No modo dinâmico, a imagem é gerada de forma diferenciada. Nesse caso, o modo cgi é desabilitado.
-	
-	O atualizaReferencia é sempre chamado após o mapa ser redesenhado.
-	
-	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
-	*/
-	atualiza: function(mapexten){
-		//if($i("boxRef")){$i("boxRef").style.display="none";} //div utilizado na ferramenta mostraexten
-		var dinamico = false;
-		if ($i("refDinamico"))
-		{var dinamico = $i("refDinamico").checked;}
-		if ($i("mapaReferencia")){
-			YAHOO.log("Atualizando o mapa de referência", "i3geo");
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			if(dinamico){
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+g_zoomRefDinamico;
-				cp.call(p,"retornaReferenciaDinamica",this.processaImagem);
-			}
-			else{
-				if(($i("imagemReferencia").src == "") || (objmapa.cgi != "sim")){
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
-					cp.call(p,"retornaReferencia",this.processaImagem);
-				}
-				else{
-					var re = new RegExp("&mode=map", "g");
-					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
-					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-				}
-			}
-		}
-		else{
-			if($i("imagemReferencia"))
-			i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
-		}
-	},
-	/*
-	Function: processaImagem
-		
-	Substituí a imagem do mapa de referência pela última gerada.
-
-	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
-	
-	Parameters:
-
-	retorno - string no formato "var refimagem='nome da imagem'".
-	*/
-	processaImagem: function(retorno){
-		i3GEO.janela.fechaAguarde("ajaxreferencia1");
-		if ((retorno.data != "erro") && (retorno.data != undefined)){
-			eval(retorno.data);
-			if ($i("imagemReferencia")){
-				var m = new Image();
-				m.src = refimagem;
-				$i("imagemReferencia").src=m.src;
-				if ((objmapa.scale < 15000000) && (objmapa.scale > 10000000)){
-					$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia.";
-					$i("refmensagem").style.fontSize="10px";
-				}
-				else{
-					$i("refmensagem").innerHTML = "";
-					$i("refmensagem").style.fontSize="0px";
-				}
-			}
-			i3GEO.gadgets.quadros.grava("referencia",refimagem);
-			YAHOO.log("Concluída imagem de referência", "redesenho");
-		}
-		else
-		{YAHOO.log("Erro na imagem de referência", "redesenho");}
-	},
-	/*
-	Function: click
-	
-	Ocorre quando o usuário clica sobre o mapa de referência, alterando a extensão geográfica do mapa principal
-	*/
-	click: function(){
-		try{
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+objmapa.scale+"&tipo=ref&x="+objposicaocursor.refx+"&y="+objposicaocursor.refy+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"pan",ajaxredesenha);
-		}
-		catch(e)
-		{var e = "";i3GEO.janela.fechaAguarde("ajaxredesenha");}	
-	}
-};
-/*
 Class: i3geo.idioma
 
 Tradução da interface principal.
@@ -45197,6 +45411,12 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 i3GEO.idioma = {
+	/*
+	Variable: DICIONARIO
+	
+	Define o objeto com o dicionário utilizado
+	*/
+	DICIONARIO: g_traducao,
 	/*
 	Function: define
 	Define qual o idioma em uso. O default é "pt". 
@@ -45347,28 +45567,26 @@ Returns:
 {String} Texto traduzido.
 */
 var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
+
 //
-//para efeitos de compatibilidade define as variaveis g_traducao e g_linguagem
-//define pt como default
-//
-try {
-	var c = i3GEO.util.pegaCookie("i3geolingua");
-	if(c) {
-		i3GEO.idioma.define(c);
-		g_linguagem = c;
-	}
-	else {
-		if(typeof(g_linguagem) != "undefined")
-		{i3GEO.idioma.define(g_linguagem);}
-		else {
-			g_linguagem = "pt";
-			i3GEO.idioma.define("pt");
+	try {
+		var c = i3GEO.util.pegaCookie("i3geolingua");
+		if(c) {
+			i3GEO.idioma.define(c);
+			g_linguagem = c;
 		}
+		else {
+			if(typeof(g_linguagem) != "undefined")
+			{i3GEO.idioma.define(g_linguagem);}
+			else {
+				g_linguagem = "pt";
+				i3GEO.idioma.define("pt");
+			}
+		}
+		if(typeof('g_traducao') != "undefined")
+		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
-	if(typeof('g_traducao') != "undefined")
-	{i3GEO.idioma.defineDicionario(g_traducao);}
-}
-catch(e){alert("Problemas com idiomas "+e);};
+	catch(e){alert("Problemas com idiomas "+e);};
 
 /*
 Class: i3GEO.ajuda
@@ -45889,11 +46107,16 @@ i3GEO.janela = {
 	
 	Cria um DIV e posiciona sobre o mapa na posição do mouse.
 	
+	Parameters:
+	
+	cabecalho {String} - texto que será usado no cabeçalho (opção fixar) (opcional)
+	
 	Return:
 	
 	ID do DIV criado
 	*/
-	tip: function(){
+	tip: function(cabecalho){
+		if(arguments.length == 0){var cabecalho = "fixar";}
 		var Nid = YAHOO.util.Dom.generateId();
 		var i = $i("i3geo_rosa");
 		if(i)
@@ -45911,16 +46134,66 @@ i3GEO.janela = {
 		{novoel.style.filter = "alpha(opacity=90)";}
 		else
 		{novoel.style.opacity = ".9";}
-		eval("novoel.onmouseout = function(){if(!$i('"+Nid+"cabecatip')){return;};if($i('"+Nid+"cabecatip').innerHTML != ''){document.body.removeChild($i('"+Nid+"'));}};");
 		document.body.appendChild(novoel);
+		objmapa.objtips.push($i(Nid));
+		//
+		//monta o TIP com o id único criado
+		//quando o usuário escolhe a opção de fixar,
+		//o div é incluido no array objmapa.objtips
+		//quando o mapa é redesenhado, esses elementos são excluídos do mapa
+		//
 		var res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
-		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\""+Nid+"\"));$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >fixar</span></div>";
+		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
 		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 		ist = novoel.style;
 		ist.top = objposicaocursor.telay - 10;
-		ist.left = objposicaocursor.telax - 20;
+		ist.left = objposicaocursor.telax - 4;
 		ist.display="block";
+		//
+		//registra a função de eliminação dos tips
+		//
+		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.excluiTips('todos')") < 0)
+		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.excluiTips('todos')");}	
+		if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.janela.excluiTips('naofixos')") < 0)
+		{i3GEO.eventos.MOUSEMOVE.push("i3GEO.janela.excluiTips('naofixos')");}		
+
+		//
 		return(Nid);
+	},
+	/*
+	Function: excluiTips
+	
+	Exclui os tips armazenados na variável objmapa.objtips
+	
+	Parameters:
+	
+	tipo {String} - todos|naofixos tipos de tips que serão excluídos
+	*/
+	excluiTips: function(tipo){
+		
+		if(objmapa.objtips.length > 0){
+			var ot = objmapa.objtips.length-1;
+			if (ot >= 0){
+				do{
+					if(tipo == 'todos'){
+						if(objmapa.objtips[ot]){
+							var i = $i(objmapa.objtips[ot].id);
+							document.body.removeChild(i);
+						}
+					}
+					if(tipo == 'naofixos'){
+						if (objmapa.objtips[ot]){
+							if($i(objmapa.objtips[ot].id+"cabecatip").innerHTML != ""){
+								document.body.removeChild(objmapa.objtips[ot]);
+							}
+						}
+					}
+				}
+				while(ot--)
+				if(tipo == "todos")
+				{objmapa.objtips = new Array();}
+			}
+		}
 	},
 	/*
 	Function: fechaAguarde
@@ -45929,11 +46202,27 @@ i3GEO.janela = {
 	
 	Paremeters:
 	
-	id {String} - id da janela que será fechada
+	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
-		try{eval('YAHOO.aguarde.'+id+'.destroy()');}
-		catch(e){};
+		if(arguments.length > 0){
+			try{eval('YAHOO.aguarde.'+id+'.destroy()');}
+			catch(e){};
+		}
+		else{
+			i3GEO.janela.fechaAguarde("ajaxdestaca");
+			i3GEO.janela.fechaAguarde("ajaxabrelente");
+			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
+			i3GEO.janela.fechaAguarde("ajaxLegenda");
+			i3GEO.janela.fechaAguarde("ajaxReferencia");
+			i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
+			i3GEO.janela.fechaAguarde("montaMapa");
+			i3GEO.janela.fechaAguarde("aguardedoc");
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");		
+		}
 	}
 };
 try{
@@ -46031,15 +46320,13 @@ try{
 catch(e){};
 
 /*
-Class:: i3GEO.eventos
+Class:: i3GEO.guias
 
-Controla as operações que são executadas em eventos que ocorrem no mapa.
+Cria e controla as guias de opções
 
-As listas de operações consistem em variáveis com nomes de funções.
+Para configurar as guias utilize i3GEO.guias.configura = ...
 
-As listas são inicializadas com algunmas funções já embutidas, mas podem ser acrescentadas outras.
-
-File: i3geo/classesjs/classe_eventos.js
+File: i3geo/classesjs/classe_guias.js
 
 About: Licença
 
@@ -46064,44 +46351,334 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
-i3GEO.eventos = {
+i3GEO.guias = {
 	/*
-	Variable: MOUSEPARADO
-
-	Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa 
-	por alguns instantes.
+	Variable: CONFIGURA
+	
+	Define os parâmetros de cada guia
+	
+	Type:
+	{JSON}
 	*/
-	MOUSEPARADO: new Array(
-		"i3GEO.gadgets.mostraCoordenadasUTM()",
-		"i3GEO.navega.mostraRosaDosVentos()"
-	),
-	/*
-	Function: mouseParado
-	
-	Executa as funções definidas em MOUSEPARADO quando é detectado que o mouse está estacionado.
-	
-	A execução desse evento é controlado por um timer definido no evento onmousemove (sobre o mapa).
-	
-	*/
-	mouseParado: function()	{
-		try
-		{clearTimeout(objmapa.tempoParado);}
-		catch(e){objmapa.tempoParado = "";}
-		if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0)
-		{
-			var f = i3GEO.eventos.MOUSEPARADO.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					if(objposicaocursor.imgx > 0)
-					{eval(i3GEO.eventos.MOUSEPARADO[f]);}
+	CONFIGURA: {
+		"temas":{
+			titulo:$trad("g1"),
+			id:"guia1",
+			idconteudo:"guia1obj",
+			click:""
+		},
+		"adiciona":{
+			titulo:$trad("g2"),
+			id:"guia2",
+			idconteudo:"guia2obj",
+			click: function(){
+				i3GEO.guias.mostra("adiciona");
+				if(!$i("arvoreAdicionaTema"))
+				{var ondeArvore = objmapa.guiaMenu+"obj";}
+				else
+				{var ondeArvore = "arvoreAdicionaTema";}
+				//para efeitos de compatibilidade
+				if(document.getElementById("outrasOpcoesAdiciona")){
+					i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde = "outrasOpcoesAdiciona";
+					i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
 				}
-				while(f--)
+				i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,ondeArvore);
+			}
+		},
+		"legenda":{
+			titulo:$trad("g3"),
+			id:"guia4",
+			idconteudo:"guia4obj",
+			click: function(){
+				i3GEO.guias.mostra("legenda");
+				objmapa.atualizaLegendaHTML();
+			}
+		},
+		"mapas":{
+			titulo:$trad("g4"),
+			id:"guia5",
+			idconteudo:"guia5obj",
+			click: function(){
+				var pegaMapas = function(retorno){
+					var ins = "<br><div id='banners' style='overflow:auto;text-align:left'>";
+					var mapa = retorno.data.mapas;
+					var ig1lt = mapa.length;
+					var ig1=0;
+					if(ig1lt > 0){
+						do{
+							var nome = mapa[ig1].NOME;
+							if(mapa[ig1].PUBLICADO){
+								if(mapa[ig1].PUBLICADO == "NAO" || mapa[ig1].PUBLICADO == "nao")
+								{var nome = "<s>"+nome+"</s>";}
+							}
+							var lkd = mapa[ig1].LINK;
+							var link = i3GEO.configura.locaplic+"/ms_criamapa.php?temasa="+mapa[ig1].TEMAS+"&layers="+mapa[ig1].LIGADOS;
+							if (mapa[ig1].EXTENSAO != "")
+							{link += "&mapext="+mapa[ig1].EXTENSAO;}
+							if (mapa[ig1].OUTROS != "")
+							{link += "&"+mapa[ig1].OUTROS;}
+							if (lkd != "")
+							{var link = lkd;}
+							ins += "<div><a href='"+link+"'><img src='"+mapa[ig1].IMAGEM+"'></a></div><br>";
+							ins += "<div><p style=text-align:center >"+nome+"</p></div><br>";
+							ig1++;
+						}
+						while(ig1<ig1lt)
+					}
+					$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = ins+"</div>";
+				};
+				$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
+				i3GEO.guias.mostra("mapas");
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"pegaMapas",pegaMapas);
+			}
+		},
+	},
+	/*
+	Variable: atual
+	
+	Guia que está ativa
+	*/
+	ATUAL: "temas",
+	/*
+	Variavel: idguias
+	
+	ID do elemento criado pelo YUI onde ficarão as guias
+	
+	Type:
+	{String}
+	*/
+	IDGUIAS: "guiasYUI",
+	/*
+	Function: cria
+	
+	Cria as guias com base na variável configura.
+	
+	As guias podem ser definidas no HTML do mapa sem necessariamente estarem na variável configura.<b> 
+	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
+	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj"
+	
+	Parameters:
+	
+	onde {String} - id do elemento que conterá as guias
+	*/
+	cria: function(onde){
+		//
+		//obtém outras guias que podem existir no mapa
+		//
+		var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		var nguias = guias.length;
+		for(var g=0;g<12;g++){
+			var tituloguia = "";
+			if ($i("guia"+g)){
+				var tituloguia = $i("guia"+g).innerHTML;
+				var re = new RegExp("&nbsp;", "g");
+				var tituloguia = tituloguia.replace(re,'');
+				for(ng=0;ng<nguias;ng++){
+					if(i3GEO.guias.CONFIGURA[guias[ng]].id == "guia"+g){
+						var tituloguia = "";
+					}
+				}
+				if (tituloguia != ""){
+					eval("i3GEO.guias.CONFIGURA.guia"+g+"=new Array()");
+					eval("i3GEO.guias.CONFIGURA.guia"+g+".titulo = '"+tituloguia+"'");
+					eval("i3GEO.guias.CONFIGURA.guia"+g+".id = 'guia"+g+"'");
+					eval("i3GEO.guias.CONFIGURA.guia"+g+".idconteudo = 'guia"+g+"obj'");
+				}
 			}
 		}
+		var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		var nguias = guias.length;
+		//
+		//verifica o div que contém as guias caso não tenha sido passado como parâmetro
+		//
+		if(arguments.length == 0){
+			for(ng=0;ng<nguias;ng++){
+				var i = $i(i3GEO.guias.CONFIGURA[guias[ng]].id);
+				if(i){
+					var onde = i.parentNode;
+				}
+			}			
+		}
+		else
+		{var onde = $i(onde);}
+		onde.id = i3GEO.guias.IDGUIAS;
+		onde.className = "yui-navset";
+		//
+		//constroi as TAGs para as guias
+		//
+		var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
+		for(ng=0;ng<nguias;ng++){
+			if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
+			ins += '<li><a href="#"><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';
+		}
+		ins += "</ul>";
+		onde.innerHTML = ins;
+		for(g=0;g<nguias;g++)
+		{
+			var guia = i3GEO.guias.CONFIGURA[guias[g]];
+			var id = guia.id;
+			if($i(id)){
+				if(guia.click == "")
+					eval('$i("'+id+'").onclick = function(){i3GEO.guias.mostra("'+guias[g]+'");}');
+				else
+					$i(id).onclick = guia.click;
+				$i(id).onmouseover = function(){
+					var bcg = this.parentNode.parentNode.style;
+					var cor = bcg.background.split(" ")[0];
+					if(cor != "white")
+					bcg.background = "#bfdaff";
+				};
+				$i(id).onmouseout = function(){
+					var bcg = this.parentNode.parentNode.style;
+					var cor = bcg.background.split(" ")[0];
+					if(cor != "white")
+					bcg.background = "transparent";
+				};
+				if($i(guia.idconteudo)){
+					$i(guia.idconteudo).style.overflow="auto";
+					$i(guia.idconteudo).style.height = objmapa.h;
+				}
+			}
+		}
+		i3GEO.guias.mostra(i3GEO.guias.ATUAL);
+	},
+	/*
+	Mostra no mapa uma determinada guia
+	
+	Parameters:
+	
+	guia {String} - nome da guia
+	*/
+	mostra: function(guia){
+		var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		var nguias = guias.length;
+		for(g=0;g<nguias;g++){
+			if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo))
+			$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.display="none";
+			if($i(i3GEO.guias.CONFIGURA[guias[g]].id))
+			$i(i3GEO.guias.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";
+		}
+		if($i(i3GEO.guias.CONFIGURA[guia].idconteudo)){
+			$i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display="block";
+			$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
+			i3GEO.guias.ATUAL = guia;
+		}
+	},
+	/*
+	Function: libera
+	
+	Libera as guias do local atual, colocando-as em uma janela móvel sobre o mapa.
+	*/
+	libera: function(){
+		if (!$i("conteudojanelaguias")){
+			if($i(i3GEO.guias.IDGUIAS)){$i(i3GEO.guias.IDGUIAS).style.display="none";}
+			var i = $i("contemFerramentas");
+			if(i)
+			i.style.display = "none";
+			var w = parseInt($i("contemFerramentas").style.width);
+			var i = $i("visual");
+			if (i)
+			{i.style.width="0px";i.innerHTML="";}
+			var pos = "px";
+			var a = objmapa.h;
+			var l = objmapa.w + w;
+			objmapa.h = a;
+			objmapa.w = l;
+			if (navm){pos = "";}
+			var i = $i("img");
+			if(i){
+				i.style.width= l+pos;
+				i.style.height= a+pos;
+			}
+			var i = $i("corpoMapa");
+			if(i){
+				i.style.width= l+pos;
+				i.style.height= a+pos;
+				i.style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')';
+			}
+			var i = $i("mst");
+			if(i){i.style.width = l + 1 + pos;}
+			var i = $i("contemImg");
+			if(i){
+				i.style.height= a+pos;
+				i.style.width= l+pos;
+			}
+			if (g_entorno == "sim"){
+				var letras=["L","O"];
+				for (var l=0;l<2; l++){
+					if ($i("img"+letras[l])){
+						$i("img"+letras[l]).style.width = objmapa.w+pos;
+						$i("img"+letras[l]).style.height = objmapa.h+pos;
+						$i("corpoMapa"+letras[l]).style.width=objmapa.w+pos;
+						$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos+pos;
+						$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
+					}
+				}
+				var letras=["N","S"];
+				for (var l=0;l<2; l++){
+					if ($i("img"+letras[l])){
+						$i("img"+letras[l]).style.width = objmapa.w * 2+pos;
+						$i("img"+letras[l]).style.height = objmapa.h * 2+pos;
+						$i("corpoMapa"+letras[l]).style.width=objmapa.w * 3+pos;
+						$i("corpoMapa"+letras[l]).style.height=objmapa.h+pos;
+						$i("corpoMapa"+letras[l]).style.clip = 'rect(0 0 0 0)';
+					}
+				}
+			}
+			calcposf();
+			var temp = function(retorno){
+				//carrega janela
+				var novoel = document.createElement("div");
+				novoel.id = "janelaguias";
+				novoel.style.display="block";
+				var temp = '<div class="hd">Guias</div>';
+				temp += '<div class="bd" id="conteudojanelaguias"></div>';
+				novoel.innerHTML = temp;
+				if($i("i3geo"))
+				{$i("i3geo").appendChild(novoel);}
+				else
+				{document.body.appendChild(novoel);}
+				YAHOO.namespace("janelaguias.xp");
+				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+				YAHOO.janelaguias.xp.panel.render();
+				var i = $i(i3GEO.guias.IDGUIAS);
+				$i("janelaguias").appendChild(i);
+				i.style.borderLeft="1px solid black";
+				i.style.borderRight="1px solid black";
+				var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+				var nguias = guias.length;
+				for(g=0;g<nguias;g++){
+					if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)){
+						$i("janelaguias").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
+						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.background="white";
+						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.border="1px solid black";
+						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.borderTop="0px solid black";
+						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.width="270px";
+						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.left="-1px";
+					}
+				}
+				ajaxredesenha("")
+				i.style.display="block";
+				i.style.left = "-1px";
+				i.style.width = "270px";
+			};	
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+i3GEO.configura.sid;
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"mudaQS",temp);
+		}
+		else{
+			YAHOO.janelaguias.xp.panel.render();
+			YAHOO.janelaguias.xp.panel.show();
+		}
+	
 	}
-}
+};
 /*
 Class: i3GEO.arvoreDeCamadas
 
@@ -46884,12 +47461,1874 @@ i3GEO.arvoreDeCamadas = {
 };
 //
 //para efeitos de compatibilidade
-i3GEO.arvoreDeCamadas.IDHTML = "listaTemas";
-try {
-	if (g_opcoesTemas == "nao")
-	{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
+i3GEO.arvoreDeCamadas.IDHTML = "listaTemas";
+/*
+Class: i3GEO.navega
+
+Realiza operações de navegação do mapa, como zoom, pan, etc..
+
+File: i3geo/classesjs/classe_navega.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
 }
-catch(e){};
+i3GEO.navega = {
+	/*
+	Property: FATORZOOM
+	
+	Valor utilizado nas operações de zoom in e out. Fator de zoom.
+	
+	O valor default é 2.
+	
+	Type:
+	{Integer}
+	*/
+	FATORZOOM: 2,
+	/*
+	Function: zoomin
+	
+	Aproxima o mapa
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	*/
+	zoomin: function(locaplic,sid){
+		YAHOO.log("zoomin", "i3geo");
+		if(arguments.length == 0){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"aproxima",ajaxredesenha);
+	},
+	/*
+	Function: zoomout
+	
+	Afasta o mapa
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	*/
+	zoomout: function(locaplic,sid){
+		YAHOO.log("zoomout", "i3geo");
+		if(arguments.length == 0){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
+		//g_operacao = "navega";
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"afasta",ajaxredesenha);
+	},
+	/*
+	Function: zoomponto
+	
+	Centraliza o mapa em um ponto e acrescenta o ponto como uma nova camada no mapa
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	x {Numeric} - coordenada em décimos de grau da longitude
+	
+	y {Numeric} - coordenada em décimos de grau da latitude
+	*/
+	zoomponto: function(locaplic,sid,x,y){
+		YAHOO.log("zoomponto", "i3geo");
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"zoomPonto",ajaxredesenha);
+	},
+	/*
+	Function: zoompontoIMG
+	
+	Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	x {Numeric} - coordenada x da imagem
+	
+	y {Numeric} - coordenada y da imagem
+	*/
+	zoompontoIMG: function(locaplic,sid,x,y){
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+x+"&y="+y+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"zoomPonto",ajaxredesenha);
+	},
+	/*
+	Function: xy2xy
+	
+	Desloca o mapa de um ponto de coordenadas xy para um segundo ponto
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	xi {Numeric} - coordenada x inicial
+	
+	yi {Numeric} - coordenada y inicial
+	
+	xf {Numeric} - coordenada x final
+	
+	yf {Numeric} - coordenada y final
+	
+	ext {String} - extensão geográfica do mapa
+	
+	tipoimagem {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
+	*/
+	xy2xy: function(locaplic,sid,xi,yi,xf,yf,ext,tipoimagem){
+		var disty = (yi * -1) + yf;
+		var distx = (xi * -1) + xf;
+		var ex = ext.split(" ");
+		var novoxi = (ex[0] * 1) - distx;
+		var novoxf = (ex[2] * 1) - distx;
+		var novoyi = (ex[1] * 1) - disty;
+		var novoyf = (ex[3] * 1) - disty;
+		if ((distx == 0)||(disty == 0))
+		{return false;}
+		else{
+			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
+			i3GEO.navega.zoomExt(locaplic,sid,tipoimagem,nex);
+			return true;
+		}
+	},	
+	/*
+	Function: localizaIP
+	
+	Localiza as coordenadas baseadas no número IP do usuário.
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
+	*/	
+	localizaIP: function(locaplic,sid,funcao){
+		YAHOO.log("localizaIP", "i3geo");
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"IP",funcao);
+	},
+	/*
+	Function: zoomIP
+	
+	Mostra no mapa um ponto baseado na localização do usuário.
+
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	*/
+	zoomIP: function(locaplic,sid){
+		try
+		{
+			if(arguments.length == 0){
+				var locaplic = i3GEO.configura.locaplic;
+				var sid = i3GEO.configura.sid;
+			}
+			var mostraIP = function(retorno)
+			{
+				if (retorno.data.latitude != null)
+				{
+					i3GEO.navega.zoomponto(locaplic,sid,retorno.data.longitude,retorno.data.latitude);
+				}
+				else
+				{alert("Nao foi possivel identificar a localizacao.");}
+			};
+			i3GEO.navega.localizaIP(locaplic,sid,mostraIP);
+		}
+		catch(e){var e = "";}
+	},
+	/*
+	Function: zoomExt
+	
+	Aplica uma nova extensão geográfica ao mapa.
+
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	tipoimagem {String} - Utlize "" para aplicar o default. Tipo de imagem que será retornada na imagem do mapa que será criada
+
+	ext {String} - Extensão geográfica no formato xmin ymin xmax ymax
+	*/
+	zoomExt: function(locaplic,sid,tipoimagem,ext){
+		YAHOO.log("zoomExt", "i3geo");
+		if(tipoimagem == "")
+		{var tipoimagem = "nenhum";}
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"mudaExtensao",ajaxredesenha);
+	},
+	/*
+	Function: aplicaEscala
+	
+	Aplica ao mapa um novo valor de escala tendo como base o valor do denminador
+
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+	
+	escala {Numeric} - denominador da escala
+	*/	
+	aplicaEscala: function(locaplic,sid,escala){
+		YAHOO.log("aplicaescala", "i3geo");
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"mudaEscala",ajaxredesenha);
+	},
+	/*
+	Function: panFixo
+	
+	Desloca o mapa para uma determinada direção com uma distância fixa.
+	
+	Parameters:
+	
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	
+	sid {String} - código da seção aberta no servidor pelo i3geo
+
+	direcao {String} - norte,sul,leste,oeste,sudeste,sudoeste,nordeste,noroeste
+	
+	w {Numeric} - largura da imagem do mapa em pixels
+	
+	h {Numeric} - altura da imagem do mapa em pixels
+	
+	escala {Numeric} - escala do mapa
+	*/
+	panFixo: function(locaplic,sid,direcao,w,h,escala){
+		YAHOO.log("panfixo", "i3geo");
+		if (direcao == "norte"){
+			var y = h / 6;
+			var x = w / 2;
+		}
+		if (direcao == "sul"){
+			var y = h - (h / 6);
+			var x = w / 2;
+		}
+		if (direcao == "leste"){
+			var x = w - (w / 6);
+			var y = h / 2;
+		}
+		if (direcao == "oeste"){
+			var x = w / 6;
+			var y = h / 2;
+		}
+		if (direcao == "nordeste"){
+			var y = h / 6;
+			var x = w - (w / 6);
+		}
+		if (direcao == "sudeste"){
+			var y = h - (h / 6);
+			var x = w - (w / 6);
+		}
+		if (direcao == "noroeste"){
+			var y = h / 6;
+			var x = w / 6;
+		}
+		if (direcao == "sudoeste"){
+			var y = h - (h / 6);
+			var x = w / 6;
+		}
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+escala+"&x="+x+"&y="+y+"&g_sid="+sid;
+		var cp = new cpaint();
+		cp.set_async("true");
+		cp.set_response_type("JSON");
+		cp.call(p,"pan",ajaxredesenha);
+	},
+	/*
+	Function: mostraRosaDosVentos
+	
+	Mostra sobre o mapa a rosa dos ventos.
+	
+	A rosa permite que o usuário navegue no mapa sem ter de alterar a opção atual de navegação.
+	
+	A rosa é mostrada apenas se a variável i3GEO.configura.mostraRosaDosVentos for = a "sim".<b> 
+
+	Para que a rosa seja mostrada, é necessário que esta função esteja registrada em
+	
+	i3GEO.eventos.MOUSEPARADO
+	*/
+	mostraRosaDosVentos: function(){
+		try{
+			if(i3GEO.configura.mostraRosaDosVentos == "nao"){return;}
+			if(g_tipoacao == "area"){return;}
+		}
+		catch(e){};
+		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10 || objposicaocursor.imgy > (objmapa.h - 10))
+		{return;}
+		if (!$i("i3geo_rosa")){
+			var novoel = document.createElement("div");
+			novoel.id = "i3geo_rosa";
+			novoel.style.position="absolute";
+			novoel.style.zIndex=5000;
+			if(navn)
+			{novoel.style.opacity=".7";}
+			else
+			{novoel.style.filter = "alpha(opacity=70)";}
+			document.body.appendChild(novoel);
+		}
+		var setas = "<table id='rosaV' >";
+		setas += "<tr onclick=\"javascript:i3GEO.configura.mostraRosaDosVentos='nao'\"><td></td><td></td><td style=cursor:pointer >x</td></tr><tr>";
+		setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','noroeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','norte','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','nordeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+		setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','oeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><table><tr>";
+		setas += "<td><img class='rosamais' title='aproxima' onclick=\"i3GEO.navega.zoomin('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
+		setas += "<td><img class='rosamenos' title='afasta' onclick=\"i3GEO.navega.zoomout('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
+		setas += "</tr></table></td>";
+		setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','leste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
+		setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudoeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sul','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
+		setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr></table>";
+		var i = $i("i3geo_rosa");
+		i.innerHTML = setas;	
+		i.style.top = objposicaocursor.telay - 27;
+		i.style.left = objposicaocursor.telax - 27;
+		i.style.display="block";
+		var escondeRosa = function(){
+			var i = $i("i3geo_rosa");
+			i.style.display="none";
+			YAHOO.util.Event.removeListener(escondeRosa);
+		}
+		if($i("img"))
+		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
+		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
+	},
+	autoRedesenho: {
+		INTERVALO: 0,
+		ID: "tempoRedesenho",
+		ativa: function(id){
+			if(arguments.length == 0){var id = "tempoRedesenho";}
+			i3GEO.navega.autoRedesenho.ID = id;
+			if (($i(id)) && i3GEO.navega.autoRedesenho.INTERVALO > 0)
+			{$i(id).style.display = "block";}
+			if (i3GEO.navega.autoRedesenho.INTERVALO > 0)
+			{i3GEO.navega.tempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.redesenha()',i3GEO.navega.autoRedesenho.INTERVALO);}
+			if (($i(id)) && (i3GEO.navega.autoRedesenho.INTERVALO > 0)){
+				$i(id).innerHTML = i3GEO.navega.autoRedesenho.INTERVALO/1000;
+				i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
+			}
+		},
+		desativa:function(){
+			i3GEO.navega.autoRedesenho.INTERVALO = 0;
+			clearTimeout(i3GEO.navega.tempoRedesenho);
+			clearTimeout(i3GEO.navega.contaTempoRedesenho);
+			i3GEO.navega.tempoRedesenho = "";
+			i3GEO.navega.contaTempoRedesenho = "";
+			if ($i(i3GEO.navega.autoRedesenho.ID))
+			{$i(i3GEO.navega.autoRedesenho.ID).style.display = "none";}
+		},
+		redesenha: function(){
+			clearTimeout(i3GEO.navega.tempoRedesenho);
+			clearTimeout(i3GEO.navega.contaTempoRedesenho);
+			ajaxredesenha("");
+			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
+		},
+		contagem: function(){
+			if ($i(i3GEO.navega.autoRedesenho.ID)){$i(i3GEO.navega.autoRedesenho.ID).innerHTML = parseInt($i(i3GEO.navega.autoRedesenho.ID).innerHTML) - 1;}
+			i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
+		}
+	}
+};
+
+/*
+Class:: i3GEO.eventos
+
+Controla as operações que são executadas em eventos que ocorrem no mapa.
+
+As listas de operações consistem em variáveis com nomes de funções.
+
+As listas são inicializadas com algunmas funções já embutidas, mas podem ser acrescentadas outras.
+
+File: i3geo/classesjs/classe_eventos.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+if(typeof(i3GEO) == 'undefined'){
+	i3GEO = new Array();
+}
+i3GEO.eventos = {
+	/*
+	Variable: NAVEGAMAPA
+	
+	Armazena as funções que serão executadas quando é feita uma operação de navegação sobre o mapa.
+	
+	Type:
+	{Array}
+	*/
+	NAVEGAMAPA: new Array(
+		"atualizaEscalaNumerica()"
+	),
+	/*
+	Variable: MOUSEPARADO
+
+	Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa 
+	por alguns instantes.
+	
+	Type:
+	{Array}
+	*/
+	MOUSEPARADO: new Array(
+		"i3GEO.gadgets.mostraCoordenadasUTM()",
+		"i3GEO.navega.mostraRosaDosVentos()"
+	),
+	/*
+	Variable: MOUSEMOVE
+
+	Nome das funções que serão executadas quando o usuário move o mouse sobre o mapa 
+	
+	Type:
+	{Array}
+	*/
+	MOUSEMOVE: new Array(
+		"movePan()",
+		"moveLonglat()",
+		"moveSelecaoPoli()"
+	),
+	/*
+	Variable: MOUSEDOWN
+
+	Nome das funções que serão executadas quando o usuário pressiona o botão do mouse sobre o mapa 
+	
+	Type:
+	{Array}
+	*/
+	MOUSEDOWN: new Array(),
+	/*
+	Variable: MOUSEUP
+
+	Nome das funções que serão executadas quando o usuário solta o botão do mouse sobre o mapa 
+	
+	Type:
+	{Array}
+	*/
+	MOUSEUP: new Array(),
+	/*
+	Variable: MOUSECLIQUE
+
+	Nome das funções que serão executadas quando o usuário clica sobre o mapa 
+	
+	Type:
+	{Array}
+	*/
+	MOUSECLIQUE: new Array(
+		"cliqueSelecaoPoli()",
+		"cliqueCapturaPt()"	
+	),
+	/*
+	Variable: TIMERPARADO
+	
+	Timer utilizado pelo contador do mouse parado
+	
+	Type:
+	{Timeout}
+	*/
+	TIMERPARADO: "",
+	/*
+	Function: mouseParado
+	
+	Executa as funções definidas em MOUSEPARADO quando é detectado que o mouse está estacionado.
+	
+	A execução desse evento é controlado por um timer definido no evento onmousemove (sobre o mapa).
+	
+	*/
+	mouseParado: function()	{
+		try
+		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
+		catch(e){i3GEO.eventos.TIMERPARADO = "";}
+		if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0)
+		{
+			var f = i3GEO.eventos.MOUSEPARADO.length-1;
+			if (f >= 0)
+			{
+				do
+				{
+					if(objposicaocursor.imgx > 0)
+					{eval(i3GEO.eventos.MOUSEPARADO[f]);}
+				}
+				while(f--)
+			}
+		}
+	},
+	/*
+	Function: navegaMapa
+	
+	Executa as funções armazenadas em NAVEGAMAPA, ou seja, operações executadas quando o mapa tem sua extensão geográfica alterada.
+	*/
+	navegaMapa: function(){
+		if (i3GEO.eventos.NAVEGAMAPA.length > 0){
+			var f = i3GEO.eventos.NAVEGAMAPA.length-1;
+			if (f >= 0){
+				do{
+					var temp = i3GEO.eventos.NAVEGAMAPA[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
+					eval(i3GEO.eventos.NAVEGAMAPA[f]);
+				}
+				while(f--)
+			}
+		}
+	},
+	/*
+	Function: mousemoveMapa
+	
+	Executa as funções armazenadas em MOUSEMOVE.
+	*/
+	mousemoveMapa: function(){
+		if (i3GEO.eventos.MOUSEMOVE.length > 0){
+			var f = i3GEO.eventos.MOUSEMOVE.length-1;
+			if (f >= 0){
+				do{
+					var temp = i3GEO.eventos.MOUSEMOVE[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
+					eval(i3GEO.eventos.MOUSEMOVE[f]);
+				}
+				while(f--)
+			}
+		}	
+	},
+	/*
+	Function: mousedownMapa
+	
+	Executa as funções armazenadas em MOUSEDOWN.
+	*/
+	mousedownMapa: function(){
+		if (i3GEO.eventos.MOUSEDOWN.length > 0){
+			var f = i3GEO.eventos.MOUSEDOWN.length-1;
+			if (f >= 0){
+				do{
+					var temp = i3GEO.eventos.MOUSEDOWN[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
+					eval(i3GEO.eventos.MOUSEDOWN[f]);
+				}
+				while(f--)
+			}
+		}
+	},
+	/*
+	Function: mouseupMapa
+	
+	Executa as funções armazenadas em MOUSEUP.
+	*/
+	mouseupMapa: function(){
+		if (i3GEO.eventos.MOUSEUP.length > 0){
+			var f = i3GEO.eventos.MOUSEUP.length-1;
+			if (f >= 0){
+				do{
+					var temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
+					if(eval('typeof ' + temp) == 'function')
+					eval(i3GEO.eventos.MOUSEUP[f]);
+				}
+				while(f--)
+			}
+		}	
+	},
+	/*
+	Function: mousecliqueMapa
+	
+	Executa as funções armazenadas em MOUSECLIQUE.
+	*/
+	mousecliqueMapa: function(){
+		if (i3GEO.eventos.MOUSECLIQUE.length > 0){
+			var f = i3GEO.eventos.MOUSECLIQUE.length-1;
+			if (f >= 0){
+				do{
+					eval(i3GEO.eventos.MOUSECLIQUE[f]);
+				}
+				while(f--)
+			}
+		}
+		if (i3GEO.eventos.MOUSECLIQUE.length > 0){
+			var lle = i3GEO.eventos.MOUSECLIQUE.length;
+			for (var f=0;f<lle; f++){
+				eval(i3GEO.eventos.MOUSECLIQUE[f]);
+			}
+		}
+	
+	}
+}
+/*
+Title: funcoes.js
+
+Funções de uso geral para processamento de dados
+
+File: i3geo/classesjs/funcoes.js
+
+About: Licenciamento
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+//
+//verifica se $i existe, se não cria.
+//isso é necessário nos casos em que funcoes.js é utilizado separadamente
+//
+try
+{
+	$i("i3geo");
+}
+catch(e)
+{
+	$i = function(i)
+	{return document.getElementById(i);};
+}
+/*
+Section: interface
+*/
+/*
+Function: criaContainerRichdraw
+
+Cria os elementos 'dom' necessários ao uso das funções de desenho sobre o mapa.
+
+As ferramentas de cálculo de distâncias e áreas utilizam esse container.
+
+Richdraw é uma biblioteca utilizada pelo i3geo para abstrair as diferenças entre as linguagens svg e vml.
+
+Essa abstração é necessária devido às diferenças entre os navegadores.
+*/
+function criaContainerRichdraw()
+{
+	try
+	{
+		//
+		//cria o container para uso da função de desenho usando
+		//svg ou vml
+		//esse container é sobreposto exatamente sobre o mapa
+		//O id do containner é divGeometriasTemp
+		//
+		if (!$i("divGeometriasTemp"))
+		{
+			//
+			//pega a posição da imagem do mapa para posicionar corretamente o container
+			//
+			var pos = [0,0];
+			if($i("img"))
+			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+			//
+			//cria o container
+			//
+			var novoel = document.createElement("div");
+			novoel.id = "divGeometriasTemp";
+			var ne = novoel.style;
+			ne.cursor="crosshair";
+			ne.zIndex=0;
+			ne.position="absolute";
+			ne.width=objmapa.w;
+			ne.height=objmapa.h;
+			ne.border="1px solid black";
+			ne.display="none";
+			ne.top=pos[1];
+			ne.left=pos[0];
+			document.body.appendChild(novoel);
+		}
+		//
+		//como o container já poderia ter sido criado antes é necessário esvaziá-lo
+		//
+		var divgeo = $i("divGeometriasTemp");
+		divgeo.innerHTML = "";
+		var renderer;
+		//
+		//cria o objeto renderer conforme o browser em uso
+		//esse objeto será utilizado nas funções de desenho
+		//mais detalhes, veja em pacotes/richdraw
+		//Conforme a resposta do navegador, utiliza-se a criação VML ou SVG
+		//
+		try
+		{
+			renderer = new VMLRenderer();
+			richdraw = new RichDrawEditor(divgeo, renderer);
+		}
+		catch(e)
+		{
+			renderer = new SVGRenderer();
+			richdraw = new RichDrawEditor(divgeo, renderer);
+		}
+		//
+		//definição dos símbolos default para os elementos gráficos
+		//
+		richdraw.editCommand('fillcolor', 'red');
+		richdraw.editCommand('linecolor', 'gray');
+		richdraw.editCommand('linewidth', '1px');
+		richdraw.editCommand('mode', 'line');
+		divgeo.style.display="block";
+		//
+		//após o container ser criado, é necessário que as funções
+		//de clique sobre o mapa sejam ativadas
+		//para funcionarem sobre o container
+		//
+		ativaClicks(divgeo);
+		
+	}
+	catch(e){alert("Erro ao tentar criar container richdraw");}
+}
+/**
+Function: mudaiconf
+
+Muda as bordas dos ícones de ferramentas, passando todos para normal.
+Aplica uma borda sobre um ícone específico e executa outras operações.
+
+Utilizado para indicar que uma determinada opção está em uso.
+
+Como esta função é executada quando um ícone é clicado, algumas operações são definidas aqui
+como por exemplo, definir o ícone que segue o mouse. 
+
+Parameters:
+
+i - id do ícone que receberá a borda.
+*/
+function mudaiconf(i)
+{
+	try
+	{
+		YAHOO.log("mudaiconf", "i3geo");
+		//limpa o container com os tips fixos na tela
+		if(objmapa.objtips.length > 0)
+		{
+			var ot = objmapa.objtips.length-1;
+			if(ot >= 0)
+			{
+				do
+				{
+					if (objmapa.objtips[ot])
+					{
+						objmapa.objtips[ot].innerHTML = "";
+						objmapa.objtips[ot].style.display="none";
+					}
+				}
+				while(ot--)
+			}
+		}
+		objmapa.objtips = new Array();
+		limpacontainerf();
+		g_tipoacao = i;
+		if ($i("divGeometriasTemp"))
+		{$i("divGeometriasTemp").style.display = "none";}
+		YAHOO.log("Fim mudaiconf", "i3geo");
+	}
+	catch(e){alert("Ocorreu um erro. mudaiconf"+e);}
+}
+/*
+Function: ativaClicks
+
+Ativa as operações de clique sobre o mapa
+
+Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
+
+Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja configura.js)
+
+Parameters:
+
+docMapa - objeto que será alvo da ativação dos cliques
+*/
+function ativaClicks(docMapa)
+{
+	docMapa.onmouseover = function()
+	{
+		this.onmousemove=function(exy)
+		{
+			try
+			{
+				try
+				{clearTimeout(i3GEO.eventos.TIMERPARADO);}
+				catch(e){var a = e;}
+				i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
+				capturaposicao(exy);
+				if (g_destaca != "")
+				{$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - destacaTamanho)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - destacaTamanho)+')';}
+			}
+			catch(e){var e = "";}
+			try
+			{i3GEO.eventos.mousemoveMapa();}
+			catch(e){var e = "";}
+		};
+	};
+	docMapa.onmouseout = function()
+	{
+		try
+		{
+			objmapa.parado="parar";
+			mostradicasf(this,'');
+		}
+		catch(e){var e = "";}
+	};
+	docMapa.onmousedown = function(exy)
+	{
+		try
+		{
+			capturaposicao(exy);
+			//verifica se esta na opÃ¯Â¿Â½o de zoom box
+			if ((g_tipoacao == "zoomli") || (g_tipoacao == "selecaobox"))
+			{
+				if($i("box1"))
+				{
+					var i = $i("box1").style;
+					i.width=0;
+					i.height=0;
+					i.visibility="visible";
+					i.display="none";
+					i.left = objposicaocursor.telax + g_postpx;
+					i.top = objposicaocursor.telay + g_postpx;
+				}
+				boxxini = objposicaocursor.telax;
+				boxyini = objposicaocursor.telay;
+				tamanhox = 0;
+				tamanhoy = 0;
+			}
+			i3GEO.eventos.mousedownMapa();
+		}
+		catch(e){var e = "";}
+	};
+	docMapa.onclick = function()
+	{
+		try
+		{i3GEO.eventos.mousecliqueMapa();}
+		catch(e){var e = "";}
+	};
+	docMapa.onmouseup = function()
+	{
+		try
+		{
+			if (g_tipoacao == "zoomli"){zoomboxf("termina");}
+			if (g_tipoacao == "selecaobox"){zoomboxf("termina");}
+			i3GEO.eventos.mouseupMapa();
+		}
+		catch(e){var e = "";}
+	};
+}
+/*
+Function: movelentef
+
+Move a imagem na lente de aumento conforme o movimento do mouse sobre o mapa.
+
+A lente de aumento é uma ferramenta do i3geo.
+
+Esta função é executada sempre que o mouse é movido sobre o mapa e se o elemento "lente" estiver visível.
+*/
+function movelentef()
+{
+	try
+	{
+		if ($i("lente"))
+		{
+			if ($i("lente").style.visibility=="visible")
+			{
+				var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+				var esq = (objposicaocursor.telax - pos[0]) * 2.25;
+				var topo = (objposicaocursor.telay - pos[1]) * 2.25;
+				var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
+				var i = $i("lente").style;
+				i.clip = clipt;
+				eval("i." + g_tipotop + "= (pos[1] - (topo - 40)) + g_postpx");
+				eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
+			}
+		}
+	}
+	catch(e){var e = "";}
+}
+
+/*
+Function: zoomboxf
+
+Faz o zoom no mapa utilizando a opção de desenhar um retângulo.
+
+As coordenadas de tela devem estar no objeto "objposicaocursor".
+A opção "desloca" altera a posição do box (box1) na tela. A opção "termina", pega as coordenadas
+de tela do box1 e chama a função ajax que redesenha o mapa.
+
+Parameters:
+
+tipo - desloca|termina
+*/
+function zoomboxf(tipo)
+{
+	var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+	if($i("box1"))
+	{
+		var bx = $i("box1");
+		var bxs = bx.style;
+	}
+	else
+	{alert("Box nao encontrado");return;}
+	switch(tipo)
+	{
+		case "desloca":
+		// muda o retï¿½gulo de zoom conforme deslocamento do mouse
+		bxs.display="block";
+		ppx = objposicaocursor.telax;
+		py = objposicaocursor.telay;
+		if (navm)
+		{
+			if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
+			{bxs.width = ppx - boxxini - 2;}
+			if ((py > boxyini) && ((py - boxyini - 2) > 0))
+			{
+				bxs.height = py - boxyini - 2;
+			}
+			if (ppx < boxxini)
+			{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
+			if (py < boxyini)
+			{bxs.top = py;bxs.height = boxyini - py + 2;}
+		}
+		else
+		{
+			if (ppx > boxxini)
+			{bxs.width = ppx - boxxini + "px";}
+			if (py > boxyini)
+			{bxs.height = py - boxyini + "px";}
+			if (ppx < boxxini)
+			{bxs.left = ppx + "px";bxs.width = boxxini - ppx + "px";}
+			if (py < boxyini)
+			{bxs.top = py + "px";bxs.height = boxyini - py + "px";}
+		}
+		break;
+		case "termina":
+		// finaliza o retï¿½gulo de zoom
+		md = 1;
+		eval ('pix = parseInt(document.getElementById("box1").style.' + g_tipoleft + ")");
+		eval ('piy = parseInt(document.getElementById("box1").style.' + g_tipotop + ")");
+		xfig0 = parseInt(bxs.width) - pos[0];
+		yfig0 = parseInt(bxs.height) - pos[1];
+		xfig = pix + (parseInt(bxs.width)) - pos[0];
+		yfig = piy + (parseInt(bxs.height)) - pos[1];
+		amext = objmapa.extent.split(" ");
+		dx = ((amext[0] * -1) - (amext[2] * -1)) / (tamanhox - 1);
+		dy = ((amext[1] * 1) - (amext[3] * 1)) / (tamanhoy - 1);
+		if (dy < 0) dy=dy * -1;
+		nx = g_celula * xfig;
+		ny = g_celula * yfig;
+		x1 = (amext[0] * 1) + nx;
+		y1 = (amext[3] * 1) - ny;
+		xfig = pix - pos[0];
+		yfig = piy - pos[1];
+		if (dy < 0) dy=dy * -1;
+		nx = g_celula * xfig;
+		ny = g_celula * yfig;
+		x2 = (amext[0] * 1) + nx;
+		y2 = (amext[3] * 1) - ny;
+		v = x2+" "+y2+" "+x1+" "+y1;
+		// se o retangulo for negativo pula essa parte para nï¿½ gerar erro
+		if (g_tipoacao != "selecaobox")
+		{
+			if (x1 != x2)
+			{
+				objmapa.extent=v;
+				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,v);
+			}
+		}
+		else
+		{
+			if (x1 != x2)
+			{
+				try
+				{
+					var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+					var tipo = "adiciona";
+					//pega o tipo de operacao da janela de selecao
+					if (doc.getElementById("tipoOperacao")){tipo = doc.getElementById("tipoOperacao").value;}
+					if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+					//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
+					if ((tipo != "limpa") && (tipo != "inverte"))
+					{
+						i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+						var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+v+"&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+objmapa.temaAtivo;
+						cpObj.call(p,"selecaobox",ajaxredesenha);
+					}
+				}
+				catch(e){var e = "";}
+			}
+		}		
+		bxs.visibility="hidden";
+		bxs.width = 0;
+		bxs.height = 0;
+		break;
+	}
+}
+
+/*
+Function: ativaEntorno
+
+Ativa ou desativa a carga do entorno.
+
+Com o entorno ativo, são produzidas imagens no entorno do mapa, no estilo Google.
+*/
+function ativaEntorno()
+{
+	if(objmapa.mapfile == "")
+	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+	if (g_entorno == "sim")
+	{
+		var letras=["L","O","N","S"];
+		for (var l=0;l<4; l++)
+		{
+			if ($i("img"+letras[l]))
+			{
+				$i("img"+letras[l]).style.display = "none";
+				$i("img"+letras[l]).src = "";
+			}
+		}
+		$left("img",0);
+		$top("img",0);
+		g_entorno = "nao";
+		alert("Entorno desativado");
+		$i("img").style.visibility = "visible";
+		$i("img").style.display = "block";
+	}
+	else
+	{
+		geraURLentorno();
+		var letras=["L","O","N","S"];
+		for (var l=0;l<4; l++)
+		{
+			if ($i("img"+letras[l]))
+			{
+				$i("img"+letras[l]).style.width = objmapa.w;
+				$i("img"+letras[l]).style.height = objmapa.h;
+				$i("img"+letras[l]).style.display = "block";
+			}
+		}
+		g_entorno = "sim";
+		ajustaEntorno();
+		alert("Entorno ativado. o desenho do mapa pode demorar mais.");
+	}
+}
+/*
+Function: geraURLentorno
+
+Gera as urls que farão parte dos divs de desenho do entorno do mapa.
+Essas URLs utilizam o mapserver no modo CGI
+*/
+function geraURLentorno()
+{
+	var nny = (objmapa.h / 2) * -1;
+	var nnx = objmapa.w / 2;
+	var sy = objmapa.h + (objmapa.h / 2);
+	var sx = objmapa.w / 2;
+	var lx = objmapa.w + (objmapa.w / 2);
+	var ly = objmapa.h / 2;
+	var ox = (parseInt(objmapa.w/2)) * -1;
+	var oy = objmapa.h / 2;
+	var u = window.location.protocol+"\/\/"+window.location.host+objmapa.cgi+"?map="+objmapa.mapfile;
+	u += "&mode=map&imgext="+objmapa.extent+"&mapsize="+nnx+" "+oy;
+	var sul = u+"&imgxy="+sx/2+" "+sy/2;
+	var norte = u+"&imgxy="+nnx/2+" "+nny/2;
+	var leste = u+"&imgxy="+lx/2+" "+ly/2;
+	var oeste = u+"&imgxy="+ox/2+" "+oy/2;
+	$i("imgS").src=sul;
+	$i("imgN").src=norte;
+	$i("imgL").src=leste;
+	$i("imgO").src=oeste;
+}
+/*
+Function: ajustaEntorno
+
+Ajusta o tamanho do mapa e das imagens do entorno, quando a opção de desenho do entorno estiver ativa.
+
+Os valores que definem o tamanho do mapa são obtidos do objeto objmapa (métodos w e h)
+*/
+function ajustaEntorno()
+{
+	$left("img",objmapa.w*-1);
+	$left("imgS",objmapa.w*-1);
+	$left("imgL",objmapa.w);
+	$left("imgO",objmapa.w*-3);
+	$left("imgN",objmapa.w*-1);
+	$top("img",objmapa.h*-1);
+	$top("imgS",objmapa.h*-1);
+	$top("imgL",objmapa.h*-1);
+	$top("imgN",objmapa.h*-1);
+	$top("imgO",objmapa.h*-1);
+}
+/*
+Section: menu de temas e outras listagens
+*/
+/*
+Function: i3geo_comboGruposMenu
+
+Busca a lista de grupos existentes no menu de temas do i3geo e monta um combo com o resultado.
+
+Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do grupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboGruposMenu(funcaoOnchange,idDestino,idCombo,largura,altura)
+{
+	var combo = function (retorno)
+	{
+		obGrupos = retorno.data;
+		var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
+		for (ig=0;ig<obGrupos.grupos.length; ig++)
+		{
+			if(obGrupos.grupos[ig].nome)
+			ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>";
+		}
+		$i(idDestino).innerHTML = ins+"</select>";
+	};
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''&listasgrupos=nao";
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadegrupos",combo);
+}
+/*
+Function: i3geo_comboSubGruposMenu
+
+Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
+
+Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+idGrupo - identificador do grupo que será pesquisado
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboSubGruposMenu(funcaoOnchange,idDestino,idCombo,idGrupo,largura,altura)
+{
+	if(idGrupo != "")
+	{
+		var combo = function(retorno)
+		{
+			var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+",this.value)' ><option value='' >Escolha um sub-grupo:</option>";
+			if (retorno.data.subgrupo)
+			{
+				var sg = retorno.data.subgrupo;
+				for (ig=0;ig<sg.length; ig++)
+				{	
+					ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
+				}
+			}
+			$i(idDestino).innerHTML = ins+"</select>";
+		};
+		var p = "classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"pegalistadeSubgrupos",combo);
+	}
+}
+/*
+Function: i3geo_comboTemasMenu
+
+Monta um combo com a lista de subgrupos de um grupo do menu de temas do i3geo.
+
+Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
+
+Parameters:
+
+funcaoOnchange - nome da funcao que será executada quando o usuário escolhe um grupo
+
+idDestino - id do elemento HTML que receberá o combo
+
+idCombo - id do combo que será criado
+
+idGrupo - identificador do grupo que será pesquisado
+
+idSubGrupo - id do subgrupo
+
+largura - largura em pixels do combo
+
+altura - altura do combo em linhas
+*/
+function i3geo_comboTemasMenu(funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura)
+{
+	var combo = function(retorno)
+	{
+		var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";
+		if (retorno.data.temas[i])
+		{
+			var sg = retorno.data.temas;
+			for (ig=0;ig<sg.length; ig++)
+			{	
+				ins += "<option value="+sg[ig].tid+" >"+sg[ig].nome+"</option>";
+			}
+		}
+		$i(idDestino).innerHTML = ins+"</select>";
+	};
+	var p = "classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+idGrupo+"&subgrupo="+idSubGrupo;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegalistadetemas",combo);
+}
+/*
+Section: redesenho do mapa
+*/
+/*
+Function: remapaf
+
+Prepara o redesenho do mapa de acordo com o que esta visivel ou nao.
+
+Chamado por algumas funções que necessitam refazer o desenho do mapa.
+
+Verifica na lista de temas já adicionados, os temas que estão ligados e desligados,
+Chama a função que verifica na lista de temas adicionais.
+*/
+function remapaf()
+{
+	//
+	//zera o contador de tempo
+	//
+	YAHOO.log("remapaf", "i3geo");
+	clearTimeout(objmapa.tempo);
+	objmapa.tempo = "";
+	objmapa.temaAtivo = "";
+	if ($i(objmapa.guiaTemas+"obj"))
+	{
+		//
+		//se g_operacao = 'legenda' significa que o usuário clicou em um tema na guia legenda
+		//nesse caso, a busca dos temas que devem ser ligados e desligados deve ser feita no id='legenda'
+		//
+		if(g_operacao == "legenda")
+		{var iguias = $i("legenda").getElementsByTagName("input");}
+		else
+		{var iguias = $i(objmapa.guiaTemas+"obj").getElementsByTagName("input");}
+		var tsl = new Array();
+		var tsd = new Array();
+		var i = iguias.length-1;
+		if (i >= 0)
+		{
+			do
+			{
+				if (iguias[i].type == "checkbox")
+				{
+					if(iguias[i].name == "layer")
+					{
+						if (iguias[i].checked == false)
+						{tsd.push(iguias[i].value);}
+						if (iguias[i].checked == true)
+						{tsl.push(iguias[i].value);}
+					}
+				}
+			}
+			while(i--)
+		}
+		var remapaAdicNovos = function (retorno)
+		{
+			if ($i("buscatema"))
+			{
+				var g = $i(objmapa.guiaMenu+"obj");
+				if($i("arvoreAdicionaTema"))
+				{var g = $i("arvoreAdicionaTema");}
+				var iguias = g.getElementsByTagName("input");
+				var ta = new Array();
+				var i = iguias.length-1;
+				if (i >= 0)
+				{
+					do
+					{
+						if (iguias[i].type == "checkbox")
+						{
+							if (iguias[i].checked == true)
+							{
+								ta.push(iguias[i].value);
+								iguias[i].checked = false;
+							}
+						}
+					}
+					while(i--)
+				}
+				if (ta.length > 0)
+				{
+					i3GEO.janela.fechaAguarde("remapa");
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					var temp = function(retorno)
+					{
+						i3GEO.janela.fechaAguarde("ajaxredesenha");
+						if(retorno.data.erro)
+						{
+							alert(retorno.data.erro);
+							return;
+						}
+						ajaxredesenha("");					
+					};
+					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(ta.toString())+"&g_sid="+i3GEO.configura.sid;
+					cpObj.call(p,"adicionaTema",temp);
+				}
+				else
+				{
+					i3GEO.janela.fechaAguarde("remapa");
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					ajaxredesenha("");
+				}
+			}
+			else
+			{
+				i3GEO.janela.fechaAguarde("remapa");
+				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+				ajaxredesenha("");
+			}
+		};
+		if ((tsd.length > 0) || (tsl.length > 0))
+		{
+			i3GEO.janela.abreAguarde("remapa",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+(tsd.toString())+"&ligar="+(tsl.toString())+"&g_sid="+i3GEO.configura.sid;
+			cpObj.call(p,"ligaDesligaTemas",remapaAdicNovos);
+		}
+		else{remapaAdicNovos();}
+		i3GEO.janela.fechaAguarde("remapa");
+	}
+	else
+	{eval(remapaAdicNovos);}
+	YAHOO.log("Fim remapaf", "i3geo");
+}
+/*
+Section: eventos
+*/
+
+/*
+Function: calcposf
+
+Calcula a posição do corpo do mapa e posiciona-o corretamente na tela.
+*/
+function calcposf()
+{
+	try
+	{
+		YAHOO.log("calcposf", "i3geo");
+		imagemxi = 0;
+		imagemyi = 0;
+		imagemxref = 0;
+		imagemyref = 0;
+		if(!$i("i3geo")){return;}
+		if ($i("i3geo").style.left){imagemxi += parseInt($i("i3geo").style.left);}
+		if ($i("i3geo").style.top){imagemyi += parseInt($i("i3geo").style.top);}	
+		var dc = $i("i3geo");
+		if ($i("contemImg"))
+		{var dc = $i("contemImg");}
+		else
+		{var dc = $i("img");}
+		if ($i("openlayers"))
+		{var dc = $i("openlayers");}
+		if ($i("flamingo"))
+		{var dc = $i("flamingo");}
+		while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo"))
+		{
+			dc = dc.offsetParent;
+			imagemxi = imagemxi + dc.offsetLeft;
+			imagemyi = imagemyi + dc.offsetTop;
+		}
+		if ($i("corpoMapa"))
+		{
+			$i("corpoMapa").style.position="absolute";
+			$left("corpoMapa",imagemxi);
+			$top("corpoMapa",imagemyi);
+			if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
+			if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
+		}
+		if ($i("ref"))
+		{
+			var dc = $i("ref");
+			while (dc.offsetParent.id != "i3geo")
+			{
+				dc = dc.offsetParent;
+				imagemxref = imagemxref + dc.offsetLeft;
+				imagemyref = imagemyref + dc.offsetTop;
+			}
+		}
+		if ($i("aguarde"))
+		{
+			$top("aguarde",imagemyi);
+			$left("aguarde",imagemxi);
+		}
+		YAHOO.log("Fim calcposf", "i3geo");
+	}
+	catch(e){alert("Ocorreu um erro. calcposf"+e);}
+}
+/*
+Function: capturaposicao
+
+Captura a posição do mouse em função do evento onmousemove sobre o corpo do mapa ou sobre o mapa de referência.
+
+Atualiza o objeto objposicaocursor.
+A função de mostrar etiquetas é definida como "" quando o mouse é movimentado.
+
+Parameters:
+
+exy - objeto evento.
+*/
+function capturaposicao(e)
+{
+	if (!e) var e = window.event;
+	//
+	//verifica sob qual objeto o mouse está se movendo
+	//
+	if (e.target)
+	{var targ = e.target;}
+	else if (e.srcElement) var targ = e.srcElement;
+	if(targ.id == "" && $i("img"))
+	{var targ = $i("img");}
+	//
+	//se estiver no modo pan, o movimento deve ser obtido do elemento
+	//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
+	//se não for feito assim, o deslocamento do mapa não é capturado
+	//
+	if (g_panM == "sim")
+	{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
+	else
+	{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+	if((g_entorno == "sim") && (g_panM == "sim"))
+	{
+		pos[0] = pos[0] - objmapa.w;
+		pos[1] = pos[1] - objmapa.h;
+	}
+	//
+	//pega a posicao correta do mouse
+	//
+	var mousex = 0;
+	var mousey = 0;
+	if (e.pageX || e.pageY) 	{
+		mousex = e.pageX;
+		mousey = e.pageY;
+	}
+	else if (e.clientX || e.clientY) 	{
+		mousex = e.clientX + document.body.scrollLeft
+			+ document.documentElement.scrollLeft;
+		mousey = e.clientY + document.body.scrollTop
+			+ document.documentElement.scrollTop;
+	}
+
+	//
+	//faz os cálculos de posicionamento
+	//fig e reffig são a mesma coisa por enquanto
+	//
+	var xfig = mousex - pos[0];
+	var yfig = mousey - pos[1];
+	var xreffig = xfig;
+	var yreffig = yfig;
+	var xtela = mousex;
+	var ytela = mousey;
+	//
+	//celula e extent são necessários para se fazer a
+	//conversão de coordenadas de tela para coordenadas geográficas
+	//esses valores são obtidos das funções ajax que redesenham ou inicializam o mapa
+	// 
+	var c = g_celula;
+	var ex = objmapa.extent;
+	try{
+		if(targ.id == "imagemReferencia"){
+			var c = g_celularef;
+			var ex = objmapa.extentref;
+			var r = $i("i3geo_rosa");
+			if(r)
+			r.style.display = "none"
+		}
+	}
+	catch(e){g_celularef = 0;}
+	var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+	var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
+	objposicaocursor.ddx = teladd[0];
+	objposicaocursor.ddy = teladd[1];
+	objposicaocursor.dmsx = teladms[0];
+	objposicaocursor.dmsy = teladms[1];
+	objposicaocursor.telax = xtela;
+	objposicaocursor.telay = ytela;
+	objposicaocursor.imgx = xfig;
+	objposicaocursor.imgy = yfig;
+	objposicaocursor.refx = xreffig;
+	objposicaocursor.refy = yreffig;
+	ajaxTip = "";
+}
+/*
+Section: calculos
+*/
+/*
+Function: posicaomouse
+
+Cria um objeto que guarda a posição do mouse na tela. A posição é medida em relação a janela do navegador.
+
+Methods:
+
+x - coordenada x em valores de tela
+
+y - coordenada y em valores de tela
+*/
+function posicaomouse()
+{
+	this.x = 0;
+	this.y = 0;
+}
+/*
+Function: posicaocursor
+
+Cria um objeto que guarda a posição do mouse no corpo do mapa. A posição é medida em relação à posição do mapa no navegador.
+
+Methods:
+
+ddx - coordenada x em décimo de grau
+
+ddy - coordenada y em décimo de grau
+
+dmsx - coordenada x em grau, minuto e segundo
+
+dmsy - coordenada y em grau, minuto e segundo
+
+telax - coordenada x em valores de tela
+
+telay - coordenada y em valores de tela
+
+imgx - coordenada x em relação ao mapa
+
+imgy - coordenada y em relação ao mapa
+
+refx - coordenada x em relação ao mapa de referência
+
+refy - coordenada y em relação ao mapa de referência
+*/
+function posicaocursor()
+{
+	this.ddx = 0;
+	this.ddy = 0;
+	this.dmsx = '';
+	this.dmsy = '';
+	this.telax = 0;
+	this.telay = 0;
+	this.imgx = 0;
+	this.imgy = 0;
+	this.refx = 0;
+	this.refy = 0;
+}
+/*
+Function: pontosdist
+
+Cria o objeto que irá armazenaa as coordenadas para calculo de distancia
+
+Parameters:
+
+xpt - coordenadas x em dd
+
+ypt - coordenadas y em dd
+
+dist - distância entre os dois últimos pontos
+
+xtela - coordenada x na tela
+
+ytela - coordenada y na tela
+
+ximg - coordenada x na imagem do mapa
+
+yimg - coordenada y na imagem do mapa
+
+linhas - lista de objetos criados pela biblioteca richdraw utilizados no desenho da linha de medição
+*/
+function pontosdist()
+{
+	this.xpt = new Array();
+	this.ypt = new Array();
+	this.dist = new Array();
+	this.xtela = new Array();
+	this.ytela = new Array();
+	this.ximg = new Array();
+	this.yimg = new Array();
+	this.linhas = new Array();
+}
+/*
+Section: desenho sobre o mapa
+*/
+/*
+Function: desenhoRichdraw
+
+Desenha elementos na tela usando a biblioteca richdraw
+
+Parameters:
+
+tipo - tipo de operação
+
+objeto - objeto gráfico do container richdraw
+
+n - índice do elemento no array pontosdistobj
+*/
+function desenhoRichdraw(tipo,objeto,n)
+{
+	if (richdraw && $i("img"))
+	{
+		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+		//
+		//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
+		//
+		if((tipo=="resizeLinha") || (tipo=="resizePoligono") && navn)
+		{
+			try
+			{richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}
+		}
+		if((tipo=="resizeLinha") && navm)
+		{
+			try
+			{
+				//
+				//no caso do ie, a linha tem de ser removida e desenhada novamente
+				//
+				var r = $i(richdraw.container.id);
+				r.removeChild(r.lastChild);
+				var dy = objposicaocursor.imgy;
+				var dx = objposicaocursor.imgx - (objmapa.w/2);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
+			}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}			
+		}
+		if((tipo=="resizePoligono") && navm)
+		{
+			try
+			{
+				var r = $i(richdraw.container.id);
+				r.removeChild(r.lastChild);
+				r.removeChild(r.lastChild);
+				var dy = objposicaocursor.imgy;
+				var dx = objposicaocursor.imgx - (objmapa.w/2);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
+				richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[0])-(objmapa.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
+			}
+			catch(e){window.status=n+" erro ao movimentar a linha ";}			
+		}
+		if(tipo=="insereCirculo")
+		{
+			if (navn)
+			{
+				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+				var w = Math.sqrt(dx + dy);
+				try
+				{
+					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
+				}
+				catch(e){window.status=n+" erro ao desenhar o raio";}
+			}
+			else
+			{
+				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+				var w = Math.sqrt(dx + dy);
+				try
+				{
+					richdraw.renderer.create('circ', '', 'rgb(250,250,250)', richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
+				}
+				catch(e){window.status=n+" erro ao desenhar o raio";}
+			}
+		}
+	}
+}
+/*
+Section: outros
+*/
+/*
+Function: incluir
+
+Inclui um arquivo shapefile no mapa atual como uma nova camada
+
+Parameters:
+
+path - caminho completo do shapefile
+*/
+function incluir(path)
+{
+	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	var temp = path.split(".");
+	if ((temp[1] == "SHP") || (temp[1] == "shp"))
+	{var f = "adicionaTemaSHP";}
+	else
+	{var f = "adicionaTemaIMG";}
+	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao="+f+"&arq="+path;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,f,ajaxredesenha);
+}
+/*
+Function: inseremarcaf
+
+Insere um ponto no mapa.
+
+Os pontos são inseridos em um contaier de pontos e mostrados temporáriamente como uma imagem.
+Utilizado pela função de medição de distâncias.
+
+Parameters:
+
+xi - coordenada x.
+
+yi - coordenada y.
+
+funcaoonclick - funcao que sera executada quando a marca for clicada
+*/
+function inseremarcaf(xi,yi,funcaoOnclick)
+{
+	try
+	{
+		//verifica se existe o container para os pontos
+		if (!$i("pontosins") )
+		{
+			var novoel = document.createElement("div");
+			novoel.id = "pontosins";
+			var i = novoel.style;
+			i.position = "absolute";
+			i.top = parseInt($i("img").style.top);
+			i.left = parseInt($i("img").style.left);
+			document.body.appendChild(novoel);
+		}
+		var container = $i("pontosins");
+		var novoel = document.createElement("div");
+		var i = novoel.style;
+		i.position = "absolute";
+		i.zIndex=2000;
+		i.top=(yi - 4)+"px";
+		i.left=(xi - 4)+"px";
+		i.width="4px";
+		i.height="4px";
+		var novoimg = document.createElement("img");
+		if (arguments.length == 2)
+		{funcaoOnclick = "";}
+		if (funcaoOnclick != "")
+		{novoimg.onclick = funcaoOnclick;}
+		novoimg.src=i3GEO.configura.locaplic+"/imagens/dot1.gif";
+		with (novoimg.style){width="6px";height="6px";zIndex=2000;}
+		novoel.appendChild(novoimg);
+		container.appendChild(novoel);
+	}
+	catch(e){alert("Ocorreu um erro. inseremarcaf"+e);}
+}
+/*
+Function: limpacontainerf
+
+Limpa o container de pontos.
+*/
+function limpacontainerf()
+{
+	if ($i("pontosins"))
+	{$i("pontosins").innerHTML = "";}
+	if ($i("mostradistancia"))
+	{$i("mostradistancia").style.display="none";}
+}
+/*
+Function: recuperamapa
+
+Tenta recuperar o último mapa, caso tenha ocorrido algum erro.
+*/
+function recuperamapa()
+{
+	g_recupera = 1;
+	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=recuperamapa&g_sid="+i3GEO.configura.sid;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"recuperamapa",remapaf);
+}
+//testa se esse script foi carregado
+function testafuncoes()
+{}
 
 /*
 Class: i3GEO.arvoreDeTemas
@@ -47883,637 +50322,6 @@ i3GEO.arvoreDeTemas = {
 			cpObj.call(p,"adicionaTema",temp);	
 		}
 	}
-};
-//
-//para efeitos de compatibilidade, as opções são definidas aqui
-//
-
-if($i("arvoreAdicionaTema") || $i("outrasOpcoesAdiciona"))
-{
-	if(!$i("arvoreAdicionaTema"))
-	{i3GEO.arvoreDeCamadas.IDHTML = objmapa.guiaMenu+"obj";}
-	else
-	{i3GEO.arvoreDeCamadas.IDHTML = "arvoreAdicionaTema";}				
-}
-try {
-	if (g_uploaddbf == "nao")
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf = false;}
-}
-catch(e){};
-try {
-	if (g_uploadlocal == "nao")
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadlocal = false;}
-}
-catch(e){};
-try {
-	if (g_downloadbase == "nao")
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.downloadbase = false;}
-}
-catch(e){};
-try {
-	if (g_conectarwms == "nao")
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwms = false;}
-}
-catch(e){};
-try {
-	if (g_conectargeorss == "nao")
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss = false;}
-}
-catch(e){};
-try {
-	if (g_nuvemTags == "nao")	
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags = false;}
-}
-catch(e){};
-try {
-	if (g_kml == "nao")	
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml = false;}
-}
-catch(e){};
-try {
-	if (g_qrcode == "nao")	
-	{i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode = false;}
-}
-catch(e){};
-
-/*
-Class:: i3GEO.gadgets
-
-Inclui elementos especiais no mapa
-
-Os elementos são opcionais e adicionam funcionalidades ao mapa.
-
-File: i3geo/classesjs/classe_gadgets.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-
-i3GEO.gadgets = {
-	/*
-	Variable: PARAMETROS
-	
-	Parametros de inicialização dos gadgets
-	
-	Type:
-	{JSON}
-	*/	
-	PARAMETROS: {
-		"mostraCoordenadasUTM":
-		{idhtml:"mostraUTM"},
-		"mostraCoordenadasGEO":
-		{idhtml:"localizarxy"},
-		"mostraEscalaNumerica":
-		{idhtml:"escala"},
-		"mostraBuscaRapida":
-		{idhtml:"buscaRapida"},
-		"mostraVisual":
-		{idhtml:"visual"},
-		"mostraQuadros":
-		{idhtml:"lugarquadros"}
-	},
-	/*
-	Function: mostraCoordenadasUTM
-	
-	Obtém as coordenadas UTM da posição do mouse sobre o mapa.
-	
-	As coordenadas são obtidas por meio de uma chamada AJAX.
-	
-	Para o funcionamento correto é necessário incluir essa função no evento que identifica quando o mouse
-	está estacionado sobre o mapa. Por default isso já é feito pelo i3Geo.
-	
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (mostraUTM) ou altere a variável i3GEO.eventos.MOUSEPARADO
-	
-	Parameters:
-	
-	locaplic {String} - localização da instalação do i3GEO. Por default será utilizado
-	i3GEO.configura.locapli
-	
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
-	i3GEO.gadgets.PARAMETROS
-	
-	sid {String} - código da seção i3Geo no servidor
-	
-	Return:
-	
-	{JSON} - objeto com x e y
-	*/
-	mostraCoordenadasUTM: function(locaplic,id,sid){
-		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
-		{return;}
-		if(arguments.length == 0 || locaplic == "")
-		{var locaplic = i3GEO.configura.locaplic;}
-		if(arguments.length < 2 || locaplic == "" || id == "")
-		{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml;}
-		if(arguments.length < 3 || locaplic == "" || id == "" || sid == "")
-		{var sid = i3GEO.configura.sid;}
-		var temp = $i(id);
-		if (!temp){return;}
-		if(temp.style.display == "block"){return;}
-		var mostra = function(retorno)
-		{
-			temp.style.display="block";
-			temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
-			return (retorno.data);
-		};
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+sid;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_persistent_connection(true);
-		cp.set_response_type("JSON");
-		cp.call(p,"geo2utm",mostra);
-	},
-	/*
-	Function: mostraCoordenadasGEO
-	
-	Obtém as coordenadas Geográficas da posição do mouse sobre o mapa.
-		
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (localizarxy)
-	
-	Parameters:
-	
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
-	i3GEO.gadgets.PARAMETROS
-	*/	
-	mostraCoordenadasGEO: function(id){
-		try{
-			if(arguments.length == 0)
-			{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
-			if($i(id)){
-				if(!$i("xm")){
-					var ins = "<table style='text-align:center'><tr>";
-					ins += "<td>localiza X:&nbsp;</td>";
-					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
-					ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
-					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
-					var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
-					temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
-					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
-					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
-					ins += "</tr></table>";
-					$i(id).innerHTML = ins;
-					$i3geo_temp_xg = $i("xg");
-					$i3geo_temp_xm = $i("xm");
-					$i3geo_temp_xs = $i("xs");
-					$i3geo_temp_yg = $i("yg");
-					$i3geo_temp_ym = $i("ym");
-					$i3geo_temp_ys = $i("ys");
-					atualizaLocalizarxy = function(){
-						var x = objposicaocursor.dmsx.split(" ");
-						var y = objposicaocursor.dmsy.split(" ");
-						$i3geo_temp_xg.value = x[0];
-						$i3geo_temp_xm.value = x[1];
-						$i3geo_temp_xs.value = x[2];
-						$i3geo_temp_yg.value = y[0];
-						$i3geo_temp_ym.value = y[1];
-						$i3geo_temp_ys.value = y[2];
-					};
-					if($i("img"))
-					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}
-				}
-			}
-		}
-		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
-	},
-	/*
-	Function: mostraEscalaNumerica
-	
-	Mostra no mapa a escala numérica.
-	
-	A escala numérica pode ser alterada pelo usuário digitando-se a nova escala.
-		
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (escala)
-	
-	Parameters:
-	
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
-	i3GEO.gadgets.PARAMETROS
-	*/		
-	mostraEscalaNumerica: function(id){
-		if(arguments.length == 0)
-		{var id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
-		if($i(id)){
-			atualizaEscalaNumerica = function(escala){
-				if(arguments.length == 1)
-				$i("i3geo_escalanum").value = escala;
-				else
-				$i("i3geo_escalanum").value = parseInt(objmapa.scale);
-			};
-			if(!$i("i3geo_escalanum")){
-				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19","");
-				var ins = "<table><tr><td>1:"+i;
-				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
-				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
-				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
-				$i(id).innerHTML = ins;
-			}
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizaEscalaNumerica()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizaEscalaNumerica()");}		
-		}
-	},
-	/*
-	Function: mostraBuscaRapida
-	
-	Mostra a opção de busca rápida de lugares por palavra digitada.
-		
-	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
-	
-	Parameters:
-	
-	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
-	i3GEO.gadgets.PARAMETROS
-	*/	
-	mostraBuscaRapida: function(id){
-		if(arguments.length == 0)
-		{var id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
-		if($i(id)){
-			i3geo_buscaRapida = function(){
-				if ($i("valorBuscaRapida").value == "")
-				{alert ("Digite uma palavra para busca!");return;}
-				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
-			}
-			var i = $inputText(id,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
-			var ins = "<table><tr><td>"+i;
-			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
-			$i(id).innerHTML = ins;
-		}	
-	},
-	/*
-	Function: visual
-	
-	Gera os ícones e controla as opções de modificação do visual do mapa.
-	
-	O visual consiste na definição dos ícones utilizados no mapa. O visual pode
-	ser modificado na inicialização ou então escolhido pelo usuário.
-	
-	Os visuais disponíveis são definidos no servidor e consistem em diretórios localizados
-	em i3geo/imagens/visual. A lista de visuais disponíveis é obtida na inicialização do i3geo.
-	
-	Os ícones para mudança do visual são incluídos no elemento HTML definido em
-	i3geo.gadgets.PARAMETROS.visual
-	*/
-	visual: {
-		/*
-		Property: visual.inicia
-		
-		Constrói os ícones de escolha do visual.
-		
-		Parameters:
-		
-		id {String} - id do elemento que receberá os ícones (opcional)
-		*/
-		inicia: function(id){
-			if(arguments.length == 0)
-			{var id = i3GEO.gadgets.PARAMETROS.mostraVisual.idhtml;}
-			if($i(id)){
-				if (objmapa.listavisual != ""){
-					var l = objmapa.listavisual.split(",");
-					var visuais = "";
-					var li = l.length-1;
-					if(li >= 0){
-						do{visuais += "<img title='"+l[li]+"' style=cursor:pointer onclick='i3GEO.gadgets.visual.troca(\""+l[li]+"\")' src='"+i3GEO.configura.locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";}
-						while(li--)
-					}
-					$i(id).innerHTML = visuais;
-					$i(id).onmouseover = function(){i3GEO.ajuda.mostraJanela($trad("d26"));};
-					$i(id).onmouseout = function(){i3GEO.ajuda.mostraJanela("");};
-				}		
-			}
-		},
-		/*
-		Property: visual.troca
-		
-		Troca o visual atual. A lista de visuais disponíveis é obtida em objmapa.listavisual
-		
-		Parameters:
-		
-		visual {String} - nome do visual que será utilizado.
-		*/
-		troca: function(visual){
-			var monta = function(retorno){
-				try{
-					i3GEO.janela.fechaAguarde("ajaxredesenha");
-					//
-					//pega todas as imagens da interface
-					//
-					var imgstemp = retorno.data.arquivos;
-					var imgs = new Array();
-					var i = imgstemp.length-1;
-					if(i >= 0){
-						do{
-							var temp = imgstemp[i].split(".");
-							if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
-							{imgs.push(imgstemp[i]);}
-						}
-						while(i--)
-					}
-					var elementos = document.getElementsByTagName("img");
-					var elt = elementos.length;
-					var caminho = i3GEO.configura.locaplic+"/imagens/visual/"+visual+"/";
-					//faz a troca em imagens
-					var j = imgs.length-1;
-					if(j >= 0){
-						do{
-							for (var i=0;i < elt; i++){
-								if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
-								{elementos[i].src = caminho+"branco.gif";}
-								if (elementos[i].src.search("visual") > -1)
-								{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
-							}
-						}
-						while(j--)
-					}	
-					//faz a troca em ids
-					var j = imgs.length-1;
-					if(j >= 0){
-						do{
-							var busca = imgs[j].split(".");
-							if ($i(busca[0]))
-							{$i(busca[0]).src = caminho+imgs[j];}
-						}
-						while(j--)
-					}
-					//faz a troca em bg
-					var elementos = new Array("barraSuperior","barraInferior","vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
-					var i = elementos.length-1;
-					if(i >= 0){
-						do{
-							if ($i(elementos[i])){
-								var nimagem = $i(elementos[i]).style.backgroundImage.replace(i3GEO.configura.visual,visual);
-								$i(elementos[i]).style.backgroundImage = nimagem;
-								//$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
-							}
-						}
-						while(i--)
-					}
-					i3GEO.configura.visual = visual;
-				}
-				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("ajaxredesenha");}
-			};
-			//
-			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
-			//
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+i3GEO.configura.sid+"&diretorio=imagens/visual/"+visual;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaVisual",monta);
-		}
-	},
-	/*
-	Function: quadros
-	
-	Cria e controla o funcionamento dos quadros de animação.
-	
-	Os quadros são mostrados no mapa como uma sequência de quadros de um filme.
-	As imagens que são produzidas no mapa são armazenadas em cada quadro, permitindo sua recuperação.
-	
-	Os quadros armazenam também a extensão geográfica de cada imagem, permitindo sua recuperação.
-	*/
-	quadros: {
-		/*
-		Variable: quadrosfilme
-		
-		Armazena cada quadro individualmente com as suas propriedades
-		
-		Type:
-		{Array}
-		*/
-		quadrosfilme: new Array(),
-		/*
-		Variable: quadroatual
-		
-		Valor do índice do quadro atual
-		
-		Type:
-		{Integer}
-		*/
-		quadroatual: 0,
-		/*
-		Property: inicia
-		
-		Gera os quadros e inicializa os objetos para armazenar as imagens
-		
-		Parameters:
-		
-		qs {Integer} - número de quadros
-		
-		lugarquadros {String} - id do elemento HTML que receberá os quadros (opcional)
-		*/
-		inicia: function(qs,lugarquadros){
-			if(arguments.length == 1)
-			{var lugarquadros = i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml;}
-			var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='i3GEO.gadgets.quadros.opcoes(this)' style='cursor:pointer'></div></td>";
-			for (var i = 0; i < qs; i++){
-				q += "<td><img class='quadro' src=\""+i3GEO.configura.locaplic+"/imagens/branco.gif\" id='quadro"+i+"' ";
-				q += "onmouseover='i3GEO.gadgets.quadros.trocaMapa(this.id);i3GEO.ajuda.mostraJanela(\"Clique para aplicar a extensão geográfica do quadro ao mapa\")' ";
-				q += "onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" ";
-				q += "onclick='i3GEO.gadgets.quadros.zoom(this.id)' /></td>";
-				i3GEO.gadgets.quadros.quadrosfilme[i] = new Array();
-			}
-			q += "</tr></table>";
-			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml)){
-				document.getElementById(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).innerHTML = q;
-				$i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).onmouseout = function(){
-					if($i("imgClone")){
-						$i("imgClone").style.display = "none";
-						$i("img").style.display = "block";
-					}
-				};
-			}
-			i3GEO.gadgets.quadros.quadroatual = 0;
-		},
-		/*
-		Property: grava
-
-		Armazena um determinado valor em uma determinada característica de um objeto quadro.
-
-		Parameters:
-
-		variavel {String} - parâmetro do objeto quadro.
-
-		valor - {String} valor que será aplicado.
-		*/
-		grava: function(variavel,valor){
-			eval("i3GEO.gadgets.quadros.quadrosfilme["+i3GEO.gadgets.quadros.quadroatual+"]."+variavel+" = '"+valor+"'");
-			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml))
-			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
-		},
-		/*
-		Property: avanca
-
-		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
-		*/		
-		avanca: function(){
-			try{
-				var nquadros = i3GEO.gadgets.quadros.quadrosfilme.length;
-				if ((nquadros - 1) == (i3GEO.gadgets.quadros.quadroatual))
-				{i3GEO.gadgets.quadros.inicia(nquadros);}
-				else{i3GEO.gadgets.quadros.quadroatual++;}
-			}
-			catch(e){var e = "";}		
-		},
-		/*
-		Property: zoom
-		
-		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
-		
-		Parameter:
-		
-		quadro {String} - id do quadro que será utilizado
-		*/
-		zoom: function(quadro){
-			var indice = quadro.replace("quadro","");
-			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[indice].extensao)
-		},
-		/*
-		Property: trocaMapa
-		
-		Troca a imagem do mapa atual pela que estiver armazenada em quadro
-		
-		A imagem mostrada no mapa é um clone do mapa atual, preservando o mapa.
-		
-		Parameters:
-		
-		quadro {String} - id do quadro que terá a imagem recuperada
-		*/
-		trocaMapa: function(quadro){
-			var indice = quadro.replace("quadro","");
-			var i = $i("img");
-			var c = $i("imgClone");
-			if(i){
-				if(!c){
-					var iclone=document.createElement('IMG');
-					iclone.style.position = "relative";
-					iclone.id = "imgClone";
-					iclone.style.border="1px solid blue";
-					i.parentNode.appendChild(iclone);
-					iclone.src = corpo.src;
-					iclone.style.width = objmapa.w;
-					iclone.style.heigth = objmapa.h;
-					iclone.style.top = corpo.style.top;
-					iclone.style.left = corpo.style.left;		
-				}
-				try{
-					if(!i3GEO.gadgets.quadros.quadrosfilme[indice].imagem){return;}
-					c.src = i3GEO.gadgets.quadros.quadrosfilme[indice].imagem;
-					c.style.display = "block";
-					i.style.display = "none";
-				}
-				catch(e){var e = "";}
-			}
-		},
-		/*
-		Property: opcoes
-		
-		Abre a janela de opções que controla as características do quado e permite disparar a animação.
-		
-		Parameters:
-		
-		obj {Object} - objeto clicado
-		*/
-		opcoes: function(obj){
-			if (objmapa.utilizacgi == "sim"){
-				objmapa.utilizacgi = "nao";
-				var volta = function(){
-					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
-				};
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"desativacgi",volta);
-			}
-			else
-			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
-		},
-		/*
-		Property: anima
-		
-		Mostra as imagens armazenadas nos quadros em uma sequência animada
-		
-		Parameters:
-		
-		Qanima {Integer} - quadro atual na sequência de animação
-		
-		t {Numeric} - tempo em milisegundos entre cada quadro
-		*/
-		anima: function(Qanima,t){
-			if(arguments.length == 0){
-				Qanima = 0;
-				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				var t = doc.getElementById("tempoanima").value;
-			}
-			if(Qanima > i3GEO.gadgets.quadros.quadrosfilme.length){
-				clearTimeout(tAnima);
-				$i("imgClone").style.display = "none";	
-				$i("img").style.display="block";
-				return;
-			}
-			//$i("img").src = preLoad[janima].src;
-			//$i("f"+janima).className = "quadro1";
-			i3GEO.gadgets.quadros.trocaMapa("quadro"+Qanima);
-			Qanima++;
-			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
-		},
-		listaImagens: function(){
-			if (objmapa.utilizacgi == "sim"){
-				objmapa.utilizacgi = "nao";
-				var volta = function()
-				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"desativacgi",volta);
-			}
-			else{
-				var wi = window.open("");//"",null,"width=550,height=650,resizable=yes,scrollbars=yes");
-				//pega os dados do objeto quadrosfilme e escreve na nova janela
-				var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
-				wi.document.write("<html><body><p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
-				var i = i3GEO.gadgets.quadros.quadrosfilme.length-1;
-				if(i >= 0){
-					do{
-						if (i3GEO.gadgets.quadros.quadrosfilme[i].imagem){
-							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
-							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrangência: "+i3GEO.gadgets.quadros.quadrosfilme[i].extensao+"<br>");
-							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].imagem+"' />");
-							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].referencia+"' />");
-						}
-						i--
-					}
-					while(i>=0)
-				}
-				wi.document.write("<br>Fim</body></html>");
-			}
-		}
-	}
 };
 /*
 Title: configura.js
@@ -48648,48 +50456,6 @@ Veja:
 */
 g_3dmap = "";
 /*
-Variable: g_docaguias
-
-Variável que define se o mapa deve iniciar com as guias em janela ou não. As guias em janela causam o desenho de um mapa com tamanho extendido.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_docaguias = "nao";
-/*
-Variable: g_barraFerramentas1
-
-Define se a barra de ferramentas 1 será aberta ou não no mapa.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas1 = "sim";
-/*
-Variable: g_barraFerramentas2
-
-Define se a barra de ferramentas 2 será aberta ou não no mapa.
-
-Veja:
-
-<iniciamma.js>
-
-Values:
-
-sim|nao
-*/
-g_barraFerramentas2 = "sim";
-/*
 Variable: g_fatordezoom
 
 Variável interna para a barra de zoom.
@@ -48765,9 +50531,9 @@ Veja:
 
 Values:
 
-simples|completo
+simples|completo|balao
 */
-g_tipotip = "completo";
+g_tipotip = "balao";
 /*
 Variable: g_tipoimagem
 
@@ -48812,66 +50578,6 @@ Values:
 sim|nao
 */
 g_entorno = "nao";
-/*
-Variable: g_guiaativa
-
-Indica qual guia do mapa iniciará ativa.
-
-Veja:
-
-<funcoes.js>, iniciamma.js>
-*/
-g_guiaativa = "guia1";
-/*
-Section: Eventos
-*/
-/*
-Variable: g_funcoesClickMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário clicar no mapa.
-
-As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções, além das padrão, utilizando-se o objeto objmapa.funcoesClickMapa
-
-Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesClickMapaDefault = new Array(
-	"cliqueSelecaoPoli()",
-	"cliqueCapturaPt()"
-);
-/*
-Variable: g_funcoesMousemoveMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário mover o mouse sobre o mapa.
-
-As funções padrão podem ser alteradas, porém, pode-se acrescentar outras funções
-
-Quando o usuário clica em um botão para ativar uma ferramenta, pode-se definir a variável g_tipoacao e depois criticá-la na função para saber qual operação deve ser executada.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesMousemoveMapaDefault = new Array(
-	"movePan()",
-	"moveLonglat()",
-	"moveSelecaoPoli()"
-);
-/*
-Variable: g_funcoesNavegaMapaDefault
-
-Nome das funções padrão que serão executadas quando o usuário navegar pelo mapa.
-
-Veja:
-
-<iniciamma.js>
-*/
-g_funcoesNavegaMapaDefault = new Array(
-	"atualizaEscalaNumerica()"
-);
 /*
 Variable: g_listaPropriedades (depreciado)
 */
@@ -49011,6 +50717,61 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan","img",i3GEO.configura.locaplic);
 			}
 			marcadorZoom = "";
+			panMapaInicia = function(){
+				if ($i("img") && (g_tipoacao == "pan")){
+					g_panM = "sim";
+					if($i("corpoMapa")){
+						leftinicial = parseInt($i("corpoMapa").style.left);
+						topinicial = parseInt($i("corpoMapa").style.top);
+					}
+					clicinicialx = objposicaocursor.imgx;
+					clicinicialy = objposicaocursor.imgy;
+					ddinicialx = objposicaocursor.ddx;
+					ddinicialy = objposicaocursor.ddy;
+				}
+			};
+			panMapaDesloca = function(){
+				if ($i("img") && (g_panM == "sim")){
+					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
+					var ny = objposicaocursor.telay - topinicial - clicinicialy;
+					if (g_entorno == "nao"){
+						var l = 0;
+						if (parseInt($i("i3geo").style.left))
+						{var l = parseInt($i("i3geo").style.left);}
+						$i("img").style.left = nx - l;
+						var t = 0;
+						if (parseInt($i("i3geo").style.top))
+						{var t = parseInt($i("i3geo").style.top);}
+						$i("img").style.top = ny - t;
+					}
+					else{
+						$left("img",objmapa.w*-1 + nx);
+						$left("imgS",objmapa.w*-1 + nx);
+						$left("imgL",objmapa.w + nx);
+						$left("imgO",objmapa.w*-3 + nx);
+						$left("imgN",objmapa.w*-1 + nx);
+						$top("img",objmapa.h*-1 + ny);
+						$top("imgS",objmapa.h*-1 + ny);
+						$top("imgL",objmapa.h*-1 + ny);
+						$top("imgN",objmapa.h*-1 + ny);
+						$top("imgO",objmapa.h*-1 + ny);
+					}
+				}
+			};
+			panMapaTermina = function(){
+				if ($i("img") && (g_tipoacao == "pan")){
+					marcadorZoom = "";
+					g_panM = "nao";
+					var res = i3GEO.navega.xy2xy(i3GEO.configura.locaplic,i3GEO.configura.sid,ddinicialx,ddinicialy,objposicaocursor.ddx,objposicaocursor.ddy,objmapa.extent,g_tipoimagem);
+					if(res == false){i3GEO.navega.zoompontoIMG(i3GEO.configura.locaplic,i3GEO.configura.sid,objposicaocursor.imgx,objposicaocursor.imgy)}
+				}
+			};
+			if(i3GEO.eventos.MOUSEDOWN.toString().search("panMapaInicia()") < 0)
+			{i3GEO.eventos.MOUSEDOWN.push("panMapaInicia()");}
+			if(i3GEO.eventos.MOUSEMOVE.toString().search("panMapaDesloca()") < 0)
+			{i3GEO.eventos.MOUSEMOVE.push("panMapaDesloca()");}
+			if(i3GEO.eventos.MOUSEUP.toString().search("panMapaTermina()") < 0)
+			{i3GEO.eventos.MOUSEUP.push("panMapaTermina()");}
 		}
 	},
 	{
@@ -49070,7 +50831,7 @@ g_listaFuncoesBotoes = {
 								if(tema >= 0){
 									do{
 										var titulo = temas[tema].split("@");
-										if (g_tipotip == "completo")
+										if (g_tipotip == "completo" || g_tipotip == "balao")
 										{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
 										var ocorrencias = titulo[1].split("*");
 										var ocorrencia = ocorrencias.length-1;
@@ -49081,7 +50842,7 @@ g_listaFuncoesBotoes = {
 													var paresi = pares.length;
 													for (var par=0;par<paresi; par++){
 														var valores = pares[par].split("#");
-														if (g_tipotip == "completo"){
+														if (g_tipotip == "completo" || g_tipotip == "balao"){
 															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
 															var mostra = true;
 														}
@@ -49099,8 +50860,17 @@ g_listaFuncoesBotoes = {
 								}
 								if(!mostra){$i("tip").style.display="none";return;}
 								else{		
-									var n = i3GEO.janela.tip();
-									$i(n).innerHTML += res;
+									if(g_tipotip != "balao"){
+										var n = i3GEO.janela.tip();
+										$i(n).style.textAlign="left";
+										$i(n).innerHTML += res;
+									}
+									else{
+										var n = i3GEO.janela.tip("<img src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+										balloon = new Balloon;
+										var res = "<div style=text-align:left >"+res+"</div>";
+										$i(n+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
+									}
 								}
 							}
 						}
@@ -49116,8 +50886,8 @@ g_listaFuncoesBotoes = {
 					eval(g_funcaoTip);
 				}
 			};
-			if(g_funcoesClickMapaDefault.toString().search("cliqueIdentifica()") < 0)
-			{g_funcoesClickMapaDefault.push("cliqueIdentifica()");}
+			if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
+			{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
 			if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
 			{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
 		}
@@ -49146,8 +50916,15 @@ g_listaFuncoesBotoes = {
 		funcaoonclick:function(){
 			g_operacao = "navega";
 			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizawiki()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizawiki()");}		
+			atualizawiki = function(){
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadowiki"))
+				{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";}
+				else
+				{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizawiki()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizawiki()");}		
 		}
 	},
 	{
@@ -49196,8 +50973,25 @@ g_listaFuncoesBotoes = {
 			if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 			else
 			{wdocaf("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizagoogle()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizagoogle()");}		
+			atualizagoogle = function(){
+				try{
+					if (navn){
+						if ($i("wdocai"))
+						{var doc = $i("wdocai").contentDocument;}
+					}
+					else{
+						if(document.frames("wdocai"))
+						{var doc = document.frames("wdocai").document;}
+					}
+					if(window.parent.frames["wdocai"].panTogoogle)
+					{window.parent.frames["wdocai"].panTogoogle();}
+					else{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
+					
+				}
+				catch(e){}
+			};		
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}		
 		}
 	},
 	{
@@ -49208,8 +51002,18 @@ g_listaFuncoesBotoes = {
 		funcaoonclick:function(){
 			g_operacao = "navega";
 			wdocaf("450px","190px",i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizascielo()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizascielo()");}
+			atualizascielo = function(){
+				try{
+					var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+					if (docel.getElementById("resultadoscielo"))
+					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";}
+					else
+					{i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
+				}
+				catch(e){}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizascielo()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizascielo()");}
 		}
 	},
 	{
@@ -49221,8 +51025,15 @@ g_listaFuncoesBotoes = {
 			g_operacao = "navega";
 			wdocaf("250px","190px",i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm","","","confluence");
 			i3GEO.util.criaBox();
-			if(g_funcoesNavegaMapaDefault.toString().search("atualizaconfluence()") < 0)
-			{g_funcoesNavegaMapaDefault.push("atualizaconfluence()");}		
+			atualizaconfluence = function(){
+				var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				if (docel.getElementById("resultadoconfluence"))
+				{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";}
+				else
+				{i3GEO.eventos.NAVEGAMAPA.remove("atualizaconfluence()")}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaconfluence()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaconfluence()");}		
 		}
 	},
 	{
@@ -49266,6 +51077,7 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
 			}
 			mede();
+			g_tipoacao = "mede";
 		}
 	},
 	{
@@ -49676,350 +51488,7 @@ i3GEO.barraDeBotoes = {
 		}
 		YAHOO.janelaBotoes.xp.panel.show();		
 	}
-}
-//para efeitos de compatibilidade
-try{
-	if(g_tipoacao != "")
-	{i3GEO.barraDeBotoes.BOTAOPADRAO = g_tipoacao;}
-}
-catch(e){}
-/*
-Class: i3GEO.navega
-
-Realiza operações de navegação do mapa, como zoom, pan, etc..
-
-File: i3geo/classesjs/classe_navega.js
-
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
-}
-i3GEO.navega = {
-	/*
-	Property: FATORZOOM
-	
-	Valor utilizado nas operações de zoom in e out. Fator de zoom.
-	
-	O valor default é 2.
-	
-	Type:
-	{Integer}
-	*/
-	FATORZOOM: 2,
-	/*
-	Function: zoomin
-	
-	Aproxima o mapa
-	
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	*/
-	zoomin: function(locaplic,sid){
-		YAHOO.log("zoomin", "i3geo");
-		if(arguments.length == 0){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
-		}
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"aproxima",ajaxredesenha);
-	},
-	/*
-	Function: zoomout
-	
-	Afasta o mapa
-	
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	*/
-	zoomout: function(locaplic,sid){
-		YAHOO.log("zoomout", "i3geo");
-		if(arguments.length == 0){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
-		}
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
-		//g_operacao = "navega";
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"afasta",ajaxredesenha);
-	},
-	/*
-	Function: zoomponto
-	
-	Centraliza o mapa em um ponto e acrescenta o ponto como uma nova camada no mapa
-	
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	
-	x {Numeric} - coordenada em décimos de grau da longitude
-	
-	y {Numeric} - coordenada em décimos de grau da latitude
-	*/
-	zoomponto: function(locaplic,sid,x,y){
-		YAHOO.log("zoomponto", "i3geo");
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"zoomPonto",ajaxredesenha);
-	},
-	/*
-	Function: localizaIP
-	
-	Localiza as coordenadas baseadas no número IP do usuário.
-	
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	
-	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
-	*/	
-	localizaIP: function(locaplic,sid,funcao){
-		YAHOO.log("localizaIP", "i3geo");
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"IP",funcao);
-	},
-	/*
-	Function: zoomIP
-	
-	Mostra no mapa um ponto baseado na localização do usuário.
-
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	*/
-	zoomIP: function(locaplic,sid){
-		try
-		{
-			if(arguments.length == 0){
-				var locaplic = i3GEO.configura.locaplic;
-				var sid = i3GEO.configura.sid;
-			}
-			var mostraIP = function(retorno)
-			{
-				if (retorno.data.latitude != null)
-				{
-					i3GEO.navega.zoomponto(locaplic,sid,retorno.data.longitude,retorno.data.latitude);
-				}
-				else
-				{alert("Nao foi possivel identificar a localizacao.");}
-			};
-			i3GEO.navega.localizaIP(locaplic,sid,mostraIP);
-		}
-		catch(e){var e = "";}
-	},
-	/*
-	Function: zoomExt
-	
-	Aplica uma nova extensão geográfica ao mapa.
-
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	
-	tipoimagem {String} - Utlize "" para aplicar o default. Tipo de imagem que será retornada na imagem do mapa que será criada
-
-	ext {String} - Extensão geográfica no formato xmin ymin xmax ymax
-	*/
-	zoomExt: function(locaplic,sid,tipoimagem,ext){
-		YAHOO.log("zoomExt", "i3geo");
-		if(tipoimagem == "")
-		{var tipoimagem = "nenhum";}
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaExtensao",ajaxredesenha);
-	},
-	/*
-	Function: aplicaEscala
-	
-	Aplica ao mapa um novo valor de escala tendo como base o valor do denminador
-
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-	
-	escala {Numeric} - denominador da escala
-	*/	
-	aplicaEscala: function(locaplic,sid,escala){
-		YAHOO.log("aplicaescala", "i3geo");
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaEscala",ajaxredesenha);
-	},
-	/*
-	Function: panFixo
-	
-	Desloca o mapa para uma determinada direção com uma distância fixa.
-	
-	Parameters:
-	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
-	
-	sid {String} - código da seção aberta no servidor pelo i3geo
-
-	direcao {String} - norte,sul,leste,oeste,sudeste,sudoeste,nordeste,noroeste
-	
-	w {Numeric} - largura da imagem do mapa em pixels
-	
-	h {Numeric} - altura da imagem do mapa em pixels
-	
-	escala {Numeric} - escala do mapa
-	*/
-	panFixo: function(locaplic,sid,direcao,w,h,escala){
-		YAHOO.log("panfixo", "i3geo");
-		if (direcao == "norte"){
-			var y = h / 6;
-			var x = w / 2;
-		}
-		if (direcao == "sul"){
-			var y = h - (h / 6);
-			var x = w / 2;
-		}
-		if (direcao == "leste"){
-			var x = w - (w / 6);
-			var y = h / 2;
-		}
-		if (direcao == "oeste"){
-			var x = w / 6;
-			var y = h / 2;
-		}
-		if (direcao == "nordeste"){
-			var y = h / 6;
-			var x = w - (w / 6);
-		}
-		if (direcao == "sudeste"){
-			var y = h - (h / 6);
-			var x = w - (w / 6);
-		}
-		if (direcao == "noroeste"){
-			var y = h / 6;
-			var x = w / 6;
-		}
-		if (direcao == "sudoeste"){
-			var y = h - (h / 6);
-			var x = w / 6;
-		}
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+escala+"&x="+x+"&y="+y+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pan",ajaxredesenha);
-	},
-	/*
-	Function: mostraRosaDosVentos
-	
-	Mostra sobre o mapa a rosa dos ventos.
-	
-	A rosa permite que o usuário navegue no mapa sem ter de alterar a opção atual de navegação.
-	
-	A rosa é mostrada apenas se a variável i3GEO.configura.mostraRosaDosVentos for = a "sim".<b> 
-
-	Para que a rosa seja mostrada, é necessário que esta função esteja registrada em
-	
-	i3GEO.eventos.MOUSEPARADO
-	*/
-	mostraRosaDosVentos: function(){
-		try{
-			if(i3GEO.configura.mostraRosaDosVentos == "nao"){return;}
-			if(g_tipoacao == "area"){return;}
-		}
-		catch(e){};
-		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10 || objposicaocursor.imgy > (objmapa.h - 10))
-		{return;}
-		if (!$i("i3geo_rosa")){
-			var novoel = document.createElement("div");
-			novoel.id = "i3geo_rosa";
-			novoel.style.position="absolute";
-			novoel.style.zIndex=5000;
-			if(navn)
-			{novoel.style.opacity=".7";}
-			else
-			{novoel.style.filter = "alpha(opacity=70)";}
-			document.body.appendChild(novoel);
-		}
-		var setas = "<table id='rosaV' >";
-		setas += "<tr onclick=\"javascript:i3GEO.configura.mostraRosaDosVentos='nao'\"><td></td><td></td><td style=cursor:pointer >x</td></tr><tr>";
-		setas += "<td><img class='rosanoroeste' title='noroeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','noroeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
-		setas += "<td><img class='rosanorte' title='norte' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','norte','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
-		setas += "<td><img class='rosanordeste' title='nordeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','nordeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
-		setas += "<tr><td><img class='rosaoeste' title='oeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','oeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
-		setas += "<td><table><tr>";
-		setas += "<td><img class='rosamais' title='aproxima' onclick=\"i3GEO.navega.zoomin('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
-		setas += "<td><img class='rosamenos' title='afasta' onclick=\"i3GEO.navega.zoomout('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"')\" src='"+$im("branco.gif")+"' </td>";
-		setas += "</tr></table></td>";
-		setas += "<td><img class='rosaleste' title='leste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','leste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr>";
-		setas += "<tr><td><img class='rosasudoeste' title='sudoeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudoeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
-		setas += "<td><img class='rosasul' title='sul' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sul','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td>";
-		setas += "<td><img class='rosasudeste' title='sudeste' src='"+$im("branco.gif")+"' onclick=\"i3GEO.navega.panFixo('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','sudeste','"+objmapa.w+"','"+objmapa.h+"','"+objmapa.scale+"')\" /></td></tr></table>";
-		var i = $i("i3geo_rosa");
-		i.innerHTML = setas;	
-		i.style.top = objposicaocursor.telay - 27;
-		i.style.left = objposicaocursor.telax - 27;
-		i.style.display="block";
-		var escondeRosa = function(){
-			var i = $i("i3geo_rosa");
-			i.style.display="none";
-			YAHOO.util.Event.removeListener(escondeRosa);
-		}
-		if($i("img"))
-		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
-		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
-	}
-};
-
+}
 /*
 Title: ferramentas.js
 
@@ -50451,7 +51920,7 @@ function cliqueMede()
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 		if (n > 0)
 		{
-			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			var d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			if($i("pararraios") && $i("pararraios").checked == true )
 			{
@@ -50779,9 +52248,7 @@ function excluitemaf(tema)
 	//remove o tema do DOM e seus filhos
 	var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 	do
-	{
-		p.removeChild(p.childNodes[0]);
-	}
+	{p.removeChild(p.childNodes[0]);}
 	while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
 	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
@@ -50955,8 +52422,8 @@ function selecao()
 		richdraw.lineColor = "red";
 		richdraw.lineWidth = "2px";	
 		wdocaf("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
-		if(g_funcoesClickMapaDefault.toString().search("cliqueSelecao()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueSelecao()");}
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueSelecao()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueSelecao()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -51058,10 +52525,10 @@ function area()
 		novoel.innerHTML = ins;
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
-		if(g_funcoesClickMapaDefault.toString().search("cliqueArea()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueArea()");}
-		if(g_funcoesMousemoveMapaDefault.toString().search("moveArea()") < 0)
-		{g_funcoesMousemoveMapaDefault.push("moveArea()");}		
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueArea()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueArea()");}
+		if(i3GEO.eventos.MOUSEMOVE.toString().search("moveArea()") < 0)
+		{i3GEO.eventos.MOUSEMOVE.push("moveArea()");}		
 	}
 	if (g_tipoacao != "area")
 	{
@@ -51133,10 +52600,10 @@ function mede()
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
 		$i('pararraios').checked=true;
-		if(g_funcoesClickMapaDefault.toString().search("cliqueMede()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueMede()");}
-		if(g_funcoesMousemoveMapaDefault.toString().search("moveMede()") < 0)
-		{g_funcoesMousemoveMapaDefault.push("moveMede()");}
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueMede()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueMede()");}
+		if(i3GEO.eventos.MOUSEMOVE.toString().search("moveMede()") < 0)
+		{i3GEO.eventos.MOUSEMOVE.push("moveMede()");}
 	}
 	if (g_tipoacao != "mede")
 	{
@@ -51187,8 +52654,8 @@ function inserexy()
 		mudaiconf("inserexy");
 		pontosdistobj = new pontosdist();
 		wdocaf("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
-		if(g_funcoesClickMapaDefault.toString().search("cliqueInserexy()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueInserexy()");}
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInserexy()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInserexy()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -51212,8 +52679,8 @@ function inseregrafico()
 		g_nomepin = "pin"+temp[1];
 		mudaiconf("inseregrafico");
 		wdocaf("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inseregrafico/index.htm',"","","Insere");
-		if(g_funcoesClickMapaDefault.toString().search("cliqueInseregrafico()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueInseregrafico()");}
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInseregrafico()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInseregrafico()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -51467,8 +52934,8 @@ function lenteDeAumento()
 		var novoel = document.createElement("div");
 		novoel.id = 'boxlente';
 		document.body.appendChild(novoel);
-		if(g_funcoesMousemoveMapaDefault.toString().search("movelentef()") < 0)
-		{g_funcoesMousemoveMapaDefault.push("movelentef()");}		
+		if(i3GEO.eventos.MOUSEMOVE.toString().search("movelentef()") < 0)
+		{i3GEO.eventos.MOUSEMOVE.push("movelentef()");}		
 
 	}
 	with($i('boxlente').style){borderWidth='1' + g_postpx;borderColor="red";}
@@ -51549,8 +53016,8 @@ function textofid()
 		pontosdistobj = new pontosdist();
 		g_tipoacao = "textofid";
 		wdocaf("360px","250px",i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
-		if(g_funcoesClickMapaDefault.toString().search("cliqueInseretoponimo()") < 0)
-		{g_funcoesClickMapaDefault.push("cliqueInseretoponimo()");}
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueInseretoponimo()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("cliqueInseretoponimo()");}
 	}
 	else
 	{mudaiconf("pan");}
@@ -51907,7 +53374,7 @@ function ajaxCorpoMapa(retorno)
 		else
 		{
 			calcposf();
-			trataErro();
+			i3GEO.janelas.fechaAguarde();
 			alert("Erro no mapa");
 		}
 		g_recupera = 0;
@@ -51916,7 +53383,7 @@ function ajaxCorpoMapa(retorno)
 	{
 		alert("Erro na funcao ajaxCorpoMapa: "+e);
 		calcposf();
-		trataErro();
+		i3GEO.janelas.fechaAguarde();
 		if(g_recupera == 0)
 		{
 			alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
@@ -52042,20 +53509,6 @@ function ajaxIniciaParametros(retorno)
 	if($i("flamingo"))
 	{atualizaFL();}
 	//
-	//limpa os objetos tips da tela
-	//
-	if(objmapa.objtips.length > 0){
-		var ot = objmapa.objtips.length-1;
-		if (ot >= 0){
-			do{
-				if (objmapa.objtips[ot])
-				{document.body.removeChild(objmapa.objtips[ot]);}
-			}
-			while(ot--)
-		}
-	}
-	objmapa.objtips = new Array();
-	//
 	//limpa os pontos digitados no calculo de distancia
 	//
 	limpacontainerf();
@@ -52156,7 +53609,7 @@ function ajaxIniciaParametros(retorno)
 		//
 		//atualiza as ferramentas de consulta que dependem da extensão geográfica
 		//
-		objmapa.verificaNavegaMapa();
+		i3GEO.eventos.navegaMapa();
 		//
 		//atualiza as imagens do entorno do mapa caso essa opçãoestiver ativa
 		//
@@ -52209,7 +53662,7 @@ function ajaxabrelente(retorno)
 		i3GEO.janela.fechaAguarde("ajaxabrelente");
 		YAHOO.log("Fim ajaxabrelente", "redesenho");
 	}
-	catch(e){trataErro();}
+	catch(e){i3GEO.janelas.fechaAguarde();}
 }
 /*
 Function: ajaxdestaca
@@ -52689,30 +54142,6 @@ function Mapa(e,m)
 	*/
 	this.finaliza="";
 	/*
-	Variable: objmapa.guiaTemas
-	
-	Define qual a guia para listar os temas do mapa
-	*/
-	this.guiaTemas = "guia1";
-	/*
-	Variable: objmapa.guiaMenu
-	
-	Define qual a guia que receberá o menu de seleção de temas
-	*/
-	this.guiaMenu = "guia2";
-	/*
-	Variable: objmapa.guiaLegenda
-	
-	Define qual a guia receberá a legenda do mapa
-	*/
-	this.guiaLegenda = "guia4";
-	/*
-	Variable: objmapa.guiaListaMapas
-	
-	Define a guia que receberá a lista de mapas
-	*/
-	this.guiaListaMapas = "guia5";
-	/*
 	Variable: objmapa.cgi
 	
 	Indica a localização do mapserver cgi. É definida pelo i3geo na inicialização do mapa e configurada no arquivo ms_configura.php.
@@ -52741,9 +54170,13 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
-	/*
-	Gera o div para função de etiquetas para efeitos de compatibilidade
-	*/
+		//
+		//para efeitos de compatibilidade com versões antigas
+		//
+		i3GEOmantemCompatibilidade();
+		/*
+			Gera o div para função de etiquetas para efeitos de compatibilidade
+		*/
 		if (!$i("tip")){
 			var novoel = document.createElement("div");
 			novoel.id = "tip";
@@ -52753,6 +54186,9 @@ function Mapa(e,m)
 			{novoel.style.filter = "alpha(opacity=90)";}
 			document.body.appendChild(novoel);
 		}
+		//
+		//
+		//
 		YAHOO.log("Inicializando o i3geo", "i3geo");
 		//
 		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
@@ -52858,7 +54294,8 @@ function Mapa(e,m)
 				//
 				//ativa as guias
 				//
-				ativaGuias();
+				//ativaGuias();
+				i3GEO.guias.cria();
 				//
 				//monta a árvore de temas adicionais se existir a div arvoreAdicionaTema
 				//
@@ -52939,25 +54376,13 @@ function Mapa(e,m)
 					}
 					ajustaEntorno();
 				}
-				autoRedesenho("ativa");
+				i3GEO.navega.autoRedesenho.ativa();
 				if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = objmapa.scale;}
 				if ((objmapa.geoip == "nao") && ($i("ondeestou")))
 				{$i("ondeestou").style.display="none";}
 			}
 			else
 			{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
-			//ativa a guia correta
-			var temp = g_guiaativa.split("guia");
-			mostraguiaf(temp[1]);
-			//
-			//ativa a cor da guia
-			//
-			/*
-			if ($i("guia"+temp[1]))
-			{
-				$i("guia"+temp[1]).parentNode.parentNode.focus();
-			}
-			*/
 			//
 			//ativa a janela de mensagens se for o caso
 			//
@@ -52979,7 +54404,7 @@ function Mapa(e,m)
 				if (i3GEO.configura.mapaRefDisplay == "block"){i3GEO.maparef.inicia();}
 			}
 			i3GEO.janela.fechaAguarde("montaMapa");
-			if (g_docaguias == "sim"){docaguias();}
+			if (i3GEO.configura.liberaGuias == "sim"){i3GEO.guias.libera();}
 			if (document.getElementById("botao3d"))
 			{
 				if (g_3dmap == ""){document.getElementById("botao3d").style.display="none";}
@@ -52988,7 +54413,6 @@ function Mapa(e,m)
 		//
 		//zera os quadros de animação
 		//
-		rebobinaf();
 		if($i("mst"))
 		$i("mst").style.visibility ="visible";
 		YAHOO.log("Fim objmapa.inicializa", "i3geo");
@@ -53038,7 +54462,7 @@ function Mapa(e,m)
 	*/
 	this.atualizaLegendaHTML = function()
 	{
-		if  (($i("moveLegi")) || ($i("legenda") && $i(objmapa.guiaLegenda+"obj") && $i(objmapa.guiaLegenda+"obj").style.display == "block"))
+		if  (($i("moveLegi")) || (i3GEO.guias.ATUAL == "legenda"))
 		{
 			YAHOO.log("Iniciando atualização da legenda HTML", "i3geo");
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+i3GEO.configura.sid;
@@ -53134,103 +54558,7 @@ function Mapa(e,m)
 		};
 		if (objmapa.finaliza)
 		{eval(objmapa.finaliza);}
-		//
-		//altera o tamanho das guias
-		//
-		var temp = new Array("guiaTemas","guiaMenu","guiaLegenda");
-		var i = temp.length-1;
-		if (i >= 0)
-		{
-			do
-			{
-				eval("var s = objmapa."+temp[i]+"obj"); 
-				if ($i(s))
-				{
-					var d = $i(s).style;
-					d.style.overflow="auto";
-					d.style.height = objmapa.h-13;
-					d.style.width = "100%";
-				}
-			}
-			while(i--)
-		}
 		YAHOO.log("Concluído o corpo do mapa", "i3geo");
-	};
-	/*
-	Function: verificaClickMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário clica no mapa.
-	*/
-	this.verificaClickMapa = function()
-	{
-		YAHOO.log("Verificando clicks no mapa", "i3geo");
-		if (this.funcoesClickMapa.length > 0)
-		{
-			var f = this.funcoesClickMapa.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					eval(this.funcoesClickMapa[f]);
-				}
-				while(f--)
-			}
-		}
-		if (g_funcoesClickMapaDefault.length > 0)
-		{
-			var lle = g_funcoesClickMapaDefault.length;
-			for (var f=0;f<lle; f++)
-			{
-				eval(g_funcoesClickMapaDefault[f]);
-			}
-		}
-		YAHOO.log("Fim verificando clicks no mapa", "i3geo");
-	};
-	/*
-	Function: verificaMousemoveMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
-	*/
-	this.verificaMousemoveMapa = function()
-	{
-		if (g_funcoesMousemoveMapaDefault.length > 0)
-		{
-			var f = g_funcoesMousemoveMapaDefault.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					var temp = g_funcoesMousemoveMapaDefault[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(g_funcoesMousemoveMapaDefault[f]);
-				}
-				while(f--)
-			}
-		}
-	};
-	/*
-	Function: verificaNavegaMapa
-	
-	Verifica se existem funções adicionais que devem ser executadas quando o usuário mover o mouse sobre o mapa.
-	*/
-	this.verificaNavegaMapa = function()
-	{
-		YAHOO.log("Verificando navegação", "i3geo");
-		if (g_funcoesNavegaMapaDefault.length > 0)
-		{
-			var f = g_funcoesNavegaMapaDefault.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					var temp = g_funcoesNavegaMapaDefault[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function')
-					eval(g_funcoesNavegaMapaDefault[f]);
-				}
-				while(f--)
-			}
-		}
-		YAHOO.log("Concluído verificando navegação", "i3geo");
 	};
 }
 /**
@@ -53337,672 +54665,585 @@ function montaMenuSuspenso(iddiv)
 }
 function testamenususpenso(){}
 
+/*
+Class:: i3GEO.gadgets
+
+Inclui elementos especiais no mapa
+
+Os elementos são opcionais e adicionam funcionalidades ao mapa.
+
+File: i3geo/classesjs/classe_gadgets.js
+
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
-/*
-Function: iCookie (depreciado)
 
-Utilize i3GEO.util
-
-Cria um cookie.
-*/
-function iCookie(nome,valor)
-{
-	i3GEO.util.insereCookie(nome,valor);
-}
-/*
-Function: pCookie (depreciado)
-
-Utilize i3GEO.util.pegaCookie
-*/
-function pCookie(nome)
-{
-	i3GEO.util.pegaCookie(nome);
-}
-/*
-Function: trocalingua (depreciado)
-
-Utilize i3GEO.idioma.trocaIdioma
-*/
-function trocalingua(l)
-{
-	i3GEO.idioma.trocaIdioma(l);
-}
-/*
-Function: initJanelaMen (depreciado)
-*/
-function initJanelaMen()
-{i3GEO.ajuda.abreJanela();}
-/* 
-Function: pegalistademenus (depreciado)
-*/
-function pegalistademenus(retorno)
-{alert("Funcao pegalistademenus foi depreciado. Utilize i3GEO.arvoreDeTemas");}
-/*
-Function: wdocaf (depreciado)
-*/
-function wdocaf(wlargura,waltura,wsrc,nx,ny,texto)
-{var janela = i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto);}
-/*
-Function: redimwdocaf (depreciado)
-*/
-function redimwdocaf(w,h)
-{i3GEO.janela.alteraTamanho(w,h);}
-/*
-Function: wdocaf2 (depreciado)
-*/
-function wdocaf2(wlargura,waltura,wsrc,nx,ny,texto)
-{
-	var id = YAHOO.util.Dom.generateId();
-	i3GEO.janela.cria(wlargura,waltura,wsrc,nx,ny,texto,id,true);
-}
-/*
-Function: wdocafechaf (depreciado)
-*/
-function wdocafechaf(odoca)
-{alert("wdocafechaf foi depreciado");}
-/*
-Function: mostradicasf (depreciado)
-*/
-function mostradicasf(objeto,dica,hlpt)
-{i3GEO.ajuda.mostraJanela(dica);}	
-/*
-Function: mudaboxnf (depreciado)
-*/
-function mudaboxnf(tipo,obj,nomeFuncao)
-{
-	alert("mudaboxnf foi depreciado");
-}
-/*
-Function: inverteStatusClasse (depreciado)
-*/
-/*
-Function: procurartemas (depreciado)
-
-Localiza um tema no menu de temas.
-*/
-function procurartemas(texto)
-{}
-/*
-Function: expandeTema (depreciado)
-
-*/
-function expandeTema(itemID)
-{
-	//verifica se clicou para expandir a legenda
-	var tema = itemID.split("legenda");
-	if (tema.length == 2)
-	{
-		g_arvoreClick = itemID;
-		tema = tema[1];
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&template=legenda2.htm&tema="+tema+"&g_sid="+g_sid;
-		cpObj.call(p,"criaLegenda",expandeLegendaVer);
-	}
-}
-/*
-Function: expandeGrupo (depreciado)
-*/
-/*
-Function: processaGrupos (depreciado)
-*/
-/*
-Function: pegavalSistemas (depreciado)
-
-Adiciona uma árvore no menu de adição de temas, contendo os sistemas que podem ser executados.
-*/
-function pegavalSistemas(sis)
-{alert("Funcao pegavalSistemas foi depreciada - veja i3GEO.arvoreDeTemas");}
-/*
-Function: processevent1 (depreciado)
-
-Captura a posição do mouse tendo como referência o navegador.
-
-Atualiza o objeto objposicaomouse e movimenta as janelas docáveis.
-
-Recalcula a posição correta da imagem do mapa.
-
-Parameters:
-
-exy1 - objeto evento.
-*/
-function processevent1(exy1)
-{}
-/*
-Function: ativaDragDrop (depreciado)
-
-Ativa a funcionalidade de arrastar e soltar para alteração da ordem de desenho dos temas e para excluir um tema do mapa.
-*/
-/*
-Function: removeAcentos (depreciado)
-*/
-function removeAcentos(palavra)
-{
-	return(i3GEO.util.removeAcentos(palavra));
-}
-/*
-Function: ativaMensagemBanner (depreciado
-*/
-function ativaMensagemBanner()
-{alert("veja i3GEO.ajuda");}
-/*
-Function: mensagemBanner (depreciado)
-*/
-function mensagemBanner()
-{}
-/*
-Function: mensagemf (depreciado)
-
-Abre uma mensagem na tela em um DIV.
-
-A mensagem é incluída em um elemento HTML com id ="mensagem"
-
-Parameters:
-
-m - mensagem que será mostrada.
-*/
-function mensagemf(m)
-{
-	try
-	{
-		//insere o div para mensagens
-		if (!$i("mensagem"))
+i3GEO.gadgets = {
+	/*
+	Variable: PARAMETROS
+	
+	Parametros de inicialização dos gadgets
+	
+	Type:
+	{JSON}
+	*/	
+	PARAMETROS: {
+		"mostraCoordenadasUTM":
+		{idhtml:"mostraUTM"},
+		"mostraCoordenadasGEO":
+		{idhtml:"localizarxy"},
+		"mostraEscalaNumerica":
+		{idhtml:"escala"},
+		"mostraBuscaRapida":
+		{idhtml:"buscaRapida"},
+		"mostraVisual":
+		{idhtml:"visual"},
+		"mostraQuadros":
+		{idhtml:"lugarquadros"}
+	},
+	/*
+	Function: mostraCoordenadasUTM
+	
+	Obtém as coordenadas UTM da posição do mouse sobre o mapa.
+	
+	As coordenadas são obtidas por meio de uma chamada AJAX.
+	
+	Para o funcionamento correto é necessário incluir essa função no evento que identifica quando o mouse
+	está estacionado sobre o mapa. Por default isso já é feito pelo i3Geo.
+	
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS (mostraUTM) ou altere a variável i3GEO.eventos.MOUSEPARADO
+	
+	Parameters:
+	
+	locaplic {String} - localização da instalação do i3GEO. Por default será utilizado
+	i3GEO.configura.locapli
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	
+	sid {String} - código da seção i3Geo no servidor
+	
+	Return:
+	
+	{JSON} - objeto com x e y
+	*/
+	mostraCoordenadasUTM: function(locaplic,id,sid){
+		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
+		{return;}
+		if(arguments.length == 0 || locaplic == "")
+		{var locaplic = i3GEO.configura.locaplic;}
+		if(arguments.length < 2 || locaplic == "" || id == "")
+		{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml;}
+		if(arguments.length < 3 || locaplic == "" || id == "" || sid == "")
+		{var sid = i3GEO.configura.sid;}
+		var temp = $i(id);
+		if (!temp){return;}
+		if(temp.style.display == "block"){return;}
+		var mostra = function(retorno)
 		{
-			var novoel = document.createElement("div");
-			novoel.id = 'mensagem';
-			novoel.innerHTML = '<table width="50" style="border: 1px solid #000000;"> <tr> <td onclick="mensagemf()" style="text-align:left;cursor:pointer" class="tdclara"> <img src="'+g_locaplic+'/imagens/excluir.png" /> </td> <td style="text-align:left" class="tdclara"> <input style="text-align:left" class="textocb" type="text" id="mensagemt" size="70" value="" /> </td></tr> </table>';
-			if($i("i3geo"))
-			{$i("i3geo").appendChild(novoel);}
-			else
-			{document.body.appendChild(novoel);}
-		}
-		if (m == null)
-		{$i("mensagem").style.visibility = "hidden";}
-		else
-		{
-			$i("mensagemt").value = m;
-			$i("mensagem").style.visibility = "visible";
-		}
-		var pos = pegaPosicaoObjeto($i("img"));
-		pos[1] = pos[1] + parseInt($i("img").style.height) - 22;
-		eval ('document.getElementById("mensagem").style.' + g_tipoleft + ' = pos[0] + g_postpx');
-		eval ('document.getElementById("mensagem").style.' + g_tipotop + ' = pos[1] + g_postpx');
-	}
-	catch(e){alert("Impossivel criar mensagem."+e);}
-}
-/*
-Function: aguarde (depreciado)
-*/
-function aguarde()
-{
-	this.abre = function(aguardeId,texto)
-	{
-		i3GEO.janela.abreAguarde(aguardeId,texto);		
-	};
-	this.fecha = function(aguardeId)
-	{
-		i3GEO.janela.fechaAguarde(aguardeId);
-	};
-}
-/*
-Function: zoomiauto (depreciado)
-*/
-function zoomiauto()
-{i3GEO.navega.zoomin(g_locaplic,g_sid);}
-/*
-Function: zoomoauto (depreciado)
-*/
-function zoomoauto()
-{i3GEO.navega.zoomout(g_locaplic,g_sid);}
-/*
-Function: convdmsddf (depreciado)
-*/
-function convdmsddf(cd,cm,cs)
-{return (i3GEO.util.dsm2dd(cd,cm,cs));}
-/*
-Function: zoomPonto (depreciado)
-*/
-function zoomPonto()
-{alert("utilize i3GEO.navega.zoomponto");}
-/*
-Function: zoomIP (depreciado)
-*/
-function zoomIP()
-{alert("zoomIP foi depreciado. Utilize i3GEO.navega.zoomIP");}
-/*
-Function: zoomtot
-*/
-function zoomtot()
-{alert("zoomtot foi depreciado. Utilize i3GEO.navega.zoomExt");}
-/*
-Function: atualizaFarol (depreciado)
-*/
-/*
-Function: panFixo (depreciado)
-*/
-function panFixo(direcao,w,h,escala)
-{alert("panFixo foi depreciado. Utilize i3GEO.navega.panFixo");}
-/*
-Function: protocolo (depreciado)
-
-Utilize i3GEO.util
-*/
-function protocolo()
-{return(i3GEO.util.protocolo());}
-//Mantido aqui apenas para fins de compatibilidade
-function borra()
-{}
-/*
-Function: pegaPosicaoObjeto (depreciado)
-*/
-function pegaPosicaoObjeto(obj)
-{return(i3GEO.util.pegaPosicaoObjeto(obj));}
-/*
-Function: i3geo_pegaElementoPai (depreciado)
-*/
-function i3geo_pegaElementoPai(e)
-{return(i3GEO.util.pegaElementoPai(e));}
-/*
-Function: convddtela (depreciado)
-*/
-function convddtela(vx,vy,docmapa)
-{return(i3GEO.util.dd2tela(vx,vy,docmapa,objmapa.extent,objmapa.cellsize));}
-/*
-Function: convdmsf (depreciado)
-*/
-function convdmsf(x,y)
-{return(i3GEO.calculo.dd2dms(x,y));}
-/*
-Function: calcddf (depreciado)
-*/
-function calcddf(xfign,yfign,g_celula,imgext)
-{return(i3GEO.util.tela2dd(xfign,yfign,g_celula,imgext));}
-/*
-Function: movecursor (depreciado)
-
-Move o ícone que segue o mouse quando da movimentação sobre o mapa
-*/
-function movecursor()
-{
-	//
-	//se a interface openlayers ou flamingo estiver sendo usada, o ícone não é mostrado
-	//'obj' é o elemento que guarda o ícone que segue o mouse
-	//
-	if ($i("obj"))
-	{
-		if ($i("openlayers") || $i("flamingo"))
-		{$i("obj").style.display = "none";}
-		else
-		{
-			var obje = $i("obj").style;
-			if ($i("img"))
-			{
-				eval ("obje." + g_tipotop + "= objposicaocursor.telay + 9 + g_postpx");
-				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 9 + g_postpx");
-			}
-			else
-			{
-				eval ("obje." + g_tipotop + "= objposicaocursor.telay - 15 + g_postpx");
-				eval ("obje." + g_tipoleft + "= objposicaocursor.telax + 15 + g_postpx");
+			temp.style.display="block";
+			temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
+			tempoUTM = setTimeout("$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';clearTimeout(tempoUTM)",3400);
+			return (retorno.data);
+		};
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+sid;
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_persistent_connection(true);
+		cp.set_response_type("JSON");
+		cp.call(p,"geo2utm",mostra);
+	},
+	/*
+	Function: mostraCoordenadasGEO
+	
+	Obtém as coordenadas Geográficas da posição do mouse sobre o mapa.
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS (localizarxy)
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/	
+	mostraCoordenadasGEO: function(id){
+		try{
+			if(arguments.length == 0)
+			{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
+			if($i(id)){
+				if(!$i("xm")){
+					var ins = "<table style='text-align:center'><tr>";
+					ins += "<td>localiza X:&nbsp;</td>";
+					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
+					ins += "<td>Y:"+$inputText("","","yg","grau","3","-00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
+					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
+					var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
+					temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
+					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
+					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
+					ins += "</tr></table>";
+					$i(id).innerHTML = ins;
+					$i3geo_temp_xg = $i("xg");
+					$i3geo_temp_xm = $i("xm");
+					$i3geo_temp_xs = $i("xs");
+					$i3geo_temp_yg = $i("yg");
+					$i3geo_temp_ym = $i("ym");
+					$i3geo_temp_ys = $i("ys");
+					atualizaLocalizarxy = function(){
+						var x = objposicaocursor.dmsx.split(" ");
+						var y = objposicaocursor.dmsy.split(" ");
+						$i3geo_temp_xg.value = x[0];
+						$i3geo_temp_xm.value = x[1];
+						$i3geo_temp_xs.value = x[2];
+						$i3geo_temp_yg.value = y[0];
+						$i3geo_temp_ym.value = y[1];
+						$i3geo_temp_ys.value = y[2];
+					};
+					if($i("img"))
+					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}
+				}
 			}
 		}
-	}
-	if($i("box1"))
-	{
-		var bx = $i("box1");
-		if (bx.style.visibility != "visible")
-		{
-			//move o box para a posição correta
-			bx.style.left = objposicaocursor.telax + g_postpx;
-			bx.style.top = objposicaocursor.telay + g_postpx;
+		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
+	},
+	/*
+	Function: mostraEscalaNumerica
+	
+	Mostra no mapa a escala numérica.
+	
+	A escala numérica pode ser alterada pelo usuário digitando-se a nova escala.
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS (escala)
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/		
+	mostraEscalaNumerica: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
+		if($i(id)){
+			atualizaEscalaNumerica = function(escala){
+				if(arguments.length == 1)
+				$i("i3geo_escalanum").value = escala;
+				else
+				$i("i3geo_escalanum").value = parseInt(objmapa.scale);
+			};
+			if(!$i("i3geo_escalanum")){
+				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19","");
+				var ins = "<table><tr><td>1:"+i;
+				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
+				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
+				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+				$i(id).innerHTML = ins;
+			}
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
 		}
-	}
-}
-/*
-Variable: g_janelaMen (depreciado)
-*/
-/*
-Variable: g_downloadbase (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de download dos dados.
-*/
-/*
-Variable: g_conectargeorss (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de conexão com GeoRSS.
-*/
-/*
-Variable: g_nuvemTags (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de busca de temas por tags.
-*/
-/*
-Variable: g_uploadlocal (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de upload.
-*/
-/*
-Variable: g_uploaddbf (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de upload de arquivo dbf.
-*/
-/*
-Variable: g_conectarwms (depreciado)
-
-Define se na árvore de adição de temas, será mostrada a opção de conexão com WMS.
-*/
-/*
-Variable: g_funcoesMouseParado (depreciado)
-*/
-/*
-Variable: g_tempotip (depreciado)
-*/
-/*
-Variable: g_mostraRosa (depreciado)
-*/
-
-/*
-Function: pegaCoordenadaUTM (depreciado)
-*/
-function pegaCoordenadaUTM()
-{i3GEO.gadgets.mostraCoordenadasUTM(g_locaplic,"mostraUTM");}
-/*
-Function: ativaLocalizarxy (depreciado)
-*/	
-function ativaLocalizarxy(iddiv)
-{i3GEO.gadgets.mostraCoordenadasGEO(iddiv);}
-/*
-Function: ativaEscalaNumerica (depreciado)
-*/	
-function ativaEscalaNumerica(iddiv)
-{i3GEO.gadgets.mostraEscalaNumerica(iddiv);}
-/*
-Function: ativaBuscaRapida (depreciado)
-*/	
-function ativaBuscaRapida(iddiv)
-{i3GEO.gadgets.mostraBuscaRapida(iddiv);}
-/*
-Function: buscaRapida (depreciado)
-*/
-function buscaRapida()
-{i3geo_buscarapida()}
-/*
-Function: criaboxg (depreciado)
-*/
-function criaboxg()
-{
-	i3GEO.util.criaBox();
-	i3GEO.util.criaPin();
-}
-/*
-Function: initJanelaZoom (depreciado)
-*/
-function initJanelaZoom(qual)
-{alert("initJanelaZoom foi depreciado. Utilize i3GEO.barraDeBotoes");}
-/*
-Function: sobeferramentas(depreciado)
-*/
-function sobeferramentas()
-{}
-/*
-Function: desceferramentas (depreciado)
-*/
-function desceferramentas()
-{}
-/*
-Function: mostraRosaDosVentos (depreciado)
-*/
-function mostraRosaDosVentos()
-{i3GEO.navega.mostraRosaDosVentos();}
-/*
-Function: mudaVisual (depreciado)
-*/
-function mudaVisual(visual)
-{i3GEO.gadgets.visual.troca(visual);}
-/*
-Function: visual (depreciado)
-*/
-function visual(iddiv)
-{i3GEO.gadgets.visual.inicia(iddiv);}
-/*
-Function: arvoreclick (depreciado)
-
-Marca o checkbox de adição de temas
-
-Parameters:
-
-itemID - ID que identifica qual tema foi clicado. O ID é definido no arquivo .map e no arquivo menutemas/menutemas.xml
-*/
-function arvoreclick(itemID)
-{
-	if (itemID.search("tema") == 0)
-	{
-		if ($i(itemID).checked == true)
-		{$i(itemID).checked = false;}
-		else
-		{$i(itemID).checked = true;}
-	}
-}
-/*
-Function: pegaTema (depreciado)
-
-Pega o tema de um no na guia de temas.
-
-Utilizado nas opções que operam sobre um tema específico.
-
-Parameters:
-
-celula - objeto que foi clicado
-
-Returns:
-
-Id do tema.
-*/
-function pegaTema(celula)
-{
-	var nos = celula.parentNode.childNodes;
-	var tempi = nos.length;
-	for (var no=0;no<tempi; no++){if (nos[no].type == "checkbox"){return nos[no].value;}}
-}
-/*
-Function: gerafilmef (depreciado)
-*/
-function gerafilmef(qs)
-{}
-/*
-Function: gravaQuadro (depreciado)
-*/
-function gravaQuadro(variavel,valor)
-{i3GEO.gadgets.quadros.grava(variavel,valor);}
-/*
-Function: avancaQuadro (depreciado)
-*/
-function avancaQuadro()
-{i3GEO.gadgets.quadros.avanca();}
-/*
-Function: zoomAnterior (depreciado)
-*/
-function zoomAnterior(){
-}
-/*
-Function: zoomProximo (depreciado)
-
-*/
-function zoomProximo(){
-}
-/*
-Function: opcoesQuadros (depreciado)
-*/
-function opcoesQuadros()
-{}
-/*
-Function: filmef
-*/
-function filmef(o)
-{}
-/*
-Function: rebobinaf (depreciado)
-*/
-function rebobinaf()
-{}
-/*
-Function: filmezf (depreciado)
-*/
-function filmezf(o)
-{}
-/*
-Function: quadrofilme (depreciado)
-*/
-function quadrofilme()
-{}
-/*
-Function: filmeanimaf (depreciado)
-*/
-function filmeanimaf()
-{}
-/*
-Function: filmeanimarodaf (depreciado)
-*/
-function filmeanimarodaf(janima)
-{}
-/*
-Function: pegaimagens (depreciado)
-*/
-function pegaimagens()
-{}
-/*
-Function calculaArea (depreciado)
-*/
-function calculaArea(pontos,pixel)
-{return (i3GEO.calculo.area(pontos,pixel));}
-/*
-Function: calculadistancia (depreciado)
-*/
-function calculadistancia(lga,lta,lgb,ltb) //0ms
-{return (i3GEO.calculo.distancia(lga,lta,lgb,ltb));}
-/*
-Function: initJanelaRef (depreciado)
-*/
-function initJanelaRef()
-{i3GEO.maparef.inicia();}
-/*
-Variable: g_mapaRefDisplay (depreciado)
-*/
-/*
-Function: atualizaReferencia (depreciado)
-*/
-/*
-Function: ajaxReferencia (depreciado)
-*/
-function ajaxReferencia(retorno)
-{i3GEO.maparef.processaImagem(retorno)}
-/*
-Function: clicouRef (depreciado)
-
-Altera a abrangência do mapa quando o mapa de referência é clicado
-*/
-function clicouRef()
-{}
-/*
-Function: movimentoRef (depreciado)
-
-Pega a coordenada do cursor sobre o mapa de referência
-*/
-function movimentoRef(obj)
-{}
-/*
-Function: mostraTip (depreciado)
-
-Mostra a descrição de um elemento do mapa como uma etiqueta na posição do mouse.
-
-Para que um tema tenha uma etiqueta, é necessário configurar o metadata TIP no map file.
-
-Parameters:
-
-retorno - retorno da função ajax com os dados para montar a etiqueta.
-*/
-function mostraTip(retorno)
-{
-	//insere div para tips
-	if (!$i("tip")){
-		var novoel = document.createElement("div");
-		novoel.id = "tip";
-		novoel.style.position="absolute";
-		novoel.style.zIndex=5000;
-		if (navm)
-		{novoel.style.filter = "alpha(opacity=90)";}
-		document.body.appendChild(novoel);
-	}
-	var i = $i("i3geo_rosa");
-	if(i)
-	i.style.display="none";
-	var mostra = false;
-	var retorno = retorno.data;
-	if ((retorno != "erro") && (retorno != undefined))
-	{
-		if ($i("img"))
-		{$i("img").title = "";}
-		if (retorno != "")
-		{
-			var res = "<div id='cabecatip' style='text-align:left;background-color:rgb(240,240,240)'><span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.parado=\"cancela\"'>parar&nbsp;&nbsp;</span>";
-			res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:objmapa.objtips.push($i(\"tip\"));$i(\"tip\").id=\"\";$i(\"cabecatip\").innerHTML =\"\";$i(\"cabecatip\").id =\"\"' >fixar</span></div>";
-			var temas = retorno.split("!");
-			var tema = temas.length-1;
-			if(tema >= 0)
-			{
-				do
-				{
-					var titulo = temas[tema].split("@");
-					if (g_tipotip == "completo")
-					{
-						res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";
+	},
+	/*
+	Function: mostraBuscaRapida
+	
+	Mostra a opção de busca rápida de lugares por palavra digitada.
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/	
+	mostraBuscaRapida: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.idhtml;}
+		if($i(id)){
+			i3geo_buscaRapida = function(){
+				if ($i("valorBuscaRapida").value == "")
+				{alert ("Digite uma palavra para busca!");return;}
+				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
+			}
+			var i = $inputText(id,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
+			var ins = "<table><tr><td>"+i;
+			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
+			$i(id).innerHTML = ins;
+		}	
+	},
+	/*
+	Function: visual
+	
+	Gera os ícones e controla as opções de modificação do visual do mapa.
+	
+	O visual consiste na definição dos ícones utilizados no mapa. O visual pode
+	ser modificado na inicialização ou então escolhido pelo usuário.
+	
+	Os visuais disponíveis são definidos no servidor e consistem em diretórios localizados
+	em i3geo/imagens/visual. A lista de visuais disponíveis é obtida na inicialização do i3geo.
+	
+	Os ícones para mudança do visual são incluídos no elemento HTML definido em
+	i3geo.gadgets.PARAMETROS.visual
+	*/
+	visual: {
+		/*
+		Property: visual.inicia
+		
+		Constrói os ícones de escolha do visual.
+		
+		Parameters:
+		
+		id {String} - id do elemento que receberá os ícones (opcional)
+		*/
+		inicia: function(id){
+			if(arguments.length == 0)
+			{var id = i3GEO.gadgets.PARAMETROS.mostraVisual.idhtml;}
+			if($i(id)){
+				if (objmapa.listavisual != ""){
+					var l = objmapa.listavisual.split(",");
+					var visuais = "";
+					var li = l.length-1;
+					if(li >= 0){
+						do{visuais += "<img title='"+l[li]+"' style=cursor:pointer onclick='i3GEO.gadgets.visual.troca(\""+l[li]+"\")' src='"+i3GEO.configura.locaplic+"/imagens/visual/"+l[li]+".png' />&nbsp;";}
+						while(li--)
 					}
-					var ocorrencias = titulo[1].split("*");
-					var ocorrencia = ocorrencias.length-1;
-					if(ocorrencia >= 0)
-					{
-						do
-						{
-							if (ocorrencias[ocorrencia] != "")
-							{
-								var pares = ocorrencias[ocorrencia].split("##");
-								var paresi = pares.length;
-								for (var par=0;par<paresi; par++)
-								{
-									var valores = pares[par].split("#");
-									if (g_tipotip == "completo")
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-									else
-									{
-										res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
-										var mostra = true;
-									}
-								}
+					$i(id).innerHTML = visuais;
+					$i(id).onmouseover = function(){i3GEO.ajuda.mostraJanela($trad("d26"));};
+					$i(id).onmouseout = function(){i3GEO.ajuda.mostraJanela("");};
+				}		
+			}
+		},
+		/*
+		Property: visual.troca
+		
+		Troca o visual atual. A lista de visuais disponíveis é obtida em objmapa.listavisual
+		
+		Parameters:
+		
+		visual {String} - nome do visual que será utilizado.
+		*/
+		troca: function(visual){
+			var monta = function(retorno){
+				try{
+					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					//
+					//pega todas as imagens da interface
+					//
+					var imgstemp = retorno.data.arquivos;
+					var imgs = new Array();
+					var i = imgstemp.length-1;
+					if(i >= 0){
+						do{
+							var temp = imgstemp[i].split(".");
+							if ((temp[1] == "png") || (temp[1] == "gif") || (temp[1] == "jpg"))
+							{imgs.push(imgstemp[i]);}
+						}
+						while(i--)
+					}
+					var elementos = document.getElementsByTagName("img");
+					var elt = elementos.length;
+					var caminho = i3GEO.configura.locaplic+"/imagens/visual/"+visual+"/";
+					//faz a troca em imagens
+					var j = imgs.length-1;
+					if(j >= 0){
+						do{
+							for (var i=0;i < elt; i++){
+								if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
+								{elementos[i].src = caminho+"branco.gif";}
+								if (elementos[i].src.search("visual") > -1)
+								{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
 							}
 						}
-						while(ocorrencia--)
+						while(j--)
+					}	
+					//faz a troca em ids
+					var j = imgs.length-1;
+					if(j >= 0){
+						do{
+							var busca = imgs[j].split(".");
+							if ($i(busca[0]))
+							{$i(busca[0]).src = caminho+imgs[j];}
+						}
+						while(j--)
 					}
+					//faz a troca em bg
+					var elementos = new Array("barraSuperior","barraInferior","vertMaisZoom","vertMenosZoom","foldermapa","foldermapa1","tic");
+					var i = elementos.length-1;
+					if(i >= 0){
+						do{
+							if ($i(elementos[i])){
+								var nimagem = $i(elementos[i]).style.backgroundImage.replace(i3GEO.configura.visual,visual);
+								$i(elementos[i]).style.backgroundImage = nimagem;
+								//$i(elementos[i]).style.backgroundImage = "url('"+caminho+"sprite.png')";
+							}
+						}
+						while(i--)
+					}
+					i3GEO.configura.visual = visual;
 				}
-				while(tema--)
+				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("ajaxredesenha");}
+			};
+			//
+			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
+			//
+			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+i3GEO.configura.sid+"&diretorio=imagens/visual/"+visual;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"mudaVisual",monta);
+		}
+	},
+	/*
+	Function: quadros
+	
+	Cria e controla o funcionamento dos quadros de animação.
+	
+	Os quadros são mostrados no mapa como uma sequência de quadros de um filme.
+	As imagens que são produzidas no mapa são armazenadas em cada quadro, permitindo sua recuperação.
+	
+	Os quadros armazenam também a extensão geográfica de cada imagem, permitindo sua recuperação.
+	*/
+	quadros: {
+		/*
+		Variable: quadrosfilme
+		
+		Armazena cada quadro individualmente com as suas propriedades
+		
+		Type:
+		{Array}
+		*/
+		quadrosfilme: new Array(),
+		/*
+		Variable: quadroatual
+		
+		Valor do índice do quadro atual
+		
+		Type:
+		{Integer}
+		*/
+		quadroatual: 0,
+		/*
+		Property: inicia
+		
+		Gera os quadros e inicializa os objetos para armazenar as imagens
+		
+		Parameters:
+		
+		qs {Integer} - número de quadros
+		
+		lugarquadros {String} - id do elemento HTML que receberá os quadros (opcional)
+		*/
+		inicia: function(qs,lugarquadros){
+			if(arguments.length == 1)
+			{var lugarquadros = i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml;}
+			var q = "<table class=tablefilme ><tr><td><div class='menuarrow'  title='op&ccedil;&otilde;es' onclick='i3GEO.gadgets.quadros.opcoes(this)' style='cursor:pointer'></div></td>";
+			for (var i = 0; i < qs; i++){
+				q += "<td><img class='quadro' src=\""+i3GEO.configura.locaplic+"/imagens/branco.gif\" id='quadro"+i+"' ";
+				q += "onmouseover='i3GEO.gadgets.quadros.trocaMapa(this.id);i3GEO.ajuda.mostraJanela(\"Clique para aplicar a extensão geográfica do quadro ao mapa\")' ";
+				q += "onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" ";
+				q += "onclick='i3GEO.gadgets.quadros.zoom(this.id)' /></td>";
+				i3GEO.gadgets.quadros.quadrosfilme[i] = new Array();
 			}
-			if(!mostra){$i("tip").style.display="none";return;}
-			if ($i("janelaMen"))
-			{$i("janelaMenTexto").innerHTML = res;}
+			q += "</tr></table>";
+			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml)){
+				document.getElementById(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).innerHTML = q;
+				$i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml).onmouseout = function(){
+					if($i("imgClone")){
+						$i("imgClone").style.display = "none";
+						$i("img").style.display = "block";
+					}
+				};
+			}
+			i3GEO.gadgets.quadros.quadroatual = 0;
+		},
+		/*
+		Property: grava
+
+		Armazena um determinado valor em uma determinada característica de um objeto quadro.
+
+		Parameters:
+
+		variavel {String} - parâmetro do objeto quadro.
+
+		valor - {String} valor que será aplicado.
+		*/
+		grava: function(variavel,valor){
+			eval("i3GEO.gadgets.quadros.quadrosfilme["+i3GEO.gadgets.quadros.quadroatual+"]."+variavel+" = '"+valor+"'");
+			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml))
+			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
+		},
+		/*
+		Property: avanca
+
+		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
+		*/		
+		avanca: function(){
+			try{
+				var nquadros = i3GEO.gadgets.quadros.quadrosfilme.length;
+				if ((nquadros - 1) == (i3GEO.gadgets.quadros.quadroatual))
+				{i3GEO.gadgets.quadros.inicia(nquadros);}
+				else{i3GEO.gadgets.quadros.quadroatual++;}
+			}
+			catch(e){var e = "";}		
+		},
+		/*
+		Property: zoom
+		
+		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
+		
+		Parameter:
+		
+		quadro {String} - id do quadro que será utilizado
+		*/
+		zoom: function(quadro){
+			var indice = quadro.replace("quadro","");
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[indice].extensao)
+		},
+		/*
+		Property: trocaMapa
+		
+		Troca a imagem do mapa atual pela que estiver armazenada em quadro
+		
+		A imagem mostrada no mapa é um clone do mapa atual, preservando o mapa.
+		
+		Parameters:
+		
+		quadro {String} - id do quadro que terá a imagem recuperada
+		*/
+		trocaMapa: function(quadro){
+			var indice = quadro.replace("quadro","");
+			var i = $i("img");
+			var c = $i("imgClone");
+			if(i){
+				if(!c){
+					var iclone=document.createElement('IMG');
+					iclone.style.position = "relative";
+					iclone.id = "imgClone";
+					iclone.style.border="1px solid blue";
+					i.parentNode.appendChild(iclone);
+					iclone.src = corpo.src;
+					iclone.style.width = objmapa.w;
+					iclone.style.heigth = objmapa.h;
+					iclone.style.top = corpo.style.top;
+					iclone.style.left = corpo.style.left;		
+				}
+				try{
+					if(!i3GEO.gadgets.quadros.quadrosfilme[indice].imagem){return;}
+					c.src = i3GEO.gadgets.quadros.quadrosfilme[indice].imagem;
+					c.style.display = "block";
+					i.style.display = "none";
+				}
+				catch(e){var e = "";}
+			}
+		},
+		/*
+		Property: opcoes
+		
+		Abre a janela de opções que controla as características do quado e permite disparar a animação.
+		
+		Parameters:
+		
+		obj {Object} - objeto clicado
+		*/
+		opcoes: function(obj){
+			if (objmapa.utilizacgi == "sim"){
+				objmapa.utilizacgi = "nao";
+				var volta = function(){
+					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
+				};
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"desativacgi",volta);
+			}
 			else
-			{
-				var i = $i("tip");
-				i.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
-				ist = i.style;
-				ist.top = objposicaocursor.telay - 10;
-				ist.left = objposicaocursor.telax - 20;
-				ist.display="block";
+			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
+		},
+		/*
+		Property: anima
+		
+		Mostra as imagens armazenadas nos quadros em uma sequência animada
+		
+		Parameters:
+		
+		Qanima {Integer} - quadro atual na sequência de animação
+		
+		t {Numeric} - tempo em milisegundos entre cada quadro
+		*/
+		anima: function(Qanima,t){
+			if(arguments.length == 0){
+				Qanima = 0;
+				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				var t = doc.getElementById("tempoanima").value;
+			}
+			if(Qanima > i3GEO.gadgets.quadros.quadrosfilme.length){
+				clearTimeout(tAnima);
+				$i("imgClone").style.display = "none";	
+				$i("img").style.display="block";
+				return;
+			}
+			//$i("img").src = preLoad[janima].src;
+			//$i("f"+janima).className = "quadro1";
+			i3GEO.gadgets.quadros.trocaMapa("quadro"+Qanima);
+			Qanima++;
+			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
+		},
+		listaImagens: function(){
+			if (objmapa.utilizacgi == "sim"){
+				objmapa.utilizacgi = "nao";
+				var volta = function()
+				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");
+				cp.call(p,"desativacgi",volta);
+			}
+			else{
+				var wi = window.open("");//"",null,"width=550,height=650,resizable=yes,scrollbars=yes");
+				//pega os dados do objeto quadrosfilme e escreve na nova janela
+				var mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
+				wi.document.write("<html><body><p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
+				var i = i3GEO.gadgets.quadros.quadrosfilme.length-1;
+				if(i >= 0){
+					do{
+						if (i3GEO.gadgets.quadros.quadrosfilme[i].imagem){
+							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Imagem: "+i+"<br>");
+							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrangência: "+i3GEO.gadgets.quadros.quadrosfilme[i].extensao+"<br>");
+							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].imagem+"' />");
+							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].referencia+"' />");
+						}
+						i--
+					}
+					while(i>=0)
+				}
+				wi.document.write("<br>Fim</body></html>");
 			}
 		}
 	}
-}
-
+};
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

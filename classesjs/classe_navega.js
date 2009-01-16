@@ -34,7 +34,8 @@ i3GEO.navega = {
 	
 	Valor utilizado nas operações de zoom in e out. Fator de zoom.
 	
-	O valor default é 2.
+	Default:
+	2
 	
 	Type:
 	{Integer}
@@ -52,7 +53,7 @@ i3GEO.navega = {
 	sid {String} - código da seção aberta no servidor pelo i3geo
 	*/
 	zoomin: function(locaplic,sid){
-		YAHOO.log("zoomin", "i3geo");
+		//YAHOO.log("zoomin", "i3geo");
 		if(arguments.length == 0){
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
@@ -76,7 +77,7 @@ i3GEO.navega = {
 	sid {String} - código da seção aberta no servidor pelo i3geo
 	*/
 	zoomout: function(locaplic,sid){
-		YAHOO.log("zoomout", "i3geo");
+		//YAHOO.log("zoomout", "i3geo");
 		if(arguments.length == 0){
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
@@ -105,7 +106,7 @@ i3GEO.navega = {
 	y {Numeric} - coordenada em décimos de grau da latitude
 	*/
 	zoomponto: function(locaplic,sid,x,y){
-		YAHOO.log("zoomponto", "i3geo");
+		//YAHOO.log("zoomponto", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+sid;
 		var cp = new cpaint();
@@ -189,7 +190,7 @@ i3GEO.navega = {
 	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
 	*/	
 	localizaIP: function(locaplic,sid,funcao){
-		YAHOO.log("localizaIP", "i3geo");
+		//YAHOO.log("localizaIP", "i3geo");
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+sid;
 		var cp = new cpaint();
 		cp.set_async("true");
@@ -243,7 +244,7 @@ i3GEO.navega = {
 	ext {String} - Extensão geográfica no formato xmin ymin xmax ymax
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
-		YAHOO.log("zoomExt", "i3geo");
+		//YAHOO.log("zoomExt", "i3geo");
 		if(tipoimagem == "")
 		{var tipoimagem = "nenhum";}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
@@ -267,7 +268,7 @@ i3GEO.navega = {
 	escala {Numeric} - denominador da escala
 	*/	
 	aplicaEscala: function(locaplic,sid,escala){
-		YAHOO.log("aplicaescala", "i3geo");
+		//YAHOO.log("aplicaescala", "i3geo");
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+sid;
 		var cp = new cpaint();
@@ -295,7 +296,7 @@ i3GEO.navega = {
 	escala {Numeric} - escala do mapa
 	*/
 	panFixo: function(locaplic,sid,direcao,w,h,escala){
-		YAHOO.log("panfixo", "i3geo");
+		//YAHOO.log("panfixo", "i3geo");
 		if (direcao == "norte"){
 			var y = h / 6;
 			var x = w / 2;
@@ -395,9 +396,39 @@ i3GEO.navega = {
 		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
 	},
+	/*
+	Function: autoRedesenho
+	
+	Controla o redesenho automático do mapa por meio de um temporizador
+	*/
 	autoRedesenho: {
+		/*
+		Variable: INTERVALO
+		
+		Intervalo de tempo, em milisegundos, que será utilizado para disparar o desenho do mapa
+		
+		Type:
+		{Integer}
+		*/
 		INTERVALO: 0,
+		/*
+		Variable: ID
+		
+		Guarda o valor do ID do elemento HTML que receberá o contador de tempo
+		
+		Type:
+		{String}
+		*/
 		ID: "tempoRedesenho",
+		/*
+		Property: ativa
+		
+		Ativa o auto-redesenho do mapa
+		
+		Parameters:
+		
+		id {String} - id do elemento onde o contador de tempo será mostrado no mapa. Por default, utiliza "tempoRedesenho".
+		*/
 		ativa: function(id){
 			if(arguments.length == 0){var id = "tempoRedesenho";}
 			i3GEO.navega.autoRedesenho.ID = id;
@@ -410,6 +441,11 @@ i3GEO.navega = {
 				i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
 			}
 		},
+		/*
+		Property: desativa
+		
+		Desativa o auto-redesenho do mapa
+		*/
 		desativa:function(){
 			i3GEO.navega.autoRedesenho.INTERVALO = 0;
 			clearTimeout(i3GEO.navega.tempoRedesenho);
@@ -419,15 +455,463 @@ i3GEO.navega = {
 			if ($i(i3GEO.navega.autoRedesenho.ID))
 			{$i(i3GEO.navega.autoRedesenho.ID).style.display = "none";}
 		},
+		/*
+		Property: redesenha
+		
+		Redesenha o mapa quando o contador de tempo chegar a zero
+		*/
 		redesenha: function(){
 			clearTimeout(i3GEO.navega.tempoRedesenho);
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
 			ajaxredesenha("");
 			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
 		},
+		/*
+		Property: contagem
+		
+		Faz a contagem do tempo
+		*/
 		contagem: function(){
 			if ($i(i3GEO.navega.autoRedesenho.ID)){$i(i3GEO.navega.autoRedesenho.ID).innerHTML = parseInt($i(i3GEO.navega.autoRedesenho.ID).innerHTML) - 1;}
 			i3GEO.navega.contaTempoRedesenho = setTimeout('i3GEO.navega.autoRedesenho.contagem()',1000);
+		}
+	},
+	/*
+	Function: zoomBox
+	
+	Controla o desenho de um box na tela para executar o zoom por box
+	*/
+	zoomBox: {
+		/*
+		Property: inicia
+		
+		Marca o início do desenho do box, capturando a posição do mouse
+		*/
+		inicia: function(){
+			if(g_tipoacao!='zoomli'){return;}
+			if(!$i("i3geoboxZoom"))
+			i3GEO.navega.zoomBox.criaBox();
+			var i = $i("i3geoboxZoom").style;
+			i.width=0;
+			i.height=0;
+			i.visibility="visible";
+			i.display="block";
+			i.left = objposicaocursor.telax + g_postpx;
+			i.top = objposicaocursor.telay + g_postpx;
+			boxxini = objposicaocursor.telax;
+			boxyini = objposicaocursor.telay;
+			tamanhox = 0;
+			tamanhoy = 0;
+			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.zoomBox.desloca()") < 0)
+			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.zoomBox.desloca()");}
+			if(i3GEO.eventos.MOUSEUP.toString().search("i3GEO.navega.zoomBox.termina()") < 0)
+			{i3GEO.eventos.MOUSEUP.push("i3GEO.navega.zoomBox.termina()");}
+		},
+		/*
+		Property: criaBox
+		
+		Cria o DIV que será utilizado para desenhar o box no mapa
+		*/
+		criaBox: function(){
+			if(!$i("i3geoboxZoom")){
+				var novoel = document.createElement("div");
+				novoel.style.width = "0px";
+				novoel.style.height = "0px";
+				novoel.id = "i3geoboxZoom";
+				novoel.style.display = "none";
+				novoel.style.fontSize = "0px";
+				if(navn)
+				{novoel.style.opacity = .25;}
+				novoel.style.backgroundColor = "gray";
+				novoel.style.position="absolute";
+				novoel.style.border = "2px solid #ff0000";		
+				if (navm)
+				{novoel.style.filter = "alpha(opacity=25)";}
+				novoel.onmousemove = function(){
+					var b = $i("i3geoboxZoom").style;
+					var wb = parseInt(b.width);
+					var hb = parseInt(b.height);
+					if (navm){
+						if(wb > 2)
+						{b.width = wb - 2;}
+						if(hb > 2)
+						{b.height = hb - 2;}
+					}
+					else{
+						b.width = wb - 2 + "px";
+						b.height = hb - 2 + "px";
+					}
+				};
+				novoel.onmouseup = function(){i3GEO.navega.zoomBox.termina()};
+				document.body.appendChild(novoel);
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","i3geoboxZoom",i3GEO.configura.locaplic);
+				if($i("img")){
+					$i("img").title = "";
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
+				}
+			}
+		},
+		/*
+		Property: desloca
+		
+		Desloca o box conforme o mouse é movimentado
+		*/
+		desloca: function(){
+			if(g_tipoacao!='zoomli'){return;}
+			var bxs = $i("i3geoboxZoom").style;
+			if(bxs.display != "block"){return;}
+			ppx = objposicaocursor.telax;
+			py = objposicaocursor.telay;
+			if (navm){
+				if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
+				{bxs.width = ppx - boxxini - 2;}
+				if ((py > boxyini) && ((py - boxyini - 2) > 0))
+				{bxs.height = py - boxyini - 2;}
+				if (ppx < boxxini)
+				{bxs.left = ppx;bxs.width = boxxini - ppx + 2;}
+				if (py < boxyini)
+				{bxs.top = py;bxs.height = boxyini - py + 2;}
+			}
+			else{
+				if (ppx > boxxini)
+				{bxs.width = ppx - boxxini + "px";}
+				if (py > boxyini)
+				{bxs.height = py - boxyini + "px";}
+				if (ppx < boxxini)
+				{bxs.left = ppx + "px";bxs.width = boxxini - ppx + "px";}
+				if (py < boxyini)
+				{bxs.top = py + "px";bxs.height = boxyini - py + "px";}
+			}
+		},
+		/*
+		Property: termina
+		
+		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
+		*/
+		termina: function(){
+			if(g_tipoacao!='zoomli'){return;}
+			try{
+				var valor = i3GEO.calculo.rect2ext("i3geoboxZoom",objmapa.extent,g_celula);
+				var v = valor[0];
+				var x1 = valor[1];
+				var y1 = valor[2];
+				var x2 = valor[3];
+				var y2 = valor[4];
+				var limpa = function(){
+					var bxs = $i("i3geoboxZoom").style;
+					bxs.display="none";
+					bxs.visibility="hidden";
+					bxs.width = 0;
+					bxs.height = 0;
+				};
+				if((x1 == x2) || (y1 == y2))
+				{limpa.call();return;}
+				// se o retangulo for negativo pula essa parte para nï¿½ gerar erro
+				objmapa.extent=v;
+				limpa.call();
+				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.zoomBox.desloca()");
+				i3GEO.eventos.MOUSEUP.remove("i3GEO.navega.zoomBox.termina()");
+				//i3GEO.eventos.MOUSEDOWN.remove("i3GEO.navega.zoomBox.inicia()");
+				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,v);
+			}
+			catch(e){limpa.call();return;}
+		}
+	},
+	/*
+	Function: entorno
+	
+	Controla o desenho do entorno do mapa (modo tile)
+	*/
+	entorno:{
+		/*
+		Function: ativaDesativa
+		
+		Ajusta o mapa para ativar ou desativar o desenho do entorno
+		
+		Ao ser chamada, essa função muda o modo atual, ativando ou desativando o entorno
+		*/
+		ativaDesativa: function(){
+			if(objmapa.mapfile == "")
+			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+			if (i3GEO.configura.entorno == "sim"){
+				var letras=["L","O","N","S"];
+				for (var l=0;l<4; l++){
+					if ($i("img"+letras[l])){
+						$i("img"+letras[l]).style.display = "none";
+						$i("img"+letras[l]).src = "";
+					}
+				}
+				$left("img",0);
+				$top("img",0);
+				i3GEO.configura.entorno = "nao";
+				alert("Entorno desativado");
+				$i("img").style.visibility = "visible";
+				$i("img").style.display = "block";
+			}
+			else{
+				i3GEO.navega.entorno.geraURL();
+				var letras=["L","O","N","S"];
+				for (var l=0;l<4; l++){
+					if ($i("img"+letras[l])){
+						$i("img"+letras[l]).style.width = objmapa.w;
+						$i("img"+letras[l]).style.height = objmapa.h;
+						$i("img"+letras[l]).style.display = "block";
+					}
+				}
+				i3GEO.configura.entorno = "sim";
+				i3GEO.navega.entorno.ajustaPosicao();
+				alert("Entorno ativado. o desenho do mapa pode demorar mais.");
+			}
+		},
+		/*
+		Function: geraURL
+		
+		Gera as URLs que serão utilizadas na tag IMG dos elementos do entorno do mapa
+		*/
+		geraURL: function(){
+			var nny = (objmapa.h / 2) * -1;
+			var nnx = objmapa.w / 2;
+			var sy = objmapa.h + (objmapa.h / 2);
+			var sx = objmapa.w / 2;
+			var lx = objmapa.w + (objmapa.w / 2);
+			var ly = objmapa.h / 2;
+			var ox = (parseInt(objmapa.w/2)) * -1;
+			var oy = objmapa.h / 2;
+			var u = window.location.protocol+"\/\/"+window.location.host+objmapa.cgi+"?map="+objmapa.mapfile;
+			u += "&mode=map&imgext="+objmapa.extent+"&mapsize="+nnx+" "+oy;
+			var sul = u+"&imgxy="+sx/2+" "+sy/2;
+			var norte = u+"&imgxy="+nnx/2+" "+nny/2;
+			var leste = u+"&imgxy="+lx/2+" "+ly/2;
+			var oeste = u+"&imgxy="+ox/2+" "+oy/2;
+			$i("imgS").src=sul;
+			$i("imgN").src=norte;
+			$i("imgL").src=leste;
+			$i("imgO").src=oeste;	
+		},
+		/*
+		Function: ajustaPosicao
+		
+		Ajusta a posição das imagens do entorno do mapa
+		*/
+		ajustaPosicao: function(){
+			$left("img",objmapa.w*-1);
+			$left("imgS",objmapa.w*-1);
+			$left("imgL",objmapa.w);
+			$left("imgO",objmapa.w*-3);
+			$left("imgN",objmapa.w*-1);
+			$top("img",objmapa.h*-1);
+			$top("imgS",objmapa.h*-1);
+			$top("imgL",objmapa.h*-1);
+			$top("imgN",objmapa.h*-1);
+			$top("imgO",objmapa.h*-1);		
+		}
+	},
+	/*
+	Function: lente
+	
+	Ativa e controla a lente de aumento.
+	
+	A lente de aumento é um box que pode ser ativado sobre o mapa
+	mostrando uma imagem ampliada da região onde está o mouse
+	*/
+	lente:{
+		/*
+		Variable: ESTAATIVA
+		
+		Indica se a lente foi ou não aberta
+		*/
+		ESTAATIVA: "nao",
+		/*
+		Variable: POSICAOX
+		
+		Define a posição em x da lente em relação ao corpo do mapa
+		*/
+		POSICAOX: 0,
+		/*
+		Variable: POSICAOY
+		
+		Define a posição em y da lente em relação ao corpo do mapa
+		*/
+		POSICAOY:0,
+		/*
+		Function: inicia
+		
+		Ativa a lente de aumento criando os elementos gráficos
+		necessários e ativando os eventos que controlam a apresentação
+		da lente
+		*/
+		inicia: function(){
+			//insere lente de aumento
+			if (!$i("lente")){
+				var novoel = document.createElement("div");
+				novoel.id = 'lente';
+				novoel.style.clip='rect(0px,0px,0px,0px)';
+				var novoimg = document.createElement("img");
+				novoimg.src="";
+				novoimg.id='lenteimg';
+				novoel.appendChild(novoimg);
+				document.body.appendChild(novoel);
+				var novoel = document.createElement("div");
+				novoel.id = 'boxlente';
+				document.body.appendChild(novoel);
+			}
+			with($i('boxlente').style){borderWidth='1' + g_postpx;borderColor="red";display = "block"}
+			$i("lente").style.display = "block";
+			i3GEO.navega.lente.ESTAATIVA = "sim";
+			i3GEO.navega.lente.atualiza();
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.lente.atualiza()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.lente.atualiza()");}
+			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.lente.movimenta()") < 0)
+			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.lente.movimenta()");}
+		},
+		/*
+		Function: atualiza
+		
+		Atualiza a imagem da lente aberta
+		*/
+		atualiza: function(){
+			var temp = function(retorno){
+				try{
+					var retorno = retorno.data;
+					if (retorno == "erro"){alert("A lente nao pode ser criada");return;}
+					var volta = retorno.split(",");
+					var nimg = volta[2];
+					var olente = $i('lente');
+					var oboxlente = $i('boxlente');
+					var olenteimg = $i('lenteimg');
+					olenteimg.src = nimg;
+					olenteimg.style.width=volta[0] * 1.5;
+					olenteimg.style.height=volta[1] * 1.5;
+					olente.style.zIndex=1000;
+					olenteimg.style.zIndex=1000;
+					oboxlente.style.zIndex=1000;
+					var pos = i3GEO.util.pegaPosicaoObjeto($i("corpoMapa"));
+					eval ("olente.style." + g_tipoleft + " = pos[0] + i3GEO.navega.lente.POSICAOX + g_postpx");
+					eval ("olente.style." + g_tipotop + " = pos[1] + i3GEO.navega.lente.POSICAOY + g_postpx");
+					eval ("oboxlente.style." + g_tipoleft + " = pos[0] + i3GEO.navega.lente.POSICAOX + g_postpx");
+					eval ("oboxlente.style." + g_tipotop + " = pos[1] + i3GEO.navega.lente.POSICAOY + g_postpx");
+					oboxlente.style.display='block';
+					oboxlente.style.visibility='visible';
+					olente.style.display='block';
+					olente.style.visibility='visible';
+					i3GEO.janela.fechaAguarde("ajaxabrelente");
+				}
+				catch(e){i3GEO.janelas.fechaAguarde();}
+			};
+			if(i3GEO.navega.lente.ESTAATIVA == "sim"){
+				i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				cp.set_response_type("JSON");			
+				cp.call(p,"lente",temp);
+			}
+			else{
+				i3GEO.navega.lente.desativa();
+			}
+		},
+		/*
+		Function: desativa
+		
+		Desativa alente aberta
+		*/
+		desativa: function(){
+			$i("lente").style.display = "none";
+			$i("boxlente").style.display = "none";
+			$i('boxlente').style.borderWidth = 0;
+			i3GEO.navega.lente.ESTAATIVA = "nao";
+			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.lente.movimenta()");
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.lente.atualiza()");
+		},
+		/*
+		Function: movimenta
+		
+		Movimenta a imagem dentro da lente para refletir a posição do mouse
+		*/
+		movimenta: function(){
+			try{
+				if(i3GEO.navega.lente.ESTAATIVA = "sim"){
+					if ($i("lente").style.visibility=="visible")
+					var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+					var esq = (objposicaocursor.telax - pos[0]) * 2.25;
+					var topo = (objposicaocursor.telay - pos[1]) * 2.25;
+					var clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";
+					var i = $i("lente").style;
+					i.clip = clipt;
+					eval("i." + g_tipotop + "= (pos[1] - (topo - 40)) + g_postpx");
+					eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
+				}
+			}
+			catch(e){}
+		}
+	},
+	destacaTema:{
+		TAMANHO: 75,
+		ESTAATIVO: "nao",
+		TEMA: "",
+		inicia: function(tema){
+			if (!$i("img_d")){
+				var novoel = document.createElement("div");
+				novoel.id = "div_d";
+				novoel.style.zIndex = 5000;
+				document.body.appendChild(novoel);
+				$i("div_d").innerHTML = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d' />";
+				$i("div_d").style.left = parseInt($i("corpoMapa").style.left);
+				$i("div_d").style.top = parseInt($i("corpoMapa").style.top);
+				$i("img_d").style.left = 0;
+				$i("img_d").style.top = 0;
+				$i("img_d").style.width = objmapa.w;
+				$i("img_d").style.height = objmapa.h;
+				$i("div_d").style.clip = 'rect(0 75 75 0)';
+				var novoeli = document.createElement("div");
+				novoeli.id = "div_di";
+				novoel.appendChild(novoeli);
+				$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
+			}
+			i3GEO.navega.destacaTema.TEMA = tema;
+			i3GEO.navega.destacaTema.ESTAATIVO = "sim";
+			i3GEO.navega.destacaTema.atualiza();
+			var janela = i3GEO.janela.cria(150,0,"","center","center","Parar destaque&nbsp;&nbsp;","ativadesativaDestaque");
+			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.navega.destacaTema.desativa);
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.destacaTema.atualiza()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.destacaTema.atualiza()");}
+			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.destacaTema.movimenta()") < 0)
+			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");}
+		},
+		atualiza: function(){
+			if(i3GEO.navega.destacaTema.ESTAATIVO == "nao")
+			{return;}
+			var temp = function(retorno){
+				var retorno = retorno.data;
+				var m = new Image();
+				m.src = retorno;
+				$i("div_d").innerHTML = "";
+				$i("div_d").style.display="block";
+				var novoel = document.createElement("input");
+				novoel.id = "img_d";
+				novoel.style.position = "relative";
+				novoel.style.top = "0px";
+				novoel.style.left = "0px";
+				novoel.type = "image";
+				novoel.src = m.src;
+				novoel.style.display = "block";
+				$i("div_d").appendChild(novoel);
+				i3GEO.janela.fechaAguarde("ajaxdestaca");	
+			};
+			i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+i3GEO.navega.destacaTema.TEMA+"&g_sid="+i3GEO.configura.sid;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");	
+			cp.call(p,"geraDestaque",temp);		
+		},
+		desativa: function(){
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.destacaTema.atualiza()");
+			i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");
+			i3GEO.navega.destacaTema.ESTAATIVO = "nao";
+			document.body.removeChild($i("div_d"));
+		},
+		movimenta: function(){
+			if(i3GEO.navega.destacaTema.ESTAATIVO == "sim")
+			$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - i3GEO.navega.destacaTema.TAMANHO)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - i3GEO.navega.destacaTema.TAMANHO)+')';
 		}
 	}
 };

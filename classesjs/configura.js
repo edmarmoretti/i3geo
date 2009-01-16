@@ -63,27 +63,6 @@ Se for definido como "", é utilizado o template i3geo/aplicmapa/legenda.htm.
 */
 g_templateLegenda = "";
 /*
-Variable: g_posicaoLenteX
-
-Define o posicionamento da lente de aumento em relação ao corpo do mapa.
-
-Veja:
-
-<redesenho.js>
-*/
-g_posicaoLenteX = 0;
-/*
-Variable: g_posicaoLenteY
-
-Define o posicionamento da lente de aumento em relação ao corpo do mapa.
-
-Veja:
-
-<redesenho.js>
-
-*/
-g_posicaoLenteY = 0;
-/*
 Variable: g_autoRedesenho
 
 Ativa o auto redesenho do mapa conforme o intervalo de tempo definido em segundos.
@@ -206,9 +185,9 @@ Veja:
 
 Values:
 
-simples|completo
+simples|completo|balao
 */
-g_tipotip = "completo";
+g_tipotip = "balao";
 /*
 Variable: g_tipoimagem
 
@@ -227,35 +206,6 @@ Nome do arquivo xml com a lista de sistemas que serão mostrados na guia de adiçã
 O valor dessa variável é definido no arquivo "ms_configura.php" e é preenchida utilizando o ajax logo na inicialização do i3geo.
 */
 g_sistemas = "";
-/*
-Variable: destacaTamanho
-
-Valor em pixel do retângulo de destaque de temas utilizado na ferramenta destacatema.
-
-Veja:
-
-<funcoes.js>
-*/
-destacaTamanho = 75;
-/*
-Variable: g_entorno
-
-Indica se o preenchimento do entorno do mapa está ou não ativo.
-Utilizado para criar o efeito de auto-preenchimento do mapa quando é executada a função pan.
-É alterada em uma opção específica no menu suspenso.
-
-Veja:
-
-<funcoes.js>, <iniciamma.js>, <redesenho.js>
-
-Values:
-
-sim|nao
-*/
-g_entorno = "nao";
-/*
-Variable: g_listaPropriedades (depreciado)
-*/
 /*
 Section: Funcionalidades
 */
@@ -368,14 +318,15 @@ g_listaFuncoesBotoes = {
 		tipo:"dinamico",
 		dica:$trad("d3"),
 		funcaoonclick:function(){
+			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
+			if(!$i("i3geoboxZoom"))
+			i3GEO.navega.zoomBox.criaBox();
 			g_operacao='navega';
 			g_tipoacao='zoomli';
 			i3GEO.barraDeBotoes.ativaIcone("zoomli");
-			if($i("img")){
-				$i("img").title = "";
-				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
-			}
 			marcadorZoom = "";
+			if(i3GEO.eventos.MOUSEDOWN.toString().search("i3GEO.navega.zoomBox.inicia()") < 0)
+			{i3GEO.eventos.MOUSEDOWN.push("i3GEO.navega.zoomBox.inicia()");}
 		}
 	},
 	{
@@ -409,7 +360,7 @@ g_listaFuncoesBotoes = {
 				if ($i("img") && (g_panM == "sim")){
 					var nx = objposicaocursor.telax - leftinicial - clicinicialx;
 					var ny = objposicaocursor.telay - topinicial - clicinicialy;
-					if (g_entorno == "nao"){
+					if (i3GEO.configura.entorno == "nao"){
 						var l = 0;
 						if (parseInt($i("i3geo").style.left))
 						{var l = parseInt($i("i3geo").style.left);}
@@ -506,7 +457,7 @@ g_listaFuncoesBotoes = {
 								if(tema >= 0){
 									do{
 										var titulo = temas[tema].split("@");
-										if (g_tipotip == "completo")
+										if (g_tipotip == "completo" || g_tipotip == "balao")
 										{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
 										var ocorrencias = titulo[1].split("*");
 										var ocorrencia = ocorrencias.length-1;
@@ -517,7 +468,7 @@ g_listaFuncoesBotoes = {
 													var paresi = pares.length;
 													for (var par=0;par<paresi; par++){
 														var valores = pares[par].split("#");
-														if (g_tipotip == "completo"){
+														if (g_tipotip == "completo" || g_tipotip == "balao"){
 															res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
 															var mostra = true;
 														}
@@ -535,8 +486,18 @@ g_listaFuncoesBotoes = {
 								}
 								if(!mostra){$i("tip").style.display="none";return;}
 								else{		
-									var n = i3GEO.janela.tip();
-									$i(n).innerHTML += res;
+									if(g_tipotip != "balao"){
+										var n = i3GEO.janela.tip();
+										$i(n).style.textAlign="left";
+										$i(n).innerHTML += res;
+									}
+									else{
+										var n = i3GEO.janela.tip("<img src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+										balloon = new Balloon;
+										balloon.delayTime = 0;
+										var res = "<div style=text-align:left >"+res+"</div>";
+										$i(n+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
+									}
 								}
 							}
 						}
@@ -708,7 +669,12 @@ g_listaFuncoesBotoes = {
 		tipo:"",
 		dica:$trad("d18"),
 		funcaoonclick:function()
-		{lenteDeAumento();}
+		{
+			if (i3GEO.navega.lente.ESTAATIVA == "nao"){
+			i3GEO.navega.lente.inicia();}
+			else
+			i3GEO.navega.lente.desativa();
+		}
 	},
 	{
 		//Coloca as guias em uma janela móvel
@@ -742,8 +708,8 @@ g_listaFuncoesBotoes = {
 				$i("img").title = "";
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
 			}
+			g_tipoacao = "";
 			mede();
-			g_tipoacao = "mede";
 		}
 	},
 	{
@@ -795,7 +761,7 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d24"),
 		funcaoonclick:function(){
 			i3GEO.barraDeBotoes.ativaIcone("selecao");
-			selecao();
+			i3GEO.selecao.janelaOpcoes();
 			if($i("img")){
 				$i("img").title = "";
 				$i("img").style.cursor="pointer";
