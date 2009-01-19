@@ -63,7 +63,7 @@ function moveMede()
 			var da = d + pontosdistobj.dist[n-1];
 			if ($i("mostradistancia_calculo"))
 			{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
-			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
+			i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 		}
 	}
 }
@@ -79,7 +79,6 @@ function moveLonglat()
 	if ($i("longlat"))
 	{$i("longlat").innerHTML = objposicaocursor.dmsx + "   " +  objposicaocursor.dmsy;}
 }
-
 /*
 Function moveArea
 
@@ -95,7 +94,7 @@ function moveArea()
 			//
 			//conforme a escala, os dados são arredondados
 			// 
-			var d = i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+			var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 			if (objmapa.scale > 500000)
 			{var d = parseInt(d);}
 			else
@@ -110,8 +109,8 @@ function moveArea()
 			//
 			//desenha as linhas na tela com o objeto richdraw
 			//
-			if(navn){desenhoRichdraw("resizePoligono",pontosdistobj.linhastemp,0);}
-			desenhoRichdraw("resizeLinha",pontosdistobj.linhas[n-1],n);
+			if(navn){i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,0);}
+			i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 		}
 	}
 }
@@ -148,26 +147,6 @@ function cliqueCapturaPt()
 		if (doc.getElementById("iys"))
 		{doc.getElementById("iys").value = y[2];}
 	}
-}
-/*
-Function: abreKml
-
-Abre a janela para mostrar o link de acesso a um tema via kml.
-
-Parameters:
-
-tema - código do tema escolhido
-*/
-function abreKml(tema)
-{
-	if(tema == "mapfile")
-	{
-		if(objmapa.mapfile == "")
-		{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-		wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml");
-	}
-	else
-	{wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml");}
 }
 /*
 Function: cliqueInserexy
@@ -352,9 +331,9 @@ function cliqueMede()
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
+			{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
 			else
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+			{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
 		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 		if (n > 0)
@@ -363,18 +342,17 @@ function cliqueMede()
 			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 			if($i("pararraios") && $i("pararraios").checked == true )
 			{
-				desenhoRichdraw("insereCirculo","",n);
+				i3GEO.desenho.aplica("insereCirculo","",n);
 				if(navm)
-				{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
+				{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
 			}
 		}
 		var temp = function()
 		{
-			richdraw.fecha();
+			i3GEO.desenho.richdraw.fecha();
 			i3GEO.util.insereMarca.limpa();
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
-			if($i("pan"))
-			$i("pan").onclick.call();
+			i3GEO.barraDeBotoes.ativaBotoes();
 		};
 		i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,temp,"pontosins");
 	}
@@ -402,388 +380,40 @@ function cliqueArea()
 			try
 			{
 				if (navn)
-				{
-					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
-				}
+				{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);}
 				else
-				{
-					pontosdistobj.linhastemp = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	
-				}				
+				{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	}				
 			}
-			catch(e){window.status="";}
+			catch(e){}
 		}
-
 		try
 		{
 			if (navn)
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
+			{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
 			else
-			{pontosdistobj.linhas[n] = richdraw.renderer.create(richdraw.mode, richdraw.fillColor, richdraw.lineColor, richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+			{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
 		}
-		catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+		catch(e){}
 		var m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 		if($i("mostraarea_calculo"))
 		{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m+"<br><b>km2</b>= "+m/1000000+"<br><b>ha</b>= "+m/10000;}
 		if (n > 3)
 		{
-			var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-			pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-			//verifica se deve terminar
-			if (d < 3)
-			{
-				richdraw.fecha();
-				i3GEO.util.insereMarca.limpa();
-				if($i("pan"))
-				$i("pan").onclick.call();
-			}
+			//var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+			//pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 		}
 		var temp = function()
 		{
-			richdraw.fecha();
-			i3GEO.util.insereMarca.limpa();
-			if($i("pan"))
-			$i("pan").onclick.call();
+			i3GEO.desenho.richdraw.fecha();
+			if($i("pontosArea")){document.body.removeChild($i("pontosArea"));}
+			i3GEO.eventos.MOUSECLIQUE.remove("cliqueArea()");
+			i3GEO.eventos.MOUSEMOVE.remove("moveArea()");
+			i3GEO.barraDeBotoes.ativaBotoes();
 		};
 		i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,temp,"pontosArea");
 	}
 }
-/*
-Section: propriedades do mapa
-*/
-/*
-Function: temporizador
 
-Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
-*/
-function autoredesenha()
-{wdocaf("300px","180px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador");}
-/*
-Function: salvaMapa
-
-Abre a janela para salvar localmente o mapfile utilizado no mapa atual
-*/
-function salvaMapa()
-{
-	if(objmapa.mapfile == "")
-	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-	wdocaf("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");
-}
-/*
-Function: carregaMapa
-
-Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
-*/
-function carregaMapa()
-{wdocaf("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa");}
-/*
-Function: convertews
-
-Abre a janela para converter o mapa atual em web service WMS
-*/
-function convertews()
-{
-	if(objmapa.mapfile == "")
-	{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-	wdocaf("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertews/index.htm","","","Web service");
-}
-/*
-Function: queryMap
-
-Abre a janela que altera as propriedades da exibição dos elementos selecionados.
-*/
-function queryMap()
-{wdocaf("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Querymap");}
-/*
-Function: template
-
-Abre a janela que muda o template do mapa atual.
-*/
-function template()
-{wdocaf("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template");}
-/*
-Function: ativaLogo
-
-Ativa ou desativa a logo marca.
-
-*/
-function ativaLogo()
-{
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ativalogo&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"ativalogo",ajaxredesenha);
-}
-/*
-Function: tamanho
-
-Abre a janela que muda o tamanho do mapa
-*/
-function tamanho()
-{wdocaf("150px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/index.htm","","","Tamanho");}
-/*
-Function: tipoimagem
-
-Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
-*/
-function tipoimagem()
-{wdocaf("300px","220px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");}
-/*
-Function: corFundo
-
-Abre a janela que altera a cor do fundo do mapa atual.
-*/
-function corFundo()
-{wdocaf("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Fundo");}
-/*
-Section: propriedades de um tema
-*/
-/*
-Function: excluitemaf
-
-Exclui um tema do mapa
-
-Parameters:
-
-tema - código do tema
-*/
-function excluitemaf(tema)
-{
-	g_operacao = "excluitema";
-	//remove o tema do DOM e seus filhos
-	var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
-	do
-	{p.removeChild(p.childNodes[0]);}
-	while (p.childNodes.length > 0);
-	p.parentNode.removeChild(p);
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"excluiTemas",ajaxredesenha);
-	objmapa.temaAtivo = "";
-}
-/*
-Function: sobetemaf
-
-Sobe um tema na ordem de desenho
-
-Parameters:
-
-tema - código do tema
-*/
-function sobetemaf(tema)
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"sobeTema",ajaxredesenha);
-}
-/*
-Function: descetemaf
-
-Desce um tema na ordem de desenho
-
-Parameters:
-
-tema - código do tema
-*/
-function descetemaf(tema)
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"desceTema",ajaxredesenha);
-}
-/*
-Function: zoomtemaf
-
-Zoom para o tema
-
-Parameters:
-
-tema - código do tema
-*/
-function zoomtemaf(tema)
-{
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"zoomTema",ajaxredesenha);
-}
-/*
-Function: limpaseltemaf
-
-Limpa a selecao do tema
-
-Parameters:
-
-tema - ID (name) do tema clicado
-*/
-function limpaseltemaf(tema)
-{
-	g_operacao = "limpasel";
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-	cpObj.call(p,"selecaoLimpa",ajaxredesenha);
-}
-/*
-Function: mudatranspf
-
-Muda a transparencia de um tema
-
-Parameters:
-
-idtema - código do tema
-*/
-function mudatranspf(idtema)
-{
-	g_operacao = "transparencia";
-	//o campo input com o valor possui o prefixo 'tr' seguido pelo código do tema
-	if ($i("tr"+idtema))
-	{var valor = $i("tr"+idtema).value;}
-	else
-	{alert("Ocorreu um erro");}
-	if (valor != "")
-	{
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+i3GEO.configura.sid;
-		cpObj.call(p,"mudaTransparencia",ajaxredesenha);
-	}
-	else
-	{alert("Valor não definido.");}
-}
-/*
-Function: mudanomef
-
-Muda o nome de um tema
-
-Parameters:
-
-idtema - código do tema
-*/
-function mudanomef(idtema)
-{
-	g_operacao = "mudanome";
-	if($i("nn"+idtema))
-	{var valor = $i("nn"+idtema).value;}
-	else
-	{alert("Ocorreu um erro");}
-	if (valor != "")
-	{
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+i3GEO.configura.sid;
-		cpObj.call(p,"mudaNome",ajaxredesenha);
-	}
-	else
-	{alert("Nome não definido");}
-}
-/*
-Function: graficotema
-
-Adiciona gráficos automaticamente nos elementos de um tema
-
-Parameters:
-
-idtema - código do tema
-*/
-function graficotema(idtema)
-{wdocaf("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico");}
-
-/*
-Function: toponimiaf
-
-Opções de toponímia de um tema.
-
-Parameters:
-
-idtema - código do tema
-*/
-function toponimiaf(idtema)
-{wdocaf("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");}
-/*
-Function: filtrof
-
-Opções de filtragem de um tema.
-
-Parameters:
-
-idtema - código do tema
-*/
-function filtrof(idtema)
-{wdocaf("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");}
-/*
-Section: análise geográfica
-*/
-/*
-Function: pontosdistri
-
-Abre a janela para executar análises de distribuição de pontos
-*/
-function pontosdistri()
-{
-	//a variável g_r indica se o R está instalado no servidor e é definida na inicialização do I3Geo
-	if (g_r == "nao")
-	{alert("Opção não disponível");}
-	else
-	{wdocaf("400px","300px",i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribui&ccedil;&atilde;o de pontos");}
-}
-
-/*
-Function: pontoempoligono
-
-Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
-*/
-function pontoempoligono()
-{wdocaf("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono");}
-/*
-Function: nptPol
-
-Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
-*/
-function nptPol()
-{wdocaf("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono");}
-/*
-Function: buffer
-
-Gera um buffer em elementos selecionados
-*/
-function buffer()
-{wdocaf("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno");}
-/*
-Function: distanciaptpt
-
-Abre a janela para calcular a distância entre um ponto e outros pontos próximos
-*/
-function distanciaptpt()
-{wdocaf("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");}
-/*
-Function: centroide
-
-Abre a janela que gera um tema com os centroides dos elementos selecionados
-*/
-function centroide()
-{wdocaf("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide");}
-/*
-Function: dissolve
-
-Abre a janela que gera um tema dissolvendo as divisas entre polígonos.
-*/
-function dissolve()
-{wdocaf("400px","230px",i3GEO.configura.locaplic+"/ferramentas/dissolve/index.htm","","","Dissolve");}
-/*
-Function: agrupaElementos
-
-Abre a janela que gera um tema poligonal agrupando elementos de um tema.
-*/
-function agrupaElementos()
-{wdocaf("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");}
-
-/*
-Function: analisaGeometrias
-
-Abre a janela com o sistema de análise de geometrias
-*/
-function analisaGeometrias()
-{
-	g_tipoacao = "selecao";
-	//i3GEO.barraDeBotoes.ativaIcone("selecao");
-	//pontosdistobj = new pontosdist();
-	objmapa.temaAtivo = "";
-	wdocaf("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
-}
 /*
 Function: 
 	
@@ -804,22 +434,25 @@ function area()
 		novoel.innerHTML = ins;
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
+	}
+	if (g_tipoacao != "area")
+	{
+		$i("mostraarea_calculo").innerHTML = "";
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueArea()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("cliqueArea()");}
 		if(i3GEO.eventos.MOUSEMOVE.toString().search("moveArea()") < 0)
 		{i3GEO.eventos.MOUSEMOVE.push("moveArea()");}		
-	}
-	if (g_tipoacao != "area")
-	{
 		YAHOO.namespace("janelaDocaarea.xp");
 		YAHOO.janelaDocaarea.xp.panel = new YAHOO.widget.Panel("mostraarea", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 		YAHOO.janelaDocaarea.xp.panel.render();
 		YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxi+150,imagemyi);
 		var escondeWdocaarea = function()
 		{
-			richdraw.fecha();
-			YAHOO.util.Event.removeListener(YAHOO.janelaDocaarea.xp.panel.close, "click");
-			limpacontainerf();
+			i3GEO.desenho.richdraw.fecha();
+			if($i("pontosArea")){document.body.removeChild($i("pontosArea"));}
+			i3GEO.eventos.MOUSECLIQUE.remove("cliqueArea()");
+			i3GEO.eventos.MOUSEMOVE.remove("moveArea()");
+			i3GEO.barraDeBotoes.ativaBotoes();
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", escondeWdocaarea);
 		var temp = function(retorno)
@@ -833,9 +466,9 @@ function area()
 				alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
 				i3GEO.barraDeBotoes.ativaIcone("area");
 				g_tipoacao = "area";
-				criaContainerRichdraw();
-				richdraw.lineColor = "green";
-				richdraw.lineWidth = "2px";
+				i3GEO.desenho.criaContainerRichdraw();
+				i3GEO.desenho.richdraw.lineColor = "green";
+				i3GEO.desenho.richdraw.lineWidth = "2px";
 			}
 		};
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
@@ -845,7 +478,7 @@ function area()
 	else
 	{
 		//i3GEO.barraDeBotoes.ativaIcone("pan");
-		richdraw.fecha();
+		i3GEO.desenho.richdraw.fecha();
 	}
 }
 /*
@@ -878,36 +511,39 @@ function mede()
 		novoel.style.borderColor="gray";
 		document.body.appendChild(novoel);
 		$i('pararraios').checked=true;
+	}
+	if (g_tipoacao != "mede")
+	{
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueMede()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("cliqueMede()");}
 		if(i3GEO.eventos.MOUSEMOVE.toString().search("moveMede()") < 0)
 		{i3GEO.eventos.MOUSEMOVE.push("moveMede()");}
-	}
-	if (g_tipoacao != "mede")
-	{
 		YAHOO.namespace("janelaDocamede.xp");
 		YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 		YAHOO.janelaDocamede.xp.panel.render();
 		YAHOO.janelaDocamede.xp.panel.moveTo(imagemxi+150,imagemyi);
 		var escondeWdocamede = function()
 		{
-			richdraw.fecha();
+			i3GEO.desenho.richdraw.fecha();
 			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
+			i3GEO.eventos.MOUSECLIQUE.remove("cliqueMede()");
+			i3GEO.eventos.MOUSEMOVE.remove("moveMede()");
+			i3GEO.barraDeBotoes.ativaBotoes();
 		};
 		YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", escondeWdocamede);
 		$i("mostradistancia").style.display="block";
 		//
 		//verifica se existe o div para incluir as geometrias temporárias via svg ou vml
 		//
-		criaContainerRichdraw();
-		richdraw.lineColor = "black";
-		richdraw.lineWidth = "1px";
+		i3GEO.desenho.criaContainerRichdraw();
+		i3GEO.desenho.richdraw.lineColor = "black";
+		i3GEO.desenho.richdraw.lineWidth = "1px";
 		g_tipoacao = "mede";
 	}
 	else
 	{
-		richdraw.fecha();
+		i3GEO.desenho.richdraw.fecha();
 		if($i("mostradistancia")){$i("mostradistancia").style.display="none";}
 		if($i("pontosins")){$i("pontosins").style.display="none";}
 	}
@@ -963,85 +599,10 @@ function inseregrafico()
 	//else
 	//{i3GEO.barraDeBotoes.ativaIcone("pan");}
 }
-/*
-Section: grades
-*/
-/*
-Function: gradePontos
 
-Abre a janela que gera grade de pontos
-*/
-function gradePontos()
-{wdocaf("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos");}
-/*
-Function: gradePoligonos
-
-Abre a janela que gera grade de poligonos
-*/
-function gradePol()
-{wdocaf("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos");}
-/*
-Function: gradeHex
-
-Abre a janela que gera grade de hexágonos
-*/
-function gradeHex()
-{wdocaf("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos");}
-
-/*
-Function: gradeCoord
-
-Abre a janela que gera grade de coordenadas
-*/
-function gradeCoord()
-{wdocaf("350px","280px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");}
-/*
-Section: atributos
-*/
-/*
-Function: procuraratribf
-
-Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
-
-Parameters:
-
-idtema - id que identifica o tema conforme definido no map file
-*/
-function procuraratribf(idtema)
-{wdocaf("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar");}
-/*
-Function: tabelaf
-
-Abre a tabela com os atributos de um tema.
-
-Parameters:
-
-idtema - id que identifica o tema conforme definido no map file
-*/
-function tabelaf(idtema)
-{wdocaf("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela");}
-/*
-Function: etiquetas
-
-Abre a janela de configuração das etiquetas
-
-Parameters:
-
-idtema - id que identifica o tema conforme definido no map file
-*/
-function etiquetas(idtema)
-{wdocaf("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas");}
 /*
 Section: legenda
 */
-/*
-Function: opcoesLegenda
-
-Abre a janela de configuração da legenda do mapa
-
-*/
-function opcoesLegenda()
-{wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");}
 /*
 Function: abreCor
 
@@ -1054,59 +615,7 @@ janela - id da janela que disparou a janela de cores
 elemento - elemento da janela que receberá os valores de cor selecionada
 */
 function abreCor(janela,elemento)
-{
-	i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
-}
-/*
-Function: editaLegenda
-
-Abre a janela do editor de legenda de um tema
-
-Parameters:
-
-idtema - id que identifica o tema conforme definido no map file
-*/
-function editaLegenda(idtema)
-{wdocaf("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda");}
-/*
-Section: adição de temas
-*/
-/*
-Function: nuvemTags
-
-Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas
-*/
-function nuvemTags()
-{wdocaf("350px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtags/index.htm","","","Nuvem de tags");}
-
-/*
-Function: navegacaoDir
-
-Abre a janela para adicionar temas navegando pelos diretórios do servidor
-*/
-function navegacaoDir()
-{wdocaf("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");}
-/*
-Function: conectarwms
-
-Abre a janela para adicionar temas tendo como fonte um web service do tipo wms
-*/
-function conectarwms()
-{wdocaf("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","WMS");}
-/*
-Function: conectarwfs
-
-Abre a janela para adicionar temas tendo como fonte um web service do tipo wfs
-*/
-function conectarwfs()
-{wdocaf("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");}
-/*
-Function: conectargeorss
-
-Abre a janela para adicionar temas tendo como fonte um georss
-*/
-function conectargeorss()
-{wdocaf("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","","GeoRSS");}
+{i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);}
 /*
 Function: abreSistema
 
@@ -1127,20 +636,6 @@ function abreSistema(endereco,w,h)
 	else
 	{alert("Endereço não definido");}
 }
-/*
-Function: upload
-
-Abre a janela para o upload de shape file
-*/
-function upload()
-{wdocaf("300px","230px",i3GEO.configura.locaplic+"/ferramentas/upload/index.htm","","","Upload");}
-/*
-Function: uploaddbf
-
-Abre a janela para o upload de um arquivo dbf
-*/
-function uploaddbf()
-{wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/uploaddbf/index.htm","","","Upload");}
 /*
 Section: navegação
 */
@@ -1192,44 +687,7 @@ function ativaHistoricoZoom(iddiv)
 /*
 Section: outros
 */
-/*
-Function: abreDoc
 
-Abre a documentacao do i3geo.
-*/
-function abreDoc()
-{window.open(i3GEO.configura.locaplic+"/documentacao/index.html");}
-
-/*
-Function: downloadbase
-
-Abre o aplicativo datadownload
-
-Veja:
-
-<datadownload.htm>
-*/
-function downloadbase()
-{window.open(i3GEO.configura.locaplic+"/datadownload.htm");}
-/*
-Function: download
-
-Abre a janela que faz o download de um tema
-
-Parameters:
-
-idtema - id ue identifica o tema no map file.
-*/
-function download(idtema)
-{wdocaf("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");}
-
-/*
-Function: opcoesEscala
-
-Abre a janela para definição das opções da barra de escala.
-*/
-function opcoesEscala()
-{wdocaf("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm","center","center","Escala");}
 /*
 Function: textofid
 

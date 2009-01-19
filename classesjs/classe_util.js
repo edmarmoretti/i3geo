@@ -205,6 +205,7 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		//YAHOO.log("arvore", "i3geo");
+		if(!$i(onde)){return;}
 		var currentIconMode;
 		YAHOO.example.treeExample = new function(){
         	function buildTree(){
@@ -574,6 +575,7 @@ i3GEO.util = {
 		*/
 		cria:function(xi,yi,funcaoOnclick,container){
 			try{
+				if(i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0)
 				i3GEO.util.insereMarca.CONTAINER.push(container);
 				//verifica se existe o container para os pontos
 				if (!$i(container)){

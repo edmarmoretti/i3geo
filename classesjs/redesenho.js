@@ -28,112 +28,6 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Function: ajaxhttp (depreciado)
-
-Cria o objeto http utilizado nas funções Ajax.
-
-Returns:
-
-Objeto httprequest.
-
-See Also:
-
-<ajaxexecAS>
-*/
-function ajaxhttp()
-{
-	try
-	{var objhttp1 = new XMLHttpRequest();}
-	catch(ee)
-	{
-		try{var objhttp1 = new ActiveXObject("Msxml2.XMLHTTP");}
-		catch(e)
-		{
-			try{var objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
-			catch(E)
-			{var objhttp1 = false;}
-		}
-	}
-	return(objhttp1);
-}
-/*
-Function: ajaxexecAS (depreciado)
-
-Executa uma chamada ajax no modo assíncrono.
-
-Parameters:
-
-programa - programa que será executado.
-funcao - função que tratará o resultado.
-
-Returns:
-
-O resultado em uma variável. Se o retorno contiver a palavra "Erro", é gerado um alert.
-
-See Also:
-
-<ajaxhttp>
-*/
-function ajaxexecAS(programa,funcao)
-{
-	var ohttp = ajaxhttp();
-	ohttp.open("POST",programa,true);
-	var retorno = "";
-	ohttp.onreadystatechange=function()
-	{
-		if (ohttp.readyState==4)
-		{
-			retorno = ohttp.responseText;
-			var reg = /Warning/gi;
-			if (retorno.search(reg) != -1)
-			{
-				alert("OOps! Ocorreu um erro\n"+retorno);
-				return;
-			}
-			var reg = /erro/gi;
-			if (retorno.search(reg) != -1)
-			{
-				alert("OOps! Ocorreu um erro\n"+retorno);
-				return;
-			}
-			if (funcao != "volta")
-			{eval(funcao+'("'+retorno+'")');}
-		}
-	};
-	ohttp.send(null);
-}
-/*
-Function: ajaxexec (depreciado)
-
-Executa uma chamada ajax no modo síncrono.
-
-Parameters:
-
-programa - programa que será executado.
-funcao - função que tratará o resultado.
-
-Returns:
-
-O resultado em uma variável. Se o retorno contiver a palavra "Erro", é gerado um alert.
-
-See Also:
-
-<ajaxhttp>
-*/
-function ajaxexec(programa,funcao)
-{
-	var objhttp = ajaxhttp();
-	objhttp.open('GET', programa, false);
-	objhttp.send(null);
-	if(objhttp.status == 200)
-	{
-		if (funcao != "volta")
-		{eval(funcao+'("'+objhttp.responseText+'")');}
-		else
-		{return objhttp.responseText;}
-	}
-}
-/*
 Function: ajaxexecASXml
 
 Executa uma chamada ajax no modo assíncrono retornando o resultado em XML.
@@ -220,82 +114,6 @@ function ajaxEscalaGrafica(retorno)
 	}
 }
 /*
-Function: ajaxLegendaHTML
-
-Substituí a legenda do mapa pela última gerada.
-
-Parameters:
-
-retorno - string HTML com a legenda.
-*/
-function ajaxLegendaHTML(retorno)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		var s = i3GEO.configura.locaplic+"/imagens/solta.gif";
-		$i("legenda").innerHTML = "<img id=soltaLeg src="+s+" title='clique para liberar'/><br><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
-		g_legendaHTML = retorno.data.legenda;
-		//
-		//verifica se a janela móvel existe e preenche com a legenda se for o caso
-		//
-		if ($i("moveLegi"))
-		{
-			$i("wlegenda").innerHTML = g_legendaHTML;
-			var elementos = $i("wlegenda").getElementsByTagName("input");
-			for(i=0;i<elementos.length;i++)
-			{elementos[i].style.display="none";}
-		}
-		//
-		//abre a janela móvel com a legenda quando o usuário clica no ícone solta.gif definido acima
-		//
-		$i("soltaLeg").onclick = function()
-		{
-			//
-			//cria a janela móvel para a legenda se já não existir
-			//
-			if (!$i("moveLegi"))
-			{
-				var novoel = document.createElement("div");
-				novoel.id = "moveLegi";
-				novoel.style.display="block";
-				var temp = '<div class="hd">Legenda</div>';
-				temp += '<div id="wlegenda" style="text-align:left;background-color:white" >';
-				temp += g_legendaHTML+"</div>";
-				novoel.innerHTML = temp;
-				document.body.appendChild(novoel);
-				var elementos = $i("wlegenda").getElementsByTagName("input");
-				for(i=0;i<elementos.length;i++)
-				{elementos[i].style.display="none";}
-				YAHOO.namespace("moveLegi.xp");
-				YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
-			}
-			YAHOO.moveLegi.xp.panel.render();
-			YAHOO.moveLegi.xp.panel.show();
-		};
-		//YAHOO.log("Concluída legenda HTML", "redesenho");
-	}
-	else
-	{YAHOO.log("Erro na legenda HTML", "redesenho");}
-}
-/*
-Function: ajaxLegendaImagem
-
-Armazena a imagem da legenda na lista de quadros de animação.
-
-Parameters:
-
-retorno - string no formato "var legimagem='nome da imagem'".
-*/
-function ajaxLegendaImagem(retorno)
-{
-	if ((retorno.data != "erro") && (retorno.data != undefined))
-	{
-		eval(retorno.data);
-		if ($i("lugarquadros"))
-		{i3GEO.gadgets.quadros.grava("legenda",legimagem);}
-	}
-}
-/*
 Function: ajaxCorpoMapa
 
 Atualiza a imagem do corpo do mapa e redesenha o entorno se for necessário.
@@ -325,14 +143,15 @@ function ajaxCorpoMapa(retorno)
 				$i("img").onload = "";
 				//atualiza quadro
 				i3GEO.gadgets.quadros.grava("imagem",mapimagem);
+				var temp = function(retorno){
+					eval(retorno.data);
+					i3GEO.gadgets.quadros.grava("legenda",legimagem);
+				};
+				i3GEO.mapa.legendaIMAGEM.obtem(temp);
 				if ($i("banners"))
 				{$i("banners").style.height = objmapa.h;}
 				if ($i("legenda"))
 				{$i("legenda").style.height = objmapa.h;}
-				//$i("img").style.width = objmapa.w;
-				//$i("img").style.height = objmapa.h;
-				//calcposf();
-				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 				if ($i("imgtemp"))
 				{$i("imgtemp").style.display="none";}
 				//necessário na função de zoom por slide
@@ -346,32 +165,29 @@ function ajaxCorpoMapa(retorno)
 		else
 		{
 			i3GEO.mapa.ajustaPosicao();
-			i3GEO.janelas.fechaAguarde();
-			alert("Erro no mapa");
+			i3GEO.janela.fechaAguarde();
+			i3GEO.mapa.recupera.inicia();
 		}
-		g_recupera = 0;
+		i3GEO.mapa.recupera.TENTATIVA = 0;
 	}
 	catch(e)
 	{
-		alert("Erro na funcao ajaxCorpoMapa: "+e);
-		i3GEO.mapa.ajustaPosicao();
-		i3GEO.janelas.fechaAguarde();
-		if(g_recupera == 0)
+		if(i3GEO.mapa.recupera.TENTATIVA == 0)
 		{
 			alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
-			recuperamapa();
+			i3GEO.mapa.recupera.inicia();
 		}
 		else
 		{
 			alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
-			if (g_recupera == 1)
+			if (i3GEO.mapa.recupera.TENTATIVA == 1)
 			{
-				g_recupera = 2;
+				i3GEO.mapa.recupera.TENTATIVA = 2;
 				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+i3GEO.configura.sid;
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
-				cp.call(p,"recuperamapa",remapaf);
+				cp.call(p,"recuperamapa",ajaxredesenha);
 			}		
 		}
 	}
@@ -389,7 +205,7 @@ retorno - string indicando se houve erro na função que chamou.
 function ajaxredesenha(retorno)
 {
 	//limpa o objeto richdraw
-	try{richdraw.clearWorkspace();}catch(e){};
+	try{i3GEO.desenho.richdraw.clearWorkspace();}catch(e){};
 	try
 	{
 		i3GEO.gadgets.quadros.avanca();
@@ -483,7 +299,7 @@ function ajaxIniciaParametros(retorno)
 	i3GEO.util.insereMarca.limpa();
 	if ($i("mostradistancia"))
 	{$i("mostradistancia").style.display="none";}
-	try{richdraw.fecha();}
+	try{i3GEO.desenho.richdraw.fecha();}
 	catch(e){};
 	//
 	//mostra a figura que segue o mouse
@@ -525,10 +341,6 @@ function ajaxIniciaParametros(retorno)
 			$i("img").style.top = 0;
 			ajaxCorpoMapa(retorno);
 		}
-		//
-		//atualiza a legenda
-		//
-		objmapa.atualizaLegendaHTML();
 		//
 		//verifica se precisa mudar a lista de temas
 		//
@@ -583,8 +395,29 @@ function ajaxIniciaParametros(retorno)
 			i3GEO.navega.entorno.ajustaPosicao();
 		}
 		//YAHOO.log("Fim ajaxIniciaParametros", "redesenho");
+		i3GEO.mapa.recupera.TENTATIVA = 0;
 	}
-	catch(e){alert("ajaxIniciaParametros "+e);}
+	catch(e)
+	{
+		if(i3GEO.mapa.recupera.TENTATIVA == 0)
+		{
+			alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+			i3GEO.mapa.recupera.inicia();
+		}
+		else
+		{
+			alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
+			if (i3GEO.mapa.recupera.TENTATIVA == 1)
+			{
+				i3GEO.mapa.recupera.TENTATIVA = 2;
+				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+i3GEO.configura.sid;
+				var cp = new cpaint();
+				//cp.set_debug(2)
+				cp.set_response_type("JSON");
+				cp.call(p,"recuperamapa",ajaxredesenha);
+			}		
+		}	
+	}
 	i3GEO.ajuda.mostraJanela("Tempo de redesenho em segundos: "+tempo,"");
 }
 //testa se esse script foi carregado

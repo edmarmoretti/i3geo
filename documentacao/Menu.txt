@@ -56,7 +56,6 @@ Group: Programas principais (core)  {
       File: configura.js  (classesjs\configura.js)
       File: datadownload.js  (classesjs\datadownload.js)
       File: ferramentas.js  (classesjs\ferramentas.js)
-      File: funcoes.js  (classesjs\funcoes.js)
       File: geradordelinks.js  (classesjs\geradordelinks.js)
       File: i3geo.idioma  (classesjs\classe_idioma.js)
       File: i3geo.js  (classesjs\i3geo.js)
@@ -79,6 +78,9 @@ Group: Programas principais (core)  {
       File: i3geo_tudo_compacto.js  (classesjs\i3geo_tudo_compacto.js)
       File: i3geo_tudo_compacto.js.php  (classesjs\i3geo_tudo_compacto.js.php)
       File: i3GEO.arvoreDeCamadas.js  (classesjs\classe_arvoredecamadas.js)
+      File: classe_mapa.js  (classesjs\classe_mapa.js)
+      File: i3GEO.desenho  (classesjs\classe_desenho.js)
+      File: i3GEO.selecao  (classesjs\classe_selecao.js)
       }  # Group: Programas principais em JavaScript (rodam no navegador)
 
    Group: Programas principais em PHP (rodam no servidor)  {

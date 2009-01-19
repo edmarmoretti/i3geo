@@ -76,6 +76,9 @@ packer("classe_barradebotoes.js","compactados/classe_barradebotoes_compacto.js",
 packer("classe_guias.js","compactados/classe_guias_compacto.js","Normal");
 packer("classe_selecao.js","compactados/classe_selecao_compacto.js","Normal");
 packer("classe_mapa.js","compactados/classe_mapa_compacto.js","Normal");
+packer("classe_desenho.js","compactados/classe_desenho_compacto.js","Normal");
+packer("classe_tema.js","compactados/classe_tema_compacto.js","Normal");
+packer("classe_analise.js","compactados/classe_analise_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -106,7 +109,10 @@ $jsfiles = array(
 "depreciados.js",
 "classe_util.js",
 "classe_calculo.js",
+"classe_desenho.js",
 "classe_mapa.js",
+"classe_tema.js",
+"classe_analise.js",
 "classe_maparef.js",
 "dicionario.js",
 "classe_idioma.js",

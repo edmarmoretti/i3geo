@@ -796,7 +796,7 @@ i3GEO.navega = {
 					olente.style.visibility='visible';
 					i3GEO.janela.fechaAguarde("ajaxabrelente");
 				}
-				catch(e){i3GEO.janelas.fechaAguarde();}
+				catch(e){i3GEO.janela.fechaAguarde();}
 			};
 			if(i3GEO.navega.lente.ESTAATIVA == "sim"){
 				i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));

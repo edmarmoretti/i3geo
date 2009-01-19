@@ -106,17 +106,17 @@ i3GEO.configura = {
 	*/
 	listaDePropriedadesDoMapa: {
 		"propriedades": [
-		{ text: "p2", url: "javascript:tipoimagem()"},
-		{ text: "p3", url: "javascript:opcoesLegenda()"},
-		{ text: "p4", url: "javascript:opcoesEscala()"},
-		{ text: "p5", url: "javascript:tamanho()"},
+		{ text: "p2", url: "javascript:i3GEO.mapa.dialogo.tipoimagem()"},
+		{ text: "p3", url: "javascript:i3GEO.mapa.dialogo.opcoesLegenda()"},
+		{ text: "p4", url: "javascript:i3GEO.mapa.dialogo.opcoesEscala()"},
+		{ text: "p5", url: "javascript:i3GEO.mapa.dialogo.tamanho()"},
 		{ text: "p6", url: "javascript:i3GEO.navega.entorno.ativaDesativa()"},
-		{ text: "p7", url: "javascript:ativaLogo()"},
-		{ text: "p8", url: "javascript:queryMap()"},
-		{ text: "p9", url: "javascript:corFundo()"},
-		{ text: "p10", url: "javascript:gradeCoord()"},
-		{ text: "p11", url: "javascript:template()"},
-		{ text: "p12", url: "javascript:autoredesenha()"}
+		{ text: "p7", url: "javascript:i3GEO.mapa.ativaLogo()"},
+		{ text: "p8", url: "javascript:i3GEO.mapa.dialogo.queryMap()"},
+		{ text: "p9", url: "javascript:i3GEO.mapa.dialogo.corFundo()"},
+		{ text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"},
+		{ text: "p11", url: "javascript:i3GEO.mapa.dialogo.template()"},
+		{ text: "p12", url: "javascript:i3GEO.mapa.dialogo.autoredesenha()"}
 		]
 	},
 	/*

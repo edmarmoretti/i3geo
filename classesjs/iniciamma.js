@@ -44,12 +44,6 @@ Free Software Foundation, Inc., no endereço
 Section: variáveis de configuração calculadas na inicialização do mapa
 */
 /*
-Variable: g_recupera
-
-Conta quantas vezes foi feita uma tentativa de recuperar um mapa com problemas
-*/
-g_recupera = 0;
-/*
 Variable: imagemxi depreciada
 
 Inicialização da variável de cálculo de posicionamento que indica a posição em x do corpo do mapa.
@@ -295,6 +289,12 @@ function Mapa(e,m)
 		$i("flamingo").style.width = this.w;
 		$i("flamingo").style.height = this.h;
 	}
+	if($i("contemImg"))
+	{
+		$i("contemImg").style.height=this.h + "px";
+		$i("contemImg").style.width=this.w + "px";
+	}
+	
 	/*
 	Variable: objmapa.navegacaoDir
 	
@@ -438,18 +438,6 @@ function Mapa(e,m)
 		//para efeitos de compatibilidade com versões antigas
 		//
 		i3GEOmantemCompatibilidade();
-		/*
-			Gera o div para função de etiquetas para efeitos de compatibilidade
-		*/
-		if (!$i("tip")){
-			var novoel = document.createElement("div");
-			novoel.id = "tip";
-			novoel.style.position="absolute";
-			novoel.style.zIndex=5000;
-			if (navm)
-			{novoel.style.filter = "alpha(opacity=90)";}
-			document.body.appendChild(novoel);
-		}
 		//
 		//
 		//
@@ -498,14 +486,15 @@ function Mapa(e,m)
 	
 	Resultado da função inicia retornado pela chamada em ajax
 	*/
-	this.montaMapa = function (retorno)
+	this.montaMapa = function(retorno)
 	{
 		//YAHOO.log("Mapa obtido", "i3geo");
-		if (retorno.data.erro)
+		if(retorno == ""){alert("Ocorreu um erro no mapa - montaMapa");retorno = {data:{erro: "erro"}};}
+		if(retorno.data.erro)
 		{
 			i3GEO.janela.fechaAguarde("montaMapa");
 			document.body.style.backgroundColor="white";
-			document.body.innerHTML = "<br>Para abrir o mapa utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
+			document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="+i3GEO.configura.locaplic+"/ms_criamapa.php >"+i3GEO.configura.locaplic+"/ms_criamapa.php</a>";
 			return("linkquebrado");
 		}
 		else
@@ -524,79 +513,57 @@ function Mapa(e,m)
 					{top.document.title = titulo;}
 				}
 				catch(e){var e = "";}
+
 				i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
-				//
-				//gera os ícones para animação
-				//
-				i3GEO.gadgets.quadros.inicia(10);
-				i3GEO.gadgets.quadros.grava("extensao",mapexten);
-				//
-				//gera a lista de temas da guia temas
-				//
-				i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
-				//
-				//gera o mapa de referencia e outros elementos do mapa
-				//
-				i3GEO.maparef.atualiza();
 				objmapa.scale = parseInt(mapscale);
 				objmapa.cellsize = g_celula;
 				objmapa.extent = mapexten;
 				objmapa.extentTotal = mapexten;
+
 				objmapa.criaCorpoMapa();
-				ajaxCorpoMapa(retorno);
-				objmapa.criaEscalaGrafica();
-				objmapa.atualizaEscalaGrafica();
-				objmapa.ativaListaPropriedades("listaPropriedades");
-				//
-				//ativa os botões  das funções
-				//
-				//YAHOO.log("Ativando os botões", "i3geo");
+
+				i3GEO.gadgets.quadros.inicia(10);
+				i3GEO.gadgets.quadros.grava("extensao",mapexten);
+				i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
+				i3GEO.maparef.atualiza();
+				i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
 				i3GEO.gadgets.mostraCoordenadasGEO();
 				i3GEO.gadgets.mostraEscalaNumerica();
 				i3GEO.gadgets.mostraBuscaRapida();
 				i3GEO.gadgets.visual.inicia();
-				//
-				//ativa as guias
-				//
-				//ativaGuias();
 				i3GEO.guias.cria();
-				//
-				//monta a árvore de temas adicionais se existir a div arvoreAdicionaTema
-				//
 				if($i("arvoreAdicionaTema"))
 				i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");
-				//
-				//calcula a posicao do mapa no browser
-				//
+				i3GEO.ajuda.ativaLetreiro(i3GEO.configura.locaplic,i3GEO.configura.sid);			
+
+				objmapa.criaEscalaGrafica();
+				objmapa.atualizaEscalaGrafica();		
+				
+				ajaxCorpoMapa(retorno);
+
 				if ($i("corpoMapa"))
 				{
-					var i = $i("img").style;
-					i.width=objmapa.w +"px";
-					i.height=objmapa.h +"px";
-					var i = $i("corpoMapa").style;
-					i.width=objmapa.w +"px";
-					i.height=objmapa.h +"px";
-					i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
+					var i = $i("img");
+					if(i){
+						i.style.width=objmapa.w +"px";
+						i.style.height=objmapa.h +"px";
+						var i = $i("corpoMapa").style;
+						i.width=objmapa.w +"px";
+						i.height=objmapa.h +"px";
+						i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
+					}
 				}
-				//
-				//ativa as mensagens no banner
-				//
-				i3GEO.ajuda.ativaLetreiro(i3GEO.configura.locaplic,i3GEO.configura.sid);
 				//
 				//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 				//se não for feito esse cálculo, o mapa fica ajustado à esquerda
 				//
+				
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
 				if($i("mst"))
 				{$i("mst").style.width=objmapa.w + temp + "px";}
-				if($i("contemImg"))
-				{
-					var i = $i("contemImg").style;
-					i.height=objmapa.h + "px";
-					i.width=objmapa.w + "px";
-				}
+				
 				i3GEO.mapa.ajustaPosicao();
 				//
 				//reposiciona a janela de botoes
@@ -663,26 +630,9 @@ function Mapa(e,m)
 				if (g_3dmap == ""){document.getElementById("botao3d").style.display="none";}
 			}
 		}
-		//
-		//zera os quadros de animação
-		//
 		if($i("mst"))
 		$i("mst").style.visibility ="visible";
 		//YAHOO.log("Fim objmapa.inicializa", "i3geo");
-	};
-	/*
-	Function: ativaListaPropriedades
-	
-	Mostra a lista de propriedades do mapa.
-	
-	Parameters:
-	
-	id - id do elemento que receberá a árvore com a lista de propriedades.	
-	*/	
-	this.ativaListaPropriedades = function(id)
-	{
-		if ($i(id))
-		{i3GEO.util.arvore("<b>"+$trad("p13")+"</b>",id,i3GEO.configura.listaDePropriedadesDoMapa);}
 	};
 	/*
 	Function: criaEscalaGrafica
@@ -709,41 +659,6 @@ function Mapa(e,m)
 		}
 	};
 	/*
-	Function: atualizaLegendaHTML
-	
-	Atualiza a legenda, em HTML, nos ids legenda e moveLegi
-	*/
-	this.atualizaLegendaHTML = function()
-	{
-		if  (($i("moveLegi")) || (i3GEO.guias.ATUAL == "legenda"))
-		{
-			//YAHOO.log("Iniciando atualização da legenda HTML", "i3geo");
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"criaLegenda",ajaxLegendaHTML);
-		}
-	};
-	/*
-	Function: atualizaLegendaImagem
-	
-	Atualiza a legenda no formato de uma imagem
-	*/
-	this.atualizaLegendaImagem = function()
-	{
-		if ($i("legenda"))
-		{
-			//i3GEO.janela.abreAguarde("ajaxLegenda","Aguarde...atualizando a legenda");
-			var p =i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"legendaGrafica",ajaxLegendaImagem);
-		}
-	};
-	/*
-	Function: atualizaListaTemas (depreciado)
-	
-	Atualiza a lista de temas disponíveis no mapa (guia com a lista de temas)
-	*/
-	this.atualizaListaTemas = function(temas)
-	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
-	/*
 	Function: criaCorpoMapa
 	
 	Cria os objetos para preenchimento com a imagem do corpo do mapa.
@@ -752,7 +667,7 @@ function Mapa(e,m)
 	this.criaCorpoMapa = function()
 	{
 		//YAHOO.log("Criando o corpo do mapa", "i3geo");
-		if ($i("corpoMapa"))
+		if($i("corpoMapa"))
 		{
 			var ins = "<table>";
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgN' /></td><td class=verdeclaro ></td></tr>";
@@ -769,14 +684,15 @@ function Mapa(e,m)
 			this.parado = "nao"; //utilizado para verificar se o mouse esta parado
 			i3GEO.eventos.ativa($i("img"));
 		}
-		this.atualizaCorpoMapa = function()
-		{
-			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+i3GEO.configura.sid+"&tipoimagem="+g_tipoimagem;
-			cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
-		};
 		if (objmapa.finaliza)
 		{eval(objmapa.finaliza);}
 		//YAHOO.log("Concluído o corpo do mapa", "i3geo");
 	};
+	this.atualizaCorpoMapa = function()
+	{
+		i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+i3GEO.configura.sid+"&tipoimagem="+g_tipoimagem;
+		cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
+	};
+	
 }

@@ -174,7 +174,7 @@ i3GEO.janela = {
 		i3GEO.util.escondeBox();
 		//fecha o container de desenho de elementos na tela
 		if($i("divGeometriasTemp"))
-		{richdraw.fecha();}
+		{i3GEO.desenho.richdraw.fecha();}
 		if($i("flamingoi")){$i("flamingoi").style.display="block";}
 		//executa as funções de fechamento
 		if(i3GEO.janela.ANTESFECHA){

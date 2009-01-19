@@ -34,7 +34,7 @@ i3GEO.barraDeBotoes = {
 	
 	Objeto com a lista de botões.
 	
-	Por default utiliza os botoes definidos em ...
+	Por default utiliza os botoes definidos em g_listaFuncoesBotoes.botoes
 	
 	Type:
 	{JSON}

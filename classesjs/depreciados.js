@@ -147,9 +147,18 @@ function i3GEOmantemCompatibilidade(){
 	}
 	catch(e){}
 	try{
-		i3GEO.navega.destacaTamanho.TAMANHO = destacaTamanho;
+		i3GEO.navega.destacaTema.TAMANHO = destacaTamanho;
 	}
 	catch(e){}
+	if (!$i("tip")){
+		var novoel = document.createElement("div");
+		novoel.id = "tip";
+		novoel.style.position="absolute";
+		novoel.style.zIndex=5000;
+		if (navm)
+		{novoel.style.filter = "alpha(opacity=90)";}
+		document.body.appendChild(novoel);
+	}
 }
 //
 //
@@ -824,7 +833,7 @@ function mostraTip(retorno)
 Function: trataErro (depreciado)
 */
 function trataErro()
-{i3GEO.janelas.fechaAguarde();}
+{i3GEO.janela.fechaAguarde();}
 /*
 Function: mostraguiaf (depreciado)
 */
@@ -1175,3 +1184,144 @@ Function: calcposf (depreciado)
 */
 function calcposf()
 {i3GEO.mapa.ajustaPosicao();}
+/*
+Function: recuperamapa (depreciado)
+*/
+function recuperamapa()
+{}
+/*
+Function: criaContainerRichdraw
+*/
+function criaContainerRichdraw()
+{alert("criaContainerRichdraw foi depreciado utilize i3GEO.desenho");}
+/*
+Function: desenhoRichdraw (depreciado)
+*/
+function desenhoRichdraw(tipo,objeto,n)
+{}
+/*
+Function: ajaxhttp (depreciado)
+
+Cria o objeto http utilizado nas funções Ajax.
+
+Returns:
+
+Objeto httprequest.
+
+See Also:
+
+<ajaxexecAS>
+*/
+function ajaxhttp()
+{
+	try
+	{var objhttp1 = new XMLHttpRequest();}
+	catch(ee)
+	{
+		try{var objhttp1 = new ActiveXObject("Msxml2.XMLHTTP");}
+		catch(e)
+		{
+			try{var objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
+			catch(E)
+			{var objhttp1 = false;}
+		}
+	}
+	return(objhttp1);
+}
+/*
+Function: ajaxexecAS (depreciado)
+
+Executa uma chamada ajax no modo assíncrono.
+
+Parameters:
+
+programa - programa que será executado.
+funcao - função que tratará o resultado.
+
+Returns:
+
+O resultado em uma variável. Se o retorno contiver a palavra "Erro", é gerado um alert.
+
+See Also:
+
+<ajaxhttp>
+*/
+function ajaxexecAS(programa,funcao)
+{
+	var ohttp = ajaxhttp();
+	ohttp.open("POST",programa,true);
+	var retorno = "";
+	ohttp.onreadystatechange=function()
+	{
+		if (ohttp.readyState==4)
+		{
+			retorno = ohttp.responseText;
+			var reg = /Warning/gi;
+			if (retorno.search(reg) != -1)
+			{
+				alert("OOps! Ocorreu um erro\n"+retorno);
+				return;
+			}
+			var reg = /erro/gi;
+			if (retorno.search(reg) != -1)
+			{
+				alert("OOps! Ocorreu um erro\n"+retorno);
+				return;
+			}
+			if (funcao != "volta")
+			{eval(funcao+'("'+retorno+'")');}
+		}
+	};
+	ohttp.send(null);
+}
+/*
+Function: ajaxexec (depreciado)
+
+Executa uma chamada ajax no modo síncrono.
+
+Parameters:
+
+programa - programa que será executado.
+funcao - função que tratará o resultado.
+
+Returns:
+
+O resultado em uma variável. Se o retorno contiver a palavra "Erro", é gerado um alert.
+
+See Also:
+
+<ajaxhttp>
+*/
+function ajaxexec(programa,funcao)
+{
+	var objhttp = ajaxhttp();
+	objhttp.open('GET', programa, false);
+	objhttp.send(null);
+	if(objhttp.status == 200)
+	{
+		if (funcao != "volta")
+		{eval(funcao+'("'+objhttp.responseText+'")');}
+		else
+		{return objhttp.responseText;}
+	}
+}
+/*
+Function: ajaxLegendaHTML (depreciado)
+*/
+function ajaxLegendaHTML(retorno)
+{}
+/*
+Function: ajaxLegendaImagem (depreciado)
+*/
+function ajaxLegendaImagem(retorno)
+{}
+/*
+Function: atualizaListaTemas (depreciado)
+
+Atualiza a lista de temas disponíveis no mapa (guia com a lista de temas)
+*/
+try{
+	objmapa.atualizaListaTemas = function(temas)
+	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
+}
+catch(e){}

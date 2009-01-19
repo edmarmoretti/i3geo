@@ -168,7 +168,8 @@ $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["
 //
 //substitui a string de conexão
 //
-substituiCon($map_file,$postgis_mapa);
+if($funcao != "recuperamapa")
+{substituiCon($map_file,$postgis_mapa);}
 
 //set_time_limit(240);
 
@@ -374,7 +375,16 @@ Recupera o mapfile de segurança.
 		if(file_exists($map_file."qy"))
 		{unlink($map_file."qy");}
 		unlink($map_file);
-		copiaSeguranca($map_file);
+		$nmf = str_replace(".map","seguranca.map",$map_file);
+		if(file_exists($nmf))
+		{
+			copy($nmf,$map_file);
+		}
+		else
+		{
+			$nmf = str_replace(".map","reinc.map",$map_file);
+			copy($nmf,$map_file);
+		}
 		$cp->set_data("ok");
 	break;
 /*

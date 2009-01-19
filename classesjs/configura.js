@@ -227,7 +227,7 @@ url - função que será executada
 oMenuData = {
 	"ajudas": [ 
 	{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
-	{ text: $trad("u2"), url: "javascript:abreDoc()" },
+	{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
 	{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
 	{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
 	{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" },
@@ -235,21 +235,21 @@ oMenuData = {
 	],
 	"analise": [
     { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
-	{ text: $trad("u7"), url: "javascript:gradePol()"},
-	{ text: $trad("u8"), url: "javascript:gradePontos()" },
-	{ text: $trad("u9"), url: "javascript:gradeHex()" },
+	{ text: $trad("u7"), url: "javascript:i3GEO.analise.dialogo.gradePol()"},
+	{ text: $trad("u8"), url: "javascript:i3GEO.analise.dialogo.gradePontos()" },
+	{ text: $trad("u9"), url: "javascript:i3GEO.analise.dialogo.gradeHex()" },
     { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
-	{ text: $trad("u11a"), url: "javascript:distanciaptpt()" },
-	{ text: $trad("u12"), url: "javascript:nptPol()" },
-	{ text: $trad("u13"), url: "javascript:pontoempoligono()" },
-	{ text: $trad("u14"), url: "javascript:pontosdistri()" },
+	{ text: $trad("u11a"), url: "javascript:i3GEO.analise.dialogo.distanciaptpt()" },
+	{ text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
+	{ text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
+	{ text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
     { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
-	{ text: $trad("u11"), url: "javascript:centroide()" },
-	{ text: $trad("u25"), url: "javascript:dissolve()" },
+	{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
+	{ text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
     { text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
-	{ text: $trad("u6"), url: "javascript:analisaGeometrias()" },
-	{ text: $trad("u10"), url: "javascript:buffer()" },
-	{ text: $trad("u26"), url: "javascript:agrupaElementos()" }
+	{ text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
+	{ text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
+	{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" }
 	]
 };
 oMenuData.janelas = [
@@ -257,11 +257,11 @@ oMenuData.janelas = [
 	{ text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 	];
 oMenuData.arquivo = [
-	{ text: $trad("u17"), url: "javascript:salvaMapa()" },
-	{ text: $trad("u18"), url: "javascript:carregaMapa()" },
+	{ text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
+	{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
 	{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
-	{ text: $trad("u20"), url: "javascript:convertews()" },
-	//{ text: $trad("u20a"), url: "javascript:abreKml('mapfile')" },
+	{ text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
+	//{ text: $trad("u20a"), url: "javascript:i3GEO.tema.dialogo.abreKml('mapfile')" },
 	{ text: $trad("u21"), url: "../geradordelinks.htm" }
 	];
 /*
@@ -723,6 +723,7 @@ g_listaFuncoesBotoes = {
 				$i("img").title = "";
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area","img",i3GEO.configura.locaplic);
 			}
+			g_tipoacao = "";
 			area();
 		}
 	},

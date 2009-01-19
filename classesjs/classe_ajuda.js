@@ -235,7 +235,14 @@ i3GEO.ajuda = {
 		BPos-=BSpeed;
 		if (BQuantas < 2)
 		i3GEO.ajuda.tempoLetreiro = setTimeout('i3GEO.ajuda.mostraLetreiro();', 140);
-	}
+	},
+	/*
+	Function: abreDoc
+
+	Abre a documentacao do i3geo.
+	*/
+	abreDoc: function()
+	{window.open(i3GEO.configura.locaplic+"/documentacao/index.html");}	
 };
 //
 //para efeitos de compatibilidade

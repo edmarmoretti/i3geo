@@ -784,7 +784,7 @@ i3GEO.arvoreDeTemas = {
 
 		if (node.data.ogc != "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml == true){
-				var html = "<a href='#' onclick='abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
+				var html = "<a href='#' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
 				var d = {html:html};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.isLeaf = true;
@@ -827,17 +827,17 @@ i3GEO.arvoreDeTemas = {
 	outrasOpcoesHTML: function(){
 		var ins = "<table width='120px' ><tr>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf == true)
-		ins += "<td><img class='uploaddbf' onclick='uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
+		ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadlocal == true)
-		ins += "<td><img class='upload' onclick='upload()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
+		ins += "<td><img class='upload' onclick='i3GEO.arvoreDeTemas.dialogo.upload()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.downloadbase == true)
-		ins += "<td><img onclick='downloadbase()' class='download' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
+		ins += "<td><img onclick='i3GEO.arvoreDeTemas.dialogo.downloadbase()' class='download' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a3")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwms == true)
-		ins += "<td><img class='conectarwms' onclick='conectarwms()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
+		ins += "<td><img class='conectarwms' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss == true)
-		ins += "<td><img class='conectargeorss' onclick='conectargeorss()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
+		ins += "<td><img class='conectargeorss' onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTags == true)
-		ins += "<td><img class='nuvemtags' onclick='nuvemTags()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
+		ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 		ins += "</tr></table>";
 		return(ins);
 	},
@@ -1115,5 +1115,72 @@ i3GEO.arvoreDeTemas = {
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,"pegalistadetemas",combo);
+	},
+	/*
+	Function: dialogo
+	
+	Abre as janelas de diálogo com as opções adicionais que permitem acrescentar temas ao mapa
+	
+	Por exemplo, para abrir a janela de upload de arquivos dbf, utilize
+	
+	i3GEO.arvoreDeTemas.dialogo.uploaddbf()
+	*/
+	dialogo:{
+		/*
+		Function: nuvemTags
+
+		Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas
+		*/
+		nuvemTags: function()
+		{i3GEO.janela.cria("350px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtags/index.htm","","","Nuvem de tags");},
+		/*
+		Function: navegacaoDir
+
+		Abre a janela para adicionar temas navegando pelos diretórios do servidor
+		*/
+		navegacaoDir: function()
+		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/navegacaodir/index.htm","","","Diret&oacute;rios");},
+		/*
+		Function: conectarwms
+
+		Abre a janela para adicionar temas tendo como fonte um web service do tipo wms
+		*/
+		conectarwms: function()
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","WMS");},
+		/*
+		Function: conectarwfs
+
+		Abre a janela para adicionar temas tendo como fonte um web service do tipo wfs
+		*/
+		conectarwfs: function()
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwfs/index.htm","","","WFS");},
+		/*
+		Function: conectargeorss
+
+		Abre a janela para adicionar temas tendo como fonte um georss
+		*/
+		conectargeorss: function()
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectargeorss/index.htm","","","GeoRSS");},
+		/*
+		Function: upload
+
+		Abre a janela para o upload de shape file
+		*/
+		upload: function()
+		{i3GEO.janela.cria("300px","230px",i3GEO.configura.locaplic+"/ferramentas/upload/index.htm","","","Upload");},
+		/*
+		Function: uploaddbf
+
+		Abre a janela para o upload de um arquivo dbf
+		*/
+		uploaddbf: function()
+		{i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/uploaddbf/index.htm","","","Upload");},
+		/*
+		Function: downloadbase
+
+		Abre o aplicativo datadownload
+		*/
+		downloadbase: function()
+		{window.open(i3GEO.configura.locaplic+"/datadownload.htm");},	
 	}
 };

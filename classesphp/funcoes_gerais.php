@@ -52,7 +52,7 @@ return:
 
 array - array("nomeclasse"=>$nomeclasse,"expressao"=>$expressao,"cores"=>$cores[$i])
 */
-//error_reporting(E_ALL);
+//error_reporting(0);
 function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
 {
 	$resultado = array();
@@ -469,8 +469,17 @@ function copiaSeguranca($map_file)
 		else
 		{
 			$nmf = str_replace(".map","seguranca.map",$map_file);
-			if ($objMapa = @ms_newMapObj($nmf))
-			{$objMapa->save($map_file);}
+			if(file_exists($nmf))
+			{
+				if ($objMapa = @ms_newMapObj($nmf))
+				{$objMapa->save($map_file);}
+			}
+			else
+			{
+				$nmf = str_replace(".map","reinc.map",$map_file);
+				if ($objMapa = @ms_newMapObj($nmf))
+				{$objMapa->save($nmf);}
+			}
 		}
 	}
 	else

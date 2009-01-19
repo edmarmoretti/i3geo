@@ -75,7 +75,7 @@ i3GEO.guias = {
 			idconteudo:"guia4obj",
 			click: function(){
 				i3GEO.guias.mostra("legenda");
-				objmapa.atualizaLegendaHTML();
+				i3GEO.mapa.legendaHTML.cria("guia4obj");
 			}
 		},
 		"mapas":{
