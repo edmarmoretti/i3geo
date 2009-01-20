@@ -54,7 +54,6 @@ var jsfiles = new Array(
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
-"ferramentas.js",
 "redesenho.js",
 "iniciamma.js",
 "menususpenso.js",
