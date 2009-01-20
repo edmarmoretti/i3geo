@@ -563,7 +563,8 @@ i3GEO.arvoreDeTemas = {
 						var executar = funcoes[ig2].ABRIR;
 						var w = funcoes[ig2].W;
 						var h = funcoes[ig2].H;
-						var nomeFunc = "<a href='#' onclick='abreSistema(\""+executar+"\",\""+w+"\",\""+h+"\")'>"+funcoes[ig2].NOME+"</a>";
+						var abre = "i3GEO.janela.cria('"+w+"px','"+h+"px','"+endereco+"','','','Sistemas')";
+						var nomeFunc = "<a href='#' onclick='"+abre+"'>"+funcoes[ig2].NOME+"</a>";
 						var d = {html:nomeFunc};
 						var funcNode = new YAHOO.widget.HTMLNode(d, sisNode, false,true);
 						funcNode.isLeaf = true;

@@ -68,7 +68,6 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 		TRANSPARENT FALSE
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
 	PROJECTION
 		"init=epsg:4291"
 	END

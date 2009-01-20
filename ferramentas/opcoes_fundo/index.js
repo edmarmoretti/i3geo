@@ -55,4 +55,4 @@ function mudacor()
 }
 //abre a paleta de cores
 function cor(obj)
-{window.parent.abreCor("wdocai",obj)}
+{window.parent.i3GEO.util.abreCor("wdocai",obj)}

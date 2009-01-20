@@ -114,7 +114,7 @@ function aguardeTotal(tipo)
 }
 //abre a paleta de cores
 function cor(obj)
-{window.parent.abreCor("wdocai",obj);}
+{window.parent.i3GEO.util.abreCor("wdocai",obj);}
 //mostra uma nova opcao quando o usuário clica em proximo ou anterior.
 //É utilizado nos menus de análise
 function mostraOpcao(anterior,proxima,texto,idatual)

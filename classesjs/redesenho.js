@@ -128,6 +128,13 @@ function ajaxCorpoMapa(retorno)
 	//YAHOO.log("ajaxCorpoMapa", "redesenho");
 	if($i("mst"))
 	{$i("mst").style.display="block";}
+	if (objmapa.OL)
+	{
+		$i("openlayers").innerHTML = "";
+		var b = objmapa.OL.getExtent();
+		criaOL(Math.random()+Math.random()+Math.random()+Math.random());
+		objmapa.OL.zoomToExtent(b);
+	}
 	if (!$i("img")){return;}
 	try
 	{

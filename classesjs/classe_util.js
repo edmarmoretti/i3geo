@@ -641,6 +641,20 @@ i3GEO.util = {
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		cp.call(p,f,ajaxredesenha);
+	},
+	/*
+	Function: abreCor
+	
+	Abre a janela flutuante para escolha de uma cor
+	
+	Parameters:
+	
+	janela {String} - id do conteúdo da janela flutuante que chamou a função
+	
+	elemento {String} - id do elemento que receberá os valores da cor selecionada
+	*/
+	abreCor: function(janela,elemento){
+		i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
 	}
 };
 //

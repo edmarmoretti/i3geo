@@ -189,4 +189,4 @@ function concluidof()
 //muda cor do input
 //abre a paleta de cores
 function corj(obj)
-{window.parent.abreCor("wdocai",obj)}
+{window.parent.i3GEO.util.abreCor("wdocai",obj)}

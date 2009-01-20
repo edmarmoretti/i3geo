@@ -848,32 +848,47 @@ class LayerServer {
         } else {
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 			$servidor = $protocolo[0]."://".$_SERVER['HTTP_HOST'];
-			$maptemp = ms_newMapObj("../../temas/".$this->map.".map");
 			$temp = $this->map;
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{$this->map = "../../aplicmap/geral1windows.map";}
-			else
-			{$this->map = "../../aplicmap/geral1.map";}
-            $this->map_object = ms_newMapObj($this->map);
-            $this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
-            for ($i=0;$i < ($this->map_object->numlayers);$i++)
+			if(!file_exists($this->map))
 			{
-				$l = $this->map_object->getlayer($i);
-				$l->set("status",MS_DELETE);
-				$l->set("name","");
+				$maptemp = ms_newMapObj("../../temas/".$this->map.".map");
+				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+				{$this->map = "../../aplicmap/geral1windows.map";}
+				else
+				{$this->map = "../../aplicmap/geral1.map";}
+            	$this->map_object = ms_newMapObj($this->map);
+            	$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
+            	for ($i=0;$i < ($this->map_object->numlayers);$i++)
+				{
+					$l = $this->map_object->getlayer($i);
+					$l->set("status",MS_DELETE);
+					$l->set("name","");
+				}
+				for ($i=0;$i < ($maptemp->numlayers);$i++)
+				{
+					$l = $maptemp->getlayer($i);
+					$l->set("status",MS_DEFAULT);
+					$l->set("type",MS_LAYER_RASTER);
+					$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+					ms_newLayerObj($this->map_object, $l);
+				}
 			}
-			for ($i=0;$i < ($maptemp->numlayers);$i++)
+			else
 			{
-				$l = $maptemp->getlayer($i);
-				$l->set("status",MS_DEFAULT);
-				$l->set("type",MS_LAYER_RASTER);
-				$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
-				ms_newLayerObj($this->map_object, $l);
+				$this->map_object = ms_newMapObj($this->map);
+				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/cgi-bin/mapserv?map=".$temp."&width=1500&height=1500&");
+				for ($i=0;$i < ($this->map_object->numlayers);$i++)
+				{
+					$l = $this->map_object->getlayer($i);
+					$l->set("status",MS_DEFAULT);
+					$l->set("type",MS_LAYER_RASTER);
+					//$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+					//ms_newLayerObj($this->map_object, $l);
+				}
 			}
             if(!$this->map_object){
                 $this->set_error('Cannot load mapfile '. $this->map);
             }
-            //http://localhost:80/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
         }
     }
 

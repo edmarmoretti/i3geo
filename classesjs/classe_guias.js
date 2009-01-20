@@ -170,6 +170,9 @@ i3GEO.guias = {
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".titulo = '"+tituloguia+"'");
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".id = 'guia"+g+"'");
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".idconteudo = 'guia"+g+"obj'");
+					if($i('guia'+g).onclick){
+						eval("i3GEO.guias.CONFIGURA.guia"+g+".click = "+$i("guia"+g).onclick);
+					}
 				}
 			}
 		}
@@ -184,10 +187,11 @@ i3GEO.guias = {
 				if(i){
 					var onde = i.parentNode;
 				}
-			}			
+			}
 		}
 		else
 		{var onde = $i(onde);}
+		if(!onde){return;}
 		onde.id = i3GEO.guias.IDGUIAS;
 		onde.className = "yui-navset";
 		//
@@ -205,10 +209,11 @@ i3GEO.guias = {
 			var guia = i3GEO.guias.CONFIGURA[guias[g]];
 			var id = guia.id;
 			if($i(id)){
-				if(guia.click == "")
+				if(guia.click == "" || guia.click == undefined)
 					eval('$i("'+id+'").onclick = function(){i3GEO.guias.mostra("'+guias[g]+'");}');
 				else
 					$i(id).onclick = guia.click;
+					
 				$i(id).onmouseover = function(){
 					var bcg = this.parentNode.parentNode.style;
 					var cor = bcg.background.split(" ")[0];

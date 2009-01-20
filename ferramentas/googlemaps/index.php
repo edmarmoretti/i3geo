@@ -1,5 +1,8 @@
 <?php
 include_once("../../ms_configura.php");
+/*
+<script src="http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&amp;up_kml_url=http%3A%2F%2Fmapas.mma.gov.br%2Fi3geo%2Fpacotes%2Fkmlmapserver%2Fkmlservice.php%3Fmap%3Dbioma%26typename%3Dbioma%26request%3Dkml&amp;up_view_mode=earth&amp;up_earth_2d_fallback=0&amp;up_earth_fly_from_space=1&amp;up_earth_show_buildings=0&amp;synd=open&amp;w=320&amp;h=400&amp;title=Embedded+KML+Viewer&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+*/
 ?>
 <html>
 <head>
@@ -332,3 +335,4 @@ include_once("../../ms_configura.php");
     </script>
     </body>
 </html>
+

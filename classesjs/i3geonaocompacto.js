@@ -31,6 +31,7 @@ var jsfiles = new Array(
 "../pacotes/yui252/build/treeview/treeview-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+"classe_php.js",
 "classe_configura.js",
 "depreciados.js",
 "classe_util.js",

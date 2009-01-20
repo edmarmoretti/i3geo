@@ -52,7 +52,9 @@ i3GEO.gadgets = {
 		"mostraVisual":
 		{idhtml:"visual"},
 		"mostraQuadros":
-		{idhtml:"lugarquadros"}
+		{idhtml:"lugarquadros"},
+		"mostraHistoricoZoom":
+		{idhtml:"historicozoom"}
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -124,6 +126,9 @@ i3GEO.gadgets = {
 	*/	
 	mostraCoordenadasGEO: function(id){
 		try{
+			//
+			//ativa o evento que preenche os campos de coordenadas
+			//
 			if(arguments.length == 0)
 			{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml;}
 			if($i(id)){
@@ -232,6 +237,52 @@ i3GEO.gadgets = {
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
 			$i(id).innerHTML = ins;
 		}	
+	},
+	/*
+	Function: mostraHistoricoZoom
+	
+	Mostra na barra de zoom os ícones que controlam a visualização do histórico da navegação sobre o mapa
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/
+	mostraHistoricoZoom: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraHistoricoZoom.idhtml;}
+		if($i(id)){
+			marcadorZoom = "";
+			var ins = "<table style='text-align:center;position:relative;left:";
+			if(navm){ins += "0px;'>";}
+			else
+			{ins += "6px;'>";}
+			ins += "<tr><td><img  id='i3geo_zoomanterior' class='zoomAnterior' title='anterior' src='"+i3GEO.util.$im("branco.gif")+"'  /></td>";
+			ins += "<td>&nbsp;</td>";
+			ins += "<td><img  id='i3geo_zoomproximo' class='zoomProximo' title='proximo' src='"+i3GEO.util.$im("branco.gif")+"'  /></td>";
+			ins += "</tr></table>";
+			$i(id).innerHTML = ins;
+			$i("i3geo_zoomanterior").onclick = function(){
+				if(marcadorZoom == ""){marcadorZoom = i3GEO.gadgets.quadros.quadroatual;}
+				if(i3GEO.gadgets.quadros.quadroatual > 0){
+					marcadorZoom = marcadorZoom - 1;
+					if(marcadorZoom >= 0)
+					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[marcadorZoom].extensao);
+					else
+					marcadorZoom = 0;
+				}
+			};
+			$i("i3geo_zoomproximo").onclick = function(){
+				if(marcadorZoom == ""){marcadorZoom = i3GEO.gadgets.quadros.quadroatual;}
+				if(i3GEO.gadgets.quadros.quadroatual < i3GEO.gadgets.quadros.quadrosfilme.length){
+					marcadorZoom = marcadorZoom + 1
+					if(marcadorZoom < i3GEO.gadgets.quadros.quadrosfilme.length)
+					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[marcadorZoom].extensao);
+				}
+				else
+				marcadorZoom = i3GEO.gadgets.quadros.quadrosfilme.length;
+			};
+		}
 	},
 	/*
 	Function: visual

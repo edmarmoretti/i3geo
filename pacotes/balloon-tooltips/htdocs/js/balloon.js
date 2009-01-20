@@ -781,8 +781,8 @@ Balloon.prototype.getAndCheckContents = function(caption) {
   
   // no Help Url without AJAX
   if (this.helpUrl && !this.allowAJAX) {
-    alert('Sorry, you have specified help URL '+this.helpUrl+' but '+notSupported);
-    return null;
+    //alert('Sorry, you have specified help URL '+this.helpUrl+' but '+notSupported);
+    //return null;
   }
 
   // look for a url in the balloon contents
@@ -798,8 +798,8 @@ Balloon.prototype.getAndCheckContents = function(caption) {
 
   // Make sure AJAX is allowed
   if (this.activeUrl && !this.allowAJAX) {
-    alert('Sorry, you asked for '+originalCaption+' but '+notSupported);
-    return null;
+    //alert('Sorry, you asked for '+originalCaption+' but '+notSupported);
+    //return null;
   }  
 
   // check if the contents are to be retrieved from an element
@@ -812,20 +812,20 @@ Balloon.prototype.getAndCheckContents = function(caption) {
 
   // check if iframes are allowed
   if (caption.match(/\<\s*iframe/i) && !this.allowIframes) {
-    alert('Sorry: iframe elements '+notAllowed);
-    return null;
+    //alert('Sorry: iframe elements '+notAllowed);
+    //return null;
   }
 
   // check if event handlers are allowed
   if (caption.match(/\bon(load|mouse|click|unload|before)[^=]*=/i) && !this.allowEventHandlers) {
-    alert('Sorry: JavaScript event handlers '+notAllowed);
-    return null;
+    //alert('Sorry: JavaScript event handlers '+notAllowed);
+    //return null;
   }
 
   // check for script elements
   if (caption.match(/\<\s*script/i) && !this.allowScripts) {
-    alert('Sorry: <script> elements '+notAllowed);
-    return null;
+    //alert('Sorry: <script> elements '+notAllowed);
+    //return null;
   }
 
   // request the contents

@@ -300,7 +300,7 @@ g_listaFuncoesBotoes = {
 		iddiv:"historicozoom",
 		tipo:"",
 		dica:$trad("d1"),
-		constroiconteudo:'ativaHistoricoZoom("historicozoom")'
+		constroiconteudo:'i3GEO.gadgets.mostraHistoricoZoom()'
 	},
 	{
 		//Ativa o botão que realiza a operação de zoom para a extensão total do mapa.
@@ -597,7 +597,7 @@ g_listaFuncoesBotoes = {
 		funcaoonclick:function(){
 			i3GEO.util.criaBox();
 			g_operacao = "navega";
-			if(navn){wdocaf((objmapa.w/2)+20+"px",(objmapa.h/2)+20+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+			if(navn){wdocaf((objmapa.w/2)+40+"px",(objmapa.h/2)+50+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 			else
 			{wdocaf("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
 			atualizagoogle = function(){
@@ -709,7 +709,7 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
 			}
 			g_tipoacao = "";
-			mede();
+			i3GEO.analise.medeDistancia.inicia();
 		}
 	},
 	{
@@ -724,7 +724,7 @@ g_listaFuncoesBotoes = {
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area","img",i3GEO.configura.locaplic);
 			}
 			g_tipoacao = "";
-			area();
+			i3GEO.analise.medeArea.inicia();
 		}
 	},
 	{
@@ -734,7 +734,8 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d22"),
 		funcaoonclick:function(){
 			i3GEO.barraDeBotoes.ativaIcone("inserexy");
-			inserexy();
+			g_tipoacao = "";
+			i3GEO.mapa.dialogo.cliquePonto();
 			if($i("img")){
 				$i("img").title = "clique para inserir um ponto";
 				$i("img").style.cursor="crosshair";
@@ -748,7 +749,8 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d23"),
 		funcaoonclick:function(){
 			i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
-			inseregrafico();
+			g_tipoacao = "";
+			i3GEO.mapa.dialogo.cliqueGrafico();
 			if($i("img")){
 				$i("img").title = "clique para incluir o gráfico";
 				$i("img").style.cursor="pointer";
@@ -776,7 +778,8 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d25"),
 		funcaoonclick:function(){
 			i3GEO.barraDeBotoes.ativaIcone("textofid");
-			textofid();
+			g_tipoacao = "";
+			i3GEO.mapa.dialogo.cliqueTexto();
 			if($i("img")){
 				$i("img").title = "clique para inserir o texto";
 				$i("img").style.cursor="pointer";

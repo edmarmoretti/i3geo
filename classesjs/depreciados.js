@@ -2,6 +2,12 @@
 //acerta algumas variáveis para efeitos de compatibilidade
 //
 function i3GEOmantemCompatibilidade(){
+	if ($i("longlat")){
+		atualizalonglat = function(){
+			$i("longlat").innerHTML = objposicaocursor.dmsx + "   " +  objposicaocursor.dmsy;
+		};
+		YAHOO.util.Event.addListener($i("img"),"mousemove", atualizalonglat);
+	}
 	try {
 		if (g_opcoesTemas == "nao")
 		{i3GEO.arvoreDeCamadas.OPCOESTEMAS = false;}
@@ -1325,3 +1331,68 @@ try{
 	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
 }
 catch(e){}
+/*
+Function: mede (depreciado)
+*/
+function mede()
+{}
+/*
+Function: cliqueMede (depreciado)
+*/
+function cliqueMede()
+{}
+/*
+Function moveMede (depreciado)
+*/
+function moveMede()
+{}
+/*
+Function: area (depreciado)
+*/
+function area()
+{}
+/*
+Function: cliqueArea (depreciado)
+*/
+function cliqueArea()
+{}
+/*
+Function moveArea (depreciado)
+*/
+function moveArea()
+{}
+/*
+Function: textofid (depreciado)
+*/
+function textofid()
+{}
+/*
+Function: inserexy (depreciado)
+*/
+function inserexy()
+{}
+/*
+Function: cliqueInseretoponimo (depreciado)
+*/
+function cliqueInseretoponimo()
+{}
+/*
+Function: cliqueInserexy (depreciado)
+*/
+function cliqueInserexy()
+{}
+/*
+Function: inseregrafico (depreciado)
+*/
+function inseregrafico()
+{}
+/*
+Function: cliqueInseregrafico (depreciado)
+*/
+function cliqueInseregrafico()
+{}
+/*
+Function: ativaHistoricoZoom (depreciado)
+*/	
+function ativaHistoricoZoom(iddiv)
+{}

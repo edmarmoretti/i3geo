@@ -93,10 +93,12 @@ $map_imagecolor = explode(" ",$map_imagecolor);
 $imgcolor = $map->imagecolor;
 $imgcolor->setrgb($map_imagecolor[0],$map_imagecolor[1],$map_imagecolor[2]);
 $o = $map->outputformat;
+
 if(strtolower($map_transparent) == "on")
 $o->set("transparent",MS_ON);
 else
 $o->set("transparent",MS_OFF);
+
 $img = $map->draw();
 echo header("Content-type: " . $map->outputformat->mimetype  . "\n\n");
 $img->saveImage("");

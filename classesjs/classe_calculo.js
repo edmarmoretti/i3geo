@@ -82,7 +82,7 @@ i3GEO.calculo = {
 
 	docmapa - objeto DOM que contém o objeto imagem
 	
-	ext {String} - extensão geográfica (espaço comoseparador) xmin ymin xmax ymax
+	ext {String} - extensão geográfica (espaço como separador) xmin ymin xmax ymax
 	
 	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
 
@@ -93,11 +93,18 @@ i3GEO.calculo = {
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try
 		{
+			if(arguments.length == 3){
+				var ext = objmapa.extent;
+				var cellsize = objmapa.cellsize;
+			}
+			if(arguments.length == 4){
+				var cellsize = objmapa.cellsize;
+			}
 			if(!docmapa)
 			{var docmapa = window.document;}
 			var dc = docmapa.getElementsByTagName("img")[0];
 			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = objmapa.extent;
+			var imgext = ext; //objmapa.extent;
 			var imgext = imgext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);

@@ -65,9 +65,7 @@ i3GEO.eventos = {
 	Type:
 	{Array}
 	*/
-	MOUSEMOVE: new Array(
-		"moveLonglat()"
-	),
+	MOUSEMOVE: new Array(),
 	/*
 	Variable: MOUSEDOWN
 
@@ -95,7 +93,7 @@ i3GEO.eventos = {
 	{Array}
 	*/
 	MOUSECLIQUE: new Array(
-		"cliqueCapturaPt()"	
+		"i3GEO.eventos.cliqueCapturaPt()"	
 	),
 	/*
 	Variable: TIMERPARADO
@@ -395,5 +393,35 @@ i3GEO.eventos = {
 			{i3GEO.eventos.mouseupMapa();}
 			catch(e){var e = "";}
 		};
-	}	
+	},
+	/*
+	Function: cliqueCapturaPt
+
+	Captura um ponto na tela e retorna o resultado para a janela interna que estiver aberta.
+
+	As coordenadas do ponto, em DMS, são repassadas para os campos do tipo input da janela interna que estiver aberta.
+	A janela aberta deve ter os seguintes elementos do tipo input (ids):
+	ixg,ixm,ixs,iyg,iym,iys
+	*/
+	cliqueCapturaPt: function(){
+		if (g_tipoacao != "capturaponto"){return;}
+		else{
+			if($i("wdocai"))
+			{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+			var x = objposicaocursor.dmsx.split(" ");
+			var y = objposicaocursor.dmsy.split(" ");
+			if (doc.getElementById("ixg"))
+			{doc.getElementById("ixg").value = x[0];}
+			if (doc.getElementById("ixm"))
+			{doc.getElementById("ixm").value = x[1];}
+			if (doc.getElementById("ixs"))
+			{doc.getElementById("ixs").value = x[2];}
+			if (doc.getElementById("iyg"))
+			{doc.getElementById("iyg").value = y[0];}
+			if (doc.getElementById("iym"))
+			{doc.getElementById("iym").value = y[1];}
+			if (doc.getElementById("iys"))
+			{doc.getElementById("iys").value = y[2];}
+		}
+	}
 };

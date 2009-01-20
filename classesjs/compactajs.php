@@ -79,6 +79,7 @@ packer("classe_mapa.js","compactados/classe_mapa_compacto.js","Normal");
 packer("classe_desenho.js","compactados/classe_desenho_compacto.js","Normal");
 packer("classe_tema.js","compactados/classe_tema_compacto.js","Normal");
 packer("classe_analise.js","compactados/classe_analise_compacto.js","Normal");
+packer("classe_php.js","compactados/classe_php_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -105,6 +106,7 @@ $jsfiles = array(
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+"classe_php.js",
 "classe_configura.js",
 "depreciados.js",
 "classe_util.js",
