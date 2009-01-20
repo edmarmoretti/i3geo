@@ -50,7 +50,6 @@ var jsfiles = new Array(
 "classe_navega.js",
 "classe_selecao.js",
 "classe_eventos.js",
-"funcoes.js",
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
