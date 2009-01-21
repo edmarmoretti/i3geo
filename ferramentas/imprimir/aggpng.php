@@ -21,6 +21,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 require_once("../../classesphp/pega_variaveis.php");
+error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -49,10 +50,15 @@ if (array_search( "MapScript", $exts) != TRUE)
 	{dl('php_mapscript.so');}
 }
 require("../../classesphp/funcoes_gerais.php");
-
-error_reporting(E_ALL);
+error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
+$temp = str_replace(".map","xxx.map",$map_file);
+$map->save($temp);
+substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
+//$legenda =$map->legend;
+//$legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias
 $temas = $map->getalllayernames();
 foreach ($temas as $tema)
@@ -69,11 +75,11 @@ foreach ($temas as $tema)
 	}
 }
 $of = $map->outputformat;
-
-$of->set("driver","svg");
+$of->set("driver","AGG/PNG");
+$of->set("imagemode","RGB");
 
 $imgo = $map->draw();
-$nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
+$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
