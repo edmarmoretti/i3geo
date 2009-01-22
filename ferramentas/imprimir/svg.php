@@ -1,0 +1,91 @@
+<?php
+/*
+About: Licença
+
+I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+*/
+require_once("../../classesphp/pega_variaveis.php");
+error_reporting(0);
+session_name("i3GeoPHP");
+if (isset($g_sid))
+{session_id($g_sid);}
+session_start();
+foreach(array_keys($_SESSION) as $k)
+{
+	eval("\$".$k."='".$_SESSION[$k]."';");
+}
+$postgis_mapa = $_SESSION["postgis_mapa"];
+//
+//se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
+//
+include_once ("../../classesphp/carrega_ext.php");
+//
+//carrega o phpmapscript
+//
+$exts = get_loaded_extensions();
+if (array_search( "MapScript", $exts) != TRUE)
+{
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{
+		if(!@dl('php_mapscript_48.dll'))
+		dl('php_mapscript.dll');
+	}
+	else
+	{dl('php_mapscript.so');}
+}
+require("../../classesphp/funcoes_gerais.php");
+error_reporting(0);
+$nomes = nomeRandomico();
+$map = ms_newMapObj($map_file);
+$temp = str_replace(".map","xxx.map",$map_file);
+$map->save($temp);
+substituiCon($temp,$postgis_mapa);
+$map = ms_newMapObj($temp);
+//$legenda =$map->legend;
+//$legenda->set("status",MS_EMBED);
+//altera o nome das classes vazias
+$temas = $map->getalllayernames();
+foreach ($temas as $tema)
+{
+	$layer = $map->getlayerbyname($tema);
+	if (($layer->data != "") && ($layer->getmetadata("escondido") != "SIM") && ($layer->getmetadata("tema") != "NAO"))
+	{
+		if ($layer->numclasses > 0)
+		{
+			$classe = $layer->getclass(0);
+			if (($classe->name == "") || ($classe->name == " "))
+			{$classe->set("name",$layer->getmetadata("tema"));}
+		}
+	}
+}
+$map->selectOutputFormat("svg");
+//$of = $map->outputformat;
+//$of->set("driver","svg");
+//$of->set("mimetype","image/svg+xml");
+//$of->set("formatoption","COMPRESSED_OUTPUT=TRUE");
+//$of->set("formatoption","FULL_RESOLUTION=TRUE");
+//$of->set("imagemode","RGB");
+
+$imgo = $map->draw();
+$nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
+$imgo->saveImage($nomer);
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' >Arquivo gerado! Clique para ver.</a>";
+?>
