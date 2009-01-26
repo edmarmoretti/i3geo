@@ -56,7 +56,7 @@ $temaedit - tema que recebera o grafico
 Include:
 <funcoes_gerais.php>
 */
-function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$map_file,$temaedit)
+function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$map_file,$temaedit)
 {
 	////////////////////////////////////////////////////////////////
 	// PHP script made by Rasmus Petersen - http://www.peters1.dk //
@@ -120,7 +120,7 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$ma
 	}
 	$nome = nomeRandomico(20).".png";
 	$nomefisico = dirname($map_file)."/".$nome;
-	$nomeurl = $imgurl.$nome;
+	$nomeurl = $nome;
 	Imagepng($img,$nomefisico);
 	ImageDestroy($img);
 	return ($nomefisico.",".$nomeurl);

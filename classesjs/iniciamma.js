@@ -162,16 +162,6 @@ Variable: g_r
 Indica se o software R esta instalado (sim ou nao). É preenchida na inicialização do mapa via AJAX.
 */
 g_r = "nao";
-/*
-Variable: cpObj
-
-Objeto cpaint que pode ser reutilizado.
-
-O objeto cpaint permite executar uma chamada ajax.
-*/
-cpObj = new cpaint();
-cpObj.set_async("true");
-cpObj.set_response_type("JSON");
 
 g_postpx = "px";
 g_tipotop = "top";
@@ -278,23 +268,12 @@ function Mapa(e,m)
 		this.w = document.body.offsetWidth - parseInt($i("contemFerramentas").style.width) - diminuix;
 		this.h = document.body.offsetHeight - diminuiy;
 	}
-	//YAHOO.log("Reposicionou a janela do navegador", "i3geo");
-	if ($i("openlayers"))
-	{
-		$i("openlayers").style.width = this.w;
-		$i("openlayers").style.height = this.h;
-	}
-	if ($i("flamingo"))
-	{
-		$i("flamingo").style.width = this.w;
-		$i("flamingo").style.height = this.h;
-	}
 	if($i("contemImg"))
 	{
 		$i("contemImg").style.height=this.h + "px";
 		$i("contemImg").style.width=this.w + "px";
 	}
-	
+	i3GEO.interface.cria(this.w,this.h);
 	/*
 	Variable: objmapa.navegacaoDir
 	
@@ -434,20 +413,9 @@ function Mapa(e,m)
 	*/
 	this.inicializa= function()
 	{
-		//
-		//para efeitos de compatibilidade com versões antigas
-		//
 		i3GEOmantemCompatibilidade();
-		//
-		//
-		//
-		//YAHOO.log("Inicializando o i3geo", "i3geo");
-		//
-		//se não for encontrado nenhum div com o id i3geo, o corpo do html recebe esse identificador
-		//
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}
-		//altera a classe do corpo do HTML. Utilizada pelo YUI.
 		$i("i3geo").className = "yui-skin-sam";
 		if($i("mst"))
 		$i("mst").style.visibility ="hidden";
@@ -456,15 +424,14 @@ function Mapa(e,m)
 		//então, é necessário criar os arquivos temporários do mapa
 		//essa operação deve ser assíncrona
 		//
-		if (i3GEO.configura.sid=="")
+		if(i3GEO.configura.sid=="")
 		{
 			var mashup = function (retorno)
 			{
 				i3GEO.configura.sid = retorno.data;
 				objmapa.inicializa();
 			};
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa&"+g_mashuppar;
-			cpObj.call(p,"",mashup);
+			i3GEO.php.criamapa(mashup,g_mashuppar);
 		}
 		else
 		{
@@ -473,9 +440,11 @@ function Mapa(e,m)
 			//
 			//YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
 			i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+g_embedLegenda+"&w="+this.w+"&h="+this.h+"&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"iniciaMapa",this.montaMapa);
+			i3GEO.php.inicia(this.montaMapa,g_embedLegenda,this.w,this.h);
 		}
+		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.fechaAguarde()") < 0)
+		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
+
 	};
 	/*
 	Function: montaMapa
@@ -499,7 +468,7 @@ function Mapa(e,m)
 		}
 		else
 		{
-			if (retorno.data.variaveis)
+			if(retorno.data.variaveis)
 			{
 				//
 				//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
@@ -520,7 +489,9 @@ function Mapa(e,m)
 				objmapa.extent = mapexten;
 				objmapa.extentTotal = mapexten;
 
-				objmapa.criaCorpoMapa();
+				i3GEO.interface.inicia();
+				if (objmapa.finaliza)
+				{eval(objmapa.finaliza);}
 
 				i3GEO.gadgets.quadros.inicia(10);
 				i3GEO.gadgets.quadros.grava("extensao",mapexten);
@@ -530,34 +501,20 @@ function Mapa(e,m)
 				i3GEO.gadgets.mostraCoordenadasGEO();
 				i3GEO.gadgets.mostraEscalaNumerica();
 				i3GEO.gadgets.mostraBuscaRapida();
+				i3GEO.gadgets.mostraEscalaGrafica();
 				i3GEO.gadgets.visual.inicia();
 				i3GEO.guias.cria();
 				if($i("arvoreAdicionaTema"))
 				i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");
-				i3GEO.ajuda.ativaLetreiro(i3GEO.configura.locaplic,i3GEO.configura.sid);			
+				i3GEO.ajuda.ativaLetreiro(objmapa.mensagens);			
 
-				objmapa.criaEscalaGrafica();
-				objmapa.atualizaEscalaGrafica();		
-				
-				ajaxCorpoMapa(retorno);
-
-				if ($i("corpoMapa"))
-				{
-					var i = $i("img");
-					if(i){
-						i.style.width=objmapa.w +"px";
-						i.style.height=objmapa.h +"px";
-						var i = $i("corpoMapa").style;
-						i.width=objmapa.w +"px";
-						i.height=objmapa.h +"px";
-						i.clip = 'rect('+0+" "+(objmapa.w)+" "+(objmapa.h)+" "+0+')';
-					}
-				}
+				if($i("mst")){$i("mst").style.display="block";}
+				//ajaxCorpoMapa(retorno);
+				ajaxIniciaParametros(retorno);
 				//
 				//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 				//se não for feito esse cálculo, o mapa fica ajustado à esquerda
-				//
-				
+				//			
 				var temp = 0;
 				if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
 				if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
@@ -565,6 +522,7 @@ function Mapa(e,m)
 				{$i("mst").style.width=objmapa.w + temp + "px";}
 				
 				i3GEO.mapa.ajustaPosicao();
+				
 				//
 				//reposiciona a janela de botoes
 				//
@@ -630,69 +588,9 @@ function Mapa(e,m)
 				if (g_3dmap == ""){document.getElementById("botao3d").style.display="none";}
 			}
 		}
-		if($i("mst"))
-		$i("mst").style.visibility ="visible";
+		if($i("mst")){
+			$i("mst").style.visibility ="visible";			
+		}
 		//YAHOO.log("Fim objmapa.inicializa", "i3geo");
 	};
-	/*
-	Function: criaEscalaGrafica
-	
-	Cria a escala gráfica como um lemento HTML se existir o id escalaGrafica
-	*/
-	this.criaEscalaGrafica = function()
-	{
-		if ( ($i("escalaGrafica")) && (!$i("imagemEscalaGrafica")) )
-		{$i("escalaGrafica").innerHTML = "<img class='menuarrow' src=\""+g_localimg+"/branco.gif\" title='op&ccedil;&otilde;es' onclick='opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";}
-	};
-	/*
-	Function: atualizaEscalaGrafica
-	
-	Atualilza a escala gráfica
-	*/
-	this.atualizaEscalaGrafica = function()
-	{
-		if ($i("escalaGrafica"))
-		{
-			//i3GEO.janela.abreAguarde("ajaxEscalaGrafica","Aguarde...criando escala gr&aacute;fica");
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=escalagrafica&g_sid="+i3GEO.configura.sid;
-			cpObj.call(p,"retornaBarraEscala",ajaxEscalaGrafica);
-		}
-	};
-	/*
-	Function: criaCorpoMapa
-	
-	Cria os objetos para preenchimento com a imagem do corpo do mapa.
-	
-	*/
-	this.criaCorpoMapa = function()
-	{
-		//YAHOO.log("Criando o corpo do mapa", "i3geo");
-		if($i("corpoMapa"))
-		{
-			var ins = "<table>";
-			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgN' /></td><td class=verdeclaro ></td></tr>";
-			ins += "<tr><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgL' /></td><td class=verdeclaro ><input style='position:relative;top:0px;left:0px'' type=image src='' id='img' /></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgO' /></td></tr>";
-			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgS' /></td><td class=verdeclaro ></td></tr>";
-			ins += "</table>";
-			$i("corpoMapa").innerHTML = ins;
-		}
-		var docMapa = "";
-		if (document.getElementById("openlayers"))
-		{i3GEO.eventos.ativa($i("openlayers"));}
-		if (document.getElementById("img"))
-		{
-			this.parado = "nao"; //utilizado para verificar se o mouse esta parado
-			i3GEO.eventos.ativa($i("img"));
-		}
-		if (objmapa.finaliza)
-		{eval(objmapa.finaliza);}
-		//YAHOO.log("Concluído o corpo do mapa", "i3geo");
-	};
-	this.atualizaCorpoMapa = function()
-	{
-		i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&g_sid="+i3GEO.configura.sid+"&tipoimagem="+g_tipoimagem;
-		cpObj.call(p,"redesenhaCorpo",ajaxCorpoMapa);
-	};
-	
 }

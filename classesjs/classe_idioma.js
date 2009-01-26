@@ -1,33 +1,5 @@
 /*
-Class: i3geo.idioma
-
-Tradução da interface principal.
-
-Fornece os métodos para traduzir frases para idiomas específicos.
-
-O dicionário é definido em i3geo/classesjs/dicionario.js
-
-Se você está customizando o i3geo,acrescentandonovas funcionalidades,
-utilize o método alteraDicionario para acrescentar novas traduções, dessa forma,
-quandoo usuário escolher oidioma ainterface será adaptada corretamente.
-
-Class:
-
-i3GEO.idioma
-
-Dependências:
-
-i3GEO.util <classe_util.js>
-
-Exemplos:
-
-i3GEO.idioma.define("pt");
-
-i3GEO.idioma.defineDicionario(g_traducao);
-
-i3GEO.idioma.alteraDicionario("d22","novo oi");
-
-alert($trad("d22"))
+Title: Idioma
 
 File: i3geo/classesjs/classe_idioma.js
 
@@ -54,15 +26,39 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3geo.idioma
+
+Tradução da interface principal.
+
+Fornece os métodos para traduzir frases para idiomas específicos.
+
+O dicionário é definido em i3geo/classesjs/dicionario.js
+
+Se você está customizando o i3geo,acrescentandonovas funcionalidades,
+utilize o método alteraDicionario para acrescentar novas traduções, dessa forma,
+quandoo usuário escolher oidioma ainterface será adaptada corretamente.
+
+Exemplos:
+
+i3GEO.idioma.define("pt");
+
+i3GEO.idioma.defineDicionario(g_traducao);
+
+i3GEO.idioma.alteraDicionario("d22","novo oi");
+
+alert($trad("d22"))
+*/
 i3GEO.idioma = {
 	/*
-	Variable: DICIONARIO
+	Property: DICIONARIO
 	
 	Define o objeto com o dicionário utilizado
 	*/
 	DICIONARIO: g_traducao,
 	/*
 	Function: define
+	
 	Define qual o idioma em uso. O default é "pt". 
    
 	Parameters:
@@ -74,6 +70,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: retornaAtual
+	
 	Retorna o idioma atual. 
        
 	Returns:
@@ -84,6 +81,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: defineDicionario
+	
 	Define o objeto com as traduções. O default é "g_traducao"
    
 	Parameters:
@@ -110,6 +108,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: alteraDicionario
+	
 	Altera um texto do dicionario ou acresecenta um novo texto para o idioma atual. 
    
 	Parameters:
@@ -122,6 +121,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: traduzir
+	
 	Traduz um texto para o idioma escolhido
    
 	Parameters:
@@ -141,6 +141,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: adicionaDicionario
+	
 	Adiciona novos registros ao dicionário atual
    
 	Parameters:
@@ -167,6 +168,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: mostraDicionario
+	
 	Abre uma nova janela do navegador com a lista de palavras do dicionário.
 	*/
 	mostraDicionario: function() {
@@ -176,6 +178,7 @@ i3GEO.idioma = {
 
 	/*
 	Function: trocaIdioma
+	
 	Troca o idioma atual por outro.
 	
 	A troca é baseada na definição de um cookie e reload da página.
@@ -189,6 +192,7 @@ i3GEO.idioma = {
 	},
 	/*
 	Function: listaIdiomas
+	
 	Lista os idiomas disponíveis no dicionário ativo
    
 	Returns:
@@ -202,6 +206,7 @@ i3GEO.idioma = {
 };
 /*
 Function: $trad
+
 Atalho para a função de tradução
   
 Parameters:

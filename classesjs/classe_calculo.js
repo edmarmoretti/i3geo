@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.calculo
-
-Utilitários.
-
-Funções gerais de cálculo.
+Title: Cálculos
 
 File: i3geo/classesjs/classe_calculo.js
 
@@ -30,6 +26,11 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.calculo
+
+Utilitários para cálculos.
+*/
 i3GEO.calculo = {
 	/*
 	Function: dms2dd
@@ -102,7 +103,8 @@ i3GEO.calculo = {
 			}
 			if(!docmapa)
 			{var docmapa = window.document;}
-			var dc = docmapa.getElementsByTagName("img")[0];
+			var dc = docmapa.getElementById("img");
+			if(!dc){var dc = docmapa;}
 			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
 			var imgext = ext; //objmapa.extent;
 			var imgext = imgext.split(" ");

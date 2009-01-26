@@ -165,6 +165,16 @@ function i3GEOmantemCompatibilidade(){
 		{novoel.style.filter = "alpha(opacity=90)";}
 		document.body.appendChild(novoel);
 	}
+	/*
+	Function: atualizaListaTemas (depreciado)
+
+	Atualiza a lista de temas disponíveis no mapa (guia com a lista de temas)
+	*/
+	try{
+		objmapa.atualizaListaTemas = function(temas)
+		{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
+	}
+	catch(e){}
 }
 //
 //
@@ -172,9 +182,21 @@ function i3GEOmantemCompatibilidade(){
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+cpObj = new cpaint();
+cpObj.set_async("true");
+cpObj.set_response_type("JSON");
+
 //
 //funcoes depreciadas
 //
+objaguarde = {
+	abre: function(){
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	},
+	fecha: function(){
+		i3GEO.janela.fechaAguarde("ajaxredesenha");
+	}
+}
 /*
 Function: iCookie (depreciado)
 
@@ -1322,16 +1344,6 @@ Function: ajaxLegendaImagem (depreciado)
 function ajaxLegendaImagem(retorno)
 {}
 /*
-Function: atualizaListaTemas (depreciado)
-
-Atualiza a lista de temas disponíveis no mapa (guia com a lista de temas)
-*/
-try{
-	objmapa.atualizaListaTemas = function(temas)
-	{alert("atualizaListaTemas foi depreciado. Utilize i3GEO.arvoreDeCamadas")};
-}
-catch(e){}
-/*
 Function: mede (depreciado)
 */
 function mede()
@@ -1396,3 +1408,11 @@ Function: ativaHistoricoZoom (depreciado)
 */	
 function ativaHistoricoZoom(iddiv)
 {}
+function ajaxhttp(){
+	return i3GEO.util.ajaxhttp();
+}
+/*
+Function: ajaxCorpoMapa (depreciado)
+*/
+function ajaxCorpoMapa(retorno)
+{i3GEO.mapa.corpo.veirifca(retorno);}

@@ -182,6 +182,7 @@ function iniciaMapa()
 	{$geoip = "sim";}
 	$res .= ";objmapa.geoip='".$geoip."';";
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
+	$res .= "objmapa.mensagens ='".$m->pegaMensagens()."';";
 	//
 	//salva uma copia para opção de reiniciar o mapa
 	//

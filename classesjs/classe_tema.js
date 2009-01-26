@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.tema
-
-Funções de diálogo e processamento de propriedades de um tema existente no mapa
-
-Em i3GEO.tema.dialogo estão as funções de abertura dos diálogos para alteração das propriedades do tema,
+Title: Temas
 
 File: i3geo/classesjs/classe_tema.js
 
@@ -30,120 +26,14 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.tema
+
+Funções de diálogo e processamento de propriedades de um tema existente no mapa
+
+Em i3GEO.tema.dialogo estão as funções de abertura dos diálogos para alteração das propriedades do tema,
+*/
 i3GEO.tema = {
-	/*
-	Function: dialogo
-	
-	Abre as telas de diálogo das opções de manipulação de um tema
-	*/
-	dialogo:{
-		/*
-		Function: abreKml
-
-		Abre a janela para mostrar o link de acesso a um tema via kml.
-
-		Parameters:
-
-		tema - código do tema escolhido
-		*/
-		abreKml: function(tema){
-			if(tema == "mapfile"){
-				if(objmapa.mapfile == "")
-				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-				i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml");
-			}
-			else
-			{i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml");}
-		},
-		/*
-		Function: graficotema
-
-		Adiciona gráficos automaticamente nos elementos de um tema
-
-		Parameters:
-
-		idtema - código do tema
-		*/
-		graficotema: function(idtema)
-		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico");},
-		/*
-		Function: toponimia
-
-		Opções de toponímia de um tema.
-
-		Parameters:
-
-		idtema - código do tema
-		*/
-		toponimia: function(idtema)
-		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");},
-		/*
-		Function: filtro
-
-		Opções de filtragem de um tema.
-
-		Parameters:
-
-		idtema - código do tema
-		*/
-		filtro: function(idtema)
-		{i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");},
-		/*
-		Function: procuraratrib
-
-		Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
-
-		Parameters:
-
-		idtema - id que identifica o tema conforme definido no map file
-		*/
-		procuraratrib: function(idtema)
-		{i3GEO.janela.cria("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar");},
-		/*
-		Function: tabela
-
-		Abre a tabela com os atributos de um tema.
-
-		Parameters:
-
-		idtema - id que identifica o tema conforme definido no map file
-		*/
-		tabela: function(idtema)
-		{i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela");},
-		/*
-		Function: etiquetas
-
-		Abre a janela de configuração das etiquetas
-
-		Parameters:
-
-		idtema - id que identifica o tema conforme definido no map file
-		*/
-		etiquetas: function(idtema)
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas");},
-		/*
-		Function: editaLegenda
-
-		Abre a janela do editor de legenda de um tema
-
-		Parameters:
-
-		idtema - id que identifica o tema conforme definido no map file
-		*/
-		editaLegenda: function(idtema)
-		{i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda");},
-		/*
-		Function: download
-
-		Abre a janela que faz o download de um tema
-
-		Parameters:
-
-		idtema - id ue identifica o tema no map file.
-		*/
-		download: function(idtema)
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");}
-	},
 	/*
 	Function: exclui
 
@@ -162,10 +52,7 @@ i3GEO.tema = {
 		while (p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"excluiTemas",ajaxredesenha);
+		i3GEO.php.excluitema(ajaxredesenha,tema);
 		objmapa.temaAtivo = "";
 	},
 	/*
@@ -179,10 +66,7 @@ i3GEO.tema = {
 	*/
 	sobe: function(tema){
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"sobeTema",ajaxredesenha);
+		i3GEO.php.sobetema(ajaxredesenha,tema);
 	},
 	/*
 	Function: desce
@@ -195,10 +79,7 @@ i3GEO.tema = {
 	*/
 	desce: function(tema){
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"desceTema",ajaxredesenha);
+		i3GEO.php.descetema(ajaxredesenha,tema);
 	},
 	/*
 	Function: zoom
@@ -211,10 +92,7 @@ i3GEO.tema = {
 	*/
 	zoom: function(tema){
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"zoomTema",ajaxredesenha);
+		i3GEO.php.zoomtema(ajaxredesenha,tema);
 	},
 	/*
 	Function: limpasel
@@ -228,10 +106,7 @@ i3GEO.tema = {
 	limpasel: function(tema){
 		g_operacao = "limpasel";
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"selecaoLimpa",ajaxredesenha);
+		i3GEO.php.limpasel(ajaxredesenha,tema);
 	},
 	/*
 	Function: mudatransp
@@ -251,10 +126,7 @@ i3GEO.tema = {
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
 			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaTransparencia",ajaxredesenha);
+			i3GEO.php.mudatransp(ajaxredesenha,idtema,valor);
 		}
 		else
 		{alert("Valor não definido.");}
@@ -276,12 +148,127 @@ i3GEO.tema = {
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
 			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaNome",ajaxredesenha);
+			i3GEO.php.mudanome(ajaxredesenha,idtema,valor);
 		}
 		else
 		{alert("Nome não definido");}
+	},
+	/*
+	Class: i3GEO.tema.dialogo
+	
+	Abre as telas de diálogo das opções de manipulação de um tema
+	
+	Return:
+	
+	i3GEO.janela.cria
+	*/
+	dialogo:{
+		/*
+		Function: abreKml
+
+		Abre a janela para mostrar o link de acesso a um tema via kml.
+
+		Parameters:
+
+		tema - código do tema escolhido
+		*/
+		abreKml: function(tema){
+			if(tema == "mapfile"){
+				if(objmapa.mapfile == "")
+				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml"));
+			}
+			else
+			{return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml"));}
+		},
+		/*
+		Function: graficotema
+
+		Adiciona gráficos automaticamente nos elementos de um tema
+
+		Parameters:
+
+		idtema - código do tema
+		*/
+		graficotema: function(idtema)
+		{return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico"));},
+		/*
+		Function: toponimia
+
+		Opções de toponímia de um tema.
+
+		Parameters:
+
+		idtema - código do tema
+		*/
+		toponimia: function(idtema)
+		{return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia"));},
+		/*
+		Function: filtro
+
+		Opções de filtragem de um tema.
+
+		Parameters:
+
+		idtema - código do tema
+		*/
+		filtro: function(idtema)
+		{return(i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro"));},
+		/*
+		Function: procuraratrib
+
+		Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
+
+		Parameters:
+
+		idtema - id que identifica o tema conforme definido no map file
+		*/
+		procuraratrib: function(idtema)
+		{return(i3GEO.janela.cria("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar"));},
+		/*
+		Function: tabela
+
+		Abre a tabela com os atributos de um tema.
+
+		Parameters:
+
+		idtema - id que identifica o tema conforme definido no map file
+		*/
+		tabela: function(idtema)
+		{return(i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela"));},
+		/*
+		Function: etiquetas
+
+		Abre a janela de configuração das etiquetas
+
+		Parameters:
+
+		idtema - id que identifica o tema conforme definido no map file
+		*/
+		etiquetas: function(idtema)
+		{return(i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas"));},
+		/*
+		Function: editaLegenda
+
+		Abre a janela do editor de legenda de um tema
+
+		Parameters:
+
+		idtema - id que identifica o tema conforme definido no map file
+		*/
+		editaLegenda: function(idtema)
+		{return(i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda"));},
+		/*
+		Function: download
+
+		Abre a janela que faz o download de um tema
+
+		Parameters:
+
+		idtema - id ue identifica o tema no map file.
+		*/
+		download: function(idtema)
+		{return(i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download"));}
 	}
+
 };

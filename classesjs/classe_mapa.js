@@ -1,10 +1,5 @@
 /*
-Class:: i3GEO.mapa
-
-Cria e processa o mapa principal
-
-Em i3GEO.mapa.dialogo estão as funções de abertura dos diálogos para alteração das propriedades do mapa,
-como cor de fundo, tipo de imagem, legenda etc.
+Title: Mapa
 
 File: i3geo/classesjs/classe_mapa.js
 
@@ -31,6 +26,14 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.mapa
+
+Cria e processa o mapa principal
+
+Em i3GEO.mapa.dialogo estão as funções de abertura dos diálogos para alteração das propriedades do mapa,
+como cor de fundo, tipo de imagem, legenda etc.
+*/
 i3GEO.mapa = {
 	/*
 	Function: ajustaPosicao
@@ -86,7 +89,149 @@ i3GEO.mapa = {
 		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}
 	},
 	/*
-	Function: recupera
+	Function: ativaLogo
+
+	Ativa ou desativa a logo marca.
+
+	*/
+	ativaLogo: function(){
+		i3GEO.php.ativalogo(ajaxredesenha);
+	},
+	/*
+	Function: insereToponimo
+	
+	Insere um texto no mapa na posição clicada
+
+	O ponto é obtido do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	*/
+	insereToponimo: function(){
+		if (g_tipoacao == "textofid"){
+			//
+			//pega os parâmetros da janela flutuante aberta
+			//
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			texto = doc.getElementById("texto").value;
+			var f = doc.getElementById("fonte").value;
+			var t = doc.getElementById("tamanho").value;
+			var a = doc.getElementById("angulo").value;
+			var cf = doc.getElementById("fundoc").value;
+			if (cf == ""){cf = "off";}
+			var cs = doc.getElementById("sombra").value;
+			if (cs == ""){cs = "off";}
+			var xs = doc.getElementById("sombrax").value;
+			var ys = doc.getElementById("sombray").value;
+			var c = doc.getElementById("frente").value;
+			var m = doc.getElementById("mascara").value;
+			if (m == ""){m = "off";}
+			var fcs = doc.getElementById("frentes").value;
+			if (fcs == ""){fcs = "off";}
+			var fxs = doc.getElementById("frentex").value;
+			var fys = doc.getElementById("frentey").value;
+			var forca = doc.getElementById("force").value;
+			var md = doc.getElementById("mindistance").value;
+			var mf = doc.getElementById("minfeaturesize").value;
+			var ox = doc.getElementById("offsetx").value;
+			var oy = doc.getElementById("offsety").value;
+			var pl = doc.getElementById("partials").value;
+			var pos = doc.getElementById("position").value;
+			//o texto será digitado
+			var digi = function(retorno){
+				//se texto for igual a vazio é pq o valor foi pego de um atributo
+				if(texto == ""){
+					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					texto = retorno.data;
+				}
+				if (texto != " "){
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					i3GEO.php.insereAnnotation(ajaxredesenha,g_nomepin+"topo",objposicaocursor.ddx+" "+objposicaocursor.ddy,texto,pos,pl,ox,oy,mf,md,forca,fcs,fxs,fys,m,c,ys,xs,cs,cf,a,t,f);
+				}
+			};
+			if (doc.getElementById("tipoInsere").value == "digitando")
+			{digi.call();}
+			else{
+				//o texto será capturado de um atributo do elemento
+				texto = "";
+				if ((doc.getElementById("temasLigados")) && (doc.getElementById("itemsel"))){
+					var tema = doc.getElementById("temasLigados").value;
+					var item = doc.getElementById("itemsel").value;
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					i3GEO.php.identificaunico(digi,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);
+				}			
+			}
+		}
+		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
+	},
+	/*
+	Function: inserePonto
+	
+	Insere um ponto no mapa na posição clicada
+
+	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	*/
+	inserePonto: function(){
+		if (g_tipoacao == "inserexy"){
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if(doc.getElementById("resultado")){
+				var ins = doc.getElementById("resultado").innerHTML;
+				ins = ins + "<div style='font-size:12px' >" + objposicaocursor.ddx +" " + objposicaocursor.ddy + "</div><br>";
+				doc.getElementById("resultado").innerHTML = ins;
+			}
+			var item = "";
+			var valoritem = "";
+			if((doc.getElementById("valorItem")) && (doc.getElementById("itemtema"))){
+				var item = doc.getElementById("itemtema").value;
+				var valoritem = doc.getElementById("valorItem").value;
+			}
+			if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
+			else{
+				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+				i3GEO.php.insereSHP(ajaxredesenha,g_nomepin,item,valoritem,objposicaocursor.ddx+" "+objposicaocursor.ddy);
+			}
+		}
+	},
+	/*
+	Function: insereGrafico
+	
+	Insere um grafico no mapa na posição clicada
+
+	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	*/
+	insereGrafico: function(){
+		if (g_tipoacao == "inseregrafico"){
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			var tema = doc.getElementById("temasLigados").value;
+			var width = doc.getElementById("w").value;
+			var inclinacao = doc.getElementById("inclinacao").value;
+			var shadow_height = doc.getElementById("sombra").value;
+			if (tema == ""){alert("Nenhum tema definido para pegar os dados");}
+			else{
+				//pega os itens e as cores definidas
+				var listadeitens = new Array();
+				var g = doc.getElementById("listai");
+				var iguias = g.getElementsByTagName("input");
+				var i = iguias.length-1;
+				if (i >= 0){
+					do{
+						if (iguias[i].checked == true){
+							var it = iguias[i].id;
+							var c = doc.getElementById("cor"+it).value;
+							listadeitens.push(it+","+c);
+						}
+					}
+					while(i--)
+				}
+				var itens = listadeitens.join("*");
+				if (itens == "")
+				{alert("Nenhum item foi escolhido");}
+				else{
+					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					i3GEO.php.insereSHPgrafico(ajaxredesenha,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
+				}
+			}
+		}
+	},
+	/*
+	Class: i3GEO.mapa.recupera
 	
 	Tenta recuperar o mapa de backup caso ocorra algum problema
 	
@@ -122,14 +267,12 @@ i3GEO.mapa = {
 		Restaura o mapa para a cópia de segurança existente no servidor
 		*/
 		restaura: function(){
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=recuperamapa&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"recuperamapa",ajaxredesenha);
+			i3GEO.php.recuperamapa(ajaxredesenha);
 		}
 	},
 	/*
+	Class: i3GEO.mapa.legendaHTML
+	
 	Controla a obtenção da legenda do mapa formatada em HTML.
 	
 	Útil para mostrar a legenda na tela
@@ -198,10 +341,7 @@ i3GEO.mapa = {
 			funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&templateLegenda="+g_templateLegenda+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"criaLegenda",funcao);
+			i3GEO.php.criaLegendaHTML(funcao,"",g_templateLegenda)
 		},
 		/*
 		Function: libera
@@ -234,7 +374,7 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Function: legendaIMAGEM
+	Class: i3GEO.mapa.legendaIMAGEM
 	
 	Controla a obtenção da legenda do mapa na forma de uma imagem
 	
@@ -254,14 +394,11 @@ i3GEO.mapa = {
 			funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
-			var p =i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaImagem&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"legendaGrafica",funcao);
+			i3GEO.php.criaLegendaImagem(funcao);
 		}
 	},
 	/*
-	Function: dialogo
+	Class: i3GEO.mapa.dialogo
 	
 	Abre as telas de diálogo das opções de manipulação do mapa atual
 	*/
@@ -426,158 +563,35 @@ i3GEO.mapa = {
 				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			}
 		}
-		
 	},
-	/*
-	Function: ativaLogo
-
-	Ativa ou desativa a logo marca.
-
-	*/
-	ativaLogo: function(){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ativalogo&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"ativalogo",ajaxredesenha);
-	},
-	/*
-	Function: insereToponimo
-	
-	Insere um texto no mapa na posição clicada
-
-	O ponto é obtido do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	*/
-	insereToponimo: function(){
-		if (g_tipoacao == "textofid"){
-			//
-			//pega os parâmetros da janela flutuante aberta
-			//
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			texto = doc.getElementById("texto").value;
-			var f = doc.getElementById("fonte").value;
-			var t = doc.getElementById("tamanho").value;
-			var a = doc.getElementById("angulo").value;
-			var cf = doc.getElementById("fundoc").value;
-			if (cf == ""){cf = "off";}
-			var cs = doc.getElementById("sombra").value;
-			if (cs == ""){cs = "off";}
-			var xs = doc.getElementById("sombrax").value;
-			var ys = doc.getElementById("sombray").value;
-			var c = doc.getElementById("frente").value;
-			var m = doc.getElementById("mascara").value;
-			if (m == ""){m = "off";}
-			var fcs = doc.getElementById("frentes").value;
-			if (fcs == ""){fcs = "off";}
-			var fxs = doc.getElementById("frentex").value;
-			var fys = doc.getElementById("frentey").value;
-			var forca = doc.getElementById("force").value;
-			var md = doc.getElementById("mindistance").value;
-			var mf = doc.getElementById("minfeaturesize").value;
-			var ox = doc.getElementById("offsetx").value;
-			var oy = doc.getElementById("offsety").value;
-			var pl = doc.getElementById("partials").value;
-			var pos = doc.getElementById("position").value;
-			//o texto será digitado
-			var digi = function(retorno){
-				//se texto for igual a vazio é pq o valor foi pego de um atributo
-				if(texto == ""){
-					i3GEO.janela.fechaAguarde("ajaxredesenha");
-					texto = retorno.data;
+	corpo:{
+		verifica:function(retorno){
+			try{
+				i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o3"));
+				if(retorno.data){var retorno = retorno.data;}
+				if (retorno.variaveis){var retorno = retorno.variaveis;}
+				if ((retorno == "erro") || (retorno == undefined)){
+					i3GEO.mapa.ajustaPosicao();
+					i3GEO.janela.fechaAguarde();
+					i3GEO.mapa.recupera.inicia();
 				}
-				if (texto != " "){
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+i3GEO.configura.sid;
-					var cp = new cpaint();
-					cp.set_response_type("JSON");
-					cp.call(p,"insereFeature",ajaxredesenha);
+				i3GEO.mapa.recupera.TENTATIVA = 0;
+			}
+			catch(e){
+				if(i3GEO.interface.ATUAL == "openlayers"){
+					i3GEO.janela.fechaAguarde();
+					return;
 				}
-			};
-			if (doc.getElementById("tipoInsere").value == "digitando")
-			{digi.call();}
-			else{
-				//o texto será capturado de um atributo do elemento
-				texto = "";
-				if ((doc.getElementById("temasLigados")) && (doc.getElementById("itemsel"))){
-					var tema = doc.getElementById("temasLigados").value;
-					var item = doc.getElementById("itemsel").value;
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+i3GEO.configura.sid;
-					var cp = new cpaint();
-					cp.set_response_type("JSON");
-					cp.call(p,"identificaunico",digi);
-				}			
-			}
-		}
-		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
-	},
-	/*
-	Function: inserePonto
-	
-	Insere um ponto no mapa na posição clicada
-
-	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	*/
-	inserePonto: function(){
-		if (g_tipoacao == "inserexy"){
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if(doc.getElementById("resultado")){
-				var ins = doc.getElementById("resultado").innerHTML;
-				ins = ins + "<div style='font-size:12px' >" + objposicaocursor.ddx +" " + objposicaocursor.ddy + "</div><br>";
-				doc.getElementById("resultado").innerHTML = ins;
-			}
-			var item = "";
-			var valoritem = "";
-			if((doc.getElementById("valorItem")) && (doc.getElementById("itemtema"))){
-				var item = doc.getElementById("itemtema").value;
-				var valoritem = doc.getElementById("valorItem").value;
-			}
-			if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
-			else{
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&item="+item+"&valor="+valoritem+"&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"insereSHP",ajaxredesenha);
-			}
-		}
-	},
-	/*
-	Function: insereGrafico
-	
-	Insere um grafico no mapa na posição clicada
-
-	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	*/
-	insereGrafico: function(){
-		if (g_tipoacao == "inseregrafico"){
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var tema = doc.getElementById("temasLigados").value;
-			var width = doc.getElementById("w").value;
-			var inclinacao = doc.getElementById("inclinacao").value;
-			var shadow_height = doc.getElementById("sombra").value;
-			if (tema == ""){alert("Nenhum tema definido para pegar os dados");}
-			else{
-				//pega os itens e as cores definidas
-				var listadeitens = new Array();
-				var g = doc.getElementById("listai");
-				var iguias = g.getElementsByTagName("input");
-				var i = iguias.length-1;
-				if (i >= 0){
-					do{
-						if (iguias[i].checked == true){
-							var it = iguias[i].id;
-							var c = doc.getElementById("cor"+it).value;
-							listadeitens.push(it+","+c);
-						}
-					}
-					while(i--)
+				if(i3GEO.mapa.recupera.TENTATIVA == 0){
+					alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+					i3GEO.mapa.recupera.inicia();
 				}
-				var itens = listadeitens.join("*");
-				if (itens == "")
-				{alert("Nenhum item foi escolhido");}
 				else{
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					i3GEO.php.insereSHPgrafico(ajaxredesenha,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
+					alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
+					if (i3GEO.mapa.recupera.TENTATIVA == 1){
+						i3GEO.mapa.recupera.TENTATIVA = 2;
+						i3GEO.php.reiniciaMapa(ajaxredesenha);
+					}		
 				}
 			}
 		}

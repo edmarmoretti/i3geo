@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.util
-
-Utilitários.
-
-Funções gerais de processamento.
+Title: Utilitários
 
 File: i3geo/classesjs/classe_util.js
 
@@ -55,6 +51,11 @@ Array.prototype.remove=function(s){
 	var i = this.indexOf(s);
 	if(i != -1) this.splice(i, 1);
 };
+/*
+Class: i3GEO.util
+
+Utilitários.
+*/
 i3GEO.util = {
 	/*
 	Variable: PINS
@@ -605,6 +606,8 @@ i3GEO.util = {
 				with (novoimg.style){width="6px";height="6px";zIndex=2000;}
 				novoel.appendChild(novoimg);
 				container.appendChild(novoel);
+				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.util.insereMarca.limpa()") < 0)
+				{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.util.insereMarca.limpa()");}					
 			}
 			catch(e){alert("Ocorreu um erro. inseremarca"+e);}
 		},
@@ -616,6 +619,7 @@ i3GEO.util = {
 					$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";
 				}
 				i3GEO.util.insereMarca.CONTAINER = new Array();
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");					
 			}
 			catch(e){}
 		}
@@ -633,14 +637,9 @@ i3GEO.util = {
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
 		var temp = path.split(".");
 		if ((temp[1] == "SHP") || (temp[1] == "shp"))
-		{var f = "adicionaTemaSHP";}
+		{i3GEO.php.adicionaTemaSHP(ajaxredesenha,path);}
 		else
-		{var f = "adicionaTemaIMG";}
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao="+f+"&arq="+path;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,f,ajaxredesenha);
+		{i3GEO.php.adicionaTemaIMG(ajaxredesenha,path);}
 	},
 	/*
 	Function: abreCor
@@ -655,6 +654,79 @@ i3GEO.util = {
 	*/
 	abreCor: function(janela,elemento){
 		i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+	},
+	/*
+	Function: ajaxhttp
+	
+	Cria o objeto XMLHttpRequest para uso com funções próprias de chamada em ajax
+	
+	O uso dessa função não é recomendado. Dê preferência para uso da chamada ajax via YUI
+	
+	Return:
+	
+	{XMLHttpRequest}
+	*/
+	ajaxhttp: function(){
+		try
+		{var objhttp1 = new XMLHttpRequest();}
+		catch(ee){
+			try{var objhttp1 = new ActiveXObject("Msxml2.XMLHTTP");}
+			catch(e){
+				try{var objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
+				catch(E)
+				{var objhttp1 = false;}
+			}
+		}
+		return(objhttp1);
+	},
+	/*
+	Function: ajaxexecASXml
+
+	Executa uma chamada ajax no modo assíncrono retornando o resultado em XML.
+
+	Parameters:
+
+	programa {String} - URL do programa que será executado no servidor.
+	funcao {funcao} - função que tratará o resultado.
+
+	Returns:
+
+	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", é gerado um alert.
+	*/
+	ajaxexecASXml: function(programa,funcao){
+		if (programa.search("http") == 0){
+			var h = window.location.host;
+			if (programa.search(h) < 0){
+				alert("OOps! Nao e possivel chamar um XML de outro host.\nContacte o administrador do sistema.\nConfigure corretamente o ms_configura.php");
+				return;
+			}
+		}	
+		var ohttp = i3GEO.util.ajaxhttp();
+		ohttp.open("GET",programa,true);
+		var retorno = "";
+		ohttp.onreadystatechange=function(){
+			if (ohttp.readyState==4){
+				var retorno = ohttp.responseText;
+				if (retorno != undefined){
+					if (document.implementation.createDocument){
+						var parser = new DOMParser();
+						var dom = parser.parseFromString(retorno, "text/xml");
+					}
+					else{
+						var dom = new ActiveXObject("Microsoft.XMLDOM");
+						dom.async="false";
+						dom.load(programa);
+					}
+				}
+				else
+				{var dom = "erro";}
+				if (funcao != "volta")
+				{eval(funcao+'(dom)');}
+				else
+				{return dom;}
+			}
+		};
+		ohttp.send(null);
 	}
 };
 //

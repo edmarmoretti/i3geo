@@ -1,15 +1,5 @@
 /*
-Class: i3GEO.arvoreDeTemas
-
-Monta a árvore com os temas disponíveis para ser adicionados ao mapa.
-
-Dependências:
-
-pacotes/yui252/build/treeview/treeview-min.js
-
-pacotes/yui252/build/treeview/assets/skins/sam/treeview.css
-
-classesjs/i3geo_util.js
+Title: Árvore de temas
 
 File: i3geo/classesjs/classe_arvodetemas.js
 
@@ -36,6 +26,11 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.arvoreDeTemas
+
+Monta a árvore com os temas disponíveis para ser adicionados ao mapa.
+*/
 i3GEO.arvoreDeTemas = {
 	/*
 	Property: OPCOESADICIONAIS
@@ -150,7 +145,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDSMENUS: new Array(),
 	/*
-	Property: IDHTML
+	Variable: IDHTML
 	
 	Armazena o ID do elemento HTML onde a árvore será incluida
 
@@ -159,7 +154,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDHTML: null,
 	/*
-	Property: LOCAPLIC
+	Variable: LOCAPLIC
 	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
@@ -168,7 +163,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	LOCAPLIC: null,
 	/*
-	Property: SID
+	Variable: SID
 	
 	Código da seção aberta no servidor pelo i3Geo
 
@@ -194,7 +189,6 @@ i3GEO.arvoreDeTemas = {
 	{JSON}
 	*/
 	DRIVES: null,
-
 	/*
 	Variable: SISTEMAS
 	
@@ -241,7 +235,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	TEMAS: null,
 	/*
-	Method: listaMenus
+	Function: listaMenus
+
 	Lista os menus disponíveis.
 	
 	Pesquisa no banco de dados administrativo ou na variável de configuração (veja ms_configura.php) a lista de menus disponíveis.
@@ -276,14 +271,11 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 				eval(funcao+"(retorno)");
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+g_sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistademenus",retorno);
+		i3GEO.php.pegalistademenus(retorno);
 	},
 	/*
-	Method: listaGrupos
+	Function: listaGrupos
+	
 	Lista os grupos de um menu.
 	
 	O resultado é armazenado em i3GEO.arvoreDetemas.GRUPOS 
@@ -307,14 +299,11 @@ i3GEO.arvoreDeTemas = {
 		var listasgrupos = "nao";
 		if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD || i3GEO.arvoreDeTemas.FILTRAOGC)
 		var listasgrupos = "sim";
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+g_sid+"&idmenu="+id_menu+"&listasistemas=nao&listasgrupos="+listasgrupos;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadegrupos",retorno);
+		i3GEO.php.pegalistadegrupos(retorno,id_menu,listasgrupos);
 	},
 	/*
-	Method: listaSubGrupos
+	Function: listaSubGrupos
+	
 	Lista os sub-grupos de um grupo.
 	
 	O resultado é armazenado emi3GEO.arvoreDetemas.SUBGRUPOS
@@ -337,14 +326,11 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 			funcao.call();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+g_sid+"&idmenu="+id_menu+"&grupo="+id_grupo;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadesubgrupos",retorno);
+		i3GEO.php.pegalistadeSubgrupos(retorno,id_menu,id_grupo)
 	},
 	/*
-	Method: listaTemas
+	Function: listaTemas
+	
 	Lista os temas de um sub-grupo.
 	
 	O resultado é armazenado em i3GEO.arvoreDeTemas.TEMAS
@@ -369,14 +355,11 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 			funcao.call();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+g_sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadetemas",retorno);
+		i3GEO.php.pegalistadetemas(retorno,id_menu,id_grupo,id_subgrupo)
 	},
 	/*
-	Method: listaSistemas
+	Function: listaSistemas
+	
 	Lista os sistemas especiais de adição de temas.
 	
 	O resultado é armazenado em i3GEO.arvoreDeTemas.SISTEMAS
@@ -395,14 +378,11 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 			funcao.call();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemas&g_sid="+g_sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pegasistemas",retorno);
+		i3GEO.php.pegaSistemas(retorno);
 	},
 	/*
-	Method: listaDrives
+	Function: listaDrives
+	
 	Lista os endereços no servidor dos drives que podem ser abertos pela opção de navegação em arquivos no servidor.
 	
 	Alista de drives deve ser definida emi3geo/ms_configura.php
@@ -421,14 +401,11 @@ i3GEO.arvoreDeTemas = {
 			if(funcao != "")
 			funcao.call();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaDrives";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"listaDrives",retorno);
+		i3GEO.php.listadrives(retorno);
 	},
 	/*
-	Method: cria
+	Function: cria
+	
 	Cria a árvore com os menus disponíveis.
 	
 	A árvore contém opcionalmente a opção de busca, os ícones adicionais e a lista de sistemas.
@@ -465,6 +442,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaArvore
+	
 	Monta a árvore incluindo os nós do primeiro nível. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos grupos.
@@ -563,7 +541,7 @@ i3GEO.arvoreDeTemas = {
 						var executar = funcoes[ig2].ABRIR;
 						var w = funcoes[ig2].W;
 						var h = funcoes[ig2].H;
-						var abre = "i3GEO.janela.cria('"+w+"px','"+h+"px','"+endereco+"','','','Sistemas')";
+						var abre = "i3GEO.janela.cria('"+w+"px','"+h+"px','"+executar+"','','','Sistemas')";
 						var nomeFunc = "<a href='#' onclick='"+abre+"'>"+funcoes[ig2].NOME+"</a>";
 						var d = {html:nomeFunc};
 						var funcNode = new YAHOO.widget.HTMLNode(d, sisNode, false,true);
@@ -582,6 +560,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaGrupos
+	
 	Monta a lista de grupos de um nó principal da árvore. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos sub-grupos.
@@ -625,6 +604,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaSubGrupos
+	
 	Monta a lista de sub-grupos de um nó do tipo grupo. 
 
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos temas.
@@ -670,6 +650,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: montaTemas
+	
 	Monta a lista de temas de um nó. 
 	*/
 	montaTemas: function(node){		
@@ -700,6 +681,15 @@ i3GEO.arvoreDeTemas = {
 		};
 		i3GEO.arvoreDeTemas.listaTemas(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,node.data.idmenu,node.data.idgrupo,node.data.idsubgrupo,temp)
 	},
+	/*
+	Function: montaDir
+	
+	Incluí na árvore o navegador de diretórios
+	
+	Parameters:
+	
+	node {node} - nó onde será criada a lista 
+	*/
 	montaDir: function(node){
 		var montaLista = function(retorno)
 		{
@@ -725,15 +715,11 @@ i3GEO.arvoreDeTemas = {
 			}
 			node.loadComplete();
 		};
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.arvoreDeTemas.SID+"&funcao=listaArquivos&diretorio="+node.data.caminho;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"listaDrives",montaLista);
+		i3GEO.php.listaarquivos(montaLista,node.data.caminho);
 	},
-	
 	/*
 	Function: montaTextoTema
+	
 	Monta o texto com o título do tema.
 	
 	Parameters:
@@ -759,6 +745,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: propTemas
+	
 	Monta o nó com informações adicionais sobre o tema.
 	
 	Parameters:
@@ -819,6 +806,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: outrasOpcoesHTML
+	
 	Constrói o HTML com as opções adicionais de inclusão de temas (upload de shp, etc.).
 	
 	Return:
@@ -844,8 +832,8 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: desativaCheckbox
-	Desmarca todos os checkbox dos temas marcados na árvore.
 	
+	Desmarca todos os checkbox dos temas marcados na árvore.
 	*/
 	desativaCheckbox: function(){
 		var o = document.getElementById(i3GEO.arvoreDeTemas.ARVORE.id);
@@ -859,7 +847,8 @@ i3GEO.arvoreDeTemas = {
 		while(i<n)	
 	},
 	/*
-	Method: listaTemasAtivos
+	Function: listaTemasAtivos
+	
 	Lista os temas com checkbox marcados.
 	
 	Return:
@@ -881,6 +870,7 @@ i3GEO.arvoreDeTemas = {
 	},
 	/*
 	Function: buscaTema
+	
 	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
 	
 	Parameter:
@@ -941,8 +931,7 @@ i3GEO.arvoreDeTemas = {
 		//funcao que será executada para buscar os temas
 		//
 		var busca = function(){
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+i3GEO.arvoreDeTemas.SID;
-			cpObj.call(p,"procurartemas",resultadoProcurar);
+			i3GEO.php.procurartemas(resultadoProcurar,procurar);
 		};
 		//
 		//recolhe todos os nós e acrescenta um novo
@@ -990,10 +979,9 @@ i3GEO.arvoreDeTemas = {
 					alert(retorno.data.erro);
 					return;
 				}
-				objmapa.atualizaCorpoMapa();					
+				ajaxredesenha();					
 			};
-			var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+(tsl.toString())+"&g_sid="+i3GEO.arvoreDeTemas.SID;
-			cpObj.call(p,"adicionaTema",temp);	
+			i3GEO.php.adtema(temp,tsl.toString());
 		}
 	},
 	/*
@@ -1027,11 +1015,7 @@ i3GEO.arvoreDeTemas = {
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=''&listasgrupos=nao";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadegrupos",combo);
+		i3GEO.php.pegalistadegrupos(combo,id_menu,"nao");
 	},
 	/*
 	Function: comboSubGruposMenu
@@ -1068,11 +1052,7 @@ i3GEO.arvoreDeTemas = {
 				}
 				$i(idDestino).innerHTML = ins+"</select>";
 			};
-			var p = locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&map_file=''&grupo="+idGrupo;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"pegalistadeSubgrupos",combo);
+			i3GEO.php.pegalistadeSubgrupos(combo,"",idGrupo);
 		}
 	},
 	/*
@@ -1111,14 +1091,10 @@ i3GEO.arvoreDeTemas = {
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&map_file=''&grupo="+idGrupo+"&subgrupo="+idSubGrupo;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"pegalistadetemas",combo);
+		i3GEO.php.pegalistadetemas(combo,id_menu,idGrupo,idSubGrupo);
 	},
 	/*
-	Function: dialogo
+	Class: dialogo
 	
 	Abre as janelas de diálogo com as opções adicionais que permitem acrescentar temas ao mapa
 	

@@ -192,7 +192,6 @@
       $this->at  = 0;
       $this->ch  = ' ';
       $this->text  = $text;
-      
       return $this->val();
     }
     

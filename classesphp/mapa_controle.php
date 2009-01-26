@@ -1401,7 +1401,7 @@ Include:
 		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
 		$m = new SHP($map_file,$tema,$locaplic);
-		$cp->set_data($m->insereSHPgrafico($tipo,$x,$y,$itens,$imgurl,$width,$inclinacao,$shadow_height));
+		$cp->set_data($m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height));
 	break;
 /*
 Property: mostrawkt
@@ -2530,10 +2530,9 @@ Lista os diretórios de um diretório.
 		$cp->set_data(listaDiretorios($diretorio));
 	break;
 /*
-Property: listaArquivos
+Property: listaArquivos*
 
 Lista os arquivos de um diretório.
-
 */
 	case "listaArquivos":
 		$cp->set_data(listaArquivos($diretorio));
@@ -2585,6 +2584,10 @@ Redesenha o mapa e retorna os parâmetros do novo mapa.
 
 Include:
 <classe_mapa.php>
+
+Parameters:
+
+tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|sepiaclara
 */
 function redesenhaMapa()
 {
@@ -2607,10 +2610,11 @@ function redesenhaMapa()
 		else
 		{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
 	}
+	$mensagens = "objmapa.mensagens ='".$m->pegaMensagens()."'";
 	restauraCon($map_file,$postgis_mapa);
 	if (($par == "") || ($imagem == ""))
 	{$cp->set_data("erro");}
 	else
-	{$cp->set_data(array("variaveis"=>($imagem.";".$par.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par));}
+	{$cp->set_data(array("variaveis"=>($mensagens.";".$imagem.";".$par.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par));}
 }
 ?>

@@ -1,10 +1,5 @@
 /*
-Class:: i3GEO.configura
-
-Configuração do i3geo
-
-Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
-o funcionamento do i3geo.
+Title: Configurações gerais
 
 File: i3geo/classesjs/classe_configura.js
 
@@ -31,6 +26,14 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.configura
+
+Configuração do i3geo
+
+Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
+o funcionamento do i3geo.
+*/
 i3GEO.configura = {
 	/*
 	Variable: sid

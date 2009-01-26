@@ -204,11 +204,12 @@
           } // end: if
           
           // convert from JSON string
+         // var_dump($GLOBALS['__cpaint_json']);
           $arguments[$key] = $GLOBALS['__cpaint_json']->parse($value);
         } // end: foreach
         
         $arguments = cpaint_transformer::decode_array($arguments, $this->basenode->get_encoding());
-  
+  //var_dump($arguments);
         if (is_array($this->api_functions[$user_function])
           && is_callable($this->api_functions[$user_function]['call'])) {
           // a valid API function is to be called

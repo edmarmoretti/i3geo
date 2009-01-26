@@ -96,8 +96,6 @@ O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
 Parameters:
 
-locmapas - endereço do arquivo xml.
-
 return:
 array
 */
@@ -167,8 +165,6 @@ idmenu - id que identifica o xml que será utilizado (definido na variável $menut
 listasistemas - sim|nao pega a lista de sistemas para montar a árvore de sistemas
 
 listasgrupos - sim|nao lista também os subgrupos associados
-
-menutemas - variável com a lista de menus (veja o ms_configura.php). Se não for definida, é obtida do ms_configura.php
 
 return:
 

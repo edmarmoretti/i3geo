@@ -51,8 +51,10 @@ if (isset($_GET))
 		eval("\$".$k."='".(strip_tags($_GET[$k]))."';");
 	}
 }
+//var_dump($_POST);exit;
 if (isset($_POST))
 {
+	//var_dump($_POST);exit;
 	foreach(array_keys($_POST) as $k)
 	{
 		if (($_POST[$k] != "''"))
@@ -68,6 +70,7 @@ if (isset($_POST))
 				$parametros_ = explode("&",$argumento_);
 				foreach($parametros_ as $parametro_)
 				{	
+					//echo $parametro_;
 					$p_ = explode("=",$parametro_);
 					if($p_[0] != "")
 					eval("\$".$p_[0]."='".(strip_tags($p_[1]))."';");	
@@ -79,4 +82,5 @@ if (isset($_POST))
 	}
 
 }
+
 ?>

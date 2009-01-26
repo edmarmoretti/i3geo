@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.analise
-
-Funções geração e abertura dos diálogos das opções de análise espacial
-
-Em i3GEO.analise.dialogo estão as funções de abertura dos diálogos 
+Title: Análise geográfica
 
 File: i3geo/classesjs/classe_analise.js
 
@@ -30,11 +26,28 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.analise
+
+Funções de geração das análises e abertura dos diálogos das opções de análise espacial
+
+Em i3GEO.analise.dialogo estão as funções de abertura dos diálogos
+*/
 i3GEO.analise = {
 	/*
-	Function: dialogo
+	Class: i3GEO.analise.dialogo
 	
 	Abre as telas de diálogo das opções de análise
+	
+	Exemplos:
+
+	Para abrir a mensagem de diálogo de geração de buffer, utilize
+	
+	i3GEO.analise.dialogo.buffer()
+	
+	Returns:
+	
+	{i3GEO.janela.cria}
 	*/
 	dialogo:{
 		/*
@@ -43,21 +56,21 @@ i3GEO.analise = {
 		Abre a janela que gera grade de pontos
 		*/
 		gradePontos: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos");},
+		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos"));},
 		/*
-		Function: gradePoligonos
+		Function: gradePol
 
 		Abre a janela que gera grade de poligonos
 		*/
 		gradePol: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos");},
+		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos"));},
 		/*
 		Function: gradeHex
 
 		Abre a janela que gera grade de hexágonos
 		*/
 		gradeHex: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos");},
+		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos"));},
 		/*
 		Function: analisaGeometrias
 
@@ -66,7 +79,7 @@ i3GEO.analise = {
 		analisaGeometrias: function(){
 			g_tipoacao = "selecao";
 			objmapa.temaAtivo = "";
-			i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
+			return(i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o"));
 		},
 		/*
 		Function: pontosdistri
@@ -78,7 +91,7 @@ i3GEO.analise = {
 			if (g_r == "nao")
 			{alert("Opção não disponível");}
 			else
-			{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribui&ccedil;&atilde;o de pontos");}
+			{return(i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribui&ccedil;&atilde;o de pontos"));}
 		},
 		/*
 		Function: pontoempoligono
@@ -86,35 +99,35 @@ i3GEO.analise = {
 		Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
 		*/
 		pontoempoligono: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono");},
+		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono"));},
 		/*
 		Function: nptPol
 
 		Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
 		*/
 		nptPol: function()
-		{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono");},
+		{return(i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono"));},
 		/*
 		Function: buffer
 
 		Gera um buffer em elementos selecionados
 		*/
 		buffer: function()
-		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno");},
+		{return(i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno"));},
 		/*
 		Function: distanciaptpt
 
 		Abre a janela para calcular a distância entre um ponto e outros pontos próximos
 		*/
 		distanciaptpt: function()
-		{i3GEO.janela.cria("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");},
+		{return(i3GEO.janela.cria("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia"));},
 		/*
 		Function: centroide
 
 		Abre a janela que gera um tema com os centroides dos elementos selecionados
 		*/
 		centroide: function()
-		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide");},
+		{return(i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide"));},
 		/*
 		Function: dissolve
 
@@ -128,10 +141,10 @@ i3GEO.analise = {
 		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 		*/
 		agrupaElementos: function()
-		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");},
+		{return(i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa"));},
 	},
 	/*
-	Function: medeDistancia
+	Class: i3GEO.analise.medeDistancia
 	
 	Ativa e controla a opção de medição de distâncias.
 
@@ -273,7 +286,7 @@ i3GEO.analise = {
 		}
 	},
 	/*
-	Function: medeArea
+	Class: i3GEO.analise.medeArea
 	
 	Ativa e controla a opção de medição de área.
 
@@ -315,10 +328,7 @@ i3GEO.analise = {
 					}
 				};
 				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=areaPixel&celsize="+g_celula+"&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"areaPixel",temp);			
+				i3GEO.php.areaPixel(temp,g_celula);
 			}
 			else{i3GEO.desenho.richdraw.fecha();}
 		},

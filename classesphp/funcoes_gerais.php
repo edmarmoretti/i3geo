@@ -547,15 +547,15 @@ function listaDiretorios($diretorio)
 	{return "erro";}
 }
 /*
-function: listaArquivos
+Function: listaArquivos
 
 Retorna lista de arquivos.
 
-parameters:
+Parameters:
 
 $diretorio - Raiz onde será feita a busca.
 
-return:
+Return:
 
 array com a lista de arquivos e diretórios.
 */
@@ -1794,11 +1794,17 @@ function: calculaAreaPixel
 
 Calcula a área em m2 de um pixel do mapa
 
+O cálculo é feito projetando-se o mapa atual para a projeção policônica
+
 Parameters:
 
 map_file - arquivo do mapa
 
-celsize - tamanho do pixel em dd
+celsize - tamanho do pixel em décimos de grau
+
+Return:
+
+{Numeric} - área em metros quadrados
 */
 function calculaAreaPixel($map_file,$celsize)
 {

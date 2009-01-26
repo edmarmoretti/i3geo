@@ -77,8 +77,8 @@ Exemplo:
 http://<host>/i3geo/ms_criamapa.php?interface=flamingo.htm
 
 */
-g_locaplic = protocolo()+"://"+window.location.host+"/i3geo";
-g_localimg = protocolo()+"://"+window.location.host+"/i3geo/imagens";
+g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 g_barraFerramentas1 = "nao"
 g_barraFerramentas2 = "nao"
 g_mapaRefDisplay = "none"
@@ -91,50 +91,9 @@ g_conectargeorss = "nao";
 g_uploadlocal = "nao";
 g_uploaddbf = "nao";
 g_conectarwms = "nao";
-
-function initFL()
-{
-	var monta = function(retorno)
-	{
-		$i("flamingo").style.height = objmapa.h + 45;
-		childPopups  = new Array();
-		childPopupNr = 0;
-		var so = new SWFObject("../pacotes/flamingo/flamingo/flamingo.swf?config="+retorno.data, "flamingoi", "100%", "100%", "8", "#eaeaea");
-		so.addParam("wmode","window"); 
-		so.write("flamingo");
-		objaguarde.fecha("montaMapa");
-	}
-	objaguarde.abre("montaMapa","Flamingo");
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=montaFlamingo&g_sid="+g_sid;
-	cpObj.call(p,"",monta);
-}
-/*
-Function: atualizaFL
-
-Atualiza a lista de temas quando o mapa é refeito e a interface é Flamingo
-*/
-function atualizaFL()
-{
-	var temp = function(retorno)
-	{
-		var w = parseInt($i("flamingo").style.width);
-		if (w == objmapa.w)
-		{$i("flamingo").style.width = parseInt($i("flamingo").style.width)+1;}
-		else
-		{$i("flamingo").style.width = parseInt($i("flamingo").style.width)-1;}
-		eval(retorno.data.parametros);
-		objmapa.atualizaListaTemas(temas);
-		objmapa.temas = temas;
-	}
-	//atualiza a lista de temas atuais
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=openlayers&g_sid="+g_sid;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"openlayers",temp);
-}
+i3GEO.interface.ATUAL = "flamingo";
+i3GEO.interface.IDCORPO = "contemImg";
 objmapa = new Mapa();
-objmapa.finaliza = "initFL()";
 objmapa.inicializa();
 </script>
 

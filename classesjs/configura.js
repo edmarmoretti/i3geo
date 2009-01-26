@@ -436,7 +436,15 @@ g_listaFuncoesBotoes = {
 			g_operacao='identifica';
 			cliqueIdentifica = function(){
 				if (g_tipoacao == "identifica")
-				{wdocaf("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");}
+				{
+					i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
+					var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+objmapa.scale,"","","Identifica");
+					var temp = function(){
+						i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
+						i3GEO.barraDeBotoes.ativaBotoes();
+					};
+					YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+				}
 			};
 			verificaTip = function(){
 				if (g_operacao != "identifica"){return;}
@@ -503,11 +511,7 @@ g_listaFuncoesBotoes = {
 						}
 						catch(e){}
 					};
-					var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&g_sid="+i3GEO.configura.sid;
-					var cp = new cpaint();
-					cp.set_persistent_connection(true);
-					cp.set_response_type("JSON");
-					cp.call(p,"identifica",retorna);
+					i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
 				};				
 				if (g_operacao == "identifica"){
 					eval(g_funcaoTip);
@@ -691,10 +695,7 @@ g_listaFuncoesBotoes = {
 		dica:$trad("d20"),
 		funcaoonclick:function(){
 			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"reiniciaMapa",ajaxredesenha);
+			i3GEO.php.reiniciaMapa(ajaxredesenha);
 		}
 	},
 	{

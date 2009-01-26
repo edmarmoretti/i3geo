@@ -1,7 +1,5 @@
 /*
-Class: i3GEO.barradebotoes
-
-Constrói a barra de botões flutuante
+Title: Barra de botões
 
 File: i3geo/classesjs/classe_barradebotoes.js
 
@@ -28,9 +26,14 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.barradebotoes
+
+Constrói a barra de botões flutuante
+*/
 i3GEO.barraDeBotoes = {
 	/*
-	Variable: LISTABOTOES
+	Property: LISTABOTOES
 	
 	Objeto com a lista de botões.
 	
@@ -41,7 +44,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	LISTABOTOES: g_listaFuncoesBotoes.botoes,
 	/*
-	Variable: BOTAOPADRAO
+	Property: BOTAOPADRAO
 	
 	Botão que será ativado ao inicializar os botões com ativaBotoes.
 	
@@ -125,6 +128,33 @@ i3GEO.barraDeBotoes = {
 			while (b--);
 		}
 	},
+	/*
+	Function: inicializaBarra
+	
+	Inicializa a barra de botões
+	
+	Exemplo:
+	
+	if ($i("barraDeBotoes1"))
+	
+	i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes1","i3geo_barra1",true,x1,y1);
+	
+	if ($i("barraDeBotoes2"))
+	
+	i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
+	
+	Parameters:
+	
+	idconteudo {String} - id do elemento existente no HTML e que contém as definições dos botões
+	
+	idconteudonovo {String} - id do elemento que será criado para adicionar os botoões
+	
+	barraZoom {boolean} - indica se a barra de zoom será incluída
+	
+	x {Numeric} - posição x (pixels) da barra em relação ao mapa
+	
+	y {Numeric} - posição y (pixels) da barra em relação ao mapa
+	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
 		var wj = "36px";
 		var recuo = "0px";

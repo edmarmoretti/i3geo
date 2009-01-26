@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.gadgets
-
-Inclui elementos especiais no mapa
-
-Os elementos são opcionais e adicionam funcionalidades ao mapa.
+Title: Gadgets (objetos marginais do mapa)
 
 File: i3geo/classesjs/classe_gadgets.js
 
@@ -30,7 +26,13 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.gadgets
 
+Inclui elementos especiais no mapa
+
+Os elementos são opcionais e adicionam funcionalidades ao mapa.
+*/
 i3GEO.gadgets = {
 	/*
 	Variable: PARAMETROS
@@ -47,6 +49,8 @@ i3GEO.gadgets = {
 		{idhtml:"localizarxy"},
 		"mostraEscalaNumerica":
 		{idhtml:"escala"},
+		"mostraEscalaGrafica":
+		{idhtml:"escalaGrafica"},
 		"mostraBuscaRapida":
 		{idhtml:"buscaRapida"},
 		"mostraVisual":
@@ -71,27 +75,18 @@ i3GEO.gadgets = {
 	
 	Parameters:
 	
-	locaplic {String} - localização da instalação do i3GEO. Por default será utilizado
-	i3GEO.configura.locapli
-	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
-	
-	sid {String} - código da seção i3Geo no servidor
-	
+
 	Return:
 	
 	{JSON} - objeto com x e y
 	*/
-	mostraCoordenadasUTM: function(locaplic,id,sid){
+	mostraCoordenadasUTM: function(id){
 		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 		{return;}
-		if(arguments.length == 0 || locaplic == "")
-		{var locaplic = i3GEO.configura.locaplic;}
-		if(arguments.length < 2 || locaplic == "" || id == "")
+		if(arguments.length == 0 || id == "")
 		{var id = i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml;}
-		if(arguments.length < 3 || locaplic == "" || id == "" || sid == "")
-		{var sid = i3GEO.configura.sid;}
 		var temp = $i(id);
 		if (!temp){return;}
 		if(temp.style.display == "block"){return;}
@@ -104,12 +99,7 @@ i3GEO.gadgets = {
 				return (retorno.data);
 			}
 		};
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&g_sid="+sid;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_persistent_connection(true);
-		cp.set_response_type("JSON");
-		cp.call(p,"geo2utm",mostra);
+		i3GEO.php.geo2utm(mostra,objposicaocursor.ddx,objposicaocursor.ddy);
 	},
 	/*
 	Function: mostraCoordenadasGEO
@@ -142,7 +132,7 @@ i3GEO.gadgets = {
 					ins += "<td>"+$inputText("","","ym","minuto","3","00")+"&nbsp;</td>";
 					ins += "<td>"+$inputText("","","ys","segundo","5","00.00")+"</td>";
 					var temp = 'var xxx = i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);';
-					temp +=	'var yyy = i3GEO.util.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
+					temp +=	'var yyy = i3GEO.calculo.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);';
 					temp +=	'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,xxx,yyy);';		
 					ins += "<td><img  class='tic' title='zoom' onclick='"+temp+"' src='"+i3GEO.util.$im("branco.gif")+"' id=procurarxy /></td>";
 					ins += "</tr></table>";
@@ -181,7 +171,7 @@ i3GEO.gadgets = {
 	A escala numérica pode ser alterada pelo usuário digitando-se a nova escala.
 		
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (escala)
+	id definido em i3GEO.gadgets.PARAMETROS
 	
 	Parameters:
 	
@@ -193,10 +183,15 @@ i3GEO.gadgets = {
 		{var id = i3GEO.gadgets.PARAMETROS.mostraEscalaNumerica.idhtml;}
 		if($i(id)){
 			atualizaEscalaNumerica = function(escala){
+				var e = $i("i3geo_escalanum");  
+				if(!e){
+					i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaNumerica()");
+					return;
+				}
 				if(arguments.length == 1)
-				$i("i3geo_escalanum").value = escala;
+				e.value = escala;
 				else
-				$i("i3geo_escalanum").value = parseInt(objmapa.scale);
+				e.value = parseInt(objmapa.scale);
 			};
 			if(!$i("i3geo_escalanum")){
 				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19","");
@@ -208,6 +203,47 @@ i3GEO.gadgets = {
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
+		}
+	},
+	/*
+	Function: mostraEscalaGrafica
+	
+	Mostra no mapa a escala grafica como um elemento fora do mapa.
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS(escala)
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/		
+	mostraEscalaGrafica: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraEscalaGrafica.idhtml;}
+		if($i(id)){
+			atualizaEscalaGrafica = function(){
+				var e = $i("imagemEscalaGrafica");  
+				if(!e){
+					i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaGrafica()");
+					return;
+				}
+				var temp = function(retorno){
+				
+					eval(retorno.data);
+					i3GEO.gadgets.quadros.grava("escala",scaimagem);
+					$i("imagemEscalaGrafica").src = scaimagem;
+				};
+				i3GEO.php.escalagrafica(temp);
+			};
+			if(!$i("imagemEscalaGrafica")){
+				
+				var ins = "<img class='menuarrow' src=\""+g_localimg+"/branco.gif\" title='op&ccedil;&otilde;es' onclick='i3GEO.mapa.dialogo.opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />"
+				$i(id).innerHTML = ins;
+			}
+			atualizaEscalaGrafica();
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaGrafica()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaGrafica()");}		
 		}
 	},
 	/*
@@ -285,7 +321,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: visual
+	Class: i3GEO.gadgets.visual
 	
 	Gera os ícones e controla as opções de modificação do visual do mapa.
 	
@@ -300,7 +336,7 @@ i3GEO.gadgets = {
 	*/
 	visual: {
 		/*
-		Property: visual.inicia
+		Function: inicia
 		
 		Constrói os ícones de escolha do visual.
 		
@@ -327,7 +363,7 @@ i3GEO.gadgets = {
 			}
 		},
 		/*
-		Property: visual.troca
+		Function: troca
 		
 		Troca o visual atual. A lista de visuais disponíveis é obtida em objmapa.listavisual
 		
@@ -400,14 +436,11 @@ i3GEO.gadgets = {
 			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
 			//
 			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaArquivos&g_sid="+i3GEO.configura.sid+"&diretorio=imagens/visual/"+visual;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaVisual",monta);
+			i3GEO.php.listaarquivos(monta,"imagens/visual/"+visual);
 		}
 	},
 	/*
-	Function: quadros
+	Class: i3GEO.gadgets.quadros
 	
 	Cria e controla o funcionamento dos quadros de animação.
 	
@@ -436,7 +469,7 @@ i3GEO.gadgets = {
 		*/
 		quadroatual: 0,
 		/*
-		Property: inicia
+		Function: inicia
 		
 		Gera os quadros e inicializa os objetos para armazenar as imagens
 		
@@ -468,9 +501,13 @@ i3GEO.gadgets = {
 				};
 			}
 			i3GEO.gadgets.quadros.quadroatual = 0;
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.quadros.avanca()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.avanca()");}
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.quadros.grava('extensao',objmapa.extent)") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.grava('extensao',objmapa.extent)");}
 		},
 		/*
-		Property: grava
+		Function: grava
 
 		Armazena um determinado valor em uma determinada característica de um objeto quadro.
 
@@ -486,7 +523,7 @@ i3GEO.gadgets = {
 			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
 		},
 		/*
-		Property: avanca
+		Function: avanca
 
 		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
 		*/		
@@ -500,7 +537,7 @@ i3GEO.gadgets = {
 			catch(e){var e = "";}		
 		},
 		/*
-		Property: zoom
+		Function: zoom
 		
 		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
 		
@@ -513,7 +550,7 @@ i3GEO.gadgets = {
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[indice].extensao)
 		},
 		/*
-		Property: trocaMapa
+		Function: trocaMapa
 		
 		Troca a imagem do mapa atual pela que estiver armazenada em quadro
 		
@@ -550,7 +587,7 @@ i3GEO.gadgets = {
 			}
 		},
 		/*
-		Property: opcoes
+		Function: opcoes
 		
 		Abre a janela de opções que controla as características do quado e permite disparar a animação.
 		
@@ -564,16 +601,13 @@ i3GEO.gadgets = {
 				var volta = function(){
 					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
 				};
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"desativacgi",volta);
+				i3GEO.php.desativacgi(volta);
 			}
 			else
 			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
 		},
 		/*
-		Property: anima
+		Function: anima
 		
 		Mostra as imagens armazenadas nos quadros em uma sequência animada
 		
@@ -601,15 +635,17 @@ i3GEO.gadgets = {
 			Qanima++;
 			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
 		},
+		/*
+		Function: listaImagens
+		
+		Lista as imagens armazenadas em uma nova página no navegador
+		*/
 		listaImagens: function(){
 			if (objmapa.utilizacgi == "sim"){
 				objmapa.utilizacgi = "nao";
 				var volta = function()
 				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=desativacgi&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"desativacgi",volta);
+				i3GEO.php.desativacgi(volta);
 			}
 			else{
 				var wi = window.open("");//"",null,"width=550,height=650,resizable=yes,scrollbars=yes");

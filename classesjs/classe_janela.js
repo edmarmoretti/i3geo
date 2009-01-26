@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.janela
-
-Abre janelas flutuantes
-
-As janelas são criadas por meio da biblioteca YUI
+Title: Janelas
 
 File: i3geo/classesjs/classe_janela.js
 
@@ -30,6 +26,13 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class:: i3GEO.janela
+
+Abre janelas flutuantes
+
+As janelas são criadas por meio da biblioteca YUI
+*/
 i3GEO.janela = {
 	/*
 	Property: ANTESCRIA
@@ -67,11 +70,6 @@ i3GEO.janela = {
 	Executa funções default antes de abrir a janela
 	*/
 	prepara: function(){
-		//
-		//esconde o mapa na interface flamingo se estiver ativa
-		//isso é necessário pq em flash as janelas não ficam por cima
-		//
-		if($i("flamingoi")){$i("flamingoi").style.display="none";}
 		//
 		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
 		//
@@ -166,6 +164,12 @@ i3GEO.janela = {
 		//YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
+	/*
+	Function: fecha
+	
+	Aplica a opção definida em ANTESFECHA e elimina alguns objetos que são comumente adicionados por algumas operações do i3geo
+	como richdraw, box, pin
+	*/
 	fecha: function(){
 		//if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
 		//{i3GEO.barraDeBotoes.ativaIcone("pan");}

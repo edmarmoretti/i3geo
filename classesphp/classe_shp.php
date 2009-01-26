@@ -193,10 +193,11 @@ $projecao - código epsg da projeção das coordenadas
 /*
 function: insereSHPgrafico
 
-Insere um ponto em um shape file no diretório local como um grafico
+Insere um ponto em um shape file, criado no diretório temporário, e adiciona ao mapa
+atual. O layer adicionado é representado como um símbolo, construído a partir de uma
+imagem temporária representando o gráfico criado.
 
 parameters:
-$tipo - Tipo de gráfico
 
 $x - Coordenada x.
 
@@ -215,8 +216,9 @@ $shadow_height - Tamanho da sombra do gráfico
 Include:
 <classe_atributos.php>, <graficopizza.php>
 */
-	function insereSHPgrafico($tipo,$x,$y,$itens,$imgurl,$width,$inclinacao,$shadow_height)
+	function insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height)
 	{
+		if(!isset($tipo)){$tipo = "pizza";}
 		//nome do novo tema
 		$temaedit = nomeRandomico();
 		//pega os valores
@@ -245,7 +247,7 @@ Include:
 			{
 				//gera a figura
 				include_once($this->locaplic."/classesphp/graficopizza.php");
-				$res = graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$imgurl,$this->arquivo,$temaedit);
+				$res = graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$this->arquivo,$temaedit);
 				$img = explode(",",$res);
 			}
 			//insere simbolo

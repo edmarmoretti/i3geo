@@ -90,7 +90,7 @@ function listaTemasLigados()
 	{
 		//var lista = (window.parent.objmapa.temas).split(";")
 		var lista = retorno.data;
-		var b = window.parent.convdmsf(xpt,ypt);
+		var b = window.parent.i3GEO.calculo.dd2dms(xpt,ypt);
 		var x = b[0].split(" ")
 		var y = b[1].split(" ")
 		var w = "W"
@@ -119,7 +119,7 @@ function listaTemasLigados()
 		if (g_locidentifica != "")
 		{
 			sistemasAdicionais = new Array()
-			ajaxexecASXml(g_locidentifica,"pegavalSistemas")
+			i3GEO.util.ajaxexecASXml(g_locidentifica,"pegavalSistemas")
 		}
 		if (window.parent.objmapa.temaAtivo == "")
 		{

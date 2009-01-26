@@ -93,7 +93,11 @@ Salva o mapfile atual
 /*
 Method: pegaMensagens
 
-Pega as mensagens do metadata mensagem
+Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual
+
+Return:
+
+{String}
 */
 	function pegaMensagens()
 	{

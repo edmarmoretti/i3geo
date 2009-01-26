@@ -1,7 +1,5 @@
 /*
-Class: i3GEO.navega
-
-Realiza operações de navegação do mapa, como zoom, pan, etc..
+Title: Navegação sobre o mapa
 
 File: i3geo/classesjs/classe_navega.js
 
@@ -28,6 +26,16 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.navega
+
+Realiza operações de navegação do mapa, como zoom, pan, etc..
+
+Quando todos os argumentos da função forem opcionais, basta usar nomeFuncao(),
+nos casos em que os primeiros argumentos forem opcionais e os demais obrigatórios,
+utilize "" no lugar do argumento que se quer usar o default, exemplo,
+nomeFuncao("","",10)
+*/
 i3GEO.navega = {
 	/*
 	Property: FATORZOOM
@@ -48,22 +56,18 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomin: function(locaplic,sid){
 		//YAHOO.log("zoomin", "i3geo");
-		if(arguments.length == 0){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+		if(arguments.length > 0){
+			i3GEO.configura.locaplic = locaplic;
+			i3GEO.configura.sid = sid;
 		}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=aproxima&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"aproxima",ajaxredesenha);
+		i3GEO.php.aproxima(ajaxredesenha,i3GEO.navega.FATORZOOM);
 	},
 	/*
 	Function: zoomout
@@ -72,23 +76,18 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomout: function(locaplic,sid){
 		//YAHOO.log("zoomout", "i3geo");
-		if(arguments.length == 0){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+		if(arguments.length > 0){
+			i3GEO.configura.locaplic = locaplic;
+			i3GEO.configura.sid = sid;
 		}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=afasta&nivel="+i3GEO.navega.FATORZOOM+"&g_sid="+sid;
-		//g_operacao = "navega";
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"afasta",ajaxredesenha);
+		i3GEO.php.afasta(ajaxredesenha,i3GEO.navega.FATORZOOM);
 	},
 	/*
 	Function: zoomponto
@@ -97,9 +96,9 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	x {Numeric} - coordenada em décimos de grau da longitude
 	
@@ -107,12 +106,10 @@ i3GEO.navega = {
 	*/
 	zoomponto: function(locaplic,sid,x,y){
 		//YAHOO.log("zoomponto", "i3geo");
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"zoomPonto",ajaxredesenha);
+		i3GEO.php.zoomponto(ajaxredesenha,x,y);
 	},
 	/*
 	Function: zoompontoIMG
@@ -121,21 +118,19 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	x {Numeric} - coordenada x da imagem
 	
 	y {Numeric} - coordenada y da imagem
 	*/
 	zoompontoIMG: function(locaplic,sid,x,y){
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&x="+x+"&y="+y+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"zoomPonto",ajaxredesenha);
+		i3GEO.php.pan(ajaxredesenha,"","",x,y);
 	},
 	/*
 	Function: xy2xy
@@ -144,9 +139,9 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	xi {Numeric} - coordenada x inicial
 	
@@ -161,6 +156,8 @@ i3GEO.navega = {
 	tipoimagem {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
 	*/
 	xy2xy: function(locaplic,sid,xi,yi,xf,yf,ext,tipoimagem){
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		var disty = (yi * -1) + yf;
 		var distx = (xi * -1) + xf;
 		var ex = ext.split(" ");
@@ -172,7 +169,7 @@ i3GEO.navega = {
 		{return false;}
 		else{
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
-			i3GEO.navega.zoomExt(locaplic,sid,tipoimagem,nex);
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,tipoimagem,nex);
 			return true;
 		}
 	},	
@@ -183,19 +180,17 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
 	*/	
 	localizaIP: function(locaplic,sid,funcao){
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		//YAHOO.log("localizaIP", "i3geo");
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=localizaIP&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"IP",funcao);
+		i3GEO.php.localizaIP(funcao);
 	},
 	/*
 	Function: zoomIP
@@ -204,16 +199,16 @@ i3GEO.navega = {
 
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomIP: function(locaplic,sid){
 		try
 		{
-			if(arguments.length == 0){
-				var locaplic = i3GEO.configura.locaplic;
-				var sid = i3GEO.configura.sid;
+			if(arguments.length > 0){
+				i3GEO.configura.locaplic = locaplic;
+				i3GEO.configura.sid = sid;
 			}
 			var mostraIP = function(retorno)
 			{
@@ -235,9 +230,9 @@ i3GEO.navega = {
 
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	tipoimagem {String} - Utlize "" para aplicar o default. Tipo de imagem que será retornada na imagem do mapa que será criada
 
@@ -245,14 +240,12 @@ i3GEO.navega = {
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
 		//YAHOO.log("zoomExt", "i3geo");
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		if(tipoimagem == "")
 		{var tipoimagem = "nenhum";}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaExtensao",ajaxredesenha);
+		i3GEO.php.mudaext(ajaxredesenha,tipoimagem,ext);
 	},
 	/*
 	Function: aplicaEscala
@@ -261,20 +254,18 @@ i3GEO.navega = {
 
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	
 	escala {Numeric} - denominador da escala
 	*/	
 	aplicaEscala: function(locaplic,sid,escala){
 		//YAHOO.log("aplicaescala", "i3geo");
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"mudaEscala",ajaxredesenha);
+		i3GEO.php.mudaescala(ajaxredesenha,escala);
 	},
 	/*
 	Function: panFixo
@@ -283,9 +274,9 @@ i3GEO.navega = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
-	sid {String} - código da seção aberta no servidor pelo i3geo
+	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 
 	direcao {String} - norte,sul,leste,oeste,sudeste,sudoeste,nordeste,noroeste
 	
@@ -297,6 +288,8 @@ i3GEO.navega = {
 	*/
 	panFixo: function(locaplic,sid,direcao,w,h,escala){
 		//YAHOO.log("panfixo", "i3geo");
+		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+		if(sid != ""){i3GEO.configura.sid = sid;}
 		if (direcao == "norte"){
 			var y = h / 6;
 			var x = w / 2;
@@ -330,11 +323,7 @@ i3GEO.navega = {
 			var x = w / 6;
 		}
 		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+escala+"&x="+x+"&y="+y+"&g_sid="+sid;
-		var cp = new cpaint();
-		cp.set_async("true");
-		cp.set_response_type("JSON");
-		cp.call(p,"pan",ajaxredesenha);
+		i3GEO.php.pan(ajaxredesenha,escala,tipo,x,y);
 	},
 	/*
 	Function: mostraRosaDosVentos
@@ -397,7 +386,7 @@ i3GEO.navega = {
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
 	},
 	/*
-	Function: autoRedesenho
+	Class: i3GEO.navega.autoRedesenho
 	
 	Controla o redesenho automático do mapa por meio de um temporizador
 	*/
@@ -421,7 +410,7 @@ i3GEO.navega = {
 		*/
 		ID: "tempoRedesenho",
 		/*
-		Property: ativa
+		Function: ativa
 		
 		Ativa o auto-redesenho do mapa
 		
@@ -442,7 +431,7 @@ i3GEO.navega = {
 			}
 		},
 		/*
-		Property: desativa
+		Function: desativa
 		
 		Desativa o auto-redesenho do mapa
 		*/
@@ -456,7 +445,7 @@ i3GEO.navega = {
 			{$i(i3GEO.navega.autoRedesenho.ID).style.display = "none";}
 		},
 		/*
-		Property: redesenha
+		Function: redesenha
 		
 		Redesenha o mapa quando o contador de tempo chegar a zero
 		*/
@@ -467,7 +456,7 @@ i3GEO.navega = {
 			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
 		},
 		/*
-		Property: contagem
+		Function: contagem
 		
 		Faz a contagem do tempo
 		*/
@@ -477,13 +466,13 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Function: zoomBox
+	Class: i3GEO.navega.zoomBox
 	
 	Controla o desenho de um box na tela para executar o zoom por box
 	*/
 	zoomBox: {
 		/*
-		Property: inicia
+		Function: inicia
 		
 		Marca o início do desenho do box, capturando a posição do mouse
 		*/
@@ -508,7 +497,7 @@ i3GEO.navega = {
 			{i3GEO.eventos.MOUSEUP.push("i3GEO.navega.zoomBox.termina()");}
 		},
 		/*
-		Property: criaBox
+		Function: criaBox
 		
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
@@ -552,7 +541,7 @@ i3GEO.navega = {
 			}
 		},
 		/*
-		Property: desloca
+		Function: desloca
 		
 		Desloca o box conforme o mouse é movimentado
 		*/
@@ -584,7 +573,7 @@ i3GEO.navega = {
 			}
 		},
 		/*
-		Property: termina
+		Function: termina
 		
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
@@ -618,7 +607,7 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Function: entorno
+	Class: i3GEO.navega.entorno
 	
 	Controla o desenho do entorno do mapa (modo tile)
 	*/
@@ -707,7 +696,7 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Function: lente
+	Class: i3GEO.navega.lente
 	
 	Ativa e controla a lente de aumento.
 	
@@ -722,13 +711,13 @@ i3GEO.navega = {
 		*/
 		ESTAATIVA: "nao",
 		/*
-		Variable: POSICAOX
+		Property: POSICAOX
 		
 		Define a posição em x da lente em relação ao corpo do mapa
 		*/
 		POSICAOX: 0,
 		/*
-		Variable: POSICAOY
+		Property: POSICAOY
 		
 		Define a posição em y da lente em relação ao corpo do mapa
 		*/
@@ -800,10 +789,7 @@ i3GEO.navega = {
 			};
 			if(i3GEO.navega.lente.ESTAATIVA == "sim"){
 				i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");			
-				cp.call(p,"lente",temp);
+				i3GEO.php.aplicaResolucao(temp,resolucao);
 			}
 			else{
 				i3GEO.navega.lente.desativa();
@@ -844,10 +830,48 @@ i3GEO.navega = {
 			catch(e){}
 		}
 	},
+	/*
+	Class: i3GEO.navega.destacaTema
+	
+	Destaca um tema mostrando-o sobre os outros em um box que segue o mouse
+	*/
 	destacaTema:{
+		/*
+		Property: TAMANHO
+		
+		Tamanho do box
+		
+		Type:
+		{Integer}
+		*/
 		TAMANHO: 75,
+		/*
+		Variable: ESTAATIVO
+		
+		Indica se o destaque está ou não ativo
+		
+		Type:
+		{sim|nao}
+		*/
 		ESTAATIVO: "nao",
+		/*
+		Variable: TEMA
+		
+		Tema que está sendo destacado
+		
+		Type:
+		{Código do tema}
+		*/
 		TEMA: "",
+		/*
+		Function: inicia
+		
+		Inicia o destaque de um tema
+		
+		Parameters:
+		
+		tema {String} - código do tema
+		*/
 		inicia: function(tema){
 			if (!$i("img_d")){
 				var novoel = document.createElement("div");
@@ -877,6 +901,13 @@ i3GEO.navega = {
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.navega.destacaTema.movimenta()") < 0)
 			{i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");}
 		},
+		/*
+		Function: atualiza
+		
+		Atualiza o destaque
+		
+		É definido para o evento de navegação do mapa
+		*/
 		atualiza: function(){
 			if(i3GEO.navega.destacaTema.ESTAATIVO == "nao")
 			{return;}
@@ -898,17 +929,26 @@ i3GEO.navega = {
 				i3GEO.janela.fechaAguarde("ajaxdestaca");	
 			};
 			i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+i3GEO.navega.destacaTema.TEMA+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			cp.set_response_type("JSON");	
-			cp.call(p,"geraDestaque",temp);		
+			i3GEO.php.geradestaque(temp,i3GEO.navega.destacaTema.TEMA);
 		},
+		/*
+		Function: desativa
+		
+		Desativa o destaque
+		*/
 		desativa: function(){
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.destacaTema.atualiza()");
 			i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");
 			i3GEO.navega.destacaTema.ESTAATIVO = "nao";
 			document.body.removeChild($i("div_d"));
 		},
+		/*
+		Function: movimenta
+		
+		Movimenta o destaque conforme o mouse move
+		
+		É definido para o evento de deslocamento do mouse
+		*/
 		movimenta: function(){
 			if(i3GEO.navega.destacaTema.ESTAATIVO == "sim")
 			$i("div_d").style.clip = 'rect('+(objposicaocursor.imgy - i3GEO.navega.destacaTema.TAMANHO)+" "+(objposicaocursor.imgx - 10)+" "+(objposicaocursor.imgy - 10)+" "+(objposicaocursor.imgx - i3GEO.navega.destacaTema.TAMANHO)+')';

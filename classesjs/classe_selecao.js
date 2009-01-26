@@ -1,7 +1,5 @@
 /*
-Class: i3GEO.selecao
-
-Realiza operações de seleção de elementos do mapa
+Title: Seleção de elementos
 
 File: i3geo/classesjs/classe_selecao.js
 
@@ -28,9 +26,117 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.selecao
+
+Realiza operações de seleção de elementos do mapa
+*/
 i3GEO.selecao = {
 	/*
-	Function: box
+	Function: porxy
+	
+	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
+	
+	Parameters:
+	
+	tema {String} - código do tema
+	
+	tipo {String} - tipo de operação adiciona|retira
+	
+	tolerancia {Integer} - tolerância de busca
+	*/
+	porxy: function(tema,tipo,tolerancia){
+		var retorna = function(retorno)
+		{ajaxredesenha(retorno);};
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
+	},
+	/*
+	Function: porbox
+	
+	Seleciona elementos de um tema com base em um retângulo
+	
+	Parameters:
+	
+	tema {String} - código do tema
+	
+	tipo {String} - tipo de operação adiciona|retira
+	
+	box {String} - xmin ymin xmax ymax
+	*/
+	porbox: function(tema,tipo,box){
+		var retorna = function(retorno)
+		{ajaxredesenha(retorno);};
+		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		i3GEO.php.selecaobox(retorna,tema,tipo,box);
+	},
+	/*
+	Function: janelaOpcoes
+	
+	Abre a janela de opções da ferramenta de seleção.
+	
+	A janela terá como id "wdocai"
+	*/
+	janelaOpcoes: function(){
+		g_tipoacao = "selecao";
+		objmapa.temaAtivo = "";
+		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}
+		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.selecao.atualizaGrafico()") < 0)
+		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.selecao.atualizaGrafico()");}
+
+		var temp = function(){
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.selecao.clique()");
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.selecao.atualizaGrafico()");
+			try{
+				i3GEO.desenho.richdraw.fecha();
+			}
+			catch(e){}
+			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
+			i3GEO.barraDeBotoes.ativaBotoes();
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+	},
+	/*
+	Function: atualizaGrafico
+	
+	Atualiza o gráfico de barras da ferramenta de seleção
+	
+	O gráfico é atualizado sempre que ocorrer uma nova seleção no mapa, o que implica no redesnho do mapa e
+	disparo do evento NAVEGAMAPA
+	*/
+	atualizaGrafico: function(){
+		if(g_tipoacao == "selecao"){
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			if(doc.getElementById("guia5obj")){
+				if(doc.getElementById("guia5obj").style.display=="block"){
+					if(window.parent.frames["wdocai"].atualizaGrafico)
+					{window.parent.frames["wdocai"].atualizaGrafico();}
+				}
+			}
+		}		
+	},
+	/*
+	Function: clique
+	
+	Seleciona elementos clicando no mapa
+	*/
+	clique: function(){
+		if (g_tipoacao == "selecao"){
+			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			var tipo = "adiciona";
+			//pega o tipo de operacao da janela de selecao
+			if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
+			if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+			var tolerancia = doc.getElementById("toleranciapt").value;
+			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
+			if ((tipo != "limpa") && (tipo != "inverte"))
+			{i3GEO.selecao.porxy(objmapa.temaAtivo,tipo,tolerancia);}
+		}
+	},
+	/*
+	Class: i3GEO.selecao.box
 	
 	Controla o desenho do box para a seleção e executa a função de seleção
 	*/
@@ -61,7 +167,7 @@ i3GEO.selecao = {
 			{i3GEO.eventos.MOUSEUP.push("i3GEO.selecao.box.termina()");}
 		},
 		/*
-		Property: criaBox
+		Function: criaBox
 		
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
@@ -105,7 +211,7 @@ i3GEO.selecao = {
 			}
 		},
 		/*
-		Property: desloca
+		Function: desloca
 		
 		Desloca o box conforme o mouse é movimentado
 		*/
@@ -137,7 +243,7 @@ i3GEO.selecao = {
 			}
 		},
 		/*
-		Property: termina
+		Function: termina
 		
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
@@ -177,48 +283,16 @@ i3GEO.selecao = {
 		}
 	},
 	/*
-	Function: janelaOpcoes
+	Class: i3GEO.selecao.poligono
 	
-	Abre a janela de opções da ferramenta de seleção.
-	
-	A janela terá como id "wdocai"
+	Realiza a seleção desenhando um polígono no mapa
 	*/
-	janelaOpcoes: function(){
-		g_tipoacao = "selecao";
-		objmapa.temaAtivo = "";
-		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}
-		var temp = function(){
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.selecao.clique()");
-			try{
-				i3GEO.desenho.richdraw.fecha();
-			}
-			catch(e){}
-			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
-			i3GEO.barraDeBotoes.ativaBotoes();
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	},
-	/*
-	Function: clique
-	
-	Seleciona elementos clicando no mapa
-	*/
-	clique: function(){
-		if (g_tipoacao == "selecao"){
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var tipo = "adiciona";
-			//pega o tipo de operacao da janela de selecao
-			if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
-			if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-			var tolerancia = doc.getElementById("toleranciapt").value;
-			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-			if ((tipo != "limpa") && (tipo != "inverte"))
-			{i3GEO.selecao.porxy(objmapa.temaAtivo,tipo,tolerancia);}
-		}
-	},
 	poligono:{
+		/*
+		Function: inicia
+		
+		Inicia o desenho do polígono
+		*/
 		inicia: function(){
 			try{i3GEO.desenho.richdraw.fecha()}catch(e){}
 			i3GEO.util.insereMarca.limpa()
@@ -233,6 +307,11 @@ i3GEO.selecao = {
 			if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.poligono.clique()") < 0)
 			{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.poligono.clique()");}
 		},
+		/*
+		Function: move
+		
+		Modifica o polígono conforme o usuário cria vértices
+		*/
 		move: function(){
 			if (g_tipoacao == "selecaopoli"){
 				var n = pontosdistobj.xpt.length;
@@ -253,6 +332,11 @@ i3GEO.selecao = {
 				}
 			}
 		},
+		/*
+		Function: clique
+		
+		Inclui um novo vértice no polígono
+		*/
 		clique: function(){
 			if (g_tipoacao != "selecaopoli"){return;}
 			var n = pontosdistobj.xpt.length;
@@ -290,6 +374,11 @@ i3GEO.selecao = {
 			}
 			i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.selecao.poligono.termina,"pontospoli");
 		},
+		/*
+		Function: termina
+		
+		Termina o desenho do polígono e executa a operação de seleção
+		*/
 		termina: function(){
 			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			var pontos = pontosdistobj;
@@ -310,53 +399,5 @@ i3GEO.selecao = {
 			cp.set_response_type("JSON");
 			cp.call(p,"selecaoPoli",retorna,xs,ys,doc.getElementById("comboTemas").value,doc.getElementById("tipoOperacao").value);
 		}
-	},
-	/*
-	Function: porxy
-	
-	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
-	
-	Parameters:
-	
-	tema {String} - código do tema
-	
-	tipo {String} - tipo de operação adiciona|retira
-	
-	tolerancia {Integer} - tolerância de busca
-	*/
-	porxy: function(tema,tipo,tolerancia){
-		var retorna = function(retorno)
-		{ajaxredesenha(retorno);};
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+tema+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+i3GEO.configura.sid;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"selecaoPT",retorna);
-	},
-	/*
-	Function: porbox
-	
-	Seleciona elementos de um tema com base em um retângulo
-	
-	Parameters:
-	
-	tema {String} - código do tema
-	
-	tipo {String} - tipo de operação adiciona|retira
-	
-	box {String} - xmin ymin xmax ymax
-	*/
-	porbox: function(tema,tipo,box){
-		var retorna = function(retorno)
-		{ajaxredesenha(retorno);};
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+box+"&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+tema;
-		var cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"selecaobox",retorna);
-	
-	},
-	porpoligono: function(){
-	
 	}
 };

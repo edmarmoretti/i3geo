@@ -78,6 +78,7 @@ packer("classe_desenho.js","compactados/classe_desenho_compacto.js","Normal");
 packer("classe_tema.js","compactados/classe_tema_compacto.js","Normal");
 packer("classe_analise.js","compactados/classe_analise_compacto.js","Normal");
 packer("classe_php.js","compactados/classe_php_compacto.js","Normal");
+packer("classe_interface.js","compactados/classe_interface_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -110,6 +111,7 @@ $jsfiles = array(
 "classe_util.js",
 "classe_calculo.js",
 "classe_desenho.js",
+"classe_interface.js",
 "classe_mapa.js",
 "classe_tema.js",
 "classe_analise.js",

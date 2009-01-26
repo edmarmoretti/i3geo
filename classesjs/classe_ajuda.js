@@ -1,10 +1,5 @@
 /*
-Class: i3GEO.ajuda
-
-Manipulação das janelas de ajuda e outras coisas relacionadas.
-
-Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conteúdo.
-Controla também o letreiro móvel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
+Title: Ajuda
 
 File: i3geo/classesjs/classe_ajuda.js
 
@@ -31,6 +26,24 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.ajuda
+
+Manipulação das janelas de ajuda e outras coisas relacionadas.
+
+Permite definir a mensagem padrão da janela de mensagens. Abrir a janela e definir seu conteúdo.
+Controla também o letreiro móvel que mostra mensagens especiais definidas em cada layer adicionado ao mapa.
+
+Exemplos:
+
+	Se vc não quiser que a janela seja aberta, inclua em seu HTML ou javascript
+	
+	i3GEO.ajuda.ATIVAJANELA = false;
+	
+	Para enviar uma mensagem para a janela, utilize
+	
+	i3GEO.ajuda.mostraJanela("texto");
+*/
 i3GEO.ajuda = {
 	/*
 	Property: ATIVAJANELA
@@ -85,9 +98,18 @@ i3GEO.ajuda = {
 	*/
 	MENSAGEMPADRAO: "",	
 	/*
-	Function: i3GEO.ajuda.abreJanela
+	Function: abreDoc
+
+	Abre a documentacao do i3geo em uma nova janela do navegador
+	*/
+	abreDoc: function()
+	{window.open(i3GEO.configura.locaplic+"/documentacao/index.html");},
+	/*
+	Function: abreJanela
 	
 	Abre a janela flutuante para mostrar as mensagens de ajuda.
+	
+	Essa função é executada na inicialização do i3GEO
 	*/
 	abreJanela: function(){
 		try	{
@@ -110,7 +132,7 @@ i3GEO.ajuda = {
 		catch(e){}
 	},
 	/*
-	Function: i3GEO.ajuda.ativaCookie
+	Function: ativaCookie
 	
 	Ativa o cookie g_janelaMen e inclui o valor "sim".
 	
@@ -122,7 +144,7 @@ i3GEO.ajuda = {
 		i3GEO.util.insereCookie("g_janelaMen","sim");
 	},
 	/*
-	Function: i3GEO.ajuda.ativaLetreiro
+	Function: ativaLetreiro
 	
 	Busca mensagens no metadata "MENSAGEM" existentes nos layers do mapa.
 	
@@ -132,49 +154,44 @@ i3GEO.ajuda = {
 	
 	Parameters:
 	
-	locaplic {String} - endereço do i3geo para a chamada ajax
-	
-	sid {String} - códigoda seção no servidor
+	mensagem {String} - (opcional) texto que será mostrado no letreiro. Se não for informado
+	será utilizado a variável objmapa.mensagens
 	*/
-	ativaLetreiro: function(locaplic,sid){
+	ativaLetreiro: function(mensagem){
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
+			if(arguments.length == 0)
+			{var mensagem = objmapa.mensagens;}
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.ajuda.ativaLetreiro()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.ajuda.ativaLetreiro()");}					
 			try
 			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
 			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
 			var l= $i(i3GEO.ajuda.DIVLETREIRO);
 			if(l.style.display=="none"){return;}
 			l.style.cursor="pointer";
-			var montaLetreiro = function(retorno)
-			{
-				if(retorno.data == ""){
-					l.value = "";
-					return;
-				}
-				if (l.size == 1)
-				{l.size = objmapa.w / 8;}
-				BMessage = retorno.data + " ---Clique para parar--- ";
-				l.onclick = function()
-				{l.style.display = "none";};
-				if (BMessage != " ---Clique para parar--- ")
-				{
-					BQuantas = 0;
-					BSize = l.size;
-					BPos=BSize;
-					BSpeed = 1;
-					BSpaces = "";
-					i3GEO.ajuda.mostraLetreiro();
-				}
-			};
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			var p = locaplic+"/classesphp/mapa_controle.php?funcao=pegaMensagens&g_sid="+sid;
-			cp.call(p,"pegaMensagem",montaLetreiro);	
+			if(mensagem == ""){
+				l.value = "";
+				return;
+			}
+			if (l.size == 1)
+			{l.size = objmapa.w / 8;}
+			BMessage = mensagem + " ---Clique para parar--- ";
+			l.onclick = function()
+			{l.style.display = "none";};
+			if (BMessage != " ---Clique para parar--- "){
+				BQuantas = 0;
+				BSize = l.size;
+				BPos=BSize;
+				BSpeed = 1;
+				BSpaces = "";
+				i3GEO.ajuda.mostraLetreiro();
+			}
+			i3GEO.ajuda.mostraLetreiro(mensagem);
 		}
 	},
 	/*
-	Function: i3GEO.ajuda.desativaCookie
+	Function: desativaCookie
 	
 	Desativa o cookie g_janelaMen.
 	
@@ -185,8 +202,8 @@ i3GEO.ajuda = {
 	desativaCookie: function(){
 		i3GEO.util.insereCookie("g_janelaMen","nao");
 	},
-	/**
-	Function: i3GEO.ajuda.fechaJanela. 
+	/*
+	Function: fechaJanela. 
 	
 	Fecha a janela de ajuda.
 	*/
@@ -195,7 +212,7 @@ i3GEO.ajuda = {
 		document.body.removeChild($i("i3geo_janelaMensagens_c"));
 	},
 	/*
-	Function: i3GEO.ajuda.mostraJanela
+	Function: mostraJanela
 	
 	Mostra um texto dentro da janela de mensagens padrão.
 	
@@ -215,7 +232,7 @@ i3GEO.ajuda = {
 		}
 	},
 	/*
-	Private: i3GEO.ajuda.mostraLetreiro
+	Private: mostraLetreiro
 	
 	Preenche o elemento INPUT com a mesnagem de texto e faz a movimentação das letras.
 	
@@ -235,14 +252,7 @@ i3GEO.ajuda = {
 		BPos-=BSpeed;
 		if (BQuantas < 2)
 		i3GEO.ajuda.tempoLetreiro = setTimeout('i3GEO.ajuda.mostraLetreiro();', 140);
-	},
-	/*
-	Function: abreDoc
-
-	Abre a documentacao do i3geo.
-	*/
-	abreDoc: function()
-	{window.open(i3GEO.configura.locaplic+"/documentacao/index.html");}	
+	}
 };
 //
 //para efeitos de compatibilidade

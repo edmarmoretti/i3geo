@@ -94,7 +94,7 @@ var indexSectionsWithContent = {
       "Numbers": false,
       "A": true,
       "B": false,
-      "C": true,
+      "C": false,
       "D": true,
       "E": false,
       "F": false,
@@ -123,9 +123,9 @@ var indexSectionsWithContent = {
       "Symbols": false,
       "Numbers": false,
       "A": true,
-      "B": false,
+      "B": true,
       "C": false,
-      "D": false,
+      "D": true,
       "E": true,
       "F": false,
       "G": false,
@@ -147,7 +147,7 @@ var indexSectionsWithContent = {
       "W": false,
       "X": false,
       "Y": false,
-      "Z": false
+      "Z": true
       },
    "Properties": {
       "Symbols": false,

@@ -473,7 +473,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 /*
 function: inverteStatusClasse
 
-Inverte o status a uma classe.
+Inverte o status a uma classe desligando ou desligando, conforme o status atual.
 
 Parameters:
 

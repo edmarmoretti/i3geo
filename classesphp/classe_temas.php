@@ -298,7 +298,7 @@ Altera a ordem de armazenamento dos layers no mapfile.
 /*
 function: reordenatemas
 
-Reordena os temas baseados na localização de um segundo tema no mapa.
+Reordena os temas baseados em uma lista com a nova ordem.
 
 Parameters:
 
@@ -306,8 +306,6 @@ lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas 
 */
 	function reordenatemas($lista)
 	{
-		//$do = $this->mapa->getlayersdrawingorder();
-		//var_dump($do);
 		$nlayers = $this->mapa->numlayers;
 		$lista = explode(",",$lista);
 		$lista = array_reverse($lista);

@@ -164,9 +164,10 @@ Salva o mapfile atual
 /*
 function: criaLegenda
 
-Gera a legenda processando o template HTML.
+Gera a legenda processando o template HTML definido na construção da classe.
 
-return:
+Return:
+
 string com a legenda HTML
 */
 	function criaLegenda()

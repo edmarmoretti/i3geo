@@ -1,11 +1,5 @@
 /*
-Class:: i3GEO.eventos
-
-Controla as operações que são executadas em eventos que ocorrem no mapa.
-
-As listas de operações consistem em variáveis com nomes de funções.
-
-As listas são inicializadas com algunmas funções já embutidas, mas podem ser acrescentadas outras.
+Title: Eventos
 
 File: i3geo/classesjs/classe_eventos.js
 
@@ -32,6 +26,27 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.eventos
+
+Controla as operações que são executadas em eventos que ocorrem no mapa.
+
+As listas de operações consistem em variáveis com nomes de funções.
+
+As listas são inicializadas com algunmas funções já embutidas, mas podem ser acrescentadas outras.
+
+Exemplos:
+
+	Para incluir uma função em um determinado evento utilize
+
+	if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
+	
+	{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
+
+	Para remover utilize
+	
+	i3GEO.eventos.NAVEGAMAPA.remove("atualizaEscalaNumerica()");
+*/
 i3GEO.eventos = {
 	/*
 	Variable: NAVEGAMAPA
@@ -143,7 +158,7 @@ i3GEO.eventos = {
 					var temp = i3GEO.eventos.NAVEGAMAPA[f].replace("()", "");
 					if(eval('typeof ' + temp) == 'function'){
 						eval(i3GEO.eventos.NAVEGAMAPA[f]);
-						YAHOO.log("navegaMapa", "i3geo");
+						//YAHOO.log("navegaMapa", "i3geo");
 					}
 				}
 				while(f--)

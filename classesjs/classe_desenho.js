@@ -1,11 +1,5 @@
 /*
-Class: i3GEO.desenho
-
-Controla as operações de desenho sobre o mapa
-
-Por desenho, entende-se elementos que são incluídos graficamente no mapa,
-como por exemplo, linhas, pontos, círculos, etc e que não compõem layers
-com dados
+Title: Desenho de elementos gráficos
 
 File: i3geo/classesjs/classe_desenho.js
 
@@ -32,7 +26,15 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.desenho
 
+Controla as operações de desenho sobre o mapa
+
+Por desenho, entende-se elementos que são incluídos graficamente no mapa,
+como por exemplo, linhas, pontos, círculos, etc e que não compõem layers
+com dados
+*/
 i3GEO.desenho = {
 	/*
 	Variable: richdraw

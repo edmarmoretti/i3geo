@@ -1,9 +1,5 @@
 /*
-Class:: i3GEO.guias
-
-Cria e controla as guias de opções
-
-Para configurar as guias utilize i3GEO.guias.configura = ...
+Title: Guias
 
 File: i3geo/classesjs/classe_guias.js
 
@@ -30,9 +26,16 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+/*
+Class: i3GEO.guias
+
+Cria e controla as guias de opções
+
+Para configurar as guias utilize i3GEO.guias.configura = ...
+*/
 i3GEO.guias = {
 	/*
-	Variable: CONFIGURA
+	Property: CONFIGURA
 	
 	Define os parâmetros de cada guia
 	
@@ -113,10 +116,7 @@ i3GEO.guias = {
 				};
 				$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
 				i3GEO.guias.mostra("mapas");
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaMapas&g_sid="+i3GEO.configura.sid;
-				var cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"pegaMapas",pegaMapas);
+				i3GEO.php.pegaMapas(pegaMapas);
 			}
 		},
 	},
@@ -236,6 +236,8 @@ i3GEO.guias = {
 		i3GEO.guias.ativa(i3GEO.guias.ATUAL);
 	},
 	/*
+	Function: mostra
+	
 	Mostra no mapa uma determinada guia
 	
 	Parameters:
@@ -266,6 +268,15 @@ i3GEO.guias = {
 			i3GEO.guias.ATUAL = guia;
 		}
 	},
+	/*
+	Function: ativa
+	
+	Ativa uma determinada guia
+	
+	Parameters:
+	
+	guia {String} - guia que será ativada
+	*/
 	ativa: function(guia){
 		try{
 			if(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click != "")
@@ -372,11 +383,7 @@ i3GEO.guias = {
 				i.style.width = "270px";
 			};	
 			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+i3GEO.configura.sid;
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"mudaQS",temp);
+			i3GEO.php.mudatamanho(temp,a,l);
 		}
 		else{
 			YAHOO.janelaguias.xp.panel.render();

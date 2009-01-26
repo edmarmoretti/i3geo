@@ -37,6 +37,7 @@ var jsfiles = new Array(
 "classe_util.js",
 "classe_calculo.js",
 "classe_desenho.js",
+"classe_interface.js",
 "classe_mapa.js",
 "classe_tema.js",
 "classe_analise.js",
