@@ -116,7 +116,7 @@ function aplicar(tipo)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"insereFeature",window.parent.ajaxredesenha);
+	cp.call(p,"insereFeature",window.parent.i3GEO.atualiza);
 }
 //insere um ponto digitando os valores dms
 function inserir()

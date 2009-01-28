@@ -26,7 +26,7 @@ buscascielo()
 function buscascielo()
 {
 	$i("resultadoscielo").innerHTML = "Aguarde...";
-	if (window.parent.objmapa.scale > 150001)
+	if (window.parent.i3GEO.parametros.mapscale > 150001)
 	{
 		var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
 		ins += "<br><br><div style=width:80px onclick='ajustarescala()' ></div>" //<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -43,7 +43,7 @@ function buscascielo()
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/ferramentas/scielo/funcoes.php?funcao=listaartigos&ret="+window.parent.objmapa.extent;
+	var p = g_locaplic+"/ferramentas/scielo/funcoes.php?funcao=listaartigos&ret="+window.parent.i3GEO.parametros.mapexten;
 	cp.call(p,"listaartigos",listaartigos);
 }
 function listaartigos(retorno)
@@ -70,5 +70,5 @@ function ajustarescala()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
-	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
+	cp.call(p,"mudaescala",window.parent.i3GEO.atualiza);
 }

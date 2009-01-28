@@ -326,7 +326,7 @@ function ativaself()
 	cp.set_response_type("JSON");
 	window.parent.g_operacao = "selecao"
 	var fim = function()
-	{aguarde("none");window.parent.ajaxredesenha("")}
+	{aguarde("none");window.parent.i3GEO.atualiza("")}
 	cp.call(p,"incluiSel",fim);
 }
 //limpa selecao no mapa
@@ -415,7 +415,7 @@ function criatemaf()
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	aguarde("none");
-	cp.call(p,"selecao2tema",window.parent.ajaxredesenha);
+	cp.call(p,"selecao2tema",window.parent.i3GEO.atualiza);
 }
 //termina
 function concluidof()

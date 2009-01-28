@@ -65,8 +65,6 @@ packer("classe_ajuda.js","compactados/classe_ajuda_compacto.js","Normal");
 packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("classe_configura.js","compactados/classe_configura_compacto.js","Normal");
 packer("classe_navega.js","compactados/classe_navega_compacto.js","Normal");
-packer("redesenho.js","compactados/redesenho_compacto.js","Normal");
-packer("iniciamma.js","compactados/iniciamma_compacto.js","Normal");
 packer("menususpenso.js","compactados/menususpenso_compacto.js","Normal");
 packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
 packer("classe_eventos.js","compactados/classe_eventos_compacto.js","Normal");
@@ -79,6 +77,7 @@ packer("classe_tema.js","compactados/classe_tema_compacto.js","Normal");
 packer("classe_analise.js","compactados/classe_analise_compacto.js","Normal");
 packer("classe_php.js","compactados/classe_php_compacto.js","Normal");
 packer("classe_interface.js","compactados/classe_interface_compacto.js","Normal");
+packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -99,12 +98,10 @@ $jsfiles = array(
 "../pacotes/yui252/build/autocomplete/autocomplete.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js",
 "../pacotes/yui252/build/treeview/treeview.js",
-//"../pacotes/jsobjects/jsUI-Global/common_compacto.js",
-//"../pacotes/jsobjects/jsUI-Global/uiCommon_compacto.js",
-//"../pacotes/jsobjects/jsUI-Treeview/component_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+"classe_i3geo.js",
 "classe_php.js",
 "classe_configura.js",
 "depreciados.js",
@@ -128,8 +125,6 @@ $jsfiles = array(
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
-"redesenho.js",
-"iniciamma.js",
 "menususpenso.js",
 "classe_gadgets.js"
 );

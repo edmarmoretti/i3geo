@@ -100,7 +100,7 @@ function criargrade()
 		if (retorno.data==undefined )
 		{$i("fim").innerHTML = "Erro. A operação demorou muito.";}
 		else
-		{window.parent.ajaxredesenha("");}
+		{window.parent.i3GEO.atualiza("");}
 	}
 	aguarde("block")
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=gradedehex&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty

@@ -110,5 +110,5 @@ function seltema(nome,titulo,prj,serv)
 	var cp = new cpaint();
 	cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"importawfs",window.parent.ajaxredesenha);	
+	cp.call(p,"importawfs",window.parent.i3GEO.atualiza);	
 }

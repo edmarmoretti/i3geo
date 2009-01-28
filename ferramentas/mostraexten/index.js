@@ -41,7 +41,7 @@ YAHOO.example.init = function ()
 	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
-$i("extatual").innerHTML = window.parent.objmapa.extent
+$i("extatual").innerHTML = window.parent.i3GEO.parametros.mapexten
 function aplicar()
 {
 	try
@@ -50,7 +50,7 @@ function aplicar()
 		{
 			eval(retorno.data)
 			$i("extatual").innerHTML = mapexten
-			window.parent.ajaxredesenha("")
+			window.parent.i3GEO.atualiza("")
 		}
 		var x = window.parent.convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
 		var xx = window.parent.convdmsddf($i("xxg").value,$i("xxm").value,$i("xxs").value);

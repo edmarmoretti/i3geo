@@ -70,11 +70,14 @@ include_once("pega_variaveis.php");
 //
 include_once("funcoes_gerais.php");
 $req = ms_newowsrequestobj();
+
 $tipo = "";
+//var_dump($_GET);
 foreach ($_GET as $k=>$v)
 {
 	$req->setParameter($k, $v);
 }
+
 $req->setParameter("VeRsIoN","1.1.0");
 $oMap = ms_newMapobj("../aplicmap/ogcws.map");
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
@@ -128,6 +131,7 @@ for ($i=0;$i < $c;++$i)
 	ms_newLayerObj($oMap, $l);
 }
 //$req->setParameter("LAYERS","i3geoogc");
+
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();

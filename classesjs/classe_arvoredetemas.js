@@ -960,9 +960,9 @@ i3GEO.arvoreDeTemas = {
 		//
 		//zera o contador de tempo
 		//
-		clearTimeout(objmapa.tempo);
-		objmapa.tempo = "";
-		objmapa.temaAtivo = "";
+		clearTimeout(tempoBotaoAplicar);
+		tempoBotaoAplicar = "";
+		i3GEO.temaAtivo = "";
 		//
 		//pega os temas ativados na árvore de menus
 		//
@@ -972,14 +972,14 @@ i3GEO.arvoreDeTemas = {
 		//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
 		//
 		if(tsl.length > 0){
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			var temp = function(retorno){
-				i3GEO.janela.fechaAguarde("ajaxredesenha");
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 				if(retorno.data.erro){
 					alert(retorno.data.erro);
 					return;
 				}
-				ajaxredesenha();					
+				i3GEO.atualiza();					
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}

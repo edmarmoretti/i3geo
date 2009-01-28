@@ -93,7 +93,7 @@ function cruza()
 			if (retorno.data==undefined )
 			{$i("fim").innerHTML = "Erro. A operação demorou muito.";}
 			else
-			{window.parent.ajaxredesenha("");}
+			{window.parent.i3GEO.atualiza("");}
 		}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=pontoEmPoligono&temaPt="+$i("temasPt").value+"&temasPo="+tsl.join(",")
 		aguarde("block")

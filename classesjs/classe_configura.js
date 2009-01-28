@@ -36,6 +36,20 @@ o funcionamento do i3geo.
 */
 i3GEO.configura = {
 	/*
+	Variable: mashuppar
+	
+	Define os parâmetros que devem ser aplicados no modo mashup
+	
+	O modo mashup possibilita que o i3Geo seja embutido dentro de uma página HTML. Nesse
+	caso, o mapa não é criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php
+	A variavel mashuppar deve conter os parâmetros que são utilizados pelo programa ms_criamapa
+	
+	Exemplo:
+	
+	i3GEO.configura.mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+	*/
+	mashuppar: "",
+	/*
 	Variable: sid
 	
 	Código da seção aberta pelo i3Geo no servidor.
@@ -163,7 +177,7 @@ i3GEO.configura = {
 	Type:
 	{sim|nao}
 	*/	
-	mostraRosaDosVentos: "sim",
+	mostraRosaDosVentos: "nao",
 	/*
 	Variable: liberaGuias
 	

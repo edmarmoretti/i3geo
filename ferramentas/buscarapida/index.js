@@ -104,9 +104,9 @@ function adicionatema(obj)
 {
 	if (obj.checked)
 	{
-		window.parent.objaguarde.abre("ajaxredesenha","Aguarde...");
+		window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");
 		var temp = function()
-		{window.parent.ajaxredesenha("");}
+		{window.parent.i3GEO.atualiza("");}
 		var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+obj.value+"&g_sid="+g_sid;
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -134,8 +134,8 @@ function mostraxy(wkt)
 	y.sort(sortNumber)
 	yMin = y[0]
 	yMax = y[(y.length)-1]
- 	var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
- 	var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+ 	var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 	window.parent.i3GEO.util.criaBox("boxg")
 	var box = window.parent.$i("boxg")
 	var w = xyMax[0]-xyMin[0]
@@ -159,7 +159,7 @@ function zoom(wkt,layer,gid,nm)
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"mudaExtensao",window.parent.ajaxredesenha);
+		cp.call(p,"mudaExtensao",window.parent.i3GEO.atualiza);
     }
 	var re = new RegExp("POLYGON", "g")
 	wkt = wkt.replace(re,"")
@@ -180,7 +180,7 @@ function zoom(wkt,layer,gid,nm)
 	yMin = y[0]
 	yMax = y[(y.length)-1]
 	var ext = xMin+" "+yMin+" "+xMax+" "+yMax
-	window.parent.objaguarde.abre("ajaxredesenha","Aguarde...");
+	window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+ext+"&g_sid="+g_sid;
 	var cp = new cpaint();
 	//cp.set_debug(2)

@@ -26,7 +26,7 @@ buscawiki()
 function buscawiki()
 {
 	$i("resultadowiki").innerHTML = "Aguarde...";
-	if (window.parent.objmapa.scale > 500001)
+	if (window.parent.i3GEO.parametros.mapscale > 500001)
 	{
 		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:500.000)!";
 		ins += "<br><br><div onclick='ajustarescala()' >"//<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -43,7 +43,7 @@ function buscawiki()
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+window.parent.objmapa.extent;
+	var p = g_locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+window.parent.i3GEO.parametros.mapexten;
 	cp.call(p,"listaartigos",listaartigos);
 }
 function listaartigos(retorno)

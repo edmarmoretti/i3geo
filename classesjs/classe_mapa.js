@@ -41,8 +41,12 @@ i3GEO.mapa = {
 	Ajusta o posicionamento do corpo do mapa
 	
 	Esse ajuste é necessário na inicialização, uma vez que o mapa utiliza style.position='absolute'
+	
+	Parameters:
+	
+	elemento {String} - id do elemento HTML que deverá ser ajustado e que contém o mapa
 	*/
-	ajustaPosicao: function(){
+	ajustaPosicao: function(elemento){
 		try{
 			imagemxi = 0;
 			imagemyi = 0;
@@ -52,38 +56,19 @@ i3GEO.mapa = {
 			if(!dc){return;}
 			if (dc.style.left){imagemxi += parseInt(dc.style.left);}
 			if (dc.style.top){imagemyi += parseInt(dc.style.top);}	
-			if ($i("contemImg"))
-			{var dc = $i("contemImg");}
-			else
-			{var dc = $i("img");}
-			if ($i("openlayers"))
-			{var dc = $i("openlayers");}
-			if ($i("flamingo"))
-			{var dc = $i("flamingo");}
+			var dc = $i(elemento);
 			while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo")){
 				dc = dc.offsetParent;
 				imagemxi = imagemxi + dc.offsetLeft;
 				imagemyi = imagemyi + dc.offsetTop;
-			}
-			var c = $i("corpoMapa");
+			}	
+			var c = $i(i3GEO.interface.IDCORPO);
 			if (c){
 				c.style.position="absolute";
-				$left("corpoMapa",imagemxi);
-				$top("corpoMapa",imagemyi);
-				if ($i("i3geo").style.left){$left("corpoMapa",imagemxi - parseInt($i("i3geo").style.left));}
-				if ($i("i3geo").style.top){$top("corpoMapa",imagemyi - parseInt($i("i3geo").style.top));}
-			}
-			if ($i("ref")){
-				var dc = $i("ref");
-				while (dc.offsetParent.id != "i3geo"){
-					dc = dc.offsetParent;
-					imagemxref = imagemxref + dc.offsetLeft;
-					imagemyref = imagemyref + dc.offsetTop;
-				}
-			}
-			if ($i("aguarde")){
-				$top("aguarde",imagemyi);
-				$left("aguarde",imagemxi);
+				$left(i3GEO.interface.IDCORPO,imagemxi);
+				$top(i3GEO.interface.IDCORPO,imagemyi);
+				if ($i("i3geo").style.left){$left(i3GEO.interface.IDCORPO,imagemxi - parseInt($i("i3geo").style.left));}
+				if ($i("i3geo").style.top){$top(i3GEO.interface.IDCORPO,imagemyi - parseInt($i("i3geo").style.top));}
 			}
 		}
 		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}
@@ -92,10 +77,9 @@ i3GEO.mapa = {
 	Function: ativaLogo
 
 	Ativa ou desativa a logo marca.
-
 	*/
 	ativaLogo: function(){
-		i3GEO.php.ativalogo(ajaxredesenha);
+		i3GEO.php.ativalogo(i3GEO.atualiza);
 	},
 	/*
 	Function: insereToponimo
@@ -138,12 +122,12 @@ i3GEO.mapa = {
 			var digi = function(retorno){
 				//se texto for igual a vazio é pq o valor foi pego de um atributo
 				if(texto == ""){
-					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 					texto = retorno.data;
 				}
 				if (texto != " "){
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					i3GEO.php.insereAnnotation(ajaxredesenha,g_nomepin+"topo",objposicaocursor.ddx+" "+objposicaocursor.ddy,texto,pos,pl,ox,oy,mf,md,forca,fcs,fxs,fys,m,c,ys,xs,cs,cf,a,t,f);
+					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+					i3GEO.php.insereAnnotation(i3GEO.atualiza,g_nomepin+"topo",objposicaocursor.ddx+" "+objposicaocursor.ddy,texto,pos,pl,ox,oy,mf,md,forca,fcs,fxs,fys,m,c,ys,xs,cs,cf,a,t,f);
 				}
 			};
 			if (doc.getElementById("tipoInsere").value == "digitando")
@@ -154,7 +138,7 @@ i3GEO.mapa = {
 				if ((doc.getElementById("temasLigados")) && (doc.getElementById("itemsel"))){
 					var tema = doc.getElementById("temasLigados").value;
 					var item = doc.getElementById("itemsel").value;
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 					i3GEO.php.identificaunico(digi,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);
 				}			
 			}
@@ -184,8 +168,8 @@ i3GEO.mapa = {
 			}
 			if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 			else{
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				i3GEO.php.insereSHP(ajaxredesenha,g_nomepin,item,valoritem,objposicaocursor.ddx+" "+objposicaocursor.ddy);
+				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+				i3GEO.php.insereSHP(i3GEO.atualiza,g_nomepin,item,valoritem,objposicaocursor.ddx+" "+objposicaocursor.ddy);
 			}
 		}
 	},
@@ -224,8 +208,8 @@ i3GEO.mapa = {
 				if (itens == "")
 				{alert("Nenhum item foi escolhido");}
 				else{
-					i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-					i3GEO.php.insereSHPgrafico(ajaxredesenha,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
+					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+					i3GEO.php.insereSHPgrafico(i3GEO.atualiza,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
 				}
 			}
 		}
@@ -267,7 +251,7 @@ i3GEO.mapa = {
 		Restaura o mapa para a cópia de segurança existente no servidor
 		*/
 		restaura: function(){
-			i3GEO.php.recuperamapa(ajaxredesenha);
+			i3GEO.php.recuperamapa(i3GEO.atualiza);
 		}
 	},
 	/*
@@ -416,7 +400,7 @@ i3GEO.mapa = {
 		Abre a janela para salvar localmente o mapfile utilizado no mapa atual
 		*/
 		salvaMapa: function(){
-			if(objmapa.mapfile == "")
+			if(i3GEO.parametros == "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 			i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");
 		},
@@ -433,7 +417,7 @@ i3GEO.mapa = {
 		Abre a janela para converter o mapa atual em web service WMS
 		*/
 		convertews: function(){
-			if(objmapa.mapfile == "")
+			if(i3GEO.parametros.mapfile == "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertews/index.htm","","","Web service");
 		},
@@ -590,7 +574,7 @@ i3GEO.mapa = {
 					alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
 					if (i3GEO.mapa.recupera.TENTATIVA == 1){
 						i3GEO.mapa.recupera.TENTATIVA = 2;
-						i3GEO.php.reiniciaMapa(ajaxredesenha);
+						i3GEO.php.reiniciaMapa(i3GEO.atualiza);
 					}		
 				}
 			}

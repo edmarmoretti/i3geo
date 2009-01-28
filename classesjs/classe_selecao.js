@@ -47,8 +47,8 @@ i3GEO.selecao = {
 	*/
 	porxy: function(tema,tipo,tolerancia){
 		var retorna = function(retorno)
-		{ajaxredesenha(retorno);};
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		{i3GEO.atualiza(retorno);};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
 	},
 	/*
@@ -66,8 +66,8 @@ i3GEO.selecao = {
 	*/
 	porbox: function(tema,tipo,box){
 		var retorna = function(retorno)
-		{ajaxredesenha(retorno);};
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		{i3GEO.atualiza(retorno);};
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.php.selecaobox(retorna,tema,tipo,box);
 	},
 	/*
@@ -79,7 +79,7 @@ i3GEO.selecao = {
 	*/
 	janelaOpcoes: function(){
 		g_tipoacao = "selecao";
-		objmapa.temaAtivo = "";
+		i3GEO.temaAtivo = "";
 		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}
@@ -128,11 +128,11 @@ i3GEO.selecao = {
 			var tipo = "adiciona";
 			//pega o tipo de operacao da janela de selecao
 			if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
-			if (objmapa.temaAtivo == ""){alert("Nenhum tema ativo");return;}
+			if (i3GEO.temaAtivo == ""){alert("Nenhum tema ativo");return;}
 			var tolerancia = doc.getElementById("toleranciapt").value;
 			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 			if ((tipo != "limpa") && (tipo != "inverte"))
-			{i3GEO.selecao.porxy(objmapa.temaAtivo,tipo,tolerancia);}
+			{i3GEO.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);}
 		}
 	},
 	/*
@@ -250,7 +250,7 @@ i3GEO.selecao = {
 		termina: function(){
 			if(g_tipoacao!='selecaobox'){return;}
 			try{
-				var valor = i3GEO.calculo.rect2ext("i3geoboxSel",objmapa.extent,g_celula);
+				var valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
 				var v = valor[0];
 				var x1 = valor[1];
 				var y1 = valor[2];
@@ -266,7 +266,7 @@ i3GEO.selecao = {
 				if((x1 == x2) || (y1 == y2))
 				{limpa.call();return;}
 				// se o retangulo for negativo pula essa parte para n� gerar erro
-				objmapa.extent=v;
+				i3GEO.parametros.mapexten=v;
 				limpa.call();
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.selecao.box.desloca()");
 				i3GEO.eventos.MOUSEUP.remove("i3GEO.selecao.box.termina()");
@@ -277,7 +277,7 @@ i3GEO.selecao = {
 				if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
 
 				if ((tipo != "limpa") && (tipo != "inverte"))
-				{i3GEO.selecao.porbox(objmapa.temaAtivo,tipo,v);}
+				{i3GEO.selecao.porbox(i3GEO.temaAtivo,tipo,v);}
 			}
 			catch(e){limpa.call();return;}
 		}
@@ -317,7 +317,7 @@ i3GEO.selecao = {
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (objmapa.scale > 500000)
+					if (i3GEO.parametros.mapscale > 500000)
 					{var d = parseInt(d);}
 					else{
 						d= d + "";
@@ -354,7 +354,7 @@ i3GEO.selecao = {
 						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
 					}
 					else{
-						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	
+						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(i3GEO.parametros.w/2),pontosdistobj.yimg[0]);	
 					}				
 				}
 				catch(e){}
@@ -364,7 +364,7 @@ i3GEO.selecao = {
 					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);
 				}
 				else{
-					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);
+					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);
 				}				
 			}
 			catch(e){}
@@ -384,14 +384,14 @@ i3GEO.selecao = {
 			var pontos = pontosdistobj;
 			i3GEO.desenho.richdraw.fecha();
 			var n = pontos.xpt.length;
-			objmapa.temaAtivo = doc.getElementById("comboTemas").value;
+			i3GEO.temaAtivo = doc.getElementById("comboTemas").value;
 			var xs = pontos.xpt.toString(",");
 			var ys = pontos.ypt.toString(",");
 			var retorna = function(){
-				i3GEO.janela.fechaAguarde("ajaxredesenha",$trad("o1"));
-				ajaxredesenha("");
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
+				i3GEO.atualiza("");
 			};
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
 			var cp = new cpaint();
 			//cp.set_debug(2)

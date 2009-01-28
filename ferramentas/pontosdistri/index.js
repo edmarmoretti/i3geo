@@ -107,7 +107,7 @@ function analiseCluster()
 	var temp = function()
 	{
 		aguarde("none");
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
@@ -127,7 +127,7 @@ function analiseDeldir()
 	var temp = function()
 	{
 		aguarde("none");
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
@@ -147,7 +147,7 @@ function analiseKernel()
 	var temp = function()
 	{
 		aguarde("none");
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
@@ -167,7 +167,7 @@ function analiseDensidade()
 	var temp = function()
 	{
 		aguarde("none");
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}
@@ -186,7 +186,7 @@ function analiseDistancia()
 	var temp = function()
 	{
 		aguarde("none");
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	var tema = $i("temasPt").value
 	if(tema == ""){alert("Escolha um tema");aguarde("none");return}

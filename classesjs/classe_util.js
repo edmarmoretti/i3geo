@@ -27,6 +27,49 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
+Variable: navm
+
+Verdadeiro (true) se o navegador for o Internet Explorer
+*/
+navm = false;
+/*
+Variable: navn
+
+Verdadeiro (true) se o navegador for o Firefox
+*/
+navn = false;
+//seta as variáveis navn e navm
+var app = navigator.appName.substring(0,1);
+if (app=='N') navn=true; else navm=true;
+/*
+Variable: g_operacao
+
+Nome da última operação que foi executada.
+
+Dependendo do tipo de operação são aplicadas as atualizações necessárias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
+
+Essas operações são controladas pela função ajaxiniciaparametros.
+*/
+g_operacao = "";
+/*
+Variable: g_tipoacao
+
+Tipo de ação que está sendo executada.
+Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo de operação que deve ser executada.
+É definida quando o usuário seleciona uma determinada ferramenta do i3Geo.
+*/
+g_tipoacao = "zoomli";
+g_postpx = "px";
+g_tipotop = "top";
+g_tipoleft = "left";
+if (navm)
+{
+	g_postpx = "";  //utilizado para crossbrowser
+	g_tipotop = "pixelTop"; //utilizado para crossbrowser
+	g_tipoleft = "pixelLeft"; //utilizado para crossbrowser
+}
+
+/*
 Function: $i
 
 Obtém um elemento DOM a partir de seu id
@@ -51,6 +94,7 @@ Array.prototype.remove=function(s){
 	var i = this.indexOf(s);
 	if(i != -1) this.splice(i, 1);
 };
+
 /*
 Class: i3GEO.util
 
@@ -143,8 +187,8 @@ i3GEO.util = {
 
 	*/
 	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
-		clearTimeout(objmapa.tempo);
-		objmapa.tempo = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
+		try{clearTimeout(tempoBotaoAplicar);}catch(e){};
+		tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
 		autoRedesenho("reinicia");
 		if(arguments.length == 1)
 		{var titulo = "Aplicar";}
@@ -169,8 +213,8 @@ i3GEO.util = {
 		else
 		{var novoel = document.getElementById("i3geo_aplicar");}
 		novoel.onclick = function(){
-			clearTimeout(objmapa.tempo);
-			objmapa.tempo = "";
+			clearTimeout(i3GEO.parametros.tempo);
+			i3GEO.parametros.tempo = "";
 			this.style.display='none';
 			eval(nomeFuncao+"\(\)");
 		};
@@ -634,12 +678,12 @@ i3GEO.util = {
 	path {String} - caminho completo do shapefile
 	*/	
 	adicionaSHP: function(path){
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
 		if ((temp[1] == "SHP") || (temp[1] == "shp"))
-		{i3GEO.php.adicionaTemaSHP(ajaxredesenha,path);}
+		{i3GEO.php.adicionaTemaSHP(i3GEO.atualiza,path);}
 		else
-		{i3GEO.php.adicionaTemaIMG(ajaxredesenha,path);}
+		{i3GEO.php.adicionaTemaIMG(i3GEO.atualiza,path);}
 	},
 	/*
 	Function: abreCor

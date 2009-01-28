@@ -35,6 +35,12 @@ As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
+	Variable: TIPS
+	
+	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
+	*/
+	TIPS: new Array(),
+	/*
 	Property: ANTESCRIA
 	
 	Lista com os nomes das funções que serão executadas antes de abrir a janela.
@@ -281,11 +287,11 @@ i3GEO.janela = {
 		else
 		{novoel.style.opacity = ".9";}
 		document.body.appendChild(novoel);
-		objmapa.objtips.push($i(Nid));
+		i3GEO.janela.TIPS.push($i(Nid));
 		//
 		//monta o TIP com o id único criado
 		//quando o usuário escolhe a opção de fixar,
-		//o div é incluido no array objmapa.objtips
+		//o div é incluido no array i3GEO.janela.TIPS
 		//quando o mapa é redesenhado, esses elementos são excluídos do mapa
 		//
 		var res = "<div id='"+Nid+"cabecatip' style='text-align:left;background-color:rgb(240,240,240)'>";
@@ -308,34 +314,34 @@ i3GEO.janela = {
 	/*
 	Function: excluiTips
 	
-	Exclui os tips armazenados na variável objmapa.objtips
+	Exclui os tips armazenados na variável i3GEO.janela.TIPS
 	
 	Parameters:
 	
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/
 	excluiTips: function(tipo){
-		if(objmapa.objtips.length > 0){
-			var ot = objmapa.objtips.length-1;
+		if(i3GEO.janela.TIPS.length > 0){
+			var ot = i3GEO.janela.TIPS.length-1;
 			if (ot >= 0){
 				do{
 					if(tipo == 'todos'){
-						if(objmapa.objtips[ot]){
-							var i = $i(objmapa.objtips[ot].id);
+						if(i3GEO.janela.TIPS[ot]){
+							var i = $i(i3GEO.janela.TIPS[ot].id);
 							document.body.removeChild(i);
 						}
 					}
 					if(tipo == 'naofixos'){
-						if ($i(objmapa.objtips[ot])){
-							if($i(objmapa.objtips[ot].id+"cabecatip").innerHTML != ""){
-								document.body.removeChild($i(objmapa.objtips[ot].id));
+						if ($i(i3GEO.janela.TIPS[ot])){
+							if($i(i3GEO.janela.TIPS[ot].id+"cabecatip").innerHTML != ""){
+								document.body.removeChild($i(i3GEO.janela.TIPS[ot].id));
 							}
 						}
 					}
 				}
 				while(ot--)
 				if(tipo == "todos")
-				{objmapa.objtips = new Array();}
+				{i3GEO.janela.TIPS = new Array();}
 			}
 		}
 	},
@@ -357,7 +363,7 @@ i3GEO.janela = {
 			i3GEO.janela.fechaAguarde("ajaxdestaca");
 			i3GEO.janela.fechaAguarde("ajaxabrelente");
 			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-			i3GEO.janela.fechaAguarde("ajaxredesenha");
+			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 			i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
 			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			i3GEO.janela.fechaAguarde("ajaxLegenda");

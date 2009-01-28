@@ -10,7 +10,7 @@ document.body.appendChild(novoel);
 var g_sid=window.opener.parent.g_sid
 var corpo = window.opener.parent.document.getElementById("img").src
 var legenda = window.opener.parent.g_legendaHTML
-var escalanumerica = window.opener.parent.objmapa.scale
+var escalanumerica = window.opener.parent.i3GEO.parametros.mapscale
 
 document.getElementById("mapa").innerHTML = "<img src="+corpo+" />"
 document.getElementById("legenda").innerHTML = legenda

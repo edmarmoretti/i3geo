@@ -134,8 +134,8 @@ i3GEO.desenho = {
 			ne.cursor="crosshair";
 			ne.zIndex=0;
 			ne.position="absolute";
-			ne.width=objmapa.w;
-			ne.height=objmapa.h;
+			ne.width=i3GEO.parametros.w;
+			ne.height=i3GEO.parametros.h;
 			ne.border="1px solid black";
 			ne.display="none";
 			ne.top=pos[1];
@@ -176,8 +176,8 @@ i3GEO.desenho = {
 					var r = $i(i3GEO.desenho.richdraw.container.id);
 					r.removeChild(r.lastChild);
 					var dy = objposicaocursor.imgy;
-					var dx = objposicaocursor.imgx - (objmapa.w/2);
-					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
+					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
+					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 				}
 				catch(e){window.status=n+" erro ao movimentar a linha ";}			
 			}
@@ -187,9 +187,9 @@ i3GEO.desenho = {
 					r.removeChild(r.lastChild);
 					r.removeChild(r.lastChild);
 					var dy = objposicaocursor.imgy;
-					var dx = objposicaocursor.imgx - (objmapa.w/2);
-					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
-					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[0])-(objmapa.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
+					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
+					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
+					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[0])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
 				}
 				catch(e){window.status=n+" erro ao movimentar a linha ";}			
 			}

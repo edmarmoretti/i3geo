@@ -19,8 +19,8 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-$i("l").value = window.parent.objmapa.w
-$i("a").value = window.parent.objmapa.h
+$i("l").value = window.parent.i3GEO.parametros.w
+$i("a").value = window.parent.i3GEO.parametros.h
 parametrosURL()
 YAHOO.example.init = function ()
 {
@@ -65,11 +65,11 @@ function executaf()
 		
 		
 		window.parent.calcposf()
-		window.parent.objaguarde.abre("ajaxredesenha","Aguarde...")
+		window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=mudatamanho&altura="+a+"&largura="+l
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
-		cp.call(p,"mudaQS",window.parent.ajaxredesenha);
+		cp.call(p,"mudaQS",window.parent.i3GEO.atualiza);
 	}
 }

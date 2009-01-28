@@ -52,7 +52,7 @@ function montaMenuSuspenso(iddiv)
 			ins += '<ul class="first-of-type" style="border:0px solid white;top:10px;">';
  			var sobe = "";
  			if(navn){var sobe = "line-height:0px;";}
- 			if(objmapa.w >= 500)
+ 			if(i3GEO.parametros.w >= 500)
  			{
 				ins += '<li class="yuimenubaritem first-of-type" style="'+sobe+'float:left;border: 0px solid white;" >';
 				ins += '&nbsp;<img  style="border: 1px solid white;padding:0 0px;top:-7px;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\'pt\')" id="brasil" alt="Portugues"/>';
@@ -71,7 +71,7 @@ function montaMenuSuspenso(iddiv)
  		}
 		function onMenuBarBeforeRender(p_sType, p_sArgs)
 		{
-			if(objmapa.w >= 500)
+			if(i3GEO.parametros.w >= 500)
 			{var conta = 4;}
 			else
 			{var conta = 0;}

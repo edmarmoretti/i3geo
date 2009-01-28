@@ -117,10 +117,10 @@ i3GEO.ajuda = {
 			if (!$i("janelaMenTexto")){
 				var nx = "";
 				var ny = "";
-				if($i("img")){
-					var pos = YAHOO.util.Dom.getXY($i("img"));
+				if($i(i3GEO.interface.IDCORPO)){
+					var pos = YAHOO.util.Dom.getXY($i(i3GEO.interface.IDCORPO));
 					var nx = pos[0] - 267;
-					var ny = objmapa.h - 70;
+					var ny = i3GEO.parametros.h - 70;
 				}
 				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
 				var janela = i3GEO.janela.cria("266","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
@@ -155,13 +155,13 @@ i3GEO.ajuda = {
 	Parameters:
 	
 	mensagem {String} - (opcional) texto que será mostrado no letreiro. Se não for informado
-	será utilizado a variável objmapa.mensagens
+	será utilizado a variável i3GEO.parametros.mensagens
 	*/
 	ativaLetreiro: function(mensagem){
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
 			if(arguments.length == 0)
-			{var mensagem = objmapa.mensagens;}
+			{var mensagem = i3GEO.parametros.mensagens;}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.ajuda.ativaLetreiro()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.ajuda.ativaLetreiro()");}					
 			try
@@ -175,7 +175,7 @@ i3GEO.ajuda = {
 				return;
 			}
 			if (l.size == 1)
-			{l.size = objmapa.w / 8;}
+			{l.size = i3GEO.parametros.w / 8;}
 			BMessage = mensagem + " ---Clique para parar--- ";
 			l.onclick = function()
 			{l.style.display = "none";};

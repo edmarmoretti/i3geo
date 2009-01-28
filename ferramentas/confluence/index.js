@@ -26,7 +26,7 @@ buscaconfluence()
 function buscaconfluence()
 {
 	$i("resultadoconfluence").innerHTML = "Aguarde...";
-	if (window.parent.objmapa.scale > 2000001)
+	if (window.parent.i3GEO.parametros.mapscale > 2000001)
 	{
 		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:2.000.000)!";
 		ins += "<br><br><div onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -39,7 +39,7 @@ function buscaconfluence()
 		}() 	
 		return;
 	}
-	var ext = window.parent.objmapa.extent
+	var ext = window.parent.i3GEO.parametros.mapexten
 	ext = ext.split(" ")
 	var xini = parseInt(ext[0])
 	var yini = parseInt(ext[1])
@@ -79,7 +79,7 @@ function buscaconfluence()
 function mostraxy(xy)
 {
 	var xy = xy.split(",")
- 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 	var box = window.parent.$i("boxg")
 	box.style.display = "block"
 	box.style.width = "5px"
@@ -100,5 +100,5 @@ function ajustarescala()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=2000000";
-	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
+	cp.call(p,"mudaescala",window.parent.i3GEO.atualiza);
 }

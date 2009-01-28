@@ -145,7 +145,7 @@ function adiciona()
 			if(retorno.data != "ok")
 			{alert("Ooops! Problemas ao acessar o serviço.");aguarde("none");}
 			else
-			{window.parent.ajaxredesenha()}
+			{window.parent.i3GEO.atualiza()}
 		}
 		aguarde("block");
 		var tiporep = $i("tiporep").value

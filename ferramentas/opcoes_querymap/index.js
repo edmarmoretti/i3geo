@@ -43,7 +43,7 @@ function mudacor()
 	var temp = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("")
+		window.parent.i3GEO.atualiza("")
 	}
 	aguarde("block")
 	var cor = $i("cor").value

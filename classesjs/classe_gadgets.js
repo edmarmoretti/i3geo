@@ -191,10 +191,10 @@ i3GEO.gadgets = {
 				if(arguments.length == 1)
 				e.value = escala;
 				else
-				e.value = parseInt(objmapa.scale);
+				e.value = parseInt(i3GEO.parametros.mapscale);
 			};
 			if(!$i("i3geo_escalanum")){
-				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19","");
+				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
 				var ins = "<table><tr><td>1:"+i;
 				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
@@ -348,8 +348,8 @@ i3GEO.gadgets = {
 			if(arguments.length == 0)
 			{var id = i3GEO.gadgets.PARAMETROS.mostraVisual.idhtml;}
 			if($i(id)){
-				if (objmapa.listavisual != ""){
-					var l = objmapa.listavisual.split(",");
+				if (i3GEO.parametros.listavisual != ""){
+					var l = i3GEO.parametros.listavisual.split(",");
 					var visuais = "";
 					var li = l.length-1;
 					if(li >= 0){
@@ -365,7 +365,7 @@ i3GEO.gadgets = {
 		/*
 		Function: troca
 		
-		Troca o visual atual. A lista de visuais disponíveis é obtida em objmapa.listavisual
+		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
 		
 		Parameters:
 		
@@ -374,7 +374,7 @@ i3GEO.gadgets = {
 		troca: function(visual){
 			var monta = function(retorno){
 				try{
-					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 					//
 					//pega todas as imagens da interface
 					//
@@ -430,12 +430,12 @@ i3GEO.gadgets = {
 					}
 					i3GEO.configura.visual = visual;
 				}
-				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("ajaxredesenha");}
+				catch(e){alert("Ocorreu um erro. mudaVisual"+e);i3GEO.janela.fechaAguarde("i3GEO.atualiza");}
 			};
 			//
 			//pega a lista de imagens no diretório do i3geo correspondente ao visual selecionado
 			//
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.php.listaarquivos(monta,"imagens/visual/"+visual);
 		}
 	},
@@ -503,8 +503,8 @@ i3GEO.gadgets = {
 			i3GEO.gadgets.quadros.quadroatual = 0;
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.quadros.avanca()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.avanca()");}
-			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.quadros.grava('extensao',objmapa.extent)") < 0)
-			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.grava('extensao',objmapa.extent)");}
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.gadgets.quadros.grava('extensao',i3GEO.parametros.mapexten)") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.grava('extensao',i3GEO.parametros.extent)");}
 		},
 		/*
 		Function: grava
@@ -572,8 +572,8 @@ i3GEO.gadgets = {
 					iclone.style.border="1px solid blue";
 					i.parentNode.appendChild(iclone);
 					iclone.src = corpo.src;
-					iclone.style.width = objmapa.w;
-					iclone.style.heigth = objmapa.h;
+					iclone.style.width = i3GEO.parametros.w;
+					iclone.style.heigth = i3GEO.parametros.h;
 					iclone.style.top = corpo.style.top;
 					iclone.style.left = corpo.style.left;		
 				}
@@ -596,8 +596,8 @@ i3GEO.gadgets = {
 		obj {Object} - objeto clicado
 		*/
 		opcoes: function(obj){
-			if (objmapa.utilizacgi == "sim"){
-				objmapa.utilizacgi = "nao";
+			if (i3GEO.parametros.utilizacgi == "sim"){
+				i3GEO.parametros.utilizacgi = "nao";
 				var volta = function(){
 					alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");
 				};
@@ -641,8 +641,8 @@ i3GEO.gadgets = {
 		Lista as imagens armazenadas em uma nova página no navegador
 		*/
 		listaImagens: function(){
-			if (objmapa.utilizacgi == "sim"){
-				objmapa.utilizacgi = "nao";
+			if (i3GEO.parametros.utilizacgi == "sim"){
+				i3GEO.parametros.utilizacgi = "nao";
 				var volta = function()
 				{alert("Armazenamento de imagens ativado. As proximas imagens ficarao disponiveis");};
 				i3GEO.php.desativacgi(volta);

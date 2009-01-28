@@ -782,7 +782,7 @@ function parametrosURL()
 //faz o zoom no mapa para uma extensao
 function zoomf(ext)
 {
-	window.parent.objaguarde.abre("ajaxredesenha",window.parent.$trad("o1"));
+	window.parent.objaguarde.abre("i3GEO.atualiza",window.parent.$trad("o1"));
 	//faz um zoom na ocorrencia
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=mudaext&ext="+ext;
 	var cp = new cpaint();
@@ -793,7 +793,7 @@ function zoomf(ext)
 //localiza um ponto no mapa no centro de uma extensao
 function pinf(ext)
 {
-	window.parent.objaguarde.abre("ajaxredesenha",window.parent.$trad("o1"));
+	window.parent.objaguarde.abre("i3GEO.atualiza",window.parent.$trad("o1"));
 	// mostra um ponto vermelho na ocorr&ecirc;ncia
 	valores = ext.split(" ");
 	vx = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
@@ -802,7 +802,7 @@ function pinf(ext)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"zoomPonto",window.parent.ajaxredesenha);
+	cp.call(p,"zoomPonto",window.parent.i3GEO.atualiza);
 }
 function convdmsddf(g,m,s)
 {

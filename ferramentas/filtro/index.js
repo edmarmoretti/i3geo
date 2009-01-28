@@ -128,7 +128,7 @@ function aplicaFiltro(testa)
 		cp.call(p,"insereFiltro",monta);
 	}
 	else
-	{cp.call(p,"insereFiltro",window.parent.ajaxredesenha);}
+	{cp.call(p,"insereFiltro",window.parent.i3GEO.atualiza);}
 }
 $i("limpar").onclick = function()
 {
@@ -140,7 +140,7 @@ $i("limpar").onclick = function()
 	cp.set_response_type("JSON");
 	aguarde("none");
 	window.parent.g_operacao = "outras"
-	cp.call(p,"insereFiltro",window.parent.ajaxredesenha);
+	cp.call(p,"insereFiltro",window.parent.i3GEO.atualiza);
 }
 //cria o combo com os itens
 function montaComboItens()

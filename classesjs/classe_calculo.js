@@ -95,18 +95,18 @@ i3GEO.calculo = {
 		try
 		{
 			if(arguments.length == 3){
-				var ext = objmapa.extent;
-				var cellsize = objmapa.cellsize;
+				var ext = i3GEO.parametros.mapexten;
+				var cellsize = i3GEO.parametros.pixelsize;
 			}
 			if(arguments.length == 4){
-				var cellsize = objmapa.cellsize;
+				var cellsize = i3GEO.parametros.pixelsize;
 			}
 			if(!docmapa)
 			{var docmapa = window.document;}
 			var dc = docmapa.getElementById("img");
 			if(!dc){var dc = docmapa;}
 			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = ext; //objmapa.extent;
+			var imgext = ext; //i3GEO.parametros.mapexten;
 			var imgext = imgext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
@@ -352,8 +352,8 @@ i3GEO.calculo = {
 		var xfig = pix - pos[0];
 		var yfig = piy - pos[1];
 		if (dy < 0) dy=dy * -1;
-		var nx = g_celula * xfig;
-		var ny = g_celula * yfig;
+		var nx = i3GEO.parametros.pixelsize * xfig;
+		var ny = i3GEO.parametros.pixelsize * yfig;
 		var x2 = (amext[0] * 1) + nx;
 		var y2 = (amext[3] * 1) - ny;
 		var v = x2+" "+y2+" "+x1+" "+y1;

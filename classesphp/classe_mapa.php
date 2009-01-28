@@ -302,7 +302,7 @@ Include:
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
-		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
+		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
 		$imgo->free();
 		return $res;
 	}

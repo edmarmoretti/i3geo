@@ -39,7 +39,7 @@ function executa()
 		var temp = function()
 		{
 			aguarde("none")
-			window.parent.ajaxredesenha("")
+			window.parent.i3GEO.atualiza("")
 		}
 		aguarde("block")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=gradeCoord"

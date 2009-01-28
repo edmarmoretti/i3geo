@@ -198,14 +198,14 @@ function aplicaProcessos()
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"aplicaProcessos",window.parent.ajaxredesenha);
+	cp.call(p,"aplicaProcessos",window.parent.i3GEO.atualiza);
 }
 function inverteCores()
 {
 	var retornapaleta = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}
@@ -221,7 +221,7 @@ function calculaTamanho()
 	var retornapaleta = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}
@@ -244,7 +244,7 @@ function valorU()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
@@ -260,7 +260,7 @@ function simbU()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
@@ -279,7 +279,7 @@ function valorC()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	//cp.set_debug(2)
@@ -300,7 +300,7 @@ function valorQ()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
@@ -316,7 +316,7 @@ function representacao()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	cp.set_response_type("JSON");
@@ -370,7 +370,7 @@ function mudaLegenda()
 function aplicaRedesenha()
 {
  	mostralegenda()
- 	window.parent.ajaxredesenha('')
+ 	window.parent.i3GEO.atualiza('')
  	window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 }
 //adiciona totalização no nome da classe
@@ -514,7 +514,7 @@ function aplicaEstilo()
 	var fim = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 	}	
 	//cp.set_debug(2)
@@ -570,7 +570,7 @@ function paleta()
 	var retornapaleta = function()
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha("");
+		window.parent.i3GEO.atualiza("");
 		window.parent.i3GEO.arvoreDeCamadas.atualizaLegenda(tema);
 		mostralegenda();
 	}

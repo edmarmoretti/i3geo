@@ -2610,11 +2610,12 @@ function redesenhaMapa()
 		else
 		{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
 	}
-	$mensagens = "objmapa.mensagens ='".$m->pegaMensagens()."'";
+	$mensagens = "var mensagens ='".$m->pegaMensagens()."'";
 	restauraCon($map_file,$postgis_mapa);
+
 	if (($par == "") || ($imagem == ""))
 	{$cp->set_data("erro");}
 	else
-	{$cp->set_data(array("variaveis"=>($mensagens.";".$imagem.";".$par.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par));}
+	{$cp->set_data(array("variaveis"=>($mensagens.";".$imagem.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par));}
 }
 ?>

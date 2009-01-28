@@ -178,9 +178,9 @@ function cliqueInserexy()
 		if (g_nomepin == ""){alert("Nenhum tema definido para editar");}
 		else
 		{
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&tema="+g_nomepin+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&g_sid="+g_sid;
-			cpObj.call(p,"insereSHP",ajaxredesenha);
+			cpObj.call(p,"insereSHP",i3GEO.atualiza);
 		}
 	}
 }
@@ -221,9 +221,9 @@ function cliqueInseregrafico()
 			{alert("Nenhum item foi escolhido");}
 			else
 			{
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&tipo=pizza&tema="+tema+"&x="+objposicaocursor.ddx+"&y="+objposicaocursor.ddy+"&itens="+itens+"&shadow_height="+shadow_height+"&width="+width+"&inclinacao="+inclinacao+"&g_sid="+g_sid;
-				cpObj.call(p,"insereSHPgrafico",ajaxredesenha);
+				cpObj.call(p,"insereSHPgrafico",i3GEO.atualiza);
 			}
 		}
 	}
@@ -273,14 +273,14 @@ function cliqueInseretoponimo()
 			//se texto for igual a vazio é pq o valor foi pego de um atributo
 			if(texto == "")
 			{
-				i3GEO.janela.fechaAguarde("ajaxredesenha");
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 				texto = retorno.data;
 			}
 			if (texto != " ")
 			{
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inserefeature&pin="+g_nomepin+"topo&tipo=ANNOTATION&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&texto="+texto+"&position="+pos+"&partials="+pl+"&offsetx="+ox+"&offsety="+oy+"&minfeaturesize="+mf+"&mindistance="+md+"&force="+forca+"&shadowcolor="+fcs+"&shadowsizex="+fxs+"&shadowsizey="+fys+"&outlinecolor="+m+"&cor="+c+"&sombray="+ys+"&sombrax="+xs+"&sombra="+cs+"&fundo="+cf+"&angulo="+a+"&tamanho="+t+"&fonte="+f+"&g_sid="+g_sid;
-				cpObj.call(p,"insereFeature",ajaxredesenha);
+				cpObj.call(p,"insereFeature",i3GEO.atualiza);
 			}
 		};
 		if (doc.getElementById("tipoInsere").value == "digitando")
@@ -293,7 +293,7 @@ function cliqueInseretoponimo()
 			{
 				var tema = doc.getElementById("temasLigados").value;
 				var item = doc.getElementById("itemsel").value;
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identificaunico&xy="+objposicaocursor.ddx+","+objposicaocursor.ddy+"&resolucao=5&tema="+tema+"&item="+item+"&g_sid="+g_sid;
 				cpObj.call(p,"identificaunico",digi);
 			}			
@@ -318,9 +318,9 @@ function cliqueSelecao()
 		//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
 		if ((tipo != "limpa") && (tipo != "inverte"))
 		{
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+objmapa.temaAtivo+"&tipo="+tipo+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy+"&tolerancia="+tolerancia+"&g_sid="+g_sid;
-			cpObj.call(p,"selecaoPT",ajaxredesenha);
+			cpObj.call(p,"selecaoPT",i3GEO.atualiza);
 		}
 	}
 }
@@ -411,7 +411,7 @@ Ativa ou desativa a logo marca.
 function ativaLogo()
 {
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ativalogo&g_sid="+g_sid;
-	cpObj.call(p,"ativalogo",ajaxredesenha);
+	cpObj.call(p,"ativalogo",i3GEO.atualiza);
 }
 /*
 Function: tamanho
@@ -484,9 +484,9 @@ function excluitemaf(tema)
 	}
 	while (p.childNodes.length > 0);
 	p.parentNode.removeChild(p);
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+g_sid;
-	cpObj.call(p,"excluiTemas",ajaxredesenha);
+	cpObj.call(p,"excluiTemas",i3GEO.atualiza);
 	objmapa.temaAtivo = "";
 }
 /*
@@ -500,9 +500,9 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function sobetemaf(tema)
 {
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=sobetema&tema="+tema+"&g_sid="+g_sid;
-	cpObj.call(p,"sobeTema",ajaxredesenha);
+	cpObj.call(p,"sobeTema",i3GEO.atualiza);
 }
 /*
 Function: descetemaf
@@ -515,9 +515,9 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function descetemaf(tema)
 {
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+g_sid;
-	cpObj.call(p,"desceTema",ajaxredesenha);
+	cpObj.call(p,"desceTema",i3GEO.atualiza);
 }
 /*
 Function: zoomtemaf
@@ -530,9 +530,9 @@ celula - objeto que foi clicado nas opções de um tema.
 */
 function zoomtemaf(tema)
 {
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+g_sid;
-	cpObj.call(p,"zoomTema",ajaxredesenha);
+	cpObj.call(p,"zoomTema",i3GEO.atualiza);
 }
 /*
 Function: limpaseltemaf
@@ -546,9 +546,9 @@ celula - objeto que foi clicado nas opções de um tema. Passado para a função peg
 function limpaseltemaf(celula)
 {
 	g_operacao = "limpasel";
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=limpasel&tema="+pegaTema(celula)+"&g_sid="+g_sid;
-	cpObj.call(p,"selecaoLimpa",ajaxredesenha);
+	cpObj.call(p,"selecaoLimpa",i3GEO.atualiza);
 }
 /*
 Function: mudatranspf
@@ -569,9 +569,9 @@ function mudatranspf(idtema)
 	{alert("Ocorreu um erro");}
 	if (valor != "")
 	{
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatransp&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
-		cpObj.call(p,"mudaTransparencia",ajaxredesenha);
+		cpObj.call(p,"mudaTransparencia",i3GEO.atualiza);
 	}
 	else
 	{alert("Valor não definido.");}
@@ -596,9 +596,9 @@ function mudanomef(idtema)
 	{
 		var p = $i("nometema"+idtema);
 		$i("nometema"+idtema).innerHTML = valor;
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudanome&tema="+idtema+"&valor="+valor+"&g_sid="+g_sid;
-		cpObj.call(p,"mudaNome",ajaxredesenha);
+		cpObj.call(p,"mudaNome",i3GEO.atualiza);
 	}
 	else
 	{alert("Nome não definido");}
@@ -1131,9 +1131,9 @@ Reinicia o mapa atual
 */
 function reiniciaMapa()
 {
-	i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
+	i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=reiniciaMapa&g_sid="+g_sid;
-	cpObj.call(p,"reiniciaMapa",ajaxredesenha);
+	cpObj.call(p,"reiniciaMapa",i3GEO.atualiza);
 }
 /*
 Function: textofid

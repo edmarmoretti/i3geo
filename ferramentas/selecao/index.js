@@ -118,15 +118,15 @@ function mudaicone()
 //botoes de tipo
 function tiposel(obj)
 {
-	window.parent.objmapa.temaAtivo = $i("comboTemas").value;
+	window.parent.i3GEO.temaAtivo = $i("comboTemas").value;
 	window.parent.i3GEO.eventos.MOUSEDOWN.remove("i3GEO.selecao.box.inicia()")
 	$i("parapoli").style.display = "none";
 	var fim = function()
-	{aguarde("none");window.parent.ajaxredesenha("");}
+	{aguarde("none");window.parent.i3GEO.atualiza("");}
 	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
 	if (obj.id == "selecaoext")
 	{
-		if (window.parent.objmapa.scale > 500000)
+		if (window.parent.i3GEO.parametros.mapscale > 500000)
 		{alert("A escala do mapa deve ser pelo menos 1:500.000");return;}
 		aguarde("block")
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoext&tema="+$i("comboTemas").value+"&tipo="+$i("tipoOperacao").value
@@ -172,7 +172,7 @@ comboTemasLigados("comboTemas",function(retorno)
 	{
 	 	$i("lugarComboX").innerHTML = "";
 	 	$i("lugarComboY").innerHTML = "";
-	 	window.parent.objmapa.temaAtivo = $i("comboTemas").value
+	 	window.parent.i3GEO.temaAtivo = $i("comboTemas").value
 		comboitens("selItem",$i("comboTemas").value,function(retorno)
 		{
 	 		comboi = retorno.dados
@@ -260,7 +260,7 @@ function operacao(tipo)
 	{
 		aguarde("block")
 		var fim = function()
-		{aguarde("none");window.parent.ajaxredesenha("")}
+		{aguarde("none");window.parent.i3GEO.atualiza("")}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+$i("comboTemas").value+"&tipo="+tipo.value+"&tolerancia="+$i("toleranciapt").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -291,7 +291,7 @@ function aplicaselecao()
 		}
 		var tipo = $i("tipoOperacao").value
 		var fim = function()
-		{aguarde("none");window.parent.ajaxredesenha("")}
+		{aguarde("none");window.parent.i3GEO.atualiza("")}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoatrib&tipo="+tipo+"&tema="+$i("comboTemas").value+"&valor="+valor+"&operador="+operador+"&item="+itemsel
 		var cp = new cpaint();
 		//cp.set_debug(2)
@@ -329,7 +329,7 @@ function criatemaf()
 	{
 		aguarde("block")
 		var fim = function()
-		{aguarde("none");window.parent.ajaxredesenha("")}
+		{aguarde("none");window.parent.i3GEO.atualiza("")}
 		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=criatemasel&tema="+$i("comboTemas").value+"&nome=Novo tema "+$i("comboTemas").value
 		var cp = new cpaint();
 		//cp.set_debug(2)

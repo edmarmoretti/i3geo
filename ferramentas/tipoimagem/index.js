@@ -39,5 +39,5 @@ function aplicar()
 	}
 	window.parent.g_tipoimagem = valor
 	window.parent.g_operacao = "outras"
-	window.parent.ajaxredesenha("")
+	window.parent.i3GEO.atualiza("")
 }

@@ -126,7 +126,7 @@ function criar()
 	var temp = function(retorno)
 	{
 		aguarde("none")
-		window.parent.ajaxredesenha(retorno)
+		window.parent.i3GEO.atualiza(retorno)
 	}	
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=graficotema&tema="+tema+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset
 	var cp = new cpaint();

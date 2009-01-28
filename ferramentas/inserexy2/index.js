@@ -133,7 +133,7 @@ function criaLin()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2) 
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=sphPT2shp&para=linha&tema="+window.parent.g_nomepin;
-	cp.call(p,"sphPT2shp",window.parent.ajaxredesenha);
+	cp.call(p,"sphPT2shp",window.parent.i3GEO.atualiza);
 }
 //converte o tema para poligonal
 function criaPol()
@@ -142,7 +142,7 @@ function criaPol()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=sphPT2shp&para=poligono&tema="+window.parent.g_nomepin;
-	cp.call(p,"sphPT2shp",window.parent.ajaxredesenha);
+	cp.call(p,"sphPT2shp",window.parent.i3GEO.atualiza);
 }
 //cria um novo tema editavel
 function criatemaeditavel()
@@ -166,7 +166,7 @@ function ativanovotema(retorno)
 		if (window.parent.$i("openlayers"))
 		{window.parent.atualizaOL();}
 		else
-		{window.parent.ajaxredesenha("")}
+		{window.parent.i3GEO.atualiza("")}
 	}
 	else
 	{$i("shapefile").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
@@ -261,7 +261,7 @@ function inserir()
 	ins = ins + "<div style='display:block;position:relative;top:5px;left:0px;font-size:12px' >" + xxx +" " + yyy + "</div><br>"
 	$i("resultado").innerHTML = ins
 	var fim = function()
-	{aguarde("none");window.parent.ajaxredesenha("");}
+	{aguarde("none");window.parent.i3GEO.atualiza("");}
 
 	var inputs = $i("listaepsg").getElementsByTagName("input")
 	var listai = new Array;
@@ -308,7 +308,7 @@ function colar()
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"insereSHP",window.parent.ajaxredesenha);
+	cp.call(p,"insereSHP",window.parent.i3GEO.atualiza);
 	var ins = $i("resultado").innerHTML
 	var n = new Array()
 	for (i = 0;i < xys.length; i = i + 1)

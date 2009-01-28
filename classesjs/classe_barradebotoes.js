@@ -222,8 +222,8 @@ i3GEO.barraDeBotoes = {
 					var corpo = $i("img");
 					if(!corpo){return;}
 					iclone.src = corpo.src;
-					iclone.style.width = objmapa.w;
-					iclone.style.heigth = objmapa.h;
+					iclone.style.width = i3GEO.parametros.w;
+					iclone.style.heigth = i3GEO.parametros.h;
 					iclone.style.top = corpo.style.top;
 					iclone.style.left = corpo.style.left;
 					$i("img").style.display = "none";
@@ -234,38 +234,38 @@ i3GEO.barraDeBotoes = {
 				$i("vertHandleDiv").onmousemove = function(){
 					var corpo = $i("img");
 					if(!corpo){return;}
-					var nw = objmapa.w;
-					var nh = objmapa.h;
+					var nw = i3GEO.parametros.w;
+					var nh = i3GEO.parametros.h;
 					var nt = 0;
 					var nl = 0;
-					i3geo_ns = parseInt(objmapa.scale);
+					i3geo_ns = parseInt(i3GEO.parametros.mapscale);
 					if ((g_fatordezoom > 0) && (g_fatordezoom < 7)){
 						g_fatordezoom = g_fatordezoom + 1;
 						var velhoh = parseInt(iclone.style.height);
 						var velhow = parseInt(iclone.style.width);
-						nh = objmapa.h / g_fatordezoom;
-						nw = objmapa.w / g_fatordezoom;
+						nh = i3GEO.parametros.h / g_fatordezoom;
+						nw = i3GEO.parametros.w / g_fatordezoom;
 						var t = parseInt(iclone.style.top);
 						var l = parseInt(iclone.style.left);
 						nt=t + ((velhoh - nh)*.5);
 						if (navm){nl=0;}
 						else
 						{nl=l + ((velhow - nw)*.5);}
-						var fatorEscala = nh/objmapa.h;
-						i3geo_ns=parseInt(objmapa.scale / fatorEscala);
+						var fatorEscala = nh/i3GEO.parametros.h;
+						i3geo_ns=parseInt(i3GEO.parametros.mapscale / fatorEscala);
 					}
 					if ((g_fatordezoom < 0) && (g_fatordezoom > -7)){
 						g_fatordezoom = g_fatordezoom - 1;
 						var velhoh = parseInt(iclone.style.height);
 						var velhow = parseInt(iclone.style.width);
-						nh = objmapa.h * g_fatordezoom * -1;
-						nw = objmapa.w * g_fatordezoom * -1;
+						nh = i3GEO.parametros.h * g_fatordezoom * -1;
+						nw = i3GEO.parametros.w * g_fatordezoom * -1;
 						var t = parseInt(iclone.style.top);
 						var l = parseInt(iclone.style.left);
 						nt = t - ((nh - velhoh)*.5);
 						nl = l - ((nw - velhow)*.5);
-						var fatorEscala = nh/objmapa.h;
-						i3geo_ns=parseInt(objmapa.scale / fatorEscala);
+						var fatorEscala = nh/i3GEO.parametros.h;
+						i3geo_ns=parseInt(i3GEO.parametros.mapscale / fatorEscala);
 					}
 					iclone.style.width = nw;
 					iclone.style.height = nh;

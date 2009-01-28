@@ -52,7 +52,7 @@ comboTemasLigados("comboTemas",function(retorno)
 	$i("temas").innerHTML = retorno.dados
 	aguarde("none")
 	$i("comboTemas").onchange = function()
-	{window.parent.objmapa.temaAtivo = $i("comboTemas").value}
+	{window.parent.i3GEO.temaAtivo = $i("comboTemas").value}
 },"temas")
 
 YAHOO.example.init = function ()
@@ -78,7 +78,7 @@ function operacao(tipo)
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
 		window.parent.g_operacao = "selecao"
-		cp.call(p,"selecaoPT",window.parent.ajaxredesenha);
+		cp.call(p,"selecaoPT",window.parent.i3GEO.atualiza);
 	}
 }
 //captura as geometrias selecionadas e grava em arquivos

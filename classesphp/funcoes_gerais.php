@@ -769,7 +769,7 @@ function retornaReferencia()
 	$nomer = ($objImagem->imageurl).basename($nomer);
 	$d = (abs($em->maxx - $em->minx)) / ($objImagem->width);
 	$s = "g_celularef = ".$d.";";
-	$s .= "objmapa.extentref = '".$em->minx." ".$em->miny." ".$em->maxx." ".$em->maxy."';";
+	$s .= "var extentref = '".$em->minx." ".$em->miny." ".$em->maxx." ".$em->maxy."';";
 	$s .=  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
 	$cp->set_data($s);
 }

@@ -51,9 +51,9 @@ i3GEO.tema = {
 		{p.removeChild(p.childNodes[0]);}
 		while (p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		i3GEO.php.excluitema(ajaxredesenha,tema);
-		objmapa.temaAtivo = "";
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.excluitema(i3GEO.atualiza,tema);
+		i3GEO.temaAtivo = "";
 	},
 	/*
 	Function: sobe
@@ -65,8 +65,8 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	sobe: function(tema){
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		i3GEO.php.sobetema(ajaxredesenha,tema);
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.sobetema(i3GEO.atualiza,tema);
 	},
 	/*
 	Function: desce
@@ -78,8 +78,8 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	desce: function(tema){
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		i3GEO.php.descetema(ajaxredesenha,tema);
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.descetema(i3GEO.atualiza,tema);
 	},
 	/*
 	Function: zoom
@@ -91,8 +91,8 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	zoom: function(tema){
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		i3GEO.php.zoomtema(ajaxredesenha,tema);
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.zoomtema(i3GEO.atualiza,tema);
 	},
 	/*
 	Function: limpasel
@@ -105,8 +105,8 @@ i3GEO.tema = {
 	*/
 	limpasel: function(tema){
 		g_operacao = "limpasel";
-		i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-		i3GEO.php.limpasel(ajaxredesenha,tema);
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.limpasel(i3GEO.atualiza,tema);
 	},
 	/*
 	Function: mudatransp
@@ -125,8 +125,8 @@ i3GEO.tema = {
 		else
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			i3GEO.php.mudatransp(ajaxredesenha,idtema,valor);
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.php.mudatransp(i3GEO.atualiza,idtema,valor);
 		}
 		else
 		{alert("Valor não definido.");}
@@ -147,8 +147,8 @@ i3GEO.tema = {
 		else
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
-			i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-			i3GEO.php.mudanome(ajaxredesenha,idtema,valor);
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
 		}
 		else
 		{alert("Nome não definido");}
@@ -174,9 +174,9 @@ i3GEO.tema = {
 		*/
 		abreKml: function(tema){
 			if(tema == "mapfile"){
-				if(objmapa.mapfile == "")
+				if(i3GEO.parametros.mapfile == "")
 				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+objmapa.mapfile,"","","Kml"));
+				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+i3GEO.parametros.mapfile,"","","Kml"));
 			}
 			else
 			{return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml"));}

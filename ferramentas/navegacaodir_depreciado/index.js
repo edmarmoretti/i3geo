@@ -102,5 +102,5 @@ function incluir(path)
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,f,window.parent.ajaxredesenha);
+	cp.call(p,f,window.parent.i3GEO.atualiza);
 }

@@ -99,5 +99,5 @@ function retornoCriaTema(retorno)
 		alert("OOps! Ocorreu um erro\n"+retorno);
 		return;
 	}
-	window.parent.ajaxredesenha("")
+	window.parent.i3GEO.atualiza("")
 }

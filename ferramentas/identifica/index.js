@@ -115,13 +115,13 @@ function listaTemasLigados()
 		}
 		$i("resultado").innerHTML = linhas+"<table class=lista ><tr><td style=text-align:left ><input onclick='identifica(\"ligados\")' style=cursor:pointer type=radio name=tema /></td><td>Todos</td></tr>"+linhas1+"</table>"
 		//verifica se existem sistemas para identificar
-		g_locidentifica = window.parent.g_locidentifica
+		g_locidentifica = window.parent.i3GEO.parametros.locidentifica
 		if (g_locidentifica != "")
 		{
 			sistemasAdicionais = new Array()
 			i3GEO.util.ajaxexecASXml(g_locidentifica,"pegavalSistemas")
 		}
-		if (window.parent.objmapa.temaAtivo == "")
+		if (window.parent.i3GEO.temaAtivo == "")
 		{
 			var temp = "";
 			for (l=0;l<lista.length;l++)
@@ -132,7 +132,7 @@ function listaTemasLigados()
 			identifica(temp)
 		}
 		else
-		{identifica(window.parent.objmapa.temaAtivo)}
+		{identifica(window.parent.i3GEO.temaAtivo)}
 	};
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemas&opcao=ligados"
 	var cp = new cpaint();
@@ -170,7 +170,7 @@ function identifica(tema)
 {
 	aguarde("block")
 	var resolucao = $i("resolucao").value;
-	window.parent.objmapa.temaAtivo = tema;
+	window.parent.i3GEO.temaAtivo = tema;
 	var temp = $i("xy").innerHTML
 	var tempy = temp.split("y: ")
 	ypt = tempy[1]

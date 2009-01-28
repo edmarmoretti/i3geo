@@ -27,7 +27,7 @@
 	 .info {text-align:left;}
 	</style> 
 </head>
-<body id="i3geo"  >
+<body id="i3geo" >
 <center>
 <table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
 <!--
@@ -276,7 +276,7 @@ g_templateLegenda = "legendaseminput.htm";
 */
 var g_templateLegenda = "";
 var g_3dmap = "3dmap.map";
-var objmapa = new Mapa();
+i3GEO.cria()
 //Log
 
 var myContainer = document.body.appendChild(document.createElement("div")); 
@@ -289,9 +289,9 @@ i3geoLog.show();
 	Inicializa o mapa
 */
 //i3GEO.guias.ATUAL = "legenda"
-objmapa.inicializa();
+i3GEO.inicia();
 //esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
-if($i("escala") && objmapa.w < 500)
+if($i("escala") && i3GEO.parametros.w < 500)
 {$i("escala").style.display="none";}
 </script>
 </body>

@@ -51,7 +51,7 @@ function busca(pagina)
 	escondexy();
 	if (window.parent.objmapa)
 	{
-		if (window.parent.objmapa.scale > 150001)
+		if (window.parent.i3GEO.parametros.mapscale > 150001)
 		{
 			var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
 			ins += "<br><br><div style=width:80px onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -72,7 +72,7 @@ function busca(pagina)
 	if($i("buscaflickr").checked)
 	{
 		$i("f").style.display="block"
-		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotosflickr&ret="+window.parent.objmapa.extent+"&key="+key+"&texto="+texto+"&ai="+ai+"&af="+af+"&page="+pagina;
+		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotosflickr&ret="+window.parent.i3GEO.parametros.mapexten+"&key="+key+"&texto="+texto+"&ai="+ai+"&af="+af+"&page="+pagina;
 		cp.call(p,"listafotosflickr",listafotosflickr);
 	}
 	if($i("buscapanoramio").checked)
@@ -81,7 +81,7 @@ function busca(pagina)
 		$i("paginas").innerHTML = pagina+50;
 		var ai = pagina
 		var af = pagina+50
-		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotospanoramio&ret="+window.parent.objmapa.extent+"&ai="+ai+"&af="+af;
+		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotospanoramio&ret="+window.parent.i3GEO.parametros.mapexten+"&ai="+ai+"&af="+af;
 		cp.call(p,"listafotospanoramio",listafotospanoramio);
 	}
 	if($i("buscalocr").checked)
@@ -90,7 +90,7 @@ function busca(pagina)
 		$i("paginas").innerHTML = pagina+50;
 		var ai = pagina
 		var af = pagina+50
-		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotoslocr&ret="+window.parent.objmapa.extent+"&ai="+ai+"&af="+af;
+		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotoslocr&ret="+window.parent.i3GEO.parametros.mapexten+"&ai="+ai+"&af="+af;
 		cp.call(p,"listafotoslocr",listafotoslocr);
 	}
 
@@ -212,7 +212,7 @@ function listafotoslocr(retorno)
 function mostraxy(xy)
 {
 	var xy = xy.split(",")
- 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize)
+ 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 	var box = window.parent.$i("boxpin")
 	box.style.display = "block"
 	box.style.width = "21px"
@@ -237,7 +237,7 @@ function ajustarescala()
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
 	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
-	cp.call(p,"mudaescala",window.parent.ajaxredesenha);
+	cp.call(p,"mudaescala",window.parent.i3GEO.atualiza);
 }
 function esconde(obj)
 {

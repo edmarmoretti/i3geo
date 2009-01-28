@@ -67,19 +67,6 @@ Return:
 
 objeto cpaint contendo uma string como no exemplo abaixo
 
-"var temas='<lista de temas>;var mapexten= '<extensão geográfica do mapa criado>';
-var mapscale=<escala do mapa>;var mapres=<resolução da imagem do mapa>;
-g_celula=<tamanho do pixel em décimo de grau>;var mapimagem='<endereço da imagem do mapa>'
-;var mapwidth=<largura do mapa>;var mapheight=<altura do mapa>;
-var mappath='<diretório temporário do mapa>';var mapurl='<url do diretório do mapa>';
-var refimagem='<depreciado>';var refwidth=<depreciado>;var refheight=<depreciado>;
-var refpath='<depreciado>';var refurl='<depreciado>';var legimagem='<depreciado>';
-var legwidth=<depreciado>;var legheight=<depreciado>;var legpath='<depreciado>';
-var legurl='<depreciado>';g_locsistemas='<endereço do xml com os sistemas adicionais>';
-g_locidentifica='<endereço do xml com os sistemas da interface de identificação>';
-g_r='<o R está instalado?>';g_locmapas='<endereço do xml para a lista de mapas>';
-objmapa.mapfile='<objeto mapfile>';objmapa.cgi='<objeto cgi>';;objmapa.postgis_con='<conexão com o postgis>';"
-
 Essa string é recuperada no lado do javascript com eval().
 
 Se $expoeMapfile = "nao", o nome do mapfile não é retornado
@@ -151,28 +138,27 @@ function iniciaMapa()
 	{$nomer = ($imgo->imageurl).basename($nomer);}
 	$iref = $m->mapa->reference;
 	$irefH = $iref->height;
-	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
-	$res .= ";var refimagem='';var refwidth=0;objmapa.refheight=".$irefH.";var refpath='';var refurl=''";
-	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';g_locsistemas='".$locsistemas."';g_locidentifica='".$locidentifica."'";
+	$res = "var mapexten= '".$ext."';var mapscale=".$escalaMapa.";var mapres=".$m->mapa->resolution.";var g_celula=".$celula.";var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
+	$res .= ";var extentref = '';var refimagem='';var refwidth=0;var refpath='';var refurl=''";
+	$res .= ";var legimagem='';var legwidth=0;var legheight=0;var legpath='';var legurl='';var locsistemas='".$locsistemas."';var locidentifica='".$locidentifica."'";
 	$r = (isset($R_path)) ? "sim" : "nao";
-	$res .= ";g_r='".$r."'"; //identifica se o r esta instalado
-	$res .= ";g_locmapas='".$locmapas."'";
+	$res .= ";var r='".$r."'"; //identifica se o r esta instalado
+	$res .= ";var locmapas='".$locmapas."'";
 	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
-	{$res .= ";objmapa.mapfile=''";}
+	{$res .= ";var mapfile=''";}
 	else
-	{$res .= ";objmapa.mapfile='".$map_file."'";}
-	$res .= ";objmapa.cgi='".$locmapserv."'";
-	$res .= ";objmapa.utilizacgi='".$utilizacgi."'";
-	$res .= ";objmapa.postgis_con='".$postgis_con."'";
+	{$res .= ";var mapfile='".$map_file."'";}
+	$res .= ";var cgi='".$locmapserv."'";
+	$res .= ";var utilizacgi='".$utilizacgi."'";
 	$res .= ";var titulo='".$tituloInstituicao."'";
 	$versao = versao();
-	$res .= ";objmapa.versaoms ='".$versao["principal"]."'";
+	$res .= ";var versaoms ='".$versao["principal"]."'";
 	//Pega os estilos disponíveis
 	$visual = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
-	$res .= ";objmapa.listavisual='".$visual."'";
+	$res .= ";var listavisual='".$visual."'";
 	//pega os usuários navegadores
 	//para efeitos de compatibilidade
-	$res .= ";objmapa.navegacaoDir='".$navegadoresLocais."'";
+	$res .= ";var navegacaoDir='".$navegadoresLocais."'";
 	$res .= ($navegadoresLocais == "sim") ? ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=true" : ";i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir=false";
 	//
 	//verifica se o pacote geoip está instalado ou não
@@ -180,12 +166,9 @@ function iniciaMapa()
 	$geoip = "nao";
 	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 	{$geoip = "sim";}
-	$res .= ";objmapa.geoip='".$geoip."';";
+	$res .= ";var geoip='".$geoip."';";
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
-	$res .= "objmapa.mensagens ='".$m->pegaMensagens()."';";
-	//
-	//salva uma copia para opção de reiniciar o mapa
-	//
+	$res .= "var mensagens ='".$m->pegaMensagens()."';";
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));
 }

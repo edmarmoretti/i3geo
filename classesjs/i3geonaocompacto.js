@@ -31,6 +31,7 @@ var jsfiles = new Array(
 "../pacotes/yui252/build/treeview/treeview-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+"classe_i3geo.js",
 "classe_php.js",
 "classe_configura.js",
 "depreciados.js",
@@ -54,8 +55,6 @@ var jsfiles = new Array(
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
-"redesenho.js",
-"iniciamma.js",
 "menususpenso.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "classe_gadgets.js"

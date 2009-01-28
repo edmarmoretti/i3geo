@@ -92,7 +92,7 @@ function cruza()
 		if (retorno.data==undefined )
 		{$i("fim").innerHTML = "Erro. A operação demorou muito.";}
 		else
-		{window.parent.ajaxredesenha("");}
+		{window.parent.i3GEO.atualiza("");}
 	}
 	aguarde("block")
 	var cp = new cpaint();

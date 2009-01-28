@@ -56,21 +56,21 @@ i3GEO.analise = {
 		Abre a janela que gera grade de pontos
 		*/
 		gradePontos: function()
-		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos"));},
+		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos");},
 		/*
 		Function: gradePol
 
 		Abre a janela que gera grade de poligonos
 		*/
 		gradePol: function()
-		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos"));},
+		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos");},
 		/*
 		Function: gradeHex
 
 		Abre a janela que gera grade de hexágonos
 		*/
 		gradeHex: function()
-		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos"));},
+		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos");},
 		/*
 		Function: analisaGeometrias
 
@@ -78,8 +78,8 @@ i3GEO.analise = {
 		*/
 		analisaGeometrias: function(){
 			g_tipoacao = "selecao";
-			objmapa.temaAtivo = "";
-			return(i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o"));
+			i3GEO.temaAtivo = "";
+			i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","Sele&ccedil;&atilde;o");
 		},
 		/*
 		Function: pontosdistri
@@ -87,11 +87,10 @@ i3GEO.analise = {
 		Abre a janela para executar análises de distribuição de pontos
 		*/
 		pontosdistri: function(){
-			//a variável g_r indica se o R está instalado no servidor e é definida na inicialização do I3Geo
-			if (g_r == "nao")
+			if (i3GEO.parametros.r == "nao")
 			{alert("Opção não disponível");}
 			else
-			{return(i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribui&ccedil;&atilde;o de pontos"));}
+			{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.htm","","","Distribui&ccedil;&atilde;o de pontos");}
 		},
 		/*
 		Function: pontoempoligono
@@ -99,35 +98,35 @@ i3GEO.analise = {
 		Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
 		*/
 		pontoempoligono: function()
-		{return(i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono"));},
+		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono");},
 		/*
 		Function: nptPol
 
 		Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
 		*/
 		nptPol: function()
-		{return(i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono"));},
+		{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono");},
 		/*
 		Function: buffer
 
 		Gera um buffer em elementos selecionados
 		*/
 		buffer: function()
-		{return(i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno"));},
+		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno");},
 		/*
 		Function: distanciaptpt
 
 		Abre a janela para calcular a distância entre um ponto e outros pontos próximos
 		*/
 		distanciaptpt: function()
-		{return(i3GEO.janela.cria("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia"));},
+		{i3GEO.janela.cria("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia");},
 		/*
 		Function: centroide
 
 		Abre a janela que gera um tema com os centroides dos elementos selecionados
 		*/
 		centroide: function()
-		{return(i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide"));},
+		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide");},
 		/*
 		Function: dissolve
 
@@ -141,7 +140,7 @@ i3GEO.analise = {
 		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 		*/
 		agrupaElementos: function()
-		{return(i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa"));},
+		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");},
 	},
 	/*
 	Class: i3GEO.analise.medeDistancia
@@ -241,7 +240,7 @@ i3GEO.analise = {
 					if (navn)
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
 					else
-					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
 				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 				if (n > 0){
@@ -250,7 +249,7 @@ i3GEO.analise = {
 					if($i("pararraios") && $i("pararraios").checked == true ){
 						i3GEO.desenho.aplica("insereCirculo","",n);
 						if(navm)
-						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(objmapa.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}
+						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 					}
 				}
 				i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.analise.medeDistancia.fechaJanela,"pontosins");
@@ -268,7 +267,7 @@ i3GEO.analise = {
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (objmapa.scale > 500000)
+					if (i3GEO.parametros.mapscale > 500000)
 					{var d = parseInt(d);}
 					else{
 						d= d + "";
@@ -314,7 +313,7 @@ i3GEO.analise = {
 				{i3GEO.eventos.MOUSEMOVE.push("i3GEO.analise.medeArea.movimento()");}		
 				YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", i3GEO.analise.medeArea.fechaJanela);
 				var temp = function(retorno){
-					i3GEO.janela.fechaAguarde("ajaxredesenha");
+					i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 					g_areapixel = retorno.data;
 					if (g_areapixel < 0)
 					{alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.");}
@@ -327,8 +326,8 @@ i3GEO.analise = {
 						i3GEO.desenho.richdraw.lineWidth = "2px";
 					}
 				};
-				i3GEO.janela.abreAguarde("ajaxredesenha",$trad("o1"));
-				i3GEO.php.areaPixel(temp,g_celula);
+				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+				i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
 			}
 			else{i3GEO.desenho.richdraw.fecha();}
 		},
@@ -387,7 +386,7 @@ i3GEO.analise = {
 						if (navn)
 						{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);}
 						else
-						{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(objmapa.w/2),pontosdistobj.yimg[0]);	}				
+						{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(i3GEO.parametros.w/2),pontosdistobj.yimg[0]);	}				
 					}
 					catch(e){}
 				}
@@ -395,7 +394,7 @@ i3GEO.analise = {
 					if (navn)
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1);}
 					else
-					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(objmapa.w/2),pontosdistobj.yimg[n]);}				
+					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
 				catch(e){}
 				var m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
@@ -421,7 +420,7 @@ i3GEO.analise = {
 					//conforme a escala, os dados são arredondados
 					// 
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (objmapa.scale > 500000)
+					if (i3GEO.parametros.mapscale > 500000)
 					{var d = parseInt(d);}
 					else{
 						d= d + "";
