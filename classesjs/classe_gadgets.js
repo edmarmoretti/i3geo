@@ -37,7 +37,7 @@ i3GEO.gadgets = {
 	/*
 	Variable: PARAMETROS
 	
-	Parametros de inicialização dos gadgets
+	Parametros de inicialização dos gadgets.
 	
 	Type:
 	{JSON}
@@ -58,7 +58,9 @@ i3GEO.gadgets = {
 		"mostraQuadros":
 		{idhtml:"lugarquadros"},
 		"mostraHistoricoZoom":
-		{idhtml:"historicozoom"}
+		{idhtml:"historicozoom"},
+		"mostraMenuSuspenso":
+		{idhtml:"menus"}
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -667,6 +669,66 @@ i3GEO.gadgets = {
 					while(i>=0)
 				}
 				wi.document.write("<br>Fim</body></html>");
+			}
+		}
+	},
+	/*
+	Function: mostraMenuSuspenso
+	
+	Mostra o menu suspenso com opções extras de análise, ajuda, etc
+	
+	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
+
+	O conteúdo do menu é baseado na variável oMenuData
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/
+	mostraMenuSuspenso: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml;}
+		else
+		{i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = id;}
+		var objid = $i(id);
+		if(objid){
+			objid.className="yuimenubar";
+			if(oMenuData.ajudas){
+				var ins = "";
+				ins += '<div class="bd" style="align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
+				ins += '<ul class="first-of-type" style="border:0px solid white;top:10px;">';
+ 				var sobe = "";
+ 				if(navn){var sobe = "line-height:0px;";}
+				ins += '<li class="yuimenubaritem" style="padding-bottom:5px" ><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuajuda" >&nbsp;&nbsp;'+$trad("s1")+'</a></li>';
+				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
+ 				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
+ 				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
+ 				ins += '</ul>'; 
+ 				ins += '</div>';
+ 				objid.innerHTML=ins;
+ 			}
+			var onMenuBarBeforeRender = function (p_sType, p_sArgs){
+				if(i3GEO.parametros.w >= 500)
+				{var conta = 0;}
+				else
+				{var conta = 0;}
+				for(var nomeMenu in oMenuData){
+					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: oMenuData[nomeMenu]});
+					var conta=conta+1;
+				}
+			}
+ 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 150, hidedelay: 250, lazyload: false});
+ 			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
+ 			i3GEOoMenuBar.render();
+			//
+			//corrige problemas de estilo
+			//
+			var temp = objid.style;
+			temp.backgroundPosition = "0px -5px";
+			temp.border = "0px solid white";
+			if($i("contemMenu")){
+				$i("contemMenu").className="yui-navset";
 			}
 		}
 	}

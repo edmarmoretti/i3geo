@@ -786,11 +786,5 @@ g_listaFuncoesBotoes = {
 				$i("img").style.cursor="pointer";
 			}
 		}
-	},
-	{
-		//monta o menu suspenso
-		iddiv:"menus",
-		tipo:"",
-		constroiconteudo:'montaMenuSuspenso("menus")'
 	}	
 ]};

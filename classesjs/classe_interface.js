@@ -57,6 +57,13 @@ i3GEO.interface = {
 	*/
 	IDCORPO: "corpoMapa",
 	/*
+	Variable: IDMAPA
+	
+	ID do elemento HTML criado para conter o mapa
+	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
+	*/
+	IDMAPA: "",
+	/*
 	Function: redesenha
 	
 	Aplica o método redesenha da interface atual
@@ -137,7 +144,8 @@ i3GEO.interface = {
 			ins += "<tr><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgL' /></td><td class=verdeclaro ><input style='position:relative;top:0px;left:0px'' type=image src='' id='img' /></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgO' /></td></tr>";
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgS' /></td><td class=verdeclaro ></td></tr>";
 			ins += "</table>";
-			$i(i3GEO.interface.IDCORPO).innerHTML = ins;		
+			$i(i3GEO.interface.IDCORPO).innerHTML = ins;
+			i3GEO.interface.IDMAPA = "img";	
 		},
 		inicia:function(){
 			if ($i("contemImg"))
@@ -157,7 +165,9 @@ i3GEO.interface = {
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraEscalaNumerica();
 			i3GEO.gadgets.mostraEscalaGrafica();
+			i3GEO.gadgets.mostraMenuSuspenso();
 			i3GEO.gadgets.visual.inicia();
+			i3GEO.idioma.mostraSeletor();
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			//
 			//inicia as barras de ferramentas
@@ -220,6 +230,7 @@ i3GEO.interface = {
 				var f = $i("flamingo");
 				f.style.width = w;
 				f.style.height = h;
+				i3GEO.interface.IDMAPA = "flamingo";
 			}
 		},
 		inicia: function(){
@@ -247,6 +258,8 @@ i3GEO.interface = {
 	Function: openlayers
 	
 	Interface baseada no software openlayers
+	
+	O objeto openlayers criado nessa função pode ser acessado na variável i3geoOL
 	*/
 	openlayers:{
 		redesenha: function(){
@@ -280,6 +293,7 @@ i3GEO.interface = {
 				f.style.width = w;
 				f.style.height = h;
 			}
+			i3GEO.interface.IDMAPA = "openlayers";
 		},
 		inicia: function(){
 			var montaMapa = function(){
@@ -363,6 +377,75 @@ i3GEO.interface = {
 			};
 			i3GEO.php.openlayers(montaMapa);
 		}
+	},
+	/*
+	Function: googlemaps
+	
+	Interface baseada no software googlemaps
+	*/
+	googlemaps:{
+		redesenha: function(){
+   			if(map != ""){
+   				map.removeOverlay(wmsmap);
+   				posfixo = posfixo + "&";
+   				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, map.getBounds());
+				map.addOverlay(wmsmap);
+			}
+		},
+		cria: function(w,h){
+			posfixo = "&";
+			var i = $i(i3GEO.interface.IDCORPO);
+			if(i){
+				var f = $i("googlemaps");
+				if(!f){
+					var ins = '<div id=googlemaps style="width:0px;height:0px;text-align:left;background-image:url('+i3GEO.configura.locaplic+'/imagens/i3geo1bw.jpg)"></div>';
+					i.innerHTML = ins;
+				}
+				var f = $i("googlemaps");
+				f.style.width = w;
+				f.style.height = h;
+			}
+			map = "";
+			i3GEO.interface.IDMAPA = "googlemaps";
+		},
+		inicia: function(){
+    		var pol = i3GEO.parametros.mapexten;
+    		var ret = pol.split(" ");
+    		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
+    		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
+    		map = new GMap2($i("googlemaps"));
+    		map.setMapType(G_SATELLITE_MAP);
+    		map.addControl(new GLargeMapControl());
+    		map.addControl(new GMapTypeControl());
+    		map.addControl(new GScaleControl());
+    		map.setCenter(new GLatLng(pt2,pt1), 8);   		
+    		wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), map.getBounds());
+			map.addOverlay(wmsmap);
+    		GEvent.addListener(map, "zoomend", function() {
+    			map.removeOverlay(wmsmap);
+    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), map.getBounds());
+				map.addOverlay(wmsmap);
+    		});
+    		GEvent.addListener(map, "dragend", function() {
+    			map.removeOverlay(wmsmap);
+    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), map.getBounds());
+				map.addOverlay(wmsmap);
+    		});
+		},
+		bbox: function(){
+			var bd = map.getBounds();
+			var so = bd.getSouthWest();
+			var ne = bd.getNorthEast();
+			var bbox = so.lng()+" "+so.lat()+" "+ne.lng()+" "+ne.lat();
+			return (bbox);
+		},
+		criaWMS: function(){
+		   	var cgi = i3GEO.configura.locaplic+"/classesphp/parse_cgi.php?g_sid="+i3GEO.configura.sid;
+    		var parametros = "&map_size="+parseInt($i("googlemaps").style.width);
+    		parametros += ","+parseInt($i("googlemaps").style.height);
+    		parametros += "&mapext="+i3GEO.interface.googlemaps.bbox();
+    		parametros += "&map_imagecolor=-1 -1 -1&map_transparent=on";
+    		return(cgi+parametros);
+		}
 	}
-
 }

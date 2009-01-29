@@ -232,6 +232,17 @@ Include:
 		$cp->set_data($resultado);
 	break;
 /*
+Property: chavegoogle
+
+Retorna o valor da chave registrada para a API do Google maps
+
+Essa chave deve ser registrada em i3geo/ms_configura.php
+*/	
+	case "chavegoogle":
+		$cp->set_data($googleApiKey);
+	break;	
+	
+/*
 Property: funcoesGeometrias
 
 Processa geometrias, armazenadas no formato I3Geo, gerando uma nova geometria.

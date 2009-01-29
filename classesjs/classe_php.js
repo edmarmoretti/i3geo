@@ -734,5 +734,17 @@ i3GEO.php = {
 	inicia: function(funcao,embedLegenda,w,h){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"iniciaMapa",funcao);	
+	},
+	/*
+	Function: chaveGoogle
+
+	PHP:
+	classesphp/mapa_controle.php
+	
+	<chavegoogle>	
+	*/
+	chaveGoogle: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=chavegoogle&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"chavegoogle",funcao);	
 	}
 };

@@ -65,7 +65,6 @@ packer("classe_ajuda.js","compactados/classe_ajuda_compacto.js","Normal");
 packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("classe_configura.js","compactados/classe_configura_compacto.js","Normal");
 packer("classe_navega.js","compactados/classe_navega_compacto.js","Normal");
-packer("menususpenso.js","compactados/menususpenso_compacto.js","Normal");
 packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
 packer("classe_eventos.js","compactados/classe_eventos_compacto.js","Normal");
 packer("classe_barradebotoes.js","compactados/classe_barradebotoes_compacto.js","Normal");
@@ -125,7 +124,6 @@ $jsfiles = array(
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
-"menususpenso.js",
 "classe_gadgets.js"
 );
 

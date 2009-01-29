@@ -51,6 +51,43 @@ alert($trad("d22"))
 */
 i3GEO.idioma = {
 	/*
+	Property: MOSTRASELETOR
+	
+	Define se o i3Geo irá incluir no mapa as bandeiras de seleção de idiomas
+	
+	Type:
+	{Boolean}
+	
+	Default:
+	true
+	*/
+	MOSTRASELETOR: true,
+	/*
+	Property: IDSELETOR
+	
+	Define o id do elemento HTML que receberá o seletor. Se não for definido, o seletor será
+	posicionado automaticamente pelo i3Geo
+	
+	Type:
+	{String}
+	
+	Default:
+	""
+	*/
+	IDSELETOR: "",
+	/*
+	Property: SELETORES
+	
+	Lista os seletores (bandeiras) que serão incluídas no seletor
+	
+	Type:
+	{Array}
+	
+	Default:
+	"pt","en","es","it"
+	*/
+	SELETORES: new Array("pt","en","es","it"),
+	/*
 	Property: DICIONARIO
 	
 	Define o objeto com o dicionário utilizado
@@ -201,6 +238,45 @@ i3GEO.idioma = {
 	listaIdiomas: function() {
 		for (k in i3GEO.idioma.DICIONARIO){
 			return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));
+		}
+	},
+	/*
+	Function: mostraSeletor
+	
+	Inclui as bandeiras no mapa permitindo a seleção do idioma
+	
+	As imagens das bandeiras devem estar definidas no CSS do i3geo, recebendo como identificadores
+	os ids uk,brasil,italiano,espanhol
+	*/
+	mostraSeletor: function(){
+		if(!i3GEO.idioma.MOSTRASELETOR){return;}
+		//
+		//monta o elemento HTML com as bandeiras
+		//
+		var ins = "";
+		var n = i3GEO.idioma.SELETORES.length;
+		for(i=0;i<n;i++){
+			ins += '<img  style="padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+i3GEO.idioma.SELETORES[i]+'\')" ';
+			if(i3GEO.idioma.SELETORES[i] == "en")
+			ins += 'alt="Ingles" id="uk" />';
+			if(i3GEO.idioma.SELETORES[i] == "pt")
+			ins += 'alt="Portugues" id="brasil" />';
+			if(i3GEO.idioma.SELETORES[i] == "es")
+			ins += 'alt="Espanhol" id="espanhol" />';
+			if(i3GEO.idioma.SELETORES[i] == "it")
+			ins += 'alt="Italiano" id="italiano" />';
+		}
+		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
+		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
+		else{
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO))
+			var novoel = document.createElement("div");
+			novoel.innerHTML = ins;
+			novoel.style.position = "absolute";
+			novoel.style.top = pos[1] - 17 +"px";
+			novoel.style.left = pos[0]+"px";
+			novoel.style.zIndex = 5000;
+			document.body.appendChild(novoel);
 		}
 	}
 };

@@ -55,7 +55,6 @@ var jsfiles = new Array(
 "classe_arvoredetemas.js",
 "configura.js",
 "classe_barradebotoes.js",
-"menususpenso.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "classe_gadgets.js"
 );

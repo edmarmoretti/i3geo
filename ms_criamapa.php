@@ -141,6 +141,7 @@ $postgis_mapa_ = $postgis_mapa;
 $tituloInstituicao_ = $tituloInstituicao;
 $atlasxml_ = $atlasxml;
 $expoeMapfile_ = $expoeMapfile;
+$googleApiKey_ = $googleApiKey;
 //
 //se houver string de conexão para substituição
 //o modo cgi não irá funcionar
@@ -198,6 +199,7 @@ $_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
+$_SESSION["googleApiKey"] = $googleApiKey_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
@@ -468,7 +470,6 @@ interface = arquivo html que será aberto
 */
 if ($interface != "mashup")
 {
-	echo "<br><br><span style='color:gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;' >Tempo de processamento no servidor em segundos: ".((microtime(1) - $tempo))."<span>";
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))
@@ -479,6 +480,8 @@ if ($interface != "mashup")
 	}
 	else
 	{
+		echo "<br><br><span style='color:gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;' >Tempo de processamento no servidor em segundos: ".((microtime(1) - $tempo))."<span>";
+
 		if (file_exists($caminho."aplicmap/".$interface))
 		{$urln = $caminho."aplicmap/".$interface."?".session_id();}
 		else 

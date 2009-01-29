@@ -1,3 +1,6 @@
+<?php
+include_once("../ms_configura.php");
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -13,21 +16,11 @@
 </style>
 <title>MMA - Mapa interativo</title>
 <!-- Leitura dos programas javaScript e estilos. Pode-se ler os arquivos não compactados, bastando excluir a palavra _compacto -->
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&v=2.x&key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js"></script>
-<!--
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA" type="text/javascript"></script>
--->
-<!--
-    chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
-    chave no desenvolvimento = ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxQ_qvn5wqSkbcx9uoqrWGnUcZ7lqhRVzkJwzeDN3nQJheG7FjoxyruBIQ
--->
 
-<!-- formatação alternativa das janelas internas, para usar é só descomentar
-<link rel="stylesheet" type="text/css" href="../css/panel-aqua.css" />
--->
 </head>
-<body id=i3geo onmouseover="javascript:this.onmousemove=processevent1" >
+<body id=i3geo >
 <center>
 <table id='mst' width=100% cellspacing='0'>
 <tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
@@ -71,11 +64,11 @@ Title: OpenLayers (experimental)
 
 Abre o i3geo com a navegação controlada pelo OpenLayers.
 
-File: i3geo/aplicmap/openlayers.htm
+File: i3geo/aplicmap/googlemaps.htm
 
 Exemplo:
 
-http://<host>/i3geo/ms_criamapa.php?interface=openlayers.htm
+http://<host>/i3geo/ms_criamapa.php?interface=googlemaps.phtml
 
 */
 g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
@@ -87,8 +80,9 @@ g_janelaMen = "nao";
 g_mostraRosa = "nao"
 g_opcoesTemas = "sim";
 g_3dmap = "3dmap.map";
-i3GEO.interface.ATUAL = "openlayers";
+i3GEO.interface.ATUAL = "googlemaps";
 i3GEO.interface.IDCORPO = "contemImg";
+
 i3GEO.cria();
 i3GEO.inicia();
 </script>

@@ -1456,3 +1456,10 @@ Function: ajaxIniciaParametros (depreciado)
 */
 function ajaxIniciaParametros(retorno)
 {i3GEO.atualiza(retorno);}
+/*
+Function montaMenuSuspenso (depreciado)
+*/
+function montaMenuSuspenso(iddiv){
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = iddiv;
+	i3GEO.gadgets.mostraMenuSuspenso();
+}
