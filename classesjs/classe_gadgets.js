@@ -158,8 +158,8 @@ i3GEO.gadgets = {
 						}
 						catch(m){};
 					};
-					if($i("img"))
-					{YAHOO.util.Event.addListener($i("img"),"mousemove", atualizaLocalizarxy);}
+					if($i(i3GEO.interface.IDMAPA))
+					{YAHOO.util.Event.addListener($i(i3GEO.interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
 				}
 			}
 		}
@@ -679,7 +679,7 @@ i3GEO.gadgets = {
 	
 	O objeto YAHOO.widget.MenuBar resultante pode ser obtido na variável i3GEOoMenuBar
 
-	O conteúdo do menu é baseado na variável oMenuData
+	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
 	
 	Parameters:
 	
@@ -694,7 +694,7 @@ i3GEO.gadgets = {
 		var objid = $i(id);
 		if(objid){
 			objid.className="yuimenubar";
-			if(oMenuData.ajudas){
+			if(i3GEO.configura.oMenuData.ajudas){
 				var ins = "";
 				ins += '<div class="bd" style="align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 				ins += '<ul class="first-of-type" style="border:0px solid white;top:10px;">';
@@ -713,8 +713,8 @@ i3GEO.gadgets = {
 				{var conta = 0;}
 				else
 				{var conta = 0;}
-				for(var nomeMenu in oMenuData){
-					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: oMenuData[nomeMenu]});
+				for(var nomeMenu in i3GEO.configura.oMenuData){
+					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData[nomeMenu]});
 					var conta=conta+1;
 				}
 			}

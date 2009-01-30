@@ -51,6 +51,7 @@ session_id($g_sid);
 session_start();
 $mapext = $temp;
 $map_file = $_SESSION["map_file"];
+
 include_once("../ms_configura.php");
 if(isset($fingerprint))
 {
@@ -76,6 +77,18 @@ foreach ($layersNames as $layerName)
 	$layer = $map->getLayerByname($layerName);
 	if ($layer->getmetadata("classesnome") != "")
 	{autoClasses(&$layer,$map);}
+	if($layer->type == MS_LAYER_POLYGON)
+	{
+		$nclasses = $layer->numclasses;
+		for($i=0;$i<$nclasses;++$i){
+			$classe = $layer->getclass($i);
+			$nestilos = $classe;
+			for($j=0;$j<$nestilos;++$j){
+				$estilo = $classe->getstyle($j);
+				$estilo->set("symbolname","pt1");
+			}	
+		}
+	}
 }
 if(isset($map_size))
 {
@@ -87,6 +100,7 @@ if(isset($mapext))
 	$mapext = explode(" ",$mapext);
 	$map->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
+//$map->save($map_file);
 $s = $map->scalebar;
 $s->set("status",MS_OFF);
 $map_imagecolor = explode(" ",$map_imagecolor);

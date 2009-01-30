@@ -736,14 +736,17 @@ i3GEO.arvoreDeCamadas = {
 	{Boolean}
 	*/
 	comparaTemas: function(novo,atual){
-		var novon = novo.length;
-		if(novon != atual.length){return (false);}
-		for (i=0;i<novon;i++){
-			if(novo[i].name != atual[i].name){return (false);}
-			if(novo[i].tema != atual[i].tema){return (false);}
-			if(novo[i].sel != atual[i].sel){return (false);}
+		try{
+			var novon = novo.length;
+			if(novon != atual.length){return (false);}
+			for (i=0;i<novon;i++){
+				if(novo[i].name != atual[i].name){return (false);}
+				if(novo[i].tema != atual[i].tema){return (false);}
+				if(novo[i].sel != atual[i].sel){return (false);}
+			}
+			return(true);
 		}
-		return(true);
+		catch(e){return true;}
 	},
 	/*
 	Function: pegaTema

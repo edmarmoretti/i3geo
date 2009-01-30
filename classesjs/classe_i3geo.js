@@ -127,8 +127,8 @@ i3GEO = {
 		catch(e){g_locaplic = i3GEO.configura.locaplic;};
 		//
 		//calcula o tamanho do mapa
-		var diminuix = (navm) ? g_diminuixM : g_diminuixN;
-		var diminuiy = (navm) ? g_diminuiyM : g_diminuiyN;
+		var diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
+		var diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		if (e == undefined){
 			var menos = 0;
 			if ($i("contemFerramentas"))
@@ -312,7 +312,7 @@ i3GEO = {
 		else{
 			//YAHOO.log("Chamada AJAX para obter o mapa inicial", "i3geo");
 			i3GEO.janela.abreAguarde("montaMapa",$trad("o5"));
-			i3GEO.php.inicia(montaMapa,g_embedLegenda,i3GEO.parametros.w,i3GEO.parametros.h);
+			i3GEO.php.inicia(montaMapa,i3GEO.configura.embedLegenda,i3GEO.parametros.w,i3GEO.parametros.h);
 		}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.janela.fechaAguarde()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
@@ -336,7 +336,7 @@ i3GEO = {
 		if(arguments.length == 0 || retorno == ""){
 			var legimagem = "";
 			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));
-			i3GEO.php.corpo(i3GEO.atualiza,g_tipoimagem);
+			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
 		}
 		else{	
 			if(arguments.length == 0){return;}

@@ -3,11 +3,53 @@
 //
 function i3GEOmantemCompatibilidade(){
 	try{
+		i3GEO.configura.oMenuData = oMenuData;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.tipoimagem = g_tipoimagem;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.tipotip = g_tipotip;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.funcaoTip = g_funcaoTip;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.diminuixM = g_diminuixM;
+	}
+	catch(e){i3GEO.configura.diminuixM = 20}
+	try{
+		i3GEO.configura.diminuixN = g_diminuixN;
+	}
+	catch(e){i3GEO.configura.diminuixN = 25}
+	try{
+		i3GEO.configura.diminuiyM = g_diminuiyM;
+	}
+	catch(e){i3GEO.configura.diminuiyM = 106}
+	try{
+		i3GEO.configura.diminuiyN = g_diminuiyN;
+	}
+	catch(e){i3GEO.configura.diminuiyN = 103}	
+	try{
+		i3GEO.configura.map3d = g_3dmap;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.embedLegenda = g_embedLegenda;
+	}
+	catch(e){}
+	try{
+		i3GEO.configura.templateLegenda = g_templateLegenda;
+	}
+	catch(e){}
+	try{
 		if(objmapa.finaliza != "")
 		i3GEO.finaliza = objmapa.finaliza
 	}catch(e){};
-
-
 	g_arvoreClick = "";
 	g_arvoreClicks = "";
 
@@ -618,8 +660,9 @@ function criaboxg()
 /*
 Function: initJanelaZoom (depreciado)
 */
-function initJanelaZoom(qual)
-{alert("initJanelaZoom foi depreciado. Utilize i3GEO.barraDeBotoes");}
+function initJanelaZoom(qual){
+	i3GEO.barraDeBotoes.reativa(qual-1);
+}
 /*
 Function: sobeferramentas(depreciado)
 */

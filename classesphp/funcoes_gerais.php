@@ -848,7 +848,7 @@ function retornaReferenciaDinamica()
 		$original = $r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy;
 		$mapa->setmetadata("referenciaextentoriginal",$original);
 	}
-	$s .= ";objmapa.extentref = '".$r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy."';";
+	$s .= ";var extentref = '".$r->minx." ".$r->miny." ".$r->maxx." ".$r->maxy."';";
 	$d = (abs($r->maxx - $r->minx)) / ($objImagem->width);
 	$s .= "g_celularef = ".$d.";";
 	$emt = $objMapa->extent;

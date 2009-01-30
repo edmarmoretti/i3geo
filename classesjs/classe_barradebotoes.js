@@ -33,16 +33,22 @@ Constrói a barra de botões flutuante
 */
 i3GEO.barraDeBotoes = {
 	/*
+	Variable: BARRAS
+	
+	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
+	*/
+	BARRAS: new Array(),
+	/*
 	Property: LISTABOTOES
 	
 	Objeto com a lista de botões.
 	
-	Por default utiliza os botoes definidos em g_listaFuncoesBotoes.botoes
+	Por default utiliza os botoes definidos em i3GEO.configura.funcoesBotoes.botoes
 	
 	Type:
 	{JSON}
 	*/
-	LISTABOTOES: g_listaFuncoesBotoes.botoes,
+	LISTABOTOES: i3GEO.configura.funcoesBotoes.botoes,
 	/*
 	Property: BOTAOPADRAO
 	
@@ -142,6 +148,11 @@ i3GEO.barraDeBotoes = {
 	if ($i("barraDeBotoes2"))
 	
 	i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
+	
+	Os objetos criados são armazenados no array BARRAS, dessa forma, para acessar uma barra utilize
+	por exemplo:
+	
+	i3GEO.barraDeBotoes.BARRAS[1].show();
 	
 	Parameters:
 	
@@ -356,6 +367,27 @@ i3GEO.barraDeBotoes = {
 				}
 			};
 		}
+		i3GEO.barraDeBotoes.BARRAS.push(YAHOO.janelaBotoes.xp.panel);
 		YAHOO.janelaBotoes.xp.panel.show();		
+	},
+	/*
+	Function: reativa
+	
+	Reativa as barras de ferramentas já criadas
+	
+	Parameters:
+	
+	indice {Integer} - índice do array BARRAS que guarda os objetos YAHOO com 
+	as barras Se não for definido, todas as barras serão reativadas
+	*/
+	reativa: function(indice){
+		if(arguments.length == 1)
+			i3GEO.barraDeBotoes.BARRAS[indice].show();
+		else{
+			var n = i3GEO.barraDeBotoes.BARRAS.length;
+			for(i=0;i<n;i++){
+				i3GEO.barraDeBotoes.BARRAS[i].show();
+			}
+		}
 	}
 }

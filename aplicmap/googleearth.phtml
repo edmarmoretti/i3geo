@@ -15,8 +15,6 @@ include_once("../ms_configura.php");
         }
 </style>
 <title>MMA - Mapa interativo</title>
-<script type="text/javascript" src="http://maps.google.com/maps?file=api&v=2.x&key=<?php echo $googleApiKey; ?>"></script>
-
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 
 </head>
@@ -74,11 +72,9 @@ include_once("../ms_configura.php");
   <table width=100% ><tr>
   <td class=tdbranca ></td>
   <td class=tdbranca style=text-align:center >
-  	<div id=localizarxy >
-  	Aguarde...
-  	</div>
+  	
   </td>
-  <td class=tdbranca ></div></td>
+  <td class=tdbranca ></td>
   <td class=tdbranca ><div id=ondeestou ></div></td>
   </tr>
   <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
@@ -168,11 +164,11 @@ Title: OpenLayers (experimental)
 
 Abre o i3geo com a navegação controlada pelo OpenLayers.
 
-File: i3geo/aplicmap/googlemaps.htm
+File: i3geo/aplicmap/googleearth.htm
 
 Exemplo:
 
-http://<host>/i3geo/ms_criamapa.php?interface=googlemaps.phtml
+http://<host>/i3geo/ms_criamapa.php?interface=googleearth.phtml
 
 */
 g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
@@ -184,7 +180,7 @@ g_janelaMen = "nao";
 g_mostraRosa = "nao"
 g_opcoesTemas = "sim";
 g_3dmap = "3dmap.map";
-i3GEO.interface.ATUAL = "googlemaps";
+i3GEO.interface.ATUAL = "googleearth";
 i3GEO.interface.IDCORPO = "contemImg";
 
 i3GEO.cria();

@@ -110,15 +110,15 @@ i3GEO.maparef = {
 		if ($i("mapaReferencia")){
 			//YAHOO.log("Atualizando o mapa de referência", "i3geo");
 			if(dinamico){
-				i3GEO.php.referenciadinamica(this.processaImagem,i3GEO.maparef.fatorZoomDinamico);
+				i3GEO.php.referenciadinamica(i3GEO.maparef.processaImagem,i3GEO.maparef.fatorZoomDinamico);
 			}
 			else{
 				if(($i("imagemReferencia").src == "") || (i3GEO.parametros.cgi != "sim")){
-					i3GEO.php.referencia(this.processaImagem);
+					i3GEO.php.referencia(i3GEO.maparef.processaImagem);
 				}
 				else{
 					var re = new RegExp("&mode=map", "g");
-					$i("imagemReferencia").src = $i("img").src.replace(re,'&mode=reference');
+					$i("imagemReferencia").src = $i(i3GEO.interface.IDMAPA).src.replace(re,'&mode=reference');
 					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 				}
 			}

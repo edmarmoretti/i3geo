@@ -282,8 +282,8 @@ i3GEO.eventos = {
 		if (e.target)
 		{var targ = e.target;}
 		else if (e.srcElement) var targ = e.srcElement;
-		if(targ.id == "" && $i("img"))
-		{var targ = $i("img");}
+		if(targ.id == "" && $i(i3GEO.interface.IDMAPA))
+		{var targ = $i(i3GEO.interface.IDMAPA);}
 		//
 		//se estiver no modo pan, o movimento deve ser obtido do elemento
 		//onde está a imagem do mapa e não diretamente sobre o elemento 'img'

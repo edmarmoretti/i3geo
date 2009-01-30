@@ -601,7 +601,7 @@ i3GEO.navega = {
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.zoomBox.desloca()");
 				i3GEO.eventos.MOUSEUP.remove("i3GEO.navega.zoomBox.termina()");
 				//i3GEO.eventos.MOUSEDOWN.remove("i3GEO.navega.zoomBox.inicia()");
-				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,g_tipoimagem,v);
+				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.configura.tipoimagem,v);
 			}
 			catch(e){limpa.call();return;}
 		}
