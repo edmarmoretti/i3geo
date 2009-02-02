@@ -458,6 +458,7 @@ i3GEO.php = {
 	<Navegacao->mudaExtensao>	
 	*/
 	mudaext: function(funcao,tipoimagem,ext){
+		if(ext == 'undefined'){alert("extensao nao definida");return;}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"mudaext",funcao);	
 	},
@@ -748,3 +749,4 @@ i3GEO.php = {
 		cpJSON.call(p,"chavegoogle",funcao);	
 	}
 };
+YAHOO.log("carregou classe php", "Classes i3geo");

@@ -91,8 +91,10 @@ Extende os métodos de um objeto Array, permitindo remover um elemento.
 
 */
 Array.prototype.remove=function(s){
-	var i = this.indexOf(s);
-	if(i != -1) this.splice(i, 1);
+	try{
+		var i = this.indexOf(s);
+		if(i != -1) this.splice(i, 1);
+	}catch(e){}
 };
 
 /*
@@ -788,3 +790,4 @@ $top = function(id,valor){
 $left = function(id,valor){
 	i3GEO.util.$left(id,valor);
 };
+YAHOO.log("carregou classe util", "Classes i3geo");

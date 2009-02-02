@@ -1158,6 +1158,7 @@ i3GEO.arvoreDeTemas = {
 		Abre o aplicativo datadownload
 		*/
 		downloadbase: function()
-		{window.open(i3GEO.configura.locaplic+"/datadownload.htm");},	
+		{window.open(i3GEO.configura.locaplic+"/datadownload.htm");}
 	}
 };
+YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");

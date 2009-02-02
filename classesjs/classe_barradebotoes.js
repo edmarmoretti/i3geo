@@ -83,17 +83,20 @@ i3GEO.barraDeBotoes = {
 				if (i3GEO.barraDeBotoes.LISTABOTOES[ko].tipo=="dinamico" && temp)
 				{
 					var ist = temp.style;
-					ist.borderWidth=0;
-					ist.borderBottomWidth=1;
-					ist.borderLeftWidth=1;
-					ist.borderColor='rgb(50,50,50)';
+					ist.borderWidth="1px";
+					ist.borderColor='white';
+					ist.borderLeftColor='rgb(50,50,50)';
+					ist.borderBottomColor='rgb(50,50,50)';
 				}
 			}
 			while(ko--)
 		}
 		//ativa o icone
 		if($i(icone))
-		{with ($i(icone).style){borderLeftWidth='0px';borderBottomWidth='0px';borderColor='black';}}
+		{with ($i(icone).style){
+			borderColor='white';
+			borderWidth="1px";
+		}}
 	},
 	/*
 	Function: ativaBotoes
@@ -390,4 +393,5 @@ i3GEO.barraDeBotoes = {
 			}
 		}
 	}
-}
+};
+YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

@@ -20,6 +20,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //pega o elemento boxref para desenhar um retângulo no mapa de referência
+/*
 boxref = false
 if (window.parent.document.getElementById("boxRef"))
 {boxref = window.parent.document.getElementById("boxRef")}
@@ -31,6 +32,7 @@ if((boxref) && !window.parent.document.getElementById("refDinamico").checked)
 	boxref.style.width=0;
 	boxref.style.height=0;
 }
+*/
 //inicializa alguns parâmetros.
 parametrosURL()
 YAHOO.example.init = function ()
@@ -46,16 +48,18 @@ function aplicar()
 {
 	try
 	{
+		aguarde("block")
 		var temp = function (retorno)
 		{
-			eval(retorno.data)
+			eval(retorno.data.variaveis)
 			$i("extatual").innerHTML = mapexten
 			window.parent.i3GEO.atualiza("")
+			aguarde("none")
 		}
-		var x = window.parent.convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-		var xx = window.parent.convdmsddf($i("xxg").value,$i("xxm").value,$i("xxs").value);
-		var y = window.parent.convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		var yy = window.parent.convdmsddf($i("yyg").value,$i("yym").value,$i("yys").value);
+		var x = window.parent.i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);
+		var xx = window.parent.i3GEO.calculo.dms2dd($i("xxg").value,$i("xxm").value,$i("xxs").value);
+		var y = window.parent.i3GEO.calculo.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);
+		var yy = window.parent.i3GEO.calculo.dms2dd($i("yyg").value,$i("yym").value,$i("yys").value);
 		if ((x == xx) || (y == yy))
 		{alert("Digite coordenadas válidas");return;}
 		if ((x > xx) || (y > yy))
@@ -63,7 +67,7 @@ function aplicar()
 		var cp = new cpaint();
 		cp.set_response_type("JSON");
 		//cp.set_debug(2) 
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+window.parent.g_tipoimagem+"&ext="+x+" "+y+" "+xx+" "+yy+"&g_sid="+window.parent.g_sid;
+		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+window.parent.i3GEO.parametros.tipoimagem+"&ext="+x+" "+y+" "+xx+" "+yy+"&g_sid="+g_sid;
 		cp.call(p,"sphPT2shp",temp);
 	}
 	catch(e){alert("Digite coordenadas válidas");}
@@ -73,10 +77,10 @@ function mudabox()
 {
 	if((boxref) && !window.parent.document.getElementById("refDinamico").checked)
 	{
-		var x = window.parent.convdmsddf($i("xg").value,$i("xm").value,$i("xs").value);
-		var xx = window.parent.convdmsddf($i("xxg").value,$i("xxm").value,$i("xxs").value);
-		var y = window.parent.convdmsddf($i("yg").value,$i("ym").value,$i("ys").value);
-		var yy = window.parent.convdmsddf($i("yyg").value,$i("yym").value,$i("yys").value);
+		var x = window.parent.i3GEO.calculo.dms2dd($i("xg").value,$i("xm").value,$i("xs").value);
+		var xx = window.parent.i3GEO.calculo.dms2dd($i("xxg").value,$i("xxm").value,$i("xxs").value);
+		var y = window.parent.i3GEO.calculo.dms2dd($i("yg").value,$i("ym").value,$i("ys").value);
+		var yy = window.parent.i3GEO.calculo.dms2dd($i("yyg").value,$i("yym").value,$i("yys").value);
 		if ((x == xx) || (y == yy))
 		{return;}
 		if ((x > xx) || (y > yy))

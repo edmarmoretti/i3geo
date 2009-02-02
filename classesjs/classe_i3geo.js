@@ -149,7 +149,7 @@ i3GEO = {
 				}
 			}
 			catch(e){var e = "";}
-			document.body.style.width = novow;
+			document.body.style.width = novow - diminuix;
 			document.body.style.height = novoh;
 			var w = novow - menos - diminuix;
 			var h = novoh - diminuiy;
@@ -192,7 +192,7 @@ i3GEO = {
 			r:"",
 			locmapas:"",
 			extentref:""
-		};	
+		};
 	},
 	inicia:function(){
 		i3GEOmantemCompatibilidade();
@@ -206,6 +206,7 @@ i3GEO = {
 			}
 			else{
 				if(retorno.data.variaveis){
+
 					//
 					//executa com eval a string que é retornada pelo servidor (função inicia do mapa_controle.php
 					//
@@ -245,7 +246,6 @@ i3GEO = {
 					i3GEO.guias.cria();
 					if($i("arvoreAdicionaTema"))
 					i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");
-
 					if($i("mst")){$i("mst").style.display="block";}
 					i3GEO.atualiza(retorno);
 					//
@@ -333,11 +333,21 @@ i3GEO = {
 	atualiza: function(retorno){
 		//verifica se o parâmetro retorno existe, caso contrário,
 		//faz a chamada ao programa PHP para obter os parâmetros
-		if(arguments.length == 0 || retorno == ""){
-			var legimagem = "";
-			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1"));
-			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+		try{
+			if (retorno.data == "erro"){
+				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+				i3GEO.mapa.recupera.inicia();return;
+			}
 		}
+		catch(e){}
+		var erro = function(){
+			var legimagem = "";
+			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
+			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
+		}
+		try{var teste = eval(retorno.data.variaveis);}
+		catch(e){erro.call();}
+		if(arguments.length == 0 || retorno == "" || retorno.data.variaveis == undefined){erro.call();return;}
 		else{	
 			if(arguments.length == 0){return;}
 			i3GEO.mapa.corpo.verifica(retorno);
@@ -348,7 +358,7 @@ i3GEO = {
 			mapexten = "";
 			//transforma o retorno em variáveis
 			eval(retorno.data.variaveis);
-			
+
 			i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
 			if (i3GEO.parametros.mapscale != mapscale)
 			i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);
@@ -360,6 +370,7 @@ i3GEO = {
 			i3GEO.parametros.mapimagem = mapimagem;
 
 			i3GEO.interface.redesenha();
+			
 			g_operacao = "";
 			i3GEO.parametros.mapexten = mapexten;
 			if ($i("mensagemt"))
@@ -375,3 +386,4 @@ i3GEO = {
 		}	
 	}
 };
+YAHOO.log("carregou classe i3geo", "Classes i3geo");

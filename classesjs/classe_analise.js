@@ -140,7 +140,7 @@ i3GEO.analise = {
 		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 		*/
 		agrupaElementos: function()
-		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");},
+		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa");}
 	},
 	/*
 	Class: i3GEO.analise.medeDistancia
@@ -440,3 +440,4 @@ i3GEO.analise = {
 		}
 	}
 };
+YAHOO.log("carregou classe analise", "Classes i3geo");

@@ -127,8 +127,8 @@ function inserir()
 	var ygv = $i("yg").value;
 	var ymv = $i("ym").value;
 	var ysv = $i("ys").value;
-	var xxx = window.parent.convdmsddf(xgv,xmv,xsv);
-	var yyy = window.parent.convdmsddf(ygv,ymv,ysv);
+	var xxx = window.parent.i3GEO.calculo.dms2dd(xgv,xmv,xsv);
+	var yyy = window.parent.i3GEO.calculo.dms2dd(ygv,ymv,ysv);
 	var ins = $i("resultado").innerHTML
 	ins = ins + "<div style='cursor:pointer; display:block;position:relative;top:5px;left:0px;' title='clique para remover' onclick='remove(this)'>" + xxx +" " + yyy + "</div><br>"
 	$i("resultado").innerHTML = ins

@@ -17,8 +17,8 @@ include_once("../../ms_configura.php");
     <script type="text/javascript" >
     counterClick = 0
     var m = document.getElementById("map")
-    m.style.width = window.parent.objmapa.w / 2
-    m.style.height = window.parent.objmapa.h / 2
+    m.style.width = window.parent.i3GEO.parametros.w / 2
+    m.style.height = window.parent.i3GEO.parametros.h / 2
     //chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
     //chave no desenvolvimento = ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxQ_qvn5wqSkbcx9uoqrWGnUcZ7lqhRVzkJwzeDN3nQJheG7FjoxyruBIQ
 	i3geoOverlay = false;
@@ -29,10 +29,10 @@ include_once("../../ms_configura.php");
     var app = navigator.appName.substring(0,1);
     if (app=='N') navn=true; else navm=true;
     
-    if(window.parent.objmapa)
+    if(window.parent.i3GEO.parametros)
     {
     	docmapa = window.parent.document
-    	pol = window.parent.objmapa.extent
+    	pol = window.parent.i3GEO.parametros.mapexten
     	ret = pol.split(" ")
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
@@ -115,45 +115,42 @@ include_once("../../ms_configura.php");
       button.style.width = "3em";
       button.style.cursor = "pointer";
     }
-    if(window.parent.objmapa.mapfile)
+    if(window.parent.i3GEO.parametros.mapfile)
 	map.addControl(new botaoI3geo());
 
     function moveMapa(bd)
     {
     	nex = bd.minX+" "+bd.minY+" "+bd.maxX+" "+bd.maxY
-    	var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex
+    	var p = window.parent.i3GEO.locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&ext="+nex
     	var cp = new cpaint();
     	//cp.set_debug(2)
     	cp.set_response_type("JSON");
-    	cp.call(p,"mudaExtensao",window.parent.ajaxredesenha);
+    	cp.call(p,"mudaExtensao",window.parent.i3GEO.atualiza);
     	//ondegoogle(bd);
     }
     function ondegoogle()
     {
-    	if(window.parent.objmapa)
-    	{
-    		var bd = map.getBounds();
-    		var so = bd.getSouthWest();
-    		var ne = bd.getNorthEast();
-    		var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
-    		var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.objmapa.extent,window.parent.objmapa.cellsize);
-			var box = window.parent.$i("boxg")
-			var w = xyMax[0]-xyMin[0]
-			var h = xyMin[1]-xyMax[1]
-			box.style.display = "block"
-			box.style.width = w
-			box.style.height = h
-			box.style.top = xyMax[1]+"px"
-			box.style.left = xyMin[0]+"px"
-    		box.style.display="block"
-    	}
+   		var bd = map.getBounds();
+   		var so = bd.getSouthWest();
+   		var ne = bd.getNorthEast();
+   		var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+   		var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+		var box = window.parent.$i("boxg")
+		var w = xyMax[0]-xyMin[0]
+		var h = xyMin[1]-xyMax[1]
+		box.style.display = "block"
+		box.style.width = w
+		box.style.height = h
+		box.style.top = xyMax[1]+"px"
+		box.style.left = xyMin[0]+"px"
+   		box.style.display="block"
     }
     
     function panTogoogle()
     {
     	var b = window.parent.document.getElementById("boxg");
     	b.style.display="block";
-    	pol = window.parent.objmapa.extent;
+    	pol = window.parent.i3GEO.parametros.mapexten;
     	ret = pol.split(" ");
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
@@ -171,7 +168,7 @@ include_once("../../ms_configura.php");
     }
     function criaWMS()
     {
-    	var cgi = window.parent.g_locaplic+"/classesphp/parse_cgi.php?g_sid="+window.parent.g_sid
+    	var cgi = window.parent.i3GEO.configura.locaplic+"/classesphp/parse_cgi.php?g_sid="+window.parent.i3GEO.configura.sid
     	var parametros = "&map_size="+parseInt(document.getElementById("map").style.width)
     	parametros += ","+parseInt(document.getElementById("map").style.height)
     	parametros += "&mapext="+bbox()
@@ -314,10 +311,10 @@ include_once("../../ms_configura.php");
 					var cp = new cpaint();
 					cp.set_response_type("JSON");
 					//cp.set_debug(2) 
-					var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
-					cp.call(p,"sphPT2shp",window.parent.ajaxredesenha);
+					var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
+					cp.call(p,"sphPT2shp",window.parent.i3GEO.atualiza);
 				}
-				var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid+"&funcao=insereSHP&tema="+retorno.data+"&xy="+pontos.join(" ");
+				var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=insereSHP&tema="+retorno.data+"&xy="+pontos.join(" ");
 				var cp = new cpaint();
 				//cp.set_debug(2)
 				cp.set_response_type("JSON");
@@ -326,7 +323,7 @@ include_once("../../ms_configura.php");
 			var cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode("POST");
-			var p = window.parent.g_locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.g_sid;
+			var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid;
 			cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
 			
     	});

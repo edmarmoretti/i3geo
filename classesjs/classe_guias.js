@@ -44,13 +44,13 @@ i3GEO.guias = {
 	*/
 	CONFIGURA: {
 		"temas":{
-			titulo:$trad("g1"),
+			titulo:$trad("g4a"),
 			id:"guia1",
 			idconteudo:"guia1obj",
 			click:""
 		},
 		"adiciona":{
-			titulo:$trad("g2"),
+			titulo:"+"+$trad("g1"),
 			id:"guia2",
 			idconteudo:"guia2obj",
 			click: function(){
@@ -83,7 +83,7 @@ i3GEO.guias = {
 			}
 		},
 		"mapas":{
-			titulo:$trad("g4"),
+			titulo:"Links",
 			id:"guia5",
 			idconteudo:"guia5obj",
 			click: function(){
@@ -119,7 +119,7 @@ i3GEO.guias = {
 				i3GEO.guias.mostra("mapas");
 				i3GEO.php.pegaMapas(pegaMapas);
 			}
-		},
+		}
 	},
 	/*
 	Variable: atual
@@ -236,6 +236,23 @@ i3GEO.guias = {
 		i3GEO.guias.mostra(i3GEO.guias.ATUAL);
 		i3GEO.guias.ativa(i3GEO.guias.ATUAL);
 	},
+	/*
+	Function: ajustaAltura
+	
+	Ajusta a altura das guias conforme a altura da imagem do mapa
+	*/
+	ajustaAltura: function(){
+		var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		var nguias = guias.length;
+		for(g=0;g<nguias;g++){
+			var guia = i3GEO.guias.CONFIGURA[guias[g]];
+			if($i(guia.idconteudo)){
+				$i(guia.idconteudo).style.overflow="auto";
+				$i(guia.idconteudo).style.height = i3GEO.parametros.h;
+			}	
+		}
+	},
+	
 	/*
 	Function: mostra
 	
@@ -393,3 +410,4 @@ i3GEO.guias = {
 	
 	}
 };
+YAHOO.log("carregou classe guias", "Classes i3geo");

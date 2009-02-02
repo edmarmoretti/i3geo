@@ -255,8 +255,8 @@ function inserir()
 		var ysv = $i("ys").value;
 		var ysv = ysv.replace(regv,".");
 	}
-	var xxx = window.parent.convdmsddf(xgv,xmv,xsv);
-	var yyy = window.parent.convdmsddf(ygv,ymv,ysv);
+	var xxx = window.parent.i3GEO.calculo.dms2dd(xgv,xmv,xsv);
+	var yyy = window.parent.i3GEO.calculo.dms2dd(ygv,ymv,ysv);
 	var ins = $i("resultado").innerHTML
 	ins = ins + "<div style='display:block;position:relative;top:5px;left:0px;font-size:12px' >" + xxx +" " + yyy + "</div><br>"
 	$i("resultado").innerHTML = ins
@@ -271,7 +271,7 @@ function inserir()
 		{var projecao = inputs[i].value}
 	}
 	var projecao = pegaProj()
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+window.parent.objmapa.sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy+"&projecao="+projecao;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy+"&projecao="+projecao;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

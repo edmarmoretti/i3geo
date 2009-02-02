@@ -98,7 +98,10 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
   if (this.isKonqueror()) this.allowFade = false;
 
   // Check for mouseover (vs. mousedown or click)
-  var mouseOver = evt.type.match('mouseover','i');  
+  var mouseOver = true;
+  try{
+  var mouseOver = evt.type.match('mouseover','i');
+  }catch(e){}  
 
   // if the firing event is a click, fade-in and a non-sticky balloon make no sense
   if (!mouseOver) {
@@ -114,10 +117,12 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
 
   // Don't start a non-sticky balloon if a sticky one is visible
   if (balloonIsVisible && balloonIsSticky && !sticky) return false;
-  
+
   // Ignore repeated firing of mouseover->mouseout events on 
   // the same element (Safari)
-  var el = this.getEventTarget(evt);
+  try{
+  	var el = this.getEventTarget(evt);
+  }catch(e){var el = evt;}
   if (sticky && mouseOver && this.isSameElement(el,this.currentElement)) return false;
   this.firingElement = el;
 
@@ -212,13 +217,14 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
 
   // Capture coordinates for mousedown or click
   if (!mouseOver) this.setActiveCoordinates(evt);
-
+this.setActiveCoordinates(evt);
   // Remember which event started this
   this.currentEvent = evt;
+  this.doShowTooltip(); //
 
   // Make delay time short for onmousedown
-  var delay = mouseOver ? this.delayTime : 1;
-  this.timeoutTooltip = window.setTimeout(this.doShowTooltip,delay);
+  //var delay = mouseOver ? this.delayTime : 1;
+  //this.timeoutTooltip = window.setTimeout(this.doShowTooltip,1);
 }
 
 
@@ -281,7 +287,6 @@ Balloon.prototype.doShowTooltip = function() {
   if (!(self.activeTop && self.activeRight)) {
     self.setActiveCoordinates();
   }
-
   // balloon orientation
   var vOrient = self.activeTop > pageMid ? 'up' : 'down';
   var hOrient = self.activeRight > pageCen ? 'left' : 'right';
@@ -290,7 +295,6 @@ Balloon.prototype.doShowTooltip = function() {
   var helpText = self.container.innerHTML;
 
   self.contents.innerHTML = helpText;
-
   // how and where to draw the balloon
   self.setBalloonStyle(vOrient,hOrient,pageWidth,pageLeft);
 
@@ -300,7 +304,7 @@ Balloon.prototype.doShowTooltip = function() {
   }
 
   balloonIsVisible = true;
-  
+
   // in IE < 7, hide <select> elements
   self.showHide();
 
@@ -441,7 +445,7 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
     }
 
   }
-
+//
   // flip left or right, as required
   if (hOrient == 'left') {
     var activeRight = pageWidth - self.activeLeft;
@@ -461,7 +465,7 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
   else {
     self.setStyle(balloon,'width',self.width);
   }
-
+//
   // Make sure the balloon is not offscreen
   var balloonPad   = self.padding + self.shadow;
   var balloonLeft  = self.getLoc(balloon,'x1');
@@ -484,12 +488,13 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
   self.setStyle('topRight','height',lineHeight);
   self.setStyle('bottomLeft','width',lineWidth);
 
+//
+
   // IE7 quirk -- look for unwanted overlap cause by an off by 1px error
   var vOverlap = self.isOverlap('topRight','bottomRight');
   var hOverlap = self.isOverlap('bottomLeft','bottomRight');
   if (vOverlap) self.setStyle('topRight','height',lineHeight-vOverlap[1]);
   if (hOverlap) self.setStyle('bottomLeft','width',lineWidth-hOverlap[0]);
-
   if (vOrient == 'up') {
     var activeTop = self.activeTop - self.vOffset - self.stemHeight - lineHeight;
     self.setStyle(balloon,'top',activeTop - self.yOffset);
@@ -499,7 +504,6 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
     var activeTop = self.activeTop + self.vOffset + self.stemHeight;
     self.setStyle(balloon,'top',activeTop - self.yOffset);
   }
-
   self.setOpacity(1);
 }
 
@@ -606,11 +610,24 @@ hideAllTooltips = function() {
 
 // Track the active mouseover coordinates
 Balloon.prototype.setActiveCoordinates = function(event) {
- 
+
   var self = currentBalloonClass;
   if (!self) return false;
   var b = self.activeBalloon;
-
+//
+//modificado por edmar
+//
+  try{
+  	if(typeof(event.id) == "string")
+  	{
+  		var pos = i3GEO.util.pegaPosicaoObjeto(event);
+    	self.activeTop    = pos[1] - 10;
+    	self.activeLeft   = pos[0] - 10;
+    	self.activeRight  = self.activeLeft + 20;
+    	self.activeBottom = self.activeTop  + 20;
+    	return true; 	
+  	}
+  }catch(e){}
   var evt = event || window.event || self.currentEvent;
   if (!evt) {
     return false;

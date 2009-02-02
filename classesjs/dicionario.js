@@ -87,10 +87,10 @@ it:"Temporizzazione"
 }],
 "p13": [
 {
-pt: "Propriedades do mapa",
-en:"Map properties",
-es:"Propiedades del mapa",
-it:"Proprietà della mappa"
+pt: "Propriedades",
+en:"Properties",
+es:"Propiedades",
+it:"Proprietà"
 }],
 "p14": [
 {
@@ -518,8 +518,8 @@ it:"Cambia il nome del tema corrente. Utilizzare per migliorare la legenda della
 }],
 "t21":[
 {
-pt:"novo nome:",
-en:"new name",
+pt:"Novo nome:",
+en:"New name",
 es:"Nuevo nombre",
 it:"Nuovo nome"
 }],
@@ -532,7 +532,7 @@ it:"Trova gli elementi nel tema secondo i suoi attributi descrittivi."
 }],
 "t23":[
 {
-pt:"procurar...",
+pt:"Procurar...",
 en:"Search...",
 es:"Buscar...",
 it:"Cerca..."
@@ -546,9 +546,9 @@ it:"Creare un nuovo strato sulla mappa per visualizzare testi descrittivi sul te
 }],
 "t25":[
 {
-pt:"texto...",
-en:"label...",
-es:"texto...",
+pt:"Texto...",
+en:"Label...",
+es:"Texto...",
 it:"Testo..."
 }],
 "t26":[
@@ -560,8 +560,8 @@ it:"Definire le etichette da visualizzare quando il mouse si ferma su un element
 }],
 "t27":[
 {
-pt:"etiquetas...",
-en:"tooltip...",
+pt:"Etiquetas...",
+en:"Tooltip...",
 es:"Etiquetas...",
 it:"Descrizioni..."
 }],
@@ -588,8 +588,8 @@ it:"Vedi la tabella degli attributi di questo tema."
 }],
 "t31":[
 {
-pt:"tabela...",
-en:"table...",
+pt:"Tabela...",
+en:"Table...",
 es:"Tabla...",
 it:"Tabella..."
 }],
@@ -602,8 +602,8 @@ it:"Aprire l'editor di legenda, che consente la modifica della forma di rapprese
 }],
 "t33":[
 {
-pt:"editar legenda...",
-en:"legend edit...",
+pt:"Editar legenda...",
+en:"Legend edit...",
 es:"Editar subtítulo...",
 it:"Modifica la legenda"
 }],
@@ -630,9 +630,9 @@ it:"Tema visibile solo a determinate scale"
 }],
 "t37":[
 {
-pt:"gr&aacute;fico",
-en:"graphic",
-es:"gr&aacute;fico",
+pt:"Gráfico",
+en:"Graphic",
+es:"Gr&aacute;fico",
 it:"Grafico"
 }],
 //guia adiciona
@@ -761,6 +761,13 @@ it:"Legenda"
 pt:"Mapas",
 en:"Maps",
 es:"Mapas",
+it:"Mappa"
+}],
+"g4a":[
+{
+pt:"Mapa",
+en:"Map",
+es:"Mapa",
 it:"Mappe"
 }],
 //outros
@@ -773,8 +780,8 @@ it:"Attendere..."
 }],
 "o2":[
 {
-pt:"busca r&aacute;pida...",
-en:"quick search...",
+pt:"Busca r&aacute;pida...",
+en:"Quick search...",
 es:"B&uacute;squeda r&aacute;pida...",
 it:"Ricerca rapida ..."
 }],
@@ -861,7 +868,7 @@ it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, ferma
 pt:"Mostra a extens&atilde;o geogr&aacute;fica atual em coordenadas geogr&aacute;ficas",
 en:"It shows the extent of current geographic coordinates",
 es:"Muestra la extensi&oacute;n geográfica actual en coordenadas geogr&aacute;ficas",
-it:"Mostra l’estensione geografica corrente in coordinate geografiche"
+it:"Mostra la estensione geografica corrente in coordinate geografiche"
 }],
 "d9":[
 {
@@ -997,3 +1004,4 @@ es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del 
 it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive della mappa."
 }]
 };
+YAHOO.log("carregou dicionario", "Classes i3geo");

@@ -47,6 +47,7 @@ i3GEO.mapa = {
 	elemento {String} - id do elemento HTML que deverá ser ajustado e que contém o mapa
 	*/
 	ajustaPosicao: function(elemento){
+		if(arguments.length == 0){return;}
 		try{
 			imagemxi = 0;
 			imagemyi = 0;
@@ -581,3 +582,4 @@ i3GEO.mapa = {
 		}
 	}
 };
+YAHOO.log("carregou classe mapa", "Classes i3geo");

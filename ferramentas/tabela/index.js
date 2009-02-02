@@ -24,7 +24,7 @@ nomeArquivoGr = "" //nome do arquivo que conterá os dados apoós ser feito o gráf
 mensagemAjuda("men1",$i("men1").innerHTML)
 parametrosURL()
 //se o R estiver instalado, mostra a guia de graficos
-if (g_r != "sim")
+if (window.parent.i3GEO.parametros.r != "sim")
 {$i("guia4obj").innerHTML = "Opção não disponível"}
 ativaGuias("")
 mostraGuia("guia1")

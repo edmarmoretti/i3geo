@@ -96,3 +96,24 @@ Utilitários
 
 	Foi criada uma classe específica com funções de uso geral. Veja em:
 	http://localhost/i3geo/documentacao/files/classesjs/classe_util-js.html
+
+Cálculos
+
+	Os cálculos agora estão na classe i3GEO.calculo, por exemplo, para converter coordenadas de dd para dms, utilize:
+	i3GEO.calculo.dd2dms(dd)
+
+OBJMAPA
+
+	A forma de inicialização do i3geo do lado do navegador (javascript) agora é controlado pela classe i3GEO.
+	O "objmapa" não é mais utilizado.
+	Os parâmetros do mapa, como extensão geográfica, tamanho do pixel, etc, são agora acessados por meio
+	de i3GEO.parametros, por exemplo, para obter a extensão geográfica do mapa atual, utilize:
+	alert(i3GEO.parametros.mapexten)
+	A lista completa de i3GEO.parametros pode ser vista em i3geo/classesjs/classe_i3geo.js
+
+Variáveis de configuração
+
+	Muitas das novas classes possuem seus próprios métodos de configuração. Porém os parâmetros principais
+	de configuração do mapa ficam agora na classe i3GEO.configura
+	Por exemplo, para obter o diretório onde o i3geo está instalado, antes utilizava-se g_locaplic, agora utiliza-se
+	i3GEO.configura.locaplic

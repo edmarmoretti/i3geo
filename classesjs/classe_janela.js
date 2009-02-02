@@ -152,7 +152,7 @@ i3GEO.janela = {
 			with (wdocaiframe.style){width = "100%";height=waltura;};
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
-			i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
+			//i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
 		}
 		var fix = false;
 		if(nx == "" || nx == "center"){var fix = true;}
@@ -165,8 +165,7 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
-		if(modal == false)
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
 		//YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
@@ -175,10 +174,12 @@ i3GEO.janela = {
 	
 	Aplica a opção definida em ANTESFECHA e elimina alguns objetos que são comumente adicionados por algumas operações do i3geo
 	como richdraw, box, pin
+	
+	Parameters:
+	
+	id {String} - id da janela que será fechada
 	*/
-	fecha: function(){
-		//if ((g_tipoacao == "selecaobox") || (g_tipoacao == "inseregrafico") || (g_tipoacao == "selecao") || (g_tipoacao == "inserexy") || (g_tipoacao == "textofid"))
-		//{i3GEO.barraDeBotoes.ativaIcone("pan");}
+	fecha: function(r,id){
 		//esconde o box do google
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
@@ -191,6 +192,8 @@ i3GEO.janela = {
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
+		document.body.removeChild($i(id+"_c"));
+		//YAHOO.janelaDoca.xp.panel.destroy();
 	},
 	/*
 	Function: alteraTamanho
@@ -468,3 +471,4 @@ try{
 	);
 }
 catch(e){};
+YAHOO.log("carregou classe janela", "Classes i3geo");

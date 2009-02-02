@@ -3,6 +3,7 @@ error_reporting(0);
 //set_time_limit(600);
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/carrega_ext.php");
 $cp = new cpaint();
 $cp->register('listaartigos');
 $cp->start();

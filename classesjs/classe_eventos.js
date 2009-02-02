@@ -69,7 +69,6 @@ i3GEO.eventos = {
 	{Array}
 	*/
 	MOUSEPARADO: new Array(
-		"i3GEO.gadgets.mostraCoordenadasUTM()",
 		"i3GEO.navega.mostraRosaDosVentos()"
 	),
 	/*
@@ -290,7 +289,7 @@ i3GEO.eventos = {
 		//se não for feito assim, o deslocamento do mapa não é capturado
 		//
 		try{
-			if (g_panM == "sim")
+			if(g_panM != 'undefined' && g_panM == "sim")
 			{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
 			else
 			{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
@@ -440,3 +439,4 @@ i3GEO.eventos = {
 		}
 	}
 };
+YAHOO.log("carregou classe eventos", "Classes i3geo");

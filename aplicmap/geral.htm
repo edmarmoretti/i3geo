@@ -28,8 +28,8 @@
 	</style> 
 </head>
 <body id="i3geo" >
-<center>
-<table id='mst' summary="" style='display:none' width=100% cellspacing='0'>
+
+<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
 <!--
 	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
 -->
@@ -49,7 +49,7 @@
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
 	 <div id=guia4 class=guia >Legenda</div>
-	 <div id=guia5 class=guia >Mapas</div>
+	 <div id=guia5 class=guia >Links</div>
     </div>
    </td>
    </tr>
@@ -155,7 +155,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	Para adicionar um botão, é só criar uma linha e especificar a função que será executada quando o usuário clicar no botão
 -->
 <div id=barraDeBotoes1 style='display:none'> 
-   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><div ID='historicozoom' ></div></td></tr></table>
+   <table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><div ID='historicozoom' ></div></td></tr><tr><td style=height:5px ></td></tr></table>
    <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
    <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
    <table title="info" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="info" alt="" src="../imagens/branco.gif" id='identifica'/></td></tr></table>
@@ -252,28 +252,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-/*
-	Variable: g_localimg
-	
-	Indica a localização correta das imagens.
-	
-	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
-	
-*/
 var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
-/*
-Variable: g_templateLegenda
-
-Template HTML que será utilizado na geração da legenda HTML
-
-A sintaxe do template é definido pelo Mapserver.
-
-O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
-
-Exemplo:
-g_templateLegenda = "legendaseminput.htm";
-*/
-var g_templateLegenda = "";
 var g_3dmap = "3dmap.map";
 i3GEO.cria()
 //Log

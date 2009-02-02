@@ -269,14 +269,19 @@ i3GEO.idioma = {
 		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
 		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO))
-			var novoel = document.createElement("div");
-			novoel.innerHTML = ins;
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA))
+			if(!$i("i3geoseletoridiomas")){
+				var novoel = document.createElement("div");
+				novoel.innerHTML = ins;
+				novoel.id = "i3geoseletoridiomas";
+				document.body.appendChild(novoel);
+			}
+			else
+			{var novoel = $i("i3geoseletoridiomas");}
 			novoel.style.position = "absolute";
 			novoel.style.top = pos[1] - 17 +"px";
 			novoel.style.left = pos[0]+"px";
 			novoel.style.zIndex = 5000;
-			document.body.appendChild(novoel);
 		}
 	}
 };
@@ -292,7 +297,6 @@ Returns:
 {String} Texto traduzido.
 */
 var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
-
 //
 	try {
 		var c = i3GEO.util.pegaCookie("i3geolingua");
@@ -312,3 +316,4 @@ var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
 		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
 	catch(e){alert("Problemas com idiomas "+e);};
+YAHOO.log("carregou classe idioma", "Classes i3geo");

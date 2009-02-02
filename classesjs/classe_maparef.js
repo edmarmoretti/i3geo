@@ -179,3 +179,4 @@ i3GEO.maparef = {
 		{var e = "";i3GEO.janela.fechaAguarde("i3GEO.atualiza");}	
 	}
 };
+YAHOO.log("carregou classe maparef", "Classes i3geo");

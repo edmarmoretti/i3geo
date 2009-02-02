@@ -100,7 +100,7 @@ if (isset($_FILES['filemap']['name']))
 		}
 		$map->save($map_file);
 		echo "Ok. redesenhando.";
-		echo "<script>window.parent.remapaf()</script>";
+		echo "<script>window.parent.i3GEO.atualiza()</script>";
 	}
 	else
 	{

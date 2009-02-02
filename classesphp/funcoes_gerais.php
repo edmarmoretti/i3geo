@@ -664,6 +664,7 @@ function substituiCon($map_file,$postgis_mapa)
 	{
 		if (($postgis_mapa != "") || ($postgis_mapa != " "))
 		{
+			if(!@ms_newMapObj($map_file)){return false;}
 			$objMap = ms_newMapObj($map_file);
 			$numlayers = $objMap->numlayers;
 			for ($i=0;$i < $numlayers;++$i)
@@ -693,6 +694,7 @@ function substituiCon($map_file,$postgis_mapa)
 			$objMap->save($map_file);
 		}
 	}
+	return true;
 }
 /*
 function: restauraCon

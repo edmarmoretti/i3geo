@@ -37,7 +37,7 @@ function aplicar()
 		if (ipt[i].checked)
 		{var valor = ipt[i].value}
 	}
-	window.parent.g_tipoimagem = valor
+	window.parent.i3GEO.configura.tipoimagem = valor
 	window.parent.g_operacao = "outras"
 	window.parent.i3GEO.atualiza("")
 }

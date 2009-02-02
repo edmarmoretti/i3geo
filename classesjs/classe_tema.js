@@ -202,7 +202,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		toponimia: function(idtema)
-		{return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia"));},
+		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");},
 		/*
 		Function: filtro
 
@@ -213,7 +213,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		filtro: function(idtema)
-		{return(i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro"));},
+		{i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");},
 		/*
 		Function: procuraratrib
 
@@ -224,7 +224,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema)
-		{return(i3GEO.janela.cria("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar"));},
+		{i3GEO.janela.cria("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar");},
 		/*
 		Function: tabela
 
@@ -235,7 +235,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		tabela: function(idtema)
-		{return(i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela"));},
+		{i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela");},
 		/*
 		Function: etiquetas
 
@@ -246,7 +246,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		etiquetas: function(idtema)
-		{return(i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas"));},
+		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas");},
 		/*
 		Function: editaLegenda
 
@@ -257,7 +257,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		editaLegenda: function(idtema)
-		{return(i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda"));},
+		{i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda");},
 		/*
 		Function: download
 
@@ -268,7 +268,7 @@ i3GEO.tema = {
 		idtema - id ue identifica o tema no map file.
 		*/
 		download: function(idtema)
-		{return(i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download"));}
+		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");}
 	}
-
 };
+YAHOO.log("carregou classe tema", "Classes i3geo");
