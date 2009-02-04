@@ -62,7 +62,6 @@ packer("classe_janela.js","compactados/classe_janela_compacto.js","Normal");
 packer("dicionario.js","compactados/dicionario_compacto.js","Normal");
 packer("classe_idioma.js","compactados/classe_idioma_compacto.js","Normal");
 packer("classe_ajuda.js","compactados/classe_ajuda_compacto.js","Normal");
-packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("classe_configura.js","compactados/classe_configura_compacto.js","Normal");
 packer("classe_navega.js","compactados/classe_navega_compacto.js","Normal");
 packer("classe_gadgets.js","compactados/classe_gadgets_compacto.js","Normal");
@@ -88,7 +87,7 @@ $jsfiles = array(
 "../pacotes/yui252/build/menu/menu-min.js",
 "../pacotes/yui252/build/logger/logger-min.js",
 "../pacotes/yui252/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui252/build/slider/slider-debug.js",
+"../pacotes/yui252/build/slider/slider-min.js",
 "../pacotes/yui252/build/animation/animation-min.js",
 "../pacotes/yui252/build/container/container-min.js",
 "../pacotes/yui252/build/element/element-beta.js",
@@ -160,12 +159,12 @@ $escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
 $jsfiles = array(
 "../ferramentas/funcoes_compacto.js",
-"../pacotes/yui231/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui231/build/element/element-beta.js",
+"../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui252/build/element/element-beta.js",
 "../pacotes/yui231/build/button/button-beta.js",
-"../pacotes/yui231/build/tabview/tabview.js",
-"../pacotes/yui231/build/animation/animation-min.js",
-"../pacotes/yui231/build/autocomplete/autocomplete-min.js",
+"../pacotes/yui252/build/tabview/tabview-min.js",
+"../pacotes/yui252/build/animation/animation-min.js",
+"../pacotes/yui252/build/autocomplete/autocomplete-min.js",
 "../pacotes/cpaint/cpaint2.inc.compressed.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";

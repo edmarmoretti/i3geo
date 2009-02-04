@@ -511,6 +511,7 @@ i3GEO.configura = {
 							i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
 							i3GEO.barraDeBotoes.ativaBotoes();
 						};
+						if(i3GEO.interface.ATUAL != "googlemaps")
 						YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 					}
 				};
@@ -862,4 +863,4 @@ i3GEO.configura = {
 		}	
 	]}
 };
-YAHOO.log("carregou classe configura", "Classes i3geo");
+//YAHOO.log("carregou classe configura", "Classes i3geo");

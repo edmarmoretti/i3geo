@@ -130,19 +130,18 @@ i3GEO.eventos = {
 		try
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
-		if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0)
-		{
-			var f = i3GEO.eventos.MOUSEPARADO.length-1;
-			if (f >= 0)
-			{
-				do
-				{
-					if(objposicaocursor.imgx > 0)
-					{YAHOO.log("mouseParado", "i3geo");eval(i3GEO.eventos.MOUSEPARADO[f]);}
+		try{
+			if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0){
+				var f = i3GEO.eventos.MOUSEPARADO.length-1;
+				if (f >= 0){
+					do{
+						if(objposicaocursor.imgx > 0)
+						{YAHOO.log("mouseParado", "i3geo");eval(i3GEO.eventos.MOUSEPARADO[f]);}
+					}
+					while(f--)
 				}
-				while(f--)
 			}
-		}
+		}catch(e){}
 	},
 	/*
 	Function: navegaMapa
@@ -197,7 +196,7 @@ i3GEO.eventos = {
 					var temp = i3GEO.eventos.MOUSEDOWN[f].replace("()", "");
 					if(eval('typeof ' + temp) == 'function'){
 						eval(i3GEO.eventos.MOUSEDOWN[f]);
-						YAHOO.log("mousedownMapa", "i3geo");
+						//YAHOO.log("mousedownMapa", "i3geo");
 					}
 				}
 				while(f--)
@@ -217,7 +216,7 @@ i3GEO.eventos = {
 					var temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
 					if(eval('typeof ' + temp) == 'function'){
 						eval(i3GEO.eventos.MOUSEUP[f]);
-						YAHOO.log("mouseupMapa", "i3geo");
+						//YAHOO.log("mouseupMapa", "i3geo");
 					}
 				}
 				while(f--)
@@ -235,7 +234,7 @@ i3GEO.eventos = {
 			if (f >= 0){
 				do{
 					eval(i3GEO.eventos.MOUSECLIQUE[f]);
-					YAHOO.log("mousecliqueMapa", "i3geo");
+					//YAHOO.log("mousecliqueMapa", "i3geo");
 				}
 				while(f--)
 			}
@@ -274,6 +273,11 @@ i3GEO.eventos = {
 	e {Event object} - objeto do tipo evento disparado sobre o objeto em foco
 	*/
 	posicaoMouseMapa: function(e){
+		//
+		//os eventos da interface googlemaps são definidos em i3GEO.interface
+		//
+		if(i3GEO.interface.ATUAL == "googlemaps")
+		{return;}	
 		if (!e) var e = window.event;
 		//
 		//verifica sob qual objeto o mouse está se movendo
@@ -439,4 +443,4 @@ i3GEO.eventos = {
 		}
 	}
 };
-YAHOO.log("carregou classe eventos", "Classes i3geo");
+//YAHOO.log("carregou classe eventos", "Classes i3geo");

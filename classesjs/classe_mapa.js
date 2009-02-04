@@ -582,4 +582,4 @@ i3GEO.mapa = {
 		}
 	}
 };
-YAHOO.log("carregou classe mapa", "Classes i3geo");
+//YAHOO.log("carregou classe mapa", "Classes i3geo");

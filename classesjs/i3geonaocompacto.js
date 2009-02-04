@@ -21,7 +21,7 @@ var jsfiles = new Array(
 "../pacotes/yui252/build/menu/menu-min.js",
 "../pacotes/yui252/build/logger/logger-min.js",
 "../pacotes/yui252/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui252/build/slider/slider-debug.js",
+"../pacotes/yui252/build/slider/slider-min.js",
 "../pacotes/yui252/build/animation/animation-min.js",
 "../pacotes/yui252/build/container/container-min.js",
 "../pacotes/yui252/build/element/element-beta.js",

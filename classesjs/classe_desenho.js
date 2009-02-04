@@ -213,4 +213,4 @@ i3GEO.desenho = {
 		}
 	}
 };
-YAHOO.log("carregou classe desenho", "Classes i3geo");
+//YAHOO.log("carregou classe desenho", "Classes i3geo");

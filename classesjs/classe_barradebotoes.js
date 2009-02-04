@@ -394,4 +394,4 @@ i3GEO.barraDeBotoes = {
 		}
 	}
 };
-YAHOO.log("carregou classe barradebotoes", "Classes i3geo");
+//YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

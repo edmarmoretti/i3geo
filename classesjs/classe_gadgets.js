@@ -740,4 +740,4 @@ i3GEO.gadgets = {
 		}
 	}
 };
-YAHOO.log("carregou classe gadgets", "Classes i3geo");
+//YAHOO.log("carregou classe gadgets", "Classes i3geo");

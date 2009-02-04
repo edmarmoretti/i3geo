@@ -268,4 +268,4 @@ if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
 }
 if(document.getElementById("bannerMensagem"))
 {i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
-YAHOO.log("carregou classe ajuda", "Classes i3geo");
+//YAHOO.log("carregou classe ajuda", "Classes i3geo");

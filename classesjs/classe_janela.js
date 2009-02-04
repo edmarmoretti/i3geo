@@ -348,6 +348,59 @@ i3GEO.janela = {
 			}
 		}
 	},
+	slider: function(funcao,inicial){
+		var janela = i3GEO.janela.cria(230,200,"","","","Opacidade","opacidadeG");
+		var novoel = document.createElement("div");
+		novoel.id = "slider-bg";
+		novoel.tabindex = "-1";
+		novoel.innerHTML = '<div style="cursor:default;position:absolute;top:4px" id="slider-thumb"><img src="'+i3GEO.configura.locaplic+'/imagens/thumb-n.gif"></div>';
+		janela[2].appendChild(novoel);
+    	var Event = YAHOO.util.Event;
+        var	Dom   = YAHOO.util.Dom;
+        var	lang  = YAHOO.lang;
+        var	slider; 
+        var	bg="slider-bg";
+        var thumb="slider-thumb"; 
+        var	valuearea="slider-value";
+        var textfield="slider-converted-value";
+		novoel.style.position = "relative";
+        novoel.style.background= 'url('+i3GEO.configura.locaplic+'/imagens/bg-fader.gif) 5px 0 no-repeat';
+        novoel.style.height = "28px";
+        novoel.style.width= "228px"; 
+    	// The slider can move 0 pixels up
+    	var topConstraint = 0;
+    	// The slider can move 200 pixels down
+    	var bottomConstraint = 200;
+    	// Custom scale factor for converting the pixel offset into a real value
+    	var scaleFactor = 1;
+    	// The amount the slider moves when the value is changed with the arrow
+    	// keys
+    	var keyIncrement = 20;
+    	var tickSize = 20;
+    	Event.onDOMReady(function() {
+        	slider = YAHOO.widget.Slider.getHorizSlider(bg,thumb, topConstraint, bottomConstraint, 20);
+        	slider.setValue(parseInt(inicial));
+        	slider.getRealValue = function() {
+            	return Math.round(this.getValue() * scaleFactor);
+        	}
+        	slider.subscribe("slideEnd", function(offsetFromStart) {
+            	//var valnode = Dom.get(valuearea);
+            	//var fld = Dom.get(textfield);
+            	// Display the pixel value of the control
+            	//valnode.innerHTML = offsetFromStart;
+            	// use the scale factor to convert the pixel offset into a real
+            	// value
+            	var actualValue = slider.getRealValue();
+            	// update the text box with the actual value
+            	//alert(actualValue);
+            	eval(funcao+"("+actualValue+")");
+			});
+        });
+        // Use setValue to reset the value to white:
+        Event.on("putval", "click", function(e) {
+            slider.setValue(100, false); //false here means to animate if possible
+        });
+	},
 	/*
 	Function: fechaAguarde
 	
@@ -471,4 +524,4 @@ try{
 	);
 }
 catch(e){};
-YAHOO.log("carregou classe janela", "Classes i3geo");
+//YAHOO.log("carregou classe janela", "Classes i3geo");

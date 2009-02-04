@@ -61,12 +61,16 @@ for (var i = 0; i < scripts.length; i++) {
 }
 var allScriptTags = "";
 var jsfiles = new Array()
+/*
 if(typeof(testafuncoes) == 'undefined')
 {jsfiles[1] = "compactados/funcoes_compacto.js"}
 if(typeof(cpaint) == 'undefined')
 {jsfiles[2] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
 if(typeof(OpenLayers) == 'undefined')
 {jsfiles[3] = "../pacotes/openlayers/OpenLayers.js"}
+*/
+jsfiles[1] = "i3geo_tudo_compacto.js.php"
+jsfiles[2] = "../pacotes/openlayers/OpenLayers.js"
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";
@@ -269,7 +273,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/	
 	this.combosubgrupos = function(idGrupo)
 	{
-		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"250","1")
+		i3GEO.arvoreDeTemas.comboSubGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combotemas",$i3geo_gl.subgrupo,"",idGrupo,"530","1")
 	}
 	/*
 	Function: combotemas
@@ -286,7 +290,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.combotemas = function (idGrupo,idSubGrupo)
 	{
-		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"250","10")
+		i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"530","5","1")
 	}
 	/*
 	Function: preseltema
@@ -322,7 +326,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.descer = function(e)
 	{
-		var pai = i3geo_pegaElementoPai(e)
+		var pai = i3GEO.util.pegaElementoPai(e)
 		divpai = pai.parentNode
 		if(pai.nextSibling)
 		divpai.insertBefore(pai,pai.nextSibling.nextSibling)
@@ -339,7 +343,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.subir = function(e)
 	{
-		var pai = i3geo_pegaElementoPai(e)
+		var pai = i3GEO.util.pegaElementoPai(e)
 		divpai = pai.parentNode
 		divpai.insertBefore(pai,pai.previousSibling)
 		$i3geo_gl.crialink()
@@ -355,7 +359,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	*/
 	this.excluir = function(e)
 	{
-		var pai = i3geo_pegaElementoPai(e)
+		var pai = i3GEO.util.pegaElementoPai(e)
 		pai.parentNode.removeChild(pai)
 		$i3geo_gl.crialink()
 	}
@@ -371,22 +375,23 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
 		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >"
 		ins += "Coordenadas geográficas em décimos de grau:<br><br>"
-		ins += "Longitude mínima:<br>"
-		ins += "<div style=padding:5px;width:80px; id=paiXmin >"
+		ins += "<table style=text-align:left >";
+		ins += "<tr><td style=text-align:left >Longitude mínima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiXmin >"
 		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmin />"
-		ins += "</div><br>"
-		ins += "Longitude máxima:<br>"
-		ins += "<div style=padding:5px;width:80px; id=paiXmax >"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Longitude máxima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiXmax >"
 		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_xmax />"
-		ins += "</div><br>"
-		ins += "Latitude mínima:<br>"
-		ins += "<div style=padding:5px;width:80px; id=paiYmin >"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Latitude mínima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiYmin >"
 		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymin />"
-		ins += "</div><br>"
-		ins += "Latitude máxima:<br>"
-		ins += "<div style=padding:5px;width:80px; id=paiYmax >"
+		ins += "</div></td></tr>"
+		ins += "<tr><td style=text-align:left >Latitude máxima:</td>"
+		ins += "<td><div style=padding:5px;width:80px; id=paiYmax >"
 		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymax />"
-		ins += "</div><br>"
+		ins += "</div></td></tr></table>"
 		ins += "<input class=executar size='20' type='button' value='capturar   ' onclick='$i3geo_gl.OL.capturageo()' />"
 		ins += "</div></div>"
 		document.getElementById(this.buscageo).innerHTML = ins
@@ -456,12 +461,12 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	
 	Contém o objeto $i3geo_gl com todas as propriedades e funções de controle da interface
 	*/
+	i3GEO.configura.sid = "";
 	$i3geo_gl = objeto_i3geo_gl_configura;
 	if(document.getElementById($i3geo_gl.buscageo))
 	$i3geo_gl.buscageo_init()
 	$i3geo_gl.seltema($i3geo_gl.nomeseltema)
-	i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","250","1")
-	
+	i3GEO.arvoreDeTemas.comboGruposMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.combosubgrupos",$i3geo_gl.grupo,"","530","1","")
 	$inputText("paiPontos","","pontos","","","")
 	$inputText("paiNometemapontos","","nometemapontos","","","")
 	$inputText("paiPerfil","","perfil","","","")

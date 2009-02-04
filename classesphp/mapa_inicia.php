@@ -73,10 +73,44 @@ Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 */
 function iniciaMapa()
 {
-	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile;
+	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//pega o xml com os sietmas para identificação
 	//
+	if(!isset($interface)){$interface = "";}
+	if($interface == "googlemaps")
+	{
+		$m = ms_newMapObj($map_file);
+		$c = $m->numlayers;
+		//$m->setProjection("proj=merc,lat_ts=0.0,lon_0=-90.0,x_0=0.0,y_0=0.0,units=m");	
+		for ($i=0;$i < $c;++$i)
+		{
+			$layer = $m->getlayer($i);
+			if($layer->name == "mundo" || $layer->name == "estados")
+			{$layer->set("status",MS_OFF);}			
+			if($layer->type == MS_LAYER_POLYGON)
+			{
+				$nclasses = $layer->numclasses;
+				for($ii=0;$ii<$nclasses;++$ii){
+					$classe = $layer->getclass($ii);
+					$nestilos = $classe;
+					for($j=0;$j<$nestilos;++$j){
+						$estilo = $classe->getstyle($j);
+						$estilo->set("symbolname","pt1");
+						$estilo->set("size","2");
+					}	
+				}
+			}
+			$layer->setProjection("init=epsg:4291");
+		}
+		$temp = $m->scalebar;
+		$temp->set("status",MS_OFF);
+		$c = $m->imagecolor;
+		$c->setrgb(255,255,255);
+		$of = $m->outputformat;
+		$of->set("transparent",MS_ON);
+		$m->save($map_file);
+	}
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$protocolo = $protocolo[0];
 	$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];

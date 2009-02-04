@@ -196,7 +196,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeMenus>	
 	*/
 	pegalistademenus: function(funcao){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"pegalistademenus",funcao);	
 	},
 	/*
@@ -208,7 +208,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeGrupos>	
 	*/
 	pegalistadegrupos: function(funcao,id_menu,listasgrupos){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&g_sid="+i3GEO.arvoreDeCamadas.SID+"&idmenu="+id_menu+"&listasistemas=nao&listasgrupos="+listasgrupos;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadegrupos&map_file=&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&listasistemas=nao&listasgrupos="+listasgrupos;
 		cpJSON.call(p,"pegalistadegrupos",funcao);	
 	},
 	/*
@@ -220,7 +220,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeSubGrupos>	
 	*/
 	pegalistadeSubgrupos: function(funcao,id_menu,id_grupo){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.arvoreDeCamadas.SID+"&idmenu="+id_menu+"&grupo="+id_grupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo;
 		cpJSON.call(p,"pegalistadeSubgrupos",funcao);	
 	},
 	/*
@@ -232,7 +232,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeTemas>	
 	*/
 	pegalistadetemas: function(funcao,id_menu,id_grupo,id_subgrupo){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.arvoreDeCamadas.SID+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo;
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*
@@ -244,7 +244,7 @@ i3GEO.php = {
 	<Menutemas->pegaSistemas>	
 	*/
 	pegaSistemas: function(funcao){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=pegaSistemas&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegaSistemas&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"pegaSistemas",funcao);	
 	},
 	/*
@@ -253,7 +253,7 @@ i3GEO.php = {
 	<listaDrives>	
 	*/
 	listadrives: function(funcao){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=listaDrives&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaDrives&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"listaDrives",funcao);	
 	},
 	/*
@@ -262,7 +262,7 @@ i3GEO.php = {
 	<listaArquivos>	
 	*/
 	listaarquivos: function(funcao,caminho){
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?g_sid="+i3GEO.arvoreDeTemas.SID+"&funcao=listaArquivos&diretorio="+caminho;
+		var p = i3GEO.arvoreDeCamadas.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaArquivos&diretorio="+caminho;
 		cpJSON.call(p,"listaArquivos",funcao);	
 	},
 	/*
@@ -733,7 +733,7 @@ i3GEO.php = {
 	<iniciaMapa>	
 	*/
 	inicia: function(funcao,embedLegenda,w,h){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.interface.ATUAL;
 		cpJSON.call(p,"iniciaMapa",funcao);	
 	},
 	/*
@@ -749,4 +749,4 @@ i3GEO.php = {
 		cpJSON.call(p,"chavegoogle",funcao);	
 	}
 };
-YAHOO.log("carregou classe php", "Classes i3geo");
+//YAHOO.log("carregou classe php", "Classes i3geo");

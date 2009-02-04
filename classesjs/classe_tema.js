@@ -271,4 +271,4 @@ i3GEO.tema = {
 		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");}
 	}
 };
-YAHOO.log("carregou classe tema", "Classes i3geo");
+//YAHOO.log("carregou classe tema", "Classes i3geo");

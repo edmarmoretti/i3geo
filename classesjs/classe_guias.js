@@ -410,4 +410,4 @@ i3GEO.guias = {
 	
 	}
 };
-YAHOO.log("carregou classe guias", "Classes i3geo");
+//YAHOO.log("carregou classe guias", "Classes i3geo");

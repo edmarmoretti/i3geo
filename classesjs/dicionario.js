@@ -1004,4 +1004,4 @@ es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del 
 it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive della mappa."
 }]
 };
-YAHOO.log("carregou dicionario", "Classes i3geo");
+//YAHOO.log("carregou dicionario", "Classes i3geo");

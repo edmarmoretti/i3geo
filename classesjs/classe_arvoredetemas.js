@@ -1004,8 +1004,11 @@ i3GEO.arvoreDeTemas = {
 	largura {Numeric} - largura em pixels do combo
 
 	altura {Numeric} - altura do combo em linhas
+	
+	id_menu {Numeric} - id do menu que será utilizado para obter os dados
 	*/
-	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura){
+	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura,id_menu){
+		i3GEO.configura.locaplic = locaplic;
 		var combo = function (retorno){
 			obGrupos = retorno.data;
 			var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
@@ -1079,8 +1082,10 @@ i3GEO.arvoreDeTemas = {
 	largura - largura em pixels do combo
 
 	altura - altura do combo em linhas
+	
+	id_menu - id do menu escolhido
 	*/
-	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura){
+	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura,id_menu){
 		var combo = function(retorno){
 			var ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";
 			if (retorno.data.temas[i]){
@@ -1161,4 +1166,4 @@ i3GEO.arvoreDeTemas = {
 		{window.open(i3GEO.configura.locaplic+"/datadownload.htm");}
 	}
 };
-YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");
+//YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");

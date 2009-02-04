@@ -772,4 +772,4 @@ i3GEO.arvoreDeCamadas = {
 //
 //para efeitos de compatibilidade
 i3GEO.arvoreDeCamadas.IDHTML = "listaTemas";
-YAHOO.log("carregou classe arvoredecamadas", "Classes i3geo");
+//YAHOO.log("carregou classe arvoredecamadas", "Classes i3geo");

@@ -361,4 +361,4 @@ i3GEO.calculo = {
 		return (res);
 	}
 };
-YAHOO.log("carregou classe calculo", "Classes i3geo");
+//YAHOO.log("carregou classe calculo", "Classes i3geo");

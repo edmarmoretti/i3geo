@@ -346,7 +346,7 @@ i3GEO = {
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
 		}
 		try{var teste = eval(retorno.data.variaveis);}
-		catch(e){erro.call();}
+		catch(e){erro.call();return;}
 		if(arguments.length == 0 || retorno == "" || retorno.data.variaveis == undefined){erro.call();return;}
 		else{	
 			if(arguments.length == 0){return;}
@@ -386,4 +386,4 @@ i3GEO = {
 		}	
 	}
 };
-YAHOO.log("carregou classe i3geo", "Classes i3geo");
+//YAHOO.log("carregou classe i3geo", "Classes i3geo");

@@ -401,4 +401,4 @@ i3GEO.selecao = {
 		}
 	}
 };
-YAHOO.log("carregou classe selecao", "Classes i3geo");
+//YAHOO.log("carregou classe selecao", "Classes i3geo");

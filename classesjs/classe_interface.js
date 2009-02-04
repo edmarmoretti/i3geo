@@ -397,12 +397,32 @@ i3GEO.interface = {
 	O objeto criado com a API do google maps pode ser acessado na variável i3GeoMap
 	*/
 	googlemaps:{
+		/*
+		Property: OPACIDADE
+		
+		Valor da opacidade da camada i3geo do mapa
+		
+		Varia de 0 a 1
+		
+		Default:
+		0.8
+		
+		Type:
+		{Numeric}
+		*/
+		OPACIDADE: 0.8,
 		redesenha: function(){
    			if(i3GeoMap != ""){
-   				i3GeoMap.removeOverlay(wmsmap);
+   				i3GeoMap.removeOverlay(i3GEOTileO);
    				posfixo = posfixo + "&";
-   				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
-				i3GeoMap.addOverlay(wmsmap);
+   				//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
+   				var i3GEOTile = new GTileLayer(null,0,18,{
+                     tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
+                     isPng:true,
+                     opacity:i3GEO.interface.googlemaps.OPACIDADE });
+                i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    			i3GeoMap.addOverlay(i3GEOTileO);
+				//i3GeoMap.addOverlay(i3GEOTile);
 			}
 		},
 		cria: function(w,h){
@@ -422,6 +442,7 @@ i3GEO.interface = {
 			i3GEO.interface.IDMAPA = "googlemaps";
 		},
 		inicia: function(){
+    		i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
     		var pol = i3GEO.parametros.mapexten;
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
@@ -430,10 +451,24 @@ i3GEO.interface = {
     		i3GeoMap.setMapType(G_SATELLITE_MAP);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
-    		i3GeoMap.addControl(new GScaleControl());
-    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 8);   		
-    		wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-			i3GeoMap.addOverlay(wmsmap);
+    		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
+    		i3GeoMap.addControl(new GScaleControl(),bottomLeft);
+    		var bottomRight = new GControlPosition(G_ANCHOR_BOTTOM_RIGHT);
+    		i3GeoMap.addControl(new GOverviewMapControl(),bottomRight);
+    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 4);   		
+    		//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+			//i3GeoMap.addOverlay(wmsmap);
+    		var i3GEOTile = new GTileLayer(null,0,18,{
+                                 tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
+                                 isPng:true,
+                                 opacity:i3GEO.interface.googlemaps.OPACIDADE });
+    		
+    		i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    		i3GeoMap.addOverlay(i3GEOTileO);
+    		var myMapType = new GMapType([i3GEOTile], new GMercatorProjection(18), 'i3Geo');
+    		i3GeoMap.addMapType(myMapType);
+    		
+    		/*
     		GEvent.addListener(i3GeoMap, "zoomend", function() {
     			i3GeoMap.removeOverlay(wmsmap);
     			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
@@ -444,10 +479,26 @@ i3GEO.interface = {
     			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
 				i3GeoMap.addOverlay(wmsmap);
     		});
+    		*/
 			i3GEO.interface.googlemaps.ativaBotoes();
 			i3GEO.eventos.ativa($i("googlemaps"));
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraMenuSuspenso();
+			var pos = i3GEO.util.pegaPosicaoObjeto($i("googlemaps"));
+			GEvent.addListener(i3GeoMap, "mousemove", function(ponto) {
+    			var teladms = i3GEO.calculo.dd2dms(ponto.lng(),ponto.lat());
+    			var tela = i3GeoMap.fromLatLngToContainerPixel(ponto);
+    			objposicaocursor = {
+					ddx: ponto.lng(),
+					ddy: ponto.lat(),
+					dmsx: teladms[0],
+					dmsy: teladms[1],
+					imgx:tela.x,
+					imgy:tela.y,
+					telax: tela.x + pos[0],
+					telay: tela.y + pos[1]
+				};
+    		});
 		},
 		bbox: function(){
 			var bd = i3GeoMap.getBounds();
@@ -464,6 +515,15 @@ i3GEO.interface = {
     		parametros += "&map_imagecolor=-1 -1 -1&map_transparent=on";
     		return(cgi+parametros);
 		},
+		criaTile: function(){
+		   	var cgi = i3GEO.util.protocolo()+"://"+window.location.host+i3GEO.parametros.cgi+"?";
+    		var parametros = "map="+i3GEO.parametros.mapfile;
+        	parametros += '&mode=tile';
+        	parametros += '&tilemode=gmap';
+        	parametros += '&tile={X}+{Y}+{Z}';
+    		//alert(cgi+parametros)
+    		return(cgi+parametros);		
+		},
 		ativaBotoes: function(){
 			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			if ($i("barraDeBotoes2")){
@@ -474,6 +534,11 @@ i3GEO.interface = {
 			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
 			//ativa as funções dos botões
 			i3GEO.barraDeBotoes.ativaBotoes();
+		},
+		mudaOpacidade: function(valor){
+			//$i("xg").value = valor / 200;
+			i3GEO.interface.googlemaps.OPACIDADE = valor / 200;
+			i3GEO.interface.googlemaps.redesenha();
 		}
 	},
 	/*
@@ -505,4 +570,4 @@ i3GEO.interface = {
 		}
 	}
 };
-YAHOO.log("carregou classe interface", "Classes i3geo");
+//YAHOO.log("carregou classe interface", "Classes i3geo");

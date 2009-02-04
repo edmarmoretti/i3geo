@@ -44,7 +44,7 @@ echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 //ogc.php
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-$protocolo = $protocolo[0];
+$protocolo = strtolower($protocolo[0]);
 $protocolo1 = strtolower($protocolo . '://'.$_SERVER['SERVER_NAME']);
 $protocolo = $protocolo . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/kml.php","",$protocolo.$_SERVER["PHP_SELF"]);

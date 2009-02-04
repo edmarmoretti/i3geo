@@ -316,4 +316,4 @@ var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
 		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
 	catch(e){alert("Problemas com idiomas "+e);};
-YAHOO.log("carregou classe idioma", "Classes i3geo");
+//YAHOO.log("carregou classe idioma", "Classes i3geo");

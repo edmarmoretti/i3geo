@@ -958,4 +958,4 @@ i3GEO.navega = {
 		}
 	}
 };
-YAHOO.log("carregou classe navega", "Classes i3geo");
+//YAHOO.log("carregou classe navega", "Classes i3geo");

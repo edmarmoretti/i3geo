@@ -790,4 +790,4 @@ $top = function(id,valor){
 $left = function(id,valor){
 	i3GEO.util.$left(id,valor);
 };
-YAHOO.log("carregou classe util", "Classes i3geo");
+//YAHOO.log("carregou classe util", "Classes i3geo");

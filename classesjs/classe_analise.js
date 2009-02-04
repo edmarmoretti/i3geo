@@ -440,4 +440,4 @@ i3GEO.analise = {
 		}
 	}
 };
-YAHOO.log("carregou classe analise", "Classes i3geo");
+//YAHOO.log("carregou classe analise", "Classes i3geo");

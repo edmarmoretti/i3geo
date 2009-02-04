@@ -1506,4 +1506,4 @@ function montaMenuSuspenso(iddiv){
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = iddiv;
 	i3GEO.gadgets.mostraMenuSuspenso();
 }
-YAHOO.log("carregou depreciados", "Classes i3geo");
+//YAHOO.log("carregou depreciados", "Classes i3geo");
