@@ -27,7 +27,6 @@ File: i3geo/admin/sistemas.php
 19/6/2007
 
 */
-
 include_once("admin.php");
 //faz a busca da função que deve ser executada
 switch ($funcao)

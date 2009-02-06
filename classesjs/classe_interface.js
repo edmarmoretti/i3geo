@@ -178,6 +178,7 @@ i3GEO.interface = {
 			i3GEO.idioma.mostraSeletor();
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			i3GEO.interface.padrao.ativaBotoes();
+			
 			if (i3GEO.configura.mapaRefDisplay != "none")
 			{
 				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
@@ -309,7 +310,7 @@ i3GEO.interface = {
 				var url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?";
 				url += "map="+i3GEO.parametros.mapfile+"&mode=map&SRS=epsg:4326&";
 				i3geoOL = new OpenLayers.Map('openlayers', { controls: [] });
-				i3geoOLlayer = new OpenLayers.Layer.WMS( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':0},{isBaseLayer:true, opacity: 1});
+				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':1},{isBaseLayer:true, opacity: 1});
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("mousemove", i3geoOL, function(e){
@@ -342,10 +343,12 @@ i3GEO.interface = {
 				var pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 				i3geoOL.addControl(pz);
 				pz.div.style.zIndex = 5000;
+				/*
 				$i("OpenLayers_Control_PanZoom_pandown").style.top=parseInt($i("OpenLayers_Control_PanZoom_pandown").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panup").style.top=parseInt($i("OpenLayers_Control_PanZoom_panup").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panleft").style.top=parseInt($i("OpenLayers_Control_PanZoom_panleft").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panright").style.top=parseInt($i("OpenLayers_Control_PanZoom_panright").style.top)+5;
+				*/
 				var navc = new OpenLayers.Control.NavToolbar();
 				i3geoOL.addControl(navc);
 				navc.div.style.left="8px";
@@ -363,7 +366,7 @@ i3GEO.interface = {
     			]);
     			i3geoOL.addControl(botoesadic);
     			botoesadic.div.style.left="10px";
-    			botoesadic.div.style.top=parseInt($i("OpenLayers_Control_PanZoom_zoomout").style.top)+77;
+    			//botoesadic.div.style.top=parseInt($i("OpenLayers_Control_PanZoom_zoomout").style.top)+77;
 	
 				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 

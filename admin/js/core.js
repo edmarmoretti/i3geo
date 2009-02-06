@@ -180,6 +180,14 @@ callback - função que processará o retorno
 */
 function core_makeRequest(sUrl,callback,tipo)
 {
+	var sUrl = escape(sUrl);
+	var re = new RegExp("%3F", "g");
+	var sUrl = sUrl.replace(re,'?');
+	var re = new RegExp("%3D", "g");
+	var sUrl = sUrl.replace(re,'=');
+	var re = new RegExp("%26", "g");
+	var sUrl = sUrl.replace(re,'&');
+	//alert(sUrl)
 	if(arguments.length == 2)
 	{var tipo = "GET";}
 	var request = YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);

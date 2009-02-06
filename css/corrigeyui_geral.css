@@ -1,4 +1,9 @@
-
+.yui-skin-sam .yuimenubar {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0;
+border:1px solid #808080;
+font-size:93%;
+line-height:2;
+}
 .yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
 background:transparent url(../pacotes/yui252/build/menu/assets/skins/sam/menubaritem_submenuindicator.png) no-repeat scroll right center;
 }

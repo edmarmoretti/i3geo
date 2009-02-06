@@ -93,7 +93,7 @@ $jsfiles = array(
 "../pacotes/yui252/build/element/element-beta.js",
 "../pacotes/yui252/build/tabview/tabview-min.js",
 "../pacotes/yui252/build/utilities/utilities.js",
-"../pacotes/cpaint/cpaint2.inc.compressed.js",
+"../pacotes/cpaint/cpaint2.inc.js",
 "../pacotes/yui252/build/treeview/treeview-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",

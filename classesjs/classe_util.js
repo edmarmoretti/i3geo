@@ -118,7 +118,32 @@ i3GEO.util = {
 	Type:
 	{Array}
 	*/
-	BOXES: new Array(),	
+	BOXES: new Array(),
+	/*
+	Function: escapeURL
+	
+	Converte uma string em uma url válida
+	
+	Parameters:
+	
+	sUrl {String} - url que será convertida
+	
+	Return:
+	
+	Type:
+	{String}
+	*/
+	escapeURL: function(sUrl){
+		var sUrl = escape(sUrl);
+		var re = new RegExp("%3F", "g");
+		var sUrl = sUrl.replace(re,'?');
+		var re = new RegExp("%3D", "g");
+		var sUrl = sUrl.replace(re,'=');
+		var re = new RegExp("%26", "g");
+		var sUrl = sUrl.replace(re,'&');
+		return sUrl;
+	},
+
 	/*
 	Function: insereCookie
 	Cria um novo cookie. 

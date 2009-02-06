@@ -35,7 +35,17 @@ div#divArvore {
 }
 </STYLE>
 <script type="text/javascript" src="../../admin/js/core.js"></script>
-
+<STYLE>
+.yui-skin-sam .yui-panel-container.shadow .underlay {
+background-color:#000000;
+bottom:0;
+left:0;
+opacity:0.12;
+position:absolute;
+right:25px;
+top:0;
+}
+</STYLE>
 <body leftmargin="0" topmargin="0" class=" yui-skin-sam">
 		<applet style=z-index:0;" code="tree.HTApplet.class" archive="tree4.jar" width="100%" height="100%" MAYSCRIPT="true">
 		    <param name="htfile"  value="">
@@ -66,11 +76,11 @@ function SelecionaTema(id) {
 	{
 		core_montaEditor("","320px","500px")
 		var imagemsrc = "<?php echo $i3geo;?>/testamapfile.php?map="+myarray[1]+".map&tipo=grande"
-		var ins = "<img src='"+imagemsrc+"' /><br><br>"
+		var ins = "<img src='"+imagemsrc+"' /><br>"
 		ins += '<input type=button id=fechar value="Fechar" style="left:-5px;" />'
 		ins += '<input type=button id=i3geo value="i3Geo" style="left:-5px;" />'
 		ins += '<input type=button id=mais value="Mais..." style="left:-5px;" />'
-
+		//$i("editor_bd").style.height="550px";
 		$i("editor_bd").innerHTML = ins
 		var fechar = function()
 		{
@@ -88,7 +98,8 @@ function SelecionaTema(id) {
 		var adiciona = new YAHOO.widget.Button("fechar",{ onclick: { fn: fechar } });
 		var adiciona = new YAHOO.widget.Button("i3geo",{ onclick: { fn: i3geo } });
 		var adiciona = new YAHOO.widget.Button("mais",{ onclick: { fn: mais } });
-		$i("janela_editor_c").style.paddingRight = "18px"
+		$i("janela_editor_c").style.paddingRight = "1px"
+		if(!document.all)
 		$i("janela_editor_c").style.overflow = "auto"
 		var temp = function(e)
 		{e.style.display="none";}
@@ -120,7 +131,8 @@ function listaTemasPorTag(dados)
 		ins += "</p>"
 	}
 	core_montaEditor("","350px","500px")
-	$i("janela_editor_c").style.paddingRight = "18px"
+	$i("janela_editor_c").style.paddingRight = "1px"
+	if(!document.all)
 	$i("janela_editor_c").style.overflow = "auto"
 	$i("editor_bd").innerHTML = ins
 	var fechar = function()

@@ -279,7 +279,10 @@ function montaDivAtlas(i)
 	ins += "<option value='' >---</option>"
 	ins += "<option value='automatica' "
 	if (i.tipoguias_atlas == "automatica"){ins += "selected";}
-	ins += " >automática</option>"	
+	ins += " >automática</option>"
+	ins += "<option value='combo' "
+	if (i.tipoguias_atlas == "combo"){ins += "selected";}
+	ins += " >combo</option>"
 	ins += "<option value='expandida' "
 	if (i.tipoguias_atlas == "expandida"){ins += "selected";}
 	ins += " >expandida</option></select><br><br>"

@@ -18,22 +18,7 @@ function i3GEOmantemCompatibilidade(){
 		i3GEO.configura.funcaoTip = g_funcaoTip;
 	}
 	catch(e){}
-	try{
-		i3GEO.configura.diminuixM = g_diminuixM;
-	}
-	catch(e){i3GEO.configura.diminuixM = 20}
-	try{
-		i3GEO.configura.diminuixN = g_diminuixN;
-	}
-	catch(e){i3GEO.configura.diminuixN = 25}
-	try{
-		i3GEO.configura.diminuiyM = g_diminuiyM;
-	}
-	catch(e){i3GEO.configura.diminuiyM = 106}
-	try{
-		i3GEO.configura.diminuiyN = g_diminuiyN;
-	}
-	catch(e){i3GEO.configura.diminuiyN = 103}	
+
 	try{
 		i3GEO.configura.map3d = g_3dmap;
 	}
@@ -1506,4 +1491,5 @@ function montaMenuSuspenso(iddiv){
 	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.idhtml = iddiv;
 	i3GEO.gadgets.mostraMenuSuspenso();
 }
+
 //YAHOO.log("carregou depreciados", "Classes i3geo");

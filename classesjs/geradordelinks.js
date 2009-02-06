@@ -422,11 +422,14 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		panel.div.style.top="-298px";
 		var zb = new OpenLayers.Control.PanZoomBar();
 		$i3geo_gl.OL.addControl(zb);
+		/*
 		$i("OpenLayers_Control_PanZoom_pandown").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panup").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panleft").style.display="none"
 		$i("OpenLayers_Control_PanZoom_panright").style.display="none"
-		zb.div.style.left="-8px"
+		*/
+		$i("OpenLayers.Control.NavToolbar_70").style.display="none"
+		zb.div.style.left="0px"
 		$i3geo_gl.OL.capturageo = function()
 		{
 			var b = $i3geo_gl.OL.getExtent();

@@ -120,11 +120,15 @@ i3GEO = {
 	para outra, os menus reflitam a última escolha
 	*/
 	temaAtivo: "",
-
 	cria:function(){
 		//para efeitos de compatibilidade
+		g_panM = "nao";
 		try {i3GEO.configura.locaplic = g_locaplic;}
-		catch(e){g_locaplic = i3GEO.configura.locaplic;};
+		catch(e){g_locaplic = i3GEO.configura.locaplic;};	
+		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
+		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
+		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
+		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}			
 		//
 		//calcula o tamanho do mapa
 		var diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
@@ -195,6 +199,7 @@ i3GEO = {
 		};
 	},
 	inicia:function(){
+		if(typeof("i3GEOmantemCompatibilidade") == 'function')
 		i3GEOmantemCompatibilidade();
 		var montaMapa = function(retorno){
 			if(retorno == ""){alert("Ocorreu um erro no mapa - montaMapa");retorno = {data:{erro: "erro"}};}
@@ -265,7 +270,6 @@ i3GEO = {
 					if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = i3GEO.parametros.mapscale;}
 					if ((i3GEO.parametros.geoip == "nao") && ($i("ondeestou")))
 					{$i("ondeestou").style.display="none";}
-	
 					i3GEO.interface.inicia();
 					if (i3GEO.finaliza)
 					{eval(i3GEO.finaliza);}

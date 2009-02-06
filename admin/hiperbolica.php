@@ -57,13 +57,13 @@ foreach ($menus as $menu)
 					if(count($tags) > 0)
 					{
 						//tags
-						$xml .= '<item cor="#CC6633" id="'.$contador.'" tipo="TE8" nome="TAGs" familia="'.$id.'" />  '."\n";
+						$xml .= '<item cor="#99cccc" id="'.$contador.'" tipo="TE8" nome="TAGs" familia="'.$id.'" />  '."\n";
 						foreach($tags as $tag)
 						{
 							$contador++;
 							$tag = html_entity_decode($tag);
 							if($tag != "")
-							$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
+							$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
 						}
 					}
 				}
