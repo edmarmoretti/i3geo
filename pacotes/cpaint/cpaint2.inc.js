@@ -202,6 +202,19 @@ function cpaint() {
   * @return   void
   */
   this.call = function() {
+    //incluido por edmar
+	var sUrl = escape(arguments[0]);
+	var re = new RegExp("%3F", "g");
+	var sUrl = sUrl.replace(re,'?');
+	var re = new RegExp("%3D", "g");
+	var sUrl = sUrl.replace(re,'=');
+	var re = new RegExp("%26", "g");
+	var sUrl = sUrl.replace(re,'&');
+	var re = new RegExp("%3A", "g");
+	var sUrl = sUrl.replace(re,':');
+    //alert(sUrl)
+    arguments[0] = sUrl;
+    //
     var use_stack = -1;
     
     if (config['persistent_connection'] == true
