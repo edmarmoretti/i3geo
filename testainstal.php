@@ -19,6 +19,10 @@ Title: Testa a instalação do I3Geo.
 
 Executa testes e aponta erros na instalação.
 
+Exemplo:
+
+http://localhost/i3geo/testainstal.php
+
 File: i3geo/testainstal.php
 
 About: Licença

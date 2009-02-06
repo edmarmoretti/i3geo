@@ -1,5 +1,5 @@
 /*
-Title: atlas.js
+Title: Atlas
 
 Executa as operações da interface Atlas.
 

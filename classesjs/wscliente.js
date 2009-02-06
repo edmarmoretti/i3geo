@@ -1,5 +1,5 @@
 /*
-Title: wscliente.js
+Title: Cliente de web services
 
 Classe javascript da aplicação de consulta de web services.
 

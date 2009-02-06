@@ -50,7 +50,9 @@ i3GEO.ajuda = {
 	
 	Define se a janela de mensagens pode ou não ser aberta.
 	
-	Default: true
+	Default:
+	
+	true
 	
 	Type:
 	{Boolean}
@@ -64,7 +66,8 @@ i3GEO.ajuda = {
 	Se esse DIV for encontrado no mapa, os textos serão mostrados em seu interior.
 	
 	Default:
-	"i3geo_ajuda"
+	
+	i3geo_ajuda
 	
 	Type:
 	{String}
@@ -78,7 +81,8 @@ i3GEO.ajuda = {
 	Esse tipo de mensagem é obtida do METADATA "MENSAGEM" que pode ser incluído em um layer.
 	
 	Default:
-	"bannerMensagem"
+	
+	i3geo_letreiro
 	
 	Type:
 	{String}

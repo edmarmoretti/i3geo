@@ -1,5 +1,5 @@
 /*
-Title: I3Geo
+Title: i3Geo
 
 File: i3geo/classesjs/classe_i3geo.js
 
@@ -43,7 +43,14 @@ i3GEO = {
 	/*
 	Variable: parametros
 	
-	Parâmetros obtidos do mapa atual
+	Parâmetros obtidos do mapa atual. Os parâmetros são fornecidos pelos programas
+	PHP de redesenho e criação do mapa e atualizados sempre que o mapa é alterado.
+	
+	Exemplos:
+	
+	Para acessar um valor, utilize por exemplo
+	
+	alert(i3GEO.parametros.mapexten)
 	
 	Parameters:
 	
@@ -63,7 +70,7 @@ i3GEO = {
 	
 	mapimagem {String} - URL da imagem que compõe o mapa
 	
-	geoip {sim|nao} - indica se o geoip está instalado, podendo ou não ser utilizado
+	geoip {sim|nao} - indica se o geoip está instalado
 	
 	listavisual {String} - lista de visuais disponíveis
 	
@@ -120,6 +127,17 @@ i3GEO = {
 	para outra, os menus reflitam a última escolha
 	*/
 	temaAtivo: "",
+	/*
+	Function: cria
+	
+	Cria e configura a visualização do mapa, definindo posicionamentos, tamanho etc
+	
+	Após as definições básicas, é executado o programa <i3GEO.interface.cria> que irá
+	realizar as operações conforme a interface atualmente em uso. A interface é definida
+	em <i3GEO.interface.ATUAL>
+	
+	<i3GEO.interface>
+	*/
 	cria:function(){
 		//para efeitos de compatibilidade
 		g_panM = "nao";
@@ -198,6 +216,22 @@ i3GEO = {
 			extentref:""
 		};
 	},
+	/*
+	Function: inicia
+	
+	Inicializa o mapa após ter sido criado com i3GEO.cria()
+	
+	Verifica se o mapa apresenta algum problema no processamento no lado do servidor e
+	realiza as operações de tentativa de recuperação, se for o caso
+	
+	No início do processo é executada a função <i3GEOmantemCompatibilidade>
+	para realizar as operações necessárias de manutenção de compatibilidade da versão atual para as anteriores
+	
+	A inicialização é baseada em <i3GEO.php.inicia> cujo retorno é utilizado para definir a
+	variável <i3GEO.parametrso>
+	
+	Após a inicialização é executado <i3GEO.interface.inicia>
+	*/
 	inicia:function(){
 		if(typeof("i3GEOmantemCompatibilidade") == 'function')
 		i3GEOmantemCompatibilidade();
@@ -322,11 +356,22 @@ i3GEO = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
 	},
 	finaliza:"",
-
 	/*
 	Function: atualiza
 	
-	Atualiza o mapa atual, alterando a imagem do mapa e os gadgets ativos
+	Atualiza o mapa atual, alterando a imagem do mapa os gadgets ativos e os parâmetros e
+	verifica a integridade do mapa em uso (arquivo mapfile)
+	
+	O processo executa também a função de atualização específica da interface atual em uso, veja
+	<i3GEO.interface.redesenha>
+	
+	Os seguintes gadgets são processados
+	
+	<i3GEO.arvoreDeCamadas.atualiza>
+	
+	<i3GEO.arvoreDeCamadas.atualizaFarol>
+	
+	Os eventos definidos em <i3GEO.eventos.navegaMapa> são executados
 	
 	Parameters:
 	

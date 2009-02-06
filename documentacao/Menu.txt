@@ -48,39 +48,43 @@ Group: Programas principais (core)  {
 
    Group: Programas principais em JavaScript (rodam no navegador)  {
 
-      File: atlas.js  (classesjs\atlas.js)
-      File: compactajs.js  (classesjs\compactajs.php)
-      File: configura.js  (classesjs\configura.js)
-      File: datadownload.js  (classesjs\datadownload.js)
-      File: geradordelinks.js  (classesjs\geradordelinks.js)
-      File: i3geo.js  (classesjs\i3geo.js)
-      File: iniciamma.js  (classesjs\iniciamma.js)
-      File: montaMenuSuspenso  (classesjs\menususpenso.js)
-      File: redesenho.js  (classesjs\redesenho.js)
-      File: wscliente.js  (classesjs\wscliente.js)
-      File: depreciados.js  (classesjs\depreciados.js)
-      File: i3geo_tudo_compacto.js  (classesjs\i3geo_tudo_compacto.js)
-      File: i3geo_tudo_compacto.js.php  (classesjs\i3geo_tudo_compacto.js.php)
-      File: Ajuda  (classesjs\classe_ajuda.js)
-      File: Análise geográfica  (classesjs\classe_analise.js)
-      File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
-      File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
-      File: Barra de botões  (classesjs\classe_barradebotoes.js)
-      File: Cálculos  (classesjs\classe_calculo.js)
-      File: Configurações gerais  (classesjs\classe_configura.js)
-      File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
-      File: Eventos  (classesjs\classe_eventos.js)
-      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
-      File: Guias  (classesjs\classe_guias.js)
-      File: Idioma  (classesjs\classe_idioma.js)
-      File: Janelas  (classesjs\classe_janela.js)
-      File: Mapa  (classesjs\classe_mapa.js)
-      File: Mapa de referência  (classesjs\classe_maparef.js)
-      File: Navegação sobre o mapa  (classesjs\classe_navega.js)
-      File: PHP  (no auto-title, classesjs\classe_php.js)
-      File: Seleção de elementos  (classesjs\classe_selecao.js)
-      File: Temas  (classesjs\classe_tema.js)
-      File: Utilitários  (classesjs\classe_util.js)
+      Group: Classes  {
+
+         File: i3Geo  (classesjs\classe_i3geo.js)
+         File: Ajuda  (classesjs\classe_ajuda.js)
+         File: Análise geográfica  (classesjs\classe_analise.js)
+         File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
+         File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
+         File: Barra de botões  (classesjs\classe_barradebotoes.js)
+         File: Cálculos  (classesjs\classe_calculo.js)
+         File: Configurações gerais  (classesjs\classe_configura.js)
+         File: depreciados.js  (classesjs\depreciados.js)
+         File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
+         File: Eventos  (classesjs\classe_eventos.js)
+         File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
+         File: Guias  (classesjs\classe_guias.js)
+         File: Idioma  (classesjs\classe_idioma.js)
+         File: Interface  (classesjs\classe_interface.js)
+         File: Janelas  (classesjs\classe_janela.js)
+         File: Mapa  (classesjs\classe_mapa.js)
+         File: Mapa de referência  (classesjs\classe_maparef.js)
+         File: Navegação sobre o mapa  (classesjs\classe_navega.js)
+         File: PHP  (no auto-title, classesjs\classe_php.js)
+         File: Seleção de elementos  (classesjs\classe_selecao.js)
+         File: Temas  (classesjs\classe_tema.js)
+         File: Utilitários  (classesjs\classe_util.js)
+         }  # Group: Classes
+
+      Group: Aplicativos  {
+
+         File: Atlas  (classesjs\atlas.js)
+         File: Cliente de web services  (classesjs\wscliente.js)
+         File: Compactador de javascript  (classesjs\compactajs.php)
+         File: Data download  (classesjs\datadownload.js)
+         File: Gerador de links  (classesjs\geradordelinks.js)
+         File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
+         }  # Group: Aplicativos
+
       }  # Group: Programas principais em JavaScript (rodam no navegador)
 
    Group: Programas principais em PHP (rodam no servidor)  {
@@ -130,6 +134,7 @@ Group: Redirecionadores  {
    File: Redirecionador para o ms_criamapa.php com extensão HTM  (index.htm)
    File: Redirecionador HTM para o ms_criamapa.php com interface zerocal  (zerocal\index.htm)
    File: Redirecionador HTML para o ms_criamapa.php com interface zerocal  (zerocal\index.html)
+   File: Redirecionador para o pacotes/arvorehiper/index.php com extensão HTML  (hiperbolica.html)
    }  # Group: Redirecionadores
 
 Group: Aplicativos adicionais  {
@@ -142,19 +147,6 @@ Group: Aplicativos adicionais  {
    File: geradordelinks.htm  (geradordelinks.htm)
    File: wscliente.htm  (wscliente.htm)
    File: geraminiatura.php  (geraminiatura.php)
-
-   Group: Zerocal  {
-
-      File: compactajs.php  (classesjs\zerocal\compactajs.php)
-      File: configura.js  (classesjs\zerocal\configura.js)
-      File: ferramentas.js  (classesjs\zerocal\ferramentas.js)
-      File: funcoes.js  (classesjs\zerocal\funcoes.js)
-      File: Funções gerais  (classesjs\zerocal\temp.js)
-      File: i3geo.js  (classesjs\zerocal\i3geo.js)
-      File: i3geonaocompacto.js  (classesjs\zerocal\i3geonaocompacto.js)
-      File: iniciamma.js  (classesjs\zerocal\iniciamma.js)
-      File: redesenho.js  (classesjs\zerocal\redesenho.js)
-      }  # Group: Zerocal
 
    Group: Atlas  {
 
@@ -181,7 +173,7 @@ Group: Aplicativos adicionais  {
       File: mobile.php  (mobile\mobile.php)
       }  # Group: Mobile
 
-   File: Redirecionador para o pacotes/arvorehiper/index.php com extensão HTML  (hiperbolica.html)
+   File: i3geo.js  (classesjs\zerocal\i3geo.js)
    }  # Group: Aplicativos adicionais
 
 Group: Configurações administrativas (menus, mapas, etc.)  {
@@ -199,6 +191,8 @@ Group: Configurações administrativas (menus, mapas, etc.)  {
 Group: Interfaces HTML e mapfiles de inicialização e configuração  {
 
    File: Flamingo &lparen;experimental&rparen;  (aplicmap\flamingo.htm)
+   File: Google Earth &lparen;experimental&rparen;  (aplicmap\googleearth.phtml)
+   File: Google Maps &lparen;experimental&rparen;  (aplicmap\googlemaps.phtml)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
    File: Interface normal &lparen;para exemplos&rparen;  (no auto-title, aplicmap\meumapa.htm)
@@ -220,3 +214,5 @@ Group: Index  {
    Variable Index: Variables
    }  # Group: Index
 
+File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js)
+File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js.php)

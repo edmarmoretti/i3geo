@@ -1,5 +1,5 @@
 /*
-Title: geradordelinks.js
+Title: Gerador de links
 
 Classe javascript da aplicação de geração de links.
 

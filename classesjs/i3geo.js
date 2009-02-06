@@ -1,9 +1,11 @@
 /*
-Title: i3geo.js
+Title: i3geo - carregador de javascripts
+
+Para uso nas interfaces HTML
 
 Lê o conjunto de javascripts para o funcionamento do i3geo.
 
-Carrega o arquivo compactado i3geo_tudo_compacto.js que inclui também os scripts do YUI
+Carrega o arquivo compactado i3geo_tudo_compacto.js.php que inclui também os scripts do YUI
 
 File: i3geo/classesjs/i3geo.js
 
