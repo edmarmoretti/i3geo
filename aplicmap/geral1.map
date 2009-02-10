@@ -51,6 +51,16 @@ MAP
  	#	FORMATOPTION "QUANTIZE_COLORS=256"
 	#END
 	OUTPUTFORMAT
+  		NAME jpeg
+  		DRIVER "GD/JPEG"
+  		MIMETYPE "image/jpeg"
+  		IMAGEMODE RGB
+  		EXTENSION "jpg"
+  		TRANSPARENT TRUE
+  		EXTENSION jpg
+  		FORMATOPTION "INTERLACE=OFF"
+	END
+	OUTPUTFORMAT
     		NAME svg
     		MIMETYPE "image/svg+xml"
     		DRIVER svg
@@ -318,7 +328,7 @@ MAP
 			POINTS
 				10 5
 			END
-			TEXT "-I3Geo"
+			TEXT "-    i3Geo"
 		END
 	END
 END

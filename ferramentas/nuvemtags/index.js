@@ -69,7 +69,7 @@ function montaNuvem(r)
 						}		
 					}
 					tags += "<span> </span> <span onmouseout='this.style.textDecoration=\"none\"' onmouseover='this.style.textDecoration=\"underline\"' onclick='procurar(\""+retorno.data[i].tag+"\")' style='cursor:pointer;vertical-align:middle;color:rgb("+cor+");font-size:"+h+"pt;'>"+retorno.data[i].tag+"</span>"+linkrss
-					if(h > 10)
+					if(h > 7)
 					tagsFlash += "<a href='index.htm?palavra="+retorno.data[i].tag+"' target='_top' style='font-size:"+(h - 15)+"px;color:red;' >"+retorno.data[i].tag+"</a>"
 				}
 			}

@@ -3744,7 +3744,7 @@ Balloon.prototype.isKonqueror = function() {
 }
 
 /*
-Title: I3Geo
+Title: i3Geo
 
 File: i3geo/classesjs/classe_i3geo.js
 
@@ -3788,7 +3788,14 @@ i3GEO = {
 	/*
 	Variable: parametros
 	
-	Parâmetros obtidos do mapa atual
+	Parâmetros obtidos do mapa atual. Os parâmetros são fornecidos pelos programas
+	PHP de redesenho e criação do mapa e atualizados sempre que o mapa é alterado.
+	
+	Exemplos:
+	
+	Para acessar um valor, utilize por exemplo
+	
+	alert(i3GEO.parametros.mapexten)
 	
 	Parameters:
 	
@@ -3808,13 +3815,15 @@ i3GEO = {
 	
 	mapimagem {String} - URL da imagem que compõe o mapa
 	
-	geoip {sim|nao} - indica se o geoip está instalado, podendo ou não ser utilizado
+	geoip {sim|nao} - indica se o geoip está instalado
 	
 	listavisual {String} - lista de visuais disponíveis
 	
 	utilizacgi {sim|nao} - indica se o mapa atual está no modo CGI
 	
-	versaoms {String} - versão do Mapserver instalado no servidor
+	versaoms {String} - versão do Mapserver instalado no servidor (maior)
+	
+	versaomscompleta {String} - versão do Mapserver instalado no servidor (completa)
 	
 	mensagens {String} - mensagens para uso no letreiro
 	
@@ -3847,6 +3856,7 @@ i3GEO = {
 		listavisual: "",
 		utilizacgi:"",
 		versaoms:"",
+		versaomscompleta: "",
 		mensagens:"",
 		w: "",
 		h: "",
@@ -3865,7 +3875,28 @@ i3GEO = {
 	para outra, os menus reflitam a última escolha
 	*/
 	temaAtivo: "",
+	/*
+	Function: cria
+	
+	Cria e configura a visualização do mapa, definindo posicionamentos, tamanho etc
+	
+	Após as definições básicas, é executado o programa <i3GEO.interface.cria> que irá
+	realizar as operações conforme a interface atualmente em uso. A interface é definida
+	em <i3GEO.interface.ATUAL>
+	
+	<i3GEO.interface>
+	*/
 	cria:function(){
+		if (window.location.href.split("?")[1]){
+			i3GEO.configura.sid = window.location.href.split("?")[1];
+			//
+			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
+			//
+			if (i3GEO.configura.sid.split("#")[0])
+			{i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];}
+		}
+		else
+		{i3GEO.configura.sid = "";}
 		//para efeitos de compatibilidade
 		g_panM = "nao";
 		try {i3GEO.configura.locaplic = g_locaplic;}
@@ -3933,6 +3964,7 @@ i3GEO = {
 			listavisual: "",
 			utilizacgi:"",
 			versaoms:"",
+			versaomscompleta:"",
 			mensagens:"",
 			w: w,
 			h: h,
@@ -3943,6 +3975,22 @@ i3GEO = {
 			extentref:""
 		};
 	},
+	/*
+	Function: inicia
+	
+	Inicializa o mapa após ter sido criado com i3GEO.cria()
+	
+	Verifica se o mapa apresenta algum problema no processamento no lado do servidor e
+	realiza as operações de tentativa de recuperação, se for o caso
+	
+	No início do processo é executada a função <i3GEOmantemCompatibilidade>
+	para realizar as operações necessárias de manutenção de compatibilidade da versão atual para as anteriores
+	
+	A inicialização é baseada em <i3GEO.php.inicia> cujo retorno é utilizado para definir a
+	variável <i3GEO.parametrso>
+	
+	Após a inicialização é executado <i3GEO.interface.inicia>
+	*/
 	inicia:function(){
 		if(typeof("i3GEOmantemCompatibilidade") == 'function')
 		i3GEOmantemCompatibilidade();
@@ -3988,6 +4036,8 @@ i3GEO = {
 					i3GEO.parametros.r = r;
 					i3GEO.parametros.locmapas = locmapas;
 					i3GEO.parametros.extentref = extentref;
+					i3GEO.parametros.versaoms = versaoms;
+					i3GEO.parametros.versaomscompleta = versaomscompleta;
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
 					i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
@@ -4067,11 +4117,22 @@ i3GEO = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
 	},
 	finaliza:"",
-
 	/*
 	Function: atualiza
 	
-	Atualiza o mapa atual, alterando a imagem do mapa e os gadgets ativos
+	Atualiza o mapa atual, alterando a imagem do mapa os gadgets ativos e os parâmetros e
+	verifica a integridade do mapa em uso (arquivo mapfile)
+	
+	O processo executa também a função de atualização específica da interface atual em uso, veja
+	<i3GEO.interface.redesenha>
+	
+	Os seguintes gadgets são processados
+	
+	<i3GEO.arvoreDeCamadas.atualiza>
+	
+	<i3GEO.arvoreDeCamadas.atualizaFarol>
+	
+	Os eventos definidos em <i3GEO.eventos.navegaMapa> são executados
 	
 	Parameters:
 	
@@ -10285,7 +10346,7 @@ i3GEO.interface = {
 				var url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?";
 				url += "map="+i3GEO.parametros.mapfile+"&mode=map&SRS=epsg:4326&";
 				i3geoOL = new OpenLayers.Map('openlayers', { controls: [] });
-				i3geoOLlayer = new OpenLayers.Layer.WMS( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':0},{isBaseLayer:true, opacity: 1});
+				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':1},{isBaseLayer:true, opacity: 1});
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("mousemove", i3geoOL, function(e){
@@ -10318,10 +10379,12 @@ i3GEO.interface = {
 				var pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 				i3geoOL.addControl(pz);
 				pz.div.style.zIndex = 5000;
+				/*
 				$i("OpenLayers_Control_PanZoom_pandown").style.top=parseInt($i("OpenLayers_Control_PanZoom_pandown").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panup").style.top=parseInt($i("OpenLayers_Control_PanZoom_panup").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panleft").style.top=parseInt($i("OpenLayers_Control_PanZoom_panleft").style.top)+5;
 				$i("OpenLayers_Control_PanZoom_panright").style.top=parseInt($i("OpenLayers_Control_PanZoom_panright").style.top)+5;
+				*/
 				var navc = new OpenLayers.Control.NavToolbar();
 				i3geoOL.addControl(navc);
 				navc.div.style.left="8px";
@@ -10339,7 +10402,7 @@ i3GEO.interface = {
     			]);
     			i3geoOL.addControl(botoesadic);
     			botoesadic.div.style.left="10px";
-    			botoesadic.div.style.top=parseInt($i("OpenLayers_Control_PanZoom_zoomout").style.top)+77;
+    			//botoesadic.div.style.top=parseInt($i("OpenLayers_Control_PanZoom_zoomout").style.top)+77;
 	
 				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 
@@ -10389,16 +10452,22 @@ i3GEO.interface = {
 		OPACIDADE: 0.8,
 		redesenha: function(){
    			if(i3GeoMap != ""){
-   				i3GeoMap.removeOverlay(i3GEOTileO);
    				posfixo = posfixo + "&";
-   				//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
-   				var i3GEOTile = new GTileLayer(null,0,18,{
-                     tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
-                     isPng:true,
-                     opacity:i3GEO.interface.googlemaps.OPACIDADE });
-                i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-    			i3GeoMap.addOverlay(i3GEOTileO);
-				//i3GeoMap.addOverlay(i3GEOTile);
+				if(tile == false){
+   					i3GeoMap.removeOverlay(wmsmap);
+   					wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+   				}
+   				else{
+   					i3GeoMap.removeOverlay(i3GEOTileO);
+
+   					var i3GEOTile = new GTileLayer(null,0,18,{
+                     	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
+                     	isPng:true,
+                     	opacity:i3GEO.interface.googlemaps.OPACIDADE });
+                	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    				i3GeoMap.addOverlay(i3GEOTileO);
+				}
 			}
 		},
 		cria: function(w,h){
@@ -10418,13 +10487,17 @@ i3GEO.interface = {
 			i3GEO.interface.IDMAPA = "googlemaps";
 		},
 		inicia: function(){
-    		i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    		tile = false;
+    		var ver = i3GEO.parametros.versaomscompleta.split(".");
+    		if(parseInt(i3GEO.parametros.versaoms) >= 5 && parseInt(ver[1]) > 1)
+    		{tile = true;}
     		var pol = i3GEO.parametros.mapexten;
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
     		i3GeoMap = new GMap2($i("googlemaps"));
     		i3GeoMap.setMapType(G_SATELLITE_MAP);
+    		//i3GeoMap.setMapType(G_SATELLITE_3D_MAP);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -10432,30 +10505,32 @@ i3GEO.interface = {
     		var bottomRight = new GControlPosition(G_ANCHOR_BOTTOM_RIGHT);
     		i3GeoMap.addControl(new GOverviewMapControl(),bottomRight);
     		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 4);   		
-    		//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-			//i3GeoMap.addOverlay(wmsmap);
-    		var i3GEOTile = new GTileLayer(null,0,18,{
+			if(tile == false){
+    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+				i3GeoMap.addOverlay(wmsmap);
+    			GEvent.addListener(i3GeoMap, "zoomend", function() {
+    				i3GeoMap.removeOverlay(wmsmap);
+    				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+    			});
+    			GEvent.addListener(i3GeoMap, "dragend", function() {
+    				i3GeoMap.removeOverlay(wmsmap);
+    				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+    			});
+    		}
+    		else{
+    			i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    			var i3GEOTile = new GTileLayer(null,0,18,{
                                  tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                                  isPng:true,
                                  opacity:i3GEO.interface.googlemaps.OPACIDADE });
     		
-    		i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-    		i3GeoMap.addOverlay(i3GEOTileO);
-    		var myMapType = new GMapType([i3GEOTile], new GMercatorProjection(18), 'i3Geo');
-    		i3GeoMap.addMapType(myMapType);
-    		
-    		/*
-    		GEvent.addListener(i3GeoMap, "zoomend", function() {
-    			i3GeoMap.removeOverlay(wmsmap);
-    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-				i3GeoMap.addOverlay(wmsmap);
-    		});
-    		GEvent.addListener(i3GeoMap, "dragend", function() {
-    			i3GeoMap.removeOverlay(wmsmap);
-    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-				i3GeoMap.addOverlay(wmsmap);
-    		});
-    		*/
+    			i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    			i3GeoMap.addOverlay(i3GEOTileO);
+    			var myMapType = new GMapType([i3GEOTile], new GMercatorProjection(18), 'i3Geo');
+    			i3GeoMap.addMapType(myMapType);   		
+			}
 			i3GEO.interface.googlemaps.ativaBotoes();
 			i3GEO.eventos.ativa($i("googlemaps"));
 			i3GEO.gadgets.mostraCoordenadasGEO();
@@ -10538,9 +10613,12 @@ i3GEO.interface = {
 			i3GEO.interface.IDMAPA = "googleearth";
 		},
 		inicia: function(){
-		//http://mapas.mma.gov.br/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
-			i3GeoMap.src = "http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&up_kml_url=http%3A%2F%2Fmapas.mma.gov.br%2Fi3geo%2Fpacotes%2Fkmlmapserver%2Fkmlservice.php%3Fmap%3Dbioma%26typename%3Dbioma%26request%3Dkml&up_view_mode=earth&up_earth_2d_fallback=0&up_earth_fly_from_space=1&up_earth_show_buildings=0&synd=open&w=320&h=400&title=Embedded+KML+Viewer&border=%23ffffff%7C3px%2C1px+solid+%23999999&source=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fcreator%3Fsynd%3Dopen%26url%3Dhttp%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F114026893455619160549%2Fembedkmlgadget.xml";
-			
+			var src = "http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&up_kml_url=";
+			var i = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
+			//window.open(i)
+			src += escape(i);
+			src += "&up_view_mode=earth&up_earth_2d_fallback=0&up_earth_fly_from_space=1&up_earth_show_buildings=0&synd=open&w=320&h=400&title=Embedded+KML+Viewer&border=%23ffffff%7C3px%2C1px+solid+%23999999&source=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fcreator%3Fsynd%3Dopen%26url%3Dhttp%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F114026893455619160549%2Fembedkmlgadget.xml";
+			i3GeoMap.src = src;
 		},
 		ativaBotoes: function(){
 		}
@@ -12083,7 +12161,9 @@ i3GEO.ajuda = {
 	
 	Define se a janela de mensagens pode ou não ser aberta.
 	
-	Default: true
+	Default:
+	
+	true
 	
 	Type:
 	{Boolean}
@@ -12097,7 +12177,8 @@ i3GEO.ajuda = {
 	Se esse DIV for encontrado no mapa, os textos serão mostrados em seu interior.
 	
 	Default:
-	"i3geo_ajuda"
+	
+	i3geo_ajuda
 	
 	Type:
 	{String}
@@ -12111,7 +12192,8 @@ i3GEO.ajuda = {
 	Esse tipo de mensagem é obtida do METADATA "MENSAGEM" que pode ser incluído em um layer.
 	
 	Default:
-	"bannerMensagem"
+	
+	i3geo_letreiro
 	
 	Type:
 	{String}
@@ -12720,18 +12802,21 @@ i3GEO.janela = {
 			catch(e){};
 		}
 		else{
-			i3GEO.janela.fechaAguarde("ajaxdestaca");
-			i3GEO.janela.fechaAguarde("ajaxabrelente");
-			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
-			i3GEO.janela.fechaAguarde("ajaxLegenda");
-			i3GEO.janela.fechaAguarde("ajaxReferencia");
-			i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
-			i3GEO.janela.fechaAguarde("montaMapa");
-			i3GEO.janela.fechaAguarde("aguardedoc");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");		
+			try{
+				i3GEO.janela.fechaAguarde("ajaxdestaca");
+				i3GEO.janela.fechaAguarde("ajaxabrelente");
+				i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
+				i3GEO.janela.fechaAguarde("ajaxLegenda");
+				i3GEO.janela.fechaAguarde("ajaxReferencia");
+				i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
+				i3GEO.janela.fechaAguarde("montaMapa");
+				i3GEO.janela.fechaAguarde("aguardedoc");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+			}
+			catch(e){}	
 		}
 	}
 };

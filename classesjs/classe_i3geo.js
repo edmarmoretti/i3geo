@@ -76,7 +76,9 @@ i3GEO = {
 	
 	utilizacgi {sim|nao} - indica se o mapa atual está no modo CGI
 	
-	versaoms {String} - versão do Mapserver instalado no servidor
+	versaoms {String} - versão do Mapserver instalado no servidor (maior)
+	
+	versaomscompleta {String} - versão do Mapserver instalado no servidor (completa)
 	
 	mensagens {String} - mensagens para uso no letreiro
 	
@@ -109,6 +111,7 @@ i3GEO = {
 		listavisual: "",
 		utilizacgi:"",
 		versaoms:"",
+		versaomscompleta: "",
 		mensagens:"",
 		w: "",
 		h: "",
@@ -139,6 +142,16 @@ i3GEO = {
 	<i3GEO.interface>
 	*/
 	cria:function(){
+		if (window.location.href.split("?")[1]){
+			i3GEO.configura.sid = window.location.href.split("?")[1];
+			//
+			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
+			//
+			if (i3GEO.configura.sid.split("#")[0])
+			{i3GEO.configura.sid = i3GEO.configura.sid.split("#")[0];}
+		}
+		else
+		{i3GEO.configura.sid = "";}
 		//para efeitos de compatibilidade
 		g_panM = "nao";
 		try {i3GEO.configura.locaplic = g_locaplic;}
@@ -206,6 +219,7 @@ i3GEO = {
 			listavisual: "",
 			utilizacgi:"",
 			versaoms:"",
+			versaomscompleta:"",
 			mensagens:"",
 			w: w,
 			h: h,
@@ -277,6 +291,8 @@ i3GEO = {
 					i3GEO.parametros.r = r;
 					i3GEO.parametros.locmapas = locmapas;
 					i3GEO.parametros.extentref = extentref;
+					i3GEO.parametros.versaoms = versaoms;
+					i3GEO.parametros.versaomscompleta = versaomscompleta;
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
 					i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);

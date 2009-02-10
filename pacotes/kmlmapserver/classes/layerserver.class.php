@@ -314,7 +314,7 @@ class LayerServer {
             // Add parameters to OGC server call
             // Fix &
             $wms_link = preg_replace('/&/', '&amp;', $wms_link);
-            $wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;';
+            $wms_link .= 'VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4291&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;';
             // Link ok, create folder
             //$folder =& $this->_xml->Document->addChild('GroundOverlay');
             $folder =& $this->simplexml_addChild($this->_xml->Document,'GroundOverlay');
@@ -876,7 +876,11 @@ class LayerServer {
 			else
 			{
 				$this->map_object = ms_newMapObj($this->map);
-				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/cgi-bin/mapserv?map=".$temp."&width=1500&height=1500&");
+				if(file_exists("ms_configura.php"))
+				{include_once("ms_configura.php");}
+				else
+				{include_once("../../ms_configura.php");}
+				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
 				for ($i=0;$i < ($this->map_object->numlayers);$i++)
 				{
 					$l = $this->map_object->getlayer($i);

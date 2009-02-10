@@ -416,18 +416,21 @@ i3GEO.janela = {
 			catch(e){};
 		}
 		else{
-			i3GEO.janela.fechaAguarde("ajaxdestaca");
-			i3GEO.janela.fechaAguarde("ajaxabrelente");
-			i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
-			i3GEO.janela.fechaAguarde("ajaxLegenda");
-			i3GEO.janela.fechaAguarde("ajaxReferencia");
-			i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
-			i3GEO.janela.fechaAguarde("montaMapa");
-			i3GEO.janela.fechaAguarde("aguardedoc");
-			i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");		
+			try{
+				i3GEO.janela.fechaAguarde("ajaxdestaca");
+				i3GEO.janela.fechaAguarde("ajaxabrelente");
+				i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
+				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
+				i3GEO.janela.fechaAguarde("ajaxLegenda");
+				i3GEO.janela.fechaAguarde("ajaxReferencia");
+				i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
+				i3GEO.janela.fechaAguarde("montaMapa");
+				i3GEO.janela.fechaAguarde("aguardedoc");
+				i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+			}
+			catch(e){}	
 		}
 	}
 };

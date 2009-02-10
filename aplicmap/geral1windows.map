@@ -56,6 +56,16 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
     		#FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
     		#FORMATOPTION  "FULL_RESOLUTION=TRUE"
   	END
+	OUTPUTFORMAT
+  		NAME jpeg
+  		DRIVER "GD/JPEG"
+  		MIMETYPE "image/jpeg"
+  		IMAGEMODE RGB
+  		EXTENSION "jpg"
+  		TRANSPARENT TRUE
+  		EXTENSION jpg
+  		FORMATOPTION "INTERLACE=OFF"
+	END
 
 	OUTPUTFORMAT
 		NAME png1
@@ -321,7 +331,7 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 			POINTS
 				10 5
 			END
-			TEXT "-I3Geo"
+			TEXT "-    i3Geo"
 		END
 	END
 END

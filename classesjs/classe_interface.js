@@ -416,16 +416,22 @@ i3GEO.interface = {
 		OPACIDADE: 0.8,
 		redesenha: function(){
    			if(i3GeoMap != ""){
-   				i3GeoMap.removeOverlay(i3GEOTileO);
    				posfixo = posfixo + "&";
-   				//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
-   				var i3GEOTile = new GTileLayer(null,0,18,{
-                     tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
-                     isPng:true,
-                     opacity:i3GEO.interface.googlemaps.OPACIDADE });
-                i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-    			i3GeoMap.addOverlay(i3GEOTileO);
-				//i3GeoMap.addOverlay(i3GEOTile);
+				if(tile == false){
+   					i3GeoMap.removeOverlay(wmsmap);
+   					wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+   				}
+   				else{
+   					i3GeoMap.removeOverlay(i3GEOTileO);
+
+   					var i3GEOTile = new GTileLayer(null,0,18,{
+                     	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
+                     	isPng:true,
+                     	opacity:i3GEO.interface.googlemaps.OPACIDADE });
+                	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    				i3GeoMap.addOverlay(i3GEOTileO);
+				}
 			}
 		},
 		cria: function(w,h){
@@ -445,13 +451,17 @@ i3GEO.interface = {
 			i3GEO.interface.IDMAPA = "googlemaps";
 		},
 		inicia: function(){
-    		i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    		tile = false;
+    		var ver = i3GEO.parametros.versaomscompleta.split(".");
+    		if(parseInt(i3GEO.parametros.versaoms) >= 5 && parseInt(ver[1]) > 1)
+    		{tile = true;}
     		var pol = i3GEO.parametros.mapexten;
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
     		i3GeoMap = new GMap2($i("googlemaps"));
     		i3GeoMap.setMapType(G_SATELLITE_MAP);
+    		//i3GeoMap.setMapType(G_SATELLITE_3D_MAP);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -459,30 +469,32 @@ i3GEO.interface = {
     		var bottomRight = new GControlPosition(G_ANCHOR_BOTTOM_RIGHT);
     		i3GeoMap.addControl(new GOverviewMapControl(),bottomRight);
     		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 4);   		
-    		//wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-			//i3GeoMap.addOverlay(wmsmap);
-    		var i3GEOTile = new GTileLayer(null,0,18,{
+			if(tile == false){
+    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+				i3GeoMap.addOverlay(wmsmap);
+    			GEvent.addListener(i3GeoMap, "zoomend", function() {
+    				i3GeoMap.removeOverlay(wmsmap);
+    				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+    			});
+    			GEvent.addListener(i3GeoMap, "dragend", function() {
+    				i3GeoMap.removeOverlay(wmsmap);
+    				wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
+					i3GeoMap.addOverlay(wmsmap);
+    			});
+    		}
+    		else{
+    			i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    			var i3GEOTile = new GTileLayer(null,0,18,{
                                  tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                                  isPng:true,
                                  opacity:i3GEO.interface.googlemaps.OPACIDADE });
     		
-    		i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-    		i3GeoMap.addOverlay(i3GEOTileO);
-    		var myMapType = new GMapType([i3GEOTile], new GMercatorProjection(18), 'i3Geo');
-    		i3GeoMap.addMapType(myMapType);
-    		
-    		/*
-    		GEvent.addListener(i3GeoMap, "zoomend", function() {
-    			i3GeoMap.removeOverlay(wmsmap);
-    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-				i3GeoMap.addOverlay(wmsmap);
-    		});
-    		GEvent.addListener(i3GeoMap, "dragend", function() {
-    			i3GeoMap.removeOverlay(wmsmap);
-    			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
-				i3GeoMap.addOverlay(wmsmap);
-    		});
-    		*/
+    			i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+    			i3GeoMap.addOverlay(i3GEOTileO);
+    			var myMapType = new GMapType([i3GEOTile], new GMercatorProjection(18), 'i3Geo');
+    			i3GeoMap.addMapType(myMapType);   		
+			}
 			i3GEO.interface.googlemaps.ativaBotoes();
 			i3GEO.eventos.ativa($i("googlemaps"));
 			i3GEO.gadgets.mostraCoordenadasGEO();
@@ -565,9 +577,12 @@ i3GEO.interface = {
 			i3GEO.interface.IDMAPA = "googleearth";
 		},
 		inicia: function(){
-		//http://mapas.mma.gov.br/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename=bioma&request=kml
-			i3GeoMap.src = "http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&up_kml_url=http%3A%2F%2Fmapas.mma.gov.br%2Fi3geo%2Fpacotes%2Fkmlmapserver%2Fkmlservice.php%3Fmap%3Dbioma%26typename%3Dbioma%26request%3Dkml&up_view_mode=earth&up_earth_2d_fallback=0&up_earth_fly_from_space=1&up_earth_show_buildings=0&synd=open&w=320&h=400&title=Embedded+KML+Viewer&border=%23ffffff%7C3px%2C1px+solid+%23999999&source=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fcreator%3Fsynd%3Dopen%26url%3Dhttp%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F114026893455619160549%2Fembedkmlgadget.xml";
-			
+			var src = "http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&up_kml_url=";
+			var i = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
+			//window.open(i)
+			src += escape(i);
+			src += "&up_view_mode=earth&up_earth_2d_fallback=0&up_earth_fly_from_space=1&up_earth_show_buildings=0&synd=open&w=320&h=400&title=Embedded+KML+Viewer&border=%23ffffff%7C3px%2C1px+solid+%23999999&source=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fcreator%3Fsynd%3Dopen%26url%3Dhttp%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F114026893455619160549%2Fembedkmlgadget.xml";
+			i3GeoMap.src = src;
 		},
 		ativaBotoes: function(){
 		}

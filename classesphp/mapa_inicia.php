@@ -78,7 +78,7 @@ function iniciaMapa()
 	//pega o xml com os sietmas para identificação
 	//
 	if(!isset($interface)){$interface = "";}
-	if($interface == "googlemaps")
+	if($interface == "googlemaps" || $interface == "googleearth")
 	{
 		$m = ms_newMapObj($map_file);
 		$c = $m->numlayers;
@@ -107,7 +107,17 @@ function iniciaMapa()
 		$temp->set("status",MS_OFF);
 		$c = $m->imagecolor;
 		$c->setrgb(255,255,255);
-		$of = $m->outputformat;
+		if($interface == "googleearth")
+		{
+			$m->selectOutputFormat("jpeg");
+			$of = $m->outputformat;
+			$of->set("imagemode",MS_IMAGEMODE_RGBA);
+			$of->set("driver","AGG/PNG");
+		}
+		else
+		{
+			$of = $m->outputformat;
+		}
 		$of->set("transparent",MS_ON);
 		$m->save($map_file);
 	}
@@ -187,6 +197,7 @@ function iniciaMapa()
 	$res .= ";var titulo='".$tituloInstituicao."'";
 	$versao = versao();
 	$res .= ";var versaoms ='".$versao["principal"]."'";
+	$res .= ";var versaomscompleta ='".$versao["completa"]."'";
 	//Pega os estilos disponíveis
 	$visual = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
 	$res .= ";var listavisual='".$visual."'";

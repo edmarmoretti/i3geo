@@ -136,7 +136,7 @@ i3GEO.eventos = {
 				if (f >= 0){
 					do{
 						if(objposicaocursor.imgx > 0)
-						{YAHOO.log("mouseParado", "i3geo");eval(i3GEO.eventos.MOUSEPARADO[f]);}
+						{eval(i3GEO.eventos.MOUSEPARADO[f]);}
 					}
 					while(f--)
 				}

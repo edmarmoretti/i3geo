@@ -1,5 +1,5 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>$i = function(id){return document.getElementById(id);}
- g_sid=window.parent.g_sid;$i=function(id){return document.getElementById(id);}
+ g_sid=window.parent.i3GEO.configura.sid;$i=function(id){return document.getElementById(id);}
 cabecalhojanela="";var h=0;if(window.parent.document.getElementById("wdocai")){var h=parseInt(window.parent.document.getElementById("wdocai").style.height);}
 navm=false;navn=false;var app=navigator.appName.substring(0,1);if(app=='N')navn=true;else navm=true;if(!$i("mascaraaguarde")){ if(navm){var s="filter:'alpha(opacity=20)'";}
  if(navn){var s="opacity:.2";}
