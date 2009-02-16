@@ -58,7 +58,7 @@ i3GEO.guias = {
 				if(!$i("arvoreAdicionaTema"))
 				{
 					try{
-						if (objmapa.guiaMenu != undefined)
+						if (objmapa.guiaMenu != "undefined")
 						var ondeArvore = objmapa.guiaMenu+"obj";
 					}
 					catch(e){var ondeArvore = "guia2obj";};
