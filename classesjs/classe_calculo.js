@@ -94,6 +94,13 @@ i3GEO.calculo = {
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try
 		{
+			if(i3GEO.interface.ATUAL == "googlemaps"){
+				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+				var latlng = new GLatLng(vy,vx);
+				var xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
+				var xy = new Array();
+				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
+			}
 			if(arguments.length == 3){
 				var ext = i3GEO.parametros.mapexten;
 				var cellsize = i3GEO.parametros.pixelsize;
@@ -111,7 +118,7 @@ i3GEO.calculo = {
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
 			c = cellsize * 1;
-			xy = new Array();
+			var xy = new Array();
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
 		catch(e){return(new Array());}
