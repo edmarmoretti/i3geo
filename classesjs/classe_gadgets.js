@@ -39,6 +39,50 @@ i3GEO.gadgets = {
 	
 	Parametros de inicialização dos gadgets.
 	
+	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
+	o gadget será incluído.
+	
+	Default:
+	
+	i3GEO.gadgets.PARAMETROS = {
+
+		"mostraCoordenadasUTM":
+
+		{idhtml:"mostraUTM"},
+
+		"mostraCoordenadasGEO":
+
+		{idhtml:"localizarxy"},
+
+		"mostraEscalaNumerica":
+
+		{idhtml:"escala"},
+
+		"mostraEscalaGrafica":
+
+		{idhtml:"escalaGrafica"},
+
+		"mostraBuscaRapida":
+
+		{idhtml:"buscaRapida"},
+
+		"mostraVisual":
+
+		{idhtml:"visual"},
+
+		"mostraQuadros":
+
+		{idhtml:"lugarquadros"},
+
+		"mostraHistoricoZoom":
+
+		{idhtml:"historicozoom"},
+
+		"mostraMenuSuspenso":
+
+		{idhtml:"menus"}
+	}	
+	
 	Type:
 	{JSON}
 	*/	
@@ -704,7 +748,7 @@ i3GEO.gadgets = {
 			if($i("contemMenu")){
 				$i("contemMenu").className="yui-navset";
 			}
-			if(i3GEO.configura.oMenuData.ajudas){
+			if(!i3GEO.configura.oMenuData.menu){
 				var ins = "";
 				ins += '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
@@ -714,21 +758,42 @@ i3GEO.gadgets = {
 				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuanalise" >&nbsp;&nbsp;'+$trad("s2")+'</a></li>';
  				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menujanelas" >&nbsp;&nbsp;'+$trad("s3")+'</a></li>';
  				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuarquivos" >&nbsp;&nbsp;'+$trad("s4")+'</a></li>';
+ 				ins += '<li class="yuimenubaritem" style="padding-bottom:5px"><a style="border: 0px solid white;" href="#" class="yuimenubaritemlabel" id="menuinterface" >&nbsp;&nbsp;'+$trad("d27")+'</a></li>';
  				ins += '</ul>'; 
  				ins += '</div>';
  				objid.innerHTML=ins;
+ 			}
+ 			else{
+ 				var ins = "";
+				ins += '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
+				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
+ 				var n = i3GEO.configura.oMenuData.menu.length;
+ 				for(i = 0;i < n;i++){
+ 					if(i3GEO.parametros.w < 550){
+ 						i3GEO.configura.oMenuData.menu[i].id = "";
+ 						var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
+ 					}
+ 					else
+ 					var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
+ 					
+ 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="'+i3GEO.configura.oMenuData.menu[i].id+'_m" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
+ 				}
+ 				ins += '</ul>'; 
+ 				ins += '</div>';
+ 				objid.innerHTML=ins;
+
  			}
 			var onMenuBarBeforeRender = function (p_sType, p_sArgs){
 				if(i3GEO.parametros.w >= 500)
 				{var conta = 0;}
 				else
 				{var conta = 0;}
-				for(var nomeMenu in i3GEO.configura.oMenuData){
-					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData[nomeMenu]});
+				for(var nomeMenu in i3GEO.configura.oMenuData.submenus){
+					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]});
 					var conta=conta+1;
 				}
 			}
- 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 250, lazyload: false});
+ 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  			i3GEOoMenuBar.render();
 			//

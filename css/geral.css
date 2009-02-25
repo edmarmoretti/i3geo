@@ -63,7 +63,7 @@ select
 .verdeescuro 
 {color:orange;border:0px solid #6699FF;padding:0px;background-color:#667B67;margin:0px;text-align: left;font-size: 8px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .verdeclaro
-{padding: 0px;background-color:#d5e9c1;margin:0px;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
+{background-image:url(../imagens/i3geo1bw.jpg);padding: 0px;background-color:#d5e9c1;margin:0px;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;}
 .verdemedio
 {padding: 0px;background-color:#d5e9c1;margin:0px;border: 0px solid #d5e9c1;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
 .aplicar

@@ -636,5 +636,22 @@
 	height:10px;
 	cursor:pointer;
 }
+.refresh
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1748px;
+	width:16px;
+	height:20px;
+	cursor:pointer;
+}
+#menuinterface
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 3px -1775px;
+	width:52px;
+	height:15px;
+}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

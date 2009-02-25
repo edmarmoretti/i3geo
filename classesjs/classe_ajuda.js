@@ -213,6 +213,7 @@ i3GEO.ajuda = {
 	*/
 	fechaJanela: function(){
 		i3GEO.ajuda.desativaCookie();
+		if($i("i3geo_janelaMensagens_c"))
 		document.body.removeChild($i("i3geo_janelaMensagens_c"));
 	},
 	/*

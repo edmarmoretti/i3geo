@@ -309,6 +309,7 @@ i3GEO.guias = {
 	*/
 	libera: function(){
 		if (!$i("conteudojanelaguias")){
+			$i(i3GEO.interface.IDCORPO).style.left = "0px";
 			if($i(i3GEO.guias.IDGUIAS)){$i(i3GEO.guias.IDGUIAS).style.display="none";}
 			var i = $i("contemFerramentas");
 			if(i)

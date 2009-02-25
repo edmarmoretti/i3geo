@@ -198,6 +198,7 @@ i3GEO.arvoreDeCamadas = {
 	atualiza: function(temas){
 		if(this.comparaTemas(temas,this.CAMADAS)){return;}
 		//YAHOO.log("Atualizando a árvore de camadas", "i3geo");
+		if(!document.getElementById(i3GEO.arvoreDeCamadas.IDHTML)){return;}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 		this.CAMADAS = temas;
 		var currentIconMode;

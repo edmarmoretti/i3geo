@@ -255,8 +255,11 @@ i3GEO.idioma = {
 		//
 		var ins = "";
 		var n = i3GEO.idioma.SELETORES.length;
+		if(i3GEO.parametros.w < 550)
+		{var w = "width:12px;"}
+		else {var w = "";}
 		for(i=0;i<n;i++){
-			ins += '<img  style="padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+i3GEO.idioma.SELETORES[i]+'\')" ';
+			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+i3GEO.idioma.SELETORES[i]+'\')" ';
 			if(i3GEO.idioma.SELETORES[i] == "en")
 			ins += 'alt="Ingles" id="uk" />';
 			if(i3GEO.idioma.SELETORES[i] == "pt")

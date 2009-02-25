@@ -10,15 +10,12 @@ licenca.txt
 http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
 
 Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, menutemas, aplicmap 
-e dos arquivos ms_configura.php e classesjs/configura.js
-
-Se vc apenas criou uma árvore de menus própria, copie os diretórios menutemas e temas antigos sobre os
-novos que foram criados.
+e dos arquivos ms_configura.php.
 
 ---------
 
 Se vc está instalando pela primeira vez, veja no site da comunidade i3geo no www.softwarepublico.gov.br
-as instruções que ficam no item "wiki". Para ter acesso ao portal, vc terá de fazer o cadastramento.
+as instruções que ficam no item "documentacao". Para ter acesso ao portal, vc terá de fazer o cadastramento.
 
 ---------
 
@@ -62,7 +59,7 @@ http://hostname/i3geo/ms_criamapa.php?interface=minhainterface.htm
 ---------
 
 Para configurar a ferramenta google, registre seu servidor e edite o arquivo
-ferramentas/googlemaps.htm para colocar a chave correta
+ms_configura.php para colocar a chave correta
 
 ---------
 
@@ -74,3 +71,9 @@ externos.
 
 Se vc quiser entrar em contato com a equipe que desenvolve o i3geo, por favor utilize
 o fórum da comunidade i3geo.
+
+---------
+
+A versão 4.1 trouxe várias modificações no modelo de programação em javascript.
+Veja o documento guia_migracao_41.txt para maiores informações.
+

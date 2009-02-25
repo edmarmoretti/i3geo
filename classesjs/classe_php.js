@@ -151,6 +151,7 @@ i3GEO.php = {
 	<Legenda->criaLegenda>	
 	*/
 	criaLegendaHTML: function(funcao,tema,template){
+		var c = "sim";
 		if(arguments.length == 1)
 		{
 			var tema = "";
@@ -158,6 +159,7 @@ i3GEO.php = {
 		}
 		if(arguments.length == 2)
 		{var template = "legenda2.htm";}
+		
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
 		cpJSON.call(p,"criaLegendaHTML",funcao);	
 	},
@@ -262,7 +264,7 @@ i3GEO.php = {
 	<listaArquivos>	
 	*/
 	listaarquivos: function(funcao,caminho){
-		var p = i3GEO.arvoreDeCamadas.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaArquivos&diretorio="+caminho;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaArquivos&diretorio="+caminho;
 		cpJSON.call(p,"listaArquivos",funcao);	
 	},
 	/*
@@ -304,7 +306,7 @@ i3GEO.php = {
 	<Mapa->mudaQS>	
 	*/
 	mudatamanho: function(funcao,altura,largura){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+a+"&largura="+l+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudatamanho&altura="+altura+"&largura="+largura+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"pegaSistemas",funcao);	
 	},
 	/*

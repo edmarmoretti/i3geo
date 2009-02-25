@@ -2,7 +2,7 @@ Guia de migração do i3Geo para a versão 4.1
 
 Sistema de administração
 
-	A administração do i3geo pode ser feita através de um sistema de formulários desde que vc opte por isso.
+	A administração do i3geo pode ser feita através de um sistema de formulários  web desde que vc opte por isso.
 	
 	Se vc quiser continuar usando os arquivos XML existentes em i3geo/menutemas, não tem problema, mas nesse
 	caso o sistema de administração não lhe será útil.
@@ -27,7 +27,7 @@ Sistema de administração
 	
 	Se vc não quiser usar o SQLITE vc deve criar um arquivo de conexão com seu banco de dados e registrar o endereço
 	desse arquivo em uma variável no i3geo/ms_configura.php. Um exemplo de arquivo de configuração para POSTGRE
-	pode ser visto em i3geo/admin/php/conexaomm.php. AO usar a opção de criação do banco existente no sistema
+	pode ser visto em i3geo/admin/php/conexaomm.php. Ao usar a opção de criação do banco existente no sistema
 	de administração, as tabelas serão criadas no banco de dados indicado.
 	
 PHP
@@ -54,41 +54,40 @@ Classes JS e namespaces
 	baseadas em classes. Isso facilitará a compreensão dos códigos e sua documentação, facilitando a vida
 	dos desenvolvedores e permitindo uma melhor evolução dos códigos.
 	
-	As classes desenvolvidas ficarão em arquivos únicos de cada classe e devem usar onamespace i3GEO. Essa
+	As classes desenvolvidas ficarão em arquivos únicos de cada classe e devem usar o namespace i3GEO. Essa
 	regra evitará conflitos entre bibliotecas javascript adicionadas ao i3geo.
 	Exemplo, para remover a acentuação de uma palavra vc pode usar a classe i3GEO.util:
 	
 	var palavraAcentuada = "coração";
 	var palavraSemAcento = i3GEO.util.removeAcentos(palavraAcentuada);
 	
-Googlemapas
+Googlemaps
 
 	A chave de registro da API do Google agora deve ser incluída no arquivo i3geo/ms_configura.php na
 	variável $googleApiKey.
 	
-	Isso foi necessário por que a API do Google será utilizada em outras ferramentas do i3geo.
+	Isso foi necessário porque a API do Google será utilizada em outras ferramentas do i3geo.
 	
-	A ferramenta googlemaps agora é chamada com ferramentas/googlemaps/index.php e seu tamanho
-	é calculado automaticamente conforme asproporções do mapa aberto no i3geo
+	A ferramenta googlemaps agora é chamada com ferramentas/googlemaps/index.php
 
 Idiomas
 
 	A lista de palavras e suas traduções foram retiradas do arquivo i3geo/classesjs/configura.js e incluidas no
 	novo arquivo i3geo/classesjs/dicionario.js
 	
-	Foi criada uma classe específicapara manipular a internacionalização. Veja a documentação em
+	Foi criada uma classe específica para manipular a internacionalização. Veja a documentação em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_idioma-js.html
 	
 Árvore de temas
 
-	A árvore de temas, que aparece na guia "Adiciona", agora é montada com a biblioteca YUI. Foi criada uma classe
+	A árvore de temas, que aparece na guia "Mapa", agora é montada com a biblioteca YUI. Foi criada uma classe
 	javascript específica para manipular essa árvore. Veja a documentação em 
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredecamadas-js.html
 	Os aplicativos que usam árvores também utilizam agora essa classe, como o i3geo/datadownload.htm
 
 Árvore de camadas
 
-	A árvore de camadas, que aparece na guia "Temas", agora é montada com a biblioteca YUI. Foi criada uma classe
+	A árvore de camadas, que aparece na guia "+ temas", agora é montada com a biblioteca YUI. Foi criada uma classe
 	javascript específica para manipular essa árvore. Veja a documentação em 
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredetemas-js.html
 
@@ -102,7 +101,7 @@ Cálculos
 	Os cálculos agora estão na classe i3GEO.calculo, por exemplo, para converter coordenadas de dd para dms, utilize:
 	i3GEO.calculo.dd2dms(dd)
 
-OBJMAPA
+objmapa
 
 	A forma de inicialização do i3geo do lado do navegador (javascript) agora é controlado pela classe i3GEO.
 	O "objmapa" não é mais utilizado.
@@ -117,3 +116,9 @@ Variáveis de configuração
 	de configuração do mapa ficam agora na classe i3GEO.configura
 	Por exemplo, para obter o diretório onde o i3geo está instalado, antes utilizava-se g_locaplic, agora utiliza-se
 	i3GEO.configura.locaplic
+	
+Chamada aos programas PHP
+
+	Todas as chamadas a programas PHP via AJAX foram concentradas na classe classe_php.js.
+
+	

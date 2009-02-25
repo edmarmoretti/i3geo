@@ -43,7 +43,7 @@ Free Software Foundation, Inc., no endereço
 	
 	Mensagem de inicialização mostrada pelo programa ms_criamapa.php
 */
-$mensagemInicia = 'Versão 4.1 beta';
+$mensagemInicia = 'Versão 4.1';
 /*
 	Variable: $tituloInstituicao
 	
@@ -233,7 +233,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		array("idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 		
-	Para usar o menu default, utilize apenas $menutemas = ""; nesse caso, os menus serão obtidos do banco de dados de administração.
+	Para usar o menu default, utilize apenas $menutemas = ""; nesse caso, os menus serão obtidos do 
+	banco de dados de administração. Para editar o banco de dados utilize http://localhost/i3geo/admin
 	*/
 	$menutemas = "";
 	/*

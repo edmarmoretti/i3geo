@@ -61,7 +61,6 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   		DRIVER "GD/JPEG"
   		MIMETYPE "image/jpeg"
   		IMAGEMODE RGB
-  		EXTENSION "jpg"
   		TRANSPARENT TRUE
   		EXTENSION jpg
   		FORMATOPTION "INTERLACE=OFF"

@@ -1002,6 +1002,14 @@ pt:"Escolha o visual para os botões e outras caracter&iacute;sticas visuais do m
 en:"Choose look for the buttons and other map's visual characteristics",
 es:"Elija la vista para los botones y otras caracter&iacute;sticas visuales del mapa",
 it:"Scegli il visuale (??)  per i pulsanti e le altre caratteristiche visive della mappa."
+}],
+"d27":[
+{
+pt:"Interface",
+en:"Interface",
+es:"Interface",
+it:"Interface"
 }]
+
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

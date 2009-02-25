@@ -33,7 +33,7 @@ function i3GEOmantemCompatibilidade(){
 	catch(e){}
 	try{
 		if(objmapa.finaliza != "")
-		i3GEO.finaliza = objmapa.finaliza
+		i3GEO.finaliza = objmapa.finaliza;
 	}catch(e){};
 	g_arvoreClick = "";
 	g_arvoreClicks = "";
@@ -238,7 +238,7 @@ function Mapa(e,m)
 {
 	i3GEO.cria();
 	this.inicializa= function()
-	{i3GEO.inicia();};	
+	{i3GEO.finaliza = this.finaliza;i3GEO.inicia();};
 }
 //
 //funcoes depreciadas

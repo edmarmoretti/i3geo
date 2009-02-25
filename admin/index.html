@@ -12,11 +12,11 @@
 <legend>Leia-me</legend>
 <div style=display:none; >
 <p>Antes da versão 4.0 o i3geo utilizava arquivos armazenados em disco (arquivos XML) para configurar as 
-árvores deadição de camadas, listagens de endereços, lista de mapas, etc.  
+árvores de adição de camadas, listagens de endereços, lista de mapas, etc.  
 Com a nova estrutura de administração, esses arquivos podem ser substituídos por registros em bancos de dados.
 Se você optar por usar um banco de dados, os arquivos antigos poderão ser importados para o banco 
-(veja as opções de importação). Se vc desejar continuar utilizando os arquivos XML emdisco, basta editar as variáveis 
-de configuração existentes emi3geo/ms_configura.php.</p>
+(veja as opções de importação). Se vc desejar continuar utilizando os arquivos XML em disco, basta 
+editar as variáveis de configuração existentes emi3geo/ms_configura.php.</p>
 <p>Para possibilitar a distribuição do i3geo de forma independente de banco de dados, optou-se pelo uso do gerenciador 
 SQLITE, cujo arquivo com os dados fica armazenado em i3geo/menutemas/admin.db. Os programas em PHP que gerenciam esse banco 
 utilizam o pacote PDO, possibilitando que seja utilizado outro gerenciador, como o POSTGRESQL, entre outros.</p>
@@ -26,12 +26,7 @@ programa em PHP que será incluído nos programas que fazem acesso ao banco de dad
 conexão em PHP pode ser visto em i3geo/admin/conexaomma.php.</p>
 <p>Para usar um gerenciador diferente do SQLITE é necessário criar as tabelas no novo banco de dados. Os sqls para 
 essa criação podem ser obtidos no item "Outras opções".</p>
-<p>Apesar do uso de um banco de dados, o acesso aos registros pelo i3geo continua sendo feito por meio de arquivos XML. 
-O controle sobre a fonte desses XMLs é feito por meio da definição de variáveis armazenadas no arquivo i3geo/ms_configura.php. 
-Quando se utiliza a estrutura padrão das tabelas, como pode ser visto no banco SQLITE, o i3geo fornece programas PHP 
-que geram os arquivos XML em sua formatação correta (veja os arquivos XML existentes no diretório i3geo/menutemas). 
-Caso você queira utilizar uma estrutura de banco de dados diferente, será necessário criar os programas em PHP para a geração 
-dos arquivos XML.
+
 </div> 
 </fieldset>
 <br>

@@ -21,8 +21,13 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 g_locaplic = window.parent.g_locaplic
-window.parent.mostraguiaf(4);
-window.parent.objmapa.atualizaLegendaHTML()
+//window.parent.mostraguiaf(4);
+//window.parent.objmapa.atualizaLegendaHTML()
+var temp = function(retorno)
+{
+	g_legendaHTML = retorno.data.legenda
+}
+window.parent.i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm")
 function abreI(obj)
 {
 	window.open(obj.value+"?g_sid="+g_sid)
