@@ -8,7 +8,7 @@
 <!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
 arquivos não compactados, bastando substituir por i3geonaocompacto -->
 <script type="text/javascript" src="../classesjs/atlas.js"></script>
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 
 <!--
 <style>
@@ -19,10 +19,10 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 
 </head>
 <body id=i3geo style="background-image:url('../imagens/atlas.jpg');" >
-<center>
+
 <table width=100% cellspacing='0'>
 <tr style="border:0px">
-<td style="height:45px;background-image:url('../imagens/atlas.jpg');"><div style="left:25px;font-weight: bold;font-size:16px;text-align:left;color:white" id="tituloAtlas" >Aguarde...Inicializando o Atlas</div></td>
+<td style="height:45px;width:100%;background-image:url('../imagens/atlas.jpg');"><div style="left:25px;font-weight: bold;font-size:16px;text-align:left;color:white;width:400px" id="tituloAtlas" >Aguarde...Inicializando o Atlas</div></td>
 </tr>
 </table>
 
@@ -98,7 +98,7 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
   <td class=tdbranca ></td>
   <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
   <td class=tdbranca ><div id=escala ></div></td>
-  <td class=tdbranca ><div id=ondeestou ></div></td>
+  <td class=tdbranca ><div id=bandeiras ></div></td>
   </tr></table>
  </td>
 </tr>
@@ -106,10 +106,10 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 </table>
 
 </td></tr></table>
-</center>
-<div style='text-align:left;color:white;left:30px'>
+<div style='text-align:left;color:white;left:30px;width:200px'>
 <a  href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </div>
+
 <div id=barraDeBotoes1 style='display:none'> 
    <table title="zoom" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/></td></tr></table>
    <table title="desloca" style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style='background-color:rgb(250,250,250);'><img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/></td></tr></table>
@@ -142,11 +142,14 @@ g_conectargeorss = "nao";
 g_uploadlocal = "nao";
 g_conectarwms = "nao";
 g_janelaMen = "nao";
-g_diminuiyN = 130;
-g_diminuixN = 50;
+g_diminuiyN = 120;
+g_diminuixN = 13;
 g_diminuiyM = 130;
 g_diminuixM = 50;
+
+i3GEO.idioma.IDSELETOR = "bandeiras"
 objmapa = new Mapa();
+
 g_visual = "default";
 g_autoRedesenho = 0;
 objmapa.guiaTemas = "guia1"
