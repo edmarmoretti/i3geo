@@ -69,7 +69,7 @@ if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/g
 {
 	$r["latitude"] = "";
 	require_once($locaplic."/classesphp/funcoes_gerais.php");
-	$conexao = "host=10.1.1.36 port=5432 dbname=geodados user=pgsql password=pgsql";
+	$conexao = "host=pgsql1.mma.gov.br port=5432 dbname=geodados user=pgsql password=pgsql";
 	//identifica o IP do usuário
 	$ip = pegaIPcliente();
 	//$ip="200.252.111.1";
