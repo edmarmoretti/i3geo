@@ -59,7 +59,7 @@ $tituloInstituicao = "MMA - Ministerio do Meio Ambiente";
 	no site do Google para o seu endereço de servidor web. veja como fazer em:
 	http://code.google.com/apis/maps/signup.html
 */
-$googleApiKey = "ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA";
+$googleApiKey = "ABQIAAAAKguAlmd-hSDulF2T_tfWMxT3OAK09d_ZSDyC36iPGlww-4j-9xSrR2ZZUxVeZC01q8anfe5ntl_U4w";
 
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
@@ -290,7 +290,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	$editores = array("10.1.11.159","10.1.2.51");
+	$editores = array("127.0.0.1");
 	$dir_tmp = "/var/tmp/ms_tmp";
 	$temasdir = "/opt/www/html/i3geo/temas";
 	$temasaplic = "/opt/www/html/i3geo/aplicmap";
@@ -302,7 +302,7 @@ else //se for linux
 	$R_path = "R";//se vc não instalou o R no seu servidor, tente o endereço $R_path = $locaplic."/pacotes/r/linux/r";
 	$postgis_con = "";
 	$srid_area = 1;
-	$postgis_mapa["cnuc"] = "port=5432 dbname=adsi user=cnuc password=cnuc";
+	$postgis_mapa = "";
 	$menutemas = ""; 
 	$utilizacgi = "nao";
 	$atlasxml = "";//"../menutemas/atlas.xml";
