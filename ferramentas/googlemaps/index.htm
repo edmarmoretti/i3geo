@@ -6,7 +6,7 @@
 <title></title>
   </head>
   <body onunload="GUnload()">
-    <div id="map" style="width: 340px; height: 340px"></div>
+    <div id="mapa" style="width: 340px; height: 340px"></div>
   
     <script type="text/javascript" >
     //chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
@@ -32,7 +32,7 @@
     	pt1 = "-54";
     	pt2 = "-12";
     }
-    map = new GMap2(document.getElementById("map"));
+    map = new GMap2(document.getElementById("mapa"));
     map.setMapType(G_SATELLITE_MAP);
     map.addMapType(G_SATELLITE_3D_MAP);
     map.addControl(new GLargeMapControl());

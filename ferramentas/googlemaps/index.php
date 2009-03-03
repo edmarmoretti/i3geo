@@ -1,26 +1,16 @@
 <?php
 include_once("../../ms_configura.php");
-/*
-<script src="http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&amp;up_kml_url=http%3A%2F%2Fmapas.mma.gov.br%2Fi3geo%2Fpacotes%2Fkmlmapserver%2Fkmlservice.php%3Fmap%3Dbioma%26typename%3Dbioma%26request%3Dkml&amp;up_view_mode=earth&amp;up_earth_2d_fallback=0&amp;up_earth_fly_from_space=1&amp;up_earth_show_buildings=0&amp;synd=open&amp;w=320&amp;h=400&amp;title=Embedded+KML+Viewer&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
-*/
 ?>
 <html>
 <head>
 <script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=<?php echo $googleApiKey; ?>">
-</script>
-<title></title>
-  </head>
-  <body onunload="GUnload()">
-    <div id="map" style="width: 440px; height: 340px"></div>
-  
-    <script type="text/javascript" >
+<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<?php echo $googleApiKey; ?>"></script>
+<script type="text/javascript">   
+    function inicializa(){
     counterClick = 0
-    var m = document.getElementById("map")
+    var m = document.getElementById("mapa")
     m.style.width = window.parent.i3GEO.parametros.w / 2
     m.style.height = window.parent.i3GEO.parametros.h / 2
-    //chave na producao= ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxSieGwtcPDeiUtRiq7Xa63cyLppcxTVYXnVlPwveOe-sXuXfpBeNpL6pA
-    //chave no desenvolvimento = ABQIAAAAg9kA9xQlYqK9iBDKaeTpgxQ_qvn5wqSkbcx9uoqrWGnUcZ7lqhRVzkJwzeDN3nQJheG7FjoxyruBIQ
 	i3geoOverlay = false;
 	if(window.parent.document.getElementById("boxg"))
 	window.parent.document.getElementById("boxg").style.zIndex = 0
@@ -32,28 +22,23 @@ include_once("../../ms_configura.php");
     var ver = window.parent.i3GEO.parametros.versaomscompleta.split(".");
     if(parseInt(window.parent.i3GEO.parametros.versaoms) >= 5 && parseInt(ver[1]) > 1)
     {tile = true;} 
-       
-    if(window.parent.i3GEO.parametros)
-    {
     	docmapa = window.parent.document
     	pol = window.parent.i3GEO.parametros.mapexten
+
     	ret = pol.split(" ")
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
     	pt = pt1+","+pt2
-    }
-    else
-    {
-    	pt1 = "-54";
-    	pt2 = "-12";
-    }
-    map = new GMap2(document.getElementById("map"));
+
+    map = new GMap2(m);
+
     map.setMapType(G_SATELLITE_MAP);
     map.addMapType(G_SATELLITE_3D_MAP);
     map.addControl(new GLargeMapControl());
     map.addControl(new GMapTypeControl());
     map.addControl(new GScaleControl());
     map.setCenter(new GLatLng(pt2,pt1), 8);
+
     GEvent.addListener(map, "moveend", function() {
     	ondegoogle(map);
     });
@@ -119,7 +104,9 @@ include_once("../../ms_configura.php");
     }
     if(window.parent.i3GEO.parametros.mapfile)
 	map.addControl(new botaoI3geo());
-
+	ondegoogle(map);
+	}
+	
     function moveMapa(bd)
     {
     	nex = bd.minX+" "+bd.minY+" "+bd.maxX+" "+bd.maxY
@@ -349,8 +336,9 @@ include_once("../../ms_configura.php");
 			
     	});
 	}    
-    ondegoogle(map);
     </script>
+  </head>
+  <body onload="inicializa()">
+    <div id="mapa" style="width: 440px; height: 340px"></div>
     </body>
 </html>
-
