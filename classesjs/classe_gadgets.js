@@ -776,7 +776,7 @@ i3GEO.gadgets = {
  					else
  					var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
  					
- 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="'+i3GEO.configura.oMenuData.menu[i].id+'_m" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
+ 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
  				}
  				ins += '</ul>'; 
  				ins += '</div>';

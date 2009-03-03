@@ -165,7 +165,7 @@ i3GEO.navega = {
 		var novoxf = (ex[2] * 1) - distx;
 		var novoyi = (ex[1] * 1) - disty;
 		var novoyf = (ex[3] * 1) - disty;
-		if ((distx == 0)||(disty == 0))
+		if ((distx == 0)&&(disty == 0))
 		{return false;}
 		else{
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;

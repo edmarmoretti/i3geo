@@ -6502,6 +6502,7 @@ i3GEO.php = {
 	<Legenda->criaLegenda>	
 	*/
 	criaLegendaHTML: function(funcao,tema,template){
+		var c = "sim";
 		if(arguments.length == 1)
 		{
 			var tema = "";
@@ -6509,6 +6510,7 @@ i3GEO.php = {
 		}
 		if(arguments.length == 2)
 		{var template = "legenda2.htm";}
+		
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
 		cpJSON.call(p,"criaLegendaHTML",funcao);	
 	},
@@ -7143,22 +7145,40 @@ i3GEO.configura = {
 
 	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso
 
-	Parâmetros:
+	Exemplo:
 
-	text - texto que serámostrado na tela
+	oMenuData:{
 
-	url - função que será executada
+		menu:[
+
+			{nome:$trad("s1"),id:"ajudas"}
+
+ 		],
+
+		submenus:{
+
+			"ajudas": [ 
+
+			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
+
+			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" }
+
+			]
+
+		}
+
+	}
 	*/
 	oMenuData:{
 		menu:[
-			{nome:$trad("s1"),id:"menuajuda"},	
-			{nome:$trad("s2"),id:"menuanalise"},
- 			{nome:$trad("s3"),id:"menujanelas"},
- 			{nome:$trad("s4"),id:"menuarquivos"},
- 			{nome:$trad("d27"),id:"menuinterface"}
+			{nome:$trad("s1"),id:"ajuda"},	
+			{nome:$trad("s2"),id:"analise"},
+ 			{nome:$trad("s3"),id:"janelas"},
+ 			{nome:$trad("s4"),id:"arquivos"},
+ 			{nome:$trad("d27"),id:"interface"}
  		],
 		submenus:{
-			"ajudas": [ 
+			"ajuda": [ 
 			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
 			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
@@ -7188,7 +7208,7 @@ i3GEO.configura = {
 			{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
 			{ text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 			],
-			"arquivo": [
+			"arquivos": [
 			{ text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
 			{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
@@ -7233,7 +7253,7 @@ i3GEO.configura = {
 	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
 	*/
-	diminuixM: 9,
+	diminuixM: 13,
 	/*
 	Variable: diminuixN
 
@@ -10501,17 +10521,17 @@ i3GEO.interface = {
 			posfixo = "&";
 			var i = $i(i3GEO.interface.IDCORPO);
 			if(i){
-				var f = $i("googlemaps");
+				var f = $i("googlemapsdiv");
 				if(!f){
-					var ins = '<div id=googlemaps style="width:0px;height:0px;text-align:left;background-image:url('+i3GEO.configura.locaplic+'/imagens/i3geo1bw.jpg)"></div>';
+					var ins = '<div id=googlemapsdiv style="width:0px;height:0px;text-align:left;background-image:url('+i3GEO.configura.locaplic+'/imagens/i3geo1bw.jpg)"></div>';
 					i.innerHTML = ins;
 				}
-				var f = $i("googlemaps");
+				var f = $i("googlemapsdiv");
 				f.style.width = w;
 				f.style.height = h;
 			}
 			i3GeoMap = "";
-			i3GEO.interface.IDMAPA = "googlemaps";
+			i3GEO.interface.IDMAPA = "googlemapsdiv";
 		},
 		inicia: function(){
     		tile = false;
@@ -10522,9 +10542,8 @@ i3GEO.interface = {
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-    		i3GeoMap = new GMap2($i("googlemaps"));
+    		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
     		i3GeoMap.setMapType(G_SATELLITE_MAP);
-    		//i3GeoMap.setMapType(G_SATELLITE_3D_MAP);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -10556,7 +10575,6 @@ i3GEO.interface = {
     		}
     		else{
     			//i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
-    			
     			var i3GEOTile = new GTileLayer(null,0,18,{
                      tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                      isPng:true,
@@ -10580,10 +10598,10 @@ i3GEO.interface = {
     			
 			}
 			i3GEO.interface.googlemaps.ativaBotoes();
-			i3GEO.eventos.ativa($i("googlemaps"));
+			i3GEO.eventos.ativa($i(i3GEO.interface.IDMAPA));
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraMenuSuspenso();
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("googlemaps"));
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA));
 			GEvent.addListener(i3GeoMap, "mousemove", function(ponto) {
     			var teladms = i3GEO.calculo.dd2dms(ponto.lng(),ponto.lat());
     			var tela = i3GeoMap.fromLatLngToContainerPixel(ponto);
@@ -10610,8 +10628,8 @@ i3GEO.interface = {
 		},
 		criaWMS: function(){
 		   	var cgi = i3GEO.configura.locaplic+"/classesphp/parse_cgi.php?g_sid="+i3GEO.configura.sid;
-    		var parametros = "&map_size="+parseInt($i("googlemaps").style.width);
-    		parametros += ","+parseInt($i("googlemaps").style.height);
+    		var parametros = "&map_size="+parseInt($i(i3GEO.interface.IDMAPA).style.width);
+    		parametros += ","+parseInt($i(i3GEO.interface.IDMAPA).style.height);
     		parametros += "&mapext="+i3GEO.interface.googlemaps.bbox();
     		parametros += "&map_imagecolor=-1 -1 -1&map_transparent=on";
     		return(cgi+parametros);
@@ -14372,7 +14390,7 @@ i3GEO.navega = {
 		var novoxf = (ex[2] * 1) - distx;
 		var novoyi = (ex[1] * 1) - disty;
 		var novoyf = (ex[3] * 1) - disty;
-		if ((distx == 0)||(disty == 0))
+		if ((distx == 0)&&(disty == 0))
 		{return false;}
 		else{
 			var nex = novoxi+" "+novoyi+" "+novoxf+" "+novoyf;
@@ -18520,6 +18538,50 @@ i3GEO.gadgets = {
 	
 	Parametros de inicialização dos gadgets.
 	
+	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
+	o gadget será incluído.
+	
+	Default:
+	
+	i3GEO.gadgets.PARAMETROS = {
+
+		"mostraCoordenadasUTM":
+
+		{idhtml:"mostraUTM"},
+
+		"mostraCoordenadasGEO":
+
+		{idhtml:"localizarxy"},
+
+		"mostraEscalaNumerica":
+
+		{idhtml:"escala"},
+
+		"mostraEscalaGrafica":
+
+		{idhtml:"escalaGrafica"},
+
+		"mostraBuscaRapida":
+
+		{idhtml:"buscaRapida"},
+
+		"mostraVisual":
+
+		{idhtml:"visual"},
+
+		"mostraQuadros":
+
+		{idhtml:"lugarquadros"},
+
+		"mostraHistoricoZoom":
+
+		{idhtml:"historicozoom"},
+
+		"mostraMenuSuspenso":
+
+		{idhtml:"menus"}
+	}	
+	
 	Type:
 	{JSON}
 	*/	
@@ -19213,7 +19275,7 @@ i3GEO.gadgets = {
  					else
  					var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
  					
- 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
+ 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
  				}
  				ins += '</ul>'; 
  				ins += '</div>';
@@ -19230,7 +19292,7 @@ i3GEO.gadgets = {
 					var conta=conta+1;
 				}
 			}
- 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: true});
+ 			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  			i3GEOoMenuBar.render();
 			//

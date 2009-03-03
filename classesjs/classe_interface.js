@@ -436,17 +436,17 @@ i3GEO.interface = {
 			posfixo = "&";
 			var i = $i(i3GEO.interface.IDCORPO);
 			if(i){
-				var f = $i("googlemaps");
+				var f = $i("googlemapsdiv");
 				if(!f){
-					var ins = '<div id=googlemaps style="width:0px;height:0px;text-align:left;background-image:url('+i3GEO.configura.locaplic+'/imagens/i3geo1bw.jpg)"></div>';
+					var ins = '<div id=googlemapsdiv style="width:0px;height:0px;text-align:left;background-image:url('+i3GEO.configura.locaplic+'/imagens/i3geo1bw.jpg)"></div>';
 					i.innerHTML = ins;
 				}
-				var f = $i("googlemaps");
+				var f = $i("googlemapsdiv");
 				f.style.width = w;
 				f.style.height = h;
 			}
 			i3GeoMap = "";
-			i3GEO.interface.IDMAPA = "googlemaps";
+			i3GEO.interface.IDMAPA = "googlemapsdiv";
 		},
 		inicia: function(){
     		tile = false;
@@ -457,9 +457,8 @@ i3GEO.interface = {
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
-    		i3GeoMap = new GMap2($i("googlemaps"));
+    		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
     		i3GeoMap.setMapType(G_SATELLITE_MAP);
-    		//i3GeoMap.setMapType(G_SATELLITE_3D_MAP);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -491,7 +490,6 @@ i3GEO.interface = {
     		}
     		else{
     			//i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
-    			
     			var i3GEOTile = new GTileLayer(null,0,18,{
                      tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                      isPng:true,
@@ -515,10 +513,10 @@ i3GEO.interface = {
     			
 			}
 			i3GEO.interface.googlemaps.ativaBotoes();
-			i3GEO.eventos.ativa($i("googlemaps"));
+			i3GEO.eventos.ativa($i(i3GEO.interface.IDMAPA));
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraMenuSuspenso();
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("googlemaps"));
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA));
 			GEvent.addListener(i3GeoMap, "mousemove", function(ponto) {
     			var teladms = i3GEO.calculo.dd2dms(ponto.lng(),ponto.lat());
     			var tela = i3GeoMap.fromLatLngToContainerPixel(ponto);
@@ -545,8 +543,8 @@ i3GEO.interface = {
 		},
 		criaWMS: function(){
 		   	var cgi = i3GEO.configura.locaplic+"/classesphp/parse_cgi.php?g_sid="+i3GEO.configura.sid;
-    		var parametros = "&map_size="+parseInt($i("googlemaps").style.width);
-    		parametros += ","+parseInt($i("googlemaps").style.height);
+    		var parametros = "&map_size="+parseInt($i(i3GEO.interface.IDMAPA).style.width);
+    		parametros += ","+parseInt($i(i3GEO.interface.IDMAPA).style.height);
     		parametros += "&mapext="+i3GEO.interface.googlemaps.bbox();
     		parametros += "&map_imagecolor=-1 -1 -1&map_transparent=on";
     		return(cgi+parametros);

@@ -66,14 +66,14 @@ i3GEO.configura = {
 	*/
 	oMenuData:{
 		menu:[
-			{nome:$trad("s1"),id:"ajudas"},	
+			{nome:$trad("s1"),id:"ajuda"},	
 			{nome:$trad("s2"),id:"analise"},
  			{nome:$trad("s3"),id:"janelas"},
- 			{nome:$trad("s4"),id:"arquivo"},
+ 			{nome:$trad("s4"),id:"arquivos"},
  			{nome:$trad("d27"),id:"interface"}
  		],
 		submenus:{
-			"ajudas": [ 
+			"ajuda": [ 
 			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
 			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
@@ -103,7 +103,7 @@ i3GEO.configura = {
 			{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
 			{ text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 			],
-			"arquivo": [
+			"arquivos": [
 			{ text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
 			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
 			{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
@@ -148,7 +148,7 @@ i3GEO.configura = {
 	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
 	*/
-	diminuixM: 9,
+	diminuixM: 13,
 	/*
 	Variable: diminuixN
 
