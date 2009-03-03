@@ -1277,7 +1277,7 @@ Include:
 		if(!isset($limitepontos))
 		{$limitepontos = "";}
 		$m = new Analise($map_file,$tema);
-		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2));
+		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite));
 		$m->salva();
 	break;
 /*

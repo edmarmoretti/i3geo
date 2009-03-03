@@ -129,22 +129,23 @@ $sigma - desvio padrão para a opção kernel
 
 $limitepontos - "TRUE"|"FALSE" limita o resultado ao limite geográfico dos pontos se "TRUE" ou ao limite do mapa se "FALSE"
 
+$extendelimite - extende o limite dos pontos em um determinado percentual em relação a área final de abrangência
 Include:
 <class.palette.php>
 */
-	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="")
+	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="",$extendelimite=5)
 	{
 		set_time_limit(180);
 		//
 		//pega os dados do tema dois para as funções que o utilizam
 		//
-		$dados1 = $this->gravaCoordenadasPt($this->nome,$limitepontos);
+		$dados1 = $this->gravaCoordenadasPt($this->nome,$limitepontos,$extendelimite);
 		$nomearq = $dados1["prefixoarquivo"];
 		$dimx = $dados1["dimx"];
 		$dimy = $dados1["dimy"];
 		if (isset($tema2) && $tema2 != "")
 		{
-			$dados2 = $this->gravaCoordenadasPt($tema2,$limitepontos);
+			$dados2 = $this->gravaCoordenadasPt($tema2,$limitepontos,$extendelimite);
 			$nomearq2 = $dados2["prefixoarquivo"];
 			$dimx2 = $dados2["dimx"];
 			$dimy2 = $dados2["dimy"];
@@ -2281,11 +2282,13 @@ tema - nome do tema com os pontos
 
 limitepontos - FALSE para considerar a extensão geográfica do mapa atual e TRUE para considerar como limite as ocorrências pontuais do tema
 
+extendelimite - percentual utilizado para extender o limite da área resultante
+
 return:
 
 array com as dimensões em x e y e nome dos arquivos com x e y gerados.
 */
-function gravaCoordenadasPt($tema,$limitepontos="TRUE")
+function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 {
 		$prjMapa = $this->mapa->getProjection();
 		$layerPt = $this->mapa->getlayerbyname($tema);
@@ -2352,6 +2355,17 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE")
 			$xf = $ext->maxx;
 			$yi = $ext->miny;
 			$yf = $ext->maxy;
+		}
+		if($extendelimite > 0)
+		{
+			$dx = $xf - $xi;
+			$dy = $yf - $yi;
+			$maisx = ($dx * $extendelimite) / 100;
+			$maisy = ($dy * $extendelimite) / 100;
+			$xi = $xi - $maisx;
+			$xf = $xf + $maisx;
+			$yi = $yi - $maisy;
+			$yf = $yf + $maisy;
 		}
 		$dimx = "c(".$xi.",".$xf.")";
 		$dimy = "c(".$yi.",".$yf.")";
