@@ -780,7 +780,7 @@ i3GEO.arvoreDeTemas = {
 	propTemas: function(node){		
 		var g_locaplic = i3GEO.arvoreDeTemas.LOCAPLIC;
 		if(node.data.fonte != "" && node.data.fonte != " "){
-			var html = "<a href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
+			var html = "<a title='' href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
@@ -788,20 +788,20 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.mini == true){
 			var lkmini = g_locaplic+"/testamapfile.php?map="+node.data.idtema+".map&tipo=mini";
 			var lkmini1 = g_locaplic+"/testamapfile.php?map="+node.data.idtema+".map&tipo=grande";
-			var html = "<a onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >Miniatura</a>";	
+			var html = "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >Miniatura</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
 		}
 		if (node.data.ogc != "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml == true){
-				var html = "<a href='#' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
+				var html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
 				var d = {html:html};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.isLeaf = true;
 			}
 			var ogc = g_locaplic+"/ogc.php?tema="+node.data.idtema+"&service=wms&request=getcapabilities";
-			var html = "<a href='"+ogc+"' target='blank' >WMS - OGC</a>";	
+			var html = "<a title='' href='"+ogc+"' target='blank' >WMS - OGC</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
@@ -809,7 +809,7 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode == true){
 			var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
 			var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
-			var html = "<a onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>";	
+			var html = "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;

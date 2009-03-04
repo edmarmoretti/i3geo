@@ -6549,7 +6549,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeMenus>	
 	*/
 	pegalistademenus: function(funcao){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.configura.sid+"&map_file=";
 		cpJSON.call(p,"pegalistademenus",funcao);	
 	},
 	/*
@@ -6573,7 +6573,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeSubGrupos>	
 	*/
 	pegalistadeSubgrupos: function(funcao,id_menu,id_grupo){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&map_file=";
 		cpJSON.call(p,"pegalistadeSubgrupos",funcao);	
 	},
 	/*
@@ -6585,7 +6585,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeTemas>	
 	*/
 	pegalistadetemas: function(funcao,id_menu,id_grupo,id_subgrupo){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo+"&map_file=";
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*
@@ -12490,15 +12490,18 @@ i3GEO.ajuda = {
 //
 //para efeitos de compatibilidade
 //
-if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
-	try {
-		if (g_mensagempadrao != "")	
-		{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
-		else
-		i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");
+try{
+	if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
+		try {
+			if (g_mensagempadrao != "")	
+			{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
+			else
+			i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");
+		}
+		catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
 	}
-	catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
 }
+catch(e){}
 if(document.getElementById("bannerMensagem"))
 {i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
 //YAHOO.log("carregou classe ajuda", "Classes i3geo");
@@ -16816,7 +16819,7 @@ i3GEO.arvoreDeTemas = {
 	propTemas: function(node){		
 		var g_locaplic = i3GEO.arvoreDeTemas.LOCAPLIC;
 		if(node.data.fonte != "" && node.data.fonte != " "){
-			var html = "<a href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
+			var html = "<a title='' href='"+node.data.fonte+"' target='_blank' >Fonte</a>";
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
@@ -16824,20 +16827,20 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.mini == true){
 			var lkmini = g_locaplic+"/testamapfile.php?map="+node.data.idtema+".map&tipo=mini";
 			var lkmini1 = g_locaplic+"/testamapfile.php?map="+node.data.idtema+".map&tipo=grande";
-			var html = "<a onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >Miniatura</a>";	
+			var html = "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkmini+" />\")' href='"+lkmini1+"' target='blank' >Miniatura</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
 		}
 		if (node.data.ogc != "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml == true){
-				var html = "<a href='#' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
+				var html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
 				var d = {html:html};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.isLeaf = true;
 			}
 			var ogc = g_locaplic+"/ogc.php?tema="+node.data.idtema+"&service=wms&request=getcapabilities";
-			var html = "<a href='"+ogc+"' target='blank' >WMS - OGC</a>";	
+			var html = "<a title='' href='"+ogc+"' target='blank' >WMS - OGC</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;
@@ -16845,7 +16848,7 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode == true){
 			var lkgrcode = g_locaplic+"/pacotes/qrcode/php/qr_html.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
 			var lkgrcode1 = g_locaplic+"/pacotes/qrcode/php/qr_img.php?d="+g_locaplic+"/mobile/index.php?temasa="+node.data.idtema;
-			var html = "<a onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>";	
+			var html = "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="+lkgrcode1+" />\")' href='"+lkgrcode+"' target='blank' >Qrcode</a>";	
 			var d = {html:html};
 			var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 			tempNode.isLeaf = true;

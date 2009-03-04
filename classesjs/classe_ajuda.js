@@ -262,15 +262,18 @@ i3GEO.ajuda = {
 //
 //para efeitos de compatibilidade
 //
-if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
-	try {
-		if (g_mensagempadrao != "")	
-		{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
-		else
-		i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");
+try{
+	if(i3GEO.ajuda.MENSAGEMPADRAO == ""){
+		try {
+			if (g_mensagempadrao != "")	
+			{i3GEO.ajuda.MENSAGEMPADRAO = g_mensagempadrao;}
+			else
+			i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");
+		}
+		catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
 	}
-	catch(e){i3GEO.ajuda.MENSAGEMPADRAO = $trad("p1");}
 }
+catch(e){}
 if(document.getElementById("bannerMensagem"))
 {i3GEO.ajuda.DIVLETREIRO = "bannerMensagem";}
 //YAHOO.log("carregou classe ajuda", "Classes i3geo");

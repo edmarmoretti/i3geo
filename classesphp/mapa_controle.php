@@ -170,8 +170,8 @@ $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["
 //
 if($funcao != "recuperamapa")
 {
-		if(!substituiCon($map_file,$postgis_mapa))
-		{$cp->set_data("erro");$cp->return_data();return;}
+	if(!substituiCon($map_file,$postgis_mapa))
+	{$cp->set_data("erro");$cp->return_data();return;}
 }
 //set_time_limit(240);
 

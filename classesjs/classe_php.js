@@ -198,7 +198,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeMenus>	
 	*/
 	pegalistademenus: function(funcao){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistademenus&g_sid="+i3GEO.configura.sid+"&map_file=";
 		cpJSON.call(p,"pegalistademenus",funcao);	
 	},
 	/*
@@ -222,7 +222,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeSubGrupos>	
 	*/
 	pegalistadeSubgrupos: function(funcao,id_menu,id_grupo){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadeSubgrupos&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&map_file=";
 		cpJSON.call(p,"pegalistadeSubgrupos",funcao);	
 	},
 	/*
@@ -234,7 +234,7 @@ i3GEO.php = {
 	<Menutemas->pegaListaDeTemas>	
 	*/
 	pegalistadetemas: function(funcao,id_menu,id_grupo,id_subgrupo){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pegalistadetemas&g_sid="+i3GEO.configura.sid+"&idmenu="+id_menu+"&grupo="+id_grupo+"&subgrupo="+id_subgrupo+"&map_file=";
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*

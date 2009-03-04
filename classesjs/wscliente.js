@@ -59,7 +59,7 @@ for (var i = 0; i < scripts.length; i++) {
 var allScriptTags = "";
 var jsfiles = new Array()
 if(typeof(testafuncoes) == 'undefined')
-{jsfiles[0] = "compactados/funcoes_compacto.js"}
+{jsfiles[0] = "compactados/classe_calculo_compacto.js"}
 if(typeof(cpaint) == 'undefined')
 {jsfiles[1] = "../pacotes/cpaint/cpaint2.inc.compressed.js"}
 if(typeof(OpenLayers) == 'undefined')

@@ -42,6 +42,7 @@ No caso do datadownload.htm ser disparado de outro local, é necessário definir e
 var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0]
+i3GEO.configura.locaplic = g_locaplic
 //
 //diretorio onde esta o i3geo
 //
