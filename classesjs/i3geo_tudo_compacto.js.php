@@ -7213,6 +7213,7 @@ i3GEO.configura = {
 			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
 			{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
 			{ text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
+			{ text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" },
 			{ text: $trad("u21"), url: "../geradordelinks.htm" }
 			],
 			"interface": [
@@ -11165,6 +11166,16 @@ i3GEO.mapa = {
 			if(i3GEO.parametros.mapfile == "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertews/index.htm","","","Web service");
+		},
+		/*
+		Function: convertekml
+
+		Abre a janela para converter o mapa atual em KML
+		*/
+		convertekml: function(){
+			if(i3GEO.parametros.mapfile == "")
+			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertemapakml/index.htm","","","Kml");
 		},
 		/*
 		Function: queryMap
@@ -16019,20 +16030,23 @@ i3GEO.eventos = {
 		else{
 			if($i("wdocai"))
 			{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
-			var x = objposicaocursor.dmsx.split(" ");
-			var y = objposicaocursor.dmsy.split(" ");
-			if (doc.getElementById("ixg"))
-			{doc.getElementById("ixg").value = x[0];}
-			if (doc.getElementById("ixm"))
-			{doc.getElementById("ixm").value = x[1];}
-			if (doc.getElementById("ixs"))
-			{doc.getElementById("ixs").value = x[2];}
-			if (doc.getElementById("iyg"))
-			{doc.getElementById("iyg").value = y[0];}
-			if (doc.getElementById("iym"))
-			{doc.getElementById("iym").value = y[1];}
-			if (doc.getElementById("iys"))
-			{doc.getElementById("iys").value = y[2];}
+			try{
+				var x = objposicaocursor.dmsx.split(" ");
+				var y = objposicaocursor.dmsy.split(" ");
+				if (doc.getElementById("ixg"))
+				{doc.getElementById("ixg").value = x[0];}
+				if (doc.getElementById("ixm"))
+				{doc.getElementById("ixm").value = x[1];}
+				if (doc.getElementById("ixs"))
+				{doc.getElementById("ixs").value = x[2];}
+				if (doc.getElementById("iyg"))
+				{doc.getElementById("iyg").value = y[0];}
+				if (doc.getElementById("iym"))
+				{doc.getElementById("iym").value = y[1];}
+				if (doc.getElementById("iys"))
+				{doc.getElementById("iys").value = y[2];}
+			}
+			catch(m){}
 		}
 	}
 };

@@ -426,20 +426,23 @@ i3GEO.eventos = {
 		else{
 			if($i("wdocai"))
 			{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
-			var x = objposicaocursor.dmsx.split(" ");
-			var y = objposicaocursor.dmsy.split(" ");
-			if (doc.getElementById("ixg"))
-			{doc.getElementById("ixg").value = x[0];}
-			if (doc.getElementById("ixm"))
-			{doc.getElementById("ixm").value = x[1];}
-			if (doc.getElementById("ixs"))
-			{doc.getElementById("ixs").value = x[2];}
-			if (doc.getElementById("iyg"))
-			{doc.getElementById("iyg").value = y[0];}
-			if (doc.getElementById("iym"))
-			{doc.getElementById("iym").value = y[1];}
-			if (doc.getElementById("iys"))
-			{doc.getElementById("iys").value = y[2];}
+			try{
+				var x = objposicaocursor.dmsx.split(" ");
+				var y = objposicaocursor.dmsy.split(" ");
+				if (doc.getElementById("ixg"))
+				{doc.getElementById("ixg").value = x[0];}
+				if (doc.getElementById("ixm"))
+				{doc.getElementById("ixm").value = x[1];}
+				if (doc.getElementById("ixs"))
+				{doc.getElementById("ixs").value = x[2];}
+				if (doc.getElementById("iyg"))
+				{doc.getElementById("iyg").value = y[0];}
+				if (doc.getElementById("iym"))
+				{doc.getElementById("iym").value = y[1];}
+				if (doc.getElementById("iys"))
+				{doc.getElementById("iys").value = y[2];}
+			}
+			catch(m){}
 		}
 	}
 };

@@ -423,6 +423,16 @@ i3GEO.mapa = {
 			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertews/index.htm","","","Web service");
 		},
 		/*
+		Function: convertekml
+
+		Abre a janela para converter o mapa atual em KML
+		*/
+		convertekml: function(){
+			if(i3GEO.parametros.mapfile == "")
+			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
+			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertemapakml/index.htm","","","Kml");
+		},
+		/*
 		Function: queryMap
 
 		Abre a janela que altera as propriedades da exibição dos elementos selecionados.

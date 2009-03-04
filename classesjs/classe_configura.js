@@ -108,6 +108,7 @@ i3GEO.configura = {
 			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
 			{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
 			{ text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
+			{ text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" },
 			{ text: $trad("u21"), url: "../geradordelinks.htm" }
 			],
 			"interface": [

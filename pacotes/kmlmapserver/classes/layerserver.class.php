@@ -176,7 +176,7 @@ class LayerServer {
         // Set endpoint
         //die($_SERVER['REQUEST_URI']);
 		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-		$protocolo = $protocolo[0];
+		$protocolo = strtolower($protocolo[0]);
         $this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
 		
 
@@ -847,7 +847,7 @@ class LayerServer {
             $this->set_error('Cannot read mapfile '. $this->map);
         } else {
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-			$servidor = $protocolo[0]."://".$_SERVER['HTTP_HOST'];
+			$servidor = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'];
 			$temp = $this->map;
 			if(!file_exists($this->map))
 			{
