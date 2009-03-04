@@ -259,7 +259,7 @@ function mostraDownload(retorno)
 	{
 		var retorno = retorno.data
 		var arqs = retorno.split(",")
-		var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado.</b><br><br>"
+		var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado (o link é mostrado ao expandir o nó correspondente ao tema).</b><br><br>"
 		for (var arq=0;arq<arqs.length;arq++)
 		{
 			var temp = arqs[arq].split(".");
