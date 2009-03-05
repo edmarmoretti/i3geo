@@ -6728,8 +6728,10 @@ i3GEO.php = {
 	
 	<retornaReferenciaDinamica>	
 	*/
-	referenciadinamica: function(funcao,zoom){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom;
+	referenciadinamica: function(funcao,zoom,tipo){
+		if(arguments.length == 2)
+		{var tipo = "dinamico"}
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo;
 		cpJSON.call(p,"retornaReferenciaDinamica",funcao);	
 	},
 	/*
@@ -12112,7 +12114,14 @@ i3GEO.maparef = {
 			ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 			var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />&nbsp;";
-			ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
+			
+			ins += "<select id='refDinamico' onchange='javascript:i3GEO.maparef.atualiza()'>";
+			ins += "<option value='fixo' select >fixo</option>";
+			ins += "<option value='mapa' >mapa</option>";
+			ins += "<option value='dinamico' >dinâmico</option>";
+			ins += "</select>";
+			ins += "</div>";
+			//ins += '<input style="cursor:pointer" onclick="javascript:i3GEO.maparef.atualiza()" type="checkbox" id="refDinamico" />&nbsp;'+$trad("o6")+'</div>';
 			ins += '<div class="bd" style="text-align:left;padding:3px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" >';
 			//ins += '<div id=boxRef style="position:absolute;top:0px;left:0px;width:10px;height:10px;border:2px solid blue;display:none"></div></div>';
@@ -12163,13 +12172,13 @@ i3GEO.maparef = {
 	atualiza: function(){
 		var dinamico = false;
 		if ($i("refDinamico"))
-		{var dinamico = $i("refDinamico").checked;}
+		{var tiporef = $i("refDinamico").value;}
 		if ($i("mapaReferencia")){
 			//YAHOO.log("Atualizando o mapa de referência", "i3geo");
-			if(dinamico){
-				i3GEO.php.referenciadinamica(i3GEO.maparef.processaImagem,i3GEO.maparef.fatorZoomDinamico);
+			if(tiporef == "dinamico"){
+				i3GEO.php.referenciadinamica(i3GEO.maparef.processaImagem,i3GEO.maparef.fatorZoomDinamico,tiporef);
 			}
-			else{
+			if(tiporef == "fixo"){
 				if(($i("imagemReferencia").src == "") || (i3GEO.parametros.cgi != "sim")){
 					i3GEO.php.referencia(i3GEO.maparef.processaImagem);
 				}
@@ -12178,6 +12187,9 @@ i3GEO.maparef = {
 					$i("imagemReferencia").src = $i(i3GEO.interface.IDMAPA).src.replace(re,'&mode=reference');
 					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 				}
+			}
+			if(tiporef == "mapa"){
+				i3GEO.php.referenciadinamica(i3GEO.maparef.processaImagem,i3GEO.maparef.fatorZoomDinamico,tiporef);
 			}
 		}
 		else{

@@ -780,7 +780,7 @@ function: retornaReferenciaDinamica
 
 Retorna uma string com as variaveis de um novo mapa de referencia gerado de forma dinamica.
 
-O mapa de referência é baseado no mapfile aplicmap/referenciadinamica.map
+O mapa de referência é baseado no mapfile aplicmap/referenciadinamica.map ou no mapa atual
 
 parameter:
 
@@ -792,13 +792,15 @@ objMapa - Objeto map.
 
 zoom - fator de zoom
 
+tipo - tipo de referência dinamico|mapa
+
 return:
 
 Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferenciaDinamica()
 {
-	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom;
+	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
@@ -807,13 +809,19 @@ function retornaReferenciaDinamica()
 	for ($i=0;$i < $numlayers;++$i)
 	{
 		$layer = $objMapa->getlayer($i);
+		if($tipo != "mapa")
 		$layer->set("status",MS_OFF);
 	}
 	$maptemp = ms_newMapObj($locaplic."/aplicmap/referenciadinamica.map");
-	$layern = $maptemp->getlayerbyname("refdin");
-	ms_newLayerObj($objMapa, $layern);
+	$nomeLayerRef = "";
+	if($tipo != "mapa")
+	{
+		$layern = $maptemp->getlayerbyname("refdin");
+		ms_newLayerObj($objMapa, $layern);
+	}
 	$layern = $maptemp->getlayerbyname("refdinrect");
 	ms_newLayerObj($objMapa, $layern);
+
 	$r = $objMapa->reference;
 	$w = $r->width;
 	$h = $r->height;

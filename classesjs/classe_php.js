@@ -377,8 +377,10 @@ i3GEO.php = {
 	
 	<retornaReferenciaDinamica>	
 	*/
-	referenciadinamica: function(funcao,zoom){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom;
+	referenciadinamica: function(funcao,zoom,tipo){
+		if(arguments.length == 2)
+		{var tipo = "dinamico"}
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo;
 		cpJSON.call(p,"retornaReferenciaDinamica",funcao);	
 	},
 	/*
