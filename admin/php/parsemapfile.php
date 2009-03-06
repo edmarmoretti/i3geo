@@ -229,7 +229,7 @@ function legendaSimples($layername)
 //
 function mapfile()
 {
-	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms;
+	global $codigoLayer,$mapfile,$mapa,$objcontype,$objlayertypes,$forcawms,$postgis_mapa;
 	$layers = $mapa->getalllayernames();
 	$dados = array(); 
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
@@ -310,6 +310,13 @@ function mapfile()
 		{
 			$xml .= "<connection>\n";
 			$con = $layer->connection;
+			if (($con == " ") || ($con == "") || (in_array($con,array_keys($postgis_mapa))))
+			{
+				if(($con == " ") || ($con == ""))
+				{$con = $postgis_mapa;}
+				else
+				{$con = $postgis_mapa[$con];}					
+			}
 			$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
 			$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
 			$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
