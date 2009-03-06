@@ -110,15 +110,18 @@ i3GEO.calculo = {
 			}
 			if(!docmapa)
 			{var docmapa = window.document;}
-			var dc = docmapa.getElementById("img");
-			if(!dc){var dc = docmapa;}
+			try{
+				var dc = docmapa.getElementById("img");
+				if(!dc){var dc = docmapa;}
+			}
+			catch(e){var dc = docmapa;}
 			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
 			var imgext = ext; //i3GEO.parametros.mapexten;
 			var imgext = imgext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
 			c = cellsize * 1;
-			var xy = new Array();
+			//var xy = new Array();
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
 		catch(e){return(new Array());}
@@ -333,6 +336,18 @@ i3GEO.calculo = {
 	Function: rect2ext
 	
 	Calcula a extensão geográfica de um retângulo desenhado sobre o mapa.
+	
+	Parameters:
+	
+	idrect - id do elemento html com o retangulo
+	
+	mapext - extensao geografica do mapa onde está o retangulo
+	
+	pixel - tamanho do pixel do mapa em dd
+	
+	return:
+	
+	{Array} - extensão, xmin, ymin, xmax, ymax
 	*/
 	rect2ext: function(idrect,mapext,pixel){
 		eval ('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ")");
@@ -359,13 +374,67 @@ i3GEO.calculo = {
 		var xfig = pix - pos[0];
 		var yfig = piy - pos[1];
 		if (dy < 0) dy=dy * -1;
-		var nx = i3GEO.parametros.pixelsize * xfig;
-		var ny = i3GEO.parametros.pixelsize * yfig;
+		var nx = pixel * xfig;
+		var ny = pixel * yfig;
 		var x2 = (amext[0] * 1) + nx;
 		var y2 = (amext[3] * 1) - ny;
 		var v = x2+" "+y2+" "+x1+" "+y1;
 		var res = new Array(v,x1,y1,x2,y2);
 		return (res);
+	},
+	/*
+	Function: ext2rect
+	
+	Calcula o posicionamento de um retângulo com base na extensão geográfica.
+	
+	Parameters:
+	
+	idrect {String} - id do elemento html com o retangulo, pode ser vazio
+	
+	mapext {String} - extensao geografica do mapa onde está o retangulo
+	
+	boxext {String} - extensao geografica do retangulo
+	
+	pixel {Number} - tamanho do pixel do mapa em dd
+	
+	documento {Object DOM} - objeto sob o qual o retângulo será posicionado
+	
+	Return:
+	
+	{Array} - width,heigth,top,left
+	*/
+	ext2rect: function(idrect,mapext,boxext,pixel,documento){
+   		var rectbox = boxext.split(" ");
+   		var rectmap = mapext.split(" ");
+   		
+   		if (rectbox[0]*1 < rectmap[0]*1){rectbox[0] = rectmap[0]}
+   		if (rectbox[0]*1 > rectmap[2]*1){rectbox[0] = rectmap[2]}
+   		if (rectbox[2]*1 > rectmap[2]*1){rectbox[2] = rectmap[2]}
+   		if (rectbox[2]*1 < rectmap[0]*1){rectbox[2] = rectmap[0]}
+   		
+   		if (rectbox[3]*1 > rectmap[3]*1){rectbox[3] = rectmap[3]}
+   		if (rectbox[2]*1 > rectmap[3]*1){rectbox[2] = rectmap[3]}
+   		if (rectbox[1]*1 < rectmap[1]*1){rectbox[1] = rectmap[1]}
+   		if (rectbox[3]*1 < rectmap[1]*1){rectbox[3] = rectmap[1]}
+   		
+   		var xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
+   		var xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
+		var w = xyMax[0]-xyMin[0];
+		var h = xyMin[1]-xyMax[1];
+   		var tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
+		var pos = i3GEO.util.pegaPosicaoObjeto(documento);
+		var t = tl[1] - pos[1];
+		var l = tl[0] - pos[0];
+		var d = "block"
+		if($i(idrect)){
+			var box = $i(idrect);
+			box.style.width = w;
+			box.style.height = h;
+			box.style.top = t + "px";
+			box.style.left = l + "px";
+   			box.style.display=d;
+   		}
+		return new Array(w,h,xyMax[1],xyMin[0]);
 	}
 };
 //YAHOO.log("carregou classe calculo", "Classes i3geo");
