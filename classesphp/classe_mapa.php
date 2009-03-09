@@ -980,6 +980,7 @@ Include:
 */
 	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain")
 	{
+		//echo $servico;return;
 		if(file_exists($this->locaplic."/wmswfs.php"))
 		include_once($this->locaplic."/wmswfs.php");
 		else
@@ -989,8 +990,10 @@ Include:
 		{unlink (($this->arquivo)."qy");}
 		$nmap = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 		$layer = $nmap->getlayerbyname("novotema");
-		$layer->set("name",$tema);
+		//$layer->set("name",nomeRandomico());
 		$layer->set("status",MS_DEFAULT);
+		if($nomecamada == "default")
+		$nomecamada = $tema;
 		$layer->setmetadata("tema",$nomecamada);
 		$layer->setmetadata("nomeoriginal",$tema); //nome original do layer no web service
 		$layer->setmetadata("tipooriginal",$tiporep);
@@ -1012,7 +1015,7 @@ Include:
 			fputs( $fp, $sld );
 			fclose($fp);
 		}
-		$layer->set("name",nomeRandomico(6));
+		$layer->set("name",nomeRandomico());
 		$layer->set("type",MS_LAYER_RASTER);
 		$layer->set("connection",$servico);
 		$layer->set("connectiontype",MS_WMS);

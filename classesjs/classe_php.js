@@ -599,6 +599,18 @@ i3GEO.php = {
 		cpJSON.call(p,"mudanome",funcao);	
 	},
 	/*
+	Function: adicionaTemaWMS
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->adicionatemawms>	
+	*/
+	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionatemawms&servico="+servico+"&tema="+tema+"&nome="+nome+"&proj="+proj+"&formato="+formato+"&versao="+versao+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+suportasld+"&formatosinfo="+formatosinfo;
+		cpJSON.call(p,"adicionatemawms",funcao);	
+	},
+	/*
 	Function: adicionaTemaSHP
 
 	PHP:
@@ -751,6 +763,30 @@ i3GEO.php = {
 	chaveGoogle: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=chavegoogle&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"chavegoogle",funcao);	
+	},
+	/*
+	Function: listaRSSwsARRAY
+
+	PHP:
+	classesphp/wscliente.php
+	
+	<listaRSSwsARRAY>	
+	*/
+	listaRSSwsARRAY: function(funcao,tipo){
+		var p = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+new Array("|")+"&tipo="+tipo;
+		cpJSON.call(p,"listaRSSwsARRAY",funcao);	
+	},
+	/*
+	Function: listaLayersWMS
+
+	PHP:
+	classesphp/wmswfs.php
+	
+	<listaLayersWMS>	
+	*/
+	listaLayersWMS: function(funcao,servico,nivel){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel;
+		cpJSON.call(p,"listaLayersWMS",funcao);	
 	}
 };
 //YAHOO.log("carregou classe php", "Classes i3geo");

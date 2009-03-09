@@ -113,6 +113,15 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUISISTEMAS: true,
 	/*
+	Property: INCLUIWMS
+	
+	Inclui na árvore a lista de Web Services WMS?
+	
+	Type:
+	{Boolean}
+	*/
+	INCLUIWMS: true,
+	/*
 	Property: FILTRADOWNLOAD
 	
 	Não mostra na árvore os nós que não possuem temas para download
@@ -239,6 +248,74 @@ i3GEO.arvoreDeTemas = {
 	{JSON}
 	*/
 	TEMAS: null,
+	/*
+	Function: listaWMS
+	
+	Lista os WMS cadastrados preenchendo o nó OGC-WMS
+	
+	*/
+	listaWMS: function(){
+		var monta = function(retorno){
+			var node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwms","raiz");
+			var raiz = retorno.data.canais;
+			var nraiz = raiz.length;
+			for (i=0;i<nraiz; i++){
+				var html = "<span title='"+raiz[i].description+"'> "+raiz[i].title;
+				var d = {html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0};
+				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
+	},
+	listaLayersWMS: function(node){
+		//node = no;
+		var monta = function(retorno){
+			var n = retorno.data.length;
+			for (i=0;i<n; i++){
+				var html = retorno.data[i].nome+" - "+retorno.data[i].titulo;
+				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1)};
+				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+				if(!retorno.data[i].estilos)
+				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+				if(retorno.data[i].estilos){
+					var ns = retorno.data[i].estilos.length;
+					for (j=0;j<ns; j++){
+						var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString());
+						var d = {html:html};
+						var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+						tempNode.isleaf = true;			
+					}
+				}		
+			}
+			node.loadComplete();
+		};
+		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1));
+	},
+	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg){
+		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
+		var temp = function(){
+			i3GEO.janela.fechaAguarde("ajaxredesenha");
+			i3GEO.atualiza();
+		}
+		var adiciona = 	"javascript:i3GEO.janela.abreAguarde(\"ajaxredesenha\",\""+$trad("o1")+"\");this.checked=false;i3GEO.php.adicionaTemaWMS("+temp+",";
+		adiciona += "\""+servico+"\",";
+		adiciona += "\""+layer+"\",";
+		adiciona += "\""+estilo+"\",";
+		adiciona += "\""+proj+"\",";
+		adiciona += "\""+formatoimg+"\",";
+		adiciona += "\""+versao+"\",";
+		adiciona += "\""+titulo+"\",";
+		adiciona += "\"\",";
+		adiciona += "\"nao\",";
+		adiciona += "\""+formatoinfo+"\")";
+		html += "onclick='"+adiciona+"' ";
+		html += " type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;' >";
+		html += layer+" - "+titulo;
+		html += "</td></span>";
+		return(html);
+	},
 	/*
 	Function: listaMenus
 
@@ -523,6 +600,15 @@ i3GEO.arvoreDeTemas = {
 			var conteudo = "<a href='../admin/html/arvore.html' target=blank >Editor de menus</a>";
 			var d = {html:conteudo,idmenu:""};
 			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+		}
+		//
+		//wms
+		//
+		if(i3GEO.arvoreDeTemas.INCLUIWMS == true){
+			var conteudo = "<b>&nbsp;OGC-WMS</b>";
+			var d = {html:conteudo,idwms:"raiz"};
+			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
+			tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaWMS, 1);
 		}
 		//
 		//adiciona na árvore a raiz de cada menu

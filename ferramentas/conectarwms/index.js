@@ -68,7 +68,7 @@ function clickGuia3()
 	{
 		$i("listatemas").innerHTML = "";
 		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&&id_ws="+g_idws+"&servico="+$i("servico").value
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=temaswms&id_ws="+g_idws+"&servico="+$i("servico").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

@@ -30,6 +30,41 @@ File: i3geo/classesphp/wmswfs.php
 19/6/2007
 */
 /*
+Function: gravaCacheWMS
+
+Lê o getcapabilities de um WMS e salva em disco se o mesmo não tiver sido salvo antes
+
+O arquivo é gravado no diretório temporário
+
+Parameters:
+
+$servico - endereço do WMS
+
+Return:
+
+Nome do arquivo criado
+*/
+function gravaCacheWMS($servico)
+{
+	global $dir_tmp;
+	$teste = explode("=",$servico);
+	if ( count($teste) > 1 ){$servico = $servico."&";}
+	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
+	$nome = $dir_tmp."/wms".md5($servico).".xml";
+	if(!file_exists($nome))
+	{
+		if( !($wms_capabilities = file($wms_service_request)) )
+		{return "erro";}
+		else
+		{
+			$fp = fopen($nome, 'w');
+			fwrite($fp, implode("",$wms_capabilities));
+			fclose($fp);	
+		}
+	}
+	return $nome;
+}
+/*
 function: existeTemaWFS
 
 Verifica se existe um tema em um servico WFS processando o getcapabilities.
@@ -230,15 +265,16 @@ $cp - Objeto CPAINT.
 function temaswms()
 {
 	global $servico,$cp,$id_ws;
-	$teste = explode("=",$servico);
-	if ( count($teste) > 1 ){$servico = $servico."&";}
-	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
+	$wms_service_request = gravaCacheWMS($servico);
+	//$teste = explode("=",$servico);
+	//if ( count($teste) > 1 ){$servico = $servico."&";}
+	//$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
 	#
 	//$wms_service_request = "c://temp//teste.xml";
 	include_once("../admin/php/webservices.php");
-	if( !($wms_capabilities = file($wms_service_request)) ) {
+	if($wms_service_request == "erro") {
 		# Cannot download the capabilities file.
 		//registra a tentativa de acesso
 		if(isset($id_ws))
@@ -248,11 +284,14 @@ function temaswms()
 		$cp->set_data("Erro de acesso");
 		return;
 	}
-	if(isset($id_ws))
+	elseif(isset($id_ws))
 	{
+		$handle = fopen ($wms_service_request, "r");
+		$wms_capabilities = fread ($handle, filesize ($wms_service_request));
+		fclose ($handle); 
 		adicionaAcesso($id_ws,true);
 	}
-	$wms_capabilities = implode("",$wms_capabilities);
+	//$wms_capabilities = implode("",$wms_capabilities);
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
 	$layers = wms_layers($dom);
@@ -326,6 +365,45 @@ function temaswms()
 	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
 	$cp->set_data(implode($retorna));
 }
+/*
+function: listaLayersWMS
+
+Lista os temas de um web service WMS e retorna o resultado como um array.
+
+parameters:
+
+$servico - Endereço do web service.
+
+$cp - Objeto CPAINT.
+
+$nivel - nível do layer na hierarquia existente no getcapabilities
+*/
+function listaLayersWMS()
+{
+	global $servico,$cp,$nivel;
+	$wms_service_request = gravaCacheWMS($servico);
+	include_once("../admin/php/webservices.php");
+	$handle = fopen ($wms_service_request, "r");
+	$wms_capabilities = fread ($handle, filesize ($wms_service_request));
+	fclose ($handle); 
+	$dom = new DomDocument();
+	$dom->loadXML($wms_capabilities);
+	$xpath = new DOMXPath($dom);
+	$q = '//WMT_MS_Capabilities/Capability';
+	for($i=0; $i <= $nivel; ++$i)
+	$q .= "/Layer";
+	
+	$layers = $xpath->query($q);
+	$res = array();
+	foreach ($layers as $layer)
+	{
+		$r = pegaTag($layer);
+		if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"]))
+		$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));
+	}
+	$cp->set_data($res);
+}
+
 function imprimeEstilos($es,$suporta,$retorna,$tval,$tituloalternativo)
 {
 	foreach($es as $e)

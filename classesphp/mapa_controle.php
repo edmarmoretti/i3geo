@@ -1812,6 +1812,19 @@ Include:
 		$cp->start();
 	break;
 /*
+Property: listaLayersWMS
+
+Retorna a lista de layers de um WMS.
+
+Include:
+<wmswfs.php>
+*/	
+	case "listaLayersWMS":
+		include_once("wmswfs.php");
+		$cp->register('listaLayersWMS');
+		$cp->start();
+	break;
+/*
 Section: Atributos
 
 Processa os atributos da tabela associada ao tema.
