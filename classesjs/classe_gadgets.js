@@ -53,6 +53,10 @@ i3GEO.gadgets = {
 		"mostraCoordenadasGEO":
 
 		{idhtml:"localizarxy"},
+		
+		"mostraInserirKml":
+		
+		{idhtml:"inserirKml"},
 
 		"mostraEscalaNumerica":
 
@@ -91,6 +95,8 @@ i3GEO.gadgets = {
 		{idhtml:"mostraUTM"},
 		"mostraCoordenadasGEO":
 		{idhtml:"localizarxy"},
+		"mostraInserirKml":
+		{idhtml:"inserirKml"},
 		"mostraEscalaNumerica":
 		{idhtml:"escala"},
 		"mostraEscalaGrafica":
@@ -217,6 +223,34 @@ i3GEO.gadgets = {
 			}
 		}
 		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
+	},
+	/*
+	Function: mostraInserirKml
+	
+	Mostra no mapa a a opção para inserir kml.
+	
+	Essa opção só funciona com a API do Google carregada
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/		
+	mostraInserirKml: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml;}
+		if($i(id)){
+			if(!$i("i3geo_urlkml")){
+				var i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
+				var ins = "<table><tr><td>Kml: "+i;
+				var temp = 'i3GEO.mapa.insereKml(true);';
+				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+				$i(id).innerHTML = ins;
+			}
+		}
 	},
 	/*
 	Function: mostraEscalaNumerica

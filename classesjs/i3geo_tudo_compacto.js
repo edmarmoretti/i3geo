@@ -10683,6 +10683,7 @@ i3GEO.interface = {
     		}
     		else{
     			//i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    			//http://mapgadgets.googlepages.com/cta.kml
     			var i3GEOTile = new GTileLayer(null,0,18,{
                      tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                      isPng:true,
@@ -10709,6 +10710,7 @@ i3GEO.interface = {
 			i3GEO.eventos.ativa($i(i3GEO.interface.IDMAPA));
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraMenuSuspenso();
+			i3GEO.gadgets.mostraInserirKml();
 			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA));
 			GEvent.addListener(i3GeoMap, "mousemove", function(ponto) {
     			var teladms = i3GEO.calculo.dd2dms(ponto.lng(),ponto.lat());
@@ -10888,6 +10890,15 @@ como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
+	Variable: GEOXML
+	
+	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
+	
+	Type:
+	{Array}
+	*/
+	GEOXML: new Array(),
+	/*
 	Function: ajustaPosicao
 	
 	Ajusta o posicionamento do corpo do mapa
@@ -10997,6 +11008,64 @@ i3GEO.mapa = {
 			}
 		}
 		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
+	},
+	/*
+	Function: insereKml
+	
+	Insere no mapa uma camada KML com base na API do Google Maps
+	
+	As camadas adicionadas são crescentadas na árvore de camadas
+	
+	A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+	
+	Parameters:
+	
+	pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+	
+	url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets)
+	
+	*/
+	insereKml: function(pan,url){
+		if(arguments.length == 1){
+			var i = $i("i3geo_urlkml");
+			if(i){var url = i.value;}
+			else{var url = "";}
+		}
+		if(url == ""){return;}
+		//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
+		var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
+		i3GEO.mapa.GEOXML.push(ngeoxml);
+		var zoom = function(){
+			if(pan){
+				eval("var ll = "+ngeoxml+".getDefaultCenter()");
+				eval(ngeoxml+".gotoDefaultViewport(i3GeoMap)");
+				//i3GeoMap.setCenter(ll);
+			}
+		};
+		eval(ngeoxml+" = new GGeoXml(url,zoom)");
+		eval("i3GeoMap.addOverlay("+ngeoxml+")");
+		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
+		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		if(!node){
+			var titulo = "<table><tr><td><b>KML</b></td></tr></table>";
+			var d = {html:titulo,idkml:"raiz"};
+			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
+		}
+		html = "<input onclick='i3GEO.mapa.ativaDesativaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
+		var d = {html:html};
+		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
+		nodekml.isleaf = true;
+		i3GEO.arvoreDeCamadas.ARVORE.draw();
+		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
+		node.expand();
+	},
+	ativaDesativaKml: function(obj){	
+		if(!obj.checked){
+			eval("i3GeoMap.removeOverlay("+obj.value+")");
+		}
+		else
+		eval("i3GeoMap.addOverlay("+obj.value+")");
 	},
 	/*
 	Function: inserePonto
@@ -16487,7 +16556,8 @@ i3GEO.arvoreDeTemas = {
 	listaLayersWMS: function(node){
 		//node = no;
 		var monta = function(retorno){
-			var n = retorno.data.length;
+			try{var n = retorno.data.length;}
+			catch(m){node.loadComplete();return;}
 			for (i=0;i<n; i++){
 				var html = retorno.data[i].nome+" - "+retorno.data[i].titulo;
 				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1)};
@@ -18817,6 +18887,10 @@ i3GEO.gadgets = {
 		"mostraCoordenadasGEO":
 
 		{idhtml:"localizarxy"},
+		
+		"mostraInserirKml":
+		
+		{idhtml:"inserirKml"},
 
 		"mostraEscalaNumerica":
 
@@ -18855,6 +18929,8 @@ i3GEO.gadgets = {
 		{idhtml:"mostraUTM"},
 		"mostraCoordenadasGEO":
 		{idhtml:"localizarxy"},
+		"mostraInserirKml":
+		{idhtml:"inserirKml"},
 		"mostraEscalaNumerica":
 		{idhtml:"escala"},
 		"mostraEscalaGrafica":
@@ -18981,6 +19057,34 @@ i3GEO.gadgets = {
 			}
 		}
 		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
+	},
+	/*
+	Function: mostraInserirKml
+	
+	Mostra no mapa a a opção para inserir kml.
+	
+	Essa opção só funciona com a API do Google carregada
+		
+	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
+	id definido em i3GEO.gadgets.PARAMETROS
+	
+	Parameters:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/		
+	mostraInserirKml: function(id){
+		if(arguments.length == 0)
+		{var id = i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml;}
+		if($i(id)){
+			if(!$i("i3geo_urlkml")){
+				var i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
+				var ins = "<table><tr><td>Kml: "+i;
+				var temp = 'i3GEO.mapa.insereKml(true);';
+				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
+				$i(id).innerHTML = ins;
+			}
+		}
 	},
 	/*
 	Function: mostraEscalaNumerica

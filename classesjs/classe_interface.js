@@ -490,6 +490,7 @@ i3GEO.interface = {
     		}
     		else{
     			//i3GEO.janela.slider("i3GEO.interface.googlemaps.mudaOpacidade","150");
+    			//http://mapgadgets.googlepages.com/cta.kml
     			var i3GEOTile = new GTileLayer(null,0,18,{
                      tileUrlTemplate:i3GEO.interface.googlemaps.criaTile(),
                      isPng:true,
@@ -516,6 +517,7 @@ i3GEO.interface = {
 			i3GEO.eventos.ativa($i(i3GEO.interface.IDMAPA));
 			i3GEO.gadgets.mostraCoordenadasGEO();
 			i3GEO.gadgets.mostraMenuSuspenso();
+			i3GEO.gadgets.mostraInserirKml();
 			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA));
 			GEvent.addListener(i3GeoMap, "mousemove", function(ponto) {
     			var teladms = i3GEO.calculo.dd2dms(ponto.lng(),ponto.lat());

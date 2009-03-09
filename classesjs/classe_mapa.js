@@ -36,6 +36,15 @@ como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
+	Variable: GEOXML
+	
+	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
+	
+	Type:
+	{Array}
+	*/
+	GEOXML: new Array(),
+	/*
 	Function: ajustaPosicao
 	
 	Ajusta o posicionamento do corpo do mapa
@@ -145,6 +154,64 @@ i3GEO.mapa = {
 			}
 		}
 		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
+	},
+	/*
+	Function: insereKml
+	
+	Insere no mapa uma camada KML com base na API do Google Maps
+	
+	As camadas adicionadas são crescentadas na árvore de camadas
+	
+	A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+	
+	Parameters:
+	
+	pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+	
+	url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets)
+	
+	*/
+	insereKml: function(pan,url){
+		if(arguments.length == 1){
+			var i = $i("i3geo_urlkml");
+			if(i){var url = i.value;}
+			else{var url = "";}
+		}
+		if(url == ""){return;}
+		//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
+		var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
+		i3GEO.mapa.GEOXML.push(ngeoxml);
+		var zoom = function(){
+			if(pan){
+				eval("var ll = "+ngeoxml+".getDefaultCenter()");
+				eval(ngeoxml+".gotoDefaultViewport(i3GeoMap)");
+				//i3GeoMap.setCenter(ll);
+			}
+		};
+		eval(ngeoxml+" = new GGeoXml(url,zoom)");
+		eval("i3GeoMap.addOverlay("+ngeoxml+")");
+		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
+		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		if(!node){
+			var titulo = "<table><tr><td><b>KML</b></td></tr></table>";
+			var d = {html:titulo,idkml:"raiz"};
+			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
+		}
+		html = "<input onclick='i3GEO.mapa.ativaDesativaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
+		var d = {html:html};
+		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
+		nodekml.isleaf = true;
+		i3GEO.arvoreDeCamadas.ARVORE.draw();
+		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
+		node.expand();
+	},
+	ativaDesativaKml: function(obj){	
+		if(!obj.checked){
+			eval("i3GeoMap.removeOverlay("+obj.value+")");
+		}
+		else
+		eval("i3GeoMap.addOverlay("+obj.value+")");
 	},
 	/*
 	Function: inserePonto

@@ -272,7 +272,8 @@ i3GEO.arvoreDeTemas = {
 	listaLayersWMS: function(node){
 		//node = no;
 		var monta = function(retorno){
-			var n = retorno.data.length;
+			try{var n = retorno.data.length;}
+			catch(m){node.loadComplete();return;}
 			for (i=0;i<n; i++){
 				var html = retorno.data[i].nome+" - "+retorno.data[i].titulo;
 				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1)};
