@@ -24,8 +24,8 @@ parametrosURL()
 ins = ""
 tema = ""
 
-comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados})
-t0()
+comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados;t0()})
+
 
 function t0()
 {

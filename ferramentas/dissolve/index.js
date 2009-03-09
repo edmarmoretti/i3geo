@@ -23,9 +23,7 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 ins = ""
 tema = ""
-comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados})
-t0()
-
+comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados;t0()})
 function t0()
 {
 	ins = "<p>Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles."

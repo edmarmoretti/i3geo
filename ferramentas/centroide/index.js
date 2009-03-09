@@ -23,8 +23,8 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 ins = ""
 tema = ""
-comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados})
-t0()
+comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados;t0()})
+
 function t0()
 {
 	ins = "<p>Os centr&oacute;ides s&atilde;o pontos localizados no centro de massa de uma forma."
