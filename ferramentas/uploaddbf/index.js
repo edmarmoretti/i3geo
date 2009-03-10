@@ -21,6 +21,24 @@ Free Software Foundation, Inc., no endereço
 */
 parametrosURL()
 mensagemAjuda("men1",$i("men1").innerHTML)
+if($i("temas")){
+	aguarde("block")
+	comboTemasLigados("tema",function(retorno)
+	{
+ 		$i("temas").innerHTML = retorno.dados
+ 		aguarde("none")
+ 		$i("tema").onchange = function()
+		{
+	 		$i("itens").innerHTML = "";
+			comboitens("item",$i("tema").value,function(retorno)
+			{
+	 			$i("itens").innerHTML = retorno.dados
+			},"itens","item")
+			if ($i("temas").value == "")
+			alert("Selecione um tema");
+		}
+	},"temas","tema")	
+}
 //document.getElementById("g_sid").value = g_sid
 YAHOO.example.init = function ()
 {
@@ -34,11 +52,14 @@ function submete()
 {
 	$i("f").submit()
 }
-radioepsg
-(
-	function(retorno)
-	{
+if($i("listaepsg"))
+{
+	radioepsg
+	(
+		function(retorno)
+		{
 		$i("listaepsg").innerHTML = retorno.dados
-	},
-	"listaepsg"
-)
+		},
+		"listaepsg"
+	)
+}

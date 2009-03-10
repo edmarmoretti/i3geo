@@ -183,16 +183,19 @@ function combocor(id,def,s)
 //
 //monta combo com os itens de um unico tema
 //
-function comboitens(id,tema,funcao,onde)
+function comboitens(id,tema,funcao,onde,nome)
 {
-	if (arguments.length == 4)
+	if (arguments.length > 3)
 	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";
+	if (arguments.length != 5)
+	{nome = "";}
+
 	var monta = function(retorno)
 	{
 		if (retorno.data != undefined)
 		{
 			var ins = new Array();
-			ins.push("<select  id="+id+" >");
+			ins.push("<select  id='"+id+"' name='"+nome+"'>");
 			ins.push("<option value='' >---</option>");
 			for (i=0;i<retorno.data.valores.length; i++)
 			{
@@ -446,17 +449,19 @@ function comboTemasSel(id,funcao,onde)
 //monta combo com os temas que estão ligados
 //retorna um combo com id=temasLigados
 //
-function comboTemasLigados(id,funcao,onde)
+function comboTemasLigados(id,funcao,onde,nome)
 {
-	if (arguments.length == 3)
+	if (arguments.length > 2)
 	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";
+	if (arguments.length == 3)
+	{nome = "";}
 	var monta = function(retorno)
 	{
 		if (retorno.data != undefined)
 		{
 			if (retorno.data.length > 0)
 			{
-				comboTemas = "<select id="+id+" >";
+				comboTemas = "<select id='"+id+"' name='"+nome+"'>";
 				comboTemas += "<option value=''>----</option>";
 				for (i=0;i<retorno.data.length;i++)
 				{comboTemas += "<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}

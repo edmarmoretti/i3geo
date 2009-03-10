@@ -54,59 +54,77 @@ if (isset($_FILES['filedbf']['name']))
 	if($status != 1)
 	{echo "Ocorreu um erro no envio do arquivo";exit;}
 	$nome = str_replace(".dbf","",$dirmap."/".$_FILES['filedbf']['name']);
-	$nomex = strtoupper($nomex);
-	$nomey = strtoupper($nomey);
 	if($status == 1)
 	{
-		echo "<p>Arquivo enviado. Criando shape file...</p>";
-		require_once("../../pacotes/phpxbase/api_conversion.php");
-		$dbf = xbase_open($dirmap."/".$_FILES['filedbf']['name']);
-		$records = xbase_numrecords($dbf);
-		$record = array();
-		$novoshpf = ms_newShapefileObj($nome, MS_SHP_POINT);
-		$novoshpf->free();
-		$shapefileObj = ms_newShapefileObj($nome,-2);
-		for($x = 1; $x <= $records; $x++)
+		if(!isset($tema)) //o dbf deverá ser transformado em uma camada no mapa
 		{
-    		$record = xbase_get_record_with_names($dbf, $x);
-     		$poPoint = ms_newpointobj();
-    		$poPoint->setXY($record[$nomex],$record[$nomey]);
-    		$shapefileObj->addpoint($poPoint);
+			$nomex = strtoupper($nomex);
+			$nomey = strtoupper($nomey);
+			echo "<p>Arquivo enviado. Criando shape file...</p>";
+			require_once("../../pacotes/phpxbase/api_conversion.php");
+			$dbf = xbase_open($dirmap."/".$_FILES['filedbf']['name']);
+			$records = xbase_numrecords($dbf);
+			$record = array();
+			$novoshpf = ms_newShapefileObj($nome, MS_SHP_POINT);
+			$novoshpf->free();
+			$shapefileObj = ms_newShapefileObj($nome,-2);
+			for($x = 1; $x <= $records; $x++)
+			{
+    			$record = xbase_get_record_with_names($dbf, $x);
+     			$poPoint = ms_newpointobj();
+    			$poPoint->setXY($record[$nomex],$record[$nomey]);
+    			$shapefileObj->addpoint($poPoint);
+			}
+			$shapefileObj->free();	
+			$mapt = ms_newMapObj($temasaplic."/novotema.map");
+			$novolayer = $mapt->getLayerByName("novotema");
+			$novolayer->set("data",$nome.".shp");
+			$novolayer->set("name",basename($nome));
+			$novolayer->setmetadata("TEMA",basename($nome));
+			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->set("type",MS_LAYER_POINT);
+			$novolayer->setfilter("");
+			$classe = $novolayer->getclass(0);
+			$estilo = $classe->getstyle(0);
+			$estilo->set("symbolname","ponto");
+			$estilo->set("size",6);
+			// le os itens
+			$novolayer->set("status",MS_DEFAULT);
+			$abriu = $novolayer->open();
+			$items = $novolayer->getItems();
+			$fechou = $novolayer->close();
+			if ($items != "")
+			{
+				$its = implode(",",$items);
+				$novolayer->setmetadata("ITENS",$its);
+				$novolayer->setmetadata("ITENSDESC",$its);
+				$novolayer->set("template","none.htm");
+			}
+			if($epsg != "")
+			{$novolayer->setProjection("init=epsg:".$epsg);}
+			$adiciona = ms_newLayerObj($mapa, $novolayer);
+			$salvo = $mapa->save($map_file);
+			echo "Tema criado!!!";
+			echo "<script>window.parent.remapaf()</script>";
 		}
-		$shapefileObj->free();	
-		$mapt = ms_newMapObj($temasaplic."/novotema.map");
-		$novolayer = $mapt->getLayerByName("novotema");
-		$novolayer->set("data",$nome.".shp");
-		$novolayer->set("name",basename($nome));
-		$novolayer->setmetadata("TEMA",basename($nome));
-		$novolayer->setmetadata("DOWNLOAD","SIM");
-		$novolayer->set("type",MS_LAYER_POINT);
-		$novolayer->setfilter("");
-		$classe = $novolayer->getclass(0);
-		$estilo = $classe->getstyle(0);
-		$estilo->set("symbolname","ponto");
-		$estilo->set("size",6);
-		// le os itens
-		$novolayer->set("status",MS_DEFAULT);
-		$abriu = $novolayer->open();
-		$items = $novolayer->getItems();
-		$fechou = $novolayer->close();
-		if ($items != "")
+		else //join com um tema
 		{
-			$its = implode(",",$items);
-			$novolayer->setmetadata("ITENS",$its);
-			$novolayer->setmetadata("ITENSDESC",$its);
-			$novolayer->set("template","none.htm");
+			//$layer = $mapa->getlayerbyname($tema);
+			$dbf = $dirmap."/".$_FILES['filedbf']['name'];
+			$string = 'JOIN '."\n".' NAME "'.$_FILES['filedbf']['name'].'"'."\n";
+			$string .= 'TABLE "'.$dbf.'"'."\n";
+			$string .= 'FROM "'.$item.'"'."\n";
+			$string .= 'TO "'.$colunadbf.'"'."\n";
+			$string .= 'TYPE ONE-TO-ONE'."\n"." END"."\n";
+			$string .= 'TEMPLATE "none.htm"'."\n";
+
+			//$layer->updatefromstring($string);
+			//$salvo = $mapa->save($map_file);
+			include_once("../../classesphp/classe_mapa.php");
+			$m = new Mapa($map_file,$locaplic);
+			$m->insereJOIN($string,$tema);
+			echo "Junção concluida!!!";			
 		}
-		//echo $epsg;
-		
-		if($epsg != "")
-		{$novolayer->setProjection("init=epsg:".$epsg);}
-		$adiciona = ms_newLayerObj($mapa, $novolayer);
-		$salvo = $mapa->save($map_file);
-		//grava os templates de cada tema
-		echo "Tema criado!!!";
-		echo "<script>window.parent.remapaf()</script>";
 	}
 	else
 	{

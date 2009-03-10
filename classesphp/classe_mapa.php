@@ -1345,5 +1345,39 @@ $arq - Nome do arquivo.
     	$dbh = null;
     	$dbhw = null;
 	}
+	function insereJOIN($string,$layername)
+	{
+		//le o map file
+		$abre = fopen($this->arquivo, "r");
+		while (!feof($abre))
+		{
+			$buffer = fgets($abre);
+			$maparray[] = $buffer;
+		}
+		fclose($abre);
+		$novoarray = array();
+		$conta = 0;
+		$pega = "nao";
+		//procura a string "querymap"
+		foreach ($maparray as $e)
+		{
+			$testa = explode("NAME",$e);
+			if (count($testa) > 1)
+			{$pega = "sim";}
+			$testa = explode('"'.$layername.'"',$e);
+			if ((count($testa) > 1) && ($pega == "sim"))
+			{
+				$novoarray[] = $string;
+				$pega = "nao";
+			}
+			$novoarray[] = $e;
+		}
+		//salva o mapfile
+		$abre = fopen($this->arquivo, "wt");
+		foreach($novoarray as $linha)
+		{$escreve = fwrite ($abre,$linha);}
+		$fecha = fclose ($abre);
+	}
+	
 }
 ?>
