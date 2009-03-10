@@ -273,6 +273,7 @@ function temaswms()
 	# Test that the capabilites file has successfully downloaded.
 	#
 	//$wms_service_request = "c://temp//teste.xml";
+	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
 	if($wms_service_request == "erro") {
 		# Cannot download the capabilities file.
@@ -377,12 +378,29 @@ $servico - Endereço do web service.
 $cp - Objeto CPAINT.
 
 $nivel - nível do layer na hierarquia existente no getcapabilities
+
 */
 function listaLayersWMS()
 {
-	global $servico,$cp,$nivel;
+	global $servico,$cp,$nivel,$id_ws;
 	$wms_service_request = gravaCacheWMS($servico);
+	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
+	if($nivel < 2){
+		if($wms_service_request == "erro") {
+			//registra a tentativa de acesso
+			if(isset($id_ws))
+			{
+				adicionaAcesso($id_ws,false);
+			}
+			$cp->set_data("Erro de acesso");
+			return;
+		}
+		elseif(isset($id_ws))
+		{
+			adicionaAcesso($id_ws,true);
+		}	
+	}
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread ($handle, filesize ($wms_service_request));
 	fclose ($handle); 

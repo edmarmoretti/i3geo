@@ -7135,8 +7135,8 @@ i3GEO.php = {
 	
 	<listaLayersWMS>	
 	*/
-	listaLayersWMS: function(funcao,servico,nivel){
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel;
+	listaLayersWMS: function(funcao,servico,nivel,id_ws){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel+"&id_ws="+id_ws;
 		cpJSON.call(p,"listaLayersWMS",funcao);	
 	}
 };
@@ -16543,11 +16543,22 @@ i3GEO.arvoreDeTemas = {
 			var node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwms","raiz");
 			var raiz = retorno.data.canais;
 			var nraiz = raiz.length;
+			var cor = "rgb(51, 102, 102)";
 			for (i=0;i<nraiz; i++){
-				var html = "<span title='"+raiz[i].description+"'> "+raiz[i].title;
+				var html = "<span style='color:"+cor+"' title='"+raiz[i].description+"'> "+raiz[i].title;
+				if(raiz[i].nacessos > 0){
+					var quali = (raiz[i].nacessosok * 100) / (raiz[i].nacessos*1);
+					html += " ("+quali+"%)</span>";
+				}
+				else
+				html += " (% de acessos não definido)</span>";
+				html += "<hr>";
 				var d = {html:html,id_ws:raiz[i].id_ws,url:raiz[i].link,nivel:0};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+				if(cor == "rgb(51, 102, 102)")
+				{var cor = "rgb(47, 70, 50)";}
+				else{var cor = "rgb(51, 102, 102)";}
 			}
 			node.loadComplete();
 		};
@@ -16558,27 +16569,31 @@ i3GEO.arvoreDeTemas = {
 		var monta = function(retorno){
 			try{var n = retorno.data.length;}
 			catch(m){node.loadComplete();return;}
+			var cor = "rgb(51, 102, 102)";
 			for (i=0;i<n; i++){
-				var html = retorno.data[i].nome+" - "+retorno.data[i].titulo;
-				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1)};
+				var html = "<span style='color:"+cor+"' >"+retorno.data[i].nome+" - "+retorno.data[i].titulo;
+				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1),id_ws:""};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				if(!retorno.data[i].estilos)
 				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
 				if(retorno.data[i].estilos){
 					var ns = retorno.data[i].estilos.length;
 					for (j=0;j<ns; j++){
-						var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString());
+						var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString(),cor);
 						var d = {html:html};
 						var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
 						tempNode.isleaf = true;			
 					}
-				}		
+				}
+				if(cor == "rgb(51, 102, 102)")
+				{var cor = "rgb(47, 70, 50)";}
+				else{var cor = "rgb(51, 102, 102)";}		
 			}
 			node.loadComplete();
 		};
-		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1));
+		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1),node.data.id_ws);
 	},
-	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg){
+	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
 		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		var temp = function(){
 			i3GEO.janela.fechaAguarde("ajaxredesenha");
@@ -16596,7 +16611,7 @@ i3GEO.arvoreDeTemas = {
 		adiciona += "\"nao\",";
 		adiciona += "\""+formatoinfo+"\")";
 		html += "onclick='"+adiciona+"' ";
-		html += " type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;' >";
+		html += " type='radio'  /></td><td style='padding-top:4px;vertical-align:top;text-align:left;padding-left:3px;color:"+cor+";' >";
 		html += layer+" - "+titulo;
 		html += "</td></span>";
 		return(html);
