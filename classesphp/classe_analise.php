@@ -214,6 +214,24 @@ Include:
 			}
 			$of = $this->mapa->outputformat;
 			$of->set("imagemode",MS_IMAGEMODE_RGB);
+			//
+			//reposiciona o layer
+			//
+			$indicel = $novolayer->index;
+			$numlayers = $this->mapa->numlayers;
+			$nummove = 0;
+			for ($i = $numlayers-1;$i > 0;$i--)
+			{
+				$layerAbaixo = $this->mapa->getlayer($i);
+				$tipo = $layerAbaixo->type;
+				if (($tipo != 2) && ($tipo != 3))
+				{$nummove++;}
+			}
+			if ($nummove > 2)
+			{
+				for ($i=0;$i<=($nummove - 3);++$i)
+				{$this->mapa->movelayerup($indicel);}
+			}
 		}
 		else
 		{return("erro");}
