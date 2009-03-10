@@ -127,6 +127,7 @@ function adicionaAcesso($id_ws,$sucesso)
     	//error_reporting(E_ALL);
     	include("conexao.php");
     	$dados = pegaDados("select * from i3geoadmin_ws WHERE id_ws = $id_ws");
+    	//var_dump($dados);
     	$acessos = $dados[0]["nacessos"] + 1;
     	if($sucesso)
     	$ok = $dados[0]["nacessosok"] + 1;
@@ -135,6 +136,7 @@ function adicionaAcesso($id_ws,$sucesso)
    		$dbhw->query("UPDATE i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
     	$dbhw = null;
     	$dbh = null;
+    	//error_reporting(0);
 	}
 	catch (PDOException $e)
 	{
