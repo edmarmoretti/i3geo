@@ -47,13 +47,16 @@ Nome do arquivo criado
 function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
+	error_reporting(0);
+	try{
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
 	$nome = $dir_tmp."/wms".md5($servico).".xml";
 	if(!file_exists($nome))
 	{
-		if( !($wms_capabilities = file($wms_service_request)) )
+		$wms_capabilities = file($wms_service_request);
+		if( !$wms_capabilities )
 		{return "erro";}
 		else
 		{
@@ -63,6 +66,8 @@ function gravaCacheWMS($servico)
 		}
 	}
 	return $nome;
+	}
+	catch(Exception $e){return "erro";}
 }
 /*
 function: existeTemaWFS
@@ -386,6 +391,7 @@ function listaLayersWMS()
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
+	error_reporting(0);
 	if($nivel < 2){
 		if($wms_service_request == "erro") {
 			//registra a tentativa de acesso

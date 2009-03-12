@@ -135,7 +135,7 @@ Include:
 */
 	function analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma="",$limitepontos="TRUE",$tema2="",$extendelimite=5)
 	{
-		set_time_limit(180);
+		set_time_limit(120);
 		//
 		//pega os dados do tema dois para as funções que o utilizam
 		//

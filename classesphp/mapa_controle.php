@@ -119,6 +119,10 @@ if ($funcao != "criaMapa")
 if (isset($debug) && $debug == "sim")
 {error_reporting(0);}
 //
+//teste de timeout
+//
+//for($i==0;$i<5000000000;$i++){}
+//
 //ativa o php mapscript e as extensões necessárias
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
