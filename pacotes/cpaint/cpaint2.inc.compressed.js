@@ -43,7 +43,19 @@ if(httpobj.readyState!=4){httpobj.abort();}
 return return_value;}
 var callback=function(){var response=null;if(httpobj.readyState==4&&httpobj.status==200){debug(httpobj.responseText,1);debug('using response type '+config['response_type'],2);switch(config['response_type']){case'XML':debug(httpobj.responseXML,2);response=__cpaint_transformer.xml_conversion(httpobj.responseXML);break;case'OBJECT':response=__cpaint_transformer.object_conversion(httpobj.responseXML);break;case'TEXT':response=__cpaint_transformer.text_conversion(httpobj.responseText);break;case'E4X':response=__cpaint_transformer.e4x_conversion(httpobj.responseText);break;case'JSON':response=__cpaint_transformer.json_conversion(httpobj.responseText);break;default:debug('invalid response type \''+response_type+'\'',0);}
 if(response!=null&&typeof client_callback=='function'){client_callback(response,httpobj.responseText);}
-remove_from_stack();}else if(httpobj.readyState==4&&httpobj.status!=200){debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);client_callback("", "erro");}}
+remove_from_stack();}
+else
+if(httpobj.readyState==4&&httpobj.status!=200)
+{
+	debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);
+	if(httpobj.status==500){
+	alert("O servidor demorou muito - timout");
+	client_callback("", "erro");	
+	}
+	else
+	client_callback("", "erro");
+}
+}
 var remove_from_stack=function(){if(typeof stack_id=='number'&&__cpaint_stack[stack_id]&&config['persistent_connection']==false){__cpaint_stack[stack_id]=null;}}
 var debug=function(message,debug_level){var prefix='[CPAINT Debug] ';if(config['debugging']<1){prefix='[CPAINT Error] ';if (message.search(" error") > 1){client_callback("", message);}}
 if(config['debugging']>=debug_level){alert(prefix+message);}}}
