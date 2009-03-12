@@ -254,6 +254,11 @@ function criarNovoMap()
 		$dados[] = '		TEMA "'.$nome.'"';
 		$dados[] = '		CLASSE "SIM"';
 		$dados[] = '	END';
+		$dados[] = '    CLASS';
+		$dados[] = '        NAME ""';
+		$dados[] = '        STYLE';
+		$dados[] = '        END';
+		$dados[] = '    END';
 		$dados[] = "END";
 		$dados[] = "END";
 		$fp = fopen($arq,"w");
