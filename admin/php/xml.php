@@ -55,7 +55,10 @@ function geraRSSsubgrupos($locaplic,$id_n1)
 
 function geraRSSgrupos($locaplic)
 {
-	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws from i3geoadmin_n1 as n1,i3geoadmin_grupos as g where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' order by nome_ws"; 
+	//$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws from i3geoadmin_n1 as n1,i3geoadmin_grupos as g where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' order by nome_ws"; 
+	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
+	$sql .= "from i3geoadmin_n1 as n1,i3geoadmin_grupos as g, i3geoadmin_n2 as n2, i3geoadmin_n3 as n3 ";
+	$sql .= "where g.id_grupo = n1.id_grupo and n2.id_n1 = n1.id_n1 and n3.id_n2 = n2.id_n2 and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
 
