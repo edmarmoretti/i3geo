@@ -61,6 +61,10 @@ Muitos dos parâmetros exigidos pelos programas em PHP são obtidos da variável
 de seção aberta no servidor quando o i3Geo é inicializado, é o caso por exemplo do nome
 do arquivo correspondente ao mapfile atualmente em uso
 
+Para evitar que uma chamada AJAX seja executada quando já existe outra em andamento
+pode-se verificar a existência do id "aguardeGifAberto" (exemplo: if($i("aguardeGifAberto")){return;} )
+isso pq a janela de aguarde inclui essa imagem GIF
+
 Para mais detalhes sobre as funções, veja <mapa_controle.php>
 */
 i3GEO.php = {
@@ -273,6 +277,7 @@ i3GEO.php = {
 	<geo2utm>	
 	*/
 	geo2utm: function(funcao,x,y){
+		if($i("aguardeGifAberto")){return;}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+x+"&y="+y+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"geo2utm",funcao);	
 	},

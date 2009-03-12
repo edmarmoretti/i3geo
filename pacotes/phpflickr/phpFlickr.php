@@ -195,6 +195,7 @@ class phpFlickr {
 	{
 		//Sends a request to Flickr's REST endpoint via POST.
 		$this->req->setURL($this->REST);
+		//echo $this->REST;return;
 		$this->req->clearPostData();
 		if (substr($command,0,7) != "flickr.") {
 			$command = "flickr." . $command;
