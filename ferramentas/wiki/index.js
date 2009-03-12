@@ -48,6 +48,8 @@ function buscawiki()
 }
 function listaartigos(retorno)
 {
+	if (retorno.data==undefined )
+	{$i("resultadowiki").innerHTML = "Erro. A operação demorou muito.";return;}
 	var ins = "<p>A busca no Mediawiki traz apenas os 20 primeiros resultados"
 	ins += "<p>Se a abrang&ecirc;ncia geogr&aacute;fica de busca for muito grande, pode ocorrer erro devido ao tempo de processamento."
 	ins += '<p>Mais detalhes sobre a busca, veja <a href="http://www.geonames.org" >Geonames</a>'

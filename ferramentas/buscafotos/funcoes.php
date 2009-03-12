@@ -4,6 +4,7 @@ require_once("../../classesphp/pega_variaveis.php");
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../ms_configura.php");
 require_once("../../pacotes/phpflickr/phpFlickr.php");
+error_reporting(0);
 $cp = new cpaint();
 if($funcao == "listafotosflickr")
 {$cp->register('listafotosflickr');}
@@ -33,6 +34,8 @@ function listafotospanoramio()
 	global $ret, $cp,$ai,$af;
 	$ret = explode(" ",$ret);
 	$resultado = "";
+	//echo "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail";
+	//return;
 	$recent = file_get_contents("http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
 	$recent = str_replace("\n","",$recent);
 	$recent = str_replace("'","",$recent);

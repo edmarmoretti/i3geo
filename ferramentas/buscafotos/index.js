@@ -38,7 +38,7 @@ function mostramenu()
 {
 	$i("mensagem").style.display="none"
 	$i("busca").style.display="block"
-	busca(1)
+	//busca(1)
 }	
 function busca(pagina)
 {
@@ -98,6 +98,8 @@ function busca(pagina)
 function listafotospanoramio(retorno)
 {
 	aguarde("none")
+	if (retorno.data==undefined )
+	{$i("resultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
 	$i("resultadofotos").style.height = "335px"
 	eval("var data = "+retorno.data)
 	if(!retorno.data)
@@ -137,6 +139,8 @@ function listafotospanoramio(retorno)
 function listafotosflickr(retorno)
 {
 	aguarde("none")
+	if (retorno.data==undefined )
+	{$i("resultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
 	$i("resultadofotos").style.height = "150px"
 	if((!retorno.data) || (retorno.data == ""))
 	{ins = "<br><span style=color:red>Problemas no acesso aos dados!</span><br><br>";$i("resultadofotos").innerHTML = ins;return;}
@@ -172,6 +176,8 @@ function listafotosflickr(retorno)
 function listafotoslocr(retorno)
 {
 	aguarde("none")
+	if (retorno.data==undefined )
+	{$i("resultadofotos").innerHTML = "Erro. A operação demorou muito.";return;}
 	$i("resultadofotos").style.height = "340px"
 	eval("var data = "+retorno.data)
 	if(!retorno.data)

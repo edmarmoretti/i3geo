@@ -5180,121 +5180,1470 @@ YAHOO.util.Event.purgeElement(D,true);D.innerHTML="";for(var C in this){if(YAHOO
 this._toggleContainer(false);};YAHOO.widget.AutoComplete.prototype._jumpSelection=function(){if(this._oCurItem){this._selectItem(this._oCurItem);}else{this._toggleContainer(false);}};YAHOO.widget.AutoComplete.prototype._moveSelection=function(G){if(this._bContainerOpen){var E=this._oCurItem;var F=-1;if(E){F=E._nItemIndex;}var D=(G==40)?(F+1):(F-1);if(D<-2||D>=this._nDisplayedItems){return ;}if(E){this._toggleHighlight(E,"from");this.itemArrowFromEvent.fire(this,E);}if(D==-1){if(this.delimChar&&this._sSavedQuery){if(!this._textMatchesOption()){this._elTextbox.value=this._sSavedQuery;}else{this._elTextbox.value=this._sSavedQuery+this._sCurQuery;}}else{this._elTextbox.value=this._sCurQuery;}this._oCurItem=null;return ;}if(D==-2){this._toggleContainer(false);return ;}var C=this._aListItems[D];var A=this._elContent;var B=((YAHOO.util.Dom.getStyle(A,"overflow")=="auto")||(YAHOO.util.Dom.getStyle(A,"overflowY")=="auto"));if(B&&(D>-1)&&(D<this._nDisplayedItems)){if(G==40){if((C.offsetTop+C.offsetHeight)>(A.scrollTop+A.offsetHeight)){A.scrollTop=(C.offsetTop+C.offsetHeight)-A.offsetHeight;}else{if((C.offsetTop+C.offsetHeight)<A.scrollTop){A.scrollTop=C.offsetTop;}}}else{if(C.offsetTop<A.scrollTop){this._elContent.scrollTop=C.offsetTop;}else{if(C.offsetTop>(A.scrollTop+A.offsetHeight)){this._elContent.scrollTop=(C.offsetTop+C.offsetHeight)-A.offsetHeight;}}}}this._toggleHighlight(C,"to");this.itemArrowToEvent.fire(this,C);if(this.typeAhead){this._updateValue(C);}}};YAHOO.widget.AutoComplete.prototype._onItemMouseover=function(A,B){if(B.prehighlightClassName){B._togglePrehighlight(this,"mouseover");}else{B._toggleHighlight(this,"to");}B.itemMouseOverEvent.fire(B,this);};YAHOO.widget.AutoComplete.prototype._onItemMouseout=function(A,B){if(B.prehighlightClassName){B._togglePrehighlight(this,"mouseout");}else{B._toggleHighlight(this,"from");}B.itemMouseOutEvent.fire(B,this);};YAHOO.widget.AutoComplete.prototype._onItemMouseclick=function(A,B){B._toggleHighlight(this,"to");B._selectItem(this);};YAHOO.widget.AutoComplete.prototype._onContainerMouseover=function(A,B){B._bOverContainer=true;};YAHOO.widget.AutoComplete.prototype._onContainerMouseout=function(A,B){B._bOverContainer=false;if(B._oCurItem){B._toggleHighlight(B._oCurItem,"to");}};YAHOO.widget.AutoComplete.prototype._onContainerScroll=function(A,B){B._elTextbox.focus();};YAHOO.widget.AutoComplete.prototype._onContainerResize=function(A,B){B._toggleContainerHelpers(B._bContainerOpen);};YAHOO.widget.AutoComplete.prototype._onTextboxKeyDown=function(A,B){var C=A.keyCode;switch(C){case 9:if((navigator.userAgent.toLowerCase().indexOf("mac")==-1)){if(B._oCurItem){if(B.delimChar&&(B._nKeyCode!=C)){if(B._bContainerOpen){YAHOO.util.Event.stopEvent(A);}}B._selectItem(B._oCurItem);}else{B._toggleContainer(false);}}break;case 13:if((navigator.userAgent.toLowerCase().indexOf("mac")==-1)){if(B._oCurItem){if(B._nKeyCode!=C){if(B._bContainerOpen){YAHOO.util.Event.stopEvent(A);}}B._selectItem(B._oCurItem);}else{B._toggleContainer(false);}}break;case 27:B._toggleContainer(false);return ;case 39:B._jumpSelection();break;case 38:YAHOO.util.Event.stopEvent(A);B._moveSelection(C);break;case 40:YAHOO.util.Event.stopEvent(A);B._moveSelection(C);break;default:break;}};YAHOO.widget.AutoComplete.prototype._onTextboxKeyPress=function(A,B){var C=A.keyCode;if((navigator.userAgent.toLowerCase().indexOf("mac")!=-1)){switch(C){case 9:if(B._oCurItem){if(B.delimChar&&(B._nKeyCode!=C)){if(B._bContainerOpen){YAHOO.util.Event.stopEvent(A);}}B._selectItem(B._oCurItem);}else{B._toggleContainer(false);}break;case 13:if(B._oCurItem){if(B._nKeyCode!=C){if(B._bContainerOpen){YAHOO.util.Event.stopEvent(A);}}B._selectItem(B._oCurItem);}else{B._toggleContainer(false);}break;default:break;}}else{if(C==229){B._queryInterval=setInterval(function(){B._onIMEDetected(B);},500);}}};YAHOO.widget.AutoComplete.prototype._onTextboxKeyUp=function(B,D){D._initProps();var E=B.keyCode;D._nKeyCode=E;var C=this.value;if(D._isIgnoreKey(E)||(C.toLowerCase()==D._sCurQuery)){return ;}else{D._bItemSelected=false;YAHOO.util.Dom.removeClass(D._oCurItem,D.highlightClassName);D._oCurItem=null;D.textboxKeyEvent.fire(D,E);}if(D.queryDelay>0){var A=setTimeout(function(){D._sendQuery(C);},(D.queryDelay*1000));if(D._nDelayID!=-1){clearTimeout(D._nDelayID);}D._nDelayID=A;}else{D._sendQuery(C);}};YAHOO.widget.AutoComplete.prototype._onTextboxFocus=function(A,B){B._elTextbox.setAttribute("autocomplete","off");B._bFocused=true;if(!B._bItemSelected){B.textboxFocusEvent.fire(B);}};YAHOO.widget.AutoComplete.prototype._onTextboxBlur=function(A,B){if(!B._bOverContainer||(B._nKeyCode==9)){if(!B._bItemSelected){var C=B._textMatchesOption();if(!B._bContainerOpen||(B._bContainerOpen&&(C===null))){if(B.forceSelection){B._clearSelection();}else{B.unmatchedItemSelectEvent.fire(B);}}else{if(B.forceSelection){B._selectItem(C);}}}if(B._bContainerOpen){B._toggleContainer(false);}B._cancelIntervalDetection(B);B._bFocused=false;B.textboxBlurEvent.fire(B);}};YAHOO.widget.AutoComplete.prototype._onWindowUnload=function(A,B){if(B&&B._elTextbox&&B.allowBrowserAutocomplete){B._elTextbox.setAttribute("autocomplete","on");}};YAHOO.widget.DataSource=function(){};YAHOO.widget.DataSource.ERROR_DATANULL="Response data was null";YAHOO.widget.DataSource.ERROR_DATAPARSE="Response data could not be parsed";YAHOO.widget.DataSource.prototype.maxCacheEntries=15;YAHOO.widget.DataSource.prototype.queryMatchContains=false;YAHOO.widget.DataSource.prototype.queryMatchSubset=false;YAHOO.widget.DataSource.prototype.queryMatchCase=false;YAHOO.widget.DataSource.prototype.toString=function(){return"DataSource "+this._sName;};YAHOO.widget.DataSource.prototype.getResults=function(A,D,B){var C=this._doQueryCache(A,D,B);if(C.length===0){this.queryEvent.fire(this,B,D);this.doQuery(A,D,B);}};YAHOO.widget.DataSource.prototype.doQuery=function(A,C,B){};YAHOO.widget.DataSource.prototype.flushCache=function(){if(this._aCache){this._aCache=[];}if(this._aCacheHelper){this._aCacheHelper=[];
 }this.cacheFlushEvent.fire(this);};YAHOO.widget.DataSource.prototype.queryEvent=null;YAHOO.widget.DataSource.prototype.cacheQueryEvent=null;YAHOO.widget.DataSource.prototype.getResultsEvent=null;YAHOO.widget.DataSource.prototype.getCachedResultsEvent=null;YAHOO.widget.DataSource.prototype.dataErrorEvent=null;YAHOO.widget.DataSource.prototype.cacheFlushEvent=null;YAHOO.widget.DataSource._nIndex=0;YAHOO.widget.DataSource.prototype._sName=null;YAHOO.widget.DataSource.prototype._aCache=null;YAHOO.widget.DataSource.prototype._init=function(){var A=this.maxCacheEntries;if(!YAHOO.lang.isNumber(A)||(A<0)){A=0;}if(A>0&&!this._aCache){this._aCache=[];}this._sName="instance"+YAHOO.widget.DataSource._nIndex;YAHOO.widget.DataSource._nIndex++;this.queryEvent=new YAHOO.util.CustomEvent("query",this);this.cacheQueryEvent=new YAHOO.util.CustomEvent("cacheQuery",this);this.getResultsEvent=new YAHOO.util.CustomEvent("getResults",this);this.getCachedResultsEvent=new YAHOO.util.CustomEvent("getCachedResults",this);this.dataErrorEvent=new YAHOO.util.CustomEvent("dataError",this);this.cacheFlushEvent=new YAHOO.util.CustomEvent("cacheFlush",this);};YAHOO.widget.DataSource.prototype._addCacheElem=function(B){var A=this._aCache;if(!A||!B||!B.query||!B.results){return ;}if(A.length>=this.maxCacheEntries){A.shift();}A.push(B);};YAHOO.widget.DataSource.prototype._doQueryCache=function(A,I,N){var H=[];var G=false;var J=this._aCache;var F=(J)?J.length:0;var K=this.queryMatchContains;var D;if((this.maxCacheEntries>0)&&J&&(F>0)){this.cacheQueryEvent.fire(this,N,I);if(!this.queryMatchCase){D=I;I=I.toLowerCase();}for(var P=F-1;P>=0;P--){var E=J[P];var B=E.results;var C=(!this.queryMatchCase)?encodeURIComponent(E.query).toLowerCase():encodeURIComponent(E.query);if(C==I){G=true;H=B;if(P!=F-1){J.splice(P,1);this._addCacheElem(E);}break;}else{if(this.queryMatchSubset){for(var O=I.length-1;O>=0;O--){var R=I.substr(0,O);if(C==R){G=true;for(var M=B.length-1;M>=0;M--){var Q=B[M];var L=(this.queryMatchCase)?encodeURIComponent(Q[0]).indexOf(I):encodeURIComponent(Q[0]).toLowerCase().indexOf(I);if((!K&&(L===0))||(K&&(L>-1))){H.unshift(Q);}}E={};E.query=I;E.results=H;this._addCacheElem(E);break;}}if(G){break;}}}}if(G){this.getCachedResultsEvent.fire(this,N,D,H);A(D,H,N);}}return H;};YAHOO.widget.DS_XHR=function(C,A,D){if(D&&(D.constructor==Object)){for(var B in D){this[B]=D[B];}}if(!YAHOO.lang.isArray(A)||!YAHOO.lang.isString(C)){return ;}this.schema=A;this.scriptURI=C;this._init();};YAHOO.widget.DS_XHR.prototype=new YAHOO.widget.DataSource();YAHOO.widget.DS_XHR.TYPE_JSON=0;YAHOO.widget.DS_XHR.TYPE_XML=1;YAHOO.widget.DS_XHR.TYPE_FLAT=2;YAHOO.widget.DS_XHR.ERROR_DATAXHR="XHR response failed";YAHOO.widget.DS_XHR.prototype.connMgr=YAHOO.util.Connect;YAHOO.widget.DS_XHR.prototype.connTimeout=0;YAHOO.widget.DS_XHR.prototype.scriptURI=null;YAHOO.widget.DS_XHR.prototype.scriptQueryParam="query";YAHOO.widget.DS_XHR.prototype.scriptQueryAppend="";YAHOO.widget.DS_XHR.prototype.responseType=YAHOO.widget.DS_XHR.TYPE_JSON;YAHOO.widget.DS_XHR.prototype.responseStripAfter="\n<!-";YAHOO.widget.DS_XHR.prototype.doQuery=function(E,G,B){var J=(this.responseType==YAHOO.widget.DS_XHR.TYPE_XML);var D=this.scriptURI+"?"+this.scriptQueryParam+"="+G;if(this.scriptQueryAppend.length>0){D+="&"+this.scriptQueryAppend;}var C=null;var F=this;var I=function(K){if(!F._oConn||(K.tId!=F._oConn.tId)){F.dataErrorEvent.fire(F,B,G,YAHOO.widget.DataSource.ERROR_DATANULL);return ;}for(var N in K){}if(!J){K=K.responseText;}else{K=K.responseXML;}if(K===null){F.dataErrorEvent.fire(F,B,G,YAHOO.widget.DataSource.ERROR_DATANULL);return ;}var M=F.parseResponse(G,K,B);var L={};L.query=decodeURIComponent(G);L.results=M;if(M===null){F.dataErrorEvent.fire(F,B,G,YAHOO.widget.DataSource.ERROR_DATAPARSE);M=[];}else{F.getResultsEvent.fire(F,B,G,M);F._addCacheElem(L);}E(G,M,B);};var A=function(K){F.dataErrorEvent.fire(F,B,G,YAHOO.widget.DS_XHR.ERROR_DATAXHR);return ;};var H={success:I,failure:A};if(YAHOO.lang.isNumber(this.connTimeout)&&(this.connTimeout>0)){H.timeout=this.connTimeout;}if(this._oConn){this.connMgr.abort(this._oConn);}F._oConn=this.connMgr.asyncRequest("GET",D,H,null);};YAHOO.widget.DS_XHR.prototype.parseResponse=function(sQuery,oResponse,oParent){var aSchema=this.schema;var aResults=[];var bError=false;var nEnd=((this.responseStripAfter!=="")&&(oResponse.indexOf))?oResponse.indexOf(this.responseStripAfter):-1;if(nEnd!=-1){oResponse=oResponse.substring(0,nEnd);}switch(this.responseType){case YAHOO.widget.DS_XHR.TYPE_JSON:var jsonList,jsonObjParsed;if(YAHOO.lang.JSON){jsonObjParsed=YAHOO.lang.JSON.parse(oResponse);if(!jsonObjParsed){bError=true;break;}else{try{jsonList=eval("jsonObjParsed."+aSchema[0]);}catch(e){bError=true;break;}}}else{if(oResponse.parseJSON){jsonObjParsed=oResponse.parseJSON();if(!jsonObjParsed){bError=true;}else{try{jsonList=eval("jsonObjParsed."+aSchema[0]);}catch(e){bError=true;break;}}}else{if(window.JSON){jsonObjParsed=JSON.parse(oResponse);if(!jsonObjParsed){bError=true;break;}else{try{jsonList=eval("jsonObjParsed."+aSchema[0]);}catch(e){bError=true;break;}}}else{try{while(oResponse.substring(0,1)==" "){oResponse=oResponse.substring(1,oResponse.length);}if(oResponse.indexOf("{")<0){bError=true;break;}if(oResponse.indexOf("{}")===0){break;}var jsonObjRaw=eval("("+oResponse+")");if(!jsonObjRaw){bError=true;break;}jsonList=eval("(jsonObjRaw."+aSchema[0]+")");}catch(e){bError=true;break;}}}}if(!jsonList){bError=true;break;}if(!YAHOO.lang.isArray(jsonList)){jsonList=[jsonList];}for(var i=jsonList.length-1;i>=0;i--){var aResultItem=[];var jsonResult=jsonList[i];for(var j=aSchema.length-1;j>=1;j--){var dataFieldValue=jsonResult[aSchema[j]];if(!dataFieldValue){dataFieldValue="";}aResultItem.unshift(dataFieldValue);}if(aResultItem.length==1){aResultItem.push(jsonResult);}aResults.unshift(aResultItem);}break;case YAHOO.widget.DS_XHR.TYPE_XML:var xmlList=oResponse.getElementsByTagName(aSchema[0]);if(!xmlList){bError=true;break;}for(var k=xmlList.length-1;k>=0;k--){var result=xmlList.item(k);
 var aFieldSet=[];for(var m=aSchema.length-1;m>=1;m--){var sValue=null;var xmlAttr=result.attributes.getNamedItem(aSchema[m]);if(xmlAttr){sValue=xmlAttr.value;}else{var xmlNode=result.getElementsByTagName(aSchema[m]);if(xmlNode&&xmlNode.item(0)&&xmlNode.item(0).firstChild){sValue=xmlNode.item(0).firstChild.nodeValue;}else{sValue="";}}aFieldSet.unshift(sValue);}aResults.unshift(aFieldSet);}break;case YAHOO.widget.DS_XHR.TYPE_FLAT:if(oResponse.length>0){var newLength=oResponse.length-aSchema[0].length;if(oResponse.substr(newLength)==aSchema[0]){oResponse=oResponse.substr(0,newLength);}if(oResponse.length>0){var aRecords=oResponse.split(aSchema[0]);for(var n=aRecords.length-1;n>=0;n--){if(aRecords[n].length>0){aResults[n]=aRecords[n].split(aSchema[1]);}}}}break;default:break;}sQuery=null;oResponse=null;oParent=null;if(bError){return null;}else{return aResults;}};YAHOO.widget.DS_XHR.prototype._oConn=null;YAHOO.widget.DS_ScriptNode=function(D,A,C){if(C&&(C.constructor==Object)){for(var B in C){this[B]=C[B];}}if(!YAHOO.lang.isArray(A)||!YAHOO.lang.isString(D)){return ;}this.schema=A;this.scriptURI=D;this._init();};YAHOO.widget.DS_ScriptNode.prototype=new YAHOO.widget.DataSource();YAHOO.widget.DS_ScriptNode.prototype.getUtility=YAHOO.util.Get;YAHOO.widget.DS_ScriptNode.prototype.scriptURI=null;YAHOO.widget.DS_ScriptNode.prototype.scriptQueryParam="query";YAHOO.widget.DS_ScriptNode.prototype.asyncMode="allowAll";YAHOO.widget.DS_ScriptNode.prototype.scriptCallbackParam="callback";YAHOO.widget.DS_ScriptNode.callbacks=[];YAHOO.widget.DS_ScriptNode._nId=0;YAHOO.widget.DS_ScriptNode._nPending=0;YAHOO.widget.DS_ScriptNode.prototype.doQuery=function(A,F,C){var B=this;if(YAHOO.widget.DS_ScriptNode._nPending===0){YAHOO.widget.DS_ScriptNode.callbacks=[];YAHOO.widget.DS_ScriptNode._nId=0;}var E=YAHOO.widget.DS_ScriptNode._nId;YAHOO.widget.DS_ScriptNode._nId++;YAHOO.widget.DS_ScriptNode.callbacks[E]=function(G){if((B.asyncMode!=="ignoreStaleResponses")||(E===YAHOO.widget.DS_ScriptNode.callbacks.length-1)){B.handleResponse(G,A,F,C);}else{}delete YAHOO.widget.DS_ScriptNode.callbacks[E];};YAHOO.widget.DS_ScriptNode._nPending++;var D=this.scriptURI+"&"+this.scriptQueryParam+"="+F+"&"+this.scriptCallbackParam+"=YAHOO.widget.DS_ScriptNode.callbacks["+E+"]";this.getUtility.script(D,{autopurge:true,onsuccess:YAHOO.widget.DS_ScriptNode._bumpPendingDown,onfail:YAHOO.widget.DS_ScriptNode._bumpPendingDown});};YAHOO.widget.DS_ScriptNode.prototype.handleResponse=function(oResponse,oCallbackFn,sQuery,oParent){var aSchema=this.schema;var aResults=[];var bError=false;var jsonList,jsonObjParsed;try{jsonList=eval("(oResponse."+aSchema[0]+")");}catch(e){bError=true;}if(!jsonList){bError=true;jsonList=[];}else{if(!YAHOO.lang.isArray(jsonList)){jsonList=[jsonList];}}for(var i=jsonList.length-1;i>=0;i--){var aResultItem=[];var jsonResult=jsonList[i];for(var j=aSchema.length-1;j>=1;j--){var dataFieldValue=jsonResult[aSchema[j]];if(!dataFieldValue){dataFieldValue="";}aResultItem.unshift(dataFieldValue);}if(aResultItem.length==1){aResultItem.push(jsonResult);}aResults.unshift(aResultItem);}if(bError){aResults=null;}if(aResults===null){this.dataErrorEvent.fire(this,oParent,sQuery,YAHOO.widget.DataSource.ERROR_DATAPARSE);aResults=[];}else{var resultObj={};resultObj.query=decodeURIComponent(sQuery);resultObj.results=aResults;this._addCacheElem(resultObj);this.getResultsEvent.fire(this,oParent,sQuery,aResults);}oCallbackFn(sQuery,aResults,oParent);};YAHOO.widget.DS_ScriptNode._bumpPendingDown=function(){YAHOO.widget.DS_ScriptNode._nPending--;};YAHOO.widget.DS_JSFunction=function(A,C){if(C&&(C.constructor==Object)){for(var B in C){this[B]=C[B];}}if(!YAHOO.lang.isFunction(A)){return ;}else{this.dataFunction=A;this._init();}};YAHOO.widget.DS_JSFunction.prototype=new YAHOO.widget.DataSource();YAHOO.widget.DS_JSFunction.prototype.dataFunction=null;YAHOO.widget.DS_JSFunction.prototype.doQuery=function(C,F,D){var B=this.dataFunction;var E=[];E=B(F);if(E===null){this.dataErrorEvent.fire(this,D,F,YAHOO.widget.DataSource.ERROR_DATANULL);return ;}var A={};A.query=decodeURIComponent(F);A.results=E;this._addCacheElem(A);this.getResultsEvent.fire(this,D,F,E);C(F,E,D);return ;};YAHOO.widget.DS_JSArray=function(A,C){if(C&&(C.constructor==Object)){for(var B in C){this[B]=C[B];}}if(!YAHOO.lang.isArray(A)){return ;}else{this.data=A;this._init();}};YAHOO.widget.DS_JSArray.prototype=new YAHOO.widget.DataSource();YAHOO.widget.DS_JSArray.prototype.data=null;YAHOO.widget.DS_JSArray.prototype.doQuery=function(E,I,A){var F;var C=this.data;var J=[];var D=false;var B=this.queryMatchContains;if(I){if(!this.queryMatchCase){I=I.toLowerCase();}for(F=C.length-1;F>=0;F--){var H=[];if(YAHOO.lang.isString(C[F])){H[0]=C[F];}else{if(YAHOO.lang.isArray(C[F])){H=C[F];}}if(YAHOO.lang.isString(H[0])){var G=(this.queryMatchCase)?encodeURIComponent(H[0]).indexOf(I):encodeURIComponent(H[0]).toLowerCase().indexOf(I);if((!B&&(G===0))||(B&&(G>-1))){J.unshift(H);}}}}else{for(F=C.length-1;F>=0;F--){if(YAHOO.lang.isString(C[F])){J.unshift([C[F]]);}else{if(YAHOO.lang.isArray(C[F])){J.unshift(C[F]);}}}}this.getResultsEvent.fire(this,A,I,J);E(I,J,A);};YAHOO.register("autocomplete",YAHOO.widget.AutoComplete,{version:"2.5.2",build:"1076"});
-function cpaint(){this.version='2.0.3';var config=new Array();config['debugging']=-1;config['proxy_url']='';config['transfer_mode']='GET';config['async']=true;config['response_type']='OBJECT';config['persistent_connection']=false;config['use_cpaint_api']=true;var stack_count=0;this.capable=test_ajax_capability();this.set_debug=function(){if(typeof arguments[0]=='boolean'){if(arguments[0]===true){config['debugging']=1;}else{config['debugging']=0;}}else if(typeof arguments[0]=='number'){config['debugging']=Math.round(arguments[0]);}}
-this.set_proxy_url=function(){if(typeof arguments[0]=='string'){config['proxy_url']=arguments[0];}}
-this.set_transfer_mode=function(){if(arguments[0].toUpperCase()=='GET'||arguments[0].toUpperCase()=='POST'){config['transfer_mode']=arguments[0].toUpperCase();}}
-this.set_async=function(){if(typeof arguments[0]=='boolean'){config['async']=arguments[0];}}
-this.set_response_type=function(){if(arguments[0].toUpperCase()=='TEXT'||arguments[0].toUpperCase()=='XML'||arguments[0].toUpperCase()=='OBJECT'||arguments[0].toUpperCase()=='E4X'||arguments[0].toUpperCase()=='JSON'){config['response_type']=arguments[0].toUpperCase();}}
-this.set_persistent_connection=function(){if(typeof arguments[0]=='boolean'){config['persistent_connection']=arguments[0];}}
-this.set_use_cpaint_api=function(){if(typeof arguments[0]=='boolean'){config['use_cpaint_api']=arguments[0];}}
-function test_ajax_capability(){var cpc=new cpaint_call(0,config,this.version);return cpc.test_ajax_capability();}
-this.call=function(){var use_stack=-1;if(config['persistent_connection']==true&&__cpaint_stack[0]!=null){switch(__cpaint_stack[0].get_http_state()){case-1:use_stack=0;debug('no XMLHttpObject object to re-use for persistence, creating new one later',2);break;case 4:use_stack=0
-debug('re-using the persistent connection',2);break;default:debug('the persistent connection is in use - skipping this request',2);}}else if(config['persistent_connection']==true){use_stack=0;__cpaint_stack[use_stack]=new cpaint_call(use_stack,config,this.version);debug('no cpaint_call object available for re-use, created new one',2);}else{use_stack=stack_count;__cpaint_stack[use_stack]=new cpaint_call(use_stack,config,this.version);debug('no cpaint_call object created new one',2);}
-if(use_stack!=-1){__cpaint_stack[use_stack].set_client_callback(arguments[2]);if(config['proxy_url']!=''){__cpaint_stack[use_stack].call_proxy(arguments);}else{__cpaint_stack[use_stack].call_direct(arguments);}
-stack_count++;debug('stack size: '+__cpaint_stack.length,2);}}
-var debug=function(message,debug_level){var prefix='[CPAINT Debug] ';if(debug_level<1){prefix='[CPAINT Error] ';}
-if(config['debugging']>=debug_level){alert(prefix+message);}if (message.search("error") > 1){client_callback("", message);}}}
-var __cpaint_stack=new Array();var __cpaint_transformer=new cpaint_transformer();function cpaint_call(){var version=arguments[2];var config=new Array();config['debugging']=arguments[1]['debugging'];config['proxy_url']=arguments[1]['proxy_url'];config['transfer_mode']=arguments[1]['transfer_mode'];config['async']=arguments[1]['async'];config['response_type']=arguments[1]['response_type'];config['persistent_connection']=arguments[1]['persistent_connection'];config['use_cpaint_api']=arguments[1]['use_cpaint_api'];var httpobj=false;var client_callback;var stack_id=arguments[0];this.set_client_callback=function(){if(typeof arguments[0]=='function'){client_callback=arguments[0];}}
-this.get_http_state=function(){var return_value=-1;if(typeof httpobj=='object'){return_value=httpobj.readyState;}
-return return_value;}
-this.call_direct=function(call_arguments){var url=call_arguments[0];var remote_method=call_arguments[1];var querystring='';var i=0;if(url=='SELF'){url=document.location.href;}
-if(config['use_cpaint_api']==true){for(i=3;i<call_arguments.length;i++){if((typeof call_arguments[i]=='string'&&call_arguments[i]!=''&&call_arguments[i].search(/^\s+$/g)==-1)&&!isNaN(call_arguments[i])&&isFinite(call_arguments[i])){querystring+='&cpaint_argument[]='+encodeURIComponent(JSON.stringify(Number(call_arguments[i])));}else{querystring+='&cpaint_argument[]='+encodeURIComponent(JSON.stringify(call_arguments[i]));}}
-querystring+='&cpaint_response_type='+config['response_type'];if(config['transfer_mode']=='GET'){if(url.indexOf('?')!=-1){url=url+'&cpaint_function='+remote_method+querystring;}else{url=url+'?cpaint_function='+remote_method+querystring;}}else{querystring='cpaint_function='+remote_method+querystring;}}else{for(i=3;i<call_arguments.length;i++){if(i==3){querystring+=encodeURIComponent(call_arguments[i]);}else{querystring+='&'+encodeURIComponent(call_arguments[i]);}}
-if(config['transfer_mode']=='GET'){url=url+querystring;}}
-get_connection_object();debug('opening connection to "'+url+'"',1);httpobj.open(config['transfer_mode'],url,config['async']);if(config['transfer_mode']=='POST'){try{httpobj.setRequestHeader('Content-Type','application/x-www-form-urlencoded');}catch(cp_err){debug('POST cannot be completed due to incompatible browser.  Use GET as your request method.',0);}}
-httpobj.setRequestHeader('X-Powered-By','CPAINT v'+version+' :: http://sf.net/projects/cpaint');httpobj.onreadystatechange=callback;if(config['transfer_mode']=='GET'){httpobj.send(null);}else{debug('sending query: '+querystring,1);httpobj.send(querystring);}
-if(config['async']==true){callback();}}
-this.call_proxy=function(call_arguments){var proxyscript=config['proxy_url'];var url=call_arguments[0];var remote_method=call_arguments[1];var querystring='';var i=0;var querystring_argument_prefix='cpaint_argument[]=';if(config['use_cpaint_api']==false){querystring_argument_prefix='';}
-for(i=3;i<call_arguments.length;i++){if(config['use_cpaint_api']==true){if((typeof call_arguments[i]=='string'&&call_arguments[i]!=''&&call_arguments[i].search(/^\s+$/g)==-1)&&!isNaN(call_arguments[i])&&isFinite(call_arguments[i])){querystring+=encodeURIComponent(querystring_argument_prefix+JSON.stringify(Number(call_arguments[i]))+'&');}else{querystring+=encodeURIComponent(querystring_argument_prefix+JSON.stringify(call_arguments[i])+'&');}}else{querystring+=encodeURIComponent(querystring_argument_prefix+call_arguments[i]+'&');}}
-if(config['use_cpaint_api']==true){querystring+=encodeURIComponent('&cpaint_function='+remote_method);querystring+=encodeURIComponent('&cpaint_responsetype='+config['response_type']);}
-if(config['transfer_mode']=='GET'){proxyscript+='?cpaint_remote_url='+encodeURIComponent(url)
-+'&cpaint_remote_query='+querystring
-+'&cpaint_remote_method='+config['transfer_mode']
-+'&cpaint_response_type='+config['response_type'];}else{querystring='cpaint_remote_url='+encodeURIComponent(url)
-+'&cpaint_remote_query='+querystring
-+'&cpaint_remote_method='+config['transfer_mode']
-+'&cpaint_response_type='+config['response_type'];}
-get_connection_object();debug('opening connection to proxy "'+proxyscript+'"',1);httpobj.open(config['transfer_mode'],proxyscript,config['async']);if(config['transfer_mode']=='POST'){try{httpobj.setRequestHeader('Content-Type','application/x-www-form-urlencoded');}catch(cp_err){debug('POST cannot be completed due to incompatible browser.  Use GET as your request method.',0);}}
-httpobj.setRequestHeader('X-Powered-By','CPAINT v'+version);httpobj.onreadystatechange=callback;if(config['transfer_mode']=='GET'){httpobj.send(null);}else{debug('sending query: '+querystring,1);httpobj.send(querystring);}
-if(config['async']==false){callback();}}
-this.test_ajax_capability=function(){return get_connection_object();}
-var get_connection_object=function(){var return_value=false;var new_connection=false;if(config['persistent_connection']==false){debug('Using new connection object',1);new_connection=true;}else{debug('Using shared connection object.',1);if(typeof httpobj!='object'){debug('Getting new persistent connection object.',1);new_connection=true;}}
-if(new_connection==true){try{httpobj=new XMLHttpRequest();}catch(e1){try{httpobj=new ActiveXObject('Msxml2.XMLHTTP');}catch(e){try{httpobj=new ActiveXObject('Microsoft.XMLHTTP');}catch(oc){httpobj=null;}}}
-if(!httpobj){debug('Could not create connection object',0);}else{return_value=true;}}
-if(httpobj.readyState!=4){httpobj.abort();}
-return return_value;}
-var callback=function(){var response=null;if(httpobj.readyState==4&&httpobj.status==200){debug(httpobj.responseText,1);debug('using response type '+config['response_type'],2);switch(config['response_type']){case'XML':debug(httpobj.responseXML,2);response=__cpaint_transformer.xml_conversion(httpobj.responseXML);break;case'OBJECT':response=__cpaint_transformer.object_conversion(httpobj.responseXML);break;case'TEXT':response=__cpaint_transformer.text_conversion(httpobj.responseText);break;case'E4X':response=__cpaint_transformer.e4x_conversion(httpobj.responseText);break;case'JSON':response=__cpaint_transformer.json_conversion(httpobj.responseText);break;default:debug('invalid response type \''+response_type+'\'',0);}
-if(response!=null&&typeof client_callback=='function'){client_callback(response,httpobj.responseText);}
-remove_from_stack();}else if(httpobj.readyState==4&&httpobj.status!=200){debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);client_callback("", "erro");}}
-var remove_from_stack=function(){if(typeof stack_id=='number'&&__cpaint_stack[stack_id]&&config['persistent_connection']==false){__cpaint_stack[stack_id]=null;}}
-var debug=function(message,debug_level){var prefix='[CPAINT Debug] ';if(config['debugging']<1){prefix='[CPAINT Error] ';if (message.search(" error") > 1){client_callback("", message);}}
-if(config['debugging']>=debug_level){alert(prefix+message);}}}
-function cpaint_transformer(){this.object_conversion=function(xml_document){var return_value=new cpaint_result_object();var i=0;var firstNodeName='';if(typeof xml_document=='object'&&xml_document!=null){for(i=0;i<xml_document.childNodes.length;i++){if(xml_document.childNodes[i].nodeType==1){firstNodeName=xml_document.childNodes[i].nodeName;break;}}
-var ajax_response=xml_document.getElementsByTagName(firstNodeName);return_value[firstNodeName]=new Array();for(i=0;i<ajax_response.length;i++){var tmp_node=create_object_structure(ajax_response[i]);tmp_node.id=ajax_response[i].getAttribute('id')
-return_value[firstNodeName].push(tmp_node);}}else{debug('received invalid XML response',0);}
-return return_value;}
-this.xml_conversion=function(xml_document){return xml_document;}
-this.text_conversion=function(text){return decode(text);}
-this.e4x_conversion=function(text){text=text.replace(/^\<\?xml[^>]+\>/,'');return new XML(text);}
-this.json_conversion=function(text){return JSON.parse(text);}
-var create_object_structure=function(stream){var return_value=new cpaint_result_object();var node_name='';var i=0;var attrib=0;if(stream.hasChildNodes()==true){for(i=0;i<stream.childNodes.length;i++){node_name=stream.childNodes[i].nodeName;node_name=node_name.replace(/[^a-zA-Z0-9_]*/g,'');if(typeof return_value[node_name]!='object'){return_value[node_name]=new Array();}
-if(stream.childNodes[i].nodeType==1){var tmp_node=create_object_structure(stream.childNodes[i]);for(attrib=0;attrib<stream.childNodes[i].attributes.length;attrib++){tmp_node.set_attribute(stream.childNodes[i].attributes[attrib].nodeName,stream.childNodes[i].attributes[attrib].nodeValue);}
-return_value[node_name].push(tmp_node);}else if(stream.childNodes[i].nodeType==3){return_value.data=decode(String(stream.firstChild.data));}}}
-return return_value;}
-var decode=function(rawtext){var plaintext='';var i=0;var c1=0;var c2=0;var c3=0;var u=0;var t=0;while(i<rawtext.length){if(rawtext.charAt(i)=='\\'&&rawtext.charAt(i+1)=='u'){u=0;for(j=2;j<6;j+=1){t=parseInt(rawtext.charAt(i+j),16);if(!isFinite(t)){break;}
-u=u*16+t;}
-plaintext+=String.fromCharCode(u);i+=6;}else{plaintext+=rawtext.charAt(i);i++;}}
-if(plaintext!=''&&plaintext.search(/^\s+$/g)==-1&&!isNaN(plaintext)&&isFinite(plaintext)){plaintext=Number(plaintext);}
-return plaintext;}}
-function cpaint_result_object(){this.id=0;this.data='';var __attributes=new Array();this.find_item_by_id=function(){var return_value=null;var type=arguments[0];var id=arguments[1];var i=0;if(this[type]){for(i=0;i<this[type].length;i++){if(this[type][i].get_attribute('id')==id){return_value=this[type][i];break;}}}
-return return_value;}
-this.get_attribute=function(){var return_value=null;var id=arguments[0];if(typeof __attributes[id]!='undefined'){return_value=__attributes[id];}
-return return_value;}
-this.set_attribute=function(){__attributes[arguments[0]]=arguments[1];}}
-Array.prototype.______array='______array';var JSON={org:'http://www.JSON.org',copyright:'(c)2005 JSON.org',license:'http://www.crockford.com/JSON/license.html',stringify:function(arg){var c,i,l,s='',v;var numeric=true;switch(typeof arg){case'object':if(arg){if(arg.______array=='______array'){for(i in arg){if(i!='______array'&&(isNaN(i)||!isFinite(i))){numeric=false;break;}}
-if(numeric==true){for(i=0;i<arg.length;++i){if(typeof arg[i]!='undefined'){v=this.stringify(arg[i]);if(s){s+=',';}
-s+=v;}else{s+=',null';}}
-return'['+s+']';}else{for(i in arg){if(i!='______array'){v=arg[i];if(typeof v!='undefined'&&typeof v!='function'){v=this.stringify(v);if(s){s+=',';}
-s+=this.stringify(i)+':'+v;}}}
-return'{'+s+'}';}}else if(typeof arg.toString!='undefined'){for(i in arg){v=arg[i];if(typeof v!='undefined'&&typeof v!='function'){v=this.stringify(v);if(s){s+=',';}
-s+=this.stringify(i)+':'+v;}}
-return'{'+s+'}';}}
-return'null';case'number':return isFinite(arg)?String(arg):'null';case'string':l=arg.length;s='"';for(i=0;i<l;i+=1){c=arg.charAt(i);if(c>=' '){if(c=='\\'||c=='"'){s+='\\';}
-s+=c;}else{switch(c){case'\b':s+='\\b';break;case'\f':s+='\\f';break;case'\n':s+='\\n';break;case'\r':s+='\\r';break;case'\t':s+='\\t';break;default:c=c.charCodeAt();s+='\\u00'+Math.floor(c/16).toString(16)+
-(c%16).toString(16);}}}
-return s+'"';case'boolean':return String(arg);default:return'null';}},parse:function(text){var at=0;var ch=' ';function error(m){throw{name:'JSONError',message:m,at:at-1,text:text};}
-function next(){ch=text.charAt(at);at+=1;return ch;}
-function white(){while(ch!=''&&ch<=' '){next();}}
-function str(){var i,s='',t,u;if(ch=='"'){outer:while(next()){if(ch=='"'){next();return s;}else if(ch=='\\'){switch(next()){case'b':s+='\b';break;case'f':s+='\f';break;case'n':s+='\n';break;case'r':s+='\r';break;case't':s+='\t';break;case'u':u=0;for(i=0;i<4;i+=1){t=parseInt(next(),16);if(!isFinite(t)){break outer;}
-u=u*16+t;}
-s+=String.fromCharCode(u);break;default:s+=ch;}}else{s+=ch;}}}
-error("Bad string");}
-function arr(){var a=[];if(ch=='['){next();white();if(ch==']'){next();return a;}
-while(ch){a.push(val());white();if(ch==']'){next();return a;}else if(ch!=','){break;}
-next();white();}}
-error("Bad array");}
-function obj(){var k,o={};if(ch=='{'){next();white();if(ch=='}'){next();return o;}
-while(ch){k=str();white();if(ch!=':'){break;}
-next();o[k]=val();white();if(ch=='}'){next();return o;}else if(ch!=','){break;}
-next();white();}}
-error("Bad object");}
-function assoc(){var k,a=[];if(ch=='<'){next();white();if(ch=='>'){next();return a;}
-while(ch){k=str();white();if(ch!=':'){break;}
-next();a[k]=val();white();if(ch=='>'){next();return a;}else if(ch!=','){break;}
-next();white();}}
-error("Bad associative array");}
-function num(){var n='',v;if(ch=='-'){n='-';next();}
-while(ch>='0'&&ch<='9'){n+=ch;next();}
-if(ch=='.'){n+='.';while(next()&&ch>='0'&&ch<='9'){n+=ch;}}
-if(ch=='e'||ch=='E'){n+='e';next();if(ch=='-'||ch=='+'){n+=ch;next();}
-while(ch>='0'&&ch<='9'){n+=ch;next();}}
-v=+n;if(!isFinite(v)){error("Bad number");}else{return v;}}
-function word(){switch(ch){case't':if(next()=='r'&&next()=='u'&&next()=='e'){next();return true;}
-break;case'f':if(next()=='a'&&next()=='l'&&next()=='s'&&next()=='e'){next();return false;}
-break;case'n':if(next()=='u'&&next()=='l'&&next()=='l'){next();return null;}
-break;}
-error("Syntax error");}
-function val(){white();switch(ch){case'{':return obj();case'[':return arr();case'<':return assoc();case'"':return str();case'-':return num();default:return ch>='0'&&ch<='9'?num():word();}}
-return val();}};
+/**
+* CPAINT - Cross-Platform Asynchronous INterface Toolkit
+*
+* http://sf.net/projects/cpaint
+* 
+* released under the terms of the LGPL
+* see http://www.fsf.org/licensing/licenses/lgpl.txt for details
+*
+* @package      CPAINT
+* @access       public
+* @copyright    Copyright (c) 2005-2006 Paul Sullivan, Dominique Stender - http://sf.net/projects/cpaint
+* @author       Paul Sullivan <wiley14@gmail.com>
+* @author       Dominique Stender <dstender@st-webdevelopment.de>
+* @author		Stephan Tijink <stijink@googlemail.com>
+* @version      2.0.3
+*/
+function cpaint() {
+  /**
+  * CPAINT version
+  * 
+  * @access     protected
+  * @var        string      version
+  */
+  this.version = '2.0.3';
+  
+  /**
+  * configuration options both for this class but also for  the cpaint_call() objects.
+  *
+  * @access     protected
+  * @var        array       config
+  */
+  var config                      = new Array();
+  config['debugging']             = -1;
+  config['proxy_url']             = '';
+  config['transfer_mode']         = 'GET';
+  config['async']                 = true;
+  config['response_type']         = 'OBJECT';
+  config['persistent_connection'] = false;
+  config['use_cpaint_api']        = true;
+  
+  /**
+  * maintains the next free index in the stack
+  *
+  * @access   protected
+  * @var      integer   stack_count
+  */
+  var stack_count = 0;
+
+  /**
+  * property returns whether or not the browser is AJAX capable
+  * 
+  * @access		public
+  * @return		boolean
+  */
+  this.capable = test_ajax_capability();
+  
+  /**
+  * switches debug mode on/off.
+  *
+  * @access   public
+  * @param    boolean    debug    debug flag
+  * @return   void
+  */
+  this.set_debug = function() {
+    
+    if (typeof arguments[0] == 'boolean') {
+      if (arguments[0] === true) {
+        config['debugging'] = 1;
+
+      } else {
+        config['debugging'] = 0;
+      }
+      
+    } else if (typeof arguments[0] == 'number') {
+      config['debugging'] = Math.round(arguments[0]);
+    }
+  }
+
+  /**
+  * defines the URL of the proxy script.
+  *
+  * @access   public
+  * @param    string    proxy_url    URL of the proxyscript to connect
+  * @return   void
+  */
+  this.set_proxy_url = function() {
+    
+    if (typeof arguments[0] == 'string') {
+
+      config['proxy_url'] = arguments[0];
+    }
+  }
+
+  /**
+  * sets the transfer_mode (GET|POST).
+  *
+  * @access   public
+  * @param    string    transfer_mode    transfer_mode
+  * @return   void
+  */
+  this.set_transfer_mode = function() {
+    
+    if (arguments[0].toUpperCase() == 'GET'
+      || arguments[0].toUpperCase() == 'POST') {
+
+      config['transfer_mode'] = arguments[0].toUpperCase();
+    }
+  }
+
+  /**
+  * sets the flag whether or not to use asynchronous calls.
+  *
+  * @access   public
+  * @param    boolean    async    syncronization flag
+  * @return   void
+  */
+  this.set_async = function() {
+    
+    if (typeof arguments[0] == 'boolean') {
+      config['async'] = arguments[0];
+    }
+  }
+
+  /**
+  * defines the response type.
+  *
+  * allowed values are:
+  *   TEXT    = raw text response
+  *   XML     = raw XMLHttpObject
+  *   OBJECT  = parsed JavaScript object structure from XMLHttpObject
+  *
+  * the default is OBJECT.
+  *
+  * @access   public
+  * @param    string    response_type    response type
+  * @return   void
+  */
+  this.set_response_type = function() {
+    
+    if (arguments[0].toUpperCase() == 'TEXT'
+      || arguments[0].toUpperCase() == 'XML'
+      || arguments[0].toUpperCase() == 'OBJECT'
+      || arguments[0].toUpperCase() == 'E4X'
+      || arguments[0].toUpperCase() == 'JSON') {
+
+      config['response_type'] = arguments[0].toUpperCase();
+    }
+  }
+
+  /**
+  * sets the flag whether or not to use a persistent connection.
+  *
+  * @access   public
+  * @param    boolean    persistent_connection    persistance flag
+  * @return   void
+  */
+  this.set_persistent_connection = function() {
+    
+    if (typeof arguments[0] == 'boolean') {
+      config['persistent_connection'] = arguments[0];
+    }
+  }
+  
+  
+  /**
+  * sets the flag whether or not to use the cpaint api on the backend.
+  *
+  * @access    public
+  * @param     boolean    cpaint_api      api_flag
+  * @return    void
+  */
+  this.set_use_cpaint_api = function() {
+    if (typeof arguments[0] == 'boolean') {
+      config['use_cpaint_api'] = arguments[0];
+    }
+  }
+  
+  /**
+  * tests whether one of the necessary implementations
+  * of the XMLHttpRequest class are available
+  *
+  * @access     protected
+  * @return     boolean
+  */
+  function test_ajax_capability() {
+    var cpc = new cpaint_call(0, config, this.version);
+    return cpc.test_ajax_capability();
+  }
+
+  /**
+  * takes the arguments supplied and triggers a call to the CPAINT backend
+  * based on the settings.
+  *
+  * upon response cpaint_call.callback() will automatically be called
+  * to perform post-processing operations.
+  *
+  * @access   public
+  * @param    string    url                 remote URL to call
+  * @param    string    remote_method       remote method to call
+  * @param    object    client_callback     client side callback method to deliver the remote response to. do NOT supply a string!
+  * @param    mixed     argN                remote parameters from now on
+  * @return   void
+  */
+  this.call = function() {
+    //incluido por edmar
+	var sUrl = escape(arguments[0]);
+	var re = new RegExp("%3F", "g");
+	var sUrl = sUrl.replace(re,'?');
+	var re = new RegExp("%3D", "g");
+	var sUrl = sUrl.replace(re,'=');
+	var re = new RegExp("%26", "g");
+	var sUrl = sUrl.replace(re,'&');
+	var re = new RegExp("%3A", "g");
+	var sUrl = sUrl.replace(re,':');
+    //alert(sUrl)
+    arguments[0] = sUrl;
+    //
+    var use_stack = -1;
+    
+    if (config['persistent_connection'] == true
+      && __cpaint_stack[0] != null) {
+
+      switch (__cpaint_stack[0].get_http_state()) {
+        case -1:
+          // no XMLHttpObject object has already been instanciated
+          // create new object and configure it
+          use_stack = 0;
+          debug('no XMLHttpObject object to re-use for persistence, creating new one later', 2);
+          break;
+          
+        case 4:
+          // object is ready for a new request, no need to do anything
+          use_stack = 0
+          debug('re-using the persistent connection', 2);
+          break;
+          
+        default:
+          // connection is currently in use, don't do anything
+          debug('the persistent connection is in use - skipping this request', 2);
+      }
+      
+    } else if (config['persistent_connection'] == true) {
+      // persistent connection is active, but no object has been instanciated
+      use_stack = 0;
+      __cpaint_stack[use_stack] = new cpaint_call(use_stack, config, this.version);
+      debug('no cpaint_call object available for re-use, created new one', 2);
+    
+    } else {
+      // no connection persistance
+      use_stack = stack_count;
+      __cpaint_stack[use_stack] = new cpaint_call(use_stack, config, this.version);
+      debug('no cpaint_call object created new one', 2);
+    }
+
+    // configure cpaint_call if allowed to
+    if (use_stack != -1) {
+      __cpaint_stack[use_stack].set_client_callback(arguments[2]);
+      
+      // distribute according to proxy use
+      if (config['proxy_url'] != '') {
+        __cpaint_stack[use_stack].call_proxy(arguments);
+      
+      } else {
+        __cpaint_stack[use_stack].call_direct(arguments);
+      }
+
+      // increase stack counter
+      stack_count++;
+      debug('stack size: ' + __cpaint_stack.length, 2);
+    }
+  }
+
+  /**
+  * debug method
+  *
+  * @access  protected
+  * @param   string       message         the message to debug
+  * @param   integer      debug_level     debug level at which the message appears
+  * @return  void
+  */
+  var debug  = function(message, debug_level) {
+    var prefix = '[CPAINT Debug] ';
+    
+    if (debug_level < 1) {
+      prefix = '[CPAINT Error] ';
+    }
+    
+    if (config['debugging'] >= debug_level) {
+      alert(prefix + message);
+    }
+  }
+}
+
+/**
+* internal FIFO stack of cpaint_call() objects.
+*
+* @access   protected
+* @var      array    __cpaint_stack
+*/
+var __cpaint_stack = new Array();
+
+/**
+* local instance of cpaint_transformer
+* MSIE is unable to handle static classes... sheesh.
+*
+* @access   public
+* @var      object    __cpaint_transformer
+*/
+var __cpaint_transformer = new cpaint_transformer();
+
+/**
+* transport agent class
+*
+* creates the request object, takes care of the response, handles the 
+* client callback. Is configured by the cpaint() object.
+*
+* @package      CPAINT
+* @access       public
+* @copyright    Copyright (c) 2005-2006 Paul Sullivan, Dominique Stender - http://sf.net/projects/cpaint
+* @author       Dominique Stender <dstender@st-webdevelopment.de>
+* @author       Paul Sullivan <wiley14@gmail.com>
+* @param        integer     stack_id      stack Id in cpaint
+* @param        array       config        configuration array for this call
+* @param        string      version       CPAINT API version
+*/
+function cpaint_call() {
+  /**
+  * CPAINT version
+  * 
+  * @access     protected
+  * @var        string      version
+  */
+  var version = arguments[2];
+  
+  /**
+  * configuration options both for this class objects.
+  *
+  * @access     protected
+  * @var        array       config
+  */
+  var config                      = new Array();
+  config['debugging']             = arguments[1]['debugging'];
+  config['proxy_url']             = arguments[1]['proxy_url'];
+  config['transfer_mode']         = arguments[1]['transfer_mode'];
+  config['async']                 = arguments[1]['async'];
+  config['response_type']         = arguments[1]['response_type'];
+  config['persistent_connection'] = arguments[1]['persistent_connection'];
+  config['use_cpaint_api']        = arguments[1]['use_cpaint_api'];
+
+  /**
+  * XMLHttpObject used for this request.
+  *
+  * @access   protected
+  * @var      object     httpobj
+  */
+  var httpobj    = false;
+
+  /**
+  * client callback function.
+  *
+  * @access   public
+  * @var      function    client_callback
+  */
+  var client_callback;
+
+  /**
+  * stores the stack Id within the cpaint object
+  *
+  * @access   protected
+  * @var      stack_id
+  */
+  var stack_id = arguments[0];
+  
+  /**
+  * sets the client callback function.
+  *
+  * @access   public
+  * @param    function    client_callback     the client callback function
+  * @return   void
+  */
+  this.set_client_callback = function() {
+    
+    if (typeof arguments[0] == 'function') {
+      client_callback = arguments[0];
+    }
+  }
+
+  /**
+  * returns the ready state of the internal XMLHttpObject
+  *
+  * if no such object was set up already, -1 is returned
+  * 
+  * @access     public
+  * @return     integer
+  */
+  this.get_http_state = function() {
+    var return_value = -1;
+    
+    if (typeof httpobj == 'object') {
+      return_value = httpobj.readyState;
+    }
+    
+    return return_value;
+  }
+  
+  /**
+  * internal method for remote calls to the local server without use of the proxy script.
+  *
+  * @access   public
+  * @param    array    call_arguments    array of arguments initially passed to cpaint.call()
+  * @return   void
+  */
+  this.call_direct = function(call_arguments) {
+    var url             = call_arguments[0];
+    var remote_method   = call_arguments[1];
+    var querystring     = '';
+    var i               = 0;
+    
+    // correct link to self
+    if (url == 'SELF') {
+      url = document.location.href;
+    }
+  
+    if (config['use_cpaint_api'] == true) {
+      // backend uses cpaint api
+      // pass parameters to remote method
+      for (i = 3; i < call_arguments.length; i++) {
+
+        if ((typeof call_arguments[i] == 'string'
+              && call_arguments[i] != ''
+              && call_arguments[i].search(/^\s+$/g) == -1)
+          && !isNaN(call_arguments[i])
+          && isFinite(call_arguments[i])) {
+          // numerical value, convert it first
+          querystring += '&cpaint_argument[]=' + encodeURIComponent(JSON.stringify(Number(call_arguments[i])));
+        
+        } else {
+          querystring += '&cpaint_argument[]=' + encodeURIComponent(JSON.stringify(call_arguments[i]));
+        }
+      }
+    
+      // add response type to querystring
+      querystring += '&cpaint_response_type=' + config['response_type'];
+    
+      // build header
+      if (config['transfer_mode'] == 'GET') {
+				
+        if(url.indexOf('?') != -1) {
+					url = url + '&cpaint_function=' + remote_method +	querystring;
+				
+        } else {
+					url = url + '?cpaint_function=' + remote_method +	querystring; 
+				}
+      
+      } else {
+        querystring = 'cpaint_function=' + remote_method + querystring;
+      }
+      
+    } else {
+      // backend does not use cpaint api
+      // pass parameters to remote method
+      for (i = 3; i < call_arguments.length; i++) {
+        
+        if (i == 3) {
+          querystring += encodeURIComponent(call_arguments[i]);
+        
+        } else {
+          querystring += '&' + encodeURIComponent(call_arguments[i]);
+        }
+      }
+    
+      // build header
+      if (config['transfer_mode'] == 'GET') {
+        url = url + querystring;
+      } 
+    }
+  
+    // open connection 
+    get_connection_object();
+
+    // open connection to remote target
+    debug('opening connection to "' + url + '"', 1);
+    httpobj.open(config['transfer_mode'], url, config['async']);
+
+    // send "urlencoded" header if necessary (if POST)
+    if (config['transfer_mode'] == 'POST') {
+
+      try {
+        httpobj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      } catch (cp_err) {
+        debug('POST cannot be completed due to incompatible browser.  Use GET as your request method.', 0);
+      }
+    }
+
+    // make ourselves known
+    httpobj.setRequestHeader('X-Powered-By', 'CPAINT v' + version + ' :: http://sf.net/projects/cpaint');
+
+    // callback handling for asynchronous calls
+    httpobj.onreadystatechange = callback;
+
+    // send content
+    if (config['transfer_mode'] == 'GET') {
+      httpobj.send(null);
+
+    } else {
+      debug('sending query: ' + querystring, 1);
+      httpobj.send(querystring);
+    }
+
+    if (config['async'] == true) {
+      // manual callback handling for synchronized calls
+      callback();
+    }
+  }
+    
+  /**
+  * internal method for calls to remote servers through the proxy script.
+  *
+  * @access   public
+  * @param    array    call_arguments    array of arguments passed to cpaint.call()
+  * @return   void
+  */
+  this.call_proxy = function(call_arguments) {
+    var proxyscript     = config['proxy_url'];
+    var url             = call_arguments[0];
+    var remote_method   = call_arguments[1];
+    var querystring     = '';
+    var i               = 0;
+    
+    var querystring_argument_prefix = 'cpaint_argument[]=';
+
+    // pass parameters to remote method
+    if (config['use_cpaint_api'] == false) {
+      // when not talking to a CPAINT backend, don't prefix arguments
+      querystring_argument_prefix = '';
+    }
+
+    for (i = 3; i < call_arguments.length; i++) {
+
+      if (config['use_cpaint_api'] == true) {
+      
+        if ((typeof call_arguments[i] == 'string'
+              && call_arguments[i] != ''
+              && call_arguments[i].search(/^\s+$/g) == -1)
+          && !isNaN(call_arguments[i])
+          && isFinite(call_arguments[i])) {
+          // numerical value, convert it first
+          querystring += encodeURIComponent(querystring_argument_prefix + JSON.stringify(Number(call_arguments[i])) + '&');
+
+        } else {
+          querystring += encodeURIComponent(querystring_argument_prefix + JSON.stringify(call_arguments[i]) + '&');
+        }
+        
+      } else {
+        // no CPAINT in the backend
+        querystring += encodeURIComponent(querystring_argument_prefix + call_arguments[i] + '&');
+      }
+    }
+
+    if (config['use_cpaint_api'] == true) {
+      // add remote function name to querystring
+      querystring += encodeURIComponent('&cpaint_function=' + remote_method);
+  
+      // add response type to querystring
+      querystring += encodeURIComponent('&cpaint_responsetype=' + config['response_type']);
+    }
+    
+    // build header
+    if (config['transfer_mode'] == 'GET') {
+      proxyscript += '?cpaint_remote_url=' + encodeURIComponent(url) 
+        + '&cpaint_remote_query=' + querystring
+        + '&cpaint_remote_method=' + config['transfer_mode'] 
+        + '&cpaint_response_type=' + config['response_type'];
+
+    } else {
+      querystring = 'cpaint_remote_url=' + encodeURIComponent(url)
+        + '&cpaint_remote_query=' + querystring
+        + '&cpaint_remote_method=' + config['transfer_mode'] 
+        + '&cpaint_response_type=' + config['response_type'];
+    }
+
+    // open connection
+    get_connection_object();
+
+    // open connection to remote target
+    debug('opening connection to proxy "' + proxyscript + '"', 1);
+    httpobj.open(config['transfer_mode'], proxyscript, config['async']);
+
+    // send "urlencoded" header if necessary (if POST)
+    if (config['transfer_mode'] == 'POST') {
+
+      try {
+        httpobj.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      } catch (cp_err) {
+        debug('POST cannot be completed due to incompatible browser.  Use GET as your request method.', 0);
+      }
+    }
+
+    httpobj.setRequestHeader('X-Powered-By', 'CPAINT v' + version);
+
+    // callback handling for asynchronous calls
+    httpobj.onreadystatechange = callback;
+
+    // send content
+    if (config['transfer_mode'] == 'GET') {
+      httpobj.send(null);
+
+    } else {
+      debug('sending query: ' + querystring, 1);
+      httpobj.send(querystring);
+    }
+
+    if (config['async'] == false) {
+      // manual callback handling for synchronized calls
+      callback();
+    }
+  }
+
+  this.test_ajax_capability = function() {
+    return get_connection_object();
+  }
+  
+  /**
+  * creates a new connection object.
+  *
+  * @access   protected
+  * @return   boolean
+  */
+  var get_connection_object = function() {
+    var return_value    = false;
+    var new_connection  = false;
+
+    // open new connection only if necessary
+    if (config['persistent_connection'] == false) {
+      // no persistance, create a new object every time
+      debug('Using new connection object', 1);
+      new_connection = true;
+
+    } else {
+      // persistent connection object, only open one if no object exists
+      debug('Using shared connection object.', 1);
+
+      if (typeof httpobj != 'object') {
+        debug('Getting new persistent connection object.', 1);
+        new_connection = true;
+      }
+    }
+
+    if (new_connection == true) {
+		
+	 try {
+        httpobj = new XMLHttpRequest();
+      } catch (e1) {
+
+		  try {
+			httpobj = new ActiveXObject('Msxml2.XMLHTTP');
+	  
+		  } catch (e) {
+			
+			try {  
+			  httpobj = new ActiveXObject('Microsoft.XMLHTTP');
+ 
+			} catch (oc) {
+			  httpobj = null;
+			} 
+		 }
+	  }
+     
+  
+      if (!httpobj) {
+        debug('Could not create connection object', 0);
+      
+      } else {
+        return_value = true;
+      }
+    }
+
+    if (httpobj.readyState != 4) {
+      httpobj.abort();
+    }
+
+    return return_value;
+  }
+
+  /**
+  * internal callback function.
+  *
+  * will perform some consistency checks (response code, NULL value testing)
+  * and if response_type = 'OBJECT' it will automatically call
+  * cpaint_call.parse_ajax_xml() to have a JavaScript object structure generated.
+  *
+  * after all that is done the client side callback function will be called 
+  * with the generated response as single value.
+  *
+  * @access   protected
+  * @return   void
+  */
+  var callback = function() {
+    var response = null;
+    if (httpobj.readyState == 4
+      && httpobj.status == 200) {
+      if(httpobj.responseText == ""){
+      	alert("O servidor demorou muito - timeout");
+		client_callback("", "erro");
+		return;
+      }
+      debug(httpobj.responseText, 1);
+      debug('using response type ' + config['response_type'], 2);
+      
+      // fetch correct response
+      switch (config['response_type']) {
+        case 'XML':
+          debug(httpobj.responseXML, 2);
+          response = __cpaint_transformer.xml_conversion(httpobj.responseXML);
+          break;
+          
+        case 'OBJECT':
+          response = __cpaint_transformer.object_conversion(httpobj.responseXML);
+          break;
+        
+        case 'TEXT':
+          response = __cpaint_transformer.text_conversion(httpobj.responseText);
+          break;
+          
+        case 'E4X':
+          response = __cpaint_transformer.e4x_conversion(httpobj.responseText);
+          break;
+          
+        case 'JSON':
+          response = __cpaint_transformer.json_conversion(httpobj.responseText);
+          break;
+          
+        default:
+          debug('invalid response type \'' + response_type + '\'', 0);
+      }
+      
+      // call client side callback
+      if (response != null 
+        && typeof client_callback == 'function') {
+        try{
+        	if(response.data)
+        		client_callback(response, httpobj.responseText);
+        	else
+        		client_callback("", "erro");
+        }
+        catch(e){
+        	client_callback("", "erro");
+        }
+      }
+      // remove ourselves from the stack
+      remove_from_stack();
+    
+    } else
+    {       
+		if(httpobj.readyState==4&&httpobj.status!=200)
+		{
+			debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);
+			if(httpobj.status==500){
+				alert("O servidor demorou muito - timeout");
+				client_callback("", "erro");	
+			}
+			else{
+				client_callback("", "erro");
+			}
+		}      
+      
+    }
+  }
+
+  /**
+  * removes an entry from the stack
+  *
+  * @access     protected
+  * @return     void
+  */
+  var remove_from_stack = function() {
+    // remove only if everything is okay and we're not configured as persistent connection
+    if (typeof stack_id == 'number'
+      && __cpaint_stack[stack_id]
+      && config['persistent_connection'] == false) {
+      
+      __cpaint_stack[stack_id] = null;
+    }
+  }
+
+  /**
+  * debug method
+  *
+  * @access  protected
+  * @param   string       message         the message to debug
+  * @param   integer      debug_level     debug level at which the message appears
+  * @return  void
+  */
+  var debug  = function(message, debug_level) {
+    var prefix = '[CPAINT Debug] ';
+    
+    if (config['debugging'] < 1) {
+      prefix = '[CPAINT Error] ';
+    }
+    
+    if (config['debugging'] >= debug_level) {
+      alert(prefix + message);
+    }
+    if (message.search(" error") > 1){client_callback("", message);}
+  }
+}
+
+/**
+* CPAINT transformation object
+*
+* @package      CPAINT
+* @access       public
+* @copyright    Copyright (c) 2005-2006 Paul Sullivan, Dominique Stender - http://sf.net/projects/cpaint
+* @author       Paul Sullivan <wiley14@gmail.com>
+* @author       Dominique Stender <dstender@st-webdevelopment.de>
+*/
+function cpaint_transformer() {
+
+  /**
+  * will take a XMLHttpObject and generate a JavaScript
+  * object structure from it.
+  *
+  * is internally called by cpaint_call.callback() if necessary.
+  * will call cpaint_call.create_object_structure() to create nested object structures.
+  *
+  * @access   public
+  * @param    object    xml_document  a XMLHttpObject
+  * @return   object
+  */
+  this.object_conversion = function(xml_document) {
+    var return_value  = new cpaint_result_object();
+    var i             = 0;
+    var firstNodeName = '';
+    
+    if (typeof xml_document == 'object'
+      && xml_document != null) {
+
+      // find the first element node - for MSIE the <?xml?> node is the very first...
+      for (i = 0; i < xml_document.childNodes.length; i++) {
+
+        if (xml_document.childNodes[i].nodeType == 1) {
+          firstNodeName = xml_document.childNodes[i].nodeName;
+          break;
+        }
+      }
+      
+      var ajax_response = xml_document.getElementsByTagName(firstNodeName);
+
+      return_value[firstNodeName] = new Array();
+    
+      for (i = 0; i < ajax_response.length; i++) {
+        var tmp_node = create_object_structure(ajax_response[i]);
+        tmp_node.id  = ajax_response[i].getAttribute('id')
+        return_value[firstNodeName].push(tmp_node);
+      }
+
+    } else {
+      debug('received invalid XML response', 0);
+    }
+
+    return return_value;
+  }
+
+  /**
+  * performs the necessary conversions for the XML response type
+  *
+  * @access   public
+  * @param    object    xml_document  a XMLHttpObject
+  * @return   object
+  */
+  this.xml_conversion = function(xml_document) {
+    return xml_document;
+  }
+  
+  /**
+  * performs the necessary conversions for the TEXT response type
+  *
+  * @access   public
+  * @param    string    text  the response text
+  * @return   string
+  */
+  this.text_conversion = function(text) {
+    return decode(text);
+  }
+  
+  /**
+  * performs the necessary conversions for the E4X response type
+  *
+  * @access   public
+  * @param    string    text  the response text
+  * @return   string
+  */
+  this.e4x_conversion = function(text) {
+    // remove <?xml ?>tag
+    text = text.replace(/^\<\?xml[^>]+\>/, '');
+    return new XML(text);
+  }
+  
+  /**
+  * performs the necessary conversions for the JSON response type
+  *
+  * @access   public
+  * @param    string    text  the response text
+  * @return   string
+  */
+  this.json_conversion = function(text) {
+    return JSON.parse(text);
+  }
+  
+  /**
+  * this method takes a HTML / XML node object and creates a
+  * JavaScript object structure from it.
+  *
+  * @access   public
+  * @param    object    stream    a node in the XML structure
+  * @return   object
+  */
+  var create_object_structure = function(stream) {
+    var return_value = new cpaint_result_object();
+    var node_name = '';
+    var i         = 0;
+    var attrib    = 0;
+    
+    if (stream.hasChildNodes() == true) {
+      for (i = 0; i < stream.childNodes.length; i++) {
+  
+        node_name = stream.childNodes[i].nodeName;
+        node_name = node_name.replace(/[^a-zA-Z0-9_]*/g, '');
+        
+        // reset / create subnode
+        if (typeof return_value[node_name] != 'object') {
+          return_value[node_name] = new Array();
+        }
+        
+        if (stream.childNodes[i].nodeType == 1) {
+          var tmp_node  = create_object_structure(stream.childNodes[i]);
+
+          for (attrib = 0; attrib < stream.childNodes[i].attributes.length; attrib++) {
+            tmp_node.set_attribute(stream.childNodes[i].attributes[attrib].nodeName, stream.childNodes[i].attributes[attrib].nodeValue);
+          }
+          
+          return_value[node_name].push(tmp_node);
+        
+        } else if (stream.childNodes[i].nodeType == 3) {
+          return_value.data  = decode(String(stream.firstChild.data));
+        }
+      }
+    }
+    
+    return return_value;
+  }
+
+  /**
+  * converts an encoded text back to viewable characters.
+  *
+  * @access     public
+  * @param      string      rawtext     raw text as provided by the backend
+  * @return     mixed
+  */
+  var decode = function(rawtext) {
+    var plaintext = ''; 
+    var i         = 0; 
+    var c1        = 0;
+    var c2        = 0;
+    var c3        = 0;
+    var u         = 0;
+    var t         = 0;
+
+    // remove special JavaScript encoded non-printable characters
+    while (i < rawtext.length) {
+      if (rawtext.charAt(i) == '\\'
+        && rawtext.charAt(i + 1) == 'u') {
+        
+        u = 0;
+        
+        for (j = 2; j < 6; j += 1) {
+          t = parseInt(rawtext.charAt(i + j), 16);
+          
+          if (!isFinite(t)) {
+            break;
+          }
+          u = u * 16 + t;
+        }
+
+        plaintext += String.fromCharCode(u);
+        i       += 6;
+      
+      } else {
+        plaintext += rawtext.charAt(i);
+        i++;
+      }
+    }
+
+    // convert numeric data to number type
+    if (plaintext != ''
+      && plaintext.search(/^\s+$/g) == -1
+      && !isNaN(plaintext) 
+      && isFinite(plaintext)) {
+      
+      plaintext = Number(plaintext);
+    }
+  
+    return plaintext;
+  }
+}
+
+/**
+* this is the basic prototype for a cpaint node object
+* as used in cpaint_call.parse_ajax_xml()
+*
+* @package      CPAINT
+* @access       public
+* @copyright    Copyright (c) 2005-2006 Paul Sullivan, Dominique Stender - http://sf.net/projects/cpaint
+* @author       Paul Sullivan <wiley14@gmail.com>
+* @author       Dominique Stender <dstender@st-webdevelopment.de>
+*/
+function cpaint_result_object() {
+  this.id           = 0;
+  this.data         = '';
+  var __attributes  = new Array();
+  
+  /**
+  * Returns a subnode with the given type and id.
+  *
+  * @access     public
+  * @param      string    type    The type of the subnode. Equivalent to the XML tag name.
+  * @param      string    id      The id of the subnode. Equivalent to the XML tag names id attribute.
+  * @return     object
+  */
+  this.find_item_by_id = function() {
+    var return_value  = null;
+    var type    = arguments[0];
+    var id      = arguments[1];
+    var i       = 0;
+    
+    if (this[type]) {
+
+      for (i = 0; i < this[type].length; i++) {
+
+        if (this[type][i].get_attribute('id') == id) {
+          return_value = this[type][i];
+          break;
+        }
+      }
+    }
+
+    return return_value;
+  }
+  
+  /**
+  * retrieves the value of an attribute.
+  *
+  * @access   public
+  * @param    string    name    name of the attribute
+  * @return   mixed
+  */
+  this.get_attribute = function() {
+    var return_value  = null;
+    var id            = arguments[0];
+    
+    if (typeof __attributes[id] != 'undefined') {
+      return_value = __attributes[id];
+    }
+    
+    return return_value;
+  }
+  
+  /**
+  * assigns a value to an attribute.
+  *
+  * if that attribute does not exist it will be created.
+  *
+  * @access     public
+  * @param      string    name    name of the attribute
+  * @param      string    value   value of the attribute
+  * @return     void
+  */
+  this.set_attribute = function() {
+    __attributes[arguments[0]] = arguments[1];
+  }
+}
+
+
+/*
+Copyright (c) 2005 JSON.org
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The Software shall be used for Good, not Evil.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+
+Array.prototype.______array = '______array';
+
+var JSON = {
+  org: 'http://www.JSON.org',
+  copyright: '(c)2005 JSON.org',
+  license: 'http://www.crockford.com/JSON/license.html',
+
+  stringify: function (arg) {
+    var c, i, l, s = '', v;
+    var numeric = true;
+    
+    switch (typeof arg) {
+    case 'object':
+      if (arg) {
+        if (arg.______array == '______array') {
+          // do a test whether all array keys are numeric
+          for (i in arg) {
+            if (i != '______array'
+              && (isNaN(i) 
+                || !isFinite(i))) {
+              numeric = false;
+              break;
+            }
+          }
+          
+          if (numeric == true) {
+            for (i = 0; i < arg.length; ++i) {
+              if (typeof arg[i] != 'undefined') {
+                v = this.stringify(arg[i]);
+                if (s) {
+                  s += ',';
+                }
+                s += v;
+              } else {
+                s += ',null';
+              }
+            }
+            return '[' + s + ']';
+          } else {
+            for (i in arg) {
+              if (i != '______array') {
+                v = arg[i];
+                if (typeof v != 'undefined' && typeof v != 'function') {
+                  v = this.stringify(v);
+                  if (s) {
+                    s += ',';
+                  }
+                  s += this.stringify(i) + ':' + v;
+                }
+              }
+            }
+            // return as object
+            return '{' + s + '}';
+          }
+        } else if (typeof arg.toString != 'undefined') {
+          for (i in arg) {
+            v = arg[i];
+            if (typeof v != 'undefined' && typeof v != 'function') {
+              v = this.stringify(v);
+              if (s) {
+                s += ',';
+              }
+              s += this.stringify(i) + ':' + v;
+            }
+          }
+          return '{' + s + '}';
+        }
+      }
+      return 'null';
+    case 'number':
+      return isFinite(arg) ? String(arg) : 'null';
+    case 'string':
+      l = arg.length;
+      s = '"';
+      for (i = 0; i < l; i += 1) {
+        c = arg.charAt(i);
+        if (c >= ' ') {
+          if (c == '\\' || c == '"') {
+            s += '\\';
+          }
+          s += c;
+        } else {
+          switch (c) {
+            case '\b':
+              s += '\\b';
+              break;
+            case '\f':
+              s += '\\f';
+              break;
+            case '\n':
+              s += '\\n';
+              break;
+            case '\r':
+              s += '\\r';
+              break;
+            case '\t':
+              s += '\\t';
+              break;
+            default:
+              c = c.charCodeAt();
+              s += '\\u00' + Math.floor(c / 16).toString(16) +
+                (c % 16).toString(16);
+          }
+        }
+      }
+      return s + '"';
+    case 'boolean':
+      return String(arg);
+    default:
+      return 'null';
+    }
+  },
+  parse: function (text) {
+    var at = 0;
+    var ch = ' ';
+
+    function error(m) {
+      throw {
+        name: 'JSONError',
+        message: m,
+        at: at - 1,
+        text: text
+      };
+    }
+
+    function next() {
+      ch = text.charAt(at);
+      at += 1;
+      return ch;
+    }
+
+    function white() {
+      while (ch != '' && ch <= ' ') {
+        next();
+      }
+    }
+
+    function str() {
+      var i, s = '', t, u;
+
+      if (ch == '"') {
+outer:      while (next()) {
+          if (ch == '"') {
+            next();
+            return s;
+          } else if (ch == '\\') {
+            switch (next()) {
+            case 'b':
+              s += '\b';
+              break;
+            case 'f':
+              s += '\f';
+              break;
+            case 'n':
+              s += '\n';
+              break;
+            case 'r':
+              s += '\r';
+              break;
+            case 't':
+              s += '\t';
+              break;
+            case 'u':
+              u = 0;
+              for (i = 0; i < 4; i += 1) {
+                t = parseInt(next(), 16);
+                if (!isFinite(t)) {
+                  break outer;
+                }
+                u = u * 16 + t;
+              }
+              s += String.fromCharCode(u);
+              break;
+            default:
+              s += ch;
+            }
+          } else {
+            s += ch;
+          }
+        }
+      }
+      error("Bad string");
+    }
+
+    function arr() {
+      var a = [];
+
+      if (ch == '[') {
+        next();
+        white();
+        if (ch == ']') {
+          next();
+          return a;
+        }
+        while (ch) {
+          a.push(val());
+          white();
+          if (ch == ']') {
+            next();
+            return a;
+          } else if (ch != ',') {
+            break;
+          }
+          next();
+          white();
+        }
+      }
+      error("Bad array");
+    }
+
+    function obj() {
+      var k, o = {};
+
+      if (ch == '{') {
+        next();
+        white();
+        if (ch == '}') {
+          next();
+          return o;
+        }
+        while (ch) {
+          k = str();
+          white();
+          if (ch != ':') {
+            break;
+          }
+          next();
+          o[k] = val();
+          white();
+          if (ch == '}') {
+            next();
+            return o;
+          } else if (ch != ',') {
+            break;
+          }
+          next();
+          white();
+        }
+      }
+      error("Bad object");
+    }
+
+    function assoc() {
+      var k, a = [];
+
+      if (ch == '<') {
+        next();
+        white();
+        if (ch == '>') {
+          next();
+          return a;
+        }
+        while (ch) {
+          k = str();
+          white();
+          if (ch != ':') {
+            break;
+          }
+          next();
+          a[k] = val();
+          white();
+          if (ch == '>') {
+            next();
+            return a;
+          } else if (ch != ',') {
+            break;
+          }
+          next();
+          white();
+        }
+      }
+      error("Bad associative array");
+    }
+
+    function num() {
+      var n = '', v;
+      if (ch == '-') {
+        n = '-';
+        next();
+      }
+      while (ch >= '0' && ch <= '9') {
+        n += ch;
+        next();
+      }
+      if (ch == '.') {
+        n += '.';
+        while (next() && ch >= '0' && ch <= '9') {
+          n += ch;
+        }
+      }
+      if (ch == 'e' || ch == 'E') {
+        n += 'e';
+        next();
+        if (ch == '-' || ch == '+') {
+          n += ch;
+          next();
+        }
+        while (ch >= '0' && ch <= '9') {
+          n += ch;
+          next();
+        }
+      }
+      v = +n;
+      if (!isFinite(v)) {
+        error("Bad number");
+      } else {
+        return v;
+      }
+    }
+
+    function word() {
+      switch (ch) {
+        case 't':
+          if (next() == 'r' && next() == 'u' && next() == 'e') {
+            next();
+            return true;
+          }
+          break;
+        case 'f':
+          if (next() == 'a' && next() == 'l' && next() == 's' &&
+              next() == 'e') {
+            next();
+            return false;
+          }
+          break;
+        case 'n':
+          if (next() == 'u' && next() == 'l' && next() == 'l') {
+            next();
+            return null;
+          }
+          break;
+      }
+      error("Syntax error");
+    }
+
+    function val() {
+      white();
+      switch (ch) {
+        case '{':
+          return obj();
+        case '[':
+          return arr();
+        case '<':
+          return assoc();
+        case '"':
+          return str();
+        case '-':
+          return num();
+        default:
+          return ch >= '0' && ch <= '9' ? num() : word();
+      }
+    }
+
+    return val();
+  }
+};
+
+
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
