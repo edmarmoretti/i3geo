@@ -146,7 +146,9 @@ i3GEO.gadgets = {
 			//if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display == "block"){return;}
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 			{return;}
+			if($i("wdoca")){return;}
 			var tempUtm = function(retorno){
+				//alert(retorno)
 				setTimeout("$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';",3400);
 				var temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){

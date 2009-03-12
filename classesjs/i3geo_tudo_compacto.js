@@ -1863,10 +1863,13 @@ function cpaint_call() {
   */
   var callback = function() {
     var response = null;
-
     if (httpobj.readyState == 4
       && httpobj.status == 200) {
-      
+      if(httpobj.responseText == ""){
+      	alert("O servidor demorou muito - timeout");
+		client_callback("", "erro");
+		return;
+      }
       debug(httpobj.responseText, 1);
       debug('using response type ' + config['response_type'], 2);
       
@@ -1900,16 +1903,33 @@ function cpaint_call() {
       // call client side callback
       if (response != null 
         && typeof client_callback == 'function') {
-        client_callback(response, httpobj.responseText);
+        try{
+        	if(response.data)
+        		client_callback(response, httpobj.responseText);
+        	else
+        		client_callback("", "erro");
+        }
+        catch(e){
+        	client_callback("", "erro");
+        }
       }
       // remove ourselves from the stack
       remove_from_stack();
     
-    } else if (httpobj.readyState == 4
-      && httpobj.status != 200) {
-      // HTTP error of some kind
-      debug('invalid HTTP response code \'' + Number(httpobj.status) + '\'', 0);
-      //client_callback("", "");
+    } else
+    {       
+		if(httpobj.readyState==4&&httpobj.status!=200)
+		{
+			debug('invalid HTTP response code \''+Number(httpobj.status)+'\'',0);
+			if(httpobj.status==500){
+				alert("O servidor demorou muito - timeout");
+				client_callback("", "erro");	
+			}
+			else{
+				client_callback("", "erro");
+			}
+		}      
+      
     }
   }
 
@@ -18995,7 +19015,9 @@ i3GEO.gadgets = {
 			//if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display == "block"){return;}
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 			{return;}
+			if($i("wdoca")){return;}
 			var tempUtm = function(retorno){
+				//alert(retorno)
 				setTimeout("$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';",3400);
 				var temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){
