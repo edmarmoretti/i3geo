@@ -406,7 +406,7 @@ i3GEO.calculo = {
 	ext2rect: function(idrect,mapext,boxext,pixel,documento){
    		var rectbox = boxext.split(" ");
    		var rectmap = mapext.split(" ");
-   		
+   		/*
    		if (rectbox[0]*1 < rectmap[0]*1){rectbox[0] = rectmap[0]}
    		if (rectbox[0]*1 > rectmap[2]*1){rectbox[0] = rectmap[2]}
    		if (rectbox[2]*1 > rectmap[2]*1){rectbox[2] = rectmap[2]}
@@ -416,7 +416,7 @@ i3GEO.calculo = {
    		if (rectbox[2]*1 > rectmap[3]*1){rectbox[2] = rectmap[3]}
    		if (rectbox[1]*1 < rectmap[1]*1){rectbox[1] = rectmap[1]}
    		if (rectbox[3]*1 < rectmap[1]*1){rectbox[3] = rectmap[1]}
-   		
+   		*/
    		var xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
    		var xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
 		var w = xyMax[0]-xyMin[0];

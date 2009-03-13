@@ -445,6 +445,7 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan",i3GEO.interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				marcadorZoom = "";
+				
 				panMapaInicia = function(){
 					if ($i("img") && (g_tipoacao == "pan")){
 						g_panM = "sim";
@@ -456,6 +457,15 @@ i3GEO.configura = {
 						clicinicialy = objposicaocursor.imgy;
 						ddinicialx = objposicaocursor.ddx;
 						ddinicialy = objposicaocursor.ddy;
+						//
+						//faz os cálculos para o posicionamento do box sobre o mapa de referência
+						//
+						boxrefObj = $i("boxref");
+						if(boxrefObj){
+							proporcaoBox = i3GEO.parametros.w / parseInt(boxrefObj.style.width);
+							boxrefObjLeft = parseInt(boxrefObj.style.left);
+							boxrefObjTop = parseInt(boxrefObj.style.top);
+						}
 					}
 				};
 				panMapaDesloca = function(){
@@ -471,6 +481,10 @@ i3GEO.configura = {
 							if (parseInt($i("i3geo").style.top))
 							{var t = parseInt($i("i3geo").style.top);}
 							$i(i3GEO.interface.IDMAPA).style.top = ny - t;
+							if(boxrefObj){
+								boxrefObj.style.left = boxrefObjLeft - (nx / proporcaoBox);
+								boxrefObj.style.top = boxrefObjTop - (ny / proporcaoBox);
+							}
 						}
 						else{
 							$left("img",i3GEO.parametros.w*-1 + nx);
