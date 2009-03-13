@@ -303,6 +303,8 @@ function montaParametrosTemas(no,dados,redesenha)
     if(!tree.getNodeByProperty("etiquetaClasses",no.data.id))
     {
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" title='adiciona classe' src=\"../imagens/05.png\" />&nbsp;"
+		conteudo += "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" title='gerar classes' src=\"../imagens/classificar.gif\" />&nbsp;"
+
 		//conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasses('"+codigoMap+"','"+codigoLayer+"')\" title='classes' src=\"../imagens/06.png\" />"
 		var d = {tipo:"etiquetaClasses",etiquetaClasses:no.data.id,html:conteudo+"<i>&nbsp;Classes:</i>"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
@@ -505,6 +507,83 @@ function adicionaNovaClasse(codigoMap,codigoLayer,indiceClasse)
 		argument: { foo:"foo", bar:"bar" }
 	}; 
 	core_makeRequest(sUrl,callback)
+}
+function classesAuto(codigoMap,codigoLayer)
+{
+	function on_editorCheckBoxChange(p_oEvent)
+	{
+		var ins = "";
+		if(p_oEvent.newValue.get("value") == "OK" && document.getElementById("itens").value != "")
+		{
+			core_carregando("ativa");
+			core_carregando(" gerando as classes");
+			var sUrl = "../php/editormapfile.php?funcao=autoClassesLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&item="+document.getElementById("itens").value;
+			var callback2 =
+			{
+  				success:function(o)
+  				{
+  					try
+  					{
+						var dados = YAHOO.lang.JSON.parse(o.responseText)				
+						var nos = tree.getNodesByProperty("classes",codigoMap+"_"+codigoLayer)
+						for (var i=0, j=nos.length; i<j; i++)
+						{tree.removeNode(nos[i],false)}
+						var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
+						montaParametrosTemas(no,dados)
+  						core_carregando("desativa");
+  					}
+  					catch(e){core_handleFailure(o,o.responseText);core_carregando("desativa");}
+  				},
+  				failure:core_handleFailure,
+  				argument: { foo:"foo", bar:"bar" }
+			};		
+			core_makeRequest(sUrl,callback2)
+		}
+		else
+		{
+			YAHOO.example.container.panelEditorAutoClasses.destroy();
+			YAHOO.example.container.panelEditorAutoClasses = null;
+		}
+	};
+	if(!YAHOO.example.container.panelEditorAutoClasses)
+	{
+		var novoel = document.createElement("div");
+		novoel.id =  "janela_editor";
+		var ins = '<div class="hd">Editor</div>';
+		ins += "<div class='bd' style='height:354px;overflow:auto'>";
+		ins += "<div id='okcancel_checkbox'></div><div id='editor_bd'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		var editorBotoes = new YAHOO.widget.ButtonGroup({id:"okcancel_checkbox_id", name:  "okcancel_checkbox_id", container:  "okcancel_checkbox" });
+		editorBotoes.addButtons([
+            { label: "Criar classes", value: "OK", checked: false},
+            { label: "Cancela", value: "CANCEL", checked: false }
+        ]);
+		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
+		YAHOO.example.container.panelEditorAutoClasses = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
+		YAHOO.example.container.panelEditorAutoClasses.render();
+		var sUrl = "../php/editormapfile.php?funcao=pegaItensLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer;
+		var callback =
+		{
+  			success:function(o)
+  			{
+  				try
+  				{
+  					ins = "<p>Itens encontrados na tabela de atributos do layer. Escolha um deles para ser utilizado na expressão de seleção de cada classe</p>"
+  					ins += "<select  id='itens' >"
+  					ins += core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
+  					ins += "</select></p>"
+  					$i("editor_bd").innerHTML = ins;
+  					core_carregando("desativa");
+  				}
+  				catch(e){core_handleFailure(o,o.responseText);core_carregando("desativa");}
+  			},
+  			failure:core_handleFailure,
+  			argument: { foo:"foo", bar:"bar" }
+		};		
+		core_makeRequest(sUrl,callback)
+	}
+	YAHOO.example.container.panelEditorAutoClasses.show();
 }
 function adicionaNovoEstilo(codigoMap,codigoLayer,indiceClasse)
 {

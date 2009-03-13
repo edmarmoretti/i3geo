@@ -47,6 +47,10 @@ switch ($funcao)
 		retornaJSON(pegaLayers());
 		exit;
 	break;
+	case "pegaItensLayer":
+		retornaJSON(pegaItensLayer());
+		exit;
+	break;
 	case "excluirMapfile":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -83,6 +87,13 @@ switch ($funcao)
 		exit;
 	break;	
 	case "listaClasses":
+		retornaJSON(listaClasses());
+		exit;
+	break;
+	case "autoClassesLayer":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		autoClassesLayer();
 		retornaJSON(listaClasses());
 		exit;
 	break;
@@ -287,6 +298,39 @@ function criarNovoLayer()
 	removeCabecalho($mapfile);
 	return array("layers"=>(array($nl->name)));
 }
+function autoClassesLayer()
+{
+	global $codigoMap,$codigoLayer,$item,$locaplic,$dir_tmp;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	include_once("../../classesphp/classe_alteraclasse.php");
+	error_reporting(E_ALL);
+	$nometemp = $dir_tmp."/".nomerandomico().".map";
+	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+	{$geral = $locaplic."/aplicmap/geral1windows.map";}
+	else
+	{$geral = $locaplic."aplicmap/geral1.map";}
+	$mapageral = ms_newMapObj($geral);
+	$nomestemp = $mapageral->getalllayernames();
+	foreach($nomestemp as $l)
+	{
+		$layertemp = $mapageral->getlayerbyname($l);
+		$layertemp->set("status",MS_DELETE);
+	}
+	$mapatemp = ms_newMapObj($mapfile);
+	$nomestemp = $mapatemp->getalllayernames();
+	foreach($nomestemp as $l)
+	{
+		$layertemp = $mapatemp->getlayerbyname($l);
+		ms_newLayerObj($mapageral, $layertemp);
+	}
+	$mapageral->save($nometemp);
+	$m = new Alteraclasse($nometemp,$codigoLayer);
+	$m->valorunico($item,"");
+	$m->salva();
+	$mapatemp = ms_newMapObj($nometemp);
+	$mapatemp->save($mapfile);
+	removeCabecalho($mapfile);
+}
 function criarNovaClasse()
 {
 	global $codigoMap,$codigoLayer,$locaplic;
@@ -312,6 +356,18 @@ function criarNovoEstilo()
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	$dados[] = array("estilo"=>$numestilos);
+	return $dados;
+}
+function pegaItensLayer()
+{
+	global $codigoMap,$locaplic,$codigoLayer;
+	$mapfile = $locaplic."/temas/".$codigoMap.".map";
+	$mapa = ms_newMapObj($mapfile);
+	$layer = $mapa->getlayerbyname($codigoLayer);
+	$layer->open();
+	$itens = $layer->getitems();
+	$layer->close();
+	$dados["itens"] = $itens;
 	return $dados;
 }
 function pegaLayers()
