@@ -116,12 +116,20 @@ function verifica($map)
 	}
 	ms_ResetErrorList();
 	$tema = "";
-	$map = str_replace("\\","/",$map);
-	$map = basename($map);
-	if (file_exists('temas/'.$map))
-	{$tema = 'temas/'.$map;}
-	if (file_exists('temas/'.$map.'.map'))
-	{$tema = 'temas/'.$map.".map";}
+
+	if(file_exists($map))
+	$tema = $map;
+	else
+	{	
+		$map = str_replace("\\","/",$map);
+		$map = basename($map);
+		if (file_exists('temas/'.$map))
+		{$tema = 'temas/'.$map;}
+		if (file_exists('temas/'.$map.'.map'))
+		{$tema = 'temas/'.$map.".map";}
+	}
+
+	
 	if(($tipo == "") || ($tipo == "todos"))
 	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
 	if ($tema != "")
@@ -137,6 +145,12 @@ function verifica($map)
 		else
 		{
 			echo "erro no arquivo $map <br>";
+			$error = ms_GetErrorObj();
+			while($error && $error->code != MS_NOERR)
+			{
+				printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+				$error = $error->next();
+			}
 			return;
 		}
 		$temasn = $nmapa->getAllLayerNames();

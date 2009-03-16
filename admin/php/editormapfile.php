@@ -147,8 +147,11 @@ switch ($funcao)
 	case "alterarConexao":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		alterarConexao();
+		$retorno = alterarConexao();
+		if($testar == false)
 		retornaJSON(pegaConexao());
+		else
+		retornaJSON(array("url"=>$retorno));
 		exit;
 	break;
 	case "pegaMetadados":
@@ -169,9 +172,12 @@ switch ($funcao)
 	case "alterarGeral":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-		alterarGeral();
-		$codigoLayer = $name;
+		$retorno = alterarGeral();
+		
+		if($testar == false)
 		retornaJSON(pegaGeral());
+		else
+		retornaJSON(array("url"=>$retorno));		
 		exit;
 	break;
 	case "pegaClasseGeral":
@@ -469,7 +475,7 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
+	global $dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -478,9 +484,19 @@ function alterarConexao()
 	$layer->set("data",$data);
 	$layer->set("tileitem",$tileitem);
 	$layer->set("tileindex",$tileindex);
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";
+	if($testar == true)
+	{
+		$nome = $dir_tmp."/".$codigoMap.".map";
+		$mapa->save($nome);
+		removeCabecalho($nome,false);
+		return $nome;
+	}
+	else
+	{
+		$mapa->save($mapfile);
+		removeCabecalho($mapfile);
+		return "ok";
+	}
 }
 function pegaMetadados()
 {
@@ -580,7 +596,7 @@ function pegaGeral()
 }
 function alterarGeral()
 {
-	global $codigoMap,$codigoLayer,$locaplic,$name,$projection,$sizeunits,$status,$toleranceunits,$tolerance,$symbolscale,$opacity,$offsite,$minscale,$maxscale,$labelsizeitem,$labelminscale,$labelmaxscale,$labelitem,$group,$filteritem,$type,$filter;
+	global $dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$name,$projection,$sizeunits,$status,$toleranceunits,$tolerance,$symbolscale,$opacity,$offsite,$minscale,$maxscale,$labelsizeitem,$labelminscale,$labelmaxscale,$labelitem,$group,$filteritem,$type,$filter;
 	error_reporting(E_ALL);
 	$v = versao();
 	$dados = array();
@@ -620,6 +636,14 @@ function alterarGeral()
 	$layer->setprojection($projection);
 	if($layer->getprojection() == MS_FALSE && $projection != "")
 	$layer->setprojection($projection);
+
+	if($testar == true)
+	{
+		$nome = $dir_tmp."/".$codigoMap.".map";
+		$mapa->save($nome);
+		removeCabecalho($nome,false);
+		return $nome;
+	}
 	
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -834,15 +858,18 @@ function alterarEstilo()
 	return "ok";
 }
 
-function removeCabecalho($arq)
+function removeCabecalho($arq,$symbolset=true)
 {
 	global $postgis_mapa;
 	restauraCon($arq,$postgis_mapa);
 	$handle = fopen($arq, "r");
 	if ($handle)
 	{
-    	$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
-    	$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
+    	if($symbolset)
+    	{
+    		$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
+    		$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
+    	}
     	$grava = false;
     	while (!feof($handle)) 
     	{

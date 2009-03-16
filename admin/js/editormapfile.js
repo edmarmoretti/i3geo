@@ -760,6 +760,7 @@ function montaEditorConexao(dados)
 		ins += "<p>Os seguintes 'alias' estão disponíveis para uso na opção 'connection': ";
 		ins += dados.postgis_mapa+"</p>"
 	}
+	ins += "<input type=button title='Testar' value='Testar' id=testarEditor />"
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
@@ -767,9 +768,14 @@ function montaEditorConexao(dados)
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype)
 	temp += "</select>"
 	$i("cConnectiontype").innerHTML = temp
+
 	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer)}
+	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,false)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+
+	var temp = function()
+	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,true)}
+	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
 }
 function montaEditorMetadados(dados)
 {
@@ -891,11 +897,13 @@ function montaEditorGeral(dados)
 		]
 	}
 	var ins = "<input type=button title='Salvar' value='Salvar' id=salvarEditor />"
+	ins += "<input type=button title='Testar' value='Testar' id=testarEditor />"
 	if(dados.colunas != "")
 	{
 		ins += "<p>O layer possuí as seguintes colunas na tabela de atributos: ";
 		ins += dados.colunas+"</p>"
 	}
+	
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
@@ -918,8 +926,13 @@ function montaEditorGeral(dados)
 	$i("cToleranceunits").innerHTML = temp
 
 	var temp = function()
-	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer)}
+	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,false)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
+	
+	var temp = function()
+	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,true)}
+	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
+
 }
 function montaEditorClasseGeral(dados)
 {
@@ -1105,8 +1118,9 @@ function montaEditorEstilo(dados)
 	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});	
 }
-function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
+function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
+	if(arguments.lenght == 5){var testar = false;}
 	if(tipo == "conexao")
 	{
 		var campos = new Array("connection","data","connectiontype","tileitem","tileindex")
@@ -1151,7 +1165,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse+"&indiceEstilo="+indiceEstilo
 		var prog = "../php/editormapfile.php?funcao=alterarEstilo"	
 	}
-
+	prog += "&testar="+testar;
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]).value)}
 	core_carregando("ativa");
@@ -1170,27 +1184,32 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo)
   				}
   				else
   				{
-  					if(tipo=="conexao")
-  					{montaEditorConexao(YAHOO.lang.JSON.parse(o.responseText));}
-  					if(tipo=="metadados")
-  					{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
-  					if(tipo=="geral")
-  					{
-  						var d = YAHOO.lang.JSON.parse(o.responseText)
-  						montaEditorGeral(d);
-  						if(d.name != codigoLayer)
+  					if(testar == false){
+  						if(tipo=="conexao")
+  						{montaEditorConexao(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="metadados")
+  						{montaEditorMetadados(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="geral")
   						{
-  							core_pegaMapfiles("montaArvore()")
-							YAHOO.example.container.panelEditor.destroy();
-							YAHOO.example.container.panelEditor = null;  							
+  							var d = YAHOO.lang.JSON.parse(o.responseText)
+  							montaEditorGeral(d);
+  							if(d.name != codigoLayer)
+  							{
+  								core_pegaMapfiles("montaArvore()")
+								YAHOO.example.container.panelEditor.destroy();
+								YAHOO.example.container.panelEditor = null;  							
+  							}
   						}
+  						if(tipo=="classeGeral")
+  						{montaEditorClasseGeral(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="classeLabel")
+  						{montaEditorClasseLabel(YAHOO.lang.JSON.parse(o.responseText));}
+  						if(tipo=="estilo")
+  						{montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));}
   					}
-  					if(tipo=="classeGeral")
-  					{montaEditorClasseGeral(YAHOO.lang.JSON.parse(o.responseText));}
-  					if(tipo=="classeLabel")
-  					{montaEditorClasseLabel(YAHOO.lang.JSON.parse(o.responseText));}
-  					if(tipo=="estilo")
-  					{montaEditorEstilo(YAHOO.lang.JSON.parse(o.responseText));}
+  					else{
+  						window.open("../../testamapfile.php?map="+YAHOO.lang.JSON.parse(o.responseText).url)
+  					}
   					core_carregando("desativa");
   				}
   			}
