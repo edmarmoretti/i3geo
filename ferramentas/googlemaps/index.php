@@ -173,7 +173,6 @@ include_once("../../ms_configura.php");
         parametros += '&tilemode=gmap';
         parametros += '&tile={X}+{Y}+{Z}';
    		return(cgi+parametros);		
-    	
     }
     function ativaI3geo()
     {
@@ -219,6 +218,7 @@ include_once("../../ms_configura.php");
     		counterClick = 0;
     		GEvent.removeListener(rotaEvento)
     		constroiRota()
+    		montaRota();
     	}
     }
     
@@ -263,8 +263,6 @@ include_once("../../ms_configura.php");
     			place = response.Placemark[0];
     			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
     			marker = new GMarker(point);
-    			
-    			/*
     			marker.openInfoWindowHtml(
         			'<b>orig latlng:</b>' + response.name + '<br/>' + 
         			'<b>latlng:</b>' + place.Point.coordinates[0] + "," + place.Point.coordinates[1] + '<br>' +
@@ -273,7 +271,6 @@ include_once("../../ms_configura.php");
         			'<b>Address:</b>' + place.address + '<br>' +
         			'<b>Accuracy:</b>' + place.AddressDetails.Accuracy + '<br>' +
         			'<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode);
-    			*/
     			endereco1 = place.address;
     			endereco1 = window.prompt("Endereco do inicio",endereco1)
     			if (endereco1!=null && endereco1!="")
@@ -282,10 +279,8 @@ include_once("../../ms_configura.php");
     				geocoder.getLocations(pontoRota2, pt2);
     			}
     		}
-    		
-    		
     	}
-    	geocoder.getLocations(pontoRota1, pt1);
+    	//geocoder.getLocations(pontoRota1, pt1);
     }
 	function montaRota()
 	{
@@ -301,7 +296,8 @@ include_once("../../ms_configura.php");
 			descrota.innerHTML = ""
 		}
 		directions = new GDirections(map, descrota);
-		directions.load("from: "+endereco1+" to: "+endereco2);
+		//directions.load("from: "+endereco1+" to: "+endereco2);
+		directions.load("from: "+pontoRota1.lat()+","+pontoRota1.lng()+" to: "+pontoRota2.lat()+","+pontoRota2.lng());
 		GEvent.addListener(directions, "load", function() {
 			var linha = directions.getPolyline();
 			var nvertices = linha.getVertexCount();
