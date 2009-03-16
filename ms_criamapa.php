@@ -81,7 +81,7 @@ nometemawkt - nome do tema em wkt
 
 debug - ativa o retorno de mensagens de erro do PHP sim|nao
 
-idioma - idioma da interface
+idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js
 */
 
 /*
@@ -120,6 +120,11 @@ if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else
 {error_reporting(E_ALL);$debug="sim";}
+/*
+Define o cookie para o idioma da interface
+*/
+if(isset($idioma) && $idioma != "")
+setcookie("i3geolingua", $idioma);
 /*
 Note: Prepara as variáveis que serão incluidas na seção
 
