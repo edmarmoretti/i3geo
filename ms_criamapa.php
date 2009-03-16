@@ -82,6 +82,8 @@ nometemawkt - nome do tema em wkt
 debug - ativa o retorno de mensagens de erro do PHP sim|nao
 
 idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js
+
+kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
 */
 
 /*
@@ -150,6 +152,7 @@ $tituloInstituicao_ = $tituloInstituicao;
 $atlasxml_ = $atlasxml;
 $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
+$kmlurl_ = $kmlurl;
 //
 //se houver string de conexão para substituição
 //o modo cgi não irá funcionar
@@ -208,6 +211,7 @@ $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
+$_SESSION["kmlurl"] = $kmlurl_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());

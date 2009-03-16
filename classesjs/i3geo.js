@@ -46,21 +46,7 @@ object - objeto javaScript
 */
 var $i = function(id)
 {return document.getElementById(id);};
-/*
-Function: $trad
 
-Pega o termo traduzido para uma lingua específica
-
-Parameters:
-
-id - id que identifica o texto na variável g_linguagem, definida em configura.js
-*/
-//var g_linguagem = "";
-//var g_traducao = "";
-var $trad = function(id)
-{
-	return eval("g_traducao."+id+"[0]."+g_linguagem+";");
-};
 //necessario para nao dar erro no refresh
 
 var scriptLocation = "";

@@ -97,6 +97,8 @@ i3GEO = {
 	extentref {String} - extensão geográfica do mapa de referência
 	
 	celularef {Numeric} - tamanho do pixel do mapa de referência em unidades do terreno
+	
+	kmlurl {String} - url de um arquivo kml que será inserido no mapa. Válido apenas na interface Google Maps
 	*/
 	parametros: {
 		mapexten: "",
@@ -119,7 +121,8 @@ i3GEO = {
 		locidentifica:"",
 		r:"",
 		locmapas:"",
-		celularef:""
+		celularef:"",
+		kmlurl:""
 	},
 	/*
 	Variable: temaAtivo
@@ -198,7 +201,6 @@ i3GEO = {
 			$i("contemImg").style.width=w + "px";
 		}
 		i3GEO.interface.cria(w,h);
-		
 		i3GEO.parametros = {
 			mapexten: "",
 			mapscale: "",
@@ -220,7 +222,8 @@ i3GEO = {
 			locidentifica:"",
 			r:"",
 			locmapas:"",
-			extentref:""
+			extentref:"",
+			kmlurl:""
 		};
 		if(w < 550){
 			var i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
@@ -289,6 +292,7 @@ i3GEO = {
 					i3GEO.parametros.extentref = extentref;
 					i3GEO.parametros.versaoms = versaoms;
 					i3GEO.parametros.versaomscompleta = versaomscompleta;
+					i3GEO.parametros.kmlurl = kmlurl;
 					
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);

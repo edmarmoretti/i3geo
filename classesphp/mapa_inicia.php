@@ -63,6 +63,8 @@ locmapserv - Variável definida no arquivo ms_configura.php que indica nome do ma
 
 postgis_con - Variável definida no arquivo ms_configura.php que indica qual conexão postgis deve ser utilizada (algumas funções de análise utilizam essa conexão, se existir)
 
+kmlurl - url de um arquivo kml que será inserido no mapa. Válido para a interface google maps
+
 Return:
 
 objeto cpaint contendo uma string como no exemplo abaixo
@@ -73,7 +75,7 @@ Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 */
 function iniciaMapa()
 {
-	global $tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	global $kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//pega o xml com os sietmas para identificação
 	//
@@ -214,6 +216,7 @@ function iniciaMapa()
 	$res .= ";var geoip='".$geoip."';";
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
 	$res .= "var mensagens ='".$m->pegaMensagens()."';";
+	$res .= "var kmlurl ='".$kmlurl."';";
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));
 }

@@ -249,6 +249,7 @@ http://<host>/i3geo/ms_criamapa.php
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 var g_3dmap = "3dmap.map";
+
 i3GEO.cria()
 //Log
 /*
@@ -262,7 +263,9 @@ i3geoLog.show();
 	Inicializa o mapa
 */
 //i3GEO.guias.ATUAL = "legenda"
+
 i3GEO.inicia();
+
 //esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
 if($i("escala") && i3GEO.parametros.w < 500)
 {$i("escala").style.display="none";}

@@ -535,6 +535,8 @@ i3GEO.interface = {
     		});
     		g_operacao = "";
     		g_tipoacao = "";
+    		if(i3GEO.parametros.kmlurl != "")
+    		{i3GEO.mapa.insereKml(true,i3GEO.parametros.kmlurl)}
 		},
 		bbox: function(){
 			var bd = i3GeoMap.getBounds();

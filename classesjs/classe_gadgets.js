@@ -817,7 +817,6 @@ i3GEO.gadgets = {
  				ins += '</ul>'; 
  				ins += '</div>';
  				objid.innerHTML=ins;
-
  			}
 			var onMenuBarBeforeRender = function (p_sType, p_sArgs){
 				if(i3GEO.parametros.w >= 500)

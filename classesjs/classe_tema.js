@@ -167,6 +167,8 @@ i3GEO.tema = {
 		Function: abreKml
 
 		Abre a janela para mostrar o link de acesso a um tema via kml.
+		
+		O tema em questão é um dos que constam na árvore de temas
 
 		Parameters:
 
