@@ -20,68 +20,62 @@ FONTSET   "../symbols/fontes.txt"
     TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME "Cerrado"
-      EXPRESSION ('[id]'eq '3')
+      NAME "6"
+      EXPRESSION ('[gid]'eq'6')
       STYLE
         ANGLE 360
-        COLOR 244 214 0
+        COLOR 222 45 254
         OPACITY 100
-        OUTLINECOLOR 50 50 50
         SYMBOL 0
       END
     END
     CLASS
-      NAME "Pantanal"
-      EXPRESSION ('[id]'eq '6')
+      NAME "5"
+      EXPRESSION ('[gid]'eq'5')
       STYLE
         ANGLE 360
-        COLOR 200 200 241
+        COLOR 202 254 0
         OPACITY 100
-        OUTLINECOLOR 50 50 50
         SYMBOL 0
       END
     END
     CLASS
-      NAME "Amaz"
-      EXPRESSION ('[id]'eq '1')
-      KEYIMAGE ""
-      LABEL
-        SIZE MEDIUM
-        TYPE BITMAP
-        BUFFER 0
-        COLOR 0 255 0
-        FORCE FALSE
-        MINDISTANCE -1
-        MINFEATURESIZE -1
-        OFFSET 0 0
-        PARTIALS TRUE
-        POSITION CC
-      END
+      NAME "4"
+      EXPRESSION ('[gid]'eq'4')
       STYLE
         ANGLE 360
-        COLOR 255 0 0
+        COLOR 29 234 16
         OPACITY 100
-      END
-    END
-    CLASS
-      NAME "Pampa"
-      EXPRESSION ('[id]'eq '5')
-      STYLE
-        ANGLE 360
-        COLOR 143 189 192
-        OPACITY 100
-        OUTLINECOLOR 50 50 50
         SYMBOL 0
       END
     END
     CLASS
-      NAME "Mata Atlântica"
-      EXPRESSION ('[id]'eq '4')
+      NAME "3"
+      EXPRESSION ('[gid]'eq'3')
       STYLE
         ANGLE 360
-        COLOR 218 255 216
+        COLOR 212 224 95
         OPACITY 100
-        OUTLINECOLOR 50 50 50
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "2"
+      EXPRESSION ('[gid]'eq'2')
+      STYLE
+        ANGLE 360
+        COLOR 125 218 150
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "1"
+      EXPRESSION ('[gid]'eq'1')
+      STYLE
+        ANGLE 360
+        COLOR 221 81 220
+        OPACITY 100
         SYMBOL 0
       END
     END

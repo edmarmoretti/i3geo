@@ -33,6 +33,16 @@ Configuração do i3geo
 
 Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
 o funcionamento do i3geo.
+
+Exemplo:
+
+i3GEO.configura.embedLegenda = "nao"
+
+i3GEO.configura.cursores.ff = "/imagens/cursores/identifica2.png"
+
+i3GEO.configura.cursores.ie = "/imagens/cursores/identifica2.cur"
+
+alert(i3GEO.configura.locaplic)
 */
 i3GEO.configura = {
 	/*

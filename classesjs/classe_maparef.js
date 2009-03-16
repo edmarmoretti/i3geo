@@ -30,6 +30,10 @@ if(typeof(i3GEO) == 'undefined'){
 Class: i3GEO.maparef
 
 Cria e processa o mapa de referência
+
+Exemplo:
+
+i3Geo.maparef.inicia()
 */
 i3GEO.maparef = {
 	/*
@@ -54,8 +58,7 @@ i3GEO.maparef = {
 			var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 			ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 			var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
-			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";
-			
+			ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";		
 			ins += "<select id='refDinamico' onchange='javascript:i3GEO.maparef.atualiza()'>";
 			ins += "<option value='fixo' select >fixo</option>";
 			ins += "<option value='mapa' >mapa</option>";

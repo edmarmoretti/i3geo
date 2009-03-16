@@ -80,7 +80,10 @@ wkt - insere elementos no mapa com coordenadas definidas em wkt
 nometemawkt - nome do tema em wkt
 
 debug - ativa o retorno de mensagens de erro do PHP sim|nao
+
+idioma - idioma da interface
 */
+
 /*
 Section: Fluxo do código
 */
