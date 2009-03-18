@@ -197,10 +197,11 @@ function alteraN3()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n3 where id_n2 = '$id_n2'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem,id_tema) VALUES ('NAO',$id_n2,'',$o,0)");
-			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3");
+    		$idtemp = (rand (9000,10000)) * -1;
+    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem,id_tema) VALUES ('NAO',$id_n2,'',$o,$idtemp)");
+			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3 where id_tema = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_n3']);
+			$id = $id[0]['id_n3'];
 			$retorna = $id;
     	}
     	$dbhw = null;
@@ -231,10 +232,11 @@ function alteraN2()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n2 where id_n1 = '$id_n1'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2");
+			$idtemp = (rand (9000,10000)) * -1;
+    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado,id_subgrupo) VALUES ($id_n1,'',$o,'NAO',$idtemp)");
+			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2 where id_subgrupo = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_n2']);
+			$id = $id[0]['id_n2'];
 			$retorna = $id;   	
     	}
     	$dbhw = null;
@@ -267,10 +269,11 @@ function alteraN1()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n1 where id_menu = '$id_menu'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'',$o,'NAO')");
-			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1");
+			$idtemp = (rand (9000,10000)) * -1;
+    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado,id_grupo) VALUES ($id_menu,'',$o,'NAO',$idtemp)");
+			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1 where id_grupo = '$idtemp'");
 			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_n1']);
+			$id = $id[0]['id_n1'];
 			$retorna = $id;   	
     	}
     	$dbhw = null;
