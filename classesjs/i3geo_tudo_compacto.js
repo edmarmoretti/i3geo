@@ -3912,6 +3912,7 @@ i3GEO = {
 	cria:function(){
 		if (window.location.href.split("?")[1]){
 			i3GEO.configura.sid = window.location.href.split("?")[1];
+			g_sid = i3GEO.configura.sid;
 			//
 			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
 			//
@@ -8095,8 +8096,36 @@ i3GEO.configura = {
 			iddiv:"rota",
 			tipo:"",
 			dica:"Rota",
-			funcaoonclick:function()
-			{}
+			funcaoonclick:function(){
+				if(i3GEO.interface.ATUAL != "googlemaps")
+				{alert("Operacao disponivel apenas na interface Google Maps");return;}
+   				counterClick = 1;
+    			var parametrosRota = function(overlay,latlng){
+    				if(counterClick == 1){	
+    					counterClick++;
+    					alert("Clique o ponto de destino da rota");
+    					pontoRota1 = latlng
+    					return;
+    				}
+    				if(counterClick == 2){
+    					pontoRota2 = latlng
+    					counterClick = 0;
+    					GEvent.removeListener(rotaEvento)
+    					var janela = i3GEO.janela.cria("300px","300px","","center","","Rota");
+    					janela[2].style.overflow = "auto";
+    					janela[2].style.height = "300px";
+						directions = new GDirections(i3GeoMap,janela[2]);
+						var temp = function(){
+							$i("wdoca_corpo").innerHTML = "Não foi possível criar a rota";
+						};
+						GEvent.addListener(directions, "error", temp);
+						directions.load("from: "+pontoRota1.lat()+","+pontoRota1.lng()+" to: "+pontoRota2.lat()+","+pontoRota2.lng());
+    					//i3GeoMap.removeOverlay(directions)
+    				}
+    			};
+   				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
+   				alert("Clique o ponto de origem da rota");
+			}
 		}
 	]}
 };
@@ -11107,14 +11136,17 @@ i3GEO.mapa = {
 		};
 		eval(ngeoxml+" = new GGeoXml(url,zoom)");
 		eval("i3GeoMap.addOverlay("+ngeoxml+")");
+		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml);
+	},
+	criaNoArvoreGoogle: function(nomeOverlay){
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 		if(!node){
-			var titulo = "<table><tr><td><b>KML</b></td></tr></table>";
+			var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 		}
-		html = "<input onclick='i3GEO.mapa.ativaDesativaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
 		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
 		var d = {html:html};
 		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
@@ -11123,7 +11155,7 @@ i3GEO.mapa = {
 		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
 		node.expand();
 	},
-	ativaDesativaKml: function(obj){	
+	ativaDesativaOverlayGoogle: function(obj){	
 		if(!obj.checked){
 			eval("i3GeoMap.removeOverlay("+obj.value+")");
 		}
@@ -17028,7 +17060,7 @@ i3GEO.arvoreDeTemas = {
 						var w = funcoes[ig2].W;
 						var h = funcoes[ig2].H;
 						var abre = "i3GEO.janela.cria('"+w+"px','"+h+"px','"+executar+"','','','Sistemas')";
-						var nomeFunc = "<a href='#' onclick='"+abre+"'>"+funcoes[ig2].NOME+"</a>";
+						var nomeFunc = "<a href='#' onclick=\""+abre+"\">"+funcoes[ig2].NOME+"</a>";
 						var d = {html:nomeFunc};
 						var funcNode = new YAHOO.widget.HTMLNode(d, sisNode, false,true);
 						funcNode.isLeaf = true;

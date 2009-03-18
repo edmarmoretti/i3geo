@@ -147,6 +147,7 @@ i3GEO = {
 	cria:function(){
 		if (window.location.href.split("?")[1]){
 			i3GEO.configura.sid = window.location.href.split("?")[1];
+			g_sid = i3GEO.configura.sid;
 			//
 			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
 			//
