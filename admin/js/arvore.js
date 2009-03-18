@@ -94,7 +94,10 @@ function montaNosMenus(dados,redesenha)
 	var root = tree.getRoot();
 	for (var i=0, j=dados.length; i<j; i++)
 	{
-		var conteudo = "<b>&nbsp;<span>"+dados[i].nome_menu+"</span>"
+		var cor = "";
+		if(dados[i].publicado_menu == "NAO")
+		var cor = "style='color:red'";
+		var conteudo = "<b>&nbsp;<span "+cor+" >"+dados[i].nome_menu+"</span>"
 		var d = {html:conteudo,id_menu:dados[i].id_menu,tipo:"menu"};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, false,true);
 	}
@@ -152,7 +155,11 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','grupo','"+dados.grupos[i].id_n1+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','grupo','"+dados.grupos[i].id_n1+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('grupo','"+dados.grupos[i].id_n1+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('grupo','"+dados.grupos[i].id_n1+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.grupos[i].nome_grupo+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('grupo','"+dados.grupos[i].id_n1+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;";
+		var cor = "";
+		if(dados.grupos[i].publicado == "NAO")
+		var cor = "style='color:red'";
+		conteudo += "<span "+cor+" >"+dados.grupos[i].nome_grupo+"</span>"
 		var d = {html:conteudo,id_n1:dados.grupos[i].id_n1,tipo:"grupo"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.setDynamicLoad(loadSubgruposData, temaIconMode);
@@ -205,7 +212,11 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados.subgrupos[i].nome_subgrupo+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('subgrupo','"+dados.subgrupos[i].id_n2+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
+		var cor = "";
+		if(dados.subgrupos[i].publicado == "NAO")
+		var cor = "style='color:red'";
+		conteudo += "<span "+cor+" >"+dados.subgrupos[i].nome_subgrupo+"</span>"
 		var d = {html:conteudo,id_n2:dados.subgrupos[i].id_n2,tipo:"subgrupo"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.setDynamicLoad(loadTemasData, temaIconMode);
@@ -221,12 +232,19 @@ function montaTemas(idmenu,no,dados,redesenha)
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
-	for (var i=0, j=dados.length; i<j; i++)
+	for (i=0, j=dados.length; i<j; i++)
 	{
 		var conteudo = "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('sobe','tema','"+dados[i].id_n3+"')\" title=sobe src=\"../imagens/34.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"sobeDesce('desce','tema','"+dados[i].id_n3+"')\" title=desce src=\"../imagens/33.png\" />"
 		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"excluir('tema','"+dados[i].id_n3+"')\" title=excluir width='10px' heigth='10px' src=\"../imagens/01.png\" />"
-		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_n3+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;<span>"+dados[i].nome_tema+"</span>"
+		conteudo += "&nbsp;<img style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editar('tema','"+dados[i].id_n3+"')\" title=editar width='10px' heigth='10px' src=\"../imagens/06.png\" />&nbsp;"
+		var cor = "";
+		if(dados[i].publicado == "NAO")
+		var cor = "style='color:red'";
+		if(dados[i].nome_tema)
+		conteudo += "<span "+cor+" >"+dados[i].nome_tema+"</span>"
+		else
+		conteudo += "<span "+cor+" >edite para escolher o tema</span>"
 		var d = {html:conteudo,id_n3:dados[i].id_n3,tipo:"tema"}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
@@ -605,24 +623,55 @@ function gravaDados(tipo,id)
   					{
   						var obj = document.getElementById("Eid_grupo")
   						var texto = obj.options[obj.selectedIndex].text
+  						
+  						var objpub = document.getElementById("Epublicado")
+  						var publicado = objpub.options[objpub.selectedIndex].value
+  						  						
   						var no = tree.getNodeByProperty("id_n1",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+
+  						if(publicado == "NAO")
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						else
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+
   						no.html = no.getContentEl().innerHTML;
   					}
   					if(tipo == "subgrupo")
   					{
   						var obj = document.getElementById("Eid_subgrupo")
   						var texto = obj.options[obj.selectedIndex].text
+
+  						var objpub = document.getElementById("Epublicado")
+  						var publicado = objpub.options[objpub.selectedIndex].value
+
   						var no = tree.getNodeByProperty("id_n2",id)
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+
+  						if(publicado == "NAO")
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						else
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+
   						no.html = no.getContentEl().innerHTML; 					
   					}
   					if(tipo == "tema")
   					{
   						var obj = document.getElementById("Eid_tema")
   						var texto = obj.options[obj.selectedIndex].text
+  						
+  						var objpub = document.getElementById("Epublicado")
+  						var publicado = objpub.options[objpub.selectedIndex].value
+
   						var no = tree.getNodeByProperty("id_n3",id)
+  						
   						no.getContentEl().getElementsByTagName("span")[0].innerHTML = texto
+  						
+  						if(publicado == "NAO")
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "red"
+  						else
+  						no.getContentEl().getElementsByTagName("span")[0].style.color = "black"
+  						
   						no.html = no.getContentEl().innerHTML;
   					}
 					if(tipo == "raizmenu" || tipo == "raizgrupo")

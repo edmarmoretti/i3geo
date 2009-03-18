@@ -33,18 +33,18 @@ error_reporting(0);
 switch ($funcao)
 {
 	case "pegaGrupos":
-		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' order by ordem");
+		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' order by ordem");
 		$raiz = pegaDados("select id_raiz,i3geoadmin_raiz.id_tema,nome_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
 	break;
 	case "pegaSubGrupos":
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$id_n1' order by ordem");
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$id_n1' order by ordem");
 		$raiz = pegaDados("select id_raiz,i3geoadmin_raiz.id_tema,nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
 	case "pegaTemas":
-		retornaJSON(pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3 from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem"));
+		retornaJSON(pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem"));
 		exit;
 	break;
 	case "adicionarTemaRaiz":
@@ -71,7 +71,7 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n1 = alteraN1();
-		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1 from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
+		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
@@ -80,7 +80,7 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n2 = alteraN2();
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2 from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
@@ -89,7 +89,7 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n3 = alteraN3();
-		$temas = pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3 from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
+		$temas = pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
 		$raiz = array();
 		retornaJSON($temas);
 		exit;
@@ -197,11 +197,11 @@ function alteraN3()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n3 where id_n2 = '$id_n2'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n3 (id_n2,n3_perfil,ordem) VALUES ($id_n2,'',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n3 (publicado,id_n2,n3_perfil,ordem,id_tema) VALUES ('NAO',$id_n2,'',$o,0)");
 			$id = $dbh->query("SELECT id_n3 FROM i3geoadmin_n3");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n3']);
-			$retorna = $id;   	
+			$retorna = $id;
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -231,7 +231,7 @@ function alteraN2()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n2 where id_n1 = '$id_n1'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem) VALUES ($id_n1,'',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n2 (id_n1,n2_perfil,ordem,publicado) VALUES ($id_n1,'',$o,'NAO')");
 			$id = $dbh->query("SELECT id_n2 FROM i3geoadmin_n2");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n2']);
@@ -267,7 +267,7 @@ function alteraN1()
 			$o = $dbh->query("SELECT MAX(ordem) as o FROM i3geoadmin_n1 where id_menu = '$id_menu'");
 			$o = $o->fetchAll();
 			$o = $o[0]['o'] + 1;
-    		$dbhw->query("INSERT INTO i3geoadmin_n1 (publicado,id_menu,n1_perfil,ordem) VALUES ('',$id_menu,'',$o)");
+    		$dbhw->query("INSERT INTO i3geoadmin_n1 (id_menu,n1_perfil,ordem,publicado) VALUES ($id_menu,'',$o,'NAO')");
 			$id = $dbh->query("SELECT id_n1 FROM i3geoadmin_n1");
 			$id = $id->fetchAll();
 			$id = intval($id[count($id)-1]['id_n1']);

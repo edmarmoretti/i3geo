@@ -1,12 +1,12 @@
 //YAHOO.namespace("example.container");
 function initEditorMenu()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu")
-	core_carregando("ativa");
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraMenus&publicado_menu=&perfil=&nome=&desc=&id=&aberto=","adicionaNovoMenu","pegaMenus_M")
 	pegaMenus_M()
 }
 function pegaMenus_M()
 {
+	core_carregando("ativa");
 	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaTabela_M")
 }
 function montaTabela_M(dados)
@@ -126,7 +126,7 @@ function gravaLinha_M(row)
 	core_carregando("ativa");
 	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
 	var mensagem = " gravando registro "+id_menu
-	core_gravaLinha(mensagem,row,sUrl)
+	core_gravaLinha(mensagem,row,sUrl,"pegaMenus_M")
 }
 function excluiLinha_M(id,row)
 {

@@ -1,14 +1,12 @@
 //YAHOO.namespace("example.container");
 function initEditorSubGrupos()
 {
-	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraSubGrupos","adicionaNovoSubGrupo")
-	core_carregando("ativa");
-	//core_ativaPainelAjuda("ajuda","botaoAjuda");
-	//core_pegaPerfis("pegaSubGrupos()");
+	core_ativaBotaoAdicionaLinha("../php/menutemas.php?funcao=alteraSubGrupos","adicionaNovoSubGrupo","pegaSubGrupos_S")
 	pegaSubGrupos_S()
 }
 function pegaSubGrupos_S()
 {
+	core_carregando("ativa");
 	core_pegaDados("buscando sub-grupos...","../php/menutemas.php?funcao=pegaSubGrupos","montaTabela_S")
 }
 function montaTabela_S(dados)
@@ -117,7 +115,7 @@ function gravaLinha_S(row)
 	core_carregando("ativa");
 	var mensagem = " gravando registro do id= "+id_subgrupo;
 	var sUrl = "../php/menutemas.php?funcao=alteraSubGrupos&nome="+nome_subgrupo+"&desc="+desc_subgrupo+"&id="+id_subgrupo;
-	core_gravaLinha(mensagem,row,sUrl)
+	core_gravaLinha(mensagem,row,sUrl,"pegaSubGrupos_S")
 }
 function excluiLinha_S(id,row)
 {

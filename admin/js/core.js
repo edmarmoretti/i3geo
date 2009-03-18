@@ -836,11 +836,15 @@ myDataTable - objeto dataTable do YUI
 sUrl - url com o programa que será executado no servidor
 
 idBotao - id do elemento com o botão
+
+nomeFuncao - nome da função que será executada ao concluir a adição da linha
 */
-function core_ativaBotaoAdicionaLinha(sUrl,idBotao)
+function core_ativaBotaoAdicionaLinha(sUrl,idBotao,nomeFuncao)
 {
 	if(arguments.length == 1)
 	{var idBotao = "adiciona";}
+	if(arguments.length < 3)
+	var nomeFuncao = "";
 	var adicionalinha = function()
 	{
 		core_carregando("ativa");
@@ -851,8 +855,11 @@ function core_ativaBotaoAdicionaLinha(sUrl,idBotao)
   			{
   				try
   				{
-  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
   					core_carregando("desativa");
+  					if(nomeFuncao != "")
+  					eval(nomeFuncao+"()");
+  					else	
+  					myDataTable.addRow(YAHOO.lang.JSON.parse(o.responseText)[0],0);
   				}
   				catch(e){core_handleFailure(e,o.responseText);}
   			},
@@ -918,21 +925,29 @@ mensagem - mensagem que será mostrada na tela
 row - objeto row que foi clicado pelo usuário. Utilizado para se obter os daods do recordset
 
 sUrl - url do programa que será executado
+
+nomeFuncao - nome da funcao que sera executada após gravar os dados (opcional)
 */
-function core_gravaLinha(mensagem,row,sUrl)
+function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 {
 	core_carregando("ativa");
 	core_carregando(mensagem);
+	if(arguments.length < 4)
+	var nomeFuncao = "";
 	var callback =
 	{
   		success:function(o)
   		{
-			var rec = myDataTable.getRecordSet().getRecord(row);
-			myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
-  			core_carregando("desativa");
-  			var linha = myDataTable.getTrEl(rec)
-			linha.style.color = "";
-  			
+			core_carregando("desativa");
+			if(nomeFuncao != "")
+			{eval(nomeFuncao+"()")}
+			else
+			{
+				var rec = myDataTable.getRecordSet().getRecord(row);
+				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
+  				var linha = myDataTable.getTrEl(rec)
+				linha.style.color = "";
+  			}
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

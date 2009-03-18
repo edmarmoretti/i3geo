@@ -95,9 +95,7 @@ switch ($funcao)
 	case "alteraMenus":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alteraMenus();
-	$sql = "SELECT * from i3geoadmin_menus WHERE id_menu = '".$novo."'";
-	retornaJSON(pegaDados($sql));
+	retornaJSON(alteraMenus());
 	exit;
 	break;
 
@@ -110,9 +108,7 @@ switch ($funcao)
 	case "alteraGrupos":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alteraGrupos();
-	$sql = "SELECT * from i3geoadmin_grupos WHERE id_grupo = '".$novo."'";
-	retornaJSON(pegaDados($sql));
+	retornaJSON(alteraGrupos());
 	exit;
 	break;
 
@@ -125,9 +121,7 @@ switch ($funcao)
 	case "alteraSubGrupos":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alteraSubGrupos();
-	$sql = "SELECT * from i3geoadmin_subgrupos WHERE id_subgrupo = '".$novo."'";
-	retornaJSON(pegaDados($sql));
+	retornaJSON(alteraSubGrupos());
 	exit;
 	break;
 
@@ -142,17 +136,7 @@ switch ($funcao)
 	$dados = pegaDados($sql);
 	if(count($dados) == 0)
 	{
-		$id = alteraTemas();
-		$nome = "";
-		$desc = "";
-		$codigo = $codigo_tema;
-		$tipoa = "";
-		$download = "SIM";
-		$ogc = "SIM";
-		$kml = "SIM";
-		$link = "";
-		$tags = "";
-		alteraTemas();
+		registraTema();
 		$dados = pegaDados($sql);
 	}
 	retornaJSON($dados);
@@ -461,19 +445,14 @@ function alteraMenus()
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
-			$retorna = $id;
     	}
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
-			$id_menu = $dbh->query("SELECT id_menu FROM i3geoadmin_menus");
-			$id_menu = $id_menu->fetchAll();
-			$id_menu = intval($id_menu[count($id_menu)-1]['id_menu']);
-			$retorna = $id_menu;
     	}
     	$dbhw = null;
     	$dbh = null;
-    	return $retorna;
+    	return "ok";
 	}
 	catch (PDOException $e)
 	{
@@ -661,23 +640,17 @@ function alteraGrupos()
 			$nome = utf8_encode($nome);
 			$desc = utf8_encode($desc);    		
     	}
-    	$retorna = "";
     	if($id != "")
     	{
     		$dbhw->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
-    		$retorna = $id;
     	}
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
-			$id_grupo = $dbh->query("SELECT * FROM i3geoadmin_grupos");
-			$id_grupo = $id_grupo->fetchAll();
-			$id_grupo = intval($id_grupo[count($id_grupo)-1]['id_grupo']);
-			$retorna = $id_grupo;
     	}
     	$dbhw = null;
     	$dbh = null;
-    	return $retorna;
+    	return "ok";
 	}
 	catch (PDOException $e)
 	{
@@ -704,25 +677,43 @@ function alteraSubGrupos()
     	if($id != "")
     	{
 	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
-    		$retorna = $id;
     	}
     	else
     	{
     		$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
-			$id = $dbh->query("SELECT * FROM i3geoadmin_subgrupos");
-			$id = $id->fetchAll();
-			$id = intval($id[count($id)-1]['id_subgrupo']);
-			$retorna = $id;    	
     	}
     	$dbhw = null;
     	$dbh = null;
-    	return $retorna;
+    	return "ok";
 	}
 	catch (PDOException $e)
 	{
     	return "Error!: " . $e->getMessage();
 	}
 }
+/*
+Function: registraTema
+
+Registra um mapfile na tabela de temas
+*/
+function registraTema()
+{
+	global $codigo_tema;
+	try 
+	{
+		$retorna = "ok";
+    	include("conexao.php");
+   		$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','SIM','SIM','','','')");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+    	$dbhw = null;
+    	$dbh = null;
+    	return "ok";
+	}
+	catch (PDOException $e)
+	{
+    	return "Error!: " . $e->getMessage();
+	}
+}
+
 /*
 Function: alteraTemas
 
