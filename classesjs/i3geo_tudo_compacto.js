@@ -8089,7 +8089,15 @@ i3GEO.configura = {
 					$i("img").style.cursor="pointer";
 				}
 			}
-		}	
+		},
+		{
+			//monta rotas com o googlemaps
+			iddiv:"rota",
+			tipo:"",
+			dica:"Rota",
+			funcaoonclick:function()
+			{}
+		}
 	]}
 };
 //YAHOO.log("carregou classe configura", "Classes i3geo");

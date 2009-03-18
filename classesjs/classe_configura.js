@@ -917,7 +917,43 @@ i3GEO.configura = {
 					$i("img").style.cursor="pointer";
 				}
 			}
-		}	
+		},
+		{
+			//monta rotas com o googlemaps
+			iddiv:"rota",
+			tipo:"",
+			dica:"Rota",
+			funcaoonclick:function(){
+				if(i3GEO.interface.ATUAL != "googlemaps")
+				{alert("Operacao disponivel apenas na interface Google Maps");return;}
+   				counterClick = 1;
+    			var parametrosRota = function(overlay,latlng){
+    				if(counterClick == 1){	
+    					counterClick++;
+    					alert("Clique o ponto de destino da rota");
+    					pontoRota1 = latlng
+    					return;
+    				}
+    				if(counterClick == 2){
+    					pontoRota2 = latlng
+    					counterClick = 0;
+    					GEvent.removeListener(rotaEvento)
+    					var janela = i3GEO.janela.cria("300px","300px","","center","","Rota");
+    					janela[2].style.overflow = "auto";
+    					janela[2].style.height = "300px";
+						directions = new GDirections(i3GeoMap,janela[2]);
+						var temp = function(){
+							$i("wdoca_corpo").innerHTML = "Não foi possível criar a rota";
+						};
+						GEvent.addListener(directions, "error", temp);
+						directions.load("from: "+pontoRota1.lat()+","+pontoRota1.lng()+" to: "+pontoRota2.lat()+","+pontoRota2.lng());
+    					//i3GeoMap.removeOverlay(directions)
+    				}
+    			};
+   				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
+   				alert("Clique o ponto de origem da rota");
+			}
+		}
 	]}
 };
 //YAHOO.log("carregou classe configura", "Classes i3geo");

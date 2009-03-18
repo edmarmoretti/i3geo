@@ -725,7 +725,7 @@ $nome - nome que será dado a geometria
 			$final["dados"] = $registros;
 			//salva arquivo
 			$nome == "" ? $nome = nomerandomico(15) : $nome = str_replace(" ","_",$nome);
-			$arq = $dir_tmp."/".$imgdir."/".$nome.".geo";
+			$arq = $dir_tmp."/".$imgdir."/".$nome."keo";
 			if (file_exists($arq))
 			{unlink($arq);}
 			$fp = fopen($arq,"w");
@@ -748,7 +748,7 @@ $imgdir - diretório temporário das imagens do mapa atual
 	function listaGeometrias($dir_tmp,$imgdir)
 	{
 		$resultado = array();
-		foreach (glob($dir_tmp."/".$imgdir."/*.geo") as $arquivo)
+		foreach (glob($dir_tmp."/".$imgdir."/*keo") as $arquivo)
 		{
 			$handle = fopen ($arquivo, "r");
 			$conteudo = fread ($handle, filesize ($arquivo));

@@ -2070,7 +2070,7 @@ $operacao - Tipo de análise.
 		{
 			$final["layer"] = $operacao." ".(implode(" ",$lista));
 			$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>"");
-			$nomegeo = $dir.(nomerandomico(10)).".geo";
+			$nomegeo = $dir.(nomerandomico(10))."keo";
 			$this->serializeGeo($nomegeo,$final);
 			$ext = $this->mapa->extent;
 			$minx = $ext->minx;
@@ -2121,6 +2121,7 @@ $operacao - Tipo de análise.
 */
 	function calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao,$postgis_con,$srid_area)
 	{
+		//error_reporting(E_ALL);
 		$lista = explode(",",$lista);
 		$dir = $dir_tmp."/".$imgdir."/";
 		foreach ($lista as $l)

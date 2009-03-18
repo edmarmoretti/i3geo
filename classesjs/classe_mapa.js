@@ -190,14 +190,17 @@ i3GEO.mapa = {
 		};
 		eval(ngeoxml+" = new GGeoXml(url,zoom)");
 		eval("i3GeoMap.addOverlay("+ngeoxml+")");
+		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml);
+	},
+	criaNoArvoreGoogle: function(nomeOverlay){
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 		if(!node){
-			var titulo = "<table><tr><td><b>KML</b></td></tr></table>";
+			var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 		}
-		html = "<input onclick='i3GEO.mapa.ativaDesativaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
 		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
 		var d = {html:html};
 		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
@@ -206,7 +209,7 @@ i3GEO.mapa = {
 		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
 		node.expand();
 	},
-	ativaDesativaKml: function(obj){	
+	ativaDesativaOverlayGoogle: function(obj){	
 		if(!obj.checked){
 			eval("i3GeoMap.removeOverlay("+obj.value+")");
 		}
