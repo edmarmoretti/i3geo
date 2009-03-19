@@ -76,14 +76,14 @@ i3GEO.configura = {
 	*/
 	oMenuData:{
 		menu:[
-			{nome:$trad("s1"),id:"ajuda"},	
+			{nome:$trad("s1"),id:"ajudaMenu"},	
 			{nome:$trad("s2"),id:"analise"},
  			{nome:$trad("s3"),id:"janelas"},
  			{nome:$trad("s4"),id:"arquivos"},
  			{nome:$trad("d27"),id:"interface"}
  		],
 		submenus:{
-			"ajuda": [ 
+			"ajudaMenu": [ 
 			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
 			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
 			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },

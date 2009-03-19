@@ -109,6 +109,7 @@ i3GEO.interface = {
 			{
 				$i("img").onload = "";
 				//atualiza quadro
+				
 				i3GEO.gadgets.quadros.grava("imagem",i3GEO.parametros.mapimagem);
 				i3GEO.gadgets.quadros.grava("extensao",i3GEO.parametros.mapexten);
 				var temp = function(retorno){
@@ -599,20 +600,10 @@ i3GEO.interface = {
 			try{
 				
 				linki3geo.setHref(linki3geo.getHref()+"&");
-				//nl.setLink(linki3geo);
 			}
 			catch(e){};
 		},
 		cria: function(w,h){
-			/*
-			var i = $i(i3GEO.interface.IDCORPO);
-			if(i){
-				i3GeoMap = document.createElement("iframe");
-				i3GeoMap.style.width = w;
-				i3GeoMap.style.height = h;
-				i.appendChild(i3GeoMap);
-			}
-			*/
 			var i = $i(i3GEO.interface.IDCORPO);
 			if(i){
 				var i3GeoMap3d = document.createElement("div");
@@ -630,17 +621,10 @@ i3GEO.interface = {
 			google.earth.createInstance("i3GeoMap3d", i3GEO.interface.googleearth.iniciaGE, i3GEO.interface.googleearth.falha);
 		},
 		iniciaGE: function(object){
-			/*
-			var src = "http://www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114026893455619160549/embedkmlgadget.xml&up_kml_url=";
-			var i = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
-			alert(i)
-			src += escape(i);
-			src += "&up_view_mode=earth&up_earth_2d_fallback=0&up_earth_fly_from_space=1&up_earth_show_buildings=0&synd=open&w=320&h=400&title=Embedded+KML+Viewer&border=%23ffffff%7C3px%2C1px+solid+%23999999&source=http%3A%2F%2Fwww.gmodules.com%2Fig%2Fcreator%3Fsynd%3Dopen%26url%3Dhttp%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F114026893455619160549%2Fembedkmlgadget.xml";
-			i3GeoMap.src = src;
-			*/
   			i3GeoMap = object;
   			i3GeoMap.getWindow().setVisibility(true);
   			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&"
+  			alert(kmlUrl)
   			linki3geo = i3GeoMap.createLink('');
           	linki3geo.setHref(kmlUrl);
           	nl = i3GeoMap.createNetworkLink('');
@@ -650,10 +634,8 @@ i3GEO.interface = {
           	var options = i3GeoMap.getOptions();
           	options.setMouseNavigationEnabled(true);
 			options.setStatusBarVisibility(true);
-			//options.setGridVisibility(true);
 			options.setOverviewMapVisibility(true);
 			options.setScaleLegendVisibility(true);
-			//options.setAtmosphereVisibility(true);
           	i3GeoMap.getNavigationControl().setVisibility(i3GeoMap.VISIBILITY_SHOW);
 		},
 		falha: function(){alert("Falhou. Vc precisa do plugin instalado");},

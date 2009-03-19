@@ -12,7 +12,7 @@ P
 #banner
 {position:absolute;top:0px;left:0px;}
 #arvoreTemas
-{overflow:auto;height:400px;width:280px;position:absolute;top:30px;left:0px;}
+{overflow:auto;height:400px;width:280px;position:absolute;top:50px;left:0px;}
 #corpo
 {text-align:left;font-size:12px;width:425px;position:absolute;top:30px;left:285px;background:rgb(250,250,250);}
 </style>
@@ -24,15 +24,21 @@ P
 <div id=banner ><img src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" ></div>
 
 <!-- aqui vai o menu de opções -->
+<br><p>Árvore de busca
 <div id=arvoreTemas >
+
+<p>Carregando árvore...
 </div>
 <!-- aqui vai o corpo da aplicação -->
 <div id=corpo style="background-color:rgb(250,250,250)">
 <H1>Web services OGC</H1>
 <p>Navegue pela &aacute;rvore ao lado para localizar o tema desejado.
 <p>Clicando-se em um tema, é mostrado o endereço do serviço OGC.
-<p>Serviços OGC são web services que possibilitam o acesso aos dados disponíveis nessa instalação do i3Geo.
+<p>Os serviços são Web Wervices que possibilitam o acesso aos dados disponíveis nessa instalação do i3Geo.
+<p>A lista de temas baseia-se nas configurações específicas de cada servidor onde o i3Geo está instalado. Para obter uma lista de outros Web Services, acesse o <a href="wscliente.htm" >cliente de webservices.</a>
+<p>Você pode usar um Web Service para acessar os dados configurados nesse servidor por meio de outros softwares de geoprocessamento, como o <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" >gvSIG.</a>
 <p>Para maiores informações sobre o uso de web services, veja <a href='http://www.opengeospatial.org/standards' target=blank >http://www.opengeospatial.org/standards</a>
+<div style="background-color:white"><p><img src="imagens/i3geo1bw.jpg" /></div>
 </div>
 
 </body>
@@ -72,7 +78,9 @@ i3GEO.configura.locaplic = g_locaplic
 g_arvoreClicks = ""
 i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
 i3GEO.arvoreDeTemas.FILTRAOGC = true
+i3GEO.arvoreDeTemas.INCLUIWMS = false
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
 i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","ogc_endereco\(this\)");
 /*
 Function: endereco

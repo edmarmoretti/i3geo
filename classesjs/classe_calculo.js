@@ -425,7 +425,7 @@ i3GEO.calculo = {
 		var pos = i3GEO.util.pegaPosicaoObjeto(documento);
 		var t = tl[1] - pos[1];
 		var l = tl[0] - pos[0];
-		var d = "block"
+		var d = "block";
 		if($i(idrect)){
 			var box = $i(idrect);
 			box.style.width = w;
