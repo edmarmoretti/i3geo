@@ -70,6 +70,9 @@ $i("guia4").onclick = function()
 }
 $i("guia5").onclick = function()
 {
+	var temp = pegaTemasSel().split(",")
+	if(temp.length > 1)
+	{alert("Escolha apenas um tema!");return;}	
  	mostraGuia("guia5")
 	$i("opc1").style.display="none";
 	$i("botoesopc").style.display="none";
@@ -115,21 +118,35 @@ function mudaicone()
 	window.parent.richdraw.fecha()
 	window.parent.$i("img").style.cursor="pointer";
 }
+//pega os temas selecionados
+function pegaTemasSel()
+{
+	var selObj = $i("comboTemas");
+	var selectedArray = new Array();
+	for (i=0; i<selObj.options.length; i++) {
+		if (selObj.options[i].selected) {
+			selectedArray.push(selObj.options[i].value);
+		}
+	}
+	return selectedArray.toString();
+}
 //botoes de tipo
 function tiposel(obj)
 {
-	window.parent.i3GEO.temaAtivo = $i("comboTemas").value;
+	var combotemas = $i("comboTemas");
+	window.parent.i3GEO.temaAtivo = pegaTemasSel();
 	window.parent.i3GEO.eventos.MOUSEDOWN.remove("i3GEO.selecao.box.inicia()")
 	$i("parapoli").style.display = "none";
 	var fim = function()
 	{aguarde("none");window.parent.i3GEO.atualiza("");}
-	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
+	if (combotemas.value == ""){alert("Escolha um tema");return;}
+	
 	if (obj.id == "selecaoext")
 	{
 		if (window.parent.i3GEO.parametros.mapscale > 500000)
 		{alert("A escala do mapa deve ser pelo menos 1:500.000");return;}
 		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoext&tema="+$i("comboTemas").value+"&tipo="+$i("tipoOperacao").value
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoext&tema="+pegaTemasSel()+"&tipo="+$i("tipoOperacao").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -155,6 +172,9 @@ function tiposel(obj)
 	}
 	if (obj.id == "selecaopoli")
 	{
+		var temp = pegaTemasSel().split(",")
+		if(temp.length > 1)
+		{alert("Escolha apenas um tema!");return;}	
 		mudaicone()
 		obj.style.border = "1px solid white"
 		window.parent.g_tipoacao = "selecaopoli";
@@ -172,7 +192,7 @@ comboTemasLigados("comboTemas",function(retorno)
 	{
 	 	$i("lugarComboX").innerHTML = "";
 	 	$i("lugarComboY").innerHTML = "";
-	 	window.parent.i3GEO.temaAtivo = $i("comboTemas").value
+	 	window.parent.i3GEO.temaAtivo = pegaTemasSel()
 		comboitens("selItem",$i("comboTemas").value,function(retorno)
 		{
 	 		comboi = retorno.dados
@@ -189,7 +209,7 @@ comboTemasLigados("comboTemas",function(retorno)
 			$i("opc3").style.display="block"
 		}
 	}
-},"temas")
+},"temas","",true)
 
 //adiciona uma linha de parametros
 function adicionalinha()
@@ -261,7 +281,7 @@ function operacao(tipo)
 		aguarde("block")
 		var fim = function()
 		{aguarde("none");window.parent.i3GEO.atualiza("")}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+$i("comboTemas").value+"&tipo="+tipo.value+"&tolerancia="+$i("toleranciapt").value
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+pegaTemasSel()+"&tipo="+tipo.value+"&tolerancia="+$i("toleranciapt").value
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -272,6 +292,9 @@ function operacao(tipo)
 //aplica a selecao por atributo
 function aplicaselecao()
 {
+	var temp = pegaTemasSel().split(",")
+	if(temp.length > 1)
+	{alert("Escolha apenas um tema!");return;}	
 	if ($i("comboTemas").value == ""){alert("Escolha um tema");return;}
 	aguarde("block")
 	var g = $i("parametros")
@@ -292,7 +315,7 @@ function aplicaselecao()
 		var tipo = $i("tipoOperacao").value
 		var fim = function()
 		{aguarde("none");window.parent.i3GEO.atualiza("")}
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoatrib&tipo="+tipo+"&tema="+$i("comboTemas").value+"&valor="+valor+"&operador="+operador+"&item="+itemsel
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaoatrib&tipo="+tipo+"&tema="+pegaTemasSel()+"&valor="+valor+"&operador="+operador+"&item="+itemsel
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
@@ -304,7 +327,7 @@ function aplicaselecao()
 function aplicaselecaoTema()
 {
 	aguarde("block")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaotema&temao="+$i("comboOverlay").value+"&tema="+$i("comboTemas").value+"&tipo="+$i("tipoOperacao").value
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaotema&temao="+$i("comboOverlay").value+"&tema="+pegaTemasSel()+"&tipo="+$i("tipoOperacao").value
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -315,14 +338,14 @@ function aplicaselecaoTema()
 function mostraSelecaoTema(retorno)
 {
  	aguarde("none")
- 	if (retorno.data == "ok")
-	{window.parent.remapaf()}
-	else
-	{alert(retorno.data)}
+ 	window.parent.remapaf();
 }
 //cria um novo tema
 function criatemaf()
 {
+	var temp = pegaTemasSel().split(",")
+	if(temp.length > 1)
+	{alert("Escolha apenas um tema!");return;}
 	if ($i("comboTemas").value == "")
 	{alert("Escolha um tema!");}
 	else
@@ -359,7 +382,7 @@ function concluipoligono()
 		//cp.set_debug(2)
 		cp.set_transfer_mode('POST');
 		cp.set_response_type("JSON");
-		cp.call(p,"selecaoPoli",concluidof,xs,ys,$i("comboTemas").value,$i("tipoOperacao").value);
+		cp.call(p,"selecaoPoli",concluidof,xs,ys,pegaTemasSel(),$i("tipoOperacao").value);
 	}
 	else
 	{alert("Sao necessarios pelo menos tres pontos");}

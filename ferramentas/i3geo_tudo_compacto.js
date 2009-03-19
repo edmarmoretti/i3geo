@@ -58,8 +58,9 @@ document.body.style.backgroundColor="#F0F0F0";function aguarde(tipo){ if(tipo=="
  else{var temp={dados:'<div class=alerta >Nenhum tema possui sele&ccedil;&atilde;o. Utilize a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de um tema para escolher algum elemento de algum tema.</div>',tipo:"mensagem"};}}
  else{var temp={dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
  eval("funcao(temp)");}
- var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemascomsel","listaTemasComSel",monta);}   function comboTemasLigados(id,funcao,onde,nome){ if(arguments.length > 2) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; if(arguments.length==3){nome="";}
- var monta=function(retorno){ if(retorno.data !=undefined){ if(retorno.data.length > 0){ comboTemas="<select id='"+id+"' name='"+nome+"'>"; comboTemas+="<option value=''>----</option>"; for(i=0;i<retorno.data.length;i++){comboTemas+="<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
+ var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemascomsel","listaTemasComSel",monta);}   function comboTemasLigados(id,funcao,onde,nome,multiplo){ if(arguments.length > 2) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; if(arguments.length==3){nome="";}
+ if(arguments.length < 5){multiplo=false;}
+ var monta=function(retorno){ if(retorno.data !=undefined){ if(retorno.data.length > 0){ if(multiplo) comboTemas="<select id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>"; else comboTemas="<select id='"+id+"' name='"+nome+"'>"; comboTemas+="<option value=''>----</option>"; for(i=0;i<retorno.data.length;i++){comboTemas+="<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
  comboTemas+="</select>"; var temp={dados:comboTemas,tipo:"dados"};}
  else{var temp={dados:'<div class=alerta >Nenhum tema está ligado.</div>',tipo:"mensagem"};}}
  else{var temp={dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}

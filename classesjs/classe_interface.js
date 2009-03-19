@@ -624,7 +624,7 @@ i3GEO.interface = {
   			i3GeoMap = object;
   			i3GeoMap.getWindow().setVisibility(true);
   			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&"
-  			alert(kmlUrl)
+  			//alert(kmlUrl)
   			linki3geo = i3GeoMap.createLink('');
           	linki3geo.setHref(kmlUrl);
           	nl = i3GeoMap.createNetworkLink('');

@@ -449,18 +449,23 @@ function comboTemasSel(id,funcao,onde)
 //monta combo com os temas que estão ligados
 //retorna um combo com id=temasLigados
 //
-function comboTemasLigados(id,funcao,onde,nome)
+function comboTemasLigados(id,funcao,onde,nome,multiplo)
 {
 	if (arguments.length > 2)
 	$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";
 	if (arguments.length == 3)
 	{nome = "";}
+	if (arguments.length < 5)
+	{multiplo = false;}
 	var monta = function(retorno)
 	{
 		if (retorno.data != undefined)
 		{
 			if (retorno.data.length > 0)
 			{
+				if(multiplo)
+				comboTemas = "<select id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";
+				else
 				comboTemas = "<select id='"+id+"' name='"+nome+"'>";
 				comboTemas += "<option value=''>----</option>";
 				for (i=0;i<retorno.data.length;i++)
