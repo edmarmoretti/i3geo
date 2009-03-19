@@ -11457,7 +11457,7 @@ i3GEO.mapa = {
 		Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
 		*/
 		tipoimagem: function()
-		{i3GEO.janela.cria("300px","220px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");},
+		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");},
 		/*
 		Function: corFundo
 
