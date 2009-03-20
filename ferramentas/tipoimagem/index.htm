@@ -6,8 +6,13 @@
 <title></title>
 </head>
 <body>
-<div  id=opcoes style=top:0px;left:0px;text-align:left;width:100%; >
+<div  id=opcoes style=top:0px;left:0px;text-align:left;width:100%;overflow:auto;height:250px; >
 	Escolha o filtro de cores que ser&aacute; aplicado. Filtros podem tornar o desenho do mapa mais lento.<br><br>
+
+	<div onclick="aplicar()" style='width:100px;text-align:left;position:relative;' >
+	<input id=botao1 type="button" size=10 value="Aplicar"  />
+	</div>
+
 	<table summary="" class=lista3 >
 	<tr>
 		<td><input style='cursor:pointer' type=radio name=tipo value=nenhum checked ></td>
@@ -15,24 +20,52 @@
 		<td><img src="../../imagens/filtro_nenhum.png" /></td>
 	</tr>
 	<tr>
-		<td><input style='cursor:pointer' type=radio name=tipo value=cinza></td>
+		<td><input style='cursor:pointer' type=radio name=tipo value=cinza ></td>
 		<td>tons de cinza</td>
 		<td><img src="../../imagens/filtro_cinza.png" /></td>
 	</tr>
 	<tr>
-		<td><input style='cursor:pointer' type=radio name=tipo value=sepiaclara></td>
+		<td><input style='cursor:pointer' type=radio name=tipo value=sepiaclara ></td>
 		<td>s&eacute;pia clara</td>
 		<td><img src="../../imagens/filtro_sepiaclara.png" /></td>
 	</tr>
 	<tr>
-		<td><input style='cursor:pointer' type=radio name=tipo value=sepianormal></td>
+		<td><input style='cursor:pointer' type=radio name=tipo value=sepianormal ></td>
 		<td>s&eacute;pia normal</td>
 		<td><img src="../../imagens/filtro_sepianormal.png" /></td>
 	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=negativo ></td>
+		<td>negativo</td>
+		<td><img src="../../imagens/filtro_negativo.png" /></td>
+	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=detectaBordas ></td>
+		<td>detecta bordas</td>
+		<td><img src="../../imagens/filtro_detectabordas.png" /></td>
+	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=embassa ></td>
+		<td>emboss</td>
+		<td><img src="../../imagens/filtro_embassa.png" /></td>
+	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=gaussian_blur ></td>
+		<td>gaussian blur</td>
+		<td><img src="../../imagens/filtro_gaussianblur.png" /></td>
+	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=selective_blur ></td>
+		<td>selective blur</td>
+		<td><img src="../../imagens/filtro_selectiveblur.png" /></td>
+	</tr>
+	<tr>
+		<td><input style='cursor:pointer' type=radio name=tipo value=mean_removal ></td>
+		<td>mean removal</td>
+		<td><img src="../../imagens/filtro_meanremoval.png" /></td>
+	</tr>
+
 	</table>
-	<div onclick="aplicar()" style='text-align:left;left:180px;position:absolute;top:120px;' >
-	<input id=botao1 type="button" size=10 value="Aplicar"  />
-	</div>
 </div>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>

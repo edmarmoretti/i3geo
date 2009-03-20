@@ -248,25 +248,25 @@ i3GEO.eventos = {
 	O resultado dos cálculos são armazenados no objeto objposicaocursor
 	esse objeto terá as seguintes propriedades:
 	
-			propriedades.ddx valor de x em décimos de grau
+			objposicaocursor.ddx valor de x em décimos de grau
 			
-			propriedades.ddy valor de y em décimos de grau
+			objposicaocursor.ddy valor de y em décimos de grau
 			
-			propriedades.dmsx valor de x em dms
+			objposicaocursor.dmsx valor de x em dms
 			
-			propriedades.dmsy valor de y em dms
+			objposicaocursor.dmsy valor de y em dms
 			
-			propriedades.telax posicao x na tela em pixels
+			objposicaocursor.telax posicao x na tela em pixels
 			
-			propriedades.telay posicao y na tela em pixels
+			objposicaocursor.telay posicao y na tela em pixels
 			
-			propriedades.imgx posicao x no mapa em pixels
+			objposicaocursor.imgx posicao x no mapa em pixels
 			
-			propriedades.imgy: posicao y no mapa em pixels
+			objposicaocursor.imgy: posicao y no mapa em pixels
 			
-			propriedades.refx: posicao x no mapa de referência em pixels
+			objposicaocursor.refx: posicao x no mapa de referência em pixels
 			
-			propriedades.refy: posicao x no mapa de referência em pixels
+			objposicaocursor.refy: posicao x no mapa de referência em pixels
 	
 	Parameters:
 	

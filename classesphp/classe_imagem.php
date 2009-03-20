@@ -216,5 +216,40 @@ Converte para sépia normal
 		}
 		return $this->img;
 	}
+	function negativo()
+	{
+		imagefilter($this->img, IMG_FILTER_NEGATE);
+		return $this->img;
+	}
+	function detectaBordas()
+	{
+		imagefilter($this->img, IMG_FILTER_EDGEDETECT);
+		return $this->img;
+	}
+	function embassa()
+	{
+		imagefilter($this->img, IMG_FILTER_EMBOSS);
+		return $this->img;
+	}
+	function gaussian_blur()
+	{
+		imagefilter($this->img, IMG_FILTER_GAUSSIAN_BLUR);
+		return $this->img;
+	}
+	function selective_blur()
+	{
+		imagefilter($this->img, IMG_FILTER_SELECTIVE_BLUR);
+		return $this->img;
+	}
+	function mean_removal()
+	{
+		imagefilter($this->img, IMG_FILTER_MEAN_REMOVAL);
+		return $this->img;
+	}
+	function pixelate()
+	{
+		imagefilter($this->img, IMG_FILTER_PIXELATE,200,true);
+		return $this->img;
+	}
 }
 ?>

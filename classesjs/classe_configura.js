@@ -626,12 +626,12 @@ i3GEO.configura = {
 											$i(n).innerHTML += res;
 										}
 										else{
-											var nn = i3GEO.janela.tip("<img id='teste' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											var nn = i3GEO.janela.tip("<img id='marcaBalao' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
 											balloon = new Balloon;
 											balloon.delayTime = 0;
 											var res = "<div style=text-align:left >"+res+"</div>";
 											//$i(nn+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
-											balloon.showTooltip($i("teste"),res);
+											balloon.showTooltip($i("marcaBalao"),res);
 										}
 									}
 								}

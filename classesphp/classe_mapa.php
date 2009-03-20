@@ -293,6 +293,41 @@ Include:
 				$m = new Imagem($nomer);
 				imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
 			}
+			if ($tipoimagem == "negativo")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->negativo(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "detectaBordas")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "embassa")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->embassa(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "gaussian_blur")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "selective_blur")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->selective_blur(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "mean_removal")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->mean_removal(),str_replace("\\","/",$nomer));
+			}
+			if ($tipoimagem == "pixelate")
+			{
+				$m = new Imagem($nomer);
+				imagepng($m->pixelate(),str_replace("\\","/",$nomer));
+			}	
 			$nomer = ($imgo->imageurl).basename($nomer);
 		}
 		if ($imgo == ""){return "erro";}
