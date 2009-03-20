@@ -103,6 +103,8 @@ i3GEO.janela = {
 	
 	ny {Integer} - posição y da janela em pixels. Se for "" será fixada no centro
 
+	texto {String} - texto do cabeçalho
+	
 	id {String} - (opcional) nome que será dado ao id que conterá a janela. Se não for definido, será usado o id="wdoca". O
 		id do iframe interno é sempre igual ao id + a letra i. Por default, será "wdocai".
 		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo"
@@ -114,8 +116,6 @@ i3GEO.janela = {
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
-		//executa as funções de preparação
-		//YAHOO.log("Cria janela", "janela");
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -152,7 +152,6 @@ i3GEO.janela = {
 			with (wdocaiframe.style){width = "100%";height=waltura;};
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
-			//i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
 		}
 		var fix = false;
 		if(nx == "" || nx == "center"){var fix = true;}
@@ -166,7 +165,6 @@ i3GEO.janela = {
 		}
 		YAHOO.janelaDoca.xp.panel.render();
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
-		//YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	/*

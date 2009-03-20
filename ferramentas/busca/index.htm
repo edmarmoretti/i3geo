@@ -1,14 +1,17 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
+
 <title></title>
 </head>
 <body>
 		<div style="top:5px;left:5px;width:300px">
-			<b>Procurar:</b>
-			<input style='cursor:text' class=digitar type=text size=30 id=palavra value=''/>
-			<img alt="tic.png" onclick="javascript:procurar()" style="cursor:pointer" src="../../imagens/tic.png" title='procurar' />
+			<input style='cursor:text' class=digitar type=text size=47 id=palavra value='digite aqui o texto...'/>
+		</div>
+		<div style=top:10px;left:3px;text-align:left; onclick="procurar()">
+			<input id=botao1 size=20  type=button value="Procurar" />
 		</div>
 		<div style="top:20px;left:5px;">
 			<table summary="Lista de opcoes" class=lista3 width="250px">
@@ -33,9 +36,7 @@
 		<div style="top:30px;left:5px;">
 			<b>Buscar nos itens:</b>
 		</div>
-		<div id=listai class=digitar style="text-align:left;top:30px;left:5px;width:250px;overflow:auto;height:160px">
-		</div>
-		<div id="resultado" style="position:absolute;top:5px;left:270px;width:230;overflow:auto;height:315px">
+		<div id=listai class=digitar style="text-align:left;top:30px;left:5px;width:250px;overflow:auto;height:120px">
 		</div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>

@@ -21,7 +21,7 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
-
+contadorJanelas = 0
 //monta a lista de itens
 checkitensf(
 	tema,
@@ -34,7 +34,14 @@ checkitensf(
 	}
 	,"listai"
 )
-
+YAHOO.example.init = function ()
+{
+	function onPushButtonsMarkupReady()
+	{
+		new YAHOO.widget.Button("botao1");
+	}
+	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+}()
 function procurar()
 {
 	aguarde("block")
@@ -53,7 +60,6 @@ function procurar()
 		{alert("digite uma palavra");aguarde("none")}
 		else
 		{
-			$i("resultado").innerHTML = "";
 			var tipo = "exata";
 			if ($i("qualquer").checked == true)
 			{tipo = "qualquer"}
@@ -74,31 +80,40 @@ function procurar()
 //monta o resultado
 function listaretornof(retorno)
 {
+	var palavra = $i("palavra").value;
+	var idJanela = "janelaBusca"+contadorJanelas
+	contadorJanelas++
+	window.parent.i3GEO.janela.cria("200px","200px","","","",palavra,idJanela)
 	aguarde("none")
 	var naoEncontrado = "<p style=color:red >Nenhum registro encontrado<br>"
 	var ins = new Array()
 	if (retorno.data != undefined)
 	{
-		var palavra = $i("palavra").value;
+		
 		for (tema=0;tema<retorno.data.length; tema++)
 		{
 		 var linhas = retorno.data[tema].resultado
 		 for (linha=0;linha<linhas.length; linha++)
 		 {
-			ins.push("<table><tr><td onclick='zoomf(\""+linhas[linha].box+"\")'style='cursor:pointer;color:navy'>zoom</td><td onclick='pinf(\""+linhas[linha].box+"\")'style='color:navy;cursor:pointer;'>localiza</td></tr></table>")
+			var valores = (linhas[linha].box).split(" ");
+			var x = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
+			var y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);			
+			
+			ins.push("<table><tr><td onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' style='cursor:pointer;color:navy'>zoom&nbsp;</td><td onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")' style='color:navy;cursor:pointer;'>localiza</td></tr></table>")
 			for (i=0;i<linhas[linha].valores.length; i++)
 			{
 				var er = new RegExp(palavra, "gi");
-				var tr = (linhas[linha].valores[i].valor).replace(er,"<span style=color:red >"+palavra+"</span>")
-				ins.push("&nbsp;" + linhas[linha].valores[i].item + ": " + tr + "<br><br>")
+				var tr = (linhas[linha].valores[i].valor).replace(er,"<span style=color:red;text-align:left >"+palavra+"</span>")
+				ins.push("<div style=width:170px;text-align:left;left:5px; >"+ linhas[linha].valores[i].item + ": " + tr + "</div><br>")
 				var naoEncontrado = ""
 			}
 		 }
 		}
-		$i("resultado").innerHTML=naoEncontrado+ins.join("")
-		$i("resultado").style.borderLeft = "1px solid rgb(235,235,235)"
-		$i("resultado").style.backgroundColor = "rgb(250,250,250)"
+		//$i("resultado").innerHTML=naoEncontrado+ins.join("")
+		window.parent.document.getElementById(idJanela+"_corpo").innerHTML = "<div style='position:relative;top:0px;left:0px;width:190;overflow:auto;height:315px'>"+naoEncontrado+ins.join("")+"</div>"
+		//$i("resultado").style.borderLeft = "1px solid rgb(235,235,235)"
+		//$i("resultado").style.backgroundColor = "rgb(250,250,250)"
 	}
 	else
-	{$i("resultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
+	{window.parent.document.getElementById(idJanela+"_corpo").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
 }
