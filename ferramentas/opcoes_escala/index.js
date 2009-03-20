@@ -32,10 +32,10 @@ YAHOO.example.init = function ()
 	function onPushButtonsMarkupReady()
 	{
 		new YAHOO.widget.Button("botao1");
+		new YAHOO.widget.Button("botao2");
 	}
 	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
-
 function inicia(retorno)
 {
 	if (retorno.data != undefined)
@@ -50,6 +50,7 @@ function inicia(retorno)
 		$i("cor").value = cor
 		$i("bcor").value = bcor
 		$i("ocor").value = ocor
+		testaBarra()
 	}
 	aguarde("none")
 }
