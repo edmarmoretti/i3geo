@@ -231,6 +231,20 @@ string de variaveis no formato javascript que permitem montar a legenda.
 */
 	function legendaGrafica()
 	{
+		$nomeslayers = $this->mapa->getalllayernames();
+		foreach ($nomeslayers as $nomelayer)
+		{
+			$layer = $this->mapa->getlayerbyname($nomelayer);
+			if (($layer->data != "") && (strtoupper($layer->getmetadata("escondido")) != "SIM") && (strtoupper($layer->getmetadata("tema")) != "NAO"))
+			{
+				if ($layer->numclasses > 0)
+				{
+					$classe = $layer->getclass(0);
+					if (($classe->name == "") || ($classe->name == " "))
+					{$classe->set("name",$layer->getmetadata("tema"));}
+				}
+			}
+		}
 		$nomeImagem = nomeRandomico();
 		$imgo = $this->mapa->drawlegend();
 		$nomer = ($imgo->imagepath)."leg".$nomeImagem.".png";
@@ -586,8 +600,22 @@ array - "imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$positi
 		$transparent = $legenda->transparent;
 		$imagecolor = corRGB($legenda->imagecolor);
 		$label = $legenda->label;
+		$font = $label->font;
+		if($font == MS_BITMAP)
+		{
+			$l = $label->size;
+			if ($l == MS_TINY){$t = 5;}
+			if ($l == MS_SMALL){$t = 7;}
+			if ($l == MS_MEDIUM){$t = 10;}
+			if ($l == MS_LARGE){$t = 12;}
+			if ($l == MS_GIANT){$t = 14;}
+			$labelsize = $t;
+		}
+		else
 		$labelsize = $label->size;
-		return(array("imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"height"=>$height,"width"=>$width,"labelsize"=>$labelsize));
+		
+		$tipofonte = $label->type;
+		return(array("tipofonte"=>$tipofonte,"font"=>$font,"imagecolor"=>$imagecolor,"transparent"=>transparent,"position"=>$position,"status"=>$status,"outlinecolor"=>$outlinecolor,"keyspacingy"=>$keyspacingy,"keyspacingx"=>$keyspacingx,"keysizey"=>$keysizey,"keysizex"=>$keysizex,"height"=>$height,"width"=>$width,"labelsize"=>$labelsize));
 	}
 /*
 function: aplicaParametrosLegImg
@@ -616,7 +644,7 @@ $heigt
 
 $width
 */
-	function aplicaParametrosLegImg($imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize)
+	function aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize)
 	{
 		$legenda = $this->mapa->legend;
 		$legenda->set("height",$height);
@@ -642,7 +670,24 @@ $width
 		$cor = explode(",",$imagecolor);
 		$corres->setRGB($cor[0],$cor[1],$cor[2]);
 		$label = $legenda->label;
-		$label->set("size",$labelsize);		
+		
+		if ($fonte != "bitmap")
+		{
+			$label->set("type",MS_TRUETYPE);
+			$label->set("font",$fonte);
+			$label->set("size",$labelsize);
+		}
+		else
+		{
+			$label->set("type",MS_BITMAP);
+			$t = MS_TINY;
+			if ($labelsize > 5 ){$t = MS_TINY;}
+			if ($labelsize >= 7 ){$t = MS_SMALL;}
+			if ($labelsize >= 10 ){$t = MS_MEDIUM;}
+			if ($labelsize >= 12 ){$t = MS_LARGE;}
+			if ($labelsize >= 14 ){$t = MS_GIANT;}
+			$label->set("size",$t);
+		}
 		return("ok");
 	}
 }

@@ -2204,6 +2204,21 @@ Include:
 		$cp->set_data($r);
 	break;
 /*
+Property: testaLegenda
+
+Testa os parâmetros de definição da legenda inserida no mapa.
+
+Include:
+<classe_legenda.php>
+*/
+	case "testaLegenda":
+		include_once("classe_legenda.php");
+		copy($map_file,str_replace(".map","testeleg.map",$map_file));
+		$m = new Legenda(str_replace(".map","testeleg.map",$map_file));
+		$m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
+		$cp->set_data($m->legendaGrafica());
+	break;
+/*
 Property: contagemclasse
 
 Acrescenta a contagem de elementos em cada classe.
@@ -2263,7 +2278,7 @@ Include:
 			$utilizacgi = "nao";
 		}
 		$m = new Legenda($map_file);
-		$cp->set_data($m->aplicaParametrosLegImg($imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize));
+		$cp->set_data($m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize));
 		$m->salva();
 	break;
 /*
@@ -2340,9 +2355,14 @@ Include:
 	case "selecaopt":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
 		if(!isset($xy)){$xy = "";}
-		$cp->set_data($m->selecaoPT($xy,$tipo,$tolerancia));
+		$temas = explode(",",$tema);
+		foreach($temas as $tema)
+		{
+			$m = new Selecao($map_file,$tema);
+			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
+		}
+		$cp->set_data(implode(",",$ok));
 	break;
 /*
 Property: selecaoext
@@ -2355,8 +2375,13 @@ Include:
 	case "selecaoext":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
-		$cp->set_data($m->selecaoEXT($tipo));
+		$temas = explode(",",$tema);
+		foreach($temas as $tema)
+		{
+			$m = new Selecao($map_file,$tema);
+			$ok[] = $m->selecaoEXT($tipo);
+		}
+		$cp->set_data(implode(",",$ok));
 	break;
 /*
 Property: selecaobox
@@ -2369,8 +2394,13 @@ Include:
 	case "selecaobox":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
-		$cp->set_data($m->selecaoBOX($tipo,$ext));
+		$temas = explode(",",$tema);
+		foreach($temas as $tema)
+		{
+			$m = new Selecao($map_file,$tema);
+			$ok[] = $m->selecaoBOX($tipo,$ext);
+		}
+		$cp->set_data(implode(",",$ok));		
 	break;
 
 /*
@@ -2398,8 +2428,13 @@ Include:
 	case "selecaotema":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
-		$cp->set_data($m->selecaoTema($temao,$tipo));
+		$temas = explode(",",$tema);
+		foreach($temas as $tema)
+		{
+			$m = new Selecao($map_file,$tema);
+			$ok[] = $m->selecaoTema($temao,$tipo);
+		}
+		$cp->set_data(implode(",",$ok));		
 	break;
 /*
 Property: selecaoPoli
@@ -2603,9 +2638,14 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 {
 	global $map_file,$cp;
 	include_once("classe_selecao.php");
-	$m = new Selecao($map_file,$tema);
-	$cp->set_data($m->selecaoPorPoligono($tipo,$xs,$ys));
-	$m->salva();
+	$temas = explode(",",$tema);
+	foreach($temas as $tema)
+	{
+		$m = new Selecao($map_file,$tema);
+		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys);
+		$m->salva();
+	}
+	$cp->set_data(implode(",",$ok));
 }
 /*
 Function: redesenhaMapa
