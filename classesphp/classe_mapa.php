@@ -676,7 +676,7 @@ $cortexto - cor do texto
 
 $incluitexto - sim|nao
 */
-	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$cortexto="0,0,0",$incluitexto="sim")
+	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$fonte="bitmap",$cortexto="0,0,0",$incluitexto="sim",$mascara="-1,-1,-1",$shadowcolor="-1,-1,-1",$shadowsizex=0,$shadowsizey=0)
 	{
 		//echo $corlinha;
 		if (file_exists(($this->arquivo)."qy"))
@@ -698,17 +698,45 @@ $incluitexto - sim|nao
 		if($incluitexto == "sim")
 		{
 			$label = $classe->label;
+			
 			$label->set("size",$tamanhotexto);
 			$label->set("type",MS_BITMAP);
+
+			if ($fonte != "bitmap")
+			{
+				$label->set("type",MS_TRUETYPE);
+				$label->set("font",$fonte);
+				$label->set("size",$tamanhotexto);
+			}
+			else
+			{
+				$label->set("type",MS_BITMAP);
+				$t = MS_TINY;
+				if ($tamanhotexto > 5 ){$t = MS_TINY;}
+				if ($tamanhotexto >= 7 ){$t = MS_SMALL;}
+				if ($tamanhotexto >= 10 ){$t = MS_MEDIUM;}
+				if ($tamanhotexto >= 12 ){$t = MS_LARGE;}
+				if ($tamanhotexto >= 14 ){$t = MS_GIANT;}
+				$label->set("size",$t);
+			}
+			
 			$label->set("buffer",0);
 			$label->set("force",MS_FALSE);
-			$label->set("partials",MS_TRUE);
+			$label->set("partials",MS_FALSE);
 			$label->set("position",MS_CC);
 			$corl = $label->color;
 			$cortexto = explode(",",$cortexto);
 			$corl->setrgb($cortexto[0],$cortexto[1],$cortexto[2]);
 			$label->set("offsetx",0);
 			$label->set("offsety",0);
+			if($mascara != "")
+			corE($label,$mascara,"outlinecolor");
+			if($shadowcolor != "")
+			{
+				corE($label,$shadowcolor,"shadowcolor");
+				$label->set("shadowsizex",$shadowsizex);
+				$label->set("shadowsizey",$shadowsizey);
+			}
 		}
 		return ("ok");
 	}

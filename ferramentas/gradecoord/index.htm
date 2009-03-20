@@ -42,11 +42,33 @@
 <tr>
 	<td>Tamanho do texto:</td>
 	<td>
-		<select id=tamanhotexto >
-			<option value=0 >pequeno</option>
-			<option value=1 >médio</option>
-			<option value=2 >grande</option>
-		</select>
+		<input class=digitar size=3 type=text value="10" id=tamanhotexto  />		
+	</td>
+</tr>
+<tr>
+	<td>Fonte:</td>
+	<td id=listaf >
+	</td>
+</tr>
+<tr>
+	<td>Cor da m&aacute;scara de um pixel de entorno:</td>
+	<td>
+		<input class=digitar size=11 type=text value="-1,-1,-1" id=mascara_i />
+		<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara_i')" />
+	</td>
+</tr>
+<tr>
+	<td>Cor da sombra:</td>
+	<td>
+		<input class=digitar size=11 type=text value="-1,-1,-1" id=shadowcolor  />
+		<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('shadowcolor')" />
+	</td>
+</tr>
+<tr>
+	<td>Deslocamento da sombra:</td>
+	<td>
+		x <input class=digitar size=3 type=text value="0" id=shadowsizex  />
+		y <input class=digitar size=3 type=text value="0" id=shadowsizey  />
 	</td>
 </tr>
 <tr>
@@ -59,7 +81,7 @@
 	</div>
 </div>
 <div id=men1 style=top:15px;left:0px >A grade ser&aacute; adicionada como um novo tema no mapa.
-Vc pode inserir mais de uma grade, e excluir as que desejar.</div>
+Vc pode inserir mais de uma grade, e excluir as que desejar. Nas opções de cor, utilize -1,-1,-1 para não considerar o parâmetro.</div>
 
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>

@@ -557,7 +557,7 @@ i3GEO.mapa = {
 		Abre a janela que gera grade de coordenadas
 		*/
 		gradeCoord: function()
-		{i3GEO.janela.cria("350px","280px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");},
+		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");},
 		/*
 		Function: cliqueTexto
 		

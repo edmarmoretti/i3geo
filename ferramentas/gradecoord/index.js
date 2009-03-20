@@ -29,7 +29,27 @@ YAHOO.example.init = function ()
 		new YAHOO.widget.Button("botao1");
 	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()	
+}()
+//preenche a lista de fontes
+var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatruetype"
+var cp = new cpaint();
+//cp.set_debug(2)
+cp.set_response_type("JSON");
+cp.call(p,"listaTrueType",listafontesf);
+
+//monta a lista de fontes
+function listafontesf(retorno)
+{
+	var retorno = retorno.data
+	var lista = retorno.split(",")
+	var ins = "<select id=fonte >"
+	ins = ins + "<option value=bitmap >bitmap</option>"
+	for (i=0;i<lista.length;i++)
+	{ins = ins + "<option value="+lista[i]+" >"+lista[i]+"</option>"}
+	ins = ins + "</select>"
+	$i("listaf").innerHTML = ins
+	aguarde("none")
+}
 function executa()
 {
 	if (($i("intervalo").value == 0) || ($i("intervalo").value == ""))
@@ -50,6 +70,12 @@ function executa()
 		p += "&tamanhotexto="+$i("tamanhotexto").value
 		p += "&cortexto="+$i("cortexto").value
 		p += "&incluitexto="+$i("incluitexto").value
+		p += "&mascara="+$i("mascara_i").value
+		p += "&shadowcolor="+$i("shadowcolor").value
+		p += "&shadowsizex="+$i("shadowsizex").value
+		p += "&shadowsizey="+$i("shadowsizey").value
+		p += "&fonte="+$i("fonte").value
+		
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");
