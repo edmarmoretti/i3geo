@@ -1120,7 +1120,8 @@ function montaEditorEstilo(dados)
 }
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
-	if(arguments.lenght == 5){var testar = false;}
+	if(arguments.length < 6){var testar = false;}
+
 	if(tipo == "conexao")
 	{
 		var campos = new Array("connection","data","connectiontype","tileitem","tileindex")
