@@ -5,8 +5,10 @@
 <style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
 <title></title>
 </head>
-<body>
-<div style=top:0px;left:0px;text-align:left;width:100%; >
+<body class="yui-skin-sam" >
+
+<div style="height:98%;overflow:auto;cursor:pointer;position:relative;top:1px;left:0px;text-align:left">
+
 	<table summary="" class=lista3 width="100%"> 
 		<tr>
 			<td>Inclui no corpo do mapa?:</td>
@@ -19,14 +21,14 @@
 			<td>
 		</tr>
 		<tr>
-			<td>Cor:</td>
+			<td>Cor do fundo:</td>
 			<td><input style="cursor:text" size=12 class=digitar type='text' id=imagecolor value='' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('imagecolor')" /></td>
 		</tr>
 		<tr>
-			<td>Contorno:</td>
+			<td>Contorno dos símbolos:</td>
 			<td><input style="cursor:text" size=12 class=digitar type='text' id=outlinecolor value='' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('outlinecolor')" /></td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Posição:</td>
 			<td>
 				<select id=position >
@@ -39,30 +41,39 @@
 				</select>
 			<td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Espaçamento em Y:</td>
 			<td><input style="cursor:text" size=4 class=digitar type='text' id=keyspacingy value='' /></td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Espaçamento em X:</td>
 			<td><input style="cursor:text" size=4 class=digitar type='text' id=keyspacingx value='' /></td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Tamanho do símb. Y:</td>
 			<td><input style="cursor:text" size=4 class=digitar type='text' id=keysizey value='' /></td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Tamanho do símb. X:</td>
 			<td><input style="cursor:text" size=4 class=digitar type='text' id=keysizex value='' /></td>
 		</tr>
-		<tr>  
+		<tr>
 			<td>Tamanho do texto:</td>
 			<td><input style="cursor:text" size=4 class=digitar type='text' id=labelsize value='' /></td>
 		</tr>
+		<tr>
+			<td>Fonte:</td>
+			<td id=listaf >aguarde...</td>
+		</tr>
+
 	</table>
 	<div style=top:10px;left:0px;text-align:left; onclick="executa()">
 	<input id=botao1 size=20  type=button value="Aplicar" />
 	</div>
+	<div style="width:100px;left:100px;position:relative;text-align:left;top:-17px;" onclick="testa()">
+	<input id=botao2 size=20 type=button value="Testar" />
+	</div>
+	<img src="" id=testeLegenda />
 </div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>

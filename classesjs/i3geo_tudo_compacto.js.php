@@ -11478,7 +11478,7 @@ i3GEO.mapa = {
 		Abre a janela de configuração da legenda do mapa
 		*/
 		opcoesLegenda: function()
-		{i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");},
+		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");},
 		/*
 		Function: gradeCoord
 
