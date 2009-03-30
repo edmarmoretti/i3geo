@@ -154,6 +154,15 @@ i3GEO.configura = {
 	*/
 	funcaoTip: "verificaTipDefault()",
 	/*
+	Variable: funcaoIdentifica
+	
+	Função que será executada na operação de identificação quando o usuário clica no mapa
+	
+	Type:
+	{String}
+	*/
+	funcaoIdentifica: "cliqueIdentifica()",
+	/*
 	Variable: diminuixM
 
 	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
@@ -561,15 +570,20 @@ i3GEO.configura = {
 				g_tipoacao='identifica';
 				g_operacao='identifica';
 				cliqueIdentifica = function(){
-					if (g_tipoacao == "identifica"){
-						i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
-						var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica");
-						var temp = function(){
-							i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
-							i3GEO.barraDeBotoes.ativaBotoes();
-						};
-						if(i3GEO.interface.ATUAL != "googlemaps")
-						YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+					cliqueIdentificaDefault = function(){
+						if (g_tipoacao == "identifica"){
+							i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");					
+							var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica");
+							var temp = function(){
+								i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
+								i3GEO.barraDeBotoes.ativaBotoes();
+							};
+							if(i3GEO.interface.ATUAL != "googlemaps")
+							YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+						}
+					};
+					if (g_operacao == "identifica"){
+						eval(i3GEO.configura.funcaoIdentifica);
 					}
 				};
 				verificaTip = function(){

@@ -13,6 +13,20 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"A legenda do mapa é utilizada em várias opções do i3Geo e pode também ficar inserida na própria imagem do mapa. A legenda mostra os símbolos utilizados no desenho de cada tema, podendo-se alterar características como fonte, tamanho dos textos, tamanho dos retângulos com os símbolos, etc.",
 			complemento:"Antes de aplicar uma alteração, você pode testar os parâmetros escolhidos para avaliar o resultado. No caso dos parâmetros que definem cores, utilize -1,-1,-1 para anular seu efeito."
+		},
+		"3": {
+			titulo: "Barra de escala",
+			diretorio:"i3geo/ferramentas/opcoes_escala",
+			categoria:"1",
+			pt:"A barra de escala é uma imagem inserida no mapa que mostra a relação entre uma medida feita no mapa e no mundo real. A barra pode ser modificada especificando-se seu tamanho, número de divisões e cores.",
+			complemento:"Existem dois modelos básicos para a escala: linear e bloco. Para não mostrar a escala no mapa, escolha a 'sem escala' na opção estilo."
+		},
+		"4": {
+			titulo: "Tamanho do mapa",
+			diretorio:"i3geo/ferramentas/opcoes_tamanho",
+			categoria:"1",
+			pt:"O tamanho do mapa é definido automaticamente quando o i3Geo é aberto, buscando-se otimizar o uso do espaço disponível no monitor. A opção de modificação do tamanho altera apenas o corpo do mapa, forçando o ajuste dos outros elementos, o que nem sempre provoca bons resultados.",
+			complemento:"O ajuste do tamanho do mapa pode ser utilizado para gerar imagens em tamanhos específicos, principalmente para efeitos de impressão. A medida do tamanho utilizado é pixel, que corresponde ao tamanho mínimo de uma célula da imagem do mapa. Para calcular o tamanho do mapa em outra unidade de medida, necessário nos casos em que se deseja imprimir o mapa, deve ser feito considerando-se a resolução de impressão desejada."
 		}
 	}
 };

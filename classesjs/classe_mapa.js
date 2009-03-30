@@ -522,7 +522,7 @@ i3GEO.mapa = {
 		Abre a janela que muda o tamanho do mapa
 		*/
 		tamanho: function()
-		{i3GEO.janela.cria("150px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/index.htm","","","Tamanho");},
+		{i3GEO.janela.cria("150px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/index.htm","","","Tamanho<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=4' ><b>?</b></a>");},
 		/*
 		Function: tipoimagem
 
@@ -543,7 +543,7 @@ i3GEO.mapa = {
 		Abre a janela para definição das opções da barra de escala.
 		*/
 		opcoesEscala: function()
-		{i3GEO.janela.cria("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm","center","center","Escala");},
+		{i3GEO.janela.cria("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm","center","center","Escala<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=3' ><b>?</b></a>");},
 		/*
 		Function: opcoesLegenda
 
