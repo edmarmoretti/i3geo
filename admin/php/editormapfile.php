@@ -148,7 +148,7 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$retorno = alterarConexao();
-		if($testar == false)
+		if($testar == "false")
 		retornaJSON(pegaConexao());
 		else
 		retornaJSON(array("url"=>$retorno));
@@ -172,10 +172,14 @@ switch ($funcao)
 	case "alterarGeral":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		
 		$retorno = alterarGeral();
 		
-		if($testar == false)
-		retornaJSON(pegaGeral());
+		if($testar == "false")
+		{
+			$codigoLayer = $name;
+			retornaJSON(pegaGeral());
+		}
 		else
 		retornaJSON(array("url"=>$retorno));		
 		exit;
@@ -309,7 +313,7 @@ function autoClassesLayer()
 	global $codigoMap,$codigoLayer,$item,$locaplic,$dir_tmp;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	include_once("../../classesphp/classe_alteraclasse.php");
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$nometemp = $dir_tmp."/".nomerandomico().".map";
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{$geral = $locaplic."/aplicmap/geral1windows.map";}
@@ -484,7 +488,7 @@ function alterarConexao()
 	$layer->set("data",$data);
 	$layer->set("tileitem",$tileitem);
 	$layer->set("tileindex",$tileindex);
-	if($testar == true)
+	if($testar == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
 		$mapa->save($nome);
@@ -600,6 +604,7 @@ function alterarGeral()
 	error_reporting(E_ALL);
 	$v = versao();
 	$dados = array();
+	
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -637,17 +642,19 @@ function alterarGeral()
 	if($layer->getprojection() == MS_FALSE && $projection != "")
 	$layer->setprojection($projection);
 
-	if($testar == true)
+	if($testar == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
 		$mapa->save($nome);
 		removeCabecalho($nome,false);
 		return $nome;
 	}
-	
-	$mapa->save($mapfile);
-	removeCabecalho($mapfile);
-	return "ok";	
+	else
+	{
+		$mapa->save($mapfile);
+		removeCabecalho($mapfile);
+		return "ok";	
+	}
 }
 function pegaClasseGeral()
 {

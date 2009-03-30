@@ -774,7 +774,7 @@ function montaEditorConexao(dados)
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 
 	var temp = function()
-	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,true)}
+	{salvarDadosEditor('conexao',dados.codigoMap,dados.codigoLayer,"","",true)}
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
 }
 function montaEditorMetadados(dados)
@@ -930,7 +930,7 @@ function montaEditorGeral(dados)
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});
 	
 	var temp = function()
-	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,true)}
+	{salvarDadosEditor('geral',dados.codigoMap,dados.codigoLayer,"","",true)}
 	new YAHOO.widget.Button("testarEditor",{ onclick: { fn: temp }});
 
 }
@@ -1114,12 +1114,14 @@ function montaEditorEstilo(dados)
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins	
+
 	var temp = function()
 	{salvarDadosEditor('estilo',dados.codigoMap,dados.codigoLayer,dados.indiceClasse,dados.indiceEstilo)}
 	new YAHOO.widget.Button("salvarEditor",{ onclick: { fn: temp }});	
 }
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
+	//alert(arguments.length)
 	if(arguments.length < 6){var testar = false;}
 
 	if(tipo == "conexao")
