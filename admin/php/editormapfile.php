@@ -314,7 +314,7 @@ function autoClassesLayer()
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	{$geral = $locaplic."/aplicmap/geral1windows.map";}
 	else
-	{$geral = $locaplic."aplicmap/geral1.map";}
+	{$geral = $locaplic."/aplicmap/geral1.map";}
 	$mapageral = ms_newMapObj($geral);
 	$nomestemp = $mapageral->getalllayernames();
 	foreach($nomestemp as $l)
