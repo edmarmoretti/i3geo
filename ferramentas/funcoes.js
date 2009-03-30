@@ -69,6 +69,13 @@ else
 	}
 }
 document.body.style.backgroundColor="#F0F0F0";
+
+$tradAjuda = function(tipo,id){
+	eval("var t = g_traducao_ajuda."+tipo);
+	eval("var texto = t[id]."+window.parent.i3GEO.idioma.ATUAL);
+	return (texto);
+};
+
 //abre relogio
 function aguarde(tipo)
 {

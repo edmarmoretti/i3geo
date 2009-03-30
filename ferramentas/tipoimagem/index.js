@@ -27,7 +27,8 @@ YAHOO.example.init = function ()
 		new YAHOO.widget.Button("botao1");
 	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()	
+}()
+
 function aplicar()
 {
 	var ipt = $i("opcoes").getElementsByTagName("input")

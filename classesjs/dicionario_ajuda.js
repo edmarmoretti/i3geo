@@ -1,0 +1,22 @@
+g_traducao_ajuda = {
+	ferramentas: {
+		"1": {
+			titulo: "Filtro de cores",
+			diretorio:"i3geo/ferramentas/tipoimagem",
+			categoria:"1",
+			pt:"O filtro possibilita gerar efeitos de coloração no mapa. É aplicado sobre a imagem gerada toda vez que o mapa é alterado. No caso de temas baseados em dados RASTER, os níveis de cores obtidos com a ferramenta de identificação não são alterados.",
+			complemento:"Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As opções sépia e tons de cinza utilizam algorítmos próprios do i3Geo, já as demais, utilizam a opção de filtro disponível com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>."
+		},
+		"2": {
+			titulo: "Legenda",
+			diretorio:"i3geo/ferramentas/opcoes_legenda",
+			categoria:"1",
+			pt:"A legenda do mapa é utilizada em várias opções do i3Geo e pode também ficar inserida na própria imagem do mapa. A legenda mostra os símbolos utilizados no desenho de cada tema, podendo-se alterar características como fonte, tamanho dos textos, tamanho dos retângulos com os símbolos, etc.",
+			complemento:"Antes de aplicar uma alteração, você pode testar os parâmetros escolhidos para avaliar o resultado. No caso dos parâmetros que definem cores, utilize -1,-1,-1 para anular seu efeito."
+		}
+	}
+};
+
+g_traducao_ajuda_categorias = {
+	"1":{titulo:"Propriedades do mapa"}
+};

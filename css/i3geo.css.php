@@ -28,6 +28,12 @@ input
 select
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 1px solid gray;text-align: left;cursor: pointer;}
 
+.ajuda_usuario
+{
+	margin-left:6px;
+	text-decoration:none;
+}
+
 .executar
 {cursor:pointer;color:white;text-align:left;background-color:gray;background-image:URL('../imagens/tic.png');background-repeat:no-repeat;border-style:outset;background-position: right;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;}
 .inputsb

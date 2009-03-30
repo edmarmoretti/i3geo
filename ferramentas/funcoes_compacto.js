@@ -9,7 +9,7 @@ if(navn){ if(document.getElementById("fundo")){ document.getElementById("fundo")
  if(document.getElementById("geral")){ document.getElementById("geral").style.height="90%"; document.getElementById("geral").style.width="97%";}}
 else{ if(document.getElementById("fundo")){ document.getElementById("fundo").style.width="104%"; document.getElementById("fundo").style.height="99%";}
  if(document.getElementById("geral")){ document.getElementById("geral").style.height="95%"; document.getElementById("geral").style.width="100%";}}
-document.body.style.backgroundColor="#F0F0F0";function aguarde(tipo){ if(tipo=="block"){ $i("mascaraaguarde").style.display="block";}
+document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval("var t=g_traducao_ajuda."+tipo); eval("var texto=t[id]."+window.parent.i3GEO.idioma.ATUAL); return(texto);}; function aguarde(tipo){ if(tipo=="block"){ $i("mascaraaguarde").style.display="block";}
  if(tipo=="none"){ if($i("mascaraaguarde")){$i("mascaraaguarde").style.display="none";}}
  if(document.getElementById("aguarde")){document.getElementById("aguarde").style.display="none";}}function aguardeTotal(tipo){ var w=parseInt(screen.availWidth); var h=parseInt(screen.availHeight); if(!document.getElementById("aguardeTotal")){ var novoel=document.createElement("div"); novoel.style.width=w+"px"; novoel.style.height=h+"px"; novoel.id="aguardeTotal"; novoel.display="none"; novoel.style.zIndex=10000; novoel.style.position="absolute"; novoel.style.top=0; novoel.style.left=0; novoel.style.backgroundColor="gray"; if(navn){novoel.style.opacity=0.45;}
  else{novoel.style.filter='alpha(opacity=45)';}
