@@ -432,6 +432,11 @@ i3GEO.interface = {
     				i3GeoMap.addOverlay(i3GEOTileO);
 				}
 			}
+			//atualiza a lista de KMLs na árvore de temas
+			var n = i3GEO.mapa.GEOXML.length;
+			for(i=0;i<n;i++){
+				i3GEO.mapa.criaNoArvoreGoogle(i3GEO.mapa.GEOXML[i],i3GEO.mapa.GEOXML[i]);
+			}
 		},
 		cria: function(w,h){
 			posfixo = "&";

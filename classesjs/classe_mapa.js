@@ -190,9 +190,9 @@ i3GEO.mapa = {
 		};
 		eval(ngeoxml+" = new GGeoXml(url,zoom)");
 		eval("i3GeoMap.addOverlay("+ngeoxml+")");
-		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml);
+		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml,ngeoxml);
 	},
-	criaNoArvoreGoogle: function(nomeOverlay){
+	criaNoArvoreGoogle: function(url,nomeOverlay){
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 		if(!node){
@@ -200,7 +200,7 @@ i3GEO.mapa = {
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 		}
-		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
 		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
 		var d = {html:html};
 		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
@@ -529,7 +529,7 @@ i3GEO.mapa = {
 		Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
 		*/
 		tipoimagem: function()
-		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");},
+		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=1' ><b>?</b></a>");},
 		/*
 		Function: corFundo
 
@@ -550,7 +550,7 @@ i3GEO.mapa = {
 		Abre a janela de configuração da legenda do mapa
 		*/
 		opcoesLegenda: function()
-		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");},
+		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=2' ><b>?</b></a>");},
 		/*
 		Function: gradeCoord
 

@@ -7799,12 +7799,12 @@ i3GEO.configura = {
 											$i(n).innerHTML += res;
 										}
 										else{
-											var nn = i3GEO.janela.tip("<img id='teste' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											var nn = i3GEO.janela.tip("<img id='marcaBalao' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
 											balloon = new Balloon;
 											balloon.delayTime = 0;
 											var res = "<div style=text-align:left >"+res+"</div>";
 											//$i(nn+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
-											balloon.showTooltip($i("teste"),res);
+											balloon.showTooltip($i("marcaBalao"),res);
 										}
 									}
 								}
@@ -10715,6 +10715,11 @@ i3GEO.interface = {
     				i3GeoMap.addOverlay(i3GEOTileO);
 				}
 			}
+			//atualiza a lista de KMLs na árvore de temas
+			var n = i3GEO.mapa.GEOXML.length;
+			for(i=0;i<n;i++){
+				i3GEO.mapa.criaNoArvoreGoogle(i3GEO.mapa.GEOXML[i],i3GEO.mapa.GEOXML[i]);
+			}
 		},
 		cria: function(w,h){
 			posfixo = "&";
@@ -11118,9 +11123,9 @@ i3GEO.mapa = {
 		};
 		eval(ngeoxml+" = new GGeoXml(url,zoom)");
 		eval("i3GeoMap.addOverlay("+ngeoxml+")");
-		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml);
+		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml,ngeoxml);
 	},
-	criaNoArvoreGoogle: function(nomeOverlay){
+	criaNoArvoreGoogle: function(url,nomeOverlay){
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 		if(!node){
@@ -11128,7 +11133,7 @@ i3GEO.mapa = {
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 		}
-		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+ngeoxml+"' checked />";
+		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
 		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
 		var d = {html:html};
 		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
@@ -11457,7 +11462,7 @@ i3GEO.mapa = {
 		Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
 		*/
 		tipoimagem: function()
-		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem");},
+		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=1' ><b>?</b></a>");},
 		/*
 		Function: corFundo
 
@@ -11478,7 +11483,7 @@ i3GEO.mapa = {
 		Abre a janela de configuração da legenda do mapa
 		*/
 		opcoesLegenda: function()
-		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda");},
+		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=2' ><b>?</b></a>");},
 		/*
 		Function: gradeCoord
 
@@ -11819,7 +11824,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema)
-		{i3GEO.janela.cria("550px","340px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar");},
+		{i3GEO.janela.cria("280px","320px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar","janela_busca");},
 		/*
 		Function: tabela
 
@@ -12941,6 +12946,8 @@ i3GEO.janela = {
 	
 	ny {Integer} - posição y da janela em pixels. Se for "" será fixada no centro
 
+	texto {String} - texto do cabeçalho
+	
 	id {String} - (opcional) nome que será dado ao id que conterá a janela. Se não for definido, será usado o id="wdoca". O
 		id do iframe interno é sempre igual ao id + a letra i. Por default, será "wdocai".
 		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo"
@@ -12952,8 +12959,6 @@ i3GEO.janela = {
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
-		//executa as funções de preparação
-		//YAHOO.log("Cria janela", "janela");
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -12990,7 +12995,6 @@ i3GEO.janela = {
 			with (wdocaiframe.style){width = "100%";height=waltura;};
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
-			//i3GEO.janela.ANTESFECHA.push("$i('"+id+"i').src = ''");
 		}
 		var fix = false;
 		if(nx == "" || nx == "center"){var fix = true;}
@@ -13004,7 +13008,6 @@ i3GEO.janela = {
 		}
 		YAHOO.janelaDoca.xp.panel.render();
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
-		//YAHOO.log("Fim cria janela", "janela");
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	/*
@@ -16172,25 +16175,25 @@ i3GEO.eventos = {
 	O resultado dos cálculos são armazenados no objeto objposicaocursor
 	esse objeto terá as seguintes propriedades:
 	
-			propriedades.ddx valor de x em décimos de grau
+			objposicaocursor.ddx valor de x em décimos de grau
 			
-			propriedades.ddy valor de y em décimos de grau
+			objposicaocursor.ddy valor de y em décimos de grau
 			
-			propriedades.dmsx valor de x em dms
+			objposicaocursor.dmsx valor de x em dms
 			
-			propriedades.dmsy valor de y em dms
+			objposicaocursor.dmsy valor de y em dms
 			
-			propriedades.telax posicao x na tela em pixels
+			objposicaocursor.telax posicao x na tela em pixels
 			
-			propriedades.telay posicao y na tela em pixels
+			objposicaocursor.telay posicao y na tela em pixels
 			
-			propriedades.imgx posicao x no mapa em pixels
+			objposicaocursor.imgx posicao x no mapa em pixels
 			
-			propriedades.imgy: posicao y no mapa em pixels
+			objposicaocursor.imgy: posicao y no mapa em pixels
 			
-			propriedades.refx: posicao x no mapa de referência em pixels
+			objposicaocursor.refx: posicao x no mapa de referência em pixels
 			
-			propriedades.refy: posicao x no mapa de referência em pixels
+			objposicaocursor.refy: posicao x no mapa de referência em pixels
 	
 	Parameters:
 	
