@@ -21,7 +21,6 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
-mensagemAjuda("men1",$i("men1").innerHTML)
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()

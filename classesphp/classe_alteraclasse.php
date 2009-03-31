@@ -327,6 +327,11 @@ $ignorar - valor que será ignorado na listagem final
 		$nclassexist = $this->layer->numclasses;
 		if ($nclassexist > count($valoresu))
 		{$nclassexist = count($valoresu);}
+		if($nclassexist == 0)
+		{
+			$temp = ms_newClassObj($this->layer);
+			ms_newStyleObj($temp);
+		}	
 		// cria classes
 		$classes = array();
 		$classpadrao = $this->layer->getClass(0);

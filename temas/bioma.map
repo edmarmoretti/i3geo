@@ -26,6 +26,7 @@ FONTSET   "../symbols/fontes.txt"
         ANGLE 360
         COLOR 222 45 254
         OPACITY 100
+        SYMBOL 0
       END
     END
     CLASS

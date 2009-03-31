@@ -7,13 +7,13 @@ include("classesphp/pega_variaveis.php");
 <link rel="stylesheet" type="text/css" href="css/i3geo_ferramentas.css">
 <title></title>
 </head>
-<body>
-<div style=text-align:center >
+<body style=overflow:auto; >
+<div style=text-align:center;width:600px >
 <p><img src="imagens/i3geo1.jpg" />
 <p style='font-size:16px'>Documentação do usuário. Para ver toda a documentação, 
 clique <a href="ajuda_usuario.php" >aqui</a></p><br>
 </div>
-<div id=resultado >
+<div id=resultado style='width:600px;'>
 </div>
 <script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
 <script>
@@ -26,7 +26,7 @@ function pegaAjuda(tipo,categoria){
 		{}
 		else
 		{
-			ins += "<p style='font-size:16px'>"+obj[k].titulo+"</p>"
+			ins += "<p style='font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></p>"
 			ins += "<p>"+obj[k].pt+"</p>"
 			ins += "<p>"+obj[k].complemento+"</p>"
 			ins += "<p style='color:gray'>"+obj[k].diretorio+"</p>"
@@ -35,7 +35,7 @@ function pegaAjuda(tipo,categoria){
 }
 function inicia()
 {
-	ins = "<div>"
+	ins = "<div style='text-align:justify'>"
 	for(var key in g_traducao_ajuda_categorias){
 		if(idcategoria != "" && idcategoria != key)
 		{}

@@ -14,9 +14,11 @@
 		</tr>
 	</table>
 
-<div style=left:0px;top:0px class=destaca >Tempo em milisegundos. Utilize 0 para eliminar o temporizador</div>
-<div style="top:15px;left:0px" onclick="executaf()">
+<div style="top:15px;left:0px;width:100px;" onclick="executaf()">
   	<input id=botao1 size=16  type=button value="Aplicar"/><br><br>
+</div>
+<div style="top:-26px;left:110px;width:100px;" onclick="javascript:$i("botao1").value=0;executaf();">
+  	<input id=botao2 size=16  type=button value="Parar"/><br><br>
 </div>
 
 

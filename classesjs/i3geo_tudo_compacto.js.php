@@ -11346,6 +11346,27 @@ i3GEO.mapa = {
 			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda)
 		},
 		/*
+		Function: ativaDesativaTema
+		
+		Liga ou desliga um único tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
+		
+		Parameters:
+		
+			inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o código do tema que será processado
+		*/
+		ativaDesativaTema: function(inputbox){
+			var temp = function(){
+				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+				i3GEO.arvoreDeCamadas.atualiza("");
+				i3GEO.janela.fechaAguarde("redesenha");
+			};
+			i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
+			if(!inputbox.checked)
+			i3GEO.php.ligatemas(temp,inputbox.value,"");
+			else
+			i3GEO.php.ligatemas(temp,"",inputbox.value);		
+		},
+		/*
 		Function: libera
 		
 		Libera a legenda criando uma janela flutuante sobre o mapa

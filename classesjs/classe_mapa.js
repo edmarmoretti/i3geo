@@ -399,6 +399,27 @@ i3GEO.mapa = {
 			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda)
 		},
 		/*
+		Function: ativaDesativaTema
+		
+		Liga ou desliga um único tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
+		
+		Parameters:
+		
+			inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o código do tema que será processado
+		*/
+		ativaDesativaTema: function(inputbox){
+			var temp = function(){
+				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+				i3GEO.arvoreDeCamadas.atualiza("");
+				i3GEO.janela.fechaAguarde("redesenha");
+			};
+			i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
+			if(!inputbox.checked)
+			i3GEO.php.ligatemas(temp,inputbox.value,"");
+			else
+			i3GEO.php.ligatemas(temp,"",inputbox.value);		
+		},
+		/*
 		Function: libera
 		
 		Libera a legenda criando uma janela flutuante sobre o mapa
@@ -464,7 +485,7 @@ i3GEO.mapa = {
 		Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
 		*/
 		autoredesenha: function()
-		{i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador");},
+		{i3GEO.janela.cria("300px","110px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=9' ><b>?</b></a>");},
 		/*
 		Function: salvaMapa
 
@@ -508,14 +529,14 @@ i3GEO.mapa = {
 		Abre a janela que altera as propriedades da exibição dos elementos selecionados.
 		*/
 		queryMap: function()
-		{i3GEO.janela.cria("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Querymap");},
+		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Cor da seleção<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=5' ><b>?</b></a>");},
 		/*
 		Function: template
 
 		Abre a janela que muda o template do mapa atual.
 		*/
 		template: function()
-		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template");},
+		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=8' ><b>?</b></a>");},
 		/*
 		Function: tamanho
 
@@ -536,7 +557,7 @@ i3GEO.mapa = {
 		Abre a janela que altera a cor do fundo do mapa atual.
 		*/
 		corFundo: function()
-		{i3GEO.janela.cria("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Fundo");},
+		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Cor do fundo<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=6' ><b>?</b></a>");},
 		/*
 		Function: opcoesEscala
 
@@ -557,7 +578,7 @@ i3GEO.mapa = {
 		Abre a janela que gera grade de coordenadas
 		*/
 		gradeCoord: function()
-		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");},
+		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=7' ><b>?</b></a>");},
 		/*
 		Function: cliqueTexto
 		
