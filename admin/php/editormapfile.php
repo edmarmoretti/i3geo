@@ -601,7 +601,7 @@ function pegaGeral()
 function alterarGeral()
 {
 	global $dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$name,$projection,$sizeunits,$status,$toleranceunits,$tolerance,$symbolscale,$opacity,$offsite,$minscale,$maxscale,$labelsizeitem,$labelminscale,$labelmaxscale,$labelitem,$group,$filteritem,$type,$filter;
-	error_reporting(E_ALL);
+	error_reporting(0);
 	$v = versao();
 	$dados = array();
 	

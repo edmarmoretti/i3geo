@@ -298,7 +298,7 @@ function mapfile()
 			{$s = "default";}
 			$xml .= "<version>$v</version>";
 			$xml .= "<srs>$e</srs>";
-			$xml .= "<format>$i</format>";
+			$xml .= "<format>image/png</format>";
 			$xml .= "<style>$s</style>";
 			$tagLegenda = "";
 		}	
