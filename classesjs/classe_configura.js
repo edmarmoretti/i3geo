@@ -283,14 +283,16 @@ i3GEO.configura = {
 	/*
 	Variable: cursores
 	
-	Imagens utilizadas para os cursores do mouse mostrados no mapa	
+	Imagens utilizadas para os cursores do mouse mostrados no mapa
+	
+	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
 
 	Type:
 	{JSON}
 	*/
 	cursores: {
 		"identifica":
-		{ff:"/imagens/cursores/identifica.png",ie:"/imagens/cursores/identifica.cur"},
+		{ff:"pointer",ie:"pointer"},
 		"pan":
 		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
 		"area":
@@ -650,7 +652,7 @@ i3GEO.configura = {
 									}
 								}
 							}
-						catch(e){}
+							catch(e){}
 						};
 						i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
 					};				

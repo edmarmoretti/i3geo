@@ -62,10 +62,32 @@ g_traducao_ajuda = {
 			categoria:"1",
 			pt:"O temporizador permite definir um intervalo de tempo em segundos que irá disparar o redesenho do mapa.",
 			complemento:"Quando o mapa é redesenhado, as camadas existentes são lidas novamente para compor o novo mapa. Essa opção é útil quando existirem camadas no mapa que sofrem atualizações frequentes, como por exemplo o deslocamento de aeronaves, carros ou navios."
+		},
+		"10": {
+			titulo: "Salvar mapa",
+			diretorio:"i3geo/ferramentas/salvamapa",
+			categoria:"2",
+			pt:"O mapa que o usuário está utilizando pode ser salvo localmente (na máquina do usuário) para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso é sempre perdido quando o usuário fecha o navegador.",
+			complemento:"Os dados locais que foram criados não são salvos, sendo necessário o seu download quando desejado. Isso afeta as opções de inclusão de pontos ou conversão de elementos selecionados em camadas."
+		},
+		"11": {
+			titulo: "Carregar mapa",
+			diretorio:"i3geo/ferramentas/carregamapa",
+			categoria:"2",
+			pt:"O mapa que o usuário está utilizando pode ser salvo localmente (na máquina do usuário) para ser aberto posteriormente. Isso permite que um trabalho seja continuado em outro momento, uma vez que o mapa em uso é sempre perdido quando o usuário fecha o navegador.",
+			complemento:"A opção de carregar um mapa permite enviar para o servidor, onde o i3Geo está instalado, o mapa que foi salvo anteriormente."
+		},
+		"12": {
+			titulo: "Converter em WMS",
+			diretorio:"i3geo/ferramentas/convertews",
+			categoria:"2",
+			pt:"",
+			complemento:""
 		}
 	}
 };
 
 g_traducao_ajuda_categorias = {
-	"1":{titulo:"Propriedades do mapa"}
+	"1":{titulo:"Propriedades do mapa"},
+	"2":{titulo:"Arquivos"}
 };

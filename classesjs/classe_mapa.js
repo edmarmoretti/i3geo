@@ -494,7 +494,7 @@ i3GEO.mapa = {
 		salvaMapa: function(){
 			if(i3GEO.parametros == "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");
+			i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=10' ><b>?</b></a>");
 		},
 		/*
 		Function: carregaMapa
@@ -502,7 +502,7 @@ i3GEO.mapa = {
 		Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
 		*/
 		carregaMapa: function()
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa");},
+		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=11' ><b>?</b></a>");},
 		/*
 		Function: convertews
 

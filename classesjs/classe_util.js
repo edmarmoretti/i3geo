@@ -425,13 +425,18 @@ i3GEO.util = {
 	*/
 	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
 		var o = document.getElementById(idobjeto);
-		if(o){
-			if(navm){
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+		var c = eval("cursores."+tipo+".ie");
+		if(c == "default" || c == "pointer" || c == "crosshair" || c == "help" || c == "move" || c == "text")
+		o.style.cursor = c;
+		else{
+			if(o){
+				if(navm){
+					o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+				}
+				else{
+					o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
+				}			
 			}
-			else{
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
-			}			
 		}
 	},
 	/*

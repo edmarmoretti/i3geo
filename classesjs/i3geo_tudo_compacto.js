@@ -4646,13 +4646,18 @@ i3GEO.util = {
 	*/
 	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
 		var o = document.getElementById(idobjeto);
-		if(o){
-			if(navm){
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+		var c = eval("cursores."+tipo+".ie");
+		if(c == "default" || c == "pointer" || c == "crosshair" || c == "help" || c == "move" || c == "text")
+		o.style.cursor = c;
+		else{
+			if(o){
+				if(navm){
+					o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
+				}
+				else{
+					o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
+				}			
 			}
-			else{
-				o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ff")+"\"),auto";
-			}			
 		}
 	},
 	/*
@@ -7456,14 +7461,16 @@ i3GEO.configura = {
 	/*
 	Variable: cursores
 	
-	Imagens utilizadas para os cursores do mouse mostrados no mapa	
+	Imagens utilizadas para os cursores do mouse mostrados no mapa
+	
+	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
 
 	Type:
 	{JSON}
 	*/
 	cursores: {
 		"identifica":
-		{ff:"/imagens/cursores/identifica.png",ie:"/imagens/cursores/identifica.cur"},
+		{ff:"pointer",ie:"pointer"},
 		"pan":
 		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
 		"area":
@@ -7823,7 +7830,7 @@ i3GEO.configura = {
 									}
 								}
 							}
-						catch(e){}
+							catch(e){}
 						};
 						i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
 					};				
@@ -11432,7 +11439,7 @@ i3GEO.mapa = {
 		Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
 		*/
 		autoredesenha: function()
-		{i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador");},
+		{i3GEO.janela.cria("300px","110px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=9' ><b>?</b></a>");},
 		/*
 		Function: salvaMapa
 
@@ -11441,7 +11448,7 @@ i3GEO.mapa = {
 		salvaMapa: function(){
 			if(i3GEO.parametros == "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa");
+			i3GEO.janela.cria("300px","180px",i3GEO.configura.locaplic+"/ferramentas/salvamapa/index.htm","","","Salva mapa<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=10' ><b>?</b></a>");
 		},
 		/*
 		Function: carregaMapa
@@ -11449,7 +11456,7 @@ i3GEO.mapa = {
 		Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
 		*/
 		carregaMapa: function()
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa");},
+		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=11' ><b>?</b></a>");},
 		/*
 		Function: convertews
 
@@ -11476,14 +11483,14 @@ i3GEO.mapa = {
 		Abre a janela que altera as propriedades da exibição dos elementos selecionados.
 		*/
 		queryMap: function()
-		{i3GEO.janela.cria("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Querymap");},
+		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Cor da seleção<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=5' ><b>?</b></a>");},
 		/*
 		Function: template
 
 		Abre a janela que muda o template do mapa atual.
 		*/
 		template: function()
-		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template");},
+		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=8' ><b>?</b></a>");},
 		/*
 		Function: tamanho
 
@@ -11504,7 +11511,7 @@ i3GEO.mapa = {
 		Abre a janela que altera a cor do fundo do mapa atual.
 		*/
 		corFundo: function()
-		{i3GEO.janela.cria("210px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Fundo");},
+		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Cor do fundo<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=6' ><b>?</b></a>");},
 		/*
 		Function: opcoesEscala
 
@@ -11525,7 +11532,7 @@ i3GEO.mapa = {
 		Abre a janela que gera grade de coordenadas
 		*/
 		gradeCoord: function()
-		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas");},
+		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=7' ><b>?</b></a>");},
 		/*
 		Function: cliqueTexto
 		
