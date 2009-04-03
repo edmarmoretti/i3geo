@@ -490,24 +490,54 @@ i3GEO.util = {
 	
 	Parameters:
 	
-	id {String} - id do elemento que será criado. Por default, será 'boxpin'
+	id {String} - (opcional) id do elemento que será criado. Por default, será 'boxpin'
+
+	imagem {URL} - (opcional) endereço da imagem
+	
+	w {String} - (opcional) largura da imagem
+	
+	h {String} - (opcional) altura da imagem
 	*/
-	criaPin: function(id){
-		if(arguments.length == 0)
-		{var id = "boxpin"}	
+	criaPin: function(id,imagem,w,h){
+		if(arguments.length < 1 || id == ""){
+			var id = "boxpin";
+		}
+		if(arguments.length < 2 || imagem == ""){
+			var imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
+		}
+		if(arguments.length < 3 || w == ""){
+			var w = "21px";
+		}
+		if(arguments.length < 4 || h == ""){
+			var h = "25px";
+		}
 		if (!$i(id))
 		{
 			var novoel = document.createElement("img");
 			novoel.id = id;
 			novoel.style.zIndex=10000;
 			novoel.style.position="absolute";
-			novoel.style.width="21px";
-			novoel.style.height="25px";
-			novoel.src = i3GEO.configura.locaplic+'/imagens/marker.png';
-			novoel.onmouseover = function(){$i("boxpin").style.display="none";};
+			novoel.style.width=w;
+			novoel.style.height=h;
+			novoel.src = imagem;
+			if(id == "boxpin")
+			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
 			document.body.appendChild(novoel);
 			i3GEO.util.PINS.push(id);
 		}	
+	},
+	/*
+	Function: posicionaImagemNoMapa
+	
+	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
+	*/
+	posicionaImagemNoMapa: function(id){
+		var i = $i(id);
+		var mx = parseInt(i.style.width) / 2;
+		var my = parseInt(i.style.height) / 2;
+		i.style.position = "absolute";
+		i.style.top = objposicaocursor.telay - my;
+		i.style.left = objposicaocursor.telax - mx;	
 	},
 	/*
 	Function: escondePin

@@ -131,9 +131,11 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
 
   // attach a mouseout event handler to the target element
   var closeBalloon = function() { 
- 	//var override = balloonIsSticky && !balloonIsVisible;
-    //Balloon.prototype.hideTooltip(override)
-    var t = setTimeout("i3GEO.janela.excluiTips('todos');var override = balloonIsSticky && !balloonIsVisible;Balloon.prototype.hideTooltip(override);",2000);
+ 	var override = balloonIsSticky && !balloonIsVisible;
+    Balloon.prototype.hideTooltip(override);
+    i3GEO.janela.excluiTips();
+    //document.body.removeChild($i("marcaBalao"));
+    //var t = setTimeout("i3GEO.janela.excluiTips('todos');var override = balloonIsSticky && !balloonIsVisible;Balloon.prototype.hideTooltip(override);",2000);
   }
   if (!mouseOver) el.onmouseup  = function() {return false};
   el.onmouseout = closeBalloon;
@@ -325,6 +327,8 @@ Balloon.prototype.addCloseButton = function () {
     closeButton.setAttribute('src',self.closeButton);
     closeButton.onclick = function() {
       Balloon.prototype.hideTooltip(1);
+      if($i("marcaIdentifica"))
+	  {document.body.removeChild($i("marcaIdentifica"));}
     };
     self.setStyle(closeButton,'position','absolute');
     document.body.appendChild(closeButton);
@@ -577,7 +581,8 @@ Balloon.prototype.hideTooltip = function(override) {
   if (balloonIsSticky && self) self.currentElement = null;
 
   balloonIsVisible = false;
-  balloonIsSticky  = false;
+  //botao de fechar ativo
+  balloonIsSticky  = true;
 
   var closeButton = document.getElementById('closeButton');
   if (closeButton) {

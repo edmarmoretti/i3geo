@@ -161,7 +161,7 @@ i3GEO.configura = {
 	Type:
 	{String}
 	*/
-	funcaoIdentifica: "cliqueIdentifica()",
+	funcaoIdentifica: "cliqueIdentificaDefault()",
 	/*
 	Variable: diminuixM
 
@@ -590,6 +590,7 @@ i3GEO.configura = {
 				};
 				verificaTip = function(){
 					if (g_operacao != "identifica"){return;}
+					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					verificaTipDefault = function(){
 						var retorna = function(retorno){
@@ -642,12 +643,14 @@ i3GEO.configura = {
 											$i(n).innerHTML += res;
 										}
 										else{
-											var nn = i3GEO.janela.tip("<img id='marcaBalao' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											//var idmarca = YAHOO.util.Dom.generateId();
+											//i3GEO.janela.tip("<img id='marcaIdentifica' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
+											i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 											balloon = new Balloon;
 											balloon.delayTime = 0;
 											var res = "<div style=text-align:left >"+res+"</div>";
-											//$i(nn+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
-											balloon.showTooltip($i("marcaBalao"),res);
+											balloon.showTooltip($i("marcaIdentifica"),res);
 										}
 									}
 								}

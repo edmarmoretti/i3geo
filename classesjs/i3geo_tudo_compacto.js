@@ -2978,9 +2978,11 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
 
   // attach a mouseout event handler to the target element
   var closeBalloon = function() { 
- 	//var override = balloonIsSticky && !balloonIsVisible;
-    //Balloon.prototype.hideTooltip(override)
-    var t = setTimeout("i3GEO.janela.excluiTips('todos');var override = balloonIsSticky && !balloonIsVisible;Balloon.prototype.hideTooltip(override);",2000);
+ 	var override = balloonIsSticky && !balloonIsVisible;
+    Balloon.prototype.hideTooltip(override);
+    i3GEO.janela.excluiTips();
+    //document.body.removeChild($i("marcaBalao"));
+    //var t = setTimeout("i3GEO.janela.excluiTips('todos');var override = balloonIsSticky && !balloonIsVisible;Balloon.prototype.hideTooltip(override);",2000);
   }
   if (!mouseOver) el.onmouseup  = function() {return false};
   el.onmouseout = closeBalloon;
@@ -3172,6 +3174,8 @@ Balloon.prototype.addCloseButton = function () {
     closeButton.setAttribute('src',self.closeButton);
     closeButton.onclick = function() {
       Balloon.prototype.hideTooltip(1);
+      if($i("marcaIdentifica"))
+	  {document.body.removeChild($i("marcaIdentifica"));}
     };
     self.setStyle(closeButton,'position','absolute');
     document.body.appendChild(closeButton);
@@ -3424,7 +3428,8 @@ Balloon.prototype.hideTooltip = function(override) {
   if (balloonIsSticky && self) self.currentElement = null;
 
   balloonIsVisible = false;
-  balloonIsSticky  = false;
+  //botao de fechar ativo
+  balloonIsSticky  = true;
 
   var closeButton = document.getElementById('closeButton');
   if (closeButton) {
@@ -4711,24 +4716,54 @@ i3GEO.util = {
 	
 	Parameters:
 	
-	id {String} - id do elemento que será criado. Por default, será 'boxpin'
+	id {String} - (opcional) id do elemento que será criado. Por default, será 'boxpin'
+
+	imagem {URL} - (opcional) endereço da imagem
+	
+	w {String} - (opcional) largura da imagem
+	
+	h {String} - (opcional) altura da imagem
 	*/
-	criaPin: function(id){
-		if(arguments.length == 0)
-		{var id = "boxpin"}	
+	criaPin: function(id,imagem,w,h){
+		if(arguments.length < 1 || id == ""){
+			var id = "boxpin";
+		}
+		if(arguments.length < 2 || imagem == ""){
+			var imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
+		}
+		if(arguments.length < 3 || w == ""){
+			var w = "21px";
+		}
+		if(arguments.length < 4 || h == ""){
+			var h = "25px";
+		}
 		if (!$i(id))
 		{
 			var novoel = document.createElement("img");
 			novoel.id = id;
 			novoel.style.zIndex=10000;
 			novoel.style.position="absolute";
-			novoel.style.width="21px";
-			novoel.style.height="25px";
-			novoel.src = i3GEO.configura.locaplic+'/imagens/marker.png';
-			novoel.onmouseover = function(){$i("boxpin").style.display="none";};
+			novoel.style.width=w;
+			novoel.style.height=h;
+			novoel.src = imagem;
+			if(id == "boxpin")
+			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
 			document.body.appendChild(novoel);
 			i3GEO.util.PINS.push(id);
 		}	
+	},
+	/*
+	Function: posicionaImagemNoMapa
+	
+	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
+	*/
+	posicionaImagemNoMapa: function(id){
+		var i = $i(id);
+		var mx = parseInt(i.style.width) / 2;
+		var my = parseInt(i.style.height) / 2;
+		i.style.position = "absolute";
+		i.style.top = objposicaocursor.telay - my;
+		i.style.left = objposicaocursor.telax - mx;	
 	},
 	/*
 	Function: escondePin
@@ -7339,7 +7374,7 @@ i3GEO.configura = {
 	Type:
 	{String}
 	*/
-	funcaoIdentifica: "cliqueIdentifica()",
+	funcaoIdentifica: "cliqueIdentificaDefault()",
 	/*
 	Variable: diminuixM
 
@@ -7768,6 +7803,7 @@ i3GEO.configura = {
 				};
 				verificaTip = function(){
 					if (g_operacao != "identifica"){return;}
+					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					verificaTipDefault = function(){
 						var retorna = function(retorno){
@@ -7820,12 +7856,14 @@ i3GEO.configura = {
 											$i(n).innerHTML += res;
 										}
 										else{
-											var nn = i3GEO.janela.tip("<img id='marcaBalao' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											//var idmarca = YAHOO.util.Dom.generateId();
+											//i3GEO.janela.tip("<img id='marcaIdentifica' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
+											i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
+											i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 											balloon = new Balloon;
 											balloon.delayTime = 0;
 											var res = "<div style=text-align:left >"+res+"</div>";
-											//$i(nn+"cabecatip").onmouseover = function(evt){balloon.showTooltip(evt,res);};
-											balloon.showTooltip($i("marcaBalao"),res);
+											balloon.showTooltip($i("marcaIdentifica"),res);
 										}
 									}
 								}
@@ -13184,8 +13222,8 @@ i3GEO.janela = {
 		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
 		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 		ist = novoel.style;
-		ist.top = objposicaocursor.telay - 10;
-		ist.left = objposicaocursor.telax - 4;
+		ist.top = objposicaocursor.telay - 9;
+		ist.left = objposicaocursor.telax - 5;
 		ist.display="block";
 		//
 		//registra a função de eliminação dos tips
@@ -13207,6 +13245,7 @@ i3GEO.janela = {
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/
 	excluiTips: function(tipo){
+		if(arguments.length == 0){var tipo = "todos";}
 		if(i3GEO.janela.TIPS.length > 0){
 			var ot = i3GEO.janela.TIPS.length-1;
 			if (ot >= 0){
@@ -15995,6 +16034,19 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+objposicaocursor = {
+	ddx: "",
+	ddy: "",
+	dmsx: "",
+	dmsy: "",
+	telax: "",
+	telay: "",
+	imgx: "",
+	imgy: "",
+	refx: "",
+	refy: ""
+};
+
 /*
 Class: i3GEO.eventos
 

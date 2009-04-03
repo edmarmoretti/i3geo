@@ -299,8 +299,8 @@ i3GEO.janela = {
 		res += "<span style='color:navy;cursor:pointer;text-align:left' onclick='javascript:$i(\""+Nid+"cabecatip\").innerHTML =\"\";' >"+cabecalho+"</span></div>";
 		novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>"+res+"</td></tr></table>";
 		ist = novoel.style;
-		ist.top = objposicaocursor.telay - 10;
-		ist.left = objposicaocursor.telax - 4;
+		ist.top = objposicaocursor.telay - 9;
+		ist.left = objposicaocursor.telax - 5;
 		ist.display="block";
 		//
 		//registra a função de eliminação dos tips
@@ -322,6 +322,7 @@ i3GEO.janela = {
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/
 	excluiTips: function(tipo){
+		if(arguments.length == 0){var tipo = "todos";}
 		if(i3GEO.janela.TIPS.length > 0){
 			var ot = i3GEO.janela.TIPS.length-1;
 			if (ot >= 0){

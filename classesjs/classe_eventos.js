@@ -26,6 +26,19 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
+objposicaocursor = {
+	ddx: "",
+	ddy: "",
+	dmsx: "",
+	dmsy: "",
+	telax: "",
+	telay: "",
+	imgx: "",
+	imgy: "",
+	refx: "",
+	refy: ""
+};
+
 /*
 Class: i3GEO.eventos
 
