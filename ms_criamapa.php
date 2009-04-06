@@ -359,15 +359,17 @@ Note: Configura os endereços corretos no mapfile.
 
 Altera as propriedades imagepath e imageurl corrigindo os caminhos padrão conforme o diretório criado para armazenar o mapa de trabalho.
 */
-$protocolo = strtolower(explode("/",$_SERVER['SERVER_PROTOCOL']));
+
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+
 $w = $mapn->web;
 $atual = $w->imagepath;
 $w->set("imagepath",$atual.$diretorios[2]."/");
 $atual = $w->imageurl;
 $w->set("imageurl",$atual.$diretorios[2]."/");
 $salvo = $mapn->save($diretorios[0]);
-$_SESSION["imgurl"] = $protocolo[0]."://".$_SERVER['HTTP_HOST'].$atual.$diretorios[2]."/";
-$_SESSION["tmpurl"] = $protocolo[0]."://".$_SERVER['HTTP_HOST'].$atual;
+$_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual.$diretorios[2]."/";
+$_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 /*
 Note: Faz o include de um programa se tiver sido passado pela URL (parâmetro &executa)
 
