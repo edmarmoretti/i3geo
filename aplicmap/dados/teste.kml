@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+  <name>teste</name>
+  
+  <Style id="randomColorIcon">
+      <IconStyle>
+         <Icon>
+            <href>http://brasil.trovit.com/imoveis/images/homes/map_icon.png</href>
+         </Icon>
+      </IconStyle>
+   </Style>
+  
+  <Style id="randomColorIcon2">
+      <IconStyle>
+         <Icon>
+            <href>http://brasil.trovit.com/imoveis/images/homes/map_icon_red.png</href>
+         </Icon>
+      </IconStyle>
+   </Style>
+  
+  <Folder>
+    <description>Trovit</description>
+    <name>Trovit</name>
+    <open>1</open>
+    	<Placemark>
+		<name><![CDATA[Apartamento p/ temporada frente à praia Ondina]]></name>
+		<LookAt id="khLookAt267086">
+        	<longitude>-38.5069292</longitude>
+	        <latitude>-13.011169699999996</latitude>
+		</LookAt>
+		<description><![CDATA[<a href="http://brasil.trovit.com/imoveis/scripts/redirect.php/id.267086/referer_id.8" rel="nofollow">Apartamento p/ temporada frente à praia Ondina</a><br />CLIQUE NO PLAY P/ VER O VÍDEO. Excelente localização, frente ao mar de Ondina, na área hoteleira nobre da cidade. Aproximadamente 200 metros do final do circuito Barra-Ondina. Alugamos por temporada o ano inteiro,curta ou longa permanência. Fácil acesso aos principais <strong>pontos</strong> <strong>comerciais</strong>, turísticos e culturais de <strong>Salvador</strong>. A 5 minutos do Shopping]]></description>
+			        <styleUrl>#randomColorIcon</styleUrl>
+	        
+		<Point id="267086">
+			<coordinates>-38.5069292, -13.011169699999996</coordinates>
+		</Point>
+	</Placemark>
+	    </Folder>
+</Document>
+</kml><!-- C -->

@@ -92,8 +92,7 @@ i3GEO.calculo = {
 	{Array} - Array com o valor de x [0] e y [1]
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
-		try
-		{
+		try{
 			if(i3GEO.interface.ATUAL == "googlemaps"){
 				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 				var latlng = new GLatLng(vy,vx);
@@ -108,13 +107,19 @@ i3GEO.calculo = {
 			if(arguments.length == 4){
 				var cellsize = i3GEO.parametros.pixelsize;
 			}
+			/*
 			if(!docmapa)
 			{var docmapa = window.document;}
 			try{
 				var dc = docmapa.getElementById("img");
 				if(!dc){var dc = docmapa;}
+				
 			}
 			catch(e){var dc = docmapa;}
+			*/
+			if(!docmapa)
+			{var docmapa = window.document;}
+			var dc = docmapa;	
 			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
 			var imgext = ext; //i3GEO.parametros.mapexten;
 			var imgext = imgext.split(" ");
@@ -406,17 +411,6 @@ i3GEO.calculo = {
 	ext2rect: function(idrect,mapext,boxext,pixel,documento){
    		var rectbox = boxext.split(" ");
    		var rectmap = mapext.split(" ");
-   		/*
-   		if (rectbox[0]*1 < rectmap[0]*1){rectbox[0] = rectmap[0]}
-   		if (rectbox[0]*1 > rectmap[2]*1){rectbox[0] = rectmap[2]}
-   		if (rectbox[2]*1 > rectmap[2]*1){rectbox[2] = rectmap[2]}
-   		if (rectbox[2]*1 < rectmap[0]*1){rectbox[2] = rectmap[0]}
-   		
-   		if (rectbox[3]*1 > rectmap[3]*1){rectbox[3] = rectmap[3]}
-   		if (rectbox[2]*1 > rectmap[3]*1){rectbox[2] = rectmap[3]}
-   		if (rectbox[1]*1 < rectmap[1]*1){rectbox[1] = rectmap[1]}
-   		if (rectbox[3]*1 < rectmap[1]*1){rectbox[3] = rectmap[1]}
-   		*/
    		var xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
    		var xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
 		var w = xyMax[0]-xyMin[0];

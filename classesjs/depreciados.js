@@ -1,6 +1,7 @@
 //
 //acerta algumas variáveis para efeitos de compatibilidade
 //
+
 function i3GEOmantemCompatibilidade(){
 	try{
 		i3GEO.configura.oMenuData = oMenuData;

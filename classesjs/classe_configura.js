@@ -647,10 +647,12 @@ i3GEO.configura = {
 											//i3GEO.janela.tip("<img id='marcaIdentifica' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
 											i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
 											i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
+											
 											balloon = new Balloon;
 											balloon.delayTime = 0;
 											var res = "<div style=text-align:left >"+res+"</div>";
 											balloon.showTooltip($i("marcaIdentifica"),res);
+											$i('marcaIdentifica').onclick = $i("closeButton").onclick;
 										}
 									}
 								}

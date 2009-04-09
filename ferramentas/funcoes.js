@@ -128,16 +128,16 @@ function cor(obj)
 //É utilizado nos menus de análise
 function mostraOpcao(anterior,proxima,texto,idatual)
 {
+	if(document.getElementById(idatual)){document.getElementById("resultado").removeChild(document.getElementById(idatual))}
 	if (!document.getElementById(idatual))
 	{
 		var ndiv = document.createElement("div");
 		ndiv.id = idatual;
 		texto += "<br><br><table style='width:100%;background-color:#F2F2F2;' ><tr style='width:100%'>";
 		if (anterior != "")
-		{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><img onclick="+anterior+" src=../../imagens/anterior.gif ></td>";}
+		{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><img onclick='"+anterior+"' src=../../imagens/anterior.gif ></td>";}
 		if (proxima != "")
-		{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><img onclick="+proxima+" src=../../imagens/proxima.gif ></td>";}
-		//texto += "<br><br><br><br>"
+		{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><img onclick='javascript:this.src=\"../../imagens/aguarde.gif\";"+proxima+"' src=../../imagens/proxima.gif ></td>";}
 		ndiv.innerHTML = texto+"</tr></table>";
 		document.getElementById("resultado").appendChild(ndiv);
 	}

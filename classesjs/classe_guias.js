@@ -57,11 +57,11 @@ i3GEO.guias = {
 				i3GEO.guias.mostra("adiciona");
 				if(!$i("arvoreAdicionaTema"))
 				{
-					try{
-						if (objmapa.guiaMenu != "undefined")
+					var ondeArvore = "guia2obj";
+					if(typeof(objmapa) != 'undefined'){
+						if (typeof(objmapa.guiaMenu) != 'undefined')
 						var ondeArvore = objmapa.guiaMenu+"obj";
 					}
-					catch(e){var ondeArvore = "guia2obj";};
 				}
 				else
 				{var ondeArvore = "arvoreAdicionaTema";}

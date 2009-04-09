@@ -20,7 +20,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 parametrosURL()
-mensagemAjuda("men1",$i("men1").innerHTML)
+
 if($i("temas")){
 	aguarde("block")
 	comboTemasLigados("tema",function(retorno)

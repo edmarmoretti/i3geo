@@ -49,6 +49,8 @@ $i("operacao").innerHTML = combot
 //cria combo com os temas
 comboTemasLigados("comboTemas",function(retorno)
 {
+	window.parent.g_tipoacao = "selecao";
+	window.parent.i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");
 	$i("temas").innerHTML = retorno.dados
 	aguarde("none")
 	$i("comboTemas").onchange = function()

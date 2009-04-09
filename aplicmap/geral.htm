@@ -11,7 +11,7 @@
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geo.js
 -->
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 	<style> 
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
@@ -21,7 +21,7 @@
 	 .info {text-align:left;}
 	</style> 
 </head>
-<body id="i3geo" >
+<body id="i3geo">
 
 <table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
 <!--
@@ -274,6 +274,8 @@ i3GEO.inicia();
 //esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
 if($i("escala") && i3GEO.parametros.w < 500)
 {$i("escala").style.display="none";}
+
+
 </script>
 </body>
 </html>

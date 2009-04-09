@@ -20,7 +20,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 parametrosURL()
-mensagemAjuda("men1",$i("men1").innerHTML)
+
 //document.getElementById("g_sid").value = g_sid
 YAHOO.example.init = function ()
 {

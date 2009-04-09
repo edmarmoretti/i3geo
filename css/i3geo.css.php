@@ -30,7 +30,10 @@ select
 
 .ajuda_usuario
 {
-	margin-left:6px;
+	background-image:url(../imagens/iajuda.png);
+	background-position:3px 2px;
+	background-repeat:no-repeat;
+	margin-left:0;
 	text-decoration:none;
 }
 

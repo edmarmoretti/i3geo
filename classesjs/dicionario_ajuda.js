@@ -81,13 +81,190 @@ g_traducao_ajuda = {
 			titulo: "Converter em WMS",
 			diretorio:"i3geo/ferramentas/convertews",
 			categoria:"2",
+			pt:"Convertendo o mapa atual em um WMS é possível utilizar outros softwares para visualizar o mesmo mapa visto no i3Geo. O resultado da conversão é um endereço (url) temporário, esse endereço deve ser inserido no software que se quer usar e que suporte WMS.",
+			complemento:"WMS é um padrão internacional e não específico do i3Geo. Utilizando um WMS, pode-se adicionar ao mapa outras camadas de dados, inclusive dados locais, se estiver sendo utilizado um software instalado em um computador local. Conforme as características de cada servidor onde o i3Geo estiver instalado, o WMS poderá permanecer disponível por períodos de tempo variáveis. Para acessar a lista de WMS disponíveis utilize o link <a href='ogc.htm' >ogc.htm</a>.Mais informações em <a href='www.opengeospatial.org' >OGC.</a>"
+		},
+		"13": {
+			titulo: "Converter em KML",
+			diretorio:"i3geo/ferramentas/convertekml",
+			categoria:"2",
+			pt:"Convertendo o mapa atual em KML é possível utilizar outros softwares para visualizar o mesmo mapa visto no i3Geo. O resultado da conversão é um endereço (url) temporário, esse endereço deve ser inserido no software que se quer usar e que suporte KML. Para usar o KML no Google Earth, utilize a opção desse softawre chamada 'adicionar link de rede'.",
+			complemento:"KML é um padrão internacional e não específico do i3Geo. Conforme as características de cada servidor onde o i3Geo estiver instalado, o KML poderá permanecer disponível por períodos de tempo variáveis. O KML gerado pelo i3Geo não contém as coordenadas dos elementos de uma camada, mas sim um WMS embutido no KML. Essa estrutura limita o uso do KML mas permite uma maior performance no acesso aos dados. Mais informações em <a href='www.opengeospatial.org' >OGC.</a>"
+		},
+		"14": {
+			titulo: "Grade de polígonos",
+			diretorio:"i3geo/ferramentas/gradepol",
+			categoria:"3",
+			pt:"Cria uma nova camada no mapa contendo retângulos com espaçamento determinado em x e y. A grade gerada pode ser obtida via download. O espaçamento é definido em décimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
+			complemento:"A grade é útil para a realização de análises onde deseja-se calcular ocorrências de fenômenos pontuais e representá-los posteriormente com base em totais. Observe que a área e as distâncias reais de cada polígono não são constantes, uma vez que é utilizada a projeção geográfica na sua geração."
+		},
+		"15": {
+			titulo: "Grade de pontos",
+			diretorio:"i3geo/ferramentas/gradepontos",
+			categoria:"3",
+			pt:"Cria uma nova camada no mapa contendo pontos com espaçamento determinado em x e y. A grade gerada pode ser obtida via download. O espaçamento é definido em décimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
+			complemento:"Observe que as distâncias reais entre cada ponto não são constantes, uma vez que é utilizada a projeção geográfica na sua geração."
+		},
+		"16": {
+			titulo: "Grade de hexágonos",
+			diretorio:"i3geo/ferramentas/gradehex",
+			categoria:"3",
+			pt:"Cria uma nova camada no mapa contendo hexágonos com espaçamento determinado em x e y. A grade gerada pode ser obtida via download. O espaçamento é definido em décimos de grau e as coordenadas do ponto inicial podem ser definida clicando-se no mapa ou digitando-se o valor.",
+			complemento:"A grade é útil para a realização de análises onde deseja-se calcular ocorrências de fenômenos pontuais e representá-los posteriormente com base em totais. Observe que a área e as distâncias reais de cada polígono não são constantes, uma vez que é utilizada a projeção geográfica na sua geração."
+		},
+		"17": {
+			titulo: "Distância entre pontos",
+			diretorio:"i3geo/ferramentas/distanciaptpt",
+			categoria:"3",
+			pt:"O cálculo de dist&acirc;ncias é feito de um ponto em rela&ccedil;&atilde;o aos mais pr&oacute;ximos. O ponto origem, deve estar selecionado em um dos temas existentes no mapa. Para restringir a distância de busca, é necessário definir um raio máximo, os pontos considerados serão aqueles dentro desse raio. Em cada linha ligando dois pontos são inseridos atributos que indicam a distância e o identificador dos pontos. Esses identificadores são escolhidos com base nas colunas de atributos do tema pontual escolhido.",
+			complemento:"O resultado dos cálculos são novas camadas incluídas no mapa, sendo uma de linhas e uma com o entorno de busca considerado."
+		},
+		"18": {
+			titulo: "",
+			diretorio:"i3geo/ferramentas/pontoempoligono",
+			categoria:"3",
+			pt:"Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos (ou imagem raster). As informa&ccedil;&otilde;es do tema poligonal (ou raster) ser&atilde;o agregadas à tabela do novo tema pontual gerado. As colunas da tabela de atributos do novo tema gerado serão nomeadas em uma sequência numérica, uma vez que o tema original pode ter colunas com nomes incompatíveis com o formato shapefile, utilizado na geração do novo tema.",
+			complemento:"Pode-se escolher mais de um tema de origem dos dados, possibilitando agregar informações de temas diferentes. Essa opção de cruzamento é útil nos casos onde a informação necessária para a análise de um tema encontra-se em outro tema. Por exemplo, é possível cruzar um tema com a localização das cidades com um tema com a delimitação de biomas. O resultado permite elaborar estatísticas por biomas com base nos dados dos pontos."
+		},
+		"19": {
+			titulo: "Número de pontos por polígono",
+			diretorio:"i3geo/ferramentas/nptpol",
+			categoria:"3",
+			pt:"Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gono. O resultado é um novo tema poligonal, cuja tabela de atributos conterá um item com o total de pontos em cada polígono",
+			complemento:"O uso dessa ferramenta é indicado nas situações em que se deseja agregar dados de ocorrências pontuais em polígonos, possibilitando a visualização dos dados por meio de técnicas de classificação e representação coroplética."
+		},
+		"20": {
+			titulo: "Distribuição de pontos",
+			diretorio:"i3geo/ferramentas/pontosdistri",
+			categoria:"3",
+			pt:"Essa opção disponibiliza várias ferramentas de análise de distribuição de pontos, a maior parte baseia-se no software estatístico < href='www.r-project.org' >R</a>. Algumas das análises geram como resultado imagens RASTER e outras temas lineares e poligonais. A opção de relatório gera uma nova página com vários índices calculados com o software R.",
+			complemento:"A imagem RASTER resultante utiliza a resolução (tamanho do pixel) compatível com a escala utilizada no mapa que está sendo visto. A representação utiliza, por padrão, tons de cinza. A alteração nas cores utilizadas na representação podem melhorar de forma significativa a visualização dos resultados. Utilize a opção de edição da legenda do tema para fazer isso."
+		},
+		"21": {
+			titulo: "Centróide",
+			diretorio:"i3geo/ferramentas/centroide",
+			categoria:"3",
+			pt:"Os centr&oacute;ides s&atilde;o pontos localizados no centro de massa de uma geometria. Para gerar os centr&oacute;ides, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado.",
+			complemento:"Dependendo da forma de uma geometria, o ponto calculado pode ser posicionado fora do polígono <a href='http://postgis.refractions.net/documentation/manual-svn/ST_Centroid.html' >exemplo</a>."
+		},
+		"22": {
+			titulo: "Dissolver",
+			diretorio:"i3geo/ferramentas/dissolve",
+			categoria:"3",
+			pt:"Essa ferramenta transforma v&aacute;rios pol&iacute;gonos em um s&oacute; eliminando as divisas entre eles. Para definir quais os pol&iacute;gonos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os pol&iacute;gonos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde;o tenha sido escolhido nenhum item, todas os pol&iacute;gonos ser&atilde;o agrupados em um s&oacute;.",
+			complemento:"O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido. Caso as geometrias originais possuam fronteiras não ajustadas exatamente, o resultado pode apresentar pequenos polígonos internos."
+		},
+		"23": {
+			titulo: "Análise de geometrias",
+			diretorio:"i3geo/ferramentas/analisegeometrias",
+			categoria:"3",
+			pt:"Essa ferramenta permite processar elementos constituintes de um ou mais temas por meio de funções que atuam sobre a geometria que define o elemento. Essas funções possibilitam a realização de cálculos, como área e perímetro, e cruzamentos entre geometrias, como união e intersecção. Para utilizar a ferramenta, deve-se selecionar cada elemento desejado e convertê-los em uma geometria ou conjunto de geometrias. Feito isso, as geometrias convertidas podem ser utilizadas nas operações.",
+			complemento:"Para selecionar elementos, utilize as opções de seleção disponíveis no i3Geo ou então clique no mapa no elemento desejado após ativar a ferramenta. A seleção é feita sobre o tema escolhido. Para ver as geometrias capturadas, clique na guia 'listar'. Para usar as opções de análise, mostradas na guia 'análise', você deve marcar as geometrias desejadas na guia 'listar'."
+		},
+		"24": {
+			titulo: "Entorno (buffer)",
+			diretorio:"i3geo/ferramentas/buffer",
+			categoria:"3",
+			pt:"O entorno, ou buffer, &eacute; um pol&iacute;gono que circunda um elemento geogr&aacute;fico em uma dist&acirc;ncia fixa. Para o cálculo de distância o i3Geo utiliza a projeção policônica. Os atributos do tema alvo são copiados para os polígonos resultantes e uma nova camada é adicionada ao mapa. Opcionalmente, os polígonos resultantes podem ser unidos como um único.",
+			complemento:"Para gerar o entorno, voc&ecirc; precisa selecionar alguns elementos de um tema. Utilize para isso a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de atributos do tema desejado."
+		},
+		"25": {
+			titulo: "Agrupa elementos",
+			diretorio:"i3geo/ferramentas/agrupaelementos",
+			categoria:"3",
+			pt:"Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; criando pol&iacute;gonos agrupados. Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor nesse item ser&atilde;o considerados no mesmo grupo e suas divisas eliminadas. Caso n&atilde; tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
+			complemento:"O resultado final ser&aacute; um novo tema com pol&iacute;gonos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido."
+		},
+		"26": {
+			titulo: "Upload de arquivo dbf",
+			diretorio:"i3geo/ferramentas/uploaddbf",
+			categoria:"4",
+			pt:"Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF. Os valores de x e y devem utilizar '.' como separador de decimal. Se as coordenadas estiverem na proje&ccedil;&atilde;o geogr&aacute;fica, os valores dever&atilde;o estar em d&eacute;cimos de grau, com sinal negativo para pontos ao sul do equador e oeste do meridiano 0.",
+			complemento:"O arquivo DBF será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados. Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatível com essas restri&ccedil;&otilde;es."
+		},
+		"27": {
+			titulo: "Upload se shapefile",
+			diretorio:"i3geo/ferramentas/",
+			categoria:"4",
+			pt:"Permite que um arquivo do tipo shapefile seja enviado ao servidor e incluído no mapa como uma nova camada. O arquivo shapefile será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados. Um shapefile é composto basicamente por três tipos de arquivos (dbf, shp e shx), todos devem ser submetidos",
+			complemento:"Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatívelcom essas restri&ccedil;&otilde;es."
+		},
+		"28": {
+			titulo: "Conexão WMS",
+			diretorio:"i3geo/ferramentas/conectarwms",
+			categoria:"4",
+			pt:"Uma conexão WMS permite que dados disponíveis em outros servidores sejam incluídos como camadas no i3Geo. Na ferramenta de conexão é mostrada uma lista de endereços previamente cadastrados, mas pode-se digitar um outro endereço qualquer, desde que seja um serviço no padrão WMS. Após um serviço ser escolhido, a lista de camadas disponíveis é mostrada na guia 'Temas'.",
+			complemento:"Camadas obtidas por meio de conexão WMS não permitem que algumas operações disponíveis no i3Geo sejam executadas, como por exemplo a alteração na legenda, seleção, entre outras. Quando um servidor apresentar problemas, a camada não poderá ser adicionada."
+		},
+		"29": {
+			titulo: "Conexão GeoRSS",
+			diretorio:"i3geo/ferramentas/conectargeorss",
+			categoria:"4",
+			pt:"Uma conexão GeoRSS permite obter a localização de conteúdos disponíveis no formato RSS com coordenadas geográficas incluídas. Na ferramenta de conexão é mostrada uma lista de endereços previamente cadastrados, mas pode-se digitar um outro endereço qualquer, desde que seja um serviço no padrão GeoRSS.",
+			complemento:"A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o serviço GeoRSS sofrer alterações, como a inclusão de um novo item, é necessário fazer novamente a conexão para que a camada reflita a alteração."
+		},
+		"30": {
+			titulo: "Nuvem de tags",
+			diretorio:"i3geo/ferramentas/nuvemtags",
+			categoria:"4",
+			pt:"A nuvem de tags é uma forma de localizar camadas disponíveis para ser vistas no mapa. A busca é feita por meio de tags ou palavras-chave. As tags são registradas pelo administrador do i3Geo para cada tema disponível na árvore de temas.",
+			complemento:"Ao escolher uma tag, é feita dos temas correspondentes e o resultado é adicionado à arvore de temas. Opcionalmente, o usuário pode escolher navegar na nuvem 'animada' que mostra as tags como um globo 3d."
+		},
+		"31": {
+			titulo: "Procurar tema",
+			diretorio:"classe_arvoredetemas.js",
+			categoria:"4",
+			pt:"Localiza temas disponíveis nos menus da árvore de adição de temas. Os temas localizados são incluídos em um novo nó da árvore, possibilitando sua adição ao mapa.",
+			complemento:"Para procurar um tema, digite a palavra ou frase no campo de texto e clique no ícone existente no lado direito."
+		},
+		"32": {
+			titulo: "Acesso aos arquivos do servidor",
+			diretorio:"classe_arvoredetemas.js",
+			categoria:"4",
+			pt:"Os usuários cadastrados no i3Geo como editores podem acessar arquivos existentes no servidor onde o i3Geo está instalado. A navegação permite localizar arquivos shapefile para inclusão como uma nova camada no mapa.",
+			complemento:"Por motivos de segurança, apenas os editores podem utilizar essa opção. O cadastramento é feito pelo administrador do i3Geo, por meio da edição do arquivo ms_configura.php."
+		},
+		"33": {
+			titulo: "Árvore de endereços WMS",
+			diretorio:"classe_arvoredetemas.js",
+			categoria:"4",
+			pt:"A conexão com serviços WMS (OGC) pode ser feita escolhendo-se o servidor e as camadas disponíveis diretamente na árvore de temas. A lista de endereços utilizada nesse nó da árvore é a mesma utilizada na opção de conexão que é aberta por meio do ícone 'Conexão MWS'. Quando uma camada for encontrada no WMS, é mostrado um 'box' ao lado do nome da camada, permitindo sua adição ao mapa.",
+			complemento:"A vantagem do uso da árvore é a velocidade de acesso à lista de camadas, uma vez que o i3Geo faz um 'cache' do arquivo XML gerado com a lista de camadas disponíveis. A árvore permite ainda a visão correta da hierarquia de camadas configuradas no WMS, que pode ter vários níveis. Cada vez que um usuário tenta acessar um WMS o sucesso ou não da conexão é registrado, assim, é possível mostrar ao lado de cada endereço o percentual de tentativas de conexão válidas."
+		},
+		"34": {
+			titulo: "Sistemas",
+			diretorio:"classe_arvoredetemas.js",
+			categoria:"4",
+			pt:"O nó 'Sistemas' da árvore de adição de temas, lista aplicativos especiais que precisam de interação com o usuário para a criação de uma camada.",
+			complemento:"Alguns sistemas são fornecidos com a instalação padrão do i3Geo, mas cada administrador pode criar seus próprios."
+		},
+		"": {
+			titulo: "",
+			diretorio:"i3geo/ferramentas/",
+			categoria:"4",
 			pt:"",
 			complemento:""
 		}
 	}
 };
-
 g_traducao_ajuda_categorias = {
 	"1":{titulo:"Propriedades do mapa"},
-	"2":{titulo:"Arquivos"}
+	"2":{titulo:"Arquivos"},
+	"3":{titulo:"Análise geográfica"},
+	"4":{titulo:"Inclusão de camadas"}
 };
+//inserir os aplicativos adicionais
+/*
+<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=' >&nbsp;&nbsp;</a>
+*/
+/*
+Não esquecer:
+
+Janela de mensagens
+Gerador de links
+Datadownload
+Ativa/desativa entorno
+Ativa/desativa logo
+
+
+*/

@@ -160,7 +160,6 @@ $abre = fopen("../ferramentas/funcoes_compacto.js", "wt");
 $escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
 $jsfiles = array(
-"compactados/dicionario_ajuda_compacto.js",
 "../ferramentas/funcoes_compacto.js",
 "../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui252/build/element/element-beta.js",

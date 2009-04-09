@@ -26,10 +26,13 @@ function pegaAjuda(tipo,categoria){
 		{}
 		else
 		{
-			ins += "<p style='font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></p>"
-			ins += "<p>"+obj[k].pt+"</p>"
-			ins += "<p>"+obj[k].complemento+"</p>"
-			ins += "<p style='color:gray'>"+obj[k].diretorio+"</p>"
+			if(idajuda == "" && categoria != obj[k].categoria){}
+			else{
+				ins += "<p style='font-size:16px;color:#759555'><b>"+obj[k].titulo+"</b></p>"
+				ins += "<p>"+obj[k].pt+"</p>"
+				ins += "<p>"+obj[k].complemento+"</p>"
+				ins += "<p style='color:gray'>"+obj[k].diretorio+"</p>"
+			}
 		}
 	}	
 }
@@ -41,7 +44,11 @@ function inicia()
 		{}
 		else
 		{
+			if(idajuda == "")
 			ins += "<p style='font-size:18px' ><b>"+g_traducao_ajuda_categorias[key].titulo+"</b></p>"
+			if(idajuda == "")
+			pegaAjuda("ferramentas",key)
+			else
 			pegaAjuda("ferramentas",g_traducao_ajuda_categorias[key])
 		}
 	}

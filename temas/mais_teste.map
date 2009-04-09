@@ -1,0 +1,17 @@
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+	NAME base
+	TYPE line
+	DATA ""
+	METADATA
+		TEMA "mais teste"
+		CLASSE "SIM"
+	END
+    CLASS
+        NAME ""
+        STYLE
+        END
+    END
+END
+END

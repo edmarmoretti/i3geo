@@ -134,8 +134,6 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
  	var override = balloonIsSticky && !balloonIsVisible;
     Balloon.prototype.hideTooltip(override);
     i3GEO.janela.excluiTips();
-    //document.body.removeChild($i("marcaBalao"));
-    //var t = setTimeout("i3GEO.janela.excluiTips('todos');var override = balloonIsSticky && !balloonIsVisible;Balloon.prototype.hideTooltip(override);",2000);
   }
   if (!mouseOver) el.onmouseup  = function() {return false};
   el.onmouseout = closeBalloon;
