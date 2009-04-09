@@ -43,6 +43,22 @@ i3GEO.maparef = {
 	*/
 	fatorZoomDinamico: -3,
 	/*
+	Property: TOP
+	
+	Posição da janela em relação ao topo do mapa
+	
+	{Numeric}
+	*/
+	TOP: 4,
+	/*
+	Property: RIGHT
+	
+	Posição da janela em relação ao lado direito do mapa
+	
+	{Numeric}
+	*/
+	RIGHT:0,
+	/*
 	Function: inicia
 	
 	Inicializa o mapa de referência
@@ -82,9 +98,7 @@ i3GEO.maparef = {
 				r.style.position = "absolute";
 			}
 			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-			if (navm){YAHOO.janelaRef.xp.panel.moveTo((pos[0]+i3GEO.parametros.w-160),pos[1]+4);}
-			else
-			{YAHOO.janelaRef.xp.panel.moveTo((pos[0]+i3GEO.parametros.w-160),pos[1]+4);}
+			YAHOO.janelaRef.xp.panel.moveTo((pos[0]+i3GEO.parametros.w+153-i3GEO.maparef.RIGHT-300),pos[1]+i3GEO.maparef.TOP);
 			var escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 				YAHOO.janelaRef.xp.panel.destroy();	
@@ -168,16 +182,6 @@ i3GEO.maparef = {
 				var m = new Image();
 				m.src = refimagem;
 				$i("imagemReferencia").src=m.src;
-				/*
-				if ((i3GEO.parametros.mapscale < 15000000) && (i3GEO.parametros.mapscale > 10000000)){
-					$i("refmensagem").innerHTML = "Para navegar no mapa principal, voc&ecirc; pode clicar em um ponto no mapa de refer&ecirc;ncia ou arrastar o box.";
-					$i("refmensagem").style.fontSize="10px";
-				}
-				else{
-					$i("refmensagem").innerHTML = "";
-					$i("refmensagem").style.fontSize="0px";
-				}
-				*/
 			}
 			i3GEO.gadgets.quadros.grava("referencia",refimagem);
 			var tiporef = "fixo";
