@@ -42,6 +42,25 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 */
 i3GEO.interface = {
 	/*
+	Property: BARRABOTOESTOP
+	
+	Distância da barra de botões em ralação ao topo do mapa.
+	
+	Type:
+	{number}
+	*/
+	BARRABOTOESTOP: 12,
+	/*
+	Property: BARRABOTOESLEFT
+	
+	Distância da barra de botões em ralação ao lado esquerdo do mapa.
+	
+	Type:
+	{number}
+	*/
+	BARRABOTOESLEFT: 3,	
+
+	/*
 	Property: ATUAL
 	
 	Interface atual em uso.
@@ -189,18 +208,15 @@ i3GEO.interface = {
 		ativaBotoes: function(){
 			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			if ($i("barraDeBotoes1")){
-				var x1 = imagemxy[0]+40;
-				var y1 = imagemxy[1]+10;
+				var x1 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT;
+				var y1 = imagemxy[1]+i3GEO.interface.BARRABOTOESTOP;
 			}
 			if ($i("barraDeBotoes2")){
-				var x2 = imagemxy[0];
-				var y2 = imagemxy[1]+10;
+				var x2 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT;
+				var y2 = imagemxy[1]+i3GEO.interface.BARRABOTOESTOP;
 			}
-			else{
-				if ($i("barraDeBotoes1")){
-					var x1 = imagemxy[0];
-					var x2 = imagemxy[1]+10;
-				}
+			if ($i("barraDeBotoes1") && $i("barraDeBotoes2")){
+				var x1 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT+40;
 			}
 			if ($i("barraDeBotoes1"))
 			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes1","i3geo_barra1",true,x1,y1);
@@ -571,8 +587,8 @@ i3GEO.interface = {
 		ativaBotoes: function(){
 			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			if ($i("barraDeBotoes2")){
-				var x2 = imagemxy[0]+80;
-				var y2 = imagemxy[1]+10;
+				var x2 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT;
+				var y2 = imagemxy[1]+i3GEO.interface.BARRABOTOESTOP;
 			}
 			if ($i("barraDeBotoes2"))
 			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
