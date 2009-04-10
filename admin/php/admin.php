@@ -162,6 +162,7 @@ function exclui()
     	include("conexao.php");
     	$dbhw->query("DELETE from $tabela WHERE $coluna = $id");
     	$dbhw = null;
+    	$dbh = null;
     	return "ok";
 	}
 	catch (PDOException $e)
@@ -186,6 +187,7 @@ function pegaDados($sql,$locaplic="")
     	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
     	$resultado = $q->fetchAll();
     	$dbh = null;
+    	$dbhw = null;
     	return $resultado;
 	}
 	catch (PDOException $e)

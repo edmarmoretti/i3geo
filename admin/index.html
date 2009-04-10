@@ -8,6 +8,7 @@
 <body>
 <div style=width:80%;text-align:left;>
 <h1>Administração do i3geo</h1>
+<p>Se você atualizou o Mapserver para a versão 5.2.2, seus mapfiles antigos podem não funcionar. Veja em "Outras opções" o item "Ajusta mapfiles".
 <fieldset>
 <legend>Leia-me</legend>
 <div style=display:none; >
@@ -16,14 +17,14 @@
 Com a nova estrutura de administração, esses arquivos podem ser substituídos por registros em bancos de dados.
 Se você optar por usar um banco de dados, os arquivos antigos poderão ser importados para o banco 
 (veja as opções de importação). Se vc desejar continuar utilizando os arquivos XML em disco, basta 
-editar as variáveis de configuração existentes emi3geo/ms_configura.php.</p>
+editar as variáveis de configuração existentes em i3geo/ms_configura.php.</p>
 <p>Para possibilitar a distribuição do i3geo de forma independente de banco de dados, optou-se pelo uso do gerenciador 
 SQLITE, cujo arquivo com os dados fica armazenado em i3geo/menutemas/admin.db. Os programas em PHP que gerenciam esse banco 
 utilizam o pacote PDO, possibilitando que seja utilizado outro gerenciador, como o POSTGRESQL, entre outros.</p>
 <p>Para modificar a configuração do PDO, e utilizar outro gerenciador, deve-se editar o arquivo i3geo/admin/conexao.php 
 ou então alterar a variável de configuração, definida no ms_configura.php, chamada $conexaoadmin. Essa variável indica o nome de um 
 programa em PHP que será incluído nos programas que fazem acesso ao banco de dados de administração. Um exemplo de 
-conexão em PHP pode ser visto em i3geo/admin/conexaomma.php.</p>
+conexão em PHP pode ser visto em i3geo/admin/php/conexaomma.php.</p>
 <p>Para usar um gerenciador diferente do SQLITE é necessário criar as tabelas no novo banco de dados. Os sqls para 
 essa criação podem ser obtidos no item "Outras opções".</p>
 
@@ -183,6 +184,8 @@ essa criação podem ser obtidos no item "Outras opções".</p>
 <legend>Outras opções</legend>
 <div style=display:none; >
 <table class=lista1 >
+<tr onclick="abre('html/incluimap.html')"><td><div class=aplicar ></div></td><td>Ajusta mapfiles</td></tr>
+
 <tr onclick="abre('php/sqlite.php')"><td><div class=aplicar ></div></td><td>Descrição do banco padrão (SQLITE)</td></tr>
 <tr onclick="abre('php/criabanco.php')"><td><div class=aplicar ></div></td><td>Criar banco de dados</td></tr>
 <tr onclick="abre('../geraminiatura.php')"><td><div class=aplicar ></div></td><td>Gera as miniaturas (thumbnails) para os temas existentes no diretório i3geo/temas</td></tr>

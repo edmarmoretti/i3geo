@@ -90,6 +90,7 @@ switch ($funcao)
 	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
 	if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
 	retornaJSON($dados);
+	exit;
 	break;
 
 	case "alteraMenus":
@@ -139,6 +140,8 @@ switch ($funcao)
 		registraTema();
 		$dados = pegaDados($sql);
 	}
+	if(count($dados) > 1)
+	{$dados = "erro. Mais de um mapfile com mesmo código registrado no banco";}
 	retornaJSON($dados);
 	exit;
 	break;	
@@ -703,7 +706,10 @@ function registraTema()
 	{
 		$retorna = "ok";
     	include("conexao.php");
-   		$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','SIM','SIM','','','')");// (link_tema,kml_tema,ogc_tema,download_tema,nome_tema,desc_tema,codigo_tema,tipoa_tema,tags_tema) VALUES ('','', '','','','','','','')");
+		$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
+		$dados = pegaDados($sql);
+		if(count($dados) == 0)
+		{$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','SIM','SIM','','','')");}
     	$dbhw = null;
     	$dbh = null;
     	return "ok";

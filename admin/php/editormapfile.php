@@ -265,6 +265,7 @@ function criarNovoMap()
 	$arq = $locaplic."/temas/".$codigo.".map";
 	if(!file_exists($arq))
 	{
+		$dados[] = "MAP";
 		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
@@ -874,6 +875,7 @@ function removeCabecalho($arq,$symbolset=true)
 	{
     	if($symbolset)
     	{
+    		$final[] = "MAP\n";
     		$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
     		$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
     	}
