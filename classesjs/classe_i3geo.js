@@ -197,6 +197,13 @@ i3GEO = {
 			if (document.getElementById("corpoMapa").style.height)
 			{var h = parseInt(document.getElementById("corpoMapa").style.height);}
 		}
+		var temp = $i("i3geo");
+		if(temp){
+			if(temp.style){
+				if(temp.style.width){var w = parseInt(temp.style.width);}
+				if(temp.style.height){var h = parseInt(temp.style.height);}
+			}
+		}
 		if($i("contemImg")){
 			$i("contemImg").style.height=h + "px";
 			$i("contemImg").style.width=w + "px";

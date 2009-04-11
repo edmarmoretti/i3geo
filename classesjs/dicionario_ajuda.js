@@ -255,7 +255,7 @@ g_traducao_ajuda_categorias = {
 };
 //inserir os aplicativos adicionais
 /*
-<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=' >&nbsp;&nbsp;</a>
+<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
 */
 /*
 Não esquecer:
