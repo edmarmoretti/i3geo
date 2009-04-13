@@ -197,7 +197,7 @@ i3GEO = {
 			if (document.getElementById("corpoMapa").style.height)
 			{var h = parseInt(document.getElementById("corpoMapa").style.height);}
 		}
-		var temp = $i("i3geo");
+		var temp = $i("corpoMapa");
 		if(temp){
 			if(temp.style){
 				if(temp.style.width){var w = parseInt(temp.style.width);}

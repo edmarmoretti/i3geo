@@ -3965,7 +3965,7 @@ i3GEO = {
 			if (document.getElementById("corpoMapa").style.height)
 			{var h = parseInt(document.getElementById("corpoMapa").style.height);}
 		}
-		var temp = $i("i3geo");
+		var temp = $i("corpoMapa");
 		if(temp){
 			if(temp.style){
 				if(temp.style.width){var w = parseInt(temp.style.width);}
@@ -13135,8 +13135,8 @@ i3GEO.janela = {
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
-		document.body.removeChild($i(id+"_c"));
-		//YAHOO.janelaDoca.xp.panel.destroy();
+		if($i(id+"_c"))
+		$i("i3geo").removeChild($i(id+"_c"));
 	},
 	/*
 	Function: alteraTamanho
@@ -19099,6 +19099,10 @@ i3GEO.gadgets = {
 	Essa variável define os parâmetros individuais de cada gadget e o ID do elemento HTML onde
 	o gadget será incluído.
 	
+	Você pode acessar os parâmetros da seguinte forma:
+	
+	i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda = 400
+	
 	Default:
 	
 	i3GEO.gadgets.PARAMETROS = {
@@ -19141,7 +19145,7 @@ i3GEO.gadgets = {
 
 		"mostraMenuSuspenso":
 
-		{idhtml:"menus"}
+		{idhtml:"menus",deslocaEsquerda:0}
 	}	
 	
 	Type:
@@ -19167,7 +19171,7 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":
-		{idhtml:"menus"}
+		{idhtml:"menus",deslocaEsquerda:0}
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -19858,7 +19862,11 @@ i3GEO.gadgets = {
  			}
  			else{
  				var ins = "";
-				ins += '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
+ 				var alinhamento = "";
+ 				if(i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda){
+ 					var alinhamento = "left:"+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda*-1+"px;";
+ 				}
+				ins += '<div class="bd" style="'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
  				var n = i3GEO.configura.oMenuData.menu.length;
  				for(i = 0;i < n;i++){

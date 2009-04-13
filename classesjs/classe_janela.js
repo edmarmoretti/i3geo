@@ -190,8 +190,8 @@ i3GEO.janela = {
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
-		document.body.removeChild($i(id+"_c"));
-		//YAHOO.janelaDoca.xp.panel.destroy();
+		if($i(id+"_c"))
+		$i("i3geo").removeChild($i(id+"_c"));
 	},
 	/*
 	Function: alteraTamanho
