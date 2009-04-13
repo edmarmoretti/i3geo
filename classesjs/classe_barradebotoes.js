@@ -39,6 +39,24 @@ i3GEO.barraDeBotoes = {
 	*/
 	BARRAS: new Array(),
 	/*
+	Property: PERMITEFECHAR
+	
+	Mostra o botão para fechar as barras ou não.
+	
+	Type:
+	{boolean}
+	*/
+	PERMITEFECHAR: true,
+	/*
+	Property: PERMITEDESLOCAR
+	
+	Permite deslocar as barras ou não.
+	
+	Type:
+	{boolean}
+	*/
+	PERMITEDESLOCAR: true,
+	/*
 	Property: LISTABOTOES
 	
 	Objeto com a lista de botões.
@@ -181,8 +199,8 @@ i3GEO.barraDeBotoes = {
 		{novoel.style.filter='alpha(opacity=90)';}
 		else
 		{novoel.style.opacity= .85;}
-		var temp = '<div class="hd">&nbsp;</div>';
-		temp += '<div class="bd" style="background-color:rgb(250,250,250);width='+wj+'px"  >';		
+		//var temp = '<div class="hd" >&nbsp;</div>';
+		//temp += '<div class="bd" style="background-color:rgb(250,250,250);width='+wj+'px"  >';		
 		var temp = "";
 		if (barraZoom == true)
 		{
@@ -208,7 +226,7 @@ i3GEO.barraDeBotoes = {
 			$i(idconteudo).innerHTML = "";
 		}
 		YAHOO.namespace("janelaBotoes.xp");
-		YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+		YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
 		if((barraZoom == true) && $i("img")){
 			if (!$i("imgClone")){
 				iclone=document.createElement('IMG');
