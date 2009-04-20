@@ -229,6 +229,7 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		//YAHOO.log("abreAguarde", "janela");
+		document.body.style.cursor = "wait";
 		if($i(id+"_mask"))
 		{document.body.removeChild($i(id+"_mask"));}
 		if($i(id+"_c"))
@@ -410,6 +411,7 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
+		document.body.style.cursor = "default";
 		if(arguments.length > 0){
 			try{eval('YAHOO.aguarde.'+id+'.destroy()');}
 			catch(e){};

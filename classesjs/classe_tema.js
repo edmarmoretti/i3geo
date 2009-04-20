@@ -193,7 +193,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		graficotema: function(idtema)
-		{return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico"));},
+		{return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>"));},
 		/*
 		Function: toponimia
 
@@ -204,7 +204,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		toponimia: function(idtema)
-		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia");},
+		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: filtro
 
@@ -215,7 +215,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		filtro: function(idtema)
-		{i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro");},
+		{i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: procuraratrib
 
@@ -226,7 +226,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema)
-		{i3GEO.janela.cria("280px","320px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar","janela_busca");},
+		{i3GEO.janela.cria("280px","320px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>","janela_busca");},
 		/*
 		Function: tabela
 
@@ -237,7 +237,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		tabela: function(idtema)
-		{i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela");},
+		{i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+"/ferramentas/tabela/index.htm?tema="+idtema,"","","Tabela<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: etiquetas
 
@@ -248,7 +248,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		etiquetas: function(idtema)
-		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas");},
+		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: editaLegenda
 
@@ -259,7 +259,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		editaLegenda: function(idtema)
-		{i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda");},
+		{i3GEO.janela.cria("490px","340px",i3GEO.configura.locaplic+"/ferramentas/legenda/index.htm?tema="+idtema,"","","Legenda<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: download
 

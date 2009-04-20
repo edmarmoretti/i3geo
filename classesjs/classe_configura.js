@@ -466,7 +466,6 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan",i3GEO.interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				marcadorZoom = "";
-				
 				panMapaInicia = function(){
 					if ($i("img") && (g_tipoacao == "pan")){
 						g_panM = "sim";
@@ -593,6 +592,7 @@ i3GEO.configura = {
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					verificaTipDefault = function(){
+						if($i("img")){$i("img").style.cursor = "wait";}
 						var retorna = function(retorno){
 							var i = $i("i3geo_rosa");
 							if(i){i.style.display="none";}			
@@ -656,8 +656,9 @@ i3GEO.configura = {
 										}
 									}
 								}
+							if($i("img")){i3GEO.util.mudaCursor(i3GEO.configura.cursores,"identifica","img",i3GEO.configura.locaplic);}
 							}
-							catch(e){}
+							catch(e){if($i("img")){i3GEO.util.mudaCursor(i3GEO.configura.cursores,"identifica","img",i3GEO.configura.locaplic);}}
 						};
 						i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
 					};				

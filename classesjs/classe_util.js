@@ -833,6 +833,98 @@ i3GEO.util = {
 			}
 		};
 		ohttp.send(null);
+	},
+	/*
+	Function: aparece
+	
+	Aplica efeito de aparecimento suave de um objetov
+	
+	Parameters:
+	
+	id {String} - id do objeto
+	
+	tempo {Integer} - tempo em milesegundos que levará o efeito
+	
+	intervalo {Integer} - intervalo entre uma imagem e outra
+	*/
+	aparece: function(id,tempo,intervalo){
+		var n = parseInt(tempo / intervalo);
+		var tempo = n * intervalo;
+		var intervalo = (intervalo * 100) / tempo;
+		var obj = $i(id);
+		var opacidade = 0;
+		if (navm)
+		{obj.style.filter='alpha(opacity=0)';}
+		else
+		{obj.style.opacity= 0;}
+		obj.style.display = "block";
+		var fadei = function(){
+			opacidade += intervalo;
+			if (navm)
+			{obj.style.filter='alpha(opacity='+opacidade+')';}
+			else
+			{obj.style.opacity= opacidade/100;}
+			if(opacidade < 100)
+			var tempoFade = setTimeout(fadei, tempo);
+			else{
+				clearTimeout(tempoFadei);
+				if (navm)
+				{obj.style.filter='alpha(opacity=100)';}
+				else
+				{obj.style.opacity= 1;}
+			}
+		};
+		var tempoFadei = setTimeout(fadei, tempo);	
+	},
+	/*
+	Function: desaparece
+	
+	Aplica efeito de desaparecimento suave de um objetov
+	
+	Parameters:
+	
+	id {String} - id do objeto
+	
+	tempo {Integer} - tempo em milesegundos que levará o efeito
+	
+	intervalo {Integer} - intervalo entre uma imagem e outra
+	
+	removeobj {Boolean} - remove ou não o objeto no final
+	*/
+	desaparece: function(id,tempo,intervalo,removeobj){
+		var n = parseInt(tempo / intervalo);
+		var tempo = n * intervalo;
+		var intervalo = (intervalo * 100) / tempo;
+		var obj = $i(id);
+		var opacidade = 100;
+		if (navm)
+		{obj.style.filter='alpha(opacity=100)';}
+		else
+		{obj.style.opacity= 1;}
+		obj.style.display = "block";
+		var fade = function(){
+			opacidade -= intervalo;
+			if (navm)
+			{obj.style.filter='alpha(opacity='+opacidade+')';}
+			else
+			{obj.style.opacity= opacidade/100;}
+			if(opacidade > 0){
+				var tempoFade = setTimeout(fade, tempo);
+			}
+			else{
+				clearTimeout(tempoFade);
+				obj.style.display = "none";
+				if (navm)
+				{obj.style.filter='alpha(opacity=100)';}
+				else
+				{obj.style.opacity= 1;}
+				if(removeobj){
+					var p = obj.parentNode;
+					p.removeChild(obj);
+				}
+			}
+		};
+		var tempoFade = setTimeout(fade, tempo);	
 	}
 };
 //

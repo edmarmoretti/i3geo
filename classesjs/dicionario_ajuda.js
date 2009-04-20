@@ -238,24 +238,90 @@ g_traducao_ajuda = {
 			pt:"O nó 'Sistemas' da árvore de adição de temas, lista aplicativos especiais que precisam de interação com o usuário para a criação de uma camada.",
 			complemento:"Alguns sistemas são fornecidos com a instalação padrão do i3Geo, mas cada administrador pode criar seus próprios."
 		},
+		"35": {
+			titulo: "Procurar ocorrências",
+			diretorio:"i3geo/ferramentas/busca",
+			categoria:"5",
+			pt:"Cada tema possuí um conjunto de dados descritivos associados aos elementos geográficos (tabela de atributos). A opção 'procurar' realiza uma pesquisa nesses atributos e localiza as correspondências. O resultado é mostrado em uma lista de elementos que permite destacar cada um deles.",
+			complemento:"Para fazer a busca deve-se selecionar em quais titens da tabela de atributos a mesma será feita, podendo-se escolher mais de um. A busca pode ser feita no mapa todo ou apenas na região visível do mapa."
+		},
+		"36": {
+			titulo: "Toponímia",
+			diretorio:"i3geo/ferramentas/",
+			categoria:"5",
+			pt:"A toponímia são os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos são baseados na tabela de atributos de cada tema, que contém os dados descritivos de cada elemento.",
+			complemento:"Ao inserir uma toponímia, um novo tema é adicionado ao mapa, podendo ser excluído ou movimentado. Dessa forma é possível incluir mais de um tema com a toponímia. Ao inserir a toponímia deve-se escoçher o item da tabela de atributos e, caso necessário, pode-se modificar as opções padrão de simbologia utilizadas nos textos, como fonte, cor, máscara, etc. É possível ainda testar as opções antes de concluir a inclusão da toponímia."
+		},
+		"37": {
+			titulo: "Etiquetas",
+			diretorio:"i3geo/ferramentas/etiqueta",
+			categoria:"5",
+			pt:"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o mouse &eacute; estacionado por alguns instantes sobre um elemento. Cada tema pode ter uma etiqueta ativa, sendo esta baseada em um item da tabela de atributos do tema.",
+			complemento:"Para ver as etiquetas, ative a opera&ccedil;&atilde;o de identifica&ccedil;&atilde;o."
+		},
+		"38": {
+			titulo: "Filtro",
+			diretorio:"i3geo/ferramentas/filtro",
+			categoria:"5",
+			pt:"Filtrar um tema significa definir um critério para que um determinado elemento seja mostrado. Esse critério é baseado nos dados descritivos (tabela de atributos). Um filtro é uma expressão que relaciona os itens da tabela de atributos e seus valores, por exemplo, 'UF' = 'SP', onde 'UF' é o nome da coluna (item) e 'SP' é o valor. As expressões podem ser definidas por meio de um 'construtor' (guia default da ferramenta) ou digitando-se diretamente a expressão. Veja <a href='http://mapserver.org/mapfile/expressions.html#mapserver-expressions' >como</a>.",
+			complemento:"Cada tema pode ter apenas um filtro. O filtro apenas deixa de mostrar os dados no mapa, ou seja, os dados continuam na tabela de atributos. Antes de aplicar um filtro, pode-se testá-lo para verificar seu efeito. O construtor de expressões permite a utilização de mais de uma coluna, para isso, deve-se adicionar novas linhas e escolher um conector, como 'e' ou 'ou'. Por exemplo, em um tema com os municípios pode-se mostrar apenas aqueles de determinados estados escolhendo-se 'colun' = 'valor' 'e' 'coluna' = 'valor'."
+		},
+		"39": {
+			titulo: "Tabela",
+			diretorio:"i3geo/ferramentas/tabela",
+			categoria:"5",
+			pt:"Cada tema possui informações descritivas associadas a cada elemento, esses dados são conhecidos como 'tabela de atributos'. Essa opção mostra os dados existentes na tabela e permite a realização de uma série de operações diretamente sobre os registros existentes, como por exemplo, seleção, zoom, relatórios e gráficos.",
+			complemento:"Como o número de registros de um tema pode ser grande, os dados são mostrados em páginas. Ao lado de cada registro existe uma caixa que permite marcar os registros. Os registros marcados são mostrados na guia 'Marcados'. As operações disponíveis nessa ferramenta atuam sobre todos os elementos da tabela ou sobre os selecinados. Para selecionar os elementos marcados, utilize a opção 'Ativa seleção' na guia 'Marcados'."
+		},
+		"40": {
+			titulo: "Gráficos",
+			diretorio:"i3geo/ferramentas/graficotema",
+			categoria:"5",
+			pt:"Para a montagem de cada gr&aacute;fico &eacute; necess&aacute;rio selecionar um tema que contenha os dados que ser&atilde;o representados. Os dados s&atilde;o aqueles que encontram-se na tabela de atributos do tema.",
+			complemento:"Ap&oacute;s selecionado o tema, &eacute; mostrada uma lista com os itens existentes na tabela de atributos. Escolha os itens que ser&atilde;o utilizados no gr&aacute;fico clicando no box que aparece na lista de itens. Cada item ir&aacute; compor uma fatia do gr&aacute;fico. Ao lado do item, &eacute; mostrada a cor que ser&aacute; utilizada na representa&ccedil;&atilde;o. Cada cor &eacute; definida em RGB. Na guia 'propriedades' &eacute; poss&iacute;vel definir propriedades de representa&ccedil;&atilde;o de cada gr&aacute;fico. As defini&ccedil;&otilde;es afetar&atilde;o a forma de cada gr&aacute;fico. Cada gr&aacute;fico adicionado &eacute; inclu&iacute;do no mapa como um novo tema."
+		},
+		"41": {
+			titulo: "Editor de legenda",
+			diretorio:"i3geo/ferramentas/legenda",
+			categoria:"5",
+			pt:"A legenda de um tema consiste nas definições dos símbolos utilizados na representação de cada elemento. A lém dos símbolos, uma das propriedades da legenda é o tipo de classificação utilizado na representação dos dados, por exemplo, pode-se mostrar todos os elementos com um único símbolo ou agrupar elementos e utilizar símbolos diferentes para cada grupo. No editor, a guia 'Classes' permite definir a classificação e na guia principal são mostrados os símbolos. Quando um símbolo é clicado, é ativada a guia que permite definir as características do símbolo.",
+			complemento:"As classes são definidas por meio de expressões que definem um tipo de filtro que será usado para definir que elementos fazem parte de cada classe. O editor possui alguns métodos para definição automática das classes, mas pode-se incluir classes livremente digitando-se o filtro. Veja <a href='http://mapserver.org/mapfile/class.html' >como</a>."
+		},
+		"42": {
+			titulo: "Opacidade",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Essa opção modifica a opacidade de um tema permitindo ajustar a visibilidade dos elementos em relação aos outros temas. A opacidade varia de 0 a 100, sendo 100 o mais opaco.",
+			complemento:""
+		},
+		"43": {
+			titulo: "Altera nome",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Essa opção permite alterar o nome do tema. O novo nome será mostrado no mapa e também na legenda.",
+			complemento:""
+		},
 		"": {
 			titulo: "",
 			diretorio:"i3geo/ferramentas/",
-			categoria:"4",
+			categoria:"5",
 			pt:"",
 			complemento:""
 		}
+
 	}
 };
+
 g_traducao_ajuda_categorias = {
 	"1":{titulo:"Propriedades do mapa"},
 	"2":{titulo:"Arquivos"},
 	"3":{titulo:"Análise geográfica"},
-	"4":{titulo:"Inclusão de camadas"}
+	"4":{titulo:"Inclusão de camadas"},
+	"5":{titulo:"Operações sobre um tema"}
 };
 //inserir os aplicativos adicionais
 /*
-<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
+<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
 */
 /*
 Não esquecer:

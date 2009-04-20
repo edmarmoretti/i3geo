@@ -83,9 +83,9 @@ i3GEO.calculo = {
 
 	docmapa - objeto DOM que contém o objeto imagem
 	
-	ext {String} - extensão geográfica (espaço como separador) xmin ymin xmax ymax
+	ext {String} - (opcional) extensão geográfica (espaço como separador) xmin ymin xmax ymax
 	
-	cellsize {Numeric} - tamanho no terreno em DD de cada pixel da imagem
+	cellsize {Numeric} - (opcional) tamanho no terreno em DD de cada pixel da imagem
 
 	Returns:
 
