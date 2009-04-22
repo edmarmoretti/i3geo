@@ -104,7 +104,8 @@ $menus = array("menutemas/menutemas.xml");
 //pega a lista de grupos
 if ($lista == "temas")
 {
-	echo "<b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
+	echo '<html><head><title>WMS</title><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
+	echo "<body><b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
 	$imprimir = "";
 	foreach ($menus as $menu)
 	{
@@ -125,6 +126,7 @@ if ($lista == "temas")
 						$imprimir .= "<span style=color:red >".$id."</span>";
 						$imprimir .= "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")."&nbsp";
 						$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$id."&service=wms&request=getcapabilities' >Getcapabilities</a>";
+						$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$id."&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$id."' >GetMap </a>";
 						if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
 						{$imprimir .= "&nbsp;&nbsp;<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
 						$imprimir .= "<br>";
@@ -133,28 +135,7 @@ if ($lista == "temas")
 			}
 		}
 	}
-	echo $imprimir;
-	return;
-}
-if ($lista == "sitemap")
-{
-	foreach ($menus as $menu)
-	{
-		$xml = simplexml_load_file($menu);
-		foreach($xml->GRUPO as $grupo)
-		{
-			foreach($grupo->SGRUPO as $sgrupo)
-			{
-				foreach($sgrupo->TEMA as $tema)
-				{
-					if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
-					{				
-						echo $urli3geo."/ogc.php?tema=".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."&service=wms&request=getcapabilities<br>";
-					}
-				}
-			}
-		}
-	}
+	echo $imprimir."</body></html>";
 	return;
 }
 if (isset($ajuda))
@@ -209,7 +190,7 @@ $oMap->setmetadata("ows_onlineresource",$or);
 $oMap->setmetadata("ows_title",$tituloInstituicao." - i3geo");
 if (!isset($intervalo))
 {$intervalo = "0,50";}
-if ($tipo == "")
+if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
 	foreach ($tema as $tx)
