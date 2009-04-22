@@ -100,30 +100,56 @@ else
 	}
 }
 if(!isset($menus))
-$menus = array("/opt/www/html/i3geo/menutemas/menutemas.xml");
+$menus = array("menutemas/menutemas.xml");
 //pega a lista de grupos
 if ($lista == "temas")
 {
-	echo "<b>Lista de temas por grupos e subgrupos (os códigos dos temas estão em vermelho)</b><br><br>";
+	echo "<b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
+	$imprimir = "";
 	foreach ($menus as $menu)
 	{
 		$xml = simplexml_load_file($menu);
 		foreach($xml->GRUPO as $grupo)
 		{
-			echo "<br><b>".mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")."</b><br>";
+			$imprimegrupo = "<i>".mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")."</i>";
 			foreach($grupo->SGRUPO as $sgrupo)
 			{
-				echo "&nbsp;&nbsp;&nbsp;".mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto")."<br>";
+				$imprimesubgrupo = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");
 				foreach($sgrupo->TEMA as $tema)
 				{
 					if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
 					{				
-						echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-						echo "<span style=color:red >".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."</span>";
-						echo "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")." - ";
+						$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
+						$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+						$id = mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto");
+						$imprimir .= "<span style=color:red >".$id."</span>";
+						$imprimir .= "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")."&nbsp";
+						$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$id."&service=wms&request=getcapabilities' >Getcapabilities</a>";
 						if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
-						{echo "<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
-						echo "<br>";
+						{$imprimir .= "&nbsp;&nbsp;<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
+						$imprimir .= "<br>";
+					}
+				}
+			}
+		}
+	}
+	echo $imprimir;
+	return;
+}
+if ($lista == "sitemap")
+{
+	foreach ($menus as $menu)
+	{
+		$xml = simplexml_load_file($menu);
+		foreach($xml->GRUPO as $grupo)
+		{
+			foreach($grupo->SGRUPO as $sgrupo)
+			{
+				foreach($sgrupo->TEMA as $tema)
+				{
+					if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
+					{				
+						echo $urli3geo."/ogc.php?tema=".mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto")."&service=wms&request=getcapabilities<br>";
 					}
 				}
 			}
@@ -160,9 +186,8 @@ foreach ($_GET as $k=>$v)
 	{$tema = $v;}
 	//if(strtolower($k) == "srs")
 	//{$SRS = $v;}
-	
 }
-if(isset($tema))
+if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 $req->setParameter("VeRsIoN","1.1.0");
 $oMap = ms_newMapobj("aplicmap/ogcws.map");
@@ -178,7 +203,8 @@ $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s"
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
 if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
-{$or = $or."tema=".$tema."&";}
+{$or = $or."?tema=".$tema."&";}
+
 $oMap->setmetadata("ows_onlineresource",$or);
 $oMap->setmetadata("ows_title",$tituloInstituicao." - i3geo");
 if (!isset($intervalo))
