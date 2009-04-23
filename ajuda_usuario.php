@@ -42,6 +42,9 @@ function pegaAjuda(tipo,categoria){
 				ins += "<p>"+obj[k].pt+"</p>"
 				ins += "<p>"+obj[k].complemento+"</p>"
 				ins += "<p style='color:gray'>"+obj[k].diretorio+"</p>"
+				if(obj[k].apijs){
+					ins += "<p style='color:gray'>API js: "+obj[k].apijs+"</p>"
+				}
 				if(obj[k].tela){
 					ins += "<p><a href='"+obj[k].tela+"' target=_blank >Exemplo de tela</a></p>"
 				}

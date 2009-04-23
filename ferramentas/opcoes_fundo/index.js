@@ -32,8 +32,10 @@ var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=pegacor
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");
-var retorno = function(retorno)
-{$i("cor").value = retorno.data;}
+var retorno = function(retorno){
+	if(retorno.data.erro){aguarde("none");return;}
+	$i("cor").value = retorno.data;
+}
 cp.call(p,"corQM",retorno);
 
 function mudacor()

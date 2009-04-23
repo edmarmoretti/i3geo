@@ -21,6 +21,7 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
+if(tema == "undefined"){tema = ""}
 estilo = ""
 classe = ""
 listaitens = "" //guarda a lista de temas e itens

@@ -28,6 +28,7 @@ cp.set_response_type("JSON");
 cp.call(p,"converteWS",resultado);
 function resultado(retorno)
 {
+	if(retorno.data.erro){aguarde("none");return;}
 	if (retorno.data != undefined)
 	{
 

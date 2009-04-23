@@ -21,6 +21,7 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
+if(tema == "undefined"){tema = "";}
 aguarde("block")
 //preenche a lista de itens
 radioitensf(tema,function(retorno){$i("listai").innerHTML = retorno.dados},"listai")

@@ -39,6 +39,7 @@ cp.call(p,"listaTrueType",listafontesf);
 //monta a lista de fontes
 function listafontesf(retorno)
 {
+	if(retorno.data.erro){aguarde("none");return;}
 	var retorno = retorno.data
 	var lista = retorno.split(",")
 	var ins = "<select id=fonte >"

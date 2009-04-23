@@ -10867,6 +10867,19 @@ i3GEO.interface = {
 		{Numeric}
 		*/
 		OPACIDADE: 0.8,
+		/*
+		Property: TIPOMAPA
+		
+		Tipo de mapa que será usado como default, conforme constantes definidas na API do Google Maps.
+		
+		Default:
+		G_PHYSICAL_MAP
+		
+		Type:
+		{Google API constante GMapType}
+		*/
+		TIPOMAPA: "G_PHYSICAL_MAP",
+		
 		redesenha: function(){
    			if(i3GeoMap != ""){
    				posfixo = posfixo + "&";
@@ -10916,8 +10929,10 @@ i3GEO.interface = {
     		var ret = pol.split(" ");
     		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
+    		
     		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
-    		i3GeoMap.setMapType(G_SATELLITE_MAP);
+    		i3GeoMap.addMapType(G_PHYSICAL_MAP);
+    		i3GeoMap.setMapType(i3GEO.interface.googlemaps.TIPOMAPA);
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -11024,7 +11039,7 @@ i3GEO.interface = {
 		ativaBotoes: function(){
 			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			if ($i("barraDeBotoes2")){
-				var x2 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT;
+				var x2 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT+70;
 				var y2 = imagemxy[1]+i3GEO.interface.BARRABOTOESTOP;
 			}
 			if ($i("barraDeBotoes2"))

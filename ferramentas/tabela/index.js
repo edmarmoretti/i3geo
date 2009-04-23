@@ -23,6 +23,7 @@ Free Software Foundation, Inc., no endereço
 nomeArquivoGr = "" //nome do arquivo que conterá os dados apoós ser feito o gráfico pela primeira vez
 mensagemAjuda("men1",$i("men1").innerHTML)
 parametrosURL()
+if(tema == "undefined"){tema = "";}
 //se o R estiver instalado, mostra a guia de graficos
 if (window.parent.i3GEO.parametros.r != "sim")
 {$i("guia4obj").innerHTML = "Opção não disponível"}

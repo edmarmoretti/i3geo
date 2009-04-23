@@ -38,6 +38,7 @@ YAHOO.example.init = function ()
 }()
 function inicia(retorno)
 {
+	if(retorno.data.erro){aguarde("none");return;}
 	if (retorno.data != undefined)
 	{
 		var retorno = retorno.data

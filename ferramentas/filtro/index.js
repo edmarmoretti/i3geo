@@ -24,6 +24,7 @@ parametrosURL()
 aguarde("block")
 listaitens = "" //guarda a lista de temas e itens
 comboDeItens = ""
+if(tema == "undefined"){tema = "";}
 //combo com as camadas
 comboCamadas("selCamada",tema,function(retorno)
 	{

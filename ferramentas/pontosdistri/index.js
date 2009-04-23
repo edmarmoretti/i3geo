@@ -47,12 +47,6 @@ comboTemasPt("temasPt",function(retorno)
 		
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDeldir()' ><input id=botaodeldir size=35  type=button value='Delaunay/Voronoi' /></div><br>"
 
-		/*
-		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseCluster()' ><input id=botaocluster size=35  type=button value='Cluster espacial' /></div>"
-		var re = new RegExp("temasPt", "g");
-		retorno.dados = retorno.dados.replace(re,"temasPt2")
-		ins += "<div>O tema escolhido acima ser&aacute; considerado como os eventos para o cluster. Selecione na lista abaixo o tema que ser&aacute; utilizado como popula&ccedil;&atilde;o alvo: "+retorno.dados+" </div></div><br>"
-		*/
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseRelatorio()' ><input id=botao3 size=35  type=button value='Relat&oacute;rio' /></div><br>"
 
 		$i("guia1obj").innerHTML = ins;

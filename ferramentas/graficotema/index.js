@@ -21,6 +21,7 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
+if(tema == "undefined"){tema = "";}
 ativaGuias("")
 mostraGuia("guia1")
 comboi = ""
