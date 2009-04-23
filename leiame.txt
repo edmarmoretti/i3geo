@@ -77,3 +77,6 @@ o fórum da comunidade i3geo.
 A versão 4.1 trouxe várias modificações no modelo de programação em javascript.
 Veja o documento guia_migracao_41.txt para maiores informações.
 
+---------
+
+Edite o arquivo aplicmap/ogcws.map para incluir os dados da sua instituição que serão mostrados nos web services automáticos gerados com i3geo/ogc.php

@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
   LAYER
@@ -20,66 +23,64 @@ FONTSET   "../symbols/fontes.txt"
     TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME "6"
-      EXPRESSION ('[gid]'eq'6')
+      NAME "PANTANAL"
+      EXPRESSION ('[cd_legenda]'eq'PANTANAL')
       STYLE
         ANGLE 360
-        COLOR 222 45 254
+        COLOR 51 127 17
         OPACITY 100
         SYMBOL 0
       END
     END
     CLASS
-      NAME "5"
-      EXPRESSION ('[gid]'eq'5')
+      NAME "PAMPA"
+      EXPRESSION ('[cd_legenda]'eq'PAMPA')
       STYLE
         ANGLE 360
-        COLOR 202 254 0
+        COLOR 172 9 159
         OPACITY 100
         SYMBOL 0
       END
     END
     CLASS
-      NAME "4"
-      EXPRESSION ('[gid]'eq'4')
+      NAME "MATA ATLÂNTICA"
+      EXPRESSION ('[cd_legenda]'eq'MATA ATLÂNTICA')
       STYLE
         ANGLE 360
-        COLOR 29 234 16
+        COLOR 133 113 7
         OPACITY 100
         SYMBOL 0
       END
     END
     CLASS
-      NAME "3"
-      EXPRESSION ('[gid]'eq'3')
+      NAME "CERRADO"
+      EXPRESSION ('[cd_legenda]'eq'CERRADO')
       STYLE
         ANGLE 360
-        COLOR 212 224 95
+        COLOR 230 124 169
         OPACITY 100
         SYMBOL 0
       END
     END
     CLASS
-      NAME "2"
-      EXPRESSION ('[gid]'eq'2')
+      NAME "CAATINGA"
+      EXPRESSION ('[cd_legenda]'eq'CAATINGA')
       STYLE
         ANGLE 360
-        COLOR 125 218 150
+        COLOR 249 209 172
         OPACITY 100
         SYMBOL 0
       END
     END
     CLASS
-      NAME "1"
-      EXPRESSION ('[gid]'eq'1')
+      NAME "AMAZÔNIA"
+      EXPRESSION ('[cd_legenda]'eq'AMAZÔNIA')
       STYLE
         ANGLE 360
-        COLOR 221 81 220
+        COLOR 175 182 141
         OPACITY 100
         SYMBOL 0
       END
     END
   END
-
 END
-

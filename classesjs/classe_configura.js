@@ -84,12 +84,13 @@ i3GEO.configura = {
  		],
 		submenus:{
 			"ajudaMenu": [ 
-			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
+			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
 			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
-			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
-			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" },
-			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
+			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
+			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo", target:"_blank" },
+			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
+			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6", target:"_blank" },
+			{ text: "Lista de funções", url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" }
 			],
 			"analise": [
     		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
@@ -678,7 +679,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d8"),
 			funcaoonclick:function()
-			{i3GEO.janela.cria("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica");}
+			{i3GEO.janela.cria("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=55' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		{
 			//botão que abre a janela com o mapa de referência
@@ -726,7 +727,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d12"),
 			funcaoonclick:function()
-			{i3GEO.janela.cria("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");}
+			{i3GEO.janela.cria("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		{
 			//botão de localização do usuário pelo IP

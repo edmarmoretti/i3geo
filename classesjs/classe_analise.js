@@ -189,7 +189,7 @@ i3GEO.analise = {
 			if (!$i("mostradistancia")){
 				var novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
-				var ins = '<div class="hd" >&nbsp</div>';
+				var ins = '<div class="hd" >&nbsp; <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>';
 				ins += '<div class="bd" style="text-align:left;padding:3px;" >';
 				ins += '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>';
 				ins += '<div style="text-align:left;font-size:10px" >';
@@ -340,7 +340,7 @@ i3GEO.analise = {
 			if (!$i("mostraarea")){
 				var novoel = document.createElement("div");
 				novoel.id = "mostraarea";
-				var ins = '<div class="hd" >&Aacute;rea aproximada</div>';
+				var ins = "<div class='hd' >&Aacute;rea aproximada <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=51' >&nbsp;&nbsp;&nbsp;</a></div>";
 				ins += '<div class="bd" style="text-align:left;padding:3px;" >';
 				ins += '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>';
 				ins+= '</div>';

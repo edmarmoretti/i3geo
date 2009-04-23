@@ -701,7 +701,7 @@ i3GEO.gadgets = {
 				i3GEO.php.desativacgi(volta);
 			}
 			else
-			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
+			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		/*
 		Function: anima
@@ -823,8 +823,10 @@ i3GEO.gadgets = {
  					}
  					else
  					var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
- 					
- 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
+ 					var t = "";
+ 					if(i3GEO.configura.oMenuData.menu[i].target)
+ 					{var t = "target="+i3GEO.configura.oMenuData.menu[i].target;}
+ 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
  				}
  				ins += '</ul>'; 
  				ins += '</div>';

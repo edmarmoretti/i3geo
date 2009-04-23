@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
@@ -16,7 +19,6 @@ LAYER
         "wms_format"	"image/png"
         "wms_connectiontimeout"	"30"
         "wms_server_version"	"1.1.1"
-
         "wms_name"	"amazonia:solos_poligono"
         "legendawms"	"http://www2.sipam.gov.br:80/geoserver/wms?SERVICE=WMS&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=amazonia:solos_poligono&style=tpar&format=image/png"
         "wms_style"	"tpar"
@@ -34,7 +36,6 @@ LAYER
       NAME " "
       METADATA
       END
-
     END
   END
 END

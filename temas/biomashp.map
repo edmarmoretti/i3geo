@@ -1,0 +1,80 @@
+MAP
+
+
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  LAYER
+    CONNECTION ""
+    DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
+    METADATA
+      "CLASSE"	"SIM"
+      "download"	"SIM"
+      "TEMA"	"Biomas shapefile"
+    END
+    NAME "biomashp"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "PANTANAL"
+      EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
+      STYLE
+        ANGLE 360
+        COLOR 104 27 127
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "PAMPA"
+      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
+      STYLE
+        ANGLE 360
+        COLOR 183 42 6
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "MATA ATLANTICA"
+      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
+      STYLE
+        ANGLE 360
+        COLOR 73 42 248
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "CERRADO"
+      EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
+      STYLE
+        ANGLE 360
+        COLOR 239 98 76
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "CAATINGA"
+      EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
+      STYLE
+        ANGLE 360
+        COLOR 107 213 213
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "AMAZONIA"
+      EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
+      STYLE
+        ANGLE 360
+        COLOR 233 166 160
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+  END
+END

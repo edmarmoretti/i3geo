@@ -1,17 +1,4 @@
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
-LAYER
-   NAME kml_places
-   TYPE POINT
-   STATUS DEFAULT
-   CONNECTIONTYPE OGR
-   CONNECTION "c:/ms4w/apache/htdocs/i3geo/aplicmap/dados/teste.kml"
-   DATA "Layer #0"
-   CLASS
-     NAME "My Places"
-     STYLE
-       COLOR 250 0 0
-     END
-  END
-END
-END
+MAP
+
+
+EOL

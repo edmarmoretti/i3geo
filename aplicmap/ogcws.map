@@ -25,10 +25,10 @@ MAP
  FONTSET   "../symbols/fontes.txt"
 	LEGEND
 		IMAGECOLOR 255 255 255
-		KEYSIZE 25 25
+		KEYSIZE 10 10
 		KEYSPACING 5 5
 		LABEL
-			SIZE 8
+			SIZE 10
 			FONT "verdana"
 			TYPE truetype
 			BUFFER 0
@@ -50,21 +50,21 @@ WEB
   METADATA
    "ows_title" "I3Geo Brasil MMA"
    "wms_title" "I3Geo Brasil MMA"
-   "ows_abstract" "Web services gerados da base de dados do I3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando ogc.php?ajuda="
-   "ows_keywordlist" ""
+   "ows_abstract" "Web services gerados da base de dados do I3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando ogc.php?ajuda=, para uma lista compacta de todos os serviços, digite ogc.php?lista=temas"
+   "ows_keywordlist" "i3Geo"
    "ows_onlineresource" ""
    "ows_fees" "none"
    "ows_accessconstraints" "vedado o uso comercial"
-   "ows_contactperson" ""
-   "ows_contactorganization" ""
+   "ows_contactperson" "Web Master"
+   "ows_contactorganization" "www.mma.gov.br"
    "ows_contactposition" ""
    "ows_addresstype" ""
    "ows_address"     ""
-   "ows_city" ""
-   "ows_stateorprovince" ""
+   "ows_city" "Brasília"
+   "ows_stateorprovince" "DF"
    "ows_postcode" ""
-   "ows_country" ""
-   "ows_contactelectronicmailaddress" ""
+   "ows_country" "Brasil"
+   "ows_contactelectronicmailaddress" "geoprocessamento@mma.gov.br"
    "ows_srs" "EPSG:4291 EPSG:4326"
    "ows_getcontext_enabled" "1"
    "ows_context_fid" "i3geo"

@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
@@ -16,7 +19,6 @@ LAYER
   	ALTTEMA "Cidades"
   	CLASSE "SIM"
     TEXTO "SIM"
-		
 		ESCALA "250000"
   END
   CLASS
@@ -26,7 +28,6 @@ LAYER
      COLOR 0 0 0
      SIZE 8
   END  # CLASS
-
   CLASS
      Name 'Cidades'
      EXPRESSION ('[TIPO]'eq'Cidade')

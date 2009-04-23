@@ -116,6 +116,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Variable: $temasdir
 	
 	Caminho completo do diretório onde ficam os arquivos .map correspondentes aos temas disponíveis
+	Esta variável não está implementada completamente. Os mapfiles devem ficar obrigatoriamente no diretório temas
 	*/
 	$temasdir = $locaplic."/temas"; //"c:/ms4w/apache/htdocs/i3geo/temas";
 	/*

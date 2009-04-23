@@ -1,6 +1,8 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
-
 LAYER
     CONNECTION "http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?"
     CONNECTIONTYPE WMS
@@ -34,8 +36,6 @@ LAYER
       NAME " "
       METADATA
       END
-
     END
   END
-
 END

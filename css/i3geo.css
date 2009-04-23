@@ -30,11 +30,12 @@ select
 
 .ajuda_usuario
 {
-	background-image:url(../imagens/iajuda.png);
-	background-position:3px 2px;
+	background-image:url(../imagens/external.png);
+	background-position:0px 0px;
 	background-repeat:no-repeat;
 	margin-left:0;
 	text-decoration:none;
+	cursor:help;
 }
 
 .executar

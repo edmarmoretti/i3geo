@@ -792,7 +792,7 @@ function randomRGB()
 //pega os parametros da url e do mapa e seta variaveis globais
 function parametrosURL()
 {
-	g_locaplic = window.parent.g_locaplic; //localizacao da aplicacao
+	g_locaplic = window.parent.i3GEO.configura.locaplic; //localizacao da aplicacao
 	g_r = window.parent.i3GEO.parametros.r;
 	var temp = (window.location.href).split("tema=");
 	if (temp[1])

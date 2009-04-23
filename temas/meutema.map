@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
   LAYER
@@ -17,4 +20,4 @@ FONTSET   "../symbols/fontes.txt"
       OUTLINECOLOR 0 255 0
     END
   END
-END 
+END

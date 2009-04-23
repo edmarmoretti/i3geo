@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
 LAYER
@@ -51,6 +54,6 @@ LAYER
     EXPRESSION ('[id]'eq '4')
     COLOR 218 255 216
     OUTLINECOLOR 50 50 50
-  END  # CLASS				
+  END  # CLASS
 END
 END

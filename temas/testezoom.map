@@ -1,6 +1,8 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
-  
 LAYER
     DATA "c:\ms4w\apache\htdocs\i3geo/aplicmap/dados/estados"
     METADATA

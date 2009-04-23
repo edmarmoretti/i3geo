@@ -1,5 +1,6 @@
 <?php
 include("classesphp/pega_variaveis.php");
+include("ms_configura.php");
 ?>
 <html>
 <head>
@@ -10,8 +11,17 @@ include("classesphp/pega_variaveis.php");
 <body style=overflow:auto; >
 <div style=text-align:center;width:600px >
 <p><img src="imagens/i3geo1.jpg" />
-<p style='font-size:16px'>Documentação do usuário. Para ver toda a documentação, 
-clique <a href="ajuda_usuario.php" >aqui</a></p><br>
+<p style='font-size:16px'>Documentação do usuário. 
+<?php
+if (isset($idcategoria))
+{
+	echo "Para ver toda a documentação, ";
+	echo "clique <a href='ajuda_usuario.php' >aqui</a>";
+}
+?>
+</p>
+<p><?php echo $mensagemInicia;?></p>
+<br>
 </div>
 <div id=resultado style='width:600px;'>
 </div>
@@ -32,6 +42,9 @@ function pegaAjuda(tipo,categoria){
 				ins += "<p>"+obj[k].pt+"</p>"
 				ins += "<p>"+obj[k].complemento+"</p>"
 				ins += "<p style='color:gray'>"+obj[k].diretorio+"</p>"
+				if(obj[k].tela){
+					ins += "<p><a href='"+obj[k].tela+"' target=_blank >Exemplo de tela</a></p>"
+				}
 			}
 		}
 	}	

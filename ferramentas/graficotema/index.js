@@ -29,8 +29,6 @@ $i("guia1").onclick = function()
 {mostraGuia("guia1")}
 $i("guia2").onclick = function()
 {mostraGuia("guia2")}
-$i("guia3").onclick = function()
-{mostraGuia("guia3")}
 mensagemAjuda("men1",$i("men1").innerHTML)
 //combo com as camadas
 comboCamadas("selCamada",tema,function(retorno)

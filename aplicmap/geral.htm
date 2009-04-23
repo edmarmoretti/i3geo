@@ -11,7 +11,7 @@
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geo.js
 -->
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 	<style> 
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
@@ -88,6 +88,7 @@
   <table width="100%" style="vertical-align:top;border-width:0px">
    <!--
    	Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px
+	Vc pode usar o estilo para definir o tamanho do mapa. Se não tiver estilo definido, o tamanho será automático
    -->
    <tr><td  class=verdeclaro id=contemImg >
     <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
@@ -226,7 +227,7 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	</div>
    <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
 </div>
-<div id=teste ></div>
+
 <!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*

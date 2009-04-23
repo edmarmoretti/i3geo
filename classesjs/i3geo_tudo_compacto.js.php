@@ -7394,12 +7394,13 @@ i3GEO.configura = {
  		],
 		submenus:{
 			"ajudaMenu": [ 
-			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332" },
+			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
 			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo" },
-			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo" },
-			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br" },
-			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6" }
+			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
+			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo", target:"_blank" },
+			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
+			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6", target:"_blank" },
+			{ text: "Lista de funções", url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" }
 			],
 			"analise": [
     		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
@@ -7988,7 +7989,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d8"),
 			funcaoonclick:function()
-			{i3GEO.janela.cria("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica");}
+			{i3GEO.janela.cria("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=55' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		{
 			//botão que abre a janela com o mapa de referência
@@ -8036,7 +8037,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d12"),
 			funcaoonclick:function()
-			{i3GEO.janela.cria("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir");}
+			{i3GEO.janela.cria("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		{
 			//botão de localização do usuário pelo IP
@@ -12253,7 +12254,7 @@ i3GEO.analise = {
 			if (!$i("mostradistancia")){
 				var novoel = document.createElement("div");
 				novoel.id = "mostradistancia";
-				var ins = '<div class="hd" >&nbsp</div>';
+				var ins = '<div class="hd" >&nbsp; <a class=ajuda_usuario target=_blank href="'+i3GEO.configura.locaplic+'/ajuda_usuario.php?idcategoria=6&idajuda=50" >&nbsp;&nbsp;&nbsp;</a></div>';
 				ins += '<div class="bd" style="text-align:left;padding:3px;" >';
 				ins += '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>';
 				ins += '<div style="text-align:left;font-size:10px" >';
@@ -12404,7 +12405,7 @@ i3GEO.analise = {
 			if (!$i("mostraarea")){
 				var novoel = document.createElement("div");
 				novoel.id = "mostraarea";
-				var ins = '<div class="hd" >&Aacute;rea aproximada</div>';
+				var ins = "<div class='hd' >&Aacute;rea aproximada <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=51' >&nbsp;&nbsp;&nbsp;</a></div>";
 				ins += '<div class="bd" style="text-align:left;padding:3px;" >';
 				ins += '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>';
 				ins+= '</div>';
@@ -12604,8 +12605,11 @@ i3GEO.maparef = {
 				r.style.clip = "rect(0px, 160px, 179px, 0px)";
 				r.style.position = "absolute";
 			}
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-			YAHOO.janelaRef.xp.panel.moveTo((pos[0]+i3GEO.parametros.w+153-i3GEO.maparef.RIGHT-300),pos[1]+i3GEO.maparef.TOP);
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+
+			var moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
+			var moveY = pos[1] + i3GEO.maparef.TOP;
+			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
 			var escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 				YAHOO.janelaRef.xp.panel.destroy();	
@@ -14446,7 +14450,7 @@ i3GEO.arvoreDeCamadas = {
 			var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 			n.isLeaf = true;
 		}
-		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t34")+"','');\" onclick='i3GEO.navega.destacaTema.inicia(\""+ltema.name+"\")'>"+$trad("t35")+" </a>";
+		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t34")+"','');\" onclick='i3GEO.navega.destacaTema.inicia(\""+ltema.name+"\")'>"+$trad("t35")+" </a><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=44' >&nbsp;&nbsp;&nbsp;</a>";
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
@@ -19910,7 +19914,7 @@ i3GEO.gadgets = {
 				i3GEO.php.desativacgi(volta);
 			}
 			else
-			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros");}
+			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		/*
 		Function: anima
@@ -20032,8 +20036,10 @@ i3GEO.gadgets = {
  					}
  					else
  					var estilo = "padding-bottom:3px;top:0px;border: 0px solid white;";
- 					
- 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
+ 					var t = "";
+ 					if(i3GEO.configura.oMenuData.menu[i].target)
+ 					{var t = "target="+i3GEO.configura.oMenuData.menu[i].target;}
+ 					ins += '<li class="yuimenubaritem" style="padding-top:2px;"><a style="'+estilo+'" href="#" class="yuimenubaritemlabel" '+t+'id="menu'+i3GEO.configura.oMenuData.menu[i].id+'" >&nbsp;'+i3GEO.configura.oMenuData.menu[i].nome+'</a></li>'; 				
  				}
  				ins += '</ul>'; 
  				ins += '</div>';

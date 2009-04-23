@@ -1,3 +1,6 @@
+MAP
+
+
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
   LAYER
@@ -29,6 +32,4 @@ FONTSET   "../symbols/fontes.txt"
       KEYIMAGE ""
     END
   END
-
 END
-

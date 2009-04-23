@@ -97,8 +97,11 @@ i3GEO.maparef = {
 				r.style.clip = "rect(0px, 160px, 179px, 0px)";
 				r.style.position = "absolute";
 			}
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
-			YAHOO.janelaRef.xp.panel.moveTo((pos[0]+i3GEO.parametros.w+153-i3GEO.maparef.RIGHT-300),pos[1]+i3GEO.maparef.TOP);
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+
+			var moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
+			var moveY = pos[1] + i3GEO.maparef.TOP;
+			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
 			var escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 				YAHOO.janelaRef.xp.panel.destroy();	

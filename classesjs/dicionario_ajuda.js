@@ -5,14 +5,16 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/tipoimagem",
 			categoria:"1",
 			pt:"O filtro possibilita gerar efeitos de coloração no mapa. É aplicado sobre a imagem gerada toda vez que o mapa é alterado. No caso de temas baseados em dados RASTER, os níveis de cores obtidos com a ferramenta de identificação não são alterados.",
-			complemento:"Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As opções sépia e tons de cinza utilizam algorítmos próprios do i3Geo, já as demais, utilizam a opção de filtro disponível com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>."
+			complemento:"Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As opções sépia e tons de cinza utilizam algorítmos próprios do i3Geo, já as demais, utilizam a opção de filtro disponível com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>.",
+			tela:"ferramentas/tipoimagem/exemplo.htm"
 		},
 		"2": {
 			titulo: "Legenda",
 			diretorio:"i3geo/ferramentas/opcoes_legenda",
 			categoria:"1",
 			pt:"A legenda do mapa é utilizada em várias opções do i3Geo e pode também ficar inserida na própria imagem do mapa. A legenda mostra os símbolos utilizados no desenho de cada tema, podendo-se alterar características como fonte, tamanho dos textos, tamanho dos retângulos com os símbolos, etc.",
-			complemento:"Antes de aplicar uma alteração, você pode testar os parâmetros escolhidos para avaliar o resultado. No caso dos parâmetros que definem cores, utilize -1,-1,-1 para anular seu efeito."
+			complemento:"Antes de aplicar uma alteração, você pode testar os parâmetros escolhidos para avaliar o resultado. No caso dos parâmetros que definem cores, utilize -1,-1,-1 para anular seu efeito.",
+			tela:"ferramentas/opcoes_legenda/exemplo.htm"
 		},
 		"3": {
 			titulo: "Barra de escala",
@@ -301,14 +303,98 @@ g_traducao_ajuda = {
 			pt:"Essa opção permite alterar o nome do tema. O novo nome será mostrado no mapa e também na legenda.",
 			complemento:""
 		},
+		"44": {
+			titulo: "Mostrar em janela",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"5",
+			pt:"Inclui um retângulo na tela que segue a movimentação do mouse e mostra o tema escolhido. Possibilita destacar a visualização de uma camada sobre as outras.",
+			complemento:""
+		},
+		"45": {
+			titulo: "Zoom para o tema",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"5",
+			pt:"Ajusta a visualização do mapa alterando a extensão geográfica para mostrar todos os componentes de um determinado tema.",
+			complemento:"Essa opção é mostrada como um pequeno ícone localizado logo abaixo de um tema na árvore de temas."
+		},
+		"46": {
+			titulo: "Farol indicativo de escala",
+			diretorio:"",
+			categoria:"5",
+			pt:"Identifica se o tema possuí uma escala compatível ou não com a escala do mapa. O farol é um ícone com cores que variam entre verde, amarelo e vermelho, conforme a escala do mapa atual. A compatibilidade da escala é definida em função da escala da fonte dos dados cartográficos.",
+			complemento:"Essa opção é mostrada como um pequeno ícone localizado logo abaixo de um tema na árvore de temas."
+		},
+		"47": {
+			titulo: "Alterar ordem de desenho",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Os temas disponíveis no mapa são desenhados como camadas que se sobrepõem para compor o mapa. Como uma pilha, as camadas seguem uma ordem de desenho, sendo que na lista de temas o primeiro que é mostrado é o último desenhado. A ordem da pilha pode ser alterada clicando-se e arrastando um tema (clicando no nome do tema) ou por meio de ícones que movem para cima ou para baixo apenas uma posição.",
+			complemento:"Quando um novo tema é adicionado ao mapa, o i3Geo irá posicioná-lo procurando evitar alguns tipos de sobreposição. Temas RASTER ou poligonais são sempre inseridos abaixo dos temas lineares e pontuais."
+		},
+		"48": {
+			titulo: "Excluir tema",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Exclui um tema da lista de temas disponíveis no mapa atual. A exclusão pode ser feita arrastando-se o tema para o ícone da 'lixeira' ou então por meio de um ícone mostrado abaixo de cada tema.",
+			complemento:"Temas locais criados pelo usuário não podem ser recuperados após uma exclusão. Já os temas que constam na lista '+Temas' poderão ser adicionados ao mapa novamente."
+		},
+		"49": {
+			titulo: "Impressão",
+			diretorio:"i3geo/ferramentas/imprimir",
+			categoria:"6",
+			pt:"Utilize essa opção para gerar uma página específica para impressão do mapa. Na janela de opções deve-se escolher o tipo de página desejada, que pode variar desde páginas padronizadas em PDF até aplicativos onde o mapa é montado de forma interativa.",
+			complemento:""
+		},
+		"50": {
+			titulo: "Cálculo de distâncias",
+			diretorio:"i3geo/classesjs/classe_analise.js",
+			categoria:"6",
+			pt:"Ativa o modo de cálculo de distâncias, permitindo que a cada clique do mouse sobre o mapa seja feito o cálculo da distância em relação ao ponto anterior e em relação a todos os pontos clicados. O resultado é mostrado em uma janela aberta sobre o mapa. Em cada ponto é também desenhado um círculo representando a distância até o último ponto.",
+			complemento:"O cálculo de distância é aproximado e depende da escala do mapa (quanto mais detalhado o mapa melhor). A fórmula de cálculo é baseada em <a href='http://www.chemical-ecology.net/java/lat-long.htm' >http://www.chemical-ecology.net/java/lat-long.htm</a>. Para parar o cálculo basta clicar sobre um dos pontos já inseridos."
+		},
+		"51": {
+			titulo: "Cálculo de área",
+			diretorio:"i3geo/classesjs/classe_analise.js",
+			categoria:"6",
+			pt:"Ativa o modo de cálculo de área, permitindo que seja desenhado um polígono sobre o mapa para cálculo da área. O polígono é criado clicando-se no mapa no local onde se quer criar um vértice.",
+			complemento:"O cálculo de distância é aproximado e depende da escala do mapa (quanto mais detalhado o mapa melhor). O cálculo é baseado no tamanho do pixel do mapa, calculado ao iniciar a ferramenta. Esse cálculo baseia-se na projeção policônica com parâmetros definidos em função da extensão geográfica do mapa atual."
+		},
+		"52": {
+			titulo: "Alterar interface",
+			diretorio:"i3geo/classesjs/classe_interface.js",
+			categoria:"6",
+			pt:"O i3Geo pode usar diferentes interfaces para manipular a navegação sobre o mapa. Por padrão, é utilizada uma interface própria, desenvolvida para o i3Geo, mas pode-se optar pelo uso do Flamingo, OpenLayers, Google Maps ou Google Earth.",
+			complemento:"As funcionalidade do i3Geo são afetadas pela interface escolhida, sendo que algumas operações diferem de uma para outra. A maior parte das funcionalidades são implementadas apenas na interface padrão. No caso do Google Earth , que permite a visualização do mapa em 3d, é necessário a instalação de um plugin específico."
+		},
+		"53": {
+			titulo: "Obter imagens geradas",
+			diretorio:"i3geo/classesjs/classe_gadgets.js",
+			categoria:"6",
+			pt:"As imagens geradas durante o uso do mapa são registradas na memória do i3Geo, dessa forma é possível obter todas essas imagens. Essa opção lista e mostra essas imagens, incluindo a extensão geográfica de cada uma e legenda.",
+			complemento:"Essa opção é útil para os casos em que se deseja capturar as imagens geradas para a geração de apresentações, impressão, etc."
+		},
+		"54": {
+			titulo: "Animação",
+			diretorio:"i3geo/ferramentas/opcoes_animacao",
+			categoria:"6",
+			pt:"As imagens geradas durante o uso do mapa são registradas na memória do i3Geo, dessa forma é possível recuperar as imagens de forma sequencial criando um efeito de animação.",
+			complemento:"A opção de animação utiliza um número limitado de quadros, que são preenchidos de forma sequencial e cíclica. Utilize a opção número de quadros para aumentar esse número. Utilize a opção de tempo para definir o tempo de transição entre um quadro e outro (tempo em milisegundos). Para obter o resultado desejado, planeje sua animação antes. Para obter as imagens individualmente, utilize a opção 'Pegar imagens'."
+		},
+		"55": {
+			titulo: "Extensão geográfica",
+			diretorio:"i3geo/ferramentas/mostraexten",
+			categoria:"7",
+			pt:"A extensão geográfica é a abrangência espacial do mapa definido por meio de uma lista de coordenadas em décimos de grau e na ordem menor longitude, menor latitude, maior longitude, maior latitude. A extensão geográfica do mapa pode ser alterada digitando-se novas coordenadas por meio dessa ferramenta.",
+			complemento:"O resultado final do mapa quando se altera a extensão pode não corresponder as espectativas, uma vez que o mapa é um retângulo cujas proporções podem não ser compatíveis com as coordenadas digitadas.",
+			tela:"ferramentas/mostraexten/exemplo.htm"
+		},
 		"": {
 			titulo: "",
-			diretorio:"i3geo/ferramentas/",
-			categoria:"5",
+			diretorio:"",
+			categoria:"6",
 			pt:"",
 			complemento:""
 		}
-
 	}
 };
 
@@ -317,11 +403,13 @@ g_traducao_ajuda_categorias = {
 	"2":{titulo:"Arquivos"},
 	"3":{titulo:"Análise geográfica"},
 	"4":{titulo:"Inclusão de camadas"},
-	"5":{titulo:"Operações sobre um tema"}
+	"5":{titulo:"Operações sobre um tema"},
+	"6":{titulo:"Operações sobre o mapa"},
+	"7":{titulo:"Navegação"}
 };
 //inserir os aplicativos adicionais
 /*
-<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
+<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
 */
 /*
 Não esquecer:
