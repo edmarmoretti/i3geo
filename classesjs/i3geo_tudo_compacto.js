@@ -7885,7 +7885,7 @@ i3GEO.configura = {
 					cliqueIdentificaDefault = function(){
 						if (g_tipoacao == "identifica"){
 							i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");					
-							var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica");
+							var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>");
 							var temp = function(){
 								i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
 								i3GEO.barraDeBotoes.ativaBotoes();
@@ -8006,7 +8006,7 @@ i3GEO.configura = {
 			dica:$trad("d11"),
 			funcaoonclick:function(){
 				g_operacao = "navega";
-				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki");
+				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=73' >&nbsp;&nbsp;&nbsp;</a>");
 				atualizawiki = function(){
 					if(!$i("wdocai"))
 					{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");return;}
@@ -8027,7 +8027,7 @@ i3GEO.configura = {
 			dica:"Fotos",
 			funcaoonclick:function(){
 				g_operacao = "navega";
-				i3GEO.janela.cria("550px","400px",i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.htm","","","Fotos");
+				i3GEO.janela.cria("550px","400px",i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.htm","","","Fotos <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=74' >&nbsp;&nbsp;&nbsp;</a>");
 				i3GEO.util.criaPin();
 			}
 		},
@@ -8053,7 +8053,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d14"),
 			funcaoonclick:function()
-			{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/3d/index.htm","","","3d");}
+			{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/3d/index.htm","","","3d <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=69' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		{
 			//Ativa o botão que realiza a operação de de busca no Google
@@ -8063,9 +8063,9 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				i3GEO.util.criaBox();
 				g_operacao = "navega";
-				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+40+"px",(i3GEO.parametros.h/2)+50+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+40+"px",(i3GEO.parametros.h/2)+50+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");}
 				else
-				{i3GEO.janela.cria("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps");}
+				{i3GEO.janela.cria("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");}
 				atualizagoogle = function(){
 					try{
 						if (navn){
@@ -8116,7 +8116,7 @@ i3GEO.configura = {
 			dica:$trad("d17"),	
 			funcaoonclick:function(){
 				g_operacao = "navega";
-				i3GEO.janela.cria("250px","190px",i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm","","","confluence");
+				i3GEO.janela.cria("250px","190px",i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm","","","Confluence <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=75' >&nbsp;&nbsp;&nbsp;</a>");
 				i3GEO.util.criaBox();
 				atualizaconfluence = function(){
 					if(!$i("wdocai"))
@@ -15819,7 +15819,7 @@ i3GEO.selecao = {
 	janelaOpcoes: function(){
 		g_tipoacao = "selecao";
 		i3GEO.temaAtivo = "";
-		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o");
+		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.selecao.atualizaGrafico()") < 0)
@@ -19592,7 +19592,7 @@ i3GEO.gadgets = {
 				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
 			}
 			var i = $inputText(id,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
-			var ins = "<table><tr><td>"+i;
+			var ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
 			$i(id).innerHTML = ins;
 		}	

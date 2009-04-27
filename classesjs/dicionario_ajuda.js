@@ -349,7 +349,7 @@ g_traducao_ajuda = {
 			titulo: "Gráficos",
 			diretorio:"i3geo/ferramentas/graficotema",
 			categoria:"5",
-			pt:"Para a montagem de cada gr&aacute;fico &eacute; necess&aacute;rio selecionar um tema que contenha os dados que ser&atilde;o representados. Os dados s&atilde;o aqueles que encontram-se na tabela de atributos do tema.",
+			pt:"Permite inserir gráficos em cada elemento que compõe uma camada para representar valores associados. Para a montagem de cada gr&aacute;fico &eacute; necess&aacute;rio selecionar um tema que contenha os dados que ser&atilde;o representados. Os dados s&atilde;o aqueles que encontram-se na tabela de atributos do tema.",
 			complemento:"Ap&oacute;s selecionado o tema, &eacute; mostrada uma lista com os itens existentes na tabela de atributos. Escolha os itens que ser&atilde;o utilizados no gr&aacute;fico clicando no box que aparece na lista de itens. Cada item ir&aacute; compor uma fatia do gr&aacute;fico. Ao lado do item, &eacute; mostrada a cor que ser&aacute; utilizada na representa&ccedil;&atilde;o. Cada cor &eacute; definida em RGB. Na guia 'propriedades' &eacute; poss&iacute;vel definir propriedades de representa&ccedil;&atilde;o de cada gr&aacute;fico. As defini&ccedil;&otilde;es afetar&atilde;o a forma de cada gr&aacute;fico. Cada gr&aacute;fico adicionado &eacute; inclu&iacute;do no mapa como um novo tema.",
 			tela:"ferramentas/graficotema/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.graficotema()"
@@ -399,8 +399,8 @@ g_traducao_ajuda = {
 			titulo: "Farol indicativo de escala",
 			diretorio:"",
 			categoria:"5",
-			pt:"Identifica se o tema possuí uma escala compatível ou não com a escala do mapa. O farol é um ícone com cores que variam entre verde, amarelo e vermelho, conforme a escala do mapa atual. A compatibilidade da escala é definida em função da escala da fonte dos dados cartográficos.",
-			complemento:"Essa opção é mostrada como um pequeno ícone localizado logo abaixo de um tema na árvore de temas."
+			pt:"Identifica se o tema possuí uma escala compatível ou não com a escala do mapa. O farol é um ícone com cores que variam entre verde, amarelo e vermelho, conforme a escala do mapa atual. A compatibilidade da escala é definida em função da escala da fonte dos dados cartográficos utilizada pelo tema.",
+			complemento:"Essa opção é mostrada como um pequeno ícone localizado logo abaixo de um tema na árvore de camadas."
 		},
 		"47": {
 			titulo: "Alterar ordem de desenho",
@@ -417,6 +417,15 @@ g_traducao_ajuda = {
 			pt:"Exclui um tema da lista de temas disponíveis no mapa atual. A exclusão pode ser feita arrastando-se o tema para o ícone da 'lixeira' ou então por meio de um ícone mostrado abaixo de cada tema.",
 			complemento:"Temas locais criados pelo usuário não podem ser recuperados após uma exclusão. Já os temas que constam na lista '+Temas' poderão ser adicionados ao mapa novamente.",
 			apijs:"i3GEO.tema.exclui(idtema)"
+		},
+		"48a": {
+			titulo: "Selecionar elementos",
+			diretorio:"i3geo/ferramentas/selecao.js",
+			categoria:"5",
+			pt:"Selecionar elementos consiste em destacar um sub-conjunto do conjunto total de componentes de um tema. Algumas operações do i3Geo atuam sobre o conjunto selecionado, como buffer, exportação, etc. Os elementos selecionados são mostrados em uma cor especial, diferente daquela definida na legenda do tema. Os temas que possuem elementos selecionados são marcados com um ícone circular mostrado junto ao nome na lista de camadas. A janela de opções para seleção, além das opções de tipo de operação, permite gerar gráficos dinâmicos e criar um novo tema com base nos elementos selecionados.",
+			complemento:"Existem várias maneiras de fazer a seleção: clicando-se sobre cada elemento, desenhando-se um retângulo ou polígono no mapa, definindo-se uma expressão que irá buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto já definido, novos elementos podem ser acrescentados ou retirados da seleção.",
+			tela:"ferramentas/selecao/exemplo.htm",
+			apijs:"i3GEO.selecao.janelaOpcoes()"
 		},
 		"49": {
 			titulo: "Impressão",
@@ -476,28 +485,188 @@ g_traducao_ajuda = {
 			tela:"ferramentas/mostraexten/exemplo.htm",
 			apijs:"i3GEO.configura.funcoesBotoes"
 		},
-		"": {
-			titulo: "",
+		"56": {
+			titulo: "Deslocamento do mapa - PAN",
 			diretorio:"",
-			categoria:"6",
-			pt:"",
-			complemento:""
+			categoria:"7",
+			pt:"O deslocamento do mapa do tipo PAN é realizado de forma interativa, deve-se clicar em um ponto do mapa e arrastar o mouse para a nova posição. O resultado é o deslocamento da extensão geográfica do mapa movendo-se o ponto inicial até o segundo ponto.",
+			complemento:"Caso o primeiro ponto seja muito próximo do segundo, ou se o usuário clicar e soltar o mouse, o ponto clicado é movido para o centro do mapa.",
+			apijs:""
+		},
+		"57": {
+			titulo: "Deslocamento direcional",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"O deslocamento direcional movimenta o mapa para o norte, sul, leste ou oeste uma distância fixa.",
+			complemento:"Essa forma de deslocamento exige que o usuário clique apenas uma vez em um botão para realizar o deslocamento.",
+			apijs:"i3GEO.navega.panFixo(locaplic,sid,direcao,w,h,escala)"
+		},
+		"58": {
+			titulo: "Rosa dos ventos",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"A rosa dos ventos é uma imagem mostrada na posição atual do mouse e que possibilita deslocar, aproximar ou afastar o mapa. A rosa aparece quando o mouse é estacionado por alguns instantes sobre o mapa e permite movimentar o mapa sem a necessidade de abandonar a ferramenta escolhida no momento.",
+			complemento:"A rosa dos ventos é opcional e por padrão não fica habilitada.",
+			apijs:"i3GEO.navega.mostraRosaDosVentos() e i3GEO.eventos.MOUSEPARADO"
+		},
+		"59": {
+			titulo: "Aproximar",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"Aproxima o mapa tendo como referência o ponto central. A aproximação ocorre por um fator fixo, modificando a escala atual.",
+			complemento:"",
+			apijs:"i3GEO.navega.zoomin()"
+		},
+		"60": {
+			titulo: "Afastar",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"Afasta o mapa tendo como referência o ponto central. O afastamento ocorre por um fator fixo, modificando a escala atual.",
+			complemento:"",
+			apijs:"i3GEO.navega.zoomout()"
+		},
+		"61": {
+			titulo: "Aproximar região",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"Ao ativar essa opção deve-se desenhar um retângulo sobre o mapa abrangendo a região que se quer enquadrar a área de visualização. O resultado é a aproximação do mapa em uma determinada região.",
+			complemento:"Para desenhar o retângulo deve-se clicar em um ponto do mapa e arrastar o mouse. A medida que isso ocorre, é desenhado um retângulo sobre o mapa.",
+			apijs:"i3GEO.navega.zoomBox"
+		},
+		"62": {
+			titulo: "Definir escala",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"A alteração da escala do mapa é uma das formas de aproximar ou afastar a visualização. Nessa opção, para alterar a escala deve-se digitar o novo valor do denominador da escala que será aplicado.",
+			complemento:"",
+			apijs:"i3GEO.navega.aplicaEscala(locaplic,sid,escala)"
+		},
+		"63": {
+			titulo: "Centralizar em um ponto",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"7",
+			pt:"Essa opção desloca o centro do mapa atual para um determinado ponto com coordenadas conhecidas. A escala do mapa não é alterada.",
+			complemento:"Para usar essa operação, digite as coordenadas desejadas nos campos de formulário utilizados para mostrar a coordenada geográfica atual do mouse.",
+			apijs:"i3GEO.navega.zoomponto(locaplic,sid,x,y)"
+		},
+		"64": {
+			titulo: "Aproximar ou afastar dinâmico",
+			diretorio:"i3geo/classesjs/classe_barradebotoes.js",
+			categoria:"7",
+			pt:"A operação de zoom dinâmico permite afastar ou aproximar o mapa por meio de um controle deslizante. O usuário move um controle para cima ou para baixo e ao soltar o mouse o mapa é modificado.",
+			complemento:"",
+			apijs:"i3GEO.barraDeBotoes.ativaBarraDeZoom()"
+		},
+		"65": {
+			titulo: "Zoom próximo ou anterior",
+			diretorio:"i3geo/classesjs/classe_gadgets.js",
+			categoria:"7",
+			pt:"Ao navegar pelo mapa as posições obtidas são armazenadas em memória. Essa opção permite reestabelecer a abrangência espacial anterior ou posterior, se houver, de forma sequencial.",
+			complemento:"Essa operação não restaura a situação do mapa apenas modifica a abrangência espacial com base nos temas visíveis no mapa atual.",
+			apijs:"i3GEO.gadgets.mostraHistoricoZoom(id)"
+		},
+		"66": {
+			titulo: "Mapa de referência",
+			diretorio:"i3geo/classesjs/classe_maparef.js",
+			categoria:"7",
+			pt:"O mapa de referência consiste em uma imagem com escala diferente do corpo do mapa atual, permitindo que a abrangência geográfica atual seja mostrada em um contexto mais amplo. A navegação pode ser feito sobre o mapa de referência, deslocando-se o retângulo que mostra a abrangência atual para um outro local.",
+			complemento:"O mapa de referência pode ser fixo ou não. O mapa de referência dinâmico pode ser montado tendo como base as camadas vistas no mapa atual. Nesse caso, a toponímia especificada e a simbologia podem gerar mapas com pouca visibilidade.",
+			apijs:"i3GEO.maparef"
+		},
+		"67": {
+			titulo: "Extensão total",
+			diretorio:"",
+			categoria:"7",
+			pt:"Ao iniciar o mapa, a primeira extensão geográfica utilizada para mostrar o mapa é armazenada em memória. Essa opção permite aplicar essa extensão ao mapa atual, restaurando a abrangência geográfica inicial.",
+			complemento:"A aplicação da extensão total não restaura a situação inicial de camadas ligadas e desligadas, mantendo a situação do mapa atual.",
+			apijs:""
+		},
+		"68": {
+			titulo: "Google Maps",
+			diretorio:"i3geo/ferramentas/googlemaps",
+			categoria:"7",
+			pt:"Essa opção mostra em uma janela interna o mapa produzido pelo Google Maps. A janela é sincronizada com o mapa mostrado no i3Geo, permitindo que a navegação em um ou noutro modifique os dois mapas.",
+			complemento:"Além das opções de tipo de mapa é possível traçar rotas no Google Maps e mostrar nessa janela o mapa visto no i3Geo. Ao traçar uma rota, o resultado é incluído no i3Geo como uma nova camada, que pode inclusive ser obtida via download. Quando o mapa do i3Geo é incluído no mapa do Google, os polígonos com símbolos não transparentes podem encubrir o mapa, nesse caso, altere a legenda das camadas para permitir a visualização correta.",
+			apijs:"i3GEO.configura.funcoesBotoes a chave de acesso da API do Google Maps é definida em ms_configura.php",
+			tela:"ferramentas/googlemaps/index.php"
+		},
+		"69": {
+			titulo: "Visualização 3d",
+			diretorio:"i3geo/ferramentas/3d",
+			categoria:"7",
+			pt:"A visualização em 3d gera um arquivo no formato 'wrl' considerando a abrangência espacial do mapa atual. Para a geração do modelo é utilizado um mapa de fundo com a representação da altimetria, esse mapa é obtido por meio de um serviço WMS baseado nos dados SRTM.",
+			complemento:"Para ver o modelo 3d é necessário a instalação de um plugin no navegador, ou então, deve-se salvar o arquivo para visualização em algum outro software. O modelo 3d é simplificado, permitindo apenas a navegação básica.",
+			apijs:"i3GEO.configura.funcoesBotoes",
+			tela:"ferramentas/3d/exemplo.htm"
+		},
+		"70": {
+			titulo: "Identificar",
+			diretorio:"i3geo/ferramentas/identifica",
+			categoria:"8",
+			pt:"Com essa ferramenta ativa pode-se clicar em um elemento do mapa e visualizar os atributos associados. Quando a janela é aberta, deve-se escolher o tema que será identificado em uma lista. Além dos temas, são mostrados alguns sistemas especiais que permitem a busca de dados em função da coordenada clicada, por exemplo, é possível abrir uma página do IBGE com informações sobre municípios.",
+			complemento:"Alguns temas permitem a identificação sem o clique no mapa, os dados são mostrados quando o mouse é estacionado sobre um ponto no mapa. Em 'Buscadores web' é mostrada uma lista de sistemas que permitem a busca de dados por meio de coordenadas. A guia propriedades permite definir a tolerância de busca, ou seja, quantos pixels serão considerados entorno do ponto clicado.",
+			apijs:"i3GEO.configura.funcoesBotoes"
+		},
+		"71": {
+			titulo: "Busca rápida",
+			diretorio:"i3geo/ferramentas/buscarapida",
+			categoria:"8",
+			pt:"Essa opção permite localizar dados com base em palavras ou frases, por esemplo 'São Paulo'. A busca é feita em um Web Service cujo banco de dados pode variar em cada instalação do i3Geo. Quando um lugar é encontrado, uma nova janela é mostrada na tela com o resultado. Clicando-se nos links disponíveis, o mapa é deslocado para o lugar definido e uma nova camada é adicionada ao mapa.",
+			complemento:"A busca é feita também no Web Service do Google, permitindo a localização de endereços.",
+			apijs:"i3GEO.gadgets.mostraBuscaRapida(id)",
+			tela:"ferramentas/buscarapida/exemplo.htm"
+		},
+		"72": {
+			titulo: "Localizar IP",
+			diretorio:"i3geo/classesjs/classe_navega.js",
+			categoria:"8",
+			pt:"Ao clicar nesse ícone é mostrado um ponto no mapa identificando a coordenada geográfica da localização do usuário.",
+			complemento:"Essa função é baseada em uma tabela de correspondência entre o número IP e localidades. A localização será mais precisa quanto for essa tabela de correspondência.",
+			apijs:"i3GEO.navega.zoomIP()"
+		},
+		"73": {
+			titulo: "Wikipedia",
+			diretorio:"i3geo/ferramentas/wiki",
+			categoria:"8",
+			pt:"A <a href='http://pt.wikipedia.org/wiki/P%C3%A1gina_principal' target='_blank' >Wikipedia</a> é uma base de conhecimento livre. Alguns dos artigos existentes são georreferenciados, permitindo sua busca por região geográfica. Essa ferramenta abre uma janela sobre o mapa procurando resultados na Wikipedia para a região de abrangência do mapa.",
+			complemento:"Para maior performance, o mapa deve estar na escala 1:500.000 ou maior. Ao navegar no mapa, a lista de lugares é atualizada.",
+			apijs:"i3GEO.configura",
+			tela:"ferramentas/wiki/exemplo.htm"
+		},
+		"74": {
+			titulo: "Localizar fotos",
+			diretorio:"i3geo/ferramentas/buscafotos",
+			categoria:"8",
+			pt:"Existem vários serviços na Internet que permitem cadastrar e visualizar fotos georreferenciadas. Essa ferramenta procura fotos para a região de abrangência do mapa nos serviços Panorâmio, Flicker e Locr.",
+			complemento:"Para maior performance, o mapa deve estar na escala 1:150.000 ou maior.Ao passar o mouse sobre a foto, a sua localização é mostrada no mapa.",
+			apijs:"i3GEO.configura",
+			tela:"ferramentas/buscafotos/exemplo.htm"
+		},
+		"75": {
+			titulo: "Confluências",
+			diretorio:"i3geo/ferramentas/confluence",
+			categoria:"8",
+			pt:"O projeto 'Confluences' registra expedições aos lugares na terra cuja coordenada geográfica corresponde ao cruzamento de 1 grau por 1 grau. Essa ferramenta permite localizar as confluências no mapa que está sendo visto e abrir a página correspondente.",
+			complemento:"O mapa deve estar pelo menos na escala 1:2.000.000 para que as confluências sejam mostradas.",
+			apijs:"i3GEO.configura",
+			tela:"ferramentas/confluence/exemplo.htm"
 		}
 	}
 };
 
 g_traducao_ajuda_categorias = {
-	"1":{titulo:"Propriedades do mapa"},
+	"1":{titulo:"Propriedades do mapa",observacao:"Funcionalidades que permitem alterar características gerais do mapa, como tamanho e filtro de cores."},
 	"2":{titulo:"Arquivos"},
 	"3":{titulo:"Análise geográfica"},
-	"4":{titulo:"Inclusão de camadas"},
-	"5":{titulo:"Operações sobre um tema"},
+	"4":{titulo:"Inclusão de camadas",observacao:"O i3Geo utiliza um conceito de camadas disponíveis no mapa e camadas adicionais. Camadas disponíveis são as que podem ser consultadas, visualizadas e modificadas, compondo uma lista separada das camadas adicionais. Normalmente as camadas disponíveis são um conjunto menor em relação ao total de temas que podem ser utilizados. Novos temas podem ser adicionados ao mapa por meio das opções existentes na lista de temas, normalmente posicionada na guia '+Temas'."},
+	"5":{titulo:"Operações sobre um tema",observacao:"Uma das características do i3Geo é a possibilidade de modificação das camadas vistas no mapa. As opções que permitem isso são mostradas normalmente na lista de camadas disponíveis no mapa atual. Essa lista é mostrada como uma árvore hierárquica sendo que cada camada é um dos nós. Expandindo-se esse nó, tem-se acesso às operações."},
 	"6":{titulo:"Operações sobre o mapa"},
-	"7":{titulo:"Navegação"}
+	"7":{titulo:"Navegação",observacao:"As funções de navegação permitem alterar a escala do mapa e modificar a abrangência espacial. Esse tipo de mudança, principalmente de escala, afeta o contexto do mapa, modificando seu comportamento. Algumas camadas podem ser sensíveis à escala, mostrando ou não determinados elementos. Quando uma camada possuir muitos elementos, é aconselhável seu desligamento até que a região desejada seja encontrada. Algumas interfaces possuem mecanismos distintos de navegação, como Flamingo, Google e openLayers. A lista abaixo contempla apenas a interface padrão."},
+	"8":{titulo:"Pesquisa"}
 };
 //inserir os aplicativos adicionais
 /*
-<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
+<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=' >&nbsp;&nbsp;&nbsp;</a>
 */
 /*
 Não esquecer:

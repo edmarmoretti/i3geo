@@ -26,7 +26,11 @@ buscaconfluence()
 function buscaconfluence()
 {
 	$i("resultadoconfluence").innerHTML = "Aguarde...";
-	if (window.parent.i3GEO.parametros.mapscale > 2000001)
+	if(window.parent.i3GEO.parametros.mapscale)
+	{var escala = window.parent.i3GEO.parametros.mapscale}
+	else
+	{var escala = 2000000;}
+	if(escala > 2000001)
 	{
 		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:2.000.000)!";
 		ins += "<br><br><div onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -39,7 +43,9 @@ function buscaconfluence()
 		}() 	
 		return;
 	}
-	var ext = window.parent.i3GEO.parametros.mapexten
+	if(window.parent.i3GEO.parametros.mapexten){var ext = window.parent.i3GEO.parametros.mapexten;}
+	else
+	{var ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
 	ext = ext.split(" ")
 	var xini = parseInt(ext[0])
 	var yini = parseInt(ext[1])
@@ -79,7 +85,7 @@ function buscaconfluence()
 function mostraxy(xy)
 {
 	var xy = xy.split(",")
- 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+ 	var xy = window.parent.i3GEO.calculo.dd2tela(xy[1]*1,xy[0]*1,window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 	var box = window.parent.$i("boxg")
 	box.style.display = "block"
 	box.style.width = "5px"

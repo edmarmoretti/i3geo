@@ -26,7 +26,11 @@ buscawiki()
 function buscawiki()
 {
 	$i("resultadowiki").innerHTML = "Aguarde...";
-	if (window.parent.i3GEO.parametros.mapscale > 500001)
+	if(window.parent.i3GEO.parametros.mapscale)
+	{var escala = window.parent.i3GEO.parametros.mapscale}
+	else
+	{var escala = 500000;}
+	if (escala > 500001)
 	{
 		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:500.000)!";
 		ins += "<br><br><div onclick='ajustarescala()' >"//<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
@@ -43,7 +47,10 @@ function buscawiki()
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
 	//cp.set_debug(2)
-	var p = g_locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+window.parent.i3GEO.parametros.mapexten;
+	if(window.parent.i3GEO.parametros.mapexten){var m = window.parent.i3GEO.parametros.mapexten;}
+	else
+	{var m = "-43.5680912209 -23.1679922593 -42.6162372815 -22.4685575305";} //apenas para exemplo
+	var p = g_locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+m;
 	cp.call(p,"listaartigos",listaartigos);
 }
 function listaartigos(retorno)

@@ -6,22 +6,25 @@ include_once("../../ms_configura.php");
 <script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<?php echo $googleApiKey; ?>"></script>
 <script type="text/javascript">   
-    function inicializa(){
+function inicializa(){
     counterClick = 0
     var m = document.getElementById("mapa")
-    m.style.width = window.parent.i3GEO.parametros.w / 2
-    m.style.height = window.parent.i3GEO.parametros.h / 2
-	i3geoOverlay = false;
-	if(window.parent.document.getElementById("boxg"))
-	window.parent.document.getElementById("boxg").style.zIndex = 0
-    navm = false; // IE
-    navn = false; // netscape
-    var app = navigator.appName.substring(0,1);
-    if (app=='N') navn=true; else navm=true;
-    tile = false;
-    var ver = window.parent.i3GEO.parametros.versaomscompleta.split(".");
-    if(parseInt(window.parent.i3GEO.parametros.versaoms) >= 5 && parseInt(ver[1]) > 1)
-    {tile = true;} 
+    if (window.parent.i3GEO.parametros.w == ""){var corpoMapa = false;}
+    else {var corpoMapa = true;}
+    if(corpoMapa){
+    	m.style.width = window.parent.i3GEO.parametros.w / 2
+    	m.style.height = window.parent.i3GEO.parametros.h / 2
+		i3geoOverlay = false;
+		if(window.parent.document.getElementById("boxg"))
+		window.parent.document.getElementById("boxg").style.zIndex = 0
+    	navm = false; // IE
+    	navn = false; // netscape
+    	var app = navigator.appName.substring(0,1);
+    	if (app=='N') navn=true; else navm=true;
+    	tile = false;
+    	var ver = window.parent.i3GEO.parametros.versaomscompleta.split(".");
+    	if(parseInt(window.parent.i3GEO.parametros.versaoms) >= 5 && parseInt(ver[1]) > 1)
+    	{tile = true;} 
     	docmapa = window.parent.document
     	pol = window.parent.i3GEO.parametros.mapexten
 
@@ -29,7 +32,12 @@ include_once("../../ms_configura.php");
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1
     	pt = pt1+","+pt2
-
+    }
+    else{
+    	pt2 = -12;
+    	pt1 = -54;
+    	tile = false;
+    }
     map = new GMap2(m);
 
     map.setMapType(G_SATELLITE_MAP);
@@ -38,7 +46,7 @@ include_once("../../ms_configura.php");
     map.addControl(new GMapTypeControl());
     map.addControl(new GScaleControl());
     map.setCenter(new GLatLng(pt2,pt1), 8);
-
+	if(!corpoMapa){return;}
     GEvent.addListener(map, "moveend", function() {
     	ondegoogle(map);
     });
@@ -63,9 +71,9 @@ include_once("../../ms_configura.php");
 				map.addOverlay(wmsmap);
     		}
     	});
-    }
-    function botaoI3geo() {
-    }
+}
+function botaoI3geo() {
+}
     botaoI3geo.prototype = new GControl();
     botaoI3geo.prototype.initialize = function(map) {
       var container = document.createElement("div");
@@ -122,8 +130,8 @@ include_once("../../ms_configura.php");
    		var bd = map.getBounds();
    		var so = bd.getSouthWest();
    		var ne = bd.getNorthEast();
-   		var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
-   		var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+   		var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+   		var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
 		var box = window.parent.$i("boxg")
 		var w = xyMax[0]-xyMin[0]
 		var h = xyMin[1]-xyMax[1]
