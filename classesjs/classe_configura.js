@@ -297,9 +297,9 @@ i3GEO.configura = {
 		"pan":
 		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
 		"area":
-		{ff:"/imagens/cursores/area.png",ie:"/imagens/cursores/area.cur"},
+		{ff:"/imagens/cursores/area.png",ie:"crosshair"},
 		"distancia":
-		{ff:"/imagens/cursores/distancia.png",ie:"/imagens/cursores/distancia.cur"},
+		{ff:"/imagens/cursores/distancia.png",ie:"crosshair"},
 		"zoom":
 		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
 	},

@@ -194,10 +194,10 @@ i3GEO.interface = {
 			i3GEO.gadgets.mostraEscalaNumerica();
 			i3GEO.gadgets.mostraEscalaGrafica();
 			i3GEO.gadgets.visual.inicia();
-			i3GEO.idioma.mostraSeletor();
+			
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			i3GEO.interface.padrao.ativaBotoes();
-			
+			i3GEO.idioma.mostraSeletor();
 			if (i3GEO.configura.mapaRefDisplay != "none")
 			{
 				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}

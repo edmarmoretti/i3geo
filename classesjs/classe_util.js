@@ -154,7 +154,7 @@ i3GEO.util = {
 	valor - (String) Valor do cookie
 	*/
 	insereCookie: function(nome,valor) {
-		document.cookie = nome+"="+valor;
+		document.cookie = nome+"="+valor+";path=/";
 	},
 	/*
 	Function: pegaCookie

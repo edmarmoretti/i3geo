@@ -4385,7 +4385,7 @@ i3GEO.util = {
 	valor - (String) Valor do cookie
 	*/
 	insereCookie: function(nome,valor) {
-		document.cookie = nome+"="+valor;
+		document.cookie = nome+"="+valor+";path=/";
 	},
 	/*
 	Function: pegaCookie
@@ -6440,6 +6440,7 @@ i3GEO.idioma = {
 	os ids uk,brasil,italiano,espanhol
 	*/
 	mostraSeletor: function(){
+		//alert(i3GEO.idioma.MOSTRASELETOR)
 		if(!i3GEO.idioma.MOSTRASELETOR){return;}
 		//
 		//monta o elemento HTML com as bandeiras
@@ -7607,9 +7608,9 @@ i3GEO.configura = {
 		"pan":
 		{ff:"/imagens/cursores/pan.png",ie:"/imagens/cursores/pan.cur"},
 		"area":
-		{ff:"/imagens/cursores/area.png",ie:"/imagens/cursores/area.cur"},
+		{ff:"/imagens/cursores/area.png",ie:"crosshair"},
 		"distancia":
-		{ff:"/imagens/cursores/distancia.png",ie:"/imagens/cursores/distancia.cur"},
+		{ff:"/imagens/cursores/distancia.png",ie:"crosshair"},
 		"zoom":
 		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
 	},
@@ -10632,10 +10633,10 @@ i3GEO.interface = {
 			i3GEO.gadgets.mostraEscalaNumerica();
 			i3GEO.gadgets.mostraEscalaGrafica();
 			i3GEO.gadgets.visual.inicia();
-			i3GEO.idioma.mostraSeletor();
+			
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			i3GEO.interface.padrao.ativaBotoes();
-			
+			i3GEO.idioma.mostraSeletor();
 			if (i3GEO.configura.mapaRefDisplay != "none")
 			{
 				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}

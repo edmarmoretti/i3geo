@@ -249,6 +249,7 @@ i3GEO.idioma = {
 	os ids uk,brasil,italiano,espanhol
 	*/
 	mostraSeletor: function(){
+		//alert(i3GEO.idioma.MOSTRASELETOR)
 		if(!i3GEO.idioma.MOSTRASELETOR){return;}
 		//
 		//monta o elemento HTML com as bandeiras
