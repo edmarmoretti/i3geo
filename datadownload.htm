@@ -17,7 +17,7 @@ P
 #arvoreDir
 {overflow:auto;height:120px;top:10px;width:280px;left:0px;}
 #corpo
-{text-align:left;font-size:12px;width:425px;position:absolute;top:20px;left:285px;background:rgb(250,250,250);}
+{text-align:left;font-size:12px;width:480px;position:absolute;top:20px;left:285px;background:rgb(250,250,250);}
 </style>
 </head>
 <body id='i3geo' class="yui-skin-sam" style="background-color:white">
@@ -35,8 +35,8 @@ P
 <p>Navegue pela &aacute;rvore ao lado para localizar o tema desejado para download.
 <p>Para fazer o download, clique no box mostrado ao lado de cada tema.
 <p>Apenas os dados armazenados no servidor de arquivos do i3Geo, e autorizados pela fonte produtora ou obtidos de locais p&uacute;blicos, est&atilde;o dispon&iacute;veis para download.
-<p>Caso exista interesse por algum outro arquivo n&atilde;o listado aqui, entre em contato com webmaster@mma.gov.br
-<p>Dependendo do tr&aacute;fego na web, o download pode n&atilde;o operar corretamente. Ap&oacute;s escolhido o tema, ser&aacute; gerado um tema no formato "shape file".
+<p>Caso exista interesse por algum outro arquivo n&atilde;o listado aqui, entre em contato com o administrador do sistema.
+<p>Dependendo do tr&aacute;fego na web, o download pode n&atilde;o operar corretamente. Ap&oacute;s escolhido o tema, ser&aacute; gerado um arquivo no formato "shape file".
 O formato "shape file" &eacute; composto por tr&ecirc;s arquivos (shp, shx e dbf) que devem ser obtidos separadamente e armazenados em um mesmo local em seu disco r&iacute;gido.
 <p>Para abrir o "shape file", voc&ecirc; poder&aacute; utilizar softwares livres como o
  <a href="http://www.gvsig.gva.es/index.php?id=gvsig&L=0" target=blank>GVSIG</a>, <a href="http://qgis.org/" target=blank > QGIS</a>, ou <a href="http://jump-pilot.sourceforge.net/OpenJUMP.html" target=blank >JUMP</a>.
@@ -50,7 +50,7 @@ Title: datadownload.htm
 
 Esse aplicativo permite ao usuário fazer o download de arquivos no formato shapefile.
 
-A lista de temas é baseada no arquivo menutemas.xml. Apenas os temas que estiverem marcados com o item <DOWNLOAD>sim</DOWNLOAD> são mostrados na lista.
+A lista de temas é baseada nas árvores de menus disponíveis. Apenas os temas que estiverem marcados com o item <DOWNLOAD>sim</DOWNLOAD> são mostrados na lista.
 
 Pode-se também definir um arquivo XML, no padrão RSS, que mostrará uma lista adicional de links para download de dados.
 
@@ -73,24 +73,6 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-File: i3geo/datadownload.htm
-
-Include:
-
-classesjs/cpaint/cpaint2.inc.compressed.js
-
-classesjs/jsobjects/jsUI-Global/common.js
-
-classesjs/jsobjects/jsUI-Global/uiCommon.js
-
-classesjs/jsobjects/jsUI-Treeview/component.js
-
-classesjs/datadownload.js
-
-Veja:
-
-<DataDownLoad>
 */
 /*
 Variable: g_RSSl
@@ -98,6 +80,8 @@ Variable: g_RSSl
 Essa variável indica o endereço de um arquivo no formato RSS que lista outros endereços que permitem o download de dados.
 
 A lista dos endereços é mostrada como links, colocados antes da lista de temas para download.
+
+Se o array estiver vazio, será utilizado o default, baseado no sistema de administração do i3geo.
 */
 g_RSSl = new Array("")
 DDinicia()

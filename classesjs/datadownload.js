@@ -109,7 +109,9 @@ function DDinicia()
 	{
 		i3GEO.arvoreDeTemas.INCLUISISTEMAS = false
 		i3GEO.arvoreDeTemas.FILTRADOWNLOAD = true
+		i3GEO.arvoreDeTemas.INCLUIWMS = false
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
+		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
 		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this.value\)");
 	}
 	if (g_tipo == "dir")

@@ -368,20 +368,33 @@ function listaRSSws2()
 	$erro = "Erro. Nao foi possivel ler o arquivo";
 	foreach ($rsss as $r)
 	{
+		$endereco = $r;
 		if($r == "" || $r == " ")
 		{
 			if($tipo == "GEORSS")
-			$canali = simplexml_load_string(geraXmlGeorss($locaplic));
+			{
+				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
+				$endereco = "admin/xmlgeorss.php";
+			}
 			if($tipo == "WMS")
-			$canali = simplexml_load_string(geraXmlWMS($locaplic));
+			{
+				$canali = simplexml_load_string(geraXmlWMS($locaplic));
+				$endereco = "admin/xmlservicoswms.php";
+			}
 			if($tipo == "WS")
-			$canali = simplexml_load_string(geraXmlWS($locaplic));
+			{
+				$canali = simplexml_load_string(geraXmlWS($locaplic));
+				$endereco = "admin/xmlservicosws.php";
+			}
 			if($tipo == "DOWNLOAD")
-			$canali = simplexml_load_string(geraXmlDownload($locaplic));
+			{
+				$canali = simplexml_load_string(geraXmlDownload($locaplic));
+				$endereco = "admin/xmllinksdownload.php";
+			}
 		}
 		else
 		{$canali = simplexml_load_file($rss);}
-		$linhas[] = "<a href='".$r."' target=blank ><img src='imagens/rss.gif' /></a>####";
+		$linhas[] = "<a href='".$endereco."' target=blank ><img src='imagens/rss.gif' /></a>####";
 		//var_dump($canali);
 		foreach ($canali->channel->item as $item)
 		{
