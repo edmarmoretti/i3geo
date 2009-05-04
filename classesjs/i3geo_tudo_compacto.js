@@ -5847,6 +5847,13 @@ en:"WMS server connection",
 es:"Conectar con el servidor WMS",
 it:"Connetti con il server WMS"
 }],
+"a4b":[
+{
+pt:"Conectar com servidor WMS-T",
+en:"WMS-T server connection",
+es:"Conectar con el servidor WMS-T",
+it:"Connetti con il server WMS-T"
+}],
 "a5":[
 {
 pt:"Conectar com GeoRss",
@@ -6464,7 +6471,7 @@ i3GEO.idioma = {
 		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
 		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA))
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO))
 			if(!$i("i3geoseletoridiomas")){
 				var novoel = document.createElement("div");
 				novoel.innerHTML = ins;
@@ -16659,6 +16666,8 @@ i3GEO.arvoreDeTemas = {
 		
 		conectarwms: true,
 		
+		conectarwmst: true,
+		
 		conectargeorss: true,
 		
 		nuvemTags: true,
@@ -16688,6 +16697,7 @@ i3GEO.arvoreDeTemas = {
 		uploadlocal: true,
 		downloadbase: true,
 		conectarwms: true,
+		conectarwmst: true,
 		conectargeorss: true,
 		nuvemTags: true,
 		navegacaoDir: false,
@@ -16858,7 +16868,6 @@ i3GEO.arvoreDeTemas = {
 	Function: listaWMS
 	
 	Lista os WMS cadastrados preenchendo o nó OGC-WMS
-	
 	*/
 	listaWMS: function(){
 		var monta = function(retorno){
@@ -16886,6 +16895,11 @@ i3GEO.arvoreDeTemas = {
 		};
 		i3GEO.php.listaRSSwsARRAY(monta,"WMS");
 	},
+	/*
+	Function: listaLayersWMS
+	
+	Lista os layers de um WMS e preenche o nó OGC-WMS
+	*/
 	listaLayersWMS: function(node){
 		//node = no;
 		var monta = function(retorno){
@@ -16915,6 +16929,11 @@ i3GEO.arvoreDeTemas = {
 		};
 		i3GEO.php.listaLayersWMS(monta,node.data.url,(node.data.nivel*1 + 1),node.data.id_ws);
 	},
+	/*
+	Function: montaTextoTemaWMS
+	
+	Monta o texto que será mostrado ao lado de cada layer de um WMS, permitindo incluir o layer no mapa.
+	*/
 	montaTextoTemaWMS: function(servico,layer,estilo,titulo,proj,formatoinfo,versao,formatoimg,cor){
 		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		var temp = function(){
@@ -17186,6 +17205,7 @@ i3GEO.arvoreDeTemas = {
 			var tempNode = new YAHOO.widget.HTMLNode(d, root, false,false);
 		}
 		//icones com as outras opções
+		//conforme definido em i3GEO.arvoreDeTemas.OPCOESADICIONAIS
 		var outrasOpcoes = i3GEO.arvoreDeTemas.outrasOpcoesHTML();
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde != "")
 		{document.getElementById(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde).innerHTML = outrasOpcoes;}
@@ -17567,6 +17587,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='conectarwms' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwms()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4")+"'/><td>";
 			t += 20;
 		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectarwmst == true){
+			ins += "<td><img class='conectarwmst' onclick='i3GEO.arvoreDeTemas.dialogo.conectarwmst()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a4b")+"'/><td>";
+			t += 20;
+		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.conectargeorss == true){
 			ins += "<td><img class='conectargeorss' onclick='i3GEO.arvoreDeTemas.dialogo.conectargeorss()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5")+"'/><td>";
 			t += 20;
@@ -17877,6 +17901,18 @@ i3GEO.arvoreDeTemas = {
 		*/
 		conectarwms: function()
 		{i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+"/ferramentas/conectarwms/index.htm","","","Conexão WMS<a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=28' >&nbsp;&nbsp;&nbsp;</a>");},
+		/*
+		Function: conectarwmst
+
+		Abre a janela para adicionar temas tendo como fonte um web service do tipo wms-t (time)
+		*/
+		conectarwmst: function(){
+			var l = 400;
+			var a = 350;
+			if(i3GEO.parametros.w){var l = i3GEO.parametros.w + 150;}
+			if(i3GEO.parametros.h){var a = i3GEO.parametros.h + 200;}
+			i3GEO.janela.cria(l/2 + "px",a/2 + "px",i3GEO.configura.locaplic+"/ferramentas/wmstime/index.htm","","","Conexão WMS-T <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=76' >&nbsp;&nbsp;&nbsp;</a>");
+		},
 		/*
 		Function: conectarwfs
 

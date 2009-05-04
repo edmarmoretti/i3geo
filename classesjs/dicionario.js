@@ -671,6 +671,13 @@ en:"WMS server connection",
 es:"Conectar con el servidor WMS",
 it:"Connetti con il server WMS"
 }],
+"a4b":[
+{
+pt:"Conectar com servidor WMS-T",
+en:"WMS-T server connection",
+es:"Conectar con el servidor WMS-T",
+it:"Connetti con il server WMS-T"
+}],
 "a5":[
 {
 pt:"Conectar com GeoRss",

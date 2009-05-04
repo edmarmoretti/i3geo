@@ -1038,10 +1038,11 @@ $imgurl - url do imgdir
 $tiporep - tipo de representação das feições do mapa
 $suportasld - Suporta SLD sim|nao.
 $formatosinfo - lista de formatos da requisição de atributos para a função getfeatureinfo (default text/plain)
+$time - específico para WMS-T (parâmentro wms_time)
 Include:
 <wmswfs.php>
 */
-	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain")
+	function adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo="text/plain",$time="")
 	{
 		//echo $servico;return;
 		if(file_exists($this->locaplic."/wmswfs.php"))
@@ -1107,6 +1108,8 @@ Include:
 		$layer->setmetadata("wms_style",$nome);
 		$layer->setmetadata("wms_connectiontimeout","30");
 		$layer->setmetadata("wms_force_separate_request","1");
+		if($time != "")
+		$layer->setmetadata("wms_time",$time);
 		//pega o timpo de formato de imagem que deve ser requisitado
 		//a preferência é png, mas se não for possível, pega o primeiro da lista de formatos
 		//disponíveis no formato

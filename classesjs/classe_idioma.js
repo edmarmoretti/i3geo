@@ -273,7 +273,7 @@ i3GEO.idioma = {
 		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
 		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDMAPA))
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO))
 			if(!$i("i3geoseletoridiomas")){
 				var novoel = document.createElement("div");
 				novoel.innerHTML = ins;
