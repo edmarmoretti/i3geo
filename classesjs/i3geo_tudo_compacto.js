@@ -7911,6 +7911,11 @@ i3GEO.configura = {
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					verificaTipDefault = function(){
+						var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
+						var etiquetas = false;
+						for(var j=0;j<ntemas;j++)
+						{if(i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas != ""){var etiquetas = true;}}
+						if(etiquetas == false){return;}	
 						if($i("img")){$i("img").style.cursor = "wait";}
 						var retorna = function(retorno){
 							var i = $i("i3geo_rosa");
@@ -10887,7 +10892,6 @@ i3GEO.interface = {
 		{Google API constante GMapType}
 		*/
 		TIPOMAPA: "G_PHYSICAL_MAP",
-		
 		redesenha: function(){
    			if(i3GeoMap != ""){
    				posfixo = posfixo + "&";
@@ -10940,7 +10944,9 @@ i3GEO.interface = {
     		
     		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
     		i3GeoMap.addMapType(G_PHYSICAL_MAP);
-    		i3GeoMap.setMapType(i3GEO.interface.googlemaps.TIPOMAPA);
+    		
+    		i3GeoMap.setMapType(eval(i3GEO.interface.googlemaps.TIPOMAPA));
+    		
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
@@ -14118,7 +14124,9 @@ i3GEO.arvoreDeCamadas = {
 			
 			"zoomtema":"sim",
 			
-			"contextoescala":"nao"
+			"contextoescala":"nao",
+			
+			"etiquetas":""
 			
 		}
 	]

@@ -441,7 +441,6 @@ i3GEO.interface = {
 		{Google API constante GMapType}
 		*/
 		TIPOMAPA: "G_PHYSICAL_MAP",
-		
 		redesenha: function(){
    			if(i3GeoMap != ""){
    				posfixo = posfixo + "&";
@@ -494,7 +493,9 @@ i3GEO.interface = {
     		
     		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
     		i3GeoMap.addMapType(G_PHYSICAL_MAP);
-    		i3GeoMap.setMapType(i3GEO.interface.googlemaps.TIPOMAPA);
+    		
+    		i3GeoMap.setMapType(eval(i3GEO.interface.googlemaps.TIPOMAPA));
+    		
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));

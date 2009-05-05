@@ -593,6 +593,11 @@ i3GEO.configura = {
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					verificaTipDefault = function(){
+						var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
+						var etiquetas = false;
+						for(var j=0;j<ntemas;j++)
+						{if(i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas != ""){var etiquetas = true;}}
+						if(etiquetas == false){return;}	
 						if($i("img")){$i("img").style.cursor = "wait";}
 						var retorna = function(retorno){
 							var i = $i("i3geo_rosa");

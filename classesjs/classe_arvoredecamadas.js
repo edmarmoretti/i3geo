@@ -108,7 +108,9 @@ i3GEO.arvoreDeCamadas = {
 			
 			"zoomtema":"sim",
 			
-			"contextoescala":"nao"
+			"contextoescala":"nao",
+			
+			"etiquetas":""
 			
 		}
 	]
