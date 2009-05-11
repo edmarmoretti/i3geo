@@ -1,6 +1,6 @@
 <?php
 require_once("../../classesphp/pega_variaveis.php");
-error_reporting(0);
+error_reporting(E_ALL);
 session_name("i3GeoPHP");
 
 if (isset($g_sid))
@@ -12,7 +12,7 @@ foreach(array_keys($_SESSION) as $k)
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
-if (!function_exists(ms_GetVersion))
+if (!function_exists('ms_GetVersion'))
 {
 	$exts = get_loaded_extensions();
 	if (array_search( "MapScript", $exts) != TRUE)
@@ -102,14 +102,18 @@ if (isset($_FILES['fileshp']['name']))
 		$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
-		echo "Tema criado!!!";
-		echo "<script>window.parent.remapaf()</script>";
+		echo "Tema criado!!! Redesenhando o mapa.";
+		echo "<script>window.parent.i3GEO.atualiza()</script>";
 	}
 	else
 	{
 		echo "<p>Erro ao enviar o arquivo.</p>";
 		exit;
 	}
+}
+else
+{
+	echo "<p>Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
 }
 ?>
 </body>

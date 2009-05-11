@@ -6685,7 +6685,7 @@ i3GEO.php = {
 		if(arguments.length == 2)
 		{var template = "legenda2.htm";}
 		
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"criaLegendaHTML",funcao);	
 	},
 	/*

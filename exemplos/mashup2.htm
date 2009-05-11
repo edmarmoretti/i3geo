@@ -4,27 +4,24 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>MMA - Mapa interativo</title>
-
-<!-- Leitura dos programas javaScript e estilos individualmente. Pode-se ler os 
-arquivos não compactados, bastando substituir por i3geonaocompacto -->
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
-
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 </head>
-<body style="background-color:rgb(200,200,200);z-index:0;">
-<p style=text-align:center;font-size:12pt >Este é um exemplo de inclusão do I3Geo dentro de uma página qualquer.<br><br>
+<body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
 <div style=position:absolute;left:10px;top:50px;width:200px; >
-<p style=text-align:left;font-size:12pt >Você pode chamar o I3Geo de dentro de uma outra página criando o DIV com id=corpo<br><br>
+<p style=text-align:left;font-size:12pt >Você pode chamar o I3Geo de dentro de uma outra página criando o DIV com id=i3geo <br><br>
 <p style=text-align:left;font-size:12pt >Para chamar a página não é necessário rodar o i3geo/ms_criamapa.php.<br><br>
 <p style=text-align:left;font-size:12pt >Nem todos os elementos precisam estar no mapa.<br><br>
 <p style=text-align:left;font-size:12pt >Você pode esconder ou mudar as ferramentas de lugar.<br><br>
 </div>
-<div id=i3geo  >
+<div id=i3geo   >
+<p style=text-align:center;font-size:12pt >Este é um exemplo de inclusão do I3Geo dentro de uma página qualquer.<br><br>
+
 <center>
 <table id='mst' style=display:none width=100% cellspacing='0'>
 <!-- Inclui o menu suspenso. Se vc não quiser o menu, é só comentar -->
 <tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
 <tr>
-<td>
+<td colspan=2 >
    <img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/> 
    <img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/> 
    <img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/>
@@ -32,8 +29,6 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
    <img title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/>
    <img title="busca na wikipedia" alt="" src="../imagens/branco.gif" id='wiki'/>
    <img title="mede" alt="" src="../imagens/branco.gif" id='mede'/> 
-</td>
-<td>
    <img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/>
    <img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/>
    <img title="aproxima" alt="" src="../imagens/branco.gif" id='zoomiauto'/>
@@ -89,57 +84,14 @@ arquivos não compactados, bastando substituir por i3geonaocompacto -->
 <a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
 </div>
-<!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
-/*
-Title: mashup.htm
-
-Exemplo de abertura do I3Geo sem passar pelo ms_criamapa.php
-
-O usuário pode digitar diretamente o html no navegador.
-
-File: i3geo/exemplos/mashup.htm
-
-Exemplo:
-
-http://<host>/i3geo/exemplos/mashup.htm
-
-*/
-/*
-	Variable: g_locaplic
-	
-	Indica a localização correta do i3geo.
-	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-*/
-g_locaplic = "http://"+window.location.host+"/i3geo";
-/*
-	Variable: g_localimg
-	
-	Indica a localização correta das imagens.
-	
-	É utilizada para identificar o local correto onde estão as imagens que são utilizados.
-*/
-g_localimg = "http://"+window.location.host+"/i3geo/imagens";
-g_mapaRefDisplay = "none"
-/*
-Variable: g_mashuppar
-
-Parâmetros de inicialização que podem ser utilizados na interface mashup.
-
-Os parâmetros são os mesmos que podem ser utilizados quando o i3geo é inicializado pelo ms_criamapa.php.
-
-Exemplo: g_mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
-*/
-g_mashuppar = "&mapext=-53 -26 -42 -18";
-g_janelaMen = "nao";
-g_diminuixN = 0;
-objmapa = new Mapa();
-/*
-	Inicializa o mapa
-*/
-
-objmapa.inicializa();
+i3GEO.configura.locaplic = "http://"+window.location.host+"/i3geo";
+i3GEO.configura.mapaRefDisplay = "none"
+i3GEO.configura.iniciaJanelaMensagens = false
+i3GEO.idioma.MOSTRASELETOR = false
+i3GEO.configura.mashuppar = "&mapext=-53 -26 -42 -18";
+i3GEO.cria()
+i3GEO.inicia();
 </script>
 
 </body>
