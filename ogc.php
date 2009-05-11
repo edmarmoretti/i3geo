@@ -168,6 +168,11 @@ foreach ($_GET as $k=>$v)
 	//if(strtolower($k) == "srs")
 	//{$SRS = $v;}
 }
+if(count($_GET) == 0){
+	$tipo="intervalo";
+	$req->setParameter("REQUEST", "getCapabilities");
+	$req->setParameter("SERVICE", "WMS");
+}
 if(isset($tema) && $tipo != "metadados")
 {$tipo = "";}
 $req->setParameter("VeRsIoN","1.1.0");
@@ -189,7 +194,13 @@ if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
 $oMap->setmetadata("ows_onlineresource",$or);
 $oMap->setmetadata("ows_title",$tituloInstituicao." - i3geo");
 if (!isset($intervalo))
-{$intervalo = "0,50";}
+{$intervalo = "0,5000";}
+else
+{$tipo = "intervalo";}
+if(!isset($tema)){
+	$intervalo = "0,5000";
+	$tipo = "intervalo";
+}
 if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
@@ -274,6 +285,7 @@ else
 	}
 	foreach($codigosTema as $codigoTema)
 	{
+		if(!file_exists("temas/".$codigoTema.".map")){break;}
 		if (@ms_newMapobj("temas/".$codigoTema.".map"))
 		{
 			$nmap = ms_newMapobj("temas/".$codigoTema.".map");

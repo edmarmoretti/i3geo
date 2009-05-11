@@ -25,6 +25,7 @@ g_tipo = ""; //tipo de tema
 g_tema = ""; //tema selecionado do ws
 g_legenda = ""; //legenda do tema
 g_nometema = ""; //nome do tema
+g_idws = ""
 ativaGuias("")
 mostraGuia("guia1")
 $i("guia1").onclick = function()
@@ -104,6 +105,7 @@ function metadados(retorno)
 }
 function listatemas(retorno)
 {
+	g_idws = "";
 	aguarde("none");
 	if ((retorno.data != "erro") && (retorno.data != undefined))
 	{

@@ -49,23 +49,25 @@ function gravaCacheWMS($servico)
 	global $dir_tmp;
 	error_reporting(0);
 	try{
-	$teste = explode("=",$servico);
-	if ( count($teste) > 1 ){$servico = $servico."&";}
-	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
-	$nome = $dir_tmp."/wms".md5($servico).".xml";
-	if(!file_exists($nome))
-	{
-		$wms_capabilities = file($wms_service_request);
-		if( !$wms_capabilities )
-		{return "erro";}
+		$teste = explode("=",$servico);
+		if ( count($teste) > 1 ){$servico = $servico."&";}
 		else
+		{$servico = $servico."?";}
+		$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
+		$nome = $dir_tmp."/wms".md5($servico).".xml";
+		if(!file_exists($nome))
 		{
-			$fp = fopen($nome, 'w');
-			fwrite($fp, implode("",$wms_capabilities));
-			fclose($fp);	
+			$wms_capabilities = file($wms_service_request);
+			if( !$wms_capabilities )
+			{return "erro";}
+			else
+			{
+				$fp = fopen($nome, 'w');
+				fwrite($fp, implode("",$wms_capabilities));
+				fclose($fp);	
+			}
 		}
-	}
-	return $nome;
+		return $nome;
 	}
 	catch(Exception $e){return "erro";}
 }
@@ -271,9 +273,6 @@ function temaswms()
 {
 	global $servico,$cp,$id_ws;
 	$wms_service_request = gravaCacheWMS($servico);
-	//$teste = explode("=",$servico);
-	//if ( count($teste) > 1 ){$servico = $servico."&";}
-	//$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
 	#
@@ -292,12 +291,14 @@ function temaswms()
 	}
 	elseif(isset($id_ws))
 	{
-		$handle = fopen ($wms_service_request, "r");
-		$wms_capabilities = fread ($handle, filesize ($wms_service_request));
-		fclose ($handle); 
+		if($id_ws != "")
 		adicionaAcesso($id_ws,true);
 	}
-	//$wms_capabilities = implode("",$wms_capabilities);
+	
+	$handle = fopen ($wms_service_request, "r");
+	$wms_capabilities = fread($handle, filesize($wms_service_request));
+	fclose ($handle); 
+	
 	$dom = new DomDocument();
 	$dom->loadXML($wms_capabilities);
 	$layers = wms_layers($dom);
