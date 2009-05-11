@@ -122,12 +122,6 @@ Group: Programas principais (core)  {
 
    }  # Group: Programas principais (core)
 
-Group: Exemplos de customização  {
-
-   File: mashup.htm  (exemplos\mashup.htm)
-   File: abas.htm  (exemplos\abas.htm)
-   }  # Group: Exemplos de customização
-
 Group: Redirecionadores  {
 
    File: Redirecionador para o ms_criamapa.php com extensão HTML  (index.html)
@@ -216,3 +210,4 @@ Group: Index  {
 
 File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js)
 File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js.php)
+File: abas.htm  (exemplos\abas.htm)
