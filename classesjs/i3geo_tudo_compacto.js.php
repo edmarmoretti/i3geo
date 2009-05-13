@@ -13727,6 +13727,8 @@ i3GEO.guias = {
 	Variable: atual
 	
 	Guia que está ativa
+	
+	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
 	*/
 	ATUAL: "temas",
 	/*
@@ -17804,6 +17806,42 @@ i3GEO.arvoreDeTemas = {
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}
+	},
+	/*
+	Function: comboMenus
+
+	Busca a lista de menus existentes no i3geo e monta um combo com o resultado.
+
+	Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do menu.
+
+	Parameters:
+
+	locaplic {String} - endereço do i3geo
+	
+	funcaoOnchange {String} - nome da funcao que será executada quando o usuário escolhe um grupo
+
+	idDestino {String} - id do elemento HTML que receberá o combo
+
+	idCombo {String} - id do combo que será criado
+
+	largura {Numeric} - largura em pixels do combo
+
+	altura {Numeric} - altura do combo em linhas
+	*/
+	comboMenus: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura){
+		i3GEO.configura.locaplic = locaplic;
+		var combo = function (retorno){
+			ob = retorno.data;
+			var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um menu:</option>";
+			for (ig=0;ig<ob.length; ig++){
+				if(ob[ig].publicado != "nao" && ob[ig].publicado != "NAO"){
+					if(ob[ig].nomemenu)
+					ins += "<option value="+ob[ig].idmenu+" >"+ob[ig].nomemenu+"</option>";
+				}
+			}
+			$i(idDestino).innerHTML = ins+"</select>";
+		};
+		i3GEO.php.pegalistademenus(combo);
 	},
 	/*
 	Function: comboGruposMenu

@@ -28,7 +28,12 @@ File: i3geo/admin/webservices.php
 
 */
 error_reporting(0);
+//
+//não sei pq mas ob_start e clean são necessários no Linux para não gerar erro indesejado
+//
+ob_start();
 include_once("admin.php");
+ob_clean();
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -124,7 +129,6 @@ function adicionaAcesso($id_ws,$sucesso)
 {
 	try
 	{
-    	//error_reporting(E_ALL);
     	include("conexao.php");
     	$dados = pegaDados("select * from i3geoadmin_ws WHERE id_ws = $id_ws");
     	//var_dump($dados);
@@ -136,7 +140,6 @@ function adicionaAcesso($id_ws,$sucesso)
    		$dbhw->query("UPDATE i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
     	$dbhw = null;
     	$dbh = null;
-    	//error_reporting(0);
 	}
 	catch (PDOException $e)
 	{

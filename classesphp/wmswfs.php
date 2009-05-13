@@ -52,7 +52,10 @@ function gravaCacheWMS($servico)
 		$teste = explode("=",$servico);
 		if ( count($teste) > 1 ){$servico = $servico."&";}
 		else
-		{$servico = $servico."?";}
+		{
+			$teste = explode("?",$servico);
+			if ( count($teste) == 1 ){$servico = $servico."?";}
+		}
 		$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.1.1";
 		$nome = $dir_tmp."/wms".md5($servico).".xml";
 		if(!file_exists($nome))

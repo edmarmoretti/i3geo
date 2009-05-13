@@ -125,6 +125,8 @@ i3GEO.guias = {
 	Variable: atual
 	
 	Guia que está ativa
+	
+	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
 	*/
 	ATUAL: "temas",
 	/*

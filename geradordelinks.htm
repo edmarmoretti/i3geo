@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html>
 <head>
-<title>Download de dados geográficos</title>
+<title>Gerador de links</title>
 <meta name="description" content="Mapa interativo do MMA"> 
 <meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> 
 <meta name="robots" content="index,follow">
@@ -28,12 +28,13 @@ na internet ou clique para testar:
 <div style='height:350px;width:550px;top:10px;left:10px;text-align:left;border:1px gray solid;' >
 	<div style=margin:10px; >
 		<p><b>Escolha os temas que serão incluídos no mapa (opcional):</b></p>
-		<div id=grupos style=text-align:left; >&Aguarde</div>
+		<div id=menus style=text-align:left; >Aguarde...</div><br>
+		<div id=grupos style=text-align:left; >&nbsp;</div>
 		<div id=subgrupos style=top:5px;text-align:left; >&nbsp;</div>
 		<div id=temas style=top:10px;text-align:left; >&nbsp;</div>
 		<div style=position:relative;top:15px;left:0px;text-align:left; >
 			Temas j&aacute; escolhidos. Os que estiverem marcados, ficar&atilde;o ligados logo ao abrir o mapa:
-			<div id=temasa style='position:relative;width:530px;border:1px gray solid;height:155px;top:10px;left:0px;text-align:left;overflow:auto' ></div>
+			<div id=temasa style='position:relative;width:530px;border:1px gray solid;height:130px;top:10px;left:0px;text-align:left;overflow:auto' ></div>
 		</div>
 	</div>
 </div>
@@ -121,7 +122,8 @@ var i3geo_gl_configura = new i3geo_gl_configura(
 	"grupos",
 	"subgrupos",
 	"temas",
-	"buscageo"
+	"buscageo",
+	"menus"
 	)
 i3geo_gl_inicia(i3geo_gl_configura)
 </script>

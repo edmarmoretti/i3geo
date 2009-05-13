@@ -42,7 +42,11 @@ No caso do datadownload.htm ser disparado de outro local, é necessário definir e
 var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0]
-i3GEO.configura.locaplic = g_locaplic
+//
+//para efeitos de compatibilidade
+//
+try{i3GEO.configura.locaplic = g_locaplic}
+catch(e){}
 //
 //diretorio onde esta o i3geo
 //
@@ -137,7 +141,7 @@ retorno - string formatada com os dados para montagem da árvore.
 */
 function processaDiretorios(retorno)
 {
-	if(!document.getElementById("arvoreDir"))
+	if(!document.getElementById("arvoreTemas"))
 	{
 		alert("Nao foi encontrado o DIV arvoreTemas");
 		return;
