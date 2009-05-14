@@ -269,7 +269,7 @@ function criarNovoMap()
 		$dados[] = "SYMBOLSET ../symbols/simbolos.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
-		$dados[] = "	NAME base";
+		$dados[] = "	NAME $codigo";
 		$dados[] = "	TYPE line";
 		$dados[] = '	DATA ""';
 		$dados[] = '	METADATA';

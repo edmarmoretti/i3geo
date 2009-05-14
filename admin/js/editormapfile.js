@@ -426,17 +426,6 @@ function adicionaNovoMapfile()
 					YAHOO.example.container.panelEditor.destroy();
 					YAHOO.example.container.panelEditor = null;
 					core_pegaMapfiles("montaArvore()")
-					/*
-					$mapfiles = [codigo];
-					var nos = montaNosRaiz("nao");
-					tree.popNode(nos[0])
-					var noi = tree.getNodeByIndex(1);
-					nos[0].insertBefore(noi);
-					tree.draw();
-					core_carregando("desativa");
-					YAHOO.example.container.panelEditor.destroy();
-					YAHOO.example.container.panelEditor = null;
-					*/
 				}
 			}
 			catch(e){core_handleFailure(e,o.responseText);}
@@ -1121,9 +1110,7 @@ function montaEditorEstilo(dados)
 }
 function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,testar)
 {
-	//alert(arguments.length)
 	if(arguments.length < 6){var testar = false;}
-
 	if(tipo == "conexao")
 	{
 		var campos = new Array("connection","data","connectiontype","tileitem","tileindex")
@@ -1132,6 +1119,25 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "metadados")
 	{
+		//
+		//validação
+		//
+		var valorTeste = $i("extensao").value
+		var teste1 = valorTeste.split(" ");
+		if(teste1.length != 4)
+		{alert("Sao necessarios 4 valores em extensao");return;}
+		if(teste1[0]*1 > teste1[2]*1)
+		{alert("xmin maior que xmax em extensao");return;}
+		if(teste1[1]*1 > teste1[3]*1)
+		{alert("ymin maior que ymax em extensao");return;}
+		var valorTeste = $i("escala").value
+		if(valorTeste != ""){
+			var teste1 = valorTeste * 1;
+			if(teste1 > 0){}
+			else
+			{alert("Valor de escala incorreto");return;}
+		}
+				
 		var campos = new Array("aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
