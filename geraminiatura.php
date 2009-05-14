@@ -75,14 +75,14 @@ foreach ($arqs["arquivos"] as $arq)
 	if($temp[(count($temp) - 1)] == "map")
 	{
 		if($tipo == "mini" || $tipo == "todos")
-		{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+		{if(!file_exists('temas/miniaturas/'.$arq.'.mini.png')){echo "<br>".$arq."<br>";verifica($arq,"mini");}}
 		if($tipo == "grande"  || $tipo == "todos")
-		{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq);}}
+		{if(!file_exists('temas/miniaturas/'.$arq.'.grande.png')){echo "<br>".$arq."<br>";verifica($arq,"grande");}}
 	}
 }
-function verifica($map)
+function verifica($map,$tipo)
 {
-	global $tipo,$locaplic;
+	global $locaplic;
 	ms_ResetErrorList();
 	$tema = "";
 	$map = str_replace("\\","/",$map);
