@@ -386,12 +386,14 @@ $servico - Endereço do web service.
 
 $cp - Objeto CPAINT.
 
-$nivel - nível do layer na hierarquia existente no getcapabilities
+$nivel - nível do layer na hierarquia existente no getcapabilities (string do tipo
 
+$nomelayer - nome do layer que contém os próximos layers
 */
 function listaLayersWMS()
 {
-	global $servico,$cp,$nivel,$id_ws;
+	global $servico,$cp,$nivel,$id_ws,$nomelayer;
+	if(!isset($nomelayer)){$nomelayer = "undefined";}
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
@@ -418,16 +420,46 @@ function listaLayersWMS()
 	$dom->loadXML($wms_capabilities);
 	$xpath = new DOMXPath($dom);
 	$q = '//WMT_MS_Capabilities/Capability';
-	for($i=0; $i <= $nivel; ++$i)
-	$q .= "/Layer";
-	
-	$layers = $xpath->query($q);
 	$res = array();
-	foreach ($layers as $layer)
+	
+	if($nomelayer != "undefined")
 	{
-		$r = pegaTag($layer);
-		if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"]))
-		$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));
+		for($i=0; $i < $nivel-1 ; ++$i)
+		$q .= "/Layer";
+		$layersanteriores = $xpath->query($q);
+		foreach ($layersanteriores as $layeranterior)
+		{
+			$r1 = pegaTag($layeranterior);
+			if($r1["nome"] == $nomelayer)
+			{
+				$layers = $xpath->query('Layer',$layeranterior);
+				foreach ($layers as $layer)
+				{
+					$r = pegaTag($layer);
+					$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));
+				}
+				if($layers->length == 0)
+				{
+					$res[] = array("nome"=>$r1["nome"],"titulo"=>$r1["titulo"],"estilos"=>(array(array("nome"=>"default","titulo"=>"default"))),"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));
+				}
+			}
+		}
+	}
+	else
+	{
+		//
+		//pega os layers no primeiro nível
+		//
+		$q .= "/Layer";
+		$layers = $xpath->query($q);	
+		$res = array();
+		foreach ($layers as $layer)
+		{
+			$r = pegaTag($layer);
+			//echo $r["nome"]."\n";
+			if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"]))
+			{$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));}
+		}
 	}
 	$cp->set_data($res);
 }
