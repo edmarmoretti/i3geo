@@ -43,6 +43,32 @@ i3GEO.maparef = {
 	*/
 	fatorZoomDinamico: -3,
 	/*
+	Property: TRANSICAOSUAVE
+	
+	Altera a transparência quando o mouse sobrepõe ao mapa de referência e quando sai
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	TRANSICAOSUAVE: true,
+	/*
+	Property: TRANSPARENCIA
+	
+	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	
+	Varia de 0 a 100, sendo 0 a menor transparência
+	
+	Type:
+	{numeric}
+	
+	Default:
+	{30}
+	*/
+	TRANSPARENCIA: 50,
+	/*
 	Property: TOP
 	
 	Posição da janela em relação ao topo do mapa
@@ -67,6 +93,24 @@ i3GEO.maparef = {
 		//YAHOO.log("initJanelaRef", "i3geo");
 		if (!$i("i3geo_winRef")){
 			var novoel = document.createElement("div");
+			if(i3GEO.maparef.TRANSICAOSUAVE){
+				if (navm)
+				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+				else
+				{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}
+				novoel.onmouseover = function(){
+					if (navm)
+					{novoel.style.filter='alpha(opacity=100)';}
+					else
+					{novoel.style.opacity= 1;}				
+				};
+				novoel.onmouseout = function(){
+					if (navm)
+					{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+					else
+					{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}				
+				}
+			}
 			novoel.id = "i3geo_winRef";
 			novoel.style.display="none";
 			novoel.style.borderColor="gray";

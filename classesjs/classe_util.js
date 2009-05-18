@@ -879,7 +879,7 @@ i3GEO.util = {
 	/*
 	Function: desaparece
 	
-	Aplica efeito de desaparecimento suave de um objetov
+	Aplica efeito de desaparecimento suave de um objeto
 	
 	Parameters:
 	
@@ -920,6 +920,7 @@ i3GEO.util = {
 				{obj.style.opacity= 1;}
 				if(removeobj){
 					var p = obj.parentNode;
+					if(p)
 					p.removeChild(obj);
 				}
 			}

@@ -39,6 +39,41 @@ i3GEO.barraDeBotoes = {
 	*/
 	BARRAS: new Array(),
 	/*
+	Property: AUTOALTURA
+	
+	Ajusta automaticamente a altura das barras conforme a altura do mapa.
+	
+	Type:
+	{boolean}
+	*/
+	AUTOALTURA: false,
+	/*
+	Property: TRANSICAOSUAVE
+	
+	Altera a transparência das barras quando o mouse sobrepõe a barra e quando sai da barra
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	TRANSICAOSUAVE: true,
+	/*
+	Property: TRANSPARENCIA
+	
+	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	
+	Varia de 0 a 100, sendo 0 a menor transparência
+	
+	Type:
+	{numeric}
+	
+	Default:
+	{30}
+	*/
+	TRANSPARENCIA: 50,
+	/*
 	Property: PERMITEFECHAR
 	
 	Mostra o botão para fechar as barras ou não.
@@ -235,12 +270,21 @@ i3GEO.barraDeBotoes = {
 		novoel.style.display="block";
 		novoel.style.border="1px solid gray";
 		novoel.style.background="white";
-		if (navm)
-		{novoel.style.filter='alpha(opacity=90)';}
-		else
-		{novoel.style.opacity= .85;}
-		//var temp = '<div class="hd" >&nbsp;</div>';
-		//temp += '<div class="bd" style="background-color:rgb(250,250,250);width='+wj+'px"  >';		
+		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+			if (navm){
+				
+				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';
+			}
+			else{
+				novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;
+			}
+		}
+		else{
+			if (navm)
+			{novoel.style.filter='alpha(opacity=90)';}
+			else
+			{novoel.style.opacity= .85;}
+		}
 		var temp = "";
 		if (barraZoom == true)
 		{
@@ -257,19 +301,63 @@ i3GEO.barraDeBotoes = {
 			//objposicaocursor.imgx = 0;
 			if($i("i3geo_rosa"))
 			{$i("i3geo_rosa").style.display="none";}
+			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+				if (navm)
+				{novoel.style.filter='alpha(opacity=90)';}
+				else
+				{novoel.style.opacity= .85;}
+			}
 		};
+		novoel.onmouseout = function(){
+			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+				if (navm)
+				{novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';}
+				else
+				{novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;}
+			}		
+		}
 		document.body.appendChild(novoel);
 		//copia os botoes do HTML para a janela
 		if ($i(idconteudo))
 		{
 			$i(idconteudonovo+"_").innerHTML = $i(idconteudo).innerHTML;
 			$i(idconteudo).innerHTML = "";
+			//faz o cálculo do número de botões que devem ficar visíveis em função do tamanho da barra
+			if(i3GEO.barraDeBotoes.AUTOALTURA){
+				var elementos = $i(idconteudonovo+"_").getElementsByTagName("img");
+				if(elementos[0].id == "sobeferramentas"){
+					try{
+						var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
+						var alturadisponivel = i3GEO.parametros.h - 4;
+						var numerobotoes = parseInt(alturadisponivel / 30);
+						var nelementos = elementos.length;
+						var i = 0;
+						do{
+							elementos[i].style.display = "none";
+							var i = i + 1;
+						}
+						while(i < nelementos)
+						var i = 0;
+						do{
+							elementos[i].style.display = "inline";
+							var i = i + 1;
+						}
+						while(i < numerobotoes)
+					}catch(e){}
+					if(i == numerobotoes){
+						if($i("sobeferramentas")){$i("sobeferramentas").style.display="none";}
+						if($i("desceferramentas")){$i("desceferramentas").style.display="none";}
+					}
+				}		
+			}
 		}
 		YAHOO.namespace("janelaBotoes.xp");
-		YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
+		if(i3GEO.barraDeBotoes.AUTOALTURA == false)
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
+		else
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
 		if((barraZoom == true) && $i("img")){
 			i3GEO.barraDeBotoes.ativaBarraDeZoom();
-			
 			verticalSlider = YAHOO.widget.Slider.getVertSlider("vertBGDiv","vertHandleDivZoom", 0, 70);
 			verticalSlider.onChange = function(offsetFromStart)
 			{g_fatordezoom = (offsetFromStart - 35) / 5;};
@@ -357,28 +445,35 @@ i3GEO.barraDeBotoes = {
 			}		
 		}
 		YAHOO.janelaBotoes.xp.panel.render();
+		if(i3GEO.barraDeBotoes.AUTOALTURA == true){
+			var y = y - i3GEO.interface.BARRABOTOESTOP + 2;
+			var x = x - 3;
+		}
 		YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 		if($i("sobeferramentas")){
 			$i("sobeferramentas").onclick = function(){
 				var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
-				if(elementos[0].style.display == "inline")
+				var nelementos = elementos.length;
+				if(elementos[0].style.display == "inline" && elementos[0].id == "")
 				{return;}
-				if(elementos.length > 0){
+				if(elementos[1].style.display == "inline" && elementos[1].id == "")
+				{return;}
+				if(nelementos > 0){
 					var mostra = elementos[0];
 					var i = 0;
 					do{
 						if(elementos[i].style){
-							if(elementos[i].style.display == "inline")
+							if(elementos[i].style.display == "inline" && elementos[i].id == "")
 							{break;}
-							if(elementos[i].style.display == "none")
+							if(elementos[i].style.display == "none" && elementos[i].id == "")
 							{var mostra = elementos[i];}
 						}
 						var i = i + 1;
 					}
-					while(i < elementos.length)
+					while(i < nelementos)
 					mostra.style.display="inline";
 					//esconde o último botao
-					var i = elementos.length - 1;
+					var i = nelementos - 1;
 					var mostra = elementos[i];
 					do{
 						if(elementos[i].style){
@@ -399,26 +494,31 @@ i3GEO.barraDeBotoes = {
 					var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
 					if(elementos[elementos.length - 1].style.display == tipo)
 					{return;}
-					if(elementos.length > 0){
+					var nelementos = elementos.length;
+					if(nelementos > 0){
 						//esconde o primeiro botao
 						var i = 0;
 						do{
-							if(elementos[i].style){
-								if((elementos[i].style.display == "block") || (elementos[i].style.display == "inline") || (elementos[i].style.display == ""))
-								{elementos[i].style.display="none";break;}
+							var e = elementos[i];
+							if(e.style){
+								if((e.style.display == "block") || (e.style.display == "inline") || (e.style.display == "")){
+									if(e.id == "")
+									{e.style.display="none";break;}
+								}
 							}
 							var i = i + 1;
 						}
-						while(i < elementos.length)
+						while(i < nelementos)
 						//mostra o último botao
-						var i = elementos.length-1;
+						var i = nelementos-1;
 						var mostra = elementos[i];
 						do{
-							if(elementos[i].style){
-								if(elementos[i].style.display == tipo)
+							var e = elementos[i];
+							if(e.style){
+								if(e.style.display == tipo)
 								{break;}
-								if(elementos[i].style.display == "none")
-								{var mostra = elementos[i];}
+								if(e.style.display == "none")
+								{var mostra = e;}
 							}
 							var i = i - 1;
 						}

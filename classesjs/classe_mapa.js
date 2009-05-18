@@ -62,10 +62,6 @@ i3GEO.mapa = {
 			imagemyi = 0;
 			imagemxref = 0;
 			imagemyref = 0;
-			var dc = $i("i3geo");
-			if(!dc){return;}
-			if (dc.style.left){imagemxi += parseInt(dc.style.left);}
-			if (dc.style.top){imagemyi += parseInt(dc.style.top);}	
 			var dc = $i(elemento);
 			while ((dc.offsetParent) && (dc.offsetParent.id != "i3geo")){
 				dc = dc.offsetParent;
@@ -77,8 +73,12 @@ i3GEO.mapa = {
 				c.style.position="absolute";
 				$left(i3GEO.interface.IDCORPO,imagemxi);
 				$top(i3GEO.interface.IDCORPO,imagemyi);
-				if ($i("i3geo").style.left){$left(i3GEO.interface.IDCORPO,imagemxi + parseInt($i("i3geo").style.left));}
-				if ($i("i3geo").style.top){$top(i3GEO.interface.IDCORPO,imagemyi + parseInt($i("i3geo").style.top));}
+				/*
+				if($i("i3geo")){
+					if ($i("i3geo").style.left){$left(i3GEO.interface.IDCORPO,imagemxi + parseInt($i("i3geo").style.left));}
+					if ($i("i3geo").style.top){$top(i3GEO.interface.IDCORPO,imagemyi + parseInt($i("i3geo").style.top));}
+				}
+				*/
 			}
 		}
 		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}

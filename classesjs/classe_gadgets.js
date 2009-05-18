@@ -96,7 +96,7 @@ i3GEO.gadgets = {
 	*/	
 	PARAMETROS: {
 		"mostraCoordenadasUTM":
-		{idhtml:"mostraUTM"},
+		{idhtml:"localizarxy"},
 		"mostraCoordenadasGEO":
 		{idhtml:"localizarxy"},
 		"mostraInserirKml":
@@ -127,7 +127,11 @@ i3GEO.gadgets = {
 	está estacionado sobre o mapa. Por default isso já é feito pelo i3Geo.
 	
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS (mostraUTM) ou altere a variável i3GEO.eventos.MOUSEPARADO
+	id definido em i3GEO.gadgets.PARAMETROS (mostraCoordenadasUTM) ou altere a variável i3GEO.eventos.MOUSEPARADO
+	
+	Se i3GEO.gadgets.mostraCoordenadasUTM.idhtml for igual a i3GEO.gadgets.mostraCoordenadasGEO.idhtml
+	
+	os valores mostrados serão intercalados entre GEO e UTM
 	
 	Parameters:
 	
@@ -153,11 +157,15 @@ i3GEO.gadgets = {
 			if($i("wdoca")){return;}
 			var tempUtm = function(retorno){
 				//alert(retorno)
-				setTimeout("$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';",3400);
+				var funcao = "";
+				funcao += "$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';";
+				funcao += "if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml)";
+				funcao += "{$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml).style.display='block';i3GEO.gadgets.mostraCoordenadasGEO();}";
+				setTimeout(funcao,3400);
 				var temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){
 					temp.style.display="block";
-					temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" datum="+retorno.data.datum;
+					temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" "+retorno.data.datum;
 					//return (retorno.data);
 				}
 			};
@@ -838,7 +846,10 @@ i3GEO.gadgets = {
 				else
 				{var conta = 0;}
 				for(var nomeMenu in i3GEO.configura.oMenuData.submenus){
+					if(i3GEO.configura.oMenuData.submenus[nomeMenu] != "")
 					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]});
+					//alert(nomeMenu)
+					//alert(i3GEO.configura.oMenuData.submenus[nomeMenu].length)
 					var conta=conta+1;
 				}
 			}

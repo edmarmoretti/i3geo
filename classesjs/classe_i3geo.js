@@ -175,13 +175,14 @@ i3GEO = {
 		{menos = menos + parseInt($i("ferramentas").style.width);}
 		var novow = parseInt(screen.availWidth) - diminuix;
 		var novoh = parseInt(screen.availHeight) - diminuiy;		
+		window.resizeTo(screen.availWidth,screen.availHeight);
+		window.moveTo(0,0);
+
 		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
 		try{
-			if (document.body.style.width < 400){
-				var novow = parseInt(screen.availWidth) - diminuix;
-				var novoh = parseInt(screen.availHeight) - diminuiy;
-				window.resizeTo(screen.availWidth,screen.availHeight);
-				window.moveTo(0,0);
+			if (novow < 800){
+				var novow = 800;
+				var novoh = 600;
 			}
 		}
 		catch(e){var e = "";}
@@ -189,19 +190,15 @@ i3GEO = {
 		document.body.style.height = novoh;
 		var w = novow - menos - diminuix;
 		var h = novoh - diminuiy;
-		if (document.getElementById("corpoMapa")){
-			if (document.getElementById("corpoMapa").style.width){
-				var w = parseInt(document.getElementById("corpoMapa").style.width);
-				var h = parseInt(document.getElementById("corpoMapa").style.width);
-			}
-			if (document.getElementById("corpoMapa").style.height)
-			{var h = parseInt(document.getElementById("corpoMapa").style.height);}
-		}
 		var temp = $i("corpoMapa");
-		if(temp){
+		if (temp){
 			if(temp.style){
-				if(temp.style.width){var w = parseInt(temp.style.width);}
-				if(temp.style.height){var h = parseInt(temp.style.height);}
+				if (temp.style.width){
+					var w = parseInt(temp.style.width);
+					var h = parseInt(temp.style.width);
+				}
+				if (temp.style.height)
+				{var h = parseInt(temp.style.height);}
 			}
 		}
 		if($i("contemImg")){
@@ -405,6 +402,11 @@ i3GEO = {
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
+		if(arguments.length == 0){
+			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
+			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+			return;
+		}
 		//verifica se o parâmetro retorno existe, caso contrário,
 		//faz a chamada ao programa PHP para obter os parâmetros
 		try{
@@ -416,8 +418,14 @@ i3GEO = {
 		catch(e){}
 		var erro = function(){
 			var legimagem = "";
-			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
-			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
+			var c = confirm("Ocorreu um erro, quer tentar novamente?");
+			if(c){
+				i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
+				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+			}
+			else{
+				i3GEO.janela.fechaAguarde();
+			}
 		}
 		try{eval(retorno.data.variaveis);}
 		catch(e){erro.call();return;}
