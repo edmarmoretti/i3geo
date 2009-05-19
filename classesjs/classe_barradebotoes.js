@@ -60,19 +60,19 @@ i3GEO.barraDeBotoes = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Property: TRANSPARENCIA
+	Property: OPACIDADE
 	
-	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da opacidade miníma utilizada quando TRANSICAOSUAVE for igual a true.
 	
-	Varia de 0 a 100, sendo 0 a menor transparência
+	Varia de 0 a 100
 	
 	Type:
 	{numeric}
 	
 	Default:
-	{30}
+	{65}
 	*/
-	TRANSPARENCIA: 50,
+	OPACIDADE: 65,
 	/*
 	Property: PERMITEFECHAR
 	
@@ -273,10 +273,10 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 			if (navm){
 				
-				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';
+				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';
 			}
 			else{
-				novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;
+				novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;
 			}
 		}
 		else{
@@ -301,7 +301,7 @@ i3GEO.barraDeBotoes = {
 			//objposicaocursor.imgx = 0;
 			if($i("i3geo_rosa"))
 			{$i("i3geo_rosa").style.display="none";}
-			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+			if(i3GEO.barraDeBotoes.OPACIDADE){
 				if (navm)
 				{novoel.style.filter='alpha(opacity=90)';}
 				else
@@ -311,9 +311,9 @@ i3GEO.barraDeBotoes = {
 		novoel.onmouseout = function(){
 			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 				if (navm)
-				{novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';}
+				{novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';}
 				else
-				{novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;}
+				{novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;}
 			}		
 		}
 		document.body.appendChild(novoel);
@@ -344,7 +344,8 @@ i3GEO.barraDeBotoes = {
 						}
 						while(i < numerobotoes)
 					}catch(e){}
-					if(i == numerobotoes){
+					//alert(i+" "+numerobotoes)
+					if(i <= numerobotoes){
 						if($i("sobeferramentas")){$i("sobeferramentas").style.display="none";}
 						if($i("desceferramentas")){$i("desceferramentas").style.display="none";}
 					}

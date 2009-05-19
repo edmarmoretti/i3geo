@@ -860,8 +860,11 @@ i3GEO.gadgets = {
 			//corrige problemas de estilo
 			//
 			var temp = objid.style;
-			temp.backgroundPosition = "0px -5px";
-			temp.border = "1px solid white";
+			temp.backgroundPosition = "0px -1px";
+			if(navn)
+			temp.border = "0px solid white";
+			else
+			temp.border = "1px dotted white";
 		}
 	}
 };

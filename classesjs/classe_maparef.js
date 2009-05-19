@@ -55,19 +55,19 @@ i3GEO.maparef = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Property: TRANSPARENCIA
+	Property: OPACIDADE
 	
-	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	
-	Varia de 0 a 100, sendo 0 a menor transparência
+	Varia de 0 a 100
 	
 	Type:
 	{numeric}
 	
 	Default:
-	{30}
+	{65}
 	*/
-	TRANSPARENCIA: 50,
+	OPACIDADE: 65,
 	/*
 	Property: TOP
 	
@@ -95,9 +95,9 @@ i3GEO.maparef = {
 			var novoel = document.createElement("div");
 			if(i3GEO.maparef.TRANSICAOSUAVE){
 				if (navm)
-				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.OPACIDADE+')';}
 				else
-				{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}
+				{novoel.style.opacity= i3GEO.maparef.OPACIDADE / 100;}
 				novoel.onmouseover = function(){
 					if (navm)
 					{novoel.style.filter='alpha(opacity=100)';}
@@ -106,9 +106,9 @@ i3GEO.maparef = {
 				};
 				novoel.onmouseout = function(){
 					if (navm)
-					{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+					{novoel.style.filter='alpha(opacity='+i3GEO.maparef.OPACIDADE+')';}
 					else
-					{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}				
+					{novoel.style.opacity= i3GEO.maparef.OPACIDADE / 100;}				
 				}
 			}
 			novoel.id = "i3geo_winRef";
@@ -134,7 +134,7 @@ i3GEO.maparef = {
 		if($i("i3geo_winRef").style.display != "block"){
 			$i("i3geo_winRef").style.display = "block";
 			YAHOO.namespace("janelaRef.xp");
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaRef.xp.panel.render();
 			var r = $i("i3geo_winRef_c");
 			if(r){

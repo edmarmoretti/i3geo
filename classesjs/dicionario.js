@@ -396,6 +396,13 @@ en:"dragging",
 es:"Haga clic y arrastre",
 it:"Clicca e trascina"
 }],
+"t7a":[
+{
+pt:"Clique e arraste para mudar a ordem. Arraste e solte na lixeira para remover. Aguarde para ver a legenda.",
+en:"dragging or wait",
+es:"Haga clic y arrastre",
+it:"Clicca e trascina"
+}],
 "t8":[
 {
 pt:"arraste para mudar a ordem",

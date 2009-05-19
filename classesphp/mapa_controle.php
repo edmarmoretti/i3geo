@@ -902,6 +902,19 @@ Include:
 		redesenhaMapa();
 	break;
 /*
+Property: fontetema
+
+Busca o link para a fonte do tema
+
+Include:
+<classe_temas.php>
+*/
+	case "fontetema":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,null,$locaplic);
+		$cp->set_data($m->fonteTema($tema));
+	break;
+/*
 Property: reordenatemas
 
 Reordena os temas baseados na localização de um segundo tema no mapa.

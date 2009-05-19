@@ -137,7 +137,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TID>bioma</TID>
             <TNOME>Biomas</TNOME>
             <TDESC></TDESC>
-            <TLINK></TLINK>
+            <TLINK>http://www.mma.gov.br</TLINK>
             <DOWNLOAD>SIM</DOWNLOAD>
             <TAGS>bioma vegetação biodiversidade</TAGS>
          </TEMA>
@@ -145,7 +145,7 @@ Veja no site da comunidade i3geo, item wiki, mais detalhes sobre a configuração 
             <TID>biomaerro</TID>
             <TNOME>Biomas para teste de erros</TNOME>
             <TDESC></TDESC>
-            <TLINK></TLINK>
+            <TLINK>http://www.mma.gov.br</TLINK>
          </TEMA>
          <TEMA>
             <TID>testephp</TID>

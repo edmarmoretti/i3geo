@@ -544,7 +544,7 @@ i3GEO.php = {
 		cpJSON.call(p,"sobetema",funcao);	
 	},
 	/*
-	Function: sobetema
+	Function: descetema
 
 	PHP:
 	classesphp/classe_temas.php
@@ -554,6 +554,18 @@ i3GEO.php = {
 	descetema: function(funcao,tema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"descetema",funcao);	
+	},
+	/*
+	Function: fontetema
+
+	PHP:
+	classesphp/classe_temas.php
+	
+	<Temas->fonteTema>	
+	*/
+	fontetema: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=fontetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"fontetema",funcao);	
 	},
 	/*
 	Function: zoomtema

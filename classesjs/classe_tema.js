@@ -56,6 +56,26 @@ i3GEO.tema = {
 		i3GEO.temaAtivo = "";
 	},
 	/*
+	Function: fonte
+
+	Abre os metadados registrados para o tema
+
+	Parameters:
+
+	tema - código do tema
+	*/
+	fonte: function(tema){
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		var temp = function(retorno){
+			i3GEO.janela.fechaAguarde();
+			if(retorno.data != "erro")
+			{window.open(retorno.data);}
+			else
+			{alert("Não existe fonte registrada para esse tema");}
+		};
+		i3GEO.php.fontetema(temp,tema);
+	},
+	/*
 	Function: sobe
 
 	Sobe um tema na ordem de desenho
@@ -152,6 +172,19 @@ i3GEO.tema = {
 		}
 		else
 		{alert("Nome não definido");}
+	},
+	mostralegendajanela: function(idtema,status){
+		//alert(idtema+" "+status)
+		if(status == "ativatimer"){
+			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','abrejanela')",4000);
+		}
+		if(status == "abrejanela"){
+			clearTimeout(mostralegendajanelaTimer);
+			
+		}
+		if(status == "desativatimer"){
+			clearTimeout(mostralegendajanelaTimer);
+		}
 	},
 	/*
 	Class: i3GEO.tema.dialogo

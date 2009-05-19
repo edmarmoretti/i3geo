@@ -832,7 +832,66 @@ lista - lista de item e cores de cada parte do grafico
 			if($tipo == "PIE")
 			$novoestilo->set("offsetx",$offset);
 		}
-		
 	}
+/*
+function: fonteTema
+
+Retorna o link para a fonte do tema.
+
+parameters:
+
+tema - código do tema
+
+*/
+	function fonteTema($tema)
+	{
+		include_once($this->locaplic."/admin/php/xml.php");
+		require($this->locaplic."/classesphp/classe_menutemas.php");
+  		$menutemas = new Menutemas("","","",$this->locaplic);
+		$linkfonte = "erro";
+		$tipo = "";
+		$this->xml = "";
+		foreach($menutemas->pegaListaDeMenus() as $menu)
+		{
+			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
+			$ondexml = $menu["arquivo"];
+			if($menu["url"] != ""){$ondexml = $menu["url"];}
+			$verificaXml = false;
+			if($ondexml != "")
+			{
+				$verificaXml = simplexml_load_file($ondexml);
+				if($verificaXml)
+				$this->xml[] = $verificaXml;
+			}
+			else //pega o xml do sistema de administração
+			{
+				$verificaXml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));
+				if($verificaXml)
+				$this->xml[] = $verificaXml;
+			}
+			if(!$verificaXml)
+			$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));
+		}
+		foreach ($this->xml as $xml)
+		{
+			$subgrupo = array();
+			foreach($xml->GRUPO as $grupo)
+			{
+					foreach($grupo->SGRUPO as $sgrupo)
+					{
+							foreach($sgrupo->TEMA as $t)
+							{
+									
+									$link = ixml($t,"TLINK");
+									$tid = ixml($t,"TID");
+									if($tid == $tema)
+									{$linkfonte = $link;}
+							}
+					}
+			}
+		}
+		return ($linkfonte);
+	}
+
 }
 ?>

@@ -7074,7 +7074,7 @@ i3GEO.php = {
 		cpJSON.call(p,"sobetema",funcao);	
 	},
 	/*
-	Function: sobetema
+	Function: descetema
 
 	PHP:
 	classesphp/classe_temas.php
@@ -7084,6 +7084,18 @@ i3GEO.php = {
 	descetema: function(funcao,tema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?&funcao=descetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"descetema",funcao);	
+	},
+	/*
+	Function: fontetema
+
+	PHP:
+	classesphp/classe_temas.php
+	
+	<Temas->fonteTema>	
+	*/
+	fontetema: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=fontetema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"fontetema",funcao);	
 	},
 	/*
 	Function: zoomtema
@@ -11883,6 +11895,26 @@ i3GEO.tema = {
 		i3GEO.temaAtivo = "";
 	},
 	/*
+	Function: fonte
+
+	Abre os metadados registrados para o tema
+
+	Parameters:
+
+	tema - código do tema
+	*/
+	fonte: function(tema){
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		var temp = function(retorno){
+			i3GEO.janela.fechaAguarde();
+			if(retorno.data != "erro")
+			{window.open(retorno.data);}
+			else
+			{alert("Não existe fonte registrada para esse tema");}
+		};
+		i3GEO.php.fontetema(temp,tema);
+	},
+	/*
 	Function: sobe
 
 	Sobe um tema na ordem de desenho
@@ -12601,19 +12633,19 @@ i3GEO.maparef = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Property: TRANSPARENCIA
+	Property: OPACIDADE
 	
-	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	
-	Varia de 0 a 100, sendo 0 a menor transparência
+	Varia de 0 a 100
 	
 	Type:
 	{numeric}
 	
 	Default:
-	{30}
+	{65}
 	*/
-	TRANSPARENCIA: 50,
+	OPACIDADE: 65,
 	/*
 	Property: TOP
 	
@@ -12641,9 +12673,9 @@ i3GEO.maparef = {
 			var novoel = document.createElement("div");
 			if(i3GEO.maparef.TRANSICAOSUAVE){
 				if (navm)
-				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.OPACIDADE+')';}
 				else
-				{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}
+				{novoel.style.opacity= i3GEO.maparef.OPACIDADE / 100;}
 				novoel.onmouseover = function(){
 					if (navm)
 					{novoel.style.filter='alpha(opacity=100)';}
@@ -12652,9 +12684,9 @@ i3GEO.maparef = {
 				};
 				novoel.onmouseout = function(){
 					if (navm)
-					{novoel.style.filter='alpha(opacity='+i3GEO.maparef.TRANSPARENCIA+')';}
+					{novoel.style.filter='alpha(opacity='+i3GEO.maparef.OPACIDADE+')';}
 					else
-					{novoel.style.opacity= i3GEO.maparef.TRANSPARENCIA / 100;}				
+					{novoel.style.opacity= i3GEO.maparef.OPACIDADE / 100;}				
 				}
 			}
 			novoel.id = "i3geo_winRef";
@@ -12680,7 +12712,7 @@ i3GEO.maparef = {
 		if($i("i3geo_winRef").style.display != "block"){
 			$i("i3geo_winRef").style.display = "block";
 			YAHOO.namespace("janelaRef.xp");
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:"shadow", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaRef.xp.panel.render();
 			var r = $i("i3geo_winRef_c");
 			if(r){
@@ -12946,6 +12978,32 @@ i3GEO.ajuda = {
 	*/
 	MENSAGEMPADRAO: "",	
 	/*
+	Property: TRANSICAOSUAVE
+	
+	Altera a transparência quando o mouse sobrepõe à janela e quando sai
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	TRANSICAOSUAVE: true,
+	/*
+	Property: OPACIDADE
+	
+	Valor da opacidade mínima utilizada quando TRANSICAOSUAVE for igual a true.
+	
+	Varia de 0 a 100
+	
+	Type:
+	{numeric}
+	
+	Default:
+	{50}
+	*/
+	OPACIDADE: 20,
+	/*
 	Function: abreDoc
 
 	Abre a documentacao do i3geo em uma nova janela do navegador
@@ -12971,7 +13029,7 @@ i3GEO.ajuda = {
 					var ny = i3GEO.parametros.h - 70;
 				}
 				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
-				var janela = i3GEO.janela.cria("266","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
+				var janela = i3GEO.janela.cria("262","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
 				janela[2].innerHTML = texto;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
@@ -13076,8 +13134,23 @@ i3GEO.ajuda = {
 			{$i(i3GEO.ajuda.DIVAJUDA).innerHTML= texto;}
 		}
 		else{
-			if ($i("janelaMenTexto"))
-			{$i("janelaMenTexto").innerHTML= texto;}
+			
+			if($i("janelaMenTexto") && i3GEO.ajuda.TRANSICAOSUAVE){
+				if(texto != ""){
+					if (navm)
+					{$i("i3geo_janelaMensagens").style.filter='alpha(opacity=100)';}
+					else
+					{$i("i3geo_janelaMensagens").style.opacity= 1;}				
+				}
+				else{
+					if (navm)
+					{$i("i3geo_janelaMensagens").style.filter='alpha(opacity='+i3GEO.ajuda.OPACIDADE+')';}
+					else
+					{$i("i3geo_janelaMensagens").style.opacity= i3GEO.ajuda.OPACIDADE / 100;}								
+				}
+			}
+			if($i("janelaMenTexto"))
+			$i("janelaMenTexto").innerHTML= texto;
 		}
 	},
 	/*
@@ -14497,6 +14570,7 @@ i3GEO.arvoreDeCamadas = {
 			tnome += "&nbsp;<img  id='idx"+ltema.name+"' class='x' src='"+i3GEO.util.$im("branco.gif")+"' title='"+$trad("t12")+"' onclick='i3GEO.tema.exclui(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t12a")+"','exclui')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 			tnome += "&nbsp;<img class='sobe' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t13")+"' onclick='i3GEO.tema.sobe(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t14")+"','sobe')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 			tnome += "&nbsp;<img class='desce' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='i3GEO.tema.desce(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t16")+"','desce')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
+			tnome += "&nbsp;<img class='fonte' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("a9")+"' onclick='i3GEO.tema.fonte(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("a9")+"','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 			//a operação de zoom para o tema não funciona na interface flamingo
 			if( (ltema.zoomtema == "sim") && (!$i("flamingo")))
 			{tnome += "&nbsp;<img class='extent' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='i3GEO.tema.zoom(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t18")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
@@ -18153,19 +18227,19 @@ i3GEO.barraDeBotoes = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Property: TRANSPARENCIA
+	Property: OPACIDADE
 	
-	Valor da transparência máxima utilizada quando TRANSICAOSUAVE for igual a true.
+	Valor da opacidade miníma utilizada quando TRANSICAOSUAVE for igual a true.
 	
-	Varia de 0 a 100, sendo 0 a menor transparência
+	Varia de 0 a 100
 	
 	Type:
 	{numeric}
 	
 	Default:
-	{30}
+	{65}
 	*/
-	TRANSPARENCIA: 50,
+	OPACIDADE: 65,
 	/*
 	Property: PERMITEFECHAR
 	
@@ -18366,10 +18440,10 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 			if (navm){
 				
-				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';
+				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';
 			}
 			else{
-				novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;
+				novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;
 			}
 		}
 		else{
@@ -18394,7 +18468,7 @@ i3GEO.barraDeBotoes = {
 			//objposicaocursor.imgx = 0;
 			if($i("i3geo_rosa"))
 			{$i("i3geo_rosa").style.display="none";}
-			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
+			if(i3GEO.barraDeBotoes.OPACIDADE){
 				if (navm)
 				{novoel.style.filter='alpha(opacity=90)';}
 				else
@@ -18404,9 +18478,9 @@ i3GEO.barraDeBotoes = {
 		novoel.onmouseout = function(){
 			if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 				if (navm)
-				{novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.TRANSPARENCIA+')';}
+				{novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';}
 				else
-				{novoel.style.opacity= i3GEO.barraDeBotoes.TRANSPARENCIA / 100;}
+				{novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;}
 			}		
 		}
 		document.body.appendChild(novoel);
@@ -18437,7 +18511,8 @@ i3GEO.barraDeBotoes = {
 						}
 						while(i < numerobotoes)
 					}catch(e){}
-					if(i == numerobotoes){
+					//alert(i+" "+numerobotoes)
+					if(i <= numerobotoes){
 						if($i("sobeferramentas")){$i("sobeferramentas").style.display="none";}
 						if($i("desceferramentas")){$i("desceferramentas").style.display="none";}
 					}
@@ -20365,8 +20440,11 @@ i3GEO.gadgets = {
 			//corrige problemas de estilo
 			//
 			var temp = objid.style;
-			temp.backgroundPosition = "0px -5px";
-			temp.border = "1px solid white";
+			temp.backgroundPosition = "0px -1px";
+			if(navn)
+			temp.border = "0px solid white";
+			else
+			temp.border = "1px dotted white";
 		}
 	}
 };

@@ -102,6 +102,32 @@ i3GEO.ajuda = {
 	*/
 	MENSAGEMPADRAO: "",	
 	/*
+	Property: TRANSICAOSUAVE
+	
+	Altera a transparência quando o mouse sobrepõe à janela e quando sai
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{true}
+	*/
+	TRANSICAOSUAVE: true,
+	/*
+	Property: OPACIDADE
+	
+	Valor da opacidade mínima utilizada quando TRANSICAOSUAVE for igual a true.
+	
+	Varia de 0 a 100
+	
+	Type:
+	{numeric}
+	
+	Default:
+	{50}
+	*/
+	OPACIDADE: 20,
+	/*
 	Function: abreDoc
 
 	Abre a documentacao do i3geo em uma nova janela do navegador
@@ -127,7 +153,7 @@ i3GEO.ajuda = {
 					var ny = i3GEO.parametros.h - 70;
 				}
 				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
-				var janela = i3GEO.janela.cria("266","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
+				var janela = i3GEO.janela.cria("262","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
 				janela[2].innerHTML = texto;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
@@ -232,8 +258,23 @@ i3GEO.ajuda = {
 			{$i(i3GEO.ajuda.DIVAJUDA).innerHTML= texto;}
 		}
 		else{
-			if ($i("janelaMenTexto"))
-			{$i("janelaMenTexto").innerHTML= texto;}
+			
+			if($i("janelaMenTexto") && i3GEO.ajuda.TRANSICAOSUAVE){
+				if(texto != ""){
+					if (navm)
+					{$i("i3geo_janelaMensagens").style.filter='alpha(opacity=100)';}
+					else
+					{$i("i3geo_janelaMensagens").style.opacity= 1;}				
+				}
+				else{
+					if (navm)
+					{$i("i3geo_janelaMensagens").style.filter='alpha(opacity='+i3GEO.ajuda.OPACIDADE+')';}
+					else
+					{$i("i3geo_janelaMensagens").style.opacity= i3GEO.ajuda.OPACIDADE / 100;}								
+				}
+			}
+			if($i("janelaMenTexto"))
+			$i("janelaMenTexto").innerHTML= texto;
 		}
 	},
 	/*
