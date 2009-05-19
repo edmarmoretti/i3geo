@@ -173,16 +173,51 @@ i3GEO.tema = {
 		else
 		{alert("Nome não definido");}
 	},
-	mostralegendajanela: function(idtema,status){
+	/*
+	Function: mostralegendajanela
+	
+	Mostra a legenda de um tema em uma janela flutuante específica
+	
+	Na configuração padrão, essa função é disparada quando o usuário estaciona o ouse sobre o nome de um tema na árvore de camadas
+	
+	O uso normal seria nas opções onmouseover e onmouseout
+	
+	Exemplo:
+	
+	onmouseover = i3GEO.tema.mostralegendajanela(idtema,nome,"ativatimer")
+	
+	onmouseout = i3GEO.tema.mostralegendajanela(idtema,nome,"desaativatimer")
+	
+	onclick = i3GEO.tema.mostralegendajanela(idtema,nome,"abrejanela")
+	
+	Parameters:
+	
+	idtema {String} - código do tema
+	
+	nome {String} - nome completo do tema que será mostrado no cabeçalho da janela
+	
+	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de operação que será executada
+	*/
+	mostralegendajanela: function(idtema,nome,tipoOperacao){
 		//alert(idtema+" "+status)
-		if(status == "ativatimer"){
-			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','abrejanela')",4000);
+		if(tipoOperacao == "ativatimer"){
+			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','"+nome+"','abrejanela')",4000);
 		}
-		if(status == "abrejanela"){
-			clearTimeout(mostralegendajanelaTimer);
-			
+		if(tipoOperacao == "abrejanela"){
+			try{clearTimeout(mostralegendajanelaTimer);}
+			catch(e){};
+			var retorna = function(retorno){
+				$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
+			};
+			if(!$i("janelaLegenda"+idtema)){
+				var janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
+				janela[2].style.textAlign="left";
+				janela[2].style.background="white";
+				janela[2].innerHTML = $trad("o1");	
+			}
+			i3GEO.php.criaLegendaHTML(retorna,idtema,"legenda3.htm");
 		}
-		if(status == "desativatimer"){
+		if(tipoOperacao == "desativatimer"){
 			clearTimeout(mostralegendajanelaTimer);
 		}
 	},

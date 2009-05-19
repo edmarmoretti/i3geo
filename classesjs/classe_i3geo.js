@@ -402,9 +402,16 @@ i3GEO = {
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
-		if(arguments.length == 0){
+		var corpoMapa = function(){
 			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
-			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
+		};
+		if(arguments.length == 0){
+			corpoMapa.call();
+			return;
+		}
+		if(!retorno.data){
+			corpoMapa.call();
 			return;
 		}
 		//verifica se o parâmetro retorno existe, caso contrário,
@@ -414,18 +421,20 @@ i3GEO = {
 				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
 				i3GEO.mapa.recupera.inicia();return;
 			}
+			else
+			if(retorno.data == "ok" || retorno.data == ""){corpoMapa.call();return;}
 		}
 		catch(e){}
 		var erro = function(){
 			var legimagem = "";
 			var c = confirm("Ocorreu um erro, quer tentar novamente?");
 			if(c){
-				i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
-				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+				corpoMapa.call();
 			}
 			else{
 				i3GEO.janela.fechaAguarde();
 			}
+			return;
 		}
 		try{eval(retorno.data.variaveis);}
 		catch(e){erro.call();return;}

@@ -4170,9 +4170,16 @@ i3GEO = {
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
-		if(arguments.length == 0){
+		var corpoMapa = function(){
 			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
-			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
+		};
+		if(arguments.length == 0){
+			corpoMapa.call();
+			return;
+		}
+		if(!retorno.data){
+			corpoMapa.call();
 			return;
 		}
 		//verifica se o parâmetro retorno existe, caso contrário,
@@ -4182,18 +4189,20 @@ i3GEO = {
 				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
 				i3GEO.mapa.recupera.inicia();return;
 			}
+			else
+			if(retorno.data == "ok" || retorno.data == ""){corpoMapa.call();return;}
 		}
 		catch(e){}
 		var erro = function(){
 			var legimagem = "";
 			var c = confirm("Ocorreu um erro, quer tentar novamente?");
 			if(c){
-				i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
-				i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);
+				corpoMapa.call();
 			}
 			else{
 				i3GEO.janela.fechaAguarde();
 			}
+			return;
 		}
 		try{eval(retorno.data.variaveis);}
 		catch(e){erro.call();return;}
@@ -5578,6 +5587,13 @@ it:"Clicca per il download di questo tema nel formato Shapefile"
 {
 pt:"clique e arraste",
 en:"dragging",
+es:"Haga clic y arrastre",
+it:"Clicca e trascina"
+}],
+"t7a":[
+{
+pt:"Clique e arraste para mudar a ordem. Arraste e solte na lixeira para remover. Aguarde para ver a legenda.",
+en:"dragging or wait",
 es:"Haga clic y arrastre",
 it:"Clicca e trascina"
 }],
@@ -12013,6 +12029,54 @@ i3GEO.tema = {
 		{alert("Nome não definido");}
 	},
 	/*
+	Function: mostralegendajanela
+	
+	Mostra a legenda de um tema em uma janela flutuante específica
+	
+	Na configuração padrão, essa função é disparada quando o usuário estaciona o ouse sobre o nome de um tema na árvore de camadas
+	
+	O uso normal seria nas opções onmouseover e onmouseout
+	
+	Exemplo:
+	
+	onmouseover = i3GEO.tema.mostralegendajanela(idtema,nome,"ativatimer")
+	
+	onmouseout = i3GEO.tema.mostralegendajanela(idtema,nome,"desaativatimer")
+	
+	onclick = i3GEO.tema.mostralegendajanela(idtema,nome,"abrejanela")
+	
+	Parameters:
+	
+	idtema {String} - código do tema
+	
+	nome {String} - nome completo do tema que será mostrado no cabeçalho da janela
+	
+	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de operação que será executada
+	*/
+	mostralegendajanela: function(idtema,nome,tipoOperacao){
+		//alert(idtema+" "+status)
+		if(tipoOperacao == "ativatimer"){
+			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','"+nome+"','abrejanela')",4000);
+		}
+		if(tipoOperacao == "abrejanela"){
+			try{clearTimeout(mostralegendajanelaTimer);}
+			catch(e){};
+			var retorna = function(retorno){
+				$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
+			};
+			if(!$i("janelaLegenda"+idtema)){
+				var janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
+				janela[2].style.textAlign="left";
+				janela[2].style.background="white";
+				janela[2].innerHTML = $trad("o1");	
+			}
+			i3GEO.php.criaLegendaHTML(retorna,idtema,"legenda3.htm");
+		}
+		if(tipoOperacao == "desativatimer"){
+			clearTimeout(mostralegendajanelaTimer);
+		}
+	},
+	/*
 	Class: i3GEO.tema.dialogo
 	
 	Abre as telas de diálogo das opções de manipulação de um tema
@@ -14254,6 +14318,18 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	OPCOESLEGENDA: true,
 	/*
+	Property: AGUARDALEGENDA
+	
+	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema.
+	
+	Default:
+	{true}
+	
+	Type:
+	{Boolean}
+	*/
+	AGUARDALEGENDA: true,
+	/*
 	Variable: CAMADAS
 	
 	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
@@ -14761,6 +14837,9 @@ i3GEO.arvoreDeCamadas = {
 			{
 				i3GEO.arvoreDeCamadas.ARVORE.removeChildren(node);
 				this.mostraLegenda(node);
+				//atualiza as janelas individuais com as legendas de cada tema
+				if($i("janelaLegenda"+idtema+"_corpo"))
+				{i3GEO.tema.mostralegendajanela(idtema,"","abrejanela");}
 			}
 		}
 		//YAHOO.log("Legenda OK", "i3geo");
@@ -14813,8 +14892,12 @@ i3GEO.arvoreDeCamadas = {
 		if (tema.sel == "sim") //o tema tem selecao
 		{html += "&nbsp;<img src="+i3GEO.util.$im("estasel.png")+" title='"+$trad("t4")+"' onclick='i3GEO.tema.limpasel(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t5")+"','limpasel')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
 		if ((tema.download == "sim") || (tema.download == "SIM"))
-		{html += "&nbsp;<img src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='i3GEO.tema.dialogo.download(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
-		html += "&nbsp;<span style='cursor:move'>"+tema.tema+"</span>";
+		{html += "&nbsp;<img src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='i3GEO.tema.dialogo.download(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t6")+"','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
+		if(i3GEO.arvoreDeCamadas.AGUARDALEGENDA)
+		html += "&nbsp;<span style='cursor:move' onclick=\"i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7a")+"','');i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"+tema.name+"','','desativatimer');\" >"+tema.tema+"</span>";
+		else
+		html += "&nbsp;<span style='cursor:move' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" >"+tema.tema+"</span>";
+		
 		html += "</p>";
 		return(html);
 	},
