@@ -398,6 +398,7 @@ function listaLayersWMS()
 	include_once("../admin/php/admin.php");
 	include_once("../admin/php/webservices.php");
 	error_reporting(0);
+	
 	if($nivel < 2){
 		if($wms_service_request == "erro") {
 			//registra a tentativa de acesso
@@ -430,12 +431,13 @@ function listaLayersWMS()
 		foreach ($layersanteriores as $layeranterior)
 		{
 			$r1 = pegaTag($layeranterior);
-			if($r1["nome"] == $nomelayer)
+			if($r1["nome"] == $nomelayer || $r1["titulo"] == $nomelayer)
 			{
 				$layers = $xpath->query('Layer',$layeranterior);
 				foreach ($layers as $layer)
 				{
 					$r = pegaTag($layer);
+					if(!$r["nome"]){$r["nome"] = $r["titulo"];}
 					$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));
 				}
 				if($layers->length == 0)
@@ -457,6 +459,7 @@ function listaLayersWMS()
 		{
 			$r = pegaTag($layer);
 			//echo $r["nome"]."\n";
+			if(!$r["nome"]){$r["nome"] = $r["titulo"];}
 			if(array_search("Style",$r["tags"]) || array_search("Layer",$r["tags"]))
 			{$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));}
 		}

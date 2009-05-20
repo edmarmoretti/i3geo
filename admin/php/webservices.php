@@ -132,11 +132,13 @@ function adicionaAcesso($id_ws,$sucesso)
     	include("conexao.php");
     	$dados = pegaDados("select * from i3geoadmin_ws WHERE id_ws = $id_ws");
     	//var_dump($dados);
+    	if($dados[0]["nacessos"] == ""){$dados[0]["nacessos"] = 0;}
     	$acessos = $dados[0]["nacessos"] + 1;
     	if($sucesso)
     	$ok = $dados[0]["nacessosok"] + 1;
     	else
     	$ok = $dados[0]["nacessosok"];
+    	if($ok == ""){$ok = 0;}
    		$dbhw->query("UPDATE i3geoadmin_ws SET nacessos = '$acessos',nacessosok = '$ok' WHERE id_ws = $id_ws");
     	$dbhw = null;
     	$dbh = null;
