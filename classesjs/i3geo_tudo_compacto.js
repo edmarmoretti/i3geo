@@ -7641,6 +7641,8 @@ i3GEO.configura = {
 	
 	Imagens utilizadas para os cursores do mouse mostrados no mapa
 	
+	A manipulação dos cursores é feita com i3GEO.util.mudaCursor
+	
 	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
 
 	Type:
@@ -7656,7 +7658,9 @@ i3GEO.configura = {
 		"distancia":
 		{ff:"/imagens/cursores/distancia.png",ie:"crosshair"},
 		"zoom":
-		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
+		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"},
+		"contexto":
+		{ff:"/imagens/cursores/contexto.png",ie:"/imagens/cursores/contexto.cur"}
 	},
 	/*
 	Variable: listaDePropriedadesDoMapa
@@ -17168,23 +17172,26 @@ i3GEO.arvoreDeTemas = {
 			catch(m){node.loadComplete();return;}
 			var cor = "rgb(51, 102, 102)";
 			for (i=0;i<n; i++){
-				var html = "<span style='color:"+cor+"' >"+retorno.data[i].nome+" - "+retorno.data[i].titulo;
-				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1),id_ws:"",layer:retorno.data[i].nome};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				if(!retorno.data[i].estilos)
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
-				if(retorno.data[i].estilos){
-					var ns = retorno.data[i].estilos.length;
-					for (j=0;j<ns; j++){
-						var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString(),cor);
-						var d = {html:html};
-						var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-						tempNode.isleaf = true;			
+				var cabeca = retorno.data[i].nome+" - "+retorno.data[i].titulo;
+				if (cabeca != "undefined - undefined"){
+					var html = "<span style='color:"+cor+"' >"+cabeca;
+					var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1),id_ws:"",layer:retorno.data[i].nome};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					if(!retorno.data[i].estilos)
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+					if(retorno.data[i].estilos){
+						var ns = retorno.data[i].estilos.length;
+						for (j=0;j<ns; j++){
+							var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString(),cor);
+							var d = {html:html};
+							var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+							tempNode.isleaf = true;			
+						}
 					}
+					if(cor == "rgb(51, 102, 102)")
+					{var cor = "rgb(47, 70, 50)";}
+					else{var cor = "rgb(51, 102, 102)";}		
 				}
-				if(cor == "rgb(51, 102, 102)")
-				{var cor = "rgb(47, 70, 50)";}
-				else{var cor = "rgb(51, 102, 102)";}		
 			}
 			node.loadComplete();
 		};
@@ -18342,6 +18349,18 @@ i3GEO.barraDeBotoes = {
 	*/
 	PERMITEDESLOCAR: true,
 	/*
+	Property: ATIVAMENUCONTEXTO
+	
+	Indica se o menu de contexto deve ser ativado
+	
+	Type:
+	{Boolean}
+	
+	Default:
+	{true}
+	*/
+	ATIVAMENUCONTEXTO: false,
+	/*
 	Property: LISTABOTOES
 	
 	Objeto com a lista de botões.
@@ -18539,14 +18558,13 @@ i3GEO.barraDeBotoes = {
 		if (barraZoom == true)
 		{
 			if (navn){temp += '<div style="text-align:center;position:relative;left:9px" >';}
-			temp += '<div id="vertMaisZoom" ></div><div id="vertBGDiv" name="vertBGDiv" tabindex="0" x2:role="role:slider" state:valuenow="0" state:valuemin="0" state:valuemax="200" title="Zoom" >';
+			temp += '<div id="vertMaisZoom" style="top:4px;"></div><div id="vertBGDiv" name="vertBGDiv" tabindex="0" x2:role="role:slider" state:valuenow="0" state:valuemin="0" state:valuemax="200" title="Zoom" >';
 			temp += '<div id="vertHandleDivZoom" ><img alt="" class="slider" src="'+i3GEO.util.$im("branco.gif")+'" /></div></div>';
 			temp += '<div id=vertMenosZoom ></div>';
 			if (navn){temp += '</div>';}
 		}
 		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div></div>';
 		novoel.innerHTML = temp;
-		//necessário para impedir o desenho da rosa dos ventos
 		novoel.onmouseover = function(){
 			//objposicaocursor.imgx = 0;
 			if($i("i3geo_rosa"))
@@ -18567,6 +18585,9 @@ i3GEO.barraDeBotoes = {
 			}		
 		}
 		document.body.appendChild(novoel);
+		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO)
+		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);
+
 		//copia os botoes do HTML para a janela
 		if ($i(idconteudo))
 		{
@@ -18780,12 +18801,53 @@ i3GEO.barraDeBotoes = {
 			};
 		}
 		i3GEO.barraDeBotoes.BARRAS.push(YAHOO.janelaBotoes.xp.panel);
-		YAHOO.janelaBotoes.xp.panel.show();		
+		YAHOO.janelaBotoes.xp.panel.show();
+		//
+		//menu de contexto
+		//
+		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO){
+			i3GEO.barraDeBotoes.ativaMenuContexto(idconteudonovo);
+		}	
+	},
+	/*
+	Function: ativaMenuContexto
+	
+	Ativa o menu de contexto acionado com o botão direito do mouse
+	
+	*/
+	ativaMenuContexto: function(idbarra){
+		function executar(a,b,c){
+			eval(c)
+		};
+		var oFieldContextMenuItemData = [
+			{ text: "<b>Fechar</b><hr>"},
+			{ text: "Fechar barra", onclick: { fn: executar, obj: "i3GEO.barraDeBotoes.fecha('"+idbarra+"')" } },
+			{ text: "Barra normal", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.AUTOALTURA=false;i3GEO.barraDeBotoes.PERMITEFECHAR=true;i3GEO.barraDeBotoes.PERMITEDESLOCAR=true;i3GEO.barraDeBotoes.recria('"+idbarra+"')" } },
+			{ text: "Barra fixa", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.AUTOALTURA=true;i3GEO.barraDeBotoes.PERMITEFECHAR=false;i3GEO.barraDeBotoes.PERMITEDESLOCAR=false;i3GEO.barraDeBotoes.recria('"+idbarra+"')" } },
+			{ text: "Remove transição", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.TRANSICAOSUAVE=false;" } },
+			{ text: "Ativa transição", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.TRANSICAOSUAVE=true;" } }
+		];
+		var oFieldContextMenu = new YAHOO.widget.ContextMenu(
+			"contexto_"+idbarra,{
+				trigger: idbarra,
+				itemdata: oFieldContextMenuItemData,
+				lazyload: true
+			}
+		);
+		var onFieldMenuRender = function(){
+			eval("var id = 'contexto_"+idbarra+"'");
+			$i(id).style.zIndex = 50000;
+		};
+		oFieldContextMenu.subscribe("render", onFieldMenuRender);
 	},
 	/*
 	Function: reativa
 	
 	Reativa as barras de ferramentas já criadas
+	
+	Essa opção apenas aplica o método "show" aos objetos armazenados em i3GEO.barraDeBotoes.BARRAS
+	
+	Se a barra não existir previamente, nada irá contecer
 	
 	Parameters:
 	
@@ -18801,6 +18863,60 @@ i3GEO.barraDeBotoes = {
 				i3GEO.barraDeBotoes.BARRAS[i].show();
 			}
 		}
+	},
+	/*
+	Function: recria
+	
+	Recria uma barra de ferramentas já aberta aplicando os parâmetros de configuração definidos
+	
+	Parameters:
+	
+	id {String} - id da barra
+	*/
+	recria: function(id){
+		var n = i3GEO.barraDeBotoes.BARRAS.length;
+		for(i=0;i<n;i++){
+			if(i3GEO.barraDeBotoes.BARRAS[i].id == id){
+				//remove o menu de contexto
+				var temp = $i("contexto_"+id);
+				if(temp){
+					temp.parentNode.removeChild(temp);
+				}
+				var novoel = document.createElement("div");
+				novoel.id = "barraTemporaria"+i;
+				novoel.innerHTML = $i(i3GEO.barraDeBotoes.BARRAS[i].id+"_").innerHTML;
+				document.body.appendChild(novoel);
+				//verifica se tem o slide de zoom
+				var barraZoom = false;
+				var temp = $i("vertMaisZoom");
+				if(temp){
+					var temp = temp.parentNode.parentNode;
+					if(temp.id == id){var barraZoom = true;}
+				}
+				var x = parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.left);
+				var y = parseInt($i(i3GEO.interface.IDCORPO).style.top)+10;//parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.top);
+				i3GEO.barraDeBotoes.BARRAS[i].destroy();
+				i3GEO.barraDeBotoes.inicializaBarra(novoel.id,i3GEO.barraDeBotoes.BARRAS[i].id+"x",barraZoom,x,y);
+			}
+		}
+		i3GEO.barraDeBotoes.ativaBotoes();
+	},
+	/*
+	Function: fecha
+	
+	Fecha uma barra de ferramentas
+	
+	Parameters:
+	
+	id {String} - id que identifica a barra. Corresponde ao parâmetro idconteudonovo da função de inicialização das barras
+	*/
+	fecha: function(id){
+		var n = i3GEO.barraDeBotoes.BARRAS.length;
+		for(i=0;i<n;i++){
+			if(i3GEO.barraDeBotoes.BARRAS[i].id == id){
+				$i(id+"_c").style.visibility = "hidden";
+			}
+		}	
 	}
 };
 //YAHOO.log("carregou classe barradebotoes", "Classes i3geo");

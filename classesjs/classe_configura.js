@@ -286,6 +286,8 @@ i3GEO.configura = {
 	
 	Imagens utilizadas para os cursores do mouse mostrados no mapa
 	
+	A manipulação dos cursores é feita com i3GEO.util.mudaCursor
+	
 	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
 
 	Type:
@@ -301,7 +303,9 @@ i3GEO.configura = {
 		"distancia":
 		{ff:"/imagens/cursores/distancia.png",ie:"crosshair"},
 		"zoom":
-		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"}
+		{ff:"/imagens/cursores/zoom.png",ie:"/imagens/cursores/zoom.cur"},
+		"contexto":
+		{ff:"/imagens/cursores/contexto.png",ie:"/imagens/cursores/contexto.cur"}
 	},
 	/*
 	Variable: listaDePropriedadesDoMapa

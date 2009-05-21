@@ -294,23 +294,26 @@ i3GEO.arvoreDeTemas = {
 			catch(m){node.loadComplete();return;}
 			var cor = "rgb(51, 102, 102)";
 			for (i=0;i<n; i++){
-				var html = "<span style='color:"+cor+"' >"+retorno.data[i].nome+" - "+retorno.data[i].titulo;
-				var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1),id_ws:"",layer:retorno.data[i].nome};
-				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
-				if(!retorno.data[i].estilos)
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
-				if(retorno.data[i].estilos){
-					var ns = retorno.data[i].estilos.length;
-					for (j=0;j<ns; j++){
-						var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString(),cor);
-						var d = {html:html};
-						var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
-						tempNode.isleaf = true;			
+				var cabeca = retorno.data[i].nome+" - "+retorno.data[i].titulo;
+				if (cabeca != "undefined - undefined"){
+					var html = "<span style='color:"+cor+"' >"+cabeca;
+					var d = {html:html,url:node.data.url,nivel:(node.data.nivel*1 + 1),id_ws:"",layer:retorno.data[i].nome};
+					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
+					if(!retorno.data[i].estilos)
+					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.listaLayersWMS, 1);
+					if(retorno.data[i].estilos){
+						var ns = retorno.data[i].estilos.length;
+						for (j=0;j<ns; j++){
+							var html = i3GEO.arvoreDeTemas.montaTextoTemaWMS(node.data.url,retorno.data[i].nome,retorno.data[i].estilos[j].nome,retorno.data[i].estilos[j].titulo,retorno.data[i].srs.toString(),retorno.data[i].formatsinfo.toString(),retorno.data[i].version.toString(),retorno.data[i].formats.toString(),cor);
+							var d = {html:html};
+							var tempNodeS = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+							tempNode.isleaf = true;			
+						}
 					}
+					if(cor == "rgb(51, 102, 102)")
+					{var cor = "rgb(47, 70, 50)";}
+					else{var cor = "rgb(51, 102, 102)";}		
 				}
-				if(cor == "rgb(51, 102, 102)")
-				{var cor = "rgb(47, 70, 50)";}
-				else{var cor = "rgb(51, 102, 102)";}		
 			}
 			node.loadComplete();
 		};
