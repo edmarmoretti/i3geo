@@ -301,8 +301,13 @@ i3GEO.barraDeBotoes = {
 		if (barraZoom == true)
 		{
 			if (navn){temp += '<div style="text-align:center;position:relative;left:9px" >';}
-			temp += '<div id="vertMaisZoom" style="top:4px;"></div><div id="vertBGDiv" name="vertBGDiv" tabindex="0" x2:role="role:slider" state:valuenow="0" state:valuemin="0" state:valuemax="200" title="Zoom" >';
+			var estilo = "top:4px;";
+			if(navm){var estilo = "top:4px;left:-2px;";}
+			temp += '<div id="vertMaisZoom" style="'+estilo+'"></div><div id="vertBGDiv" name="vertBGDiv" tabindex="0" x2:role="role:slider" state:valuenow="0" state:valuemin="0" state:valuemax="200" title="Zoom" >';
 			temp += '<div id="vertHandleDivZoom" ><img alt="" class="slider" src="'+i3GEO.util.$im("branco.gif")+'" /></div></div>';
+			if(navm)
+			temp += '<div id=vertMenosZoom style="left:-1px;" ></div>';
+			else
 			temp += '<div id=vertMenosZoom ></div>';
 			if (navn){temp += '</div>';}
 		}
@@ -563,7 +568,7 @@ i3GEO.barraDeBotoes = {
 			eval(c)
 		};
 		var oFieldContextMenuItemData = [
-			{ text: "<b>Fechar</b><hr>"},
+			{ text: "<b>Fechar</b>"},
 			{ text: "Fechar barra", onclick: { fn: executar, obj: "i3GEO.barraDeBotoes.fecha('"+idbarra+"')" } },
 			{ text: "Barra normal", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.AUTOALTURA=false;i3GEO.barraDeBotoes.PERMITEFECHAR=true;i3GEO.barraDeBotoes.PERMITEDESLOCAR=true;i3GEO.barraDeBotoes.recria('"+idbarra+"')" } },
 			{ text: "Barra fixa", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.AUTOALTURA=true;i3GEO.barraDeBotoes.PERMITEFECHAR=false;i3GEO.barraDeBotoes.PERMITEDESLOCAR=false;i3GEO.barraDeBotoes.recria('"+idbarra+"')" } },
@@ -633,6 +638,9 @@ i3GEO.barraDeBotoes = {
 				var barraZoom = false;
 				var temp = $i("vertMaisZoom");
 				if(temp){
+					if(navm)
+					var temp = temp.parentNode;
+					else
 					var temp = temp.parentNode.parentNode;
 					if(temp.id == id){var barraZoom = true;}
 				}
