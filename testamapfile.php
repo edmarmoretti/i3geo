@@ -132,6 +132,7 @@ function verifica($map)
 	
 	if(($tipo == "") || ($tipo == "todos"))
 	echo "<hr><br><br><span style='color:red' ><b>Testando: $tema </span><pre></b>";
+	if(!file_exists($tema)){echo "Arquivo ".$map." não encontrado.";exit;}
 	if ($tema != "")
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -216,7 +217,17 @@ function verifica($map)
 		}
 		$objImagem = @$mapa->draw();
 		if (!$objImagem)
-		{echo "Problemas ao gerar o mapa<br>";return;}
+		{
+			echo "Problemas ao gerar o mapa<br>";
+			$error = "";
+			$error = ms_GetErrorObj();
+			while($error && $error->code != MS_NOERR)
+			{
+				echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
+				$error = $error->next();
+			}
+			return;
+		}
 		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);
