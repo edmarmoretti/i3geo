@@ -83,6 +83,18 @@ i3GEO.interface = {
 	*/
 	IDMAPA: "",
 	/*
+	Property: ATIVAMENUCONTEXTO
+
+	Indica se o menu de contexto deve ser ativado
+
+	Type:
+	{Boolean}
+
+	Default:
+	{true}
+	*/
+	ATIVAMENUCONTEXTO: false,
+	/*
 	Function: redesenha
 	
 	Aplica o método redesenha da interface atual
@@ -171,8 +183,46 @@ i3GEO.interface = {
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgS' /></td><td class=verdeclaro ></td></tr>";
 			ins += "</table>";
 			$i(i3GEO.interface.IDCORPO).innerHTML = ins;
-			i3GEO.interface.IDMAPA = "img";	
+			i3GEO.interface.IDMAPA = "img";
 		},
+		/*
+		Function: ativaMenuContexto
+	
+		Ativa o menu de contexto acionado com o botão direito do mouse
+	
+		*/
+		ativaMenuContexto: function(){
+			//remove o menu de contexto se existir
+			var temp = $i("contexto_"+i3GEO.interface.IDMAPA);
+			if(temp){
+				temp.parentNode.removeChild(temp);
+			}
+			function executar(a,b,c){
+				eval(c);
+			};
+			var oFieldContextMenuItemData = [
+				{ text: "&nbsp;<span class='container-close'></span>"},
+				{ text: "<img class='rosamais' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-4px;'> Aproxima</span>", onclick: { fn: executar, obj: "i3GEO.navega.zoomin(i3GEO.configura.locaplic,i3GEO.configura.sid);" } },
+				{ text: "<img class='rosamenos' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-4px;'> Afasta</span>", onclick: { fn: executar, obj: "i3GEO.navega.zoomout(i3GEO.configura.locaplic,i3GEO.configura.sid);" } },
+				{ text: "<img class='rosanorte' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-7px;'> Norte</span>", onclick: { fn: executar, obj: "i3GEO.navega.panFixo('','','norte','','','');" } },
+				{ text: "<img class='rosasul' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-7px;'> Sul</span>", onclick: { fn: executar, obj: "i3GEO.navega.panFixo('','','sul','','','');" } },
+				{ text: "<img class='rosaleste' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-7px;'> Leste</span>", onclick: { fn: executar, obj: "i3GEO.navega.panFixo('','','leste','','','');" } },
+				{ text: "<img class='rosaoeste' style='height:18px;' src='"+$im("branco.gif")+"'><span style='position:relative;top:-7px;'> Oeste</span>", onclick: { fn: executar, obj: "i3GEO.navega.panFixo('','','oeste','','','');" } },
+				{ text: "Captura", onclick: { fn: executar, obj: "i3GEO.gadgets.quadros.listaImagens();" } }
+			];
+			var oFieldContextMenu = new YAHOO.widget.ContextMenu(
+				"contexto_"+i3GEO.interface.IDMAPA,{
+					trigger: i3GEO.interface.IDMAPA,
+					itemdata: oFieldContextMenuItemData,
+					lazyload: true
+				}
+			);
+			var onFieldMenuRender = function(){
+				eval("var id = 'contexto_"+i3GEO.interface.IDMAPA+"'");
+				$i(id).style.zIndex = 50000;
+			};
+			oFieldContextMenu.subscribe("render", onFieldMenuRender);
+		},		
 		inicia:function(){
 			if ($i("contemImg"))
 			{var elemento = "contemImg";}
@@ -227,6 +277,8 @@ i3GEO.interface = {
 			{
 				if (i3GEO.configura.map3d == ""){document.getElementById("botao3d").style.display="none";}
 			}
+			if(i3GEO.interface.ATIVAMENUCONTEXTO)
+			i3GEO.interface.padrao.ativaMenuContexto();
 		}
 	},
 	/*

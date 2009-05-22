@@ -241,7 +241,7 @@ i3GEO.eventos = {
 	
 	Executa as funções armazenadas em MOUSECLIQUE.
 	*/
-	mousecliqueMapa: function(){
+	mousecliqueMapa: function(exy){
 		if (i3GEO.eventos.MOUSECLIQUE.length > 0){
 			var f = i3GEO.eventos.MOUSECLIQUE.length-1;
 			if (f >= 0){
@@ -410,18 +410,35 @@ i3GEO.eventos = {
 		docMapa.onmousedown = function(exy){
 			try{
 				i3GEO.eventos.posicaoMouseMapa(exy);
+				if(navm)
+				{var k = event.button;}
+				else
+				{var k = exy.button;}
+				if(k != 2)
 				i3GEO.eventos.mousedownMapa();
 			}
 			catch(e){var e = "";}
 		};
-		docMapa.onclick = function(){
-			try
-			{i3GEO.eventos.mousecliqueMapa();}
+		docMapa.onclick = function(exy){
+			try{
+				if(navm)
+				{var k = event.button;}
+				else
+				{var k = exy.button;}
+				if(k != 2)
+				i3GEO.eventos.mousecliqueMapa();
+			}
 			catch(e){var e = "";}
 		};
-		docMapa.onmouseup = function(){
-			try
-			{i3GEO.eventos.mouseupMapa();}
+		docMapa.onmouseup = function(exy){
+			try{
+				if(navm)
+				{var k = event.button;}
+				else
+				{var k = exy.button;}
+				if(k != 2)				
+				i3GEO.eventos.mouseupMapa();
+			}
 			catch(e){var e = "";}
 		};
 	},

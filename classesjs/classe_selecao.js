@@ -207,7 +207,10 @@ i3GEO.selecao = {
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","i3geoboxSel",i3GEO.configura.locaplic);
 			if($i("img")){
 				$i("img").title = "";
-				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
+				var temp = "zoom";
+				if(i3GEO.interface.ATIVAMENUCONTEXTO)
+				var temp = "zoom_contexto";
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 			}
 		},
 		/*

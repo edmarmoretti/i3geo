@@ -290,6 +290,9 @@ i3GEO.navega = {
 		//YAHOO.log("panfixo", "i3geo");
 		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
 		if(sid != ""){i3GEO.configura.sid = sid;}
+		if(w == ""){var w = i3GEO.parametros.w;}
+		if(h == ""){var h = i3GEO.parametros.h;}
+		if(escala == ""){var escala = i3GEO.parametros.mapscale;}
 		if (direcao == "norte"){
 			var y = h / 6;
 			var x = w / 2;
@@ -323,7 +326,7 @@ i3GEO.navega = {
 			var x = w / 6;
 		}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-		i3GEO.php.pan(i3GEO.atualiza,escala,tipo,x,y);
+		i3GEO.php.pan(i3GEO.atualiza,escala,"",x,y);
 	},
 	/*
 	Function: mostraRosaDosVentos
@@ -533,10 +536,14 @@ i3GEO.navega = {
 				};
 				novoel.onmouseup = function(){i3GEO.navega.zoomBox.termina()};
 				document.body.appendChild(novoel);
-				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","i3geoboxZoom",i3GEO.configura.locaplic);
-				if($i("img")){
+				
+				if(i3GEO.interface.ATUAL == "padrao"){
 					$i("img").title = "";
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","img",i3GEO.configura.locaplic);
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","i3geoboxZoom",i3GEO.configura.locaplic);
+					var temp = "zoom";
+					if(i3GEO.interface.ATIVAMENUCONTEXTO)
+					var temp = "zoom_contexto";
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 				}
 			}
 		},

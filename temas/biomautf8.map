@@ -1,0 +1,34 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  LAYER
+    CONNECTION "user=geodados password=geodados dbname=geodados host=pgsql1.mma.gov.br port=5432"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select the_geom,gid,convert_to(cd_legenda,'UTF8') as cd_legenda FROM brasil.brareg1) as foo USING UNIQUE gid USING SRID=4291"
+    LABELITEM "cd_legenda"
+    METADATA
+      "CLASSE"	"SIM"
+      "ITENSDESC"	"Nome"
+      "ESCALA"	"5000000"
+      "EXTENSAO"	"-75.233614607 -33.7515829981 -27.592958622 5.272156"
+      "ITENS"	"cd_legenda"
+      "TEMA"	"Bioma"
+    END
+    NAME "bioma"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        COLOR 51 127 17
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+  END
+
+END
+
