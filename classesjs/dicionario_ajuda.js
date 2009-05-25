@@ -659,8 +659,7 @@ g_traducao_ajuda = {
 			complemento:"Após definido o período, a ferramenta fará a busca das imagens para sua apresentação em sequência. Ao parar a animação, a imagem mostrada poderá ser acrescentada ao mapa como uma nova camada. A visualização das imagens só é possível após a carga de todas as datas selecionadas. Caso seja necessário cancelar a carga de uma ou mais datas, deve-se clicar em 'parar' na lista de imagens que estão sendo carregadas.",
 			tela:"ferramentas/wmstime/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas"
-		},
-
+		}
 	}
 };
 

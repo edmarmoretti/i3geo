@@ -43,6 +43,8 @@ i3GEO.barraDeBotoes = {
 	
 	Ajusta automaticamente a altura das barras conforme a altura do mapa.
 	
+	Esta opção não tem efeito se a barra contiver a barra de zoom (isso ocorre em função de um bug do YIU, que causa erro na barra nessas condições)
+	
 	Type:
 	{boolean}
 	*/
@@ -284,7 +286,6 @@ i3GEO.barraDeBotoes = {
 		novoel.style.background="white";
 		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 			if (navm){
-				
 				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';
 			}
 			else{
@@ -311,7 +312,7 @@ i3GEO.barraDeBotoes = {
 			temp += '<div id=vertMenosZoom ></div>';
 			if (navn){temp += '</div>';}
 		}
-		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div></div>';
+		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div>';
 		novoel.innerHTML = temp;
 		novoel.onmouseover = function(){
 			//objposicaocursor.imgx = 0;
@@ -372,7 +373,7 @@ i3GEO.barraDeBotoes = {
 			}
 		}
 		YAHOO.namespace("janelaBotoes.xp");
-		if(i3GEO.barraDeBotoes.AUTOALTURA == false)
+		if(i3GEO.barraDeBotoes.AUTOALTURA == false || barraZoom == true )
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
 		else
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
@@ -556,6 +557,8 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO){
 			i3GEO.barraDeBotoes.ativaMenuContexto(idconteudonovo);
 		}	
+		if($i(idconteudonovo+"_h"))
+		$i(idconteudonovo+"_h").className = "hd2";
 	},
 	/*
 	Function: ativaMenuContexto

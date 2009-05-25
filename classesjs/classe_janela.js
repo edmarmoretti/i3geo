@@ -111,11 +111,13 @@ i3GEO.janela = {
 	
 	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
 	
+	classe {String} - (opcional) classe CSS que será aplicada à barra de menu. Por default o valor é hd2
+
 	Return:
 	
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe){
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -126,15 +128,23 @@ i3GEO.janela = {
 		if (arguments.length < 7 || id == ""){
 			var id = "wdoca";
 			var modal = false;
+			var classe = "hd";
 		}
 		if (arguments.length == 7){
 			var modal = false;
+			var classe = "hd";
+		}
+		if (arguments.length == 8){
+			var classe = "hd";
 		}
 		var wlargura_ = parseInt(wlargura)+0+"px";
 		YAHOO.namespace("janelaDoca.xp");
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
-		var ins = '<div id="'+id+'_cabecalho" class="hd">'+texto+'</div><div id="'+id+'_corpo" class="bd">';
+		var ins = '<div id="'+id+'_cabecalho" class="hd">';
+		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
+		ins += texto;
+		ins += '</div><div id="'+id+'_corpo" class="bd">';
 		if(wsrc != "")
 		ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
 		ins += '</div>';
@@ -164,6 +174,7 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
+		$i(id+'_cabecalho').className = classe;
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},

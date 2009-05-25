@@ -23,7 +23,19 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 ins = ""
 tema = ""
+//
+//detecta iframe id
+//
+/*
+var frs = window.parent.document.getElementsByTagName("iframe")
+var nframes = frs.length;
 
+for(f=0;f<nframes;f++){
+	if(frs[f].src == window.location.href){
+		alert(frs[f].parentNode.parentNode.id)
+	}
+}
+*/
 comboTemasSel("temasComSel",function(retorno){comboTemas = retorno.dados;t0()})
 
 

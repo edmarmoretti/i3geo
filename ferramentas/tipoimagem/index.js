@@ -28,7 +28,6 @@ YAHOO.example.init = function ()
 	}
    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 }()
-
 function aplicar()
 {
 	var ipt = $i("opcoes").getElementsByTagName("input")

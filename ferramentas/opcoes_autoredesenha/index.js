@@ -20,12 +20,8 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 $i("t").value = window.parent.i3GEO.navega.autoRedesenho.INTERVALO
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao1");new YAHOO.widget.Button("botao2");}
-	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
+new YAHOO.widget.Button("botao1");
+new YAHOO.widget.Button("botao2");
 function executaf()
 {
 	window.parent.i3GEO.navega.autoRedesenho.desativa()

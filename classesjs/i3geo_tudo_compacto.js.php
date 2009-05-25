@@ -12863,7 +12863,7 @@ i3GEO.maparef = {
 			var ins = "";
 			if(i3GEO.maparef.PERMITEDESLOCAR){
 				ins += '<div class="hd" style="text-align:left;z-index:20;">';
-				ins += '<span id=maparefmaismenosZoom ';
+				ins += '<span id=maparefmaismenosZoom > ';
 				var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 				var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
@@ -12937,6 +12937,7 @@ i3GEO.maparef = {
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.maparef.atualiza()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.maparef.atualiza()");}
 		this.atualiza();
+		$i("i3geo_winRef_h").className = "hd2";
 	},
 	/*
 	Function: atualiza
@@ -13501,11 +13502,13 @@ i3GEO.janela = {
 	
 	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
 	
+	classe {String} - (opcional) classe CSS que será aplicada à barra de menu. Por default o valor é hd2
+
 	Return:
 	
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe){
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -13516,15 +13519,23 @@ i3GEO.janela = {
 		if (arguments.length < 7 || id == ""){
 			var id = "wdoca";
 			var modal = false;
+			var classe = "hd";
 		}
 		if (arguments.length == 7){
 			var modal = false;
+			var classe = "hd";
+		}
+		if (arguments.length == 8){
+			var classe = "hd";
 		}
 		var wlargura_ = parseInt(wlargura)+0+"px";
 		YAHOO.namespace("janelaDoca.xp");
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
-		var ins = '<div id="'+id+'_cabecalho" class="hd">'+texto+'</div><div id="'+id+'_corpo" class="bd">';
+		var ins = '<div id="'+id+'_cabecalho" class="hd">';
+		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
+		ins += texto;
+		ins += '</div><div id="'+id+'_corpo" class="bd">';
 		if(wsrc != "")
 		ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
 		ins += '</div>';
@@ -13554,6 +13565,7 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
+		$i(id+'_cabecalho').className = classe;
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
@@ -18453,6 +18465,8 @@ i3GEO.barraDeBotoes = {
 	
 	Ajusta automaticamente a altura das barras conforme a altura do mapa.
 	
+	Esta opção não tem efeito se a barra contiver a barra de zoom (isso ocorre em função de um bug do YIU, que causa erro na barra nessas condições)
+	
 	Type:
 	{boolean}
 	*/
@@ -18694,7 +18708,6 @@ i3GEO.barraDeBotoes = {
 		novoel.style.background="white";
 		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 			if (navm){
-				
 				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';
 			}
 			else{
@@ -18721,7 +18734,7 @@ i3GEO.barraDeBotoes = {
 			temp += '<div id=vertMenosZoom ></div>';
 			if (navn){temp += '</div>';}
 		}
-		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div></div>';
+		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div>';
 		novoel.innerHTML = temp;
 		novoel.onmouseover = function(){
 			//objposicaocursor.imgx = 0;
@@ -18782,7 +18795,7 @@ i3GEO.barraDeBotoes = {
 			}
 		}
 		YAHOO.namespace("janelaBotoes.xp");
-		if(i3GEO.barraDeBotoes.AUTOALTURA == false)
+		if(i3GEO.barraDeBotoes.AUTOALTURA == false || barraZoom == true )
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
 		else
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
@@ -18966,6 +18979,8 @@ i3GEO.barraDeBotoes = {
 		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO){
 			i3GEO.barraDeBotoes.ativaMenuContexto(idconteudonovo);
 		}	
+		if($i(idconteudonovo+"_h"))
+		$i(idconteudonovo+"_h").className = "hd2";
 	},
 	/*
 	Function: ativaMenuContexto

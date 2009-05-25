@@ -20,8 +20,12 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //
+imagemAguardeCabecalho = false;
 g_sid = "";
-try{g_sid = window.parent.i3GEO.configura.sid;}
+try{
+	g_sid = window.parent.i3GEO.configura.sid;
+	g_locaplic = window.parent.i3GEO.configura.locaplic;
+}
 catch(e){}
 $i = function(id)
 {return document.getElementById(id);}
@@ -82,11 +86,15 @@ function aguarde(tipo)
 	if (tipo == "block")
 	{
 		$i("mascaraaguarde").style.display = "block";
+		if(imagemAguardeCabecalho)
+		imagemAguardeCabecalho.style.visibility="visible";
 	}
 	if (tipo == "none")
 	{
 		if ($i("mascaraaguarde"))
 		{$i("mascaraaguarde").style.display="none";}
+		if(imagemAguardeCabecalho)
+		imagemAguardeCabecalho.style.visibility="hidden";
 	}
 	if (document.getElementById("aguarde"))
 	{document.getElementById("aguarde").style.display = "none";}
@@ -797,6 +805,19 @@ function parametrosURL()
 	var temp = (window.location.href).split("tema=");
 	if (temp[1])
 	{tema = (temp[1].split("&"))[0];}
+	//
+	//obtem gif de aguarde do cabecalho da janela que contém o iframe atual da ferramenta
+	//
+	try{
+		var fs = window.parent.document.getElementsByTagName("iframe");
+		var nfs = fs.length;
+		for(i=0;i<nfs;i++){
+			if(fs[i].src == window.location.href){
+				imagemAguardeCabecalho = fs[i].parentNode.parentNode.id;
+				imagemAguardeCabecalho = window.parent.document.getElementById(imagemAguardeCabecalho+"_imagemCabecalho");
+			}
+		}
+	}catch(e){}
 }
 //faz o zoom no mapa para uma extensao
 function zoomf(ext)

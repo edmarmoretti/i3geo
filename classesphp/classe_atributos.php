@@ -344,8 +344,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						{
 							$valori = ($shape->values[$item]);
 						}
-						if (function_exists("mb_convert_encoding"))
-						{$valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");}
+						$valori = $valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
 					}
 					//if (in_array($shp_index,$shp_atual))
