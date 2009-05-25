@@ -279,6 +279,8 @@ i3GEO.interface = {
 			}
 			if(i3GEO.interface.ATIVAMENUCONTEXTO)
 			i3GEO.interface.padrao.ativaMenuContexto();
+			if(i3GEO.configura.visual != "default")
+			i3GEO.gadgets.visual.troca(i3GEO.configura.visual);
 		}
 	},
 	/*
