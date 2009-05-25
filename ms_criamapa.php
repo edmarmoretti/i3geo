@@ -84,6 +84,26 @@ debug - ativa o retorno de mensagens de erro do PHP sim|nao
 idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js
 
 kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
+
+Parâmetros utilizados para adicionar uma camada baseada em um wms
+
+Testar com http://localhost/i3geo/ms_criamapa.php?url_wms=http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&layer_wms=biomas&style_wms=default&nome_wms=Biomas do Brasil&srs_wms=epsg:4291&image_wms=image/png&versao_wms=1.1.1
+
+url_wms - endereço
+
+layer_wms - nome do layer
+
+style_wms - estilo do layer
+
+nome_wms - nome da camada (titulo)
+
+srs_wms - código da projeção
+
+image_wms - tipo de imagem disponível
+
+versao_wms - versão do WMS
+
+
 */
 
 /*
@@ -152,7 +172,7 @@ $tituloInstituicao_ = $tituloInstituicao;
 $atlasxml_ = $atlasxml;
 $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
-$kmlurl_ = $kmlurl;
+if(isset($kmlurl)){$kmlurl_ = $kmlurl;}
 //
 //se houver string de conexão para substituição
 //o modo cgi não irá funcionar
@@ -211,6 +231,7 @@ $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
+if(isset($kmlurl_))
 $_SESSION["kmlurl"] = $kmlurl_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
@@ -432,6 +453,14 @@ Note: Inclui uma camada de polígonos utilizando os parâmetros passados pela URL
 */
 if (isset($poligonos))
 {inserePoligonosUrl();}
+/*
+Note: inclui um tema wms se for o caso
+
+Verifica os parâmetros WMS e adiciona uma camada se for o caso
+*/
+if(isset($url_wms))
+{incluiTemaWms();}
+
 $error = ms_GetErrorObj();
 while($error && $error->code != MS_NOERR)
 {
@@ -439,6 +468,7 @@ while($error && $error->code != MS_NOERR)
 	$error = $error->next();
 }
 ms_ResetErrorList();
+
 //
 //se vc quiser parar o script aqui, para verificar erros, descomente a linha abaixo
 //
@@ -970,5 +1000,20 @@ function inserePoligonosUrl()
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
+}
+/*
+Function: incluiTemaWms
+*/
+function incluiTemaWms()
+{
+	global $nome_wms,$url_wms,$layer_wms,$style_wms,$srs_wms,$image_wms,$versao_wms,$tmpfname,$locaplic;
+	include_once ($locaplic."/classesphp/classe_mapa.php");
+	if(!$nome_wms)
+	{$nome = $layer_wms." ".$style_wms;}
+	else
+	$nome = $nome_wms;
+	$m = new Mapa($tmpfname);
+ 	$m->adicionatemawms($layer_wms,$url_wms,$style_wms,$srs_wms,$image_wms,$locaplic,"",$versao_wms,$nome,"","","","","nao","text/plain","");
+	$salvo = $m->salva($tmpfname);
 }
 ?>
