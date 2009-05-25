@@ -1031,6 +1031,15 @@ line-height:2;
 padding:0 10px;
 }
 
+.yui-skin-sam .yui-panel .hd2 {
+background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) repeat-x scroll 0 0px;
+color:#000000;
+font-size:70%;
+font-weight:bold;
+line-height:2;
+padding:0 10px;
+}
+
 .yui-skin-sam .container-close {
 background:transparent url(../pacotes/yui252/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -300px;
 cursor:pointer;
