@@ -199,7 +199,7 @@ i3GEO.gadgets = {
 			if($i(id)){
 				if(!$i("xm")){
 					var ins = "<table style='text-align:center'><tr>";
-					ins += "<td>localiza X:&nbsp;</td>";
+					ins += "<td>X:&nbsp;</td>";
 					ins += "<td>"+$inputText(id,"315","xg","grau","3","-00")+"&nbsp;</td>";
 					ins += "<td>"+$inputText("","","xm","minuto","3","00")+"&nbsp;</td>";
 					ins += "<td>"+$inputText("","","xs","segundo","5","00.00")+"&nbsp;</td>";
@@ -297,7 +297,7 @@ i3GEO.gadgets = {
 				e.value = parseInt(i3GEO.parametros.mapscale);
 			};
 			if(!$i("i3geo_escalanum")){
-				var i = $inputText(id,"138","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
+				var i = $inputText(id,"145","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
 				var ins = "<table><tr><td>1:"+i;
 				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';
@@ -371,10 +371,13 @@ i3GEO.gadgets = {
 				{alert ("Digite uma palavra para busca!");return;}
 				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
 			}
-			var i = $inputText(id,"180","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
+			var i = $inputText(id,"200","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
 			var ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
-			$i(id).innerHTML = ins;
+			var temp = $i(id);
+			if(temp){
+				temp.innerHTML = ins;
+			}
 		}	
 	},
 	/*

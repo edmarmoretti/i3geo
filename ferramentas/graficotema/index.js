@@ -38,6 +38,7 @@ comboCamadas("selCamada",tema,function(retorno)
  	{$i("combot").innerHTML="";registrosf()}
  	else
  	{
+		$i("combot").style.display = "block"
 		$i("combot").innerHTML = "<div style=top:10px class=destaca >O tema escolhido &eacute; composto por mais de uma camada de dados. Selecione uma das camadas para listar:</div><br>"+retorno.dados
 		$i("selCamada").onchange = function()
 		{

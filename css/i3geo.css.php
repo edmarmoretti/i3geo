@@ -397,16 +397,15 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 /*ícone de aplicar*/
 .tic
 {
-	background-image:URL('../imagens/visual/default/sprite.png');
-	background-repeat: no-repeat;
-	background-position: 0px -650px;
-	width:10px;
-	height:9px;
+	background-image:url(../imagens/visual/default/sprite.png);
+	background-position:0px -650px;
+	background-repeat:no-repeat;
 	cursor:pointer;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	height:15px;
+	text-align:center;
+	width:25px;
+}
+
 }
 .x
 {
