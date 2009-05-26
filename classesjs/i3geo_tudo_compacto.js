@@ -11073,16 +11073,17 @@ i3GEO.interface = {
     		
     		i3GeoMap = new GMap2($i(i3GEO.interface.IDMAPA));
     		i3GeoMap.addMapType(G_PHYSICAL_MAP);
-    		
     		i3GeoMap.setMapType(eval(i3GEO.interface.googlemaps.TIPOMAPA));
-    		
+			
     		i3GeoMap.addControl(new GLargeMapControl());
     		i3GeoMap.addControl(new GMapTypeControl());
     		var bottomLeft = new GControlPosition(G_ANCHOR_BOTTOM_LEFT,new GSize(0,40));
     		i3GeoMap.addControl(new GScaleControl(),bottomLeft);
     		var bottomRight = new GControlPosition(G_ANCHOR_BOTTOM_RIGHT);
     		i3GeoMap.addControl(new GOverviewMapControl(),bottomRight);
-    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 4);   		
+    		
+    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), 4);
+
 			if(tile == false){
     			wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS(), i3GeoMap.getBounds());
 				i3GeoMap.addOverlay(wmsmap);
