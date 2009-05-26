@@ -1,13 +1,13 @@
 <html>
 <body>
-Isto é um teste!!!!!
-<input type=text value="" id="valorBuscaRapida" onchange="busca()"/>
+Digite a palavra para busca:<br>
+<input type=text value="" id="valorBuscaRapida" /><input type=button onclick="busca()" value="localizar" />
 <div style="width:310px;"><iframe style="width:310px;display:none;" id="resBuscaLugar" src=''></iframe></div>
 <script>
 i3GEO = {configura:{locaplic: "http://localhost/i3geo"}}
 function busca(){
 	var i = document.getElementById("resBuscaLugar")	
-	i.src = "../ferramentas/buscarapida/gadget.htm"
+	i.src = "../ferramentas/buscarapida/gadget.php?locaplic=http://localhost/i3geo&palavra="+document.getElementById("valorBuscaRapida").value
 	i.style.display = "block"
 }
 </script>
