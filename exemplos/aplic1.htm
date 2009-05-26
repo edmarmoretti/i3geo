@@ -1,0 +1,16 @@
+<html>
+<body>
+Isto é um teste!!!!!
+<input type=text value="" id="valorBuscaRapida" onchange="busca()"/>
+<div style="width:310px;"><iframe style="width:310px;display:none;" id="resBuscaLugar" src=''></iframe></div>
+<script>
+i3GEO = {configura:{locaplic: "http://localhost/i3geo"}}
+function busca(){
+	var i = document.getElementById("resBuscaLugar")	
+	i.src = "../ferramentas/buscarapida/gadget.htm"
+	i.style.display = "block"
+}
+</script>
+
+</body>
+</html>

@@ -20,8 +20,19 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
-parametrosURL()
-busca()
+/*
+O valor da palavra para busca deve ser devinida em um campo input com id igual a "valorBuscaRapida"
+
+A função que será executada quando o usuário clica no ícone de zoom é definida na variável global "funcaoZoom"
+*/
+i3GEOferramentas = {
+	buscaRapida:{
+		inicia: function(){
+			parametrosURL();
+			busca();
+		}
+	}
+}
 //pega a lista de temas editaveis
 function busca()
 {
@@ -44,7 +55,7 @@ function busca()
 						ins += nm;
 						var wkt = retorno.data.geonames[i].lugares[j].limite
 						var gid = retorno.data.geonames[i].lugares[j].gid
-						ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'>zoom</td></tr>"
+						ins += "</td><td onclick=\"zoom('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"mostraxy('"+wkt+"')\" onmouseout='escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
 					}
 				}
 			}
@@ -64,7 +75,7 @@ function busca()
 	$i("resultado").innerHTML = "Aguarde..."
 	var palavra = window.parent.document.getElementById("valorBuscaRapida").value
 	palavra = removeAcentos(palavra);
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=buscaRapida&palavra="+palavra+"&servico="+servico
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("json");
@@ -116,6 +127,8 @@ function adicionatema(obj)
 }
 function mostraxy(wkt)
 {
+	if(!window.parent.i3GEO){return;}
+	if(!window.parent.i3GEO.calculo){return;}
 	var re = new RegExp("POLYGON", "g")
 	wkt = wkt.replace(re,"")
 	wkt = wkt.split("(")[2].split(")")[0]
@@ -148,6 +161,10 @@ function mostraxy(wkt)
 }
 function zoom(wkt,layer,gid,nm)
 {
+    if(funcaoZoom != "default"){
+    	funcaoZoom.call(this,wkt,layer,gid,nm);
+    	return;
+    }
     var adicionaCamada = function(layer,gid,nm)
     {
 	 	var s = "&tema="+layer
@@ -194,6 +211,7 @@ function sortNumber(a,b)
 }
 function escondexy()
 {
+	if(!window.parent.$i){return;}
 	if (window.parent.$i("boxg"))
 	{
 		var box = window.parent.$i("boxg")
