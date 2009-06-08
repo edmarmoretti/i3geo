@@ -591,7 +591,6 @@ i3GEO.mapa = {
 				var temp = Math.random() + "b";
 				temp = temp.split(".");
 				g_nomepin = "pin"+temp[1];
-				//pontosdistobj = new pontosdist();
 				g_tipoacao = "textofid";
 				var janela = i3GEO.janela.cria("360px","250px",i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.insereToponimo()") < 0)

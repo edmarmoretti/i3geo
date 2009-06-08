@@ -11933,7 +11933,6 @@ i3GEO.mapa = {
 				var temp = Math.random() + "b";
 				temp = temp.split(".");
 				g_nomepin = "pin"+temp[1];
-				//pontosdistobj = new pontosdist();
 				g_tipoacao = "textofid";
 				var janela = i3GEO.janela.cria("360px","250px",i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.insereToponimo()") < 0)
@@ -12534,6 +12533,7 @@ i3GEO.analise = {
 		São registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
+			pontosdistobj = new Array();
 			i3GEO.analise.medeDistancia.criaJanela();
 			if (g_tipoacao != "mede"){
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.clique()") < 0)
@@ -12574,6 +12574,11 @@ i3GEO.analise = {
 				document.body.appendChild(novoel);
 				$i('pararraios').checked=true;
 			}
+			else{
+				if ($i("mostradistancia_calculo"))
+				{$i("mostradistancia_calculo").innerHTML = "";}
+			}
+			
 			YAHOO.namespace("janelaDocamede.xp");
 			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
