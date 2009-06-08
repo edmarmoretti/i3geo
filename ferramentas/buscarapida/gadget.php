@@ -1,3 +1,6 @@
+<?php
+include_once("../../classesphp/pega_variaveis.php");
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
       <link rel="stylesheet" type="text/css" href="../../css/ferramentas.css">
@@ -34,7 +37,7 @@ var mapaLugar = function(wkt,layer,gid,nm)
 	yMin = y[0]
 	yMax = y[(y.length)-1]
 	var ext = xMin+" "+yMin+" "+xMax+" "+yMax
-	var url = window.parent.i3GEO.configura.locaplic+"/ms_criamapa.php?srs_wms=epsg:4291&image_wms=image/png&versao_wms=1.1.1"
+	var url = "<?php echo $locaplic;?>/ms_criamapa.php?srs_wms=epsg:4291&image_wms=image/png&versao_wms=1.1.1"
 	url += "&url_wms=http://mapas.mma.gov.br/webservices/geonameswms.php?gid="+gid+"&";
 	url += "&layer_wms="+layer+"&style_wms=default"
 	url += "&nome_wms="+nm+" - "+layer
@@ -42,12 +45,9 @@ var mapaLugar = function(wkt,layer,gid,nm)
 	url += "&interface=googlemaps.phtml"
 	window.open(url)
 }
-i3GEObuscaRapida.funcaoZoom = mapaLugar
-i3GEObuscaRapida.inicia(
-   	window.parent.document.getElementById("valorBuscaRapida").value,
-   	window.parent.i3GEO.configura.locaplic
-)
-</script>
+i3GEO.buscaRapida.funcaoZoom = mapaLugar
+i3GEObuscaRapida.inicia("<?php echo $palavra;?>","<?php echo $locaplic;?>")
+  </script>
 
 
   </body>

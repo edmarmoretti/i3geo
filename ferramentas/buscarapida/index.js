@@ -25,19 +25,20 @@ O valor da palavra para busca deve ser devinida em um campo input com id igual a
 
 A função que será executada quando o usuário clica no ícone de zoom é definida na variável global "funcaoZoom"
 */
-i3GEOferramentas = {
-	buscaRapida:{
-		inicia: function(){
-			parametrosURL();
-			busca();
-		}
-	}
-}
-//pega a lista de temas editaveis
-function busca()
-{
-	var listaretorno = function(retorno)
-	{
+i3GEObuscaRapida = {
+	servico:"http://mapas.mma.gov.br/webservices/geonames.php",
+	funcaoZoom:"default",
+	inicia: function(palavra,locaplic){
+		aguarde("block")
+		$i("resultado").innerHTML = "Aguarde..."
+		palavra = removeAcentos(palavra);
+		var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+i3GEObuscaRapida.servico
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("json");
+		cp.call(p,"buscaRapida",i3GEObuscaRapida.montaResultado);	
+	},
+	montaResultado: function(retorno){
 		var ins = "Nada encontrado";
 		if (retorno.data)
 		{
@@ -69,17 +70,7 @@ function busca()
 		//cp.set_debug(2);
 		cp.set_response_type("json");
 		cp.call(p,"procurartemas",resultadoTemas);
-		
 	}
-	aguarde("block")
-	$i("resultado").innerHTML = "Aguarde..."
-	var palavra = window.parent.document.getElementById("valorBuscaRapida").value
-	palavra = removeAcentos(palavra);
-	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("json");
-	cp.call(p,"buscaRapida",listaretorno);	
 }
 function resultadoTemas(retorno)
 {
@@ -127,8 +118,11 @@ function adicionatema(obj)
 }
 function mostraxy(wkt)
 {
-	if(!window.parent.i3GEO){return;}
-	if(!window.parent.i3GEO.calculo){return;}
+	try{
+		if(!window.parent.i3GEO){return;}
+		if(!window.parent.i3GEO.calculo){return;}
+	}
+	catch(e){return;}
 	var re = new RegExp("POLYGON", "g")
 	wkt = wkt.replace(re,"")
 	wkt = wkt.split("(")[2].split(")")[0]
@@ -211,7 +205,10 @@ function sortNumber(a,b)
 }
 function escondexy()
 {
-	if(!window.parent.$i){return;}
+	try{
+		if(!window.parent.$i){return;}
+	}
+	catch(e){return;}
 	if (window.parent.$i("boxg"))
 	{
 		var box = window.parent.$i("boxg")

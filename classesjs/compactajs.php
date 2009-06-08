@@ -167,7 +167,8 @@ $jsfiles = array(
 "../pacotes/yui252/build/tabview/tabview-min.js",
 "../pacotes/yui252/build/animation/animation-min.js",
 "../pacotes/yui252/build/autocomplete/autocomplete-min.js",
-"../pacotes/cpaint/cpaint2.inc.js"
+"../pacotes/cpaint/cpaint2.inc.js",
+"classe_php.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";
 salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js","js");

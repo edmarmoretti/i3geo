@@ -7,14 +7,13 @@
 <body class="yui-skin-sam;" style="overflow:auto;">
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Aguarde...</div>
 
-<script src="../../pacotes/cpaint/cpaint2.inc.compressed.js" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="../funcoes.js"></script>
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 <script type="text/javascript">
-	//endereço do web service que será consultado
-    servico = "http://mapas.mma.gov.br/webservices/geonames.php"
-    funcaoZoom = "default"
-    i3GEOferramentas.buscaRapida.inicia()
+i3GEObuscaRapida.inicia(
+   	window.parent.document.getElementById("valorBuscaRapida").value,
+   	window.parent.i3GEO.configura.locaplic
+)
 </script>
 </body>
 </html>
