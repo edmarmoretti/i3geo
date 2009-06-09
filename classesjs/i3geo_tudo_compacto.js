@@ -17802,11 +17802,13 @@ i3GEO.arvoreDeTemas = {
 		}
 		if(i3GEO.arvoreDeTemas.INCLUISISTEMAS){
 			var retorno = function(){
-				var conteudo = "<b>Sistemas</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>";
-				var d = {html:conteudo};
-				var tempNode = new YAHOO.widget.HTMLNode(d,root, false,true);
-				var sis = i3GEO.arvoreDeTemas.SISTEMAS;
-				var iglt = sis.length;
+				try{
+					var sis = i3GEO.arvoreDeTemas.SISTEMAS;
+					var iglt = sis.length;
+					var conteudo = "<b>Sistemas</b>"+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=34' >&nbsp;&nbsp;&nbsp;</a>";
+					var d = {html:conteudo};
+					var tempNode = new YAHOO.widget.HTMLNode(d,root, false,true);
+				}catch(e){i3GEO.arvoreDeTemas.ARVORE.draw();return;}
 				var ig=0;
 				do{
 					var nomeSis = sis[ig].NOME;
