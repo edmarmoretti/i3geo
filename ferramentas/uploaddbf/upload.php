@@ -44,10 +44,10 @@ if (isset($_FILES['filedbf']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9_\.]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
-	{echo "Arquivos inv·lidos";exit;}
+	{echo "Nome de arquivo inv·lido";exit;}
 	//sobe arquivo
 	$Arquivo = $_FILES['filedbf']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['filedbf']['name']);
