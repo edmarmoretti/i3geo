@@ -10249,49 +10249,36 @@ i3GEO.calculo = {
 	Function: distancia
 
 	Calcula a distância entre dois pontos.
-	
-	Baseado no site http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
 
+	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	
+	Em versões anteriores utilizava-se o cálculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
+	
 	Parameters:
 
-	lga {Numeric} - x inicial.
+	lon1 {Numeric} - x inicial.
 
-	lta {Numeric} - y inicial
+	lat1 {Numeric} - y inicial
 
-	lgb {Numeric} - x final
+	lon2 {Numeric} - x final
 
-	ltb {Numeric} - y final
+	lat2 {Numeric} - y final
 	
 	Return:
 	
 	Type:
 	{Numeric}
 	*/	
-	distancia: function(lga,lta,lgb,ltb){
-		try{
-			var er = 6366.707;
-			var radlat1 = Math.PI * lta/180;
-			var radlat2 = Math.PI * ltb/180;
-			var radlong1 = Math.PI * lga/180;
-			var radlong2 = Math.PI * lgb/180;
-			if (lta > 0) {radlat1=Math.PI/2-radlat1;}
-			if (lta < 0) {radlat1=Math.PI/2+radlat1;}
-			if (lga < 0) {radlong1=Math.PI*2-radlong1;}
-			if (ltb > 0) {radlat2=Math.PI/2-radlat2;}
-			if (ltb < 0) {radlat2=Math.PI/2+radlat2;}
-			if (lgb < 0) {radlong2=Math.PI*2-radlong2;}
-			var x1 = er * Math.cos(radlong1)*Math.sin(radlat1);
-			var y1 = er * Math.sin(radlong1)*Math.sin(radlat1);
-			var z1 = er * Math.cos(radlat1);
-			var x2 = er * Math.cos(radlong2)*Math.sin(radlat2);
-			var y2 = er * Math.sin(radlong2)*Math.sin(radlat2);
-			var z2 = er * Math.cos(radlat2);
-			var d = Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)+(z1-z2)*(z1-z2));
-			//side, side, side, law of cosines and arccos
-			var theta = Math.acos((er*er+er*er-d*d)/(2*er*er));
-			return theta*er;
-		}
-		catch(e){return (0);}
+	distancia: function(lon1,lat1,lon2,lat2){
+		var R = 6371; // km
+		var dLat = ((lat2-lat1))* Math.PI / 180;
+		var dLon = ((lon2-lon1)) * Math.PI / 180; 
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+       	Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+       	Math.sin(dLon/2) * Math.sin(dLon/2); 
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c;
+		return d;
 	},
 	/*
 	Function: rect2ext

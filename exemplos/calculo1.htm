@@ -4,16 +4,20 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geoo.js"></script>
 	<style> 
 p{font-size:16px;text-align:left;padding:10px;}
 	</style> 
 </head>
 <body style="background:white;text-align:left">
-<p>Cálculos de distância<br>
+<p>Cálculos de distância em km<br>
 <script>
 var calc = i3GEO.calculo.distancia(-50,-10,-50,10)
 document.body.innerHTML += "<p>-50,-10,-50,10 = "+calc
+var calc = i3GEO.calculo.distancia(-50,10,-50,-10)
+document.body.innerHTML += "<p>-50,10,-50,-10 = "+calc
+var calc = i3GEO.calculo.distancia(-1,53,0,52)
+document.body.innerHTML += "<p>-1,53,0,52 = "+calc
 </script>
 </body>
 </html>
