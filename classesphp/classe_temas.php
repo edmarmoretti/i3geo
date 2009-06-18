@@ -892,6 +892,57 @@ tema - código do tema
 		}
 		return ($linkfonte);
 	}
+/*
+function: zoomSel
 
+Zoom para os elementos selecionados de um tema.
+
+Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o mapa para essa extensão.
+*/
+	function zoomSel()
+	{
+		if(!$this->layer){return "erro";}
+		$extatual = $this->mapa->extent;
+		$prjMapa = "";
+		$prjTema = "";
+		if (file_exists($this->arquivo."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$res_count = $this->layer->getNumresults();
+		if($res_count > 0)
+		{
+			$xmin = array();
+			$xmax = array();
+			$ymin = array();
+			$ymax = array();
+			for ($i = 0; $i < $res_count; ++$i)
+			{
+				$valitem = array();
+				$result = $this->layer->getResult($i);
+				$shp_index  = $result->shapeindex;
+				$shape = $this->layer->getshape(-1, $shp_index);				
+				$bound = $shape->bounds;
+				$xmin[] = $bound->minx;
+				$xmax[] = $bound->maxx;
+				$ymin[] = $bound->miny;
+				$ymax[] = $bound->maxy;
+			}
+			$this->layer->close();
+			$ret = ms_newRectObj();
+			$ret->set("minx",min($xmin));
+			$ret->set("miny",min($ymin));
+			$ret->set("maxx",max($xmax));
+			$ret->set("maxy",max($ymax));
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$projInObj = ms_newprojectionobj($prjTema);
+				$projOutObj = ms_newprojectionobj($prjMapa);
+				$ret->project($projInObj, $projOutObj);
+			}
+			$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+		}
+		return("ok");
+	}
 }
 ?>

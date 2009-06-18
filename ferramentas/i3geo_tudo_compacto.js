@@ -7299,6 +7299,19 @@ i3GEO.php = {
 		cpJSON.call(p,"zoomtema",funcao);	
 	},
 	/*
+	Function: zoomsel
+
+	PHP:
+	classesphp/classe_temas.php
+	
+	<Temas->zoomSel>	
+	*/
+	zoomsel: function(funcao,tema){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"zoomsel",funcao);	
+	},
+	/*
 	Function: limpasel
 
 	PHP:

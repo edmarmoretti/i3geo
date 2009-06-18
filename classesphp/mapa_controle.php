@@ -947,6 +947,22 @@ Include:
 		redesenhaMapa();
 	break;
 /*
+Property: zoomsel
+
+Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos selecionados de um tema.
+
+Include:
+<classe_temas.php>
+*/
+	case "zoomsel":
+		include_once("classe_temas.php");
+		copiaSeguranca($map_file);
+		$m = new Temas($map_file,$tema);
+		$cp->set_data($m->zoomSel());
+		$m->salva();
+		redesenhaMapa();
+	break;
+/*
 Property: insereFiltro
 
 Inclui um filtro no tema.

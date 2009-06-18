@@ -659,6 +659,14 @@ g_traducao_ajuda = {
 			complemento:"Após definido o período, a ferramenta fará a busca das imagens para sua apresentação em sequência. Ao parar a animação, a imagem mostrada poderá ser acrescentada ao mapa como uma nova camada. A visualização das imagens só é possível após a carga de todas as datas selecionadas. Caso seja necessário cancelar a carga de uma ou mais datas, deve-se clicar em 'parar' na lista de imagens que estão sendo carregadas.",
 			tela:"ferramentas/wmstime/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas"
+		},
+		"78": {
+			titulo: "Zoom para a seleção",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Ajusta a extensão geográfica do mapa tendo como base os elementos selecionados de um tema.",
+			complemento:"Essa opção é mostrada como um pequeno ícone, localizado ao lado do nome do tema, quando este possuir seleção.",
+			apijs:"i3GEO.tema.zoomsel(idtema)"
 		}
 	}
 };

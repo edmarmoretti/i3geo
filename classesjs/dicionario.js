@@ -375,6 +375,13 @@ en:"Clear selection",
 es:"Limpia la selecci&oacute;n",
 it:"Pulizia della selezione"
 }],
+"t4a":[
+{
+pt:"zoom para a sele&ccedil;&atilde;o",
+en:"Zoom to selection",
+es:"Zoom a la selecci&oacute;n",
+it:"Zoom della selezione"
+}],
 "t5":[
 {
 pt:"Limpa sele&ccedil;&atilde;o existente nesse tema",

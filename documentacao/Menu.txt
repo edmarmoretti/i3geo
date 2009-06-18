@@ -210,4 +210,11 @@ Group: Index  {
 
 File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js)
 File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js.php)
-File: abas.htm  (exemplos\abas.htm)
+
+Group: Exemplos  {
+
+   File: abas.htm  (exemplos\abas.htm)
+   File: Interface normal  (exemplos\visual1.htm)
+   File: Interface normal  (exemplos\visual2.htm)
+   }  # Group: Exemplos
+

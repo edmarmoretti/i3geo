@@ -115,6 +115,19 @@ i3GEO.tema = {
 		i3GEO.php.zoomtema(i3GEO.atualiza,tema);
 	},
 	/*
+	Function: zoomsel
+
+	Zoom para os elementos selecionados de um tema
+
+	Parameters:
+
+	tema - código do tema
+	*/
+	zoomsel: function(tema){
+		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.php.zoomsel(i3GEO.atualiza,tema);
+	},
+	/*
 	Function: limpasel
 
 	Limpa a selecao do tema
