@@ -7,6 +7,7 @@ Veja:
 
 licenca.txt
 
+
 http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
 
 Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, menutemas, aplicmap 
