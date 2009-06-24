@@ -197,7 +197,8 @@ i3GEO.analise = {
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
 				ins += "<input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
 				ins += '</div>';
-				ins+= '</div>';
+				ins += '</div>';
+				//ins += "<a href='http://www.movable-type.co.uk/scripts/latlong.html' target='_blank'>sobre o cálculo</a>";
 				novoel.innerHTML = ins;
 				novoel.style.borderColor="gray";
 				document.body.appendChild(novoel);

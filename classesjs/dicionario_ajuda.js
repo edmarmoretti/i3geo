@@ -441,7 +441,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/classesjs/classe_analise.js",
 			categoria:"6",
 			pt:"Ativa o modo de cálculo de distâncias, permitindo que a cada clique do mouse sobre o mapa seja feito o cálculo da distância em relação ao ponto anterior e em relação a todos os pontos clicados. O resultado é mostrado em uma janela aberta sobre o mapa. Em cada ponto é também desenhado um círculo representando a distância até o último ponto.",
-			complemento:"O cálculo de distância é aproximado e depende da escala do mapa (quanto mais detalhado o mapa melhor). A fórmula de cálculo é baseada em <a href='http://www.chemical-ecology.net/java/lat-long.htm' >http://www.chemical-ecology.net/java/lat-long.htm</a>. Para parar o cálculo basta clicar sobre um dos pontos já inseridos.",
+			complemento:"O cálculo de distância é aproximado e depende da escala do mapa (quanto mais detalhado o mapa melhor). A fórmula de cálculo é baseada em <a href='http://www.movable-type.co.uk/scripts/latlong.html' >http://www.movable-type.co.uk/scripts/latlong.html</a>. Para parar o cálculo basta clicar sobre um dos pontos já inseridos.",
 			apijs:"i3GEO.configura.funcoesBotoes"
 		},
 		"51": {
