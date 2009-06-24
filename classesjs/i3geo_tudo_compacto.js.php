@@ -10300,6 +10300,18 @@ i3GEO.calculo = {
 		var d = R * c;
 		return d;
 	},
+	direcao: function(lon1,lat1,lon2,lat2){
+		lat1 = lat1 * (Math.PI / 180);
+		lat2 = lat2 * (Math.PI / 180);
+		var dLon = (lon2-lon1) * (Math.PI / 180);
+		var y = Math.sin(dLon) * Math.cos(lat2);
+		var x = Math.cos(lat1)*Math.sin(lat2) -
+		Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
+		var r = Math.atan2(y, x);
+		var r = r  * 180 / Math.PI;
+		var r = r + 360;
+		return r % 360;
+	},
 	/*
 	Function: rect2ext
 	
@@ -12601,7 +12613,7 @@ i3GEO.analise = {
 			}
 			
 			YAHOO.namespace("janelaDocamede.xp");
-			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:300,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
 			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxi+150,imagemyi);
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
@@ -12665,6 +12677,9 @@ i3GEO.analise = {
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+					var r = i3GEO.calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+					var r = i3GEO.calculo.dd2dms(r,r);
+					var r = r[0];
 					if (i3GEO.parametros.mapscale > 500000)
 					{var d = parseInt(d);}
 					else{
@@ -12675,8 +12690,9 @@ i3GEO.analise = {
 						d = d * 1;
 					}
 					var da = d + pontosdistobj.dist[n-1];
-					if ($i("mostradistancia_calculo"))
-					{$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km";}
+					if ($i("mostradistancia_calculo")){
+						$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km <br> Direção (DMS)= "+r;
+					}
 					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
 			}

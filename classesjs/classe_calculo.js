@@ -324,6 +324,18 @@ i3GEO.calculo = {
 		var d = R * c;
 		return d;
 	},
+	direcao: function(lon1,lat1,lon2,lat2){
+		lat1 = lat1 * (Math.PI / 180);
+		lat2 = lat2 * (Math.PI / 180);
+		var dLon = (lon2-lon1) * (Math.PI / 180);
+		var y = Math.sin(dLon) * Math.cos(lat2);
+		var x = Math.cos(lat1)*Math.sin(lat2) -
+		Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
+		var r = Math.atan2(y, x);
+		var r = r  * 180 / Math.PI;
+		var r = r + 360;
+		return r % 360;
+	},
 	/*
 	Function: rect2ext
 	
