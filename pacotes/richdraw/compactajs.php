@@ -73,7 +73,7 @@ function packer($src,$out,$tipo="None")
 //packer
 //$src = 'temp.js';
 //$out = 'i3geo_tudo_compacto.js';
-require_once '../../classesjs/packer/class.JavaScriptPacker.php';
+require_once '../packer/class.JavaScriptPacker.php';
 $script = file_get_contents($src);
 $t1 = microtime(true);
 $packer = new JavaScriptPacker($script, $tipo, true, false);

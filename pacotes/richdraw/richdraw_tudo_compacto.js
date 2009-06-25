@@ -312,7 +312,7 @@ function AbstractRenderer() {
 
 AbstractRenderer.prototype.init = function(elem) {};
 AbstractRenderer.prototype.bounds = function(shape) { return { x:0, y:0, width:0, height: 0 }; };
-AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {};
+AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {};
 AbstractRenderer.prototype.remove = function(shape) {};
 AbstractRenderer.prototype.move = function(shape, left, top) {};
 AbstractRenderer.prototype.track = function(shape) {};
@@ -388,7 +388,7 @@ SVGRenderer.prototype.bounds = function(shape) {
 };
 
 
-SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {
   var svgNamespace = 'http://www.w3.org/2000/svg';
   var svg;
 
@@ -429,6 +429,14 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     svg.setAttributeNS(null, 'x2', width + 'px');
     svg.setAttributeNS(null, 'y2', height + 'px');
   }
+  else if (shape == 'text') {
+	svg = this.container.ownerDocument.createElementNS(svgNamespace,'text');
+	var n = this.container.ownerDocument.createTextNode(texto);
+	svg.appendChild(n);
+	svg.setAttributeNS(null, 'x', left + 'px');
+	svg.setAttributeNS(null, 'y', top + 'px');
+	svg.setAttributeNS(null, 'font-size', '12px');
+  }
 
   svg.style.position = 'absolute';
 
@@ -439,6 +447,7 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   if (lineColor.length == 0)
     lineColor = 'none';
   svg.setAttributeNS(null, 'stroke', lineColor);
+  
   svg.setAttributeNS(null, 'stroke-width', lineWidth);
       
   this.svgRoot.appendChild(svg);
@@ -667,7 +676,7 @@ VMLRenderer.prototype.bounds = function(shape) {
 };
 
 
-VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {
   var vml;
   if (shape == 'rect') {
     vml = this.container.ownerDocument.createElement('v:rect');
@@ -683,6 +692,10 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   }
   else if (shape == 'line') {
     vml = this.container.ownerDocument.createElement('v:line');
+  }
+  else if (shape == 'text') {
+    vml = this.container.ownerDocument.createElement('v:textbox');
+    vml.innerHTML = texto;
   }
 
   if (shape != 'line') {  

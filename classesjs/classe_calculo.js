@@ -324,6 +324,30 @@ i3GEO.calculo = {
 		var d = R * c;
 		return d;
 	},
+	/*
+	Function: direcao
+
+	Calcula a direção (0 a 360 graus) entre dois pontos.
+
+	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	
+	Parameters:
+
+	lon1 {Numeric} - x inicial.
+
+	lat1 {Numeric} - y inicial
+
+	lon2 {Numeric} - x final
+
+	lat2 {Numeric} - y final
+	
+	Return:
+	
+	Ângulo em décimos de grau
+	
+	Type:
+	{Numeric}
+	*/	
 	direcao: function(lon1,lat1,lon2,lat2){
 		lat1 = lat1 * (Math.PI / 180);
 		lat2 = lat2 * (Math.PI / 180);

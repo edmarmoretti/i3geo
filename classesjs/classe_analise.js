@@ -195,14 +195,14 @@ i3GEO.analise = {
 				ins += '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>';
 				ins += '<div style="text-align:left;font-size:10px" >';
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
-				ins += "<input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
+				ins += "<table><tr><td><input style='cursor:pointer' type='checkbox' id='pararraios' checked /></td><td>Raios</td><td>&nbsp;</td>";
+				ins += "<td><input style='cursor:pointer' type='checkbox' id='parartextos' checked /></td><td>Textos<td></tr></table></span>";
 				ins += '</div>';
 				ins += '</div>';
 				//ins += "<a href='http://www.movable-type.co.uk/scripts/latlong.html' target='_blank'>sobre o cálculo</a>";
 				novoel.innerHTML = ins;
 				novoel.style.borderColor="gray";
 				document.body.appendChild(novoel);
-				$i('pararraios').checked=true;
 			}
 			else{
 				if ($i("mostradistancia_calculo"))
@@ -257,6 +257,9 @@ i3GEO.analise = {
 						i3GEO.desenho.aplica("insereCirculo","",n);
 						if(navm)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
+					}
+					if($i("parartextos") && $i("parartextos").checked == true ){
+						i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 					}
 				}
 				i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.analise.medeDistancia.fechaJanela,"pontosins");

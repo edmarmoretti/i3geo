@@ -312,7 +312,7 @@ function AbstractRenderer() {
 
 AbstractRenderer.prototype.init = function(elem) {};
 AbstractRenderer.prototype.bounds = function(shape) { return { x:0, y:0, width:0, height: 0 }; };
-AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {};
+AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {};
 AbstractRenderer.prototype.remove = function(shape) {};
 AbstractRenderer.prototype.move = function(shape, left, top) {};
 AbstractRenderer.prototype.track = function(shape) {};

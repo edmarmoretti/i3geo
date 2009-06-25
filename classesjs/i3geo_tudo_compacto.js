@@ -10300,6 +10300,30 @@ i3GEO.calculo = {
 		var d = R * c;
 		return d;
 	},
+	/*
+	Function: direcao
+
+	Calcula a direção (0 a 360 graus) entre dois pontos.
+
+	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	
+	Parameters:
+
+	lon1 {Numeric} - x inicial.
+
+	lat1 {Numeric} - y inicial
+
+	lon2 {Numeric} - x final
+
+	lat2 {Numeric} - y final
+	
+	Return:
+	
+	Ângulo em décimos de grau
+	
+	Type:
+	{Numeric}
+	*/	
 	direcao: function(lon1,lat1,lon2,lat2){
 		lat1 = lat1 * (Math.PI / 180);
 		lat2 = lat2 * (Math.PI / 180);
@@ -10562,11 +10586,13 @@ i3GEO.desenho = {
 
 	tipo - resizelinha|resizePoligono|insereCirculo tipo de operação
 
-	objeto - objeto gráfico existnente no container richdraw
+	objeto - objeto gráfico existente no container richdraw
 
-	n - índice do elemento no array pontosdistobj com 
+	n - índice do elemento no array pontosdistobj
+	
+	texto - texto que será inserido no tipo "insereTexto"
 	*/	
-	aplica: function(tipo,objeto,n){
+	aplica: function(tipo,objeto,n,texto){
 		if(i3GEO.desenho.richdraw && $i("img")){
 			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 			//
@@ -10583,7 +10609,13 @@ i3GEO.desenho = {
 					//no caso do ie, a linha tem de ser removida e desenhada novamente
 					//
 					var r = $i(i3GEO.desenho.richdraw.container.id);
-					r.removeChild(r.lastChild);
+					//verifica se o elemento é do tipo texto, se for, pega o anterior a ele
+					var elemento = r.lastChild;
+					if(elemento.innerHTML != ""){
+						var elementos = r.childNodes;
+						var elemento = elementos[elementos.length - 2];
+					}
+					r.removeChild(elemento);
 					var dy = objposicaocursor.imgy;
 					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
@@ -10618,6 +10650,12 @@ i3GEO.desenho = {
 					}
 					catch(e){}
 				}
+			}
+			if(tipo=="insereTexto"){
+				try{
+					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
+				}
+				catch(e){}
 			}
 		}
 	}
@@ -12598,14 +12636,14 @@ i3GEO.analise = {
 				ins += '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>';
 				ins += '<div style="text-align:left;font-size:10px" >';
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
-				ins += "<input style='cursor:pointer' type='checkbox' id='pararraios' 'checked' />Raios</span>";
+				ins += "<table><tr><td><input style='cursor:pointer' type='checkbox' id='pararraios' checked /></td><td>Raios</td><td>&nbsp;</td>";
+				ins += "<td><input style='cursor:pointer' type='checkbox' id='parartextos' checked /></td><td>Textos<td></tr></table></span>";
 				ins += '</div>';
 				ins += '</div>';
 				//ins += "<a href='http://www.movable-type.co.uk/scripts/latlong.html' target='_blank'>sobre o cálculo</a>";
 				novoel.innerHTML = ins;
 				novoel.style.borderColor="gray";
 				document.body.appendChild(novoel);
-				$i('pararraios').checked=true;
 			}
 			else{
 				if ($i("mostradistancia_calculo"))
@@ -12660,6 +12698,9 @@ i3GEO.analise = {
 						i3GEO.desenho.aplica("insereCirculo","",n);
 						if(navm)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
+					}
+					if($i("parartextos") && $i("parartextos").checked == true ){
+						i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 					}
 				}
 				i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.analise.medeDistancia.fechaJanela,"pontosins");
@@ -19546,7 +19587,7 @@ function AbstractRenderer() {
 
 AbstractRenderer.prototype.init = function(elem) {};
 AbstractRenderer.prototype.bounds = function(shape) { return { x:0, y:0, width:0, height: 0 }; };
-AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {};
+AbstractRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {};
 AbstractRenderer.prototype.remove = function(shape) {};
 AbstractRenderer.prototype.move = function(shape, left, top) {};
 AbstractRenderer.prototype.track = function(shape) {};
@@ -19622,7 +19663,7 @@ SVGRenderer.prototype.bounds = function(shape) {
 };
 
 
-SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {
   var svgNamespace = 'http://www.w3.org/2000/svg';
   var svg;
 
@@ -19663,6 +19704,14 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
     svg.setAttributeNS(null, 'x2', width + 'px');
     svg.setAttributeNS(null, 'y2', height + 'px');
   }
+  else if (shape == 'text') {
+	svg = this.container.ownerDocument.createElementNS(svgNamespace,'text');
+	var n = this.container.ownerDocument.createTextNode(texto);
+	svg.appendChild(n);
+	svg.setAttributeNS(null, 'x', left + 'px');
+	svg.setAttributeNS(null, 'y', top + 'px');
+	svg.setAttributeNS(null, 'font-size', '12px');
+  }
 
   svg.style.position = 'absolute';
 
@@ -19673,6 +19722,7 @@ SVGRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   if (lineColor.length == 0)
     lineColor = 'none';
   svg.setAttributeNS(null, 'stroke', lineColor);
+  
   svg.setAttributeNS(null, 'stroke-width', lineWidth);
       
   this.svgRoot.appendChild(svg);
@@ -19901,7 +19951,7 @@ VMLRenderer.prototype.bounds = function(shape) {
 };
 
 
-VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {
   var vml;
   if (shape == 'rect') {
     vml = this.container.ownerDocument.createElement('v:rect');
@@ -19917,6 +19967,10 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   }
   else if (shape == 'line') {
     vml = this.container.ownerDocument.createElement('v:line');
+  }
+  else if (shape == 'text') {
+    vml = this.container.ownerDocument.createElement('v:textbox');
+    vml.innerHTML = texto;
   }
 
   if (shape != 'line') {  

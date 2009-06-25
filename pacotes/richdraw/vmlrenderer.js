@@ -64,7 +64,7 @@ VMLRenderer.prototype.bounds = function(shape) {
 };
 
 
-VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height) {
+VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, left, top, width, height, texto) {
   var vml;
   if (shape == 'rect') {
     vml = this.container.ownerDocument.createElement('v:rect');
@@ -80,6 +80,10 @@ VMLRenderer.prototype.create = function(shape, fillColor, lineColor, lineWidth, 
   }
   else if (shape == 'line') {
     vml = this.container.ownerDocument.createElement('v:line');
+  }
+  else if (shape == 'text') {
+    vml = this.container.ownerDocument.createElement('v:textbox');
+    vml.innerHTML = texto;
   }
 
   if (shape != 'line') {  

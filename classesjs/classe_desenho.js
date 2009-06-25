@@ -153,11 +153,13 @@ i3GEO.desenho = {
 
 	tipo - resizelinha|resizePoligono|insereCirculo tipo de operação
 
-	objeto - objeto gráfico existnente no container richdraw
+	objeto - objeto gráfico existente no container richdraw
 
-	n - índice do elemento no array pontosdistobj com 
+	n - índice do elemento no array pontosdistobj
+	
+	texto - texto que será inserido no tipo "insereTexto"
 	*/	
-	aplica: function(tipo,objeto,n){
+	aplica: function(tipo,objeto,n,texto){
 		if(i3GEO.desenho.richdraw && $i("img")){
 			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
 			//
@@ -174,7 +176,13 @@ i3GEO.desenho = {
 					//no caso do ie, a linha tem de ser removida e desenhada novamente
 					//
 					var r = $i(i3GEO.desenho.richdraw.container.id);
-					r.removeChild(r.lastChild);
+					//verifica se o elemento é do tipo texto, se for, pega o anterior a ele
+					var elemento = r.lastChild;
+					if(elemento.innerHTML != ""){
+						var elementos = r.childNodes;
+						var elemento = elementos[elementos.length - 2];
+					}
+					r.removeChild(elemento);
 					var dy = objposicaocursor.imgy;
 					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
@@ -209,6 +217,12 @@ i3GEO.desenho = {
 					}
 					catch(e){}
 				}
+			}
+			if(tipo=="insereTexto"){
+				try{
+					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
+				}
+				catch(e){}
 			}
 		}
 	}
