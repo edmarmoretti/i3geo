@@ -7,6 +7,10 @@ Lista os temas configurados no menu de temas e que permitem download.
 
 Para utilizar esse sistema acesse http://localhost/i3geo/datadownload.htm
 
+Pode-se usar um parâmetro para abrir o aplicativo e imediatamente mostrar os arquivos para download, por exemplo
+
+datadownload.htm?bioma
+
 File: i3geo/classesjs/datadownload.js
 
 About: Licença
@@ -42,6 +46,13 @@ No caso do datadownload.htm ser disparado de outro local, é necessário definir e
 var loc = window.location.href;
 g_locaplic = loc.split("/datadownload.htm");
 g_locaplic = g_locaplic[0]
+
+var temp = loc.split("?");
+if(temp[1])
+{temaDownload = temp[1]}
+else
+{temaDownload = ""}
+
 //
 //para efeitos de compatibilidade
 //
@@ -127,6 +138,9 @@ function DDinicia()
 		cp.call(p,"listaDiretorios",processaDiretorios);
 	}
 	dataDownloadLinks(g_RSSl)
+	if(temaDownload != ""){
+		datadownload_download(temaDownload);
+	}
 }
 /*
 Function: processaDiretorios
