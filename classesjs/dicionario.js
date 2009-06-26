@@ -666,10 +666,10 @@ it:"Upload del shape file"
 }],
 "a2b":[
 {
-pt:"Upload de arquivo dbf",
-en:"Upload dbf file",
-es:"Upload de archivo dbf",
-it: "Upload del file dbf"
+pt:"Upload de arquivo dbf ou CSV",
+en:"Upload dbf or CSV file",
+es:"Upload de archivo dbf o CSV",
+it: "Upload del file dbf o CSV"
 }],
 "a3":[
 {

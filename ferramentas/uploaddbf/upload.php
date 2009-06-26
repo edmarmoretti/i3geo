@@ -44,7 +44,8 @@ if (isset($_FILES['filedbf']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	//if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "Nome de arquivo inválido";exit;}
@@ -53,21 +54,59 @@ if (isset($_FILES['filedbf']['name']))
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['filedbf']['name']);
 	if($status != 1)
 	{echo "Ocorreu um erro no envio do arquivo";exit;}
-	$nome = str_replace(".dbf","",$dirmap."/".$_FILES['filedbf']['name']);
+	$nome = explode(".",$_FILES['filedbf']['name']);
+	$nome = $nome[0];
+	$nomeshp = $dirmap."/".$nome.".shp";
 	if($status == 1)
 	{
-		if(!isset($tema)) //o dbf deverá ser transformado em uma camada no mapa
+		if(!isset($tema)) //o arquivo deverá ser transformado em uma camada no mapa
 		{
 			$nomex = strtoupper($nomex);
 			$nomey = strtoupper($nomey);
+			//converte de csv para dbf
+			if($tipoarquivo != "dbf"){
+				if($tipoarquivo == "csvpv"){$separador = ";";}
+				if($tipoarquivo == "csvv"){$separador = ",";}
+				include_once("../../pacotes/classesphp/class.CSVHandler.php");
+				include_once "../../pacotes/phpxbase/api_conversion.php";
+				$csv = new CSVHandler($dirmap."/".$_FILES['filedbf']['name'],$separador,"record");
+				$dados = $csv->ReadCSV();
+				$conta = 0;
+				foreach($csv->HeaderData as $i)
+				{	
+					$i = strtoupper($i);
+					$i = trim($i);
+					if(($i != $nomex) && ($i != $nomey))
+					{
+						$i = str_replace("_","",$i);
+						$i = str_replace("-","",$i);
+						$i= substr($i, 0, 7);
+						$def[] = array($i.$conta,"C","255");
+					}
+					else
+					$def[] = array($i,"C","255");
+					$conta++;
+				}
+				$db = xbase_create($dirmap."/".$nome.".dbf", $def);
+				//xbase_close($db);
+				//$db=xbase_open($dirmap."/".$nome.".dbf",2);		
+				foreach($dados as $d){
+					$reg = array();
+					foreach($d as $i)
+					{$reg[] = $i;}
+					xbase_add_record($db,$reg);	
+				}
+				xbase_close($db);
+				$_FILES['filedbf']['name'] = $nome.".dbf";
+			}
 			echo "<p>Arquivo enviado. Criando shape file...</p>";
 			require_once("../../pacotes/phpxbase/api_conversion.php");
 			$dbf = xbase_open($dirmap."/".$_FILES['filedbf']['name']);
 			$records = xbase_numrecords($dbf);
 			$record = array();
-			$novoshpf = ms_newShapefileObj($nome, MS_SHP_POINT);
+			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 			$novoshpf->free();
-			$shapefileObj = ms_newShapefileObj($nome,-2);
+			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
 			for($x = 1; $x <= $records; $x++)
 			{
     			$record = xbase_get_record_with_names($dbf, $x);
@@ -78,9 +117,9 @@ if (isset($_FILES['filedbf']['name']))
 			$shapefileObj->free();	
 			$mapt = ms_newMapObj($temasaplic."/novotema.map");
 			$novolayer = $mapt->getLayerByName("novotema");
-			$novolayer->set("data",$nome.".shp");
-			$novolayer->set("name",basename($nome));
-			$novolayer->setmetadata("TEMA",basename($nome));
+			$novolayer->set("data",$nomeshp);
+			$novolayer->set("name",basename($nomeshp));
+			$novolayer->setmetadata("TEMA",basename($nomeshp));
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->set("type",MS_LAYER_POINT);
 			$novolayer->setfilter("");
@@ -110,6 +149,8 @@ if (isset($_FILES['filedbf']['name']))
 		else //join com um tema
 		{
 			//$layer = $mapa->getlayerbyname($tema);
+			//essa funcao ainda não está implementada
+			//
 			$dbf = $dirmap."/".$_FILES['filedbf']['name'];
 			$string = 'JOIN '."\n".' NAME "'.$_FILES['filedbf']['name'].'"'."\n";
 			$string .= 'TABLE "'.$dbf.'"'."\n";

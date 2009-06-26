@@ -1412,6 +1412,11 @@ $arq - Nome do arquivo.
     	$dbh = null;
     	$dbhw = null;
 	}
+	//
+	//esta função não está concluida
+	//não use
+	//pois não funcionará
+	//
 	function insereJOIN($string,$layername)
 	{
 		//le o map file

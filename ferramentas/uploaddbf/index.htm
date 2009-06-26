@@ -10,10 +10,28 @@
 <div style="top:5px;left:10px;display:block;position:absolute">
 <form id=f action="upload.php" method="post" ENCTYPE="multipart/form-data">
   <pre style="font-size:14px">
-dbf: <input class=digitar type="file" size=20 name="filedbf">
+arquivo: <input class=digitar type="file" size=20 name="filedbf">
 </pre>
-nome coluna x: <input class=digitar type="input" size=20 name="nomex"><br>
-nome coluna y: <input class=digitar type="input" size=20 name="nomey"><br><br>
+<table>
+<tr>
+	<td>tipo:</td>
+	<td>
+		<select name='tipoarquivo'>
+			<option value='dbf' select >dbf</option>
+			<option value='csvpv' >csv separador ';'</option>
+			<option value='csvv' >csv separador ','</option>
+		</select><br>
+	</td>
+</tr>
+<tr>
+	<td>nome coluna x:</td>
+	<td><input class=digitar type="input" size=20 name="nomex"></td>
+</tr>
+<tr>
+	<td>nome coluna y:</td>
+	<td><input class=digitar type="input" size=20 name="nomey"></td>
+</tr>
+</table>
 Proje&ccedil;&atilde;o:
 <div id=listaepsg style='left:0px;overflow:auto;height:60px'></div>
 <div onclick='submete()' style='top:10px;left:0px'>

@@ -224,11 +224,11 @@ g_traducao_ajuda = {
 			apijs:"i3GEO.analise.dialogo.agrupaElementos()"
 		},
 		"26": {
-			titulo: "Upload de arquivo dbf",
+			titulo: "Upload de arquivo DBF ou CSV",
 			diretorio:"i3geo/ferramentas/uploaddbf",
 			categoria:"4",
-			pt:"Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF. Os valores de x e y devem utilizar '.' como separador de decimal. Se as coordenadas estiverem na proje&ccedil;&atilde;o geogr&aacute;fica, os valores dever&atilde;o estar em d&eacute;cimos de grau, com sinal negativo para pontos ao sul do equador e oeste do meridiano 0.",
-			complemento:"O arquivo DBF será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados. Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatível com essas restri&ccedil;&otilde;es.",
+			pt:"Utilize essa op&ccedil;&atilde;o para acrescentar um tema baseado nas coordenadas x e y presentes em uma tabela DBF ou arquivo CSV. Os valores de x e y devem utilizar '.' como separador de decimal. Se as coordenadas estiverem na proje&ccedil;&atilde;o geogr&aacute;fica, os valores dever&atilde;o estar em d&eacute;cimos de grau, com sinal negativo para pontos ao sul do equador e oeste do meridiano 0.",
+			complemento:"O arquivo DBF ou CSV será armazenado no servidor onde o i3geo está instalado e permanecerá lá até que os arquivos temporários sejam apagados. Não utilize essa opção se existir alguma restrição ao uso do arquivo e se a política de acesso aos dados, definidas pela entidade que hospeda o i3geo, não for compatível com essas restri&ccedil;&otilde;es.",
 			tela:"ferramentas/uploaddbf/exemplo.htm",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.uploaddbf()"
 		},
