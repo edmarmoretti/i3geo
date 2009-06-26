@@ -103,6 +103,27 @@ function geraRSStemasDownload($locaplic)
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas para download");
 }
+function geraRSStemasKml($locaplic)
+{
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasdownload.php","",$_SERVER['PHP_SELF']));
+	$sql = "select '".$url."/pacotes/kmlmapserver/kmlservice.php?request=kml&map='||codigo_tema||'&typename='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
+	$sql .= "
+		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
+		where 
+		t.id_tema = n3.id_tema 
+		and n3.id_n2 = n2.id_n2 
+		and n2.id_subgrupo = sg.id_subgrupo
+		and n2.id_n1 = n1.id_n1 
+		and n1.id_grupo = g.id_grupo
+		and (t.kml_tema = 'sim' or t.kml_tema != 'SIM')
+		and n3.n3_perfil = '' 
+		and n2.n2_perfil = ''
+		and n1.n1_perfil = ''
+	";
+	//echo $sql;exit;
+	return geraXmlRSS($locaplic,$sql,"Temas em KML");
+}
 
 function geraXmlRSS($locaplic,$sql,$descricao)
 {
