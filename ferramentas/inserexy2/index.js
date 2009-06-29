@@ -28,18 +28,21 @@ mostraGuia("guia1")
 $i("guia1").onclick = function()
 {mostraGuia("guia1");$i("projecao").style.display="none";}
 $i("guia2").onclick = function()
-{mostraGuia("guia2");$i("projecao").style.display="block";}
+{mostraGuia("guia2");$i("projecao").style.display="none";}
 $i("guia3").onclick = function()
 {mostraGuia("guia3");$i("projecao").style.display="block";}
 $i("guia4").onclick = function()
-{mostraGuia("guia4");$i("projecao").style.display="none";}
+{mostraGuia("guia4");$i("projecao").style.display="block";}
 $i("guia5").onclick = function()
 {mostraGuia("guia5");$i("projecao").style.display="none";}
+$i("guia6").onclick = function()
+{mostraGuia("guia6");$i("projecao").style.display="none";}
 
 window.parent.g_nomepin = ""
 mensagemAjuda("men1",$i("men1").innerHTML)
 mensagemAjuda("men2",$i("men2").innerHTML)
 mensagemAjuda("men3",$i("men3").innerHTML)
+mensagemAjuda("mendd",$i("mendd").innerHTML)
 
 radioepsg
 (
@@ -73,6 +76,7 @@ function montaComboLocal()
 					new YAHOO.widget.Button("botao4");
 					new YAHOO.widget.Button("botao5");
 					new YAHOO.widget.Button("botao6");
+					new YAHOO.widget.Button("botaodd");
 				}
     			YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 			}()
@@ -271,7 +275,7 @@ function inserir()
 		{var projecao = inputs[i].value}
 	}
 	var projecao = pegaProj()
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy+"&projecao="+projecao;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&"+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xxx+" "+yyy+"&projecao="+projecao+"&item="+$i("itemtema").value+"&valor="+$i("valorItem").value;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -279,6 +283,47 @@ function inserir()
 	$i("longitude").value = ""
 	$i("latitude").value = ""
 }
+//insere um ponto com base no ângulo e distância
+function inserirdd()
+{
+	aguarde("block")
+	var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g");
+	var regv = new RegExp(",", "g");
+	var xgv = $i("xgdd").value;
+	var xmv = $i("xmdd").value;
+	var xsv = $i("xsdd").value;
+	var xsv = xsv.replace(regv,".");
+
+	var direcao = window.parent.i3GEO.calculo.dms2dd(xgv,xmv,xsv);
+	
+	var redesenha = function()
+	{aguarde("none");window.parent.i3GEO.atualiza("");}
+
+	var inserePT = function(retorno){
+		try{
+			var x = retorno.data.mapprj.x
+			var y = retorno.data.mapprj.y
+			
+			var xy = window.parent.i3GEO.calculo.destinoDD(x,y,$i("distdd").value,direcao)
+			var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+xy[0]+" "+xy[1]+"&item="+$i("itemtema").value+"&valor="+$i("valorItem").value;
+			var cp = new cpaint();
+			//cp.set_debug(2)
+			cp.set_response_type("JSON");
+			cp.call(p,"insereSHP",redesenha);
+			var ins = $i("resultado").innerHTML
+			ins = ins + "<div style='display:block;position:relative;top:5px;left:0px;font-size:12px' >" + x +" " + y + "</div><br>"
+			$i("resultado").innerHTML = ins
+		}
+		catch(e){alert(e)}
+	}
+
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=pegaxyUltimoPonto&tema="+window.parent.g_nomepin;
+	var cp = new cpaint();
+	//cp.set_debug(2)
+	cp.set_response_type("JSON");
+	cp.call(p,"pegaxyUltimoPonto",inserePT);
+}
+
 function verificaproj()
 {
 	var p = pegaProj()
@@ -304,7 +349,7 @@ function colar()
 	var regv = new RegExp(",", "g");
 	$i("colar").value = $i("colar").value.replace(regv,".")
 	var xys = $i("colar").value.split(" ")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+$i("colar").value;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=insereSHP&tema="+window.parent.g_nomepin+"&xy="+$i("colar").value+"&item="+$i("itemtema").value+"&valor="+$i("valorItem").value;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

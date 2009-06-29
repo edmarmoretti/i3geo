@@ -9,10 +9,11 @@
 <body class="yui-skin-sam" >
 	<div class=verdeescuro style="top:0px;cursor:pointer;left:0px;">
 		<div id=guia1 >Tema</div>
-		<div id=guia2 >Digitar</div>
-		<div id=guia3 >Colar</div>
-		<div id=guia4 >Conversor</div>
-		<div id=guia5 >Coordenadas</div>
+		<div id=guia2 >Direc/dist</div>
+		<div id=guia3 >Digitar</div>
+		<div id=guia4 >Colar</div>
+		<div id=guia5 >Conversor</div>
+		<div id=guia6 >Coordenadas</div>
 	</div>
 	<div id=geral style="left:0px;top:0px;">
 		<div id=projecao style='left:0px;display:none'>
@@ -38,6 +39,25 @@
 			</div>
 		</div>
 		<div class=guiaobj id="guia2obj" style="display:none;;left:1px" >
+			<div>
+				Direção:<br>
+				<input class=digitar id='xgdd' title='grau' type=text size=3 value='00'/>
+				<input class=digitar id='xmdd' title='minuto' type=text size=3 value='00'/>
+				<input class=digitar id='xsdd' title='segundo' type=text size=3 value='0.0'/><br><br>
+				Distância em Km:<br>
+				<input class=digitar id='distdd' title='km' type=text size=5 value='0.0'/>
+			</div>
+			<div id=opcdd style="display:block;top:15px;left:0px">
+				<div style=top:0px;left:0px;text-align:left onclick='inserirdd()' >
+				<input id=botaodd type='button' size=14 value='Insere'  />
+				</div>
+			</div>
+			<div id=mendd style="display:block;position:relative;left:0px;top:20px">
+				O próximo ponto será incluído em relação ao último ponto existente no tema, considerando-se apenas os pontos visíveis na extensão do mapa atual.
+				<br>Digite o ângulo em relação ao Norte e a distância em Km.
+			</div>
+		</div>
+		<div class=guiaobj id="guia3obj" style="display:none;;left:1px" >
 			<div id=tipodig style="display:block;top:5px;left:0px">
 				Tipo de entrada:
 				<table summary="Tipo de entrada" class=lista >
@@ -74,7 +94,7 @@
 				<br>O valor correspondente ao Grau deve receber o sinal de negativo("-") nos casos de longitude oeste (todo o Brasil est&aacute; nesse caso) e nos casos de latitude Sul.<br><br><br>
 			</div>
 		</div>
-		<div class=guiaobj id="guia3obj" style="display:none;left:1px;top:5px" >
+		<div class=guiaobj id="guia4obj" style="display:none;left:1px;top:5px" >
 			
 			<div id=opc3 style="top:0px;left:0px;text-align:left;">
 				Cole ou digite a lista de coordenadas:
@@ -87,7 +107,7 @@
 				Cole os valores de X e Y, em d&eacute;cimos de grau, com sinal de negativo para oeste e sul, exemplo:<br> -54.23 -12.5 -50 -5.33<br>
 			</div>
 		</div>
-		<div class=guiaobj id="guia4obj" style="display:none;left:1px;top:5px" >
+		<div class=guiaobj id="guia5obj" style="display:none;left:1px;top:5px" >
 			<div id=opc4 style="top:0px;left:0px">
 			<div style=top:0px;left:0px;text-align:left onclick='wkt()'>
 				<input id=botao3 type='button' size=25 value='Lista wkt' /><br><br>
@@ -102,7 +122,7 @@
 			<div id=wktres style="display:block;position:relative;top:5px;left:0px">
 			</div>
 		</div>
-		<div class=guiaobj id="guia5obj" style="display:none;left:1px;top:5px" >
+		<div class=guiaobj id="guia6obj" style="display:none;left:1px;top:5px" >
 		<div id="resultado" style="display:block;position:relative;top:10px;left:0px;font-size:12px"></div>
 		</div>
 	</div>

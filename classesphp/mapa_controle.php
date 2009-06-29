@@ -1434,6 +1434,20 @@ Include:
 		redesenhaMapa();
 	break;
 /*
+Property: insereSHPdd
+
+Insere um ponto em um shape file tendo como referência o último ponto existente no tema, a direção e a distância.
+
+Include:
+<classe_shp.php>
+*/
+	case "pegaxyUltimoPonto":
+		include_once("classe_shp.php");
+		$m = new SHP($map_file,$tema);
+		$cp->set_data($m->ultimoXY());
+	break;
+
+/*
 Property: insereSHPgrafico
 
 Cria um gráfico e insere no mapa em um local clicado no mapa.

@@ -915,12 +915,13 @@ $locaplic - Localização do I3geo.
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{
-			$qstring = "/.*/";
-			if($layerPt->connectiontype == MS_POSTGIS)
-			{$layerPt->queryByrect($this->mapa->extent);}
+			$layerPt->queryByrect($this->mapa->extent);
+			//$qstring = "/.*/";
+			//if($layerPt->connectiontype == MS_POSTGIS)
+			//{$layerPt->queryByrect($this->mapa->extent);}
 			//$qstring = $itemspt[0].' ~* \'^.\'  ';
-			else
-			{$layerPt->queryByAttributes($itemspt[0], $qstring, 1);}
+			//else
+			//{$layerPt->queryByAttributes($itemspt[0], $qstring, 1);}
 		}
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
