@@ -301,6 +301,44 @@ string - xy
 		return $xy;
 	}
 /*
+function: ultimoXY
+
+Obtém as coordenadas xy do último ponto existente no layer. O último ponto é considerado entre aqueles que estão visíveis no mapa atual
+
+return:
+array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
+*/
+	function ultimoXY()
+	{
+		if(!$this->layer){return "erro";}
+		$this->layer->queryByrect($this->mapa->extent);
+		$res_count = $this->layer->getNumresults();
+		$sopen = $this->layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		$xy = array();
+
+		$result = $this->layer->getResult($res_count - 1);
+		$shp_index  = $result->shapeindex;
+		$shape = $this->layer->getshape(-1,$shp_index);
+		$lin = $shape->line(0);
+		$pt = $lin->point(0);
+		$this->layer->close();
+		$xylayer = array("x"=>$pt->x,"y"=>$pt->y);
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projInObj = ms_newprojectionobj($prjTema);
+			$projOutObj = ms_newprojectionobj($prjMapa);
+			$pt->project($projInObj, $projOutObj);
+			$xymapa = array("x"=>$pt->x,"y"=>$pt->y);
+		}
+		else
+		{$xymapa = $xylayer;}	
+		return array("layerprj"=>$xylayer,"mapprj"=>$xymapa);
+	}
+
+/*
 function: shpPT2shp
 
 Cria um tema linear ou poligonal com base em pontos de um tema pontual.
