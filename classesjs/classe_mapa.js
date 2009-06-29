@@ -615,7 +615,7 @@ i3GEO.mapa = {
 				var temp = Math.random() + "a";
 				temp = temp.split(".");
 				g_nomepin = "pin"+temp[1];
-				var janela = i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
+				var janela = i3GEO.janela.cria("500px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.inserePonto()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.mapa.inserePonto()");}
 				var temp = function(){

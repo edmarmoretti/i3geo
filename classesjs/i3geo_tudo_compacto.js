@@ -10337,6 +10337,43 @@ i3GEO.calculo = {
 		return r % 360;
 	},
 	/*
+	Function: destinoDD
+	
+	Calcula as coordenadas de um novo ponto em função da posição de um ponto de origem, distância e direção
+	
+	O novo ponto é calculado em coordenadas geográficas em DD
+	
+	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	
+	Parameters:
+	
+	lon {Numeric} - longitude (x) do ponto de origem
+	
+	lat {Numeric} - latitude do ponto de origem
+	
+	d {Numeric} - distância em Km
+	
+	direção {Numeric} - ângulo desejado em décimos de grau (direção de 0 a 360)
+	
+	Return:
+	
+	Array com a longitude e latitude em décimos de grau ([0] = longitude, [1] = latitude
+	
+	Type:
+	{Array}
+	*/
+	destinoDD: function(lon,lat,d,direcao){
+		var R = 6371; // earth's mean radius in km
+  		var lat1 = lat * (Math.PI / 180);
+  		var lon1 = lon * (Math.PI / 180);
+  		var brng = direcao * (Math.PI / 180);
+		var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );
+		var lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1),Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+		lon2 = (lon2+Math.PI)%(2*Math.PI) - Math.PI;  // normalise to -180...+180
+		if (isNaN(lat2) || isNaN(lon2)) return null;
+		return new Array((lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI));
+	},
+	/*
 	Function: rect2ext
 	
 	Calcula a extensão geográfica de um retângulo desenhado sobre o mapa.
@@ -12014,7 +12051,7 @@ i3GEO.mapa = {
 				var temp = Math.random() + "a";
 				temp = temp.split(".");
 				g_nomepin = "pin"+temp[1];
-				var janela = i3GEO.janela.cria("400px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
+				var janela = i3GEO.janela.cria("500px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.inserePonto()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.mapa.inserePonto()");}
 				var temp = function(){
