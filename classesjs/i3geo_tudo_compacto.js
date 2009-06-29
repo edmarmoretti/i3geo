@@ -14222,7 +14222,7 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Variable: atual
+	Variable: ATUAL
 	
 	Guia que está ativa
 	
@@ -14232,7 +14232,7 @@ i3GEO.guias = {
 	/*
 	Variavel: idguias
 	
-	ID do elemento criado pelo YUI onde ficarão as guias
+	ID do elemento DOM, criado pelo YUI, onde serão inseridas as guias
 	
 	Type:
 	{String}
@@ -14243,7 +14243,7 @@ i3GEO.guias = {
 	
 	Cria as guias com base na variável configura.
 	
-	As guias podem ser definidas no HTML do mapa sem necessariamente estarem na variável configura.<b> 
+	As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na variável configura.<b> 
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
 	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj"
 	
@@ -17373,6 +17373,21 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDSMENUS: new Array(),
 	/*
+	Property: RETORNAGUIA
+	
+	Guia que será ativada após uma operação de adição de temas ter sido concluída.
+	
+	Se for vazia, a guia atual será mantida.
+	
+	A string corresponde ao nome da guia que deve estar definida em i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA = "temas"
+	
+	Type:
+	{String}
+	
+	Default: ""
+	*/
+	RETORNAGUIA: "",
+	/*
 	Variable: IDHTML
 	
 	Armazena o ID do elemento HTML onde a árvore será incluida
@@ -18361,7 +18376,15 @@ i3GEO.arvoreDeTemas = {
 					alert(retorno.data.erro);
 					return;
 				}
-				i3GEO.atualiza();					
+				i3GEO.atualiza();
+				//
+				//verifica se deve ser ativada uma outra guia que não a atual
+				//
+				if(i3GEO.arvoreDeTemas.RETORNAGUIA != ""){
+					if(i3GEO.arvoreDeTemas.RETORNAGUIA != i3GEO.guias.ATUAL){
+						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
+					}
+				}					
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}

@@ -162,6 +162,21 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDSMENUS: new Array(),
 	/*
+	Property: RETORNAGUIA
+	
+	Guia que será ativada após uma operação de adição de temas ter sido concluída.
+	
+	Se for vazia, a guia atual será mantida.
+	
+	A string corresponde ao nome da guia que deve estar definida em i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA = "temas"
+	
+	Type:
+	{String}
+	
+	Default: ""
+	*/
+	RETORNAGUIA: "",
+	/*
 	Variable: IDHTML
 	
 	Armazena o ID do elemento HTML onde a árvore será incluida
@@ -1150,7 +1165,15 @@ i3GEO.arvoreDeTemas = {
 					alert(retorno.data.erro);
 					return;
 				}
-				i3GEO.atualiza();					
+				i3GEO.atualiza();
+				//
+				//verifica se deve ser ativada uma outra guia que não a atual
+				//
+				if(i3GEO.arvoreDeTemas.RETORNAGUIA != ""){
+					if(i3GEO.arvoreDeTemas.RETORNAGUIA != i3GEO.guias.ATUAL){
+						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
+					}
+				}					
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}

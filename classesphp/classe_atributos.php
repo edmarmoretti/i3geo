@@ -313,6 +313,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		}
 		if ($tipolista == "tudo")
 		{
+			//ini_set('memory_limit', '500M');
 			$shp_atual = array();
 			for ($i = 0; $i < $res_count;++$i)
 			{
