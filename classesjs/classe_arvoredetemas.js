@@ -593,14 +593,14 @@ i3GEO.arvoreDeTemas = {
 				{currentIconMode = newVal;}
 				buildTree();
 			}
-        	function buildTree(){
+       		function buildTree(){
 				i3GEO.arvoreDeTemas.ARVORE = new YAHOO.widget.TreeView(i3GEO.arvoreDeTemas.IDHTML);
 				var root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 				var tempNode = new YAHOO.widget.TextNode('', root, false);
 				tempNode.isLeaf = false;
-        	}
-    		buildTree();
-		}();
+       		}
+   			buildTree();
+   		}();
 		var root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 		//opção de busca de temas
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca == true){
@@ -757,9 +757,19 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && grupos[i].ogc == "nao")
 				{var mostra = false;}
-
 				if(mostra){
+					//se id_n1 existir, significa que os grupos possuem id, pois são oriundos do sistema
+					//de administração
+					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
+					//sendo necessário o uso da ordem dos grupos como identificador
+					if(grupos[i].publicado){
+						if(grupos[i].publicado == "NAO"){
+							grupos[i].nome = "<span title='nao publicado' style=color:red; >"+grupos[i].nome+"</span>";
+						}
+					}
 					var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:i};
+					if(grupos[i].id_n1)
+					var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:grupos[i].id_n1};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos, 1);
 					tempNode.isLeaf = false;
@@ -805,7 +815,18 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 
 				if(mostra){
+					//se id_n2 existir, significa que os grupos possuem id, pois são oriundos do sistema
+					//de administração
+					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
+					//sendo necessário o uso da ordem dos grupos como identificador
+					if(subgrupos[i].publicado){
+						if(subgrupos[i].publicado == "NAO"){
+							subgrupos[i].nome = "<span title='nao publicado' style=color:red; >"+subgrupos[i].nome+"</span>";
+						}
+					}	
 					var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
+					if(subgrupos[i].id_n2)
+					var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:subgrupos[i].id_n2};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
 					tempNode.isLeaf = false;
@@ -833,6 +854,11 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 
 				if(mostra){
+					if(temas[i].publicado){
+						if(temas[i].publicado == "NAO"){
+							temas[i].nome = "<span title='nao publicado' style=color:red; >"+temas[i].nome+"</span>";
+						}
+					}
 					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
 					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);

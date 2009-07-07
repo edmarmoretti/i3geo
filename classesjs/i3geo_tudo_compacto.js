@@ -4044,7 +4044,6 @@ i3GEO = {
 					}
 					catch(e){var e = "";}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
-
 					i3GEO.parametros.mapexten= mapexten;
 					i3GEO.parametros.mapscale= parseInt(mapscale);
 					i3GEO.parametros.mapres= mapres;
@@ -4069,8 +4068,10 @@ i3GEO = {
 					
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
+					
 					i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
+
 					i3GEO.gadgets.mostraBuscaRapida();
 					i3GEO.guias.cria();
 					if($i("arvoreAdicionaTema"))
@@ -4527,15 +4528,13 @@ i3GEO.util = {
 		//YAHOO.log("arvore", "i3geo");
 		if(!$i(onde)){return;}
 		var currentIconMode;
-		YAHOO.example.treeExample = new function(){
-        	function buildTree(){
-				arvore = new YAHOO.widget.TreeView(onde);
-				root = arvore.getRoot();
-				var tempNode = new YAHOO.widget.TextNode('', root, false);
-				tempNode.isLeaf = false;
-        	}
-    		buildTree();
-		}();
+		try{
+			arvore = new YAHOO.widget.TreeView(onde);
+			root = arvore.getRoot();
+			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			tempNode.isLeaf = false;
+		}
+		catch(e){}
 		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
@@ -6876,7 +6875,7 @@ i3GEO.php = {
 	/*
 	Function: desativacgi
 
-	<desativacgi>	
+	<desativacgi>
 	*/
 	desativacgi: function(funcao){
 		i3GEO.php.verifica();
@@ -6889,7 +6888,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_menutemas.php
 	
-	<Menutemas->pegaListaDeMapas>	
+	<Menutemas->pegaListaDeMapas>
 	*/
 	pegaMapas: function(funcao){
 		i3GEO.php.verifica();
@@ -6902,7 +6901,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_mapa.php
 	
-	<Mapa->mudaQS>	
+	<Mapa->mudaQS>
 	*/
 	mudatamanho: function(funcao,altura,largura){
 		i3GEO.php.verifica();
@@ -6915,7 +6914,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_mapa.php
 	
-	<Mapa->ativalogo>	
+	<Mapa->ativalogo>
 	*/
 	ativalogo: function(funcao,altura,largura){
 		i3GEO.php.verifica();
@@ -6928,7 +6927,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_temas.php
 	
-	<Temas->insereFeature>	
+	<Temas->insereFeature>
 	*/
 	insereAnnotation: function(funcao,pin,xy,texto,position,partials,offsetx,offsety,minfeaturesize,mindistance,force,shadowcolor,shadowsizex,shadowsizey,outlinecolor,cor,sombray,sombrax,sombra,fundo,angulo,tamanho,fonte){
 		i3GEO.php.verifica();
@@ -6941,7 +6940,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_atributos.php
 	
-	<Atributos->identificaQBP>	
+	<Atributos->identificaQBP>
 	*/
 	identificaunico: function(funcao,xy,tema,item){
 		i3GEO.php.verifica();
@@ -6954,7 +6953,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/mapa_controle.php
 	
-	<recuperamapa>	
+	<recuperamapa>
 	*/
 	recuperamapa: function(funcao){
 		i3GEO.php.verifica();
@@ -6967,7 +6966,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_legenda.php
 	
-	<Atributos->legendaGrafica>	
+	<Atributos->legendaGrafica>
 	*/
 	criaLegendaImagem: function(funcao){
 		i3GEO.php.verifica();
@@ -6980,7 +6979,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/funcoes_gerais.php
 	
-	<retornaReferenciaDinamica>	
+	<retornaReferenciaDinamica>
 	*/
 	referenciadinamica: function(funcao,zoom,tipo){
 		i3GEO.php.verifica();
@@ -7008,7 +7007,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_navegacao.php
 	
-	<Navegacao->pan>	
+	<Navegacao->pan>
 	*/
 	pan: function(funcao,escala,tipo,x,y){
 		i3GEO.php.verifica();
@@ -7163,7 +7162,7 @@ i3GEO.php = {
 	PHP:
 	classesphp/classe_temas.php
 	
-	<Temas->desceTema>	
+	<Temas->desceTema>
 	*/
 	descetema: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -7319,9 +7318,10 @@ i3GEO.php = {
 	
 	<Menutemas->procurartemas>	
 	*/
-	procurartemas: function(funcao,procurar){
-		i3GEO.php.verifica();
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&procurar="+procurar+"&g_sid="+i3GEO.configura.sid;
+	procurartemas: function(funcao,procurar,locaplic){
+		if(arguments.length == 2)
+		{var locaplic = i3GEO.configura.locaplic;}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&map_file=&procurar="+procurar;
 		cpJSON.call(p,"procurartemas",funcao);	
 	},
 	/*
@@ -7450,6 +7450,18 @@ i3GEO.php = {
 	listaLayersWMS: function(funcao,servico,nivel,id_ws,nomelayer){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel+"&id_ws="+id_ws+"&nomelayer="+nomelayer;
 		cpJSON.call(p,"listaLayersWMS",funcao);	
+	},
+	/*
+	Function: buscaRapida
+
+	PHP:
+	classesphp/funcoes_gerais.php
+	
+	<buscaRapida>	
+	*/
+	buscaRapida: function(funcao,locaplic,servico,palavra){
+		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico
+		cpJSON.call(p,"buscaRapida",funcao);	
 	}
 };
 //YAHOO.log("carregou classe php", "Classes i3geo");
@@ -17841,14 +17853,14 @@ i3GEO.arvoreDeTemas = {
 				{currentIconMode = newVal;}
 				buildTree();
 			}
-        	function buildTree(){
+       		function buildTree(){
 				i3GEO.arvoreDeTemas.ARVORE = new YAHOO.widget.TreeView(i3GEO.arvoreDeTemas.IDHTML);
 				var root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 				var tempNode = new YAHOO.widget.TextNode('', root, false);
 				tempNode.isLeaf = false;
-        	}
-    		buildTree();
-		}();
+       		}
+   			buildTree();
+   		}();
 		var root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
 		//opção de busca de temas
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca == true){
@@ -18005,9 +18017,19 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 				if(i3GEO.arvoreDeTemas.FILTRAOGC && grupos[i].ogc == "nao")
 				{var mostra = false;}
-
 				if(mostra){
+					//se id_n1 existir, significa que os grupos possuem id, pois são oriundos do sistema
+					//de administração
+					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
+					//sendo necessário o uso da ordem dos grupos como identificador
+					if(grupos[i].publicado){
+						if(grupos[i].publicado == "NAO"){
+							grupos[i].nome = "<span title='nao publicado' style=color:red; >"+grupos[i].nome+"</span>";
+						}
+					}
 					var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:i};
+					if(grupos[i].id_n1)
+					var d = {html:grupos[i].nome,idmenu:node.data.idmenu,idgrupo:grupos[i].id_n1};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos, 1);
 					tempNode.isLeaf = false;
@@ -18053,7 +18075,18 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 
 				if(mostra){
+					//se id_n2 existir, significa que os grupos possuem id, pois são oriundos do sistema
+					//de administração
+					//no caso do uso de menu de temas com base em arquivos xml, o id não existe
+					//sendo necessário o uso da ordem dos grupos como identificador
+					if(subgrupos[i].publicado){
+						if(subgrupos[i].publicado == "NAO"){
+							subgrupos[i].nome = "<span title='nao publicado' style=color:red; >"+subgrupos[i].nome+"</span>";
+						}
+					}	
 					var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:i};
+					if(subgrupos[i].id_n2)
+					var d = {html:subgrupos[i].nome,idmenu:node.data.idmenu,idgrupo:node.data.idgrupo,idsubgrupo:subgrupos[i].id_n2};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
 					tempNode.isLeaf = false;
@@ -18081,6 +18114,11 @@ i3GEO.arvoreDeTemas = {
 				{var mostra = false;}
 
 				if(mostra){
+					if(temas[i].publicado){
+						if(temas[i].publicado == "NAO"){
+							temas[i].nome = "<span title='nao publicado' style=color:red; >"+temas[i].nome+"</span>";
+						}
+					}
 					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
 					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
