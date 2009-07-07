@@ -777,7 +777,7 @@ function montaEditorMetadados(dados)
 		{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
 		titulo:"Extensao",id:"extensao",value:dados.extensao,tipo:"text"},
 		{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
-		titulo:"Aplicaextensao",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
+		titulo:"Aplica extensao",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
 		{ajuda:"Indica se o usuário pode fazer download do tema",
 		titulo:"Download",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
 		{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM.",

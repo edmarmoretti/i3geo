@@ -13,12 +13,12 @@ class Arvore
 	//todos os temas
 	public $sql_temas = "select * from i3geoadmin_temas ";
 	//temas de um subgrupo
-	public $sql_temasSubgrupo = "select i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
+	public $sql_temasSubgrupo = "select i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 	function __construct($locaplic)
 	{
 		$this->locaplic = $locaplic;
 		$dbh = "";
-		error_reporting(0);
+		error_reporting(E_ALL);
 		include($locaplic."/admin/php/conexao.php");
 		$this->dbh = $dbh;
 		//
@@ -39,6 +39,83 @@ class Arvore
 	{
 		$this->dbh = null;
 		$this->dbhw = null;
+	}
+	//pega a lista de menus
+	function pegaListaDeMenus($perfil)
+	{
+		if($this->editor)
+		$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
+		else
+		$sql = "SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
+		$regs = $this->execSQL($sql);
+   		$resultado = array();
+		foreach($regs as $reg)
+		{
+			if ($this->verificaOcorrencia($perfil,explode(",",$reg["perfil_menu"])))
+			{
+				$status = "fechado";
+				if(strtolower($reg["aberto"]) == "sim")
+				$status = "aberto";
+				$url = "";//$this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
+				$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
+			}
+		}
+		return $resultado;
+	}
+	//procura um tema tendo como base uma palavra
+	function procuraTemas ($procurar,$perfil)
+	{
+		$procurar = $this->removeAcentos($procurar);
+		$menus = $this->pegaListaDeMenus($perfil);
+		$resultado = array();
+		$subgrupo = array();
+		$final = array();
+		foreach($menus as $menu)
+		{
+			$grupos = $this->pegaGruposMenu($menu["idmenu"]);
+			foreach($grupos["grupos"] as $grupo)
+			{
+				if($this->verificaOcorrencia($perfil,explode(",",$grupo["n1_perfil"])))
+				{
+					$sgrupos = $this->pegaSubgruposGrupo($menu["idmenu"],$grupo["id_n1"]);
+					foreach($sgrupos["subgrupos"] as $sgrupo)
+					{
+						if($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
+						{
+							$temas = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
+							foreach ($temas as $tema)
+							{
+								if($this->verificaOcorrencia($perfil,explode(",",$tema["n3_perfil"])))
+								{
+									$t = $this->pegaTema($tema["id_tema"]);
+									$t = $t[0];
+									$nome = $this->removeAcentos($tema["nome_tema"]);
+									$tags = $this->removeAcentos($tema["tags_tema"]);
+									$down = "nao";
+									if (strtolower($t["download_tema"]) == "sim")
+									{$down = "sim";}
+									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$tema["nome_tema"],"link"=>$t["link_tema"],"download"=>$down);
+									if (stristr($nome,$procurar))
+									{$resultado[] = $texto;}
+									else
+									{
+										if (stristr($tags,$procurar))
+										{$resultado[] = $texto;}
+									}
+								}
+							}
+						}
+						if (count($resultado) > 0)
+						{$subgrupo[] = array("subgrupo"=>$sgrupo["nome_subgrupo"],"temas"=>$resultado);}
+						$resultado = array();
+					}	
+				}
+				if (count($subgrupo) > 0)
+				{$final[] = array("grupo"=>$grupo["nome_grupo"],"subgrupos"=>$subgrupo);}
+				$subgrupo = array();				
+			}
+		}
+		return $final;
 	}
 	//pega os grupos de um menu específico e os temas na raiz do menu
 	function pegaGruposMenu($id_menu)
@@ -81,7 +158,7 @@ class Arvore
 		{$grupos[] = array();}
 		foreach($dados["grupos"] as $grupo)
 		{
-			if ($this->verificaOcorrencia($perfil,explode(",",$grupo["n1_perfil"])))
+			if($this->verificaOcorrencia($perfil,explode(",",$grupo["n1_perfil"])))
 			{
 				$temas = array();
 				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"]);
@@ -221,6 +298,26 @@ class Arvore
 			if ($e == $ip){$editor=true;}
 		}
 		return $editor;
+	}
+	function removeAcentos($s)
+	{
+		$s = ereg_replace("[áàâã]","a",$s);
+		$s = ereg_replace("[ÁÀÂÃ]","A",$s);
+		$s = ereg_replace("[éèê]","e",$s);
+		$s = ereg_replace("[í]","i",$s);
+		$s = ereg_replace("[Í]","I",$s);
+		$s = ereg_replace("[ÉÈÊ]","E",$s);
+		$s = ereg_replace("[óòôõ]","o",$s);
+		$s = ereg_replace("[ÓÒÔÕ]","O",$s);
+		$s = ereg_replace("[úùû]","u",$s);
+		$s = ereg_replace("[ÚÙÛ]","U",$s);
+		$s = str_replace("ç","c",$s);
+		$s = str_replace("Ç","C",$s);
+		//$str = htmlentities($s);
+		$str = preg_replace("/(&)([a-z])([a-z]+;)/i", '$2', $s);
+		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);
+		$str = preg_replace("/\s+/i", ' ', $str);
+		return $str;
 	}
 }
 ?>
