@@ -276,7 +276,6 @@ i3GEO = {
 					}
 					catch(e){var e = "";}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
-
 					i3GEO.parametros.mapexten= mapexten;
 					i3GEO.parametros.mapscale= parseInt(mapscale);
 					i3GEO.parametros.mapres= mapres;
@@ -301,8 +300,10 @@ i3GEO = {
 					
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
+					
 					i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
+
 					i3GEO.gadgets.mostraBuscaRapida();
 					i3GEO.guias.cria();
 					if($i("arvoreAdicionaTema"))
