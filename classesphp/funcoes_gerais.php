@@ -1251,11 +1251,11 @@ function buscaRapida($servico,$palavra)
 	include_once('../pacotes/SOAP/nusoap.php');
 	//include_once("../pacotes/SOAP/easy_parser.inc");
 	$soapclient = new Xsoapclient($servico."?wsdl","wsdl");
+	$vv = "erro";
 	if (@$p = $soapclient->getproxy())
 	{
-		//$vv = $p->procurar(array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
 		$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
-		//print_r($vv);
+		if($vv == ""){$vv = "erro";}
 		return ($vv);
 	}
 	else

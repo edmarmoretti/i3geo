@@ -167,7 +167,7 @@ include_once("funcoes_gerais.php");
 //identifica qual a url do i3geo
 //
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-$protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+$protocolo = strtolower($protocolo[0]) . '://'.$_SERVER['HTTP_HOST'];//$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //substitui a string de conexão

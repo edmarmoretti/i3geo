@@ -2,7 +2,10 @@
 /*
 Title: classe_menutemas.php
 
-Manipulação dos temas do arquivo menutemas.xml.
+Manipulação dos temas do arquivo menutemas.xml ou sistema de administração
+
+Quando o i3Geo está configurado para acessar o sistema de administração, os métodos desta classe
+passam a utilizar a classe i3geo/admin/php/classe_arvore.php
 
 Lista temas, grupos,etc.
 
@@ -28,7 +31,6 @@ Free Software Foundation, Inc., no endereço
 
 File: i3geo/classesphp/classe_menutemas.php
 
-19/6/2007
 */
 /*
 Class: Menutemas
@@ -112,34 +114,10 @@ array
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
-			$locaplic = $this->locaplic;
-			include($this->locaplic."/admin/php/conexao.php");
-			if($this->editor)
-			$sql = 'SELECT * from i3geoadmin_menus order by nome_menu';
-			else
-			$sql = "SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
-    		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-    		$regs = $q->fetchAll();
-    		$dbh = null;
-    		$resultado = array();
-			foreach($regs as $reg)
-			{
-				$perfis = str_replace(","," ",$reg["perfil_menu"]); 
-				$perfis = explode(" ",$perfis); 
-				if (($this->array_in_array($this->perfil,$perfis)) || ($reg["perfil_menu"] == ""))
-				{
-					if(!in_array("publicado_menu",array_keys($reg)))
-					{$reg["publicado_menu"] = "sim";}
-					if(strtolower($reg["publicado_menu"]) != "nao" || $this->editor)
-					{
-						$status = "fechado";
-						if(strtolower($reg["aberto"]) == "sim")
-						$status = "aberto";
-						$url = $this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
-						$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
-					}
-				}
-			}
+			include_once("../admin/php/classe_arvore.php");
+			$arvore = new Arvore($this->locaplic);
+			$resultado = $arvore->pegaListaDeMenus($this->perfil);
+			unset($arvore);
 		}
 		else
 		{$resultado = $this->menutemas;}
@@ -193,15 +171,19 @@ array
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
 				if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
-				if($ondexml != "")
+				if($ondexml != "" && $this->menutemas != "")
 				{
 					$xml = simplexml_load_file($ondexml);
 					$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
 				}
 				else //pega o xml do sistema de administração
 				{
-					$xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
-					$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
+					//$xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					//$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
+					include_once("../admin/php/classe_arvore.php");
+					$arvore = new Arvore($this->locaplic);
+					$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
+					unset($arvore);
 				}
 			}
 		}
@@ -362,12 +344,17 @@ array
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
-				if($ondexml != "")
+				if($ondexml != "" && $this->menutemas != "")
 				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
-					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));
+					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));
 					//echo geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic);exit;	
+					include_once("../admin/php/classe_arvore.php");
+					$arvore = new Arvore($this->locaplic);
+					$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
+					unset($arvore);
+					return($subGrupos);
 				}
 			}
 		}
@@ -470,11 +457,16 @@ array
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
-				if($ondexml != "")
+				if($ondexml != "" && $this->menutemas != "")
 				{$this->xml = simplexml_load_file($ondexml);}
 				else //pega o xml do sistema de administração
 				{
-					$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
+					include_once("../admin/php/classe_arvore.php");
+					$arvore = new Arvore($this->locaplic);
+					$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
+					unset($arvore);
+					return($temas);
 				}
 			}
 		}
@@ -663,17 +655,24 @@ $procurar - String que será procurada.
 		include_once($this->locaplic."/admin/php/xml.php");
 		$tipo = "";
 		$this->xml = "";
-		foreach($this->pegaListaDeMenus() as $menu)
+		if($this->menutemas != "")
 		{
-			if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
-			$ondexml = $menu["arquivo"];
-			if($menu["url"] != ""){$ondexml = $menu["url"];}
-			if($ondexml != "")
-			{$this->xml[] = simplexml_load_file($ondexml);}
-			else //pega o xml do sistema de administração
+			foreach($this->pegaListaDeMenus() as $menu)
 			{
-				$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
+				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
+				$ondexml = $menu["arquivo"];
+				if($menu["url"] != ""){$ondexml = $menu["url"];}
+				$this->xml[] = simplexml_load_file($ondexml);
 			}
+		}
+		else
+		{
+				//$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
+				include_once("../admin/php/classe_arvore.php");
+				$arvore = new Arvore($this->locaplic);
+				$temas = $arvore->procuraTemas($procurar,$this->perfil);
+				unset($arvore);
+				return($temas);
 		}
 		$resultado = array();
 		$texto = array();
