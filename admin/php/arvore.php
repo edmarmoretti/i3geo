@@ -33,20 +33,48 @@ error_reporting(0);
 switch ($funcao)
 {
 	case "pegaGrupos":
-		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' order by ordem");
-		$raiz = pegaDados("select id_raiz,i3geoadmin_raiz.id_tema,nome_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
-		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
+		require_once("classe_arvore.php");
+		$arvore = new Arvore($locaplic);
+		$grupos = $arvore->pegaGruposMenu($id_menu);
+		unset($arvore);
+		retornaJSON($grupos);
 		exit;
 	break;
 	case "pegaSubGrupos":
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n1='$id_n1' order by ordem");
-		$raiz = pegaDados("select id_raiz,i3geoadmin_raiz.id_tema,nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
-		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
-		exit;
+		require_once("classe_arvore.php");
+		$arvore = new Arvore($locaplic);
+		$sgrupos = $arvore->pegaSubgruposGrupo($id_menu,$id_n1);
+		unset($arvore);
+		retornaJSON($sgrupos);
+		exit;		
+	break;
 	case "pegaTemas":
-		retornaJSON(pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n2='$id_n2' order by ordem"));
+		require_once("classe_arvore.php");
+		$arvore = new Arvore($locaplic);
+		$temas = $arvore->pegaTemasSubGrupo($id_n2);
+		unset($arvore);
+		retornaJSON($temas);
 		exit;
 	break;
+
+	case "pegaDadosGrupo":
+		retornaJSON(pegaDados("select * from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
+		exit;
+	break;
+	case "pegaDadosSubGrupo":
+		retornaJSON(pegaDados("select * from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
+		exit;
+	break;
+	case "pegaDadosTema":
+		retornaJSON(pegaDados("select * from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
+		exit;
+	break;
+	case "pegaDadosRaiz":
+		retornaJSON(pegaDados("select * from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
+		exit;
+	break;
+
+
 	case "adicionarTemaRaiz":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
@@ -94,22 +122,6 @@ switch ($funcao)
 		retornaJSON($temas);
 		exit;
 	break;	
-	case "pegaDadosGrupo":
-		retornaJSON(pegaDados("select * from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
-		exit;
-	break;
-	case "pegaDadosSubGrupo":
-		retornaJSON(pegaDados("select * from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
-		exit;
-	break;
-	case "pegaDadosTema":
-		retornaJSON(pegaDados("select * from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
-		exit;
-	break;
-	case "pegaDadosRaiz":
-		retornaJSON(pegaDados("select * from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
-		exit;
-	break;
 	case "alterarGrupo":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
