@@ -1,3 +1,32 @@
+
+
 MAP
+
+
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME testept # ok
+  TYPE point
+  STATUS OFF #
+  CONNECTIONTYPE postgis
+	CONNECTION "user=geodados password=geodados dbname=geodados host=dsvmapas.mma.gov.br port=5432"
+	DATA "the_geom FROM (select * FROM brasil.brabct231) as foo USING UNIQUE gid USING SRID=4291"
+	TEMPLATE 'none.htm'
+  METADATA
+  	TEMA "Censo"
+  	CLASSE "SIM"
+    TEXTO "SIM"
+  END
+  CLASS
+     NAME ''
+     SYMBOL 'ponto'
+     COLOR 0 0 0
+     SIZE 8
+  END  # CLASS
+END  # LAYER
+END
+
+
 
 
