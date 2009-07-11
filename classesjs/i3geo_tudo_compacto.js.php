@@ -4392,7 +4392,6 @@ i3GEO.util = {
 		var sUrl = sUrl.replace(re,'&');
 		return sUrl;
 	},
-
 	/*
 	Function: insereCookie
 	Cria um novo cookie. 
@@ -4607,6 +4606,8 @@ i3GEO.util = {
 	pegaPosicaoObjeto: function(obj){
 		if(obj)
 		{
+			if(!obj.style)
+			{return [0,0];}
 			if(obj.style.position == "absolute")
 			{return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];}
 			else{
@@ -4626,7 +4627,7 @@ i3GEO.util = {
 		{return [0,0];}
 	},
 	/*
-		Function: i3geo_pegaElementoPai
+		Function: pegaElementoPai
 
 		Pega o elemento pai de um elemento clicado para identificar o código do tema.
 
@@ -4713,6 +4714,8 @@ i3GEO.util = {
 			novoel.onmouseout = function(){novoel.style.display='block';};
 			i3GEO.util.BOXES.push(id);
 		}
+		else
+		$i(id).style.display="block";
 	},
 	/*
 	Function: escondeBox
@@ -4777,6 +4780,10 @@ i3GEO.util = {
 	Function: posicionaImagemNoMapa
 	
 	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
+	
+	Parameters:
+	
+	id {string} - id do elemento que será posicionado
 	*/
 	posicionaImagemNoMapa: function(id){
 		var i = $i(id);
@@ -5173,6 +5180,59 @@ i3GEO.util = {
 			}
 		};
 		var tempoFade = setTimeout(fade, tempo);	
+	},
+	/*
+	Function: wkt2ext
+	
+	Calcula a extensão geográfica de uma geometria fornecida no formato WKT
+	
+	Parameters:
+	
+	wkt {String} - geometria no formato wkt
+	
+	tipo {String} - tipo de geometria (polygon,point,line)
+	
+	Return:
+	
+	{String} - extensão geográfica (xmin ymin xmax ymax)
+	*/
+	wkt2ext:function(wkt,tipo){
+		var tipo = tipo.toLowerCase();
+		ext = false;
+		if(tipo == "polygon"){
+			try{
+				var re = new RegExp("POLYGON", "g");
+				var wkt = wkt.replace(re,"");
+				var wkt = wkt.split("(")[2].split(")")[0];
+				var wkt = wkt.split(",");
+				var x = new Array();
+				var y = new Array();
+				for (w=0;w<wkt.length; w++){
+ 					var temp = wkt[w].split(" ");
+ 					x.push(temp[0]);
+ 					y.push(temp[1]);
+				}
+				x.sort(i3GEO.util.sortNumber);
+				var xMin = x[0];
+				var xMax = x[(x.length)-1];
+				y.sort(i3GEO.util.sortNumber);
+				var yMin = y[0];
+				var yMax = y[(y.length)-1];
+				return xMin+" "+yMin+" "+xMax+" "+yMax;
+			}
+			catch(e){}
+		}
+		return ext;
+	},
+	/*
+	Function: sortNumber
+	
+	Ordena um array contendo números. Deve ser usado como parâmetro do método "sort", exemplo
+	
+	y.sort(i3GEO.util.sortNumber), onde y é um array de números
+	*/
+	sortNumber: function(a,b){
+		return a - b;
 	}
 };
 //
@@ -7072,10 +7132,13 @@ i3GEO.php = {
 	
 	<Navegacao->mudaExtensao>	
 	*/
-	mudaext: function(funcao,tipoimagem,ext){
-		i3GEO.php.verifica();
+	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
+		if(arguments.length == 3){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
 		if(ext == 'undefined'){alert("extensao nao definida");return;}
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+i3GEO.configura.sid;
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",funcao);	
 	},
 	/*
@@ -7255,9 +7318,12 @@ i3GEO.php = {
 	
 	<Mapa->adicionatemawms>	
 	*/
-	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionatemawms&servico="+servico+"&tema="+tema+"&nome="+nome+"&proj="+proj+"&formato="+formato+"&versao="+versao+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+suportasld+"&formatosinfo="+formatosinfo;
+	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
+		if(arguments.length == 11){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?g_sid="+sid+"&funcao=adicionatemawms&servico="+servico+"&tema="+tema+"&nome="+nome+"&proj="+proj+"&formato="+formato+"&versao="+versao+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+suportasld+"&formatosinfo="+formatosinfo;
 		cpJSON.call(p,"adicionatemawms",funcao);	
 	},
 	/*
@@ -7332,9 +7398,13 @@ i3GEO.php = {
 	
 	<Mapa->adicionaTema>	
 	*/
-	adtema: function(funcao,temas){
-		i3GEO.php.verifica();
-		var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+temas+"&g_sid="+i3GEO.configura.sid;
+	adtema: function(funcao,temas,locaplic,sid){
+		if(arguments.length == 2){
+			i3GEO.php.verifica();
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+temas+"&g_sid="+sid;
 		cpJSON.call(p,"adtema",funcao);	
 	},
 	/*
@@ -10095,16 +10165,7 @@ i3GEO.calculo = {
 			if(arguments.length == 4){
 				var cellsize = i3GEO.parametros.pixelsize;
 			}
-			/*
-			if(!docmapa)
-			{var docmapa = window.document;}
-			try{
-				var dc = docmapa.getElementById("img");
-				if(!dc){var dc = docmapa;}
-				
-			}
-			catch(e){var dc = docmapa;}
-			*/
+
 			if(!docmapa)
 			{var docmapa = window.document;}
 			var dc = docmapa;	
@@ -20540,7 +20601,7 @@ i3GEO.gadgets = {
 				e.value = parseInt(i3GEO.parametros.mapscale);
 			};
 			if(!$i("i3geo_escalanum")){
-				var i = $inputText(id,"145","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
+				var i = $inputText(id,"155","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
 				var ins = "<table><tr><td>1:"+i;
 				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';

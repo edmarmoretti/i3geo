@@ -51,6 +51,10 @@ function pegaAjuda(tipo,categoria){
 				if(obj[k].tela){
 					ins += "<p><a href='"+obj[k].tela+"' target=_blank style='padding-left:20px' >Exemplo de tela</a></p>"
 				}
+				if(obj[k].gadget){
+					ins += "<p><a href='"+obj[k].gadget+"' target=_blank style='padding-left:20px' >Gadget</a></p>"
+				}
+
 				ins += "</div>"
 			}
 			

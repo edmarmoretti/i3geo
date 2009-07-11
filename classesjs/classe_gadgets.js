@@ -297,7 +297,7 @@ i3GEO.gadgets = {
 				e.value = parseInt(i3GEO.parametros.mapscale);
 			};
 			if(!$i("i3geo_escalanum")){
-				var i = $inputText(id,"145","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
+				var i = $inputText(id,"155","i3geo_escalanum",$trad("d10"),"19",parseInt(i3GEO.parametros.mapscale));
 				var ins = "<table><tr><td>1:"+i;
 				var temp = 'var nova = document.getElementById("i3geo_escalanum").value;';
 				temp += 'i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,nova);';

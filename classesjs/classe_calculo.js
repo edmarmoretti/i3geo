@@ -107,16 +107,7 @@ i3GEO.calculo = {
 			if(arguments.length == 4){
 				var cellsize = i3GEO.parametros.pixelsize;
 			}
-			/*
-			if(!docmapa)
-			{var docmapa = window.document;}
-			try{
-				var dc = docmapa.getElementById("img");
-				if(!dc){var dc = docmapa;}
-				
-			}
-			catch(e){var dc = docmapa;}
-			*/
+
 			if(!docmapa)
 			{var docmapa = window.document;}
 			var dc = docmapa;	

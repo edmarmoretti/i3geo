@@ -614,7 +614,8 @@ g_traducao_ajuda = {
 			pt:"Essa opção permite localizar dados com base em palavras ou frases, por esemplo 'São Paulo'. A busca é feita em um Web Service cujo banco de dados pode variar em cada instalação do i3Geo. Quando um lugar é encontrado, uma nova janela é mostrada na tela com o resultado. Clicando-se nos links disponíveis, o mapa é deslocado para o lugar definido e uma nova camada é adicionada ao mapa.",
 			complemento:"A busca é feita também no Web Service do Google, permitindo a localização de endereços.",
 			apijs:"i3GEO.gadgets.mostraBuscaRapida(id)",
-			tela:"ferramentas/buscarapida/exemplo.htm"
+			tela:"ferramentas/buscarapida/exemplo.htm",
+			gadget:"ferramentas/buscarapida/gadget.php?palavra=tanabi&locaplic=../../../i3geo"
 		},
 		"72": {
 			titulo: "Localizar IP",

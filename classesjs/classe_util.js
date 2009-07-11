@@ -143,7 +143,6 @@ i3GEO.util = {
 		var sUrl = sUrl.replace(re,'&');
 		return sUrl;
 	},
-
 	/*
 	Function: insereCookie
 	Cria um novo cookie. 
@@ -279,15 +278,13 @@ i3GEO.util = {
 		//YAHOO.log("arvore", "i3geo");
 		if(!$i(onde)){return;}
 		var currentIconMode;
-		YAHOO.example.treeExample = new function(){
-        	function buildTree(){
-				arvore = new YAHOO.widget.TreeView(onde);
-				root = arvore.getRoot();
-				var tempNode = new YAHOO.widget.TextNode('', root, false);
-				tempNode.isLeaf = false;
-        	}
-    		buildTree();
-		}();
+		try{
+			arvore = new YAHOO.widget.TreeView(onde);
+			root = arvore.getRoot();
+			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			tempNode.isLeaf = false;
+		}
+		catch(e){}
 		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
@@ -360,6 +357,8 @@ i3GEO.util = {
 	pegaPosicaoObjeto: function(obj){
 		if(obj)
 		{
+			if(!obj.style)
+			{return [0,0];}
 			if(obj.style.position == "absolute")
 			{return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];}
 			else{
@@ -379,7 +378,7 @@ i3GEO.util = {
 		{return [0,0];}
 	},
 	/*
-		Function: i3geo_pegaElementoPai
+		Function: pegaElementoPai
 
 		Pega o elemento pai de um elemento clicado para identificar o código do tema.
 
@@ -466,6 +465,8 @@ i3GEO.util = {
 			novoel.onmouseout = function(){novoel.style.display='block';};
 			i3GEO.util.BOXES.push(id);
 		}
+		else
+		$i(id).style.display="block";
 	},
 	/*
 	Function: escondeBox
@@ -530,6 +531,10 @@ i3GEO.util = {
 	Function: posicionaImagemNoMapa
 	
 	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
+	
+	Parameters:
+	
+	id {string} - id do elemento que será posicionado
 	*/
 	posicionaImagemNoMapa: function(id){
 		var i = $i(id);
@@ -926,6 +931,59 @@ i3GEO.util = {
 			}
 		};
 		var tempoFade = setTimeout(fade, tempo);	
+	},
+	/*
+	Function: wkt2ext
+	
+	Calcula a extensão geográfica de uma geometria fornecida no formato WKT
+	
+	Parameters:
+	
+	wkt {String} - geometria no formato wkt
+	
+	tipo {String} - tipo de geometria (polygon,point,line)
+	
+	Return:
+	
+	{String} - extensão geográfica (xmin ymin xmax ymax)
+	*/
+	wkt2ext:function(wkt,tipo){
+		var tipo = tipo.toLowerCase();
+		ext = false;
+		if(tipo == "polygon"){
+			try{
+				var re = new RegExp("POLYGON", "g");
+				var wkt = wkt.replace(re,"");
+				var wkt = wkt.split("(")[2].split(")")[0];
+				var wkt = wkt.split(",");
+				var x = new Array();
+				var y = new Array();
+				for (w=0;w<wkt.length; w++){
+ 					var temp = wkt[w].split(" ");
+ 					x.push(temp[0]);
+ 					y.push(temp[1]);
+				}
+				x.sort(i3GEO.util.sortNumber);
+				var xMin = x[0];
+				var xMax = x[(x.length)-1];
+				y.sort(i3GEO.util.sortNumber);
+				var yMin = y[0];
+				var yMax = y[(y.length)-1];
+				return xMin+" "+yMin+" "+xMax+" "+yMax;
+			}
+			catch(e){}
+		}
+		return ext;
+	},
+	/*
+	Function: sortNumber
+	
+	Ordena um array contendo números. Deve ser usado como parâmetro do método "sort", exemplo
+	
+	y.sort(i3GEO.util.sortNumber), onde y é um array de números
+	*/
+	sortNumber: function(a,b){
+		return a - b;
 	}
 };
 //
