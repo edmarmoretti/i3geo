@@ -22,7 +22,7 @@ body,td
 Aplicativos disponíveis com o i3geo e documentação.
 </div><br>
 
-<div style="width:500px;text-align:left;" >
+<div style="width:700px;text-align:left;" >
 <table>
 <tr>
 	<td></td>				
@@ -324,33 +324,34 @@ Aplicativos disponíveis com o i3geo e documentação.
 		&nbsp;Esses RSS permitem listar os grupos, subgrupos e temas cadastrados no sistema de administração.
 	</td>
 </tr>
+</table>
+<div id=gadgets ></div>
+<table>
 <tr>
 	<td></td>				
 	<td>
 		<b>Bilbiotecas:</b>
 	</td>
 </tr>
-</table>
-<table>
-<tr><td></td><td>
-<a href="pacotes/openlayers/doc/walkthru.html" target="_blank" >OpenLayers</a>&nbsp;
-<a href="pacotes/yui252" target="_blank" >YUI - Yahoo</a>&nbsp;
-<a href="http://mapserver.gis.umn.edu/" target="_blank">Mapserver</a>&nbsp;
-<a href="http://www.r-project.org/" target="_blank">R</a>&nbsp;
-<a href="http://developer.yahoo.com/yui/" target="_blank">YUI</a>&nbsp;
-<a href="http://cpaint.sourceforge.net/" target="_blank">CPAINT</a>&nbsp;
-<a href="http://dean.edwards.name/" target="_blank">PACKER</a>&nbsp;
-<a href="http://www.fpdf.org/" target="_blank">FPDF</a>&nbsp;
-<a href="http://www.maxmind.com/app/ip-location" target="_blank">GEOIP</a>&nbsp;
-<a href="http://sourceforge.net/projects/kmlmapserver/" target="_blank">KMLMapserver</a>&nbsp;
-<a href="http://www.openlayers.org/" target="_blank">OpenLayers</a>&nbsp;
-<a href="http://www.phpclasses.org/browse/package/2673.html" target="_blank">PHPXBASE</a>&nbsp;
-<a href="http://www.swetake.com/" target="_blank">QRCODE</a>&nbsp;
-<a href="http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/" target="_blank">RICHDRAW</a>&nbsp;
-</td></tr>
+<tr><td></td><td><a href="pacotes/openlayers/doc/walkthru.html" target="_blank" >OpenLayers</a></td></tr>
+<tr><td></td><td><a href="pacotes/yui252" target="_blank" >YUI - Yahoo</a></td></tr>
+<tr><td></td><td><a href="http://mapserver.gis.umn.edu/" target="_blank">Mapserver</a></td></tr>
+<tr><td></td><td><a href="http://www.r-project.org/" target="_blank">R</a></td></tr>
+<tr><td></td><td><a href="http://developer.yahoo.com/yui/" target="_blank">YUI</a></td></tr>
+<tr><td></td><td><a href="http://cpaint.sourceforge.net/" target="_blank">CPAINT</a></td></tr>
+<tr><td></td><td><a href="http://dean.edwards.name/" target="_blank">PACKER</a></td></tr>
+<tr><td></td><td><a href="http://www.fpdf.org/" target="_blank">FPDF</a></td></tr>
+<tr><td></td><td><a href="http://www.maxmind.com/app/ip-location" target="_blank">GEOIP</a></td></tr>
+<tr><td></td><td><a href="http://sourceforge.net/projects/kmlmapserver/" target="_blank">KMLMapserver</a></td></tr>
+<tr><td></td><td><a href="http://www.openlayers.org/" target="_blank">OpenLayers</a></td></tr>
+<tr><td></td><td><a href="http://www.phpclasses.org/browse/package/2673.html" target="_blank">PHPXBASE</a></td></tr>
+<tr><td></td><td><a href="http://www.swetake.com/" target="_blank">QRCODE</a></td></tr>
+<tr><td></td><td><a href="http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/" target="_blank">RICHDRAW</a></td></tr>
+
 </table>
 </div>
 </body>
+<script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
 <script>
 /*
 Title: Página principal com a lista de aplicativos do i3geo
@@ -363,4 +364,13 @@ http://localhost/i3geo/principal.htm
 
 File: principal.htm
 */
+//carrega a lista de gadgets registrados em 
+var ins = "<table><tr><td></td><td><b>Gadgets</b> (ferramentas do i3geo que também podem ser usadas de forma independente):</td></tr>"
+var obj = g_traducao_ajuda.ferramentas
+for(var k in obj){
+	if(obj[k].gadget)
+	ins += "<tr><td></td><td><a href='"+obj[k].gadget+"' target=_blank >"+obj[k].titulo+"</a></td></tr>"
+}
+document.getElementById("gadgets").innerHTML = ins+"</table>"
+
 </script>
