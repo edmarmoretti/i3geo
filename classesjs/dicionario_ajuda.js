@@ -668,6 +668,14 @@ g_traducao_ajuda = {
 			pt:"Ajusta a extensão geográfica do mapa tendo como base os elementos selecionados de um tema.",
 			complemento:"Essa opção é mostrada como um pequeno ícone, localizado ao lado do nome do tema, quando este possuir seleção.",
 			apijs:"i3GEO.tema.zoomsel(idtema)"
+		},
+		"79": {
+			titulo: "Exporta SLD",
+			diretorio:"i3geo/classesjs/classe_tema.js",
+			categoria:"5",
+			pt:"Exporta a legenda atual do tema para o formato SLD. O XML é mostrado na tela.",
+			complemento:"O formato SLD é utilizado em clientes WMS. Essa função objetiva auxiliar a construção de web Services OGC.",
+			apijs:"i3GEO.tema.dialogo.sld(idtema) Esta opção não possuí um diretório em i3geo/ferramentas. O XML é gerado diretamente na tela pelo programa classesphp/mapa_controle.php"
 		}
 	}
 };

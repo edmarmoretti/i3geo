@@ -944,5 +944,15 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		}
 		return("ok");
 	}
+/*
+function: sld
+
+Retorna o SLD correspondente à legenda do tema.
+*/
+	function sld()
+	{
+		if(!$this->layer){return "erro";}
+		return $this->layer->generateSLD();
+	}
 }
 ?>

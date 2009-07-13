@@ -1047,6 +1047,19 @@ Include:
 		redesenhaMapa();
 	break;
 /*
+Property: tema2sld
+
+Mostra na tela o SLD de um tema
+*/
+	case "tema2sld":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$sld = $m->sld();
+		echo header("Content-type: application/xml");
+		echo $m->sld();
+		exit;
+	break;
+/*
 Section: Classes
 
 Edita as características das classes de um tema.

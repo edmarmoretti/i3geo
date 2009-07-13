@@ -7177,6 +7177,7 @@ i3GEO.php = {
 	*/
 	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
 		if(arguments.length == 3){
+			i3GEO.php.verifica();
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
 		}
@@ -7363,6 +7364,7 @@ i3GEO.php = {
 	*/
 	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
 		if(arguments.length == 11){
+			i3GEO.php.verifica();
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
 		}

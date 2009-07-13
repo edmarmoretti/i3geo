@@ -520,7 +520,13 @@ i3GEO.arvoreDeCamadas = {
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
+		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t38")+"','');\" onclick='i3GEO.tema.dialogo.sld(\""+ltema.name+"\")'>"+$trad("t39")+" </a>";
+		var d = {html:tnome};
+		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
+		n.isLeaf = true;
+
 		node.loadComplete();
+
 		//YAHOO.log("Opções OK", "i3geo");
 	},
 	/*

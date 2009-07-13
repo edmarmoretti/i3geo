@@ -649,6 +649,20 @@ en:"Graphic",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
+"t38":[
+{
+pt:"Exporta a legenda para o padrão SLD.",
+en:"Exporta a legenda para o padrão SLD.",
+es:"Exporta a legenda para o padrão SLD.",
+it:"Exporta a legenda para o padrão SLD."
+}],
+"t39":[
+{
+pt:"SLD...",
+en:"SLD...",
+es:"SLD...",
+it:"SLD..."
+}],
 //guia adiciona
 "a1":[
 {

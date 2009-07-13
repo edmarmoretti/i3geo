@@ -5902,6 +5902,20 @@ en:"Graphic",
 es:"Gr&aacute;fico",
 it:"Grafico"
 }],
+"t38":[
+{
+pt:"Exporta a legenda para o padrão SLD.",
+en:"Exporta a legenda para o padrão SLD.",
+es:"Exporta a legenda para o padrão SLD.",
+it:"Exporta a legenda para o padrão SLD."
+}],
+"t39":[
+{
+pt:"SLD...",
+en:"SLD...",
+es:"SLD...",
+it:"SLD..."
+}],
 //guia adiciona
 "a1":[
 {
@@ -7134,6 +7148,7 @@ i3GEO.php = {
 	*/
 	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
 		if(arguments.length == 3){
+			i3GEO.php.verifica();
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
 		}
@@ -7320,6 +7335,7 @@ i3GEO.php = {
 	*/
 	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
 		if(arguments.length == 11){
+			i3GEO.php.verifica();
 			var locaplic = i3GEO.configura.locaplic;
 			var sid = i3GEO.configura.sid;
 		}
@@ -12545,7 +12561,20 @@ i3GEO.tema = {
 		idtema - id ue identifica o tema no map file.
 		*/
 		download: function(idtema)
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");}
+		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");},
+		/*
+		Function: sld
+		
+		Converte a legenda do tema para o formato SLD (utilizado em requisições de Web Services OGC)
+		
+		O SLD é mostrado em uma janela sobre o mapa
+		
+		Parameters:
+
+		idtema - id ue identifica o tema no map file.
+		*/
+		sld: function(idtema)
+		{i3GEO.janela.cria("500px","350px",i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+idtema+"&g_sid="+i3GEO.configura.sid,"","","SLD <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");},
 	}
 };
 //YAHOO.log("carregou classe tema", "Classes i3geo");
@@ -15146,7 +15175,13 @@ i3GEO.arvoreDeCamadas = {
 		var d = {html:tnome};
 		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
 		n.isLeaf = true;
+		var tnome = "<a href='#' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t38")+"','');\" onclick='i3GEO.tema.dialogo.sld(\""+ltema.name+"\")'>"+$trad("t39")+" </a>";
+		var d = {html:tnome};
+		var n = new YAHOO.widget.HTMLNode(d, node, false,true);
+		n.isLeaf = true;
+
 		node.loadComplete();
+
 		//YAHOO.log("Opções OK", "i3geo");
 	},
 	/*
