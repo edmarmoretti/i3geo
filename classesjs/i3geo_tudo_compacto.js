@@ -3934,18 +3934,20 @@ i3GEO = {
 		try{i3GEO.configura.diminuiyN = g_diminuiyN;}catch(e){}			
 		//
 		//calcula o tamanho do mapa
+		//
 		var diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		var diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		var menos = 0;
 		if ($i("contemFerramentas"))
-		{menos = menos + parseInt($i("contemFerramentas").style.width);}
+		{var menos = menos + parseInt($i("contemFerramentas").style.width);}
 		if ($i("ferramentas"))
-		{menos = menos + parseInt($i("ferramentas").style.width);}
+		{var menos = menos + parseInt($i("ferramentas").style.width);}
 		var novow = parseInt(screen.availWidth) - diminuix;
-		var novoh = parseInt(screen.availHeight) - diminuiy;		
-		window.resizeTo(screen.availWidth,screen.availHeight);
-		window.moveTo(0,0);
-
+		var novoh = parseInt(screen.availHeight) - diminuiy;
+		if (window.top==window.self){//nao se aplica em iframe		
+			window.resizeTo(screen.availWidth,screen.availHeight);
+			window.moveTo(0,0);
+		}
 		//o try aqui é necessário por conta do uso possível do i3geo em um iframe
 		try{
 			if (novow < 800){
@@ -10357,7 +10359,7 @@ i3GEO.calculo = {
 	/*
 	Function: distancia
 
-	Calcula a distância entre dois pontos.
+	Calcula a distância em km entre dois pontos.
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 	
