@@ -283,7 +283,7 @@ i3GEO.calculo = {
 	/*
 	Function: distancia
 
-	Calcula a distância entre dois pontos.
+	Calcula a distância em km entre dois pontos.
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 	
