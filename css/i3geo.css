@@ -44,6 +44,9 @@ select
 {font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 0px solid gray;text-align: center;cursor: text;}
 .legendatemas
 {cursor:pointer;text-align:left;background-color:none;vertical-align: top;border: 0px solid gray;margin:0;padding:0;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.legendatemas input
+{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #2F4632;background-color: #FFFFFF;padding: 0;border: 0px solid gray;text-align: center;cursor: text;}
+
 .legendatemas td
 {text-align:left;background-color:#ffffff;vertical-align: top;padding: 0;font-family: Verdana, Arial, Helvetica, sans-serif;z-index:1000;position:relative;}
 .legendatemas input
