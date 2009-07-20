@@ -4,22 +4,15 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>MMA - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 </head>
 <body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
-<div style=position:absolute;left:10px;top:50px;width:200px; >
-<p style=text-align:left;font-size:12pt >Você pode chamar o I3Geo de dentro de uma outra página criando o DIV com id=i3geo<br><br>
-<p style=text-align:left;font-size:12pt >Para chamar a página não é necessário rodar o i3geo/ms_criamapa.php.<br><br>
-<p style=text-align:left;font-size:12pt >Nem todos os elementos precisam estar no mapa.<br><br>
-<p style=text-align:left;font-size:12pt >Você pode esconder ou mudar as ferramentas de lugar.<br><br>
-</div>
-<div id=i3geo  style="left:300px;top:100px;position:absolute" >
-<p style=text-align:center;font-size:12pt >Este é um exemplo de inclusão do I3Geo dentro de uma página qualquer.<br><br>
 
-
+<div id=i3geo style="left:0px;top:0px;position:absolute"  >
 <table id='mst' style=display:none width=100% cellspacing='0'>
-
-<tr style="border:0px"><td style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<tr style="border:0px">
+<td style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
 <tr>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
@@ -41,8 +34,8 @@
 </tr>
 <tr style="border:0px"><td style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 </table>
-<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
-</center>
+<a style=text-align:left;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
+
 </div>
 <div id=barraDeBotoes1 style='display:none'>   
 	<div style='display:inline;background-color:rgb(250,250,250);'>
@@ -69,7 +62,8 @@ i3GEO.configura.mapaRefDisplay = "none"
 i3GEO.configura.iniciaJanelaMensagens = false
 i3GEO.idioma.MOSTRASELETOR = false
 i3GEO.configura.mashuppar = "&mapext=-53 -26 -42 -18";
-i3GEO.barraDeBotoes.PERMITEFECHAR = false
+i3GEO.configura.iniciaJanelaMensagens = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = false;
 i3GEO.cria()
 i3GEO.inicia();
 
