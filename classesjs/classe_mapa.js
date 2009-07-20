@@ -340,6 +340,18 @@ i3GEO.mapa = {
 		*/
 		ID: "",
 		/*
+		Property: incluiBotaoLibera
+		
+		Define se na legenda será incluido o botão para liberar a legenda e incluí-la em uma janela flutuante
+		
+		type:
+		{boolean}
+		
+		default:
+		{true}
+		*/
+		incluiBotaoLibera: true,
+		/*
 		Function: cria
 		
 		Cria a legenda HTML
@@ -372,7 +384,11 @@ i3GEO.mapa = {
 				{
 					if ((retorno.data != "erro") && (retorno.data != undefined)){
 						var s = i3GEO.configura.locaplic+"/imagens/solta.gif";
-						$i(i3GEO.mapa.legendaHTML.ID).innerHTML = "<img onclick='i3GEO.mapa.legendaHTML.libera()' id=soltaLeg src="+s+" title='clique para liberar'/><br><div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
+						var ins = "";
+						if(i3GEO.mapa.legendaHTML.incluiBotaoLibera == true)
+						{ins += "<img onclick='i3GEO.mapa.legendaHTML.libera()' id=soltaLeg src="+s+" title='clique para liberar'/><br>";}
+						ins += "<div id='corpoLegi' >"+ retorno.data.legenda + "</div>"
+						$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
 					}
 				}
 				if ($i("wlegenda")){
