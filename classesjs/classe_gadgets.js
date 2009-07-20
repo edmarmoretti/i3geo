@@ -165,7 +165,7 @@ i3GEO.gadgets = {
 				var temp = $i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml);
 				if(retorno.data){
 					temp.style.display="block";
-					temp.innerHTML = "UTM: x="+retorno.data.x+" y="+retorno.data.y+" zona="+retorno.data.zona+" "+retorno.data.datum;
+					temp.innerHTML = "<div>UTM: x="+retorno.data.x+" y="+retorno.data.y+" zn="+retorno.data.zona+" "+retorno.data.datum+"</div>";
 					//return (retorno.data);
 				}
 			};
