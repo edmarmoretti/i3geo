@@ -216,5 +216,6 @@ Group: Exemplos  {
    File: abas.htm  (exemplos\abas.htm)
    File: Interface normal  (exemplos\visual1.htm)
    File: Interface normal  (exemplos\visual2.htm)
+   File: Interface normal  (exemplos\guias1.htm)
    }  # Group: Exemplos
 
