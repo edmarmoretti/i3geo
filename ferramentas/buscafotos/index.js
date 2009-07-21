@@ -241,19 +241,17 @@ function escondexy()
 	}
 }
 
-function ajustarescala()
+function ajustaescala()
 {
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
-	cp.call(p,"mudaescala",window.parent.i3GEO.atualiza);
+	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
 }
 function esconde(obj)
 {
 	$i("f").style.display="none"
+	$i("resultadofotos").innerHTML = "";
+	$i("paginas").innerHTML = ""
 	if(obj.value=="flickr")
 	{$i("f").style.display="block"}
-	$i("resultadofotos").innerHTML = "Clique em 'Procurar fotos' para iniciar pesquisa de fotos.";
-	$i("paginas").innerHTML = ""
+	else
+	{busca("1")}
 }
