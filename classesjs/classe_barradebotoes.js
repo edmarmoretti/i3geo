@@ -30,6 +30,8 @@ if(typeof(i3GEO) == 'undefined'){
 Class: i3GEO.barradebotoes
 
 Constrói a barra de botões flutuante
+
+Veja também classe_interface.js (i3GEO.interface) que possuí parâmetros que permitem ajustar a posição das barras no mapa
 */
 i3GEO.barraDeBotoes = {
 	/*

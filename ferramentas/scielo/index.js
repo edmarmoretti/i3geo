@@ -21,24 +21,39 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
-buscascielo()
+if(window.parent.i3GEO.parametros.mapscale > 150001){
+	var ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:150.000."
+	ins += "<p>A restrição de escala é necessária para melhorar a performance da busca."
+	ins += "<p>O mapa atual está fora do limite de escala (1:150.000)."
+	ins += "<p><input id=ajustaEscala size=20  type=button value='Ajustar' />"
+	$i("resultadoscielo").innerHTML = ins;
+}
+else{
+	if(window.parent.scieloAtivo == false){
+		var ins = "<p>A busca de artigos ainda é experimental."
+		ins += '<p>Os dados não são obtidos diretamente da base Scielo, mas sim do Ministério do Meio Ambiente.'
+		ins += "<p><input id=continuar size=20  type=button value='Continuar' />"
+		$i("resultadoscielo").innerHTML = ins;
+	}
+	else{buscawiki();}
+}
+if($i("ajustaEscala")){
+	new YAHOO.widget.Button("ajustaEscala",{onclick:{fn: function(){
+		window.parent.i3GEO.parametros.mapscale=150000;
+		window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
+	}}});
+}
+if($i("continuar")){
+	new YAHOO.widget.Button("continuar",{onclick:{fn: function(){
+		buscascielo()
+	}}});
+}
+
 //pega a lista de temas editaveis
 function buscascielo()
 {
+	window.parent.scieloAtivo = true;
 	$i("resultadoscielo").innerHTML = "Aguarde...";
-	if (window.parent.i3GEO.parametros.mapscale > 150001)
-	{
-		var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
-		ins += "<br><br><div style=width:80px onclick='ajustarescala()' ></div>" //<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
-		$i("resultadoscielo").innerHTML = ins;
-		YAHOO.example.init = function ()
-		{
-			function onPushButtonsMarkupReady()
-			{new YAHOO.widget.Button("botao1");}
-  				YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-		}() 	
-		return;
-	}
 	//pega a lista de temas locais do mapfile
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
@@ -63,12 +78,4 @@ function listaartigos(retorno)
 		}
 	}
 	$i("resultadoscielo").innerHTML = ins;
-}
-function ajustarescala()
-{
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=150000";
-	cp.call(p,"mudaescala",window.parent.i3GEO.atualiza);
 }

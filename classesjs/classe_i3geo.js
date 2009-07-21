@@ -30,7 +30,9 @@ A classe i3GEO possuí os métodos de criação e atualização do mapa. Todas as subc
 são baseadas em i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa,
 utilize i3GEO.janela.cria()
 
-Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza()
+Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
+Após terminado o processo de inicialização, pode-se executar uma função de ajuste. Essa função
+deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza("funcaoDeAjuste()")
 
 Ao inicializar ou atualizar o i3Geo, é feita uma chamada em AJAX 
 para a obtenção dos parâmetros necessários ao funcionamento do mapa. Esses parâmetros

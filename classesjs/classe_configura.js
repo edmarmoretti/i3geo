@@ -738,16 +738,17 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d11"),
 			funcaoonclick:function(){
+				wikiAtivo = false;//esta variável é utilizada pela ferramenta durante a navegação no mapa. Se estiver true significa que a ferramenta está sendo atualizada durante um processo de navegação no mapa
 				g_operacao = "navega";
 				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=73' >&nbsp;&nbsp;&nbsp;</a>");
-				atualizawiki = function(){
+				atualizawiki = function(){				
 					if(!$i("wdocai"))
 					{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");return;}
 					var docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 					if (docel.getElementById("resultadowiki"))
 					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";}
 					else
-					{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");}
+					{wikiAtivo = false;i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()")}
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizawiki()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("atualizawiki()");}		
@@ -826,6 +827,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d16"),
 			funcaoonclick:function(){
+				scieloAtivo = false;//esta variável é utilizada pela ferramenta durante a navegação no mapa. Se estiver true significa que a ferramenta está sendo atualizada durante um processo de navegação no mapa				
 				g_operacao = "navega";
 				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm","","","Scielo");
 				atualizascielo = function(){
@@ -836,7 +838,7 @@ i3GEO.configura = {
 						else
 						{i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
 					}
-					catch(e){i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
+					catch(e){scieloAtivo = false;i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizascielo()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("atualizascielo()");}

@@ -20,29 +20,43 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
+
 parametrosURL()
-buscawiki()
+
+if(window.parent.i3GEO.parametros.mapscale > 500001){
+	var ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:500.000."
+	ins += "<p>A restrição de escala é necessária para melhorar a performance da busca."
+	ins += "<p>O mapa atual está fora do limite de escala (1:500.000)."
+	ins += "<p><input id=ajustaEscala size=20  type=button value='Ajustar' />"
+	$i("resultadowiki").innerHTML = ins;
+}
+else{
+	if(window.parent.wikiAtivo == false){
+		var ins = "<p>A busca no Mediawiki traz apenas os 20 primeiros resultados"
+		ins += '<p>Mais detalhes sobre a busca, veja <a href="http://www.geonames.org" >Geonames</a>'
+		ins += "<p><input id=continuar size=20  type=button value='Continuar' />"
+		$i("resultadowiki").innerHTML = ins;
+	}
+	else{buscawiki();}
+}
+
+
+if($i("ajustaEscala")){
+	new YAHOO.widget.Button("ajustaEscala",{onclick:{fn: function(){
+		window.parent.i3GEO.parametros.mapscale=500000;
+		window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,500000)
+	}}});
+}
+if($i("continuar")){
+	new YAHOO.widget.Button("continuar",{onclick:{fn: function(){
+		buscawiki()
+	}}});
+}
 //pega a lista de temas editaveis
 function buscawiki()
 {
+	window.parent.wikiAtivo = true;
 	$i("resultadowiki").innerHTML = "Aguarde...";
-	if(window.parent.i3GEO.parametros.mapscale)
-	{var escala = window.parent.i3GEO.parametros.mapscale}
-	else
-	{var escala = 500000;}
-	if (escala > 500001)
-	{
-		var ins = "Aproxime mais o mapa (pelo menos até a escala 1:500.000)!";
-		ins += "<br><br><div onclick='ajustarescala()' >"//<input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
-		$i("resultadowiki").innerHTML = ins;
-		YAHOO.example.init = function ()
-		{
-			function onPushButtonsMarkupReady()
-			{new YAHOO.widget.Button("botao1");}
-   			YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-		}() 	
-		return;
-	}
 	//pega a lista de temas locais do mapfile
 	var cp = new cpaint();
 	cp.set_response_type("JSON");
@@ -57,16 +71,5 @@ function listaartigos(retorno)
 {
 	if (retorno.data==undefined )
 	{$i("resultadowiki").innerHTML = "Erro. A operação demorou muito.";return;}
-	var ins = "<p>A busca no Mediawiki traz apenas os 20 primeiros resultados"
-	ins += "<p>Se a abrang&ecirc;ncia geogr&aacute;fica de busca for muito grande, pode ocorrer erro devido ao tempo de processamento."
-	ins += '<p>Mais detalhes sobre a busca, veja <a href="http://www.geonames.org" >Geonames</a>'
-	$i("resultadowiki").innerHTML = retorno.data+ins;
-}
-function ajustarescala()
-{
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	//cp.set_debug(2)
-	var p = g_locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&g_sid="+g_sid+"&escala=500000";
-	cp.call(p,"mudaescala",window.parent.remapaf);
+	$i("resultadowiki").innerHTML = retorno.data+"Navegue no mapa para atualizar a lista de resultados";
 }

@@ -21,19 +21,18 @@ Free Software Foundation, Inc., no endereço
 */
 //inicializa
 parametrosURL()
+new YAHOO.widget.Button("botao1",{onclick:{fn: function(){
+	busca("1")
+}}});
+new YAHOO.widget.Button("botao2",{onclick:{fn: function(){
+	mostramenu()
+}}});
+new YAHOO.widget.Button("botao3",{onclick:{fn: function(){
+	window.parent.i3GEO.parametros.mapscale=150000;
+	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
+	mostramenu()
+}}});
 
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao2");}
-		YAHOO.util.Event.onContentReady("botao2", onPushButtonsMarkupReady);
-}()
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao3");}
-		YAHOO.util.Event.onContentReady("botao3", onPushButtonsMarkupReady);
-}()
 function mostramenu()
 {
 	$i("mensagem").style.display="none"
@@ -49,23 +48,6 @@ function busca(pagina)
 	var ai = $i("ai").value;
 	var af = $i("af").value;
 	escondexy();
-	if (window.parent.i3GEO.parametros.mapscale)
-	{
-		if (window.parent.i3GEO.parametros.mapscale > 150001)
-		{
-			var ins = "Aproxime mais o mapa <br>(pelo menos até a escala 1:150.000)!";
-			//ins += "<br><br><div style=width:80px onclick='ajustarescala()' ><input  id=botao1 size=20  type=button value='Ajustar escala' /></div>"
-			$i("resultadofotos").innerHTML = ins;
-			YAHOO.example.init = function ()
-			{
-				function onPushButtonsMarkupReady()
-				{new YAHOO.widget.Button("botao1");}
-  					YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-			}()
-			aguarde("none")	
-			return;
-		}
-	}
 	if(window.parent.i3GEO.parametros.mapexten)
 	{var m = window.parent.i3GEO.parametros.mapexten}
 	else
@@ -239,11 +221,6 @@ function escondexy()
 		box.style.top = "0px"
 		box.style.left = "0px"
 	}
-}
-
-function ajustaescala()
-{
-	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
 }
 function esconde(obj)
 {
