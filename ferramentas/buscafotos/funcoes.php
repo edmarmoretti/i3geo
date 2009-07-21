@@ -34,7 +34,7 @@ function listafotospanoramio()
 	global $ret, $cp,$ai,$af;
 	$ret = explode(" ",$ret);
 	$resultado = "";
-	//echo "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail";
+	//echo "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=small";
 	//return;
 	$recent = file_get_contents("http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
 	$recent = str_replace("\n","",$recent);

@@ -7,10 +7,10 @@
   <body class="yui-skin-sam" >
   	<div id=mensagem style=display:block >
   	<p>As fotos mostradas aqui s&atilde;o de responsabilidade dos servi&ccedil;os de hospedagem utilizados na busca e podem abranger tem&aacute;ticas diversas.
-    <p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:150.000.
+    <p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:300.000.
     <p>A restrição de escala é necessária para melhorar a performance da busca.
     <script>
-    if(window.parent.i3GEO.parametros.mapscale > 150000){
+    if(window.parent.i3GEO.parametros.mapscale > 300001){
     	var ins = "<p>O mapa atual está fora do limite de escala."
     	ins += "<p><input id=botao3 size=20  type=button value='Ajustar' />"
     }
@@ -39,7 +39,7 @@
     	<input type=radio style="cursor:pointer" onclick="esconde(this)" name=buscador value=locr id=buscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>
     </div>
     <div id="paginas" style="top:10px;"></div><br>
-    <div style="top:0px;left:5px;display:block;width:90%;height:150px;overflow:auto"  id="resultadofotos" ></div>
+    <div style="top:0px;left:5px;display:block;width:90%;height:140px;overflow:auto"  id="resultadofotos" ></div>
   	</div>
 	<script type="text/javascript">
 	//chave de acesso ao flicker

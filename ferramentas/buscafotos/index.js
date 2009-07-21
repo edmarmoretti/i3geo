@@ -28,7 +28,7 @@ new YAHOO.widget.Button("botao2",{onclick:{fn: function(){
 	mostramenu()
 }}});
 new YAHOO.widget.Button("botao3",{onclick:{fn: function(){
-	window.parent.i3GEO.parametros.mapscale=150000;
+	window.parent.i3GEO.parametros.mapscale=300000;
 	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
 	mostramenu()
 }}});
@@ -64,18 +64,18 @@ function busca(pagina)
 	if($i("buscapanoramio").checked)
 	{
 		$i("f").style.display="none"
-		$i("paginas").innerHTML = pagina+50;
+		$i("paginas").innerHTML = parseInt(pagina)+50;
 		var ai = pagina
-		var af = pagina+50
+		var af = parseInt(pagina)+15
 		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotospanoramio&ret="+m+"&ai="+ai+"&af="+af;
 		cp.call(p,"listafotospanoramio",listafotospanoramio);
 	}
 	if($i("buscalocr").checked)
 	{
 		$i("f").style.display="none"
-		$i("paginas").innerHTML = pagina+50;
+		$i("paginas").innerHTML = parseInt(pagina)+50;
 		var ai = pagina
-		var af = pagina+50
+		var af = parseInt(pagina)+15
 		var p = g_locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotoslocr&ret="+m+"&ai="+ai+"&af="+af;
 		cp.call(p,"listafotoslocr",listafotoslocr);
 	}
@@ -97,26 +97,24 @@ function listafotospanoramio(retorno)
 	{ins += "<br><span style=color:red>Nada encontrado nessa regi&atilde;o!</span><br><br>";}
 	else
 	{
-		ins += "<table width='90%'>"
 		for (i=0;i<res;i++)
 		{
 			if(data.photos[i])
 			{
-				ins += "<tr><td>"
 				ins += "<img src='"+data.photos[i].photo_file_url+"' "
-				ins += " onmouseout='escondexy()' onmouseover='mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'"
-				ins += "/></td>"
-				ins += "<td style='text-align:left' ><a href='"+data.photos[i].owner_url+"' target='_blank' >autor: "+data.photos[i].owner_name+" - "+data.photos[i].photo_title+"</a><br><br>"
-				ins += "</td></tr>"
+				ins += " onmouseout='escondexy()' ";
+				ins += " onmouseover='mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'"
+				ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' "	
+				var t = data.photos[i].owner_name+" - "+data.photos[i].photo_title;
+				ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />" 			
 			}
 		}
-		ins += "</table>"
 	}
-	$i("resultadofotos").innerHTML = ins;
+	$i("resultadofotos").innerHTML = ins+"<br><br>";
 	var p = parseInt($i("paginas").innerHTML)
-	if(res > 50)
+	if(res > 15)
 	{
-		var ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >mais...&nbsp;</span>"
+		var ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >mais 15 fotos...&nbsp;</span>"
 		$i("paginas").innerHTML = ins;
 	}
 	else
@@ -138,17 +136,27 @@ function listafotosflickr(retorno)
 	{ins += "<br><span style=color:red>Nada encontrado nessa regi&atilde;o!</span><br><br>";}
 	else
 	{
-		ins += "<table width='90%'>"
 		for (i=0;i<res;i++)
 		{
+
+			/*
 			ins += "<tr><td>"
 			ins += "<img src='http://farm"+data[i].farm+".static.flickr.com/"+data[i].server+"/"+data[i].id+"_"+data[i].secret+"_s.jpg' "
 			ins += " onmouseout='escondexy()' onmouseover='mostraxy(\""+data[i].latitude+","+data[i].longitude+"\")'"
 			ins += "/></td>"
 			ins += "<td style='text-align:left' ><a href='http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"/' target='_blank' >"+data[i].title+"</a><br><br>"
 			ins += "</td></tr>"
+			*/
+
+			ins += "<img src='http://farm"+data[i].farm+".static.flickr.com/"+data[i].server+"/"+data[i].id+"_"+data[i].secret+"_s.jpg' "
+			ins += " onmouseout='escondexy()' ";
+			ins += " onmouseover='mostraxy(\""+data[i].latitude+","+data[i].longitude+"\")'"
+			ins += " onclick='javascript:window.open(\"http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"\")' "	
+			var t = data[i].title;
+			ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />" 
+
+
 		}
-		ins += "</table>"
 	}
 	$i("resultadofotos").innerHTML = ins;
 	var p = retorno.data.pages
@@ -175,26 +183,25 @@ function listafotoslocr(retorno)
 	{ins += "<br><span style=color:red>Nada encontrado nessa regi&atilde;o!</span><br><br>";}
 	else
 	{
-		ins += "<table width='90%'>"
 		for (i=0;i<res;i++)
 		{
 			if(data.photos[i])
 			{
-				ins += "<tr><td>"
 				ins += "<img src='"+data.photos[i].photo_file_url+"' "
-				ins += " onmouseout='escondexy()' onmouseover='mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'"
-				ins += "/></td>"
-				ins += "<td style='text-align:left' ><a href='"+data.photos[i].user_url+"' target='_blank' >autor: "+data.photos[i].user_name+" - "+data.photos[i].caption+"</a><br><br>"
-				ins += "</td></tr>"
+				ins += " onmouseout='escondexy()' ";
+				ins += " onmouseover='mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'"
+				ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' "	
+				var t = data.photos[i].owner_name+" - "+data.photos[i].photo_title;
+				ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />" 
+
 			}
 		}
-		ins += "</table>"
 	}
 	$i("resultadofotos").innerHTML = ins;
 	var p = parseInt($i("paginas").innerHTML)
-	if(res > 50)
+	if(res > 15)
 	{
-		var ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >mais...&nbsp;</span>"
+		var ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >mais 15 fotos...&nbsp;</span>"
 		$i("paginas").innerHTML = ins;
 	}
 	else
