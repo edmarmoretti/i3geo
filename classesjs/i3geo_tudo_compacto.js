@@ -15789,12 +15789,23 @@ i3GEO.navega = {
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
 		//YAHOO.log("zoomExt", "i3geo");
-		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
-		if(sid != ""){i3GEO.configura.sid = sid;}
-		if(tipoimagem == "")
-		{var tipoimagem = "nenhum";}
-		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-		i3GEO.php.mudaext(i3GEO.atualiza,tipoimagem,ext);
+		if(i3GEO.interface.ATUAL == "padrao"){
+			if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+			if(sid != ""){i3GEO.configura.sid = sid;}
+			if(tipoimagem == "")
+			{var tipoimagem = "nenhum";}
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.php.mudaext(i3GEO.atualiza,tipoimagem,ext);
+		}
+		if(i3GEO.interface.ATUAL == "googlemaps"){
+			var ext = ext.split(" ");
+    		var pt1 = (( (ext[0] * -1) - (ext[2] * -1) ) / 2) + ext[0] *1;
+    		var pt2 = (((ext[1] - ext[3]) / 2)* -1) + ext[1] *1;
+    		var sw = new GLatLng(ext[1],ext[0]);
+    		var ne = new GLatLng(ext[3],ext[2]);
+    		var z = i3GeoMap.getBoundsZoomLevel(new GLatLngBounds(sw,ne));
+    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), z);			
+		}
 	},
 	/*
 	Function: aplicaEscala
