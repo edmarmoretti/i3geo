@@ -29,7 +29,7 @@ new YAHOO.widget.Button("botao2",{onclick:{fn: function(){
 }}});
 new YAHOO.widget.Button("botao3",{onclick:{fn: function(){
 	window.parent.i3GEO.parametros.mapscale=300000;
-	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,150000)
+	window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,300000)
 	mostramenu()
 }}});
 

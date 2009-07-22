@@ -22,7 +22,6 @@ Free Software Foundation, Inc., no endereço
 //inicializa
 
 parametrosURL()
-
 if(window.parent.i3GEO.parametros.mapscale > 500001){
 	var ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:500.000."
 	ins += "<p>A restrição de escala é necessária para melhorar a performance da busca."

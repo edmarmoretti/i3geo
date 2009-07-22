@@ -35,7 +35,7 @@ else{
 		ins += "<p><input id=continuar size=20  type=button value='Continuar' />"
 		$i("resultadoscielo").innerHTML = ins;
 	}
-	else{buscawiki();}
+	else{buscascielo();}
 }
 if($i("ajustaEscala")){
 	new YAHOO.widget.Button("ajustaEscala",{onclick:{fn: function(){

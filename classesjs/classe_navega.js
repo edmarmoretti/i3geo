@@ -251,21 +251,29 @@ i3GEO.navega = {
 	Function: aplicaEscala
 	
 	Aplica ao mapa um novo valor de escala tendo como base o valor do denminador
+	
+	Utilize "" caso vc queira usar locaplic e sid default.
 
 	Parameters:
 	
-	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
+	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX. Pode ser ""
 	
-	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
+	sid {String} - código da seção aberta no servidor pelo i3geo. pode ser ""
 	
 	escala {Numeric} - denominador da escala
 	*/	
 	aplicaEscala: function(locaplic,sid,escala){
 		//YAHOO.log("aplicaescala", "i3geo");
-		if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
-		if(sid != ""){i3GEO.configura.sid = sid;}
-		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-		i3GEO.php.mudaescala(i3GEO.atualiza,escala);
+		if(i3GEO.interface.ATUAL == "padrao"){
+			if(locaplic != ""){i3GEO.configura.locaplic = locaplic;}
+			if(sid != ""){i3GEO.configura.sid = sid;}
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.php.mudaescala(i3GEO.atualiza,escala);
+		}
+		if(i3GEO.interface.ATUAL == "googlemaps"){
+			var nzoom = i3GEO.interface.googlemaps.escala2nzoom(escala);
+			i3GeoMap.setZoom(nzoom);
+		}
 	},
 	/*
 	Function: panFixo
