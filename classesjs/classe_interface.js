@@ -510,7 +510,6 @@ i3GEO.interface = {
    			try{
    			if(i3GeoMap != ""){
    				posfixo = posfixo + "&";
-   				if(posfixo == "&&&"){posfixo = "";}
 				i3GeoMap.removeOverlay(i3GEOTileO);
 				var i3GEOTile = new GTileLayer(null,0,18,{
                	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
