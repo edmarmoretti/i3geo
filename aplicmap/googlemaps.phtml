@@ -169,6 +169,14 @@ g_3dmap = "3dmap.map";
 i3GEO.interface.ATUAL = "googlemaps";
 i3GEO.interface.IDCORPO = "contemImg";
 i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
+
+i3GEO.configura.listaDePropriedadesDoMapa = {
+	"propriedades": [
+		{ text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"},
+		{ text: "p12", url: "javascript:i3GEO.mapa.dialogo.autoredesenha()"}
+	]
+}
+
 i3GEO.cria();
 i3GEO.inicia();
 </script>
