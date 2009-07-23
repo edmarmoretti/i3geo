@@ -2717,24 +2717,31 @@ tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|se
 */
 function redesenhaMapa()
 {
-	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv;
+	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface;
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
-	$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
-	if ($imagem == "erro")
-	{
-		unlink($map_file);
-		copy(str_replace(".map","seguranca.map",$map_file),$map_file);
-		$m = New Mapa($map_file);
-		$par = $m->parametrosTemas();
-		if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
-		{$imagem = "var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
-		else
-		{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
+	//
+	//na interface googlemaps não é necessário gerar a imagem
+	//
+	if (isset($interface) && $interface == "googlemaps")
+	{$imagem = "var mapimagem='';var mapexten=''";}
+	else{
+		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
+		if ($imagem == "erro")
+		{
+			unlink($map_file);
+			copy(str_replace(".map","seguranca.map",$map_file),$map_file);
+			$m = New Mapa($map_file);
+			$par = $m->parametrosTemas();
+			if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
+			{$imagem = "var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
+			else
+			{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
+		}
 	}
 	$mensagens = "var mensagens ='".$m->pegaMensagens()."'";
 	restauraCon($map_file,$postgis_mapa);

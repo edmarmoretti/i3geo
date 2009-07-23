@@ -415,6 +415,10 @@ i3GEO = {
 			corpoMapa.call();
 			return;
 		}
+		if(retorno == ""){
+			corpoMapa.call();
+			return;
+		}
 		if(!retorno.data){
 			corpoMapa.call();
 			return;
@@ -454,17 +458,20 @@ i3GEO = {
 			mapexten = "";
 			//transforma o retorno em variáveis
 			eval(retorno.data.variaveis);
-
-			i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
-			if (i3GEO.parametros.mapscale != mapscale)
-			i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);
-
-			i3GEO.parametros.mapexten = mapexten;
-			i3GEO.parametros.mapscale = mapscale;
-			i3GEO.parametros.mapres = mapres;
-			i3GEO.parametros.pixelsize = g_celula;
-			i3GEO.parametros.mapimagem = mapimagem;
-
+			//
+			//o try aqui é necessário pois na interface googlemaps os parâmetros retorno.data.variaveis não são gerados completamente
+			//
+			try{
+				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
+				if (i3GEO.parametros.mapscale != mapscale)
+				i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);
+				i3GEO.parametros.mapexten = mapexten;
+				i3GEO.parametros.mapscale = mapscale;
+				i3GEO.parametros.mapres = mapres;
+				i3GEO.parametros.pixelsize = g_celula;
+				i3GEO.parametros.mapimagem = mapimagem;
+			}
+			catch(e){}
 			i3GEO.interface.redesenha();
 			
 			g_operacao = "";

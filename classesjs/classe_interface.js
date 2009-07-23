@@ -507,28 +507,24 @@ i3GEO.interface = {
 		ZOOMSCALE: [591657550,295828775,147914387,73957193,36978596,18489298,9244649,4622324,2311162,1155581,577790,288895,144447,72223,36111,18055,9027,4513,2256,1128],
 
 		redesenha: function(){
+   			try{
    			if(i3GeoMap != ""){
    				posfixo = posfixo + "&";
-				if(tile == false){
-   					i3GeoMap.removeOverlay(wmsmap);
-   					wmsmap = new GGroundOverlay(i3GEO.interface.googlemaps.criaWMS()+posfixo, i3GeoMap.getBounds());
-					i3GeoMap.addOverlay(wmsmap);
-   				}
-   				else{
-   					i3GeoMap.removeOverlay(i3GEOTileO);
-   					var i3GEOTile = new GTileLayer(null,0,18,{
-                     	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
-                     	isPng:true,
-                     	opacity:i3GEO.interface.googlemaps.OPACIDADE });
-                	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-    				i3GeoMap.addOverlay(i3GEOTileO);
-				}
+   				if(posfixo == "&&&"){posfixo = "";}
+				i3GeoMap.removeOverlay(i3GEOTileO);
+				var i3GEOTile = new GTileLayer(null,0,18,{
+               	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
+               	isPng:true,
+               	opacity:i3GEO.interface.googlemaps.OPACIDADE });
+              	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+   				i3GeoMap.addOverlay(i3GEOTileO);
 			}
 			//atualiza a lista de KMLs na árvore de temas
 			var n = i3GEO.mapa.GEOXML.length;
 			for(i=0;i<n;i++){
 				i3GEO.mapa.criaNoArvoreGoogle(i3GEO.mapa.GEOXML[i],i3GEO.mapa.GEOXML[i]);
 			}
+			}catch(e){alert(e)}
 		},
 		cria: function(w,h){
 			posfixo = "&";
@@ -676,6 +672,16 @@ i3GEO.interface = {
 					return(i);
 				}
 			}
+		},
+		zoom2extent:function(mapexten){
+			var pol = mapexten;
+    		var ret = pol.split(" ");
+    		var pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
+    		var pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
+    		var sw = new GLatLng(ret[1],ret[0]);
+    		var ne = new GLatLng(ret[3],ret[2]);
+    		var z = i3GeoMap.getBoundsZoomLevel(new GLatLngBounds(sw,ne));
+    		i3GeoMap.setCenter(new GLatLng(pt2,pt1), z);		
 		}
 	},
 	/*

@@ -222,7 +222,7 @@ i3GEObuscaRapida = {
 	
 	Essa é a função default utilizada pela ferramenta, podendo ser substituída por outra se desejado.
 	
-	Além de enquadrar o mapa à uma extensão geográfica específica, uma nova camada é adicionada ao mapa, mostrando o limite da ocorrência desejada.
+	Além de enquadrar o mapa à uma extensão geográfica específica, uma nova camada é adicionada, mostrando o limite da ocorrência desejada.
 	
 	Parameters:
 	
@@ -235,14 +235,17 @@ i3GEObuscaRapida = {
 	nm {String} - nome que será dado à acamada que será adicionada ao mapa
 	*/
 	zoom: function(wkt,layer,gid,nm){
-    	var adicionaCamada = function(layer,gid,nm){
+    	var adicionaCamada = function(layer,gid,nm,ext){
 	 		var s = i3GEObuscaRapida.servicowms+"?gid="+gid+"&";
 			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4291","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+			if(window.parent.i3GEO.interface.ATUAL == "googlemaps"){
+				window.parent.i3GEO.interface.googlemaps.zoom2extent(ext);
+			}		
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}
 		try{window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");}catch(e){}
-		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
+		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm,ext),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 	},
 	/*
 	Function: adicionatema

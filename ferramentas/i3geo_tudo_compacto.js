@@ -7182,8 +7182,15 @@ i3GEO.php = {
 			var sid = i3GEO.configura.sid;
 		}
 		if(ext == 'undefined'){alert("extensao nao definida");return;}
+		var retorno = function(retorno){
+			if(i3GEO.interface.ATUAL == "googlemaps"){
+				i3GEO.interface.googlemaps.zoom2extent(ext);
+    			i3GEO.janela.fechaAguarde();
+			}
+			else{funcao.call();}
+		};
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
-		cpJSON.call(p,"mudaext",funcao);	
+		cpJSON.call(p,"mudaext",retorno);	
 	},
 	/*
 	Function: mudaescala
@@ -7299,8 +7306,16 @@ i3GEO.php = {
 	*/
 	zoomtema: function(funcao,tema){
 		i3GEO.php.verifica();
+		var retorno = function(retorno){
+			if(i3GEO.interface.ATUAL == "googlemaps"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.googlemaps.zoom2extent(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			else{funcao.call();}
+		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"zoomtema",funcao);	
+		cpJSON.call(p,"zoomtema",retorno);	
 	},
 	/*
 	Function: zoomsel
@@ -7312,8 +7327,16 @@ i3GEO.php = {
 	*/
 	zoomsel: function(funcao,tema){
 		i3GEO.php.verifica();
+		var retorno = function(retorno){
+			if(i3GEO.interface.ATUAL == "googlemaps"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.googlemaps.zoom2extent(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			else{funcao.call();}
+		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"zoomsel",funcao);	
+		cpJSON.call(p,"zoomsel",retorno);
 	},
 	/*
 	Function: limpasel
@@ -7501,7 +7524,7 @@ i3GEO.php = {
 	*/
 	corpo: function(funcao,tipoimagem){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.interface.ATUAL;
 		cpJSON.call(p,"corpo",funcao);	
 	},
 	/*
