@@ -208,11 +208,11 @@ i3GEO.analise = {
 				if ($i("mostradistancia_calculo"))
 				{$i("mostradistancia_calculo").innerHTML = "";}
 			}
-			
 			YAHOO.namespace("janelaDocamede.xp");
 			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:300,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
-			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxi+150,imagemyi);
+			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
 		},
 		/*
@@ -262,7 +262,7 @@ i3GEO.analise = {
 						i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 					}
 				}
-				i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.analise.medeDistancia.fechaJanela,"pontosins");
+				i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");
 			}
 		},
 		/*
@@ -340,8 +340,12 @@ i3GEO.analise = {
 						i3GEO.desenho.richdraw.lineWidth = "2px";
 					}
 				};
-				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-				i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
+				if(i3GEO.interface.ATUAL == "padrao"){
+					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+					i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
+				}
+				else
+				{alert("Operacao nao disponivel");}
 			}
 			else{i3GEO.desenho.richdraw.fecha();}
 		},
@@ -365,7 +369,8 @@ i3GEO.analise = {
 			YAHOO.namespace("janelaDocaarea.xp");
 			YAHOO.janelaDocaarea.xp.panel = new YAHOO.widget.Panel("mostraarea", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocaarea.xp.panel.render();
-			YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxi+150,imagemyi);
+			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 		},
 		/*
 		Function: fechaJanela
@@ -418,7 +423,7 @@ i3GEO.analise = {
 				//var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 				//pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 				}
-				i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.analise.medeArea.fechaJanela,"pontosArea");
+				i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.fechaJanela,"pontosArea");
 			}
 		},
 		/*

@@ -440,6 +440,10 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d2"),
 			funcaoonclick:function(){
+				if(i3GEO.interface.ATUAL == "openlayers"){
+					i3GEO.interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
+					return;
+				}
 				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.configura.tipoimagem,i3GEO.parametros.extentTotal);
 				marcadorZoom = "";
 			}
@@ -453,13 +457,21 @@ i3GEO.configura = {
 				var temp = "zoom";
 				if(i3GEO.interface.ATIVAMENUCONTEXTO)
 				var temp = "zoom_contexto";
+				
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
-				if(!$i("i3geoboxZoom"))
-				i3GEO.navega.zoomBox.criaBox();
+				
 				g_operacao='navega';
 				g_tipoacao='zoomli';
 				i3GEO.barraDeBotoes.ativaIcone("zoomli");
 				marcadorZoom = "";
+				
+				if(i3GEO.interface.ATUAL=="openlayers"){
+					OLpanel.activateControl(OLzoom);
+					return;
+				}
+				
+				if(!$i("i3geoboxZoom"))
+				i3GEO.navega.zoomBox.criaBox();				
 				if(i3GEO.eventos.MOUSEDOWN.toString().search("i3GEO.navega.zoomBox.inicia()") < 0)
 				{i3GEO.eventos.MOUSEDOWN.push("i3GEO.navega.zoomBox.inicia()");}
 				if(i3GEO.eventos.MOUSEUP.toString().search("i3GEO.navega.zoomBox.termina()") < 0)
@@ -483,6 +495,13 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				marcadorZoom = "";
+
+				if(i3GEO.interface.ATUAL=="openlayers"){
+					OLpanel.activateControl(OLpan);
+					return;
+				}
+
+				
 				panMapaInicia = function(exy){
 					if ($i("img") && (g_tipoacao == "pan")){
 						try{
@@ -761,6 +780,9 @@ i3GEO.configura = {
    						wikiDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizawiki()});
    						wikiZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizawiki()});						
 					}
+					if(i3GEO.interface.ATUAL == "openlayers"){
+   						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizawiki();});
+					}
 				}		
 			}
 		},
@@ -822,13 +844,22 @@ i3GEO.configura = {
 						}
 						if(window.parent.frames["wdocai"].panTogoogle)
 						{window.parent.frames["wdocai"].panTogoogle();}
-						else{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
+						else{
+							i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
+						}
 						
 					}
-					catch(e){i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
+					catch(e){
+						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
+					}
 				};		
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
-				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}		
+				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
+				if(i3GEO.interface.ATUAL == "openlayers"){
+					i3geoOL.events.register("moveend",i3geoOL,function(e){
+						try{window.parent.frames["wdocai"].panTogoogle();}catch(x){}
+					});
+				}
 			}
 		},
 		{
@@ -847,8 +878,10 @@ i3GEO.configura = {
 						{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";}
 						else{
 							i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");
-							GEvent.removeListener(scieloDragend);
-							GEvent.removeListener(scieloZoomend);
+							if(i3GEO.interface.ATUAL == "googlemaps"){
+								GEvent.removeListener(scieloDragend);
+								GEvent.removeListener(scieloZoomend);
+							}
 						}
 					}
 					catch(e){scieloAtivo = false;i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");}
@@ -858,6 +891,9 @@ i3GEO.configura = {
 					if(i3GEO.interface.ATUAL == "googlemaps"){
    						scieloDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizascielo()});
    						scieloZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizascielo()});						
+					}
+					if(i3GEO.interface.ATUAL == "openlayers"){
+   						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizascielo();});
 					}
 				}
 			}
@@ -879,8 +915,10 @@ i3GEO.configura = {
 					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";}
 					else{
 						i3GEO.eventos.NAVEGAMAPA.remove("atualizaconfluence()");
-						GEvent.removeListener(confluenceDragend);
-						GEvent.removeListener(confluenceZoomend);
+						if(i3GEO.interface.ATUAL == "googlemaps"){
+							GEvent.removeListener(confluenceDragend);
+							GEvent.removeListener(confluenceZoomend);
+						}
 					}
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaconfluence()") < 0){
@@ -888,7 +926,10 @@ i3GEO.configura = {
 					if(i3GEO.interface.ATUAL == "googlemaps"){
    						confluenceDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizaconfluence()});
    						confluenceZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizaconfluence()});						
-					}				
+					}
+					if(i3GEO.interface.ATUAL == "openlayers"){
+   						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizaconfluence();});
+					}			
 				}		
 			}
 		},

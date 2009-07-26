@@ -167,10 +167,7 @@ function ativanovotema(retorno)
 	{
 		montaComboLocal()
 		window.parent.g_nomepin = retorno.data
-		if (window.parent.$i("openlayers"))
-		{window.parent.atualizaOL();}
-		else
-		{window.parent.i3GEO.atualiza("")}
+		window.parent.i3GEO.atualiza()
 	}
 	else
 	{$i("shapefile").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}

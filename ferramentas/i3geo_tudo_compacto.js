@@ -7187,7 +7187,11 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				i3GEO.interface.openlayers.zoom2ext(ext);
+    			i3GEO.janela.fechaAguarde();			
+			}
+			if(i3GEO.interface.ATUAL == "padrao"){funcao.call();}
 		};
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	
@@ -8064,8 +8068,6 @@ i3GEO.util = {
 			novoel.style.zIndex=1;
 			novoel.innerHTML = '<font face="Arial" size=0></font>';
 			document.body.appendChild(novoel);
-			//YAHOO.util.Event.addListener($i(id),"mouseover", "this.style.display='none'");
-			//novoel.onmouseover = eval("$i('"+id+"').style.display='none';");
 			novoel.onmouseover = function(){novoel.style.display='none';};
 			novoel.onmouseout = function(){novoel.style.display='block';};
 			i3GEO.util.BOXES.push(id);
@@ -8300,8 +8302,8 @@ i3GEO.util = {
 					novoel.id = container;
 					var i = novoel.style;
 					i.position = "absolute";
-					i.top = parseInt($i("img").style.top);
-					i.left = parseInt($i("img").style.left);
+					i.top = parseInt($i(i3GEO.interface.IDCORPO).style.top);
+					i.left = parseInt($i(i3GEO.interface.IDCORPO).style.left);
 					document.body.appendChild(novoel);
 				}
 				var container = $i(container);

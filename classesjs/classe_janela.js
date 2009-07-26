@@ -286,7 +286,7 @@ i3GEO.janela = {
 		var i = $i("i3geo_rosa");
 		if(i)
 		i.style.display="none";
-		if ($i("img"))
+		if ($i(i3GEO.interface.IDCORPO))
 		{$i("img").title = "";}
 		//insere div para tips
 		var novoel = document.createElement("div");

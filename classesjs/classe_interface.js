@@ -383,6 +383,11 @@ i3GEO.interface = {
 				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':1},{isBaseLayer:true, opacity: 1});
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
+				i3geoOL.events.register("moveend",i3geoOL,function(e){
+					i3GEO.interface.openlayers.recalcPar();
+   					g_operacao = "";
+   					g_tipoacao = "";	
+				});
 				i3geoOL.events.register("mousemove", i3geoOL, function(e){
 					//pega as coordenadas do cursor
 					if (navm)
@@ -390,15 +395,15 @@ i3GEO.interface = {
 					else
 					{var p = e.xy;}
 					//altera o indicador de localizacao
-					var lonlat = i3geoOL.getLonLatFromViewPortPx(p);
+					var lonlat = i3geoOL.getLonLatFromPixel(p);
 					var d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 					try{
-						objposicaomouse.x = p.x;
-						objposicaomouse.y = p.y;
 						objposicaocursor.ddx = lonlat.lon;
 						objposicaocursor.ddy = lonlat.lat;
 						objposicaocursor.telax = p.x;
 						objposicaocursor.telay = p.y;
+						objposicaocursor.dmsx = d[0];
+						objposicaocursor.dmsy = d[1];
 						var dc = $i("i3geo");
 						if ($i("openlayers_OpenLayers_Container")){var dc = $i("openlayers_OpenLayers_Container");}
 						while (dc.offsetParent){
@@ -406,59 +411,70 @@ i3GEO.interface = {
 							objposicaocursor.telax = objposicaocursor.telax + dc.offsetLeft;
 							objposicaocursor.telay = objposicaocursor.telay + dc.offsetTop;
 						}
-						//movecursor();
 					}
 					catch(e){}
 				});
 				var pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 				i3geoOL.addControl(pz);
 				pz.div.style.zIndex = 5000;
-				/*
-				$i("OpenLayers_Control_PanZoom_pandown").style.top=parseInt($i("OpenLayers_Control_PanZoom_pandown").style.top)+5;
-				$i("OpenLayers_Control_PanZoom_panup").style.top=parseInt($i("OpenLayers_Control_PanZoom_panup").style.top)+5;
-				$i("OpenLayers_Control_PanZoom_panleft").style.top=parseInt($i("OpenLayers_Control_PanZoom_panleft").style.top)+5;
-				$i("OpenLayers_Control_PanZoom_panright").style.top=parseInt($i("OpenLayers_Control_PanZoom_panright").style.top)+5;
-				*/
-				var navc = new OpenLayers.Control.NavToolbar();
-				i3geoOL.addControl(navc);
-				navc.div.style.left="8px";
-				navc.div.style.top="-20px";
-				navc.div.onclick = function(){
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pan","img",i3GEO.configura.locaplic);
-					g_operacao="navega";
-				};
-    			zb = new OpenLayers.Control.ZoomToMaxExtent();
-				var botoesadic = new OpenLayers.Control.Panel();
-    			/*
-    			botoesadic.addControls([
-       				new OpenLayers.Control.ZoomToMaxExtent()
-    			]);
-    			i3geoOL.addControl(botoesadic);
-    			botoesadic.div.style.left="10px";
-    			botoesadic.div.style.top=parseInt($i("OpenLayers_Control_PanZoom_zoomout").style.top)+77;
-				*/
 				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 
-				var m = i3GEO.parametros.mapexten.split(" ");
-				var b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);
-				i3geoOL.zoomToExtent(b);
+				i3GEO.interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 
-				i3geoOL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
+				//i3geoOL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
+				i3geoOL.addControl(new OpenLayers.Control.ScaleLine());
+				i3geoOL.addControl(new OpenLayers.Control.OverviewMap());
 				i3geoOL.addControl(new OpenLayers.Control.KeyboardDefaults());	
-				//var ol_overview = new OpenLayers.Layer.WMS( "OpenLayers WMS", "http://labs.metacarta.com/wms/vmap0",{layers: 'basic'});
-				//var options = {layers: [ol_overview],minRatio: 8,maxRatio: 128};
-				//var overview = new OpenLayers.Control.OverviewMap(options);
-				//i3geoOL.addControl(overview);
+				
 				i3GEO.eventos.ativa($i("openlayers"));
+				
 				var pos = i3GEO.util.pegaPosicaoObjeto($i("openlayers"));
 				if ($i("aguarde")){
 					$top("aguarde",pos[1]);
 					$left("aguarde",pos[0]);
 				}
+				//
+				//estes controles ficam invisíveis e são usados quando os ícones default do i3geo são ativados
+				//
+				OLpan = new OpenLayers.Control.Navigation();
+				OLzoom = new OpenLayers.Control.ZoomBox();
+				OLpanel = new OpenLayers.Control.Panel();
+				OLpanel.addControls([OLpan,OLzoom]);
+				i3geoOL.addControl(OLpanel);
+				
+				i3GEO.interface.openlayers.ativaBotoes();
 			};
 			i3GEO.php.openlayers(montaMapa);
+			i3GEO.gadgets.mostraMenuSuspenso();
+			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
+			i3GEO.idioma.mostraSeletor();
+			i3GEO.gadgets.mostraCoordenadasGEO();
+			i3GEO.gadgets.mostraCoordenadasUTM();
+			i3GEO.gadgets.mostraEscalaNumerica();		
 		},
 		ativaBotoes: function(){
+			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			if ($i("barraDeBotoes2")){
+				var x2 = imagemxy[0]+i3GEO.interface.BARRABOTOESLEFT;
+				var y2 = imagemxy[1]+i3GEO.interface.BARRABOTOESTOP;
+			}
+			if ($i("barraDeBotoes2"))
+			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);
+			//ativa as funções dos botões
+			i3GEO.barraDeBotoes.ativaBotoes();
+		},
+		recalcPar: function(){
+			g_operacao = "";
+			g_tipoacao = "";
+			var bounds = i3geoOL.getExtent().toBBOX().split(",");
+    		i3GEO.parametros.mapexten = bounds[0]+" "+bounds[1]+" "+bounds[2]+" "+bounds[3];
+			i3GEO.parametros.mapscale = i3geoOL.getScale();
+			atualizaEscalaNumerica(parseInt(i3GEO.parametros.mapscale));
+		},
+		zoom2ext: function(ext){
+			var m = ext.split(" ");
+			var b = new OpenLayers.Bounds(m[0],m[1],m[2],m[3]);
+			i3geoOL.zoomToExtent(b);		
 		}
 	},
 	/*

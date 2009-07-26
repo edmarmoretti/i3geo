@@ -288,9 +288,22 @@ i3GEO.eventos = {
 	posicaoMouseMapa: function(e){
 		//
 		//os eventos da interface googlemaps são definidos em i3GEO.interface
+		//se a interface for googlemaps ou openlayers, os eventos são controlados
+		//pelas respectivas apis
+		//caso contrário, o i3geo irá controlar os cálculos
+		//Entretanto, nas ferramentas que usam o richdraw (distância e área) o posicionamento
+		//deve ser controlado pelo i3geo
 		//
-		if(i3GEO.interface.ATUAL == "googlemaps")
-		{return;}	
+		var container = "";
+		try{
+			//verifica se o richdraw está sendo usaado
+			var container = e.target.parentNode.id;
+		}
+		catch(erro){}
+		if (container != "divGeometriasTemp"){
+			if((i3GEO.interface.ATUAL == "googlemaps") || (i3GEO.interface.ATUAL == "openlayers"))
+			{return;}
+		}
 		if (!e) var e = window.event;
 		//
 		//verifica sob qual objeto o mouse está se movendo

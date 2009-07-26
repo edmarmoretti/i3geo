@@ -123,8 +123,7 @@ i3GEO.desenho = {
 			//pega a posição da imagem do mapa para posicionar corretamente o container
 			//
 			var pos = [0,0];
-			if($i("img"))
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			//
 			//cria o container
 			//
@@ -160,8 +159,8 @@ i3GEO.desenho = {
 	texto - texto que será inserido no tipo "insereTexto"
 	*/	
 	aplica: function(tipo,objeto,n,texto){
-		if(i3GEO.desenho.richdraw && $i("img")){
-			var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+		if(i3GEO.desenho.richdraw && $i(i3GEO.interface.IDCORPO)){
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			//
 			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 			//

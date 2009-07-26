@@ -274,6 +274,9 @@ i3GEO.navega = {
 			var nzoom = i3GEO.interface.googlemaps.escala2nzoom(escala);
 			i3GeoMap.setZoom(nzoom);
 		}
+		if(i3GEO.interface.ATUAL == "openlayers"){
+			i3geoOL.zoomToScale(escala,true);
+		}
 	},
 	/*
 	Function: panFixo

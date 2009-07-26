@@ -532,7 +532,11 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				i3GEO.interface.openlayers.zoom2ext(ext);
+    			i3GEO.janela.fechaAguarde();			
+			}
+			if(i3GEO.interface.ATUAL == "padrao"){funcao.call();}
 		};
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	

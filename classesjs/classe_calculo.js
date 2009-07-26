@@ -100,6 +100,11 @@ i3GEO.calculo = {
 				var xy = new Array();
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+				var xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
+				return [(xy.x)+pos[0],(xy.y)+pos[1]];
+			}
 			if(arguments.length == 3){
 				var ext = i3GEO.parametros.mapexten;
 				var cellsize = i3GEO.parametros.pixelsize;
@@ -414,7 +419,7 @@ i3GEO.calculo = {
 		}
 		else
 		{alert("Box nao encontrado");return;}
-		var pos = i3GEO.util.pegaPosicaoObjeto($i("img"));
+		var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 		var xfig0 = parseInt(bxs.width) - pos[0];
 		var yfig0 = parseInt(bxs.height) - pos[1];
 		var xfig = pix + (parseInt(bxs.width)) - pos[0];
