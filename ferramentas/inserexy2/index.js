@@ -23,7 +23,9 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 aguarde("block")
 ativaGuias("")
+
 mostraGuia("guia1")
+
 //eventos das guias
 $i("guia1").onclick = function()
 {mostraGuia("guia1");$i("projecao").style.display="none";}
@@ -37,7 +39,7 @@ $i("guia5").onclick = function()
 {mostraGuia("guia5");$i("projecao").style.display="none";}
 $i("guia6").onclick = function()
 {mostraGuia("guia6");$i("projecao").style.display="none";}
-
+	
 window.parent.g_nomepin = ""
 mensagemAjuda("men1",$i("men1").innerHTML)
 mensagemAjuda("men2",$i("men2").innerHTML)
@@ -66,21 +68,13 @@ function montaComboLocal()
  			{document.body.innerHTML = retorno.dados;return;}
  			retorno = retorno.dados;
  			$i("shapefile").innerHTML = retorno+"<br><br><div style=top:0px;left:0px;text-align:left; onclick='criatemaeditavel()'><input id=botao1 type='button' size=18 value='Cria um novo tema' /></div>"
-			YAHOO.example.init = function ()
-			{
-				function onPushButtonsMarkupReady()
-				{
-					new YAHOO.widget.Button("botao1");
-					new YAHOO.widget.Button("botao2");
-					new YAHOO.widget.Button("botao3");
-					new YAHOO.widget.Button("botao4");
-					new YAHOO.widget.Button("botao5");
-					new YAHOO.widget.Button("botao6");
-					new YAHOO.widget.Button("botaodd");
-				}
-    			YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-			}()
-			
+			new YAHOO.widget.Button("botao1");
+			new YAHOO.widget.Button("botao2");
+			new YAHOO.widget.Button("botao3");
+			new YAHOO.widget.Button("botao4");
+			new YAHOO.widget.Button("botao5");
+			new YAHOO.widget.Button("botao6");
+			new YAHOO.widget.Button("botaodd");
  			if ($i("temasLocais"))
  			{
  	 			$i("temasLocais").value = window.parent.g_nomepin
@@ -104,6 +98,7 @@ function montaComboLocal()
 		"shapefile"
 	)
 }
+
 montaComboLocal()
 //monta o combo com a lista de itens
 function ativaItem(tema)

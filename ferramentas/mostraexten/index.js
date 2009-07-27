@@ -23,15 +23,9 @@ Free Software Foundation, Inc., no endereço
 
 //inicializa alguns parâmetros.
 parametrosURL()
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{
-		new YAHOO.widget.Button("botao1");
-	}
-   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
+new YAHOO.widget.Button("botao1");
 $i("extatual").innerHTML = window.parent.i3GEO.parametros.mapexten
+
 function aplicar()
 {
 	try

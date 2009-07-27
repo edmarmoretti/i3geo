@@ -22,11 +22,13 @@ Free Software Foundation, Inc., no endereço
 //inicializa
 aguarde("block")
 parametrosURL()
+
 var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=escalaparametros"
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");
 cp.call(p,"parametrosBarraEscala",inicia);
+
 YAHOO.example.init = function ()
 {
 	function onPushButtonsMarkupReady()
