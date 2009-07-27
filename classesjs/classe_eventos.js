@@ -144,6 +144,10 @@ i3GEO.eventos = {
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
 		try{
+			if(objposicaocursor.imgy == ""){
+				objposicaocursor.imgy = 1;
+				objposicaocursor.imgx = 1;
+			}
 			if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0){
 				var f = i3GEO.eventos.MOUSEPARADO.length-1;
 				if (f >= 0){

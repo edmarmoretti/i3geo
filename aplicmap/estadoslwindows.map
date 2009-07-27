@@ -8,7 +8,7 @@ LAYER
 	TEMPLATE "estados.htm"
 	METADATA
 		ITENS "ESTADO"
-		#TIP "ESTADO"
+		TIP "ESTADO"
 		ITENSDESC "Estado"
 	    #ITEMIMG "ESTADO"
 	    #IMGLOC "imagens/bandeiras"

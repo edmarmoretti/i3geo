@@ -116,6 +116,7 @@ function mudaicone()
 	$i("selecaopoli").style.border = "1px solid gray"
 	if(window.parent.richdraw)
 	window.parent.richdraw.fecha()
+	if(window.parent.$i("img"))
 	window.parent.$i("img").style.cursor="pointer";
 }
 //pega os temas selecionados
@@ -155,12 +156,11 @@ function tiposel(obj)
 	if (obj.id == "selecaobox")
 	{
 		mudaicone()
-		obj.style.border = "1px solid white"
+		obj.style.border = "1px solid white";
 		window.parent.g_tipoacao = "selecaobox";
 		window.parent.i3GEO.selecao.box.criaBox();
 		if(window.parent.i3GEO.eventos.MOUSEDOWN.toString().search("i3GEO.selecao.box.inicia()") < 0)
 		{window.parent.i3GEO.eventos.MOUSEDOWN.push("i3GEO.selecao.box.inicia()");}
-		
 	}
 	if (obj.id == "selecaopt")
 	{

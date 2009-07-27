@@ -7296,7 +7296,13 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.openlayers.zoom2ext(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			if(i3GEO.interface.ATUAL == "padrao")
+			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomtema",retorno);	
@@ -7317,7 +7323,13 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.openlayers.zoom2ext(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			if(i3GEO.interface.ATUAL == "padrao")
+			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomsel",retorno);
@@ -16781,17 +16793,18 @@ i3GEO.selecao = {
 		*/
 		inicia: function(){
 			if(g_tipoacao!='selecaobox'){return;}
-			if(!$i("i3geoboxSel"))
 			i3GEO.selecao.box.criaBox();
+			adicionaxyBox = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			var i = $i("i3geoboxSel").style;
 			i.width=0;
 			i.height=0;
 			i.visibility="visible";
 			i.display="block";
-			i.left = objposicaocursor.telax + g_postpx;
-			i.top = objposicaocursor.telay + g_postpx;
-			boxxini = objposicaocursor.telax;
-			boxyini = objposicaocursor.telay;
+			i.left = objposicaocursor.imgx + adicionaxyBox[0] + g_postpx;
+			i.top = objposicaocursor.imgy + adicionaxyBox[1] + g_postpx;
+			
+			boxxini = objposicaocursor.imgx + adicionaxyBox[0];
+			boxyini = objposicaocursor.imgy + adicionaxyBox[1];
 			tamanhox = 0;
 			tamanhoy = 0;
 			if(i3GEO.eventos.MOUSEMOVE.toString().search("i3GEO.selecao.box.desloca()") < 0)
@@ -16805,6 +16818,11 @@ i3GEO.selecao = {
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
+			try{i3GEO.desenho.richdraw.fecha()}catch(e){}
+			i3GEO.desenho.criaContainerRichdraw();
+			i3GEO.desenho.richdraw.lineColor = "red";
+			i3GEO.desenho.richdraw.lineWidth = "2px";
+
 			if(!$i("i3geoboxSel")){
 				var novoel = document.createElement("div");
 				novoel.style.width = "0px";
@@ -16855,8 +16873,8 @@ i3GEO.selecao = {
 			if(g_tipoacao!='selecaobox'){return;}
 			var bxs = $i("i3geoboxSel").style;
 			if(bxs.display != "block"){return;}
-			ppx = objposicaocursor.telax;
-			py = objposicaocursor.telay;
+			ppx = objposicaocursor.imgx + adicionaxyBox[0];
+			py = objposicaocursor.imgy + adicionaxyBox[1];
 			if (navm){
 				if ((ppx > boxxini) && ((ppx - boxxini - 2) > 0))
 				{bxs.width = ppx - boxxini - 2;}
@@ -16952,18 +16970,6 @@ i3GEO.selecao = {
 			if (g_tipoacao == "selecaopoli"){
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
-					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (i3GEO.parametros.mapscale > 500000)
-					{var d = parseInt(d);}
-					else{
-						d= d + "";
-						d = d.split(".");
-						var decimal = d[1].substr(0,3);
-						d = d[0]+"."+decimal;
-						d = d * 1;
-					}
-					var da = d + pontosdistobj.dist[n-1];
-					if(navn){i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,0);}
 					i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhas[n-1],n);
 				}
 			}
@@ -16975,40 +16981,26 @@ i3GEO.selecao = {
 		*/
 		clique: function(){
 			if (g_tipoacao != "selecaopoli"){return;}
-			var n = pontosdistobj.xpt.length;
-			pontosdistobj.xpt[n] = objposicaocursor.ddx;
-			pontosdistobj.ypt[n] = objposicaocursor.ddy;
-			pontosdistobj.xtela[n] = objposicaocursor.telax;
-			pontosdistobj.ytela[n] = objposicaocursor.telay;
-			pontosdistobj.ximg[n] = objposicaocursor.imgx;
-			pontosdistobj.yimg[n] = objposicaocursor.imgy;
-			pontosdistobj.dist[n] = 0;
-			//inclui a linha para ligar com o ponto inicial
-			if (n == 0){
+				var n = pontosdistobj.xpt.length;
+				pontosdistobj.xpt[n] = objposicaocursor.ddx;
+				pontosdistobj.ypt[n] = objposicaocursor.ddy;
+				pontosdistobj.xtela[n] = objposicaocursor.telax;
+				pontosdistobj.ytela[n] = objposicaocursor.telay;
+				pontosdistobj.ximg[n] = objposicaocursor.imgx;
+				pontosdistobj.yimg[n] = objposicaocursor.imgy;
+				pontosdistobj.dist[n] = 0;
 				try{
-					if (navn){
-						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);
-					}
-					else{
-						pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(i3GEO.parametros.w/2),pontosdistobj.yimg[0]);	
-					}				
+					if (navn)
+					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
+					else
+					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
-				catch(e){}
-			}
-			try{
-				if (navn){
-					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n],pontosdistobj.yimg[n],pontosdistobj.ximg[n],pontosdistobj.yimg[n]);
+				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+				if (n > 0){
+					var d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 				}
-				else{
-					pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);
-				}				
-			}
-			catch(e){}
-			if (n > 0){
-				var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-				pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-			}
-			i3GEO.util.insereMarca.cria(objposicaocursor.telax,objposicaocursor.telay,i3GEO.selecao.poligono.termina,"pontospoli");
+			i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.selecao.poligono.termina,"divGeometriasTemp");
 		},
 		/*
 		Function: termina
@@ -17184,6 +17176,10 @@ i3GEO.eventos = {
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
 		try{
+			if(objposicaocursor.imgy == ""){
+				objposicaocursor.imgy = 1;
+				objposicaocursor.imgx = 1;
+			}
 			if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0){
 				var f = i3GEO.eventos.MOUSEPARADO.length-1;
 				if (f >= 0){

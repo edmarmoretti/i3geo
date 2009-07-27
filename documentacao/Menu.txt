@@ -189,11 +189,11 @@ Group: Interfaces HTML e mapfiles de inicialização e configuração  {
    File: Google Maps &lparen;experimental&rparen;  (aplicmap\googlemaps.phtml)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
+   File: Interface normal  (aplicmap\openlayers.htm)
    File: Interface normal &lparen;para exemplos&rparen;  (no auto-title, aplicmap\meumapa.htm)
    File: Interface simples 1  (aplicmap\simples1.htm)
    File: Interface simples 2  (aplicmap\simples2.htm)
    File: Interface zerocal  (aplicmap\zerocal.htm)
-   File: OpenLayers &lparen;experimental&rparen;  (aplicmap\openlayers.htm)
    File: Redirecionador para o ms_criamapa.php com extensão HTM  (aplicmap\index.htm)
    File: Redirecionador para o ms_criamapa.php com extensão HTML  (aplicmap\index.html)
    }  # Group: Interfaces HTML e mapfiles de inicialização e configuração

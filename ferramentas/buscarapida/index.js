@@ -240,6 +240,9 @@ i3GEObuscaRapida = {
 			i3GEO.php.adicionaTemaWMS(window.parent.i3GEO.atualiza,s,layer,"default","EPSG:4291","image/png","1.1.0",nm+" - "+layer,"","nao","",i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 			if(window.parent.i3GEO.interface.ATUAL == "googlemaps"){
 				window.parent.i3GEO.interface.googlemaps.zoom2extent(ext);
+			}
+			if(window.parent.i3GEO.interface.ATUAL == "openlayers"){
+				window.parent.i3GEO.interface.openlayers.zoom2ext(ext);
 			}		
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");

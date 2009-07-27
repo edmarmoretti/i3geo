@@ -2727,7 +2727,7 @@ function redesenhaMapa()
 	//
 	//na interface googlemaps não é necessário gerar a imagem
 	//
-	if (isset($interface) && $interface == "googlemaps")
+	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers"))
 	{$imagem = "var mapimagem='';var mapexten=''";}
 	else{
 		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);

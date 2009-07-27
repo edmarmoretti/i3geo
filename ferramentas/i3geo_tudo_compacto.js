@@ -7316,7 +7316,13 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.openlayers.zoom2ext(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			if(i3GEO.interface.ATUAL == "padrao")
+			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomtema",retorno);	
@@ -7337,7 +7343,13 @@ i3GEO.php = {
 				i3GEO.interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			else{funcao.call();}
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				eval(retorno.data.variaveis);
+				i3GEO.interface.openlayers.zoom2ext(mapexten);
+    			i3GEO.janela.fechaAguarde();
+			}
+			if(i3GEO.interface.ATUAL == "padrao")
+			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomsel",retorno);
