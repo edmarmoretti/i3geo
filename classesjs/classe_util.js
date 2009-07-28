@@ -283,17 +283,20 @@ i3GEO.util = {
 			root = arvore.getRoot();
 			var tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
+			tempNode.enableHighlight = false;
 		}
 		catch(e){}
 		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+		tempNode.enableHighlight = false;
 		var c = obj.propriedades.length;
 		for (var i=0, j=c; i<j; i++){
 			var linha = obj.propriedades[i];
 			var conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
 			var d = {html:conteudo};
 			var temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+			temaNode.enableHighlight = false;
 		}
 		arvore.collapseAll();
    		arvore.draw();

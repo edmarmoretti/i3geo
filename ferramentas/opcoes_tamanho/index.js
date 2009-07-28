@@ -22,12 +22,9 @@ Free Software Foundation, Inc., no endereço
 $i("l").value = window.parent.i3GEO.parametros.w
 $i("a").value = window.parent.i3GEO.parametros.h
 parametrosURL()
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{new YAHOO.widget.Button("botao1");}
-	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
+
+new YAHOO.widget.Button("botao1");
+
 function executaf()
 {
 	var l = $i("l").value

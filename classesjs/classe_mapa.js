@@ -199,11 +199,13 @@ i3GEO.mapa = {
 			var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
+			node.enableHighlight = false;
 		}
 		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
 		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
 		var d = {html:html};
-		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true);    			
+		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
+		nodekml.enableHighlight = false;   			
 		nodekml.isleaf = true;
 		i3GEO.arvoreDeCamadas.ARVORE.draw();
 		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
@@ -587,7 +589,7 @@ i3GEO.mapa = {
 		Abre a janela de configuração da legenda do mapa
 		*/
 		opcoesLegenda: function()
-		{i3GEO.janela.cria("320px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a>");},
+		{i3GEO.janela.cria("320px","350px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: gradeCoord
 

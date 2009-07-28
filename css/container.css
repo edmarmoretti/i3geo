@@ -47,6 +47,8 @@ Version 0.11.4
 	-moz-opacity: 0.5;
 	opacity:.50;
 	filter: alpha(opacity=50);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	background-color:#CCC;
 }
 

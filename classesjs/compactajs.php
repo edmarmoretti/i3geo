@@ -82,21 +82,21 @@ packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal"
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
-"../pacotes/yui252/build/yahoo/yahoo-min.js",
-"../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui252/build/dom/dom-min.js",
-"../pacotes/yui252/build/container/container_core-min.js",
-"../pacotes/yui252/build/menu/menu-min.js",
-"../pacotes/yui252/build/logger/logger-min.js",
-"../pacotes/yui252/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui252/build/slider/slider-min.js",
-"../pacotes/yui252/build/animation/animation-min.js",
-"../pacotes/yui252/build/container/container-min.js",
-"../pacotes/yui252/build/element/element-beta.js",
-"../pacotes/yui252/build/tabview/tabview-min.js",
-"../pacotes/yui252/build/utilities/utilities.js",
 "../pacotes/cpaint/cpaint2.inc.js",
-"../pacotes/yui252/build/treeview/treeview-min.js",
+"../pacotes/yui270/build/yahoo/yahoo-min.js",
+"../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui270/build/dom/dom-min.js",
+"../pacotes/yui270/build/container/container_core-min.js",
+"../pacotes/yui270/build/menu/menu-min.js",
+"../pacotes/yui270/build/logger/logger-min.js",
+"../pacotes/yui270/build/dragdrop/dragdrop-min.js",
+"../pacotes/yui270/build/slider/slider-min.js",
+"../pacotes/yui270/build/animation/animation-min.js",
+"../pacotes/yui270/build/container/container-min.js",
+"../pacotes/yui270/build/element/element-min.js",
+"../pacotes/yui270/build/tabview/tabview-min.js",
+"../pacotes/yui270/build/utilities/utilities.js",
+"../pacotes/yui270/build/treeview/treeview.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 "classe_i3geo.js",
@@ -136,16 +136,15 @@ $cssfiles = array(
 "../css/geral.css",
 "../css/botoes.css",
 "../css/documentation.css",
-"../pacotes/yui252/build/logger/assets/skins/sam/logger.css",
-"../pacotes/yui252/build/fonts/fonts-min.css",
-"../pacotes/yui252/build/reset-fonts-grids/reset-fonts-grids.css",
-"../pacotes/yui252/build/grids/grids-min.css",
-"../pacotes/yui252/build/menu/assets/skins/sam/menu.css",
-"../pacotes/yui231/build/autocomplete/assets/skins/sam/autocomplete.css",
-"../pacotes/yui231/build/container/assets/skins/sam/container.css",
-"../pacotes/yui252/build/tabview/assets/skins/sam/tabview.css",
-//"../pacotes/jsobjects/jsUI-Treeview/default.css",
-"../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css",
+"../pacotes/yui270/build/logger/assets/skins/sam/logger.css",
+"../pacotes/yui270/build/fonts/fonts-min.css",
+"../pacotes/yui270/build/reset-fonts-grids/reset-fonts-grids.css",
+"../pacotes/yui270/build/grids/grids-min.css",
+"../pacotes/yui270/build/menu/assets/skins/sam/menu.css",
+"../pacotes/yui270/build/autocomplete/assets/skins/sam/autocomplete.css",
+"../pacotes/yui270/build/container/assets/skins/sam/container.css",
+"../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
+"../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
 "../css/corrigeyui_geral.css"
 ); 
 
@@ -161,18 +160,50 @@ $escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
 $jsfiles = array(
 "../ferramentas/funcoes_compacto.js",
-"../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui252/build/element/element-beta.js",
-"../pacotes/yui231/build/button/button-beta.js",
-"../pacotes/yui252/build/tabview/tabview-min.js",
-"../pacotes/yui252/build/animation/animation-min.js",
-"../pacotes/yui252/build/autocomplete/autocomplete-min.js",
 "../pacotes/cpaint/cpaint2.inc.js",
+"../pacotes/yui270/build/yahoo/yahoo-min.js",
+"../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
+"../pacotes/yui270/build/dom/dom-min.js",
+"../pacotes/yui270/build/container/container_core-min.js",
+"../pacotes/yui270/build/menu/menu-min.js",
+"../pacotes/yui270/build/logger/logger-min.js",
+"../pacotes/yui270/build/dragdrop/dragdrop-min.js",
+"../pacotes/yui270/build/slider/slider-min.js",
+"../pacotes/yui270/build/animation/animation-min.js",
+"../pacotes/yui270/build/container/container-min.js",
+"../pacotes/yui270/build/element/element-min.js",
+"../pacotes/yui270/build/tabview/tabview-min.js",
+"../pacotes/yui270/build/utilities/utilities.js",
+"../pacotes/yui270/build/treeview/treeview.js",
+"../pacotes/yui270/build/button/button-min.js",
 "classe_php.js",
 "classe_util.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";
 salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js","js");
+
+//css das ferramentas
+$cssfiles = array(
+"../css/button.css",
+"../css/ferramentas.css",
+"../pacotes/yui270/build/container/assets/skins/sam/container.css",
+"../pacotes/yui270/build/menu/assets/skins/sam/menu-skin.css",
+"../css/tabview.css",
+);
+$buffer = "";
+foreach ($cssfiles as $f)
+{
+	$abre = fopen($f, "r");
+	while (!feof($abre))
+	{$buffer .= fgets($abre);}
+	fclose($abre);
+	$buffer .= "\n";
+}
+$abre = fopen("../css/i3geo_ferramentas.css", "wt");
+$escreve = fwrite ($abre,$buffer);
+$fecha = fclose ($abre);
+chmod("../css/i3geo_ferramentas.css",0777);
+
 
 function inicia($arquivo)
 {

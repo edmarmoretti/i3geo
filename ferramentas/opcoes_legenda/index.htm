@@ -2,8 +2,15 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
-<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
-<title></title>
+<title></title> 
+<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;border:0px;
+}
+</style>
 </head>
 <body class="yui-skin-sam" >
 
@@ -67,12 +74,10 @@
 		</tr>
 
 	</table>
-	<div style=top:10px;left:0px;text-align:left; onclick="executa()">
-	<input id=botao1 size=20  type=button value="Aplicar" />
-	</div>
-	<div style="width:100px;left:100px;position:relative;text-align:left;top:-17px;" onclick="testa()">
-	<input id=botao2 size=20 type=button value="Testar" />
-	</div>
+	<br>
+	<input id=botao1 size=20  onclick="executa()" type=button value="Aplicar" />
+	<input id=botao2  onclick="testa()" size=20 type=button value="Testar" />
+	<br><br>
 	<img src="" id=testeLegenda />
 </div>
 <script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>

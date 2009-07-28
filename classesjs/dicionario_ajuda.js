@@ -654,7 +654,7 @@ g_traducao_ajuda = {
 		},
 		"76": {
 			titulo: "Conexão WMS-T",
-			diretorio:"i3geo/ferramentas/conectarwmst",
+			diretorio:"i3geo/ferramentas/wmstime",
 			categoria:"4",
 			pt:"Uma conexão WMS-T permite que dados disponíveis em outros servidores sejam incluídos como camadas no i3Geo. Na ferramenta de conexão é mostrada uma lista de endereços previamente cadastrados, mas pode-se digitar um outro endereço qualquer, desde que seja um serviço no padrão WMS-T. Após ser escolhido o serviço, deve-se definir o período das imagens e o intervalo desejado (diário, mensal ou anual).",
 			complemento:"Após definido o período, a ferramenta fará a busca das imagens para sua apresentação em sequência. Ao parar a animação, a imagem mostrada poderá ser acrescentada ao mapa como uma nova camada. A visualização das imagens só é possível após a carga de todas as datas selecionadas. Caso seja necessário cancelar a carga de uma ou mais datas, deve-se clicar em 'parar' na lista de imagens que estão sendo carregadas.",

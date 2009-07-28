@@ -915,24 +915,29 @@ function ativaGuias()
 	}
 	gpai.id = "guiasYUI";
 	gpai.className = "yui-navset";
-	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
+	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
 	for(g=0;g<12;g++)
 	{
-		if ($i("guia"+g))
+		if($i("guia"+g))
 		ins += '<li><a href="#"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px; >'+$i("guia"+g).innerHTML+'</div></em></a></li>';
 	}
 	ins += "</ul>";
 	gpai.innerHTML = ins;
+	for(g=0;g<12;g++){
+		var guia = $i("guia"+g);
+	}
 }
 function mostraGuia(guia)
 {
 	for(g=0;g<12;g++)
 	{
-		if ($i("guia"+g+"obj"))
-		$i("guia"+g+"obj").style.display="none";
+		if ($i("guia"+g+"obj")){
+			$i("guia"+g+"obj").style.display="none";
+		}
 	}
-	if ($i(guia+"obj"))
-	{$i(guia+"obj").style.display="block";}
+	if ($i(guia+"obj")){
+		$i(guia+"obj").style.display="block";
+	}
 }
 /*
 Function: protocolo

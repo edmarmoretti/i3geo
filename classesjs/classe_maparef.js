@@ -147,7 +147,7 @@ i3GEO.maparef = {
 			}
 			ins += '<div class="bd" style="text-align:left;padding:3px;border-bottom-width:1px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
 			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" onclick="javascript:i3GEO.maparef.click()">';
-			//ins += '<div style="text-align:left;font-size:0px" id="refmensagem" ></div></div>';
+			ins += '</div>';
 			novoel.innerHTML = ins;
 			document.body.appendChild(novoel);
 			if(i3GEO.maparef.TRANSICAOSUAVE){

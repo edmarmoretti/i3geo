@@ -144,7 +144,7 @@ i3GEO.janela = {
 		var ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
-		ins += '</div><div id="'+id+'_corpo" class="bd">';
+		ins += '</div><div id="'+id+'_corpo" class="bd" style="padding:5px">';
 		if(wsrc != "")
 		ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';
 		ins += '</div>';
@@ -159,7 +159,7 @@ i3GEO.janela = {
 		var wdocaiframe = $i(id+"i");
 		if (wdocaiframe)
 		{
-			with (wdocaiframe.style){width = "100%";height=waltura;};
+			with (wdocaiframe.style){width = parseInt(wlargura)-12;height=waltura;};
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
 		}
@@ -252,8 +252,8 @@ i3GEO.janela = {
 		else if ($i("contemImg"))
 		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
 		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
-		eval ('YAHOO.aguarde.'+id+'.setBody("<span style=font-size:12px; >"+texto+"</span>")');
-		eval ('YAHOO.aguarde.'+id+'.body.style.height="20px"');
+		eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
+		eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
 		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>")');
 		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
 		if($i("flamingo"))
@@ -261,8 +261,7 @@ i3GEO.janela = {
 		else
 		{eval ('YAHOO.aguarde.'+id+'.moveTo('+pos[0]+','+pos[1]+')');}
 		eval ('YAHOO.aguarde.'+id+'.show()');
-		if($i(id+"_mask"))
-		{$i(id+"_mask").style.zIndex=5000;}
+		if($i(id+"_mask")){$i(id+"_mask").style.zIndex=5000;}
 		if($i(id+"_c"))
 		{$i(id+"_c").style.zIndex=6000;}
 		//YAHOO.log("Fim abreAguarde", "janela");	

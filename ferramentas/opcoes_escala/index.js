@@ -29,15 +29,13 @@ var cp = new cpaint();
 cp.set_response_type("JSON");
 cp.call(p,"parametrosBarraEscala",inicia);
 
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{
-		new YAHOO.widget.Button("botao1");
-		new YAHOO.widget.Button("botao2");
-	}
-	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
+new YAHOO.widget.Button("botao1",{onclick:{fn: function(){
+	executa();
+}}});
+new YAHOO.widget.Button("botao2",{onclick:{fn: function(){
+	testaBarra();
+}}});
+
 function inicia(retorno)
 {
 	if(retorno.data.erro){aguarde("none");return;}

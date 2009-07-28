@@ -118,8 +118,8 @@ function mensagemOpcao(onde,texto){ var ins="<table style='width:100%;padding:2;
  ins+=texto; ins+='</div></th></tr></table>'; if(onde !=""){$i(onde).innerHTML=ins;}
  else{return(ins);}}
 function ativaGuias(){ for(g=0;g<12;g++){ if($i("guia"+g)) var gpai=$i("guia"+g).parentNode;}
- gpai.id="guiasYUI"; gpai.className="yui-navset"; var ins='<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">'; for(g=0;g<12;g++){ if($i("guia"+g)) ins+='<li><a href="#"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px;>'+$i("guia"+g).innerHTML+'</div></em></a></li>';}
- ins+="</ul>"; gpai.innerHTML=ins;}
-function mostraGuia(guia){ for(g=0;g<12;g++){ if($i("guia"+g+"obj")) $i("guia"+g+"obj").style.display="none";}
- if($i(guia+"obj")){$i(guia+"obj").style.display="block";}}
+ gpai.id="guiasYUI"; gpai.className="yui-navset"; var ins='<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">'; for(g=0;g<12;g++){ if($i("guia"+g)) ins+='<li><a href="#"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px;>'+$i("guia"+g).innerHTML+'</div></em></a></li>';}
+ ins+="</ul>"; gpai.innerHTML=ins; for(g=0;g<12;g++){ var guia=$i("guia"+g);}}
+function mostraGuia(guia){ for(g=0;g<12;g++){ if($i("guia"+g+"obj")){ $i("guia"+g+"obj").style.display="none";}}
+ if($i(guia+"obj")){ $i(guia+"obj").style.display="block";}}
 function protocolo(){ var u=window.location.href; var u=u.split(":"); return(u[0]);}

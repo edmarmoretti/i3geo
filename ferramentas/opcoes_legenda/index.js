@@ -20,15 +20,12 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //inicializa
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{
-		new YAHOO.widget.Button("botao1");
-		new YAHOO.widget.Button("botao2");
-	}
-	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
+new YAHOO.widget.Button("botao1",{onclick:{fn: function(){
+	executa();
+}}});
+new YAHOO.widget.Button("botao2",{onclick:{fn: function(){
+	testa();
+}}});
 
 aguarde("block")
 parametrosURL()

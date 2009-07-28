@@ -662,7 +662,7 @@ TV.prototype = {
                     }, 200);
                 } else {
                     if (self.fireEvent('clickEvent', {event:ev,node:node}) !== false) { 
-                        toggle();
+                        //toggle();
                     }
                 }
             }
@@ -1556,7 +1556,7 @@ YAHOO.widget.Node.prototype = {
  * @type boolean
  * @default true
  */
-    enableHighlight: true,
+    enableHighlight: false,
     
 /** 
  * Stores the highlight state.  Can be any of:
@@ -2403,7 +2403,7 @@ YAHOO.widget.Node.prototype = {
 
         sb[sb.length] = '<table id="ygtvtableel' + this.index + '"border="0" cellpadding="0" cellspacing="0" class="ygtvtable ygtvdepth' + this.depth;
         if (this.enableHighlight) {
-            sb[sb.length] = ' ygtv-highlight' + this.highlightState;
+            //sb[sb.length] = ' ygtv-highlight' + this.highlightState;
         }
         if (this.className) {
             sb[sb.length] = ' ' + this.className;
@@ -2674,6 +2674,7 @@ YAHOO.widget.Node.prototype = {
     * @param _silent {boolean} optional, don't fire the highlightEvent
     */
     highlight: function(_silent) {
+        return;
         if (this.enableHighlight) {
             if (this.tree.singleNodeHighlight) {
                 if (this.tree._currentlyHighlighted) {

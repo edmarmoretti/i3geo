@@ -803,6 +803,7 @@ i3GEO.gadgets = {
 			if($i("contemMenu")){
 				$i("contemMenu").className="yui-navset";
 			}
+			//default dos cabeçalhos se a variável i3GEO.configura.oMenuData.menu não existir
 			if(!i3GEO.configura.oMenuData.menu){
 				var ins = "";
 				ins += '<div class="bd" style="display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
@@ -824,7 +825,7 @@ i3GEO.gadgets = {
  				if(i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda){
  					var alinhamento = "left:"+i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.deslocaEsquerda*-1+"px;";
  				}
-				ins += '<div class="bd" style="'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
+				ins += '<div class="bd" style="top:0px;'+alinhamento+'display:block;align:right;border: 0px solid white;z-index:6000;line-height:1.4" >';
 				ins += '<ul class="first-of-type" style="display:block;border:0px solid white;top:10px;">';
  				var n = i3GEO.configura.oMenuData.menu.length;
  				for(i = 0;i < n;i++){
@@ -851,8 +852,6 @@ i3GEO.gadgets = {
 				for(var nomeMenu in i3GEO.configura.oMenuData.submenus){
 					if(i3GEO.configura.oMenuData.submenus[nomeMenu] != "")
 					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]});
-					//alert(nomeMenu)
-					//alert(i3GEO.configura.oMenuData.submenus[nomeMenu].length)
 					var conta=conta+1;
 				}
 			}

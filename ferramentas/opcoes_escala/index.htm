@@ -2,10 +2,17 @@
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
-<style type="text/css">.yuibutton button{padding-left:2em;background:url(../../imagens/tic.png) 5% 50% no-repeat;}</style>
-<title></title>
+<title></title> 
+<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;border:0px;
+}
+</style>
 </head>
-<body>
+<body class="yui-skin-sam" >
 <div style="cursor:pointer;position:relative;top:1px;left:0px;text-align:left">
 	<table summary="" class=lista3 width="90%"> 
 		<tr>  
@@ -52,12 +59,9 @@
 			<td><input style="cursor:text" size=10 class=digitar type='text' id=ocor value='' /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('ocor')" /></td>
 		</tr>
 	</table>
-	<div style=top:10px;left:0px;text-align:left; onclick="executa()">
-	<input id=botao1 size=20  type=button value="Aplicar" />
-	</div>
-	<div style="width:100px;left:100px;position:relative;text-align:left;top:-17px;" onclick="testaBarra()">
-	<input id=botao2 size=20 type=button value="Testar" />
-	</div>	
+	<br>
+	<input id=botao1 size=20  onclick="executa()" type=button value="Aplicar" />
+	<input id=botao2 onclick="testaBarra()" size=20 type=button value="Testar" />
 	<div id=teste style=left:0px;top:10px; >
 	</div>
 </div>
