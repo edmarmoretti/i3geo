@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Inclui teg MAP
+Title: Inclui tag MAP
 
 About: Licença
 

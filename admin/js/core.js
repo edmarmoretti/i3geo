@@ -1177,31 +1177,31 @@ for (i = 0; i < scripts.length; i++) {
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
 */
 var jsfiles = new Array(
-"../../pacotes/yui252/build/utilities/utilities.php",
-"../../pacotes/yui252/build/yahoo-dom-event/yahoo-dom-event.php",
-"../../pacotes/yui252/build/element/element-beta-min.js",
-"../../pacotes/yui252/build/datasource/datasource-beta-min.js",
-"../../pacotes/yui252/build/datatable/datatable-beta-min.php",
-"../../pacotes/yui252/build/button/button-min.php",
-"../../pacotes/yui252/build/dragdrop/dragdrop-min.php",
-"../../pacotes/yui252/build/container/container-min.php",
-"../../pacotes/yui252/build/connection/connection-min.js",
-"../../pacotes/yui252/build/treeview/treeview-min.js",
-"../../pacotes/yui252/build/json/json-min.js",
-"../../pacotes/yui252/build/menu/menu-min.js",
-"../../pacotes/yui252/build/editor/editor-beta-min.js"
+"../../pacotes/yui270/build/utilities/utilities.js",
+"../../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
+"../../pacotes/yui270/build/element/element-min.js",
+"../../pacotes/yui270/build/datasource/datasource-min.js",
+"../../pacotes/yui270/build/datatable/datatable-min.js",
+"../../pacotes/yui270/build/button/button-min.js",
+"../../pacotes/yui270/build/dragdrop/dragdrop-min.js",
+"../../pacotes/yui270/build/container/container-min.js",
+"../../pacotes/yui270/build/connection/connection-min.js",
+"../../pacotes/yui270/build/treeview/treeview-min.js",
+"../../pacotes/yui270/build/json/json-min.js",
+"../../pacotes/yui270/build/menu/menu-min.js",
+"../../pacotes/yui270/build/editor/editor-min.js"
 );
 //
 //arquivos css
 //
 var cssfiles =new Array(
 "../html/admin.css",
-"../../pacotes/yui252/build/fonts/fonts-min.css",
-"../../pacotes/yui252/build/datatable/assets/skins/sam/datatable.css",
-"../../pacotes/yui252/build/button/assets/skins/sam/button.css",
-"../../pacotes/yui252/build/container/assets/skins/sam/container.css",
-"../../pacotes/yui252/build/treeview/assets/skins/sam/treeview.css",
-"../../pacotes/yui252/build/editor/assets/skins/sam/editor.css"
+"../../pacotes/yui270/build/fonts/fonts-min.css",
+"../../pacotes/yui270/build/datatable/assets/skins/sam/datatable.css",
+"../../pacotes/yui270/build/button/assets/skins/sam/button.css",
+"../../pacotes/yui270/build/container/assets/skins/sam/container.css",
+"../../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
+"../../pacotes/yui270/build/editor/assets/skins/sam/editor.css"
 );
 //
 //carrega os arquivos js
