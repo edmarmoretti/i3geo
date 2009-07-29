@@ -23,9 +23,13 @@ $temasa=bioma;
 include("ms_criamapa.php");
 
 
-File: i3geo/ms_criamapa.php
+Arquivo:
 
-About: Licença
+i3geo/ms_criamapa.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -45,7 +49,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-About: Parâmetros
+
 
 base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
 
@@ -101,17 +105,17 @@ srs_wms - código da projeção
 
 image_wms - tipo de imagem disponível
 
-versao_wms - versão do WMS
+Parametro: versao_wms
+
+&versao_wms
+
+Versão do WMS
 
 
 */
 
 /*
-Section: Fluxo do código
-*/
-$tempo = microtime(1);
-/*
-Note: Verifica a variável $caminho
+Verifica a variável $caminho
 
 Essa variável deve ser definida em programas que utilizam o ms_criamapa.php via include.
 Indica onde está o diretório i3geo para que os includes seguintes possam ser localizados.
@@ -124,20 +128,21 @@ if (!file_exists($caminho."classesphp/carrega_ext.php"))
 if (isset($_GET["caminho"]))
 {$caminho = $_GET["caminho"];}
 /*
-Note: Carrega as extensões PHP
+ Carrega as extensões PHP
 
 Carrega as extensões utilizadas no programa de inicialização. 
 A carga das extensões geralmente é necessária nas instalações windows (ms4w) ou quando as mesmas não são carregadas pela própria inicialização do PHP.
 */
 include_once ($caminho."classesphp/carrega_ext.php");
 /*
-Note: Include dos arquivos PHP.
+ Include dos arquivos PHP.
 
 Inclui os programas php com funções utilizadas pelo ms_criamapa.php
 */
 include_once ($caminho."classesphp/pega_variaveis.php");
 include_once ($caminho."classesphp/funcoes_gerais.php");
-include_once ($caminho."ms_configura.php");
+if(!isset($dir_tmp))
+{include_once ($caminho."ms_configura.php");}
 if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else
@@ -148,7 +153,16 @@ Define o cookie para o idioma da interface
 if(isset($idioma) && $idioma != "")
 setcookie("i3geolingua", $idioma);
 /*
-Note: Prepara as variáveis que serão incluidas na seção
+Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
+*/
+$diretorios = criaDirMapa($dir_tmp);
+if(!$diretorios)
+{echo "<p style=color:red ><b>N&atilde;o foi po&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
+criaIndex();
+$tmpfname = $diretorios[0];
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+/*
+ Prepara as variáveis que serão incluidas na seção
 
 As variáveis vêm do arquivo ms_configura.php e são armazenadas em uma seção com nome específico para o i3geo.
 */
@@ -187,7 +201,7 @@ $navegadoresLocais_ = "sim";
 else
 $navegadoresLocais_ = "nao";
 /*
-Note: Inicia a seção
+ Inicia a seção
 
 O i3geo inicia uma seção específica no servidor, denominada i3GeoPHP.
 Se já houver uma seção aberta, em função de outro browser estar ativo, cria uma nova. Faz a cópia das variáveis definidas para itens da seção.
@@ -199,15 +213,15 @@ if(isset($_SESSION["map_file"]) || $g_sid!="")
 {session_regenerate_id();}
 
 /*
-Note: Aguarde
+ Aguarde
 
 Monta a apresentação do aguarde.
 
 Aqui é necessário verificar se $executa está definido
 isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
-if (!isset($executa))
-{mostraAguarde();}
+//if (!isset($executa))
+//{mostraAguarde();}
 
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["temasdir"] = $temasdir_;
@@ -236,6 +250,9 @@ $_SESSION["kmlurl"] = $kmlurl_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
+$_SESSION["mapdir"] = $diretorios[1];
+$_SESSION["imgdir"] = $diretorios[2];
+
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //
@@ -243,7 +260,7 @@ foreach(array_keys($_SESSION) as $k)
 {eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $postgis_mapa_;
 /*
-Note: Define os arquivos .map 
+ Define os arquivos .map 
 
 Seleciona os arquivos mapfile que serão carregados como base conforme o tipo de sistema operacional.
 
@@ -263,40 +280,11 @@ else
 	if (!isset($base) || $base == ""){$base = "geral1";}
 	$estadosl = "estadosl";
 }
-if (file_exists($base))
-{$mapdefault = ms_newMapObj($base);}
-else
-{$mapdefault = ms_newMapObj($temasaplic."/".$base.".map");}
 /*
-Note: Parâmetros adicionais.
-
-Processa os parâmetros para a inicialização verificando se foram passados pela URL ou não.
-*/
-if (!isset($mapext))
-{$mapext = $mapdefault->extent->minx." ".$mapdefault->extent->miny." ".$mapdefault->extent->maxx." ".$mapdefault->extent->maxy;}
-if (!isset ($map_reference_image)) //arquivo com a imagem de refer&ecirc;ncia
-{$map_reference_image = $mapdefault->reference->image;}
-if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
-{$map_reference_extent = $mapdefault->reference->extent->minx." ".$mapdefault->reference->extent->miny." ".$mapdefault->reference->extent->maxx." ".$mapdefault->reference->extent->maxy;}
-if (!isset($interface))
-{$interface = "geral.htm";}
-/*
-Note: Diretórios temporários
-
-Cria os diretórios temporários que serão utilizados pelo i3geo para armazenar as imagens e outros dados. 
-*/
-$diretorios = criaDirMapa($dir_tmp);
-if(!$diretorios)
-{echo "<p style=color:red ><b>N&atilde;o foi po&iacute;vel criar os diret&oacute;rios tempor&aacute;rios em $dir_tmp.</b></p>";exit;}
-$_SESSION["mapdir"] = $diretorios[1];
-$_SESSION["imgdir"] = $diretorios[2];
-criaIndex();
-/*
-Note: Cria os objetos map que serão processados
+ Cria os objetos map que serão processados
 
 O arquivo definido em $base é lido como um objeto map. Esse objeto será processado para incluir novos layers e alterar outros parâmetros definidos pelo usuário.
 */
-ms_ResetErrorList();
 if (file_exists($base))
 {
 	$map = ms_newMapObj($base);
@@ -307,40 +295,25 @@ else
 	$map = ms_newMapObj($temasaplic."/".$base.".map");
 	$mapn = ms_newMapObj($temasaplic."/".$base.".map");
 }
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
 /*
-Note: Incluí temas
+ Parâmetros adicionais.
 
-Verifica a lista de temas da inicializacao, adicionando-os se necessário
+Processa os parâmetros para a inicialização verificando se foram passados pela URL ou não.
 */
+if (!isset($mapext))
+{$mapext = $map->extent->minx." ".$map->extent->miny." ".$map->extent->maxx." ".$map->extent->maxy;}
+if (!isset ($map_reference_image)) //arquivo com a imagem de refer&ecirc;ncia
+{$map_reference_image = $map->reference->image;}
+if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
+{$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;}
+if (!isset($interface))
+{$interface = $interfacePadrao;}
+
 incluiTemasIniciais();
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-/*
-Note: Liga os temas definidos em $layers
-*/
-ligaTemas();
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-/*
-Note: Aplica ao mapa os parâmetros passados pela URL
-*/
+
+if(isset($layers))
+{ligaTemas();}
+
 if (isset($map_reference_image))
 {$mapn->reference->set("image",$map_reference_image);}
 $extr = $mapn->reference->extent;
@@ -368,39 +341,23 @@ if ((isset($mapext)) && ($mapext != ""))
 	if (count($newext) == 4)
 	{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
 }
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
 /*
-Note: Configura os endereços corretos no mapfile.
+Configura os endereços corretos no mapfile.
 
 Altera as propriedades imagepath e imageurl corrigindo os caminhos padrão conforme o diretório criado para armazenar o mapa de trabalho.
 */
-
-$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-
 $w = $mapn->web;
 $atual = $w->imagepath;
 $w->set("imagepath",$atual.$diretorios[2]."/");
 $atual = $w->imageurl;
 $w->set("imageurl",$atual.$diretorios[2]."/");
-$salvo = $mapn->save($diretorios[0]);
+$salvo = $mapn->save($tmpfname);
+
 $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual.$diretorios[2]."/";
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
-/*
-Note: Faz o include de um programa se tiver sido passado pela URL (parâmetro &executa)
-
-Nessa altura do processo, a variável $tmpfname guarda o nome do mapfile que será utilizado pelo i3geo.
-
-Esse mapfile pode ser modificado pelo programa que será incluido.
-*/
-$tmpfname = $diretorios[0];
-$_SESSION["map_file"] = $diretorios[0];
+$_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
+
 if (isset($executa))
 {
 	if (file_exists($executa))
@@ -408,112 +365,69 @@ if (isset($executa))
 	if (function_exists($executa))
 	{eval($executa."();");}
 }
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-/*
-Note: Inclui uma camada de pontos utilizando os parâmetros passados pela URL
-*/
-if (isset($wkt))
-{insereWKTUrl();}
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-if (isset($pontos))
-{inserePontosUrl();}
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-/*
-Note: Inclui uma camada de linhas utilizando os parâmetros passados pela URL
-*/
-if (isset($linhas))
-{insereLinhasUrl();}
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
-/*
-Note: Inclui uma camada de polígonos utilizando os parâmetros passados pela URL
-*/
-if (isset($poligonos))
-{inserePoligonosUrl();}
-/*
-Note: inclui um tema wms se for o caso
 
-Verifica os parâmetros WMS e adiciona uma camada se for o caso
-*/
+if(isset($wkt))
+{insereWKTUrl();}
+
+if(isset($pontos))
+{inserePontosUrl();}
+
+if(isset($linhas))
+{insereLinhasUrl();}
+
+if(isset($poligonos))
+{inserePoligonosUrl();}
+
 if(isset($url_wms))
 {incluiTemaWms();}
 
-$error = ms_GetErrorObj();
-while($error && $error->code != MS_NOERR)
-{
-	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-	$error = $error->next();
-}
-ms_ResetErrorList();
+adaptaLayers();
+if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
+{require_once($caminho."ms_registraip.php");}
 
-//
-//se vc quiser parar o script aqui, para verificar erros, descomente a linha abaixo
-//
-//exit
+if ($interface != "mashup")
+{abreInterface();}
+
 /*
-Note: Adapta os dados de cada layer.
+Function: adaptaLayers
+
+Adapta os dados de cada layer.
 
 Faz alterações em cada layer caso sejam necessárias.
 */
-$mapa = ms_newMapObj($tmpfname);
-$path = $mapa->shapepath;
-for($i=0;$i<($mapa->numlayers);++$i)
-{
-	$layer = $mapa->getLayer($i);
-	$ok = true;
-	if ($layer->connection == "")
+function adaptaLayers(){
+	global $tmpfname;
+	$mapa = ms_newMapObj($tmpfname);
+	$path = $mapa->shapepath;
+	for($i=0;$i<($mapa->numlayers);++$i)
 	{
-		$ok = false;
-		$d = $layer->data;
-		if((file_exists($d)) || (file_exists($d.".shp")))
-		{$ok = true;}
-		else
+		$layer = $mapa->getLayer($i);
+		$ok = true;
+		if ($layer->connection == "")
 		{
-			if((file_exists($path."/".$d)) || (file_exists($path."/".$d.".shp")))
+			$ok = false;
+			$d = $layer->data;
+			if((file_exists($d)) || (file_exists($d.".shp")))
 			{$ok = true;}
+			else
+			{
+				if((file_exists($path."/".$d)) || (file_exists($path."/".$d.".shp")))
+				{$ok = true;}
+			}
 		}
+		if ($ok == false)
+		{$layer->set("status",MS_OFF);}
 	}
-	if ($ok == false)
-	{$layer->set("status",MS_OFF);}
+	$mapa->save($tmpfname);
+	erroCriacao();
 }
-$mapa->save($tmpfname);
 /*
-Note: Obtem o IP do usuário e registra no banco de dados.
+Function: abreInterface
 
-Essa função pode ser comentada sem prejuízos ao funcionamento do I3Geo.
-Só opera corretamente se a rotina de registro tiver sido configurada corretamente.
+Redireciona para o HTML definido em $interface, abrindo o mapa
 */
-require_once($caminho."ms_registraip.php");
-/*
-Note: Gera a url para abrir o mapa
-
-interface = arquivo html que será aberto
-*/
-if ($interface != "mashup")
-{
+function abreInterface(){
+	global $interface,$caminho,$tempo;
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))
@@ -524,19 +438,16 @@ if ($interface != "mashup")
 	}
 	else
 	{
-		echo "<br><br><span style='color:gray;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;' >Tempo de processamento no servidor em segundos: ".((microtime(1) - $tempo))."<span>";
-
 		if (file_exists($caminho."aplicmap/".$interface))
 		{$urln = $caminho."aplicmap/".$interface."?".session_id();}
 		else 
 		{$urln = $interface."?".session_id();}
-		//header("Location:".$urln);
-		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
-	}
+		if(!headers_sent())
+		{header("Location:".$urln);}
+		else
+		{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
+	}	
 }
-//////////////////////////////////////////////////////////////////////////////
-//funções
-/////////////////////////////////////////////////////////////////////////////
 /*
 Function: ligaTemas
 
@@ -570,6 +481,7 @@ function ligaTemas()
 			}
 		}
 	}
+	erroCriacao();
 }
 /*
 Function: incluiTemasIniciais
@@ -631,6 +543,7 @@ function incluiTemasIniciais()
 		$of = &$mapn->outputformat;
 		$of->set("imagemode",MS_IMAGEMODE_RGB);
 	}
+	erroCriacao();
 }
 /*
 Function: criaIndex
@@ -766,6 +679,7 @@ function insereWKTUrl()
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
+	erroCriacao();
 }
 /*
 Function: inserePontosUrl
@@ -837,6 +751,7 @@ function inserePontosUrl()
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
+	erroCriacao();
 }
 /*
 Function: insereLinhasUrl
@@ -917,6 +832,7 @@ function insereLinhasUrl()
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
+	erroCriacao();
 }
 /*
 Function: inserePoligonosUrl
@@ -1000,9 +916,12 @@ function inserePoligonosUrl()
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
+	erroCriacao();
 }
 /*
 Function: incluiTemaWms
+
+Inclui no mapa um tema do tipo WMS
 */
 function incluiTemaWms()
 {
@@ -1015,5 +934,16 @@ function incluiTemaWms()
 	$m = new Mapa($tmpfname);
  	$m->adicionatemawms($layer_wms,$url_wms,$style_wms,$srs_wms,$image_wms,$locaplic,"",$versao_wms,$nome,"","","","","nao","text/plain","");
 	$salvo = $m->salva($tmpfname);
+	erroCriacao();
 }
+function erroCriacao(){
+	$error = ms_GetErrorObj();
+	while($error && $error->code != MS_NOERR)
+	{
+		printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+		$error = $error->next();
+	}
+	ms_ResetErrorList();
+}
+
 ?>
