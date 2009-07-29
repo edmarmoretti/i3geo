@@ -31,7 +31,7 @@ class Arvore
 		if($editores != "")
 		{$this->editor = $this->verificaeditores($editores);}
 		$this->editores = $editores;
-		$this->pubsql = "publicado != 'NAO' or publicado isnull";
+		$this->pubsql = " (publicado != 'NAO' or publicado isnull) and ";
 		if($this->editor)
 		{$this->pubsql = "";}
 	}
@@ -57,7 +57,7 @@ class Arvore
 				if(strtolower($reg["aberto"]) == "sim")
 				$status = "aberto";
 				$url = "";//$this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
-				$resultado[] = array("desc"=>$reg["desc_menu"],"publicado"=>$reg["publicado_menu"],"nomemenu"=>$reg["nome_menu"],"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
+				$resultado[] = array("desc"=>$this->converte($reg["desc_menu"]),"publicado"=>$reg["publicado_menu"],"nomemenu"=>$this->converte($reg["nome_menu"]),"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
 			}
 		}
 		return $resultado;
@@ -94,7 +94,7 @@ class Arvore
 									$down = "nao";
 									if (strtolower($t["download_tema"]) == "sim")
 									{$down = "sim";}
-									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$tema["nome_tema"],"link"=>$t["link_tema"],"download"=>$down);
+									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 									if (stristr($nome,$procurar))
 									{$resultado[] = $texto;}
 									else
@@ -106,12 +106,12 @@ class Arvore
 							}
 						}
 						if (count($resultado) > 0)
-						{$subgrupo[] = array("subgrupo"=>$sgrupo["nome_subgrupo"],"temas"=>$resultado);}
+						{$subgrupo[] = array("subgrupo"=>$this->converte($sgrupo["nome_subgrupo"]),"temas"=>$resultado);}
 						$resultado = array();
 					}	
 				}
 				if (count($subgrupo) > 0)
-				{$final[] = array("grupo"=>$grupo["nome_grupo"],"subgrupos"=>$subgrupo);}
+				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"subgrupos"=>$subgrupo);}
 				$subgrupo = array();				
 			}
 		}
@@ -185,11 +185,11 @@ class Arvore
 								if (strtolower($tema["ogc_tema"]) == "sim")
 								{$ogc = "sim";$grupoogc = "sim";}
 							}
-							$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"nome"=>($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+							$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
-				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
+				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
@@ -225,7 +225,7 @@ class Arvore
 					if (strtolower($tema["ogc_tema"]) == "sim")
 					{$ogc = "sim";$grupoogc = "sim";}
 				}
-				$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+				$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 			}
 		}
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temasraiz));
@@ -256,7 +256,7 @@ class Arvore
 		{$ogc = "nao";}
 		if ($recordset["link_tema"] != "")
 		{$link = $recordset["link_tema"];}
-		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc);		
+		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc);		
 	}
 	//executa o sql
 	function execSQL($sql)
@@ -318,6 +318,10 @@ class Arvore
 		$str = preg_replace("/[^A-Z0-9]/i", ' ', $str);
 		$str = preg_replace("/\s+/i", ' ', $str);
 		return $str;
+	}
+	function converte($texto){
+		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
+		return $texto;	
 	}
 }
 ?>
