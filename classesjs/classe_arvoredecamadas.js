@@ -1,9 +1,13 @@
 /*
 Title: Árvore de camadas
 
-File: i3geo/classesjs/classe_arvoredecamadas.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_arvoredecamadas.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.arvoreDeCamadas
+Classe: i3GEO.arvoreDeCamadas
 
 Monta a árvore com os temas existentes no mapa atual. A árvore contém as opções de ligar e desligar temas.
 
@@ -41,89 +45,78 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
-	Property: EXPANDIDA
+	Variavel: EXPANDIDA
 	
 	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore.
 	
 	Default:
 	{false}
 	
-	Type:
+	Tipo:
 	{Boolena}
 	*/
 	EXPANDIDA: false,
 	/*
-	Property: LEGENDAEXPANDIDA
+	Variavel: LEGENDAEXPANDIDA
 	
 	Indica se a legenda da árvore será montada de forma expandida ou não.
 	
 	Default:
 	{false}
 	
-	Type:
+	Tipo:
 	{Boolena}
 	*/
 	LEGENDAEXPANDIDA: false,
 	/*
-	Property: ATIVATEMA
-	
-	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
-	
-	Type:
-	{String}
-	*/
-	ATIVATEMA: "",
-	/*
-	Property: OPCOESICONES
+	Variavel: OPCOESICONES
 	
 	Inclui ou não os ícones de opções em cada tema (farol, zoom para o tema, etc)
 	
 	Default:
 	{true}
 	
-	Type:
+	Tipo:
 	{boolean}
 	*/
 	OPCOESICONES: true,
 	/*
-	Property: OPCOESTEMAS
+	Variavel: OPCOESTEMAS
 	
 	Inclui ou não o nó com as opções de manipulação de cada tema.
 	
 	Default:
 	true
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	OPCOESTEMAS: true,
 	/*
-	Property: OPCOESLEGENDA
+	Variavel: OPCOESLEGENDA
 	
 	Inclui ou não o nó para mostrar a legenda do tema.
 	
 	Default:
 	true
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	OPCOESLEGENDA: true,
 	/*
-	Property: AGUARDALEGENDA
+	Variavel: AGUARDALEGENDA
 	
 	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema.
 	
 	Default:
 	{true}
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	AGUARDALEGENDA: true,
 	/*
-	Variable: CAMADAS
-	
 	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
 	
 	Este objeto é construído nas operações em PHP de inicialização ou redesenho do mapa.
@@ -163,54 +156,54 @@ i3GEO.arvoreDeCamadas = {
 		}
 	]
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	CAMADAS: "",
 	/*
-	Variable: ARVORE
-	
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
-	Type:
+	Tipo:
 	{YAHOO.widget.TreeView}
 	*/
 	ARVORE: null,
 	/*
-	Variable: IDHTML
-	
 	Armazena o ID do elemento DOM onde a árvore foi inserida.
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	IDHTML: null,
 	/*
-	Variable: SID
-	
 	Código da seção aberta no servidor pelo i3Geo
 
-	Type:
+	Tipo:
 	{String}
 	*/
 	SID: null,
 	/*
-	Variable: LOCAPLIC
-	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 	
 	Exemplo: 'http://localhost/i3geo'
 
-	Type:
+	Tipo:
 	{String}
 	*/
 	LOCAPLIC: null,
+	/*
+	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
+	
+	Tipo:
+	{String}
+	*/
+	ATIVATEMA: "",
+
 	/*
 	Function: cria
 	
 	Cria a árvore com as opções de manipulação das camadas existentes no mapa
 	
-	Parameters:
+	Parametros:
 	
 	onde {String} - ID do elemento DOM onde a árvore será inserida. Se for definido como "" o id será buscado da variável IDHTML.
 	
@@ -218,7 +211,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	g_sid {String} -  Código da seção PHP criada ao abrir o i3Geo
 
-	funcaoTema {String} - (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
+	funcaoTema {String} - (opcional) Nome da função que será incluida no evento disparado quando o usuário clicar no checkbox de um tema
 	*/
 	cria: function(onde,temas,g_sid,g_locaplic,funcaoTema){
 		//YAHOO.log("Criando a árvore de camadas", "i3geo");
@@ -241,7 +234,7 @@ i3GEO.arvoreDeCamadas = {
 	O objeto CAMADAS é comparado com o parâmetro "temas" para verificar se existem diferenças que
 	justifiquem a atualização.
 	
-	Parameters:
+	Parametro:
 	
 	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS)
 	*/
@@ -286,6 +279,11 @@ i3GEO.arvoreDeCamadas = {
    		i3GEO.arvoreDeCamadas.ARVORE.draw();
    		this.ativaDragDrop();
 	},
+	/*
+	Function: ativaDragDrop
+	
+	Ativa a funcionalidade de arrastar um tema para mudar sua ordem de desenho ou excluir do mapa
+	*/
 	ativaDragDrop: function(){
 		//YAHOO.log("Ativando drag-drop da árvore de camadas", "i3geo");
 		var Dom = YAHOO.util.Dom;
@@ -416,7 +414,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Nesse segundo nível são mostrados alguns ícones como o farol, excluir, etc, além do nó de opções e legenda.
 	
-	Parameters:
+	Parametro:
 	
 	node {YAHOO.widget.HTMLNode} - Nó que foi clicado
 	*/
@@ -473,7 +471,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Monta os nós filhos do nó "opções"
 	
-	Parameter:
+	Parametro:
 	
 	node {YAHOO.widget.HTMLNode}
 	*/
@@ -524,7 +522,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Adiciona uma nova opção no nó de opções de um tema
 	
-	Parameters:
+	Parametros:
 	
 	dica {String} - dica que será mostrada na janela de mensagens do mapa quando o usuário sobrepoem o mouse
 	
@@ -546,7 +544,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Monta os nós filhos do nó "legenda"
 	
-	Parameter:
+	Parametro:
 	
 	node - {YAHOO.widget.HTMLNode}
 	*/
@@ -635,7 +633,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	A legenda precisa ser atualizada emalgumas circunstâncias, como quando é feitoumzoom no mapa.
 	
-	Parameter:
+	Parametro:
 	
 	id {String} - ID (name) do tema
 	*/
@@ -662,10 +660,9 @@ i3GEO.arvoreDeCamadas = {
 	
 	A chamada dessa função é definida em aplicmap/legenda2.htm
 	
-	Parameters:
+	Parametro:
 	
 	leg {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
-	
 	*/
 	inverteStatusClasse: function (leg){
 		//YAHOO.log("Invertendo o status da árvore de camadas", "i3geo");
@@ -679,7 +676,7 @@ i3GEO.arvoreDeCamadas = {
 	Monta o texto com o título do tema. Esse texto é o que será mostrado nos nós principais da árvore e
 	contém o checkbox para ligar e desligar o tema.
 	
-	Parameters:
+	Parametro:
 	
 	tema - {Object} - objeto JSON com as propriedades do tema
 	
@@ -721,7 +718,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	O farol identifica a compatibilidade da escala do mapa com a escala de cada tema
 	
-	Parameters:
+	Parametro:
 	
 	mapscale {Numeric} - escala de comparação com a escala de cada tema
 	*/
@@ -810,7 +807,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Compara se dois objetos com as camadas são iguais
 	
-	Parameters:
+	Parametros:
 	
 	novo {JSON} - objeto novo
 	
@@ -838,7 +835,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	Procura um tema no objeto CAMADAS.
 	
-	Parameters:
+	Parametro:
 	
 	idtema - {String} ID do tema que será procurado
 	

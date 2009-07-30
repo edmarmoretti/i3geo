@@ -6,7 +6,9 @@ Compacta os arquivos js e css utilizados pelo I3Geo.
 
 Deve ser executado sempre que forem feitas alterações nos arquivos javascript existentes em classesjs ou nos arquivos de estilo existentes em css.
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,9 +28,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesjs/compactajs.php
+Arquivo:
 
-19/7/2007
+i3geo/classesjs/compactajs.php
 
 */
 //
@@ -99,29 +101,29 @@ $jsfiles = array(
 "../pacotes/yui270/build/treeview/treeview.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
-"classe_i3geo.js",
-"classe_util.js",
-"dicionario.js",
-"classe_idioma.js",
-"classe_php.js",
-"classe_configura.js",
-"depreciados.js",
-"classe_calculo.js",
-"classe_desenho.js",
-"classe_interface.js",
-"classe_mapa.js",
-"classe_tema.js",
-"classe_analise.js",
-"classe_maparef.js",
-"classe_ajuda.js",
-"classe_janela.js",
-"classe_guias.js",
-"classe_arvoredecamadas.js",
-"classe_navega.js",
-"classe_selecao.js",
-"classe_eventos.js",
-"classe_arvoredetemas.js",
-"classe_barradebotoes.js",
+"compactados/classe_i3geo_compacto.js",
+"compactados/classe_util_compacto.js",
+"compactados/dicionario_compacto.js",
+"compactados/classe_idioma_compacto.js",
+"compactados/classe_php_compacto.js",
+"compactados/classe_configura_compacto.js",
+"compactados/depreciados_compacto.js",
+"compactados/classe_calculo_compacto.js",
+"compactados/classe_desenho_compacto.js",
+"compactados/classe_interface_compacto.js",
+"compactados/classe_mapa_compacto.js",
+"compactados/classe_tema_compacto.js",
+"compactados/classe_analise_compacto.js",
+"compactados/classe_maparef_compacto.js",
+"compactados/classe_ajuda_compacto.js",
+"compactados/classe_janela_compacto.js",
+"compactados/classe_guias_compacto.js",
+"compactados/classe_arvoredecamadas_compacto.js",
+"compactados/classe_navega_compacto.js",
+"compactados/classe_selecao_compacto.js",
+"compactados/classe_eventos_compacto.js",
+"compactados/classe_arvoredetemas_compacto.js",
+"compactados/classe_barradebotoes_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
 "classe_gadgets.js"
 );

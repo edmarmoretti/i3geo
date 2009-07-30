@@ -1,9 +1,13 @@
 /*
 Title: Configurações gerais
 
-File: i3geo/classesjs/classe_configura.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_configura.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.configura
+Classe: i3GEO.configura
 
 Configuração do i3geo
 
@@ -46,7 +50,7 @@ alert(i3GEO.configura.locaplic)
 */
 i3GEO.configura = {
 	/*
-	Variable: oMenuData
+	Variavel: oMenuData
 
 	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso
 
@@ -73,6 +77,9 @@ i3GEO.configura = {
 		}
 
 	}
+	
+	Tipo:
+	{object}
 	*/
 	oMenuData:{
 		menu:[
@@ -130,69 +137,114 @@ i3GEO.configura = {
 		}
 	},
 	/*
-	Variable: tipoimagem
+	Variavel: tipoimagem
 
 	Indica o tipo de filtro de imagem que está ativo.
 	O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
+	
+	Veja <classe_imagem.php> para obter os tipos possíveis
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{"nenhum"}
 	*/
 	tipoimagem: "nenhum",
 	/*
-	Variable: tipotip
+	Variavel: tipotip
 	
 	Tipo de tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
 	
-	Type:
-	{completo|simples|balao}
+	Tipo:
+	{string}
+	
+	Valores:
+	
+	completo|simples|balao
+	
+	Default:
+	{"balao"}
 	*/
 	tipotip: "balao",
 	/*
-	Variable: funcaoTip
+	Variavel: funcaoTip
 	
 	Função que será executada na operação de identificação quando o usuário estaciona o mouse sobre o mapa
 	
-	Type:
+	Tipo:
 	{String}
+	
+	Default:
+	{"verificaTipDefault()"}
 	*/
 	funcaoTip: "verificaTipDefault()",
 	/*
-	Variable: funcaoIdentifica
+	Variavel: funcaoIdentifica
 	
 	Função que será executada na operação de identificação quando o usuário clica no mapa
 	
-	Type:
+	Tipo:
 	{String}
+	
+	Default:
+	{"i3GEO.mapa.cliqueIdentificaDefault()"}
 	*/
-	funcaoIdentifica: "cliqueIdentificaDefault()",
+	funcaoIdentifica: "i3GEO.mapa.cliqueIdentificaDefault()",
 	/*
-	Variable: diminuixM
+	Variavel: diminuixM
 
 	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{13}
 	*/
 	diminuixM: 13,
 	/*
-	Variable: diminuixN
+	Variavel: diminuixN
 
 	Diminui a largura do mapa em pixels no caso do navegador ser o FF.
 	Valores definidos em pixel.
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{11}
 	*/
 	diminuixN: 11,
 	/*
-	Variable: diminuiyM
+	Variavel: diminuiyM
 
 	Diminui a altura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{106}
 	*/
 	diminuiyM: 106,
 	/*
-	Variable: diminuiyN
+	Variavel: diminuiyN
 
 	Diminui a altura do mapa em pixels no caso do navegador ser o FF.
 	Valores definidos em pixel.
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{103}
 	*/
 	diminuiyN: 103,
 	/*
-	Variable: map3d
+	Variavel: map3d
 
 	Variável que define o nome do map_file que possuí o layer para uso na função 3d.
 	Pode ser utilizado o caminho completo, se não, busca no diretório aplicmap.
@@ -201,30 +253,48 @@ i3GEO.configura = {
 	sobre o qual o mapa será desenhado.
 
 	Por padrão, o i3geo utiliza o mapfile aplicmpa/3dmap.map
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
 	*/
 	map3d: "",
 	/*
-	Variable: embedLegenda
+	Variavel: embedLegenda
 
 	Indica se a legenda deve ser incluida no corpo do mapa.
 
-	Type:
-	{sim|nao}
+	Tipo:
+	{string}
+	
+	Valores:
+	sim|nao
+	
+	Default:
+	{nao}
 	*/
 	embedLegenda: "nao",
 	/*
-	Variable: templateLegenda
+	Variavel: templateLegenda
 
 	Template HTML que será utilizado na geração da legenda HTML.
 
 	A sintaxe utilizada na montagem do template é baseado na sintaxe do próprio Mapserver.
 	O HTML pode ser armazenado em i3geo/aplicmap ou em um outro endereço no servidor.
 	O template serve para definir o layout da legenda que é mostrada quando a guia legenda é ativada.
-	Se for definido como "", é utilizado o template i3geo/aplicmapa/legenda.htm.
+	Se for definido como "", é utilizado o template i3geo/aplicmap/legenda.htm.
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
 	*/
 	templateLegenda: "",
 	/*
-	Variable: mashuppar
+	Variavel: mashuppar
 	
 	Define os parâmetros que devem ser aplicados no modo mashup
 	
@@ -235,41 +305,53 @@ i3GEO.configura = {
 	Exemplo:
 	
 	i3GEO.configura.mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
 	*/
 	mashuppar: "",
 	/*
-	Variable: sid
+	Variavel: sid
 	
 	Código da seção aberta pelo i3Geo no servidor.
 	
 	O código é gerado na inicialização do i3Geo pelo programa ms_criamapa.php
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	sid: "",
 	/*
-	Variable: locaplic
+	Variavel: locaplic
 	
 	Localização da instalação do i3geo (URI)
 	
-	Por default, é definida na inicialização do i3Geo com o uso do i3GEO.util
+	Por default, é definida na inicialização do i3Geo
 
-	Type:
-	{URI}
+	Tipo:
+	{string}
 	*/
 	locaplic: "",
 	/*
-	Variable: mapaRefDisplay
+	Variavel: mapaRefDisplay
 	
 	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
 	
-	Type:
-	{style.display}
+	Tipo:
+	{string}
+	
+	Default:
+	{"block"}
+	
+	Valores:
+	block|none
 	*/
 	mapaRefDisplay: "block",
 	/*
-	Variable: visual
+	Variavel: visual
 	
 	Tipo de visual que será utilizado no mapa.
 	
@@ -277,12 +359,15 @@ i3GEO.configura = {
 	
 	Veja o diretório i3geo/imagens/visual
 
-	Type:
+	Tipo:
 	{String}
+	
+	Default:
+	{default}
 	*/
 	visual: "default",
 	/*
-	Variable: cursores
+	Variavel: cursores
 	
 	Imagens utilizadas para os cursores do mouse mostrados no mapa
 	
@@ -290,7 +375,7 @@ i3GEO.configura = {
 	
 	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
 
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	cursores: {
@@ -314,11 +399,11 @@ i3GEO.configura = {
 		{ff:"/imagens/cursores/zoom_contexto.png",ie:"/imagens/cursores/zoom_contexto.cur"}
 	},
 	/*
-	Variable: listaDePropriedadesDoMapa
+	Variavel: listaDePropriedadesDoMapa
 	
 	Lista com as funções que são incluídas no item "Propriedades do mapa"	
 
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	listaDePropriedadesDoMapa: {
@@ -337,92 +422,105 @@ i3GEO.configura = {
 		]
 	},
 	/*
-	Variable: tempoAplicar
+	Variavel: tempoAplicar
 	
 	Tempo em milisegundos que será esperado até que o mapa seja desenhado automaticamente.
 	
 	Utilizado no botão Aplicar, quando o usuário liga/desliga ou adiciona umtema
 	
-	Type:
+	Tipo:
 	{Numeric}
+	
+	Default:
+	{4000}
 	*/
 	tempoAplicar: 4000,
 	/*
-	Variable: tempoMouseParado
+	Variavel: tempoMouseParado
 	
 	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
 	
 	Controla o lapso de tempo utilizado para disparar as funções que ocorrem quando o mouse está parado sobre o mapa
 	
-	Type:
+	Tipo:
 	{Numeric}
+	
+	Default:
+	{3500}
 	*/
 	tempoMouseParado: 3500,
 	/*
-	Variable: iniciaJanelaMensagens
+	Variavel: iniciaJanelaMensagens
 	
 	Inicia o i3geo com a janela de mensagens aberta ou fechada.
 	
 	Se o cookie g_janelaMen estiver definido, essa variável não terá efeito
 
-	Type:
+	Tipo:
 	{Boolean}
+	
+	Default:
+	{true}
 	*/
 	iniciaJanelaMensagens: true,
 	/*
-	Variable: mostraRosaDosVentos
+	Variavel: mostraRosaDosVentos
 	
 	Mostra ou não a rosa dos ventos sob o mouse quando estiver parado.
 
-	Type:
+	Tipo:
+	{string}
+	
+	Valores:
 	{sim|nao}
+	
+	Default:
+	{"nao"}
 	*/	
 	mostraRosaDosVentos: "nao",
 	/*
-	Variable: liberaGuias
+	Variavel: liberaGuias
 	
 	Indica se as guias serão montadas em uma janela flutuante sobre o mapa
 	
-	Type:
+	Tipo:
+	{string}
+	
+	Valores:
 	{sim|nao}
+	
+	Default:
+	{nao}
 	*/
 	liberaGuias: "nao",
 	/*
-	Variable: entorno
+	Variavel: entorno
 	
 	Define se o entorno do mapa será desenhado também
 	
 	O desenho do entorno permite a navegação no mapa no estilo "tiles"
 	
-	Type:
+	Tipo:
+	{string}
+	
+	Valores:
 	{sim|nao}
+	
+	Default:
+	{"nao"}
 	*/
 	entorno: "nao",
 	/*
-	Variable: funcoesBotoes
+	Variavel: funcoesBotoes
 
-	Objeto com a lista de funcionalidades que serão adicionadas ao mapa.
+	Objeto com a lista de funcionalidades que serão adicionadas aos botões existentes no mapa.
 
 	Essa lista pode ser modificada antes da inicialização do mapa.
 
-	A montagem das operações é feita no iniciamma.js.
-
 	As funcionalidades apenas são incluídas se o elemento HTML indicado em iddiv existir. Por isso, caso uma função não seja desejada, basta excluir o div do HTML utilizado no mapa.
 
-	Type:
+	Tipo:
 	{JSON}
-
-	Parâmetros:
-
-	iddiv - id do elemento onde a ferramenta será incluída
-
-	dica - dica de tela que será acrescentada ao evento onmouseover
-
-	conteudo - conteudo de iddiv que será acrescentado como innerHTML
-
-	funcaoonclick - funcao que será incluida no onclick
-
-	constroiconteudo - função que ativará a opção. Essa opção atua como a opção conteúdo, porém, executa uma função para preenchimento do div.
 
 	*/
 	funcoesBotoes: {
@@ -618,18 +716,6 @@ i3GEO.configura = {
 				g_tipoacao='identifica';
 				g_operacao='identifica';
 				cliqueIdentifica = function(){
-					cliqueIdentificaDefault = function(){
-						if (g_tipoacao == "identifica"){
-							i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");					
-							var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>");
-							var temp = function(){
-								i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
-								i3GEO.barraDeBotoes.ativaBotoes();
-							};
-							if(i3GEO.interface.ATUAL != "googlemaps")
-							YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-						}
-					};
 					if (g_operacao == "identifica"){
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
@@ -638,93 +724,6 @@ i3GEO.configura = {
 					if (g_operacao != "identifica"){return;}
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
-					verificaTipDefault = function(){
-						var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
-						var etiquetas = false;
-						for(var j=0;j<ntemas;j++)
-						{if(i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas != ""){var etiquetas = true;}}
-						if(etiquetas == false){return;}	
-						if($i("img")){$i("img").style.cursor = "wait";}
-						var retorna = function(retorno){
-							var i = $i("i3geo_rosa");
-							if(i){i.style.display="none";}			
-							var mostra = false;
-							try{
-								var retorno = retorno.data;
-								if ($i("img"))
-								{$i("img").title = "";}
-								if (retorno != ""){
-									var res = "";
-									var temas = retorno.split("!");
-									var tema = temas.length-1;
-									if(tema >= 0){
-										do{
-											var titulo = temas[tema].split("@");
-											if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao")
-											{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
-											var ocorrencias = titulo[1].split("*");
-											var ocorrencia = ocorrencias.length-1;
-											if(ocorrencia >= 0){
-												do{
-													if (ocorrencias[ocorrencia] != ""){
-														var pares = ocorrencias[ocorrencia].split("##");
-														var paresi = pares.length;
-														for (var par=0;par<paresi; par++){
-															var valores = pares[par].split("#");
-															if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao"){
-																res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-																var mostra = true;
-															}
-															else{
-																res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
-																var mostra = true;
-															}
-														}
-													}
-												}
-												while(ocorrencia--)
-											}
-										}
-										while(tema--)
-									}
-									if(!mostra){$i("tip").style.display="none";return;}
-									else{		
-										if(i3GEO.configura.tipotip != "balao"){
-											var n = i3GEO.janela.tip();
-											$i(n).style.textAlign="left";
-											$i(n).innerHTML += res;
-										}
-										else{
-											//var idmarca = YAHOO.util.Dom.generateId();
-											//i3GEO.janela.tip("<img id='marcaIdentifica' src='"+i3GEO.configura.locaplic+"/imagens/grabber.gif' />");
-											i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
-											i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
-											balloon = new Balloon;
-											balloon.delayTime = 0;
-											var res = "<div style=text-align:left >"+res+"</div>";
-											balloon.showTooltip($i("marcaIdentifica"),res);
-											$i('marcaIdentifica').onclick = $i("closeButton").onclick;
-										}
-									}
-								}
-								if($i("img")){
-									var temp = "zoom";
-									if(i3GEO.interface.ATIVAMENUCONTEXTO)
-									var temp = "identifica_contexto";
-									i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
-								}
-							}
-							catch(e){
-								if($i("img")){
-									var temp = "identifica";
-									if(i3GEO.interface.ATIVAMENUCONTEXTO)
-									var temp = "identifica_contexto";
-									i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
-								}
-							}
-						};
-						i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
-					};				
 					if (g_operacao == "identifica"){
 						eval(i3GEO.configura.funcaoTip);
 					}

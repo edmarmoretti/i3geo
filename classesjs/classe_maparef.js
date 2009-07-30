@@ -1,9 +1,13 @@
 /*
 Title: Mapa de referência
 
-File: i3geo/classesjs/classe_maparef.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_maparef.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.maparef
+Classe: i3GEO.maparef
 
 Cria e processa o mapa de referência
 
@@ -37,17 +41,23 @@ i3Geo.maparef.inicia()
 */
 i3GEO.maparef = {
 	/*
-	Variable: fatorZoomDinamico
+	Variavel: fatorZoomDinamico
 	
 	Define o fator de zoom inicial do mapa de referência quando o modo dinâmico for ativado
+	
+	Tipo:
+	{numeric}
+	
+	Default:
+	{-3}
 	*/
 	fatorZoomDinamico: -3,
 	/*
-	Property: SELETORTIPO
+	Variavel: SELETORTIPO
 	
 	Inclui ou não o seletor de tipo de mapa de referência
 	
-	Type:
+	Tipo:
 	{Boolean}
 	
 	Default:
@@ -55,31 +65,34 @@ i3GEO.maparef = {
 	*/
 	SELETORTIPO:true,
 	/*
-	Property: PERMITEFECHAR
+	Variavel: PERMITEFECHAR
 	
 	Mostra o botão para fechar a janela ou não.
 	
-	Type:
+	Tipo:
 	{boolean}
+	
+	Default:
+	{true}
 	*/
 	PERMITEFECHAR: true,
 	/*
-	Property: PERMITEDESLOCAR
+	Variavel: PERMITEDESLOCAR
 	
 	Permite deslocar janela ou não.
 	
-	Type:
+	Tipo:
 	{boolean}
 	*/
 	PERMITEDESLOCAR: true,
 	/*
-	Property: TRANSICAOSUAVE
+	Variavel: TRANSICAOSUAVE
 	
 	Altera a transparência quando o mouse sobrepõe ao mapa de referência e quando sai
 	
 	Essa opção como true não funciona bem no IE
 	
-	Type:
+	Tipo:
 	{boolean}
 	
 	Default:
@@ -87,33 +100,40 @@ i3GEO.maparef = {
 	*/
 	TRANSICAOSUAVE: false,
 	/*
-	Property: OPACIDADE
+	Variavel: OPACIDADE
 	
 	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	
 	Varia de 0 a 100
 	
-	Type:
+	Tipo:
 	{numeric}
 	
 	Default:
-	{65}
+	{35}
 	*/
 	OPACIDADE: 35,
 	/*
-	Property: TOP
+	Variavel: TOP
 	
 	Posição da janela em relação ao topo do mapa
 	
+	Tipo:
 	{Numeric}
+	
+	Default:
+	{4}
 	*/
 	TOP: 4,
 	/*
-	Property: RIGHT
+	Variavel: RIGHT
 	
 	Posição da janela em relação ao lado direito do mapa
 	
 	{Numeric}
+	
+	Defau:
+	{0}
 	*/
 	RIGHT:0,
 	/*
@@ -261,7 +281,7 @@ i3GEO.maparef = {
 
 	Esta função processa os dados de uma chamada AJAX para atualizar o mapa de referência
 	
-	Parameters:
+	Parametro:
 
 	retorno - string no formato "var refimagem='nome da imagem'".
 	*/

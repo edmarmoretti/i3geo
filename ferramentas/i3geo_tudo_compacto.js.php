@@ -5456,9 +5456,13 @@ this._hasKeyEventHandlers=true;}this.fireEvent("focus",O);},_onBlur:function(N){
 /*
 Title: PHP
 
-File: i3geo/classesjs/classe_php.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_php.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -5482,7 +5486,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Variable: cpJSON
+Variavel: cpJSON
 
 Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX assíncronas com retorno no formato JSON
 
@@ -5508,7 +5512,7 @@ Return:
 cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 /*
-Class: i3GEO.php
+Classe: i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 
@@ -6422,9 +6426,13 @@ i3GEO.php = {
 /*
 Title: Utilitários
 
-File: i3geo/classesjs/classe_util.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_util.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -6448,23 +6456,34 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Variable: navm
+Variavel: navm
 
 Verdadeiro (true) se o navegador for o Internet Explorer
+
+Tipo:
+{boolean}
+
+Default:
+{false}
 */
 navm = false;
 /*
-Variable: navn
+Variavel: navn
 
 Verdadeiro (true) se o navegador for o Firefox
+
+Tipo:
+{boolean}
+
+Default:
+{false}
+
 */
 navn = false;
 //seta as variáveis navn e navm
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 /*
-Variable: g_operacao
-
 Nome da última operação que foi executada.
 
 Dependendo do tipo de operação são aplicadas as atualizações necessárias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
@@ -6473,8 +6492,6 @@ Essas operações são controladas pela função ajaxiniciaparametros.
 */
 g_operacao = "";
 /*
-Variable: g_tipoacao
-
 Tipo de ação que está sendo executada.
 Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo de operação que deve ser executada.
 É definida quando o usuário seleciona uma determinada ferramenta do i3Geo.
@@ -6495,7 +6512,7 @@ Function: $i
 
 Obtém um elemento DOM a partir de seu id
   
-Parameters:
+Parametros:
 
 id - {String} ID do elemento.
     
@@ -6519,24 +6536,22 @@ Array.prototype.remove=function(s){
 };
 
 /*
-Class: i3GEO.util
+Classe: i3GEO.util
 
 Utilitários.
 */
 i3GEO.util = {
 	/*
-	Variable: PINS
 	Elementos IMG criados na função criaPin
 	
-	Type:
+	Tipo:
 	{Array}
 	*/
 	PINS: new Array(),
 	/*
-	Variable: BOXES
 	Elementos DIV criados na função criaBox
 	
-	Type:
+	Tipo:
 	{Array}
 	*/
 	BOXES: new Array(),
@@ -6545,13 +6560,13 @@ i3GEO.util = {
 	
 	Converte uma string em uma url válida
 	
-	Parameters:
+	Parametros:
 	
 	sUrl {String} - url que será convertida
 	
 	Return:
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	escapeURL: function(sUrl){
@@ -6566,9 +6581,11 @@ i3GEO.util = {
 	},
 	/*
 	Function: insereCookie
+
 	Cria um novo cookie. 
    
-	Parameters:
+	Parametros:
+
 	nome - {String} Nome do cookie.
 	
 	valor - (String) Valor do cookie
@@ -6578,12 +6595,15 @@ i3GEO.util = {
 	},
 	/*
 	Function: pegaCookie
+
 	Pega o valor de um cookie. 
    
-	Parameters:
+	Parametros:
+
 	nome - {String} Nome do cookie.
 
 	Returns:
+
 	(String) - valor do cookie
 	*/
 	pegaCookie: function(nome){
@@ -6598,12 +6618,15 @@ i3GEO.util = {
 	},
 	/*
 	Function: listaChaves
+
 	Lista as chaves de um objeto. 
    
-	Parameters:
+	Parametros:
+
 	obj - {Object}
 
 	Return:
+
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
@@ -6615,11 +6638,12 @@ i3GEO.util = {
 	},
 	/*
 	Function: criaBotaoAplicar
+
 	Cria um botão flutuante do tipo aplicar.
 	
 	O novo botão é adicionado no DOM com ID "i3geo_aplicar" e posicionado sobre o objeto definido
    
-	Parameters:
+	Parametros:
 	
 	nomeFuncao - {String} Nome da função que será executada quando o botão for cllicado
 	
@@ -6630,6 +6654,7 @@ i3GEO.util = {
 	obj - (opcional) {Objeto} Objeto DOM que foi clicado para provocar a criação do botão.
 
 	Return:
+
 	(Object) - Objeto DOM criado.
 
 	*/
@@ -6678,7 +6703,7 @@ i3GEO.util = {
 	
 	Cria uma árvore com base em um objeto contendo aspropriedades.
 	
-	Parameters:
+	Parametros:
 	
 	titulo - {String} cabeçaljo da árvore
 	
@@ -6728,7 +6753,7 @@ i3GEO.util = {
 
 	Remove acentos de uma palavra ou frase
 
-	Parameters:
+	Parametros:
 
 	palavra {String}
 	
@@ -6770,7 +6795,7 @@ i3GEO.util = {
 
 	Retorna a posição x,y de um objeto em relação a tela do navegador
 	
-	Parameters:
+	Parametros:
 	
 	obj {Object} - objeto dom
 	
@@ -6806,7 +6831,7 @@ i3GEO.util = {
 
 		Pega o elemento pai de um elemento clicado para identificar o código do tema.
 
-		Parameters:
+		Parametros:
 
 		e - elemento do DOM.
 		
@@ -6836,7 +6861,7 @@ i3GEO.util = {
 	
 	Os cursores disponíveis são definidos por default em classe_configura.js
 	
-	Parameters:
+	Parametros:
 	
 	cursores {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
 	
@@ -6869,7 +6894,7 @@ i3GEO.util = {
 	
 	Esse elemento pode ser utilizado para desenhar retângulos sobre o mapa
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - id do elemento que será criado. Por default, será 'boxg'
 	*/
@@ -6911,7 +6936,7 @@ i3GEO.util = {
 	
 	Esse elemento pode ser utilizado para desenhar pontos sobre o mapa
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - (opcional) id do elemento que será criado. Por default, será 'boxpin'
 
@@ -6954,7 +6979,7 @@ i3GEO.util = {
 	
 	Posiciona uma imagem no mapa no local onde o mouse está posicionado sobre o mapa
 	
-	Parameters:
+	Parametros:
 	
 	id {string} - id do elemento que será posicionado
 	*/
@@ -6987,7 +7012,7 @@ i3GEO.util = {
 
 	Exemplo: $im("imagem.png")
 
-	Parâmetros:
+	Parametros:
 
 	g {String} - nome da imagem
 
@@ -7003,7 +7028,7 @@ i3GEO.util = {
 
 	Cria um elemento html do tipo input text com formatação especial.
 
-	Parameters:
+	Parametros:
 
 	idPai {String} - id do elemento pai do input
 
@@ -7039,7 +7064,7 @@ i3GEO.util = {
 
 	Exemplo: $top("imagem",100)
 
-	Parâmetros:
+	Parametros:
 
 	id - identificador do objeto
 
@@ -7060,7 +7085,7 @@ i3GEO.util = {
 
 	Exemplo: $left("imagem",100)
 
-	Parâmetros:
+	Parametros:
 
 	id - identificador do objeto
 
@@ -7081,11 +7106,9 @@ i3GEO.util = {
 	*/
 	insereMarca:{
 		/*
-		Variable: CONTAINER
-		
 		Armazena o valor do ID do div criado para inserir pontos
 		
-		Type:
+		Tipo:
 		{Array}
 		*/
 		CONTAINER: new Array(),
@@ -7096,7 +7119,7 @@ i3GEO.util = {
 		
 		Os pontos são inseridos em um contaier de pontos e mostrados temporáriamente
 
-		Parameters:
+		Parametros:
 
 		xi {Numeric} - coordenada x.
 
@@ -7162,7 +7185,7 @@ i3GEO.util = {
 
 	Inclui um arquivo shapefile no mapa atual como uma nova camada
 
-	Parameters:
+	Parametros:
 
 	path {String} - caminho completo do shapefile
 	*/	
@@ -7179,7 +7202,7 @@ i3GEO.util = {
 	
 	Abre a janela flutuante para escolha de uma cor
 	
-	Parameters:
+	Parametros:
 	
 	janela {String} - id do conteúdo da janela flutuante que chamou a função
 	
@@ -7217,7 +7240,7 @@ i3GEO.util = {
 
 	Executa uma chamada ajax no modo assíncrono retornando o resultado em XML.
 
-	Parameters:
+	Parametros:
 
 	programa {String} - URL do programa que será executado no servidor.
 	funcao {funcao} - função que tratará o resultado.
@@ -7266,7 +7289,7 @@ i3GEO.util = {
 	
 	Aplica efeito de aparecimento suave de um objetov
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - id do objeto
 	
@@ -7308,7 +7331,7 @@ i3GEO.util = {
 	
 	Aplica efeito de desaparecimento suave de um objeto
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - id do objeto
 	
@@ -7359,7 +7382,7 @@ i3GEO.util = {
 	
 	Calcula a extensão geográfica de uma geometria fornecida no formato WKT
 	
-	Parameters:
+	Parametros:
 	
 	wkt {String} - geometria no formato wkt
 	

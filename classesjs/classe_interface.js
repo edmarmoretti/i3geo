@@ -1,9 +1,13 @@
 /*
 Title: Interface
 
-File: i3geo/classesjs/classe_interface.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_interface.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.interface
+Classe: i3GEO.interface
 
 Funcoes que controlam o comportamento específico de determinadas interfaces
 
@@ -42,52 +46,65 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 */
 i3GEO.interface = {
 	/*
-	Property: BARRABOTOESTOP
+	Variavel: BARRABOTOESTOP
 	
 	Distância da barra de botões em ralação ao topo do mapa.
 	
-	Type:
+	Tipo:
 	{number}
+	
+	Default:
+	{12}
 	*/
 	BARRABOTOESTOP: 12,
 	/*
-	Property: BARRABOTOESLEFT
+	Variavel: BARRABOTOESLEFT
 	
 	Distância da barra de botões em ralação ao lado esquerdo do mapa.
 	
-	Type:
+	Tipo:
 	{number}
+	
+	Default:
+	{3}
 	*/
 	BARRABOTOESLEFT: 3,	
 
 	/*
-	Property: ATUAL
+	Variavel: ATUAL
 	
 	Interface atual em uso.
 	
+	Tipo:
+	{string}
+	
 	Default:
-	padrao
+	{"padrao"}
 	*/
 	ATUAL: "padrao",
 	/*
-	Property: IDCORPO
+	Variavel: IDCORPO
 	
 	ID do elemento HTML que receberá o corpo do mapa
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{"corpoMapa"}
 	*/
 	IDCORPO: "corpoMapa",
 	/*
-	Variable: IDMAPA
-	
 	ID do elemento HTML criado para conter o mapa
 	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
 	*/
 	IDMAPA: "",
 	/*
-	Property: ATIVAMENUCONTEXTO
+	Variavel: ATIVAMENUCONTEXTO
 
 	Indica se o menu de contexto deve ser ativado
 
-	Type:
+	Tipo:
 	{Boolean}
 
 	Default:
@@ -109,7 +126,7 @@ i3GEO.interface = {
 	
 	Essa função é executada na inicialização do i3geo
 	
-	Parameters:
+	Parametros:
 	
 	w {Integer} - largura do corpo do mapa em pixels
 	
@@ -134,6 +151,15 @@ i3GEO.interface = {
 	ativaBotoes: function(){
 		eval("i3GEO.interface."+i3GEO.interface.ATUAL+".ativaBotoes()");
 	},
+	/*
+	Classe: i3GEO.interface.padrao
+	
+	Interface padrão com motor de navegação do próprio i3Geo
+	
+	Utilizado quando 
+	
+	i3GEO.interface.ATUAL = "padrao"
+	*/
 	padrao:{
 		redesenha:function(){
 			$i("img").onload =  function()
@@ -284,9 +310,13 @@ i3GEO.interface = {
 		}
 	},
 	/*
-	Function: flamingo
+	Classe: i3GEO.interface.flamingo
 	
-	Interface baseada no software flamingo (flash)
+	Interface com motor de navegação baseado no software Flamingo Map Components (flash)
+	
+	Utilizado quando 
+	
+	i3GEO.interface.ATUAL = "flamingo"
 	*/
 	flamingo:{
 		redesenha: function(){
@@ -335,11 +365,15 @@ i3GEO.interface = {
 		}
 	},
 	/*
-	Function: openlayers
+	Classe: i3GEO.interface.openlayers
 	
-	Interface baseada no software openlayers
+	Interface com motor de navegação baseado na API OpenLayers
 	
-	O objeto openlayers criado nessa função pode ser acessado na variável i3geoOL
+	Utilizado quando 
+	
+	i3GEO.interface.ATUAL = "openlayers"
+	
+	Cria o objeto i3geoOL que pode receber os métodos da API
 	*/
 	openlayers:{
 		redesenha: function(){
@@ -478,15 +512,19 @@ i3GEO.interface = {
 		}
 	},
 	/*
-	Function: googlemaps
+	Classe: i3GEO.interface.googlemaps
 	
-	Interface baseada no software googlemaps
+	Interface com motor de navegação baseado na API Google Maps
 	
-	O objeto criado com a API do google maps pode ser acessado na variável i3GeoMap
+	Utilizado quando 
+	
+	i3GEO.interface.ATUAL = "googlemaps"
+	
+	Cria o objeto i3GeoMap que pode receber os métodos da API
 	*/
 	googlemaps:{
 		/*
-		Property: OPACIDADE
+		Variavel: OPACIDADE
 		
 		Valor da opacidade da camada i3geo do mapa
 		
@@ -495,19 +533,19 @@ i3GEO.interface = {
 		Default:
 		0.8
 		
-		Type:
+		Tipo:
 		{Numeric}
 		*/
 		OPACIDADE: 0.8,
 		/*
-		Property: TIPOMAPA
+		Variavel: TIPOMAPA
 		
 		Tipo de mapa que será usado como default, conforme constantes definidas na API do Google Maps.
 		
 		Default:
 		"G_PHYSICAL_MAP"
 		
-		Type:
+		Tipo:
 		{string - Google API constante GMapType}
 		*/
 		TIPOMAPA: "G_PHYSICAL_MAP",
@@ -516,7 +554,7 @@ i3GEO.interface = {
 		
 		Array com a lista de escalas em cada nivel de zoom utilizado pelo Google
 		
-		Type:
+		Tipo:
 		{array}
 		
 		*/
@@ -697,19 +735,108 @@ i3GEO.interface = {
     		var ne = new GLatLng(ret[3],ret[2]);
     		var z = i3GeoMap.getBoundsZoomLevel(new GLatLngBounds(sw,ne));
     		i3GeoMap.setCenter(new GLatLng(pt2,pt1), z);		
+		},
+		/*
+		Function: adicionaKml
+	
+		Insere no mapa uma camada KML com base na API do Google Maps
+	
+		As camadas adicionadas são crescentadas na árvore de camadas
+	
+		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+	
+		Parametros:
+	
+		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+	
+		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
+		*/
+		adicionaKml: function(pan,url){
+			if(arguments.length == 1){
+				var i = $i("i3geo_urlkml");
+				if(i){var url = i.value;}
+				else{var url = "";}
+			}
+			if(url == ""){return;}
+			//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
+			var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
+			i3GEO.mapa.GEOXML.push(ngeoxml);
+			var zoom = function(){
+				if(pan){
+					eval("var ll = "+ngeoxml+".getDefaultCenter()");
+					eval(ngeoxml+".gotoDefaultViewport(i3GeoMap)");
+					//i3GeoMap.setCenter(ll);
+				}
+			};
+			eval(ngeoxml+" = new GGeoXml(url,zoom)");
+			eval("i3GeoMap.addOverlay("+ngeoxml+")");
+			i3GEO.mapa.adicionaNoArvoreGoogle(ngeoxml,ngeoxml);
+		},
+		/*
+		Function: adicionaNoArvoreGoogle
+		
+		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
+		
+		Os temas são incluídos em um nó chamado "Google Maps".
+		
+		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		
+		Parametros:
+		
+		url {string} - url do arquivo KML
+	
+		nomeOverlay {string} - título do tema
+		*/
+		adicionaNoArvoreGoogle: function(url,nomeOverlay){
+			var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
+			var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+			if(!node){
+				var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
+				var d = {html:titulo,idkml:"raiz"};
+				var node = new YAHOO.widget.HTMLNode(d, root, true,true);
+				node.enableHighlight = false;
+			}
+			html = "<input onclick='i3GEO.mapa.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
+			html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
+			var d = {html:html};
+			var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
+			nodekml.enableHighlight = false;   			
+			nodekml.isleaf = true;
+			i3GEO.arvoreDeCamadas.ARVORE.draw();
+			i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
+			node.expand();
+		},
+		/*
+		Function: ativaDesativaCamadaKml
+		
+		Ativa ou desativa uma camada do nó de layers KML
+			
+		Parametro:
+		
+		obj {object} - objeto do tipo checkbox que foi ativado/desativado
+		*/
+		ativaDesativaCamadaKml: function(obj){	
+			if(!obj.checked){
+				eval("i3GeoMap.removeOverlay("+obj.value+")");
+			}
+			else
+			eval("i3GeoMap.addOverlay("+obj.value+")");
 		}
 	},
 	/*
-	Function: googleearth
+	Classe: i3GEO.interface.googleearth
 	
-	Interface baseada no software googlemaps
+	Interface com motor de navegação baseado na API Google Earth
 	
-	O objeto criado com a API do google maps pode ser acessado na variável i3GeoMap
+	Utilizado quando 
+	
+	i3GEO.interface.ATUAL = "googleearth"
+	
+	Cria o objeto i3GeoMap que pode receber os métodos da API do google Earth
 	*/
 	googleearth:{
 		redesenha: function(){
 			try{
-				
 				linki3geo.setHref(linki3geo.getHref()+"&");
 			}
 			catch(e){};

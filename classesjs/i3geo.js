@@ -1,15 +1,21 @@
 /*
 Title: i3geo - carregador de javascripts
 
-Para uso nas interfaces HTML
+Para uso nas interfaces HTML.
 
 Lê o conjunto de javascripts para o funcionamento do i3geo.
 
-Carrega o arquivo compactado i3geo_tudo_compacto.js.php que inclui também os scripts do YUI
+Carrega o arquivo compactado i3geo_tudo_compacto.js.php
 
-File: i3geo/classesjs/i3geo.js
+Veja exemplo em <geral.htm>
 
-About: Licença
+Arquivo:
+
+i3geo/classesjs/i3geo.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -30,8 +36,6 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Function: $i
-
 Pega um objeto do documento.
 
 Exemplo: $i("box1")

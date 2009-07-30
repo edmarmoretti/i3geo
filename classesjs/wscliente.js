@@ -5,19 +5,13 @@ Classe javascript da aplicação de consulta de web services.
 
 Lê o conjunto de javascripts para o funcionamento da interface wscliente.htm
 
-File: i3geo/classesjs/wscliente.js
+Arquivo:
 
-Esse programa possuí as seguintes dependências:
+i3geo/classesjs/wscliente.js
 
-i3geo/pacotes/cpaint/cpaint2.inc.compressed.js
+Licenca:
 
-i3geo/pacotes/openlayers/OpenLayers.js
-
-i3geo/classesjs/compactados/funcoes_compacto.js
-
-As dependências são carregadas pelo próprio wscliente.js, não sendo necessário incluir no HTML.
-
-About: Licença
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -70,11 +64,8 @@ for (var i = 0; i < jsfiles.length; i++)
 	allScriptTags += currentScriptTag;
 }
 document.write(allScriptTags);
-/*
-Section: Classes
-*/
 /* 
-Class: i3geo_wscliente_configura
+Classe: i3geo_wscliente_configura
 
 Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação dos elementos da interface.
 
@@ -90,7 +81,7 @@ var i3geo_wscliente_configura = new i3geo_wscliente_configura
 	new Array("http://mapas.mma.gov.br/i3geo/menutemas/servicoswms.php")
 )
 
-Parameters:
+Parametros:
 
 loc_i3geo - endereço web onde está instalado o i3geo.
 
@@ -107,63 +98,43 @@ rsswms - array com a lista de endereços dos serviços RSS com a lista de webservi
 function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,rsswms)
 {
 	/*
-	Property: loc_i3geo
-	
 	Guarda o valor do parâmetro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Property: corpo
-	
 	Guarda o valor do parâmetro corpo
 	*/
 	this.corpo = corpo;
 	if(!$i("corpo")){alert("id "+corpo+" nao existe");}
 	/*
-	Property: enderecows
-	
 	Guarda o valor do parâmetro enderecows
 	*/
 	this.enderecows = enderecows;
 	/*
-	Property: enderecowms
-	
 	Guarda o valor do parâmetro enderecowms
 	*/
 	this.enderecowms = enderecowms;
 	/*
-	Property: rssws
-	
 	Guarda o valor do parâmetro rssws
 	*/
 	this.rssws = rssws;
 	/*
-	Property: rsswms
-	
 	Guarda o valor do parâmetro rsswms
 	*/
 	this.rsswms = rsswms;
 	/* 
-	Property: tipo
-	
 	Tipo de serviço wms ativo
 	*/
 	this.tipo = ""
 	/* 
-	Property: tema
-	
 	Código do tema wms escolhido
 	*/
 	this.tema = ""
 	/* 
-	Property: nometema
-	
 	Nome do tema wms escolhido
 	*/
 	this.nometema = ""
 	/* 
-	Property: funcao
-	
 	Função do ws escolhida.
 	*/
 	this.funcao = ""
@@ -242,9 +213,9 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 
 	Mostra links que permitem ao usuário abrir os RSSs cadastrados para determinado serviço.
 
-	Parameters:
+	Parametros:
 
-	tipo - ws/wms
+	tipo - ws|wms
 
 	*/
 	this.listaLinkServicos = function(tipo)
@@ -609,22 +580,20 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	this.wsdl = function()
 	{window.open($i(this.enderecows).value)}
 }
-/*
-Section: Inicialização
-*/
+
 /*
 Function: i3geo_wscliente_inicia
 
 Inicia a interface do cliente de web services.
 
-Parameters:
+Parametros:
 
 objeto_i3geo_wscliente_configura - objeto com os parâmentros de configuração criado pela função i3geo_gl_configura
 */	
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {		
 	/*
-	Variable: $i3geo_wscliente
+	Variavel: $i3geo_wscliente
 	
 	Contém o objeto $i3geo_wscliente com todas as propriedades e funções de controle da interface
 	*/
@@ -637,9 +606,7 @@ function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
    		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
 	}()
 }
-/*
-Section: Funções adicionais
-*/
+
 /*
 Function: seltema
 
@@ -647,7 +614,7 @@ Seta as variáveis necessárias para visualizar o mapa com o OpenLayers após o usu
 
 Essa função é chamada por padrão quando uma camada é escolhida na lista de camadas retornada pelo i3geo.
 
-Parameters:
+Parametros:
 
 tipo - tipo de tema
 tema - nome do tema

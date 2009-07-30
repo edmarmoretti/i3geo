@@ -1,9 +1,11 @@
 /*
 Title: Gadgets (objetos marginais do mapa)
 
-File: i3geo/classesjs/classe_gadgets.js
+Arquivo: i3geo/classesjs/classe_gadgets.js
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,15 +29,17 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.gadgets
+Classe: i3GEO.gadgets
 
 Inclui elementos especiais no mapa
 
 Os elementos são opcionais e adicionam funcionalidades ao mapa.
+
+Outras funcionalidades são definidas em botões. Veja <classe_configura.js>
 */
 i3GEO.gadgets = {
 	/*
-	Variable: PARAMETROS
+	Variavel: PARAMETROS
 	
 	Parametros de inicialização dos gadgets.
 	
@@ -91,7 +95,7 @@ i3GEO.gadgets = {
 		{idhtml:"menus",deslocaEsquerda:0}
 	}	
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/	
 	PARAMETROS: {
@@ -133,7 +137,7 @@ i3GEO.gadgets = {
 	
 	os valores mostrados serão intercalados entre GEO e UTM
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -182,7 +186,7 @@ i3GEO.gadgets = {
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (localizarxy)
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -246,12 +250,12 @@ i3GEO.gadgets = {
 	Essa opção só funciona com a API do Google carregada
 		
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
-	id definido em i3GEO.gadgets.PARAMETROS
+	id definido em i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
-	i3GEO.gadgets.PARAMETROS
+	i3GEO.gadgets.PARAMETROS.mostraInserirKml.idhtml
 	*/		
 	mostraInserirKml: function(id){
 		if(arguments.length == 0)
@@ -260,7 +264,7 @@ i3GEO.gadgets = {
 			if(!$i("i3geo_urlkml")){
 				var i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
 				var ins = "<table><tr><td>Kml: "+i;
-				var temp = 'i3GEO.mapa.insereKml(true);';
+				var temp = 'i3GEO.mapa.adicionaKml(true);';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}
@@ -276,7 +280,7 @@ i3GEO.gadgets = {
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -316,7 +320,7 @@ i3GEO.gadgets = {
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS(escala)
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -357,7 +361,7 @@ i3GEO.gadgets = {
 	Se você não quer essa função no mapa, elimine o elemento HTML existente no mapa que contenha o 
 	id definido em i3GEO.gadgets.PARAMETROS (buscaRapida)
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -385,7 +389,7 @@ i3GEO.gadgets = {
 	
 	Mostra na barra de zoom os ícones que controlam a visualização do histórico da navegação sobre o mapa
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS
@@ -427,7 +431,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Class: i3GEO.gadgets.visual
+	Classe: i3GEO.gadgets.visual
 	
 	Gera os ícones e controla as opções de modificação do visual do mapa.
 	
@@ -446,7 +450,7 @@ i3GEO.gadgets = {
 		
 		Constrói os ícones de escolha do visual.
 		
-		Parameters:
+		Parametro:
 		
 		id {String} - id do elemento que receberá os ícones (opcional)
 		*/
@@ -473,7 +477,7 @@ i3GEO.gadgets = {
 		
 		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
 		
-		Parameters:
+		Parametro:
 		
 		visual {String} - nome do visual que será utilizado.
 		*/
@@ -546,7 +550,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Class: i3GEO.gadgets.quadros
+	Classe: i3GEO.gadgets.quadros
 	
 	Cria e controla o funcionamento dos quadros de animação.
 	
@@ -557,20 +561,20 @@ i3GEO.gadgets = {
 	*/
 	quadros: {
 		/*
-		Variable: quadrosfilme
+		Variavel: quadrosfilme
 		
 		Armazena cada quadro individualmente com as suas propriedades
 		
-		Type:
+		Tipo:
 		{Array}
 		*/
 		quadrosfilme: new Array(),
 		/*
-		Variable: quadroatual
+		Variavel: quadroatual
 		
 		Valor do índice do quadro atual
 		
-		Type:
+		Tipo:
 		{Integer}
 		*/
 		quadroatual: 0,
@@ -579,7 +583,7 @@ i3GEO.gadgets = {
 		
 		Gera os quadros e inicializa os objetos para armazenar as imagens
 		
-		Parameters:
+		Parametros:
 		
 		qs {Integer} - número de quadros
 		
@@ -618,7 +622,7 @@ i3GEO.gadgets = {
 
 		Armazena um determinado valor em uma determinada característica de um objeto quadro.
 
-		Parameters:
+		Parametros:
 
 		variavel {String} - parâmetro do objeto quadro.
 
@@ -648,7 +652,7 @@ i3GEO.gadgets = {
 		
 		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
 		
-		Parameter:
+		Parametro:
 		
 		quadro {String} - id do quadro que será utilizado
 		*/
@@ -663,7 +667,7 @@ i3GEO.gadgets = {
 		
 		A imagem mostrada no mapa é um clone do mapa atual, preservando o mapa.
 		
-		Parameters:
+		Parametro:
 		
 		quadro {String} - id do quadro que terá a imagem recuperada
 		*/
@@ -699,7 +703,7 @@ i3GEO.gadgets = {
 		
 		Abre a janela de opções que controla as características do quado e permite disparar a animação.
 		
-		Parameters:
+		Parametro:
 		
 		obj {Object} - objeto clicado
 		*/
@@ -719,7 +723,7 @@ i3GEO.gadgets = {
 		
 		Mostra as imagens armazenadas nos quadros em uma sequência animada
 		
-		Parameters:
+		Parametros:
 		
 		Qanima {Integer} - quadro atual na sequência de animação
 		
@@ -787,7 +791,7 @@ i3GEO.gadgets = {
 
 	O conteúdo do menu é baseado na variável i3GEO.configura.oMenuData
 	
-	Parameters:
+	Parametro:
 	
 	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
 	i3GEO.gadgets.PARAMETROS

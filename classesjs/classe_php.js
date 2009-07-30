@@ -1,9 +1,13 @@
 /*
 Title: PHP
 
-File: i3geo/classesjs/classe_php.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_php.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Variable: cpJSON
+Variavel: cpJSON
 
 Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX assíncronas com retorno no formato JSON
 
@@ -53,7 +57,7 @@ Return:
 cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 /*
-Class: i3GEO.php
+Classe: i3GEO.php
 
 Chamadas em AJAX que executam programas no lado do servidor
 

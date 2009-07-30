@@ -1,9 +1,13 @@
 /*
 Title: Navegação sobre o mapa
 
-File: i3geo/classesjs/classe_navega.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_navega.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.navega
+Classe: i3GEO.navega
 
 Realiza operações de navegação do mapa, como zoom, pan, etc..
 
@@ -38,23 +42,23 @@ nomeFuncao("","",10)
 */
 i3GEO.navega = {
 	/*
-	Property: FATORZOOM
+	Variavel: FATORZOOM
 	
 	Valor utilizado nas operações de zoom in e out. Fator de zoom.
 	
 	Default:
-	2
+	{2}
 	
-	Type:
-	{Integer}
+	Tipo:
+	{Numeric}
 	*/
 	FATORZOOM: 2,
 	/*
 	Function: zoomin
 	
-	Aproxima o mapa
+	Aproxima o mapa aplicando um fator de modificação da escala
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -72,9 +76,9 @@ i3GEO.navega = {
 	/*
 	Function: zoomout
 	
-	Afasta o mapa
+	Afasta o mapa aplicando um fator de modificação da escala
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -94,7 +98,7 @@ i3GEO.navega = {
 	
 	Centraliza o mapa em um ponto e acrescenta o ponto como uma nova camada no mapa
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -116,7 +120,7 @@ i3GEO.navega = {
 	
 	Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -137,7 +141,7 @@ i3GEO.navega = {
 	
 	Desloca o mapa de um ponto de coordenadas xy para um segundo ponto
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -178,7 +182,7 @@ i3GEO.navega = {
 	
 	Localiza as coordenadas baseadas no número IP do usuário.
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -197,7 +201,7 @@ i3GEO.navega = {
 	
 	Mostra no mapa um ponto baseado na localização do usuário.
 
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -228,7 +232,7 @@ i3GEO.navega = {
 	
 	Aplica uma nova extensão geográfica ao mapa.
 
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -254,7 +258,7 @@ i3GEO.navega = {
 	
 	Utilize "" caso vc queira usar locaplic e sid default.
 
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX. Pode ser ""
 	
@@ -283,7 +287,7 @@ i3GEO.navega = {
 	
 	Desloca o mapa para uma determinada direção com uma distância fixa.
 	
-	Parameters:
+	Parametros:
 	
 	locaplic {String} - (opcional) endereço do i3geo utilizado na geração da URL para fazer a chamada AJAX
 	
@@ -400,26 +404,27 @@ i3GEO.navega = {
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
 	},
 	/*
-	Class: i3GEO.navega.autoRedesenho
+	Classe: i3GEO.navega.autoRedesenho
 	
 	Controla o redesenho automático do mapa por meio de um temporizador
 	*/
 	autoRedesenho: {
 		/*
-		Variable: INTERVALO
+		Variavel: INTERVALO
 		
 		Intervalo de tempo, em milisegundos, que será utilizado para disparar o desenho do mapa
 		
-		Type:
+		Tipo:
 		{Integer}
+		
+		Default:
+		{0}
 		*/
 		INTERVALO: 0,
 		/*
-		Variable: ID
-		
 		Guarda o valor do ID do elemento HTML que receberá o contador de tempo
 		
-		Type:
+		Tipo:
 		{String}
 		*/
 		ID: "tempoRedesenho",
@@ -428,7 +433,7 @@ i3GEO.navega = {
 		
 		Ativa o auto-redesenho do mapa
 		
-		Parameters:
+		Parametros:
 		
 		id {String} - id do elemento onde o contador de tempo será mostrado no mapa. Por default, utiliza "tempoRedesenho".
 		*/
@@ -480,7 +485,7 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Class: i3GEO.navega.zoomBox
+	Classe: i3GEO.navega.zoomBox
 	
 	Controla o desenho de um box na tela para executar o zoom por box
 	*/
@@ -628,7 +633,7 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Class: i3GEO.navega.entorno
+	Classe: i3GEO.navega.entorno
 	
 	Controla o desenho do entorno do mapa (modo tile)
 	*/
@@ -717,7 +722,7 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Class: i3GEO.navega.lente
+	Classe: i3GEO.navega.lente
 	
 	Ativa e controla a lente de aumento.
 	
@@ -726,21 +731,31 @@ i3GEO.navega = {
 	*/
 	lente:{
 		/*
-		Variable: ESTAATIVA
-		
 		Indica se a lente foi ou não aberta
 		*/
 		ESTAATIVA: "nao",
 		/*
-		Property: POSICAOX
+		Variavel: POSICAOX
 		
 		Define a posição em x da lente em relação ao corpo do mapa
+
+		Tipo:
+		{numeric}
+		
+		Default:
+		{0}
 		*/
 		POSICAOX: 0,
 		/*
-		Property: POSICAOY
+		Variavel: POSICAOY
 		
 		Define a posição em y da lente em relação ao corpo do mapa
+		
+		Tipo:
+		{numeric}
+		
+		Default:
+		{0}
 		*/
 		POSICAOY:0,
 		/*
@@ -852,35 +867,34 @@ i3GEO.navega = {
 		}
 	},
 	/*
-	Class: i3GEO.navega.destacaTema
+	Classe: i3GEO.navega.destacaTema
 	
 	Destaca um tema mostrando-o sobre os outros em um box que segue o mouse
 	*/
 	destacaTema:{
 		/*
-		Property: TAMANHO
+		Variavel: TAMANHO
 		
 		Tamanho do box
 		
-		Type:
+		Tipo:
 		{Integer}
+		
+		Default:
+		{75}
 		*/
 		TAMANHO: 75,
 		/*
-		Variable: ESTAATIVO
-		
 		Indica se o destaque está ou não ativo
 		
-		Type:
+		Tipo:
 		{sim|nao}
 		*/
 		ESTAATIVO: "nao",
 		/*
-		Variable: TEMA
-		
 		Tema que está sendo destacado
 		
-		Type:
+		Tipo:
 		{Código do tema}
 		*/
 		TEMA: "",
@@ -889,7 +903,7 @@ i3GEO.navega = {
 		
 		Inicia o destaque de um tema
 		
-		Parameters:
+		Parametros:
 		
 		tema {String} - código do tema
 		*/

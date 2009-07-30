@@ -1,9 +1,13 @@
 /*
 Title: Seleção de elementos
 
-File: i3geo/classesjs/classe_selecao.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_selecao.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.selecao
+Classe: i3GEO.selecao
 
 Realiza operações de seleção de elementos do mapa
 */
@@ -37,7 +41,7 @@ i3GEO.selecao = {
 	
 	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
 	
-	Parameters:
+	Parametros:
 	
 	tema {String} - código do tema
 	
@@ -56,7 +60,7 @@ i3GEO.selecao = {
 	
 	Seleciona elementos de um tema com base em um retângulo
 	
-	Parameters:
+	Parametros:
 	
 	tema {String} - código do tema
 	
@@ -136,7 +140,7 @@ i3GEO.selecao = {
 		}
 	},
 	/*
-	Class: i3GEO.selecao.box
+	Classe: i3GEO.selecao.box
 	
 	Controla o desenho do box para a seleção e executa a função de seleção
 	*/
@@ -292,7 +296,7 @@ i3GEO.selecao = {
 		}
 	},
 	/*
-	Class: i3GEO.selecao.poligono
+	Classe: i3GEO.selecao.poligono
 	
 	Realiza a seleção desenhando um polígono no mapa
 	*/

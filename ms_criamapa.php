@@ -19,9 +19,11 @@ http://localhost/i3geo/ms_criamapa.php?temasa=estadosl bioma&layers=estadosl bio
 Caso a inicialização do i3geo ocorra por um outro programa PHP, o ms_criamapa.php deve ser executado via include. Nesse caso, os parâmetros devem ser especificados como variáveis, p.e.,
 
 $temasa=bioma;
-
 include("ms_criamapa.php");
 
+Link:
+
+http://localhost/i3geo/ms_criamapa.php
 
 Arquivo:
 
@@ -49,69 +51,105 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
+Parametro: base
 
+arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
 
-base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
+Parametro: temasa
 
-temasa - lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
+lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
 
-layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
+Parametro: layers
 
-mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
+lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
 
-executa - programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
+Parametro: mapext
 
-interface - nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
+extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
 
-perfil - perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
+Parametro: executa
 
-caminho - caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
+programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
 
-pontos - lista de coordenadas x e y que serão adicionadas como pontos no mapa.
+Parametro: interface
 
-nometemapontos - nome do tema de pontos
+nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
-linhas - lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+Parametro: perfil
 
-nometemalinhas - nome do tema de linhas
+perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
 
-poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
+Parametro: caminho
 
-nometemapoligonos - nome do tema de polígonos
+caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
 
-wkt - insere elementos no mapa com coordenadas definidas em wkt
+Parametro: pontos
 
-nometemawkt - nome do tema em wkt
+lista de coordenadas x e y que serão adicionadas como pontos no mapa.
 
-debug - ativa o retorno de mensagens de erro do PHP sim|nao
+Parametro: nometemapontos
 
-idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js
+nome do tema de pontos
 
-kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
+Parametro: linhas
 
-Parâmetros utilizados para adicionar uma camada baseada em um wms
+lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
 
-Testar com http://localhost/i3geo/ms_criamapa.php?url_wms=http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&layer_wms=biomas&style_wms=default&nome_wms=Biomas do Brasil&srs_wms=epsg:4291&image_wms=image/png&versao_wms=1.1.1
+Parametro: nometemalinhas
 
-url_wms - endereço
+nome do tema de linhas
 
-layer_wms - nome do layer
+Parametro: poligonos
 
-style_wms - estilo do layer
+lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
 
-nome_wms - nome da camada (titulo)
+Parametro: nometemapoligonos
 
-srs_wms - código da projeção
+nome do tema de polígonos
 
-image_wms - tipo de imagem disponível
+Parametro: wkt
+
+insere elementos no mapa com coordenadas definidas em wkt
+
+Parametro: nometemawkt
+
+nome do tema em wkt
+
+Parametro: idioma
+
+idioma da interface (veja os idiomas disponíveis em classe_idioma.js)
+
+Parametro: kmlurl
+
+url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
+
+Parametro: url_wms
+
+endereço de um WMS (será incluido como uma camada no mapa)
+
+Parametro: layer_wms
+
+nome do layer
+
+Parametro: style_wms
+
+estilo do layer
+
+Parametro: nome_wms
+
+nome da camada (titulo)
+
+Parametro: srs_wms
+
+código da projeção
+
+Parametro: image_wms
+
+tipo de imagem disponível
 
 Parametro: versao_wms
 
-&versao_wms
-
-Versão do WMS
-
-
+Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
 */
 
 /*
@@ -389,8 +427,6 @@ if ($interface != "mashup")
 {abreInterface();}
 
 /*
-Function: adaptaLayers
-
 Adapta os dados de cada layer.
 
 Faz alterações em cada layer caso sejam necessárias.
@@ -422,8 +458,6 @@ function adaptaLayers(){
 	erroCriacao();
 }
 /*
-Function: abreInterface
-
 Redireciona para o HTML definido em $interface, abrindo o mapa
 */
 function abreInterface(){
@@ -449,10 +483,7 @@ function abreInterface(){
 	}	
 }
 /*
-Function: ligaTemas
-
 Liga os temas definidos na variável $layers
-
 */
 function ligaTemas()
 {
@@ -484,10 +515,7 @@ function ligaTemas()
 	erroCriacao();
 }
 /*
-Function: incluiTemasIniciais
-
 Inclui os temas definidos na variável $temasa
-
 */
 function incluiTemasIniciais()
 {
@@ -546,10 +574,7 @@ function incluiTemasIniciais()
 	erroCriacao();
 }
 /*
-Function: criaIndex
-
 Cria os arquivos vazios index.htm e index.html nos diretórios temporários
-
 */
 function criaIndex()
 {
@@ -576,19 +601,7 @@ function criaIndex()
 	}
 }
 /*
-Function: MostraAguarde
-
 Mostra a mensagem de aguarde
-
-Globals:
-
-$interface
-
-$caminho
-
-$mensagemInicia
-
-$tituloInstituicao
 */
 function mostraAguarde()
 {
@@ -609,15 +622,7 @@ function mostraAguarde()
 	}
 }
 /*
-Function: insereWKTUrl
-
 Insere elementos no mapa a partir de uma string definida em wkt
-
-Globals:
-
-$wkt - string no formato wkt
-
-$nometemawkt - nome do tema que será criado
 */
 function insereWKTUrl()
 {
@@ -682,15 +687,7 @@ function insereWKTUrl()
 	erroCriacao();
 }
 /*
-Function: inserePontosUrl
-
 Insere um tema do tipo ponto
-
-Globals:
-
-$pontos - lista de coordenadas x,y
-
-$nometemapontos - nome do tema que será criado
 
 */
 function inserePontosUrl()
@@ -754,17 +751,10 @@ function inserePontosUrl()
 	erroCriacao();
 }
 /*
-Function: insereLinhasUrl
-
 Insere um tema do tipo linear
 
 As linhas devem ter os pontos separados por espaços e cada linha separada por vírgula
 
-Globals:
-
-$linhas - lista de coordenadas
-
-$nometemalinhas - nome do tema que será criado
 */
 function insereLinhasUrl()
 {
@@ -835,18 +825,9 @@ function insereLinhasUrl()
 	erroCriacao();
 }
 /*
-Function: inserePoligonosUrl
-
 Insere um tema poligonal.
 
 Os polígonos devem ter os pontos separados por espaços e cada polígono separado por vírgula
-
-Globals:
-
-$poligonos - lista de coordenadas
-
-$nometemapoligonos - nome do tema que será criado
-
 */
 function inserePoligonosUrl()
 {
@@ -919,8 +900,6 @@ function inserePoligonosUrl()
 	erroCriacao();
 }
 /*
-Function: incluiTemaWms
-
 Inclui no mapa um tema do tipo WMS
 */
 function incluiTemaWms()
@@ -936,6 +915,9 @@ function incluiTemaWms()
 	$salvo = $m->salva($tmpfname);
 	erroCriacao();
 }
+/*
+Captura e mostra os erros de processamento do mapserver
+*/
 function erroCriacao(){
 	$error = ms_GetErrorObj();
 	while($error && $error->code != MS_NOERR)

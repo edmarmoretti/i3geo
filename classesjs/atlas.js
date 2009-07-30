@@ -7,9 +7,11 @@ Para abrir os atlas utilize http://localhost/i3geo/atlas
 
 A definição dos atlas é feita em i3geo/menutemas/menutemas.xml ou no sistema de administração do i3geo.
 
-File: i3geo/classesjs/atlas.js
+Arquivo: i3geo/classesjs/atlas.js
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -30,16 +32,12 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Variable: listaAtlas
-
 Objeto com as informações básicas sobre os Atlas existentes.
 
-Essa lista é obtida lendo-se o arquivo xml definido em atlasxml
+Essa lista é obtida lendo-se o arquivo xml definido em atlasxml ou no siostema de administração
 */
 listaAtlas = "";
 /*
-Variable: atlasxml
-
 Endereço do arquivo xml com a lista de atlas.
 */
 atlasxml = "";
@@ -204,7 +202,7 @@ Function: abreatlas
 
 Abre um Atlas específico escolhido pelo usuário
 
-Parameters:
+Parametros:
 
 id - id do atlas que será aberto
 */
@@ -219,7 +217,7 @@ Function: abrePrancha
 
 Ativa uma prancha, adicionando e ativando as camadas específicas.
 
-Parameters:
+Parametros:
 
 id - id da prancha que será aberta
 */

@@ -148,7 +148,7 @@ if ($funcao == "criaMapa")
 	//
 	chdir($locaplic);
 	$interface = "mashup";
-	include_once("ms_criamapa.php");
+	include_once($d."ms_criamapa.php");
 	$cp->set_data(session_id());
 	$cp->return_data();
 	return;

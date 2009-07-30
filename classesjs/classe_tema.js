@@ -27,7 +27,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.tema
+Classe: i3GEO.tema
 
 Funções de diálogo e processamento de propriedades de um tema existente no mapa
 
@@ -39,7 +39,7 @@ i3GEO.tema = {
 
 	Exclui um tema do mapa
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -60,7 +60,7 @@ i3GEO.tema = {
 
 	Abre os metadados registrados para o tema
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -80,7 +80,7 @@ i3GEO.tema = {
 
 	Sobe um tema na ordem de desenho
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -93,7 +93,7 @@ i3GEO.tema = {
 
 	Desce um tema na ordem de desenho
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -106,7 +106,7 @@ i3GEO.tema = {
 
 	Zoom para o tema
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -119,7 +119,7 @@ i3GEO.tema = {
 
 	Zoom para os elementos selecionados de um tema
 
-	Parameters:
+	Parametros:
 
 	tema - código do tema
 	*/
@@ -132,7 +132,7 @@ i3GEO.tema = {
 
 	Limpa a selecao do tema
 
-	Parameters:
+	Parametros:
 
 	tema - ID (name) do tema clicado
 	*/
@@ -146,7 +146,7 @@ i3GEO.tema = {
 
 	Muda a transparencia de um tema
 
-	Parameters:
+	Parametros:
 
 	idtema - código do tema
 	*/
@@ -169,7 +169,7 @@ i3GEO.tema = {
 	
 	Muda o nome de um tema
 
-	Parameters:
+	Parametros:
 
 	idtema - código do tema
 	*/
@@ -203,7 +203,7 @@ i3GEO.tema = {
 	
 	onclick = i3GEO.tema.mostralegendajanela(idtema,nome,"abrejanela")
 	
-	Parameters:
+	Parametros:
 	
 	idtema {String} - código do tema
 	
@@ -235,7 +235,7 @@ i3GEO.tema = {
 		}
 	},
 	/*
-	Class: i3GEO.tema.dialogo
+	Classe: i3GEO.tema.dialogo
 	
 	Abre as telas de diálogo das opções de manipulação de um tema
 	
@@ -251,7 +251,7 @@ i3GEO.tema = {
 		
 		O tema em questão é um dos que constam na árvore de temas
 
-		Parameters:
+		Parametros:
 
 		tema - código do tema escolhido
 		*/
@@ -269,7 +269,7 @@ i3GEO.tema = {
 
 		Adiciona gráficos automaticamente nos elementos de um tema
 
-		Parameters:
+		Parametros:
 
 		idtema - código do tema
 		*/
@@ -280,7 +280,7 @@ i3GEO.tema = {
 
 		Opções de toponímia de um tema.
 
-		Parameters:
+		Parametros:
 
 		idtema - código do tema
 		*/
@@ -291,7 +291,7 @@ i3GEO.tema = {
 
 		Opções de filtragem de um tema.
 
-		Parameters:
+		Parametros:
 
 		idtema - código do tema
 		*/
@@ -302,7 +302,7 @@ i3GEO.tema = {
 
 		Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
 
-		Parameters:
+		Parametros:
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
@@ -313,7 +313,7 @@ i3GEO.tema = {
 
 		Abre a tabela com os atributos de um tema.
 
-		Parameters:
+		Parametros:
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
@@ -324,7 +324,7 @@ i3GEO.tema = {
 
 		Abre a janela de configuração das etiquetas
 
-		Parameters:
+		Parametros:
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
@@ -335,7 +335,7 @@ i3GEO.tema = {
 
 		Abre a janela do editor de legenda de um tema
 
-		Parameters:
+		Parametros:
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
@@ -346,7 +346,7 @@ i3GEO.tema = {
 
 		Abre a janela que faz o download de um tema
 
-		Parameters:
+		Parametros:
 
 		idtema - id ue identifica o tema no map file.
 		*/
@@ -359,7 +359,7 @@ i3GEO.tema = {
 		
 		O SLD é mostrado em uma janela sobre o mapa
 		
-		Parameters:
+		Parametros:
 
 		idtema - id ue identifica o tema no map file.
 		*/

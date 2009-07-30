@@ -1,9 +1,13 @@
 /*
 Title: Guias
 
-File: i3geo/classesjs/classe_guias.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_guias.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.guias
+Classe: i3GEO.guias
 
 Cria e controla as guias de opções
 
@@ -35,11 +39,11 @@ Para configurar as guias utilize i3GEO.guias.configura = ...
 */
 i3GEO.guias = {
 	/*
-	Property: CONFIGURA
+	Variavel: CONFIGURA
 	
-	Define os parâmetros de cada guia
+	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	CONFIGURA: {
@@ -122,11 +126,17 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Variable: ATUAL
+	Variavel: ATUAL
 	
 	Guia que está ativa
 	
 	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{"temas"}
 	*/
 	ATUAL: "temas",
 	/*
@@ -134,8 +144,11 @@ i3GEO.guias = {
 	
 	ID do elemento DOM, criado pelo YUI, onde serão inseridas as guias
 	
-	Type:
+	Tipo:
 	{String}
+	
+	Default:
+	{"guiasYUI"}
 	*/
 	IDGUIAS: "guiasYUI",
 	/*
@@ -147,7 +160,7 @@ i3GEO.guias = {
 	As guias, nesse caso, devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias
 	deve haver um DIV com o conteúdo. Esse DIV deve ter como ID "guia'n'obj", por exemplo id="guia6obj"
 	
-	Parameters:
+	Parametro:
 	
 	onde {String} - id do elemento que conterá as guias
 	*/
@@ -260,7 +273,7 @@ i3GEO.guias = {
 	
 	Mostra no mapa uma determinada guia
 	
-	Parameters:
+	Parametro:
 	
 	guia {String} - nome da guia
 	*/
@@ -293,7 +306,7 @@ i3GEO.guias = {
 	
 	Ativa uma determinada guia
 	
-	Parameters:
+	Parametro:
 	
 	guia {String} - guia que será ativada
 	*/

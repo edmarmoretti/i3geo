@@ -1,9 +1,13 @@
 /*
 Title: Cálculos
 
-File: i3geo/classesjs/classe_calculo.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_calculo.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.calculo
+Classe: i3GEO.calculo
 
 Utilitários para cálculos.
 */
@@ -37,9 +41,9 @@ i3GEO.calculo = {
 	
 	Converte coordenadas formatadas em DMS para DD
 	
-	Parameters:
+	Parametros:
 	
-	cd {Numeric} - grau
+	cd {Numeric} - grau (com sinal de - para sul e oeste)
 	
 	cm {Numeric} - minuto
 	
@@ -75,7 +79,7 @@ i3GEO.calculo = {
 
 	Converte coordenadas dd em coordenadas de tela.
 
-	Parameters:
+	Parametros:
 
 	vx {Numeric} - coordenada x.
 
@@ -132,7 +136,7 @@ i3GEO.calculo = {
 
 	Converte coordenadas de dd em dms.
 
-	Parameters:
+	Parametros:
 
 	x {Numeric} - coordenada x.
 
@@ -207,7 +211,7 @@ i3GEO.calculo = {
 
 	Converte o x,y de unidades de tela para décimo de grau.
 
-	Parameters:
+	Parametros:
 
 	xfign {Numeric} - x em valores de imagem.
 
@@ -255,7 +259,7 @@ i3GEO.calculo = {
 
 	Referência - http://www.mail-archive.com/mapserver-users@lists.umn.edu/msg07052.html
 	
-	Parameters:
+	Parametros:
 	
 	pontos {Array} - array com a lista de pontos pontos.xtela corresponde a um array com os valores de x e pontos.ytela aos valores de y
 	
@@ -294,7 +298,7 @@ i3GEO.calculo = {
 	
 	Em versões anteriores utilizava-se o cálculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
 	
-	Parameters:
+	Parametros:
 
 	lon1 {Numeric} - x inicial.
 
@@ -327,7 +331,7 @@ i3GEO.calculo = {
 
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 	
-	Parameters:
+	Parametros:
 
 	lon1 {Numeric} - x inicial.
 
@@ -365,7 +369,7 @@ i3GEO.calculo = {
 	
 	Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
 	
-	Parameters:
+	Parametros:
 	
 	lon {Numeric} - longitude (x) do ponto de origem
 	
@@ -398,7 +402,7 @@ i3GEO.calculo = {
 	
 	Calcula a extensão geográfica de um retângulo desenhado sobre o mapa.
 	
-	Parameters:
+	Parametros:
 	
 	idrect - id do elemento html com o retangulo
 	
@@ -448,7 +452,7 @@ i3GEO.calculo = {
 	
 	Calcula o posicionamento de um retângulo com base na extensão geográfica.
 	
-	Parameters:
+	Parametros:
 	
 	idrect {String} - id do elemento html com o retangulo, pode ser vazio
 	

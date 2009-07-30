@@ -30,6 +30,7 @@ File: i3geo/classesphp/mapa_inicia.php
 
 19/6/2007
 */
+
 /*
 Function: iniciaMapa
 

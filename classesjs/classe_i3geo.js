@@ -1,9 +1,13 @@
 /*
 Title: i3Geo
 
-File: i3geo/classesjs/classe_i3geo.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_i3geo.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
-Class: i3GEO
+Classe: i3GEO
 
 A classe i3GEO possuí os métodos de criação e atualização do mapa. Todas as subclasses
 são baseadas em i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa,
@@ -43,18 +47,17 @@ Nessa classe estão disponíveis variáveis internas utilizadas em várias funções, 
 i3GEO = {
 	
 	/*
-	Variable: parametros
+	Variavel: parametros
 	
 	Parâmetros obtidos do mapa atual. Os parâmetros são fornecidos pelos programas
 	PHP de redesenho e criação do mapa e atualizados sempre que o mapa é alterado.
 	
 	Exemplos:
 	
-	Para acessar um valor, utilize por exemplo
+	alert(i3GEO.parametros.mapexten);
+	i3GEO.mapscale = 25000;
 	
-	alert(i3GEO.parametros.mapexten)
-	
-	Parameters:
+	Parametros:
 	
 	mapexten {String} - extensão geográfica do mapa no formato xmin ymin xmax ymax
 	
@@ -131,10 +134,28 @@ i3GEO = {
 	
 	Indica o último tema que foi ativado no mapa
 	
-	Um tema é ativado em algumas ferramentas, permitindo aue ao se passar de uma ferramenta
-	para outra, os menus reflitam a última escolha
+	Permite que ao se passar de uma ferramenta
+	para outra, os menus reflitam a última escolha.
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
 	*/
 	temaAtivo: "",
+	/*
+	Variavel: finaliza
+	
+	Armazena o nome de uma função que será executada após a inicialização do mapa
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
+	*/
+	finaliza:"",
 	/*
 	Function: cria
 	
@@ -144,7 +165,7 @@ i3GEO = {
 	realizar as operações conforme a interface atualmente em uso. A interface é definida
 	em <i3GEO.interface.ATUAL>
 	
-	<i3GEO.interface>
+	Veja <i3GEO.interface>
 	*/
 	cria:function(){
 		if (window.location.href.split("?")[1]){
@@ -251,7 +272,7 @@ i3GEO = {
 	para realizar as operações necessárias de manutenção de compatibilidade da versão atual para as anteriores
 	
 	A inicialização é baseada em <i3GEO.php.inicia> cujo retorno é utilizado para definir a
-	variável <i3GEO.parametrso>
+	variável <i3GEO.parametros>
 	
 	Após a inicialização é executado <i3GEO.interface.inicia>
 	*/
@@ -382,11 +403,10 @@ i3GEO = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.janela.fechaAguarde()");}
 		eval(i3GEO.finaliza);
 	},
-	finaliza:"",
 	/*
 	Function: atualiza
 	
-	Atualiza o mapa atual, alterando a imagem do mapa os gadgets ativos e os parâmetros e
+	Atualiza o mapa atual, altera a imagem do mapa os gadgets ativos e os parâmetros e
 	verifica a integridade do mapa em uso (arquivo mapfile)
 	
 	O processo executa também a função de atualização específica da interface atual em uso, veja
@@ -400,10 +420,10 @@ i3GEO = {
 	
 	Os eventos definidos em <i3GEO.eventos.navegaMapa> são executados
 	
-	Parameters:
+	Parametro:
 	
 	retorno {String} - string com os parâmetros do novo mapa. Se retorno não
-	for especificado, será feita uma chamada em ajax para sua obtenção. O resultado
+	for especificado ou se for vazio, será feita uma chamada em ajax para sua obtenção. O resultado
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
@@ -450,7 +470,7 @@ i3GEO = {
 		if(arguments.length == 0 || retorno == "" || retorno.data.variaveis == undefined){erro.call();return;}
 		else{	
 			if(arguments.length == 0){return;}
-			i3GEO.mapa.corpo.verifica(retorno);
+			i3GEO.mapa.verifica(retorno);
 			var tempo = "";
 			if(i3GEO.desenho.richdraw)
 			{i3GEO.desenho.richdraw.clearWorkspace();}

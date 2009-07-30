@@ -5,7 +5,9 @@ Classe javascript da aplicação de geração de links.
 
 Lê o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
 
-File: i3geo/classesjs/geradordelinks.js
+Arquivo:
+
+i3geo/classesjs/geradordelinks.js
 
 Esse programa possuí as seguintes dependências:
 
@@ -17,7 +19,9 @@ i3geo/classesjs/compactados/funcoes_compacto.js
 
 As dependências são carregadas pelo próprio geradordelinks.js, não sendo necessário incluir no HTML.
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -69,11 +73,8 @@ for (var i = 0; i < jsfiles.length; i++)
 	allScriptTags += currentScriptTag;
 }
 document.write(allScriptTags);
-/*
-Section: Classes
-*/
 /* 
-Class: i3geo_gl_configura
+Classe: i3geo_gl_configura
 
 Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação.
 
@@ -104,56 +105,38 @@ menu - id do elemento HTML onde será incluido a lista de menus
 function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tema,buscageo,menu)
 {
 	/* 
-	Property: temasa
-	
 	Id do elemento HTML onde a lista de temas adicionados, ou seja, os que forem escolhidos pelo usuário, será incluída.
 	 */
 	this.temasa = temasa;
 	/* 
-	Property: link
-	
 	Id do elemento HTML do tipo <a> onde será mostrado o link criado para o mapa.
 	 */
 	this.link = link;
 	/*
-	Property: nomeseltema
-	
 	Guarda o valor do parâmetro seltema
 	*/
 	this.nomeseltema = nomeseltema;
 	/*
-	Property: loc_i3geo
-	
 	Guarda o valor do parâmetro loc_i3geo
 	*/
 	this.loc_i3geo = loc_i3geo;
 	/*
-	Property: menu
-	
 	Guarda o valor do parâmetro menu
 	*/
 	this.menu = menu;	
 	/*
-	Property: grupo
-	
 	Guarda o valor do parâmetro grupo
 	*/
 	this.grupo = grupo;
 	/*
-	Property: subgrupo
-	
 	Guarda o valor do parâmetro subgrupo
 	*/
 	this.subgrupo = subgrupo;
 	/*
-	Property: tema
-	
 	Guarda o valor do parâmetro tema
 	*/
 	this.tema = tema;
 	/*
-	Property: buscageo
-	
 	Guarda o valor do parâmetro buscageo
 	*/
 	this.buscageo = buscageo;
@@ -461,9 +444,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$inputText("paiYmax","","i3geo_gl_ymax","","","")
 	}
 }
-/*
-Section: Inicialização
-*/
+
 /*
 Function: i3geo_gl_inicia
 
@@ -476,7 +457,7 @@ objeto_i3geo_gl_configura - objeto com os parâmentros de configuração criado pel
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {		
 	/*
-	Variable: $i3geo_gl
+	Variavel: $i3geo_gl
 	
 	Contém o objeto $i3geo_gl com todas as propriedades e funções de controle da interface
 	*/

@@ -407,7 +407,7 @@ function nomeRandomico($n=10)
 {
 	$nomes = "";
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	$max = strlen($a)-1;
+	$max = 51;
 	for($i=0; $i < $n; ++$i)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
@@ -486,32 +486,6 @@ function copiaSeguranca($map_file)
 	{
 		copy((str_replace(".map","seguranca.map",$map_file)),$map_file);	
 	}
-}
-/*
-function: criaDirMapa
-
-Cria os diretórios temporários para a aplicação.
-parameters:
-
-$dir_tmp - Diretório temporário (no servidor) utilizado pelo mapserver.
-*/
-function criaDirMapa($dir_tmp)
-{
-	if(file_exists($dir_tmp))
-	{
-		$tmpdirname = nomeRandomico(10);
-		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0777);
-		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0777);
-		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
-		$tmpimgname = "img".$tmpdirname;
-		@mkdir($dir_tmp."/".comum,0777);
-		if(file_exists($dir_tmp."/".$tmpdirname))
-		return array($mapfile,$tmpdirname,$tmpimgname);
-		else
-		{return false;}
-	}
-	else
-	{return false;}
 }
 /*
 function: listaDiretorios
@@ -2059,5 +2033,31 @@ function removeAcentos($var)
 	$var = str_replace("Ç","C",$var);
 	$var = str_replace("ç","c",$var);
 	return $var;
+}
+/*
+function: criaDirMapa
+
+Cria os diretórios temporários para a aplicação.
+parameters:
+
+$dir_tmp - Diretório temporário (no servidor) utilizado pelo mapserver.
+*/
+function criaDirMapa($dir_tmp)
+{
+	if(file_exists($dir_tmp))
+	{
+		$tmpdirname = nomeRandomico();
+		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0777);
+		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0777);
+		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
+		$tmpimgname = "img".$tmpdirname;
+		@mkdir($dir_tmp."/".comum,0777);
+		if(file_exists($dir_tmp."/".$tmpdirname))
+		return array($mapfile,$tmpdirname,$tmpimgname);
+		else
+		{return false;}
+	}
+	else
+	{return false;}
 }
 ?>

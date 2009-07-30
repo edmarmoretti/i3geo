@@ -1,9 +1,13 @@
 /*
 Title: Janelas
 
-File: i3geo/classesjs/classe_janela.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_janela.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class:: i3GEO.janela
+Classe: i3GEO.janela
 
 Abre janelas flutuantes
 
@@ -35,39 +39,39 @@ As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
-	Variable: TIPS
-	
 	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
 	*/
 	TIPS: new Array(),
 	/*
-	Property: ANTESCRIA
+	Variavel: ANTESCRIA
 	
 	Lista com os nomes das funções que serão executadas antes de abrir a janela.
 	
 	Este é um array que pode ser modificado utilizando-se as funções javascript de
 	manipulação de arrays.
 	
-	Por default, ao criar uma janela é executada a função i3GEO.janela.prepara
-
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{"i3GEO.janela.prepara()"}
 	*/
 	ANTESCRIA: new Array(
 		"i3GEO.janela.prepara()"
 	),
 	/*
-	Property: ANTESFECHA
+	Variavel: ANTESFECHA
 	
 	Lista com os nomes das funções que serão executadas após fechar a janela.
 	
 	Este é um array que pode ser modificado utilizando-se as funções javascript de
 	manipulação de arrays.
 	
-	Por default, ao fechar uma janela é executada a função i3GEO.janela.fecha
-
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{[]}
 	*/
 	ANTESFECHA: new Array(),
 	/*
@@ -91,7 +95,7 @@ i3GEO.janela = {
 	
 	{retorno}[2].innerHTML
 	
-	Parameters:
+	Parametros:
 	
 	wlargura {integer} - largura da janela em pixels
 	
@@ -184,11 +188,11 @@ i3GEO.janela = {
 	Aplica a opção definida em ANTESFECHA e elimina alguns objetos que são comumente adicionados por algumas operações do i3geo
 	como richdraw, box, pin
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - id da janela que será fechada
 	*/
-	fecha: function(r,id){
+	fecha: function(id){
 		//esconde o box do google
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
@@ -209,7 +213,7 @@ i3GEO.janela = {
 	
 	Altera o tamanho de uma janela aberta
 	
-	Parameters:
+	Parametros:
 	
 	w {Integer} - nova largura
 	
@@ -232,7 +236,7 @@ i3GEO.janela = {
 	
 	Abre uma janela com a mensagem de agurde e bloqueia cliques nomapa
 	
-	Parameters:
+	Parametros:
 	
 	id {String} - id danovajanela
 	
@@ -271,7 +275,7 @@ i3GEO.janela = {
 	
 	Cria um DIV e posiciona sobre o mapa na posição do mouse.
 	
-	Parameters:
+	Parametro:
 	
 	cabecalho {String} - texto que será usado no cabeçalho (opção fixar) (opcional)
 	
@@ -328,7 +332,7 @@ i3GEO.janela = {
 	
 	Exclui os tips armazenados na variável i3GEO.janela.TIPS
 	
-	Parameters:
+	Parametro:
 	
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/

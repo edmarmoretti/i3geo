@@ -1,9 +1,13 @@
 /*
 Title: Idioma
 
-File: i3geo/classesjs/classe_idioma.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_idioma.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3geo.idioma
+Classe: i3geo.idioma
 
 Tradução da interface principal.
 
@@ -51,46 +55,52 @@ alert($trad("d22"))
 */
 i3GEO.idioma = {
 	/*
-	Property: MOSTRASELETOR
+	Variavel: MOSTRASELETOR
 	
 	Define se o i3Geo irá incluir no mapa as bandeiras de seleção de idiomas
 	
-	Type:
+	Tipo:
 	{Boolean}
 	
 	Default:
-	true
+	{true}
 	*/
 	MOSTRASELETOR: true,
 	/*
-	Property: IDSELETOR
+	Variavel: IDSELETOR
 	
 	Define o id do elemento HTML que receberá o seletor. Se não for definido, o seletor será
 	posicionado automaticamente pelo i3Geo
 	
-	Type:
+	Tipo:
 	{String}
 	
 	Default:
-	""
+	{""}
 	*/
 	IDSELETOR: "",
 	/*
-	Property: SELETORES
+	Variavel: SELETORES
 	
 	Lista os seletores (bandeiras) que serão incluídas no seletor
 	
-	Type:
+	Tipo:
 	{Array}
 	
 	Default:
-	"pt","en","es","it"
+	{["pt","en","es","it"]}
 	*/
 	SELETORES: new Array("pt","en","es","it"),
 	/*
-	Property: DICIONARIO
+	Variavel: DICIONARIO
 	
-	Define o objeto com o dicionário utilizado
+	Objeto contendo o dicionário utilizado
+	
+	Tipo:
+	{object} - veja <dicionario.js>
+	
+	Default:
+	{g_traducao}
 	*/
 	DICIONARIO: g_traducao,
 	/*
@@ -98,7 +108,7 @@ i3GEO.idioma = {
 	
 	Define qual o idioma em uso. O default é "pt". 
    
-	Parameters:
+	Parametro:
 	codigo - {String} Código do idioma.
 	*/
 	define: function(codigo) {
@@ -121,7 +131,7 @@ i3GEO.idioma = {
 	
 	Define o objeto com as traduções. O default é "g_traducao"
    
-	Parameters:
+	Parametro:
 	obj - {Object} Objeto com a tradução.
      
 	Example:
@@ -148,8 +158,10 @@ i3GEO.idioma = {
 	
 	Altera um texto do dicionario ou acresecenta um novo texto para o idioma atual. 
    
-	Parameters:
+	Parametros:
+	
 	id - {String} Código do texto.
+	
 	novo - (String) Novo texto.
      
 	*/
@@ -161,10 +173,12 @@ i3GEO.idioma = {
 	
 	Traduz um texto para o idioma escolhido
    
-	Parameters:
+	Parametro:
+	
 	id - {String} Código do texto.
      
 	Returns:
+	
 	{String} Texto traduzido.
 	*/
 	traduzir: function(id) {
@@ -181,7 +195,8 @@ i3GEO.idioma = {
 	
 	Adiciona novos registros ao dicionário atual
    
-	Parameters:
+	Parametro:
+	
 	novodic - {Object} Objeto novo dicionário.
      
 	Example:
@@ -220,7 +235,8 @@ i3GEO.idioma = {
 	
 	A troca é baseada na definição de um cookie e reload da página.
    
-	Parameters:
+	Parametro:
+	
 	codigo - {String} Código do idioma (p.e. "en")
 	*/
 	trocaIdioma: function(codigo) {
@@ -294,10 +310,12 @@ Function: $trad
 
 Atalho para a função de tradução
   
-Parameters:
+Parametro:
+
 id - {String} Código do texto.
     
 Returns:
+
 {String} Texto traduzido.
 */
 var $trad = function(id){return (i3GEO.idioma.traduzir(id))};

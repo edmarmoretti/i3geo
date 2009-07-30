@@ -1,9 +1,13 @@
 /*
 Title: Mapa
 
-File: i3geo/classesjs/classe_mapa.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_mapa.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.mapa
+Classe: i3GEO.mapa
 
 Cria e processa o mapa principal
 
@@ -36,11 +40,9 @@ como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
-	Variable: GEOXML
-	
 	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 	
-	Type:
+	Tipo:
 	{Array}
 	*/
 	GEOXML: new Array(),
@@ -73,12 +75,6 @@ i3GEO.mapa = {
 				c.style.position="absolute";
 				$left(i3GEO.interface.IDCORPO,imagemxi);
 				$top(i3GEO.interface.IDCORPO,imagemyi);
-				/*
-				if($i("i3geo")){
-					if ($i("i3geo").style.left){$left(i3GEO.interface.IDCORPO,imagemxi + parseInt($i("i3geo").style.left));}
-					if ($i("i3geo").style.top){$top(i3GEO.interface.IDCORPO,imagemyi + parseInt($i("i3geo").style.top));}
-				}
-				*/
 			}
 		}
 		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}
@@ -90,6 +86,45 @@ i3GEO.mapa = {
 	*/
 	ativaLogo: function(){
 		i3GEO.php.ativalogo(i3GEO.atualiza);
+	},
+	/*
+	Function: verifica
+	
+	Verifica se ocorreu algum problema na atualização do corpo do mapa e inicia o processo de tentativa de recuperação
+	
+	Parametro:
+	
+	retorno {string} - objeto recebido da função PHP de atualização do mapa
+	*/
+	verifica:function(retorno){
+		try{
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o3"));
+			if(retorno.data){var retorno = retorno.data;}
+			if (retorno.variaveis){var retorno = retorno.variaveis;}
+			if ((retorno == "erro") || (retorno == undefined)){
+				i3GEO.mapa.ajustaPosicao();
+				i3GEO.janela.fechaAguarde();
+				i3GEO.mapa.recupera.inicia();
+			}
+			i3GEO.mapa.recupera.TENTATIVA = 0;
+		}
+		catch(e){
+			if(i3GEO.interface.ATUAL == "openlayers"){
+				i3GEO.janela.fechaAguarde();
+				return;
+			}
+			if(i3GEO.mapa.recupera.TENTATIVA == 0){
+				alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
+				i3GEO.mapa.recupera.inicia();
+			}
+			else{
+				alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
+				if (i3GEO.mapa.recupera.TENTATIVA == 1){
+					i3GEO.mapa.recupera.TENTATIVA = 2;
+					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
+				}		
+			}
+		}
 	},
 	/*
 	Function: insereToponimo
@@ -154,69 +189,6 @@ i3GEO.mapa = {
 			}
 		}
 		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
-	},
-	/*
-	Function: insereKml
-	
-	Insere no mapa uma camada KML com base na API do Google Maps
-	
-	As camadas adicionadas são crescentadas na árvore de camadas
-	
-	A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
-	
-	Parameters:
-	
-	pan {Boolean} - define se o mapa será deslocado para encaixar o KML
-	
-	url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets)
-	
-	*/
-	insereKml: function(pan,url){
-		if(arguments.length == 1){
-			var i = $i("i3geo_urlkml");
-			if(i){var url = i.value;}
-			else{var url = "";}
-		}
-		if(url == ""){return;}
-		//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
-		var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
-		i3GEO.mapa.GEOXML.push(ngeoxml);
-		var zoom = function(){
-			if(pan){
-				eval("var ll = "+ngeoxml+".getDefaultCenter()");
-				eval(ngeoxml+".gotoDefaultViewport(i3GeoMap)");
-				//i3GeoMap.setCenter(ll);
-			}
-		};
-		eval(ngeoxml+" = new GGeoXml(url,zoom)");
-		eval("i3GeoMap.addOverlay("+ngeoxml+")");
-		i3GEO.mapa.criaNoArvoreGoogle(ngeoxml,ngeoxml);
-	},
-	criaNoArvoreGoogle: function(url,nomeOverlay){
-		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-		var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
-		if(!node){
-			var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
-			var d = {html:titulo,idkml:"raiz"};
-			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
-			node.enableHighlight = false;
-		}
-		html = "<input onclick='i3GEO.mapa.ativaDesativaOverlayGoogle(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
-		html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
-		var d = {html:html};
-		var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
-		nodekml.enableHighlight = false;   			
-		nodekml.isleaf = true;
-		i3GEO.arvoreDeCamadas.ARVORE.draw();
-		i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
-		node.expand();
-	},
-	ativaDesativaOverlayGoogle: function(obj){	
-		if(!obj.checked){
-			eval("i3GeoMap.removeOverlay("+obj.value+")");
-		}
-		else
-		eval("i3GeoMap.addOverlay("+obj.value+")");
 	},
 	/*
 	Function: inserePonto
@@ -288,20 +260,18 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Class: i3GEO.mapa.recupera
+	Classe: i3GEO.mapa.recupera
 	
-	Tenta recuperar o mapa de backup caso ocorra algum problema
+	Tenta recuperar o mapa caso ocorra algum problema
 	
 	O i3Geo mantém sempre uma cópia do arquivo mapfile em uso. Essa função tenta
 	usar essa cópia para restaurar o funcionamento do mapa
 	*/
 	recupera:{
 		/*
-		Variable: TENTATIVA
-		
 		Armazena a quantidade de tentativas de recuperação que foram feitas
 		
-		Type:
+		Tipo:
 		{Integer}
 		*/
 		TENTATIVA: 0,
@@ -328,7 +298,7 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Class: i3GEO.mapa.legendaHTML
+	Classe: i3GEO.mapa.legendaHTML
 	
 	Controla a obtenção da legenda do mapa formatada em HTML.
 	
@@ -336,20 +306,18 @@ i3GEO.mapa = {
 	*/
 	legendaHTML:{
 		/*
-		Variable: ID
-		
 		Armazena o id definido na criação da legenda
 		*/
 		ID: "",
 		/*
-		Property: incluiBotaoLibera
+		Variavel: incluiBotaoLibera
 		
 		Define se na legenda será incluido o botão para liberar a legenda e incluí-la em uma janela flutuante
 		
-		type:
+		Tipo:
 		{boolean}
 		
-		default:
+		Default:
 		{true}
 		*/
 		incluiBotaoLibera: true,
@@ -364,7 +332,7 @@ i3GEO.mapa = {
 		i3GEO.mapa.legendaHTML.cria("");
 		i3GEO.mapa.legendaHTML.libera();		
 		
-		Parameters:
+		Parametros:
 		
 		id {String} - id do elemento que receberá a legenda
 		*/
@@ -409,9 +377,9 @@ i3GEO.mapa = {
 		
 		O resultado é processado pela função passada como parâmetro
 		
-		Parameters:
+		Parametro:
 		
-			funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
+		funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
 			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda)
@@ -421,9 +389,9 @@ i3GEO.mapa = {
 		
 		Liga ou desliga um único tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
 		
-		Parameters:
+		Parametro:
 		
-			inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o código do tema que será processado
+		inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o código do tema que será processado
 		*/
 		ativaDesativaTema: function(inputbox){
 			var temp = function(){
@@ -468,7 +436,7 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Class: i3GEO.mapa.legendaIMAGEM
+	Classe: i3GEO.mapa.legendaIMAGEM
 	
 	Controla a obtenção da legenda do mapa na forma de uma imagem
 	
@@ -483,16 +451,16 @@ i3GEO.mapa = {
 		
 		O resultado é processado pela função passada como parâmetro
 		
-		Parameters:
+		Parametro:
 		
-			funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
+		funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
 			i3GEO.php.criaLegendaImagem(funcao);
 		}
 	},
 	/*
-	Class: i3GEO.mapa.dialogo
+	Classe: i3GEO.mapa.dialogo
 	
 	Abre as telas de diálogo das opções de manipulação do mapa atual
 	*/
@@ -665,39 +633,119 @@ i3GEO.mapa = {
 				};
 				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			}
-		}
-	},
-	corpo:{
-		verifica:function(retorno){
-			try{
-				i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o3"));
-				if(retorno.data){var retorno = retorno.data;}
-				if (retorno.variaveis){var retorno = retorno.variaveis;}
-				if ((retorno == "erro") || (retorno == undefined)){
-					i3GEO.mapa.ajustaPosicao();
-					i3GEO.janela.fechaAguarde();
-					i3GEO.mapa.recupera.inicia();
-				}
-				i3GEO.mapa.recupera.TENTATIVA = 0;
-			}
-			catch(e){
-				if(i3GEO.interface.ATUAL == "openlayers"){
-					i3GEO.janela.fechaAguarde();
-					return;
-				}
-				if(i3GEO.mapa.recupera.TENTATIVA == 0){
-					alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
-					i3GEO.mapa.recupera.inicia();
-				}
-				else{
-					alert("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
-					if (i3GEO.mapa.recupera.TENTATIVA == 1){
-						i3GEO.mapa.recupera.TENTATIVA = 2;
-						i3GEO.php.reiniciaMapa(i3GEO.atualiza);
-					}		
+		},
+		/*
+		Function: cliqueIdentificaDefault
+		
+		Abre o diálogo para obtenção de informações quando o usuário clica no mapa.
+		
+		Essa é a função padrão definida em i3GEO.configura		
+		*/
+		cliqueIdentificaDefault: function(){
+			if (g_tipoacao == "identifica"){
+				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");					
+				var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>");
+				if(i3GEO.interface.ATUAL != "googlemaps"){
+					var temp = function(){
+						i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
+						i3GEO.barraDeBotoes.ativaBotoes();
+					};
+					YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 				}
 			}
-		}
+		},
+		/*
+		Function: verificaTipDefault
+		
+		Mostra etiquetas no mapa com informações sobre os temas com etiquetas ativas
+		
+		Essa é a função padrão definida em i3GEO.configura		
+		*/
+		verificaTipDefault: function(){
+			var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
+			var etiquetas = false;
+			for(var j=0;j<ntemas;j++)
+			{if(i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas != ""){var etiquetas = true;}}
+			if(etiquetas == false){return;}	
+			if($i("img")){$i("img").style.cursor = "wait";}
+			var retorna = function(retorno){
+				var i = $i("i3geo_rosa");
+				if(i){i.style.display="none";}			
+				var mostra = false;
+				try{
+					var retorno = retorno.data;
+					if ($i("img"))
+					{$i("img").title = "";}
+					if (retorno != ""){
+						var res = "";
+						var temas = retorno.split("!");
+						var tema = temas.length-1;
+						if(tema >= 0){
+							do{
+								var titulo = temas[tema].split("@");
+								if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao")
+								{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
+								var ocorrencias = titulo[1].split("*");
+								var ocorrencia = ocorrencias.length-1;
+								if(ocorrencia >= 0){
+									do{
+										if (ocorrencias[ocorrencia] != ""){
+											var pares = ocorrencias[ocorrencia].split("##");
+											var paresi = pares.length;
+											for (var par=0;par<paresi; par++){
+												var valores = pares[par].split("#");
+												if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao"){
+													res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
+													var mostra = true;
+												}
+												else{
+													res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
+													var mostra = true;
+												}
+											}
+										}
+									}
+									while(ocorrencia--)
+								}
+							}
+							while(tema--)
+						}
+						if(!mostra){$i("tip").style.display="none";return;}
+						else{		
+							if(i3GEO.configura.tipotip != "balao"){
+								var n = i3GEO.janela.tip();
+								$i(n).style.textAlign="left";
+								$i(n).innerHTML += res;
+							}
+							else{
+								i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
+								i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
+								balloon = new Balloon;
+								balloon.delayTime = 0;
+								var res = "<div style=text-align:left >"+res+"</div>";
+								balloon.showTooltip($i("marcaIdentifica"),res);
+								$i('marcaIdentifica').onclick = $i("closeButton").onclick;
+							}
+						}
+					}
+					if($i("img")){
+						var temp = "zoom";
+						if(i3GEO.interface.ATIVAMENUCONTEXTO)
+						var temp = "identifica_contexto";
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
+					}
+				}
+				catch(e){
+					if($i("img")){
+						var temp = "identifica";
+						if(i3GEO.interface.ATIVAMENUCONTEXTO)
+						var temp = "identifica_contexto";
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
+					}
+				}
+			};
+			i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
+		};
 	}
 };
 //YAHOO.log("carregou classe mapa", "Classes i3geo");

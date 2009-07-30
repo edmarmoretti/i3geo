@@ -11,9 +11,13 @@ Pode-se usar um parâmetro para abrir o aplicativo e imediatamente mostrar os arq
 
 datadownload.htm?bioma
 
-File: i3geo/classesjs/datadownload.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/datadownload.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -38,7 +42,7 @@ Veja:
 <datadownload.htm>
 */
 /*
-Variable: g_locaplic
+Variavel: g_locaplic
 
 Indica a localização do i3geo. Por default, procura no diretório onde foi executada a plicação datadownload.
 No caso do datadownload.htm ser disparado de outro local, é necessário definir essa variável antes de chamar a função DDinicia
@@ -71,22 +75,6 @@ Variable: g_tipo
 
 Tipo de acesso aos dados.
 
-Values:
-
-dir - indica que os dados serão buscados em diretórios no servidor.
-
-menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml ou no sistema de administração do i3geo
-*/
-g_tipo = "menutemas"
-/*
-Variable: g_dirbaseDown
-
-Url para o endereço definido em g_dirbase.
-É utilizada para montar o link de acesso aos arquivos quando g_tipo = 'dir'
-*/
-g_dirbaseDown = ""
-
-/*
 g_tipo é uma variável que pode ser definida antes de iniciar a funcao DDinicia
 g_tipo = "menutemas", indica que a lista de temas para download será buscada no xml com a lista de temas do I3Geo
 se g_tipo for "dir", a aplicação entenderá que se trata de uma busca em diretórios
@@ -95,7 +83,7 @@ g_dirbase = "/opt/www/html/geodados"
 g_dirarquivos indica o diretório inicial para listagem dos arquivos
 por default, g_tipo = "menutemas"
 
-exemplo:
+Exemplo que pode ser utilizado em um HTML armazenado no diretório vegetacao2002:
 
 g_tipo = "dir"
 g_dirbase = "/opt/www/html/geodados/brasil/vegetacao/vegetacao2002"
@@ -103,8 +91,49 @@ g_dirbaseDown = "http://"+window.location.host+"/geodados/brasil/vegetacao/veget
 g_dirarquivos = "/opt/www/html/geodados/brasil/vegetacao/vegetacao2002"
 g_i3geo = "/i3geo"
 g_locaplic = "http://"+window.location.host+g_i3geo
+
+Tipo:
+{string}
+
+Valores:
+
+dir - indica que os dados serão buscados em diretórios no servidor.
+
+menutemas - indica que os dados serão buscados no arquivo menutemas/menutemas.xml ou 
+no sistema de administração do i3geo
+*/
+g_tipo = "menutemas"
+/*
+Variavel: g_dirbaseDown
+
+Url para o endereço definido em g_dirbase.
+É utilizada para montar o link de acesso aos arquivos quando g_tipo = 'dir'
+
+Tipo:
+{string}
+
+*/
+g_dirbaseDown = ""
+
+/*
+Variavel: g_dirbase
+
+Endereço no servidor onde estão os arquivos ou diretórios que poderão ser acessados
+
+Tipo:
+{string}
+
 */
 g_dirbase = ""
+/*
+Variavel: g_dirarquivos
+
+Endereço do diretório que será acessado na inicialização da aplicação
+
+Tipo:
+{string}
+
+*/
 g_dirarquivos = ""
 /*
 Function: DDinicia
@@ -149,7 +178,7 @@ Cahamado pela função DDinicia. Recebe os dados da função Ajax com a lista de dir
 
 Monta a árvore para navegação pelos diretórios.
 
-Parameters:
+Parametros:
 
 retorno - string formatada com os dados para montagem da árvore.
 */
@@ -180,7 +209,7 @@ Expande um diretório quando o usuário clica no nó da árvore de diretórios.
 
 Definido na função processaDiretorios. Após serem mostrados os sub-diretórios é disparada a função listaArquivos para mostrar a lista de arquivos existentes no diretório selecionado.
 
-Parameters:
+Parametros:
 
 id - id do nó clicado na árvore treeview
 */
@@ -212,7 +241,7 @@ Lista os arquivos de um diretório.
 
 No HTML deve existir um DIV com id='corpo'. Nesse div será incluída a lista.
 
-Parameters:
+Parametros:
 
 dir - diretório no servidor 
 */
@@ -255,7 +284,7 @@ Function: download
 
 Gera os arquivos para download do shape file de um tema.
 
-Parameters:
+Parametros:
 
 tema - código do tema para download
 */
@@ -304,7 +333,7 @@ Utilizado para acrescentar outros links no sistema de download
 
 Por default, o rss é menutemas/linksdownload.xml
 
-Parameters:
+Parametros:
 
 rss - endereço do arquivo rss.
 */

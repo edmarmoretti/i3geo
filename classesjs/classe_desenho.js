@@ -1,9 +1,13 @@
 /*
 Title: Desenho de elementos gráficos
 
-File: i3geo/classesjs/classe_desenho.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_desenho.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,21 +31,26 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.desenho
+Classe: i3GEO.desenho
 
 Controla as operações de desenho sobre o mapa
 
 Por desenho, entende-se elementos que são incluídos graficamente no mapa,
 como por exemplo, linhas, pontos, círculos, etc e que não compõem layers
 com dados
+
+As operações de desenho são baseadas na biblioteca Richdraw (i3geo/pacotes/richdraw)
+
+Link:
+
+http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
+
 */
 i3GEO.desenho = {
 	/*
-	Variable: richdraw
-	
 	Objeto richdraw criado por criaContainerRichdraw
 	
-	Type:
+	Tipo:
 	{richdraw object}
 	*/
 	richdraw: "",
@@ -111,7 +120,10 @@ i3GEO.desenho = {
 	/*
 	Function: criaDivContainer
 	
-	Cria o elemento DIV que será utilizado para renderizar os elementos gráficos
+	Cria o elemento DIV que será utilizado para renderizar os elementos gráficos.
+	Nesse DIV serão incluídos os elementos de desenho em SVG ou VML 
+	
+	O DIV recebe como ID "divGeometriasTemp"
 	
 	Return:
 	
@@ -148,15 +160,15 @@ i3GEO.desenho = {
 
 	Desenha ou reposiciona elementos na tela usando a biblioteca richdraw
 
-	Parameters:
+	Parametros:
 
-	tipo - resizelinha|resizePoligono|insereCirculo tipo de operação
+	tipo {string} - resizelinha|resizePoligono|insereCirculo tipo de operação
 
-	objeto - objeto gráfico existente no container richdraw
+	objeto {object} - objeto gráfico existente no container richdraw
 
-	n - índice do elemento no array pontosdistobj
+	n {numeric} - índice do elemento no array pontosdistobj
 	
-	texto - texto que será inserido no tipo "insereTexto"
+	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/	
 	aplica: function(tipo,objeto,n,texto){
 		if(i3GEO.desenho.richdraw && $i(i3GEO.interface.IDCORPO)){

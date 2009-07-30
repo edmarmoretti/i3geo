@@ -1,9 +1,13 @@
 /*
 Title: Árvore de temas
 
-File: i3geo/classesjs/classe_arvodetemas.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_arvodetemas.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,13 +31,13 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.arvoreDeTemas
+Classe: i3GEO.arvoreDeTemas
 
 Monta a árvore com os temas disponíveis para ser adicionados ao mapa.
 */
 i3GEO.arvoreDeTemas = {
 	/*
-	Property: OPCOESADICIONAIS
+	Variavel: OPCOESADICIONAIS
 	
 	Objeto com a definição das propriedades que serão utilizadas na inclusão dos ícones adicionais de adição de temas e no item de descrição de cada tema.
 
@@ -74,7 +78,7 @@ i3GEO.arvoreDeTemas = {
 		refresh: true	
 	}
 	
-	Type:
+	Tipo:
 	{Object}
 	*/
 	OPCOESADICIONAIS: {
@@ -96,73 +100,73 @@ i3GEO.arvoreDeTemas = {
 		refresh: true
 	},
 	/*
-	Property: FATORESTRELA
+	Variavel: FATORESTRELA
 	
 	Valor que será utilizado para dividir o valor bruto do número de acessos de cada tema.
 	
 	A divisão é utilizada para definir quantas estrelas serão mostradas na árvore de opções adicionais.<b> 
 
-	Type:
+	Tipo:
 	{Numeric}
 	*/
 	FATORESTRELA: "1",
 	/*
-	Property: INCLUISISTEMAS
+	Variavel: INCLUISISTEMAS
 	
 	Inclui na árvore a lista de sistemas adicionais definidos no i3geo?
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	INCLUISISTEMAS: true,
 	/*
-	Property: INCLUIWMS
+	Variavel: INCLUIWMS
 	
 	Inclui na árvore a lista de Web Services WMS?
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	INCLUIWMS: true,
 	/*
-	Property: FILTRADOWNLOAD
+	Variavel: FILTRADOWNLOAD
 	
 	Não mostra na árvore os nós que não possuem temas para download
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	FILTRADOWNLOAD: false,
 	/*
-	Property: FILTRAOGC
+	Variavel: FILTRAOGC
 	
 	Não mostra na árvore os nós que não permitem a geração de WMS
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	FILTRAOGC: false,
 
 	/*
-	Property: ATIVATEMA
+	Variavel: ATIVATEMA
 	
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	ATIVATEMA: "",
 	/*
-	Property: IDSMENUS
+	Variavel: IDSMENUS
 	
 	Array com a lista de ids que serão considerados na montagem da árvore. Por default é vazio, o que significa que todos os menus serão considerados.
 	
-	Type:
+	Tipo:
 	{Array}
 	*/
 	IDSMENUS: new Array(),
 	/*
-	Property: RETORNAGUIA
+	Variavel: RETORNAGUIA
 	
 	Guia que será ativada após uma operação de adição de temas ter sido concluída.
 	
@@ -170,99 +174,79 @@ i3GEO.arvoreDeTemas = {
 	
 	A string corresponde ao nome da guia que deve estar definida em i3GEO.guias.CONFIGURA, por exemplo i3GEO.arvoreDeTemas.RETORNAGUIA = "temas"
 	
-	Type:
+	Tipo:
 	{String}
 	
 	Default: ""
 	*/
 	RETORNAGUIA: "",
 	/*
-	Variable: IDHTML
-	
 	Armazena o ID do elemento HTML onde a árvore será incluida
 
-	Type:
+	Tipo:
 	{String}
 	*/
 	IDHTML: null,
 	/*
-	Variable: LOCAPLIC
-	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
-	Type:
+	Tipo:
 	{String}
 	*/
 	LOCAPLIC: null,
 	/*
-	Variable: SID
-	
 	Código da seção aberta no servidor pelo i3Geo
 
-	Type:
+	Tipo:
 	{String}
 	*/
 	SID: null,
 	/*
-	Variable: ARVORE
-	
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
-	Type:
+	Tipo:
 	{YAHOO.widget.TreeView}
 	*/
 	ARVORE: null,
 	/*
-	Variable: DRIVES
-	
 	Objeto JSON com a lista de drives no servidor que podem ser abertos na opção de navegação pelos diretórios
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	DRIVES: null,
 	/*
-	Variable: SISTEMAS
-	
 	Objeto JSON com a lista de sistemas existentes
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	SISTEMAS: null,
 	/*
-	Variable: MENUS
-	
 	Armazena o objeto JSON com a lista de menus resultante da função listaMenus
 	
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	MENUS: null,
 	/*
-	Variable: GRUPOS
-	
 	Armazena o objeto JSON com a última lista de grupos obtida
 
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	GRUPOS: null,
 	/*
-	Variable: SUBGRUPOS
-	
 	Armazena o objeto JSON com a última lista de sub-grupos obtida
 
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	SUBGRUPOS: null,
 	/*
-	Variable: TEMAS
-	
 	Armazena o objeto JSON com a última lista de temas obtida
 
-	Type:
+	Tipo:
 	{JSON}
 	*/
 	TEMAS: null,
@@ -376,7 +360,7 @@ i3GEO.arvoreDeTemas = {
 	
 	A propriedade i3GEO.arvoreDetemas.IDSMENUS pode ser utilizada para filtrar alista de menus que será utilizada.
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -411,7 +395,7 @@ i3GEO.arvoreDeTemas = {
 	
 	O resultado é armazenado em i3GEO.arvoreDetemas.GRUPOS 
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -439,7 +423,7 @@ i3GEO.arvoreDeTemas = {
 	
 	O resultado é armazenado emi3GEO.arvoreDetemas.SUBGRUPOS
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -466,7 +450,7 @@ i3GEO.arvoreDeTemas = {
 	
 	O resultado é armazenado em i3GEO.arvoreDeTemas.TEMAS
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -495,7 +479,7 @@ i3GEO.arvoreDeTemas = {
 	
 	O resultado é armazenado em i3GEO.arvoreDeTemas.SISTEMAS
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -518,7 +502,7 @@ i3GEO.arvoreDeTemas = {
 	
 	Alista de drives deve ser definida emi3geo/ms_configura.php
 	
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -544,7 +528,7 @@ i3GEO.arvoreDeTemas = {
 	Ao ser criada, os parâmetros utilizados são armazenados em variáveis que podem ser acessadas com
 	i3geo.arvoreDeTemas.[ATIVATEMA,OPCOESADICIONAIS,IDHTML,LOCAPLIC,SID]
 
-	Parameters:
+	Parametros:
 	
 	g_sid - {String} Código da seção PHP criada ao abrir o i3Geo
 
@@ -899,7 +883,7 @@ i3GEO.arvoreDeTemas = {
 	
 	Incluí na árvore o navegador de diretórios
 	
-	Parameters:
+	Parametro:
 	
 	node {node} - nó onde será criada a lista 
 	*/
@@ -937,7 +921,7 @@ i3GEO.arvoreDeTemas = {
 	
 	Monta o texto com o título do tema.
 	
-	Parameters:
+	Parametros:
 	
 	cor - {String} - cor que será utilizada no estilo "color"
 	
@@ -963,7 +947,7 @@ i3GEO.arvoreDeTemas = {
 	
 	Monta o nó com informações adicionais sobre o tema.
 	
-	Parameters:
+	Parametro:
 	
 	node - {Object} - objeto com o nó que foi clicado
 	*/
@@ -1113,7 +1097,7 @@ i3GEO.arvoreDeTemas = {
 	
 	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
 	
-	Parameter:
+	Parametro:
 	
 	palavra {String}
 	*/
@@ -1243,7 +1227,7 @@ i3GEO.arvoreDeTemas = {
 
 	Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do menu.
 
-	Parameters:
+	Parametros:
 
 	locaplic {String} - endereço do i3geo
 	
@@ -1279,7 +1263,7 @@ i3GEO.arvoreDeTemas = {
 
 	Ao escolher uma opção do combo, a função de retorno receberá como parâmetro o id do grupo.
 
-	Parameters:
+	Parametros:
 
 	locaplic {String} - endereço do i3geo
 	
@@ -1315,7 +1299,7 @@ i3GEO.arvoreDeTemas = {
 
 	Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
 
-	Parameters:
+	Parametros:
 
 	locaplic {String} - endereço do i3geo
 
@@ -1353,7 +1337,7 @@ i3GEO.arvoreDeTemas = {
 
 	Ao escolher um subgrupo, a função de retorno receberá o id do grupo e o id do subgrupo.
 
-	Parameters:
+	Parametros:
 
 	locaplic {String} - endereço do i3geo
 
@@ -1387,7 +1371,7 @@ i3GEO.arvoreDeTemas = {
 		i3GEO.php.pegalistadetemas(combo,id_menu,idGrupo,idSubGrupo);
 	},
 	/*
-	Class: dialogo
+	Classe: dialogo
 	
 	Abre as janelas de diálogo com as opções adicionais que permitem acrescentar temas ao mapa
 	

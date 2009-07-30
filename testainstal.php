@@ -15,17 +15,21 @@ catch(ee)
 </script>
 <?php
 /*
-Title: Testa a instalação do I3Geo.
+Title: Testa a instalação do I3Geo
 
 Executa testes e aponta erros na instalação.
 
-Exemplo:
+Link:
 
 http://localhost/i3geo/testainstal.php
 
-File: i3geo/testainstal.php
+Arquivo:
 
-About: Licença
+i3geo/testainstal.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

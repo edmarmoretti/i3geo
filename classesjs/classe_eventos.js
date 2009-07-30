@@ -1,9 +1,13 @@
 /*
 Title: Eventos
 
-File: i3geo/classesjs/classe_eventos.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_eventos.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -40,7 +44,7 @@ objposicaocursor = {
 };
 
 /*
-Class: i3GEO.eventos
+Classe: i3GEO.eventos
 
 Controla as operações que são executadas em eventos que ocorrem no mapa.
 
@@ -62,72 +66,88 @@ Exemplos:
 */
 i3GEO.eventos = {
 	/*
-	Variable: NAVEGAMAPA
+	Variavel: NAVEGAMAPA
 	
 	Armazena as funções que serão executadas quando é feita uma operação de navegação sobre o mapa.
 	
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{["atualizaEscalaNumerica()"]}
 	*/
 	NAVEGAMAPA: new Array(
 		"atualizaEscalaNumerica()"
 	),
 	/*
-	Variable: MOUSEPARADO
+	Variavel: MOUSEPARADO
 
-	Nome das funções padrão que serão executadas quando o usuário estaciona o mouse sobre o mapa 
+	Armazena as funções que serão executadas quando o usuário estaciona o mouse sobre o mapa 
 	por alguns instantes.
 	
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{["i3GEO.navega.mostraRosaDosVentos()"]}
 	*/
 	MOUSEPARADO: new Array(
 		"i3GEO.navega.mostraRosaDosVentos()"
 	),
 	/*
-	Variable: MOUSEMOVE
+	Variavel: MOUSEMOVE
 
-	Nome das funções que serão executadas quando o usuário move o mouse sobre o mapa 
+	Armazena as funções que serão executadas quando o usuário move o mouse sobre o mapa 
 	
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{[]}
 	*/
 	MOUSEMOVE: new Array(),
 	/*
-	Variable: MOUSEDOWN
+	Variavel: MOUSEDOWN
 
-	Nome das funções que serão executadas quando o usuário pressiona o botão do mouse sobre o mapa 
+	Armazena as funções que serão executadas quando o usuário pressiona o botão do mouse sobre o mapa 
 	
-	Type:
+	Tipo:
 	{Array}
+
+	Default:
+	{[]}
 	*/
 	MOUSEDOWN: new Array(),
 	/*
-	Variable: MOUSEUP
+	Variavel: MOUSEUP
 
-	Nome das funções que serão executadas quando o usuário solta o botão do mouse sobre o mapa 
+	Armazena as funções que serão executadas quando o usuário solta o botão do mouse sobre o mapa 
 	
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{[]}
 	*/
 	MOUSEUP: new Array(),
 	/*
-	Variable: MOUSECLIQUE
+	Variavel: MOUSECLIQUE
 
-	Nome das funções que serão executadas quando o usuário clica sobre o mapa 
+	Armazena as funções que serão executadas quando o usuário clica sobre o mapa 
 	
-	Type:
+	Tipo:
 	{Array}
+	
+	Default:
+	{["i3GEO.eventos.cliqueCapturaPt()"]}
 	*/
 	MOUSECLIQUE: new Array(
 		"i3GEO.eventos.cliqueCapturaPt()"	
 	),
 	/*
-	Variable: TIMERPARADO
-	
 	Timer utilizado pelo contador do mouse parado
 	
-	Type:
+	Tipo:
 	{Timeout}
 	*/
 	TIMERPARADO: "",
@@ -393,13 +413,13 @@ i3GEO.eventos = {
 	/*
 	Function: ativa
 
-	Ativa as operações de clique sobre o mapa
+	Ativa os eventos sobre o mapa
 
 	Define o que será executado quando o mouse é clicado ou movido sobre o mapa.
 
-	Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja configura.js)
+	Além das funções padrão,são ativadas aquelas definidas nas variáveis de configuração (veja classe_configura.js)
 
-	Parameters:
+	Parametro:
 
 	docMapa {DOM node} - objeto que será alvo da ativação dos cliques
 	*/

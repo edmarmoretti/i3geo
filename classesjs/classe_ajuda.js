@@ -1,9 +1,13 @@
 /*
 Title: Ajuda
 
-File: i3geo/classesjs/classe_ajuda.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_ajuda.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.ajuda
+Classe: i3GEO.ajuda
 
 Manipulação das janelas de ajuda e outras coisas relacionadas.
 
@@ -46,20 +50,20 @@ Exemplos:
 */
 i3GEO.ajuda = {
 	/*
-	Property: ATIVAJANELA
+	Variavel: ATIVAJANELA
 	
 	Define se a janela de mensagens pode ou não ser aberta.
 	
 	Default:
 	
-	true
+	{true}
 	
-	Type:
+	Tipo:
 	{Boolean}
 	*/
 	ATIVAJANELA: true,
 	/*
-	Property: DIVAJUDA
+	Variavel: DIVAJUDA
 	
 	Nome do elemento HTML, do tipo DIV, que irá conter os textos de ajuda.
 	
@@ -67,14 +71,14 @@ i3GEO.ajuda = {
 	
 	Default:
 	
-	i3geo_ajuda
+	{"i3geo_ajuda"}
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	DIVAJUDA: "i3geo_ajuda",
 	/*
-	Property: DIVLETREIRO
+	Variavel: DIVLETREIRO
 	
 	Id do elemento HTML onde será incluído o banner (letreiro) de mensagens.
 	
@@ -82,31 +86,31 @@ i3GEO.ajuda = {
 	
 	Default:
 	
-	i3geo_letreiro
+	{"i3geo_letreiro"}
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	DIVLETREIRO: "i3geo_letreiro",
 	/*
-	Property: MENSAGEMPADRAO
+	Variavel: MENSAGEMPADRAO
 	
 	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
 	mensagem definida para o elemento sobre o qual o mouse estaciona.
 	
 	Default:
-	""
+	{""}
 	
-	Type:
+	Tipo:
 	{String}
 	*/
 	MENSAGEMPADRAO: "",	
 	/*
-	Property: TRANSICAOSUAVE
+	Variavel: TRANSICAOSUAVE
 	
 	Altera a transparência quando o mouse sobrepõe à janela e quando sai
 	
-	Type:
+	Tipo:
 	{boolean}
 	
 	Default:
@@ -114,17 +118,17 @@ i3GEO.ajuda = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Property: OPACIDADE
+	Variavel: OPACIDADE
 	
 	Valor da opacidade mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	
 	Varia de 0 a 100
 	
-	Type:
+	Tipo:
 	{numeric}
 	
 	Default:
-	{50}
+	{20}
 	*/
 	OPACIDADE: 20,
 	/*
@@ -182,7 +186,7 @@ i3GEO.ajuda = {
 	
 	O letreiro deve ser um elemento do tipo INPUT (text).
 	
-	Parameters:
+	Parametro:
 	
 	mensagem {String} - (opcional) texto que será mostrado no letreiro. Se não for informado
 	será utilizado a variável i3GEO.parametros.mensagens
@@ -247,7 +251,7 @@ i3GEO.ajuda = {
 	
 	Mostra um texto dentro da janela de mensagens padrão.
 	
-	Parameters:
+	Parametro:
 	
 	texto {String} - texto a ser mostrado
 	*/

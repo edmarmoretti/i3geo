@@ -39,88 +39,87 @@ Timestamp: Gerado em day month, year
 
 
 File: Página principal com a lista de aplicativos do i3geo  (principal.htm)
+File: Exemplos de configuração  (exemplos\index.html)
 File: Inicializa o I3Geo via URL ms_criamapa.php  (ms_criamapa.php)
 File: Variáveis de inicialização ms_configura.php  (ms_configura.php)
-File: Testa a instalação do I3Geo.  (testainstal.php)
-File: Testa um mapfile.  (testamapfile.php)
+File: Testa a instalação do I3Geo  (testainstal.php)
+File: Testa um mapfile  (testamapfile.php)
+File: i3geo.js  (no auto-title, classesjs\i3geo.js)
 
-Group: Programas principais (core)  {
+Group: API Javascript  {
 
-   Group: Programas principais em JavaScript (rodam no navegador)  {
+   Group: Classes  {
 
-      Group: Classes  {
+      File: Compactador de javascript  (classesjs\compactajs.php)
+      File: i3Geo  (classesjs\classe_i3geo.js)
+      File: Ajuda  (classesjs\classe_ajuda.js)
+      File: Análise geográfica  (classesjs\classe_analise.js)
+      File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
+      File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
+      File: Barra de botões  (classesjs\classe_barradebotoes.js)
+      File: Cálculos  (classesjs\classe_calculo.js)
+      File: Configurações gerais  (classesjs\classe_configura.js)
+      File: Depreciados  (classesjs\depreciados.js)
+      File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
+      File: Eventos  (classesjs\classe_eventos.js)
+      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
+      File: Guias  (classesjs\classe_guias.js)
+      File: Idioma  (classesjs\classe_idioma.js)
+      File: Interface  (classesjs\classe_interface.js)
+      File: Janelas  (classesjs\classe_janela.js)
+      File: Mapa  (classesjs\classe_mapa.js)
+      File: Mapa de referência  (classesjs\classe_maparef.js)
+      File: Navegação sobre o mapa  (classesjs\classe_navega.js)
+      File: PHP  (no auto-title, classesjs\classe_php.js)
+      File: Seleção de elementos  (classesjs\classe_selecao.js)
+      File: Temas  (classesjs\classe_tema.js)
+      File: Utilitários  (classesjs\classe_util.js)
+      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\i3geo_tudo_compacto.js)
+      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\i3geo_tudo_compacto.js.php)
+      }  # Group: Classes
 
-         File: i3Geo  (classesjs\classe_i3geo.js)
-         File: Ajuda  (classesjs\classe_ajuda.js)
-         File: Análise geográfica  (classesjs\classe_analise.js)
-         File: Árvore de camadas  (classesjs\classe_arvoredecamadas.js)
-         File: Árvore de temas  (classesjs\classe_arvoredetemas.js)
-         File: Barra de botões  (classesjs\classe_barradebotoes.js)
-         File: Cálculos  (classesjs\classe_calculo.js)
-         File: Configurações gerais  (classesjs\classe_configura.js)
-         File: depreciados.js  (classesjs\depreciados.js)
-         File: Desenho de elementos gráficos  (classesjs\classe_desenho.js)
-         File: Eventos  (classesjs\classe_eventos.js)
-         File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\classe_gadgets.js)
-         File: Guias  (classesjs\classe_guias.js)
-         File: Idioma  (classesjs\classe_idioma.js)
-         File: Interface  (classesjs\classe_interface.js)
-         File: Janelas  (classesjs\classe_janela.js)
-         File: Mapa  (classesjs\classe_mapa.js)
-         File: Mapa de referência  (classesjs\classe_maparef.js)
-         File: Navegação sobre o mapa  (classesjs\classe_navega.js)
-         File: PHP  (no auto-title, classesjs\classe_php.js)
-         File: Seleção de elementos  (classesjs\classe_selecao.js)
-         File: Temas  (classesjs\classe_tema.js)
-         File: Utilitários  (classesjs\classe_util.js)
-         }  # Group: Classes
+   Group: Aplicativos  {
 
-      Group: Aplicativos  {
+      File: Atlas  (classesjs\atlas.js)
+      File: Cliente de web services  (classesjs\wscliente.js)
+      File: Data download  (classesjs\datadownload.js)
+      File: Gerador de links  (classesjs\geradordelinks.js)
+      }  # Group: Aplicativos
 
-         File: Atlas  (classesjs\atlas.js)
-         File: Cliente de web services  (classesjs\wscliente.js)
-         File: Compactador de javascript  (classesjs\compactajs.php)
-         File: Data download  (classesjs\datadownload.js)
-         File: Gerador de links  (classesjs\geradordelinks.js)
-         File: i3geo - carregador de javascripts  (classesjs\i3geo.js)
-         }  # Group: Aplicativos
+   }  # Group: API Javascript
 
-      }  # Group: Programas principais em JavaScript (rodam no navegador)
+Group: API PHP  {
 
-   Group: Programas principais em PHP (rodam no servidor)  {
-
-      File: atlas_controle.php  (classesphp\atlas_controle.php)
-      File: carrega_ext.php  (classesphp\carrega_ext.php)
-      File: class.palette.php  (classesphp\class.palette.php)
-      File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
-      File: classe_analise.php  (classesphp\classe_analise.php)
-      File: classe_atlas.php  (classesphp\classe_atlas.php)
-      File: classe_atributos  (classesphp\classe_atributos.php)
-      File: classe_escala.php  (classesphp\classe_escala.php)
-      File: classe_estatistica.php  (classesphp\classe_estatistica.php)
-      File: classe_imagem.php  (classesphp\classe_imagem.php)
-      File: classe_legenda.php  (classesphp\classe_legenda.php)
-      File: classe_mapa.php  (classesphp\classe_mapa.php)
-      File: classe_menutemas.php  (classesphp\classe_menutemas.php)
-      File: classe_navegacao.php  (classesphp\classe_navegacao.php)
-      File: classe_selecao.php  (classesphp\classe_selecao.php)
-      File: classe_shp.php  (classesphp\classe_shp.php)
-      File: classe_temas.php  (classesphp\classe_temas.php)
-      File: classe_toponimia.php  (classesphp\classe_toponimia.php)
-      File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
-      File: flamingoogc.php  (classesphp\flamingoogc.php)
-      File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
-      File: graficopizza.php  (classesphp\graficopizza.php)
-      File: graficos.php  (classesphp\graficos.php)
-      File: mapa_controle.php  (classesphp\mapa_controle.php)
-      File: mapa_inicia.php  (classesphp\mapa_inicia.php)
-      File: parse_cgi.php  (classesphp\parse_cgi.php)
-      File: pega_variaveis.php  (classesphp\pega_variaveis.php)
-      File: wmswfs.php  (classesphp\wmswfs.php)
-      File: wscliente.php  (classesphp\wscliente.php)
-      }  # Group: Programas principais em PHP (rodam no servidor)
-
-   }  # Group: Programas principais (core)
+   File: atlas_controle.php  (classesphp\atlas_controle.php)
+   File: carrega_ext.php  (classesphp\carrega_ext.php)
+   File: class.palette.php  (classesphp\class.palette.php)
+   File: classe_alteraclasse.php  (classesphp\classe_alteraclasse.php)
+   File: classe_analise.php  (classesphp\classe_analise.php)
+   File: classe_atlas.php  (classesphp\classe_atlas.php)
+   File: classe_atributos  (classesphp\classe_atributos.php)
+   File: classe_escala.php  (classesphp\classe_escala.php)
+   File: classe_estatistica.php  (classesphp\classe_estatistica.php)
+   File: classe_imagem.php  (classesphp\classe_imagem.php)
+   File: classe_legenda.php  (classesphp\classe_legenda.php)
+   File: classe_mapa.php  (classesphp\classe_mapa.php)
+   File: classe_menutemas.php  (classesphp\classe_menutemas.php)
+   File: classe_navegacao.php  (classesphp\classe_navegacao.php)
+   File: classe_selecao.php  (classesphp\classe_selecao.php)
+   File: classe_shp.php  (classesphp\classe_shp.php)
+   File: classe_temas.php  (classesphp\classe_temas.php)
+   File: classe_toponimia.php  (classesphp\classe_toponimia.php)
+   File: classe_vermultilayer.php  (classesphp\classe_vermultilayer.php)
+   File: flamingoogc.php  (classesphp\flamingoogc.php)
+   File: funcoes_gerais.php  (classesphp\funcoes_gerais.php)
+   File: graficopizza.php  (classesphp\graficopizza.php)
+   File: graficos.php  (classesphp\graficos.php)
+   File: mapa_controle.php  (classesphp\mapa_controle.php)
+   File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+   File: parse_cgi.php  (classesphp\parse_cgi.php)
+   File: pega_variaveis.php  (classesphp\pega_variaveis.php)
+   File: wmswfs.php  (classesphp\wmswfs.php)
+   File: wscliente.php  (classesphp\wscliente.php)
+   }  # Group: API PHP
 
 Group: Redirecionadores  {
 
@@ -141,6 +140,7 @@ Group: Aplicativos adicionais  {
    File: geradordelinks.htm  (geradordelinks.htm)
    File: wscliente.htm  (wscliente.htm)
    File: geraminiatura.php  (geraminiatura.php)
+   File: i3geo.js  (classesjs\zerocal\i3geo.js)
 
    Group: Atlas  {
 
@@ -167,20 +167,7 @@ Group: Aplicativos adicionais  {
       File: mobile.php  (mobile\mobile.php)
       }  # Group: Mobile
 
-   File: i3geo.js  (classesjs\zerocal\i3geo.js)
    }  # Group: Aplicativos adicionais
-
-Group: Configurações administrativas (menus, mapas, etc.)  {
-
-   File: Lista de aplicações de identificação  (menutemas\identifica.xml)
-   File: Lista de Atlas  (menutemas\atlas.xml)
-   File: Lista de links para sites de download  (menutemas\linksdownload.xml)
-   File: Lista de mapas  (menutemas\mapas.xml)
-   File: Lista de serviços de acesso aos dados.  (menutemas\servicosws.xml)
-   File: Lista de serviços georss  (menutemas\servicosgeorss.xml)
-   File: Lista de sistemas.  (menutemas\sistemas.xml)
-   File: Menu de temas  (menutemas\menutemas.xml)
-   }  # Group: Configurações administrativas (menus, mapas, etc.)
 
 Group: Interfaces HTML e mapfiles de inicialização e configuração  {
 
@@ -201,21 +188,11 @@ Group: Interfaces HTML e mapfiles de inicialização e configuração  {
 Group: Index  {
 
    Index: Everything
-   Class Index: Classes
-   File Index: Files
    Function Index: Functions
    Property Index: Properties
-   Variable Index: Variables
+   Arquivo Index: Arquivos
+   Classe Index: Classe
+   Parametro Index: Parametros
+   Variavel Index: Variaveis
    }  # Group: Index
-
-File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js)
-File: -  (no auto-title, classesjs\i3geo_tudo_compacto.js.php)
-
-Group: Exemplos  {
-
-   File: abas.htm  (exemplos\abas.htm)
-   File: Interface normal  (exemplos\visual1.htm)
-   File: Interface normal  (exemplos\visual2.htm)
-   File: Interface normal  (exemplos\guias1.htm)
-   }  # Group: Exemplos
 

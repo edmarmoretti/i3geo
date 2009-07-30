@@ -1,9 +1,13 @@
 /*
 Title: Análise geográfica
 
-File: i3geo/classesjs/classe_analise.js
+Arquivo:
 
-About: Licença
+i3geo/classesjs/classe_analise.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -27,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Class: i3GEO.analise
+Classe: i3GEO.analise
 
 Funções de geração das análises e abertura dos diálogos das opções de análise espacial
 
@@ -35,19 +39,15 @@ Em i3GEO.analise.dialogo estão as funções de abertura dos diálogos
 */
 i3GEO.analise = {
 	/*
-	Class: i3GEO.analise.dialogo
+	Classe: i3GEO.analise.dialogo
 	
 	Abre as telas de diálogo das opções de análise
 	
-	Exemplos:
+	Exemplo:
 
 	Para abrir a mensagem de diálogo de geração de buffer, utilize
 	
 	i3GEO.analise.dialogo.buffer()
-	
-	Returns:
-	
-	{i3GEO.janela.cria}
 	*/
 	dialogo:{
 		/*
@@ -143,7 +143,7 @@ i3GEO.analise = {
 		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=25' >&nbsp;&nbsp;&nbsp;</a>");}
 	},
 	/*
-	Class: i3GEO.analise.medeDistancia
+	Classe: i3GEO.analise.medeDistancia
 	
 	Ativa e controla a opção de medição de distâncias.
 
@@ -299,7 +299,7 @@ i3GEO.analise = {
 		}
 	},
 	/*
-	Class: i3GEO.analise.medeArea
+	Classe: i3GEO.analise.medeArea
 	
 	Ativa e controla a opção de medição de área.
 
