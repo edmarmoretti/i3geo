@@ -30,11 +30,17 @@ function inicializaJanela()
 	ypt = unescape(((((window.location.href).split("y="))[1]).split("&"))[0] );
 	escala = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
 	//eventos das guias
-	$i("guia1").onclick = function(){listaTemasLigados();mostraGuia("guia1")}
-	$i("guia2").onclick = function(){listaTodos()}
+	$i("guia1").onclick = function(){listaTemas("ligados");mostraGuia("guia1")}
+	$i("guia2").onclick = function(){listaTemas("todos")}
 	$i("guia3").onclick = function(){mostraGuia("guia3")}
+	$i("guia4").onclick = function(){
+		mostraGuia("guia4");
+		new YAHOO.widget.Button("botao1",{onclick:{fn: function(){
+			window.location.href = "../etiqueta/index.htm?tema="+window.parent.i3GEO.temaAtivo;
+		}}});
+	}
 	$i("xy").innerHTML = "x: " + xpt + "  y: " + ypt
-	listaTemasLigados()
+	listaTemas("todos")
 }
 //le o arquivo opcional de sistemas
 function pegavalSistemas(xmlDoc)
@@ -82,13 +88,12 @@ function pegavalSistemas(xmlDoc)
 	}
 	aguarde("none");
 }
-//lista os temas ligados
-function listaTemasLigados()
+//lista os temas
+function listaTemas(tipo)
 {
 	aguarde("none");
 	var retorno = function (retorno)
 	{
-		//var lista = (window.parent.objmapa.temas).split(";")
 		var lista = retorno.data;
 		var b = window.parent.i3GEO.calculo.dd2dms(xpt,ypt);
 		var x = b[0].split(" ")
@@ -134,28 +139,13 @@ function listaTemasLigados()
 		else
 		{identifica(window.parent.i3GEO.temaAtivo)}
 	};
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemas&opcao=ligados"
+	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemas&opcao="+tipo
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
 	cp.call(p,"listatemas",retorno);
-	
-	
 }
-//lista os temas ligados
-function listaTodos()
-{
-	var lista = (window.parent.objmapa.temas).split(";")
-	var linhas = "Clique no tema para ver os dados<table class=lista2 >"
-	for (l=0;l<lista.length;l++)
-	{
-		var ltema = lista[l].split("*")
-		if (ltema[2] != 2)
-		linhas += "<tr><td><input onclick='identifica(\""+ltema[0]+"\")' style=cursor:pointer type=radio name=tema /></td><td>"+ltema[2]+"</td></tr>"
-	}
-	$i("resultado").innerHTML = "<table>"+linhas+"</table>"
-	mostraGuia("guia1");
-}
+
 //identifica o sistema clicado
 function identificasistema(exec,t)
 {
