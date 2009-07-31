@@ -163,11 +163,31 @@ function mostraOpcao(anterior,proxima,texto,idatual)
 		ndiv.id = idatual;
 		texto += "<br><br><table style='width:100%;background-color:#F2F2F2;' ><tr style='width:100%'>";
 		if (anterior != "")
-		{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><img onclick='"+anterior+"' src=../../imagens/anterior.gif ></td>";}
+		{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><input id="+idatual+"anterior_ onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
 		if (proxima != "")
-		{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><img onclick='javascript:this.src=\"../../imagens/aguarde.gif\";"+proxima+"' src=../../imagens/proxima.gif ></td>";}
+		{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><input id="+idatual+"proxima_ onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
 		ndiv.innerHTML = texto+"</tr></table>";
 		document.getElementById("resultado").appendChild(ndiv);
+		new YAHOO.widget.Button(idatual+"anterior_",{
+			onclick:{fn: function(){
+				eval(anterior+"()");
+			},
+			lazyloadmenu:true 
+		}});
+		new YAHOO.widget.Button(idatual+"proxima_",
+			{onclick:{fn: function(){
+				eval(proxima+"()");
+			},
+			lazyloadmenu:true
+		}});
+		var i = $i(idatual+"proxima_-button");
+		i.style.backgroundImage = "url('../../imagens/player_avanca.png')";
+		i.style.backgroundRepeat = "no-repeat";
+		i.style.backgroundPosition = "center center";
+		var i = $i(idatual+"anterior_-button");
+		i.style.backgroundImage = "url('../../imagens/player_volta.png')";
+		i.style.backgroundRepeat = "no-repeat";
+		i.style.backgroundPosition = "center center";
 	}
 	var ids = new Array("t0","t1","t2","t3","t4","t5","t6","t7");
 	for (i=0;i<ids.length;i++)
