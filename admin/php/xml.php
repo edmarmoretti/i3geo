@@ -72,6 +72,11 @@ function geraXmlWS($locaplic)
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Web services");
 }
+function geraXmlKmlrss($locaplic)
+{
+	$sql = "select * from i3geoadmin_ws where tipo_ws = 'KML' and nome_ws <> ''";
+	return geraXmlRSS($locaplic,$sql,"Web services");
+}
 function geraXmlWMS($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> '' order by nome_ws";

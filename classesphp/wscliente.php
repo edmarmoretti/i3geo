@@ -444,6 +444,11 @@ function listaRSSwsARRAY()
 				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
 				$linkrss = $urli3geo."/admin/xmlgeorss.php";
 			}
+			if($tipo == "KML")
+			{
+				$canali = simplexml_load_string(geraXmlKmlrss($locaplic));
+				$linkrss = $urli3geo."/admin/xmlkmlrss.php";
+			}
 			if($tipo == "WMS")
 			{
 				$canali = simplexml_load_string(geraXmlWMS($locaplic));

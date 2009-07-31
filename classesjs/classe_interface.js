@@ -751,27 +751,38 @@ i3GEO.interface = {
 		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
 	
 		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
+
+		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
+		
+		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
-		adicionaKml: function(pan,url){
+		adicionaKml: function(pan,url,titulo,ativo){
+			var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
 			if(arguments.length == 1){
 				var i = $i("i3geo_urlkml");
 				if(i){var url = i.value;}
 				else{var url = "";}
+				var titulo = ngeoxml;
+				var ativo = true;
 			}
+			if(arguments.length == 2){
+				var titulo = ngeoxml;
+				var ativo = true;
+			}
+			if(arguments.length == 2){var ativo = true;}
 			if(url == ""){return;}
 			//"http://api.flickr.com/services/feeds/geo/?g=322338@N20&lang=en-us&format=feed-georss"
-			var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
 			i3GEO.mapa.GEOXML.push(ngeoxml);
 			var zoom = function(){
 				if(pan){
 					eval("var ll = "+ngeoxml+".getDefaultCenter()");
 					eval(ngeoxml+".gotoDefaultViewport(i3GeoMap)");
-					//i3GeoMap.setCenter(ll);
 				}
 			};
 			eval(ngeoxml+" = new GGeoXml(url,zoom)");
-			eval("i3GeoMap.addOverlay("+ngeoxml+")");
-			i3GEO.interface.googlemaps.adicionaNoArvoreGoogle(ngeoxml,ngeoxml);
+			if(ativo == true)
+			{eval("i3GeoMap.addOverlay("+ngeoxml+")");}
+			i3GEO.interface.googlemaps.adicionaNoArvoreGoogle(url,titulo,ativo,ngeoxml);
 		},
 		/*
 		Function: adicionaNoArvoreGoogle
@@ -787,8 +798,14 @@ i3GEO.interface = {
 		url {string} - url do arquivo KML
 	
 		nomeOverlay {string} - título do tema
+		
+		ativo {boolean} - indica o estado do checkbox
+		
+		id {string} - nome do objeto GGeoXml
 		*/
-		adicionaNoArvoreGoogle: function(url,nomeOverlay){
+		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
+			if(arguments.length == 2){var ativo = true;var id = nomeOverlay;}
+			if(arguments.length == 2){var id = nomeOverlay;}
 			var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
 			var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
 			if(!node){
@@ -797,8 +814,10 @@ i3GEO.interface = {
 				var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 				node.enableHighlight = false;
 			}
-			html = "<input onclick='i3GEO.mapa.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+nomeOverlay+"' checked />";
-			html += "&nbsp;<span style='cursor:move'>"+url+"</span>";
+			html = "<input onclick='i3GEO.interface.googlemaps.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
+			if(ativo == true){html += " checked ";}
+			html += "/>";
+			html += "&nbsp;<span style='cursor:move'>"+nomeOverlay+"</span>";
 			var d = {html:html};
 			var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
 			nodekml.enableHighlight = false;   			

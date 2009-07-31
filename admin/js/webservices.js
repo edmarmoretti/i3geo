@@ -148,6 +148,9 @@ function montaDiv(i)
 	ins += "<option value='' "
 	if (i.tipo_ws == ""){ins += "selected";}
 	ins += ">---</option>"
+	ins += "<option value='KML' "
+	if (i.tipo_ws == "KML"){ins += "selected";}
+	ins += " >KML</option>"
 	ins += "<option value='WMS' "
 	if (i.tipo_ws == "WMS"){ins += "selected";}
 	ins += " >WMS</option>"
