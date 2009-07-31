@@ -593,7 +593,7 @@ objeto_i3geo_wscliente_configura - objeto com os parâmentros de configuração cri
 function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 {		
 	/*
-	Variavel: $i3geo_wscliente
+	Propriedade: $i3geo_wscliente
 	
 	Contém o objeto $i3geo_wscliente com todas as propriedades e funções de controle da interface
 	*/

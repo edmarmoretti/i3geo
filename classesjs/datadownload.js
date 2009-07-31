@@ -42,7 +42,7 @@ Veja:
 <datadownload.htm>
 */
 /*
-Variavel: g_locaplic
+Propriedade: g_locaplic
 
 Indica a localização do i3geo. Por default, procura no diretório onde foi executada a plicação datadownload.
 No caso do datadownload.htm ser disparado de outro local, é necessário definir essa variável antes de chamar a função DDinicia
@@ -71,7 +71,7 @@ g_i3geo = ""
 //
 g_arvoreClicks = ""
 /*
-Variable: g_tipo
+Propriedade: g_tipo
 
 Tipo de acesso aos dados.
 
@@ -104,7 +104,7 @@ no sistema de administração do i3geo
 */
 g_tipo = "menutemas"
 /*
-Variavel: g_dirbaseDown
+Propriedade: g_dirbaseDown
 
 Url para o endereço definido em g_dirbase.
 É utilizada para montar o link de acesso aos arquivos quando g_tipo = 'dir'
@@ -116,7 +116,7 @@ Tipo:
 g_dirbaseDown = ""
 
 /*
-Variavel: g_dirbase
+Propriedade: g_dirbase
 
 Endereço no servidor onde estão os arquivos ou diretórios que poderão ser acessados
 
@@ -126,7 +126,7 @@ Tipo:
 */
 g_dirbase = ""
 /*
-Variavel: g_dirarquivos
+Propriedade: g_dirarquivos
 
 Endereço do diretório que será acessado na inicialização da aplicação
 

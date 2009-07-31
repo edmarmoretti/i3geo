@@ -39,11 +39,7 @@ As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
-	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
-	*/
-	TIPS: new Array(),
-	/*
-	Variavel: ANTESCRIA
+	Propriedade: ANTESCRIA
 	
 	Lista com os nomes das funções que serão executadas antes de abrir a janela.
 	
@@ -60,7 +56,7 @@ i3GEO.janela = {
 		"i3GEO.janela.prepara()"
 	),
 	/*
-	Variavel: ANTESFECHA
+	Propriedade: ANTESFECHA
 	
 	Lista com os nomes das funções que serão executadas após fechar a janela.
 	
@@ -74,6 +70,12 @@ i3GEO.janela = {
 	{[]}
 	*/
 	ANTESFECHA: new Array(),
+	/*
+	Variavel: TIPS
+	
+	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
+	*/
+	TIPS: new Array(),
 	/*
 	Function: prepara
 	
@@ -396,17 +398,9 @@ i3GEO.janela = {
         	slider.setValue(parseInt(inicial));
         	slider.getRealValue = function() {
             	return Math.round(this.getValue() * scaleFactor);
-        	}
+        	};
         	slider.subscribe("slideEnd", function(offsetFromStart) {
-            	//var valnode = Dom.get(valuearea);
-            	//var fld = Dom.get(textfield);
-            	// Display the pixel value of the control
-            	//valnode.innerHTML = offsetFromStart;
-            	// use the scale factor to convert the pixel offset into a real
-            	// value
             	var actualValue = slider.getRealValue();
-            	// update the text box with the actual value
-            	//alert(actualValue);
             	eval(funcao+"("+actualValue+")");
 			});
         });

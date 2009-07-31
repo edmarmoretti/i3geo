@@ -8,7 +8,10 @@ Adiciona, remove, altera, etc.
 
 Cria camadas com a toponímia e gerencia o status das etiquetas mostradas no mapa.
 
-Abiut: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -28,36 +31,36 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File:classe_toponimia.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_toponimia.php
 */
 /*
-Class: Toponimia
+Classe: Toponimia
 */
 
 class Toponimia
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $map_file
+	Variavel: $map_file
 	
 	Arquivo map file
 	*/
 	protected $map_file;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/

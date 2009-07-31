@@ -6,7 +6,10 @@ Manipulação da legenda.
 
 Cria legenda, edita simbolos, etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,66 +29,66 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_legenda.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_legenda.php
 */
 /*
-Class: Legenda
+Classe: Legenda
 
 */
 class Legenda
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variable: $grupo
+	Variavel: $grupo
 	
 	Array com os temas do grupo, se houver
 	*/
 	protected $grupo;
 	/*
-	Variable: $visiveis
+	Variavel: $visiveis
 	
 	Temas do grupo que são visíveis em função da escala
 	*/
 	protected $visiveis;
 	/*
-	Variable: $indices
+	Variavel: $indices
 	
 	Indices dos layers do grupo
 	*/
 	protected $indices;
 	/*
-	Variable: $templateleg
+	Variavel: $templateleg
 	
 	Template da legenda
 	*/
 	protected $templateleg;	
 	/*
-	Variable: $localaplicacao
+	Variavel: $localaplicacao
 	
 	Localização da aplicação
 	*/

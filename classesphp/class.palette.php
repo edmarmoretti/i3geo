@@ -19,7 +19,7 @@ File: i3geo/classesphp/class.palette.php
 19/6/2007
 */
 /*
-Class: palette
+Classe: palette
 
 Gera um degradê de cores.
 */
@@ -27,13 +27,13 @@ class palette{
 
   protected $colors=array();  //Arreglo de colores por los cuales debe pasar la paleta
 	/*
-	Variable: $colorPath
+	Variavel: $colorPath
 	
 	Array com os valores finais
 	*/
   public $colorPath=array();  //Arreglo de colores finales de la paleta
 	/*
-	Variable: $colorRGB
+	Variavel: $colorRGB
 	
 	Array com os valores finais em RGB
 	*/

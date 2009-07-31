@@ -457,7 +457,7 @@ objeto_i3geo_gl_configura - objeto com os parâmentros de configuração criado pel
 function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 {		
 	/*
-	Variavel: $i3geo_gl
+	Propriedade: $i3geo_gl
 	
 	Contém o objeto $i3geo_gl com todas as propriedades e funções de controle da interface
 	*/

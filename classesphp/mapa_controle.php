@@ -16,7 +16,9 @@ Sequência de operações:
 
 pega as variáveis get ou post->pega as variáveis da seção->verifica se o debug deve ser ativado->carrega as extensões doPHP->cria o objeto cpaint->carrega as funções de uso mais comuns->faz uma cópia de segurança do map_file->roda a função desejada->retorna os valores obtidos
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -1652,7 +1654,7 @@ Property: pegalistademenus
 
 Pega a lista de menus para incluir na guia adiciona.
 
-Parameters:
+Parametros:
 */
 	case "pegalistademenus":
 		if(!isset($menutemas) || !isset($editores))
@@ -1671,7 +1673,7 @@ Property: pegalistadegrupos
 
 Pega a lista de grupos do menu.
 
-Parameters:
+Parametros:
 
 map_file
 
@@ -2711,7 +2713,7 @@ Redesenha o mapa e retorna os parâmetros do novo mapa.
 Include:
 <classe_mapa.php>
 
-Parameters:
+Parametros:
 
 tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|sepiaclara
 */

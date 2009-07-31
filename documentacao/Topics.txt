@@ -87,17 +87,37 @@ Format: Development Release 02-10-2007 (1.35 base)
 Topic Type: Variavel
 
    Plural: Variaveis
-   Can Group With: Variables
+   Index: No
+   Can Group With: Variaveis
 
    Keywords:
       variavel, variaveis
       variable, variables
 
 
+Topic Type: Propriedade
+
+   Plural: Propriedades
+   Index: No
+   Can Group With: Propriedades
+
+   Keywords:
+      propriedade, propriedades
+
+
+Topic Type: Opcao
+
+   Plural: Opcoes
+   Index: No
+   Can Group With: Opcoes
+
+   Keywords:
+      opcao, opcoes
+
+
 Topic Type: Classe
 
    Plural: Classe
-   Scope: Start
    Class Hierarchy: Yes
    Page Title If First: Yes
    Can Group With: Classes
@@ -114,6 +134,7 @@ Topic Type: Classe
 Topic Type: Tipo
 
    Plural: Tipos
+   Index: No
    Can Group With: Variaveis, Variables, Constants, Macros, Enumerations
 
    Keywords:
@@ -125,6 +146,8 @@ Topic Type: Tipo
 Topic Type: Licenca
 
    Plural: Licencas
+   Index: No
+
    Keywords:
       licenca, licencas
 
@@ -140,6 +163,7 @@ Topic Type: Arquivo
 Topic Type: Valor
 
    Plural: Valores
+   Index: No
    Can Group With: Parametros
 
    Keywords:
@@ -149,6 +173,8 @@ Topic Type: Valor
 Topic Type: Parametro
 
    Plural: Parametros
+   Index: No
+
    Keywords:
       parametro, parametros
       parameter, parameters

@@ -48,6 +48,8 @@ http://starkravingfinkle.org/blog/2006/04/richdraw-simple-vmlsvg-editor/
 */
 i3GEO.desenho = {
 	/*
+	Variavel: richdraw
+	
 	Objeto richdraw criado por criaContainerRichdraw
 	
 	Tipo:

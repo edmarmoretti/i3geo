@@ -4,7 +4,10 @@ Title: classe_atlas.php
 
 Manipulação da interface Atlas.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,12 +27,12 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_atlas.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_atlas.php
 */
 /*
-Class: Atlas
+Classe: Atlas
 */
 class Atlas
 {
@@ -54,7 +57,7 @@ Method: pegaListaDeAtlas
 
 Pega a lista de atlas existentes e as informações básicas sobre cada um
 
-Parameters:
+Parametros:
 
 tituloinstituicao - é utilizado para montar o cabeçalho HTML com a lista de atlas. Pode ser obtido do ms_configura.php
 */
@@ -73,7 +76,7 @@ Method: criaAtlas
 
 Lê os parâmetros necessários para abrir um atlas no i3geo
 
-Parameters:
+Parametros:
 
 atlasId - id do atlas desejado, conforme existente em atlas.xml
 */
@@ -95,7 +98,7 @@ Method: pegaListaDePranchas
 
 Pega a lista de pranchas existentes em um atlas específico e as informações básicas sobre cada uma
 
-Parameters:
+Parametros:
 
 atlasId - identificador do Atlas desejado
 */
@@ -134,7 +137,7 @@ Inclui os temas definidos na configuração da prancha.
 
 Os layers que não são oriundos de uma prancha recebe o metadata "ATLAS" igual a "nao". Isso é feito na inicialização do Atlas.
 
-Parameters:
+Parametros:
 
 atlasId - id do atlas
 

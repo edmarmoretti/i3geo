@@ -9,7 +9,10 @@ passam a utilizar a classe i3geo/admin/php/classe_arvore.php
 
 Lista temas, grupos,etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -29,11 +32,13 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_menutemas.php
+Arquivo:
+
+i3geo/classesphp/classe_menutemas.php
 
 */
 /*
-Class: Menutemas
+Classe: Menutemas
 */
 class Menutemas
 {
@@ -96,7 +101,7 @@ Pega a lista de menus do banco de dados de administração.
 
 O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
-Parameters:
+Parametros:
 
 return:
 array
@@ -136,7 +141,7 @@ O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
 Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
 
-Parameters:
+Parametros:
 
 idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
 
@@ -321,7 +326,7 @@ O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
 Os grupos e subgrupos são definidos no xml menutemas/menutemas.xml e os sistemas em menutemas/sistemas.xml.
 
-Parameters:
+Parametros:
 
 idmenu - id que identifica o xml que será utilizado (definido na variável $menutemas em ms_configura.php)
 
@@ -551,7 +556,7 @@ Le o arquivo xml com a lista de mapas existente no xml $locmapas.
 
 O perfil do usuário é armazenado na seção na inicialização do I3Geo.
 
-Parameters:
+Parametros:
 
 locmapas - endereço do arquivo xml.
 
@@ -773,7 +778,7 @@ function: listaTags
 
 Lista os tags registrados nos menus de temas.
 
-Parameters:
+Parametros:
 
 rss - (opcional) endereço de um RSS para cruzar com as tags.
 

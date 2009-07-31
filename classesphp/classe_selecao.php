@@ -6,7 +6,10 @@ Seleção de elementos de um tema.
 
 Adiciona, remove, etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,35 +29,35 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_selecao.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_selecao.php
 */
 /*
-Class: Selecao
+Classe: Selecao
 */
 class Selecao
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/

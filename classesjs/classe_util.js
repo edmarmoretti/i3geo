@@ -31,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Variavel: navm
+Propriedade: navm
 
 Verdadeiro (true) se o navegador for o Internet Explorer
 
@@ -43,7 +43,7 @@ Default:
 */
 navm = false;
 /*
-Variavel: navn
+Propriedade: navn
 
 Verdadeiro (true) se o navegador for o Firefox
 
@@ -59,6 +59,8 @@ navn = false;
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 /*
+Variavel: g_operacao
+
 Nome da última operação que foi executada.
 
 Dependendo do tipo de operação são aplicadas as atualizações necessárias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa, atualiza a lista de temas, etc.
@@ -67,11 +69,14 @@ Essas operações são controladas pela função ajaxiniciaparametros.
 */
 g_operacao = "";
 /*
+Variavel: g_tipoacao
+
 Tipo de ação que está sendo executada.
 Quando o usuário clica no mapa, essa variável é pesquisada para definir o tipo de operação que deve ser executada.
 É definida quando o usuário seleciona uma determinada ferramenta do i3Geo.
 */
 g_tipoacao = "zoomli";
+
 g_postpx = "px";
 g_tipotop = "top";
 g_tipoleft = "left";
@@ -117,6 +122,8 @@ Utilitários.
 */
 i3GEO.util = {
 	/*
+	Variavel: PINS
+	
 	Elementos IMG criados na função criaPin
 	
 	Tipo:
@@ -124,6 +131,8 @@ i3GEO.util = {
 	*/
 	PINS: new Array(),
 	/*
+	Variavel:BOXES
+	
 	Elementos DIV criados na função criaBox
 	
 	Tipo:

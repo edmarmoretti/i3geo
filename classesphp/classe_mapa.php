@@ -4,7 +4,10 @@ Title: classe_mapa.php
 
 Manipulação do mapa. Altera tamanho, lista temas, etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,29 +27,29 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_mapa.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_mapa.php
 */
 /*
-Class: Mapa
+Classe: Mapa
 */
 class Mapa
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	public $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	public $arquivo;
 	/*
-	Variable: $layers
+	Variavel: $layers
 	
 	Objetos layers
 	*/
@@ -210,7 +213,7 @@ Method: redesenhaCorpo
 
 Redesenha o mapa e retorna as variáveis necessárias para montar o mapa.
 
-Parameters:
+Parametros:
 
 $locsistemas - Endereço do arquivo xml com a lista de sistemas adicionais.
 $locidentifica - Variável definida no arquivo ms_configura.php que identifica se existem sistemas adicionais a ser mostrados na opção de identificação.
@@ -495,7 +498,7 @@ Obs.: o "METADATA" "ESCONDIDO", quando presente no tema e diferente de vazio, in
 tipo escondido, ou seja, não deve ser listado pelo I3Geo em combos ou listagens. Por isso,
 layers desse tipo são ignorados por essa função.
 
-Parameters:
+Parametros:
 
 $tipo Tipo de tema (pode ser mais de um) ponto,poligono,linha,raster
 
@@ -598,7 +601,7 @@ Muda o tamanho do query map.
 Essa função é executada na inicialização do mapa ou quando o mapa tem suas dimensões alteradas.
 A função de alteração dos parâmetros do query map original do PHPMapscript, não funciona corretamente.
 
-Parameters:
+Parametros:
 
 $w - Largura.
 
@@ -787,7 +790,7 @@ Os layers que formam grupos também são processados, tendo seus nomes alterados d
 Cada novo layer receberá um novo nome, definido de forma aleatória.
 Os nomes dos temas podem conter o caminho completo do mapfile.
 
-Parameters:
+Parametros:
 
 $temas - string Lista separada por vírgulas, dos arquivos que serão abertos para pegar os novos layers. Não inclua a extensão ".map".
 
@@ -963,7 +966,7 @@ Liga desliga temas.
 
 Torna temas visíveis ou não no mapa alterando seu status.
 
-Parameters:
+Parametros:
 
 $ligar - lista separada por vírgula dos temas que serão ligados.
 
@@ -1022,7 +1025,7 @@ Method: adicionatemawms
 
 Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
-Parameters:
+Parametros:
 
 $tema - Tema que será adicionado.
 $servico - Endereço do web service.
@@ -1159,7 +1162,7 @@ Transforma o mapa atual em um web service.
 
 O novo map file é armazenado no mesmo diretório do map file original.
 
-Parameters:
+Parametros:
 $locmapserv - localização do CGI do mapserver
 $h - host name
 
@@ -1202,7 +1205,7 @@ Method: adicionaTemaGeoRSS
 
 Adiciona um canal GeoRSS como um tema no mapa.
 
-Parameters:
+Parametros:
 $servico - Endereço do RSS.
 $dir_tmp - Diretório onde o arquivo será criado.
 $locaplic - Localização do I3geo
@@ -1352,7 +1355,7 @@ Method: adicionaTemaSHP
 
 Adiciona um tema a partir de um arquivo shape file armazenado no servidor de arquivos.
 
-Parameters:
+Parametros:
 $arq - Nome do shape file.
 */
 	function adicionaTemaSHP($arq)
@@ -1381,7 +1384,7 @@ Method: adicionaTemaIMG
 
 Adiciona um tema a partir de um arquivo imagem armazenado no servidor de arquivos.
 
-Parameters:
+Parametros:
 $arq - Nome do arquivo.
 */
 	function adicionaTemaIMG($arq)

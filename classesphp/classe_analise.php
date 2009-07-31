@@ -4,7 +4,10 @@ Title: classe_analise.php
 
 Gera análises espaciais, como buffer, calculo de centróides, etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,42 +27,42 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_analise.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_analise.php
 */
 /*
-Class: Analise
+Classe: Analise
 
 */
 class Analise
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variable: $diretorio
+	Variavel: $diretorio
 	
 	Diretório do arquivo map_file
 	*/
@@ -637,7 +640,7 @@ Lê um arquivo CSV gerado pelo software R com os dados referentes à triangulação 
 
 O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
 
-Parameters:
+Parametros:
 
 $nomearq - nome do arquivo CSV
 
@@ -723,7 +726,7 @@ Lê um arquivo CSV gerado pelo software R com os dados referentes ao diagrama de 
 
 O arquivo CSV é lido e convertido em um shape file que é então adicionado ao mapa.
 
-Parameters:
+Parametros:
 
 $nomearq - nome do arquivo CSV
 
@@ -1149,7 +1152,7 @@ Gera entorno (buffer) nos elementos selecionados de um tema.
 
 Salva o mapa acrescentando um novo layer com o buffer.
 
-Parameters:
+Parametros:
 
 $distancia - Distância em km.
 
@@ -1265,7 +1268,7 @@ Gera centroide dos elementos selecionados de um tema.
 
 Salva o mapa acrescentando um novo layer com os pontos.
 
-Parameters:
+Parametros:
 
 $locaplic - Localização do I3geo.
 */
@@ -2296,7 +2299,7 @@ Lê as coordenadas de um tema pontual e grava em arquivos.
 
 Essa função é utilizada nas opções que utilizam o R para cálculos e necessitam ler as coordenadas dos pontos.
 
-Parameters:
+Parametros:
 
 tema - nome do tema com os pontos
 
@@ -2396,7 +2399,7 @@ function unserializeGeo
 
 Deserializa um arquivo de geometrias.
 
-Parameters:
+Parametros:
 $arquivo - arquivo que será processado
 */ 	 	
 	public function unserializeGeo($arq)
@@ -2411,7 +2414,7 @@ function serializeGeo
 
 Deserializa um arquivo de geometrias.
 
-Parameters:
+Parametros:
 $arquivo - arquivo que será processado
 
 $geos - array com os dados

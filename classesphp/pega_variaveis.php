@@ -15,7 +15,10 @@ dos argumentos definidos na chamada call. Para fazer a chamada utilizando-se POS
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
 	cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -35,13 +38,13 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-About: Exemplo 
+Exemplo: 
 
 include("pega_variaveis.php");
 
-File: i3geo/classesphp/pega_variaveis.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/pega_variaveis.php
 */
 if (isset($_GET))
 {

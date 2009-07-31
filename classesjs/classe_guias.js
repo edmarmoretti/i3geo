@@ -39,7 +39,7 @@ Para configurar as guias utilize i3GEO.guias.configura = ...
 */
 i3GEO.guias = {
 	/*
-	Variavel: CONFIGURA
+	Propriedade: CONFIGURA
 	
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
 	
@@ -126,7 +126,7 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Variavel: ATUAL
+	Propriedade: ATUAL
 	
 	Guia que está ativa
 	
@@ -140,7 +140,7 @@ i3GEO.guias = {
 	*/
 	ATUAL: "temas",
 	/*
-	Variavel: idguias
+	Propriedade: idguias
 	
 	ID do elemento DOM, criado pelo YUI, onde serão inseridas as guias
 	
@@ -281,7 +281,6 @@ i3GEO.guias = {
 		var guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		var nguias = guias.length;
 		for(g=0;g<nguias;g++){
-			if($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo))
 			$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.display="none";
 			if($i(i3GEO.guias.CONFIGURA[guias[g]].id))
 			$i(i3GEO.guias.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background="transparent";
@@ -411,7 +410,7 @@ i3GEO.guias = {
 						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.left="-1px";
 					}
 				}
-				i3GEO.atualiza("")
+				i3GEO.atualiza("");
 				i.style.display="block";
 				i.style.left = "-1px";
 				i.style.width = "270px";

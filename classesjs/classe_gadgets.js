@@ -39,7 +39,7 @@ Outras funcionalidades são definidas em botões. Veja <classe_configura.js>
 */
 i3GEO.gadgets = {
 	/*
-	Variavel: PARAMETROS
+	Propriedade: PARAMETROS
 	
 	Parametros de inicialização dos gadgets.
 	
@@ -264,7 +264,7 @@ i3GEO.gadgets = {
 			if(!$i("i3geo_urlkml")){
 				var i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
 				var ins = "<table><tr><td>Kml: "+i;
-				var temp = 'i3GEO.mapa.adicionaKml(true);';
+				var temp = 'i3GEO.interface.googlemaps.adicionaKml(true);';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}

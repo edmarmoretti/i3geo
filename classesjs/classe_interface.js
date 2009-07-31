@@ -46,7 +46,7 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 */
 i3GEO.interface = {
 	/*
-	Variavel: BARRABOTOESTOP
+	Propriedade: BARRABOTOESTOP
 	
 	Distância da barra de botões em ralação ao topo do mapa.
 	
@@ -58,7 +58,7 @@ i3GEO.interface = {
 	*/
 	BARRABOTOESTOP: 12,
 	/*
-	Variavel: BARRABOTOESLEFT
+	Propriedade: BARRABOTOESLEFT
 	
 	Distância da barra de botões em ralação ao lado esquerdo do mapa.
 	
@@ -71,7 +71,7 @@ i3GEO.interface = {
 	BARRABOTOESLEFT: 3,	
 
 	/*
-	Variavel: ATUAL
+	Propriedade: ATUAL
 	
 	Interface atual em uso.
 	
@@ -83,7 +83,7 @@ i3GEO.interface = {
 	*/
 	ATUAL: "padrao",
 	/*
-	Variavel: IDCORPO
+	Propriedade: IDCORPO
 	
 	ID do elemento HTML que receberá o corpo do mapa
 	
@@ -95,12 +95,7 @@ i3GEO.interface = {
 	*/
 	IDCORPO: "corpoMapa",
 	/*
-	ID do elemento HTML criado para conter o mapa
-	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
-	*/
-	IDMAPA: "",
-	/*
-	Variavel: ATIVAMENUCONTEXTO
+	Propriedade: ATIVAMENUCONTEXTO
 
 	Indica se o menu de contexto deve ser ativado
 
@@ -111,6 +106,12 @@ i3GEO.interface = {
 	{true}
 	*/
 	ATIVAMENUCONTEXTO: false,
+	/*
+	Variavel: IDMAPA
+	ID do elemento HTML criado para conter o mapa
+	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
+	*/
+	IDMAPA: "",
 	/*
 	Function: redesenha
 	
@@ -349,7 +350,7 @@ i3GEO.interface = {
 				var so = new SWFObject(i3GEO.configura.locaplic+"/pacotes/flamingo/flamingo/flamingo.swf?config="+retorno.data, "flamingoi", "100%", "100%", "8", "#eaeaea");
 				so.addParam("wmode","transparent"); 
 				so.write("flamingo");
-			}
+			};
 			i3GEO.php.flamingo(monta);
 			i3GEO.eventos.ativa($i("flamingo"));
 			
@@ -524,7 +525,7 @@ i3GEO.interface = {
 	*/
 	googlemaps:{
 		/*
-		Variavel: OPACIDADE
+		Propriedade: OPACIDADE
 		
 		Valor da opacidade da camada i3geo do mapa
 		
@@ -538,7 +539,7 @@ i3GEO.interface = {
 		*/
 		OPACIDADE: 0.8,
 		/*
-		Variavel: TIPOMAPA
+		Propriedade: TIPOMAPA
 		
 		Tipo de mapa que será usado como default, conforme constantes definidas na API do Google Maps.
 		
@@ -770,7 +771,7 @@ i3GEO.interface = {
 			};
 			eval(ngeoxml+" = new GGeoXml(url,zoom)");
 			eval("i3GeoMap.addOverlay("+ngeoxml+")");
-			i3GEO.mapa.adicionaNoArvoreGoogle(ngeoxml,ngeoxml);
+			i3GEO.interface.googlemaps.adicionaNoArvoreGoogle(ngeoxml,ngeoxml);
 		},
 		/*
 		Function: adicionaNoArvoreGoogle
@@ -861,7 +862,7 @@ i3GEO.interface = {
 		iniciaGE: function(object){
   			i3GeoMap = object;
   			i3GeoMap.getWindow().setVisibility(true);
-  			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&"
+  			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
   			//alert(kmlUrl)
   			linki3geo = i3GeoMap.createLink('');
           	linki3geo.setHref(kmlUrl);

@@ -5,7 +5,10 @@ Title: wmswfs.php
 Faz a leitura e o processamento de web services nos padrões OGC.
 Atualmente, processa apenas serviços no padrão WMS.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -25,9 +28,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/wmswfs.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/wmswfs.php
 */
 /*
 Function: gravaCacheWMS
@@ -36,7 +39,7 @@ Lê o getcapabilities de um WMS e salva em disco se o mesmo não tiver sido salvo 
 
 O arquivo é gravado no diretório temporário
 
-Parameters:
+Parametros:
 
 $servico - endereço do WMS
 

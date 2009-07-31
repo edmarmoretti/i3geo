@@ -255,7 +255,7 @@ objaguarde = {
 	fecha: function(){
 		i3GEO.janela.fechaAguarde("i3GEO.atualiza");
 	}
-}
+};
 /*
  iCookie (depreciado)
 

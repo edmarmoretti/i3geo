@@ -308,9 +308,9 @@ i3GEO.selecao = {
 		*/
 		inicia: function(){
 			try{i3GEO.desenho.richdraw.fecha()}catch(e){}
-			i3GEO.util.insereMarca.limpa()
+			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
-			alert("Clique no mapa para desenhar o polígono.")
+			alert("Clique no mapa para desenhar o polígono.");
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";

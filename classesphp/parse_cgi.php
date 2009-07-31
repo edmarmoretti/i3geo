@@ -9,7 +9,7 @@ das variáveis de conexão com banco.
 
 Deve ser utilizado na tag IMG de umarquivo HTML.
 
-Parameters:
+Parametros:
 
 $g_sid - código da seção aberta
 
@@ -21,7 +21,10 @@ $map_imagecolor - cor do fundo do mapa (default é -1 -1 -1)
 
 $map_transparent - a cor do fundo será transparente? (ON OFF, default é ON)
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -40,6 +43,10 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/classesphp/parse_cgi.php
 */
 error_reporting(0);
 include_once("pega_variaveis.php");

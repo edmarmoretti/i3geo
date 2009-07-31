@@ -4,13 +4,21 @@ Title: atlas_controle.php
 
 Controle das requisições em Ajax feitas pela interface Atlas do i3geo
 
+A lista de atlas é definida no sistema de administração do i3Geo ou em um arquivo XML
+
 Recebe as requisições feitas em JavaScript (AJAX) e retorna o resultado para a interface.
 
 As principais variáveis são obtidas da seção, definida na inicialização do I3Geo. Se a variável $map_file não for enviada, o retorno é uma mensagem linkquebrado e o fim do programa.
 
 O parâmetro "funcao" define qual a operação que será executada (veja exemplo abaixo). esse parâmetro é verificado em um bloco "switch ($funcao)".
 
-About: Licença
+Arquivo:
+
+i3geo/classesphp/atlas_controle.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -30,28 +38,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-About: Parâmetros
+Parametros:
 
-funcao - opção que será executada.
+funcao {string} - opção que será executada.
+
+g_sid {string} - id da seção PHP.
 
 Retorno:
 
 cp - o resultado da operação será retornado em um objeto CPAINT.
-
-Exemplo de chamada CPAINT (Ajax) do lado do cliente (javascript):
-
-var p = "classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid
-
-var cp = new cpaint()
-
-cp.set_response_type("JSON")
-
-cp.call(p,"lente",ajaxabrelente)
-
-File: i3geo/classesphp/atlas_controle.php
-
-19/6/2007
-
 */
 error_reporting(0);
 $tempo = microtime(1);
@@ -128,9 +123,13 @@ $xml = simplexml_load_file($atlasxml);
 switch ($funcao)
 {
 /*
-Property: pegaListaDeAtlas
+Opcao: pegaListaDeAtlas
 
 Pega a lista de Atlas definida no arquivo xml menutemas/atlas.xml.
+
+Parametro:
+
+atlasxml {string} - nome do arquivo xml que contém a lista de atlas (veja em i3geo/menutemas). Se não for definido é utilizado a variável definida em ms_configura.php
 */
 	case "pegaListaDeAtlas":
 		include_once("classe_atlas.php");
@@ -139,12 +138,17 @@ Pega a lista de Atlas definida no arquivo xml menutemas/atlas.xml.
 		$cp->set_data($resultado);
 	break;
 /*
-Property: criaAtlas
+Opcao: criaAtlas
 
 Abre um Atlas específico, criando o mapa e chamando a interface desejada.
 
 Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_controle.php?atlasxml=&atlasId=
 
+Parametros:
+
+atlasxml {string} - nome do arquivo xml que contém a lista de atlas (veja em i3geo/menutemas). Se não for definido é utilizado a variável definida em ms_configura.php
+
+atlasId_ {string} - identificador do atlas
 */
 	case "criaAtlas":
 		include_once("classe_atlas.php");
@@ -169,10 +173,15 @@ Esse programa é chamado diretamente, por exemplo, i3geo/classesphp/atlas_control
 		exit;
 	break;
 /*
-Property: pegaListaDePranchas
+Opcao: pegaListaDePranchas
 
 Pega a lista de pranchas de um atlas específico.
 
+Parametros:
+
+atlasxml {string} - nome do arquivo xml que contém a lista de atlas (veja em i3geo/menutemas). Se não for definido é utilizado a variável definida em ms_configura.php
+
+atlasId {string} - identificador do atlas
 */
 	case "pegaListaDePranchas":
 		include_once("classe_atlas.php");
@@ -181,10 +190,17 @@ Pega a lista de pranchas de um atlas específico.
 		$cp->set_data($resultado);
 	break;
 /*
-Property: abrePrancha
+Opcao: abrePrancha
 
 Ativa uma prancha do atlas.
 
+Parametros:
+
+atlasxml {string} - nome do arquivo xml que contém a lista de atlas (veja em i3geo/menutemas). Se não for definido é utilizado a variável definida em ms_configura.php
+
+atlasId {string} - identificador do atlas
+
+pranchaId {string} - identificador da prancha
 */
 	case "abrePrancha":
 		include_once("classe_atlas.php");

@@ -47,7 +47,7 @@ Nessa classe estão disponíveis variáveis internas utilizadas em várias funções, 
 i3GEO = {
 	
 	/*
-	Variavel: parametros
+	Propriedade: parametros
 	
 	Parâmetros obtidos do mapa atual. Os parâmetros são fornecidos pelos programas
 	PHP de redesenho e criação do mapa e atualizados sempre que o mapa é alterado.
@@ -130,7 +130,19 @@ i3GEO = {
 		kmlurl:""
 	},
 	/*
-	Variable: temaAtivo
+	Propriedade: finaliza
+	
+	Armazena o nome de uma função que será executada após a inicialização do mapa
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{""}
+	*/
+	finaliza:"",
+	/*
+	Variavel: temaAtivo
 	
 	Indica o último tema que foi ativado no mapa
 	
@@ -144,18 +156,6 @@ i3GEO = {
 	{""}
 	*/
 	temaAtivo: "",
-	/*
-	Variavel: finaliza
-	
-	Armazena o nome de uma função que será executada após a inicialização do mapa
-	
-	Tipo:
-	{string}
-	
-	Default:
-	{""}
-	*/
-	finaliza:"",
 	/*
 	Function: cria
 	
@@ -464,7 +464,7 @@ i3GEO = {
 				i3GEO.janela.fechaAguarde();
 			}
 			return;
-		}
+		};
 		try{eval(retorno.data.variaveis);}
 		catch(e){erro.call();return;}
 		if(arguments.length == 0 || retorno == "" || retorno.data.variaveis == undefined){erro.call();return;}

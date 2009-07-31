@@ -4,7 +4,10 @@ Title: flamingoogc.php
 
 Gerador automático de web services OGC para a interface flamingo do i3geo
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,14 +27,11 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/flamingoogc.php
+Arquivo:
 
-19/6/2007
+i3geo/flamingoogc.php
 
-Include:
-<ms_configura.php> <classesphp/pega_variaveis.php>
-
-Parameters:
+Parametros:
 
 lista - se for igual a "temas", mostra uma lista dos temas disponíveis
 

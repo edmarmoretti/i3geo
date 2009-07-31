@@ -12,7 +12,9 @@ quando o ms_criamapa.php é executado.
 
 Caso seja necessário carregar alguma extensão adicional, basta incluir no array $extensoes
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -32,13 +34,11 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/carrega_ext.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/carrega_ext.php
 */
 /*
-Variable: extensoes
-
 Array com a lista de extensoes que devem ser carregadas pelo i3geo.
 
 Outras extensoes exigidas pelo i3geo também são verificadas, como mapscript e gd.

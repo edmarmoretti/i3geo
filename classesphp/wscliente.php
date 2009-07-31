@@ -6,7 +6,9 @@ Funções de leitura de web services e montagem da lista de serviços para conexão 
 
 Utilizado também pela aplicação ws_cliente
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,13 +28,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/wscliente.php
+Arquivo:
 
-19/6/2007
-
-Include:
-
-<pega_variaveis.php>, <lews/wms_functions.php>, <classesjs/cpaint/cpaint2.inc.php>
+i3geo/classesphp/wscliente.php
 */
 include_once("pega_variaveis.php");
 include_once("lews/wms_functions.php");

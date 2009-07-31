@@ -41,7 +41,7 @@ i3Geo.maparef.inicia()
 */
 i3GEO.maparef = {
 	/*
-	Variavel: fatorZoomDinamico
+	Propriedade: fatorZoomDinamico
 	
 	Define o fator de zoom inicial do mapa de referência quando o modo dinâmico for ativado
 	
@@ -53,7 +53,7 @@ i3GEO.maparef = {
 	*/
 	fatorZoomDinamico: -3,
 	/*
-	Variavel: SELETORTIPO
+	Propriedade: SELETORTIPO
 	
 	Inclui ou não o seletor de tipo de mapa de referência
 	
@@ -65,7 +65,7 @@ i3GEO.maparef = {
 	*/
 	SELETORTIPO:true,
 	/*
-	Variavel: PERMITEFECHAR
+	Propriedade: PERMITEFECHAR
 	
 	Mostra o botão para fechar a janela ou não.
 	
@@ -77,7 +77,7 @@ i3GEO.maparef = {
 	*/
 	PERMITEFECHAR: true,
 	/*
-	Variavel: PERMITEDESLOCAR
+	Propriedade: PERMITEDESLOCAR
 	
 	Permite deslocar janela ou não.
 	
@@ -86,7 +86,7 @@ i3GEO.maparef = {
 	*/
 	PERMITEDESLOCAR: true,
 	/*
-	Variavel: TRANSICAOSUAVE
+	Propriedade: TRANSICAOSUAVE
 	
 	Altera a transparência quando o mouse sobrepõe ao mapa de referência e quando sai
 	
@@ -100,7 +100,7 @@ i3GEO.maparef = {
 	*/
 	TRANSICAOSUAVE: false,
 	/*
-	Variavel: OPACIDADE
+	Propriedade: OPACIDADE
 	
 	Valor da transparência mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	
@@ -114,7 +114,7 @@ i3GEO.maparef = {
 	*/
 	OPACIDADE: 35,
 	/*
-	Variavel: TOP
+	Propriedade: TOP
 	
 	Posição da janela em relação ao topo do mapa
 	
@@ -126,7 +126,7 @@ i3GEO.maparef = {
 	*/
 	TOP: 4,
 	/*
-	Variavel: RIGHT
+	Propriedade: RIGHT
 	
 	Posição da janela em relação ao lado direito do mapa
 	
@@ -329,7 +329,7 @@ i3GEO.maparef = {
 					var x = i3GEO.calculo.tela2dd(telamaxx,telamaxy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
 					var ext = m[0]+" "+m[1]+" "+x[0]+" "+x[1];
 					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",ext);
-				}
+				};
 				var box = $i("boxref");
 			}
 			i3GEO.calculo.ext2rect("boxref",extentref,i3GEO.parametros.mapexten,g_celularef,$i("mapaReferencia"));

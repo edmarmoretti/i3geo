@@ -66,7 +66,7 @@ Exemplos:
 */
 i3GEO.eventos = {
 	/*
-	Variavel: NAVEGAMAPA
+	Propriedade: NAVEGAMAPA
 	
 	Armazena as funções que serão executadas quando é feita uma operação de navegação sobre o mapa.
 	
@@ -80,7 +80,7 @@ i3GEO.eventos = {
 		"atualizaEscalaNumerica()"
 	),
 	/*
-	Variavel: MOUSEPARADO
+	Propriedade: MOUSEPARADO
 
 	Armazena as funções que serão executadas quando o usuário estaciona o mouse sobre o mapa 
 	por alguns instantes.
@@ -95,7 +95,7 @@ i3GEO.eventos = {
 		"i3GEO.navega.mostraRosaDosVentos()"
 	),
 	/*
-	Variavel: MOUSEMOVE
+	Propriedade: MOUSEMOVE
 
 	Armazena as funções que serão executadas quando o usuário move o mouse sobre o mapa 
 	
@@ -107,7 +107,7 @@ i3GEO.eventos = {
 	*/
 	MOUSEMOVE: new Array(),
 	/*
-	Variavel: MOUSEDOWN
+	Propriedade: MOUSEDOWN
 
 	Armazena as funções que serão executadas quando o usuário pressiona o botão do mouse sobre o mapa 
 	
@@ -119,7 +119,7 @@ i3GEO.eventos = {
 	*/
 	MOUSEDOWN: new Array(),
 	/*
-	Variavel: MOUSEUP
+	Propriedade: MOUSEUP
 
 	Armazena as funções que serão executadas quando o usuário solta o botão do mouse sobre o mapa 
 	
@@ -131,7 +131,7 @@ i3GEO.eventos = {
 	*/
 	MOUSEUP: new Array(),
 	/*
-	Variavel: MOUSECLIQUE
+	Propriedade: MOUSECLIQUE
 
 	Armazena as funções que serão executadas quando o usuário clica sobre o mapa 
 	
@@ -145,6 +145,8 @@ i3GEO.eventos = {
 		"i3GEO.eventos.cliqueCapturaPt()"	
 	),
 	/*
+	Variavel: TIMERPARADO
+	
 	Timer utilizado pelo contador do mouse parado
 	
 	Tipo:

@@ -5,7 +5,9 @@ Title: classe_alteraclasse.php
 Manipulação de classes e estilos de um layer
 
 
-About: Licença
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -25,12 +27,12 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_alteraclasse.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_alteraclasse.php
 */
 /*
-Class: Alteraclasse
+Classe: Alteraclasse
 
 Operações que alteram as classes da legenda de um tema existente no mapa.
 As modificações permitem contruir novas legendas para cada tema.
@@ -38,25 +40,25 @@ As modificações permitem contruir novas legendas para cada tema.
 class Alteraclasse
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/
@@ -66,7 +68,7 @@ Function: __construct
 
 Cria um objeto Alteraclasse 
 
-parameters:
+Parametros:
 
 $map_file - Endereço do mapfile no servidor.
 
@@ -128,7 +130,7 @@ function: alteraclasses
 
 Altera as classes existentes em um objeto layer conforme a lista de índices, nomes e expressões definidas nos parâmetros passados como argumentos.
 
-parameters:
+Parametros:
 
 $ids - lista de ids, separados por vírgula, que identificam as classes no layer
 
@@ -188,7 +190,7 @@ function: intervalosiguais
 
 Cria classes em um objeto layer com intervalos iguais baseando-se em um item numérico na tabela de atributos com um número de classes fixos.
 
-parameters:
+Parametros:
 
 $item - item da tabela de atributos
 
@@ -248,7 +250,7 @@ function: quartis
 
 Cria classes em um objeto layer com intervalos em quartis baseando-se em um item numérico na tabela de atributos com um número de classes fixos.
 
-parameters:
+Parametros:
 
 $item - Item da tabela de atributos utilizado para gerar as classes.
 
@@ -310,7 +312,7 @@ Cria classes em um objeto layer baseando-se em um item na tabela de atributos.
 
 Para cada ocorrência de um valor é acrescentada uma classe.
 
-parameters:
+Parametros:
 
 $item - Item da tabela de atributos utilizado para gerar as classes.
 
@@ -388,7 +390,7 @@ function: alteraCoresClasses
 
 Altera as cores das classes existentes em um objeto layer gerando uma paleta de cores de acordo com um valor inicial e final.
 
-parameters:
+Parametros:
 $cori - cor inicial.
 
 $corf - cor final.
@@ -480,7 +482,7 @@ function: inverteStatusClasse
 
 Inverte o status a uma classe desligando ou desligando, conforme o status atual.
 
-Parameters:
+Parametros:
 
 $classe - id da classe
 

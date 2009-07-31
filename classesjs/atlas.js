@@ -32,12 +32,16 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
+Variavel: listaAtlas
+
 Objeto com as informações básicas sobre os Atlas existentes.
 
 Essa lista é obtida lendo-se o arquivo xml definido em atlasxml ou no siostema de administração
 */
 listaAtlas = "";
 /*
+Variavel: atlasxml
+
 Endereço do arquivo xml com a lista de atlas.
 */
 atlasxml = "";

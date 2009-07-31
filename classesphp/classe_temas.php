@@ -6,7 +6,10 @@ Manipulação de temas.
 
 Adiciona, remove, muda ordem, etc.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,53 +29,53 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_temas.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_temas.php
 */
 /*
-Class: Temas
+Classe: Temas
 */
 class Temas
 {
 	/*
-	Variable: $mapa
+	Variavel: $mapa
 	
 	Objeto mapa
 	*/
 	protected $mapa;
 	/*
-	Variable: $arquivo
+	Variavel: $arquivo
 	
 	Arquivo map file
 	*/
 	protected $arquivo;
 	/*
-	Variable: $layer
+	Variavel: $layer
 	
 	Objeto layer
 	*/
 	protected $layer;
 	/*
-	Variable: $nome
+	Variavel: $nome
 	
 	Nome do layer
 	*/
 	protected $nome;
 	/*
-	Variable: $grupo
+	Variavel: $grupo
 	
 	Array com os temas do grupo, se houver
 	*/
 	protected $grupo;
 	/*
-	Variable: $visiveis
+	Variavel: $visiveis
 	
 	Temas do grupo que são visíveis em função da escala
 	*/
 	protected $visiveis;
 	/*
-	Variable: $indices
+	Variavel: $indices
 	
 	Indices dos layers do grupo
 	*/
@@ -300,7 +303,7 @@ function: reordenatemas
 
 Reordena os temas baseados em uma lista com a nova ordem.
 
-Parameters:
+Parametros:
 
 lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas separados por vírgula.
 */

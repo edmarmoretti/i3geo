@@ -50,7 +50,7 @@ Exemplos:
 */
 i3GEO.ajuda = {
 	/*
-	Variavel: ATIVAJANELA
+	Propriedade: ATIVAJANELA
 	
 	Define se a janela de mensagens pode ou não ser aberta.
 	
@@ -63,7 +63,7 @@ i3GEO.ajuda = {
 	*/
 	ATIVAJANELA: true,
 	/*
-	Variavel: DIVAJUDA
+	Propriedade: DIVAJUDA
 	
 	Nome do elemento HTML, do tipo DIV, que irá conter os textos de ajuda.
 	
@@ -78,7 +78,7 @@ i3GEO.ajuda = {
 	*/
 	DIVAJUDA: "i3geo_ajuda",
 	/*
-	Variavel: DIVLETREIRO
+	Propriedade: DIVLETREIRO
 	
 	Id do elemento HTML onde será incluído o banner (letreiro) de mensagens.
 	
@@ -93,7 +93,7 @@ i3GEO.ajuda = {
 	*/
 	DIVLETREIRO: "i3geo_letreiro",
 	/*
-	Variavel: MENSAGEMPADRAO
+	Propriedade: MENSAGEMPADRAO
 	
 	Mensagem que será incluída ao iniciar a janela de mensagens ou quando não houver
 	mensagem definida para o elemento sobre o qual o mouse estaciona.
@@ -106,7 +106,7 @@ i3GEO.ajuda = {
 	*/
 	MENSAGEMPADRAO: "",	
 	/*
-	Variavel: TRANSICAOSUAVE
+	Propriedade: TRANSICAOSUAVE
 	
 	Altera a transparência quando o mouse sobrepõe à janela e quando sai
 	
@@ -118,7 +118,7 @@ i3GEO.ajuda = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Variavel: OPACIDADE
+	Propriedade: OPACIDADE
 	
 	Valor da opacidade mínima utilizada quando TRANSICAOSUAVE for igual a true.
 	

@@ -45,7 +45,7 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
-	Variavel: EXPANDIDA
+	Propriedade: EXPANDIDA
 	
 	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore.
 	
@@ -57,7 +57,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	EXPANDIDA: false,
 	/*
-	Variavel: LEGENDAEXPANDIDA
+	Propriedade: LEGENDAEXPANDIDA
 	
 	Indica se a legenda da árvore será montada de forma expandida ou não.
 	
@@ -69,7 +69,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	LEGENDAEXPANDIDA: false,
 	/*
-	Variavel: OPCOESICONES
+	Propriedade: OPCOESICONES
 	
 	Inclui ou não os ícones de opções em cada tema (farol, zoom para o tema, etc)
 	
@@ -81,7 +81,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	OPCOESICONES: true,
 	/*
-	Variavel: OPCOESTEMAS
+	Propriedade: OPCOESTEMAS
 	
 	Inclui ou não o nó com as opções de manipulação de cada tema.
 	
@@ -93,7 +93,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	OPCOESTEMAS: true,
 	/*
-	Variavel: OPCOESLEGENDA
+	Propriedade: OPCOESLEGENDA
 	
 	Inclui ou não o nó para mostrar a legenda do tema.
 	
@@ -105,7 +105,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	OPCOESLEGENDA: true,
 	/*
-	Variavel: AGUARDALEGENDA
+	Propriedade: AGUARDALEGENDA
 	
 	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema.
 	
@@ -117,6 +117,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	AGUARDALEGENDA: true,
 	/*
+	Variavel: CAMADAS
+	
 	Objeto com a lista de camadas existentes no mapa. É definido na inicialização ou no redesenho do mapa.
 	
 	Este objeto é construído nas operações em PHP de inicialização ou redesenho do mapa.
@@ -161,6 +163,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	CAMADAS: "",
 	/*
+	Variavel: ARVORE
+	
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
 	Tipo:
@@ -168,6 +172,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	ARVORE: null,
 	/*
+	Variavel: IDHTML
+	
 	Armazena o ID do elemento DOM onde a árvore foi inserida.
 	
 	Tipo:
@@ -175,6 +181,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	IDHTML: null,
 	/*
+	Variavel: SID
+	
 	Código da seção aberta no servidor pelo i3Geo
 
 	Tipo:
@@ -182,6 +190,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	SID: null,
 	/*
+	Variavel: LOCAPLIC
+	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 	
 	Exemplo: 'http://localhost/i3geo'
@@ -191,6 +201,8 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	LOCAPLIC: null,
 	/*
+	Variavel: ATIVATEMA
+	
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
 	
 	Tipo:

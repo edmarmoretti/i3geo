@@ -31,7 +31,7 @@ if(typeof(i3GEO) == 'undefined'){
 	i3GEO = new Array();
 }
 /*
-Variavel: cpJSON
+Propriedade: cpJSON
 
 Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX assíncronas com retorno no formato JSON
 
@@ -963,7 +963,7 @@ i3GEO.php = {
 	<buscaRapida>	
 	*/
 	buscaRapida: function(funcao,locaplic,servico,palavra){
-		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico
+		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico;
 		cpJSON.call(p,"buscaRapida",funcao);	
 	}
 };

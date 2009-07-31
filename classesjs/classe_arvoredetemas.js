@@ -37,7 +37,7 @@ Monta a árvore com os temas disponíveis para ser adicionados ao mapa.
 */
 i3GEO.arvoreDeTemas = {
 	/*
-	Variavel: OPCOESADICIONAIS
+	Propriedade: OPCOESADICIONAIS
 	
 	Objeto com a definição das propriedades que serão utilizadas na inclusão dos ícones adicionais de adição de temas e no item de descrição de cada tema.
 
@@ -100,7 +100,7 @@ i3GEO.arvoreDeTemas = {
 		refresh: true
 	},
 	/*
-	Variavel: FATORESTRELA
+	Propriedade: FATORESTRELA
 	
 	Valor que será utilizado para dividir o valor bruto do número de acessos de cada tema.
 	
@@ -111,7 +111,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	FATORESTRELA: "1",
 	/*
-	Variavel: INCLUISISTEMAS
+	Propriedade: INCLUISISTEMAS
 	
 	Inclui na árvore a lista de sistemas adicionais definidos no i3geo?
 	
@@ -120,7 +120,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUISISTEMAS: true,
 	/*
-	Variavel: INCLUIWMS
+	Propriedade: INCLUIWMS
 	
 	Inclui na árvore a lista de Web Services WMS?
 	
@@ -129,7 +129,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	INCLUIWMS: true,
 	/*
-	Variavel: FILTRADOWNLOAD
+	Propriedade: FILTRADOWNLOAD
 	
 	Não mostra na árvore os nós que não possuem temas para download
 	
@@ -138,7 +138,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	FILTRADOWNLOAD: false,
 	/*
-	Variavel: FILTRAOGC
+	Propriedade: FILTRAOGC
 	
 	Não mostra na árvore os nós que não permitem a geração de WMS
 	
@@ -148,7 +148,7 @@ i3GEO.arvoreDeTemas = {
 	FILTRAOGC: false,
 
 	/*
-	Variavel: ATIVATEMA
+	Propriedade: ATIVATEMA
 	
 	Nome da função que será incluída no evento onclick do elemento checkbox adicionado no início do nome de um tema.
 	
@@ -157,7 +157,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ATIVATEMA: "",
 	/*
-	Variavel: IDSMENUS
+	Propriedade: IDSMENUS
 	
 	Array com a lista de ids que serão considerados na montagem da árvore. Por default é vazio, o que significa que todos os menus serão considerados.
 	
@@ -166,7 +166,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDSMENUS: new Array(),
 	/*
-	Variavel: RETORNAGUIA
+	Propriedade: RETORNAGUIA
 	
 	Guia que será ativada após uma operação de adição de temas ter sido concluída.
 	
@@ -181,6 +181,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	RETORNAGUIA: "",
 	/*
+	Variavel: IDHTML
+	
 	Armazena o ID do elemento HTML onde a árvore será incluida
 
 	Tipo:
@@ -188,6 +190,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	IDHTML: null,
 	/*
+	Variavel: LOCAPLIC
+	
 	Endereço da aplicação i3geo. Utilizado para definir o caminho para a chamada em AJAX.
 
 	Tipo:
@@ -195,6 +199,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	LOCAPLIC: null,
 	/*
+	Variavel: SID
+	
 	Código da seção aberta no servidor pelo i3Geo
 
 	Tipo:
@@ -202,6 +208,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	SID: null,
 	/*
+	Variavel: ARVORE
+	
 	Objeto com a árvore criada com YAHOO.widget.TreeView
 
 	Tipo:
@@ -209,6 +217,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ARVORE: null,
 	/*
+	Variavel: DRIVES
+	
 	Objeto JSON com a lista de drives no servidor que podem ser abertos na opção de navegação pelos diretórios
 	
 	Tipo:
@@ -216,6 +226,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	DRIVES: null,
 	/*
+	Variavel: SISTEMAS
+	
 	Objeto JSON com a lista de sistemas existentes
 	
 	Tipo:
@@ -223,6 +235,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	SISTEMAS: null,
 	/*
+	Variavel: MENUS
+	
 	Armazena o objeto JSON com a lista de menus resultante da função listaMenus
 	
 	Tipo:
@@ -230,6 +244,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	MENUS: null,
 	/*
+	Variavel: GRUPOS
+	
 	Armazena o objeto JSON com a última lista de grupos obtida
 
 	Tipo:
@@ -237,6 +253,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	GRUPOS: null,
 	/*
+	Variavel: SUBGRUPOS
+	
 	Armazena o objeto JSON com a última lista de sub-grupos obtida
 
 	Tipo:
@@ -244,6 +262,8 @@ i3GEO.arvoreDeTemas = {
 	*/
 	SUBGRUPOS: null,
 	/*
+	Variavel: TEMAS
+	
 	Armazena o objeto JSON com a última lista de temas obtida
 
 	Tipo:
@@ -331,7 +351,7 @@ i3GEO.arvoreDeTemas = {
 		var temp = function(){
 			i3GEO.janela.fechaAguarde("ajaxredesenha");
 			i3GEO.atualiza();
-		}
+		};
 		var adiciona = 	"javascript:i3GEO.janela.abreAguarde(\"ajaxredesenha\",\""+$trad("o1")+"\");this.checked=false;i3GEO.php.adicionaTemaWMS("+temp+",";
 		adiciona += "\""+servico+"\",";
 		adiciona += "\""+layer+"\",";

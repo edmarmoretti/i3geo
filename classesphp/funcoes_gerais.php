@@ -4,7 +4,10 @@ Title: funcoes_gerais.php
 
 Contém um conjunto de funções que são compartilhadas por outros programas do I3Geo.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,9 +27,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/funcoes_gerais.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/funcoes_gerais.php
 */
 /*
 Section: Imagens
@@ -38,7 +41,7 @@ Gera parâmetros para classificação de imagens.
 
 Gera a expressão e as cores para uso em classes com intervalos iguais para representação de imagens raster.
 
-Parameters:
+Parametros:
 
 minvalor - Menor valor existente na série
 
@@ -525,7 +528,7 @@ Function: listaArquivos
 
 Retorna lista de arquivos.
 
-Parameters:
+Parametros:
 
 $diretorio - Raiz onde será feita a busca.
 
@@ -626,7 +629,7 @@ function: substituiCon
 
 Substituí a string de conexão com o banco postgis pela string definida na inicialização (ms_configura.php)
 
-Parameters:
+Parametros:
 
 map_file - arquivo mapfile
 
@@ -675,7 +678,7 @@ function: restauraCon
 
 Esconde a string de conexão com o banco, caso necessário
 
-Parameters:
+Parametros:
 
 map_file - arquivo mapfile
 
@@ -960,7 +963,7 @@ function: gravaImagemMapa
 
 Grava a imagem do mapa atual
 
-Parameters:
+Parametros:
 
 $mapa - objeto mapa ou arquivo mapfile
 
@@ -1370,7 +1373,7 @@ function: geo2zonaUTM
 
 Calcula a zona utm de um par de coordenadas geográficas
 
-Parameters:
+Parametros:
 
 $x - longitude
 
@@ -1780,7 +1783,7 @@ Calcula a área em m2 de um pixel do mapa
 
 O cálculo é feito projetando-se o mapa atual para a projeção policônica
 
-Parameters:
+Parametros:
 
 map_file - arquivo do mapa
 
@@ -1886,7 +1889,7 @@ Gera as classes do layer com base em valores definidos na tabela de atributos.
 
 Os parâmetros para montagem das classes são definidos em metadados do layer.
 
-Parameters:
+Parametros:
 
 nlayer - objeto layer que será processado
 
@@ -2012,7 +2015,7 @@ Function: removeAcentos
 
 Remove os acentos de uma string
 
-Parameters:
+Parametros:
 
 var - string
 

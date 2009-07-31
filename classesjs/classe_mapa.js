@@ -40,6 +40,7 @@ como cor de fundo, tipo de imagem, legenda etc.
 */
 i3GEO.mapa = {
 	/*
+	Variavel: GEOXML
 	Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 	
 	Tipo:
@@ -269,6 +270,8 @@ i3GEO.mapa = {
 	*/
 	recupera:{
 		/*
+		Variavel: TENTATIVA
+		
 		Armazena a quantidade de tentativas de recuperação que foram feitas
 		
 		Tipo:
@@ -306,11 +309,7 @@ i3GEO.mapa = {
 	*/
 	legendaHTML:{
 		/*
-		Armazena o id definido na criação da legenda
-		*/
-		ID: "",
-		/*
-		Variavel: incluiBotaoLibera
+		Propriedade: incluiBotaoLibera
 		
 		Define se na legenda será incluido o botão para liberar a legenda e incluí-la em uma janela flutuante
 		
@@ -321,6 +320,12 @@ i3GEO.mapa = {
 		{true}
 		*/
 		incluiBotaoLibera: true,
+		/*
+		Variavel:  ID
+		
+		Armazena o id definido na criação da legenda
+		*/
+		ID: "",
 		/*
 		Function: cria
 		
@@ -357,7 +362,7 @@ i3GEO.mapa = {
 						var ins = "";
 						if(i3GEO.mapa.legendaHTML.incluiBotaoLibera == true)
 						{ins += "<img onclick='i3GEO.mapa.legendaHTML.libera()' id=soltaLeg src="+s+" title='clique para liberar'/><br>";}
-						ins += "<div id='corpoLegi' >"+ retorno.data.legenda + "</div>"
+						ins += "<div id='corpoLegi' >"+ retorno.data.legenda + "</div>";
 						$i(i3GEO.mapa.legendaHTML.ID).innerHTML = ins;
 					}
 				}
@@ -382,7 +387,7 @@ i3GEO.mapa = {
 		funcao {function} - função que receberá o resultado da chamada AJAX. O objeto CPAINT é enviado como parâmetro.
 		*/
 		obtem: function(funcao){
-			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda)
+			i3GEO.php.criaLegendaHTML(funcao,"",i3GEO.configura.templateLegenda);
 		},
 		/*
 		Function: ativaDesativaTema
@@ -431,7 +436,7 @@ i3GEO.mapa = {
 					temp[i].style.display = "none";
 				}
 				YAHOO.moveLegi.xp.panel.show();				
-			}
+			};
 			i3GEO.mapa.legendaHTML.obtem(temp);
 		}
 	},
@@ -745,7 +750,7 @@ i3GEO.mapa = {
 				}
 			};
 			i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
-		};
+		}
 	}
 };
 //YAHOO.log("carregou classe mapa", "Classes i3geo");

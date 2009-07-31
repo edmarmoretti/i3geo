@@ -55,7 +55,7 @@ alert($trad("d22"))
 */
 i3GEO.idioma = {
 	/*
-	Variavel: MOSTRASELETOR
+	Propriedade: MOSTRASELETOR
 	
 	Define se o i3Geo irá incluir no mapa as bandeiras de seleção de idiomas
 	
@@ -67,7 +67,7 @@ i3GEO.idioma = {
 	*/
 	MOSTRASELETOR: true,
 	/*
-	Variavel: IDSELETOR
+	Propriedade: IDSELETOR
 	
 	Define o id do elemento HTML que receberá o seletor. Se não for definido, o seletor será
 	posicionado automaticamente pelo i3Geo
@@ -80,7 +80,7 @@ i3GEO.idioma = {
 	*/
 	IDSELETOR: "",
 	/*
-	Variavel: SELETORES
+	Propriedade: SELETORES
 	
 	Lista os seletores (bandeiras) que serão incluídas no seletor
 	
@@ -92,7 +92,7 @@ i3GEO.idioma = {
 	*/
 	SELETORES: new Array("pt","en","es","it"),
 	/*
-	Variavel: DICIONARIO
+	Propriedade: DICIONARIO
 	
 	Objeto contendo o dicionário utilizado
 	
@@ -289,7 +289,7 @@ i3GEO.idioma = {
 		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
 		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO))
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
 			if(!$i("i3geoseletoridiomas")){
 				var novoel = document.createElement("div");
 				novoel.innerHTML = ins;

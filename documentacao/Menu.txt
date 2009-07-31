@@ -17,6 +17,11 @@ Timestamp: Gerado em day month, year
 #   yyyy  - Four digit year.  2006 is "2006"
 #   year  - Four digit year.  2006 is "2006"
 
+# These are indexes you deleted, so Natural Docs will not add them again
+# unless you remove them from this line.
+
+Don't Index: Properties
+
 
 # --------------------------------------------------------------------------
 # 
@@ -189,10 +194,7 @@ Group: Index  {
 
    Index: Everything
    Function Index: Functions
-   Property Index: Properties
    Arquivo Index: Arquivos
    Classe Index: Classe
-   Parametro Index: Parametros
-   Variavel Index: Variaveis
    }  # Group: Index
 

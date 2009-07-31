@@ -6,7 +6,10 @@ Verifica se o layer e multilayer
 
 Analisa um mapfile e retorna a situação de agrupamento das camadas.
 
-About: Licença
+Licenca:
+
+GPL2
+
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,47 +29,47 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/classesphp/classe_vermultilayer.php
+Arquivo:
 
-19/6/2007
+i3geo/classesphp/classe_vermultilayer.php
 */
 /*
-Class: vermultilayer
+Classe: vermultilayer
 */
 class vermultilayer
 {
 	/*
-	Variable: $resultado
+	Variavel: $resultado
 	
 	Indica se é multi-layer ou não (0 ou 1)
 	*/
 	var $resultado;
 	/*
-	Variable: $temas
+	Variavel: $temas
 	
 	Lista de códigos dos temas
 	*/
 	var $temas; //lista de nomes de temas se for um grupo
 	/*
-	Variable: $layers
+	Variavel: $layers
 	
 	Lista de objetos layers
 	*/
 	var $layers; //lista de objetos temas se for um grupo
 	/*
-	Variable: $nomes
+	Variavel: $nomes
 	
 	Lista de nomes dos temas
 	*/
 	var $nomes; //lista de nomes se for um grupo
 	/*
-	Variable: $nomesvisiveis
+	Variavel: $nomesvisiveis
 	
 	Lista dos nomes dos temas visíveis
 	*/
 	var $nomesvisiveis; //nomes dos temas visíveis na escala
 	/*
-	Variable: $temasvisiveis
+	Variavel: $temasvisiveis
 	
 	Lista com os códigos dos temas visíveis
 	*/

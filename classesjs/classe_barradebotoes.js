@@ -39,11 +39,7 @@ Veja também classe_interface.js (i3GEO.interface) que possuí parâmetros que perm
 */
 i3GEO.barraDeBotoes = {
 	/*
-	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
-	*/
-	BARRAS: new Array(),
-	/*
-	Variavel: AUTOALTURA
+	Propriedade: AUTOALTURA
 	
 	Ajusta automaticamente a altura das barras conforme a altura do mapa.
 	
@@ -54,7 +50,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	AUTOALTURA: false,
 	/*
-	Variavel: TRANSICAOSUAVE
+	Propriedade: TRANSICAOSUAVE
 	
 	Altera a transparência das barras quando o mouse sobrepõe a barra e quando sai da barra
 	
@@ -66,7 +62,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	TRANSICAOSUAVE: true,
 	/*
-	Variavel: OPACIDADE
+	Propriedade: OPACIDADE
 	
 	Valor da opacidade miníma utilizada quando TRANSICAOSUAVE for igual a true.
 	
@@ -80,7 +76,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	OPACIDADE: 65,
 	/*
-	Variavel: PERMITEFECHAR
+	Propriedade: PERMITEFECHAR
 	
 	Mostra o botão para fechar as barras ou não.
 	
@@ -89,7 +85,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	PERMITEFECHAR: true,
 	/*
-	Variavel: PERMITEDESLOCAR
+	Propriedade: PERMITEDESLOCAR
 	
 	Permite deslocar as barras ou não.
 	
@@ -98,7 +94,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	PERMITEDESLOCAR: true,
 	/*
-	Variavel: ATIVAMENUCONTEXTO
+	Propriedade: ATIVAMENUCONTEXTO
 	
 	Indica se o menu de contexto deve ser ativado
 	
@@ -110,7 +106,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	ATIVAMENUCONTEXTO: false,
 	/*
-	Variavel: LISTABOTOES
+	Propriedade: LISTABOTOES
 	
 	Objeto com a lista de botões.
 	
@@ -121,7 +117,7 @@ i3GEO.barraDeBotoes = {
 	*/
 	LISTABOTOES: i3GEO.configura.funcoesBotoes.botoes,
 	/*
-	Variavel: BOTAOPADRAO
+	Propriedade: BOTAOPADRAO
 	
 	Botão que será ativado ao inicializar os botões com ativaBotoes.
 	
@@ -132,6 +128,15 @@ i3GEO.barraDeBotoes = {
 	*/
 	BOTAOPADRAO: "pan",
 	/*
+	Variavel: BARRAS
+	
+	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
+	*/
+	BARRAS: new Array(),
+
+	/*
+	Variavel: BOTAOCLICADO
+	
 	Último icone que foi clicado
 	
 	Tipo:
@@ -339,7 +344,7 @@ i3GEO.barraDeBotoes = {
 				else
 				{novoel.style.opacity= i3GEO.barraDeBotoes.OPACIDADE / 100;}
 			}		
-		}
+		};
 		document.body.appendChild(novoel);
 		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO)
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);
@@ -392,7 +397,7 @@ i3GEO.barraDeBotoes = {
 			verticalSlider.setValue(35,true);
 			if ($i("vertBGDiv")){
 				$i("vertBGDiv").onmouseup = function(){
-					i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,i3geo_ns)
+					i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,i3geo_ns);
 					g_fatordezoom = 0;
 					verticalSlider.setValue(35,true);
 				};

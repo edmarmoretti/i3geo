@@ -50,7 +50,7 @@ alert(i3GEO.configura.locaplic)
 */
 i3GEO.configura = {
 	/*
-	Variavel: oMenuData
+	Propriedade: oMenuData
 
 	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso
 
@@ -137,7 +137,7 @@ i3GEO.configura = {
 		}
 	},
 	/*
-	Variavel: tipoimagem
+	Propriedade: tipoimagem
 
 	Indica o tipo de filtro de imagem que está ativo.
 	O filtro ativo é aplicado sobre a imagem toda a vez que o mapa é refeito.
@@ -152,7 +152,7 @@ i3GEO.configura = {
 	*/
 	tipoimagem: "nenhum",
 	/*
-	Variavel: tipotip
+	Propriedade: tipotip
 	
 	Tipo de tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
 	
@@ -168,7 +168,7 @@ i3GEO.configura = {
 	*/
 	tipotip: "balao",
 	/*
-	Variavel: funcaoTip
+	Propriedade: funcaoTip
 	
 	Função que será executada na operação de identificação quando o usuário estaciona o mouse sobre o mapa
 	
@@ -176,11 +176,11 @@ i3GEO.configura = {
 	{String}
 	
 	Default:
-	{"verificaTipDefault()"}
+	{"i3GEO.mapa.dialogo.verificaTipDefault()"}
 	*/
-	funcaoTip: "verificaTipDefault()",
+	funcaoTip: "i3GEO.mapa.dialogo.verificaTipDefault()",
 	/*
-	Variavel: funcaoIdentifica
+	Propriedade: funcaoIdentifica
 	
 	Função que será executada na operação de identificação quando o usuário clica no mapa
 	
@@ -188,11 +188,11 @@ i3GEO.configura = {
 	{String}
 	
 	Default:
-	{"i3GEO.mapa.cliqueIdentificaDefault()"}
+	{"i3GEO.mapa.dialogo.cliqueIdentificaDefault()"}
 	*/
-	funcaoIdentifica: "i3GEO.mapa.cliqueIdentificaDefault()",
+	funcaoIdentifica: "i3GEO.mapa.dialogo.cliqueIdentificaDefault()",
 	/*
-	Variavel: diminuixM
+	Propriedade: diminuixM
 
 	Diminui a largura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
@@ -205,7 +205,7 @@ i3GEO.configura = {
 	*/
 	diminuixM: 13,
 	/*
-	Variavel: diminuixN
+	Propriedade: diminuixN
 
 	Diminui a largura do mapa em pixels no caso do navegador ser o FF.
 	Valores definidos em pixel.
@@ -218,7 +218,7 @@ i3GEO.configura = {
 	*/
 	diminuixN: 11,
 	/*
-	Variavel: diminuiyM
+	Propriedade: diminuiyM
 
 	Diminui a altura do mapa em pixels no caso do navegador ser o IE.
 	Valores definidos em pixel.
@@ -231,7 +231,7 @@ i3GEO.configura = {
 	*/
 	diminuiyM: 106,
 	/*
-	Variavel: diminuiyN
+	Propriedade: diminuiyN
 
 	Diminui a altura do mapa em pixels no caso do navegador ser o FF.
 	Valores definidos em pixel.
@@ -244,7 +244,7 @@ i3GEO.configura = {
 	*/
 	diminuiyN: 103,
 	/*
-	Variavel: map3d
+	Propriedade: map3d
 
 	Variável que define o nome do map_file que possuí o layer para uso na função 3d.
 	Pode ser utilizado o caminho completo, se não, busca no diretório aplicmap.
@@ -262,7 +262,7 @@ i3GEO.configura = {
 	*/
 	map3d: "",
 	/*
-	Variavel: embedLegenda
+	Propriedade: embedLegenda
 
 	Indica se a legenda deve ser incluida no corpo do mapa.
 
@@ -277,7 +277,7 @@ i3GEO.configura = {
 	*/
 	embedLegenda: "nao",
 	/*
-	Variavel: templateLegenda
+	Propriedade: templateLegenda
 
 	Template HTML que será utilizado na geração da legenda HTML.
 
@@ -294,7 +294,7 @@ i3GEO.configura = {
 	*/
 	templateLegenda: "",
 	/*
-	Variavel: mashuppar
+	Propriedade: mashuppar
 	
 	Define os parâmetros que devem ser aplicados no modo mashup
 	
@@ -314,7 +314,7 @@ i3GEO.configura = {
 	*/
 	mashuppar: "",
 	/*
-	Variavel: sid
+	Propriedade: sid
 	
 	Código da seção aberta pelo i3Geo no servidor.
 	
@@ -325,7 +325,7 @@ i3GEO.configura = {
 	*/
 	sid: "",
 	/*
-	Variavel: locaplic
+	Propriedade: locaplic
 	
 	Localização da instalação do i3geo (URI)
 	
@@ -336,7 +336,7 @@ i3GEO.configura = {
 	*/
 	locaplic: "",
 	/*
-	Variavel: mapaRefDisplay
+	Propriedade: mapaRefDisplay
 	
 	Indica se o mapa de referência deverá ser aberto quando o i3Geo for inicializado.
 	
@@ -351,7 +351,7 @@ i3GEO.configura = {
 	*/
 	mapaRefDisplay: "block",
 	/*
-	Variavel: visual
+	Propriedade: visual
 	
 	Tipo de visual que será utilizado no mapa.
 	
@@ -367,7 +367,7 @@ i3GEO.configura = {
 	*/
 	visual: "default",
 	/*
-	Variavel: cursores
+	Propriedade: cursores
 	
 	Imagens utilizadas para os cursores do mouse mostrados no mapa
 	
@@ -399,7 +399,7 @@ i3GEO.configura = {
 		{ff:"/imagens/cursores/zoom_contexto.png",ie:"/imagens/cursores/zoom_contexto.cur"}
 	},
 	/*
-	Variavel: listaDePropriedadesDoMapa
+	Propriedade: listaDePropriedadesDoMapa
 	
 	Lista com as funções que são incluídas no item "Propriedades do mapa"	
 
@@ -422,7 +422,7 @@ i3GEO.configura = {
 		]
 	},
 	/*
-	Variavel: tempoAplicar
+	Propriedade: tempoAplicar
 	
 	Tempo em milisegundos que será esperado até que o mapa seja desenhado automaticamente.
 	
@@ -436,7 +436,7 @@ i3GEO.configura = {
 	*/
 	tempoAplicar: 4000,
 	/*
-	Variavel: tempoMouseParado
+	Propriedade: tempoMouseParado
 	
 	Tempo em milisegundos que será esperado para detectar que o mouse está parado.
 	
@@ -450,7 +450,7 @@ i3GEO.configura = {
 	*/
 	tempoMouseParado: 3500,
 	/*
-	Variavel: iniciaJanelaMensagens
+	Propriedade: iniciaJanelaMensagens
 	
 	Inicia o i3geo com a janela de mensagens aberta ou fechada.
 	
@@ -464,7 +464,7 @@ i3GEO.configura = {
 	*/
 	iniciaJanelaMensagens: true,
 	/*
-	Variavel: mostraRosaDosVentos
+	Propriedade: mostraRosaDosVentos
 	
 	Mostra ou não a rosa dos ventos sob o mouse quando estiver parado.
 
@@ -479,7 +479,7 @@ i3GEO.configura = {
 	*/	
 	mostraRosaDosVentos: "nao",
 	/*
-	Variavel: liberaGuias
+	Propriedade: liberaGuias
 	
 	Indica se as guias serão montadas em uma janela flutuante sobre o mapa
 	
@@ -494,7 +494,7 @@ i3GEO.configura = {
 	*/
 	liberaGuias: "nao",
 	/*
-	Variavel: entorno
+	Propriedade: entorno
 	
 	Define se o entorno do mapa será desenhado também
 	
@@ -511,7 +511,7 @@ i3GEO.configura = {
 	*/
 	entorno: "nao",
 	/*
-	Variavel: funcoesBotoes
+	Propriedade: funcoesBotoes
 
 	Objeto com a lista de funcionalidades que serão adicionadas aos botões existentes no mapa.
 
@@ -1063,15 +1063,15 @@ i3GEO.configura = {
    				counterClick = 1;
     			var parametrosRota = function(overlay,latlng){
     				if(counterClick == 1){	
-    					counterClick++;
+    					counterClick++;;
     					alert("Clique o ponto de destino da rota");
-    					pontoRota1 = latlng
+    					pontoRota1 = latlng;
     					return;
     				}
     				if(counterClick == 2){
-    					pontoRota2 = latlng
+    					pontoRota2 = latlng;
     					counterClick = 0;
-    					GEvent.removeListener(rotaEvento)
+    					GEvent.removeListener(rotaEvento);
     					var janela = i3GEO.janela.cria("300px","300px","","center","","Rota");
     					janela[2].style.overflow = "auto";
     					janela[2].style.height = "300px";

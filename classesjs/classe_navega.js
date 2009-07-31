@@ -42,7 +42,7 @@ nomeFuncao("","",10)
 */
 i3GEO.navega = {
 	/*
-	Variavel: FATORZOOM
+	Propriedade: FATORZOOM
 	
 	Valor utilizado nas operações de zoom in e out. Fator de zoom.
 	
@@ -398,7 +398,7 @@ i3GEO.navega = {
 			var i = $i("i3geo_rosa");
 			i.style.display="none";
 			YAHOO.util.Event.removeListener(escondeRosa);
-		}
+		};
 		if($i("img"))
 		YAHOO.util.Event.addListener($i("img"),"mousemove", escondeRosa);
 		i3GEO.ajuda.mostraJanela('Clique nas pontas da rosa para navegar no mapa. Clique em x para parar de mostrar essa opção.');
@@ -410,7 +410,7 @@ i3GEO.navega = {
 	*/
 	autoRedesenho: {
 		/*
-		Variavel: INTERVALO
+		Propriedade: INTERVALO
 		
 		Intervalo de tempo, em milisegundos, que será utilizado para disparar o desenho do mapa
 		
@@ -422,6 +422,8 @@ i3GEO.navega = {
 		*/
 		INTERVALO: 0,
 		/*
+		Variavel: ID
+		
 		Guarda o valor do ID do elemento HTML que receberá o contador de tempo
 		
 		Tipo:
@@ -731,11 +733,7 @@ i3GEO.navega = {
 	*/
 	lente:{
 		/*
-		Indica se a lente foi ou não aberta
-		*/
-		ESTAATIVA: "nao",
-		/*
-		Variavel: POSICAOX
+		Propriedade: POSICAOX
 		
 		Define a posição em x da lente em relação ao corpo do mapa
 
@@ -747,7 +745,7 @@ i3GEO.navega = {
 		*/
 		POSICAOX: 0,
 		/*
-		Variavel: POSICAOY
+		Propriedade: POSICAOY
 		
 		Define a posição em y da lente em relação ao corpo do mapa
 		
@@ -758,6 +756,12 @@ i3GEO.navega = {
 		{0}
 		*/
 		POSICAOY:0,
+		/*
+		Variavel: ESTAATIVA
+		
+		Indica se a lente foi ou não aberta
+		*/
+		ESTAATIVA: "nao",
 		/*
 		Function: inicia
 		
@@ -873,7 +877,7 @@ i3GEO.navega = {
 	*/
 	destacaTema:{
 		/*
-		Variavel: TAMANHO
+		Propriedade: TAMANHO
 		
 		Tamanho do box
 		
