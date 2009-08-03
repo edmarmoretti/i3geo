@@ -22,8 +22,6 @@ Free Software Foundation, Inc., no endereço
 //inicializa
 parametrosURL()
 aguarde("block")
-ativaGuias("")
-
 mostraGuia("guia1")
 
 //eventos das guias

@@ -933,6 +933,7 @@ function ativaGuias()
 		if ($i("guia"+g))
 		var gpai = $i("guia"+g).parentNode;
 	}
+	if($i("guiasYUI")){return;}
 	gpai.id = "guiasYUI";
 	gpai.className = "yui-navset";
 	var ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';

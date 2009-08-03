@@ -23,7 +23,7 @@ Free Software Foundation, Inc., no endereço
 function inicializaJanela()
 {
 	aguarde("block")
-	ativaGuias("")
+	//ativaGuias("")
 	mostraGuia("guia1")
 	g_locaplic = window.parent.g_locaplic
 	xpt = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
