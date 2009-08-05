@@ -68,6 +68,7 @@ require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 include("classesphp/classe_menutemas.php");
+
 //
 //pega os endereços para compor a url de chamada do gerador de web services
 //ogc.php
@@ -82,6 +83,7 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //se a variável definida em ms_configura for = "", a busca é feita
 //pelo método Menutemas
 //
+
 if(!isset($perfil)){$perfil = "";}
 if($menutemas != "" || is_array($menutemas))
 {
@@ -168,6 +170,7 @@ foreach ($_GET as $k=>$v)
 	//if(strtolower($k) == "srs")
 	//{$SRS = $v;}
 }
+
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
@@ -201,6 +204,7 @@ if(!isset($tema)){
 	$intervalo = "0,5000";
 	$tipo = "intervalo";
 }
+
 if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
@@ -318,6 +322,7 @@ else
 		}
 	}
 }
+
 ms_ioinstallstdouttobuffer();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();

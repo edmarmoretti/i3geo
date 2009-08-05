@@ -119,7 +119,7 @@ array
 		{
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
-			include_once("../admin/php/classe_arvore.php");
+			include_once($this->locaplic."/admin/php/classe_arvore.php");
 			$arvore = new Arvore($this->locaplic);
 			$resultado = $arvore->pegaListaDeMenus($this->perfil);
 			unset($arvore);

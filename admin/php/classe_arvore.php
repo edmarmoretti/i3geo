@@ -18,7 +18,7 @@ class Arvore
 	{
 		$this->locaplic = $locaplic;
 		$dbh = "";
-		error_reporting(E_ALL);
+		error_reporting(0);
 		include($locaplic."/admin/php/conexao.php");
 		if(!isset($convUTF))
 		{$convUTF = true;}
