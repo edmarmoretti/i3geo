@@ -20,6 +20,9 @@ class Arvore
 		$dbh = "";
 		error_reporting(E_ALL);
 		include($locaplic."/admin/php/conexao.php");
+		if(!isset($convUTF))
+		{$convUTF = true;}
+		$this->convUTF = $convUTF;
 		$this->dbh = $dbh;
 		//
 		//verifica se o ip atual está cadastrado como um dos editores
@@ -320,7 +323,10 @@ class Arvore
 		return $str;
 	}
 	function converte($texto){
-		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
+		if($this->convUTF == true)
+		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF8");
+		else
+		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
 		return $texto;	
 	}
 }
