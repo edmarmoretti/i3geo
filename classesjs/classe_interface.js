@@ -162,6 +162,18 @@ i3GEO.interface = {
 	i3GEO.interface.ATUAL = "padrao"
 	*/
 	padrao:{
+		/*
+		Propriedade: TRANSICAO
+		
+		Ativa ou não o modo de transição suave das imagens quando o mapa é redesenhado. 
+
+		Default:
+		true
+		
+		Tipo:
+		{Boolean}
+		*/
+		TRANSICAO: false,
 		redesenha:function(){
 			$i("img").onload =  function()
 			{
@@ -175,9 +187,16 @@ i3GEO.interface = {
 					i3GEO.gadgets.quadros.grava("legenda",legimagem);
 				};
 				i3GEO.mapa.legendaIMAGEM.obtem(temp);
-				if ($i("imgtemp"))
-				{i3GEO.util.desaparece("imgtemp",50,5,true);}
-				i3GEO.util.aparece("img",50,5);
+				if(i3GEO.interface.padrao.TRANSICAO == true){
+					if ($i("imgtemp"))
+					{i3GEO.util.desaparece("imgtemp",50,5,true);}
+					i3GEO.util.aparece("img",50,5);
+				}
+				else{
+					if ($i("imgtemp"))
+					{i3GEO.util.desaparece("imgtemp",5,5,true);}
+					i3GEO.util.aparece("img",5,5);
+				}
 				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			};
 			if (!$i("imgtemp"))
