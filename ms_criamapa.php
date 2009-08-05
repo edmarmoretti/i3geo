@@ -344,8 +344,12 @@ if (!isset ($map_reference_image)) //arquivo com a imagem de refer&ecirc;ncia
 {$map_reference_image = $map->reference->image;}
 if (!isset ($map_reference_extent)) //extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
 {$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;}
-if (!isset($interface))
-{$interface = $interfacePadrao;}
+if(!isset($interface))
+{
+	if(!isset($interfacePadrao))
+	{$interfacePadrao = "geral.htm";}
+	$interface = $interfacePadrao;
+}
 
 incluiTemasIniciais();
 
