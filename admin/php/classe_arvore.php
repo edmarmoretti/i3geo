@@ -59,7 +59,7 @@ class Arvore
 				$status = "fechado";
 				if(strtolower($reg["aberto"]) == "sim")
 				$status = "aberto";
-				$url = "";//$this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
+				//$url = $this->urli3geo."/admin/xmlmenutemas.php?id_menu=".$reg["id_menu"];
 				$resultado[] = array("desc"=>$this->converte($reg["desc_menu"]),"publicado"=>$reg["publicado_menu"],"nomemenu"=>$this->converte($reg["nome_menu"]),"idmenu"=>$reg["id_menu"],"arquivo"=>"","status"=>$status,"url"=>$url);
 			}
 		}
@@ -188,7 +188,7 @@ class Arvore
 								if (strtolower($tema["ogc_tema"]) == "sim")
 								{$ogc = "sim";$grupoogc = "sim";}
 							}
-							$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
+							$subgrupos[] = array("id_n2"=>$sgrupo["id_n2"],"publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
@@ -324,9 +324,10 @@ class Arvore
 	}
 	function converte($texto){
 		if($this->convUTF == true)
-		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF8");
+		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"UTF-8");
 		else
 		$texto = mb_convert_encoding($texto,mb_detect_encoding($texto),"ISO-8859-1");
+		
 		return $texto;	
 	}
 }

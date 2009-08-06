@@ -409,7 +409,7 @@ array
 								{$ogc = "sim";}						
 							}
 							$nome = ixml($sgrupo,"SDTIPO");
-							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down,"ogc"=>$ogc);
+							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down);
 						}
 					}
 				}

@@ -53,7 +53,10 @@ ogc.php?tema=bioma
 
 ogc.php?intervalo=0,50
 */
-error_reporting(0);
+
+//
+//validações e includes
+//
 if (!function_exists('ms_GetVersion'))
 {
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -69,6 +72,7 @@ include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 include("classesphp/classe_menutemas.php");
 
+error_reporting(0);
 //
 //pega os endereços para compor a url de chamada do gerador de web services
 //ogc.php
@@ -79,78 +83,20 @@ $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
-//pega a lista de menus que será processada
-//se a variável definida em ms_configura for = "", a busca é feita
-//pelo método Menutemas
+//imprime na tela a ajuda
 //
-
-if(!isset($perfil)){$perfil = "";}
-if($menutemas != "" || is_array($menutemas))
-{
-	foreach($menutemas as $m)
-	{
-		$menus[] = $m["arquivo"];
-	}
-
-}
-else
-{
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
-	foreach($m->pegaListaDeMenus() as $menu)
-	{
-		$menus[] = $menu["url"];
-	}
-}
-if(!isset($menus))
-$menus = array("menutemas/menutemas.xml");
-//pega a lista de grupos
-if ($lista == "temas")
-{
-	echo '<html><head><title>WMS</title><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
-	echo "<body><b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
-	$imprimir = "";
-	foreach ($menus as $menu)
-	{
-		$xml = simplexml_load_file($menu);
-		foreach($xml->GRUPO as $grupo)
-		{
-			$imprimegrupo = "<i>".mb_convert_encoding($grupo->GTIPO,"HTML-ENTITIES","auto")."</i>";
-			foreach($grupo->SGRUPO as $sgrupo)
-			{
-				$imprimesubgrupo = mb_convert_encoding($sgrupo->SDTIPO,"HTML-ENTITIES","auto");
-				foreach($sgrupo->TEMA as $tema)
-				{
-					if (mb_convert_encoding($tema->OGC,"HTML-ENTITIES","auto") == "")
-					{				
-						$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
-						$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-						$id = mb_convert_encoding($tema->TID,"HTML-ENTITIES","auto");
-						$imprimir .= "<span style=color:red >".$id."</span>";
-						$imprimir .= "&nbsp;-&nbsp;".mb_convert_encoding($tema->TNOME,"HTML-ENTITIES","auto")."&nbsp";
-						$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$id."&service=wms&request=getcapabilities' >Getcapabilities</a>";
-						$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$id."&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$id."' >GetMap </a>";
-						if (mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto") != "")
-						{$imprimir .= "&nbsp;&nbsp;<a href='".mb_convert_encoding($tema->TLINK,"HTML-ENTITIES","auto")."' >fonte</a>";}
-						$imprimir .= "<br>";
-					}
-				}
-			}
-		}
-	}
-	echo $imprimir."</body></html>";
-	return;
-}
 if (isset($ajuda))
 {
-	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
-	echo "Esse utilitário usa o arquivo menutemas.xml para gerar web services no padrão OGC.";
-	echo "Para escolher um tema, utilize:<br>";
-	echo "ogc.php?lista=temas - para listar os temas disponíveis<br>";
-	echo "Para usar esse web service, além dos parâmetros normais, vc deverá incluir o parâmetro &tema=,<br>";
-	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema obtido do menutemas.xml]<br><br>";
-	echo "Se não for desejado que um tema apareça na lista, é necessário incluir a tag <OGC>nao</OGC> no registro do tema no arquivo menutemas.xml.<br>";
-	echo "Utilize o parametro &intervalo=0,20 para definir o número de temas.";
-	return;
+	ogc_imprimeAjuda();
+	exit;
+}
+//
+//imprime na tela a lista de temas disponíveis
+//
+if($lista == "temas")
+{
+	ogc_imprimeListaDeTemas();
+	exit;
 }
 //
 //cria o web service
@@ -167,10 +113,7 @@ foreach ($_GET as $k=>$v)
 	{$tema = $v;}
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
-	//if(strtolower($k) == "srs")
-	//{$SRS = $v;}
 }
-
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
@@ -204,7 +147,6 @@ if(!isset($tema)){
 	$intervalo = "0,5000";
 	$tipo = "intervalo";
 }
-
 if ($tipo == "" || $tipo == "metadados")
 {
 	$tema = explode(" ",$tema);
@@ -269,52 +211,63 @@ else
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
-	//var_dump($menus);exit;
+	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
+	$menus = $m->pegaListaDeMenus();
 	foreach ($menus as $menu)
 	{	
-		$xml = simplexml_load_file($menu);
-		foreach($xml->GRUPO as $grupo)
+		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
+		foreach($grupos as $grupo)
 		{
-			foreach($grupo->SGRUPO as $sgrupo)
+			if($grupo["ogc"] == "sim")
 			{
-				foreach($sgrupo->TEMA as $tm)
+				foreach($grupo["subgrupos"] as $sgrupo)
 				{
-					if (mb_convert_encoding($tm->OGC,"HTML-ENTITIES","auto") == "")
+					if($sgrupo["ogc"] == "sim")
 					{
-						$codigosTema[] = mb_convert_encoding($tm->TID,"HTML-ENTITIES","auto");
+						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
+						foreach($temas as $tema)
+						{
+							if($tema["ogc"] == "sim")
+							{
+								$codigosTema[] = array("tema"=>$tema["tid"],"fonte"=>$tema["link"]);
+							}
+						}
 					}
 				}
-			}		
+			}
 		}
 	}
-	foreach($codigosTema as $codigoTema)
+	foreach($codigosTema as $c)
 	{
-		if(!file_exists("temas/".$codigoTema.".map")){break;}
-		if (@ms_newMapobj("temas/".$codigoTema.".map"))
+		$codigoTema = $c["tema"];
+		if(file_exists("temas/".$codigoTema.".map"))
 		{
-			$nmap = ms_newMapobj("temas/".$codigoTema.".map");
-			$ts = $nmap->getalllayernames();
-			if (count($ts) == 1)
-			{ 
-				foreach ($ts as $t)
-				{
-					if ($oMap->getlayerbyname($t) == "")
+			if (@ms_newMapobj("temas/".$codigoTema.".map"))
+			{
+				$nmap = ms_newMapobj("temas/".$codigoTema.".map");
+				$ts = $nmap->getalllayernames();
+				if (count($ts) == 1)
+				{ 
+					foreach ($ts as $t)
 					{
-						$conta++;
-						if (($conta >= $int[0]) && ($conta <= $int[1]))
+						if ($oMap->getlayerbyname($t) == "")
 						{
-							$l = $nmap->getlayerbyname($t);
-							$l->setmetadata("ows_title",pegaNome($l));
-							$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
-							$l->set("status",MS_OFF);
-							$l->setmetadata("gml_include_items","all");
-							$l->set("dump",MS_TRUE);
-							$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-							$l->setmetadata("ows_metadataurl_href",mb_convert_encoding($tm->TLINK,"HTML-ENTITIES","auto"));
-							$l->setmetadata("ows_metadataurl_type","TC211");
-							$l->setmetadata("ows_metadataurl_format","text/html");
-							ms_newLayerObj($oMap, $l);
+							$conta++;
+							if (($conta >= $int[0]) && ($conta <= $int[1]))
+							{
+								$l = $nmap->getlayerbyname($t);
+								$l->setmetadata("ows_title",pegaNome($l));
+								$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+								$l->set("status",MS_OFF);
+								$l->setmetadata("gml_include_items","all");
+								$l->set("dump",MS_TRUE);
+								$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+								$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+								$l->setmetadata("ows_metadataurl_href",$c["fonte"]);
+								$l->setmetadata("ows_metadataurl_type","TC211");
+								$l->setmetadata("ows_metadataurl_format","text/html");
+								ms_newLayerObj($oMap, $l);
+							}
 						}
 					}
 				}
@@ -329,4 +282,81 @@ $contenttype = ms_iostripstdoutbuffercontenttype();
 header("Content-type: $contenttype");
 ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
+//
+//funções
+//
+function ogc_pegaListaDeMenus()
+{
+	global $perfil,$menutemas,$locsistemas,$locaplic,$urli3geo;
+	if(!isset($perfil)){$perfil = "";}
+	if($menutemas != "" || is_array($menutemas))
+	{
+		foreach($menutemas as $m)
+		{$menus[] = $m["arquivo"];	}
+	}
+	else
+	{
+		$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
+		foreach($m->pegaListaDeMenus() as $menu)
+		{$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];}
+	}
+	if(!isset($menus))
+	{$menus = array("menutemas/menutemas.xml");}
+	return $menus;
+}
+function ogc_imprimeAjuda()
+{
+	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
+	echo "Esse utilitário usa o arquivo menutemas.xml para gerar web services no padrão OGC.";
+	echo "Para escolher um tema, utilize:<br>";
+	echo "ogc.php?lista=temas - para listar os temas disponíveis<br>";
+	echo "Para usar esse web service, além dos parâmetros normais, vc deverá incluir o parâmetro &tema=,<br>";
+	echo "ou seja,http://[host]/i3geo/ogc.php?tema=[código do tema]<br><br>";
+	echo "Utilize o sistema de administração do i3Geo para configurar quais os temas podem ser utilizados.";
+	echo "Utilize o parametro &intervalo=0,20 para definir o número de temas desejado na função getcapabilities.";
+}
+function ogc_imprimeListaDeTemas()
+{
+	global $urli3geo,$perfil,$locsistemas,$locaplic,$menutemas;
+	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+	$menus = $m->pegaListaDeMenus();
+	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
+	echo "<body><b>Lista de temas por grupos e subgrupos e endereços de acesso aos dados por meio de Web Services WMS (os códigos dos temas estão em vermelho)</b><br><br>";
+	$imprimir = "";
+	foreach ($menus as $menu)
+	{
+		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
+		foreach($grupos as $grupo)
+		{
+			if($grupo["ogc"] == "sim")
+			{
+				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
+				foreach($grupo["subgrupos"] as $sgrupo)
+				{
+					if($sgrupo["ogc"] == "sim")
+					{
+						$imprimesubgrupo = $sgrupo["nome"];
+						$temas = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
+						foreach($temas as $tema)
+						{
+							if($tema["ogc"] == "sim")
+							{
+								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
+								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+								$imprimir .= "<span style=color:red >".$tema["tid"]."</span>";
+								$imprimir .= "&nbsp;-&nbsp;".$tema["nome"]."&nbsp";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&service=wms&request=getcapabilities' >Getcapabilities</a>";
+								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$tema["tid"]."&SRS=EPSG:4291&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$tema["tid"]."' >GetMap </a>";
+								if($tema["link"] != " ")
+								$imprimir .= "&nbsp;&nbsp;<a href='".$tema["link"]."' >fonte</a>";
+								$imprimir .= "<br>";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	echo $imprimir."</body></html>";
+}
 ?>
