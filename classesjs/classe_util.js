@@ -883,9 +883,16 @@ i3GEO.util = {
 	*/
 	aparece: function(id,tempo,intervalo){
 		var n = parseInt(tempo / intervalo);
+		var obj = $i(id);
+		if(n == 1){
+			obj.style.display = "block";
+			if (navm)
+			{obj.style.filter='alpha(opacity=100)';}
+			else
+			{obj.style.opacity= 1;}
+		}
 		var tempo = n * intervalo;
 		var intervalo = (intervalo * 100) / tempo;
-		var obj = $i(id);
 		var opacidade = 0;
 		if (navm)
 		{obj.style.filter='alpha(opacity=0)';}
@@ -927,9 +934,18 @@ i3GEO.util = {
 	*/
 	desaparece: function(id,tempo,intervalo,removeobj){
 		var n = parseInt(tempo / intervalo);
+		var obj = $i(id);
+		if(n == 1){
+			obj.style.display = "none";
+			if(removeobj){
+				var p = obj.parentNode;
+				if(p)
+				p.removeChild(obj);
+			}
+			return;
+		}
 		var tempo = n * intervalo;
 		var intervalo = (intervalo * 100) / tempo;
-		var obj = $i(id);
 		var opacidade = 100;
 		if (navm)
 		{obj.style.filter='alpha(opacity=100)';}
