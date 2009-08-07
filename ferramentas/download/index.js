@@ -33,32 +33,28 @@ function download()
 }
 function mostraDownload(retorno)
 {
+
+	aguarde("none")
 	if (retorno.data != undefined)
 	{
 		var retorno = retorno.data
-		aguarde("none")
 		var arqs = retorno.split(",")
-		var ins = "Clique nos links para pegar os arquivos e gravar em seu computador. Caso vc deseje alterar os nomes, mantenha as extensões e use o mesmo nome para cada arquivo.<br><br>"
-		for (arq=0;arq<arqs.length;arq++)
+		var n = arqs.length;
+		if(retorno == "erro")
+		{var ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
+		else
 		{
-			var temp = arqs[arq].split(".");
-			if ((temp[1] == "png") || (temp[1] == "tif") || (temp[1] == "wld"))
+			var ins = "<b>Clique nos links para pegar os arquivos.</b><br><br>"
+			for (var arq=0;arq<n;arq++)
 			{
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+"'>"+arqs[arq]+"<br>"
-			}
-			else
-			{
-				arqs[arq] = temp[0];
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shp'>"+arqs[arq]+".shp<br>"
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".dbf'>"+arqs[arq]+".dbf<br>"
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shx'>"+arqs[arq]+".shx<br><br>"
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"<br>"
 			}
 		}
-		$i("resultado").innerHTML = ins
 	}
 	else
 	{
-		$i("resultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
+		var ins = "<p style=color:red >Ocorreu um erro<br>"
 	}
-	aguarde("none")
+	document.getElementById("resultado").innerHTML = ins
+
 }

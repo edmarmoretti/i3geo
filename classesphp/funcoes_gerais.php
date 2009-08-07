@@ -1186,7 +1186,7 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 /*
 function: pegaItens
 
-Pega os itens de um tema e armazena em cache.
+Pega os itens da tabela de atributos de um tema.
 
 parameter:
 $layer - objeto layer
@@ -1199,14 +1199,6 @@ function pegaItens($layer)
 	else
 	$items = array();
 	return $items;
-/*
-	if ($layer->type != 3)
-	{$layer->open();}
-	$items = $layer->getItems();
-	if ($layer->type != 3)
-	{$layer->close();}
-	return $items;
-*/	
 }
 /*
 function: buscaRapida
@@ -1604,6 +1596,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		foreach ($items as $ni)
 		{
 			$temp = strtoupper($ni);
+			//
+			//nao tem como descobrir o tamanho e tipo do campo
+			//
 			$def[] = array($temp,"C","254");
 		}
 		$db = xbase_create($nomeshp.".dbf", $def);
@@ -1675,6 +1670,9 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	include_once($locaplic."/ms_configura.php");
 	else	
 	include_once("../ms_configura.php");
+	//
+	//cria o arquivo mapfile, caso ele não exista, que servirá de base para obtenção dos dados
+	//
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -1684,6 +1682,11 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
 		$map_tmp->save($map_file);
 	}
+	//
+	//verifica se o tema existe no mapfile
+	//se não existir, tenta inserir com base no mapfile existente no diretório temas
+	//o tema pode existir se a função estiver sendo chamada da árvore de temas de um mapa já aberto
+	//
 	$temasdir = $locaplic."/temas";
 	$map = ms_newMapObj($map_file);
 	$teste = @$map->getlayerbyname($tema);
@@ -1697,13 +1700,22 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			ms_newLayerObj($map, $ll);
 		}
 	}
+	//
+	//verifica novamente se o layer existe
+	//
 	$teste = @$map->getlayerbyname($tema);
 	if ($teste == "")
 	{return "erro";}
+	//
+	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
+	//
 	$map->save(str_replace(".map","tmp.map",$map_file));
 	$map_file = str_replace(".map","tmp.map",$map_file);
 	$map = ms_newMapObj($map_file);
+	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
+	//os grupos podem ter o nome do layer em GROUP ao invés de NAME
+	//
 	$multilayer = 0;
 	$grupos = $map->getAllGroupNames();
 	foreach ($grupos as $grupo)
@@ -1733,11 +1745,21 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 		{
 			if (file_exists($dados))
 			{
-				$arq = basename($dados);
-				$resultado[] = str_replace("/img","/",$map->web->imageurl).$arq;
-				$arq = explode(".",$arq);
-				$resultado[] = str_replace("/img","/",$map->web->imageurl).$arq[0].".wld";
+				$dir = dirname($dados);
+				$arq = explode(".",basename($dados));
+				$nomecopia = $dir_tmp."/".$arq[0];
+				$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld");
+				foreach($exts as $ext)
+				{
+					$copia = $nomecopia.".".$ext;
+					if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
+					{copy($dir."/".$arq[0].".".$ext,$copia);}
+					if(file_exists($copia))
+					$resultado[] = basename($dir_tmp)."/".basename($copia);	
+				}
 			}
+			else
+			{return "erro";}
 		}
 		else
 		{
@@ -1762,13 +1784,15 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 					copy($arq[0].".shx",$nomeshp.".shx");
 					copy($arq[0].".dbf",$nomeshp.".dbf");
 				}
-				$resultado[] = str_replace($radtmp,"",$nomeshp);
 			}
 			else
 			{
 				$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
-				$resultado[] = str_replace($radtmp,"",$restemp);
+				$novonomelayer = str_replace($radtmp,"",$restemp);
 			}
+			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
+			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
+			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 		}
 	}
 	return(implode(",",$resultado));

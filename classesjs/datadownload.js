@@ -308,21 +308,23 @@ function mostraDownload(retorno)
 	{
 		var retorno = retorno.data
 		var arqs = retorno.split(",")
-		var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado (o link é mostrado ao expandir o nó correspondente ao tema).</b><br><br>"
-		for (var arq=0;arq<arqs.length;arq++)
+		var n = arqs.length;
+		if(retorno == "erro")
+		{var ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
+		else
 		{
-			var temp = arqs[arq].split(".");
-			arqs[arq] = temp[0];
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shp'>"+arqs[arq]+".shp<br>"
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".dbf'>"+arqs[arq]+".dbf<br>"
-			ins += "<a href='"+window.location.protocol+"//"+window.location.host+arqs[arq]+".shx'>"+arqs[arq]+".shx<br><br>"
+			var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado (o link é mostrado ao expandir o nó correspondente ao tema).</b><br><br>"
+			for (var arq=0;arq<n;arq++)
+			{
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"<br>"
+			}
 		}
-		document.getElementById("corpo").innerHTML = ins
 	}
 	else
 	{
-		document.getElementById("corpo").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
+		var ins = "<p style=color:red >Ocorreu um erro<br>"
 	}
+	document.getElementById("corpo").innerHTML = ins
 }
 /*
 Function: dataDownloadLinks

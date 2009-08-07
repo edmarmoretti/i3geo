@@ -2,7 +2,6 @@ MAP
 SYMBOLSET ../symbols/simbolos.sym
 FONTSET   "../symbols/fontes.txt"
   LAYER
-    CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
     METADATA
       "CLASSE"	"SIM"
