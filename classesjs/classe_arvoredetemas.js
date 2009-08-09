@@ -923,7 +923,7 @@ i3GEO.arvoreDeTemas = {
 			for (ig=0;ig<arquivos.length;ig++)
 			{
 				var conteudo = arquivos[ig];
-				if(conteudo.search(".tif") > 1 || conteudo.search(".TIF") > 1 || conteudo.search(".shp") > 1 || conteudo.search(".SHP") > 1)
+				if(conteudo.search(".img") > 1 || conteudo.search(".tif") > 1 || conteudo.search(".TIF") > 1 || conteudo.search(".shp") > 1 || conteudo.search(".SHP") > 1)
 				{
 					var conteudo = "<a href='#' title='"+$trad("g2")+"' onclick='i3GEO.util.adicionaSHP(\""+node.data.caminho+"/"+conteudo+"\")' >"+conteudo+"</a>";
 					var d = {html:conteudo,caminho:node.data.caminho+"/"+conteudo};
