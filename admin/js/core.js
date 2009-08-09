@@ -146,17 +146,19 @@ o - string retornada pelo ajax
 function core_handleFailure(o,texto)
 {
 	//div onde será mostrado o log
-	alert(texto)
+	//alert(texto)
 	if(!$i('logajax'))
 	{return;}
 	log = $i('logajax');
-	YAHOO.log("The failure handler was called.  tId: " + o.tId + ".", "info", "example");
+	//YAHOO.log("The failure handler was called.  tId: " + o.tId + ".", "info", "example");
 	if(o.responseText !== undefined)
 	{
-		log.innerHTML = "<ul><li>Transaction id: " + o.tId + "</li>";
-		log.innerHTML += "<li>HTTP status: " + o.status + "</li>";
-		log.innerHTML += "<li>Status code message: " + o.statusText + "</li>";
-		log.innerHTML += "<li>PHP message: " + texto + "</li></ul>";
+		if(o.statusText != "OK"){
+			log.innerHTML = "<ul><li>Transaction id: " + o.tId + "</li>";
+			log.innerHTML += "<li>HTTP status: " + o.status + "</li>";
+			log.innerHTML += "<li>Status code message: " + o.statusText + "</li>";
+			log.innerHTML += "<li>PHP message: " + texto + "</li></ul>";
+		}
 	}
 	if (!YAHOO.example.container.wait)
 	{
