@@ -12,7 +12,7 @@ LAYER
   METADATA
 	ITENS "cd_legenda"
 	ITENSDESC "Nome"
-  	TEMA "Bioma"
+  	TEMA "Teste de geração automática de classes em dados vetoriais"
   	CLASSE "SIM"
       ESCALA "5000000"
 	EXTENSAO "-75.233614607 -33.7515829981 -27.592958622 5.272156"

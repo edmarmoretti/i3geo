@@ -8,7 +8,7 @@ LAYER
     METADATA
       "CLASSE"	"SIM"
       "ESCALA"	"250000"
-      "TEMA"	"Brasil"
+      "TEMA"	"Teste de zoom quando uma camada é adicionada ao mapa"
       "IDENTIFICA"	"nao"
 	"APLICAEXTENSAO" "sim"
 	"EXTENSAO" "-59.3209846282 -20.7465830515 -42.7452291615 -12.3810873165"

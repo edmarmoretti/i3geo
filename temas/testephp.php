@@ -9,6 +9,8 @@
 //
 $layer = $this->mapa->getlayerbyname("copyright");
 $layer->set("status",MS_DEFAULT);
+$layer->setmetadata("TEMA","Veja o texto no mapa");
+$layer->setmetadata("ESCONDIDO","");
 $shp = ms_newshapeobj(MS_SHAPE_POINT);
 $shp->set("text","teste .... teste");
 $lin = ms_newlineobj();

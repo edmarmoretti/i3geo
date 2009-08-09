@@ -1,0 +1,27 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+    DATA "c://ms4w/Apache/htdocs/geodados/cbersgeo.img"
+    METADATA
+      "classe"	"SIM"
+      "DOWNLOAD"	"sim"
+      "tema"	"cbersgeo"
+    END
+    NAME "cbersgeo"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE RASTER
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        COLOR 0 255 255
+        OPACITY 100
+        OUTLINECOLOR 0 0 0
+        SYMBOL 0
+      END
+    END
+  END
+END
