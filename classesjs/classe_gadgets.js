@@ -374,7 +374,7 @@ i3GEO.gadgets = {
 				if ($i("valorBuscaRapida").value == "")
 				{alert ("Digite uma palavra para busca!");return;}
 				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
-			}
+			};
 			var i = $inputText(id,"200","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
 			var ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
@@ -421,7 +421,7 @@ i3GEO.gadgets = {
 			$i("i3geo_zoomproximo").onclick = function(){
 				if(marcadorZoom == ""){marcadorZoom = i3GEO.gadgets.quadros.quadroatual;}
 				if(i3GEO.gadgets.quadros.quadroatual < i3GEO.gadgets.quadros.quadrosfilme.length){
-					marcadorZoom = marcadorZoom + 1
+					marcadorZoom = marcadorZoom + 1;
 					if(marcadorZoom < i3GEO.gadgets.quadros.quadrosfilme.length)
 					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[marcadorZoom].extensao);
 				}
@@ -858,7 +858,7 @@ i3GEO.gadgets = {
 					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]});
 					var conta=conta+1;
 				}
-			}
+			};
  			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  			i3GEOoMenuBar.render();

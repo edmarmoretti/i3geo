@@ -361,9 +361,9 @@ i3GEO.util = {
 		return(palavra);
 	},
 	/*
-	Function protocolo
+	Function: protocolo
 	
-	Obtém o protocoloutilizado na URL atual
+	Obtém o protocolo utilizado na URL atual
 	
 	Return:
 	

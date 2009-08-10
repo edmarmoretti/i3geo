@@ -7461,7 +7461,7 @@ i3GEO.gadgets = {
 		{idhtml:"menus",deslocaEsquerda:0}
 	},
 	/*
-	Function: mostraCoordenadasUTM
+	function mostraCoordenadasUTM
 	
 	Obtém as coordenadas UTM da posição do mouse sobre o mapa.
 	
@@ -7519,7 +7519,7 @@ i3GEO.gadgets = {
 		{i3GEO.eventos.MOUSEPARADO.push("atualizaCoordenadasUTM()");}		
 	},
 	/*
-	Function: mostraCoordenadasGEO
+	function mostraCoordenadasGEO
 	
 	Obtém as coordenadas Geográficas da posição do mouse sobre o mapa.
 		
@@ -7583,7 +7583,7 @@ i3GEO.gadgets = {
 		catch(e){alert("mostraCoordenadasGeo: "+e.description);}
 	},
 	/*
-	Function: mostraInserirKml
+	function mostraInserirKml
 	
 	Mostra no mapa a a opção para inserir kml.
 	
@@ -7611,7 +7611,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: mostraEscalaNumerica
+	function mostraEscalaNumerica
 	
 	Mostra no mapa a escala numérica.
 	
@@ -7653,7 +7653,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: mostraEscalaGrafica
+	function mostraEscalaGrafica
 	
 	Mostra no mapa a escala grafica como um elemento fora do mapa.
 		
@@ -7694,7 +7694,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: mostraBuscaRapida
+	function mostraBuscaRapida
 	
 	Mostra a opção de busca rápida de lugares por palavra digitada.
 		
@@ -7714,7 +7714,7 @@ i3GEO.gadgets = {
 				if ($i("valorBuscaRapida").value == "")
 				{alert ("Digite uma palavra para busca!");return;}
 				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
-			}
+			};
 			var i = $inputText(id,"200","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
 			var ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
@@ -7725,7 +7725,7 @@ i3GEO.gadgets = {
 		}	
 	},
 	/*
-	Function: mostraHistoricoZoom
+	function mostraHistoricoZoom
 	
 	Mostra na barra de zoom os ícones que controlam a visualização do histórico da navegação sobre o mapa
 	
@@ -7761,7 +7761,7 @@ i3GEO.gadgets = {
 			$i("i3geo_zoomproximo").onclick = function(){
 				if(marcadorZoom == ""){marcadorZoom = i3GEO.gadgets.quadros.quadroatual;}
 				if(i3GEO.gadgets.quadros.quadroatual < i3GEO.gadgets.quadros.quadrosfilme.length){
-					marcadorZoom = marcadorZoom + 1
+					marcadorZoom = marcadorZoom + 1;
 					if(marcadorZoom < i3GEO.gadgets.quadros.quadrosfilme.length)
 					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[marcadorZoom].extensao);
 				}
@@ -7786,7 +7786,7 @@ i3GEO.gadgets = {
 	*/
 	visual: {
 		/*
-		Function: inicia
+		function inicia
 		
 		Constrói os ícones de escolha do visual.
 		
@@ -7813,7 +7813,7 @@ i3GEO.gadgets = {
 			}
 		},
 		/*
-		Function: troca
+		function troca
 		
 		Troca o visual atual. A lista de visuais disponíveis é obtida em i3GEO.parametros.listavisual
 		
@@ -7919,7 +7919,7 @@ i3GEO.gadgets = {
 		*/
 		quadroatual: 0,
 		/*
-		Function: inicia
+		function inicia
 		
 		Gera os quadros e inicializa os objetos para armazenar as imagens
 		
@@ -7958,7 +7958,7 @@ i3GEO.gadgets = {
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.gadgets.quadros.avanca()");}
 		},
 		/*
-		Function: grava
+		function grava
 
 		Armazena um determinado valor em uma determinada característica de um objeto quadro.
 
@@ -7974,7 +7974,7 @@ i3GEO.gadgets = {
 			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
 		},
 		/*
-		Function: avanca
+		function avanca
 
 		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
 		*/		
@@ -7988,7 +7988,7 @@ i3GEO.gadgets = {
 			catch(e){var e = "";}		
 		},
 		/*
-		Function: zoom
+		function zoom
 		
 		Aplica o zoom no mapa para a extensão geográfica armazenada em um quadro
 		
@@ -8001,7 +8001,7 @@ i3GEO.gadgets = {
 			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",i3GEO.gadgets.quadros.quadrosfilme[indice].extensao)
 		},
 		/*
-		Function: trocaMapa
+		function trocaMapa
 		
 		Troca a imagem do mapa atual pela que estiver armazenada em quadro
 		
@@ -8039,7 +8039,7 @@ i3GEO.gadgets = {
 			}
 		},
 		/*
-		Function: opcoes
+		function opcoes
 		
 		Abre a janela de opções que controla as características do quado e permite disparar a animação.
 		
@@ -8059,7 +8059,7 @@ i3GEO.gadgets = {
 			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a>");}
 		},
 		/*
-		Function: anima
+		function anima
 		
 		Mostra as imagens armazenadas nos quadros em uma sequência animada
 		
@@ -8088,7 +8088,7 @@ i3GEO.gadgets = {
 			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
 		},
 		/*
-		Function: listaImagens
+		function listaImagens
 		
 		Lista as imagens armazenadas em uma nova página no navegador
 		*/
@@ -8123,7 +8123,7 @@ i3GEO.gadgets = {
 		}
 	},
 	/*
-	Function: mostraMenuSuspenso
+	function mostraMenuSuspenso
 	
 	Mostra o menu suspenso com opções extras de análise, ajuda, etc
 	
@@ -8198,7 +8198,7 @@ i3GEO.gadgets = {
 					i3GEOoMenuBar.getItem(conta).cfg.setProperty('submenu',{id:nomeMenu,itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]});
 					var conta=conta+1;
 				}
-			}
+			};
  			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  			i3GEOoMenuBar.render();

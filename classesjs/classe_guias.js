@@ -42,6 +42,18 @@ i3GEO.guias = {
 	Propriedade: CONFIGURA
 	
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
+
+	Exemplo
+	
+	i3GEO.guias.CONFIGURA.legenda = {
+			titulo:"Legenda do mapa",
+			id:"guia4",
+			idconteudo:"guia4obj",//id do elemento HTML que contém o conteúdo da guia
+			click: function(){
+				i3GEO.guias.mostra("legenda");//mostra a guia
+				i3GEO.mapa.legendaHTML.cria("guia4obj");
+			}
+		}	
 	
 	Tipo:
 	{JSON}
