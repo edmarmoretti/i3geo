@@ -158,7 +158,7 @@ function i3GEOmantemCompatibilidade(){
 	catch(e){};
 	try {
 		if (g_docaguias)
-		{i3GEO.configura.liberaGUias = g_docaguias;}
+		{i3GEO.configura.liberaGuias = g_docaguias;}
 	}
 	catch(e){};
 	if (window.location.href.split("?")[1]){
