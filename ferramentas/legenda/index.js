@@ -144,16 +144,18 @@ function montaLegenda(retorno)
 			ajuda += " Voc&ecirc; pode aplicar a escala em bandas individuais, para isso, utilize SCALE_n, por exemplo SCALE_1=AUTO SCALE_2=200,500."
 			ajuda += "<br>Para escolher quais bandas ser&atilde;o utilizadas e qual sua ordem, utilize a op&ccedil;&atilde;o BANDAS."
 			ajuda += " Utilize, por exemplo, BANDS=1,2,3 BANDS=1 ."
+			ajuda += " Para alterar o modo de amostragem, utilize RESAMPLE com uma das opções: AVERAGE,NEAREST ou BILINEAR."
 			var ins = "<br>Voc&ecirc; pode incluir processos na imagem para modificar as caracter&iacute;sticas de visualiza&ccedil;&atilde;o<br><br>Adicionar processo:";
 			ins += "<select onchange=adicionaProcesso(this) >"
 			ins += "<option value='' >selecione o processo</option>"
 			ins += "<option value='SCALE=' >Escala de cores</option>"
+			ins += "<option value='RESAMPLE=' >Reamostragem</option>"
 			ins += "<option value='BANDS=' >Bandas</option>"
 			ins += "<option value='COLOR_MATCH_THRESHOLD=' >Threshold</option>"
 			ins += "<option value='NODATA=' >Nodata</option>"
 			ins += "</select><br>"
 			ins += '<br><input class="executar" onclick="aplicaProcessos()" size="22" type="buttom" value="aplicar processos">'
-			if(retorno.data[0].proc != "")
+			if(retorno.data[0].proc == "")
 			{ins += "<div style=width:80% id=processos ></div>"}
 			else
 			{
@@ -194,7 +196,7 @@ function aplicaProcessos()
 		}
 	}
 	lista = lista.join("|")
-	lista = '"'+lista+'"'
+	//lista = '"'+lista+'"'
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=aplicaProcessos&lista="+lista+"&tema="+tema
 	var cp = new cpaint();
 	//cp.set_debug(2)

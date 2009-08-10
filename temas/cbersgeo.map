@@ -4,7 +4,7 @@ FONTSET   "../symbols/fontes.txt"
 LAYER
     DATA "c://ms4w/Apache/htdocs/geodados/cbersgeo.img"
     METADATA
-      "classe"	"SIM"
+      "classe"	"NAO"
       "DOWNLOAD"	"sim"
       "tema"	"cbersgeo"
     END

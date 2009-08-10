@@ -357,10 +357,15 @@ array
 						$linhas[$c]["totalreg"] = $total;
 					}
 				}
-				if ($nc == 0)
+				if ($layer->type == MS_LAYER_RASTER && $nc == 1)
 				{
 					$proc = "";
+					$linhas = array();
 					if($layer->num_processing > 0){$proc = $layer->getProcessing();}
+					if($layer->type == MS_LAYER_RASTER && $proc == "")
+					{
+						$proc = array("RESAMPLE=NEAREST");
+					}
 					$linhas[] = array("tema"=>$l,"idclasse"=>"","nomeclasse"=>"","expressao"=>"","imagem"=>"","proc"=>$proc);
 				}
 			}

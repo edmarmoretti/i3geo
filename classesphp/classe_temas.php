@@ -142,7 +142,7 @@ $lista - lista de processos separados por |
 		if(!$this->layer){return "erro";}
 		if ($this->layer->num_processing > 0)
 		{$this->layer->clearProcessing();}
-		$lista = str_replace('"',"",$lista);
+		//$lista = str_replace('"',"",$lista);
 		$lista = explode("|",$lista);
 		foreach ($lista as $processo)
 		{$this->layer->setprocessing($processo);}
