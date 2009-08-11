@@ -194,7 +194,7 @@ i3GEO.interface = {
 				}
 				else{
 					if ($i("imgtemp"))
-					{i3GEO.util.desaparece("imgtemp",5,5,true);}
+					{i3GEO.util.desaparece("imgtemp",15,5,true);}
 					i3GEO.util.aparece("img",5,5);
 				}
 				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");

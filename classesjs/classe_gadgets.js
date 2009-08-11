@@ -509,13 +509,17 @@ i3GEO.gadgets = {
 							for (var i=0;i < elt; i++){
 								if ((elementos[i].src.search("branco") > -1) && ((elementos[i].className != "") || (elementos[i].id != "")))
 								{elementos[i].src = caminho+"branco.gif";}
-								if (elementos[i].src.search("visual") > -1)
-								{elementos[i].style.backgroundImage = "url('"+caminho+imgs[j]+"')";}
+								if (elementos[i].src.search("visual") > -1){
+									elementos[i].style.backgroundImage = "url('"+caminho+"sprite.png')";
+									//var nimagem = elementos[i].style.backgroundImage.replace(i3GEO.configura.visual,visual);
+									//elementos[i].style.backgroundImage = nimagem;
+								
+								}
 							}
 						}
 						while(j--)
 					}	
-					//faz a troca em ids
+					//
 					var j = imgs.length-1;
 					if(j >= 0){
 						do{
