@@ -995,12 +995,7 @@ $adicionar - sim|nao força a adição de um tema se ele não existir no mapfile atu
 						{$incluir = false;}
 					}
 					else
-					{
-						if($layerE->name != $t)
-						{$incluir = true;}
-						else
-						{$incluir = false;}
-					}
+					{$incluir = false;}
 				}
 				if($incluir == true){$adicionar[] = $t;}
 			}
