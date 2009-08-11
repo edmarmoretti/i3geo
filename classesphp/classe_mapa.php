@@ -800,7 +800,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 */
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
-		error_reporting(0);
+		//error_reporting(E_ALL);
+		
 		//include_once($locaplic."/admin/php/menutemas.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
@@ -971,9 +972,36 @@ Parametros:
 $ligar - lista separada por vírgula dos temas que serão ligados.
 
 $desligar - lista separada por vírgula dos temas que serão desligados. Se for igual a todos, todos os layers serão desligados.
+
+$adicionar - sim|nao força a adição de um tema se ele não existir no mapfile atual
 */
-	function ligaDesligaTemas($ligar,$desligar)
+	function ligaDesligaTemas($ligar,$desligar,$adicionar="nao")
 	{
+		if(strTolower($adicionar) == "sim")
+		{
+			$teste = explode(",",$ligar);
+			$adicionar = array();
+			$incluir = false;
+			foreach($teste as $t)
+			{
+				$incluir = false;
+				foreach($this->layers as $layerE)
+				{
+					if($layerE->name != $t && $layerE->getmetadata("nomeoriginal") != $t)
+					$incluir = true;	
+				}
+				if($incluir){$adicionar[] = $t;}
+			}
+			if(count($adicionar > 0))
+			{
+				$this->adicionaTema(implode(",",$adicionar),$this->locaplic,$random="sim");
+				$this->salva();
+				$this->mapa = ms_newMapObj($this->arquivo); 
+				$c = $this->mapa->numlayers;
+				for ($i=0;$i < $c;++$i)
+				{$this->layers[] = $this->mapa->getlayer($i);}
+			}
+		}
 		if($desligar == "todos")
 		{
 			$desligar = $this->mapa->getalllayernames();

@@ -702,8 +702,8 @@ Include:
 	case "ligatemas":
   		include_once("classe_mapa.php");
   		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$cp->set_data($m->ligaDesligaTemas($ligar,$desligar));
+		$m = new Mapa($map_file,$locaplic);
+		$cp->set_data($m->ligaDesligaTemas($ligar,$desligar,$adicionar));
 		$m->salva();
 	break;
 /*
