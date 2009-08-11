@@ -981,16 +981,28 @@ $adicionar - sim|nao força a adição de um tema se ele não existir no mapfile atu
 		{
 			$teste = explode(",",$ligar);
 			$adicionar = array();
-			$incluir = false;
 			foreach($teste as $t)
 			{
 				$incluir = false;
 				foreach($this->layers as $layerE)
 				{
-					if($layerE->name != $t && $layerE->getmetadata("nomeoriginal") != $t)
-					$incluir = true;	
+					$original = $layerE->getmetadata("nomeoriginal");
+					if($original != "")
+					{
+						if($original != $t)
+						{$incluir = true;}
+						else
+						{$incluir = false;}
+					}
+					else
+					{
+						if($layerE->name != $t)
+						{$incluir = true;}
+						else
+						{$incluir = false;}
+					}
 				}
-				if($incluir){$adicionar[] = $t;}
+				if($incluir == true){$adicionar[] = $t;}
 			}
 			if(count($adicionar > 0))
 			{
