@@ -689,7 +689,8 @@ i3GEO.arvoreDeTemas = {
 			var desc = dados[i].desc;
 			if(!dados[i].nomemenu)
 			dados[i].nomemenu = dados[i].idmenu;
-			if(dados[i].publicado != "NAO")
+			if(!dados[i].publicado){dados[i].publicado = "sim";}
+			if(dados[i].publicado.toLowerCase() != "nao")
 			var conteudo = "<b>&nbsp;<span title='"+desc+"'>"+dados[i].nomemenu+"</span>";
 			else
 			var conteudo = "<b>&nbsp;<span title='nao publicado' style=color:red; >"+dados[i].nomemenu+"</span>";
