@@ -127,9 +127,7 @@ array
 		else
 		{$resultado = $this->menutemas;}
 		if(count($resultado) == 0)
-		{
-			$resultado[] = array("idmenu"=>"i3geo (xml)","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto");
-		}
+		{$resultado[] = array("publicado"=>"SIM","idmenu"=>"i3geo (xml)","arquivo"=>"../menutemas/menutemas.xml","status"=>"aberto");}
 		return ($resultado);
 	}
 /*
@@ -175,7 +173,7 @@ array
 			{
 				if(!isset($menu["url"])){$menu["url"] = "";} //para efeitos de compatibilidade entre versões do i3geo
 				$ondexml = $menu["arquivo"];
-				if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
+				//if(!isset($menu["publicado"])){$ondexml = $menu["url"];}
 				if($ondexml != "" && $this->menutemas != "")
 				{
 					$xml = simplexml_load_file($ondexml);
@@ -183,8 +181,6 @@ array
 				}
 				else //pega o xml do sistema de administração
 				{
-					//$xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
-					//$grupos = $this->retornaGrupos($xml,$listasistemas,$idmenu,$listasgrupos);
 					include_once("../admin/php/classe_arvore.php");
 					$arvore = new Arvore($this->locaplic);
 					$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
