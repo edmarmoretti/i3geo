@@ -211,7 +211,7 @@ else
 	$conta = 0;
 	$int = explode(",",$intervalo);
 	$codigosTema = array();
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
+	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
 	$menus = $m->pegaListaDeMenus();
 	foreach ($menus as $menu)
 	{	
