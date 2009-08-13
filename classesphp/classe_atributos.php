@@ -1228,9 +1228,13 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 			foreach ($itens as $it)
 			{
 				$val = $shape->values[$it];
-				$busca = '['.$it.']';
-				$link = str_replace($busca,$val,$lks[$conta]);
-				
+				$link = $lks[$conta];
+				foreach($itens as $t)
+				{
+					$valtemp = $shape->values[$t];
+					$busca = '['.$t.']';
+					$link = str_replace($busca,$valtemp,$link);
+				}
 				$img = "";
 				if($locimg[$conta] != "" && $itemimg[$conta] != "")
 				{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}

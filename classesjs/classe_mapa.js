@@ -705,8 +705,11 @@ i3GEO.mapa = {
 										eval("var link = ds[s]."+tips[r]+".link");
 										eval("var img = ds[s]."+tips[r]+".img");
 										if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao"){
-											if(valor != "")
+											if(valor != "" && link == "") 
 											ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";
+											if(valor != "" && link != "") 
+											ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";
+
 											if(img != "")
 											ins += img+"<br>";
 											
