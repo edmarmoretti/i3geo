@@ -536,6 +536,8 @@ Include:
 /*
 function: identifica
 
+Depreciado na versão 4.2 (utilize "identifica2")
+
 Identifica elementos no mapa.
 
 parameters:
@@ -661,7 +663,165 @@ $resolucao - Resolucao de busca.
 		{return("");}
 	}
 /*
+function: identifica2
+
+Identifica elementos no mapa.
+
+parameters:
+
+$opcao - Opcao tip|tema|ligados|todos.
+
+$xy - coordenada x e y separadas por virgulao.
+
+$resolucao - Resolucao de busca.
+*/
+	function identifica2($opcao,$xy,$resolucao)
+	{
+		$temas = $this->mapa->getalllayernames();
+		foreach ($temas as $tem)
+		{
+			$vermultilayer = new vermultilayer();
+			$vermultilayer->verifica($this->arquivo,$tem);
+			if ($vermultilayer->resultado == 1) // o tema e multi layer
+			{
+				foreach (($vermultilayer->temasvisiveis) as $tv)
+				{
+					$l = $this->mapa->getlayerbyname($tv);
+					if ($l->getmetadata("identifica") != "nao")
+					{$listatemas[] = $tv;}
+				}
+			}
+			else
+			{
+		 		$l = $this->mapa->getlayerbyname($tem);
+				if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao"))
+				{$listatemas[] = $tem;}
+			}
+		}
+		$listatemas = array_unique($listatemas);
+		$xyarray = explode(",",$xy);
+		$resultados = array();
+		//pesquisa um tema
+		if ($opcao == "tema")
+		{
+			$listatemas = array();
+			$vermultilayer = new vermultilayer();
+			$vermultilayer->verifica($this->arquivo,$this->nome);
+			if ($vermultilayer->resultado == 1) // o tema e multi layer
+			{$listatemp = $vermultilayer->temasvisiveis;}
+			else
+			{$listatemp[] = $this->nome;}
+			foreach ($listatemp as $t)
+			{
+				$layerteste = $this->mapa->getlayerbyname($t);
+				$mclasse = strtoupper($layerteste->getmetadata("CLASSE"));
+				$mtema = strtoupper($layerteste->getmetadata("TEMA"));
+				$gr = $layerteste->group;
+				if ((!(($mclasse == "NAO") && ($mtema == "NAO"))) || ($gr != ""))
+				{
+					if (($layerteste->data != "") && ($layerteste->connectiontype != MS_WMS))
+					{$listatemas[] = $t;}
+				}
+			}
+			$layerteste = $this->layer;
+			if ($layerteste->connectiontype == MS_WMS)
+			{
+				$listatemas = array();
+				$listatemas[] = $this->nome;
+			}
+			foreach ($listatemas as $tema)
+			{
+				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+			}
+		}
+		//pesquisa todos os temas acrescentados no mapa
+		if ($opcao == "todos")
+		{
+			foreach ($listatemas as $tema)
+			{
+				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+			}
+		}
+		//pesquisa apenas os temas visiveis
+		if ($opcao == "ligados")
+		{
+			$novalista = array();
+			foreach ($listatemas as $tema)
+			{
+				$l = $this->mapa->getlayerbyname($tema);
+				if($l->status == MS_DEFAULT)
+				$novalista[] = $tema;
+				$listatemas = $novalista;
+			}
+			foreach ($listatemas as $tema)
+			{
+				$l = $this->mapa->getlayerbyname($tema);
+				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+			}
+			//var_dump($resultados);
+		}
+		//pesquisa apenas os temas com tip
+		if ($opcao == "tip")
+		{
+			$ltemp = array();
+			foreach ($listatemas as $tema)
+			{
+				$tl = $this->mapa->getlayerbyname($tema);
+				$itemtip = $tl->getmetadata("TIP");
+				if ($itemtip != "")
+				{
+					if ($tl->status == MS_DEFAULT)
+					{
+						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip));
+						$ltemp[] = $tema;
+					}
+				}
+			}
+			$listatemas = $ltemp;
+		}
+		if (count($resultados) > 0)
+		{
+			$res = $this->retornaI2($listatemas,$resultados,$this->mapa);
+			return($res);
+		}
+		else
+		{return("");}
+	}
+/*
+function: retornaI2
+
+Depreciado na versão 4.2
+
+Processa o resultado da identificação de um elemento compondo um array de strings formatadas.
+
+parameters:
+$listatemas - Lista de temas
+
+$resultados - Resultados de cada tema.
+
+$map - Objeto Map.
+*/
+function retornaI2($listatemas,$resultados,$map)
+{
+	$final = array();
+	foreach ($listatemas as $tema)
+	{
+		$layer = $map->getlayerbyname($tema);
+		$nometmp = $tema;
+		if (strtoupper($layer->getMetaData("TEMA")) != "NAO")
+		{$nometmp = $layer->getMetaData("TEMA");}
+		else if ($layer->getMetaData("ALTTEMA") != "")
+		{$nometmp = $layer->getMetaData("ALTTEMA");}
+		$nometmp = mb_convert_encoding($nometmp,"UTF-8","ISO-8859-1");
+		$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema]);
+	}
+	return $final;
+}
+
+/*
 function: retornaI
+
+Depreciado na versão 4.2
 
 Processa o resultado da identificação de um elemento compondo um array de strings formatadas.
 
@@ -702,6 +862,8 @@ function retornaI($listatemas,$resultados,$map)
 }
 /*
 function: identificaQBP
+
+Depreciado na versão 4.2
 
 Identifica um elemento utilizando querybypoint.
 
@@ -898,6 +1060,192 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 			}
 			$valori = implode("@##",$valori);
 			$valori = explode("@",$valori);
+			$resultado[] = $valori;
+		}
+		$layer->close();
+	}
+	else
+	{$resultado[] = " ";}
+	return $resultado;
+}
+/*
+function: identificaQBP2
+
+Identifica um elemento utilizando querybypoint.
+
+parameters:
+
+$tema - Tema que será identificado
+
+$x - Coordenada X.
+
+$y - Coordenada Y.
+
+$map_file - Arquivo map file.
+
+$resolucao - Resolução de busca.
+
+$item - Item único que será identificado.
+
+$tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
+*/
+function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="")
+{
+	$mapa = ms_newMapObj($map_file);
+	$layer = $mapa->getLayerByName($tema);
+	$layer->set("status",MS_DEFAULT);
+	$layer->set("template","none.htm");
+	$pt = ms_newPointObj();
+	$pt->setXY($x, $y);
+	//
+	//operação especial para o caso de wms
+	//
+	if($layer->connectiontype == MS_WMS)
+	{
+		$layer->set("toleranceunits",MS_PIXELS);
+		$layer->set("tolerance",$resolucao);
+		$ptimg = xy2imagem($map_file,array($x,$y));
+		$mapa = desligatemas($mapa);
+		$mapa = desligamargem($mapa);
+		$imgo = $mapa->draw();
+		//$res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
+		$resultado = array();
+		$res = $layer->connection;
+		$res .= "&request=getfeatureinfo&service=wms";
+		$res .= "&version=1.1.0";//.($layer->getmetadata("wms_version"));
+		$res .= "&QUERY_LAYERS=".($layer->getmetadata("wms_name"));
+		$res .= "&LAYERS=".($layer->getmetadata("wms_name"));
+		$bb = $mapa->extent;
+		$res .= "&BBOX=".($bb->minx).",".($bb->miny).",".($bb->maxx).",".($bb->maxy);
+		$res .= "&X=".round($ptimg->x);
+		$res .= "&Y=".round($ptimg->y);
+		$res .= "&WIDTH=".$mapa->width;
+		$res .= "&HEIGHT=".$mapa->height;
+		$formatoinfo = "text/plain";
+		$formatosinfo = $layer->getmetadata("formatosinfo");
+		if ($formatosinfo != "")
+		{
+			$formatosinfo = explode(",",$formatosinfo);
+			if ($formatosinfo[0] != ""){$formatoinfo = $formatosinfo[0];}
+			foreach ($formatosinfo as $f)
+			{
+		 		if(strtoupper($f) == "TEXT/PLAIN")
+		 		{$formatoinfo = "text/plain";}
+			}
+					
+		}
+		$srs = $layer->getmetadata("wms_srs");
+		$srss = explode(" ",$srs);
+		$srs = "EPSG:4326";
+		foreach ($srss as $s)
+		{
+		 	if(strtoupper($s) == "EPSG:4291")
+		 	{$srs = "EPSG:4291";}
+		}
+		$res .= "&SRS=".$srs;
+		$resposta = file($res."&FORMAT=".$formatoinfo);
+		$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
+		$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
+		$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
+		$resposta = str_ireplace('<?xml',"",$resposta);
+		$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
+		$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
+		if (stristr(implode(" ",$resposta),"msWMSLoadGetMapParams"))
+		{
+			$resposta = file($res);
+			$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
+			$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
+			$resposta = str_ireplace("<?xml version='1.0' encoding='ISO-8859-1'?>","",$resposta);
+			$resposta = str_ireplace('<?xml',"",$resposta);
+			$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
+			$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
+		}
+		$resultado[] = $resposta;
+		return $resultado;		
+	}
+	if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
+	{
+		$layer->set("toleranceunits",MS_PIXELS);
+		$layer->set("tolerance",$resolucao);
+		$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);
+	}
+	if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE))
+	{
+		$layer->set("toleranceunits",MS_PIXELS);
+		$layer->set("tolerance",$resolucao);
+		$ident = @$layer->queryByPoint($pt, 1, 0); //0.01);
+	}
+	if ($layer->type == MS_LAYER_POLYGON)
+	{
+		$layer->set("toleranceunits",'MS_PIXEL');
+		$layer->set("tolerance",1);
+		$ident = @$layer->queryByPoint($pt, 1, 0);
+	}
+	if ($ident == MS_SUCCESS)
+	{
+		$itens = $layer->getmetadata("ITENS"); // itens
+		$itensdesc = $layer->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
+		$lks = $layer->getmetadata("ITENSLINK"); // link dos itens
+		$itemimg = $layer->getmetadata("ITEMIMG"); //indica um item que será utilizado para colocar um ícone
+		$locimg = $layer->getmetadata("IMGLOC"); //indica o local onde estão os ícones
+		$tips = $layer->getmetadata("TIP");
+		$itensLayer = pegaItens($layer);
+		
+		$nitens = count($itensLayer);
+		
+		if($itens == "")
+		{$itens = $itensLayer;}
+		else
+		{$itens = explode(",",$itens);}
+		
+		if($itensdesc == "")
+		{$itensdesc = array_fill(0, $nitens-1,'');}
+		else
+		{$itensdesc = explode(",",$itensdesc);}
+		if($lks == "")
+		{$lks = array_fill(0, $nitens-1,'');}
+		else
+		{$lks = explode(",",$lks);}		
+		if($itemimg == "")
+		{$itemimg = array_fill(0, $nitens-1,'');}
+		else
+		{$itemimg = explode(",",$itemimg);}			
+		if($locimg == "")
+		{$locimg = array_fill(0, $nitens-1,'');}
+		else
+		{$locimg = explode(",",$locimg);}
+
+		$res_count = $layer->getNumresults();
+		$sopen = $layer->open();
+		if($sopen == MS_FAILURE){return "erro";}
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			$valori = array();
+			$result = $layer->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $layer->getshape(-1, $shp_index);
+			$conta = 0;
+			foreach ($itens as $it)
+			{
+				$val = $shape->values[$it];
+				$busca = '['.$it.']';
+				$link = str_replace($busca,$val,$lks[$conta]);
+				
+				$img = "";
+				if($locimg[$conta] != "" && $itemimg[$conta] != "")
+				{$img = "<img src='".$locimg[$conta]."//".$shape->values[$itemimg[$conta]]."' //>";}
+				else
+				if($itemimg[$conta] != "")
+				{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}
+				
+				$valori[$it] = array(
+					"alias"=>mb_convert_encoding($itensdesc[$conta],"UTF-8","ISO-8859-1"),
+					"valor"=>mb_convert_encoding($val,"UTF-8","ISO-8859-1"),
+					"link"=>$link,
+					"img"=>$img
+				);
+				$conta = $conta + 1;
+			}
 			$resultado[] = $valori;
 		}
 		$layer->close();

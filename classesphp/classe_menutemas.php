@@ -202,25 +202,25 @@ array
 		{
 			$down = "nao";
 			$ogc = "sim";
-			$temp = ixml($temar,"DOWNLOAD");
+			$temp = $this->ixml($temar,"DOWNLOAD");
 			if (($temp == "sim") || ($temp == "SIM"))
 			{$down = "sim";}
-			$temp = ixml($temar,"OGC");
+			$temp = $this->ixml($temar,"OGC");
 			if (($temp == "nao") || ($temp == "NAO"))
 			{$ogc = "nao";}
 			$link = " ";
-			$temp = ixml($temar,"TLINK");
+			$temp = $this->ixml($temar,"TLINK");
 			if ($temp != "")
 			{$link = $temp;}
-			$tid = ixml($temar,"TID");
-			$nome = ixml($temar,"TNOME");
+			$tid = $this->ixml($temar,"TID");
+			$nome = $this->ixml($temar,"TNOME");
 			$temasraiz[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 		}
 		foreach($xml->GRUPO as $grupo)
 		{
 			$incluigrupo = TRUE;
 			//filtra pelo perfil
-			$temp = ixml($grupo,"PERFIL");
+			$temp = $this->ixml($grupo,"PERFIL");
 			if ($temp != "")
 			{
 				$incluigrupo = FALSE;
@@ -237,32 +237,32 @@ array
 				{
 					$down = "nao";
 					$ogc = "sim";
-					$temp = ixml($temar,"DOWNLOAD");
+					$temp = $this->ixml($temar,"DOWNLOAD");
 					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
-					$temp = ixml($temar,"OGC");
+					$temp = $this->ixml($temar,"OGC");
 					if (($temp == "nao") || ($temp == "NAO"))
 					{$ogc = "nao";}
 					$link = " ";
-					$temp = ixml($temar,"TLINK");
+					$temp = $this->ixml($temar,"TLINK");
 					if ($temp != "")
 					{$link = $temp;}
-					$tid = ixml($temar,"TID");
-					$nome = ixml($temar,"TNOME");
+					$tid = $this->ixml($temar,"TID");
+					$nome = $this->ixml($temar,"TNOME");
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 				}
 				$grupodown = "nao";
-				$grupoogc = "nao";
+				$grupoogc = "sim";
 				foreach($grupo->SGRUPO as $sgrupo)
 				{
 					foreach($sgrupo->TEMA as $tema)
 					{
-						$temp = ixml($tema,"DOWNLOAD");
+						$temp = $this->ixml($tema,"DOWNLOAD");
 						if (($temp == "sim") || ($temp == "SIM"))
 						{$grupodown = "sim";}						
-						$temp = ixml($tema,"OGC");
-						if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
-						{$grupoogc = "sim";}						
+						$temp = $this->ixml($tema,"OGC");
+						if (($temp == "nao") || ($temp == "NAO"))
+						{$grupoogc = "nao";}						
 					}
 				}
 				$subgrupos = array();
@@ -271,7 +271,7 @@ array
 					foreach($grupo->SGRUPO as $sgrupo)
 					{
 						$incluisgrupo = TRUE;
-						$temp = ixml($sgrupo,"PERFIL");
+						$temp = $this->ixml($sgrupo,"PERFIL");
 						if ($temp != "")
 						{
 							$incluisgrupo = FALSE;
@@ -284,22 +284,22 @@ array
 						{
 							//verifica se existem temas que podem receber download
 							$down = "nao";
-							$ogc = "nao";
+							$ogc = "sim";
 							foreach($sgrupo->TEMA as $tema)
 							{
-								$temp = ixml($tema,"DOWNLOAD");
+								$temp = $this->ixml($tema,"DOWNLOAD");
 								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
-								$temp = ixml($tema,"OGC");
-								if (($temp == "") || ($temp != "sim") || ($temp != "SIM"))
-								{$ogc = "sim";}
+								$temp = $this->ixml($tema,"OGC");
+								if (($temp == "nao") || ($temp == "NAO"))
+								{$ogc = "nao";}
 							}
-							$nome = ixml($sgrupo,"SDTIPO");
+							$nome = $this->ixml($sgrupo,"SDTIPO");
 							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
-				$nome = ixml($grupo,"GTIPO");
+				$nome = $this->ixml($grupo,"GTIPO");
 				$grupos[] = array("nome"=>$nome,"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
 		}
@@ -363,7 +363,7 @@ array
 		$subgrupos[] = array();
 		foreach($this->xml->GRUPO as $grupo)
 		{
-			$temp = ixml($grupo,"PERFIL");
+			$temp = $this->ixml($grupo,"PERFIL");
 			if ($conta == $codgrupo)
 			{
 				$incluigrupo = TRUE;
@@ -382,7 +382,7 @@ array
 					foreach($grupo->SGRUPO as $sgrupo)
 					{
 						$incluisgrupo = TRUE;
-						$temp = ixml($sgrupo,"PERFIL");
+						$temp = $this->ixml($sgrupo,"PERFIL");
 						if ($temp != "")
 						{
 							$incluisgrupo = FALSE;
@@ -394,17 +394,17 @@ array
 						if (($incluisgrupo == TRUE))
 						{
 							$down = "nao";
-							$ogc = "nao";
+							$ogc = "sim";
 							foreach($sgrupo->TEMA as $tema)
 							{
-								$temp = ixml($tema,"DOWNLOAD");
+								$temp = $this->ixml($tema,"DOWNLOAD");
 								if (($temp == "sim") || ($temp == "SIM"))
 								{$down = "sim";}
-								$temp = ixml($tema,"OGC");
-								if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
-								{$ogc = "sim";}						
+								$temp = $this->ixml($tema,"OGC");
+								if (($temp == "nao") || ($temp == "NAO"))
+								{$ogc = "nao";}						
 							}
-							$nome = ixml($sgrupo,"SDTIPO");
+							$nome = $this->ixml($sgrupo,"SDTIPO");
 							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down);
 						}
 					}
@@ -413,19 +413,19 @@ array
 				foreach($grupo->TEMA as $temar)
 				{
 					$down = "nao";
-					$ogc = "nao";
-					$temp = ixml($temar,"DOWNLOAD");
+					$ogc = "sim";
+					$temp = $this->ixml($temar,"DOWNLOAD");
 					if (($temp == "sim") || ($temp == "SIM"))
 					{$down = "sim";}
-					$temp = ixml($temar,"OGC");
-					if (($temp == "") || ($temp == "sim") || ($temp == "SIM"))
-					{$ogc = "sim";}
+					$temp = $this->ixml($temar,"OGC");
+					if (($temp == "nao") || ($temp == "NAO"))
+					{$ogc = "nao";}
 					$link = " ";
-					$temp = ixml($temar,"TLINK");
+					$temp = $this->ixml($temar,"TLINK");
 					if ($temp != "")
 					{$link = $temp;}
-					$tid = ixml($temar,"TID");
-					$nome = ixml($temar,"TNOME");
+					$tid = $this->ixml($temar,"TID");
+					$nome = $this->ixml($temar,"TNOME");
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 				}
 			}
@@ -476,10 +476,10 @@ array
 		foreach($this->xml->GRUPO as $g)
 		{
 			$incluigrupo = TRUE;
-			if (ixml($g,"PERFIL") != "")
+			if ($this->ixml($g,"PERFIL") != "")
 			{
 				$incluigrupo = FALSE;
-				$temp = ixml($g,"PERFIL");
+				$temp = $this->ixml($g,"PERFIL");
 				$perfis = str_replace(","," ",$temp);
 				$perfis = explode(" ",$perfis);
 				if ($this->array_in_array($this->perfil,$perfis))
@@ -493,10 +493,10 @@ array
 					foreach ($g->SGRUPO as $s)
 					{
 						$incluisgrupo = TRUE;
-						if (ixml($s,"PERFIL") != "")
+						if ($this->ixml($s,"PERFIL") != "")
 						{
 							$incluisgrupo = FALSE;
-							$temp = ixml($s,"PERFIL");
+							$temp = $this->ixml($s,"PERFIL");
 							$perfis = str_replace(","," ",$temp);
 							$perfis = explode(" ",$perfis);
 							if ($this->array_in_array($this->perfil,$perfis))
@@ -509,11 +509,11 @@ array
 								foreach($s->TEMA as $tema)
 								{
 									$inclui = TRUE;
-									if (ixml($tema,"PERFIL") != "")
+									if ($this->ixml($tema,"PERFIL") != "")
 									{
 										
 										$inclui = FALSE;
-										$temp = ixml($tema,"PERFIL");
+										$temp = $this->ixml($tema,"PERFIL");
 										$perfis = str_replace(","," ",$temp);
 										$perfis = explode(" ",$perfis);
 										if ($this->array_in_array($this->perfil,$perfis))
@@ -529,10 +529,10 @@ array
 										{$ogc = "nao";}
 										$link = " ";
 										if ($tema->TLINK != "")
-										{$link = ixml($tema,"TLINK");}
-										$tid = ixml($tema,"TID");
-										$nome = ixml($tema,"TNOME");
-										$temas[] = array("nacessos"=>(ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
+										{$link = $this->ixml($tema,"TLINK");}
+										$tid = $this->ixml($tema,"TID");
+										$nome = $this->ixml($tema,"TNOME");
+										$temas[] = array("nacessos"=>($this->ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 									}
 								}
 							}
@@ -575,19 +575,19 @@ array
 		//pega os sistemas checando os perfis
 		foreach($this->xml->MAPA as $s)
 		{
-			$ps = ixml($s,"PERFIL");
+			$ps = $this->ixml($s,"PERFIL");
 			$perfis = str_replace(","," ",$ps);
 			$perfis = explode(" ",$perfis);
 			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 			{
-				$n = ixml($s,"NOME");
-				$i = ixml($s,"IMAGEM");
-				$t = ixml($s,"TEMAS");
-				$l = ixml($s,"LIGADOS");
-				$e = ixml($s,"EXTENSAO");
-				$o = ixml($s,"OUTROS");
-				$k = ixml($s,"LINKDIRETO");
-				$p = ixml($s,"PUBLICADO");
+				$n = $this->ixml($s,"NOME");
+				$i = $this->ixml($s,"IMAGEM");
+				$t = $this->ixml($s,"TEMAS");
+				$l = $this->ixml($s,"LIGADOS");
+				$e = $this->ixml($s,"EXTENSAO");
+				$o = $this->ixml($s,"OUTROS");
+				$k = $this->ixml($s,"LINKDIRETO");
+				$p = $this->ixml($s,"PUBLICADO");
 				$mapas[] =  array("PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k);
 			}
 		}
@@ -614,11 +614,11 @@ Array
 		{$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic,$this->editores));}
 		foreach($xmlsistemas->SISTEMA as $s)
 		{
-			$publicado = ixml($s,"PUBLICADO");
+			$publicado = $this->ixml($s,"PUBLICADO");
 			if(strtolower($publicado) != "nao" || $this->editor)
 			{
-				$nomesis = ixml($s,"NOMESIS");
-				$ps = ixml($s,"PERFIL");
+				$nomesis = $this->ixml($s,"NOMESIS");
+				$ps = $this->ixml($s,"PERFIL");
 				$perfis = str_replace(","," ",$ps);
 				$perfis = explode(" ",$perfis);
 				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
@@ -626,11 +626,11 @@ Array
 					$funcoes = array();
 					foreach($s->FUNCAO as $f)
 					{
-						$n = ixml($f,"NOMEFUNCAO");
-						$a = ixml($f,"ABRIR");
-						$w = ixml($f,"JANELAW");
-						$h = ixml($f,"JANELAH");
-						$p = ixml($f,"PERFIL");
+						$n = $this->ixml($f,"NOMEFUNCAO");
+						$a = $this->ixml($f,"ABRIR");
+						$w = $this->ixml($f,"JANELAW");
+						$h = $this->ixml($f,"JANELAH");
+						$p = $this->ixml($f,"PERFIL");
 						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
 						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
 					}
@@ -684,7 +684,7 @@ $procurar - String que será procurada.
 			foreach($xml->GRUPO as $grupo)
 			{
 				$incluigrupo = TRUE;
-				$temp = ixml($grupo,"PERFIL");
+				$temp = $this->ixml($grupo,"PERFIL");
 				if ($temp != "")
 				{
 					$incluigrupo = FALSE;
@@ -700,7 +700,7 @@ $procurar - String que será procurada.
 						$incluisgrupo = TRUE;
 						if ($this->perfil != "")
 						{
-							$temp = ixml($sgrupo,"PERFIL");
+							$temp = $this->ixml($sgrupo,"PERFIL");
 							$perfis = str_replace(","," ",$temp);
 							$perfis = explode(" ",$perfis);
 							if (!$this->array_in_array($this->perfil,$perfis))
@@ -713,7 +713,7 @@ $procurar - String que será procurada.
 								$inclui = TRUE;
 								if ($this->perfil != "")
 								{
-									$temp = ixml($tema,"PERFIL");
+									$temp = $this->ixml($tema,"PERFIL");
 									$perfis = str_replace(","," ",$temp);
 									$perfis = explode(" ",$perfis);
 									if (!$this->array_in_array($this->perfil,$perfis))
@@ -722,28 +722,28 @@ $procurar - String que será procurada.
 								if ($inclui == TRUE)
 								{
 									$down = "nao";
-									$temp = ixml($tema,"DOWNLOAD");
+									$temp = $this->ixml($tema,"DOWNLOAD");
 									if (($temp == "sim") || ($temp == "SIM"))
 									{$down = "sim";}
-									$link = ixml($tema,"TLINK");
-									$tid = ixml($tema,"TID");
+									$link = $this->ixml($tema,"TLINK");
+									$tid = $this->ixml($tema,"TID");
 									
 									if(!isset($texto[$tid]))
 									{
-										$texto[$tid] = array("tid"=>$tid,"nome"=>(ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
+										$texto[$tid] = array("tid"=>$tid,"nome"=>($this->ixml($tema,"TNOME")),"link"=>$link,"download"=>$down);
 										$p1 = $this->removeAcentos($procurar);
 										$p1 = $this->removeAcentos(htmlentities($p1));
-										$pp1 = $this->removeAcentos(ixml($tema,"TNOME"));
+										$pp1 = $this->removeAcentos($this->ixml($tema,"TNOME"));
 										$pp1 = $this->removeAcentos($pp1);
 										$pp1 = $this->removeAcentos(htmlentities($pp1));
-										if (stristr($pp1,$p1) || stristr(ixml($tema,"TNOME"),htmlentities($procurar)))
+										if (stristr($pp1,$p1) || stristr($this->ixml($tema,"TNOME"),htmlentities($procurar)))
 										{
 											$listadetemas[] = $texto[$tid];
 										}
 										else
-										if(ixml($tema,"TAGS") != "")
+										if($this->ixml($tema,"TAGS") != "")
 										{
-											$pp1 = ixml($tema,"TAGS");
+											$pp1 = $this->ixml($tema,"TAGS");
 											$pp1 = $this->removeAcentos($pp1);
 											if (stristr($pp1,$p1))
 											{$listadetemas[] = $texto[$tid];}	
@@ -753,7 +753,7 @@ $procurar - String que será procurada.
 							}
 							if (count($listadetemas) > 0)
 							{
-								$subgrupo[] = array("subgrupo"=>(ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
+								$subgrupo[] = array("subgrupo"=>($this->ixml($sgrupo,"SDTIPO")),"temas"=>$listadetemas);
 							}
 							$listadetemas = array();
 						}
@@ -761,7 +761,7 @@ $procurar - String que será procurada.
 					}
 					if (count($subgrupo) > 0)
 					{
-						$resultado[] = array("grupo"=>(ixml($grupo,"GTIPO")),"subgrupos"=>$subgrupo);
+						$resultado[] = array("grupo"=>($this->ixml($grupo,"GTIPO")),"subgrupos"=>$subgrupo);
 					}
 					$subgrupo = array();
 				}
@@ -793,7 +793,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 			foreach ( simplexml_load_file($rss)->channel->item as $item )
 			{
 				if($conta < $nrss)
-				$noticiasRSS[] = array("desc"=>(ixml($item,"description")),"titulo"=>(ixml($item,"title")),"link"=>(ixml($item,"link")));
+				$noticiasRSS[] = array("desc"=>($this->ixml($item,"description")),"titulo"=>($this->ixml($item,"title")),"link"=>($this->ixml($item,"link")));
 				$conta++;
 			}	
 		}
@@ -818,7 +818,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 			foreach($xml->GRUPO as $grupo)
 			{
 				$incluigrupo = TRUE;
-				$temp = ixml($grupo,"PERFIL");
+				$temp = $this->ixml($grupo,"PERFIL");
 				if ($temp != "")
 				{
 					$incluigrupo = FALSE;
@@ -833,7 +833,7 @@ nrss - (opcional) número de registros no rss que serão considerados
 						$incluisgrupo = TRUE;
 						if ($this->perfil != "")
 						{
-							$temp = ixml($sgrupo,"PERFIL");
+							$temp = $this->ixml($sgrupo,"PERFIL");
 							$perfis = str_replace(","," ",$temp);
 							$perfis = explode(" ",$perfis);
 							if (!$this->array_in_array($this->perfil,$perfis))
@@ -853,8 +853,8 @@ nrss - (opcional) número de registros no rss que serão considerados
 								}
 								if ($inclui == TRUE)
 								{
-									$tid = ixml($tema,"TID");
-									$tags = explode(" ",ixml($tema,"TAGS"));
+									$tid = $this->ixml($tema,"TID");
+									$tags = explode(" ",$this->ixml($tema,"TAGS"));
 									foreach ($tags as $tag)
 									{
 										if($tag != "")
@@ -956,5 +956,10 @@ nrss - (opcional) número de registros no rss que serão considerados
 		}
 		return $editor;
 	}
+	function ixml($no,$nome)
+	{
+		return mb_convert_encoding($no->$nome,"HTML-ENTITIES","auto");
+	}
+
 }
 ?>

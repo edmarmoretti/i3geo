@@ -1932,6 +1932,8 @@ Include:
 /*
 Property: identifica
 
+Depreciado na versão 4.2 (utilize "identifica2")
+
 Identifica elementos no mapa.
 
 Include:
@@ -1944,6 +1946,22 @@ Include:
 		$m = new Atributos($map_file,$tema);
 		$cp->set_data($m->identifica($opcao,$xy,$resolucao));
 	break;
+/*
+Property: identifica2
+
+Identifica elementos no mapa.
+
+Include:
+<classe_atributos.php>
+*/
+	case "identifica2":
+		if (!isset($tema)){$tema = "";}
+		if (!isset($resolucao)){$resolucao = 5;}
+		include_once("classe_atributos.php");
+		$m = new Atributos($map_file,$tema);
+		$cp->set_data($m->identifica2($opcao,$xy,$resolucao));
+	break;
+
 /*
 Property: identificaunico
 

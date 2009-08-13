@@ -671,51 +671,62 @@ i3GEO.mapa = {
 			var etiquetas = false;
 			for(var j=0;j<ntemas;j++)
 			{if(i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas != ""){var etiquetas = true;}}
-			if(etiquetas == false){return;}	
-			if($i("img")){$i("img").style.cursor = "wait";}
+			if(etiquetas == false){return;}
+			
+			if(i3GEO.interface.ATUAL=="padrao"){$i("img").style.cursor = "wait";}
+			
 			var retorna = function(retorno){
 				var i = $i("i3geo_rosa");
 				if(i){i.style.display="none";}			
 				var mostra = false;
 				try{
 					var retorno = retorno.data;
-					if ($i("img"))
-					{$i("img").title = "";}
-					if (retorno != ""){
+					if (retorno != "")
+					{
 						var res = "";
-						var temas = retorno.split("!");
-						var tema = temas.length-1;
-						if(tema >= 0){
-							do{
-								var titulo = temas[tema].split("@");
-								if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao")
-								{res += "<span style='text-align:left;font-size:9pt'><b>"+titulo[0]+"</b></span><br>";}
-								var ocorrencias = titulo[1].split("*");
-								var ocorrencia = ocorrencias.length-1;
-								if(ocorrencia >= 0){
-									do{
-										if (ocorrencias[ocorrencia] != ""){
-											var pares = ocorrencias[ocorrencia].split("##");
-											var paresi = pares.length;
-											for (var par=0;par<paresi; par++){
-												var valores = pares[par].split("#");
-												if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao"){
-													res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'>" + valores[0] + " <i>" + valores[1] + "</i></span><br>";
-													var mostra = true;
-												}
-												else{
-													res = res + "<span class='tiptexto' style='text-align:left;font-size:9pt'><i>" + valores[1] + "</i></span><br>";
-													var mostra = true;
-												}
-											}
+						var temas = retorno;
+						var ntemas = temas.length;
+						for(var j=0;j<ntemas;j++){
+							var titulo = temas[j].nome;
+							if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao")
+							{var titulo = "<span style='text-decoration:underline;text-align:left;font-size:9pt'><b>"+titulo+"</b></span><br>";}
+							else
+							{var titulo = "";}
+							var tips = (temas[j].resultado.tips).split(",");
+							var ntips = tips.length;
+							var ins = "";
+							for(var r=0;r<ntips;r++){
+								var ds = temas[j].resultado.dados;
+								if(ds != " "){
+									var nds = ds.length;	
+									for(var s=0;s<nds;s++){
+										eval("var alias = ds[s]."+tips[r]+".alias");
+										eval("var valor = ds[s]."+tips[r]+".valor");
+										eval("var link = ds[s]."+tips[r]+".link");
+										eval("var img = ds[s]."+tips[r]+".img");
+										if (i3GEO.configura.tipotip == "completo" || i3GEO.configura.tipotip == "balao"){
+											if(valor != "")
+											ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";
+											if(img != "")
+											ins += img+"<br>";
+											
+											var mostra = true;
+										}
+										else{
+											ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
+											var mostra = true;
 										}
 									}
-									while(ocorrencia--)
 								}
 							}
-							while(tema--)
+							if(ins != "")
+							var res = res + titulo + ins;
 						}
-						if(!mostra){$i("tip").style.display="none";return;}
+						if(!mostra){
+							if($i("tip"))
+							$i("tip").style.display="none";
+							return;
+						}
 						else{		
 							if(i3GEO.configura.tipotip != "balao"){
 								var n = i3GEO.janela.tip();
@@ -733,7 +744,7 @@ i3GEO.mapa = {
 							}
 						}
 					}
-					if($i("img")){
+					if(i3GEO.interface.ATUAL=="padrao"){
 						var temp = "zoom";
 						if(i3GEO.interface.ATIVAMENUCONTEXTO)
 						var temp = "identifica_contexto";
@@ -741,7 +752,7 @@ i3GEO.mapa = {
 					}
 				}
 				catch(e){
-					if($i("img")){
+					if(i3GEO.interface.ATUAL=="padrao"){
 						var temp = "identifica";
 						if(i3GEO.interface.ATIVAMENUCONTEXTO)
 						var temp = "identifica_contexto";
@@ -749,7 +760,7 @@ i3GEO.mapa = {
 					}
 				}
 			};
-			i3GEO.php.identifica(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
+			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
 		}
 	}
 };

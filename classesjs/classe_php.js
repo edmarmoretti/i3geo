@@ -788,7 +788,9 @@ i3GEO.php = {
 	},
 	/*
 	Function: identifica
-
+	
+	Depreciado na versão 4.2 (utilize "identifica2")
+	
 	PHP:
 	classesphp/classe_atributos.php
 	
@@ -796,9 +798,23 @@ i3GEO.php = {
 	*/
 	identifica: function(funcao,x,y,resolucao){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"identifica",funcao);	
 	},
+	/*
+	Function: identifica2
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<Atributos->identifica2>	
+	*/
+	identifica2: function(funcao,x,y,resolucao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"identifica",funcao);	
+	},
+
 	/*
 	Function: reiniciaMapa
 
