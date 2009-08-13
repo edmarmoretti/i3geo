@@ -412,6 +412,7 @@ i3GEO.interface = {
 						}
 					}
 				}
+				i3GEO.interface.openlayers.recalcPar();
 			}
 			i3GEO.janela.fechaAguarde();
 		},
