@@ -313,17 +313,23 @@ lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas 
 		$lista = explode(",",$lista);
 		$lista = array_reverse($lista);
 		$novaordem = array();
-		$escondidos = array();
 		foreach ($lista as $l)
 		{
 			for ($i=0;$i<$nlayers;++$i)
 			{
 				$la = $this->mapa->getlayer($i);
-				$g = strtoupper($la->group);
-				$n = strtoupper($la->name);
-				//echo "$l $n $g -";
-				if ((strtoupper($l) == $n) || (strtoupper($l) == $g))
-				{$novaordem[] = $i;}
+				if($la->getmetadata("escondido") != "")
+				{
+					if (!in_array($la->index,$novaordem))
+					$novaordem[] = $i;
+				}
+				else
+				{
+					$g = strtoupper($la->group);
+					$n = strtoupper($la->name);
+					if ((strtoupper($l) == $n) || (strtoupper($l) == $g))
+					{$novaordem[] = $i;}
+				}
 			}
 		}
 		for ($i=0;$i<$nlayers;++$i)
@@ -331,6 +337,8 @@ lista - lista com a nova ordem para os temas. A lista contém os nomes dos temas 
 			if (!in_array($i,$novaordem))
 			{$novaordem[] = $i;}
 		}
+		//echo "<pre>";
+		//var_dump($novaordem);
 		$this->mapa->setlayersdrawingorder($novaordem);
 		return "ok";
 	}
