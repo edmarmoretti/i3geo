@@ -5679,9 +5679,10 @@ i3GEO.php = {
 	
 	<Mapa->ligaDesligaTemas>	
 	*/
-	ligatemas: function(funcao,desligar,ligar){
+	ligatemas: function(funcao,desligar,ligar,adicionar){
 		i3GEO.php.verifica();
-		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+desligar+"&ligar="+ligar+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
+		if(arguments.length == 3){var adicionar = "nao";}
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+desligar+"&ligar="+ligar+"&adicionar="+adicionar+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"ligaDesligaTemas",funcao);	
 	},
 	/*
@@ -6243,7 +6244,9 @@ i3GEO.php = {
 	},
 	/*
 	Function: identifica
-
+	
+	Depreciado na versão 4.2 (utilize "identifica2")
+	
 	PHP:
 	classesphp/classe_atributos.php
 	
@@ -6251,9 +6254,23 @@ i3GEO.php = {
 	*/
 	identifica: function(funcao,x,y,resolucao){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"identifica",funcao);	
 	},
+	/*
+	Function: identifica2
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<Atributos->identifica2>	
+	*/
+	identifica2: function(funcao,x,y,resolucao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"identifica",funcao);	
+	},
+
 	/*
 	Function: reiniciaMapa
 
@@ -6787,9 +6804,9 @@ i3GEO.util = {
 		return(palavra);
 	},
 	/*
-	Function protocolo
+	Function: protocolo
 	
-	Obtém o protocoloutilizado na URL atual
+	Obtém o protocolo utilizado na URL atual
 	
 	Return:
 	
