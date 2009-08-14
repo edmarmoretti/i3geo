@@ -75,6 +75,7 @@ if (isset($_FILES['fileshp']['name']))
 		if ($tipo == 1){$novolayer->set("type",MS_LAYER_POINT);} // ponto
 		if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
 		if ($tipo == 5){$novolayer->set("type",MS_LAYER_POLYGON);}
+		$novolayer->setmetadata("TEMALOCAL","SIM");
 		//if (($tipo != 3) and ($tipo != 8 )){$novolayer->set("type",0);}
 		$novolayer->setfilter("");
 		$classe = $novolayer->getclass(0);
