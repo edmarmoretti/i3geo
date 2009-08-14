@@ -121,6 +121,7 @@ if (isset($_FILES['filedbf']['name']))
 			$novolayer->set("name",basename($nomeshp));
 			$novolayer->setmetadata("TEMA",basename($nomeshp));
 			$novolayer->setmetadata("DOWNLOAD","SIM");
+			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->set("type",MS_LAYER_POINT);
 			$novolayer->setfilter("");
 			$classe = $novolayer->getclass(0);
