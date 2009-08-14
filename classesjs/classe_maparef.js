@@ -333,12 +333,13 @@ i3GEO.maparef = {
 				var box = $i("boxref");
 			}
 			i3GEO.calculo.ext2rect("boxref",extentref,i3GEO.parametros.mapexten,g_celularef,$i("mapaReferencia"));
-			if(parseInt(box.style.width) > 120)
-			box.style.display = "none";
+			var w = parseInt(box.style.width);
+			if(w > 120 || w < 10)
+			{box.style.display = "none";}
 			else{
 				box.style.display = "block";
-				box.style.top = parseInt(box.style.top)+2;
-				box.style.left = parseInt(box.style.left)+2;
+				box.style.top = parseInt(box.style.top)+4;
+				box.style.left = parseInt(box.style.left)+4;
 			}
 		}
 	},

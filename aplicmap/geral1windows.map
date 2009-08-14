@@ -121,7 +121,7 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 		EXTENT -79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 #-75.2486 -35.4973 -31.2486 5.99421
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGE "c:/ms4w/apache/htdocs/i3geo/imagens/referencia1.png"
-		OUTLINECOLOR 255 0 0
+		OUTLINECOLOR 120 220 220
 		SIZE 150 150
 		STATUS off
 		MARKER "ref"
@@ -188,6 +188,8 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 			"ITENSDESC"	"FIPS,GMI,Nome" #descricao dos nomes dos itens
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
+			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+			#"ESCONDIDO" "sim"
 		END
 		NAME "mundo"
 		SIZEUNITS PIXELS
@@ -240,6 +242,7 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 			"TEMA"	"Brasil"
 			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
 			"IDENTIFICA" "nao"
+			#"ESCONDIDO" "sim"
 		END
 		NAME "estados"
 		SIZEUNITS PIXELS

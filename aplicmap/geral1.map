@@ -123,7 +123,7 @@ MAP
 		EXTENT -79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 #-75.2486 -35.4973 -31.2486 5.99421
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGE "/opt/www/html/i3geo/imagens/referencia1.png"
-		OUTLINECOLOR 255 0 0
+		OUTLINECOLOR 120 220 220
 		SIZE 150 150
 		STATUS off
 		MARKER "ref"
