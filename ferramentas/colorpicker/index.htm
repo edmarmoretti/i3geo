@@ -24,7 +24,7 @@ body {
 <!--begin custom header content for this example-->
 
 <style type="text/css">
-  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 380px; height:200px; }
+  #container { position: relative; padding: 6px; background-color: #eeeeee; width: 300px; height:200px; }
 </style>
 
 
@@ -106,6 +106,7 @@ function aplicarCor()
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
 	var ncor = document.getElementById("yui-picker-r").value+","+document.getElementById("yui-picker-g").value+","+document.getElementById("yui-picker-b").value
 	doc.getElementById(elemento).value = ncor;
+	window.parent.YAHOO.janelaCor.xp.panel.destroy();
 }
 </script>
 

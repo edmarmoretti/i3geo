@@ -7236,7 +7236,47 @@ i3GEO.util = {
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 	*/
 	abreCor: function(janela,elemento){
-		i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+		var wlargura = "400";
+		var waltura = "240";
+		var wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento;
+		var nx = "";
+		var ny = "";
+		var texto = "Cor";
+		var id = "i3geo_janelaCor"
+		var modal = true;
+		var classe = "hd";
+		var wlargura_ = "400px";
+		YAHOO.namespace("janelaCor.xp");
+		if ($i(id))
+		{YAHOO.janelaCor.xp.panel.destroy();}
+		var ins = '<div id="'+id+'_cabecalho" class="hd">';
+		ins += "<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
+		ins += texto;
+		ins += '</div><div id="i3geo_janelaCor_corpo" class="bd" style="padding:5px">';
+		if(wsrc != "")
+		ins += '<iframe name="'+id+'i" id="i3geo_janelaCori" valign="top" style="border:0px white solid"></iframe>';
+		ins += '</div>';
+		var novoel = document.createElement("div");
+		novoel.id = "i3geo_janelaCor";
+		novoel.style.display="block";
+		novoel.innerHTML = ins;
+		if($i("i3geo"))
+		{$i("i3geo").appendChild(novoel);}
+		else
+		{document.body.appendChild(novoel);}
+		var wdocaiframe = $i("i3geo_janelaCori");
+		if (wdocaiframe)
+		{
+			with (wdocaiframe.style){width = parseInt(wlargura)-12;height=waltura;};
+			wdocaiframe.style.display = "block";
+			wdocaiframe.src = wsrc;
+		}
+		var fix = false;
+		if(nx == "" || nx == "center"){var fix = true;}
+		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaCor.xp.panel.render();
+		$i(id+'_cabecalho').className = classe;
 	},
 	/*
 	Function: ajaxhttp
