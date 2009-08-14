@@ -290,20 +290,6 @@ i3GEO.arvoreDeCamadas = {
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign="left";
    		i3GEO.arvoreDeCamadas.ARVORE.draw();
    		this.ativaDragDrop();
-   		if(i3GEO.interface.ATUAL == "googlemaps"){
-   			i3GEO.arvoreDeCamadas.adicionaListaKml();
-   		}
-	},
-	adicionaListaKml: function(){
-		var monta = function(retorno){
-			var raiz = retorno.data.canais;
-			var nraiz = raiz.length;
-			for (i=0;i<nraiz; i++){
-				i3GEO.interface.googlemaps.adicionaKml(false,raiz[i].link,raiz[i].title,false);
-			}
-			node.loadComplete();
-		};
-		i3GEO.php.listaRSSwsARRAY(monta,"KML");
 	},
 	/*
 	Function: ativaDragDrop

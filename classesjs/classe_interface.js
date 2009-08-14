@@ -583,22 +583,17 @@ i3GEO.interface = {
 
 		redesenha: function(){
    			try{
-   			if(i3GeoMap != ""){
-   				posfixo = posfixo + "&";
-				i3GeoMap.removeOverlay(i3GEOTileO);
-				var i3GEOTile = new GTileLayer(null,0,18,{
-               	tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
-               	isPng:true,
-               	opacity:i3GEO.interface.googlemaps.OPACIDADE });
-              	i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
-   				i3GeoMap.addOverlay(i3GEOTileO);
-			}
-			//atualiza a lista de KMLs na árvore de temas
-			var n = i3GEO.mapa.GEOXML.length;
-			for(i=0;i<n;i++){
-				i3GEO.mapa.criaNoArvoreGoogle(i3GEO.mapa.GEOXML[i],i3GEO.mapa.GEOXML[i]);
-			}
-			}catch(e){alert(e)}
+   				if(i3GeoMap != ""){
+   					posfixo = posfixo + "&";
+					i3GeoMap.removeOverlay(i3GEOTileO);
+					var i3GEOTile = new GTileLayer(null,0,18,{
+               		tileUrlTemplate:i3GEO.interface.googlemaps.criaTile()+posfixo,
+               		isPng:true,
+               		opacity:i3GEO.interface.googlemaps.OPACIDADE });
+              		i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
+   					i3GeoMap.addOverlay(i3GEOTileO);
+				}
+			}catch(e){}
 		},
 		cria: function(w,h){
 			posfixo = "&";
@@ -685,6 +680,7 @@ i3GEO.interface = {
     		if(i3GEO.parametros.kmlurl != "")
     		{i3GEO.mapa.insereKml(true,i3GEO.parametros.kmlurl)}
     		i3GEO.parametros.mapscale = i3GEO.interface.googlemaps.calcescala();
+   			i3GEO.interface.googlemaps.adicionaListaKml();
 		},
 		bbox: function(){
 			var bd = i3GeoMap.getBounds();
@@ -777,6 +773,8 @@ i3GEO.interface = {
 		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
 		*/
 		adicionaKml: function(pan,url,titulo,ativo){
+			if(!$i("arvoreCamadasKml"))
+			{i3GEO.interface.googlemaps.criaArvoreKML();}
 			var ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
 			if(arguments.length == 1){
 				var i = $i("i3geo_urlkml");
@@ -804,6 +802,16 @@ i3GEO.interface = {
 			{eval("i3GeoMap.addOverlay("+ngeoxml+")");}
 			i3GEO.interface.googlemaps.adicionaNoArvoreGoogle(url,titulo,ativo,ngeoxml);
 		},
+		adicionaListaKml: function(){
+			var monta = function(retorno){
+				var raiz = retorno.data.canais;
+				var nraiz = raiz.length;
+				for (i=0;i<nraiz; i++){
+					i3GEO.interface.googlemaps.adicionaKml(false,raiz[i].link,raiz[i].title,false);
+				}
+			};
+			i3GEO.php.listaRSSwsARRAY(monta,"KML");
+		},
 		/*
 		Function: adicionaNoArvoreGoogle
 		
@@ -824,16 +832,12 @@ i3GEO.interface = {
 		id {string} - nome do objeto GGeoXml
 		*/
 		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
+			if(!$i("arvoreCamadasKml"))
+			{i3GEO.interface.googlemaps.criaArvoreKML();}
 			if(arguments.length == 2){var ativo = true;var id = nomeOverlay;}
 			if(arguments.length == 2){var id = nomeOverlay;}
-			var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-			var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
-			if(!node){
-				var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
-				var d = {html:titulo,idkml:"raiz"};
-				var node = new YAHOO.widget.HTMLNode(d, root, true,true);
-				node.enableHighlight = false;
-			}
+			var root = i3GEO.interface.googlemaps.ARVORE.getRoot();
+			var node = i3GEO.interface.googlemaps.ARVORE.getNodeByProperty("idkml","raiz");
 			html = "<input onclick='i3GEO.interface.googlemaps.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
 			if(ativo == true){html += " checked ";}
 			html += "/>";
@@ -842,9 +846,30 @@ i3GEO.interface = {
 			var nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
 			nodekml.enableHighlight = false;   			
 			nodekml.isleaf = true;
-			i3GEO.arvoreDeCamadas.ARVORE.draw();
-			i3GEO.arvoreDeCamadas.ARVORE.collapseAll();
+			i3GEO.interface.googlemaps.ARVORE.draw();
+			i3GEO.interface.googlemaps.ARVORE.collapseAll();
 			node.expand();
+		},
+		criaArvoreKML: function(){
+			try{
+			var arvore = $i("arvoreCamadasKml");
+			if(!arvore){
+				var d = document.createElement("div");
+				d.id = "arvoreCamadasKml";
+				d.style.top = "40px";
+				var a = $i(i3GEO.arvoreDeCamadas.IDHTML);
+				if(a){
+					a.parentNode.appendChild(d);
+				}
+				else{alert("Arvore de camadas nao encontrada. Nao e possivel adicionar a arvore de KML");return;}
+			}
+			i3GEO.interface.googlemaps.ARVORE = new YAHOO.widget.TreeView("arvoreCamadasKml");
+			var root = i3GEO.interface.googlemaps.ARVORE.getRoot();
+			var titulo = "<table><tr><td><b>Google Maps</b></td></tr></table>";
+			var d = {html:titulo,idkml:"raiz"};
+			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
+			node.enableHighlight = false;
+			}catch(e){alert(e)}
 		},
 		/*
 		Function: ativaDesativaCamadaKml
