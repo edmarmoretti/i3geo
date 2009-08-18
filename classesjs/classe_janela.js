@@ -180,6 +180,7 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
+		if(i3GEO.interface.ATUAL=="googleearth"){var classe = "bd";}
 		$i(id+'_cabecalho').className = classe;
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
@@ -195,6 +196,9 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada
 	*/
 	fecha: function(id){
+		if(i3GEO.interface.ATUAL=="googleearth"){
+			YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
+		}
 		//esconde o box do google
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
