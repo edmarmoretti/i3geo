@@ -800,9 +800,6 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 */
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
-		//error_reporting(E_ALL);
-		
-		//include_once($locaplic."/admin/php/menutemas.php");
 		//limpa selecao
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
@@ -889,9 +886,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 								if ($nummove > 2)
 								{
 									for ($i=0;$i<=($nummove - 3);++$i)
-									{
-										$this->mapa->movelayerup($indicel);
-									}
+									{$this->mapa->movelayerup($indicel);}
 								}
 							}
 						}

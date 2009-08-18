@@ -1523,7 +1523,27 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM")
 	{
 		$estilo->set( "size",4);
 		$estilo->set("symbolname","ponto");
-	}	
+	}
+	//reposiciona o layer na pilha
+	$ltipo = $l->type;
+	if (($ltipo == 2) || ($ltipo == 3))
+	{
+		$indicel = $l->index;
+		$numlayers = $oMapa->numlayers;
+		$nummove = 0;
+		for ($i = $numlayers-1;$i > 0;$i--)
+		{
+			$layerAbaixo = $oMapa->getlayer($i);
+			$tipo = $layerAbaixo->type;
+			if (($tipo != 2) && ($tipo != 3))
+			{$nummove++;}
+		}
+		if ($nummove > 2)
+		{
+			for ($i=0;$i<=($nummove - 3);++$i)
+			{$oMapa->movelayerup($indicel);}
+		}
+	}
 	return $l;
 }
 /*
