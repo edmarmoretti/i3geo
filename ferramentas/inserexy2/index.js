@@ -144,13 +144,16 @@ function criaPol()
 //cria um novo tema editavel
 function criatemaeditavel()
 {
-	aguarde("block")
-	$i("resultado").innerHTML = ""
-	var cp = new cpaint();
-	cp.set_response_type("JSON");
-	cp.set_transfer_mode("POST");
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
-	cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
+ 	var tituloTema = window.prompt("Titulo do novo tema","");
+	if (tituloTema!=null){
+		aguarde("block")
+		$i("resultado").innerHTML = ""
+		var cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.set_transfer_mode("POST");
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
+		cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio&tituloTema="+tituloTema);
+	}
 }
 //ativa o tema com o shape vazio
 function ativanovotema(retorno)

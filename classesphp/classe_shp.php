@@ -99,10 +99,14 @@ function: criaSHPvazio
 
 Cria um shape file do tipo pontual vazio no diretório local
 
+Parameter:
+
+$tituloTema - título do novo tema
+
 return:
 Nome do tema criado.
 */
-	function criaSHPvazio()
+	function criaSHPvazio($tituloTema="")
 	{
 		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
 		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
@@ -120,7 +124,9 @@ Nome do tema criado.
 		xbase_close($db);
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->free();
-		$l->setmetadata("tema",$novonomelayer." pontos");
+		if($tituloTema == "")
+		{$tituloTema = $novonomelayer." pontos";}
+		$l->setmetadata("tema",$tituloTema);
 		$l->setmetadata("TEMALOCAL","SIM");
 		$l->setmetadata("DOWNLOAD","sim");
 		$l->set("data",$nomeshp);

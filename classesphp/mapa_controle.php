@@ -1426,10 +1426,10 @@ Include:
 */
 	case "criashpvazio":
 		include_once("classe_shp.php");
-		//se colocar aqui da um erro
-		//copiaSeguranca($map_file);
 		$m = new SHP($map_file);
-		$cp->set_data($m->criaSHPvazio());
+		if(!isset($tituloTema))
+		{$tituloTema = "";}
+		$cp->set_data($m->criaSHPvazio($tituloTema));
 		$m->salva();
 	break;
 /*
