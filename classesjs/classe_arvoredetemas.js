@@ -1236,7 +1236,16 @@ i3GEO.arvoreDeTemas = {
 					if(i3GEO.arvoreDeTemas.RETORNAGUIA != i3GEO.guias.ATUAL){
 						i3GEO.guias.mostra(i3GEO.arvoreDeTemas.RETORNAGUIA);
 					}
-				}					
+				}
+				//
+				//verifica se a janela a ferramenta identifica está ativa
+				//
+				try{
+					if(g_tipoacao=='identifica'){
+						eval(i3GEO.configura.funcaoIdentifica);
+					}
+				}
+				catch(r){}
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}
