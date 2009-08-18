@@ -222,6 +222,7 @@ function iniciaMapa()
 	$res .= "var mensagens ='".$m->pegaMensagens()."';";
 	$res .= "var kmlurl ='".$kmlurl."';";
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
+	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));
 }
 ?>
