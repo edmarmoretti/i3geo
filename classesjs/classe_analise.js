@@ -418,7 +418,9 @@ i3GEO.analise = {
 				catch(e){}
 				var m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 				if($i("mostraarea_calculo"))
-				{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m+"<br><b>km2</b>= "+m/1000000+"<br><b>ha</b>= "+m/10000;}
+				{
+					$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2);
+				}
 				if (n > 3){
 				//var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
 				//pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
