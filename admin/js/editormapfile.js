@@ -733,9 +733,9 @@ function montaEditorConexao(dados)
 		"linhas":[
 		{ajuda:"Type of connection. Default is local.",
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
-		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db]",
+		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentuação, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		titulo:"Connection",id:"connection",value:dados.connection,tipo:"text"},
-		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name.",
+		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 ",
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
 		{ajuda:"Item that contains the location of an individual tile, default is 'location'.",
 		titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
@@ -1123,13 +1123,15 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		//validação
 		//
 		var valorTeste = $i("extensao").value
-		var teste1 = valorTeste.split(" ");
-		if(teste1.length != 4)
-		{alert("Sao necessarios 4 valores em extensao");return;}
-		if(teste1[0]*1 > teste1[2]*1)
-		{alert("xmin maior que xmax em extensao");return;}
-		if(teste1[1]*1 > teste1[3]*1)
-		{alert("ymin maior que ymax em extensao");return;}
+		if(valorTeste != ""){
+			var teste1 = valorTeste.split(" ");
+			if(teste1.length != 4)
+			{alert("Sao necessarios 4 valores em extensao");return;}
+			if(teste1[0]*1 > teste1[2]*1)
+			{alert("xmin maior que xmax em extensao");return;}
+			if(teste1[1]*1 > teste1[3]*1)
+			{alert("ymin maior que ymax em extensao");return;}
+		}
 		var valorTeste = $i("escala").value
 		if(valorTeste != ""){
 			var teste1 = valorTeste * 1;

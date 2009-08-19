@@ -185,6 +185,7 @@ if (!isset($debug))
 {error_reporting(0);$debug="nao";}
 else
 {error_reporting(E_ALL);$debug="sim";}
+
 /*
 Define o cookie para o idioma da interface
 */

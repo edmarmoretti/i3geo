@@ -78,32 +78,14 @@ if ($menutemas != "" || is_array($menutemas))
 			$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
 			$desc = mb_convert_encoding($grupo->DTIPO,"auto","auto");
 			kml_cabecalho($nome,$desc);
+			foreach($grupo->TEMA as $tema)
+			{kml_tema($tema);}
 			foreach($grupo->SGRUPO as $sgrupo)
 			{
 				$nome = mb_convert_encoding($sgrupo->SDTIPO,"auto","auto");
 				kml_folder($nome);
 				foreach($sgrupo->TEMA as $tema)
-				{
-					$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
-					$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
-					$id = mb_convert_encoding($tema->TID,"auto","auto");
-					$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
-					$tipoa = "";
-					if($tema->TIPOA)
-					$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
-					$ogc = sim;
-					if($tema->TID)
-					{
-						$kml = mb_convert_encoding($tema->KML,"auto","auto");
-					}
-					if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
-					{
-    					$fonte = "<a href='$fonte' >Fonte </a>";
-    					$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-						$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-						kml_servico($nome,$fonte,$legenda,$desc,$href);
-					}
-				}		
+				{kml_tema($tema);}		
 				echo "</Folder>\n";	
 			}
 			echo "</Folder>\n";
@@ -177,6 +159,27 @@ function kml_folder($nome)
 	echo "  <name>".str_replace("&","&amp;",$nome)."</name>\n";
 	echo "  <description></description>\n";
 	echo "  <open>0</open><visibility>0</visibility>\n";
+}
+function kml_tema($tema)
+{
+	global $urli3geo;
+	$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
+	$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
+	$id = mb_convert_encoding($tema->TID,"auto","auto");
+	$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
+	$tipoa = "";
+	if($tema->TIPOA)
+	$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
+	$ogc = sim;
+	if($tema->TID)
+	{$kml = mb_convert_encoding($tema->KML,"auto","auto");}
+	if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
+	{
+		$fonte = "<a href='$fonte' >Fonte </a>";
+		$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+		$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+		kml_servico($nome,$fonte,$legenda,$desc,$href);
+	}
 }
 function kml_servico($nome,$fonte,$legenda,$desc,$href)
 {
