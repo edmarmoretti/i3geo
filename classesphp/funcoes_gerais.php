@@ -1768,7 +1768,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 				$dir = dirname($dados);
 				$arq = explode(".",basename($dados));
 				$nomecopia = $dir_tmp."/".$arq[0];
-				$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld");
+				$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
 				foreach($exts as $ext)
 				{
 					$copia = $nomecopia.".".$ext;
