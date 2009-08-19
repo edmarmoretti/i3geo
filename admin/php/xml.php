@@ -100,7 +100,8 @@ function geraRSStemasDownload($locaplic)
 		and n2.id_subgrupo = sg.id_subgrupo
 		and n2.id_n1 = n1.id_n1 
 		and n1.id_grupo = g.id_grupo
-		and (t.download_tema = 'sim' or t.download_tema = 'SIM')
+		and (t.download_tema != 'nao' and t.download_tema != 'NAO') 
+		and t.tipoa_tema != 'WMS' 
 		and n3.n3_perfil = '' 
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
@@ -121,7 +122,7 @@ function geraRSStemasKml($locaplic)
 		and n2.id_subgrupo = sg.id_subgrupo
 		and n2.id_n1 = n1.id_n1 
 		and n1.id_grupo = g.id_grupo
-		and (t.kml_tema = 'sim' or t.kml_tema = 'SIM')
+		and (t.kml_tema != 'nao' and t.kml_tema != 'NAO')
 		and n3.n3_perfil = '' 
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
@@ -142,7 +143,8 @@ function geraRSStemasOgc($locaplic)
 		and n2.id_subgrupo = sg.id_subgrupo
 		and n2.id_n1 = n1.id_n1 
 		and n1.id_grupo = g.id_grupo
-		and (t.ogc_tema != 'nao' or t.ogc_tema != 'NAO')
+		and (t.ogc_tema != 'nao' or t.ogc_tema != 'NAO') 
+		and t.tipoa_tema != 'WMS' 
 		and n3.n3_perfil = '' 
 		and n2.n2_perfil = ''
 		and n1.n1_perfil = ''
