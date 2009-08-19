@@ -1316,7 +1316,7 @@ i3GEO.arvoreDeTemas = {
 			var ins = "<select id='"+idCombo+"' SIZE="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"(this.value)' ><option value='' >Escolha um grupo:</option>";
 			for (ig=0;ig<obGrupos.grupos.length; ig++){
 				if(obGrupos.grupos[ig].nome)
-				ins += "<option value="+ig+" >"+obGrupos.grupos[ig].nome+"</option>";
+				ins += "<option value="+obGrupos.grupos[ig].id_n1+" >"+obGrupos.grupos[ig].nome+"</option>";
 			}
 			$i(idDestino).innerHTML = ins+"</select>";
 		};
@@ -1352,7 +1352,7 @@ i3GEO.arvoreDeTemas = {
 				if (retorno.data.subgrupo){
 					var sg = retorno.data.subgrupo;
 					for (ig=0;ig<sg.length; ig++){	
-						ins += "<option value="+ig+" >"+sg[ig].nome+"</option>";
+						ins += "<option value="+sg[ig].id_n2+" >"+sg[ig].nome+"</option>";
 					}
 				}
 				$i(idDestino).innerHTML = ins+"</select>";

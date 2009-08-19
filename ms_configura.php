@@ -50,7 +50,7 @@ Free Software Foundation, Inc., no endereço
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Versão 4.2 beta 3';
+$mensagemInicia = 'Versão 4.2';
 /*
 	Variable: tituloInstituicao
 	
@@ -59,7 +59,7 @@ $mensagemInicia = 'Versão 4.2 beta 3';
 	Tipo:
 	{string}
 */
-$tituloInstituicao = "MMA - Ministerio do Meio Ambiente";
+$tituloInstituicao = "i3Geo";
 /*
 	Variable: googleApiKey
 	
