@@ -1760,59 +1760,73 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	foreach ($temas as $tema)
 	{
 		$l = $map->getlayerbyname($tema);
-		$dados = $l->data;
-		if($l->type == MS_LAYER_RASTER)
+		$meta = $l->getmetadata("arquivodownload");
+		if($meta != "")
 		{
-			if (file_exists($dados))
+			$nomecopia = $dir_tmp."/".basename($meta);
+			if(file_exists($meta))
 			{
-				$dir = dirname($dados);
-				$arq = explode(".",basename($dados));
-				$nomecopia = $dir_tmp."/".$arq[0];
-				$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
-				foreach($exts as $ext)
-				{
-					$copia = $nomecopia.".".$ext;
-					if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
-					{copy($dir."/".$arq[0].".".$ext,$copia);}
-					if(file_exists($copia))
-					$resultado[] = basename($dir_tmp)."/".basename($copia);	
-				}
+				if(!file_exists($nomecopia))
+				{copy($meta,$nomecopia);}
 			}
-			else
-			{return "erro";}
+			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
 		}
 		else
 		{
-			$sp = $map->shapepath;
-			$arq = "";
-			if (file_exists($dados))
-			{$arq = $dados;}
-			if (file_exists($dados.".shp"))
-			{$arq = $dados.".shp";}
-			if (file_exists($sp.$dados.".shp"))
-			{$arq = $sp.$dados.".shp";}
-			if (file_exists($sp.$dados))
-			{$arq = $sp.$dados;}
-			if ($arq != "")
+			$dados = $l->data;
+			if($l->type == MS_LAYER_RASTER)
 			{
-				$novonomelayer = $tema; //nomeRandomico(20);
-				$nomeshp = $dir_tmp."/".$novonomelayer;
-				$arq = explode(".shp",$arq);
-				if(!file_exists($nomeshp.".shp"))
+				if (file_exists($dados))
 				{
-					copy($arq[0].".shp",$nomeshp.".shp");
-					copy($arq[0].".shx",$nomeshp.".shx");
-					copy($arq[0].".dbf",$nomeshp.".dbf");
+					$dir = dirname($dados);
+					$arq = explode(".",basename($dados));
+					$nomecopia = $dir_tmp."/".$arq[0];
+					$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
+					foreach($exts as $ext)
+					{
+						$copia = $nomecopia.".".$ext;
+						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
+						{copy($dir."/".$arq[0].".".$ext,$copia);}
+						if(file_exists($copia))
+						$resultado[] = basename($dir_tmp)."/".basename($copia);	
+					}
 				}
+				else
+				{return "erro";}
 			}
 			else
 			{
-				$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
-				$novonomelayer = str_replace($radtmp,"",$restemp);
+				$sp = $map->shapepath;
+				$arq = "";
+				if (file_exists($dados))
+				{$arq = $dados;}
+				if (file_exists($dados.".shp"))
+				{$arq = $dados.".shp";}
+				if (file_exists($sp.$dados.".shp"))
+				{$arq = $sp.$dados.".shp";}
+				if (file_exists($sp.$dados))
+				{$arq = $sp.$dados;}
+				if ($arq != "")
+				{
+					$novonomelayer = $tema; //nomeRandomico(20);
+					$nomeshp = $dir_tmp."/".$novonomelayer;
+					$arq = explode(".shp",$arq);
+					if(!file_exists($nomeshp.".shp"))
+					{
+						copy($arq[0].".shp",$nomeshp.".shp");
+						copy($arq[0].".shx",$nomeshp.".shx");
+						copy($arq[0].".dbf",$nomeshp.".dbf");
+					}
+				}
+				else
+				{
+					$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
+					$novonomelayer = str_replace($radtmp,"",$restemp);
+				}
+				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
+				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
+				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 			}
-			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
-			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
-			$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 		}
 	}
 	return(implode(",",$resultado));

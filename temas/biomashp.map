@@ -6,6 +6,7 @@ FONTSET   "../symbols/fontes.txt"
     METADATA
       "CLASSE"	"SIM"
       "download"	"SIM"
+      "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
       "TEMA"	"Biomas shapefile"
     END
     NAME "biomashp"
@@ -74,4 +75,6 @@ FONTSET   "../symbols/fontes.txt"
       END
     END
   END
+
 END
+

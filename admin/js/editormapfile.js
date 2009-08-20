@@ -780,6 +780,8 @@ function montaEditorMetadados(dados)
 		titulo:"Aplica extensao",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
 		{ajuda:"Indica se o usuário pode fazer download do tema",
 		titulo:"Download",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
+		{ajuda:"Endereço de um arquivo para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
+		titulo:"Arquivo download",id:"arquivodownload",value:dados.arquivodownload,tipo:"text"},
 		{ajuda:"Indica se as classes serão mostradas ou não na legenda. Por padrão é SIM.",
 		titulo:"Classe",id:"",value:dados.classe,tipo:"text",div:"<div id=cClasse ></div>"},
 		{ajuda:"Indica se o tema é mostrado no mapa mas não nas listas da legenda e na guia 'temas'",
@@ -1140,7 +1142,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			{alert("Valor de escala incorreto");return;}
 		}
 				
-		var campos = new Array("aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
