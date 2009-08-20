@@ -193,6 +193,9 @@ i3GEO.desenho = {
 					var elemento = r.lastChild;
 					if(elemento.innerHTML != ""){
 						var elementos = r.childNodes;
+						if(elementos.length > 3)
+						var elemento = elementos[elementos.length - 3];
+						else
 						var elemento = elementos[elementos.length - 2];
 					}
 					r.removeChild(elemento);
