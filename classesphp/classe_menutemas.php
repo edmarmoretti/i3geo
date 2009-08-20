@@ -200,11 +200,11 @@ array
 		//
 		foreach($xml->TEMA as $temar)
 		{
-			$down = "nao";
+			$down = "sim";
 			$ogc = "sim";
 			$temp = $this->ixml($temar,"DOWNLOAD");
-			if (($temp == "sim") || ($temp == "SIM"))
-			{$down = "sim";}
+			if (($temp == "nao") || ($temp == "NAO"))
+			{$down = "nao";}
 			$temp = $this->ixml($temar,"OGC");
 			if (($temp == "nao") || ($temp == "NAO"))
 			{$ogc = "nao";}
@@ -235,11 +235,11 @@ array
 				$temas = array();
 				foreach($grupo->TEMA as $temar)
 				{
-					$down = "nao";
+					$down = "sim";
 					$ogc = "sim";
 					$temp = $this->ixml($temar,"DOWNLOAD");
-					if (($temp == "sim") || ($temp == "SIM"))
-					{$down = "sim";}
+					if (($temp == "nao") || ($temp == "NAO"))
+					{$down = "nao";}
 					$temp = $this->ixml($temar,"OGC");
 					if (($temp == "nao") || ($temp == "NAO"))
 					{$ogc = "nao";}
@@ -251,18 +251,22 @@ array
 					$nome = $this->ixml($temar,"TNOME");
 					$temas[] = array("tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
 				}
-				$grupodown = "nao";
+				$grupodown = "sim";
 				$grupoogc = "sim";
 				foreach($grupo->SGRUPO as $sgrupo)
 				{
 					foreach($sgrupo->TEMA as $tema)
 					{
 						$temp = $this->ixml($tema,"DOWNLOAD");
-						if (($temp == "sim") || ($temp == "SIM"))
-						{$grupodown = "sim";}						
+						if (($temp == "nao") || ($temp == "NAO"))
+						{$grupodown = "nao";}
+						else
+						{$grupodown = "sim";}
 						$temp = $this->ixml($tema,"OGC");
 						if (($temp == "nao") || ($temp == "NAO"))
-						{$grupoogc = "nao";}						
+						{$grupoogc = "nao";}
+						else
+						{$grupoogc = "sim";}						
 					}
 				}
 				$subgrupos = array();
@@ -283,16 +287,20 @@ array
 						if ($incluisgrupo == TRUE)
 						{
 							//verifica se existem temas que podem receber download
-							$down = "nao";
+							$down = "sim";
 							$ogc = "sim";
 							foreach($sgrupo->TEMA as $tema)
 							{
 								$temp = $this->ixml($tema,"DOWNLOAD");
-								if (($temp == "sim") || ($temp == "SIM"))
+								if (($temp == "nao") || ($temp == "NAO"))
+								{$down = "nao";}
+								else
 								{$down = "sim";}
 								$temp = $this->ixml($tema,"OGC");
 								if (($temp == "nao") || ($temp == "NAO"))
 								{$ogc = "nao";}
+								else
+								{$ogc = "sim";}
 							}
 							$nome = $this->ixml($sgrupo,"SDTIPO");
 							$subgrupos[] = array("nome"=>$nome,"download"=>$down,"ogc"=>$ogc);
@@ -393,16 +401,20 @@ array
 						}
 						if (($incluisgrupo == TRUE))
 						{
-							$down = "nao";
+							$down = "sim";
 							$ogc = "sim";
 							foreach($sgrupo->TEMA as $tema)
 							{
 								$temp = $this->ixml($tema,"DOWNLOAD");
-								if (($temp == "sim") || ($temp == "SIM"))
+								if (($temp == "nao") || ($temp == "NAO"))
+								{$down = "nao";}
+								else
 								{$down = "sim";}
 								$temp = $this->ixml($tema,"OGC");
 								if (($temp == "nao") || ($temp == "NAO"))
-								{$ogc = "nao";}						
+								{$ogc = "nao";}
+								else
+								{$ogc = "sim";}					
 							}
 							$nome = $this->ixml($sgrupo,"SDTIPO");
 							$subgrupos[] = array("nome"=>$nome,"ogc"=>$ogc,"download"=>$down);
@@ -412,11 +424,11 @@ array
 				$temas = array();
 				foreach($grupo->TEMA as $temar)
 				{
-					$down = "nao";
+					$down = "sim";
 					$ogc = "sim";
 					$temp = $this->ixml($temar,"DOWNLOAD");
-					if (($temp == "sim") || ($temp == "SIM"))
-					{$down = "sim";}
+					if (($temp == "nao") || ($temp == "NAO"))
+					{$down = "nao";}
 					$temp = $this->ixml($temar,"OGC");
 					if (($temp == "nao") || ($temp == "NAO"))
 					{$ogc = "nao";}
@@ -510,8 +522,7 @@ array
 								{
 									$inclui = TRUE;
 									if ($this->ixml($tema,"PERFIL") != "")
-									{
-										
+									{	
 										$inclui = FALSE;
 										$temp = $this->ixml($tema,"PERFIL");
 										$perfis = str_replace(","," ",$temp);
@@ -521,9 +532,9 @@ array
 									}
 									if ($inclui == TRUE)
 									{
-										$down = "nao";
-										if (($tema->DOWNLOAD == "sim") || ($tema->DOWNLOAD == "SIM"))
-										{$down = "sim";}
+										$down = "sim";
+										if (($tema->DOWNLOAD == "nao") || ($tema->DOWNLOAD == "NAO"))
+										{$down = "nao";}
 										$ogc = "sim";
 										if (($tema->OGC == "nao") || ($tema->OGC == "NAO"))
 										{$ogc = "nao";}

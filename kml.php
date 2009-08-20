@@ -73,6 +73,9 @@ if ($menutemas != "" || is_array($menutemas))
 	foreach ($menus as $menu)
 	{
 		$xml = simplexml_load_file($menu);
+		//raiz
+		foreach($xml->TEMA as $tema)
+		{kml_tema($tema);}
 		foreach($xml->GRUPO as $grupo)
 		{
 			$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
@@ -95,50 +98,62 @@ if ($menutemas != "" || is_array($menutemas))
 //
 //no caso do menu vir do sistema de administração
 //
+//error_reporting(E_ALL);
 if($menutemas == "")
 {
 	include("admin/php/admin.php");
-	$menus = pegaDados("SELECT * from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu ");
-	echo $sql;
+	$menus = pegaDados("SELECT * from i3geoadmin_menus where lower(publicado_menu) != 'nao' or publicado_menu isnull order by nome_menu ");
+	//echo $sql;
 	foreach($menus as $menu)
 	{
-		echo $menu["nome_menu"];
 		kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
 		$id_menu = $menu["id_menu"];
-		$grupos = pegaDados("SELECT nome_grupo,n1.id_grupo,gr.desc_grupo from i3geoadmin_n1 as n1,i3geoadmin_grupos as gr where n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
+		//raiz
+		$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,codigo_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema isnull) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
+		$temas = pegaDados($sql);
+		if(count($temas) > 0)
+		{
+			foreach ($temas as $tema)
+			{kml_tema_bd($tema);}
+		}
+		$grupos = pegaDados("SELECT nome_grupo,n1.id_n1,n1.id_grupo,gr.desc_grupo from i3geoadmin_n1 as n1,i3geoadmin_grupos as gr where (lower(n1.publicado) != 'nao' or n1.publicado isnull) and n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
 		foreach($grupos as $grupo)
 		{
 			kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
 			$id_grupo = $grupo["id_grupo"];
+			//raiz
+			$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,kml_tema,codigo_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where lower(i3geoadmin_temas.tipoa_tema) != 'wms' and lower(i3geoadmin_temas.kml_tema) != 'nao' and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupo["id_n1"]." order by ordem";
+			$temas = pegaDados($sql);
+			if(count($temas) > 0)
+			{
+				foreach ($temas as $tema)
+				{kml_tema_bd($tema);}
+			}
 			$sql = "select s.nome_subgrupo,n2.id_n2 from i3geoadmin_n2 as n2,i3geoadmin_n1 as n1, i3geoadmin_subgrupos as s ";
 			$sql .= "where n1.id_grupo = '$id_grupo' and n2.id_subgrupo = s.id_subgrupo ";
 			$sql .= "and n2.id_n1 = n1.id_n1 ";
 			$sql .= "and n1.n1_perfil = '' and n2.n2_perfil = '' ";
+			$sql .= "and (lower(n2.publicado) != 'nao' or n2.publicado isnull) ";
 			$sql .= "order by s.nome_subgrupo";
 			$subgrupos = pegaDados($sql);	
 			foreach ($subgrupos as $subgrupo)
 			{
-				kml_folder($subgrupo["nome_subgrupo"]);
 				$id_n2 = $subgrupo["id_n2"];
 				$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
 				$sql .= "n3.id_n2='$id_n2' ";
 				$sql .= "and n3.id_tema = t.id_tema ";
 				$sql .= "and n3_perfil = '' ";
-				$sql .= "and t.kml_tema != 'nao' ";
-				$sql .= "and t.tipoa_tema = ''";
+				$sql .= "and lower(t.kml_tema) != 'nao' ";
+				$sql .= "and lower(t.tipoa_tema) != 'wms'";
+				$sql .= "and (lower(n3.publicado) != 'nao' or n3.publicado isnull) ";
 				$temas = pegadados($sql);
-				foreach ($temas as $tema)
+				if(count($temas) > 0)
 				{
-					$fonte = $tema["link_tema"];
-					$nome = $tema["nome_tema"];
-					$id = $tema["codigo_tema"];
-					$desc = $tema["desc_tema"];
-					$fonte = "<a href='$fonte' >Fonte </a>";
-    				$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
-					$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-					kml_servico($nome,$fonte,$legenda,$desc,$href);
+					kml_folder($subgrupo["nome_subgrupo"]);
+					foreach ($temas as $tema)
+					{kml_tema_bd($tema);}
+					echo "</Folder>\n";
 				}
-				echo "</Folder>\n";
 			}
 			echo "</Folder>\n";
 		}
@@ -146,6 +161,18 @@ if($menutemas == "")
 	}
 }
 echo "</Document></kml>\n";
+function kml_tema_bd($tema)
+{
+	global $urli3geo;
+	$fonte = $tema["link_tema"];
+	$nome = $tema["nome_tema"];
+	$id = $tema["codigo_tema"];
+	$desc = $tema["desc_tema"];
+	$fonte = "<a href='$fonte' >Fonte </a>";
+	$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
+	kml_servico($nome,$fonte,$legenda,$desc,$href);
+}
 function kml_cabecalho($nome,$desc)
 {
 	echo "<Folder>\n";
