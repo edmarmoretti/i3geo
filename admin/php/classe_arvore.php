@@ -9,11 +9,11 @@ class Arvore
 	//nomes de todos os grupos
 	public $sql_todosgrupos = "select * from i3geoadmin_grupos ";
 	//temas na raiz
-	public $sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
+	public $sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 	//todos os temas
 	public $sql_temas = "select * from i3geoadmin_temas ";
 	//temas de um subgrupo
-	public $sql_temasSubgrupo = "select i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
+	public $sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 	function __construct($locaplic)
 	{
 		$this->locaplic = $locaplic;
@@ -94,9 +94,9 @@ class Arvore
 									$t = $t[0];
 									$nome = $this->removeAcentos($tema["nome_tema"]);
 									$tags = $this->removeAcentos($tema["tags_tema"]);
-									$down = "nao";
-									if (strtolower($t["download_tema"]) == "sim")
-									{$down = "sim";}
+									$down = "sim";
+									if (strtolower($t["download_tema"]) == "nao")
+									{$down = "nao";}
 									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 									if (stristr($nome,$procurar))
 									{$resultado[] = $texto;}
@@ -165,15 +165,20 @@ class Arvore
 			{
 				$temas = array();
 				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"]);
-				foreach($raizgrupo as $tema)
-				{$temas[] = $this->formataTema($tema["id_tema"]);}
-
 				$grupodown = "nao";
 				$grupoogc = "nao";
+				foreach($raizgrupo as $tema)
+				{$temas[] = $this->formataTema($tema["id_tema"]);}
+				if($temas > 0)
+				{
+					$grupodown = "sim";
+					$grupoogc = "sim";
+				}
 				$subgrupos = array();
 				if($listasgrupos=="sim")
 				{
 					$dadossubgrupos = $this->pegaSubgruposGrupo($id_menu,$grupo["id_n1"]);
+					
 					foreach($dadossubgrupos["subgrupos"] as $sgrupo)
 					{
 						if($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
@@ -181,17 +186,24 @@ class Arvore
 							//verifica se existem temas que podem receber download
 							$down = "nao";
 							$ogc = "nao";
-							foreach($this->pegaTemasSubGrupo($sgrupo["id_n2"]) as $tema)
+							$listaT = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
+							foreach($listaT as $tema)
 							{
-								if (strtolower($tema["download_tema"]) == "sim")
-								{$down = "sim";$grupodown = "sim";}
-								if (strtolower($tema["ogc_tema"]) == "sim")
-								{$ogc = "sim";$grupoogc = "sim";}
+								if(strtolower($tema["tipoa_tema"]) != "wms")
+								{	
+									if (strtolower($tema["download_tema"]) != "nao")
+									{$down = "sim";$grupodown = "sim";}
+									
+									if (strtolower($tema["ogc_tema"]) != "nao")
+									{$ogc = "sim";$grupoogc = "sim";}
+								}
 							}
+							if(count($listaT) > 0)
 							$subgrupos[] = array("id_n2"=>$sgrupo["id_n2"],"publicado"=>($sgrupo["publicado"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 						}
 					}
 				}
+				if(count($temas) > 0 || count($subgrupos) > 0)
 				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
 		}
@@ -217,17 +229,20 @@ class Arvore
 		{
 			if ($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
 			{
-				$sgrupodown = "nao";
-				$sgrupoogc = "nao";
+				$listaT = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
 				$down = "nao";
 				$ogc = "nao";
-				foreach($this->pegaTemasSubGrupo($sgrupo["id_n2"]) as $tema)
+				foreach($listaT as $tema)
 				{
-					if (strtolower($tema["download_tema"]) == "sim")
-					{$down = "sim";$grupodown = "sim";}
-					if (strtolower($tema["ogc_tema"]) == "sim")
-					{$ogc = "sim";$grupoogc = "sim";}
+					if(strtolower($tema["tipoa_tema"]) != "wms")
+					{
+						if (strtolower($tema["download_tema"]) != "nao")
+						{$down = "sim";}
+						if (strtolower($tema["ogc_tema"]) != "nao")
+						{$ogc = "sim";}
+					}
 				}
+				if(count($listaT) > 0)
 				$subgrupos[] = array("publicado"=>($sgrupo["publicado"]),"id_n2"=>($sgrupo["id_n2"]),"nome"=>$this->converte($sgrupo["nome_subgrupo"]),"download"=>$down,"ogc"=>$ogc);
 			}
 		}
@@ -250,13 +265,15 @@ class Arvore
 	{
 		$recordset = $this->pegaTema($id_tema);
 		$recordset = $recordset[0];
-		$down = "nao";
+		$down = "sim";
 		$ogc = "sim";
 		$link = " ";
-		if (strtolower($recordset["download_tema"]) == "sim")
-		{$down = "sim";}
+		if (strtolower($recordset["download_tema"]) == "nao")
+		{$down = "nao";}
 		if (strtolower($recordset["ogc_tema"]) == "nao")
 		{$ogc = "nao";}
+		if(strtolower($recordset["tipoa_tema"]) == "wms")
+		{$down = "nao";$ogc="nao";}
 		if ($recordset["link_tema"] != "")
 		{$link = $recordset["link_tema"];}
 		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc);		
