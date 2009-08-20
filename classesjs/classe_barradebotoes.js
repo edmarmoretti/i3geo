@@ -128,6 +128,28 @@ i3GEO.barraDeBotoes = {
 	*/
 	BOTAOPADRAO: "pan",
 	/*
+	Propriedade: COMPORTAMENTO
+	
+	Define o comportamento dos botões quando é pressionado
+	
+	Tipo:
+	{String}
+	
+	Valores:
+	
+	"padrao" - comportamento padrão, com bordas da esquerda e inferiores ativadas
+	
+	"destacado" - destaca apenas o botão atualmente pressionado
+	
+	"vermelho" - destaca com fundo vermelho
+	
+	"laranja" - destaca com fundo laranja
+	
+	"cinza" - destaca com fundo cinza
+	
+	*/
+	COMPORTAMENTO: "laranja",	
+	/*
 	Variavel: BARRAS
 	
 	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
@@ -157,12 +179,9 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaIcone: function(icone){
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
-		//desativa todos os ícones
 		var ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
-		if(ko >= 0)
-		{
-			do
-			{
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "padrao"){
+			if(ko >= 0){do{
 				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
 				if (i3GEO.barraDeBotoes.LISTABOTOES[ko].tipo=="dinamico" && temp)
 				{
@@ -172,15 +191,53 @@ i3GEO.barraDeBotoes = {
 					ist.borderLeftColor='rgb(50,50,50)';
 					ist.borderBottomColor='rgb(50,50,50)';
 				}
-			}
-			while(ko--)
+			}while(ko--)}
+			//ativa o icone
+			if($i(icone))
+			{with ($i(icone).style){
+				borderColor='white';
+				borderWidth="1px";
+			}}
 		}
-		//ativa o icone
-		if($i(icone))
-		{with ($i(icone).style){
-			borderColor='white';
-			borderWidth="1px";
-		}}
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
+			if(ko >= 0){do{
+				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+				if (temp)
+				{
+					var ist = temp.style;
+					ist.borderWidth="1px";
+					ist.borderColor='white';
+				}
+			}while(ko--)}
+			//ativa o icone
+			if($i(icone))
+			{with ($i(icone).style){
+				borderColor='black';
+				borderWidth="1px";
+			}}
+		}
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja" || i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho" || i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){
+			if(ko >= 0){do{
+				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+				if (temp)
+				{
+					var ist = temp.style;
+					ist.borderWidth="1px";
+					ist.borderColor='white';
+					ist.backgroundColor='white';
+				}
+			}while(ko--)}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja"){var cor = "orange";}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho"){var cor = "red";}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){var cor = "gray";}
+			//ativa o icone
+			if($i(icone))
+			{with ($i(icone).style){
+				borderColor='black';
+				borderWidth="1px";
+				backgroundColor=cor;
+			}}
+		}
 	},
 	/*
 	Function: ativaBotoes
