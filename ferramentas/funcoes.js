@@ -181,13 +181,17 @@ function mostraOpcao(anterior,proxima,texto,idatual)
 			lazyloadmenu:true
 		}});
 		var i = $i(idatual+"proxima_-button");
-		i.style.backgroundImage = "url('../../imagens/player_avanca.png')";
-		i.style.backgroundRepeat = "no-repeat";
-		i.style.backgroundPosition = "center center";
+		if(i){
+			i.style.backgroundImage = "url('../../imagens/player_avanca.png')";
+			i.style.backgroundRepeat = "no-repeat";
+			i.style.backgroundPosition = "center center";
+		}
 		var i = $i(idatual+"anterior_-button");
-		i.style.backgroundImage = "url('../../imagens/player_volta.png')";
-		i.style.backgroundRepeat = "no-repeat";
-		i.style.backgroundPosition = "center center";
+		if(i){
+			i.style.backgroundImage = "url('../../imagens/player_volta.png')";
+			i.style.backgroundRepeat = "no-repeat";
+			i.style.backgroundPosition = "center center";
+		}
 	}
 	var ids = new Array("t0","t1","t2","t3","t4","t5","t6","t7");
 	for (i=0;i<ids.length;i++)

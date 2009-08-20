@@ -71,14 +71,11 @@ function t3()
 function t4()
 {
 	ins = "A grade ser&aacute; acrescentada como um novo tema no mapa"
-	ins += "<br><br><div style='text-align:left;left:0px' onclick='criargrade()' ><input id=botao1 size=18 class=executar type='button' value='Criar grade' /></div>"
+	ins += "<br><br><input id=botaoExec size=18 class=executar type='button' value='Criar grade' />"
 	mostraOpcao("t3()","",ins,"t4")
-	YAHOO.example.init = function ()
-	{
-		function onPushButtonsMarkupReady()
-		{new YAHOO.widget.Button("botao1");}
-    	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-	}()	
+	new YAHOO.widget.Button("botaoExec",{onclick:{fn: function(){
+		criargrade();
+	}}});
 }
 function criargrade()
 {
