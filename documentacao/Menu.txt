@@ -79,8 +79,6 @@ Group: API Javascript  {
       File: Seleção de elementos  (classesjs\classe_selecao.js)
       File: Temas  (classesjs\classe_tema.js)
       File: Utilitários  (classesjs\classe_util.js)
-      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\i3geo_tudo_compacto.js)
-      File: Gadgets &lparen;objetos marginais do mapa&rparen;  (classesjs\i3geo_tudo_compacto.js.php)
       }  # Group: Classes
 
    Group: Aplicativos  {
