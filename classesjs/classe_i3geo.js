@@ -192,6 +192,14 @@ i3GEO = {
 		//
 		var diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		var diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
+		//
+		//subtrai barra de rolagem
+		//
+		try{
+			var a = i3GEO.util.getScrollerWidth();
+			var diminuiy = diminuiy + a;
+		}
+		catch(r){}
 		var menos = 0;
 		if ($i("contemFerramentas"))
 		{var menos = menos + parseInt($i("contemFerramentas").style.width);}
