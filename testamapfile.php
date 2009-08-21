@@ -232,6 +232,7 @@ function verifica($map)
 			 $sca->set("status",MS_OFF);
 		}
 		$objImagem = @$mapa->draw();
+		$objImagemLegenda = @$mapa->drawLegend();
 		if (!$objImagem)
 		{
 			echo "Problemas ao gerar o mapa<br>";
@@ -247,9 +248,16 @@ function verifica($map)
 		$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
 		$objImagem->saveImage($nomec);
 		$nomer = ($objImagem->imageurl).basename($nomec);
+		
+		$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
+		$objImagemLegenda->saveImage($nomel);
+		$nomerl = ($objImagemLegenda->imageurl).basename($nomel);
+		
+		
 		if(($tipo == "") || ($tipo == "todos"))
 		{
-			echo "<img src=".$nomer." />";
+			echo "<img src=".$nomer." /><br>";
+			echo "<img src=".$nomerl." />";
 			if($tipo == "todos")
 			{
 			 echo "<br>".$dados."<br>";
@@ -264,7 +272,8 @@ function verifica($map)
 					echo "<br>Error in %s: %s<br>", $error->routine, $error->message;
 					$error = $error->next();
 				}
-			}		
+			}
+				
 		}
 		else
 		{
@@ -277,12 +286,12 @@ function verifica($map)
 function zoomTema($nomelayer,&$mapa)
 {
 	$layer = $mapa->getlayerbyname($nomelayer);
-	if($layer->type > 2)
-	{return;}
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$extatual = $mapa->extent;
 	$ret = $layer->getmetadata("extensao");
+	if($layer->type > 2 && $ret == "")
+	{return;}
 	$ct = $layer->connectiontype;
 	if(($ret == "") && ($ct != 1))
 	{return;}

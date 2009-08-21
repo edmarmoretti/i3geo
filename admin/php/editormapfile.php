@@ -529,6 +529,8 @@ function pegaMetadados()
 	$dados["classestamanho"] = $layer->getmetadata("classestamanho");
 	$dados["aplicaextensao"] = $layer->getmetadata("aplicaextensao");
 	$dados["arquivodownload"] = $layer->getmetadata("arquivodownload");
+	$dados["palletefile"] = $layer->getmetadata("palletefile");
+	$dados["palletestep"] = $layer->getmetadata("palletestep");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
@@ -536,7 +538,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc;
+	global $palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -560,6 +562,8 @@ function alterarMetadados()
 	$layer->setmetadata("classestamanho",$classestamanho);
 	$layer->setmetadata("aplicaextensao",$aplicaextensao);
 	$layer->setmetadata("arquivodownload",$arquivodownload);
+	$layer->setmetadata("palletefile",$palletefile);
+	$layer->setmetadata("palletestep",$palletestep);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";

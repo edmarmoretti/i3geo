@@ -1,0 +1,19 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+    DATA "c://ms4w/Apache/htdocs/geodados/cinza.png"
+    METADATA
+      "DOWNLOAD"	"sim"
+      "tema"	"teste palete"
+      "extensao" "-45.3164908803 -18.728115624 -36.4701672412 -13.692240792"
+      "palletefile" "c://ms4w/Apache/htdocs/i3geo/symbols/testepalete.txt"
+      "palletestep" "20"
+    END
+    NAME "cinza"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TYPE RASTER
+    UNITS METERS
+  END
+END

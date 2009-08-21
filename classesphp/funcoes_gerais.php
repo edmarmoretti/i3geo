@@ -1972,101 +1972,163 @@ function autoClasses(&$nlayer,$mapa)
 			$nlayer->set("connection",$postgis_mapa);
 			$substituicon = "sim";
 		}
-	}	
-	if($nlayer->getmetadata("classesitem") == "")
-	{return;}
-	$itemnome = $nlayer->getmetadata("classesnome");
-	$itemid = $nlayer->getmetadata("classesitem");
-	$itemcor = $nlayer->getmetadata("classescor");
-	$itemsimbolo = $nlayer->getmetadata("classesimbolo");
-	$itemtamanho = $nlayer->getmetadata("classestamanho");
-	$classeoriginal = $nlayer->getclass(0);
+	}
 	//
-	//pega a extensao geografica que devera ser utilizada
-	//
-	$prjMapa = $mapa->getProjection();
-	$prjTema = $nlayer->getProjection();
-	$ret = $nlayer->getmetadata("extensao");
-	if ($ret == "")
+	//gera classes automaticamente (temas vetoriais)
+	if($nlayer->getmetadata("classesitem") != "")
 	{
-		$ret = $nlayer->getextent();
-		//reprojeta o retangulo
-		if (($prjTema != "") && ($prjMapa != $prjTema))
+		$itemnome = $nlayer->getmetadata("classesnome");
+		$itemid = $nlayer->getmetadata("classesitem");
+		$itemcor = $nlayer->getmetadata("classescor");
+		$itemsimbolo = $nlayer->getmetadata("classesimbolo");
+		$itemtamanho = $nlayer->getmetadata("classestamanho");
+		$classeoriginal = $nlayer->getclass(0);
+		//
+		//pega a extensao geografica que devera ser utilizada
+		//
+		$prjMapa = $mapa->getProjection();
+		$prjTema = $nlayer->getProjection();
+		$ret = $nlayer->getmetadata("extensao");
+		if ($ret == "")
 		{
-			$projInObj = ms_newprojectionobj($prjTema);
-			$projOutObj = ms_newprojectionobj($prjMapa);
-			$ret->project($projInObj, $projOutObj);
+			$ret = $nlayer->getextent();
+			//reprojeta o retangulo
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$projInObj = ms_newprojectionobj($prjTema);
+				$projOutObj = ms_newprojectionobj($prjMapa);
+				$ret->project($projInObj, $projOutObj);
+			}
 		}
-	}
-	else
-	{
-		$temp = explode(" ",$ret);
-		$ret = ms_newRectObj();
-		$ret->setextent($temp[0],$temp[1],$temp[2],$temp[3]);
-	}
-	//	
-	$sopen = $nlayer->open();
-	if($sopen == MS_FAILURE){return "erro";}
+		else
+		{
+			$temp = explode(" ",$ret);
+			$ret = ms_newRectObj();
+			$ret->setextent($temp[0],$temp[1],$temp[2],$temp[3]);
+		}
+		//	
+		$sopen = $nlayer->open();
+		if($sopen == MS_FAILURE){return "erro";}
 
-	$status = $nlayer->whichShapes($ret);
-	$parametrosClasses = array();	
-	if ($status == 0)
-	{	
-		while ($shape = $nlayer->nextShape())
-		{
-			$id = trim($shape->values[$itemid]);
-			if (!$parametrosClasses[$id])
+		$status = $nlayer->whichShapes($ret);
+		$parametrosClasses = array();	
+		if ($status == 0)
+		{	
+			while ($shape = $nlayer->nextShape())
 			{
-				$nome = "";
-				if($itemnome != "")
-				$nome = trim($shape->values[$itemnome]);
-				$cor = "";
-				if($itemcor != "")
-				$cor = explode(",",trim($shape->values[$itemcor]));
-				if(count($cor) != 3)
-				$cor = explode(" ",trim($shape->values[$itemcor]));
-				$tamanho = "";
-				if($itemtamanho != "")
-				$tamanho = trim($shape->values[$itemtamanho]);
-				$simbolo = "";
-				if($itemsimbolo != "")
-				$simbolo = trim($shape->values[$itemsimbolo]);
-				$parametrosClasses[$id] = array("nome"=>$nome,"cor"=>$cor,"tamanho"=>$tamanho,"simbolo"=>$simbolo);
-			}
-		}
-		$fechou = $nlayer->close();
-		//echo "<pre>";var_dump($parametrosClasses);
-		if (count($parametrosClasses) > 0)
-		{
-			$ids = array_keys($parametrosClasses);
-			for($i=0;$i < count($parametrosClasses);++$i)
-			{
-				$p = $parametrosClasses[$ids[$i]];
-				//echo "<pre>";var_dump($p);
-				$nclasse = ms_newClassObj($nlayer,$classeoriginal);
-				if($p["nome"] != "")
-				$nclasse->set("name",$p["nome"]);
-				$estilo = $nclasse->getstyle(0);
-				if($p["cor"] != "")
+				$id = trim($shape->values[$itemid]);
+				if (!$parametrosClasses[$id])
 				{
-					$cor = $p["cor"];
-					$ncor = $estilo->color;
-					if($ncor == "")
-					$ncor = $estilo->outlinecolor;
-					$ncor->setrgb($cor[0],$cor[1],$cor[2]);
+					$nome = "";
+					if($itemnome != "")
+					$nome = trim($shape->values[$itemnome]);
+					$cor = "";
+					if($itemcor != "")
+					$cor = explode(",",trim($shape->values[$itemcor]));
+					if(count($cor) != 3)
+					$cor = explode(" ",trim($shape->values[$itemcor]));
+					$tamanho = "";
+					if($itemtamanho != "")
+					$tamanho = trim($shape->values[$itemtamanho]);
+					$simbolo = "";
+					if($itemsimbolo != "")
+					$simbolo = trim($shape->values[$itemsimbolo]);
+					$parametrosClasses[$id] = array("nome"=>$nome,"cor"=>$cor,"tamanho"=>$tamanho,"simbolo"=>$simbolo);
 				}
-				if($p["tamanho"] != "")
-				$estilo->set("size",$p["tamanho"]);
-				if($p["simbolo"] != "")
-				$estilo->set("symbolname",$p["simbolo"]);
-				$strE = "('[".$itemid."]'eq'".$ids[$i]."')";
-				$nclasse->setexpression($strE);
 			}
-			$classeoriginal->set("status",MS_DELETE);
+			$fechou = $nlayer->close();
+			//echo "<pre>";var_dump($parametrosClasses);
+			if (count($parametrosClasses) > 0)
+			{
+				$ids = array_keys($parametrosClasses);
+				for($i=0;$i < count($parametrosClasses);++$i)
+				{
+					$p = $parametrosClasses[$ids[$i]];
+					//echo "<pre>";var_dump($p);
+					$nclasse = ms_newClassObj($nlayer,$classeoriginal);
+					if($p["nome"] != "")
+					$nclasse->set("name",$p["nome"]);
+					$estilo = $nclasse->getstyle(0);
+					if($p["cor"] != "")
+					{
+						$cor = $p["cor"];
+						$ncor = $estilo->color;
+						if($ncor == "")
+						$ncor = $estilo->outlinecolor;
+						$ncor->setrgb($cor[0],$cor[1],$cor[2]);
+					}
+					if($p["tamanho"] != "")
+					$estilo->set("size",$p["tamanho"]);
+					if($p["simbolo"] != "")
+					$estilo->set("symbolname",$p["simbolo"]);
+					$strE = "('[".$itemid."]'eq'".$ids[$i]."')";
+					$nclasse->setexpression($strE);
+				}
+				$classeoriginal->set("status",MS_DELETE);
+			}
 		}
+		if($substituicon == "sim"){$nlayer->set("connection"," ");}
 	}
-	if($substituicon == "sim"){$nlayer->set("connection"," ");}
+	$pf = $nlayer->getmetadata("palletefile");
+	if($pf != "")
+	{
+		if(!file_exists($pf)){return;}
+		$ps = $nlayer->getmetadata("palletesteps");
+		if ($ps == "") $ps=8;
+		//
+		//pega os valores do arquivo
+		//
+		$rules = array();
+		$abre = fopen($pf, "r");
+		$paletteRules = array();
+		while (!feof($abre))
+		{
+			$line = trim(fgets($abre));
+			$pos = strpos($line, "#");
+			if ($pos === false || $pos > 0)
+			{
+				$paletteEntry = explode(" ",$line);
+				$rules[] = array(
+					"v0" => $paletteEntry[0],
+					"v1" => $paletteEntry[1],
+					"r0" => $paletteEntry[2],
+					"g0" => $paletteEntry[3],
+					"b0" => $paletteEntry[4],
+					"r1" => $paletteEntry[5],
+					"g1" => $paletteEntry[6],
+					"b1" => $paletteEntry[7]
+				);
+			}
+		}
+		fclose($abre);
+		foreach($rules as $rule)
+		{
+			$delta = ceil(($rule["v1"]-$rule["v0"])/$ps);
+			$legenda=true;
+			for($value=$rule["v0"]; $value<$rule["v1"]; $value+=$delta)
+			{
+    			$class = ms_newClassObj($nlayer);
+    			$style = ms_newStyleObj($class);
+				if ($legenda)
+				{
+					$class->set(name,round($value,0));
+					$legenda=true;
+				}
+				$expression="([pixel] > ".round($value,0)." AND [pixel] <= ".round($value+$delta,0).")";
+				$class->setExpression($expression);
+				$rgb=getRGBpallete($rule,$value);
+				$style->color->setRGB($rgb[0],$rgb[1],$rgb[2]);
+			}
+		}	
+	}
 	return;
+}
+function getRGBpallete($rule, $value){
+	$escala=($value-$rule["v0"])/($rule["v1"]-$rule["v0"]);
+	$r=$rule["r0"] + round(($rule["r1"]-$rule["r0"])*$escala, 0);
+	$g=$rule["g0"] + round(($rule["g1"]-$rule["g0"])*$escala, 0);
+	$b=$rule["b0"] + round(($rule["b1"]-$rule["b0"])*$escala, 0);
+	return array($r,$g,$b);
 }
 /*
 Function: removeAcentos
