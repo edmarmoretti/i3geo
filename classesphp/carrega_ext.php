@@ -56,10 +56,14 @@ else
 $ler_extensoes = array();
 if (count($extensoes) > 0)
 {
+	$s = PHP_SHLIB_SUFFIX;
 	foreach ($extensoes as $templ)
 	{
 		if (in_array( $templ, $temp1) != TRUE)
 		{
+			@dl( 'php_'.$templ.".".$s );
+			$ler_extensoes[] = $templ;
+			/*
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{
 				@dl('php_'.$templ.'.dll');
@@ -70,11 +74,15 @@ if (count($extensoes) > 0)
 				@dl('php_'.$templ.'.so');
 				$ler_extensoes[] = $templ;
 			}
+			*/
 		}
 	}
 	//verifica se carregou a gd se não, tenta carregar a gd2
 	if (!function_exists('imagecreate'))
 	{
+		@dl( 'php_gd.'.$s );
+		$ler_extensoes[] = 'gd';
+		/*
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{
 			@dl('php_gd.dll');
@@ -85,9 +93,13 @@ if (count($extensoes) > 0)
 			@dl('php_gd.so');
 			$ler_extensoes[] = 'gd';
 		}
+		*/
 	}
 	if (!function_exists('imagecreate'))
 	{
+		@dl( 'php_gd2.'.$s );
+		$ler_extensoes[] = 'gd2';
+		/*
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{
 			@dl('php_gd2.dll');
@@ -98,10 +110,14 @@ if (count($extensoes) > 0)
 			@dl('php_gd2.so');
 			$ler_extensoes[] = 'gd2';
 		}
+		*/
 	}
 	//verifica se carregou o mapscript
 	if (!function_exists('ms_GetVersion'))
 	{
+		@dl( 'php_mapscript.'.$s );
+		$ler_extensoes[] = 'php_mapscript';	
+		/*
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 		{
 			if(!@dl('php_mapscript_48.dll'))
@@ -117,6 +133,7 @@ if (count($extensoes) > 0)
 			dl('php_mapscript.so');
 			$ler_extensoes[] = 'mapscript';
 		}
+		*/
 	}
 }
 if((is_array($ler_extensoes)) && (count($ler_extensoes) > 0))
