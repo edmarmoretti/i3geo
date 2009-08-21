@@ -112,7 +112,7 @@ function geraRSStemasDownload($locaplic)
 function geraRSStemasKml($locaplic)
 {
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasdownload.php","",$_SERVER['PHP_SELF']));
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemaskml.php","",$_SERVER['PHP_SELF']));
 	$sql = "select '".$url."/pacotes/kmlmapserver/kmlservice.php?request=kml&map='||codigo_tema||'&typename='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
 		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
@@ -133,7 +133,7 @@ function geraRSStemasKml($locaplic)
 function geraRSStemasOgc($locaplic)
 {
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasdownload.php","",$_SERVER['PHP_SELF']));
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].(str_replace("/admin/rsstemasogc.php","",$_SERVER['PHP_SELF']));
 	$sql = "select '".$url."/ogc.php?request=getcapabilities&service=wms&tema='||codigo_tema as link_ws, g.nome_grupo||' -> '||sg.nome_subgrupo||' -> '||nome_tema as nome_ws, desc_tema as desc_ws, link_tema as autor_ws ";
 	$sql .= "
 		from i3geoadmin_temas as t,i3geoadmin_n3 as n3, i3geoadmin_n2 as n2, i3geoadmin_n1 as n1, i3geoadmin_grupos as g, i3geoadmin_subgrupos as sg
