@@ -51,12 +51,12 @@ Free Software Foundation, Inc., no endereço
 */
 error_reporting(E_ALL);
 echo "<pre>\n";
-echo "<b>TESTE DE INSTALACAO DO I3Geo</b><br>\n";
+echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 echo getcwd();
 //echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
-echo "<br><br>PHP (a versão deve ser a 5x): ";
+echo "<br><br>PHP (a versão deve ser a 5x e menor que 5.3): ";
 echo "<br>".phpversion()."<br>\n";
-require_once("classesphp/carrega_ext.php");
+include("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
 echo ms_GetVersion()."<br><br>";
 echo "---";
@@ -92,6 +92,8 @@ if(!file($enderecocgi))
 }
 else
 {echo "O arquivo cgi $enderecocgi do mapserver foi encontrado \n";}
+
+echo "Você pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, deverá aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
 echo "<br>Escrevendo no diretorio temporario...";
 $f = @fopen($dir_tmp."/teste.txt",w);
