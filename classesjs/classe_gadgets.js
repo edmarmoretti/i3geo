@@ -783,6 +783,7 @@ i3GEO.gadgets = {
 					while(i>=0)
 				}
 				wi.document.write("<br>Fim</body></html>");
+				wi.document.close();
 			}
 		}
 	},
