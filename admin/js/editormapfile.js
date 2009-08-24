@@ -735,7 +735,7 @@ function montaEditorConexao(dados)
 		titulo:"Connectiontype",id:"",value:"",div:"<div id=cConnectiontype ></div>",tipo:"text"},
 		{ajuda:"Database connection string to retrieve remote data.An SDE connection string consists of a hostname, instance name, database name, username and password separated by commas.A PostGIS connection string is basically a regular PostgreSQL connection string, it takes the form of 'user=nobody password=****** dbname=dbname host=localhost port=5432' An Oracle connection string: user/pass[@db] . Se vc tiver problemas com acentuação, experimente algo como: user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		titulo:"Connection",id:"connection",value:dados.connection,tipo:"text"},
-		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 ",
+		{ajuda:"Full filename of the spatial data to process. No file extension is necessary for shapefiles. Can be specified relative to the SHAPEPATH option from the Map Object.If this is an SDE layer, the parameter should include the name of the layer as well as the geometry column, i.e. 'mylayer,shape,myversion'.If this is a PostGIS layer, the parameter should be in the form of '<columnname> from <tablename>', where 'columnname' is the name of the column containing the geometry objects and 'tablename' is the name of the table from which the geometry data will be read.For Oracle, use 'shape FROM table' or 'shape FROM (SELECT statement)' or even more complex Oracle compliant queries! Note that there are important performance impacts when using spatial subqueries however. Try using MapServer's FILTER whenever possible instead. You can also see the SQL submitted by forcing an error, for instance by submitting a DATA parameter you know won't work, using for example a bad column name. Exemplo postgis: the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291 . Exemplo shapefile: c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp",
 		titulo:"Data",id:"data",value:dados.data,tipo:"text"},
 		{ajuda:"Item that contains the location of an individual tile, default is 'location'.",
 		titulo:"tileitem",id:"tileitem",value:dados.tileitem,tipo:"text"},
@@ -1146,7 +1146,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			{alert("Valor de escala incorreto");return;}
 		}
 				
-		var campos = new Array("palletefile","palettestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
@@ -1183,8 +1183,10 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 		var prog = "../php/editormapfile.php?funcao=alterarEstilo"	
 	}
 	prog += "&testar="+testar;
+	try{
 	for (i=0;i<campos.length;i++)
 	{par += "&"+campos[i]+"="+($i(campos[i]).value)}
+	}catch(e){alert(e)}
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do layer= "+codigoLayer);
 	var sUrl = prog+par;
