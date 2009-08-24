@@ -1,0 +1,30 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+  LAYER
+    CONNECTION ""
+    DATA "c://ms4w/Apache/htdocs/geodados/brasil/limitespol/localidades.shp"
+    METADATA
+      "palletestep"	""
+      "palletefile"	""
+      "download"	"SIM"
+      "arquivodownload"	""
+    END
+    NAME "testept"
+    STATUS OFF
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        ANGLE 360
+        COLOR 255 0 0
+        OPACITY 100
+        SIZE 8
+        SYMBOL 0
+      END
+    END
+  END
+
+END
+
