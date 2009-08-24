@@ -147,6 +147,10 @@ i3GEO.janela = {
 		YAHOO.namespace("janelaDoca.xp");
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
+		if($i(id+"_c"))
+		{$i("i3geo").removeChild($i(id+"_c"));alert("oi");}
+		if($i(id))
+		{$i("i3geo").removeChild($i(id));}
 		var ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
@@ -182,7 +186,7 @@ i3GEO.janela = {
 		YAHOO.janelaDoca.xp.panel.render();
 		if(i3GEO.interface.ATUAL=="googleearth"){var classe = "bd";}
 		$i(id+'_cabecalho').className = classe;
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,id);
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	/*
@@ -211,8 +215,11 @@ i3GEO.janela = {
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
-		if($i(id+"_c"))
-		$i("i3geo").removeChild($i(id+"_c"));
+		YAHOO.janelaDoca.xp.panel.destroy();
+		if($i("wdoca_c"))
+		$i("i3geo").removeChild($i("wdoca_c"));
+		if($i("wdoca"))
+		$i("i3geo").removeChild($i("wdoca"));
 	},
 	/*
 	Function: alteraTamanho
