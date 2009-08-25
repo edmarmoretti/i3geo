@@ -11,7 +11,7 @@ if(!isset($locaplic))
       <link rel="stylesheet" type="text/css" href="../../css/botoes.css">
   	<title></title>
   </head>
-  <body class="yui-skin-sam;" style="overflow:auto;">
+  <body name="ancora" class="yui-skin-sam;" style="overflow:auto;">
 <div style="top:5px;left:1px;display:block;width:90%;"  id="resultado" >Aguarde...</div>
 	<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript" src="index.js"></script>

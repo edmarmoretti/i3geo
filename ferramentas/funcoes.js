@@ -944,7 +944,7 @@ function ativaGuias()
 	for(g=0;g<12;g++)
 	{
 		if($i("guia"+g))
-		ins += '<li><a href="#"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px; >'+$i("guia"+g).innerHTML+'</div></em></a></li>';
+		ins += '<li><a href="#ancora"><em><div id=guia'+g+' style=text-align:center;font-size:10px;left:0px; >'+$i("guia"+g).innerHTML+'</div></em></a></li>';
 	}
 	ins += "</ul>";
 	gpai.innerHTML = ins;

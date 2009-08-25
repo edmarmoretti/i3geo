@@ -32,7 +32,7 @@ if (!function_exists("ms_GetVersion"))
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body bgcolor="white" style="background-color:white">
+<body name="ancora" bgcolor="white" style="background-color:white">
 <p>
 <?php
 if (isset($_FILES['filedbf']['name']))

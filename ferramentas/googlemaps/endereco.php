@@ -37,7 +37,7 @@ function inicializa()
 } 
 </script>
   </head>
-  <body onload="inicializa()">
+  <body name="ancora" onload="inicializa()">
     <div id="mapa"></div>
     </body>
 </html>
