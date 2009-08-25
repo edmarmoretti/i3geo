@@ -1744,10 +1744,10 @@ version: 2.7.0
             this.footer = null;
 
             Module.textResizeEvent.unsubscribe(this.onDomResize, this);
-
-            this.cfg.destroy();
-            this.cfg = null;
-
+			if(this.cfg){
+            	this.cfg.destroy();
+            	this.cfg = null;
+			}
             this.destroyEvent.fire();
         },
 
@@ -1768,6 +1768,7 @@ version: 2.7.0
         * @method hide
         */
         hide: function () {
+            if(this.cfg)
             this.cfg.setProperty("visible", false);
         },
         
