@@ -432,7 +432,13 @@ i3GEO.janela = {
 	fechaAguarde: function(id){
 		document.body.style.cursor = "default";
 		if(arguments.length > 0){
-			try{eval('YAHOO.aguarde.'+id+'.destroy()');}
+			try{
+				eval('YAHOO.aguarde.'+id+'.destroy()');
+				if($i(id+"_c"))
+				{$i("i3geo").removeChild($i(id+"_c"));}
+				if($i(id+"_mask"))
+				{$i("i3geo").removeChild($i(id+"_mask"));}
+			}
 			catch(e){};
 		}
 		else{

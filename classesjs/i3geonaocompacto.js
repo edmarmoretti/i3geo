@@ -23,7 +23,7 @@ var jsfiles = new Array(
 "../pacotes/yui270/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui270/build/slider/slider-min.js",
 "../pacotes/yui270/build/animation/animation-min.js",
-"../pacotes/yui270/build/container/container-min.js",
+"../pacotes/yui270/build/container/container.js",
 "../pacotes/yui270/build/element/element-min.js",
 "../pacotes/yui270/build/tabview/tabview-min.js",
 "../pacotes/yui270/build/utilities/utilities.js",

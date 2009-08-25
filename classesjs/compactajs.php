@@ -80,6 +80,7 @@ packer("classe_interface.js","compactados/classe_interface_compacto.js","Normal"
 packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
+packer("../pacotes/yui270/build/container/container.js","../pacotes/yui270/build/container/container_compacto.js","Normal");
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -94,7 +95,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui270/build/slider/slider-min.js",
 "../pacotes/yui270/build/animation/animation-min.js",
-"../pacotes/yui270/build/container/container-min.js",
+"../pacotes/yui270/build/container/container_compacto.js",
 "../pacotes/yui270/build/element/element-min.js",
 "../pacotes/yui270/build/tabview/tabview-min.js",
 "../pacotes/yui270/build/utilities/utilities.js",
