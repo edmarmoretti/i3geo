@@ -405,7 +405,7 @@ i3GEO.guias = {
 				else
 				{document.body.appendChild(novoel);}
 				YAHOO.namespace("janelaguias.xp");
-				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+				YAHOO.janelaguias.xp.panel = new YAHOO.widget.Panel("janelaguias", {width:"270px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
 				YAHOO.janelaguias.xp.panel.render();
 				var i = $i(i3GEO.guias.IDGUIAS);
 				$i("janelaguias").appendChild(i);

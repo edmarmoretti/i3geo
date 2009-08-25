@@ -443,9 +443,9 @@ i3GEO.barraDeBotoes = {
 		}
 		YAHOO.namespace("janelaBotoes.xp");
 		if(i3GEO.barraDeBotoes.AUTOALTURA == false || barraZoom == true )
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
 		else
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false } );
+			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
 		if((barraZoom == true) && $i("img")){
 			i3GEO.barraDeBotoes.ativaBarraDeZoom();
 			verticalSlider = YAHOO.widget.Slider.getVertSlider("vertBGDiv","vertHandleDivZoom", 0, 70);

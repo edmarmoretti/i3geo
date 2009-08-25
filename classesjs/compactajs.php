@@ -81,6 +81,8 @@ packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui270/build/container/container.js","../pacotes/yui270/build/container/container_compacto.js","Normal");
+packer("../pacotes/yui270/build/container/container_core.js","../pacotes/yui270/build/container/container_core_compacto.js","Normal");
+
 //
 //gera um único js para a inicialização do I3Geo
 //
@@ -89,7 +91,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui270/build/dom/dom-min.js",
-"../pacotes/yui270/build/container/container_core-min.js",
+"../pacotes/yui270/build/container/container_core_compacto.js",
 "../pacotes/yui270/build/menu/menu-min.js",
 "../pacotes/yui270/build/logger/logger-min.js",
 "../pacotes/yui270/build/dragdrop/dragdrop-min.js",

@@ -176,9 +176,9 @@ i3GEO.janela = {
 		var fix = false;
 		if(nx == "" || nx == "center"){var fix = true;}
 		if(waltura == "auto")
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { zIndex:5000, modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );	
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { zIndex:15000, modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );	
 		else
-		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
+		YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:15000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );
 		if(nx != "" && nx != "center"){
 			var pos = new Array(nx,ny);
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
@@ -268,7 +268,7 @@ i3GEO.janela = {
 		{var pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
 		else if ($i("contemImg"))
 		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
-		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true})');
+		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true,monitorresize:false})');
 		eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
 		eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
 		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>")');

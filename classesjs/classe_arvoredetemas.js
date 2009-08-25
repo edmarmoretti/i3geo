@@ -614,7 +614,7 @@ i3GEO.arvoreDeTemas = {
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca == true){
 			var insp = "<br><br><table><tr>";
 			insp += "<td><span style='font-size:12px'>&nbsp;"+$trad("a1")+" <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=31' >&nbsp;&nbsp;&nbsp;</a></span></td>";
-			insp += "<td><input class='digitar' type='text' id='i3geo_buscatema' size='15' value=''  /></td>";
+			insp += "<td><input onclick='javascript:this.select();' class='digitar' type='text' id='i3geo_buscatema' size='15' value=''  /></td>";
 			insp += "<td><img  class='tic' ";
 			if(navm){insp += "style='top:0px;'";}
 			else

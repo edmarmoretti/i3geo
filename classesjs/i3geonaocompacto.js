@@ -17,7 +17,7 @@ var jsfiles = new Array(
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui270/build/dom/dom-min.js",
-"../pacotes/yui270/build/container/container_core-min.js",
+"../pacotes/yui270/build/container/container_core.js",
 "../pacotes/yui270/build/menu/menu-min.js",
 "../pacotes/yui270/build/logger/logger-min.js",
 "../pacotes/yui270/build/dragdrop/dragdrop-min.js",

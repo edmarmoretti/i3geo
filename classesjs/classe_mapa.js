@@ -426,7 +426,7 @@ i3GEO.mapa = {
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
 					YAHOO.namespace("moveLegi.xp");
-					YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
+					YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
 					YAHOO.moveLegi.xp.panel.render();
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;

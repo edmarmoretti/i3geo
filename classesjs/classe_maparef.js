@@ -197,7 +197,7 @@ i3GEO.maparef = {
 			var temp = "none";
 			if(i3GEO.maparef.PERMITEDESLOCAR)
 			var temp = "shadow";
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false } );
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
 			YAHOO.janelaRef.xp.panel.render();
 			var r = $i("i3geo_winRef_c");
 			if(r){
