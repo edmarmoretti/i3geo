@@ -1353,7 +1353,7 @@ version: 2.7.0
          * @method _initResizeMonitor
          */
         _initResizeMonitor : function() {
-
+			return;
             var oDoc, 
                 oIFrame, 
                 sHTML;
