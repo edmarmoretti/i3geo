@@ -37,14 +37,14 @@ body {
 			<div style="width:95%;text-align:left;top:15px;left:0px" >
 				<table summary="" class=lista2 >
 					<tr><td>Fonte:</td><td><span id="listaf"></span></td></tr>
-					<tr><td>Tamanho:</td><td><input class=digitar size=2 type=text value=8 id=tamanho_i /></td></tr>
-					<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou CURVO, nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td><input class=digitar size=4 type=text value=0 id=angulo_i /></td></tr>
+					<tr><td>Tamanho:</td><td><input onclick='javascript:this.select();' class=digitar size=2 type=text value=8 id=tamanho_i /></td></tr>
+					<tr><td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou CURVO, nesses casos, a fonte n&atilde;o pode ser do tipo bitmap):</td><td><input onclick='javascript:this.select();' class=digitar size=4 type=text value=0 id=angulo_i /></td></tr>
 					<tr>
 						<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
-						<td>x <input class=digitar size=2 type=text value=0 id=offsetx_i /> y <input class=digitar size=2 type=text value=0 id=offsety_i /></td>
+						<td>x <input onclick='javascript:this.select();' class=digitar size=2 type=text value=0 id=offsetx_i /> y <input class=digitar size=2 type=text value=0 id=offsety_i /></td>
 					</tr>
-					<tr><td>Cor do texto:</td><td><input class=digitar  size=11 type=text value="0 0 0" id=frente_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente_i')" /></td></tr>
-					<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td><input class=digitar size=11 type=text value="" id=mascara_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara_i')" /></td></tr>
+					<tr><td>Cor do texto:</td><td><input onclick='javascript:this.select();' class=digitar  size=11 type=text value="0 0 0" id=frente_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente_i')" /></td></tr>
+					<tr><td>Cor da m&aacute;scara de um pixel de entorno:</td><td><input onclick='javascript:this.select();' class=digitar size=11 type=text value="" id=mascara_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara_i')" /></td></tr>
 					<tr>
 						<td>Posicionamento:</td>
 						<td>
@@ -68,11 +68,11 @@ body {
 		<div id=guia3obj style="display:none;width:95%;left:0px">
 			<div style="width:95%;top:15px;left:0px;" >
 				<table summary="" class="lista2" >
-					<tr><td>Cor do fundo:</td><td><input class=digitar size=9 type=text value="" id=fundoc_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc_i')" /></td></tr>
-					<tr><td>Cor da sombra do fundo:</td><td><input class=digitar size=9 type=text value="" id=sombra_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra_i')" /></td></tr>
-					<tr><td>Deslocamento da sombra do fundo:</td><td>x <input class=digitar size=1 type=text value="1" id=sombrax_i /> y <input class=digitar size=1 type=text value="1" id=sombray_i /></td></tr>
-					<tr><td>Cor da sombra:</td><td><input class=digitar size=9 type=text value="" id=frentes_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes_i')" /></td></tr>
-					<tr><td>Deslocamento da sombra:</td><td>x <input class=digitar size=1 type=text value="1" id=frentex_i /> y <input class=digitar size=1 type=text value="1" id=frentey_i /></td></tr>
+					<tr><td>Cor do fundo:</td><td><input onclick='javascript:this.select();' class=digitar size=9 type=text value="" id=fundoc_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc_i')" /></td></tr>
+					<tr><td>Cor da sombra do fundo:</td><td><input onclick='javascript:this.select();' class=digitar size=9 type=text value="" id=sombra_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra_i')" /></td></tr>
+					<tr><td>Deslocamento da sombra do fundo:</td><td>x <input onclick='javascript:this.select();' class=digitar size=1 type=text value="1" id=sombrax_i /> y <input class=digitar size=1 type=text value="1" id=sombray_i /></td></tr>
+					<tr><td>Cor da sombra:</td><td><input onclick='javascript:this.select();' class=digitar size=9 type=text value="" id=frentes_i /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes_i')" /></td></tr>
+					<tr><td>Deslocamento da sombra:</td><td>x <input onclick='javascript:this.select();' class=digitar size=1 type=text value="1" id=frentex_i /> y <input class=digitar size=1 type=text value="1" id=frentey_i /></td></tr>
 				</table>
 			</div>
 		</div>
@@ -87,8 +87,8 @@ body {
 							</select>
 						</td>
 					</tr>
-					<tr><td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td><td><input class=digitar size=4 type=text value="auto" id=mindistance_i /></td></tr>
-					<tr><td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td><td><input class=digitar size=4 type=text value="auto" id=minfeaturesize_i /></td></tr>
+					<tr><td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td><td><input onclick='javascript:this.select();' class=digitar size=4 type=text value="auto" id=mindistance_i /></td></tr>
+					<tr><td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td><td><input onclick='javascript:this.select();' class=digitar size=4 type=text value="auto" id=minfeaturesize_i /></td></tr>
 					<tr><td>O texto pode ultrapassar o mapa?:</td>
 						<td>
 							<select id=partials_i >

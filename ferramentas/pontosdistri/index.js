@@ -38,12 +38,12 @@ comboTemasPt("temasPt",function(retorno)
 		var ins = "<div style=top:0px;left:0px;text-align:left; >Escolha o tema de pontos que ser&aacute; utilizado:</div><br><br>"
 		ins += retorno.dados
 		ins += "<br><br><div style=top:0px;left:0px;text-align:left; >Restringe a análise aos limites de abrang&ecirc;ncia dos pontos? "+simnao("limitePontos")+"<div>"
-		ins += "<br><div style=top:0px;left:-10px;text-align:left; >Extende os limites de abrang&ecirc;ncia dos pontos em <input type=text size=3 value=10 id=extendelimite /> %<div>"
+		ins += "<br><div style=top:0px;left:-10px;text-align:left; >Extende os limites de abrang&ecirc;ncia dos pontos em <input onclick='javascript:this.select();' type=text size=3 value=10 id=extendelimite /> %<div>"
 
 		ins += "<br><div style=top:0px;left:0px;text-align:left; onclick='analiseDensidade()' ><input id=botao1 size=35  type=button value='Densidade de pontos' /></div><br>"
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDistancia()' ><input id=botao2 size=35  type=button value='Dist&acirc;ncia entre pontos' /></div><br>"
 		ins += "<div style='padding:1px;left:0px;border: 1px solid gray;'><div style=top:0px;left:0px;text-align:left; onclick='analiseKernel()' ><input id=botaokernel size=35  type=button value='Kernel' /></div>"
-		ins += "<div>Desvio padr&atilde;o (sigma):<input class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
+		ins += "<div>Desvio padr&atilde;o (sigma):<input onclick='javascript:this.select();' class='digitar' type=text size=3 value='' id=sigma /></div></div><br>"
 		
 		ins += "<div style=top:0px;left:0px;text-align:left; onclick='analiseDeldir()' ><input id=botaodeldir size=35  type=button value='Delaunay/Voronoi' /></div><br>"
 

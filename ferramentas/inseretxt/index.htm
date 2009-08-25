@@ -25,7 +25,7 @@ body {
 	<div id=geral style="left:0px;top:0px;">
 		<div id=guia1obj style="width:95%;text-align:left">
 			<div style="width:95%;top:5px;left:0px">
-				<input size=55 class=digitar type=text value="" id=texto />
+				<input onclick='javascript:this.select();' size=55 class=digitar type=text value="" id=texto />
 			</div>
 			<div id=men1 style="text-align:left;top:10px;left:-5px;" >
 				Digite o texto e clique no mapa no ponto de inclus&atilde;o.
@@ -53,23 +53,23 @@ body {
 					</tr>
 					<tr>
 						<td>Tamanho:</td>
-						<td><input size=2 type=text value=8 id=tamanho /></td>
+						<td><input onclick='javascript:this.select();' size=2 type=text value=8 id=tamanho /></td>
 					</tr>
 					<tr>
 						<td>&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO):</td>
-						<td><input size=4 type=text value=0 id=angulo /></td>
+						<td><input onclick='javascript:this.select();' size=4 type=text value=0 id=angulo /></td>
 					</tr>	
 					<tr>
 						<td>Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
-						<td>x <input size=2 type=text value=0 id=offsetx /> y <input size=2 type=text value=0 id=offsety /></td>
+						<td>x <input onclick='javascript:this.select();' size=2 type=text value=0 id=offsetx /> y <input size=2 type=text value=0 id=offsety /></td>
 					</tr>
 					<tr>
 						<td>Cor do texto (digite os valores em vermelho, verde e azul, p.ex. 20 20 20):</td>
-						<td><input onkeyup="icor(this)" size=11 type=text value="0 0 0" id=frente /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente')" /></td>
+						<td><input onclick='javascript:this.select();' onkeyup="icor(this)" size=11 type=text value="0 0 0" id=frente /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frente')" /></td>
 					</tr>
 					<tr>
 						<td>Cor da m&aacute;scara de um pixel de entorno:</td>
-						<td><input onkeyup="icor(this)" size=11 type=text value="" id=mascara /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara')" /></td>
+						<td><input onclick='javascript:this.select();' onkeyup="icor(this)" size=11 type=text value="" id=mascara /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara')" /></td>
 					</tr>
 					<tr>
 						<td>Posi&ccedil;&atilde;o do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o:</td>
@@ -96,23 +96,23 @@ body {
 				<table summary="" class=lista2 width="95%"> 
 					<tr>		
 						<td>Cor do fundo:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=fundoc /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc')" /></td>
+						<td><input onclick='javascript:this.select();' onkeyup="icor(this)" size=9 type=text value="" id=fundoc /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('fundoc')" /></td>
 					</tr>
 					<tr>
 						<td>Cor da sombra do fundo:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=sombra /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra')" /></td>
+						<td><input onclick='javascript:this.select();' onkeyup="icor(this)" size=9 type=text value="" id=sombra /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('sombra')" /></td>
 					</tr>
 					<tr>
 						<td>Desl. da sombra do fundo:</td>
-						<td>x <input size=1 type=text value="1" id=sombrax /> y <input size=1 type=text value="1" id=sombray /></td>
+						<td>x <input onclick='javascript:this.select();' size=1 type=text value="1" id=sombrax /> y <input size=1 type=text value="1" id=sombray /></td>
 					</tr>
 					<tr>
 						<td>Cor da sombra:</td>
-						<td><input onkeyup="icor(this)" size=9 type=text value="" id=frentes /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes')" /></td>
+						<td><input onclick='javascript:this.select();' onkeyup="icor(this)" size=9 type=text value="" id=frentes /><img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('frentes')" /></td>
 					</tr>
 					<tr>
 						<td>Deslocamento da sombra:</td>
-						<td>x <input size=1 type=text value="1" id=frentex /> y <input size=1 type=text value="1" id=frentey /></td>
+						<td>x <input onclick='javascript:this.select();' size=1 type=text value="1" id=frentex /> y <input size=1 type=text value="1" id=frentey /></td>
 					</tr>
 				</table>
 			</div>
@@ -131,11 +131,11 @@ body {
 					</tr>
 					<tr>
 						<td>Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel):</td>
-						<td><input size=4 type=text value="auto" id=mindistance /></td>
+						<td><input onclick='javascript:this.select();' size=4 type=text value="auto" id=mindistance /></td>
 					</tr>
 					<tr>
 						<td>Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel):</td>
-						<td><input size=4 type=text value="auto" id=minfeaturesize /></td>
+						<td><input onclick='javascript:this.select();' size=4 type=text value="auto" id=minfeaturesize /></td>
 					</tr>
 					<tr>
 						<td>O texto pode ultrapassar o mapa?:</td>

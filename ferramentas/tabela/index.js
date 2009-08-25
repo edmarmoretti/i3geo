@@ -511,7 +511,7 @@ function t2()
 		ins += "<option value=media >m&eacute;dia</option></select>"
 	}
 	ins += "<br><br>Excluir valores:<br>"
-	ins += "<input class=digitar type=text value='' size=4 id=gexcluir />"
+	ins += "<input onclick='javascript:this.select();' class=digitar type=text value='' size=4 id=gexcluir />"
 	aguarde("none")
 	mostraOpcao("t0()","t4()",ins,"t2")
 }
@@ -571,13 +571,13 @@ function t4()
 	ins += "<tr><td><b>Tamanho da figura</b></td><td></td></tr>"
 	
 	ins += "<tr><td>Largura em pixels</td>"
-	ins += "<td><input class=digitar type=text value=400 size=4 id='gw' /></td></tr>"
+	ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=400 size=4 id='gw' /></td></tr>"
 
 	ins += "<tr><td>Altura em pixels</td>"
-	ins += "<td><input class=digitar type=text value=400 size=4 id='gh' /></td></tr>"
+	ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=400 size=4 id='gh' /></td></tr>"
 
 	ins += "<tr><td>Resolu&ccedil;&atilde;o em dpi</td>"
-	ins += "<td><input class=digitar type=text value=72 size=4 id='res' /></td></tr>"
+	ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=72 size=4 id='res' /></td></tr>"
 
 	var temp = parametros.split(",")
 	for(i=0;i < temp.length;i++)
@@ -668,17 +668,17 @@ function retornaPar(id)
 	if (id == "nbins")
 	{
 		ins += "<tr><td>Número de divisões dos eixos</td>"
-		ins += "<td><input class=digitar type=text value='40' size=4 id=nbins /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='40' size=4 id=nbins /></td></tr>"
 	}
 	if (id == "breaks")
 	{
 		ins += "<tr><td>Total de quebras</td>"
-		ins += "<td><input class=digitar type=text value='20' size=20 id=breaks /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='20' size=20 id=breaks /></td></tr>"
 	}
 	if (id == "space")
 	{
 		ins += "<tr><td>Espa&ccedil;amento entre as barras</td>"
-		ins += "<td><input class=digitar type=text value=0 size=4 id=space /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=0 size=4 id=space /></td></tr>"
 	}
 	if (id == "grid")
 	{
@@ -688,7 +688,7 @@ function retornaPar(id)
 	if (id == "radius")
 	{
 		ins += "<tr><td>Redu&ccedil;&atilde;o da figura (-1 a 1)</td>"
-		ins += "<td><input class=digitar type=text value='0.9' size=4 id=radius /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='0.9' size=4 id=radius /></td></tr>"
 	}
 	if (id == "percentual")
 	{
@@ -729,7 +729,7 @@ function retornaPar(id)
 	if (id == "cex")
 	{
 		ins += "<tr><td>Fator de escala</td>"
-		ins += "<td><input class=digitar type=text value='.6' size=4 id=cex /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='.6' size=4 id=cex /></td></tr>"
 	}
 	if (id == "main")
 	{
@@ -739,7 +739,7 @@ function retornaPar(id)
 		if ($i("gi2"))
 		{t += " " + $i("gi2").value}
 		ins += "<tr><td>T&iacute;tulo</td>"
-		ins += "<td><input class=digitar type=text value='"+t+"' size=20 id=main /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='"+t+"' size=20 id=main /></td></tr>"
 	}
 	if (id == "fontmain")
 	{
@@ -756,7 +756,7 @@ function retornaPar(id)
 	if (id == "cexmain")
 	{
 		ins += "<tr><td>Fator de escala</td>"
-		ins += "<td><input class=digitar type=text value=1 size=4 id=cexmain /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=1 size=4 id=cexmain /></td></tr>"
 	}
 	if (id == "colmain")
 	{
@@ -766,7 +766,7 @@ function retornaPar(id)
 	if (id == "sub")
 	{
 		ins += "<tr><td>Sub-T&iacute;tulo</td>"
-		ins += "<td><input class=digitar type=text value='' size=20 id=sub /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='' size=20 id=sub /></td></tr>"
 	}
 	if (id == "fontsub")
 	{
@@ -783,7 +783,7 @@ function retornaPar(id)
 	if (id == "cexsub")
 	{
 		ins += "<tr><td>Fator de escala</td>"
-		ins += "<td><input class=digitar type=text value=1 size=4 id=cexsub /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=1 size=4 id=cexsub /></td></tr>"
 	}
 	if (id == "colsub")
 	{
@@ -796,7 +796,7 @@ function retornaPar(id)
 		{var t = $i("gi1").value}
 		if (tipoDeGrafico == "hist"){var t = "quantidade" }
 		ins += "<tr><td>Nome do eixo y</td>"
-		ins += "<td><input class=digitar type=text value='"+t+"' size=20 id=ylab /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='"+t+"' size=20 id=ylab /></td></tr>"
 	}
 	if (id == "xlab")
 	{
@@ -804,17 +804,17 @@ function retornaPar(id)
 		{var t = $i("gi2").value}
 		if (tipoDeGrafico == "hist"){var t = "ocorrencias" }
 		ins += "<tr><td>Nome do eixo x</td>"
-		ins += "<td><input class=digitar type=text value='"+t+"' size=20 id=xlab /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='"+t+"' size=20 id=xlab /></td></tr>"
 	}
 	if (id == "cexaxis")
 	{
 		ins += "<tr><td>Fator de escala</td>"
-		ins += "<td><input class=digitar type=text value=.5 size=4 id=cexaxis /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=.5 size=4 id=cexaxis /></td></tr>"
 	}
 	if (id == "cexlab")
 	{
 		ins += "<tr><td>Fator de escala</td>"
-		ins += "<td><input class=digitar type=text value=1 size=4 id=cexlab /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=1 size=4 id=cexlab /></td></tr>"
 	}
 	if (id == "colaxis")
 	{
@@ -883,12 +883,12 @@ function retornaPar(id)
 	if (id == "lwd")
 	{
 		ins += "<tr><td>Largura da linha</td>"
-		ins += "<td><input class=digitar type=text value=1 size=4 id=lwd /></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=1 size=4 id=lwd /></tr>"
 	}
 	if (id == "tck")
 	{
 		ins += "<tr><td>Tamanho dos tics</td>"
-		ins += "<td><input class=digitar type=text value=1 size=4 id=tck /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=1 size=4 id=tck /></td></tr>"
 	}
 	if (id == "horiz")
 	{
@@ -913,12 +913,12 @@ function retornaPar(id)
 	if (id == "pch")
 	{
 		ins += "<tr><td>Símbolo dos pontos</td>"
-		ins += "<td><input class=digitar type=text value='o' size=4 id=pch /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value='o' size=4 id=pch /></td></tr>"
 	}
 	if (id == "tpt")
 	{
 		ins += "<tr><td>Tamanho dos pontos</td>"
-		ins += "<td><input class=digitar type=text value=0.5 size=4 id=tpt /></td></tr>"
+		ins += "<td><input onclick='javascript:this.select();' class=digitar type=text value=0.5 size=4 id=tpt /></td></tr>"
 	}
 	return (ins)
 }

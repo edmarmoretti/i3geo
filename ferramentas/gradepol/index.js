@@ -35,13 +35,13 @@ function t1()
 {
 	ins = "Dist&acirc;ncia entre c&eacute;lulas"
 	ins += "<p>em X: "
-	ins += "Grau <input class=digitar id='xg' title='grau' type=text size=3 value='1'/>"
-	ins += "Minuto <input class=digitar id='xm' title='minuto' type=text size=5 value='00'/>"
-	ins += "Segundo <input class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>"
+	ins += "Grau <input onclick='javascript:this.select();' class=digitar id='xg' title='grau' type=text size=3 value='1'/>"
+	ins += "Minuto <input onclick='javascript:this.select();' class=digitar id='xm' title='minuto' type=text size=5 value='00'/>"
+	ins += "Segundo <input onclick='javascript:this.select();' class=digitar id='xs' title='segundo' type=text size=5 value='00.00'/>"
 	ins += "<p>em Y: "
-	ins += "Grau <input class=digitar id='yg' title='grau' type=text size=3 value='1'/>"
-	ins += "Minuto <input class=digitar id='ym' title='minuto' type=text size=5 value='00'/>"
-	ins += "Segundo <input class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/>"
+	ins += "Grau <input onclick='javascript:this.select();' class=digitar id='yg' title='grau' type=text size=3 value='1'/>"
+	ins += "Minuto <input onclick='javascript:this.select();' class=digitar id='ym' title='minuto' type=text size=5 value='00'/>"
+	ins += "Segundo <input onclick='javascript:this.select();' class=digitar id='ys' title='segundo' type=text size=5 value='00.00'/>"
 	window.parent.g_tipoacao = "capturaponto"
 	mostraOpcao("t0()","t2()",ins,"t1")
 }
@@ -49,13 +49,13 @@ function t2()
 {
 	ins = "Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>"
 	ins += "<p>em X: "
-	ins += "Grau<input class=digitar id='ixg' title='grau'  type=text size=3 value='-00'/>"
-	ins += "Minuto<input class=digitar id='ixm' title='minuto'  type=text size=5 value='00'/>"
-	ins += "Segundo<input class=digitar id='ixs' title='segundo'  type=text size=5 value='00.00'/>"
+	ins += "Grau<input onclick='javascript:this.select();' class=digitar id='ixg' title='grau'  type=text size=3 value='-00'/>"
+	ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='ixm' title='minuto'  type=text size=5 value='00'/>"
+	ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='ixs' title='segundo'  type=text size=5 value='00.00'/>"
 	ins += "<p>em Y: "
-	ins += "Grau<input class=digitar id='iyg' title='grau'  type=text size=3 value='-00'/>"
-	ins += "Minuto<input class=digitar id='iym' title='minuto'  type=text size=5 value='00'/>"
-	ins += "Segundo<input class=digitar id='iys' title='segundo'  type=text size=5 value='00.00'/>"
+	ins += "Grau<input onclick='javascript:this.select();' class=digitar id='iyg' title='grau'  type=text size=3 value='-00'/>"
+	ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='iym' title='minuto'  type=text size=5 value='00'/>"
+	ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='iys' title='segundo'  type=text size=5 value='00.00'/>"
 	mostraOpcao("t1()","t3()",ins,"t2")
 }
 function t3()
@@ -63,9 +63,9 @@ function t3()
 	window.parent.mudaiconf("pan")
 	ins = "Número de c&eacute;lulas. Máximo de 10.000."
 	ins += "<p>em X: "
-	ins += "<input class=digitar id='nptx' title='em x'  type=text size=3 value='10'/>"
+	ins += "<input onclick='javascript:this.select();' class=digitar id='nptx' title='em x'  type=text size=3 value='10'/>"
 	ins += "<p>em Y: "
-	ins += "<input class=digitar id='npty' title='em y'  type=text size=3 value='10'/>"
+	ins += "<input onclick='javascript:this.select();' class=digitar id='npty' title='em y'  type=text size=3 value='10'/>"
 	mostraOpcao("t2()","t4()",ins,"t3")
 }
 function t4()

@@ -121,16 +121,16 @@ for(var key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>"
 }
 ins += "</select>";
-ins += "<p><input type=text id=iServico size=42 />"
+ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=42 />"
 ins += "<p><TEXTAREA id='WMS_descricao' rows='5' cols='42' ></TEXTAREA></p>";
 ins += "<table style='text-align:left'>"
-ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input type=text value='0' id=WMS_anoinicio size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input type=text value='nulo' id=WMS_mesinicio size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input type=text value='nulo' id=WMS_diainicio size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 /></tr>"
 
-ins += "<tr><td style='text-align:left'>Ano final: </td><td><input type=text value='0' id=WMS_anofim size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Mês final: </td><td><input type=text value='nulo' id=WMS_mesfim size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Dia final: </td><td><input type=text value='nulo' id=WMS_diafim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>"
 ins += "</table>"
 ins += "<div style='position:absolute;left:120px;top:180px'>"
 ins += "<p>Obter uma imagem por:</p>"

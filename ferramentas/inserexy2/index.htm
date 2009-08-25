@@ -49,11 +49,11 @@ body {
 		<div class=guiaobj id="guia2obj" style="display:none;;left:1px" >
 			<div>
 				Direção:<br>
-				<input class=digitar id='xgdd' title='grau' type=text size=3 value='00'/>
-				<input class=digitar id='xmdd' title='minuto' type=text size=3 value='00'/>
-				<input class=digitar id='xsdd' title='segundo' type=text size=3 value='0.0'/><br><br>
+				<input onclick='javascript:this.select();' class=digitar id='xgdd' title='grau' type=text size=3 value='00'/>
+				<input onclick='javascript:this.select();' class=digitar id='xmdd' title='minuto' type=text size=3 value='00'/>
+				<input onclick='javascript:this.select();' class=digitar id='xsdd' title='segundo' type=text size=3 value='0.0'/><br><br>
 				Distância em Km:<br>
-				<input class=digitar id='distdd' title='km' type=text size=5 value='0.0'/>
+				<input onclick='javascript:this.select();' class=digitar id='distdd' title='km' type=text size=5 value='0.0'/>
 			</div>
 			<div id=opcdd style="display:block;top:15px;left:0px">
 				<div style=top:0px;left:0px;text-align:left onclick='inserirdd()' >
@@ -78,16 +78,16 @@ body {
 				</table><br>
 			</div>
 			<div id=digmascara style="display:block;top:10px;left:0px">
-				X:<input class=digitar id='xg' title='grau' type=text size=3 value='-00'/>
-				<input class=digitar id='xm' title='minuto' type=text size=3 value='00'/>
-				<input class=digitar id='xs' title='segundo' type=text size=3 value='0.0'/>
-				&nbsp;Y:<input class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
-				<input class=digitar id='ym' title='minuto' type=text size=3 value='00'/>
-				<input class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/><br><br>
+				X:<input onclick='javascript:this.select();' class=digitar id='xg' title='grau' type=text size=3 value='-00'/>
+				<input onclick='javascript:this.select();' class=digitar id='xm' title='minuto' type=text size=3 value='00'/>
+				<input onclick='javascript:this.select();' class=digitar id='xs' title='segundo' type=text size=3 value='0.0'/>
+				&nbsp;Y:<input onclick='javascript:this.select();' class=digitar id='yg' title='grau' type=text size=3 value='-00'/>
+				<input onclick='javascript:this.select();' class=digitar id='ym' title='minuto' type=text size=3 value='00'/>
+				<input onclick='javascript:this.select();' class=digitar id='ys' title='segundo' type=text size=3 value='0.0'/><br><br>
 			</div>
 			<div id=digcampo style="display:none;top:10px;left:0px">
-				X: <input class=digitar id='longitude' title='dms' type=text size=16 value=''/>
-				Y: <input class=digitar id='latitude' title='dms' type=text size=16 value=''/><br><br>
+				X: <input onclick='javascript:this.select();' class=digitar id='longitude' title='dms' type=text size=16 value=''/>
+				Y: <input onclick='javascript:this.select();' class=digitar id='latitude' title='dms' type=text size=16 value=''/><br><br>
 			</div>
 			<div id=opc2 style="display:block;top:15px;left:0px">
 				<div style=top:0px;left:0px;text-align:left onclick='inserir()' >
@@ -106,7 +106,7 @@ body {
 			
 			<div id=opc3 style="top:0px;left:0px;text-align:left;">
 				Cole ou digite a lista de coordenadas:
-				<input class=digitar id='colar' title='pares' type=text size=50 value=''/>
+				<input onclick='javascript:this.select();' class=digitar id='colar' title='pares' type=text size=50 value=''/>
 			</div>
 			<div style=top:10px;left:0px;text-align:left onclick='colar()' >
 				<input id=botao6 type='button' size=14 value='Insere'  />

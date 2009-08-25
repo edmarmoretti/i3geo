@@ -71,7 +71,7 @@ function listaitensComPar(retorno)
 		{
 			ins.push("<tr><td><input onclick='pegaitens()' size=2 style='cursor:pointer' name="+retorno.data.valores[i].item+" type=checkbox id="+retorno.data.valores[i].item+" /></td>")
 			ins.push("<td>"+retorno.data.valores[i].item+"</td>")
-			ins.push("<td><input id=cor"+retorno.data.valores[i].item+" type=text size=13 value="+randomRGB()+" /></td>")
+			ins.push("<td><input onclick='javascript:this.select();' id=cor"+retorno.data.valores[i].item+" type=text size=13 value="+randomRGB()+" /></td>")
 			ins.push("<td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"corj('cor"+retorno.data.valores[i].item+"')\" /></td></tr>")
 		}
 		ins.push("</table>")

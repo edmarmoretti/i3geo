@@ -43,7 +43,7 @@ function t1()
 function t2()
 {
 	ins = "<div style=left:0px;top:0px; >Diminuir o exagero vertical em:</div><br>"
-	ins += "<input id=fz size=2 class=digitar type=text value=10 /> x "
+	ins += "<input onclick='javascript:this.select();' id=fz size=2 class=digitar type=text value=10 /> x "
  	ins += "<div class=destaca id=dest style=top:10px;display:none ></div>"
 	ins += "<div onclick='criar3d()' id=temasRaster style=left:0px;top:0px;width:90% >"
 	ins += "<br><input id=botao1 size=20 type='button' value='Criar modelo 3d' /></div>"

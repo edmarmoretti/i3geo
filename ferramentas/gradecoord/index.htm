@@ -48,7 +48,7 @@ body {
 <tr>
 	<td>Tamanho do texto:</td>
 	<td>
-		<input class=digitar size=3 type=text value="10" id=tamanhotexto  />		
+		<input onclick='javascript:this.select();' class=digitar size=3 type=text value="10" id=tamanhotexto  />		
 	</td>
 </tr>
 <tr>
@@ -59,22 +59,22 @@ body {
 <tr>
 	<td>Cor da m&aacute;scara de um pixel de entorno:</td>
 	<td>
-		<input class=digitar size=11 type=text value="-1,-1,-1" id=mascara_i />
+		<input onclick='javascript:this.select();' class=digitar size=11 type=text value="-1,-1,-1" id=mascara_i />
 		<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('mascara_i')" />
 	</td>
 </tr>
 <tr>
 	<td>Cor da sombra:</td>
 	<td>
-		<input class=digitar size=11 type=text value="-1,-1,-1" id=shadowcolor  />
+		<input onclick='javascript:this.select();' class=digitar size=11 type=text value="-1,-1,-1" id=shadowcolor  />
 		<img alt="aquarela.gif" style=cursor:pointer src='../../imagens/aquarela.gif' onclick="corj('shadowcolor')" />
 	</td>
 </tr>
 <tr>
 	<td>Deslocamento da sombra:</td>
 	<td>
-		x <input class=digitar size=3 type=text value="0" id=shadowsizex  />
-		y <input class=digitar size=3 type=text value="0" id=shadowsizey  />
+		x <input onclick='javascript:this.select();' class=digitar size=3 type=text value="0" id=shadowsizex  />
+		y <input onclick='javascript:this.select();' class=digitar size=3 type=text value="0" id=shadowsizey  />
 	</td>
 </tr>
 <tr>

@@ -325,7 +325,7 @@ function checkitenseditaveis(tema,funcao,onde)
 			for (i=0;i<retorno.data.valores.length; i++)
 			{
 				ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+retorno.data.valores[i].item+"' /></td>");
-				ins.push("<td><input id='"+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size=25 value='"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].nome+"' /></td></tr>");
+				ins.push("<td><input onclick='javascript:this.select();' id='"+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size=25 value='"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].nome+"' /></td></tr>");
 			}
 			ins.push("</table>");
 			var ins = ins.join('');

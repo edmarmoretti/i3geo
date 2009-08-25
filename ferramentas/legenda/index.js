@@ -162,7 +162,7 @@ function montaLegenda(retorno)
 				ins += "<div style=width:80% id=processos >"
 				for (i=0;i<retorno.data[0].proc.length;i++)
 				{
-					ins += "<br><input type=text size=50 value='"+retorno.data[0].proc[i]+"' />"
+					ins += "<br><input onclick='javascript:this.select();' type=text size=50 value='"+retorno.data[0].proc[i]+"' />"
 				}
 				ins += "</div>"
 			}
@@ -458,11 +458,11 @@ function verEstilo(e)
 	linha = linha.split("#")
 	var tipoLayer = linha[0]
 	var d = ""
-	d += "<table><tr><td style='text-align:left;'>Cor do contorno:</td><td><input type=text class=digitar id=outlinecolor value='"+linha[2]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('outlinecolor')\" /></td></tr>"
-	d += "<tr><td style='text-align:left;'>Cor do fundo:</td><td><input type=text class=digitar id=backgroundcolor value='"+linha[3]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('backgroundcolor')\" /></td></tr>"
-	d += "<tr><td style='text-align:left;'>Cor da frente:</td><td><input type=text class=digitar id=color value='"+linha[4]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('color')\" /></td></tr>"
-	d += "<tr><td style='text-align:left;'>Tamanho:</td><td><input type=text class=digitar id=sizes value='"+linha[6]+ "' title='digite o valor'/></td><td></td></tr>"
-	d += "<tr><td style='text-align:left;'>S&iacute;mbolo:</td><td><input type=text class=digitar id=symbolname value='"+linha[5]+"' title='digite o valor'/></td><td></td></tr></table>"
+	d += "<table><tr><td style='text-align:left;'>Cor do contorno:</td><td><input onclick='javascript:this.select();' type=text class=digitar id=outlinecolor value='"+linha[2]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('outlinecolor')\" /></td></tr>"
+	d += "<tr><td style='text-align:left;'>Cor do fundo:</td><td><input onclick='javascript:this.select();' type=text class=digitar id=backgroundcolor value='"+linha[3]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('backgroundcolor')\" /></td></tr>"
+	d += "<tr><td style='text-align:left;'>Cor da frente:</td><td><input onclick='javascript:this.select();' type=text class=digitar id=color value='"+linha[4]+ "' title='digite o valor'/></td><td><img style=cursor:pointer src='../../imagens/aquarela.gif' onclick=\"cor('color')\" /></td></tr>"
+	d += "<tr><td style='text-align:left;'>Tamanho:</td><td><input onclick='javascript:this.select();' type=text class=digitar id=sizes value='"+linha[6]+ "' title='digite o valor'/></td><td></td></tr>"
+	d += "<tr><td style='text-align:left;'>S&iacute;mbolo:</td><td><input onclick='javascript:this.select();' type=text class=digitar id=symbolname value='"+linha[5]+"' title='digite o valor'/></td><td></td></tr></table>"
 	$i("mostraEstilo").innerHTML = "Propriedades do s&iacute;mbolo. Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul<br><br>"+d
 	aguarde("block")
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=editasimbolo&tipo="+tipoLayer+"&opcao=listaSimbolos"
