@@ -178,7 +178,7 @@ function t1()
 function t2()
 {
 	ins = "Dist&acirc;ncia do entorno em metros"
-	ins += "<br><input class=digitar id='d' type=text size=10 value='0'/><br><br>"
+	ins += "<br><input onclick='javascript:this.select();' class=digitar id='d' type=text size=10 value='0'/><br><br>"
 	ins += "Considerar os elementos selecionados como se fossem um s&oacute;?";
 	ins += "<br><select id=unir ><option value=nao selected >n&atilde;o</option><option value=sim >sim</option></select>"
 	mostraOpcao("t1()","t3()",ins,"t2")
