@@ -135,12 +135,12 @@ switch ($funcao)
 	case "pegaTemaPorMapfile":
 	$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
 	$dados = pegaDados($sql);
-	if(count($dados) == 0)
+	if(is_array($dados) && count($dados) == 0)
 	{
 		registraTema();
 		$dados = pegaDados($sql);
 	}
-	if(count($dados) > 1)
+	if(is_array($dados) && count($dados) > 1)
 	{$dados = "erro. Mais de um mapfile com mesmo código registrado no banco";}
 	retornaJSON($dados);
 	exit;
@@ -380,6 +380,7 @@ function pegaTemas()
 				"download_tema"=>$row['download_tema'],
 				"ogc_tema"=>$row['ogc_tema'],
 				"kml_tema"=>$row['kml_tema'],
+				"kmz_tema"=>$row['kmz_tema'],
 				"tags_tema"=>$row['tags_tema']
 				);
     	}
@@ -709,7 +710,7 @@ function registraTema()
 		$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
 		$dados = pegaDados($sql);
 		if(count($dados) == 0)
-		{$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','SIM','SIM','','','')");}
+		{$dbhw->query("INSERT INTO i3geoadmin_temas (nome_tema,codigo_tema,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,link_tema,desc_tema) VALUES ('$codigo_tema','$codigo_tema','SIM','NAO','SIM','SIM','','','')");}
     	$dbhw = null;
     	$dbh = null;
     	return "ok";
@@ -727,7 +728,7 @@ Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
 {
-	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags;
+	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz;
 	//error_reporting(E_ALL);
 	try 
 	{
@@ -741,7 +742,10 @@ function alteraTemas()
 		}
     	if($id != "")
     	{
+	    	if(!isset($kmz))
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml' WHERE id_tema = $id");
+    		else
+	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml',kmz_tema='$kmz' WHERE id_tema = $id");    		
     		$retorna = $id;
     	}
     	else
@@ -750,7 +754,10 @@ function alteraTemas()
 			$id = $dbh->query("SELECT * FROM i3geoadmin_temas WHERE nome_tema = 'xxxxxX'");
 			$id = $id->fetchAll();
 			$id = intval($id[0]['id_tema']);
+			if(!isset($kmz))
 			$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='', link_tema='', nome_tema ='',desc_tema='',codigo_tema='',tipoa_tema='',download_tema='',ogc_tema='',kml_tema='' WHERE id_tema = $id");
+			else
+			$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='', link_tema='', nome_tema ='',desc_tema='',codigo_tema='',tipoa_tema='',download_tema='',ogc_tema='',kml_tema='',kmz_tema='' WHERE id_tema = $id");
 			$retorna = $id;
     	}
     	//verifica se é necessário adicionar algum tag novo
@@ -913,7 +920,7 @@ function importarXmlMenu()
 		{
 			$nome = str_replace("'","",$nome);
 			$descricao = str_replace("'","",$descricao);
-			$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+			$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 		}
 		$temasExistentes[$codigo] = 0;
 	}
@@ -941,7 +948,7 @@ function importarXmlMenu()
 			{
 				$nome = str_replace("'","",$nome);
 				$descricao = str_replace("'","",$descricao);
-				$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+				$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 			}
 			$temasExistentes[$codigo] = 0;
 		}
@@ -969,7 +976,7 @@ function importarXmlMenu()
 				{
 					$nome = str_replace("'","",$nome);
 					$descricao = str_replace("'","",$descricao);
-					$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
+					$dbhw->query("INSERT INTO i3geoadmin_temas (nacessos,kml_tema,kmz_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema) VALUES (0,'$kml','NAO','$ogc','$down','$tags','$tipo','$link','$descricao','$nome','$codigo')");
 				}
 				$temasExistentes[$codigo] = 0;
 			}

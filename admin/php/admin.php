@@ -177,23 +177,28 @@ Executa um sql de busca de dados
 */
 function pegaDados($sql,$locaplic="")
 {
-	try 
-	{
-    	$resultado = array();
-    	if($locaplic == "")
-    	include("conexao.php");
-    	else
-    	include("$locaplic/admin/php/conexao.php");
-    	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
-    	$resultado = $q->fetchAll();
-    	$dbh = null;
-    	$dbhw = null;
-    	return $resultado;
-	}
-	catch (PDOException $e)
-	{
-    	return "Error!: " . $e->getMessage();
-	}
+   	$resultado = array();
+   	if($locaplic == "")
+   	include("conexao.php");
+   	else
+   	include("$locaplic/admin/php/conexao.php");
+   	error_reporting(E_ALL);
+   	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+   	if($q)
+   	{
+   		$resultado = $q->fetchAll();
+   		$dbh = null;
+   		$dbhw = null;
+   		//error_reporting(0);
+   		return $resultado;
+   	}
+   	else
+   	{
+    	$e = $dbh->errorInfo();
+    	echo " erro: ".$e[2];
+    	//echo $sql;
+   		return;
+   	}
 }
 /*
 Function: verificaFilhos

@@ -95,6 +95,11 @@ function montaDivTemas(i)
 	ins += "<p>Permite acesso via kml?<br>"
 	ins += "<select  id='kml_tema' >"
 	ins += core_combosimnao(i.kml_tema)
+	ins += "</select></p>"
+
+	ins += "<p>Permite acesso via kmz (kml com dados vetoriais)?<br>"
+	ins += "<select  id='kmz_tema' >"
+	ins += core_combosimnao(i.kmz_tema)
 	ins += "</select></p><br><br><br>"
 	
 	ins += "<input type=hidden id=codigo_tema value='"+i.codigo_tema+"'/>"
@@ -102,10 +107,20 @@ function montaDivTemas(i)
 }
 function gravaDadosTema(id)
 {
-	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo")
+	//validacao
+	if($i("kml_tema") && $i("kmz_tema"){
+		if($i("kmz_tema").value == "SIM")
+		{$i("kml_tema").value = "SIM";}
+		if($i("kml_tema").value == "NAO")
+		{$i("kmz_tema").value = "NAO";}
+	}
+	var campos = new Array("nome","desc","link","tags","tipo","ogc","download","kml","codigo","kmz")
 	var par = ""
 	for (i=0;i<campos.length;i++)
-	{par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)}
+	{
+		if($i(campos[i]+"_tema"))
+		par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)
+	}
 	par += "&id="+id
 	core_carregando("ativa");
 	core_carregando(" gravando o registro do id= "+id);
