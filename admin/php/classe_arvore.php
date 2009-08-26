@@ -268,6 +268,7 @@ class Arvore
 		$down = "sim";
 		$ogc = "sim";
 		$link = " ";
+		$kmz = "nao";
 		if (strtolower($recordset["download_tema"]) == "nao")
 		{$down = "nao";}
 		if (strtolower($recordset["ogc_tema"]) == "nao")
@@ -276,7 +277,9 @@ class Arvore
 		{$down = "nao";$ogc="nao";}
 		if ($recordset["link_tema"] != "")
 		{$link = $recordset["link_tema"];}
-		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc);		
+		if (strtolower($recordset["kmz_tema"]) == "sim")
+		{$kmz = "sim";}
+		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);		
 	}
 	//executa o sql
 	function execSQL($sql)

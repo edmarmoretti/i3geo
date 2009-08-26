@@ -184,7 +184,7 @@ function kml_tema_bd($tema)
 	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 	kml_servico($nome,$fonte,$legenda,$desc,$href);
 	
-	if(strtolower($tema["kmz_tema"]) != "nao")
+	if(strtolower($tema["kmz_tema"]) == "sim")
 	{
 		$href = "$urli3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&amp;map=$id&amp;typename=$id";
 		kml_networklink($nome." (vetorial)",$fonte,$legenda,$desc,$href);

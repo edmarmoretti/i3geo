@@ -22,7 +22,11 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 var endereco = window.location.protocol+"//"+window.location.host
 var tema = window.location.href.split("=")
-var tema = tema[1]
-var endereco = g_locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+tema+"&typename="+tema+"&request=kml"
+var tema = tema[1].split(",");
+var tipo = tema[1]
+var tema = tema[0]
+var endereco = "<p><b>Kml com 'GroundOverlay' baseado em um servico WMS: </b></p><p>"+g_locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+tema+"&typename="+tema+"&request=kml"
+if(tipo == "kmz")
+endereco += "<p><b>Kmz que gera um arquivo kml vetorial: </b></p><p>"+g_locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+tema+"&typename="+tema+"&request=kmz"
 $i("resultado").innerHTML = endereco
 $i("men1").innerHTML += "<br><br><b>Voc&ecirc; pode também utilizar o link <span style=color:red >"+g_locaplic+"/kml.php </span><br>para mostrar a &aacute;rvore completa de temas no GoogleEarth"

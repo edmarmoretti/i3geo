@@ -472,7 +472,7 @@ array
 				if($menu["url"] != ""){$ondexml = $menu["url"];}
 				if($ondexml != "" && $this->menutemas != "")
 				{$this->xml = simplexml_load_file($ondexml);}
-				else //pega o xml do sistema de administração
+				else //pega os dados do sistema de administração
 				{
 					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
 					include_once("../admin/php/classe_arvore.php");
@@ -543,7 +543,7 @@ array
 										{$link = $this->ixml($tema,"TLINK");}
 										$tid = $this->ixml($tema,"TID");
 										$nome = $this->ixml($tema,"TNOME");
-										$temas[] = array("nacessos"=>($this->ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc);
+										$temas[] = array("nacessos"=>($this->ixml($tema,"NACESSOS")),"tid"=>$tid,"nome"=>$nome,"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>"nao");
 									}
 								}
 							}

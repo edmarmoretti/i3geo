@@ -884,7 +884,7 @@ i3GEO.arvoreDeTemas = {
 						}
 					}
 					htmli = i3GEO.arvoreDeTemas.montaTextoTema(cor,temas[i]);
-					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc};
+					var d = {nacessos:temas[i].nacessos,html:htmli,idtema:temas[i].tid,fonte:temas[i].link,ogc:temas[i].ogc,kmz:temas[i].kmz};
 					var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 					//tempNode.nowrap = true;
 					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
@@ -992,7 +992,10 @@ i3GEO.arvoreDeTemas = {
 		}
 		if (node.data.ogc != "nao"){
 			if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml == true){
-				var html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\")' >Kml</a>";		
+				var html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kml\")' >Kml</a>";		
+				if (node.data.kmz == "sim")
+				var html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""+node.data.idtema+"\",\"kmz\")' >Kml</a>";		
+
 				var d = {html:html};
 				var tempNode = new YAHOO.widget.HTMLNode(d, node, false,true);
 				tempNode.enableHighlight = false;

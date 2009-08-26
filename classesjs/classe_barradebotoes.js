@@ -148,7 +148,7 @@ i3GEO.barraDeBotoes = {
 	"cinza" - destaca com fundo cinza
 	
 	*/
-	COMPORTAMENTO: "laranja",	
+	COMPORTAMENTO: "padrao",	
 	/*
 	Variavel: BARRAS
 	

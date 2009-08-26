@@ -254,15 +254,19 @@ i3GEO.tema = {
 		Parametros:
 
 		tema - código do tema escolhido
+		
+		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
-		abreKml: function(tema){
+		abreKml: function(tema,tipo){
+			if(arguments.lenght == 1)
+			{tipo = "kml";}
 			if(tema == "mapfile"){
 				if(i3GEO.parametros.mapfile == "")
 				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+i3GEO.parametros.mapfile,"","","Kml"));
 			}
 			else
-			{return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema,"","","Kml"));}
+			{return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema+","+tipo,"","","Kml"));}
 		},
 		/*
 		Function: graficotema
