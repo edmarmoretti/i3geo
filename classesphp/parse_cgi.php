@@ -7,7 +7,7 @@ Este programa alguns dos parâmetros do mapserver CGI e retorna uma imagem do map
 É utilizado para processar o mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
 das variáveis de conexão com banco.
 
-Deve ser utilizado na tag IMG de umarquivo HTML.
+Deve ser utilizado na tag IMG de um arquivo HTML.
 
 Parametros:
 
