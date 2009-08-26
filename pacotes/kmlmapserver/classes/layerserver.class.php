@@ -40,7 +40,7 @@ This file is part of KMLMAPSERVER.
 
 
 /** Fix a GE bug for filled polygons */
-define('TREAT_POLY_AS_LINE', true);
+define('TREAT_POLY_AS_LINE', false);
 
 /** Enable cache */
 define('ENABLE_CACHE', true);
@@ -49,12 +49,13 @@ if (!extension_loaded('MapScript'))
 {
     dl( 'php_mapscript.' . PHP_SHLIB_SUFFIX );
 }
-
-
+if (!extension_loaded('php_mbstring'))
+{
+    dl( 'php_mbstring.' . PHP_SHLIB_SUFFIX );
+}
 /**
 * Main server class
 */
-
 class LayerServer {
 
     /** map file path */
@@ -159,7 +160,6 @@ class LayerServer {
                 }
             }
         }
-
         // If not layer are requested, send all as networklinks
         if(!$this->typename){
             $this->_networklink = true;
@@ -167,7 +167,6 @@ class LayerServer {
         } else {
             $this->_networklink = false;
         }
-
         $this->_xml = new SimpleXMLElement('<kml xmlns="http://earth.google.com/kml/2.0"><Document ></Document></kml>');
         // Prepare projection
         $this->in_proj  = ms_newProjectionObj($this->map_object->getProjection());
@@ -178,8 +177,6 @@ class LayerServer {
 		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 		$protocolo = strtolower($protocolo[0]);
         $this->endpoint = $protocolo . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
-		
-
         // Process request
         if(!$this->has_error()) {
              $this->process_request();
@@ -242,7 +239,6 @@ class LayerServer {
         }
         return array($searchfield, $searchstring);
     }
-
     /**
     * Process request
     */
@@ -259,7 +255,6 @@ class LayerServer {
             }
         }
     }
-
     /**
     * Add a networklink
     */
@@ -279,11 +274,11 @@ class LayerServer {
     * @return boolean false on error
     */
     function process_layer_request(&$layer_name){
-
+//error_reporting(E_ALL);
         $layer = @$this->map_object->getLayerByName($layer_name);
 
         if(!$layer){
-            $this->set_error('Layer not found ' . $layer_name, $layer_name);
+            $this->set_error('Nenhum layer com esse nome foi encontrado no mapfile ' . $layer_name, $layer_name);
             return false;
         }
 
@@ -294,7 +289,7 @@ class LayerServer {
         $description_template = $layer->getMetadata('DESCRIPTION_TEMPLATE');
 
         // Set on
-        $layer->set( 'status', MS_ON );
+        $layer->set( 'status', MS_DEFAULT );
 
         // Set kml title from layer description (default to layer name)
         $layer_desc = $this->get_layer_description($layer);
@@ -345,11 +340,13 @@ class LayerServer {
             // Get results
             if(MS_SUCCESS == $layer->open()){
                 // Search which column to use to identify the feature
-                $namecol = $layer->getMetadata('RESULT_FIELDS');
-                if(!$namecol){
+                $namecol = $layer->getMetadata("itens");
+                if($namecol == ""){
                     $cols = array_values($layer->getItems());
                     $namecol = $cols[0];
                 }
+                else
+                {$namecol = explode(",",$namecol);$namecol = $namecol[0];}
                 // Add classes
                 $folder =& $this->_xml->Document->addChild('Folder');
                 $class_list = $this->parse_classes($layer, $folder, $namecol, $title_field, $description_template);
@@ -359,6 +356,8 @@ class LayerServer {
                 $folder->addChild('name', $layer_desc);
 
                 //print("$searchfield && $searchstring");
+                if(!isset($searchfield)){$searchfield = false;}
+                if(!isset($searchstring)){$searchstring = false;}
                 if($searchfield && $searchstring){
                     if(@$layer->queryByAttributes($searchfield, $searchstring, MS_MULTIPLE) == MS_SUCCESS){
                         $layer->open();
@@ -376,9 +375,21 @@ class LayerServer {
                         return false;
                     }
                 } else { // Get all shapes
-                    $status = $layer->whichShapes($this->map_object->extent);
-                    while ($shape = $layer->nextShape()) {
-                        $this->process_shape($layer, $shape, $class_list, $folder,$namecol );
+                    $layer->set("template","none.htm");
+                    $layer->queryByrect($this->map_object->extent);
+                    $layer->open();
+                    $n = $layer->getNumResults();
+                    for ($j=0; $j < $n; $j++)
+                    {
+                        // get next shape row
+                        $result = $layer->getResult($j);
+                        $shape  = $layer->getShape($result->tileindex, $result->shapeindex);
+                        $shape->classindex = $result->classindex;
+                        $this->process_shape($layer, $shape, $class_list, $folder, $namecol);
+                    }
+                    if($n == 0) {
+                        $this->set_error('QueryByRect returned no data', $layer_name);
+                        return false;
                     }
                 }
                 $layer->close();
@@ -394,15 +405,19 @@ class LayerServer {
     * Process the shape
     */
     function process_shape(&$layer, &$shape, &$class_list, &$folder, &$namecol){
+        $itens = $layer->getmetadata("itens");
+		$itensdesc = $layer->getmetadata("itensdesc");
         $shape->project($this->in_proj, $this->out_proj);
         // Assign style
         if($layer->classitem){
             $style_id = $this->get_shape_class($layer->classitem, $shape->values, $class_list);
         }
-        if(!$style_id){
+        if(!isset($style_id)){
             // Get first class
             $class_keys = array_keys($class_list);
-            $style_id = $class_keys[0];
+            $nome = $layer->getclass($shape->classindex);
+            $nome= $nome->name;
+            $style_id = preg_replace('/[^A-z0-9]/', '_', $layer->name . $nome);
         }
         // Add the feature
         if(array_key_exists('folder', $class_list[$style_id])) {
@@ -418,23 +433,21 @@ class LayerServer {
         }
         // Add style class
         $style_url =& $this->add_style($layer, $feature_folder, $style_id, $class_list[$style_id], $namecol, $shape->values);
-
         $wkt = $shape->toWkt();
-        $placemark =& $this->add_feature($feature_folder, $wkt, $shape->values[$namecol],  $shape->values, $description_template, $class_list[$style_id]);
+        $description_template = false;
+        $placemark =& $this->add_feature($feature_folder, $wkt, $shape->values[$namecol],  $shape->values, $description_template, $class_list[$style_id],$itens,$itensdesc);
 
         $placemark->addChild('styleUrl', '#'. $style_url);
 
     }
-
     /**
     * Add the feature to the result set
     * @return reference to placemark object
     */
-    function &add_feature(&$folder, &$wkt, $featurename, $attributes, $description_template, $style_data){
+    function &add_feature(&$folder, &$wkt, $featurename, $attributes, $description_template, $style_data,$itens,$itensdesc){
         $pm = $folder->addChild('Placemark');
-        //if($featurename == 'VERCELLI') {var_dump($wkt); die();}
-        $pm->addChild('name', iconv($this->encoding, 'utf-8', $featurename));
-        $pm->addChild('description', $this->get_feature_description($featurename, $attributes, $description_template));
+        $pm->addChild('name',mb_convert_encoding($featurename,"UTF-8",mb_detect_encoding($featurename,"UTF-8, ISO-8859-1")));
+        $pm->addChild('description', $this->get_feature_description($featurename, $attributes, $description_template,$itens,$itensdesc));
         // Now parse the wkt
         if(strpos($wkt, 'MULTILINESTRING') !== false){
             $this->add_multilinestring($wkt, $pm, $featurename, $style_data['icon']);
@@ -506,8 +519,16 @@ class LayerServer {
     */
     function add_point(&$wkt, &$element, $featurename){
         $pt = $element->addChild('Point');
+        /*
         preg_match('/(\d\.?\d+\s\d+\.?\d+)/', $wkt, $data);
+        //var_dump($data);exit;
         $data = str_replace(' ', ',', $data[1]);
+        */
+        $data = str_replace("(","",$wkt);
+        $data = str_replace(")","",$data);
+        $data = str_replace("POINT","",$data);
+        $data = str_replace(" ",",",trim($data));
+        //echo $data;exit;
         $pt->addChild('coordinates', $data);
     }
 
@@ -548,20 +569,28 @@ class LayerServer {
     /**
     * Get the feature description
     */
-    function get_feature_description($featurename, $attributes, $description_template){
+    function get_feature_description($featurename, $attributes, $description_template,$itens,$itensdesc){
         // Compute hyperlink
-        if($description_template){
-                $description = $description_template;
-            foreach($attributes as $k => $val){
-                $description = str_replace("%$k%", iconv($this->encoding, 'utf-8', $val), $description);
-            }
-        } else {
-            $description = iconv($this->encoding, 'utf-8', $featurename);
+        //var_dump($attributes);exit;
+        $n = "";
+        if($itens == "")
+        {
+        	foreach($attributes as $k => $val){
+        		$n .=  $k." - ".$attributes[$k]."\n";
+        	}
         }
-        return htmlentities($description);
+        else
+        {
+        	$itens = explode(",",$itens);
+        	$itensdesc = explode(",",$itensdesc);
+        	for($i=0;$i<count($itens);$i++)
+        	{
+        		$n .=  $itensdesc[$i]." - ".$attributes[$itens[$i]]."\n";	
+        	}
+        }
+      	$description = mb_convert_encoding($n,"UTF-8",mb_detect_encoding($n,"UTF-8,ISO-8859-1"));
+		return $description;
     }
-
-
     /**
     * Parse classes
     * @return array hash of 'style_id' => style_data)
@@ -583,9 +612,9 @@ class LayerServer {
                 $style['outlinecolor']      = $_style->outlinecolor;
                 $style['width']             = $_style->size; // Lines
                 $style['backgroundcolor']   = $_style->backgroundcolor;
-                $style['icon']              = $this->get_icon_url($layer, $class->name);
+                if($layer->type == MS_LAYER_POINT)
+                $style['icon']              = $this->get_icon_url($layer, $class->name,$i);
                 $style['icon_width']        = $_style->size; // Points
-
             }
             $style['expression']        = $class->getExpression();
             // Set description_template if any
@@ -597,10 +626,10 @@ class LayerServer {
             }
             // Create style element
             $style_id = preg_replace('/[^A-z0-9]/', '_', $layer->name . $class->name);
-            //$this->add_style($layer, $folder, $style_id, $style, $namecol, $title_field );
+            $this->add_style($layer, $folder, $style_id, $style, $namecol, $title_field );
             // create folder if more than one class
             if($numclasses > 1){
-                $style['folder'] =& $class->name;
+                //$style['folder'] =& $class->name;
                 //$folder->addChild('Folder');
                 //$style['folder']->addChild('name', $class->name);
             }
@@ -717,6 +746,7 @@ class LayerServer {
         }
         */
         // Label size and color
+        /*
         if($style_data['label_size'] || $style_data['label_color']){
             $ls =& $new_style->addChild('LabelStyle');
             if($style_data['label_size'] != -1 && $style_data['label_size'] != 32){
@@ -726,6 +756,7 @@ class LayerServer {
                 $ls->addChild('color', sprintf('FF%02X%02X%02X', $style_data['label_color']->blue, $style_data['label_color']->green, $style_data['label_color']->red));
             }
         }
+        */
     }
 
     /**
@@ -736,9 +767,9 @@ class LayerServer {
         $this->add_style_line($new_style, $style_data);
         $st =& $new_style->addChild('PolyStyle');
         //die(print_r($backgroundcolor, true));
-        if($style_data['backgroundcolor']->red != -1){
-            $st->addChild('color', sprintf('FF%02X%02X%02X', $style_data['backgroundcolor']->blue, $style_data['backgroundcolor']->green, $style_data['backgroundcolor']->red));
-            $st->addChild('fill', 0);
+        if($style_data['color']->red != -1){
+            $st->addChild('color', sprintf('FF%02X%02X%02X', $style_data['color']->blue, $style_data['color']->green, $style_data['color']->red));
+            $st->addChild('fill', 1);
         } else {
             $st->addChild('fill', 0);
         }
@@ -778,8 +809,18 @@ class LayerServer {
     /**
     * Get the url for a point icon
     */
-    function get_icon_url($layer, $classname){
-        return $this->endpoint . '?service=icon&map=' . $this->map . '&typename=' . urlencode($layer->name) . '&classname=' . urlencode($classname);
+    function get_icon_url($layer, $classname, $classindex){
+        $classe = $layer->getclass($classindex);
+        $estilo = $classe->getstyle(0);
+        $url = "";
+       	$imageObj = $classe->createLegendIcon($estilo->size, $estilo->size);
+       	if($imageObj)
+		{
+			$url = $imageObj->saveWebImage();
+			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+			$url = strtolower($protocolo[0]."://".$_SERVER['HTTP_HOST']).$url;
+		}
+        return $url; //$this->endpoint . '?service=icon&map=' . $this->map . '&typename=' . urlencode($layer->name) . '&classname=' . urlencode($classname);
     }
 
     /**
@@ -857,8 +898,10 @@ class LayerServer {
 				else
 				{$this->map = "../../aplicmap/geral1.map";}
             	$this->map_object = ms_newMapObj($this->map);
+            	if(!$this->_zipped)
             	$this->map_object->setmetadata('wms_onlineresource',$servidor.":80/i3geo/ogc.php?tema=".$temp."&width=1500&height=1500&");
-            	for ($i=0;$i < ($this->map_object->numlayers);$i++)
+            	$n = $this->map_object->numlayers;
+            	for ($i=0;$i < $n;$i++)
 				{
 					$l = $this->map_object->getlayer($i);
 					$l->set("status",MS_DELETE);
@@ -868,8 +911,11 @@ class LayerServer {
 				{
 					$l = $maptemp->getlayer($i);
 					$l->set("status",MS_DEFAULT);
-					$l->set("type",MS_LAYER_RASTER);
-					$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+					if(!$this->_zipped)
+					{
+						$l->set("type",MS_LAYER_RASTER);
+						$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
+					}
 					ms_newLayerObj($this->map_object, $l);
 				}
 			}
@@ -880,11 +926,14 @@ class LayerServer {
 				{include_once("ms_configura.php");}
 				else
 				{include_once("../../ms_configura.php");}
+				if(!$this->_zipped)
 				$this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
-				for ($i=0;$i < ($this->map_object->numlayers);$i++)
+				$n = $this->map_object->numlayers;
+				for ($i=0;$i < $n;$i++)
 				{
 					$l = $this->map_object->getlayer($i);
 					$l->set("status",MS_DEFAULT);
+					if(!$this->_zipped)
 					$l->set("type",MS_LAYER_RASTER);
 					//$l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
 					//ms_newLayerObj($this->map_object, $l);
@@ -939,7 +988,8 @@ class LayerServer {
     * Calculate cache file name
     */
     function get_cache_file_name(){
-        return  'cache/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
+        include("../../ms_configura.php");
+        return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
     }
 
     /**
@@ -955,8 +1005,8 @@ class LayerServer {
             $data = $ziper->file();
         }
         // Create cache if needed
-        if(ENABLE_CACHE && count($this->layers) == 1 && $this->layers[$this->typename]->getMetadata('KML_CACHE')) {
-            error_log( 'creating cache ' . $this->get_cache_file_name() );
+        if(ENABLE_CACHE && count($this->layers) == 1) {
+            //error_log( 'creating cache ' . $this->get_cache_file_name() );
             file_put_contents($this->get_cache_file_name(), $data);
         }
         print $data;
