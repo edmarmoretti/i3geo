@@ -109,7 +109,7 @@ if($menutemas == "")
 		kml_cabecalho($menu["nome_menu"],$menu["desc_menu"]);
 		$id_menu = $menu["id_menu"];
 		//raiz
-		$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,codigo_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema isnull) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
+		$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,codigo_tema,kmz_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema isnull) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
 		$temas = pegaDados($sql);
 		if(count($temas) > 0)
 		{
@@ -122,7 +122,7 @@ if($menutemas == "")
 			kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
 			$id_grupo = $grupo["id_grupo"];
 			//raiz
-			$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,kml_tema,codigo_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where lower(i3geoadmin_temas.tipoa_tema) != 'wms' and lower(i3geoadmin_temas.kml_tema) != 'nao' and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupo["id_n1"]." order by ordem";
+			$sql = "select id_raiz,i3geoadmin_raiz.id_tema,nome_tema,tipoa_tema,kml_tema,kmz_tema,codigo_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where lower(i3geoadmin_temas.tipoa_tema) != 'wms' and lower(i3geoadmin_temas.kml_tema) != 'nao' and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = ".$grupo["id_n1"]." order by ordem";
 			$temas = pegaDados($sql);
 			if(count($temas) > 0)
 			{
@@ -139,7 +139,7 @@ if($menutemas == "")
 			foreach ($subgrupos as $subgrupo)
 			{
 				$id_n2 = $subgrupo["id_n2"];
-				$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
+				$sql = "select t.codigo_tema,t.nome_tema,t.link_tema, t.desc_tema, t.kmz_tema from i3geoadmin_n3 as n3,i3geoadmin_temas as t where ";
 				$sql .= "n3.id_n2='$id_n2' ";
 				$sql .= "and n3.id_tema = t.id_tema ";
 				$sql .= "and n3_perfil = '' ";
@@ -164,14 +164,31 @@ echo "</Document></kml>\n";
 function kml_tema_bd($tema)
 {
 	global $urli3geo;
+	$teste = array_keys($tema);
+	if(in_array("link_tema",$teste))
 	$fonte = $tema["link_tema"];
+	else
+	$fonte = "";
+	
 	$nome = $tema["nome_tema"];
 	$id = $tema["codigo_tema"];
+	
+	if(in_array("desc_tema",$teste))
 	$desc = $tema["desc_tema"];
+	else
+	$desc = "";
+	
 	$fonte = "<a href='$fonte' >Fonte </a>";
 	$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+
 	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 	kml_servico($nome,$fonte,$legenda,$desc,$href);
+	
+	if(strtolower($tema["kmz_tema"]) != "nao")
+	{
+		$href = "$urli3geo/pacotes/kmlmapserver/kmlservice.php?request=kmz&amp;map=$id&amp;typename=$id";
+		kml_networklink($nome." (vetorial)",$fonte,$legenda,$desc,$href);
+	}
 }
 function kml_cabecalho($nome,$desc)
 {
@@ -202,8 +219,12 @@ function kml_tema($tema)
 	{$kml = mb_convert_encoding($tema->KML,"auto","auto");}
 	if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
 	{
+		if($fonte != "")
 		$fonte = "<a href='$fonte' >Fonte </a>";
-		$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
+		else
+		$fonte = "";
+		
+		$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/png' >Legenda </a>";
 		$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
 		kml_servico($nome,$fonte,$legenda,$desc,$href);
 	}
@@ -221,4 +242,17 @@ function kml_servico($nome,$fonte,$legenda,$desc,$href)
 	echo "    <LatLonBox><north>9.49014618085</north><south>-39.3925604735</south><east>-29.5851853</east><west>-76.5125927</west></LatLonBox>\n";
 	echo "   </GroundOverlay>\n";
 }
+function kml_networklink($nome,$fonte,$legenda,$desc,$href)
+{
+	echo "   <NetworkLink>\n";
+	echo "    <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
+	echo "    <visibility>0</visibility>\n";      
+	echo "    <Link>\n";
+	echo "       <viewRefreshMode>never</viewRefreshMode>\n";
+	echo "       <href>$href</href>\n";
+	echo "    </Link>\n";
+	echo "   </NetworkLink>\n";
+}
+
 ?>
