@@ -9,6 +9,8 @@ FONTSET   "../symbols/fontes.txt"
       "palletefile"	""
       "download"	"SIM"
       "arquivodownload"	""
+      "ITENS" "NOMEMUN,ANOCRIA,ESTADO"
+      "ITENSDESC" "Nome,Ano,UF"
     END
     NAME "testept"
     STATUS OFF
@@ -21,7 +23,7 @@ FONTSET   "../symbols/fontes.txt"
         COLOR 255 0 0
         OPACITY 100
         SIZE 8
-        SYMBOL 0
+        SYMBOL "aviao"
       END
     END
   END
