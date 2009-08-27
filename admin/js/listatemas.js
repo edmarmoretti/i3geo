@@ -108,11 +108,11 @@ function montaDivTemas(i)
 function gravaDadosTema(id)
 {
 	//validacao
-	if($i("kml_tema") && $i("ogc_tema"){
+	if($i("kml_tema") && $i("ogc_tema")){
 		if($i("ogc_tema").value == "SIM")
 		{$i("kml_tema").value = "SIM";}		
 	}
-	if($i("kml_tema") && $i("kmz_tema"){
+	if($i("kml_tema") && $i("kmz_tema")){
 		if($i("kmz_tema").value == "SIM")
 		{$i("kml_tema").value = "SIM";}
 		if($i("kml_tema").value == "NAO")
