@@ -772,7 +772,7 @@ $resolucao - Resolucao de busca.
 				{
 					if ($tl->status == MS_DEFAULT)
 					{
-						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip));
+						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip,"",true));
 						$ltemp[] = $tema;
 					}
 				}
@@ -1088,8 +1088,10 @@ $resolucao - Resolução de busca.
 $item - Item único que será identificado.
 
 $tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
+
+$etip  booblean - indica se a solicitação é para obtenção dos dados do tipo etiqueta
 */
-function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="")
+function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="",$etip=false)
 {
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getLayerByName($tema);
@@ -1202,19 +1204,43 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 		{$itensdesc = array_fill(0, $nitens-1,'');}
 		else
 		{$itensdesc = explode(",",$itensdesc);}
+		
 		if($lks == "")
 		{$lks = array_fill(0, $nitens-1,'');}
 		else
-		{$lks = explode(",",$lks);}		
+		{$lks = explode(",",$lks);}
+				
 		if($itemimg == "")
 		{$itemimg = array_fill(0, $nitens-1,'');}
 		else
-		{$itemimg = explode(",",$itemimg);}			
+		{$itemimg = explode(",",$itemimg);}	
+			
 		if($locimg == "")
 		{$locimg = array_fill(0, $nitens-1,'');}
 		else
 		{$locimg = explode(",",$locimg);}
-
+		//o retorno deve ser do tipo TIP
+		if($etip == true)
+		{
+			$temp = array_combine($itens,$itensdesc);
+			$templ = array_combine($itens,$lks);
+			$tempimg = array_combine($itens,$itemimg);
+			$temploc = array_combine($itens,$locimg);
+			$itensdesc = array();
+			$itens = array();
+			$lks = array();
+			$itemimg = array();
+			$locimg = array();
+			$tips = explode(",",$tips);
+			foreach($tips as $t)
+			{
+				$itens[] = $t;
+				if($temp[$t] != ""){$itensdesc[] = $temp[$t];}else{$itensdesc[] = $t;}
+				if($templ[$t] != ""){$lks[] = $templ[$t];}else{$lks[] = "";}
+				if($tempimg[$t] != ""){$itemimg[] = $tempimg[$t];}else{$itemimg[] = "";}
+				if($temploc[$t] != ""){$locimg[] = $temploc[$t];}else{$locimg[] = "";}
+			}
+		}
 		$res_count = $layer->getNumresults();
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}

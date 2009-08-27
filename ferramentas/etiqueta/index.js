@@ -23,7 +23,7 @@ Free Software Foundation, Inc., no endereço
 parametrosURL()
 if(tema == "undefined"){tema = "";}
 //preenche a lista de itens
-radioitensf
+checkitensf
 (
 	tema,
 	function(retorno)
@@ -47,7 +47,7 @@ $i("executar").onclick = function()
 	//se for vazio o tema nao possui tabela, mas a toponimia pode existir
 	var listai = new Array;
 	var tema = "";
-	var item = "";
+	var itens = new Array();
 	if ($i("listai").innerHTML != "")
 	{
 		var ipt = $i("listai").getElementsByTagName("input")
@@ -55,9 +55,8 @@ $i("executar").onclick = function()
 		{
 			if (ipt[i].checked)
 			{
-				var temp = (ipt[i].id).split(";")
-				var tema = temp[1]
-				var item = temp[0]			
+				itens.push(ipt[i].id);
+				var tema = ipt[i].name;
 			}
 		}
 	}
@@ -67,7 +66,7 @@ $i("executar").onclick = function()
 	else
 	{
 		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=ativaEtiquetas&tema="+tema+"&item="+item
+		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=ativaEtiquetas&tema="+tema+"&item="+itens.toString(",")
 		var cp = new cpaint();
 		//cp.set_debug(2)
 		cp.set_response_type("JSON");

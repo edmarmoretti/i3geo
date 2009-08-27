@@ -231,7 +231,7 @@ function: ativaEtiquetas
 ativa a inclusão de etiquetas em um tema
 
 parameter:
-$item Item que será utilizado.	
+$item Lista de Itens separados por vírgula que serão utilizados.	
 */
 	function ativaEtiquetas($item)
 	{

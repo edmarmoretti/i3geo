@@ -184,8 +184,9 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
-			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
-			"ITENSDESC"	"FIPS,GMI,Nome" #descricao dos nomes dos itens
+			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
+			"ITENSDESC"	"FIPS,GMI,Nome,Wikipedia" #descricao dos nomes dos itens
+			"ITENSLINK" ",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"

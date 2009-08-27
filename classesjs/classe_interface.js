@@ -851,7 +851,6 @@ i3GEO.interface = {
 			node.expand();
 		},
 		criaArvoreKML: function(){
-			try{
 			var arvore = $i("arvoreCamadasKml");
 			if(!arvore){
 				var d = document.createElement("div");
@@ -869,7 +868,6 @@ i3GEO.interface = {
 			var d = {html:titulo,idkml:"raiz"};
 			var node = new YAHOO.widget.HTMLNode(d, root, true,true);
 			node.enableHighlight = false;
-			}catch(e){alert(e)}
 		},
 		/*
 		Function: ativaDesativaCamadaKml
