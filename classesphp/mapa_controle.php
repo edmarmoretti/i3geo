@@ -721,6 +721,7 @@ Include:
 		$salvar = $m->adicionaTema($temas,$locaplic);
 		if($salvar)
 		$m->salva();
+		$cp->set_data("ok");
 		$teste = testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{$cp->set_data("ok");}

@@ -253,10 +253,20 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	
 	Para mais detalhes veja a função substituiCon em classesphp/funcoes_gerais.php
 	
+	Importante - se vc usar o modo de substituição de strings, as interfaces que dependem do modo CGI
+	para funcionarem, não serão capazes de acessar os dados. Isso afeta por exemplo, a interface Google Maps e Openlayers.
+	
+	exemplo - 
+	
+	$postgis_mapa = array(
+		"conexao1"=>"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432",
+		"conexao2"=>"user=geodados password=geodados dbname=geodadosteste host=10.1.1.36 port=5432"
+	)
+	
 	Tipo:
-	{array}
+	{array ou  string}
 	*/
-	$postgis_mapa = ""; //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
+	$postgis_mapa = array("teste"=>"user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'"); //"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432";
 	/*
 	Variable: menutemas
 	

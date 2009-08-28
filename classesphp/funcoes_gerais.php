@@ -861,8 +861,16 @@ postgis_mapa - string de conexão com o banco de dados definida em ms_configura.p
 */
 function testaMapa($map_file,$postgis_mapa)
 {
+	//var_dump($postgis_mapa);
+	//error_reporting(E_ALL);
 	substituiCon($map_file,$postgis_mapa);
 	$objMapa = ms_newMapObj($map_file);
+	
+	//$l = $objMapa->getlayerbyname("testesubsstring");
+	//echo $l->connection;
+	
+	
+	
 	ms_ResetErrorList();
 	$img = $objMapa->draw();
 	$erros = "";
