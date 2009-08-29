@@ -184,6 +184,7 @@ function pegaDados($sql,$locaplic="")
    	include("$locaplic/admin/php/conexao.php");
    	error_reporting(E_ALL);
    	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+   	//var_dump($q);
    	if($q)
    	{
    		$resultado = $q->fetchAll();

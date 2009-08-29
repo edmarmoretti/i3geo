@@ -956,6 +956,7 @@ i3GEO.configura = {
 			dica:$trad("d20"),
 			funcaoonclick:function(){
 				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+				i3GEO.arvoreDeCamadas.CAMADAS = "";
 				i3GEO.php.reiniciaMapa(i3GEO.atualiza);
 			}
 		},

@@ -178,27 +178,26 @@ if ($tipo == "" || $tipo == "metadados")
 			{
 				if ($postgis_mapa != "")
 				{
-				if ($layer->connectiontype == MS_POSTGIS)
-				{
-					$lcon = $l->connection;
-					if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+					if ($layer->connectiontype == MS_POSTGIS)
 					{
-						//
-						//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-						//				
-						if(($lcon == " ") || ($lcon == ""))
+						$lcon = $l->connection;
+						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
 						{
-							$l->set("connection",$postgis_mapa);
-							$l->setmetadata("CONEXAOORIGINAL",$lcon);
+							//
+							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
+							//				
+							if(($lcon == " ") || ($lcon == ""))
+							{
+								$l->set("connection",$postgis_mapa);
+								$l->setmetadata("CONEXAOORIGINAL",$lcon);
+							}
+							else
+							{
+								$l->set("connection",$postgis_mapa[$lcon]);
+								$l->setmetadata("CONEXAOORIGINAL",$lcon);
+							}					
 						}
-						else
-						{
-							$l->set("connection",$postgis_mapa[$lcon]);
-							$l->setmetadata("CONEXAOORIGINAL",$lcon);
-						}					
 					}
-				}
-
 				}
 			}
 			autoClasses(&$l,$oMap);

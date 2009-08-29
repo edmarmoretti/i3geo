@@ -50,6 +50,7 @@ Nome do arquivo criado
 function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
+	//ini_set('auto_detect_line_endings', true);
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
