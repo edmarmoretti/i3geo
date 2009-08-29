@@ -65,7 +65,7 @@ Cria um objeto Escala
 
 parameters:
 $map_file - Endereço do mapfile no servidor. 
-*/  	
+*/
 	function __construct($map_file,$nomeImagem="",$locaplic="")
 	{
   		//error_reporting(E_ALL);

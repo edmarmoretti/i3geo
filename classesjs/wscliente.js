@@ -64,7 +64,7 @@ for (var i = 0; i < jsfiles.length; i++)
 	allScriptTags += currentScriptTag;
 }
 document.write(allScriptTags);
-/* 
+/**
 Classe: i3geo_wscliente_configura
 
 Cria o objeto javascript com os parâmetros de configuração da api e com as funções de manipulação dos elementos da interface.
