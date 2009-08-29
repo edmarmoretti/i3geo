@@ -148,7 +148,7 @@ i3GEO.janela = {
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
 		if($i(id+"_c"))
-		{$i("i3geo").removeChild($i(id+"_c"));alert("oi");}
+		{$i("i3geo").removeChild($i(id+"_c"));}
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
 		var ins = '<div id="'+id+'_cabecalho" class="hd">';
