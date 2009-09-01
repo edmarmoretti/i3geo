@@ -955,6 +955,8 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d20"),
 			funcaoonclick:function(){
+				var buscarapida = $i("valorBuscaRapida");
+				if(buscarapida){buscarapida.value="";}
 				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 				i3GEO.arvoreDeCamadas.CAMADAS = "";
 				i3GEO.php.reiniciaMapa(i3GEO.atualiza);
