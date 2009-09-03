@@ -405,6 +405,8 @@ class LayerServer {
     * Process the shape
     */
     function process_shape(&$layer, &$shape, &$class_list, &$folder, &$namecol){
+		$permite = $layer->getmetadata("permitekmz");
+		if($permite == "nao"){return;}
         $itens = $layer->getmetadata("itens");
 		$itensdesc = $layer->getmetadata("itensdesc");
         $shape->project($this->in_proj, $this->out_proj);

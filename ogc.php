@@ -201,6 +201,8 @@ if ($tipo == "" || $tipo == "metadados")
 				}
 			}
 			autoClasses(&$l,$oMap);
+			$permite = $l->getmetadata("permiteogc");
+			if($permite != "nao")
 			ms_newLayerObj($oMap, $l);
 		}
 	}

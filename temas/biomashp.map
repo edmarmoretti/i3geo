@@ -5,8 +5,12 @@ FONTSET   "../symbols/fontes.txt"
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
     METADATA
       "CLASSE"	"SIM"
+      "permitekmz"	"sim"
+      "permitedownload"	"sim"
       "download"	"SIM"
       "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
+      "permiteogc"	""
+      "permitekml"	"sim"
       "TEMA"	"Biomas shapefile"
     END
     NAME "biomashp"

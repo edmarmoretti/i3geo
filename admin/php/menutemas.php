@@ -728,7 +728,7 @@ Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
 {
-	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz;
+	global $nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic;
 	//error_reporting(E_ALL);
 	try 
 	{
@@ -747,6 +747,28 @@ function alteraTemas()
     		else
 	    	$dbhw->query("UPDATE i3geoadmin_temas SET tags_tema='$tags', link_tema='$link', nome_tema ='$nome',desc_tema='$desc',codigo_tema='$codigo',tipoa_tema='$tipoa',download_tema='$download',ogc_tema='$ogc',kml_tema='$kml',kmz_tema='$kmz' WHERE id_tema = $id");    		
     		$retorna = $id;
+    		if(!isset($kmz)){$kmz = "nao";}
+ 			$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id'";
+    		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+    		$resultado = $q->fetchAll();
+    		$mapfile = $resultado[0]["codigo_tema"];
+			$mapfile = $locaplic."/temas/".$mapfile.".map";
+
+			if($mapa = @ms_newMapObj($mapfile))
+			{
+				$mapa = ms_newMapObj($mapfile);
+				$nomes = $mapa->getalllayernames();
+				foreach($nomes as $nome)
+				{
+					$layer = $mapa->getlayerbyname($nome);
+					$layer->setmetadata("permitedownload",strtolower($download));
+					$layer->setmetadata("permiteogc",strtolower($ogc));
+					$layer->setmetadata("permitekml",strtolower($kml));
+					$layer->setmetadata("permitekmz",strtolower($kmz));
+				}
+				$mapa->save($mapfile);
+				removeCabecalho($mapfile);
+			}
     	}
     	else
     	{
@@ -1065,5 +1087,60 @@ function importarXmlMenu()
 	$dbhw = null;
 	$dbh = null;
 	return "Dados importados.";
+}
+
+function removeCabecalho($arq,$symbolset=true)
+{
+	$handle = fopen($arq, "r");
+	if ($handle)
+	{
+    	$cabeca = array();
+    	if($symbolset)
+    	{
+    		$cabeca[] = "MAP\n";
+    		//$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
+    		//$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
+    	}
+    	$grava = false;
+    	while (!feof($handle)) 
+    	{
+        	$linha = fgets($handle);
+        	if($symbolset)
+        	{
+        		if(strtoupper(trim($linha)) == "SYMBOLSET")
+        		{$cabeca[] = $linha;}
+        		if(strtoupper(trim($linha)) == "FONTSET")
+        		{$cabeca[] = $linha;}
+        	}
+        	if(strtoupper(trim($linha)) == "LAYER")
+        	{$grava = true;}
+        	if($grava)
+        	{$final[] = rtrim($linha, "\r\n") . PHP_EOL;}
+    	}
+    	fclose($handle);
+	}
+	$final = array_merge($cabeca,$final);
+	$handle = fopen($arq, "w+");
+	foreach ($final as $f)
+	{
+		//
+		//remove resultados em branco
+		//e grava a linha
+		//
+		$teste = strtoupper($f);
+		$teste = trim($teste);
+		$teste = str_replace(" ","",$teste);
+		$teste = str_replace("'","",$teste);
+		$teste = str_replace('"',"",$teste);
+		$teste = preg_replace('/[\n\r\t ]*/', '', $teste);
+      	$testar = array("KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA");
+		$passou = true;
+		foreach ($testar as $t)
+		{if($teste == $t){$passou = false;}}
+		if($passou)
+		fwrite($handle,$f);
+	}
+	fclose($handle);
+	chmod($arq, 0666);
 }
 ?>

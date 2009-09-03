@@ -874,21 +874,27 @@ function alterarEstilo()
 
 function removeCabecalho($arq,$symbolset=true)
 {
-	global $postgis_mapa;
-	restauraCon($arq,$postgis_mapa);
 	$handle = fopen($arq, "r");
 	if ($handle)
 	{
+    	$cabeca = array();
     	if($symbolset)
     	{
-    		$final[] = "MAP\n";
-    		$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
-    		$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
+    		$cabeca[] = "MAP\n";
+    		//$final[] = "SYMBOLSET ../symbols/simbolos.sym\n";
+    		//$final[] = "FONTSET   ".'"'."../symbols/fontes.txt".'"'."\n";
     	}
     	$grava = false;
     	while (!feof($handle)) 
     	{
         	$linha = fgets($handle);
+        	if($symbolset)
+        	{
+        		if(strtoupper(trim($linha)) == "SYMBOLSET")
+        		{$cabeca[] = $linha;}
+        		if(strtoupper(trim($linha)) == "FONTSET")
+        		{$cabeca[] = $linha;}
+        	}
         	if(strtoupper(trim($linha)) == "LAYER")
         	{$grava = true;}
         	if($grava)
@@ -896,6 +902,7 @@ function removeCabecalho($arq,$symbolset=true)
     	}
     	fclose($handle);
 	}
+	$final = array_merge($cabeca,$final);
 	$handle = fopen($arq, "w+");
 	foreach ($final as $f)
 	{
