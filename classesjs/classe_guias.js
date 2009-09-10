@@ -33,9 +33,11 @@ if(typeof(i3GEO) == 'undefined'){
 /*
 Classe: i3GEO.guias
 
-Cria e controla as guias de opções
+Cria e controla as guias de opções mostradas no mapa principal e as guias das ferramentas
 
-Para configurar as guias utilize i3GEO.guias.configura = ...
+Para configurar as guias do mapa principal utilize i3GEO.guias.configura = ...
+
+As guias das ferramentas são configuradas nos scripts específicos de cada ferramenta
 */
 i3GEO.guias = {
 	/*
@@ -279,7 +281,6 @@ i3GEO.guias = {
 			}	
 		}
 	},
-	
 	/*
 	Function: mostra
 	
@@ -435,7 +436,33 @@ i3GEO.guias = {
 			YAHOO.janelaguias.xp.panel.render();
 			YAHOO.janelaguias.xp.panel.show();
 		}
+	},
+	/*
+	Function: mostraGuiaFerramenta
 	
+	Mostra uma determinada guia em uma janela do tipo ferramenta.
+	
+	As guias são construídas pelo construtor da ferramenta
+	
+	Parametros:
+	
+	guia {String} - O elemento html cujo id for igual a guia+"obj" terá seu estilo (display) definido como block, tornando-o visível
+	
+	namespace {String} - Todas elementos html que tiverem como id o namespace, seguindo por um número e "obj", terão seu estilo alterado para none, tornando-se invisíveis
+	
+	*/
+	mostraGuiaFerramenta: function(guia,namespace){
+		if(arguments.length == 1)
+		{var namespace = "guia";}
+		for(g=0;g<12;g++)
+		{
+			if ($i(namespace+g+"obj")){
+				$i(namespace+g+"obj").style.display="none";
+			}
+		}
+		if ($i(guia+"obj")){
+			$i(guia+"obj").style.display="block";
+		}	
 	}
 };
 //YAHOO.log("carregou classe guias", "Classes i3geo");
