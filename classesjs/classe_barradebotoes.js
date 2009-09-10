@@ -39,6 +39,18 @@ Veja também classe_interface.js (i3GEO.interface) que possuí parâmetros que perm
 */
 i3GEO.barraDeBotoes = {
 	/*
+	Propriedade: SOICONES
+	
+	Esconde as bordas das barras e o fundo, mostrando apenas os ícones
+	
+	Default:
+	{false}
+	
+	Tipo:
+	{boolean}
+	*/
+	SOICONES: false,
+	/*
 	Propriedade: AUTOALTURA
 	
 	Ajusta automaticamente a altura das barras conforme a altura do mapa.
@@ -195,8 +207,10 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone))
 			{with ($i(icone).style){
-				borderColor='white';
-				borderWidth="1px";
+				if(i3GEO.barraDeBotoes.SOICONES == false){
+					borderColor='white';
+					borderWidth="1px";
+				}
 			}}
 		}
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
@@ -212,8 +226,10 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone))
 			{with ($i(icone).style){
-				borderColor='black';
-				borderWidth="1px";
+				if(i3GEO.barraDeBotoes.SOICONES == false){
+					borderColor='black';
+					borderWidth="1px";
+				}
 			}}
 		}
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja" || i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho" || i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){
@@ -222,9 +238,13 @@ i3GEO.barraDeBotoes = {
 				if (temp)
 				{
 					var ist = temp.style;
-					ist.borderWidth="1px";
-					ist.borderColor='white';
-					ist.backgroundColor='white';
+					if(i3GEO.barraDeBotoes.SOICONES == false){
+						ist.borderWidth="1px";
+						ist.borderColor='white';
+						ist.backgroundColor='white';
+					}
+					else{ist.backgroundColor='';}
+					
 				}
 			}while(ko--)}
 			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja"){var cor = "orange";}
@@ -233,8 +253,10 @@ i3GEO.barraDeBotoes = {
 			//ativa o icone
 			if($i(icone))
 			{with ($i(icone).style){
-				borderColor='black';
-				borderWidth="1px";
+				if(i3GEO.barraDeBotoes.SOICONES == false){
+					borderColor='black';
+					borderWidth="1px";
+				}
 				backgroundColor=cor;
 			}}
 		}
@@ -351,8 +373,10 @@ i3GEO.barraDeBotoes = {
 		var novoel = document.createElement("div");
 		novoel.id = idconteudonovo;
 		novoel.style.display="block";
-		novoel.style.border="1px solid gray";
-		novoel.style.background="white";
+		if(i3GEO.barraDeBotoes.SOICONES == false){
+			novoel.style.border="1px solid gray";
+			novoel.style.background="white";
+		}
 		if(i3GEO.barraDeBotoes.TRANSICAOSUAVE){
 			if (navm){
 				novoel.style.filter='alpha(opacity='+i3GEO.barraDeBotoes.OPACIDADE+')';
@@ -405,7 +429,6 @@ i3GEO.barraDeBotoes = {
 		document.body.appendChild(novoel);
 		if(i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO)
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"contexto",idconteudonovo,i3GEO.configura.locaplic);
-
 		//copia os botoes do HTML para a janela
 		if ($i(idconteudo))
 		{
@@ -446,7 +469,14 @@ i3GEO.barraDeBotoes = {
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
 		else
 			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
-		if((barraZoom == true) && $i("img")){
+		
+		if(i3GEO.barraDeBotoes.SOICONES == true){
+			var temp = $i("i3geo_barra2");
+			if(temp){temp.style.borderWidth="0 0 0 0";}
+			var temp = $i("i3geo_barra1");
+			if(temp){temp.style.borderWidth="0 0 0 0";}
+		}
+		if((barraZoom == true) && i3GEO.interface.ATUAL == "padrao"){
 			i3GEO.barraDeBotoes.ativaBarraDeZoom();
 			verticalSlider = YAHOO.widget.Slider.getVertSlider("vertBGDiv","vertHandleDivZoom", 0, 70);
 			verticalSlider.onChange = function(offsetFromStart)
