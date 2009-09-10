@@ -1113,6 +1113,23 @@ i3GEO.util = {
    		document.body.removeChild(document.body.lastChild);
     	// Pixel width of the scroller
     	return (wNoScroll - wScroll);
+	},
+	scriptTag: function(js,ini,id){
+		if(id == ""){var id = "loadscriptI3GEO";}
+		var head= document.getElementsByTagName('head')[0];
+		var script= document.createElement('script');
+		script.type= 'text/javascript';
+		if(navm){
+			script.onreadystatechange= function(){
+				if(this.readyState == 'loaded' || this.readyState == 'complete')
+				{eval(ini);}
+			};
+		}
+		else
+		{script.onload=function(){eval(ini);};}
+		script.src= js;
+		script.id = id;
+		head.appendChild(script);
 	}
 };
 //
