@@ -1241,11 +1241,12 @@ i3GEO.arvoreDeTemas = {
 					}
 				}
 				//
-				//verifica se a janela a ferramenta identifica está ativa
+				//verifica se a janela a ferramenta identifica está ativa para atualizar a lista de temas
 				//
 				try{
-					if(g_tipoacao=='identifica'){
-						eval(i3GEO.configura.funcaoIdentifica);
+					if($i("i3GEOidentificalistaTemas")){
+						i3GEOF.identifica.listaTemas();
+						g_tipoacao = "identifica";
 					}
 				}
 				catch(r){}
