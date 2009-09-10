@@ -214,8 +214,8 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada
 	*/
 	fecha: function(event){
-		if(i3GEO.interface.ATUAL=="googleearth"){
-			YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
+		if(i3GEO.interface.ATUAL == "googleearth"){
+			//YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
 		}
 		//esconde o box do google
 		i3GEO.util.escondePin();
@@ -229,11 +229,11 @@ i3GEO.janela = {
 			for(i=0;i<i3GEO.janela.ANTESFECHA.length;i++)
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
-		YAHOO.janelaDoca.xp.panel.destroy();
+		//YAHOO.janelaDoca.xp.panel.destroy();
 		if($i(this.id+"_c"))
-		$i("i3geo").removeChild($i(this.id+"_c"));
+		document.body.removeChild($i(this.id+"_c"));
 		if($i(this.id))
-		$i("i3geo").removeChild($i(this.id));
+		document.body.removeChild($i(this.id));
 		//
 		//remove script tag se houver
 		//

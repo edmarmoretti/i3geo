@@ -216,7 +216,7 @@ i3GEO.configura = {
 	Default:
 	{11}
 	*/
-	diminuixN: 16,
+	diminuixN: 18,
 	/*
 	Propriedade: diminuiyM
 
@@ -700,7 +700,7 @@ i3GEO.configura = {
 			dica:$trad("d7"),
 			funcaoonclick:function()
 			{
-				if($i("img")){
+				if(i3GEO.interface.ATUAL=="padrao"){
 					$i("img").title = "";
 					var temp = "identifica";
 					if(i3GEO.interface.ATIVAMENUCONTEXTO)
@@ -717,7 +717,7 @@ i3GEO.configura = {
 					}
 				};
 				verificaTip = function(){
-					if (g_operacao != "identifica"){return;}
+					if(g_operacao != "identifica" || i3GEOF.identifica){return;}
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
 					if (g_operacao == "identifica"){

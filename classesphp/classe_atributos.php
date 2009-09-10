@@ -731,7 +731,7 @@ $resolucao - Resolucao de busca.
 			}
 			foreach ($listatemas as $tema)
 			{
-				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
@@ -739,7 +739,7 @@ $resolucao - Resolucao de busca.
 		{
 			foreach ($listatemas as $tema)
 			{
-				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
 			}
 		}
 		//pesquisa apenas os temas visiveis
@@ -756,7 +756,7 @@ $resolucao - Resolucao de busca.
 			foreach ($listatemas as $tema)
 			{
 				$l = $this->mapa->getlayerbyname($tema);
-				$resultados[$tema] = $this->identificaQBP($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
 			}
 			//var_dump($resultados);
 		}
@@ -890,7 +890,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 	$layer->set("status",MS_DEFAULT);
 	$layer->set("template","none.htm");
 	$pt = ms_newPointObj();
-	$pt->setXY($x, $y);
+	$pt->setXY($x,$y);
 	//
 	//operação especial para o caso de wms
 	//
@@ -1145,6 +1145,7 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 		 	{$srs = "EPSG:4291";}
 		}
 		$res .= "&SRS=".$srs;
+		
 		$resposta = file($res."&FORMAT=".$formatoinfo);
 		$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
 		$resposta = str_ireplace('<?xml version="1.0" encoding="ISO-8859-1"?>',"",$resposta);
@@ -1162,8 +1163,16 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 			$resposta = str_ireplace("<","zzzzzzzzzz",$resposta);
 			$resposta = str_ireplace(">","zzzzzzzzzz",$resposta);
 		}
-		$resultado[] = $resposta;
-		return $resultado;		
+		$n = array();
+		foreach($resposta as $r)
+		{
+			$t = explode("=",$r);
+			$v = str_replace("\\n","",$t[1]);
+			$v = str_replace("\\r","",$v);
+			if(trim($v) != "")
+			$n[] = array("alias"=>trim($t[0]),"valor"=>trim($v),"link"=>"","img"=>"");
+		}
+		return array($n);		
 	}
 	if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 	{
@@ -1194,14 +1203,14 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 		$itensLayer = pegaItens($layer);
 		
 		$nitens = count($itensLayer);
-		
+
 		if($itens == "")
 		{$itens = $itensLayer;}
 		else
 		{$itens = explode(",",$itens);}
 		
 		if($itensdesc == "")
-		{$itensdesc = array_fill(0, $nitens-1,'');}
+		{$itensdesc = $itensLayer;}//array_fill(0, $nitens-1,'');}
 		else
 		{$itensdesc = explode(",",$itensdesc);}
 		
@@ -1268,12 +1277,16 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 				if($itemimg[$conta] != "")
 				{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}
 				
-				$valori[$it] = array(
+				$arraytemp = array(
 					"alias"=>mb_convert_encoding($itensdesc[$conta],"UTF-8","ISO-8859-1"),
 					"valor"=>mb_convert_encoding($val,"UTF-8","ISO-8859-1"),
 					"link"=>$link,
 					"img"=>$img
 				);
+				if($etip==false)
+				{$valori[] = $arraytemp;}
+				else
+				{$valori[$it] = $arraytemp;}
 				$conta = $conta + 1;
 			}
 			$resultado[] = $valori;

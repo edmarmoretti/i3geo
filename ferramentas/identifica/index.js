@@ -1,7 +1,11 @@
 /*
+Title: Ferramenta Identifica
+
+File: i3geo/ferramentas/identifica/index.js
+
 About: Licença
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -19,83 +23,257 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-//inicializa
-function inicializaJanela()
-{
-	aguarde("block")
-	//ativaGuias("")
-	mostraGuia("guia1")
-	g_locaplic = window.parent.g_locaplic
-	xpt = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
-	ypt = unescape(((((window.location.href).split("y="))[1]).split("&"))[0] );
-	escala = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
-	//eventos das guias
-	$i("guia1").onclick = function(){listaTemas("ligados");mostraGuia("guia1")}
-	$i("guia2").onclick = function(){listaTemas("todos")}
-	$i("guia3").onclick = function(){mostraGuia("guia3")}
-	$i("guia4").onclick = function(){
-		mostraGuia("guia4");
-		new YAHOO.widget.Button("botao1",{onclick:{fn: function(){
-			window.location.href = "../etiqueta/index.htm?tema="+window.parent.i3GEO.temaAtivo;
-		}}});
-	}
-	$i("xy").innerHTML = "x: " + xpt + "  y: " + ypt
-	listaTemas("todos")
+if(typeof(i3GEOF) == 'undefined'){
+	i3GEOF = new Array();
 }
-//le o arquivo opcional de sistemas
-function pegavalSistemas(xmlDoc)
-{
-	aguarde("none");
-	if (xmlDoc != undefined)
-	{
-		var sis = xmlDoc.getElementsByTagName("FUNCAO")
-		for (ig=0;ig<sis.length;ig++)
-		{	
-			var sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue
-			if(sis[ig].getElementsByTagName("PUBLICADO")[0])
-			{
-				if(sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild)
-				{
-					var pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
-					if(pub == "NAO" || pub == "nao")
-					{var sistema = "<s>"+sistema+"</s>";}
+/*
+Class: i3GEOF.identifica
+
+Obtém os atributos de um tema para uma coordenada.
+
+Abre uma janela com várias opções e lista de temas disponíveis no mapa atual.
+
+Essa classe depende da classe i3geo/classesjs/classe_php.php
+*/
+i3GEOF.identifica = {
+	/*
+	Variavel: mostraLinkGeohack
+	
+	Mostra ou não o link para abrir o site GeoHack.
+	
+	Este site permite o uso de vários buscadores disponíveis na internet.
+	
+	Type:
+	{boolean}
+	*/
+	mostraLinkGeohack: true,
+	/*
+	Variavel: mostraSistemasAdicionais
+	
+	Mostra ou não a lista de sistemas adicionais de busca de dados.
+
+	Type:
+	{boolean}
+	*/	
+	mostraSistemasAdicionais: true,
+	/*
+	Variavel: locaplic
+	
+	Localização do i3geo
+	
+	Type:
+	{String}
+	*/
+	locaplic: "",
+	/*
+	Variavel: sid
+	
+	Código da seção aberta pelo i3geo
+	
+	Type:
+	{String}
+	*/
+	sid: "",
+	/*
+	Variavel: tema
+	
+	Código do tema que será pesquisado
+	
+	Type:
+	{String}
+	*/
+	tema: "",
+	/*
+	Variavel: x
+	
+	Coordenada x
+	
+	Type:
+	{Numeric}
+	*/
+	x: 0,
+	/*
+	Variavel: y
+	
+	Coordenada y
+	
+	Type:
+	{Numeric}
+	*/
+	y: 0,
+	/*
+	Variavel: sistemasAdicionais
+	
+	Guarda a lista de sistemas adicionais que são incluídos na seleção de temas
+	
+	Type:
+	{Array}
+	*/
+	sistemasAdicionais: new Array(),
+	/*
+	Function: inicia
+	
+	Inicia a janela de informações
+	
+	Parameters:
+	
+	locaplic {String} - url onde o i3geo está instalado, pe, http://localhost/i3geo
+	
+	sid {String} - código da seção aberta no servidor eplo i3Geo
+	
+	tema {String} - código do tema, existente no mapfile armazenado na seção, que será consultado já na inicialização
+
+	x {Numeric} - coordenada x do ponto que será utilizado para busca dos atributos
+	
+	y {Numeric} - coordenada y do ponto
+	
+	iddiv {String} - id do elemento html onde o conteúdo da ferramenta será incluido
+	
+	mostraLinkGeohack {boolean} - mostra ou não o link para o site geohacks
+	
+	mostraSistemasAdicionais {boolean} - mostra ou não os sistemas adicionais de busca de dados
+	*/
+	inicia: function(locaplic,sid,tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
+		try{
+			$i(iddiv).innerHTML += i3GEOF.identifica.html();
+			i3GEOF.identifica.locaplic = locaplic;
+			i3GEOF.identifica.sid = sid;
+			i3GEOF.identifica.tema = tema;
+			i3GEOF.identifica.x = x;
+			i3GEOF.identifica.y = y;
+			i3GEOF.identifica.mostraLinkGeohack = mostraLinkGeohack;
+			i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
+			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
+			//eventos das guias
+			$i("i3GEOidentificaguia1").onclick = function(){i3GEOF.identifica.listaTemas("ligados");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia")}
+			$i("i3GEOidentificaguia2").onclick = function(){i3GEOF.identifica.listaTemas("todos");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia")}
+			$i("i3GEOidentificaguia3").onclick = function(){i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3","i3GEOidentificaguia")}
+			$i("i3GEOidentificaguia4").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia4","i3GEOidentificaguia");
+				new YAHOO.widget.Button("i3GEOidentificabotao1",{onclick:{fn: function(){
+					//window.location.href = "../etiqueta/index.htm?tema="+tema;
+					if(i3GEO.temaAtivo != "")
+					i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);
+					else
+					{alert("Nenhum tema definido");}
+				}}});
+			}
+			i3GEOF.identifica.listaTemas("ligados")
+			//
+			//verifica se existem sistemas para identificar
+			//
+			if(i3GEOF.identifica.mostraSistemasAdicionais == true){
+				var g_locidentifica = i3GEO.parametros.locidentifica;
+				if (g_locidentifica != ""){
+					if(window.parent.tempXMLSISTEMAS == undefined)
+					{i3GEO.util.ajaxexecASXml(g_locidentifica,"i3GEOF.identifica.montaListaSistemas");}
+					else
+					{i3GEOF.identifica.montaListaSistemas(window.parent.tempXMLSISTEMAS);}
 				}
 			}
-			var exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue
-			var temp = exec.split('"')
-			if(temp.length == 1)
-			var exec = '"'+exec+'"'
-			var temp = exec.split("?")
-			if(temp.length != 2)
-			exec += '+"?"'
-			exec += '+"'+"&x="+xpt+"&y="+ypt+'"'
-			var t = "blank"
-			if (sis[ig].getElementsByTagName("TARGET")[0])
-			{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue}
-			sistemasAdicionais.push(sistema+","+exec+","+t)
+			if (i3GEO.temaAtivo != "")
+			{i3GEOF.identifica.buscaDadosTema(window.parent.i3GEO.temaAtivo);}
 		}
-		if (sistemasAdicionais.length > 0)
-		{
-			var linhas = ""
-			for (l=0;l<sistemasAdicionais.length;l++)
-			{
-				var ltema = sistemasAdicionais[l].split(",")
-				if (ltema.length > 1)
-				linhas += "<span style='text-align:left;font-size:10px;cursor:pointer' onclick='identificasistema("+ltema[1]+",\""+ltema[2]+"\")'><input style=cursor:default type=radio name=tema />"+ltema[0]+"<br></span>"
-			}
-			$i("resultado").innerHTML += linhas
-		}
-	}
-	aguarde("none");
-}
-//lista os temas
-function listaTemas(tipo)
-{
-	aguarde("none");
-	var retorno = function (retorno)
-	{
+		catch(erro){alert(erro);}
+	},
+	/*
+	Function: html
+	
+	Gera o código html para apresentação das opções da ferramenta
+	
+	Retorno:
+	
+	String com o código html
+	*/
+	html:function(){
+		var ins = '';
+		ins += '<div id=i3GEOidentificaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
+		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia1" style="text-align:center;font-size:10px;left:0px;" >Temas vis&iacute;veis</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia2" style="text-align:center;font-size:10px;left:0px;" >Todos os temas</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia3" style="text-align:center;font-size:10px;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;font-size:10px;left:0px;" >Etiquetas</div></em></a></li>';
+		ins += '	</ul>';
+		ins += '</div>';
+		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
+		ins += '	<div class=guiaobj id="i3GEOidentificaguia1obj" style="left:1px;90%">';
+		ins += '		<div style="display:block;position:relative;top:-5px;left:0px;width:150px">';
+		ins += '			<div style="left:0px;width:120px;text-align:left;font-size:10px;" id="i3GEOidentificalistaTemas" >Aguarde...</div>';
+		ins += '			<div style="left:0px;width:120px;text-align:left;font-size:10px;" id="i3GEOidentificalistaSistemas" >Aguarde...</div>';
+		ins += '		</div>';
+		ins += '		<div id="i3GEOidentificaocorrencia" style="font-size: 10px;overflow:auto;height:200px;display:block;position:absolute;top:5px;left:160px;width:60%"></div>';
+		ins += '	</div>';
+		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
+		ins += '	</div>';
+		ins += '	<div class=guiaobj id="i3GEOidentificaguia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
+		ins += '		Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input onclick="javascript:this.select();" type=text class=digitar value=5 id="i3GEOidentificaresolucao" size=2 />';
+		ins += '	</div>';
+		ins += '	<div class=guiaobj id="i3GEOidentificaguia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >';
+		ins += '		As etiquetas são mostradas quando o mouse é estacionado sobre um elemento.';
+		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
+		ins += '	</div>';
+		ins += '</div>	';
+		return ins;
+	},
+	/*
+	Function: listaTemas
+	
+	Incluí a lista de temas para o usuário escolher
+	
+	Parametros:
+	
+	tipo {String} - ligados|todos lista apenas os temas que estão visíveis no mapa ou todos os temas
+	*/
+	listaTemas: function(tipo){
+		i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid);
+	},
+	/*
+	Function: montaListaTemas
+	
+	Monta a lista de temas na forma de botões 'radio'
+	
+	O resultado é inserido no div com id "listaTemas"
+	
+	Parametros:
+	
+	retorno {JSON} - objeto retornado por i3GEO.php.listaTemas
+	*/
+	montaListaTemas: function(retorno){
 		var lista = retorno.data;
-		var b = window.parent.i3GEO.calculo.dd2dms(xpt,ypt);
+		//
+		//ativa o link para o site geohack
+		//
+		if(i3GEOF.identifica.mostraLinkGeohack == true)
+		{var linhas = i3GEOF.identifica.montaLinkGeohack();}
+		else
+		{var linhas = "";}
+		//
+		//monta a lista de temas
+		//	
+		linhas += "Clique no tema para ver os dados"
+		var linhas1 = "";
+		for (l=0;l<lista.length;l++)
+		{
+			var nome = lista[l].nome
+			var tema = lista[l].tema
+			if(lista[l].identifica != "nao")
+			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>"}
+		}
+		var divResultado = $i("i3GEOidentificalistaTemas");
+		if(divResultado)
+		{divResultado.innerHTML = linhas+"<table class=lista2 ><tr><td style=text-align:left ><input onclick='i3GEOF.identifica.buscaDadosTema(\"ligados\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td>Todos</td></tr>"+linhas1+"</table>";}
+	},
+	/*
+	Function: montaLinkGeohack
+	
+	Monta o link para o site geohack
+	
+	Return:
+	
+	{String}
+	*/
+	montaLinkGeohack: function(){
+		var b = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
 		var x = b[0].split(" ")
 		var y = b[1].split(" ")
 		var w = "W"
@@ -107,164 +285,153 @@ function listaTemas(tipo)
 		var param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w
 		var url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param//15_48_00_S_47_51_50_W
 		var linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>"
-		linhas += "Clique no tema para ver os dados<table class=lista2 >"
-		var linhas1 = "";
-		for (l=0;l<lista.length;l++)
+		return linhas;
+	},
+	/*
+	Function: montaListaSistemas
+	
+	Obtém a lista de sistemas especiais de consulta.
+	
+	O resultado é inserido no div com id "listaSistemas".
+	
+	A lista de sistemas é obtida de um XML definido no i3Geo na variável window.parent.i3GEO.parametros.locidentifica
+	
+	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
+	
+	Parametros:
+	
+	xmlDoc - documento xml
+	*/
+	montaListaSistemas: function(xmlDoc){
+		if (xmlDoc != undefined)
 		{
-			var nome = lista[l].nome
-			var tema = lista[l].tema
-			if(lista[l].identifica != "nao")
-			{
-		 		linhas1 += "<tr><td><input onclick='identifica(\""+tema+"\")' style=cursor:pointer type=radio name=tema /></td><td>"+nome+"</td></tr>"
-			}
-		}
-		$i("resultado").innerHTML = linhas+"<table class=lista ><tr><td style=text-align:left ><input onclick='identifica(\"ligados\")' style=cursor:pointer type=radio name=tema /></td><td>Todos</td></tr>"+linhas1+"</table>"
-		//verifica se existem sistemas para identificar
-		g_locidentifica = window.parent.i3GEO.parametros.locidentifica
-		if (g_locidentifica != "")
-		{
-			sistemasAdicionais = new Array()
-			i3GEO.util.ajaxexecASXml(g_locidentifica,"pegavalSistemas")
-		}
-		if (window.parent.i3GEO.temaAtivo == "")
-		{
-			var temp = "";
-			for (l=0;l<lista.length;l++)
-			{
-				if(lista[l].identifica != "nao")
-				{var temp = lista[l].tema;break;}
-			}			
-			identifica(temp)
-		}
-		else
-		{identifica(window.parent.i3GEO.temaAtivo)}
-	};
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemas&opcao="+tipo
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"listatemas",retorno);
-}
-
-//identifica o sistema clicado
-function identificasistema(exec,t)
-{
-	var resolucao = $i("resolucao").value;
-	if ((t == "blank") || (t == "new") || (t == "BLANK") || (t == "NEW") || (t == ""))
-	{window.open(exec)}
-	else
-	{window.location.href = exec}
-}
-//identifica o tema clicado
-function identifica(tema)
-{
-	aguarde("block")
-	var resolucao = $i("resolucao").value;
-	window.parent.i3GEO.temaAtivo = tema;
-	var temp = $i("xy").innerHTML
-	var tempy = temp.split("y: ")
-	ypt = tempy[1]
-	var tempx = tempy[0]
-	tempx = tempx.split("x: ")
-	xpt = tempx[1]
-	$i("ocorrencia").innerHTML="<img src='../../imagens/aguarde.gif' />"
-	//var resolucao = "0.01"
-	if (tema == "ligados"){var opcao = "ligados"}
-	else
-	{var opcao = "tema"}
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=identifica&xy="+xpt+" ,"+ypt+"&opcao="+opcao+"&resolucao="+resolucao+"&tema="+tema
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"identifica",mostraf);
-}
-//mostra uma ocorrencia em um div a parte
-function mostraf(retorno)
-{
-	var res = ""
-	if (retorno.data != undefined)
-	{
-		var retorno = retorno.data
-		var re = new RegExp("zzzzzzzzzz","g")
-		var retorno = retorno.replace(re,"<br>")
-		var re = new RegExp('" ',"g")
-		var retorno = retorno.replace(re,'"<br>')
-		var re = new RegExp("' ","g")
-		var retorno = retorno.replace(re,"'<br>")	
-		var reg = /Erro./;
-		if (retorno.search(reg) != -1)
-		{
-			$i("ocorrencia").innerHTML="OOps! Ocorreu um erro\n"+retorno;
-			return;
-		}
-		$i("ocorrencia").innerHTML=""
-		var octemas = retorno.split("!")
-		for (octemasc=0;octemasc<octemas.length;octemasc++)
-		{
-			var titulo = octemas[octemasc].split("@")
-			var contat = 0
-			if (!titulo[1])
-			{
-			 	//aguarde("none")
-				//$i("ocorrencia").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
-				break
-			}
-			var ocs = titulo[1].split("*")
-			res += "<div style='left:2px;text-align:left;background-color:white;width:80%' >"+titulo[0]+"</div>"
-			//verifica se é WS
-			var pares = ocs[1].split("##")
-			var valores = pares[0].split("#")
-			//dados vem de uma chamada WS
-			if (valores[1] == undefined)
-			{
-				res += "<div style=text-align:left >Resultado: <pre><i>" + valores[0] + "</i></pre></div>"
-				res += "<div>------</div>"
-				$i("ocorrencia").innerHTML=res
-				//return
-			}
-			var contao = 0
-			for (oc=0;oc<ocs.length;oc++)
-			{
-				if (ocs[oc] != "")
+			window.parent.tempXMLSISTEMAS = xmlDoc;
+			var divins = $i("i3GEOidentificalistaSistemas");
+			var sis = xmlDoc.getElementsByTagName("FUNCAO")
+			for (ig=0;ig<sis.length;ig++)
+			{	
+				var sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue
+				if(sis[ig].getElementsByTagName("PUBLICADO")[0])
 				{
-					var pares = ocs[oc].split("##")
-					if (contao == 1){var ver = true}
-					else {var ver = false}
-					var contav = 0
-					var cor = "RGB(245,245,245)";
-					for (par=0;par<pares.length;par++)
+					if(sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild)
 					{
-						var valores = pares[par].split("#")
-						var vlink = valores[2]
-						if ((valores[2] != " ") && (valores[2] != undefined))
-						{res = res + "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;" + valores[0] + " <a href='" + vlink + "' > link</a></div>"}
-						else if ((valores[2] == " ") || (valores[2] != undefined))
-						{
-							var testaIcone = (valores[0].split(".png")).length
-							if (testaIcone == 1) //nao é do tipo ícone
-							{res = res + "<div style='border-top:0px solid brown;font-size:9px;width:90%;text-align:left;background-color:"+cor+"' ><b>&nbsp;&nbsp;" + valores[0] + " </b>" + valores[1] + "</div>"}
-							else //corrige o caminho do ícone
-							{
-								var i = valores[0].replace("..","../..")
-								res = res + "<div style='width:80%;text-align:left;background-color:"+cor+"' >" + i + " <i>" + valores[1] + "</i></div>"
-							}
-						}
-						contav = contav + 1
-						if (cor == "RGB(245,245,245)"){cor = "RGB(230,230,230)";}
-						else
-						{cor = "RGB(245,245,245)";}
+						var pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
+						if(pub == "NAO" || pub == "nao")
+						{var sistema = "<s>"+sistema+"</s>";}
 					}
-					//res += "<div style='border-top:1px solid gray;background-color:gray;width:100%;' ><br></div>"
 				}
-				contao = contao + 1
+				var exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue
+				var temp = exec.split('"')
+				if(temp.length == 1)
+				var exec = '"'+exec+'"'
+				var temp = exec.split("?")
+				if(temp.length != 2)
+				exec += '+"?"'
+				var t = "blank"
+				if (sis[ig].getElementsByTagName("TARGET")[0])
+				{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue}
+				i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t)
+			}
+			if (i3GEOF.identifica.sistemasAdicionais.length > 0)
+			{
+				var linhas = ""
+				for (l=0;l<i3GEOF.identifica.sistemasAdicionais.length;l++)
+				{
+					var ltema = i3GEOF.identifica.sistemasAdicionais[l].split(",")
+					if (ltema.length > 1)
+					linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";
+					
+				}
+				if(divins){
+					divins.innerHTML = "<table class='lista2' >"+linhas+"</table>";
+					return;
+				}
 			}
 		}
-		$i("ocorrencia").innerHTML=res
-		aguarde("none")
+		divins.innerHTML = "";
+	},
+	/*
+	Function: buscaDadosTema
+	
+	Obtém os dados de um tema para o ponto de coordenadas clicado no mapa
+	*/	
+	buscaDadosTema: function(tema){
+		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEOF.identifica.locaplic+"/imagens/aguarde.gif' />";
+		var res = $i("i3GEOidentificaresolucao");
+		if(res)
+		{var resolucao = res.value;}
+		else
+		{var res = 5;}
+		i3GEO.temaAtivo = tema;
+		//var resolucao = "0.01"
+		if (tema == "ligados"){var opcao = "ligados"}
+		else
+		{var opcao = "tema"}
+		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid,tema)
+	},
+	/*
+	Function: mostraDadosSistema
+	
+	Obtém os dados de um sistema para o ponto de coordenadas clicado no mapa
+	
+	Parametros:
+	
+	exec {String} - url que será aberta
+	
+	target {String} (depreciado) - _self|self| onde a url será aberta. Se for "self", será aberta na mesma janela, caso contrário, em uma nova página do navegador 
+	*/	
+	mostraDadosSistema: function(exec,target){
+		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y
+		window.open(exec);
+		/*
+		if (target == "self" || target == "_self")
+		{window.location.href = exec}
+		else
+		{window.open(exec)}
+		*/
+	},
+	/*
+	Function: mostraDadosTema
+	
+	Mostra os dados obtidos de um ou mais temas.
+	
+	Recebe o resultado em JSON da operação de consulta realizada pelo servidor e formata os dados para apresentação na tela.
+	
+	Parametros:
+	
+	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
+	*/
+	mostraDadosTema: function(retorno){
+		var res = ""
+		if (retorno.data != undefined)
+		{
+			var retorno = retorno.data;
+			var divO = $i("i3GEOidentificaocorrencia");
+			divO.innerHTML=""
+			var ntemas = retorno.length;
+			for(var i=0;i<ntemas;i++)
+			{
+				var resultados = retorno[i].resultado[0];
+				if(resultados != " ")
+				{
+					res += "<div style='padding-top:6px;left:2px;text-align:left;width:80%;' >"+retorno[i].nome+"</div>"		
+					var nres = resultados.length;
+					var cor = "RGB(250,250,250)";
+					for(var j=0;j<nres;j++)
+					{
+						if(resultados[j].link == "")
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;"+resultados[j].valor+"</div>";}
+						else
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;<a href='"+resultados[j].link+"' target=_blank >"+resultados[j].valor+"</a></div>";}
+						if(resultados[j].img != "")
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >"+resultados[j].img+"</div>";}
+						if (cor == "RGB(250,250,250)"){cor = "beige";}
+						else
+						{cor = "RGB(250,250,250)";}
+					}
+				}
+			}
+			$i("i3GEOidentificaocorrencia").innerHTML=res;
+		}
 	}
-	else
-	{
-		aguarde("none")
-		$i("ocorrencia").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
-	}
-}
+};

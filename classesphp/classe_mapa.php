@@ -472,7 +472,7 @@ nome
 		{
 			foreach ($this->layers as $layer)
 			{
-				if (($layer->isvisible()) && ($layer->status == 2) && ($layer->getmetadata("ESCONDIDO") == ""))
+				if (($layer->isvisible()) && ($layer->status == MS_DEFAULT) && ($layer->getmetadata("ESCONDIDO") == ""))
 				{
 					$ident = $layer->getmetadata("IDENTIFICA");
 					$final[] = array("tema"=>$layer->name,"nome"=>(pegaNome($layer,"UTF-8")),"identifica"=>$ident);

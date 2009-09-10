@@ -501,8 +501,10 @@ i3GEO = {
 			}
 			catch(e){}
 			i3GEO.interface.redesenha();
-			
-			g_operacao = "";
+			//caso esteja na função de identificação
+			if($i("i3GEOidentificalistaTemas")){g_tipoacao = "identifica";g_operacao='identifica';}
+			else
+			{g_operacao = "";}
 			i3GEO.parametros.mapexten = mapexten;
 			if ($i("mensagemt"))
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
@@ -517,4 +519,10 @@ i3GEO = {
 		}	
 	}
 };
+/*
+Classe: i3GEOF
+
+Esta classe recebe os métodos sob demanda por meio da injeção de javascripts por meio de script tag.
+*/
+i3GEOF = new Array();
 //YAHOO.log("carregou classe i3geo", "Classes i3geo");

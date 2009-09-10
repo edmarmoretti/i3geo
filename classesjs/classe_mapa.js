@@ -648,14 +648,33 @@ i3GEO.mapa = {
 		*/
 		cliqueIdentificaDefault: function(){
 			if (g_tipoacao == "identifica"){
-				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");					
-				var janela = i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/identifica/index.htm?&x='+objposicaocursor.ddx+'&y='+objposicaocursor.ddy+'&escala='+i3GEO.parametros.mapscale,"","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>");
-				if(i3GEO.interface.ATUAL != "googlemaps"){
-					var temp = function(){
-						i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
-						i3GEO.barraDeBotoes.ativaBotoes();
+				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
+				if(typeof(i3GEOF.identifica) == 'undefined'){
+					//função para o clique sobre o cabecalho da janela
+					var cabecalho = function(){
+						i3GEO.barraDeBotoes.ativaIcone("identifica");
+						g_tipoacao='identifica';
+						g_operacao='identifica';
 					};
-					YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+					var janela = i3GEO.janela.cria("450px","250px","","","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>","i3GEOF.identifica",false,"hd",cabecalho);
+					var js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
+					var divid = janela[2].id;
+					var ini = "i3GEOF.identifica.inicia('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','"+i3GEO.temaAtivo+"',"+objposicaocursor.ddx+","+objposicaocursor.ddy+",'"+divid+"',true,true)";
+					i3GEO.util.scriptTag(js,ini,"i3GEOF.identifica_script");
+					
+					if(i3GEO.interface.ATUAL != "googlemaps"){
+						var temp = function(){
+							i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
+							i3GEO.barraDeBotoes.ativaBotoes();
+						};
+						YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+					}
+				}
+				else{
+					i3GEOF.identifica.x = objposicaocursor.ddx;
+					i3GEOF.identifica.y = objposicaocursor.ddy;
+					i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);
+					return;
 				}
 			}
 		},

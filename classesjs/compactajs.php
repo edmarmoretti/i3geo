@@ -91,6 +91,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui270/build/dom/dom-min.js",
+"../pacotes/yui270/build/utilities/utilities.js",
 "../pacotes/yui270/build/container/container_core_compacto.js",
 "../pacotes/yui270/build/menu/menu-min.js",
 "../pacotes/yui270/build/logger/logger-min.js",
@@ -100,8 +101,8 @@ $jsfiles = array(
 "../pacotes/yui270/build/container/container_compacto.js",
 "../pacotes/yui270/build/element/element-min.js",
 "../pacotes/yui270/build/tabview/tabview-min.js",
-"../pacotes/yui270/build/utilities/utilities.js",
 "../pacotes/yui270/build/treeview/treeview.js",
+"../pacotes/yui270/build/button/button-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 "compactados/classe_i3geo_compacto.js",
@@ -150,6 +151,7 @@ $cssfiles = array(
 "../pacotes/yui270/build/container/assets/skins/sam/container.css",
 "../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
+"../pacotes/yui270/build/button/assets/skins/sam/button.css",
 "../css/corrigeyui_geral.css"
 ); 
 

@@ -952,12 +952,15 @@ function ativaGuias()
 		var guia = $i("guia"+g);
 	}
 }
-function mostraGuia(guia)
+//incluido em i3GEO.guias.mostraGuiaFerramenta
+function mostraGuia(guia,namespace)
 {
+	if(arguments.length == 1)
+	{var namespace = "guia";}
 	for(g=0;g<12;g++)
 	{
-		if ($i("guia"+g+"obj")){
-			$i("guia"+g+"obj").style.display="none";
+		if ($i(namespace+g+"obj")){
+			$i(namespace+g+"obj").style.display="none";
 		}
 	}
 	if ($i(guia+"obj")){

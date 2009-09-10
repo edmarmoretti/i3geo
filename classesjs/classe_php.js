@@ -282,6 +282,22 @@ i3GEO.php = {
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*
+	Function: listatemas
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->listaTemas>	
+	*/
+	listaTemas: function(funcao,tipo,locaplic,sid){
+		if(arguments.length == 2){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemas&g_sid="+sid+"&tipo="+tipo;
+		cpJSON.call(p,"listaTemas",funcao);	
+	},
+	/*
 	Function: pegaSistemas
 
 	PHP:
@@ -796,9 +812,8 @@ i3GEO.php = {
 	
 	<Atributos->identifica>	
 	*/
-	identifica: function(funcao,x,y,resolucao){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+	identifica: function(funcao,x,y,resolucao,locaplic,sid){
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
 		cpJSON.call(p,"identifica",funcao);	
 	},
 	/*
@@ -809,9 +824,19 @@ i3GEO.php = {
 	
 	<Atributos->identifica2>	
 	*/
-	identifica2: function(funcao,x,y,resolucao){
-		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+i3GEO.configura.sid;
+	identifica2: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema){
+		if(arguments.length == 4){
+			var opcao = "tip";
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;		
+		}
+		if(arguments.length == 5){
+			var locaplic = i3GEO.configura.locaplic;
+			var sid = i3GEO.configura.sid;		
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
+		if(opcao != "tip")
+		{p += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao);	
 	},
 

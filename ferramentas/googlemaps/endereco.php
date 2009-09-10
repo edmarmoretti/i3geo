@@ -30,7 +30,6 @@ function inicializa()
         	ins += '<b>Country code:</b> ' + place.AddressDetails.Country.CountryNameCode;
     		ins += '<br><br>O endereço obtido é aproximado. Mais detalhes em <a href="http://nicogoeminne.googlepages.com/documentation.html" >Google</a>'
 		}
-		ins += "<br><br><a href='#' onclick='javascript:history.back(-1)'>voltar</a>"
 		document.getElementById("mapa").innerHTML = ins
     }
    	geocoder.getLocations(ponto, pt1);

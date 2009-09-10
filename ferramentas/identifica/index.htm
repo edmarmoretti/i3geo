@@ -13,44 +13,28 @@ body {
 </style>
 </head>
 <body name="ancora" class="yui-skin-sam" >
-	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
-		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
-			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Temas vis&iacute;veis</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Todos os temas</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia3" style="text-align:center;font-size:10px;left:0px;" >Propriedades</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia4" style="text-align:center;font-size:10px;left:0px;" >Etiquetas</div></em></a></li>
-		</ul>
-	</div>
-	
-	<div id=geral style="left:0px;top:0px;">
-	
-		<div class=guiaobj id="guia1obj" style="left:1px;90%">
-			<div id="resultado" style="overflow:auto;height:200px;display:block;position:relative;top:-5px;left:0px;width:150px"></div>
-			<div id="ocorrencia" style="overflow:auto;height:200px;display:block;position:absolute;top:5px;left:160px;width:60%"></div>
-		</div>
-		<div class=guiaobj id="guia2obj" style="left:1px">
-		</div>
-		<div class=guiaobj id="guia3obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >
-			Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados:<br>  <input onclick='javascript:this.select();' type=text class=digitar value=5 id=resolucao size=2 />
-		</div>
-		<div class=guiaobj id="guia4obj" style="left:1px;top:10px;display:none;font-size:12px;overflow:hidden" >
-			As etiquetas são mostradas quando o mouse é estacionado sobre um elemento.
-			<p><input id=botao1 size=20  type=button value="Configurar etiquetas" />
-		</div>
-
-	</div>
-	
-	<div id="aguarde">
-		<img alt="" src="../../imagens/aguarde.gif" />Aguarde...
-	</div>
-	<div id=xy style="display:none;position:relative;top:10px;left:5px">
-	</div>
-
-<script language="JavaScript" type="text/javascript" src="../../classesjs/compactados/redesenho_compacto.js"></script>
-<script src="../../classesjs/compactados/classe_util_compacto.js" type="text/javascript"></script>
-<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
-<script language="JavaScript" type="text/javascript" src="index.js"></script><script type="text/javascript" >
-inicializaJanela()
-</script>
 </body>
+<script src="../i3geo_tudo_compacto.js.php" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script type="text/javascript" >
+//
+//pega os dados da url
+//
+var locaplic = window.parent.i3GEO.configura.locaplic;
+var sid = window.parent.i3GEO.configura.sid;
+var xpt = unescape(((((window.location.href).split("x="))[1]).split("&"))[0] );
+var ypt = unescape(((((window.location.href).split("y="))[1]).split("&"))[0] );
+var tema = window.parent.i3GEO.temaAtivo;
+
+i3GEOidentifica.inicia(
+   	locaplic,
+	sid,
+	tema,
+	xpt,
+	ypt,
+	document.body,
+	true,
+	true
+);
+</script>
 </html>

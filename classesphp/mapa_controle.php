@@ -645,8 +645,8 @@ Include:
 	case "listatemas":
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
-		$resultado = $m->listaTemas($opcao);
-		$cp->set_data($resultado);
+		$resultado = $m->listaTemas($tipo);
+		$cp->set_data(array_reverse($resultado));
 	break;
 /*
 Property: listatemaslocais
