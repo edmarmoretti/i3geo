@@ -115,7 +115,7 @@ i3GEO.arvoreDeCamadas = {
 	Tipo:
 	{Boolean}
 	*/
-	AGUARDALEGENDA: true,
+	AGUARDALEGENDA: false,
 	/*
 	Variavel: CAMADAS
 	
@@ -290,6 +290,16 @@ i3GEO.arvoreDeCamadas = {
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign="left";
    		i3GEO.arvoreDeCamadas.ARVORE.draw();
    		this.ativaDragDrop();
+		//
+		//verifica se a janela a ferramenta identifica está ativa para atualizar a lista de temas
+		//
+		try{
+			if($i("i3GEOidentificalistaTemas")){
+				i3GEOF.identifica.listaTemas();
+				g_tipoacao = "identifica";
+			}
+		}
+		catch(r){}
 	},
 	/*
 	Function: ativaDragDrop
