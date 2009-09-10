@@ -113,7 +113,9 @@ i3GEO.janela = {
 	
 	id {String} - (opcional) nome que será dado ao id que conterá a janela. Se não for definido, será usado o id="wdoca". O
 		id do iframe interno é sempre igual ao id + a letra i. Por default, será "wdocai".
-		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo"
+		O id do cabçalho será igual a id+"_cabecalho" e o id do corpo será id+"_corpo".
+		O id também é utilizado na função de fechamento da janela. Quando for usada a técnica de
+		script tag, ao fechar a janela a função de mesmo nome do id será definida como "null".
 	
 	modal {Boolean} - (opcional) indica se a janela bloqueará as inferiores ou não. Por default é false
 	
@@ -123,7 +125,7 @@ i3GEO.janela = {
 	
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho){
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -135,13 +137,19 @@ i3GEO.janela = {
 			var id = "wdoca";
 			var modal = false;
 			var classe = "hd";
+			var funcaoCabecalho = null;
 		}
 		if (arguments.length == 7){
 			var modal = false;
 			var classe = "hd";
+			var funcaoCabecalho = null;
 		}
 		if (arguments.length == 8){
 			var classe = "hd";
+			var funcaoCabecalho = null;
+		}
+		if (arguments.length == 9){
+			var funcaoCabecalho = null;
 		}
 		var wlargura_ = parseInt(wlargura)+0+"px";
 		YAHOO.namespace("janelaDoca.xp");
@@ -167,11 +175,14 @@ i3GEO.janela = {
 		else
 		{document.body.appendChild(novoel);}
 		var wdocaiframe = $i(id+"i");
-		if (wdocaiframe)
+		if(wdocaiframe)
 		{
 			with (wdocaiframe.style){width = parseInt(wlargura)-12;height=waltura;};
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
+		}
+		else{
+			$i(id+'_corpo').style.height=waltura;
 		}
 		var fix = false;
 		if(nx == "" || nx == "center"){var fix = true;}
@@ -185,8 +196,11 @@ i3GEO.janela = {
 		}
 		YAHOO.janelaDoca.xp.panel.render();
 		if(i3GEO.interface.ATUAL=="googleearth"){var classe = "bd";}
-		$i(id+'_cabecalho').className = classe;
-		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha);
+		var temp = $i(id+'_cabecalho');
+		temp.className = classe;
+		if(funcaoCabecalho)
+		{temp.onclick = funcaoCabecalho;}
+		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
 		return(new Array(YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")));
 	},
 	/*
@@ -199,7 +213,7 @@ i3GEO.janela = {
 	
 	id {String} - id da janela que será fechada
 	*/
-	fecha: function(id){
+	fecha: function(event){
 		if(i3GEO.interface.ATUAL=="googleearth"){
 			YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
 		}
@@ -216,10 +230,29 @@ i3GEO.janela = {
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
 		YAHOO.janelaDoca.xp.panel.destroy();
-		if($i("wdoca_c"))
-		$i("i3geo").removeChild($i("wdoca_c"));
-		if($i("wdoca"))
-		$i("i3geo").removeChild($i("wdoca"));
+		if($i(this.id+"_c"))
+		$i("i3geo").removeChild($i(this.id+"_c"));
+		if($i(this.id))
+		$i("i3geo").removeChild($i(this.id));
+		//
+		//remove script tag se houver
+		//
+		try{
+			var old = $i("loadscriptI3GEO");
+			if (old != null) {
+				old.parentNode.removeChild(old);
+				delete old;
+				if(this.id)
+				eval(this.id+" = null;");
+			}
+			var old = $i(this.id+"_script");
+			if (old != null) {
+				old.parentNode.removeChild(old);
+				delete old;
+				eval("delete " + this.id);
+			}
+		}
+		catch(erro){}
 	},
 	/*
 	Function: alteraTamanho
