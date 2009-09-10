@@ -677,6 +677,6 @@
 	height:9px;
 	cursor:pointer;
 }
-
+button{background:url(../imagens/tic.png) 98% 50% no-repeat;}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

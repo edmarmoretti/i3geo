@@ -129,6 +129,10 @@ width:16px;
     outline:0;
 }
 
+.yui-skin-sam .yui-button{
+	border-width:1px 0;border-style:solid;border-color:#808080;background:url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x 0 0;margin:auto .25em;
+}
+
 .ygtvtn
 {
 	background:transparent url(../pacotes/yui270/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -5600px;

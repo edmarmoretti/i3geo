@@ -30,6 +30,9 @@ select
 {text-align:left;text-decoration:none;border: 0px solid #ffffff;font-family: Verdana, Arial, Helvetica, sans-serif;position:relative;display:block;font-size:8px;padding:1;font-weight:normal;top:0px;width:95%;}
 #geral
 {position:relative;background-color:white;text-align:center;text-decoration:none;border-top: 2px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:8px;padding:5px;font-weight:normal;top:8px;left:0px;overflow:auto;width:100%;}
+.geralFerramentas
+{position:relative;background-color:white;text-align:center;text-decoration:none;border-top: 2px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:8px;padding:5px;font-weight:normal;top:8px;left:0px;overflow:auto;width:100%;}
+
 #aguarde
 {position:relative;top:10px;left:5px;}
 .aguarde1
