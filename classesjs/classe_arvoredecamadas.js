@@ -45,6 +45,18 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: ARRASTARLIXEIRA
+	
+	Ativa a opção de arrastar um tema para a lixeria quando se quer removê-lo do mapa.
+	
+	Default:
+	{true}
+	
+	Type:
+	{voolean}
+	*/
+	ARRASTARLIXEIRA: true,
+	/*
 	Propriedade: EXPANDIDA
 	
 	Indica se a árvore será montada de forma expandida ou não. Se true, os nós do primeiro nível serão abertos na inicialização da árvore.
@@ -274,7 +286,10 @@ i3GEO.arvoreDeCamadas = {
     		buildTree();
 		}();
 		var root = i3GEO.arvoreDeCamadas.ARVORE.getRoot();
-		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td><img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' /></td></tr></table>";
+		var titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td>";
+		if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA == true)
+		{titulo += "<img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+		titulo += "</td></tr></table>";
 		var d = {html:titulo};
 		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = false;
@@ -316,7 +331,7 @@ i3GEO.arvoreDeCamadas = {
 		{
     		init: function() 
     		{
-        		if($i("i3geo_lixeira"))
+        		if($i("i3geo_lixeira") && i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA == true)
         		{new YAHOO.util.DDTarget("i3geo_lixeira");}
         		var lista = i3GEO.arvoreDeCamadas.CAMADAS;
         		var i = lista.length-1;
@@ -386,10 +401,12 @@ i3GEO.arvoreDeCamadas = {
 	                		DDM.refreshCache();
 	                		//exclui tema
    		             		if(DDM.getDDById(id).id == "i3geo_lixeira"){
-                				i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
-                				var tema = (this.getEl()).id.split("arrastar_")[1];
-								i3GEO.php.excluitema(i3GEO.atualiza,tema);							
-								i3GEO.temaAtivo = "";
+                				if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA == true){
+                					i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
+                					var tema = (this.getEl()).id.split("arrastar_")[1];
+									i3GEO.php.excluitema(i3GEO.atualiza,tema);							
+									i3GEO.temaAtivo = "";
+								}
 							}
 							//muda ordem de desenho do tema
 							else{
