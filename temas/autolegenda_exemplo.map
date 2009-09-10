@@ -10,7 +10,7 @@ LAYER
   TEMPLATE "none.htm"
   DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
   METADATA
-	ITENS "cd_legenda"
+	ITENS "CD_LEGENDA"
 	ITENSDESC "Nome"
   	TEMA "Teste de geração automática de classes em dados vetoriais"
   	CLASSE "SIM"
