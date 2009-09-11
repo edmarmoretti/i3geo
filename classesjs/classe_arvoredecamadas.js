@@ -45,6 +45,18 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: ARRASTARORDEM
+	
+	Ativa a opção de arrastar um tema para alterar a ordem de desenho das camadas
+	
+	Default:
+	{true}
+	
+	Type:
+	{voolean}
+	*/
+	ARRASTARORDEM: true,
+	/*
 	Propriedade: ARRASTARLIXEIRA
 	
 	Ativa a opção de arrastar um tema para a lixeria quando se quer removê-lo do mapa.
@@ -304,7 +316,8 @@ i3GEO.arvoreDeCamadas = {
 		}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign="left";
    		i3GEO.arvoreDeCamadas.ARVORE.draw();
-   		this.ativaDragDrop();
+   		if(i3GEO.arvoreDeCamadas.ARRASTARORDEM == true || i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA == true)
+   		{this.ativaDragDrop();}
 		//
 		//verifica se a janela a ferramenta identifica está ativa para atualizar a lista de temas
 		//
@@ -410,13 +423,15 @@ i3GEO.arvoreDeCamadas = {
 							}
 							//muda ordem de desenho do tema
 							else{
-	                			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-	                			var destEl = Dom.get(id);
-   		             			var noid = id.split("arrastar_")[1];
-   	    	         			destEl.appendChild(this.getEl()); 
- 								var els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
- 								var lista = els[2].join(",");
- 								i3GEO.php.reordenatemas(i3GEO.atualiza,lista);
+								if(i3GEO.arvoreDeCamadas.ARRASTARORDEM == true){
+		                			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		                			var destEl = Dom.get(id);
+	   		             			var noid = id.split("arrastar_")[1];
+	   	    	         			destEl.appendChild(this.getEl()); 
+	 								var els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
+	 								var lista = els[2].join(",");
+	 								i3GEO.php.reordenatemas(i3GEO.atualiza,lista);
+	 							}
 							}
         	    		}
 	    	    	}
