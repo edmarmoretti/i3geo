@@ -113,7 +113,8 @@ document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval
 function convdmsddf(g,m,s){ cd=$i(g).value; cm=$i(m).value; cs=$i(s).value; var sinal='positivo'; if(cd < 0){ cd=cd*-1; sinal='negativo';}
  spm=cs/3600; mpg=cm/60; var dd=(cd*1)+(mpg*1)+(spm*1); if(sinal=='negativo'){dd=dd*-1;}
  return dd;}
-function mensagemAjuda(onde,texto){ var ins="<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2;font-family:Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;border: 1px solid #B1CDEB;text-align: left;padding-left: 7px;padding-right: 11px;'>"; ins+='<div style="float:right"><img src="../../imagens/question.gif"/></div>'; ins+='<div style="left;">'; if(texto==""){var texto=$i(onde).innerHTML;}
+function mensagemAjuda(onde,texto){ var local="../.."; try{var local=window.parent.i3GEO.configura.locaplic;}catch(e){}
+ var ins="<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2;font-family:Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;border: 1px solid #B1CDEB;text-align: left;padding-left: 7px;padding-right: 11px;'>"; ins+='<div style="float:right"><img src="'+local+'/imagens/question.gif"/></div>'; ins+='<div style="left;">'; if(texto==""){var texto=$i(onde).innerHTML;}
  ins+=texto; ins+='</div></th></tr></table>'; if(onde !=""){$i(onde).innerHTML=ins;}
  else{return(ins);}}
 function mensagemOpcao(onde,texto){ var ins="<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2;font-family:Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;border: 1px solid #B1CDEB;text-align: left;padding-left: 7px;padding-right: 11px;'>"; ins+='<div style="float:right"><img src="../../imagens/opcoes.gif"/></div>'; ins+='<div style="left;">'; if(texto==""){var texto=$i(onde).innerHTML;}
