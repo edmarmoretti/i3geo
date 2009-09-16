@@ -183,7 +183,6 @@ i3GEO = {
 	cria:function(){
 		if (window.location.href.split("?")[1]){
 			i3GEO.configura.sid = window.location.href.split("?")[1];
-			g_sid = i3GEO.configura.sid;
 			//
 			//a biblioteca YUI, por algum motivo, acrescenta # na URL. O # precisa ser removido, caso contrário, a opção de reload da página pelo browser as vezes não funciona
 			//
@@ -192,8 +191,11 @@ i3GEO = {
 		}
 		else
 		{i3GEO.configura.sid = "";}
+		//
 		//para efeitos de compatibilidade
+		//
 		g_panM = "nao";
+		g_sid = i3GEO.configura.sid;
 		try {i3GEO.configura.locaplic = g_locaplic;}
 		catch(e){g_locaplic = i3GEO.configura.locaplic;}
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
@@ -208,11 +210,9 @@ i3GEO = {
 		//
 		//subtrai barra de rolagem
 		//
-		try{
-			var a = i3GEO.util.getScrollerWidth();
-			diminuiy += a;
-		}
-		catch(r){}
+		try{diminuiy += i3GEO.util.getScrollerWidth();}
+		catch(e){}
+		//
 		var menos = 0;
 		if ($i("contemFerramentas"))
 		{menos += parseInt($i("contemFerramentas").style.width,10);}
@@ -247,9 +247,10 @@ i3GEO = {
 				{var h = parseInt(temp.style.height,10);}
 			}
 		}
-		if($i("contemImg")){
-			$i("contemImg").style.height=h + "px";
-			$i("contemImg").style.width=w + "px";
+		var temp = $i("contemImg");
+		if(temp){
+			temp.style.height=h + "px";
+			temp.style.width=w + "px";
 		}
 		i3GEO.Interface.cria(w,h);
 		i3GEO.parametros = {
@@ -323,7 +324,7 @@ i3GEO = {
 						if (titulo !== "")
 						{top.document.title = titulo;}
 					}
-					catch(e){var e = "";}
+					catch(e){}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
 					i3GEO.parametros.mapexten= mapexten;
 					i3GEO.parametros.mapscale= parseInt(mapscale,10);
@@ -389,10 +390,7 @@ i3GEO = {
 				var abreJM = "sim";
 				if (i3GEO.util.pegaCookie("g_janelaMen")){
 					var abreJM = i3GEO.util.pegaCookie("g_janelaMen");
-					if(abreJM == "sim")
-					{i3GEO.configura.iniciaJanelaMensagens = true;}
-					else
-					{i3GEO.configura.iniciaJanelaMensagens = false;}
+					i3GEO.configura.iniciaJanelaMensagens = (abreJM == "sim") ? true : false;
 				}
 				if(i3GEO.configura.iniciaJanelaMensagens === true)
 				{i3GEO.ajuda.abreJanela();}		
@@ -407,7 +405,7 @@ i3GEO = {
 		if($i("mst"))
 		{$i("mst").style.visibility ="hidden";}
 		//
-		//se g_sid="", o html foi aberto diretamente
+		//se i3GEO.configura.sid = "", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa
 		//essa operação deve ser assíncrona
 		//
@@ -520,7 +518,8 @@ i3GEO = {
 			catch(e){}
 			i3GEO.Interface.redesenha();
 			//caso esteja na função de identificação
-			if($i("i3GEOidentificalistaTemas")){g_tipoacao = "identifica";g_operacao='identifica';}
+			if($i("i3GEOidentificalistaTemas"))
+			{g_tipoacao = "identifica";g_operacao='identifica';}
 			else
 			{g_operacao = "";}
 			i3GEO.parametros.mapexten = mapexten;
