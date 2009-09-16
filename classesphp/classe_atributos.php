@@ -415,7 +415,9 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$filtro = $l->getfilter();
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
-			$trocas = "AAOOOaaaaoooouuieec";
+			$buscasUTF = mb_convert_encoding($buscas,"UTF-8","ISO-8859-1");
+			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
+			$buscas = $buscas.$buscasUTF;
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){return "erro";}
 			$l->whichShapes($this->mapa->extent);

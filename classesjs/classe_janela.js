@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.janela
@@ -38,6 +38,18 @@ Abre janelas flutuantes
 As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
+	/*
+	Propriedade: AGUARDEMODAL
+	
+	Indica se a janela de aguarde será do tipo MODAL, ou seja, se irá ou não bloquear as opções do mapa.
+	
+	Tipo:
+	{Boolean}
+	
+	Default:
+	{false}
+	*/
+	AGUARDEMODAL: false,
 	/*
 	Propriedade: ANTESCRIA
 	
@@ -69,13 +81,13 @@ i3GEO.janela = {
 	Default:
 	{[]}
 	*/
-	ANTESFECHA: new Array(),
+	ANTESFECHA: [],
 	/*
 	Variavel: TIPS
 	
 	Lista os tips inseridos no mapa, possibilitando sua remoção em lote
 	*/
-	TIPS: new Array(),
+	TIPS: [],
 	/*
 	Function: prepara
 	
@@ -195,7 +207,7 @@ i3GEO.janela = {
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
 		YAHOO.janelaDoca.xp.panel.render();
-		if(i3GEO.interface.ATUAL=="googleearth"){var classe = "bd";}
+		if(i3GEO.Interface.ATUAL=="googleearth"){var classe = "bd";}
 		var temp = $i(id+'_cabecalho');
 		temp.className = classe;
 		if(funcaoCabecalho)
@@ -214,7 +226,7 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada
 	*/
 	fecha: function(event){
-		if(i3GEO.interface.ATUAL == "googleearth"){
+		if(i3GEO.Interface.ATUAL == "googleearth"){
 			//YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
 		}
 		//esconde o box do google
@@ -301,10 +313,12 @@ i3GEO.janela = {
 		{var pos = YAHOO.util.Dom.getXY($i("corpoMapa"));}
 		else if ($i("contemImg"))
 		{var pos = YAHOO.util.Dom.getXY($i("contemImg"));}
-		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:true,monitorresize:false})');
+		texto += "<br><span style='color:navy;cursor:pointer;font-size:9px;' onclick='javascript:if(i3GEO.janela.AGUARDEMODAL == true){i3GEO.janela.AGUARDEMODAL = false;}else{i3GEO.janela.AGUARDEMODAL = true;}'>bloquear/desbloquear</span>";
+		//texto += i3GEO.contadorAtualiza;
+		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
 		eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
 		eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
-		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>")');
+		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+i3GEO.contadorAtualiza+'</span>")');
 		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
 		if($i("flamingo"))
 		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}
@@ -335,7 +349,7 @@ i3GEO.janela = {
 		var i = $i("i3geo_rosa");
 		if(i)
 		i.style.display="none";
-		if ($i(i3GEO.interface.IDCORPO))
+		if ($i(i3GEO.Interface.IDCORPO))
 		{$i("img").title = "";}
 		//insere div para tips
 		var novoel = document.createElement("div");
@@ -404,7 +418,7 @@ i3GEO.janela = {
 				}
 				while(ot--)
 				if(tipo == "todos")
-				{i3GEO.janela.TIPS = new Array();}
+				{i3GEO.janela.TIPS = [];}
 			}
 		}
 	},

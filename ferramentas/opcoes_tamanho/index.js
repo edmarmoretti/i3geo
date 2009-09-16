@@ -36,11 +36,11 @@ function executaf()
 		window.parent.i3GEO.parametros.h = a
 		var pos = "px"
 		if (window.parent.navm){pos = ""}
-		doc.getElementById(window.parent.i3GEO.interface.IDMAPA).style.width= l+pos
-		doc.getElementById(window.parent.i3GEO.interface.IDMAPA).style.height= a+pos
-		doc.getElementById(window.parent.i3GEO.interface.IDCORPO).style.width= l+pos
-		doc.getElementById(window.parent.i3GEO.interface.IDCORPO).style.height= a+pos
-		doc.getElementById(window.parent.i3GEO.interface.IDCORPO).style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')'
+		doc.getElementById(window.parent.i3GEO.Interface.IDMAPA).style.width= l+pos
+		doc.getElementById(window.parent.i3GEO.Interface.IDMAPA).style.height= a+pos
+		doc.getElementById(window.parent.i3GEO.Interface.IDCORPO).style.width= l+pos
+		doc.getElementById(window.parent.i3GEO.Interface.IDCORPO).style.height= a+pos
+		doc.getElementById(window.parent.i3GEO.Interface.IDCORPO).style.clip = 'rect('+0+" "+(l*1+2)+" "+(a*1+2)+" "+0+')'
 		var calc = 5;
 		if (doc.getElementById("ferramentas"))
 		{calc += parseInt(doc.getElementById("ferramentas").style.width);}

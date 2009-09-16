@@ -64,7 +64,7 @@ for (var i = 0; i < scripts.length; i++) {
 	}
 }
 var allScriptTags = "";
-var jsfiles = new Array()
+var jsfiles = []
 jsfiles[0] = "i3geo_tudo_compacto.js.php"
 jsfiles[1] = "../pacotes/openlayers/OpenLayers.js"
 for (var i = 0; i < jsfiles.length; i++)
@@ -204,8 +204,8 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	{
 		var ins = $i3geo_gl.loc_i3geo+"/ms_criamapa.php?";
 		var iguias = $i($i3geo_gl.temasa).getElementsByTagName("input");
-		var tsl = new Array(); //temas ligados
-		var tsd = new Array(); //temas
+		var tsl = []; //temas ligados
+		var tsd = []; //temas
 		for (i=0;i<iguias.length; i++)
 		{
 			if (iguias[i].type == "checkbox")

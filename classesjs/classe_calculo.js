@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.calculo
@@ -97,15 +97,15 @@ i3GEO.calculo = {
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
-			if(i3GEO.interface.ATUAL == "googlemaps"){
-				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			if(i3GEO.Interface.ATUAL == "googlemaps"){
+				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				var latlng = new GLatLng(vy,vx);
 				var xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
-				var xy = new Array();
+				var xy = [];
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
-			if(i3GEO.interface.ATUAL == "openlayers"){
-				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			if(i3GEO.Interface.ATUAL == "openlayers"){
+				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				var xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
 				return [(xy.x)+pos[0],(xy.y)+pos[1]];
 			}
@@ -126,10 +126,10 @@ i3GEO.calculo = {
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
 			c = cellsize * 1;
-			//var xy = new Array();
+			//var xy = [];
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
-		catch(e){return(new Array());}
+		catch(e){return([]);}
 	},
 	/*
 	Function: dd2dms
@@ -201,7 +201,7 @@ i3GEO.calculo = {
 		if (m.length == 2){m = "0"+m;}
 		if (s*1 < 10){s = "0"+s;}
 		var yv = dy+" "+my+" "+sy;
-		var res = new Array();
+		var res = [];
 		res[0] = xv;
 		res[1] = yv;
 		return res;
@@ -241,7 +241,7 @@ i3GEO.calculo = {
 			var amext = imgext.split(" ");
 			var longdd = (amext[0] * 1) + nx;
 			var latdd = (amext[3] * 1) - ny;
-			var res = new Array();
+			var res = [];
 			res[0] = longdd;
 			res[1] = latdd;
 			return (res);
@@ -423,7 +423,7 @@ i3GEO.calculo = {
 		}
 		else
 		{alert("Box nao encontrado");return;}
-		var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+		var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 		var xfig0 = parseInt(bxs.width) - pos[0];
 		var yfig0 = parseInt(bxs.height) - pos[1];
 		var xfig = pix + (parseInt(bxs.width)) - pos[0];

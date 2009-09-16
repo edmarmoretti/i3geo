@@ -157,15 +157,28 @@ i3GEO = {
 	*/
 	temaAtivo: "",
 	/*
+	Variavel: contadorAtualiza
+	
+	Essa variável é um contador utilizado para indicar quantos processos estão ativos e que
+	farão o redesenho do mapa. O mapa só é atualizado quando o contador for menor que 1.
+	Essi contador é utilizado no método i3GEO.atualiza e todas as funções que chamam esse
+	método devem acrescentar 1 ao contador, por exemplo, i3GEO.contadoratualiza++
+	O contador é necessário para evitar chamadas desnecessárias à função de redesenho do mapa.
+	
+	Tipo:
+	{string}
+	*/
+	contadorAtualiza:0,
+	/*
 	Function: cria
 	
 	Cria e configura a visualização do mapa, definindo posicionamentos, tamanho etc
 	
-	Após as definições básicas, é executado o programa <i3GEO.interface.cria> que irá
+	Após as definições básicas, é executado o programa <i3GEO.Interface.cria> que irá
 	realizar as operações conforme a interface atualmente em uso. A interface é definida
-	em <i3GEO.interface.ATUAL>
+	em <i3GEO.Interface.ATUAL>
 	
-	Veja <i3GEO.interface>
+	Veja <i3GEO.Interface>
 	*/
 	cria:function(){
 		if (window.location.href.split("?")[1]){
@@ -182,7 +195,7 @@ i3GEO = {
 		//para efeitos de compatibilidade
 		g_panM = "nao";
 		try {i3GEO.configura.locaplic = g_locaplic;}
-		catch(e){g_locaplic = i3GEO.configura.locaplic;};	
+		catch(e){g_locaplic = i3GEO.configura.locaplic;}
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
 		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
 		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
@@ -197,16 +210,16 @@ i3GEO = {
 		//
 		try{
 			var a = i3GEO.util.getScrollerWidth();
-			var diminuiy = diminuiy + a;
+			diminuiy += a;
 		}
 		catch(r){}
 		var menos = 0;
 		if ($i("contemFerramentas"))
-		{var menos = menos + parseInt($i("contemFerramentas").style.width);}
+		{menos += parseInt($i("contemFerramentas").style.width,10);}
 		if ($i("ferramentas"))
-		{var menos = menos + parseInt($i("ferramentas").style.width);}
-		var novow = parseInt(screen.availWidth) - diminuix;
-		var novoh = parseInt(screen.availHeight) - diminuiy;
+		{menos += parseInt($i("ferramentas").style.width,10);}
+		var novow = parseInt(screen.availWidth,10) - diminuix;
+		var novoh = parseInt(screen.availHeight,10) - diminuiy;
 		if (window.top==window.self){//nao se aplica em iframe		
 			window.resizeTo(screen.availWidth,screen.availHeight);
 			window.moveTo(0,0);
@@ -218,7 +231,7 @@ i3GEO = {
 				var novoh = 600;
 			}
 		}
-		catch(e){var e = "";}
+		catch(e){}
 		document.body.style.width = novow - diminuix;
 		document.body.style.height = novoh;
 		var w = novow - menos - diminuix;
@@ -227,18 +240,18 @@ i3GEO = {
 		if (temp){
 			if(temp.style){
 				if (temp.style.width){
-					var w = parseInt(temp.style.width);
-					var h = parseInt(temp.style.width);
+					var w = parseInt(temp.style.width,10);
+					var h = parseInt(temp.style.width,10);
 				}
 				if (temp.style.height)
-				{var h = parseInt(temp.style.height);}
+				{var h = parseInt(temp.style.height,10);}
 			}
 		}
 		if($i("contemImg")){
 			$i("contemImg").style.height=h + "px";
 			$i("contemImg").style.width=w + "px";
 		}
-		i3GEO.interface.cria(w,h);
+		i3GEO.Interface.cria(w,h);
 		i3GEO.parametros = {
 			mapexten: "",
 			mapscale: "",
@@ -265,7 +278,7 @@ i3GEO = {
 		};
 		if(w < 550){
 			var i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
-			if(i){i.style.display = "none"};
+			if(i){i.style.display = "none";}
 		}
 	},
 	/*
@@ -282,13 +295,16 @@ i3GEO = {
 	A inicialização é baseada em <i3GEO.php.inicia> cujo retorno é utilizado para definir a
 	variável <i3GEO.parametros>
 	
-	Após a inicialização é executado <i3GEO.interface.inicia>
+	Após a inicialização é executado <i3GEO.Interface.inicia>
 	*/
 	inicia:function(){
 		if(typeof("i3GEOmantemCompatibilidade") == 'function')
-		i3GEOmantemCompatibilidade();
+		{i3GEOmantemCompatibilidade();}
 		var montaMapa = function(retorno){
-			if(retorno == ""){alert("Ocorreu um erro no mapa - montaMapa");retorno = {data:{erro: "erro"}};}
+			if(retorno === ""){
+				alert("Ocorreu um erro no mapa - montaMapa");
+				retorno = {data:{erro: "erro"}};
+			}
 			if(retorno.data.erro){
 				i3GEO.janela.fechaAguarde("montaMapa");
 				document.body.style.backgroundColor="white";
@@ -304,13 +320,13 @@ i3GEO = {
 					var titulo = "";
 					eval(retorno.data.variaveis);
 					try{
-						if (titulo != "")
+						if (titulo !== "")
 						{top.document.title = titulo;}
 					}
 					catch(e){var e = "";}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
 					i3GEO.parametros.mapexten= mapexten;
-					i3GEO.parametros.mapscale= parseInt(mapscale);
+					i3GEO.parametros.mapscale= parseInt(mapscale,10);
 					i3GEO.parametros.mapres= mapres;
 					i3GEO.parametros.pixelsize= g_celula;
 					i3GEO.parametros.mapfile= mapfile;
@@ -340,7 +356,7 @@ i3GEO = {
 					i3GEO.gadgets.mostraBuscaRapida();
 					i3GEO.guias.cria();
 					if($i("arvoreAdicionaTema"))
-					i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");
+					{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
 					
 					if($i("mst")){$i("mst").style.display="block";}
 					i3GEO.atualiza(retorno);
@@ -349,19 +365,19 @@ i3GEO = {
 					//se não for feito esse cálculo, o mapa fica ajustado à esquerda
 					//			
 					var temp = 0;
-					if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width);}
-					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width);}
+					if ($i("contemFerramentas")){temp = temp + parseInt($i("contemFerramentas").style.width,10);}
+					if ($i("ferramentas")){temp = temp + parseInt($i("ferramentas").style.width,10);}
 					if($i("mst"))
 					{$i("mst").style.width=i3GEO.parametros.w + temp + "px";}
 					if (i3GEO.configura.entorno == "sim"){
-						i3GEO.configura.entorno == "nao";
+						i3GEO.configura.entorno = "nao";
 						i3GEO.navega.entorno.ativaDesativa();
 					}
 					i3GEO.navega.autoRedesenho.ativa();
 					if ($i("i3geo_escalanum")){$i("i3geo_escalanum").value = i3GEO.parametros.mapscale;}
 					if ((i3GEO.parametros.geoip == "nao") && ($i("ondeestou")))
 					{$i("ondeestou").style.display="none";}
-					i3GEO.interface.inicia();
+					i3GEO.Interface.inicia();
 				}
 				else
 				{alert("Erro. Impossivel criar o mapa "+retorno.data);return;}
@@ -374,11 +390,11 @@ i3GEO = {
 				if (i3GEO.util.pegaCookie("g_janelaMen")){
 					var abreJM = i3GEO.util.pegaCookie("g_janelaMen");
 					if(abreJM == "sim")
-					i3GEO.configura.iniciaJanelaMensagens = true;
+					{i3GEO.configura.iniciaJanelaMensagens = true;}
 					else
-					i3GEO.configura.iniciaJanelaMensagens = false;
+					{i3GEO.configura.iniciaJanelaMensagens = false;}
 				}
-				if(i3GEO.configura.iniciaJanelaMensagens == true)
+				if(i3GEO.configura.iniciaJanelaMensagens === true)
 				{i3GEO.ajuda.abreJanela();}		
 				i3GEO.janela.fechaAguarde("montaMapa");
 				if (i3GEO.configura.liberaGuias == "sim"){i3GEO.guias.libera();}
@@ -389,13 +405,13 @@ i3GEO = {
 		{document.body.id = "i3geo";}
 		$i("i3geo").className = "yui-skin-sam";
 		if($i("mst"))
-		$i("mst").style.visibility ="hidden";
+		{$i("mst").style.visibility ="hidden";}
 		//
 		//se g_sid="", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa
 		//essa operação deve ser assíncrona
 		//
-		if(i3GEO.configura.sid==""){
+		if(i3GEO.configura.sid===""){
 			var mashup = function (retorno){
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia();
@@ -418,7 +434,7 @@ i3GEO = {
 	verifica a integridade do mapa em uso (arquivo mapfile)
 	
 	O processo executa também a função de atualização específica da interface atual em uso, veja
-	<i3GEO.interface.redesenha>
+	<i3GEO.Interface.redesenha>
 	
 	Os seguintes gadgets são processados
 	
@@ -435,15 +451,17 @@ i3GEO = {
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
+		if(i3GEO.contadorAtualiza > 1){i3GEO.contadorAtualiza--;return;}
+		if(i3GEO.contadorAtualiza > 0){i3GEO.contadorAtualiza--;}
 		var corpoMapa = function(){
 			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
 		};
-		if(arguments.length == 0){
+		if(arguments.length === 0){
 			corpoMapa.call();
 			return;
 		}
-		if(retorno == ""){
+		if(retorno === ""){
 			corpoMapa.call();
 			return;
 		}
@@ -459,7 +477,7 @@ i3GEO = {
 				i3GEO.mapa.recupera.inicia();return;
 			}
 			else
-			if(retorno.data == "ok" || retorno.data == ""){corpoMapa.call();return;}
+			if(retorno.data == "ok" || retorno.data === ""){corpoMapa.call();return;}
 		}
 		catch(e){}
 		var erro = function(){
@@ -475,9 +493,9 @@ i3GEO = {
 		};
 		try{eval(retorno.data.variaveis);}
 		catch(e){erro.call();return;}
-		if(arguments.length == 0 || retorno == "" || retorno.data.variaveis == undefined){erro.call();return;}
+		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined){erro.call();return;}
 		else{	
-			if(arguments.length == 0){return;}
+			if(arguments.length === 0){return;}
 			i3GEO.mapa.verifica(retorno);
 			var tempo = "";
 			if(i3GEO.desenho.richdraw)
@@ -492,7 +510,7 @@ i3GEO = {
 			try{
 				i3GEO.arvoreDeCamadas.atualiza(retorno.data.temas);
 				if (i3GEO.parametros.mapscale != mapscale)
-				i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);
+				{i3GEO.arvoreDeCamadas.atualizaFarol(mapscale);}
 				i3GEO.parametros.mapexten = mapexten;
 				i3GEO.parametros.mapscale = mapscale;
 				i3GEO.parametros.mapres = mapres;
@@ -500,7 +518,7 @@ i3GEO = {
 				i3GEO.parametros.mapimagem = mapimagem;
 			}
 			catch(e){}
-			i3GEO.interface.redesenha();
+			i3GEO.Interface.redesenha();
 			//caso esteja na função de identificação
 			if($i("i3GEOidentificalistaTemas")){g_tipoacao = "identifica";g_operacao='identifica';}
 			else
@@ -524,5 +542,5 @@ Classe: i3GEOF
 
 Esta classe recebe os métodos sob demanda por meio da injeção de javascripts por meio de script tag.
 */
-i3GEOF = new Array();
+i3GEOF = [];
 //YAHOO.log("carregou classe i3geo", "Classes i3geo");

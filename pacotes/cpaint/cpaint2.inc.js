@@ -370,7 +370,6 @@ function cpaint_call() {
   * @var      stack_id
   */
   var stack_id = arguments[0];
-  
   /**
   * sets the client callback function.
   *
@@ -621,6 +620,7 @@ function cpaint_call() {
   this.test_ajax_capability = function() {
     return get_connection_object();
   }
+  
   
   /**
   * creates a new connection object.

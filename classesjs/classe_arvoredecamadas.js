@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.arvoreDeCamadas
@@ -417,6 +417,7 @@ i3GEO.arvoreDeCamadas = {
                 				if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA == true){
                 					i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1"));
                 					var tema = (this.getEl()).id.split("arrastar_")[1];
+									i3GEO.contadorAtualiza++;
 									i3GEO.php.excluitema(i3GEO.atualiza,tema);							
 									i3GEO.temaAtivo = "";
 								}
@@ -430,6 +431,7 @@ i3GEO.arvoreDeCamadas = {
 	   	    	         			destEl.appendChild(this.getEl()); 
 	 								var els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 	 								var lista = els[2].join(",");
+	 								i3GEO.contadorAtualiza++;
 	 								i3GEO.php.reordenatemas(i3GEO.atualiza,lista);
 	 							}
 							}
@@ -496,7 +498,7 @@ i3GEO.arvoreDeCamadas = {
 			tnome += "&nbsp;<img class='desce' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t15")+"' onclick='i3GEO.tema.desce(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t16")+"','desce')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 			tnome += "&nbsp;<img class='fonte' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("a9")+"' onclick='i3GEO.tema.fonte(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("a9")+"','fonte')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";
 			//a operação de zoom para o tema não funciona na interface flamingo
-			if( (ltema.zoomtema == "sim") && (i3GEO.interface.ATUAL != "flamingo"))
+			if( (ltema.zoomtema == "sim") && (i3GEO.Interface.ATUAL != "flamingo"))
 			{tnome += "&nbsp;<img class='extent' src='"+i3GEO.util.$im("branco.gif") +"' title='"+$trad("t17")+"' onclick='i3GEO.tema.zoom(\""+ltema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t18")+"','')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" \>";}
 			var d = {html:tnome};
 			var iconesNode = new YAHOO.widget.HTMLNode(d, node, false,true);
@@ -553,10 +555,10 @@ i3GEO.arvoreDeCamadas = {
 		n.isLeaf = true;
 
 		if ((ltema.type < 3) && (ltema.connectiontype != 7)){
-			if(i3GEO.interface.ATUAL != "flamingo")
+			if(i3GEO.Interface.ATUAL != "flamingo")
 			{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t22"),$trad("t23"),'i3GEO.tema.dialogo.procuraratrib(\"'+ltema.name+'\")',node);}
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t24"),$trad("t25"),'i3GEO.tema.dialogo.toponimia(\"'+ltema.name+'\")',node);
-			if(i3GEO.interface.ATUAL == "padrao"){
+			if(i3GEO.Interface.ATUAL == "padrao"){
 				i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t26"),$trad("t27"),'i3GEO.tema.dialogo.etiquetas(\"'+ltema.name+'\")',node);
 			}
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t28"),$trad("t29"),'i3GEO.tema.dialogo.filtro(\"'+ltema.name+'\")',node);
@@ -568,7 +570,7 @@ i3GEO.arvoreDeCamadas = {
 		if (ltema.type < 4){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t32"),$trad("t33"),'i3GEO.tema.dialogo.editaLegenda(\"'+ltema.name+'\")',node);
 		}
-		if(i3GEO.interface.ATUAL == "padrao"){
+		if(i3GEO.Interface.ATUAL == "padrao"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
 		}
 		
@@ -659,7 +661,7 @@ i3GEO.arvoreDeCamadas = {
 			//
 			var elementos = document.getElementById(idtema+"verdiv").getElementsByTagName("input");
 			var nelementos = elementos.length;
-			var inputs = new Array();
+			var inputs = [];
 			var i = 0;
 			if (nelementos > 0){
 				do{
@@ -835,9 +837,9 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	listaLigadosDesligados: function(){
 		var nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo","tema");
-		var ligados = new Array();
-		var desligados = new Array();
-		var todos = new Array();
+		var ligados = [];
+		var desligados = [];
+		var todos = [];
 		var n = nos.length;
 		var i=0;
 		do{

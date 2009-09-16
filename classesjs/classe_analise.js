@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.analise
@@ -162,7 +162,7 @@ i3GEO.analise = {
 		São registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
-			pontosdistobj = new Array();
+			pontosdistobj = [];
 			i3GEO.analise.medeDistancia.criaJanela();
 			if (g_tipoacao != "mede"){
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.analise.medeDistancia.clique()") < 0)
@@ -211,7 +211,7 @@ i3GEO.analise = {
 			YAHOO.namespace("janelaDocamede.xp");
 			YAHOO.janelaDocamede.xp.panel = new YAHOO.widget.Panel("mostradistancia", {width:300,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocamede.xp.panel.render();
-			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocamede.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 			YAHOO.util.Event.addListener(YAHOO.janelaDocamede.xp.panel.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
 		},
@@ -340,7 +340,7 @@ i3GEO.analise = {
 						i3GEO.desenho.richdraw.lineWidth = "2px";
 					}
 				};
-				if(i3GEO.interface.ATUAL == "padrao"){
+				if(i3GEO.Interface.ATUAL == "padrao"){
 					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 					i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
 				}
@@ -369,7 +369,7 @@ i3GEO.analise = {
 			YAHOO.namespace("janelaDocaarea.xp");
 			YAHOO.janelaDocaarea.xp.panel = new YAHOO.widget.Panel("mostraarea", {width:220,fixedcenter: false, constraintoviewport: true, underlay:"none", close:true, visible:true, draggable:true, modal:false } );
 			YAHOO.janelaDocaarea.xp.panel.render();
-			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			var imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
 		},
 		/*

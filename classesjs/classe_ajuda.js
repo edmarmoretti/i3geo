@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.ajuda
@@ -151,8 +151,8 @@ i3GEO.ajuda = {
 			if (!$i("janelaMenTexto")){
 				var nx = "";
 				var ny = "";
-				if($i(i3GEO.interface.IDCORPO)){
-					var pos = YAHOO.util.Dom.getXY($i(i3GEO.interface.IDCORPO));
+				if($i(i3GEO.Interface.IDCORPO)){
+					var pos = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
 					var nx = pos[0] - 267;
 					var ny = i3GEO.parametros.h - 70;
 				}

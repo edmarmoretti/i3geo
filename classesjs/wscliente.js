@@ -51,7 +51,7 @@ for (var i = 0; i < scripts.length; i++) {
 	}
 }
 var allScriptTags = "";
-var jsfiles = new Array()
+var jsfiles = []
 if(typeof(testafuncoes) == 'undefined')
 {jsfiles[0] = "compactados/classe_calculo_compacto.js"}
 if(typeof(cpaint) == 'undefined')
@@ -555,7 +555,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 			$i($i3geo_wscliente.corpo).style.display="block"
 		}
 		aguardeTotal("block");
-		var par = new Array()
+		var par = []
 		if (retorno != "")
 		{
 			var pars = retorno.split("|")

@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.arvoreDeTemas
@@ -164,7 +164,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{Array}
 	*/
-	IDSMENUS: new Array(),
+	IDSMENUS: [],
 	/*
 	Propriedade: RETORNAGUIA
 	
@@ -393,7 +393,7 @@ i3GEO.arvoreDeTemas = {
 			if(i3GEO.arvoreDeTemas.IDSMENUS.length == 0)
 				i3GEO.arvoreDeTemas.MENUS = retorno.data;
 			else{
-				i3GEO.arvoreDeTemas.MENUS = new Array();
+				i3GEO.arvoreDeTemas.MENUS = [];
 				var c = retorno.data.length;
 				var m = i3GEO.arvoreDeTemas.IDSMENUS.length;
 				for (var i=0, j=c; i<j; i++){
@@ -1107,7 +1107,7 @@ i3GEO.arvoreDeTemas = {
 		var inputs = o.getElementsByTagName("input");
 		var n = inputs.length;
 		var i=0;
-		var lista = new Array();
+		var lista = [];
 		do{
 			if(inputs[i].checked == true)
 			{lista.push(inputs[i].value);}

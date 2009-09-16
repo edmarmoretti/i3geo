@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.desenho
@@ -75,14 +75,14 @@ i3GEO.desenho = {
 	*/
 	criaContainerRichdraw: function(){
 		pontosdistobj = {
-			xpt: new Array(),
-			ypt: new Array(),
-			dist: new Array(),
-			xtela: new Array(),
-			ytela: new Array(),
-			ximg: new Array(),
-			yimg: new Array(),
-			linhas: new Array()
+			xpt: [],
+			ypt: [],
+			dist: [],
+			xtela: [],
+			ytela: [],
+			ximg: [],
+			yimg: [],
+			linhas: []
 		};
 		try{
 			var divgeo = i3GEO.desenho.criaDivContainer();
@@ -137,7 +137,7 @@ i3GEO.desenho = {
 			//pega a posição da imagem do mapa para posicionar corretamente o container
 			//
 			var pos = [0,0];
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
 			//cria o container
 			//
@@ -173,8 +173,8 @@ i3GEO.desenho = {
 	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/	
 	aplica: function(tipo,objeto,n,texto){
-		if(i3GEO.desenho.richdraw && $i(i3GEO.interface.IDCORPO)){
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.interface.IDCORPO));
+		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
 			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 			//

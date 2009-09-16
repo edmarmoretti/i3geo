@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.guias
@@ -196,7 +196,7 @@ i3GEO.guias = {
 					}
 				}
 				if (tituloguia != ""){
-					eval("i3GEO.guias.CONFIGURA.guia"+g+"=new Array()");
+					eval("i3GEO.guias.CONFIGURA.guia"+g+"=[]");
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".titulo = '"+tituloguia+"'");
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".id = 'guia"+g+"'");
 					eval("i3GEO.guias.CONFIGURA.guia"+g+".idconteudo = 'guia"+g+"obj'");
@@ -337,7 +337,7 @@ i3GEO.guias = {
 	*/
 	libera: function(){
 		if (!$i("conteudojanelaguias")){
-			$i(i3GEO.interface.IDCORPO).style.left = "0px";
+			$i(i3GEO.Interface.IDCORPO).style.left = "0px";
 			if($i(i3GEO.guias.IDGUIAS)){$i(i3GEO.guias.IDGUIAS).style.display="none";}
 			var i = $i("contemFerramentas");
 			if(i)

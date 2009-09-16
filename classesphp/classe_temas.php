@@ -706,7 +706,7 @@ $nome - nome que será dado a geometria
 			$valitem = array();
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);				
+			$shape = $this->layer->getshape(-1, $shp_index);		
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
@@ -729,6 +729,7 @@ $nome - nome que será dado a geometria
 				$registros[] = array("id"=>$i,"wkt"=>$wktgeo,"valores"=>$valitem,"imagem"=>$im["url"]);
 				$abriu = $this->layer->open();
 			}
+			else{return "erro";}
 		}
 		$fechou = $this->layer->close();
 		if (count($registros) > 0)

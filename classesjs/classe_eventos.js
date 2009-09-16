@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 objposicaocursor = {
 	ddx: "",
@@ -105,7 +105,7 @@ i3GEO.eventos = {
 	Default:
 	{[]}
 	*/
-	MOUSEMOVE: new Array(),
+	MOUSEMOVE: [],
 	/*
 	Propriedade: MOUSEDOWN
 
@@ -117,7 +117,7 @@ i3GEO.eventos = {
 	Default:
 	{[]}
 	*/
-	MOUSEDOWN: new Array(),
+	MOUSEDOWN: [],
 	/*
 	Propriedade: MOUSEUP
 
@@ -129,7 +129,7 @@ i3GEO.eventos = {
 	Default:
 	{[]}
 	*/
-	MOUSEUP: new Array(),
+	MOUSEUP: [],
 	/*
 	Propriedade: MOUSECLIQUE
 
@@ -165,6 +165,7 @@ i3GEO.eventos = {
 		try
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
+		if(objposicaocursor.dentroDomapa == false){return;}
 		try{
 			if(objposicaocursor.imgy == ""){
 				objposicaocursor.imgy = 1;
@@ -313,7 +314,7 @@ i3GEO.eventos = {
 	*/
 	posicaoMouseMapa: function(e){
 		//
-		//os eventos da interface googlemaps são definidos em i3GEO.interface
+		//os eventos da interface googlemaps são definidos em i3GEO.Interface
 		//se a interface for googlemaps ou openlayers, os eventos são controlados
 		//pelas respectivas apis
 		//caso contrário, o i3geo irá controlar os cálculos
@@ -327,7 +328,7 @@ i3GEO.eventos = {
 		}
 		catch(erro){}
 		if (container != "divGeometriasTemp"){
-			if((i3GEO.interface.ATUAL == "googlemaps") || (i3GEO.interface.ATUAL == "openlayers"))
+			if((i3GEO.Interface.ATUAL == "googlemaps") || (i3GEO.Interface.ATUAL == "openlayers"))
 			{return;}
 		}
 		if (!e) var e = window.event;
@@ -337,8 +338,8 @@ i3GEO.eventos = {
 		if (e.target)
 		{var targ = e.target;}
 		else if (e.srcElement) var targ = e.srcElement;
-		if(targ.id == "" && $i(i3GEO.interface.IDMAPA))
-		{var targ = $i(i3GEO.interface.IDMAPA);}
+		if(targ.id == "" && $i(i3GEO.Interface.IDMAPA))
+		{var targ = $i(i3GEO.Interface.IDMAPA);}
 		//
 		//se estiver no modo pan, o movimento deve ser obtido do elemento
 		//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
@@ -409,7 +410,8 @@ i3GEO.eventos = {
 			imgx: xfig,
 			imgy: yfig,
 			refx: xreffig,
-			refy: yreffig
+			refy: yreffig,
+			dentroDomapa: true
 		};
 	},
 	/*
@@ -427,6 +429,7 @@ i3GEO.eventos = {
 	*/
 	ativa: function(docMapa){
 		docMapa.onmouseover = function(){
+			objposicaocursor.dentroDomapa = true;
 			this.onmousemove=function(exy){
 				i3GEO.eventos.posicaoMouseMapa(exy);
 				try{
@@ -442,6 +445,7 @@ i3GEO.eventos = {
 			};
 		};
 		docMapa.onmouseout = function(){
+			objposicaocursor.dentroDomapa = true;
 			try
 			{objmapaparado="parar";}
 			catch(e){var e = "";}

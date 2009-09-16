@@ -24,7 +24,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.tema
@@ -52,6 +52,7 @@ i3GEO.tema = {
 		while (p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.temaAtivo = "";
 	},
@@ -86,6 +87,7 @@ i3GEO.tema = {
 	*/
 	sobe: function(tema){
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.sobetema(i3GEO.atualiza,tema);
 	},
 	/*
@@ -99,6 +101,7 @@ i3GEO.tema = {
 	*/
 	desce: function(tema){
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.descetema(i3GEO.atualiza,tema);
 	},
 	/*
@@ -112,6 +115,7 @@ i3GEO.tema = {
 	*/
 	zoom: function(tema){
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.zoomtema(i3GEO.atualiza,tema);
 	},
 	/*
@@ -125,6 +129,7 @@ i3GEO.tema = {
 	*/
 	zoomsel: function(tema){
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.zoomsel(i3GEO.atualiza,tema);
 	},
 	/*
@@ -139,6 +144,7 @@ i3GEO.tema = {
 	limpasel: function(tema){
 		g_operacao = "limpasel";
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.contadorAtualiza++;
 		i3GEO.php.limpasel(i3GEO.atualiza,tema);
 	},
 	/*
@@ -159,6 +165,7 @@ i3GEO.tema = {
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.contadorAtualiza++;
 			i3GEO.php.mudatransp(i3GEO.atualiza,idtema,valor);
 		}
 		else
@@ -181,6 +188,7 @@ i3GEO.tema = {
 		{alert("Ocorreu um erro");}
 		if (valor != ""){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.contadorAtualiza++;
 			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
 		}
 		else

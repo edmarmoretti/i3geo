@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Propriedade: cpJSON
@@ -481,7 +481,7 @@ i3GEO.php = {
 	pan: function(funcao,escala,tipo,x,y){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=pan&escala="+escala+"&tipo="+tipo+"&x="+x+"&y="+y+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"pan",funcao);	
+		cpJSON.call(p,"pan",funcao);
 	},
 	/*
 	Function: aproxima
@@ -549,15 +549,15 @@ i3GEO.php = {
 		}
 		if(ext == 'undefined'){alert("extensao nao definida");return;}
 		var retorno = function(retorno){
-			if(i3GEO.interface.ATUAL == "googlemaps"){
-				i3GEO.interface.googlemaps.zoom2extent(ext);
+			if(i3GEO.Interface.ATUAL == "googlemaps"){
+				i3GEO.Interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.interface.ATUAL == "openlayers"){
-				i3GEO.interface.openlayers.zoom2ext(ext);
+			if(i3GEO.Interface.ATUAL == "openlayers"){
+				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
 			}
-			if(i3GEO.interface.ATUAL == "padrao"){funcao.call();}
+			if(i3GEO.Interface.ATUAL == "padrao"){funcao.call();}
 		};
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	
@@ -677,17 +677,17 @@ i3GEO.php = {
 	zoomtema: function(funcao,tema){
 		i3GEO.php.verifica();
 		var retorno = function(retorno){
-			if(i3GEO.interface.ATUAL == "googlemaps"){
+			if(i3GEO.Interface.ATUAL == "googlemaps"){
 				eval(retorno.data.variaveis);
-				i3GEO.interface.googlemaps.zoom2extent(mapexten);
+				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL == "openlayers"){
 				eval(retorno.data.variaveis);
-				i3GEO.interface.openlayers.zoom2ext(mapexten);
+				i3GEO.Interface.openlayers.zoom2ext(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.interface.ATUAL == "padrao")
+			if(i3GEO.Interface.ATUAL == "padrao")
 			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
@@ -704,17 +704,17 @@ i3GEO.php = {
 	zoomsel: function(funcao,tema){
 		i3GEO.php.verifica();
 		var retorno = function(retorno){
-			if(i3GEO.interface.ATUAL == "googlemaps"){
+			if(i3GEO.Interface.ATUAL == "googlemaps"){
 				eval(retorno.data.variaveis);
-				i3GEO.interface.googlemaps.zoom2extent(mapexten);
+				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL == "openlayers"){
 				eval(retorno.data.variaveis);
-				i3GEO.interface.openlayers.zoom2ext(mapexten);
+				i3GEO.Interface.openlayers.zoom2ext(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.interface.ATUAL == "padrao")
+			if(i3GEO.Interface.ATUAL == "padrao")
 			{funcao.call();}
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
@@ -931,7 +931,7 @@ i3GEO.php = {
 	*/
 	corpo: function(funcao,tipoimagem){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.interface.ATUAL;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
 		cpJSON.call(p,"corpo",funcao);	
 	},
 	/*
@@ -956,7 +956,7 @@ i3GEO.php = {
 	*/
 	inicia: function(funcao,embedLegenda,w,h){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.interface.ATUAL;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=inicia&embedLegenda="+embedLegenda+"&w="+w+"&h="+h+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
 		cpJSON.call(p,"iniciaMapa",funcao);	
 	},
 	/*

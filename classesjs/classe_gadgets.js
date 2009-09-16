@@ -26,7 +26,7 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 /*
 Classe: i3GEO.gadgets
@@ -235,8 +235,8 @@ i3GEO.gadgets = {
 						}
 						catch(m){};
 					};
-					if($i(i3GEO.interface.IDMAPA))
-					{YAHOO.util.Event.addListener($i(i3GEO.interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
+					if($i(i3GEO.Interface.IDMAPA))
+					{YAHOO.util.Event.addListener($i(i3GEO.Interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
 				}
 			}
 		}
@@ -264,7 +264,7 @@ i3GEO.gadgets = {
 			if(!$i("i3geo_urlkml")){
 				var i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
 				var ins = "<table><tr><td>Kml: "+i;
-				var temp = 'i3GEO.interface.googlemaps.adicionaKml(true);';
+				var temp = 'i3GEO.Interface.googlemaps.adicionaKml(true);';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}
@@ -489,7 +489,7 @@ i3GEO.gadgets = {
 					//pega todas as imagens da interface
 					//
 					var imgstemp = retorno.data.arquivos;
-					var imgs = new Array();
+					var imgs = [];
 					var i = imgstemp.length-1;
 					if(i >= 0){
 						do{
@@ -572,7 +572,7 @@ i3GEO.gadgets = {
 		Tipo:
 		{Array}
 		*/
-		quadrosfilme: new Array(),
+		quadrosfilme: [],
 		/*
 		Variavel: quadroatual
 		
@@ -602,7 +602,7 @@ i3GEO.gadgets = {
 				q += "onmouseover='i3GEO.gadgets.quadros.trocaMapa(this.id);i3GEO.ajuda.mostraJanela(\"Clique para aplicar a extensão geográfica do quadro ao mapa\")' ";
 				//q += "onmouseout="+ saida; //\"javascript:i3GEO.ajuda.mostraJanela('')\" ";
 				q += "onclick='i3GEO.gadgets.quadros.zoom(this.id)' /></td>";
-				i3GEO.gadgets.quadros.quadrosfilme[i] = new Array();
+				i3GEO.gadgets.quadros.quadrosfilme[i] = [];
 			}
 			q += "</tr></table>";
 			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml)){

@@ -230,7 +230,7 @@ function i3GEOmantemCompatibilidade(){
 //
 //
 if(typeof(i3GEO) == 'undefined'){
-	i3GEO = new Array();
+	i3GEO = [];
 }
 cpObj = new cpaint();
 cpObj.set_async("true");
@@ -1256,14 +1256,14 @@ function incluir(path)
 */
 function pontosdist()
 {
-	this.xpt = new Array();
-	this.ypt = new Array();
-	this.dist = new Array();
-	this.xtela = new Array();
-	this.ytela = new Array();
-	this.ximg = new Array();
-	this.yimg = new Array();
-	this.linhas = new Array();
+	this.xpt = [];
+	this.ypt = [];
+	this.dist = [];
+	this.xtela = [];
+	this.ytela = [];
+	this.ximg = [];
+	this.yimg = [];
+	this.linhas = [];
 }
 /*
  mudaiconf (depreciado)
