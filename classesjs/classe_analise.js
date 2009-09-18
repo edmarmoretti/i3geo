@@ -251,14 +251,14 @@ i3GEO.analise = {
 				}
 				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 				if (n > 0){
-					var d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+					var d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy),10);
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-					if($i("pararraios") && $i("pararraios").checked == true ){
+					if($i("pararraios") && $i("pararraios").checked === true ){
 						i3GEO.desenho.aplica("insereCirculo","",n);
 						if(navm)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 					}
-					if($i("parartextos") && $i("parartextos").checked == true ){
+					if($i("parartextos") && $i("parartextos").checked === true ){
 						i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 					}
 				}
@@ -273,15 +273,15 @@ i3GEO.analise = {
 		movimento: function(){
 			if (g_tipoacao == "mede"){
 				if($i("mostradistancia"))
-				$i("mostradistancia").style.display="block";
+				{$i("mostradistancia").style.display="block";}
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 					var r = i3GEO.calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					var r = i3GEO.calculo.dd2dms(r,r);
-					var r = r[0];
+					r = i3GEO.calculo.dd2dms(r,r);
+					r = r[0];
 					if (i3GEO.parametros.mapscale > 500000)
-					{var d = parseInt(d);}
+					{d = parseInt(d,10);}
 					else{
 						d= d + "";
 						d = d.split(".");
@@ -290,8 +290,9 @@ i3GEO.analise = {
 						d = d * 1;
 					}
 					var da = d + pontosdistobj.dist[n-1];
-					if ($i("mostradistancia_calculo")){
-						$i("mostradistancia_calculo").innerHTML = " Dist acum.= "+da+" atual= "+d+" km <br> Direção (DMS)= "+r;
+					var mostra = $i("mostradistancia_calculo");
+					if (mostra){
+						mostra.innerHTML = " Dist acum.= "+da+" atual= "+d+" km <br> Direção (DMS)= "+r;
 					}
 					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
@@ -400,7 +401,7 @@ i3GEO.analise = {
 				pontosdistobj.yimg[n] = objposicaocursor.imgy;
 				pontosdistobj.dist[n] = 0;
 				//inclui a linha para ligar com o ponto inicial
-				if (n == 0){
+				if (n === 0){
 					try	{
 						if (navn)
 						{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n]-1,pontosdistobj.yimg[n]-1,pontosdistobj.ximg[0]-1,pontosdistobj.yimg[0]-1);}
@@ -442,7 +443,7 @@ i3GEO.analise = {
 					// 
 					var d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 					if (i3GEO.parametros.mapscale > 500000)
-					{var d = parseInt(d);}
+					{d = parseInt(d,10);}
 					else{
 						d= d + "";
 						d = d.split(".");
