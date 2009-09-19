@@ -64,8 +64,8 @@ i3GEO.calculo = {
 				cd = cd * -1;
 				sinal = 'negativo';
 			}
-			spm = cs / 3600;
-			mpg = cm / 60;
+			var spm = cs / 3600;
+			var mpg = cm / 60;
 			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
 			if (sinal == 'negativo')
 			{dd = dd * -1;}
@@ -97,35 +97,36 @@ i3GEO.calculo = {
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
+			var pos;
 			if(i3GEO.Interface.ATUAL == "googlemaps"){
-				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				var latlng = new GLatLng(vy,vx);
 				var xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
-				var xy = [];
+				xy = [];
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
 			if(i3GEO.Interface.ATUAL == "openlayers"){
-				var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				var xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
+				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+				xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
 				return [(xy.x)+pos[0],(xy.y)+pos[1]];
 			}
 			if(arguments.length == 3){
-				var ext = i3GEO.parametros.mapexten;
-				var cellsize = i3GEO.parametros.pixelsize;
+				ext = i3GEO.parametros.mapexten;
+				cellsize = i3GEO.parametros.pixelsize;
 			}
 			if(arguments.length == 4){
-				var cellsize = i3GEO.parametros.pixelsize;
+				cellsize = i3GEO.parametros.pixelsize;
 			}
 
 			if(!docmapa)
-			{var docmapa = window.document;}
+			{docmapa = window.document;}
 			var dc = docmapa;	
-			var pos = i3GEO.util.pegaPosicaoObjeto(dc);
+			pos = i3GEO.util.pegaPosicaoObjeto(dc);
 			var imgext = ext; //i3GEO.parametros.mapexten;
-			var imgext = imgext.split(" ");
+			imgext = imgext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
-			c = cellsize * 1;
+			var c = cellsize * 1;
 			//var xy = [];
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
@@ -147,59 +148,61 @@ i3GEO.calculo = {
 	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
 	*/
 	dd2dms: function(x,y){
+		var restod,mx,sx,mm,restos,my,sy;
 		var m = 0;
 		var s = 0;
-		var dx = parseInt(x);
+		var dx = parseInt(x,10);
 		if (dx > 0)
-		{var restod = x - dx;}
+		{restod = x - dx;}
 		if (dx < 0)
 		{restod = (x * -1) - (dx * -1);}
 		dx = dx;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var mx = m;
-			if (restos != 0){
-				var s = restos * 60;
-				var s = (s+"_").substring(0,5);
-				var sx = s;
+		if (restod !== 0){
+			mm = restod * 60;
+			m = parseInt(restod * 60,10);
+			restos = mm - m;
+			mx = m;
+			if (restos !== 0){
+				s = restos * 60;
+				s = (s+"_").substring(0,5);
+				sx = s;
 			}
-			else  { s = "00.00" }
+			else{s = "00.00";}
 		}
 		else{
-			var mx = "00";
-			var sx = "00.00";
+			mx = "00";
+			sx = "00.00";
 		}
 		if (m.length == 2){m = "0"+m+"";}
 		if (s*1 < 10){s = "0"+s;}
 		var xv = dx+" "+mx+" "+sx;
-		var m = 0;
-		var s = 0;
-		var dy = parseInt(y);
+		m = 0;
+		s = 0;
+		var dy = parseInt(y,10);
 		if (dy > 0)
-		{var restod = y - dy;}
+		{restod = y - dy;}
 		if (dy < 0)
-		{var restod = (y * -1) - (dy * -1);}
+		{restod = (y * -1) - (dy * -1);}
 		dy = dy;
-		if (restod != 0){
-			var mm = restod * 60;
-			var m = parseInt(restod * 60);
-			var restos = mm - m;
-			var my = m;
-			if (restos != 0){
-				var s = restos * 60;
+		if (restod !== 0){
+			mm = restod * 60;
+			m = parseInt(restod * 60,10);
+			restos = mm - m;
+			my = m;
+			if (restos !== 0){
+				s = restos * 60;
 				s = (s+"_").substring(0,5);
-				var sy = s;
+				sy = s;
 			}
-			else  { var s = "00.00";}
+			else  { s = "00.00";}
 		}
 		else{
-			var my = "00";
-			var sy = "00.00";
+			my = "00";
+			sy = "00.00";
 		}
 		if (m.length == 2){m = "0"+m;}
-		if (s*1 < 10){s = "0"+s;}
+		if (s*1 < 10)
+		{s = "0"+s;}
 		var yv = dy+" "+my+" "+sy;
 		var res = [];
 		res[0] = xv;
@@ -271,6 +274,7 @@ i3GEO.calculo = {
 	{Numeric}
 	*/
 	area: function(pontos,pixel){
+		var $polygon_area;
 		try{
 			if(pontos.xpt.length > 2){
 				var $array_length = pontos.xpt.length;
@@ -278,7 +282,7 @@ i3GEO.calculo = {
 				pontos.ytela.push(pontos.ytela[0]);
 				pontos.xtela.push(pontos.xtela[0]);
 				pontos.ytela.push(pontos.ytela[1]);
-				var $polygon_area = 0;
+				$polygon_area = 0;
 				for (var $i=0;$i <= $array_length;$i++)
 				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
 				$polygon_area = Math.abs($polygon_area) / 2;
@@ -356,8 +360,8 @@ i3GEO.calculo = {
 		var x = Math.cos(lat1)*Math.sin(lat2) -
 		Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
 		var r = Math.atan2(y, x);
-		var r = r  * 180 / Math.PI;
-		var r = r + 360;
+		r = r  * 180 / Math.PI;
+		r = r + 360;
 		return r % 360;
 	},
 	/*
@@ -394,8 +398,10 @@ i3GEO.calculo = {
 		var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );
 		var lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1),Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
 		lon2 = (lon2+Math.PI)%(2*Math.PI) - Math.PI;  // normalise to -180...+180
-		if (isNaN(lat2) || isNaN(lon2)) return null;
-		return new Array((lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI));
+		if (isNaN(lat2) || isNaN(lon2))
+		{return null;}
+		var resultado = [(lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI)];
+		return resultado;
 	},
 	/*
 	Function: rect2ext
@@ -415,36 +421,37 @@ i3GEO.calculo = {
 	{Array} - extensão, xmin, ymin, xmax, ymax
 	*/
 	rect2ext: function(idrect,mapext,pixel){
+		var bx,bxs,xfig,yfig,nx,ny,pix,piy;
 		eval ('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ")");
 		eval ('piy = parseInt(document.getElementById("'+idrect+'").style.' + g_tipotop + ")");
 		if($i(idrect)){
-			var bx = $i(idrect);
-			var bxs = bx.style;
+			bx = $i(idrect);
+			bxs = bx.style;
 		}
 		else
 		{alert("Box nao encontrado");return;}
 		var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-		var xfig0 = parseInt(bxs.width) - pos[0];
-		var yfig0 = parseInt(bxs.height) - pos[1];
-		var xfig = pix + (parseInt(bxs.width)) - pos[0];
-		var yfig = piy + (parseInt(bxs.height)) - pos[1];
+		xfig = pix + (parseInt(bxs.width,10)) - pos[0];
+		yfig = piy + (parseInt(bxs.height,10)) - pos[1];
 		var amext = mapext.split(" ");
 		var dx = ((amext[0] * -1) - (amext[2] * -1)) / -1;
 		var dy = ((amext[1] * 1) - (amext[3] * 1)) / -1;
-		if (dy < 0) dy=dy * -1;
-		var nx = pixel * xfig;
-		var ny = pixel * yfig;
+		if (dy < 0)
+		{dy=dy * -1;}
+		nx = pixel * xfig;
+		ny = pixel * yfig;
 		var x1 = (amext[0] * 1) + nx;
 		var y1 = (amext[3] * 1) - ny;
-		var xfig = pix - pos[0];
-		var yfig = piy - pos[1];
-		if (dy < 0) dy=dy * -1;
-		var nx = pixel * xfig;
-		var ny = pixel * yfig;
+		xfig = pix - pos[0];
+		yfig = piy - pos[1];
+		if (dy < 0)
+		{dy=dy * -1;}
+		nx = pixel * xfig;
+		ny = pixel * yfig;
 		var x2 = (amext[0] * 1) + nx;
 		var y2 = (amext[3] * 1) - ny;
 		var v = x2+" "+y2+" "+x1+" "+y1;
-		var res = new Array(v,x1,y1,x2,y2);
+		var res = [v,x1,y1,x2,y2];
 		return (res);
 	},
 	/*
@@ -488,7 +495,7 @@ i3GEO.calculo = {
 			box.style.left = l + "px";
    			box.style.display=d;
    		}
-		return new Array(w,h,xyMax[1],xyMin[0]);
+		return [w,h,xyMax[1],xyMin[0]];
 	}
 };
 //YAHOO.log("carregou classe calculo", "Classes i3geo");
