@@ -192,73 +192,79 @@ i3GEO.barraDeBotoes = {
 	ativaIcone: function(icone){
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
 		var ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
+		var estilo,temp,ist,cor;
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "padrao"){
-			if(ko >= 0){do{
-				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
-				if (i3GEO.barraDeBotoes.LISTABOTOES[ko].tipo=="dinamico" && temp)
-				{
-					var ist = temp.style;
-					ist.borderWidth="1px";
-					ist.borderColor='white';
-					ist.borderLeftColor='rgb(50,50,50)';
-					ist.borderBottomColor='rgb(50,50,50)';
-				}
-			}while(ko--)}
-			//ativa o icone
-			if($i(icone))
-			{with ($i(icone).style){
-				if(i3GEO.barraDeBotoes.SOICONES == false){
-					borderColor='white';
-					borderWidth="1px";
-				}
-			}}
-		}
-		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
-			if(ko >= 0){do{
-				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
-				if (temp)
-				{
-					var ist = temp.style;
-					ist.borderWidth="1px";
-					ist.borderColor='white';
-				}
-			}while(ko--)}
-			//ativa o icone
-			if($i(icone))
-			{with ($i(icone).style){
-				if(i3GEO.barraDeBotoes.SOICONES == false){
-					borderColor='black';
-					borderWidth="1px";
-				}
-			}}
-		}
-		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja" || i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho" || i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){
-			if(ko >= 0){do{
-				var temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
-				if (temp)
-				{
-					var ist = temp.style;
-					if(i3GEO.barraDeBotoes.SOICONES == false){
+			if(ko >= 0){
+				do{
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+					if (i3GEO.barraDeBotoes.LISTABOTOES[ko].tipo=="dinamico" && temp){
+						ist = temp.style;
 						ist.borderWidth="1px";
 						ist.borderColor='white';
-						ist.backgroundColor='white';
+						ist.borderLeftColor='rgb(50,50,50)';
+						ist.borderBottomColor='rgb(50,50,50)';
 					}
-					else{ist.backgroundColor='';}
-					
 				}
-			}while(ko--)}
-			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja"){var cor = "orange";}
-			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho"){var cor = "red";}
-			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){var cor = "gray";}
+				while(ko--);
+			}
 			//ativa o icone
-			if($i(icone))
-			{with ($i(icone).style){
-				if(i3GEO.barraDeBotoes.SOICONES == false){
-					borderColor='black';
-					borderWidth="1px";
+			if($i(icone)){
+				estilo = $i(icone).style;
+				if(i3GEO.barraDeBotoes.SOICONES === false){
+					estilo.borderColor='white';
+					estilo.borderWidth="1px";
+				}
+			}
+		}
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
+			if(ko >= 0){
+				do{
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+					if (temp){
+						ist = temp.style;
+						ist.borderWidth="1px";
+						ist.borderColor='white';
+					}
+				}
+				while(ko--);
+			}
+			//ativa o icone
+			if($i(icone)){
+				estilo = $i(icone).style;
+				if(i3GEO.barraDeBotoes.SOICONES === false){
+					estilo.borderColor='black';
+					estilo.borderWidth="1px";
+				}
+			}
+		}
+		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja" || i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho" || i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){
+			if(ko >= 0){
+				do{
+					temp = $i(i3GEO.barraDeBotoes.LISTABOTOES[ko].iddiv);
+					if (temp){
+						ist = temp.style;
+						if(i3GEO.barraDeBotoes.SOICONES === false){
+							ist.borderWidth="1px";
+							ist.borderColor='white';
+							ist.backgroundColor='white';
+						}
+						else{ist.backgroundColor='';}
+					}
+				}
+				while(ko--);
+			}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "laranja"){cor = "orange";}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "vermelho"){cor = "red";}
+			if(i3GEO.barraDeBotoes.COMPORTAMENTO == "cinza"){cor = "gray";}
+			//ativa o icone
+			if($i(icone)){
+				estilo = $i(icone).style;
+				if(i3GEO.barraDeBotoes.SOICONES === false){
+					estilo.borderColor='black';
+					estilo.borderWidth="1px";
 				}
 				backgroundColor=cor;
-			}}
+			}
 		}
 	},
 	/*
@@ -275,8 +281,8 @@ i3GEO.barraDeBotoes = {
 	O nome do botao deve estar em LISTABOTOES na propriedade iddiv
 	*/
 	ativaBotoes:function(padrao){
-		if(arguments.length == 0)
-		{var padrao = i3GEO.barraDeBotoes.BOTAOPADRAO;}
+		if(arguments.length === 0)
+		{padrao = i3GEO.barraDeBotoes.BOTAOPADRAO;}
 		i3GEO.barraDeBotoes.BOTAOCLICADO = padrao;
 		var l = i3GEO.barraDeBotoes.LISTABOTOES;
 		var b = l.length-1;
@@ -334,12 +340,13 @@ i3GEO.barraDeBotoes = {
 	y {Numeric} - posição y (pixels) da barra em relação ao mapa
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
+		var numerobotoes,i,temp,elementos,nelementos,e;
 		var wj = "36px";
 		var recuo = "0px";
 		var novoel = document.createElement("div");
 		novoel.id = idconteudonovo;
 		novoel.style.display="block";
-		if(i3GEO.barraDeBotoes.SOICONES == false){
+		if(i3GEO.barraDeBotoes.SOICONES === false){
 			novoel.style.border="1px solid gray";
 			novoel.style.background="white";
 		}
@@ -349,10 +356,10 @@ i3GEO.barraDeBotoes = {
 		}
 		else{
 			if (navm){novoel.style.filter='alpha(opacity=90)';}
-			else{novoel.style.opacity= .85;}
+			else{novoel.style.opacity= 0.85;}
 		}
-		var temp = "";
-		if (barraZoom == true)
+		temp = "";
+		if (barraZoom === true)
 		{temp += i3GEO.navega.barraDeZoom.cria();}
 		temp += '<div id="'+idconteudonovo+'_" style="left:'+recuo+';top:-6px;"  ></div>';
 		novoel.innerHTML = temp;
@@ -364,7 +371,7 @@ i3GEO.barraDeBotoes = {
 				if (navm)
 				{novoel.style.filter='alpha(opacity=90)';}
 				else
-				{novoel.style.opacity= .85;}
+				{novoel.style.opacity = 0.85;}
 			}
 		};
 		novoel.onmouseout = function(){
@@ -385,25 +392,25 @@ i3GEO.barraDeBotoes = {
 			$i(idconteudo).innerHTML = "";
 			//faz o cálculo do número de botões que devem ficar visíveis em função do tamanho da barra
 			if(i3GEO.barraDeBotoes.AUTOALTURA){
-				var elementos = $i(idconteudonovo+"_").getElementsByTagName("img");
+				elementos = $i(idconteudonovo+"_").getElementsByTagName("img");
 				if(elementos[0].id == "sobeferramentas"){
 					try{
-						var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
+						elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
 						var alturadisponivel = i3GEO.parametros.h - 4;
-						var numerobotoes = parseInt(alturadisponivel / 30);
-						var nelementos = elementos.length;
-						var i = 0;
+						numerobotoes = parseInt(alturadisponivel / 30,10);
+						nelementos = elementos.length;
+						i = 0;
 						do{
 							elementos[i].style.display = "none";
-							var i = i + 1;
+							i = i + 1;
 						}
-						while(i < nelementos)
-						var i = 0;
+						while(i < nelementos);
+						i = 0;
 						do{
 							elementos[i].style.display = "inline";
-							var i = i + 1;
+							i = i + 1;
 						}
-						while(i < numerobotoes)
+						while(i < numerobotoes);
 					}catch(e){}
 					//alert(i+" "+numerobotoes)
 					if(i <= numerobotoes){
@@ -414,58 +421,60 @@ i3GEO.barraDeBotoes = {
 			}
 		}
 		YAHOO.namespace("janelaBotoes.xp");
-		if(i3GEO.barraDeBotoes.AUTOALTURA == false || barraZoom == true )
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
+		if(i3GEO.barraDeBotoes.AUTOALTURA === false || barraZoom === true )
+		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
 		else
-			YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );
+		{YAHOO.janelaBotoes.xp.panel = new YAHOO.widget.Panel(idconteudonovo, {height:i3GEO.parametros.h - 4,width:wj, fixedcenter: false, constraintoviewport: false, underlay:"none", close:i3GEO.barraDeBotoes.PERMITEFECHAR, visible:true, draggable:i3GEO.barraDeBotoes.PERMITEDESLOCAR, modal:false,iframe:false } );}
 		
-		if(i3GEO.barraDeBotoes.SOICONES == true){
-			var temp = $i("i3geo_barra2");
-			if(temp){temp.style.borderWidth="0 0 0 0";}
-			var temp = $i("i3geo_barra1");
-			if(temp){temp.style.borderWidth="0 0 0 0";}
+		if(i3GEO.barraDeBotoes.SOICONES === true){
+			temp = $i("i3geo_barra2");
+			if(temp)
+			{temp.style.borderWidth="0 0 0 0";}
+			temp = $i("i3geo_barra1");
+			if(temp)
+			{temp.style.borderWidth="0 0 0 0";}
 		}
-		if((barraZoom == true) && i3GEO.Interface.ATUAL == "padrao")
+		if((barraZoom === true) && i3GEO.Interface.ATUAL == "padrao")
 		{i3GEO.navega.barraDeZoom.ativa();}
 		YAHOO.janelaBotoes.xp.panel.render();
-		if(i3GEO.barraDeBotoes.AUTOALTURA == true){
-			var y = y - i3GEO.Interface.BARRABOTOESTOP + 2;
-			var x = x - 3;
+		if(i3GEO.barraDeBotoes.AUTOALTURA === true){
+			y = y - i3GEO.Interface.BARRABOTOESTOP + 2;
+			x = x - 3;
 		}
 		YAHOO.janelaBotoes.xp.panel.moveTo(x,y);
 		if($i("sobeferramentas")){
 			$i("sobeferramentas").onclick = function(){
-				var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
-				var nelementos = elementos.length;
-				if(elementos[0].style.display == "inline" && elementos[0].id == "")
+				elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
+				nelementos = elementos.length;
+				if(elementos[0].style.display == "inline" && elementos[0].id === "")
 				{return;}
-				if(elementos[1].style.display == "inline" && elementos[1].id == "")
+				if(elementos[1].style.display == "inline" && elementos[1].id === "")
 				{return;}
 				if(nelementos > 0){
 					var mostra = elementos[0];
 					var i = 0;
 					do{
 						if(elementos[i].style){
-							if(elementos[i].style.display == "inline" && elementos[i].id == "")
+							if(elementos[i].style.display == "inline" && elementos[i].id === "")
 							{break;}
-							if(elementos[i].style.display == "none" && elementos[i].id == "")
-							{var mostra = elementos[i];}
+							if(elementos[i].style.display == "none" && elementos[i].id === "")
+							{mostra = elementos[i];}
 						}
-						var i = i + 1;
+						i = i + 1;
 					}
-					while(i < nelementos)
+					while(i < nelementos);
 					mostra.style.display="inline";
 					//esconde o último botao
-					var i = nelementos - 1;
-					var mostra = elementos[i];
+					i = nelementos - 1;
+					mostra = elementos[i];
 					do{
 						if(elementos[i].style){
 							if(elementos[i].style.display == "inline")
-							{var mostra = elementos[i];break;}
+							{mostra = elementos[i];break;}
 						}
-						var i = i - 1;
+						i = i - 1;
 					}
-					while(i >= 0)
+					while(i >= 0);
 					mostra.style.display="none";
 				}
 			};
@@ -474,38 +483,38 @@ i3GEO.barraDeBotoes = {
 			$i("desceferramentas").onclick = function(){
 				var tipo = "inline";
 				if($i(idconteudonovo+"_")){
-					var elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
+					elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
 					if(elementos[elementos.length - 1].style.display == tipo)
 					{return;}
-					var nelementos = elementos.length;
+					nelementos = elementos.length;
 					if(nelementos > 0){
 						//esconde o primeiro botao
-						var i = 0;
+						i = 0;
 						do{
-							var e = elementos[i];
+							e = elementos[i];
 							if(e.style){
-								if((e.style.display == "block") || (e.style.display == "inline") || (e.style.display == "")){
-									if(e.id == "")
+								if((e.style.display == "block") || (e.style.display == "inline") || (e.style.display === "")){
+									if(e.id === "")
 									{e.style.display="none";break;}
 								}
 							}
-							var i = i + 1;
+							i = i + 1;
 						}
-						while(i < nelementos)
+						while(i < nelementos);
 						//mostra o último botao
-						var i = nelementos-1;
+						i = nelementos-1;
 						var mostra = elementos[i];
 						do{
-							var e = elementos[i];
+							e = elementos[i];
 							if(e.style){
 								if(e.style.display == tipo)
 								{break;}
 								if(e.style.display == "none")
-								{var mostra = e;}
+								{mostra = e;}
 							}
-							var i = i - 1;
+							i = i - 1;
 						}
-						while(i >= 0)
+						while(i >= 0);
 						mostra.style.display=tipo;
 					}
 				}
@@ -520,7 +529,7 @@ i3GEO.barraDeBotoes = {
 			i3GEO.barraDeBotoes.ativaMenuContexto(idconteudonovo);
 		}	
 		if($i(idconteudonovo+"_h"))
-		$i(idconteudonovo+"_h").className = "hd2";
+		{$i(idconteudonovo+"_h").className = "hd2";}
 	},
 	/*
 	Function: ativaMenuContexto
@@ -532,9 +541,8 @@ i3GEO.barraDeBotoes = {
 	idbarra - {string} id da barra de botões onde o evento será ativado
 	*/
 	ativaMenuContexto: function(idbarra){
-		function executar(a,b,c){
-			eval(c)
-		};
+		function executar(a,b,c)
+		{eval(c);}
 		var oFieldContextMenuItemData = [
 			{ text: "&nbsp;<span class='container-close'></span>"},
 			{ text: "Fechar barra", onclick: { fn: executar, obj: "i3GEO.barraDeBotoes.fecha('"+idbarra+"')" } },
@@ -572,12 +580,11 @@ i3GEO.barraDeBotoes = {
 	*/
 	reativa: function(indice){
 		if(arguments.length == 1)
-			i3GEO.barraDeBotoes.BARRAS[indice].show();
+		{i3GEO.barraDeBotoes.BARRAS[indice].show();}
 		else{
 			var n = i3GEO.barraDeBotoes.BARRAS.length;
-			for(i=0;i<n;i++){
-				i3GEO.barraDeBotoes.BARRAS[i].show();
-			}
+			for(i=0;i<n;i++)
+			{i3GEO.barraDeBotoes.BARRAS[i].show();}
 		}
 	},
 	/*
@@ -604,16 +611,17 @@ i3GEO.barraDeBotoes = {
 				document.body.appendChild(novoel);
 				//verifica se tem o slide de zoom
 				var barraZoom = false;
-				var temp = $i("vertMaisZoom");
+				temp = $i("vertMaisZoom");
 				if(temp){
 					if(navm)
-					var temp = temp.parentNode;
+					{temp = temp.parentNode;}
 					else
-					var temp = temp.parentNode.parentNode;
-					if(temp.id == id){var barraZoom = true;}
+					{temp = temp.parentNode.parentNode;}
+					if(temp.id == id)
+					{barraZoom = true;}
 				}
-				var x = parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.left);
-				var y = parseInt($i(i3GEO.Interface.IDCORPO).style.top)+10;//parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.top);
+				var x = parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.left,10);
+				var y = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10)+10;//parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.top);
 				i3GEO.barraDeBotoes.BARRAS[i].destroy();
 				i3GEO.barraDeBotoes.inicializaBarra(novoel.id,i3GEO.barraDeBotoes.BARRAS[i].id+"x",barraZoom,x,y);
 			}
