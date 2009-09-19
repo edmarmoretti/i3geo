@@ -345,16 +345,16 @@ i3GEO.arvoreDeCamadas = {
     		init: function() 
     		{
         		if($i("i3geo_lixeira") && i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
-        		{new YAHOO.util.DDTarget("i3geo_lixeira");}
+        		{var ddtarget = new YAHOO.util.DDTarget("i3geo_lixeira");}
         		var lista = i3GEO.arvoreDeCamadas.CAMADAS;
         		var i = lista.length-1;
         		if (i >= 0){
 	       	 		do{
                			var ltema = lista[i];
                			if($i("arrastar_"+ltema.name))
-               			{new YAHOO.example.DDList("arrastar_"+ltema.name);}
+               			{var ddlist = new YAHOO.example.DDList("arrastar_"+ltema.name);}
         			}
-        			while(i--)
+        			while(i--);
         		}
     		}
 		};
@@ -644,7 +644,7 @@ i3GEO.arvoreDeCamadas = {
 								var exp = colunas[3].replace(re,'"');
 								tabela += "<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='"+colunas[4]+"' </td><td style='text-align:left'>"+colunas[2]+"</td></tr>";
 							}
-							while(linha--)
+							while(linha--);
 						}
 						tabela += "</table><br>";
 					}
@@ -670,7 +670,7 @@ i3GEO.arvoreDeCamadas = {
 					if (elementos[i].type == "checkbox"){inputs.push(elementos[i]);}
 					i++;
 				}
-				while(i < nelementos)
+				while(i < nelementos);
 			}
 			if(original.data.desativar){
 				var desativar = original.data.desativar;
@@ -681,7 +681,7 @@ i3GEO.arvoreDeCamadas = {
 						inputs[desativar[i]].checked = false;
 						i++;
 					}
-					while(i < nindices)
+					while(i < nindices);
 				}
 			}
 		};
@@ -805,7 +805,7 @@ i3GEO.arvoreDeCamadas = {
 					$i("farol"+ltema.name).src = g_locaplic+"/imagens/"+farol;
 				}
 			}
-			while(l--)
+			while(l--);
 		}
 		//YAHOO.log("Farol OK", "i3geo");
 	},
@@ -862,7 +862,7 @@ i3GEO.arvoreDeCamadas = {
 				i++;
 			} catch(e){i++;}
 		}
-		while(i<n)
+		while(i<n);
 		var lista = [ligados,desligados,todos];
 		return (lista);
 	},
