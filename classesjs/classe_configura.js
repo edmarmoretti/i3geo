@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
+
 /*
 Title: Configurações gerais
 
@@ -27,7 +29,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -538,7 +540,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d2"),
 			funcaoonclick:function(){
-				if(i3GEO.Interface.ATUAL == "openlayers"){
+				if(i3GEO.Interface.ATUAL === "openlayers"){
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
 					return;
 				}
@@ -561,7 +563,7 @@ i3GEO.configura = {
 				g_tipoacao='zoomli';
 				i3GEO.barraDeBotoes.ativaIcone("zoomli");
 				marcadorZoom = "";
-				if(i3GEO.Interface.ATUAL=="openlayers"){
+				if(i3GEO.Interface.ATUAL==="openlayers"){
 					OLpanel.activateControl(OLzoom);
 					return;
 				}
@@ -593,19 +595,19 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				marcadorZoom = "";
-				if(i3GEO.Interface.ATUAL=="openlayers"){
+				if(i3GEO.Interface.ATUAL==="openlayers"){
 					OLpanel.activateControl(OLpan);
 					return;
 				}
 				panMapaInicia = function(exy){
 					var k;
-					if ($i("img") && (g_tipoacao == "pan")){
+					if ($i("img") && (g_tipoacao === "pan")){
 						try{
 							if(navm)
 							{k = event.button;}
 							else
 							{k = exy.button;}
-							if(k == 2){return;}
+							if(k === 2){return;}
 						}
 						catch(h){}
 						g_panM = "sim";
@@ -630,10 +632,10 @@ i3GEO.configura = {
 				};
 				panMapaDesloca = function(){
 					var nx,ny,l,t;
-					if ($i(i3GEO.Interface.IDMAPA) && (g_panM == "sim")){
+					if ($i(i3GEO.Interface.IDMAPA) && (g_panM === "sim")){
 						nx = objposicaocursor.telax - leftinicial - clicinicialx;
 						ny = objposicaocursor.telay - topinicial - clicinicialy;
-						if (i3GEO.configura.entorno == "nao"){
+						if (i3GEO.configura.entorno === "nao"){
 							l = 0;
 							if (parseInt($i("i3geo").style.left,10))
 							{l = parseInt($i("i3geo").style.left,10);}
@@ -662,7 +664,7 @@ i3GEO.configura = {
 					}
 				};
 				panMapaTermina = function(){
-					if (g_tipoacao == "pan"){
+					if (g_tipoacao === "pan"){
 						marcadorZoom = "";
 						g_panM = "nao";
 						var f = "i3GEO.navega.timerNavega = null;if("+
@@ -712,7 +714,7 @@ i3GEO.configura = {
 			funcaoonclick:function()
 			{
 				var temp;
-				if(i3GEO.Interface.ATUAL=="padrao"){
+				if(i3GEO.Interface.ATUAL==="padrao"){
 					$i("img").title = "";
 					temp = "identifica";
 					if(i3GEO.Interface.ATIVAMENUCONTEXTO)
@@ -724,15 +726,15 @@ i3GEO.configura = {
 				g_operacao='identifica';
 				i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
 				cliqueIdentifica = function(){
-					if (g_operacao == "identifica"){
+					if (g_operacao === "identifica"){
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
 				};
 				verificaTip = function(){
-					if(g_operacao != "identifica" || i3GEOF.identifica){return;}
+					if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
 					if($i("marcaIdentifica")){return;}
 					//funcao default para pegar os dados
-					if (g_operacao == "identifica"){
+					if (g_operacao === "identifica"){
 						eval(i3GEO.configura.funcaoTip);
 					}
 				};
@@ -776,7 +778,7 @@ i3GEO.configura = {
 					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";}
 					else{
 						wikiAtivo = false;i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");
-						if(i3GEO.Interface.ATUAL == "googlemaps"){
+						if(i3GEO.Interface.ATUAL === "googlemaps"){
 							GEvent.removeListener(wikiDragend);
 							GEvent.removeListener(wikiZoomend);
 						}
@@ -784,11 +786,11 @@ i3GEO.configura = {
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizawiki()") < 0){
 					i3GEO.eventos.NAVEGAMAPA.push("atualizawiki()");
-					if(i3GEO.Interface.ATUAL == "googlemaps"){
+					if(i3GEO.Interface.ATUAL === "googlemaps"){
    						wikiDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizawiki();});
    						wikiZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizawiki();});						
 					}
-					if(i3GEO.Interface.ATUAL == "openlayers"){
+					if(i3GEO.Interface.ATUAL === "openlayers"){
    						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizawiki();});
 					}
 				}		
@@ -851,8 +853,8 @@ i3GEO.configura = {
 							if(document.frames("wdocai"))
 							{doc = document.frames("wdocai").document;}
 						}
-						if(window.parent.frames["wdocai"].panTogoogle)
-						{window.parent.frames["wdocai"].panTogoogle();}
+						if(window.parent.wdocai.panTogoogle)
+						{window.parent.wdocai.panTogoogle();}
 						else{
 							i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
 						}
@@ -864,9 +866,9 @@ i3GEO.configura = {
 				};		
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
-				if(i3GEO.Interface.ATUAL == "openlayers"){
+				if(i3GEO.Interface.ATUAL === "openlayers"){
 					i3geoOL.events.register("moveend",i3geoOL,function(e){
-						try{window.parent.frames["wdocai"].panTogoogle();}catch(x){}
+						try{window.parent.wdocai.panTogoogle();}catch(x){}
 					});
 				}
 			}
@@ -888,7 +890,7 @@ i3GEO.configura = {
 						{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/scielo/index.htm";}
 						else{
 							i3GEO.eventos.NAVEGAMAPA.remove("atualizascielo()");
-							if(i3GEO.Interface.ATUAL == "googlemaps"){
+							if(i3GEO.Interface.ATUAL === "googlemaps"){
 								GEvent.removeListener(scieloDragend);
 								GEvent.removeListener(scieloZoomend);
 							}
@@ -898,11 +900,11 @@ i3GEO.configura = {
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizascielo()") < 0){
 					i3GEO.eventos.NAVEGAMAPA.push("atualizascielo()");
-					if(i3GEO.Interface.ATUAL == "googlemaps"){
+					if(i3GEO.Interface.ATUAL === "googlemaps"){
    						scieloDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizascielo();});
    						scieloZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizascielo();});						
 					}
-					if(i3GEO.Interface.ATUAL == "openlayers"){
+					if(i3GEO.Interface.ATUAL === "openlayers"){
    						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizascielo();});
 					}
 				}
@@ -925,7 +927,7 @@ i3GEO.configura = {
 					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/confluence/index.htm";}
 					else{
 						i3GEO.eventos.NAVEGAMAPA.remove("atualizaconfluence()");
-						if(i3GEO.Interface.ATUAL == "googlemaps"){
+						if(i3GEO.Interface.ATUAL === "googlemaps"){
 							GEvent.removeListener(confluenceDragend);
 							GEvent.removeListener(confluenceZoomend);
 						}
@@ -933,11 +935,11 @@ i3GEO.configura = {
 				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaconfluence()") < 0){
 					i3GEO.eventos.NAVEGAMAPA.push("atualizaconfluence()");
-					if(i3GEO.Interface.ATUAL == "googlemaps"){
+					if(i3GEO.Interface.ATUAL === "googlemaps"){
    						confluenceDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizaconfluence();});
    						confluenceZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizaconfluence();});						
 					}
-					if(i3GEO.Interface.ATUAL == "openlayers"){
+					if(i3GEO.Interface.ATUAL === "openlayers"){
    						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizaconfluence();});
 					}			
 				}		
@@ -950,7 +952,7 @@ i3GEO.configura = {
 			dica:$trad("d18"),
 			funcaoonclick:function()
 			{
-				if (i3GEO.navega.lente.ESTAATIVA == "nao")
+				if (i3GEO.navega.lente.ESTAATIVA === "nao")
 				{i3GEO.navega.lente.inicia();}
 				else
 				{i3GEO.navega.lente.desativa();}
@@ -1073,18 +1075,18 @@ i3GEO.configura = {
 			tipo:"",
 			dica:"Rota",
 			funcaoonclick:function(){
-				if(i3GEO.Interface.ATUAL != "googlemaps")
+				if(i3GEO.Interface.ATUAL !== "googlemaps")
 				{alert("Operacao disponivel apenas na interface Google Maps");return;}
    				counterClick = 1;
     			var parametrosRota = function(overlay,latlng){
     				var temp,janela;
-    				if(counterClick == 1){	
+    				if(counterClick === 1){	
     					counterClick++;
     					alert("Clique o ponto de destino da rota");
     					pontoRota1 = latlng;
     					return;
     				}
-    				if(counterClick == 2){
+    				if(counterClick === 2){
     					pontoRota2 = latlng;
     					counterClick = 0;
     					GEvent.removeListener(rotaEvento);

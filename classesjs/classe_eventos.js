@@ -1,3 +1,4 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Eventos
 
@@ -27,7 +28,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 objposicaocursor = {
@@ -76,9 +77,7 @@ i3GEO.eventos = {
 	Default:
 	{["atualizaEscalaNumerica()"]}
 	*/
-	NAVEGAMAPA: new Array(
-		"atualizaEscalaNumerica()"
-	),
+	NAVEGAMAPA: ["atualizaEscalaNumerica()"],
 	/*
 	Propriedade: MOUSEPARADO
 
@@ -91,9 +90,7 @@ i3GEO.eventos = {
 	Default:
 	{["i3GEO.navega.mostraRosaDosVentos()"]}
 	*/
-	MOUSEPARADO: new Array(
-		"i3GEO.navega.mostraRosaDosVentos()"
-	),
+	MOUSEPARADO: ["i3GEO.navega.mostraRosaDosVentos()"],
 	/*
 	Propriedade: MOUSEMOVE
 
@@ -141,9 +138,7 @@ i3GEO.eventos = {
 	Default:
 	{["i3GEO.eventos.cliqueCapturaPt()"]}
 	*/
-	MOUSECLIQUE: new Array(
-		"i3GEO.eventos.cliqueCapturaPt()"	
-	),
+	MOUSECLIQUE: ["i3GEO.eventos.cliqueCapturaPt()"],
 	/*
 	Variavel: TIMERPARADO
 	
@@ -165,20 +160,15 @@ i3GEO.eventos = {
 		try
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
-		if(objposicaocursor.dentroDomapa == false){return;}
+		if(objposicaocursor.dentroDomapa === false){return;}
 		try{
-			if(objposicaocursor.imgy == ""){
+			if(objposicaocursor.imgy === ""){
 				objposicaocursor.imgy = 1;
 				objposicaocursor.imgx = 1;
 			}
 			if (i3GEO.eventos.MOUSEPARADO.length > 0 && objposicaocursor.imgy > 0 && objposicaocursor.imgx > 0){
-				var f = i3GEO.eventos.MOUSEPARADO.length-1;
-				if (f >= 0){
-					do{
-						if(objposicaocursor.imgx > 0)
-						{eval(i3GEO.eventos.MOUSEPARADO[f]);}
-					}
-					while(f--)
+				if(objposicaocursor.imgx > 0){
+					i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEPARADO);
 				}
 			}
 		}catch(e){}
@@ -189,19 +179,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em NAVEGAMAPA, ou seja, operações executadas quando o mapa tem sua extensão geográfica alterada.
 	*/
 	navegaMapa: function(){
-		if (i3GEO.eventos.NAVEGAMAPA.length > 0){
-			var f = i3GEO.eventos.NAVEGAMAPA.length-1;
-			if (f >= 0){
-				do{
-					var temp = i3GEO.eventos.NAVEGAMAPA[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function'){
-						eval(i3GEO.eventos.NAVEGAMAPA[f]);
-						//YAHOO.log("navegaMapa", "i3geo");
-					}
-				}
-				while(f--)
-			}
-		}
+		i3GEO.eventos.executaEventos(i3GEO.eventos.NAVEGAMAPA);
 	},
 	/*
 	Function: mousemoveMapa
@@ -209,19 +187,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSEMOVE.
 	*/
 	mousemoveMapa: function(){
-		if (i3GEO.eventos.MOUSEMOVE.length > 0){
-			var f = i3GEO.eventos.MOUSEMOVE.length-1;
-			if (f >= 0){
-				do{
-					var temp = i3GEO.eventos.MOUSEMOVE[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function'){
-						eval(i3GEO.eventos.MOUSEMOVE[f]);
-						//YAHOO.log("mousemoveMapa", "i3geo");
-					}
-				}
-				while(f--)
-			}
-		}	
+		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEMOVE);
 	},
 	/*
 	Function: mousedownMapa
@@ -229,19 +195,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSEDOWN.
 	*/
 	mousedownMapa: function(){
-		if (i3GEO.eventos.MOUSEDOWN.length > 0){
-			var f = i3GEO.eventos.MOUSEDOWN.length-1;
-			if (f >= 0){
-				do{
-					var temp = i3GEO.eventos.MOUSEDOWN[f].replace("()", "");
-					if(eval('typeof ' + temp) == 'function'){
-						eval(i3GEO.eventos.MOUSEDOWN[f]);
-						//YAHOO.log("mousedownMapa", "i3geo");
-					}
-				}
-				while(f--)
-			}
-		}
+		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEDOWN);
 	},
 	/*
 	Function: mouseupMapa
@@ -249,36 +203,53 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSEUP.
 	*/
 	mouseupMapa: function(){
+		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEUP);
+		/*
 		if (i3GEO.eventos.MOUSEUP.length > 0){
-			var f = i3GEO.eventos.MOUSEUP.length-1;
+			var f,temp;
+			f = i3GEO.eventos.MOUSEUP.length-1;
 			if (f >= 0){
 				do{
-					var temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
+					temp = i3GEO.eventos.MOUSEUP[f].replace("()", "");
 					if(eval('typeof ' + temp) == 'function'){
 						eval(i3GEO.eventos.MOUSEUP[f]);
 						//YAHOO.log("mouseupMapa", "i3geo");
 					}
 				}
-				while(f--)
+				while(f--);
 			}
-		}	
+		}
+		*/	
 	},
 	/*
 	Function: mousecliqueMapa
 	
 	Executa as funções armazenadas em MOUSECLIQUE.
 	*/
-	mousecliqueMapa: function(exy){
-		if (i3GEO.eventos.MOUSECLIQUE.length > 0){
-			var f = i3GEO.eventos.MOUSECLIQUE.length-1;
-			if (f >= 0){
-				do{
-					eval(i3GEO.eventos.MOUSECLIQUE[f]);
-					//YAHOO.log("mousecliqueMapa", "i3geo");
+	mousecliqueMapa: function(){
+		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUE);
+	},
+	/*
+	Function: executaEventos
+	
+	Executa a pilha de nomes de funções armazenados em um array
+	
+	Parameter:
+	
+	eventos {array} - array com os nomes das funções
+	*/
+	executaEventos: function(eventos){
+		try{
+			var f,temp;
+			if (eventos.length > 0){
+				f = eventos.length-1;
+				if (f >= 0){
+					do{eval(eventos[f]);}
+					while(f--);
 				}
-				while(f--)
 			}
 		}
+		catch(e){}
 	},
 	/*
 	Function posicaoMouseMapa
@@ -321,85 +292,83 @@ i3GEO.eventos = {
 		//Entretanto, nas ferramentas que usam o richdraw (distância e área) o posicionamento
 		//deve ser controlado pelo i3geo
 		//
-		var container = "";
+		var teladd,teladms,container,targ,pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
 		try{
 			//verifica se o richdraw está sendo usaado
-			var container = e.target.parentNode.id;
+			container = e.target.parentNode.id;
 		}
 		catch(erro){}
-		if (container != "divGeometriasTemp"){
-			if((i3GEO.Interface.ATUAL == "googlemaps") || (i3GEO.Interface.ATUAL == "openlayers"))
+		if (container !== "divGeometriasTemp"){
+			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "openlayers"))
 			{return;}
 		}
-		if (!e) var e = window.event;
+		if (!e){e = window.event;}
 		//
 		//verifica sob qual objeto o mouse está se movendo
 		//
 		if (e.target)
-		{var targ = e.target;}
-		else if (e.srcElement) var targ = e.srcElement;
-		if(targ.id == "" && $i(i3GEO.Interface.IDMAPA))
-		{var targ = $i(i3GEO.Interface.IDMAPA);}
+		{targ = e.target;}
+		else if (e.srcElement) {targ = e.srcElement;}
+		if(targ.id === "" && $i(i3GEO.Interface.IDMAPA))
+		{targ = $i(i3GEO.Interface.IDMAPA);}
 		//
 		//se estiver no modo pan, o movimento deve ser obtido do elemento
 		//onde está a imagem do mapa e não diretamente sobre o elemento 'img'
 		//se não for feito assim, o deslocamento do mapa não é capturado
 		//
 		try{
-			if(g_panM != 'undefined' && g_panM == "sim")
-			{var pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
+			if(g_panM !== 'undefined' && g_panM === "sim")
+			{pos = i3GEO.util.pegaPosicaoObjeto(targ.parentNode);}
 			else
-			{var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
-			if((i3GEO.configura.entorno == "sim") && (g_panM == "sim")){
+			{pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+			if((i3GEO.configura.entorno === "sim") && (g_panM === "sim")){
 				pos[0] = pos[0] - i3GEO.parametros.w;
 				pos[1] = pos[1] - i3GEO.parametros.h;
 			}
 		}
-		catch(m){var pos = i3GEO.util.pegaPosicaoObjeto(targ);}
+		catch(m){pos = i3GEO.util.pegaPosicaoObjeto(targ);}
 		//
 		//pega a posicao correta do mouse
 		//
-		var mousex = 0;
-		var mousey = 0;
+		mousex = 0;
+		mousey = 0;
 		if (e.pageX || e.pageY){
-			var mousex = e.pageX;
-			var mousey = e.pageY;
+			mousex = e.pageX;
+			mousey = e.pageY;
 		}
 		else if (e.clientX || e.clientY){
-			var mousex = e.clientX + document.body.scrollLeft
-			+ document.documentElement.scrollLeft;
-			var mousey = e.clientY + document.body.scrollTop
-			+ document.documentElement.scrollTop;
+			mousex = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			mousey = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 		}
 		//
 		//faz os cálculos de posicionamento
 		//fig e reffig são a mesma coisa por enquanto
 		//
-		var xfig = mousex - pos[0];
-		var yfig = mousey - pos[1];
-		var xreffig = xfig;
-		var yreffig = yfig;
-		var xtela = mousex;
-		var ytela = mousey;
+		xfig = mousex - pos[0];
+		yfig = mousey - pos[1];
+		xreffig = xfig;
+		yreffig = yfig;
+		xtela = mousex;
+		ytela = mousey;
 		//
 		//celula e extent são necessários para se fazer a
 		//conversão de coordenadas de tela para coordenadas geográficas
 		//esses valores são obtidos das funções ajax que redesenham ou inicializam o mapa
 		// 
-		var c = i3GEO.parametros.pixelsize;
-		var ex = i3GEO.parametros.mapexten;
+		c = i3GEO.parametros.pixelsize;
+		ex = i3GEO.parametros.mapexten;
 		try{
-			if(targ.id == "imagemReferencia"){
-				var c = i3GEO.parametros.celularef;
-				var ex = i3GEO.parametros.extentref;
-				var r = $i("i3geo_rosa");
+			if(targ.id === "imagemReferencia"){
+				c = i3GEO.parametros.celularef;
+				ex = i3GEO.parametros.extentref;
+				r = $i("i3geo_rosa");
 				if(r)
-				r.style.display = "none"
+				{r.style.display = "none";}
 			}
 		}
 		catch(e){i3GEO.parametros.celularef = 0;}
-		var teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
-		var teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
+		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+		teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
 		objposicaocursor = {
 			ddx: teladd[0],
 			ddy: teladd[1],
@@ -435,55 +404,59 @@ i3GEO.eventos = {
 				try{
 					try
 					{clearTimeout(i3GEO.eventos.TIMERPARADO);}
-					catch(e){var a = e;}
+					catch(e){}
 					i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
 				}
-				catch(e){var e = "";}
+				catch(e){}
 				try
 				{i3GEO.eventos.mousemoveMapa();}
-				catch(e){var e = "";}
+				catch(e){}
 			};
 		};
 		docMapa.onmouseout = function(){
 			objposicaocursor.dentroDomapa = true;
 			try
 			{objmapaparado="parar";}
-			catch(e){var e = "";}
+			catch(e){}
 		};
 		docMapa.onmousedown = function(exy){
-			try{
-				i3GEO.eventos.posicaoMouseMapa(exy);
-				if(navm)
-				{var k = event.button;}
-				else
-				{var k = exy.button;}
-				if(k != 2)
-				i3GEO.eventos.mousedownMapa();
-			}
-			catch(e){var e = "";}
+			if(!i3GEO.eventos.botaoDireita(exy))
+			{i3GEO.eventos.mousedownMapa();}
 		};
 		docMapa.onclick = function(exy){
-			try{
-				if(navm)
-				{var k = event.button;}
-				else
-				{var k = exy.button;}
-				if(k != 2)
-				i3GEO.eventos.mousecliqueMapa();
-			}
-			catch(e){var e = "";}
+			if(!i3GEO.eventos.botaoDireita(exy))
+			{i3GEO.eventos.mousecliqueMapa();}
 		};
 		docMapa.onmouseup = function(exy){
-			try{
-				if(navm)
-				{var k = event.button;}
-				else
-				{var k = exy.button;}
-				if(k != 2)				
-				i3GEO.eventos.mouseupMapa();
-			}
-			catch(e){var e = "";}
+			if(!i3GEO.eventos.botaoDireita(exy))
+			{i3GEO.eventos.mouseupMapa();}
 		};
+	},
+	/*
+	Function: botaoDireita
+	
+	Retorna true se o botão da direita foi utilizado no evento do mouse
+	
+	Parametro:
+	
+	exy - evento
+	
+	Return:
+	{boolean}
+	*/
+	botaoDireita: function(exy){
+		try{
+			var k;
+			if(navm)
+			{k = event.button;}
+			else
+			{k = exy.button;}
+			if(k !== 2)				
+			{return false;}
+			else
+			{return true;}
+		}
+		catch(e){return false;}	
 	},
 	/*
 	Function: cliqueCapturaPt
@@ -495,13 +468,14 @@ i3GEO.eventos = {
 	ixg,ixm,ixs,iyg,iym,iys
 	*/
 	cliqueCapturaPt: function(){
-		if (g_tipoacao != "capturaponto"){return;}
+		var x,y,doc;
+		if (g_tipoacao !== "capturaponto"){return;}
 		else{
 			if($i("wdocai"))
-			{var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
 			try{
-				var x = objposicaocursor.dmsx.split(" ");
-				var y = objposicaocursor.dmsy.split(" ");
+				x = objposicaocursor.dmsx.split(" ");
+				y = objposicaocursor.dmsy.split(" ");
 				if (doc.getElementById("ixg"))
 				{doc.getElementById("ixg").value = x[0];}
 				if (doc.getElementById("ixm"))

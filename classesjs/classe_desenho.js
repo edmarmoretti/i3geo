@@ -1,4 +1,5 @@
-/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
+
 /*
 Title: Desenho de elementos gráficos
 

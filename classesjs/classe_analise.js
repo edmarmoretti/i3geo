@@ -1,3 +1,5 @@
+/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
+
 /*
 Title: Análise geográfica
 
