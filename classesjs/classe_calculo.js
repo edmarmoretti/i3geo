@@ -58,15 +58,16 @@ i3GEO.calculo = {
 		{
 			//YAHOO.log("dms2dd", "i3geo");
 			//converte dms em dd
-			var sinal = 'positivo';
+			var sinal,spm,mpg,dd;
+			sinal = 'positivo';
 			if (cd < 0)
 			{
 				cd = cd * -1;
 				sinal = 'negativo';
 			}
-			var spm = cs / 3600;
-			var mpg = cm / 60;
-			var dd = (cd * 1) + (mpg * 1) + (spm * 1);
+			spm = cs / 3600;
+			mpg = cm / 60;
+			dd = (cd * 1) + (mpg * 1) + (spm * 1);
 			if (sinal == 'negativo')
 			{dd = dd * -1;}
 			//YAHOO.log("Fim dms2dd", "i3geo");
@@ -97,11 +98,11 @@ i3GEO.calculo = {
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
-			var pos;
+			var pos,latlng,xyn,dc,imgext,c,xy;
 			if(i3GEO.Interface.ATUAL == "googlemaps"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				var latlng = new GLatLng(vy,vx);
-				var xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
+				latlng = new GLatLng(vy,vx);
+				xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
 				xy = [];
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
@@ -120,13 +121,13 @@ i3GEO.calculo = {
 
 			if(!docmapa)
 			{docmapa = window.document;}
-			var dc = docmapa;	
+			dc = docmapa;	
 			pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			var imgext = ext; //i3GEO.parametros.mapexten;
+			imgext = ext; //i3GEO.parametros.mapexten;
 			imgext = imgext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
-			var c = cellsize * 1;
+			c = cellsize * 1;
 			//var xy = [];
 			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
 		}
@@ -148,66 +149,46 @@ i3GEO.calculo = {
 	{Array} - Array com o valor de x [0] e y [1] no formato dd mm ss
 	*/
 	dd2dms: function(x,y){
-		var restod,mx,sx,mm,restos,my,sy;
-		var m = 0;
-		var s = 0;
-		var dx = parseInt(x,10);
+		var restod,mx,sx,mm,restos,my,sy,s,dx,dy;
+		dx = parseInt(x,10);
 		if (dx > 0)
 		{restod = x - dx;}
 		if (dx < 0)
 		{restod = (x * -1) - (dx * -1);}
-		dx = dx;
 		if (restod !== 0){
 			mm = restod * 60;
-			m = parseInt(restod * 60,10);
-			restos = mm - m;
-			mx = m;
+			mx = parseInt(restod * 60,10);
+			restos = mm - mx;
 			if (restos !== 0){
 				s = restos * 60;
 				s = (s+"_").substring(0,5);
 				sx = s;
 			}
-			else{s = "00.00";}
 		}
 		else{
 			mx = "00";
 			sx = "00.00";
 		}
-		if (m.length == 2){m = "0"+m+"";}
-		if (s*1 < 10){s = "0"+s;}
-		var xv = dx+" "+mx+" "+sx;
-		m = 0;
-		s = 0;
-		var dy = parseInt(y,10);
+		dy = parseInt(y,10);
 		if (dy > 0)
 		{restod = y - dy;}
 		if (dy < 0)
 		{restod = (y * -1) - (dy * -1);}
-		dy = dy;
 		if (restod !== 0){
 			mm = restod * 60;
-			m = parseInt(restod * 60,10);
-			restos = mm - m;
-			my = m;
+			my = parseInt(restod * 60,10);
+			restos = mm - my;
 			if (restos !== 0){
 				s = restos * 60;
 				s = (s+"_").substring(0,5);
 				sy = s;
 			}
-			else  { s = "00.00";}
 		}
 		else{
 			my = "00";
 			sy = "00.00";
 		}
-		if (m.length == 2){m = "0"+m;}
-		if (s*1 < 10)
-		{s = "0"+s;}
-		var yv = dy+" "+my+" "+sy;
-		var res = [];
-		res[0] = xv;
-		res[1] = yv;
-		return res;
+		return [dx+" "+mx+" "+sx,dy+" "+my+" "+sy];
 	},
 	/*
 	Function: tela2dd
@@ -231,6 +212,7 @@ i3GEO.calculo = {
 	tela2dd: function(xfign,yfign,g_celula,imgext){
 		try
 		{
+			var amext,longdd,latdd;
 			if (navm){
 				xfign = xfign - 2.2;
 				yfign = yfign - 2.7;
@@ -239,15 +221,10 @@ i3GEO.calculo = {
 				xfign = xfign - 0.12;
 				yfign = yfign - 1.05;
 			}
-			var nx = g_celula * xfign;
-			var ny = g_celula * yfign;
-			var amext = imgext.split(" ");
-			var longdd = (amext[0] * 1) + nx;
-			var latdd = (amext[3] * 1) - ny;
-			var res = [];
-			res[0] = longdd;
-			res[1] = latdd;
-			return (res);
+			amext = imgext.split(" ");
+			longdd = (amext[0] * 1) + (g_celula * xfign);
+			latdd = (amext[3] * 1) - (g_celula * yfign);
+			return [longdd,latdd];
 		}
 		catch(e){return(0);}
 	},
@@ -274,16 +251,16 @@ i3GEO.calculo = {
 	{Numeric}
 	*/
 	area: function(pontos,pixel){
-		var $polygon_area;
+		var $polygon_area,$i,$array_length;
 		try{
 			if(pontos.xpt.length > 2){
-				var $array_length = pontos.xpt.length;
+				$array_length = pontos.xpt.length;
 				pontos.xtela.push(pontos.xtela[0]);
 				pontos.ytela.push(pontos.ytela[0]);
 				pontos.xtela.push(pontos.xtela[0]);
 				pontos.ytela.push(pontos.ytela[1]);
 				$polygon_area = 0;
-				for (var $i=0;$i <= $array_length;$i++)
+				for ($i=0;$i <= $array_length;$i++)
 				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
 				$polygon_area = Math.abs($polygon_area) / 2;
 			}
@@ -318,14 +295,14 @@ i3GEO.calculo = {
 	{Numeric}
 	*/	
 	distancia: function(lon1,lat1,lon2,lat2){
-		var R = 6371; // km
-		var dLat = ((lat2-lat1))* Math.PI / 180;
-		var dLon = ((lon2-lon1)) * Math.PI / 180; 
-		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		var dLat,dLon,a,c,d;
+		dLat = ((lat2-lat1))* Math.PI / 180;
+		dLon = ((lon2-lon1)) * Math.PI / 180; 
+		a = Math.sin(dLat/2) * Math.sin(dLat/2) +
        	Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
        	Math.sin(dLon/2) * Math.sin(dLon/2); 
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		var d = R * c;
+		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		d = 6371 * c;
 		return d;
 	},
 	/*
@@ -353,13 +330,14 @@ i3GEO.calculo = {
 	{Numeric}
 	*/	
 	direcao: function(lon1,lat1,lon2,lat2){
+		var dLon,y,x,r;
 		lat1 = lat1 * (Math.PI / 180);
 		lat2 = lat2 * (Math.PI / 180);
-		var dLon = (lon2-lon1) * (Math.PI / 180);
-		var y = Math.sin(dLon) * Math.cos(lat2);
-		var x = Math.cos(lat1)*Math.sin(lat2) -
+		dLon = (lon2-lon1) * (Math.PI / 180);
+		y = Math.sin(dLon) * Math.cos(lat2);
+		x = Math.cos(lat1)*Math.sin(lat2) -
 		Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
-		var r = Math.atan2(y, x);
+		r = Math.atan2(y, x);
 		r = r  * 180 / Math.PI;
 		r = r + 360;
 		return r % 360;
@@ -391,17 +369,17 @@ i3GEO.calculo = {
 	{Array}
 	*/
 	destinoDD: function(lon,lat,d,direcao){
-		var R = 6371; // earth's mean radius in km
-  		var lat1 = lat * (Math.PI / 180);
-  		var lon1 = lon * (Math.PI / 180);
-  		var brng = direcao * (Math.PI / 180);
-		var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );
-		var lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1),Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+		var R,lat1,lon1,brng,lat2,lon2;
+		R = 6371; // earth's mean radius in km
+  		lat1 = lat * (Math.PI / 180);
+  		lon1 = lon * (Math.PI / 180);
+  		brng = direcao * (Math.PI / 180);
+		lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );
+		lon2 = lon1 + Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1),Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
 		lon2 = (lon2+Math.PI)%(2*Math.PI) - Math.PI;  // normalise to -180...+180
 		if (isNaN(lat2) || isNaN(lon2))
 		{return null;}
-		var resultado = [(lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI)];
-		return resultado;
+		return [(lon2 * 180 / Math.PI),(lat2 * 180 / Math.PI)];
 	},
 	/*
 	Function: rect2ext
@@ -421,7 +399,7 @@ i3GEO.calculo = {
 	{Array} - extensão, xmin, ymin, xmax, ymax
 	*/
 	rect2ext: function(idrect,mapext,pixel){
-		var bx,bxs,xfig,yfig,nx,ny,pix,piy;
+		var bx,bxs,xfig,yfig,nx,ny,pix,piy,pos,amext,dx,dy,x1,y1,x2,y2;
 		eval ('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ")");
 		eval ('piy = parseInt(document.getElementById("'+idrect+'").style.' + g_tipotop + ")");
 		if($i(idrect)){
@@ -430,29 +408,27 @@ i3GEO.calculo = {
 		}
 		else
 		{alert("Box nao encontrado");return;}
-		var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+		pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 		xfig = pix + (parseInt(bxs.width,10)) - pos[0];
 		yfig = piy + (parseInt(bxs.height,10)) - pos[1];
-		var amext = mapext.split(" ");
-		var dx = ((amext[0] * -1) - (amext[2] * -1)) / -1;
-		var dy = ((amext[1] * 1) - (amext[3] * 1)) / -1;
+		amext = mapext.split(" ");
+		dx = ((amext[0] * -1) - (amext[2] * -1)) / -1;
+		dy = ((amext[1] * 1) - (amext[3] * 1)) / -1;
 		if (dy < 0)
 		{dy=dy * -1;}
 		nx = pixel * xfig;
 		ny = pixel * yfig;
-		var x1 = (amext[0] * 1) + nx;
-		var y1 = (amext[3] * 1) - ny;
+		x1 = (amext[0] * 1) + nx;
+		y1 = (amext[3] * 1) - ny;
 		xfig = pix - pos[0];
 		yfig = piy - pos[1];
 		if (dy < 0)
 		{dy=dy * -1;}
 		nx = pixel * xfig;
 		ny = pixel * yfig;
-		var x2 = (amext[0] * 1) + nx;
-		var y2 = (amext[3] * 1) - ny;
-		var v = x2+" "+y2+" "+x1+" "+y1;
-		var res = [v,x1,y1,x2,y2];
-		return (res);
+		x2 = (amext[0] * 1) + nx;
+		y2 = (amext[3] * 1) - ny;
+		return [x2+" "+y2+" "+x1+" "+y1,x1,y1,x2,y2];
 	},
 	/*
 	Function: ext2rect
@@ -476,19 +452,20 @@ i3GEO.calculo = {
 	{Array} - width,heigth,top,left
 	*/
 	ext2rect: function(idrect,mapext,boxext,pixel,documento){
-   		var rectbox = boxext.split(" ");
-   		var rectmap = mapext.split(" ");
-   		var xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
-   		var xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
-		var w = xyMax[0]-xyMin[0];
-		var h = xyMin[1]-xyMax[1];
-   		var tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
-		var pos = i3GEO.util.pegaPosicaoObjeto(documento);
-		var t = tl[1] - pos[1];
-		var l = tl[0] - pos[0];
-		var d = "block";
+   		var rectbox,rectmap,xyMin,xyMax,w,h,tl,pos,t,l,d,box;
+   		rectbox = boxext.split(" ");
+   		rectmap = mapext.split(" ");
+   		xyMin = i3GEO.calculo.dd2tela(rectbox[0],rectbox[1],documento,boxext,pixel);
+   		xyMax = i3GEO.calculo.dd2tela(rectbox[2],rectbox[3],documento,boxext,pixel);
+		w = xyMax[0]-xyMin[0];
+		h = xyMin[1]-xyMax[1];
+   		tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
+		pos = i3GEO.util.pegaPosicaoObjeto(documento);
+		t = tl[1] - pos[1];
+		l = tl[0] - pos[0];
+		d = "block";
 		if($i(idrect)){
-			var box = $i(idrect);
+			box = $i(idrect);
 			box.style.width = w;
 			box.style.height = h;
 			box.style.top = t + "px";

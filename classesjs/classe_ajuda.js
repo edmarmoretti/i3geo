@@ -147,18 +147,17 @@ i3GEO.ajuda = {
 	*/
 	abreJanela: function(){
 		try	{
-			var nx = "";
-			var ny = "";				
+			var nx,ny,pos,corpo,texto,janela;				
 			if(i3GEO.ajuda.ATIVAJANELA === false){return;}
 			if (!$i("janelaMenTexto")){
-				var corpo = $i(i3GEO.Interface.IDCORPO);
+				corpo = $i(i3GEO.Interface.IDCORPO);
 				if(corpo){
-					var pos = YAHOO.util.Dom.getXY(corpo);
+					pos = YAHOO.util.Dom.getXY(corpo);
 					nx = pos[0] - 267;
 					ny = i3GEO.parametros.h - 70;
 				}
-				var texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
-				var janela = i3GEO.janela.cria("262","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
+				texto = '<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">'+i3GEO.ajuda.MENSAGEMPADRAO+'</div>';
+				janela = i3GEO.janela.cria("262","auto","",nx,ny,"&nbsp;","i3geo_janelaMensagens",false);
 				janela[2].innerHTML = texto;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
 				i3GEO.ajuda.ativaCookie();
@@ -193,6 +192,7 @@ i3GEO.ajuda = {
 	será utilizado a variável i3GEO.parametros.mensagens
 	*/
 	ativaLetreiro: function(mensagem){
+		var l;
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
 			if(arguments.length === 0)
@@ -202,7 +202,7 @@ i3GEO.ajuda = {
 			try
 			{clearTimeout(i3GEO.ajuda.tempoLetreiro);}
 			catch(e){i3GEO.ajuda.tempoLetreiro = "";}
-			var l= $i(i3GEO.ajuda.DIVLETREIRO);
+			l = $i(i3GEO.ajuda.DIVLETREIRO);
 			if(l.style.display=="none"){return;}
 			l.style.cursor="pointer";
 			if(mensagem === ""){
@@ -258,14 +258,15 @@ i3GEO.ajuda = {
 	texto {String} - texto a ser mostrado
 	*/
 	mostraJanela: function(texto){
-		var j = $i(i3GEO.ajuda.DIVAJUDA);
+		var j,k;
+		j = $i(i3GEO.ajuda.DIVAJUDA);
 		if(j){
 			if (texto === ""){j.innerHTML="-";}
 			else
 			{j.innerHTML= texto;}
 		}
 		else{
-			var k = $i("janelaMenTexto");
+			k = $i("janelaMenTexto");
 			if(k && i3GEO.ajuda.TRANSICAOSUAVE){
 				j = $i("i3geo_janelaMensagens");
 				if(texto !== ""){

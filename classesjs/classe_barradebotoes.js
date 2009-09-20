@@ -190,9 +190,9 @@ i3GEO.barraDeBotoes = {
 	icone {String} - id do icone que será ativado. Esse id é o mesmo definido em LISTABOTOES
 	*/
 	ativaIcone: function(icone){
+		var estilo,temp,ist,cor,ko;
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
-		var ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
-		var estilo,temp,ist,cor;
+		ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "padrao"){
 			if(ko >= 0){
 				do{
@@ -281,11 +281,12 @@ i3GEO.barraDeBotoes = {
 	O nome do botao deve estar em LISTABOTOES na propriedade iddiv
 	*/
 	ativaBotoes:function(padrao){
+		var l,b;
 		if(arguments.length === 0)
 		{padrao = i3GEO.barraDeBotoes.BOTAOPADRAO;}
 		i3GEO.barraDeBotoes.BOTAOCLICADO = padrao;
-		var l = i3GEO.barraDeBotoes.LISTABOTOES;
-		var b = l.length-1;
+		l = i3GEO.barraDeBotoes.LISTABOTOES;
+		b = l.length-1;
 		if (b >= 0){
 			do{
 				if ($i(l[b].iddiv)){
@@ -340,10 +341,10 @@ i3GEO.barraDeBotoes = {
 	y {Numeric} - posição y (pixels) da barra em relação ao mapa
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
-		var numerobotoes,i,temp,elementos,nelementos,e;
-		var wj = "36px";
-		var recuo = "0px";
-		var novoel = document.createElement("div");
+		var tipo,mostra,numerobotoes,i,temp,elementos,nelementos,e,wj,recuo,novoel,alturadisponivel;
+		wj = "36px";
+		recuo = "0px";
+		novoel = document.createElement("div");
 		novoel.id = idconteudonovo;
 		novoel.style.display="block";
 		if(i3GEO.barraDeBotoes.SOICONES === false){
@@ -396,7 +397,7 @@ i3GEO.barraDeBotoes = {
 				if(elementos[0].id == "sobeferramentas"){
 					try{
 						elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
-						var alturadisponivel = i3GEO.parametros.h - 4;
+						alturadisponivel = i3GEO.parametros.h - 4;
 						numerobotoes = parseInt(alturadisponivel / 30,10);
 						nelementos = elementos.length;
 						i = 0;
@@ -451,8 +452,8 @@ i3GEO.barraDeBotoes = {
 				if(elementos[1].style.display == "inline" && elementos[1].id === "")
 				{return;}
 				if(nelementos > 0){
-					var mostra = elementos[0];
-					var i = 0;
+					mostra = elementos[0];
+					i = 0;
 					do{
 						if(elementos[i].style){
 							if(elementos[i].style.display == "inline" && elementos[i].id === "")
@@ -481,7 +482,7 @@ i3GEO.barraDeBotoes = {
 		}
 		if($i("desceferramentas")){
 			$i("desceferramentas").onclick = function(){
-				var tipo = "inline";
+				tipo = "inline";
 				if($i(idconteudonovo+"_")){
 					elementos = $i(idconteudonovo+"_").getElementsByTagName("div");
 					if(elementos[elementos.length - 1].style.display == tipo)
@@ -541,9 +542,10 @@ i3GEO.barraDeBotoes = {
 	idbarra - {string} id da barra de botões onde o evento será ativado
 	*/
 	ativaMenuContexto: function(idbarra){
+		var oFieldContextMenuItemData,oFieldContextMenu,onFieldMenuRender,id;
 		function executar(a,b,c)
 		{eval(c);}
-		var oFieldContextMenuItemData = [
+		oFieldContextMenuItemData = [
 			{ text: "&nbsp;<span class='container-close'></span>"},
 			{ text: "Fechar barra", onclick: { fn: executar, obj: "i3GEO.barraDeBotoes.fecha('"+idbarra+"')" } },
 			{ text: "Barra normal", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.AUTOALTURA=false;i3GEO.barraDeBotoes.PERMITEFECHAR=true;i3GEO.barraDeBotoes.PERMITEDESLOCAR=true;i3GEO.barraDeBotoes.recria('"+idbarra+"')" } },
@@ -551,14 +553,14 @@ i3GEO.barraDeBotoes = {
 			{ text: "Remove transição", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.TRANSICAOSUAVE=false;" } },
 			{ text: "Ativa transição", onclick: { fn: executar, obj:"i3GEO.barraDeBotoes.TRANSICAOSUAVE=true;" } }
 		];
-		var oFieldContextMenu = new YAHOO.widget.ContextMenu(
+		oFieldContextMenu = new YAHOO.widget.ContextMenu(
 			"contexto_"+idbarra,{
 				trigger: idbarra,
 				itemdata: oFieldContextMenuItemData,
 				lazyload: true
 			}
 		);
-		var onFieldMenuRender = function(){
+		onFieldMenuRender = function(){
 			eval("var id = 'contexto_"+idbarra+"'");
 			$i(id).style.zIndex = 50000;
 		};
@@ -579,10 +581,11 @@ i3GEO.barraDeBotoes = {
 	as barras Se não for definido, todas as barras serão reativadas
 	*/
 	reativa: function(indice){
+		var n,i;
 		if(arguments.length == 1)
 		{i3GEO.barraDeBotoes.BARRAS[indice].show();}
 		else{
-			var n = i3GEO.barraDeBotoes.BARRAS.length;
+			n = i3GEO.barraDeBotoes.BARRAS.length;
 			for(i=0;i<n;i++)
 			{i3GEO.barraDeBotoes.BARRAS[i].show();}
 		}
@@ -597,20 +600,21 @@ i3GEO.barraDeBotoes = {
 	id {String} - id da barra
 	*/
 	recria: function(id){
-		var n = i3GEO.barraDeBotoes.BARRAS.length;
+		var n,temp,novoel,barraZoom,x,y;
+		n = i3GEO.barraDeBotoes.BARRAS.length;
 		for(i=0;i<n;i++){
 			if(i3GEO.barraDeBotoes.BARRAS[i].id == id){
 				//remove o menu de contexto
-				var temp = $i("contexto_"+id);
+				temp = $i("contexto_"+id);
 				if(temp){
 					temp.parentNode.removeChild(temp);
 				}
-				var novoel = document.createElement("div");
+				novoel = document.createElement("div");
 				novoel.id = "barraTemporaria"+i;
 				novoel.innerHTML = $i(i3GEO.barraDeBotoes.BARRAS[i].id+"_").innerHTML;
 				document.body.appendChild(novoel);
 				//verifica se tem o slide de zoom
-				var barraZoom = false;
+				barraZoom = false;
 				temp = $i("vertMaisZoom");
 				if(temp){
 					if(navm)
@@ -620,8 +624,8 @@ i3GEO.barraDeBotoes = {
 					if(temp.id == id)
 					{barraZoom = true;}
 				}
-				var x = parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.left,10);
-				var y = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10)+10;//parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.top);
+				x = parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.left,10);
+				y = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10)+10;//parseInt($i(i3GEO.barraDeBotoes.BARRAS[i].id+"_c").style.top);
 				i3GEO.barraDeBotoes.BARRAS[i].destroy();
 				i3GEO.barraDeBotoes.inicializaBarra(novoel.id,i3GEO.barraDeBotoes.BARRAS[i].id+"x",barraZoom,x,y);
 			}
