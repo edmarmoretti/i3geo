@@ -1,3 +1,4 @@
+/*jslint white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Desenho de elementos gráficos
 
@@ -27,7 +28,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if (typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -85,9 +86,9 @@ i3GEO.desenho = {
 			linhas: []
 		};
 		try{
-			var divgeo = i3GEO.desenho.criaDivContainer();
+			var divgeo,renderer;
+			divgeo = i3GEO.desenho.criaDivContainer();
 			divgeo.innerHTML = "";
-			var renderer;
 			//
 			//cria o objeto renderer conforme o browser em uso
 			//esse objeto será utilizado nas funções de desenho
@@ -98,7 +99,7 @@ i3GEO.desenho = {
 				renderer = new VMLRenderer();
 				i3GEO.desenho.richdraw = new RichDrawEditor(divgeo, renderer);
 			}
-			catch(e){
+			catch(erro){
 				renderer = new SVGRenderer();
 				i3GEO.desenho.richdraw = new RichDrawEditor(divgeo, renderer);
 			}
@@ -117,7 +118,7 @@ i3GEO.desenho = {
 			//
 			i3GEO.eventos.ativa(divgeo);
 		}
-		catch(e){alert("Erro ao tentar criar container richdraw");}
+		catch(erro){alert("Erro ao tentar criar container richdraw");}
 	},
 	/*
 	Function: criaDivContainer
@@ -133,17 +134,18 @@ i3GEO.desenho = {
 	*/
 	criaDivContainer: function(){
 		if (!$i("divGeometriasTemp")){
+			var pos,novoel,ne;
 			//
 			//pega a posição da imagem do mapa para posicionar corretamente o container
 			//
-			var pos = [0,0];
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+			pos = [0,0];
+			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
 			//cria o container
 			//
-			var novoel = document.createElement("div");
+			novoel = document.createElement("div");
 			novoel.id = "divGeometriasTemp";
-			var ne = novoel.style;
+			ne = novoel.style;
 			ne.cursor="crosshair";
 			ne.zIndex=0;
 			ne.position="absolute";
@@ -173,72 +175,73 @@ i3GEO.desenho = {
 	texto {string} - texto que será inserido no tipo "insereTexto"
 	*/	
 	aplica: function(tipo,objeto,n,texto){
+		var pos,r,elemento,elementos,dy,dx,w;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			//
 			//faz o reposicionamento de linhas quando o mouse é movido e a linha está ativa
 			//
-			if((tipo=="resizeLinha") || (tipo=="resizePoligono") && navn){
+			if((tipo==="resizeLinha") || (tipo==="resizePoligono") && navn){
 				try
 				{i3GEO.desenho.richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-				catch(e){window.status=n+" erro ao movimentar a linha ";}
+				catch(erro){window.status=n+" erro ao movimentar a linha ";}
 			}
-			if((tipo=="resizeLinha") && navm){
+			if((tipo==="resizeLinha") && navm){
 				try{
 					//
 					//no caso do ie, a linha tem de ser removida e desenhada novamente
 					//
-					var r = $i(i3GEO.desenho.richdraw.container.id);
+					r = $i(i3GEO.desenho.richdraw.container.id);
 					//verifica se o elemento é do tipo texto, se for, pega o anterior a ele
-					var elemento = r.lastChild;
-					if(elemento.innerHTML != ""){
-						var elementos = r.childNodes;
+					elemento = r.lastChild;
+					if(elemento.innerHTML !== ""){
+						elementos = r.childNodes;
 						if(elementos.length > 3)
-						var elemento = elementos[elementos.length - 3];
+						{elemento = elementos[elementos.length - 3];}
 						else
-						var elemento = elementos[elementos.length - 2];
+						{elemento = elementos[elementos.length - 2];}
 					}
 					r.removeChild(elemento);
-					var dy = objposicaocursor.imgy;
-					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
+					dy = objposicaocursor.imgy;
+					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 				}
-				catch(e){window.status=n+" erro ao movimentar a linha ";}			
+				catch(erro){window.status=n+" erro ao movimentar a linha ";}			
 			}
-			if((tipo=="resizePoligono") && navm){
+			if((tipo==="resizePoligono") && navm){
 				try{
-					var r = $i(i3GEO.desenho.richdraw.container.id);
+					r = $i(i3GEO.desenho.richdraw.container.id);
 					r.removeChild(r.lastChild);
 					r.removeChild(r.lastChild);
-					var dy = objposicaocursor.imgy;
-					var dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
+					dy = objposicaocursor.imgy;
+					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[0])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
 				}
-				catch(e){window.status=n+" erro ao movimentar a linha ";}			
+				catch(erro){window.status=n+" erro ao movimentar a linha ";}			
 			}
-			if(tipo=="insereCirculo"){
-				var dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
-				var dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
-				var w = Math.sqrt(dx + dy);
+			if(tipo==="insereCirculo"){
+				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
+				dy = Math.pow(((pontosdistobj.ytela[n])*1) - ((pontosdistobj.ytela[n-1])*1),2);
+				w = Math.sqrt(dx + dy);
 				if (navn){
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
 					}
-					catch(e){}
+					catch(erro){}
 				}
 				else{
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
 					}
-					catch(e){}
+					catch(erro){}
 				}
 			}
-			if(tipo=="insereTexto"){
+			if(tipo==="insereTexto"){
 				try{
 					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
-				catch(e){}
+				catch(erro){}
 			}
 		}
 	}
