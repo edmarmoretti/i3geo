@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
+
 /*
 Title: Seleção de elementos
 
@@ -27,7 +29,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -82,15 +84,16 @@ i3GEO.selecao = {
 	A janela terá como id "wdocai"
 	*/
 	janelaOpcoes: function(){
+		var janela,temp;
 		g_tipoacao = "selecao";
 		i3GEO.temaAtivo = "";
-		var janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o  <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>");
+		janela = i3GEO.janela.cria("430px","320px",i3GEO.configura.locaplic+'/ferramentas/selecao/index.htm',"","","Sele&ccedil;&atilde;o  <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>");
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.selecao.clique()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");}
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.selecao.atualizaGrafico()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.selecao.atualizaGrafico()");}
 
-		var temp = function(){
+		temp = function(){
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.selecao.clique()");
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.selecao.atualizaGrafico()");
 			try{
@@ -111,12 +114,12 @@ i3GEO.selecao = {
 	disparo do evento NAVEGAMAPA
 	*/
 	atualizaGrafico: function(){
-		if(g_tipoacao == "selecao"){
+		if(g_tipoacao === "selecao"){
 			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if(doc.getElementById("guia5obj")){
-				if(doc.getElementById("guia5obj").style.display=="block"){
-					if(window.parent.frames["wdocai"].atualizaGrafico)
-					{window.parent.frames["wdocai"].atualizaGrafico();}
+				if(doc.getElementById("guia5obj").style.display==="block"){
+					if(window.parent.frames.wdocai.atualizaGrafico)
+					{window.parent.frames.wdocai.atualizaGrafico();}
 				}
 			}
 		}		
@@ -127,15 +130,18 @@ i3GEO.selecao = {
 	Seleciona elementos clicando no mapa
 	*/
 	clique: function(){
-		if (g_tipoacao == "selecao"){
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var tipo = "adiciona";
+		if (g_tipoacao === "selecao"){
+			var doc,tipo,tolerancia;
+			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			tipo = "adiciona";
 			//pega o tipo de operacao da janela de selecao
-			if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
-			if (i3GEO.temaAtivo == ""){alert("Nenhum tema ativo");return;}
-			var tolerancia = doc.getElementById("toleranciapt").value;
+			if (doc.getElementById("tipoOperacao"))
+			{tipo = doc.getElementById("tipoOperacao").value;}
+			if (i3GEO.temaAtivo === "")
+			{alert("Nenhum tema ativo");return;}
+			tolerancia = doc.getElementById("toleranciapt").value;
 			//se tipo for limpa ou inverte, a operacao nao e executada no clique no mapa
-			if ((tipo != "limpa") && (tipo != "inverte"))
+			if ((tipo !== "limpa") && (tipo !== "inverte"))
 			{i3GEO.selecao.porxy(i3GEO.temaAtivo,tipo,tolerancia);}
 		}
 	},
@@ -151,7 +157,8 @@ i3GEO.selecao = {
 		Marca o início do desenho do box, capturando a posição do mouse
 		*/
 		inicia: function(){
-			if(g_tipoacao!='selecaobox'){return;}
+			if(g_tipoacao !== 'selecaobox')
+			{return;}
 			i3GEO.selecao.box.criaBox();
 			adicionaxyBox = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			var i = $i("i3geoboxSel").style;
@@ -177,29 +184,30 @@ i3GEO.selecao = {
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
-			try{i3GEO.desenho.richdraw.fecha()}catch(e){}
+			try{i3GEO.desenho.richdraw.fecha();}catch(e){}
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";
-
+			var novoel,temp;
 			if(!$i("i3geoboxSel")){
-				var novoel = document.createElement("div");
+				novoel = document.createElement("div");
 				novoel.style.width = "0px";
 				novoel.style.height = "0px";
 				novoel.id = "i3geoboxSel";
 				novoel.style.display = "none";
 				novoel.style.fontSize = "0px";
 				if(navn)
-				{novoel.style.opacity = .25;}
+				{novoel.style.opacity = 0.25;}
 				novoel.style.backgroundColor = "yellow";
 				novoel.style.position="absolute";
 				novoel.style.border = "2px solid #ff0000";		
 				if (navm)
 				{novoel.style.filter = "alpha(opacity=25)";}
 				novoel.onmousemove = function(){
-					var b = $i("i3geoboxSel").style;
-					var wb = parseInt(b.width);
-					var hb = parseInt(b.height);
+					var b,wb,hb;
+					b = $i("i3geoboxSel").style;
+					wb = parseInt(b.width,10);
+					hb = parseInt(b.height,10);
 					if (navm){
 						if(wb > 2)
 						{b.width = wb - 2;}
@@ -211,15 +219,16 @@ i3GEO.selecao = {
 						b.height = hb - 2 + "px";
 					}
 				};
-				novoel.onmouseup = function(){i3GEO.selecao.box.termina()};
+				novoel.onmouseup = function()
+				{i3GEO.selecao.box.termina();};
 				document.body.appendChild(novoel);
 			}
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"zoom","i3geoboxSel",i3GEO.configura.locaplic);
 			if($i("img")){
 				$i("img").title = "";
-				var temp = "zoom";
+				temp = "zoom";
 				if(i3GEO.Interface.ATIVAMENUCONTEXTO)
-				var temp = "zoom_contexto";
+				{temp = "zoom_contexto";}
 				i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 			}
 		},
@@ -229,9 +238,12 @@ i3GEO.selecao = {
 		Desloca o box conforme o mouse é movimentado
 		*/
 		desloca: function(){
-			if(g_tipoacao!='selecaobox'){return;}
-			var bxs = $i("i3geoboxSel").style;
-			if(bxs.display != "block"){return;}
+			if(g_tipoacao !== 'selecaobox')
+			{return;}
+			var bxs,ppx,py;
+			bxs = $i("i3geoboxSel").style;
+			if(bxs.display !== "block")
+			{return;}
 			ppx = objposicaocursor.imgx + adicionaxyBox[0];
 			py = objposicaocursor.imgy + adicionaxyBox[1];
 			if (navm){
@@ -261,22 +273,24 @@ i3GEO.selecao = {
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
-			if(g_tipoacao!='selecaobox'){return;}
+			if(g_tipoacao !== 'selecaobox')
+			{return;}
+			var valor,v,x1,y1,x2,y2,limpa,doc,tipo;
 			try{
-				var valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
-				var v = valor[0];
-				var x1 = valor[1];
-				var y1 = valor[2];
-				var x2 = valor[3];
-				var y2 = valor[4];
-				var limpa = function(){
+				valor = i3GEO.calculo.rect2ext("i3geoboxSel",i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
+				v = valor[0];
+				x1 = valor[1];
+				y1 = valor[2];
+				x2 = valor[3];
+				y2 = valor[4];
+				limpa = function(){
 					var bxs = $i("i3geoboxSel").style;
 					bxs.display="none";
 					bxs.visibility="hidden";
 					bxs.width = 0;
 					bxs.height = 0;
 				};
-				if((x1 == x2) || (y1 == y2))
+				if((x1 === x2) || (y1 === y2))
 				{limpa.call();return;}
 				// se o retangulo for negativo pula essa parte para nï¿½ gerar erro
 				i3GEO.parametros.mapexten=v;
@@ -284,12 +298,13 @@ i3GEO.selecao = {
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.selecao.box.desloca()");
 				i3GEO.eventos.MOUSEUP.remove("i3GEO.selecao.box.termina()");
 
-				var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-				var tipo = "adiciona";
+				doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				tipo = "adiciona";
 				//pega o tipo de operacao da janela de selecao
-				if (doc.getElementById("tipoOperacao")){var tipo = doc.getElementById("tipoOperacao").value;}
+				if (doc.getElementById("tipoOperacao"))
+				{tipo = doc.getElementById("tipoOperacao").value;}
 
-				if ((tipo != "limpa") && (tipo != "inverte"))
+				if ((tipo !== "limpa") && (tipo !== "inverte"))
 				{i3GEO.selecao.porbox(i3GEO.temaAtivo,tipo,v);}
 			}
 			catch(e){limpa.call();return;}
@@ -307,7 +322,9 @@ i3GEO.selecao = {
 		Inicia o desenho do polígono
 		*/
 		inicia: function(){
-			try{i3GEO.desenho.richdraw.fecha()}catch(e){}
+			try
+			{i3GEO.desenho.richdraw.fecha();}
+			catch(e){}
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
 			alert("Clique no mapa para desenhar o polígono.");
@@ -326,7 +343,7 @@ i3GEO.selecao = {
 		Modifica o polígono conforme o usuário cria vértices
 		*/
 		move: function(){
-			if (g_tipoacao == "selecaopoli"){
+			if (g_tipoacao === "selecaopoli"){
 				var n = pontosdistobj.xpt.length;
 				if (n > 0){
 					i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhas[n-1],n);
@@ -339,8 +356,9 @@ i3GEO.selecao = {
 		Inclui um novo vértice no polígono
 		*/
 		clique: function(){
-			if (g_tipoacao != "selecaopoli"){return;}
-				var n = pontosdistobj.xpt.length;
+			if (g_tipoacao !== "selecaopoli"){return;}
+				var n,d;
+				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
 				pontosdistobj.ypt[n] = objposicaocursor.ddy;
 				pontosdistobj.xtela[n] = objposicaocursor.telax;
@@ -356,7 +374,7 @@ i3GEO.selecao = {
 				}
 				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
 				if (n > 0){
-					var d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
+					d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy),10);
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 				}
 			i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.selecao.poligono.termina,"divGeometriasTemp");
@@ -367,20 +385,21 @@ i3GEO.selecao = {
 		Termina o desenho do polígono e executa a operação de seleção
 		*/
 		termina: function(){
-			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			var pontos = pontosdistobj;
+			var doc,pontos,n,xs,ys,retorna,p,cp;
+			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+			pontos = pontosdistobj;
 			i3GEO.desenho.richdraw.fecha();
-			var n = pontos.xpt.length;
+			n = pontos.xpt.length;
 			i3GEO.temaAtivo = doc.getElementById("comboTemas").value;
-			var xs = pontos.xpt.toString(",");
-			var ys = pontos.ypt.toString(",");
-			var retorna = function(){
+			xs = pontos.xpt.toString(",");
+			ys = pontos.ypt.toString(",");
+			retorna = function(){
 				i3GEO.janela.fechaAguarde("i3GEO.atualiza",$trad("o1"));
 				i3GEO.atualiza("");
 			};
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
-			var cp = new cpaint();
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoPoli";
+			cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_transfer_mode('POST');
 			cp.set_response_type("JSON");

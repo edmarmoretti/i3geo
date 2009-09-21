@@ -1,3 +1,4 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Temas
 
@@ -23,7 +24,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -49,7 +50,8 @@ i3GEO.tema = {
 		var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 		do
 		{p.removeChild(p.childNodes[0]);}
-		while (p.childNodes.length > 0);
+		while
+		(p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
@@ -69,7 +71,7 @@ i3GEO.tema = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = function(retorno){
 			i3GEO.janela.fechaAguarde();
-			if(retorno.data != "erro")
+			if(retorno.data !== "erro")
 			{window.open(retorno.data);}
 			else
 			{alert("Não existe fonte registrada para esse tema");}
@@ -158,12 +160,13 @@ i3GEO.tema = {
 	*/
 	mudatransp: function(idtema){
 		g_operacao = "transparencia";
+		var valor;
 		//o campo input com o valor possui o prefixo 'tr' seguido pelo código do tema
 		if ($i("tr"+idtema))
-		{var valor = $i("tr"+idtema).value;}
+		{valor = $i("tr"+idtema).value;}
 		else
 		{alert("Ocorreu um erro");}
-		if (valor != ""){
+		if (valor !== ""){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.contadorAtualiza++;
 			i3GEO.php.mudatransp(i3GEO.atualiza,idtema,valor);
@@ -182,11 +185,12 @@ i3GEO.tema = {
 	*/
 	mudanome: function(idtema){
 		g_operacao = "mudanome";
+		var valor;
 		if($i("nn"+idtema))
-		{var valor = $i("nn"+idtema).value;}
+		{valor = $i("nn"+idtema).value;}
 		else
 		{alert("Ocorreu um erro");}
-		if (valor != ""){
+		if (valor !== ""){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.contadorAtualiza++;
 			i3GEO.php.mudanome(i3GEO.atualiza,idtema,valor);
@@ -221,24 +225,25 @@ i3GEO.tema = {
 	*/
 	mostralegendajanela: function(idtema,nome,tipoOperacao){
 		//alert(idtema+" "+status)
-		if(tipoOperacao == "ativatimer"){
+		var retorna,janela;
+		if(tipoOperacao === "ativatimer"){
 			mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('"+idtema+"','"+nome+"','abrejanela')",4000);
 		}
-		if(tipoOperacao == "abrejanela"){
+		if(tipoOperacao === "abrejanela"){
 			try{clearTimeout(mostralegendajanelaTimer);}
-			catch(e){};
-			var retorna = function(retorno){
+			catch(e){}
+			retorna = function(retorno){
 				$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
 			};
 			if(!$i("janelaLegenda"+idtema)){
-				var janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
+				janela = i3GEO.janela.cria("250px","","","","",nome,"janelaLegenda"+idtema,false);
 				janela[2].style.textAlign="left";
 				janela[2].style.background="white";
 				janela[2].innerHTML = $trad("o1");	
 			}
 			i3GEO.php.criaLegendaHTML(retorna,idtema,"legenda3.htm");
 		}
-		if(tipoOperacao == "desativatimer"){
+		if(tipoOperacao === "desativatimer"){
 			clearTimeout(mostralegendajanelaTimer);
 		}
 	},
@@ -266,10 +271,10 @@ i3GEO.tema = {
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
-			if(arguments.lenght == 1)
+			if(arguments.lenght === 1)
 			{tipo = "kml";}
-			if(tema == "mapfile"){
-				if(i3GEO.parametros.mapfile == "")
+			if(tema === "mapfile"){
+				if(i3GEO.parametros.mapfile === "")
 				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
 				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+i3GEO.parametros.mapfile,"","","Kml"));
 			}

@@ -120,18 +120,16 @@ i3GEO.calculo = {
 			if(arguments.length == 4){
 				cellsize = i3GEO.parametros.pixelsize;
 			}
-
 			if(!docmapa)
 			{docmapa = window.document;}
 			dc = docmapa;	
 			pos = i3GEO.util.pegaPosicaoObjeto(dc);
-			imgext = ext; //i3GEO.parametros.mapexten;
-			imgext = imgext.split(" ");
+			imgext = ext.split(" ");
 			vx = (vx * 1) - (imgext[0] * 1);
 			vy = (vy * -1) + (imgext[3] * 1);
 			c = cellsize * 1;
 			//var xy = [];
-			return [(vx  / c) + pos[0],(vy / c) + pos[1]];
+			return [(vx  / c) - pos[0],(vy / c) - pos[1]];
 		}
 		catch(e){return([]);}
 	},
