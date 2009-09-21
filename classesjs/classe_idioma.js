@@ -1,3 +1,4 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: false */
 /*
 Title: Idioma
 
@@ -27,7 +28,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -90,7 +91,7 @@ i3GEO.idioma = {
 	Default:
 	{["pt","en","es","it"]}
 	*/
-	SELETORES: new Array("pt","en","es","it"),
+	SELETORES: ["pt","en","es","it"],
 	/*
 	Propriedade: DICIONARIO
 	
@@ -188,7 +189,8 @@ i3GEO.idioma = {
 			//YAHOO.log("Fim traduzir", "i3geo");
 			return t[i3GEO.idioma.ATUAL];
 		}
-		else return;
+		else
+		{return;}
 	},
 	/*
 	Function: adicionaDicionario
@@ -216,7 +218,11 @@ i3GEO.idioma = {
 	alert($trad("pp"))
 	*/
 	adicionaDicionario: function(novodic) {
-		for (k in novodic) { i3GEO.idioma.DICIONARIO[k] = novodic[k]; }
+		for (var k in novodic)
+		{
+			if(novodic.hasOwnProperty(k))
+			{i3GEO.idioma.DICIONARIO[k] = novodic[k];}
+		}
 	},
 	/*
 	Function: mostraDicionario
@@ -224,8 +230,12 @@ i3GEO.idioma = {
 	Abre uma nova janela do navegador com a lista de palavras do dicionário.
 	*/
 	mostraDicionario: function() {
-		var w = window.open();
-		for (k in i3GEO.idioma.DICIONARIO) { w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>"); }
+		var w,k;
+		w = window.open();
+		for (k in i3GEO.idioma.DICIONARIO){
+			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
+			{w.document.write(k+" = "+i3GEO.idioma.traduzir(k)+"<br>");}
+		}
 	},
 
 	/*
@@ -241,7 +251,7 @@ i3GEO.idioma = {
 	*/
 	trocaIdioma: function(codigo) {
 		i3GEO.util.insereCookie("i3geolingua",codigo);
-		window.location.reload(true)
+		window.location.reload(true);
 	},
 	/*
 	Function: listaIdiomas
@@ -252,8 +262,9 @@ i3GEO.idioma = {
 	{Array} Array com os códigos de idioma disponíveis.
 	*/
 	listaIdiomas: function() {
-		for (k in i3GEO.idioma.DICIONARIO){
-			return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));
+		for(var k in i3GEO.idioma.DICIONARIO){
+			if(i3GEO.idioma.DICIONARIO.hasOwnProperty(k))
+			{return (i3GEO.util.listaChaves(i3GEO.idioma.DICIONARIO[k][0]));}
 		}
 	},
 	/*
@@ -270,34 +281,35 @@ i3GEO.idioma = {
 		//
 		//monta o elemento HTML com as bandeiras
 		//
-		var ins = "";
-		var n = i3GEO.idioma.SELETORES.length;
+		var ins,n,w,i,pos,novoel;
+		ins = "";
+		n = i3GEO.idioma.SELETORES.length;
 		if(i3GEO.parametros.w < 550)
-		{var w = "width:12px;"}
-		else {var w = "";}
+		{w = "width:12px;";}
+		else {w = "";}
 		for(i=0;i<n;i++){
 			ins += '<img  style="'+w+'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'+i3GEO.util.$im("branco.gif")+'" onclick="i3GEO.idioma.trocaIdioma(\''+i3GEO.idioma.SELETORES[i]+'\')" ';
-			if(i3GEO.idioma.SELETORES[i] == "en")
-			ins += 'alt="Ingles" id="uk" />';
-			if(i3GEO.idioma.SELETORES[i] == "pt")
-			ins += 'alt="Portugues" id="brasil" />';
-			if(i3GEO.idioma.SELETORES[i] == "es")
-			ins += 'alt="Espanhol" id="espanhol" />';
-			if(i3GEO.idioma.SELETORES[i] == "it")
-			ins += 'alt="Italiano" id="italiano" />';
+			if(i3GEO.idioma.SELETORES[i] === "en")
+			{ins += 'alt="Ingles" id="uk" />';}
+			if(i3GEO.idioma.SELETORES[i] === "pt")
+			{ins += 'alt="Portugues" id="brasil" />';}
+			if(i3GEO.idioma.SELETORES[i] === "es")
+			{ins += 'alt="Espanhol" id="espanhol" />';}
+			if(i3GEO.idioma.SELETORES[i] === "it")
+			{ins += 'alt="Italiano" id="italiano" />';}
 		}
-		if(i3GEO.idioma.IDSELETOR != "" && $i(i3GEO.idioma.IDSELETOR))
+		if(i3GEO.idioma.IDSELETOR !== "" && $i(i3GEO.idioma.IDSELETOR))
 		{$i(i3GEO.idioma.IDSELETOR).innerHTML = ins;}
 		else{
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			if(!$i("i3geoseletoridiomas")){
-				var novoel = document.createElement("div");
+				novoel = document.createElement("div");
 				novoel.innerHTML = ins;
 				novoel.id = "i3geoseletoridiomas";
 				document.body.appendChild(novoel);
 			}
 			else
-			{var novoel = $i("i3geoseletoridiomas");}
+			{novoel = $i("i3geoseletoridiomas");}
 			novoel.style.position = "absolute";
 			novoel.style.top = pos[1] - 17 +"px";
 			novoel.style.left = pos[0]+"px";
@@ -318,7 +330,8 @@ Returns:
 
 {String} Texto traduzido.
 */
-var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
+var $trad = function(id)
+{return (i3GEO.idioma.traduzir(id));};
 //
 	try {
 		var c = i3GEO.util.pegaCookie("i3geolingua");
@@ -327,15 +340,15 @@ var $trad = function(id){return (i3GEO.idioma.traduzir(id))};
 			g_linguagem = c;
 		}
 		else {
-			if(typeof(g_linguagem) != "undefined")
+			if(typeof(g_linguagem) !== "undefined")
 			{i3GEO.idioma.define(g_linguagem);}
 			else {
 				g_linguagem = "pt";
 				i3GEO.idioma.define("pt");
 			}
 		}
-		if(typeof('g_traducao') != "undefined")
+		if(typeof('g_traducao') !== "undefined")
 		{i3GEO.idioma.defineDicionario(g_traducao);}
 	}
-	catch(e){alert("Problemas com idiomas "+e);};
+	catch(e){alert("Problemas com idiomas "+e);}
 //YAHOO.log("carregou classe idioma", "Classes i3geo");

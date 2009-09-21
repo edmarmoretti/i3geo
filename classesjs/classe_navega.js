@@ -86,7 +86,7 @@ i3GEO.navega = {
 	*/
 	zoomin: function(locaplic,sid){
 		//YAHOO.log("zoomin", "i3geo");
-		if(arguments.length > 0){
+		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
 			i3GEO.configura.sid = sid;
 		}
@@ -107,7 +107,7 @@ i3GEO.navega = {
 	*/
 	zoomout: function(locaplic,sid){
 		//YAHOO.log("zoomout", "i3geo");
-		if(arguments.length > 0){
+		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
 			i3GEO.configura.sid = sid;
 		}
@@ -375,10 +375,43 @@ i3GEO.navega = {
 		}
 		var f = "i3GEO.navega.timerNavega = null;i3GEO.janela.abreAguarde('i3GEO.atualiza','"+$trad('o1')+"');"+
 			"i3GEO.contadorAtualiza++;"+
-			"i3GEO.php.pan(i3GEO.atualiza,"+escala+","+x+","+y+");";
-		if(i3GEO.navega.timerNavega != undefined)
+			"i3GEO.php.pan(i3GEO.atualiza,"+escala+",'',"+x+","+y+");";
+		try
 		{clearTimeout(i3GEO.navega.timerNavega);}
+		catch(e){}
 		i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);		
+	},
+	/*
+	Function: panFixoNorte
+	
+	Desloca o mapa para o norte
+	*/
+	panFixoNorte: function(){
+		i3GEO.navega.panFixo('','','norte','','','');
+	},
+	/*
+	Function: panFixoSul
+	
+	Desloca o mapa para o sul
+	*/
+	panFixoSul: function(){
+		i3GEO.navega.panFixo('','','sul','','','');
+	},
+	/*
+	Function: panFixoOeste
+	
+	Desloca o mapa para o oeste
+	*/
+	panFixoOeste: function(){
+		i3GEO.navega.panFixo('','','oeste','','','');
+	},
+	/*
+	Function: panFixoLeste
+	
+	Desloca o mapa para o leste
+	*/
+	panFixoLeste: function(){
+		i3GEO.navega.panFixo('','','leste','','','');
 	},
 	/*
 	Function: mostraRosaDosVentos

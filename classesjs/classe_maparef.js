@@ -27,7 +27,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -143,18 +143,19 @@ i3GEO.maparef = {
 	*/
 	inicia: function(){
 		//YAHOO.log("initJanelaRef", "i3geo");
+		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef;
 		if (!$i("i3geo_winRef")){
-			var novoel = document.createElement("div");
+			novoel = document.createElement("div");
 			novoel.id = "i3geo_winRef";
 			novoel.style.display="none";
 			novoel.style.borderColor="gray";
-			var ins = "";
+			ins = "";
 			if(i3GEO.maparef.PERMITEDESLOCAR){
 				ins += '<div class="hd" style="text-align:left;z-index:20;">';
 				ins += '<span id=maparefmaismenosZoom > ';
-				var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
-				var temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
+				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";		
 				if(i3GEO.maparef.SELETORTIPO){
 					ins += "<select id='refDinamico' onchange='javascript:i3GEO.maparef.atualiza()'>";
@@ -171,7 +172,7 @@ i3GEO.maparef = {
 			novoel.innerHTML = ins;
 			document.body.appendChild(novoel);
 			if(i3GEO.maparef.TRANSICAOSUAVE){
-				var novoel = $i("imagemReferencia");
+				novoel = $i("imagemReferencia");
 				if (navm)
 				{novoel.style.filter='alpha(opacity='+i3GEO.maparef.OPACIDADE+')';}
 				else
@@ -189,27 +190,26 @@ i3GEO.maparef = {
 					{novoel.style.opacity= i3GEO.maparef.OPACIDADE / 100;}				
 				}
 			}
-
 		}
 		if($i("i3geo_winRef").style.display != "block"){
 			$i("i3geo_winRef").style.display = "block";
 			YAHOO.namespace("janelaRef.xp");
-			var temp = "none";
+			temp = "none";
 			if(i3GEO.maparef.PERMITEDESLOCAR)
-			var temp = "shadow";
+			temp = "shadow";
 			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
 			YAHOO.janelaRef.xp.panel.render();
-			var r = $i("i3geo_winRef_c");
+			r = $i("i3geo_winRef_c");
 			if(r){
 				r.style.clip = "rect(0px, 160px, 179px, 0px)";
 				r.style.position = "absolute";
 			}
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 
-			var moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
-			var moveY = pos[1] + i3GEO.maparef.TOP;
+			moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
+			moveY = pos[1] + i3GEO.maparef.TOP;
 			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
-			var escondeRef = function(){
+			escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
 				YAHOO.janelaRef.xp.panel.destroy();	
 				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
@@ -241,13 +241,14 @@ i3GEO.maparef = {
 	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
 	*/
 	atualiza: function(){
-		var dinamico = false;
+		var dinamico,tiporef,temp,re;
+		dinamico = false;
 		if ($i("refDinamico"))
-		{var tiporef = $i("refDinamico").value;}
+		{tiporef = $i("refDinamico").value;}
 		else
-		{var tiporef = "fixo";}
+		{tiporef = "fixo";}
 		if ($i("mapaReferencia")){
-			var temp = $i("maparefmaismenosZoom");
+			temp = $i("maparefmaismenosZoom");
 			if(tiporef == "dinamico"){
 				i3GEO.php.referenciadinamica(i3GEO.maparef.processaImagem,i3GEO.maparef.fatorZoomDinamico,tiporef);
 				if(temp){temp.style.display="inline";}
@@ -258,7 +259,7 @@ i3GEO.maparef = {
 					if(temp){temp.style.display="none";}
 				}
 				else{
-					var re = new RegExp("&mode=map", "g");
+					re = new RegExp("&mode=map", "g");
 					$i("imagemReferencia").src = $i(i3GEO.Interface.IDMAPA).src.replace(re,'&mode=reference');
 					i3GEO.gadgets.quadros.grava("referencia",$i("imagemReferencia").src);
 				}
@@ -286,21 +287,22 @@ i3GEO.maparef = {
 	retorno - string no formato "var refimagem='nome da imagem'".
 	*/
 	processaImagem: function(retorno){
+		var w,tiporef,m,novoel,boxrefdd,box;
 		i3GEO.janela.fechaAguarde("ajaxreferencia1");
 		if ((retorno.data != "erro") && (retorno.data != undefined)){
 			eval(retorno.data);
 			i3GEO.parametros.celularef = g_celularef;
 			i3GEO.parametros.extentref = extentref;
 			if ($i("imagemReferencia")){
-				var m = new Image();
+				m = new Image();
 				m.src = refimagem;
 				$i("imagemReferencia").src=m.src;
 			}
 			i3GEO.gadgets.quadros.grava("referencia",refimagem);
-			var tiporef = "fixo";
+			tiporef = "fixo";
 			if ($i("refDinamico"))
-			{var tiporef = $i("refDinamico").value;}
-			var box = $i("boxref");
+			{tiporef = $i("refDinamico").value;}
+			box = $i("boxref");
 			if(tiporef != "fixo"){
 				if (box){box.style.display = "none"}
 				return;
@@ -309,7 +311,7 @@ i3GEO.maparef = {
 			//box movel sobre o mapa
 			//
 			if (!box){
-				var novoel = document.createElement("div");
+				novoel = document.createElement("div");
 				novoel.id = "boxref";
 				novoel.style.zIndex=10;
 				novoel.style.position = 'absolute';
@@ -318,22 +320,23 @@ i3GEO.maparef = {
 				if (navm){novoel.style.filter='alpha(opacity=40)';}
 				else{novoel.style.opacity= .4;}
 				$i("mapaReferencia").appendChild(novoel);
-				var boxrefdd = new YAHOO.util.DD("boxref");
+				boxrefdd = new YAHOO.util.DD("boxref");
 				novoel.onmouseup = function(){
-					var rect = $i("boxref");
-					var telaminx = parseInt(rect.style.left);
-					var telamaxy = parseInt(rect.style.top);
-					var telamaxx = telaminx + parseInt(rect.style.width);
-					var telaminy = telamaxy + parseInt(rect.style.height);
-					var m = i3GEO.calculo.tela2dd(telaminx,telaminy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
-					var x = i3GEO.calculo.tela2dd(telamaxx,telamaxy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
-					var ext = m[0]+" "+m[1]+" "+x[0]+" "+x[1];
+					var rect,telaminx,telaminxy,telamaxx,telaminy,m,x,ext;
+					rect = $i("boxref");
+					telaminx = parseInt(rect.style.left);
+					telamaxy = parseInt(rect.style.top);
+					telamaxx = telaminx + parseInt(rect.style.width);
+					telaminy = telamaxy + parseInt(rect.style.height);
+					m = i3GEO.calculo.tela2dd(telaminx,telaminy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
+					x = i3GEO.calculo.tela2dd(telamaxx,telamaxy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
+					ext = m[0]+" "+m[1]+" "+x[0]+" "+x[1];
 					i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",ext);
 				};
-				var box = $i("boxref");
+				box = $i("boxref");
 			}
 			i3GEO.calculo.ext2rect("boxref",extentref,i3GEO.parametros.mapexten,g_celularef,$i("mapaReferencia"));
-			var w = parseInt(box.style.width);
+			w = parseInt(box.style.width);
 			if(w > 120 || w < 10)
 			{box.style.display = "none";}
 			else{
@@ -355,7 +358,7 @@ i3GEO.maparef = {
 			i3GEO.php.pan(i3GEO.atualiza,i3GEO.parametros.mapscale,"ref",objposicaocursor.refx,objposicaocursor.refy);
 		}
 		catch(e)
-		{var e = "";i3GEO.janela.fechaAguarde("i3GEO.atualiza");}	
+		{i3GEO.janela.fechaAguarde("i3GEO.atualiza");}	
 	}
 };
 //YAHOO.log("carregou classe maparef", "Classes i3geo");
