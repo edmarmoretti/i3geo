@@ -843,7 +843,10 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: listaLigadosDesligados
 	
-	Lista os temas que estão ligados e os que estão desligados.
+	Lista os temas que estão ligados e os que estão desligados
+	tendo como fonte de busca os checkbox existentes na árvore.
+	
+	Esse método é mais demorado pois varre a árvore toda. Porém, obtém o status verdadeiro do tema.
 	
 	Return:
 	{Array} - array com os códigos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
@@ -922,7 +925,7 @@ i3GEO.arvoreDeCamadas = {
 	
 	{JSON}
 	*/
-	pegaTema: function pegatema(idtema){
+	pegaTema: function(idtema){
 		var c,i;
 		c = i3GEO.arvoreDeCamadas.CAMADAS.length;
 		for (i=0; i<c; i++){
@@ -930,6 +933,48 @@ i3GEO.arvoreDeCamadas = {
 				return (i3GEO.arvoreDeCamadas.CAMADAS[i]);
 			}
 		}	
+	},
+	/*
+	Function: filtraCamadas
+	
+	Busca temas na variável i3GEO.arvoreDeCamadas.CAMADAS aplicando um filtro
+	
+	Parameters:
+	
+	propriedade {string} - propriedade de CAMADAS que será filtrado
+	
+	valor - valor do filtro
+	
+	operador {string} - operador entre propriedade e valor igual|diferente
+	
+	camadas {array} - array do tipo i3GEO.arvoreDeCamadas.CAMADAS
+	
+	Return:
+	{Array}
+	*/
+	filtraCamadas: function(propriedade,valor,operador,camadas){
+    	var resultado = [],
+    		i = 0,
+    		temp,
+    		nelementos = camadas.length,
+    		ltema;
+    	if (nelementos > 0){
+	 		do{
+	   			ltema = camadas[i];
+          		temp = eval("ltema."+propriedade);
+          		if(operador === "igual"){
+          			if(temp === valor)
+           			{resultado.push(ltema);}
+           		}
+          		if(operador === "diferente"){
+          			if(temp !== valor)
+           			{resultado.push(ltema);}
+           		}
+           		i++;        		
+      		}
+   			while(i < nelementos);
+   		}
+   		return resultado;
 	}
 };
 //
