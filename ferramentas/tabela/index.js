@@ -211,6 +211,12 @@ function zoomlinhaf2()
 	}
 	//redesenha o mapa
 	concluidof()
+	if(window.parent.i3GEO.Interface.ATUAL == "googlemaps"){
+		window.parent.i3GEO.Interface.googlemaps.zoom2extent(ext);
+	}
+	if(window.parent.i3GEO.Interface.ATUAL == "openlayers"){
+		window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
+	}		
 }
 //exclui uma coluna
 function excluicolunaf(coluna)
