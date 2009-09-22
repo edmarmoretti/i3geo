@@ -680,6 +680,7 @@ i3GEO.mapa = {
 						i3GEO.barraDeBotoes.ativaIcone("identifica");
 						g_tipoacao='identifica';
 						g_operacao='identifica';
+						i3GEOF.identifica.ativaFoco();
 					};
 					minimiza = function(){
 						var temp = $i("i3GEOF.identifica_corpo");
