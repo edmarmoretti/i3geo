@@ -674,16 +674,30 @@ i3GEO.mapa = {
 				i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");
 				if(typeof(i3GEOF.identifica) === 'undefined'){
 					//função para o clique sobre o cabecalho da janela
-					var cabecalho,janela,js,divid,ini,temp;
+					var minimiza,cabecalho,janela,js,divid,ini,temp;
+					//funcao que sera executada ao ser clicado no cabeçalho da janela
 					cabecalho = function(){
 						i3GEO.barraDeBotoes.ativaIcone("identifica");
 						g_tipoacao='identifica';
 						g_operacao='identifica';
 					};
-					janela = i3GEO.janela.cria("450px","250px","","","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>","i3GEOF.identifica",false,"hd",cabecalho);
+					minimiza = function(){
+						var temp = $i("i3GEOF.identifica_corpo");
+						if(temp){
+							if(temp.style.display === "block")
+							{temp.style.display = "none";}
+							else
+							{temp.style.display = "block";}
+						}
+					};
+					//cria a janela flutuante
+					janela = i3GEO.janela.cria("450px","250px","","","","Identifica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>","i3GEOF.identifica",false,"hd",cabecalho,minimiza);
+					//javascript que será carregado
 					js = i3GEO.configura.locaplic+"/ferramentas/identifica/index.js";
 					divid = janela[2].id;
+					//funcao que será executada ao carregar o script
 					ini = "i3GEOF.identifica.inicia('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','"+i3GEO.temaAtivo+"',"+objposicaocursor.ddx+","+objposicaocursor.ddy+",'"+divid+"',true,true)";
+					//carrega o script
 					i3GEO.util.scriptTag(js,ini,"i3GEOF.identifica_script");
 					
 					if(i3GEO.Interface.ATUAL !== "googlemaps"){

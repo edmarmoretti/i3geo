@@ -55,7 +55,7 @@ i3GEO.navega = {
 	Default:
 	{1500}
 	*/
-	TEMPONAVEGAR: 800,
+	TEMPONAVEGAR: 600,
 	/*
 	Propriedade: FATORZOOM
 	

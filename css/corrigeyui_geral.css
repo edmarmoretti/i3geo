@@ -86,6 +86,17 @@ width:25px;
 z-index:2001;
 }
 
+.yui-skin-sam .container-minimiza {
+background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 -450px;
+cursor:pointer;
+height:15px;
+position:absolute;
+right:30px;
+top:1px;
+width:25px;
+z-index:2001;
+}
+
 .yui-skin-sam .yui-simple-dialog .bd .yui-icon {
 background:transparent url(../pacotes/yui270/build/assets/skins/sam/sprite.png) no-repeat scroll 0 0;
 float:left;

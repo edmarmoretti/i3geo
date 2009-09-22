@@ -31,6 +31,8 @@ Free Software Foundation, Inc., no endereço
 if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
+YAHOO.namespace("janelaDoca.xp");
+YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
 /*
 Classe: i3GEO.janela
 
@@ -132,11 +134,15 @@ i3GEO.janela = {
 	
 	classe {String} - (opcional) classe CSS que será aplicada à barra de menu. Por default o valor é hd2
 
+	funcaoCabecalho {function} - (opcional) funcao que será executada quando o usuário clicar no cabecalho
+	
+	funcaoMinimiza {function} - (opcional) funcao que será executada para minimizar a janela
+
 	Return:
 	
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
-	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho){
+	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix;
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
@@ -150,21 +156,27 @@ i3GEO.janela = {
 			modal = false;
 			classe = "hd";
 			funcaoCabecalho = null;
+			funcaoMinimiza = null;
 		}
 		if (arguments.length === 7){
 			modal = false;
 			classe = "hd";
 			funcaoCabecalho = null;
+			funcaoMinimiza = null;
 		}
 		if (arguments.length === 8){
 			classe = "hd";
 			funcaoCabecalho = null;
+			funcaoMinimiza = null;
 		}
 		if (arguments.length === 9){
 			funcaoCabecalho = null;
+			funcaoMinimiza = null;
+		}
+		if (arguments.length === 10){
+			funcaoMinimiza = null;
 		}
 		wlargura_ = parseInt(wlargura,10)+0+"px";
-		YAHOO.namespace("janelaDoca.xp");
 		if ($i(id))
 		{YAHOO.janelaDoca.xp.panel.destroy();}
 		if($i(id+"_c"))
@@ -174,7 +186,9 @@ i3GEO.janela = {
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
-		ins += '</div><div id="'+id+'_corpo" class="bd" style="padding:5px">';
+		if(funcaoMinimiza)
+		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza' ></div>";}
+		ins += '</div><div id="'+id+'_corpo" class="bd" style="display:block;padding:5px">';
 		if(wsrc !== "")
 		{ins += '<iframe name="'+id+'i" id="'+id+'i" valign="top" style="border:0px white solid"></iframe>';}
 		ins += '</div>';
@@ -207,12 +221,16 @@ i3GEO.janela = {
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
+		//YAHOO.janelaDoca.xp.panel.setFooter = "oi";
 		YAHOO.janelaDoca.xp.panel.render();
+		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
 		if(i3GEO.Interface.ATUAL==="googleearth"){classe = "bd";}
 		temp = $i(id+'_cabecalho');
 		temp.className = classe;
 		if(funcaoCabecalho)
 		{temp.onclick = funcaoCabecalho;}
+		if(funcaoMinimiza)
+		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
 		return([YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},

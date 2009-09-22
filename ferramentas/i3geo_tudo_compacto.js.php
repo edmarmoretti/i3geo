@@ -5456,6 +5456,7 @@ version: 2.7.0
 this._hasKeyEventHandlers=true;}this.fireEvent("focus",O);},_onBlur:function(N){this.removeStateCSSClasses("focus");if(this.get("type")!="menu"){this.removeStateCSSClasses("active");}if(this._activationKeyPressed){M.on(document,"keyup",this._onDocumentKeyUp,null,this);}C=null;this.fireEvent("blur",N);},_onDocumentKeyUp:function(N){if(this._isActivationKey(M.getCharCode(N))){this._activationKeyPressed=false;M.removeListener(document,"keyup",this._onDocumentKeyUp);}},_onKeyDown:function(O){var N=this._menu;if(this.get("type")=="split"&&this._isSplitButtonOptionKey(O)){this.fireEvent("option",O);}else{if(this._isActivationKey(M.getCharCode(O))){if(this.get("type")=="menu"){this._showMenu(O);}else{this._activationKeyPressed=true;this.addStateCSSClasses("active");}}}if(N&&N.cfg.getProperty("visible")&&M.getCharCode(O)==27){N.hide();this.focus();}},_onKeyUp:function(N){var O;if(this._isActivationKey(M.getCharCode(N))){O=this.get("type");if(O=="checkbox"||O=="radio"){this.set("checked",!(this.get("checked")));}this._activationKeyPressed=false;if(this.get("type")!="menu"){this.removeStateCSSClasses("active");}}},_onClick:function(Q){var S=this.get("type"),N,R,O,P;switch(S){case"radio":case"checkbox":if(!this._hasDefaultTitle){if(this.get("checked")){N=(S=="radio")?this.RADIO_CHECKED_TITLE:this.CHECKBOX_CHECKED_TITLE;}else{N=(S=="radio")?this.RADIO_DEFAULT_TITLE:this.CHECKBOX_DEFAULT_TITLE;}this.set("title",N);}break;case"submit":if(Q.returnValue!==false){this.submitForm();}break;case"reset":R=this.getForm();if(R){R.reset();}break;case"menu":N=this._menu.cfg.getProperty("visible")?this.MENUBUTTON_MENU_VISIBLE_TITLE:this.MENUBUTTON_DEFAULT_TITLE;this.set("title",N);break;case"split":if(this._nOptionRegionX>0&&(M.getPageX(Q)>this._nOptionRegionX)){P=false;}else{this._hideMenu();O=this.get("srcelement");if(O&&O.type=="submit"&&Q.returnValue!==false){this.submitForm();}}N=this._menu.cfg.getProperty("visible")?this.SPLITBUTTON_OPTION_VISIBLE_TITLE:this.SPLITBUTTON_DEFAULT_TITLE;this.set("title",N);break;}return P;},_onDblClick:function(O){var N=true;if(this.get("type")=="split"&&M.getPageX(O)>this._nOptionRegionX){N=false;}return N;},_onAppendTo:function(N){I.later(0,this,this._addListenersToForm);},_onFormReset:function(O){var P=this.get("type"),N=this._menu;if(P=="checkbox"||P=="radio"){this.resetValue("checked");}if(J&&N&&(N instanceof J)){this.resetValue("selectedMenuItem");}},_onFormSubmit:function(N){this.createHiddenFields();},_onDocumentMouseDown:function(Q){var N=M.getTarget(Q),P=this.get("element"),O=this._menu.element;if(N!=P&&!G.isAncestor(P,N)&&N!=O&&!G.isAncestor(O,N)){this._hideMenu();M.removeListener(document,"mousedown",this._onDocumentMouseDown);}},_onOption:function(N){if(this.hasClass("yui-split-button-activeoption")){this._hideMenu();this._bOptionPressed=false;}else{this._showMenu(N);this._bOptionPressed=true;}},_onMenuShow:function(O){M.on(document,"mousedown",this._onDocumentMouseDown,null,this);var N,P;if(this.get("type")=="split"){N=this.SPLITBUTTON_OPTION_VISIBLE_TITLE;P="activeoption";}else{N=this.MENUBUTTON_MENU_VISIBLE_TITLE;P="active";}this.addStateCSSClasses(P);this.set("title",N);},_onMenuHide:function(P){var O=this._menu,N,Q;if(this.get("type")=="split"){N=this.SPLITBUTTON_DEFAULT_TITLE;Q="activeoption";}else{N=this.MENUBUTTON_DEFAULT_TITLE;Q="active";}this.removeStateCSSClasses(Q);this.set("title",N);if(this.get("type")=="split"){this._bOptionPressed=false;}},_onMenuKeyDown:function(P,O){var N=O[0];if(M.getCharCode(N)==27){this.focus();if(this.get("type")=="split"){this._bOptionPressed=false;}}},_onMenuRender:function(P){var S=this.get("element"),O=S.parentNode,N=this._menu,R=N.element,Q=N.srcElement;if(O!=R.parentNode){O.appendChild(R);}this._renderedMenu=true;if(Q&&Q.nodeName.toLowerCase()==="select"&&Q.value){this.set("selectedMenuItem",N.getItem(Q.selectedIndex));}},_onMenuClick:function(O,N){var Q=N[1],P;if(Q){this.set("selectedMenuItem",Q);P=this.get("srcelement");if(P&&P.type=="submit"){this.submitForm();}this._hideMenu();}},_onSelectedMenuItemChange:function(N){var O=N.prevValue,P=N.newValue;if(O){G.removeClass(O.element,"yui-button-selectedmenuitem");}if(P){G.addClass(P.element,"yui-button-selectedmenuitem");}},createButtonElement:function(N){var P=this.NODE_NAME,O=document.createElement(P);O.innerHTML="<"+P+' class="first-child">'+(N=="link"?"<a></a>":'<button type="button"></button>')+"</"+P+">";return O;},addStateCSSClasses:function(N){var O=this.get("type");if(I.isString(N)){if(N!="activeoption"&&N!="hoveroption"){this.addClass(this.CSS_CLASS_NAME+("-"+N));}this.addClass("yui-"+O+("-button-"+N));}},removeStateCSSClasses:function(N){var O=this.get("type");if(I.isString(N)){this.removeClass(this.CSS_CLASS_NAME+("-"+N));this.removeClass("yui-"+O+("-button-"+N));}},createHiddenFields:function(){this.removeHiddenFields();var V=this.getForm(),Z,O,S,X,Y,T,U,N,R,W,P,Q=false;if(V&&!this.get("disabled")){O=this.get("type");S=(O=="checkbox"||O=="radio");if((S&&this.get("checked"))||(E==this)){Z=F((S?O:"hidden"),this.get("name"),this.get("value"),this.get("checked"));if(Z){if(S){Z.style.display="none";}V.appendChild(Z);}}X=this._menu;if(J&&X&&(X instanceof J)){Y=this.get("selectedMenuItem");P=X.srcElement;Q=(P&&P.nodeName.toUpperCase()=="SELECT");if(Y){U=(Y.value===null||Y.value==="")?Y.cfg.getProperty("text"):Y.value;T=this.get("name");if(Q){W=P.name;}else{if(T){W=(T+"_options");}}if(U&&W){N=F("hidden",W,U);V.appendChild(N);}}else{if(Q){V.appendChild(P);}}}if(Z&&N){this._hiddenFields=[Z,N];}else{if(!Z&&N){this._hiddenFields=N;}else{if(Z&&!N){this._hiddenFields=Z;}}}R=this._hiddenFields;}return R;},removeHiddenFields:function(){var Q=this._hiddenFields,O,P;function N(R){if(G.inDocument(R)){R.parentNode.removeChild(R);}}if(Q){if(I.isArray(Q)){O=Q.length;if(O>0){P=O-1;do{N(Q[P]);}while(P--);}}else{N(Q);}this._hiddenFields=null;}},submitForm:function(){var Q=this.getForm(),P=this.get("srcelement"),O=false,N;if(Q){if(this.get("type")=="submit"||(P&&P.type=="submit")){E=this;
 }if(L.ie){O=Q.fireEvent("onsubmit");}else{N=document.createEvent("HTMLEvents");N.initEvent("submit",true,true);O=Q.dispatchEvent(N);}if((L.ie||L.webkit)&&O){Q.submit();}}return O;},init:function(O,a){var Q=a.type=="link"?"a":"button",V=a.srcelement,Z=O.getElementsByTagName(Q)[0],X;if(!Z){X=O.getElementsByTagName("input")[0];if(X){Z=document.createElement("button");Z.setAttribute("type","button");X.parentNode.replaceChild(Z,X);}}this._button=Z;this._hasDefaultTitle=(a.title&&a.title.length>0);YAHOO.widget.Button.superclass.init.call(this,O,a);var T=this.get("id"),N=T+"-button";Z.id=N;var U,W;var d=function(e){return(e.htmlFor===T);};var S=function(){W.setAttribute((L.ie?"htmlFor":"for"),N);};if(V&&this.get("type")!="link"){U=G.getElementsBy(d,"label");if(I.isArray(U)&&U.length>0){W=U[0];}}D[T]=this;this.addClass(this.CSS_CLASS_NAME);this.addClass("yui-"+this.get("type")+"-button");M.on(this._button,"focus",this._onFocus,null,this);this.on("mouseover",this._onMouseOver);this.on("mousedown",this._onMouseDown);this.on("mouseup",this._onMouseUp);this.on("click",this._onClick);var Y=this.get("onclick");this.set("onclick",null);this.set("onclick",Y);this.on("dblclick",this._onDblClick);if(W){this.on("appendTo",S);}this.on("appendTo",this._onAppendTo);var c=this.get("container"),P=this.get("element"),b=G.inDocument(P),R;if(c){if(V&&V!=P){R=V.parentNode;if(R){R.removeChild(V);}}if(I.isString(c)){M.onContentReady(c,this.appendTo,c,this);}else{this.on("init",function(){I.later(0,this,this.appendTo,c);});}}else{if(!b&&V&&V!=P){R=V.parentNode;if(R){this.fireEvent("beforeAppendTo",{type:"beforeAppendTo",target:R});R.replaceChild(P,V);this.fireEvent("appendTo",{type:"appendTo",target:R});}}else{if(this.get("type")!="link"&&b&&V&&V==P){this._addListenersToForm();}}}this.fireEvent("init",{type:"init",target:this});},initAttributes:function(O){var N=O||{};YAHOO.widget.Button.superclass.initAttributes.call(this,N);this.setAttributeConfig("type",{value:(N.type||"push"),validator:I.isString,writeOnce:true,method:this._setType});this.setAttributeConfig("label",{value:N.label,validator:I.isString,method:this._setLabel});this.setAttributeConfig("value",{value:N.value});this.setAttributeConfig("name",{value:N.name,validator:I.isString});this.setAttributeConfig("tabindex",{value:N.tabindex,validator:I.isNumber,method:this._setTabIndex});this.configureAttribute("title",{value:N.title,validator:I.isString,method:this._setTitle});this.setAttributeConfig("disabled",{value:(N.disabled||false),validator:I.isBoolean,method:this._setDisabled});this.setAttributeConfig("href",{value:N.href,validator:I.isString,method:this._setHref});this.setAttributeConfig("target",{value:N.target,validator:I.isString,method:this._setTarget});this.setAttributeConfig("checked",{value:(N.checked||false),validator:I.isBoolean,method:this._setChecked});this.setAttributeConfig("container",{value:N.container,writeOnce:true});this.setAttributeConfig("srcelement",{value:N.srcelement,writeOnce:true});this.setAttributeConfig("menu",{value:null,method:this._setMenu,writeOnce:true});this.setAttributeConfig("lazyloadmenu",{value:(N.lazyloadmenu===false?false:true),validator:I.isBoolean,writeOnce:true});this.setAttributeConfig("menuclassname",{value:(N.menuclassname||"yui-button-menu"),validator:I.isString,method:this._setMenuClassName,writeOnce:true});this.setAttributeConfig("menuminscrollheight",{value:(N.menuminscrollheight||90),validator:I.isNumber});this.setAttributeConfig("menumaxheight",{value:(N.menumaxheight||0),validator:I.isNumber});this.setAttributeConfig("menualignment",{value:(N.menualignment||["tl","bl"]),validator:I.isArray});this.setAttributeConfig("selectedMenuItem",{value:null});this.setAttributeConfig("onclick",{value:N.onclick,method:this._setOnClick});this.setAttributeConfig("focusmenu",{value:(N.focusmenu===false?false:true),validator:I.isBoolean});},focus:function(){if(!this.get("disabled")){this._button.focus();}},blur:function(){if(!this.get("disabled")){this._button.blur();}},hasFocus:function(){return(C==this);},isActive:function(){return this.hasClass(this.CSS_CLASS_NAME+"-active");},getMenu:function(){return this._menu;},getForm:function(){var N=this._button,O;if(N){O=N.form;}return O;},getHiddenFields:function(){return this._hiddenFields;},destroy:function(){var P=this.get("element"),O=P.parentNode,N=this._menu,R;if(N){if(K&&K.find(N)){K.remove(N);}N.destroy();}M.purgeElement(P);M.purgeElement(this._button);M.removeListener(document,"mouseup",this._onDocumentMouseUp);M.removeListener(document,"keyup",this._onDocumentKeyUp);M.removeListener(document,"mousedown",this._onDocumentMouseDown);var Q=this.getForm();if(Q){M.removeListener(Q,"reset",this._onFormReset);M.removeListener(Q,"submit",this._onFormSubmit);}this.unsubscribeAll();if(O){O.removeChild(P);}delete D[this.get("id")];R=G.getElementsByClassName(this.CSS_CLASS_NAME,this.NODE_NAME,Q);if(I.isArray(R)&&R.length===0){M.removeListener(Q,"keypress",YAHOO.widget.Button.onFormKeyPress);}},fireEvent:function(O,N){var P=arguments[0];if(this.DOM_EVENTS[P]&&this.get("disabled")){return false;}return YAHOO.widget.Button.superclass.fireEvent.apply(this,arguments);},toString:function(){return("Button "+this.get("id"));}});YAHOO.widget.Button.onFormKeyPress=function(R){var P=M.getTarget(R),S=M.getCharCode(R),Q=P.nodeName&&P.nodeName.toUpperCase(),N=P.type,T=false,V,X,O,W;function U(a){var Z,Y;switch(a.nodeName.toUpperCase()){case"INPUT":case"BUTTON":if(a.type=="submit"&&!a.disabled){if(!T&&!O){O=a;}}break;default:Z=a.id;if(Z){V=D[Z];if(V){T=true;if(!V.get("disabled")){Y=V.get("srcelement");if(!X&&(V.get("type")=="submit"||(Y&&Y.type=="submit"))){X=V;}}}}break;}}if(S==13&&((Q=="INPUT"&&(N=="text"||N=="password"||N=="checkbox"||N=="radio"||N=="file"))||Q=="SELECT")){G.getElementsBy(U,"*",this);if(O){O.focus();}else{if(!O&&X){M.preventDefault(R);if(L.ie){X.get("element").fireEvent("onclick");}else{W=document.createEvent("HTMLEvents");W.initEvent("click",true,true);if(L.gecko<1.9){X.fireEvent("click",W);
 }else{X.get("element").dispatchEvent(W);}}}}}};YAHOO.widget.Button.addHiddenFieldsToForm=function(N){var S=G.getElementsByClassName(YAHOO.widget.Button.prototype.CSS_CLASS_NAME,"*",N),Q=S.length,R,O,P;if(Q>0){for(P=0;P<Q;P++){O=S[P].id;if(O){R=D[O];if(R){R.createHiddenFields();}}}}};YAHOO.widget.Button.getButton=function(N){return D[N];};})();(function(){var C=YAHOO.util.Dom,B=YAHOO.util.Event,D=YAHOO.lang,A=YAHOO.widget.Button,E={};YAHOO.widget.ButtonGroup=function(J,H){var I=YAHOO.widget.ButtonGroup.superclass.constructor,K,G,F;if(arguments.length==1&&!D.isString(J)&&!J.nodeName){if(!J.id){F=C.generateId();J.id=F;}I.call(this,(this._createGroupElement()),J);}else{if(D.isString(J)){G=C.get(J);if(G){if(G.nodeName.toUpperCase()==this.NODE_NAME){I.call(this,G,H);}}}else{K=J.nodeName.toUpperCase();if(K&&K==this.NODE_NAME){if(!J.id){J.id=C.generateId();}I.call(this,J,H);}}}};YAHOO.extend(YAHOO.widget.ButtonGroup,YAHOO.util.Element,{_buttons:null,NODE_NAME:"DIV",CSS_CLASS_NAME:"yui-buttongroup",_createGroupElement:function(){var F=document.createElement(this.NODE_NAME);return F;},_setDisabled:function(G){var H=this.getCount(),F;if(H>0){F=H-1;do{this._buttons[F].set("disabled",G);}while(F--);}},_onKeyDown:function(K){var G=B.getTarget(K),I=B.getCharCode(K),H=G.parentNode.parentNode.id,J=E[H],F=-1;if(I==37||I==38){F=(J.index===0)?(this._buttons.length-1):(J.index-1);}else{if(I==39||I==40){F=(J.index===(this._buttons.length-1))?0:(J.index+1);}}if(F>-1){this.check(F);this.getButton(F).focus();}},_onAppendTo:function(H){var I=this._buttons,G=I.length,F;for(F=0;F<G;F++){I[F].appendTo(this.get("element"));}},_onButtonCheckedChange:function(G,F){var I=G.newValue,H=this.get("checkedButton");if(I&&H!=F){if(H){H.set("checked",false,true);}this.set("checkedButton",F);this.set("value",F.get("value"));}else{if(H&&!H.set("checked")){H.set("checked",true,true);}}},init:function(I,H){this._buttons=[];YAHOO.widget.ButtonGroup.superclass.init.call(this,I,H);this.addClass(this.CSS_CLASS_NAME);var J=this.getElementsByClassName("yui-radio-button");if(J.length>0){this.addButtons(J);}function F(K){return(K.type=="radio");}J=C.getElementsBy(F,"input",this.get("element"));if(J.length>0){this.addButtons(J);}this.on("keydown",this._onKeyDown);this.on("appendTo",this._onAppendTo);var G=this.get("container");if(G){if(D.isString(G)){B.onContentReady(G,function(){this.appendTo(G);},null,this);}else{this.appendTo(G);}}},initAttributes:function(G){var F=G||{};YAHOO.widget.ButtonGroup.superclass.initAttributes.call(this,F);this.setAttributeConfig("name",{value:F.name,validator:D.isString});this.setAttributeConfig("disabled",{value:(F.disabled||false),validator:D.isBoolean,method:this._setDisabled});this.setAttributeConfig("value",{value:F.value});this.setAttributeConfig("container",{value:F.container,writeOnce:true});this.setAttributeConfig("checkedButton",{value:null});},addButton:function(J){var L,K,G,F,H,I;if(J instanceof A&&J.get("type")=="radio"){L=J;}else{if(!D.isString(J)&&!J.nodeName){J.type="radio";L=new A(J);}else{L=new A(J,{type:"radio"});}}if(L){F=this._buttons.length;H=L.get("name");I=this.get("name");L.index=F;this._buttons[F]=L;E[L.get("id")]=L;if(H!=I){L.set("name",I);}if(this.get("disabled")){L.set("disabled",true);}if(L.get("checked")){this.set("checkedButton",L);}K=L.get("element");G=this.get("element");if(K.parentNode!=G){G.appendChild(K);}L.on("checkedChange",this._onButtonCheckedChange,L,this);}return L;},addButtons:function(G){var H,I,J,F;if(D.isArray(G)){H=G.length;J=[];if(H>0){for(F=0;F<H;F++){I=this.addButton(G[F]);if(I){J[J.length]=I;}}}}return J;},removeButton:function(H){var I=this.getButton(H),G,F;if(I){this._buttons.splice(H,1);delete E[I.get("id")];I.removeListener("checkedChange",this._onButtonCheckedChange);I.destroy();G=this._buttons.length;if(G>0){F=this._buttons.length-1;do{this._buttons[F].index=F;}while(F--);}}},getButton:function(F){return this._buttons[F];},getButtons:function(){return this._buttons;},getCount:function(){return this._buttons.length;},focus:function(H){var I,G,F;if(D.isNumber(H)){I=this._buttons[H];if(I){I.focus();}}else{G=this.getCount();for(F=0;F<G;F++){I=this._buttons[F];if(!I.get("disabled")){I.focus();break;}}}},check:function(F){var G=this.getButton(F);if(G){G.set("checked",true);}},destroy:function(){var I=this._buttons.length,H=this.get("element"),F=H.parentNode,G;if(I>0){G=this._buttons.length-1;do{this._buttons[G].destroy();}while(G--);}B.purgeElement(H);F.removeChild(H);},toString:function(){return("ButtonGroup "+this.get("id"));}});})();YAHOO.register("button",YAHOO.widget.Button,{version:"2.7.0",build:"1799"});
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: PHP
 
@@ -5485,7 +5486,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -5547,9 +5548,9 @@ i3GEO.php = {
 	Verifica se as variáveis i3GEO.configura.locaplic e i3GEO.configura.sid existem
 	*/
 	verifica: function(){
-		if(i3GEO.configura.locaplic == undefined)
+		if(i3GEO.configura.locaplic === undefined)
 		{alert("variavel i3GEO.configura.locaplic não esta definida");}
-		if(i3GEO.configura.sid == undefined)
+		if(i3GEO.configura.sid === undefined)
 		{alert("variavel i3GEO.configura.locaplic não esta definida");}
 	},
 	/*
@@ -5646,14 +5647,12 @@ i3GEO.php = {
 	*/
 	criaLegendaHTML: function(funcao,tema,template){
 		i3GEO.php.verifica();
-		var c = "sim";
-		if(arguments.length == 1)
-		{
-			var tema = "";
-			var template = "legenda2.htm";
+		if(arguments.length === 1){
+			tema = "";
+			template = "legenda2.htm";
 		}
-		if(arguments.length == 2)
-		{var template = "legenda2.htm";}
+		if(arguments.length === 2)
+		{template = "legenda2.htm";}
 		
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"criaLegendaHTML",funcao);	
@@ -5683,7 +5682,8 @@ i3GEO.php = {
 	*/
 	ligatemas: function(funcao,desligar,ligar,adicionar){
 		i3GEO.php.verifica();
-		if(arguments.length == 3){var adicionar = "nao";}
+		if(arguments.length === 3)
+		{adicionar = "nao";}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=ligatemas&desligar="+desligar+"&ligar="+ligar+"&adicionar="+adicionar+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"ligaDesligaTemas",funcao);	
 	},
@@ -5748,9 +5748,9 @@ i3GEO.php = {
 	<Mapa->listaTemas>	
 	*/
 	listaTemas: function(funcao,tipo,locaplic,sid){
-		if(arguments.length == 2){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+		if(arguments.length === 2){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemas&g_sid="+sid+"&tipo="+tipo;
 		cpJSON.call(p,"listaTemas",funcao);	
@@ -5795,7 +5795,8 @@ i3GEO.php = {
 	*/
 	geo2utm: function(funcao,x,y){
 		i3GEO.php.verifica();
-		if($i("aguardeGifAberto")){return;}
+		if($i("aguardeGifAberto"))
+		{return;}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+x+"&y="+y+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"geo2utm",funcao);	
 	},
@@ -5910,8 +5911,8 @@ i3GEO.php = {
 	*/
 	referenciadinamica: function(funcao,zoom,tipo){
 		i3GEO.php.verifica();
-		if(arguments.length == 2)
-		{var tipo = "dinamico"}
+		if(arguments.length === 2)
+		{tipo = "dinamico";}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo;
 		cpJSON.call(p,"retornaReferenciaDinamica",funcao);	
 	},
@@ -6000,24 +6001,26 @@ i3GEO.php = {
 	<Navegacao->mudaExtensao>	
 	*/
 	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
-		if(arguments.length == 3){
+		var retorno,p;
+		if(arguments.length === 3){
 			i3GEO.php.verifica();
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
 		}
-		if(ext == 'undefined'){alert("extensao nao definida");return;}
-		var retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
+		if(ext === 'undefined')
+		{alert("extensao nao definida");return;}
+		retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				i3GEO.Interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.Interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
 				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
 			}
-			if(i3GEO.Interface.ATUAL == "padrao"){funcao.call();}
+			if(i3GEO.Interface.ATUAL === "padrao"){funcao.call();}
 		};
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
+		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	
 	},
 	/*
@@ -6134,21 +6137,22 @@ i3GEO.php = {
 	*/
 	zoomtema: function(funcao,tema){
 		i3GEO.php.verifica();
-		var retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
+		var retorno,p;
+		retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				eval(retorno.data.variaveis);
 				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.Interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
 				eval(retorno.data.variaveis);
 				i3GEO.Interface.openlayers.zoom2ext(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.Interface.ATUAL == "padrao")
+			if(i3GEO.Interface.ATUAL === "padrao")
 			{funcao.call();}
 		};
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomtema&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomtema",retorno);	
 	},
 	/*
@@ -6161,21 +6165,22 @@ i3GEO.php = {
 	*/
 	zoomsel: function(funcao,tema){
 		i3GEO.php.verifica();
-		var retorno = function(retorno){
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
+		var retorno,p;
+		retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
 				eval(retorno.data.variaveis);
 				i3GEO.Interface.googlemaps.zoom2extent(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.Interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
 				eval(retorno.data.variaveis);
 				i3GEO.Interface.openlayers.zoom2ext(mapexten);
     			i3GEO.janela.fechaAguarde();
 			}
-			if(i3GEO.Interface.ATUAL == "padrao")
+			if(i3GEO.Interface.ATUAL === "padrao")
 			{funcao.call();}
 		};
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomsel&tema="+tema+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"zoomsel",retorno);
 	},
 	/*
@@ -6226,10 +6231,10 @@ i3GEO.php = {
 	<Mapa->adicionatemawms>	
 	*/
 	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
-		if(arguments.length == 11){
+		if(arguments.length === 11){
 			i3GEO.php.verifica();
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?g_sid="+sid+"&funcao=adicionatemawms&servico="+servico+"&tema="+tema+"&nome="+nome+"&proj="+proj+"&formato="+formato+"&versao="+versao+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+suportasld+"&formatosinfo="+formatosinfo;
 		cpJSON.call(p,"adicionatemawms",funcao);	
@@ -6283,17 +6288,17 @@ i3GEO.php = {
 	<Atributos->identifica2>	
 	*/
 	identifica2: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema){
-		if(arguments.length == 4){
-			var opcao = "tip";
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;		
+		if(arguments.length === 4){
+			opcao = "tip";
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;		
 		}
-		if(arguments.length == 5){
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;		
+		if(arguments.length === 5){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;		
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
-		if(opcao != "tip")
+		if(opcao !== "tip")
 		{p += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao);	
 	},
@@ -6318,8 +6323,8 @@ i3GEO.php = {
 	<Menutemas->procurartemas>	
 	*/
 	procurartemas: function(funcao,procurar,locaplic){
-		if(arguments.length == 2)
-		{var locaplic = i3GEO.configura.locaplic;}
+		if(arguments.length === 2)
+		{locaplic = i3GEO.configura.locaplic;}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&map_file=&procurar="+procurar;
 		cpJSON.call(p,"procurartemas",funcao);	
 	},
@@ -6332,10 +6337,10 @@ i3GEO.php = {
 	<Mapa->adicionaTema>	
 	*/
 	adtema: function(funcao,temas,locaplic,sid){
-		if(arguments.length == 2){
+		if(arguments.length === 2){
 			i3GEO.php.verifica();
-			var locaplic = i3GEO.configura.locaplic;
-			var sid = i3GEO.configura.sid;
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=adtema&temas="+temas+"&g_sid="+sid;
 		cpJSON.call(p,"adtema",funcao);	
@@ -6439,7 +6444,7 @@ i3GEO.php = {
 	<listaRSSwsARRAY>	
 	*/
 	listaRSSwsARRAY: function(funcao,tipo){
-		var p = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+new Array("|")+"&tipo="+tipo;
+		var p = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+["|"]+"&tipo="+tipo;
 		cpJSON.call(p,"listaRSSwsARRAY",funcao);	
 	},
 	/*
@@ -6468,6 +6473,7 @@ i3GEO.php = {
 	}
 };
 //YAHOO.log("carregou classe php", "Classes i3geo");
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Utilitários
 
@@ -6497,7 +6503,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEO) == 'undefined'){
+if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
@@ -6527,7 +6533,7 @@ Default:
 navn = false;
 //seta as variáveis navn e navm
 var app = navigator.appName.substring(0,1);
-if (app=='N'){navn=true;}else{navm=true;}
+if (app==='N'){navn=true;}else{navm=true;}
 /*
 Variavel: g_operacao
 
@@ -6581,7 +6587,7 @@ Extende os métodos de um objeto Array, permitindo remover um elemento.
 Array.prototype.remove=function(s){
 	try{
 		var i = this.indexOf(s);
-		if(i != -1) this.splice(i, 1);
+		if(i !== -1){this.splice(i, 1);}
 	}catch(e){}
 };
 
@@ -6624,13 +6630,14 @@ i3GEO.util = {
 	{String}
 	*/
 	escapeURL: function(sUrl){
-		var sUrl = escape(sUrl);
-		var re = new RegExp("%3F", "g");
-		var sUrl = sUrl.replace(re,'?');
-		var re = new RegExp("%3D", "g");
-		var sUrl = sUrl.replace(re,'=');
-		var re = new RegExp("%26", "g");
-		var sUrl = sUrl.replace(re,'&');
+		var re;
+		sUrl = escape(sUrl);
+		re = new RegExp("%3F", "g");
+		sUrl = sUrl.replace(re,'?');
+		re = new RegExp("%3D", "g");
+		sUrl = sUrl.replace(re,'=');
+		re = new RegExp("%26", "g");
+		sUrl = sUrl.replace(re,'&');
 		return sUrl;
 	},
 	/*
@@ -6661,13 +6668,14 @@ i3GEO.util = {
 	(String) - valor do cookie
 	*/
 	pegaCookie: function(nome){
-		var cookies = document.cookie;
-		var i = cookies.indexOf(nome);
-		if(i == -1)
+		var cookies,i,fim;
+		cookies = document.cookie;
+		i = cookies.indexOf(nome);
+		if(i === -1)
 		{return null;}
-		var fim = cookies.indexOf(";",i);
-		if (fim == -1)
-		{var fim = cookies.length;}
+		fim = cookies.indexOf(";",i);
+		if (fim === -1)
+		{fim = cookies.length;}
 		return (unescape(cookies.substring(i,fim))).split("=")[1];
 	},
 	/*
@@ -6684,9 +6692,11 @@ i3GEO.util = {
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
-		var keys = [];
-		for(var key in obj){
-   			keys.push(key);
+		var keys,key;
+		keys = [];
+		for(key in obj){
+   			if(obj[key])
+   			{keys.push(key);}
 		}
 		return keys;
 	},
@@ -6713,16 +6723,19 @@ i3GEO.util = {
 
 	*/
 	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
-		try{clearTimeout(tempoBotaoAplicar);}catch(e){};
+		try
+		{clearTimeout(tempoBotaoAplicar);}
+		catch(e){}
+		var novoel,xy;
 		tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
 		autoRedesenho("reinicia");
-		if(arguments.length == 1)
-		{var titulo = "Aplicar";}
-		if(arguments.length == 1 || arguments.length == 2)
-		{var classe = "i3geoBotaoAplicar";}
+		if(arguments.length === 1)
+		{titulo = "Aplicar";}
+		if(arguments.length === 1 || arguments.length === 2)
+		{classe = "i3geoBotaoAplicar";}
 		if (!document.getElementById("i3geo_aplicar"))
 		{
-			var novoel = document.createElement("input");
+			novoel = document.createElement("input");
 			novoel.id = 'i3geo_aplicar';
 			novoel.type = 'button';
 			novoel.value = titulo;
@@ -6737,7 +6750,7 @@ i3GEO.util = {
 			document.body.appendChild(novoel);
 		}
 		else
-		{var novoel = document.getElementById("i3geo_aplicar");}
+		{novoel = document.getElementById("i3geo_aplicar");}
 		novoel.onclick = function(){
 			clearTimeout(i3GEO.parametros.tempo);
 			i3GEO.parametros.tempo = "";
@@ -6745,9 +6758,9 @@ i3GEO.util = {
 			eval(nomeFuncao+"\(\)");
 		};
 		//reposiciona o botao
-		if(arguments.length == 4){
+		if(arguments.length === 4){
 			novoel.style.display="block";
-			var xy = YAHOO.util.Dom.getXY(obj);
+			xy = YAHOO.util.Dom.getXY(obj);
 			YAHOO.util.Dom.setXY(novoel,xy);
 		}
 		return (novoel);
@@ -6776,26 +6789,26 @@ i3GEO.util = {
 	*/
 	arvore: function(titulo,onde,obj){
 		//YAHOO.log("arvore", "i3geo");
+		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo;
 		if(!$i(onde)){return;}
-		var currentIconMode;
 		try{
 			arvore = new YAHOO.widget.TreeView(onde);
 			root = arvore.getRoot();
-			var tempNode = new YAHOO.widget.TextNode('', root, false);
+			tempNode = new YAHOO.widget.TextNode('', root, false);
 			tempNode.isLeaf = false;
 			tempNode.enableHighlight = false;
 		}
 		catch(e){}
-		var titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
-		var d = {html:titulo};
-		var tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
+		titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
+		d = {html:titulo};
+		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = false;
-		var c = obj.propriedades.length;
-		for (var i=0, j=c; i<j; i++){
-			var linha = obj.propriedades[i];
-			var conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
-			var d = {html:conteudo};
-			var temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+		c = obj.propriedades.length;
+		for (i=0, j=c; i<j; i++){
+			linha = obj.propriedades[i];
+			conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
+			d = {html:conteudo};
+			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
 			temaNode.enableHighlight = false;
 		}
 		arvore.collapseAll();
@@ -6816,17 +6829,18 @@ i3GEO.util = {
 	{String}
 	*/
 	removeAcentos: function(palavra) {
-		var re = /ã|á|à|â/gi;
+		var re;
+		re = /ã|á|à|â/gi;
 		palavra = palavra.replace(re,"a");
-		var re = /é/gi;
+		re = /é/gi;
 		palavra = palavra.replace(re,"e");
-		var re = /í/gi;
+		re = /í/gi;
 		palavra = palavra.replace(re,"i");
-		var re = /ó|õ/gi;
+		re = /ó|õ/gi;
 		palavra = palavra.replace(re,"o");
-		var re = /ç/gi;
+		re = /ç/gi;
 		palavra = palavra.replace(re,"c");
-		var re = /ú/gi;
+		re = /ú/gi;
 		palavra = palavra.replace(re,"u");
 		return(palavra);
 	},
@@ -6841,7 +6855,7 @@ i3GEO.util = {
 	*/
 	protocolo: function(){
 		var u = window.location.href;
-		var u = u.split(":");
+		u = u.split(":");
 		return (u[0]);	
 	},
 	/*
@@ -6862,10 +6876,10 @@ i3GEO.util = {
 		{
 			if(!obj.style)
 			{return [0,0];}
-			if(obj.style.position == "absolute")
-			{return [(parseInt(obj.style.left)),(parseInt(obj.style.top))];}
+			if(obj.style.position === "absolute")
+			{return [(parseInt(obj.style.left,10)),(parseInt(obj.style.top,10))];}
 			else{
-				var curleft = curtop = 0;
+				var curleft = 0,curtop = 0;
 				if(obj){
 					if (obj.offsetParent) {
 						do {
@@ -6896,15 +6910,14 @@ i3GEO.util = {
 	pegaElementoPai: function(e){
 		var targ;
 		if (!e)
-		{var e = window.event;}
+		{e = window.event;}
 		if (e.target)
 		{targ = e.target;}
 		else
 		if (e.srcElement)
 		{targ = e.srcElement;}
-		if (targ.nodeType == 3)
+		if (targ.nodeType === 3)
    		{targ = targ.parentNode;}
-		var tname;
 		tparent=targ.parentNode;
 		return(tparent);
 	},
@@ -6926,10 +6939,11 @@ i3GEO.util = {
 	locaplic {String} - onde está instalado o i3Geo
 	*/
 	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
-		var o = document.getElementById(idobjeto);
-		var c = eval("cursores."+tipo+".ie");
-		if(c == "default" || c == "pointer" || c == "crosshair" || c == "help" || c == "move" || c == "text")
-		o.style.cursor = c;
+		var o,c;
+		o = document.getElementById(idobjeto);
+		c = eval("cursores."+tipo+".ie");
+		if(c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text")
+		{o.style.cursor = c;}
 		else{
 			if(o){
 				if(navm){
@@ -6953,8 +6967,8 @@ i3GEO.util = {
 	id {String} - id do elemento que será criado. Por default, será 'boxg'
 	*/
 	criaBox: function(id){
-		if(arguments.length == 0)
-		{var id = "boxg"}
+		if(arguments.length === 0)
+		{id = "boxg";}
 		if (!$i(id))
 		{
 			var novoel = document.createElement("div");
@@ -6967,7 +6981,7 @@ i3GEO.util = {
 			i3GEO.util.BOXES.push(id);
 		}
 		else
-		$i(id).style.display="block";
+		{$i(id).style.display="block";}
 	},
 	/*
 	Function: escondeBox
@@ -6977,7 +6991,8 @@ i3GEO.util = {
 	Os ids são criado pela função criaBox
 	*/
 	escondeBox: function(){
-		var l = i3GEO.util.BOXES.length;
+		var l,i;
+		l = i3GEO.util.BOXES.length;
 		for (i=0; i<l; i++){
 			if($i(i3GEO.util.BOXES[i]))
 			{$i(i3GEO.util.BOXES[i]).style.display = "none";}
@@ -7001,17 +7016,17 @@ i3GEO.util = {
 	h {String} - (opcional) altura da imagem
 	*/
 	criaPin: function(id,imagem,w,h){
-		if(arguments.length < 1 || id == ""){
-			var id = "boxpin";
+		if(arguments.length < 1 || id === ""){
+			id = "boxpin";
 		}
-		if(arguments.length < 2 || imagem == ""){
-			var imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
+		if(arguments.length < 2 || imagem === ""){
+			imagem = i3GEO.configura.locaplic+'/imagens/marker.png';
 		}
-		if(arguments.length < 3 || w == ""){
-			var w = "21px";
+		if(arguments.length < 3 || w === ""){
+			w = "21px";
 		}
-		if(arguments.length < 4 || h == ""){
-			var h = "25px";
+		if(arguments.length < 4 || h === ""){
+			h = "25px";
 		}
 		if (!$i(id))
 		{
@@ -7022,7 +7037,7 @@ i3GEO.util = {
 			novoel.style.width=w;
 			novoel.style.height=h;
 			novoel.src = imagem;
-			if(id == "boxpin")
+			if(id === "boxpin")
 			{novoel.onmouseover = function(){$i("boxpin").style.display="none";};}
 			document.body.appendChild(novoel);
 			i3GEO.util.PINS.push(id);
@@ -7038,9 +7053,10 @@ i3GEO.util = {
 	id {string} - id do elemento que será posicionado
 	*/
 	posicionaImagemNoMapa: function(id){
-		var i = $i(id);
-		var mx = parseInt(i.style.width) / 2;
-		var my = parseInt(i.style.height) / 2;
+		var i,mx,my;
+		i = $i(id);
+		mx = parseInt(i.style.width,10) / 2;
+		my = parseInt(i.style.height,10) / 2;
 		i.style.position = "absolute";
 		i.style.top = objposicaocursor.telay - my;
 		i.style.left = objposicaocursor.telax - mx;	
@@ -7053,7 +7069,8 @@ i3GEO.util = {
 	Os ids são criado pela função criaPin
 	*/
 	escondePin: function(){
-		var l = i3GEO.util.PINS.length;
+		var l,i;
+		l = i3GEO.util.PINS.length;
 		for (i=0; i<l; i++){
 			if($i(i3GEO.util.PINS[i]))
 			{$i(i3GEO.util.PINS[i]).style.display = "none";}
@@ -7097,9 +7114,9 @@ i3GEO.util = {
 	valor {String} - valor do input
 	*/
 	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor) {
-		if(idPai != "")
+		if(idPai !== "")
 		{
-			if(larguraIdPai != "")
+			if(larguraIdPai !== "")
 			{$i(idPai).style.width=larguraIdPai+"px";}
 			$i(idPai).style.padding="3";
 			$i(idPai).style.textAlign="center";
@@ -7108,8 +7125,7 @@ i3GEO.util = {
 			$i(idPai).onmouseout = function()
 			{this.className = "";};	
 		}
-		var i = "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
-		return i;
+		return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
 	},
 	/*
 	Function: $top ou nome curto $top
@@ -7186,34 +7202,38 @@ i3GEO.util = {
 		*/
 		cria:function(xi,yi,funcaoOnclick,container){
 			try{
+				var novoel,i,novoimg,temp;
 				if(i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0)
-				i3GEO.util.insereMarca.CONTAINER.push(container);
+				{i3GEO.util.insereMarca.CONTAINER.push(container);}
 				//verifica se existe o container para os pontos
 				if (!$i(container)){
-					var novoel = document.createElement("div");
+					novoel = document.createElement("div");
 					novoel.id = container;
-					var i = novoel.style;
+					i = novoel.style;
 					i.position = "absolute";
-					i.top = parseInt($i(i3GEO.Interface.IDCORPO).style.top);
-					i.left = parseInt($i(i3GEO.Interface.IDCORPO).style.left);
+					i.top = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10);
+					i.left = parseInt($i(i3GEO.Interface.IDCORPO).style.left,10);
 					document.body.appendChild(novoel);
 				}
-				var container = $i(container);
-				var novoel = document.createElement("div");
-				var i = novoel.style;
+				container = $i(container);
+				novoel = document.createElement("div");
+				i = novoel.style;
 				i.position = "absolute";
 				i.zIndex=2000;
 				i.top=(yi - 4)+"px";
 				i.left=(xi - 4)+"px";
 				i.width="4px";
 				i.height="4px";
-				var novoimg = document.createElement("img");
-				if (funcaoOnclick != "")
+				novoimg = document.createElement("img");
+				if (funcaoOnclick !== "")
 				{novoimg.onclick = funcaoOnclick;}
 				else
-				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();}}
+				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();};}
 				novoimg.src=i3GEO.configura.locaplic+"/imagens/dot1.gif";
-				with (novoimg.style){width="6px";height="6px";zIndex=2000;}
+				temp = novoimg.style;
+				temp.width="6px";
+				temp.height="6px";
+				temp.zIndex=2000;
 				novoel.appendChild(novoimg);
 				container.appendChild(novoel);
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.util.insereMarca.limpa()") < 0)
@@ -7223,10 +7243,11 @@ i3GEO.util = {
 		},
 		limpa: function(){
 			try{
-				var n = i3GEO.util.insereMarca.CONTAINER.length;
+				var n,i;
+				n = i3GEO.util.insereMarca.CONTAINER.length;
 				for(i=0;i<n;i++){
 					if($i(i3GEO.util.insereMarca.CONTAINER[i]))
-					$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";
+					{$i(i3GEO.util.insereMarca.CONTAINER[i]).innerHTML = "";}
 				}
 				i3GEO.util.insereMarca.CONTAINER = [];
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");					
@@ -7247,7 +7268,7 @@ i3GEO.util = {
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
 		i3GEO.contadorAtualiza++;
-		if ((temp[1] == "SHP") || (temp[1] == "shp"))
+		if ((temp[1] === "SHP") || (temp[1] === "shp"))
 		{i3GEO.php.adicionaTemaSHP(i3GEO.atualiza,path);}
 		else
 		{i3GEO.php.adicionaTemaIMG(i3GEO.atualiza,path);}
@@ -7265,27 +7286,32 @@ i3GEO.util = {
 	*/
 	abreCor: function(janela,elemento){
 		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
-		var wlargura = "400";
-		var waltura = "240";
-		var wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento;
-		var nx = "";
-		var ny = "";
-		var texto = "Cor";
-		var id = "i3geo_janelaCor";
-		var modal = true;
-		var classe = "hd";
-		var wlargura_ = "400px";
+		var ins,
+			temp,
+			novoel,
+			wdocaiframe,
+			fix = false,
+			wlargura = "400",
+			waltura = "240",
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,
+			nx = "",
+			ny = "",
+			texto = "Cor",
+			id = "i3geo_janelaCor",
+			modal = true,
+			classe = "hd",
+			wlargura_ = "400px";
 		YAHOO.namespace("janelaCor.xp");
 		if ($i(id))
 		{YAHOO.janelaCor.xp.panel.destroy();}
-		var ins = '<div id="'+id+'_cabecalho" class="hd">';
+		ins = '<div id="'+id+'_cabecalho" class="hd">';
 		ins += "<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
 		ins += texto;
 		ins += '</div><div id="i3geo_janelaCor_corpo" class="bd" style="padding:5px">';
-		if(wsrc != "")
-		ins += '<iframe name="'+id+'i" id="i3geo_janelaCori" valign="top" style="border:0px white solid"></iframe>';
+		if(wsrc !== "")
+		{ins += '<iframe name="'+id+'i" id="i3geo_janelaCori" valign="top" style="border:0px white solid"></iframe>';}
 		ins += '</div>';
-		var novoel = document.createElement("div");
+		novoel = document.createElement("div");
 		novoel.id = "i3geo_janelaCor";
 		novoel.style.display="block";
 		novoel.innerHTML = ins;
@@ -7293,15 +7319,16 @@ i3GEO.util = {
 		{$i("i3geo").appendChild(novoel);}
 		else
 		{document.body.appendChild(novoel);}
-		var wdocaiframe = $i("i3geo_janelaCori");
+		wdocaiframe = $i("i3geo_janelaCori");
 		if (wdocaiframe)
 		{
-			with (wdocaiframe.style){width = parseInt(wlargura)-12;height=waltura;};
+			temp = wdocaiframe.style;
+			temp.width = parseInt(wlargura,10)-12;
+			temp.height=waltura;
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
 		}
-		var fix = false;
-		if(nx == "" || nx == "center"){var fix = true;}
+		if(nx === "" || nx === "center"){fix = true;}
 		YAHOO.janelaCor.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:5000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true, iframe:false} );
 		YAHOO.janelaCor.xp.panel.render();
 		$i(id+'_cabecalho').className = classe;
@@ -7318,14 +7345,15 @@ i3GEO.util = {
 	{XMLHttpRequest}
 	*/
 	ajaxhttp: function(){
+		var objhttp1;
 		try
-		{var objhttp1 = new XMLHttpRequest();}
+		{objhttp1 = new XMLHttpRequest();}
 		catch(ee){
-			try{var objhttp1 = new ActiveXObject("Msxml2.XMLHTTP");}
+			try{objhttp1 = new ActiveXObject("Msxml2.XMLHTTP");}
 			catch(e){
-				try{var objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
+				try{objhttp1 = new ActiveXObject("Microsoft.XMLHTTP");}
 				catch(E)
-				{var objhttp1 = false;}
+				{objhttp1 = false;}
 			}
 		}
 		return(objhttp1);
@@ -7345,33 +7373,35 @@ i3GEO.util = {
 	O resultado em um objeto DOM. Se o retorno contiver a palavra "Erro", é gerado um alert.
 	*/
 	ajaxexecASXml: function(programa,funcao){
-		if (programa.search("http") == 0){
-			var h = window.location.host;
+		var h,ohttp,retorno;
+		if (programa.search("http") === 0){
+			h = window.location.host;
 			if (programa.search(h) < 0){
 				alert("OOps! Nao e possivel chamar um XML de outro host.\nContacte o administrador do sistema.\nConfigure corretamente o ms_configura.php");
 				return;
 			}
 		}	
-		var ohttp = i3GEO.util.ajaxhttp();
+		ohttp = i3GEO.util.ajaxhttp();
 		ohttp.open("GET",programa,true);
-		var retorno = "";
+		retorno = "";
 		ohttp.onreadystatechange=function(){
-			if (ohttp.readyState==4){
-				var retorno = ohttp.responseText;
-				if (retorno != undefined){
+			var retorno,parser,dom;
+			if (ohttp.readyState === 4){
+				retorno = ohttp.responseText;
+				if (retorno !== undefined){
 					if (document.implementation.createDocument){
-						var parser = new DOMParser();
-						var dom = parser.parseFromString(retorno, "text/xml");
+						parser = new DOMParser();
+						dom = parser.parseFromString(retorno, "text/xml");
 					}
 					else{
-						var dom = new ActiveXObject("Microsoft.XMLDOM");
+						dom = new ActiveXObject("Microsoft.XMLDOM");
 						dom.async="false";
 						dom.load(programa);
 					}
 				}
 				else
-				{var dom = "erro";}
-				if (funcao != "volta")
+				{dom = "erro";}
+				if (funcao !== "volta")
 				{eval(funcao+'(dom)');}
 				else
 				{return dom;}
@@ -7393,31 +7423,32 @@ i3GEO.util = {
 	intervalo {Integer} - intervalo entre uma imagem e outra
 	*/
 	aparece: function(id,tempo,intervalo){
-		var n = parseInt(tempo / intervalo);
-		var obj = $i(id);
-		if(n == 1){
+		var n,obj,opacidade,fadei,tempoFadei;
+		n = parseInt(tempo / intervalo,10);
+		obj = $i(id);
+		if(n === 1){
 			obj.style.display = "block";
 			if (navm)
 			{obj.style.filter='alpha(opacity=100)';}
 			else
 			{obj.style.opacity= 1;}
 		}
-		var tempo = n * intervalo;
-		var intervalo = (intervalo * 100) / tempo;
-		var opacidade = 0;
+		tempo = n * intervalo;
+		intervalo = (intervalo * 100) / tempo;
+		opacidade = 0;
 		if (navm)
 		{obj.style.filter='alpha(opacity=0)';}
 		else
 		{obj.style.opacity= 0;}
 		obj.style.display = "block";
-		var fadei = function(){
+		fadei = function(){
 			opacidade += intervalo;
 			if (navm)
 			{obj.style.filter='alpha(opacity='+opacidade+')';}
 			else
 			{obj.style.opacity= opacidade/100;}
 			if(opacidade < 100)
-			var tempoFade = setTimeout(fadei, tempo);
+			{tempoFadei = setTimeout(fadei, tempo);}
 			else{
 				clearTimeout(tempoFadei);
 				if (navm)
@@ -7426,7 +7457,7 @@ i3GEO.util = {
 				{obj.style.opacity= 1;}
 			}
 		};
-		var tempoFadei = setTimeout(fadei, tempo);	
+		tempoFadei = setTimeout(fadei, tempo);	
 	},
 	/*
 	Function: desaparece
@@ -7444,33 +7475,34 @@ i3GEO.util = {
 	removeobj {Boolean} - remove ou não o objeto no final
 	*/
 	desaparece: function(id,tempo,intervalo,removeobj){
-		var n = parseInt(tempo / intervalo);
-		var obj = $i(id);
-		if(n == 1){
+		var n,obj,opacidade,fade,p,tempoFade;
+		n = parseInt(tempo / intervalo,10);
+		obj = $i(id);
+		if(n === 1){
 			obj.style.display = "none";
 			if(removeobj){
-				var p = obj.parentNode;
+				p = obj.parentNode;
 				if(p)
-				p.removeChild(obj);
+				{p.removeChild(obj);}
 			}
 			return;
 		}
-		var tempo = n * intervalo;
-		var intervalo = (intervalo * 100) / tempo;
-		var opacidade = 100;
+		tempo = n * intervalo;
+		intervalo = (intervalo * 100) / tempo;
+		opacidade = 100;
 		if (navm)
 		{obj.style.filter='alpha(opacity=100)';}
 		else
 		{obj.style.opacity= 1;}
 		obj.style.display = "block";
-		var fade = function(){
+		fade = function(){
 			opacidade -= intervalo;
 			if (navm)
 			{obj.style.filter='alpha(opacity='+opacidade+')';}
 			else
 			{obj.style.opacity= opacidade/100;}
 			if(opacidade > 0){
-				var tempoFade = setTimeout(fade, tempo);
+				tempoFade = setTimeout(fade, tempo);
 			}
 			else{
 				clearTimeout(tempoFade);
@@ -7480,13 +7512,13 @@ i3GEO.util = {
 				else
 				{obj.style.opacity= 1;}
 				if(removeobj){
-					var p = obj.parentNode;
+					p = obj.parentNode;
 					if(p)
-					p.removeChild(obj);
+					{p.removeChild(obj);}
 				}
 			}
 		};
-		var tempoFade = setTimeout(fade, tempo);	
+		tempoFade = setTimeout(fade, tempo);	
 	},
 	/*
 	Function: wkt2ext
@@ -7504,27 +7536,28 @@ i3GEO.util = {
 	{String} - extensão geográfica (xmin ymin xmax ymax)
 	*/
 	wkt2ext:function(wkt,tipo){
-		var tipo = tipo.toLowerCase();
+		var re,x,y,w,xMin,xMax,yMin,yMax,temp;
+		tipo = tipo.toLowerCase();
 		ext = false;
-		if(tipo == "polygon"){
+		if(tipo === "polygon"){
 			try{
-				var re = new RegExp("POLYGON", "g");
-				var wkt = wkt.replace(re,"");
-				var wkt = wkt.split("(")[2].split(")")[0];
-				var wkt = wkt.split(",");
-				var x = [];
-				var y = [];
+				re = new RegExp("POLYGON", "g");
+				wkt = wkt.replace(re,"");
+				wkt = wkt.split("(")[2].split(")")[0];
+				wkt = wkt.split(",");
+				x = [];
+				y = [];
 				for (w=0;w<wkt.length; w++){
- 					var temp = wkt[w].split(" ");
+ 					temp = wkt[w].split(" ");
  					x.push(temp[0]);
  					y.push(temp[1]);
 				}
 				x.sort(i3GEO.util.sortNumber);
-				var xMin = x[0];
-				var xMax = x[(x.length)-1];
+				xMin = x[0];
+				xMax = x[(x.length)-1];
 				y.sort(i3GEO.util.sortNumber);
-				var yMin = y[0];
-				var yMax = y[(y.length)-1];
+				yMin = y[0];
+				yMax = y[(y.length)-1];
 				return xMin+" "+yMin+" "+xMax+" "+yMax;
 			}
 			catch(e){}
@@ -7553,10 +7586,10 @@ i3GEO.util = {
 	altura
 	*/
 	getScrollerWidth: function() {
-    	var scr = null;
-    	var inn = null;
-    	var wNoScroll = 0;
-    	var wScroll = 0;
+    	var scr = null,
+    		inn = null,
+    		wNoScroll = 0,
+    		wScroll = 0;
     	// Outer scrolling div
     	scr = document.createElement('div');
     	scr.style.position = 'absolute';
@@ -7586,13 +7619,15 @@ i3GEO.util = {
     	return (wNoScroll - wScroll);
 	},
 	scriptTag: function(js,ini,id){
-		if(id == ""){var id = "loadscriptI3GEO";}
-		var head= document.getElementsByTagName('head')[0];
-		var script= document.createElement('script');
+		var head,script;
+		if(id === "")
+		{id = "loadscriptI3GEO";}
+		head= document.getElementsByTagName('head')[0];
+		script= document.createElement('script');
 		script.type= 'text/javascript';
 		if(navm){
-			script.onreadystatechange= function(){
-				if(this.readyState == 'loaded' || this.readyState == 'complete')
+			script.onreadystatechange = function(){
+				if(this.readyState === 'loaded' || this.readyState === 'complete')
 				{eval(ini);}
 			};
 		}
