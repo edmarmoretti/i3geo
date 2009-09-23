@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
+
 /*
 Title: Ferramenta Identifica
 
@@ -23,8 +25,8 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-if(typeof(i3GEOF) == 'undefined'){
-	i3GEOF = new Array();
+if(typeof(i3GEOF) === 'undefined'){
+	i3GEOF = [];
 }
 /*
 Class: i3GEOF.identifica
@@ -109,7 +111,7 @@ i3GEOF.identifica = {
 	Type:
 	{Array}
 	*/
-	sistemasAdicionais: new Array(),
+	sistemasAdicionais: [],
 	/*
 	Function: inicia
 	
@@ -135,6 +137,7 @@ i3GEOF.identifica = {
 	*/
 	inicia: function(locaplic,sid,tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
 		try{
+			var g_locidentifica;
 			$i(iddiv).innerHTML += i3GEOF.identifica.html();
 			i3GEOF.identifica.locaplic = locaplic;
 			i3GEOF.identifica.sid = sid;
@@ -145,36 +148,39 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");
 			//eventos das guias
-			$i("i3GEOidentificaguia1").onclick = function(){i3GEOF.identifica.listaTemas("ligados");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia")}
-			$i("i3GEOidentificaguia2").onclick = function(){i3GEOF.identifica.listaTemas("todos");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia")}
-			$i("i3GEOidentificaguia3").onclick = function(){i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3","i3GEOidentificaguia")}
+			$i("i3GEOidentificaguia1").onclick = function(){i3GEOF.identifica.listaTemas("ligados");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
+			$i("i3GEOidentificaguia2").onclick = function(){i3GEOF.identifica.listaTemas("todos");i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1","i3GEOidentificaguia");};
+			$i("i3GEOidentificaguia3").onclick = function(){i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3","i3GEOidentificaguia");};
 			$i("i3GEOidentificaguia4").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia4","i3GEOidentificaguia");
 				new YAHOO.widget.Button("i3GEOidentificabotao1",{onclick:{fn: function(){
 					//window.location.href = "../etiqueta/index.htm?tema="+tema;
-					if(i3GEO.temaAtivo != "")
-					i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);
+					if(i3GEO.temaAtivo !== "")
+					{i3GEO.tema.dialogo.etiquetas(i3GEO.temaAtivo);}
 					else
 					{alert("Nenhum tema definido");}
 				}}});
-			}
-			i3GEOF.identifica.listaTemas("ligados")
+			};
+			i3GEOF.identifica.listaTemas("ligados");
 			//
 			//verifica se existem sistemas para identificar
 			//
-			if(i3GEOF.identifica.mostraSistemasAdicionais == true){
-				var g_locidentifica = i3GEO.parametros.locidentifica;
-				if (g_locidentifica != ""){
-					if(window.parent.tempXMLSISTEMAS == undefined)
+			if(i3GEOF.identifica.mostraSistemasAdicionais === true){
+				g_locidentifica = i3GEO.parametros.locidentifica;
+				if (g_locidentifica !== ""){
+					if(window.parent.tempXMLSISTEMAS === undefined)
 					{i3GEO.util.ajaxexecASXml(g_locidentifica,"i3GEOF.identifica.montaListaSistemas");}
 					else
 					{i3GEOF.identifica.montaListaSistemas(window.parent.tempXMLSISTEMAS);}
 				}
 			}
-			if (i3GEO.temaAtivo != "")
+			if (i3GEO.temaAtivo !== "")
 			{i3GEOF.identifica.buscaDadosTema(window.parent.i3GEO.temaAtivo);}
 		}
 		catch(erro){alert(erro);}
+	},
+	ativaFoco: function(){
+		i3GEOF.identifica.listaTemas("ligados");
 	},
 	/*
 	Function: html
@@ -225,7 +231,15 @@ i3GEOF.identifica = {
 	tipo {String} - ligados|todos lista apenas os temas que estão visíveis no mapa ou todos os temas
 	*/
 	listaTemas: function(tipo){
-		i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid);
+		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+			var lista = i3GEO.arvoreDeCamadas.CAMADAS;
+			if(tipo === "ligados")
+			{lista = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",lista);}
+			lista = i3GEO.arvoreDeCamadas.filtraCamadas("identifica","nao","diferente",lista);
+			i3GEOF.identifica.montaListaTemas(lista);
+		}
+		else
+		{i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid);}		
 	},
 	/*
 	Function: montaListaTemas
@@ -236,30 +250,41 @@ i3GEOF.identifica = {
 	
 	Parametros:
 	
-	retorno {JSON} - objeto retornado por i3GEO.php.listaTemas
+	retorno {JSON} - objeto retornado por i3GEO.php.listaTemas ou por i3GEO.arvoreDeCamadas.filtraCamadas
 	*/
 	montaListaTemas: function(retorno){
-		var lista = retorno.data;
+		var lista,linhas,linhas1,l,nome,tema,divResultado;
+		if(retorno.data)
+		{lista = retorno.data;}
+		else
+		{lista = retorno;}
 		//
 		//ativa o link para o site geohack
 		//
-		if(i3GEOF.identifica.mostraLinkGeohack == true)
-		{var linhas = i3GEOF.identifica.montaLinkGeohack();}
+		if(i3GEOF.identifica.mostraLinkGeohack === true)
+		{linhas = i3GEOF.identifica.montaLinkGeohack();}
 		else
-		{var linhas = "";}
+		{linhas = "";}
 		//
 		//monta a lista de temas
 		//	
-		linhas += "Clique no tema para ver os dados"
-		var linhas1 = "";
+		linhas += "Clique no tema para ver os dados";
+		linhas1 = "";
 		for (l=0;l<lista.length;l++)
 		{
-			var nome = lista[l].nome
-			var tema = lista[l].tema
-			if(lista[l].identifica != "nao")
-			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>"}
+			if(lista[l].nome){
+				nome = lista[l].nome;
+				tema = lista[l].tema;
+			}
+			else{
+				nome = lista[l].tema;
+				tema = lista[l].name;
+			}
+			
+			if(lista[l].identifica !== "nao")
+			{linhas1 += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.buscaDadosTema(\""+tema+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+nome+"</td></tr>";}
 		}
-		var divResultado = $i("i3GEOidentificalistaTemas");
+		divResultado = $i("i3GEOidentificalistaTemas");
 		if(divResultado)
 		{divResultado.innerHTML = linhas+"<table class=lista2 ><tr><td style=text-align:left ><input onclick='i3GEOF.identifica.buscaDadosTema(\"ligados\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td>Todos</td></tr>"+linhas1+"</table>";}
 	},
@@ -273,18 +298,23 @@ i3GEOF.identifica = {
 	{String}
 	*/
 	montaLinkGeohack: function(){
-		var b = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
-		var x = b[0].split(" ")
-		var y = b[1].split(" ")
-		var w = "W"
-		var s = "S"
-		if (x[0]*1 > 0){w = "L"}
-		if (y[0]*1 > 0){s = "N"}
-		if (x[0]*1 < 0){x[0] = x[0]*-1}
-		if (y[0]*1 < 0){y[0] = y[0]*-1}
-		var param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w
-		var url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param//15_48_00_S_47_51_50_W
-		var linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>"
+		var b,x,y,w,s,param,url,linhas;
+		b = i3GEO.calculo.dd2dms(i3GEOF.identifica.x,i3GEOF.identifica.y);
+		x = b[0].split(" ");
+		y = b[1].split(" ");
+		w = "W";
+		s = "S";
+		if (x[0]*1 > 0)
+		{w = "L";}
+		if (y[0]*1 > 0)
+		{s = "N";}
+		if (x[0]*1 < 0)
+		{x[0] = x[0]*-1;}
+		if (y[0]*1 < 0)
+		{y[0] = y[0]*-1;}
+		param = y[0]+"_"+y[1]+"_"+y[2]+"_"+s+"_"+x[0]+"_"+x[1]+"_"+x[2]+"_"+w;
+		url = "http://tools.wikimedia.de/~magnus/geo/geohack.php?params="+param;
+		linhas = "<a href='"+url+"' target=blank >Buscadores web</a><br>";
 		return linhas;
 	},
 	/*
@@ -303,43 +333,44 @@ i3GEOF.identifica = {
 	xmlDoc - documento xml
 	*/
 	montaListaSistemas: function(xmlDoc){
-		if (xmlDoc != undefined)
+		var divins,sisig,sistema,pub,exec,temp,t,linhas,ltema;
+		if (xmlDoc !== undefined)
 		{
 			window.parent.tempXMLSISTEMAS = xmlDoc;
-			var divins = $i("i3GEOidentificalistaSistemas");
-			var sis = xmlDoc.getElementsByTagName("FUNCAO")
+			divins = $i("i3GEOidentificalistaSistemas");
+			sis = xmlDoc.getElementsByTagName("FUNCAO");
 			for (ig=0;ig<sis.length;ig++)
 			{	
-				var sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue
+				sistema = sis[ig].getElementsByTagName("NOMESIS")[0].firstChild.nodeValue;
 				if(sis[ig].getElementsByTagName("PUBLICADO")[0])
 				{
 					if(sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild)
 					{
-						var pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
-						if(pub == "NAO" || pub == "nao")
-						{var sistema = "<s>"+sistema+"</s>";}
+						pub = sis[ig].getElementsByTagName("PUBLICADO")[0].firstChild.nodeValue;
+						if(pub === "NAO" || pub === "nao")
+						{sistema = "<s>"+sistema+"</s>";}
 					}
 				}
-				var exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue
-				var temp = exec.split('"')
-				if(temp.length == 1)
-				var exec = '"'+exec+'"'
-				var temp = exec.split("?")
-				if(temp.length != 2)
-				exec += '+"?"'
-				var t = "blank"
+				exec = sis[ig].getElementsByTagName("ABRIR")[0].firstChild.nodeValue;
+				temp = exec.split('"');
+				if(temp.length === 1)
+				{exec = '"'+exec+'"';}
+				temp = exec.split("?");
+				if(temp.length !== 2)
+				{exec += '+"?"';}
+				t = "blank";
 				if (sis[ig].getElementsByTagName("TARGET")[0])
-				{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue}
-				i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t)
+				{t = sis[ig].getElementsByTagName("TARGET")[0].firstChild.nodeValue;}
+				i3GEOF.identifica.sistemasAdicionais.push(sistema+","+exec+","+t);
 			}
 			if (i3GEOF.identifica.sistemasAdicionais.length > 0)
 			{
-				var linhas = ""
+				linhas = "";
 				for (l=0;l<i3GEOF.identifica.sistemasAdicionais.length;l++)
 				{
-					var ltema = i3GEOF.identifica.sistemasAdicionais[l].split(",")
+					ltema = i3GEOF.identifica.sistemasAdicionais[l].split(",");
 					if (ltema.length > 1)
-					linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";
+					{linhas += "<tr><td style='border-top:1px solid beige;'><input onclick='i3GEOF.identifica.mostraDadosSistema("+ltema[1]+",\""+ltema[2]+"\")' style=cursor:pointer type=radio name=i3GEOidentificatema /></td><td style='border-top:1px solid beige;' >"+ltema[0]+"</td></tr>";}
 					
 				}
 				if(divins){
@@ -356,18 +387,20 @@ i3GEOF.identifica = {
 	Obtém os dados de um tema para o ponto de coordenadas clicado no mapa
 	*/	
 	buscaDadosTema: function(tema){
+		var res,opcao,resolucao;
 		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEOF.identifica.locaplic+"/imagens/aguarde.gif' />";
-		var res = $i("i3GEOidentificaresolucao");
+		res = $i("i3GEOidentificaresolucao");
 		if(res)
-		{var resolucao = res.value;}
+		{resolucao = res.value;}
 		else
-		{var res = 5;}
+		{res = 5;}
 		i3GEO.temaAtivo = tema;
 		//var resolucao = "0.01"
-		if (tema == "ligados"){var opcao = "ligados"}
+		if (tema === "ligados")
+		{opcao = "ligados";}
 		else
-		{var opcao = "tema"}
-		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid,tema)
+		{opcao = "tema";}
+		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid,tema);
 	},
 	/*
 	Function: mostraDadosSistema
@@ -381,14 +414,8 @@ i3GEOF.identifica = {
 	target {String} (depreciado) - _self|self| onde a url será aberta. Se for "self", será aberta na mesma janela, caso contrário, em uma nova página do navegador 
 	*/	
 	mostraDadosSistema: function(exec,target){
-		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y
+		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y;
 		window.open(exec);
-		/*
-		if (target == "self" || target == "_self")
-		{window.location.href = exec}
-		else
-		{window.open(exec)}
-		*/
 	},
 	/*
 	Function: mostraDadosTema
@@ -402,30 +429,30 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res = ""
-		if (retorno.data != undefined)
+		var res,div0,ntemas,i,resultados,nres,cor,j;
+		if (retorno.data !== undefined)
 		{
-			var retorno = retorno.data;
-			var divO = $i("i3GEOidentificaocorrencia");
-			divO.innerHTML=""
-			var ntemas = retorno.length;
-			for(var i=0;i<ntemas;i++)
+			retorno = retorno.data;
+			divO = $i("i3GEOidentificaocorrencia");
+			divO.innerHTML="";
+			ntemas = retorno.length;
+			for(i=0;i<ntemas;i++)
 			{
-				var resultados = retorno[i].resultado[0];
-				if(resultados != " ")
+				resultados = retorno[i].resultado[0];
+				if(resultados !== " ")
 				{
-					res += "<div style='padding-top:6px;left:2px;text-align:left;width:80%;' >"+retorno[i].nome+"</div>"		
-					var nres = resultados.length;
-					var cor = "RGB(250,250,250)";
-					for(var j=0;j<nres;j++)
+					res += "<div style='padding-top:6px;left:2px;text-align:left;width:80%;' >"+retorno[i].nome+"</div>";	
+					nres = resultados.length;
+					cor = "RGB(250,250,250)";
+					for(j=0;j<nres;j++)
 					{
-						if(resultados[j].link == "")
+						if(resultados[j].link === "")
 						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;"+resultados[j].valor+"</div>";}
 						else
 						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;<a href='"+resultados[j].link+"' target=_blank >"+resultados[j].valor+"</a></div>";}
-						if(resultados[j].img != "")
+						if(resultados[j].img !== "")
 						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >"+resultados[j].img+"</div>";}
-						if (cor == "RGB(250,250,250)"){cor = "beige";}
+						if (cor === "RGB(250,250,250)"){cor = "beige";}
 						else
 						{cor = "RGB(250,250,250)";}
 					}
