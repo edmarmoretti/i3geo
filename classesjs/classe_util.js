@@ -805,7 +805,7 @@ i3GEO.util = {
 	
 	Parametros:
 	
-	janela {String} - id do conteúdo da janela flutuante que chamou a função
+	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 	
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 	*/
@@ -1161,6 +1161,47 @@ i3GEO.util = {
 		script.src= js;
 		script.id = id;
 		head.appendChild(script);
+	},
+	/*
+	Function: mensagemAjuda
+	
+	Formata uma mensagem de texto com ícone de ?
+	
+	Parametros:
+	
+	onde {String} - id do elemento que receberá a mensagem
+	
+	texto {String} - texto da mensagem
+	*/
+	mensagemAjuda: function(onde,texto){
+		var ins = "<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; border: 1px solid #B1CDEB; text-align: left; padding-left: 7px;padding-right: 11px;'>";
+		ins += '<div style="float:right"><img src="'+i3GEO.configura.locaplic+'/imagens/question.gif" /></div>';
+		ins += '<div style="text-align:left;">';
+		if (texto == "")
+		{texto = $i(onde).innerHTML;}
+		ins += texto;
+		ins += '</div></th></tr></table>';
+		if (onde != "")
+		{$i(onde).innerHTML = ins;}
+		else
+		{return(ins);}
+	},
+	/*
+	Function: randomRGB
+	
+	Gera uma cor RGB de forma aleatória
+	
+	Return:
+	{String} - r,g,b
+	*/
+	randomRGB: function(){
+		var v = Math.random(),
+			r = parseInt(255*v),
+			v = Math.random(),
+			g = parseInt(255*v),
+			v = Math.random(),
+			b = parseInt(255*v);
+		return (r+","+g+","+b);		
 	}
 };
 //

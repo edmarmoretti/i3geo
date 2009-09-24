@@ -1012,6 +1012,18 @@ i3GEO.php = {
 	buscaRapida: function(funcao,locaplic,servico,palavra){
 		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico;
 		cpJSON.call(p,"buscaRapida",funcao);	
+	},
+	/*
+	Function: listaItensTema
+
+	PHP:
+	classesphp/classe_atributoss.php
+	
+	<listaItens>	
+	*/
+	listaItensTema: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
+	 	cpJSON.call(p,"listaItensTema",funcao);
 	}
 };
 //YAHOO.log("carregou classe php", "Classes i3geo");
