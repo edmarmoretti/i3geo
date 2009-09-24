@@ -198,7 +198,8 @@ string - javascript com os parametros
 					"connectiontype"=>$ct,
 					"zoomtema"=>$zoomtema,
 					"contextoescala"=>$contextoescala,
-					"etiquetas"=>($oLayer->getmetadata("TIP"))
+					"etiquetas"=>($oLayer->getmetadata("TIP")),
+					"identifica"=>($oLayer->getmetadata("IDENTIFICA"))
 				);
 			}
 		}
