@@ -100,7 +100,10 @@ function aplicarCor()
 	if (app=='N') navn=true; else navm=true;
 	try{
 		var doc = unescape(((((window.location.href).split("doc="))[1]).split("&"))[0] )
-		var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument
+		if(doc != "")
+		{var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument;}
+		else
+		{var doc = window.parent.document;}
 	}
 	catch(e){var doc = window.parent.document;}
 	var elemento = unescape(((((window.location.href).split("elemento="))[1]).split("&"))[0] );
