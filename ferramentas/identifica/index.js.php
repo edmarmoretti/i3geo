@@ -3,7 +3,7 @@
 /*
 Title: Ferramenta Identifica
 
-File: i3geo/ferramentas/identifica/index.js
+File: i3geo/ferramentas/identifica/index.js.php
 
 About: Licença
 
@@ -59,24 +59,6 @@ i3GEOF.identifica = {
 	*/	
 	mostraSistemasAdicionais: true,
 	/*
-	Variavel: locaplic
-	
-	Localização do i3geo
-	
-	Type:
-	{String}
-	*/
-	locaplic: "",
-	/*
-	Variavel: sid
-	
-	Código da seção aberta pelo i3geo
-	
-	Type:
-	{String}
-	*/
-	sid: "",
-	/*
 	Variavel: tema
 	
 	Código do tema que será pesquisado
@@ -119,10 +101,6 @@ i3GEOF.identifica = {
 	
 	Parameters:
 	
-	locaplic {String} - url onde o i3geo está instalado, pe, http://localhost/i3geo
-	
-	sid {String} - código da seção aberta no servidor eplo i3Geo
-	
 	tema {String} - código do tema, existente no mapfile armazenado na seção, que será consultado já na inicialização
 
 	x {Numeric} - coordenada x do ponto que será utilizado para busca dos atributos
@@ -135,12 +113,10 @@ i3GEOF.identifica = {
 	
 	mostraSistemasAdicionais {boolean} - mostra ou não os sistemas adicionais de busca de dados
 	*/
-	inicia: function(locaplic,sid,tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
+	inicia: function(tema,x,y,iddiv,mostraLinkGeohack,mostraSistemasAdicionais){
 		try{
 			var g_locidentifica;
 			$i(iddiv).innerHTML += i3GEOF.identifica.html();
-			i3GEOF.identifica.locaplic = locaplic;
-			i3GEOF.identifica.sid = sid;
 			i3GEOF.identifica.tema = tema;
 			i3GEOF.identifica.x = x;
 			i3GEOF.identifica.y = y;
@@ -166,19 +142,71 @@ i3GEOF.identifica = {
 			//verifica se existem sistemas para identificar
 			//
 			if(i3GEOF.identifica.mostraSistemasAdicionais === true){
-				g_locidentifica = i3GEO.parametros.locidentifica;
-				if (g_locidentifica !== ""){
-					if(window.parent.tempXMLSISTEMAS === undefined)
-					{i3GEO.util.ajaxexecASXml(g_locidentifica,"i3GEOF.identifica.montaListaSistemas");}
+				if (i3GEO.parametros.locidentifica !== ""){
+					if(i3GEO.tempXMLSISTEMAS === undefined)
+					{i3GEO.util.ajaxexecASXml(i3GEO.parametros.locidentifica,"i3GEOF.identifica.montaListaSistemas");}
 					else
-					{i3GEOF.identifica.montaListaSistemas(window.parent.tempXMLSISTEMAS);}
+					{i3GEOF.identifica.montaListaSistemas(i3GEO.tempXMLSISTEMAS);}
 				}
 			}
 			if (i3GEO.temaAtivo !== "")
-			{i3GEOF.identifica.buscaDadosTema(window.parent.i3GEO.temaAtivo);}
+			{i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo);}
 		}
 		catch(erro){alert(erro);}
 	},
+	/*
+	Function: criaJanelaFlutuante
+	
+	Cria a janela flutuante para controle da ferramenta.
+	*/
+	criaJanelaFlutuante: function(){
+		var minimiza,cabecalho,janela,divid,temp,titulo;
+		//funcao que sera executada ao ser clicado no cabeçalho da janela
+		cabecalho = function(){
+			i3GEO.barraDeBotoes.ativaIcone("identifica");
+			g_tipoacao='identifica';
+			g_operacao='identifica';
+			i3GEOF.identifica.ativaFoco();
+		};
+		minimiza = function(){
+			var temp = $i("i3GEOF.identifica_corpo");
+			if(temp){
+				if(temp.style.display === "block")
+				{temp.style.display = "none";}
+				else
+				{temp.style.display = "block";}
+			}
+		};
+		//cria a janela flutuante
+		titulo = "Identifica <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>";
+		janela = i3GEO.janela.cria(
+			"450px",
+			"250px",
+			"",
+			"",
+			"",
+			titulo,
+			"i3GEOF.identifica",
+			false,
+			"hd",
+			cabecalho,
+			minimiza
+		);
+		divid = janela[2].id;
+		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
+		if(i3GEO.Interface.ATUAL !== "googlemaps"){
+			temp = function(){
+				i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
+				i3GEO.barraDeBotoes.ativaBotoes();
+			};
+			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		}	
+	},
+	/*
+	Function: ativaFoco
+	
+	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
+	*/
 	ativaFoco: function(){
 		i3GEOF.identifica.listaTemas("ligados");
 	},
@@ -239,7 +267,7 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.montaListaTemas(lista);
 		}
 		else
-		{i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid);}		
+		{i3GEO.php.listaTemas(i3GEOF.identifica.montaListaTemas,tipo,i3GEO.configura.locaplic,i3GEO.configura.sid);}		
 	},
 	/*
 	Function: montaListaTemas
@@ -324,7 +352,7 @@ i3GEOF.identifica = {
 	
 	O resultado é inserido no div com id "listaSistemas".
 	
-	A lista de sistemas é obtida de um XML definido no i3Geo na variável window.parent.i3GEO.parametros.locidentifica
+	A lista de sistemas é obtida de um XML definido no i3Geo na variável i3GEO.parametros.locidentifica
 	
 	Cada sistema consiste em uma URL para a qual serão passados os parâmetros x e y.
 	
@@ -336,7 +364,7 @@ i3GEOF.identifica = {
 		var divins,sisig,sistema,pub,exec,temp,t,linhas,ltema;
 		if (xmlDoc !== undefined)
 		{
-			window.parent.tempXMLSISTEMAS = xmlDoc;
+			i3GEO.tempXMLSISTEMAS = xmlDoc;
 			divins = $i("i3GEOidentificalistaSistemas");
 			sis = xmlDoc.getElementsByTagName("FUNCAO");
 			for (ig=0;ig<sis.length;ig++)
@@ -388,7 +416,7 @@ i3GEOF.identifica = {
 	*/	
 	buscaDadosTema: function(tema){
 		var res,opcao,resolucao;
-		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEOF.identifica.locaplic+"/imagens/aguarde.gif' />";
+		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' />";
 		res = $i("i3GEOidentificaresolucao");
 		if(res)
 		{resolucao = res.value;}
@@ -400,7 +428,7 @@ i3GEOF.identifica = {
 		{opcao = "ligados";}
 		else
 		{opcao = "tema";}
-		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEOF.identifica.locaplic,i3GEOF.identifica.sid,tema);
+		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema);
 	},
 	/*
 	Function: mostraDadosSistema
