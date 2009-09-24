@@ -1101,7 +1101,16 @@ width:16px;
 .yui-skin-sam .yui-button{
 	border-width:1px 0;border-style:solid;border-color:#808080;background:url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x 0 0;margin:auto .25em;
 }
-
+.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a
+{
+	padding:0 10px;
+	font-size:11px;
+	line-height:2;
+	*line-height:1.7;
+	min-height:2em;
+	*min-height:auto;
+	color:#000;
+}
 .ygtvtn
 {
 	background:transparent url(../pacotes/yui270/build/assets/skins/sam/treeview-sprite.gif) no-repeat scroll 0 -5600px;
@@ -1185,4 +1194,7 @@ width:16px;
 	width:18px;
 }
 .ygtvhtml{text-align:left;}
-.ygtvitem{text-align:left;}
+.ygtvitem{text-align:left;}
+
+
+
