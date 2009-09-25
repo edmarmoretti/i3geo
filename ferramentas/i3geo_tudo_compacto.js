@@ -64,7 +64,7 @@ document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval
  else{var temp={dados:'<div class=alerta >Nenhum tema possui sele&ccedil;&atilde;o. Utilize a op&ccedil;&atilde;o de sele&ccedil;&atilde;o ou a tabela de um tema para escolher algum elemento de algum tema.</div>',tipo:"mensagem"};}}
  else{var temp={dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
  eval("funcao(temp)");}
- var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemascomsel","listaTemasComSel",monta);}   function comboTemasLigados(id,funcao,onde,nome,multiplo){ if(arguments.length > 2) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; if(arguments.length==3){nome="";}
+ var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemascomsel","listaTemasComSel",monta);}    function comboTemasLigados(id,funcao,onde,nome,multiplo){ if(arguments.length > 2) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; if(arguments.length==3){nome="";}
  if(arguments.length < 5){multiplo=false;}
  var monta=function(retorno){ if(retorno.data !=undefined){ if(retorno.data.length > 0){ if(multiplo) comboTemas="<select id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>"; else comboTemas="<select id='"+id+"' name='"+nome+"'>"; comboTemas+="<option value=''>----</option>"; for(i=0;i<retorno.data.length;i++){comboTemas+="<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
  comboTemas+="</select>"; var temp={dados:comboTemas,tipo:"dados"};}
@@ -107,13 +107,12 @@ document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval
  else{var temp={dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
  eval("funcao(temp)");}
  var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaEpsg","listaEpsg",monta);}
- function removeAcentos(palavra){ var re=/ã|á|à|â/gi; palavra=palavra.replace(re,"a"); var re=/é/gi; palavra=palavra.replace(re,"e"); var re=/í/gi; palavra=palavra.replace(re,"i"); var re=/ó|õ/gi; palavra=palavra.replace(re,"o"); var re=/ç/gi; palavra=palavra.replace(re,"c"); var re=/ú/gi; palavra=palavra.replace(re,"u"); return(palavra);}function htmlAcentos(palavra){ var re=/ã/gi; palavra=palavra.replace(re,"*atilde|"); var re=/á/gi; palavra=palavra.replace(re,"*aacute|"); var re=/â/gi; palavra=palavra.replace(re,"*acirc|"); var re=/õ/gi; palavra=palavra.replace(re,"*otilde|"); var re=/ó/gi; palavra=palavra.replace(re,"*oacute|"); var re=/ô/gi; palavra=palavra.replace(re,"*ocirc|"); var re=/é/gi; palavra=palavra.replace(re,"*eacute|"); var re=/ê/gi; palavra=palavra.replace(re,"*ecirc|"); var re=/í/gi; palavra=palavra.replace(re,"*iacute|"); var re=/ú/gi; palavra=palavra.replace(re,"*uacute|"); var re=/ç/gi; palavra=palavra.replace(re,"*ccedil|"); var re=/Ã/gi; palavra=palavra.replace(re,"*Atilde|"); var re=/Á/gi; palavra=palavra.replace(re,"*Aacute|"); var re=/Â/gi; palavra=palavra.replace(re,"*Acirc|"); var re=/Õ/gi; palavra=palavra.replace(re,"*otilde|"); var re=/Ó/gi; palavra=palavra.replace(re,"*Oacute|"); var re=/Ô/gi; palavra=palavra.replace(re,"*Ocirc|"); var re=/É/gi; palavra=palavra.replace(re,"*Eacute|"); var re=/Ê/gi; palavra=palavra.replace(re,"*Ecirc|"); var re=/Í/gi; palavra=palavra.replace(re,"*Iacute|"); var re=/Ú/gi; palavra=palavra.replace(re,"*Uacute|"); var re=/Ç/gi; palavra=palavra.replace(re,"*Ccedil|"); return(palavra);}function randomRGB(){ var v=Math.random(); var r=parseInt(255*v); var v=Math.random(); var g=parseInt(255*v); var v=Math.random(); var b=parseInt(255*v); return(r+","+g+","+b);}function parametrosURL(){ try{ if(!window.parent.i3GEO){g_locaplic="../..";}
+ function removeAcentos(palavra){ var re=/ã|á|à|â/gi; palavra=palavra.replace(re,"a"); var re=/é/gi; palavra=palavra.replace(re,"e"); var re=/í/gi; palavra=palavra.replace(re,"i"); var re=/ó|õ/gi; palavra=palavra.replace(re,"o"); var re=/ç/gi; palavra=palavra.replace(re,"c"); var re=/ú/gi; palavra=palavra.replace(re,"u"); return(palavra);}function htmlAcentos(palavra){ var re=/ã/gi; palavra=palavra.replace(re,"*atilde|"); var re=/á/gi; palavra=palavra.replace(re,"*aacute|"); var re=/â/gi; palavra=palavra.replace(re,"*acirc|"); var re=/õ/gi; palavra=palavra.replace(re,"*otilde|"); var re=/ó/gi; palavra=palavra.replace(re,"*oacute|"); var re=/ô/gi; palavra=palavra.replace(re,"*ocirc|"); var re=/é/gi; palavra=palavra.replace(re,"*eacute|"); var re=/ê/gi; palavra=palavra.replace(re,"*ecirc|"); var re=/í/gi; palavra=palavra.replace(re,"*iacute|"); var re=/ú/gi; palavra=palavra.replace(re,"*uacute|"); var re=/ç/gi; palavra=palavra.replace(re,"*ccedil|"); var re=/Ã/gi; palavra=palavra.replace(re,"*Atilde|"); var re=/Á/gi; palavra=palavra.replace(re,"*Aacute|"); var re=/Â/gi; palavra=palavra.replace(re,"*Acirc|"); var re=/Õ/gi; palavra=palavra.replace(re,"*otilde|"); var re=/Ó/gi; palavra=palavra.replace(re,"*Oacute|"); var re=/Ô/gi; palavra=palavra.replace(re,"*Ocirc|"); var re=/É/gi; palavra=palavra.replace(re,"*Eacute|"); var re=/Ê/gi; palavra=palavra.replace(re,"*Ecirc|"); var re=/Í/gi; palavra=palavra.replace(re,"*Iacute|"); var re=/Ú/gi; palavra=palavra.replace(re,"*Uacute|"); var re=/Ç/gi; palavra=palavra.replace(re,"*Ccedil|"); return(palavra);} function randomRGB(){ var v=Math.random(); var r=parseInt(255*v); var v=Math.random(); var g=parseInt(255*v); var v=Math.random(); var b=parseInt(255*v); return(r+","+g+","+b);}function parametrosURL(){ try{ if(!window.parent.i3GEO){g_locaplic="../..";}
  else{ if(window.parent.i3GEO.configura) g_locaplic=window.parent.i3GEO.configura.locaplic; if(window.parent.i3GEO.parametros) g_r=window.parent.i3GEO.parametros.r;}
  var temp=(window.location.href).split("tema="); if(temp[1]){tema=(temp[1].split("&"))[0];}}catch(e){}}function zoomf(ext){ window.parent.objaguarde.abre("i3GEO.atualiza",window.parent.$trad("o1")); var p=g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=mudaext&ext="+ext; var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(p,"mudaExtensao",window.parent.remapaf);}function pinf(ext){ window.parent.objaguarde.abre("i3GEO.atualiza",window.parent.$trad("o1")); valores=ext.split(" "); vx=(valores[0]*1)+((((valores[0]*-1)-(valores[2]*-1))/2)*1); vy=(valores[1]*1)+((((valores[1]*-1)-(valores[3]*-1))/2)*1); var p=g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=zoomponto&pin=pin&xy="+vx+" "+vy; var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(p,"zoomPonto",window.parent.i3GEO.atualiza);}
 function convdmsddf(g,m,s){ cd=$i(g).value; cm=$i(m).value; cs=$i(s).value; var sinal='positivo'; if(cd < 0){ cd=cd*-1; sinal='negativo';}
  spm=cs/3600; mpg=cm/60; var dd=(cd*1)+(mpg*1)+(spm*1); if(sinal=='negativo'){dd=dd*-1;}
- return dd;}
-function mensagemAjuda(onde,texto){ var local="../.."; try{var local=window.parent.i3GEO.configura.locaplic;}catch(e){}
+ return dd;}function mensagemAjuda(onde,texto){ var local="../.."; try{var local=window.parent.i3GEO.configura.locaplic;}catch(e){}
  var ins="<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2;font-family:Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;border: 1px solid #B1CDEB;text-align: left;padding-left: 7px;padding-right: 11px;'>"; ins+='<div style="float:right"><img src="'+local+'/imagens/question.gif"/></div>'; ins+='<div style="left;">'; if(texto==""){var texto=$i(onde).innerHTML;}
  ins+=texto; ins+='</div></th></tr></table>'; if(onde !=""){$i(onde).innerHTML=ins;}
  else{return(ins);}}
@@ -6470,6 +6469,18 @@ i3GEO.php = {
 	buscaRapida: function(funcao,locaplic,servico,palavra){
 		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico;
 		cpJSON.call(p,"buscaRapida",funcao);	
+	},
+	/*
+	Function: listaItensTema
+
+	PHP:
+	classesphp/classe_atributoss.php
+	
+	<listaItens>	
+	*/
+	listaItensTema: function(funcao,tema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
+	 	cpJSON.call(p,"listaItensTema",funcao);
 	}
 };
 //YAHOO.log("carregou classe php", "Classes i3geo");
@@ -6885,7 +6896,7 @@ i3GEO.util = {
 						do {
 							curleft += obj.offsetLeft-obj.scrollLeft;
 							curtop += obj.offsetTop-obj.scrollTop;
-						} while (obj = obj.offsetParent);
+						} while (obj === obj.offsetParent);
 					}
 				}
 				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
@@ -7280,7 +7291,7 @@ i3GEO.util = {
 	
 	Parametros:
 	
-	janela {String} - id do conteúdo da janela flutuante que chamou a função
+	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 	
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 	*/
@@ -7636,7 +7647,118 @@ i3GEO.util = {
 		script.src= js;
 		script.id = id;
 		head.appendChild(script);
-	}
+	},
+	/*
+	Function: mensagemAjuda
+	
+	Formata uma mensagem de texto com ícone de ?
+	
+	Parametros:
+	
+	onde {String} - id do elemento que receberá a mensagem
+	
+	texto {String} - texto da mensagem
+	*/
+	mensagemAjuda: function(onde,texto){
+		var ins = "<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; border: 1px solid #B1CDEB; text-align: left; padding-left: 7px;padding-right: 11px;'>";
+		ins += '<div style="float:right"><img src="'+i3GEO.configura.locaplic+'/imagens/question.gif" /></div>';
+		ins += '<div style="text-align:left;">';
+		if (texto === "")
+		{texto = $i(onde).innerHTML;}
+		ins += texto;
+		ins += '</div></th></tr></table>';
+		if (onde !== "")
+		{$i(onde).innerHTML = ins;}
+		else
+		{return(ins);}
+	},
+	/*
+	Function: randomRGB
+	
+	Gera uma cor RGB de forma aleatória
+	
+	Return:
+	{String} - r,g,b
+	*/
+	randomRGB: function(){
+		var v = Math.random(),
+			r = parseInt(255*v,10),
+			g;
+		v = Math.random();
+		g = parseInt(255*v,10);
+		v = Math.random();
+		b = parseInt(255*v,10);
+		return (r+","+g+","+b);		
+	},
+	/*
+	Function: comboTemasLigados
+	
+	Cria um combo (caixa de seleção) com a lista de temas que estão visíveis no mapa
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	
+	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	
+	multiplo {Booleano} - indica se o combo permite seleções múltiplas
+	*/	
+	comboTemasLigados: function(id,funcao,onde,nome,multiplo){
+		if (arguments.length > 2)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
+		if (arguments.length === 3)
+		{nome = "";}
+		if (arguments.length < 5)
+		{multiplo = false;}
+		var monta, lista;
+		monta = function(retorno){
+			var i,comboTemas,temp,n,nome;
+			if (retorno !== undefined)
+			{
+				if(retorno.data)
+				{retorno = retorno.data;}
+				n = retorno.length;
+				if (n > 0)
+				{
+					if(multiplo)
+					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
+					else
+					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' name='"+nome+"'>";}
+					comboTemas += "<option value=''>----</option>";
+					for (i=0;i<n;i++){
+						if(retorno[i].nome){
+							nome = retorno[i].nome;
+							tema = retorno[i].tema;
+						}
+						else{
+							nome = retorno[i].tema;
+							tema = retorno[i].name;
+						}
+						comboTemas += "<option value="+tema+" >"+nome+"</option>";
+					}
+					comboTemas += "</select>";
+					temp = {dados:comboTemas,tipo:"dados"};
+				}
+				else
+				{temp = {dados:'<div class=alerta >Nenhum tema está ligado.</div>',tipo:"mensagem"};}
+			}
+			else
+			{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}
+			eval("funcao(temp);");
+		};
+		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+			monta(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+		}
+		else
+		{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}		
+	}	
 };
 //
 //alias

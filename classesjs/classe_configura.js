@@ -1031,7 +1031,6 @@ i3GEO.configura = {
 			tipo:"dinamico",
 			dica:$trad("d23"),
 			funcaoonclick:function(){
-				i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
 				g_tipoacao = "";
 				i3GEO.mapa.dialogo.cliqueGrafico();
 				if($i("img")){

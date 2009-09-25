@@ -676,6 +676,14 @@ g_traducao_ajuda = {
 			pt:"Exporta a legenda atual do tema para o formato SLD. O XML é mostrado na tela.",
 			complemento:"O formato SLD é utilizado em clientes WMS. Essa função objetiva auxiliar a construção de web Services OGC.",
 			apijs:"i3GEO.tema.dialogo.sld(idtema) Esta opção não possuí um diretório em i3geo/ferramentas. O XML é gerado diretamente na tela pelo programa classesphp/mapa_controle.php"
+		},
+		"80": {
+			titulo: "Inserir gráfico interativamente",
+			diretorio:"i3geo/ferramentas/inseregrafico",
+			categoria:"5",
+			pt:"Insere gráficos em um elemento de um tema de forma interativa.",
+			complemento:"",
+			apijs:"i3GEO.mapa.dialogo.cliqueGrafico()"
 		}
 	}
 };

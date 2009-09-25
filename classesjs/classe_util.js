@@ -410,7 +410,7 @@ i3GEO.util = {
 						do {
 							curleft += obj.offsetLeft-obj.scrollLeft;
 							curtop += obj.offsetTop-obj.scrollTop;
-						} while (obj = obj.offsetParent);
+						} while (obj === obj.offsetParent);
 					}
 				}
 				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
@@ -1177,11 +1177,11 @@ i3GEO.util = {
 		var ins = "<table style='width:100%;padding:2;vertical-align:top;background-color:#ffffff;' ><tr><th style='background-color: #cedff2; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; border: 1px solid #B1CDEB; text-align: left; padding-left: 7px;padding-right: 11px;'>";
 		ins += '<div style="float:right"><img src="'+i3GEO.configura.locaplic+'/imagens/question.gif" /></div>';
 		ins += '<div style="text-align:left;">';
-		if (texto == "")
+		if (texto === "")
 		{texto = $i(onde).innerHTML;}
 		ins += texto;
 		ins += '</div></th></tr></table>';
-		if (onde != "")
+		if (onde !== "")
 		{$i(onde).innerHTML = ins;}
 		else
 		{return(ins);}
@@ -1196,13 +1196,83 @@ i3GEO.util = {
 	*/
 	randomRGB: function(){
 		var v = Math.random(),
-			r = parseInt(255*v),
-			v = Math.random(),
-			g = parseInt(255*v),
-			v = Math.random(),
-			b = parseInt(255*v);
+			r = parseInt(255*v,10),
+			g;
+		v = Math.random();
+		g = parseInt(255*v,10);
+		v = Math.random();
+		b = parseInt(255*v,10);
 		return (r+","+g+","+b);		
-	}
+	},
+	/*
+	Function: comboTemasLigados
+	
+	Cria um combo (caixa de seleção) com a lista de temas que estão visíveis no mapa
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	
+	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	
+	multiplo {Booleano} - indica se o combo permite seleções múltiplas
+	*/	
+	comboTemasLigados: function(id,funcao,onde,nome,multiplo){
+		if (arguments.length > 2)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
+		if (arguments.length === 3)
+		{nome = "";}
+		if (arguments.length < 5)
+		{multiplo = false;}
+		var monta, lista;
+		monta = function(retorno){
+			var i,comboTemas,temp,n,nome;
+			if (retorno !== undefined)
+			{
+				if(retorno.data)
+				{retorno = retorno.data;}
+				n = retorno.length;
+				if (n > 0)
+				{
+					if(multiplo)
+					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
+					else
+					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' name='"+nome+"'>";}
+					comboTemas += "<option value=''>----</option>";
+					for (i=0;i<n;i++){
+						if(retorno[i].nome){
+							nome = retorno[i].nome;
+							tema = retorno[i].tema;
+						}
+						else{
+							nome = retorno[i].tema;
+							tema = retorno[i].name;
+						}
+						comboTemas += "<option value="+tema+" >"+nome+"</option>";
+					}
+					comboTemas += "</select>";
+					temp = {dados:comboTemas,tipo:"dados"};
+				}
+				else
+				{temp = {dados:'<div class=alerta >Nenhum tema está ligado.</div>',tipo:"mensagem"};}
+			}
+			else
+			{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}
+			eval("funcao(temp);");
+		};
+		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+			monta(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+		}
+		else
+		{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}		
+	}	
 };
 //
 //alias

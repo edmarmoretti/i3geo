@@ -457,7 +457,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res,div0,ntemas,i,resultados,nres,cor,j;
+		var res="",div0,ntemas,i,resultados,nres,cor,j;
 		if (retorno.data !== undefined)
 		{
 			retorno = retorno.data;

@@ -508,6 +508,7 @@ function comboTemasSel(id,funcao,onde)
 //monta combo com os temas que estão ligados
 //retorna um combo com id=temasLigados
 //
+//i3GEO.util
 function comboTemasLigados(id,funcao,onde,nome,multiplo)
 {
 	if (arguments.length > 2)
@@ -831,6 +832,7 @@ function htmlAcentos(palavra)
 	return(palavra);
 }
 //rgb aleatorio
+//i3GEO.util.randomRGB
 function randomRGB()
 {
 	var v = Math.random();
@@ -900,6 +902,7 @@ function convdmsddf(g,m,s)
   {dd = dd * -1;}
   return dd;
 }
+//veja i3geo.util
 function mensagemAjuda(onde,texto)
 {
 	var local = "../..";

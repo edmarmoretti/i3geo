@@ -1725,7 +1725,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 		foreach ($temastemp as $tt)
 		{
 			$ll = $maptemp->getlayerbyname($tt);
-			$permite = $l->getmetadata("permitedownload");
+			$permite = $ll->getmetadata("permitedownload");
 			if($permite != "nao")			
 			ms_newLayerObj($map, $ll);
 		}
