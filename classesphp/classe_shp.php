@@ -120,8 +120,14 @@ Nome do tema criado.
 		$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 		$novoshpf->free();
 		$def[] = array("ID","C","50");
-		$db = xbase_create($nomeshp.".dbf", $def);
-		xbase_close($db);
+		if(!function_exists("dbase_create")){
+			$db = xbase_create($nomeshp.".dbf", $def);
+			xbase_close($db);
+		}
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);
+			dbase_close($db);
+		}
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->free();
 		if($tituloTema == "")
