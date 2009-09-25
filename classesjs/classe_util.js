@@ -410,7 +410,7 @@ i3GEO.util = {
 						do {
 							curleft += obj.offsetLeft-obj.scrollLeft;
 							curtop += obj.offsetTop-obj.scrollTop;
-						} while (obj === obj.offsetParent);
+						} while (obj = obj.offsetParent);
 					}
 				}
 				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
