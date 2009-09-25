@@ -1827,15 +1827,17 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 						copy($arq[0].".shx",$nomeshp.".shx");
 						copy($arq[0].".dbf",$nomeshp.".dbf");
 					}
+					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
+					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
+					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 				}
 				else
 				{
-					$restemp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
-					$novonomelayer = str_replace($radtmp,"",$restemp);
+					$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
+					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
+					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
+					$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
 				}
-				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shp";
-				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
-				$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 			}
 		}
 	}
