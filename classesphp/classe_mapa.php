@@ -935,7 +935,7 @@ $temas - lista separada por vírgula dos temas que serão excluídos.
 				$grupo = $layer->group;
 				$layer->set("status",MS_DELETE);
 				$lgs = $this->mapa->getLayersIndexByGroup($grupo);
-				if($lgs)
+				if($lgs && $grupo != "")
 				{
 					foreach ($lgs as $lg)
 					{
