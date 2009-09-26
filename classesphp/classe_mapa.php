@@ -1314,10 +1314,12 @@ $canal - Identificador do canal (ordem em que está no RSS)
 			$def[] = array("DESC","C","254");
 			$def[] = array("CATEGORIA","C","254");
 			if(!function_exists(dbase_create))
-			{xbase_create($nomeshp.".dbf", $def);}
+			{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 			else
-			{dbase_create($nomeshp.".dbf", $def);}				
+			{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+			//acrescenta os pontos no novo shapefile
 			$dbname = $nomeshp.".dbf";
+			$db=xbase_open($dbname,2);
 			$reg = array();
 			$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 			//acrescenta os shapes

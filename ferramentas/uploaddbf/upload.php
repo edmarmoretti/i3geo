@@ -88,11 +88,10 @@ if (isset($_FILES['filedbf']['name']))
 					$conta++;
 				}
 				if(!function_exists(dbase_create))
-				{xbase_create($dirmap."/".$nome.".dbf", $def);}
+				{xbase_create($dirmap."/".$nome.".dbf", $def);xbase_close($db);}
 				else
-				{dbase_create($dirmap."/".$nome.".dbf", $def);}				
-				//xbase_close($db);
-				//$db=xbase_open($dirmap."/".$nome.".dbf",2);		
+				{dbase_create($dirmap."/".$nome.".dbf", $def);dbase_close($db);}				
+				$db=xbase_open($dirmap."/".$nome.".dbf",2);		
 				foreach($dados as $d){
 					$reg = array();
 					foreach($d as $i)

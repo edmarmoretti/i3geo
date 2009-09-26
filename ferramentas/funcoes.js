@@ -154,6 +154,8 @@ function cor(obj)
 {window.parent.i3GEO.util.abreCor("wdocai",obj);}
 //mostra uma nova opcao quando o usuário clica em proximo ou anterior.
 //É utilizado nos menus de análise
+//i3geo.util.proximoAnterior
+//
 function mostraOpcao(anterior,proxima,texto,idatual)
 {
 	if(document.getElementById(idatual)){document.getElementById("resultado").removeChild(document.getElementById(idatual))}
