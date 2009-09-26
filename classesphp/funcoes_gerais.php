@@ -1603,11 +1603,17 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	if ($data == "")
 	{
 		$def[] = array("ID","C","50");
-		$db = xbase_create($nomeshp.".dbf", $def);
-		$dbname = $nomeshp.".dbf";
 		$reg[] = 0;
-		xbase_add_record($db,$reg);
-		xbase_close($db);
+		if(!function_exists("dbase_create")){
+			$db = xbase_create($nomeshp.".dbf", $def);		
+			xbase_add_record($db,$reg);
+			xbase_close($db);
+		}
+		else{
+			$db = dbase_create($nomeshp.".dbf", $def);		
+			dbase_add_record($db,$reg);
+			dbase_close($db);
+		}
 		$s = $layer->getshape(-1,0);
 		$result = $layer->getResult(0);
 		$shpi  = $result->shapeindex;
@@ -1629,7 +1635,10 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			//
 			$def[] = array($temp,"C","254");
 		}
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists("dbase_create"))
+		{$db = xbase_create($nomeshp.".dbf", $def);}
+		else
+		{$db = dbase_create($nomeshp.".dbf", $def);}
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
@@ -1659,10 +1668,16 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 					$reg[] = $shape->values[$ni];
 				}
 				$novoshpf->addShape($shape);
+				if(!function_exists("dbase_create"))
 				xbase_add_record($db,$reg);
+				else
+				dbase_add_record($db,$reg);
 				$reg = array();
 			}
+			if(!function_exists("dbase_create"))
 			xbase_close($db);
+			else
+			dbase_close($db);
 			$novoshpf->free();
 			$layer->close();
 		}
