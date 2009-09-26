@@ -108,26 +108,27 @@ Nome do tema criado.
 */
 	function criaSHPvazio($tituloTema="")
 	{
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
 		$diretorio = dirname($this->arquivo);
-		$tipol = MS_SHP_POINT;
 		$novonomelayer = nomeRandomico();
 		$nomeshp = $diretorio."/".$novonomelayer;
-		$l = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Ins","SIM");
-		$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-		$novoshpf->free();
 		$def[] = array("ID","C","50");
 		if(!function_exists("dbase_create")){
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
+			else	
+			{include_once "../pacotes/phpxbase/api_conversion.php";}
 			$db = xbase_create($nomeshp.".dbf", $def);
 			xbase_close($db);
 		}
-		else{
+		else
+		{
 			$db = dbase_create($nomeshp.".dbf", $def);
 			dbase_close($db);
 		}
+		$tipol = MS_SHP_POINT;
+		$l = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Ins","SIM");
+		$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
+		$novoshpf->free();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->free();
 		if($tituloTema == "")
@@ -365,11 +366,6 @@ $para - linha|poligono
 */
 	function shpPT2shp($locaplic,$para)
 	{
-		//para manipular dbf
-		if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
-		include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");
-		else	
-		include_once "../pacotes/phpxbase/api_conversion.php";
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$diretorio = dirname($this->arquivo);
@@ -390,7 +386,17 @@ $para - linha|poligono
 			$temp = strtoupper($ni);
 			$def[] = array($temp,"C","254");
 		}
-		$db = xbase_create($nomeshp.".dbf", $def);
+		//para manipular dbf
+		if(!function_exists("dbase_create"))
+		{
+			if(file_exists($this->locaplic."/pacotes/phpxbase/api_conversion.php"))
+			{include_once($this->locaplic."/pacotes/phpxbase/api_conversion.php");}
+			else	
+			{include_once "../pacotes/phpxbase/api_conversion.php";}
+			$db = xbase_create($nomeshp.".dbf", $def);
+		}
+		else
+		{$db = dbase_create($nomeshp.".dbf", $def);}
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", $tipol);
@@ -412,10 +418,18 @@ $para - linha|poligono
 		foreach ($items as $ni)
 		{$reg[] = "-";}
 		$novoshpf->addShape($shape);
-		xbase_add_record($db,$reg);
+		if(!function_exists("dbase_create"))
+		{
+			xbase_add_record($db,$reg);
+			xbase_close($db);
+		}
+		else
+		{
+			dbase_add_record($db,$reg);
+			dbase_close($db);			
+		}
 		$novoshpf->free();
 		$this->layer->close();
-		xbase_close($db);
 		//cria o novo layer
 		$layer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"",$metaClasse="SIM");
 		$layer->set("data",$nomeshp);
