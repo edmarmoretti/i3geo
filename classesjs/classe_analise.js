@@ -57,8 +57,12 @@ i3GEO.analise = {
 
 		Abre a janela que gera grade de pontos
 		*/
-		gradePontos: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.htm","","","Grade de pontos <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=15' >&nbsp;&nbsp;&nbsp;</a>");},
+		gradePontos: function(){
+			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePontos.criaJanelaFlutuante()","i3GEOF.gradeDePontos_script");
+			}
+		},
 		/*
 		Function: gradePol
 

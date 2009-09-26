@@ -1272,7 +1272,77 @@ i3GEO.util = {
 		}
 		else
 		{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}		
-	}	
+	},
+	/*
+	Function: proximoAnterior
+	
+	Cria uma sequência de opções com botão de anterior e próximo. É utilizado principalmente pelas
+	ferramentas de análise espacial, onde o usuário segue uma sequência de operações de escolha
+	de parâmetros.
+	
+	Parametros:
+	
+	anterior {String} - nome da função que é executada para voltar à tela anterior. Pode ser "".
+	
+	proxima {String} - nome da função que é executada para avançar para a próxima tela. Pode ser "".
+	
+	texto {String} - texto que comporá a tela atual
+	
+	idatual {String} - id do elemento DIV que será criado para inserir o conteúdo definido em 'texto"
+
+	container {String} - id do elemento DIV já existente que receberá as telas.
+	*/
+	proximoAnterior: function(anterior,proxima,texto,idatual,container){
+		var temp = $i(idatual),
+			ndiv = document.createElement("div"),
+			nids,
+			i;
+			
+		if(temp){$i(container).removeChild(temp);}
+		if (!document.getElementById(idatual))
+		{
+			ndiv.id = idatual;
+			texto += "<br><br><table style='width:100%;background-color:#F2F2F2;' ><tr style='width:100%'>";
+			if (anterior !== "")
+			{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><input id='"+idatual+"anterior_' onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+			if (proxima !== "")
+			{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><input id='"+idatual+"proxima_' onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+			ndiv.innerHTML = texto+"</tr></table>";
+			
+			$i(container).appendChild(ndiv);
+			
+			new YAHOO.widget.Button(idatual+"anterior_",{
+				onclick:{fn: function(){
+					eval(anterior+"()");
+				},
+				lazyloadmenu:true 
+			}});
+			new YAHOO.widget.Button(idatual+"proxima_",
+				{onclick:{fn: function(){
+					eval(proxima+"()");
+				},
+				lazyloadmenu:true
+			}});
+			i = $i(idatual+"proxima_-button");
+			if(i){
+				i.style.backgroundImage = "url('"+i3GEO.configura.locaplic+"/imagens/player_avanca.png')";
+				i.style.backgroundRepeat = "no-repeat";
+				i.style.backgroundPosition = "center center";
+			}
+			i = $i(idatual+"anterior_-button");
+			if(i){
+				i.style.backgroundImage = "url('"+i3GEO.configura.locaplic+"/imagens/player_volta.png')";
+				i.style.backgroundRepeat = "no-repeat";
+				i.style.backgroundPosition = "center center";
+			}
+		}
+		temp = $i(container).getElementsByTagName("div");
+		nids = temp.length;
+		for (i=0;i<nids;i++){
+			temp[i].style.display="none";
+		}
+		$i(idatual).style.display="block";
+	}
 };
 //
 //alias
