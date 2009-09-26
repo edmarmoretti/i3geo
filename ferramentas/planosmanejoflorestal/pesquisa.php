@@ -129,7 +129,11 @@ function adicionatema($map_file,$dir_tmp,$imgdir,$nometemapontos,$itens,$valores
 	$def = array();
 	foreach ($itens as $ni)
 	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}				
+
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);

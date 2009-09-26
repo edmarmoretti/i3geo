@@ -11,13 +11,15 @@ FONTSET   "../symbols/fontes.txt"
       "arquivodownload"	""
       "ITENS" "NOMEMUN,ANOCRIA,ESTADO"
       "ITENSDESC" "Nome,Ano,UF"
+	"TEMA" "Teste de pontos"
+	"CLASSE" "SIM"
     END
     NAME "testept"
     STATUS OFF
     TYPE POINT
     UNITS METERS
     CLASS
-      NAME ""
+	NAME " "
       STYLE
         ANGLE 360
         COLOR 255 0 0

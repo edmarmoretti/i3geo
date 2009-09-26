@@ -668,7 +668,11 @@ $locaplic - diretório da aplicação i3geo
 			$def[] = array("y2","N","12","5");
 			$def[] = array("ind1","N","5","0");
 			$def[] = array("ind2","N","5","0");
-			$db = xbase_create($nomeshp.".dbf", $def);
+			if(!function_exists(dbase_create))
+			{xbase_create($nomeshp.".dbf", $def);}
+			else
+			{dbase_create($nomeshp.".dbf", $def);}				
+			
 			$dbname = $nomeshp.".dbf";
 			//le o arquivo linha a linha, pulando a primeira
 			//acrescenta os pontos no shape file formando as linhas
@@ -764,13 +768,20 @@ $locaplic - diretório da aplicação i3geo
 			$def[] = array("b1","C","6");
 			$def[] = array("b2","C","6");
 			$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);
+			if(!function_exists(dbase_create))
+			{$dbLinhas = xbase_create($nomeshpLinhas.".dbf", $def);}
+			else
+			{$dbLinhas = dbase_create($nomeshpLinhas.".dbf", $def);}				
 			$dbnameLinhas = $nomeshpLinhas.".dbf";
 			//
 			// cria o dbf para o shapefile poligonal
 			//
 			$def = array();
 			$def[] = array("area","N","12","5");
-			$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);
+			if(!function_exists(dbase_create))
+			{$dbPoligonos = xbase_create($nomeshpPoligonos.".dbf", $def);}
+			else
+			{$dbPoligonos = dbase_create($nomeshpPoligonos.".dbf", $def);}				
 			$dbnamePoligonos = $nomeshpPoligonos.".dbf";
 			//
 			//constrói as linhas do diagrama
@@ -966,7 +977,10 @@ $locaplic - Localização do I3geo.
 				$conta = $conta + 1;
 			}
 		}
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}				
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		foreach($pontos as $ponto)
@@ -1100,7 +1114,10 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$def[] = array("dist_m","N","10","2");
 	$def[] = array("origem","C","255");
 	$def[] = array("destino","C","255");
-	$db = xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}	
 	//acrescenta os pontos no novo shapefile
 	$dbname = $nomeshp.".dbf";
 	foreach ($shapesorigem as $sorigem)
@@ -1228,7 +1245,10 @@ nome do layer criado com o buffer.
 		$def[] = array("i3geo","C","254");
 		foreach ($items as $ni)
 		{$def[] = array($ni,"C","254");}
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		for($i = 0;$i < count($buffers);++$i)
@@ -1315,7 +1335,10 @@ $locaplic - Localização do I3geo.
 		$def = array();
 		foreach ($items as $ni)
 		{$def[] = array($ni,"C","254");}
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		for($i = 0;$i < count($centroides);++$i)
@@ -1392,7 +1415,10 @@ $npty - Número de pontos em Y (opcional)
 		$def = array();
 		$def[] = array("x","C","20");
 		$def[] = array("y","C","20");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
@@ -1504,7 +1530,10 @@ $npty - Número de pontos em Y (opcional)
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
@@ -1642,7 +1671,10 @@ $npty - Número de pontos em Y (opcional)
 		$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
 		$def = array();
 		$def[] = array("id","C","20");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		$reg = array();
@@ -1778,7 +1810,10 @@ $locaplic - Localização do I3geo
 		foreach ($itenspo as $ni)
 		{$def[] = array($ni,"C","254");}
 		$def[] = array("npontos","N","10","0");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		$dbname = $nomeshp.".dbf";
 		$sopen = $layerPo->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -1892,7 +1927,10 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$def = array();
 		if($item==""){$item="nenhum";}
 		$def[] = array($item,"C","254");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		$dbname = $nomeshp.".dbf";
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
@@ -1996,7 +2034,10 @@ $locaplic - Localização do I3geo
 		$def = array();
 		if($item==""){$item="nenhum";}
 		$def[] = array($item,"C","254");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		$dbname = $nomeshp.".dbf";
 		$classes = array_keys($dissolve);
 		foreach ($classes as $classe)
@@ -2261,7 +2302,10 @@ $operacao - Tipo de análise.
 		$l = criaLayer($this->mapa,$tiposhape,MS_DEFAULT,"Ins","SIM");
 		$novoshpf = ms_newShapefileObj($nomeshp, $tiposhapefile);
 		$def[] = array("ID","C","250");
-		$db = xbase_create($nomeshp.".dbf", $def);
+		if(!function_exists(dbase_create))
+		{xbase_create($nomeshp.".dbf", $def);}
+		else
+		{dbase_create($nomeshp.".dbf", $def);}	
 		$conta = 0;
 		foreach ($shapes as $s)
 		{

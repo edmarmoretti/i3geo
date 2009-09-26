@@ -649,7 +649,10 @@ function insereWKTUrl()
 	$items = array("COORD");
 	foreach ($items as $ni)
 	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	if ($tipol == 1)
@@ -713,7 +716,10 @@ function inserePontosUrl()
 	$items = array("COORD");
 	foreach ($items as $ni)
 	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
@@ -779,7 +785,10 @@ function insereLinhasUrl()
 	$items = array("COORD");
 	foreach ($items as $ni)
 	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}	
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
@@ -852,7 +861,10 @@ function inserePoligonosUrl()
 	$items = array("COORD");
 	foreach ($items as $ni)
 	{$def[] = array($ni,"C","254");}
-	xbase_create($nomeshp.".dbf", $def);
+	if(!function_exists(dbase_create))
+	{xbase_create($nomeshp.".dbf", $def);}
+	else
+	{dbase_create($nomeshp.".dbf", $def);}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);

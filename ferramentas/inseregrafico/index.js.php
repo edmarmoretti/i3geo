@@ -85,13 +85,13 @@ i3GEOF.insereGrafico = {
 		ins += '</div>';
 		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;90%;display:none;">';
-		ins += '		<p>Escolha o tema com os dados:';
+		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
 		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">Aguarde...';
 		ins += '		</div>';	
 		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
 		ins += '		<br><br><br>';
 		ins += '		<input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
-		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px >Marque os itens para compor as partes do gr&aacute;fico: Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique no elemento do mapa para inserir o gr&aacute;fico.</div>';
+		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico: Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique no elemento do mapa para inserir o gr&aacute;fico.</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
 		ins += '		<table summary="" class=lista width="70%">';

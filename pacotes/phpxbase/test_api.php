@@ -17,6 +17,7 @@
 *
 **/
 
+	$locaplic = "c:/ms4w/apache/htdocs/i3geo";
 	require_once "api_conversion.php";
 
 	$fields = array(
