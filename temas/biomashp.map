@@ -13,6 +13,7 @@ FONTSET   "../symbols/fontes.txt"
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile"
     END
+    GROUP "Grupo 1"
     NAME "biomashp"
     STATUS OFF
     TEMPLATE "none.htm"

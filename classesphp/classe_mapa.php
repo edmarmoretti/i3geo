@@ -859,6 +859,7 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						if ($nlayer->group != " " && $nlayer->group != "" )
 						{
 							$lr = $nlayer->group;
+							if($nomeunico[$lr])
 							$nlayer->set("group",$nomeunico[$lr]);
 						}
 						ms_newLayerObj($this->mapa, $nlayer);

@@ -103,7 +103,7 @@ select
 {margin:0px;color:#426252;background-color:rgb(195,226,226);border: 0px solid #CBCBCB;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 
 .legendaTema
-{font-size:10px;text-align:left;}
+{font-size:12px;text-align:left;}
 #corpoMapa,#corpoMapaL,#corpoMapaO,#corpoMapaN,#corpoMapaS
 {position:absolute;left:0px;top:0px;z-index:0;}
 #div_d

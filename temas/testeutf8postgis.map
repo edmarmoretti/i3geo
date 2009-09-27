@@ -15,6 +15,7 @@ FONTSET   "../symbols/fontes.txt"
     TEMPLATE "none.htm"
     TYPE POLYGON
     UNITS METERS
+GROUP "Grupo 1"
     CLASS
       NAME "Pantanal"
       EXPRESSION ('[id]'eq'6')
