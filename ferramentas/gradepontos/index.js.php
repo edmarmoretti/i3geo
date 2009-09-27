@@ -131,6 +131,8 @@ i3GEOF.gradeDePontos = {
 		ins += "Segundo<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedepontosiys' title='segundo'  type=text size=5 value='00.00'/>";
 		g_tipoacao = "capturaponto";
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDePontos.t1()","i3GEOF.gradeDePontos.t3()",ins,"i3GEOF.gradeDePontos.t2","i3GEOgradedepontosresultado");	
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDePontos.capturaPonto()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDePontos.capturaPonto()");}
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>Número de pontos. Total máximo de 10.000";
@@ -149,6 +151,11 @@ i3GEOF.gradeDePontos = {
 			{onclick:{fn: i3GEOF.gradeDePontos.criaGrade}}
 		);		
 	},
+	/*
+	Function: criaGrade
+	
+	Cria a grade e adiciona um novo tema ao mapa
+	*/
 	criaGrade: function(){
 		try{
 			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
@@ -179,6 +186,24 @@ i3GEOF.gradeDePontos = {
 			cp.call(p,"gradeDePontos",fim);
 		}
 		catch(e){$i("i3GEOgradedepontosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();}
+	},
+	/*
+	Function: capturaPonto
+	
+	Captura um ponto no mapa e preenche os campos de coordenadas de início da grade
+	*/
+	capturaPonto: function(){
+		var temp = g_tipoacao;
+		g_tipoacao = "capturaponto";
+		i3GEO.eventos.cliqueCapturaPt(
+			"i3GEOgradedepontosixg",
+			"i3GEOgradedepontosixm",
+			"i3GEOgradedepontosixs",
+			"i3GEOgradedepontosiyg",
+			"i3GEOgradedepontosiym",
+			"i3GEOgradedepontosiys"
+		);
+		g_tipoacao = temp;
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
