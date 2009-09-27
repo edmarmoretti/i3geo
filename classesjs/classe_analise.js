@@ -68,8 +68,12 @@ i3GEO.analise = {
 
 		Abre a janela que gera grade de poligonos
 		*/
-		gradePol: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradepol/index.htm","","","Grade de pol&iacute;gonos <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=14' >&nbsp;&nbsp;&nbsp;</a>");},
+		gradePol: function(){
+			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/gradepol/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePoligonos.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
+			}
+		},
 		/*
 		Function: gradeHex
 
