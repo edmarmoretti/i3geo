@@ -52,6 +52,26 @@ alert(i3GEO.configura.locaplic)
 */
 i3GEO.configura = {
 	/*
+	Propriedade: grupoLayers
+	
+	Lista de grupos e seus respectivos layers, para montagem da árvore de camadas.
+	
+	Se essa propriedade estiver definida, as camadas serão agrupadas na árvore de camadas conforme os grupos definidos.
+
+	Por exemplo
+	i3GEO.configura.grupoLayers = [
+		{nome:"Grupo 1",layers:["zee","estadosl"]},
+		{nome:"Grupo 2",layers:["mundo"]}
+	]
+	
+	Type:
+	{JASON}
+	
+	Default:
+	""
+	*/
+	grupoLayers: "",
+	/*
 	Propriedade: oMenuData
 
 	Itens incluídos no menu suspenso. Define os parâmetros para o gadget menu suspenso

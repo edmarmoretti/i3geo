@@ -278,7 +278,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	atualiza: function(temas){
 		if(this.comparaTemas(temas,this.CAMADAS)){return;}
-		var currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j;
+		var currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
 		if(!document.getElementById(i3GEO.arvoreDeCamadas.IDHTML)){return;}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 		this.CAMADAS = temas;
@@ -306,21 +306,76 @@ i3GEO.arvoreDeCamadas = {
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
 		tempNode.enableHighlight = false;
-		c = temas.length;
-		for (i=0, j=c; i<j; i++){
-			ltema = temas[i];		
-			d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:temas[i].name,tipo:"tema"};
-			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
-			temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+		//
+		//monta a árvore.
+		//se i3GEO.configura.grupoLayers estiver definido
+		//o processo é diferenciado
+		//
+		if (i3GEO.configura.grupoLayers === ""){
+			c = temas.length;
+			for (i=0, j=c; i<j; i++){
+				ltema = temas[i];		
+				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
+				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+				temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+				temaNode.expanded = false;
+				temaNode.enableHighlight = false;
+			}
+		}
+		else{
+			nk = temas.length;
+			c = i3GEO.configura.grupoLayers.length;
+			//grupos
+			for(i=0;i<c; i++){
+				d = {html:"<b>"+i3GEO.configura.grupoLayers[i].nome+"</b>"};
+				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
+				temaNode.expanded = false;
+				temaNode.enableHighlight = false;				
+				n = i3GEO.configura.grupoLayers[i].layers.length;
+				//layers de um grupo
+				for(j=0;j<n; j++){
+					//busca na lista de temas
+					for(k=0;k<nk; k++){
+						ltema = temas[k];
+						if(ltema.name === i3GEO.configura.grupoLayers[i].layers[j]){
+							d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
+							temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+							temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+							temaNode.expanded = false;
+							temaNode.enableHighlight = false;
+							incluidos.push(ltema.name);					
+						}
+					}
+				}
+			}
+			//inclui os temas não agrupados
+			d = {html:"<b>Outros</b>"};
+			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
 			temaNode.expanded = false;
 			temaNode.enableHighlight = false;
+			c = incluidos.length;
+			for(k=0;k<nk; k++){
+				ltema = temas[k];
+				n = false;
+				for(j=0;j<c; j++){
+					if(incluidos[j] === ltema.name)
+					{n = true;}
+				}
+				if (n === false){
+					d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
+					temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
+					temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+					temaNode.expanded = false;
+					temaNode.enableHighlight = false;	
+				}
+			}
 		}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).style.textAlign="left";
    		i3GEO.arvoreDeCamadas.ARVORE.draw();
    		if(i3GEO.arvoreDeCamadas.ARRASTARORDEM === true || i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
    		{this.ativaDragDrop();}
 		//
-		//verifica se a janela a ferramenta identifica está ativa para atualizar a lista de temas
+		//verifica se a ferramenta identifica está ativa para atualizar a lista de temas
 		//
 		try{
 			if($i("i3GEOidentificalistaTemas")){
