@@ -79,8 +79,12 @@ i3GEO.analise = {
 
 		Abre a janela que gera grade de hexágonos
 		*/
-		gradeHex: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/gradehex/index.htm","","","Grade de hex&aacute;gonos <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=16' >&nbsp;&nbsp;&nbsp;</a>");},
+		gradeHex: function(){
+			if(typeof(i3GEOF.gradeDeHex) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/gradehex/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.gradeDeHex.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
+			}
+		},
 		/*
 		Function: analisaGeometrias
 
