@@ -467,27 +467,40 @@ i3GEO.eventos = {
 	A janela aberta deve ter os seguintes elementos do tipo input (ids):
 	ixg,ixm,ixs,iyg,iym,iys
 	*/
-	cliqueCapturaPt: function(){
-		var x,y,doc;
-		if (g_tipoacao !== "capturaponto"){return;}
-		else{
+	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
+		if(arguments.length === 0){
+			var ixg = "ixg",
+				ixm = "ixm",
+				ixs = "ixs",
+				iyg = "iyg",
+				iym = "iym",
+				iys = "iys",
+				x,y;
 			if($i("wdocai"))
 			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
+		}
+		else{
+			var doc = document; 
+			x,
+			y;
+		}
+		if (g_tipoacao !== "capturaponto"){return;}
+		else{
 			try{
 				x = objposicaocursor.dmsx.split(" ");
 				y = objposicaocursor.dmsy.split(" ");
-				if (doc.getElementById("ixg"))
-				{doc.getElementById("ixg").value = x[0];}
-				if (doc.getElementById("ixm"))
-				{doc.getElementById("ixm").value = x[1];}
-				if (doc.getElementById("ixs"))
-				{doc.getElementById("ixs").value = x[2];}
-				if (doc.getElementById("iyg"))
-				{doc.getElementById("iyg").value = y[0];}
-				if (doc.getElementById("iym"))
-				{doc.getElementById("iym").value = y[1];}
-				if (doc.getElementById("iys"))
-				{doc.getElementById("iys").value = y[2];}
+				if (doc.getElementById(ixg))
+				{doc.getElementById(ixg).value = x[0];}
+				if (doc.getElementById(ixm))
+				{doc.getElementById(ixm).value = x[1];}
+				if (doc.getElementById(ixs))
+				{doc.getElementById(ixs).value = x[2];}
+				if (doc.getElementById(iyg))
+				{doc.getElementById(iyg).value = y[0];}
+				if (doc.getElementById(iym))
+				{doc.getElementById(iym).value = y[1];}
+				if (doc.getElementById(iys))
+				{doc.getElementById(iys).value = y[2];}
 			}
 			catch(m){}
 		}
