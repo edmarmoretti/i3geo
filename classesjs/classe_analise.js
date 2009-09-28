@@ -91,9 +91,10 @@ i3GEO.analise = {
 		Abre a janela com o sistema de análise de geometrias
 		*/
 		analisaGeometrias: function(){
-			g_tipoacao = "selecao";
-			i3GEO.temaAtivo = "";
-			i3GEO.janela.cria("500px","400px",i3GEO.configura.locaplic+'/ferramentas/analisageometrias/index.htm',"","","An&aacute;lise de geometrias <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>");
+			if(typeof(i3GEOF.analisaGeometrias) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/analisageometrias/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.analisaGeometrias.criaJanelaFlutuante()","i3GEOF.analisaGeometrias_script");
+			}
 		},
 		/*
 		Function: pontosdistri

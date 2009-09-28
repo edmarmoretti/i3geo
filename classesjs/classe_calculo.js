@@ -461,8 +461,8 @@ i3GEO.calculo = {
 		h = xyMin[1]-xyMax[1];
    		tl = i3GEO.calculo.dd2tela(rectbox[0],rectbox[3],documento,mapext,pixel);  		
 		pos = i3GEO.util.pegaPosicaoObjeto(documento);
-		t = tl[1] - pos[1];
-		l = tl[0] - pos[0];
+		t = tl[1] + pos[1];
+		l = tl[0] + pos[0];
 		d = "block";
 		if($i(idrect)){
 			box = $i(idrect);
