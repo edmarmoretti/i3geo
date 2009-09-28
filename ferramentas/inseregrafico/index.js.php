@@ -79,8 +79,8 @@ i3GEOF.insereGrafico = {
 		var ins = '';
 		ins += '<div id=i3GEOinseregraficoguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;font-size:10px;left:0px;" >Fonte dos dados</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;font-size:10px;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
@@ -108,9 +108,6 @@ i3GEOF.insereGrafico = {
 		ins += '			<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOinseregraficosombra value="5" /></td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		</table>';			
-		ins += '	</div>';
-		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia3obj" style="left:1px;display:none;">';
-
 		ins += '	</div>';
 		ins += '</div>	';
 		return ins;
