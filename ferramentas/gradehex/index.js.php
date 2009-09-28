@@ -97,7 +97,7 @@ i3GEOF.gradeDeHex = {
 			cabecalho,
 			minimiza
 		);
-		divid = janela[2].id;
+		divid = janela[2].id;	
 		i3GEOF.gradeDeHex.inicia(divid);
 	},
 	t0: function()
@@ -120,7 +120,8 @@ i3GEOF.gradeDeHex = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t0()","i3GEOF.gradeDeHex.t2()",ins,"i3GEOF.gradeDeHex.t1","i3GEOgradedehexresultado");
 	},
 	t2: function(){
-		var ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
+		var temp,
+			ins = "<p class='paragrafo'>Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>";
 		ins += "<p class='paragrafo'>em X: ";
 		ins += "Grau<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixg' title='grau'  type=text size=3 value='-00'/>";
 		ins += "Minuto<input onclick='javascript:this.select();' class=digitar id='i3GEOgradedehexixm' title='minuto'  type=text size=5 value='00'/>";
@@ -133,6 +134,10 @@ i3GEOF.gradeDeHex = {
 		i3GEO.util.proximoAnterior("i3GEOF.gradeDeHex.t1()","i3GEOF.gradeDeHex.t3()",ins,"i3GEOF.gradeDeHex.t2","i3GEOgradedehexresultado");	
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.gradeDeHex.capturaPonto()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.gradeDeHex.capturaPonto()");}
+		temp = function(){
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.gradeDeHex.capturaPonto()");
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	t3: function(){
 		var ins = "<p class='paragrafo'>Número de hex&aacute;gonos. Total máximo de 10.000";
