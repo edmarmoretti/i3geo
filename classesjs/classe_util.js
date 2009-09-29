@@ -1205,7 +1205,7 @@ i3GEO.util = {
 		return (r+","+g+","+b);		
 	},
 	/*
-	Function: comboTemasLigados
+	Function: comboTemas
 	
 	Cria um combo (caixa de seleção) com a lista de temas que estão visíveis no mapa
 	
@@ -1223,8 +1223,10 @@ i3GEO.util = {
 	nome {String} - valor que será incluido no parametro "name" do elemento "select".
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
+	
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados
 	*/	
-	comboTemasLigados: function(id,funcao,onde,nome,multiplo){
+	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if (arguments.length > 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
 		if (arguments.length === 3)
@@ -1261,17 +1263,26 @@ i3GEO.util = {
 					temp = {dados:comboTemas,tipo:"dados"};
 				}
 				else
-				{temp = {dados:'<div class=alerta >Nenhum tema está ligado.</div>',tipo:"mensagem"};}
+				{temp = {dados:'<div class=alerta >Nenhum tema encontrado.</div>',tipo:"mensagem"};}
 			}
 			else
 			{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}
 			eval("funcao(temp);");
 		};
-		if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
-			monta(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+		if(tipoCombo === "ligados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
-		else
-		{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}		
+		if(tipoCombo === "selecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listaTemasComSel(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}	
 	},
 	/*
 	Function: proximoAnterior

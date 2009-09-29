@@ -239,7 +239,7 @@ i3GEOF.analisaGeometrias = {
 	Cria o combo com os temas disponíveis (temas ligados) para adição dos gráficos.
 	*/
 	comboTemas: function(){
-		i3GEO.util.comboTemasLigados(
+		i3GEO.util.comboTemas(
 			"i3GEOanalisageometriastemasLigados",
 			function(retorno){
 		 		$i("i3GEOanalisageometriastemas").innerHTML = retorno.dados;
@@ -253,7 +253,10 @@ i3GEOF.analisaGeometrias = {
 					$i("i3GEOanalisageometriastemasLigados").onchange.call();
 				}
 			},
-			"i3GEOanalisageometriastemas"
+			"i3GEOanalisageometriastemas",
+			"",
+			false,
+			"ligados"
 		);
 	},
 	/*

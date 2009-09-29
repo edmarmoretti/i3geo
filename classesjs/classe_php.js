@@ -298,6 +298,22 @@ i3GEO.php = {
 		cpJSON.call(p,"listaTemas",funcao);	
 	},
 	/*
+	Function: listatemascomsel
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->listaTemasComSel>	
+	*/
+	listaTemasComSel: function(funcao,locaplic,sid){
+		if(arguments.length === 1){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemascomsel&g_sid="+sid;
+		cpJSON.call(p,"listaTemasComSel",funcao);	
+	},
+	/*
 	Function: pegaSistemas
 
 	PHP:

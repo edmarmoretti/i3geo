@@ -184,7 +184,7 @@ i3GEO.janela = {
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
 		ins = '<div id="'+id+'_cabecalho" class="hd">';
-		ins += "<span><img id='"+id+"_imagemCabecalho' style='visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>";
+		ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
 		ins += texto;
 		if(funcaoMinimiza)
 		{ins += "<div id='"+id+"_minimizaCabecalho' class='container-minimiza' ></div>";}

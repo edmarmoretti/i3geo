@@ -218,7 +218,7 @@ i3GEOF.insereGrafico = {
 	Cria o combo com os temas disponíveis (temas ligados) para adição dos gráficos.
 	*/
 	comboTemas: function(){
-		i3GEO.util.comboTemasLigados(
+		i3GEO.util.comboTemas(
 			"i3GEOinseregraficotemasLigados",
 			function(retorno){
 		 		$i("i3GEOinseregraficotemasi").innerHTML = retorno.dados;
@@ -234,7 +234,10 @@ i3GEOF.insereGrafico = {
 					$i("i3GEOinseregraficotemasLigados").onchange.call();
 				}
 			},
-			"i3GEOinseregraficotemasi"
+			"i3GEOinseregraficotemasi",
+			"",
+			false,
+			"ligados"
 		);
 	},
 	/*

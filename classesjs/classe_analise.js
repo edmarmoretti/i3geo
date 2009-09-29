@@ -126,8 +126,12 @@ i3GEO.analise = {
 
 		Gera um buffer em elementos selecionados
 		*/
-		buffer: function()
-		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/buffer/index.htm","","","Entorno <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>");},
+		buffer: function(){
+			if(typeof(i3GEOF.buffer) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/buffer/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.buffer.criaJanelaFlutuante()","i3GEOF.buffer_script");
+			}
+		},
 		/*
 		Function: distanciaptpt
 
