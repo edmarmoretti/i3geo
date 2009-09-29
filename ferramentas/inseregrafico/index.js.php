@@ -39,6 +39,12 @@ O tema que será utilizado é o que estiver armazenado na variável global i3GEO.te
 */
 i3GEOF.insereGrafico = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -148,7 +154,7 @@ i3GEOF.insereGrafico = {
 			minimiza
 		);
 		divid = janela[2].id;
-		
+		i3GEOF.insereGrafico.aguarde = $i("i3GEOF.insereGrafico_imagemCabecalho").style;
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.insereGrafico.insere()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.insereGrafico.insere()");}
 		temp = function(){
@@ -187,16 +193,21 @@ i3GEOF.insereGrafico = {
 				width = $i("i3GEOinseregraficow").value,
 				inclinacao = $i("i3GEOinseregraficoinclinacao").value,
 				shadow_height = $i("i3GEOinseregraficosombra").value,
-				itens;
+				itens,
+				temp;
 			if (tema === ""){alert("Nenhum tema definido para pegar os dados");}
 			else{
 				itens = i3GEOF.insereGrafico.pegaItensMarcados();
 				if (itens === "")
 				{alert("Nenhum item foi escolhido");}
 				else{
-					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+					temp = function(){
+						i3GEOF.insereGrafico.aguarde.visibility = "hidden";
+						i3GEO.atualiza();
+					};
+					i3GEOF.insereGrafico.aguarde.visibility = "visible";
 					i3GEO.contadorAtualiza++;
-					i3GEO.php.insereSHPgrafico(i3GEO.atualiza,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
+					i3GEO.php.insereSHPgrafico(temp,tema,objposicaocursor.ddx,objposicaocursor.ddy,itens,shadow_height,width,inclinacao);
 				}
 			}
 		}

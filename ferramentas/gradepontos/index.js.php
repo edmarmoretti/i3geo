@@ -32,6 +32,12 @@ cria e adiciona um novo tema ao mapa contendo uma grade de pontos com espaçament
 */
 i3GEOF.gradeDePontos = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -98,6 +104,7 @@ i3GEOF.gradeDePontos = {
 			minimiza
 		);
 		divid = janela[2].id;
+		i3GEOF.gradeDePontos.aguarde = $i("i3GEOF.gradeDePontos_imagemCabecalho").style;
 		i3GEOF.gradeDePontos.inicia(divid);
 	},
 	t0: function()
@@ -163,6 +170,9 @@ i3GEOF.gradeDePontos = {
 	*/
 	criaGrade: function(){
 		try{
+			if(i3GEOF.gradeDePontos.aguarde.visibility === "visible")
+			{return;}
+			i3GEOF.gradeDePontos.aguarde.visibility = "visible";
 			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosxg").value,$i("i3GEOgradedepontosxm").value,$i("i3GEOgradedepontosxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepontosyg").value,$i("i3GEOgradedepontosym").value,$i("i3GEOgradedepontosys").value);
@@ -178,19 +188,18 @@ i3GEOF.gradeDePontos = {
 			{alert("Número de pontos não pode ser maior que 10.000");return;}
 			fim = function(retorno)
 			{
-				i3GEO.janela.fechaAguarde("gradeDePontos");
+				i3GEOF.gradeDePontos.aguarde.visibility = "hidden";
 				if (retorno.data == undefined )
 				{$i("i3GEOgradedepontosfim").innerHTML = "<p class='paragrafo'>Erro. A operação demorou muito(?).";}
 				else
 				{i3GEO.atualiza("");}
 			}
-			i3GEO.janela.abreAguarde("gradeDePontos","Criando a grade...");
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepontos&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDePontos",fim);
 		}
-		catch(e){$i("i3GEOgradedepontosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();}
+		catch(e){$i("i3GEOgradedepontosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.gradeDePontos.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: capturaPonto

@@ -32,6 +32,12 @@ Cria e adiciona um novo tema ao mapa contendo uma grade de polígonos com espaçam
 */
 i3GEOF.gradeDePoligonos = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -98,6 +104,7 @@ i3GEOF.gradeDePoligonos = {
 			minimiza
 		);
 		divid = janela[2].id;
+		i3GEOF.gradeDePoligonos.aguarde = $i("i3GEOF.gradeDePoligonos_imagemCabecalho").style;
 		i3GEOF.gradeDePoligonos.inicia(divid);
 	},
 	t0: function()
@@ -163,6 +170,9 @@ i3GEOF.gradeDePoligonos = {
 	*/
 	criaGrade: function(){
 		try{
+			if(i3GEOF.gradeDePoligonos.aguarde.visibility === "visible")
+			{return;}
+			i3GEOF.gradeDePoligonos.aguarde.visibility = "visible";
 			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosxg").value,$i("i3GEOgradedepoligonosxm").value,$i("i3GEOgradedepoligonosxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedepoligonosyg").value,$i("i3GEOgradedepoligonosym").value,$i("i3GEOgradedepoligonosys").value);
@@ -178,19 +188,18 @@ i3GEOF.gradeDePoligonos = {
 			{alert("Número de celulas não pode ser maior que 10.000");return;}
 			fim = function(retorno)
 			{
-				i3GEO.janela.fechaAguarde("gradeDePoligonos");
+				i3GEOF.gradeDePoligonos.aguarde.visibility = "hidden";
 				if (retorno.data == undefined )
 				{$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo'>Erro. A operação demorou muito(?).";}
 				else
 				{i3GEO.atualiza("");}
 			}
-			i3GEO.janela.abreAguarde("gradeDePoligonos","Criando a grade...");
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedepol&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDePoligonos",fim);
 		}
-		catch(e){$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();}
+		catch(e){$i("i3GEOgradedepoligonosfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEOF.gradeDeHex.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: capturaPonto

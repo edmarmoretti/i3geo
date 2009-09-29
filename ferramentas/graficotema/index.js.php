@@ -37,6 +37,12 @@ O tema que será utilizado é o que estiver armazenado na variável global i3GEO.te
 */
 i3GEOF.graficoTema = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -79,8 +85,8 @@ i3GEOF.graficoTema = {
 		var ins = '';
 		ins += '<div id=i3GEOgraficotemaguiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">';
 		ins += '	<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia1" style="text-align:center;font-size:10px;left:0px;" >Fonte dos dados</div></em></a></li>';
-		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia2" style="text-align:center;font-size:10px;left:0px;" >Propriedades</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>';
+		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
 		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
@@ -146,6 +152,7 @@ i3GEOF.graficoTema = {
 			"hd"
 		);
 		divid = janela[2].id;
+		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
 		i3GEOF.graficoTema.inicia(divid);
 	},
 	/*
@@ -211,6 +218,8 @@ i3GEOF.graficoTema = {
 	*/
 	criaNovoTema: function(){
 		try{
+			if(i3GEOF.graficoTema.aguarde.visibility === "visible")
+			{return;}
 			var lista = i3GEOF.graficoTema.pegaItensMarcados(),
 				outlinecolor = $i("i3GEOgraficotemaoutlinecolor").value,
 				offset = $i("i3GEOgraficotemaoffset").value,
@@ -225,15 +234,15 @@ i3GEOF.graficoTema = {
 			{tamanho = $i("i3GEOgraficotemalargura").value+" "+$i("altura").value;}
 			if(lista === "")
 			{alert("selecione um item");return;}
-			i3GEO.janela.abreAguarde("montaMapa","Criando novo tema...");
+			i3GEOF.graficoTema.aguarde.visibility = "visible";
 			temp = function(retorno){
-				i3GEO.janela.fechaAguarde("montaMapa");
+				i3GEOF.graficoTema.aguarde.visibility = "hidden";
 				i3GEO.atualiza(retorno);
 			};
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficotema&tema="+i3GEO.temaAtivo+"&lista="+lista+"&tamanho="+tamanho+"&tipo="+tipo+"&outlinecolor="+outlinecolor+"&offset="+offset;
 			cp.set_response_type("JSON");
 			cp.call(p,"graficotema",temp);
-		}catch(e){alert("Erro: "+e);i3GEO.janela.fechaAguarde();}
+		}catch(e){alert("Erro: "+e);i3GEOF.graficoTema.aguarde.visibility = "hidden";}
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

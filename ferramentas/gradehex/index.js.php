@@ -32,6 +32,12 @@ cria e adiciona um novo tema ao mapa contendo uma grade de heságonos com espaçam
 */
 i3GEOF.gradeDeHex = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -97,7 +103,8 @@ i3GEOF.gradeDeHex = {
 			cabecalho,
 			minimiza
 		);
-		divid = janela[2].id;	
+		divid = janela[2].id;
+		i3GEOF.gradeDeHex.aguarde = $i("i3GEOF.gradeDeHex_imagemCabecalho").style;
 		i3GEOF.gradeDeHex.inicia(divid);
 	},
 	t0: function()
@@ -163,6 +170,9 @@ i3GEOF.gradeDeHex = {
 	*/
 	criaGrade: function(){
 		try{
+			if(i3GEOF.gradeDeHex.aguarde.visibility === "visible")
+			{return;}
+			i3GEOF.gradeDeHex.aguarde.visibility = "visible";
 			var dx,dy,ix,iy,nptx,npty,fim,p,cp;
 			dx = i3GEO.calculo.dms2dd($i("i3GEOgradedehexxg").value,$i("i3GEOgradedehexxm").value,$i("i3GEOgradedehexxs").value);
 			dy = i3GEO.calculo.dms2dd($i("i3GEOgradedehexyg").value,$i("i3GEOgradedehexym").value,$i("i3GEOgradedehexys").value);
@@ -178,19 +188,18 @@ i3GEOF.gradeDeHex = {
 			{alert("Número de pontos não pode ser maior que 10.000");return;}
 			fim = function(retorno)
 			{
-				i3GEO.janela.fechaAguarde("gradeDeHex");
+				i3GEOF.gradeDeHex.aguarde.visibility = "hidden";
 				if (retorno.data == undefined )
 				{$i("i3GEOgradedehexfim").innerHTML = "<p class='paragrafo'>Erro. A operação demorou muito(?).";}
 				else
-				{i3GEO.atualiza("");}
+				{i3GEO.atualiza();}
 			}
-			i3GEO.janela.abreAguarde("gradeDeHex","Criando a grade...");
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=gradedehex&xdd="+dx+"&ydd="+dy+"&px="+ix+"&py="+iy+"&nptx="+nptx+"&npty="+npty;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"gradeDeHex",fim);
 		}
-		catch(e){$i("i3GEOgradedehexfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();}
+		catch(e){$i("i3GEOgradedehexfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEOF.gradeDeHex.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: capturaPonto

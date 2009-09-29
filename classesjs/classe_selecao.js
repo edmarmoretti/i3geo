@@ -135,7 +135,7 @@ i3GEO.selecao = {
 			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			tipo = "adiciona";
 			//pega o tipo de operacao da janela de selecao
-			if (doc.getElementById("tipoOperacao"))
+			if(doc.getElementById("tipoOperacao"))
 			{tipo = doc.getElementById("tipoOperacao").value;}
 			if (i3GEO.temaAtivo === "")
 			{alert("Nenhum tema ativo");return;}

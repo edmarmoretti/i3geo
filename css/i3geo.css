@@ -8,7 +8,10 @@
 {border:0px solid gray;}
 .lista3 td
 {border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 1px;color:#2F4632;background-color:#F2F2F2;margin:0px;text-align:left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
-
+.lista4 td
+{border: 1px solid rgb(240,240,240);padding: 2px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+.lista4 td input
+{border:0px solid gray;}
 .geralFerramentas
 {position:relative;background-color:white;text-align:left;text-decoration:none;border-top: 2px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:12px;padding:5px;font-weight:normal;top:8px;left:0px;overflow:auto;width:100%;}
 
