@@ -1,3 +1,5 @@
+<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Ferramenta análise de geometrias
 
@@ -37,6 +39,12 @@ O tema que será utilizado é o que estiver armazenado na variável global i3GEO.te
 */
 i3GEOF.analisaGeometrias = {
 	/*
+	Variavel: aguarde
+	
+	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	*/
+	aguarde: "",
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -51,26 +59,34 @@ i3GEOF.analisaGeometrias = {
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
 			//eventos das guias
 			$i("i3GEOanalisageometrias1").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometriasa1","i3GEOanalisageometrias");};
-			$i("i3GEOanalisageometrias2").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias2","i3GEOanalisageometrias");};
-			
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");};
+			$i("i3GEOanalisageometrias2").onclick = function(){
+				if($i("i3GEOanalisageometrias2obj").style.display === "block")
+				{return;}
+				i3GEOF.analisaGeometrias.aguarde.visibility = "visible";
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias2","i3GEOanalisageometrias");
+				i3GEOF.analisaGeometrias.listaGeo();
+			};
+			$i("i3GEOanalisageometrias3").onclick = function()
+			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias3","i3GEOanalisageometrias");};
 			new YAHOO.widget.Button(
 				"i3GEOanalisageometriasbotao1",
 				{onclick:{fn: i3GEOF.analisaGeometrias.capturageo}}
 			);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen1",$i("i3GEOanalisageometriasmen1").innerHTML);
+			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen2",$i("i3GEOanalisageometriasmen2").innerHTML);
+			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen3",$i("i3GEOanalisageometriasmen3").innerHTML);
 			g_tipoacao="";
 			g_operacao="";
 			i3GEOF.analisaGeometrias.ativaFoco();
-			var combot = "<select style='font-size:11px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >"
-			combot += "<option value='adiciona' >Adiciona</option>"
-			combot += "<option value='retira' >Retira</option>"
-			combot += "<option value='inverte' >Inverte</option>"
-			combot += "<option value='limpa' >Limpa</option>"
-			combot += "</select>"
-			$i("i3GEOanalisageometriasoperacao").innerHTML = combot
-
+			var combot = "<select style='font-size:11px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
+			combot += "<option value='adiciona' >Adiciona</option>";
+			combot += "<option value='retira' >Retira</option>";
+			combot += "<option value='inverte' >Inverte</option>";
+			combot += "<option value='limpa' >Limpa</option>";
+			combot += "</select>";
+			$i("i3GEOanalisageometriasoperacao").innerHTML = combot;
+			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 		}
 		catch(erro){alert(erro);}
 	},
@@ -105,10 +121,39 @@ i3GEOF.analisaGeometrias = {
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias2obj" style="left:1px;display:none;">';
-		
+		ins += '		<div id=i3GEOanalisageometriaslistadegeometrias style="width:95%;text-align:left;left:0px;">';
+		ins += '		</div><br><br>';
+		ins += '		<div style="text-align:left;left:0px" id=i3GEOanalisageometriasmen3 >';
+		ins += '		<p class=paragrafo >Marque as geometrias para aplicar os processos desejados.';
+		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
-
+		ins += '			<p class=paragrafo >Operações que obtém descrições sobre a geometria, retornando valores que são adicionados aos itens da geometria:';
+		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.calculo(this)"  >';
+		ins += '				<option value="" selected >---</option>';
+		ins += '				<option value=area >&aacute;rea</option>';
+		ins += '				<option value=perimetro >per&iacute;metro</option>';
+		ins += '			</select><br>';
+		ins += '			<p class=paragrafo >Operações que criam novas geometrias a partir de duas ou mais geometrias:';
+		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.funcoes(this)" >';
+		ins += '				<option value="" selected >---</option>';
+		ins += '				<option value=union_geos >Uni&atilde;o</option>';
+		ins += '				<option value=intersection >Intersec&ccedil;&atilde;o</option>';
+		ins += '				<option value=difference >Diferen&ccedil;a</option>';
+		ins += '				<option value=symdifference >Diferen&ccedil;a inversa</option>';
+		ins += '				<option value=convexhull >Convexo</option>';
+		ins += '			</select>';
+		ins += '			<p class=paragrafo >Operações que atuam sobre uma única geometria:';
+		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.funcoes1(this)" >';
+		ins += '				<option value="" selected >---</option>';
+		ins += '				<option value=convexhull >convexo</option>';
+		ins += '				<option value=boundary >entorno</option>';
+		ins += '			</select>';
+		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
+		ins += '			<p class=paragrafo >As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.';
+		ins += '			<p class=paragrafo >Para maiores informações, veja: <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
+		ins += '			<p class=paragrafo >Algumas fun&ccedil;&otilde;es para operarem corretamente sobre temas pontuais, precisam que antes seja feita a uni&atilde;o dos pontos em uma nova geometria.';
+		ins += '		</div>';
 		ins += '	</div>';
 		ins += '</div>	';
 		return ins;
@@ -137,7 +182,7 @@ i3GEOF.analisaGeometrias = {
 		titulo = "An&aacute;lise de geometrias <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"500px",
-			"400px",
+			"300px",
 			"",
 			"",
 			"",
@@ -149,15 +194,14 @@ i3GEOF.analisaGeometrias = {
 			minimiza
 		);
 		divid = janela[2].id;
-		
-		/*
-		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.insereGrafico.insere()") < 0)
-		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.insereGrafico.insere()");}
+		i3GEOF.analisaGeometrias.aguarde = $i("i3GEOF.analisaGeometrias_imagemCabecalho").style;
+		i3GEOF.analisaGeometrias.aguarde.visibility = "visible";
+		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.analisaGeometrias.selecionaElemento()") < 0)
+		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.analisaGeometrias.selecionaElemento()");}
 		temp = function(){
-			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.insereGrafico.insere()");
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.analisaGeometrias.selecionaElemento()");
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		*/			
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 		i3GEOF.analisaGeometrias.inicia(divid);
 	},
 	/*
@@ -166,11 +210,28 @@ i3GEOF.analisaGeometrias = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		if(g_tipoacao !== 'analisageometrias'){
+		if(g_operacao !== 'analisageometrias'){
+			i3GEO.barraDeBotoes.ativaIcone("selecao");
 			g_tipoacao='analisageometrias';
 			g_operacao='analisageometrias';
 			i3GEOF.analisaGeometrias.comboTemas();
+			var temp = $i(i3GEO.Interface.IDMAPA);
+			if(temp){
+				temp.title = "";
+				temp.style.cursor="pointer";
+			}
 		}
+	},
+	/*
+	Function: selecionaElemento
+	
+	Seleciona um elemento do tema ativo quando o usuário clica no mapa
+	
+	É executado no evento de clique no mapa
+	*/
+	selecionaElemento: function(){
+		if(g_tipoacao === 'analisageometrias')
+		{i3GEO.selecao.porxy(i3GEO.temaAtivo,$i("i3GEOanalisageometriastipoOperacao").value,5);}
 	},
 	/*
 	Function: comboTemas
@@ -194,201 +255,218 @@ i3GEOF.analisaGeometrias = {
 			},
 			"i3GEOanalisageometriastemas"
 		);
+	},
+	/*
+	Function: capturaGeo
+	
+	Captura as geometrias selecionadas. As geometrias capturadas são armazenadas como objetos
+	serializados no servidor, e podem ser utilizadas nas operações de análise
+	*/
+	capturageo:function(){
+		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+		{return;}
+		else
+		{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+		var p,
+			cp = new cpaint(),
+			nome=window.prompt("Nome que sera dado a geometria:"),
+			temp = function(retorno){
+				if($i("i3GEOanalisageometrias2obj").style.display === "block"){
+					i3GEOF.analisaGeometrias.aguarde.visibility = "visible";
+					i3GEOF.analisaGeometrias.listaGeo();
+				}
+				else{
+					i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				}
+			};
+		try{
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=capturageometrias&tema="+$i("i3GEOanalisageometriastemasLigados").value+"&nome="+nome;
+			cp.set_response_type("JSON");
+			cp.call(p,"capturageo",temp);
+		}catch(e){
+			alert("Ocorreu um erro: "+e);
+			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+		}
+	},
+	/*
+	Function: listaGeo
+	
+	Obtém a lista de geometrias armazenadas
+	*/
+	listaGeo: function(){
+		var montalistageometrias,
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listageometrias",
+			cp = new cpaint();
+		montalistageometrias = function(retorno){
+			if(retorno.data !== "")
+			{
+				var ins,cor,temp,j,k,i;
+				ins = "<input id=i3GEOanalisageometriasbotao4 type=button size=20  value='Excluir marcados' />&nbsp;&nbsp;";
+				ins += "<input id=i3GEOanalisageometriasbotao5 type=i3GEOanalisageometriasbutton size=20  value='Ver no mapa' /><br><br>";
+				cor = "rgb(245,245,245)";
+				for (i=0;i<retorno.data.length; i++)
+				{
+					ins += "<table width=90% class=lista4 ><tr style=background-color:"+cor+" >";
+					ins += "<td width=5 ><input type=checkbox id="+retorno.data[i].arquivo+" style=cursor:pointer /></td>";
+					ins += "<td width=55 >"+retorno.data[i].layer+" "+retorno.data[i].arquivo+"</td>";
+					ins += "<td><table>";
+					temp = retorno.data[i].dados;
+					for (j=0;j<temp.length; j++)
+					{
+						ins += "<tr><td>"+temp[j].id+"</td><td style=text-align:left >";
+						if (temp[j].imagem !== "")
+						{ins += "<img src='"+temp[j].imagem+"' />";}
+						for (k=0;k<temp[j].valores.length; k++)
+						{ins += temp[j].valores[k].item+" = "+temp[j].valores[k].valor+"<br>";}
+						ins += "</td></tr>";
+					}
+					ins += "</table></td>";
+					ins += "</tr></table>";
+					if (cor === "rgb(245,245,245)")
+					{cor = "rgb(255,255,255)";}
+					else {cor = "rgb(245,245,245)";}
+				}
+				$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = ins;
+				new YAHOO.widget.Button(
+					"i3GEOanalisageometriasbotao4",
+					{onclick:{fn: i3GEOF.analisaGeometrias.excluirGeo}}
+				);
+				new YAHOO.widget.Button(
+					"i3GEOanalisageometriasbotao5",
+					{onclick:{fn: i3GEOF.analisaGeometrias.incluirNoMapa}}
+				);
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";			
+			}
+			else{
+				$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = "<p class=paragrafo >Nenhuma geometria dispon&iacute;vel.";
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			}
+		};
+		cp.set_response_type("JSON");
+		cp.call(p,"listageometrias",montalistageometrias);	
+	},
+	/*
+	Function: excluirGeo
+	
+	Exclui do servidor as geometrias marcadas na lista de geometrias
+	*/
+	excluirGeo: function(){
+		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+		{return;}
+		else
+		{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+		var lista,p,cp;
+		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+		$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = "<p class=paragrafo >Aguarde...";
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=removergeometrias&lista="+lista;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"removergeometrias",i3GEOF.analisaGeometrias.listaGeo);
+	},
+	/*
+	Function: incluirNoMapa
+	
+	Inclui no mapa as geometrias marcadas na lista de geometrias
+	*/
+	incluirNoMapa:function(){
+		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+		{return;}
+		else
+		{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+		var lista,p,cp,
+			temp = function(){
+				i3GEO.atualiza();
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			};
+		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=incmapageometrias&lista="+lista;
+		cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"incmapageometrias",temp);
+	},
+	/*
+	Function: pegaGeometriasMarcadas
+	
+	Retorna uma lista com os ids das geometrias que estão marcadas (checkbox)
+	*/
+	pegaGeometriasMarcadas:function(){
+		var inputs = $i("i3GEOanalisageometriaslistadegeometrias").getElementsByTagName("input"),
+			listai = [],
+			n = inputs.length;
+		for (i=0;i<n; i++){
+			if (inputs[i].checked === true)
+			{listai.push(inputs[i].id);}
+		}
+		return (listai.join(","));	
+	},
+	/*
+	Function: calculo
+	
+	Realiza cálculos do tipo área e perímetro sobre as geometrias marcadas
+	*/
+	calculo: function(obj){
+		if (obj.value !== ""){
+			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+			{return;}
+			else
+			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
+				temp,
+				cp = new cpaint(),
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=calculaGeometrias&operacao="+obj.value+"&lista="+lista;
+			
+			temp = function(){
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			};
+			cp.set_response_type("JSON");
+			cp.call(p,"analisaGeometrias",temp);
+		}
+	},
+	/*
+	Function: funcoes
+	
+	Realiza operações geométricas de cruzamento entre geometrias
+	*/
+	funcoes: function(obj){
+		if (obj.value !== ""){
+			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+			{return;}
+			else
+			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
+				temp,
+				cp = new cpaint(),
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista;
+			
+			temp = function(){
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			};
+			cp.set_response_type("JSON");
+			cp.call(p,"funcoesGeometrias",temp);
+		}	
+	},
+	/*
+	Function: funcoes1
+	
+	Realiza operações geométricas em uma única geometria
+	*/
+	funcoes1: function(obj){
+		if (obj.value !== ""){
+			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
+			{return;}
+			else
+			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
+			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
+				temp,
+				cp = new cpaint(),
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista;
+
+			temp = function(){
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			};
+			cp.set_response_type("JSON");
+			cp.call(p,"funcoesGeometrias",temp);
+		}
 	}
 };
-/*
-$i("guia1").onclick = function()
-{mostraGuia("guia1")}
-$i("guia2").onclick = function()
-{mostraGuia("guia2");listageometrias();}
-$i("guia3").onclick = function()
-{mostraGuia("guia3");}
-
-mensagemAjuda("men2","")
-mensagemAjuda("men3","")
-
-//combo com o tipo de operacao
-//cria combo com os temas
-comboTemasLigados("comboTemas",function(retorno)
-{
-	window.parent.g_tipoacao = "selecao";
-	window.parent.i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.clique()");
-	$i("temas").innerHTML = retorno.dados
-	aguarde("none")
-	$i("comboTemas").onchange = function()
-	{window.parent.i3GEO.temaAtivo = $i("comboTemas").value}
-},"temas")
-
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{
-		new YAHOO.widget.Button("botao1");
-		new YAHOO.widget.Button("botao2");
-		new YAHOO.widget.Button("botao3");
-		new YAHOO.widget.Button("botaof1");
-	}
-   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
-
-//executa o tipo de operacao selecionada se for o caso
-function operacao(tipo)
-{
-	if((tipo.value == "limpa") || (tipo.value == "inverte"))
-	{
-		aguarde("block")
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=selecaopt&tema="+$i("comboTemas").value+"&tipo="+tipo.value
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		window.parent.g_operacao = "selecao"
-		cp.call(p,"selecaoPT",window.parent.i3GEO.atualiza);
-	}
-}
-//captura as geometrias selecionadas e grava em arquivos
-function capturageo()
-{
-	var nome=window.prompt("Nome que sera dado a geometria:")
-	aguarde("block")
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=capturageometrias&tema="+$i("comboTemas").value+"&nome="+nome
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"capturageo",listageometrias);
-}
-//lista as geometrias capturadas
-function listageometrias()
-{
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listageometrias"
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"listageometrias",montalistageometrias);
-}
-//monta a lista de geometrias
-function montalistageometrias(retorno)
-{
-	if(retorno.data != "")
-	{
-		var ins = "<div onclick='excluirgeo()' style=top:0px; ><br><input id=botao4 type=button size=20  value='Excluir marcados' \></div>"
-		ins += "<div onclick='incmapa()' style=position:absolute;top:14px;left:140px ><input id=botao5 type=button size=20  value='Ver no mapa' \></div><br>"
-		var cor = "rgb(245,245,245)"
-		for (i=0;i<retorno.data.length; i++)
-		{
-			ins += "<table width=700 ><tr style=background-color:"+cor+" >"
-			ins += "<td width=5 ><input type=checkbox id="+retorno.data[i].arquivo+" style=cursor:pointer \></td>"
-			ins += "<td width=55 >"+retorno.data[i].layer+" "+retorno.data[i].arquivo+"</td>"
-			ins += "<td><table>"
-			var temp = retorno.data[i].dados
-			for (j=0;j<temp.length; j++)
-			{
-				ins += "<tr><td>"+temp[j].id+"</td><td style=text-align:left >"
-				if (temp[j].imagem != "")
-				{ins += "<img src='"+temp[j].imagem+"' />"}
-				for (k=0;k<temp[j].valores.length; k++)
-				{
-					ins += temp[j].valores[k].item+" = "+temp[j].valores[k].valor+"<br>"
-					
-				}
-				ins += "</td></tr>"
-			}
-			ins += "</table></td>"
-			ins += "</tr></table>"
-			if (cor == "rgb(245,245,245)"){cor = "rgb(255,255,255)"}
-			else {cor = "rgb(245,245,245)"}
-		}
-		$i("listadegeometrias").innerHTML = ins
-		YAHOO.example.init = function ()
-		{
-			function onPushButtonsMarkupReady()
-			{
-				new YAHOO.widget.Button("botao4");
-				new YAHOO.widget.Button("botao5");
-			}
-   			YAHOO.util.Event.onContentReady("botao5", onPushButtonsMarkupReady);
-		}()
-	}
-	aguarde("none")
-}
-function pegaMarcados()
-{
-	var inputs = $i("listadegeometrias").getElementsByTagName("input")
-	var listai = new Array;
-	for (i=0;i<inputs.length; i++)
-	{
-		if (inputs[i].checked == true)
-		{listai.push(inputs[i].id);}
-	}
-	return (listai.join(","))
-}
-function incmapa()
-{
-	var lista = pegaMarcados()
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=incmapageometrias&lista="+lista
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"incmapageometrias",window.parent.remapaf());
-}
-function excluirgeo()
-{
-	aguarde("block")
-	var lista = pegaMarcados()
-	$i("listadegeometrias").innerHTML = ""
-	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=removergeometrias&lista="+lista
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"removergeometrias",listageometrias);
-}
-function calculo()
-{
-	operacao = $i("calculos").value
-	if (operacao != "")
-	{
-		aguarde("block")
-		var lista = pegaMarcados()
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=calculaGeometrias&operacao="+operacao+"&lista="+lista
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"analisaGeometrias",concluidof);
-	}
-}
-function funcoes()
-{
-	operacao = $i("funcoes").value
-	if (operacao != "")
-	{
-		aguarde("block")
-		var lista = pegaMarcados()
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=funcoesGeometrias&operacao="+operacao+"&lista="+lista
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"funcoesGeometrias",concluidof);
-	}
-}
-function funcoes1()
-{
-	var lista = pegaMarcados();
-	if(window.confirm("Essa operação funciona apenas se houver uma geometria. Continua?"))
-	{
-		operacao = $i("funcoes1").value
-		if (operacao != "")
-		{
-			aguarde("block")
-			var lista = pegaMarcados()
-			var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=funcoesGeometrias&operacao="+operacao+"&lista="+lista
-			var cp = new cpaint();
-			//cp.set_debug(2)
-			cp.set_response_type("JSON");
-			cp.call(p,"funcoesGeometrias",concluidof);
-		}
-	}
-}
-function concluidof()
-{
-	aguarde("none")
-}
-*/
+<?php if(extension_loaded('zlib')){ob_end_flush();}?>
