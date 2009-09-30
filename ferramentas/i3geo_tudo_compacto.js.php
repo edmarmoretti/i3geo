@@ -27,7 +27,7 @@ document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval
  var i=$i(idatual+"anterior_-button"); if(i){ i.style.backgroundImage="url('../../imagens/player_volta.png')"; i.style.backgroundRepeat="no-repeat"; i.style.backgroundPosition="center center";}}
  var ids=new Array("t0","t1","t2","t3","t4","t5","t6","t7"); for(i=0;i<ids.length;i++){ if(document.getElementById(ids[i])){document.getElementById(ids[i]).style.display="none";}}
  document.getElementById(idatual).style.display="block";}function simnao(id){ var combo="<select name="+id+" id="+id+" >"; combo+="<option value=TRUE selected>sim</option>"; combo+="<option value=FALSE >não</option>"; combo+="</select>"; return(combo);}function naosim(id){ var combo="<select name="+id+" id="+id+" >"; combo+="<option value=TRUE >sim</option>"; combo+="<option value=FALSE selected >não</option>"; combo+="</select>"; return(combo);}function combocor(id,def,s){ var combo="<select name="+id+" id="+id+" >"; if(def==0){s='selected';}
- combo+='<option value="0" '+s+' >branco</option>'; s=""; combo+='<option value="2">vermelho</option>'; combo+='<option value="7">amarelo</option>'; if(def==1){s='selected'}; combo+='<option value="1" '+s+' >preto</option>'; combo+='<option value="rgb(1,1,0.8)">bege</option>'; combo+='<option value="3">verde</option>'; combo+='<option value="8">cinza</option>'; combo+='<option value="4">azul</option>'; combo+='<option value="5">ciano</option>'; combo+='<option value="6">magenta</option>'; combo+="</select>"; return(combo);}  function comboitens(id,tema,funcao,onde,nome){ if(arguments.length > 3) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando itens...</span>"; if(arguments.length !=5){nome="";}
+ combo+='<option value="0" '+s+' >branco</option>'; s=""; combo+='<option value="2">vermelho</option>'; combo+='<option value="7">amarelo</option>'; if(def==1){s='selected'}; combo+='<option value="1" '+s+' >preto</option>'; combo+='<option value="rgb(1,1,0.8)">bege</option>'; combo+='<option value="3">verde</option>'; combo+='<option value="8">cinza</option>'; combo+='<option value="4">azul</option>'; combo+='<option value="5">ciano</option>'; combo+='<option value="6">magenta</option>'; combo+="</select>"; return(combo);}   function comboitens(id,tema,funcao,onde,nome){ if(arguments.length > 3) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando itens...</span>"; if(arguments.length !=5){nome="";}
  var monta=function(retorno){ if(retorno.data !=undefined){ var ins=new Array(); ins.push("<select id='"+id+"' name='"+nome+"'>"); ins.push("<option value='' >---</option>"); for(i=0;i<retorno.data.valores.length;i++){ if(retorno.data.valores[i].tema==tema){ins.push("<option value='"+retorno.data.valores[i].item+"' >"+retorno.data.valores[i].item+"</option>");}}
  ins.push("</select>"); var ins=ins.join(''); var temp={dados:ins,tipo:"dados"};}
  else{ var temp={dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
@@ -7725,7 +7725,7 @@ i3GEO.util = {
 	/*
 	Function: comboTemas
 	
-	Cria um combo (caixa de seleção) com a lista de temas que estão visíveis no mapa
+	Cria um combo (caixa de seleção) com a lista de temas existentes no mapa e de determinado tipo
 	
 	Parametros:
 	
@@ -7808,6 +7808,55 @@ i3GEO.util = {
 			else
 			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
+	},
+	/*
+	Function: comboItens
+	
+	Cria um combo (caixa de seleção) com a lista de itens de um layer
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	tema {String} - código do tema (layer)
+		
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	
+	nome {String} - valor que será incluido no parametro "name" do elemento "select".	
+	*/	
+	comboItens: function(id,tema,funcao,onde,nome){
+		if (arguments.length > 3)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
+		if (arguments.length != 5)
+		{nome = "";}
+	
+		var monta = function(retorno)
+		{
+			var ins,temp,i;
+			if (retorno.data != undefined){
+				ins = [];
+				ins.push("<select  id='"+id+"' name='"+nome+"'>");
+				ins.push("<option value='' >---</option>");
+				temp = retorno.data.valores.length;
+				for (i=0;i<temp; i++){
+					if (retorno.data.valores[i].tema == tema)
+					{ins.push("<option value='"+retorno.data.valores[i].item+"' >"+retorno.data.valores[i].item+"</option>");}
+				}
+				ins.push("</select>");
+				ins = ins.join('');
+				temp = {dados:ins,tipo:"dados"};
+			}
+			else{
+				temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};
+			}
+			eval("funcao(temp)");
+		}
+		i3GEO.php.listaItensTema(monta,tema);
 	},
 	/*
 	Function: proximoAnterior

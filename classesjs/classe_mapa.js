@@ -469,8 +469,12 @@ i3GEO.mapa = {
 
 		Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
 		*/
-		carregaMapa: function()
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.htm?urlatual="+window.location,"","","Carrega mapa <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>");},
+		carregaMapa: function(){
+			if(typeof(i3GEOF.carregaMapa) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/carregamapa/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.carregaMapa.criaJanelaFlutuante()","i3GEOF.carregaMapa_script");
+			}
+		},
 		/*
 		Function: convertews
 

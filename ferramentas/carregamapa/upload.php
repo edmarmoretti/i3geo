@@ -1,3 +1,16 @@
+<?php
+require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/funcoes_gerais.php");
+include_once ("../../classesphp/carrega_ext.php");
+error_reporting(E_ALL);
+session_name("i3GeoPHP");
+if (isset($g_sid))
+{session_id($g_sid);}
+session_start();
+foreach(array_keys($_SESSION) as $k)
+{eval("\$".$k."='".$_SESSION[$k]."';");}
+$postgis_mapa = $_SESSION["postgis_mapa"];
+?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
@@ -5,70 +18,26 @@
 </head>
 <body bgcolor="white" style="background-color:white">
 <p>
+
 <?php
-/*
-About: Licença
-
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
-
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
-GNU conforme publicada pela Free Software Foundation;
-tanto a versão 2 da Licença.
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-
-require_once("../../classesphp/pega_variaveis.php");
-require_once("../../classesphp/funcoes_gerais.php");
-error_reporting(0);
-session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
-session_start();
-foreach(array_keys($_SESSION) as $k)
+if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 {
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
-$postgis_mapa = $_SESSION["postgis_mapa"];
-$exts = get_loaded_extensions();
-if (array_search( "MapScript", $exts) != TRUE)
-{
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
-		if(!@dl('php_mapscript_48.dll'))
-		dl('php_mapscript.dll');
-	}
-	else
-	{dl('php_mapscript.so');}
-}
-if (isset($_FILES['filemap']['name']))
-{
-	echo "<p>Carregando o arquivo...</p>";
+	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
-	$Arquivo = $_FILES['filemap']['name'];
+	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9\.]',$nome)) || (!ereg('\.map$',$_FILES['filemap']['name'])) )
+	if( (ereg('[^a-zA-Z0-9\.]',$Arquivo)) || (!ereg('\.map$',$Arquivo)) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
-	{echo "Arquivo inválido.!";exit;}	
+	{echo "<p class='paragrafo' >Arquivo inválido.!";paraAguarde();exit;}	
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
-	$status =  move_uploaded_file($_FILES['filemap']['tmp_name'],$dirmap."/".$Arquivo);
+	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
 	if($status != 1)
-	{echo "Ocorreu um erro no envio do arquivo";exit;}
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo";paraAguarde();exit;}
 	if($status == 1)
 	{
-		echo "<p>Arquivo enviado. Verificando o mapa...</p>";
+		echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
 		substituiCon($map_file,$postgis_mapa);
 		substituiCon($dirmap."/".$Arquivo,$postgis_mapa);
 		$mapt = ms_newMapObj($dirmap."/".$Arquivo);
@@ -94,23 +63,22 @@ if (isset($_FILES['filemap']['name']))
 			$layertemp->set("status",$st);
 			if ($testa == 1)
 			{
-				echo "<p style='color:red'>Problemas em ".($layer->name).". Removido.</p><br>";
+				echo "<p class='paragrafo' >Problemas em ".($layer->name).". Removido.</p><br>";
 				$layertemp->set("status",MS_DELETE);
 			}
 		}
 		$map->save($map_file);
-		echo "Ok. redesenhando.";
-		echo "<script>window.parent.i3GEO.atualiza()</script>";
+		echo "<p class='paragrafo' >Ok. redesenhando.";
+		echo "<script>window.parent.i3GEO.atualiza();</script>";
 	}
 	else
-	{
-		echo "Erro ao enviar o arquivo.";
-		exit;
-	}
+	{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}
 }
 else
-{
-	echo "Erro ao enviar o arquivo.";
+{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}
+paraAguarde();
+function paraAguarde(){
+	echo "<script>window.parent.i3GEOF.carregaMapa.aguarde.visibility='hidden';</script>";
 }
 ?>
 </body>
