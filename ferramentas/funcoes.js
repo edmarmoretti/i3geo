@@ -243,6 +243,7 @@ function combocor(id,def,s)
 }
 //
 //monta combo com os itens de um unico tema
+//i3GEO.util.comboItens
 //
 function comboitens(id,tema,funcao,onde,nome)
 {

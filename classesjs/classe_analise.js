@@ -158,8 +158,12 @@ i3GEO.analise = {
 
 		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 		*/
-		agrupaElementos: function()
-		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.htm","","","Agrupa <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=25' >&nbsp;&nbsp;&nbsp;</a>");}
+		agrupaElementos: function(){
+			if(typeof(i3GEOF.agrupaElementos) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.agrupaElementos.criaJanelaFlutuante()","i3GEOF.agrupaElementos_script");
+			}
+		}
 	},
 	/*
 	Classe: i3GEO.analise.medeDistancia

@@ -1207,7 +1207,7 @@ i3GEO.util = {
 	/*
 	Function: comboTemas
 	
-	Cria um combo (caixa de seleção) com a lista de temas que estão visíveis no mapa
+	Cria um combo (caixa de seleção) com a lista de temas existentes no mapa e de determinado tipo
 	
 	Parametros:
 	
@@ -1290,6 +1290,55 @@ i3GEO.util = {
 			else
 			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
+	},
+	/*
+	Function: comboItens
+	
+	Cria um combo (caixa de seleção) com a lista de itens de um layer
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	tema {String} - código do tema (layer)
+		
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	
+	nome {String} - valor que será incluido no parametro "name" do elemento "select".	
+	*/	
+	comboItens: function(id,tema,funcao,onde,nome){
+		if (arguments.length > 3)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
+		if (arguments.length != 5)
+		{nome = "";}
+	
+		var monta = function(retorno)
+		{
+			var ins,temp,i;
+			if (retorno.data != undefined){
+				ins = [];
+				ins.push("<select  id='"+id+"' name='"+nome+"'>");
+				ins.push("<option value='' >---</option>");
+				temp = retorno.data.valores.length;
+				for (i=0;i<temp; i++){
+					if (retorno.data.valores[i].tema == tema)
+					{ins.push("<option value='"+retorno.data.valores[i].item+"' >"+retorno.data.valores[i].item+"</option>");}
+				}
+				ins.push("</select>");
+				ins = ins.join('');
+				temp = {dados:ins,tipo:"dados"};
+			}
+			else{
+				temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};
+			}
+			eval("funcao(temp)");
+		}
+		i3GEO.php.listaItensTema(monta,tema);
 	},
 	/*
 	Function: proximoAnterior
