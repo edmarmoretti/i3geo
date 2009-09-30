@@ -88,7 +88,7 @@ document.body.style.backgroundColor="#F0F0F0";$tradAjuda=function(tipo,id){ eval
  else{var temp={dados:'<div class=alerta >Nenhum tema de pol&iacute;gonos dispon&iacute;vel.</div>',tipo:"mensagem"};}}
  else{var temp={dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
  eval("funcao(temp)");}
- var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemasTipo&tipo=poligono","listaTemasTipo",monta);}function comboTemasRaster(id,funcao,onde){ if(arguments.length==3) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; var monta=function(retorno){ if(retorno.data !=undefined){ if(retorno.data.length > 0){ comboTemas="<select id="+id+" >"; comboTemas+="<option value=''>----</option>"; for(i=0;i<retorno.data.length;i++){comboTemas+="<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
+ var cp=new cpaint(); cp.set_response_type("JSON"); cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemasTipo&tipo=poligono","listaTemasTipo",monta);} function comboTemasRaster(id,funcao,onde){ if(arguments.length==3) $i(onde).innerHTML="<span style=color:red;font-size:10px;>buscando temas...</span>"; var monta=function(retorno){ if(retorno.data !=undefined){ if(retorno.data.length > 0){ comboTemas="<select id="+id+" >"; comboTemas+="<option value=''>----</option>"; for(i=0;i<retorno.data.length;i++){comboTemas+="<option value="+retorno.data[i].tema+" >"+retorno.data[i].nome+"</option>";}
  comboTemas+="</select>"; var temp={dados:comboTemas,tipo:"dados"};}
  else{var temp={dados:'<div class=alerta >Nenhum tema raster dispon&iacute;vel.</div>',tipo:"mensagem"};}}
  else{var temp={dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
@@ -5739,7 +5739,7 @@ i3GEO.php = {
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*
-	Function: listatemas
+	Function: listaTemas
 
 	PHP:
 	classesphp/classe_mapa.php
@@ -5755,7 +5755,7 @@ i3GEO.php = {
 		cpJSON.call(p,"listaTemas",funcao);	
 	},
 	/*
-	Function: listatemascomsel
+	Function: listaTemasComSel
 
 	PHP:
 	classesphp/classe_mapa.php
@@ -5769,6 +5769,22 @@ i3GEO.php = {
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemascomsel&g_sid="+sid;
 		cpJSON.call(p,"listaTemasComSel",funcao);	
+	},
+	/*
+	Function: listatemasTipo
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->listatemasTipo>	
+	*/
+	listatemasTipo: function(funcao,tipo,locaplic,sid){
+		if(arguments.length === 2){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=&funcao=listatemasTipo&tipo="+tipo+"&g_sid="+sid;
+		cpJSON.call(p,"listatemasTipo",funcao);	
 	},
 	/*
 	Function: pegaSistemas
@@ -7726,7 +7742,7 @@ i3GEO.util = {
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
 	
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if (arguments.length > 2)
@@ -7784,7 +7800,14 @@ i3GEO.util = {
 			}
 			else
 			{i3GEO.php.listaTemasComSel(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);}
-		}	
+		}
+		if(tipoCombo === "raster"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
 	},
 	/*
 	Function: proximoAnterior

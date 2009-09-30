@@ -848,8 +848,12 @@ i3GEO.configura = {
 			iddiv:"v3d",
 			tipo:"",
 			dica:$trad("d14"),
-			funcaoonclick:function()
-			{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/3d/index.htm","","","3d <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=69' >&nbsp;&nbsp;&nbsp;</a>");}
+			funcaoonclick:function(){
+				if(typeof(i3GEOF.t3d) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/3d/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.t3d.criaJanelaFlutuante()","i3GEOF.t3d_script");
+				}
+			}
 		},
 		{
 			//Ativa o botão que realiza a operação de de busca no Google

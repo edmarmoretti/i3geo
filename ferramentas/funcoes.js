@@ -646,6 +646,7 @@ function comboTemasPol(id,funcao,onde)
 	cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listatemasTipo&tipo=poligono","listaTemasTipo",monta);
 }
 //lista temas do tipo poligonal
+//i3GEO.php.listatemasTipo
 function comboTemasRaster(id,funcao,onde)
 {
 	if (arguments.length == 3)

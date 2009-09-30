@@ -604,9 +604,7 @@ i3GEO.mapa = {
 		*/
 		cliqueGrafico: function(){
 			if(typeof(i3GEOF.insereGrafico) === 'undefined'){
-				//javascript que será carregado
 				var js = i3GEO.configura.locaplic+"/ferramentas/inseregrafico/index.js.php";
-				//carrega o script
 				i3GEO.util.scriptTag(js,"i3GEOF.insereGrafico.criaJanelaFlutuante()","i3GEOF.insereGrafico_script");
 			}
 		},

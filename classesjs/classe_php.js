@@ -282,7 +282,7 @@ i3GEO.php = {
 		cpJSON.call(p,"pegalistadetemas",funcao);	
 	},
 	/*
-	Function: listatemas
+	Function: listaTemas
 
 	PHP:
 	classesphp/classe_mapa.php
@@ -298,7 +298,7 @@ i3GEO.php = {
 		cpJSON.call(p,"listaTemas",funcao);	
 	},
 	/*
-	Function: listatemascomsel
+	Function: listaTemasComSel
 
 	PHP:
 	classesphp/classe_mapa.php
@@ -312,6 +312,22 @@ i3GEO.php = {
 		}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemascomsel&g_sid="+sid;
 		cpJSON.call(p,"listaTemasComSel",funcao);	
+	},
+	/*
+	Function: listatemasTipo
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->listatemasTipo>	
+	*/
+	listatemasTipo: function(funcao,tipo,locaplic,sid){
+		if(arguments.length === 2){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=&funcao=listatemasTipo&tipo="+tipo+"&g_sid="+sid;
+		cpJSON.call(p,"listatemasTipo",funcao);	
 	},
 	/*
 	Function: pegaSistemas

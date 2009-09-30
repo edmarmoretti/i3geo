@@ -1224,7 +1224,7 @@ i3GEO.util = {
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
 	
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if (arguments.length > 2)
@@ -1282,7 +1282,14 @@ i3GEO.util = {
 			}
 			else
 			{i3GEO.php.listaTemasComSel(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);}
-		}	
+		}
+		if(tipoCombo === "raster"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
 	},
 	/*
 	Function: proximoAnterior
