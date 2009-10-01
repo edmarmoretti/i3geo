@@ -62,12 +62,17 @@ echo ms_GetVersion()."<br><br>";
 echo "---";
 echo "<br><pre>Extensoes:<br>";
 if (array_search( "libxml", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a libxml<br></span>";}
+if (array_search( "PDO", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
+if (array_search( "pdo_sqlite", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a pdo_sqlite<br></span>";}
+if (array_search( "SQLite", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SQLite<br></span>";}
+
+if (array_search( "PDO", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
 if (array_search( "SimpleXML", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
 if (array_search( "dom", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
 if (array_search( "xml", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
 if (array_search( "gd", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
 if (array_search( "gd2", $exts) != TRUE){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
-if (array_search( "SimpleXML", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
+
 
 var_dump( $exts );
 
@@ -86,13 +91,14 @@ echo "localizando o cgi...\n";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $enderecocgi = $proto.$server.$locmapserv;
-if(!file($enderecocgi))
+/*
+if(!file_exists($locmapserv))
 {
-	echo "<span style=color:red >O arquivo cgi $enderecocgi do mapserver nao foi encontrado</span> \n";
+	echo "<span style=color:red >O arquivo cgi $locmapserv do mapserver nao foi encontrado</span> \n";
 }
 else
 {echo "O arquivo cgi $enderecocgi do mapserver foi encontrado \n";}
-
+*/
 echo "Você pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, deverá aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
 echo "<br>Escrevendo no diretorio temporario...";
