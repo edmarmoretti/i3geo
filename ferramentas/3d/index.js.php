@@ -1,4 +1,4 @@
-//<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
+<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
@@ -156,4 +156,4 @@ i3GEOF.t3d = {
 	    window.open(p);
 	}
 };
-//<?php if(extension_loaded('zlib')){ob_end_flush();}?>
+<?php if(extension_loaded('zlib')){ob_end_flush();}?>
