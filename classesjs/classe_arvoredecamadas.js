@@ -981,13 +981,14 @@ i3GEO.arvoreDeCamadas = {
 	{JSON}
 	*/
 	pegaTema: function(idtema){
-		var c,i;
+		var c,i,v = "";
 		c = i3GEO.arvoreDeCamadas.CAMADAS.length;
 		for (i=0; i<c; i++){
 			if(i3GEO.arvoreDeCamadas.CAMADAS[i].name == idtema){
-				return (i3GEO.arvoreDeCamadas.CAMADAS[i]);
+				v = i3GEO.arvoreDeCamadas.CAMADAS[i];
 			}
-		}	
+		}
+		return v;	
 	},
 	/*
 	Function: filtraCamadas

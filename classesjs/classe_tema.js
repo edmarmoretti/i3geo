@@ -332,8 +332,13 @@ i3GEO.tema = {
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
-		procuraratrib: function(idtema)
-		{i3GEO.janela.cria("280px","320px",i3GEO.configura.locaplic+"/ferramentas/busca/index.htm?tema="+idtema,"","","Procurar <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>","janela_busca");},
+		procuraratrib: function(idtema){
+			if(typeof(i3GEOF.busca) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/busca/index.js.php";
+				i3GEO.temaAtivo = idtema;
+				i3GEO.util.scriptTag(js,"i3GEOF.busca.criaJanelaFlutuante()","i3GEOF.busca_script");
+			}
+		},
 		/*
 		Function: tabela
 

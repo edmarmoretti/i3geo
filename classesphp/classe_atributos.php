@@ -405,7 +405,6 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 		$palavra = trim($palavra);
 		foreach ($temas as $tema)
 		{
-			
 			$registros = array();
 			$items = $temasi[$tema];
 			$l = $this->mapa->getlayerbyname($tema);
