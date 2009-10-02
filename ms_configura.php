@@ -371,7 +371,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 }
 else //se for linux
 {
-	$editores = array("127.0.0.1");
+	$editores = array("127.0.0.1","localhost");
 	$dir_tmp = "/var/tmp/ms_tmp";
 	$temasdir = "/opt/www/html/i3geo/temas";
 	$temasaplic = "/opt/www/html/i3geo/aplicmap";

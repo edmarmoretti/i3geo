@@ -822,9 +822,10 @@ i3GEO.configura = {
 			tipo:"",
 			dica:"Fotos",
 			funcaoonclick:function(){
-				g_operacao = "navega";
-				i3GEO.janela.cria("550px","400px",i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.htm","","","Fotos <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=74' >&nbsp;&nbsp;&nbsp;</a>");
-				i3GEO.util.criaPin();
+				if(typeof(i3GEOF.buscaFotos) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.buscaFotos.criaJanelaFlutuante()","i3GEOF.buscaFotos_script");
+				}
 			}
 		},
 		{

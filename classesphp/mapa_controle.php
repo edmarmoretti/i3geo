@@ -119,7 +119,7 @@ if ($funcao != "criaMapa")
 //verifica se deve ativar o debug
 //
 if (isset($debug) && $debug == "sim")
-{error_reporting(0);}
+{error_reporting(E_ALL);}
 //
 //teste de timeout
 //
@@ -165,6 +165,8 @@ if (!isset($map_file))
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 include_once("funcoes_gerais.php");
+if (isset($debug) && $debug == "sim")
+{error_reporting(E_ALL);}
 //
 //identifica qual a url do i3geo
 //

@@ -80,6 +80,7 @@ Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 function iniciaMapa()
 {
 	global $kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	error_reporting(E_ALL);
 	//
 	//pega o xml com os sietmas para identificação
 	//
@@ -134,10 +135,12 @@ function iniciaMapa()
 	$locidentifica = ($locidentifica == "") ? $urli3geo."/admin/xmlidentifica.php" : $locidentifica;
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
+	error_reporting(E_ALL);
 	$m = new Mapa($map_file);
 	$m->mudaQS($w,$h);
 	$m = new Mapa($map_file);
 	$m->mapa->setsize($w,$h);
+	error_reporting(E_ALL);
 	//
 	//verifica se a legenda deve ser embebida no mapa
 	//
