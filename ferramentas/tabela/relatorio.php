@@ -3,13 +3,16 @@ session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
+include("../../classesphp/pega_variaveis.php");
 foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
 include("../../classesphp/carrega_ext.php");
-include("../../classesphp/pega_variaveis.php");
+include("../../classesphp/funcoes_gerais.php");
+
+substituiCon($map_file,$postgis_mapa);
 $temp = explode(",",$nomesrel);
 $colunas = array();
 foreach($temp as $t)
@@ -31,6 +34,7 @@ if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 
 $mapa = ms_newMapObj($map_file);
 $layer = $mapa->getlayerbyname($temarel);
+
 $existesel = "nao";
 if (file_exists($map_file."qy"))
 {$mapa->loadquery($map_file."qy");}
@@ -71,6 +75,7 @@ for ($i = 0; $i < $res_count; $i++)
 	}
 }
 $fechou = $layer->close();
+restauraCon($map_file,$postgis_mapa);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -250,23 +255,5 @@ function calculaarea($geo)
 		return $area / 10000;
 	}
 }
-/*
-function: versao
 
-Retorna a versão do Mapserver.
-*/
-	function versao()
-	{
-		$v = "5.0.0";
-		$vs = explode(" ",ms_GetVersion());
-		for ($i=0;$i<(count($vs));$i++)
-		{
-			if(strtolower($vs[$i]) == "version")
-			{$v = $vs[$i+1];}
-		}
-		$versao["completa"] = $v;
-		$v = explode(".",$v);
-		$versao["principal"] = $v[0];
-		return $versao;
-	}
 ?>
