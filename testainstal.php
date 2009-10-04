@@ -87,6 +87,18 @@ echo "locmapserv = $locmapserv \n";
 echo "locaplic = $locaplic \n";
 echo "locsistemas = $locsistemas \n";
 echo "locidentifica = $locidentifica \n";
+echo "\n<br>";
+echo "editores: \n";
+var_dump($editores);
+
+$ip = "UNKNOWN";
+if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
+else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
+else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
+else $ip = "UNKNOWN";
+
+echo "IP do cliente = $ip \n";
+echo "\n<br>";
 echo "localizando o cgi...\n";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
