@@ -79,7 +79,8 @@ i3GEOF.busca = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" ><input onclick="javascript:this.select();" style="cursor:text" class=digitar type=text size=47 id=i3GEObuscapalavra value="digite aqui o texto..."/>';
+		ins += '<p class="paragrafo" >';
+		ins += $inputText("","","i3GEObuscapalavra","",47,"digite aqui o texto...");
 		ins += '<p class="paragrafo" ><input id=i3GEObuscabotao1 size=20  type=button value="Procurar" />';
 		ins += '<br><br><table summary="Lista de opcoes" class=lista3 width="250px">';
 		ins += '	<tr>';

@@ -88,9 +88,8 @@ i3GEOF.insereGrafico = {
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOinseregraficoguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
-		ins += '</div>';
-		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
-		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;90%;display:none;">';
+		ins += '</div><br>';
+		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia1obj" style="left:1px;display:none;">';
 		ins += '		<p class="paragrafo">Escolha o tema com os dados:';
 		ins += '		<div id=i3GEOinseregraficotemasi style="display:block;position:relative;top:10px;left:0px;text-align:left;">Aguarde...';
 		ins += '		</div>';	
@@ -103,15 +102,18 @@ i3GEOF.insereGrafico = {
 		ins += '		<table summary="" class=lista width="70%">';
 		ins += '		<tr>  ';
 		ins += '			<td>Tamanho do círculo:</td>';
-		ins += '			<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOinseregraficow value="50" /></td>';
+		ins += '			<td>';
+		ins += $inputText("","","i3GEOinseregraficow","",50,"0,0,0")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
 		ins += '			<td>Inclina&ccedil;&atilde;o do círculo:</td>';
-		ins += '			<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOinseregraficoinclinacao value="1.5" /></td>';
+		ins += '			<td>';
+		ins += $inputText("","","i3GEOinseregraficoinclinacao","",4,"1.5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
 		ins += '			<td>Tamanho da sombra:</td>';
-		ins += '			<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOinseregraficosombra value="5" /></td>';
+		ins += '			<td>';
+		ins += $inputText("","","i3GEOinseregraficosombra","",4,"5")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		</table>';			
 		ins += '	</div>';
@@ -154,6 +156,7 @@ i3GEOF.insereGrafico = {
 			minimiza
 		);
 		divid = janela[2].id;
+		$i("i3GEOF.insereGrafico_corpo").style.backgroundColor = "white";
 		i3GEOF.insereGrafico.aguarde = $i("i3GEOF.insereGrafico_imagemCabecalho").style;
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.insereGrafico.insere()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.insereGrafico.insere()");}

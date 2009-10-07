@@ -6506,16 +6506,30 @@ i3GEO.php = {
 	Function: listaItensTema
 
 	PHP:
-	classesphp/classe_atributoss.php
+	classesphp/classe_atributos.php
 	
 	<listaItens>	
 	*/
 	listaItensTema: function(funcao,tema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
 	 	cpJSON.call(p,"listaItensTema",funcao);
+	},
+	/*
+	Function: extRegistros
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<extensaoRegistro>	
+	*/
+	extRegistros: function(funcao,tema,reg){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=extregistros&registro="+reg+"&tema="+tema;
+		cpJSON.call(p,"listaItensTema",funcao);
 	}
 };
-//YAHOO.log("carregou classe php", "Classes i3geo");
+//incluisel - tabela
+//criatemasel - tabela
+//estatistica - tabela
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Utilitários
@@ -7881,17 +7895,19 @@ i3GEO.util = {
 		var temp = $i(idatual),
 			ndiv = document.createElement("div"),
 			nids,
-			i;
+			i,
+			fundo;
 			
 		if(temp){$i(container).removeChild(temp);}
 		if (!document.getElementById(idatual))
 		{
+			fundo = $i(container).style.backgroundColor;
 			ndiv.id = idatual;
-			texto += "<br><br><table style='width:100%;background-color:#F2F2F2;' ><tr style='width:100%'>";
+			texto += "<br><br><table style='width:100%;background-color:"+fundo+";' ><tr style='width:100%'>";
 			if (anterior !== "")
-			{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:#F2F2F2;'><input id='"+idatual+"anterior_' onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+			{texto += "<td style='border:0px solid white;text-align:left;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"anterior_' onclick='"+anterior+"' type='button' value='&nbsp;&nbsp;' /></td>";}
 			if (proxima !== "")
-			{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:#F2F2F2;'><input id='"+idatual+"proxima_' onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
+			{texto += "<td style='border:0px solid white;text-align:right;cursor:pointer;background-color:"+fundo+";'><input id='"+idatual+"proxima_' onclick='"+proxima+"' type='button' value='&nbsp;&nbsp;' /></td>";}
 			ndiv.innerHTML = texto+"</tr></table>";
 			
 			$i(container).appendChild(ndiv);

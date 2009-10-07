@@ -88,8 +88,7 @@ i3GEOF.graficoTema = {
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia1" style="text-align:center;left:0px;" >Fonte dos dados</div></em></a></li>';
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOgraficotemaguia2" style="text-align:center;left:0px;" >Propriedades</div></em></a></li>';
 		ins += '	</ul>';
-		ins += '</div>';
-		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
+		ins += '</div><br>';
 		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia1obj" style="left:1px;90%;display:none;">';
 		ins += '			<div id=i3GEOgraficotemacombot style="display:none;position:relative;top:5px;left:0px;">';
 		ins += '			</div>';
@@ -112,19 +111,23 @@ i3GEOF.graficoTema = {
 		ins += '			</tr><tr><td>&nbsp;</td><td></td></tr>';
 		ins += '			<tr>';
 		ins += '				<td>Largura (em pixels):</td>';
-		ins += '				<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOgraficotemalargura value="50" /></td>';
+		ins += '				<td>';
+		ins += $inputText("","","i3GEOgraficotemalargura","",4,"50")+'</td>';
 		ins += '			</tr><tr><td>&nbsp;</td><td></td></tr>';
 		ins += '			<tr>';
 		ins += '				<td>Altura (em pixels) - relevante apenas para o tipo Barras:</td>';
-		ins += '				<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOgraficotemaaltura value="50" /></td>';
+		ins += '				<td>';
+		ins += $inputText("","","i3GEOgraficotemaaltura","",4,"50")+'</td>';
 		ins += '			</tr><tr><td>&nbsp;</td><td></td></tr>';
 		ins += '			<tr>';
 		ins += '				<td>Deslocamento das fatias (em pixels) - relevante apenas para o tipo Pizza:</td>';
-		ins += '				<td><input onclick="javascript:this.select();" style="cursor:text" size=4 class=digitar type="text" id=i3GEOgraficotemaoffset value="0" /></td>';
+		ins += '				<td>';
+		ins += $inputText("","","i3GEOgraficotemaoffset","",4,"0")+'</td>';
 		ins += '			</tr><tr><td>&nbsp;</td><td></td></tr>';
 		ins += '			<tr>';
 		ins += '				<td>Cor do contorno:</td>';
-		ins += '				<td style=width:40% ><input onclick="javascript:this.select();" style="cursor:text" size=12 class=digitar type="text" id="i3GEOgraficotemaoutlinecolor" value="0,0,0" /><img alt="aquarela.gif" style=cursor:pointer src="../imagens/aquarela.gif" onclick="i3GEOF.graficoTema.corj(\'i3GEOgraficotemaoutlinecolor\')" /></td>';
+		ins += '				<td style=width:40% >';
+		ins += $inputText("","","i3GEOgraficotemaoutlinecolor","",12,"0,0,0")+'</td>';
 		ins += '			</tr><tr><td>&nbsp;</td><td></td></tr>';
 		ins += '		</table>';			
 		ins += '	</div>';
@@ -153,6 +156,7 @@ i3GEOF.graficoTema = {
 		);
 		divid = janela[2].id;
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
+		$i("i3GEOF.graficoTema_corpo").style.backgroundColor = "white";
 		i3GEOF.graficoTema.inicia(divid);
 	},
 	/*
