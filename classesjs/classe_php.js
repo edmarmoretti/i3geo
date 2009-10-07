@@ -1049,13 +1049,27 @@ i3GEO.php = {
 	Function: listaItensTema
 
 	PHP:
-	classesphp/classe_atributoss.php
+	classesphp/classe_atributos.php
 	
 	<listaItens>	
 	*/
 	listaItensTema: function(funcao,tema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
 	 	cpJSON.call(p,"listaItensTema",funcao);
+	},
+	/*
+	Function: extRegistros
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<extensaoRegistro>	
+	*/
+	extRegistros: function(funcao,tema,reg){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=extregistros&registro="+reg+"&tema="+tema;
+		cpJSON.call(p,"listaItensTema",funcao);
 	}
 };
-//YAHOO.log("carregou classe php", "Classes i3geo");
+//incluisel - tabela
+//criatemasel - tabela
+//estatistica - tabela
