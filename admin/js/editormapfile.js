@@ -753,7 +753,7 @@ function montaEditorConexao(dados)
 	ins += core_geraLinhas(param)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
-	temp = "<p><select id='connectiontype' >"
+	temp = "<select id='connectiontype' >"
 	temp += core_comboObjeto(objcontype,"valor","texto",dados.connectiontype)
 	temp += "</select>"
 	$i("cConnectiontype").innerHTML = temp
@@ -824,11 +824,11 @@ function montaEditorMetadados(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 	
-	temp = "<p><select id='aplicaextensao' >"
+	temp = "<select id='aplicaextensao' >"
 	temp += core_combosimnao(dados.aplicaextensao)
 	temp += "</select>"
 	$i("cAplicaextensao").innerHTML = temp
-	temp = "<p><select id='download' >"
+	temp = "<select id='download' >"
 	temp += core_combosimnao(dados.download)
 	temp += "</select>"
 	$i("cDownload").innerHTML = temp
@@ -836,11 +836,11 @@ function montaEditorMetadados(dados)
 	temp += core_combosimnao(dados.classe)
 	temp += "</select>"
 	$i("cClasse").innerHTML = temp
-	temp = "<p><select id='escondido' >"
+	temp = "<select id='escondido' >"
 	temp += core_combosimnao(dados.escondido)
 	temp += "</select>"
 	$i("cEscondido").innerHTML = temp
-	temp = "<p><select id='identifica' >"
+	temp = "<select id='identifica' >"
 	temp += core_combosimnao(dados.identifica)
 	temp += "</select>"
 	$i("cIdentifica").innerHTML = temp
@@ -903,19 +903,19 @@ function montaEditorGeral(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 		
-	temp = "<p><select id='status' >"
+	temp = "<select id='status' >"
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
 	temp += "</select>"
 	$i("cStatus").innerHTML = temp	
-	temp = "<p><select id='type' >"
+	temp = "<select id='type' >"
 	temp += core_comboObjeto(objlayertypes,"valor","texto",dados.type)
 	temp += "</select>"
 	$i("cType").innerHTML = temp	
-	temp = "<p><select id='sizeunits' >"
+	temp = "<select id='sizeunits' >"
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.sizeunits)
 	temp += "</select>"
 	$i("cSizeunits").innerHTML = temp
-	temp = "<p><select id='toleranceunits' >"
+	temp = "<select id='toleranceunits' >"
 	temp += core_comboObjeto(objmapunits,"valor","texto",dados.toleranceunits)
 	temp += "</select>"
 	$i("cToleranceunits").innerHTML = temp
@@ -963,7 +963,7 @@ function montaEditorClasseGeral(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 		
-	temp = "<p><select id='status' >"
+	temp = "<select id='status' >"
 	temp += core_comboObjeto(objstatus,"valor","texto",dados.status)
 	temp += "</select>"
 	$i("cStatus").innerHTML = temp	
@@ -1042,27 +1042,27 @@ function montaEditorClasseLabel(dados)
 	ins += "<br><br><br>"
 	$i("editor_bd").innerHTML = ins
 
-	temp = "<p><select id='font' >"
+	temp = "<select id='font' >"
 	temp += core_comboObjeto(dados.fontes,"","",dados.font)
 	temp += "</select>"
 	$i("cFont").innerHTML = temp
 	
-	temp = "<p><select id='type' >"
+	temp = "<select id='type' >"
 	temp += core_comboObjeto(objfonttypes,"valor","texto",dados.type)
 	temp += "</select>"
 	$i("cType").innerHTML = temp	
 
-	temp = "<p><select id='partials' >"
+	temp = "<select id='partials' >"
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.partials)
 	temp += "</select>"
 	$i("cPartials").innerHTML = temp	
 
-	temp = "<p><select id='force' >"
+	temp = "<select id='force' >"
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.force)
 	temp += "</select>"
 	$i("cForce").innerHTML = temp	
 
-	temp = "<p><select id='autoangle' >"
+	temp = "<select id='autoangle' >"
 	temp += core_comboObjeto(objbool_tf,"valor","texto",dados.autoangle)
 	temp += "</select>"
 	$i("cAutoangle").innerHTML = temp

@@ -798,7 +798,7 @@ function core_geraLinhas(dados)
 			if(p.ajuda)
 			{
 				var temp = "$i('"+contaParam+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick =\""+temp+"\" style=cursor:pointer title='ajuda' ><b>"+p.titulo+"</b></div><br>"
+				resultado += "<p><div onclick =\""+temp+"\" style=cursor:pointer title='ajuda' ><b>"+p.titulo+"</b></div>"
 				resultado += "<div id='"+contaParam+"_ajuda' style=display:none >"+p.ajuda+"</div>"
 			}
 			else

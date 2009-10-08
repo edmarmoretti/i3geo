@@ -599,7 +599,8 @@ function pegaGeral()
 	$dados["projection"] = $layer->getProjection();
 	$dados["name"] = $layer->name;
 	if($dados["projection"] == "null")
-	$dados["projection"] = "";
+	{$dados["projection"] = "";}
+	$dados["projection"] = str_replace("+i","i",$dados["projection"]);
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
