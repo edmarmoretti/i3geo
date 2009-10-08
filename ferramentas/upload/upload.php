@@ -97,7 +97,6 @@ if (isset($_FILES['fileshp']['name']))
 			$novolayer->setmetadata("ITENSDESC",$its);
 			$novolayer->set("template","none.htm");
 		}
-		//echo $epsg;
 		if($epsg != "")
 		{$novolayer->setProjection("init=epsg:".$epsg);}
 		$adiciona = ms_newLayerObj($mapa, $novolayer);
