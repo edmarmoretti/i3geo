@@ -64,7 +64,7 @@ i3GEOF.agrupaElementos = {
 	*/
 	html:function(){
 		var ins = '';
-		ins +=	'<div style="top:0px;left:0px;display:block;width:98%;" id="i3GEOagrupaelementosresultado" >';
+		ins +=	'<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEOagrupaelementosresultado" >';
 		ins +=	'</div>';
 		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEOagrupaelementosfim" >';
 		ins +=	'</div>';

@@ -198,7 +198,7 @@ i3GEOF.tabela = {
 		ins += '	<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;font-size:10px;left:0px;" >Relat&oacute;rios</div></em></a></li>';
 		ins += '</ul>';
 		ins += '</div><br>';
-		ins += '	<div id=i3GEOtabelaresultadotab style="position:relative;top:5px;left:0px"></div>';
+		ins += '	<div id=i3GEOtabelaresultadotab style="background-color:#F2F2F2;position:relative;top:5px;left:0px"></div>';
 		ins += '	<div id=i3GEOtabelaguia1obj style="width:99%">';
 		ins += '		<table summary="" class=lista2 >';
 		ins += '		<tr>';
