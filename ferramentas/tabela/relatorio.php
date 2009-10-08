@@ -34,7 +34,7 @@ if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 
 $mapa = ms_newMapObj($map_file);
 $layer = $mapa->getlayerbyname($temarel);
-
+$layer->set("template","none.html");
 $existesel = "nao";
 if (file_exists($map_file."qy"))
 {$mapa->loadquery($map_file."qy");}
