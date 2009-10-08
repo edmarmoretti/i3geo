@@ -15,111 +15,111 @@ body {
 <body name="ancora" class="yui-skin-sam" >
 	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
 		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
-			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Todos os registros</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Marcados</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia3" style="text-align:center;font-size:10px;left:0px;" >Opera&ccedil;&otilde;es</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia4" style="text-align:center;font-size:10px;left:0px;" >Gr&aacute;fico</div></em></a></li>
-			<li><a href="#ancora"><em><div id="guia5" style="text-align:center;font-size:10px;left:0px;" >Relat&oacute;rios</div></em></a></li>
+			<li><a href="#ancora"><em><div id="i3GEOtabelaguia1" style="text-align:center;font-size:10px;left:0px;" >Todos os registros</div></em></a></li>
+			<li><a href="#ancora"><em><div id="i3GEOtabelaguia2" style="text-align:center;font-size:10px;left:0px;" >Marcados</div></em></a></li>
+			<li><a href="#ancora"><em><div id="i3GEOtabelaguia3" style="text-align:center;font-size:10px;left:0px;" >Opera&ccedil;&otilde;es</div></em></a></li>
+			<li><a href="#ancora"><em><div id="i3GEOtabelaguia4" style="text-align:center;font-size:10px;left:0px;" >Gr&aacute;fico</div></em></a></li>
+			<li><a href="#ancora"><em><div id="i3GEOtabelaguia5" style="text-align:center;font-size:10px;left:0px;" >Relat&oacute;rios</div></em></a></li>
 		</ul>
 	</div>
 	<div id=geral style="left:0px;top:0px;">
-		<div id=resultadotab style="position:relative;top:5px;left:0px"></div>
-		<div id=guia1obj style="width:90%">
+		<div id=i3GEOtabelaresultadotab style="position:relative;top:5px;left:0px"></div>
+		<div id=i3GEOtabelaguia1obj style="width:90%">
 			<table summary="" class=lista >
 			<tr>
-				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tiporeg CHECKED /></td>
+				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=i3GEOtabelatiporeg CHECKED /></td>
 				<td>Considerar na listagem apenas a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>
 			</tr>
 			<tr>
-				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=tipolista /></td>
+				<td><input style="cursor:pointer" onclick="registrosf()" type=checkbox id=i3GEOtabelatipolista /></td>
 				<td>Mostrar na listagem apenas os selecionados</td>
 			</tr>
 			</table>
 
-			<div id=combot style="position:relative;top:5px;left:0px;">
+			<div id=i3GEOtabelacombot style="position:relative;top:5px;left:0px;">
 			</div>
-			<div id=contador style="background-color:rgb(240,240,240);width:90%;position:relative;top:15px;left:0px;text-align:left">
-				de <img alt="minus.gif" style=cursor:pointer onclick='menosf()' src=../../imagens/minus.gif />
-				<input onclick='javascript:this.select();' type=text class=digitar size=5 value=1 id=inicio />
+			<div id=i3GEOtabelacontador style="background-color:rgb(240,240,240);width:90%;position:relative;top:15px;left:0px;text-align:left">
+				de <img alt="minus.gif" style=cursor:pointer onclick="menosf()" src=../../imagens/minus.gif />
+				<input onclick="javascript:this.select();" type=text class=digitar size=5 value=1 id=i3GEOtabelainicio />
 				at&eacute;
-				<input onclick='javascript:this.select();' type=text class=digitar size=5 value=20 id=fim />
-				<img alt="plus.gif" style=cursor:pointer onclick='maisf()' src=../../imagens/plus.gif />
-				<span style=cursor:pointer onclick='registrosf()' ><img alt="tic.png" title='listar dados'  src=../../imagens/tic.png /> Listar</span>
+				<input onclick="javascript:this.select();" type=text class=digitar size=5 value=20 id=i3GEOtabelafim />
+				<img alt="plus.gif" style=cursor:pointer onclick="maisf()" src=../../imagens/plus.gif />
+				<span style=cursor:pointer onclick="registrosf()" ><img alt="tic.png" title="listar dados"  src=../../imagens/tic.png /> Listar</span>
 			</div>
-			<div id=registros style="position:relative;top:20px;left:0px;text-align:left;">
+			<div id=i3GEOtabelaregistros style="position:relative;top:20px;left:0px;text-align:left;">
 			</div>
 		</div>
-		<div id=guia2obj style="display:none;width:95%">
+		<div id=i3GEOtabelaguia2obj style="display:none;width:95%">
 			<div onclick="limpalista()" style="display:inline;position:absolute;top:5px;left:0px">
-				<input id=botao1 size=14 type=button value="Limpa lista" />
+				<input id=i3GEOtabelabotao1 size=14 type=button value="Limpa lista" />
 			</div>
 			<div onclick="ativaself()" style="display:inline;position:absolute;top:5px;left:96px">
-				<input id=botao2 size=25 type=button value="Ativa a sele&ccedil;&atilde;o" />
+				<input id=i3GEOtabelabotao2 size=25 type=button value="Ativa a sele&ccedil;&atilde;o" />
 			</div>
 			<div onclick="limpaself()" style="display:inline;position:relative;top:5px;left:217px">
-				<input id=botao3 size=25  type=button value="Limpa a sele&ccedil;&atilde;o"/>
+				<input id=i3GEOtabelabotao3 size=25  type=button value="Limpa a sele&ccedil;&atilde;o"/>
 			</div>
-			<div id="registrossel" style="position:relative;top:9px;left:0px;">
+			<div id="i3GEOtabelaregistrossel" style="position:relative;top:9px;left:0px;">
 			</div>
 		</div>
-		<div id=guia3obj style="display:none;width:95%;left:0px" >
+		<div id=i3GEOtabelaguia3obj style="display:none;width:95%;left:0px" >
 			<div style="position:relative;top:5px;left:0px;">
 				<span onclick="calculaestatisticaf()" style="cursor:pointer">
-					<input id=botao4 size=30  type=button value="Estat&iacute;sticas"/>
+					<input id=i3GEOtabelabotao4 size=30  type=button value="Estat&iacute;sticas"/>
 				</span>
-				<span id=itensGuia3 ></span>
+				<span id=i3GEOtabelaitensGuia3 ></span>
 				excluir:
-				<input onclick='javascript:this.select();' class=digitar type=text id=filtro1 size=5 value="" />
+				<input onclick="javascript:this.select();" class=digitar type=text id=i3GEOtabelafiltro1 size=5 value="" />
 			</div>  
 			<div onclick="listatextof()" style="position:relative;top:15px;left:0px;">
-				<input id=botao5 size=25  type=button value="Listar no formato texto"/>
+				<input id=i3GEOtabelabotao5 size=25  type=button value="Listar no formato texto"/>
 			</div>
 			<div onclick="criatemaf()" style="position:absolute;top:45px;left:165px;">
-				<input id=botao6 size=30  type=button value="Criar um tema novo"/>
+				<input id=i3GEOtabelabotao6 size=30  type=button value="Criar um tema novo"/>
 			</div>
-			<div id="operacoes" class=digitar style="text-align:left;position:relative;top:25px;left:0px;overflow:auto;height:180px"  >
+			<div id="i3GEOtabelaoperacoes" class=digitar style="text-align:left;position:relative;top:25px;left:0px;overflow:auto;height:180px"  >
 			</div>
-			<div id=men1 style="position:relative;top:25px;left:0px;width:100%" >
+			<div id=i3GEOtabelamen1 style="position:relative;top:25px;left:0px;width:100%" >
 				Para que as opera&ccedil;&otilde;es atuem apenas sobre os elementos selecionados, 
 				ative a sele&ccedil;&atilde;o no mapa, para isso utilize, na guia "marcados"
 				a op&ccedil;&atilde;o "Ativa a sele&ccedil;&atilde;o"
 			</div>
 		</div>
-		<div id=guia4obj style="display:none;width:95%;left:0px">
-			<div style="top:5px;left:-5px;display:block;width:95%" id='resultado' >
+		<div id=i3GEOtabelaguia4obj style="display:none;width:95%;left:0px">
+			<div style="top:5px;left:-5px;display:block;width:95%" id="i3GEOtabelaresultado" >
 			</div>
 		</div>
-		<div id=guia5obj style="width:90%;display:none">
+		<div id=i3GEOtabelaguia5obj style="width:90%;display:none">
 			Escolha os itens que dever&atilde;o constar no relat&oacute;rio. Voc&ecirc; pode alterar os nomes para adequar os nomes das colunas no relat&oacute;rio:
-			<div id=itensrelatorio class=digitar style="text-align:left;top:15px;left:5px;width:250px;overflow:auto;height:100px">
+			<div id=i3GEOtabelaitensrelatorio class=digitar style="text-align:left;top:15px;left:5px;width:250px;overflow:auto;height:100px">
 			</div>
 			<br><br>Escolha o item que voc&ecirc; quer utilizar para agrupar valores (opcional):
-			<div id=agrupamento style="text-align:left;top:15px;left:5px;">
+			<div id=i3GEOtabelaagrupamento style="text-align:left;top:15px;left:5px;">
 			</div>
 			<div style="position:relative;top:25px;left:0px">
-				<input style="cursor:pointer" type=checkbox id=calculaarea />
+				<input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaarea />
 				Incluir c&aacute;lculo de &aacute;rea
 			</div>
 			<div style="position:relative;top:25px;left:0px">
-				<input style="cursor:pointer" type=checkbox id=calculaestat />
+				<input style="cursor:pointer" type=checkbox id=i3GEOtabelacalculaestat />
 				Incluir c&aacute;lculo de estat&iacute;sticas
 			</div>
 			<div style="position:relative;top:25px;left:0px">
 				Excluir das estat&iacute;sticas o valor
-				<input onclick='javascript:this.select();' style="cursor:pointer" type=text id=excestat />
+				<input onclick="javascript:this.select();" style="cursor:pointer" type=text id=i3GEOtabelaexcestat />
 			</div>
 			<div onclick="gerarelatorio()" style="position:relative;top:35px;left:0px;cursor:pointer">
-				<input id=botao7 size=30  type=button value="Criar"/>
+				<input id=i3GEOtabelabotao7 size=30  type=button value="Criar"/>
 			</div>
-			<form method=post style="display:none" id=relatorio action="relatorio.php" target="_blank" >
-				<input type=hidden id=arearel name=arearel value=nao />
-				<input type=hidden id=statrel name=statrel value=nao />
-				<input type=hidden id=temarel name=temarel value="" />
-				<input type=hidden id=g_sid name=g_sid value="" />
-				<input type=hidden id=itemagruparel name=itemagruparel value="" />
-				<input type=hidden id=itensrel name=itensrel value="" />
-				<input type=hidden id=nomesrel name=nomesrel value="" />
-				<input type=hidden id=excluirvalor name=excluirvalor value="" />
+			<form method=post style="display:none" id=i3GEOtabelarelatorio action="relatorio.php" target="_blank" >
+				<input type=hidden id=i3GEOtabelaarearel name=arearel value=nao />
+				<input type=hidden id=i3GEOtabelastatrel name=statrel value=nao />
+				<input type=hidden id=i3GEOtabelatemarel name=temarel value="" />
+				<input type=hidden id=i3GEOtabelag_sid name=g_sid value="" />
+				<input type=hidden id=i3GEOtabelaitemagruparel name=itemagruparel value="" />
+				<input type=hidden id=i3GEOtabelaitensrel name=itensrel value="" />
+				<input type=hidden id=i3GEOtabelanomesrel name=nomesrel value="" />
+				<input type=hidden id=i3GEOtabelaexcluirvalor name=excluirvalor value="" />
 			</form>
 		</div>
 	</div>

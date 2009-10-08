@@ -76,6 +76,18 @@ for ($i = 0; $i < $res_count; $i++)
 }
 $fechou = $layer->close();
 restauraCon($map_file,$postgis_mapa);
+
+if(isset($tiporel) && $tiporel == "csv")
+{
+	echo implode(";",explode(",",$nomesrel));
+	if($arearel == "true")
+	{echo ";&aacute;rea em ha \n";}
+	else
+	{echo "\n";}
+	foreach ($registros as $linhas)
+	{echo implode(";",$linhas)."\n";}
+	exit;
+}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -107,9 +119,7 @@ if ($itemagruparel == "")
 	echo "<tr style=background-color:yellow >";
 	if($statrel == "true"){echo "<td></td>";}
 	foreach ($colunas as $c)
-	{
-		echo "<td>$c</td>";
-	}
+	{echo "<td>$c</td>";}
 	if($arearel == "true")
 	{echo "<td>&aacute;rea em ha</td>";}
 	foreach ($registros as $linhas)

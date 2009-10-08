@@ -133,7 +133,7 @@ $gfile_name - nome da imagem que será criada
 Include:
 <classe_imagem.php>
 */
-function executaR($rcode,$dir_tmp,$R_path,$gfile_name)
+function executaR($rcode,$dir_tmp,$R_path,$gfile_name="")
 {
 	$R_options = "--slave --no-save";
 	$r_name = nomeRandomico(20);
@@ -1153,23 +1153,41 @@ $tipo - Tipo de processamento soma|media|contagem|nenhum.
 */
 function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 {
+	$valores = null;
 	foreach ($lista as $linha)
 	{
 		$c = $linha[$indiceChave];
 		$v = $linha[$indiceValor];
 		if ($tipo == "conta")
-		{$valores[$c] = $valores[$c] + 1;}
+		{
+			if(@$valores[$c])
+			$valores[$c] = $valores[$c] + 1;
+			else
+			$valores[$c] = 1;
+		}
 		if (($tipo == "soma"))
 		{
 			if (($v != "") && (is_numeric($v)))
-			{$valores[$c] = $valores[$c] + $v;}
+			{
+				if(@$valores[$c])
+				$valores[$c] = $valores[$c] + $v;
+				else
+				$valores[$c] = $v;
+			}
 		}
 		if ($tipo == "media")
 		{
 			if (($v != "") && (is_numeric($v)))
 			{
+				if(@$soma[$c])
 				$soma[$c] = $soma[$c] + $v;
+				else
+				$soma[$c] = $v;
+				
+				if(@$conta[$c])
 				$conta[$c] = $conta[$c] + 1;
+				else
+				$conta[$c] = 1;
 			}
 		}
 		if ($tipo == "nenhum")

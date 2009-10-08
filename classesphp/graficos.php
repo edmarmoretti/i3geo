@@ -39,13 +39,13 @@ function graficoPizza()
 {
 	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$border,$las,$radius,$lwd,$lty,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$cex,$nval,$main,$cexmain,$sub,$cexsub;
+	//error_reporting(E_ALL);
 	//gera os nomes dos arquivos com os dados
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
 	{
 		$temp = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual);
 		$nnval = $temp["dados"];
-		//$nval = $temp["ndados"];
 		$nome = $dir."/".nomeRandomico(20);
 		gravaDados($nnval,$nome);
 	}
@@ -387,9 +387,9 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 		$layer->open();
 		$res_count = $layer->getNumresults();
 		$layer->close();
+		if ($res_count < 1)
+		{$selecionados = "nao";}	
 	}
-	if ($res_count < 1)
-	{$selecionados = "nao";}	
 	if ($exclui == ""){$exclui = "nulo";}
 	$valores = pegaValoresM($map,$layer,array($itemclasses,$itemvalores),$exclui,$selecionados);
 	$dados = agrupaValores($valores,0,1,$tipo);

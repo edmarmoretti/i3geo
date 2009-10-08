@@ -1,0 +1,33 @@
+MAP
+  LAYER
+    CONNECTION ""
+    DATA "C:\ms4w\Apache\htdocs\geodados\utm21.shp"
+    METADATA
+      "CLASSE"	"SIM"
+      "palletestep"	""
+      "palletefile"	""
+      "download"	"SIM"
+      "arquivodownload"	""
+      "TEMA"	"Teste de projeção utm"
+    END
+    NAME "testeutm"
+    STATUS OFF
+    #TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    PROJECTION
+      "init=epsg:29181"
+    END
+    CLASS
+      NAME " "
+      STYLE
+        ANGLE 360
+        COLOR 162 179 93
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+  END
+
+END
+

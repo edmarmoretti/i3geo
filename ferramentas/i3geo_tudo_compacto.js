@@ -7182,7 +7182,7 @@ i3GEO.util = {
 			$i(idPai).onmouseout = function()
 			{this.className = "";};	
 		}
-		return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id="+idInput+" title='"+titulo+"' type=text size="+digitos+" class=digitar value='"+valor+"' />";
+		return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' />";
 	},
 	/*
 	Function: $top ou nome curto $top
@@ -7846,19 +7846,19 @@ i3GEO.util = {
 	comboItens: function(id,tema,funcao,onde,nome){
 		if (arguments.length > 3)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
-		if (arguments.length != 5)
+		if (arguments.length !== 5)
 		{nome = "";}
 	
 		var monta = function(retorno)
 		{
 			var ins,temp,i;
-			if (retorno.data != undefined){
+			if (retorno.data !== undefined){
 				ins = [];
 				ins.push("<select  id='"+id+"' name='"+nome+"'>");
 				ins.push("<option value='' >---</option>");
 				temp = retorno.data.valores.length;
 				for (i=0;i<temp; i++){
-					if (retorno.data.valores[i].tema == tema)
+					if (retorno.data.valores[i].tema === tema)
 					{ins.push("<option value='"+retorno.data.valores[i].item+"' >"+retorno.data.valores[i].item+"</option>");}
 				}
 				ins.push("</select>");
@@ -7869,9 +7869,81 @@ i3GEO.util = {
 				temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};
 			}
 			eval("funcao(temp)");
-		}
+		};
 		i3GEO.php.listaItensTema(monta,tema);
 	},
+	/*
+	Function: comboSimNao
+	
+	Cria uma caixa de seleção com as palavras sim e não
+	
+	Parametros:
+	
+	id [String} - id do elemento select que será criado
+	
+	selecionado {string} - qual valor estará selecionado sim|nao
+	
+	Return:
+	{string}
+	*/
+	comboSimNao: function(id,selecionado){
+		var combo = "<select name="+id+" id="+id+" >";
+    	combo+= "<option value='' >---</option>";
+    	if(selecionado === "sim")
+    	{combo+= "<option value=TRUE selected >sim</option>";}
+    	else
+    	{combo+= "<option value=TRUE >sim</option>";}
+    	if(selecionado === "nao")
+		{combo += "<option value=FALSE selected >não</option>";}
+		else
+		{combo += "<option value=FALSE >não</option>";}
+		combo += "</select>";
+		return(combo);	
+	},
+	/*
+	Function: checkItensEditaveis
+	
+	Cria uma lista de elementos do tipo input com textos editáveis contendo a lista de itens de um tema.
+	
+	tema {string} - código do layer existente no mapa
+	
+	funcao {function} - função que será executada para montar a lista. Essa função receberá
+	como parâmetro um array do tipo {dados:ins,tipo:"dados"}
+	onde ins é um array com as linhas e tipo é o tipo de resultado, que pode ser "dados"|"erro"
+	
+	onde {string} - id do elemento que receberá a mensagem de aguarde
+	
+	size {numeric} - tamanho dos elementos input editáveis
+	
+	prefixo {string} - Prefixo que será usado no id de cada elemento
+	*/
+	checkItensEditaveis: function(tema,funcao,onde,size,prefixo){
+		if (onde !== "")
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
+		var monta = function(retorno)
+		{
+			var ins = [],
+				i,
+				temp,
+				n;			
+			if (retorno.data !== undefined)
+			{
+				ins.push("<table class=lista3 >");
+				n = retorno.data.valores.length;
+				for (i=0;i<n; i++){
+					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+prefixo+retorno.data.valores[i].item+"' /></td>");
+					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+"' /></td></tr>");
+				}
+				ins.push("</table>");
+				ins = ins.join('');
+				temp = {dados:ins,tipo:"dados"};
+			}
+			else
+			{temp = {dados:'<div class=erro >Ocorreu um erro</div>',tipo:"erro"};}
+			eval("funcao(temp)");
+		};
+		i3GEO.php.listaItensTema(monta,tema);
+	},	
 	/*
 	Function: proximoAnterior
 	

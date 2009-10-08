@@ -1382,8 +1382,10 @@ i3GEO.util = {
 	onde {string} - id do elemento que receberá a mensagem de aguarde
 	
 	size {numeric} - tamanho dos elementos input editáveis
+	
+	prefixo {string} - Prefixo que será usado no id de cada elemento
 	*/
-	checkItensEditaveis: function(tema,funcao,onde,size){
+	checkItensEditaveis: function(tema,funcao,onde,size,prefixo){
 		if (onde !== "")
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
 		var monta = function(retorno)
@@ -1397,8 +1399,8 @@ i3GEO.util = {
 				ins.push("<table class=lista3 >");
 				n = retorno.data.valores.length;
 				for (i=0;i<n; i++){
-					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+retorno.data.valores[i].item+"' /></td>");
-					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+" - "+retorno.data.valores[i].nome+"' /></td></tr>");
+					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+retorno.data.valores[i].tema+"' type=checkbox id='"+prefixo+retorno.data.valores[i].item+"' /></td>");
+					ins.push("<td><input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+retorno.data.valores[i].item+retorno.data.valores[i].tema+"' type=text size='"+size+"' value='"+retorno.data.valores[i].item+"' /></td></tr>");
 				}
 				ins.push("</table>");
 				ins = ins.join('');
