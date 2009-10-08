@@ -969,7 +969,10 @@ nrss - (opcional) número de registros no rss que serão considerados
 	}
 	function ixml($no,$nome)
 	{
-		return mb_convert_encoding($no->$nome,"HTML-ENTITIES","auto");
+		$texto = $no->$nome;
+		if (!mb_detect_encoding($texto,"UTF-8",true))
+		{$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");}
+		return mb_convert_encoding($texto,"HTML-ENTITIES","auto");
 	}
 
 }
