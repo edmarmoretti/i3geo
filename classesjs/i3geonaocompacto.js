@@ -66,7 +66,20 @@ for (i = 0; i < jsfiles.length; i++)
 //css
 var allCssTags = "";
 var cssfiles = new Array(
-"../css/i3geo.css.php"
+"../css/geral.css",
+"../css/botoes.css",
+"../css/documentation.css",
+"../pacotes/yui270/build/logger/assets/skins/sam/logger.css",
+"../pacotes/yui270/build/fonts/fonts-min.css",
+"../pacotes/yui270/build/reset-fonts-grids/reset-fonts-grids.css",
+"../pacotes/yui270/build/grids/grids-min.css",
+"../pacotes/yui270/build/menu/assets/skins/sam/menu.css",
+"../pacotes/yui270/build/autocomplete/assets/skins/sam/autocomplete.css",
+"../pacotes/yui270/build/container/assets/skins/sam/container.css",
+"../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
+"../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
+"../pacotes/yui270/build/button/assets/skins/sam/button.css",
+"../css/corrigeyui_geral.css"
 );
 for (i = 0; i < cssfiles.length; i++)
 {

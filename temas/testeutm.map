@@ -11,13 +11,12 @@ MAP
       "TEMA"	"Teste de projeção utm"
     END
     NAME "testeutm"
-    STATUS OFF
-    #TEMPLATE "none.htm"
-    TYPE POLYGON
-    UNITS METERS
     PROJECTION
       "init=epsg:29181"
     END
+    STATUS OFF
+    TYPE POLYGON
+    UNITS METERS
     CLASS
       NAME " "
       STYLE

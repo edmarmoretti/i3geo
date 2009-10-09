@@ -265,7 +265,7 @@ i3GEO.barraDeBotoes = {
 					estilo.borderColor='black';
 					estilo.borderWidth="1px";
 				}
-				backgroundColor=cor;
+				estilo.backgroundColor=cor;
 			}
 		}
 	},
