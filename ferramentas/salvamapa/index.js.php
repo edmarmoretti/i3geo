@@ -1,9 +1,9 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Ferramenta carrega mapa salvo
+Title: Ferramenta salva mapfile em disco local
 
-File: i3geo/ferramentas/carregamapa/index.js.php
+File: i3geo/ferramentas/salvamapa/index.js.php
 
 About: Licença
 
@@ -33,7 +33,7 @@ Class: i3GEOF.carregaMapa
 
 Envia para o servidor um arquivo mapfile armazenado localmente
 */
-i3GEOF.carregaMapa = {
+i3GEOF.salvaMapa = {
 	/*
 	Variavel: aguarde
 	
@@ -51,11 +51,10 @@ i3GEOF.carregaMapa = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
-			new YAHOO.widget.Button(
-				"i3GEOcarregamapabotao1",
-				{onclick:{fn: i3GEOF.carregaMapa.submete}}
-			);
+			var map_file = i3GEO.parametros.mapfile,
+				local = map_file.split("ms_tmp");
+			local = window.location.protocol+"//"+window.location.host+"/ms_tmp"+local[1];
+			$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a>";
 		}
 		catch(erro){alert(erro);}
 	},
@@ -70,17 +69,9 @@ i3GEOF.carregaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Digite o nome do arquivo .map ou busque com o navegador de arquivos:';
-		ins += '<br><br>';
-		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
-		ins += '<input id="i3GEOcarregamapafilemap" class=digitar type="file" size=42 name="i3GEOcarregamapafilemap" style="top:0px;left:0px">';
-		ins += '<br><br>';
-		ins += '<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="Carregar arquivo" size=12 name="submit">';
-		ins += '<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >';
-		ins += '<input type="hidden" name="MAX_FILE_SIZE" value="10000">';
-		ins += '<input type=hidden id=i3GEOcarregamapanomearq name=i3GEOcarregamapanomearq value="" >';
-		ins += '</form>';
-		ins += '<iframe name=i3GEOcarregamaiframe width="280px" height="60px"></iframe>';
+		ins += '<p class="paragrafo" >Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador.';
+		ins += '<p class="paragrafo" >Para carregar o mapa armazenado, utilize a op&ccedil;&atilde;o de carregar mapa.';
+		ins += '<p class="paragrafo" >';
 		return ins;
 	},
 	/*
@@ -90,26 +81,21 @@ i3GEOF.carregaMapa = {
 	*/	
 	criaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
-		titulo = "Carrega mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Salva o mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=10' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
-			"200px",
+			"180px",
 			"",
 			"",
 			"",
 			titulo,
-			"i3GEOF.carregaMapa",
+			"i3GEOF.salvaMapa",
 			true,
 			"hd"
 		);
 		divid = janela[2].id;
-		i3GEOF.carregaMapa.aguarde = $i("i3GEOF.carregaMapa_imagemCabecalho").style;
-		i3GEOF.carregaMapa.inicia(divid);
-	},
-	submete: function(){
-		i3GEOF.carregaMapa.aguarde.visibility="visible";
-		$i("i3GEOcarregamapanomearq").value = $i("i3GEOcarregamapafilemap").value;
-		$i("i3GEOcarregamapaf").submit();
+		i3GEOF.salvaMapa.aguarde = $i("i3GEOF.salvaMapa_imagemCabecalho").style;
+		i3GEOF.salvaMapa.inicia(divid);
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
