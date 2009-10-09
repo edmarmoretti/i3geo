@@ -676,6 +676,7 @@ function insereWKTUrl()
 	$layer->set("type",$shape->type);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
+	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
 	if($shape->type == 0)
 	{
@@ -724,8 +725,8 @@ function inserePontosUrl()
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 	$pontos = explode(" ",trim($pontos));
-	if(count($pontos) == 0)
-	$pontos = explode(",",trim($pontos));
+	if(count($pontos) == 1)
+	{$pontos = explode(",",trim($pontos[0]));}
 	foreach ($pontos as $p)
 	{if (is_numeric($p)){$pontosn[] = $p;}}
 	$pontos = $pontosn;
@@ -753,6 +754,7 @@ function inserePontosUrl()
 	$layer->set("type",MS_LAYER_POINT);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
+	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
 	$estilo->set("symbolname","ponto");
 	$estilo->set("size",6);
@@ -830,6 +832,7 @@ function insereLinhasUrl()
 	$layer->set("type",MS_LAYER_LINE);
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
+	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
 	$estilo->set("symbolname","linha");
 	$estilo->set("size",3);
@@ -908,6 +911,7 @@ function inserePoligonosUrl()
 	$layer->set("transparency","50");
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
+	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
 	//$estilo->set("symbolname","linha");
 	//$estilo->set("size",3);
