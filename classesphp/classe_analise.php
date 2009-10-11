@@ -165,6 +165,8 @@ Include:
 			$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
 			$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
 			$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
+			if(file_exists(($this->arquivo)."qy"))
+			{unlink(($this->arquivo)."qy");}			
 			return "ok";
 			break;
 			case "kernel":
@@ -238,6 +240,8 @@ Include:
 		}
 		else
 		{return("erro");}
+		if(file_exists(($this->arquivo)."qy"))
+		{unlink(($this->arquivo)."qy");}
 		return("ok");
 	}
 /*

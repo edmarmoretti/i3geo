@@ -461,10 +461,13 @@ i3GEO = {
 		if(i3GEO.contadorAtualiza > 0)
 		{i3GEO.contadorAtualiza--;}
 		corpoMapa = function(){
-			i3GEO.janela.abreAguarde("ajaxiniciaParametros",$trad("o1")+" atualizando");
+			if($i("ajaxCorpoMapa"))
+			{return;}
+			i3GEO.janela.abreAguarde("ajaxCorpoMapa",$trad("o1")+" atualizando");
 			i3GEO.php.corpo(i3GEO.atualiza,i3GEO.configura.tipoimagem);		
 		};
 		if(arguments.length === 0){
+			i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			corpoMapa.call();
 			return;
 		}
@@ -473,7 +476,9 @@ i3GEO = {
 			return;
 		}
 		if(!retorno.data){
-			corpoMapa.call();
+			alert(retorno);
+			i3GEO.mapa.recupera.inicia();
+			//corpoMapa.call();
 			return;
 		}
 		//verifica se o parâmetro retorno existe, caso contrário,

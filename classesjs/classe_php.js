@@ -1073,3 +1073,5 @@ i3GEO.php = {
 //incluisel - tabela
 //criatemasel - tabela
 //estatistica - tabela
+//verPaleta - pontosdistri
+//analisedistri - pontosdistri

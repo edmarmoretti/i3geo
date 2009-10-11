@@ -980,10 +980,7 @@ Include:
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
 		if(!isset($testa)){$testa="";}
-		{
-			$cp->set_data($m->insereFiltro($filtro,$testa));
-			//$cp->return_data();
-		}
+		{$cp->set_data($m->insereFiltro($filtro,$testa));}
 		if($testa != "sim")
 		{
 			$m->salva();
@@ -1328,8 +1325,9 @@ Include:
 		if(!isset($limitepontos))
 		{$limitepontos = "";}
 		$m = new Analise($map_file,$tema);
-		$cp->set_data($m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite));
+		$res = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
 		$m->salva();
+		$cp->set_data($res);
 	break;
 /*
 Property: gradeDePontos

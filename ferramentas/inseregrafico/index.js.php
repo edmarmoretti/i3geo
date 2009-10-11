@@ -95,7 +95,7 @@ i3GEOF.insereGrafico = {
 		ins += '		</div>';	
 		ins += '		<div id=i3GEOinseregraficolistai class=digitar style="left:0px;top:20px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
 		ins += '		<br><br><br>';
-		ins += '		<input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
+		ins += '		<p class="paragrafo"><input id=i3GEOinseregraficobotao1 size=35  type=button value="mostrar legenda no mapa" />';
 		ins += '		<div id=i3GEOinseregraficomen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico: Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique no elemento do mapa para inserir o gr&aacute;fico.</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOinseregraficoguia2obj" style="left:1px;display:none;">';
@@ -103,7 +103,7 @@ i3GEOF.insereGrafico = {
 		ins += '		<tr>  ';
 		ins += '			<td>Tamanho do círculo:</td>';
 		ins += '			<td>';
-		ins += $inputText("","","i3GEOinseregraficow","",50,"0,0,0")+'</td>';
+		ins += $inputText("","","i3GEOinseregraficow","",5,"0,0,0")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
 		ins += '			<td>Inclina&ccedil;&atilde;o do círculo:</td>';

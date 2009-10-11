@@ -6529,7 +6529,9 @@ i3GEO.php = {
 };
 //incluisel - tabela
 //criatemasel - tabela
-//estatistica - tabela
+//estatistica - tabela
+//verPaleta - pontosdistri
+//analisedistri - pontosdistri
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Utilitários
@@ -7756,7 +7758,7 @@ i3GEO.util = {
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
 	
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if (arguments.length > 2)
@@ -7821,6 +7823,14 @@ i3GEO.util = {
 			}
 			else
 			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
+		if(tipoCombo === "pontosSelecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
 		}
 	},
 	/*
