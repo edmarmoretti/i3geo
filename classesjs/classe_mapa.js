@@ -517,8 +517,12 @@ i3GEO.mapa = {
 
 		Abre a janela que muda o tamanho do mapa
 		*/
-		tamanho: function()
-		{i3GEO.janela.cria("150px","170px",i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/index.htm","","","Tamanho <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=4' >&nbsp;&nbsp;&nbsp;</a>");},
+		tamanho: function(){
+			if(typeof(i3GEOF.opcoesTamanho) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_tamanho/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesTamanho.criaJanelaFlutuante()","i3GEOF.opcoesTamanho_script");
+			}
+		},
 		/*
 		Function: tipoimagem
 

@@ -72,7 +72,7 @@ i3GEOF.opcoesLegenda = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<table summary="" class=lista width="100%">' +
+		var ins = '<table summary="" class=lista >' +
 			'<tr><td>Inclui no corpo do mapa?:</td><td>' +
 			'	<select id=i3GEOopcoesLegendastatus >' +
 			'		<option value=3 >sim</option>' +
