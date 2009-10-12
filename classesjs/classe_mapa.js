@@ -531,8 +531,12 @@ i3GEO.mapa = {
 
 		Abre a janela que altera a cor do fundo do mapa atual.
 		*/
-		corFundo: function()
-		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.htm","","","Cor do fundo <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=6' >&nbsp;&nbsp;&nbsp;</a>");},
+		corFundo: function(){
+			if(typeof(i3GEOF.gradeCoord) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesFundo.criaJanelaFlutuante()","i3GEOF.opcoes_fundo_script");
+			}
+		},
 		/*
 		Function: opcoesEscala
 
