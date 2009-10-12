@@ -534,7 +534,7 @@ i3GEO.mapa = {
 		corFundo: function(){
 			if(typeof(i3GEOF.gradeCoord) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.opcoesFundo.criaJanelaFlutuante()","i3GEOF.opcoes_fundo_script");
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesFundo.criaJanelaFlutuante()","i3GEOF.opcoesFundo_script");
 			}
 		},
 		/*
@@ -549,8 +549,12 @@ i3GEO.mapa = {
 
 		Abre a janela de configuração da legenda do mapa
 		*/
-		opcoesLegenda: function()
-		{i3GEO.janela.cria("320px","350px",i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.htm","","","Legenda <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a>");},
+		opcoesLegenda: function(){
+			if(typeof(i3GEOF.opcoesLegenda) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesLegenda.criaJanelaFlutuante()","i3GEOF.opcoesLegenda_script");
+			}
+		},
 		/*
 		Function: gradeCoord
 
