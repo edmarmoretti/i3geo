@@ -6525,6 +6525,15 @@ i3GEO.php = {
 	extRegistros: function(funcao,tema,reg){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=extregistros&registro="+reg+"&tema="+tema;
 		cpJSON.call(p,"listaItensTema",funcao);
+	},
+	/*
+	Function: listaFontesTexto
+	
+	<listaTrueType>	
+	*/
+	listaFontesTexto: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listatruetype";
+		cpJSON.call(p,"listaTrueType",funcao);
 	}
 };
 //incluisel - tabela
@@ -7881,6 +7890,35 @@ i3GEO.util = {
 			eval("funcao(temp)");
 		};
 		i3GEO.php.listaItensTema(monta,tema);
+	},
+	/*
+	Function: comboFontes
+	
+	Cria um combo (caixa de seleção) com a lista fontes de texto disponíveis
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	*/	
+	comboFontes: function(id,onde){
+		$i(onde).innerHTML = "<span style=color:red >buscando fontes...</span>";
+		var monta = function(retorno){
+			var ins = "",temp,i,dados;
+			if (retorno.data !== undefined){
+				ins += "<select  id='"+id+"'>";
+				ins += "<option value='bitmap' >bitmap</option>";
+				dados = retorno.data.split(",");
+				temp = dados.length;
+				for (i=0;i<temp; i++){
+					ins += "<option value='"+dados[i]+"' >"+dados[i]+"</option>";
+				}
+				ins += "</select>";
+			}
+			$i(onde).innerHTML = ins;
+		};
+		i3GEO.php.listaFontesTexto(monta);
 	},
 	/*
 	Function: comboSimNao

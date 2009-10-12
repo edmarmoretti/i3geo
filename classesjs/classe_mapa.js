@@ -552,8 +552,12 @@ i3GEO.mapa = {
 
 		Abre a janela que gera grade de coordenadas
 		*/
-		gradeCoord: function()
-		{i3GEO.janela.cria("350px","330px",i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.htm","","","Grade de coordenadas <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=7' >&nbsp;&nbsp;&nbsp;</a>");},
+		gradeCoord: function(){
+			if(typeof(i3GEOF.gradeCoord) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/gradecoord/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.gradeCoord.criaJanelaFlutuante()","i3GEOF.gradeCoord_script");
+			}
+		},
 		/*
 		Function: cliqueTexto
 		

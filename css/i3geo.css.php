@@ -1,7 +1,7 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>.paragrafo
 {font-size:12px;line-height:15px;margin-bottom:9px;text-align:left;}
 .lista td
-{border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+{border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 0px;color:#2F4632;margin:0px;text-align:left;font-size: 11px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .lista2 td
 {border: 0px solid rgb(240,240,240);border-left: 0px;border-right:0px;border-top:0px;padding: 2px;color:#2F4632;margin:0px;text-align:left;font-size: 10px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 .lista2 td input

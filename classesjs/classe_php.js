@@ -1068,6 +1068,15 @@ i3GEO.php = {
 	extRegistros: function(funcao,tema,reg){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=extregistros&registro="+reg+"&tema="+tema;
 		cpJSON.call(p,"listaItensTema",funcao);
+	},
+	/*
+	Function: listaFontesTexto
+	
+	<listaTrueType>	
+	*/
+	listaFontesTexto: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listatruetype";
+		cpJSON.call(p,"listaTrueType",funcao);
 	}
 };
 //incluisel - tabela
