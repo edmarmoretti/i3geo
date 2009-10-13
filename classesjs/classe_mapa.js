@@ -503,8 +503,12 @@ i3GEO.mapa = {
 
 		Abre a janela que altera as propriedades da exibição dos elementos selecionados.
 		*/
-		queryMap: function()
-		{i3GEO.janela.cria("210px","80px",i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.htm","","","Cor da seleção <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=5' >&nbsp;&nbsp;&nbsp;</a>");},
+		queryMap: function(){
+			if(typeof(i3GEOF.opcoesQuery) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesQuery.criaJanelaFlutuante()","i3GEOF.opcoesQuery_script");
+			}
+		},
 		/*
 		Function: template
 
