@@ -602,7 +602,6 @@ i3GEO.gadgets = {
 			for (i = 0; i < qs; i++){
 				q += "<td><img class='quadro' src=\""+i3GEO.configura.locaplic+"/imagens/branco.gif\" id='quadro"+i+"' ";
 				q += "onmouseover='i3GEO.gadgets.quadros.trocaMapa(this.id);i3GEO.ajuda.mostraJanela(\"Clique para aplicar a extensão geográfica do quadro ao mapa\")' ";
-				//q += "onmouseout="+ saida; //\"javascript:i3GEO.ajuda.mostraJanela('')\" ";
 				q += "onclick='i3GEO.gadgets.quadros.zoom(this.id)' /></td>";
 				i3GEO.gadgets.quadros.quadrosfilme[i] = [];
 			}
@@ -722,8 +721,12 @@ i3GEO.gadgets = {
 				};
 				i3GEO.php.desativacgi(volta);
 			}
-			else
-			{i3GEO.janela.cria("150px","150px",i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.htm","center","","Quadros <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=6&idajuda=54' >&nbsp;&nbsp;&nbsp;</a>");}
+			else{
+				if(typeof(i3GEOF.opcoesQuadros) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_quadros/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.opcoesQuadros.criaJanelaFlutuante()","i3GEOF.opcoesQuadros_script");
+				}
+			}
 		},
 		/*
 		Function: anima
