@@ -550,8 +550,12 @@ i3GEO.mapa = {
 
 		Abre a janela para definição das opções da barra de escala.
 		*/
-		opcoesEscala: function()
-		{i3GEO.janela.cria("250px","300px",i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.htm","center","center","Escala <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>");},
+		opcoesEscala: function(){
+			if(typeof(i3GEOF.opcoesEscala) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesEscala.criaJanelaFlutuante()","i3GEOF.opcoesEscala_script");
+			}
+		},
 		/*
 		Function: opcoesLegenda
 
