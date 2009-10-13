@@ -452,8 +452,12 @@ i3GEO.mapa = {
 
 		Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
 		*/
-		autoredesenha: function()
-		{i3GEO.janela.cria("300px","110px",i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.htm","","","Temporizador <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=9' >&nbsp;&nbsp;&nbsp;</a>");},
+		autoredesenha: function(){
+			if(typeof(i3GEOF.opcoesTempo) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_autoredesenha/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.opcoesTempo.criaJanelaFlutuante()","i3GEOF.opcoesTempo_script");
+			}
+		},
 		/*
 		Function: salvaMapa
 
