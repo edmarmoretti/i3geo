@@ -116,8 +116,13 @@ i3GEO.analise = {
 
 		Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
 		*/
-		pontoempoligono: function()
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.htm","","","Ponto em pol&iacute;gono <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=18' >&nbsp;&nbsp;&nbsp;</a>");},
+		pontoempoligono: function(){
+			if(typeof(i3GEOF.pontoEmPoligono) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.pontoEmPoligono.criaJanelaFlutuante()","i3GEOF.pontoEmPoligono_script");
+			}
+
+		},
 		/*
 		Function: nptPol
 

@@ -18,7 +18,8 @@
 {border:1px solid gray;}
 .geralFerramentas
 {position:relative;background-color:white;text-align:left;text-decoration:none;border-top: 2px solid rgb(230,230,230);font-family: Verdana, Arial, Helvetica, sans-serif;display:block;font-size:12px;padding:5px;font-weight:normal;top:8px;left:0px;overflow:auto;width:100%;}
-
+.alerta
+{color:red;font-size:11px;}
 caption
 {font-size:8px;padding-top:0px;border-top:0px solid #FFFFFF;z-index:1000;position:relative;}
 span

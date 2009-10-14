@@ -7767,7 +7767,7 @@ i3GEO.util = {
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
 	
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados|pontos
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if (arguments.length > 2)
@@ -7776,7 +7776,7 @@ i3GEO.util = {
 		{nome = "";}
 		if (arguments.length < 5)
 		{multiplo = false;}
-		var monta, lista;
+		var monta, lista, temp;
 		monta = function(retorno){
 			var i,comboTemas,temp,n,nome;
 			if (retorno !== undefined)
@@ -7837,6 +7837,127 @@ i3GEO.util = {
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
+		if(tipoCombo === "pontos"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
+	},
+	/*
+	Function: checkTemas
+	
+	Cria uma lista com check box de temas existentes no mapa e de determinado tipo
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	
+	nome {String} - valor que será incluido no parametro "name" do elemento "select".
+	
+	tipoLista {String} - Tipo de temas que serão incluídos na lista ligados|selecionados|raster|pontosSelecionados|pontos|polraster
+
+	prefixo {string} - Prefixo que será usado no id de cada elemento
+	
+	size {numeric} - tamanho dos elementos input editáveis
+	*/	
+	checkTemas: function(id,funcao,onde,nome,tipoLista,prefixo,size){
+		if (arguments.length > 2)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
+		if (arguments.length === 3)
+		{nome = "";}
+		var monta, lista, temp, temp1, n, i;
+		monta = function(retorno){
+			try{
+				var i,comboTemas,temp,n,nome;
+				if (retorno !== undefined)
+				{
+					if(retorno.data)
+					{retorno = retorno.data;}
+					n = retorno.length;
+					if (n > 0)
+					{
+						comboTemas = "<table class=lista3 >"
+						for (i=0;i<n;i++){
+							if(retorno[i].nome){
+								nome = retorno[i].nome;
+								tema = retorno[i].tema;
+							}
+							else{
+								nome = retorno[i].tema;
+								tema = retorno[i].name;
+							}
+							comboTemas += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='"+tema+"' /></td>";
+							comboTemas += "<td>&nbsp;<input style='text-align:left; cursor:text;' onclick='javascript:this.select();' id='"+prefixo+tema+"' type=text size='"+size+"' value='"+nome+"' /></td></tr>";
+						}
+						comboTemas += "</table>";
+						temp = {dados:comboTemas,tipo:"dados"};
+					}
+					else
+					{temp = {dados:'<div class=alerta >Nenhum tema encontrado.</div>',tipo:"mensagem"};}
+				}
+				else
+				{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}
+				eval("funcao(temp);");
+			}catch(e){alert(e);}
+		};
+		if(tipoLista === "ligados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
+		if(tipoLista === "selecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listaTemasComSel(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
+		if(tipoLista === "raster"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{i3GEO.php.listatemasTipo(monta,"raster",i3GEO.configura.locaplic,i3GEO.configura.sid);}
+		}
+		if(tipoLista === "polraster"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",3,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
+				temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
+				n = temp1.length;
+				for (i=0;i<n;i++){
+					temp.push(temp1[i]);
+				}
+				monta(temp);
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}
+		}
+		if(tipoLista === "pontosSelecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
+		if(tipoLista === "pontos"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",0,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
 			{alert("Arvore de camadas não encontrada");}			
