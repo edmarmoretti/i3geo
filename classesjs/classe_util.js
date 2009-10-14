@@ -1346,7 +1346,7 @@ i3GEO.util = {
 					n = retorno.length;
 					if (n > 0)
 					{
-						comboTemas = "<table class=lista3 >"
+						comboTemas = "<table class=lista3 >";
 						for (i=0;i<n;i++){
 							if(retorno[i].nome){
 								nome = retorno[i].nome;
