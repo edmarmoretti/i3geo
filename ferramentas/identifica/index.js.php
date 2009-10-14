@@ -194,6 +194,7 @@ i3GEOF.identifica = {
 		);
 		divid = janela[2].id;
 		i3GEOF.identifica.inicia(i3GEO.temaAtivo,objposicaocursor.ddx,objposicaocursor.ddy,divid,true,true);
+		$i("i3GEOF.identifica_corpo").style.backgroundColor = "white";
 		if(i3GEO.Interface.ATUAL !== "googlemaps"){
 			temp = function(){
 				i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");
@@ -229,13 +230,13 @@ i3GEOF.identifica = {
 		ins += '		<li><a href="#ancora"><em><div id="i3GEOidentificaguia4" style="text-align:center;font-size:10px;left:0px;" >Etiquetas</div></em></a></li>';
 		ins += '	</ul>';
 		ins += '</div>';
-		ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
+		//ins += '<div class="geralFerramentas" style="left:0px;top:0px;width:98%;height:86%;">';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia1obj" style="left:1px;90%">';
-		ins += '		<div style="display:block;position:relative;top:-5px;left:0px;width:150px">';
+		ins += '		<div class="geralFerramentas" style="display:block;position:relative;top:-5px;left:0px;width:150px">';
 		ins += '			<div style="left:0px;width:120px;text-align:left;font-size:10px;" id="i3GEOidentificalistaTemas" >Aguarde...</div>';
 		ins += '			<div style="left:0px;width:120px;text-align:left;font-size:10px;" id="i3GEOidentificalistaSistemas" >Aguarde...</div>';
 		ins += '		</div>';
-		ins += '		<div id="i3GEOidentificaocorrencia" style="font-size: 10px;overflow:auto;height:200px;display:block;position:absolute;top:5px;left:160px;width:60%"></div>';
+		ins += '		<div id="i3GEOidentificaocorrencia" style="font-size: 10px;display:block;position:absolute;top:5px;left:160px;width:60%"></div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOidentificaguia2obj" style="left:1px">';
 		ins += '	</div>';
@@ -246,7 +247,7 @@ i3GEOF.identifica = {
 		ins += '		As etiquetas são mostradas quando o mouse é estacionado sobre um elemento.';
 		ins += '		<br><br><input id=i3GEOidentificabotao1 size=20  type=button value="Configurar etiquetas" />';
 		ins += '	</div>';
-		ins += '</div>	';
+		//ins += '</div>	';
 		return ins;
 	},
 	/*
