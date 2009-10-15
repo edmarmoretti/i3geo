@@ -684,7 +684,17 @@ g_traducao_ajuda = {
 			pt:"Insere gráficos em um elemento de um tema de forma interativa.",
 			complemento:"",
 			apijs:"i3GEO.mapa.dialogo.cliqueGrafico()"
-		}
+		},
+		"81": {
+			titulo: "Converter tema em KML",
+			diretorio:"i3geo/ferramentas/convertekml",
+			categoria:"5",
+			pt:"Convertendo um tema em KML é possível utilizar outros softwares para visualizar os dados. O i3Geo permite isso de duas maneiras, a primeira utiliza um WMS embutido dentro de um KML, ou seja, os dados são vistos como uma imagem raster georreferenciada, sendo que as coordenadas e atributos não são acessíveis diretamente.Dessa forma, grandes volumes de dados podem ser utilizados, pois não ocorre o download dos arquivos.<p>A segunda maneira converte os dados de um tema em arquivos KML compactados contendo as coordenadas e atributos dos elementos que compõem o tema.",
+			complemento:"KML é um padrão internacional e não é específico do i3Geo. Conforme as características de cada servidor onde o i3Geo estiver instalado, o KML poderá permanecer disponível por períodos de tempo variáveis. Para usar o KML no Google Earth, utilize a opção desse software chamada 'adicionar link de rede'",
+			tela:"ferramentas/convertekml/exemplo.htm",
+			apijs:"i3GEO.mapa.dialogo.convertekml()"
+		},
+
 	}
 };
 

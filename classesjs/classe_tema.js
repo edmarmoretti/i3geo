@@ -273,13 +273,10 @@ i3GEO.tema = {
 		abreKml: function(tema,tipo){
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
-			if(tema === "mapfile"){
-				if(i3GEO.parametros.mapfile === "")
-				{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-				return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+i3GEO.parametros.mapfile,"","","Kml"));
+			if(typeof(i3GEOF.converteKml) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
 			}
-			else
-			{return(i3GEO.janela.cria("450px","250px",i3GEO.configura.locaplic+'/ferramentas/convertekml/index.htm?tema='+tema+","+tipo,"","","Kml"));}
 		},
 		/*
 		Function: graficotema
@@ -291,15 +288,11 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		graficotema: function(idtema){
-			//return(i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/graficotema/index.htm?tema="+idtema,"","","Gr&aacute;fico <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=40' >&nbsp;&nbsp;&nbsp;</a>"));
 			if(typeof(i3GEOF.graficoTema) === 'undefined'){
-				//javascript que será carregado
 				var js = i3GEO.configura.locaplic+"/ferramentas/graficotema/index.js.php";
 				i3GEO.temaAtivo = idtema;
-				//carrega o script
 				i3GEO.util.scriptTag(js,"i3GEOF.graficoTema.criaJanelaFlutuante()","i3GEOF.graficoTema_script");
 			}
-		
 		},
 		/*
 		Function: toponimia
