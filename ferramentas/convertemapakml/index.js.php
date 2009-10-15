@@ -25,11 +25,11 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.converteKml
+Class: i3GEOF.converteMapaKml
 
-Converte um tema em KML
+Converte um mapa em KML
 */
-i3GEOF.converteKml = {
+i3GEOF.converteMapaKml = {
 	/*
 	Function: html
 	
@@ -39,21 +39,17 @@ i3GEOF.converteKml = {
 	
 	divid {String} - id do div que receberá o conteudo HTML da ferramenta
 
-	tema {String} - código do tema
-	
-	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
-	
 	*/
-	html:function(divid,tema,tipo){
-		var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar dados em softwares que aceitam o formato kml,' +
-		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>.' +
+	html:function(divid){
+		var ins,lista,tema;
+		lista = i3GEO.arvoreDeCamadas.CAMADAS;
+		tema = lista[0].name;	
+		var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml,' +
+		'como o <a href="http://earth.google.com/intl/pt/" target="_blank" > Google Earth</a>. O endereço de acesso é temporário, ficando disponível por determinado período de tempo conforme definido pelo administrador do i3Geo.' +
 		'<p class="paragrafo" >Clique <a href="'+i3GEO.configura.locaplic+'/documentacao/ajuda/googleearth.htm" target="blank" >aqui</a> para mais detalhes sobre como usar o link kml no Google Earth.' +
-		'<p class="paragrafo" ><b>Kml com "GroundOverlay" baseado em um servico WMS: </b></p>' +
-		'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kml</textarea></p>';
-		if(tipo == "kmz"){
-			ins += '<p class="paragrafo" ><b>Kmz que gera um arquivo kml vetorial: </b></p>' +
-			'<p class="paragrafo" ><textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+tema+'&typename='+tema+'&request=kmz</textarea></p>';
-		}
+		'<p class="paragrafo" ><b>Kml baseado em um servico WMS: </b></p>' +
+		'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' + 
+		i3GEO.configura.locaplic + '/pacotes/kmlmapserver/kmlservice.php?map='+i3GEO.parametros.mapfile+'&typename='+tema+'&request=kml</textarea></p>';
 		ins += '<p class="paragrafo" >Voc&ecirc; pode também utilizar o link abaixo para mostrar a &aacute;rvore completa de temas no GoogleEarth' +
 		'<p class="paragrafo" ><textarea cols="65" rows="2" style=cursor:pointer onclick="javascript:this.select()">' + i3GEO.configura.locaplic + '/kml.php </textarea></p>';
 		$i(divid).innerHTML += ins;
@@ -62,18 +58,12 @@ i3GEOF.converteKml = {
 	Function: criaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
-	
-	Parametros:
-	
-	tema {String} - código do tema
-	
-	tipo {String} - kml|kmz "kml" gera um link para acesso a um WMS e "kmz" gera um link que permite o acesso a um WMS e ao arquivo kmz vetorial
 	*/	
-	criaJanelaFlutuante: function(tema,tipo){
+	criaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo;
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.converteKml_corpo");
+			var temp = $i("i3GEOF.converteMapaKml_corpo");
 			if(temp){
 				if(temp.style.display === "block")
 				{temp.style.display = "none";}
@@ -81,22 +71,22 @@ i3GEOF.converteKml = {
 				{temp.style.display = "block";}
 			}
 		};
-		titulo = "Kml <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=81' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Kml <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=13' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"450px",
-			"250px",
+			"440px",
+			"280px",
 			"",
 			"",
 			"",
 			titulo,
-			"i3GEOF.converteKml",
+			"i3GEOF.converteMapaKml",
 			false,
 			"hd",
 			cabecalho,
 			minimiza
 		);
 		divid = janela[2].id;
-		i3GEOF.converteKml.html(divid,tema,tipo);
+		i3GEOF.converteMapaKml.html(divid);
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
