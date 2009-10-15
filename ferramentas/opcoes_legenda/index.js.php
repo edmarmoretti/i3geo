@@ -60,7 +60,7 @@ i3GEOF.opcoesLegenda = {
 			);
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){}
 	},
 	/*
 	Function: html
@@ -110,11 +110,11 @@ i3GEOF.opcoesLegenda = {
 			$inputText("","","i3GEOopcoesLegendakeyspacingx","",4,"") +
 			'</td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Tamanho do símb. Y:</td>' +
+			'<tr><td>Tamanho do símb. Y:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizey","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +
-			'<tr><td>Tamanho do símb. X:</td>' +
+			'<tr><td>Tamanho do símb. X:</td><td>' +
 			$inputText("","","i3GEOopcoesLegendakeysizex","",4,"") +
 			'<td></tr>' +
 			'<tr><td>&nbsp;</td><td></td></tr>' +			

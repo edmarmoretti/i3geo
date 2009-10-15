@@ -151,7 +151,6 @@ $cssfiles = array(
 "../pacotes/yui270/build/container/assets/skins/sam/container.css",
 "../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
-"../pacotes/yui270/build/button/assets/skins/sam/button.css",
 "../css/corrigeyui_geral.css"
 ); 
 
