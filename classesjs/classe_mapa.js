@@ -490,7 +490,10 @@ i3GEO.mapa = {
 		convertews: function(){
 			if(i3GEO.parametros.mapfile === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}
-			i3GEO.janela.cria("440px","280px",i3GEO.configura.locaplic+"/ferramentas/convertews/index.htm","","","WMS <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=2&idajuda=12' >&nbsp;&nbsp;&nbsp;</a>");
+			if(typeof(i3GEOF.converteKml) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/convertews/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.converteMapaWS.criaJanelaFlutuante()","i3GEOF.converteMapaWS_script");
+			}
 		},
 		/*
 		Function: convertekml
