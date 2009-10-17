@@ -100,10 +100,10 @@ function iniciaMapa()
 				$nclasses = $layer->numclasses;
 				for($ii=0;$ii<$nclasses;++$ii){
 					$classe = $layer->getclass($ii);
-					$nestilos = $classe;
+					$nestilos = $classe->numstyles;
 					for($j=0;$j<$nestilos;++$j){
 						$estilo = $classe->getstyle($j);
-						$estilo->set("symbolname","pt1");
+						$estilo->set("symbolname","p7");
 						$estilo->set("size","2");
 					}	
 				}
@@ -122,9 +122,7 @@ function iniciaMapa()
 			$of->set("driver","AGG/PNG");
 		}
 		else
-		{
-			$of = $m->outputformat;
-		}
+		{$of = $m->outputformat;}
 		$of->set("transparent",MS_ON);
 		$m->save($map_file);
 	}
