@@ -153,6 +153,8 @@ i3GEO.configura = {
 			],
 			"interface": [
 			{ text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/geral.htm?'+i3GEO.configura.sid" },
+			{ text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/openlayers.htm?'+i3GEO.configura.sid" },
+			{ text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/flamingo.htm?'+i3GEO.configura.sid" },
 			{ text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googlemaps.phtml?'+i3GEO.configura.sid" },
 			{ text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googleearth.phtml?'+i3GEO.configura.sid" }
 			]

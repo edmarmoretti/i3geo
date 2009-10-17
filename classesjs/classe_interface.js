@@ -47,6 +47,20 @@ O HTML deve conter as definições da interface criada e deve estar armazenado em 
 */
 i3GEO.Interface = {
 	/*
+	Propriedade: OUTPUTFORMAT
+	
+	Formato de geração da imagem.
+	
+	Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A definição dessa variável não afeta a interface padrão, que utiliza a definição que estiver ativa nos mapfiles de inicialização.
+	
+	Tipo:
+	{MAPSERVER OUTPUTFORMAT}
+	
+	Default:
+	{"AGG_Q"}
+	*/
+	OUTPUTFORMAT: "AGG_Q",
+	/*
 	Propriedade: BARRABOTOESTOP
 	
 	Distância da barra de botões em ralação ao topo do mapa.
@@ -238,16 +252,14 @@ i3GEO.Interface = {
 				}
 				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
 			};
-			if (!$i("imgtemp"))
-			{
+			if (!$i("imgtemp")){
 				ndiv = document.createElement("div");
 				ndiv.id = "imgtemp";
 				ndiv.style.position = "absolute";
 				ndiv.style.border = "1px solid blue";
 				document.getElementById("corpoMapa").appendChild(ndiv);
 			}
-			if(g_tipoacao === "pan" && i3GEO.barraDeBotoes.BOTAOCLICADO === "pan")
-			{
+			if(g_tipoacao === "pan" && i3GEO.barraDeBotoes.BOTAOCLICADO === "pan"){
 				$i("imgtemp").style.left = parseInt($i("img").style.left,10);
 				$i("imgtemp").style.top = parseInt($i("img").style.top,10);
 				$i("imgtemp").style.width = i3GEO.parametros.w;
@@ -262,11 +274,14 @@ i3GEO.Interface = {
 			i.src=i3GEO.parametros.mapimagem;
 		},
 		cria:function(){
+			var ins = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img' />";
+			/*
 			var ins = "<table>";
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgN' /></td><td class=verdeclaro ></td></tr>";
 			ins += "<tr><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgL' /></td><td class=verdeclaro ><input style='position:relative;top:0px;left:0px'' type=image src='' id='img' /></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgO' /></td></tr>";
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgS' /></td><td class=verdeclaro ></td></tr>";
 			ins += "</table>";
+			*/
 			$i(i3GEO.Interface.IDCORPO).innerHTML = ins;
 			i3GEO.Interface.IDMAPA = "img";
 		},
@@ -332,8 +347,7 @@ i3GEO.Interface = {
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			i3GEO.Interface.padrao.ativaBotoes();
 			i3GEO.idioma.mostraSeletor();
-			if (i3GEO.configura.mapaRefDisplay !== "none")
-			{
+			if (i3GEO.configura.mapaRefDisplay !== "none"){
 				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay"))
 				{i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
 				if (i3GEO.configura.mapaRefDisplay === "block")
@@ -360,8 +374,7 @@ i3GEO.Interface = {
 			{i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);}
 			//ativa as funções dos botões
 			i3GEO.barraDeBotoes.ativaBotoes();
-			if (document.getElementById("botao3d"))
-			{
+			if (document.getElementById("botao3d")){
 				if (i3GEO.configura.map3d === "")
 				{document.getElementById("botao3d").style.display="none";}
 			}
@@ -481,7 +494,7 @@ i3GEO.Interface = {
 				url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?";
 				url += "map="+i3GEO.parametros.mapfile+"&mode=map&SRS=epsg:4326&";
 				i3geoOL = new OpenLayers.Map('openlayers', { controls: [] });
-				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl'},{'buffer':1},{isBaseLayer:true, opacity: 1});
+				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl',map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("moveend",i3geoOL,function(e){
@@ -762,6 +775,7 @@ i3GEO.Interface = {
         	parametros += '&mode=tile';
         	parametros += '&tilemode=gmap';
         	parametros += '&tile={X}+{Y}+{Z}';
+        	parametros += '&map_imagetype='+i3GEO.Interface.OUTPUTFORMAT;
     		//alert(cgi+parametros)
     		return(cgi+parametros);		
 		},
