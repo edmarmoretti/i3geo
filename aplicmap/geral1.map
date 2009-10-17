@@ -26,7 +26,7 @@ MAP
 	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
 	#para png1 quando um arquivo rsater é adicionado ao mapa
 	#
-	IMAGETYPE png2
+	IMAGETYPE AGG_Q
 	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 	SIZE 480 500
 	STATUS ON
@@ -42,14 +42,14 @@ MAP
  	#	IMAGEMODE RGB
 	#END
 	#png output, with number of colors reduced with quantization . ( Note: this functionality is not supported with RGBA images, that is outputformats with IMAGEMODE RGBA, or maps with TRANSPARENT ON ) :
-	#OUTPUTFORMAT
-	#	NAME 'AGG_Q'
- 	#	DRIVER AGG/PNG
- 	#	IMAGEMODE RGB
- 	#	FORMATOPTION "QUANTIZE_FORCE=ON"
- 	#	FORMATOPTION "QUANTIZE_DITHER=OFF"
- 	#	FORMATOPTION "QUANTIZE_COLORS=256"
-	#END
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+ 		DRIVER AGG/PNG
+ 		IMAGEMODE RGB
+ 		FORMATOPTION "QUANTIZE_FORCE=ON"
+ 		FORMATOPTION "QUANTIZE_DITHER=OFF"
+ 		FORMATOPTION "QUANTIZE_COLORS=256"
+	END
 	OUTPUTFORMAT
   		NAME jpeg
   		DRIVER GD/JPEG
