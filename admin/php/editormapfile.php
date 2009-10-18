@@ -675,6 +675,7 @@ function pegaClasseGeral()
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
 	$dados["name"] = $classe->name;
+	$dados["title"] = $classe->title;
 	$temp = $classe->getExpression();
 	$temp = str_replace("[","_C",$temp);
 	$temp = str_replace("]","C_",$temp);
@@ -694,13 +695,14 @@ function pegaClasseGeral()
 }
 function alterarClasseGeral()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic,$status,$minscale,$maxscale,$name,$expression,$keyimage;
+	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic,$status,$minscale,$maxscale,$name,$expression,$keyimage,$title;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$classe = $layer->getclass($indiceClasse);
 	$classe->set("name",$name);
+	$classe->set("title",$title);
 	$temp = str_replace("_C","[",$expression);
 	$temp = str_replace("C_","]",$temp);
 	$temp = str_replace("_A_","'",$temp);	

@@ -1,8 +1,7 @@
 MAP
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
   LAYER
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
+    GROUP "Grupo 1"
     METADATA
       "CLASSE"	"SIM"
       "permitekmz"	"sim"
@@ -13,7 +12,6 @@ FONTSET   "../symbols/fontes.txt"
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile"
     END
-    GROUP "Grupo 1"
     NAME "biomashp"
     STATUS OFF
     TEMPLATE "none.htm"
@@ -28,6 +26,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda."
     END
     CLASS
       NAME "PAMPA"
@@ -38,6 +37,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE ""
     END
     CLASS
       NAME "MATA ATLANTICA"
@@ -48,6 +48,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
       NAME "CERRADO"
@@ -58,6 +59,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
       NAME "CAATINGA"
@@ -68,6 +70,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
       NAME "AMAZONIA"
@@ -78,6 +81,7 @@ FONTSET   "../symbols/fontes.txt"
         OPACITY 100
         SYMBOL 0
       END
+      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
   END
 

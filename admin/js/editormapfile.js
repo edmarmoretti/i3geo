@@ -941,6 +941,8 @@ function montaEditorClasseGeral(dados)
 		"linhas":[
 		{ajuda:"Nome da classe para ser mostrada na legenda",
 		titulo:"Name",id:"name",value:dados.name,tipo:"text"},
+		{ajuda:"Descrição da classe (mostrada na legenda quando o mouse é sobreposto",
+		titulo:"Title",id:"title",value:dados.title,tipo:"text"},
 		{ajuda:"Sets the current display status of the class. Default turns the class on",
 		titulo:"Status",id:"",value:dados.status,tipo:"text",div:"<div id=cStatus ></div>"},
 		{ajuda:"Four types of expressions are now supported to define class membership. String comparisons, regular expressions, simple logical expressions, and string functions. If no expression is given, then all features are said to belong to this class.<br>String comparisons are case sensitive and are the fastest to evaluate. No special delimiters are necessary although string must be quoted if they contain special characters. (As a matter of good habit, it is recommended you quote all strings).<br>Regular expressions function just like previous versions of MapServer. However, you must now delimit a regular expression using /regex/. No quotes should be used.<br><br>Logical expressions allow you to build fairly complex tests based on one or more attributes and therefore are only available with shapefiles. Logical expressions are delimited by parentheses '(expression)'. Attribute names are delimited by square brackets '[ATTRIBUTE]'. These names are case sensitive and must match the items in the shapefile. For example: EXPRESSION ([POPULATION] > 50000 AND '[LANGUAGE]' eq 'FRENCH') ... The following logical operators are supported: =,>,<,<=,>=,=,or,and,lt,gt,ge,le,eq,ne. As you might expect this level of complexity is slower to process.<br>One string function exists: length(). This obviously computes the length of a string. An example follows:<br>EXPRESSION (length('[NAME_E]') < 8)<br>String comparisons and regular expressions work from the classitem defined at the layer level. You may mix expression types within the different classes of a layer",
@@ -1158,7 +1160,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 	}
 	if(tipo == "classeGeral")
 	{
-		var campos = new Array("status","minscale","maxscale","name","keyimage")
+		var campos = new Array("status","minscale","maxscale","name","title","keyimage")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&indiceClasse="+indiceClasse
 		var temp = $i("expression").value;
 		var re = /]/g;
