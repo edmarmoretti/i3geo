@@ -1,4 +1,7 @@
 <html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+</head>
 <script>
 try
 {var objhttp1 = new XMLHttpRequest();}

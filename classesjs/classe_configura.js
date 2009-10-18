@@ -771,8 +771,12 @@ i3GEO.configura = {
 			iddiv:"exten",
 			tipo:"",
 			dica:$trad("d8"),
-			funcaoonclick:function()
-			{i3GEO.janela.cria("450px","340px",i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.htm","","","Extensão geográfica <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=55' >&nbsp;&nbsp;&nbsp;</a>");}
+			funcaoonclick:function(){
+				if(typeof(i3GEOF.mostraExten) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.mostraExten.criaJanelaFlutuante()","i3GEOF.mostraExten_script");
+				}			
+			}
 		},
 		{
 			//botão que abre a janela com o mapa de referência

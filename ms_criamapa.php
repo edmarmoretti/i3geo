@@ -614,6 +614,7 @@ function mostraAguarde()
 	if (!isset($interface))
 	{
 		echo "<html><head>";
+		echo '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head>';
 		echo "<title>".$tituloInstituicao."</title>";
 		echo '<div id="aguarde"><center>';
 		echo '<p class=paguarde style="font-family: Verdana, Arial, Helvetica, sans-serif;color:black;text-align:center;font-size:12pt"><b>'.$mensagemInicia.'</b><br> Aguarde...preparando o mapa</p>';
