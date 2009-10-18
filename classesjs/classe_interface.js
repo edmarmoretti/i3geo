@@ -494,7 +494,7 @@ i3GEO.Interface = {
 				url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?";
 				url += "map="+i3GEO.parametros.mapfile+"&mode=map&SRS=epsg:4326&";
 				i3geoOL = new OpenLayers.Map('openlayers', { controls: [] });
-				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{layers:'estadosl',map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});
+				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("moveend",i3geoOL,function(e){
