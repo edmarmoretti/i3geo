@@ -451,16 +451,16 @@ i3GEO.barraDeBotoes = {
 				nelementos = elementos.length;
 				if(elementos[0].style.display == "inline" && elementos[0].id === "")
 				{return;}
-				if(elementos[1].style.display == "inline" && elementos[1].id === "")
-				{return;}
+				//if(elementos[1].style.display == "inline" && elementos[1].id === "")
+				//{return;}
 				if(nelementos > 0){
 					mostra = elementos[0];
 					i = 0;
 					do{
 						if(elementos[i].style){
-							if(elementos[i].style.display == "inline" && elementos[i].id === "")
+							if(elementos[i].style.display === "inline" && elementos[i].id === "")
 							{break;}
-							if(elementos[i].style.display == "none" && elementos[i].id === "")
+							if(elementos[i].style.display === "none" && elementos[i].id === "")
 							{mostra = elementos[i];}
 						}
 						i = i + 1;
@@ -468,12 +468,14 @@ i3GEO.barraDeBotoes = {
 					while(i < nelementos);
 					mostra.style.display="inline";
 					//esconde o último botao
-					i = nelementos - 1;
+					i = nelementos + 1;
 					mostra = elementos[i];
 					do{
-						if(elementos[i].style){
-							if(elementos[i].style.display == "inline")
-							{mostra = elementos[i];break;}
+						if(elementos[i]){
+							if(elementos[i].style){
+								if(elementos[i].style.display === "inline")
+								{mostra = elementos[i];break;}
+							}
 						}
 						i = i - 1;
 					}

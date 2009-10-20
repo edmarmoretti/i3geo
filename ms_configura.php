@@ -282,8 +282,8 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Example:
 
 	$menutemas = array(
-		array("publicado"=>"sim","idmenu"=>1,"arquivo"=>"http://localhost/i3geo/menutemas/geopr.xml","status"=>"fechado"),
-		array("publicado"=>"sim","idmenu"=>2,"arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
+		array("publicado"=>"sim","idmenu"=>"A',"arquivo"=>"http://localhost/i3geo/menutemas/geopr.xml","status"=>"fechado"),
+		array("publicado"=>"sim","idmenu"=>"B","arquivo"=>"http://localhost/i3geo/menutemas/menutemas.xml","status"=>"aberto")
 		);
 
 		

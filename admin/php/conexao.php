@@ -71,6 +71,9 @@ if($conexaoadmin == "")
 	}
 	$conAdmin = "sqlite:$arquivosqlite";
 	$conAdminw = "sqlite:$arquivosqlite";
+	if(!extension_loaded("PDO")){
+		echo "A extensao do PHP 'PDO' nao esta instalada.";
+	}
 	try
 	{
 		//para escrita

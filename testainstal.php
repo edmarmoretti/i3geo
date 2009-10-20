@@ -64,19 +64,15 @@ $exts = get_loaded_extensions();
 echo ms_GetVersion()."<br><br>";
 echo "---";
 echo "<br><pre>Extensoes:<br>";
-if (array_search( "libxml", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a libxml<br></span>";}
-if (array_search( "PDO", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
-if (array_search( "pdo_sqlite", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a pdo_sqlite<br></span>";}
-if (array_search( "SQLite", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SQLite<br></span>";}
-
-if (array_search( "PDO", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
-if (array_search( "SimpleXML", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
-if (array_search( "dom", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
-if (array_search( "xml", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
-if (array_search( "gd", $exts) != TRUE){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
-if (array_search( "gd2", $exts) != TRUE){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
-
-
+if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: não está instalado a libxml<br></span>";}
+if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
+if (!extension_loaded( "pdo_sqlite")){echo "<span style=color:red >Problema: não está instalado a pdo_sqlite<br></span>";}
+if (!extension_loaded( "SQLite")){echo "<span style=color:red >Problema: não está instalado a SQLite<br></span>";}
+if (!extension_loaded( "SimpleXML")){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
+if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
+if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
+if (!extension_loaded( "gd")){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
+if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
 var_dump( $exts );
 
 echo "Existe o ms_configura.php? ";
