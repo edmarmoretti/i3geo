@@ -58,6 +58,7 @@ i3GEO.analise = {
 		Abre a janela que gera grade de pontos
 		*/
 		gradePontos: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePontos()");}
 			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePontos.criaJanelaFlutuante()","i3GEOF.gradeDePontos_script");
@@ -69,6 +70,7 @@ i3GEO.analise = {
 		Abre a janela que gera grade de poligonos
 		*/
 		gradePol: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePol()");}
 			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/gradepol/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePoligonos.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
@@ -80,6 +82,7 @@ i3GEO.analise = {
 		Abre a janela que gera grade de hexágonos
 		*/
 		gradeHex: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradeHex()");}
 			if(typeof(i3GEOF.gradeDeHex) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/gradehex/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.gradeDeHex.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
@@ -91,6 +94,7 @@ i3GEO.analise = {
 		Abre a janela com o sistema de análise de geometrias
 		*/
 		analisaGeometrias: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.analisaGeometrias()");}
 			if(typeof(i3GEOF.analisaGeometrias) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/analisageometrias/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.analisaGeometrias.criaJanelaFlutuante()","i3GEOF.analisaGeometrias_script");
@@ -102,6 +106,7 @@ i3GEO.analise = {
 		Abre a janela para executar análises de distribuição de pontos
 		*/
 		pontosdistri: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontosdistri()");}
 			if (i3GEO.parametros.r == "nao")
 			{alert("Opção não disponível");}
 			else{
@@ -117,6 +122,7 @@ i3GEO.analise = {
 		Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
 		*/
 		pontoempoligono: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontoempoligono()");}
 			if(typeof(i3GEOF.pontoEmPoligono) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.pontoEmPoligono.criaJanelaFlutuante()","i3GEOF.pontoEmPoligono_script");
@@ -136,6 +142,7 @@ i3GEO.analise = {
 		Gera um buffer em elementos selecionados
 		*/
 		buffer: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.buffer()");}
 			if(typeof(i3GEOF.buffer) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/buffer/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.buffer.criaJanelaFlutuante()","i3GEOF.buffer_script");
@@ -168,6 +175,7 @@ i3GEO.analise = {
 		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
 		*/
 		agrupaElementos: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.agrupaElementos()");}
 			if(typeof(i3GEOF.agrupaElementos) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.agrupaElementos.criaJanelaFlutuante()","i3GEOF.agrupaElementos_script");
@@ -194,6 +202,7 @@ i3GEO.analise = {
 		São registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeDistancia.inicia()");}
 			pontosdistobj = [];
 			i3GEO.analise.medeDistancia.criaJanela();
 			if (g_tipoacao != "mede"){
@@ -354,6 +363,7 @@ i3GEO.analise = {
 		São registrados os eventos de clique sobre o mapa e fechamento da janela de resultados
 		*/
 		inicia: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
 			var temp;
 			i3GEO.analise.medeArea.criaJanela();
 			if (g_tipoacao != "area"){

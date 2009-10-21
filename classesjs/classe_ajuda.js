@@ -148,6 +148,7 @@ i3GEO.ajuda = {
 	Essa função é executada na inicialização do i3GEO
 	*/
 	abreJanela: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.abreJanela()");}
 		try	{
 			var nx,ny,pos,corpo,texto,janela;				
 			if(i3GEO.ajuda.ATIVAJANELA === false){return;}
@@ -194,6 +195,7 @@ i3GEO.ajuda = {
 	será utilizado a variável i3GEO.parametros.mensagens
 	*/
 	ativaLetreiro: function(mensagem){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.ativaLetreiro()");}
 		var l;
 		if($i(i3GEO.ajuda.DIVLETREIRO))
 		{
@@ -245,6 +247,7 @@ i3GEO.ajuda = {
 	Fecha a janela de ajuda.
 	*/
 	fechaJanela: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.fechaJanela()");}
 		i3GEO.ajuda.desativaCookie();
 		var j = $i("i3geo_janelaMensagens_c");
 		if(j)
@@ -260,6 +263,7 @@ i3GEO.ajuda = {
 	texto {String} - texto a ser mostrado
 	*/
 	mostraJanela: function(texto){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraJanela()");}
 		var j,k;
 		j = $i(i3GEO.ajuda.DIVAJUDA);
 		if(j){
@@ -296,6 +300,7 @@ i3GEO.ajuda = {
 	desde o início do redesenho do mapa.
 	*/
 	mostraLetreiro: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.mostraLetreiro()");}
 		for (count=0; count<BPos; count++)
 		{BSpaces+= " ";}
 		if (BPos < 1){

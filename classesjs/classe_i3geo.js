@@ -183,6 +183,7 @@ i3GEO = {
 	Veja <i3GEO.Interface>
 	*/
 	cria:function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.cria()");}
 		var diminuix,diminuiy,menos,novow,novoh,w,h,temp,i;
 		if (window.location.href.split("?")[1]){
 			i3GEO.configura.sid = window.location.href.split("?")[1];
@@ -302,6 +303,7 @@ i3GEO = {
 	Após a inicialização é executado <i3GEO.Interface.inicia>
 	*/
 	inicia:function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.inicia()");}
 		var monyaMapa,mashup;
 		if(typeof("i3GEOmantemCompatibilidade") === 'function')
 		{i3GEOmantemCompatibilidade();}
@@ -455,6 +457,7 @@ i3GEO = {
 	dessa chamada é armazenada em i3GEO.parametros
 	*/
 	atualiza: function(retorno){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.atualiza()");}
 		var corpoMapa,erro,tempo,mapscale,mapexten;
 		if(i3GEO.contadorAtualiza > 1)
 		{i3GEO.contadorAtualiza--;return;}

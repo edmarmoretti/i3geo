@@ -95,6 +95,7 @@ i3GEO.janela = {
 	Executa funções default antes de abrir a janela
 	*/
 	prepara: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.prepara()");}
 		//
 		//esconde o box de zoom e outros objetos temporários se estiverem visíveis
 		//
@@ -143,6 +144,7 @@ i3GEO.janela = {
 	{Array} Array contendo: objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
 		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix;
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
@@ -245,6 +247,7 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada
 	*/
 	fecha: function(event){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
 		var i,old;
 		if(i3GEO.Interface.ATUAL === "googleearth"){
 			//YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
@@ -301,6 +304,7 @@ i3GEO.janela = {
 	id {String} - (opcional) id que identifica a janela aberta, por padrão utiliza "wdoca"
 	*/
 	alteraTamanho: function(w,h,id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.alteraTamanho()");}
 		var i;
 		if(arguments.length === 3)
 		{i = $i(id);}
@@ -323,6 +327,7 @@ i3GEO.janela = {
 	texto {String} - texto da janela
 	*/
 	abreAguarde: function(id,texto){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
 		//YAHOO.log("abreAguarde", "janela");
 		var pos,index,contador;
 		document.body.style.cursor = "wait";
@@ -371,6 +376,7 @@ i3GEO.janela = {
 	ID do DIV criado
 	*/
 	tip: function(cabecalho){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.tip()");}
 		var Nid,i,novoel,res;
 		if(arguments.length === 0){cabecalho = "fixar";}
 		Nid = YAHOO.util.Dom.generateId();
@@ -425,6 +431,7 @@ i3GEO.janela = {
 	tipo {String} - todos|naofixos tipos de tips que serão excluídos
 	*/
 	excluiTips: function(tipo){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.excluiTips()");}
 		var ot,i;
 		if(arguments.length === 0)
 		{tipo = "todos";}
@@ -507,6 +514,7 @@ i3GEO.janela = {
 	id {String} - id da janela que será fechada. Se não for definido, tenta fechar as janelas principais.
 	*/
 	fechaAguarde: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fechaAguarde("+id+")");}
 		document.body.style.cursor = "default";
 		if(arguments.length > 0){
 			try{
@@ -520,18 +528,30 @@ i3GEO.janela = {
 		}
 		else{
 			try{
-				i3GEO.janela.fechaAguarde("ajaxdestaca");
-				i3GEO.janela.fechaAguarde("ajaxabrelente");
-				i3GEO.janela.fechaAguarde("ajaxiniciaParametros");
-				i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-				i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");
-				i3GEO.janela.fechaAguarde("ajaxCorpoMapa");
-				i3GEO.janela.fechaAguarde("ajaxLegenda");
-				i3GEO.janela.fechaAguarde("ajaxReferencia");
-				i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");
-				i3GEO.janela.fechaAguarde("montaMapa");
-				i3GEO.janela.fechaAguarde("aguardedoc");
-				i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");
+				if($i("ajaxdestaca_c"))
+				{i3GEO.janela.fechaAguarde("ajaxdestaca");}
+				if($i("ajaxabrelente_c"))
+				{i3GEO.janela.fechaAguarde("ajaxabrelente");}
+				if($i("ajaxiniciaParametros_c"))
+				{i3GEO.janela.fechaAguarde("ajaxiniciaParametros");}
+				if($i("i3GEO.atualiza_c"))
+				{i3GEO.janela.fechaAguarde("i3GEO.atualiza");}
+				if($i("ajaxCorpoMapaEntorno_c"))
+				{i3GEO.janela.fechaAguarde("ajaxCorpoMapaEntorno");}
+				if($i("ajaxCorpoMapa_c"))
+				{i3GEO.janela.fechaAguarde("ajaxCorpoMapa");}
+				if($i("ajaxLegenda_c"))
+				{i3GEO.janela.fechaAguarde("ajaxLegenda");}
+				if($i("ajaxReferencia_c"))
+				{i3GEO.janela.fechaAguarde("ajaxReferencia");}
+				if($i("ajaxEscalaGrafica_c"))
+				{i3GEO.janela.fechaAguarde("ajaxEscalaGrafica");}
+				if($i("montaMapa_c"))
+				{i3GEO.janela.fechaAguarde("montaMapa");}
+				if($i("aguardedoc_c"))
+				{i3GEO.janela.fechaAguarde("aguardedoc");}
+				if($i("ajaxCorpoMapa1_c"))
+				{i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");}
 			}
 			catch(e){}	
 		}

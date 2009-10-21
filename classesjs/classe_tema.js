@@ -45,6 +45,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	exclui: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.exclui()");}
 		g_operacao = "excluitema";
 		//remove o tema do DOM e seus filhos
 		var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
@@ -68,6 +69,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	fonte: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.fonte()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = function(retorno){
 			i3GEO.janela.fechaAguarde();
@@ -88,6 +90,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	sobe: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.sobe()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.sobetema(i3GEO.atualiza,tema);
@@ -102,6 +105,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	desce: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.desce()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.descetema(i3GEO.atualiza,tema);
@@ -116,6 +120,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	zoom: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.zoom()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.zoomtema(i3GEO.atualiza,tema);
@@ -130,6 +135,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	zoomsel: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.zoomsel()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.zoomsel(i3GEO.atualiza,tema);
@@ -144,6 +150,7 @@ i3GEO.tema = {
 	tema - ID (name) do tema clicado
 	*/
 	limpasel: function(tema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.limpasel()");}
 		g_operacao = "limpasel";
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
@@ -159,6 +166,7 @@ i3GEO.tema = {
 	idtema - código do tema
 	*/
 	mudatransp: function(idtema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
 		g_operacao = "transparencia";
 		var valor;
 		//o campo input com o valor possui o prefixo 'tr' seguido pelo código do tema
@@ -184,6 +192,7 @@ i3GEO.tema = {
 	idtema - código do tema
 	*/
 	mudanome: function(idtema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudanome()");}
 		g_operacao = "mudanome";
 		var valor;
 		if($i("nn"+idtema))
@@ -224,6 +233,7 @@ i3GEO.tema = {
 	tipoOperacao {String} {ativatimer|desativatimer|abrejanela} - tipo de operação que será executada
 	*/
 	mostralegendajanela: function(idtema,nome,tipoOperacao){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mostralegendajanela()");}
 		//alert(idtema+" "+status)
 		var retorna,janela;
 		if(tipoOperacao === "ativatimer"){
@@ -271,6 +281,7 @@ i3GEO.tema = {
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.abreKml()");}
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
 			if(typeof(i3GEOF.converteKml) === 'undefined'){
@@ -288,6 +299,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		graficotema: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.graficotema()");}
 			if(typeof(i3GEOF.graficoTema) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/graficotema/index.js.php";
 				i3GEO.temaAtivo = idtema;
@@ -326,6 +338,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.procuraratrib()");}
 			if(typeof(i3GEOF.busca) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/busca/index.js.php";
 				i3GEO.temaAtivo = idtema;
@@ -342,6 +355,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		tabela: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.tabela()");}
 			if(typeof(i3GEOF.busca) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/tabela/index.js.php";
 				i3GEO.temaAtivo = idtema;

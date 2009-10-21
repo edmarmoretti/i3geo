@@ -52,6 +52,7 @@ i3GEO.selecao = {
 	tolerancia {Integer} - tolerância de busca
 	*/
 	porxy: function(tema,tipo,tolerancia){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.porxy()");}
 		var retorna = function(retorno)
 		{i3GEO.atualiza(retorno);};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
@@ -71,6 +72,7 @@ i3GEO.selecao = {
 	box {String} - xmin ymin xmax ymax
 	*/
 	porbox: function(tema,tipo,box){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.selecao.porbox()");}
 		var retorna = function(retorno)
 		{i3GEO.atualiza(retorno);};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
@@ -84,6 +86,7 @@ i3GEO.selecao = {
 	A janela terá como id "wdocai"
 	*/
 	janelaOpcoes: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.janelaOpcoes()");}
 		var janela,temp;
 		g_tipoacao = "selecao";
 		i3GEO.temaAtivo = "";
@@ -114,6 +117,7 @@ i3GEO.selecao = {
 	disparo do evento NAVEGAMAPA
 	*/
 	atualizaGrafico: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.atualizaGrafico()");}
 		if(g_tipoacao === "selecao"){
 			var doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
 			if(doc.getElementById("guia5obj")){
@@ -130,6 +134,7 @@ i3GEO.selecao = {
 	Seleciona elementos clicando no mapa
 	*/
 	clique: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.selecao.clique()");}
 		if (g_tipoacao === "selecao"){
 			var doc,tipo,tolerancia;
 			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;

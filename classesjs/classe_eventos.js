@@ -157,6 +157,7 @@ i3GEO.eventos = {
 	
 	*/
 	mouseParado: function()	{
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseParado()");}
 		try
 		{clearTimeout(i3GEO.eventos.TIMERPARADO);}
 		catch(e){i3GEO.eventos.TIMERPARADO = "";}
@@ -179,6 +180,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em NAVEGAMAPA, ou seja, operações executadas quando o mapa tem sua extensão geográfica alterada.
 	*/
 	navegaMapa: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.navegaMapa()");}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.NAVEGAMAPA);
 	},
 	/*
@@ -195,6 +197,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSEDOWN.
 	*/
 	mousedownMapa: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mousedownMapa()");}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEDOWN);
 	},
 	/*
@@ -203,6 +206,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSEUP.
 	*/
 	mouseupMapa: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mouseupMapa()");}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEUP);
 		/*
 		if (i3GEO.eventos.MOUSEUP.length > 0){
@@ -227,6 +231,7 @@ i3GEO.eventos = {
 	Executa as funções armazenadas em MOUSECLIQUE.
 	*/
 	mousecliqueMapa: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.mousecliqueMapa()");}
 		i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUE);
 	},
 	/*
@@ -397,6 +402,7 @@ i3GEO.eventos = {
 	docMapa {DOM node} - objeto que será alvo da ativação dos cliques
 	*/
 	ativa: function(docMapa){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.ativa()");}
 		docMapa.onmouseover = function(){
 			objposicaocursor.dentroDomapa = true;
 			this.onmousemove=function(exy){
@@ -468,6 +474,7 @@ i3GEO.eventos = {
 	ixg,ixm,ixs,iyg,iym,iys
 	*/
 	cliqueCapturaPt: function(ixg,ixm,ixs,iyg,iym,iys){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.eventos.cliqueCapturaPt()");}
 		if(arguments.length === 0){
 			var ixg = "ixg",
 				ixm = "ixm",

@@ -86,6 +86,7 @@ i3GEO.navega = {
 	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomin: function(locaplic,sid){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomin()");}
 		//YAHOO.log("zoomin", "i3geo");
 		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
@@ -107,6 +108,7 @@ i3GEO.navega = {
 	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomout: function(locaplic,sid){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomout()");}
 		//YAHOO.log("zoomout", "i3geo");
 		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
@@ -132,6 +134,7 @@ i3GEO.navega = {
 	y {Numeric} - coordenada em décimos de grau da latitude
 	*/
 	zoomponto: function(locaplic,sid,x,y){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomponto()");}
 		//YAHOO.log("zoomponto", "i3geo");
 		if(locaplic !== ""){i3GEO.configura.locaplic = locaplic;}
 		if(sid !== ""){i3GEO.configura.sid = sid;}
@@ -158,6 +161,7 @@ i3GEO.navega = {
 	y {Numeric} - coordenada y da imagem
 	*/
 	zoompontoIMG: function(locaplic,sid,x,y){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoompontoIMG()");}
 		if(locaplic !== ""){i3GEO.configura.locaplic = locaplic;}
 		if(sid !== ""){i3GEO.configura.sid = sid;}
 		i3GEO.janela.abreAguarde('i3GEO.atualiza',$trad('o1'));
@@ -188,6 +192,7 @@ i3GEO.navega = {
 	tipoimagem {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
 	*/
 	xy2xy: function(locaplic,sid,xi,yi,xf,yf,ext,tipoimagem){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.xy2xy()");}
 		var disty,distx,ex,novoxi,novoxf,novoyf,nex;
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
@@ -222,6 +227,7 @@ i3GEO.navega = {
 	funcao {Function} - função que será executada ao concluir a chamada AJAX. Essa função receberá o objeto JSON obtido.
 	*/	
 	localizaIP: function(locaplic,sid,funcao){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.localizaIP()");}
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
 		if(sid !== "")
@@ -241,6 +247,7 @@ i3GEO.navega = {
 	sid {String} - (opcional) código da seção aberta no servidor pelo i3geo
 	*/
 	zoomIP: function(locaplic,sid){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomIP()");}
 		try
 		{
 			if(arguments.length > 0){
@@ -274,6 +281,7 @@ i3GEO.navega = {
 	ext {String} - Extensão geográfica no formato xmin ymin xmax ymax
 	*/
 	zoomExt: function(locaplic,sid,tipoimagem,ext){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomExt()");}
 		//YAHOO.log("zoomExt", "i3geo");
 		if(locaplic !== "")
 		{i3GEO.configura.locaplic = locaplic;}
@@ -304,6 +312,7 @@ i3GEO.navega = {
 	escala {Numeric} - denominador da escala
 	*/	
 	aplicaEscala: function(locaplic,sid,escala){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.aplicaEscala()");}
 		//YAHOO.log("aplicaescala", "i3geo");
 		if(i3GEO.Interface.ATUAL === "padrao"){
 			if(locaplic !== "")
@@ -344,6 +353,7 @@ i3GEO.navega = {
 	escala {Numeric} - escala do mapa
 	*/
 	panFixo: function(locaplic,sid,direcao,w,h,escala){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.panFixo()");}
 		//YAHOO.log("panfixo", "i3geo");
 		var x,y,f;
 		if(locaplic !== "")
@@ -442,6 +452,7 @@ i3GEO.navega = {
 	i3GEO.eventos.MOUSEPARADO
 	*/
 	mostraRosaDosVentos: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.mostraRosaDosVentos()");}
 		var novoel,setas,i;
 		try{
 			if(i3GEO.configura.mostraRosaDosVentos === "nao")
@@ -532,6 +543,7 @@ i3GEO.navega = {
 		id {String} - id do elemento onde o contador de tempo será mostrado no mapa. Por default, utiliza "tempoRedesenho".
 		*/
 		ativa: function(id){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.autoRedesenho.ativa()");}
 			if(arguments.length === 0)
 			{id = "tempoRedesenho";}
 			i3GEO.navega.autoRedesenho.ID = id;
@@ -550,6 +562,7 @@ i3GEO.navega = {
 		Desativa o auto-redesenho do mapa
 		*/
 		desativa:function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.autoRedesenho.desativa()");}
 			i3GEO.navega.autoRedesenho.INTERVALO = 0;
 			clearTimeout(i3GEO.navega.tempoRedesenho);
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
@@ -564,6 +577,7 @@ i3GEO.navega = {
 		Redesenha o mapa quando o contador de tempo chegar a zero
 		*/
 		redesenha: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.autoRedesenho.redesenha()");}
 			clearTimeout(i3GEO.navega.tempoRedesenho);
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
 			i3GEO.contadorAtualiza++;
@@ -593,6 +607,7 @@ i3GEO.navega = {
 		Marca o início do desenho do box, capturando a posição do mouse
 		*/
 		inicia: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomBox.inicia()");}
 			if(i3GEO.navega.timerNavega !== null)
 			{return;}
 			if(g_tipoacao !== 'zoomli')
@@ -621,6 +636,7 @@ i3GEO.navega = {
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomBox.criaBox()");}
 			if(i3GEO.navega.timerNavega !== null){return;}
 			if(!$i("i3geoboxZoom")){
 				var novoel,temp;
@@ -709,6 +725,7 @@ i3GEO.navega = {
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
 		termina: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomBox.termina()");}
 			var valor,v,x1,y1,x2,y2,limpa,f;
 			if(g_tipoacao !== 'zoomli'){
 				i3GEO.eventos.MOUSEDOWN.remove("i3GEO.navega.zoomBox.inicia()");
@@ -884,6 +901,7 @@ i3GEO.navega = {
 		da lente
 		*/
 		inicia: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.lente.inicia()");}
 			//insere lente de aumento
 			var novoel,novoimg,temp;
 			if (!$i("lente")){
@@ -917,6 +935,7 @@ i3GEO.navega = {
 		Atualiza a imagem da lente aberta
 		*/
 		atualiza: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.lente.atualiza()");}
 			var temp = function(retorno){
 				try{
 					var pos,volta,nimg,olente,oboxlente,olenteimg;
@@ -961,6 +980,7 @@ i3GEO.navega = {
 		Desativa alente aberta
 		*/
 		desativa: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.lente.desativa()");}
 			$i("lente").style.display = "none";
 			$i("boxlente").style.display = "none";
 			$i('boxlente').style.borderWidth = 0;
@@ -1033,6 +1053,7 @@ i3GEO.navega = {
 		tema {String} - código do tema
 		*/
 		inicia: function(tema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.destacaTema.inicia()");}
 			var novoel,novoeli,janela;
 			if (!$i("img_d")){
 				novoel = document.createElement("div");
@@ -1070,6 +1091,7 @@ i3GEO.navega = {
 		É definido para o evento de navegação do mapa
 		*/
 		atualiza: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.destacaTema.atualiza()");}
 			if(i3GEO.navega.destacaTema.ESTAATIVO === "nao")
 			{return;}
 			var temp = function(retorno){
@@ -1099,6 +1121,7 @@ i3GEO.navega = {
 		Desativa o destaque
 		*/
 		desativa: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.destacaTema.desativa()");}
 			i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.navega.destacaTema.atualiza()");
 			i3GEO.eventos.MOUSEMOVE.push("i3GEO.navega.destacaTema.movimenta()");
 			i3GEO.navega.destacaTema.ESTAATIVO = "nao";
@@ -1131,6 +1154,7 @@ i3GEO.navega = {
 		{string} - código html
 		*/
 		cria: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.barraDeZoom.cria()");}
 			var temp = "",estilo;
 			if (navn)
 			{temp += '<div style="text-align:center;position:relative;left:9px" >';}
@@ -1152,6 +1176,7 @@ i3GEO.navega = {
 		Ativa os botões da barra de zoom
 		*/
 		ativa: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.barraDeZoom.ativa()");}
 			$i("vertMaisZoom").onmouseover = function(){	
 				i3GEO.ajuda.mostraJanela('Amplia o mapa mantendo o centro atual.');
 			};

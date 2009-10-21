@@ -44,9 +44,9 @@ $abre = fopen("../pacotes/richdraw/prototype_compacto.js", "wt");
 $escreve = fwrite ($abre,$s);
 $fecha = fclose ($abre);
 $jsfiles = array(
-"../pacotes/richdraw/richdraw.js",
-"../pacotes/richdraw/svgrenderer.js",
-"../pacotes/richdraw/vmlrenderer.js"
+"../pacotes/richdraw/richdraw_compacto.js",
+"../pacotes/richdraw/svgrenderer_compacto.js",
+"../pacotes/richdraw/vmlrenderer_compacto.js"
 );
 $buffer = "";
 salvatudojs($jsfiles,$buffer,"../pacotes/richdraw/richdraw_tudo_compacto.js","js");
@@ -82,16 +82,21 @@ packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal"
 packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui270/build/container/container.js","../pacotes/yui270/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui270/build/container/container_core.js","../pacotes/yui270/build/container/container_core_compacto.js","Normal");
+packer("../pacotes/yui270/build/utilities/utilities.js","../pacotes/yui270/build/utilities/utilities_compacto.js","Normal");
+packer("../pacotes/yui270/build/treeview/treeview.js","../pacotes/yui270/build/treeview/treeview_compacto.js","Normal");
+packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
+packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
+packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
 
 //
 //gera um único js para a inicialização do I3Geo
 //
 $jsfiles = array(
-"../pacotes/cpaint/cpaint2.inc.js",
+"../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui270/build/yahoo/yahoo-min.js",
 "../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js",
 "../pacotes/yui270/build/dom/dom-min.js",
-"../pacotes/yui270/build/utilities/utilities.js",
+"../pacotes/yui270/build/utilities/utilities_compacto.js",
 "../pacotes/yui270/build/container/container_core_compacto.js",
 "../pacotes/yui270/build/menu/menu-min.js",
 "../pacotes/yui270/build/logger/logger-min.js",
@@ -101,10 +106,10 @@ $jsfiles = array(
 "../pacotes/yui270/build/container/container_compacto.js",
 "../pacotes/yui270/build/element/element-min.js",
 "../pacotes/yui270/build/tabview/tabview-min.js",
-"../pacotes/yui270/build/treeview/treeview.js",
+"../pacotes/yui270/build/treeview/treeview_compacto.js",
 "../pacotes/yui270/build/button/button-min.js",
-"../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
-"../pacotes/balloon-tooltips/htdocs/js/balloon.js",
+"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
+"../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
 "compactados/classe_i3geo_compacto.js",
 "compactados/classe_util_compacto.js",
 "compactados/dicionario_compacto.js",
@@ -129,7 +134,7 @@ $jsfiles = array(
 "compactados/classe_arvoredetemas_compacto.js",
 "compactados/classe_barradebotoes_compacto.js",
 "../pacotes/richdraw/richdraw_tudo_compacto.js",
-"classe_gadgets.js"
+"compactados/classe_gadgets_compacto.js"
 );
 
 $buffer .= "\$i = function(id){return document.getElementById(id);};\n";
@@ -256,6 +261,7 @@ function packer($src,$out,$tipo="None")
 	//$out = 'i3geo_tudo_compacto.js';
 	require_once '../pacotes/packer/class.JavaScriptPacker.php';
 	$script = file_get_contents($src);
+	$script = str_replace("if(typeof(console)","//if(typeof(console)",$script);
 	$t1 = microtime(true);
 	$packer = new JavaScriptPacker($script, 0, true, false);
 	$packed = $packer->pack();
@@ -273,7 +279,14 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 		echo $f;
 		$abre = fopen($f, "r");
 		while (!feof($abre))
-		{$buffer .= fgets($abre);}
+		{
+			$linha = fgets($abre);
+			$buffer .= $linha;
+			//if(stristr($linha, '(console)') === FALSE)
+			//{$buffer .= $linha;}
+			//else
+			//echo "<br>".$linha;
+		}
 		fclose($abre);
 		$buffer .= "\n";
 	}
@@ -293,6 +306,7 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	$buffer .= "\n";
 	$buffer .= "<?php if(extension_loaded('zlib')){ob_end_flush();}?>";
 	$abre = fopen($final.".php", "wt");
+	//$buffer = str_replace("if(typeof(console)","//if(typeof(console)",$buffer);
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
 	chmod($final.".php",0777);	

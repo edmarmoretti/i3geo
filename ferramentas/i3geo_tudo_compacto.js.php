@@ -127,6 +127,8 @@ function ativaGuias(){ for(g=0;g<12;g++){ if($i("guia"+g)) var gpai=$i("guia"+g)
  if($i(guia+"obj")){ $i(guia+"obj").style.display="block";}}
 function protocolo(){ var u=window.location.href; var u=u.split(":"); return(u[0]);}
 
+/*jslint plusplus:false,white:false,undef: false, rhino: false, onevar: false, evil: false */
+
 /**
 * CPAINT - Cross-Platform Asynchronous INterface Toolkit
 *
@@ -203,7 +205,7 @@ function cpaint() {
     } else if (typeof arguments[0] == 'number') {
       config['debugging'] = Math.round(arguments[0]);
     }
-  }
+  };
 
   /**
   * defines the URL of the proxy script.
@@ -218,7 +220,7 @@ function cpaint() {
 
       config['proxy_url'] = arguments[0];
     }
-  }
+  };
 
   /**
   * sets the transfer_mode (GET|POST).
@@ -234,7 +236,7 @@ function cpaint() {
 
       config['transfer_mode'] = arguments[0].toUpperCase();
     }
-  }
+  };
 
   /**
   * sets the flag whether or not to use asynchronous calls.
@@ -248,7 +250,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['async'] = arguments[0];
     }
-  }
+  };
 
   /**
   * defines the response type.
@@ -274,7 +276,7 @@ function cpaint() {
 
       config['response_type'] = arguments[0].toUpperCase();
     }
-  }
+  };
 
   /**
   * sets the flag whether or not to use a persistent connection.
@@ -288,7 +290,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['persistent_connection'] = arguments[0];
     }
-  }
+  };
   
   
   /**
@@ -302,7 +304,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['use_cpaint_api'] = arguments[0];
     }
-  }
+  };
   
   /**
   * tests whether one of the necessary implementations
@@ -359,7 +361,7 @@ function cpaint() {
           
         case 4:
           // object is ready for a new request, no need to do anything
-          use_stack = 0
+          use_stack = 0;
           debug('re-using the persistent connection', 2);
           break;
           
@@ -397,7 +399,7 @@ function cpaint() {
       stack_count++;
       debug('stack size: ' + __cpaint_stack.length, 2);
     }
-  }
+  };
 
   /**
   * debug method
@@ -417,7 +419,7 @@ function cpaint() {
     if (config['debugging'] >= debug_level) {
       alert(prefix + message);
     }
-  }
+  };
 }
 
 /**
@@ -511,7 +513,7 @@ function cpaint_call() {
     if (typeof arguments[0] == 'function') {
       client_callback = arguments[0];
     }
-  }
+  };
 
   /**
   * returns the ready state of the internal XMLHttpObject
@@ -529,7 +531,7 @@ function cpaint_call() {
     }
     
     return return_value;
-  }
+  };
   
   /**
   * internal method for remote calls to the local server without use of the proxy script.
@@ -640,7 +642,7 @@ function cpaint_call() {
       // manual callback handling for synchronized calls
       callback();
     }
-  }
+  };
     
   /**
   * internal method for calls to remote servers through the proxy script.
@@ -744,11 +746,11 @@ function cpaint_call() {
       // manual callback handling for synchronized calls
       callback();
     }
-  }
+  };
 
   this.test_ajax_capability = function() {
     return get_connection_object();
-  }
+  };
   
   
   /**
@@ -811,7 +813,7 @@ function cpaint_call() {
     }
 
     return return_value;
-  }
+  };
 
   /**
   * internal callback function.
@@ -896,7 +898,7 @@ function cpaint_call() {
 		}      
       
     }
-  }
+  };
 
   /**
   * removes an entry from the stack
@@ -912,7 +914,7 @@ function cpaint_call() {
       
       __cpaint_stack[stack_id] = null;
     }
-  }
+  };
 
   /**
   * debug method
@@ -933,7 +935,7 @@ function cpaint_call() {
       alert(prefix + message);
     }
     if (message.search(" error") > 1){client_callback("", message);}
-  }
+  };
 }
 
 /**
@@ -981,7 +983,7 @@ function cpaint_transformer() {
     
       for (i = 0; i < ajax_response.length; i++) {
         var tmp_node = create_object_structure(ajax_response[i]);
-        tmp_node.id  = ajax_response[i].getAttribute('id')
+        tmp_node.id  = ajax_response[i].getAttribute('id');
         return_value[firstNodeName].push(tmp_node);
       }
 
@@ -990,7 +992,7 @@ function cpaint_transformer() {
     }
 
     return return_value;
-  }
+  };
 
   /**
   * performs the necessary conversions for the XML response type
@@ -1001,7 +1003,7 @@ function cpaint_transformer() {
   */
   this.xml_conversion = function(xml_document) {
     return xml_document;
-  }
+  };
   
   /**
   * performs the necessary conversions for the TEXT response type
@@ -1012,7 +1014,7 @@ function cpaint_transformer() {
   */
   this.text_conversion = function(text) {
     return decode(text);
-  }
+  };
   
   /**
   * performs the necessary conversions for the E4X response type
@@ -1025,7 +1027,7 @@ function cpaint_transformer() {
     // remove <?xml ?>tag
     text = text.replace(/^\<\?xml[^>]+\>/, '');
     return new XML(text);
-  }
+  };
   
   /**
   * performs the necessary conversions for the JSON response type
@@ -1036,7 +1038,7 @@ function cpaint_transformer() {
   */
   this.json_conversion = function(text) {
     return JSON.parse(text);
-  }
+  };
   
   /**
   * this method takes a HTML / XML node object and creates a
@@ -1079,7 +1081,7 @@ function cpaint_transformer() {
     }
     
     return return_value;
-  }
+  };
 
   /**
   * converts an encoded text back to viewable characters.
@@ -1132,7 +1134,7 @@ function cpaint_transformer() {
     }
   
     return plaintext;
-  }
+  };
 }
 
 /**
@@ -1176,7 +1178,7 @@ function cpaint_result_object() {
     }
 
     return return_value;
-  }
+  };
   
   /**
   * retrieves the value of an attribute.
@@ -1194,7 +1196,7 @@ function cpaint_result_object() {
     }
     
     return return_value;
-  }
+  };
   
   /**
   * assigns a value to an attribute.
@@ -1208,7 +1210,7 @@ function cpaint_result_object() {
   */
   this.set_attribute = function() {
     __attributes[arguments[0]] = arguments[1];
-  }
+  };
 }
 
 
@@ -1357,19 +1359,19 @@ var JSON = {
         at: at - 1,
         text: text
       };
-    }
+    };
 
     function next() {
       ch = text.charAt(at);
       at += 1;
       return ch;
-    }
+    };
 
     function white() {
       while (ch != '' && ch <= ' ') {
         next();
       }
-    }
+    };
 
     function str() {
       var i, s = '', t, u;
@@ -1416,7 +1418,7 @@ outer:      while (next()) {
         }
       }
       error("Bad string");
-    }
+    };
 
     function arr() {
       var a = [];
@@ -1442,7 +1444,7 @@ outer:      while (next()) {
         }
       }
       error("Bad array");
-    }
+    };
 
     function obj() {
       var k, o = {};
@@ -1474,7 +1476,7 @@ outer:      while (next()) {
         }
       }
       error("Bad object");
-    }
+    };
 
     function assoc() {
       var k, a = [];
@@ -1506,7 +1508,7 @@ outer:      while (next()) {
         }
       }
       error("Bad associative array");
-    }
+    };
 
     function num() {
       var n = '', v;
@@ -1542,7 +1544,7 @@ outer:      while (next()) {
       } else {
         return v;
       }
-    }
+    };
 
     function word() {
       switch (ch) {
@@ -1567,7 +1569,7 @@ outer:      while (next()) {
           break;
       }
       error("Syntax error");
-    }
+    };
 
     function val() {
       white();
@@ -1585,7 +1587,7 @@ outer:      while (next()) {
         default:
           return ch >= '0' && ch <= '9' ? num() : word();
       }
-    }
+    };
 
     return val();
   }
@@ -6698,6 +6700,7 @@ i3GEO.util = {
 	{String}
 	*/
 	escapeURL: function(sUrl){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escapeURL()");}
 		var re;
 		sUrl = escape(sUrl);
 		re = new RegExp("%3F", "g");
@@ -6720,6 +6723,7 @@ i3GEO.util = {
 	valor - (String) Valor do cookie
 	*/
 	insereCookie: function(nome,valor) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereCookie()");}
 		document.cookie = nome+"="+valor+";path=/";
 	},
 	/*
@@ -6736,6 +6740,7 @@ i3GEO.util = {
 	(String) - valor do cookie
 	*/
 	pegaCookie: function(nome){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaCookie()");}
 		var cookies,i,fim;
 		cookies = document.cookie;
 		i = cookies.indexOf(nome);
@@ -6760,6 +6765,7 @@ i3GEO.util = {
 	(Array) - array com as chaves.
 	*/
 	listaChaves: function (obj) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.listaChaves()");}
 		var keys,key;
 		keys = [];
 		for(key in obj){
@@ -6791,6 +6797,7 @@ i3GEO.util = {
 
 	*/
 	criaBotaoAplicar: function (nomeFuncao,titulo,classe,obj) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaBotaoAplicar()");}
 		try
 		{clearTimeout(tempoBotaoAplicar);}
 		catch(e){}
@@ -6856,6 +6863,7 @@ i3GEO.util = {
 	
 	*/
 	arvore: function(titulo,onde,obj){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.arvore()");}
 		//YAHOO.log("arvore", "i3geo");
 		var arvore,root,tempNode,currentIconMode,d,c,i,linha,conteudo;
 		if(!$i(onde)){return;}
@@ -6897,6 +6905,7 @@ i3GEO.util = {
 	{String}
 	*/
 	removeAcentos: function(palavra) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.removeAcentos()");}
 		var re;
 		re = /ã|á|à|â/gi;
 		palavra = palavra.replace(re,"a");
@@ -6922,6 +6931,7 @@ i3GEO.util = {
 	{String} - protocolo
 	*/
 	protocolo: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.protocolo()");}
 		var u = window.location.href;
 		u = u.split(":");
 		return (u[0]);	
@@ -6942,6 +6952,7 @@ i3GEO.util = {
 	pegaPosicaoObjeto: function(obj){
 		if(obj)
 		{
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaPosicaoObjeto("+obj.id+")");}
 			if(!obj.style)
 			{return [0,0];}
 			if(obj.style.position === "absolute")
@@ -6976,6 +6987,7 @@ i3GEO.util = {
 		{Node} - objeto DOM
 	*/
 	pegaElementoPai: function(e){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaElementoPai()");}
 		var targ;
 		if (!e)
 		{e = window.event;}
@@ -7007,6 +7019,7 @@ i3GEO.util = {
 	locaplic {String} - onde está instalado o i3Geo
 	*/
 	mudaCursor: function(cursores,tipo,idobjeto,locaplic){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.mudaCursor("+idobjeto+")");}
 		var o,c;
 		o = document.getElementById(idobjeto);
 		c = eval("cursores."+tipo+".ie");
@@ -7035,6 +7048,7 @@ i3GEO.util = {
 	id {String} - id do elemento que será criado. Por default, será 'boxg'
 	*/
 	criaBox: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaBox("+id+")");}
 		if(arguments.length === 0)
 		{id = "boxg";}
 		if (!$i(id))
@@ -7059,6 +7073,7 @@ i3GEO.util = {
 	Os ids são criado pela função criaBox
 	*/
 	escondeBox: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escondeBox()");}
 		var l,i;
 		l = i3GEO.util.BOXES.length;
 		for (i=0; i<l; i++){
@@ -7084,6 +7099,7 @@ i3GEO.util = {
 	h {String} - (opcional) altura da imagem
 	*/
 	criaPin: function(id,imagem,w,h){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaPin()");}
 		if(arguments.length < 1 || id === ""){
 			id = "boxpin";
 		}
@@ -7121,6 +7137,7 @@ i3GEO.util = {
 	id {string} - id do elemento que será posicionado
 	*/
 	posicionaImagemNoMapa: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.posicionaImagemNoMapa()");}
 		var i,mx,my;
 		i = $i(id);
 		mx = parseInt(i.style.width,10) / 2;
@@ -7137,6 +7154,7 @@ i3GEO.util = {
 	Os ids são criado pela função criaPin
 	*/
 	escondePin: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.escondePin()");}
 		var l,i;
 		l = i3GEO.util.PINS.length;
 		for (i=0; i<l; i++){
@@ -7269,6 +7287,7 @@ i3GEO.util = {
 		container {String} - id do container que receberá os pontos
 		*/
 		cria:function(xi,yi,funcaoOnclick,container){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
 			try{
 				var novoel,i,novoimg,temp;
 				if(i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0)
@@ -7333,6 +7352,7 @@ i3GEO.util = {
 	path {String} - caminho completo do shapefile
 	*/	
 	adicionaSHP: function(path){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.adicionaSHP()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		var temp = path.split(".");
 		i3GEO.contadorAtualiza++;
@@ -7353,6 +7373,7 @@ i3GEO.util = {
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
 	*/
 	abreCor: function(janela,elemento){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
 		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
 		var ins,
 			temp,
@@ -7491,6 +7512,7 @@ i3GEO.util = {
 	intervalo {Integer} - intervalo entre uma imagem e outra
 	*/
 	aparece: function(id,tempo,intervalo){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.aparece("+id+")");}
 		var n,obj,opacidade,fadei,tempoFadei;
 		n = parseInt(tempo / intervalo,10);
 		obj = $i(id);
@@ -7604,6 +7626,7 @@ i3GEO.util = {
 	{String} - extensão geográfica (xmin ymin xmax ymax)
 	*/
 	wkt2ext:function(wkt,tipo){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.wkt2ext()");}
 		var re,x,y,w,xMin,xMax,yMin,yMax,temp;
 		tipo = tipo.toLowerCase();
 		ext = false;
@@ -7654,6 +7677,7 @@ i3GEO.util = {
 	altura
 	*/
 	getScrollerWidth: function() {
+    	if(typeof(console) !== 'undefined'){console.info("i3GEO.util.getScrollerWidth()");}
     	var scr = null,
     		inn = null,
     		wNoScroll = 0,
@@ -7687,6 +7711,7 @@ i3GEO.util = {
     	return (wNoScroll - wScroll);
 	},
 	scriptTag: function(js,ini,id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 		var head,script;
 		if(id === "")
 		{id = "loadscriptI3GEO";}
@@ -7770,6 +7795,7 @@ i3GEO.util = {
 	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados|pontos
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
 		if (arguments.length > 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
 		if (arguments.length === 3)
@@ -7874,6 +7900,7 @@ i3GEO.util = {
 	size {numeric} - tamanho dos elementos input editáveis
 	*/	
 	checkTemas: function(id,funcao,onde,nome,tipoLista,prefixo,size){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.checkTemas()");}
 		if (arguments.length > 2)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando temas...</span>";}
 		if (arguments.length === 3)
@@ -7984,6 +8011,7 @@ i3GEO.util = {
 	nome {String} - valor que será incluido no parametro "name" do elemento "select".	
 	*/	
 	comboItens: function(id,tema,funcao,onde,nome){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboItens()");}
 		if (arguments.length > 3)
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
 		if (arguments.length !== 5)
@@ -8024,6 +8052,7 @@ i3GEO.util = {
 	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
 	*/	
 	comboFontes: function(id,onde){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboFontes()");}
 		$i(onde).innerHTML = "<span style=color:red >buscando fontes...</span>";
 		var monta = function(retorno){
 			var ins = "",temp,i,dados;
@@ -8056,6 +8085,7 @@ i3GEO.util = {
 	{string}
 	*/
 	comboSimNao: function(id,selecionado){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboSimNao()");}
 		var combo = "<select name="+id+" id="+id+" >";
     	combo+= "<option value='' >---</option>";
     	if(selecionado === "sim")
@@ -8087,6 +8117,7 @@ i3GEO.util = {
 	prefixo {string} - Prefixo que será usado no id de cada elemento
 	*/
 	checkItensEditaveis: function(tema,funcao,onde,size,prefixo){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.checkItensEditaveis()");}
 		if (onde !== "")
 		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando itens...</span>";}
 		var monta = function(retorno)
@@ -8133,6 +8164,7 @@ i3GEO.util = {
 	container {String} - id do elemento DIV já existente que receberá as telas.
 	*/
 	proximoAnterior: function(anterior,proxima,texto,idatual,container){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.proximoAnterior()");}
 		var temp = $i(idatual),
 			ndiv = document.createElement("div"),
 			nids,

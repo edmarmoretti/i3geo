@@ -192,6 +192,7 @@ i3GEO.barraDeBotoes = {
 	icone {String} - id do icone que será ativado. Esse id é o mesmo definido em LISTABOTOES
 	*/
 	ativaIcone: function(icone){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaIcone()");}
 		var estilo,temp,ist,cor,ko;
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
 		ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
@@ -283,6 +284,7 @@ i3GEO.barraDeBotoes = {
 	O nome do botao deve estar em LISTABOTOES na propriedade iddiv
 	*/
 	ativaBotoes:function(padrao){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaBotoes()");}
 		var l,b;
 		if(arguments.length === 0)
 		{padrao = i3GEO.barraDeBotoes.BOTAOPADRAO;}
@@ -343,6 +345,7 @@ i3GEO.barraDeBotoes = {
 	y {Numeric} - posição y (pixels) da barra em relação ao mapa
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
 		var tipo,mostra,numerobotoes,i,temp,elementos,nelementos,e,wj,recuo,novoel,alturadisponivel;
 		wj = "36px";
 		recuo = "0px";
@@ -546,6 +549,7 @@ i3GEO.barraDeBotoes = {
 	idbarra - {string} id da barra de botões onde o evento será ativado
 	*/
 	ativaMenuContexto: function(idbarra){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaMenuContexto()");}
 		var oFieldContextMenuItemData,oFieldContextMenu,onFieldMenuRender,id;
 		function executar(a,b,c)
 		{eval(c);}
@@ -585,6 +589,7 @@ i3GEO.barraDeBotoes = {
 	as barras Se não for definido, todas as barras serão reativadas
 	*/
 	reativa: function(indice){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.reativa()");}
 		var n,i;
 		if(arguments.length == 1)
 		{i3GEO.barraDeBotoes.BARRAS[indice].show();}
@@ -604,6 +609,7 @@ i3GEO.barraDeBotoes = {
 	id {String} - id da barra
 	*/
 	recria: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.recria()");}
 		var n,temp,novoel,barraZoom,x,y;
 		n = i3GEO.barraDeBotoes.BARRAS.length;
 		for(i=0;i<n;i++){
@@ -646,6 +652,7 @@ i3GEO.barraDeBotoes = {
 	id {String} - id que identifica a barra. Corresponde ao parâmetro idconteudonovo da função de inicialização das barras
 	*/
 	fecha: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.fecha()");}
 		var n = i3GEO.barraDeBotoes.BARRAS.length;
 		for(i=0;i<n;i++){
 			if(i3GEO.barraDeBotoes.BARRAS[i].id == id){

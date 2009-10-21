@@ -133,6 +133,7 @@ i3GEO.Interface = {
 	Aplica o método redesenha da interface atual
 	*/
 	redesenha: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.redesenha()");}
 		if(i3GEO.Interface.ATUAL === "padrao")
 		{i3GEO.Interface.padrao.redesenha();}
 		if(i3GEO.Interface.ATUAL === "openlayers")
@@ -158,6 +159,7 @@ i3GEO.Interface = {
 	h {Integer} - altura do corpo do mapa em pixels
 	*/
 	cria: function(w,h){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.cria()");}
 		if(i3GEO.Interface.ATUAL === "padrao")
 		{i3GEO.Interface.padrao.cria(w,h);}
 		if(i3GEO.Interface.ATUAL === "openlayers")
@@ -175,6 +177,7 @@ i3GEO.Interface = {
 	Inicia a interface
 	*/
 	inicia: function(w,h){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
 		if(i3GEO.Interface.ATUAL === "padrao")
 		{i3GEO.Interface.padrao.inicia();}
 		if(i3GEO.Interface.ATUAL === "openlayers")
@@ -192,6 +195,7 @@ i3GEO.Interface = {
 	Ativa os botões de ferramentas
 	*/
 	ativaBotoes: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.ativaBotoes()");}
 		if(i3GEO.Interface.ATUAL === "padrao")
 		{i3GEO.Interface.padrao.ativaBotoes();}
 		if(i3GEO.Interface.ATUAL === "openlayers")

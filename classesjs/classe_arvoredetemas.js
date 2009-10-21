@@ -278,6 +278,7 @@ i3GEO.arvoreDeTemas = {
 	Lista os WMS cadastrados preenchendo o nó OGC-WMS
 	*/
 	listaWMS: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaWMS()");}
 		var monta = function(retorno){
 			var node,raiz,nraiz,cor,i,html,tempNode;
 			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idwms","raiz");
@@ -315,6 +316,7 @@ i3GEO.arvoreDeTemas = {
 	*/
 	listaLayersWMS: function(node){
 		//node = no;
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaLayersWMS()");}
 		var monta = function(retorno){
 			var n,cor,i,cabeca,tempNode,ns,j,tempNodeS;
 			n = 0;
@@ -423,6 +425,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {String} nome da função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaMenus: function(g_sid,g_locaplic,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaMenus()");}
 		var retorno = function(retorno) {
 			var c,m,i,k,jj,j;
 			if(i3GEO.arvoreDeTemas.IDSMENUS.length === 0)
@@ -461,6 +464,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaGrupos: function(g_sid,g_locaplic,id_menu,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaGrupos()");}
 		var retorno = function(retorno) {
 			i3GEO.arvoreDeTemas.GRUPOS = retorno.data;
 			if(funcao !== "")
@@ -491,6 +495,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaSubGrupos: function(g_sid,g_locaplic,id_menu,id_grupo,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaSubGrupos()");}
 		var retorno = function(retorno) {
 			i3GEO.arvoreDeTemas.SUBGRUPOS = retorno.data;
 			if(funcao !== "")
@@ -520,6 +525,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaTemas: function(g_sid,g_locaplic,id_menu,id_grupo,id_subgrupo,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaTemas()");}
 		var retorno = function(retorno) {
 			i3GEO.arvoreDeTemas.TEMAS = retorno.data;
 			if(funcao !== "")
@@ -543,6 +549,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaSistemas: function(g_sid,g_locaplic,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaSistemas()");}
 		var retorno = function(retorno) {
 			i3GEO.arvoreDeTemas.SISTEMAS = retorno.data;
 			if(funcao !== "")
@@ -566,6 +573,7 @@ i3GEO.arvoreDeTemas = {
 	funcao - {Function} função que será executada quando a lista for recebida. Se for "", não é chamada.
 	*/
 	listaDrives: function(g_sid,g_locaplic,funcao) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaDrives()");}
 		var retorno = function(retorno) {
 			i3GEO.arvoreDeTemas.DRIVES = retorno.data[0];
 			if(funcao !== "")
@@ -596,6 +604,7 @@ i3GEO.arvoreDeTemas = {
 	objOpcoes - {Object} (opcional) Objeto com as opções necessárias para criação dos ícones com as opções adicionais de adição de temas
 	*/
 	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.cria()");}
 		if(this.ARVORE){return;}
 		if(idhtml !== "")
 		{i3GEO.arvoreDeTemas.IDHTML = idhtml;}
@@ -616,6 +625,7 @@ i3GEO.arvoreDeTemas = {
 	Refaz a árvore atual
 	*/
 	atualiza: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.atualiza()");}
 		this.ARVORE = null;
 		this.cria(i3GEO.arvoreDeTemas.SID,i3GEO.arvoreDeTemas.LOCAPLIC,i3GEO.arvoreDeTemas.IDHTML);
 	},
@@ -627,6 +637,7 @@ i3GEO.arvoreDeTemas = {
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos grupos.
 	*/
 	montaArvore: function() {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaArvore()");}
 		var newVal,currentIconMode,d,tempNode,retorno,nomeSis,root,insp,outrasOpcoes,dados,c,i,j,conteudo;
 		YAHOO.example.treeExample = function(){
 			function changeIconMode(){
@@ -837,6 +848,7 @@ i3GEO.arvoreDeTemas = {
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos sub-grupos.
 	*/
 	montaGrupos: function(node){		
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaGrupos()");}
 		var temp=function(){
 			var grupos,c,raiz,nraiz,mostra,html,i,d;
 			grupos = i3GEO.arvoreDeTemas.GRUPOS.grupos;
@@ -897,6 +909,7 @@ i3GEO.arvoreDeTemas = {
 	A opção de carga dinâmica dos nós filhos é definida para a montagem dos temas.
 	*/
 	montaSubGrupos: function(node){		
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaSubGrupos()");}
 		var temp=function(){
 			var i,c,mostra,d,html,tempNode,nraiz,subgrupos,raiz;
 			subgrupos = i3GEO.arvoreDeTemas.SUBGRUPOS.subgrupo;
@@ -956,7 +969,7 @@ i3GEO.arvoreDeTemas = {
 	Monta a lista de temas de um nó. 
 	*/
 	montaTemas: function(node){		
-		
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaTemas()");}
 		var temp=function(){
 			var i,cor,temas,c,mostra,tempNode;
 			temas = i3GEO.arvoreDeTemas.TEMAS.temas;
@@ -1010,6 +1023,7 @@ i3GEO.arvoreDeTemas = {
 	node {node} - nó onde será criada a lista 
 	*/
 	montaDir: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.montaDir()");}
 		var montaLista = function(retorno)
 		{
 			var ig,d,conteudo,dirs,tempNode,arquivos,nodeSHP;
@@ -1085,6 +1099,7 @@ i3GEO.arvoreDeTemas = {
 	node - {Object} - objeto com o nó que foi clicado
 	*/
 	propTemas: function(node){		
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.propTemas()");}
 		var d,tempNode,html,lkmini,lkmini1,lkgrcode,lkgrcode1,n,ogc;
 		if(node.data.fonte !== "" && node.data.fonte != " "){
 			tempNode = new YAHOO.widget.HTMLNode(
@@ -1167,6 +1182,7 @@ i3GEO.arvoreDeTemas = {
 	{String} - html gerado
 	*/
 	outrasOpcoesHTML: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.outrasOpcoesHTML()");}
 		var ins = "",t = 0;
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.refresh === true){
 			ins += "<td><img class='refresh' onclick='i3GEO.arvoreDeTemas.atualiza()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='Refresh'/><td>";
@@ -1208,6 +1224,7 @@ i3GEO.arvoreDeTemas = {
 	Desmarca todos os checkbox dos temas marcados na árvore.
 	*/
 	desativaCheckbox: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.desativaCheckbox()");}
 		var o,inputs,n,i;
 		o = document.getElementById(i3GEO.arvoreDeTemas.ARVORE.id);
 		inputs = o.getElementsByTagName("input");
@@ -1228,6 +1245,7 @@ i3GEO.arvoreDeTemas = {
 	{Array} - array com os códigos dos temas
 	*/
 	listaTemasAtivos: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.listaTemasAtivos()");}
 		var o,inputs,n,i,lista;
 		o = document.getElementById(i3GEO.arvoreDeTemas.ARVORE.id);
 		inputs = o.getElementsByTagName("input");
@@ -1252,6 +1270,7 @@ i3GEO.arvoreDeTemas = {
 	palavra {String}
 	*/
 	buscaTema: function(palavra){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.buscaTema()");}
 		var busca,root,nodePalavra;
 		resultadoProcurar = function(retorno)
 		{
@@ -1337,6 +1356,7 @@ i3GEO.arvoreDeTemas = {
 	Adiciona ao mapa os temas selecionados na árvore
 	*/
 	adicionaTemas: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
 		var tsl,temp;
 		//
 		//zera o contador de tempo
@@ -1405,6 +1425,7 @@ i3GEO.arvoreDeTemas = {
 	altura {Numeric} - altura do combo em linhas
 	*/
 	comboMenus: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboMenus()");}
 		i3GEO.configura.locaplic = locaplic;
 		var combo = function (retorno){
 			var ob,ins,ig;
@@ -1444,6 +1465,7 @@ i3GEO.arvoreDeTemas = {
 	id_menu {Numeric} - id do menu que será utilizado para obter os dados
 	*/
 	comboGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,largura,altura,id_menu){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboGruposMenu()");}
 		i3GEO.configura.locaplic = locaplic;
 		var combo = function (retorno){
 			var obGrupos,ins,ig;
@@ -1481,6 +1503,7 @@ i3GEO.arvoreDeTemas = {
 	altura {Numeric} - altura do combo em linhas
 	*/
 	comboSubGruposMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,largura,altura){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboSubGruposMenu()");}
 		if(idGrupo !== ""){
 			var combo = function(retorno){
 				var ins,sg,ig;
@@ -1524,6 +1547,7 @@ i3GEO.arvoreDeTemas = {
 	id_menu - id do menu escolhido
 	*/
 	comboTemasMenu: function(locaplic,funcaoOnchange,idDestino,idCombo,idGrupo,idSubGrupo,largura,altura,id_menu){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.comboTemasMenu()");}
 		var combo = function(retorno){
 			var ins,sg,ig;
 			ins = "<select id='"+idCombo+"' size="+altura+" style=width:"+largura+"px onchange='"+funcaoOnchange+"("+idGrupo+","+idSubGrupo+",this.value)' ><option value='' >Escolha um tema:</option>";

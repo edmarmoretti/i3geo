@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
+
 /* 
 This file contains the default configuration options.  
 Default options can be edited in this file or changed after the Balloon object is 
@@ -114,7 +116,7 @@ BalloonConfig = function(balloon) {
   // way to go if you must have AJAX in an environment where 
   // outside users can send text to the browser/balloon
   balloon.escapeHTML         = false;
-}
+};
 
 // simple Box alternative
 BoxConfig = function(box) {
@@ -203,5 +205,5 @@ BoxConfig = function(box) {
   // way to go if you must have AJAX in an environment where 
   // outside users can send text to the browser/box
   box.escapeHTML         = false;
-}
+};
 

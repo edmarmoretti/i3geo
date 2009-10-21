@@ -76,6 +76,7 @@ i3GEO.desenho = {
 	
 	*/
 	criaContainerRichdraw: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.desenho.criaContainerRichdraw()");}
 		pontosdistobj = {
 			xpt: [],
 			ypt: [],

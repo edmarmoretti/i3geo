@@ -113,6 +113,7 @@ i3GEO.idioma = {
 	codigo - {String} Código do idioma.
 	*/
 	define: function(codigo) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.define()");}
 		i3GEO.idioma.ATUAL = codigo;
 		i3GEO.util.insereCookie("i3geolingua",codigo);
 	},
@@ -250,6 +251,7 @@ i3GEO.idioma = {
 	codigo - {String} Código do idioma (p.e. "en")
 	*/
 	trocaIdioma: function(codigo) {
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.trocaIdioma()");}
 		i3GEO.util.insereCookie("i3geolingua",codigo);
 		window.location.reload(true);
 	},
@@ -276,6 +278,7 @@ i3GEO.idioma = {
 	os ids uk,brasil,italiano,espanhol
 	*/
 	mostraSeletor: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.idioma.mostraSeletor()");}
 		//alert(i3GEO.idioma.MOSTRASELETOR)
 		if(!i3GEO.idioma.MOSTRASELETOR){return;}
 		//

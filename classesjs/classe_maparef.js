@@ -144,6 +144,7 @@ i3GEO.maparef = {
 	Inicializa o mapa de referência
 	*/
 	inicia: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.inicia()");}
 		//YAHOO.log("initJanelaRef", "i3geo");
 		var r,pos,novoel,ins,temp,moveX,moveY,escondeRef;
 		if (!$i("i3geo_winRef")){
@@ -243,6 +244,7 @@ i3GEO.maparef = {
 	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
 	*/
 	atualiza: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.atualiza()");}
 		var dinamico,tiporef,temp,re;
 		dinamico = false;
 		if ($i("refDinamico"))
@@ -289,6 +291,7 @@ i3GEO.maparef = {
 	retorno - string no formato "var refimagem='nome da imagem'".
 	*/
 	processaImagem: function(retorno){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.processaImagem()");}
 		var w,tiporef,m,novoel,boxrefdd,box;
 		i3GEO.janela.fechaAguarde("ajaxreferencia1");
 		if ((retorno.data !== "erro") && (retorno.data !== undefined)){
@@ -355,6 +358,7 @@ i3GEO.maparef = {
 	Ocorre quando o usuário clica sobre o mapa de referência, alterando a extensão geográfica do mapa principal
 	*/
 	click: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.click()");}
 		try{
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.contadorAtualiza++;

@@ -252,6 +252,7 @@ i3GEO.arvoreDeCamadas = {
 	funcaoTema {String} - (opcional) Nome da função que será incluida no evento disparado quando o usuário clicar no checkbox de um tema
 	*/
 	cria: function(onde,temas,g_sid,g_locaplic,funcaoTema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.cria()");}
 		//YAHOO.log("Criando a árvore de camadas", "i3geo");
 		if(arguments.length == 5){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
@@ -277,6 +278,7 @@ i3GEO.arvoreDeCamadas = {
 	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS)
 	*/
 	atualiza: function(temas){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualiza()");}
 		if(this.comparaTemas(temas,this.CAMADAS)){return;}
 		var currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
 		if(!document.getElementById(i3GEO.arvoreDeCamadas.IDHTML)){return;}
@@ -391,6 +393,7 @@ i3GEO.arvoreDeCamadas = {
 	Ativa a funcionalidade de arrastar um tema para mudar sua ordem de desenho ou excluir do mapa
 	*/
 	ativaDragDrop: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.ativaDragDrop()");}
 		var Dom,Event,DDM;
 		Dom = YAHOO.util.Dom;
 		Event = YAHOO.util.Event;
@@ -534,6 +537,7 @@ i3GEO.arvoreDeCamadas = {
 	node {YAHOO.widget.HTMLNode} - Nó que foi clicado
 	*/
 	montaOpcoes: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.montaOpcoes()");}
 		//YAHOO.log("Montando as opções da árvore de camadas", "i3geo");
 		var d,conteudo,opcoesNode,idtema,ltema,farol,mfarol,tnome,iconesNode;
 		idtema = node.data.id;
@@ -594,6 +598,7 @@ i3GEO.arvoreDeCamadas = {
 	node {YAHOO.widget.HTMLNode}
 	*/
 	mostraOpcoes: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraOpcoes()");}
 		//YAHOO.log("Mostrando as opções da árvore de camadas", "i3geo");
 		var idtema,ltema,tnome,d,n;
 		idtema = node.data.idopcoes;
@@ -673,6 +678,7 @@ i3GEO.arvoreDeCamadas = {
 	node - {YAHOO.widget.HTMLNode}
 	*/
 	mostraLegenda: function(node){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.mostraLegenda()");}
 		//YAHOO.log("Mostrando a legenda da árvore de camadas", "i3geo");
 		var idtema,ltema,retorna;
 		idtema = node.data.idlegenda;
@@ -764,6 +770,7 @@ i3GEO.arvoreDeCamadas = {
 	id {String} - ID (name) do tema
 	*/
 	atualizaLegenda: function(idtema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualizaLegenda()");}
 		//YAHOO.log("Atualizando a legenda da árvore de camadas", "i3geo");
 		var node;
 		if(document.getElementById(idtema+"verdiv"))
@@ -852,6 +859,7 @@ i3GEO.arvoreDeCamadas = {
 	*/
 	atualizaFarol: function(mapscale)
 	{
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualizaFarol()");}
 		//YAHOO.log("Atualizando o farol da árvore de camadas", "i3geo");
 		var farol,l,ltema,escala;
 		farol = "maisamarelo.png";
@@ -880,6 +888,7 @@ i3GEO.arvoreDeCamadas = {
 	Refaz o mapa ligando e desligando os temas conforme consta na árvore de camadas
 	*/
 	aplicaTemas: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.aplicaTemas()");}
 		//YAHOO.log("Mudando status ligado/desligado de um tema", "i3geo");
 		var t,temp;
 		t = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
@@ -907,6 +916,7 @@ i3GEO.arvoreDeCamadas = {
 	{Array} - array com os códigos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 	*/
 	listaLigadosDesligados: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligados()");}
 		var nos,ligados,desligados,todos,n,i,no,cs,csn,j,c;
 		nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo","tema");
 		ligados = [];
@@ -951,6 +961,7 @@ i3GEO.arvoreDeCamadas = {
 	{Boolean}
 	*/
 	comparaTemas: function(novo,atual){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.comparaTemas()");}
 		try{
 			var novon = novo.length,i;
 			if(novon != atual.length)
@@ -981,6 +992,7 @@ i3GEO.arvoreDeCamadas = {
 	{JSON}
 	*/
 	pegaTema: function(idtema){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.pegaTema()");}
 		var c,i,v = "";
 		c = i3GEO.arvoreDeCamadas.CAMADAS.length;
 		for (i=0; i<c; i++){
@@ -1009,6 +1021,7 @@ i3GEO.arvoreDeCamadas = {
 	{Array}
 	*/
 	filtraCamadas: function(propriedade,valor,operador,camadas){
+    	if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.filtraCamadas()");}
     	var resultado = [],
     		i = 0,
     		temp,

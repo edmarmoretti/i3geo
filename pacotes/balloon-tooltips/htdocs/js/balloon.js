@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: false, onevar: false, evil: false */
+
 /*
  balloon.js -- a DHTML library for balloon tooltips
 
@@ -71,7 +73,7 @@ var Balloon = function () {
   }
 
   return this;
-}
+};
 
 //////////////////////////////////////////////////////////////////////////
 // This is the function that is called on mouseover.  It has a built-in //
@@ -134,8 +136,8 @@ Balloon.prototype.showTooltip = function(evt,caption,sticky,width) {
  	var override = balloonIsSticky && !balloonIsVisible;
     Balloon.prototype.hideTooltip(override);
     i3GEO.janela.excluiTips();
-  }
-  if (!mouseOver) el.onmouseup  = function() {return false};
+  };
+  if (!mouseOver) el.onmouseup  = function() {return false;};
   el.onmouseout = closeBalloon;
 
   balloonIsSticky = sticky;
@@ -225,7 +227,7 @@ this.setActiveCoordinates(evt);
   // Make delay time short for onmousedown
   //var delay = mouseOver ? this.delayTime : 1;
   //this.timeoutTooltip = window.setTimeout(this.doShowTooltip,1);
-}
+};
 
 
 // Preload the balloon background images
@@ -239,7 +241,7 @@ Balloon.prototype.preload = function(src) {
   this.setStyle(i,'top',-8000);
   document.body.appendChild(i);
   document.body.removeChild(i);
-}
+};
 
 
 /////////////////////////////////////////////////////////////////////
@@ -309,7 +311,7 @@ Balloon.prototype.doShowTooltip = function() {
   self.showHide();
 
   self.fade(0,95,self.fadeIn);
-}
+};
 
 Balloon.prototype.addCloseButton = function () {
   var self         = currentBalloonClass;
@@ -337,7 +339,7 @@ Balloon.prototype.addCloseButton = function () {
   self.setStyle(closeButton,'display','inline');
   self.setStyle(closeButton,'cursor','pointer');
   self.setStyle(closeButton,'z-index',999999999);
-}
+};
 
 // use a fresh object every time to make sure style 
 // is not polluted
@@ -374,7 +376,7 @@ Balloon.prototype.makeBalloon = function() {
       self.timeoutAutoClose = window.setTimeout(this.hideTooltip,self.displayTime);
   }
   return balloon;
-}
+};
 
 
 Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft) {
@@ -507,7 +509,7 @@ Balloon.prototype.setBalloonStyle = function(vOrient,hOrient,pageWidth,pageLeft)
     self.setStyle(balloon,'top',activeTop - self.yOffset);
   }
   self.setOpacity(1);
-}
+};;
 
 // Fade method adapted from an example on 
 // http://brainerror.net/scripts/javascript/blendtrans/
@@ -526,7 +528,7 @@ Balloon.prototype.fade = function(opacStart, opacEnd, millisec) {
       setTimeout("Balloon.prototype.setStyle('balloon','display','none')",millisec);
     }
     else {
-      self.setStyle('balloon','display','none')
+      self.setStyle('balloon','display','none');
     }
   }
   else if(opacStart < opacEnd && self.fadeOK) {
@@ -535,7 +537,7 @@ Balloon.prototype.fade = function(opacStart, opacEnd, millisec) {
       timer++;
     }
   }
-}
+};
 
 Balloon.prototype.setOpacity = function(opc) {
   var self = currentBalloonClass;
@@ -562,7 +564,7 @@ Balloon.prototype.setOpacity = function(opc) {
   // old Safari
   self.setStyle(b,'KhtmlOpacity',o);
 
-}
+};
 
 Balloon.prototype.hideTooltip = function(override) {
   // some browsers pass the event object == we don't want it
@@ -596,7 +598,7 @@ Balloon.prototype.hideTooltip = function(override) {
     else self.setStyle(self.activeBalloon,'display','none');
   }
   Balloon.prototype.showHide(1);
-}
+};
 
 // this function is meant to be called externally to clear
 // any open balloons
@@ -608,7 +610,7 @@ hideAllTooltips = function() {
   balloonIsVisible    = false;
   balloonIsSticky     = false;
   currentBalloonClass = null;
-}
+};
 
 
 // Track the active mouseover coordinates
@@ -642,7 +644,7 @@ Balloon.prototype.setActiveCoordinates = function(event) {
   self.activeBottom = self.activeTop  + 20;
 
   return true;
-}
+};
 
 ////
 // event XY and getEventTarget Functions based on examples by Peter-Paul
@@ -661,7 +663,7 @@ Balloon.prototype.eventXY = function(event) {
   }
   //XY[0] = XY[0] + 10;
   return XY;
-}
+};
 
 Balloon.prototype.getEventTarget = function(event) {
   var targ;
@@ -670,7 +672,7 @@ Balloon.prototype.getEventTarget = function(event) {
   else if (e.srcElement) targ = e.srcElement;
   if (targ.nodeType == 3) targ = targ.parentNode; // Safari
   return targ;
-}
+};
 ////
 
 
@@ -688,7 +690,7 @@ Balloon.prototype.setStyle = function(el,att,val) {
   else {
     YAHOO.util.Dom.setStyle(el,att,val);
   }
-}
+};
 
 // Uses YAHOO's region class for element coordinates
 Balloon.prototype.getLoc = function(el,request) {
@@ -703,7 +705,7 @@ Balloon.prototype.getLoc = function(el,request) {
     case ('height') : return (parseInt(region.bottom) - parseInt(region.top));
     case ('region') : return region; 
  }
-}
+};
 
 // We don't know if numbers are overridden with strings
 // so play it safe
@@ -719,7 +721,7 @@ Balloon.prototype.parseIntAll = function() {
   this.minWidth    = parseInt(this.minWidth);
   this.fadeIn      = parseInt(this.fadeIn);
   this.fadeOut     = parseInt(this.fadeOut);  
-}
+};
 
 
 // show/hide select elements in older IE
@@ -764,7 +766,7 @@ Balloon.prototype.showHide = function(visible) {
       }
     }
   }
-}
+};
 
 // Try to find overlap
 Balloon.prototype.isOverlap = function(el1,el2) {
@@ -778,7 +780,7 @@ Balloon.prototype.isOverlap = function(el1,el2) {
     intersect = new Array((intersect.right - intersect.left),(intersect.bottom - intersect.top));
   }
   return intersect;
-}
+};
 
 // Coordinate-based test for the same element
 Balloon.prototype.isSameElement = function(el1,el2) {
@@ -787,7 +789,7 @@ Balloon.prototype.isSameElement = function(el1,el2) {
   var R2 = this.getLoc(el2,'region');
   var same = R1.contains(R2) && R2.contains(R1);
   return same ? true : false;
-}
+};
 
 
 ///////////////////////////////////////////////////////
@@ -853,7 +855,7 @@ Balloon.prototype.getAndCheckContents = function(caption) {
   this.loadedFromElement = false;
   
   return this.currentHelpText;;
-}
+};
 
 
 ///////////////////////////////////////////////////////
@@ -899,22 +901,22 @@ Balloon.prototype.getContents = function(section) {
   else {
     return section;
   }
-}
+};
 
 
 // test for internet explorer
 Balloon.prototype.isIE = function() {
   return document.all && !window.opera;
-}
+};
 
 // test for internet explorer (but not IE7)
 Balloon.prototype.isOldIE = function() {
   if (navigator.appVersion.indexOf("MSIE") == -1) return false;
   var temp=navigator.appVersion.split("MSIE");
   return parseFloat(temp[1]) < 7;
-}
+};
 
 // test for Konqueror
 Balloon.prototype.isKonqueror = function() {
   return navigator.userAgent.indexOf( 'Konqueror' ) != -1;
-}
+};

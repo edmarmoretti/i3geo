@@ -251,6 +251,7 @@ i3GEO.calculo = {
 	{Numeric}
 	*/
 	area: function(pontos,pixel){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.area()");}
 		var $polygon_area,$i,$array_length;
 		try{
 			if(pontos.xpt.length > 2){
@@ -295,6 +296,7 @@ i3GEO.calculo = {
 	{Numeric}
 	*/	
 	distancia: function(lon1,lat1,lon2,lat2){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.distancia()");}
 		var dLat,dLon,a,c,d;
 		dLat = ((lat2-lat1))* Math.PI / 180;
 		dLon = ((lon2-lon1)) * Math.PI / 180; 
@@ -330,6 +332,7 @@ i3GEO.calculo = {
 	{Numeric}
 	*/	
 	direcao: function(lon1,lat1,lon2,lat2){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.direcao()");}
 		var dLon,y,x,r;
 		lat1 = lat1 * (Math.PI / 180);
 		lat2 = lat2 * (Math.PI / 180);
@@ -369,6 +372,7 @@ i3GEO.calculo = {
 	{Array}
 	*/
 	destinoDD: function(lon,lat,d,direcao){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.destinoDD()");}
 		var R,lat1,lon1,brng,lat2,lon2;
 		R = 6371; // earth's mean radius in km
   		lat1 = lat * (Math.PI / 180);
@@ -399,6 +403,7 @@ i3GEO.calculo = {
 	{Array} - extensão, xmin, ymin, xmax, ymax
 	*/
 	rect2ext: function(idrect,mapext,pixel){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.rect2ext()");}
 		var bx,bxs,xfig,yfig,nx,ny,pix,piy,pos,amext,dx,dy,x1,y1,x2,y2;
 		eval ('pix = parseInt(document.getElementById("'+idrect+'").style.' + g_tipoleft + ")");
 		eval ('piy = parseInt(document.getElementById("'+idrect+'").style.' + g_tipotop + ")");
@@ -452,6 +457,7 @@ i3GEO.calculo = {
 	{Array} - width,heigth,top,left
 	*/
 	ext2rect: function(idrect,mapext,boxext,pixel,documento){
+   		if(typeof(console) !== 'undefined'){console.info("i3GEO.calculo.ext2rect()");}
    		var rectbox,rectmap,xyMin,xyMax,w,h,tl,pos,t,l,d,box;
    		rectbox = boxext.split(" ");
    		rectmap = mapext.split(" ");

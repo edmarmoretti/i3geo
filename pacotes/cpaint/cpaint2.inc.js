@@ -1,3 +1,5 @@
+/*jslint plusplus:false,white:false,undef: false, rhino: false, onevar: false, evil: false */
+
 /**
 * CPAINT - Cross-Platform Asynchronous INterface Toolkit
 *
@@ -74,7 +76,7 @@ function cpaint() {
     } else if (typeof arguments[0] == 'number') {
       config['debugging'] = Math.round(arguments[0]);
     }
-  }
+  };
 
   /**
   * defines the URL of the proxy script.
@@ -89,7 +91,7 @@ function cpaint() {
 
       config['proxy_url'] = arguments[0];
     }
-  }
+  };
 
   /**
   * sets the transfer_mode (GET|POST).
@@ -105,7 +107,7 @@ function cpaint() {
 
       config['transfer_mode'] = arguments[0].toUpperCase();
     }
-  }
+  };
 
   /**
   * sets the flag whether or not to use asynchronous calls.
@@ -119,7 +121,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['async'] = arguments[0];
     }
-  }
+  };
 
   /**
   * defines the response type.
@@ -145,7 +147,7 @@ function cpaint() {
 
       config['response_type'] = arguments[0].toUpperCase();
     }
-  }
+  };
 
   /**
   * sets the flag whether or not to use a persistent connection.
@@ -159,7 +161,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['persistent_connection'] = arguments[0];
     }
-  }
+  };
   
   
   /**
@@ -173,7 +175,7 @@ function cpaint() {
     if (typeof arguments[0] == 'boolean') {
       config['use_cpaint_api'] = arguments[0];
     }
-  }
+  };
   
   /**
   * tests whether one of the necessary implementations
@@ -230,7 +232,7 @@ function cpaint() {
           
         case 4:
           // object is ready for a new request, no need to do anything
-          use_stack = 0
+          use_stack = 0;
           debug('re-using the persistent connection', 2);
           break;
           
@@ -268,7 +270,7 @@ function cpaint() {
       stack_count++;
       debug('stack size: ' + __cpaint_stack.length, 2);
     }
-  }
+  };
 
   /**
   * debug method
@@ -288,7 +290,7 @@ function cpaint() {
     if (config['debugging'] >= debug_level) {
       alert(prefix + message);
     }
-  }
+  };
 }
 
 /**
@@ -382,7 +384,7 @@ function cpaint_call() {
     if (typeof arguments[0] == 'function') {
       client_callback = arguments[0];
     }
-  }
+  };
 
   /**
   * returns the ready state of the internal XMLHttpObject
@@ -400,7 +402,7 @@ function cpaint_call() {
     }
     
     return return_value;
-  }
+  };
   
   /**
   * internal method for remote calls to the local server without use of the proxy script.
@@ -511,7 +513,7 @@ function cpaint_call() {
       // manual callback handling for synchronized calls
       callback();
     }
-  }
+  };
     
   /**
   * internal method for calls to remote servers through the proxy script.
@@ -615,11 +617,11 @@ function cpaint_call() {
       // manual callback handling for synchronized calls
       callback();
     }
-  }
+  };
 
   this.test_ajax_capability = function() {
     return get_connection_object();
-  }
+  };
   
   
   /**
@@ -682,7 +684,7 @@ function cpaint_call() {
     }
 
     return return_value;
-  }
+  };
 
   /**
   * internal callback function.
@@ -767,7 +769,7 @@ function cpaint_call() {
 		}      
       
     }
-  }
+  };
 
   /**
   * removes an entry from the stack
@@ -783,7 +785,7 @@ function cpaint_call() {
       
       __cpaint_stack[stack_id] = null;
     }
-  }
+  };
 
   /**
   * debug method
@@ -804,7 +806,7 @@ function cpaint_call() {
       alert(prefix + message);
     }
     if (message.search(" error") > 1){client_callback("", message);}
-  }
+  };
 }
 
 /**
@@ -852,7 +854,7 @@ function cpaint_transformer() {
     
       for (i = 0; i < ajax_response.length; i++) {
         var tmp_node = create_object_structure(ajax_response[i]);
-        tmp_node.id  = ajax_response[i].getAttribute('id')
+        tmp_node.id  = ajax_response[i].getAttribute('id');
         return_value[firstNodeName].push(tmp_node);
       }
 
@@ -861,7 +863,7 @@ function cpaint_transformer() {
     }
 
     return return_value;
-  }
+  };
 
   /**
   * performs the necessary conversions for the XML response type
@@ -872,7 +874,7 @@ function cpaint_transformer() {
   */
   this.xml_conversion = function(xml_document) {
     return xml_document;
-  }
+  };
   
   /**
   * performs the necessary conversions for the TEXT response type
@@ -883,7 +885,7 @@ function cpaint_transformer() {
   */
   this.text_conversion = function(text) {
     return decode(text);
-  }
+  };
   
   /**
   * performs the necessary conversions for the E4X response type
@@ -896,7 +898,7 @@ function cpaint_transformer() {
     // remove <?xml ?>tag
     text = text.replace(/^\<\?xml[^>]+\>/, '');
     return new XML(text);
-  }
+  };
   
   /**
   * performs the necessary conversions for the JSON response type
@@ -907,7 +909,7 @@ function cpaint_transformer() {
   */
   this.json_conversion = function(text) {
     return JSON.parse(text);
-  }
+  };
   
   /**
   * this method takes a HTML / XML node object and creates a
@@ -950,7 +952,7 @@ function cpaint_transformer() {
     }
     
     return return_value;
-  }
+  };
 
   /**
   * converts an encoded text back to viewable characters.
@@ -1003,7 +1005,7 @@ function cpaint_transformer() {
     }
   
     return plaintext;
-  }
+  };
 }
 
 /**
@@ -1047,7 +1049,7 @@ function cpaint_result_object() {
     }
 
     return return_value;
-  }
+  };
   
   /**
   * retrieves the value of an attribute.
@@ -1065,7 +1067,7 @@ function cpaint_result_object() {
     }
     
     return return_value;
-  }
+  };
   
   /**
   * assigns a value to an attribute.
@@ -1079,7 +1081,7 @@ function cpaint_result_object() {
   */
   this.set_attribute = function() {
     __attributes[arguments[0]] = arguments[1];
-  }
+  };
 }
 
 
@@ -1228,19 +1230,19 @@ var JSON = {
         at: at - 1,
         text: text
       };
-    }
+    };
 
     function next() {
       ch = text.charAt(at);
       at += 1;
       return ch;
-    }
+    };
 
     function white() {
       while (ch != '' && ch <= ' ') {
         next();
       }
-    }
+    };
 
     function str() {
       var i, s = '', t, u;
@@ -1287,7 +1289,7 @@ outer:      while (next()) {
         }
       }
       error("Bad string");
-    }
+    };
 
     function arr() {
       var a = [];
@@ -1313,7 +1315,7 @@ outer:      while (next()) {
         }
       }
       error("Bad array");
-    }
+    };
 
     function obj() {
       var k, o = {};
@@ -1345,7 +1347,7 @@ outer:      while (next()) {
         }
       }
       error("Bad object");
-    }
+    };
 
     function assoc() {
       var k, a = [];
@@ -1377,7 +1379,7 @@ outer:      while (next()) {
         }
       }
       error("Bad associative array");
-    }
+    };
 
     function num() {
       var n = '', v;
@@ -1413,7 +1415,7 @@ outer:      while (next()) {
       } else {
         return v;
       }
-    }
+    };
 
     function word() {
       switch (ch) {
@@ -1438,7 +1440,7 @@ outer:      while (next()) {
           break;
       }
       error("Syntax error");
-    }
+    };
 
     function val() {
       white();
@@ -1456,7 +1458,7 @@ outer:      while (next()) {
         default:
           return ch >= '0' && ch <= '9' ? num() : word();
       }
-    }
+    };
 
     return val();
   }

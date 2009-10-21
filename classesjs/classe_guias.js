@@ -183,6 +183,7 @@ i3GEO.guias = {
 	onde {String} - id do elemento que conterá as guias
 	*/
 	cria: function(onde){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.cria()");}
 		//
 		//obtém outras guias que podem existir no mapa
 		//
@@ -281,6 +282,7 @@ i3GEO.guias = {
 	Ajusta a altura das guias conforme a altura da imagem do mapa
 	*/
 	ajustaAltura: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ajustaAltura()");}
 		var guia,guias,nguias;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
@@ -302,6 +304,7 @@ i3GEO.guias = {
 	guia {String} - nome da guia
 	*/
 	mostra: function(guia){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostra()");}
 		var guias,nguias,g;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
@@ -336,6 +339,7 @@ i3GEO.guias = {
 	guia {String} - guia que será ativada
 	*/
 	ativa: function(guia){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.ativa()");}
 		try{
 			if(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click !== "")
 			{i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click.call();}
@@ -348,6 +352,7 @@ i3GEO.guias = {
 	Libera as guias do local atual, colocando-as em uma janela móvel sobre o mapa.
 	*/
 	libera: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.libera()");}
 		if (!$i("conteudojanelaguias")){
 			var i,w,pos,a,l,letras,temp;
 			$i(i3GEO.Interface.IDCORPO).style.left = "0px";
@@ -469,6 +474,7 @@ i3GEO.guias = {
 	
 	*/
 	mostraGuiaFerramenta: function(guia,namespace){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.guias.mostraGuiaFerramenta()");}
 		var g;
 		if(arguments.length === 1)
 		{namespace = "guia";}
