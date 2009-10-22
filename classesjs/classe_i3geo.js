@@ -215,7 +215,9 @@ i3GEO = {
 		//subtrai barra de rolagem
 		//
 		try{diminuiy += i3GEO.util.getScrollerWidth();}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		//
 		menos = 0;
 		if ($i("contemFerramentas"))
@@ -235,7 +237,9 @@ i3GEO = {
 				novoh = 600;
 			}
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		document.body.style.width = novow - diminuix;
 		document.body.style.height = novoh;
 		w = novow - menos - diminuix;
@@ -331,7 +335,9 @@ i3GEO = {
 						if (titulo !== "")
 						{top.document.title = titulo;}
 					}
-					catch(e){}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
 					i3GEO.parametros.mapexten= mapexten;
 					i3GEO.parametros.mapscale= parseInt(mapscale,10);
@@ -495,7 +501,9 @@ i3GEO = {
 			if(retorno.data === "ok" || retorno.data === "")
 			{corpoMapa.call();return;}
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		erro = function(){
 			var legimagem,c;
 			legimagem = "";
@@ -534,7 +542,9 @@ i3GEO = {
 				i3GEO.parametros.pixelsize = g_celula;
 				i3GEO.parametros.mapimagem = mapimagem;
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 			i3GEO.Interface.redesenha();
 			//caso esteja na função de identificação
 			if($i("i3GEOidentificalistaTemas")){

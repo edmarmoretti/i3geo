@@ -385,7 +385,9 @@ i3GEO.arvoreDeCamadas = {
 				g_tipoacao = "identifica";
 			}
 		}
-		catch(r){}
+		catch(r){
+			if(typeof(console) !== 'undefined'){console.error(r);}
+		}
 	},
 	/*
 	Function: ativaDragDrop

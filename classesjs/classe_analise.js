@@ -292,7 +292,9 @@ i3GEO.analise = {
 					else
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
-				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho.richdraw "+e);}
+				}
 				if (n > 0){
 					d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy),10);
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
@@ -456,7 +458,9 @@ i3GEO.analise = {
 						else
 						{pontosdistobj.linhastemp = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[0])-(i3GEO.parametros.w/2),pontosdistobj.yimg[0]);	}				
 					}
-					catch(e){}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 				}
 				try{
 					if (navn)
@@ -464,7 +468,9 @@ i3GEO.analise = {
 					else
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
-				catch(e){}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 				m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 				if($i("mostraarea_calculo"))
 				{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2);}

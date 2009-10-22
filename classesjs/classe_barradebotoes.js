@@ -417,7 +417,9 @@ i3GEO.barraDeBotoes = {
 							i = i + 1;
 						}
 						while(i < numerobotoes);
-					}catch(e){}
+					}catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 					//alert(i+" "+numerobotoes)
 					if(i <= numerobotoes){
 						if($i("sobeferramentas")){$i("sobeferramentas").style.display="none";}

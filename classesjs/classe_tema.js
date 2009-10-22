@@ -241,7 +241,9 @@ i3GEO.tema = {
 		}
 		if(tipoOperacao === "abrejanela"){
 			try{clearTimeout(mostralegendajanelaTimer);}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 			retorna = function(retorno){
 				$i("janelaLegenda"+idtema+"_corpo").innerHTML = retorno.data.legenda;
 			};

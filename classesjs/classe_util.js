@@ -329,7 +329,9 @@ i3GEO.util = {
 			tempNode.isLeaf = false;
 			tempNode.enableHighlight = false;
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		titulo = "<table><tr><td><b>"+titulo+"</b></td><td></td></tr></table>";
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
@@ -407,7 +409,6 @@ i3GEO.util = {
 	pegaPosicaoObjeto: function(obj){
 		if(obj)
 		{
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.pegaPosicaoObjeto("+obj.id+")");}
 			if(!obj.style)
 			{return [0,0];}
 			if(obj.style.position === "absolute")
@@ -794,7 +795,9 @@ i3GEO.util = {
 				i3GEO.util.insereMarca.CONTAINER = [];
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEO.util.insereMarca.limpa()");					
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		}
 	},
 	/*
@@ -1106,7 +1109,9 @@ i3GEO.util = {
 				yMax = y[(y.length)-1];
 				return xMin+" "+yMin+" "+xMax+" "+yMax;
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		}
 		return ext;
 	},

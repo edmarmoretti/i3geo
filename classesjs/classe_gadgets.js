@@ -237,7 +237,9 @@ i3GEO.gadgets = {
 							$i3geo_temp_ym.value = y[1];
 							$i3geo_temp_ys.value = y[2];
 						}
-						catch(m){}
+						catch(m){
+							if(typeof(console) !== 'undefined'){console.error(m);}
+						}
 					};
 					if($i(i3GEO.Interface.IDMAPA))
 					{YAHOO.util.Event.addListener($i(i3GEO.Interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
@@ -318,6 +320,9 @@ i3GEO.gadgets = {
 			}
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaEscalaNumerica()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaEscalaNumerica()");}		
+		}
+		else{
+			atualizaEscalaNumerica = function(){}
 		}
 	},
 	/*
@@ -660,7 +665,9 @@ i3GEO.gadgets = {
 				{i3GEO.gadgets.quadros.inicia(nquadros);}
 				else{i3GEO.gadgets.quadros.quadroatual++;}
 			}
-			catch(e){}		
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}		
 		},
 		/*
 		Function: zoom
@@ -711,7 +718,9 @@ i3GEO.gadgets = {
 					c.style.display = "block";
 					i.style.display = "none";
 				}
-				catch(e){}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 			}
 		},
 		/*

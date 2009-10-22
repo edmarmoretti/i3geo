@@ -1398,7 +1398,9 @@ i3GEO.arvoreDeTemas = {
 						g_tipoacao = "identifica";
 					}
 				}
-				catch(r){}
+				catch(r){
+					if(typeof(console) !== 'undefined'){console.error(r);}
+				}
 			};
 			i3GEO.php.adtema(temp,tsl.toString());
 		}

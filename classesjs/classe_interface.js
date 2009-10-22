@@ -531,7 +531,9 @@ i3GEO.Interface = {
 							objposicaocursor.telay = objposicaocursor.telay + dc.offsetTop;
 						}
 					}
-					catch(e){}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 				});
 				pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 				i3geoOL.addControl(pz);
@@ -659,7 +661,9 @@ i3GEO.Interface = {
               		i3GEOTileO = new GTileLayerOverlay(i3GEOTile);
    					i3GeoMap.addOverlay(i3GEOTileO);
 				}
-			}catch(e){}
+			}catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		},
 		cria: function(w,h){
 			var i,f,ins;
@@ -997,7 +1001,9 @@ i3GEO.Interface = {
 			try{
 				linki3geo.setHref(linki3geo.getHref()+"&");
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		},
 		cria: function(w,h){
 			var i,i3GeoMap3d,i3GeoMap;

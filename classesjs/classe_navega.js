@@ -263,7 +263,9 @@ i3GEO.navega = {
 			};
 			i3GEO.navega.localizaIP(locaplic,sid,mostraIP);
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function: zoomExt
@@ -403,7 +405,9 @@ i3GEO.navega = {
 			"i3GEO.php.pan(i3GEO.atualiza,"+escala+",'',"+x+","+y+");";
 		try
 		{clearTimeout(i3GEO.navega.timerNavega);}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);		
 	},
 	/*
@@ -460,7 +464,9 @@ i3GEO.navega = {
 			if(g_tipoacao === "area")
 			{return;}
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10 || objposicaocursor.imgy > (i3GEO.parametros.h - 10))
 		{return;}
 		if (!$i("i3geo_rosa")){
@@ -1008,7 +1014,9 @@ i3GEO.navega = {
 					eval("i." + g_tipoleft +  "= (pos[0] - (esq - 40)) + g_postpx");
 				}
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		}
 	},
 	/*

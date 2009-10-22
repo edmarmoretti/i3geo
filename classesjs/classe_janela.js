@@ -288,7 +288,9 @@ i3GEO.janela = {
 				eval("delete " + this.id);
 			}
 		}
-		catch(erro){}
+		catch(erro){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function: alteraTamanho
@@ -518,13 +520,16 @@ i3GEO.janela = {
 		document.body.style.cursor = "default";
 		if(arguments.length > 0){
 			try{
-				eval('YAHOO.aguarde.'+id+'.destroy()');
+				if($i(id+"_c"))
+				{eval('YAHOO.aguarde.'+id+'.destroy()');}
 				if($i(id+"_c"))
 				{$i("i3geo").removeChild($i(id+"_c"));}
 				if($i(id+"_mask"))
 				{$i("i3geo").removeChild($i(id+"_mask"));}
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		}
 		else{
 			try{
@@ -553,7 +558,9 @@ i3GEO.janela = {
 				if($i("ajaxCorpoMapa1_c"))
 				{i3GEO.janela.fechaAguarde("ajaxCorpoMapa1");}
 			}
-			catch(e){}	
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}	
 		}
 	}
 };

@@ -102,7 +102,9 @@ i3GEO.selecao = {
 			try{
 				i3GEO.desenho.richdraw.fecha();
 			}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 			if($i("pontosins")){document.body.removeChild($i("pontosins"));}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		};
@@ -189,7 +191,9 @@ i3GEO.selecao = {
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
 		criaBox: function(){
-			try{i3GEO.desenho.richdraw.fecha();}catch(e){}
+			try{i3GEO.desenho.richdraw.fecha();}catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 			i3GEO.desenho.criaContainerRichdraw();
 			i3GEO.desenho.richdraw.lineColor = "red";
 			i3GEO.desenho.richdraw.lineWidth = "2px";
@@ -329,7 +333,9 @@ i3GEO.selecao = {
 		inicia: function(){
 			try
 			{i3GEO.desenho.richdraw.fecha();}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 			i3GEO.util.insereMarca.limpa();
 			g_tipoacao = "selecaopoli";
 			alert("Clique no mapa para desenhar o polígono.");

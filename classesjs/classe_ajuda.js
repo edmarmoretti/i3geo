@@ -166,7 +166,9 @@ i3GEO.ajuda = {
 				i3GEO.ajuda.ativaCookie();
 			}
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error("i3GEO.ajuda.abreJanela "+e);}
+		}
 	},
 	/*
 	Function: ativaCookie

@@ -622,6 +622,9 @@ i3GEO.configura = {
 					return;
 				}
 				panMapaInicia = function(exy){
+					if(arguments.length == 0){
+						return;
+					}
 					var k;
 					if ($i("img") && (g_tipoacao === "pan")){
 						try{
@@ -631,7 +634,9 @@ i3GEO.configura = {
 							{k = exy.button;}
 							if(k === 2){return;}
 						}
-						catch(h){}
+						catch(h){
+							if(typeof(console) !== 'undefined'){console.error(h);}
+						}
 						g_panM = "sim";
 						if($i("corpoMapa")){
 							leftinicial = parseInt($i(i3GEO.Interface.IDCORPO).style.left,10);

@@ -77,7 +77,7 @@ i3GEO.eventos = {
 	Default:
 	{["atualizaEscalaNumerica()"]}
 	*/
-	NAVEGAMAPA: ["atualizaEscalaNumerica()"],
+	NAVEGAMAPA: [],
 	/*
 	Propriedade: MOUSEPARADO
 
@@ -172,7 +172,9 @@ i3GEO.eventos = {
 					i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSEPARADO);
 				}
 			}
-		}catch(e){}
+		}catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function: navegaMapa
@@ -254,7 +256,9 @@ i3GEO.eventos = {
 				}
 			}
 		}
-		catch(e){}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function posicaoMouseMapa
@@ -302,7 +306,9 @@ i3GEO.eventos = {
 			//verifica se o richdraw está sendo usaado
 			container = e.target.parentNode.id;
 		}
-		catch(erro){}
+		catch(erro){
+			if(typeof(console) !== 'undefined'){console.error(erro);}
+		}
 		if (container !== "divGeometriasTemp"){
 			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "openlayers"))
 			{return;}
@@ -410,20 +416,28 @@ i3GEO.eventos = {
 				try{
 					try
 					{clearTimeout(i3GEO.eventos.TIMERPARADO);}
-					catch(e){}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 					i3GEO.eventos.TIMERPARADO = setTimeout('i3GEO.eventos.mouseParado()',i3GEO.configura.tempoMouseParado);
 				}
-				catch(e){}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 				try
 				{i3GEO.eventos.mousemoveMapa();}
-				catch(e){}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 			};
 		};
 		docMapa.onmouseout = function(){
 			objposicaocursor.dentroDomapa = true;
 			try
 			{objmapaparado="parar";}
-			catch(e){}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
 		};
 		docMapa.onmousedown = function(exy){
 			if(!i3GEO.eventos.botaoDireita(exy))
@@ -509,7 +523,9 @@ i3GEO.eventos = {
 				if (doc.getElementById(iys))
 				{doc.getElementById(iys).value = y[2];}
 			}
-			catch(m){}
+			catch(m){
+				if(typeof(console) !== 'undefined'){console.error(m);}
+			}
 		}
 	}
 };
