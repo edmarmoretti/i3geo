@@ -416,8 +416,8 @@ i3GEO = {
 		if (!$i("i3geo"))
 		{document.body.id = "i3geo";}
 		$i("i3geo").className = "yui-skin-sam";
-		if($i("mst"))
-		{$i("mst").style.visibility ="hidden";}
+		//if($i("mst"))
+		//{$i("mst").style.visibility ="hidden";}
 		//
 		//se i3GEO.configura.sid = "", o html foi aberto diretamente
 		//então, é necessário criar os arquivos temporários do mapa

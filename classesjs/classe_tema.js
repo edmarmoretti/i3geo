@@ -358,7 +358,7 @@ i3GEO.tema = {
 		*/
 		tabela: function(idtema){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.tabela()");}
-			if(typeof(i3GEOF.busca) === 'undefined'){
+			if(typeof(i3GEOF.tabela) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/tabela/index.js.php";
 				i3GEO.temaAtivo = idtema;
 				i3GEO.util.scriptTag(js,"i3GEOF.tabela.criaJanelaFlutuante()","i3GEOF.tabela_script");
@@ -395,8 +395,14 @@ i3GEO.tema = {
 
 		idtema - id ue identifica o tema no map file.
 		*/
-		download: function(idtema)
-		{i3GEO.janela.cria("300px","150px",i3GEO.configura.locaplic+"/ferramentas/download/index.htm?tema="+idtema,"","","Download");},
+		download: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.download()");}
+			if(typeof(i3GEOF.busca) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/download/index.js.php";
+				i3GEO.temaAtivo = idtema;
+				i3GEO.util.scriptTag(js,"i3GEOF.download.criaJanelaFlutuante('"+idtema+"')","i3GEOF.download_script");
+			}		
+		},
 		/*
 		Function: sld
 		

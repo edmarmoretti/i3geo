@@ -622,9 +622,6 @@ i3GEO.configura = {
 					return;
 				}
 				panMapaInicia = function(exy){
-					if(arguments.length == 0){
-						return;
-					}
 					var k;
 					if ($i("img") && (g_tipoacao === "pan")){
 						try{

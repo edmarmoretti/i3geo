@@ -694,7 +694,15 @@ g_traducao_ajuda = {
 			tela:"ferramentas/convertekml/exemplo.htm",
 			apijs:"i3GEO.mapa.dialogo.convertekml()"
 		},
-
+		"82": {
+			titulo: "Download",
+			diretorio:"i3geo/ferramentas/download",
+			categoria:"2",
+			pt:"Permite o download de um tema escolhido. No caso de dados vetoriais derivados de outros temas ou camadas com elementos selecionados, os dados são sempre fornecidos no formato 'shapefile'. Nos outros casos, o arquivo fornecido dependerá da configuração de cada camada, mas, por padrão, os dados são fornecidos em 'shapefile'",
+			complemento:"",
+			tela:"ferramentas/download/exemplo.htm",
+			apijs:"i3GEO.tema.dialogo.download()"
+		}
 	}
 };
 

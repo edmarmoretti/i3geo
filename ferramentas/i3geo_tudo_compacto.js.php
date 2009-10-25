@@ -6542,7 +6542,8 @@ i3GEO.php = {
 //criatemasel - tabela
 //estatistica - tabela
 //verPaleta - pontosdistri
-//analisedistri - pontosdistri
+//analisedistri - pontosdistri
+//download - download
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 Title: Utilitários

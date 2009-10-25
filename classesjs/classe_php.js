@@ -1084,3 +1084,4 @@ i3GEO.php = {
 //estatistica - tabela
 //verPaleta - pontosdistri
 //analisedistri - pontosdistri
+//download - download

@@ -257,7 +257,7 @@ i3GEO.eventos = {
 			}
 		}
 		catch(e){
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){"executaEventos "+console.error(e);}
 		}
 	},
 	/*
