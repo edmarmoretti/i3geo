@@ -1762,18 +1762,21 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			if($permite != "nao")			
 			ms_newLayerObj($map, $ll);
 		}
+		$teste = @$map->getlayerbyname($tema);
+		if ($teste == "")
+		{return "erro";}
 	}
-	//
-	//verifica novamente se o layer existe
-	//
-	$teste = @$map->getlayerbyname($tema);
-	if ($teste == "")
-	{return "erro";}
+	else
+	{
+		//remove o metadata com um nome de arquivo opcional, pois a função de download pode estar sendo executada da árvore de camadas
+		$teste = $map->getlayerbyname($tema);
+		$teste->setmetadata("arquivodownload","");
+	}
 	//
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
 	//
-	$map->save(str_replace(".map","tmp.map",$map_file));
-	$map_file = str_replace(".map","tmp.map",$map_file);
+	$ma_file = str_replace(".map","tmp.map",$map_file);
+	$map->save($map_file);
 	$map = ms_newMapObj($map_file);
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas

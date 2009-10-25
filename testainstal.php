@@ -71,8 +71,11 @@ if (!extension_loaded( "SQLite")){echo "<span style=color:red >Problema: não est
 if (!extension_loaded( "SimpleXML")){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
 if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
 if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
+if (!extension_loaded( "zlib")){echo "<span style=color:red >Problema: não está instalado a zlib <br></span>";}
 if (!extension_loaded( "gd")){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
 if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
+
+
 var_dump( $exts );
 
 echo "Existe o ms_configura.php? ";

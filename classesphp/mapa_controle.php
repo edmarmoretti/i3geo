@@ -852,7 +852,6 @@ Include:
 Property: download
 
 Gera os arquivos para download de um tema.
-
 */
 	case "download":
 		$cp->set_data(downloadTema($map_file,$tema,$locaplic,$dir_tmp));
