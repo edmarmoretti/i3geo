@@ -297,9 +297,9 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	//gzip
 	$abre = fopen($final, "r");
 	if ($tipo == "js")
-	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
+	$buffer = "<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
 	else
-	$buffer = "<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
+	$buffer = "<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
 	while (!feof($abre))
 	{$buffer .= fgets($abre);}
 	fclose($abre);
