@@ -1630,8 +1630,12 @@ i3GEO.arvoreDeTemas = {
 
 		Abre a janela para o upload de shape file
 		*/
-		upload: function()
-		{i3GEO.janela.cria("300px","230px",i3GEO.configura.locaplic+"/ferramentas/upload/index.htm","","","Upload de shapefile <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>");},
+		upload: function(){
+			if(typeof(i3GEOF.upload) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/upload/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.upload.criaJanelaFlutuante()","i3GEOF.upload_script");
+			}
+		},
 		/*
 		Function: uploaddbf
 

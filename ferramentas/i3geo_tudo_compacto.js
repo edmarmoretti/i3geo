@@ -6536,6 +6536,15 @@ i3GEO.php = {
 	listaFontesTexto: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listatruetype";
 		cpJSON.call(p,"listaTrueType",funcao);
+	},
+	/*
+	Function: listaEpsg
+	
+	<listaEpsg>	
+	*/
+	listaEpsg: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg";
+		cpJSON.call(p,"listaEpsg",funcao);
 	}
 };
 //incluisel - tabela
@@ -8110,6 +8119,8 @@ i3GEO.util = {
 	
 	Cria uma lista de elementos do tipo input com textos editáveis contendo a lista de itens de um tema.
 	
+	Parametros:
+	
 	tema {string} - código do layer existente no mapa
 	
 	funcao {function} - função que será executada para montar a lista. Essa função receberá
@@ -8149,7 +8160,50 @@ i3GEO.util = {
 			eval("funcao(temp)");
 		};
 		i3GEO.php.listaItensTema(monta,tema);
-	},	
+	},
+	/*
+	Function: radioEpsg
+	
+	Cria uma lista de códigos EPSG para o usuário escolher um deles.
+	
+	A lista é mostrada como uma série de elementos do tipo radio com "name" igual ao prefixo mais a palavra EPSG
+	
+	Parametros:
+	
+	funcao {function} - função que será executada para montar a lista. Essa função receberá
+	como parâmetro um array do tipo {dados:ins,tipo:"dados"}
+	onde ins é um array com as linhas e tipo é o tipo de resultado, que pode ser "dados"|"erro"
+	
+	onde {string} - id do elemento que receberá a mensagem de aguarde
+	
+	prefixo {string} - Prefixo que será usado no name de cada elemento
+	*/
+	radioEpsg: function (funcao,onde,prefixo){
+		if (arguments.length === 2)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando...</span>";}
+		var cp,monta = function(retorno){
+			var ins = new Array(),
+				i,n,temp;
+			if (retorno.data !== undefined){
+
+				ins.push("<table class=lista2 >");
+				ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+prefixo+"EPSG' type=radio checked value='' /></td>");
+				ins.push("<td>"+retorno.data[0].nome+"</td></tr>");
+				n = retorno.data.length;
+				for (i=1;i<n; i++){
+					ins.push("<tr><td><input size=2 style='cursor:pointer' name='"+prefixo+"EPSG' type=radio value='"+retorno.data[i].codigo+"' /></td>");
+					ins.push("<td>"+retorno.data[i].nome+"</td></tr>");
+				}
+				ins.push("</table>");
+				ins = ins.join('');
+				temp = {dados:ins,tipo:"dados"};
+			}
+			else
+			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
+			eval("funcao(temp)");
+		};
+		i3GEO.php.listaEpsg(monta);
+	},
 	/*
 	Function: proximoAnterior
 	

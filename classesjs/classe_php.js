@@ -1077,6 +1077,15 @@ i3GEO.php = {
 	listaFontesTexto: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listatruetype";
 		cpJSON.call(p,"listaTrueType",funcao);
+	},
+	/*
+	Function: listaEpsg
+	
+	<listaEpsg>	
+	*/
+	listaEpsg: function(funcao){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg";
+		cpJSON.call(p,"listaEpsg",funcao);
 	}
 };
 //incluisel - tabela

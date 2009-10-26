@@ -1,76 +1,60 @@
 <?php
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/funcoes_gerais.php");
+include_once ("../../classesphp/carrega_ext.php");
 error_reporting(E_ALL);
 session_name("i3GeoPHP");
-
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
-
 foreach(array_keys($_SESSION) as $k)
-{
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
+{eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $_SESSION["postgis_mapa"];
-if (!function_exists('ms_GetVersion'))
-{
-	$exts = get_loaded_extensions();
-	if (array_search( "MapScript", $exts) != TRUE)
-	{
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{
-			if(!@dl('php_mapscript_48.dll'))
-			dl('php_mapscript.dll');
-		}
-		else
-		{dl('php_mapscript.so');}
-	}
-}
 ?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body name="ancora" bgcolor="white" style="background-color:white">
+<body name="ancora" bgcolor="white" style="background-color:white;text-align:left;font-size:10px;">
 <p>
 <?php
-if (isset($_FILES['fileshp']['name']))
+if (isset($_FILES['i3GEOuploadshp']['name']))
 {
 	//$ndir = dirname($filen);
 	require_once ("../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
-	echo "<p>Carregando o arquivo...</p>";
+	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['fileshp']['name'])) || (!ereg('\.shp$',$_FILES['fileshp']['name'])) )
+	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploadshp']['name'])) || (!ereg('\.shp$',$_FILES['i3GEOuploadshp']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['fileshx']['name'])) || (!ereg('\.shx$',$_FILES['fileshx']['name'])) )
+	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploadshx']['name'])) || (!ereg('\.shx$',$_FILES['i3GEOuploadshx']['name'])) )
 	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploaddbf']['name'])) || (!ereg('\.dbf$',$_FILES['i3GEOuploaddbf']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
-	{echo "Nome de arquivo inv·lido";exit;}
+	{echo "<p class='paragrafo' >Nome de arquivo inv·lido. Evite acentos, espaÁos em branco ou caracteres especiais.";paraAguarde();exit;}
 	//sobe arquivo
-	$Arquivo = $_FILES['fileshp']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['fileshp']['name']);
-	$Arquivo = $_FILES['fileshx']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['fileshx']['name']);
-	$Arquivo = $_FILES['filedbf']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['filedbf']['name']);
+	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploadshp']['name']);
+	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploadshx']['name']);
+	$Arquivo = $_FILES['i3GEOuploaddbf']['tmp_name'];
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploaddbf']['name']);
 	if($status != 1)
-	{echo "Ocorreu um erro no envio do arquivo shp";exit;}
+	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo shp";paraAguarde();exit;}
 	if($status == 1)
 	{
-		echo "<p>Arquivo enviado. Adicionando tema...</p>";
+		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
 		$mapt = ms_newMapObj($temasaplic."/novotema.map");
 		$novolayer = $mapt->getLayerByName("novotema");
-		$novolayer->set("data",$dirmap."/".$_FILES['fileshp']['name']);
-		$novolayer->set("name",$_FILES['fileshp']['name']);
-		$novolayer->setmetadata("TEMA",$_FILES['fileshp']['name']);
+		$novolayer->set("data",$dirmap."/".$_FILES['i3GEOuploadshp']['name']);
+		$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);
+		$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->setmetadata("DOWNLOAD","SIM");
-		$sfileObj = ms_newShapefileObj($dirmap."/".$_FILES['fileshp']['name'], -1);
+		$sfileObj = ms_newShapefileObj($dirmap."/".$_FILES['i3GEOuploadshp']['name'], -1);
 		$tipo = $sfileObj->type;
 		if ($tipo == 1){$novolayer->set("type",MS_LAYER_POINT);} // ponto
 		if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
@@ -97,23 +81,28 @@ if (isset($_FILES['fileshp']['name']))
 			$novolayer->setmetadata("ITENSDESC",$its);
 			$novolayer->set("template","none.htm");
 		}
-		if($epsg != "")
-		{$novolayer->setProjection("init=epsg:".$epsg);}
+		if($uploadEPSG != "")
+		{$novolayer->setProjection("init=epsg:".$uploadEPSG);}
 		$adiciona = ms_newLayerObj($mapa, $novolayer);
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
-		echo "Tema criado!!! Redesenhando o mapa.";
+		echo "<p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
 		echo "<script>window.parent.i3GEO.atualiza()</script>";
 	}
 	else
 	{
-		echo "<p>Erro ao enviar o arquivo.</p>";
+		echo "<p class='paragrafo' >Erro ao enviar o arquivo.</p>";
+		paraAguarde();
 		exit;
 	}
 }
 else
 {
-	echo "<p>Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";	
+}
+paraAguarde();
+function paraAguarde(){
+	echo "<script>window.parent.i3GEOF.upload.aguarde.visibility='hidden';</script>";
 }
 ?>
 </body>
