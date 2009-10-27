@@ -46,7 +46,7 @@
 	 <div id=guia1 class=guia >Temas</div>
 	 <div id=guia2 class=guia >Adiciona</div>
 	 <div id=guia4 class=guia >Legenda</div>
-	 <div id=guia5 class=guia >Links</div>
+	 <div id=guia6 class=guia >Fotos</div>
     </div>
    </td>
 
@@ -80,43 +80,22 @@
   	<div style='left:5px;top:10px;' id=buscaRapida ></div>
   	<div id=listaPropriedades style='top:15px;' ></div>
   	<div id=listaTemas style='top:15px;'></div>
- 	<!-- se vc quiser colocar a arvore de adição de temas em um lugar específico, use o div abaixo, caso contrário, a árvore será colocada na guia definida em objmapa.guiaMenu
-  	<div id=arvoreAdicionaTema style='top:25px;' ></div>
-  	<div id=outrasOpcoesAdiciona style='top:25px;' ></div>
-  	-->	
   </div>
 
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia5obj' style='display:none;text-align:left'><div id='banners' style='overflow:auto;text-align:left'>Aguarde...</div></div>
+  <div id='guia6obj' style='display:none;text-align:left'>
+  	<div id='listaDeFotos' style='overflow:auto;text-align:left'></div>
+  </div>
  </td>
  <td style="vertical-align:top;border-width:0px;">
   <table width="100%" style="vertical-align:top;border-width:0px">
-   <!--
-   	Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px
-	Vc pode usar o estilo para definir o tamanho do mapa. Se não tiver estilo definido, o tamanho será automático
-   -->
    <tr><td  class=verdeclaro id=contemImg >
-
     <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
    </td></tr>
   </table>
  </td>
  </tr>
-<!--
-Mostra as coordenadas conforme o mouse é movimentado
--->  
-<!-- <div class=pcenter10 id='longlat'>Longitude e latitude</div> -->
-<!--
-Escala gráfica. Pode ser excluída.
---> 
-<!-- <div id="escalaGrafica" style="text-align:left"></div> -->
-<!--
-vc pode optar por colocar mensagens de ajuda em algum lugar
--->
-<!--
-<tr><td colspan=2 ><div id=i3geo_ajuda class=verdeescuro style="text-align:left;" >I3Geo</div></td></tr>
--->
 <tr>
 
  <td class=tdbranca >
@@ -274,75 +253,35 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	</div>
    <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
 </div>
+<div id=teste ></div>
 <!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
-/*
-Title: Interface normal
 
-Abre o i3geo com todas as suas funcionalidades.
-
-File: i3geo/aplicmap/geral.htm
-
-Exemplo:
-
-http://<host>/i3geo/ms_criamapa.php
-
-*/
-/*
-	Indica a localização correta do i3geo.
-	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
-*/
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 var g_3dmap = "3dmap.map";
 
-//i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
-//i3GEO.idioma.MOSTRASELETOR = false;
-//function tempi(){alert("oi")}
-//i3GEO.configura.funcaoIdentifica = "tempi()"
 i3GEO.cria()
-//Log
-/*
-var myContainer = document.body.appendChild(document.createElement("div")); 
-myContainer.style.textAlign="left";
-i3geoLog = new YAHOO.widget.LogReader(myContainer);
-i3geoLog.show();
-*/
-
-/*
-	Inicializa o mapa
-*/
-//i3GEO.guias.ATUAL = "legenda"
-//i3GEO.idioma.alteraDicionario("t18a","teste");
-
-/*
-i3GEO.configura.grupoLayers = [
-	{nome:"Grupo 1",layers:["zee","estadosl"]},
-	{nome:"Grupo 2",layers:["mundo"]}
-]
-*/
 
 i3GEO.barraDeBotoes.AUTOALTURA = false
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = true
 i3GEO.barraDeBotoes.PERMITEFECHAR = true
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
-
 i3GEO.idioma.IDSELETOR = "seletorIdiomas"
 i3GEO.interface.ATIVAMENUCONTEXTO = true;
+i3GEO.guias.CONFIGURA.guiaDeFotos = {
+		titulo:"Fotos",
+		id:"guia6",
+		idconteudo:"guia6obj",
+		click:""
+	};
+i3GEO.guias.ATUAL = "guiaDeFotos";
 
 i3GEO.inicia();
-//
-//inclui um tema via javascript
-/*
-var temp = function(){alert("oi");i3GEO.atualiza();}
-i3GEO.php.ligatemas(temp,"","biomashp","sim");
-*/
 
-//esconde a opção de inclusão da escala quando a resolução da tela for muito pequena
-if($i("escala") && i3GEO.parametros.w < 500)
-{$i("escala").style.display="none";}
+var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
+i3GEO.util.scriptTag(js,"i3GEOF.buscaFotos.inicia('listaDeFotos')","i3GEOF.buscaFotos_script");
 </script>
 
 </body>

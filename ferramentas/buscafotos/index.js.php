@@ -73,6 +73,11 @@ i3GEOF.buscaFotos = {
 			}}});
 			i3GEOF.buscaFotos.ativaFoco();
 			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
+			if(i3GEO.parametros.mapscale === ""){
+				i3GEOF.buscaFotos.mostraMenu();
+				$i("i3GEObuscafotosbuscapanoramio").checked = true;
+				i3GEOF.buscaFotos.busca("1");
+			}
 		}
 		catch(erro){alert(erro);}
 	},
