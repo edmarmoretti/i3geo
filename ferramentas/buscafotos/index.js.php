@@ -72,6 +72,7 @@ i3GEOF.buscaFotos = {
 				i3GEOF.buscaFotos.mostraMenu();
 			}}});
 			i3GEOF.buscaFotos.ativaFoco();
+			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
 		}
 		catch(erro){alert(erro);}
 	},
@@ -158,6 +159,10 @@ i3GEOF.buscaFotos = {
 		divid = janela[2].id;
 		i3GEOF.buscaFotos.aguarde = $i("i3GEOF.buscaFotos_imagemCabecalho").style;
 		i3GEOF.buscaFotos.inicia(divid);
+		temp = function(){
+			i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.buscaFotos.busca('1')");
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
 	},
 	/*
 	Function: ativaFoco
