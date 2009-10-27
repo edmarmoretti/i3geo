@@ -598,6 +598,18 @@ i3GEO.gadgets = {
 		*/
 		quadroatual: 0,
 		/*
+		Propriedade: geraLegenda
+		
+		Gera ou não a legenda quando o mapa é redesenhado. Ativando essa opção, o i3Geo fica um pouco mais lento
+		
+		Type:
+		{boolean}
+		
+		Default:
+		{false}
+		*/
+		geraLegenda: false,
+		/*
 		Function: inicia
 		
 		Gera os quadros e inicializa os objetos para armazenar as imagens
@@ -771,8 +783,6 @@ i3GEO.gadgets = {
 				$i("img").style.display="block";
 				return;
 			}
-			//$i("img").src = preLoad[janima].src;
-			//$i("f"+janima).className = "quadro1";
 			i3GEO.gadgets.quadros.trocaMapa("quadro"+Qanima);
 			Qanima++;
 			tAnima = setTimeout('i3GEO.gadgets.quadros.anima('+Qanima+','+t+')',t);
@@ -791,7 +801,7 @@ i3GEO.gadgets = {
 				i3GEO.php.desativacgi(volta);
 			}
 			else{
-				wi = window.open("");//"",null,"width=550,height=650,resizable=yes,scrollbars=yes");
+				wi = window.open("");
 				//pega os dados do objeto quadrosfilme e escreve na nova janela
 				mensagem = "<br><b>N&atilde;o existem imagens guardadas.";
 				wi.document.write("<html><body><p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Click com o bot&atilde;o da direita do mouse sobre a imagem para fazer o download<br>");	
@@ -803,7 +813,8 @@ i3GEO.gadgets = {
 							wi.document.write("<p style='font-size: 12px; font-family: verdana, arial, helvetica, sans-serif;'>Abrangência: "+i3GEO.gadgets.quadros.quadrosfilme[i].extensao+"<br>");
 							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].imagem+"' />");
 							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].referencia+"' />");
-							wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].legenda+"' />");
+							if(i3GEO.gadgets.quadros.geraLegenda === true)
+							{wi.document.write("<img src='"+i3GEO.gadgets.quadros.quadrosfilme[i].legenda+"' />");}
 						}
 						i--;
 					}
