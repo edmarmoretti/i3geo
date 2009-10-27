@@ -1,41 +1,26 @@
 <?php
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/funcoes_gerais.php");
+include_once ("../../classesphp/carrega_ext.php");
 error_reporting(E_ALL);
 session_name("i3GeoPHP");
-
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
-
 foreach(array_keys($_SESSION) as $k)
-{
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
+{eval("\$".$k."='".$_SESSION[$k]."';");}
 $postgis_mapa = $_SESSION["postgis_mapa"];
-if (!function_exists("ms_GetVersion"))
-{
-	$exts = get_loaded_extensions();
-	if (array_search( "MapScript", $exts) != TRUE)
-	{
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{
-			if(!@dl('php_mapscript_48.dll'))
-			dl('php_mapscript.dll');
-		}
-		else
-		{dl('php_mapscript.so');}
-	}
-}
 ?>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
-<body name="ancora" bgcolor="white" style="background-color:white">
+<body name="ancora" bgcolor="white" style="background-color:white;text-align:left;font-size:10px;">
 <p>
 <?php
-if (isset($_FILES['filedbf']['name']))
+//var_dump($_FILES);exit;
+if (isset($_FILES['i3GEOuploaddbffile']['name']))
 {
 	//$ndir = dirname($filen);
 	require_once ("../../ms_configura.php");
@@ -44,32 +29,31 @@ if (isset($_FILES['filedbf']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	//if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name'])) )
-	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) )
+	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['i3GEOuploaddbffile']['name'])) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "Nome de arquivo inválido";exit;}
 	//sobe arquivo
-	$Arquivo = $_FILES['filedbf']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['filedbf']['name']);
+	$Arquivo = $_FILES['i3GEOuploaddbffile']['tmp_name'];
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 	if($status != 1)
 	{echo "Ocorreu um erro no envio do arquivo";exit;}
-	$nome = explode(".",$_FILES['filedbf']['name']);
+	$nome = explode(".",$_FILES['i3GEOuploaddbffile']['name']);
 	$nome = $nome[0];
 	$nomeshp = $dirmap."/".$nome.".shp";
 	if($status == 1)
 	{
 		if(!isset($tema)) //o arquivo deverá ser transformado em uma camada no mapa
 		{
-			$nomex = strtoupper($nomex);
-			$nomey = strtoupper($nomey);
+			$nomex = strtoupper($i3GEOuploaddbfnomex);
+			$nomey = strtoupper($i3GEOuploaddbfnomey);
 			//converte de csv para dbf
-			if($tipoarquivo != "dbf"){
-				if($tipoarquivo == "csvpv"){$separador = ";";}
-				if($tipoarquivo == "csvv"){$separador = ",";}
+			if($i3GEOuploaddbftipoarquivo != "dbf"){
+				if($i3GEOuploaddbftipoarquivo == "csvpv"){$separador = ";";}
+				if($i3GEOuploaddbftipoarquivo == "csvv"){$separador = ",";}
 				include_once("../../pacotes/classesphp/class.CSVHandler.php");
 				include_once "../../pacotes/phpxbase/api_conversion.php";
-				$csv = new CSVHandler($dirmap."/".$_FILES['filedbf']['name'],$separador,"record");
+				$csv = new CSVHandler($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$separador,"record");
 				$dados = $csv->ReadCSV();
 				$conta = 0;
 				foreach($csv->HeaderData as $i)
@@ -87,10 +71,10 @@ if (isset($_FILES['filedbf']['name']))
 					$def[] = array($i,"C","255");
 					$conta++;
 				}
-				if(!function_exists(dbase_create))
-				{xbase_create($dirmap."/".$nome.".dbf", $def);xbase_close($db);}
+				if(!function_exists("dbase_create"))
+				{xbase_create($dirmap."/".$nome.".dbf", $def);}
 				else
-				{dbase_create($dirmap."/".$nome.".dbf", $def);dbase_close($db);}				
+				{dbase_create($dirmap."/".$nome.".dbf", $def);}				
 				$db=xbase_open($dirmap."/".$nome.".dbf",2);		
 				foreach($dados as $d){
 					$reg = array();
@@ -99,11 +83,11 @@ if (isset($_FILES['filedbf']['name']))
 					xbase_add_record($db,$reg);	
 				}
 				xbase_close($db);
-				$_FILES['filedbf']['name'] = $nome.".dbf";
+				$_FILES['i3GEOuploaddbffile']['name'] = $nome.".dbf";
 			}
 			echo "<p>Arquivo enviado. Criando shape file...</p>";
 			require_once("../../pacotes/phpxbase/api_conversion.php");
-			$dbf = xbase_open($dirmap."/".$_FILES['filedbf']['name']);
+			$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 			$records = xbase_numrecords($dbf);
 			$record = array();
 			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
@@ -147,7 +131,7 @@ if (isset($_FILES['filedbf']['name']))
 			$adiciona = ms_newLayerObj($mapa, $novolayer);
 			$salvo = $mapa->save($map_file);
 			echo "Tema criado!!!";
-			echo "<script>window.parent.remapaf()</script>";
+			echo "<script>window.parent.i3GEO.atualiza()</script>";
 		}
 		else //join com um tema
 		{
@@ -155,7 +139,7 @@ if (isset($_FILES['filedbf']['name']))
 			//essa funcao ainda não está implementada
 			//
 			$dbf = $dirmap."/".$_FILES['filedbf']['name'];
-			$string = 'JOIN '."\n".' NAME "'.$_FILES['filedbf']['name'].'"'."\n";
+			$string = 'JOIN '."\n".' NAME "'.$_FILES['i3GEOuploaddbffile']['name'].'"'."\n";
 			$string .= 'TABLE "'.$dbf.'"'."\n";
 			$string .= 'FROM "'.$item.'"'."\n";
 			$string .= 'TO "'.$colunadbf.'"'."\n";
@@ -173,8 +157,11 @@ if (isset($_FILES['filedbf']['name']))
 	else
 	{
 		echo "<p>Erro ao enviar o arquivo.</p>";
-		exit;
 	}
+}
+paraAguarde();
+function paraAguarde(){
+	echo "<script>window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";
 }
 ?>
 </body>

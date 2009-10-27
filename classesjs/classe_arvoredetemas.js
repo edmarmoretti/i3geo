@@ -1641,8 +1641,12 @@ i3GEO.arvoreDeTemas = {
 
 		Abre a janela para o upload de um arquivo dbf
 		*/
-		uploaddbf: function()
-		{i3GEO.janela.cria("300px","280px",i3GEO.configura.locaplic+"/ferramentas/uploaddbf/index.htm","","","Upload DBF <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=26' >&nbsp;&nbsp;&nbsp;</a>");},
+		uploaddbf: function(){
+			if(typeof(i3GEOF.uploaddbf) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/uploaddbf/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.uploaddbf.criaJanelaFlutuante()","i3GEOF.uploaddbf_script");
+			}
+		},
 		/*
 		Function: downloadbase
 

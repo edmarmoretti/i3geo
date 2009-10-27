@@ -132,19 +132,3 @@ i3GEOF.upload = {
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
-/*
-parametrosURL()
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
-	{
-		new YAHOO.widget.Button("botao1");
-	}
-   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-}()
-function submete()
-{
-	$i("f").submit()
-}
-
-*/
