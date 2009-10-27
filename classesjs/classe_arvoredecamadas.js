@@ -320,7 +320,7 @@ i3GEO.arvoreDeCamadas = {
 				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
 				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
 				temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
-				temaNode.expanded = false;
+				temaNode.expanded = i3GEO.arvoreDeCamadas.EXPANDIDA;
 				temaNode.enableHighlight = false;
 			}
 		}
