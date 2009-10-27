@@ -85,10 +85,6 @@
 	background-repeat: no-repeat;
 	background-position: 0px -200px;
 }
-#zoomoauto
-{background-image:URL('../imagens/out.png');}
-#zoomiauto
-{background-image:URL('../imagens/in.png');}
 #zoomtot
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
@@ -675,6 +671,20 @@
 	background-position: 0px -1850px;
 	width:9px;
 	height:9px;
+	cursor:pointer;
+}
+#zoomiauto
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1875px;
+	cursor:pointer;
+}
+#zoomoauto
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1900px;
 	cursor:pointer;
 }
 button{background:url(../imagens/tic.png) 98% 50% no-repeat;}
