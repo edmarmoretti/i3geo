@@ -1183,8 +1183,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$cor = $estilo->color;
 	$cor->setrgb(255,210,0);
 	//limpa selecao
-	//if (file_exists(($this->arquivo)."qy"))
-	//{unlink (($this->arquivo)."qy");}
+	if (file_exists(($this->arquivo)."qy"))
+	{unlink (($this->arquivo)."qy");}
 	return($nomeshp.".shp");	
 }
 /*
@@ -1196,7 +1196,7 @@ Salva o mapa acrescentando um novo layer com o buffer.
 
 Parametros:
 
-$distancia - Distância em km.
+$distancia - Distância em metros.
 
 $locaplic - Localização do I3geo.
 

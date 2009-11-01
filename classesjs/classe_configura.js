@@ -132,12 +132,12 @@ i3GEO.configura = {
 			{ text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
 			{ text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
     		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
-			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
 			{ text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
     		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
 			{ text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
 			{ text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
-			{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" }
+			{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
+			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" }
 			],
 			"janelas": [
 			{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },

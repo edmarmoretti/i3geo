@@ -1000,10 +1000,11 @@ i3GEO.Interface = {
 	googleearth:{
 		redesenha: function(){
 			try{
-				linki3geo.setHref(linki3geo.getHref()+"&");
+				if(typeof(linki3geo) !== 'undefined')
+				{linki3geo.setHref(linki3geo.getHref()+"&");}
 			}
 			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
+				alert(e);
 			}
 		},
 		cria: function(w,h){
@@ -1028,7 +1029,6 @@ i3GEO.Interface = {
   			i3GeoMap = object;
   			i3GeoMap.getWindow().setVisibility(true);
   			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
-  			//alert(kmlUrl)
   			linki3geo = i3GeoMap.createLink('');
           	linki3geo.setHref(kmlUrl);
           	nl = i3GeoMap.createNetworkLink('');
@@ -1042,7 +1042,8 @@ i3GEO.Interface = {
 			options.setScaleLegendVisibility(true);
           	i3GeoMap.getNavigationControl().setVisibility(i3GeoMap.VISIBILITY_SHOW);
 		},
-		falha: function(){alert("Falhou. Vc precisa do plugin instalado");},
+		falha: function()
+		{alert("Falhou. Vc precisa do plugin instalado");},
 		ativaBotoes: function(){}
 	}
 };

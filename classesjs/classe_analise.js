@@ -153,8 +153,13 @@ i3GEO.analise = {
 
 		Abre a janela para calcular a distância entre um ponto e outros pontos próximos
 		*/
-		distanciaptpt: function()
-		{i3GEO.janela.cria("400px","220px",i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.htm","","","Dist&acirc;ncia <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=17' >&nbsp;&nbsp;&nbsp;</a>");},
+		distanciaptpt: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.distanciaptpt()");}
+			if(typeof(i3GEOF.distanciaptpt) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.distanciaptpt.criaJanelaFlutuante()","i3GEOF.distanciaptpt_script");
+			}
+		},
 		/*
 		Function: centroide
 
