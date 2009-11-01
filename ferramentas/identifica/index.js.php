@@ -423,7 +423,7 @@ i3GEOF.identifica = {
 		{resolucao = res.value;}
 		else
 		{res = 5;}
-		i3GEO.temaAtivo = tema;
+		i3GEO.mapa.ativaTema(tema);
 		//var resolucao = "0.01"
 		if (tema === "ligados")
 		{opcao = "ligados";}

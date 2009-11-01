@@ -245,7 +245,7 @@ i3GEOF.analisaGeometrias = {
 		 		$i("i3GEOanalisageometriastemas").innerHTML = retorno.dados;
 		 		if ($i("i3GEOanalisageometriastemasLigados")){
 		 			$i("i3GEOanalisageometriastemasLigados").onchange = function(){
-		 				i3GEO.temaAtivo = $i("i3GEOanalisageometriastemasLigados").value;
+		 				i3GEO.mapa.ativaTema($i("i3GEOanalisageometriastemasLigados").value);
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){

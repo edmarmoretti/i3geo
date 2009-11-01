@@ -387,49 +387,33 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1100px;
+	background-position: 0px -1099px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid #DCDCDC;
 }
 .download
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1125px;
+	background-position: 0px -1124px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid #DCDCDC;
 }
 .conectarwms
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1150px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1149px;
+	width:16px;
+	border: 1px solid #DCDCDC;
 }
 .conectargeorss
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1175px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1174px;
+	width:16px;
+	border: 1px solid #DCDCDC;
 }
 .conectarservidor
 {
@@ -550,13 +534,9 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1525px;
+	background-position: 1px -1523px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid #DCDCDC;
 }
 .rosanordeste
 {
@@ -594,13 +574,9 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1650px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1648px;
+	width:16px;
+	border: 1px solid #DCDCDC;
 }
 .zoomAnterior
 {
@@ -633,8 +609,8 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1748px;
-	width:16px;
+	background-position: 0px -1749px;
+	width:18px;
 	height:20px;
 	cursor:pointer;
 }
@@ -656,13 +632,9 @@
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1825px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1824px;
+	width:16px;
+	border: 1px solid #DCDCDC;
 }
 .fonte
 {

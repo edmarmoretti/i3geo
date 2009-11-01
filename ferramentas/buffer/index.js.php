@@ -181,7 +181,7 @@ i3GEOF.buffer = {
 		 		$i("i3GEObufferSelTemas").style.display = "block";
 		 		if ($i("i3GEObuffertemasComSel")){
 		 			$i("i3GEObuffertemasComSel").onchange = function(){
-		 				i3GEO.temaAtivo = $i("i3GEObuffertemasComSel").value;
+		 				i3GEO.mapa.ativaTema($i("i3GEObuffertemasComSel").value);
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){

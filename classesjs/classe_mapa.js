@@ -84,6 +84,26 @@ i3GEO.mapa = {
 		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}
 	},
 	/*
+	Function: ativaTema
+	
+	Altera a variável i3GEO.temaAtivo e atualiza a interface em função do novo tema que for ativado
+	
+	Parametros:
+	
+	codigo {string} - código da camada
+	*/
+	ativaTema: function(codigo){
+		var noArvoreCamadas = $i("arrastar_"+codigo),
+			noAtualArvoreCamadas = $i("arrastar_"+i3GEO.temaAtivo);
+		i3GEO.temaAtivo = codigo;
+		if(noAtualArvoreCamadas){
+			noAtualArvoreCamadas.style.textDecoration = "";
+		}
+		if(noArvoreCamadas){
+			noArvoreCamadas.style.textDecoration = "underline";
+		}			
+	},
+	/*
 	Function: ativaLogo
 
 	Ativa ou desativa a logo marca.

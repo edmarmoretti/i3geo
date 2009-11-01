@@ -1363,7 +1363,7 @@ i3GEO.arvoreDeTemas = {
 		//
 		clearTimeout(tempoBotaoAplicar);
 		tempoBotaoAplicar = "";
-		i3GEO.temaAtivo = "";
+		i3GEO.mapa.ativaTema("");
 		//
 		//pega os temas ativados na árvore de menus
 		//

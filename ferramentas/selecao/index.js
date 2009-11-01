@@ -135,7 +135,7 @@ function pegaTemasSel()
 function tiposel(obj)
 {
 	var combotemas = $i("comboTemas");
-	window.parent.i3GEO.temaAtivo = pegaTemasSel();
+	window.parent.i3GEO.mapa.ativaTema(pegaTemasSel());
 	window.parent.i3GEO.eventos.MOUSEDOWN.remove("i3GEO.selecao.box.inicia()")
 	$i("parapoli").style.display = "none";
 	var fim = function()
@@ -192,7 +192,7 @@ comboTemasLigados("comboTemas",function(retorno)
 	{
 	 	$i("lugarComboX").innerHTML = "";
 	 	$i("lugarComboY").innerHTML = "";
-	 	window.parent.i3GEO.temaAtivo = pegaTemasSel()
+	 	window.parent.i3GEO.mapa.ativaTema(pegaTemasSel());
 		comboitens("selItem",$i("comboTemas").value,function(retorno)
 		{
 	 		comboi = retorno.dados

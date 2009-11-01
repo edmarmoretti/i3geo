@@ -198,7 +198,7 @@ i3GEOF.pontoEmPoligono = {
 		 		$i("i3GEOpontoEmPoligonoSelTemasPt").style.display = "block";
 		 		if ($i("i3GEOpontoEmPoligonotemasComSelPt")){
 		 			$i("i3GEOpontoEmPoligonotemasComSelPt").onchange = function(){
-		 				i3GEO.temaAtivo = $i("i3GEOpontoEmPoligonotemasComSelPt").value;
+		 				i3GEO.mapa.ativaTema($i("i3GEOpontoEmPoligonotemasComSelPt").value);
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){

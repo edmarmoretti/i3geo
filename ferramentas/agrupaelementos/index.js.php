@@ -183,7 +183,7 @@ i3GEOF.agrupaElementos = {
 		 		$i("i3GEOagrupaelementosSelTemas").style.display = "block";
 		 		if ($i("i3GEOagrupaelementostemasComSel")){
 		 			$i("i3GEOagrupaelementostemasComSel").onchange = function(){
-		 				i3GEO.temaAtivo = $i("i3GEOagrupaelementostemasComSel").value;
+		 				i3GEO.mapa.ativaTema($i("i3GEOagrupaelementostemasComSel").value);
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){

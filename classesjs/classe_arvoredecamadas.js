@@ -481,7 +481,7 @@ i3GEO.arvoreDeCamadas = {
                 					tema = (this.getEl()).id.split("arrastar_")[1];
 									i3GEO.contadorAtualiza++;
 									i3GEO.php.excluitema(i3GEO.atualiza,tema);							
-									i3GEO.temaAtivo = "";
+									i3GEO.mapa.ativaTema("");
 								}
 							}
 							//muda ordem de desenho do tema
@@ -825,7 +825,7 @@ i3GEO.arvoreDeCamadas = {
 		if(tema.status == 2){ck = ' CHECKED ';}
 		else
 		{ck = "";}
-		html = "<p id='arrastar_"+tema.name+"' style='text-align:left;font-size:11px;' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
+		html = "<p onclick='i3GEO.mapa.ativaTema(\""+tema.name+"\")' id='arrastar_"+tema.name+"' style='text-align:left;font-size:11px;' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA !== "")
 		{html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";}

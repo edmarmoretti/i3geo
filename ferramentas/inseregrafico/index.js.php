@@ -229,7 +229,7 @@ i3GEOF.insereGrafico = {
 		 			$i("i3GEOinseregraficotemasLigados").onchange = function(){
 		 				$i("i3GEOinseregraficolistai").innerHTML = "<p style=color:red >Aguarde...<br>";
 		 				i3GEO.php.listaItensTema(i3GEOF.insereGrafico.listaItens,$i("i3GEOinseregraficotemasLigados").value);
-		 				i3GEO.temaAtivo = $i("i3GEOinseregraficotemasLigados").value;
+		 				i3GEO.mapa.ativaTema($i("i3GEOinseregraficotemasLigados").value);
 		 			};
 				}
 				if(i3GEO.temaAtivo !== ""){

@@ -577,49 +577,33 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1100px;
+	background-position: 0px -1099px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid gray;
 }
 .download
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1125px;
+	background-position: 0px -1124px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid gray;
 }
 .conectarwms
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1150px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1149px;
+	width:16px;
+	border: 1px solid gray;
 }
 .conectargeorss
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1175px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1174px;
+	width:16px;
+	border: 1px solid gray;
 }
 .conectarservidor
 {
@@ -740,13 +724,9 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1525px;
+	background-position: 1px -1523px;
 	width:16px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	border: 1px solid gray;
 }
 .rosanordeste
 {
@@ -784,13 +764,9 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1650px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1648px;
+	width:16px;
+	border: 1px solid gray;
 }
 .zoomAnterior
 {
@@ -823,8 +799,8 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1748px;
-	width:16px;
+	background-position: 0px -1749px;
+	width:18px;
 	height:20px;
 	cursor:pointer;
 }
@@ -846,13 +822,9 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -1825px;
-	width:14px;
-	height:14px;
-	border-left: 1px solid gray;
-	border-bottom:1px solid gray;
-	border-top:1px solid #F8F8F8;
-	border-right:1px solid #F8F8F8;
+	background-position: 1px -1824px;
+	width:16px;
+	border: 1px solid gray;
 }
 .fonte
 {

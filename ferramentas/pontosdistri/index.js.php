@@ -208,7 +208,7 @@ i3GEOF.pontosDistri = {
 		 		}
 		 		$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo >"+retorno.dados + "</p>";
 	 			$i("i3GEOpontosDistritemasComSel").onchange = function(){
-	 				i3GEO.temaAtivo = $i("i3GEOpontosDistritemasComSel").value;
+	 				i3GEO.mapa.ativaTema($i("i3GEOpontosDistritemasComSel").value);
 	 			};
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOpontosDistritemasComSel").value = i3GEO.temaAtivo;
