@@ -50,7 +50,7 @@ Free Software Foundation, Inc., no endereço
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Versão 4.3 - beta';
+$mensagemInicia = 'Versão 4.3 - beta. Revisão SVN 1360';
 /*
 	Variable: tituloInstituicao
 	

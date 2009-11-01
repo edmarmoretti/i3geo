@@ -579,7 +579,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 0px -1099px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .download
 {
@@ -587,7 +587,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 0px -1124px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .conectarwms
 {
@@ -595,7 +595,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 1px -1149px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .conectargeorss
 {
@@ -603,7 +603,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 1px -1174px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .conectarservidor
 {
@@ -726,7 +726,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 1px -1523px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .rosanordeste
 {
@@ -766,7 +766,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 1px -1648px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .zoomAnterior
 {
@@ -824,7 +824,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-repeat: no-repeat;
 	background-position: 1px -1824px;
 	width:16px;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;
 }
 .fonte
 {

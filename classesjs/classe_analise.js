@@ -160,8 +160,13 @@ i3GEO.analise = {
 
 		Abre a janela que gera um tema com os centroides dos elementos selecionados
 		*/
-		centroide: function()
-		{i3GEO.janela.cria("400px","180px",i3GEO.configura.locaplic+"/ferramentas/centroide/index.htm","","","Centróide <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=21' >&nbsp;&nbsp;&nbsp;</a>");},
+		centroide: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.centroide()");}
+			if(typeof(i3GEOF.centroide) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/centroide/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.centroide.criaJanelaFlutuante()","i3GEOF.centroide_script");
+			}
+		},
 		/*
 		Function: dissolve
 
