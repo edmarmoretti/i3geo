@@ -157,7 +157,10 @@ string - javascript com os parametros
 					if ($res_count > 0){$sel = "sim";$existesel = true;}
 				}
 			}
-			if ((strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($oLayer->getmetadata("escondido") == ""))
+			$escondido = $oLayer->getmetadata("escondido");
+			if($escondido == "")
+			{$escondido = "NAO";}
+			if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($escondido == "NAO") )
 			{
 				$escala = $oLayer->getmetadata("escala");
 				if ($escala == ""){$escala = 0;}
