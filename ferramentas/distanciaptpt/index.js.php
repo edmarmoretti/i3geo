@@ -155,7 +155,9 @@ i3GEOF.distanciaptpt = {
 			var distancia = $i("i3GEOFdistanciaptptdistancia").value,
 				temaOrigem = $i("i3GEOdistanciaptpttemasComSel").value,
 				temaDestino = $i("i3GEOdistanciaptpttemas").value,
-				fim;
+				fim,
+				p,
+				cp;
 			if ((distancia*1 > 0) && (temaOrigem != "") && (temaDestino != "")){
 				i3GEOF.distanciaptpt.aguarde.visibility = "visible";
 				fim = function(retorno){
@@ -165,8 +167,8 @@ i3GEOF.distanciaptpt = {
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
 				};
-				var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value;
-				var cp = new cpaint();
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value;
+				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"distanciaptpt",fim);
 			}
@@ -193,7 +195,6 @@ i3GEOF.distanciaptpt = {
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOdistanciaptpttemasComSel").value = i3GEO.temaAtivo;
-					$i("i3GEOdistanciaptpttemasComSel").onchange.call();
 				}
 			},
 			"i3GEOdistanciaptptSelTemasOrigem",
@@ -220,7 +221,6 @@ i3GEOF.distanciaptpt = {
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOdistanciaptpttemas").value = i3GEO.temaAtivo;
-					$i("i3GEOdistanciaptpttemas").onchange.call();
 				}
 			},
 			"i3GEOdistanciaptptSelTemasDestino",

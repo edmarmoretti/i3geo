@@ -127,15 +127,19 @@ i3GEO.analise = {
 				var js = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.pontoEmPoligono.criaJanelaFlutuante()","i3GEOF.pontoEmPoligono_script");
 			}
-
 		},
 		/*
 		Function: nptPol
 
 		Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
 		*/
-		nptPol: function()
-		{i3GEO.janela.cria("400px","200px",i3GEO.configura.locaplic+"/ferramentas/nptpol/index.htm","","","Pontos por pol&iacute;gono <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=19' >&nbsp;&nbsp;&nbsp;</a>");},
+		nptPol: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.nptpol()");}
+			if(typeof(i3GEOF.nptpol) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/nptpol/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.nptpol.criaJanelaFlutuante()","i3GEOF.nptpol_script");
+			}
+		},
 		/*
 		Function: buffer
 

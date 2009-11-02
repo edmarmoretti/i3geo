@@ -109,7 +109,7 @@ i3GEOF.pontoEmPoligono = {
 	t0: function()
 	{
 		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos ou raster."
-		ins += "<p class='paragrafo'>As informa&ccedil;&otilde;es do tema poligonal ser&atilde;o agregadas a tabela do novo tema gerado."
+		ins += "<p class='paragrafo'>As informa&ccedil;&otilde;es do tema poligonal ser&atilde;o inseridas na tabela de atributos de um novo tema do tipo pontual."
 		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos."
 		i3GEO.util.proximoAnterior("","i3GEOF.pontoEmPoligono.t1()",ins,"i3GEOFgradeDePontost0","i3GEOpontoEmPoligonoresultado");
 	},

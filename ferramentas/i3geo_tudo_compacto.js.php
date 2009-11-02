@@ -7889,6 +7889,13 @@ i3GEO.util = {
 			else
 			{alert("Arvore de camadas não encontrada");}			
 		}
+		if(tipoCombo === "poligonos"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
 	},
 	/*
 	Function: checkTemas
