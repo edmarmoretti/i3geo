@@ -95,8 +95,8 @@ i3GEOF.graficoTema = {
 		ins += '			<p class="paragrafo" >Escolha os itens to tipo num&eacute;rico que compor&atilde;o cada parte do gr&aacute;fico<br><br>';	
 		ins += '			<div id=i3GEOgraficotemalistai class=digitar style="left:0px;top:0px;330px;height:80px;overflow:auto;display:block;">Escolha o tema para ver a lista de itens</div>';
 		ins += '			<br><br>';
-		ins += '			<input id=i3GEOgraficotemabotao1 size=35  type=button value="Criar gráficos" />';
-		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico: Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique em criar gr&aacute;ficos para inserir um novo tema com os gr&aacute;ficos.</div>';
+		ins += '			<p class="paragrafo" ><input id=i3GEOgraficotemabotao1 size=35  type=button value="Criar gráficos" />';
+		ins += '		<div id=i3GEOgraficotemamen1 style=top:10px;left:1px ><p class="paragrafo">Marque os itens para compor as partes do gr&aacute;fico. Edite os valores de cor (R,G,B) conforme o desejado. Ap&oacute;s escolher os itens, clique em criar gr&aacute;ficos para inserir um novo tema com os gr&aacute;ficos.</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOgraficotemaguia2obj" style="left:1px;display:none;">';
 		ins += '		<table summary="" class=lista width="90%">';
