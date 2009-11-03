@@ -317,8 +317,14 @@ i3GEO.tema = {
 
 		idtema - código do tema
 		*/
-		toponimia: function(idtema)
-		{i3GEO.janela.cria("350px","340px",i3GEO.configura.locaplic+"/ferramentas/toponimia/index.htm?tema="+idtema,"","","Topon&iacute;mia <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=36' >&nbsp;&nbsp;&nbsp;</a>");},
+		toponimia: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.toponimia()");}
+			if(typeof(i3GEOF.toponimia) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/toponimia/index.js.php";
+				i3GEO.mapa.ativaTema(idtema);
+				i3GEO.util.scriptTag(js,"i3GEOF.toponimia.criaJanelaFlutuante()","i3GEOF.toponimia_script");
+			}		
+		},
 		/*
 		Function: filtro
 
