@@ -93,7 +93,11 @@ i3GEO.gadgets = {
 
 		"mostraMenuSuspenso":
 
-		{idhtml:"menus",deslocaEsquerda:0}
+		{idhtml:"menus",deslocaEsquerda:0},
+		
+		"mostraVersao":
+		
+		{idhtml:"versaoi3geo"}
 	}	
 	
 	Tipo:
@@ -119,7 +123,30 @@ i3GEO.gadgets = {
 		"mostraHistoricoZoom":
 		{idhtml:"historicozoom"},
 		"mostraMenuSuspenso":
-		{idhtml:"menus",deslocaEsquerda:0}
+		{idhtml:"menus",deslocaEsquerda:0},
+		"mostraVersao":
+		{idhtml:"versaoi3geo"}
+	},
+	/*
+	Function: mostraVersao
+	
+	Mostra a versão atual do i3Geo armazenada na variável i3GEO.parametros.mensageminicial
+
+	Parametro:
+	
+	id {String} - id do elemento HTML que receberá o resultado. Esse id por default é obtido de
+	i3GEO.gadgets.PARAMETROS
+	*/
+	mostraVersao: function(id){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.mostraVersão()");}
+		if(arguments.length === 0 || id === "")
+		{id = i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml;}
+		else
+		{i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml = id;}
+		var temp = $i(id);
+		try
+		{temp.innerHTML = i3GEO.parametros.mensageminicia;}
+		catch(e){}
 	},
 	/*
 	Function: mostraCoordenadasUTM

@@ -79,7 +79,7 @@ Se $expoeMapfile = "nao", o nome do mapfile não é retornado
 */
 function iniciaMapa()
 {
-	global $kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	global $mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$cp,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
 	error_reporting(E_ALL);
 	//
 	//pega o xml com os sietmas para identificação
@@ -222,6 +222,7 @@ function iniciaMapa()
 	$res .= "var tempo =".(microtime(1) - $tempo).";";
 	$res .= "var mensagens ='".$m->pegaMensagens()."';";
 	$res .= "var kmlurl ='".$kmlurl."';";
+	$res .= "var mensagemInicia ='".$mensagemInicia."';";
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));

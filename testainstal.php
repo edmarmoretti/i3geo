@@ -82,6 +82,7 @@ echo "Existe o ms_configura.php? ";
 if(file_exists("ms_configura.php")) echo "Sim\n"; else {echo "Nao";saindo("ms_configura não encontrado");}
 echo "Incluindo...\n<br>";
 include ("ms_configura.php");
+echo "<b>$mensagemInicia </b> \n";
 echo "dir_tmp = $dir_tmp \n";
 echo "temasdir = $temasdir \n";
 echo "temasaplic = $temasaplic \n";

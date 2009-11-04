@@ -106,6 +106,8 @@ i3GEO = {
 	celularef {Numeric} - tamanho do pixel do mapa de referência em unidades do terreno
 	
 	kmlurl {String} - url de um arquivo kml que será inserido no mapa. Válido apenas na interface Google Maps
+
+	mensagemInicia {String} - mensagem definida em ms_configura.php indicando a versão atual do i3Geo.
 	*/
 	parametros: {
 		mapexten: "",
@@ -129,7 +131,8 @@ i3GEO = {
 		r:"",
 		locmapas:"",
 		celularef:"",
-		kmlurl:""
+		kmlurl:"",
+		mensageminicia:""
 	},
 	/*
 	Propriedade: finaliza
@@ -283,7 +286,8 @@ i3GEO = {
 			r:"",
 			locmapas:"",
 			extentref:"",
-			kmlurl:""
+			kmlurl:"",
+			mensageminicia:""
 		};
 		if(w < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
@@ -339,28 +343,31 @@ i3GEO = {
 						if(typeof(console) !== 'undefined'){console.error(e);}
 					}
 					i3GEO.ajuda.mostraJanela("Tempo de desenho em segundos: "+tempo,"");
-					i3GEO.parametros.mapexten= mapexten;
-					i3GEO.parametros.mapscale= parseInt(mapscale,10);
-					i3GEO.parametros.mapres= mapres;
-					i3GEO.parametros.pixelsize= g_celula;
-					i3GEO.parametros.mapfile= mapfile;
-					i3GEO.parametros.cgi= cgi;
-					i3GEO.parametros.extentTotal=mapexten;
-					i3GEO.parametros.mapimagem= mapimagem;
-					i3GEO.parametros.geoip= geoip;
-					i3GEO.parametros.listavisual= listavisual;
-					i3GEO.parametros.utilizacgi= utilizacgi;
-					i3GEO.parametros.versaoms= versaoms;
-					i3GEO.parametros.mensagens= mensagens;
-					i3GEO.parametros.locsistemas = locsistemas;
-					i3GEO.parametros.locidentifica = locidentifica;
-					i3GEO.parametros.r = r;
-					i3GEO.parametros.locmapas = locmapas;
-					i3GEO.parametros.extentref = extentref;
-					i3GEO.parametros.versaoms = versaoms;
-					i3GEO.parametros.versaomscompleta = versaomscompleta;
-					i3GEO.parametros.kmlurl = kmlurl;
-					
+					try{
+						i3GEO.parametros.mapexten= mapexten;
+						i3GEO.parametros.mapscale= parseInt(mapscale,10);
+						i3GEO.parametros.mapres= mapres;
+						i3GEO.parametros.pixelsize= g_celula;
+						i3GEO.parametros.mapfile= mapfile;
+						i3GEO.parametros.cgi= cgi;
+						i3GEO.parametros.extentTotal=mapexten;
+						i3GEO.parametros.mapimagem= mapimagem;
+						i3GEO.parametros.geoip= geoip;
+						i3GEO.parametros.listavisual= listavisual;
+						i3GEO.parametros.utilizacgi= utilizacgi;
+						i3GEO.parametros.versaoms= versaoms;
+						i3GEO.parametros.mensagens= mensagens;
+						i3GEO.parametros.locsistemas = locsistemas;
+						i3GEO.parametros.locidentifica = locidentifica;
+						i3GEO.parametros.r = r;
+						i3GEO.parametros.locmapas = locmapas;
+						i3GEO.parametros.extentref = extentref;
+						i3GEO.parametros.versaoms = versaoms;
+						i3GEO.parametros.versaomscompleta = versaomscompleta;
+						i3GEO.parametros.kmlurl = kmlurl;
+						i3GEO.parametros.mensageminicia = mensagemInicia;
+					}
+					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}					
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
 					
@@ -368,6 +375,7 @@ i3GEO = {
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
 
 					i3GEO.gadgets.mostraBuscaRapida();
+					i3GEO.gadgets.mostraVersao();
 					i3GEO.guias.cria();
 					if($i("arvoreAdicionaTema"))
 					{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
