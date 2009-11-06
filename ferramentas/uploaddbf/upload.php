@@ -126,8 +126,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				$novolayer->setmetadata("ITENSDESC",$its);
 				$novolayer->set("template","none.htm");
 			}
-			if($epsg != "")
-			{$novolayer->setProjection("init=epsg:".$epsg);}
+			if($uploaddbfEPSG != "")
+			{$novolayer->setProjection("init=epsg:".$uploaddbfEPSG);}
 			$adiciona = ms_newLayerObj($mapa, $novolayer);
 			$salvo = $mapa->save($map_file);
 			echo "Tema criado!!!";
