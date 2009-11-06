@@ -57,23 +57,23 @@ echo "<pre>\n";
 echo "<b>TESTE DE INSTALACAO DO i3Geo</b><br>\n";
 echo getcwd();
 //echo "<br>SERVER_SOFTWARE: ".$SERVER_SOFTWARE."<br>";
-echo "<br><br>PHP (a versão deve ser a 5x e menor que 5.3): ";
+echo "<br><br>PHP (a vers&atilde;o deve ser a 5x e menor que 5.3): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
 echo ms_GetVersion()."<br><br>";
 echo "---";
-echo "<br><pre>Extensoes:<br>";
-if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: não está instalado a libxml<br></span>";}
-if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: não está instalado a PDO<br></span>";}
-if (!extension_loaded( "pdo_sqlite")){echo "<span style=color:red >Problema: não está instalado a pdo_sqlite<br></span>";}
-if (!extension_loaded( "SQLite")){echo "<span style=color:red >Problema: não está instalado a SQLite<br></span>";}
-if (!extension_loaded( "SimpleXML")){echo "<span style=color:red >Problema: não está instalado a SimpleXML<br></span>";}
-if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: não está instalado a dom<br></span>";}
-if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: não está instalado a xml<br></span>";}
-if (!extension_loaded( "zlib")){echo "<span style=color:red >Problema: não está instalado a zlib <br></span>";}
-if (!extension_loaded( "gd")){echo "<span style=color:red >Problema: não está instalado a gd<br></span>";}
-if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: não está instalado a gd2 - o que não é muito crítico....<br></span>";}
+echo "<br><pre>Extens&otilde;es:<br>";
+if (!extension_loaded("libxml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a libxml<br></span>";}
+if (!extension_loaded( "PDO")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a PDO<br></span>";}
+if (!extension_loaded( "pdo_sqlite")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a pdo_sqlite<br></span>";}
+if (!extension_loaded( "SQLite")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SQLite<br></span>";}
+if (!extension_loaded( "SimpleXML")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a SimpleXML<br></span>";}
+if (!extension_loaded( "dom")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a dom<br></span>";}
+if (!extension_loaded( "xml")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a xml<br></span>";}
+if (!extension_loaded( "zlib")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a zlib <br></span>";}
+if (!extension_loaded( "gd")){echo "<span style=color:red >Problema: n&atilde;o est&aacute; instalado a gd<br></span>";}
+if (!extension_loaded( "gd2")){echo "<span style=color:red >Obs: n&atilde;o est&aacute; instalado a gd2 - o que não é muito crítico....<br></span>";}
 
 
 var_dump( $exts );
@@ -114,14 +114,14 @@ if(!file_exists($locmapserv))
 else
 {echo "O arquivo cgi $enderecocgi do mapserver foi encontrado \n";}
 */
-echo "Você pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, deverá aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
+echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
-echo "<br>Escrevendo no diretorio temporario...";
+echo "<br>Escrevendo no diret&oacute;rio tempor&aacute;rio...";
 $f = @fopen($dir_tmp."/teste.txt",w);
 @fclose($f);
-if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("Não foi possível gravar no diretório temporário");
+if (file_exists($dir_tmp."/teste.txt")) echo "ok\n"; else saindo("N&atilde;o foi poss&iacute;vel gravar no diret&oacute;rio tempor&aacute;rio");
 echo "Existe o geral1.map? ";
-if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map não encontrado");}
+if(file_exists("$locaplic/aplicmap/geral1.map")) echo "Sim\n"; else {echo "Nao";saindo("geral1.map n&atilde;o encontrado");}
 if ($locsistemas != "")
 {
 	echo "Existe o $locsistemas? ";
@@ -146,7 +146,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {$mapa = ms_newMapObj($temasaplic."/geral1windows.map");}
 else
 {$mapa = ms_newMapObj($temasaplic."/geral1.map");}
-echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...\nverifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
+echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no geral1.map ou geral1windows.map):</b>\n";
 $imgo = $mapa->draw();
 $nome = ($imgo->imagepath)."teste.png";
 echo "<p>Nome da imagem gerada: $nome </p>";
@@ -167,11 +167,11 @@ while($error && $error->code != MS_NOERR)
 	printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
 	$error = $error->next();
 }
-echo "<b>E agora..desenhando o mapa (se o mapa não aparecer é um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
-echo "Um problema bastante comum é o não reconhecimento do diretório ms_tmp pelo Apache. \nO diretório ms_tmp é utilizado pelo Mapserver e pelo i3geo para armazenar dados temporários. \nÉ nesse diretório que ficam as imagens do mapa.\n";
-echo "Quando o Apache não consegue utilizar esse diretório, a imagem não será mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa estão sendo criadas no ms_tmp após rodar o testainstal.php).\n";
-echo "Para solucionar esse problema, vc pode criar um link simbólico (nos sistemas linux),\n no mesmo local onde está instalado o i3geo, apontando para o local \nfísico onde está o ms_tmp.\n";
-echo "No wiki do portal do software público vc poderá encontrar mais detalhes sobre isso.\n";
+echo "<b>E agora..desenhando o mapa (se o mapa n&atilde;o aparecer &eacute; um problema...\nverifique os caminhos no ms_configura.php e no estadosl.map ou estadoslwindows.map):</b>\n";
+echo "Um problema bastante comum &eacute; o n&atilde;o reconhecimento do diret&oacute;rio ms_tmp pelo Apache. \nO diretório ms_tmp é utilizado pelo Mapserver e pelo i3geo para armazenar dados temporários. \nÉ nesse diretório que ficam as imagens do mapa.\n";
+echo "Quando o Apache n&atilde;o consegue utilizar esse diret&oacute;rio, a imagem n&atilde;o ser&aacute; mostrada,\n apesar de ser gerada dentro do ms_tmp (vc pode verificar se as imagens do \nmapa estão sendo criadas no ms_tmp após rodar o testainstal.php).\n";
+echo "Para solucionar esse problema, vc pode criar um link simb&oacute;lico (nos sistemas linux),\n no mesmo local onde está instalado o i3geo, apontando para o local \nfísico onde está o ms_tmp.\n";
+echo "No wiki do portal do software p&uacute;blico vc poder&aacute; encontrar mais detalhes sobre isso.\n";
 
 for($i=0;$i<($maptemp->numlayers);$i++)
 {
