@@ -212,7 +212,7 @@ i3GEO.janela = {
 		}
 		else{
 			$i(id+'_corpo').style.height=waltura;
-			$i(id+'_corpo').style.width=wlargura;
+			$i(id+'_corpo').style.width=wlargura-10;
 		}
 		fix = false;
 		if(nx === "" || nx === "center"){fix = true;}
