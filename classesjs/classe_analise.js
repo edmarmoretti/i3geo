@@ -181,8 +181,13 @@ i3GEO.analise = {
 
 		Abre a janela que gera um tema dissolvendo as divisas entre polígonos.
 		*/
-		dissolve: function()
-		{i3GEO.janela.cria("400px","230px",i3GEO.configura.locaplic+"/ferramentas/dissolve/index.htm","","","Dissolve <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=3&idajuda=22' >&nbsp;&nbsp;&nbsp;</a>");},
+		dissolve: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.dissolve()");}
+			if(typeof(i3GEOF.agrupaElementos) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/dissolve/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.dissolve.criaJanelaFlutuante()","i3GEOF.dissolve_script");
+			}
+		},
 		/*
 		Function: agrupaElementos
 

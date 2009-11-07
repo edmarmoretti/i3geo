@@ -1273,9 +1273,9 @@ i3GEO.util = {
 				if (n > 0)
 				{
 					if(multiplo)
-					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
+					{comboTemas = "<select 'style=font-size:12px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
 					else
-					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' name='"+nome+"'>";}
+					{comboTemas = "<select 'style=font-size:12px;' id='"+id+"' name='"+nome+"'>";}
 					comboTemas += "<option value=''>----</option>";
 					for (i=0;i<n;i++){
 						if(retorno[i].nome){
@@ -1337,6 +1337,14 @@ i3GEO.util = {
 		if(tipoCombo === "poligonos"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
+		if(tipoCombo === "poligonosSelecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
 			}
 			else
 			{alert("Arvore de camadas não encontrada");}			
