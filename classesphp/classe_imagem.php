@@ -160,18 +160,8 @@ Converte a imagem atual em tons de cinza
 */		
 	function cinzaNormal()
 	{
-		$sx = imagesx($this->img);
-		$sy = imagesy($this->img);
-		for ($x = 0; $x < $sx; $x++)
-		{
-			for ($y = 0; $y < $sy; $y++)
-			{
-				$rgb = imagecolorat($this->img, $x, $y);
-				$cor = ((($rgb >> 16) & 0xFF) + (($rgb >> 8) & 0xFF) + ($rgb & 0xFF)) / 3;
-				imagesetpixel($this->img, $x, $y, imagecolorallocate($this->img, $cor, $cor, $cor));
-			}
-		}
-		return ($this->img);
+		imagefilter($this->img, IMG_FILTER_GRAYSCALE);
+		return $this->img;
 	}
 /*
 function: sepiaClara

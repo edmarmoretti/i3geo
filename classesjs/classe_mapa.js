@@ -580,8 +580,13 @@ i3GEO.mapa = {
 
 		Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
 		*/
-		tipoimagem: function()
-		{i3GEO.janela.cria("300px","260px",i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.htm","","","Tipo de imagem <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=1' >&nbsp;&nbsp;&nbsp;</a>");},
+		tipoimagem: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.tipoimagem()");}
+			if(typeof(i3GEOF.tipoimagem) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/tipoimagem/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.tipoimagem.criaJanelaFlutuante()","i3GEOF.tipoimagem_script");
+			}
+		},
 		/*
 		Function: corFundo
 

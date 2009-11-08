@@ -6067,7 +6067,7 @@ i3GEO.php = {
 	*/
 	mudaescala: function(funcao,escala){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=mudaescala&escala="+escala+"&g_sid="+i3GEO.configura.sid+"&tipoimagem="+i3GEO.configura.tipoimagem;
 		cpJSON.call(p,"mudaescala",funcao);	
 	},
 	/*
