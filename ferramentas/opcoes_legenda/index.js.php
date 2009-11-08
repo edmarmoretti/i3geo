@@ -137,7 +137,17 @@ i3GEOF.opcoesLegenda = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,temp,titulo,cabecalho,minimiza;
+		cabecalho = function(){};
+		minimiza = function(){
+			var temp = $i("i3GEOF.opcoesLegenda_corpo");
+			if(temp){
+				if(temp.style.display === "block")
+				{temp.style.display = "none";}
+				else
+				{temp.style.display = "block";}
+			}
+		};
 		//cria a janela flutuante
 		titulo = "Legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=2' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
@@ -148,8 +158,10 @@ i3GEOF.opcoesLegenda = {
 			"",
 			titulo,
 			"i3GEOF.opcoesLegenda",
-			true,
-			"hd"
+			false,
+			"hd",
+			cabecalho,
+			minimiza
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesLegenda_corpo").style.backgroundColor = "white";

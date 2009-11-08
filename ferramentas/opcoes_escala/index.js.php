@@ -125,7 +125,17 @@ i3GEOF.opcoesEscala = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,temp,titulo,cabecalho,minimiza;
+		cabecalho = function(){};
+		minimiza = function(){
+			var temp = $i("i3GEOF.opcoesEscala_corpo");
+			if(temp){
+				if(temp.style.display === "block")
+				{temp.style.display = "none";}
+				else
+				{temp.style.display = "block";}
+			}
+		};
 		//cria a janela flutuante
 		titulo = "Barra de escala <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=3' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
@@ -136,8 +146,10 @@ i3GEOF.opcoesEscala = {
 			"",
 			titulo,
 			"i3GEOF.opcoesEscala",
-			true,
-			"hd"
+			false,
+			"hd",
+			cabecalho,
+			minimiza
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesEscala_corpo").style.backgroundColor = "white";

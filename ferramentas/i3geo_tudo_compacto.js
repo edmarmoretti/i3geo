@@ -7829,9 +7829,9 @@ i3GEO.util = {
 				if (n > 0)
 				{
 					if(multiplo)
-					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
+					{comboTemas = "<select 'style=font-size:12px;' id='"+id+"' size='4' multiple='multiple' name='"+nome+"'>";}
 					else
-					{comboTemas = "<select 'style=font-size:11px;' id='"+id+"' name='"+nome+"'>";}
+					{comboTemas = "<select 'style=font-size:12px;' id='"+id+"' name='"+nome+"'>";}
 					comboTemas += "<option value=''>----</option>";
 					for (i=0;i<n;i++){
 						if(retorno[i].nome){

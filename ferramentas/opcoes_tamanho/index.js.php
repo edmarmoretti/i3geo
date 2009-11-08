@@ -1,6 +1,5 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
 About: Licença
 
@@ -85,7 +84,17 @@ i3GEOF.opcoesTamanho = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo;
+		var janela,divid,temp,titulo,cabecalho,minimiza;
+		cabecalho = function(){};
+		minimiza = function(){
+			var temp = $i("i3GEOF.opcoesTamanho_corpo");
+			if(temp){
+				if(temp.style.display === "block")
+				{temp.style.display = "none";}
+				else
+				{temp.style.display = "block";}
+			}
+		};
 		//cria a janela flutuante
 		titulo = "Tamanho <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=4' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
@@ -96,8 +105,10 @@ i3GEOF.opcoesTamanho = {
 			"",
 			titulo,
 			"i3GEOF.opcoesTamanho",
-			true,
-			"hd"
+			false,
+			"hd",
+			cabecalho,
+			minimiza
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesTamanho_corpo").style.backgroundColor = "white";

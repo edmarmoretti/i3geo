@@ -841,8 +841,12 @@ i3GEO.configura = {
 			iddiv:"imprimir",
 			tipo:"",
 			dica:$trad("d12"),
-			funcaoonclick:function()
-			{i3GEO.janela.cria("320px","180px",i3GEO.configura.locaplic+"/ferramentas/imprimir/index.htm","","","Imprimir <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>");}
+			funcaoonclick:function(){
+				if(typeof(i3GEOF.imprimir) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/imprimir/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.imprimir.criaJanelaFlutuante()","i3GEOF.imprimir_script");
+				}			
+			}
 		},
 		{
 			//botão de localização do usuário pelo IP
