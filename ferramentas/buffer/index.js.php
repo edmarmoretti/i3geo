@@ -76,7 +76,7 @@ i3GEOF.buffer = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
+		var minimiza,cabecalho,janela,divid,temp,titulo,cabecalho,minimiza;
 		//cria a janela flutuante
 		titulo = "Entorno <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};

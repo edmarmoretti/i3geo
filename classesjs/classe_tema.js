@@ -379,8 +379,14 @@ i3GEO.tema = {
 
 		idtema - id que identifica o tema conforme definido no map file
 		*/
-		etiquetas: function(idtema)
-		{i3GEO.janela.cria("400px","250px",i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.htm?tema="+idtema,"","","Etiquetas <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=37' >&nbsp;&nbsp;&nbsp;</a>");},
+		etiquetas: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.etiqueta()");}
+			if(typeof(i3GEOF.etiqueta) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.js.php";
+				i3GEO.mapa.ativaTema(idtema);
+				i3GEO.util.scriptTag(js,"i3GEOF.etiqueta.criaJanelaFlutuante()","i3GEOF.etiqueta_script");
+			}
+		},
 		/*
 		Function: editaLegenda
 
