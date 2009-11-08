@@ -18,7 +18,7 @@ são também fornecidas para o cliente (navegador) na inicialização do mapa e fica
 
 Arquivo:
 
-i3geo/ms_configura.php
+ms_configura.php
 
 Licenca:
 
@@ -50,7 +50,7 @@ Free Software Foundation, Inc., no endereço
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Vers&atilde;o 4.3 - beta. Revis&atilde;o SVN 1380';
+$mensagemInicia = 'Vers&atilde;o 4.3 - beta. Revis&atilde;o SVN 1385';
 /*
 	Variable: tituloInstituicao
 	

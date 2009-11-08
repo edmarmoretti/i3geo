@@ -27,7 +27,7 @@ http://localhost/i3geo/ms_criamapa.php
 
 Arquivo:
 
-i3geo/ms_criamapa.php
+ms_criamapa.php
 
 Licenca:
 
