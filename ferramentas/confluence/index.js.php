@@ -31,9 +31,11 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Class: i3GEOF.confluence
 
-Realiza a busca de elementos em um tema tendo como base a tabela de atributos do tema.
+Mostra os pontos de confluência de coordenadas geográficas de 1 po 1 grau.
 
-O tema que será utilizado na inicialização é o que estiver armazenado na variável global i3GEO.temaAtivo
+Em cada confluência é mostrado um link para o site www.confluence.org
+
+Os pontos são mostrados conforme a extensão geográfica vista no mapa.
 */
 i3GEOF.confluence = {
 	/*

@@ -794,34 +794,10 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d11"),
 			funcaoonclick:function(){
-				var docel;
-				wikiAtivo = false;//esta variável é utilizada pela ferramenta durante a navegação no mapa. Se estiver true significa que a ferramenta está sendo atualizada durante um processo de navegação no mapa
-				g_operacao = "navega";
-				i3GEO.janela.cria("450px","190px",i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm","","","Wiki <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=73' >&nbsp;&nbsp;&nbsp;</a>");
-				atualizawiki = function(){				
-					if(!$i("wdocai"))
-					{i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");return;}
-					docel = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-					if (docel.getElementById("resultadowiki"))
-					{$i("wdocai").src = i3GEO.configura.locaplic+"/ferramentas/wiki/index.htm";}
-					else{
-						wikiAtivo = false;i3GEO.eventos.NAVEGAMAPA.remove("atualizawiki()");
-						if(i3GEO.Interface.ATUAL === "googlemaps"){
-							GEvent.removeListener(wikiDragend);
-							GEvent.removeListener(wikiZoomend);
-						}
-					}
-				};
-				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizawiki()") < 0){
-					i3GEO.eventos.NAVEGAMAPA.push("atualizawiki()");
-					if(i3GEO.Interface.ATUAL === "googlemaps"){
-   						wikiDragend = GEvent.addListener(i3GeoMap, "dragend", function() {atualizawiki();});
-   						wikiZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {atualizawiki();});						
-					}
-					if(i3GEO.Interface.ATUAL === "openlayers"){
-   						i3geoOL.events.register("moveend",i3geoOL,function(e){atualizawiki();});
-					}
-				}		
+				if(typeof(i3GEOF.wiki) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/wiki/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.wiki.criaJanelaFlutuante()","i3GEOF.wiki_script");
+				}
 			}
 		},
 		{
