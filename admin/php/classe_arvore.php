@@ -203,9 +203,8 @@ class Arvore
 						}
 					}
 				}
-				if(count($temas) > 0 || count($subgrupos) > 0)
-				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
+			$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
 		//pega os sistemas checando os perfis

@@ -211,8 +211,8 @@ i3GEO.janela = {
 			wdocaiframe.src = wsrc;
 		}
 		else{
-			$i(id+'_corpo').style.height=waltura;
-			$i(id+'_corpo').style.width=wlargura-10;
+			$i(id+'_corpo').style.height=parseInt(waltura,10);
+			$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;
 		}
 		fix = false;
 		if(nx === "" || nx === "center"){fix = true;}
