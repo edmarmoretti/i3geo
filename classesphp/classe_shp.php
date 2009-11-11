@@ -305,7 +305,16 @@ string - xy
 		if(!$this->layer){return "erro";}		
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		$this->layer->whichShapes($this->mapa->extent);
+		$prjMapa = $this->mapa->getProjection();
+		$prjTema = $this->layer->getProjection();
+		$ret = $this->mapa->extent;
+		if (($prjTema != "") && ($prjMapa != $prjTema))
+		{
+			$projOutObj = ms_newprojectionobj($prjTema);
+			$projInObj = ms_newprojectionobj($prjMapa);
+			$ret->project($projInObj, $projOutObj);
+		}
+		$this->layer->whichShapes($ret);
 		$xy = array();
 		while ($shape = $this->layer->nextShape())
 		{
