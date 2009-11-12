@@ -44,7 +44,7 @@ Array com a lista de extensoes que devem ser carregadas pelo i3geo.
 Outras extensoes exigidas pelo i3geo também são verificadas, como mapscript e gd.
 */
 $ler_extensoes = "";
-if(!function_exists("dl")){
+if(function_exists("dl")){
 	$extensoes = array("zlib","libxml","SimpleXML","dom","xml","simplexml","mbstring");
 	if (isset($ler_extensoes))
 	{
@@ -65,18 +65,6 @@ if(!function_exists("dl")){
 			{
 				@dl( 'php_'.$templ.".".$s );
 				$ler_extensoes[] = $templ;
-				/*
-				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-				{
-					@dl('php_'.$templ.'.dll');
-					$ler_extensoes[] = $templ;
-				}
-				else
-				{
-					@dl('php_'.$templ.'.so');
-					$ler_extensoes[] = $templ;
-				}
-				*/
 			}
 		}
 		//verifica se carregou a gd se não, tenta carregar a gd2
@@ -84,58 +72,17 @@ if(!function_exists("dl")){
 		{
 			@dl( 'php_gd.'.$s );
 			$ler_extensoes[] = 'gd';
-			/*
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
-				@dl('php_gd.dll');
-				$ler_extensoes[] = 'gd';
-			}
-			else
-			{
-				@dl('php_gd.so');
-				$ler_extensoes[] = 'gd';
-			}
-			*/
 		}
 		if (!function_exists('imagecreate'))
 		{
 			@dl( 'php_gd2.'.$s );
 			$ler_extensoes[] = 'gd2';
-			/*
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
-				@dl('php_gd2.dll');
-				$ler_extensoes[] = 'gd2';
-			}
-			else
-			{
-				@dl('php_gd2.so');
-				$ler_extensoes[] = 'gd2';
-			}
-			*/
 		}
 		//verifica se carregou o mapscript
 		if (!function_exists('ms_GetVersion'))
 		{
 			@dl( 'php_mapscript.'.$s );
 			$ler_extensoes[] = 'php_mapscript';	
-			/*
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
-				if(!@dl('php_mapscript_48.dll'))
-				{
-					@dl('php_mapscript.dll');
-					$ler_extensoes[] = 'mapscript';
-				}
-				else
-				{$ler_extensoes[] = 'mapscript_48';}
-			}
-			else
-			{
-				dl('php_mapscript.so');
-				$ler_extensoes[] = 'mapscript';
-			}
-			*/
 		}
 	}
 	if((is_array($ler_extensoes)) && (count($ler_extensoes) > 0))
