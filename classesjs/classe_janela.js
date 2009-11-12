@@ -234,9 +234,10 @@ i3GEO.janela = {
 		if(modal === true){
 			if($i(id+"_mask"))
 			{$i(id+"_mask").style.zIndex = 9000;}
-			if($i(id+"_c"))
-			{$i(id+"_c").style.zIndex = 10000;}
 		}
+		if($i(id+"_c"))
+		{$i(id+"_c").style.zIndex = 10000;}
+
 		if(i3GEO.Interface.ATUAL==="googleearth"){classe = "bd";}
 		temp = $i(id+'_cabecalho');
 		temp.className = classe;
