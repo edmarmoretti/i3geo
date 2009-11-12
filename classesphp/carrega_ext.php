@@ -43,7 +43,7 @@ Array com a lista de extensoes que devem ser carregadas pelo i3geo.
 
 Outras extensoes exigidas pelo i3geo também são verificadas, como mapscript e gd.
 */
-$ler_extensoes = array();
+$ler_extensoes = "";
 if(function_exists("dl")){
 	$extensoes = array("zlib","libxml","SimpleXML","dom","xml","simplexml","mbstring");
 	if (isset($ler_extensoes))
