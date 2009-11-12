@@ -702,7 +702,15 @@ g_traducao_ajuda = {
 			complemento:"",
 			tela:"ferramentas/download/exemplo.htm",
 			apijs:"i3GEO.tema.dialogo.download()"
-		}
+		},
+		"83": {
+			titulo: "Inserir texto interativamente",
+			diretorio:"i3geo/ferramentas/inseretxt",
+			categoria:"5",
+			pt:"Insere textos em local do mapa de forma interativa.",
+			complemento:"",
+			apijs:"i3GEO.mapa.dialogo.cliqueTexto()"
+		},
 	}
 };
 

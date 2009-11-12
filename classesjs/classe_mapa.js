@@ -157,77 +157,6 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Function: insereToponimo
-	
-	Insere um texto no mapa na posição clicada
-
-	O ponto é obtido do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	*/
-	insereToponimo: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.insereToponimo()");}
-		if (g_tipoacao === "textofid"){
-			//
-			//pega os parâmetros da janela flutuante aberta
-			//
-			var tema,item,pos,digi,doc,texto,f,t,a,cf,cs,xs,ys,c,m,fcs,fxs,fys,forca,md,mf,ox,oy,pl;
-			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			f = doc.getElementById("fonte").value;
-			t = doc.getElementById("tamanho").value;
-			a = doc.getElementById("angulo").value;
-			cf = doc.getElementById("fundoc").value;
-			if (cf === "")
-			{cf = "off";}
-			cs = doc.getElementById("sombra").value;
-			if (cs === "")
-			{cs = "off";}
-			xs = doc.getElementById("sombrax").value;
-			ys = doc.getElementById("sombray").value;
-			c = doc.getElementById("frente").value;
-			m = doc.getElementById("mascara").value;
-			if (m === "")
-			{m = "off";}
-			fcs = doc.getElementById("frentes").value;
-			if (fcs === "")
-			{fcs = "off";}
-			fxs = doc.getElementById("frentex").value;
-			fys = doc.getElementById("frentey").value;
-			forca = doc.getElementById("force").value;
-			md = doc.getElementById("mindistance").value;
-			mf = doc.getElementById("minfeaturesize").value;
-			ox = doc.getElementById("offsetx").value;
-			oy = doc.getElementById("offsety").value;
-			pl = doc.getElementById("partials").value;
-			pos = doc.getElementById("position").value;
-			//o texto será digitado
-			digi = function(retorno){
-				//se texto for igual a vazio é pq o valor foi pego de um atributo
-				texto = doc.getElementById("texto").value;
-				if(texto === ""){
-					i3GEO.janela.fechaAguarde("i3GEO.atualiza");
-					texto = retorno.data;
-				}
-				if (texto !== " "){
-					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-					i3GEO.contadorAtualiza++;
-					i3GEO.php.insereAnnotation(i3GEO.atualiza,g_nomepin+"topo",objposicaocursor.ddx+" "+objposicaocursor.ddy,texto,pos,pl,ox,oy,mf,md,forca,fcs,fxs,fys,m,c,ys,xs,cs,cf,a,t,f);
-				}
-			};
-			if (doc.getElementById("tipoInsere").value === "digitando")
-			{digi.call();}
-			else{
-				//o texto será capturado de um atributo do elemento
-				texto = "";
-				if ((doc.getElementById("temasLigados")) && (doc.getElementById("itemsel"))){
-					tema = doc.getElementById("temasLigados").value;
-					item = doc.getElementById("itemsel").value;
-					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-					i3GEO.php.identificaunico(digi,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);
-				}			
-			}
-		}
-		else{i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");}
-	},
-	/*
 	Function: inserePonto
 	
 	Insere um ponto no mapa na posição clicada
@@ -644,20 +573,9 @@ i3GEO.mapa = {
 		*/
 		cliqueTexto: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueTexto()");}
-			if (g_tipoacao !== "textofid"){
-				var temp,janela;
-				temp = Math.random() + "b";
-				temp = temp.split(".");
-				g_nomepin = "pin"+temp[1];
-				g_tipoacao = "textofid";
-				janela = i3GEO.janela.cria("360px","250px",i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.htm","","","Texto");
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.insereToponimo()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.mapa.insereToponimo()");}
-				temp = function(){
-					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.insereToponimo()");
-					i3GEO.barraDeBotoes.ativaBotoes();
-				};
-				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+			if(typeof(i3GEOF.inseretxt) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/inseretxt/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.inseretxt.criaJanelaFlutuante()","i3GEOF.inseretxt_script");
 			}
 		},
 		/*

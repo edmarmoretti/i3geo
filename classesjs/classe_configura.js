@@ -1052,10 +1052,6 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("textofid");
 				g_tipoacao = "";
 				i3GEO.mapa.dialogo.cliqueTexto();
-				if($i("img")){
-					$i("img").title = "clique para inserir o texto";
-					$i("img").style.cursor="pointer";
-				}
 			}
 		},
 		{
