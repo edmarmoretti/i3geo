@@ -1143,7 +1143,6 @@ width:16px;
 
 .yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a{background:#d8d8d8 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}
 .yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover{background:#2647a0 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x left -1400px;color:#fff;}.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{background:#bfdaff url(../../../../assets/skins/sam/sprite.png) repeat-x left -1300px;outline:0;}
-
 
 
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>

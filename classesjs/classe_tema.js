@@ -334,8 +334,14 @@ i3GEO.tema = {
 
 		idtema - código do tema
 		*/
-		filtro: function(idtema)
-		{i3GEO.janela.cria("480px","250px",i3GEO.configura.locaplic+"/ferramentas/filtro/index.htm?tema="+idtema,"","","Filtro <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=38' >&nbsp;&nbsp;&nbsp;</a>");},
+		filtro: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.filtro()");}
+			if(typeof(i3GEOF.filtro) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/filtro/index.js.php";
+				i3GEO.mapa.ativaTema(idtema);
+				i3GEO.util.scriptTag(js,"i3GEOF.filtro.criaJanelaFlutuante()","i3GEOF.filtro_script");
+			}		
+		},
 		/*
 		Function: procuraratrib
 

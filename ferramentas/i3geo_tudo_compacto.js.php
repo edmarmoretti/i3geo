@@ -6518,6 +6518,18 @@ i3GEO.php = {
 	 	cpJSON.call(p,"listaItensTema",funcao);
 	},
 	/*
+	Function: listaValoresItensTema
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<listaRegistros>	
+	*/
+	listaValoresItensTema: function(funcao,tema,itemTema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema;
+	 	cpJSON.call(p,"listaRegistros",funcao);
+	},
+	/*
 	Function: extRegistros
 
 	PHP:
@@ -8070,6 +8082,57 @@ i3GEO.util = {
 			eval("funcao(temp)");
 		};
 		i3GEO.php.listaItensTema(monta,tema);
+	},
+	/*
+	Function: comboValoresItem
+	
+	Cria uma caixa de seleção com os valores de um item de um tema
+	
+	Parametros:
+	
+	id {String} - id do elemento select que será criado
+	
+	tema {String} - código do tema (layer)
+		
+	itemTema {String} - nome do item
+	
+	funcao {Function} - função que será executada ao terminar a montagem do combo. Essa função receberá
+		como parâmetros um Array associativo contendo os dados em HTML gerados e o tipo de resultado. P.ex.:
+		{dados:comboTemas,tipo:"dados"}
+		tipo será uma string que pode ser "dados"|"mensagem"|"erro" indicando o tipo de retorno.
+		
+	onde {String} - id do elemento HTML que receberá o combo. É utilizado apenas para inserir uma mensagem de aguarde.
+	*/	
+	comboValoresItem: function(id,tema,itemTema,funcao,onde){
+		if (arguments.length == 5)
+		{$i(onde).innerHTML="<span style=color:red;font-size:10px; >buscando valores...</span>";}
+		var monta = function(retorno){
+			var ins = [],
+				i,
+				pares,
+				j,
+				temp;		
+			if (retorno.data != undefined){
+				ins.push("<select  id="+id+" >");
+				ins.push("<option value='' >---</option>");
+				for (i=0;i<retorno.data[1].registros.length; i++){
+					pares = retorno.data[1].registros[i].valores;
+					for (j=0;j<pares.length;j++)
+					{ins.push("<option value='"+pares[j].valor+"' >"+pares[j].valor+"</option>");}
+				}
+				ins.push("</select>");
+				ins = ins.join('');
+				temp = {dados:ins,tipo:"dados"};
+			}
+			else
+			{temp = {dados:'<div class=erro >Ocorreu um erro</erro>',tipo:"erro"};}
+			eval("funcao(temp)");
+		};
+		i3GEO.php.listaValoresItensTema(monta,tema,itemTema);
+		cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call( g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema,"listaRegistros",monta);
 	},
 	/*
 	Function: comboFontes

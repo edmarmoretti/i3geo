@@ -1059,6 +1059,18 @@ i3GEO.php = {
 	 	cpJSON.call(p,"listaItensTema",funcao);
 	},
 	/*
+	Function: listaValoresItensTema
+
+	PHP:
+	classesphp/classe_atributos.php
+	
+	<listaRegistros>	
+	*/
+	listaValoresItensTema: function(funcao,tema,itemTema){
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema;
+	 	cpJSON.call(p,"listaRegistros",funcao);
+	},
+	/*
 	Function: extRegistros
 
 	PHP:

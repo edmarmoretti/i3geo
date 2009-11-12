@@ -145,7 +145,7 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
-		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix;
+		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix,underlay;
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -215,18 +215,28 @@ i3GEO.janela = {
 			$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;
 		}
 		fix = false;
-		if(nx === "" || nx === "center"){fix = true;}
-		if(waltura === "auto")
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { zIndex:15000, modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
+		if(nx === "" || nx === "center")
+		{fix = true;}
+		if(modal === true)
+		{underlay = "none";}
 		else
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { zIndex:15000, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		{underlay = "shadow";}
+		if(waltura === "auto")
+		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
+		else
+		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
 		}
-		//YAHOO.janelaDoca.xp.panel.setFooter = "oi";
-		YAHOO.janelaDoca.xp.panel.render();
 		YAHOO.janelaDoca.xp.manager.register(YAHOO.janelaDoca.xp.panel);
+		YAHOO.janelaDoca.xp.panel.render();
+		if(modal === true){
+			if($i(id+"_mask"))
+			{$i(id+"_mask").style.zIndex = 9000;}
+			if($i(id+"_c"))
+			{$i(id+"_c").style.zIndex = 10000;}
+		}
 		if(i3GEO.Interface.ATUAL==="googleearth"){classe = "bd";}
 		temp = $i(id+'_cabecalho');
 		temp.className = classe;
