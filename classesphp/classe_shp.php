@@ -427,7 +427,7 @@ $para - linha|poligono
 			$lin = $shape->line(0);
 			$pt = $lin->point(0);
 			if (($prjTema != "") && ($prjMapa != $prjTema))
-			{$pt->project($projInObj, $projOutObj);
+			{$pt->project($projInObj, $projOutObj);}
 			$linha->add($pt);
 		}
 		if ($para == "poligono")
