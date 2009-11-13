@@ -343,8 +343,11 @@ i3GEOF.inseretxt = {
 		try{
 			if(i3GEOF.inseretxt.aguarde.visibility === "visible")
 			{return;}
+			if($i("i3GEOinseretxtguia3obj").style.display === "block"){
+				alert("Ative a guia 1 ou 2 para definir o texto");
+				return;
+			}
 			i3GEOF.inseretxt.aguarde.visibility = "visible";
-
 			var texto,temp,tema,item;
 			//
 			//de onde vem o texto
