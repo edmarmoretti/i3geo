@@ -1009,10 +1009,6 @@ i3GEO.configura = {
 				i3GEO.barraDeBotoes.ativaIcone("inserexy");
 				g_tipoacao = "";
 				i3GEO.mapa.dialogo.cliquePonto();
-				if($i("img")){
-					$i("img").title = "clique para inserir um ponto";
-					$i("img").style.cursor="crosshair";
-				}
 			}
 		},
 		{

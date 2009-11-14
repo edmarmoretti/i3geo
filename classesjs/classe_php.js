@@ -120,10 +120,10 @@ i3GEO.php = {
 	
 	<SHP->insereSHP>
 	*/
-	insereSHP: function(funcao,tema,item,valoritem,xy){
+	insereSHP: function(funcao,tema,item,valoritem,xy,projecao){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&item="+item+"&valor="+valoritem+"&tema="+tema+"&xy="+xy+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"insereSHPgrafico",funcao);
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHP&item="+item+"&valor="+valoritem+"&tema="+tema+"&xy="+xy+"&projecao="+projecao+"&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"insereSHP",funcao);
 	},
 	/*
 	Function: pegaMensagens
@@ -297,6 +297,23 @@ i3GEO.php = {
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemas&g_sid="+sid+"&tipo="+tipo;
 		cpJSON.call(p,"listaTemas",funcao);	
 	},
+	/*
+	Function: listaTemasEditaveis
+
+	PHP:
+	classesphp/classe_mapa.php
+	
+	<Mapa->listaTemasLocais>	
+	*/
+	listaTemasEditaveis: function(funcao,locaplic,sid){
+		if(arguments.length === 1){
+			locaplic = i3GEO.configura.locaplic;
+			sid = i3GEO.configura.sid;
+		}
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=listatemaslocais&g_sid="+sid;
+		cpJSON.call(p,"listatemaslocais",funcao);	
+	},
+
 	/*
 	Function: listaTemasComSel
 

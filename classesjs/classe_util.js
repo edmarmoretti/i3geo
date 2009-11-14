@@ -1317,6 +1317,9 @@ i3GEO.util = {
 			else
 			{i3GEO.php.listaTemas(monta,"ligados",i3GEO.configura.locaplic,i3GEO.configura.sid);}
 		}
+		if(tipoCombo === "editaveis"){
+			i3GEO.php.listaTemasEditaveis(monta,i3GEO.configura.locaplic,i3GEO.configura.sid);
+		}
 		if(tipoCombo === "selecionados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));

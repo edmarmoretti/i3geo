@@ -157,38 +157,6 @@ i3GEO.mapa = {
 		}
 	},
 	/*
-	Function: inserePonto
-	
-	Insere um ponto no mapa na posição clicada
-
-	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
-	*/
-	inserePonto: function(){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.inserePonto()");}
-		if (g_tipoacao === "inserexy"){
-			var doc,ins,item,valoritem;
-			doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
-			if(doc.getElementById("resultado")){
-				ins = doc.getElementById("resultado").innerHTML;
-				ins = ins + "<div style='font-size:12px' >" + objposicaocursor.ddx +" " + objposicaocursor.ddy + "</div><br>";
-				doc.getElementById("resultado").innerHTML = ins;
-			}
-			item = "";
-			valoritem = "";
-			if((doc.getElementById("valorItem")) && (doc.getElementById("itemtema"))){
-				item = doc.getElementById("itemtema").value;
-				valoritem = doc.getElementById("valorItem").value;
-			}
-			if (g_nomepin === "")
-			{alert("Nenhum tema definido para editar");}
-			else{
-				i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
-				i3GEO.contadorAtualiza++;
-				i3GEO.php.insereSHP(i3GEO.atualiza,g_nomepin,item,valoritem,objposicaocursor.ddx+" "+objposicaocursor.ddy);
-			}
-		}
-	},
-	/*
 	Classe: i3GEO.mapa.recupera
 	
 	Tenta recuperar o mapa caso ocorra algum problema
@@ -587,20 +555,9 @@ i3GEO.mapa = {
 		*/
 		cliquePonto: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliquePonto()");}
-			if (g_tipoacao !== "inserexy"){
-				g_tipoacao = "inserexy";
-				var temp,janela;
-				temp = Math.random() + "a";
-				temp = temp.split(".");
-				g_nomepin = "pin"+temp[1];
-				janela = i3GEO.janela.cria("500px","300px",i3GEO.configura.locaplic+'/ferramentas/inserexy2/index.htm',"","","Insere");
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEO.mapa.inserePonto()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.mapa.inserePonto()");}
-				temp = function(){
-					i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.mapa.inserePonto()");
-					i3GEO.barraDeBotoes.ativaBotoes();
-				};
-				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+			if(typeof(i3GEOF.inserexy) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/inserexy2/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.inserexy.criaJanelaFlutuante()","i3GEOF.inserexy_script");
 			}
 		},
 		/*
