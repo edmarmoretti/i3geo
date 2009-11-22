@@ -301,10 +301,10 @@ i3GEOF.analisaGeometrias = {
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listageometrias",
 			cp = new cpaint();
 		montalistageometrias = function(retorno){
-			if(retorno.data !== "")
+			if(retorno.data != "") //não comparar com !==
 			{
 				var ins,cor,temp,j,k,i;
-				ins = "<input id=i3GEOanalisageometriasbotao4 type=button size=20  value='Excluir marcados' />&nbsp;&nbsp;";
+				ins = "<p class=paragrafo ><input id=i3GEOanalisageometriasbotao4 type=button size=20  value='Excluir marcados' />&nbsp;&nbsp;";
 				ins += "<input id=i3GEOanalisageometriasbotao5 type=i3GEOanalisageometriasbutton size=20  value='Ver no mapa' /><br><br>";
 				cor = "rgb(245,245,245)";
 				for (i=0;i<retorno.data.length; i++)
@@ -341,6 +341,7 @@ i3GEOF.analisaGeometrias = {
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";			
 			}
 			else{
+				
 				$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = "<p class=paragrafo >Nenhuma geometria dispon&iacute;vel.";
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			}
