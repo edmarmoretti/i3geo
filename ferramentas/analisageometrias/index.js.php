@@ -116,7 +116,7 @@ i3GEOF.analisaGeometrias = {
 		ins += '		<p class=paragrafo >Tipo de sele&ccedil;&atilde;o:';
 		ins += '		<div id="i3GEOanalisageometriasoperacao" style="width:90%;text-align:left;left:0px">';
 		ins += '		</div><br>';
-		ins += '		<input id=i3GEOanalisageometriasbotao1 size=45 type=button value="Capturar as geometrias selecionadas"/><br><br>';
+		ins += '		<p class=paragrafo ><input id=i3GEOanalisageometriasbotao1 size=45 type=button value="Capturar as geometrias selecionadas"/><br><br>';
 		ins += '		<div id=i3GEOanalisageometriasmen1 style="top:5px;left:0px"><p class=paragrafo >Ap&oacute;s escolher o tema, clique no mapa para selecionar os elementos desejados, caso vc j&aacute; n&atilde;o tenha feito isso ou caso deseje alterar a sele&ccedil;&atilde;o. Conclu&iacute;da a sele&ccedil;&atilde;o, clique no bot&atilde;o de captura para obter as geometrias. <br>As geometrias capturadas podem ser vistas na segunda guia.';
 		ins += '		</div>';
 		ins += '	</div>';
