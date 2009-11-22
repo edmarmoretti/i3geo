@@ -2765,7 +2765,7 @@ function redesenhaMapa()
 	}
 	$mensagens = "var mensagens ='".$m->pegaMensagens()."'";
 	restauraCon($map_file,$postgis_mapa);
-
+	ob_clean();
 	if (($par == "") || ($imagem == ""))
 	{$cp->set_data("erro");}
 	else

@@ -424,6 +424,7 @@ $para - linha|poligono
 		$this->layer->whichShapes($ret);
 		$linha = ms_newLineObj();
 		$pponto = "";
+		$pontos = array();
 		while ($shape = $this->layer->nextShape())
 		{
 			$lin = $shape->line(0);
@@ -432,19 +433,15 @@ $para - linha|poligono
 			{$pponto = $pt;}
 			if (($prjTema != "") && ($prjMapa != $prjTema))
 			{$pt->project($projInObj, $projOutObj);}
-			$linha->add($pt);
+			$pontos[] = $pt->x;
+			$pontos[] = $pt->y;
 		}
+		$pontos = implode(" ",$pontos);
+		$pontos = xy2wkt($pontos);
 		if ($para == "poligono")
-		{
-			$linha->add($pponto);
-		}
-		$shape = ms_newShapeObj($tipos);
-		$shape->add($linha);
-
-		//for ($i=0;$i < $linha->numpoints;$i++)
-		//{var_dump($linha->point($i));}
-
-
+		{$shape = ms_shapeObjFromWkt($pontos["poligono"]);}
+		else
+		{$shape = ms_shapeObjFromWkt($pontos["linha"]);}
 		foreach ($items as $ni)
 		{$reg[] = "-";}
 		$novoshpf->addShape($shape);
