@@ -212,7 +212,10 @@ i3GEO.janela = {
 		}
 		else{
 			$i(id+'_corpo').style.height=parseInt(waltura,10);
-			$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;
+			if(navn)
+			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;}
+			else
+			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-4;}
 		}
 		fix = false;
 		if(nx === "" || nx === "center")
