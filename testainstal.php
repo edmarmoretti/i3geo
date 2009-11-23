@@ -61,6 +61,7 @@ echo "<br><br>PHP (a vers&atilde;o deve ser a 5x e menor que 5.3): ";
 echo "<br>".phpversion()."<br>\n";
 include("classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
+echo "Obs: MapServer (a vers&atilde;o deve ser &gt;= 5.2 para que a sobreposi&ccedil;&atilde;o de temas funcione na interface Google Maps): ";
 echo ms_GetVersion()."<br><br>";
 echo "---";
 echo "<br><pre>Extens&otilde;es:<br>";

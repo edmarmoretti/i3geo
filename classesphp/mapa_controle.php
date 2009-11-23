@@ -2243,7 +2243,7 @@ Include:
 			$m->salva();
 		}
 		if ($opcao == "listaSimbolos")
-		{$cp->set_data($m->listaSimbolos($tipo,$dir_tmp,$imgdir));}
+		{$cp->set_data($m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick));}
 		if ($opcao == "pegaparametros")
 		{$cp->set_data($m->pegaParametros($classe));}
 	break;

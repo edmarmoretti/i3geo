@@ -7240,11 +7240,11 @@ i3GEO.util = {
 
 	valor {String} - valor do input
 	
-	tipo {String - normal|cor tipo de input. Por default é normal. Se for definido como cor, a cor do texto muda conforme se altera os valores
+	nome {String - name do input
 	*/
-	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,tipo) {
+	$inputText: function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome) {
 		if(arguments.length === 6)
-		{tipo = "normal";}
+		{nome = "";}
 		if(idPai !== ""){
 			if(larguraIdPai !== "")
 			{$i(idPai).style.width=larguraIdPai+"px";}
@@ -7255,12 +7255,7 @@ i3GEO.util = {
 			$i(idPai).onmouseout = function()
 			{this.className = "";};
 		}
-		if(tipo === "cor"){
-			return "<input tabindex='0' onchange='javascript:i3GEO.util.$inputTextMudaCor(this);' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' />";
-		}
-		else{
-			return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' />";
-		}	
+		return "<input tabindex='0' onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' onclick='javascript:this.select();this.className=\"digitarMouseclick\";' id='"+idInput+"' title='"+titulo+"' type='text' size='"+digitos+"' class='digitar' value='"+valor+"' name='"+nome+"' />";
 	},
 	$inputTextMudaCor: function(obj){
 		var n = obj.value.split(" ");
@@ -8395,10 +8390,10 @@ i3GEO.util = {
 $im = function(g){
 	return i3GEO.util.$im(g);
 };
-$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor,tipo){
+$inputText = function(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome){
 	if(arguments.length === 6)
-	{tipo = "normal";}
-	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor,tipo);
+	{nome = "";}
+	return i3GEO.util.$inputText(idPai,larguraIdPai,idInput,titulo,digitos,valor,nome);
 };
 $top = function(id,valor){
 	i3GEO.util.$top(id,valor);

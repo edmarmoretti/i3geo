@@ -188,7 +188,16 @@ i3GEO.gadgets = {
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 			{return;}
 			if($i("wdoca")){return;}
-			var tempUtm = function(retorno){
+			var tempUtm,s,n,i,t;
+			s = document.getElementsByTagName("script");
+			n = s.length;
+			for (i=0;i < n;i++){
+				t = s[i].id;
+				t = t.split(".");
+				if(t[0] === "i3GEOF")
+				{return;}
+			}
+			tempUtm = function(retorno){
 				var funcao,temp;
 				funcao = "$i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display='none';";
 				funcao += "if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml == i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml)";

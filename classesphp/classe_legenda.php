@@ -447,55 +447,57 @@ $dir_tmp - Diretório temporário do mapserver.
 
 $imgdir - Diretório temporário das imagens.
 
+$onclick - Função que será incluída no HTML no evento onclick sobre o símbolo
+
 return:
 String no formato HTML com as imagens dos símbolos
 */
-function listaSimbolos($tipo,$dir_tmp,$imgdir)
-{
-	if ($tipo == 3){$tipo = 2;} //tipo raster
-	if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
+	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick)
 	{
-		$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc","w");
-		if ($tipo == 2){$t="simpol.map";}
-		if ($tipo == 0){$t="simpt.map";}
-		if ($tipo == 1){$t="simlin.map";}
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);}
-		else
-		{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
-		$ins = "";
-		$ns = $mapatemp->getnumsymbols();
-		$l = $mapatemp->getlayer(0);
-		$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
-		$this->mapa->setsymbolset($novoss);
-		for ($i=0;$i < $ns;++$i)
+		if ($tipo == 3){$tipo = 2;} //tipo raster
+		if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
 		{
-			$oSymbol = $this->mapa->getSymbolObjectById($i);
-			$nomes = $oSymbol->name;
-			$adiciona = ms_newLayerObj($this->mapa, $l);
-			$nomel = $l->name;
-			$tematemp= $this->mapa->getlayerbyname($nomel);
-			$c = $tematemp->getClass(0);
-			$e = $c->getstyle(0);
-			$e->set("symbolname",$nomes);
-			$e->set("size",5);
-			$ico = $c->createLegendIcon(40,40);
-			$nimg = $ico->saveWebImage();
-			$pat = $this->mapa->web->imageurl;
-			$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$nomes." onclick='aplicarsim(this)'>";
+			$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc","w");
+			if ($tipo == 2){$t="simpol.map";}
+			if ($tipo == 0){$t="simpt.map";}
+			if ($tipo == 1){$t="simlin.map";}
+			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
+			{$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);}
+			else
+			{$mapatemp = ms_newMapObj($this->localaplicacao."/aplicmap/".$t);}
+			$ins = "";
+			$ns = $mapatemp->getnumsymbols();
+			$l = $mapatemp->getlayer(0);
+			$novoss = dirname($this->mapa->symbolsetfilename)."/".basename($mapatemp->symbolsetfilename);
+			$this->mapa->setsymbolset($novoss);
+			for ($i=0;$i < $ns;++$i)
+			{
+				$oSymbol = $this->mapa->getSymbolObjectById($i);
+				$nomes = $oSymbol->name;
+				$adiciona = ms_newLayerObj($this->mapa, $l);
+				$nomel = $l->name;
+				$tematemp= $this->mapa->getlayerbyname($nomel);
+				$c = $tematemp->getClass(0);
+				$e = $c->getstyle(0);
+				$e->set("symbolname",$nomes);
+				$e->set("size",5);
+				$ico = $c->createLegendIcon(40,40);
+				$nimg = $ico->saveWebImage();
+				$pat = $this->mapa->web->imageurl;
+				$ins .= "<img src='".$nimg."' style='cursor:pointer;border: 5px solid #FFFFFF' title=".$nomes." onclick='".$onclick."'>";
+			}
+			fwrite($f,"<?php \$res = \"".$ins."\";?>");
+			fclose($f);
+			copy ($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc",$dir_tmp."/comum/simbolos".$tipo.".inc");
+			return $ins;
 		}
-		fwrite($f,"<?php \$res = \"".$ins."\";?>");
-		fclose($f);
-		copy ($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc",$dir_tmp."/comum/simbolos".$tipo.".inc");
-		return $ins;
+		else
+		{
+			$res = "";
+			include_once $dir_tmp."/comum/simbolos".$tipo.".inc";
+			return $res;
+		}
 	}
-	else
-	{
-		$res = "";
-		include_once $dir_tmp."/comum/simbolos".$tipo.".inc";
-		return $res;
-	}
-}
 /*
 function: pegaParametros
 

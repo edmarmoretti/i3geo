@@ -1310,8 +1310,6 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaitensrelh").value=listai;
 			$i("i3GEOtabelarelatorio").submit();
 		}catch(e){alert(e);}
-
-
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
