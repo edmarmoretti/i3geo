@@ -268,6 +268,13 @@ i3GEO.janela = {
 			else
 			{temp.style.display = "block";}
 		}
+		temp = $i(id+"_resizehandle");
+		if(temp){
+			if(temp.style.display === "none")
+			{temp.style.display = "block";}
+			else
+			{temp.style.display = "none";}
+		}
 		temp = $i(id+"_c");
 		if(temp){
 			temp = temp.getElementsByTagName("div");
