@@ -82,13 +82,7 @@ i3GEOF.gradeDePontos = {
 		titulo = "Grade de pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=15' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.gradeDePontos_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.gradeDePontos");
 		};
 		janela = i3GEO.janela.cria(
 			"400px",

@@ -227,13 +227,7 @@ i3GEOF.legenda = {
 			i3GEOF.legenda.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.legenda_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.legenda");
 		};
 		//cria a janela flutuante
 		titulo = "Editor de legenda <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>";

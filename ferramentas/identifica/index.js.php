@@ -169,13 +169,7 @@ i3GEOF.identifica = {
 			i3GEOF.identifica.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.identifica_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.identifica");
 		};
 		//cria a janela flutuante
 		titulo = "Identifica <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=70' >&nbsp;&nbsp;&nbsp;</a>";

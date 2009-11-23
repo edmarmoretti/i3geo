@@ -88,13 +88,7 @@ i3GEOF.opcoesTempo = {
 		var janela,divid,temp,titulo;
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.opcoesTempo_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}		
+			i3GEO.janela.minimiza("i3GEOF.opcoesTempo");
 		};
 		//cria a janela flutuante
 		titulo = "Temporizador <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=9' >&nbsp;&nbsp;&nbsp;</a>";

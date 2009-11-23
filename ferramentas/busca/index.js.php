@@ -117,13 +117,7 @@ i3GEOF.busca = {
 			i3GEOF.busca.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.busca_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
 		titulo = "Procurar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";

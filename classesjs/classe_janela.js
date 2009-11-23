@@ -249,6 +249,37 @@ i3GEO.janela = {
 		return([YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},
 	/*
+	function: minimiza
+	
+	Minimiza ou maximiza a janela
+	
+	Parametro:
+	
+	id {string} - prefixo utilizado na composição do id da janela
+	*/
+	minimiza: function(id){
+		var temp = $i(id+"_corpo"),n,i;
+		if(temp){
+			if(temp.style.display === "block")
+			{temp.style.display = "none";}
+			else
+			{temp.style.display = "block";}
+		}
+		temp = $i(id+"_c");
+		if(temp){
+			temp = temp.getElementsByTagName("div");
+			n = temp.length;
+			for(i=0;i<n;i++){
+				if(temp[i].className === "underlay"){
+					if(temp[i].style.display === "none")
+					{temp[i].style.display = "block";}
+					else
+					{temp[i].style.display = "none";}
+				}
+			}
+		}
+	},
+	/*
 	Function: fecha
 	
 	Aplica a opção definida em ANTESFECHA e elimina alguns objetos que são comumente adicionados por algumas operações do i3geo

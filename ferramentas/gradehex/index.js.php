@@ -82,13 +82,7 @@ i3GEOF.gradeDeHex = {
 		titulo = "Grade de hex&aacute;gonos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=16' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.gradeDeHex_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.gradeDeHex");
 		};
 		janela = i3GEO.janela.cria(
 			"400px",

@@ -91,13 +91,7 @@ i3GEOF.opcoesFundo = {
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.opcoesFundo_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.opcoesFundo");
 		};
 		//cria a janela flutuante
 		titulo = "Cor do fundo <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=6' >&nbsp;&nbsp;&nbsp;</a>";

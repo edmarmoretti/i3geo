@@ -165,13 +165,7 @@ i3GEOF.pontosDistri = {
 			i3GEOF.pontosDistri.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.pontosDistri_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.pontosDistri");
 		};
 		//cria a janela flutuante
 		titulo = "Distribui&ccedil;&atilde;o de pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=20' >&nbsp;&nbsp;&nbsp;</a>";

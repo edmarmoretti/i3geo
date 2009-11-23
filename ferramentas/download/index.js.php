@@ -86,13 +86,7 @@ i3GEOF.download = {
 		var janela,divid,temp,titulo;
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.download_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.download");
 		};
 		titulo = "Download <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=82' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(

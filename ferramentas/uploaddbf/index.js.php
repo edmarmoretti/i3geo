@@ -105,13 +105,7 @@ i3GEOF.uploaddbf = {
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.uploaddbf_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.uploaddbf");
 		};
 		titulo = "Upload de arquivo de dados <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(

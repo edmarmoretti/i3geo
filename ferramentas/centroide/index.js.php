@@ -81,13 +81,7 @@ i3GEOF.centroide = {
 		titulo = "Centróide <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=21' >&nbsp;&nbsp;&nbsp;</a>";
 		cabecalho = function(){};
 		minimiza = function(){
-			var temp = $i("i3GEOF.centroide_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.centroide");
 		};
 		janela = i3GEO.janela.cria(
 			"400px",

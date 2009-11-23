@@ -170,13 +170,7 @@ i3GEOF.analisaGeometrias = {
 			i3GEOF.analisaGeometrias.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.analisaGeometrias_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.agrupaElementos");
 		};
 		//cria a janela flutuante
 		titulo = "An&aacute;lise de geometrias <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=23' >&nbsp;&nbsp;&nbsp;</a>";

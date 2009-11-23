@@ -284,13 +284,7 @@ i3GEOF.tabela = {
 			i3GEOF.tabela.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.tabela_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.tabela");
 		};
 		//cria a janela flutuante
 		titulo = "Tabela <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=39' >&nbsp;&nbsp;&nbsp;</a>";

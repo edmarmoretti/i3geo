@@ -138,13 +138,7 @@ i3GEOF.buscaFotos = {
 			i3GEOF.buscaFotos.ativaFoco();
 		};
 		minimiza = function(){
-			var temp = $i("i3GEOF.buscaFotos_corpo");
-			if(temp){
-				if(temp.style.display === "block")
-				{temp.style.display = "none";}
-				else
-				{temp.style.display = "block";}
-			}
+			i3GEO.janela.minimiza("i3GEOF.buscaFotos");
 		};
 		//cria a janela flutuante
 		titulo = "Fotos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=74' >&nbsp;&nbsp;&nbsp;</a>";
