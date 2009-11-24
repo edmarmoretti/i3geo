@@ -1,6 +1,5 @@
 <?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
 About: Licença
 
@@ -265,7 +264,6 @@ i3GEOF.inseretxt = {
 		i3GEOF.inseretxt.aguarde = $i("i3GEOF.inseretxt_imagemCabecalho").style;
 		$i("i3GEOF.inseretxt_corpo").style.backgroundColor = "white";
 		i3GEOF.inseretxt.inicia(divid);
-		
 		if(i3GEO.eventos.MOUSECLIQUE.toString().search("i3GEOF.inseretxt.cria()") < 0)
 		{i3GEO.eventos.MOUSECLIQUE.push("i3GEOF.inseretxt.cria()");}
 		temp = function(){
@@ -357,7 +355,7 @@ i3GEOF.inseretxt = {
 				}			
 			}
 			else{
-				var temp = function(retorno){
+				temp = function(retorno){
 					i3GEOF.inseretxt.insere(retorno.data);
 				};
 				tema = $i("i3GEOinseretxtComboTemas").value;
@@ -397,67 +395,3 @@ i3GEOF.inseretxt = {
 	}
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
-/*
-parametrosURL()
-aguarde("block")
-ativaGuias("")
-mostraGuia("guia1")
-comboi = ""
-mensagemAjuda("men2",$i("men2").innerHTML);
-$i("guia1").onclick = function()
-{mostraGuia("guia1");$i("tipoInsere").value = "digitando"}
-$i("guia2").onclick = function()
-{
-	mostraGuia("guia2");
-	$i("tipoInsere").value = "clicando"
-	comboTemasLigados("temasLigados",function(retorno)
-	{
- 		$i("temasi").innerHTML = retorno.dados
- 		aguarde("none")
- 		if ($i("temasLigados"))
- 		{
- 			$i("temasLigados").onchange = function()
- 			{
-				aguarde("block")
-				var tema = $i("temasLigados").value
-				$i("men1").style.display = "block"
-				var cp = new cpaint();
-				//cp.set_debug(2)
-				cp.set_response_type("JSON");
-				cp.call(g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaitens&tema="+tema,"listaItens",listaItens);
- 			}
-		}
-	},"temasi");
-}
-$i("guia3").onclick = function()
-{mostraGuia("guia3")}
-$i("guia4").onclick = function()
-{mostraGuia("guia4")}
-$i("guia5").onclick = function()
-{mostraGuia("guia5")}
-mensagemAjuda("men1",$i("men1").innerHTML)
-comboTrueType(function(retorno)
-{
-	$i("listaf").innerHTML = retorno.dados
-	aguarde("none")
-},"listaf")
-function listaItens()
-{
-	comboitens(
-		"itemsel",
-		$i("temasLigados").value,
-		function(retorno)
-		{
-			if (retorno.tipo == "dados")
-			{$i("listai").innerHTML = retorno.dados}
-			else
-			{document.body.innerHTML = retorno.dados}
-			aguarde("none");
-		}
-		,"listai"
-	)
-}
-
-function corj(obj)
-{window.parent.i3GEO.util.abreCor("wdocai",obj)}
-*/
