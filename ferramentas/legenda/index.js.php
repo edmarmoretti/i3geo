@@ -164,11 +164,11 @@ i3GEOF.legenda = {
 		'		<li><a href="#ancora"><em><div id="i3GEOlegendaguia4" style="text-align:center;left:0px;" >Gr&aacute;ficos</div></em></a></li>'+
 		'	</ul>'+
 		'</div><br>'+
-		'<div id=i3GEOlegendaguia1obj style="width:99%">'+
+		'<div id=i3GEOlegendaguia1obj style="width:99%;text-align:left;">'+
 		'	<p class=paragrafo ><input id=i3GEOlegendabotao1 size="22" type="button" value="Aplicar alterações">'+
 		'	<input id=i3GEOlegendabotao2 size="22" type="button" value="Adicionar classe">' +
 		'	<input id=i3GEOlegendabotao3 size="25" type="button" value="Adiciona contagem"></p>' +
-		'	<table summary="" class=lista2 width="90%">' + 
+		'	<table summary="" class=lista5 width="400px">' + 
 		'		<tr>' +
 		'			<td><input id=i3GEOlegendabotao4 type="button" size=15 value="Gerar cores"></td>' +
 		'			<td>de:</td>' +
@@ -176,13 +176,13 @@ i3GEOF.legenda = {
 		$inputText("","","i3GEOlegendaacori","",12,"0,0,0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacori\')" /> ' +
 		'			</td>' +
-		'			<td>at&eacute;:</td>'+
+		'			<td>at&eacute;:</td><td>'+
 		$inputText("","","i3GEOlegendaacorf","",12,"0,0,0") +
 		'			<img alt="aquarela.gif" style=cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.legenda.corj(\'i3GEOlegendaacorf\')" /> ' +
 		'			</td>' +
 		'		</tr>' +
 		'	</table>' +
-		'	<br><br><div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">' +
+		'	<div id="i3GEOlegendaresultado" style="text-align:left;width:100%;display:block;left:0px">' +
 		'	</div>'+
 		'</div>'+
 		'<div id=i3GEOlegendaguia2obj style="width:99%;text-align:left;">'+
