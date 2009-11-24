@@ -353,6 +353,8 @@ $valor - Valor.
 			{$this->layer->querybyattributes($item,'(['.$item.']'.$operador.' '.$valor.' )',1);}
 		}
 		$res_count = $this->layer->getNumresults();
+		//echo '("['.$item.']"'.$operador.'"'.$valor.'")';
+		//echo $res_count;
 		$shpi = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{

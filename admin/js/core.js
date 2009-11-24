@@ -789,6 +789,19 @@ function core_geraLinhas(dados)
 	var nparam = dados.linhas.length;
 	var contaParam = 0
 	var resultado = "";
+	core_geralinhasEscondeAjuda = function(id){
+		var a = $i(id+"_ajuda"),
+			i = $i(id+"_imgajuda");
+		
+		if(a.style.display == "block"){
+			a.style.display = "none";
+			i. src = "../../imagens/desce.gif";
+		}
+		else{
+			a.style.display = "block";
+			i. src = "../../imagens/sobe.gif";		
+		}
+	};
 	do
 	{
 		var p = dados.linhas[contaParam];
@@ -798,7 +811,7 @@ function core_geraLinhas(dados)
 			if(p.ajuda)
 			{
 				var temp = "$i('"+contaParam+"_ajuda').style.display='block' "
-				resultado += "<p><div onclick =\""+temp+"\" style=cursor:pointer title='ajuda' ><b>"+p.titulo+"</b></div>"
+				resultado += "<p><div onclick='core_geralinhasEscondeAjuda(\""+contaParam+"\")' style=cursor:pointer title='ajuda' ><img id='"+contaParam+"_imgajuda' src='../../imagens/desce.gif' >&nbsp;<b>"+p.titulo+"</b></div>"
 				resultado += "<div id='"+contaParam+"_ajuda' style=display:none >"+p.ajuda+"</div>"
 			}
 			else

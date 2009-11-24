@@ -30,13 +30,8 @@ Free Software Foundation, Inc., no endereço
 Variable: $mensagemAguarde
 */
 $mensagemAguarde = "<img src='../../imagens/aguarde.gif' />";//"<span style=color:red ><p>Aguarde...</p></span>"
-
 $i = function(i)
 {return document.getElementById(i);};
-
-
-
-
 /*
 Variable: cPaint
 Objeto cpaint para chamada ajax
@@ -44,7 +39,6 @@ Objeto cpaint para chamada ajax
 cPaint = new cpaint();
 cPaint.set_async("true");
 cPaint.set_response_type("JSON");
-
 function ativaIndice(onde)
 {
 	var f = document.getElementsByTagName("fieldset")
@@ -79,6 +73,7 @@ function ativaLegenda()
 	var etrs = document.getElementsByTagName("legend")
 	for(t = 0;t < etrs.length;t++)
 	{
+		etrs[t].innerHTML = "<img src='../imagens/desce.gif' id='img_"+t+"' >&nbsp;" + etrs[t].innerHTML;
 		etrs[t].onclick = function()
 		{
 			var c = this.parentNode.childNodes;
@@ -86,16 +81,20 @@ function ativaLegenda()
 			{
 				if(c[h].style && c[h].tagName != "LEGEND")
 				{
-					if(c[h].style.display=="none")
-					c[h].style.display="block"
-					else
-					c[h].style.display="none"
+					var i = this.getElementsByTagName("img");
+					if(c[h].style.display=="none"){
+						c[h].style.display="block";
+						i[0].src = '../imagens/sobe.gif';
+					}
+					else{
+						c[h].style.display="none";
+						i[0].src = '../imagens/desce.gif';
+					}
 				}
 			}
 		}
 	}
 }
-
 /*
 Function: abre
 
@@ -273,3 +272,4 @@ function registraPerfil(id,perfil)
 	else
 	$i(id).value = $i(id).value+" "+perfil
 }
+
