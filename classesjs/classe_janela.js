@@ -227,7 +227,7 @@ i3GEO.janela = {
 		if(waltura === "auto")
 		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
 		else
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:false,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
 		if(nx !== "" && nx !== "center"){
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);

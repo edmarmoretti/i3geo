@@ -77,7 +77,10 @@ i3GEO.mapa = {
 			c = $i(i3GEO.Interface.IDCORPO);
 			if (c){
 				c.style.position="absolute";
-				$left(i3GEO.Interface.IDCORPO,imagemxi);
+				if(navm)
+				{$left(i3GEO.Interface.IDCORPO,imagemxi - 1);}
+				else
+				{$left(i3GEO.Interface.IDCORPO,imagemxi);}
 				$top(i3GEO.Interface.IDCORPO,imagemyi);
 			}
 		}
