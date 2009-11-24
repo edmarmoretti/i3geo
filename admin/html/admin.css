@@ -103,10 +103,13 @@ input
 	color:black;text-align: left;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .fieldsetRaiz
-{background-color:rgb(252,210,186);}
+{
+	background-color:rgb(252,210,186);
+	border: 1px solid gray;
+}
 fieldset
 {
 	text-align:left;
 	padding: 10px;
-	border: 1px groove threedface
+	border: 1px solid gray
 }
