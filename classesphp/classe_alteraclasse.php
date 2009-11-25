@@ -317,18 +317,35 @@ Parametros:
 $item - Item da tabela de atributos utilizado para gerar as classes.
 
 $ignorar - valor que será ignorado na listagem final
+
+$itemNome - item que será usado para definir os nomes das classes (por default será igual a $item)
 */
-	function valorunico($item,$ignorar)
+	function valorunico($item,$ignorar,$itemNome="")
 	{
 		if(!$this->layer){return "erro";}
+		if($itemNome == "" || $ignorar != "")
+		{$itemNome = $item;}
 		// pega valores
-		$valoresu = array_unique(pegaValores($this->mapa,$this->layer,$item,false,$ignorar));
+		$vs = pegaValores($this->mapa,$this->layer,$item,false,$ignorar);
+		if ($item == $itemNome)
+		{$ns = $vs;}
+		else
+		{$ns = pegaValores($this->mapa,$this->layer,$itemNome,false,$ignorar);}
+		$lista = array();
+		for ($i = 0; $i < count($vs); ++$i){
+			$temp[$vs[$i]] = $ns[$i];
+		}
+		$valores = array_keys($temp);
+		$nomes = array();
+		foreach($temp as $t)
+		{$nomes[] = $t;}
+		//$valoresu = array_unique($v);
 		// processa array com os valores
-		rsort($valoresu);
-		reset($valoresu);
+		//rsort($valoresu);
+		//reset($valoresu);
 		$nclassexist = $this->layer->numclasses;
-		if ($nclassexist > count($valoresu))
-		{$nclassexist = count($valoresu);}
+		if ($nclassexist > count($valores))
+		{$nclassexist = count($valores);}
 		if($nclassexist == 0)
 		{
 			$temp = ms_newClassObj($this->layer);
@@ -345,7 +362,7 @@ $ignorar - valor que será ignorado na listagem final
 			$cl = $this->layer->getClass($i);
 			$cl->set("status",MS_DELETE);
 		}
-		$c = count($valoresu);
+		$c = count($valores);
 		for ($i = 0; $i < $c; ++$i)
 		{
 			$classes[$i] = ms_newClassObj($this->layer);
@@ -353,10 +370,10 @@ $ignorar - valor que será ignorado na listagem final
 		}
 		for ($i = 0; $i < $c; ++$i)
 		{
-			$e = "('[".$item."]'eq'".$valoresu[$i]."')";
+			$e = "('[".$item."]'eq'".$valores[$i]."')";
 			$ca = $classes[$i];
 			$ca->setexpression($e);
-			$ca->set("name",$valoresu[$i]);
+			$ca->set("name",$nomes[$i]);
 			$estilo = $classes[$i]->getStyle(0);
 			$ncor = $estilo->color;
 			$ncor->setrgb((mt_rand(0,255)),(mt_rand(0,255)),(mt_rand(0,255)));

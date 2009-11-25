@@ -18,70 +18,64 @@ MAP
     TYPE POLYGON
     UNITS METERS
     CLASS
-      NAME "PANTANAL"
-      EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
+      NAME "CAATINGA"
+      EXPRESSION ('[ID]'eq'2.00')
       STYLE
         ANGLE 360
-        COLOR 104 27 127
+        COLOR 24 214 111
         OPACITY 100
         SYMBOL 0
       END
-      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda."
     END
     CLASS
       NAME "PAMPA"
-      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
+      EXPRESSION ('[ID]'eq'5.00')
       STYLE
         ANGLE 360
-        COLOR 183 42 6
+        COLOR 208 90 180
         OPACITY 100
         SYMBOL 0
       END
-      TITLE ""
-    END
-    CLASS
-      NAME "MATA ATLANTICA"
-      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLANTICA')
-      STYLE
-        ANGLE 360
-        COLOR 73 42 248
-        OPACITY 100
-        SYMBOL 0
-      END
-      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
       NAME "CERRADO"
-      EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
+      EXPRESSION ('[ID]'eq'3.00')
       STYLE
         ANGLE 360
-        COLOR 239 98 76
+        COLOR 165 220 169
         OPACITY 100
         SYMBOL 0
       END
-      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
-      NAME "CAATINGA"
-      EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
+      NAME "PANTANAL"
+      EXPRESSION ('[ID]'eq'6.00')
       STYLE
         ANGLE 360
-        COLOR 107 213 213
+        COLOR 182 86 205
         OPACITY 100
         SYMBOL 0
       END
-      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
     END
     CLASS
       NAME "AMAZONIA"
-      EXPRESSION ('[CD_LEGENDA]'eq'AMAZONIA')
+      EXPRESSION ('[ID]'eq'1.00')
       STYLE
         ANGLE 360
-        COLOR 233 166 160
+        COLOR 98 126 232
         OPACITY 100
         SYMBOL 0
       END
-      TITLE "Isto é um teste de inclusão de um texto descritivo para cada classe da legenda"
+    END
+    CLASS
+      NAME "MATA ATLANTICA"
+      EXPRESSION ('[ID]'eq'4.00')
+      STYLE
+        ANGLE 360
+        COLOR 94 171 18
+        OPACITY 100
+        SYMBOL 0
+      END
     END
   END
 

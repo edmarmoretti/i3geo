@@ -502,11 +502,15 @@ function classesAuto(codigoMap,codigoLayer)
 	function on_editorCheckBoxChange(p_oEvent)
 	{
 		var ins = "";
-		if(p_oEvent.newValue.get("value") == "OK" && document.getElementById("itens").value != "")
+		var itemExpressao = document.getElementById("itemExpressao").value;
+		var itemNome = document.getElementById("itemNome").value;
+		if(itemNome == "")
+		{itemNome = itemExpressao;}
+		if(p_oEvent.newValue.get("value") == "OK" && itemExpressao != "")
 		{
 			core_carregando("ativa");
 			core_carregando(" gerando as classes");
-			var sUrl = "../php/editormapfile.php?funcao=autoClassesLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&item="+document.getElementById("itens").value;
+			var sUrl = "../php/editormapfile.php?funcao=autoClassesLayer&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer+"&itemExpressao="+itemExpressao+"&itemNome="+itemNome;
 			var callback2 =
 			{
   				success:function(o)
@@ -520,6 +524,8 @@ function classesAuto(codigoMap,codigoLayer)
 						var no = tree.getNodeByProperty("id",codigoMap+"_"+codigoLayer)
 						montaParametrosTemas(no,dados)
   						core_carregando("desativa");
+						YAHOO.example.container.panelEditorAutoClasses.destroy();
+						YAHOO.example.container.panelEditorAutoClasses = null;
   					}
   					catch(e){core_handleFailure(o,o.responseText);core_carregando("desativa");}
   				},
@@ -558,9 +564,14 @@ function classesAuto(codigoMap,codigoLayer)
   			{
   				try
   				{
-  					ins = "<p>Itens encontrados na tabela de atributos do layer. Escolha um deles para ser utilizado na expressão de seleção de cada classe</p>"
-  					ins += "<select  id='itens' >"
-  					ins += core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
+  					var itens = core_comboObjeto(YAHOO.lang.JSON.parse(o.responseText).itens,"","","");
+  					ins = "<p>Item da tabela de atributos que será utilizado para compor a expressão de seleção de cada classe</p>"
+  					ins += "<select  id='itemExpressao' >"
+  					ins += itens
+  					ins += "</select></p>"
+  					ins += "<p>Item da tabela de atributos que será utilizado para compor o nome de cada classe</p>"
+  					ins += "<select  id='itemNome' >"
+  					ins += itens
   					ins += "</select></p>"
   					$i("editor_bd").innerHTML = ins;
   					core_carregando("desativa");

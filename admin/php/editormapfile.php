@@ -312,7 +312,7 @@ function criarNovoLayer()
 }
 function autoClassesLayer()
 {
-	global $codigoMap,$codigoLayer,$item,$locaplic,$dir_tmp;
+	global $codigoMap,$codigoLayer,$itemExpressao,$itemNome,$locaplic,$dir_tmp;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	include_once("../../classesphp/classe_alteraclasse.php");
 	error_reporting(0);
@@ -337,7 +337,7 @@ function autoClassesLayer()
 	}
 	$mapageral->save($nometemp);
 	$m = new Alteraclasse($nometemp,$codigoLayer);
-	$m->valorunico($item,"");
+	$m->valorunico($itemExpressao,"",$itemNome);
 	$m->salva();
 	$mapatemp = ms_newMapObj($nometemp);
 	$mapatemp->save($mapfile);
