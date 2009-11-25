@@ -281,22 +281,22 @@ function montaParametrosTemas(no,dados,redesenha)
     }
     if(!tree.getNodeByProperty("etiquetaConexao",no.data.id))
     {
-		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorConexao('"+codigoMap+"','"+codigoLayer+"')\" title='edita conexão' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaConexao",etiquetaConexao:no.data.id,html:conteudo+" Editar fonte dos dados"}
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorConexao('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita conexão' src=\"../imagens/06.png\" /> Editar fonte dos dados</span>"
+		var d = {tipo:"etiquetaConexao",etiquetaConexao:no.data.id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaMetadados",no.data.id))
     {
-		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" title='edita metadados' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:no.data.id,html:conteudo+" Editar metadados"}
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorMetadados('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita metadados' src=\"../imagens/06.png\" /> Editar metadados</span>"
+		var d = {tipo:"etiquetaMetadados",etiquetaMetadados:no.data.id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaGeral",no.data.id))
     {
-		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorGeral('"+codigoMap+"','"+codigoLayer+"')\" title='parâmetros gerais' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaGeral",etiquetaGeral:no.data.id,html:conteudo+" Editar características gerais"}
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorGeral('"+codigoMap+"','"+codigoLayer+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='parâmetros gerais' src=\"../imagens/06.png\" /> Editar características gerais</span>"
+		var d = {tipo:"etiquetaGeral",etiquetaGeral:no.data.id,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
@@ -330,15 +330,15 @@ function montaParametrosClasses(no,dados,redesenha)
 	var indiceClasse = no.data.indiceClasse
     if(!tree.getNodeByProperty("etiquetaClasseGeral",no.data.id))
     {
-		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='edita características da classe' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar características gerais"}
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorClasseGeral('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\"  ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar características gerais</span>"
+		var d = {tipo:"etiquetaClasseGeral",etiquetaClasseGeral:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}
     if(!tree.getNodeByProperty("etiquetaClasseLabel",no.data.id))
     {
-		var conteudo = "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" title='edita características da classe' src=\"../imagens/06.png\" />"
-		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo+" Editar etiquetas"}
+		var conteudo = "<span style=cursor:pointer; onclick=\"editorClasseLabel('"+codigoMap+"','"+codigoLayer+"','"+indiceClasse+"')\" ><img width='10px' heigth='10px' style=\"position:relative;top:0px\" title='edita características da classe' src=\"../imagens/06.png\" /> Editar etiquetas</span>"
+		var d = {tipo:"etiquetaClasseLabel",etiquetaClasseLabel:codigoMap+"_"+codigoLayer+"_"+indiceClasse,html:conteudo}
 		var tempNode = new YAHOO.widget.HTMLNode(d, no, false,true);
 		tempNode.isLeaf = true;
 	}

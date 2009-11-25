@@ -1201,7 +1201,7 @@ var jsfiles = new Array(
 "../../pacotes/yui270/build/dragdrop/dragdrop-min.js",
 "../../pacotes/yui270/build/container/container-min.js",
 "../../pacotes/yui270/build/connection/connection-min.js",
-"../../pacotes/yui270/build/treeview/treeview-min.js",
+"../../pacotes/yui270/build/treeview/treeview.js",
 "../../pacotes/yui270/build/json/json-min.js",
 "../../pacotes/yui270/build/menu/menu-min.js",
 "../../pacotes/yui270/build/editor/editor-min.js"
