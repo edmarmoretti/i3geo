@@ -368,6 +368,20 @@ en:"Turn the layer on/off on the map. Wait a few moments to get the map redesign
 es:"Haga clic para conectar o desconectar este tema, mostr&aacute;ndolo o no en el mapa. Despu&eacute;s de alterar el estado del tema, espere algunos instantes para que el mapa sea redise&ntilde;ado, o haga clic en el bot&oacute;n aplicar que se mostrar&aacute;.",
 it:"Fare clic per attivare o disattivare questo tema. Dopo aver modificato lo stato del tema, La mappa aggiornata sarà visualizzata dopo qualche istante. Per visualizzare subito cliccare su Applica" 
 }],
+"t3a":[
+{
+pt:"Clique para ligar todos os temas",
+en:"Turn all layers layer on",
+es:"Haga clic para conectar los temas",
+it:"Turn all layers on" 
+}],
+"t3b":[
+{
+pt:"Clique para desligar todos os temas",
+en:"Turn all layers layer off",
+es:"Haga clic para desconectar los temas",
+it:"Turn all layers off" 
+}],
 "t4":[
 {
 pt:"limpa sele&ccedil;&atilde;o",

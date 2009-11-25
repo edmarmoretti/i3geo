@@ -852,6 +852,24 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-position: 0px -1900px;
 	cursor:pointer;
 }
+#olhoAberto
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1925px;
+	cursor:pointer;
+	width:25px;
+	height:20px;
+}
+#olhoFechado
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -1949px;
+	width:25px;
+	height:20px;
+	cursor:pointer;
+}
 button{background:url(../imagens/tic.png) 98% 50% no-repeat;}
 #encolheFerramentas
 {background-image:URL('../imagens/encolhe.png');background-repeat: no-repeat;background-position:center;cursor:pointer;}

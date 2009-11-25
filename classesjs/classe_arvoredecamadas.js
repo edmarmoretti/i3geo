@@ -55,7 +55,7 @@ i3GEO.arvoreDeCamadas = {
 	{true}
 	
 	Type:
-	{voolean}
+	{boolean}
 	*/
 	ARRASTARORDEM: true,
 	/*
@@ -67,9 +67,21 @@ i3GEO.arvoreDeCamadas = {
 	{true}
 	
 	Type:
-	{voolean}
+	{boolean}
 	*/
 	ARRASTARLIXEIRA: true,
+	/*
+	Propriedade: LIGARDESLIGARTODOS
+	
+	Mostra os ícones de desligar/ligar todos os temas.
+	
+	Default:
+	{true}
+	
+	Type:
+	{boolean}
+	*/
+	LIGARDESLIGARTODOS: true,
 	/*
 	Propriedade: EXPANDIDA
 	
@@ -304,6 +316,10 @@ i3GEO.arvoreDeCamadas = {
 		titulo = "<table><tr><td><b>"+$trad("a7")+"</b></td><td>";
 		if(i3GEO.arvoreDeCamadas.ARRASTARLIXEIRA === true)
 		{titulo += "<img id='i3geo_lixeira' title='"+$trad("t2")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";}
+		if(i3GEO.arvoreDeCamadas.LIGARDESLIGARTODOS === true){
+			titulo += "&nbsp;<img onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"ligartodos\");' id='olhoAberto' title='"+$trad("t3a")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";
+			titulo += "&nbsp;<img onclick='i3GEO.arvoreDeCamadas.aplicaTemas(\"desligartodos\");' id='olhoFechado' title='"+$trad("t3b")+"'  src='"+i3GEO.util.$im("branco.gif")+"' />";
+		}
 		titulo += "</td></tr></table>";
 		d = {html:titulo};
 		tempNode = new YAHOO.widget.HTMLNode(d, root, true,true);
@@ -887,13 +903,24 @@ i3GEO.arvoreDeCamadas = {
 	/*
 	Function: aplicaTemas
 	
-	Refaz o mapa ligando e desligando os temas conforme consta na árvore de camadas
+	Refaz o mapa ligando e desligando os temas conforme consta na árvore de camadas ou ligando/desligando todos
+	
+	Parametro:
+	
+	tipo {String} - tipo de operação normal|ligartodos|desligartodos a opção 'normal' irá desligar/ligar o que estiver marcado
 	*/
-	aplicaTemas: function(){
+	aplicaTemas: function(tipo){
+		if(arguments.length == 0)
+		{tipo = "normal";}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.aplicaTemas()");}
 		//YAHOO.log("Mudando status ligado/desligado de um tema", "i3geo");
-		var t,temp;
-		t = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
+		var t,temp,ligar,desligar;
+		if(tipo === "normal")
+		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("mantem");}
+		if(tipo === "ligartodos")
+		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("marca");}
+		if(tipo === "desligartodos")
+		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("desmarca");}
 		//
 		//zera o contador de tempo
 		//
@@ -901,10 +928,23 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde("redesenha");
 		};
-		clearTimeout(tempoBotaoAplicar);
+		try{clearTimeout(tempoBotaoAplicar);}
+		catch(erro){}
 		tempoBotaoAplicar = "";
 		i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
-		i3GEO.php.ligatemas(temp,t[1].toString(),t[0].toString());
+		if(tipo === "normal"){
+			ligar = t[0].toString();
+			desligar = t[1].toString();
+		}
+		if(tipo === "ligartodos"){
+			ligar = t[2].toString();
+			desligar = "";
+		}
+		if(tipo === "desligartodos"){
+			ligar = "";
+			desligar = t[2].toString();
+		}		
+		i3GEO.php.ligatemas(temp,desligar,ligar);
 	},
 	/*
 	Function: listaLigadosDesligados
@@ -914,10 +954,16 @@ i3GEO.arvoreDeCamadas = {
 	
 	Esse método é mais demorado pois varre a árvore toda. Porém, obtém o status verdadeiro do tema.
 	
+	Parametro:
+	
+	tipo {String} - mantem|marca|desmarca marca, desmarca ou mantém o checkbox após identificar seu status atual
+	
 	Return:
 	{Array} - array com os códigos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 	*/
-	listaLigadosDesligados: function(){
+	listaLigadosDesligados: function(tipo){
+		if(arguments.length === 0)
+		{tipo = "manter";}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligados()");}
 		var nos,ligados,desligados,todos,n,i,no,cs,csn,j,c;
 		nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo","tema");
@@ -939,6 +985,10 @@ i3GEO.arvoreDeCamadas = {
 						else
 						{desligados.push(c.value);}
 						todos.push(c.value);
+						if(tipo === "marca")
+						{c.checked = true;}
+						if(tipo === "desmarca")
+						{c.checked = false;}
 					}
 				}
 				i++;
