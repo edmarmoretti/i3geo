@@ -304,6 +304,7 @@ function montaParametrosTemas(no,dados,redesenha)
     {
 		var conteudo = "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"adicionaNovaClasse('"+codigoMap+"','"+codigoLayer+"')\" title='adiciona classe' src=\"../imagens/05.png\" />&nbsp;"
 		conteudo += "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"classesAuto('"+codigoMap+"','"+codigoLayer+"')\" title='gerar classes' src=\"../imagens/classificar.gif\" />&nbsp;"
+		conteudo += "<img style=\"position:relative;cursor:pointer;top:2px\" onclick=\"window.open('../../testamapfile.php?solegenda=sim&map="+no.data.codigoMap+"')\" title='ver legenda' src=\"../imagens/41.png\" />"
 
 		//conteudo += "<img width='10px' heigth='10px' style=\"position:relative;cursor:pointer;top:0px\" onclick=\"editorClasses('"+codigoMap+"','"+codigoLayer+"')\" title='classes' src=\"../imagens/06.png\" />"
 		var d = {tipo:"etiquetaClasses",etiquetaClasses:no.data.id,html:conteudo+"<i>&nbsp;Classes:</i>"}
