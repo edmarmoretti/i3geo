@@ -26,6 +26,11 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 //variáveis globais
+navn = false;
+//seta as variáveis navn e navm
+var app = navigator.appName.substring(0,1);
+if (app==='N'){navn=true;}else{navm=true;}
+
 /*
 Variable: $mensagemAguarde
 */

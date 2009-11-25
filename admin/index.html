@@ -9,6 +9,12 @@
 <div style=width:80%;text-align:left;>
 <h1>Administração do i3geo</h1>
 <p>Se você atualizou o Mapserver para a versão 5.2.2, seus mapfiles antigos podem não funcionar. Veja em "Outras opções" o item "Ajusta mapfiles".
+<div id=mensagemIE style=display:none >
+<p style=color:red >Atenção: o sistema de administração funciona melhor no Firefox.</p>
+<p>No Internet Explorer, vc deve alterar as configurações de armazenamento de 'cache' para não ter problemas.</p>
+<p>No menu 'Ferramentas->Opções da Internet->Geral' clique em 'Configurações' no item 'Histórico de navegação'</p>
+<p>Marque a opção 'Sempre que eu visitar a página da web'</p>
+</div>
 <fieldset>
 <legend>Leia-me</legend>
 <div style=display:none; >
@@ -223,6 +229,8 @@ ativaLegenda()
 
 function ajuda(i,t)
 {$i(i).style.display="block";t.style.display="none"}
-	
+
+if(navm)
+{$i("mensagemIE").style.display = "block";}
 </script>
 </html>

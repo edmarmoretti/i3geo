@@ -1,0 +1,23 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME cbers
+  TYPE POLYGON
+  STATUS DEFAULT
+  DATA "c:\ms4w\apache\htdocs\geodados\brasil\CBERS_cenas.shp"
+  TEMPLATE "none.htm"
+  METADATA
+  	  TEMA "CBERS"
+	  ESCALA "250000"
+  	  CLASSE "SIM"
+  END
+  CLASS
+	  NAME " "
+	  CLASS
+		COLOR 100 255 100
+		OUTLINECOLOR 0 0 0
+	  END
+  END  # CLASS
+END  # LAYER
+END

@@ -93,6 +93,10 @@ function retornaJSON($obj)
 		if (!mb_detect_encoding($texto,"UTF-8",true))
 		$texto = utf8_encode($texto);
 		header("Content-type: text/ascii; charset=UTF-8");
+		header('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+		header('Cache-Control: no-cache, must-revalidate');
+		header('Pragma: no-cache');
 		echo $texto;
 	/*
 	}
