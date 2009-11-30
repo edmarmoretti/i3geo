@@ -320,7 +320,7 @@ i3GEOF.filtro = {
 			var filtro = "",
 				re,g,ipt,i,nos,s,itemsel,valor,operador,conector,p,cp,temp;
 			if( ($i("i3GEOfiltrofiltro").value !== "") &&($i("i3GEOfiltroguia2obj").style.display === "block")){
-				filtro = $i("filtro").value;
+				filtro = $i("i3GEOfiltrofiltro").value;
 				re = new RegExp("'","g");
 				filtro = filtro.replace(re,"|");
 				filtro = filtro.replace(re,"");
@@ -338,10 +338,6 @@ i3GEOF.filtro = {
 						operador = s[0].value;
 						s = nos[4].getElementsByTagName("input");
 						valor = s[0].value;
-						if ((valor == "") && ($i("i3GEOfiltrocbitens"))){
-						 	valor = $i("cbitens").value;
-						 	s[0].value = $i("cbitens").value;
-						}
 						s = nos[5].getElementsByTagName("select")
 						conector = s[0].value;
 						if (valor*1)

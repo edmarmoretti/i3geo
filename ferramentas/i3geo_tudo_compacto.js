@@ -6140,6 +6140,45 @@ i3GEO.php = {
 		cpJSON.call(p,"selecaobox",funcao);	
 	},
 	/*
+	Function: selecaoext
+
+	PHP:
+	classesphp/classe_selecao.php
+	
+	<Selecao->selecaoEXT>	
+	*/
+	selecaoext: function(funcao,tema,tipo){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoext&tema="+tema+"&tipo="+tipo;
+		cpJSON.call(p,"selecaobox",funcao);	
+	},
+	/*
+	Function: selecaoatrib2
+
+	PHP:
+	classesphp/classe_selecao.php
+	
+	<Selecao->selecaoAtributos2>	
+	*/
+	selecaoatrib2: function(funcao,tema,filtro,tipo){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoatrib2&tema="+tema+"&filtro="+filtro+"&tipo="+tipo;
+		cpJSON.call(p,"selecaoatrib2",funcao);	
+	},
+	/*
+	Function: selecaotema
+
+	PHP:
+	classesphp/classe_selecao.php
+	
+	<Selecao->selecaoTema>	
+	*/
+	selecaotema: function(funcao,temao,tema,tipo){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaotema&temao="+temao+"&tema="+tema+"&tipo="+tipo;
+		cpJSON.call(p,"selecaotema",funcao);	
+	},
+	/*
 	Function: sobetema
 
 	PHP:
@@ -6575,10 +6614,22 @@ i3GEO.php = {
 	listaEpsg: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg";
 		cpJSON.call(p,"listaEpsg",funcao);
+	},
+	/*
+	Function: criatemasel
+
+	PHP:
+	classesphp/selecao.php
+	
+	<Selecao->criatemaSel>	
+	*/
+	criatemaSel: function(funcao,tema){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criatemasel&tema="+tema+"&nome=Novo tema "+tema;
+		cpJSON.call(p,"chavegoogle",funcao);	
 	}
 };
 //incluisel - tabela
-//criatemasel - tabela
 //estatistica - tabela
 //verPaleta - pontosdistri
 //analisedistri - pontosdistri

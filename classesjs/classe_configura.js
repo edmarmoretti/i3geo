@@ -1032,11 +1032,7 @@ i3GEO.configura = {
 			dica:$trad("d24"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("selecao");
-				i3GEO.selecao.janelaOpcoes();
-				if($i("img")){
-					$i("img").title = "";
-					$i("img").style.cursor="pointer";
-				}
+				i3GEO.mapa.dialogo.selecao();
 			}
 		},
 		{

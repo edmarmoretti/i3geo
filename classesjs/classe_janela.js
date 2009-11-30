@@ -145,7 +145,7 @@ i3GEO.janela = {
 	*/
 	cria: function(wlargura,waltura,wsrc,nx,ny,texto,id,modal,classe,funcaoCabecalho,funcaoMinimiza){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.cria()");}
-		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix,underlay;
+		var i,wlargura_,ins,novoel,wdocaiframe,pos,temp,fix,underlay,ifr;
 		if(i3GEO.janela.ANTESCRIA){
 			for(i=0;i<i3GEO.janela.ANTESCRIA.length;i++)
 			{eval(i3GEO.janela.ANTESCRIA[i]);}
@@ -226,8 +226,9 @@ i3GEO.janela = {
 		{underlay = "shadow";}
 		if(waltura === "auto")
 		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.Panel(id, { modal:modal, width: wlargura_,underlay:"none", fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}	
-		else
-		{YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:false,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );}
+		else{
+			YAHOO.janelaDoca.xp.panel = new YAHOO.widget.ResizePanel(id, { iframe:false,underlay:underlay, modal:modal, width: wlargura_, fixedcenter: fix, constraintoviewport: false, visible: true,monitorresize:false,dragOnly:true,keylisteners:null} );
+		}
 		if(nx !== "" && nx !== "center"){
 			pos = [nx,ny];
 			YAHOO.janelaDoca.xp.panel.moveTo(pos[0],pos[1]+50);
@@ -679,6 +680,7 @@ try{
                    			nNewHeight = Math.max(nStartHeight + nOffsetY, 10),
                    			nBodyHeight = (nNewHeight - (oFooter.offsetHeight + oHeader.offsetHeight + nBodyOffset));
                			me.cfg.setProperty("width", nNewWidth + "px");
+               			oBody.style.width = nNewWidth - nBodyOffset+"px";
                			if (nBodyHeight < 0)
                			{nBodyHeight = 0;}
                			oBody.style.height =  nBodyHeight + "px";

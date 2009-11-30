@@ -224,8 +224,11 @@ i3GEOF.analisaGeometrias = {
 	É executado no evento de clique no mapa
 	*/
 	selecionaElemento: function(){
-		if(g_tipoacao === 'analisageometrias')
-		{i3GEO.selecao.porxy(i3GEO.temaAtivo,$i("i3GEOanalisageometriastipoOperacao").value,5);}
+		if(g_tipoacao === 'analisageometrias'){
+			var retorna = function(retorno)
+			{i3GEO.atualiza(retorno);};
+			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+			i3GEO.php.selecaopt(retorna,i3GEO.temaAtivo,objposicaocursor.ddx+" "+objposicaocursor.ddy,$i("i3GEOanalisageometriastipoOperacao").value,5);		
 	},
 	/*
 	Function: comboTemas

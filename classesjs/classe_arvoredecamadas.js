@@ -404,6 +404,9 @@ i3GEO.arvoreDeCamadas = {
 		catch(r){
 			if(typeof(console) !== 'undefined'){console.error(r);}
 		}
+		if(i3GEO.temaAtivo !== ""){
+			i3GEO.mapa.ativaTema(i3GEO.temaAtivo);
+		}
 	},
 	/*
 	Function: ativaDragDrop

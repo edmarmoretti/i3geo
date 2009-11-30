@@ -591,14 +591,11 @@ i3GEOF.tabela = {
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
 		{return;}
 		i3GEOF.tabela.aguarde.visibility = "visible";
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criatemasel&tema="+i3GEOF.tabela.tema+"&nome=Novo tema "+i3GEOF.tabela.tema,
-			cp = new cpaint();
-			temp = function(retorno){
-				i3GEOF.tabela.aguarde.visibility = "hidden";
-				i3GEO.atualiza(retorno);
-			};
-		cp.set_response_type("JSON");
-		cp.call(p,"selecao2tema",temp);
+		var temp = function(retorno){
+			i3GEOF.tabela.aguarde.visibility = "hidden";
+			i3GEO.atualiza(retorno);
+		};
+		i3GEO.php.criatemaSel(temp,i3GEOF.tabela.tema);
 	},
 	/*
 	Function: comboItens

@@ -550,6 +550,18 @@ i3GEO.mapa = {
 			}
 		},
 		/*
+		Function: selecao
+		
+		Abre o diálogo para seleção de elementos
+		*/
+		selecao: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.selecao()");}
+			if(typeof(i3GEOF.selecao) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/selecao/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.selecao.criaJanelaFlutuante()","i3GEOF.selecao_script");
+			}
+		},
+		/*
 		Function: cliquePonto
 		
 		Abre o diálogo para inclusão de pontos diretamente no mapa
