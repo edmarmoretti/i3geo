@@ -1,7 +1,9 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Seleção de elementos
+Title: Seleção de elementos (depreciado)
+
+Esta classe foi depreciada e poderá ser removida. Veja i3geo/ferramentas/selecao/index.js.php
 
 Arquivo:
 
@@ -33,13 +35,13 @@ if(typeof(i3GEO) === 'undefined'){
 	i3GEO = [];
 }
 /*
-Classe: i3GEO.selecao
+ i3GEO.selecao
 
 Realiza operações de seleção de elementos do mapa
 */
 i3GEO.selecao = {
 	/*
-	Function: porxy
+	 porxy
 	
 	Executa a seleção de elementos de um tema com base em um par de coordenadas xy
 	
@@ -59,7 +61,7 @@ i3GEO.selecao = {
 		i3GEO.php.selecaopt(retorna,tema,objposicaocursor.ddx+" "+objposicaocursor.ddy,tipo,tolerancia);
 	},
 	/*
-	Function: porbox
+	 porbox
 	
 	Seleciona elementos de um tema com base em um retângulo
 	
@@ -79,7 +81,7 @@ i3GEO.selecao = {
 		i3GEO.php.selecaobox(retorna,tema,tipo,box);
 	},
 	/*
-	Function: janelaOpcoes
+	 janelaOpcoes
 	
 	Abre a janela de opções da ferramenta de seleção.
 	
@@ -111,7 +113,7 @@ i3GEO.selecao = {
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
-	Function: atualizaGrafico
+	 atualizaGrafico
 	
 	Atualiza o gráfico de barras da ferramenta de seleção
 	
@@ -131,7 +133,7 @@ i3GEO.selecao = {
 		}		
 	},
 	/*
-	Function: clique
+	 clique
 	
 	Seleciona elementos clicando no mapa
 	*/
@@ -153,13 +155,13 @@ i3GEO.selecao = {
 		}
 	},
 	/*
-	Classe: i3GEO.selecao.box
+	 i3GEO.selecao.box
 	
 	Controla o desenho do box para a seleção e executa a função de seleção
 	*/
 	box: {
 		/*
-		Function: inicia
+		 inicia
 		
 		Marca o início do desenho do box, capturando a posição do mouse
 		*/
@@ -186,7 +188,7 @@ i3GEO.selecao = {
 			{i3GEO.eventos.MOUSEUP.push("i3GEO.selecao.box.termina()");}
 		},
 		/*
-		Function: criaBox
+		 criaBox
 		
 		Cria o DIV que será utilizado para desenhar o box no mapa
 		*/
@@ -242,7 +244,7 @@ i3GEO.selecao = {
 			}
 		},
 		/*
-		Function: desloca
+		 desloca
 		
 		Desloca o box conforme o mouse é movimentado
 		*/
@@ -277,7 +279,7 @@ i3GEO.selecao = {
 			}
 		},
 		/*
-		Function: termina
+		 termina
 		
 		Para o desenho do box, captura seu tamanho e faz o zoom no mapa
 		*/
@@ -320,13 +322,13 @@ i3GEO.selecao = {
 		}
 	},
 	/*
-	Classe: i3GEO.selecao.poligono
+	 i3GEO.selecao.poligono
 	
 	Realiza a seleção desenhando um polígono no mapa
 	*/
 	poligono:{
 		/*
-		Function: inicia
+		 inicia
 		
 		Inicia o desenho do polígono
 		*/
@@ -349,7 +351,7 @@ i3GEO.selecao = {
 			{i3GEO.eventos.MOUSECLIQUE.push("i3GEO.selecao.poligono.clique()");}
 		},
 		/*
-		Function: move
+		 move
 		
 		Modifica o polígono conforme o usuário cria vértices
 		*/
@@ -362,7 +364,7 @@ i3GEO.selecao = {
 			}
 		},
 		/*
-		Function: clique
+		 clique
 		
 		Inclui um novo vértice no polígono
 		*/
@@ -391,7 +393,7 @@ i3GEO.selecao = {
 			i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.selecao.poligono.termina,"divGeometriasTemp");
 		},
 		/*
-		Function: termina
+		termina
 		
 		Termina o desenho do polígono e executa a operação de seleção
 		*/

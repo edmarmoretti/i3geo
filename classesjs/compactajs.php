@@ -129,7 +129,7 @@ $jsfiles = array(
 "compactados/classe_guias_compacto.js",
 "compactados/classe_arvoredecamadas_compacto.js",
 "compactados/classe_navega_compacto.js",
-"compactados/classe_selecao_compacto.js",
+//"compactados/classe_selecao_compacto.js", depreciado
 "compactados/classe_eventos_compacto.js",
 "compactados/classe_arvoredetemas_compacto.js",
 "compactados/classe_barradebotoes_compacto.js",
