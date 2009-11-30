@@ -2494,6 +2494,20 @@ Include:
 		$cp->set_data($m->selecaoAtributos($tipo,$item,$operador,$valor));
 	break;
 /*
+Property: selecaoatrib2
+
+Seleciona elementos com base nos atributos utilizando sintaxe complexa.
+
+Include:
+<classe_selecao.php>
+*/
+	case "selecaoatrib2":
+		include_once("classe_selecao.php");
+		copiaSeguranca($map_file);
+		$m = new Selecao($map_file,$tema);
+		$cp->set_data($m->selecaoAtributos2($filtro,$tipo));
+	break;
+/*
 Property: selecaotema
 
 Sleciona elementos de um tema com base em outro tema.

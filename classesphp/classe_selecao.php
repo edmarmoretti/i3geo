@@ -310,9 +310,10 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 /*
 function: selecaoAtributos
 
-Seleciona por atributo.
+Seleção simples por atributo. Não permite composição de atributos.
 
 parameters:
+
 $tipo - Tipo de operação adiciona|retira|inverte|limpa
 
 $item - Item que será consultado.
@@ -353,8 +354,62 @@ $valor - Valor.
 			{$this->layer->querybyattributes($item,'(['.$item.']'.$operador.' '.$valor.' )',1);}
 		}
 		$res_count = $this->layer->getNumresults();
-		//echo '("['.$item.']"'.$operador.'"'.$valor.'")';
-		//echo $res_count;
+		$shpi = array();
+		for ($i = 0; $i < $res_count; ++$i)
+		{
+			$result = $this->layer->getResult($i);
+			$shpi[]  = $result->shapeindex;
+		}
+		if ($tipo == "adiciona")
+		{return($this->selecaoAdiciona($shpi,$shp_atual));}
+		if ($tipo == "retira")
+		{return($this->selecaoRetira($shpi,$shp_atual));}
+		return("ok");
+	}
+	/*
+	function: selecaoAtributos2
+	
+	Seleção por atributo. Permite composição de atributos.
+	
+	parameters:
+	
+	$filtro - Expressão de seleção
+	
+	$tipo - Tipo de operação adiciona|retira|inverte|limpa
+	*/	
+	function selecaoAtributos2($filtro,$tipo)
+	{
+		if ($tipo == "limpa")
+		{return($this->selecaoLimpa());}
+		if ($tipo == "inverte")
+		{return($this->selecaoInverte());}
+		if(!$this->layer){return "erro";}
+		$this->layer->set("template","none.htm");
+		$indxlayer = $this->layer->index;
+		if (file_exists(($this->arquivo)."qy"))
+		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		$res_count = $this->layer->getNumresults();
+		$shp_atual = array();
+		for ($i = 0; $i < $res_count;++$i)
+		{
+			$rc = $this->layer->getResult($i);
+			$shp_atual[] = $rc->shapeindex;
+		}
+		$this->mapa->freequery($indxlayer);
+		$shpi = array();
+		$items = pegaItens($this->layer);
+		$filtro = str_replace("|","'",$filtro);
+		if ($this->layer->connectiontype == MS_POSTGIS)
+		{
+			$filtro = str_replace("'[","",$filtro);
+			$filtro = str_replace("[","",$filtro);
+			$filtro = str_replace("]'","",$filtro);
+			$filtro = str_replace("]","",$filtro);
+			$filtro = str_replace("("," ",$filtro);
+			$filtro = str_replace(")"," ",$filtro);
+		}
+		$this->layer->querybyattributes($items[0],$filtro,1);
+		$res_count = $this->layer->getNumresults();
 		$shpi = array();
 		for ($i = 0; $i < $res_count; ++$i)
 		{
