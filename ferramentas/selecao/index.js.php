@@ -129,7 +129,7 @@ i3GEOF.selecao = {
 		'	<option value="adiciona" >Adicionar</option>' +
 		'	<option value="retira" >Retirar</option>' +
 		'	</select></p>' +
-		'	<p class=paragrafo >Temas:</p><div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
+		'	<p class=paragrafo >Temas:<div id=i3GEOselecaoComboTemas style=text-align:left; ></div>' +
 		'	<p class=paragrafo >Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):' +
 		$inputText("","","i3GEOselecaotoleranciapt","",3,"0") +
 		'	</p><div id=i3GEOselecaomen1 style=left:0px;width:100%; >' +

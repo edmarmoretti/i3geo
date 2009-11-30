@@ -142,7 +142,7 @@ i3GEOF.inserexy = {
 		'</div><br>' +
 		'<div id=i3GEOinserexyprojecao style="left:0px;display:block">' +
 		'   <p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
-		'	<div id="i3GEOinserexylistaepsg" style="border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
+		'	<div id="i3GEOinserexylistaepsg" style="text-align:left;border:1px solid gray;width:300px;overflow:auto;height:60px;display:block;left:1px" >' +
 		'	</div>' +
 		'</div>' +
 		'<div class=guiaobj id="i3GEOinserexyguia1obj" style="left:1px;display:none;top:10px">' +
