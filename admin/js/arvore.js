@@ -4,19 +4,19 @@ function initMenu()
 	var editorDeMenus = function()
 	{
 		core_montaEditor("","600px","500px","pegaMenus")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorMenu()
 	};
 	var editorDeGrupos = function()
 	{
 		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorGrupos()
 	};
 	var editorDeSubGrupos = function()
 	{
 		core_montaEditor("","600px","500px")
-		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /><br><br><div id="tabela" style="left:-5px;"> </div>'
+		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorSubGrupos()
 	};
 

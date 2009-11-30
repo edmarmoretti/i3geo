@@ -50,9 +50,7 @@ function montaTabela_M(dados)
             var column = myDataTable.getColumn(oArgs.target);
             //if(column.editor != "null")
             if(!YAHOO.lang.isNull(column.editor))
-            {
-				YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');
-            }
+            {YAHOO.util.Dom.addClass(elCell,'yui-dt-highlighted');}
         };
         myDataTable.unhighlightEditableCell = function(oArgs)
         {
@@ -95,10 +93,7 @@ function montaTabela_M(dados)
         myDataTable.subscribe("editorUpdateEvent", function(oArgs)
         {
             if(oArgs.editor.column.key === "active")
-            {
-                this.saveCellEditor();
-                
-            }
+            {this.saveCellEditor();}
         });
         myDataTable.subscribe("editorBlurEvent", function(oArgs)
         {
@@ -107,8 +102,9 @@ function montaTabela_M(dados)
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
 			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.record)
+			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
 			linha.style.color = "blue";
+			linha.style.textDecoration = "blink";
         });
 		//destroy
     };

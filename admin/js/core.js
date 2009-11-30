@@ -962,6 +962,7 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
 				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
   				var linha = myDataTable.getTrEl(rec)
 				linha.style.color = "";
+				linha.style.textDecoration = "none";
   			}
   		},
   		failure:core_handleFailure,

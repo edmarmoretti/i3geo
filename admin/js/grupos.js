@@ -99,8 +99,9 @@ function montaTabela_G(dados)
         myDataTable.subscribe("editorSaveEvent", function(oArgs)
         {
 			if(oArgs.newData != oArgs.oldData)
-			var linha = myDataTable.getTrEl(oArgs.editor.record)
+			var linha = myDataTable.getTrEl(oArgs.editor.getRecord())
 			linha.style.color = "blue";
+			linha.style.textDecoration = "blink";
         });
     };
     core_carregando("desativa");
