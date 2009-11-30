@@ -954,16 +954,16 @@ function core_gravaLinha(mensagem,row,sUrl,nomeFuncao)
   		success:function(o)
   		{
 			core_carregando("desativa");
+			var rec = myDataTable.getRecordSet().getRecord(row);
+			var linha = myDataTable.getTrEl(rec);
 			if(nomeFuncao != "")
 			{eval(nomeFuncao+"()")}
 			else
 			{
-				var rec = myDataTable.getRecordSet().getRecord(row);
 				myDataTable.updateRow(rec,YAHOO.lang.JSON.parse(o.responseText)[0])
-  				var linha = myDataTable.getTrEl(rec)
-				linha.style.color = "";
-				linha.style.textDecoration = "none";
   			}
+			linha.style.color = "";
+			linha.style.textDecoration = "none";
   		},
   		failure:core_handleFailure,
   		argument: { foo:"foo", bar:"bar" }

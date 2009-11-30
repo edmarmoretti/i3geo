@@ -30,21 +30,23 @@
 <div id="ajuda">
 	<div class="hd">Ajuda</div>
 	<div class="bd" style="height:144px;overflow:auto">
-		Este programa permite criar ou editar os arquivos mapfile que compõem temas no i3geo.<br>
-		Os arquivo .map são armazenados no diretório i3geo/temas e podem também ser editados manualmente.<br>
-		Cada arquivo contém layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos são as
-		estruturas básicas utilizadas pelo i3geo na apresentação de dados e montagem das camadas que são vistas no mapa.<br>
-		Após criados os mapfiles, deve-se ainda definir as características de cada tema.<br>
-		A lista de IPs dos usuários que podem administrar o i3geo é definida no
-		arquivo i3geo/ms_configura.php	
+		<p>Este formulário permite criar ou editar os arquivos mapfile que compõem temas no i3geo.
+		<p>Os arquivo .map são armazenados no diretório i3geo/temas e podem também ser editados manualmente.
+		<p>Cada arquivo contém layers definidos conforme a sintaxe utilizada pelo Mapserver. Esses arquivos são as
+		estruturas básicas utilizadas pelo i3geo na apresentação de dados e montagem das camadas que são vistas no mapa.
+		<p>Após criados os mapfiles, deve-se ainda definir as características de cada LAYER.
+		<p>A lista de IPs dos usuários que podem administrar o i3geo é definida no
+		arquivo i3geo/ms_configura.php
+		<p>Apenas os mapfiles que forem vinculados a um tema poderão ser vistos na janela de inclusão de temas na árvore de temas.
+		Se você criou um mapfile manualmente, utilize a opção de edição (ícone apresentado ao lado de cada mapfile) para fazer essa associação.
 	</div>
 	<div class="ft"></div>
 </div>
 <input onclick="adicionaLinha()" type=button id=adiciona value="Criar um novo mapfile" />
 <br><br>
-Além de criar os mapfiles, deve-se definir as características de cada tema antes de montar os menus.<br>
+Além de criar os mapfiles, é necessário definir as características de cada LAYER nas opções abaixo.<br>
 <br>
-<p>Mapfiles:</p>
+<p>Mapfiles (arquivos .map existentes no diretório i3geo/temas):</p>
 <div id="tabela" style="left:-5px;"></div>
 </div>
 <div id=logajax style="display:block" ></div>

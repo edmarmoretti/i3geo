@@ -38,11 +38,12 @@ Free Software Foundation, Inc., no endereço
 
 */
 include_once("admin.php");
+
 $totaltemas = count(pegaDados("select * from i3geoadmin_temas"));
 $temasvalidos = pegaDados("select * from i3geoadmin_temas where codigo_tema <> ''");
 $temasassocsubgrupos = pegaDados("select id_tema from i3geoadmin_n3 group by id_tema");
 $ntags = pegaDados("select nome from i3geoadmin_tags");
-
+error_reporting(0);
 $totaltemasvalidos = count($temasvalidos);
 $codigostemas = array();
 $ncodigostemas = array();
