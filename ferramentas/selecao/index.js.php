@@ -227,6 +227,9 @@ i3GEOF.selecao = {
 		if($i("img")){
 			$i("img").style.cursor="pointer";
 		}
+		var i = $i("i3GEOF.selecao_c").style;
+		i3GEO.janela.ULTIMOZINDEX++;
+		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: mudaicone

@@ -90,6 +90,12 @@ i3GEO.janela = {
 	*/
 	TIPS: [],
 	/*
+	Variavel: ULTIMOZINDEX
+	
+	Cada vez que uma janela flutuante é criada, esse valor é acrescido de 1
+	*/	
+	ULTIMOZINDEX : 0,
+	/*
 	Function: prepara
 	
 	Executa funções default antes de abrir a janela
@@ -250,6 +256,7 @@ i3GEO.janela = {
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
+		i3GEO.janela.ULTIMOZINDEX++;
 		return([YAHOO.janelaDoca.xp.panel,$i(id+"_cabecalho"),$i(id+"_corpo")]);
 	},
 	/*

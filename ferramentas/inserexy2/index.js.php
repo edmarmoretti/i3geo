@@ -287,6 +287,9 @@ i3GEOF.inserexy = {
 		if($i("img")){
 			$i("img").style.cursor="crosshair";
 		}
+		var i = $i("i3GEOF.inserexy_c").style;
+		i3GEO.janela.ULTIMOZINDEX++;
+		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: montaComboLocal

@@ -147,6 +147,9 @@ i3GEOF.busca = {
 	ativaFoco: function(){
 		if(i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
 		{alert("O tema ja nao existe mais no mapa");}
+		var i = $i("i3GEOF.busca_c").style;
+		i3GEO.janela.ULTIMOZINDEX++;
+		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: montaListaItens

@@ -136,6 +136,9 @@ i3GEOF.confluence = {
 	ativaFoco: function(){
 		g_operacao = "navega";
 		i3GEO.util.criaPin();
+		var i = $i("i3GEOF.confluence_c").style;
+		i3GEO.janela.ULTIMOZINDEX++;
+		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: escondexy

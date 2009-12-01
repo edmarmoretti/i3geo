@@ -175,6 +175,9 @@ i3GEOF.insereGrafico = {
 			g_nomepin = "pin"+temp[1];
 			i3GEOF.insereGrafico.comboTemas();
 			$i("i3GEOinseregraficolistai").innerHTML = "";
+			var i = $i("i3GEOF.ainsereGrafico_c").style;
+			i3GEO.janela.ULTIMOZINDEX++;
+			i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 		}			
 	},
 	/*
