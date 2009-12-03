@@ -19,6 +19,7 @@ foreach ($menus as $menu)
 	{continue;}
 	$id = $menu["id_menu"];
 	$nome = html_entity_decode($menu["nome_menu"]);
+	$nome = h_converteTexto($nome);
 	//menu
 	$xml .= '<item cor="#FFFF99" id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 	$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,id_menu from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id' order by ordem",$locaplic);
@@ -26,6 +27,7 @@ foreach ($menus as $menu)
 	{
 		$contador++;
 		$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
+		$nome = h_converteTexto($nome);
 		$idgrupo = $grupos[$i]["id_n1"];
 		//grupo
 		$xml .= '<item cor="#FFCC99" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
@@ -37,6 +39,7 @@ foreach ($menus as $menu)
 		{
 			$contador++;
 			$nome = html_entity_decode($subgrupos[$j]["nome_subgrupo"]);
+			$nome = h_converteTexto($nome);
 			//subgrupo
 			$xml .= '<item cor="#FF9900" id="'.$contador.'" tipo="TE5" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 			$contador++;
@@ -47,6 +50,7 @@ foreach ($menus as $menu)
 			{
 				$contador++;
 				$nome = html_entity_decode($temas[$k]["nome_tema"]);
+				$nome = h_converteTexto($nome);
 				$nid = "tema,".$temas[$k]["codigo_tema"];
 				if($nome != "")
 				{
@@ -62,6 +66,7 @@ foreach ($menus as $menu)
 						{
 							$contador++;
 							$tag = html_entity_decode($tag);
+							$tag = h_converteTexto($tag);
 							if($tag != "")
 							$xml .= '<item cor="#ffffff" id="'.$contador.'" tipo="TE9" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";
 						}
@@ -79,6 +84,7 @@ for($i=0;$i < count($grupos);++$i)
 {
 	$contador++;
 	$nome = html_entity_decode($grupos[$i]["nome_grupo"]);
+	$nome = h_converteTexto($nome);
 	$idgrupo = $grupos[$i]["id_n1"];
 	$xml .= '<item cor="#FFFF99" id="'.$contador.'" tipo="TE2" nome="'.$nome.'" familia="'.$id.'" />  '."\n";
 	$temastag = pegaDados("select d.tags_tema as tags,d.id_tema as tema from i3geoadmin_n2 as b,i3geoadmin_n1 as a,i3geoadmin_n3 as c,i3geoadmin_temas as d where a.id_grupo = '$idgrupo' and a.id_n1 = b.id_n1 and c.id_n2 = b.id_n2 and c.id_tema = d.id_tema group by tema,d.tags_tema",$locaplic);
@@ -96,6 +102,7 @@ for($i=0;$i < count($grupos);++$i)
 		foreach($arrayTag as $tag)
 		{
 			$tag = html_entity_decode($tag);
+			$tag = h_converteTexto($tag);
 			$contador++;
 			if($tag != "")
 			$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE4" nome="'.$tag.'" familia="tag,'.$tag.'" />  '."\n";	
@@ -114,6 +121,7 @@ foreach ($tipos as $tipo)
 	{
 		$contador++;
 		$nome = html_entity_decode($w["nome_ws"]);
+		$nome = h_converteTexto($nome);
 		$link = str_replace("&","&amp;",$w["link_ws"]);
 		if($nome != "")
 		$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].",".$link.'" />  '."\n";		
@@ -130,4 +138,11 @@ $xml .= "</capa>";
 header("Content-type: application/xml");
 
 echo $xml;
+
+function h_converteTexto($i)
+{
+	$encoding = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
+	return mb_convert_encoding($i,"UTF-8",$encoding);	
+}
+
 ?> 

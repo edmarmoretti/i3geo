@@ -1,0 +1,139 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../css/i3geo_ferramentas.css">
+<title></title> 
+<style type="text/css" >button{background:url(../../imagens/tic.png) 98% 50% no-repeat;}</style>
+<link rel="stylesheet" type="text/css" href="../../pacotes/yui270/build/button/assets/skins/sam/button.css"/>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;
+	border:0px;
+}
+</style>
+</head>
+<body name="ancora" class="yui-skin-sam" >
+	<div id=guiasYUI class="yui-navset" style="top:0px;cursor:pointer;left:0px;">
+		<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">
+			<li><a href="#ancora"><em><div id="guia1" style="text-align:center;font-size:10px;left:0px;" >Pegar no mapa</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia2" style="text-align:center;font-size:10px;left:0px;" >Por atributo</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia3" style="text-align:center;font-size:10px;left:0px;" >Por tema</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia5" style="text-align:center;font-size:10px;left:0px;" >Gr&aacute;fico</div></em></a></li>
+			<li><a href="#ancora"><em><div id="guia4" style="text-align:center;font-size:10px;left:0px;" >Op&ccedil;&otilde;es</div></em></a></li>
+		</ul>
+	</div>	
+	<div id=geral style="left:0px;top:0px;">
+		<div id="botoesopc" style=top:1px;left:0px;text-align:center;width:90%; >
+			<img alt="selpt.png" id=selecaopt onclick="tiposel(this)" src="../../imagens/selpt.png" title="Clique no mapa para selecionar" style="cursor:pointer;border:1px solid white" /> 
+			<img alt="selext.png" id=selecaoext onclick="tiposel(this)" src="../../imagens/selext.png" title="Seleciona o que estiver visível no mapa" style="cursor:pointer;border:1px solid gray" /> 
+			<img alt="selbox.png" id=selecaobox onclick="tiposel(this)" src="../../imagens/selbox.png" title="Desenhe um retângulo no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
+			<img alt="selpoli.png" id=selecaopoli onclick="tiposel(this)" src="../../imagens/selpoli.png" title="Desenhe um pol&iacute;gono no mapa para selecionar" style="cursor:pointer;border:1px solid gray" /> 
+		</div>
+			<input type=button id=parapoli style="cursor:pointer;display:none;text-align:center" value="concluir pol&iacute;gono" onclick="concluipoligono()"/>
+		<div id=opc1 style=top:0px;left:10px;text-align:left;width:90%; >
+			Escolha um ou mais temas:
+			<div id="temas" >
+			</div>
+			<br>Tipo de sele&ccedil;&atilde;o:
+			<div id="operacao" >
+			</div>
+		</div>
+		<div id=guia1obj style="text-align:left;top:10px;left:10px;width:95%;">
+			<div id=opc2 onclick="criatemaf()" style="text-align:left;top:0px;left:0px;">
+				<input id=botao1 size=40 type=button value="Criar um tema novo com a sele&ccedil;&atilde;o"/>
+			</div>
+			<div id=men1 style=top:20px;left:0px;width:100%; >
+			Escolha o tema que receber&aacute; a sele&ccedil;&atilde;o e o tipo de opera&ccedil;&atilde;o.
+			Depois, clique no mapa no elemento desejado para selecionar.
+			</div>  
+		</div>
+		<div id=guia2obj style="width:95%;display:none;left:10px;top:5px">
+			<div id=opc3 style=top:0px;left:0px;text-align:left;display:none;>
+				Utilize as op&ccedil;&otilde;es abaixo para construir a express&ccedil;&atilde;o:
+				<table summary="" id="parametros" >
+				</table>
+				<div onclick="aplicaselecao()" style="text-align:left;position:relative;top:10px;left:0px">
+					<input id=botao2 size=10 type=button value="Aplicar" />
+				</div>
+				<div id=valores class=digitar style="width:100%;height:60px;text-align:left;top:15px;left:0px;overflow:auto">
+				</div>
+			</div>
+		</div>
+		<div id=guia3obj style="width:95%;display:none;left:10px;top:10px">
+			<div id=opc4 style=top:0px;left:0px;text-align:left;width:100%;>
+				Tema que ser&aacute; utilizado para selecionar o outro (esse tema deve possuir elementos j&aacute; selecionados):
+				<div id="overlay" style="text-align:left;top:0px;left:0px">
+				</div>
+				<div onclick="aplicaselecaoTema()" style="text-align:left;top:0px;left:0px">
+					<br><input id=botao3 size=10 type=button value="Aplicar"> 
+				</div>
+			</div>
+		</div>
+		<div id=guia4obj style="width:95%;display:none;left:10px;top:10px">
+			<table summary="" class=lista3 width="90%"> 
+				<tr>  
+					<td>Dist&acirc;ncia utilizada ao selecionar por ponto (em metros):</td>
+					<td><input style="cursor:text" size=4 class=digitar type='text' id=toleranciapt value='0' /></td>
+				</tr>
+				<tr>  
+					<td>Esquema de cores para o gr&aacute;fico:</td>
+					<td>
+            			<select id="colorScheme" >
+                			<option value="Blue">Azul</option>
+                			<option value="Red">Vermelho</option>
+                			<option value="Green">Verde</option>
+                			<option value="Purple">Roxo</option>
+                			<option value="Cyan">Ciano</option>
+                			<option value="Orange">Laranja</option>
+            			</select>					
+					</td>
+				<tr>
+				</tr>
+					<td>Tipo de gr&aacute;fico</td>
+					<td>
+						<select id="chartStyle">
+                			<option value="bar">Barras</option>
+                			<option value="line">Linhas</option>
+                			<option value="pie">Pizza</option>
+            			</select>
+            		</td>
+				</tr>
+			</table>
+		</div>
+		<div id=guia5obj style="width:95%;display:block;left:10px;top:5px">
+			<div id=opcgr style=top:0px;left:0px;text-align:left;display:block;>
+				Defina as colunas que compor&atilde;o os eixos x e y do gr&aacute;fico:
+				<table summary="" id="itensgrafico" >
+				<tr>
+					<td>Eixo X (Classes)</td><td>Eixo Y (Valores)</td><td onclick="atualizaGrafico()"><input id=botaoGr size=10 type=button value="Gerar"></td>
+				</tr>
+				<tr>
+					<td id=lugarComboX ></td><td id=lugarComboY ></td><td></td>
+				</tr>
+				</table>
+			</div>
+			<div id=lugarGrafico style="text-align:center;left:5px;width:95%" ></div>
+		</div>
+
+	</div>
+<!---
+O Mochikit possui uma incompatibilidade com o CPAINT
+Para resolver o problema, foi criado uma cópia de cpaint2.inc.js
+no diretório desta ferramenta.
+Por isso, a carga dos js é feita de cada componente
+--->
+<script src="../funcoes_compacto.js"></script>
+<script src="../../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script src="../../pacotes/yui270/build/element/element-min.js"></script>
+<script src="../../pacotes/yui270/build/button/button-min.js"></script>
+<script src="../../pacotes/yui270/build/tabview/tabview-min.js"></script>
+<script src="../../pacotes/yui270/build/animation/animation-min.js"></script>
+<script src="cpaint2.inc.js"></script>
+<script language="JavaScript" type="text/javascript" src="index.js"></script>
+<script src="../../pacotes/MochiKit/packed/MochiKit/MochiKit.js" type="text/javascript"></script>
+<script src="../../pacotes/plotkit/PlotKit/excanvas.js" type="text/javascript"></script>
+<script src="../../pacotes/plotkit/PlotKit/PlotKit.js" type="text/javascript"></script>
+
+</body>
+</html>

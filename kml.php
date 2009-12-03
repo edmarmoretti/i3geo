@@ -78,14 +78,14 @@ if ($menutemas != "" || is_array($menutemas))
 		{kml_tema($tema);}
 		foreach($xml->GRUPO as $grupo)
 		{
-			$nome = mb_convert_encoding($grupo->GTIPO,"auto","auto");
-			$desc = mb_convert_encoding($grupo->DTIPO,"auto","auto");
+			$nome = kml_converteTexto($grupo->GTIPO);
+			$desc = kml_converteTexto($grupo->DTIPO);
 			kml_cabecalho($nome,$desc);
 			foreach($grupo->TEMA as $tema)
 			{kml_tema($tema);}
 			foreach($grupo->SGRUPO as $sgrupo)
 			{
-				$nome = mb_convert_encoding($sgrupo->SDTIPO,"auto","auto");
+				$nome = kml_converteTexto($sgrupo->SDTIPO);
 				kml_folder($nome);
 				foreach($sgrupo->TEMA as $tema)
 				{kml_tema($tema);}		
@@ -193,30 +193,30 @@ function kml_tema_bd($tema)
 function kml_cabecalho($nome,$desc)
 {
 	echo "<Folder>\n";
-	echo " <name>".str_replace("&","&amp;",$nome)."</name>\n";
-	echo " <description>".str_replace("&","&amp;",$desc)."</description>\n";
+	echo " <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
+	echo " <description>".str_replace("&","&amp;",kml_converteTexto($desc))."</description>\n";
 	echo " <open>0</open><visibility>0</visibility>\n";	
 }
 function kml_folder($nome)
 {
 	echo " <Folder>\n";
-	echo "  <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "  <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo "  <description></description>\n";
 	echo "  <open>0</open><visibility>0</visibility>\n";
 }
 function kml_tema($tema)
 {
 	global $urli3geo;
-	$nome = mb_convert_encoding($tema->TNOME,"auto","auto");
-	$desc = mb_convert_encoding($tema->TDESC,"auto","auto");
-	$id = mb_convert_encoding($tema->TID,"auto","auto");
-	$fonte = mb_convert_encoding($tema->TLINK,"auto","auto");
+	$nome = kml_converteTexto($tema->TNOME);
+	$desc = kml_converteTexto($tema->TDESC);
+	$id = kml_converteTexto($tema->TID);
+	$fonte = kml_converteTexto($tema->TLINK);
 	$tipoa = "";
 	if($tema->TIPOA)
-	$tipoa = mb_convert_encoding($tema->TIPOA,"auto","auto");
+	$tipoa = kml_converteTexto($tema->TIPOA);
 	$ogc = sim;
 	if($tema->TID)
-	{$kml = mb_convert_encoding($tema->KML,"auto","auto");}
+	{$kml = kml_converteTexto($tema->KML);}
 	if(strtolower($kml) != "nao" && strtolower($tipoa) != "wms")
 	{
 		if($fonte != "")
@@ -232,7 +232,7 @@ function kml_tema($tema)
 function kml_servico($nome,$fonte,$legenda,$desc,$href)
 {
 	echo "   <GroundOverlay>\n";
-	echo "    <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
 	echo "    <visibility>0</visibility>\n";      
 	echo "    <Icon>\n";
@@ -245,7 +245,7 @@ function kml_servico($nome,$fonte,$legenda,$desc,$href)
 function kml_networklink($nome,$fonte,$legenda,$desc,$href)
 {
 	echo "   <NetworkLink>\n";
-	echo "    <name>".str_replace("&","&amp;",$nome)."</name>\n";
+	echo "    <name>".str_replace("&","&amp;",kml_converteTexto($nome))."</name>\n";
 	echo "    <description><![CDATA[".$fonte.$legenda.$desc."]]></description>\n";
 	echo "    <visibility>0</visibility>\n";      
 	echo "    <Link>\n";
@@ -254,5 +254,9 @@ function kml_networklink($nome,$fonte,$legenda,$desc,$href)
 	echo "    </Link>\n";
 	echo "   </NetworkLink>\n";
 }
-
+function kml_converteTexto($i)
+{
+	$encoding = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
+	return mb_convert_encoding($i,"UTF-8",$encoding);	
+}
 ?>

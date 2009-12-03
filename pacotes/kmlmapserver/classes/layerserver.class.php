@@ -448,8 +448,9 @@ class LayerServer {
     */
     function &add_feature(&$folder, &$wkt, $featurename, $attributes, $description_template, $style_data,$itens,$itensdesc){
         $pm = $folder->addChild('Placemark');
-        $pm->addChild('name',mb_convert_encoding($featurename,"UTF-8",mb_detect_encoding($featurename,"UTF-8, ISO-8859-1")));
-        $pm->addChild('description', $this->get_feature_description($featurename, $attributes, $description_template,$itens,$itensdesc));
+        $fname = mb_convert_encoding($featurename,"UTF-8",mb_detect_encoding($featurename,'UTF-8, UTF-7, ASCII, ISO-8859-1'));
+        $pm->addChild('name',$fname);
+        $pm->addChild('description', $this->get_feature_description($fname, $attributes, $description_template,$itens,$itensdesc));
         // Now parse the wkt
         if(strpos($wkt, 'MULTILINESTRING') !== false){
             $this->add_multilinestring($wkt, $pm, $featurename, $style_data['icon']);
