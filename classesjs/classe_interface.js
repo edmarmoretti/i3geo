@@ -279,7 +279,8 @@ i3GEO.Interface = {
 			i.src=i3GEO.parametros.mapimagem;
 		},
 		cria:function(){
-			var ins = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img' />";
+			var ins = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img' />",
+				temp = $i(i3GEO.Interface.IDCORPO);
 			/*
 			var ins = "<table>";
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgN' /></td><td class=verdeclaro ></td></tr>";
@@ -287,7 +288,8 @@ i3GEO.Interface = {
 			ins += "<tr><td class=verdeclaro ></td><td class=verdeclaro ><input style='display:none;position:relative' type=image src='' id='imgS' /></td><td class=verdeclaro ></td></tr>";
 			ins += "</table>";
 			*/
-			$i(i3GEO.Interface.IDCORPO).innerHTML = ins;
+			if(temp)
+			{temp.innerHTML = ins;}
 			i3GEO.Interface.IDMAPA = "img";
 		},
 		/*
