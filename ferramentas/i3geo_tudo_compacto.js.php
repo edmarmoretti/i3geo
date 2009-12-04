@@ -7813,6 +7813,19 @@ i3GEO.util = {
     	// Pixel width of the scroller
     	return (wNoScroll - wScroll);
 	},
+	/*
+	Function: scriptTag
+	
+	Insere um javascript no documento HTML
+	
+	Parametros:
+	
+	js {String} - endereco do JS
+	
+	ini - funcao do JS que será executada ao ser carregado o script (pode ser "")
+	
+	id - id do elemento script que será criado
+	*/
 	scriptTag: function(js,ini,id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 		var head,script;
@@ -7821,14 +7834,16 @@ i3GEO.util = {
 		head= document.getElementsByTagName('head')[0];
 		script= document.createElement('script');
 		script.type= 'text/javascript';
-		if(navm){
-			script.onreadystatechange = function(){
-				if(this.readyState === 'loaded' || this.readyState === 'complete')
-				{eval(ini);}
-			};
+		if(ini !== ""){
+			if(navm){
+				script.onreadystatechange = function(){
+					if(this.readyState === 'loaded' || this.readyState === 'complete')
+					{eval(ini);}
+				};
+			}
+			else
+			{script.onload=function(){eval(ini);};}
 		}
-		else
-		{script.onload=function(){eval(ini);};}
 		script.src= js;
 		script.id = id;
 		head.appendChild(script);

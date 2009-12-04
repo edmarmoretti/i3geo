@@ -122,6 +122,7 @@ i3GEOF.selecao = {
 		'	<img id=i3GEOselecaopoli onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/polygon.png" title="Desenhe um poligono no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img id=i3GEOselecaoext onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/map.png" title="Seleciona o que estiver visivel no mapa" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img id=i3GEOselecaobox onclick="i3GEOF.selecao.tiposel(this)" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/region.png" title="Desenhe um retangulo no mapa para selecionar" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
+		'	<img onclick="i3GEOF.selecao.grafico()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/layer-vector-chart-add.png" title="Grafico" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'inverte\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/undo.png" title="Inverte a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.operacao(\'limpa\')" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/erase.png" title="Limpa a selecao" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
 		'	<img onclick="i3GEOF.selecao.criatema()" src="'+i3GEO.configura.locaplic+'/imagens/gisicons/save1.png" title="Salva a selecao como um novo tema" style="cursor:pointer;border:1px solid RGB(230,230,230);" />' +
@@ -179,7 +180,7 @@ i3GEOF.selecao = {
 		};
 		titulo = "Seleção <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"360px",
+			"370px",
 			"210px",
 			"",
 			"",
@@ -859,6 +860,16 @@ i3GEOF.selecao = {
 			alert("Erro: "+e);
 			i3GEOF.selecao.aguarde.visibility = "hidden";
 		}
+	},
+	/*
+	Function: grafico
+	
+	Abre uma janela flutuante para criar gráficos
+	*/
+	grafico: function(){
+		var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
+		i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
 	}
+
 };
 <?php if(extension_loaded('zlib')){ob_end_flush();}?>
