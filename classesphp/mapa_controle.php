@@ -1501,7 +1501,11 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 */					
 	case "graficoSelecao":
 		include_once("graficos.php");
-		$cp->set_data(iniciaDadosGrafico($map_file,$tema,"",$itemclasses,$itemvalores,"xy",false));
+		if(!isset($exclui))
+		{$exclui = "";}
+		if(!isset($tipo))
+		{$tipo = "nenhum";}
+		$cp->set_data(iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false));
 	break;
 /*
 Property: graficotema
