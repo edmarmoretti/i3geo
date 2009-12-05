@@ -121,7 +121,7 @@ i3GEOF.graficointerativo = {
 		'<div class=guiaobj id="i3GEOgraficointerativoguia1obj" style="left:1px;display:none;">' +
 		'	<p class=paragrafo >Escolha o tipo de gráfico: </p>' +
 		'	<table class=lista6 >' +
-		'		<tr><td><input type=radio onclick="javascript:i3GEOF.graficointerativo.tipo=\'pizza2d\';" value="pizza2d" name="tipoGrafico" style=cursor:pointer > </td><td>pizza 2d</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style=cursor:pointer > </td><td>pizza 2d</td></tr>' +
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
@@ -192,6 +192,15 @@ i3GEOF.graficointerativo = {
 		var i = $i("i3GEOF.graficointerativo_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+	},
+	/*
+	Function: ativaTipo
+	
+	Define a variável com o tipo de gráfico e mostra a guia 2
+	*/
+	ativaTipo: function(obj){
+		i3GEOF.graficointerativo.tipo = obj.value;
+		$i("i3GEOgraficointerativoguia2").onclick.call();
 	},
 	/*
 	Function: configuraDados
@@ -275,7 +284,7 @@ i3GEOF.graficointerativo = {
 				ins = [],
 				i,
 				id;
-			ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td style=background-color:yellow >nome</td><td style=background-color:yellow >valor</td><td style=background-color:yellow >cor</td></tr>");
+			ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td style=background-color:yellow >nome</td><td style=background-color:yellow >valor</td><td style=background-color:yellow >cor</td><td></td></tr>");
 			for (i=1;i<n; i++){
 				v = dados[i].split(";");
 				v[0] = v[0].replace("'","");
@@ -287,7 +296,9 @@ i3GEOF.graficointerativo = {
 				ins.push("</td><td>");
 				ins.push($inputText("","",id+"_valor","digite o novo valor",12,v[1],"valor"));
 				ins.push("</td><td>");
-				ins.push($inputText("","",id+"_cor","r,g,b",12,"250,250,250","cor"));
+				ins.push($inputText("","",id+"_cor","",12,"#d01f3c","cor"));
+				ins.push("</td><td>");
+				ins.push("<img alt='aquarela.gif' style=cursor:pointer src='"+i3GEO.configura.locaplic+"/imagens/aquarela.gif' onclick='i3GEOF.graficointerativo.corj(\""+id+"_cor\")' />");				
 				ins.push("</td></tr>");
 			}
 			ins.push("</table><br>");
@@ -314,9 +325,9 @@ i3GEOF.graficointerativo = {
 			titulo = $i("i3GEOgraficointerativoComboTemasId").options[indice].text,
 			par = [];
 		for(i=0;i<ninputs;i = i + 3){
-			valores.push(inputs[i+1].value * 1);
 			nomes.push(inputs[i].value+" ");
-			cores.push("#d01f3c");
+			cores.push(inputs[i+2].value);
+			valores.push(inputs[i+1].value * 1);
 			par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
 		}
 		if(i3GEOF.graficointerativo.tipo === "pizza2d"){
@@ -330,7 +341,7 @@ i3GEOF.graficointerativo = {
 					"animate":   1,
 					"values" :   par,
 					"tip": "#val# de #total#<br>#percent# de 100%",
-					"gradient-fill": true,
+					"gradient-fill": true
 				}],
 				"title":{
 					"text": titulo,
@@ -344,7 +355,14 @@ i3GEOF.graficointerativo = {
 			});
 		}
 		return parametros;
-	}
+	},
+	/*
+	Function: corj
+	
+	Abre a janela para o usuário selecionar uma cor interativamente
+	*/
+	corj: function(obj)
+	{i3GEO.util.abreCor("",obj,"hex");},
 };
 //pacotes/openflahchart/json2.js
 if (!this.JSON1) {
@@ -353,7 +371,6 @@ if (!this.JSON1) {
         function f(n) {    // Format integers to have at least two digits.
             return n < 10 ? '0' + n : n;
         }
-
         Date.prototype.toJSON = function () {
             return this.getUTCFullYear()   + '-' +
                  f(this.getUTCMonth() + 1) + '-' +

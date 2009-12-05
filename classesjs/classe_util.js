@@ -836,10 +836,14 @@ i3GEO.util = {
 	janela {String} - id do conteúdo da janela flutuante que chamou a função. Pode ser "" caso elemento exista em document
 	
 	elemento {String} - id do elemento que receberá os valores da cor selecionada
+	
+	tipo {String} - opcional pode ser definido como rgb ou hex indicando o tipo de retorno da cor
 	*/
-	abreCor: function(janela,elemento){
+	abreCor: function(janela,elemento,tipo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.abreCor()");}
 		//i3GEO.janela.cria("400","240",i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);
+		if(arguments.length == 2)
+		{tipo = "rgb";}
 		var ins,
 			temp,
 			novoel,
@@ -847,7 +851,7 @@ i3GEO.util = {
 			fix = false,
 			wlargura = "400",
 			waltura = "240",
-			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento,
+			wsrc = i3GEO.configura.locaplic+"/ferramentas/colorpicker/index.htm?doc="+janela+"&elemento="+elemento+"&tipo="+tipo,
 			nx = "",
 			ny = "",
 			texto = "Cor",
