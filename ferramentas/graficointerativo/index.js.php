@@ -68,6 +68,7 @@ i3GEOF.graficointerativo = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia4","i3GEOgraficointerativoguia");
 				var so = new SWFObject(i3GEO.configura.locaplic+"/pacotes/openflashchart/open-flash-chart.swf", "i3GEOgraficointerativoGrafico1", "95%", "88%", "9", "#ffffff");
 				so.addVariable("get-data", "i3GEOF.graficointerativo.tabela2dados");
+				so.addVariable("loading","Criando grafico...");
 				so.write("i3GEOgraficointerativoGrafico");
 			};
 			i3GEOF.graficointerativo.ativaFoco();
@@ -122,6 +123,25 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo >Escolha o tipo de gráfico: </p>' +
 		'	<table class=lista6 >' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="pizza2d" name="tipoGrafico" style=cursor:pointer > </td><td>pizza 2d</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style=cursor:pointer > </td><td>área 2d</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style=cursor:pointer > </td><td>barras simples</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_glass" name="tipoGrafico" style=cursor:pointer > </td><td>barras 2 cores</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_3d" name="tipoGrafico" style=cursor:pointer > </td><td>barras 3d</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_sketch" name="tipoGrafico" style=cursor:pointer > </td><td>barras rascunho</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder" name="tipoGrafico" style=cursor:pointer > </td><td>barras cilindro</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_cylinder_outline" name="tipoGrafico" style=cursor:pointer > </td><td>barras cilindro com contorno</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style=cursor:pointer > </td><td>barras cúpula</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style=cursor:pointer > </td><td>barras pílula</td></tr>' +
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
@@ -145,7 +165,7 @@ i3GEOF.graficointerativo = {
 		'<div class=guiaobj id="i3GEOgraficointerativoguia3obj" style="left:1px;display:none;top:-5px">' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-5px">' +
-		'	<div id="i3GEOgraficointerativoGrafico">gráfico</div>' +
+		'	<div id="i3GEOgraficointerativoGrafico"></div>' +
 		'</div>';
 		return ins;		
 	},
@@ -200,7 +220,10 @@ i3GEOF.graficointerativo = {
 	*/
 	ativaTipo: function(obj){
 		i3GEOF.graficointerativo.tipo = obj.value;
-		$i("i3GEOgraficointerativoguia2").onclick.call();
+		if($i("i3GEOgraficointerativoGrafico").innerHTML === "")
+		{$i("i3GEOgraficointerativoguia2").onclick.call();}
+		else
+		{$i("i3GEOgraficointerativoguia4").onclick.call();}
 	},
 	/*
 	Function: configuraDados
@@ -284,7 +307,7 @@ i3GEOF.graficointerativo = {
 				ins = [],
 				i,
 				id;
-			ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td style=background-color:yellow >nome</td><td style=background-color:yellow >valor</td><td style=background-color:yellow >cor</td><td></td></tr>");
+			ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td></td><td style=background-color:yellow >nome</td><td style=background-color:yellow >valor</td><td style=background-color:yellow >cor</td><td></td></tr>");
 			for (i=1;i<n; i++){
 				v = dados[i].split(";");
 				v[0] = v[0].replace("'","");
@@ -292,6 +315,8 @@ i3GEOF.graficointerativo = {
 				//ins += v[0]+" "+v[1];
 				id = "i3GEOgraficointerativoDados"+i; //layer+indice da classe
 				ins.push("<tr><td>");
+				ins.push("<img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.graficointerativo.excluilinha(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' /></td>");
+				ins.push("</td><td>");
 				ins.push($inputText("","",id+"_nome","digite o novo nome",20,v[0],"nome"));
 				ins.push("</td><td>");
 				ins.push($inputText("","",id+"_valor","digite o novo valor",12,v[1],"valor"));
@@ -314,7 +339,8 @@ i3GEOF.graficointerativo = {
 	Obtém os dados da tabela para compor o gráfico
 	*/
 	tabela2dados: function(){
-		var inputs = $i("i3GEOgraficointerativoDados").getElementsByTagName("input"),
+		var temp,
+			inputs = $i("i3GEOgraficointerativoDados").getElementsByTagName("input"),
 			ninputs = inputs.length,
 			i,
 			parametros,
@@ -323,38 +349,121 @@ i3GEOF.graficointerativo = {
 			cores = [],
 			indice = $i("i3GEOgraficointerativoComboTemasId").options.selectedIndex,
 			titulo = $i("i3GEOgraficointerativoComboTemasId").options[indice].text,
-			par = [];
+			par = [],
+			soma = 0,
+			menor = inputs[1].value * 1,
+			maior = 0,
+			alpha = 0.8,
+			stroke = 2,
+			gradient = true,
+			tituloSize = "15px",
+			tituloCor = "#000000",
+			tituloAlinhamento = "center",
+			corunica = "#E2D66A",
+			outlinecolor = "#577261",
+			corGrid = "#D7E4A3",
+			divisoesY = 10,
+			rotacaoX = 270,
+			legendaX = $i("i3GEOgraficointerativoComboXid").value,
+			legendaY = $i("i3GEOgraficointerativoComboYid").value,
+			fill = "#C4B86A";
 		for(i=0;i<ninputs;i = i + 3){
 			nomes.push(inputs[i].value+" ");
 			cores.push(inputs[i+2].value);
-			valores.push(inputs[i+1].value * 1);
+			temp = inputs[i+1].value * 1;
+			valores.push(temp);
+			soma += temp;
+			if(temp > maior)
+			{maior = temp;}
+			if(temp < menor)
+			{menor = temp;}
 			par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
 		}
 		if(i3GEOF.graficointerativo.tipo === "pizza2d"){
-			parametros = JSON1.stringify({
+			parametros = {
 				"elements":[{
 					"type":      "pie",
 					"start-angle": 180,
 					"colours":   cores,
-					"alpha":     0.6,
-					"stroke":    2,
+					"alpha":     alpha,
+					"stroke":    stroke,
 					"animate":   1,
 					"values" :   par,
 					"tip": "#val# de #total#<br>#percent# de 100%",
-					"gradient-fill": true
+					"gradient-fill": gradient
 				}],
 				"title":{
 					"text": titulo,
-					"style": "{font-size: 15px; color:#000000; text-align: center;}"
+					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
 	  			},
 				"num_decimals": 2,
 				"is_fixed_num_decimals_forced": true,
 				"is_decimal_separator_comma": true,
 				"is_thousand_separator_disabled": true,
 				"x_axis": null
-			});
+			};
 		}
-		return parametros;
+		if(i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
+			parametros = {
+				"elements":[{
+					"type":      i3GEOF.graficointerativo.tipo,
+					"start-angle": 180,
+					"colour":   corunica,
+					"outlinecolor": outlinecolor,
+					"alpha":     alpha,
+					"stroke":    stroke,
+					"animate":   1,
+					"values" :   valores,
+					"tip": "#val#",
+					"gradient-fill": gradient,
+					"fill": fill,
+					"fill-alpha": alpha,
+					"dot-style": { "type": "dot", "colour": "#9C0E57", "dot-size": 7 }
+				}],
+				"x_axis": {
+					"colour": "#A2ACBA",
+					"grid-colour": corGrid,
+					"offset": true,
+					"steps": 1,
+					"labels": {
+						"steps": 1,
+						"rotate": rotacaoX,
+						"colour": "#000000",
+						"labels": nomes
+					}
+				},
+				"y_axis": {
+					"min": menor,
+					"max": maior,
+					"steps": parseInt((parseInt(maior - menor,10) / divisoesY),10),
+				},
+				"x_legend": {
+					"text": legendaX,
+					"style": "{font-size: 12px; color: #778877}"
+				},
+				"y_legend": {
+					"text": legendaY,
+					"style": "{font-size: 12px; color: #778877}"
+				},
+				"title":{
+					"text": titulo,
+					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
+	  			}  			
+			};
+		}
+		return JSON1.stringify(parametros);
+	},
+	/*
+	Function: excluilinha
+	
+	Exclui uma linha da tabela de dados
+	*/
+	excluilinha: function(celula){
+		var p = celula.parentNode.parentNode;
+		do{
+			p.removeChild(p.childNodes[0]);
+		} while (p.childNodes.length > 0);
+		p.parentNode.removeChild(p);
 	},
 	/*
 	Function: corj
