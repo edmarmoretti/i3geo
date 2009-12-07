@@ -42,6 +42,12 @@ i3GEOF.legenda = {
 	*/
 	tema: i3GEO.temaAtivo,
 	/*
+	Variavel: dadosGrafico
+	
+	Dados utilizados no gráfico no formato da ferramenta graficointerativo
+	*/
+	dadosGrafico: "",
+	/*
 	Variavel: aguarde
 	
 	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
@@ -889,7 +895,10 @@ i3GEOF.legenda = {
 					if (retorno.data[0].proc == "") //o layer nao deve ser raster
 					{
 						var ins = [],i,id,re,exp,t;
+						ins.push("<p class='paragrafo' ><input type=button value='Gráfico de pizza' id=i3GEOlegendaGraficoPizza /></p>");
+						ins.push("<p class='paragrafo' >Número de ocorrências em cada classe (n)</p>");
 						ins.push("<table width=100% >")
+						i3GEOF.legenda.dadosGrafico = ["n;x"];
 						for (i=0;i<retorno.data.length;i++){
 							id = retorno.data[i].tema+"-"+retorno.data[i].idclasse; //layer+indice da classe
 							re = new RegExp("'", "g");
@@ -897,6 +906,7 @@ i3GEOF.legenda = {
 							ins.push("<tr><td style='text-align:left;border-bottom:0 none white' >"+retorno.data[i].nomeclasse+"</td></tr>");
 							t = (retorno.data[i].nreg * 100)/retorno.data[i].totalreg;
 							ins.push("<tr><td style=text-align:left ><img height=15px width="+t+"% src='"+retorno.data[i].imagem+"' /></td></tr>");
+							i3GEOF.legenda.dadosGrafico.push(retorno.data[i].nomeclasse+";"+retorno.data[i].nreg);
 						}
 						ins.push("</table><br>");
 						$i("i3GEOlegendaguia4obj").innerHTML = ins.join("");
@@ -904,6 +914,14 @@ i3GEOF.legenda = {
 					else
 					{$i("i3GEOlegendaguia4obj").innerHTML = "<p style=color:red >Ocorreu um erro<br>"}
 					i3GEOF.legenda.aguarde.visibility = "hidden";
+					new YAHOO.widget.Button(
+						"i3GEOlegendaGraficoPizza",
+						{onclick:{fn: function(){
+								var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
+								i3GEO.util.scriptTag(js,"i3GEOF.legenda.iniciaGraficoPizza()","i3GEOF.graficointerativo_script");
+							}
+						}}
+					);				
 				},
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=contagemclasse&tema="+i3GEOF.legenda.tema,
 				cp = new cpaint();
@@ -912,6 +930,16 @@ i3GEOF.legenda = {
 			cp.call(p,"cocontagemclasse",monta);
 		}
 		catch(e){alert("Erro: "+ e);i3GEOF.legenda.aguarde.visibility = "hidden";}
+	},
+	iniciaGraficoPizza: function(){
+		var dados = {
+			"attributes":{"id":""},
+			"data":{
+				"dados":i3GEOF.legenda.dadosGrafico
+			}
+		};		
+		i3GEOF.graficointerativo.tipo = "pizza2d";
+		i3GEOF.graficointerativo.criaJanelaFlutuante(dados);
 	},
 	/*
 	Function: aplicaProcessos
