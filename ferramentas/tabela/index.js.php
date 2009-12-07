@@ -672,8 +672,20 @@ i3GEOF.tabela = {
 		var ins = "<br><img src='"+i3GEO.configura.locaplic+"/imagens/Rlogo.jpg'/>";
 		ins += "<p class='paragrafo' >A representação gr&aacute;fica dos dados tabulares utiliza todos os elementos da tabela ou os selecionados, se estiverem ativos no mapa.";
 		ins += "<p class='paragrafo' >Nas op&ccedil;&otilde;s seguintes, defina o tipo e as op&ccedil;&otilde;es do gr&aacute;fico.";
-		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gráficos s&atilde;o gerados com o software R.</a>";
+		ins += "<p class='paragrafo' ><a href='http://www.r-project.org/' target=blank >Os gráficos s&atilde;o gerados com o software R,</a> mas vc pode optar por usar a ferramenta de gráficos interativos que possuem outras opções e geram gráficos em Flash.";
+		ins += "<p class='paragrafo' ><input type=button value='Gráficos interativos' id=i3GEOtabelaGraficoI /></p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.tabela.t1()",ins,"i3GEOFtabelat0","i3GEOtabelaresultado");
+		new YAHOO.widget.Button(
+			"i3GEOtabelaGraficoI",
+			{onclick:{fn: function(){
+					i3GEO.mapa.ativaTema(i3GEOF.tabela.tema);
+					var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
+					
+				}
+			}}
+		);				
+		
 	},
 	t1: function(){
 		var ins = "<p class='paragrafo' >Escolha o tipo de gr&aacute;fico:</p>";
