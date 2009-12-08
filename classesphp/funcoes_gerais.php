@@ -1192,10 +1192,10 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 		}
 		if ($tipo == "nenhum")
 		{
-			if (($v != "") && (is_numeric($v)))
-			{
+			//if (($v != "") && (is_numeric($v)))
+			//{
 				$valoresn[] = $v;
-			}
+			//}
 			$valores = $valoresn;
 		}
 	}

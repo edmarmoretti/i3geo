@@ -137,6 +137,8 @@ i3GEOF.graficointerativo = {
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="area" name="tipoGrafico" style=cursor:pointer > </td><td>área 2d</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style=cursor:pointer > </td><td>distribuição de pontos</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
 
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style=cursor:pointer > </td><td>barras simples</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
@@ -153,6 +155,9 @@ i3GEOF.graficointerativo = {
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round_glass" name="tipoGrafico" style=cursor:pointer > </td><td>barras cúpula</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_round" name="tipoGrafico" style=cursor:pointer > </td><td>barras pílula</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="hbar" name="tipoGrafico" style=cursor:pointer > </td><td>barras horizontais</td></tr>' +
+
 		'	</table>' +
 		'</div> ' +
 		'<div class=guiaobj id="i3GEOgraficointerativoguia2obj" style="left:1px;display:none;top:-5px">' +
@@ -177,6 +182,7 @@ i3GEOF.graficointerativo = {
 		'<div class=guiaobj id="i3GEOgraficointerativoguia3obj" style="left:1px;display:none;top:-5px">' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-5px">' +
 		'	<div id="i3GEOgraficointerativoGrafico"></div>' +
@@ -307,10 +313,14 @@ i3GEOF.graficointerativo = {
 			x = $i("i3GEOgraficointerativoComboXid").value,
 			y = $i("i3GEOgraficointerativoComboYid").value,
 			excluir = $i("i3GEOgraficointerativoexcluir").value,
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&excluir="+excluir,
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir,
 			cp = new cpaint(),
 			tipo = "soma",
 			monta;
+		
+		if($i("i3GEOgraficointerativoDadosPuros").checked)
+		{tipo = "nenhum";}
+			
 		if(x === y)
 		{tipo = "conta";}
 		if(tema === "")
@@ -401,6 +411,8 @@ i3GEOF.graficointerativo = {
 			soma = 0,
 			menor = inputs[1].value * 1,
 			maior = 0,
+			menorNome = inputs[0].value * 1,
+			maiorNome = 0,
 			alpha = 0.8,
 			stroke = 2,
 			gradient = true,
@@ -414,7 +426,8 @@ i3GEOF.graficointerativo = {
 			rotacaoX = 270,
 			legendaX = "",
 			legendaY = "",
-			fill = "#C4B86A";
+			fill = "#C4B86A",
+			pointSize = 2;
 		if($i("i3GEOgraficointerativoComboXid"))
 		{legendaX = $i("i3GEOgraficointerativoComboXid").value;}
 		if($i("i3GEOgraficointerativoComboYid"))
@@ -431,6 +444,11 @@ i3GEOF.graficointerativo = {
 			{maior = temp;}
 			if(temp < menor)
 			{menor = temp;}
+			temp = inputs[i].value * 1;
+			if(temp > maiorNome)
+			{maiorNome = temp;}
+			if(temp < menorNome)
+			{menorNome = temp;}	
 			par.push({"value":inputs[i+1].value * 1,"label":inputs[i].value+" "});
 		}
 		if($i("i3GEOgraficointerativoAcumula").checked){
@@ -469,7 +487,7 @@ i3GEOF.graficointerativo = {
 				"x_axis": null
 			};
 		}
-		if(i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
+		if(i3GEOF.graficointerativo.tipo === "scatter" || i3GEOF.graficointerativo.tipo === "hbar" || i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
 			parametros = {
 				"elements":[{
 					"type":      i3GEOF.graficointerativo.tipo,
@@ -484,7 +502,7 @@ i3GEOF.graficointerativo = {
 					"gradient-fill": gradient,
 					"fill": fill,
 					"fill-alpha": alpha,
-					"dot-style": { "type": "dot", "colour": "#9C0E57", "dot-size": 7 }
+					"dot-style": { "type": "anchor", "colour": "#9C0E57", "dot-size": pointSize }
 				}],
 				"x_axis": {
 					"colour": "#A2ACBA",
@@ -516,6 +534,45 @@ i3GEOF.graficointerativo = {
 					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
 	  			}  			
 			};
+			if(i3GEOF.graficointerativo.tipo === "hbar"){
+				n = valores.length;
+				temp = [];
+				for(i=0;i<n;i++){
+					temp.push({"left":0,right:valores[i]});
+				}
+				parametros.elements[0].values = temp;
+				
+				parametros.x_axis = {
+					"min": 0,
+					"max": maior,
+					"steps": parseInt((maior / divisoesY),10)
+				}
+				parametros.y_axis = {
+    				"offset": 1,
+    				"labels": nomes
+				};
+				parametros.x_legend.text = legendaY;
+				parametros.y_legend.text = legendaX;	
+			}
+			if(i3GEOF.graficointerativo.tipo === "scatter"){
+				n = valores.length;
+				temp = [];
+				for(i=0;i<n;i++){
+					temp.push({"x":nomes[i],"y":valores[i]});
+				}
+				parametros.elements[0].values = temp;
+				parametros.x_axis = {
+					"min": menor,
+					"max": maior,
+					"steps": parseInt(((maior - menor) / divisoesY),10)
+				}
+				parametros.x_axis = {
+					"min": menorNome,
+					"max": maiorNome,
+					"steps": parseInt(((maiorNome - menorNome) / divisoesY),10)
+				}
+				parametros.elements[0].tip = "#x#  -  #y#";
+			}
 		}
 		return JSON1.stringify(parametros);
 		}catch(erro){alert(erro);}
