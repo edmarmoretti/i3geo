@@ -867,8 +867,7 @@ i3GEOF.selecao = {
 	Abre uma janela flutuante para criar gráficos
 	*/
 	grafico: function(){
-		var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
-		i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
+		i3GEO.analise.dialogo.graficoInterativo();
 	}
 
 };

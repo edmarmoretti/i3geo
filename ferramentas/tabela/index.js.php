@@ -679,8 +679,7 @@ i3GEOF.tabela = {
 			"i3GEOtabelaGraficoI",
 			{onclick:{fn: function(){
 					i3GEO.mapa.ativaTema(i3GEOF.tabela.tema);
-					var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
+					i3GEO.analise.dialogo.graficoInterativo();
 					
 				}
 			}}

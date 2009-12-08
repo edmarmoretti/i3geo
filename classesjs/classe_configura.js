@@ -137,7 +137,8 @@ i3GEO.configura = {
 			{ text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
 			{ text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
 			{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
-			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" }
+			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
+			{ text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" }
 			],
 			"janelas": [
 			{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },

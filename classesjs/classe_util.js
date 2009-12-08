@@ -1259,6 +1259,26 @@ i3GEO.util = {
 		return (r+","+g+","+b);		
 	},
 	/*
+	Function: rgb2hex
+	
+	Converte uma cor RGB para HEX
+	
+	Parametro:
+	
+	str {String} - r,g,b
+	
+	Return:
+	{String}
+	*/
+	rgb2hex: function(str) {
+		var rgb = str.split(",");
+		function hex(x)  {
+			var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8","9", "A", "B", "C", "D", "E", "F"];
+			return hexDigits[(x - x % 16) / 16] + hexDigits[x% 16];
+		};
+		return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
+	},
+	/*
 	Function: comboTemas
 	
 	Cria um combo (caixa de seleção) com a lista de temas existentes no mapa e de determinado tipo

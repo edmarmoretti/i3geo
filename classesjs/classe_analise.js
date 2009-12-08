@@ -53,6 +53,18 @@ i3GEO.analise = {
 	*/
 	dialogo:{
 		/*
+		Function: graficoInterativo
+
+		Abre a janela para criação de gráficos interativos
+		*/
+		graficoInterativo: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.graficoInterativo()");}
+			if(typeof(i3GEOF.graficointerativo) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
+			}
+		},
+		/*
 		Function: gradePontos
 
 		Abre a janela que gera grade de pontos
