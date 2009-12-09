@@ -183,6 +183,7 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this)" /> Atualiza o gráfico ao navegar pelo mapa</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-5px">' +
 		'	<div id="i3GEOgraficointerativoGrafico"></div>' +
@@ -646,7 +647,36 @@ i3GEOF.graficointerativo = {
 			tabela.innerHTML = ins;
 		}
 		catch(e){}
+	},
+	/*
+	Function: ativaNavegacao
+	
+	Ativa ou desativa a atualização automática ao navegar no mapa
+	*/
+	ativaNavegacao: function(obj){
+		if(obj.checked){
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo.obterDados()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+   				graficointerativoDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.graficointerativo.obterDados();});
+   				graficointerativoZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.graficointerativo.obterDados();});						
+			}
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+   				i3geoOL.events.register("moveend",i3geoOL,function(e){i3GEOF.graficointerativo.obterDados();});
+			}			
+		}
+		else{
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				GEvent.removeListener(graficointerativoDragend);
+				GEvent.removeListener(graficointerativoZoomend);
+			}
+		}
 	}
+	
 };
 //pacotes/openflahchart/json2.js
 if (!this.JSON1) {
