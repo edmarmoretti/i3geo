@@ -907,6 +907,13 @@ it:"Riduci la mappa tenendo come referimento il centro corrente"
 }],
 "d7":[
 {
+pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, clique sobre o mesmo.",
+en:"Displays information about a point on the map. Once activated, click on it.",
+es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarla haga clic sobre el mismo.",
+it:"Mostra gli informazioni su un punto sulla mappa. Dopo averla attivata, fare clic su di esso."
+}],
+"d7a":[
+{
 pt:"Mostra informa&ccedil;&otilde;es sobre um ponto no mapa. Ap&oacute;s ativada, pare o mouse por alguns instantes no ponto desejado ou clique sobre o mesmo.",
 en:"Displays information about a point on the map. Once activated, stop the mouse for a few moments at the desired point or click on it.",
 es:"Muestra informaci&oacute;n sobre un punto en el mapa. Despu&eacute;s de activarla, pare el rat&oacute;n por algunos instantes en el punto deseado o haga clic sobre el mismo.",

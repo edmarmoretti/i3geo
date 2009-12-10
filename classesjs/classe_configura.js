@@ -473,7 +473,7 @@ i3GEO.configura = {
 	Default:
 	{3500}
 	*/
-	tempoMouseParado: 3500,
+	tempoMouseParado: 2500,
 	/*
 	Propriedade: iniciaJanelaMensagens
 	
@@ -755,6 +755,33 @@ i3GEO.configura = {
 						eval(i3GEO.configura.funcaoIdentifica);
 					}
 				};
+				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
+				{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
+				if(i3GEO.eventos.MOUSECLIQUE.toString().search("verificaTip()") > 0)
+				{i3GEO.eventos.MOUSECLIQUE.remove("verificaTip()");}
+				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") > 0)
+				{i3GEO.eventos.MOUSEPARADO.remove("verificaTip()");}
+			}
+		},
+		{
+			//botão que abre a função de identificação do tipo balao.
+			iddiv:"identificaBalao",
+			tipo:"dinamico",
+			dica:$trad("d7a"),
+			funcaoonclick:function()
+			{
+				var temp;
+				if(i3GEO.Interface.ATUAL==="padrao"){
+					$i("img").title = "";
+					temp = "identifica";
+					if(i3GEO.Interface.ATIVAMENUCONTEXTO)
+					{temp = "identifica_contexto";}
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
+				}
+				i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
+				g_tipoacao='identifica';
+				g_operacao='identifica';
+				i3GEO.barraDeBotoes.BOTAOPADRAO = "identificaBalao";
 				verificaTip = function(){
 					if(g_operacao !== "identifica" || i3GEOF.identifica){return;}
 					if($i("marcaIdentifica")){return;}
@@ -764,7 +791,7 @@ i3GEO.configura = {
 					}
 				};
 				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
-				{i3GEO.eventos.MOUSECLIQUE.push("cliqueIdentifica()");}
+				{i3GEO.eventos.MOUSECLIQUE.push("verificaTip()");}
 				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
 				{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}
 			}

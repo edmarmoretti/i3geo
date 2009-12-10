@@ -1,13 +1,16 @@
 MAP
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
   LAYER
     CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291"
+    GROUP "Grupo 1"
     METADATA
       "CLASSE"	"SIM"
+      "permitekmz"	""
+      "permitedownload"	""
       "download"	"SIM"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
       "TEMA"	"Teste UTF8 Postgis"
     END
     NAME "testeutf8postgis"
@@ -15,7 +18,6 @@ FONTSET   "../symbols/fontes.txt"
     TEMPLATE "none.htm"
     TYPE POLYGON
     UNITS METERS
-GROUP "Grupo 1"
     CLASS
       NAME "Pantanal"
       EXPRESSION ('[id]'eq'6')

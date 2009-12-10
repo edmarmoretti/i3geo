@@ -1,4 +1,4 @@
-<?php if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
 About: Licença
@@ -93,4 +93,4 @@ i3GEOF.converteKml = {
 		i3GEOF.converteKml.html(divid,tema,tipo);
 	}
 };
-<?php if(extension_loaded('zlib')){ob_end_flush();}?>
+<?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
