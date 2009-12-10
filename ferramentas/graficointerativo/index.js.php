@@ -139,6 +139,10 @@ i3GEOF.graficointerativo = {
 		'		<tr><td>&nbsp;</td></tr>' +
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="scatter" name="tipoGrafico" style=cursor:pointer > </td><td>distribuição de pontos</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="line" name="tipoGrafico" style=cursor:pointer > </td><td>linha</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
+		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="radar" name="tipoGrafico" style=cursor:pointer > </td><td>radar</td></tr>' +
+		'		<tr><td>&nbsp;</td></tr>' +
 
 		'		<tr><td><input type=radio onclick="i3GEOF.graficointerativo.ativaTipo(this)" value="bar_filled" name="tipoGrafico" style=cursor:pointer > </td><td>barras simples</td></tr>' +
 		'		<tr><td>&nbsp;</td></tr>' +
@@ -321,9 +325,10 @@ i3GEOF.graficointerativo = {
 		
 		if($i("i3GEOgraficointerativoDadosPuros").checked)
 		{tipo = "nenhum";}
-			
-		if(x === y)
-		{tipo = "conta";}
+		else{	
+			if(x === y)
+			{tipo = "conta";}
+		}
 		if(tema === "")
 		{alert("Escolha um tema");return;}
 		if(x === "")
@@ -394,7 +399,6 @@ i3GEOF.graficointerativo = {
 	Obtém os dados da tabela para compor o gráfico
 	*/
 	tabela2dados: function(){
-		try{
 		var temp = 0,
 			ultimo = 0,
 			inputs = $i("i3GEOgraficointerativoDados").getElementsByTagName("input"),
@@ -403,6 +407,7 @@ i3GEOF.graficointerativo = {
 			i,
 			parametros,
 			valores = [],
+			valoresS = [],
 			acumulado = [],
 			nomes = [],
 			cores = [],
@@ -438,6 +443,7 @@ i3GEOF.graficointerativo = {
 			cores.push(inputs[i+2].value);
 			temp = inputs[i+1].value * 1;
 			valores.push(temp);
+			valoresS.push(temp+" ");
 			acumulado.push(ultimo + temp);
 			ultimo = ultimo + temp;
 			soma += temp;
@@ -488,7 +494,7 @@ i3GEOF.graficointerativo = {
 				"x_axis": null
 			};
 		}
-		if(i3GEOF.graficointerativo.tipo === "scatter" || i3GEOF.graficointerativo.tipo === "hbar" || i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
+		if(i3GEOF.graficointerativo.tipo === "line" || i3GEOF.graficointerativo.tipo === "scatter" || i3GEOF.graficointerativo.tipo === "hbar" || i3GEOF.graficointerativo.tipo === "area" || i3GEOF.graficointerativo.tipo === "bar_round" || i3GEOF.graficointerativo.tipo === "bar_round_glass" || i3GEOF.graficointerativo.tipo === "bar_filled" || i3GEOF.graficointerativo.tipo === "bar_glass" || i3GEOF.graficointerativo.tipo === "bar_3d" || i3GEOF.graficointerativo.tipo === "bar_sketch" || i3GEOF.graficointerativo.tipo === "bar_cylinder" || i3GEOF.graficointerativo.tipo === "bar_cylinder_outline"){
 			parametros = {
 				"elements":[{
 					"type":      i3GEOF.graficointerativo.tipo,
@@ -575,8 +581,38 @@ i3GEOF.graficointerativo = {
 				parametros.elements[0].tip = "#x#  -  #y#";
 			}
 		}
+		if(i3GEOF.graficointerativo.tipo === "radar"){
+			parametros = {
+				"elements": [{
+					"type": "area",
+					"width": 1,
+					"dot-style": { "type": "anchor", "colour": "#9C0E57", "dot-size": pointSize },
+					"colour": "#45909F",
+					"fill": "#45909F",
+					"fill-alpha": 0.4,
+					"loop": true,
+					"values": valores
+				}],
+				"radar_axis": {
+					"max": maior,
+					"steps": parseInt(((maior - menor) / divisoesY),10),
+					"colour": "#EFD1EF",
+					"grid-colour": "#EFD1EF",
+					"spoke-labels": {
+						"labels": nomes,
+						"colour": "#9F819F"
+					}
+				},
+
+				"title":{
+					"text": titulo,
+					"style": "{font-size: "+tituloSize+"; color:"+tituloCor+"; text-align: "+tituloAlinhamento+";}"
+  				},
+  				"bg_colour": "#DFFFEC"
+			};
+		}
+		
 		return JSON1.stringify(parametros);
-		}catch(erro){alert(erro);}
 	},
 	/*
 	Function: excluilinha
