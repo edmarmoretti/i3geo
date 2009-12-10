@@ -9,8 +9,8 @@ MAP
       "permitekmz"	""
       "permitedownload"	""
       "download"	"SIM"
-      "permitekml"	"sim"
       "permiteogc"	"sim"
+      "permitekml"	"sim"
       "TEMA"	"Teste UTF8 Postgis"
     END
     NAME "testeutf8postgis"

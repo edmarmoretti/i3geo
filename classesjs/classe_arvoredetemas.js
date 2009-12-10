@@ -65,6 +65,8 @@ i3GEO.arvoreDeTemas = {
 		
 		nuvemTags: true,
 		
+		nuvemTagsFlash: true,
+		
 		navegacaoDir: false,
 		
 		incluibusca: true,
@@ -93,6 +95,7 @@ i3GEO.arvoreDeTemas = {
 		conectarwmst: true,
 		conectargeorss: true,
 		nuvemTags: true,
+		nuvemTagsFlash: false,
 		navegacaoDir: false,
 		incluibusca: true,
 		kml: true,
@@ -1216,6 +1219,11 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTags()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.nuvemTagsFlash === true){
+			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
+			t += 20;
+		}
+
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");
 	},
 	/*
@@ -1578,8 +1586,21 @@ i3GEO.arvoreDeTemas = {
 
 		Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas
 		*/
-		nuvemTags: function()
-		{i3GEO.janela.cria("350px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtags/index.htm","","","Nuvem de tags <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=4&idajuda=30' >&nbsp;&nbsp;&nbsp;</a>");},
+		nuvemTags: function(){
+			if(typeof(i3GEOF.upload) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/nuvemtags/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.nuvemtags.criaJanelaFlutuante()","i3GEOF.nuvemtags_script");
+			}
+		},
+		/*
+		Function: nuvemTagsFlash
+
+		Mostra a nuvem de tags para escolha de temas baseado nos tags registrados nos menus de temas.
+		
+		Essa ferramenta é alternativa a ferramenta nuvemTags, mostrando tbm a nuvem com um aplicativo em flash
+		*/
+		nuvemTagsFlash: function()
+		{i3GEO.janela.cria("550px","350px",i3GEO.configura.locaplic+"/ferramentas/nuvemtagsflash/index.htm","","","Nuvem Flash");},
 		/*
 		Function: navegacaoDir
 

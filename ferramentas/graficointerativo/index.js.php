@@ -212,7 +212,7 @@ i3GEOF.graficointerativo = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.graficointerativo");
 		};
-		titulo = "Gráficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Gráficos interativos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=84' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"380px",
 			"240px",

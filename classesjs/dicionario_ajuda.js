@@ -711,6 +711,14 @@ g_traducao_ajuda = {
 			complemento:"",
 			apijs:"i3GEO.mapa.dialogo.cliqueTexto()"
 		},
+		"84": {
+			titulo: "Gráfico interativo",
+			diretorio:"i3geo/ferramentas/graficointerativo",
+			categoria:"3",
+			pt:"Gerador de representação gráfica de dados tabulares. Abre uma janela flutuante onde o usuário pode escolher os dados e o tipo de gráfico desejado. Os dados são baseados em um dos temas existentes no mapa.",
+			complemento:"Existem várias opções de tratamento dos dados que permitem, por exemplo, mostrar os percentuais ou os dados brutos. Pode-se ainda ativar a navegação dinâmica, o que permite atualizar o gráfico conforme é feita a navegação sobre o mapa.",
+			apijs:"i3GEO.analise.dialogo.graficoInterativo()"
+		},
 	}
 };
 
