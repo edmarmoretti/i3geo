@@ -174,11 +174,22 @@ if ($tipo == "" || $tipo == "metadados")
 				if ($c->name == "")
 				{$c->name = " ";}
 			}
-			if (isset($postgis_mapa))
+			if ($l->connectiontype == MS_POSTGIS)
 			{
-				if ($postgis_mapa != "")
+				//inclui extensao geografica
+				$extensao = $l->getmetadata("EXTENSAO");
+				if($extensao == "")
 				{
-					if ($layer->connectiontype == MS_POSTGIS)
+					$e = $oMap->extent;
+					$extensao = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+				}
+				$l->setmetadata("wms_extent",$extensao);
+			}
+			if (isset($postgis_mapa))
+			{			
+				if ($postgis_mapa != "")
+				{				
+					if ($l->connectiontype == MS_POSTGIS)
 					{
 						$lcon = $l->connection;
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
