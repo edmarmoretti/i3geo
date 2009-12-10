@@ -94,15 +94,18 @@ class Arvore
 									$t = $t[0];
 									$nome = $this->removeAcentos($tema["nome_tema"]);
 									$tags = $this->removeAcentos($tema["tags_tema"]);
+									$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+
 									$down = "sim";
 									if (strtolower($t["download_tema"]) == "nao")
 									{$down = "nao";}
 									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
-									if (stristr($nome,$procurar))
+									if (stristr($nome,$procurar) || stristr($nome1,$procurar))
 									{$resultado[] = $texto;}
 									else
 									{
-										if (stristr($tags,$procurar))
+										if (stristr($tags,$procurar) || stristr($tags1,$procurar))
 										{$resultado[] = $texto;}
 									}
 								}
