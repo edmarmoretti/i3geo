@@ -206,6 +206,10 @@ i3GEOF.tabela = {
 		ins += '			<td>Considerar na listagem a regi&atilde;o mostrada no mapa (se essa opção for desmarcada, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica do mapa inicial)</td>';
 		ins += '		</tr>';
 		ins += '		<tr>';
+		ins += '			<td><input style="cursor:pointer" type=checkbox onclick="i3GEOF.tabela.ativaAutoAtualiza(this)"  /></td>';
+		ins += '			<td>Atualiza a tabela após navegar no mapa</td>';
+		ins += '		</tr>';
+		ins += '		<tr>';
 		ins += '			<td><input style="cursor:pointer" onclick="i3GEOF.tabela.pegaRegistros()" type=checkbox id=i3GEOtabelatipolista /></td>';
 		ins += '			<td>Mostrar na listagem apenas os selecionados</td>';
 		ins += '		</tr>';
@@ -305,6 +309,16 @@ i3GEOF.tabela = {
 		$i("i3GEOF.tabela_corpo").style.backgroundColor = "white";
 		i3GEOF.tabela.aguarde = $i("i3GEOF.tabela_imagemCabecalho").style;
 		i3GEOF.tabela.inicia(divid);
+		temp = function(){
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				GEvent.removeListener(tabelaDragend);
+				GEvent.removeListener(tabelaZoomend);
+			}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
@@ -317,6 +331,34 @@ i3GEOF.tabela = {
 		var i = $i("i3GEOF.tabela_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+	},
+	/*
+	Function: ativaAutoAtualiza
+	
+	Ativa ou desativa a atualização automática da tabela quando o usuário navega no mapa
+	*/
+	ativaAutoAtualiza:function(obj){
+		if(obj.checked == true){
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.tabela.pegaRegistros()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+   				tabelaDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.tabela.pegaRegistros();});
+   				tabelaZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});						
+			}
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+   				i3geoOL.events.register("moveend",i3geoOL,function(e){i3GEOF.tabela.pegaRegistros();});
+			}					
+		}
+		else{
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				GEvent.removeListener(tabelaDragend);
+				GEvent.removeListener(tabelaZoomend);
+			}		
+		}
 	},
 	/*
 	Function: pegaRegistros

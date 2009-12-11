@@ -233,6 +233,16 @@ i3GEOF.graficointerativo = {
 		{i3GEOF.graficointerativo.inicia(divid);}
 		else
 		{i3GEOF.graficointerativo.inicia(divid,dados);}
+		temp = function(){
+			if(i3GEO.Interface.ATUAL === "padrao"){
+				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
+			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				GEvent.removeListener(graficointerativoDragend);
+				GEvent.removeListener(graficointerativoZoomend);
+			}
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco
