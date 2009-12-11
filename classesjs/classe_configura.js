@@ -873,11 +873,17 @@ i3GEO.configura = {
 			}
 		},
 		{
-			//Ativa o botão que realiza a operação de de busca no Google
 			iddiv:"google",
 			tipo:"",
 			dica:$trad("d15"),
 			funcaoonclick:function(){
+				//isso não funciona
+				/*
+				if(typeof(i3GEOF.googlemaps) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.googlemaps.criaJanelaFlutuante()","i3GEOF.googlemaps_script");
+				}
+				*/
 				i3GEO.util.criaBox();
 				g_operacao = "navega";
 				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+40+"px",(i3GEO.parametros.h/2)+50+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");}

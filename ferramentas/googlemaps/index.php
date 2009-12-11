@@ -166,8 +166,7 @@ function inicializa(){
     	var parametros = "&map_size="+parseInt(document.getElementById("mapa").style.width)
     	parametros += ","+parseInt(document.getElementById("mapa").style.height)
     	parametros += "&mapext="+bbox()
-    	parametros += "&map_imagecolor=-1 -1 -1&map_transparent=on"
-    	//alert(cgi+parametros)
+    	parametros += "&map_imagecolor=0 0 0&map_transparent=on"
     	return(cgi+parametros)
     }
     function criaTile(){

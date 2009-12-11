@@ -7833,24 +7833,28 @@ i3GEO.util = {
 	scriptTag: function(js,ini,id){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.scriptTag()");}
 		var head,script;
-		if(id === "")
-		{id = "loadscriptI3GEO";}
-		head= document.getElementsByTagName('head')[0];
-		script= document.createElement('script');
-		script.type= 'text/javascript';
-		if(ini !== ""){
-			if(navm){
-				script.onreadystatechange = function(){
-					if(this.readyState === 'loaded' || this.readyState === 'complete')
-					{eval(ini);}
-				};
+		if(!$i(id) || id === ""){
+			head= document.getElementsByTagName('head')[0];
+			script= document.createElement('script');
+			script.type= 'text/javascript';
+			if(ini !== ""){
+				if(navm){
+					script.onreadystatechange = function(){
+						if(this.readyState === 'loaded' || this.readyState === 'complete')
+						{eval(ini);}
+					};
+				}
+				else
+				{script.onload=function(){eval(ini);};}
 			}
-			else
-			{script.onload=function(){eval(ini);};}
+			script.src= js;
+			if(id !== "")
+			{script.id = id;}
+			head.appendChild(script);
 		}
-		script.src= js;
-		script.id = id;
-		head.appendChild(script);
+		else{
+			if(ini !== ""){eval(ini);}
+		}
 	},
 	/*
 	Function: mensagemAjuda
