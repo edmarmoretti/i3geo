@@ -231,6 +231,10 @@ i3GEO.Interface = {
 		TRANSICAO: false,
 		redesenha:function(){
 			var ndiv,i;
+			if(!$i("img")){
+				i3GEO.janela.fechaAguarde();
+				return;
+			}
 			$i("img").onload =  function()
 			{
 				var imagem,temp;
@@ -336,6 +340,7 @@ i3GEO.Interface = {
 			{elemento = "img";}
 			i3GEO.mapa.ajustaPosicao(elemento);
 			i = $i("img");
+			if(!i){return;}
 			i.style.width=i3GEO.parametros.w +"px";
 			i.style.height=i3GEO.parametros.h +"px";
 			estilo = $i(i3GEO.Interface.IDCORPO).style;

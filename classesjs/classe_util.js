@@ -411,20 +411,22 @@ i3GEO.util = {
 		{
 			if(!obj.style)
 			{return [0,0];}
-			if(obj.style.position === "absolute")
-			{return [(parseInt(obj.style.left,10)),(parseInt(obj.style.top,10))];}
-			else{
-				var curleft = 0,curtop = 0;
+			//if(obj.style.position === "absolute")
+			//{return [(parseInt(obj.style.left,10)),(parseInt(obj.style.top,10))];}
+			//else{
+				var curleft = 0,curtop = 0,teste;
 				if(obj){
 					if (obj.offsetParent) {
 						do {
 							curleft += obj.offsetLeft-obj.scrollLeft;
 							curtop += obj.offsetTop-obj.scrollTop;
-						} while (obj = obj.offsetParent);
+							//$i("posicaoDomouse").innerHTML = obj.id+" "+curleft;
+							obj = obj.offsetParent;
+						} while (obj);
 					}
 				}
 				return [curleft+document.body.scrollLeft,curtop+document.body.scrollTop];
-			}
+			//}
 		}
 		else
 		{return [0,0];}

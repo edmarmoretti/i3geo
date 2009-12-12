@@ -624,19 +624,23 @@ i3GEO.configura = {
 				}
 				panMapaInicia = function(exy){
 					var k;
+					leftinicial = 0;
+					topinicial = 0;
 					if ($i("img") && (g_tipoacao === "pan")){
 						try{
-							if(navm)
-							{k = event.button;}
-							else
-							{k = exy.button;}
-							if(k === 2){return;}
+							if(arguments.length > 0){
+								if(navm)
+								{k = event.button;}
+								else
+								{k = exy.button;}
+								if(k === 2){return;}
+							}
 						}
 						catch(h){
 							if(typeof(console) !== 'undefined'){console.error(h);}
 						}
 						g_panM = "sim";
-						if($i("corpoMapa")){
+						if($i(i3GEO.Interface.IDCORPO)){
 							leftinicial = parseInt($i(i3GEO.Interface.IDCORPO).style.left,10);
 							topinicial = parseInt($i(i3GEO.Interface.IDCORPO).style.top,10);
 						}
@@ -692,6 +696,7 @@ i3GEO.configura = {
 					if (g_tipoacao === "pan"){
 						marcadorZoom = "";
 						g_panM = "nao";
+						//alert(ddinicialx+","+ddinicialy+","+objposicaocursor.ddx+","+objposicaocursor.ddy)
 						var f = "i3GEO.navega.timerNavega = null;if("+
 							"i3GEO.navega.xy2xy('"+
 								i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"',"+ddinicialx+","+ddinicialy+","+objposicaocursor.ddx+","+objposicaocursor.ddy+",'"+i3GEO.parametros.mapexten+"','"+i3GEO.configura.tipoimagem+"'"+

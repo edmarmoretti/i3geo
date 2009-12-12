@@ -192,6 +192,7 @@ i3GEO.navega = {
 	tipoimagem {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
 	*/
 	xy2xy: function(locaplic,sid,xi,yi,xf,yf,ext,tipoimagem){
+		//alert(xi+" "+xf)
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.xy2xy()");}
 		var disty,distx,ex,novoxi,novoxf,novoyf,nex;
 		if(locaplic !== "")

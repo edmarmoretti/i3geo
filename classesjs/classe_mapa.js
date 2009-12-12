@@ -62,6 +62,7 @@ i3GEO.mapa = {
 	ajustaPosicao: function(elemento){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ajustaPosicao()");}
 		if(arguments.length === 0){return;}
+		if(!$i(elemento)){return;}
 		var imagemxi,imagemyi,imagemxref,imagemyref,dc,c;
 		try{
 			imagemxi = 0;
@@ -84,7 +85,7 @@ i3GEO.mapa = {
 				$top(i3GEO.Interface.IDCORPO,imagemyi);
 			}
 		}
-		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao"+e);}
+		catch(e){alert("Ocorreu um erro. i3GEO.mapa.ajustaPosicao "+e);}
 	},
 	/*
 	Function: ativaTema
