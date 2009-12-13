@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+</head>
+<body id="i3geo" style=background-color:white; >
+<div id=arvoreAdicionaTema style='position:absolute;top:15px;left:15px'></div>
+<div style='position:absolute;top:15px;left:350px;width:600px'>
+<p class=paragrafo >
+A árvore de temas mostra a lista de layers que estão disponíveis para ser adicionados ao mapa atual, bem como opções de pesquisa na base 
+de temas e conexão com Web Services.
+</p>
+<p class=paragrafo >
+Nesta página são mostradas todos os parâmetros que podem ser utilizados para customizar a árvore, 
+modificando o seu comportamento normal. 
+</p>
+<p class=paragrafo >
+Você pode testar os parâmetros e obter o código javascript necessário para fazê-los funcionar. Os códigos 
+normalmente devem ser inseridos no HTML utilizado para montar o seu mapa. Por exemplo, você pode editar o 
+arquivo padrão do i3Geo: i3geo/locaplic/geral.htm. Nesse caso, os códigos devem ser inseridos antes da linha:<br>
+i3GEO.cria();
+</p>
+<p class=paragrafo >
+<input class=aplicar type="button" value="Atualizar a árvore" onclick="ARVatualizar()" />
+</p>
+<div id=ARVparametros >
+<p class=paragrafo ><b>Parâmetros:</b></p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.incluiArvore">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ou não os ícones de opções
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.uploaddbf">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone de upload de arquivo dbf ou CSV
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.uploadlocal">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone de upload de arquivo shapefile ou imagem local
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.downloadbase">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone para acessar o sistema de download de dados
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectarwms">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone da ferramenta de conexão com WMS
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectarwmst">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone da ferramenta de conexão com WMS-T
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.conectargeorss">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone da ferramenta de conexão com geoRSS
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.nuvemTags">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui ícone da ferramenta nuvem de tags
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.nuvemTagsFlash">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui ícone da ferramenta nuvem de tags - opção em Flash
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.navegacaoDir">
+		<option value=true  >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Inclui opção de navegação na árvore de diretórios (apenas para usuários cadastrados como editores)
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.incluibusca">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui campo de formulário para realizar busca por temas existentes na árvore
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.kml">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a opção de obtenção do endereço de acesso aos dados em KML
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.qrcode">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a opção de obtenção do qrcode
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.mini">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a opção de obtenção dimagem miniatura
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.estrelas">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Nas opções de cada tema, inclui a pontuação em estrelas (baseado no número de acessos)
+</p>
+<p class=paragrafo >
+	<select name="OPCOESADICIONAIS.refresh">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui o ícone de "refresh" da árvore
+</p>
+<p class=paragrafo >
+	<select name="INCLUISISTEMAS">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui um nó na árvore com a lista de sistemas especiais de acesso a dados cadastrados no sistema de administração
+</p>
+<p class=paragrafo >
+	<select name="INCLUIWMS">
+		<option value=true selected >true</option>
+		<option value=false >false</option>
+	</select>
+	Inclui um nó na árvore com a lista de WMS cadastrados no sistema de administração
+</p>
+<p class=paragrafo >
+	<select name="FILTRADOWNLOAD">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Não mostra na árvore os nós que não possuem temas para download
+</p>
+<p class=paragrafo >
+	<select name="FILTRAOGC">
+		<option value=true >true</option>
+		<option value=false selected >false</option>
+	</select>
+	Não mostra na árvore os nós que não permitem a geração de WMS
+</p>
+</div>
+<p class=paragrafo ><b>Código:</b></p>
+<div id=codigo class=paragrafo ></div>
+</div>
+<script type="text/javascript">
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+i3GEO.cria();
+i3GEO.inicia();
+i3GEO.ajuda.ATIVAJANELA = false
+function ARVatualizar(){
+	$i("arvoreAdicionaTema").innerHTML = "Aguarde...";
+	var par = $i("ARVparametros").getElementsByTagName("select"),
+		n = par.length,
+		i,
+		codigo = "",
+		c;
+	for(i = 0;i < n; i++){
+		c = "i3GEO.arvoreDeTemas."+par[i].name+" = "+par[i].value+";";
+		eval(c);
+		codigo += c+"<br>";
+	}
+	$i("codigo").innerHTML = codigo;
+	i3GEO.arvoreDeTemas.atualiza();
+}
+</script>
+</body>
+
+</html>
