@@ -42,6 +42,20 @@ As janelas são criadas por meio da biblioteca YUI
 */
 i3GEO.janela = {
 	/*
+	Propriedade: ESTILOAGUARDE
+	
+	Estilo da janela de aguarde
+	
+	Pode ser normal|reduzida|minima
+	
+	Tipo:
+	{String}
+	
+	Default:
+	{normal}
+	*/
+	ESTILOAGUARDE: "normal",
+	/*
 	Propriedade: AGUARDEMODAL
 	
 	Indica se a janela de aguarde será do tipo MODAL, ou seja, se irá ou não bloquear as opções do mapa.
@@ -410,9 +424,12 @@ i3GEO.janela = {
 			contador = contador + ".";
 		}
 		eval ('YAHOO.aguarde.'+id+' = new YAHOO.widget.Panel("'+id+'",{width:"240px",fixedcenter:false,underlay:"none",close:true,draggable:false,modal:'+i3GEO.janela.AGUARDEMODAL.toString()+',monitorresize:false})');
-		eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
-		eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
-		eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');
+		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "reduzida"){
+			eval ('YAHOO.aguarde.'+id+'.setBody(texto)');
+			eval ('YAHOO.aguarde.'+id+'.body.style.padding="5px"');
+		}
+		if(i3GEO.janela.ESTILOAGUARDE === "normal" || i3GEO.janela.ESTILOAGUARDE === "minima")
+		{eval ('YAHOO.aguarde.'+id+'.setHeader("<span><img id=aguardeGifAberto src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' /></span>&nbsp;<span style=font-size:8px >'+contador+'</span>")');}
 		eval ('YAHOO.aguarde.'+id+'.render(document.body)');
 		if($i("flamingo"))
 		{eval ('YAHOO.aguarde.'+id+'.moveTo(0,0)');}

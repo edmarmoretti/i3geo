@@ -2,6 +2,7 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="../pacotes/yui270/build/json/json-min.js"></script>
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 
 </head>
@@ -16,13 +17,23 @@ novas ou na customização do i3Geo.
 <p class=paragrafo >
 Para ver o código javascript utilizado, utilize a opção de visualização do código fonte de seu navegador.
 </p>
-<p class=paragrafo ><b>Lista de todos os temas:</b></p>
+<p class=paragrafo >
+Para mais informações, veja i3geo/classesjs/classe_util.js função comboTemas
+</p>
+<p class=paragrafo ><b>Objeto JSON com os dados das camadas armazenado em i3GEO.arvoreDeCamadas.CAMADAS</b></p>
+<div class=paragrafo id="objJSON" ></div>
+<p class=paragrafo ><b>Itens do tema escolhido:</b></p>
+<div class="paragrafo" id=CMBitens ></div>
+<p class=paragrafo ><b>Valores do item do tema escolhido:</b></p>
+<div class="paragrafo" id=CMBvalores ></div>
+<p class=paragrafo ><b>Todos os temas:</b></p>
 <div class="paragrafo" id=CMBtodos ></div>
-
 <p class=paragrafo ><b>Temas que possuem elementos selecionados:</b></p>
 <div class="paragrafo" id=CMBselecionados ></div>
 <p class=paragrafo ><b>Temas ligados:</b></p>
 <div class="paragrafo" id=CMBligados ></div>
+<p class=paragrafo ><b>Seleção de mais de um tema ligado:</b></p>
+<div class="paragrafo" id=CMBligadosM ></div>
 <p class=paragrafo ><b>Temas armazenados no diretório temporário (editáveis):</b></p>
 <div class="paragrafo" id=CMBeditaveis ></div>
 <p class=paragrafo ><b>Temas raster:</b></p>
@@ -42,7 +53,7 @@ var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/image
 
 i3GEO.ajuda.ATIVAJANELA = false
 function montaCombos(){
-try{
+	$i("objJSON").innerHTML = YAHOO.lang.dump(i3GEO.arvoreDeCamadas.CAMADAS);
 	//todos os temas
 	i3GEO.util.comboTemas(
 		"CMBtodosID",
@@ -52,6 +63,7 @@ try{
 				$i("CMBtodosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -69,6 +81,7 @@ try{
 				$i("CMBselecionadosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -86,12 +99,29 @@ try{
 				$i("CMBligadosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
 		"CMBligados",
 		"",
 		false,
+		"ligados"
+	);
+	//temas ligados
+	i3GEO.util.comboTemas(
+		"CMBligadosMID",
+		function(retorno){
+	 		$i("CMBligadosM").innerHTML = retorno.dados;
+			if($i("CMBligadosMID")){
+				$i("CMBligadosMID").onchange = function(){
+					alert("Voce escolheu os temas: "+this.value);
+				};
+			}
+		},
+		"CMBligadosM",
+		"",
+		true,
 		"ligados"
 	);
 	//temas editaveis
@@ -103,6 +133,7 @@ try{
 				$i("CMBeditaveisID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -120,6 +151,7 @@ try{
 				$i("CMBrasterID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -137,6 +169,7 @@ try{
 				$i("CMBpontosSelecionadosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -154,6 +187,7 @@ try{
 				$i("CMBpoligonosSelecionadosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -171,6 +205,7 @@ try{
 				$i("CMBpoligonosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -188,6 +223,7 @@ try{
 				$i("CMBpontosID").onchange = function(){
 					i3GEO.mapa.ativaTema(this.value);
 					alert("Voce escolheu o tema: "+this.value);
+					montaCombosItens(this.value);
 				};
 			}
 		},
@@ -197,7 +233,30 @@ try{
 		"pontos"
 	);
 }
-catch(e){alert(e);}
+function montaCombosItens(tema){
+	i3GEO.util.comboItens(
+		"CMBitensID",
+		tema,
+		function(retorno){
+	 		$i("CMBitens").innerHTML = retorno.dados;
+	 		$i("CMBitensID").onchange = function(){
+		 		alert("Vc escolheu: "+this.value);
+		 		i3GEO.util.comboValoresItem(
+				 	"CMBvaloresID",
+				 	tema,
+				 	this.value,
+				 	function(retorno){
+				 		$i("CMBvalores").innerHTML = retorno.dados;
+				 		$i("CMBvaloresID").onchange = function(){
+				 			alert("Vc escolheu: "+this.value);
+				 		};
+				 	},
+				 	"CMBvalores"
+				);
+	 		};
+		},
+		"CMBitens"
+	);
 }
 i3GEO.arvoreDeCamadas.finaliza = "montaCombos()";
 i3GEO.cria();
