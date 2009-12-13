@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+
+</head>
+<body id="i3geo" style=background-color:white; >
+<div id=listaTemas style='position:absolute;top:15px;left:15px'></div>
+<div style='position:absolute;top:15px;left:350px;width:600px'>
+<p class=paragrafo >
+A árvore de camadas mostra a lista de layers que estão disponíveis no mapa atual. Com base nessa árvore, 
+podem ser montados caixas de seleção (combos). Esses combos são importantes na criação de ferramentas 
+novas ou na customização do i3Geo.
+</p>
+<p class=paragrafo >
+Para ver o código javascript utilizado, utilize a opção de visualização do código fonte de seu navegador.
+</p>
+<p class=paragrafo ><b>Lista de todos os temas:</b></p>
+<div class="paragrafo" id=CMBtodos ></div>
+
+<p class=paragrafo ><b>Temas que possuem elementos selecionados:</b></p>
+<div class="paragrafo" id=CMBselecionados ></div>
+<p class=paragrafo ><b>Temas ligados:</b></p>
+<div class="paragrafo" id=CMBligados ></div>
+<p class=paragrafo ><b>Temas armazenados no diretório temporário (editáveis):</b></p>
+<div class="paragrafo" id=CMBeditaveis ></div>
+<p class=paragrafo ><b>Temas raster:</b></p>
+<div class="paragrafo" id=CMBraster ></div>
+<p class=paragrafo ><b>Temas pontuais com elementos selecionados:</b></p>
+<div class="paragrafo" id=CMBpontosSelecionados ></div>
+<p class=paragrafo ><b>Temas poligonais com elementos selecionados:</b></p>
+<div class="paragrafo" id=CMBpoligonosSelecionados ></div>
+<p class=paragrafo ><b>Temas pontuais:</b></p>
+<div class="paragrafo" id=CMBpontos ></div>
+<p class=paragrafo ><b>Temas poligonais:</b></p>
+<div class="paragrafo" id=CMBpoligonos ></div>
+</div>
+<script type="text/javascript">
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+
+i3GEO.ajuda.ATIVAJANELA = false
+function montaCombos(){
+try{
+	//todos os temas
+	i3GEO.util.comboTemas(
+		"CMBtodosID",
+		function(retorno){
+	 		$i("CMBtodos").innerHTML = retorno.dados;
+			if($i("CMBtodosID")){
+				$i("CMBtodosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBtodos",
+		"",
+		false,
+		""
+	);
+	//temas selecionados
+	i3GEO.util.comboTemas(
+		"CMBselecionadosID",
+		function(retorno){
+	 		$i("CMBselecionados").innerHTML = retorno.dados;
+			if($i("CMBselecionadosID")){
+				$i("CMBselecionadosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBselecionados",
+		"",
+		false,
+		"selecionados"
+	);
+	//temas ligados
+	i3GEO.util.comboTemas(
+		"CMBligadosID",
+		function(retorno){
+	 		$i("CMBligados").innerHTML = retorno.dados;
+			if($i("CMBligadosID")){
+				$i("CMBligadosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBligados",
+		"",
+		false,
+		"ligados"
+	);
+	//temas editaveis
+	i3GEO.util.comboTemas(
+		"CMBeditaveisID",
+		function(retorno){
+	 		$i("CMBeditaveis").innerHTML = retorno.dados;
+			if($i("CMBeditaveisID")){
+				$i("CMBeditaveisID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBeditaveis",
+		"",
+		false,
+		"editaveis"
+	);
+	//temas raster
+	i3GEO.util.comboTemas(
+		"CMBrasterID",
+		function(retorno){
+	 		$i("CMBraster").innerHTML = retorno.dados;
+			if($i("CMBrasterID")){
+				$i("CMBrasterID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBraster",
+		"",
+		false,
+		"raster"
+	);
+	//temas pontos selecionados
+	i3GEO.util.comboTemas(
+		"CMBpontosSelecionadosID",
+		function(retorno){
+	 		$i("CMBpontosSelecionados").innerHTML = retorno.dados;
+			if($i("CMBpontosSelecionadosID")){
+				$i("CMBpontosSelecionadosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBpontosSelecionados",
+		"",
+		false,
+		"pontosSelecionados"
+	);
+	//temas poligonais selecionados
+	i3GEO.util.comboTemas(
+		"CMBpoligonosSelecionadosID",
+		function(retorno){
+	 		$i("CMBpoligonosSelecionados").innerHTML = retorno.dados;
+			if($i("CMBpoligonosSelecionadosID")){
+				$i("CMBpoligonosSelecionadosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBpoligonosSelecionados",
+		"",
+		false,
+		"poligonosSelecionados"
+	);
+	//temas poligonais
+	i3GEO.util.comboTemas(
+		"CMBpoligonosID",
+		function(retorno){
+	 		$i("CMBpoligonos").innerHTML = retorno.dados;
+			if($i("CMBpoligonosID")){
+				$i("CMBpoligonosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBpoligonos",
+		"",
+		false,
+		"poligonos"
+	);
+	//temas pontuais
+	i3GEO.util.comboTemas(
+		"CMBpontosID",
+		function(retorno){
+	 		$i("CMBpontos").innerHTML = retorno.dados;
+			if($i("CMBpontosID")){
+				$i("CMBpontosID").onchange = function(){
+					i3GEO.mapa.ativaTema(this.value);
+					alert("Voce escolheu o tema: "+this.value);
+				};
+			}
+		},
+		"CMBpontos",
+		"",
+		false,
+		"pontos"
+	);
+}
+catch(e){alert(e);}
+}
+i3GEO.arvoreDeCamadas.finaliza = "montaCombos()";
+i3GEO.cria();
+i3GEO.inicia();
+
+</script>
+</body>
+
+</html>

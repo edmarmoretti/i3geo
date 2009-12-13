@@ -47,6 +47,18 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: finaliza
+	
+	Nome de uma função que será executada após a árvore ter sido montada
+	
+	Default:
+	{""}
+	 
+	Type:
+	{String}
+	*/
+	finaliza: "",
+	/*
 	Propriedade: EXPANDESOLEGENDA
 	
 	Ao expandir um tema mostra apenas a legenda, sem as outras opções
@@ -299,6 +311,9 @@ i3GEO.arvoreDeCamadas = {
 		{this.IDHTML = onde;}
 		if(this.IDHTML === ""){return;}
 		this.atualiza(temas);
+		if(this.finaliza != ""){
+			eval(this.finaliza);
+		}
 	},
 	/*
 	Function: atualiza
