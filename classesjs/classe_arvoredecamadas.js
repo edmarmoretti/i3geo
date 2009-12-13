@@ -47,6 +47,30 @@ Exemplos:
 */
 i3GEO.arvoreDeCamadas = {
 	/*
+	Propriedade: EXPANDESOLEGENDA
+	
+	Ao expandir um tema mostra apenas a legenda, sem as outras opções
+	
+	Default:
+	{false}
+	
+	Type:
+	{boolean}
+	*/
+	EXPANDESOLEGENDA: false,
+	/*
+	Propriedade: PERMITEEXPANDIRTEMAS
+	
+	Permite que as opções abaixo dos nós referentes acada tema sejam mostradas
+	
+	Default:
+	{true}
+	
+	Type:
+	{boolean}
+	*/
+	PERMITEEXPANDIRTEMAS:true,
+	/*
 	Propriedade: ARRASTARORDEM
 	
 	Ativa a opção de arrastar um tema para alterar a ordem de desenho das camadas
@@ -287,11 +311,16 @@ i3GEO.arvoreDeCamadas = {
 	
 	Parametro:
 	
-	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS)
+	temas {JSON} - Objeto com a lista de camadas e propriedades (veja CAMADAS). Se não existir, a árvore é redesenhada
 	*/
 	atualiza: function(temas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualiza()");}
-		if(this.comparaTemas(temas,this.CAMADAS)){return;}
+		if(arguments.length === 0){
+			temas = this.CAMADAS;
+			this.CAMADAS = "";
+		}
+		if(this.comparaTemas(temas,this.CAMADAS))
+		{return;}
 		var currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
 		if(!document.getElementById(i3GEO.arvoreDeCamadas.IDHTML)){return;}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
@@ -333,9 +362,14 @@ i3GEO.arvoreDeCamadas = {
 			c = temas.length;
 			for (i=0, j=c; i<j; i++){
 				ltema = temas[i];		
-				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
+				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema",idlegenda:ltema.name};
 				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
-				temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+				if(i3GEO.arvoreDeCamadas.PERMITEEXPANDIRTEMAS === true){
+					if(i3GEO.arvoreDeCamadas.EXPANDESOLEGENDA === false)
+					{temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);}
+					else
+					{temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.mostraLegenda, 1);}
+				}
 				temaNode.expanded = i3GEO.arvoreDeCamadas.EXPANDIDA;
 				temaNode.enableHighlight = false;
 			}
@@ -358,7 +392,7 @@ i3GEO.arvoreDeCamadas = {
 						if(ltema.name === i3GEO.configura.grupoLayers[i].layers[j]){
 							d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
 							temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
-							temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);
+							temaNode.setDynamicLoad(i3GEO.arvoreDeCamadas.montaOpcoes, currentIconMode);							
 							temaNode.expanded = false;
 							temaNode.enableHighlight = false;
 							incluidos.push(ltema.name);					
@@ -563,7 +597,6 @@ i3GEO.arvoreDeCamadas = {
 		var d,conteudo,opcoesNode,idtema,ltema,farol,mfarol,tnome,iconesNode;
 		idtema = node.data.id;
 		ltema = i3GEO.arvoreDeCamadas.pegaTema(idtema);
-		
 		if(i3GEO.arvoreDeCamadas.OPCOESICONES === true){
 			farol = "maisamarelo.png";
 			mfarol = "";
