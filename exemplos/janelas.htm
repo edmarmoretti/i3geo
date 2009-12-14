@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+
+</head>
+<body id="i3geo" style=background-color:white;padding:20px; >
+<div class=paragrafo style=top:50px; >
+<p class=paragrafo >
+<b>Cria uma janela de aguarde padrão</b><br></br>
+<input class=aplicar type="button" value="Abrir" onclick="aguardePadrao()" />&nbsp;
+<input class=aplicar type="button" value="Fechar" onclick="fechaPadrao()" />
+</p>
+<p class=paragrafo >
+<b>Cria uma janela de aguarde reduzida</b><br></br>
+<input class=aplicar type="button" value="Abrir" onclick="aguardeReduzida()" />&nbsp;
+<input class=aplicar type="button" value="Fechar" onclick="fechaReduzida()" />
+</p>
+<p class=paragrafo >
+<b>Cria uma janela de aguarde mínima</b><br></br>
+<input class=aplicar type="button" value="Abrir" onclick="aguardeMinima()" />&nbsp;
+<input class=aplicar type="button" value="Fechar" onclick="fechaMinima()" />
+</p>
+<p class=paragrafo >
+<b>Cria uma janela flutuante com um iframe dentro</b><br></br>
+<input class=aplicar type="button" value="Abrir" onclick="flutuanteIframe()" />&nbsp;
+</p>
+<p class=paragrafo >
+<b>Cria uma janela flutuante sem iframe</b><br></br>
+<input class=aplicar type="button" value="Abrir" onclick="flutuante()" />&nbsp;
+</p>
+</div>
+<script type="text/javascript">
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+i3GEO.cria();
+i3GEO.inicia();
+i3GEO.ajuda.ATIVAJANELA = false
+function aguardePadrao(){
+	i3GEO.janela.ESTILOAGUARDE = "normal";
+	i3GEO.janela.abreAguarde("normal","Espere...");
+	document.body.style.cursor = "default";
+	YAHOO.aguarde.normal.moveTo(200,100);
+}
+function fechaPadrao(){
+	i3GEO.janela.fechaAguarde("normal");
+}
+function aguardeReduzida(){
+	i3GEO.janela.ESTILOAGUARDE = "reduzida";
+	i3GEO.janela.abreAguarde("reduzida","Espere...");
+	document.body.style.cursor = "default";
+}
+function fechaReduzida(){
+	i3GEO.janela.fechaAguarde("reduzida");
+}
+function aguardeMinima(){
+	i3GEO.janela.ESTILOAGUARDE = "minima";
+	i3GEO.janela.abreAguarde("minima","Espere...");
+	document.body.style.cursor = "default";
+}
+function fechaMinima(){
+	i3GEO.janela.fechaAguarde("minima");
+}
+function flutuanteIframe(){
+	i3GEO.janela.cria("500px","500px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");
+}
+function flutuante(){
+	titulo = "Título da janela com link <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=24' >&nbsp;&nbsp;&nbsp;</a>";
+	cabecalho = function(){alert("Vc clicou no cabeçalho da janela");};
+	minimiza = function(){
+		i3GEO.janela.minimiza("testaJanela");
+	};
+	janela = i3GEO.janela.cria(
+		"400px",
+		"180px",
+		"",
+		"",
+		"",
+		titulo,
+		"testaJanela",
+		false,
+		"hd",
+		cabecalho,
+		minimiza
+	);
+	divid = janela[2].id;
+	$i(divid).innerHTML = "Esse é o texto que vai dentro da janela. Vc pode incluir qualquer coisa aqui."
+}
+</script>
+</body>
+
+</html>
