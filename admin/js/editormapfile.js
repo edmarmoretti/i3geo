@@ -810,6 +810,9 @@ function montaEditorMetadados(dados)
 		titulo:"Itensdesc",id:"itensdesc",value:dados.itensdesc,tipo:"text"},
 		{ajuda:"Lista de links que serão incluídos em cada resultado de busca da ferramenta de identificação. A lista de links deve ser separada por ',', podendo-se incluir '' para indicar que o item não tem link. Exemplo de uso para inclusão de links para o site do IBGE quando um município é clicado no mapa:<br>ITENS 'codigo,nome2,uf'<br>ITENSDESC 'codigo do IBGE,nome do município,uf'<br>ITENSLLINK ',http://www.ibge.gov.br/munic2001/tabelas.php?codmun=[codigo]&descricao=[nome],'",
 		titulo:"Itenslink",id:"itenslink",value:dados.itenslink,tipo:"text"},
+		{ajuda:"Template utilizado no gerador de KML para definir o conteúdo dos balões de informação. O template utiliza o caractere '%' para iniciar e fechar o nome de uma coluna. O template pode usar também elementos HTML, por exemplo: <code>'<b>Nome do municipio</b>: %NOMEMUN%'</code>. Se o template não for especificado, o i3Geo irá utilizar o metadata ITENS e ITENSDESC. Se esses não forem especificados, será utilizado o nome original da coluna.",
+		titulo:"KML description_template",id:"description_template",value:dados.description_template,tipo:"text"},
+
 		{ajuda:"Lista de colunas que serão utilizadas na opção de inclusão de 'etiquetas'. As etiquetas são mostradas no mapa quando o usuário estaciona o mouse por alguns instantes sobre o mapa. Separe a lista com ','.",
 		titulo:"Tip",id:"tip",value:dados.tip,tipo:"text"},
 		{ajuda:"Mensagem que será mostrada no rodapé do mapa quando o tema estiver visível. É útil para apresentar ao usuário observações especiais sobre o uso daquele tema.",
@@ -1160,7 +1163,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			{alert("Valor de escala incorreto");return;}
 		}
 				
-		var campos = new Array("palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}

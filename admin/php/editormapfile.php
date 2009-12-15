@@ -532,6 +532,7 @@ function pegaMetadados()
 	$dados["arquivodownload"] = $layer->getmetadata("arquivodownload");
 	$dados["palletefile"] = $layer->getmetadata("palletefile");
 	$dados["palletestep"] = $layer->getmetadata("palletestep");
+	$dados["description_template"] = $layer->getmetadata("description_template");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
@@ -539,7 +540,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc;
+	global $description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -565,6 +566,7 @@ function alterarMetadados()
 	$layer->setmetadata("arquivodownload",$arquivodownload);
 	$layer->setmetadata("palletefile",$palletefile);
 	$layer->setmetadata("palletestep",$palletestep);
+	$layer->setmetadata("description_template",$description_template);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
@@ -894,9 +896,9 @@ function removeCabecalho($arq,$symbolset=true)
         	$linha = fgets($handle);
         	if($symbolset)
         	{
-        		if(strtoupper(trim($linha)) == "SYMBOLSET")
+        		if(strpos(strtoupper($linha),"SYMBOLSET") !== false)
         		{$cabeca[] = $linha;}
-        		if(strtoupper(trim($linha)) == "FONTSET")
+        		if(strpos(strtoupper($linha),"FONTSET") !== false)
         		{$cabeca[] = $linha;}
         	}
         	if(strtoupper(trim($linha)) == "LAYER")

@@ -436,7 +436,9 @@ class LayerServer {
         // Add style class
         $style_url =& $this->add_style($layer, $feature_folder, $style_id, $class_list[$style_id], $namecol, $shape->values);
         $wkt = $shape->toWkt();
-        $description_template = false;
+        $description_template = $layer->getMetadata('DESCRIPTION_TEMPLATE');//false;
+        if($description_template == "")
+        {$description_template = false;}
         $placemark =& $this->add_feature($feature_folder, $wkt, $shape->values[$namecol],  $shape->values, $description_template, $class_list[$style_id],$itens,$itensdesc);
 
         $placemark->addChild('styleUrl', '#'. $style_url);
@@ -575,6 +577,7 @@ class LayerServer {
     function get_feature_description($featurename, $attributes, $description_template,$itens,$itensdesc){
         // Compute hyperlink
         //var_dump($attributes);exit;
+        //if($description_template != ""){return $description_template;}
         $n = "";
         if($itens == "")
         {
@@ -586,9 +589,16 @@ class LayerServer {
         {
         	$itens = explode(",",$itens);
         	$itensdesc = explode(",",$itensdesc);
-        	for($i=0;$i<count($itens);$i++)
+        	if($description_template != "")
         	{
-        		$n .=  $itensdesc[$i]." - ".$attributes[$itens[$i]]."\n";	
+        		for($i=0;$i<count($itens);$i++)
+        		{$description_template = str_replace("%".$itens[$i]."%",$attributes[$itens[$i]],$description_template);}
+        		$n = $description_template;
+        	}
+        	else
+        	{
+        		for($i=0;$i<count($itens);$i++)
+        		{$n .=  $itensdesc[$i]." - ".$attributes[$itens[$i]]."\n";}
         	}
         }
       	$description = mb_convert_encoding($n,"UTF-8",mb_detect_encoding($n,"UTF-8,ISO-8859-1"));
@@ -679,13 +689,13 @@ class LayerServer {
     */
     function add_style(&$layer, &$folder, $style_id, &$style_data){
         // Calculare style URL
-        /*
+        
         if($style_data['description_template']){
             $this->style_counter++;
             $style_id .= '_'.$this->style_counter;
             $balloon_data = $this->get_feature_description($attributes[$namecol], $attributes, $style_data['description_template']);
         }
-        */
+        
         // Check if the style already exists
         $expr = '//*[@id=\''.$style_id.'\']';
         if($folder->xpath($expr)) {
@@ -743,7 +753,8 @@ class LayerServer {
             $icon =& $st->addChild('Icon');
             $icon->addChild('href', htmlentities($style_data['icon']));
         }
-        /*/ Add the balloon style if description_template is set
+        // Add the balloon style if description_template is set
+        /*
         if($style_data['description_template']){
             $this->add_balloon_style($new_style, $balloon_data);
         }
@@ -839,6 +850,9 @@ class LayerServer {
         }
         if(!$description){
             $description = $layer->getMetadata('WMS_TITLE');
+        }
+        if(!$description){
+            $description = $layer->getMetadata('TEMA');
         }
         if(!$description){
             $description = $layer->name;

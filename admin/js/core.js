@@ -193,7 +193,7 @@ function core_makeRequest(sUrl,callback,tipo)
 	if(arguments.length == 2)
 	{var tipo = "GET";}
 	var request = YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
-	YAHOO.log("Initiating request; tId: " + request.tId + ".", "info", "example");
+	//YAHOO.log("Initiating request; tId: " + request.tId + ".", "info", "example");
 }
 /*
 Function: core_carregando

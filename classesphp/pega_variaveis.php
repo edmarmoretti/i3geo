@@ -54,7 +54,7 @@ if (isset($_GET))
 		eval("\$".$k."='".(strip_tags($_GET[$k]))."';");
 	}
 }
-//var_dump($_POST);exit;
+//var_dump($_GET);exit;
 if (isset($_POST))
 {
 	//var_dump($_POST);exit;
