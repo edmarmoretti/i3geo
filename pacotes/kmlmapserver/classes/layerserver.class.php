@@ -579,28 +579,28 @@ class LayerServer {
         //var_dump($attributes);exit;
         //if($description_template != ""){return $description_template;}
         $n = "";
-        if($itens == "")
-        {
-        	foreach($attributes as $k => $val){
-        		$n .=  $k." - ".$attributes[$k]."\n";
-        	}
-        }
-        else
-        {
-        	$itens = explode(",",$itens);
-        	$itensdesc = explode(",",$itensdesc);
-        	if($description_template != "")
-        	{
-        		for($i=0;$i<count($itens);$i++)
-        		{$description_template = str_replace("%".$itens[$i]."%",$attributes[$itens[$i]],$description_template);}
-        		$n = $description_template;
-        	}
-        	else
-        	{
-        		for($i=0;$i<count($itens);$i++)
-        		{$n .=  $itensdesc[$i]." - ".$attributes[$itens[$i]]."\n";}
-        	}
-        }
+    	if($description_template != "")
+    	{
+    		foreach($attributes as $k => $val)
+    		{$description_template = str_replace("%".$k."%",$attributes[$k],$description_template);}
+    		$n = $description_template;
+    	}
+		else
+		{
+	        if($itens == "")
+	        {
+	        	foreach($attributes as $k => $val){
+	        		$n .=  $k." - ".$attributes[$k]."\n";
+	        	}
+	        }
+	        else
+	        {
+	        	$itens = explode(",",$itens);
+	        	$itensdesc = explode(",",$itensdesc);
+	       		for($i=0;$i<count($itens);$i++)
+	       		{$n .=  $itensdesc[$i]." - ".$attributes[$itens[$i]]."\n";}
+	        }
+		}
       	$description = mb_convert_encoding($n,"UTF-8",mb_detect_encoding($n,"UTF-8,ISO-8859-1"));
 		return $description;
     }
