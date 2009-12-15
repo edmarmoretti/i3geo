@@ -268,6 +268,17 @@ else
 							if (($conta >= $int[0]) && ($conta <= $int[1]))
 							{
 								$l = $nmap->getlayerbyname($t);
+								if ($l->connectiontype == MS_POSTGIS)
+								{
+									//inclui extensao geografica
+									$extensao = $l->getmetadata("EXTENSAO");
+									if($extensao == "")
+									{
+										$e = $oMap->extent;
+										$extensao = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+									}
+									$l->setmetadata("wms_extent",$extensao);
+								}
 								$l->setmetadata("ows_title",pegaNome($l));
 								$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
 								$l->set("status",MS_OFF);
