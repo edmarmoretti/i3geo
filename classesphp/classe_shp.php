@@ -282,7 +282,7 @@ Include:
 			if(!isset($tamanho)){$tamanho = 50;}
 			$e->set("size",$tamanho);
 			$e->set("symbolname",$nomes);
-			$pinlayer->set("transparency",MS_GD_ALPHA);
+			$pinlayer->set("opacity",MS_GD_ALPHA);
 			$shp = ms_newshapeobj(MS_SHAPE_POINT);
 			$lin = ms_newlineobj();
 			$lin->addxy($x,$y);
@@ -344,7 +344,7 @@ array("layerprj"=>$xylayer,"mapprj"=>$xymapa)
 
 		$result = $this->layer->getResult($res_count - 1);
 		$shp_index  = $result->shapeindex;
-		$shape = $this->layer->getshape(-1,$shp_index);
+		$shape = $this->layer->getfeature($shp_index,-1);
 		$lin = $shape->line(0);
 		$pt = $lin->point(0);
 		$this->layer->close();
@@ -469,7 +469,7 @@ $para - linha|poligono
 		if ($para == "poligono")
 		{
 			$layer->set("type",MS_LAYER_POLYGON);
-			$layer->set("transparency","50");
+			$layer->set("opacity","50");
 			$layer->setmetadata("tema",$novonomelayer." (poligonal)");
 		}
 		return("ok");

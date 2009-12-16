@@ -105,7 +105,7 @@ function fusaoGrafico()
 		$nome = ($imgo->imagepath).nomeRandomico().".png";
 		$imgo->saveImage($nome);
 		$imagem = ($imgo->imageurl).basename($nome);
-		$imgo->free();
+		//$imgo->free();
 	}
 	$m = new Imagem(dirname($dir_tmp).$imagem);
 	$i = $m->fundeIm(dirname($dir_tmp).$grafico);
@@ -994,7 +994,7 @@ function gravaImagemMapa($mapa)
 	if ($salva != -1)
 	{
 		$retorno = array("url"=>($imgo->imageurl).basename($nome),"arquivo"=>$nome);
-		$imgo->free();
+		//$imgo->free();
 	}
 	else
 	{$retorno = false;}
@@ -1032,7 +1032,7 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 		{
 			$result = $layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $layer->getshape(-1, $shp_index);
+			$shape = $layer->getfeature($shp_index,-1);
 			$v = trim($shape->values[$item]);
 			if ($numerico)
 			{
@@ -1112,7 +1112,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 			if (($selecionados == "sim") && (array_search($shp_index,$indicesel) === FALSE))
 			{continue;}
 			$considera = "sim";
-			$shape = $layer->getshape(-1, $shp_index);
+			$shape = $layer->getfeature($shp_index,-1);
 			//verifica se no registro deve ser considerado
 			if ($exclui != "nulo")
 			{
@@ -1632,10 +1632,10 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			dbase_add_record($db,$reg);
 			dbase_close($db);
 		}
-		$s = $layer->getshape(-1,0);
+		$s = $layer->getfeature(0,-1);
 		$result = $layer->getResult(0);
 		$shpi  = $result->shapeindex;
-		$shape = $layer->getshape(-1, $shpi);
+		$shape = $layer->getfeature($shpi,-1);
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
 		$novoshpf->free();
@@ -1680,7 +1680,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			{
 				$result = $layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $layer->getshape(-1, $shp_index);
+				$shape = $layer->getfeature($shp_index,-1);
 				foreach ($items as $ni)
 				{
 					$reg[] = $shape->values[$ni];

@@ -285,7 +285,7 @@ function verifica($map,$solegenda)
 			Header("Content-type: image/png");
 			ImagePng(ImageCreateFromPNG($nomec));
 		}
-		$objImagem->free();
+		//$objImagem->free();
 	}
 }
 function zoomTema($nomelayer,&$mapa)

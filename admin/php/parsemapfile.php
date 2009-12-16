@@ -60,7 +60,7 @@ function tipoLegenda($layername)
 	if($nclasses == 1)
 	{
 		$classe = $layer->getclass(0);
-		$expressao = $classe->getExpression();
+		$expressao = $classe->getExpressionString();
 		if($expressao == "")
 		{return "simples";exit;}
 		$expressao = str_replace("'eq'","=");
@@ -74,7 +74,7 @@ function tipoLegenda($layername)
 	for($i=0;$i<$nclasses;++$i)
 	{
 		$classe = $layer->getclass($i);
-		$expressao = $classe->getExpression();
+		$expressao = $classe->getExpressionString();
 		if(count(explode("[",$expressao)) > 2)
 		{
 			return "intervalo";
@@ -114,7 +114,7 @@ function legendaValorUnico($layername)
 		$outlinecolor[] = "'".$cor->red.",".$cor->green.",".$cor->blue.",255'";
 		$cor = $estilo->color;
 		$color[] = "'".$cor->red.",".$cor->green.",".$cor->blue.",255'";
-		$expressao = $classe->getExpression();
+		$expressao = $classe->getExpressionString();
 		$expressao = str_replace("'eq","=",$expressao);
 		$expressao = str_replace("'eq ","=",$expressao);
 		$expressao = str_replace("' eq","=",$expressao);
@@ -339,22 +339,22 @@ function mapfile()
 			$xml .= "<tabela>".$esquemaTabela[1]."</tabela>";
 			$xml .= "<where>".$s[1]."</where>";
 			$xml .= "<type>".$objlayertypes[$layer->type]."</type>\n";
-			$xml .= "<filter>".$layer->getfilter()."</filter>\n";
+			$xml .= "<filter>".$layer->getfilterstring()."</filter>\n";
 			$xml .= "<filteritem>$layer->filteritem</filteritem>\n";
 			$xml .= "<labelangleitem>$layer->labelangleitem</labelangleitem>\n";
 			$xml .= "<labelitem>$layer->labelitem</labelitem>\n";
-			$xml .= "<labelmaxscale>$layer->labelmaxscale</labelmaxscale>\n";
-			$xml .= "<labelminscale>$layer->labelminscale</labelminscale>\n";
-			$xml .= "<labelsizeitem>$layer->labelsizeitem</labelsizeitem>\n";
+			$xml .= "<labelmaxscale>$layer->labelmaxscaledenom</labelmaxscale>\n";
+			$xml .= "<labelminscale>$layer->labelminscaledenom</labelminscale>\n";
+			$xml .= "<labelsizeitem></labelsizeitem>\n";
 		}
 		$xml .= "<group>$layer->group</group>\n";
-		$xml .= "<maxscale>$layer->maxscale</maxscale>\n";
-		$xml .= "<minscale>$layer->minscale</minscale>\n";
+		$xml .= "<maxscale>$layer->maxscaledenom</maxscale>\n";
+		$xml .= "<minscale>$layer->minscaledenom</minscale>\n";
 		$xml .= "<offsite>".$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue."</offsite>\n";
 		$xml .= "<opacity>$layer->opacity</opacity>\n";
 		if($ct != "MS_WMS")
 		{
-			$xml .= "<symbolscale>$layer->symbolscale</symbolscale>\n";
+			$xml .= "<symbolscale>$layer->symbolscaledenom</symbolscale>\n";
 			$xml .= "<tileindex>$layer->tileindex</tileindex>\n";
 			$xml .= "<tileitem>$layer->tileitem</tileitem>\n";
 			$xml .= "<tolerance>$layer->tolerance</tolerance>\n";
@@ -381,7 +381,7 @@ function pegaClasses($xml)
 		$xml .= "<classe>\n";
 		$classe = $layer->getclass($i);
 		$xml .= "<name>".mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1")."</name>\n";
-		$xml .= "<expression>".$classe->getExpression()."</expression>\n";
+		$xml .= "<expression>".$classe->getExpressionString()."</expression>\n";
 		$xml .= "<keyimage>$classe->keyimage</keyimage>\n";
 		$xml .= "<size>$classe->size</size>\n";
 		$xml .= "<symbolname>$classe->symbolname</symbolname>\n";

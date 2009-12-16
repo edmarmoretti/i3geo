@@ -306,7 +306,7 @@ array
 					$nomeclasse = $classe->name;
 					if (function_exists("mb_convert_encoding"))
 					{$nomeclasse = mb_convert_encoding($nomeclasse,"UTF-8","ISO-8859-1");}
-					$nomeexp = $classe->getexpression();
+					$nomeexp = $classe->getExpressionString();
 					if (function_exists("mb_convert_encoding"))
 					{$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");}
 

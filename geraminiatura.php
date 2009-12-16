@@ -169,7 +169,7 @@ function verifica($map,$tipo)
 			echo "<br><img src='".$url.".grande.png' /><br>";
 		}
 		$objImagem->saveImage($nomec);
-		$objImagem->free();
+		//$objImagem->free();
 	}
 }
 function zoomTema($nomelayer,&$mapa)

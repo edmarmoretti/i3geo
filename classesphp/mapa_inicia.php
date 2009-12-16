@@ -172,7 +172,7 @@ function iniciaMapa()
 	$m->salva($map_file);
 	$e = $m->mapa->extent;
 	$ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-	$escalaMapa = $m->mapa->scale;
+	$escalaMapa = $m->mapa->scaledenom;
 	$celula = $m->mapa->cellsize;
 	//
 	//pega os parametros de cada tema

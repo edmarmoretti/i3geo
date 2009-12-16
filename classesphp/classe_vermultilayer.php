@@ -101,8 +101,8 @@ class vermultilayer
 			$layer = $map->getlayerbyname($temai);
 			$testa = 0;
 			//verifica se o tema é visivel na escala
-			$mins = $layer->minscale;
-			$maxs = $layer->maxscale;
+			$mins = $layer->minscaledenom;
+			$maxs = $layer->maxscaledenom;
 			if ($mins != $maxs)
 			{
 				$testa = 1;

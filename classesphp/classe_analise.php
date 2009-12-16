@@ -969,7 +969,7 @@ $locaplic - Localização do I3geo.
 		{
 			$result = $layerPt->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $layerPt->getshape(-1, $shp_index);
+			$shape = $layerPt->getfeature($shp_index,-1);
 			$pontos[] = $shape;
 		}
 		$layerPt->close();
@@ -1032,7 +1032,7 @@ $locaplic - Localização do I3geo.
 				{
 					$result = $layer->getResult(0);
 					$shp_index  = $result->shapeindex;
-					$shape = $layer->getshape(-1, $shp_index);
+					$shape = $layer->getfeature($shp_index,-1);
 					foreach ($itens as $item)
 					{$reg[] = $shape->values[$item];}
 				}
@@ -1231,7 +1231,7 @@ nome do layer criado com o buffer.
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);
+			$shape = $this->layer->getfeature($shp_index,-1);
 			//calcula a extensão geografica
 			$rect = $shape->bounds;
 			$projInObj = ms_newprojectionobj("proj=latlong");
@@ -1344,7 +1344,7 @@ $locaplic - Localização do I3geo.
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);
+			$shape = $this->layer->getfeature($shp_index,-1);
 			$LineObj = ms_newLineObj();
 			$LineObj->add($shape->getCentroid());
 			$ShapeObj = ms_newShapeObj(MS_SHAPE_POINT);
@@ -1645,7 +1645,7 @@ $npty - Número de pontos em Y (opcional)
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		$novolayer->set("transparency","50");
+		$novolayer->set("opacity","50");
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		return("ok");
@@ -1798,7 +1798,7 @@ $npty - Número de pontos em Y (opcional)
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		$novolayer->set("transparency","50");
+		$novolayer->set("opacity","50");
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		return("ok");
@@ -1867,7 +1867,7 @@ $locaplic - Localização do I3geo
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		$novolayer->set("transparency","80");
+		$novolayer->set("opacity","80");
 		if (file_exists(($this->arquivo)."qy"))
 		{unlink (($this->arquivo)."qy");}
 		return("ok");
@@ -1903,7 +1903,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);
+			$shape = $this->layer->getfeature($shp_index,-1);
 			if($item != "")
 			$valor = $shape->values[$item];
 			else
@@ -1921,7 +1921,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		{
 			foreach ($i as $indice)
 			{
-				$shape = $this->layer->getshape(-1, $indice);
+				$shape = $this->layer->getfeature($indice,-1);
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2023,7 +2023,7 @@ $locaplic - Localização do I3geo
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);
+			$shape = $this->layer->getfeature($shp_index,-1);
 			if($item != "")
 			$valor = $shape->values[$item];
 			else
@@ -2044,7 +2044,7 @@ $locaplic - Localização do I3geo
 		{
 			foreach ($i as $indice)
 			{
-				$shape = $this->layer->getshape(-1, $indice);
+				$shape = $this->layer->getfeature($indice,-1);
 				if($item != "")
 				$valor = $shape->values[$item];
 				else
@@ -2427,7 +2427,7 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		{
 			$result = $layerPt->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $layerPt->getshape(-1, $shp_index);
+			$shape = $layerPt->getfeature($shp_index,-1);
 			$lineo = $shape->line(0);
 			$pt = $lineo->point(0);
 			if (($prjTema != "") && ($prjMapa != $prjTema))

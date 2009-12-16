@@ -394,12 +394,12 @@ string Filtro.
 	function pegaFiltro()
 	{
 		if(!$this->layer){return "erro";}
-		$fil = $this->layer->getfilter();
-		if ($this->layer->getfilter() == '"(null)"'){return " ";}
+		$fil = $this->layer->getfilterstring();
+		if ($this->layer->getfilterstring() == '"(null)"'){return " ";}
 		if (function_exists("mb_convert_encoding"))
-		{return (mb_convert_encoding($this->layer->getfilter(),"HTML-ENTITIES","auto"));}
+		{return (mb_convert_encoding($this->layer->getfilterstring(),"HTML-ENTITIES","auto"));}
 		else
-		{return ($this->layer->getfilter());}
+		{return ($this->layer->getfilterstring());}
 	}
 /*
 function: insereFiltro
@@ -598,7 +598,7 @@ $fonte - Fonte.
 				$e->set("symbolname",$marca);
 				$pinlayer->setmetadata("tema","Poligonos inseridos");
 				$pinlayer->set("type",MS_LAYER_POLYGON);
-				$pinlayer->set("transparency","50");
+				$pinlayer->set("opacity","50");
 				break;
 				case "ANNOTATION":
 				$c->set("status",MS_DELETE);
@@ -642,7 +642,7 @@ $fonte - Fonte.
 				$label->set("position",$p[$position]);
 				$pinlayer->setmetadata("TEMA",$texto);
 				$pinlayer->set("type",MS_LAYER_ANNOTATION);
-				$pinlayer->set("transparency","100");
+				$pinlayer->set("opacity","100");
 				break;
 			}
 		}
@@ -706,7 +706,7 @@ $nome - nome que será dado a geometria
 			$valitem = array();
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);		
+			$shape = $this->layer->getfeature($shp_index,-1);		
 			foreach ($items as $item)
 			{
 				$v = trim($shape->values[$item]);
@@ -933,7 +933,7 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 				$valitem = array();
 				$result = $this->layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getshape(-1, $shp_index);				
+				$shape = $this->layer->getfeature($shp_index,-1);				
 				$bound = $shape->bounds;
 				$xmin[] = $bound->minx;
 				$xmax[] = $bound->maxx;

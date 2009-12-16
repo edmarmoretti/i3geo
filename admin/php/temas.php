@@ -413,21 +413,21 @@ function pegaCaracteristicasGerais()
 	$dados["connectiontype"] = $layer->connectiontype;
 	$dados["data"] = $layer->data;
 	$dados["type"] = $layer->type;
-	$dados["filter"] = $layer->getfilter();
+	$dados["filter"] = $layer->getfilterstring();
 	if($dados["filter"]== ""){$dados["filter"] = "";}
 	$dados["filteritem"] = $layer->filteritem;
 	$dados["group"] = $layer->group;
 	$dados["labelangleitem"] = $layer->labelangleitem;
 	$dados["labelitem"] = $layer->labelitem;
-	$dados["labelmaxscale"] = $layer->labelmaxscale;
-	$dados["labelmaxscale"] = $layer->labelmaxscale;
-	$dados["labelminscale"] = $layer->labelminscale;
-	$dados["labelsizeitem"] = $layer->labelsizeitem;
-	$dados["maxscale"] = $layer->maxscale;
-	$dados["minscale"] = $layer->minscale;
+	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
+	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
+	$dados["labelminscale"] = $layer->labelminscaledenom;
+	//$dados["labelsizeitem"] = $layer->labelsizeitem;
+	$dados["maxscale"] = $layer->maxscaledenom;
+	$dados["minscale"] = $layer->minscaledenom;
 	$dados["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
 	$dados["opacity"] = $layer->opacity;
-	$dados["symbolscale"] = $layer->symbolscale;
+	$dados["symbolscale"] = $layer->symbolscaledenom;
 	$dados["tileindex"] = $layer->tileindex;
 	$dados["tileitem"] = $layer->tileitem;
 	$dados["tolerance"] = $layer->tolerance;
@@ -484,10 +484,10 @@ function pegaClasses()
 	{
 		$classe = $layer->getclass($i);
 		$temp["name"] = mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1");
-		$temp["expression"] = $classe->getExpression();
+		$temp["expression"] = $classe->getExpressionString();
 		$temp["keyimage"] = $classe->keyimage;
-		$temp["maxscale"] = $classe->maxscale;
-		$temp["minscale"] = $classe->minscale;
+		$temp["maxscale"] = $classe->maxscaledenom;
+		$temp["minscale"] = $classe->minscaledenom;
 		$temp["maxsize"] = $classe->maxsize;
 		$temp["minsize"] = $classe->minsize;
 		$temp["size"] = $classe->size;

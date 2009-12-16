@@ -204,7 +204,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 			{
 				$result = $layero->getResult($i);
 				$s  = $result->shapeindex;
-				$sh = $layero->getShape(-1,$s);
+				$sh = $layero->getfeature($s,-1);
 				$tiposh = $sh->type;
 				if ($tiposh == 2)
 				{$ident = @$this->layer->querybyshape($sh);}
@@ -257,9 +257,9 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 			$conta = $layero->getNumresults();
 			for ($k = 0; $k < $conta; $k++)
 			{
-				if (@$layero->getshape(-1,$k))
+				if (@$layero->getfeature($k,-1))
 				{
-					$s = $layero->getshape(-1,$k);
+					$s = $layero->getfeature($k,-1);
 					if ($s->type == 2)
 					{
 						$this->layer->querybyshape($s);

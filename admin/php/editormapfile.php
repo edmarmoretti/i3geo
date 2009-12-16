@@ -580,21 +580,21 @@ function pegaGeral()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$dados["type"] = $layer->type;
-	$dados["filter"] = $layer->getfilter();
+	$dados["filter"] = $layer->getfilterstring();
 	if($dados["filter"]== ""){$dados["filter"] = "";}
 	$dados["filteritem"] = $layer->filteritem;
 	$dados["group"] = $layer->group;
 	//$dados["labelangleitem"] = $layer->labelangleitem;
 	$dados["labelitem"] = $layer->labelitem;
-	$dados["labelmaxscale"] = $layer->labelmaxscale;
-	$dados["labelmaxscale"] = $layer->labelmaxscale;
-	$dados["labelminscale"] = $layer->labelminscale;
+	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
+	$dados["labelmaxscale"] = $layer->labelmaxscaledenom;
+	$dados["labelminscale"] = $layer->labelminscaledenom;
 	//$dados["labelsizeitem"] = $layer->labelsizeitem;
-	$dados["maxscale"] = $layer->maxscale;
-	$dados["minscale"] = $layer->minscale;
+	$dados["maxscale"] = $layer->maxscaledenom;
+	$dados["minscale"] = $layer->minscaledenom;
 	$dados["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
 	$v["principal"] == "4" ? $dados["opacity"] = $layer->transparency : $dados["opacity"] = $layer->opacity;
-	$dados["symbolscale"] = $layer->symbolscale;
+	$dados["symbolscale"] = $layer->symbolscaledenom;
 	$dados["tolerance"] = $layer->tolerance;
 	$dados["toleranceunits"] = $layer->toleranceunits;
 	$dados["status"] = $layer->status;
@@ -629,11 +629,11 @@ function alterarGeral()
 	$layer->set("group",$group);
 	//$layer->set("labelangleitem",$labelangleitem);
 	$layer->set("labelitem",$labelitem);
-	$layer->set("labelmaxscale",$labelmaxscale);
-	$layer->set("labelminscale",$labelminscale);
+	$layer->set("labelmaxscaledenom",$labelmaxscale);
+	$layer->set("labelminscaledenom",$labelminscale);
 	//$layer->set("labelsizeitem",$labelsizeitem);
-	$layer->set("maxscale",$maxscale);
-	$layer->set("minscale",$minscale);
+	$layer->set("maxscaledenom",$maxscale);
+	$layer->set("minscaledenom",$minscale);
 	$cor = $layer->offsite;
 	$c = explode(",",$offsite);
 	if(count($c) < 3)
@@ -642,7 +642,7 @@ function alterarGeral()
 	$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
 	$v["principal"] == "4" ? $layer->set("transparency",$opacity) : $layer->set("opacity",$opacity);
 
-	$layer->set("symbolscale",$symbolscale);
+	$layer->set("symbolscaledenom",$symbolscale);
 	$layer->set("tolerance",$tolerance);
 	$layer->set("toleranceunits",$toleranceunits);
 	$layer->set("status",$status);
@@ -679,15 +679,15 @@ function pegaClasseGeral()
 	$classe = $layer->getclass($indiceClasse);
 	$dados["name"] = $classe->name;
 	$dados["title"] = $classe->title;
-	$temp = $classe->getExpression();
+	$temp = $classe->getExpressionString();
 	$temp = str_replace("[","_C",$temp);
 	$temp = str_replace("]","C_",$temp);
 	$temp = str_replace("'","_A_",$temp);
 	//substitui caracteres que dão problemas
 	$dados["expression"] = $temp;
 	$dados["keyimage"] = $classe->keyimage;
-	$dados["maxscale"] = $classe->maxscale;
-	$dados["minscale"] = $classe->minscale;
+	$dados["maxscale"] = $classe->maxscaledenom;
+	$dados["minscale"] = $classe->minscaledenom;
 	$dados["status"] = $classe->status;
 	//$dados["text"] = $classe->getTextString();
 	$dados["codigoMap"] = $codigoMap;
@@ -711,8 +711,8 @@ function alterarClasseGeral()
 	$temp = str_replace("_A_","'",$temp);	
 	$classe->setexpression($temp);
 	$classe->set("keyimage",$keyimage);
-	$classe->set("maxscale",$maxscale);
-	$classe->set("minscale",$minscale);
+	$classe->set("maxscaledenom",$maxscale);
+	$classe->set("minscaledenom",$minscale);
 	$classe->set("status",$status);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);

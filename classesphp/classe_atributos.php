@@ -156,7 +156,7 @@ $registro - Índice do registro que será consultado.
 			if (@$this->layer->queryByrect($this->mapa->extent) == MS_SUCCESS)
 			{
 				$this->layer->open();
-				$shape = $this->layer->getshape(-1, $registro);
+				$shape = $this->layer->getfeature($registro,-1);
 				$fechou = $this->layer->close();
 				$ext = $this->extensaoShape($shape);
 			}
@@ -230,7 +230,7 @@ $tipo - Tipo de busca brasil|null
 			{
 				$result = $this->layer->getResult($i);
 				$shp_index  = $result->shapeindex;
-				$shape = $this->layer->getshape(-1, $shp_index);
+				$shape = $this->layer->getfeature($shp_index,-1);
 				$v = trim($shape->values[$item]);
 				if (function_exists("mb_convert_encoding"))
 				{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
@@ -304,7 +304,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 				{
 					$result = $this->layer->getResult($i);
 					$shp_index  = $result->shapeindex;
-					$shape = $this->layer->getshape(-1, $shp_index);
+					$shape = $this->layer->getfeature($shp_index,-1);
 					$valori = trim($shape->values[$item]);
 					if (function_exists("mb_convert_encoding"))
 					{$valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");}
@@ -342,7 +342,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					{
 						$result = $this->layer->getResult($i);
 						$shp_index  = $result->shapeindex;
-						$shape = $this->layer->getshape(-1, $shp_index);
+						$shape = $this->layer->getfeature($shp_index,-1);
 						$valori = "";
 						if(@$shape->values[$item])
 						{
@@ -411,7 +411,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$this->layer = $l;
 			if ($l->data == "")
 			{return "Erro. O tema não tem tabela";}
-			$filtro = $l->getfilter();
+			$filtro = $l->getfilterstring();
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
 			$buscasUTF = mb_convert_encoding($buscas,"UTF-8","ISO-8859-1");
@@ -481,7 +481,7 @@ Include:
 		$this->layer->set("template","none.htm");
 		$items = pegaItens($this->layer);
 		$valores = array();
-		$filtro = $this->layer->getfilter();
+		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$existesel = "nao";
@@ -498,7 +498,7 @@ Include:
 		{
 			$result = $this->layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $this->layer->getshape(-1, $shp_index);
+			$shape = $this->layer->getfeature($shp_index,-1);
 			$v = $shape->values[$item];
 			$valores[] = $v;
 		}
@@ -1020,7 +1020,7 @@ function identificaQBP($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno=""
 			$valori = array();
 			$result = $layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $layer->getshape(-1, $shp_index);
+			$shape = $layer->getfeature($shp_index,-1);
 			if ($tiporetorno == "shape")
 			{
 				$layer->close();
@@ -1259,7 +1259,7 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 			$valori = array();
 			$result = $layer->getResult($i);
 			$shp_index  = $result->shapeindex;
-			$shape = $layer->getshape(-1, $shp_index);
+			$shape = $layer->getfeature($shp_index,-1);
 			$conta = 0;
 			foreach ($itens as $it)
 			{

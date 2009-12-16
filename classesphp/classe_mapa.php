@@ -125,7 +125,7 @@ Grava a imagem do mapa atual
 		$nome = ($imgo->imagepath).nomeRandomico().".png";
 		$imgo->saveImage($nome);
 		$nome = ($imgo->imageurl).basename($nome);
-		$imgo->free();
+		//$imgo->free();
 		return ($nome);
 	}
 /*
@@ -185,13 +185,13 @@ string - javascript com os parametros
 				//verifica se existe restrição de escala
 				//
 				$contextoescala = "nao";
-				if(($oLayer->minscale > 0) || ($oLayer->maxscale > 0))
+				if(($oLayer->minscaledenom > 0) || ($oLayer->maxscaledenom > 0))
 				{$contextoescala = "sim";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
 					"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
-					"transparency"=>($oLayer->transparency),
+					"transparency"=>($oLayer->opacity),
 					"type"=>($oLayer->type),
 					"sel"=>$sel,
 					"escala"=>$escala,
@@ -345,7 +345,7 @@ Include:
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
 		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
-		$imgo->free();
+		//$imgo->free();
 		return $res;
 	}
 /*
@@ -366,7 +366,7 @@ string - javascript com as variáveis para redesenho do mapa
 		$e = $this->mapa->extent;
 		$w = $this->mapa->width;
 		$h = $this->mapa->height;
-		$s = $this->mapa->scale;
+		$s = $this->mapa->scaledenom;
 		$this->mapa = desligamargem($this->mapa);
 		$pt = ms_newPointObj();
 		//desenha o leste
@@ -1394,7 +1394,7 @@ $arq - Nome do shape file.
 		if (file_exists($arq))
 		{
 			$s = ms_newShapefileObj($arq,-1);
-			$shape = $s->getShape(0);
+			$shape = $s->getfeature(0);
 			$t = $shape->type;
 			$tipo = MS_LAYER_POLYGON;
 			if ($t == 0)

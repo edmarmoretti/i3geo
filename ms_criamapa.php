@@ -692,7 +692,7 @@ function insereWKTUrl()
 		$estilo->set("size",3);
 	}
 	if($shape->type == 2)
-	{$layer->set("transparency","50");}
+	{$layer->set("opacity","50");}
 	$cor = $estilo->color;
 	$cor->setRGB(255,0,0);
 	$salvo = $mapa->save($tmpfname);
@@ -911,7 +911,7 @@ function inserePoligonosUrl()
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
 	$layer->set("type",MS_LAYER_POLYGON);
-	$layer->set("transparency","50");
+	$layer->set("opacity","50");
 	$layer->set("status",MS_DEFAULT);
 	$classe = ms_newClassObj($layer);
 	$classe->set("name"," ");
