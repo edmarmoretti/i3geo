@@ -66,6 +66,9 @@ if (!isset($tipo))
 	echo "Utilize geraminiatura.php?tipo=mini ou grande ou todos. As imagens são armazenadas no diretório temporário.";
 	echo "<br>Após geradas as imagens, copie os arquivos para o diretório i3geo/temas/miniaturas.";
 	echo "<br>As miniaturas são geradas apenas para os arquivos que ainda não existem no diretório temas/miniaturas.";
+	echo "<br><a href='geraminiatura.php?tipo=todos' >Gerar todas as miniaturas</a>";
+	echo "<br><a href='geraminiatura.php?tipo=mini' >Gerar apenas as pequenas</a>";
+	echo "<br><a href='geraminiatura.php?tipo=grande' >Gerar apenas as grandes</a>";
 	exit;
 }
 $arqs = listaArquivos("temas");

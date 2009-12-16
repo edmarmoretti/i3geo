@@ -719,6 +719,14 @@ g_traducao_ajuda = {
 			complemento:"Existem várias opções de tratamento dos dados que permitem, por exemplo, mostrar os percentuais ou os dados brutos. Pode-se ainda ativar a navegação dinâmica, o que permite atualizar o gráfico conforme é feita a navegação sobre o mapa.",
 			apijs:"i3GEO.analise.dialogo.graficoInterativo()"
 		},
+		"85": {
+			titulo: "Miniaturas",
+			diretorio:"i3geo/ferramentas/carouseltemas",
+			categoria:"6",
+			pt:"Abre uma janela flutuante que mostra imagens miniatura de cada tema existente na árvore de temas. O usuário pode clicar em uma das imagens para adicionar o tema ao mapa atual.",
+			complemento:"As miniaturas devem existir previamente para aparecerem nessa ferramenta. Para gerar as miniaturas, o administrador do i3Geo pode usar o sistema de administração.",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.carouselTemas()"
+		}
 	}
 };
 

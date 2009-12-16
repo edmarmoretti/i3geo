@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>MMA - Mapa interativo</title>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+</head>
+<body style="background-color:rgb(200,200,200);z-index:0;" class=yui-skin-sam >
+<div id=carousel style="left:100px;top:0px;position:absolute"  >
+</div>
+<div id=i3geo style="left:100px;top:100px;position:absolute"  >
+
+
+<table id='mst' style=display:none width=100% cellspacing='0'>
+<tr style="border:0px"><td colspan=2 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td></tr>
+<tr>
+<td colspan=2 >
+   <img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/> 
+   <img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/> 
+   <img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/>
+   <img title="selecao" alt="" src="../imagens/branco.gif" id='selecao'/>
+   <img title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/>
+   <img title="busca na wikipedia" alt="" src="../imagens/branco.gif" id='wiki'/>
+   <img title="mede" alt="" src="../imagens/branco.gif" id='mede'/> 
+   <img title="desloca" alt="" src="../imagens/branco.gif" ID='pan'/>
+   <img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/>
+   <img title="aproxima" alt="" src="../imagens/branco.gif" id='zoomiauto'/>
+   <img title="afasta" alt="" src="../imagens/branco.gif" id='zoomoauto'/>
+   <img title="geral" alt="" src="../imagens/branco.gif" ID='zoomtot'/> 
+   <img title="google" alt="" src="../imagens/branco.gif" id='google'/>
+   <img title="info" alt="" src="../imagens/branco.gif" id='identifica'/>
+</td>
+</tr>
+<tr>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+  <table width=100% cellspacing=0 cellpadding=0 >
+   <tr>
+   <td title="libera guias" class=tdclaro ></td>
+   <td style="border-bottom:3px solid rgb(200,200,200)">
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
+	 <div id=guia1 class=guia value="Mostra os temas atualmente inseridos no mapa e que podem estar visíveis ou não." >&nbsp;Temas&nbsp;</div>
+	 <div id=guia4 class=guia value="Mostra a legnda do mapa atual." >&nbsp;Legenda&nbsp;</div>
+    </div>
+   </td>
+   </tr>
+  </table>
+  <div id='guia1obj' ><div id=buscaRapida ></div><div id=listaPropriedades ></div><div id=listaTemas ></div></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+ </td>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <tr><td  class=verdeclaro id=contemImg >
+<!-- define o tamanho do mapa -->
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');width:545px;height:400px"></div>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+<tr>
+ <td class=tdbranca >
+ 	<div id=escala ></div>
+ 	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
+ </td>
+ <td class=tdbranca >
+  <table width=100% ><tr>
+  <td class=tdbranca ></td>
+  <td class=tdbranca ><div id=localizarxy >Aguarde...</div></td>
+  <td class=tdbranca ></td>
+  </tr></table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
+</table>
+<a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
+</center>
+</div>
+<script type="text/javascript">
+function abreCarousel(){
+	i3GEOF.carouseltemas.incluiAmpliacao = false;
+	i3GEOF.carouseltemas.numVisible = 15;
+	i3GEOF.carouseltemas.inicia("carousel");
+}
+i3GEO.configura.locaplic = "http://"+window.location.host+"/i3geo";
+i3GEO.configura.mapaRefDisplay = "none"
+i3GEO.configura.iniciaJanelaMensagens = false
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.idioma.MOSTRASELETOR = false
+
+i3GEO.cria()
+i3GEO.inicia();
+var js = i3GEO.configura.locaplic+"/ferramentas/carouseltemas/index.js.php";
+i3GEO.util.scriptTag(js,"abreCarousel()","i3GEOF.carouseltemas_script");
+
+</script>
+
+</body>
+</html>

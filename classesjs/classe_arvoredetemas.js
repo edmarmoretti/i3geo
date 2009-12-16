@@ -79,7 +79,10 @@ i3GEO.arvoreDeTemas = {
 		
 		estrelas:true,
 		
-		refresh: true	
+		refresh: true,
+		
+		carousel: true
+		
 	}
 	
 	Tipo:
@@ -102,7 +105,8 @@ i3GEO.arvoreDeTemas = {
 		qrcode: true,
 		mini: true,
 		estrelas: true,
-		refresh: true
+		refresh: true,
+		carousel: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -1223,6 +1227,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='nuvemtags' onclick='i3GEO.arvoreDeTemas.dialogo.nuvemTagsFlash()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='"+$trad("a5a")+"'/><td>";
 			t += 20;
 		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.carousel === true){
+			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title=''/><td>";
+			t += 20;
+		}
 
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");
 	},
@@ -1278,6 +1286,7 @@ i3GEO.arvoreDeTemas = {
 	palavra {String}
 	*/
 	buscaTema: function(palavra){
+		if(palavra === ""){return;}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.buscaTema()");}
 		var busca,root,nodePalavra;
 		resultadoProcurar = function(retorno)
@@ -1581,6 +1590,17 @@ i3GEO.arvoreDeTemas = {
 	i3GEO.arvoreDeTemas.dialogo.uploaddbf()
 	*/
 	dialogo:{
+		/*
+		Function: carouselTemas
+
+		abre a janela flutuante para o usuário adicionar temas baseado nas imagens miniatura
+		*/
+		carouselTemas: function(){
+			if(typeof(i3GEOF.upload) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/carouseltemas/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.carouseltemas.criaJanelaFlutuante()","i3GEOF.carouseltemas_script");
+			}
+		},
 		/*
 		Function: nuvemTags
 

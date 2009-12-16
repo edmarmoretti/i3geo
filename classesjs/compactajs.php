@@ -84,6 +84,7 @@ packer("../pacotes/yui270/build/container/container.js","../pacotes/yui270/build
 packer("../pacotes/yui270/build/container/container_core.js","../pacotes/yui270/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui270/build/utilities/utilities.js","../pacotes/yui270/build/utilities/utilities_compacto.js","Normal");
 packer("../pacotes/yui270/build/treeview/treeview.js","../pacotes/yui270/build/treeview/treeview_compacto.js","Normal");
+packer("../pacotes/yui270/build/carousel/carousel-min.js","../pacotes/yui270/build/carousel/carousel_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.config.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js","Normal");
 packer("../pacotes/balloon-tooltips/htdocs/js/balloon.js","../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js","Normal");
@@ -108,6 +109,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/tabview/tabview-min.js",
 "../pacotes/yui270/build/treeview/treeview_compacto.js",
 "../pacotes/yui270/build/button/button-min.js",
+"../pacotes/yui270/build/carousel/carousel_compacto.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
 "compactados/classe_i3geo_compacto.js",
@@ -156,6 +158,7 @@ $cssfiles = array(
 "../pacotes/yui270/build/container/assets/skins/sam/container.css",
 "../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
+"../pacotes/yui270/build/carousel/assets/skins/sam/carousel.css",
 "../css/corrigeyui_geral.css"
 ); 
 

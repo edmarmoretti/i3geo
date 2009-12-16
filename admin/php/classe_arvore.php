@@ -68,7 +68,8 @@ class Arvore
 	//procura um tema tendo como base uma palavra
 	function procuraTemas ($procurar,$perfil)
 	{
-		$procurar = $this->removeAcentos($procurar);
+		if($procurar != "")
+		{$procurar = $this->removeAcentos($procurar);}
 		$menus = $this->pegaListaDeMenus($perfil);
 		$resultado = array();
 		$subgrupo = array();
@@ -96,17 +97,24 @@ class Arvore
 									$tags = $this->removeAcentos($tema["tags_tema"]);
 									$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
 									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
-
+									$miniatura = "nao";
+									if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
+									{$miniatura = "sim";}
 									$down = "sim";
 									if (strtolower($t["download_tema"]) == "nao")
 									{$down = "nao";}
-									$texto = array("tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
-									if (stristr($nome,$procurar) || stristr($nome1,$procurar))
+									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+									if($procurar == "")
 									{$resultado[] = $texto;}
 									else
 									{
-										if (stristr($tags,$procurar) || stristr($tags1,$procurar))
+										if (stristr($nome,$procurar) || stristr($nome1,$procurar))
 										{$resultado[] = $texto;}
+										else
+										{
+											if (stristr($tags,$procurar) || stristr($tags1,$procurar))
+											{$resultado[] = $texto;}
+										}
 									}
 								}
 							}

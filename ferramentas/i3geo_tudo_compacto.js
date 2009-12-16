@@ -8259,10 +8259,10 @@ i3GEO.util = {
 			eval("funcao(temp)");
 		};
 		i3GEO.php.listaValoresItensTema(monta,tema,itemTema);
-		cp = new cpaint();
+		//cp = new cpaint();
 		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call( g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema,"listaRegistros",monta);
+		//cp.set_response_type("JSON");
+		//cp.call( g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema,"listaRegistros",monta);
 	},
 	/*
 	Function: comboFontes
