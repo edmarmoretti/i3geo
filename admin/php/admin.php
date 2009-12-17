@@ -46,13 +46,13 @@ if(!isset($locaplic))
 	}
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
-
 error_reporting(0);
 //
 //carrega o phpmapscript
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
 include_once ($locaplic."/classesphp/funcoes_gerais.php");
+
 //
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico

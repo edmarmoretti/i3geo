@@ -73,7 +73,7 @@ function graficoPizza()
 */
 function graficoBarras()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $setasdv,$percentual,$nome,$margem,$margemexterna,$margeminterna,$grid,$border,$cexaxis,$las,$space,$lwd,$fontlab,$collab,$cexlab,$xlab,$ylab,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$main,$cexmain,$sub,$cexsub;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -116,14 +116,14 @@ function graficoBarras()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
+	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
 * Gera gráfico de histograma.
 */
 function graficoHist()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $densidade,$percentual,$nome,$margem,$margemexterna,$margeminterna,$corbarras,$grid,$breaks,$border,$cexaxis,$las,$lwd,$fontlab,$collab,$cexlab,$xlab,$ylab,$fontsub,$fontmain,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$fg,$colmain,$font,$main,$cexmain,$sub,$cexsub;
 	$dir = dirname(dirname($map_file));
 	if($nome == "")
@@ -165,14 +165,14 @@ function graficoHist()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
+	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
 * Gera gráfico de linhas.
 */
 function graficoLinhas()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$xlab,$ylab,$grid,$ppontos,$spline,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$nome;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -211,14 +211,14 @@ function graficoLinhas()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
+	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
 * Gera gráfico de distribuição de pontos (scatter).
 */
 function graficoScatter()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $percentual,$nome,$margem,$margemexterna,$margeminterna,$corlinha,$grid,$ppontos,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -243,14 +243,14 @@ function graficoScatter()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
+	return ($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 /**
 * Gera gráfico de distribuição de pontos (scatter) com agrupamento em pixels.
 */
 function graficoScatterBins()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $plota3d,$nbins,$percentual,$nome,$margem,$margemexterna,$margeminterna,$corlinha,$grid,$ppontos,$locaplic,$dir_tmp,$gw,$gh,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$dir = dirname(dirname($map_file));
@@ -286,7 +286,7 @@ function graficoScatterBins()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
+	return($url.$gfile_name.".png,".$url.(basename($nome)).",".$nome);
 }
 
 /**
@@ -294,7 +294,7 @@ function graficoScatterBins()
 */
 function graficoEstrela()
 {
-	global $cp,$map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
+	global $map_file,$itemvalores,$itemclasses,$tema,$exclui,$tipo,$R_path;
 	global $font,$cex,$grid,$ppontos,$locaplic,$dir_tmp,$w,$h,$res,$bg,$collab,$colaxis,$cexlab,$cexaxis,$fontlab,$las,$tck,$cexmain,$border,$lty,$lwd,$lty,$lwd,$pch,$tpt,$main,$colmain,$fontmain,$ylab,$xlab;
 	//pega os valores
 	$map = ms_newMapObj($map_file);
@@ -333,7 +333,7 @@ function graficoEstrela()
 	$map = ms_newMapObj($map_file);
 	$webo = $map->web;
 	$url = dirname($webo->imageurl)."/";
-	$cp->set_data($url.$gfile_name.".png,".$url.(basename($nomeV)));
+	return($url.$gfile_name.".png,".$url.(basename($nomeV)));
 }
 function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexterna,$margeminterna,$locaplic)
 {

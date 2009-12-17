@@ -138,13 +138,11 @@ Chama a função getcapabilities e retorna o resultado.
 parameters:
 $servico - Endereço do web service.
 
-$cp - Objeto CPAINT.
-
 $id_ws - id do wms se estiver sendo utilizado o banco de administração do i3geo
 */
 function getcapabilities()
 {
-	global $servico,$cp,$id_ws;
+	global $servico,$id_ws;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&version=1.1.0";
@@ -157,7 +155,7 @@ function getcapabilities()
 		return;
 	}
 	$wms_capabilities = implode("",$wms_capabilities);
-	$cp->set_data(xml2html($wms_capabilities));
+	return(xml2html($wms_capabilities));
 }
 /*
 function: getcapabilities2
@@ -167,11 +165,10 @@ Chama a função getcapabilities e retorna o resultado formatado (WMS).
 parameters:
 $servico - Endereço do web service.
 
-$cp - Objeto CPAINT.
 */
 function getcapabilities2()
 {
-	global $servico,$cp;
+	global $servico;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&version=1.1.0";
@@ -218,7 +215,7 @@ function getcapabilities2()
 	foreach ($entries as $entry){$temp .= $entry->nodeValue.".";}
 	$retorno .= "<br><br><b>Contato: </b>".$temp;
 
-	$cp->set_data($retorno);
+	return($retorno);
 }
 /*
 function: getcapabilities3
@@ -229,11 +226,10 @@ parameters:
 
 $servico - Endereço do web service.
 
-$cp - Objeto CPAINT.
 */
 function getcapabilities3()
 {
-	global $servico,$cp;
+	global $servico;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "request=getcapabilities&service=wfs&version=1.0.0";
@@ -263,7 +259,7 @@ function getcapabilities3()
 		{$temp .= $v->nodeValue;}
 		$retorno .= "<br><br><b>T&iacute;tulo: </b>".$temp;
 	}
-	$cp->set_data($retorno);
+	return($retorno);
 }
 /*
 function: temaswms
@@ -274,11 +270,10 @@ parameters:
 
 $servico - Endereço do web service.
 
-$cp - Objeto CPAINT.
 */
 function temaswms()
 {
-	global $servico,$cp,$id_ws;
+	global $servico,$id_ws;
 	$wms_service_request = gravaCacheWMS($servico);
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
@@ -377,7 +372,7 @@ function temaswms()
 	$retorna[] = "<br>Formatos info:<input size=30 id=formatosinfo type=text class=digitar value='".implode(",",wms_formatsinfo($dom))."'/><br><br>";
 	$retorna[] = "<br>Versao:<input size=30 id=versao type=text class=digitar value='".(wms_version($dom))."'/><br><br>";
 	$retorna[] = "<br>Suporta SLD:<input size=30 id=suportasld type=text class=digitar value='".$suporta."'/><br><br><br>";
-	$cp->set_data(implode($retorna));
+	return(implode($retorna));
 }
 /*
 function: listaLayersWMS
@@ -388,15 +383,13 @@ parameters:
 
 $servico - Endereço do web service.
 
-$cp - Objeto CPAINT.
-
 $nivel - nível do layer na hierarquia existente no getcapabilities (string do tipo
 
 $nomelayer - nome do layer que contém os próximos layers
 */
 function listaLayersWMS()
 {
-	global $servico,$cp,$nivel,$id_ws,$nomelayer;
+	global $servico,$nivel,$id_ws,$nomelayer;
 	if(!isset($nomelayer)){$nomelayer = "undefined";}
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once("../admin/php/admin.php");
@@ -468,7 +461,7 @@ function listaLayersWMS()
 			{$res[] = array("nome"=>$r["nome"],"titulo"=>$r["titulo"],"estilos"=>$r["estilos"],"srs"=>wms_srs($dom),"formats"=>wms_formats($dom),"version"=>wms_version($dom),"formatsinfo"=>wms_formatsinfo($dom));}
 		}
 	}
-	$cp->set_data($res);
+	return($res);
 }
 
 function imprimeEstilos($es,$suporta,$retorna,$tval,$tituloalternativo)

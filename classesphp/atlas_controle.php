@@ -80,25 +80,27 @@ if (!isset($atlasxml) || $atlasxml == "")// || !isset($editores))
 //se as extensões já estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais rápido
 //
 include_once("carrega_ext.php");
-include_once("../pacotes/cpaint/cpaint2.inc.php");
+include_once("funcoes_gerais.php");
+//include_once("../pacotes/cpaint/cpaint2.inc.php");
 
 //
 //cria objeto cpaint para uso com ajax
 //
-$cp = new cpaint();
-$cp->set_data("");
+//$cp = new cpaint();
+//$cp->set_data("");
 //
 //verifica se o usuário está tentando utilizar um link que não funciona mais
 //
 if (!isset($map_file))
 {
 	//nesse caso é necessário criar o diretório temporário e iniciar o mapa
-	$cp->set_data("linkquebrado");
-	$cp->return_data();
+	//$cp->set_data("linkquebrado");
+	//$cp->return_data();
+	cpjson(array("erro"=>"linkquebrado"));
 	exit;
 }
 include_once("classe_vermultilayer.php");
-include_once("funcoes_gerais.php");
+
 if ($map_file != "")
 {
 	//
@@ -134,8 +136,7 @@ atlasxml {string} - nome do arquivo xml que contém a lista de atlas (veja em i3g
 	case "pegaListaDeAtlas":
 		include_once("classe_atlas.php");
 		$atl = new Atlas($xml,$atlasxml);
-		$resultado = $atl->pegaListaDeAtlas($tituloInstituicao);
-		$cp->set_data($resultado);
+		$retorno = $atl->pegaListaDeAtlas($tituloInstituicao);
 	break;
 /*
 Opcao: criaAtlas
@@ -186,8 +187,7 @@ atlasId {string} - identificador do atlas
 	case "pegaListaDePranchas":
 		include_once("classe_atlas.php");
 		$atl = new Atlas($xml,$atlasxml);
-		$resultado = $atl->pegaListaDePranchas($atlasId);
-		$cp->set_data($resultado);
+		$retorno = $atl->pegaListaDePranchas($atlasId);
 	break;
 /*
 Opcao: abrePrancha
@@ -205,10 +205,8 @@ pranchaId {string} - identificador da prancha
 	case "abrePrancha":
 		include_once("classe_atlas.php");
 		$atl = new Atlas($xml,$atlasxml);
-		$resultado = $atl->abrePrancha($atlasId,$pranchaId,$map_file,$locaplic);
-		$cp->set_data($resultado);
+		$retorno = $atl->abrePrancha($atlasId,$pranchaId,$map_file,$locaplic);
 	break;
-
 }
 
 if (!connection_aborted())
@@ -217,7 +215,7 @@ if (!connection_aborted())
 	{
 		restauraCon($map_file,$postgis_mapa);
 	}
-	$cp->return_data();
+	cpjson($retorno);
 }
 else
 {exit();}

@@ -1,6 +1,6 @@
 MAP
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\Apache\htdocs\geodados\brasil\limitespol\localidades.shp"
@@ -8,12 +8,16 @@ FONTSET   "../symbols/fontes.txt"
     METADATA
       "CLASSE"	"SIM"
       "palletestep"	""
-      "description_template"	""
+      "permitekmz"	"nao"
       "ITENSDESC"	"Nome,Ano,UF"
+      "description_template"	""
       "palletefile"	""
+      "permitedownload"	"sim"
       "download"	"SIM"
-      "ITENS"	"NOMEMUN,ANOCRIA,ESTADO"
       "arquivodownload"	""
+      "ITENS"	"NOMEMUN,ANOCRIA,ESTADO"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
       "TEMA"	"Teste de pontos"
     END
     NAME "testept"

@@ -96,7 +96,7 @@ Include:
 */
 function fusaoGrafico()
 {
-	global $imagem,$grafico,$dir_tmp,$cp,$map_file;
+	global $imagem,$grafico,$dir_tmp,$map_file;
 	include_once("classe_imagem.php");
 	if($map_file != "")
 	{
@@ -110,7 +110,7 @@ function fusaoGrafico()
 	$m = new Imagem(dirname($dir_tmp).$imagem);
 	$i = $m->fundeIm(dirname($dir_tmp).$grafico);
 	imagepng($i,dirname($dir_tmp).$imagem);
-	$cp->set_data($imagem);
+	return ($imagem);
 }
 /*
 Section: R
@@ -601,7 +601,7 @@ $dir_tmp - Diretório temporário.
 */
 function listaTrueType()
 {
-	global $cp,$locaplic,$imgdir,$dir_tmp;
+	global $locaplic,$imgdir,$dir_tmp;
 	if (!file_exists($dir_tmp."/comum/truetype.inc"))
 	{
 		$arq = $locaplic."/symbols/fontes.txt";
@@ -619,7 +619,7 @@ function listaTrueType()
 	}
 	else
 	{include ($dir_tmp."/comum/truetype.inc");}
-	$cp->set_data($res);
+	return($res);
 }
 /*
 Section: mapa
@@ -724,7 +724,7 @@ Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferencia()
 {
-	global $cp,$nomeImagem,$objMapa,$utilizacgi,$locmapserv,$map_file;
+	global $nomeImagem,$objMapa,$utilizacgi,$locmapserv,$map_file;
 	//
 	//pega a extensao original caso ela tenha sido registrada no modo dinamico
 	//
@@ -750,7 +750,7 @@ function retornaReferencia()
 	$s = "g_celularef = ".$d.";";
 	$s .= "var extentref = '".$em->minx." ".$em->miny." ".$em->maxx." ".$em->maxy."';";
 	$s .=  "var refimagem='".$nomer."';var refwidth=".$objImagem->width.";var refheight=".$objImagem->height.";var refpath='".$objImagem->imagepath."';var refurl='".$objImagem->imageurl."'";
-	$cp->set_data($s);
+	return($s);
 }
 /*
 function: retornaReferenciaDinamica
@@ -777,7 +777,7 @@ Objeto cpaint com uma string contendo variáveis no formato javascript
 */
 function retornaReferenciaDinamica()
 {
-	global $cp,$nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo;
+	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
@@ -844,7 +844,7 @@ function retornaReferenciaDinamica()
 	$r->set("maxx",$emt->maxx);
 	$r->set("maxy",$emt->maxy);
 	$mapa->save($map_file);
-	$cp->set_data($s);
+	return($s);
 }
 /*
 function: testaMapa
@@ -2230,5 +2230,55 @@ function criaDirMapa($dir_tmp)
 	}
 	else
 	{return false;}
+}
+/*
+Function: array2json
+
+Converte um array em uma string no formato JSON. Utiliza as funções nativas do PHP para gerar o objeto.
+
+$cpaint - {boolean} se for true é acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
+*/
+function array2json($a,$cpaint=true)
+{
+	if($cpaint == true)
+	{$a = array("data"=>$a);}
+	return json_encode($a);
+}
+/*
+Function: echojson
+
+Retorna para o navegador uma string (JSON) e para o processamento
+
+$a - string
+*/
+function echojson($a)
+{
+	//ob_clean();
+	if(extension_loaded('zlib'))
+	{ob_start('ob_gzhandler');}
+	header("Content-type: text/html");
+	echo $a;
+	if(extension_loaded('zlib'))
+	{ob_end_flush();}
+	exit;	
+}
+/*
+Function: cpjson
+
+Converte um array em um objeto JSON e retorna para o navegador
+
+$obj - objeto que será convertido
+*/
+function cpjson($obj){
+	if(function_exists("json_encode"))
+	{
+		echojson(array2json($obj));	
+	}
+	else
+	{
+		include_once("../pacotes/cpaint/cpaint2.inc.php");
+		$cp = new cpaint();
+		$cp->set_data($obj);
+	}
 }
 ?>
