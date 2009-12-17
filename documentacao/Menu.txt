@@ -76,7 +76,7 @@ Group: API Javascript  {
       File: Mapa de referência  (classesjs\classe_maparef.js)
       File: Navegação sobre o mapa  (classesjs\classe_navega.js)
       File: PHP  (no auto-title, classesjs\classe_php.js)
-      File: Seleção de elementos  (classesjs\classe_selecao.js)
+      File: Seleção de elementos &lparen;depreciado&rparen;  (classesjs\classe_selecao.js)
       File: Temas  (classesjs\classe_tema.js)
       File: Utilitários  (classesjs\classe_util.js)
       }  # Group: Classes
@@ -180,6 +180,7 @@ Group: Interfaces HTML e mapfiles de inicialização e configuração  {
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
    File: Interface normal  (aplicmap\openlayers.htm)
+   File: Interface normal  (aplicmap\debug.htm)
    File: Interface normal &lparen;para exemplos&rparen;  (no auto-title, aplicmap\meumapa.htm)
    File: Interface simples 1  (aplicmap\simples1.htm)
    File: Interface simples 2  (aplicmap\simples2.htm)
