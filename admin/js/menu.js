@@ -31,6 +31,9 @@ function montaTabela_M(dados)
             {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_menu", formatter:formatTexto},
 			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto, editor:"textbox"},
+			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:"textbox"},
+			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:"textbox"},
+			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:"textbox"},
 			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
 			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox"},
 			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
@@ -40,7 +43,7 @@ function montaTabela_M(dados)
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
         {
-            fields: ["publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
+            fields: ["it","es","en","publicado_menu","perfil_menu","aberto","desc_menu","id_menu","nome_menu"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
@@ -119,8 +122,12 @@ function gravaLinha_M(row)
 	var desc_menu = r.getData("desc_menu")
 	var id_menu = r.getData("id_menu")
 	var nome_menu = r.getData("nome_menu")
+	var en = r.getData("en");
+	var es = r.getData("es");
+	var it = r.getData("it");
+
 	core_carregando("ativa");
-	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"";
+	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"&en="+en+"&es="+es+"&it="+it+"";
 	var mensagem = " gravando registro "+id_menu
 	core_gravaLinha(mensagem,row,sUrl,"pegaMenus_M")
 }

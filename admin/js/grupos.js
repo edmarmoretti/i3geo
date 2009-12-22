@@ -36,13 +36,16 @@ function montaTabela_G(dados)
             {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_grupo", formatter:formatTextoId},
 			{label:"nome",resizeable:true,key:"nome_grupo", formatter:formatTexto, editor:"textbox"},
-			{label:"descrição",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:"textbox"}
+			{label:"descrição",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:"textbox"},
+			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:"textbox"},
+			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:"textbox"},
+			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:"textbox"}
         ];
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
         {
-            fields: ["desc_grupo","id_grupo","nome_grupo"]
+            fields: ["it","es","en","desc_grupo","id_grupo","nome_grupo"]
         };
         myDataTable = new YAHOO.widget.DataTable("tabela", myColumnDefs, myDataSource);
         // Set up editing flow
@@ -112,9 +115,12 @@ function gravaLinha_G(row)
 	var id_grupo = r.getData("id_grupo");
 	var nome_grupo = r.getData("nome_grupo");
 	var desc_grupo = r.getData("desc_grupo");
+	var en = r.getData("en");
+	var es = r.getData("es");
+	var it = r.getData("it");
 	core_carregando("ativa");
 	var mensagem = " gravando registro do id= "+id_grupo;
-	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo;
+	var sUrl = "../php/menutemas.php?funcao=alteraGrupos&nome="+nome_grupo+"&desc="+desc_grupo+"&id="+id_grupo+"&en="+en+"&es="+es+"&it="+it;
 	core_gravaLinha(mensagem,row,sUrl,"pegaGrupos_G")
 }
 function excluiLinha_G(id,row)

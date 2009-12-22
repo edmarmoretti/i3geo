@@ -1,4 +1,18 @@
-Guia de migração do i3Geo para a versão 4.1
+GUIA DE UPDATES
+-------------------------------------------------------------------------------------------------
+Para a versão 4.3
+
+	O banco de dados de administração sofreu as seguintes alterações (vc deve incluir as novas colunas
+	para que o i3Geo funcione corretamente:
+	
+	- acréscimo das colunas en,es,it nas tabelas
+		i3geoadmin_menus
+		i3geoadmin_temas
+		i3geoadmin_grupos
+		i3geoadmin_subgrupos
+
+-------------------------------------------------------------------------------------------------
+Para a versão 4.1
 
 Sistema de administração
 

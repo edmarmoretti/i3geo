@@ -91,7 +91,7 @@ i3GEO.idioma = {
 	Default:
 	{["pt","en","es","it"]}
 	*/
-	SELETORES: ["pt","en","es","it"],
+	SELETORES: ["pt","en","es"], //,"it"],
 	/*
 	Propriedade: DICIONARIO
 	
@@ -287,7 +287,7 @@ i3GEO.idioma = {
 		var ins,n,w,i,pos,novoel;
 		ins = "";
 		n = i3GEO.idioma.SELETORES.length;
-		if(i3GEO.parametros.w < 550)
+		if($i("i3geo") && i3GEO.parametros.w < 550)
 		{w = "width:12px;";}
 		else {w = "";}
 		for(i=0;i<n;i++){

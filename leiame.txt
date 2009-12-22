@@ -7,11 +7,11 @@ Veja:
 
 licenca.txt
 
-
 http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332
 
 Se vc está fazendo um upgrade do i3geo, faça cópia dos diretórios temas, menutemas, aplicmap 
-e dos arquivos ms_configura.php.
+e dos arquivos ms_configura.php. Consulte o documento i3geo/guia_de_migracao.txt para verificar 
+quais cuidados vc deve tomar nos upgrades
 
 ---------
 
@@ -76,7 +76,7 @@ o fórum da comunidade i3geo.
 ---------
 
 A versão 4.1 trouxe várias modificações no modelo de programação em javascript.
-Veja o documento guia_migracao_41.txt para maiores informações.
+Veja o documento guia_de_migracao.txt para maiores informações.
 
 ---------
 

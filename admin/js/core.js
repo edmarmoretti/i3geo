@@ -1162,6 +1162,17 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose)
 	YAHOO.util.Event.addListener(YAHOO.example.container.panelEditor.close, "click", fecha);
 	YAHOO.example.container.panelEditor.show();
 }
+/*
+Function idiomaSel
+
+Retorna o idioma selecionado pesquisando no elemento select com id = "idioma"
+*/
+function idiomaSel(){
+	var idioma = "pt";
+	if($i("idioma"))
+	{idioma = $i("idioma").value;}
+	return idioma;
+}
 function core_abreCor(janela,elemento)
 {
 	i3GEO.janela.cria("420","230px","../../ferramentas/colorpicker/index.htm?doc=&elemento="+elemento,"","","Cor","i3geo_janelaCor",true);

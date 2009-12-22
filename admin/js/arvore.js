@@ -3,18 +3,21 @@ function initMenu()
 {
 	var editorDeMenus = function()
 	{
+		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px","pegaMenus")
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoMenu value="Adicionar um novo menu" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorMenu()
 	};
 	var editorDeGrupos = function()
 	{
+		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px")
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoGrupo value="Adicionar um novo grupo" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorGrupos()
 	};
 	var editorDeSubGrupos = function()
 	{
+		if($i("editor_bd")){return;}
 		core_montaEditor("","600px","500px")
 		$i("editor_bd").innerHTML = '<input type=button id=adicionaNovoSubGrupo value="Adicionar um novo sub-grupo" style="left:-5px;" /><p>Antes de fechar o formulário, salve as alterações feitas.<br><div id="tabela" style="left:-5px;"> </div>'
 		initEditorSubGrupos()
@@ -33,10 +36,11 @@ function pegaMenus()
 	try
 	{YAHOO.util.Event.removeListener(YAHOO.example.container.panelEditor.close, "click");}
 	catch(e){}
-	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus","montaArvore")
+	core_pegaDados("buscando menus...","../php/menutemas.php?funcao=pegaMenus2&idioma="+idiomaSel(),"montaArvore")
 }
 function montaArvore(dados)
 {
+
 	YAHOO.example.treeExample = new function()
 	{
 		var currentIconMode;
@@ -50,7 +54,7 @@ function montaArvore(dados)
 		}
         function loadNodeData(node, fnLoadComplete)
         {
-			var sUrl = "../php/arvore.php?funcao=pegaGrupos&id_menu="+node.data.id_menu;
+			var sUrl = "../php/arvore.php?funcao=pegaGrupos&id_menu="+node.data.id_menu+"&idioma="+idiomaSel();
 			var callback =
 			{
                 success: function(oResponse)
@@ -116,7 +120,7 @@ function montaNosGrupos(idmenu,no,dados,redesenha)
 	}
     function loadSubgruposData(node, fnLoadComplete)
     {
-		var sUrl = "../php/arvore.php?funcao=pegaSubGrupos&id_n1="+node.data.id_n1+"&id_menu="+idmenu;
+		var sUrl = "../php/arvore.php?funcao=pegaSubGrupos&id_n1="+node.data.id_n1+"&id_menu="+idmenu+"&idioma="+idiomaSel();
 		var callback =
 		{
             success: function(oResponse)
@@ -170,7 +174,7 @@ function montaNosSubgrupos(idmenu,no,dados,redesenha)
 {
     function loadTemasData(node, fnLoadComplete)
     {
-		var sUrl = "../php/arvore.php?funcao=pegaTemas&id_n2="+node.data.id_n2;
+		var sUrl = "../php/arvore.php?funcao=pegaTemas&id_n2="+node.data.id_n2+"&idioma="+idiomaSel();
 		var callback =
 		{
             success: function(oResponse)
@@ -308,7 +312,7 @@ function novoTemaRaiz(id)
 	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("id_menu",id)
 	var noEtiquetaGrupo = tree.getNodeByProperty("etiquetaGrupo","menu_"+id)
-	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id;
+	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaiz&id_menu="+id+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
@@ -332,7 +336,7 @@ function novoTemaRaizGrupo(idmenu,id)
 	core_carregando(mensagem);
 	var no = tree.getNodeByProperty("id_n1",id)
 	var noEtiquetaSubGrupo = tree.getNodeByProperty("etiquetaTemasSubGrupo",id)
-	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu;
+	var sUrl = "../php/arvore.php?funcao=adicionarTemaRaizGrupo&id_n1="+id+"&id_menu="+idmenu+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
@@ -358,7 +362,7 @@ function novoGrupo(id_menu)
 	core_carregando("ativa");
 	var mensagem = " adicionando grupo...";
 	core_carregando(mensagem);
-	var sUrl = "../php/arvore.php?funcao=adicionarGrupo&id_menu="+id_menu;
+	var sUrl = "../php/arvore.php?funcao=adicionarGrupo&id_menu="+id_menu+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
@@ -382,7 +386,7 @@ function novoSubGrupo(idmenu,id_n1)
 	core_carregando("ativa");
 	var mensagem = " adicionando Sub-grupo...";
 	core_carregando(mensagem);
-	var sUrl = "../php/arvore.php?funcao=adicionarSubGrupo&id_n1="+id_n1;
+	var sUrl = "../php/arvore.php?funcao=adicionarSubGrupo&id_n1="+id_n1+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
@@ -406,7 +410,7 @@ function novoTema(idmenu,id_n2)
 	core_carregando("ativa");
 	var mensagem = " adicionando tema...";
 	core_carregando(mensagem);
-	var sUrl = "../php/arvore.php?funcao=adicionarTema&id_n2="+id_n2;
+	var sUrl = "../php/arvore.php?funcao=adicionarTema&id_n2="+id_n2+"&idioma="+idiomaSel();
 	var callback =
 	{
     	success: function(oResponse)
@@ -428,23 +432,23 @@ function excluir(tipo,id)
 	if(tipo == "raizgrupo" || tipo == "raizmenu")
 	{
 		var no = tree.getNodeByProperty("id_raiz",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_raiz";
+		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_raiz&idioma="+idiomaSel();
 	}
 
 	if(tipo == "grupo")
 	{
 		var no = tree.getNodeByProperty("id_n1",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n1";
+		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n1&idioma="+idiomaSel();
 	}
 	if(tipo == "subgrupo")
 	{
 		var no = tree.getNodeByProperty("id_n2",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n2";
+		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n2&idioma="+idiomaSel();
 	}
 	if(tipo == "tema")
 	{
 		var no = tree.getNodeByProperty("id_n3",id)
-		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n3";
+		var sUrl = "../php/arvore.php?funcao=excluir&id="+id+"&tabela=i3geoadmin_n3&idioma="+idiomaSel();
 	}
 	core_excluiNoTree(sUrl,no,mensagem)	
 }
@@ -498,13 +502,13 @@ function editar(tipo,id)
 		argument: { foo:"foo", bar:"bar" }
 	}; 
 	if(tipo == "grupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosGrupo&id="+id;}
+	{var sUrl = "../php/arvore.php?funcao=pegaDadosGrupo&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "subgrupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosSubGrupo&id="+id;}
+	{var sUrl = "../php/arvore.php?funcao=pegaDadosSubGrupo&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "tema")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosTema&id="+id;}
+	{var sUrl = "../php/arvore.php?funcao=pegaDadosTema&id="+id+"&idioma="+idiomaSel();}
 	if(tipo == "raizmenu" || tipo == "raizgrupo")
-	{var sUrl = "../php/arvore.php?funcao=pegaDadosRaiz&id="+id;}
+	{var sUrl = "../php/arvore.php?funcao=pegaDadosRaiz&id="+id+"&idioma="+idiomaSel();}
 	core_makeRequest(sUrl,callback)
 }
 function montaDivGrupo(i)
@@ -580,25 +584,25 @@ function gravaDados(tipo,id)
 	{
 		var campos = new Array("id_grupo","n1_perfil","publicado","ordem")
 		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarGrupo"
+		var prog = "../php/arvore.php?funcao=alterarGrupo&idioma="+idiomaSel();
 	}
 	if(tipo == "subgrupo")
 	{
 		var campos = new Array("id_subgrupo","n2_perfil","publicado","ordem")
 		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarSubGrupo"
+		var prog = "../php/arvore.php?funcao=alterarSubGrupo&idioma="+idiomaSel();
 	}
 	if(tipo == "tema")
 	{
 		var campos = new Array("id_tema","n3_perfil","publicado","ordem")
 		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarTema"
+		var prog = "../php/arvore.php?funcao=alterarTema&idioma="+idiomaSel()
 	}
 	if(tipo == "raizmenu" || tipo == "raizgrupo")
 	{
 		var campos = new Array("id_tema","perfil","ordem")
 		var par = "&id="+id
-		var prog = "../php/arvore.php?funcao=alterarRaiz"
+		var prog = "../php/arvore.php?funcao=alterarRaiz&idioma="+idiomaSel()
 	}
 
 	for (i=0;i<campos.length;i++)
@@ -725,7 +729,7 @@ function sobeDesce(movimento,tipo,id)
 	};
 	if(movimenta)
 	{
-		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id;		
+		var sUrl = "../php/arvore.php?funcao=movimentaNo&tipo="+tipo+"&movimento="+movimento+"&id="+id+"&idioma="+idiomaSel();		
 		core_carregando("ativa");
 		core_carregando(" modificando a ordem no banco de dados");
 		core_makeRequest(sUrl,callback)

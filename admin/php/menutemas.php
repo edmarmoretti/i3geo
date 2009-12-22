@@ -30,7 +30,10 @@ File: i3geo/admin/mapfiles.php
 include_once("admin.php");
 if(!isset($funcao))
 {$funcao = "";}
-
+if(!isset($idioma))
+{$idioma = "pt";}
+if($idioma == "")
+{$idioma = "pt";}
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
@@ -48,11 +51,25 @@ switch ($funcao)
 	break;
 	
 	case "pegaMenus":
+	if($idioma == "pt")
+	{$coluna = "nome_tema";}
+	else
+	{$coluna = $idioma;}
 	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
 	retornaJSON($dados);
 	exit;
 	break;
-	
+
+	case "pegaMenus2":
+	if($idioma == "pt")
+	{$coluna = "nome_menu";}
+	else
+	{$coluna = $idioma;}
+	$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu");
+	retornaJSON($dados);
+	exit;
+	break;
+
 	case "pegaTags":
 	$sql = "SELECT * from i3geoadmin_tags order by nome";
 	retornaJSON(pegaDados($sql));
@@ -60,7 +77,12 @@ switch ($funcao)
 	break;
 	
 	case "pegaTagsPorMapfile":
-    $q = pegaDados("select link_tema,tags_tema,codigo_tema,nome_tema from i3geoadmin_temas");
+	if($idioma == "pt")
+	{$coluna = "nome_tema";}
+	else
+	{$coluna = $idioma;}
+
+    $q = pegaDados("select link_tema,tags_tema,codigo_tema,$coluna as nome_tema from i3geoadmin_temas");
     $temas = array();
     $temaExiste = array();
     foreach($q as $row)
@@ -101,7 +123,19 @@ switch ($funcao)
 	break;
 
 	case "pegaGrupos":
-	$dados = pegaDados('SELECT * from i3geoadmin_grupos order by nome_grupo');
+	$nome = "nome_grupo";
+	if($idioma != "pt")
+	{$nome = $idioma;}
+	$dados = pegaDados("SELECT * from i3geoadmin_grupos order by $nome");
+	retornaJSON($dados);
+	exit;
+	break;
+
+	case "pegaGrupos2":
+	$nome = "nome_grupo";
+	if($idioma != "pt")
+	{$nome = $idioma;}
+	$dados = pegaDados("SELECT desc_grupo,id_grupo,$nome as 'nome_grupo' from i3geoadmin_grupos order by $nome");
 	retornaJSON($dados);
 	exit;
 	break;
@@ -115,6 +149,15 @@ switch ($funcao)
 
 	case "pegaSubGrupos":
 	$dados = pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo');
+	retornaJSON($dados);
+	exit;
+	break;
+	
+	case "pegaSubGrupos2":
+	$nome = "nome_subgrupo";
+	if($idioma != "pt")
+	{$nome = $idioma;}
+	$dados = pegaDados("SELECT desc_subgrupo,id_subgrupo,$nome as 'nome_subgrupo' from i3geoadmin_subgrupos order by nome_subgrupo");
 	retornaJSON($dados);
 	exit;
 	break;
@@ -436,7 +479,7 @@ Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
 {
-	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu;
+	global $nome,$desc,$id,$aberto,$perfil,$publicado_menu,$en,$es,$it;
 	try 
 	{
 		$retorna = "";
@@ -448,11 +491,11 @@ function alteraMenus()
 		}
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_menus SET publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
+    		$dbhw->query("UPDATE i3geoadmin_menus SET en = '$en', es = '$es', it = '$it', publicado_menu = '$publicado_menu',aberto = '$aberto', nome_menu = '$nome', desc_menu = '$desc', perfil_menu = '$perfil' WHERE id_menu = $id");
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_menus (publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','', '','SIM','')");
+    		$dbhw->query("INSERT INTO i3geoadmin_menus (it,es,en,publicado_menu, nome_menu, desc_menu, aberto, perfil_menu) VALUES ('','','','','', '','SIM','')");
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -635,7 +678,7 @@ Altera o registro de um grupo. Se id for vazio acrescenta o registro
 */
 function alteraGrupos()
 {
-	global $nome,$desc,$id;
+	global $nome,$desc,$id,$en,$es,$it;
 	try 
 	{
     	include("conexao.php");
@@ -646,11 +689,11 @@ function alteraGrupos()
     	}
     	if($id != "")
     	{
-    		$dbhw->query("UPDATE i3geoadmin_grupos SET nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
+    		$dbhw->query("UPDATE i3geoadmin_grupos SET en = '$en', es = '$es', it = '$it', nome_grupo = '$nome', desc_grupo = '$desc' WHERE id_grupo = $id");
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo) VALUES ('', '')");
+    		$dbhw->query("INSERT INTO i3geoadmin_grupos (nome_grupo, desc_grupo, en, es, it) VALUES ('', '','','','')");
     	}
     	$dbhw = null;
     	$dbh = null;
@@ -668,7 +711,7 @@ Altera o registro de um sub-grupo. Se id for vazio acrescenta o registro
 */
 function alteraSubGrupos()
 {
-	global $nome,$desc,$id;
+	global $nome,$desc,$id,$en,$es,$it;
 	try 
 	{
     	require_once("conexao.php");
@@ -680,11 +723,11 @@ function alteraSubGrupos()
     	$retorna = "";
     	if($id != "")
     	{
-	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
+	    	$dbhw->query("UPDATE i3geoadmin_subgrupos SET en = '$en', es = '$es', it = '$it', nome_subgrupo = '$nome', desc_subgrupo = '$desc' WHERE id_subgrupo = $id");
     	}
     	else
     	{
-    		$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo) VALUES ('', '')");
+    		$dbhw->query("INSERT INTO i3geoadmin_subgrupos (nome_subgrupo, desc_subgrupo, en, es, it) VALUES ('', '','','','')");
     	}
     	$dbhw = null;
     	$dbh = null;

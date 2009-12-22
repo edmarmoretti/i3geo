@@ -62,8 +62,10 @@ $menutemas - (opcional) array contendo a lista de menus para compor a árvore de 
 $urli3geo - (opcional) url onde está o i3geo (p.ex. http://localhost/i3geo
 
 $editores - (opcional) array com os editores cadastrados no ms_configura.php
+
+$idioma - (opcional) pt|en|es|it
 */  	
-	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="")
+	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="",$idioma="pt")
 	{
 		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
@@ -73,6 +75,7 @@ $editores - (opcional) array com os editores cadastrados no ms_configura.php
 		$this->locaplic = $locaplic;
 		$this->menutemas = $menutemas;
 		$this->urli3geo = $urli3geo;
+		$this->idioma = $idioma;
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
@@ -120,7 +123,7 @@ array
 			if(!isset($this->locaplic))
 			{return "locaplic nao foi definido";}
 			include_once($this->locaplic."/admin/php/classe_arvore.php");
-			$arvore = new Arvore($this->locaplic);
+			$arvore = new Arvore($this->locaplic,$this->idioma);
 			$resultado = $arvore->pegaListaDeMenus($this->perfil);
 			unset($arvore);
 		}
@@ -182,7 +185,7 @@ array
 				else //pega o xml do sistema de administração
 				{
 					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic);
+					$arvore = new Arvore($this->locaplic,$this->idioma);
 					$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos);
 					unset($arvore);
 				}
@@ -360,7 +363,7 @@ array
 					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));
 					//echo geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic);exit;	
 					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic);
+					$arvore = new Arvore($this->locaplic,$this->idioma);
 					$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
 					unset($arvore);
 					return($subGrupos);
@@ -476,7 +479,7 @@ array
 				{
 					//$this->xml = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$idmenu,$tipo,$this->locaplic));	
 					include_once("../admin/php/classe_arvore.php");
-					$arvore = new Arvore($this->locaplic);
+					$arvore = new Arvore($this->locaplic,$this->idioma);
 					$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
 					unset($arvore);
 					return($temas);
@@ -681,7 +684,7 @@ $procurar - String que será procurada.
 		{
 				//$this->xml[] = simplexml_load_string(geraXmlMenutemas(implode(" ",$this->perfil),$menu["idmenu"],$tipo,$this->locaplic));	
 				include_once("../admin/php/classe_arvore.php");
-				$arvore = new Arvore($this->locaplic);
+				$arvore = new Arvore($this->locaplic,$this->idioma);
 				$temas = $arvore->procuraTemas($procurar,$this->perfil);
 				unset($arvore);
 				return($temas);

@@ -13,16 +13,19 @@ P
 #banner
 {position:absolute;top:0px;left:0px;}
 #arvoreTemas
-{overflow:auto;height:400px;width:270px;left:10px;top:120px;position:absolute;}
+{overflow:auto;height:400px;width:270px;left:10px;top:135px;position:absolute;}
 #arvoreDir
-{text-align:left;overflow:auto;height:120px;top:10px;width:280px;left:10px;position:absolute;}
+{text-align:left;overflow:auto;height:120px;top:35px;width:280px;left:10px;position:absolute;}
 #corpo
 {text-align:left;font-size:12px;width:480px;position:absolute;top:20px;left:285px;background:rgb(250,250,250);}
+#bandeiras
+{width:80px;position:absolute;top:25px;left:2px;}
 </style>
 </head>
-<body id='i3geo' class="yui-skin-sam" style="background-color:white">
+<body class="yui-skin-sam" style="background-color:white">
 
 <div id=banner ><img src="imagens/barrasuperior_geradordelinks_2006.jpg" width="765" ></div>
+<div id="bandeiras" ></div>
 <!-- aqui vão os links para download -->
 <div id=arvoreDir >
 	<div id=RSSl style="height:100px;overflow:auto;width:230px;text-align:left" ></div>
@@ -83,7 +86,9 @@ A lista dos endereços é mostrada como links, colocados antes da lista de temas p
 
 Se o array estiver vazio, será utilizado o default, baseado no sistema de administração do i3geo.
 */
-g_RSSl = new Array("")
+g_RSSl = new Array("");
+i3GEO.idioma.IDSELETOR = "bandeiras";
+i3GEO.idioma.mostraSeletor();
 DDinicia()
 </script>
 </html>

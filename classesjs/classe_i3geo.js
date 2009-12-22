@@ -38,7 +38,7 @@ utilize i3GEO.janela.cria()
 
 Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa, utilize i3GEO.atualiza().
 Após terminado o processo de inicialização, pode-se executar uma função de ajuste. Essa função
-deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza("funcaoDeAjuste()")
+deve ser definida em i3GEO.finaliza, por exemplo i3GEO.finaliza = "funcaoDeAjuste()"
 
 Ao inicializar ou atualizar o i3Geo, é feita uma chamada em AJAX 
 para a obtenção dos parâmetros necessários ao funcionamento do mapa. Esses parâmetros

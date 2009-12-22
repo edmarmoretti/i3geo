@@ -310,7 +310,9 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 /*
 function: selecaoAtributos
 
-Seleção simples por atributo. Não permite composição de atributos.
+Seleção simples por atributo. Não permite composição de atributos, porém, se valor for igual a vazio "",
+a string existente em "operador" será incluida como está no filtro. Para que isso funcione, a string
+deve estar no padrão utilizado pelo mapserver.
 
 parameters:
 
@@ -329,8 +331,11 @@ $valor - Valor.
 		if ($tipo == "inverte")
 		{return($this->selecaoInverte());}
 		if(!$this->layer){return "erro";}
-		$operador = explode(",",$operador);
-		$operador = $operador[1];
+		if($valor != "")
+		{
+			$operador = explode(",",$operador);
+			$operador = $operador[1];
+		}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		if (file_exists(($this->arquivo)."qy"))
@@ -345,13 +350,25 @@ $valor - Valor.
 		$this->mapa->freequery($indxlayer);
 		$shpi = array();
 		if($this->layer->connectiontype == MS_POSTGIS)
-		{$this->layer->querybyattributes($item,$item." ".$operador." '".$valor."' ",1);}
+		{
+			if($valor != "")
+			{$this->layer->querybyattributes($item,$item." ".$operador." '".$valor."' ",1);}
+			else
+			{$this->layer->querybyattributes($item,$operador,1);}
+		}
 		else
 		{		
-			if(!is_numeric($valor))
-			{$this->layer->querybyattributes($item,'("['.$item.']"'.$operador.'"'.$valor.'")',1);}
+			if($valor != "")
+			{
+				if(!is_numeric($valor))
+				{$this->layer->querybyattributes($item,'("['.$item.']"'.$operador.'"'.$valor.'")',1);}
+				else
+				{$this->layer->querybyattributes($item,'(['.$item.']'.$operador.' '.$valor.' )',1);}
+			}
 			else
-			{$this->layer->querybyattributes($item,'(['.$item.']'.$operador.' '.$valor.' )',1);}
+			{
+				$this->layer->querybyattributes($item,$operador,1);
+			}			
 		}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();

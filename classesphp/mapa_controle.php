@@ -1654,7 +1654,7 @@ Parametros:
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		$retorno = $m->pegaListaDeMenus();
 	break;
 /*
@@ -1684,7 +1684,7 @@ Include:
 		}
 		include_once("classe_menutemas.php");
 		if(!isset($urli3geo)){$urli3geo = "";}
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu="";}
 		if(!isset($listasistemas)){$listasistemas="nao";}
 		if(!isset($listasgrupos)){$listasgrupos="nao";}
@@ -1704,7 +1704,7 @@ Pega a lista de sistemas.
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,"","",$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,"","",$editores,$idioma);
 		$retorno = $m->pegaSistemas();
 	break;
 
@@ -1725,7 +1725,7 @@ Include:
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu = "";}
 		$retorno = $m->pegaListaDeSubGrupos($grupo,$idmenu);
 	break;
@@ -1746,7 +1746,7 @@ Include:
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu = "";}
 		$retorno = array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu));
 	break;
@@ -1767,7 +1767,7 @@ Include:
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas($procurar);
 	break;
 /*
@@ -1789,7 +1789,7 @@ Include:
 			else
 			{include_once($locaplic."/ms_configura.php");}
 		}
-		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo);
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$idioma);
 		$retorno = $m->pegaListaDeMapas($locmapas);
 	break;	
 /*

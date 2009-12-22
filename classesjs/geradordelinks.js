@@ -65,8 +65,8 @@ for (var i = 0; i < scripts.length; i++) {
 }
 var allScriptTags = "";
 var jsfiles = []
-jsfiles[0] = "i3geo_tudo_compacto.js.php"
-jsfiles[1] = "../pacotes/openlayers/OpenLayers.js"
+//jsfiles[0] = "i3geo_tudo_compacto.js.php"
+jsfiles[0] = "../pacotes/openlayers/OpenLayers.js"
 for (var i = 0; i < jsfiles.length; i++)
 {
 	var currentScriptTag = "<script src='" + scriptLocation + jsfiles[i] + "'></script>";

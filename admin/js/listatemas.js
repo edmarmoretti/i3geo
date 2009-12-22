@@ -57,7 +57,10 @@ function montaDivTemas(i)
 {
 	var param = {
 		"linhas":[
-		{titulo:"Nome que será mostrado na árvore de menus:",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""}
+		{titulo:"Nome que será mostrado na árvore de menus (português):",id:"nome_tema",size:"50",value:i.nome_tema,tipo:"text",div:""},
+		{titulo:"Inglês:",id:"en",size:"50",value:i.en,tipo:"text",div:""},
+		{titulo:"Espanhol:",id:"es",size:"50",value:i.es,tipo:"text",div:""},
+		{titulo:"Italiano:",id:"it",size:"50",value:i.it,tipo:"text",div:""}
 		]
 	}
 	var ins = ""
@@ -124,6 +127,12 @@ function gravaDadosTema(id)
 	{
 		if($i(campos[i]+"_tema"))
 		par += "&"+campos[i]+"="+($i(campos[i]+"_tema").value)
+	}
+	var campos = new Array("en","es","it")
+	for (i=0;i<campos.length;i++)
+	{
+		if($i(campos[i]))
+		par += "&"+campos[i]+"="+($i(campos[i]).value)
 	}
 	par += "&id="+id
 	core_carregando("ativa");

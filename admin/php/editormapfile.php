@@ -261,7 +261,7 @@ function sobeDesce()
 }
 function criarNovoMap()
 {
-	global $nome,$codigo,$locaplic;
+	global $nome,$codigo,$locaplic,$it,$en,$es;
 	$arq = $locaplic."/temas/".$codigo.".map";
 	if(!file_exists($arq))
 	{
@@ -290,7 +290,7 @@ function criarNovoMap()
 			fwrite($fp,$dado."\n");
 		}
     	require_once("conexao.php");
-    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema) VALUES ('','','', '','','','','','$nome','$codigo')");
+    	$dbhw->query("INSERT INTO i3geoadmin_temas (link_tema,kml_tema,kmz_tema,ogc_tema,download_tema,desc_tema,tipoa_tema,tags_tema,nome_tema,codigo_tema,it,es,en) VALUES ('','','', '','','','','','$nome','$codigo','$it','$es','$en')");
     	$dbh = null;
     	$dbhw = null;
 		return "ok";

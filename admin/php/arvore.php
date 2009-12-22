@@ -28,13 +28,17 @@ File: i3geo/admin/arvore.php
 
 */
 require_once("admin.php");
+if(!isset($idioma))
+{$idioma = "pt";}
+if($idioma == "")
+{$idioma = "pt";}
 error_reporting(0);
 //faz a busca da função que deve ser executada
 switch ($funcao)
 {
 	case "pegaGrupos":
 		require_once("classe_arvore.php");
-		$arvore = new Arvore($locaplic);
+		$arvore = new Arvore($locaplic,$idioma);
 		$grupos = $arvore->pegaGruposMenu($id_menu);
 		unset($arvore);
 		retornaJSON($grupos);
@@ -42,7 +46,7 @@ switch ($funcao)
 	break;
 	case "pegaSubGrupos":
 		require_once("classe_arvore.php");
-		$arvore = new Arvore($locaplic);
+		$arvore = new Arvore($locaplic,$idioma);
 		$sgrupos = $arvore->pegaSubgruposGrupo($id_menu,$id_n1);
 		unset($arvore);
 		retornaJSON($sgrupos);
@@ -50,7 +54,7 @@ switch ($funcao)
 	break;
 	case "pegaTemas":
 		require_once("classe_arvore.php");
-		$arvore = new Arvore($locaplic);
+		$arvore = new Arvore($locaplic,$idioma);
 		$temas = $arvore->pegaTemasSubGrupo($id_n2);
 		unset($arvore);
 		retornaJSON($temas);
@@ -81,7 +85,11 @@ switch ($funcao)
 		$id_nivel = 0;
 		$nivel = 0;
 		$id_raiz = alterarRaiz();
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		if($idioma == "pt")
+		{$coluna = "nome_tema";}
+		else
+		{$coluna = $idioma;}
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 	break;
@@ -91,7 +99,11 @@ switch ($funcao)
 		$id_nivel = $id_n1;
 		$nivel = 1;
 		$id_raiz = alterarRaiz();
-		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
+		if($idioma == "pt")
+		{$coluna = "nome_tema";}
+		else
+		{$coluna = $idioma;}		
+		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 	break;	
@@ -99,7 +111,11 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n1 = alteraN1();
-		$grupos = pegaDados("select i3geoadmin_grupos.nome_grupo,id_n1,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
+		if($idioma == "pt")
+		{$coluna = "nome_grupo";}
+		else
+		{$coluna = $idioma;}
+		$grupos = pegaDados("select i3geoadmin_grupos.$coluna as nome_grupo,id_n1,i3geoadmin_n1.publicado from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_menu='$id_menu' and id_n1 = '$id_n1'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
@@ -108,7 +124,11 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n2 = alteraN2();
-		$subgrupos = pegaDados("select i3geoadmin_subgrupos.nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
+		if($idioma == "pt")
+		{$coluna = "nome_subgrupo";}
+		else
+		{$coluna = $idioma;}
+		$subgrupos = pegaDados("select i3geoadmin_subgrupos.$coluna as nome_subgrupo,i3geoadmin_n2.id_n2,i3geoadmin_n2.publicado from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where i3geoadmin_n2.id_n2='$id_n2'");
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
@@ -117,7 +137,11 @@ switch ($funcao)
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n3 = alteraN3();
-		$temas = pegaDados("select i3geoadmin_temas.nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
+		if($idioma == "pt")
+		{$coluna = "nome_tema";}
+		else
+		{$coluna = $idioma;}
+		$temas = pegaDados("select i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.id_n3,i3geoadmin_n3.publicado from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where i3geoadmin_n3.id_n3='$id_n3'");
 		$raiz = array();
 		retornaJSON($temas);
 		exit;

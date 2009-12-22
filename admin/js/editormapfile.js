@@ -112,7 +112,14 @@ function ativaBotaoAdicionaMapfile(idBotao)
 	{
 		core_montaEditor("adicionaNovoMapfile()")
 		ins = "<p>Título do novo tema: </p>"
+		ins += "<p>Português: </p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>"
+		ins += "<p>Espanhol:: </p>";
+		ins += "<input size=50 type=text id='EtituloES' value='' /></p>"
+		ins += "<p>Inglês: </p>";
+		ins += "<input size=50 type=text id='EtituloEN' value='' /></p>"
+		ins += "<p>Italiano: </p>";
+		ins += "<input size=50 type=text id='EtituloIT' value='' /></p>"
 		ins += "<p>Nome do arquivo mapfile (sem .map): </p>"
 		ins += "<input size=50 type=text id='Ecodigo' value='' /></p>"
 		$i("editor_bd").innerHTML = ins
@@ -409,8 +416,11 @@ function adicionaNovoMapfile()
 	core_carregando("ativa");
 	core_carregando(" adicionando um novo mapfile");
 	var nome = $i("Etitulo").value
+	var it = $i("EtituloIT").value
+	var es = $i("EtituloES").value
+	var en = $i("EtituloEN").value
 	var codigo = $i("Ecodigo").value
-	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo
+	sUrl = "../php/editormapfile.php?funcao=criarNovoMap&nome="+nome+"&codigo="+codigo+"&it="+it+"&en="+en+"&es="+es
 	var callback =
 	{
 		success:function(o)
