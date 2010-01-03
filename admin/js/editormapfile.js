@@ -800,6 +800,8 @@ function montaEditorMetadados(dados)
 		titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
 		{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
 		titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
+		{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
+		titulo:"Permite editar SQL (EDITORSQL)",id:"",value:dados.editorsql,tipo:"text",div:"<div id=cEditorsql ></div>"},
 		{ajuda:"Indica se o usuário pode fazer download do tema",
 		titulo:"Download (DOWNLOAD)",id:"",value:dados.download,tipo:"text",div:"<div id=cDownload ></div>"},
 		{ajuda:"Endereço de um arquivo para download dos dados (caminho completo no servidor). Se definido, o sistema irá usar esse arquivo ao invés de gerar os dados, quando o usuário clicar nas opções de download. Se não for definido, o arquivo de download é gerado diretamente do original, convertendo do banco ou copiando o arquivo definido em DATA.",
@@ -853,6 +855,10 @@ function montaEditorMetadados(dados)
 	temp += core_combosimnao(dados.aplicaextensao)
 	temp += "</select>"
 	$i("cAplicaextensao").innerHTML = temp
+	temp = "<select id='editorsql' >"
+	temp += core_combosimnao(dados.editorsql)
+	temp += "</select>"
+	$i("cEditorsql").innerHTML = temp
 	temp = "<select id='download' >"
 	temp += core_combosimnao(dados.download)
 	temp += "</select>"
@@ -1172,8 +1178,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-				
-		var campos = new Array("description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}

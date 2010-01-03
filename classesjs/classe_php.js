@@ -1160,7 +1160,7 @@ i3GEO.php = {
 	Function: criatemasel
 
 	PHP:
-	classesphp/selecao.php
+	classesphp/classe_selecao.php
 	
 	<Selecao->criatemaSel>	
 	*/
@@ -1168,6 +1168,32 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criatemasel&tema="+tema+"&nome=Novo tema "+tema;
 		cpJSON.call(p,"chavegoogle",funcao);	
+	},
+	/*
+	Function: pegaData
+
+	PHP:
+	classesphp/classe_tema.php
+	
+	<Tema->pegadata>	
+	*/
+	pegaData: function(funcao,tema){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegadata&tema="+tema;
+		cpJSON.call(p,"pegadata",funcao);	
+	},
+	/*
+	Function: alteraData
+
+	PHP:
+	classesphp/classe_tema.php
+	
+	<Tema->alteradata>	
+	*/
+	alteraData: function(funcao,tema,data){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=alteradata&tema="+tema+"&novodata="+data;
+		cpJSON.call(p,"alteradata",funcao);	
 	}
 };
 //incluisel - tabela

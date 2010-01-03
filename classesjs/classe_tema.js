@@ -417,11 +417,11 @@ i3GEO.tema = {
 
 		Parametros:
 
-		idtema - id ue identifica o tema no map file.
+		idtema - id que identifica o tema no map file.
 		*/
 		download: function(idtema){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.download()");}
-			if(typeof(i3GEOF.busca) === 'undefined'){
+			if(typeof(i3GEOF.download) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/download/index.js.php";
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.scriptTag(js,"i3GEOF.download.criaJanelaFlutuante('"+idtema+"')","i3GEOF.download_script");
@@ -439,7 +439,24 @@ i3GEO.tema = {
 		idtema - id ue identifica o tema no map file.
 		*/
 		sld: function(idtema)
-		{i3GEO.janela.cria("500px","350px",i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+idtema+"&g_sid="+i3GEO.configura.sid,"","","SLD <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");}
+		{i3GEO.janela.cria("500px","350px",i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+idtema+"&g_sid="+i3GEO.configura.sid,"","","SLD <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");},
+		/*
+		Function: editorsql
+
+		Abre a janela que permite editar o sql de acesso aos dados utilizado no layer
+
+		Parametros:
+
+		idtema - id que identifica o tema no map file.
+		*/
+		editorsql: function(idtema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.editorsql()");}
+			if(typeof(i3GEOF.editorsql) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/editorsql/index.js.php";
+				i3GEO.mapa.ativaTema(idtema);
+				i3GEO.util.scriptTag(js,"i3GEOF.editorsql.criaJanelaFlutuante('"+idtema+"')","i3GEOF.editorsql_script");
+			}		
+		}
 	}
 };
 //YAHOO.log("carregou classe tema", "Classes i3geo");

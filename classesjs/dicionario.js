@@ -666,7 +666,7 @@ it:"Grafico"
 "t38":[
 {
 pt:"Exporta a legenda para o padrão SLD.",
-en:"Exporta a legenda para o padrão SLD.",
+en:"Export the legend to SLD.",
 es:"Exporta a legenda para o padrão SLD.",
 it:"Exporta a legenda para o padrão SLD."
 }],
@@ -676,6 +676,20 @@ pt:"SLD...",
 en:"SLD...",
 es:"SLD...",
 it:"SLD..."
+}],
+"t40":[
+{
+pt:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
+en:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
+es:"Abre a ferramenta que permite alterar o SQL de acesso aos dados",
+it:"Abre a ferramenta que permite alterar o SQL de acesso aos dados"
+}],
+"t41":[
+{
+pt:"SQL...",
+en:"SQL...",
+es:"SQL...",
+it:"SQL..."
 }],
 //guia adiciona
 "a1":[

@@ -227,7 +227,9 @@ i3GEO.arvoreDeCamadas = {
 			
 			"contextoescala":"nao",
 			
-			"etiquetas":""
+			"etiquetas":"",
+			
+			"editorsql":"sim"
 			
 		}
 	]
@@ -707,9 +709,11 @@ i3GEO.arvoreDeCamadas = {
 		}
 		if(i3GEO.Interface.ATUAL === "padrao"){
 			i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t34"),$trad("t35"),'i3GEO.navega.destacaTema.inicia(\"'+ltema.name+'\")',node);
-		}
-		
+		}	
 		i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t38"),$trad("t39"),'i3GEO.tema.dialogo.sld(\"'+ltema.name+'\")',node);
+		if(ltema.editorsql == "sim" || ltema.editorsql == "SIM")
+		{i3GEO.arvoreDeCamadas.adicionaOpcaoTema($trad("t40"),$trad("t41"),'i3GEO.tema.dialogo.editorsql(\"'+ltema.name+'\")',node);}
+
 		node.loadComplete();
 
 		//YAHOO.log("Opções OK", "i3geo");

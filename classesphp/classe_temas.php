@@ -966,5 +966,41 @@ Retorna o SLD correspondente à legenda do tema.
 		if(!$this->layer){return "erro";}
 		return $this->layer->generateSLD();
 	}
+/*
+function: pegadata
+
+Retorna o valor do elemento DATA
+*/
+	function pegadata()
+	{
+		if(!$this->layer){return "erro";}
+		$metadata = $this->layer->getmetadata("editorsql");
+		if(strtolower($metadata) != "nao")
+		return $this->layer->data;
+		else
+		return "O layer não permite a alteracao do elemento DATA";
+	}
+/*
+function: alteradata
+
+Altera o valor do elemento DATA
+*/
+	function alteradata($data)
+	{
+		if(!$this->layer){return "erro";}
+		$data = str_ireplace("delete","",$data);
+		$data = str_ireplace("insert","",$data);
+		$data = str_ireplace("update","",$data);
+		$data = str_ireplace("create","",$data);
+		$data = str_ireplace("alter","",$data);
+		$metadata = $this->layer->getmetadata("editorsql");
+		if(strtolower($metadata) != "nao")
+		{
+			$this->layer->set("data",$data);
+			return $data;
+		}
+		else
+		return "O layer não permite a alteracao do elemento DATA";
+	}
 }
 ?>

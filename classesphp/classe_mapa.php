@@ -187,6 +187,16 @@ string - javascript com os parametros
 				$contextoescala = "nao";
 				if(($oLayer->minscaledenom > 0) || ($oLayer->maxscaledenom > 0))
 				{$contextoescala = "sim";}
+				//
+				//verifica se o usuário pode editar o SQL em DATA
+				//
+				$editorsql = "nao";
+				if($ct == 3 || $ct == 4 || $ct == 6 || $ct == 8)
+				{
+					if (strtoupper($oLayer->getmetadata("editorsql")) != "NAO")
+					{$editorsql = "sim";}
+				}
+				
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -201,7 +211,8 @@ string - javascript com os parametros
 					"zoomtema"=>$zoomtema,
 					"contextoescala"=>$contextoescala,
 					"etiquetas"=>($oLayer->getmetadata("TIP")),
-					"identifica"=>($oLayer->getmetadata("IDENTIFICA"))
+					"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
+					"editorsql"=>$editorsql
 				);
 			}
 		}

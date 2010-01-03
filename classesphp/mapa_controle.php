@@ -326,6 +326,33 @@ Include:
 		$retorno = $m->capturaGeometrias($dir_tmp,$imgdir,$nome);
 	break;
 /*
+Property: pegadata
+
+Obtém o valor definido no elemento DATA de um LAYER.
+
+Include:
+<classe_temas.php>
+*/	
+	case "pegadata":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$retorno = $m->pegadata();
+	break;
+/*
+Property: alteradata
+
+Altera o valor definido no elemento DATA de um LAYER.
+
+Include:
+<classe_temas.php>
+*/	
+	case "alteradata":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$retorno = $m->alteradata($novodata);
+		$m->salva();
+	break;
+/*
 Property: removergeometrias
 
 Remove geometrias do diretório temporário.

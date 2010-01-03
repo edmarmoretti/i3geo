@@ -726,6 +726,14 @@ g_traducao_ajuda = {
 			pt:"Abre uma janela flutuante que mostra imagens miniatura de cada tema existente na árvore de temas. O usuário pode clicar em uma das imagens para adicionar o tema ao mapa atual.",
 			complemento:"As miniaturas devem existir previamente para aparecerem nessa ferramenta. Para gerar as miniaturas, o administrador do i3Geo pode usar o sistema de administração.",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.carouselTemas()"
+		},
+		"86": {
+			titulo: "Editor SQL",
+			diretorio:"i3geo/ferramentas/editorsql",
+			categoria:"5",
+			pt:"Permite modificar o SQL utilizado para compor os dados referentes ao tema. Apenas temas baseados em bancos de dados podem utilizar essa função, sendo que o administrador do i3Geo pode bloqueá-la utilizando do sistema de administração. As funções SQL de modificação de dados não são suportadas (UPDATE, INSERT, DELETE, etc.)",
+			complemento:"O Mapserver utiliza uma expressão na linguagem SQL para definir os dados que irão compor um tema. A edição do SQL possibilita o uso de expressões customizadas, baseadas na sintaxe SQL que o banco de dados utilizado suportar. A janela de diálogo permite ainda listar as colunas disponíveis bem como os dados de cada coluna, facilitando a definição do novo SQL.",
+			apijs:"i3GEO.arvoreDeTemas.dialogo.editorsql()"
 		}
 	}
 };

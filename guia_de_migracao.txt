@@ -10,6 +10,12 @@ Para a versão 4.3
 		i3geoadmin_temas
 		i3geoadmin_grupos
 		i3geoadmin_subgrupos
+		
+	Foi incluida uma nova opção que permite ao usuário alterar o SQL que faz o acesso aos dados em
+	um LAYER (elemento DATA do mapfile). Mostrar ou não essa opção é controlado por um metadata
+	em cada LAYER. Por default, o i3Geo entende que esse metadata é marcado como SIM. Se vc não quer
+	que o usuário possa acessar essa funcionalidade, utilize o sistema de administração para editar
+	esse metadata de cada LAYER presente em um mapfile ou então, inclua o metadata "editorsql" "nao".
 
 -------------------------------------------------------------------------------------------------
 Para a versão 4.1
