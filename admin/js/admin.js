@@ -27,6 +27,7 @@ Free Software Foundation, Inc., no endereço
 */
 //variáveis globais
 navn = false;
+navm = false;
 //seta as variáveis navn e navm
 var app = navigator.appName.substring(0,1);
 if (app==='N'){navn=true;}else{navm=true;}
