@@ -26,11 +26,11 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesFundo
+Class: i3GEOF.editorsql
 
 Altera as propriedades do fundo do mapa.
 */
-i3GEOF.opcoesFundo = {
+i3GEOF.editorsql = {
 	/*
 	Variavel: aguarde
 	
@@ -48,21 +48,34 @@ i3GEOF.opcoesFundo = {
 	*/
 	inicia: function(iddiv){
 		try{
-			i3GEOF.opcoesFundo.aguarde.visibility = "visible";
-			$i(iddiv).innerHTML += i3GEOF.opcoesFundo.html();
+			$i(iddiv).innerHTML = i3GEOF.editorsql.html();
 			new YAHOO.widget.Button(
-				"i3GEOopcoesFundobotao1",
-				{onclick:{fn: i3GEOF.opcoesFundo.executa}}
+				"i3GEOeditorsqlbotao1",
+				{onclick:{fn: i3GEOF.editorsql.altera}}
 			);
-			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegacorfundo",
-				cp = new cpaint(),
-				retorno = function(retorno){
-					i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
-					if(retorno.data.erro){alert("Ocorreu um erro");return;}
-					$i("i3GEOopcoesFundocor").value = retorno.data;
-				};
-			cp.set_response_type("JSON");
-			cp.call(p,"corQM",retorno);
+			i3GEOF.editorsql.pega();
+			
+			i3GEO.util.comboItens(
+				"i3GEOeditorsqlItem",
+				i3GEO.temaAtivo,
+				function(retorno){
+			 		$i("i3GEOeditorsqlDivItem").innerHTML = retorno.dados;
+			 		$i("i3GEOeditorsqlItem").onchange = function(){
+						i3GEO.util.comboValoresItem(
+							"i3GEOeditorsqlitens",
+							i3GEO.temaAtivo,
+							$i("i3GEOeditorsqlItem").value,
+							function(retorno){
+								$i("i3GEOeditorsqlvalores").innerHTML = "<p class=paragrafo >Valores encontrados:<br><br>"+retorno.dados+"</p>";
+							},
+							"i3GEOeditorsqlvalores"
+						);
+			 		
+			 		};
+				},
+				"i3GEOeditorsqlDivItem"
+			);
+
 		}
 		catch(erro){alert(erro);}
 	},
@@ -76,10 +89,12 @@ i3GEOF.opcoesFundo = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = $inputText("","","i3GEOopcoesFundocor","",12,"") +
-		'<img alt="aquarela.gif" style=cursor:pointer '+
-		'src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.opcoesFundo.corj(\'i3GEOopcoesFundocor\')" /> ' +
-		'<br><br><p class=paragrafo ><input size=20 id=i3GEOopcoesFundobotao1 type=button value="Aplica"  />';
+		var ins = "<textarea rows='4' colums='20' cols='38' id=i3GEOeditorsqlSQL ></textarea>" +
+			'<br><br><p class=paragrafo ><input size=20 id=i3GEOeditorsqlbotao1 type=button value="Aplica"  />' +
+			'<br><br><a class=paragrafo href="http://postgis.refractions.net/documentation/manual-1.4/ch07.html" target=_blank >Veja aqui o manual de funções SQL do Postgis</a>' +
+			'<br><p class=paragrafo >Lista de itens existentes na tabela de atributos do tema (escolha um para ver os valores):</p>' +
+			'<div class=paragrafo id=i3GEOeditorsqlDivItem ></div>' +
+			'<div class=paragrafo id=i3GEOeditorsqlvalores ></div>';
 		return ins;
 	},
 	/*
@@ -88,57 +103,55 @@ i3GEOF.opcoesFundo = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/	
 	criaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.opcoesFundo");
-		};
+		var janela,divid,temp,titulo;
 		//cria a janela flutuante
-		titulo = "Cor do fundo <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=6' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Altera SQL <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
-			"80px",
+			"300px",
+			"260px",
 			"",
 			"",
 			"",
 			titulo,
-			"i3GEOF.opcoesFundo",
-			false,
-			"hd",
-			cabecalho,
-			minimiza
+			"i3GEOF.editorsql",
+			true,
+			"hd"
 		);
 		divid = janela[2].id;
-		$i("i3GEOF.opcoesFundo_corpo").style.backgroundColor = "white";
-		$i("i3GEOF.opcoesFundo_corpo").style.textAlign = "left";
-		i3GEOF.opcoesFundo.aguarde = $i("i3GEOF.opcoesFundo_imagemCabecalho").style;
-		i3GEOF.opcoesFundo.inicia(divid);
+		$i("i3GEOF.editorsql_corpo").style.backgroundColor = "white";
+		$i("i3GEOF.editorsql_corpo").style.textAlign = "left";
+		i3GEOF.editorsql.aguarde = $i("i3GEOF.editorsql_imagemCabecalho").style;
+		i3GEOF.editorsql.inicia(divid);
 	},
 	/*
-	Function: corj
+	Function: pega
 	
-	Abre a janela para o usuário selecionar uma cor interativamente
+	Pega o SQL
 	*/
-	corj: function(obj)
-	{i3GEO.util.abreCor("",obj);},
-	/*
-	Function: executa
-	
-	Insere a grade no mapa
-	*/
-	executa: function(){
-		if(i3GEOF.opcoesFundo.aguarde.visibility === "visible")
+	pega: function(){
+		if(i3GEOF.editorsql.aguarde.visibility === "visible")
 		{return;}
-		i3GEOF.opcoesFundo.aguarde.visibility = "visible";
+		i3GEOF.editorsql.aguarde.visibility = "visible";
+		var temp = function(retorno){
+			i3GEOF.editorsql.aguarde.visibility = "hidden";
+			$i("i3GEOeditorsqlSQL").innerHTML = retorno.data;
+		};
+		i3GEO.php.pegaData(temp,i3GEO.temaAtivo);
+	},
+	/*
+	Function: altera
+	
+	Altera o SQL
+	*/
+	altera: function(){
+		if(i3GEOF.editorsql.aguarde.visibility === "visible")
+		{return;}
+		i3GEOF.editorsql.aguarde.visibility = "visible";
 		var temp = function(){
-				i3GEOF.opcoesFundo.aguarde.visibility = "hidden";
-				i3GEO.atualiza();
-			},
-			cor = $i("i3GEOopcoesFundocor").value,
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=corfundo&cor="+cor,
-			cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"corQM",temp);
+			i3GEOF.editorsql.aguarde.visibility = "hidden";
+			i3GEO.atualiza();
+		};
+		i3GEO.php.alteraData(temp,i3GEO.temaAtivo,$i("i3GEOeditorsqlSQL").value);
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
