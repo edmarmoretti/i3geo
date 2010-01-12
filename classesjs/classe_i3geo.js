@@ -243,6 +243,7 @@ i3GEO = {
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
+		//novoh = 500
 		document.body.style.width = novow - diminuix;
 		document.body.style.height = novoh;
 		w = novow - menos - diminuix;
