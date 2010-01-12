@@ -5845,7 +5845,7 @@ i3GEO.php = {
 	*/
 	geo2utm: function(funcao,x,y){
 		i3GEO.php.verifica();
-		if($i("aguardeGifAberto"))
+		if($i("aguardeGifAberto") || x < -180)
 		{return;}
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geo2utm&x="+x+"&y="+y+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"geo2utm",funcao);	
