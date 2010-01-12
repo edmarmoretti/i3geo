@@ -901,9 +901,9 @@ h3	{ margin-top:0px; margin-bottom:0px; font-size:18px; color: #3B6BD2;}
 .footer {background-color: #E4E4E4;padding-top:3px;padding-bottom:3px;padding-left:10px;padding-right:3px; border: 1px solid #C0C0C0; }
 .code	{background-color: #F1F1F1; font-family: Courier New; font-size: 9pt; color: #000080; padding: 5px;}
 .function	{width:94%; background-color: #C0C0C0; border: 1px solid #A0A0A0; padding: 5px;font-family: Courier New; font-size: 9pt;}
-body	{font-family: verdana;font-size: 8pt;}
-td	{font-family: verdana;font-size: 8pt;}
-th	{font-family: verdana;font-size: 8pt;}
+body	{font-size: 8pt;}
+td	{font-size: 8pt;}
+th	{font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 8pt;}
 .ftable	{padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px;}
 input { font-size: 11px; }
 select { font-size: 11px; }
