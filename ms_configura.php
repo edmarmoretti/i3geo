@@ -359,7 +359,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	Tipo:
 	{string}
 	*/
-	$conexaoadmin = "";//$locaplic."/admin/php/conexaopostgresql.php";
+	$conexaoadmin = "";
 	/*
 	 Variable: interfacePadrao
 	 

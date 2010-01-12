@@ -1710,6 +1710,7 @@ Include:
 			{include_once($locaplic."/ms_configura.php");}
 		}
 		include_once("classe_menutemas.php");
+
 		if(!isset($urli3geo)){$urli3geo = "";}
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){$idmenu="";}

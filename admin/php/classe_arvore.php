@@ -190,6 +190,7 @@ class Arvore
 	//formata os dados com grupos e temas na raiz do menu
 	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
 	{
+		error_reporting(E_ALL);
 		$dados = $this->pegaGruposMenu($id_menu);
 		$resultado = array();
 		$temasraiz = array();
