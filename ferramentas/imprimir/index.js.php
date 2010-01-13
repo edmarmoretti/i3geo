@@ -73,23 +73,23 @@ i3GEOF.imprimir = {
 			'		<td>A4 paisagem</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td ><input style="cursor:pointer" onclick=i3GEOF.imprimirabreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
+			'		<td ><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
 			'		<td >A4 retrato</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimirabreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
+			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
 			'		<td>A4 com margens pdf</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimirabreI(this) type=radio value="geotif.php" name=cmodelo /></td>' +
+			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="geotif.php" name=cmodelo /></td>' +
 			'		<td>Geo Tiff</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimirabreI(this) type=radio value="aggpng.php" name=cmodelo /></td>' +
+			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="aggpng.php" name=cmodelo /></td>' +
 			'		<td>Agg/Png alta qualidade</td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimirabreI(this) type=radio value="svg.php" name=cmodelo /></td>' +
+			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="svg.php" name=cmodelo /></td>' +
 			'		<td>Svg - vetorial</td>' +
 			'	</tr>' +
 			'</table>';
@@ -133,7 +133,7 @@ i3GEOF.imprimir = {
 	Abre uma nova janela com o resultado da impressão.
 	*/
 	abreI: function(obj){
-		window.open(obj.value+"?g_sid="+i3GEO.configura.sid);
+		window.open(i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid);
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
