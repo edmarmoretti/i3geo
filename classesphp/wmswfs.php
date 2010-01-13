@@ -493,6 +493,7 @@ function imprimeTag($r,$retorna)
 }
 function pegaTag($layer)
 {
+	error_reporting(0);
 	$noslayer = $layer->childNodes;
 	$resultado = array();
 	for ($i = 0; $i < $noslayer->length; ++$i)

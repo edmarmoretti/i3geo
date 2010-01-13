@@ -102,19 +102,64 @@ else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
 else $ip = "UNKNOWN";
 
 echo "IP do cliente = $ip \n";
-echo "\n<br>";
+echo "\n";
+
+if($menutemas == "")
+{
+	echo "verificando banco de dados de administra&ccedil;&atilde;o...\n";
+	$tabelas = array(
+		"i3geoadmin_sistemasf"=>"abrir_funcao,h_funcao,id_funcao,id_sistema,nome_funcao,perfil_funcao,w_funcao",
+		"i3geoadmin_tags"=>"id_tag,nome",
+		"i3geoadmin_perfis"=>"id_perfil,perfil",
+		"i3geoadmin_atlasp"=>"ordem_prancha,desc_prancha,h_prancha,icone_prancha,id_atlas,id_prancha,link_prancha,mapext_prancha,titulo_prancha,w_prancha",
+		"i3geoadmin_atlast"=>"ordem_tema,codigo_tema,id_prancha,id_tema,ligado_tema",
+		"i3geoadmin_mapas"=>"publicado_mapa,ordem_mapa,perfil_mapa,ligados_mapa,temas_mapa,desc_mapa,ext_mapa,id_mapa,imagem_mapa,linkdireto_mapa,nome_mapa,outros_mapa",
+		"i3geoadmin_atlas"=>"publicado_atlas,ordem_atlas,basemapfile_atlas,desc_atlas,h_atlas,icone_atlas,id_atlas,link_atlas,pranchadefault_atlas,template_atlas,tipoguias_atlas,titulo_atlas,w_atlas",
+		"i3geoadmin_sistemas"=>"publicado_sistema,id_sistema,nome_sistema,perfil_sistema",
+		"i3geoadmin_identifica"=>"publicado_i,abrir_i,id_i,nome_i,target_i",
+		"i3geoadmin_raiz"=>"ordem,id_tema,id_menu,id_nivel,id_raiz,nivel,perfil",
+		"i3geoadmin_n1"=>"publicado,ordem,id_menu,id_grupo,id_n1,n1_perfil",
+		"i3geoadmin_n2"=>"publicado,ordem,id_n1,id_n2,id_subgrupo,n2_perfil",
+		"i3geoadmin_n3"=>"publicado,ordem,id_n2,id_n3,id_tema,n3_perfil",
+		"i3geoadmin_ws"=>"nacessosok,nacessos,autor_ws,desc_ws,id_ws,link_ws,nome_ws,tipo_ws",
+		"i3geoadmin_grupos"=>"it,es,en,desc_grupo,id_grupo,nome_grupo",
+		"i3geoadmin_subgrupos"=>"it,es,en,desc_subgrupo,id_subgrupo,nome_subgrupo",
+		"i3geoadmin_temas"=>"it,es,en,kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
+		"i3geoadmin_menus"=>"it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu"
+	);
+	include_once("admin/php/conexao.php");
+	foreach(array_keys($tabelas) as $tabela)
+	{
+		echo "     Tabela: <b>".$tabela."</b>";
+		$sql = "select * from $tabela ";
+		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
+		if($q !== false)
+		{
+			$resultado = $q->fetchAll();
+			if(count($resultado) > 0)
+			{
+				echo "...ok\n";
+				foreach(explode(",",$tabelas[$tabela]) as $coluna)
+				{
+					echo "         coluna: ".$coluna;
+					if(in_array($coluna,array_keys($resultado[0])))
+					{echo "...ok\n";}
+					else
+					{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
+				}
+			}
+			else
+			{echo "<span style=color:red >...n&atilde;o existem registros cadastrados</span>\n";}
+		}
+		else
+		{echo "<span style=color:red >..n&atilde;o encontrada</span>\n";}
+	}
+}
+echo "\n";
 echo "localizando o cgi...\n";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $enderecocgi = $proto.$server.$locmapserv;
-/*
-if(!file_exists($locmapserv))
-{
-	echo "<span style=color:red >O arquivo cgi $locmapserv do mapserver nao foi encontrado</span> \n";
-}
-else
-{echo "O arquivo cgi $enderecocgi do mapserver foi encontrado \n";}
-*/
 echo "Voc&ecirc; pode testar o CGI clicando <a href='".$enderecocgi."' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'\n" ;
 
 echo "<br>Escrevendo no diret&oacute;rio tempor&aacute;rio...";
