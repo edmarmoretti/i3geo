@@ -103,7 +103,7 @@ i3GEOF.insereGrafico = {
 		ins += '		<tr>  ';
 		ins += '			<td>Tamanho do círculo:</td>';
 		ins += '			<td>';
-		ins += $inputText("","","i3GEOinseregraficow","",5,"0,0,0")+'</td>';
+		ins += $inputText("","","i3GEOinseregraficow","",5,"50")+'</td>';
 		ins += '		</tr><tr><td></td><td>&nbsp;</td></tr>';
 		ins += '		<tr>';
 		ins += '			<td>Inclina&ccedil;&atilde;o do círculo:</td>';
@@ -175,7 +175,7 @@ i3GEOF.insereGrafico = {
 			g_nomepin = "pin"+temp[1];
 			i3GEOF.insereGrafico.comboTemas();
 			$i("i3GEOinseregraficolistai").innerHTML = "";
-			var i = $i("i3GEOF.ainsereGrafico_c").style;
+			var i = $i("i3GEOF.insereGrafico_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
 			i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
 		}			
