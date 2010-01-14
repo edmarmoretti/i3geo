@@ -330,7 +330,8 @@ function ogc_pegaListaDeMenus()
 function ogc_imprimeAjuda()
 {
 	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
-	echo "Esse utilitário usa o arquivo menutemas.xml para gerar web services no padrão OGC.";
+	echo "Esse utilitário usa os arquivos mapfiles existentes em <br>";
+	echo "i3geo/temas para gerar web services no padrão OGC.<br>";
 	echo "Para escolher um tema, utilize:<br>";
 	echo "ogc.php?lista=temas - para listar os temas disponíveis<br>";
 	echo "Para usar esse web service, além dos parâmetros normais, vc deverá incluir o parâmetro &tema=,<br>";
