@@ -81,7 +81,9 @@ class Arvore
    		$resultado = array();
 		foreach($regs as $reg)
 		{
-			if ($this->verificaOcorrencia($perfil,explode(",",$reg["perfil_menu"])))
+			$a = $reg["perfil_menu"];
+			$a = str_replace(" ",",",$a);
+			if ($this->verificaOcorrencia($perfil,explode(",",$a)))
 			{
 				$status = "fechado";
 				if(strtolower($reg["aberto"]) == "sim")
@@ -106,17 +108,23 @@ class Arvore
 			$grupos = $this->pegaGruposMenu($menu["idmenu"]);
 			foreach($grupos["grupos"] as $grupo)
 			{
-				if($this->verificaOcorrencia($perfil,explode(",",$grupo["n1_perfil"])))
+				$a = $grupo["n1_perfil"];
+				$a = str_replace(" ",",",$a);
+				if($this->verificaOcorrencia($perfil,explode(",",$a)))
 				{
 					$sgrupos = $this->pegaSubgruposGrupo($menu["idmenu"],$grupo["id_n1"]);
 					foreach($sgrupos["subgrupos"] as $sgrupo)
 					{
-						if($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
+						$a = $sgrupo["n2_perfil"];
+						$a = str_replace(" ",",",$a);
+						if($this->verificaOcorrencia($perfil,explode(",",$a)))
 						{
 							$temas = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
 							foreach ($temas as $tema)
 							{
-								if($this->verificaOcorrencia($perfil,explode(",",$tema["n3_perfil"])))
+								$a = $tema["n3_perfil"];
+								$a = str_replace(" ",",",$a);								
+								if($this->verificaOcorrencia($perfil,explode(",",$a)))
 								{
 									$t = $this->pegaTema($tema["id_tema"]);
 									$t = $t[0];
@@ -200,7 +208,9 @@ class Arvore
 		{$grupos[] = array();}
 		foreach($dados["grupos"] as $grupo)
 		{
-			if($this->verificaOcorrencia($perfil,explode(",",$grupo["n1_perfil"])))
+			$a = $grupo["n1_perfil"];
+			$a = str_replace(" ",",",$a);								
+			if($this->verificaOcorrencia($perfil,explode(",",$a)))
 			{
 				$temas = array();
 				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"]);
@@ -220,7 +230,9 @@ class Arvore
 					
 					foreach($dadossubgrupos["subgrupos"] as $sgrupo)
 					{
-						if($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
+						$a = $sgrupo["n2_perfil"];
+						$a = str_replace(" ",",",$a);
+						if($this->verificaOcorrencia($perfil,explode(",",$a)))
 						{
 							//verifica se existem temas que podem receber download
 							$down = "nao";
@@ -265,7 +277,9 @@ class Arvore
 		$subgrupos = array();
 		foreach($dados["subgrupos"] as $sgrupo)
 		{
-			if ($this->verificaOcorrencia($perfil,explode(",",$sgrupo["n2_perfil"])))
+			$a = $sgrupo["n2_perfil"];
+			$a = str_replace(" ",",",$a);
+			if ($this->verificaOcorrencia($perfil,explode(",",$a)))
 			{
 				$listaT = $this->pegaTemasSubGrupo($sgrupo["id_n2"]);
 				$down = "nao";
@@ -293,7 +307,9 @@ class Arvore
 		$temas = array();
 		foreach($dados as $tema)
 		{
-			if($this->verificaOcorrencia($perfil,explode(",",$tema["n3_perfil"])))
+			$a = $tema["n3_perfil"];
+			$a = str_replace(" ",",",$a);
+			if($this->verificaOcorrencia($perfil,explode(",",$a)))
 			{$temas[] = $this->formataTema($tema["id_tema"],$tema["publicado"]);}
 		}
 		return $temas;
