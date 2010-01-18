@@ -169,13 +169,13 @@ class Arvore
 	function pegaSubgruposGrupo($id_menu,$id_n1)
 	{
 		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by ordem");
-		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);		
 	}
 	//pega os temas na raiz de um grupo
 	function pegaTemasRaizGrupo($id_menu,$id_n1)
 	{
-		return $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		return $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 	}
 	//pega os dados de um tema
 	function pegaTema($id_tema)
@@ -190,7 +190,7 @@ class Arvore
 	//formata os dados com grupos e temas na raiz do menu
 	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
 	{
-		error_reporting(E_ALL);
+		//error_reporting(E_ALL);
 		$dados = $this->pegaGruposMenu($id_menu);
 		$resultado = array();
 		$temasraiz = array();
@@ -322,7 +322,9 @@ class Arvore
 	//executa o sql
 	function execSQL($sql)
 	{
-    	$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
+    	//echo "<br>".$sql;
+			//error_reporting(E_ALL);
+			$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
     	return $q->fetchAll();	
 	}
 	function verificaOcorrencia($procurar,$em)
