@@ -42,10 +42,14 @@ error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");
 include_once ("ms_configura.php");
+include_once ("admin/php/conexao.php");
+$encoding = "ISO-8859-1";
+if($convUTF == true)
+{$encoding = "UTF-8";}
 if(!isset($idioma))
 {$idioma = "pt";}
 echo header("Content-type: application/xml");
-echo '<?xml version="1.0" encoding="UTF-8"?>';
+echo '<?xml version="1.0" encoding="'.$encoding.'"?>';
 echo "<kml xmlns='http://earth.google.com/kml/2.2'>\n";
 //
 //pega os endereços para compor a url de chamada do gerador de web services
@@ -287,7 +291,8 @@ function kml_networklink($nome,$fonte,$legenda,$desc,$href)
 }
 function kml_converteTexto($i)
 {
-	$encoding = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
-	return mb_convert_encoding($i,"UTF-8",$encoding);	
+	global $encoding;
+	$encodingatual = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
+	return mb_convert_encoding($i,$encoding,$encodingatual);	
 }
 ?>
