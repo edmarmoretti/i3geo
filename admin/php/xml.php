@@ -476,7 +476,7 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 }
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
-	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = $id_prancha";
+	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = '$id_prancha'";
 	//echo $q;
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)
