@@ -39,6 +39,9 @@ include("../classesphp/classe_menutemas.php");
 include("../ms_configura.php");
 ?>
 <html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+</head>
 <style>
 body
 {
@@ -87,8 +90,9 @@ if ($tipo == "listatemas")
 	echo "<h1>Escolha o tema:</h1>";
 	foreach($r as $l)
 	{
-		echo "<input type='radio' onclick='adicionatema(\"".$l["tid"]."\")' />".$l["nome"]."<br>";
+		echo "<input type='radio' onclick='adicionatema(\"".$l["tid"]."\")' />".converte($l["nome"])."<br>";
 	}
+	echo "<br>";
 }
 if($tipo == "adicionatema")
 {
@@ -104,25 +108,50 @@ if ($tipo == "adicionar")
 	echo "<h1>Escolha o sub-grupo:</h1>";
 	$m = new Menutemas("","",$locsistemas,$locaplic,$menutemas,$urli3geo,$editores);
 	$menus = $m->pegaListaDeMenus();
+	
 	foreach ($menus as $menu)
 	{
 		if($menu["publicado"] != "NAO")
 		{
-			$r = $m->pegaListaDeGrupos($menu["idmenu"],"","sim");
+			$r = $m->pegaListaDeGrupos($menu["idmenu"],"nao","sim");
+			error_reporting(0);
+			//echo "<pre>";var_dump($r);exit;
 			for($rid=0;$rid<count($r);$rid++)
 			{
-				$g = $r[$rid];
-				echo $g["nome"]."<br>";
-				$sub = $g["subgrupos"];
-				for($sid=0;$sid<count($sub);$sid++)
+				if($r[$rid])
 				{
-					$s = $sub[$sid];
-					echo "<input type='radio' onclick='listatemas(\"".$rid."\",\"".$sid."\",\"".$menu["idmenu"]."\")' /><span style='color:gray;font-size:12pt;'>".$s["nome"]."</span><br>";
+					$g = $r[$rid];
+					$idgrupo = $rid;
+					if($g["id_n1"])
+					{$idgrupo = $g["id_n1"];}
+					if($g["subgrupos"])
+					{
+						echo converte($g["nome"])."<br>";
+						$sub = $g["subgrupos"];
+						if(count($sub) > 0)
+						{
+							for($sid=0;$sid<count($sub);$sid++)
+							{
+								$s = $sub[$sid];
+								$idsubgrupo = $sub;
+								if($s["id_n2"])
+								{$idsubgrupo = $s["id_n2"];}								
+								if($s["nome"] != "")
+								echo "&nbsp;&nbsp;&nbsp;<input type='radio' onclick='listatemas(\"".$idgrupo."\",\"".$idsubgrupo."\",\"".$menu["idmenu"]."\")' /><span style='color:gray;font-size:12pt;'>".converte($s["nome"])."</span><br>";
+							}
+						}
+					}
 				}
 			}
 		}
 	}
+	echo "<br>";
 }
+function converte($texto){
+	$texto = mb_convert_encoding($texto,"ISO-8859-1",mb_detect_encoding($texto));
+	return $texto;	
+}
+
 ?>
 <input type='button' value='retorna' style='cursor:pointer;' onclick='retorno()' /><br>
 </body>
