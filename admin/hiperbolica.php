@@ -3,11 +3,14 @@ error_reporting(0);
 include("../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
 include("$locaplic/admin/php/conexao.php");
+$encoding = "UTF-8";
 if($convUTF)
 $xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
-else$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
-
-
+else
+{
+	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	$encoding = "ISO-8859-1";
+}
 $xml .= "<capa>";
 $menus = pegaDados("SELECT * from i3geoadmin_menus order by nome_menu ",$locaplic);
 $xml .= '<termo cor="#FFFFFF" id="00" nome="Dados geo">';
@@ -141,8 +144,9 @@ echo $xml;
 
 function h_converteTexto($i)
 {
-	$encoding = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
-	return mb_convert_encoding($i,"UTF-8",$encoding);	
+	global $encoding;
+	$s = mb_detect_encoding($i, 'UTF-8, UTF-7, ASCII, ISO-8859-1');
+	return mb_convert_encoding($i,$encoding,$s);	
 }
 
 ?> 
