@@ -351,18 +351,20 @@ function dataDownloadLinks(rss)
 		}
 		var linhas = retorno.data.split("|")
 		var ins = ""
-		for (var i=0;i<linhas.length; i++)
+		var n = linhas.length;
+		if(n == 1){return;}
+		for (var i=0;i<n; i++)
 		{
 			var caso = linhas[i].split("#")
 			if (i > 0)
 			{
-				ins += "<a style=text-align:left href='"+caso[2]+"' target=blank >"+caso[0]+"&nbsp;("+caso[3]+")</a>"
+				ins += "<a style=text-align:left href='"+caso[2]+"' target=blank >"+caso[0]+"&nbsp;("+caso[1]+")</a>"
 				ins += "<br>"
 			}
 			else
 			{ins += "<p class=clique ><b>"+caso[0]+"</b>&nbsp;"+caso[1]+"&nbsp;</p>"}
 		}
-		document.getElementById("RSSl").innerHTML = ins+"<br><br>"
+		document.getElementById("RSSl").innerHTML = ins
 	}
 	if (document.getElementById("RSSl"))
 	{
