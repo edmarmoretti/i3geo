@@ -441,7 +441,11 @@ i3GEOF.identifica = {
 	*/	
 	mostraDadosSistema: function(exec,target){
 		exec += "&x="+i3GEOF.identifica.x+"&y="+i3GEOF.identifica.y;
-		window.open(exec);
+		if(target === "target")
+		{window.open(exec);}
+		else {
+			i3GEO.janela.cria("500","500",exec,parseInt(Math.random()*100,10),10,exec,"janela"+i3GEO.util.randomRGB(),false);
+		}
 	},
 	/*
 	Function: mostraDadosTema
