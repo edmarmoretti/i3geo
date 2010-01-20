@@ -795,7 +795,9 @@ i3GEO.configura = {
 						eval(i3GEO.configura.funcaoTip);
 					}
 				};
-				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") < 0)
+				if(i3GEO.eventos.MOUSECLIQUE.toString().search("cliqueIdentifica()") > 0)
+				{i3GEO.eventos.MOUSECLIQUE.remove("cliqueIdentifica()");}				
+				if(i3GEO.eventos.MOUSECLIQUE.toString().search("verificaTip()") < 0)
 				{i3GEO.eventos.MOUSECLIQUE.push("verificaTip()");}
 				if(i3GEO.eventos.MOUSEPARADO.toString().search("verificaTip()") < 0)
 				{i3GEO.eventos.MOUSEPARADO.push("verificaTip()");}

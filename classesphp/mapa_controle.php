@@ -1882,6 +1882,7 @@ Include:
 <wmswfs.php>
 */	
 	case "temaswms":
+		echo "oi";
 		include_once("wmswfs.php");
 		restauraCon($map_file,$postgis_mapa);
 		$retorno = temaswms();
