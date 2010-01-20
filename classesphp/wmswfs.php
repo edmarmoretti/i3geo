@@ -50,7 +50,8 @@ Nome do arquivo criado
 function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
-	//ini_set('auto_detect_line_endings', true);
+	if($dir_tmp == "")
+	{include_once("../ms_configura.php");}
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
@@ -274,6 +275,7 @@ $servico - Endereço do web service.
 function temaswms()
 {
 	global $servico,$id_ws;
+
 	$wms_service_request = gravaCacheWMS($servico);
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
@@ -296,7 +298,6 @@ function temaswms()
 		if($id_ws != "")
 		adicionaAcesso($id_ws,true);
 	}
-	
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread($handle, filesize($wms_service_request));
 	fclose ($handle); 
