@@ -144,7 +144,8 @@ if (!isset($intervalo))
 else
 {$tipo = "intervalo";}
 if(!isset($tema)){
-	$intervalo = "0,5000";
+	if(!isset($intervalo))
+	{$intervalo = "0,5000";}
 	$tipo = "intervalo";
 }
 if ($tipo == "" || $tipo == "metadados")
