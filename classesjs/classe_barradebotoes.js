@@ -120,6 +120,18 @@ i3GEO.barraDeBotoes = {
 	*/
 	ATIVAMENUCONTEXTO: false,
 	/*
+	Propriedade: AUTO
+	
+	Cria as barras de botões automaticamente, utilizando os potões padrão
+	
+	Tipo:
+	{Boolean}
+	
+	Default:
+	{false}
+	*/
+	AUTO: false,	
+	/*
 	Propriedade: LISTABOTOES
 	
 	Objeto com a lista de botões.
@@ -347,6 +359,109 @@ i3GEO.barraDeBotoes = {
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
 		var tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel;
+		if(i3GEO.barraDeBotoes.AUTO === true){
+			if(idconteudo === "barraDeBotoes1"){
+				novoel = document.createElement("div");
+				novoel.id = "barraDeBotoes1";
+				temp = '<table style="width:100%"><caption style="text-align:center">&nbsp;</caption><tr><td style="background-color:rgb(250,250,250);"><div ID="historicozoom" ></div></td></tr><tr><td style=height:5px ></td></tr></table>' +
+					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
+					"<p style='font-size:4px;'>&nbsp;</p>" +
+					'<img title="zoom" alt="zoom" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomli"/>' +
+					"</div>" +
+					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
+					"<p style='font-size:4px;'>&nbsp;</p>" +
+					'<img title="desloca" alt="desloca" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="pan"/>' +
+					"</div>" +
+					"<div style='display:inline;background-color:rgb(250,250,250);'>" +
+					"<p style='font-size:4px;'>&nbsp;</p>" +
+					'<img title="geral" alt="geral" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="zoomtot"/>' +
+					"</div>";
+				novoel.innerHTML = temp;
+				document.body.appendChild(novoel);
+			}
+			if(idconteudo === "barraDeBotoes2"){
+				novoel = document.createElement("div");
+				novoel.id = "barraDeBotoes2";
+				temp = "<table style='width:100%'><caption style='text-align:center'>&nbsp;</caption>"+
+				"	<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='sobeferramentas'/></td></tr>"+
+				"	</table>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:2px;'>&nbsp;</p>"+
+				"		<img title='identifica' alt='identifica' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='identifica'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='info' alt='info' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='identificaBalao'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='mede' alt='mede' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='mede'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='area' alt='area' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='area'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='imprimir' alt='imprimir' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='imprimir'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='reinicia' alt='reinicia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='reinicia'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='extensao' alt='extensao' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='exten'/>"+
+				"	</div>        "+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='referencia' alt='referencia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='referencia'/>"+
+				"	</div>        "+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='insere xy' alt='insere xy' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='inserexy'/>"+
+				"	</div> "+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='texto' alt='texto' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='textofid'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='selecao' alt='selecao' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='selecao'/>"+
+				"	</div>"+
+				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='google' alt='google' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='google'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='fotos' alt='fotos' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='buscafotos'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='busca na wikipedia' alt='busca na wikipedia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='wiki'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img title='lente' alt='lente' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='lentei'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='confluencias' alt='confluencias' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='confluence'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='Insere gráficos' alt='Insere gráficos' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='inseregrafico'/>"+
+				"	</div>	"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img  title='3d' alt='3d' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='v3d'/>"+
+				"	</div>"+
+				"  <table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
+				novoel.innerHTML = temp;
+				document.body.appendChild(novoel);
+			}
+		}
 		wj = "36px";
 		recuo = "0px";
 		novoel = document.createElement("div");

@@ -323,10 +323,12 @@ i3GEO.guias = {
 				{guia = guias[g];}
 			}
 		}
-		if($i(i3GEO.guias.CONFIGURA[guia].idconteudo)){
-			$i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display="block";
-			$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
-			i3GEO.guias.ATUAL = guia;
+		if(i3GEO.guias.CONFIGURA[guia]){
+			if($i(i3GEO.guias.CONFIGURA[guia].idconteudo)){
+				$i(i3GEO.guias.CONFIGURA[guia].idconteudo).style.display="block";
+				$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.background="white";
+				i3GEO.guias.ATUAL = guia;
+			}
 		}
 	},
 	/*

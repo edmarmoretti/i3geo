@@ -33,7 +33,7 @@ mes - mes de busca
 cnpj - cnpj do empreendimento
 
 */
-require_once("../../classesjs/cpaint/cpaint2.inc.php");
+require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -59,6 +59,7 @@ function pesquisa()
 	global $cp,$map_file,$dir_tmp,$imgdir,$uf,$categoria,$ano,$situacao,$mes,$cnpj;
 	$parametros = "&uf=$uf&categoria=$categoria&ano=$ano&situacao=$situacao&mes=$mes&cnpj=$cnpj"; 
   	$xml = simplexml_load_file("http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros);
+  	//echo "http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros;
 	if ($xml != FALSE)
 	{
 		$pontos = array();
