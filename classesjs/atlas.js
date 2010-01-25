@@ -98,7 +98,7 @@ function iniciaAtlas()
 					else
 					{
 						ins += '<li><a href="#"><em><div onclick="abrePrancha(\''+pranchas[i].id+'\')" id=guiaAtlas'+i+' style=text-align:center;font-size:10px;left:0px; >';
-						var icone = g_locaplic+"/imagens/branco.gif";
+						var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
 						if(pranchas[i].icone != "")
 						{
 							var icone = pranchas[i].icone;
@@ -117,7 +117,7 @@ function iniciaAtlas()
 		}
 		if (localTitulo)
 		{
-			var icone = g_locaplic+"/imagens/branco.gif";
+			var icone = i3GEO.configura.locaplic+"/imagens/branco.gif";
 			if (retorno.data.icone != "")
 			{var icone = retorno.data.icone;}
 			localTitulo.innerHTML = retorno.data.titulo;
@@ -129,7 +129,7 @@ function iniciaAtlas()
 		{abrePrancha(retorno.data.pranchadefault)}
 		i3GEO.mapa.ajustaPosicao();
 	}
-	var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
+	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDePranchas&g_sid="+i3GEO.configura.sid;
 	cpObjAtlas.call(p,"pegaListaDePranchas",monta);
 }
 /*
@@ -170,7 +170,7 @@ function pegaListaDeAtlas()
 			{
 				if (listaAtlas[i].ID)
 				{
-					var inicia = g_locaplic+"/classesphp/atlas_controle.php?atlasxml= "+atlasxml+"&atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
+					var inicia = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?atlasxml= "+atlasxml+"&atlasId_="+listaAtlas[i].ID+"&funcao=criaAtlas";
 					texto += "<tr><td >";
 					if (listaAtlas[i].ICONE != "")
 					{
@@ -195,7 +195,7 @@ function pegaListaDeAtlas()
 			local.innerHTML = texto+"</table>";
 			document.getElementById("tituloinstituicao").innerHTML = retorno.data.tituloinstituicao
 		}
-		var p = g_locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDeAtlas";
+		var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?funcao=pegaListaDeAtlas";
 		cpObjAtlas.call(p,"pegaListaDeAtlas",monta);
 	}
 	else
@@ -212,7 +212,7 @@ id - id do atlas que será aberto
 */
 function abreatlas(id)
 {
-	var inicia = g_locaplic+"/classesphp/atlas_controle.php?atlasxml="+atlasxml+"&atlasId_="+id+"&funcao=criaAtlas";
+	var inicia = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?atlasxml="+atlasxml+"&atlasId_="+id+"&funcao=criaAtlas";
 	//document.body.innerHTML = "<center>Aguarde...<br>Iniciando</center>";
 	window.location = inicia;
 }
@@ -238,7 +238,7 @@ function abrePrancha(id)
 		}
 		remapaf();
 	}
-	var p = g_locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
+	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);
 }
 /*

@@ -159,7 +159,7 @@ if ($funcao == "criaMapa")
 	include_once("ms_criamapa.php");
 	//$cp->set_data(session_id());
 	//$cp->return_data();
-	cpjson(session_id(),$cp);
+	cpjson(session_id());
 	return;
 }
 if (!isset($map_file))
