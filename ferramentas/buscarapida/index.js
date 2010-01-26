@@ -158,6 +158,7 @@ i3GEObuscaRapida = {
 		try{
 			if(retorno.data){
 				if (retorno.data.geonames){
+					ins = "";
 					for (i=0;i<retorno.data.geonames.length; i++){
 						if (i == 0){var ins = "<table >";}
 						ins += "<tr><td style='width:30%;text-align:left;background-color:rgb(220,220,220)' colspan=2 ><b>"+retorno.data.geonames[i].tema+"</b></td></tr>";
@@ -178,8 +179,8 @@ i3GEObuscaRapida = {
 		catch(e){var ins = "Erro ao acessar o serviço "+i3GEObuscaRapida.servico+"<br>";}
 		$i(i3GEObuscaRapida.idresultado).innerHTML = ins
 		aguarde("none")
-		if(i3GEObuscaRapida.buscaemtemas){
-			i3GEO.php.procurartemas(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
+		if(i3GEObuscaRapida.buscaemtemas){	
+			window.parent.i3GEO.php.procurartemas(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
 		}
 	},
 	/*
