@@ -936,16 +936,18 @@ i3GEO.gadgets = {
 				else
 				{conta = 0;}
 				for(nomeMenu in i3GEO.configura.oMenuData.submenus){
-					if(i3GEO.configura.oMenuData.submenus[nomeMenu] !== ""){
-						i3GEOoMenuBar.getItem(conta).cfg.setProperty(
-							'submenu',
-							{
-								id:nomeMenu,
-								itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]
-							}
-						);
+					if($i("menu"+nomeMenu)){
+						if(i3GEO.configura.oMenuData.submenus[nomeMenu] !== ""){
+							i3GEOoMenuBar.getItem(conta).cfg.setProperty(
+								'submenu',
+								{
+									id:nomeMenu,
+									itemdata: i3GEO.configura.oMenuData.submenus[nomeMenu]
+								}
+							);
+						}
+						conta=conta+1;
 					}
-					conta=conta+1;
 				}
 			};
  			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
