@@ -48,8 +48,7 @@ i3GEOF.opcoesLegenda = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.opcoesLegenda.html();
-			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef");
+			$i(iddiv).innerHTML = i3GEOF.opcoesLegenda.html();
 			new YAHOO.widget.Button(
 				"i3GEOopcoesLegendabotao1",
 				{onclick:{fn: i3GEOF.opcoesLegenda.executa}}
@@ -58,6 +57,7 @@ i3GEOF.opcoesLegenda = {
 				"i3GEOopcoesLegendabotao2",
 				{onclick:{fn: i3GEOF.opcoesLegenda.testa}}
 			);
+			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef");
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 		}
 		catch(erro){}
@@ -128,7 +128,7 @@ i3GEOF.opcoesLegenda = {
 			'<p class=paragrafo >' +
 			'<input id=i3GEOopcoesLegendabotao1 size=20  type=button value="Aplicar" />' +
 			'<input id=i3GEOopcoesLegendabotao2 size=20 type=button value="Testar" />' +
-			'</p><br><img src="" id=i3GEOopcoesLegendatesteLegenda />';
+			'</p><br><img alt="teste" src="" id=i3GEOopcoesLegendatesteLegenda style="display:none"/>';
 		return ins;
 	},
 	/*
@@ -212,7 +212,7 @@ i3GEOF.opcoesLegenda = {
 						$i("i3GEOopcoesLegendalabelsize").value = retorno.data.labelsize;
 					}
 					i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
-					i3GEOF.opcoesLegenda.testa();
+					//i3GEOF.opcoesLegenda.testa();
 				}catch(e){
 					alert("Erro. "+e);
 					i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
@@ -261,6 +261,7 @@ i3GEOF.opcoesLegenda = {
 				i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
 				eval(retorno.data);
 				$i("i3GEOopcoesLegendatesteLegenda").src = legimagem;
+				$i("i3GEOopcoesLegendatesteLegenda").style.display = "block";
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=testaLegenda"+par,
