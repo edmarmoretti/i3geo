@@ -43,6 +43,20 @@ As guias das ferramentas são configuradas nos scripts específicos de cada ferram
 */
 i3GEO.guias = {
 	/*
+	Variavel: ATUAL
+	
+	Guia que está ativa
+	
+	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{"temas"}
+	*/
+	ATUAL: "temas",
+	/*
 	Propriedade: CONFIGURA
 	
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
@@ -144,19 +158,20 @@ i3GEO.guias = {
 		}
 	},
 	/*
-	Propriedade: ATUAL
+	Propriedade: TIPO
 	
-	Guia que está ativa
-	
-	O nome da guia é a definida na variável i3GEO.guias.CONFIGURA
+	Tipo de guia
 	
 	Tipo:
 	{string}
 	
 	Default:
-	{"temas"}
+	{"guia"}
+	
+	Values:
+	guia|sanfona
 	*/
-	ATUAL: "temas",
+	TIPO: "guia",
 	/*
 	Propriedade: idguias
 	
@@ -231,29 +246,73 @@ i3GEO.guias = {
 		//
 		//constroi as TAGs para as guias
 		//
-		ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
-		for(ng=0;ng<nguias;ng++){
-			if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
-				if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
-				{ins += '<li><a href="#"><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';}
+		if(i3GEO.guias.TIPO === "guia"){
+			ins = '<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;">';
+			for(ng=0;ng<nguias;ng++){
+				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
+					if($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo))
+					{ins += '<li><a href="#"><em><div id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</div></em></a></li>';}
+				}
 			}
+			ins += "</ul>";
+			onde.innerHTML = ins;
+			onf = function(){
+				var bcg,cor;
+				bcg = this.parentNode.parentNode.style;
+				cor = bcg.background.split(" ")[0];
+				if(cor !== "white")
+				{bcg.background = "#bfdaff";}
+			};
+			outf = function(){
+				var bcg,cor;
+				bcg = this.parentNode.parentNode.style;
+				cor = bcg.background.split(" ")[0];
+				if(cor !== "white")
+				{bcg.background = "transparent";}
+			};
 		}
-		ins += "</ul>";
-		onde.innerHTML = ins;
-		onf = function(){
-			var bcg,cor;
-			bcg = this.parentNode.parentNode.style;
-			cor = bcg.background.split(" ")[0];
-			if(cor !== "white")
-			{bcg.background = "#bfdaff";}
-		};
-		outf = function(){
-			var bcg,cor;
-			bcg = this.parentNode.parentNode.style;
-			cor = bcg.background.split(" ")[0];
-			if(cor !== "white")
-			{bcg.background = "transparent";}
-		};
+		
+		/*
+<dl id=sanfonaTeste class="accordion">
+	<dt>title 1</dt>
+		<dd class="close">
+			<div class="bd">
+				content of accordion pane #1
+			</div>
+		</dd>
+	<dt>title 1</dt>
+		<dd class="close">
+			<div class="bd">
+				content of accordion pane #2
+			</div>
+		</dd>
+</dl>
+*/		
+		if(i3GEO.guias.TIPO === "sanfona"){
+			ins = '<dl id=sanfona'+onde.id+' class="accordion">';
+			for(ng=0;ng<nguias;ng++){
+				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
+					id = i3GEO.guias.CONFIGURA[guias[ng]].idconteudo;
+					temp = $i(id);
+					if(temp){
+						guiaconteudo = temp.innerHTML;
+						temp.innerHTML = "";
+						temp.style.display = "none";
+						temp.id = "";
+						ins += '<dt style=height:17px id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</dt>';
+						ins += '<dd clas=close >';
+						ins += '<div class=bd >';
+						ins += '<div id="'+id+'" >'+guiaconteudo+'</div></div></dd>';
+					}
+				}
+			}
+			ins += "</dl>";
+			onde.innerHTML = ins;
+			onde.style.height = i3GEO.parametros.h - (nguias * 25) + "px";
+			onf = function(){};
+			outf = function(){};
+			YAHOO.lutsr.accordion.init(true,10,false,"sanfona"+onde.id,i3GEO.parametros.h - (nguias * 25));
+		}
 		for(g=0;g<nguias;g++)
 		{
 			guia = i3GEO.guias.CONFIGURA[guias[g]];
@@ -269,7 +328,10 @@ i3GEO.guias = {
 				temp = $i(guia.idconteudo);
 				if(temp){
 					temp.style.overflow="auto";
-					temp.style.height = i3GEO.parametros.h;
+					if(i3GEO.guias.TIPO === "guia")
+					{temp.style.height = i3GEO.parametros.h;}
+					else
+					{temp.style.height = onde.style.height;}
 				}
 			}
 		}
@@ -290,7 +352,8 @@ i3GEO.guias = {
 			guia = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo);
 			if(guia){
 				guia.style.overflow="auto";
-				guia.style.height = i3GEO.parametros.h;
+				if(i3GEO.guias.TIPO === "guia")
+				{guia.style.height = i3GEO.parametros.h;}
 			}	
 		}
 	},

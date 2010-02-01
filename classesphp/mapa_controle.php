@@ -1112,7 +1112,7 @@ Include:
 		{
 			//esta operação é chamada com POST via cpaint
 			//por isso precisa ser executada com start
-			alteraclassesPost();
+			alteraclassesPost($ids,$nomes,$exps);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");
 		}

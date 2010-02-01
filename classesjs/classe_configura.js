@@ -697,15 +697,18 @@ i3GEO.configura = {
 						marcadorZoom = "";
 						g_panM = "nao";
 						//alert(ddinicialx+","+ddinicialy+","+objposicaocursor.ddx+","+objposicaocursor.ddy)
-						var f = "i3GEO.navega.timerNavega = null;if("+
-							"i3GEO.navega.xy2xy('"+
-								i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"',"+ddinicialx+","+ddinicialy+","+objposicaocursor.ddx+","+objposicaocursor.ddy+",'"+i3GEO.parametros.mapexten+"','"+i3GEO.configura.tipoimagem+"'"+
-								") == false"+
-							"){"+
-								"i3GEO.navega.zoompontoIMG('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"',"+objposicaocursor.imgx+","+objposicaocursor.imgy+")"+
-							"}";
-						clearTimeout(i3GEO.navega.timerNavega);
-						i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);
+						try{
+							var f = "i3GEO.navega.timerNavega = null;if("+
+								"i3GEO.navega.xy2xy('"+
+									i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"',"+ddinicialx+","+ddinicialy+","+objposicaocursor.ddx+","+objposicaocursor.ddy+",'"+i3GEO.parametros.mapexten+"','"+i3GEO.configura.tipoimagem+"'"+
+									") == false"+
+								"){"+
+									"i3GEO.navega.zoompontoIMG('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"',"+objposicaocursor.imgx+","+objposicaocursor.imgy+")"+
+								"}";
+							clearTimeout(i3GEO.navega.timerNavega);
+							i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);
+						}
+						catch(e){}
 					}
 				};
 				if(i3GEO.eventos.MOUSEDOWN.toString().search("panMapaInicia()") < 0)

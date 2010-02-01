@@ -70,7 +70,7 @@ i3GEOF.carregaMapa = {
 	*/
 	html:function(){
 		var ins = '';
-		ins += '<p class="paragrafo" >Digite o nome do arquivo .map ou busque com o navegador de arquivos:';
+		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (não utilize espaço em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
 		ins += '<br><br>';
 		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
 		ins += '<input id="i3GEOcarregamapafilemap" class=digitar type="file" size=42 name="i3GEOcarregamapafilemap" style="top:0px;left:0px">';

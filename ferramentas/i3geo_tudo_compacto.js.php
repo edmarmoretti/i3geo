@@ -8513,6 +8513,154 @@ i3GEO.util = {
 		$i(idatual).style.display="block";
 	}
 };
+
+
+
+//++++++++++++++++++++++++++++++++++++
+// YUI ACCORDION
+// 1/22/2008 - Edwart Visser
+//
+// accordion
+//
+// REQUIRES: yahoo-dom-event.js, animation-min.js
+//
+// TODO: build hover script for highlighting header in IE
+// TODO: attach behaviour based on rel attribute
+//++++++++++++++++++++++++++++++++++++
+
+YAHOO.namespace("lutsr");
+YAHOO.lutsr.accordion = {
+	properties : {
+		animation : true,
+		animationDuration : 10,
+		multipleOpen : false,
+		Id: "sanfona",
+		altura: 200,
+		ativa: 0
+	},
+
+	init : function(animation,animationDuration,multipleOpen,Id,altura,ativa) {
+		if(animation) {
+			this.properties.animation = animation;
+		}
+		if(animationDuration) {
+			this.properties.animationDuration = animationDuration;
+		}
+		if(multipleOpen) {
+			this.properties.multipleOpen = multipleOpen;
+		}
+		if(Id) {
+			this.properties.Id = Id;
+		}
+		if(altura) {
+			this.properties.altura = altura;
+		}
+		if(ativa) {
+			this.properties.ativa = ativa;
+		}
+		var accordionObject = document.getElementById(this.properties.Id);
+		if(accordionObject) {
+			if(accordionObject.nodeName == "DL") {
+				var headers = accordionObject.getElementsByTagName("dt");
+				var bodies = headers[0].parentNode.getElementsByTagName("dd");
+			}
+			this.attachEvents(headers,0);
+		}
+	},
+
+	attachEvents : function(headers,nr) {
+		for(var i=0; i<headers.length; i++) {
+			var headerProperties = {
+				objRef : headers[i],
+				nr : i,
+				jsObj : this
+			};
+			YAHOO.util.Event.addListener(headers[i],"click",this.clickHeader,headerProperties);
+		}
+		var parentObj = headers[this.properties.ativa].parentNode;
+		var headers = parentObj.getElementsByTagName("dd"); 
+		var header = headers[this.properties.ativa];
+
+		this.expand(header);
+	},
+
+	clickHeader : function(e,headerProperties) {
+		var parentObj = headerProperties.objRef.parentNode;
+		var headers = parentObj.getElementsByTagName("dd"); 
+		var header = headers[headerProperties.nr];
+
+		if(YAHOO.util.Dom.hasClass(header,"open")) {
+			headerProperties.jsObj.collapse(header);
+		} else {
+			if(headerProperties.jsObj.properties.multipleOpen) {
+				headerProperties.jsObj.expand(header);
+			} else {
+				for(var i=0; i<headers.length; i++) {
+					if(YAHOO.util.Dom.hasClass(headers[i],"open")) {
+						headerProperties.jsObj.collapse(headers[i]);
+					}
+				}
+				headerProperties.jsObj.expand(header);
+			}
+		}
+	},
+	
+	collapse : function(header) {
+		YAHOO.util.Dom.removeClass(YAHOO.util.Dom.getPreviousSibling(header),"selected");
+		if(!this.properties.animation) {
+			YAHOO.util.Dom.removeClass(header,"open");
+		} else {
+			this.initAnimation(header,"close");
+		}
+	},
+	expand : function(header) {
+		YAHOO.util.Dom.addClass(YAHOO.util.Dom.getPreviousSibling(header),"selected");
+		if(!this.properties.animation) {
+			YAHOO.util.Dom.addClass(header,"open");
+		} else {
+			this.initAnimation(header,"open");
+		}
+	},
+	initAnimation : function(header,dir) {
+		if(dir == "open") {
+			YAHOO.util.Dom.setStyle(header,"visibility","hidden");
+			YAHOO.util.Dom.setStyle(header,"height",this.properties.altura);
+			YAHOO.util.Dom.addClass(header,"open");
+			var attributes = {
+				height : {
+					from : 0,
+					to : this.properties.altura
+				}
+			};
+			YAHOO.util.Dom.setStyle(header,"height",0);
+			YAHOO.util.Dom.setStyle(header,"visibility","visible");
+			
+			var animation = new YAHOO.util.Anim(header,attributes);
+			animationEnd = function() {
+				//alert(this.properties.altura+"px")
+				header.style.height = this.properties.altura+"px";
+			};
+			animation.duration = this.properties.animationDuration;
+			animation.useSeconds = false;
+			animation.onComplete.subscribe(animationEnd);
+			animation.animate();
+		} else if ("close") {
+			var attributes = {
+				height : {
+					to : 0
+				}
+			};			
+			animationEnd = function() {
+				YAHOO.util.Dom.removeClass(header,"open");
+			};
+			var animation = new YAHOO.util.Anim(header,attributes);
+			animation.duration = this.properties.animationDuration;
+			animation.useSeconds = false;
+			animation.onComplete.subscribe(animationEnd);
+			animation.animate();
+		}
+	}
+};
 //
 //alias
 //

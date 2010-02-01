@@ -379,7 +379,7 @@ i3GEO.arvoreDeCamadas = {
 			c = temas.length;
 			for (i=0, j=c; i<j; i++){
 				ltema = temas[i];		
-				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema",idlegenda:ltema.name};
+				d = {html:i3GEO.arvoreDeCamadas.montaTextoTema(ltema),id:ltema.name,tipo:"tema"};
 				temaNode = new YAHOO.widget.HTMLNode(d, tempNode, i3GEO.arvoreDeCamadas.EXPANDIDA,true);
 				if(i3GEO.arvoreDeCamadas.PERMITEEXPANDIRTEMAS === true){
 					if(i3GEO.arvoreDeCamadas.EXPANDESOLEGENDA === false)
