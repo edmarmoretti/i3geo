@@ -179,8 +179,9 @@ $exps - lista com as novas expressões
 				$classe->set("status",MS_DEFAULT);
 				$classe->set("name",$nomes[$i]);
 				$e = $exps[$i];
-				$e = str_replace("\\","",$e);
+				$e = str_replace("\\","'",$e);
 				$e = str_replace('"',"'",$e);
+				$e = str_replace("''","'",$e);
 				$classe->setexpression($e);
 			}
 		}

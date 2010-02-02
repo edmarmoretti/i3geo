@@ -306,7 +306,7 @@ i3GEOF.legenda = {
 						id = retorno.data[i].tema+"-"+retorno.data[i].idclasse; //layer+indice da classe
 						re = new RegExp("'", "g");
 						exp = (retorno.data[i].expressao).replace(re,'"');
-						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' /></td><td><img style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick='i3GEOF.legenda.editaSimbolo(\"i3GEOlegendaid_"+id+"\")' /></td><td>");
+						ins.push("<tr><td><img style='cursor:pointer' title='clique para excluir' onclick='i3GEOF.legenda.excluilinhaf(this)' src='"+i3GEO.configura.locaplic+"/imagens/x.gif' title='excluir' /></td><td><img style='cursor:pointer' title='clique para alterar' src='"+retorno.data[i].imagem+"' onclick=i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_"+id+"') /></td><td>");
 						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite o novo nome",30,retorno.data[i].nomeclasse,"nome"));
 						ins.push("</td><td>");
 						ins.push($inputText("","","i3GEOlegendaid_"+id,"digite a nova express&atilde;o",30,exp,"expressao"));
@@ -539,7 +539,7 @@ i3GEOF.legenda = {
 		try{
 			$i("i3GEOlegendaguia1obj").style.display="none";
 			$i("i3GEOlegendaguia3obj").style.display="block";
-			var id = id.split("_"),estilo,p,cp;
+			var id = id.split("-"),estilo,p,cp;
 			i3GEOF.legenda.classe = id[1];
 			i3GEOF.legenda.estilo = 0;
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=editasimbolo&opcao=pegaparametros&tema="+i3GEOF.legenda.tema+"&classe="+id[1];
