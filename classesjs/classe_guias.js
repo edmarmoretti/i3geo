@@ -202,7 +202,7 @@ i3GEO.guias = {
 		//
 		//obtém outras guias que podem existir no mapa
 		//
-		var onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins;
+		var onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		for(g=0;g<12;g++){
@@ -289,7 +289,11 @@ i3GEO.guias = {
 </dl>
 */		
 		if(i3GEO.guias.TIPO === "sanfona"){
-			ins = '<dl id=sanfona'+onde.id+' class="accordion">';
+			ins = '<dl id=sanfona'+onde.id+' class="accordion" >';
+			if(navn)
+			{altura = i3GEO.parametros.h - (nguias * 25) - 1;}
+			else
+			{altura = i3GEO.parametros.h - (nguias * 23) + 1;}
 			for(ng=0;ng<nguias;ng++){
 				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
 					id = i3GEO.guias.CONFIGURA[guias[ng]].idconteudo;
@@ -299,7 +303,9 @@ i3GEO.guias = {
 						temp.innerHTML = "";
 						temp.style.display = "none";
 						temp.id = "";
-						ins += '<dt style=height:17px id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</dt>';
+						ins += '<dt style=height:17px id="'+i3GEO.guias.CONFIGURA[guias[ng]].id+'" >';
+						//ins += i3GEO.guias.CONFIGURA[guias[ng]].titulo+'<img id="" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" style="width:10px;" /></dt>';
+						ins += '<table class=accordiontable ><tr><td width="98%" >'+i3GEO.guias.CONFIGURA[guias[ng]].titulo+'</td><td width="2%" ><img id="" src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" style="width:10px;" /></td></tr></table>';
 						ins += '<dd clas=close >';
 						ins += '<div class=bd >';
 						ins += '<div id="'+id+'" >'+guiaconteudo+'</div></div></dd>';
@@ -308,10 +314,10 @@ i3GEO.guias = {
 			}
 			ins += "</dl>";
 			onde.innerHTML = ins;
-			onde.style.height = i3GEO.parametros.h - (nguias * 25) + "px";
+			onde.style.height = altura+"px";
 			onf = function(){};
 			outf = function(){};
-			YAHOO.lutsr.accordion.init(true,10,false,"sanfona"+onde.id,i3GEO.parametros.h - (nguias * 25));
+			YAHOO.lutsr.accordion.init(true,5,false,"sanfona"+onde.id,altura);
 		}
 		for(g=0;g<nguias;g++)
 		{

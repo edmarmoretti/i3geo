@@ -359,7 +359,7 @@ i3GEO = {
 				if(document.getElementById("ajuda")) //para efeitos de compatibilidade com as versões anteriores a 4.1
 				{i3GEO.ajuda.DIVAJUDA = "ajuda";}
 				abreJM = "sim";
-				if (i3GEO.util.pegaCookie("g_janelaMen")){
+				if(i3GEO.util.pegaCookie("g_janelaMen")){
 					abreJM = i3GEO.util.pegaCookie("g_janelaMen");
 					i3GEO.configura.iniciaJanelaMensagens = (abreJM === "sim") ? true : false;
 				}

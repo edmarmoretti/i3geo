@@ -307,8 +307,14 @@ i3GEO.arvoreDeCamadas = {
 		if(arguments.length === 5){
 			i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
 		}
-		this.SID = g_sid;
-		this.LOCAPLIC = g_locaplic;
+		if(g_sid)
+		{this.SID = g_sid;}
+		else
+		{this.SID = i3GEO.configura.sid;}
+		if(g_locaplic)
+		{this.LOCAPLIC = g_locaplic;}
+		else
+		{this.LOCAPLIC = i3GEO.configura.locaplic;}
 		if(onde !== "")
 		{this.IDHTML = onde;}
 		if(this.IDHTML === ""){return;}
