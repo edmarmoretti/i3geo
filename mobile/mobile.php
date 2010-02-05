@@ -30,13 +30,15 @@ document.body.innerHTML="";
 /*
 Title: mobile.php
 
-Interface do mapa
+Interface de apresentação do mapa. Inicializa o mapa interativo da versão mobile.
 
-File: i3geo/mobile/mobile.php
+A estrutura de funcionamento do mapa é baseada no reload da página toda vez que uma operação é executada.
 
-About: Licença
+Os parâmetros descritos abaixo são passados via URL.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Licenca:
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -54,14 +56,36 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parameters:
+Arquivo:
 
-tmpfname - nome do mapfile em uso
+i3geo/mobile/mobile.php
+
+Parametros:
+
+&tmpfname {string} - nome do mapfile em uso
+
+&tipo {string} - tipo de operação que será executada
+*/
+/*
+Section: PHP
+
+Operações executadas do lado do servidor
+
+Valores que o parâmetro "tipo" pode assumir.
+
+Exemplo:
+
+mobile.php?tipo=zoommais&tmpfname=xxxxxxx
 */
 include_once ("../classesphp/pega_variaveis.php");
 include_once("../classesphp/carrega_ext.php");
 require_once("../classesphp/funcoes_gerais.php");
 include("../ms_configura.php");
+/*
+Valor: zoommais
+
+Aproxima o mapa no nível de zoom 5.
+*/
 if ($tipo=="zoommais")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -69,6 +93,11 @@ if ($tipo=="zoommais")
 	$m->aproxima(5);
 	$m->salva();		
 }
+/*
+Valor: zoommais1
+
+Aproxima o mapa no nível de zoom 3.
+*/
 if ($tipo=="zoommais1")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -76,6 +105,11 @@ if ($tipo=="zoommais1")
 	$m->aproxima(3);
 	$m->salva();		
 }
+/*
+Valor: zoommais2
+
+Aproxima o mapa no nível de zoom 2.
+*/
 if ($tipo=="zoommais2")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -83,6 +117,11 @@ if ($tipo=="zoommais2")
 	$m->aproxima(2);
 	$m->salva();		
 }
+/*
+Valor: zoommenos
+
+Afasta o mapa no nível de zoom 5.
+*/
 if ($tipo=="zoommenos")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -90,6 +129,11 @@ if ($tipo=="zoommenos")
 	$m->afasta(5);
 	$m->salva();		
 }
+/*
+Valor: zoommenos
+
+Afasta o mapa no nível de zoom 3.
+*/
 if ($tipo=="zoommenos1")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -97,6 +141,11 @@ if ($tipo=="zoommenos1")
 	$m->afasta(3);
 	$m->salva();		
 }
+/*
+Valor: zoommenos
+
+Afasta o mapa no nível de zoom 2.
+*/
 if ($tipo=="zoommenos2")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -104,6 +153,11 @@ if ($tipo=="zoommenos2")
 	$m->afasta(2);
 	$m->salva();		
 }
+/*
+Valor: norte
+
+Desloca o mapa para o norte.
+*/
 if ($tipo=="norte")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -114,6 +168,11 @@ if ($tipo=="norte")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
+/*
+Valor: sul
+
+Desloca o mapa para o sul.
+*/
 if ($tipo=="sul")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -124,6 +183,11 @@ if ($tipo=="sul")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
+/*
+Valor: leste
+
+Desloca o mapa para o leste.
+*/
 if ($tipo=="leste")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -133,6 +197,11 @@ if ($tipo=="leste")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
+/*
+Valor: oeste
+
+Desloca o mapa para o oeste.
+*/
 if ($tipo=="oeste")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -142,16 +211,31 @@ if ($tipo=="oeste")
 	$m->pan($x,$y,"","");
 	$m->salva();		
 }
+/*
+Valor: localizar
+
+Abre formulário para busca geográfica.
+*/
 if ($tipo=="localizar")
 {
 	include("localizar.php");
 	exit;
 }
+/*
+Valor: localizarxy
+
+Abre formulário para incluir um ponto no mapa
+*/
 if ($tipo=="localizarxy")
 {
 	include("localizarxy.php");
 	exit;
 }
+/*
+Valor: autopan
+
+Desloca o mapa de forma interativa.
+*/
 if ($tipo =="autopan")
 {
 	include("../classesphp/classe_navegacao.php");
@@ -240,67 +324,140 @@ if ((isset($maparef)) && ($maparef == "sim"))
 ?>
 </body>
 <script>
+/*
+Section: Javascript
+
+Operações executadas pelo navegador
+*/
 modooperacao = ""
 navn = false
 navm = false
 var app = navigator.appName.substring(0,1);
 if (app=='N') navn=true; else navm=true;
 pan = ""
+/*
+Function: mensagem
+
+Inclui uma mensagem no elemento HTML com id=mensagem
+
+Parametro:
+
+m {string} - mensagem
+*/
 function mensagem(m)
 {
 	if(m == ""){var m = "-";}
 	document.getElementById("mensagem").innerHTML = m
 }
+/*
+Function: zoommais
+
+Executa a operação zoommais
+*/
 function zoommais()
 {
 	document.getElementById('tipo').value = 'zoommais';
 	document.getElementById('f').submit();
 }
+/*
+Function: zoommais1
+
+Executa a operação zoommais1
+*/
 function zoommais1()
 {
 	document.getElementById('tipo').value = 'zoommais1';
 	document.getElementById('f').submit();
 }
+/*
+Function: zoommais2
+
+Executa a operação zoommais2
+*/
 function zoommais2()
 {
 	document.getElementById('tipo').value = 'zoommais2';
 	document.getElementById('f').submit();
 }
+/*
+Function: zoommenos
+
+Executa a operação zoommenos
+*/
 function zoommenos()
 {
 	document.getElementById('tipo').value = 'zoommenos';
 	document.getElementById('f').submit();
 }
+/*
+Function: zoommenos1
+
+Executa a operação zoommenos1
+*/
 function zoommenos1()
 {
 	document.getElementById('tipo').value = 'zoommenos1';
 	document.getElementById('f').submit();
 }
+/*
+Function: zoommenos2
+
+Executa a operação zoommenos2
+*/
 function zoommenos2()
 {
 	document.getElementById('tipo').value = 'zoommenos2';
 	document.getElementById('f').submit();
 }
+/*
+Function: norte
+
+Executa a operação norte
+*/
 function norte()
 {
 	document.getElementById('tipo').value = 'norte';
 	document.getElementById('f').submit();
 }
+/*
+Function: sul
+
+Executa a operação sul
+*/
 function sul()
 {
 	document.getElementById('tipo').value = 'sul';
 	document.getElementById('f').submit();
 }
+/*
+Function: leste
+
+Executa a operação leste
+*/
 function leste()
 {
 	document.getElementById('tipo').value = 'leste';
 	document.getElementById('f').submit();
 }
+/*
+Function: oeste
+
+Executa a operação oeste
+*/
 function oeste()
 {
 	document.getElementById('tipo').value = 'oeste';
 	document.getElementById('f').submit();
 }
+/*
+Function: op
+
+Abre um novo formulário PHP
+
+Parametro:
+
+valor {string} - indica qual formulário deve ser aberto
+*/
 function op(valor)
 {
 	document.getElementById('tipo').value = valor;
@@ -324,6 +481,11 @@ function op(valor)
 	{document.getElementById('f').action = "localizarxy.php?"}
 	document.getElementById('f').submit();
 }
+/*
+Function: maparef
+
+Mostra na tela o mapa de referência
+*/
 function maparef()
 {
 	var temp = document.getElementById("referencia").value;
@@ -334,6 +496,11 @@ function maparef()
 	document.getElementById('tipo').value = "";
 	document.getElementById('f').submit();
 }
+/*
+Function: autopan
+
+Captura os parâmetros para executar a operação de deslocamento dinâmico do mapa
+*/
 function autopan(exy)
 {
 	var xy = capturaposicao(exy)
@@ -348,11 +515,25 @@ function autopan(exy)
 		document.getElementById('f').submit();
 	}
 }
+/*
+Function: identifica
+
+Altera o modo de operação do mapa de forma que ao ser clicado, o resultado será a abertura de um formulário com os resultados do clique
+*/
 function identifica()
 {
 	modooperacao = "identifica"
 	document.getElementById("botoes").innerHTML = "Clique no mapa"
 }
+/*
+Function: capturaposicao
+
+Calcula a posição do clique sobre o mapa
+
+Retorno:
+
+{array}
+*/
 function capturaposicao(exy)
 {
 	//var e = (navn) ? exy : window.event;
@@ -365,6 +546,15 @@ function capturaposicao(exy)
 	var yfig = yfig - pos[1]
 	return [xfig,yfig]
 }
+/*
+Function: findPos
+
+Calcula a posição de um elemento HTML na tela
+
+Retorno:
+
+{array}
+*/
 function findPos(obj) {
 	var curleft = curtop = 0;
 	if (obj.offsetParent) {

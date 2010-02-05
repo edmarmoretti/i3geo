@@ -2,13 +2,9 @@
 /*
 Title: localizarxy.php
 
-Localiza um lugar no mapa.
+Constrói e apresenta na tela um formulário para o usuário indicar um par de coordenadas para inserir um ponto no mapa
 
-Utiliza o web service geonames do MMA.
-
-File: i3geo/mobile/localizar.php
-
-About: Licença
+Licenca
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -28,9 +24,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parameters:
+Arquivo: i3geo/mobile/localizar.php
 
-tmpfname - nome do mapfile em uso
+Parametro:
+
+tmpfname {string} - nome do mapfile em uso
+
+x {numerico} - coordenada x em dms
+
+y {numerico} - coordenada y em dms
 */
 error_reporting(E_ALL);
 require_once("../classesphp/funcoes_gerais.php");

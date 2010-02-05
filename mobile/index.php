@@ -30,17 +30,15 @@ h1
 /*
 Title: index.php
 
-i3geo mobile
+Tela inicial do i3geo mobile
 
-Inicializa a versão do i3geo para dispositivos móveis.
+Apresenta na tela as mensagens de boas vindas e a lista de mapas que o usuário pode abrir. Mostra também um campo de formulário para busca de lugares.
 
-A lista de mapas mostrada na tela é obtida do arquivo menutemas/mapas.xml ou outro que estiver definido na variável de configuração $locmapas (definido no i3geo/ms_configura.php) 
+A lista de mapas mostrada na tela é obtida do cadastro de mapas existente no sistema de administração do i3Geo. 
 
 Faz o cálculo do tamanho da tela do dispositivo e repassa a variável para o programa inicia.php.
 
-File: i3geo/mobile/index.php
-
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -59,6 +57,8 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo: i3geo/mobile/index.php
 
 */
 include_once("../classesphp/pega_variaveis.php");
@@ -106,9 +106,11 @@ Function: ligar
 
 Inicializa o i3geo mobile passando a lista de temas que devem ser ativados
 
-Parameter:
+Parametros:
 
-temas - lista de códigos de temas
+temas {string} - lista de códigos de temas que serão acrescentados ao mapa
+
+layers {string} - lista de layers que serão ligados
 */
 function ligar(temas,layers)
 {
@@ -119,10 +121,9 @@ function ligar(temas,layers)
 /*
 Function: localizar
 
-Inicia a busca por um lugar
-
+Acessa o PHP que gera o formulário de busca por um lugar.
 */
-function localizar(temas)
+function localizar()
 {
 	document.getElementById('temasa').value = "estadosl";
 	document.getElementById('layers').value = "baserasterwms";

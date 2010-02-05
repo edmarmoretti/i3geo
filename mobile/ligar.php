@@ -4,9 +4,9 @@ Title: ligar.php
 
 Liga um tema que não está visível no mapa
 
-File: i3geo/mobile/ligar.php
+Constrói e mostra um formulário com a lista de temas desligados para o usuário escolher.
 
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,9 +26,11 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parameters:
+Arquivo: i3geo/mobile/ligar.php
 
-tmpfname - nome do mapfile em uso
+Parametro:
+
+tmpfname {string} - nome do mapfile em uso
 */
 require_once("../classesphp/funcoes_gerais.php");
 include_once ("../classesphp/pega_variaveis.php");

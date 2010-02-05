@@ -2,15 +2,13 @@
 /*
 Title: inicia.php
 
-Abre o mapa
-
 Cria o mapa e abre a interface.
 
 Esse programa inclui o arquivo i3geo/ms_criamapa.php ativando alguns parâmetros especiais para a versão mobile.
 
-File: i3geo/mobile/inicia.php
+Cria os arquivos temporários do mapa e faz o include de <mobile.php>
 
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -29,6 +27,9 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+
+Arquivo: i3geo/mobile/inicia.php
 
 */
 include_once("../classesphp/pega_variaveis.php");
@@ -49,6 +50,16 @@ Faz o include do programa mobile.php.
 As variáveis wmobile e hmobile, que especificam o tamanho da tela do dispositivo, são definidas por index.php.
 
 A variável tmpfname é definida no processo de criação do mapa, feito pelo ms_criamapa.php, e guarda o nome do mapfile criado.
+
+Globais:
+
+$wmobile
+
+$hmobile
+
+$tmpfname
+
+$postgis_mapa
 */
 function iniciamobile()
 {
@@ -63,7 +74,6 @@ function iniciamobile()
 	//$n = explode(",",$bcor);
 	$cornb->setrgb(255,0,0);
 	$mapa->save($tmpfname);
-	//$tipo = "inicia";
 	include("mobile.php");
 	exit;
 }	

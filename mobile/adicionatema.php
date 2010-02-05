@@ -4,9 +4,11 @@ Title: adicionatema.php
 
 Adiciona um tema ao mapa
 
-File: i3geo/mobile/adicionatema.php
+Monta e apresenta um formulário com a lista de grupos, subgrupos e temas
 
-About: Licença
+O usuário deve primeiro escolher um grupo para depois escolher um tema
+
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,9 +28,13 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parameters:
+Arquivo: i3geo/mobile/adicionatema.php
 
-tmpfname - nome do mapfile em uso
+Parametro:
+
+$tmpfname {string} - nome do mapfile em uso
+
+$tipo {string} - tipo de operação
 */
 
 error_reporting(E_ALL);

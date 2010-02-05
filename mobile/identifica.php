@@ -2,11 +2,9 @@
 /*
 Title: identifica.php
 
-Identifica elementos no mapa em determinada coordenada x e y
+Identifica elementos no mapa em determinada coordenada x e y e apresenta o resultado na tela
 
-File: i3geo/mobile/adicionatema.php
-
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -26,9 +24,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parameters:
+Arquivo: i3geo/mobile/adicionatema.php
 
-tmpfname - nome do mapfile em uso
+Parametro:
+
+tmpfname {string} - nome do mapfile em uso
+
+x {numerico} - coordenada x em unidades de tela
+
+y {numerico} - coordenada y em unidades de tela
 */
 
 error_reporting(0);
