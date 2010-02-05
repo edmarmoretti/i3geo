@@ -2,23 +2,34 @@
 /*
 Title: pega_variaveis.php
 
-Processa os array $_GET e $_POST, transformando-as em variáveis conforme as chaves.
-Deve ser incluído sempre nos programas em PHP, evitando que o parâmetro "REGISTER_GLOBALS" 
+Processa os arrays $_GET e $_POST, transformando-os em variáveis conforme as chaves.
+
+Deve ser incluído sempre no início dos programas em PHP utilizados pelo i3Geo, evitando que o parâmetro "REGISTER_GLOBALS" 
 do PHP precise ser definido como "On".
 
 No caso do uso de POST do lado cliente com a biblioteca CPAINT, é feito o processamento
 dos argumentos definidos na chamada call. Para fazer a chamada utilizando-se POST, deve-se seguir o exemplo abaixo:
 
 	var cp = new cpaint();
+	
 	cp.set_response_type("JSON");
+	
 	cp.set_transfer_mode("POST");
+	
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid;
-	cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
+	
+	cp.call(p,"criaSHPvazio",ativanovotema,"funcao=criashpvazio,tema=teste");
+	
+	
+O parâmetro "funcao=criashpvazio,tema=teste" será transformado em variáveis, ou seja,
+
+$funcao = "v";
+
+$tema = "teste";
 
 Licenca:
 
 GPL2
-
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -37,10 +48,6 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-Exemplo: 
-
-include("pega_variaveis.php");
 
 Arquivo:
 

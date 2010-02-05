@@ -2,13 +2,12 @@
 /*
 Title: graficos.php
 
-Funções de gráficos do software R.
+Funções de representação gráfica de dados com o software R.
 Gera scripts na linguagem R para ser executados como CGI.
 
 Licenca:
 
 GPL2
-
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

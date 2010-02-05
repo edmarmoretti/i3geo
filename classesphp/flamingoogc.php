@@ -4,6 +4,10 @@ Title: flamingoogc.php
 
 Gerador automático de web services OGC para a interface flamingo do i3geo
 
+Processa o mapfile temporário utilizado no mapa atual transformando-o em um serviço OGC.
+Realiza as operações sobre o mapfile conforme as necessidades da API do software Flamingo.
+Esse programa é utilizado em conjunto com flamingo.inc
+
 Licenca:
 
 GPL2
@@ -30,26 +34,6 @@ Free Software Foundation, Inc., no endereço
 Arquivo:
 
 i3geo/flamingoogc.php
-
-Parametros:
-
-lista - se for igual a "temas", mostra uma lista dos temas disponíveis
-
-ajuda - se for definida na URL, mostra uma ajuda ao usuário
-
-tema - nome do tema do serviço. Se for definido, o web service conterá apenas o tema.
-
-intervalo - valor inicial e final com o número de temas que serão mostrados no serviço
-
-legenda - mostra a legenda no corpo do mapa sim|nao
-
-About: Exemplos
-
-ogc.php?lista=temas
-
-ogc.php?tema=bioma
-
-ogc.php?intervalo=0,50
 */
 error_reporting(E_ALL);
 if (!function_exists('ms_GetVersion'))
@@ -80,7 +64,8 @@ foreach ($_GET as $k=>$v)
 
 $req->setParameter("VeRsIoN","1.1.0");
 $oMap = ms_newMapobj("../aplicmap/ogcws.map");
-$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
+$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+$proto = $protocolo[0] . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $or = $proto.$server.$_SERVER['PHP_SELF'];
 $oMap->setmetadata("ows_onlineresource",$or."?g_sid=".$g_sid);

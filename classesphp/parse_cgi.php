@@ -2,24 +2,10 @@
 /*
 Title: parse_cgi.php
 
-Este programa alguns dos parâmetros do mapserver CGI e retorna uma imagem do mapa.
+Faz o porcessamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
+das variáveis de conexão com banco e outras operações específicas do i3Geo.
 
-É utilizado para processar o mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
-das variáveis de conexão com banco.
-
-Deve ser utilizado na tag IMG de um arquivo HTML.
-
-Parametros:
-
-$g_sid - código da seção aberta
-
-$map_size - string com o tamanho do novo mapa (w h)
-
-$mapext - extensão geográfica do novo mapa (xmin ymin xmax ymax)
-
-$map_imagecolor - cor do fundo do mapa (default é -1 -1 -1)
-
-$map_transparent - a cor do fundo será transparente? (ON OFF, default é ON)
+Pode ser utilizado na tag IMG de um arquivo HTML ao invés de ser utilizado o Mapserver em modo CGI.
 
 Licenca:
 
@@ -47,6 +33,22 @@ Free Software Foundation, Inc., no endereço
 Arquivo:
 
 i3geo/classesphp/parse_cgi.php
+
+Parâmetros:
+
+$g_sid {string} - código da seção aberta no servidor
+
+$map_size {string} - string com o tamanho do novo mapa (w h)
+
+$mapext {string}- extensão geográfica do novo mapa (xmin ymin xmax ymax)
+
+$map_imagecolor {string} - cor do fundo do mapa (default é -1 -1 -1)
+
+$map_transparent {string} - a cor do fundo será transparente? (ON OFF, default é ON)
+
+Exemplo:
+
+http://localhost/i3geo/classesphp/parse_cgi.php?g_sid=dgge4877dhhhgrjjey&map_size=500 500
 */
 error_reporting(0);
 include_once("pega_variaveis.php");

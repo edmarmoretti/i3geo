@@ -2,15 +2,19 @@
 /*
 Title: carrega_ext.php
 
-Verifica se as extensões do PHP necessárias ao I3Geo estão carregadas.
-Tenta carregar as extensões que não estiverem habilitadas por default.
+Verifica se as extensões do PHP necessárias ao i3Geo estão carregadas, inclusive o php_mapscript.
+Tenta carregar as extensões que não estiverem habilitadas diretamente na configuração do PHP.
 
-O ms_criamapa.php define a variável de seção $ler_extensoes indicando as que devem ser lidas.
-
-Se a variável $ler_extensoes não estiver definida, o programa irá criar. Essa é a situação
-quando o ms_criamapa.php é executado.
+O ms_criamapa.php define a variável de seção $ler_extensoes indicando as extensões que devem ser lidas
+antes de ser utilizado o PHPMapscript.
 
 Caso seja necessário carregar alguma extensão adicional, basta incluir no array $extensoes
+
+Se todas as extensões forem carregadas diretamente pelo PHP, esse programa pode ser totalmente comentado 
+melhorando a performance do i3geo.
+
+Nas versões mais novas do PHP, o carregamento dinâmico de extensões
+não é mais permitido, tornando esse programa inútil.
 
 Licenca:
 
@@ -37,11 +41,6 @@ Free Software Foundation, Inc., no endereço
 Arquivo:
 
 i3geo/classesphp/carrega_ext.php
-*/
-/*
-Array com a lista de extensoes que devem ser carregadas pelo i3geo.
-
-Outras extensoes exigidas pelo i3geo também são verificadas, como mapscript e gd.
 */
 if(function_exists("dl")){
 	$extensoes = array("zlib","libxml","SimpleXML","dom","xml","simplexml","mbstring");

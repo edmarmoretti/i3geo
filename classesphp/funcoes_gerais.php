@@ -2,7 +2,7 @@
 /*
 Title: funcoes_gerais.php
 
-Contém um conjunto de funções que são compartilhadas por outros programas do I3Geo.
+Contém um conjunto de funções que são compartilhadas por outros programas PHP utilizados pelo i3Geo.
 
 Licenca:
 
@@ -35,7 +35,7 @@ i3geo/classesphp/funcoes_gerais.php
 Section: Imagens
 */
 /*
-function: classesRasterI
+Function: classesRasterI
 
 Gera parâmetros para classificação de imagens.
 
@@ -43,17 +43,25 @@ Gera a expressão e as cores para uso em classes com intervalos iguais para repre
 
 Parametros:
 
-minvalor - Menor valor existente na série
+$minvalor {numeric} - Menor valor existente na série
 
-maxvalor - Maior valor
+$maxvalor {numeric} - Maior valor
 
-nclasses - Número de classes
+$nclasses {numeric} - Número de classes
 
-cores - Cores. Array de array de cores cores[0] = array(r,g,b)
+$cores {array} - Cores. Array de array de cores cores[0] = array(r,g,b)
 
-return:
+Retorno:
 
-array - array("nomeclasse"=>$nomeclasse,"expressao"=>$expressao,"cores"=>$cores[$i])
+(start code)
+array(
+	array(
+		"nomeclasse"=>,
+		"expressao"=>,
+		"cores"=>
+	)
+)
+(end)
 */
 //error_reporting(0);
 function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
@@ -73,26 +81,26 @@ function classesRasterI($minvalor,$maxvalor,$nclasses,$cores)
 	return $resultado;
 }
 /*
-function: fusaoGrafico
+Function: fusaoGrafico
 
 Faz a fusao de uma imagem com outra grafico+imagem.
 
-parameters:
+Globais:
 
-imagem - imagem do mapa
+$imagem {objeto} - imagem base, caso $map_file for ""
 
-grafico - imagem do grafico
+$grafico {objeto} - imagem do grafico
 
-dir_tmp - diretorio onde estao as imagens
+$dir_tmp {string} - diretorio onde estao as imagens
 
-cp - Objeto CPAINT
+$cp {CPAINT} - Objeto CPAINT
 
-Return:
+$map_file [string} - arquivo mapfile que será utilizado para gerar a imagem base. Se for "", será utilizado a imagem definida em $imagem
 
-Objeto cpaint com o nome da nova imagem criada.
+Retorno:
 
-Include:
-<classe_imagem.php>
+{string} - endereço da imagem criada
+
 */
 function fusaoGrafico()
 {
@@ -116,22 +124,23 @@ function fusaoGrafico()
 Section: R
 */
 /*
-function: executaR
+Function: executaR
 
 Executa comandos do R.
 
-parameters:
+Parametros:
 
-$rcode - Código que será executado.
+$rcode {array} - Código que será executado.
 
-$dir_tmp - Diretório temporário onde ficarão os arquivos para processamento.
+$dir_tmp {string} - Diretório temporário onde ficarão os arquivos para processamento.
 
-$R_path - Executável do R.
+$R_path {string} - Executável do R.
 
-$gfile_name - nome da imagem que será criada
+$gfile_name {string} - nome da imagem que será criada
 
-Include:
-<classe_imagem.php>
+Retorno:
+
+{string} - nome do arquivo com o código R que foi executado
 */
 function executaR($rcode,$dir_tmp,$R_path,$gfile_name="")
 {
@@ -152,15 +161,21 @@ function executaR($rcode,$dir_tmp,$R_path,$gfile_name="")
 	return($r_input);
 }
 /*
-function: criaImagemR
+Function: criaImagemR
 
 Cria uma imagem png a partir de dados armazenados em disco.
 
 Utilizado para gerar uma imagem com base nos resultados de comandos R.
 
-parameters:
+O nome da imagem criada será o mesmo nome de $nomearq, porém com extensão .png
 
-$nomearq - Nome do arquivo no servidor que será utilizado para gerar a imagem.
+Parametros:
+
+$nomearq {string} - Nome do arquivo no servidor que será utilizado para gerar a imagem.
+
+Retorno:
+
+{array($minpixel,$maxpixel)} - tamanho da imagem gerada.
 */
 function criaImagemR($nomearq)
 {
@@ -221,16 +236,17 @@ function criaImagemR($nomearq)
 Section: cor
 */
 /*
-function: corRGB
+Function: corRGB
 
 Obtém os valores em RGB de um objeto cor do Mapscript.
 
-parameter:
+Parametro:
 
-$cor - objeto cor do mapscript.
+$cor {objeto} - objeto cor do mapscript.
 
-return:
-string - Cor em RGB separados por vírgula.
+Retorno:
+
+{string} - Cor em RGB separados por vírgula.
 */
 function corRGB($cor)
 {
@@ -240,17 +256,17 @@ function corRGB($cor)
 	return($r.",".$g.",".$b);
 }
 /*
-function: corE
+Function: corE
 
 Aplica uma cor a um elemento de um objeto label de um layer.
 
-parameter:
+Parametro:
 
-label - Objeto do tipo label.
+$label {objeto} - Objeto do tipo label.
 
-cor - RGB separado por espacos, se for um array, aplica diretamente ao objeto cor.
+$cor {string} - RGB separado por espacos, se for um array, aplica diretamente ao objeto cor.
 
-elemento - Nome do elemento que receberá a cor.
+$elemento {string} - Nome do elemento que receberá a cor.
 */
 function corE($label,$cor,$elemento)
 {
@@ -273,17 +289,17 @@ function corE($label,$cor,$elemento)
 	{$corres->setRGB($cor->red,$cor->green,$cor->blue);}
 }
 /*
-function: colorHex
+Function: colorHex
 
 Aloca uma cor a um objeto imagem (GD).
 
 A origem é uma cor definida em hexadecimal.
 
-parameters:
+Parametro:
 
-$img - objeto imagem
+$img {objeto} - objeto imagem
 
-$HexColorString - cor hexadecimal
+$HexColorString {string} - cor hexadecimal
 */
 function colorHex($img, $HexColorString)
 {
@@ -293,16 +309,17 @@ function colorHex($img, $HexColorString)
 	return ImageColorAllocate($img, $R, $G, $B);
 }
 /*
-function: colorRGB
+Function: colorRGB
 
 Aloca uma cor a um objeto imagem (GD).
 
 A origem é uma cor definida em rgb.
 
-parameter:
-$img - objeto imagem
+Parametros:
 
-$ColorString - cor r,g,b
+$img {objeto} - objeto imagem
+
+$ColorString {string} - cor r,g,b
 */
 function colorRGB($img, $ColorString)
 {
@@ -313,16 +330,17 @@ function colorRGB($img, $ColorString)
 	return ImageColorAllocate($img, $R, $G, $B);
 }
 /*
-function: colorRGBshadow
+Function: colorRGBshadow
 
 Aloca uma cor de sombra a um objeto imagem (GD).
 
 A origem é uma cor definida em rgb.
 
-parameters:
-$img - objeto imagem
+Parametros:
 
-$ColorString - cor r,g,b
+$img {objeto} - objeto imagem
+
+$ColorString {string} - cor r,g,b
 */
 function colorRGBshadow($img, $ColorString, $mork)
 {
@@ -345,16 +363,17 @@ function colorRGBshadow($img, $ColorString, $mork)
 	return ImageColorAllocate($img, $R, $G, $B);
 }
 /*
-function: colorHexshadow
+Function: colorHexshadow
 
 Aloca uma cor de sombra a um objeto imagem (GD).
 
 A origem é uma cor definida em hexadecimal.
 
-parameters:
-$img - objeto imagem
+Parametros:
 
-$ColorString - cor hexadecimal
+$img {objeto} - objeto imagem
+
+$ColorString {string} - cor hexadecimal
 */
 function colorHexshadow($img, $HexColorString, $mork)
 {
@@ -376,12 +395,17 @@ function colorHexshadow($img, $HexColorString, $mork)
 	return ImageColorAllocate($img, $R, $G, $B);
 }
 /*
-function: RGB2hex
+Function: RGB2hex
 
 Converte uma cor rgb em hex.
 
-parameters:
-$rgb - cor RGB
+Parametro:
+
+$rgb {string} - cor RGB
+
+Retorno:
+
+{string}
 */
 function RGB2hex($rgb)
 {
@@ -394,17 +418,17 @@ function RGB2hex($rgb)
 Section: arquivos
 */
 /*
-function: nomeRandomico
+Function: nomeRandomico
 
 Gera um nome randômico.
 
-parameter:
+Parametro:
 
-Número de dígitos.
+$n {numeric} - Número de dígitos.
 
-return:
+Retorno:
 
-string - Nome aleatório.
+{string}
 */
 function nomeRandomico($n=10)
 {
@@ -416,10 +440,23 @@ function nomeRandomico($n=10)
 	return $nomes;
 }
 /*
-function: listaEpsg
+Function: listaEpsg
 
 Lê o arquivo com os códigos de projeção epsg e retorna um array com os dados.
 
+O arquivo lido é "../ferramentas/epsg.txt"
+
+Retorno:
+
+{start code}
+array(
+	array(
+		"codigo"=>,
+		"nome"=>,
+		"def"=>
+	)
+)
+{end}
 */
 function listaEpsg()
 {
@@ -449,15 +486,15 @@ function listaEpsg()
 	return $lista;		
 }
 /*
-function: copiaSeguranca
+Function: copiaSeguranca
 
 Cria cópia de segurança do map_file.
 
 Salva o mapfile atual incluindo no nome, a string "seguranca".
 
-parameter:
+Parametro:
 
-map_file - Arquivo map file.
+$map_file {string} - Arquivo map file.
 
 */
 function copiaSeguranca($map_file)
@@ -491,17 +528,17 @@ function copiaSeguranca($map_file)
 	}
 }
 /*
-function: listaDiretorios
+Function: listaDiretorios
 
 Retorna lista de diretórios.
 
 parameters:
 
-$diretorio - Raiz onde será feita a busca.
+$diretorio {string} - Raiz onde será feita a busca.
 
-return:
+Retorno:
 
-array com a lista de diretórios.
+{array}
 */
 function listaDiretorios($diretorio)
 {
@@ -528,13 +565,13 @@ Function: listaArquivos
 
 Retorna lista de arquivos.
 
-Parametros:
+Parametro:
 
-$diretorio - Raiz onde será feita a busca.
+$diretorio {string} - Raiz onde será feita a busca.
 
-Return:
+Retorno:
 
-array com a lista de arquivos e diretórios.
+{array}
 */
 function listaArquivos($diretorio)
 {
@@ -564,14 +601,15 @@ function listaArquivos($diretorio)
 	{return "erro";}
 }
 /*
-function: gravaDados
+Function: gravaDados
 
 Grava as linhas de um array em um arquivo.
 
-parameters:
-$dados - Dados que serão gravados.
+Parametros:
 
-$arq - Nome do arquivo que será gravado
+$dados {array} - Dados que serão gravados.
+
+$arq {string} - Nome do arquivo que será gravado
 */
 function gravaDados($dados,$arq)
 {
@@ -582,7 +620,7 @@ function gravaDados($dados,$arq)
 	}
 }
 /*
-function: listaTrueType
+Function: listaTrueType
 
 Lista as fontes true type.
 
@@ -590,14 +628,19 @@ Lê o arquivo fontes.txt existente no diretório symbols da instalação do I3Geo.
 O resultado é gravado em um arquivo temporário para include, o que torna mais rápida a carga futura.
 O arquivo para include armazena a variável res que contém a lista de fontes separadas por vírgula.
 
-parameters:
-$cp - Objeto CPAINT.
+Parametros:
 
-$locaplic - Localização da aplicação no servidor.
+$cp {CAPAINT} - Objeto CPAINT.
 
-$imgdir - Diretório das imagens.
+$locaplic {string} - Localização da aplicação no servidor.
 
-$dir_tmp - Diretório temporário.
+$imgdir {string} - Diretório das imagens.
+
+$dir_tmp {string} - Diretório temporário.
+
+Retorno:
+
+{string}
 */
 function listaTrueType()
 {
@@ -625,15 +668,19 @@ function listaTrueType()
 Section: mapa
 */
 /*
-function: substituiCon
+Function: substituiCon
 
 Substituí a string de conexão com o banco postgis pela string definida na inicialização (ms_configura.php)
 
 Parametros:
 
-map_file - arquivo mapfile
+$map_file {string} - arquivo mapfile
 
-postgis_mapa - string de conexão com o banco
+$postgis_mapa {array} - lista de strings de conexão com o banco
+
+Retorno:
+
+{boleano}
 */
 function substituiCon($map_file,$postgis_mapa)
 {
@@ -674,15 +721,15 @@ function substituiCon($map_file,$postgis_mapa)
 	return true;
 }
 /*
-function: restauraCon
+Function: restauraCon
 
 Esconde a string de conexão com o banco, caso necessário
 
 Parametros:
 
-map_file - arquivo mapfile
+$map_file {string} - arquivo mapfile
 
-postgis_mapa - string de conexão com o banco
+$postgis_mapa {string} - lista de conexão com o banco
 */
 function restauraCon($map_file,$postgis_mapa)
 {
@@ -706,21 +753,25 @@ function restauraCon($map_file,$postgis_mapa)
 	}
 }
 /*
-function: retornaReferencia
+Function: retornaReferencia
 
 Retorna uma string com as variaveis de um novo mapa de referencia.
 
-parameter:
+Globais:
 
-cp - Objeto CPAINT.
+$nomeImagem {string} - Nome da imagem do corpo do mapa.
 
-nomeImagem - Nome da imagem do corpo do mapa.
+$objMapa {objeto} - Objeto map.
 
-objMapa - Objeto map.
+$utilizacgi {string} - indica se o mapserver CGI está em uso
 
-return:
+$locmapserv	{string} - locallização do mapserver CGI
 
-Objeto cpaint com uma string contendo variáveis no formato javascript
+$map_file {string} - mapfile que será processado
+
+Retorno:
+
+string contendo variáveis no formato javascript
 */
 function retornaReferencia()
 {
@@ -753,27 +804,33 @@ function retornaReferencia()
 	return($s);
 }
 /*
-function: retornaReferenciaDinamica
+Function: retornaReferenciaDinamica
 
 Retorna uma string com as variaveis de um novo mapa de referencia gerado de forma dinamica.
 
 O mapa de referência é baseado no mapfile aplicmap/referenciadinamica.map ou no mapa atual
 
-parameter:
+Globais:
 
-cp - Objeto CPAINT.
+$nomeImagem {string} - Nome da imagem do corpo do mapa.
 
-nomeImagem - Nome da imagem do corpo do mapa.
+$objMapa {objeto} - Objeto map.
 
-objMapa - Objeto map.
+$utilizacgi {string} - indica se o mapserver CGI está em uso
 
-zoom - fator de zoom
+$locmapserv	{string} - locallização do mapserver CGI
 
-tipo - tipo de referência dinamico|mapa
+$map_file {string} - mapfile que será processado
 
-return:
+$locaplic {string} - onde o i3geo está instalado
 
-Objeto cpaint com uma string contendo variáveis no formato javascript
+$zoom - fator de zoom
+
+$tipo - tipo de referência dinamico|mapa
+
+Retorno:
+
+String contendo variáveis no formato javascript
 */
 function retornaReferenciaDinamica()
 {
@@ -847,30 +904,26 @@ function retornaReferenciaDinamica()
 	return($s);
 }
 /*
-function: testaMapa
+Function: testaMapa
 
 Testa se um mapa está íntegro.
 
 Se o mapfile apresentar problemas, a cópia de segurança é restaurada.
 
-parameter:
+Parametro:
 
-map_file - Arquivo map file.
+$map_file {string} - Arquivo map file.
 
-postgis_mapa - string de conexão com o banco de dados definida em ms_configura.php
+$postgis_mapa {array} - lista de strings de conexão com o banco de dados definida em ms_configura.php
+
+Retorno:
+
+{string} - erro|ok
 */
 function testaMapa($map_file,$postgis_mapa)
 {
-	//var_dump($postgis_mapa);
-	//error_reporting(E_ALL);
 	substituiCon($map_file,$postgis_mapa);
 	$objMapa = ms_newMapObj($map_file);
-	
-	//$l = $objMapa->getlayerbyname("testesubsstring");
-	//echo $l->connection;
-	
-	
-	
 	ms_ResetErrorList();
 	$img = $objMapa->draw();
 	$erros = "";
@@ -902,15 +955,15 @@ function testaMapa($map_file,$postgis_mapa)
 	{return "ok";}
 }
 /*
-function: desligamargem
+Function: desligamargem
 
 Desliga o mapa de referência e a barra de escala de um mapa.
 
-parameter:
+Parametro:
 
-objmapa - Objeto map.
+$objmapa {objeto} - Objeto map.
 
-return:
+Retorno:
 
 Objeto map alterado.
 */
@@ -923,15 +976,15 @@ function desligamargem($objmapa)
 	return $objmapa;
 }
 /*
-function: desligaTemas
+Function: desligaTemas
 
 Desliga todos os temas de um mapa.
 
-parameter:
+Parametro:
 
-objMapa - Objeto map.
+$objMapa {objeto} - Objeto map.
 
-return:
+Retorno:
 
 Objeto map alterado.
 */
@@ -946,13 +999,13 @@ function desligaTemas($objMapa)
 	return $objMapa;
 }
 /*
-function: extPadrao
+Function: extPadrao
 
 Aplica o valor da extensao geográfica padrao a um objeto map.
 
-parameter:
+Parametro:
 
-$oMap - Mapa.
+$oMap {objeto} - objeto mapa
 */
 function extPadrao($oMap)
 {
@@ -967,17 +1020,17 @@ function extPadrao($oMap)
 	return $oMap;
 }
 /*
-function: gravaImagemMapa
+Function: gravaImagemMapa
 
 Grava a imagem do mapa atual
 
-Parametros:
+Parametro:
 
 $mapa - objeto mapa ou arquivo mapfile
 
-Return:
+Retorno:
 
-array - array("url"=>,"arquivo"=>) ou falso se ocorrer erro
+{array} - array("url"=>,"arquivo"=>) ou falso se ocorrer erro
 
 */
 function gravaImagemMapa($mapa)
@@ -1004,19 +1057,23 @@ function gravaImagemMapa($mapa)
 Section: atributos
 */
 /*
-function: pegaValores
+Function: pegaValores
 
 Pega os valores de um item de um tema.
 
-parameters:
+Parametros:
 
-$layer - Layer que será processado.
+$layer {objeto} - Layer que será processado.
 
-$item - Item que será processado.
+$item {string} - Item que será processado.
 
-$numerico - O item e numerico (true ou false).
+$numerico {boleano} - O item e numerico (true ou false).
 
-$ignorar - valor que será ignorado na listagem final
+$ignorar {string} - valor que será ignorado na listagem final
+
+Retorno:
+
+{array}
 */
 function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 {
@@ -1064,21 +1121,25 @@ function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 	return ($valitem);
 }
 /*
-function: pegaValoresM
+Function: pegaValoresM
 
 Pega os valores de múltiplos itens de um tema.
 
 Se for passado apenas um item, o array de retorno será unidimensional.
 
-parameters:
+Parametros:
 
-$layer - Layer que será processado.
+$layer {objeto} - Layer que será processado.
 
-$itens - Itens que serão processados.
+$itens {array} - Itens que serão processados.
 
-$exclui - O registro não será considerado se um dos valores for igual a esse valor.
+$exclui {string} - O registro não será considerado se um dos valores for igual a esse valor.
 
-$selecionados - Utiliza apenas os selecionados ou todos
+$selecionados {string} - sim|nao Utiliza apenas os selecionados ou todos
+
+Retorno:
+
+{array}
 */
 function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 {
@@ -1136,20 +1197,25 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 	return ($valores);
 }
 /*
-function: agrupaValores
+Function: agrupaValores
 
 Agrupa os valores de um array por um método de cálculo.
 
 No caso de soma e média, será considerado apenas um item e uma chave.
 
-parameters:
-$lista - Lista com os arrays contendo os dados que serão processados.
+Parametros:
 
-$indiceChave - Índice do array da lista que será considerado como a chave do array.
+$lista {array} - Lista com os arrays contendo os dados que serão processados.
 
-$indiceValor - Índice do array da lista que será considerado como o valor.
+$indiceChave {string} - Índice do array da lista que será considerado como a chave do array.
 
-$tipo - Tipo de processamento soma|media|contagem|nenhum.
+$indiceValor {string} - Índice do array da lista que será considerado como o valor.
+
+$tipo {string} - Tipo de processamento soma|media|contagem|nenhum.
+
+Retorno:
+
+{array}
 */
 function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 {
@@ -1210,12 +1276,17 @@ function agrupaValores($lista,$indiceChave,$indiceValor,$tipo)
 	return ($valores);
 }
 /*
-function: pegaItens
+Function: pegaItens
 
 Pega os itens da tabela de atributos de um tema.
 
-parameter:
-$layer - objeto layer
+Parametro:
+
+$layer {objeto} - objeto layer
+
+Retorno:
+
+{array}
 */
 function pegaItens($layer)
 {
@@ -1227,19 +1298,19 @@ function pegaItens($layer)
 	return $items;
 }
 /*
-function: buscaRapida
+Function: buscaRapida
 
 Acessa um web service RPC de busca de nomes e retorna os resultados.
 
-parameters:
+Parametros:
 
-servico - Endereco do web service.
+$servico {string} - Endereco do web service.
 
-palavra - palavra de busca
+$palavra {string} - palavra de busca
 
-return:
+Retorno:
 
-array com o resultado.
+{array} | "erro"
 */
 function buscaRapida($servico,$palavra)
 {
@@ -1260,15 +1331,19 @@ function buscaRapida($servico,$palavra)
 Section: coordenadas
 */
 /*
-function: ip2geo
+Function: ip2geo
 
 Localiza a coordenada geográfica de um endereço IP.
 
 Essa função baseia-se no pacote geoIP, que deve estar instalado em pacotes/geoip.
 
-parameters:
+Parametros:
 
-$ip - Número do IP.
+$ip {string} - Número do IP.
+
+Retorno:
+
+{array}
 */
 function ip2geo($ip,$locaplic="..")
 {
@@ -1294,15 +1369,19 @@ function ip2geo($ip,$locaplic="..")
 	return($resultado);
 }
 /*
-function: xy2imagem
+Function: xy2imagem
 
 Converte coordenadas geograficas em coordenadas de imagem e retorna um ponto.
 
-parameters:
+Parametros:
 
-$map_file - Arquivo map file.
+$map_file {string} - Arquivo map file.
 
-$xy - XY com as coordenadas (separado por espaço no caso de string)
+$xy {string | array} - XY com as coordenadas (separado por espaço no caso de string)
+
+Retorno:
+
+{mapscript point}
 */
 function xy2imagem($map_file,$xy)
 {
@@ -1323,15 +1402,19 @@ function xy2imagem($map_file,$xy)
 	return $pt;
 }
 /*
-function: imagem2xy
+Function: imagem2xy
 
 Converte coordenadas de imagem em coordenadas geográficas.
 
-parameters:
+Parametros:
 
-$map_file - Arquivo map file.
+$map_file {string} - Arquivo map file.
 
-$xy - XY com as coordenadas (separado por espaço no caso de string)
+$xy {array | string} - XY com as coordenadas (separado por espaço no caso de string)
+
+Retorno:
+
+{array}
 */
 function imagem2xy($map_file,$xy)
 {
@@ -1349,13 +1432,23 @@ function imagem2xy($map_file,$xy)
 }
 
 /*
-function: xy2wkt
+Function: xy2wkt
 
-Converte coordenadas em wkt.
+Converte coordenadas para wkt.
 
-parameters:
+Parametro:
 
-$xy - Lista de pares de coordenadas xy separadas por espaço.
+$xy {string} - Lista de pares de coordenadas xy separadas por espaço.
+
+Retorno:
+
+{start code}
+array(
+	"ponto"=>,
+	"linha"=>,
+	"poligono"=>
+)
+{end}
 */
 function xy2wkt($xy)
 {
@@ -1387,13 +1480,17 @@ function xy2wkt($xy)
 	return array("ponto"=>$shppt->toWkt(),"linha"=>$shplin->toWkt(),"poligono"=>$shppol->toWkt());
 }
 /*
-function: geo2zonaUTM
+Function: geo2zonaUTM
 
-Calcula a zona utm de um par de coordenadas geográficas
+Calcula a zona utm de um meridiano
 
 Parametros:
 
-$x - longitude
+$x {numerico dd} - longitude
+
+Retorno:
+
+{numerico}
 
 */
 function geo2zonaUTM($x)
@@ -1403,17 +1500,28 @@ function geo2zonaUTM($x)
 	return intval($x) + 1;
 }
 /*
-function: geo2utm
+Function: geo2utm
 
 Converte coordenadas geográficas para UTM
 
-parameters:
+Parametros:
 
-$x - longitude
+$x {numerico dd} - longitude
 
-$y - latitude
+$y {numerico dd} - latitude
 
-$zona - zona UTM
+$zona {numerico} - zona UTM
+
+Retorno:
+
+{start code}
+array(
+	"x"=>,
+	"y"=>,
+	"zona"=>,
+	"datum"=>"SAD-69"
+)
+{end}
 */
 function geo2utm($x,$y,$zona)
 {
@@ -1431,17 +1539,17 @@ function geo2utm($x,$y,$zona)
 Section: web services
 */
 /*
-function: reSLD
+Function: reSLD
 
-Regera o SLD de um tema WMS.
+Gera o SLD de um tema WMS.
 
-parameters:
+Parametros:
 
-$map_file - arquivo map_file
+$map_file {string} - arquivo map_file
 
-$tema - código do tema
+$tema {string} - código do tema
 
-$sld - string sld
+$sld {string} - arquivo onde o sld será gravado
 */
 function reSLD($map_file,$tema,$sld)
 {
@@ -1462,11 +1570,11 @@ function reSLD($map_file,$tema,$sld)
 	fclose($fp);
 }
 /*
-function: georssCanais (depreciado)
+georssCanais (depreciado)
 
 Lista os canais de um GeoRss.
 
-parameters:
+Parametros:
 $servico - Endereço do RSS.
 
 $map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
@@ -1491,14 +1599,19 @@ function georssCanais($servico,$map_file,$dir_tmp,$locaplic)
 Section: tema
 */
 /*
-function: pegaNome
+Function: pegaNome
 
-Retorna o nome correto de um layer
+Retorna o nome correto de um layer verificando os elementos METADATA TEMA e ALTTEMA
 
-parameters:
-$layer - Objeto layer
+Parametros:
 
-$enc - Código de página para conversão de caracteres
+$layer {objeto} - Objeto layer
+
+$enc {string} - Código de página para conversão de caracteres
+
+Retorno:
+
+{string}
 */
 function pegaNome($layer,$enc="AUTO")
 {
@@ -1514,20 +1627,25 @@ function pegaNome($layer,$enc="AUTO")
 	return $nometmp;
 }
 /*
-function: criaLayer
+Function: criaLayer
 
 Cria um objeto layer
 
-parameters:
-$oMapa - objeto mapa
+Parametros:
 
-$ms_tipo - tipo de layer
+$oMapa {objeto} - objeto mapa
 
-$ms_status - status de visibilidade
+$ms_tipo {MS_LAYER} - tipo de layer
 
-$metaTema - metadado com o nome do tema
+$ms_status [MS_STATUS} - status de visibilidade
 
-$metaClasse - metadado indicando se a classe é visível ou não na legenda
+$metaTema {string} - nome do tema que será incluído no metadata TEMA
+
+$metaClasse {string} - SIM|NAO indica se a classe é visível ou não na legenda
+
+Retorno:
+
+{layer}
 */
 function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM")
 {
@@ -1573,21 +1691,25 @@ function criaLayer($oMapa,$ms_tipo,$ms_status,$metaTema,$metaClasse="SIM")
 	return $l;
 }
 /*
-function: criaSHP
+Function: criaSHP
 
 Cria um arquivo shape file de um tema.
 
-parameters:
+Parametros:
 
-$tema - Tema que será processado.
+$tema {string} - Tema que será processado.
 
-$map_file -Nome do arquivo map file. Inclua o caminho completo no servidor.
+$map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$locaplic - Diretório onde está a aplicação no servidor.
+$locaplic {string} - Diretório onde está a aplicação no servidor.
 
-$dir_tmp - Diretório temporário
+$dir_tmp {string} - Diretório temporário
 
-$nomeRand - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
+$nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza o nome do tema (FALSE)
+
+Retorno:
+
+{string} - nome do arquivo criado
 */
 function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 {
@@ -1703,23 +1825,23 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	return $nomeshp;
 }
 /*
-function: downloadTema
+Function: downloadTema
 
 Faz o download dos dados de um tema.
 
-parameters:
+Parametros:
 
-$map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
+$map_file {string} - Nome do arquivo map file. Inclua o caminho completo no servidor.
 
-$tema - Tema que será processado.
+$tema {string} - Tema que será processado.
 
-$locaplic - Diretório da aplicação.
+$locaplic {string} - Diretório da aplicação.
 
-$dir_tmp - Diretório temporário
+$dir_tmp {string} - Diretório temporário
 
-return:
+Retorno:
 
-Array com o nome do diretório e nome do arquivo
+{array} com o nome do diretório e nome do arquivo
 
 Include:
 <ms_configura.php>
@@ -1760,7 +1882,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			$ll = $maptemp->getlayerbyname($tt);
 			$permite = $ll->getmetadata("permitedownload");
 			if($permite != "nao")			
-			ms_newLayerObj($map, $ll);
+			{ms_newLayerObj($map, $ll);}
 		}
 		$teste = @$map->getlayerbyname($tema);
 		if ($teste == "")
@@ -1883,7 +2005,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 Section: Outros
 */
 /*
-function: calculaAreaPixel
+Function: calculaAreaPixel
 
 Calcula a área em m2 de um pixel do mapa
 
@@ -1891,13 +2013,13 @@ O cálculo é feito projetando-se o mapa atual para a projeção policônica
 
 Parametros:
 
-map_file - arquivo do mapa
+$map_file {string} - arquivo do mapa
 
-celsize - tamanho do pixel em décimos de grau
+$celsize {numerico} - tamanho do pixel em décimos de grau
 
-Return:
+Retorno:
 
-{Numeric} - área em metros quadrados
+{Numerico} - área em metros quadrados
 */
 function calculaAreaPixel($map_file,$celsize)
 {
@@ -1922,9 +2044,13 @@ function calculaAreaPixel($map_file,$celsize)
 	return $area;
 }
 /*
-function: pegaIPcliente
+Function: pegaIPcliente
 
 Pega o IP do cliente
+
+Retorno:
+
+{string}
 */
 function pegaIPcliente()
 {
@@ -1937,9 +2063,13 @@ function pegaIPcliente()
 	return $ip;
 }
 /*
-function: pegaIPcliente2
+Function: pegaIPcliente2
 
 Pega o IP do cliente sem REMOTE_ADDR
+
+Retorno:
+
+{string}
 */
 function pegaIPcliente2()
 {
@@ -1950,13 +2080,13 @@ function pegaIPcliente2()
 	return $ip;
 }
 /*
-function: versao
+Function: versao
 
 Retorna a versão do Mapserver.
 
-Return:
+Retorno:
 
-array - array("completa"=>,"principal"=>)
+{array} - array("completa"=>,"principal"=>)
 */
 function versao()
 {
@@ -1974,15 +2104,15 @@ function versao()
 	return $versao;
 }
 /*
-function: iXml
+Function: iXml
 
 Retorna o valor de um elemento xml
 
 Parameter:
 
-no - objeto representando o elemento xml
+$no - objeto representando o elemento xml
 
-nome - nome do elemento
+$nome - nome do elemento
 */
 function ixml($no,$nome)
 {
@@ -1997,13 +2127,13 @@ Os parâmetros para montagem das classes são definidos em metadados do layer.
 
 Parametros:
 
-nlayer - objeto layer que será processado
+$nlayer {objeto} - objeto layer que será processado
 
-mapa - objeto mapa que será processado
+$mapa {objeto} - objeto mapa que será processado
 
-Return:
+Retorno:
 
-Objeto layer modificado
+{objeto} layer modificado
 */
 function autoClasses(&$nlayer,$mapa)
 {
@@ -2183,13 +2313,13 @@ Function: removeAcentos
 
 Remove os acentos de uma string
 
-Parametros:
+Parametro:
 
-var - string
+$var {string}
 
-Return:
+Retorno:
 
-palavra sem acento
+{string} palavra sem acento
 */
 function removeAcentos($var)
 {
@@ -2206,12 +2336,17 @@ function removeAcentos($var)
 	return $var;
 }
 /*
-function: criaDirMapa
+Function: criaDirMapa
 
 Cria os diretórios temporários para a aplicação.
-parameters:
 
-$dir_tmp - Diretório temporário (no servidor) utilizado pelo mapserver.
+Parametro:
+
+$dir_tmp {string} - Diretório temporário (no servidor) utilizado pelo mapserver.
+
+Retorno:
+
+{boleano}
 */
 function criaDirMapa($dir_tmp)
 {
@@ -2236,7 +2371,15 @@ Function: array2json
 
 Converte um array em uma string no formato JSON. Utiliza as funções nativas do PHP para gerar o objeto.
 
-$cpaint - {boolean} se for true é acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
+Parametro:
+
+$a {array}
+
+$cpaint {boolean} - se for true é acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
+
+Retorno:
+
+{JSON}
 */
 function array2json($a,$cpaint=true)
 {
@@ -2247,9 +2390,11 @@ function array2json($a,$cpaint=true)
 /*
 Function: echojson
 
-Retorna para o navegador uma string (JSON) e para o processamento
+Retorna para o navegador uma string (JSON) e para o processamento do PHP
 
-$a - string
+Parametro:
+
+$a {string}
 */
 function echojson($a)
 {
@@ -2267,7 +2412,9 @@ Function: cpjson
 
 Converte um array em um objeto JSON e retorna para o navegador
 
-$obj - objeto que será convertido
+Parametro:
+
+$obj {array} - objeto que será convertido
 */
 function cpjson($obj){
 	if(function_exists("json_encode"))

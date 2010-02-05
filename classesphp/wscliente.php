@@ -2,9 +2,11 @@
 /*
 Title: wscliente.php
 
-Funções de leitura de web services e montagem da lista de serviços para conexão remota.
+Executa requisições a Web Services convencionais ou nos padrões OGC.
 
-Utilizado também pela aplicação ws_cliente
+Possibilita a leitura dos metadados dos serviços e também a execução das funções existentes.
+
+É utilizado apenas pela aplicação wscliente e as requisições são feitas por meio de AJAX utilizando-se abiblioteca CPAINT.
 
 Licenca:
 
@@ -31,6 +33,18 @@ Free Software Foundation, Inc., no endereço
 Arquivo:
 
 i3geo/classesphp/wscliente.php
+
+Parametros:
+
+$funcao {string} - nome da função que será executada
+
+$cp {CPAINT} - objeto CPAINT contendo os parâmetros da API CPAINT
+
+As variáveis globais de cada função devem ser enviadas como prâmetros ao ser feita a requisição
+
+Exemplo:
+
+http://localhost/i3geo/classesphp/wscliente.php?funcao=listaRSSws&rss=http://localhost/i3geo/admin/xmlservicosws.php&g_sid=&cpaint_function=listaRSSws&cpaint_response_type=JSON
 */
 include_once("pega_variaveis.php");
 include_once("lews/wms_functions.php");
@@ -53,11 +67,17 @@ Function: getcapabilities
 
 Retorna a resposta da função getcapabilities de um serviço WMS.
 
-cp - Objeto CPAINT.
+Globais:
 
-onlineresource - Endereço do serviço.
+$cp {CPAINT} - Objeto CPAINT.
 
-tipo - Tipo do serviço WMS|WFS.
+$onlineresource {string} - Endereço do serviço.
+
+$tipo {string} - Tipo do serviço WMS|WFS.
+
+Retorno:
+
+{JSON} - Objeto JSON com as marcações do XML resultante convertidas para HTML 
 */
 function getcapabilities()
 {
@@ -104,9 +124,15 @@ Function: funcoesws
 
 Lista as funções de um web service SOAP ou RPC.
 
-servico - Endereço do web service.
+Globais:
 
-cp - Objeto CPAINT.
+$servico {string} - Endereço do web service.
+
+$cp {CPAINT} - Objeto CPAINT.
+
+Retorno:
+
+{JSON} - lista de funções e parâmetros de cada uma
 */
 function funcoesws()
 {
@@ -195,13 +221,19 @@ Function: dadosWS
 
 Faz a chamada de uma função de um WS para pegar os dados.
 
-cp - Objeto CPAINT.
+Globais:
 
-servico - Endereço do web service.
+$cp {CPAINT} - Objeto CPAINT.
 
-funcaows - Nome da função do serviço.
+$servico {string} - Endereço do web service.
 
-param - Parâmetros da funcao.
+$funcaows {string} - Nome da função do serviço.
+
+$param {string} - Parâmetros da funcao.
+
+Retorno:
+
+{JSON} - resultado da chamada ao serviço
 */
 function dadosWS()
 {
@@ -259,13 +291,19 @@ if ($funcao == "parfuncoesws")
 /*
 Function: parFuncoesws
 
-Pega os campos de parâmetros de uma função de um WS.
+Retorna os campos de parâmetros de uma função de um WS.
 
-cp - Objeto CPAINT.
+Globais:
 
-servico - Endereço do web service.
+$cp {CPAINT} - Objeto CPAINT.
 
-funcaows - Nome da função do serviço.
+$servico {string} - Endereço do web service.
+
+$funcaows {string} - Nome da função do serviço.
+
+Retorno:
+
+{JSON}
 */
 function parFuncoesws()
 {
@@ -344,7 +382,7 @@ if ($funcao == "listaRSSwsARRAY")
 	exit;
 }
 /*
-Function: listaRSSws2 (depreciado)
+listaRSSws2 (depreciado)
 
 Pega os links de um RSS.
 
@@ -416,11 +454,17 @@ Function: listaRSSwsARRAY
 
 Pega os links de um RSS e retorna o resultado como um array.
 
-cp - Objeto CPAINT.
+Globais:
 
-rss - Endereços dos RSS.
+$cp {CPAINT} - Objeto CPAINT.
 
-tipo - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+$rss {string} - Endereços dos RSS.
+
+$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que será usado GEORSS|WMS|WS|DOWNLOAD
+
+Retorno:
+
+{JSON}
 */
 function listaRSSwsARRAY()
 {
@@ -489,9 +533,15 @@ Function: listaRSSws
 
 Pega os links de um RSS usando a biblioteca magpierss (depreciado).
 
-cp - Objeto CPAINT.
+Globais:
 
-rss - Endereços dos RSS.
+$cp {CPAINT} - Objeto CPAINT.
+
+$rss {string} - Endereços dos RSS.
+
+Retorno:
+
+{JSON}
 */
 function listaRSSws()
 {

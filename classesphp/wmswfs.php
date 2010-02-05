@@ -2,7 +2,7 @@
 /*
 Title: wmswfs.php
 
-Faz a leitura e o processamento de web services nos padrões OGC.
+Funções de uso geral para realizar a leitura e o processamento de Web Services nos padrões OGC.
 Atualmente, processa apenas serviços no padrão WMS.
 
 Licenca:
@@ -41,11 +41,15 @@ O arquivo é gravado no diretório temporário
 
 Parametros:
 
-$servico - endereço do WMS
+$servico {string} - endereço do WMS
+
+Global:
+
+$dir_tmp {string} - (opcional) endereço do diretório temporário onde o cache será armazenado. Se não for definido, tenta obter das variáveis de configuração existentes em i3geo/ms_configura.php
 
 Return:
 
-Nome do arquivo criado
+{string} - Nome do arquivo criado. Retorna a palavra "erro" se tiver ocorrido um erro.
 */
 function gravaCacheWMS($servico)
 {
@@ -80,14 +84,19 @@ function gravaCacheWMS($servico)
 	catch(Exception $e){return "erro";}
 }
 /*
-function: existeTemaWFS
+Function: existeTemaWFS
 
-Verifica se existe um tema em um servico WFS processando o getcapabilities.
+Verifica se existe um tema em um servico WFS.
 
-parameters:
-$wfs - endereço do serviço
+Globais:
 
-$tema - tema que será verificado
+$wfs {string} - endereço do serviço
+
+$tema {string} - tema (layer) que será verificado
+
+Retorno:
+
+{string} - sim|nao
 */
 function existeTemaWFS()
 {
@@ -108,12 +117,17 @@ function existeTemaWFS()
 	return "nao";
 }
 /*
-function: existeWFS
+Function: existeWFS
 
 Verifica se existe um servico WFS invocando o getcapabilities.
 
-parameters:
-$servico - endereço do serviço
+Global:
+
+$servico {string} - endereço do serviço
+
+Retorno:
+
+{string} - nao|true
 */
 function existeWFS()
 {
@@ -132,18 +146,21 @@ function existeWFS()
 	{return $wfs_capabilities;}
 }
 /*
-function: getcapabilities
+Function: getcapabilities
 
 Chama a função getcapabilities e retorna o resultado.
 
-parameters:
-$servico - Endereço do web service.
+Global:
 
-$id_ws - id do wms se estiver sendo utilizado o banco de administração do i3geo
+$servico {string} - Endereço do web service.
+
+Retorno:
+
+{string}
 */
 function getcapabilities()
 {
-	global $servico,$id_ws;
+	global $servico;
 	$teste = explode("=",$servico);
 	if ( count($teste) > 1 ){$servico = $servico."&";}
 	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WMS&version=1.1.0";
@@ -161,11 +178,15 @@ function getcapabilities()
 /*
 function: getcapabilities2
 
-Chama a função getcapabilities e retorna o resultado formatado (WMS).
+Chama a função getcapabilities e retorna o resultado pré-formatado (WMS).
 
-parameters:
-$servico - Endereço do web service.
+Global:
 
+$servico {string} - Endereço do web service.
+
+Retorno:
+
+{string}
 */
 function getcapabilities2()
 {
@@ -219,13 +240,14 @@ function getcapabilities2()
 	return($retorno);
 }
 /*
-function: getcapabilities3
+getcapabilities3
 
 Chama a função getcapabilities e retorna o resultado formatado (WFS).
 
-parameters:
+Global:
 
-$servico - Endereço do web service.
+$servico {string} - Endereço do web service.
+
 
 */
 function getcapabilities3()
@@ -263,14 +285,19 @@ function getcapabilities3()
 	return($retorno);
 }
 /*
-function: temaswms
+Function: temaswms
 
 Lista os temas de um web service WMS.
 
-parameters:
+Globais:
 
-$servico - Endereço do web service.
+$servico {string} - Endereço do web service.
 
+$id_ws {string} - (opcional) id do serviço registrado no sistema de administração do i3geo. Se definido, é feito o registro de tentativa de acesso ao serviço no sistema de administração
+
+Retorno:
+
+{html} - htaml formatado para permitir a escolha de uma camada
 */
 function temaswms()
 {
@@ -376,17 +403,21 @@ function temaswms()
 	return(implode($retorna));
 }
 /*
-function: listaLayersWMS
+Function: listaLayersWMS
 
 Lista os temas de um web service WMS e retorna o resultado como um array.
 
-parameters:
+Globais:
 
-$servico - Endereço do web service.
+$servico {string} - Endereço do web service.
 
-$nivel - nível do layer na hierarquia existente no getcapabilities (string do tipo
+$nivel - nível do layer na hierarquia existente no getcapabilities
 
 $nomelayer - nome do layer que contém os próximos layers
+
+Retorno:
+
+{array}
 */
 function listaLayersWMS()
 {
@@ -535,7 +566,7 @@ function pegaTag($layer)
 
 
 /*
-function: temaswfs
+temaswfs
 
 Lista os temas de um web service WFS.
 
@@ -598,13 +629,17 @@ function temaswfs()
 	$cp->set_data($retorno);
 }
 /*
-function: xml2html
+Function: xml2html
 
 Converte caracteres XML em HTML.
 
-parameters:
+Parametro:
 
-$str - Xml.
+$str {string} - Xml que será convertido
+
+Retorno:
+
+{string}
 */
 function xml2html ( $str )
 {
@@ -614,7 +649,7 @@ function xml2html ( $str )
 	return $str;
 }
 /*
-function: wms_descricao
+wms_descricao
 
 Retorna a descrição de um serviço (nó).
 */
@@ -631,7 +666,7 @@ function wms_descricao ( $dom,$xp )
 	return $n;
 }
 /*
-function: wms_descricaov
+wms_descricaov
 
 Retorna a descrição de um serviço (atributo).
 */
@@ -648,7 +683,7 @@ function wms_descricaov ( $dom,$xp,$attrib )
 	return $n;
 }
 /*
-function: wms_descricaon
+wms_descricaon
 
 Retorna a descrição de um serviço (filho de um nó).
 */
@@ -659,7 +694,7 @@ function wms_descricaon ( $dom,$xp,$n ) {
 	return $dtnode->content;
 }
 /*
-function: wms_title
+wms_title
 
 Retorna o título de um WMS.
 */
@@ -674,7 +709,7 @@ function wms_title ( $dom ) {
 	return $nomeserv;
 }
 /*
-function: wms_onlineresource
+wms_onlineresource
 
 Retorna o recurso on-line de um WMS.
 */
@@ -688,7 +723,7 @@ function wms_onlineresource ( $dom ) {
 	return $xpnode->nodeset[0]->get_attribute("href");
 }
 /*
-function: wms_formats
+wms_formats
 
 Retorna os formatos de imagem de um WMS.
 */
@@ -705,7 +740,7 @@ function wms_formats ( $dom )
 	return $arr;
 }
 /*
-function: wms_formatsinfo
+wms_formatsinfo
 
 Retorna os formatos existentes de retorno da opção getfeatureinfo.
 */
@@ -722,7 +757,7 @@ function wms_formatsinfo ( $dom )
 	return $arr;
 }
 /*
-function: wms_estilos
+wms_estilos
 
 Retorna os estilos de um WMS.
 */
@@ -738,7 +773,7 @@ function wms_estilos ( $dom ) {
 
 }
 /*
-function: wms_exceptions
+wms_exceptions
 
 Retorna as exceptions de um WMS.
 */
@@ -757,7 +792,7 @@ function wms_exceptions ( $dom ) {
 	return $arr;
 }
 /*
-function: wms_version
+wms_version
 
 Retorna a versao.
 */
@@ -773,7 +808,7 @@ function wms_version ( $dom )
 	return $v;
 }
 /*
-function: wms_layers
+wms_layers
 
 Retorna os layers de um WMS.
 */
@@ -798,7 +833,7 @@ function wms_layers ( $dom ) {
 	return $entries;
 }
 /*
-function: wms_xpnode2content
+wms_xpnode2content
 
 Read the content child node of an element tag node WMS.
 */
@@ -815,7 +850,7 @@ function wms_xpnode2content( $xp_node ) {
 	return $content;
 }
 /*
-function: wms_srs
+wms_srs
 
 Retorna os SRSs WMS.
 */
@@ -840,7 +875,7 @@ function wms_srs( $dom )
 	return $arr;
 }
 /*
-function: wms_bbox
+wms_bbox
 
 Retorna o BBOX de um WMS.
 */
@@ -856,7 +891,7 @@ function wms_bbox( $dom )
 	{return wms_bbox2txt($bbox);}
 }
 /*
-function: wms_bbox2txt
+wms_bbox2txt
 
 Convert a BoundingBox node into a text string de um wms.
 */
@@ -879,7 +914,7 @@ function wms_bbox2txt( $node ) {
 	return $txt;
 }
 /*
-function: wms_layer2html
+wms_layer2html
 
 Convert a Layer node into an HTML representation wms.
 */
@@ -925,7 +960,7 @@ function wms_layer2html( $node, $tipo , $layer ) {
 	return $html;
 }
 /*
-function: wms_layer3html
+wms_layer3html
 
 Convert a Layer node into an HTML representation sem radio.
 */
@@ -943,7 +978,7 @@ function wms_layer3html( $node ) {
 	return $html;
 }
 /*
-function: wms_layer4html
+wms_layer4html
 
 Convert a Layer into an HTML WMS.
 */

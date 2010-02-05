@@ -38,25 +38,23 @@ Gera uma imagem em disco de um gráfico de pizza.
 
 Os dados são passados como parâmetros.
 
-parameters:
-$data - dados separados como no exemplo "10*9*11*10"
+Parametros:
 
-$width - tamanho da imagem
+$data {string} - dados separados como no exemplo "10*9*11*10"
 
-$inclinacao - inclinacao da pizza
+$width {numerico} - tamanho da imagem
 
-$shadow_height - profundidade da sombra
+$inclinacao {numerico} - inclinacao da pizza
 
-$cores - cores separadas como no exemplo "200,40,30*100,200,50*0,255,0*255,0,0"
+$shadow_height {numerico} - profundidade da sombra
 
-$imgurl - url do servidor para chamar a imagem
+$cores {string} - cores separadas como no exemplo "200,40,30*100,200,50*0,255,0*255,0,0"
 
-$map_file - arquivo mapfile
+$imgurl {string} - url do servidor para chamar a imagem
 
-$temaedit - tema que recebera o grafico
+$map_file {string} - arquivo mapfile
 
-Include:
-<funcoes_gerais.php>
+$temaedit {string} - tema que recebera o grafico
 */
 function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$map_file,$temaedit)
 {

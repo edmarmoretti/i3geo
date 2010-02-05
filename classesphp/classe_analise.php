@@ -2288,19 +2288,17 @@ $operacao - Tipo de análise.
 		return("ok");	
 	}
 /*
-function: incmapageometrias
+Function: incmapageometrias
 
 Insere geometrias como tema no mapa.
 
 parameters:
+
 $dir_tmp - Diretório temporário do mapserver
 
 $imgdir - Diretório das imagens do mapa atual
 
 $lista - Nomes, sem o caminho, dos arquivos com as geometrias, separados por vírgula.
-
-$operacao - Tipo de análise.
-
 */
 	function incmapageometrias($dir_tmp,$imgdir,$lista)
 	{

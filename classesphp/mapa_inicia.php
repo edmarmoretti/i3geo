@@ -2,9 +2,10 @@
 /*
 Title: mapa_inicia.php
 
-Inicia o mapa.
+Inicia um novo mapa.
+
 Gera as imagens necessárias para abrir o mapa e calcula um conjunto de variáveis necessárias
-ao funcionamento do mapa.
+ao funcionamento do i3Geo.
 
 Licenca:
 
@@ -37,45 +38,66 @@ i3geo/classesphp/mapa_inicia.php
 /*
 Function: iniciaMapa
 
-Inicia um mapa, pegando os parâmetros necessários.
+Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interface HTML.
 
-Parametros:
+Globais:
 
-navegadoresLocais - array que indica quais usuários podem navegar no servidor
+$navegadoresLocais - array que indica quais usuários podem navegar no servidor
 
-cp - Objeto CPAINT.
+$cp - Objeto CPAINT.
 
-embedLegenda - inclui a legenda no corpo do mapa sim|nao
+$embedLegenda - inclui a legenda no corpo do mapa sim|nao
 
-map_file - Arquivo map file.
+$map_file - Arquivo map file.
 
-mapext - Extensão geográfica do mapa.
+$mapext - Extensão geográfica do mapa.
 
-w - Largura da imagem do mapa.
+$w - Largura da imagem do mapa.
 
-h - Altura da imagem do mapa.
+$h - Altura da imagem do mapa.
 
-locsistemas - Variável definida no arquivo ms_configura.php que identifica se existem sistemas associados que serão incluídos na guia de adição de temas.
+$locsistemas - Variável definida no arquivo ms_configura.php que identifica se existem sistemas associados que serão incluídos na guia de adição de temas.
 
-locidentifica - Variável definida no arquivo ms_configura.php que identifica se existem sistemas adicionais a ser mostrados na opção de identificação.
+$locidentifica - Variável definida no arquivo ms_configura.php que identifica se existem sistemas adicionais a ser mostrados na opção de identificação.
 
-R_path - Variável definida no arquivo ms_configura.php que indica se o software R está instalado.
+$R_path - Variável definida no arquivo ms_configura.php que indica se o software R está instalado.
 
-locmapas - Variável definida no arquivo ms_configura.php que indica se a guia de mapas deve ser mostrada.
+$locmapas - Variável definida no arquivo ms_configura.php que indica se a guia de mapas deve ser mostrada.
 
-locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
+$locmapserv - Variável definida no arquivo ms_configura.php que indica nome do mapserver cgi.
 
-postgis_con - Variável definida no arquivo ms_configura.php que indica qual conexão postgis deve ser utilizada (algumas funções de análise utilizam essa conexão, se existir)
+$postgis_con - Variável definida no arquivo ms_configura.php que indica qual conexão postgis deve ser utilizada (algumas funções de análise utilizam essa conexão, se existir)
 
-kmlurl - url de um arquivo kml que será inserido no mapa. Válido para a interface google maps
+$kmlurl - url de um arquivo kml que será inserido no mapa. Válido para a interface google maps
 
-Return:
+Retorno:
 
-objeto cpaint contendo uma string como no exemplo abaixo
+{JSON}
 
-Essa string é recuperada no lado do javascript com eval().
+(start code)
 
-Se $expoeMapfile = "nao", o nome do mapfile não é retornado
+{
+	variaveis:,
+	temas:[{
+		"name":,
+		"status":,
+		"tema":,
+		"transparency":,
+		"type":,
+		"sel":,
+		"escala":,
+		"download":,
+		"features":,
+		"connectiontype":,
+		"zoomtema":,
+		"contextoescala":,
+		"etiquetas":,
+		"identifica":,
+		"editorsql":
+	}]
+}
+
+(end)
 */
 function iniciaMapa()
 {
