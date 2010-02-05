@@ -22,14 +22,6 @@ Title: Testa a instalação do I3Geo
 
 Executa testes e aponta erros na instalação.
 
-Link:
-
-http://localhost/i3geo/testainstal.php
-
-Arquivo:
-
-i3geo/testainstal.php
-
 Licenca:
 
 GPL2
@@ -51,6 +43,11 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/testainstal.php
+
 */
 error_reporting(E_ALL);
 echo "<pre>\n";

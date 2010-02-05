@@ -42,9 +42,8 @@ GRANT SELECT ON TABLE visitantes_i3geo TO geodados;
 GRANT SELECT, UPDATE, INSERT, DELETE ON TABLE visitantes_i3geo TO geoeditor;
 COMMENT ON TABLE visitantes_i3geo IS 'Registra as coordenadas dos usuários que acessam o I3Geo. É mantido pelo i3geo/ms_criamapa.php.';
 
-File: i3geo/ms_registraip.php
 
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -64,6 +63,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
+Arquivo: i3geo/ms_registraip.php
 */
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 {

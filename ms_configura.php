@@ -16,9 +16,6 @@ As variáveis de configuração são definidas em blocos diferentes conforme o siste
 O ms_criamapa.php carrega o ms_configura.php e armazena a maior parte das variáveis na seção. Algumas variáveis
 são também fornecidas para o cliente (navegador) na inicialização do mapa e ficam disponíveis em variáveis javascript.
 
-Arquivo:
-
-ms_configura.php
 
 Licenca:
 
@@ -41,6 +38,9 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo: ms_configura.php
+
 */
 /*
 	Variavel: mensagemInicia

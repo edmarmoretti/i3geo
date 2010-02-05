@@ -165,6 +165,7 @@ function iniciaMapa()
 	//verifica se a legenda deve ser embebida no mapa
 	//
 	$legenda = $m->mapa->legend;
+
 	$embedLegenda == "sim" ? $legenda->set("status",MS_EMBED) : $legenda->set("status",MS_OFF);
 	//
 	//salva as alterações feitas

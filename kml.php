@@ -12,7 +12,7 @@ Exemplo
 
 kml.php?idioma=en
 
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -32,11 +32,11 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/kml.php
+Arquivo: i3geo/kml.php
 
-Parameter:
+Parametro:
 
-perfil - perfis separados por espaços que indicam que menus serão utilizados
+perfil - perfis separados por espaços. Ao usar um perfil, serão mostrados apenas os temas disponíveis para o perfil indicado.
 */
 error_reporting(0);
 include_once ("classesphp/carrega_ext.php");

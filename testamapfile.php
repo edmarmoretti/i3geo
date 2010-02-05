@@ -10,11 +10,6 @@ a miniatura tiver sido gerada previamente, a preferência é por esse arquivo em c
 uma vez que a geração on-line pode ser muito demorada. Para gerar as miniaturas o administrador deve executar o
 programa geraminiatura.php.
 
-
-Arquivo:
-
-i3geo/testamapfile.php
-
 Licenca:
 
 GPL2
@@ -37,30 +32,21 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
+Arquivo:
+
+i3geo/testamapfile.php
+
 Exemplos:
 
 testamapfile.php?map=bioma
 
 testamapfile.php?map=bioma&tipo=mini
 
-Link:
+Parametros:
 
-http://localhost/i3geo/testamapfile.php
+map {string} - Nome do mapfile que será testado ou usado na geração da miniatura. O arquivo é procurado no caminho indicado e no diretório i3geo/temas. Se map=todos, todos os mapas são testados em grupos de 10 em 10 e a miniatura não é gerada.
 
-Parametro: map
-
-Nome do mapfile que será testado ou usado na geração da miniatura. O arquivo é procurado no caminho indicado e no diretório i3geo/temas
-Se map=todos, todos os mapas são testados em grupos de 10 em 10 e a miniatura não é gerada.
-
-Parametro: tipo (opcional)
-
-Define o tamanho da imagem que será gerada. Se não for definido, será feito o teste do mapfile.
-Tipo de retorno mini|grande . Controla o tamanho da miniatura que deverá ser mostrada.
-
-Valores:
-
-mini - Gera uma miniatura de 50x50 pixels
-grande - Gera uma miniatura de 300x300 pixels
+tipo {string} - (opcional) mini|grande Define o tamanho da imagem que será gerada. Se não for definido, será feito o teste do mapfile. Controla o tamanho da miniatura que deverá ser mostrada.
 */
 set_time_limit(300);
 ini_set('max_execution_time', 300);

@@ -8,9 +8,7 @@ As imagens são armazenadas no diretório temporário do i3geo e devem ser movidas 
 para poderem ser utilizadas. O programa verifica se a miniatura já existe no diretório temas/miniaturas e gera apenas as que faltarem.
 
 
-File: i3geo/geraminiatura.php
-
-About: Licença
+Licenca:
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -32,11 +30,13 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-About: Exemplo
+Arquivo: i3geo/geraminiatura.php
+
+Exemplo:
 
 geraminiatura.php?tipo=mini
 
-Parameters:
+Parametro:
 
 tipo - tipo de retorno mini|grande|todos
 */

@@ -4,7 +4,7 @@ Title: ogc.php
 
 Gera web services nos padrões OGC baseado no menutemas.xml
 
-About: Licença
+Licenca
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -24,14 +24,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/ogc.php
+Arquivo: i3geo/ogc.php
 
-19/6/2007
-
-Include:
-<ms_configura.php> <classesphp/pega_variaveis.php>
-
-Parameters:
+Parametros:
 
 lista - se for igual a "temas", mostra uma lista dos temas disponíveis
 
@@ -45,7 +40,7 @@ legenda - mostra a legenda no corpo do mapa sim|nao
 
 perfil - perfil utilizado para escolher os menus
 
-About: Exemplos
+Exemplos:
 
 ogc.php?lista=temas
 

@@ -25,10 +25,6 @@ Link:
 
 http://localhost/i3geo/ms_criamapa.php
 
-Arquivo:
-
-ms_criamapa.php
-
 Licenca:
 
 GPL2
@@ -51,105 +47,59 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Parametro: base
+Arquivo: i3geo/ms_criamapa.php
 
-arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
+Parametros:
 
-Parametro: temasa
+base - arquivo mapfile que servirá de base para a criação do mapa.Por default, são utilizados os arquivos aplicmap/geral1.map (para linux) ou aplicmap/geral1windows.map (para windows).
 
-lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
+temasa - lista, separada por espaços, com os nomes dos arquivos map que serão adicionados ao mapa. Se o arquivo map não estiver no diretório i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo map pode conter mais de um layer pois todos os existentes serão adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles são adicionados ao mapa com o status de desenho em OFF.
 
-Parametro: layers
+layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
 
-lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
+mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
 
-Parametro: mapext
+executa - programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
 
-extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
+interface - nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
-Parametro: executa
+perfil - perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
 
-programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
+caminho - caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
 
-Parametro: interface
+pontos - lista de coordenadas x e y que serão adicionadas como pontos no mapa.
 
-nome da interface que será utilizada para abrir o mapa. As interfaces são arquivos HTML que podem estar no diretório aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alterá-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
+nometemapontos - nome do tema de pontos
 
-Parametro: perfil
+linhas - lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
 
-perfil utilizado para restringir os menus de temas. O menu com os temas mostrados no i3geo são definidos no arquivo menutemas/menutemas.xml. Nesse arquivo,pode-se utilizar um elemento <PERFIL></PERFIL> indicando que o tema apenas será mostrado em perfis específicos. Por exempo: ms_criamapa.php?perfil=usuário1
+nometemalinhas - nome do tema de linhas
 
-Parametro: caminho
+poligonos - lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
 
-caminho para os programas que serão incluídos com "include". Ao chamar o programa ms_criamapa.php por meio de "include" é necessário especificar essa variável para indicar o caminho correto do i3geo.
+nometemapoligonos - nome do tema de polígonos
 
-Parametro: pontos
+wkt - insere elementos no mapa com coordenadas definidas em wkt
 
-lista de coordenadas x e y que serão adicionadas como pontos no mapa.
+nometemawkt - nome do tema em wkt
 
-Parametro: nometemapontos
+idioma - idioma da interface (veja os idiomas disponíveis em classe_idioma.js)
 
-nome do tema de pontos
+kmlurl - url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
 
-Parametro: linhas
+url_wms - endereço de um WMS (será incluido como uma camada no mapa)
 
-lista de coordenadas x e y que serão adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ",", por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+layer_wms - nome do layer
 
-Parametro: nometemalinhas
+style_wms - estilo do layer
 
-nome do tema de linhas
+nome_wms - nome da camada (titulo)
 
-Parametro: poligonos
+srs_wms - código da projeção
 
-lista de coordenadas x e y que serão adicionadas como polígonos no mapa. As coordenadas dos vértices de polígonos diferentes devem ser separadas por ",".
+image_wms - tipo de imagem disponível
 
-Parametro: nometemapoligonos
-
-nome do tema de polígonos
-
-Parametro: wkt
-
-insere elementos no mapa com coordenadas definidas em wkt
-
-Parametro: nometemawkt
-
-nome do tema em wkt
-
-Parametro: idioma
-
-idioma da interface (veja os idiomas disponíveis em classe_idioma.js)
-
-Parametro: kmlurl
-
-url de um arquivo KML que será incluido no mapa. Válido apenas na interface google maps
-
-Parametro: url_wms
-
-endereço de um WMS (será incluido como uma camada no mapa)
-
-Parametro: layer_wms
-
-nome do layer
-
-Parametro: style_wms
-
-estilo do layer
-
-Parametro: nome_wms
-
-nome da camada (titulo)
-
-Parametro: srs_wms
-
-código da projeção
-
-Parametro: image_wms
-
-tipo de imagem disponível
-
-Parametro: versao_wms
-
-Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
+versao_wms - Versão do WMS (necessário quando da inclusão de uma camada WMS diretamente pela URL)
 */
 
 /*
