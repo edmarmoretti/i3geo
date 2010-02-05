@@ -399,7 +399,7 @@ i3GEO.janela = {
 	
 	Parametros:
 	
-	id {String} - id danovajanela
+	id {String} - id da nova janela
 	
 	texto {String} - texto da janela
 	*/
