@@ -13,6 +13,10 @@ controles - lista separada por "," com os nomes dos controles que serão adiciona
 botoes - lista com os nomes dos botoes que serão adicionados ao mapa. Se não for definido, todos os botões serão adicionados
 
 servidor - endereco do servidor OGC utilizado. Por default é "../ogc.php" o que força o uso do i3geo local
+
+largura - lagura do mapa em pixels
+
+altura - altura do mapa em pixels
 */
 
 include_once("../classesphp/pega_variaveis.php");
@@ -22,6 +26,10 @@ include_once("../classesphp/carrega_ext.php");
 //
 if(!isset($temas))
 {ajuda();}
+if(!isset($largura))
+{$largura = 400;}
+if(!isset($altura))
+{$altura = 400;}
 //
 //define o nível de zoom
 //
@@ -137,6 +145,9 @@ Parâmetros:
 	temas - lista com os temas (mapfiles) do i3Geo que serão incluídos no mapa
 	numzoomlevels - número de níveis de zoom, default=6
 	maxextent - extensão geográfica do mapa (xmin,ymin,xmax,ymax)
+	largura - lagura do mapa em pixels
+	altura - altura do mapa em pixels
+
 	controles - lista com os nomes dos controles que serão adicionados ao mapa. Se não for definido, todos os controles serão adicionados
 		navigation
 		panzoombar 
@@ -152,6 +163,9 @@ Parâmetros:
 		distancia
 		area
 		identifica
+
+	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
+	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
 	";	
 	exit;
 }
@@ -166,7 +180,7 @@ Parâmetros:
 
 </head>
 <body>
-<div id=i3geoMapa style="width:400px;height:400px;"></div>
+<div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
 <script type="text/javascript">
 navn = false;
 //seta as variáveis navn e navm
