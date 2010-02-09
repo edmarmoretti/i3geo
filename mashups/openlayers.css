@@ -1,0 +1,57 @@
+.olControlEditingToolbar .panItemInactive {
+background-position:-0px 0;
+}
+.olControlEditingToolbar .panItemActive {
+background-position:-0px -28px;
+}
+.olControlEditingToolbar .zoomboxItemInactive {
+background-position:-29px 0;
+}
+.olControlEditingToolbar .zoomboxItemActive {
+background-position:-29px -28px;
+}
+.olControlEditingToolbar .zoomtotItemInactive {
+background-position:-58px 0;
+}
+.olControlEditingToolbar .zoomtotItemActive {
+background-position:-58px -28px;
+}
+.olControlEditingToolbar .legendaItemInactive {
+background-position:-87px 0;
+}
+.olControlEditingToolbar .legendaItemActive {
+background-position:-87px -28px;
+}
+.olControlEditingToolbar .distanciaItemInactive {
+background-position:-116px 0;
+}
+.olControlEditingToolbar .distanciaItemActive {
+background-position:-116px -28px;
+}
+.olControlEditingToolbar .areaItemInactive {
+background-position:-145px 0;
+}
+.olControlEditingToolbar .areaItemActive {
+background-position:-145px -28px;
+}
+.olControlEditingToolbar .identificaItemInactive {
+background-position:-174px 0;
+}
+.olControlEditingToolbar .identificaItemActive {
+background-position:-174px -28px;
+}
+.olControlEditingToolbar {
+	width:300px;
+}
+.olControlEditingToolbar div {
+	background-image:url(openlayers.png);
+	background-repeat:no-repeat;
+	float:right;
+	height:29px;
+	margin:2px;
+	width:29px;
+}
+pre{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;	
+}
