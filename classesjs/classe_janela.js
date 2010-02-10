@@ -341,10 +341,13 @@ i3GEO.janela = {
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
 		//YAHOO.janelaDoca.xp.panel.destroy();
-		if($i(this.id+"_c"))
-		{document.body.removeChild($i(this.id+"_c"));}
-		if($i(this.id))
-		{document.body.removeChild($i(this.id));}
+		if($i(event.id+"_c"))
+		{document.body.removeChild($i(event.id+"_c"));}
+		if($i(event.id))
+		{document.body.removeChild($i(event.id));}
+		if($i(event.id+"_mask"))
+		{document.body.removeChild($i(event.id+"_mask"));}
+
 		//
 		//remove script tag se houver
 		//
@@ -353,14 +356,14 @@ i3GEO.janela = {
 			if (old !== null) {
 				old.parentNode.removeChild(old);
 				old = null;
-				if(this.id)
-				{eval(this.id+" = null;");}
+				if(event.id)
+				{eval(event.id+" = null;");}
 			}
-			old = $i(this.id+"_script");
+			old = $i(event.id+"_script");
 			if (old !== null) {
 				old.parentNode.removeChild(old);
 				old = null;
-				eval("delete " + this.id);
+				eval("delete " + event.id);
 			}
 		}
 		catch(erro){
