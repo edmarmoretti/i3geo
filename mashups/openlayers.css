@@ -40,9 +40,49 @@ background-position:-174px 0;
 .olControlEditingToolbar .identificaItemActive {
 background-position:-174px -28px;
 }
-.olControlEditingToolbar {
-	width:300px;
+.olControlEditingToolbar .linhaItemInactive {
+background-position:-203px 0;
 }
+.olControlEditingToolbar .linhaItemActive {
+background-position:-203px -28px;
+}
+.olControlEditingToolbar .pontoItemInactive {
+background-position:-232px 0;
+}
+.olControlEditingToolbar .pontoItemActive {
+background-position:-232px -28px;
+}
+.olControlEditingToolbar .poligonoItemInactive {
+background-position:-261px 0;
+}
+.olControlEditingToolbar .poligonoItemActive {
+background-position:-261px -28px;
+}
+.olControlEditingToolbar .editaItemInactive {
+background-position:-290px 0;
+}
+.olControlEditingToolbar .editaItemActive {
+background-position:-290px -28px;
+}
+.olControlEditingToolbar .apagaItemInactive {
+background-position:-319px 0;
+}
+.olControlEditingToolbar .apagaItemActive {
+background-position:-319px -28px;
+}
+.olControlEditingToolbar .selecaoItemInactive {
+background-position:-348px 0;
+}
+.olControlEditingToolbar .selecaoItemActive {
+background-position:-348px -28px;
+}
+
+
+
+.olControlEditingToolbar {
+	width:500px;
+}
+
 .olControlEditingToolbar div {
 	background-image:url(openlayers.png);
 	background-repeat:no-repeat;

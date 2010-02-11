@@ -73,7 +73,7 @@ i3GEOF.carregaMapa = {
 		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (não utilize espaço em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
 		ins += '<br><br>';
 		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
-		ins += '<input id="i3GEOcarregamapafilemap" class=digitar type="file" size=42 name="i3GEOcarregamapafilemap" style="top:0px;left:0px">';
+		ins += '<p class="paragrafo" ><input id="i3GEOcarregamapafilemap" class=digitar type="file" size=42 name="i3GEOcarregamapafilemap" style="top:0px;left:0px">';
 		ins += '<br><br>';
 		ins += '<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="Carregar arquivo" size=12 name="submit">';
 		ins += '<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >';
@@ -92,8 +92,8 @@ i3GEOF.carregaMapa = {
 		var janela,divid,temp,titulo;
 		titulo = "Carrega mapa <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
-			"200px",
+			"340px",
+			"240px",
 			"",
 			"",
 			"",

@@ -85,6 +85,12 @@ if(!isset($botoes)){
 	$objBotoes[] = "'distancia':true";
 	$objBotoes[] = "'area':true";
 	$objBotoes[] = "'identifica':true";
+	$objBotoes[] = "'linha':true";
+	$objBotoes[] = "'ponto':true";
+	$objBotoes[] = "'poligono':true";
+	$objBotoes[] = "'edita':true";
+	$objBotoes[] = "'apaga':true";
+
 }
 else{
 	$botoes = str_replace(" ",",",$botoes);
@@ -104,6 +110,17 @@ else{
 	{$objBotoes[] = "'area':true";}
 	if(in_array("identifica",$botoes))
 	{$objBotoes[] = "'identifica':true";}
+	if(in_array("linha",$botoes))
+	{$objBotoes[] = "'linha':true";}
+	if(in_array("ponto",$botoes))
+	{$objBotoes[] = "'ponto':true";}
+	if(in_array("poligono",$botoes))
+	{$objBotoes[] = "'poligono':true";}
+	if(in_array("edita",$botoes))
+	{$objBotoes[] = "'edita':true";}
+	if(in_array("apaga",$botoes))
+	{$objBotoes[] = "'apaga':true";}
+
 }
 $botoes = "{".implode(",",$objBotoes)."}";
 //
@@ -163,6 +180,11 @@ Parâmetros:
 		distancia
 		area
 		identifica
+		ponto
+		linha
+		poligono
+		edita
+		apaga
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
@@ -206,10 +228,9 @@ function i3GeoMapaInicia(){
 	});
 	var ol_wms = new OpenLayers.Layer.WMS.Untiled( "OpenLayers WMS","http://labs.metacarta.com/wms/vmap0",{layers: 'basic'} );
 	var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://t1.hypercube.telascience.org/cgi-bin/landsat7",{layers: "landsat7"});
-	//var dm_wms = new OpenLayers.Layer.WMS( "DM Solutions Demo","http://www2.dmsolutions.ca/cgi-bin/mswms_gmap",{layers: "bathymetry,land_fn,park,drain_fn,drainage," +"prov_bound,fedlimit,rail,road,popplace",transparent: "true", format: "image/png" },{isBaseLayer:true);	
 	jpl_wms.setVisibility(false);
-	//dm_wms.setVisibility(false);
-	i3geoOL.addLayers([ol_wms, jpl_wms, <?php echo implode(",",$objOpenLayers); ?>]);
+	layergrafico = new OpenLayers.Layer.Vector("Edição");
+	i3geoOL.addLayers([ol_wms, jpl_wms, <?php echo implode(",",$objOpenLayers); ?>,layergrafico]);
 	i3geoOL.zoomToMaxExtent();
 	//
 	//substitui o controle que mostra as coordenadas
@@ -364,6 +385,90 @@ function criaBotoes(botoes){
 		controles.push(button);
 		var adiciona = true;
 	}
+	if(botoes.linha==true){
+		button = new OpenLayers.Control.DrawFeature(
+			layergrafico,
+            OpenLayers.Handler.Path,
+            {
+            	displayClass: "linha",
+            	title: "digitalizar linha"
+            }
+		);
+		controles.push(button);
+		var adiciona = true;
+	}	
+	if(botoes.ponto==true){
+		button = new OpenLayers.Control.DrawFeature(
+			layergrafico,
+            OpenLayers.Handler.Point,
+            {
+            	displayClass: "ponto",
+            	title: "digitalizar ponto"
+            }
+		);
+		controles.push(button);
+		var adiciona = true;
+	}
+	if(botoes.poligono==true){
+		button = new OpenLayers.Control.DrawFeature(
+			layergrafico,
+            OpenLayers.Handler.Polygon,
+            {
+            	displayClass: "poligono",
+            	title: "digitalizar polígono"
+            }
+		);
+		controles.push(button);
+		var adiciona = true;
+	}
+	if(botoes.edita==true){
+		button = new OpenLayers.Control.ModifyFeature(
+			layergrafico,
+            {
+            	displayClass: "edita",
+            	title: "edita elemento"
+            }
+		);
+		controles.push(button);
+		var adiciona = true;
+	}
+	//botao de seleção
+	if(botoes.apaga==true){
+		button = new OpenLayers.Control.SelectFeature(
+			layergrafico,
+            {
+            	displayClass: "selecao",
+            	title: "seleciona elemento",
+                clickout: true,
+                toggle: true,
+                multiple: false,
+                hover: false,
+                toggleKey: "ctrlKey", // ctrl key removes from selection
+                multipleKey: "shiftKey", // shift key adds to selection
+                box: false
+            }
+		);
+		controles.push(button);
+		var adiciona = true;
+	}
+	if(botoes.apaga==true){
+		var button = new OpenLayers.Control.Button({
+			displayClass: "apaga", 
+			trigger: function(){
+				if(layergrafico.selectedFeatures.length > 0){
+					var x = window.confirm("Exclui os elementos selecionados?");
+					if(x)
+					{layergrafico.removeFeatures(layergrafico.selectedFeatures);}
+				}
+				else
+				{alert("Selecione pelo menos um elemento");}
+			},
+			title: "Apaga selecionados"
+		});
+		controles.push(button);
+		var adiciona = true;
+	}	
+
 	//
 	//adiciona o painel ao mapa se alguma opï¿½ï¿½o foi inserida
 	//
