@@ -50,7 +50,7 @@ WEB
   METADATA
    "ows_title" "I3Geo Brasil MMA"
    "wms_title" "I3Geo Brasil MMA"
-   "ows_abstract" "Web services gerados da base de dados do I3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando ogc.php?ajuda=, para uma lista compacta de todos os serviços, digite ogc.php?lista=temas"
+   "ows_abstract" "Web services gerados da base de dados do I3Geo. Para chamar um tema especificamente, veja o sistema de ajuda, digitando ogc.php?ajuda=, para uma lista compacta de todos os servicos, digite ogc.php?lista=temas"
    "ows_keywordlist" "i3Geo"
    "ows_onlineresource" ""
    "ows_fees" "none"
@@ -60,7 +60,7 @@ WEB
    "ows_contactposition" ""
    "ows_addresstype" ""
    "ows_address"     ""
-   "ows_city" "Brasília"
+   "ows_city" "Brasilia"
    "ows_stateorprovince" "DF"
    "ows_postcode" ""
    "ows_country" "Brasil"

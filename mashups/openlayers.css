@@ -76,6 +76,12 @@ background-position:-348px 0;
 .olControlEditingToolbar .selecaoItemActive {
 background-position:-348px -28px;
 }
+.olControlEditingToolbar .capturaItemInactive {
+background-position:-377px 0;
+}
+.olControlEditingToolbar .capturaItemActive {
+background-position:-377px -28px;
+}
 
 
 

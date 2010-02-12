@@ -90,7 +90,7 @@ if(!isset($botoes)){
 	$objBotoes[] = "'poligono':true";
 	$objBotoes[] = "'edita':true";
 	$objBotoes[] = "'apaga':true";
-
+	$objBotoes[] = "'captura':false";
 }
 else{
 	$botoes = str_replace(" ",",",$botoes);
@@ -120,7 +120,8 @@ else{
 	{$objBotoes[] = "'edita':true";}
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
-
+	if(in_array("captura",$botoes))
+	{$objBotoes[] = "'captura':false";}
 }
 $botoes = "{".implode(",",$objBotoes)."}";
 //
@@ -185,6 +186,7 @@ Parâmetros:
 		poligono
 		edita
 		apaga
+		captura
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
@@ -202,7 +204,7 @@ Parâmetros:
 <head>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js.php"></script>
-<link rel="stylesheet" href="../pacotes/openlayers/theme/default/style.css" type="text/css" />
+<link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
 
 </head>
@@ -256,9 +258,9 @@ function i3GeoMapaInicia(){
 		});
 	}
 	var botoes = <?php echo $botoes; ?>;
-	criaBotoes(botoes);
+	i3GEOOLcriaBotoes(botoes);
 };
-function criaBotoes(botoes){
+function i3GEOOLcriaBotoes(botoes){
 	var sketchSymbolizers = {
 	    "Point": {
 	        pointRadius: 4,
@@ -314,7 +316,7 @@ function criaBotoes(botoes){
 	if(botoes.legenda==true){
 		var button = new OpenLayers.Control.Button({
 			displayClass: "legenda", 
-			trigger: function(){mostraLegenda();},
+			trigger: function(){i3GEOOLmostraLegenda();},
 			title: "Legenda"
 		});
 		controles.push(button);
@@ -364,17 +366,19 @@ function criaBotoes(botoes){
     	button = new OpenLayers.Control.WMSGetFeatureInfo({
            	maxFeatures:1,
            	infoFormat:'text/plain', //'application/vnd.ogc.gml',
-           	layers: pegaLayers(),
+           	layers: i3GEOOLpegaLayers(),
            	queryVisible: true,
            	title: "Identificar",
            	displayClass: "identifica",
             eventListeners: {
                 getfeatureinfo: function(event) {
+                    var lonlat = i3geoOL.getLonLatFromPixel(event.xy);
+                    var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEOOLcaptura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
                     i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
                         "chicken", 
                         i3geoOL.getLonLatFromPixel(event.xy),
                         null,
-                        "<pre>"+event.text+"</pre>",
+                        lonlattexto+"<pre>"+event.text+"</pre>",
                         null,
                         true
                     ));
@@ -468,7 +472,33 @@ function criaBotoes(botoes){
 		controles.push(button);
 		var adiciona = true;
 	}	
-
+	if(botoes.captura==true){
+		botaoCapturaOL = new OpenLayers.Control.GetFeature({
+			protocol: "",
+			displayClass: "captura", 
+			title: "Captura geometria",
+            eventListeners: {
+                featureselected: function(e) {
+                    layergrafico.addFeatures([e.feature]);
+                }
+            }
+		});
+		botaoCapturaOL.events.register(
+			"activate",
+			this, 
+			function(e){
+				var layers = i3GEOOLpegaLayers();
+                var u = layers[0].url+"&request=getfeature&service=wfs";
+                u += "&typename="+layers[0].params.LAYERS;
+                u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>-54,-12</gml:coordinates></gml:Point></Intersect></Filter>";
+                botaoCapturaOL.protocol = OpenLayers.Protocol.WFS({
+                	url:u
+                });
+            }
+        );
+ 		controles.push(botaoCapturaOL);
+		var adiciona = true;
+	}	
 	//
 	//adiciona o painel ao mapa se alguma opï¿½ï¿½o foi inserida
 	//
@@ -477,7 +507,7 @@ function criaBotoes(botoes){
 		i3geoOL.addControl(panel);
 	}
 }
-function mostraLegenda(){
+function i3GEOOLmostraLegenda(){
 	var layers = pegaLayers()
 	var nlayers = layers.length;
 	var ins = "";
@@ -491,7 +521,7 @@ function mostraLegenda(){
 	w.document.close();
 
 }
-function pegaLayers(){
+function i3GEOOLpegaLayers(){
 	var layers = i3geoOL.layers;
 	var nlayers = layers.length;
 	var ins = new Array();
@@ -501,6 +531,32 @@ function pegaLayers(){
 		}
 	}
 	return ins;
+}
+function i3GEOOLcaptura(lonlat){
+	var layers = i3GEOOLpegaLayers();
+    var u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
+    u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
+    u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersect></Filter>";
+	document.body.style.cursor="wait";
+	document.getElementById("i3geoMapa").style.cursor = "wait";
+	OpenLayers.Request.issue({
+		method: "GET",
+		url: u,
+		callback: function(retorno){
+			document.body.style.cursor="default";
+			document.getElementById("i3geoMapa").style.cursor = "default";
+			var fromgml = new OpenLayers.Format.GML({
+				geometryName: "msGeometry"
+			});
+			var gml = fromgml.read(retorno.responseText);
+			layergrafico.addFeatures(gml);
+		},
+		failure: function(){
+			document.body.style.cursor="default";
+			document.getElementById("i3geoMapa").style.cursor = "default";
+			alert("Erro");
+		}
+	})
 }
 i3GeoMapaInicia();
 </script>
