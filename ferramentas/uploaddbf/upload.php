@@ -2,7 +2,6 @@
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/funcoes_gerais.php");
 include_once ("../../classesphp/carrega_ext.php");
-error_reporting(E_ALL);
 session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
@@ -19,7 +18,6 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 <body name="ancora" bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-//var_dump($_FILES);exit;
 if (isset($_FILES['i3GEOuploaddbffile']['name']))
 {
 	//$ndir = dirname($filen);
@@ -28,16 +26,12 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	echo "<p>Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
 	//verifica nomes
-	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name']))  || (!ereg('\.csv$',$_FILES['filedbf']['name'])))
-	{$statusNome = 0;}
-	if($statusNome != 1)
-	{echo "Nome de arquivo inv·lido";exit;}
+	verificaNome($_FILES['i3GEOuploaddbffile']['name']);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploaddbffile']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
 	if($status != 1)
-	{echo "Ocorreu um erro no envio do arquivo";exit;}
+	{echo "Ocorreu um erro no envio do arquivo";paraAguarde();exit;}
 	$nome = explode(".",$_FILES['i3GEOuploaddbffile']['name']);
 	$nome = $nome[0];
 	$nomeshp = $dirmap."/".$nome.".shp";
@@ -162,6 +156,18 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 paraAguarde();
 function paraAguarde(){
 	echo "<script>window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";
+}
+function verificaNome($nome)
+{
+	$nome = strtolower($nome);
+	$lista = explode(".",$nome);
+	$extensao = $lista[count($lista) - 1];
+	if(($extensao != "dbf") && ($extensao != "csv"))
+	{
+		echo "Nome de arquivo inv·lido";
+		paraAguarde();
+		exit;
+	}
 }
 ?>
 </body>

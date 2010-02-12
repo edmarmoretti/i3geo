@@ -25,11 +25,14 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
+	verificaNome($Arquivo);
+	/*
 	$statusNome = 1;
 	if( (ereg('[^a-zA-Z0-9\.]',$Arquivo)) || (!ereg('\.map$',$Arquivo)) )
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "<p class='paragrafo' >Arquivo inválido.!";paraAguarde();exit;}	
+	*/
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
 	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
@@ -79,6 +82,18 @@ else
 paraAguarde();
 function paraAguarde(){
 	echo "<script>window.parent.i3GEOF.carregaMapa.aguarde.visibility='hidden';</script>";
+}
+function verificaNome($nome)
+{
+	$nome = strtolower($nome);
+	$lista = explode(".",$nome);
+	$extensao = $lista[count($lista) - 1];
+	if($extensao != "map")
+	{
+		echo "Nome de arquivo inválido";
+		paraAguarde();
+		exit;
+	}
 }
 ?>
 </body>

@@ -27,15 +27,10 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
 	//verifica nomes
-	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploadshp']['name'])) || (!ereg('\.shp$',$_FILES['i3GEOuploadshp']['name'])) )
-	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploadshx']['name'])) || (!ereg('\.shx$',$_FILES['i3GEOuploadshx']['name'])) )
-	{$statusNome = 0;}
-	if( (ereg('[^a-zA-Z0-9·ÈÌÛ˙‚ÙÍ„ı_\.\ \-]',$_FILES['i3GEOuploaddbf']['name'])) || (!ereg('\.dbf$',$_FILES['i3GEOuploaddbf']['name'])) )
-	{$statusNome = 0;}
-	if($statusNome != 1)
-	{echo "<p class='paragrafo' >Nome de arquivo inv·lido. Evite acentos, espaÁos em branco ou caracteres especiais.";paraAguarde();exit;}
+	verificaNome($_FILES['i3GEOuploadshp']['name']);
+	verificaNome($_FILES['i3GEOuploadshx']['name']);
+	verificaNome($_FILES['i3GEOuploaddbf']['name']);
+
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploadshp']['name']);
@@ -103,6 +98,18 @@ else
 paraAguarde();
 function paraAguarde(){
 	echo "<script>window.parent.i3GEOF.upload.aguarde.visibility='hidden';</script>";
+}
+function verificaNome($nome)
+{
+	$nome = strtolower($nome);
+	$lista = explode(".",$nome);
+	$extensao = $lista[count($lista) - 1];
+	if(($extensao != "dbf") && ($extensao != "shx") && ($extensao != "shp"))
+	{
+		echo "Nome de arquivo inv·lido.";
+		paraAguarde();
+		exit;
+	}
 }
 ?>
 </body>
