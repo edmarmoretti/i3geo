@@ -29,7 +29,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['i3GEOuploaddbffile']['name'])) )
+	if( (ereg('[^a-zA-Z0-9áéíóúâôêãõ_\.\ \-]',$_FILES['filedbf']['name'])) || (!ereg('\.dbf$',$_FILES['filedbf']['name']))  || (!ereg('\.csv$',$_FILES['filedbf']['name'])))
 	{$statusNome = 0;}
 	if($statusNome != 1)
 	{echo "Nome de arquivo inválido";exit;}
