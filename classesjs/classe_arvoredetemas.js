@@ -118,7 +118,7 @@ i3GEO.arvoreDeTemas = {
 	Tipo:
 	{Numeric}
 	*/
-	FATORESTRELA: "1",
+	FATORESTRELA: "50",
 	/*
 	Propriedade: INCLUISISTEMAS
 	

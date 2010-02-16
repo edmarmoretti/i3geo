@@ -82,6 +82,12 @@ background-position:-377px 0;
 .olControlEditingToolbar .capturaItemActive {
 background-position:-377px -28px;
 }
+.olControlEditingToolbar .procuraItemInactive {
+background-position:-406px 0;
+}
+.olControlEditingToolbar .procuraItemActive {
+background-position:-406px -28px;
+}
 
 
 

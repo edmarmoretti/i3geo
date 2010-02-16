@@ -90,7 +90,7 @@ if(!isset($botoes)){
 	$objBotoes[] = "'poligono':true";
 	$objBotoes[] = "'edita':true";
 	$objBotoes[] = "'apaga':true";
-	$objBotoes[] = "'captura':false";
+	$objBotoes[] = "'procura':true";
 }
 else{
 	$botoes = str_replace(" ",",",$botoes);
@@ -120,8 +120,8 @@ else{
 	{$objBotoes[] = "'edita':true";}
 	if(in_array("apaga",$botoes))
 	{$objBotoes[] = "'apaga':true";}
-	if(in_array("captura",$botoes))
-	{$objBotoes[] = "'captura':false";}
+	if(in_array("procura",$botoes))
+	{$objBotoes[] = "'procura':false";}
 }
 $botoes = "{".implode(",",$objBotoes)."}";
 //
@@ -187,6 +187,7 @@ Parâmetros:
 		edita
 		apaga
 		captura
+		procura
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.
@@ -202,363 +203,22 @@ Parâmetros:
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/fonts/fonts-min.css" />
+<link rel="stylesheet" type="text/css" href="../pacotes/yui270/build/container/assets/skins/sam/container.css" />
+<script type="text/javascript" src="../pacotes/yui270/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="../pacotes/yui270/build/dragdrop/dragdrop-min.js"></script>
+<script type="text/javascript" src="../pacotes/yui270/build/container/container-min.js"></script>
 <script type="text/javascript" src="../classesjs/compactados/classe_calculo_compacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js.php"></script>
 <link rel="stylesheet" href="theme/default/style.css" type="text/css" />
 <link rel="stylesheet" href="openlayers.css" type="text/css" />
-
 </head>
-<body>
+<body class=" yui-skin-sam">
 <div id=i3geoMapa style="width:<?php echo $largura;?>px;height:<?php echo $altura;?>px;"></div>
+<div id=i3geoSelTemaAtivo style="height:15em;z-index:3000" class=" yui-skin-sam"></div>
 <script type="text/javascript">
-navn = false;
-//seta as variáveis navn e navm
-var navn = false;
-var navm = false;
-var app = navigator.appName.substring(0,1);
-if (app==='N'){navn=true;}else{navm=true;}
-
-OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-OpenLayers.Lang.setCode("pt-BR");
-function i3GeoMapaInicia(){
-	i3geoOL = new OpenLayers.Map('i3geoMapa', {
-		controls: [
-			<?php echo implode(",",$objControles); ?>
-		],
-		numZoomLevels: <?php echo $numzoomlevels;?>,
-		maxExtent: new OpenLayers.Bounds(<?php echo $maxextent;?>)
-	});
-	var ol_wms = new OpenLayers.Layer.WMS.Untiled( "OpenLayers WMS","http://labs.metacarta.com/wms/vmap0",{layers: 'basic'} );
-	var jpl_wms = new OpenLayers.Layer.WMS( "NASA Global Mosaic","http://t1.hypercube.telascience.org/cgi-bin/landsat7",{layers: "landsat7"});
-	jpl_wms.setVisibility(false);
-	layergrafico = new OpenLayers.Layer.Vector("Edição");
-	i3geoOL.addLayers([ol_wms, jpl_wms, <?php echo implode(",",$objOpenLayers); ?>,layergrafico]);
-	i3geoOL.zoomToMaxExtent();
-	//
-	//substitui o controle que mostra as coordenadas
-	//
-	var idcoord = i3geoOL.getControlsBy("separator"," ");
-	//alert(idcoord[0].id)
-	if(idcoord[0]){
-		i3geoOL.events.register("mousemove", i3geoOL, function(e){
-			var p,lonlat,d,dc;
-			if (navm)
-			{p = new OpenLayers.Pixel(e.x,e.y);}
-			else
-			{p = e.xy;}
-			//altera o indicador de localizacao
-			lonlat = i3geoOL.getLonLatFromPixel(p);
-			d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
-			try{
-				$i(idcoord[0].id).innerHTML = "Long: "+d[0]+"<br>Lat: "+d[1];
-			}
-			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
-			}
-		});
-	}
-	var botoes = <?php echo $botoes; ?>;
-	i3GEOOLcriaBotoes(botoes);
-};
-function i3GEOOLcriaBotoes(botoes){
-	var sketchSymbolizers = {
-	    "Point": {
-	        pointRadius: 4,
-	        graphicName: "square",
-	        fillColor: "white",
-	        fillOpacity: 1,
-	        strokeWidth: 1,
-	        strokeOpacity: 1,
-	        strokeColor: "#333333"
-	    },
-	    "Line": {
-	        strokeWidth: 3,
-	        strokeOpacity: 1,
-	        strokeColor: "#666666",
-	        strokeDashstyle: "dash"
-	    },
-	    "Polygon": {
-	        strokeWidth: 2,
-	        strokeOpacity: 1,
-	        strokeColor: "#666666",
-	        fillColor: "white",
-	        fillOpacity: 0.3
-	    }
-	};
-	var style = new OpenLayers.Style();
-	style.addRules([
-	    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
-	]);
-	var styleMap = new OpenLayers.StyleMap({"default": style});
-
-	var adiciona = false;
-	var controles = new Array();
-	var panel = new OpenLayers.Control.Panel({
-		displayClass: "olControlEditingToolbar noprint"
-	});
-	if(botoes.pan==true){
-		controles.push(new OpenLayers.Control.Navigation({title: "Deslocar",displayClass:"pan"}));
-		var adiciona = true;
-	}
-	if(botoes.zoombox==true){
-		controles.push(new OpenLayers.Control.ZoomBox({displayClass: "zoombox",title: "Zoom"}));
-		var adiciona = true;
-	}
-	if(botoes.zoomtot==true){
-		var button = new OpenLayers.Control.Button({
-			displayClass: "zoomtot", 
-			trigger: function(){i3geoOL.zoomToMaxExtent();},
-			title: "Ajusta extens&atilde;o"
-		});
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.legenda==true){
-		var button = new OpenLayers.Control.Button({
-			displayClass: "legenda", 
-			trigger: function(){i3GEOOLmostraLegenda();},
-			title: "Legenda"
-		});
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.distancia==true){
-		var button = new OpenLayers.Control.Measure(
-			OpenLayers.Handler.Path,
-			{
-				handlerOptions: {layerOptions: {styleMap: styleMap}},
-				persist: true,
-				displayClass: "distancia", 
-				title: "Distância"
-			}
-		);
-		button.events.on({
-			"measure": function(event){
-					var units = event.units;
-					var measure = event.measure;
-					alert("Distância: " + measure.toFixed(3) + " " + units);
-			},
-		});
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.area==true){
-		var button = new OpenLayers.Control.Measure(
-			OpenLayers.Handler.Polygon,
-			{
-				handlerOptions: {layerOptions: {styleMap: styleMap}},
-				persist: true,
-				displayClass: "area", 
-				title: "Área"
-			}
-		);
-		button.events.on({
-			"measure": function(event){
-					var units = event.units;
-					var measure = event.measure;
-					alert("Área: " + measure.toFixed(3) + " " + units + " quadrados");
-			},
-		});
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.identifica==true){
-    	button = new OpenLayers.Control.WMSGetFeatureInfo({
-           	maxFeatures:1,
-           	infoFormat:'text/plain', //'application/vnd.ogc.gml',
-           	layers: i3GEOOLpegaLayers(),
-           	queryVisible: true,
-           	title: "Identificar",
-           	displayClass: "identifica",
-            eventListeners: {
-                getfeatureinfo: function(event) {
-                    var lonlat = i3geoOL.getLonLatFromPixel(event.xy);
-                    var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEOOLcaptura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
-                    i3geoOL.addPopup(new OpenLayers.Popup.FramedCloud(
-                        "chicken", 
-                        i3geoOL.getLonLatFromPixel(event.xy),
-                        null,
-                        lonlattexto+"<pre>"+event.text+"</pre>",
-                        null,
-                        true
-                    ));
-                }
-            }
-       	});
-		//button.events.register("getfeatureinfo", this, showInfo);
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.linha==true){
-		button = new OpenLayers.Control.DrawFeature(
-			layergrafico,
-            OpenLayers.Handler.Path,
-            {
-            	displayClass: "linha",
-            	title: "digitalizar linha"
-            }
-		);
-		controles.push(button);
-		var adiciona = true;
-	}	
-	if(botoes.ponto==true){
-		button = new OpenLayers.Control.DrawFeature(
-			layergrafico,
-            OpenLayers.Handler.Point,
-            {
-            	displayClass: "ponto",
-            	title: "digitalizar ponto"
-            }
-		);
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.poligono==true){
-		button = new OpenLayers.Control.DrawFeature(
-			layergrafico,
-            OpenLayers.Handler.Polygon,
-            {
-            	displayClass: "poligono",
-            	title: "digitalizar polígono"
-            }
-		);
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.edita==true){
-		button = new OpenLayers.Control.ModifyFeature(
-			layergrafico,
-            {
-            	displayClass: "edita",
-            	title: "edita elemento"
-            }
-		);
-		controles.push(button);
-		var adiciona = true;
-	}
-	//botao de seleção
-	if(botoes.apaga==true){
-		button = new OpenLayers.Control.SelectFeature(
-			layergrafico,
-            {
-            	displayClass: "selecao",
-            	title: "seleciona elemento",
-                clickout: true,
-                toggle: true,
-                multiple: false,
-                hover: false,
-                toggleKey: "ctrlKey", // ctrl key removes from selection
-                multipleKey: "shiftKey", // shift key adds to selection
-                box: false
-            }
-		);
-		controles.push(button);
-		var adiciona = true;
-	}
-	if(botoes.apaga==true){
-		var button = new OpenLayers.Control.Button({
-			displayClass: "apaga", 
-			trigger: function(){
-				if(layergrafico.selectedFeatures.length > 0){
-					var x = window.confirm("Exclui os elementos selecionados?");
-					if(x)
-					{layergrafico.removeFeatures(layergrafico.selectedFeatures);}
-				}
-				else
-				{alert("Selecione pelo menos um elemento");}
-			},
-			title: "Apaga selecionados"
-		});
-		controles.push(button);
-		var adiciona = true;
-	}	
-	if(botoes.captura==true){
-		botaoCapturaOL = new OpenLayers.Control.GetFeature({
-			protocol: "",
-			displayClass: "captura", 
-			title: "Captura geometria",
-            eventListeners: {
-                featureselected: function(e) {
-                    layergrafico.addFeatures([e.feature]);
-                }
-            }
-		});
-		botaoCapturaOL.events.register(
-			"activate",
-			this, 
-			function(e){
-				var layers = i3GEOOLpegaLayers();
-                var u = layers[0].url+"&request=getfeature&service=wfs";
-                u += "&typename="+layers[0].params.LAYERS;
-                u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>-54,-12</gml:coordinates></gml:Point></Intersect></Filter>";
-                botaoCapturaOL.protocol = OpenLayers.Protocol.WFS({
-                	url:u
-                });
-            }
-        );
- 		controles.push(botaoCapturaOL);
-		var adiciona = true;
-	}	
-	//
-	//adiciona o painel ao mapa se alguma opï¿½ï¿½o foi inserida
-	//
-	if(adiciona == true){
-		panel.addControls(controles);
-		i3geoOL.addControl(panel);
-	}
-}
-function i3GEOOLmostraLegenda(){
-	var layers = pegaLayers()
-	var nlayers = layers.length;
-	var ins = "";
-	for(i=0;i<nlayers;i++){
-		var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
-		url = url.replace("LAYERS","LAYER");
-		ins += "<img src='"+url+"' /><br>";
-	}
-	var w = window.open()
-	w.document.write(ins)
-	w.document.close();
-
-}
-function i3GEOOLpegaLayers(){
-	var layers = i3geoOL.layers;
-	var nlayers = layers.length;
-	var ins = new Array();
-	for(i=0;i<nlayers;i++){
-		if(layers[i].visibility && (layers[i].isBaseLayer == false)){
-			ins.push(layers[i]);
-		}
-	}
-	return ins;
-}
-function i3GEOOLcaptura(lonlat){
-	var layers = i3GEOOLpegaLayers();
-    var u = layers[0].url+"&request=getfeature&service=wfs&version=1.0.0";
-    u += "&OUTPUTFORMAT=gml2&typename="+layers[0].params.LAYERS;
-    u += "&filter=<Filter><Intersect><PropertyName>Geometry</PropertyName><gml:Point><gml:coordinates>"+lonlat+"</gml:coordinates></gml:Point></Intersect></Filter>";
-	document.body.style.cursor="wait";
-	document.getElementById("i3geoMapa").style.cursor = "wait";
-	OpenLayers.Request.issue({
-		method: "GET",
-		url: u,
-		callback: function(retorno){
-			document.body.style.cursor="default";
-			document.getElementById("i3geoMapa").style.cursor = "default";
-			var fromgml = new OpenLayers.Format.GML({
-				geometryName: "msGeometry"
-			});
-			var gml = fromgml.read(retorno.responseText);
-			layergrafico.addFeatures(gml);
-		},
-		failure: function(){
-			document.body.style.cursor="default";
-			document.getElementById("i3geoMapa").style.cursor = "default";
-			alert("Erro");
-		}
-	})
-}
-i3GeoMapaInicia();
+<?php include("openlayers.js.php"); ?>
+i3GEOOL.inicia()
 </script>
 </body>
 </html>
