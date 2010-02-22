@@ -323,7 +323,7 @@ i3GEO.janela = {
 	*/
 	fecha: function(event){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
-		var i,old;
+		var i,old,id;
 		if(i3GEO.Interface.ATUAL === "googleearth"){
 			//YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
 		}
@@ -341,12 +341,16 @@ i3GEO.janela = {
 			{eval(i3GEO.janela.ANTESFECHA[i]);}
 		}
 		//YAHOO.janelaDoca.xp.panel.destroy();
-		if($i(this.id+"_c"))
-		{document.body.removeChild($i(this.id+"_c"));}
-		if($i(this.id))
-		{document.body.removeChild($i(this.id));}
-		if($i(this.id+"_mask"))
-		{document.body.removeChild($i(this.id+"_mask"));}
+		if(this.id)
+		{id = this.id;}
+		else
+		{id = event.id;}
+		if($i(id+"_c"))
+		{document.body.removeChild($i(id+"_c"));}
+		if($i(id))
+		{document.body.removeChild($i(id));}
+		if($i(id+"_mask"))
+		{document.body.removeChild($i(id+"_mask"));}
 		//
 		//remove script tag se houver
 		//
@@ -355,14 +359,14 @@ i3GEO.janela = {
 			if (old !== null) {
 				old.parentNode.removeChild(old);
 				old = null;
-				if(this.id)
-				{eval(this.id+" = null;");}
+				if(id)
+				{eval(id+" = null;");}
 			}
-			old = $i(this.id+"_script");
+			old = $i(id+"_script");
 			if (old !== null) {
 				old.parentNode.removeChild(old);
 				old = null;
-				eval("delete " + this.id);
+				eval("delete " + id);
 			}
 		}
 		catch(erro){
@@ -710,8 +714,10 @@ try{
                			if (nBodyHeight < 0)
                			{nBodyHeight = 0;}
                			oBody.style.height =  nBodyHeight + "px";
-               			if ($i("wdocai"))
-               			{$i("wdocai").style.height = nBodyHeight;}
+               			if ($i("wdocai")){
+							$i("wdocai").style.height = nBodyHeight;
+							$i("wdocai").style.width = oBody.style.width;
+						}
            			};
        			}
        			function onBeforeShow(){
