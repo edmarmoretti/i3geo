@@ -468,7 +468,7 @@ i3GEOF.identifica = {
 			ntemas = retorno.length;
 			for(i=0;i<ntemas;i++)
 			{
-				resultados = retorno[i].resultado[0];
+				resultados = retorno[i].resultado;
 				if(resultados !== " ")
 				{
 					res += "<div style='padding-top:6px;left:2px;text-align:left;width:80%;' >"+retorno[i].nome+"</div>";	
@@ -477,11 +477,11 @@ i3GEOF.identifica = {
 					for(j=0;j<nres;j++)
 					{
 						if(resultados[j].link === "")
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;"+resultados[j].valor+"</div>";}
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][0].alias+":&nbsp;"+resultados[j][0].valor+"</div>";}
 						else
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j].alias+":&nbsp;<a href='"+resultados[j].link+"' target=_blank >"+resultados[j].valor+"</a></div>";}
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][0].alias+":&nbsp;<a href='"+resultados[j][0].link+"' target=_blank >"+resultados[j][0].valor+"</a></div>";}
 						if(resultados[j].img !== "")
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >"+resultados[j].img+"</div>";}
+						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >"+resultados[j][0].img+"</div>";}
 						if (cor === "RGB(250,250,250)"){cor = "beige";}
 						else
 						{cor = "RGB(250,250,250)";}
