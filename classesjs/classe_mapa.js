@@ -618,7 +618,7 @@ i3GEO.mapa = {
 		/*
 		Function: verificaTipDefault
 		
-		Mostra etiquetas no mapa com informações sobre os temas com etiquetas ativas
+		Mostra balões de identificação, no ponto clicado pelo usuário, para os temas com etiquetas ativas
 		
 		Essa é a função padrão definida em i3GEO.configura		
 		*/
@@ -632,8 +632,11 @@ i3GEO.mapa = {
 			{etiquetas = true;}}
 			if(etiquetas === false)
 			{return;}
-			if(i3GEO.Interface.ATUAL==="padrao")
-			{$i("img").style.cursor = "wait";}
+			if($i(i3GEO.Interface.IDMAPA)){
+				if($i(i3GEO.Interface.IDMAPA).style.cursor == "wait")
+				{return;}
+				$i(i3GEO.Interface.IDMAPA).style.cursor = "wait";
+			}
 			retorna = function(retorno){
 				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s;
 				i = $i("i3geo_rosa");
@@ -656,9 +659,9 @@ i3GEO.mapa = {
 							tips = (temas[j].resultado.tips).split(",");
 							ntips = tips.length;
 							ins = "";
-							for(r=0;r<ntips;r++){
-								ds = temas[j].resultado.dados;
-								if(ds !== " "){
+							ds = temas[j].resultado.dados;
+							if(ds[0] !== " "){
+								for(r=0;r<ntips;r++){
 									nds = ds.length;	
 									for(s=0;s<nds;s++){
 										eval("var alias = ds[s]."+tips[r]+".alias");
@@ -670,10 +673,8 @@ i3GEO.mapa = {
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
 											if(valor !== "" && link !== "") 
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
-
 											if(img !== "")
 											{ins += img+"<br>";}
-											
 											mostra = true;
 										}
 										else{
@@ -716,6 +717,7 @@ i3GEO.mapa = {
 					}
 				}
 				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
 					if(i3GEO.Interface.ATUAL==="padrao"){
 						temp = "identifica";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)

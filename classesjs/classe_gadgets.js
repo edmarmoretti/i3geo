@@ -183,6 +183,10 @@ i3GEO.gadgets = {
 		if (!$i(id)){return;}
 		atualizaCoordenadasUTM = function()
 		{
+			if($i(i3GEO.Interface.IDMAPA)){
+				if($i(i3GEO.Interface.IDMAPA).style.cursor == "wait")
+				{return;}
+			}
 			if(typeof(console) !== 'undefined'){console.info("atualizaCoordenadasUTM()");}
 			//if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display == "block"){return;}
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
