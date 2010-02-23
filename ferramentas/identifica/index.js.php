@@ -459,7 +459,7 @@ i3GEOF.identifica = {
 	retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica2>
 	*/
 	mostraDadosTema: function(retorno){
-		var res="",div0,ntemas,i,resultados,nres,cor,j;
+		var res="",div0,ntemas,i,resultados,nres,cor,j,itens,nitens,k;
 		if (retorno.data !== undefined)
 		{
 			retorno = retorno.data;
@@ -469,24 +469,30 @@ i3GEOF.identifica = {
 			for(i=0;i<ntemas;i++)
 			{
 				resultados = retorno[i].resultado;
-				if(resultados !== " ")
+				res += "<div style='padding-top:6px;left:2px;text-align:left;width:100%;' >"+retorno[i].nome+"</div>";	
+				if(resultados[0] !== " ")
 				{
-					res += "<div style='padding-top:6px;left:2px;text-align:left;width:80%;' >"+retorno[i].nome+"</div>";	
-					nres = resultados.length;
+					nres = resultados.length;	
 					cor = "RGB(250,250,250)";
 					for(j=0;j<nres;j++)
 					{
-						if(resultados[j].link === "")
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][0].alias+":&nbsp;"+resultados[j][0].valor+"</div>";}
-						else
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][0].alias+":&nbsp;<a href='"+resultados[j][0].link+"' target=_blank >"+resultados[j][0].valor+"</a></div>";}
-						if(resultados[j].img !== "")
-						{res +=  "<div style='width:80%;text-align:left;background-color:"+cor+"' >"+resultados[j][0].img+"</div>";}
-						if (cor === "RGB(250,250,250)"){cor = "beige";}
-						else
-						{cor = "RGB(250,250,250)";}
+						nitens = resultados[j].length;
+						for(k=0;k<nitens;k++){
+							if(resultados[j][k].link === "")
+							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][k].alias+":&nbsp;"+resultados[j][k].valor+"</div>";}
+							else
+							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >&nbsp;&nbsp;"+resultados[j][k].alias+":&nbsp;<a href='"+resultados[j][k].link+"' target=_blank >"+resultados[j][k].valor+"</a></div>";}
+							if(resultados[j][k].img !== "")
+							{res +=  "<div style='width:100%;text-align:left;background-color:"+cor+"' >"+resultados[j][k].img+"</div>";}
+							if (cor === "RGB(250,250,250)"){cor = "beige";}
+							else
+							{cor = "RGB(250,250,250)";}
+						}
+						res += "<br>";
 					}
 				}
+				else
+				{res += "Nada encontrado";}
 			}
 			$i("i3GEOidentificaocorrencia").innerHTML=res;
 		}

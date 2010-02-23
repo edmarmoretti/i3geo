@@ -1094,6 +1094,7 @@ $etip  booblean - indica se a solicitação é para obtenção dos dados do tipo etiq
 */
 function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="",$etip=false)
 {
+	
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getLayerByName($tema);
 	$layer->set("status",MS_DEFAULT);
@@ -1181,18 +1182,20 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 		$layer->set("tolerance",$resolucao);
 		$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);
 	}
+	//error_reporting(E_ALL);
 	if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE))
 	{
 		$layer->set("toleranceunits",MS_PIXELS);
 		$layer->set("tolerance",$resolucao);
-		$ident = @$layer->queryByPoint($pt, 1, 0); //0.01);
+		$ident = @$layer->queryByPoint($pt, 1, -1); //0.01);
 	}
 	if ($layer->type == MS_LAYER_POLYGON)
 	{
-		$layer->set("toleranceunits",'MS_PIXEL');
-		$layer->set("tolerance",1);
-		$ident = @$layer->queryByPoint($pt, 1, 0);
+		$layer->set("toleranceunits",MS_PIXELS);
+		$layer->set("tolerance",$resolucao);
+		$ident = @$layer->queryByPoint($pt, 1, -1);
 	}
+
 	if ($ident == MS_SUCCESS)
 	{
 		$itens = $layer->getmetadata("ITENS"); // itens
