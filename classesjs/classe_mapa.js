@@ -690,7 +690,7 @@ i3GEO.mapa = {
 						if(!mostra){
 							if($i("tip"))
 							{$i("tip").style.display="none";}
-							return;
+							//return;
 						}
 						else{		
 							if(i3GEO.configura.tipotip !== "balao"){
@@ -717,7 +717,6 @@ i3GEO.mapa = {
 					else
 					{temp = "identifica";}
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-					
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
