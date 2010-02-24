@@ -550,7 +550,6 @@ i3GEO.Interface = {
 				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
 
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
-
 				//i3geoOL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
 				i3geoOL.addControl(new OpenLayers.Control.ScaleLine());
 				i3geoOL.addControl(new OpenLayers.Control.OverviewMap());

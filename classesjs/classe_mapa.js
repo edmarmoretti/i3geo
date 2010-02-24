@@ -713,8 +713,11 @@ i3GEO.mapa = {
 						temp = "zoom";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 						{temp = "identifica_contexto";}
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
+					else
+					{temp = "identifica";}
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
+					
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}
