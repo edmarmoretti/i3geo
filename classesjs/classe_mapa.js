@@ -725,8 +725,10 @@ i3GEO.mapa = {
 						temp = "identifica";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 						{temp = "identifica_contexto";}
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
+					else
+					{temp = "identifica";}
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 			};
 			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
