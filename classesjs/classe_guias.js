@@ -229,6 +229,17 @@ i3GEO.guias = {
 		}
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
+		//aqui é refeito o cálculo do número de guias pois
+		//apesar da guia existir em i3GEO.guias.CONFIGURA
+		//o usuário pode ter removido do HTML
+		//se o numero de guias não for calculado corretamente, os posicionamentos das guias ficam errados
+		i = nguias;
+		for(ng=0;ng<nguias;ng++){
+			if(!$i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
+				i--;
+			}
+		}
+		nguias = i;
 		//
 		//verifica o div que contém as guias caso não tenha sido passado como parâmetro
 		//

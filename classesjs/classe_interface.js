@@ -465,6 +465,45 @@ i3GEO.Interface = {
 	Cria o objeto i3geoOL que pode receber os métodos da API
 	*/
 	openlayers:{
+		/*
+		Propriedade: TILES
+		
+		Define se o mapa será mostrado com "tiles" (quadrículas) ou não 
+
+		Default:
+		true
+		
+		Tipo:
+		{Boolean}
+		*/
+		TILES: true,
+		/*
+		Propriedade: GADGETS
+		
+		Define quais funcionalidades específicas do OpenLayers (gadgets) serão incluídos no mapa 
+
+		Exemplo:
+		
+		i3GEO.Interface.openlayers.GADGETS =  {
+			
+			PanZoomBar:true,
+			
+			LayerSwitcher:true,
+			
+			ScaleLine:true,
+			
+			OverviewMap:true			
+		}
+
+		Tipo:
+		{Array}
+		*/
+		GADGETS: {
+			PanZoomBar:true,
+			LayerSwitcher:true,
+			ScaleLine:true,
+			OverviewMap:true			
+		},
 		redesenha: function(){
 			if($i("openlayers_OpenLayers_Container")){
 				var a,b,c,no,divs1,n1,divs2,n2,imgs,nimg;
@@ -507,7 +546,10 @@ i3GEO.Interface = {
 				url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?";
 				url += "map="+i3GEO.parametros.mapfile+"&mode=map&SRS=epsg:4326&";
 				i3geoOL = new OpenLayers.Map('openlayers', { controls: [] });
-				i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});
+				if(i3GEO.Interface.openlayers.TILES === true)
+				{i3geoOLlayer = new OpenLayers.Layer.MapServer( "Temas I3Geo", url,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});}
+				else
+				{i3geoOLlayer = new OpenLayers.Layer.MapServer.Untiled( "Temas I3Geo", url,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});}	
 				i3geoOLlayer.setVisibility(true);
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("moveend",i3geoOL,function(e){
@@ -547,14 +589,15 @@ i3GEO.Interface = {
 				pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
 				i3geoOL.addControl(pz);
 				pz.div.style.zIndex = 5000;
-				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
-
+				if(i3GEO.Interface.openlayers.GADGETS.LayerSwitcher === true)
+				{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 				//i3geoOL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
-				i3geoOL.addControl(new OpenLayers.Control.ScaleLine());
-				i3geoOL.addControl(new OpenLayers.Control.OverviewMap());
+				if(i3GEO.Interface.openlayers.GADGETS.ScaleLine === true)
+				{i3geoOL.addControl(new OpenLayers.Control.ScaleLine());}
+				if(i3GEO.Interface.openlayers.GADGETS.OverviewMap === true)
+				{i3geoOL.addControl(new OpenLayers.Control.OverviewMap());}
 				i3geoOL.addControl(new OpenLayers.Control.KeyboardDefaults());	
-				
 				i3GEO.eventos.ativa($i("openlayers"));
 				
 				pos = i3GEO.util.pegaPosicaoObjeto($i("openlayers"));
