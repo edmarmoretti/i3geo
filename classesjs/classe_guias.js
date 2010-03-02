@@ -158,6 +158,28 @@ i3GEO.guias = {
 		}
 	},
 	/*
+	Propriedade: ORDEM
+	
+	Ordem de inclusão das guias no mapa. Essa opção é mais útil no caso do tipo sanfona, pois
+	a primeira guia é sempre a que fica ativa. Se esse parâmetro for uma string vazia, a ordem
+	utilizada será a ordem existente em CONFIGURA
+	
+	Exemplo:
+	
+	i3GEO.guias.ORDEM = ["temas","adiciona","legenda"];
+	
+	Tipo:
+	{array}
+	
+	Default:
+	{""}
+	
+	Values:
+	
+	*/
+	ORDEM: "",
+	
+	/*
 	Propriedade: TIPO
 	
 	Tipo de guia
@@ -227,7 +249,10 @@ i3GEO.guias = {
 				}
 			}
 		}
-		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+		if(i3GEO.guias.ORDEM === "")
+		{guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);}
+		else
+		{guias = i3GEO.guias.ORDEM;}
 		nguias = guias.length;
 		//
 		//verifica o div que contém as guias caso não tenha sido passado como parâmetro
@@ -243,7 +268,6 @@ i3GEO.guias = {
 		if(!onde){return;}
 		onde.id = i3GEO.guias.IDGUIAS;
 		onde.className = "yui-navset";
-		
 		//
 		//constroi as TAGs para as guias
 		//
@@ -275,11 +299,15 @@ i3GEO.guias = {
 		if(i3GEO.guias.TIPO === "sanfona"){
 			ins = '<dl id=sanfona'+onde.id+' class="accordion" >';
 			//verifica a quantidade certa de guias
-			for(ng=0;ng<nguias;ng++){
-				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
-					nguiasreal++;
+			if(i3GEO.guias.ORDEM === ""){
+				for(ng=0;ng<nguias;ng++){
+					if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
+						nguiasreal++;
+					}
 				}
 			}
+			else
+			{nguiasreal = i3GEO.guias.ORDEM.length;}
 			if(navn)
 			{altura = i3GEO.parametros.h - (nguiasreal * 25) - 1;}
 			else

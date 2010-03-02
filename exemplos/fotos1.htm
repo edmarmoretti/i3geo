@@ -134,7 +134,7 @@
   </div>
   <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
   <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
-  <div id='guia6obj' style='display:none;text-align:left'>
+  <div id='guia6obj' style='display:block;text-align:left'>
   	<div id='listaDeFotos' style='overflow:auto;text-align:left'></div>
   </div>
  </td>
@@ -211,13 +211,13 @@ i3GEO.guias.CONFIGURA.temas.click = function(){
 
 i3GEO.guias.TIPO = "sanfona";
 i3GEO.guias.CONFIGURA.guiaDeFotos = {
-		titulo:"Fotos",
-		id:"guia6",
-		idconteudo:"guia6obj",
-		click:""
-	};
-
-
+	titulo:"Fotos",
+	id:"guia6",
+	idconteudo:"guia6obj",
+	click:""
+};
+i3GEO.guias.ORDEM = ["guiaDeFotos","temas","adiciona","legenda"];
+i3GEO.guias.ATUAL = "guiaDeFotos";
 i3GEO.inicia();
 
 var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
