@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>i3Geo - Mapa interativo</title>
+<!--
+	Leitura dos programas javaScript e estilos.
+	Os códigos do i3geo são compactados para tornar o carregamento mais rápido.
+	Se vc alterar os códigos originais, não se esqueça de compactá-los com classesjs/compactajs.php.
+	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
+	o arquivo i3geo.js por i3geo.js
+-->
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+	<style> 
+	.yui-log .i3geo {background-color:yellow;} /* customize a color */
+	.yui-log .redesenho {background-color:yellow;} /* customize a color */
+	.yui-log .janela {background-color:yellow;} /* customize a color */
+	.yui-log-bd {text-align:left;}
+	.yui-log-entry yui-log-verbose, p{text-align:left;}
+	 .info {text-align:left;}
+/* accordion */
+.accordion {
+	text-align:left;
+	width:267px;
+	border: 1px solid #aaa;
+	border-bottom-width: 0px;
+}
+.accordion dt {
+	text-align:left;
+	color: black;
+	padding: 3px 4px;
+	border: 1px solid #aaa;
+	width: 258px;
+	*width:266px; /*IE*/
+	background:#D8D8D8 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -199px;//-1306px;
+}
+.accordion dt.selected {
+	background:#D8D8D8 url(../pacotes/yui270/build/assets/skins/sam/sprite.png) repeat-x scroll 0 -1306px;
+	color: black;
+	font-weight:bolder;
+	padding: 3px 4px;
+	border: 1px solid #aaa;
+	width: 258px;
+	*width:266px; /*IE*/
+	
+}
+.accordiontable{
+	text-align:left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+.accordiontable td{
+	text-align:left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:none;
+}
+.accordion dt img{
+	background-image:url(../imagens/visual/default/sprite.png);
+	background-position:-4px -800px;
+	background-repeat:no-repeat;
+	border:0 solid white;
+	cursor:pointer;
+	padding:0;
+	top:2px;
+	width:10px;
+}
+.accordion dt.selected img {
+	background-image:url(../imagens/visual/default/sprite.png);
+	background-position:-4px -825px;
+	background-repeat:no-repeat;
+	border:0 solid white;
+	cursor:pointer;
+	padding:0;
+	top:2px;
+	width:10px;
+}
+
+.accordion dt:hover, .accordion dt.over {
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+}
+.accordion dd {
+	display: none;
+	border: 0px solid #aaa;
+	padding: 0px;
+	overflow: hidden;
+}
+.accordion dd.open {
+	display: block;
+	border: 0px solid #aaa;
+}
+.accordion dd.getHeight {
+	display: block;
+}	 
+	 
+	 
+	 
+	</style> 
+</head>
+<body id="i3geo">
+
+<table id='mst' summary="" style='display:none;' width=100% cellspacing='0'>
+
+<!--
+	Inclui a barra superior. Se vc não quiser o menu, é só comentar o TR
+-->
+<tr style="border:0px">
+	<td colspan=2 id="barraSuperior" style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
+<tr style="border:0px" >
+<td colspan=2 id="contemMenu" style="text-align:right;height:19px;border-width:0pt 0pt 1px;border-color:rgb(240,240,240)">
+	 <div id="menus" ></div>    
+</td>
+</tr>
+<tr style="border:0px">
+	<td colspan=2  style="background-image:url('../imagens/visual/default/rodape2.png');height:10px"></td>
+</tr>
+<tr>
+ <td class=tdbranca id=contemFerramentas style="vertical-align:top;width:268px;text-align:left;">
+    <div class=verdeescuro style="top:0px;cursor:pointer;">
+	 <div id=guia1 class=guia >Temas</div>
+	 <div id=guia2 class=guia >Adiciona</div>
+	 <div id=guia4 class=guia >Legenda</div>
+	 <div id=guia6 class=guia >Fotos</div>
+    </div>
+
+  <div id='guia1obj' >
+  	<div style='left:5px;top:10px;' id=buscaRapida ></div>
+  	<div id=listaPropriedadesSanfona style='top:15px;' ></div>
+  	<div id=listaTemasSanfona style='top:15px;'></div>
+  </div>
+  <div id='guia2obj' style='display:none;'>Aguarde...<img alt="" src="../imagens/branco.gif" width=248 /></div>
+  <div id='guia4obj' style='display:none;text-align:left'><div id='legenda' style='text-align:left'></div></div>
+  <div id='guia6obj' style='display:none;text-align:left'>
+  	<div id='listaDeFotos' style='overflow:auto;text-align:left'></div>
+  </div>
+ </td>
+ <td style="vertical-align:top;border-width:0px;">
+  <table width="100%" style="vertical-align:top;border-width:0px">
+   <!--
+   	Corpo do mapa. Pode ser reposicionado, mas não mude os IDs. Se vc quiser que o mapa tenha um tamanho específico, inclua o estilo, exemplo, style=width:300px;height:300px
+	Vc pode usar o estilo para definir o tamanho do mapa. Se não tiver estilo definido, o tamanho será automático
+   -->
+   <tr><td  class=verdeclaro id=contemImg  >
+    <div id=corpoMapa style="background-image:url('../imagens/i3geo1bw.jpg');"></div>
+   </td></tr>
+  </table>
+ </td>
+ </tr>
+ <tr style="border:0px">
+	<td colspan=3 style="background-image:url('../imagens/visual/default/cabeca.png');height:10px"></td>
+</tr>
+<tr style="border:0px">
+ <td colspan=3 >
+ 	<table style=width:100% >
+ 	<tr>
+ 	<td><div id="seletorIdiomas" ></div></td>
+ 	<td><div id=lugarquadros ></div></td>
+ 	<td><div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div></td>
+  	<td><div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div></td>
+  	<td><div id=escala ></div></td>
+  	</tr>
+  	</table>
+ </td>
+</tr>
+<tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape2.png');height:10px"></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
+<tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br</td></tr>
+</table>
+
+<center>
+<br><br>
+<table>
+<tr>
+	<td colspan=3 ><center><img src='../imagens/i3geo1.jpg'></td>
+</tr>
+<tr><td style="padding:10px;"><center><img src='../imagens/pspb.png'></td>
+	<td style="padding:10px;"><center><img src='../imagens/mapserv.png'></td>
+	<td style="padding:10px;"><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='../imagens/somerights20_pt.gif' ></a></td>
+</tr>
+<tr>
+	<td colspan=3 ><center>
+	</td>
+</tr>
+</table>
+<script type="text/javascript">
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
+i3GEO.cria()
+i3GEO.barraDeBotoes.AUTOALTURA = true
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = true
+i3GEO.barraDeBotoes.PERMITEFECHAR = true
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.guias.CONFIGURA.adiciona.titulo = "Mais temas";
+//as barras de botoes serão construidas automaticamente, sem precisar de eleemntos HTML
+i3GEO.barraDeBotoes.AUTO = true
+i3GEO.configura.iniciaJanelaMensagens = false
+i3GEO.guias.CONFIGURA.temas.click = function(){
+	if($i("listaTemasSanfona").innerHTML === ""){
+		i3GEO.arvoreDeCamadas.cria("listaTemasSanfona");
+		i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedadesSanfona",i3GEO.configura.listaDePropriedadesDoMapa);
+	}
+	else
+	{$i("guia1obj").style.display = "block";}
+}
+
+i3GEO.guias.TIPO = "sanfona";
+i3GEO.guias.CONFIGURA.guiaDeFotos = {
+		titulo:"Fotos",
+		id:"guia6",
+		idconteudo:"guia6obj",
+		click:""
+	};
+
+
+i3GEO.inicia();
+
+var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
+i3GEO.util.scriptTag(js,"i3GEOF.buscaFotos.inicia('listaDeFotos')","i3GEOF.buscaFotos_script");
+
+</script>
+
+</body>
+</html>

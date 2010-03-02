@@ -470,7 +470,7 @@ i3GEO.janela = {
 		if(i)
 		{i.style.display="none";}
 		if ($i(i3GEO.Interface.IDCORPO))
-		{$i(i3GEO.Interface.IDCORPO).title = "";}
+		{$i("img").title = "";}
 		//insere div para tips
 		novoel = document.createElement("div");
 		novoel.id = Nid;

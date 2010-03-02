@@ -202,7 +202,7 @@ i3GEO.guias = {
 		//
 		//obtém outras guias que podem existir no mapa
 		//
-		var onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura;
+		var nguiasreal = 0,onf,outf,guiaconteudo,id,guia,guias,nguias,g,re,ng,tituloguia,i,ins,largura,altura;
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
 		for(g=0;g<12;g++){
@@ -229,17 +229,6 @@ i3GEO.guias = {
 		}
 		guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 		nguias = guias.length;
-		//aqui é refeito o cálculo do número de guias pois
-		//apesar da guia existir em i3GEO.guias.CONFIGURA
-		//o usuário pode ter removido do HTML
-		//se o numero de guias não for calculado corretamente, os posicionamentos das guias ficam errados
-		i = nguias;
-		for(ng=0;ng<nguias;ng++){
-			if(!$i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
-				i--;
-			}
-		}
-		nguias = i;
 		//
 		//verifica o div que contém as guias caso não tenha sido passado como parâmetro
 		//
@@ -254,6 +243,7 @@ i3GEO.guias = {
 		if(!onde){return;}
 		onde.id = i3GEO.guias.IDGUIAS;
 		onde.className = "yui-navset";
+		
 		//
 		//constroi as TAGs para as guias
 		//
@@ -282,29 +272,18 @@ i3GEO.guias = {
 				{bcg.background = "transparent";}
 			};
 		}
-		
-		/*
-<dl id=sanfonaTeste class="accordion">
-	<dt>title 1</dt>
-		<dd class="close">
-			<div class="bd">
-				content of accordion pane #1
-			</div>
-		</dd>
-	<dt>title 1</dt>
-		<dd class="close">
-			<div class="bd">
-				content of accordion pane #2
-			</div>
-		</dd>
-</dl>
-*/		
 		if(i3GEO.guias.TIPO === "sanfona"){
 			ins = '<dl id=sanfona'+onde.id+' class="accordion" >';
+			//verifica a quantidade certa de guias
+			for(ng=0;ng<nguias;ng++){
+				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
+					nguiasreal++;
+				}
+			}
 			if(navn)
-			{altura = i3GEO.parametros.h - (nguias * 25) - 1;}
+			{altura = i3GEO.parametros.h - (nguiasreal * 25) - 1;}
 			else
-			{altura = i3GEO.parametros.h - (nguias * 23) + 1;}
+			{altura = i3GEO.parametros.h - (nguiasreal * 23) + 1;}
 			for(ng=0;ng<nguias;ng++){
 				if($i(i3GEO.guias.CONFIGURA[guias[ng]].id)){
 					id = i3GEO.guias.CONFIGURA[guias[ng]].idconteudo;

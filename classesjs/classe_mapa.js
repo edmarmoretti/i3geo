@@ -618,7 +618,7 @@ i3GEO.mapa = {
 		/*
 		Function: verificaTipDefault
 		
-		Mostra balões de identificação, no ponto clicado pelo usuário, para os temas com etiquetas ativas
+		Mostra etiquetas no mapa com informações sobre os temas com etiquetas ativas
 		
 		Essa é a função padrão definida em i3GEO.configura		
 		*/
@@ -632,11 +632,8 @@ i3GEO.mapa = {
 			{etiquetas = true;}}
 			if(etiquetas === false)
 			{return;}
-			if($i(i3GEO.Interface.IDMAPA)){
-				if($i(i3GEO.Interface.IDMAPA).style.cursor == "wait")
-				{return;}
-				$i(i3GEO.Interface.IDMAPA).style.cursor = "wait";
-			}
+			if(i3GEO.Interface.ATUAL==="padrao")
+			{$i("img").style.cursor = "wait";}
 			retorna = function(retorno){
 				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s;
 				i = $i("i3geo_rosa");
@@ -659,9 +656,9 @@ i3GEO.mapa = {
 							tips = (temas[j].resultado.tips).split(",");
 							ntips = tips.length;
 							ins = "";
-							ds = temas[j].resultado.dados;
-							if(ds[0] !== " "){
-								for(r=0;r<ntips;r++){
+							for(r=0;r<ntips;r++){
+								ds = temas[j].resultado.dados;
+								if(ds !== " "){
 									nds = ds.length;	
 									for(s=0;s<nds;s++){
 										eval("var alias = ds[s]."+tips[r]+".alias");
@@ -673,8 +670,10 @@ i3GEO.mapa = {
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
 											if(valor !== "" && link !== "") 
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
+
 											if(img !== "")
 											{ins += img+"<br>";}
+											
 											mostra = true;
 										}
 										else{
@@ -690,7 +689,7 @@ i3GEO.mapa = {
 						if(!mostra){
 							if($i("tip"))
 							{$i("tip").style.display="none";}
-							//return;
+							return;
 						}
 						else{		
 							if(i3GEO.configura.tipotip !== "balao"){
@@ -713,21 +712,16 @@ i3GEO.mapa = {
 						temp = "zoom";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 						{temp = "identifica_contexto";}
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
-					else
-					{temp = "identifica";}
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				catch(e){
-					if(typeof(console) !== 'undefined'){console.error(e);}
 					if(i3GEO.Interface.ATUAL==="padrao"){
 						temp = "identifica";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 						{temp = "identifica_contexto";}
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
-					else
-					{temp = "identifica";}
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 			};
 			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");

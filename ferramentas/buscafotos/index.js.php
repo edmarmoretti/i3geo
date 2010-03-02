@@ -71,6 +71,7 @@ i3GEOF.buscaFotos = {
 				i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,300000);
 				i3GEOF.buscaFotos.mostraMenu();
 			}}});
+			
 			i3GEOF.buscaFotos.ativaFoco();
 			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
 			if(i3GEO.parametros.mapscale === ""){
@@ -171,6 +172,8 @@ i3GEOF.buscaFotos = {
 	ativaFoco: function(){
 		g_operacao = "navega";
 		i3GEO.util.criaPin();
+		if(!$i("i3GEOF.buscaFotos_c"))
+		{return;}
 		var i = $i("i3GEOF.buscaFotos_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
