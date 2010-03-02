@@ -657,6 +657,7 @@ i3GEO.mapa = {
 							ntips = tips.length;
 							ins = "";
 							for(r=0;r<ntips;r++){
+								try{
 								ds = temas[j].resultado.dados;
 								if(ds !== " "){
 									nds = ds.length;	
@@ -670,10 +671,8 @@ i3GEO.mapa = {
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
 											if(valor !== "" && link !== "") 
 											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
-
 											if(img !== "")
 											{ins += img+"<br>";}
-											
 											mostra = true;
 										}
 										else{
@@ -682,14 +681,15 @@ i3GEO.mapa = {
 										}
 									}
 								}
+								}
+								catch(e){}
 							}
 							if(ins !== "")
-							{res = res + titulo + ins;}
+							{res += titulo + ins;}
 						}
 						if(!mostra){
 							if($i("tip"))
 							{$i("tip").style.display="none";}
-							return;
 						}
 						else{		
 							if(i3GEO.configura.tipotip !== "balao"){

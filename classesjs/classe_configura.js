@@ -1026,6 +1026,7 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"distancia","img",i3GEO.configura.locaplic);
 				}
 				g_tipoacao = "";
+				g_operacao="";
 				i3GEO.analise.medeDistancia.inicia();
 			}
 		},
@@ -1041,6 +1042,7 @@ i3GEO.configura = {
 					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area","img",i3GEO.configura.locaplic);
 				}
 				g_tipoacao = "";
+				g_operacao="";
 				i3GEO.analise.medeArea.inicia();
 			}
 		},

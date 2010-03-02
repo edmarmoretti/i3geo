@@ -571,7 +571,6 @@ i3GEO.Interface = {
 				OLpanel = new OpenLayers.Control.Panel();
 				OLpanel.addControls([OLpan,OLzoom]);
 				i3geoOL.addControl(OLpanel);
-				
 				i3GEO.Interface.openlayers.ativaBotoes();
 			};
 			i3GEO.php.openlayers(montaMapa);

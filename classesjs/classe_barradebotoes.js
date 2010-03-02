@@ -205,6 +205,12 @@ i3GEO.barraDeBotoes = {
 	*/
 	ativaIcone: function(icone){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaIcone()");}
+		if(i3GEO.Interface.ATUAL==="openlayers"){
+			try{
+				OLzoom.deactivate();
+			}
+			catch(e){}
+		}
 		var estilo,temp,ist,cor,ko;
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
 		ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
