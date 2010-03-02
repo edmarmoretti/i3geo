@@ -465,6 +465,23 @@ i3GEO.Interface = {
 	Cria o objeto i3geoOL que pode receber os métodos da API
 	*/
 	openlayers:{
+		/*
+		Propriedade: GADGETS
+		
+		Lista dos controles específicos da API do OpenLayers que serão inseridos ou não no mapa
+		
+		Tipo:
+		{object}
+		
+		Default:
+		{PanZoomBar:true,LayerSwitcher:true,ScaleLine:true,OverviewMap:true}
+		*/
+		GADGETS: {
+			PanZoomBar:true,
+			LayerSwitcher:true,
+			ScaleLine:true,
+			OverviewMap:true	
+		},
 		redesenha: function(){
 			if($i("openlayers_OpenLayers_Container")){
 				var a,b,c,no,divs1,n1,divs2,n2,imgs,nimg;
@@ -544,16 +561,19 @@ i3GEO.Interface = {
 						if(typeof(console) !== 'undefined'){console.error(e);}
 					}
 				});
-				pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
-				i3geoOL.addControl(pz);
-				pz.div.style.zIndex = 5000;
-				i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
-
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+				if(i3GEO.Interface.openlayers.GADGETS.PanZoomBar == true){
+					pz = new OpenLayers.Control.PanZoomBar({numZoomLevels: 5});
+					i3geoOL.addControl(pz);
+					pz.div.style.zIndex = 5000;
+				}
+				if(i3GEO.Interface.openlayers.GADGETS.LayerSwitcher == true)
+				{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
+				if(i3GEO.Interface.openlayers.GADGETS.ScaleLine == true)
+				{i3geoOL.addControl(new OpenLayers.Control.ScaleLine());}
+				if(i3GEO.Interface.openlayers.GADGETS.OverviewMap == true)
+				{i3geoOL.addControl(new OpenLayers.Control.OverviewMap());}
 
-				//i3geoOL.addControl(new OpenLayers.Control.Scale("escalanumerica"));
-				i3geoOL.addControl(new OpenLayers.Control.ScaleLine());
-				i3geoOL.addControl(new OpenLayers.Control.OverviewMap());
 				i3geoOL.addControl(new OpenLayers.Control.KeyboardDefaults());	
 				
 				i3GEO.eventos.ativa($i("openlayers"));
