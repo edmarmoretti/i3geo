@@ -342,10 +342,19 @@ i3GEO.arvoreDeCamadas = {
 			temas = this.CAMADAS;
 			this.CAMADAS = "";
 		}
-		if(this.comparaTemas(temas,this.CAMADAS))
+		var temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
+		//
+		//essa verificacao é necessaria quando a arvore é criada fora dos padrões normais
+		//
+		var temp = $i(i3GEO.arvoreDeCamadas.IDHTML);
+		if(temp){
+			if(temp.innerHTML !== ""){
+				if(this.comparaTemas(temas,this.CAMADAS))
+				{return;}
+			}
+		}
+		else
 		{return;}
-		var currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
-		if(!document.getElementById(i3GEO.arvoreDeCamadas.IDHTML)){return;}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 		this.CAMADAS = temas;
 		YAHOO.example.treeExample = function(){

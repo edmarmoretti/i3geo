@@ -11,7 +11,7 @@
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geo.js
 -->
-<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../classesjs/i3geo.js"></script>
 	<style> 
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
@@ -202,11 +202,10 @@ i3GEO.barraDeBotoes.AUTO = true
 i3GEO.configura.iniciaJanelaMensagens = false
 i3GEO.guias.CONFIGURA.temas.click = function(){
 	if($i("listaTemasSanfona").innerHTML === ""){
-		i3GEO.arvoreDeCamadas.cria("listaTemasSanfona");
+		i3GEO.arvoreDeCamadas.cria("listaTemasSanfona",i3GEO.arvoreDeCamadas.CAMADAS);
 		i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedadesSanfona",i3GEO.configura.listaDePropriedadesDoMapa);
 	}
-	else
-	{$i("guia1obj").style.display = "block";}
+	$i("guia1obj").style.display = "block";
 }
 
 i3GEO.guias.TIPO = "sanfona";
