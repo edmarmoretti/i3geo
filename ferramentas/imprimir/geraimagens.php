@@ -56,6 +56,12 @@ foreach ($temas as $tema)
 		}
 	}
 }
+if($interface == "openlayers"){
+	$ext = explode(" ",$mapexten);
+	$extatual = $map->extent;
+	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
+}
+
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);

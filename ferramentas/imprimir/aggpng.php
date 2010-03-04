@@ -56,6 +56,9 @@ $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
+$of = $map->outputformat;
+$of->set("driver","AGG/PNG");
+$of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
 //$legenda =$map->legend;
 //$legenda->set("status",MS_EMBED);
@@ -74,10 +77,13 @@ foreach ($temas as $tema)
 		}
 	}
 }
-$of = $map->outputformat;
-$of->set("driver","AGG/PNG");
-$of->set("imagemode","RGB");
-
+if($interface == "openlayers"){
+	$ext = explode(" ",$mapexten);
+	$extatual = $map->extent;
+	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
+	$legenda = $map->legend;
+	$legenda->set("status",MS_EMBED);
+}
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);

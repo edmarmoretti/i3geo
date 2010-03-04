@@ -67,16 +67,18 @@ i3GEOF.imprimir = {
 	*/
 	html:function(){
 		var ins = '<p class=paragrafo > Escolha o modelo:</p>' +
-			'<table class=lista6 width="200px">' +
-			'	<tr>' +
+			'<table class=lista6 width="200px">';
+			if(i3GEO.Interface.ATUAL == "padrao"){
+			ins += '	<tr>' +
 			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4l.htm" name=cmodelo /></td>' +
 			'		<td>A4 paisagem</td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td ><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4p.htm" name=cmodelo  /></td>' +
 			'		<td >A4 retrato</td>' +
-			'	</tr>' +
-			'	<tr>' +
+			'	</tr>';
+			}
+			ins += '	<tr>' +
 			'		<td><input style="cursor:pointer" onclick=i3GEOF.imprimir.abreI(this) type=radio value="a4lpaisagempdf.htm" name=cmodelo /></td>' +
 			'		<td>A4 com margens pdf</td>' +
 			'	</tr>' +
@@ -133,7 +135,8 @@ i3GEOF.imprimir = {
 	Abre uma nova janela com o resultado da impressão.
 	*/
 	abreI: function(obj){
-		window.open(i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid);
+		
+		window.open(i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL+"&mapexten="+i3GEO.parametros.mapexten);
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
