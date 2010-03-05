@@ -156,6 +156,7 @@ function DDinicia()
 		i3GEO.arvoreDeTemas.INCLUIWMS = false
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false
 		i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluibusca = false
+		i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 		i3GEO.arvoreDeTemas.cria("",g_locaplic,"arvoreTemas","datadownload_download\(this.value\)");
 	}
 	if (g_tipo == "dir")
@@ -290,7 +291,18 @@ tema - código do tema para download
 */
 function datadownload_download(tema)
 {
-	document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
+	if(!$i("panellistaarquivos")){
+		YAHOO.namespace("datadownloadLista");
+		YAHOO.datadownloadLista.panel = new YAHOO.widget.Panel("panellistaarquivos", {zIndex:2000, iframe:false, width:"450px", visible:false, draggable:true, close:true, modal:true } );
+		YAHOO.datadownloadLista.panel.setHeader("Arquivos");
+		YAHOO.datadownloadLista.panel.setBody("");
+		YAHOO.datadownloadLista.panel.setFooter("");
+		YAHOO.datadownloadLista.panel.render(document.body);
+		YAHOO.datadownloadLista.panel.center();
+	};
+	YAHOO.datadownloadLista.panel.setBody($trad("d28"));
+	YAHOO.datadownloadLista.panel.show();
+	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
 	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download&tema="+tema;
 	var cp = new cpaint();
 	//cp.set_debug(2)
@@ -324,7 +336,8 @@ function mostraDownload(retorno)
 	{
 		var ins = "<p style=color:red >Ocorreu um erro<br>"
 	}
-	document.getElementById("corpo").innerHTML = ins
+	YAHOO.datadownloadLista.panel.setBody(ins);
+	YAHOO.datadownloadLista.panel.show();
 }
 /*
 Function: dataDownloadLinks

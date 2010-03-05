@@ -1079,7 +1079,15 @@ pt:"Interface",
 en:"Interface",
 es:"Interface",
 it:"Interface"
-}]
+}],
+"d28":[
+{
+pt:"Aguarde...gerando os arquivos",
+en:"Wait...",
+es:"Espere...",
+it:"Attendere..."
+}],
+
 
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

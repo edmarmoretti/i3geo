@@ -155,7 +155,21 @@ i3GEO.arvoreDeTemas = {
 	{Boolean}
 	*/
 	FILTRAOGC: false,
-
+	/*
+	Propriedade: TIPOBOTAO
+	
+	Tipo de botao que sera usado para clicar no tema
+	
+	Tipo:
+	{String}
+	
+	Valores:
+	{checkbox|radio}
+	
+	Default:
+	{checkbox}
+	*/
+	TIPOBOTAO: "checkbox",
 	/*
 	Propriedade: ATIVATEMA
 	
@@ -609,18 +623,30 @@ i3GEO.arvoreDeTemas = {
 	funcaoTema - {String} (opcional) Nome da função que será executada quando o usuário clicar no checkbox de um tema
 
 	objOpcoes - {Object} (opcional) Objeto com as opções necessárias para criação dos ícones com as opções adicionais de adição de temas
+	
+	tipoBotao - {String} (opcional) checkbox|radio tipo de botão que será mostrado para o usuário escolher o tema
 	*/
-	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes) {
+	cria: function(g_sid,g_locaplic,idhtml,funcaoTema,objOpcoes,tipoBotao) {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.cria()");}
 		if(this.ARVORE){return;}
+		if(!idhtml)
+		{var idhtml = "";}
 		if(idhtml !== "")
 		{i3GEO.arvoreDeTemas.IDHTML = idhtml;}
-		var nargs = arguments.length;
-		if(nargs == 4 || nargs == 5){
-			i3GEO.arvoreDeTemas.ATIVATEMA = funcaoTema;
-		}
-		if(nargs == 5)
-		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS = objOpcoes;}	
+		if(!funcaoTema)
+		{var funcaoTema = "";}
+		if(funcaoTema !== "")
+		{i3GEO.arvoreDeTemas.ATIVATEMA = funcaoTema;}
+		if(!objOpcoes)
+		{var objOpcoes = "";}
+		if(objOpcoes !== "")
+		{i3GEO.arvoreDeTemas.OPCOESADICIONAIS = objOpcoes;}
+		if(!tipoBotao)
+		{var tipoBotao = "";}
+		if(tipoBotao !== "")
+		{i3GEO.arvoreDeTemas.TIPOBOTAO = tipoBotao;}
+		
+		
 		i3GEO.arvoreDeTemas.LOCAPLIC = g_locaplic;
 		i3GEO.arvoreDeTemas.SID = g_sid;
 		if(i3GEO.arvoreDeTemas.IDHTML === ""){return;}
@@ -1091,7 +1117,7 @@ i3GEO.arvoreDeTemas = {
 		{html += "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
 		else
 		{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
-		html += " type='checkbox' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:top;text-align:left;color:"+cor+";padding-left:3px;' >";
+		html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:top;text-align:left;color:"+cor+";padding-left:3px;' >";
 		html += tema.nome;
 		html += "</td></span>";
 		return(html);
