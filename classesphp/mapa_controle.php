@@ -1011,13 +1011,20 @@ Gera uma imagem que será utilizada para destacar um determinado tema.
 		$retorno = $m->geraDestaque();
 	break;
 /*
-Valor: DOWNLOAD
+Valor: DOWNLOAD (depreciado, utilize DOWNLOAD2
+*/
+	case "DOWNLOAD":
+		$retorno = downloadTema($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
+	break;
+/*
+Valor: DOWNLOAD2
 
 Gera os arquivos para download de um tema.
 */
-	case "DOWNLOAD":
-		$retorno = downloadTema($map_file,$tema,$locaplic,$dir_tmp);
+	case "DOWNLOAD2":
+		$retorno = downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
 	break;
+
 /*
 function: INSEREFEATURE
 

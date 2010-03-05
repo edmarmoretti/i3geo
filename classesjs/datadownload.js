@@ -293,7 +293,7 @@ function datadownload_download(tema)
 {
 	if(!$i("panellistaarquivos")){
 		YAHOO.namespace("datadownloadLista");
-		YAHOO.datadownloadLista.panel = new YAHOO.widget.Panel("panellistaarquivos", {zIndex:2000, iframe:false, width:"450px", visible:false, draggable:true, close:true, modal:true } );
+		YAHOO.datadownloadLista.panel = new YAHOO.widget.Panel("panellistaarquivos", {zIndex:2000, iframe:false, width:"450px",align:"left", visible:false, draggable:true, close:true, modal:true } );
 		YAHOO.datadownloadLista.panel.setHeader("Arquivos");
 		YAHOO.datadownloadLista.panel.setBody("");
 		YAHOO.datadownloadLista.panel.setFooter("");
@@ -303,11 +303,11 @@ function datadownload_download(tema)
 	YAHOO.datadownloadLista.panel.setBody($trad("d28"));
 	YAHOO.datadownloadLista.panel.show();
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
-	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download&tema="+tema;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download2&tema="+tema;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
-	cp.call(p,"downloadTema",mostraDownload);
+	cp.call(p,"downloadTema2",mostraDownload);
 }
 /*
 Function: mostraDownload
@@ -319,7 +319,7 @@ function mostraDownload(retorno)
 	if (retorno.data != undefined)
 	{
 		var retorno = retorno.data
-		var arqs = retorno.split(",")
+		var arqs = retorno.arquivos.split(",")
 		var n = arqs.length;
 		if(retorno == "erro")
 		{var ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
@@ -328,8 +328,10 @@ function mostraDownload(retorno)
 			var ins = "<b>Clique nos links para pegar os arquivos. Para obter os metadados, veja o link na árvore ao lado (o link é mostrado ao expandir o nó correspondente ao tema).</b><br><br>"
 			for (var arq=0;arq<n;arq++)
 			{
-				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"<br>"
+				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>"
 			}
+			if(retorno.nreg)
+			{ins += "<br><br>N&uacute;mero de registros ="+retorno.nreg;}
 		}
 	}
 	else

@@ -425,7 +425,7 @@ i3GEO.tema = {
 				var js = i3GEO.configura.locaplic+"/ferramentas/download/index.js.php";
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.scriptTag(js,"i3GEOF.download.criaJanelaFlutuante('"+idtema+"')","i3GEOF.download_script");
-			}		
+			}
 		},
 		/*
 		Function: sld

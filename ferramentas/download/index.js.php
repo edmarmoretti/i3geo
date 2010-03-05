@@ -51,15 +51,17 @@ i3GEOF.download = {
 				retorno,arqs,n,arq;
 			if (retorno.data != undefined){
 				retorno = retorno.data;
-				arqs = retorno.split(",");
+				arqs = retorno.arquivos.split(",");
 				n = arqs.length;
 				if(retorno == "erro")
 				{ins = "<p style=color:red >Ocorreu um erro. O tema não foi encontrado. Pode ser que o código do tema não existe na definição do mapfile. Informe o administrador do sistema.<br>";}
 				else{
 					for (arq=0;arq<n;arq++){
-						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"<br>";
+						ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>";
 					}
 				}
+				if(retorno.nreg)
+				{ins += "<br><br>N&uacute;mero de registros ="+retorno.nreg;}
 			}
 			else
 			{ins = "<p style=color:red >Ocorreu um erro<br>";}
@@ -68,7 +70,7 @@ i3GEOF.download = {
 		}
 		
 		
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download&tema="+tema;
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"downloadTema",mostraDownload);		

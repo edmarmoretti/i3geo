@@ -1729,6 +1729,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$novonomelayer = nomeRandomico(20);
 	else
 	$novonomelayer = $tema;
+	
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
@@ -1786,13 +1787,16 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$existesel = "nao";
 		if (file_exists($map_file."qy"))
 		{$map->loadquery($map_file."qy");}
-		if ($layer->getNumresults() > 0){$existesel = "sim";}
+		if ($layer->getNumresults() > 0)
+		{$existesel = "sim";}
+
 		if ($existesel == "nao")
 		{
 			@$layer->queryByrect($map->extent);
 		}
 		//pega cada registro
 		$res_count = $layer->getNumresults();
+
 		if ($res_count > 0)
 		{
 			$sopen = $layer->open();
@@ -1825,7 +1829,17 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	return $nomeshp;
 }
 /*
-Function: downloadTema
+Function: downloadTema (depreciado)
+
+Utilize downloadTema2
+*/
+function downloadTema($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
+{
+	$resultado = downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
+	return $resultado["arquivos"];
+}
+/*
+Function: downloadTema2
 
 Faz o download dos dados de um tema.
 
@@ -1839,6 +1853,8 @@ $locaplic {string} - Diretório da aplicação.
 
 $dir_tmp {string} - Diretório temporário
 
+$postgismapa - variavel definida em ms_configura.php
+
 Retorno:
 
 {array} com o nome do diretório e nome do arquivo
@@ -1846,7 +1862,7 @@ Retorno:
 Include:
 <ms_configura.php>
 */
-function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
+function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 {
 	ini_set("max_execution_time","1800");
 	if(file_exists($locaplic."/ms_configura.php"))
@@ -1897,8 +1913,9 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	//
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
 	//
-	$ma_file = str_replace(".map","tmp.map",$map_file);
+	$map_file = str_replace(".map","tmp.map",$map_file);
 	$map->save($map_file);
+	substituiCon($map_file,$postgis_mapa);
 	$map = ms_newMapObj($map_file);
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
@@ -1928,6 +1945,16 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 	foreach ($temas as $tema)
 	{
 		$l = $map->getlayerbyname($tema);
+		$novonomelayer = $tema;
+		$nomeshp = $dir_tmp."/".$novonomelayer;
+		if(file_exists($nomeshp.".dbf")){
+			$verificaDBF = verificaDBF($nomeshp.".dbf");
+			if($verificaDBF == false){
+				unlink($nomeshp.".dbf");
+				unlink($nomeshp.".shp");
+				unlink($nomeshp.".shx");
+			}
+		}
 		$meta = $l->getmetadata("arquivodownload");
 		if($meta != "")
 		{
@@ -1965,7 +1992,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			else
 			{
 				$sp = $map->shapepath;
-				$arq = "";
+				$arq = "";			
 				if (file_exists($dados))
 				{$arq = $dados;}
 				if (file_exists($dados.".shp"))
@@ -1976,8 +2003,6 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 				{$arq = $sp.$dados;}
 				if ($arq != "")
 				{
-					$novonomelayer = $tema; //nomeRandomico(20);
-					$nomeshp = $dir_tmp."/".$novonomelayer;
 					$arq = explode(".shp",$arq);
 					if(!file_exists($nomeshp.".shp"))
 					{
@@ -1991,6 +2016,7 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 				}
 				else
 				{
+					
 					$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
 					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
 					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
@@ -1999,7 +2025,37 @@ function downloadTema($map_file,$tema,$locaplic,$dir_tmp)
 			}
 		}
 	}
-	return(implode(",",$resultado));
+	$nreg = "";
+	if(count($resultado) == 3){
+		$arq = $radtmp."/".$resultado[2];
+		$db = dbase_open($arq, 0);
+		if ($db) {$nreg = dbase_numrecords($db);}
+	}
+	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
+}
+/*
+Function: verificaDBF
+
+Verifica se um arquivo dbf está ou não vazio
+
+Parametros:
+
+$arq {string} - nome do arquivo dbf
+
+Return:
+
+{boolean} - true indica que não está vazio
+*/
+function verificaDBF($arq){
+	$db = dbase_open($arq, 0);
+	if ($db) {
+	  $record_numbers = dbase_numrecords($db);
+	  if ($record_numbers > 0)
+	  {return true;}
+	  else
+	  {return false;}
+	}
+	else {return false;}	
 }
 /*
 Section: Outros
