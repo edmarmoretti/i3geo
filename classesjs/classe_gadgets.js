@@ -951,8 +951,32 @@ i3GEO.gadgets = {
 				}
 			};
  			i3GEOoMenuBar=new YAHOO.widget.MenuBar(id,{autosubmenudisplay: true, showdelay: 100, hidedelay: 500, lazyload: false});
+ 			YAHOO.widget.MenuManager.addMenu(i3GEOoMenuBar);
  			i3GEOoMenuBar.beforeRenderEvent.subscribe(onMenuBarBeforeRender);
  			i3GEOoMenuBar.render();
+ 			//
+ 			//marca o tipo de interface em uso
+ 			//
+ 			try{
+	 			if(i3GEO.Interface.ATUAL === "padrao" && $i("omenudataInterface1")){
+	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface1").cfg.setProperty("checked", true);
+	 			}
+	 			if(i3GEO.Interface.ATUAL === "openlayers" && $i("omenudataInterface2")){
+	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface2").cfg.setProperty("checked", true);
+	 			}
+	 			if(i3GEO.Interface.ATUAL === "flamingo" && $i("omenudataInterface3")){
+	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface3").cfg.setProperty("checked", true);
+	 			}
+	 			if(i3GEO.Interface.ATUAL === "googlemaps" && $i("omenudataInterface4")){
+	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface4").cfg.setProperty("checked", true);
+	 			}
+	 			if(i3GEO.Interface.ATUAL === "googleearth" && $i("omenudataInterface5")){
+	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
+	 			}
+ 			}catch(e){
+ 				if(typeof(console) !== 'undefined')
+ 				{console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
+ 			}
 			//
 			//corrige problemas de estilo
 			//

@@ -113,51 +113,51 @@ i3GEO.configura = {
  		],
 		submenus:{
 			"ajudaMenu": [ 
-			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
-			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
-			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo", target:"_blank" },
-			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
-			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6", target:"_blank" },
-			{ text: "Lista de funções", url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" }
+			{ id:"omenudataAjudamenu1",text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
+			{ id:"omenudataAjudamenu2",text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
+			{ id:"omenudataAjudamenu3",text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
+			{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo", target:"_blank" },
+			{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
+			{ id:"omenudataAjudamenu6",text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6", target:"_blank" },
+			{ id:"omenudataAjudamenu7",text: "Lista de funções", url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" }
 			],
 			"analise": [
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
-			{ text: $trad("u7"), url: "javascript:i3GEO.analise.dialogo.gradePol()"},
-			{ text: $trad("u8"), url: "javascript:i3GEO.analise.dialogo.gradePontos()" },
-			{ text: $trad("u9"), url: "javascript:i3GEO.analise.dialogo.gradeHex()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
-			{ text: $trad("u11a"), url: "javascript:i3GEO.analise.dialogo.distanciaptpt()" },
-			{ text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
-			{ text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
-			{ text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
-			{ text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
-			{ text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
-			{ text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
-			{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
-			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
-			{ text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" }
+    		{ id:"omenudataAnalise1",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise2",text: $trad("u7"), url: "javascript:i3GEO.analise.dialogo.gradePol()"},
+			{ id:"omenudataAnalise3",text: $trad("u8"), url: "javascript:i3GEO.analise.dialogo.gradePontos()" },
+			{ id:"omenudataAnalise4",text: $trad("u9"), url: "javascript:i3GEO.analise.dialogo.gradeHex()" },
+    		{ id:"omenudataAnalise5",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise6",text: $trad("u11a"), url: "javascript:i3GEO.analise.dialogo.distanciaptpt()" },
+			{ id:"omenudataAnalise7",text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
+			{ id:"omenudataAnalise8",text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
+			{ id:"omenudataAnalise9",text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
+    		{ id:"omenudataAnalise10",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise11",text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
+    		{ id:"omenudataAnalise12",text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
+			{ id:"omenudataAnalise13",text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
+			{ id:"omenudataAnalise14",text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
+			{ id:"omenudataAnalise15",text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
+			{ id:"omenudataAnalise16",text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
+			{ id:"omenudataAnalise17",text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" }
 			],
 			"janelas": [
-			{ text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
-			{ text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
+			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
+			{ id:"omenudataJanelas2",text: $trad("u16"), url: "javascript:i3GEO.ajuda.abreJanela()" }        
 			],
 			"arquivos": [
-			{ text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
-			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
-			{ text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
-			{ text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
-			{ text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" },
-			{ text: $trad("u21"), url: "../geradordelinks.htm" }
+			{ id:"omenudataArquivos1",text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
+			{ id:"omenudataArquivos2",text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
+			{ id:"omenudataArquivos3",text: $trad("u19"), url: "javascript:i3GEO.gadgets.quadros.listaImagens()" },
+			{ id:"omenudataArquivos4",text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
+			{ id:"omenudataArquivos5",text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" },
+			{ id:"omenudataArquivos6",text: $trad("u21"), url: "../geradordelinks.htm" }
 			],
 			"interface": [
-			{ text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/geral.htm?'+i3GEO.configura.sid" },
-			{ text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/openlayers.htm?'+i3GEO.configura.sid" },
-			{ text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/flamingo.htm?'+i3GEO.configura.sid" },
-			{ text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googlemaps.phtml?'+i3GEO.configura.sid" },
-			{ text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googleearth.phtml?'+i3GEO.configura.sid" }
+			{ id:"omenudataInterface1",text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/geral.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/openlayers.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/flamingo.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googlemaps.phtml?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface5",text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googleearth.phtml?'+i3GEO.configura.sid" }
 			]
 		}
 	},
