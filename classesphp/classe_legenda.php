@@ -452,7 +452,7 @@ $onclick - Função que será incluída no HTML no evento onclick sobre o símbolo
 return:
 String no formato HTML com as imagens dos símbolos
 */
-	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick)
+	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=16)
 	{
 		if ($tipo == 3){$tipo = 2;} //tipo raster
 		if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
@@ -460,7 +460,10 @@ String no formato HTML com as imagens dos símbolos
 			$f = fopen($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc","w");
 			if ($tipo == 2){$t="simpol.map";}
 			if ($tipo == 0){$t="simpt.map";}
-			if ($tipo == 1){$t="simlin.map";}
+			if ($tipo == 1){
+				$t="simlin.map";
+				$tamanho = $tamanho / 4;
+			}
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 			{$mapatemp = ms_newMapObj($this->localaplicacao."\\aplicmap\\".$t);}
 			else
@@ -480,7 +483,7 @@ String no formato HTML com as imagens dos símbolos
 				$c = $tematemp->getClass(0);
 				$e = $c->getstyle(0);
 				$e->set("symbolname",$nomes);
-				$e->set("size",5);
+				$e->set("size",$tamanho);
 				$ico = $c->createLegendIcon(40,40);
 				$nimg = $ico->saveWebImage();
 				$pat = $this->mapa->web->imageurl;
