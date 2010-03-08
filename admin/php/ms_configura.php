@@ -58,7 +58,8 @@ switch ($funcao)
 		"\$expoeMapfile",
 		"\$menutemas",
 		"\$conexaoadmin",
-		"\$googleApiKey"
+		"\$googleApiKey",
+		"\$interfacePadrao"
 	);
 	$par = array();
 	foreach ($vs as $v)

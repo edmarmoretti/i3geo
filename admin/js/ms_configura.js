@@ -55,7 +55,8 @@ function initMenu()
 	{ mensagem: "(opcional) string de conexão com o banco de dados para substituir o item CONECTION quando o mesmo estiver vazio",cabeca: "Substituição de conexão", variavel: "$postgis_mapa"},
 	{ mensagem: "sim|nao Define se o desenho da imagem do mapa será feito por meio do CGI ou não. A escolha do uso do CGI ou não deve ser testada para verificar qual a melhor performance em cada instalação.",cabeca: "Utiliza CGI", variavel: "$utilizacgi"},
 	{ mensagem: "sim|nao Expõe ou não o endereço do arquivo mapfile utilizado no mapa que está sendo usado. Quando essa variável for definida como nao algumas das funcionalidades do i3geo poderão ficar prejudicadas, mas sem comprometimento das funções principais",cabeca: "Expõe o mapfile", variavel: "$expoeMapfile"},	
-	{ mensagem: "Arquivo (PHP) que define a conexão com o banco de dados administrativo. Mantendo esse valor como vazio, o i3geo irá utilizar o banco de dados padrão em SQLITE. Veja i3geo/ms_configura.php e i3geo/admin/conexao.php para maiores informações sobre como utilizar outros bancos de dados.",cabeca: "Conexão com o banco de dados administrativo", variavel: "$conexaoadmin"}	
+	{ mensagem: "Arquivo (PHP) que define a conexão com o banco de dados administrativo. Mantendo esse valor como vazio, o i3geo irá utilizar o banco de dados padrão em SQLITE. Veja i3geo/ms_configura.php e i3geo/admin/conexao.php para maiores informações sobre como utilizar outros bancos de dados.",cabeca: "Conexão com o banco de dados administrativo", variavel: "$conexaoadmin"},
+	{ mensagem: "Interface padrão utilizada para mostrar o mapa. essa é a interface utilizada quando o i3Geo é inicializado sem a passagem de parâmetros para definição da interface a ser usada.",cabeca: "Interface padrão", variavel: "$interfacePadrao"}	
 	]};
 	core_carregando("ativa");
 	core_pegaDados("buscando parâmetros...","../php/ms_configura.php?funcao=pegaParametrosConfigura","pegaParametros")
