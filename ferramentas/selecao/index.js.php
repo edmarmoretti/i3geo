@@ -496,7 +496,11 @@ i3GEOF.selecao = {
 				tipo = $i("i3GEOselecaotipoOperacao").value;
 				i3GEOF.selecao.porbox(i3GEO.temaAtivo,tipo,v);
 			}
-			catch(e){limpa.call();return;}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+				limpa.call();
+				return;
+			}
 		}
 	},
 	/*

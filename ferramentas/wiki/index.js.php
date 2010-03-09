@@ -61,7 +61,7 @@ i3GEOF.wiki = {
 			}			
 			i3GEOF.wiki.lista();
 		}
-		catch(erro){alert(erro);}
+		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 	},
 	/*
 	Function: html

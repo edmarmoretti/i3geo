@@ -60,7 +60,7 @@ i3GEOF.opcoesLegenda = {
 			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef");
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 		}
-		catch(erro){}
+		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 	},
 	/*
 	Function: html

@@ -248,7 +248,7 @@ i3GEObuscaRapida = {
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}
-		try{window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");}catch(e){}
+		try{window.parent.objaguarde.abre("i3GEO.atualiza","Aguarde...");}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		i3GEO.php.mudaext(adicionaCamada(layer,gid,nm,ext),window.parent.i3GEO.configura.tipoimagem,ext,i3GEObuscaRapida.locaplic,window.parent.i3GEO.configura.sid);
 	},
 	/*
@@ -288,7 +288,7 @@ i3GEObuscaRapida = {
 			if(!window.parent.i3GEO){return;}
 			if(!window.parent.i3GEO.calculo){return;}
 		}
-		catch(e){return;}
+		catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}	
 		var ext = ext.split(" ");

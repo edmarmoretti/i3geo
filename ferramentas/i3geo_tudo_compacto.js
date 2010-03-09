@@ -6917,7 +6917,7 @@ i3GEO.util = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.criaBotaoAplicar()");}
 		try
 		{clearTimeout(tempoBotaoAplicar);}
-		catch(e){}
+		catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		var novoel,xy;
 		tempoBotaoAplicar = eval("setTimeout('"+nomeFuncao+"\(\)',(i3GEO.configura.tempoAplicar))");
 		autoRedesenho("reinicia");
@@ -8137,7 +8137,7 @@ i3GEO.util = {
 				else
 				{temp = {dados:"<p style=color:red >Ocorreu um erro<br>",tipo:"erro"};}
 				eval("funcao(temp);");
-			}catch(e){alert(e);}
+			}catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		};
 		if(tipoLista === "ligados"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){

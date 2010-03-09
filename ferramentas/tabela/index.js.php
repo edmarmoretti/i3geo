@@ -494,7 +494,10 @@ i3GEOF.tabela = {
 				}
 			}
 			i3GEOF.tabela.aguarde.visibility = "hidden";
-		}catch(e){i3GEOF.tabela.aguarde.visibility = "hidden";}
+		}catch(e){
+			i3GEOF.tabela.aguarde.visibility = "hidden";
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function: ordenaColuna
@@ -542,7 +545,7 @@ i3GEOF.tabela = {
 			$i("i3GEOtabelaregistros").innerHTML = ins+"</table>";
 			i3GEOF.tabela.aguarde.visibility = "hidden";
 		}
-		catch(e){i3GEOF.tabela.aguarde.visibility = "hidden";}
+		catch(e){i3GEOF.tabela.aguarde.visibility = "hidden";if(typeof(console) !== 'undefined'){console.error(e);}}
 	},
 	excluiLinha: function(celula){
 		var p = celula.parentNode.parentNode;

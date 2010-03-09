@@ -692,7 +692,7 @@ i3GEOF.graficointerativo = {
 			}
 			tabela.innerHTML = ins;
 		}
-		catch(e){}
+		catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 	},
 	/*
 	Function: ativaNavegacao
