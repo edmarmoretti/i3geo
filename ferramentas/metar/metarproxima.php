@@ -77,13 +77,15 @@ if($xml == true){
 		{$resultado .= "<p><b> Elevação: </b>".$t;}
 		
 		$r = $e->xpath('lat');
-		$y = $r;
-		foreach($r as $t)
-		{$resultado .= "<p><a title='Incluir no mapa' href='#' onmouseout='escondexy()' onmouseover='mostraxy()' onclick='insereponto()'><b> Latitude: </b>".$t;}
+		foreach($r as $t){
+			$resultado .= "<p><a title='Incluir no mapa' href='#' onmouseout='escondexy()' onmouseover='mostraxy()' onclick='insereponto()'><b> Latitude: </b>".$t;
+			$y = $t;
+		}
 		$r = $e->xpath('lng');
-		$x = $r;
-		foreach($r as $t)
-		{$resultado .= "<b> Longitude: </b>".$t."</a>";}
+		foreach($r as $t){
+			$resultado .= "<b> Longitude: </b>".$t."</a>";
+			$x = $t;
+		}
 		
 		$r = $e->xpath('temperature');
 		foreach($r as $t)
