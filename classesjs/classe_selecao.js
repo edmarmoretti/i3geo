@@ -318,7 +318,12 @@ i3GEO.selecao = {
 				if ((tipo !== "limpa") && (tipo !== "inverte"))
 				{i3GEO.selecao.porbox(i3GEO.temaAtivo,tipo,v);}
 			}
-			catch(e){limpa.call();return;}
+			catch(e){
+				if(typeof(console) !== 'undefined')
+				{console.error(e);}
+				limpa.call();
+				return;
+			}
 		}
 	},
 	/*
@@ -385,7 +390,7 @@ i3GEO.selecao = {
 					else
 					{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}				
 				}
-				catch(e){window.status=n+" erro ao desenhar a linha base "+e.message;}
+				catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 				if (n > 0){
 					d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy),10);
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];

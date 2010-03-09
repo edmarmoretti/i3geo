@@ -146,7 +146,7 @@ i3GEO.gadgets = {
 		var temp = $i(id);
 		try
 		{temp.innerHTML = i3GEO.parametros.mensageminicia;}
-		catch(e){}
+		catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 	},
 	/*
 	Function: mostraCoordenadasUTM

@@ -364,8 +364,10 @@ i3GEO.maparef = {
 			i3GEO.contadorAtualiza++;
 			i3GEO.php.pan(i3GEO.atualiza,i3GEO.parametros.mapscale,"ref",objposicaocursor.refx,objposicaocursor.refy);
 		}
-		catch(e)
-		{i3GEO.janela.fechaAguarde("i3GEO.atualiza");}	
+		catch(e){
+			i3GEO.janela.fechaAguarde("i3GEO.atualiza");
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}	
 	}
 };
 //YAHOO.log("carregou classe maparef", "Classes i3geo");

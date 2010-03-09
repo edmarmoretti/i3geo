@@ -209,7 +209,7 @@ i3GEO.barraDeBotoes = {
 			try{
 				OLzoom.deactivate();
 			}
-			catch(e){}
+			catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 		}
 		var estilo,temp,ist,cor,ko;
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;

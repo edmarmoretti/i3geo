@@ -158,6 +158,7 @@ i3GEO.mapa = {
 					i3GEO.php.reiniciaMapa(i3GEO.atualiza);
 				}		
 			}
+			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 	},
 	/*
@@ -682,7 +683,7 @@ i3GEO.mapa = {
 									}
 								}
 								}
-								catch(e){}
+								catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 							}
 							if(ins !== "")
 							{res += titulo + ins;}
@@ -722,6 +723,7 @@ i3GEO.mapa = {
 						{temp = "identifica_contexto";}
 						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
 					}
+					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
 			};
 			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");

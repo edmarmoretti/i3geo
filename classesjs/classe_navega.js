@@ -971,7 +971,10 @@ i3GEO.navega = {
 					olente.style.visibility='visible';
 					i3GEO.janela.fechaAguarde("ajaxabrelente");
 				}
-				catch(e){i3GEO.janela.fechaAguarde();}
+				catch(e){
+					i3GEO.janela.fechaAguarde();
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 			};
 			if(i3GEO.navega.lente.ESTAATIVA === "sim"){
 				i3GEO.janela.abreAguarde("ajaxabrelente",$trad("o1"));
@@ -1202,7 +1205,7 @@ i3GEO.navega = {
 				try{
 					clearTimeout(i3GEO.navega.timerNavega);
 				}
-				catch(e){}
+				catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 				i3GEO.navega.timerNavega = setTimeout("$i('vertBGDiv').onmouseup.call();",i3GEO.navega.TEMPONAVEGAR);			
 				if(g_fatordezoom < -6){
 					$i("vertBGDiv").onmouseup.call();
@@ -1223,7 +1226,7 @@ i3GEO.navega = {
 				try{
 					clearTimeout(i3GEO.navega.timerNavega);
 				}
-				catch(e){}
+				catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 				i3GEO.navega.timerNavega = setTimeout("$i('vertBGDiv').onmouseup.call();",i3GEO.navega.TEMPONAVEGAR);
 				if(g_fatordezoom > 6){
 					$i("vertBGDiv").onmouseup.call();
@@ -1329,7 +1332,7 @@ i3GEO.navega = {
 						if ($i("i3geo_escalanum"))
 						{$i("i3geo_escalanum").value=i3geo_ns;}
 					}
-					catch(e){}
+					catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 				};
 			}		
 		}

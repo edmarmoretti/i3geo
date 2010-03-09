@@ -204,7 +204,10 @@ i3GEO = {
 		g_panM = "nao";
 		g_sid = i3GEO.configura.sid;
 		try {i3GEO.configura.locaplic = g_locaplic;}
-		catch(e){g_locaplic = i3GEO.configura.locaplic;}
+		catch(e){
+			g_locaplic = i3GEO.configura.locaplic;
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
 		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}
 		try{i3GEO.configura.diminuiyM = g_diminuiyM;}catch(e){}
@@ -480,7 +483,11 @@ i3GEO = {
 			return;
 		};
 		try{eval(retorno.data.variaveis);}
-		catch(e){erro.call();return;}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+			erro.call();
+			return;
+		}
 		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined){erro.call();return;}
 		else{	
 			if(arguments.length === 0){return;}

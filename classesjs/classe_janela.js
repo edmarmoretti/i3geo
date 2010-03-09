@@ -370,7 +370,7 @@ i3GEO.janela = {
 			}
 		}
 		catch(erro){
-			if(typeof(console) !== 'undefined'){console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 	},
 	/*
@@ -743,5 +743,5 @@ try{
 		}
 	);
 }
-catch(e){}
+catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
 //YAHOO.log("carregou classe janela", "Classes i3geo");

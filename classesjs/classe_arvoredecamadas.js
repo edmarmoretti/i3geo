@@ -999,7 +999,7 @@ i3GEO.arvoreDeCamadas = {
 			i3GEO.janela.fechaAguarde("redesenha");
 		};
 		try{clearTimeout(tempoBotaoAplicar);}
-		catch(erro){}
+		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
 		tempoBotaoAplicar = "";
 		i3GEO.janela.abreAguarde("redesenha",$trad("o1"));
 		if(tipo === "normal"){

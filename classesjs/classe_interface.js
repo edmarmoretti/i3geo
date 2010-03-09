@@ -1046,7 +1046,7 @@ i3GEO.Interface = {
 				{linki3geo.setHref(linki3geo.getHref()+"&");}
 			}
 			catch(e){
-				alert(e);
+				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
 		},
 		cria: function(w,h){
