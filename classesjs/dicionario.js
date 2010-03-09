@@ -1087,7 +1087,13 @@ en:"Wait...",
 es:"Espere...",
 it:"Attendere..."
 }],
-
+"d29":[
+{
+pt:"Estações metar",
+en:"Estações metar",
+es:"Estações metar",
+it:"Estações metar"
+}]
 
 };
 //YAHOO.log("carregou dicionario", "Classes i3geo");

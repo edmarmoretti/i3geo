@@ -2444,6 +2444,21 @@ function array2json($a,$cpaint=true)
 	return json_encode($a);
 }
 /*
+Function: json2array
+
+Converte uma string JSON em um objeto PHP
+
+$a {string}
+
+Retorno:
+
+{objeto}
+*/
+function json2array($a)
+{
+	return json_decode($a);
+}
+/*
 Function: echojson
 
 Retorna para o navegador uma string (JSON) e para o processamento do PHP

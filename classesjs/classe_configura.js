@@ -839,6 +839,18 @@ i3GEO.configura = {
 			}
 		},
 		{
+			//botão de busca na rede metar
+			iddiv:"metar",
+			tipo:"",
+			dica:$trad("d29"),
+			funcaoonclick:function(){
+				if(typeof(i3GEOF.metar) === 'undefined'){
+					var js = i3GEO.configura.locaplic+"/ferramentas/metar/index.js.php";
+					i3GEO.util.scriptTag(js,"i3GEOF.metar.criaJanelaFlutuante()","i3GEOF.metar_script");
+				}
+			}
+		},
+		{
 			//botão de busca de fotos
 			iddiv:"buscafotos",
 			tipo:"",

@@ -30,6 +30,7 @@ var jsfiles = new Array(
 "../pacotes/cpaint/cpaint2.inc.js",
 "../pacotes/yui270/build/treeview/treeview.js",
 "../pacotes/yui270/build/button/button-min.js",
+"../pacotes/yui270/build/json/json-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon.js",
 "classe_i3geo.js",

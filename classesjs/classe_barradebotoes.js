@@ -449,6 +449,10 @@ i3GEO.barraDeBotoes = {
 				"	</div>"+
 				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
 				"		<p style='font-size:4px;'>&nbsp;</p>"+
+				"		<img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='metar'/>"+
+				"	</div>"+
+				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
+				"		<p style='font-size:4px;'>&nbsp;</p>"+
 				"		<img title='lente' alt='lente' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='lentei'/>"+
 				"	</div>"+
 				"	<div style='display:none;background-color:rgb(250,250,250);'>"+

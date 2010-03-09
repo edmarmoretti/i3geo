@@ -110,6 +110,7 @@ $jsfiles = array(
 "../pacotes/yui270/build/treeview/treeview_compacto.js",
 "../pacotes/yui270/build/button/button-min.js",
 "../pacotes/yui270/build/carousel/carousel_compacto.js",
+"../pacotes/yui270/build/json/json-min.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.config.js",
 "../pacotes/balloon-tooltips/htdocs/js/balloon_compacto.js",
 "compactados/classe_i3geo_compacto.js",

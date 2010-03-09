@@ -734,6 +734,15 @@ g_traducao_ajuda = {
 			pt:"Permite modificar o SQL utilizado para compor os dados referentes ao tema. Apenas temas baseados em bancos de dados podem utilizar essa função, sendo que o administrador do i3Geo pode bloqueá-la utilizando do sistema de administração. As funções SQL de modificação de dados não são suportadas (UPDATE, INSERT, DELETE, etc.)",
 			complemento:"O Mapserver utiliza uma expressão na linguagem SQL para definir os dados que irão compor um tema. A edição do SQL possibilita o uso de expressões customizadas, baseadas na sintaxe SQL que o banco de dados utilizado suportar. A janela de diálogo permite ainda listar as colunas disponíveis bem como os dados de cada coluna, facilitando a definição do novo SQL.",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.editorsql()"
+		},
+		"87": {
+			titulo: "Rede Metar",
+			diretorio:"i3geo/ferramentas/metar",
+			categoria:"8",
+			pt:"A rede <a href='http://weather.noaa.gov/' target='_blank' >metar</a> reune dados de estações meteorológicas espalhadas por toto o mundo. Essa ferramenta mostra as estações existentes na extensão geográfica do mapa",
+			complemento:"Os dados da rede Metar são acessados indiretamente por meio dos Web Services do site Geonames.",
+			apijs:"i3GEO.configura",
+			tela:""
 		}
 	}
 };

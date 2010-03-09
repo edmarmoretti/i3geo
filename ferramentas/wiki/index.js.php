@@ -161,37 +161,3 @@ i3GEOF.wiki = {
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
-/*
-parametrosURL()
-if(window.parent.i3GEO.parametros.mapscale > 500001){
-	var ins = "<p>A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:500.000."
-	ins += "<p>A restrição de escala é necessária para melhorar a performance da busca."
-	ins += "<p>O mapa atual está fora do limite de escala (1:500.000)."
-	ins += "<p><input id=ajustaEscala size=20  type=button value='Ajustar' />"
-	$i("resultadowiki").innerHTML = ins;
-}
-else{
-	if(window.parent.wikiAtivo == false){
-		var ins = "<p>A busca no Mediawiki traz apenas os 20 primeiros resultados"
-		ins += '<p>Mais detalhes sobre a busca, veja <a href="http://www.geonames.org" >Geonames</a>'
-		ins += "<p><input id=continuar size=20  type=button value='Continuar' />"
-		$i("resultadowiki").innerHTML = ins;
-	}
-	else{buscawiki();}
-}
-if($i("ajustaEscala")){
-	new YAHOO.widget.Button("ajustaEscala",{onclick:{fn: function(){
-		window.parent.i3GEO.parametros.mapscale=500000;
-		window.parent.i3GEO.navega.aplicaEscala(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,500000)
-	}}});
-}
-if($i("continuar")){
-	new YAHOO.widget.Button("continuar",{onclick:{fn: function(){
-		buscawiki()
-	}}});
-}
-
-function listaartigos(retorno)
-{
-}
-*/
