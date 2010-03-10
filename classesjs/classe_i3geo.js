@@ -206,7 +206,6 @@ i3GEO = {
 		try {i3GEO.configura.locaplic = g_locaplic;}
 		catch(e){
 			g_locaplic = i3GEO.configura.locaplic;
-			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 		try{i3GEO.configura.diminuixM = g_diminuixM;}catch(e){}
 		try{i3GEO.configura.diminuixN = g_diminuixN;}catch(e){}

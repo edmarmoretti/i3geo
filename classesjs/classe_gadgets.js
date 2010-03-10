@@ -145,7 +145,10 @@ i3GEO.gadgets = {
 		{i3GEO.gadgets.PARAMETROS.mostraVersao.idhtml = id;}
 		var temp = $i(id);
 		try
-		{temp.innerHTML = i3GEO.parametros.mensageminicia;}
+		{
+			if(temp)
+			{temp.innerHTML = i3GEO.parametros.mensageminicia;}
+		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
