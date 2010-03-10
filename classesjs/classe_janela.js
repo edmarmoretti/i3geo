@@ -743,5 +743,7 @@ try{
 		}
 	);
 }
-catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+catch(e){
+	if(typeof(console) !== 'undefined'){console.error(e);}
+}
 //YAHOO.log("carregou classe janela", "Classes i3geo");

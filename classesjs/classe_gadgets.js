@@ -146,7 +146,9 @@ i3GEO.gadgets = {
 		var temp = $i(id);
 		try
 		{temp.innerHTML = i3GEO.parametros.mensageminicia;}
-		catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+		catch(e){
+			if(typeof(console) !== 'undefined'){console.error(e);}
+		}
 	},
 	/*
 	Function: mostraCoordenadasUTM
@@ -974,8 +976,7 @@ i3GEO.gadgets = {
 	 				YAHOO.widget.MenuManager.getMenuItem("omenudataInterface5").cfg.setProperty("checked", true);
 	 			}
  			}catch(e){
- 				if(typeof(console) !== 'undefined')
- 				{console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
+ 				if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
  			}
 			//
 			//corrige problemas de estilo

@@ -708,7 +708,9 @@ i3GEO.configura = {
 							clearTimeout(i3GEO.navega.timerNavega);
 							i3GEO.navega.timerNavega = setTimeout(f,i3GEO.navega.TEMPONAVEGAR);
 						}
-						catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+						catch(e){
+							if(typeof(console) !== 'undefined'){console.error(e);}
+						}
 					}
 				};
 				if(i3GEO.eventos.MOUSEDOWN.toString().search("panMapaInicia()") < 0)
@@ -938,7 +940,10 @@ i3GEO.configura = {
 				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
 				if(i3GEO.Interface.ATUAL === "openlayers"){
 					i3geoOL.events.register("moveend",i3geoOL,function(e){
-						try{window.parent.wdocai.panTogoogle();}catch(x){if(typeof(console) !== 'undefined'){console.error(x);}}
+						try{window.parent.wdocai.panTogoogle();}
+						catch(x){
+							if(typeof(console) !== 'undefined'){console.error(x);}
+						}
 					});
 				}
 			}

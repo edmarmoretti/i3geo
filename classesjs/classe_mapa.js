@@ -683,7 +683,9 @@ i3GEO.mapa = {
 									}
 								}
 								}
-								catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+								catch(e){
+									if(typeof(console) !== 'undefined'){console.error(e);}
+								}
 							}
 							if(ins !== "")
 							{res += titulo + ins;}

@@ -187,7 +187,9 @@ i3GEO.desenho = {
 			if((tipo==="resizeLinha") || (tipo==="resizePoligono") && navn){
 				try
 				{i3GEO.desenho.richdraw.renderer.resize(objeto,0,0,objposicaocursor.imgx,objposicaocursor.imgy);}
-				catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
+				catch(erro){
+					if(typeof(console) !== 'undefined'){console.error(erro);}
+				}
 			}
 			if((tipo==="resizeLinha") && navm){
 				try{
@@ -209,7 +211,9 @@ i3GEO.desenho = {
 					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 				}
-				catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}			
+				catch(erro){
+					if(typeof(console) !== 'undefined'){console.error(erro);}
+				}			
 			}
 			if((tipo==="resizePoligono") && navm){
 				try{
@@ -221,7 +225,9 @@ i3GEO.desenho = {
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[0])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[0]-3,dx,dy-3);
 				}
-				catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}			
+				catch(erro){
+					if(typeof(console) !== 'undefined'){console.error(erro);}
+				}			
 			}
 			if(tipo==="insereCirculo"){
 				dx = Math.pow(((pontosdistobj.xtela[n])*1) - ((pontosdistobj.xtela[n-1])*1),2);
@@ -231,20 +237,26 @@ i3GEO.desenho = {
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],w,w);
 					}
-					catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
+					catch(erro){
+						if(typeof(console) !== 'undefined'){console.error(erro);}
+					}
 				}
 				else{
 					try{
 						i3GEO.desenho.richdraw.renderer.create('circ', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1]-w,pontosdistobj.yimg[n-1]-w,w*2,w*2);
 					}
-					catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
+					catch(erro){
+						if(typeof(console) !== 'undefined'){console.error(erro);}
+					}
 				}
 			}
 			if(tipo==="insereTexto"){
 				try{
 					i3GEO.desenho.richdraw.renderer.create('text', '', 'rgb(250,250,250)', i3GEO.desenho.richdraw.lineWidth, pontosdistobj.ximg[n-1],pontosdistobj.yimg[n-1],"","",texto);
 				}
-				catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
+				catch(erro){
+					if(typeof(console) !== 'undefined'){console.error(erro);}
+				}
 			}
 		}
 	}

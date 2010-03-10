@@ -1205,7 +1205,9 @@ i3GEO.navega = {
 				try{
 					clearTimeout(i3GEO.navega.timerNavega);
 				}
-				catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 				i3GEO.navega.timerNavega = setTimeout("$i('vertBGDiv').onmouseup.call();",i3GEO.navega.TEMPONAVEGAR);			
 				if(g_fatordezoom < -6){
 					$i("vertBGDiv").onmouseup.call();
@@ -1226,7 +1228,9 @@ i3GEO.navega = {
 				try{
 					clearTimeout(i3GEO.navega.timerNavega);
 				}
-				catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+				catch(e){
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
 				i3GEO.navega.timerNavega = setTimeout("$i('vertBGDiv').onmouseup.call();",i3GEO.navega.TEMPONAVEGAR);
 				if(g_fatordezoom > 6){
 					$i("vertBGDiv").onmouseup.call();
@@ -1332,7 +1336,9 @@ i3GEO.navega = {
 						if ($i("i3geo_escalanum"))
 						{$i("i3geo_escalanum").value=i3geo_ns;}
 					}
-					catch(e){if(typeof(console) !== 'undefined'){console.error(e);}}
+					catch(e){
+						if(typeof(console) !== 'undefined'){console.error(e);}
+					}
 				};
 			}		
 		}
