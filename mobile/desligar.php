@@ -83,9 +83,11 @@ $par = $m->parametrosTemas();
 echo "<h1>Escolha o tema que vc não quer ver no mapa:</h1>";
 foreach($par as $p)
 {
-	$existe=true;
-	$titulo = mb_convert_encoding($p["tema"],"ISO-8859-1","UTF-8");
-	echo "<input type=radio value='".$p["name"]."' onclick='desligar(this.value)' />".$titulo."<br>";
+	if($p["status"] !== 0){
+		$existe=true;
+		$titulo = mb_convert_encoding($p["tema"],"ISO-8859-1","UTF-8");
+		echo "<input type=radio value='".$p["name"]."' onclick='desligar(this.value)' />".$titulo."<br>";
+	}
 }
 if (!$existe)
 echo "<span style='color:red' >Nenhum tema dispon&iacute;vel.</br>";
