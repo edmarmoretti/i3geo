@@ -12,14 +12,16 @@
 	o arquivo i3geo.js por i3geo.js
 -->
 <script type="text/javascript" src="../classesjs/i3geo.js"></script>
-	<style> 
-	.yui-log .i3geo {background-color:yellow;} /* customize a color */
-	.yui-log .redesenho {background-color:yellow;} /* customize a color */
-	.yui-log .janela {background-color:yellow;} /* customize a color */
-	.yui-log-bd {text-align:left;}
-	.yui-log-entry yui-log-verbose, p{text-align:left;}
-	 .info {text-align:left;}
-	</style> 
+<style> 
+#menutesteMenu
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 3px -500px;
+	width:52px;
+	height:15px;
+}
+</style> 
 </head>
 <body id="i3geo">
 
@@ -193,7 +195,7 @@ i3GEO.barraDeBotoes.AUTO = true
 i3GEO.configura.oMenuData.menu.splice(2,1);
 //acrescenta um novo item no menu
 i3GEO.configura.oMenuData.menu.push(
-	{nome:"<b>Isso é um teste</b>",id:"testeMenu"}
+	{nome:"Teste",id:"testeMenu"}
 );
 //acrescenta subitens no novo item
 i3GEO.configura.oMenuData.submenus.testeMenu = [

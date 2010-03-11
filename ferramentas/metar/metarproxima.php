@@ -48,7 +48,9 @@ echo "<html><style>
 require_once("../../classesphp/pega_variaveis.php");
 error_reporting(E_ALL);
 $url = "http://ws.geonames.org/findNearByWeatherXML?lat=$y&lng=$x&lang=pt";
+
 $xml = simplexml_load_file($url);
+
 $conta = 0;
 $fim = array();
 $resultado = "";
@@ -123,9 +125,8 @@ if($xml == true){
 		$resultado .= "<br><a href='http://weather.noaa.gov/' >Metar</a><br>";
 	}
 }
-if ($resultado == "")
+if ($resultado == "" || $xml == "")
 {$resultado = "<span style=color:red >Nada encontrado</span><br><hr>";}
-else
 echo $resultado;
 ?>
 <script>

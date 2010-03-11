@@ -349,7 +349,7 @@ i3GEOOL = {
 						var units = event.units;
 						var measure = event.measure;
 						alert("Distância: " + measure.toFixed(3) + " " + units);
-				},
+				}
 			});
 			controles.push(button);
 			var adiciona = true;
@@ -369,7 +369,7 @@ i3GEOOL = {
 						var units = event.units;
 						var measure = event.measure;
 						alert("Área: " + measure.toFixed(3) + " " + units + " quadrados");
-				},
+				}
 			});
 			controles.push(button);
 			var adiciona = true;
