@@ -235,7 +235,7 @@ i3GEOF.graficoTema = {
 			if (tipo === "PIE")
 			{tamanho = $i("i3GEOgraficotemalargura").value;}
 			else
-			{tamanho = $i("i3GEOgraficotemalargura").value+" "+$i("altura").value;}
+			{tamanho = $i("i3GEOgraficotemalargura").value+" "+$i("i3GEOgraficotemaaltura").value;}
 			if(lista === "")
 			{alert("selecione um item");return;}
 			i3GEOF.graficoTema.aguarde.visibility = "visible";
