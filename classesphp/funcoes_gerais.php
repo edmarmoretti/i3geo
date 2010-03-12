@@ -1730,6 +1730,8 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	else
 	$novonomelayer = $tema;
 	
+	//$novonomelayer = str_replace("_","",$novonomelayer);
+	
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
@@ -1771,6 +1773,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		foreach ($items as $ni)
 		{
 			$temp = strtoupper($ni);
+			$temp = substr($temp,0,9);
 			//
 			//nao tem como descobrir o tamanho e tipo do campo
 			//
@@ -1801,7 +1804,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		{
 			$sopen = $layer->open();
 			if($sopen == MS_FAILURE){return "erro";}
-
 			for ($i = 0; $i < $res_count; ++$i)
 			{
 				$result = $layer->getResult($i);
@@ -1809,7 +1811,11 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 				$shape = $layer->getfeature($shp_index,-1);
 				foreach ($items as $ni)
 				{
-					$reg[] = $shape->values[$ni];
+					$vreg = $shape->values[$ni];
+					if(strlen($vreg) > 255){
+					 $vreg = substr($vreg,0,255);
+					}
+					$reg[] = $vreg;
 				}
 				$novoshpf->addShape($shape);
 				if(!function_exists("dbase_create"))
