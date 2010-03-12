@@ -1,0 +1,19 @@
+MAP
+SYMBOLSET ../symbols/simbolos.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+	NAME teste5
+	TYPE line
+	DATA ""
+	METADATA
+		TEMA "teste criando novo mapfile"
+		CLASSE "SIM"
+	END
+    CLASS
+        NAME ""
+        STYLE
+        	COLOR 0 0 0
+        END
+    END
+END
+END

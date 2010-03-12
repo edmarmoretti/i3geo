@@ -34,6 +34,12 @@ function montaEditorTema(dados)
 		editorBotoes.on("checkedButtonChange", on_editorCheckBoxChange);	
 		YAHOO.example.container.panelEditorTema = new YAHOO.widget.Panel("janela_editor", { fixedcenter:true,close:true,width:"400px", height:"400px",overflow:"auto", visible:false,constraintoviewport:true } );
 		YAHOO.example.container.panelEditorTema.render();
+		var fecha = function()
+		{
+			YAHOO.example.container.panelEditorTema.destroy();
+			YAHOO.example.container.panelEditorTema = null;
+		}
+		YAHOO.util.Event.addListener(YAHOO.example.container.panelEditorTema.close, "click", fecha);
 	}
 	YAHOO.example.container.panelEditorTema.show();
 	//carrega os dados na janela

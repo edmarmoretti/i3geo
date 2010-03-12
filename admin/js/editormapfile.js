@@ -110,8 +110,8 @@ function ativaBotaoAdicionaMapfile(idBotao)
 {
 	var adiciona = function()
 	{
-		core_montaEditor("adicionaNovoMapfile()")
-		ins = "<p>Título do novo tema: </p>"
+		core_montaEditor("adicionaNovoMapfile()","450px","660px")
+		ins = "<p><b>Título do novo tema</b></p>"
 		ins += "<p>Português: </p>";
 		ins += "<input size=50 type=text id='Etitulo' value='' /></p>"
 		ins += "<p>Espanhol:: </p>";

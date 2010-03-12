@@ -501,7 +501,7 @@ function core_comboGrupos(onde,id,marcar,funcao)
 				{var funcao = "";}
 				if (funcao != "")
 				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
 				ins += core_comboObjeto(valores,"id_grupo","nome_grupo",marcar)
 				ins += "</select></p>"
 				$i(onde).innerHTML = ins;
@@ -542,7 +542,7 @@ function core_comboSubGrupos(onde,id,marcar,funcao)
 				{var funcao = "";}
 				if (funcao != "")
 				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select  id='"+id+"' "+funcao+" >"
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
 				ins += core_comboObjeto(valores,"id_subgrupo","nome_subgrupo",marcar)
 				ins += "</select></p>"
 				$i(onde).innerHTML = ins;
@@ -583,8 +583,8 @@ function core_comboTemas(onde,id,marcar,funcao)
 				{var funcao = "";}
 				if (funcao != "")
 				{var funcao = "onchange='"+funcao+"'";}
-				ins = "<select  id='"+id+"' "+funcao+" >"
-				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar)
+				ins = "<select size=6 style='width:370px' id='"+id+"' "+funcao+" >"
+				ins += core_comboObjeto(valores,"id_tema","nome_tema",marcar,"codigo_tema")
 				ins += "</select></p>"
 				$i(onde).innerHTML = ins;
   			}
@@ -755,7 +755,7 @@ Function: core_comboObjeto
 
 Retorna os itens option de um combo baseado em um objeto json
 */
-function core_comboObjeto(obj,valor,texto,marcar)
+function core_comboObjeto(obj,valor,texto,marcar,texto2)
 {
 	var ins = "<option value='' "
 	ins += ">---</option>";
@@ -769,6 +769,11 @@ function core_comboObjeto(obj,valor,texto,marcar)
 		var t = eval("obj[k]."+texto);
 		else
 		var t = obj[k];
+		
+		if(texto2){
+			t += " ("+eval("obj[k]."+texto2)+")";
+		}
+		
 		ins += "<option value='"+v+"' "
 		if (marcar == v){ins += "selected"}
 		ins += ">"+t+"</option>";

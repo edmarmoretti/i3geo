@@ -1,41 +1,37 @@
 MAP
-
-
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
-LAYER
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
     CONNECTION "http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?"
     CONNECTIONTYPE WMS
     DATA ""
-      METADATA
-        "wms_srs"	"EPSG:4326"
-        "wms_exceptions_format"	"application/vnd.ogc.se_xml"
-        "CLASSE"	"SIM"
-        "wfs"	"nao"
-        "TEXTO"	"NAO"
-        "wms_force_separate_request"	"1"
-        "wms_name"	"3"
-        "formatosinfo"	"application/vnd.ogc.wms_xml,text/xml,text/html,text/plain"
-        "legendawms"	"http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=3&format=image/png"
-        "wms_formatlist"	"image/png,image/jpeg"
-        "wms_format"	"image/png"
-        "wms_connectiontimeout"	"30"
-        "TEMA"	"Linhas de Transmissão"
-        "wms_server_version"	"1.1.1"
-        "wms_style"	"default"
-      END
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "wms_force_separate_request"	"1"
+      "TEXTO"	"NAO"
+      "legendawms"	"http://sigel.aneel.gov.br/wmsconnector/com.esri.wms.Esrimap/gsiwms?&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=3&format=image/png"
+      "formatosinfo"	"application/vnd.ogc.wms_xml,text/xml,text/html,text/plain"
+      "wms_name"	"3"
+      "wms_format"	"image/png"
+      "wms_formatlist"	"image/png,image/jpeg"
+      "wms_connectiontimeout"	"30"
+      "TEMA"	"Linhas de Transmissão"
+      "wms_server_version"	"1.1.1"
+      "wms_style"	"default"
+    END
     NAME "geopr_aneel_linhas"
     OFFSITE 255 255 255
-    SIZEUNITS PIXELS
     STATUS DEFAULT
     TOLERANCE 0
-    TOLERANCEUNITS PIXELS
     TYPE RASTER
     UNITS METERS
     CLASS
       NAME " "
-      METADATA
-      END
     END
   END
+
 END
+

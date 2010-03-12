@@ -1,5 +1,6 @@
 MAP
   LAYER
+    CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
     GROUP "Grupo 1"
     METADATA
@@ -8,13 +9,14 @@ MAP
       "permitedownload"	"sim"
       "download"	"SIM"
       "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
-      "permiteogc"	""
       "permitekml"	"sim"
+      "permiteogc"	""
       "TEMA"	"Biomas shapefile"
     END
     NAME "biomashp"
     STATUS OFF
     TEMPLATE "none.htm"
+    OPACITY 50
     TYPE POLYGON
     UNITS METERS
     CLASS

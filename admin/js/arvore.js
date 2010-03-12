@@ -546,7 +546,7 @@ function montaDivTema(i)
 	var ins = "<br>Tema:<br><br>"
 	ins += "<div id=comboTema >Buscando...</div>"
 	ins += "<p>Perfis que podem ver: </p>"
-	ins += "<input size=50 type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>"
+	ins += "<input type=text id='En3_perfil' value='"+i.n3_perfil+"' /></p>"
 	ins += "<div id=comboPerfil >Buscando...</div>";
 	ins += "<br>Publicado?<br>"
 	ins += "<select id='Epublicado' >"
