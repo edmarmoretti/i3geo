@@ -1066,7 +1066,7 @@ i3GEO.arvoreDeTemas = {
 				tempNode = new YAHOO.widget.HTMLNode(
 					{
 						html:dirs[ig],
-						caminho:node.data.caminho+"/"+conteudo
+						caminho:node.data.caminho+"/"+dirs[ig]
 					},
 					node,
 					false,

@@ -749,7 +749,7 @@ i3GEO.gadgets = {
 		trocaMapa: function(quadro){
 			var indice,i,c,iclone;
 			indice = quadro.replace("quadro","");
-			i = $i("img");
+			i = $i(i3GEO.Interface.IDMAPA);
 			c = $i("imgClone");
 			if(i){
 				if(!c){

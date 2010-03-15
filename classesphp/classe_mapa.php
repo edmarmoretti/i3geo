@@ -1405,7 +1405,7 @@ $arq - Nome do shape file.
 		if (file_exists($arq))
 		{
 			$s = ms_newShapefileObj($arq,-1);
-			$shape = $s->getfeature(0);
+			$shape = $s->getShape(0);
 			$t = $shape->type;
 			$tipo = MS_LAYER_POLYGON;
 			if ($t == 0)

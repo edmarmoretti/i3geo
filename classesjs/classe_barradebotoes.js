@@ -337,6 +337,8 @@ i3GEO.barraDeBotoes = {
 	
 	Inicializa a barra de botões
 	
+	A barra de zoom é inserida automaticamente na barra de botoes 1
+	
 	Exemplo:
 	
 	if ($i("barraDeBotoes1"))
