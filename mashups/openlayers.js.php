@@ -12,7 +12,7 @@ i3GEOOL = {
 	ol_mma: new OpenLayers.Layer.WMS(
 		"Base cartográfica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-		{layers:'baseraster',SRS:'EPSG:4291'}
+		{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'}
 	),
 	ol_wms: new OpenLayers.Layer.WMS.Untiled(
 		"OpenLayers WMS",
@@ -25,7 +25,12 @@ i3GEOOL = {
 		{layers: "landsat7"}
 	),
 	layergrafico: new OpenLayers.Layer.Vector("Edição"),
-	layersIniciais: <?php echo implode(",",$objOpenLayers); ?>,
+	layersIniciais: <?php 
+						if(isset($objOpenLayers) && $objOpenLayers != "")
+						echo implode(",",$objOpenLayers);
+						else
+						echo "''";
+					?>,
 	botoes: <?php echo $botoes; ?>,
 	mapa: new OpenLayers.Map('i3geoMapa', {
 		controls: [
@@ -35,15 +40,21 @@ i3GEOOL = {
 		maxExtent: new OpenLayers.Bounds(<?php echo $maxextent;?>)
 	}),
 	inicia: function(){
+		var alayers = [];
 		i3GEOOL.jpl_wms.setVisibility(false);
 		i3GEOOL.ol_wms.setVisibility(false);
-		i3GEOOL.mapa.addLayers([
-			i3GEOOL.ol_mma,
-			i3GEOOL.ol_wms,
-			i3GEOOL.jpl_wms,
-			i3GEOOL.layersIniciais,
-			i3GEOOL.layergrafico
-		]);	
+		if(i3GEOOL.ol_mma != "")
+		{alayers.push(i3GEOOL.ol_mma);}
+		if(i3GEOOL.ol_wms != "")
+		{alayers.push(i3GEOOL.ol_wms);}
+		if(i3GEOOL.jpl_wms != "")
+		{alayers.push(i3GEOOL.jpl_wms);}
+		if(i3GEOOL.layersIniciais != "")
+		{alayers.push(i3GEOOL.layersIniciais);}
+		if(i3GEOOL.layergrafico != "")
+		{alayers.push(i3GEOOL.layergrafico);}
+		
+		i3GEOOL.mapa.addLayers(alayers);	
 		i3GEOOL.mapa.zoomToMaxExtent();
 		i3GEOOL.coordenadas();	
 		i3GEOOL.criaJanelaBusca();
