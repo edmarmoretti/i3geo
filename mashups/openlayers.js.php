@@ -229,10 +229,13 @@ i3GEOOL = {
 		var nlayers = layers.length;
 		var ins = "";
 		for(i=0;i<nlayers;i++){
-			var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
-			url = url.replace("LAYERS","LAYER");
-			ins += "<img src='"+url+"' /><br>";
-		}
+			try{
+				var url = layers[i].getFullRequestString({"request":"getlegendgraphic"});
+				url = url.replace("LAYERS","LAYER");
+				ins += "<img src='"+url+"' /><br>";
+			}
+			catch(e){}
+			}
 		var w = window.open()
 		w.document.write(ins)
 		w.document.close();
