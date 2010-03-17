@@ -398,7 +398,7 @@ i3GEOOL = {
 	           	displayClass: "identifica",
 	            eventListeners: {
 	                getfeatureinfo: function(event) {
-	                    var lonlat = i3GEOOL.mapa.getLonLatFromPixel(event.xy);
+						var lonlat = i3GEOOL.mapa.getLonLatFromPixel(event.xy);
 	                    var lonlattexto = "<hr><pre><span style=color:blue;cursor:pointer onclick='i3GEOOL.captura(\""+lonlat.lon+","+lonlat.lat+"\")'>captura</span></pre>";
 	                    i3GEOOL.mapa.addPopup(new OpenLayers.Popup.FramedCloud(
 	                        "chicken", 
