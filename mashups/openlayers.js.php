@@ -25,12 +25,12 @@ i3GEOOL = {
 		{layers: "landsat7"}
 	),
 	layergrafico: new OpenLayers.Layer.Vector("Edição"),
-	layersIniciais: <?php 
+	layersIniciais: [<?php 
 						if(isset($objOpenLayers) && $objOpenLayers != "")
-						echo implode(",",$objOpenLayers);
+						{echo implode(",",$objOpenLayers);}
 						else
-						echo "''";
-					?>,
+						{echo "''";}
+					?>],
 	botoes: <?php echo $botoes; ?>,
 	mapa: new OpenLayers.Map('i3geoMapa', {
 		controls: [
@@ -41,20 +41,23 @@ i3GEOOL = {
 	}),
 	inicia: function(){
 		var alayers = [];
-		i3GEOOL.jpl_wms.setVisibility(false);
-		i3GEOOL.ol_wms.setVisibility(false);
 		if(i3GEOOL.ol_mma != "")
 		{alayers.push(i3GEOOL.ol_mma);}
-		if(i3GEOOL.ol_wms != "")
-		{alayers.push(i3GEOOL.ol_wms);}
-		if(i3GEOOL.jpl_wms != "")
-		{alayers.push(i3GEOOL.jpl_wms);}
+		if(i3GEOOL.ol_wms != ""){
+			i3GEOOL.ol_wms.setVisibility(false);
+			alayers.push(i3GEOOL.ol_wms);
+		}
+		if(i3GEOOL.jpl_wms != ""){
+			alayers.push(i3GEOOL.jpl_wms);
+			i3GEOOL.jpl_wms.setVisibility(false);
+		}
+		i3GEOOL.mapa.addLayers(alayers);
 		if(i3GEOOL.layersIniciais != "")
-		{alayers.push(i3GEOOL.layersIniciais);}
+		{i3GEOOL.mapa.addLayers(i3GEOOL.layersIniciais);}
 		if(i3GEOOL.layergrafico != "")
-		{alayers.push(i3GEOOL.layergrafico);}
+		{i3GEOOL.mapa.addLayers(i3GEOOL.layergrafico);}
 		
-		i3GEOOL.mapa.addLayers(alayers);	
+			
 		i3GEOOL.mapa.zoomToMaxExtent();
 		i3GEOOL.coordenadas();	
 		i3GEOOL.criaJanelaBusca();
@@ -109,26 +112,30 @@ i3GEOOL = {
 		ins += "<br>Procurar por:<br><input type=text size=20 id=i3GEOOLpalavraBusca >";
 		ins += "<br><br><input type=button value='Procurar' id='i3GEOOLbotaoBusca' ></div>";
 		ins += "<br>Resultado:<br><span id=i3GEOOLcomboresultado ></span>";
-		YAHOO.namespace("procura.container");
-		YAHOO.procura.container.panel = new YAHOO.widget.Panel("panelprocura", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
-		YAHOO.procura.container.panel.setHeader("Encontre no mapa");
-		YAHOO.procura.container.panel.setBody(ins);
-		YAHOO.procura.container.panel.setFooter("");
-		YAHOO.procura.container.panel.render(document.body);
-		YAHOO.procura.container.panel.center();
-		document.getElementById("i3GEOOLbotaoBusca").onclick = function(){
-			var layer = i3GEOOL.layerAtivo();
-			var item = document.getElementById("i3GEOOLbuscaItem").value;
-			var palavra = document.getElementById("i3GEOOLpalavraBusca").value;
-			if(item == "" || palavra == "")
-			{alert("Escolha o item e o texto de busca");return;}
-			i3GEOOL.busca(layer,item,palavra,"i3GEOOLcomboresultado");
-		};
-		document.getElementById("i3GEOOLlistaTemasBusca").onchange = function(){
-			i3GEOOL.ativaTema(this.value);
-			document.getElementById("i3GEOOLcomboitens").innerHTML = "...";
-			i3GEOOL.listaItens(i3GEOOL.layerAtivo(),"i3GEOOLcomboitens","i3GEOOLbuscaItem");
-		};
+		try{
+			YAHOO.namespace("procura.container");
+			YAHOO.procura.container.panel = new YAHOO.widget.Panel("panelprocura", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
+			YAHOO.procura.container.panel.setHeader("Encontre no mapa");
+			YAHOO.procura.container.panel.setBody(ins);
+			YAHOO.procura.container.panel.setFooter("");
+			YAHOO.procura.container.panel.render(document.body);
+			YAHOO.procura.container.panel.center();
+
+			document.getElementById("i3GEOOLbotaoBusca").onclick = function(){
+				var layer = i3GEOOL.layerAtivo();
+				var item = document.getElementById("i3GEOOLbuscaItem").value;
+				var palavra = document.getElementById("i3GEOOLpalavraBusca").value;
+				if(item == "" || palavra == "")
+				{alert("Escolha o item e o texto de busca");return;}
+				i3GEOOL.busca(layer,item,palavra,"i3GEOOLcomboresultado");
+			};
+			document.getElementById("i3GEOOLlistaTemasBusca").onchange = function(){
+				i3GEOOL.ativaTema(this.value);
+				document.getElementById("i3GEOOLcomboitens").innerHTML = "...";
+				i3GEOOL.listaItens(i3GEOOL.layerAtivo(),"i3GEOOLcomboitens","i3GEOOLbuscaItem");
+			};
+		}
+		catch(e){}
 	},
 	criaJanelaAtivaTema: function(){
 		var layers = i3GEOOL.layersLigados();
@@ -138,18 +145,21 @@ i3GEOOL = {
 			combo += "<option value='"+i+"' >"+layers[i].name+"</option>";
 		}
 		combo += "</select>";
-		YAHOO.namespace("temaativo.container");
-		YAHOO.temaativo.container.panel = new YAHOO.widget.Panel("paneltemaativo", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
-		YAHOO.temaativo.container.panel.setHeader("Tema ativo");
-		YAHOO.temaativo.container.panel.setBody(combo);
-		YAHOO.temaativo.container.panel.setFooter("");
-		YAHOO.temaativo.container.panel.render(document.body);
-		YAHOO.temaativo.container.panel.center();
-		document.getElementById("i3GEOOLlistaTemasAtivos").onchange = function(){
-			if(botaoIdentifica){
-				botaoIdentifica.layers = [i3GEOOL.layersLigados()[this.value]];
-			} 
-		};
+		try{
+			YAHOO.namespace("temaativo.container");
+			YAHOO.temaativo.container.panel = new YAHOO.widget.Panel("paneltemaativo", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
+			YAHOO.temaativo.container.panel.setHeader("Tema ativo");
+			YAHOO.temaativo.container.panel.setBody(combo);
+			YAHOO.temaativo.container.panel.setFooter("");
+			YAHOO.temaativo.container.panel.render(document.body);
+			YAHOO.temaativo.container.panel.center();
+			document.getElementById("i3GEOOLlistaTemasAtivos").onchange = function(){
+				if(botaoIdentifica){
+					botaoIdentifica.layers = [i3GEOOL.layersLigados()[this.value]];
+				} 
+			};
+		}
+		catch(e){}
 	},
 	ativaTema: function(id){
 		document.getElementById("i3GEOOLlistaTemasAtivos").value = id;

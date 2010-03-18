@@ -10,6 +10,8 @@ Para a versão 4.3
 		i3geoadmin_temas
 		i3geoadmin_grupos
 		i3geoadmin_subgrupos
+
+	- acréscimo da coluna kmz_tema em i3geoadmin_temas
 		
 	Foi incluida uma nova opção que permite ao usuário alterar o SQL que faz o acesso aos dados em
 	um LAYER (elemento DATA do mapfile). Mostrar ou não essa opção é controlado por um metadata
