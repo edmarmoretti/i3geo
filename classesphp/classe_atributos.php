@@ -1183,7 +1183,7 @@ function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="
 		$ident = @$layer->queryByPoint($pt, 0, 0); //0.01);
 	}
 	//error_reporting(E_ALL);
-	if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE))
+	if (($layer->type == MS_LAYER_POINT) || ($layer->type == MS_LAYER_LINE) || ($layer->type == MS_LAYER_CHART))
 	{
 		$layer->set("toleranceunits",MS_PIXELS);
 		$layer->set("tolerance",$resolucao);
