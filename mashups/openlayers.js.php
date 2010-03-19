@@ -9,6 +9,7 @@ if (app==='N'){navn=true;}else{navm=true;}
 OpenLayers.ImgPath = "../pacotes/openlayers/img/"
 OpenLayers.Lang.setCode("pt-BR");
 i3GEOOL = {
+	nomeFuncaoSalvar: "i3GEOOL.testeSalvar()", 
 	ol_mma: new OpenLayers.Layer.WMS(
 		"Base cartográfica",
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
@@ -24,7 +25,7 @@ i3GEOOL = {
 		"http://t1.hypercube.telascience.org/cgi-bin/landsat7",
 		{layers: "landsat7"}
 	),
-	layergrafico: new OpenLayers.Layer.Vector("Edição"),
+	layergrafico: new OpenLayers.Layer.Vector("Edição",{displayInLayerSwitcher:true,visibility:true}),
 	layersIniciais: [<?php 
 						if(isset($objOpenLayers) && $objOpenLayers != "")
 						{echo implode(",",$objOpenLayers);}
@@ -54,9 +55,10 @@ i3GEOOL = {
 		i3GEOOL.mapa.addLayers(alayers);
 		if(i3GEOOL.layersIniciais != "")
 		{i3GEOOL.mapa.addLayers(i3GEOOL.layersIniciais);}
-		if(i3GEOOL.layergrafico != "")
-		{i3GEOOL.mapa.addLayers(i3GEOOL.layergrafico);}
-		
+
+		if(i3GEOOL.layergrafico != ""){
+			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);
+		}
 			
 		i3GEOOL.mapa.zoomToMaxExtent();
 		i3GEOOL.coordenadas();	
@@ -287,6 +289,52 @@ i3GEOOL = {
 			}
 		})
 	},
+	salvaGeometrias: function(){
+		try{
+			YAHOO.namespace("salvaGeometrias.container");
+			YAHOO.salvaGeometrias.container.panel = new YAHOO.widget.Panel("panelsalvageometrias", {zIndex:2000, iframe:false, width:"250px", visible:false, draggable:true, close:true } );
+			YAHOO.salvaGeometrias.container.panel.setHeader("Geometrias");
+			YAHOO.salvaGeometrias.container.panel.setBody("");
+			YAHOO.salvaGeometrias.container.panel.setFooter("");
+			YAHOO.salvaGeometrias.container.panel.render(document.body);
+			YAHOO.salvaGeometrias.container.panel.center();
+		}
+		catch(e){}
+		YAHOO.salvaGeometrias.container.panel.show();
+		var geos = i3GEOOL.layergrafico.selectedFeatures;
+		var n = geos.length;
+		var ins = "";
+		if(n > 0){
+			ins += "<p class=paragrafo >Foram encontrada(s) "+n+" geometria(s) selecionada(s) </p>";
+			ins += "<p class=paragrafo ><a href='#' onclick='i3GEOOL.listaGeometriasSel()' > Listar geometrias</a> ";
+			ins += "<a href='#' onclick='"+i3GEOOL.nomeFuncaoSalvar+"' >Salvar geometria(s)</a></p>";
+			YAHOO.salvaGeometrias.container.panel.setBody(ins);
+		}
+		else
+		{alert("Selecione pelo menos um elemento");}
+	},
+	listaGeometriasSel: function(){
+		var geos = i3GEOOL.layergrafico.selectedFeatures;
+		var n = geos.length;
+		var ins = "";
+		for(i=0;i<n;i++){
+			ins += "<b>Geometria: "+i+"</b><br>"+geos[i].geometry+"<br><br>";
+			ins += "<b>Atributos: "+i+"</b><br>";
+			var a = geos[i].attributes;
+			var keys = [];
+			for(key in a){
+   				if(a[key]){
+   					ins += key+" = "+a[key]+"<br>";
+   				}
+			}			
+		}
+		var w = window.open();
+		w.document.write(ins);
+		w.document.close();
+	},
+	testeSalvar: function(){
+		alert("Funcao nao disponivel. Defina o nome da funcao em i3GEOOL.nomeFuncaoSalvar ");
+	},
 	criaBotoes: function(botoes){
 		var sketchSymbolizers = {
 		    "Point": {
@@ -317,7 +365,6 @@ i3GEOOL = {
 		    new OpenLayers.Rule({symbolizer: sketchSymbolizers})
 		]);
 		var styleMap = new OpenLayers.StyleMap({"default": style});
-	
 		var adiciona = false;
 		var controles = new Array();
 		var panel = new OpenLayers.Control.Panel({
@@ -510,7 +557,16 @@ i3GEOOL = {
 			});
 			controles.push(button);
 			var adiciona = true;
-		}	
+		}
+		if(botoes.salva==true){
+			var button = new OpenLayers.Control.Button({
+				displayClass: "salva", 
+				trigger: function(){i3GEOOL.salvaGeometrias();},
+				title: "Salvar"
+			});
+			controles.push(button);
+			var adiciona = true;
+		}
 		//
 		//adiciona o painel ao mapa se alguma opï¿½ï¿½o foi inserida
 		//

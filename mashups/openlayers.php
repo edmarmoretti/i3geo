@@ -91,6 +91,7 @@ if(!isset($botoes)){
 	$objBotoes[] = "'edita':true";
 	$objBotoes[] = "'apaga':true";
 	$objBotoes[] = "'procura':true";
+	$objBotoes[] = "'salva':true";
 }
 else{
 	$botoes = str_replace(" ",",",$botoes);
@@ -122,36 +123,41 @@ else{
 	{$objBotoes[] = "'apaga':true";}
 	if(in_array("procura",$botoes))
 	{$objBotoes[] = "'procura':false";}
+	if(in_array("salva",$botoes))
+	{$objBotoes[] = "'salva':false";}
 }
 $botoes = "{".implode(",",$objBotoes)."}";
 //
 //define quais os layers que comporão o mapa
 //
-$temas = str_replace(" ",",",$temas);
-$temas = strtolower($temas);
-$temas = explode(",",$temas);
-$layers = array();
-$objOpenLayers = array();
-if(isset($servidor) && $servidor != "../ogc.php"){
-	$layers = $temas;
-	foreach($temas as $tema){
-		$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tema.'", "'.$servidor.'?tema='.$tema.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
-	}
-}
-else{
-	foreach($temas as $tema){
-		if(file_exists("../temas/".$tema.".map")){
-			$maptemp = @ms_newMapObj("../temas/".$tema.".map");
-			for($i=0;$i<($maptemp->numlayers);++$i)
-			{
-				$layern = $maptemp->getLayer($i);
-				$layers[] = $layern->name;
-			}
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
+if($temas != "")
+{
+	$temas = str_replace(" ",",",$temas);
+	$temas = strtolower($temas);
+	$temas = explode(",",$temas);
+	$layers = array();
+	$objOpenLayers = array();
+	if(isset($servidor) && $servidor != "../ogc.php"){
+		$layers = $temas;
+		foreach($temas as $tema){
+			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$tema.'", "'.$servidor.'?tema='.$tema.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
 		}
-		else
-		{echo $tema." não foi encontrado.<br>";}
-		$layers = array();
+	}
+	else{
+		foreach($temas as $tema){
+			if(file_exists("../temas/".$tema.".map")){
+				$maptemp = @ms_newMapObj("../temas/".$tema.".map");
+				for($i=0;$i<($maptemp->numlayers);++$i)
+				{
+					$layern = $maptemp->getLayer($i);
+					$layers[] = $layern->name;
+				}
+				$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.($layern->getmetadata("tema")).'", "../ogc.php?tema='.$tema.'&",{layers:"'.implode(",",$layers).'",transparent: "true", format: "image/png"},{isBaseLayer:false})';
+			}
+			else
+			{echo $tema." não foi encontrado.<br>";}
+			$layers = array();
+		}
 	}
 }
 function ajuda(){
@@ -188,6 +194,7 @@ Parâmetros:
 		apaga
 		captura
 		procura
+		salva
 
 	Para ver a lista de códigos de temas, que podem ser utilizados no parâmetro 'temas', acesse: 
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os códigos são mostrados em vermelho.

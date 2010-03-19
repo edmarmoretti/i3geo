@@ -89,6 +89,12 @@ background-position:-406px 0;
 background-position:-406px -28px;
 }
 
+.olControlEditingToolbar .salvaItemInactive {
+background-position:-435px 0;
+}
+.olControlEditingToolbar .salvaItemActive {
+background-position:-435px -28px;
+}
 
 
 .olControlEditingToolbar {
