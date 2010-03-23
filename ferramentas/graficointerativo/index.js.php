@@ -44,6 +44,54 @@ i3GEOF.graficointerativo = {
 	*/
 	tipo: "",
 	/*
+	Propriedade: acumula
+	
+	Acumula os valores ao gerar o gráfico
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	acumula: false,
+	/*
+	Propriedade: relativa
+	
+	Utiliza valores relativos ao criar o gráfico
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	relativa: false,
+	/*
+	Propriedade: dadospuros
+	
+	Não faz nenhum tipo de processamento nos dados antes de gerar o gráfico
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	dadospuros: false,
+	/*
+	Propriedade: navegacao
+	
+	Ativa ou não a navegação dinâmica do mapa
+	
+	Type:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	navegacao:false,
+	/*
 	Function: inicia
 	
 	Inicia a ferramenta. É chamado por criaJanelaFlutuante
@@ -57,6 +105,11 @@ i3GEOF.graficointerativo = {
 	inicia: function(iddiv,dados){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo.html();
+			$i("i3GEOgraficointerativoAcumula").checked = i3GEOF.graficointerativo.acumula;
+			$i("i3GEOgraficointerativoRelativa").checked = i3GEOF.graficointerativo.relativa;
+			$i("i3GEOgraficointerativoDadosPuros").checked = i3GEOF.graficointerativo.dadospuros;
+			if(i3GEOF.graficointerativo.navegacao == true)
+			{i3GEOF.graficointerativo.ativaNavegacao(true);}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficointerativoguia1","i3GEOgraficointerativoguia");
 			//eventos das guias
 			$i("i3GEOgraficointerativoguia1").onclick = function(){
@@ -187,7 +240,7 @@ i3GEOF.graficointerativo = {
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoAcumula /> Utiliza valores acumulados</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoRelativa /> Utiliza valores relativos (%)</p>' +
 		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox id=i3GEOgraficointerativoDadosPuros /> Não processa os valores ao obter os dados (mantém os dados como estão na tabela de atributos) - essa opção é útil nos gráficos de distribuição de pontos</p>' +
-		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this)" /> Atualiza o gráfico ao navegar pelo mapa</p>' +
+		'	<p class=paragrafo ><input style=cursor:pointer type=checkbox onclick="i3GEOF.graficointerativo.ativaNavegacao(this.checked)" /> Atualiza o gráfico ao navegar pelo mapa</p>' +
 		'</div>'+
 		'<div class=guiaobj id="i3GEOgraficointerativoguia4obj" style="left:1px;display:none;top:-5px">' +
 		'	<div id="i3GEOgraficointerativoGrafico"></div>' +
@@ -364,13 +417,18 @@ i3GEOF.graficointerativo = {
 	retorno {JSON} - dados no formato JSON
 	*/
 	montaTabelaDados: function(retorno){
-		var dados = retorno.data.dados,
-			n = dados.length,
+		var dados,
+			n,
 			v,
 			ins = [],
 			i,
 			id,
 			cor = "#d01f3c";
+		if(retorno.dados)
+		{dados = retorno.data.dados;}
+		else
+		{dados = retorno;}
+		n = dados.length;
 		ins.push("<p class=paragrafo >Tabela de dados para o gráfico. Os valores podem ser editados</p><table class=lista4 id=i3GEOgraficointerativotabeladados ><tr><td></td>");
 		ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo.ordenaColuna(this,1)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> nome</td>");
 		ins.push("<td style=background-color:yellow >&nbsp;<img style=cursor:pointer onclick='i3GEOF.graficointerativo.ordenaColuna(this,2)' src='"+i3GEO.configura.locaplic+"/imagens/ordena1.gif' title='ordena' /> valor</td>");
@@ -700,7 +758,7 @@ i3GEOF.graficointerativo = {
 	Ativa ou desativa a atualização automática ao navegar no mapa
 	*/
 	ativaNavegacao: function(obj){
-		if(obj.checked){
+		if(obj == true){
 			if(i3GEO.Interface.ATUAL === "padrao"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.graficointerativo.obterDados()");
 			}
