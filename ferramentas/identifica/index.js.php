@@ -261,6 +261,7 @@ i3GEOF.identifica = {
 			var lista = i3GEO.arvoreDeCamadas.CAMADAS;
 			if(tipo === "ligados")
 			{lista = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",lista);}
+			lista = i3GEO.arvoreDeCamadas.filtraCamadas("identifica","NAO","diferente",lista);
 			lista = i3GEO.arvoreDeCamadas.filtraCamadas("identifica","nao","diferente",lista);
 			i3GEOF.identifica.montaListaTemas(lista);
 		}
