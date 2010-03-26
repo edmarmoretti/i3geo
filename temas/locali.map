@@ -1,0 +1,58 @@
+MAP
+  FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+  LAYER
+    CONNECTION ""
+    DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Localidades"
+	"LTEMPOFORMATODATA" "iso8601"
+	"LTEMPOITEMINICIO" "ANOCRIA"
+	"LTEMPOITEMFIM" ""
+	"LTEMPOITEMTITULO" ""
+	"LTEMPOITEMDESCRICAO" ""
+	"LTEMPOITEMTIP" ""
+    END
+    NAME "locali"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME "Vila"
+      EXPRESSION ('[TIPO]'eq'Vila')
+      STYLE
+        ANGLE 360
+        COLOR 209 36 9
+        OPACITY 100
+        SIZE 4
+        SYMBOL "ponto"
+      END
+    END
+    CLASS
+      NAME "Cidade"
+      EXPRESSION ('[TIPO]'eq'Cidade')
+      STYLE
+        ANGLE 360
+        COLOR 62 9 41
+        OPACITY 100
+        SIZE 6
+        SYMBOL "ponto"
+      END
+    END
+    CLASS
+      NAME "Capital"
+      EXPRESSION ('[TIPO]'eq'Capital')
+      STYLE
+        ANGLE 360
+        COLOR 112 203 244
+        OPACITY 100
+        SIZE 6
+        SYMBOL "capital"
+      END
+    END
+  END
+
+END
+
