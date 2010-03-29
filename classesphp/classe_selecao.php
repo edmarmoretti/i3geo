@@ -62,6 +62,12 @@ class Selecao
 	Nome do layer
 	*/
 	protected $nome;
+	/*
+	Variavel: $qyfile
+	
+	Nome do arquivo de seleção (.qy)
+	*/
+	public $qyfile;
 /*
 Function: __construct
 
@@ -77,6 +83,7 @@ $tema - nome do tema
 	function __construct($map_file,$tema="")
 	{
   		//error_reporting(E_ALL);
+		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
@@ -116,8 +123,8 @@ $ys - lista de coordenadas y separadas por virgula
 		{return($this->selecaoInverte());}
 		$tipoLayer = $this->layer->type;
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
@@ -178,8 +185,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$tipoLayero = $layero->type;
 		$this->layer->set("template","none.htm");
 		$layero->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$res_counto = $layero->getNumresults();
@@ -338,8 +345,8 @@ $valor - Valor.
 		}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
@@ -403,8 +410,8 @@ $valor - Valor.
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
@@ -458,8 +465,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{return ($this->selecaoInverte());}
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
@@ -534,16 +541,16 @@ Limpa a seleção do tema.
 		if ($this->nome != "") //limpa de um tema
 		{
 			if(!$this->layer){return "erro";}
-			if (file_exists(($this->arquivo)."qy"))
-			{$this->mapa->loadquery(($this->arquivo)."qy");}
+			if (file_exists($this->qyfile))
+			{$this->mapa->loadquery($this->qyfile);}
 			$indxlayer = $this->layer->index;
 			$this->mapa->freequery($indxlayer);
-			$this->mapa->savequery(($this->arquivo)."qy");
+			$this->mapa->savequery($this->qyfile);
 		}
 		else //limpa de todos os temas
 		{
-			if (file_exists(($this->arquivo)."qy"))
-			{unlink (($this->arquivo)."qy");}
+			if (file_exists($this->qyfile))
+			{unlink ($this->qyfile);}
 		}
 		return("ok");
 	}
@@ -557,8 +564,8 @@ Inverte seleção do tema.
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$items = pegaItens($this->layer);
 		$res_count = $this->layer->getNumresults();
@@ -584,7 +591,7 @@ Inverte seleção do tema.
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery(($this->arquivo)."qy");
+		$this->mapa->savequery($this->qyfile);
 		return("ok");
 	}
 /*
@@ -607,7 +614,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery(($this->arquivo)."qy");
+		$this->mapa->savequery($this->qyfile);
 		return("ok");
 	}
 /*
@@ -632,7 +639,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery(($this->arquivo)."qy");
+		$this->mapa->savequery($this->qyfile);
 		return("ok");
 	}
 /*
@@ -650,14 +657,14 @@ $ids - Ids separados por vírgula correspondendo aos registros.
 	{
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$ids = explode(",",$ids);
 		$indxlayer = $this->layer->index;
 		$ids = array_unique($ids);
 		foreach ($ids as $i)
 		{$this->mapa->queryByIndex($indxlayer, -1, $i);}
-		$this->mapa->savequery(($this->arquivo)."qy");
+		$this->mapa->savequery($this->qyfile);
 		return("ok");
 	}
 /*
@@ -708,8 +715,8 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();
@@ -757,8 +764,8 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
 		$this->layer->set("template","none.htm");
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$res_count = $this->layer->getNumresults();
 		$shp_atual = array();

@@ -1788,8 +1788,9 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$existesel = "nao";
-		if (file_exists($map_file."qy"))
-		{$map->loadquery($map_file."qy");}
+		$qyfile = str_replace(".map",".qy",$map_file);
+		if (file_exists($qyfile))
+		{$map->loadquery($qyfile);}
 		if ($layer->getNumresults() > 0)
 		{$existesel = "sim";}
 

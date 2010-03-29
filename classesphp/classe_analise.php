@@ -67,6 +67,12 @@ class Analise
 	Diretório do arquivo map_file
 	*/
 	protected $diretorio;
+	/*
+	Variavel: $qyfile
+	
+	Nome do arquivo de seleção (.qy)
+	*/
+	public $qyfile;
 /*
 Function: __construct
 
@@ -81,6 +87,7 @@ $tema - Nome do tema que será processado
 	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
+		$this->qyfile = str_replace(".map",".qy",$map_file);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
@@ -165,8 +172,8 @@ Include:
 			$this->mapaDeldir($nomearq,$dir_tmp,$R_path,$locaplic);
 			$this->deldirDir2shp($nomearq."dirsgs",$dir_tmp,$locaplic);
 			$this->deldirDel2shp($nomearq."delsgs",$dir_tmp,$locaplic);
-			if(file_exists(($this->arquivo)."qy"))
-			{unlink(($this->arquivo)."qy");}			
+			if(file_exists($this->qyfile))
+			{unlink($this->qyfile);}			
 			return "ok";
 			break;
 			case "kernel":
@@ -240,8 +247,8 @@ Include:
 		}
 		else
 		{return("erro");}
-		if(file_exists(($this->arquivo)."qy"))
-		{unlink(($this->arquivo)."qy");}
+		if(file_exists($this->qyfile))
+		{unlink($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -947,8 +954,8 @@ $locaplic - Localização do I3geo.
 		//pega os shapes selecionados
 		$itemspt = pegaItens($layerPt);
 		$existesel = "nao";
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{
@@ -1057,8 +1064,8 @@ $locaplic - Localização do I3geo.
 		$novolayer->setmetadata("ITENS"," ");
 		$novolayer->setmetadata("ITENSDESC"," ");
 		$novolayer->set("connectiontype",MS_SHAPEFILE);
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return(implode(" ",$nomesitens));
 	}
 /*
@@ -1094,8 +1101,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	//define o nome do novo shapefile que será criado
 	$nomefinal = nomeRandomico();
 	$nomeshp = $this->diretorio."/".$nomefinal;
-	if (file_exists(($this->arquivo)."qy"))
-	{$this->mapa->loadquery(($this->arquivo)."qy");}
+	if (file_exists($this->qyfile))
+	{$this->mapa->loadquery($this->qyfile);}
 	else
 	{return "errox";}
 	$layerorigem = $this->mapa->getlayerbyname($temaorigem);
@@ -1183,8 +1190,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$cor = $estilo->color;
 	$cor->setrgb(255,210,0);
 	//limpa selecao
-	if (file_exists(($this->arquivo)."qy"))
-	{unlink (($this->arquivo)."qy");}
+	if (file_exists($this->qyfile))
+	{unlink ($this->qyfile);}
 	return($nomeshp.".shp");	
 }
 /*
@@ -1218,8 +1225,8 @@ nome do layer criado com o buffer.
 		$nomebuffer = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomebuffer;
 		//pega os shapes selecionados
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$items = pegaItens($this->layer);
@@ -1330,8 +1337,8 @@ $locaplic - Localização do I3geo.
 		$nomeCentroides = nomeRandomico();
 		$nomeshp = $this->diretorio."/".$nomeCentroides;
 		//pega os shapes selecionados
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$items = pegaItens($this->layer);
@@ -1389,8 +1396,8 @@ $locaplic - Localização do I3geo.
 		$novolayer->set("template","none.htm");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		//limpa selecao
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -1503,8 +1510,8 @@ $npty - Número de pontos em Y (opcional)
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -1646,8 +1653,8 @@ $npty - Número de pontos em Y (opcional)
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","50");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -1799,8 +1806,8 @@ $npty - Número de pontos em Y (opcional)
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","50");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -1868,8 +1875,8 @@ $locaplic - Localização do I3geo
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->set("opacity","80");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		return("ok");
 	}
 /*
@@ -1890,8 +1897,8 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
 		//define o nome do novo shapefile que será criado
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -1982,8 +1989,8 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 
 		return("ok");
 	}
@@ -2010,8 +2017,8 @@ $locaplic - Localização do I3geo
 		else	
 		include_once "../pacotes/phpxbase/api_conversion.php";
 		//define o nome do novo shapefile que será criado
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();
@@ -2091,8 +2098,8 @@ $locaplic - Localização do I3geo
 		$novolayer->set("data",$nomeshp.".shp");
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("TEMALOCAL","SIM");
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 
 		return("ok");
 	}
@@ -2405,8 +2412,8 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		$nomearq = $this->diretorio."/".$nomefinal;
 		$itemspt = pegaItens($layerPt);
 		$existesel = "nao";
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{$layerPt->queryByrect($this->mapa->extent);}

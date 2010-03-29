@@ -376,8 +376,9 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	//pega os valores
 	$map = ms_newMapObj($map_file);
 	$selecionados = "sim";
-	if (file_exists($map_file."qy"))
-	{$map->loadquery($map_file."qy");}
+	$qyfile = str_replace(".map",".qy",$map_file);
+	if (file_exists($qyfile))
+	{$map->loadquery($qyfile);}
 	else
 	{$selecionados = "nao";}
 	$layer = $map->getLayerByName($tema);

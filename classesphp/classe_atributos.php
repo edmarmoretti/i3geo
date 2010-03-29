@@ -63,6 +63,12 @@ class Atributos
 	Nome do layer
 	*/
 	protected $nome;
+	/*
+	Variavel: $qyfile
+	
+	Nome do arquivo de seleção (.qy)
+	*/
+	public $qyfile;
 /*
 Function: __construct
 
@@ -77,6 +83,7 @@ $tema - nome do tema
 	function __construct($map_file,$tema="",$locaplic="")
 	{
   		//error_reporting(E_ALL);
+		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->locaplic = $locaplic;
   		$this->mapa = ms_newMapObj($map_file);
   		$this->arquivo = $map_file;
@@ -214,8 +221,8 @@ $tipo - Tipo de busca brasil|null
 		//le o arquivo de query se existir e checa se existe seleção para o tema
 		$items = pegaItens($this->layer);
 		$existesel = "nao";
-		if (file_exists($this->arquivo."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{$this->layer->querybyrect($this->mapa->extent);}
@@ -281,8 +288,8 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 		else
 		{$items[] = $itemtema;}
 		$resultadoFinal[] = array("itens"=>$items);
-		if (file_exists($this->arquivo."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -485,8 +492,8 @@ Include:
 		if ($filtro != ""){$this->layer->setfilter("");}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$existesel = "nao";
-		if (file_exists(($this->arquivo)."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		if ($this->layer->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{$this->layer->queryByrect($this->mapa->extent);}

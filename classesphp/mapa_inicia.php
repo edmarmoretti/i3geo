@@ -157,6 +157,7 @@ function iniciaMapa()
 	include_once("classe_mapa.php");
 	error_reporting(E_ALL);
 	$m = new Mapa($map_file);
+
 	$m->mudaQS($w,$h);
 	$m = new Mapa($map_file);
 	$m->mapa->setsize($w,$h);
@@ -200,7 +201,8 @@ function iniciaMapa()
 	//
 	//pega os parametros de cada tema
 	//
-	$arqsel = (file_exists($map_file."qy")) ? true : false;
+	$qyfile = str_replace(".map",".qy",$map_file);
+	$arqsel = (file_exists($qyfile)) ? true : false;
 	$m = New Mapa($map_file);
 	$temas = $m->parametrosTemas();
 	$nomes = nomeRandomico(12);

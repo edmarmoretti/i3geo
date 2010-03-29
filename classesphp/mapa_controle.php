@@ -149,12 +149,7 @@ if (isset($debug) && $debug == "sim")
 //
 include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
-//include_once("../pacotes/cpaint/cpaint2.inc.php");
-//
-//cria objeto cpaint para uso com ajax
-//
-//$cp = new cpaint();
-//$cp->set_data("");
+
 if ($funcao == "criaMapa")
 {
 	session_destroy();
@@ -403,8 +398,9 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		$retorno = $m->criaBuffer($distancia,$locaplic,$unir);
 		$m->salva();
 		//limpa selecao
-		if (file_exists($map_file."qy"))
-		{unlink ($map_file."qy");}
+		$qyfile = str_replace(".map",".qy",$map_file);
+		if (file_exists($qyfile))
+		{unlink ($qyfile);}
 	break;
 /*
 Property - DISTANCIAPTPT
@@ -560,8 +556,10 @@ Valor: REINICIAMAPA
 Reinicia um mapa restaurando a cópia de segurança.
 */	
 	case "REINICIAMAPA":
-		if(file_exists($map_file."qy"))
-		{unlink($map_file."qy");}
+		$qyfile = str_replace(".map",".qy",$map_file);
+		if (file_exists($qyfile))
+		{unlink ($qyfile);}
+
 		unlink($map_file);
 		copy(str_replace(".map","reinc.map",$map_file),$map_file);
 		$retorno = "ok";
@@ -572,8 +570,10 @@ Valor: RECUPERAMAPA
 Recupera o mapfile de segurança.
 */	
 	case "RECUPERAMAPA":
-		if(file_exists($map_file."qy"))
-		{unlink($map_file."qy");}
+		$qyfile = str_replace(".map",".qy",$map_file);
+		if (file_exists($qyfile))
+		{unlink ($qyfile);}
+
 		unlink($map_file);
 		$nmf = str_replace(".map","seguranca.map",$map_file);
 		if(file_exists($nmf))

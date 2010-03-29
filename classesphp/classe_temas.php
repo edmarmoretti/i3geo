@@ -79,7 +79,13 @@ class Temas
 	
 	Indices dos layers do grupo
 	*/
-	protected $indices;	 
+	protected $indices;	
+	/*
+	Variavel: $qyfile
+	
+	Nome do arquivo de seleção (.qy)
+	*/
+	public $qyfile;
 /*
 function __construct
 
@@ -93,6 +99,7 @@ $tema - nome do tema que será processado
 	function __construct($map_file,$tema=null,$locaplic="")
 	{
   		//error_reporting(E_ALL);
+		$this->qyfile = str_replace(".map",".qy",$map_file);
   		if(file_exists($locaplic."/funcoes_gerais.php"))
   		include_once($locaplic."/funcoes_gerais.php");
   		else
@@ -213,8 +220,8 @@ Altera a ordem de armazenamento dos layers no mapfile.
 */
 	function desceTema()
 	{
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		$nl = $this->mapa->numlayers;
 		$mover = 1;
 		$indice = $this->indices[0];
@@ -259,8 +266,8 @@ Altera a ordem de armazenamento dos layers no mapfile.
 */
 	function sobeTema()
 	{
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		$nl = $this->mapa->numlayers;
 		$mover = 1;
 		$indices = array_reverse($this->indices);
@@ -692,8 +699,8 @@ $nome - nome que será dado a geometria
 		$ext = $this->mapa->extent;
 		$sb = $this->mapa->scalebar;
 		$sb->set("status",MS_OFF);
-		if (file_exists($this->arquivo."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$items = pegaItens($this->layer);
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
@@ -917,8 +924,8 @@ Calcula a extensão geográfica dos elementos selecionados de um tema e ajusta o m
 		$extatual = $this->mapa->extent;
 		$prjMapa = "";
 		$prjTema = "";
-		if (file_exists($this->arquivo."qy"))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{$this->mapa->loadquery($this->qyfile);}
 		$sopen = $this->layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $this->layer->getNumresults();

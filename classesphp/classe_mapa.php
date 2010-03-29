@@ -53,6 +53,12 @@ class Mapa
 	Objetos layers
 	*/
 	public $layers;
+	/*
+	Variavel: $qyfile
+	
+	Nome do arquivo de seleção (.qy)
+	*/
+	public $qyfile;	
 	
 /*
 Function: __construct
@@ -71,6 +77,7 @@ $map_file - Endereço do mapfile no servidor.
   		include_once($locaplic."/funcoes_gerais.php");
   		else
   		include_once("funcoes_gerais.php");
+		$this->qyfile = str_replace(".map",".qy",$map_file);
   		$this->locaplic = $locaplic;
   		if(!file_exists($map_file))
   		{return $this->arquivo = false;}
@@ -140,9 +147,9 @@ string - javascript com os parametros
 	function parametrosTemas()
 	{
 		$existesel = false;
-		$qy = file_exists(($this->arquivo)."qy");
+		$qy = file_exists($this->qyfile);
 		if ($qy)
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		{$this->mapa->loadquery($this->qyfile);}
 		foreach ($this->layers as $oLayer)
 		{
 			$sel = "nao";
@@ -218,7 +225,7 @@ string - javascript com os parametros
 		}
 		//apaga o arquivo qy se não for necessário
 		if (!$existesel && $qy)
-		{unlink(($this->arquivo)."qy");}
+		{unlink($this->qyfile);}
 		$temas = array_reverse($temas);
 		return $temas;
 	}
@@ -247,7 +254,7 @@ Include:
   		else
   		include_once("classe_imagem.php");
 		$nomer = "";
-		$qy = file_exists(($this->arquivo)."qy");
+		$qy = file_exists($this->qyfile);
 		$legenda = $this->mapa->legend;
 		//
 		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes que podem estar em branco
@@ -529,8 +536,8 @@ nome
 */
 	function listaTemasTipo($tipo,$selecao="nao")
 	{
-		if (($selecao=="sim") && (file_exists(($this->arquivo)."qy")))
-		{$this->mapa->loadquery(($this->arquivo)."qy");}
+		if (($selecao=="sim") && (file_exists($this->qyfile)))
+		{$this->mapa->loadquery($this->qyfile);}
 		$layers = array();
 		foreach($this->layers as $layer)
 		{
@@ -585,14 +592,14 @@ nome
 	{
 		$layers = array();
 		$final = array();
-		if (file_exists(($this->arquivo)."qy"))
+		if (file_exists($this->qyfile))
 		{
 			foreach($this->layers as $layer)
 			{
 				if ($layer->getmetadata("ESCONDIDO") == "")
 				{$layers[] = $layer;}
 			}
-			$this->mapa->loadquery(($this->arquivo)."qy");
+			$this->mapa->loadquery($this->qyfile);
 			foreach ($layers as $layer)
 			{
 				//verifica se o tema tem selecao
@@ -732,8 +739,8 @@ $incluitexto - sim|nao
 	function gradeCoord($intervalo,$corlinha="200,200,200",$larguralinha=1,$tipolinha="linha",$tamanhotexto=MS_TINY,$fonte="bitmap",$cortexto="0,0,0",$incluitexto="sim",$mascara="-1,-1,-1",$shadowcolor="-1,-1,-1",$shadowsizex=0,$shadowsizey=0)
 	{
 		//echo $corlinha;
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
 		ms_newgridobj($nlayer);
 		$nlayer->grid->set("labelformat", "DDMMSS");
@@ -815,8 +822,8 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 	function adicionaTema($temas,$locaplic,$random="sim")
 	{
 		//limpa selecao
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		$temas = explode(",",$temas);
 		$zoomlayer = "";
 		foreach ($temas as $nome)
@@ -939,8 +946,8 @@ $temas - lista separada por vírgula dos temas que serão excluídos.
 */
 	function excluiTemas($temas)
 	{
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink(($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink($this->qyfile);}
 		$temas = explode(",",$temas);
 		foreach ($temas as $nome)
 		{
@@ -1091,8 +1098,8 @@ Include:
 		else
 		include_once("wmswfs.php");
 		//limpa selecao
-		if (file_exists(($this->arquivo)."qy"))
-		{unlink (($this->arquivo)."qy");}
+		if (file_exists($this->qyfile))
+		{unlink ($this->qyfile);}
 		$nmap = ms_newMapObj($locaplic."/aplicmap/novotema.map");
 		$layer = $nmap->getlayerbyname("novotema");
 		//$layer->set("name",nomeRandomico());
