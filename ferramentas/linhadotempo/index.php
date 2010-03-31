@@ -146,8 +146,8 @@ function tituloover(wkt){
 	*/
 	window.parent.i3GEO.util.criaPin('marcaIdentifica',window.parent.i3GEO.configura.locaplic+"/imagens/marker.png","21px","25px");
 	var i = window.parent.document.getElementById('marcaIdentifica')
-	i.style.top = xyMax[1]-25+"px";
-	i.style.left = xyMin[0]-8+"px";
+	i.style.top = xyMax[1]-15+"px";
+	i.style.left = xyMin[0]-2+"px";
 	i.style.display = "block"
 }
 function tituloout(){

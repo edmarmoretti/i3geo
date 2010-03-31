@@ -749,7 +749,7 @@ g_traducao_ajuda = {
 			diretorio:"i3geo/ferramentas/linhadotempo",
 			categoria:"3",
 			pt:"Constrói um gráfico do tipo 'linha do tempo' tendo como fonte dos dados a tabela de atributos de um tema. Veja: <a href='http://www.simile-widgets.org/timeline/' target=_blank >Simline</a>",
-			complemento:"O gráfico só é mostrado para os temas que estiverem configurados para isso pelo administrador do i3Geo.",
+			complemento:"Ao navegar pelo mapa, o gráfico é atualizado sendo utilizado apenas os dados existentes na extensão do mapa. Ao passar o mouse sobre um dos nomes mostrados no gráfico, é indicado a posição no mapa. Ao ser clicado um ícone no gráfico, abre-se um balão com informações adicionais, podendo incluir links e imagens. O gráfico só é mostrado para os temas que estiverem configurados pelo administrador do i3Geo.",
 			apijs:"i3GEO.configura",
 			tela:""
 		}
