@@ -17,8 +17,12 @@ MAP
 	#
 	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do defaul
 	#
-FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
-SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
+	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
+	#DEBUG OFF
+	DEBUG 5
+	CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 157 211 255
 	#
@@ -61,7 +65,6 @@ SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   		DRIVER "GD/JPEG"
   		MIMETYPE "image/jpeg"
   		IMAGEMODE RGB
-  		TRANSPARENT TRUE
   		EXTENSION jpg
   		FORMATOPTION "INTERLACE=OFF"
 	END

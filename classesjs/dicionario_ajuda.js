@@ -743,7 +743,17 @@ g_traducao_ajuda = {
 			complemento:"Os dados da rede Metar são acessados indiretamente por meio dos Web Services do site Geonames.",
 			apijs:"i3GEO.configura",
 			tela:""
+		},
+		"88": {
+			titulo: "Linha do tempo",
+			diretorio:"i3geo/ferramentas/linhadotempo",
+			categoria:"3",
+			pt:"Constrói um gráfico do tipo 'linha do tempo' tendo como fonte dos dados a tabela de atributos de um tema. Veja: <a href='http://www.simile-widgets.org/timeline/' target=_blank >Simline</a>",
+			complemento:"O gráfico só é mostrado para os temas que estiverem configurados para isso pelo administrador do i3Geo.",
+			apijs:"i3GEO.configura",
+			tela:""
 		}
+		
 	}
 };
 

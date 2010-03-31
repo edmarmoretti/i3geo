@@ -1,5 +1,11 @@
 GUIA DE UPDATES
 -------------------------------------------------------------------------------------------------
+Para a versão 4.4
+
+	Verifique se o PHP está configurado (php.ini) para permitir a passagem de parâmetros por referência
+	(dependendo da versão do PHP, esse parâmetro é definido como "Off" por default):
+	allow_call_time_pass_reference = On
+-------------------------------------------------------------------------------------------------
 Para a versão 4.3
 
 	O banco de dados de administração sofreu as seguintes alterações (vc deve incluir as novas colunas

@@ -5,13 +5,18 @@ MAP
     GROUP "Grupo 1"
     METADATA
       "CLASSE"	"SIM"
+      "palletestep"	""
       "permitekmz"	"sim"
+      "description_template"	""
+      "palletefile"	""
       "permitedownload"	"sim"
       "download"	"SIM"
       "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
-      "permitekml"	"sim"
       "permiteogc"	""
+      "permitekml"	"sim"
       "TEMA"	"Biomas shapefile"
+      "editorsql"	""
+      "identifica"	"NAO"
     END
     NAME "biomashp"
     STATUS OFF
@@ -25,8 +30,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 24 214 111
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
@@ -35,8 +40,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 208 90 180
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
@@ -45,8 +50,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 165 220 169
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
@@ -55,8 +60,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 182 86 205
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
@@ -65,8 +70,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 98 126 232
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
     CLASS
@@ -75,8 +80,8 @@ MAP
       STYLE
         ANGLE 360
         COLOR 94 171 18
-        OPACITY 100
         SYMBOL 0
+        WIDTH 1
       END
     END
   END

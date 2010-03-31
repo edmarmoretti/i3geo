@@ -138,7 +138,8 @@ i3GEO.configura = {
 			{ id:"omenudataAnalise14",text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
 			{ id:"omenudataAnalise15",text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" },
 			{ id:"omenudataAnalise16",text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
-			{ id:"omenudataAnalise17",text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" }
+			{ id:"omenudataAnalise17",text: $trad("t37"), url: "javascript:i3GEO.analise.dialogo.graficoInterativo()" },
+			{ id:"omenudataAnalise18",text: $trad("d30"), url: "javascript:i3GEO.analise.dialogo.linhaDoTempo()" }
 			],
 			"janelas": [
 			{ id:"omenudataJanelas1",text: $trad("u15"), url: "javascript:initJanelaZoom('1');initJanelaZoom('2')" },
@@ -924,12 +925,11 @@ i3GEO.configura = {
 							if(document.frames("wdocai"))
 							{doc = document.frames("wdocai").document;}
 						}
-						if(window.parent.wdocai.panTogoogle)
+						if(doc.getElementById("mapa"))
 						{window.parent.wdocai.panTogoogle();}
 						else{
 							i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
 						}
-						
 					}
 					catch(e){
 						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");

@@ -1137,12 +1137,19 @@ $exclui {string} - O registro não será considerado se um dos valores for igual a
 
 $selecionados {string} - sim|nao Utiliza apenas os selecionados ou todos
 
+$chaves {boolean} - inclui ou não os nomes dos itens como chave no array resultante
+
+$centroide {boolean} - captura ou não o WKT com o centroide do elemento
+
 Retorno:
 
 {array}
 */
-function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
+function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$chaves=false,$centroide=false)
 {
+	//error_reporting(E_ALL);
+	$prjMapa = $mapa->getProjection();
+	$prjTema = $layer->getProjection();
 	$layer->set("template","none.htm");
 	$layer->setfilter("");
 	$indicesel = array();
@@ -1184,8 +1191,22 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao")
 			$v = array();
 			if ($considera == "sim")
 			{
-				foreach ($itens as $item)
-				{$v[] = $shape->values[$item];}
+				foreach ($itens as $item){
+					if($chaves == false)
+					{$v[] = $shape->values[$item];}
+					else
+					{$v[$item] = $shape->values[$item];}
+					if($centroide == true){
+						$c = $shape->getCentroid();
+						if (($prjTema != "") && ($prjMapa != $prjTema))
+						{
+							$projOutObj = ms_newprojectionobj($prjTema);
+							$projInObj = ms_newprojectionobj($prjMapa);
+							$c->project($projInObj, $projOutObj);
+						}
+						$v["centroide"] = "POINT(".$c->x." ".$c->y.")";
+					}
+				}
 				if (count($v) == 1)
 				{$valores[] = $v[0];}
 				else

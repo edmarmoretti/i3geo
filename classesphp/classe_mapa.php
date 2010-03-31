@@ -203,7 +203,12 @@ string - javascript com os parametros
 					if (strtoupper($oLayer->getmetadata("editorsql")) != "NAO")
 					{$editorsql = "sim";}
 				}
-				
+				//
+				//verifica se o tema pode ser utilizado para gerar gráficos de linha do tempo
+				//
+				$ltempo = "nao";
+				if($oLayer->getmetadata("ltempoformatodata") !== "")
+				{$ltempo = "sim";}
 				$temas[] = array(
 					"name"=>($oLayer->name),
 					"status"=>($oLayer->status),
@@ -219,7 +224,8 @@ string - javascript com os parametros
 					"contextoescala"=>$contextoescala,
 					"etiquetas"=>($oLayer->getmetadata("TIP")),
 					"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
-					"editorsql"=>$editorsql
+					"editorsql"=>$editorsql,
+					"linhadotempo"=>$ltempo
 				);
 			}
 		}

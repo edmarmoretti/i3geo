@@ -1561,6 +1561,17 @@ Cria um gráfico de pizza.
 		$retorno = graficoPizza();
 	break;
 /*
+Valor: DADOSLINHADOTEMPO
+
+Pega os dados de um tema para geração do gráfico de linha do tempo.
+
+<graficoPizza()>
+*/
+	case "DADOSLINHADOTEMPO":
+		include_once("graficos.php");
+		$retorno = dadosLinhaDoTempo($map_file,$tema);
+	break;
+/*
 Section: Menu de temas
 
 Obtém a lista de temas, grupos e sub-grupos.

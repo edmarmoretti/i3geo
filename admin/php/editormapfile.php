@@ -537,11 +537,20 @@ function pegaMetadados()
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
+	$dados["ltempoformatodata"] = $layer->getmetadata("ltempoformatodata");
+	$dados["ltempoiteminicio"] = $layer->getmetadata("ltempoiteminicio");
+	$dados["ltempoitemfim"] = $layer->getmetadata("ltempoitemfim");
+	$dados["ltempoitemtitulo"] = $layer->getmetadata("ltempoitemtitulo");
+	$dados["ltempoitemdescricao"] = $layer->getmetadata("ltempoitemdescricao");
+	$dados["ltempoitemtip"] = $layer->getmetadata("ltempoitemtip");
+	$dados["ltempoitemimagem"] = $layer->getmetadata("ltempoitemimagem");
+	$dados["ltempoitemicone"] = $layer->getmetadata("ltempoitemicone");
+	$dados["ltempoitemlink"] = $layer->getmetadata("ltempoitemlink");
 	return $dados;
 }
 function alterarMetadados()
 {
-	global $description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -569,6 +578,16 @@ function alterarMetadados()
 	$layer->setmetadata("palletestep",$palletestep);
 	$layer->setmetadata("description_template",$description_template);
 	$layer->setmetadata("editorsql",$editorsql);
+
+	$layer->setmetadata("ltempoformatodata",$ltempoformatodata);
+	$layer->setmetadata("ltempoiteminicio",$ltempoiteminicio);
+	$layer->setmetadata("ltempoitemfim",$ltempoitemfim);
+	$layer->setmetadata("ltempoitemtitulo",$ltempoitemtitulo);
+	$layer->setmetadata("ltempoitemdescricao",$ltempoitemdescricao);
+	$layer->setmetadata("ltempoitemtip",$ltempoitemtip);
+	$layer->setmetadata("ltempoitemimagem",$ltempoitemimagem);
+	$layer->setmetadata("ltempoitemicone",$ltempoitemicone);
+	$layer->setmetadata("ltempoitemlink",$ltempoitemlink);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";

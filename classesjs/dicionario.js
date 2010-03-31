@@ -1093,6 +1093,13 @@ pt:"Estações metar",
 en:"Estações metar",
 es:"Estações metar",
 it:"Estações metar"
+}],
+"d30":[
+{
+pt:"Linha do tempo",
+en:"Time line",
+es:"Linha do tempo",
+it:"Linha do tempo"
 }]
 
 };

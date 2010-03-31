@@ -423,4 +423,111 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	}
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);
 }
+function dadosLinhaDoTempo($map_file,$tema)
+{
+	$map = ms_newMapObj($map_file);
+	$selecionados = "sim";
+	$qyfile = str_replace(".map",".qy",$map_file);
+	if (file_exists($qyfile))
+	{$map->loadquery($qyfile);}
+	else
+	{$selecionados = "nao";}
+	$layer = $map->getLayerByName($tema);
+	if ($selecionados == "sim")
+	{
+		$layer->open();
+		$res_count = $layer->getNumresults();
+		$layer->close();
+		if ($res_count < 1)
+		{$selecionados = "nao";}	
+	}
+	if ($exclui == ""){$exclui = "nulo";}
+	//define os itens para pegar os dados
+	$itens = array();
+	if($layer->getmetadata("ltempoformatodata") == "")
+	{return "Nao esta definido o metadata com o formato do campo";}
+	
+	if($layer->getmetadata("ltempoiteminicio") != ""){
+		$iteminicio = $layer->getmetadata("ltempoiteminicio");
+		$itens[] = $iteminicio;
+	}
+	else
+	{return "Nao esta definido o metadata com o item inicial";}
+
+	$itemi = "";
+	if($layer->getmetadata("ltempoitemimagem") != ""){
+		$itemi = $layer->getmetadata("ltempoitemimagem");
+		$itens[] = $itemi;
+	}
+	$itemicone = "";
+	if($layer->getmetadata("ltempoitemicone") != ""){
+		$itemicone = $layer->getmetadata("ltempoitemicone");
+		$itens[] = $itemicone;
+	}	
+	$itemfim = "";
+	if($layer->getmetadata("ltempoitemfim") != ""){
+		$itemfim = $layer->getmetadata("ltempoitemfim");
+		$itens[] = $itemfim;
+	}
+	$itemtitulo = $iteminicio;
+	if($layer->getmetadata("ltempoitemtitulo") != ""){
+		$itemtitulo = $layer->getmetadata("ltempoitemtitulo");
+		$itens[] = $itemtitulo;
+	}
+	$itemdescricao = $itemtitulo;
+	if($layer->getmetadata("ltempoitemdescricao") != ""){
+		$itemdescricao = $layer->getmetadata("ltempoitemdescricao");
+		$itens[] = $itemdescricao;
+	}
+	$itemtip = $itemdescricao;
+	if($layer->getmetadata("ltempoitemtip") != ""){
+		$itemtip = $layer->getmetadata("ltempoitemtip");
+		$itens[] = $itemtip;
+	}
+	$itemlink = "";
+	if($layer->getmetadata("ltempoitemlink") != ""){
+		$itemlink = $layer->getmetadata("ltempoitemlink");
+		$itens[] = $itemlink;
+	}
+	$dados = pegaValoresM($map,$layer,$itens,$exclui,$selecionados,true,true);
+	$eventos = array();
+	foreach($dados as $dado){
+		if($itemi == "")
+		{$image = '';}
+		else {$image = $dado[$itemi];}
+		if($itemicone == "")
+		{$icone = 'dark-red-circle.png';}
+		else {$icone = $dado[$itemicone];}
+		if($itemfim == "")
+		{$fim = '';}
+		else {$fim = $dado[$itemfim];}
+		if($itemlink == "")
+		{$link = '';}
+		else {$link = $dado[$link];}
+		$titulo = $dado[$itemtitulo];
+		$desc = $dado[$itemdescricao];
+		if (function_exists("mb_convert_encoding")){
+			$titulo = mb_convert_encoding($titulo,"UTF-8","ISO-8859-1");
+			$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		}
+		if($dado[$iteminicio] != 0 && $dado[$iteminicio] != '-'){
+			$eventos[] = array(
+				'start'=>$dado[$iteminicio],
+				'end'=>$fim,
+				'title'=>"<span onmouseover='tituloover(\"".$dado["centroide"]."\")' onmouseout='tituloout()'>".$titulo."</span>",
+				'description'=>$dado[$iteminicio]." ".$fim."<br>".$desc,
+				'icon'=>$icone,
+				'image'=>$image,
+				'link'=>$link
+			);
+		}
+	}
+	//echo "<pre>";
+	return array(
+		"dateTimeFormat"=>$layer->getmetadata("ltempoformatodata"),
+		"wikiURL"=>"http://simile.mit.edu/shelf/",
+		"wikiSection"=>"Simile Cubism Timeline",		
+		"events"=>$eventos
+	);
+}
 ?>

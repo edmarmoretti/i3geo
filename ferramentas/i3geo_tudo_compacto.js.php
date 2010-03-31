@@ -7790,6 +7790,18 @@ i3GEO.util = {
 				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
 		}
+		if(tipo === "point"){
+			try{
+				re = new RegExp("POINT", "g");
+				wkt = wkt.replace(re,"");
+				wkt = wkt.split("(")[1].split(")")[0];
+				wkt = wkt.split(" ");
+				return (wkt[0]*1 - 0.01)+" "+ (wkt[1]*1 - 0.01) +" "+ (wkt[0]*1+0.01) + " " + (wkt[1]*1+0.01);
+			}
+			catch(e){
+				if(typeof(console) !== 'undefined'){console.error(e);}
+			}
+		}
 		return ext;
 	},
 	/*
@@ -7968,7 +7980,7 @@ i3GEO.util = {
 	
 	multiplo {Booleano} - indica se o combo permite seleções múltiplas
 	
-	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados|pontos
+	tipoCombo {String} - Tipo de temas que serão incluídos no combo ligados|selecionados|raster|pontosSelecionados|pontos|linhaDoTempo
 	*/	
 	comboTemas: function(id,funcao,onde,nome,multiplo,tipoCombo){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.util.comboTemas()");}
@@ -8064,6 +8076,13 @@ i3GEO.util = {
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS);
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}
+		if(tipoCombo === "linhaDoTempo"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("linhadotempo","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));
 			}
 			else
 			{alert("Arvore de camadas não encontrada");}			
