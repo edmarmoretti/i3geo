@@ -154,14 +154,14 @@ i3GEO.maparef = {
 			novoel.style.borderColor="gray";
 			ins = "";
 			if(i3GEO.maparef.PERMITEDESLOCAR){
-				ins += '<div class="hd" style="text-align:left;z-index:20;">';
+				ins += '<div class="hd" style="text-align:left;z-index:20;padding-left: 0px;padding-bottom: 3px;padding-top: 1px;">';
 				ins += '<span id=maparefmaismenosZoom > ';
 				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == -1){i3GEO.maparef.fatorZoomDinamico = 1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico + 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=mais onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" />";
 				temp = "javascript:if(i3GEO.maparef.fatorZoomDinamico == 1){i3GEO.maparef.fatorZoomDinamico = -1};i3GEO.maparef.fatorZoomDinamico = i3GEO.maparef.fatorZoomDinamico - 1 ;$i(\"refDinamico\").checked = true;i3GEO.maparef.atualiza();";
 				ins += "<img class=menos onclick='"+temp+"' src="+i3GEO.util.$im("branco.gif")+" /></span>&nbsp;";		
 				if(i3GEO.maparef.SELETORTIPO){
-					ins += "<select id='refDinamico' onchange='javascript:i3GEO.maparef.atualiza()'>";
+					ins += "<select style='font-size:9px;' id='refDinamico' onchange='javascript:i3GEO.maparef.atualiza()'>";
 					ins += "<option value='fixo' select >fixo</option>";
 					ins += "<option value='mapa' >mapa</option>";
 					ins += "<option value='dinamico' >dinâmico</option>";
@@ -169,7 +169,7 @@ i3GEO.maparef = {
 				}
 				ins += "</div>";
 			}
-			ins += '<div class="bd" style="text-align:left;padding:3px;border-bottom-width:1px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
+			ins += '<div class="bd" style="text-align:left;padding:3px;height: 150px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
 			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '</div>';
 			novoel.innerHTML = ins;
@@ -200,15 +200,17 @@ i3GEO.maparef = {
 			temp = "none";
 			if(i3GEO.maparef.PERMITEDESLOCAR)
 			{temp = "shadow";}
-			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"200px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
+			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"177px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
 			YAHOO.janelaRef.xp.panel.render();
+			
 			r = $i("i3geo_winRef_c");
 			if(r){
-				r.style.clip = "rect(0px, 160px, 179px, 0px)";
+				r.style.clip = "rect(0px, 160px, 182px, 0px)";
 				r.style.position = "absolute";
 			}
 			pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-
+			$i("mapaReferencia").style.height = "150px";
+			$i("i3geo_winRef").style.border = "1px solid gray";
 			moveX = pos[0] + i3GEO.parametros.w + 153 - i3GEO.maparef.RIGHT - 300;
 			moveY = pos[1] + i3GEO.maparef.TOP;
 			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
@@ -229,6 +231,8 @@ i3GEO.maparef = {
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.maparef.atualiza()");}
 		this.atualiza();
 		$i("i3geo_winRef_h").className = "hd2";
+		if(navm)
+		{$i("i3geo_winRef_h").style.width = "156px";}
 	},
 	/*
 	Function: atualiza
