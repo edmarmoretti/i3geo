@@ -902,40 +902,23 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d15"),
 			funcaoonclick:function(){
-				//isso não funciona
-				/*
-				if(typeof(i3GEOF.googlemaps) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.googlemaps.criaJanelaFlutuante()","i3GEOF.googlemaps_script");
-				}
-				*/
+				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") > 0)
+				{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
 				i3GEO.util.criaBox();
 				g_operacao = "navega";
-				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+40+"px",(i3GEO.parametros.h/2)+50+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");}
+				var idgoogle = "googlemaps"+Math.random();
+				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+25+"px",(i3GEO.parametros.h/2)+18+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
 				else
-				{i3GEO.janela.cria("500px","380px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>");}
+				{i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
 				atualizagoogle = function(){
-					var doc;
 					try{
-						if (navn){
-							if ($i("wdocai"))
-							{doc = $i("wdocai").contentDocument;}
-						}
-						else{
-							if(document.frames("wdocai"))
-							{doc = document.frames("wdocai").document;}
-						}
-						if(doc.getElementById("mapa"))
-						{window.parent.wdocai.panTogoogle();}
-						else{
-							i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
-						}
+						parent.frames[idgoogle+"i"].panTogoogle();
 					}
 					catch(e){
 						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
 						if(typeof(console) !== 'undefined'){console.error(e);}
 					}
-				};		
+				};
 				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
 				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
 				if(i3GEO.Interface.ATUAL === "openlayers"){

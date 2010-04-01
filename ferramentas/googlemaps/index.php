@@ -54,6 +54,7 @@ function inicializa(){
    	}); 	
    	GEvent.addListener(map, "dragend", function() {
 		if(window.parent.i3GEO){
+			ondegoogle();
 			try{
 				map.removeOverlay(wmsmap);
    				wmsmap = new GGroundOverlay(criaWMS(), map.getBounds());
@@ -124,7 +125,7 @@ function inicializa(){
     }
     function ondegoogle()
     {
-   		if(!window.parent.i3GEO){return;}
+		if(!window.parent.i3GEO){return;}
    		var bd = map.getBounds();
    		var so = bd.getSouthWest();
    		var ne = bd.getNorthEast();
@@ -144,7 +145,7 @@ function inicializa(){
     
     function panTogoogle()
     {
-    	if(!window.parent.i3GEO){return;}
+		if(!window.parent.i3GEO){return;}
     	var b = window.parent.document.getElementById("boxg");
     	b.style.display="block";
     	pol = window.parent.i3GEO.parametros.mapexten;
@@ -152,6 +153,7 @@ function inicializa(){
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1;
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1;
     	map.panTo(new GLatLng(pt2,pt1))
+		//ondegoogle();
     }
     function bbox()
     {
