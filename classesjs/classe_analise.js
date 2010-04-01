@@ -348,7 +348,7 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,d;
+			var n,d,decimal;
 			if (g_tipoacao == "mede"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -368,7 +368,13 @@ i3GEO.analise = {
 					if(typeof(console) !== 'undefined'){console.error("i3GEO.desenho.richdraw "+e);}
 				}
 				if (n > 0){
-					d = parseInt(i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy),10);
+					d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
+					decimal = 0;
+					d = d + "";
+					d = d.split(".");
+					decimal = d[1].substr(0,5);
+					d = d[0]+"."+decimal;
+					d = d * 1;
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 					if($i("pararraios") && $i("pararraios").checked === true ){
 						i3GEO.desenho.aplica("insereCirculo","",n);
@@ -398,19 +404,20 @@ i3GEO.analise = {
 					r = i3GEO.calculo.direcao(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
 					r = i3GEO.calculo.dd2dms(r,r);
 					r = r[0];
-					if (i3GEO.parametros.mapscale > 500000)
-					{d = parseInt(d,10);}
-					else{
-						d = d + "";
-						d = d.split(".");
-						decimal = d[1].substr(0,3);
-						d = d[0]+"."+decimal;
-						d = d * 1;
-					}
+					d = d + "";
+					d = d.split(".");
+					decimal = d[1].substr(0,5);
+					d = d[0]+"."+decimal;
+					d = d * 1;
 					da = d + pontosdistobj.dist[n-1];
+					da = da + "";
+					da = da.split(".");
+					decimal = da[1].substr(0,5);
+					da = da[0]+"."+decimal;
+					da = da * 1;
 					mostra = $i("mostradistancia_calculo");
 					if (mostra){
-						mostra.innerHTML = " Dist acum.= "+da+" atual= "+d+" km <br> Direção (DMS)= "+r;
+						mostra.innerHTML = " Dist acum.= "+da+" km <br>atual= "+d+" km <br> Direção (DMS)= "+r;
 					}
 					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
