@@ -89,6 +89,12 @@ $tema - nome do tema
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
+		$c = $this->mapa->numlayers;
+		for ($i=0;$i < $c;++$i)
+		{
+			$l = $this->mapa->getlayer($i);
+			$l->set("template","none.htm");
+		}
 	}
 /*
 function: salva
@@ -600,6 +606,7 @@ function: selecaoAdiciona
 Adiciona elementos na seleção do tema.
 
 parameters:
+
 $shpi - Indices dos registros novos.
 
 $shp_atual - Indices dos elementos já selecionados.
@@ -607,7 +614,7 @@ $shp_atual - Indices dos elementos já selecionados.
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
+		//$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
 		$shp = array_unique($shp);

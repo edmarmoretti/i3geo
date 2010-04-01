@@ -2672,6 +2672,7 @@ function redesenhaMapa()
 	if (connection_aborted()){exit();}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
+
 	$par = $m->parametrosTemas();
 	//
 	//na interface googlemaps não é necessário gerar a imagem

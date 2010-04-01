@@ -148,6 +148,9 @@ string - javascript com os parametros
 	{
 		$existesel = false;
 		$qy = file_exists($this->qyfile);
+		foreach($this->layers as $l)
+		{$l->set("template","none.htm");}
+
 		if ($qy)
 		{$this->mapa->loadquery($this->qyfile);}
 		foreach ($this->layers as $oLayer)
@@ -230,8 +233,8 @@ string - javascript com os parametros
 			}
 		}
 		//apaga o arquivo qy se não for necessário
-		if (!$existesel && $qy)
-		{unlink($this->qyfile);}
+		//if (!$existesel && $qy)
+		//{unlink($this->qyfile);}
 		$temas = array_reverse($temas);
 		return $temas;
 	}
@@ -261,6 +264,12 @@ Include:
   		include_once("classe_imagem.php");
 		$nomer = "";
 		$qy = file_exists($this->qyfile);
+		if($qy)
+		{
+			foreach($this->layers as $l)
+			{$l->set("template","none.htm");}
+			$this->mapa->loadquery($this->qyfile);
+		}
 		$legenda = $this->mapa->legend;
 		//
 		//prepara a legenda para incluir no mapa, preenchendo os nomes das classes que podem estar em branco
@@ -300,12 +309,24 @@ Include:
 				$of = $this->mapa->outputformat;
 				$of->set("imagemode",MS_IMAGEMODE_RGB);
 			}
+
+			
 			if (!$qy)
 			{$imgo = @$this->mapa->draw();}
 			else
 			{$imgo = @$this->mapa->drawQuery();}
+	
+	$error = ms_GetErrorObj();
+	while($error && $error->code != MS_NOERR)
+	{
+		printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+		$error = $error->next();
+	}
+	ms_ResetErrorList();			
+		
 			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
 			$imgo->saveImage($nomer);
+			
 			//
 			//aplica o filtro de imagem se estiver definido em $tipoimagem
 			//
