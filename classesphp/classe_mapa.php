@@ -1157,7 +1157,12 @@ Include:
 		$layer->set("name",nomeRandomico());
 		$layer->set("type",MS_LAYER_RASTER);
 		$layer->set("connection",$servico);
-		$layer->set("connectiontype",MS_WMS);
+		
+		if(ms_GetVersionInt() > 50201)
+		{$layer->setconnectiontype(MS_WMS);}
+		else
+		{$layer->set("connectiontype",MS_WMS);}
+		
 		$epsg = "EPSG:4291";
 		$e4291 = "nao";
 		$pos = explode(",",$proj);

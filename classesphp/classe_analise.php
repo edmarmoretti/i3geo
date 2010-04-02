@@ -1063,7 +1063,10 @@ $locaplic - Localização do I3geo.
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$novolayer->setmetadata("ITENS"," ");
 		$novolayer->setmetadata("ITENSDESC"," ");
-		$novolayer->set("connectiontype",MS_SHAPEFILE);
+		if(ms_GetVersionInt() > 50201)
+		{$novolayer->setconnectiontype(MS_SHAPEFILE);}
+		else
+		{$novolayer->set("connectiontype",MS_SHAPEFILE);}
 		if (file_exists($this->qyfile))
 		{unlink ($this->qyfile);}
 		return(implode(" ",$nomesitens));

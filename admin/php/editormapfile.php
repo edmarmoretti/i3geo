@@ -486,7 +486,10 @@ function alterarConexao()
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$layer->set("connection",$connection);
-	$layer->set("connectiontype",$connectiontype);
+	if(ms_GetVersionInt() > 50201)
+	{$layer->setconnectiontype($connectiontype);}
+	else
+	{$layer->set("connectiontype",$connectiontype);}
 	$layer->set("data",$data);
 	$layer->set("tileitem",$tileitem);
 	$layer->set("tileindex",$tileindex);

@@ -240,7 +240,7 @@ function mapfile()
 	$nlayers = array();
 	foreach ($layers as $layer)
 	{
-		if($objcontype[$layer->connectiontype] != "MS_WMS")
+		if($objcontype[$layer->connectiontype] != MS_WMS )
 		{
 			$layer = $mapa->getlayerbyname($layer);
 			if($layer->group == "")

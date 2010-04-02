@@ -128,7 +128,6 @@ $ys - lista de coordenadas y separadas por virgula
 		if ($tipo == "inverte")
 		{return($this->selecaoInverte());}
 		$tipoLayer = $this->layer->type;
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
@@ -470,7 +469,6 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
@@ -569,7 +567,6 @@ Inverte seleção do tema.
 	function selecaoInverte()
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
@@ -614,7 +611,6 @@ $shp_atual - Indices dos elementos já selecionados.
 	function selecaoAdiciona($shpi,$shp_atual)
 	{
 		if(!$this->layer){return "erro";}
-		//$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
 		$shp = array_unique($shp);
@@ -622,6 +618,7 @@ $shp_atual - Indices dos elementos já selecionados.
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
 		$this->mapa->savequery($this->qyfile);
+
 		return("ok");
 	}
 /*
@@ -638,7 +635,6 @@ $shp_atual - Indices dos elementos já selecionados.
 	function selecaoRetira($shpi,$shp_atual)
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
 		$indxlayer = $this->layer->index;
 		$this->mapa->freequery($indxlayer);
 		$shp = array_diff($shp_atual,$shpi);
@@ -663,7 +659,6 @@ $ids - Ids separados por vírgula correspondendo aos registros.
 	function incluiSel($ids)
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$ids = explode(",",$ids);
@@ -687,7 +682,6 @@ $dir_tmp - localização do diretório temporário
 	function selecao2tema($locaplic,$dir_tmp)
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->set("template","none.htm");
 		$this->layer->setfilter("");
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp);
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Seleção de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
@@ -721,7 +715,6 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
@@ -770,7 +763,6 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		{return ($this->selecaoLimpa());}
 		if ($tipo == "inverte")
 		{return ($this->selecaoInverte());}
-		$this->layer->set("template","none.htm");
 		if (file_exists($this->qyfile))
 		{$this->mapa->loadquery($this->qyfile);}
 		$indxlayer = $this->layer->index;
