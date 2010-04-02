@@ -1117,7 +1117,7 @@ i3GEO.arvoreDeTemas = {
 		{html += "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
 		else
 		{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
-		html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:top;text-align:left;color:"+cor+";padding-left:3px;' >";
+		html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:middle;text-align:left;color:"+cor+";padding-left:3px;' >";
 		html += tema.nome;
 		html += "</td></span>";
 		return(html);
