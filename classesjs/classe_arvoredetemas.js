@@ -839,7 +839,7 @@ i3GEO.arvoreDeTemas = {
 					nomeSis = sis[ig].NOME;
 					if(sis[ig].PUBLICADO){
 						if(sis[ig].PUBLICADO == "NAO" || sis[ig].PUBLICADO == "nao")
-						{nomeSis = "<s>"+sis[ig].NOME+"</s>";}
+						{nomeSis = "<span style='color:red' >"+sis[ig].NOME+"</span>";}
 					}
 					sisNode = new YAHOO.widget.HTMLNode(
 						{html:nomeSis},

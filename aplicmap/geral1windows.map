@@ -108,7 +108,7 @@ MAP
 			PARTIALS TRUE
 		END
 		POSITION LL
-		STATUS EMBED
+		STATUS OFF
 		#edite o caminho se a aplicacao for movida de lugar
 		#TEMPLATE "c:\ms4w\apache\htdocs\i3geo/aplicmap/legenda.htm"
 	END

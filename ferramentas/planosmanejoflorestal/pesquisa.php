@@ -35,6 +35,7 @@ cnpj - cnpj do empreendimento
 */
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
+require_once("../../classesphp/carrega_ext.php");
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
@@ -42,7 +43,7 @@ foreach(array_keys($_SESSION) as $k)
 {
 	eval("\$".$k."='".$_SESSION[$k]."';");
 }
-require_once("../../pacotes/phpxbase/api_conversion.php");
+include("../../pacotes/phpxbase/api_conversion.php");
 $cp = new cpaint();
 $cp->register('pesquisa');
 $cp->start();
@@ -59,7 +60,8 @@ function pesquisa()
 	global $cp,$map_file,$dir_tmp,$imgdir,$uf,$categoria,$ano,$situacao,$mes,$cnpj;
 	$parametros = "&uf=$uf&categoria=$categoria&ano=$ano&situacao=$situacao&mes=$mes&cnpj=$cnpj"; 
   	$xml = simplexml_load_file("http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros);
-  	//echo "http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros;
+  	var_dump($xml);
+	//echo "http://www.mma.gov.br/estruturas/sfb_pflorestal/xml/callWS_plano_manejoA.php?".$parametros;
 	if ($xml != FALSE)
 	{
 		$pontos = array();
