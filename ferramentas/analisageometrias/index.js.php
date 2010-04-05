@@ -55,6 +55,7 @@ i3GEOF.analisaGeometrias = {
 	*/
 	inicia: function(iddiv){
 		try{
+			var temp,combot;
 			$i(iddiv).innerHTML += i3GEOF.analisaGeometrias.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
 			//eventos das guias
@@ -73,13 +74,37 @@ i3GEOF.analisaGeometrias = {
 				"i3GEOanalisageometriasbotao1",
 				{onclick:{fn: i3GEOF.analisaGeometrias.capturageo}}
 			);
+			new YAHOO.widget.Button(
+				"i3GEOanalisageometriasbotaocalculo",
+				{onclick:{fn: i3GEOF.analisaGeometrias.calculo}}
+			);
+			temp = $i("i3GEOanalisageometriasbotaocalculo-button").style;
+			temp.minHeight = "1.5em";
+			temp.padding = "0px 5px";
+			
+			new YAHOO.widget.Button(
+				"i3GEOanalisageometriasbotaofuncoes",
+				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes}}
+			);
+			temp = $i("i3GEOanalisageometriasbotaofuncoes-button").style;
+			temp.minHeight = "1.5em";
+			temp.padding = "0px 5px";
+			
+			new YAHOO.widget.Button(
+				"i3GEOanalisageometriasbotaofuncoes1",
+				{onclick:{fn: i3GEOF.analisaGeometrias.funcoes1}}
+			);
+			temp = $i("i3GEOanalisageometriasbotaofuncoes1-button").style;
+			temp.minHeight = "1.5em";
+			temp.padding = "0px 5px";
+			
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen1",$i("i3GEOanalisageometriasmen1").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen2",$i("i3GEOanalisageometriasmen2").innerHTML);
 			i3GEO.util.mensagemAjuda("i3GEOanalisageometriasmen3",$i("i3GEOanalisageometriasmen3").innerHTML);
 			g_tipoacao="";
 			g_operacao="";
 			i3GEOF.analisaGeometrias.ativaFoco();
-			var combot = "<select style='font-size:11px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
+			combot = "<select style='font-size:11px' id='i3GEOanalisageometriastipoOperacao' onchange='i3GEOF.analisaGeometrias.operacao(this)' >";
 			combot += "<option value='adiciona' >Adiciona</option>";
 			combot += "<option value='retira' >Retira</option>";
 			combot += "<option value='inverte' >Inverte</option>";
@@ -128,27 +153,28 @@ i3GEOF.analisaGeometrias = {
 		ins += '		</div>';
 		ins += '	</div>';
 		ins += '	<div class=guiaobj id="i3GEOanalisageometrias3obj" style="left:1px;display:none;">';
+		ins += '			<p class=paragrafo ><input style="cursor:pointer;vertical-align:text-bottom" type=checkbox id=i3geoanalisageometriassemprecalcula /> Recalcula a área e o perímetro das novas geometrias';
 		ins += '			<p class=paragrafo >Operações que obtém descrições sobre a geometria, retornando valores que são adicionados aos itens da geometria:';
-		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.calculo(this)"  >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaocalculo style="position:relative;top:-3px;"  >';
 		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=area >&aacute;rea</option>';
-		ins += '				<option value=perimetro >per&iacute;metro</option>';
-		ins += '			</select><br>';
+		ins += '				<option value=area >&Aacute;rea</option>';
+		ins += '				<option value=perimetro >Per&iacute;metro</option>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaocalculo type=button value="ok"/></p>';
 		ins += '			<p class=paragrafo >Operações que criam novas geometrias a partir de duas ou mais geometrias:';
-		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.funcoes(this)" >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
 		ins += '				<option value=union_geos >Uni&atilde;o</option>';
 		ins += '				<option value=intersection >Intersec&ccedil;&atilde;o</option>';
 		ins += '				<option value=difference >Diferen&ccedil;a</option>';
 		ins += '				<option value=symdifference >Diferen&ccedil;a inversa</option>';
 		ins += '				<option value=convexhull >Convexo</option>';
-		ins += '			</select>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes type=button value="ok"/></p>';
 		ins += '			<p class=paragrafo >Operações que atuam sobre uma única geometria:';
-		ins += '			<br><select onchange="i3GEOF.analisaGeometrias.funcoes1(this)" >';
+		ins += '			<p class=paragrafo ><select id=i3GEOanalisageometriasselecaofuncoes1 style="position:relative;top:-3px;" >';
 		ins += '				<option value="" selected >---</option>';
-		ins += '				<option value=convexhull >convexo</option>';
-		ins += '				<option value=boundary >entorno</option>';
-		ins += '			</select>';
+		ins += '				<option value=convexhull >Convexo</option>';
+		ins += '				<option value=boundary >Entorno</option>';
+		ins += '			</select><input id=i3GEOanalisageometriasbotaofuncoes1 type=button value="ok"/></p>';
 		ins += '		<div id=i3GEOanalisageometriasmen2 style="text-align:left;left:0px" >';
 		ins += '			<p class=paragrafo >As opera&ccedil;&otilde;es de an&aacute;lise s&atilde;o executadas sobre as geometrias selecionadas.';
 		ins += '			<p class=paragrafo >Para maiores informações, veja: <a href="http://www.opengeospatial.org/standards/sfs" target=blank >OGC</a>, <a href="http://postgis.refractions.net/docs/ch06.html" target=blank >PostGis, </a>e <a href="http://www.vividsolutions.com/jts/tests/index.html" target=blank >JTS</a>';
@@ -356,12 +382,18 @@ i3GEOF.analisaGeometrias = {
 	Exclui do servidor as geometrias marcadas na lista de geometrias
 	*/
 	excluirGeo: function(){
+
 		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 		{return;}
 		else
 		{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
 		var lista,p,cp;
 		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+		if(lista == ""){
+			alert("Nenhuma geometria foi marcada");
+			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			return;
+		}
 		$i("i3GEOanalisageometriaslistadegeometrias").innerHTML = "<p class=paragrafo >Aguarde...";
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=removergeometrias&lista="+lista;
 		cp = new cpaint();
@@ -384,6 +416,11 @@ i3GEOF.analisaGeometrias = {
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			};
 		lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+		if(lista == ""){
+			alert("Nenhuma geometria foi marcada");
+			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+			return;
+		}
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=incmapageometrias&lista="+lista;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
@@ -408,18 +445,27 @@ i3GEOF.analisaGeometrias = {
 	Function: calculo
 	
 	Realiza cálculos do tipo área e perímetro sobre as geometrias marcadas
+	
 	*/
-	calculo: function(obj){
+	calculo: function(){
+		var lista,
+			temp,
+			cp = new cpaint(),
+			p,
+			obj = $i("i3GEOanalisageometriasselecaocalculo");
+		
 		if (obj.value !== ""){
 			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 			{return;}
 			else
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
-			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
-				temp,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=calculaGeometrias&operacao="+obj.value+"&lista="+lista;
-			
+			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+			if(lista == ""){
+				alert("Nenhuma geometria foi marcada");
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				return;
+			}
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=calculaGeometrias&operacao="+obj.value+"&lista="+lista;
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			};
@@ -432,16 +478,26 @@ i3GEOF.analisaGeometrias = {
 	
 	Realiza operações geométricas de cruzamento entre geometrias
 	*/
-	funcoes: function(obj){
+	funcoes: function(){
+		var lista,
+			temp,
+			cp = new cpaint(),
+			p,
+			obj = $i("i3GEOanalisageometriasselecaofuncoes");
+
 		if (obj.value !== ""){
 			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 			{return;}
 			else
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
-			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
-				temp,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista;
+			
+			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas()
+			if(lista == ""){
+				alert("Nenhuma geometria foi marcada");
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				return;
+			}
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista+"&recalcareaper="+$i("i3geoanalisageometriassemprecalcula").checked
 			
 			temp = function(){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
@@ -455,18 +511,27 @@ i3GEOF.analisaGeometrias = {
 	
 	Realiza operações geométricas em uma única geometria
 	*/
-	funcoes1: function(obj){
+	funcoes1: function(){
+		var lista,
+			temp,
+			cp = new cpaint(),
+			p,
+			obj = $i("i3GEOanalisageometriasselecaofuncoes1");
+			
 		if (obj.value !== ""){
 			if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
 			{return;}
 			else
 			{i3GEOF.analisaGeometrias.aguarde.visibility = "visible";}
-			var lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas(),
-				temp,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista;
+			lista = i3GEOF.analisaGeometrias.pegaGeometriasMarcadas();
+			if(lista == ""){
+				alert("Nenhuma geometria foi marcada");
+				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
+				return;
+			}
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=funcoesGeometrias&operacao="+obj.value+"&lista="+lista+"&recalcareaper="+$i("i3geoanalisageometriassemprecalcula").checked;
 
-			temp = function(){
+			temp = function(retorno){
 				i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			};
 			cp.set_response_type("JSON");

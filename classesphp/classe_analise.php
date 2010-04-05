@@ -2189,8 +2189,6 @@ $operacao - Tipo de análise.
 				$this->salva();
 				$final = array();
 				$final["layer"] = $operacao." ".(implode(" ",$lista));
-				
-				
 				$final["dados"][] = array("id"=>"0","wkt"=>($calculo[0]["gwkt"]),"valores"=>$valoresoriginais,"imagem"=>($imagem["url"]));
 				$this->serializeGeo($nomegeo,$final);
 			}

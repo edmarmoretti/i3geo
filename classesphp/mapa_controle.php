@@ -274,6 +274,10 @@ União, intersecção, etc.
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
 		$retorno = $m->funcoesGeometrias($dir_tmp,$imgdir,$lista,$operacao);
+		if($recalcareaper == "true"){
+			$m->calculaGeometrias($dir_tmp,$imgdir,basename($retorno),"area",$postgis_con,$srid_area);
+			$m->calculaGeometrias($dir_tmp,$imgdir,basename($retorno),"perimetro",$postgis_con,$srid_area);
+		}
 	break;
 /*
 Valor: CALCULAGEOMETRIAS
