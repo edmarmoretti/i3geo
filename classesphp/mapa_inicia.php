@@ -42,6 +42,8 @@ Inicia um mapa e obtém os parâmetros necessários para o funcionamento da interfa
 
 Globais:
 
+$interfacePadrao - interface definida em ms_configura.php
+
 $navegadoresLocais - array que indica quais usuários podem navegar no servidor
 
 $cp - Objeto CPAINT.
@@ -101,7 +103,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
+	global $interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$locsistemas,$locidentifica,$R_path,$locmapas,$locmapserv,$postgis_con,$utilizacgi,$expoeMapfile,$interface;
 	error_reporting(E_ALL);
 	//
 	//pega o xml com os sietmas para identificação
@@ -248,6 +250,7 @@ function iniciaMapa()
 	$res .= "var mensagens ='".$m->pegaMensagens()."';";
 	$res .= "var kmlurl ='".$kmlurl."';";
 	$res .= "var mensagemInicia ='".$mensagemInicia."';";
+	$res .= "var interfacePadrao ='".$interfacePadrao."';";
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	//$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));

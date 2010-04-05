@@ -154,7 +154,7 @@ i3GEO.configura = {
 			{ id:"omenudataArquivos6",text: $trad("u21"), url: "../geradordelinks.htm" }
 			],
 			"interface": [
-			{ id:"omenudataInterface1",text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/geral.htm?'+i3GEO.configura.sid" },
+			{ id:"omenudataInterface1",text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/'+i3GEO.parametros.interfacePadrao+'?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface2",text: "OpenLayers", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/openlayers.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface3",text: "Flash", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/flamingo.htm?'+i3GEO.configura.sid" },
 			{ id:"omenudataInterface4",text: "Google Maps", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googlemaps.phtml?'+i3GEO.configura.sid" },

@@ -176,6 +176,7 @@ $atlasxml_ = $atlasxml;
 $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
+$interfacePadrao_ = $interfacePadrao;
 if(isset($kmlurl)){$kmlurl_ = $kmlurl;}
 //
 //se houver string de conexão para substituição
@@ -236,6 +237,7 @@ $_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
+$_SESSION["interfacePadrao"] = $interfacePadrao_;
 if(isset($kmlurl_))
 $_SESSION["kmlurl"] = $kmlurl_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions

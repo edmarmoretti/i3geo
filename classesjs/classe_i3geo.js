@@ -108,6 +108,8 @@ i3GEO = {
 	kmlurl {String} - url de um arquivo kml que será inserido no mapa. Válido apenas na interface Google Maps
 
 	mensagemInicia {String} - mensagem definida em ms_configura.php indicando a versão atual do i3Geo.
+	
+	interfacePadrao {String} - interface padrão definida em ms_configura
 	*/
 	parametros: {
 		mapexten: "",
@@ -132,7 +134,8 @@ i3GEO = {
 		locmapas:"",
 		celularef:"",
 		kmlurl:"",
-		mensageminicia:""
+		mensageminicia:"",
+		interfacePadrao:"geral.htm"
 	},
 	/*
 	Propriedade: finaliza
@@ -239,7 +242,8 @@ i3GEO = {
 			locmapas:"",
 			extentref:"",
 			kmlurl:"",
-			mensageminicia:""
+			mensageminicia:"",
+			interfacePadrao:"geral.htm"
 		};
 		if(tamanho[0] < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
@@ -318,6 +322,7 @@ i3GEO = {
 						i3GEO.parametros.versaomscompleta = versaomscompleta;
 						i3GEO.parametros.kmlurl = kmlurl;
 						i3GEO.parametros.mensageminicia = mensagemInicia;
+						i3GEO.parametros.interfacePadrao = interfacePadrao;
 					}
 					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}					
 					i3GEO.gadgets.quadros.inicia(10);
