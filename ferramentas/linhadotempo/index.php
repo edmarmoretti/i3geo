@@ -122,34 +122,39 @@ function tituloover(wkt){
 		if(!window.parent.i3GEO.calculo){return;}
 	}
 	catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
-	var ext = i3GEO.util.wkt2ext(wkt,"point");
-	if(ext == false){alert("wkt invalido");return;}	
-	var ext = ext.split(" ");
-	var xMin = ext[0];
-	var xMax = ext[2];
-	var yMin = ext[1];
-	var yMax = ext[3];
 
-	var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
-	var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+	re = new RegExp("POINT", "g");
+	wkt = wkt.replace(re,"");
+	wkt = wkt.split("(")[1].split(")")[0];
+	wkt = wkt.split(" ");
 
-	/*
-	window.parent.i3GEO.util.criaBox("boxg");
-	var box = window.parent.$i("boxg");
-	var w = xyMax[0]-xyMin[0];
-	var h = xyMin[1]-xyMax[1];
-	box.style.display = "block";
-	box.style.width = w;
-	box.style.height = h;
-	box.style.top = xyMax[1]+"px";
-	box.style.left = xyMin[0]+"px";
-	*/
+	var xy = window.parent.i3GEO.calculo.dd2tela(wkt[0],wkt[1],window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+
 	window.parent.i3GEO.util.criaPin('marcaIdentifica',window.parent.i3GEO.configura.locaplic+"/imagens/marker.png","21px","25px");
 	var i = window.parent.document.getElementById('marcaIdentifica')
-	i.style.top = xyMax[1]-15+"px";
-	i.style.left = xyMin[0]-2+"px";
+	i.style.top = xy[1]-25+"px";
+	i.style.left = xy[0]-10+"px";
 	i.style.display = "block"
 }
+function tituloclique(wkt){
+	try{
+		if(!window.parent){return;}
+		if(!window.parent.i3GEO){return;}
+		if(!window.parent.i3GEO.calculo){return;}
+	}
+	catch(e){if(typeof(console) !== 'undefined'){console.error(e);};return;}
+	re = new RegExp("POINT", "g");
+	wkt = wkt.replace(re,"");
+	wkt = wkt.split("(")[1].split(")")[0];
+	wkt = wkt.split(" ");
+	var retorna = function(retorno)
+	{window.parent.i3GEO.atualiza(retorno);};
+	
+	window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+	window.parent.i3GEO.php.selecaopt(retorna,$i("tema").value,wkt[0]+" "+wkt[1],"adiciona",0);
+
+}
+
 function tituloout(){
 	window.parent.i3GEO.util.escondePin();
 }

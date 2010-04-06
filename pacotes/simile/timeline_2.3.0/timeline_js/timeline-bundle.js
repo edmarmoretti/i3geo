@@ -2466,6 +2466,8 @@ if(C==null||C.length==0){C=this.getText();
 }if(C==null||C.length==0){return ;
 }D.style.display="inline";
 C=C.replace(/\s/g,"_");
+/*
+modificado por edmar moretti para o i3geo
 var B=this._wikiURL+this._wikiSection.replace(/\s/g,"_")+"/"+C;
 var A=document.createElement("a");
 A.href=B;
@@ -2474,17 +2476,34 @@ A.innerHTML=Timeline.strings[Timeline.clientLocale].wikiLinkLabel;
 D.appendChild(document.createTextNode("["));
 D.appendChild(A);
 D.appendChild(document.createTextNode("]"));
-},fillTime:function(A,B){if(this._instant){if(this.isImprecise()){A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
-A.appendChild(A.ownerDocument.createElement("br"));
-A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._end)));
-}else{A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
-}}else{if(this.isImprecise()){A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)+" ~ "+B.labelPrecise(this._latestStart)));
-A.appendChild(A.ownerDocument.createElement("br"));
-A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._earliestEnd)+" ~ "+B.labelPrecise(this._end)));
-}else{A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
-A.appendChild(A.ownerDocument.createElement("br"));
-A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._end)));
-}}},fillInfoBubble:function(A,E,M){var K=A.ownerDocument;
+*/
+},
+fillTime:function(A,B){
+	/*
+	if(this._instant){
+		if(this.isImprecise()){
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
+			A.appendChild(A.ownerDocument.createElement("br"));
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._end)));
+		}
+		else{
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
+		}
+	}else{
+		if(this.isImprecise()){
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)+" ~ "+B.labelPrecise(this._latestStart)));
+			A.appendChild(A.ownerDocument.createElement("br"));
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._earliestEnd)+" ~ "+B.labelPrecise(this._end)));
+		}
+		else{
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._start)));
+			A.appendChild(A.ownerDocument.createElement("br"));
+			A.appendChild(A.ownerDocument.createTextNode(B.labelPrecise(this._end)));
+		}
+	}
+	*/
+},
+fillInfoBubble:function(A,E,M){var K=A.ownerDocument;
 var J=this.getText();
 var H=this.getLink();
 var B=this.getImage();

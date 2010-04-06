@@ -514,7 +514,7 @@ function dadosLinhaDoTempo($map_file,$tema)
 			$eventos[] = array(
 				'start'=>$dado[$iteminicio],
 				'end'=>$fim,
-				'title'=>"<span onmouseover='tituloover(\"".$dado["centroide"]."\")' onmouseout='tituloout()'>".$titulo."</span>",
+				'title'=>"<span title='clique para selecionar' onclick='tituloclique(\"".$dado["centroide"]."\")' onmouseover='tituloover(\"".$dado["centroide"]."\")' onmouseout='tituloout()'>".$titulo."</span>",
 				'description'=>$dado[$iteminicio]." ".$fim."<br>".$desc,
 				'icon'=>$icone,
 				'image'=>$image,
@@ -525,8 +525,8 @@ function dadosLinhaDoTempo($map_file,$tema)
 	//echo "<pre>";
 	return array(
 		"dateTimeFormat"=>$layer->getmetadata("ltempoformatodata"),
-		"wikiURL"=>"http://simile.mit.edu/shelf/",
-		"wikiSection"=>"Simile Cubism Timeline",		
+		"wikiURL"=>"",
+		"wikiSection"=>"",		
 		"events"=>$eventos
 	);
 }
