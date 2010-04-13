@@ -114,34 +114,36 @@ wms_configura = {
 		tipo: 2
 	}
 }
-var ins = "<p>Escolha o serviço de dados</p>"
-ins += "<select style='width:280px;' onchange='escolheuServico(this.value)'>"
+var ins = "<p>Escolha o serviço de fornecimento de dados (WMS-T)</p>"
+ins += "<select style='width:353px;border:1px solid gray;' onchange='escolheuServico(this.value)'>"
 ins += "<option value='' >---</option>"
 for(var key in wms_configura){
 	ins += "<option value='"+key+"'>"+wms_configura[key].titulo+"</option>"
 }
 ins += "</select>";
-ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=42 />"
-ins += "<p><TEXTAREA id='WMS_descricao' rows='5' cols='42' ></TEXTAREA></p>";
+ins += "<p><input onclick='javascript:this.select();' type=text id=iServico size=54 />"
+ins += "<p><TEXTAREA id='WMS_descricao' rows='3' cols='52' ></TEXTAREA></p>";
 ins += "<table style='text-align:left'>"
-ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Ano inicial: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anoinicio size=4 />"
+ins += "<td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>"
 
-ins += "<tr><td style='text-align:left'>Ano final: </td><td><input onclick='javascript:this.select();' type=text value='0' id=WMS_anofim size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>"
-ins += "<tr><td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>"
+ins += "<tr><td style='text-align:left'>Mês inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesinicio size=4 />"
+ins += "<td style='text-align:left'>Mês final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_mesfim size=4 /></tr>"
+
+ins += "<tr><td style='text-align:left'>Dia inicial: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diainicio size=4 />"
+ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascript:this.select();' type=text value='nulo' id=WMS_diafim size=4 /></tr>"
+
 ins += "</table>"
-ins += "<div style='position:absolute;left:120px;top:180px'>"
-ins += "<p>Obter uma imagem por:</p>"
-ins += "<select id='umaImagemPor'>"
+//ins += "<div style='position:absolute;left:120px;top:180px'>"
+ins += "<p>Obter uma imagem por: "
+ins += "<select id='umaImagemPor' style='border:1px solid gray'>"
 ins += "<option value='' >---</option></select>" 
 
 ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>"
 ins += "</div>"
 $i("parametros").innerHTML = ins
 
-new YAHOO.widget.Button("botao1");
+//new YAHOO.widget.Button("botao1");
 
 function escolheuServico(idWMS){
 	tipoServico = wms_configura[idWMS].tipo
@@ -175,6 +177,9 @@ function escolheuServico(idWMS){
 	$i("umaImagemPor").innerHTML = ins;
 }
 function iniciaImagens(){
+	$i("imagens").innerHTML = "";
+	$i("imagensLidas").innerHTML = "";
+	$i("marcaTempo").innerHTML = "";
 	$i("parametros").style.display="none"
 	$i("quadroAnima").style.display="block"
 	if(window.parent.i3GEO.parametros.mapexten){
@@ -204,6 +209,7 @@ function iniciaImagens(){
 	quantasLidas = 0
 	onde = $i("imagens")
 	ondeContador = $i("imagensLidas")
+	ondeContador.style.display="block"
 	ondeControle = $i("controle")
 	idsValidos = new Array()
 	idsTempo = new Array()
@@ -263,7 +269,7 @@ function iniciaImagens(){
 function criaImg(tempo,id){
 	var novoel = document.createElement("img");
 	var p = "absolute"
-	if(id==1){var p = "relative"}
+	//if(id==1){var p = "relative"}
 	novoel.id = id;
 	novoel.style.position = p
 	novoel.style.top = "0px"
