@@ -309,20 +309,18 @@ Include:
 				$of = $this->mapa->outputformat;
 				$of->set("imagemode",MS_IMAGEMODE_RGB);
 			}
-
-			
 			if (!$qy)
 			{$imgo = @$this->mapa->draw();}
 			else
 			{$imgo = @$this->mapa->drawQuery();}
 	
-	$error = ms_GetErrorObj();
-	while($error && $error->code != MS_NOERR)
-	{
-		printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-		$error = $error->next();
-	}
-	ms_ResetErrorList();			
+			$error = ms_GetErrorObj();
+			while($error && $error->code != MS_NOERR)
+			{
+				printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+				$error = $error->next();
+			}
+			ms_ResetErrorList();			
 		
 			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
 			$imgo->saveImage($nomer);
@@ -330,56 +328,32 @@ Include:
 			//
 			//aplica o filtro de imagem se estiver definido em $tipoimagem
 			//
-			if ($tipoimagem == "cinza")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));
+			if($tipoimagem !== "nenhum"){
+				$tiposImagem = explode(" ",$tipoimagem);
+				foreach ($tiposImagem as $tipoimagem){
+					$m = new Imagem($nomer);
+					if ($tipoimagem == "cinza")
+					{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "sepiaclara")
+					{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "sepianormal")
+					{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "negativo")
+					{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "detectaBordas")
+					{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "embassa")
+					{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "gaussian_blur")
+					{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "selective_blur")
+					{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "mean_removal")
+					{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
+					if ($tipoimagem == "pixelate")
+					{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
+				}
 			}
-			if ($tipoimagem == "sepiaclara")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "sepianormal")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "negativo")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->negativo(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "detectaBordas")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "embassa")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->embassa(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "gaussian_blur")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "selective_blur")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->selective_blur(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "mean_removal")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->mean_removal(),str_replace("\\","/",$nomer));
-			}
-			if ($tipoimagem == "pixelate")
-			{
-				$m = new Imagem($nomer);
-				imagepng($m->pixelate(),str_replace("\\","/",$nomer));
-			}	
 			$nomer = ($imgo->imageurl).basename($nomer);
 		}
 		if ($imgo == ""){return "erro";}

@@ -47,7 +47,22 @@ i3GEOF.tipoimagem = {
 	*/
 	inicia: function(iddiv){
 		try{
+			var temp,f;
+			
 			$i(iddiv).innerHTML += i3GEOF.tipoimagem.html();
+			new YAHOO.widget.Button(
+				"i3GEOFtipoImagemListaDeFiltrosOk",
+				{onclick:{fn: i3GEOF.tipoimagem.aplicar}}
+			);
+			temp = $i("i3GEOFtipoImagemListaDeFiltrosOk-button").style;
+			temp.minHeight = "1.5em";
+			temp.padding = "0px 5px";
+			
+			f = i3GEO.configura.tipoimagem;
+			if(f == 'nenhum')
+			{f = "";}
+			$i("i3GEOFtipoImagemListaDeFiltros").value = f;
+			
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda
 			}
@@ -66,57 +81,59 @@ i3GEOF.tipoimagem = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<p class=paragrafo >Escolha o filtro de cores que ser&aacute; aplicado.</p>' +
+		var ins = '<p class=paragrafo >Escolha um ou mais filtros de cores. Vc pode editar manualmente a lista de filtros.</p>' +
+			'<input type=text size=29 value="" id="i3GEOFtipoImagemListaDeFiltros" style="position:relative;top:-2px" /> ' +
+			'<input id=i3GEOFtipoImagemListaDeFiltrosOk type=button value="ok"/><br>' +
 			'<table class=lista6 width="200px">' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'nenhum\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=nenhum ></td>' +
+			'		<td><input onclick="javascript:$i(\'i3GEOFtipoImagemListaDeFiltros\').value = \'\'" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=nenhum ></td>' +
 			'		<td>nenhum</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'nenhum\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_nenhum.png" /></td>' +
+			'		<td><img onclick="javascript:$i(\'i3GEOFtipoImagemListaDeFiltros\').value = \'\'" src="'+i3GEO.configura.locaplic+'/imagens/filtro_nenhum.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'cinza\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=cinza ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'cinza\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=cinza ></td>' +
 			'		<td>tons de cinza</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'cinza\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_cinza.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'cinza\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_cinza.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'sepiaclara\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepiaclara ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'sepiaclara\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepiaclara ></td>' +
 			'		<td>s&eacute;pia clara</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'sepiaclara\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepiaclara.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'sepiaclara\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepiaclara.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'sepianormal\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepianormal ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'sepianormal\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepianormal ></td>' +
 			'		<td>s&eacute;pia normal</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'sepianormal\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepianormal.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'sepianormal\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepianormal.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'negativo\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=negativo ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'negativo\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=negativo ></td>' +
 			'		<td>negativo</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'negativo\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_negativo.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'negativo\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_negativo.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'detectaBordas\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=detectaBordas ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'detectaBordas\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=detectaBordas ></td>' +
 			'		<td>detecta bordas</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'detectaBordas\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_detectabordas.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'detectaBordas\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_detectabordas.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'embassa\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=embassa ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'embassa\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=embassa ></td>' +
 			'		<td>emboss</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'embassa\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_embassa.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'embassa\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_embassa.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'gaussian_blur\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=gaussian_blur ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'gaussian_blur\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=gaussian_blur ></td>' +
 			'		<td>gaussian blur</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'gaussian_blur\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_gaussianblur.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'gaussian_blur\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_gaussianblur.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'selective_blur\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=selective_blur ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'selective_blur\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=selective_blur ></td>' +
 			'		<td>selective blur</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'selective_blur\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_selectiveblur.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'selective_blur\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_selectiveblur.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
-			'		<td><input onclick="i3GEOF.tipoimagem.aplicar(\'mean_removal\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=mean_removal ></td>' +
+			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'mean_removal\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=mean_removal ></td>' +
 			'		<td>mean removal</td>' +
-			'		<td><img onclick="i3GEOF.tipoimagem.aplicar(\'mean_removal\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_meanremoval.png" /></td>' +
+			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'mean_removal\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_meanremoval.png" /></td>' +
 			'	</tr>' +
 			'</table>';
 		return ins;
@@ -158,10 +175,21 @@ i3GEOF.tipoimagem = {
 	
 	Aplica o filtro de imagem escolhido
 	*/
-	aplicar: function(filtro){
+	aplicar: function(){
+		var filtro = $i("i3GEOFtipoImagemListaDeFiltros").value;
+		if(filtro == "")
+		{filtro = 'nenhum';}
 		i3GEO.configura.tipoimagem = filtro;
 		g_operacao = "outras";
 		i3GEO.atualiza();
+	},
+	/*
+	Function: adicionar
+	
+	Adiciona um filtro na lista de filtros que serão aplicados
+	*/
+	adicionar: function(filtro){
+		$i("i3GEOFtipoImagemListaDeFiltros").value = $i("i3GEOFtipoImagemListaDeFiltros").value+" "+filtro;
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
