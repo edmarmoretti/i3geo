@@ -10,7 +10,7 @@ it:"I3geo è un software libero! <a href='http://mapas.mma.gov.br/download' targe
 //lista de propriedades do mapa
 "p2": [
 {
-pt:"Tipo de imagem",
+pt:"Filtro de cores",
 en:"Image type",
 es:"Tipo de imagen",
 it:"Tipo di immagine"
@@ -98,6 +98,13 @@ pt: "Aplicar",
 en:"Apply",
 es:"Aplicar",
 it:"Applica"
+}],
+"p15": [
+{
+pt: "Formato da imagem do mapa",
+en:"Image map format",
+es:"Formato de la imagen del mapa",
+it:"Image map format"
 }],
 //itens do menu suspenso
 "s1": [

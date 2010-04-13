@@ -381,6 +381,18 @@ i3GEO.mapa = {
 	*/
 	dialogo:{
 		/*
+		Function: outputformat
+
+		Altera o formato utilizado na geração da imagem do mapa.
+		*/
+		outputformat: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.outputformat()");}
+			if(typeof(i3GEOF.outputformat) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/outputformat/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.outputformat.criaJanelaFlutuante()","i3GEOF.outputformat_script");
+			}
+		},
+		/*
 		Function: autoredesenha
 
 		Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.

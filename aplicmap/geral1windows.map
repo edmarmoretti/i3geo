@@ -20,16 +20,11 @@ MAP
 	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
 	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 	#DEBUG OFF
-	DEBUG 5
-	CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+	#DEBUG 5
+	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
 
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 157 211 255
-	#
-	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
-	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente
-	#para png1 quando um arquivo rsater é adicionado ao mapa
-	#
 	IMAGETYPE AGG_Q
 	EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
 	SIZE 480 500
@@ -37,14 +32,7 @@ MAP
 	UNITS DD
 	NAME "GERAL"
 	DEBUG OFF
-	#utilize o agg apenas com mapserver 5x
-	#24 bit png (high quality, large file size):
-	#OUTPUTFORMAT
- 	#	NAME 'AGG'
- 	#	DRIVER AGG/PNG
- 	#	IMAGEMODE RGB
-	#END
-	#png output, with number of colors reduced with quantization . ( Note: this functionality is not supported with RGBA images, that is outputformats with IMAGEMODE RGBA, or maps with TRANSPARENT ON ) :
+
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
  		DRIVER AGG/PNG
@@ -53,6 +41,7 @@ MAP
  		FORMATOPTION "QUANTIZE_DITHER=OFF"
  		FORMATOPTION "QUANTIZE_COLORS=256"
 	END
+	
 	OUTPUTFORMAT
     	NAME svg
     	MIMETYPE "image/svg+xml"
@@ -78,11 +67,12 @@ MAP
 		TRANSPARENT FALSE
 		FORMATOPTION "INTERLACE=OFF"
 	END
+	
 	OUTPUTFORMAT
 		#utilizado quando é incluido um layer do tipo raster
 		NAME png2
 		MIMETYPE image/png
-		DRIVER GD/PNG
+		DRIVER AGG/PNG
 		EXTENSION png
 		IMAGEMODE PC256
 		TRANSPARENT TRUE

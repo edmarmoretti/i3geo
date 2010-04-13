@@ -100,6 +100,20 @@ Salva o mapfile atual
 	  	$this->mapa->save($this->arquivo);
 	}
 /*
+Method: mudaoutputformat
+
+Muda o OUTPUTFORMAT
+
+Parametro:
+
+tipo {string} - OUTPUTFORMAT que será aplicado. deve existir no mapfile básico que iniciou o i3Geo 
+*/	
+ 	function mudaoutputformat($tipo)
+ 	{
+		//error_reporting(E_ALL);
+		return $this->mapa->selectOutputFormat($tipo);
+	}
+/*
 Method: pegaMensagens
 
 Pega as mensagens do metadata "mensagem" existentes nos layers do mapa atual

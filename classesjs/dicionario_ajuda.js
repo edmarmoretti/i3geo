@@ -752,8 +752,16 @@ g_traducao_ajuda = {
 			complemento:"Ao navegar pelo mapa, o gráfico é atualizado sendo utilizado apenas os dados existentes na extensão do mapa. Ao passar o mouse sobre um dos nomes mostrados no gráfico, é indicado a posição no mapa. Ao ser clicado um ícone no gráfico, abre-se um balão com informações adicionais, podendo incluir links e imagens. O gráfico só é mostrado para os temas que estiverem configurados pelo administrador do i3Geo.",
 			apijs:"i3GEO.configura",
 			tela:""
+		},
+		"89": {
+			titulo: "Tipo de imagem",
+			diretorio:"i3geo/ferramentas/outputformat",
+			categoria:"1",
+			pt:"Modifica o tipo de imagem utilizada na geração do mapa.",
+			complemento:"Modifica o parâmetro OUTPUTFORMAT do mapa em uso permitindo-se escolher entre PNG e JPEG com tecnologia de geração AGG ou GD.",
+			tela:"",
+			apijs:"i3GEO.mapa.dialogo.outputformat()"
 		}
-		
 	}
 };
 

@@ -97,12 +97,12 @@ i3GEOF.tipoimagem = {
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'sepiaclara\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepiaclara ></td>' +
-			'		<td>s&eacute;pia clara</td>' +
+			'		<td>s&eacute;pia clara (funciona apenas com o tipo de imagem png1) </td>' +
 			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'sepiaclara\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepiaclara.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
 			'		<td><input onclick="i3GEOF.tipoimagem.adicionar(\'sepianormal\')" style="cursor:pointer" type=radio name=i3GEOtipoimagemtipo value=sepianormal ></td>' +
-			'		<td>s&eacute;pia normal</td>' +
+			'		<td>s&eacute;pia normal (funciona apenas com o tipo de imagem png1)</td>' +
 			'		<td><img onclick="i3GEOF.tipoimagem.adicionar(\'sepianormal\')" src="'+i3GEO.configura.locaplic+'/imagens/filtro_sepianormal.png" /></td>' +
 			'	</tr>' +
 			'	<tr>' +
@@ -150,7 +150,7 @@ i3GEOF.tipoimagem = {
 			i3GEO.janela.minimiza("i3GEOF.tipoimagem");
 		};
 		//cria a janela flutuante
-		titulo = "Tipo de imagem <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=1' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Filtro de cores <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=1' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"260px",

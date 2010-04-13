@@ -916,9 +916,7 @@ Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 		if ($teste == "ok")
 		{$retorno = "ok";}
 		else
-		{
-			$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);	
-		}
+		{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);}
 	break;
 /*
 Valor: REFERENCIA
@@ -939,6 +937,22 @@ Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do 
 		//$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
 		$retorno = retornaReferenciaDinamica();
+	break;
+/*
+Valor: MUDAOUTPUTFORMAT
+
+Muda o OUTPUTFORMAT.
+*/	
+	case "MUDAOUTPUTFORMAT":
+		include_once("classe_mapa.php");
+		copiaSeguranca($map_file);
+		$m = new Mapa($map_file);
+	 	$res = $m->mudaoutputformat($tipo);
+		if($res != 1)
+		{$m->salva();}
+		else
+		{$res = "erro";}
+		$retorno = $res;
 	break;
 /*
 Section: Temas
