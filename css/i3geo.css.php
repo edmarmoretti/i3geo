@@ -191,7 +191,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
      cursor: se-resize;
  }
 
-#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
+#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
 {cursor:pointer;border: 0px solid rgb(50,50,50);border-bottom:1px solid rgb(50,50,50);border-left:1px solid rgb(50,50,50);width:22;height:22;z-index:1000;position:relative;}
 #box1
 {font-size:0px;cursor:crosshair;opacity:.25;background-color: gray;position: absolute;visibility: hidden;width: 0px;height: 0px;border: 2px solid #ff0000;}
@@ -892,6 +892,15 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
 	background-position: 0px -2025px;
+	cursor:pointer;
+}
+.uploadgpx
+{
+	background-image:URL('../imagens/visual/default/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -2050px;
+	width: 16px;
+	border: 1px solid #DCDCDC;
 	cursor:pointer;
 }
 button{background:url(../imagens/tic.png) 98% 50% no-repeat;}

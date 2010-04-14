@@ -81,8 +81,9 @@ i3GEO.arvoreDeTemas = {
 		
 		refresh: true,
 		
-		carousel: true
+		carousel: true,
 		
+		uploadgpx: true
 	}
 	
 	Tipo:
@@ -106,7 +107,8 @@ i3GEO.arvoreDeTemas = {
 		mini: true,
 		estrelas: true,
 		refresh: true,
-		carousel: true
+		carousel: true,
+		uploadgpx: true
 	},
 	/*
 	Propriedade: FATORESTRELA
@@ -1221,6 +1223,10 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='refresh' onclick='i3GEO.arvoreDeTemas.atualiza()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='Refresh'/><td>";
 			t += 20;
 		}
+		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadgpx === true){
+			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title=''/><td>";
+			t += 20;
+		}		
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf === true){
 			ins += "<td><img class='uploaddbf' onclick='i3GEO.arvoreDeTemas.dialogo.uploaddbf()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left' title='"+$trad("a2b")+"'/><td>";
 			t += 20;
@@ -1257,7 +1263,6 @@ i3GEO.arvoreDeTemas = {
 			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title=''/><td>";
 			t += 20;
 		}
-
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");
 	},
 	/*
@@ -1721,6 +1726,18 @@ i3GEO.arvoreDeTemas = {
 		*/
 		downloadbase: function()
 		{window.open(i3GEO.configura.locaplic+"/datadownload.htm");}
+		,
+		/*
+		Function: uploadgpx
+
+		Abre a janela para o upload de um arquivo gpx
+		*/
+		uploadgpx: function(){
+			if(typeof(i3GEOF.uploadgpx) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/uploadgpx/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.uploadgpx.criaJanelaFlutuante()","i3GEOF.uploadgpx_script");
+			}
+		}
 	}
 };
 //YAHOO.log("carregou classe arvoredetemas", "Classes i3geo");

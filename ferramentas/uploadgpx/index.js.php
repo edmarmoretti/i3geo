@@ -1,9 +1,9 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Upload de arquivo shapefile
+Title: uploadgpx de arquivo gpx
 
-File: i3geo/ferramentas/upload/index.js.php
+File: i3geo/ferramentas/uploadgpxgpx/index.js.php
 
 About: Licença
 
@@ -29,11 +29,11 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.upload
+Class: i3GEOF.uploadgpx
 
 Envia para o servidor um arquivo shapefile local e insere como uma camada no mapa.
 */
-i3GEOF.upload = {
+i3GEOF.uploadgpx = {
 	/*
 	Variavel: aguarde
 	
@@ -51,16 +51,16 @@ i3GEOF.upload = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.upload.html();
+			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
 			new YAHOO.widget.Button(
-				"i3GEOuploadbotao1",
-				{onclick:{fn: i3GEOF.upload.submete}}
+				"i3GEOuploadgpxbotao1",
+				{onclick:{fn: i3GEOF.uploadgpx.submete}}
 			);
 			i3GEO.util.radioEpsg(
 				function(retorno)
-				{$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;},
-				"i3GEOuploadListaepsg",
-				"upload"
+				{$i("i3GEOuploadgpxListaepsg").innerHTML = retorno.dados;},
+				"i3GEOuploadgpxListaepsg",
+				"uploadgpx"
 			);
 		}
 		catch(erro){alert(erro);}
@@ -75,17 +75,15 @@ i3GEOF.upload = {
 	String com o código html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<p class="paragrafo" >shp: <br><input class=digitar type="file" size=42 name="i3GEOuploadshp" style="top:0px;left:0px"></p>' +
-		'<p class="paragrafo" >shx: <br><input class=digitar type="file" size=42 name="i3GEOuploadshx" style="top:0px;left:0px"></p>' +
-		'<p class="paragrafo" >dbf: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbf" style="top:0px;left:0px"></p>' +
+		var ins = '<form id=i3GEOuploadgpxf target="i3GEOuploadgpxiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadgpx/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		'<p class="paragrafo" >Arquivo gpx: <br><input class=digitar type="file" size=42 name="i3GEOuploadgpx" style="top:0px;left:0px"></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
-		'<div id=i3GEOuploadListaepsg style="border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'<br><p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="Criar camada" size=12 name="submit">' +
+		'<div id=i3GEOuploadgpxListaepsg style="border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
+		'<br><p class="paragrafo" ><input id=i3GEOuploadgpxbotao1 type="button" value="Criar camada" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
-		'<iframe name=i3GEOuploadiframe style="text-align:left;" width="280px" height="60px"></iframe>';
+		'<iframe name=i3GEOuploadgpxiframe style="text-align:left;" width="280px" height="60px"></iframe>';
 		return ins;
 	},
 	/*
@@ -97,32 +95,32 @@ i3GEOF.upload = {
 		var janela,divid,temp,titulo,cabecalho,minimiza;
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.upload");
+			i3GEO.janela.minimiza("i3GEOF.uploadgpx");
 		};
-		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
+		titulo = "Upload de arquivo GPX <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
-			"350px",
+			"250px",
 			"",
 			"",
 			"",
 			titulo,
-			"i3GEOF.upload",
+			"i3GEOF.uploadgpx",
 			false,
 			"hd",
 			cabecalho,
 			minimiza
 		);
 		divid = janela[2].id;
-		$i("i3GEOF.upload_corpo").style.backgroundColor = "white";
-		i3GEOF.upload.aguarde = $i("i3GEOF.upload_imagemCabecalho").style;
-		i3GEOF.upload.inicia(divid);
+		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";
+		i3GEOF.uploadgpx.aguarde = $i("i3GEOF.uploadgpx_imagemCabecalho").style;
+		i3GEOF.uploadgpx.inicia(divid);
 	},
 	submete: function(){
-		if(i3GEOF.upload.aguarde.visibility==="visible")
+		if(i3GEOF.uploadgpx.aguarde.visibility==="visible")
 		{return;}
-		i3GEOF.upload.aguarde.visibility="visible";
-		$i("i3GEOuploadf").submit();
+		i3GEOF.uploadgpx.aguarde.visibility="visible";
+		$i("i3GEOuploadgpxf").submit();
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>
