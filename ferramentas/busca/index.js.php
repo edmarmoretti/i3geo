@@ -37,6 +37,12 @@ O tema que será utilizado na inicialização é o que estiver armazenado na variáve
 */
 i3GEOF.busca = {
 	/*
+	Variavel: nbuscas
+	
+	Número de buscas já feitas. Utilizado para posicionar as janelas de resultados.
+	*/
+	nbuscas: 0,
+	/*
 	Variavel: aguarde
 	
 	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
@@ -207,7 +213,6 @@ i3GEOF.busca = {
 				if ($i("i3GEObuscaregiao").checked === true)
 				{onde = "regiao";}
 				palavra = removeAcentos(palavra);
-				
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listavaloresitens&palavra="+palavra+"&lista="+listai.toString()+"&tipo="+tipo+"&onde="+onde;
 				cp = new cpaint();
 				cp.set_response_type("json");
@@ -236,8 +241,12 @@ i3GEOF.busca = {
 			i,
 			er,
 			tr,
-			tema;		
-		i3GEO.janela.cria("200px","200px","","","",palavra,idJanela);
+			tema
+			posicaoleft = parseInt($i("i3GEOF.busca_c").style.left,10)+(i3GEOF.busca.nbuscas*10),
+			posicaotop  = parseInt($i("i3GEOF.busca_c").style.top,10)+(i3GEOF.busca.nbuscas*10);
+		
+		i3GEOF.busca.nbuscas++;
+		i3GEO.janela.cria("200px","200px","",posicaoleft+290,posicaotop,palavra,idJanela);
 		if (retorno.data !== undefined)
 		{
 			nlinhas = retorno.data.length;
