@@ -782,6 +782,8 @@ i3GEO.configura = {
 			dica:$trad("d7a"),
 			funcaoonclick:function()
 			{
+				if(i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas","","diferente",i3GEO.arvoreDeCamadas.CAMADAS) == "")
+				{alert($trad("d31"));return;}
 				var temp;
 				if(i3GEO.Interface.ATUAL==="padrao"){
 					$i("img").title = "";

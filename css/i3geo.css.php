@@ -898,7 +898,7 @@ h1 {padding:.25em .5em;background-color:#ccc;}
 {
 	background-image:URL('../imagens/visual/default/sprite.png');
 	background-repeat: no-repeat;
-	background-position: 0px -2050px;
+	background-position: 0px -2052px;
 	width: 16px;
 	border: 1px solid #DCDCDC;
 	cursor:pointer;

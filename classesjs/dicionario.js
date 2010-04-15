@@ -1107,6 +1107,13 @@ pt:"Linha do tempo",
 en:"Time line",
 es:"Linha do tempo",
 it:"Linha do tempo"
+}],
+"d31":[
+{
+pt:"Não existe nenhuma camada com etiquetas ativas",
+en:"Não existe nenhuma camada com etiquetas ativas",
+es:"Não existe nenhuma camada com etiquetas ativas",
+it:"Não existe nenhuma camada com etiquetas ativas"
 }]
 
 };
