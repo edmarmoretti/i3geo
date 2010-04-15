@@ -15,6 +15,7 @@ i3GEOOL = {
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 		{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'}
 	),
+	ol_mma.transitionEffect ="resize";
 	ol_wms: new OpenLayers.Layer.WMS.Untiled(
 		"OpenLayers WMS",
 		"http://labs.metacarta.com/wms/vmap0",

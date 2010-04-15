@@ -476,7 +476,7 @@ i3GEO.Interface = {
 		Default:
 		{true}
 		*/
-		TILES: true,
+		TILES: false,
 		/*
 		Propriedade: GADGETS
 		
@@ -541,6 +541,7 @@ i3GEO.Interface = {
 				else
 				{i3geoOLlayer = new OpenLayers.Layer.MapServer.Untiled( "Temas I3Geo", url,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{'buffer':1},{isBaseLayer:true, opacity: 1});}				
 				i3geoOLlayer.setVisibility(true);
+				i3geoOLlayer.transitionEffect ="resize";
 				i3geoOL.addLayer(i3geoOLlayer);
 				i3geoOL.events.register("moveend",i3geoOL,function(e){
 					i3GEO.Interface.openlayers.recalcPar();
