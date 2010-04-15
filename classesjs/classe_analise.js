@@ -446,6 +446,7 @@ i3GEO.analise = {
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
 			var temp;
+			pontosdistobj = [];
 			i3GEO.analise.medeArea.criaJanela();
 			if (g_tipoacao != "area"){
 				$i("mostraarea_calculo").innerHTML = "";
@@ -460,7 +461,7 @@ i3GEO.analise = {
 					if (g_areapixel < 0)
 					{alert("Nao e possivel calcular a area. Entre em contato com o administrador do sistema.");}
 					else{
-						alert("Clique no mapa para desenhar o poligono. Clique duas vezes para concluir");
+						$i("mostraarea_calculo").innerHTML = "Clique no mapa para desenhar o poligono. Clique duas vezes para concluir";
 						i3GEO.barraDeBotoes.ativaIcone("area");
 						g_tipoacao = "area";
 						i3GEO.desenho.criaContainerRichdraw();
@@ -553,42 +554,25 @@ i3GEO.analise = {
 				m = i3GEO.calculo.area(pontosdistobj,g_areapixel);
 				if($i("mostraarea_calculo"))
 				{$i("mostraarea_calculo").innerHTML = "<br>m2</b>= "+m.toFixed(2)+"<br><b>km2</b>= "+(m/1000000).toFixed(2)+"<br><b>ha</b>= "+(m/10000).toFixed(2);}
-				if (n > 3){
-				//var d = parseInt(i3GEO.util.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy));
-				//pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-				}
 				i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeArea.fechaJanela,"pontosArea");
 			}
 		},
 		/*
 		Function: movimento
 		
-		Realiza os cálculos e desenho da linha conforme o usuário movimenta o mouse
+		Realiza o desenho do poligono conforme o usuário movimenta o mouse
 		*/
 		movimento: function(){
 			var n,d,decimal,da;
 			if (g_tipoacao == "area"){
 				n = pontosdistobj.xpt.length;
 				if (n > 0){
-					//
-					//conforme a escala, os dados são arredondados
-					// 
-					d = i3GEO.calculo.distancia(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],objposicaocursor.ddx,objposicaocursor.ddy);
-					if (i3GEO.parametros.mapscale > 500000)
-					{d = parseInt(d,10);}
+					if(navm)
+					{i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhas[n-1],n);}
 					else{
-						d= d + "";
-						d = d.split(".");
-						decimal = d[1].substr(0,3);
-						d = d[0]+"."+decimal;
-						d = d * 1;
+						i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,1);
+						i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 					}
-					da = d + pontosdistobj.dist[n-1];
-					//
-					//desenha as linhas na tela com o objeto richdraw
-					//
-					if(navn){i3GEO.desenho.aplica("resizePoligono",pontosdistobj.linhastemp,0);}
-					i3GEO.desenho.aplica("resizeLinha",pontosdistobj.linhas[n-1],n);
 				}
 			}
 		}

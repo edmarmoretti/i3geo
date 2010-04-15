@@ -209,6 +209,7 @@ i3GEO.desenho = {
 					r.removeChild(elemento);
 					dy = objposicaocursor.imgy;
 					dx = objposicaocursor.imgx - (i3GEO.parametros.w/2);
+					//alert(pontosdistobj.ximg[n-1])
 					i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2)-1,pontosdistobj.yimg[n-1]-3,dx,dy-3);
 				}
 				catch(erro){

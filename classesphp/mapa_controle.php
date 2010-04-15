@@ -2455,7 +2455,7 @@ Seleção por poligono (chamado via POST).
 		//esta operação é chamada com POST via cpaint
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
-		$retorno = selecaoPoli();
+		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
 		restauraCon($map_file,$postgis_mapa);
 	break;
 /*
