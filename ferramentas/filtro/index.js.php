@@ -70,7 +70,7 @@ i3GEOF.filtro = {
 			};
 			new YAHOO.widget.Button(
 				"i3GEOfiltrobotao1",
-				{onclick:{fn: i3GEOF.filtro.aplicaFiltro}}
+				{onclick:{fn: function(){i3GEOF.filtro.aplicaFiltro("nao");}}}
 			);
 			new YAHOO.widget.Button(
 				"i3GEOfiltrobotao2",
@@ -271,7 +271,7 @@ i3GEOF.filtro = {
 	*/
 	pegaFiltro: function(){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEO.temaAtivo,
-			cp = new cpaint()
+			cp = new cpaint(),
 			temp = function(retorno){
 				if(retorno.data !== undefined)
 				{$i("i3GEOfiltrofiltro").value = retorno.data;}
@@ -351,9 +351,10 @@ i3GEOF.filtro = {
 					}
 				}
 			}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEO.temaAtivo+"&filtro="+filtro+"&testa="+testa;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
 			cp = new cpaint();
 			cp.set_response_type("JSON");
+			cp.set_transfer_mode('POST');
 			if (testa === "sim"){
 			 	temp = function(retorno){
 			 		$i("i3GEOfiltroguia3obj").innerHTML = "<img src="+retorno.data+" />";
@@ -366,7 +367,7 @@ i3GEOF.filtro = {
 			 		i3GEOF.filtro.aguarde.visibility = "hidden";
 			 	};		
 			}
-			cp.call(p,"insereFiltro",temp);
+			cp.call(p,"insereFiltro",temp,"tema="+i3GEO.temaAtivo,"filtro="+filtro,"testa="+testa);
 		}
 		catch(e){
 			alert("Erro: "+e);

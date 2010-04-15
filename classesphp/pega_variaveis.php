@@ -82,13 +82,16 @@ if (isset($_POST))
 				{	
 					//echo $parametro_;
 					$p_ = explode("=",$parametro_);
-					if($p_[0] != "")
-					eval("\$".$p_[0]."='".(strip_tags($p_[1]))."';");	
+					$parametro = $p_[0];
+					$p_ = array_slice($p_, 1, count($p_));;
+					$valor = implode("=",$p_);
+					//echo $valor."<br>";
+					if($parametro != "")
+					eval("\$".$parametro."='".(strip_tags($valor))."';");	
 				}
 			}	
 			
 		}
-		
 	}
 }
 ?>

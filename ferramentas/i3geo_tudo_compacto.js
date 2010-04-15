@@ -6415,8 +6415,10 @@ i3GEO.php = {
 	procurartemas: function(funcao,procurar,locaplic){
 		if(arguments.length === 2)
 		{locaplic = i3GEO.configura.locaplic;}
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&map_file=&procurar="+procurar+"&idioma="+i3GEO.idioma.ATUAL;
-		cpJSON.call(p,"procurartemas",funcao);	
+		try{
+			var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&map_file=&procurar="+procurar+"&idioma="+i3GEO.idioma.ATUAL;
+			cpJSON.call(p,"procurartemas",funcao);
+		}catch(e){}
 	},
 	/*
 	Function: adtema

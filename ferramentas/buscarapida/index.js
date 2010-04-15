@@ -180,7 +180,9 @@ i3GEObuscaRapida = {
 		$i(i3GEObuscaRapida.idresultado).innerHTML = ins
 		aguarde("none")
 		if(i3GEObuscaRapida.buscaemtemas){	
-			window.parent.i3GEO.php.procurartemas(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
+			try{
+				window.parent.i3GEO.php.procurartemas(i3GEObuscaRapida.resultadoTemas,i3GEObuscaRapida.palavra,i3GEObuscaRapida.locaplic);	
+			}catch(e){}
 		}
 	},
 	/*
