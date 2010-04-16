@@ -11,13 +11,13 @@ Para a versão 4.3
 	O banco de dados de administração sofreu as seguintes alterações (vc deve incluir as novas colunas
 	para que o i3Geo funcione corretamente:
 	
-	- acréscimo das colunas en,es,it nas tabelas
+	- acréscimo das colunas en,es,it nas tabelas (tipo texto)
 		i3geoadmin_menus
 		i3geoadmin_temas
 		i3geoadmin_grupos
 		i3geoadmin_subgrupos
 
-	- acréscimo da coluna kmz_tema em i3geoadmin_temas
+	- acréscimo da coluna kmz_tema em i3geoadmin_temas (tipo texto)
 		
 	Foi incluida uma nova opção que permite ao usuário alterar o SQL que faz o acesso aos dados em
 	um LAYER (elemento DATA do mapfile). Mostrar ou não essa opção é controlado por um metadata
