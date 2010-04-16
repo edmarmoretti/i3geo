@@ -74,7 +74,7 @@ if ($tipo == "")
 {
 	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"></head><script>function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}</script><body >';
 	echo '<form action="testamapfile.php" method="post" id=f >';
-	echo 'Nome do arquivo map existente no diretório i3geo/temas (complete com "testamapfile.php?map=todos" na URL para testar todos de uma só vez):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit">';
+	echo 'Nome do arquivo map existente no diretório i3geo/temas. Exemplo para uso manual da URL: testamapfile.php?map=biomashp (utilize "testamapfile.php?map=todos" na URL para testar todos de uma só vez):<br><br><input id=nomemap class=digitar type="file" size=20 ><input id=map type="hidden" value="" name="map"><input type="button" onclick="roda()" class=executar value="Testar" size=10 name="submit">';
 	echo '<br>Mostra apenas a legenda? <input type=radio name=solegenda value=sim />sim <input type=radio name=solegenda value=nao CHECKED /> não<br></form></body></html>';
 }
 if (isset($map) && $map != "")
@@ -94,7 +94,7 @@ if (isset($map) && $map != "")
 			{
 				$temp = explode(".",$arq);
 				if($temp[1] == "map")
-				verifica($arq);
+				verifica($arq,$solegenda);
 				else
 				{echo "<br>Arquivo <i>$map</i> não é válido. <br>";}
 			}
