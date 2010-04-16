@@ -50,6 +50,7 @@ i3GEOF.converteMapaWS = {
 		try{
 			var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o <a href="http://www.openjump.org" target=blank >OpenJump</a> ou <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
 			'<p class="paragrafo" >O "web service" criado, utiliza o padr&atilde;o WMS, conforme definido pelo OGC. A disponibilidade do endere&ccedil;o &eacute; tempor&aacute;ria, permanecendo ativa apenas no dia em que foi criado.' +
+			'<p class="paragrafo" >O Web Map Context (WMC) pode ou não ser gerado dependendo da configuração do servidor onde o i3Geo está instalado. <a href="'+endereco+'&service=WMS&request=GetContext&version=1.1.0" target=_blank >Clique para obter o Web Map Context</a>'+
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
 			'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 			endereco + '</textarea></p>' +

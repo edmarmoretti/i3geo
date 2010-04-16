@@ -292,10 +292,10 @@ it:"Apri immagine"
 }],
 "u20": [
 {
-pt: "Converter em WMS",
-en:"Convert to WMS",
-es:"Convertir en WMS",
-it:"Converti in WMS"
+pt: "Converter em WMS e WMC",
+en:"Convert to WMS and WMC",
+es:"Convertir en WMS y WMC",
+it:"Converti in WMS e WMC"
 }],
 "u20a": [
 {
