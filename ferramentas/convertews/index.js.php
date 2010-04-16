@@ -46,17 +46,17 @@ i3GEOF.converteMapaWS = {
 	divid {String} - id do div que receberá o conteudo HTML da ferramenta
 
 	*/
-	html:function(divid,endereco){
+	html:function(divid,enderecowms,enderecowmc){
 		try{
 			var ins = '<p class="paragrafo" >Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o <a href="http://www.openjump.org" target=blank >OpenJump</a> ou <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
 			'<p class="paragrafo" >O "web service" criado, utiliza o padr&atilde;o WMS, conforme definido pelo OGC. A disponibilidade do endere&ccedil;o &eacute; tempor&aacute;ria, permanecendo ativa apenas no dia em que foi criado.' +
-			'<p class="paragrafo" >O Web Map Context (WMC) pode ou não ser gerado dependendo da configuração do servidor onde o i3Geo está instalado. <a href="'+endereco+'&service=WMS&request=GetContext&version=1.1.0" target=_blank >Clique para obter o Web Map Context</a>'+
+			'<p class="paragrafo" >O Web Map Context (WMC) pode ou não ser gerado dependendo da configuração do servidor onde o i3Geo está instalado. <a href="'+enderecowmc+'" target=_blank >Clique para obter o Web Map Context</a>'+
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
 			'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
-			endereco + '</textarea></p>' +
+			enderecowms + '</textarea></p>' +
 			'<p class="paragrafo" >Para testar, utilize: ' +
-			'<a href="' + endereco + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >' +
-			endereco + '&request=getcapabilities&version=1.1.0&service=wms';
+			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >' +
+			enderecowms + '&request=getcapabilities&version=1.1.0&service=wms';
 			$i(divid).innerHTML += ins;
 			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
 		}catch(e){alert(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
@@ -90,16 +90,18 @@ i3GEOF.converteMapaWS = {
 		i3GEOF.converteMapaWS.aguarde = $i("i3GEOF.converteMapaWS_imagemCabecalho").style;
 		i3GEOF.converteMapaWS.aguarde.visibility = "visible";
 		temp = function(retorno){
-			var endereco = "Ocorreu um erro ao criar o WMS";
+			var enderecowms = "Ocorreu um erro ao criar o WMS",
+				enderecowmc = "Ocorreu um erro ao criar o WMS";
 			if (retorno.data != undefined){
-				endereco = window.location.protocol+"//"+window.location.host+retorno.data+"&"+retorno.data+"&";
+				enderecowms = window.location.protocol+"//"+window.location.host+retorno.data.wms+"&"+retorno.data.wms+"&";
+				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&"+retorno.data.wmc+"&";
 			}
-			i3GEOF.converteMapaWS.html(divid,endereco);
+			i3GEOF.converteMapaWS.html(divid,enderecowms,enderecowmc);
 		};
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=convertews&h="+window.location.host;
+		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc&h="+window.location.host;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"converteWS",temp);		
+		cp.call(p,"converteWMSWMC",temp);		
 	}
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

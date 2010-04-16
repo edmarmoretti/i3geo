@@ -668,6 +668,21 @@ Converte o mapa atual em um wms.
 		$retorno = $m->converteWS($locmapserv,$h);
 	break;
 /*
+Valor: CONVERTEWMSWMC
+
+Converte o mapa atual em um wms e wmc.
+
+<converteWMC()>
+*/
+	case "CONVERTEWMSWMC":
+		include_once("classe_mapa.php");
+		$m = new Mapa($map_file);
+		if(!isset($h)){$h = "";}
+		$wms = $m->converteWS($locmapserv,$h);
+		$wmc = $m->converteWMC($locmapserv,$h);
+		$retorno = array("wms"=>$wms,"wmc"=>$wmc);
+	break;
+/*
 Valor: QUERYMAPCOR
 
 Altera a cor de seleção.

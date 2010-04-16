@@ -1227,7 +1227,9 @@ Transforma o mapa atual em um web service.
 O novo map file é armazenado no mesmo diretório do map file original.
 
 Parametros:
+
 $locmapserv - localização do CGI do mapserver
+
 $h - host name
 
 Return:
@@ -1240,11 +1242,11 @@ Endereço do WMS
 		$nomeurl = $locmapserv."?map=".$nomews;
 		$w = $this->mapa->web;
 		$w->set("template","");
-		// adiciona os parametros no nivel do mapa
+		//adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","I3Geo");
 		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
 		$this->mapa->setmetadata("wms_srs","EPSG:4291");
-		$this->mapa->setmetadata("wms_getcontext_enabled","1");
+		//$this->mapa->setmetadata("wms_getcontext_enabled","1");
 		foreach ($this->layers as $layer)
 		{
 			$n = pegaNome($layer);
@@ -1253,7 +1255,7 @@ Endereço do WMS
 			$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
 			//$layer->setmetadata("wms_getcontext_enabled","1");
 			$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
-			$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+			//$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
 			$layer->set("status","ON");
 			$layer->set("template","none.htm");
 			$layer->setmetadata("gml_include_items","all");
@@ -1267,6 +1269,77 @@ Endereço do WMS
 		$this->mapa->save($nomews);
 		return($nomeurl);
 	}
+/*
+Method: converteWMC
+
+Transforma o mapa atual em um Web Map Context.
+
+O novo map file é armazenado no mesmo diretório do map file original.
+
+Parametros:
+
+$locmapserv - localização do CGI do mapserver
+
+$h - host name
+
+Return:
+
+Endereço do WMC
+*/
+	function converteWMC($locmapserv,$h)
+	{
+		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+		$protocolo = $protocolo[0];
+		$protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
+		$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+		$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
+
+		$nomews = str_replace(".map","wmc.map",$this->arquivo);
+		$nomeurl = $locmapserv."?map=".$nomews;
+		$w = $this->mapa->web;
+		$w->set("template","");
+		// adiciona os parametros no nivel do mapa
+		$this->mapa->setmetadata("wms_title","I3Geo");
+		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+		$this->mapa->setmetadata("wms_srs","EPSG:4291");
+		$this->mapa->setmetadata("wms_getcontext_enabled","1");
+		foreach ($this->layers as $layer)
+		{
+			$n = pegaNome($layer);
+			$layer->setmetadata("wms_title",$n);
+			$codigo = $layer->getmetadata("nomeoriginal");
+			if($codigo == "")
+			{$codigo = $layer->name;}
+			$layer->setmetadata("wms_server_version","1.0.0");
+			$layer->setmetadata("wms_name",$codigo);
+			$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
+			//$layer->setmetadata("wms_getcontext_enabled","1");
+			$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
+			$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+			$layer->set("status","ON");
+			$layer->set("template","none.htm");
+			$layer->setmetadata("gml_include_items","all");
+			$layer->set("dump",MS_TRUE);
+			$c = $layer->getclass(0);
+			if ($c->name == "")
+			{$c->name = " ";}
+			if($layer->connectiontype != "WS_WMS" && $layer->getmetadata("permiteogc") == "" && $layer->getmetadata("TEMALOCAL") == ""){
+				if(ms_GetVersionInt() > 50201)
+				{$layer->setconnectiontype(MS_WMS);}
+				else
+				{$layer->set("connectiontype",MS_WMS);}
+				$data = $urli3geo."/ogc.php?tema=".$codigo;
+				$layer->set("connection",$data);
+				$layer->set("data","");
+				if(file_exists("../temas/".$codigo.".map"))
+				{$layer->setmetadata("wms_onlineresource",$data);}
+			}
+		}
+		$eb = $this->mapa->scalebar;
+		$eb->set("status",MS_OFF);
+		$this->mapa->save($nomews);
+		return($nomeurl."&service=WMS&request=GetContext&version=1.1.0");
+	}	
 /*
 Method: adicionaTemaGeoRSS
 
