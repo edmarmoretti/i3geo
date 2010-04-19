@@ -69,15 +69,15 @@ MAP
 	END
 	
 	OUTPUTFORMAT
-		#utilizado quando é incluido um layer do tipo raster
 		NAME png2
 		MIMETYPE image/png
-		DRIVER AGG/PNG
+		DRIVER GD/PNG
 		EXTENSION png
 		IMAGEMODE PC256
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
+	
 	PROJECTION
 		"init=epsg:4291"
 	END
