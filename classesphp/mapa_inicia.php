@@ -251,6 +251,7 @@ function iniciaMapa()
 	$res .= "var kmlurl ='".$kmlurl."';";
 	$res .= "var mensagemInicia ='".$mensagemInicia."';";
 	$res .= "var interfacePadrao ='".$interfacePadrao."';";
+	$res .= "var erro ='';";	
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	//$cp->set_data(array("variaveis"=>$res,"temas"=>$temas));

@@ -327,15 +327,18 @@ Include:
 			{$imgo = @$this->mapa->draw();}
 			else
 			{$imgo = @$this->mapa->drawQuery();}
-	
+			$mensagemErro = "";
 			$error = ms_GetErrorObj();
 			while($error && $error->code != MS_NOERR)
 			{
-				printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+				//printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+				$mensagemErro .= $error->routine." ".$error->message;
 				$error = $error->next();
 			}
 			ms_ResetErrorList();			
-		
+			$mensagemErro = str_replace("'"," ",$mensagemErro);
+			$mensagemErro = str_replace(":"," ",$mensagemErro);
+			$mensagemErro = str_replace("\n"," ",$mensagemErro);
 			$nomer = ($imgo->imagepath)."mapa".$nome.".png";
 			$imgo->saveImage($nomer);
 			
@@ -377,7 +380,7 @@ Include:
 		{
 			$nomer = $locmapserv."?map=".$this->arquivo."&mode=map&".nomeRandomico();
 		}
-		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."'";
+		$res = "g_locidentifica='".$locidentifica."';g_sistemas='".$locsistemas."';var g_celula=".$this->mapa->cellsize.";var mapscale = ".$this->mapa->scale.";var mapres=".$this->mapa->resolution.";var mapcellsize=".$this->mapa->cellsize.";var mapexten='".$ext."';var mapimagem='".$nomer."';var mapwidth=".$imgo->width.";var mapheight=".$imgo->height.";var mappath='".$imgo->imagepath."';var mapurl='".$imgo->imageurl."';var erro='".$mensagemErro."'";
 		//$imgo->free();
 		return $res;
 	}

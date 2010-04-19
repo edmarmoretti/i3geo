@@ -1,0 +1,24 @@
+<GDAL_WMS>
+    <Service name="TMS">
+        <ServerUrl>http://tile.openstreetmap.org/${z}/${x}/${y}.png</ServerUrl>
+		<ImageFormat>image/png</ImageFormat>
+
+    </Service>
+    <DataWindow>
+        <UpperLeftX>-105.003889</UpperLeftX>
+        <UpperLeftY>40.412778</UpperLeftY>
+        <LowerRightX>-104.98333</LowerRightX>
+        <LowerRightY>40.399722</LowerRightY>
+        <SizeX>580</SizeX>
+        <SizeY>480</SizeY>
+        <TileLevel>19</TileLevel>
+	<TileCountX>1</TileCountX>
+	<TileCountY>1</TileCountY>
+        <YOrigin>top</YOrigin>
+    </DataWindow>
+    <Projection>EPSG:4326</Projection>
+    <BlockSizeX>256</BlockSizeX>
+    <BlockSizeY>256</BlockSizeY>
+    <BandsCount>3</BandsCount>
+    <Cache />
+</GDAL_WMS>

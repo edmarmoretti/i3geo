@@ -486,7 +486,9 @@ i3GEO = {
 			}
 			return;
 		};
-		try{eval(retorno.data.variaveis);}
+		try{
+			eval(retorno.data.variaveis);
+		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
 			erro.call();
@@ -503,6 +505,8 @@ i3GEO = {
 			mapexten = "";
 			//transforma o retorno em variáveis
 			eval(retorno.data.variaveis);
+			if(erro != "")
+			{alert(erro);}			
 			//
 			//o try aqui é necessário pois na interface googlemaps os parâmetros retorno.data.variaveis não são gerados completamente
 			//

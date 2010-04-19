@@ -116,10 +116,10 @@ echo "<tr><td>&nbsp;</td><td>&nbsp;</td><td></td></tr>";
 echo "<tr><td><b>Número de tags: </b></td><td>".count($ntags)."</td><td></td></tr>";
 
 echo "</table>";
-echo "<p><b>10 temas mais acessados</b></p>";
+echo "<p><b>Aceesos por tema</b></p>";
 arsort($temasacessos);
 $temasacessos2 = array_keys($temasacessos);
-for($i=0;$i<10;$i++)
+for($i=0;$i<=count($temasacessos2);$i++)
 {
 	if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "UTF-8")
 	echo "<p>".utf8_decode($temasacessos2[$i])." - ".$temasacessos[$temasacessos2[$i]]."</p>";

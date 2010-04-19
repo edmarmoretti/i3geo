@@ -5,6 +5,9 @@ Para a versão 4.4
 	Verifique se o PHP está configurado (php.ini) para permitir a passagem de parâmetros por referência
 	(dependendo da versão do PHP, esse parâmetro é definido como "Off" por default):
 	allow_call_time_pass_reference = On
+	
+	Foi acrescentado um novo LAYER em i3geo/aplicmpa/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
+	queira que essas camadas novas apareçam, basta removê-las desses arquivos.
 -------------------------------------------------------------------------------------------------
 Para a versão 4.3
 
