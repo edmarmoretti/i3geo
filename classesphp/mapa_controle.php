@@ -2711,7 +2711,7 @@ function redesenhaMapa()
 	//na interface googlemaps não é necessário gerar a imagem
 	//
 	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers"))
-	{$imagem = "var mapimagem='';var mapexten=''";}
+	{$imagem = "var erro = '';var mapimagem='';var mapexten=''";}
 	else{
 		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
 		if ($imagem == "erro")
@@ -2721,7 +2721,7 @@ function redesenhaMapa()
 			$m = New Mapa($map_file);
 			$par = $m->parametrosTemas();
 			if (isset($utilizacgi) && strtolower($utilizacgi) == "sim")
-			{$imagem = "var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
+			{$imagem = "var erro = '';var mapimagem='".$locmapserv."?map=".$map_file."&mode=map&".nomeRandomico()."'";}
 			else
 			{$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem);}
 		}
@@ -2732,7 +2732,7 @@ function redesenhaMapa()
 	if (($par == "") || ($imagem == ""))
 	{$retorno = "erro";}
 	else
-	{$retorno = array("variaveis"=>($mensagens.";".$imagem.";var tempo=".(microtime(1) - $tempo)),"temas"=>$par);}
+	{$retorno = array("variaveis"=>($mensagens.";".$imagem.";var erro = '';var tempo=".(microtime(1) - $tempo)),"temas"=>$par);}
 	cpjson($retorno);
 }
 ?>
