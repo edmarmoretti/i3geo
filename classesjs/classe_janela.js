@@ -205,7 +205,7 @@ i3GEO.janela = {
 		{$i("i3geo").removeChild($i(id+"_c"));}
 		if($i(id))
 		{$i("i3geo").removeChild($i(id));}
-		ins = '<div id="'+id+'_cabecalho" class="hd" >';
+		ins = '<div id="'+id+'_cabecalho" class="hd" style="background-color:white;">';
 		ins += "<img id='"+id+"_imagemCabecalho' style='position:absolute;left:3px;top:2px;visibility:hidden;' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
 		ins += texto;
 		if(funcaoMinimiza)
@@ -261,12 +261,8 @@ i3GEO.janela = {
 		}
 		if($i(id+"_c"))
 		{$i(id+"_c").style.zIndex = 10000;}
-
-		if(i3GEO.Interface.ATUAL==="googleearth"){classe = "bd";}
-		temp = $i(id+'_cabecalho');
-		temp.className = classe;
 		if(funcaoCabecalho)
-		{temp.onclick = funcaoCabecalho;}
+		{$i(id+'_cabecalho').onclick = funcaoCabecalho;}
 		if(funcaoMinimiza)
 		{$i(id+"_minimizaCabecalho").onclick = funcaoMinimiza;}
 		YAHOO.util.Event.addListener(YAHOO.janelaDoca.xp.panel.close, "click", i3GEO.janela.fecha,YAHOO.janelaDoca.xp.panel,{id:id},true);
