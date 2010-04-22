@@ -2699,19 +2699,24 @@ tipoimagem {String} - tipo de imagem que será gerada nenhum|cinza|sepianormal|se
 */
 function redesenhaMapa()
 {
-	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface;
+	global $tempo,$map_file,$locsistemas,$locidentifica,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}
+	if($interface == "googleearth" && $mapexten != ""){
+		include_once("classe_navegacao.php");
+		$m = new Navegacao($map_file);
+		$m->mudaExtensao($mapexten);
+		$m->salva();
+	}
 	include_once("classe_mapa.php");
 	$m = New Mapa($map_file);
-
 	$par = $m->parametrosTemas();
 	//
 	//na interface googlemaps não é necessário gerar a imagem
 	//
-	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers"))
-	{$imagem = "var erro = '';var mapimagem='';var mapexten=''";}
+	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers" || $interface == "googleearth"))
+	{$imagem = "var erro = '';var mapimagem='';var mapexten='';var mapres = ''";}
 	else{
 		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
 		if ($imagem == "erro")

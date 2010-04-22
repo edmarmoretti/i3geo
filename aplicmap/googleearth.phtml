@@ -16,7 +16,7 @@ include_once("../ms_configura.php");
 </style>
 <title>MMA - Mapa interativo</title>
 <script type="text/javascript" src="http://www.google.com/jsapi?key=<?php echo $googleApiKey; ?>"></script>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 </head>
 <body id=i3geo >
 <center>
@@ -54,7 +54,6 @@ include_once("../ms_configura.php");
 </table>
 <a style=text-align:center;color:white href="mailto:edmar.moretti@mma.gov.br">Cr&iacute;ticas e sugest&otilde;es</a>
 </center>
-<!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*
 Title: Google Earth (experimental)
@@ -68,20 +67,58 @@ Exemplo:
 http://localhost/i3geo/ms_criamapa.php?interface=googleearth.phtml
 
 */
-g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
-g_barraFerramentas1 = "nao"
-g_barraFerramentas2 = "sim"
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 g_mapaRefDisplay = "none"
 g_janelaMen = "nao";
 g_mostraRosa = "nao"
 g_opcoesTemas = "sim";
-g_3dmap = "3dmap.map";
-i3GEO.interface.ATUAL = "googleearth";
-i3GEO.interface.IDCORPO = "contemImg";
-
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+i3GEO.Interface.ATUAL = "googleearth";
+i3GEO.Interface.IDCORPO = "contemImg";
+janelaFerramentasGE()
 i3GEO.cria();
 i3GEO.inicia();
+
+/*janela de ferramentas*/
+function janelaFerramentasGE(){
+	titulo = "Ferramentas";
+	cabecalho = function(){};
+	minimiza = function(){
+		i3GEO.janela.minimiza("i3GEOF.ferramentasGE");
+	};
+	var janela = i3GEO.janela.cria(
+		"200px",
+		"70px",
+		"",
+		"",
+		"",
+		titulo,
+		"i3GEOF.ferramentasGE",
+		false,
+		"hd",
+		cabecalho,
+		minimiza
+	);
+	var ins  = '' +
+	'<div style="display:inline;background-color:rgb(250,250,250);">'+
+	'	<img title="info" alt="" src="../imagens/branco.gif" id="identifica"/>'+
+	'</div>'+
+	'<div style="display:inline;background-color:rgb(250,250,250);">'+
+	'	<img title="info" alt="" src="../imagens/branco.gif" id="identificaBalao"/>'+
+	'</div>'+
+	'<div style="display:inline;background-color:rgb(250,250,250);">'+
+	'	<img title="mede" alt="" src="../imagens/branco.gif" id="mede"/>'+
+	'</div>'+
+	'<div style="display:inline;background-color:rgb(250,250,250);">'+
+	'	<img title="extensao" alt="" src="../imagens/branco.gif" id="exten"/>'+
+	'</div>';
+	$i(janela[2].id).innerHTML = ins;
+	i3GEO.barraDeBotoes.BOTAOPADRAO = "";
+	i3GEO.barraDeBotoes.ativaBotoes();
+	i3GEO.Interface.googleearth.aguarde = $i("i3GEOF.ferramentasGE_imagemCabecalho").style;
+}
+
 </script>
 
 </body>

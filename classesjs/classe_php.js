@@ -605,6 +605,10 @@ i3GEO.php = {
 				i3GEO.Interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				i3GEO.Interface.googleearth.redesenha();
+    			i3GEO.janela.fechaAguarde();
+			}
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
@@ -1028,6 +1032,11 @@ i3GEO.php = {
 	corpo: function(funcao,tipoimagem){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
+		//recalcula a extensão geográfica do parametro i3GEO.parametros.mapexten
+		if(i3GEO.Interface.ATUAL === "googleearth"){
+			i3GEO.Interface.googleearth.recalcPar();
+			p += "&mapexten="+i3GEO.parametros.mapexten;
+		}
 		cpJSON.call(p,"corpo",funcao);	
 	},
 	/*

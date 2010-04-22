@@ -87,6 +87,8 @@ i3GEO.desenho = {
 			yimg: [],
 			linhas: []
 		};
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{return;}
 		try{
 			var divgeo,renderer;
 			divgeo = i3GEO.desenho.criaDivContainer();

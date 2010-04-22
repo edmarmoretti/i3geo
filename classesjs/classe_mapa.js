@@ -647,6 +647,8 @@ i3GEO.mapa = {
 			{return;}
 			if(i3GEO.Interface.ATUAL==="padrao")
 			{$i("img").style.cursor = "wait";}
+			if(i3GEO.Interface.ATUAL == "googleearth")
+			{i3GEO.Interface.googleearth.aguarde.visibility = "visible";}
 			retorna = function(retorno){
 				var temp,rfes,n,balloon,i,mostra,res,temas,ntemas,titulo,tips,j,ntips,ins,r,ds,nds,s;
 				i = $i("i3geo_rosa");
@@ -713,13 +715,19 @@ i3GEO.mapa = {
 								$i(n).innerHTML += res;
 							}
 							else{
-								i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
-								i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
-								balloon = new Balloon();
-								balloon.delayTime = 0;
-								res = "<div style=text-align:left >"+res+"</div>";
-								balloon.showTooltip($i("marcaIdentifica"),res);
-								$i('marcaIdentifica').onclick = $i("closeButton").onclick;
+								if(i3GEO.Interface.ATUAL === "googleearth"){
+									//res = '<div style="text-align:left;" >'+res+'</div>';
+									i3GEO.Interface.googleearth.balao(res,objposicaocursor.ddx,objposicaocursor.ddy);
+								}
+								else{
+									i3GEO.util.criaPin('marcaIdentifica',i3GEO.configura.locaplic+"/imagens/grabber.gif","12px","12px");
+									i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
+									balloon = new Balloon();
+									balloon.delayTime = 0;
+									res = "<div style=text-align:left >"+res+"</div>";
+									balloon.showTooltip($i("marcaIdentifica"),res);
+									$i('marcaIdentifica').onclick = $i("closeButton").onclick;
+								}
 							}
 						}
 					}

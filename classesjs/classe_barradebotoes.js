@@ -134,7 +134,11 @@ i3GEO.barraDeBotoes = {
 	/*
 	Propriedade: LISTABOTOES
 	
-	Objeto com a lista de botões.
+	Objeto com a lista de botões e suas propriedades, como por exemplo, a função a ser executada ao se clicar no botão.
+	
+	Essa lista não indica quais os botões que serão inseridos. Para definir os botões que serão inseridos, inclua no HTML da interface
+	os botões desejados (veja em i3geo/exemplos). Se vc utilizar a opção i3GEO.barraDeBotoes.AUTO = true , os botões serão inseridos
+	automaticamente. Nesse caso, utilize a opção i3GEO.barraDeBotoes.INCLUIRBOTOES para indicar os botões desejados.
 	
 	Por default utiliza os botoes definidos em i3GEO.configura.funcoesBotoes.botoes
 	
@@ -142,6 +146,97 @@ i3GEO.barraDeBotoes = {
 	{JSON}
 	*/
 	LISTABOTOES: i3GEO.configura.funcoesBotoes.botoes,
+	/*
+	Propriedade: INCLUIBOTAO
+	
+	Objeto que indica quais os botões que serão inseridos na barra de botões 2.
+	
+	Essa opção só funciona se i3GEO.barraDeBotoes.AUTO = true
+	
+	Vc pode também alterar a ordem dos botoes.
+	
+	Default:
+	
+	INCLUIBOTAO: {
+	
+		identifica: true,
+		
+		identificaBalao: true,
+		
+		mede: true,
+		
+		area: true,
+		
+		imprimir: true,
+		
+		reinicia: true,
+		
+		exten: true,
+		
+		referencia: true,
+		
+		inserexy: true,
+		
+		textofid: true,
+		
+		selecao: true,
+		
+		google: true,
+		
+		buscafotos: true,
+		
+		wiki: true,
+		
+		metar: true,
+		
+		lentei: true,
+		
+		confluence: true,
+		
+		inseregrafico: true,
+		
+		v3d: true
+	}	
+	
+	Tipo:
+	{JSON}
+	*/
+	INCLUIBOTAO: {
+		identifica: true,
+		identificaBalao: true,
+		mede: true,
+		area: true,
+		imprimir: true,
+		reinicia: true,
+		exten: true,
+		referencia: true,
+		inserexy: true,
+		textofid: true,
+		selecao: true,
+		google: true,
+		buscafotos: true,
+		wiki: true,
+		metar: true,
+		lentei: true,
+		confluence: true,
+		inseregrafico: true,
+		v3d: true
+	},
+	/*
+	Propriedade: TEMPLATEBOTAO
+	
+	Template HTML que será utilizado na construção automática dos botões da barra 2.
+	
+	Utilize a string $$ para indicar onde será incluído o código do botão.
+	
+	Default:
+	
+	"<div style='display:inline;background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>"
+	
+	Tipo:
+	{string}
+	*/
+	TEMPLATEBOTAO: 	"",
 	/*
 	Propriedade: BOTAOPADRAO
 	
@@ -181,7 +276,6 @@ i3GEO.barraDeBotoes = {
 	Array com os objetos YAHOO.janelaBotoes.xp.panel criados
 	*/
 	BARRAS: [],
-
 	/*
 	Variavel: BOTAOCLICADO
 	
@@ -204,18 +298,21 @@ i3GEO.barraDeBotoes = {
 	icone {String} - id do icone que será ativado. Esse id é o mesmo definido em LISTABOTOES
 	*/
 	ativaIcone: function(icone){
-		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaIcone()");}
+		if(typeof(console) !== 'undefined')
+		{console.info("i3GEO.barraDeBotoes.ativaIcone()");}
 		if(i3GEO.Interface.ATUAL==="openlayers"){
-			try{
-				OLzoom.deactivate();
-			}
+			try
+			{OLzoom.deactivate();}
 			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
+				if(typeof(console) !== 'undefined')
+				{console.error(e);}
 			}
 		}
 		var estilo,temp,ist,cor,ko;
 		i3GEO.barraDeBotoes.BOTAOCLICADO = icone;
 		ko = i3GEO.barraDeBotoes.LISTABOTOES.length-1;
+
+		
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "padrao"){
 			if(ko >= 0){
 				do{
@@ -239,6 +336,7 @@ i3GEO.barraDeBotoes = {
 				}
 			}
 		}
+
 		if(i3GEO.barraDeBotoes.COMPORTAMENTO == "destacado"){
 			if(ko >= 0){
 				do{
@@ -286,7 +384,7 @@ i3GEO.barraDeBotoes = {
 					estilo.borderColor='black';
 					estilo.borderWidth="1px";
 				}
-				estilo.backgroundColor=cor;
+				estilo.backgroundColor = cor;
 			}
 		}
 	},
@@ -331,6 +429,8 @@ i3GEO.barraDeBotoes = {
 			}
 			while (b--);
 		}
+		if(padrao == "")
+		{i3GEO.barraDeBotoes.ativaIcone("");}
 	},
 	/*
 	Function: inicializaBarra
@@ -368,7 +468,9 @@ i3GEO.barraDeBotoes = {
 	*/
 	inicializaBarra:function(idconteudo,idconteudonovo,barraZoom,x,y){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.inicializaBarra()");}
-		var tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel;
+		if(i3GEO.barraDeBotoes.TEMPLATEBOTAO === "")
+		{i3GEO.barraDeBotoes.TEMPLATEBOTAO = "<div style='display:inline;background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='$$'/></div>";}
+		var tipo,mostra,numerobotoes = 0,i,temp,elementos,nelementos = 0,e,wj,recuo,novoel,alturadisponivel,n,chaves,re;
 		if(i3GEO.barraDeBotoes.AUTO === true){
 			if(idconteudo === "barraDeBotoes1"){
 				novoel = document.createElement("div");
@@ -394,84 +496,15 @@ i3GEO.barraDeBotoes = {
 				novoel.id = "barraDeBotoes2";
 				temp = "<table style='width:100%'><caption style='text-align:center'>&nbsp;</caption>"+
 				"	<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='sobeferramentas'/></td></tr>"+
-				"	</table>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:2px;'>&nbsp;</p>"+
-				"		<img title='identifica' alt='identifica' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='identifica'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='info' alt='info' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='identificaBalao'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='mede' alt='mede' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='mede'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='area' alt='area' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='area'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='imprimir' alt='imprimir' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='imprimir'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='reinicia' alt='reinicia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='reinicia'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='extensao' alt='extensao' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='exten'/>"+
-				"	</div>        "+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='referencia' alt='referencia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='referencia'/>"+
-				"	</div>        "+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='insere xy' alt='insere xy' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='inserexy'/>"+
-				"	</div> "+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='texto' alt='texto' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='textofid'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='selecao' alt='selecao' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='selecao'/>"+
-				"	</div>"+
-				"	<div style='display:inline;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='google' alt='google' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='google'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='fotos' alt='fotos' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='buscafotos'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='busca na wikipedia' alt='busca na wikipedia' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='wiki'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='metar'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img title='lente' alt='lente' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='lentei'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='confluencias' alt='confluencias' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='confluence'/>"+
-				"	</div>"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='Insere gráficos' alt='Insere gráficos' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='inseregrafico'/>"+
-				"	</div>	"+
-				"	<div style='display:none;background-color:rgb(250,250,250);'>"+
-				"		<p style='font-size:4px;'>&nbsp;</p>"+
-				"		<img  title='3d' alt='3d' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='v3d'/>"+
-				"	</div>"+
-				"  <table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
+				"	</table>";
+				chaves = i3GEO.util.listaChaves(i3GEO.barraDeBotoes.INCLUIBOTAO);
+				n = chaves.length;
+				for(i=0;i<n;i++){
+					if(eval("i3GEO.barraDeBotoes.INCLUIBOTAO."+chaves[i]) == true){
+						temp += i3GEO.barraDeBotoes.TEMPLATEBOTAO.replace("$$",chaves[i]);
+					}
+				}
+				temp += "  <table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
 				novoel.innerHTML = temp;
 				document.body.appendChild(novoel);
 			}

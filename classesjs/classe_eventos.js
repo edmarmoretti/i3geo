@@ -257,7 +257,7 @@ i3GEO.eventos = {
 			}
 		}
 		catch(e){
-			if(typeof(console) !== 'undefined'){"debug executaEventos "+console.error(e);}
+			if(typeof(console) !== 'undefined'){console.error(e);}
 		}
 	},
 	/*
@@ -295,7 +295,7 @@ i3GEO.eventos = {
 	posicaoMouseMapa: function(e){
 		//
 		//os eventos da interface googlemaps são definidos em i3GEO.Interface
-		//se a interface for googlemaps ou openlayers, os eventos são controlados
+		//se a interface for googleearth, googlemaps ou openlayers, os eventos são controlados
 		//pelas respectivas apis
 		//caso contrário, o i3geo irá controlar os cálculos
 		//Entretanto, nas ferramentas que usam o richdraw (distância e área) o posicionamento
@@ -310,7 +310,7 @@ i3GEO.eventos = {
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		if (container !== "divGeometriasTemp"){
-			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "openlayers"))
+			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "openlayers") || (i3GEO.Interface.ATUAL === "googleearth"))
 			{return;}
 		}
 		if (!e){e = window.event;}
@@ -501,7 +501,7 @@ i3GEO.eventos = {
 			{doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;}
 		}
 		else{
-			var doc = document; 
+			var doc = document,
 			x,
 			y;
 		}

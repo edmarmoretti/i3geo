@@ -755,6 +755,10 @@ i3GEO.util = {
 		*/
 		cria:function(xi,yi,funcaoOnclick,container){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				i3GEO.Interface.googleearth.insereMarca("",xi,yi,container);
+				return;
+			}
 			try{
 				var novoel,i,novoimg,temp;
 				if(i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0)

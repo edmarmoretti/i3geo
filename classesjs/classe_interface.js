@@ -1041,6 +1041,8 @@ i3GEO.Interface = {
 	Cria o objeto i3GeoMap que pode receber os métodos da API do google Earth
 	*/
 	googleearth:{
+		POSICAOTELA: [0,0],
+		aguarde: "",
 		redesenha: function(){
 			try{
 				if(typeof(linki3geo) !== 'undefined')
@@ -1072,22 +1074,114 @@ i3GEO.Interface = {
   			i3GeoMap = object;
   			i3GeoMap.getWindow().setVisibility(true);
   			kmlUrl = i3GEO.configura.locaplic+"/pacotes/kmlmapserver/kmlservice.php?map="+i3GEO.parametros.mapfile+"&typename=estadosl&request=kml&mode=map&";
-  			linki3geo = i3GeoMap.createLink('');
+			linki3geo = i3GeoMap.createLink('');
           	linki3geo.setHref(kmlUrl);
           	nl = i3GeoMap.createNetworkLink('');
           	nl.setLink(linki3geo);
           	nl.setFlyToView(true);          
           	i3GeoMap.getFeatures().appendChild(nl);
-          	var options = i3GeoMap.getOptions();
+          	var options = i3GeoMap.getOptions(),
+				evento = function(e){
+					i3GEO.Interface.googleearth.recalcPar();
+					g_operacao = "";
+					g_tipoacao = "";	
+				};
           	options.setMouseNavigationEnabled(true);
 			options.setStatusBarVisibility(true);
 			options.setOverviewMapVisibility(true);
 			options.setScaleLegendVisibility(true);
           	i3GeoMap.getNavigationControl().setVisibility(i3GeoMap.VISIBILITY_SHOW);
+			google.earth.addEventListener(
+				i3GeoMap.getView(),
+				"viewchangeend",
+				function(e){
+					i3GEO.Interface.googleearth.recalcPar();
+					g_operacao = "";
+					g_tipoacao = "";	
+				}
+			);
+			i3GEO.Interface.googleearth.POSICAOTELA = YAHOO.util.Dom.getXY($i(i3GEO.Interface.IDCORPO));
+			google.earth.addEventListener(
+				i3GeoMap.getGlobe(),
+				'mousemove',
+				function(event){
+    				objposicaocursor = {
+						ddx: event.getLongitude(),
+						ddy: event.getLatitude(),
+						dmsx: 0,
+						dmsy: 0,
+						imgx: event.getClientX(),
+						imgy: event.getClientY(),
+						telax: event.getClientX() + i3GEO.Interface.googleearth.POSICAOTELA[0],
+						telay: event.getClientY() + i3GEO.Interface.googleearth.POSICAOTELA[1]
+					};
+					i3GEO.eventos.mousemoveMapa();
+				}
+    		);
+			google.earth.addEventListener(
+				i3GeoMap.getGlobe(),
+				'click',
+				function(event){
+    				if(i3GEO.Interface.googleearth.aguarde.visibility === "hidden"){
+						i3GEO.eventos.mousecliqueMapa();
+					}
+					else
+					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
+				}
+    		);
+		},
+		recalcPar: function(){
+			var bounds;
+			g_operacao = "";
+			g_tipoacao = "";
+			bounds = i3GeoMap.getView().getViewportGlobeBounds();
+    		i3GEO.parametros.mapexten = bounds.getWest()+" "+bounds.getSouth()+" "+bounds.getEast()+" "+bounds.getNorth();
+			//i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
 		},
 		falha: function()
 		{alert("Falhou. Vc precisa do plugin instalado");},
-		ativaBotoes: function(){}
+		ativaBotoes: function(){
+			i3GEO.barraDeBotoes.ativaBotoes();
+		},
+		balao: function(texto,ddx,ddy){
+			var placemark = i3GeoMap.createPlacemark('');
+			var point = i3GeoMap.createPoint('');
+			point.setLatitude(ddy);
+			point.setLongitude(ddx);
+			placemark.setGeometry(point);
+			var b = i3GeoMap.createHtmlStringBalloon('');
+			b.setContentString("<div style=text-align:left >"+texto+"</div>");
+			b.setFeature(placemark);
+			i3GeoMap.setBalloon(b);
+			i3GEO.Interface.googleearth.aguarde.visibility = "hidden";
+		},
+		insereMarca: function(texto,ddx,ddy,name){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.googleearth.insereMarca()");}
+			var placemark = i3GeoMap.createPlacemark('');
+			placemark.setName(name);
+			var point = i3GeoMap.createPoint('');
+			point.setLatitude(ddy);
+			point.setLongitude(ddx);
+			placemark.setGeometry(point);
+			if(texto != "")
+			{placemark.setDescription(texto);}
+			i3GeoMap.getFeatures().appendChild(placemark);
+		},
+		removePlacemark: function(nome){
+			var features = i3GeoMap.getFeatures(),
+				n = features.getChildNodes().getLength(),
+				i;
+			for(i=0;i<n;i++){
+				try{
+					if(features.getChildNodes().item(i).getName() == nome){
+						//features.removeChild(features.getChildNodes().item(i));
+						//remover.push(features.getChildNodes().item(i))
+						features.getChildNodes().item(i).setVisibility(false);
+					}
+				}
+				catch(e){}
+			}		
+		}
 	}
 };
 //

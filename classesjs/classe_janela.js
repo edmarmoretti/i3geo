@@ -320,9 +320,6 @@ i3GEO.janela = {
 	fecha: function(event){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.fecha()");}
 		var i,old,id;
-		if(i3GEO.Interface.ATUAL === "googleearth"){
-			//YAHOO.janelaDoca.xp.panel.moveTo(-2000,-2000);
-		}
 		//esconde o box do google
 		i3GEO.util.escondePin();
 		i3GEO.util.escondeBox();
@@ -407,7 +404,6 @@ i3GEO.janela = {
 	*/
 	abreAguarde: function(id,texto){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.janela.abreAguarde()");}
-		//YAHOO.log("abreAguarde", "janela");
 		var pos,index,contador;
 		document.body.style.cursor = "wait";
 		if($i(id+"_mask"))
@@ -440,8 +436,11 @@ i3GEO.janela = {
 		eval ('YAHOO.aguarde.'+id+'.show()');
 		if($i(id+"_mask"))
 		{$i(id+"_mask").style.zIndex=5000;}
-		if($i(id+"_c"))
-		{$i(id+"_c").style.zIndex=6000;}
+		if($i(id+"_c")){
+			$i(id+"_c").style.zIndex=6000;
+			$i(id+"_c").style.backgroundColor = "white";
+		}
+		
 		//YAHOO.log("Fim abreAguarde", "janela");	
 	},
 	/*
