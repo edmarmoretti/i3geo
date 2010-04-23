@@ -313,7 +313,7 @@ i3GEO.gadgets = {
 			if(!$i("i3geo_urlkml")){
 				i = $inputText(id,"280","i3geo_urlkml","kml url","40","");
 				ins = "<table><tr><td>Kml: "+i;
-				temp = 'i3GEO.Interface.googlemaps.adicionaKml(true);';
+				temp = 'i3GEO.Interface.adicionaKml();';
 				ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='"+temp+"' /></td></tr></table>";
 				$i(id).innerHTML = ins;
 			}

@@ -1114,6 +1114,83 @@ pt:"Não existe nenhuma camada com etiquetas ativas",
 en:"Não existe nenhuma camada com etiquetas ativas",
 es:"Não existe nenhuma camada com etiquetas ativas",
 it:"Não existe nenhuma camada com etiquetas ativas"
+}],
+"ge1":[
+{
+pt:"Navegação com o mouse",
+en:"Navegação com o mouse",
+es:"Navegação com o mouse",
+it:"Navegação com o mouse"
+}],
+"ge2":[
+{
+pt:"Barra de status",
+en:"Barra de status",
+es:"Barra de status",
+it:"Barra de status"
+}],
+"ge3":[
+{
+pt:"Mapa de referência",
+en:"Mapa de referência",
+es:"Mapa de referência",
+it:"Mapa de referência"
+}],
+"ge4":[
+{
+pt:"Escala e legenda",
+en:"Escala e legenda",
+es:"Escala e legenda",
+it:"Escala e legenda"
+}],
+"ge5":[
+{
+pt:"Atmosfera",
+en:"Atmosfera",
+es:"Atmosfera",
+it:"Atmosfera"
+}],
+"ge6":[
+{
+pt:"Grade de coordenadas",
+en:"Grade de coordenadas",
+es:"Grade de coordenadas",
+it:"Grade de coordenadas"
+}],
+"ge7":[
+{
+pt:"Luz do sol",
+en:"Luz do sol",
+es:"Luz do sol",
+it:"Luz do sol"
+}],
+"ge8":[
+{
+pt:"Limites políticos",
+en:"Limites políticos",
+es:"Limites políticos",
+it:"Limites políticos"
+}],
+"ge9":[
+{
+pt:"Construções em 3d",
+en:"Construções em 3d",
+es:"Construções em 3d",
+it:"Construções em 3d"
+}],
+"ge10":[
+{
+pt:"Estradas",
+en:"Estradas",
+es:"Estradas",
+it:"Estradas"
+}],
+"ge11":[
+{
+pt:"Terreno",
+en:"Terreno",
+es:"Terreno",
+it:"Terreno"
 }]
 
 };

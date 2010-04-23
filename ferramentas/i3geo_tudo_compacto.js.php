@@ -6064,6 +6064,10 @@ i3GEO.php = {
 				i3GEO.Interface.googlemaps.zoom2extent(ext);
     			i3GEO.janela.fechaAguarde();
 			}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				i3GEO.Interface.googleearth.redesenha();
+    			i3GEO.janela.fechaAguarde();
+			}
 			if(i3GEO.Interface.ATUAL === "openlayers"){
 				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
@@ -6487,6 +6491,11 @@ i3GEO.php = {
 	corpo: function(funcao,tipoimagem){
 		i3GEO.php.verifica();
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=corpo&tipoimagem="+tipoimagem+"&g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL;
+		//recalcula a extensão geográfica do parametro i3GEO.parametros.mapexten
+		if(i3GEO.Interface.ATUAL === "googleearth"){
+			i3GEO.Interface.googleearth.recalcPar();
+			p += "&mapexten="+i3GEO.parametros.mapexten;
+		}
 		cpJSON.call(p,"corpo",funcao);	
 	},
 	/*
@@ -6966,6 +6975,10 @@ i3GEO.util = {
 	
 	Cria uma árvore com base em um objeto contendo aspropriedades.
 	
+	No objeto com as propriedades, se "url" for igual a "", será incluído o texto original definido em "text".
+	
+	Caso contrário, o valor de "text" será traduzido com $trad(). Nesse caso, utilize em "text" o código definido em dicionario.js
+	
 	Parametros:
 	
 	titulo - {String} cabeçaljo da árvore
@@ -7005,7 +7018,10 @@ i3GEO.util = {
 		c = obj.propriedades.length;
 		for (i=0, j=c; i<j; i++){
 			linha = obj.propriedades[i];
-			conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
+			if(linha.url !== "")
+			{conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";}
+			else
+			{conteudo = linha.text;}
 			d = {html:conteudo};
 			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
 			temaNode.enableHighlight = false;
@@ -7419,6 +7435,10 @@ i3GEO.util = {
 		*/
 		cria:function(xi,yi,funcaoOnclick,container){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.util.insereMarca.cria()");}
+			if(i3GEO.Interface.ATUAL === "googleearth"){
+				i3GEO.Interface.googleearth.insereMarca("",xi,yi,container);
+				return;
+			}
 			try{
 				var novoel,i,novoimg,temp;
 				if(i3GEO.util.insereMarca.CONTAINER.toString().search(container) < 0)

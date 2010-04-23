@@ -146,6 +146,18 @@ i3GEO.Interface = {
 		{i3GEO.Interface.flamingo.redesenha();}
 	},
 	/*
+	Function: adicionaKml
+	
+	Aplica o método de adição de kml ao mapa conforme a interface atual
+	*/
+	adicionaKml: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.adicionaKml()");}
+		if(i3GEO.Interface.ATUAL === "googlemaps")
+		{i3GEO.Interface.googlemaps.adicionaKml("foo");}
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{i3GEO.Interface.googleearth.adicionaKml("foo");}
+	},
+	/*
 	Function: cria
 	
 	Cria ou altera os elementos HTML necessários para a interface
@@ -1041,6 +1053,30 @@ i3GEO.Interface = {
 	Cria o objeto i3GeoMap que pode receber os métodos da API do google Earth
 	*/
 	googleearth:{
+		/*
+		Propriedade: GADGETS
+		
+		Lista dos controles específicos da API do Google Earth que serão inseridos ou não no mapa
+		
+		Tipo:
+		{object}
+		
+		Default:
+		{}
+		*/
+		GADGETS: {
+		    setMouseNavigationEnabled:true,
+			setStatusBarVisibility:true,
+			setOverviewMapVisibility:true,
+			setScaleLegendVisibility:true,
+			setAtmosphereVisibility:true,
+			setGridVisibility:false,
+			getSun:false,
+			LAYER_BORDERS: true,
+			LAYER_BUILDINGS: false,
+			LAYER_ROADS: false,
+			LAYER_TERRAIN: true
+		},
 		POSICAOTELA: [0,0],
 		aguarde: "",
 		redesenha: function(){
@@ -1053,7 +1089,87 @@ i3GEO.Interface = {
 			}
 		},
 		cria: function(w,h){
-			var i,i3GeoMap3d,i3GeoMap;
+			var i,i3GeoMap3d,i3GeoMap,texto;
+			i3GEO.configura.listaDePropriedadesDoMapa = {
+				"propriedades": []
+			};
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setMouseNavigationEnabled == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setMouseNavigationEnabled(this.checked)'" ;
+			texto += "> "+$trad("ge1");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setStatusBarVisibility == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setStatusBarVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge2");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setOverviewMapVisibility == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setOverviewMapVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge3");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});				
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setScaleLegendVisibility == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setScaleLegendVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge4");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});				
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setAtmosphereVisibility == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setAtmosphereVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge5");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.setGridVisibility == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getOptions().setGridVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge6");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.getSun == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getSun().setVisibility(this.checked)'" ;
+			texto += "> "+$trad("ge7");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.LAYER_BORDERS == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BORDERS, this.checked)'" ;
+			texto += "> "+$trad("ge8");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.LAYER_BUILDINGS == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_BUILDINGS, this.checked)'" ;
+			texto += "> "+$trad("ge9");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.LAYER_ROADS == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_ROADS, this.checked)'" ;
+			texto += "> "+$trad("ge10");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+
+			texto = "<input type=checkbox style='vertical-align:top;cursor:pointer' ";
+			if(i3GEO.Interface.googleearth.GADGETS.LAYER_TERRAIN == true)
+			{texto += "CHECKED ";}
+			texto += " onclick='javascript:i3GeoMap.getLayerRoot().enableLayerById(i3GeoMap.LAYER_TERRAIN, this.checked)'" ;
+			texto += "> "+$trad("ge11");
+			i3GEO.configura.listaDePropriedadesDoMapa.propriedades.push({text: texto,url:""});			
+			
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				i3GeoMap3d = document.createElement("div");
@@ -1081,16 +1197,28 @@ i3GEO.Interface = {
           	nl.setFlyToView(true);          
           	i3GeoMap.getFeatures().appendChild(nl);
           	var options = i3GeoMap.getOptions(),
+				layerRoot = i3GeoMap.getLayerRoot(),
 				evento = function(e){
 					i3GEO.Interface.googleearth.recalcPar();
 					g_operacao = "";
 					g_tipoacao = "";	
 				};
-          	options.setMouseNavigationEnabled(true);
-			options.setStatusBarVisibility(true);
-			options.setOverviewMapVisibility(true);
-			options.setScaleLegendVisibility(true);
+
+			options.setMouseNavigationEnabled(i3GEO.Interface.googleearth.GADGETS.setMouseNavigationEnabled);
+			options.setStatusBarVisibility(i3GEO.Interface.googleearth.GADGETS.setStatusBarVisibility);
+			options.setOverviewMapVisibility(i3GEO.Interface.googleearth.GADGETS.setOverviewMapVisibility);
+			options.setScaleLegendVisibility(i3GEO.Interface.googleearth.GADGETS.setScaleLegendVisibility);
+			options.setAtmosphereVisibility(i3GEO.Interface.googleearth.GADGETS.setAtmosphereVisibility);
+			options.setGridVisibility(i3GEO.Interface.googleearth.GADGETS.setGridVisibility);
+			
+			layerRoot.enableLayerById(i3GeoMap.LAYER_BORDERS, i3GEO.Interface.googleearth.GADGETS.LAYER_BORDERS);
+			layerRoot.enableLayerById(i3GeoMap.LAYER_BUILDINGS, i3GEO.Interface.googleearth.GADGETS.LAYER_BUILDINGS);
+			layerRoot.enableLayerById(i3GeoMap.LAYER_ROADS, i3GEO.Interface.googleearth.GADGETS.LAYER_ROADS);
+			layerRoot.enableLayerById(i3GeoMap.LAYER_TERRAIN, i3GEO.Interface.googleearth.GADGETS.LAYER_TERRAIN);
+			i3GeoMap.getSun().setVisibility(i3GEO.Interface.googleearth.GADGETS.getSun);
+			
           	i3GeoMap.getNavigationControl().setVisibility(i3GeoMap.VISIBILITY_SHOW);
+			
 			google.earth.addEventListener(
 				i3GeoMap.getView(),
 				"viewchangeend",
@@ -1129,6 +1257,10 @@ i3GEO.Interface = {
 					{i3GEO.Interface.googleearth.aguarde.visibility = "hidden";}
 				}
     		);
+			i3GEO.Interface.googleearth.ativaBotoes();
+			i3GEO.gadgets.mostraInserirKml("inserirKml");
+			i3GEO.Interface.googleearth.adicionaListaKml();
+			
 		},
 		recalcPar: function(){
 			var bounds;
@@ -1141,7 +1273,27 @@ i3GEO.Interface = {
 		falha: function()
 		{alert("Falhou. Vc precisa do plugin instalado");},
 		ativaBotoes: function(){
+			var cabecalho = function(){};
+			var minimiza = function(){
+				i3GEO.janela.minimiza("i3GEOF.ferramentasGE");
+			};
+			var janela = i3GEO.janela.cria(
+				"200px",
+				"70px",
+				"",
+				"",
+				"",
+				"Ferramentas",
+				"i3GEOF.ferramentasGE",
+				false,
+				"hd",
+				cabecalho,
+				minimiza
+			);
+			i3GEO.barraDeBotoes.TEMPLATEBOTAO = '<div style="display:inline;background-color:rgb(250,250,250);"><img src="'+i3GEO.configura.locaplic+'/imagens/branco.gif" id="$$"/></div>&nbsp;';
+			i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","",false,"200","200",janela[2].id);			
 			i3GEO.barraDeBotoes.ativaBotoes();
+			i3GEO.Interface.googleearth.aguarde = $i("i3GEOF.ferramentasGE_imagemCabecalho").style;
 		},
 		balao: function(texto,ddx,ddy){
 			var placemark = i3GeoMap.createPlacemark('');
@@ -1174,13 +1326,185 @@ i3GEO.Interface = {
 			for(i=0;i<n;i++){
 				try{
 					if(features.getChildNodes().item(i).getName() == nome){
-						//features.removeChild(features.getChildNodes().item(i));
-						//remover.push(features.getChildNodes().item(i))
 						features.getChildNodes().item(i).setVisibility(false);
 					}
 				}
 				catch(e){}
 			}		
+		},
+		/*
+		Function: adicionaKml
+	
+		Insere no mapa uma camada KML com base na API do Google Earth
+	
+		As camadas adicionadas são crescentadas na árvore de camadas
+	
+		A lista de nomes dos objetos geoXml criados é mantida em i3GEO.mapas.GEOXML
+	
+		Parametros:
+	
+		pan {Boolean} - define se o mapa será deslocado para encaixar o KML
+	
+		url {String} - URL do arquivo KML. Se não for definido, a URL será obtida do INPUT com id = i3geo_urlkml (veja i3GEO.gadgets.mostraInserirKml)
+
+		titulo {string} - titulo que aparecerá na árvore. Se não for definido, será calculado aleatoriamente.
+		
+		ativo {boolean} - indica se a camada estará ativa ou não. Se não for definido, será considerado como true
+		*/
+		adicionaKml: function(pan,url,titulo,ativo){
+			var ngeoxml,i,zoom;
+			if(!$i("arvoreCamadasKml"))
+			{i3GEO.Interface.googleearth.criaArvoreKML();}
+			ngeoxml = "geoXml_"+i3GEO.mapa.GEOXML.length;
+			if(arguments.length === 1){
+				i = $i("i3geo_urlkml");
+				if(i)
+				{url = i.value;}
+				else
+				{url = "";}
+				titulo = ngeoxml;
+				ativo = false;
+			}
+			if(arguments.length === 2){
+				titulo = ngeoxml;
+				ativo = true;
+			}
+			if(arguments.length === 2)
+			{ativo = true;}
+			if(url === "")
+			{return;}
+			i3GEO.mapa.GEOXML.push(ngeoxml);
+			linki3geo = i3GeoMap.createLink('');
+          	linki3geo.setHref(url);
+			eval(ngeoxml+" = i3GeoMap.createNetworkLink('')");
+			eval(ngeoxml+".setLink(linki3geo)");
+			i3GEO.Interface.googleearth.adicionaNoArvoreGoogle(url,titulo,ativo,ngeoxml);
+		},
+		adicionaListaKml: function(){
+			var monta = function(retorno){
+				var raiz,nraiz,i;
+				raiz = retorno.data.canais;
+				nraiz = raiz.length;
+				for (i=0;i<nraiz; i++){
+					i3GEO.Interface.googleearth.adicionaKml(false,raiz[i].link,raiz[i].title,false);
+				}
+			};
+			i3GEO.php.listaRSSwsARRAY(monta,"KML");
+		},
+		/*
+		Function: adicionaNoArvoreGoogle
+		
+		Acrescenta na árvore de camadas um novo tema no nó que mostra os arquivos KML inseridos no mapa
+		
+		Os temas são incluídos em um nó chamado "Google Earth".
+		
+		Para obter esse nó utilize var node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("idkml","raiz");
+		
+		Parametros:
+		
+		url {string} - url do arquivo KML
+	
+		nomeOverlay {string} - título do tema
+		
+		ativo {boolean} - indica o estado do checkbox
+		
+		id {string} - nome do objeto GGeoXml
+		*/
+		adicionaNoArvoreGoogle: function(url,nomeOverlay,ativo,id){
+			var root,node,d,nodekml;
+			if(!$i("arvoreCamadasKml"))
+			{i3GEO.Interface.googleearth.criaArvoreKML();}
+			if(arguments.length === 2){
+				ativo = true;
+				id = nomeOverlay;
+			}
+			if(arguments.length === 2)
+			{id = nomeOverlay;}
+			root = i3GEO.Interface.googleearth.ARVORE.getRoot();
+			node = i3GEO.Interface.googleearth.ARVORE.getNodeByProperty("idkml","raiz");
+			html = "<input onclick='i3GEO.Interface.googleearth.ativaDesativaCamadaKml(this)' class=inputsb style='cursor:pointer;' type='checkbox' value='"+id+"'";
+			if(ativo === true)
+			{html += " checked ";}
+			html += "/>";
+			html += "&nbsp;<span style='cursor:move'>"+nomeOverlay+"</span>";
+			d = {html:html};
+			nodekml = new YAHOO.widget.HTMLNode(d, node, true,true); 
+			nodekml.enableHighlight = false;   			
+			nodekml.isleaf = true;
+			i3GEO.Interface.googleearth.ARVORE.draw();
+			i3GEO.Interface.googleearth.ARVORE.collapseAll();
+			node.expand();
+		},
+		criaArvoreKML: function(){
+			var arvore,a,root,titulo,d,node;
+			arvore = $i("arvoreCamadasKml");
+			if(!arvore){
+				d = document.createElement("div");
+				d.id = "arvoreCamadasKml";
+				d.style.top = "40px";
+				a = $i(i3GEO.arvoreDeCamadas.IDHTML);
+				if(a){
+					a.parentNode.appendChild(d);
+				}
+				else{alert("Arvore de camadas nao encontrada. Nao e possivel adicionar a arvore de KML");return;}
+			}
+			i3GEO.Interface.googleearth.ARVORE = new YAHOO.widget.TreeView("arvoreCamadasKml");
+			root = i3GEO.Interface.googleearth.ARVORE.getRoot();
+			titulo = "<table><tr><td><b>Google Earth Kml</b></td></tr></table>";
+			d = {html:titulo,idkml:"raiz"};
+			node = new YAHOO.widget.HTMLNode(d, root, true,true);
+			node.enableHighlight = false;
+		},
+		existeLink: function(url){
+			var existe = false,
+				features = i3GeoMap.getFeatures(),
+				n = features.getChildNodes().getLength(),
+				i;
+			for(i=0;i<n;i++){
+				try{
+					if(features.getChildNodes().item(i).getLink().getHref() == url){
+						existe = true;
+					}
+				}
+				catch(e){}
+			}
+			return (existe);
+		},
+		ativaDesativaLink: function(url,valor){
+			var features = i3GeoMap.getFeatures(),
+				n = features.getChildNodes().getLength(),
+				i;
+			for(i=0;i<n;i++){
+				try{
+					if(features.getChildNodes().item(i).getLink().getHref() == url){
+						features.getChildNodes().item(i).setVisibility(valor);
+					}
+				}
+				catch(e){}
+			}
+		},
+		/*
+		Function: ativaDesativaCamadaKml
+		
+		Ativa ou desativa uma camada do nó de layers KML
+			
+		Parametro:
+		
+		obj {object} - objeto do tipo checkbox que foi ativado/desativado
+		*/
+		ativaDesativaCamadaKml: function(obj){	
+			var url = eval(obj.value+".getLink().getHref()");
+			var existe = i3GEO.Interface.googleearth.existeLink(url);
+			if(!obj.checked){
+				{i3GEO.Interface.googleearth.ativaDesativaLink(url,false);}
+			}
+			else
+			{
+				if(existe == false)
+				{eval("i3GeoMap.getFeatures().appendChild("+obj.value+")");}
+				else
+				{i3GEO.Interface.googleearth.ativaDesativaLink(url,true);}
+			}
 		}
 	}
 };

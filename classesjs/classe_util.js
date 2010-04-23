@@ -302,6 +302,10 @@ i3GEO.util = {
 	
 	Cria uma árvore com base em um objeto contendo aspropriedades.
 	
+	No objeto com as propriedades, se "url" for igual a "", será incluído o texto original definido em "text".
+	
+	Caso contrário, o valor de "text" será traduzido com $trad(). Nesse caso, utilize em "text" o código definido em dicionario.js
+	
 	Parametros:
 	
 	titulo - {String} cabeçaljo da árvore
@@ -341,7 +345,10 @@ i3GEO.util = {
 		c = obj.propriedades.length;
 		for (i=0, j=c; i<j; i++){
 			linha = obj.propriedades[i];
-			conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";
+			if(linha.url !== "")
+			{conteudo = "<a href='#' onclick='"+linha.url+"'>"+$trad(linha.text)+"</a>";}
+			else
+			{conteudo = linha.text;}
 			d = {html:conteudo};
 			temaNode = new YAHOO.widget.HTMLNode(d, tempNode, false,true);
 			temaNode.enableHighlight = false;
