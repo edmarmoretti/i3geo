@@ -76,7 +76,6 @@ echo '
 </body>
 <script type="text/javascript">
 g_locaplic = "http://"+window.location.host+"/i3geo";
-g_localimg = "http://"+window.location.host+"/i3geo/imagens";';
 echo 'document.body.onmouseover=function(){this.onmousemove=processevent1;};';
 echo "m ='".$tmpfname."';";
 echo "e = '".$mapext."';";

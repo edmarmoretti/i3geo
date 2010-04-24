@@ -399,7 +399,7 @@ i3GEO.gadgets = {
 				i3GEO.php.escalagrafica(temp);
 			};
 			if(!$i("imagemEscalaGrafica")){
-				ins = "<img class='menuarrow' src=\""+g_localimg+"/branco.gif\" title='op&ccedil;&otilde;es' onclick='i3GEO.mapa.dialogo.opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";
+				ins = "<img class='menuarrow' src=\""+i3GEO.configura.locaplic+"/imagens/branco.gif\" title='op&ccedil;&otilde;es' onclick='i3GEO.mapa.dialogo.opcoesEscala()' style='cursor:pointer'/><img id=imagemEscalaGrafica src='' />";
 				$i(id).innerHTML = ins;
 			}
 			atualizaEscalaGrafica();
