@@ -32,6 +32,19 @@ Gera um arquivo para visualização em 3d com o mapa atual.
 */
 i3GEOF.t3d = {
 	/*
+	Propriedade: 3dmap
+	
+	Arquivo mapfile que contém o layer do tipo imagem que será utilizado para a obtenção dos valores  de Z.
+	O arquivo deve ficar armazenado em i3geo/aplicmap
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{3dmap.map}
+	*/
+	3dmap: "3dmap.map",
+	/*
 	Variavel: aguarde
 	
 	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
@@ -146,7 +159,7 @@ i3GEOF.t3d = {
 	    	p;
 	    if ($i("i3GEO3dlistaRaster"))
 	    {raster = $i("i3GEO3dlistaRaster").value;}
-		p = i3GEO.configura.locaplic+"/ferramentas/3d/3d.php?map3d="+g_3dmap+"&fz="+$i("i3GEO3dfz").value+"&temaz="+raster;
+		p = i3GEO.configura.locaplic+"/ferramentas/3d/3d.php?map3d="+i3GEOF.t3d.3dmap+"&fz="+$i("i3GEO3dfz").value+"&temaz="+raster;
 	    window.open(p);
 	}
 };
