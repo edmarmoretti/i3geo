@@ -1081,7 +1081,7 @@ i3GEO.Interface = {
 		aguarde: "",
 		redesenha: function(){
 			try{
-				if(typeof(linki3geo) !== 'undefined')
+				if(linki3geo !== undefined)
 				{linki3geo.setHref(linki3geo.getHref()+"&");}
 			}
 			catch(e){
@@ -1374,10 +1374,10 @@ i3GEO.Interface = {
 			if(url === "")
 			{return;}
 			i3GEO.mapa.GEOXML.push(ngeoxml);
-			linki3geo = i3GeoMap.createLink('');
-          	linki3geo.setHref(url);
+			linki3geokml = i3GeoMap.createLink('');
+          	linki3geokml.setHref(url);
 			eval(ngeoxml+" = i3GeoMap.createNetworkLink('')");
-			eval(ngeoxml+".setLink(linki3geo)");
+			eval(ngeoxml+".setLink(linki3geokml)");
 			i3GEO.Interface.googleearth.adicionaNoArvoreGoogle(url,titulo,ativo,ngeoxml);
 		},
 		adicionaListaKml: function(){
