@@ -47,21 +47,26 @@ i3GEOOL = {
 			alayers.push(i3GEOOL.ol_mma);
 		}
 		if(i3GEOOL.ol_wms != ""){
+			i3GEOOL.ol_wms.transitionEffect = "resize";
 			i3GEOOL.ol_wms.setVisibility(false);
 			alayers.push(i3GEOOL.ol_wms);
 		}
 		if(i3GEOOL.jpl_wms != ""){
+			i3GEOOL.jpl_wms.transitionEffect = "resize";
 			alayers.push(i3GEOOL.jpl_wms);
 			i3GEOOL.jpl_wms.setVisibility(false);
 		}
 		i3GEOOL.mapa.addLayers(alayers);
-		if(i3GEOOL.layersIniciais != "")
-		{i3GEOOL.mapa.addLayers(i3GEOOL.layersIniciais);}
-
+		
+		if(i3GEOOL.layersIniciais != ""){
+			var n = i3GEOOL.layersIniciais.length;
+			for(i=0;i<n;i++)
+			{i3GEOOL.mapa.addLayer(i3GEOOL.layersIniciais[i]);}
+		}
 		if(i3GEOOL.layergrafico != ""){
 			i3GEOOL.mapa.addLayers([i3GEOOL.layergrafico]);
 		}
-			
+		
 		i3GEOOL.mapa.zoomToMaxExtent();
 		i3GEOOL.coordenadas();	
 		i3GEOOL.criaJanelaBusca();
@@ -370,7 +375,7 @@ i3GEOOL = {
 		var adiciona = false;
 		var controles = new Array();
 		var panel = new OpenLayers.Control.Panel({
-			displayClass: "olControlEditingToolbar noprint"
+			displayClass: "olControlEditingToolbar1 noprint"
 		});
 		if(botoes.procura==true){
 			var button = new OpenLayers.Control.Button({
