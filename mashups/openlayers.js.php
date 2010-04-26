@@ -15,7 +15,6 @@ i3GEOOL = {
 		"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
 		{layers:'baseraster',SRS:'EPSG:4291',FORMAT:'image/png'}
 	),
-	ol_mma.transitionEffect ="resize";
 	ol_wms: new OpenLayers.Layer.WMS.Untiled(
 		"OpenLayers WMS",
 		"http://labs.metacarta.com/wms/vmap0",
@@ -43,8 +42,10 @@ i3GEOOL = {
 	}),
 	inicia: function(){
 		var alayers = [];
-		if(i3GEOOL.ol_mma != "")
-		{alayers.push(i3GEOOL.ol_mma);}
+		if(i3GEOOL.ol_mma != ""){
+			i3GEOOL.ol_mma.transitionEffect = "resize";
+			alayers.push(i3GEOOL.ol_mma);
+		}
 		if(i3GEOOL.ol_wms != ""){
 			i3GEOOL.ol_wms.setVisibility(false);
 			alayers.push(i3GEOOL.ol_wms);
