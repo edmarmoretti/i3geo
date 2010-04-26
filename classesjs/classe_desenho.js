@@ -178,7 +178,7 @@ i3GEO.desenho = {
 	n {numeric} - índice do elemento no array pontosdistobj
 	
 	texto {string} - texto que será inserido no tipo "insereTexto"
-	*/	
+	*/
 	aplica: function(tipo,objeto,n,texto){
 		var pos,r,elemento,elementos,dy,dx,w;
 		if(i3GEO.desenho.richdraw && $i(i3GEO.Interface.IDCORPO)){

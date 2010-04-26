@@ -363,7 +363,7 @@ i3GEO.analise = {
 		Adiciona uma marca na tela e realiza o cálculo de distância dos pontos inseridos
 		*/
 		clique: function(){
-			var n,d,decimal;
+			var n,d,decimal,dd;
 			if (g_tipoacao == "mede"){
 				n = pontosdistobj.xpt.length;
 				pontosdistobj.xpt[n] = objposicaocursor.ddx;
@@ -373,7 +373,8 @@ i3GEO.analise = {
 				pontosdistobj.ximg[n] = objposicaocursor.imgx;
 				pontosdistobj.yimg[n] = objposicaocursor.imgy;
 				pontosdistobj.dist[n] = 0;
-				if(i3GEO.Interface.ATUAL != "googleearth"){
+				//cria a linha que será utilizada para seguir a posição do mouse e o último ponto
+				if(i3GEO.Interface.ATUAL === "padrao"){
 					try{
 						if (navn)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
@@ -393,20 +394,27 @@ i3GEO.analise = {
 					d = d[0]+"."+decimal;
 					d = d * 1;
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
-					if(i3GEO.Interface.ATUAL !== "googleearth"){
-						if($i("pararraios") && $i("pararraios").checked === true ){
+					
+					if($i("pararraios") && $i("pararraios").checked === true ){
+						if(i3GEO.Interface.ATUAL === "padrao"){
 							i3GEO.desenho.aplica("insereCirculo","",n);
 							if(navm)
 							{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 						}
-						if($i("parartextos") && $i("parartextos").checked === true ){
+						if(i3GEO.Interface.ATUAL === "googleearth"){
+							dd = Math.sqrt(((Math.pow((pontosdistobj.xpt[n] - pontosdistobj.xpt[n-1]),2)) + (Math.pow((pontosdistobj.ypt[n] - pontosdistobj.ypt[n-1]),2)) ));
+							i3GEO.Interface.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd);
+						}
+					}
+					if($i("parartextos") && $i("parartextos").checked === true ){
+						if(i3GEO.Interface.ATUAL === "padrao"){
 							i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 						}
 					}
 				}
-				if(i3GEO.Interface.ATUAL !== "googleearth")
+				if(i3GEO.Interface.ATUAL === "padrao")
 				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
-				else
+				if(i3GEO.Interface.ATUAL === "googleearth")
 				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
 			}
 		},

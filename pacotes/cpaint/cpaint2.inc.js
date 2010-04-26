@@ -711,6 +711,13 @@ function cpaint_call() {
       debug(httpobj.responseText, 1);
       debug('using response type ' + config['response_type'], 2);
       
+	  //tenta remover cabeçalhos espúrios
+	  //alert(httpobj.responseText);
+	  var r = httpobj.responseText;
+	  r = r.split("{");
+	  if(r[0] != "" && r.length > 1);
+	  {r[0] = "";}
+	  var responseText = r.join("{");
       // fetch correct response
       switch (config['response_type']) {
         case 'XML':
@@ -731,7 +738,7 @@ function cpaint_call() {
           break;
           
         case 'JSON':
-          response = __cpaint_transformer.json_conversion(httpobj.responseText);
+		  response = __cpaint_transformer.json_conversion(responseText);
           break;
           
         default:
@@ -743,7 +750,7 @@ function cpaint_call() {
         && typeof client_callback == 'function') {
         try{
         	if(response.data)
-        		client_callback(response, httpobj.responseText);
+        		client_callback(response, responseText);
         	else
         		client_callback("", "erro");
         }
@@ -1463,4 +1470,3 @@ outer:      while (next()) {
     return val();
   }
 };
-

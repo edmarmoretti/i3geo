@@ -1319,6 +1319,9 @@ i3GEO.Interface = {
 			{placemark.setDescription(texto);}
 			i3GeoMap.getFeatures().appendChild(placemark);
 		},
+		insereCirculo: function(x,y,d){
+			alert(d);
+		},
 		removePlacemark: function(nome){
 			var features = i3GeoMap.getFeatures(),
 				n = features.getChildNodes().getLength(),
