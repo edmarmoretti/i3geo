@@ -1341,4 +1341,4 @@ function sobeDesce(movimento,tipo,codigoMap,codigoLayer,indiceClasse,indiceEstil
 		core_makeRequest(sUrl,callback)
 	}
 }
-YAHOO.util.Event.addListener(window, "load", initMenu);
+//YAHOO.util.Event.addListener(window, "load", initMenu);

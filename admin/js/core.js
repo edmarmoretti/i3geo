@@ -342,12 +342,20 @@ Pega a lista de mapfiles
 Parameters:
 
 funcao - (opcional) nome da funcao que será executada ao terminar a busca pelos dados
+
+letra - (opcional) letra inicial utilizada para filtrar a lista
 */
-function core_pegaMapfiles(funcaoM)
+function core_pegaMapfiles(funcaoM,letra)
 {
-	if(arguments.length == 0)
-	{var funcao = "";}
-	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas";
+	if(arguments.length == 0){
+		var funcao = "";
+		var letra = "";
+	}
+	if(arguments.length == 1){
+		var letra = "";
+	}
+
+	var sUrl = "../php/menutemas.php?funcao=listaMapsTemas&letra="+letra;
 	var callbackM =
 	{
   		success:function(o)

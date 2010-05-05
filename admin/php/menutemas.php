@@ -857,7 +857,7 @@ locaplic - localização da instalação do I3Geo
 */
 function listaMapsTemas()
 {
- 	global $cp,$locaplic;
+ 	global $cp,$locaplic,$letra;
  	$arquivos = array();
 	if (is_dir($locaplic."/temas"))
 	{
@@ -869,7 +869,13 @@ function listaMapsTemas()
 				{
 					$file = str_replace(".map","",$file);
 					$file = str_replace(".php","",$file);
-					$arquivos[] = $file;
+					if(isset($letra) && $letra != "")
+					{
+						if(strtolower(substr(basename($file),0,1)) == strtolower($letra))
+						{$arquivos[] = $file;}
+					}
+					else
+					{$arquivos[] = $file;}
 				}
 			}
        	}

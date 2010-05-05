@@ -46,9 +46,28 @@
 <br><br>
 Além de criar os mapfiles, é necessário definir as características de cada LAYER nas opções abaixo.<br>
 <br>
+<div id="letras" ></div>
+<br>
 <p>Mapfiles (arquivos .map existentes no diretório i3geo/temas):</p>
 <div id="tabela" style="left:-5px;"></div>
 </div>
 <div id=logajax style="display:block" ></div>
 <div id=dialogoContinua style="display:block" ></div>
+<script>
+YAHOO.util.Event.addListener(window, "load", initMenu);
+var letras = "A B C D E F G H I J K L M N O P Q R S T U V X Y Z _ 1 2 3 4 5 6 7 8 9".split(" "),
+	nletras = letras.length,
+	i,
+	ins = "<p>";
+for(i=0;i<nletras;i++){
+	ins += "<span onclick='filtraLetra(\""+letras[i]+"\")' style='color:blue;cursor:pointer'>"+letras[i]+" </span>";
+}
+document.getElementById("letras").innerHTML = ins;
+
+function filtraLetra(letra){
+	document.getElementById("tabela").innerHTML = "<span style=color:red >Aguarde...</span>";
+	core_pegaMapfiles("montaArvore()",letra)
+}
+
+</script>
 </body>
