@@ -87,7 +87,11 @@ $map_file - Endereço do mapfile no servidor.
 		$this->arquivo = $map_file;
 		$c = $this->mapa->numlayers;
 		for ($i=0;$i < $c;++$i)
-		{$this->layers[] = $this->mapa->getlayer($i);}
+		{
+			$l = $this->mapa->getlayer($i);
+			$this->layers[] = $l;
+			$this->nomes[] = $l->name;
+		}
 	}
 /*
 Method: salva
@@ -182,9 +186,9 @@ string - javascript com os parametros
 			}
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
-			{$escondido = "NAO";}
-			if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") && ($escondido == "NAO") )
-			{
+			{$escondido = "nao";}
+			//if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") )
+			//{
 				$escala = $oLayer->getmetadata("escala");
 				if ($escala == ""){$escala = 0;}
 				$down = $oLayer->getmetadata("download");
@@ -242,9 +246,10 @@ string - javascript com os parametros
 					"etiquetas"=>($oLayer->getmetadata("TIP")),
 					"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
 					"editorsql"=>$editorsql,
-					"linhadotempo"=>$ltempo
+					"linhadotempo"=>$ltempo,
+					"escondido"=>strtolower($escondido)
 				);
-			}
+			//}
 		}
 		//apaga o arquivo qy se não for necessário
 		//if (!$existesel && $qy)
@@ -885,11 +890,13 @@ $random - indica se os nomes dos novos layers serão modificados ou nao
 						//
 						//muda para RGB para melhorar o desenho da imagem raster
 						//
+						/*
 						if($nlayer->type == MS_LAYER_RASTER)
 						{
 							$of = $this->mapa->outputformat;
 							$of->set("imagemode",MS_IMAGEMODE_RGB);
 						}
+						*/
 						$nlayer->set("status",MS_DEFAULT);
 						$nlayer->setmetadata("nomeoriginal",$nlayer->name);
 						$nlayer->set("name",$nomeunico[$n]);

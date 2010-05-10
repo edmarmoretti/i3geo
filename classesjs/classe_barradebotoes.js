@@ -298,8 +298,7 @@ i3GEO.barraDeBotoes = {
 	icone {String} - id do icone que será ativado. Esse id é o mesmo definido em LISTABOTOES
 	*/
 	ativaIcone: function(icone){
-		if(typeof(console) !== 'undefined')
-		{console.info("i3GEO.barraDeBotoes.ativaIcone()");}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.barraDeBotoes.ativaIcone()");}
 		if(i3GEO.Interface.ATUAL==="openlayers"){
 			try
 			{OLzoom.deactivate();}

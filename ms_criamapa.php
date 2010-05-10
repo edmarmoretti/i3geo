@@ -177,6 +177,8 @@ $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
 $interfacePadrao_ = $interfacePadrao;
+if(isset($interface)){$interface_ = $interface;}
+else{$interface_ = $interfacePadrao;}
 if(isset($kmlurl)){$kmlurl_ = $kmlurl;}
 //
 //se houver string de conexão para substituição
@@ -202,7 +204,6 @@ session_start();
 if (!isset($g_sid)){$g_sid="";}
 if(isset($_SESSION["map_file"]) || $g_sid!="")
 {session_regenerate_id();}
-
 /*
  Aguarde
 
@@ -211,9 +212,6 @@ Monta a apresentação do aguarde.
 Aqui é necessário verificar se $executa está definido
 isso pq algumas aplicações podem ser prejudicadas caso o aguarde seja mostrado
 */
-//if (!isset($executa))
-//{mostraAguarde();}
-
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["temasdir"] = $temasdir_;
 $_SESSION["temasaplic"] = $temasaplic_;
@@ -238,6 +236,8 @@ $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
+if(isset($interface_))
+$_SESSION["interface"] = $interface_;
 if(isset($kmlurl_))
 $_SESSION["kmlurl"] = $kmlurl_;
 //rotina de segurança, ver http://shiflett.org/articles/the-truth-about-sessions
@@ -245,7 +245,6 @@ $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
 $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
-
 //
 //pega todas as variáveis da sessão, mesmo as que foram definidas anteriormente
 //
@@ -421,6 +420,10 @@ Redireciona para o HTML definido em $interface, abrindo o mapa
 */
 function abreInterface(){
 	global $interface,$caminho,$tempo;
+	$nomeInterface = explode(".",basename($interface));
+
+	$_SESSION["interface"] = $nomeInterface[0];
+	
 	if (count(explode(".php",$interface)) > 1)
 	{
 		if (file_exists($caminho."aplicmap/".$interface))

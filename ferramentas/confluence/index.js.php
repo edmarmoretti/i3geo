@@ -57,16 +57,13 @@ i3GEOF.confluence = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.confluence.html();
 			i3GEOF.confluence.ativaFoco();
-			if(i3GEO.Interface.ATUAL === "padrao"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				confluenceDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
    				confluenceZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});						
 			}
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-   				i3geoOL.events.register("moveend",i3geoOL,function(e){i3GEOF.confluence.lista();});
-			}			
 			i3GEOF.confluence.lista();
 		}
 		catch(erro){alert(erro);}
@@ -118,7 +115,7 @@ i3GEOF.confluence = {
 		i3GEOF.confluence.aguarde = $i("i3GEOF.confluence_imagemCabecalho").style;
 		i3GEOF.confluence.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL === "padrao"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){

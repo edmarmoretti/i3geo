@@ -95,9 +95,9 @@ i3GEOF.buscaFotos = {
 		var ins = '';
 		ins += '<div id=i3GEObuscafotosaviso style=display:block >';
 		ins += '<p class="paragrafo" >As fotos mostradas aqui s&atilde;o de responsabilidade dos servi&ccedil;os de hospedagem utilizados na busca e podem abranger tem&aacute;ticas diversas.';
-		ins += '<p class="paragrafo" >A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual, cuja escala deve estar em pelo menos 1:300.000.';
+		ins += '<p class="paragrafo" >A busca &eacute; feita apenas para a regi&atilde;o de abrang&ecirc;ncia do mapa atual.';
 		ins += '<p class="paragrafo" >A restrição de escala é necessária para melhorar a performance da busca.';
-    	if(i3GEO.parametros.mapscale > 300001){
+    	if(i3GEO.parametros.mapscale > 30000001){
     		ins += '<p class="paragrafo" >O mapa atual está fora do limite de escala.';
     		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="Ajustar" />';
     	}

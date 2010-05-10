@@ -96,14 +96,6 @@ i3GEO.analise = {
 			};		
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizaLinhaDoTempo()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("atualizaLinhaDoTempo()");}
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-				i3geoOL.events.register("moveend",i3geoOL,function(e){
-					try{window.parent.wdocai.atualizaLinhaDoTempo();}
-					catch(x){
-						if(typeof(console) !== 'undefined'){console.error(x);}
-					}
-				});
-			}
 		},
 		/*
 		Function: gradePontos
@@ -322,7 +314,13 @@ i3GEO.analise = {
 				ins += '<div style="text-align:left;font-size:10px" >';
 				ins += "<span style='color:navy;cursor:pointer;text-align:left;' >";
 				ins += "<table><tr><td><input style='cursor:pointer' type='checkbox' id='pararraios' checked /></td><td>Raios</td><td>&nbsp;</td>";
-				ins += "<td><input style='cursor:pointer' type='checkbox' id='parartextos' checked /></td><td>Textos<td></tr></table></span>";
+				
+				if(i3GEO.Interface.ATUAL !== "googleearth"){
+					ins += "<td>";
+					ins += "<input style='cursor:pointer' type='checkbox' id='parartextos' checked />";
+					ins += "</td><td>Textos<td>";
+				}
+				ins += "</tr></table></span>";
 				ins += '</div>';
 				ins += '</div>';
 				//ins += "<a href='http://www.movable-type.co.uk/scripts/latlong.html' target='_blank'>sobre o cálculo</a>";
@@ -374,7 +372,7 @@ i3GEO.analise = {
 				pontosdistobj.yimg[n] = objposicaocursor.imgy;
 				pontosdistobj.dist[n] = 0;
 				//cria a linha que será utilizada para seguir a posição do mouse e o último ponto
-				if(i3GEO.Interface.ATUAL === "padrao"){
+				if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers"){
 					try{
 						if (navn)
 						{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1),(pontosdistobj.ximg[n]-1),(pontosdistobj.yimg[n]-1));}
@@ -396,26 +394,30 @@ i3GEO.analise = {
 					pontosdistobj.dist[n] = d + pontosdistobj.dist[n-1];
 					
 					if($i("pararraios") && $i("pararraios").checked === true ){
-						if(i3GEO.Interface.ATUAL === "padrao"){
+						if(i3GEO.Interface.ATUAL === "padrao"  || i3GEO.Interface.ATUAL === "openlayers"){
 							i3GEO.desenho.aplica("insereCirculo","",n);
 							if(navm)
 							{pontosdistobj.linhas[n] = i3GEO.desenho.richdraw.renderer.create(i3GEO.desenho.richdraw.mode, i3GEO.desenho.richdraw.fillColor, i3GEO.desenho.richdraw.lineColor, i3GEO.desenho.richdraw.lineWidth, (pontosdistobj.ximg[n-1])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n-1],(pontosdistobj.ximg[n])-(i3GEO.parametros.w/2),pontosdistobj.yimg[n]);}
 						}
 						if(i3GEO.Interface.ATUAL === "googleearth"){
 							dd = Math.sqrt(((Math.pow((pontosdistobj.xpt[n] - pontosdistobj.xpt[n-1]),2)) + (Math.pow((pontosdistobj.ypt[n] - pontosdistobj.ypt[n-1]),2)) ));
-							i3GEO.Interface.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd);
+							i3GEO.Interface.googleearth.insereCirculo(pontosdistobj.xpt[n],pontosdistobj.ypt[n],dd,"divGeometriasTemp");
 						}
 					}
 					if($i("parartextos") && $i("parartextos").checked === true ){
-						if(i3GEO.Interface.ATUAL === "padrao"){
+						if(i3GEO.Interface.ATUAL === "padrao"  || i3GEO.Interface.ATUAL === "openlayers"){
 							i3GEO.desenho.aplica("insereTexto","",n,d+" km");
 						}
 					}
+					//cria a linha ligando os dois últimos pontos
+					if(i3GEO.Interface.ATUAL === "googleearth"){
+						i3GEO.Interface.googleearth.insereLinha(pontosdistobj.xpt[n-1],pontosdistobj.ypt[n-1],pontosdistobj.xpt[n],pontosdistobj.ypt[n],"divGeometriasTemp");
+					}
 				}
-				if(i3GEO.Interface.ATUAL === "padrao")
+				if(i3GEO.Interface.ATUAL === "padrao" || i3GEO.Interface.ATUAL === "openlayers")
 				{i3GEO.util.insereMarca.cria(objposicaocursor.imgx,objposicaocursor.imgy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
 				if(i3GEO.Interface.ATUAL === "googleearth")
-				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp");}
+				{i3GEO.util.insereMarca.cria(objposicaocursor.ddx,objposicaocursor.ddy,i3GEO.analise.medeDistancia.fechaJanela,"divGeometriasTemp","");}
 			}
 		},
 		/*

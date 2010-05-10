@@ -122,6 +122,7 @@ i3GEO.desenho = {
 			//para funcionarem sobre o container
 			//
 			i3GEO.eventos.ativa(divgeo);
+			
 		}
 		catch(erro){alert("Erro ao tentar criar container richdraw");}
 	},
@@ -156,7 +157,7 @@ i3GEO.desenho = {
 			ne.position="absolute";
 			ne.width=i3GEO.parametros.w;
 			ne.height=i3GEO.parametros.h;
-			ne.border="1px solid black";
+			ne.border="0px solid black";
 			ne.display="none";
 			ne.top=pos[1];
 			ne.left=pos[0];

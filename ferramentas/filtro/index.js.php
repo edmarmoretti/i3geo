@@ -292,9 +292,10 @@ i3GEOF.filtro = {
 			i3GEOF.filtro.aguarde.visibility = "visible";
 			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&tema="+i3GEO.temaAtivo+"&filtro=",
 				cp = new cpaint(),
-				temp = function(){
+				temp = function(retorno){
 					i3GEOF.filtro.aguarde.visibility = "hidden";
-					i3GEO.atualiza();
+					i3GEO.atualiza(retorno);
+					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"insereFiltro",temp);			
@@ -363,7 +364,8 @@ i3GEOF.filtro = {
 			}
 			else{
 			 	temp = function(retorno){
-			 		i3GEO.atualiza();
+			 		i3GEO.atualiza(retorno);
+					i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 			 		i3GEOF.filtro.aguarde.visibility = "hidden";
 			 	};		
 			}

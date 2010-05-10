@@ -213,10 +213,10 @@ i3GEOF.busca = {
 				if ($i("i3GEObuscaregiao").checked === true)
 				{onde = "regiao";}
 				palavra = removeAcentos(palavra);
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listavaloresitens&palavra="+palavra+"&lista="+listai.toString()+"&tipo="+tipo+"&onde="+onde;
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listavaloresitens&palavra="+palavra+"&lista="+listai.toString()+"&tipo="+tipo+"&onde="+onde+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();
 				cp.set_response_type("json");
-				cp.call(p,"buscaRegistros",i3GEOF.busca.mostraBusca);
+				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca);
 			}
 		}	
 	},

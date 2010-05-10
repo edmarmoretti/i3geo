@@ -4,17 +4,9 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
-<script type="text/javascript" src="../pacotes/openlayers/OpenLayers.js.php"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 <link rel="stylesheet" href="../pacotes/openlayers/theme/default/style.css" type="text/css" />
-	<style> 
-	.yui-log .i3geo {background-color:yellow;} /* customize a color */
-	.yui-log .redesenho {background-color:yellow;} /* customize a color */
-	.yui-log .janela {background-color:yellow;} /* customize a color */
-	.yui-log-bd {text-align:left;}
-	.yui-log-entry yui-log-verbose, p{text-align:left;}
-	 .info {text-align:left;}
-	</style> 
 </head>
 <body id="i3geo">
 
@@ -142,6 +134,7 @@
 	<table style="width:100%"><caption style="text-align:center">&nbsp;</caption>
 	<tr><td style='background-color:rgb(250,250,250);'><img title="" alt="" src="../imagens/branco.gif" id='sobeferramentas'/></td></tr>
 	</table>
+
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="zoom" alt="" src="../imagens/branco.gif" id='zoomli'/>
@@ -181,6 +174,7 @@
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img title="selecao" alt="" src="../imagens/branco.gif" id='selecao'/>
+
 	</div>
 	<div style='display:inline;background-color:rgb(250,250,250);'>
 		<p style='font-size:4px;'>&nbsp;</p>
@@ -196,10 +190,7 @@
 	</div> 
 	<div style='display:none;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
-		<img  title="metar" alt="" src="../imagens/branco.gif" id='metar'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:2px;'>&nbsp;</p>
+
 		<img  title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/>
 	</div>
 	<div style='display:none;background-color:rgb(250,250,250);'>
@@ -209,6 +200,7 @@
 	<div style='display:none;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
 		<img  title="3d" alt="" src="../imagens/branco.gif" id='v3d'/>
+
 	</div>
 	<div style='display:none;background-color:rgb(250,250,250);'>
 		<p style='font-size:2px;'>&nbsp;</p>
@@ -237,6 +229,7 @@ http://<host>/i3geo/ms_criamapa.php
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 
 i3GEO.interface.ATUAL = "openlayers";
 i3GEO.interface.IDCORPO = "contemImg";
@@ -299,6 +292,7 @@ i3GEO.configura.oMenuData = {
 }
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
+		PanZoom:false,
 		LayerSwitcher:false,
 		ScaleLine:true,
 		OverviewMap:true	
@@ -307,6 +301,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 i3GEO.cria()
 /*
 	Inicializa o mapa
+	
 */
 
 i3GEO.barraDeBotoes.AUTOALTURA = false
@@ -318,12 +313,16 @@ i3GEO.interface.BARRABOTOESTOP = 10
 i3GEO.idioma.IDSELETOR = "seletorIdiomas"
 i3GEO.interface.ATIVAMENUCONTEXTO = true
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
-
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true
 //
 //esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
 //
 OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-
+/*
+Após a inicialização, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
+Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
+*/
 i3GEO.inicia();
 
 

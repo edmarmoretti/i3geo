@@ -80,7 +80,7 @@ $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
 */
-	function __construct($map_file,$tema="",$locaplic="")
+	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -90,6 +90,11 @@ $tema - nome do tema
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		}
 	}
 /*
 function: salva
@@ -677,15 +682,25 @@ Identifica elementos no mapa.
 
 parameters:
 
-$opcao - Opcao tip|tema|ligados|todos.
+$opcao - Opcao tip|tema|ligados|todos|lista.
 
 $xy - coordenada x e y separadas por virgulao.
 
 $resolucao - Resolucao de busca.
+
+$ext - (opcional) Extensão geográfica que será aplicada ao mapa antes da operação de query (xmin ymin xmax ymax)
+
+$listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificados - vale apenas se $opcao = lista
 */
-	function identifica2($opcao,$xy,$resolucao)
+	function identifica2($opcao,$xy,$resolucao,$ext="",$listaDeTemas="")
 	{
-		$temas = $this->mapa->getalllayernames();
+		if($listaDeTemas != "")
+		{
+			$listaDeTemas = str_replace(" ",",",$listaDeTemas);
+			$temas = explode(",",$listaDeTemas);
+		}
+		else
+		{$temas = $this->mapa->getalllayernames();}
 		foreach ($temas as $tem)
 		{
 			$vermultilayer = new vermultilayer();
@@ -739,32 +754,33 @@ $resolucao - Resolucao de busca.
 			}
 			foreach ($listatemas as $tema)
 			{
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
 		if ($opcao == "todos")
 		{
 			foreach ($listatemas as $tema)
-			{
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
-			}
+			{$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);}
 		}
 		//pesquisa apenas os temas visiveis
-		if ($opcao == "ligados")
+		if ($opcao == "ligados" || $opcao == "lista")
 		{
-			$novalista = array();
-			foreach ($listatemas as $tema)
+			if($opcao == "ligados")
 			{
-				$l = $this->mapa->getlayerbyname($tema);
-				if($l->status == MS_DEFAULT)
-				$novalista[] = $tema;
-				$listatemas = $novalista;
+				$novalista = array();
+				foreach ($listatemas as $tema)
+				{
+					$l = $this->mapa->getlayerbyname($tema);
+					if($l->status == MS_DEFAULT)
+					$novalista[] = $tema;
+					$listatemas = $novalista;
+				}
 			}
 			foreach ($listatemas as $tema)
 			{
 				$l = $this->mapa->getlayerbyname($tema);
-				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao);
+				$resultados[$tema] = $this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,"","",false,$ext);
 			}
 			//var_dump($resultados);
 		}
@@ -778,9 +794,9 @@ $resolucao - Resolucao de busca.
 				$itemtip = $tl->getmetadata("TIP");
 				if ($itemtip != "")
 				{
-					if ($tl->status == MS_DEFAULT)
+					if ($tl->status == MS_DEFAULT || $listaDeTemas != "")
 					{
-						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip,"",true));
+						$resultados[$tema] = array("tips"=>$itemtip,"dados"=>$this->identificaQBP2($tema,$xyarray[0],$xyarray[1],$this->arquivo,$resolucao,$itemtip,"",true,$ext));
 						$ltemp[] = $tema;
 					}
 				}
@@ -1097,12 +1113,16 @@ $item - Item único que será identificado.
 
 $tiporetorno - Tipo de retorno dos dados. Se for vazio, o retorno é formatado como string, se for shape, retorna o objeto shape 
 
-$etip  booblean - indica se a solicitação é para obtenção dos dados do tipo etiqueta
+$etip  {booblean} - indica se a solicitação é para obtenção dos dados do tipo etiqueta
 */
-function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="",$etip=false)
+function identificaQBP2($tema,$x,$y,$map_file,$resolucao,$item="",$tiporetorno="",$etip=false,$ext="")
 {
-	
 	$mapa = ms_newMapObj($map_file);
+	if($ext != ""){
+		$extmapa = $mapa->extent;
+		$e = explode(" ",$ext);
+		$extmapa->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+	}
 	$layer = $mapa->getLayerByName($tema);
 	$layer->set("status",MS_DEFAULT);
 	$layer->set("template","none.htm");

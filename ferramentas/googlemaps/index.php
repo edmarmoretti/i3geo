@@ -19,10 +19,8 @@ function inicializa(){
     	navn = false; // netscape
     	var app = navigator.appName.substring(0,1);
     	if (app=='N') navn=true; else navm=true;
-
     	docmapa = window.parent.document
     	pol = window.parent.i3GEO.parametros.mapexten
-
     	ret = pol.split(" ")
     	pt1 = (( (ret[0] * -1) - (ret[2] * -1) ) / 2) + ret[0] *1
     	pt2 = (((ret[1] - ret[3]) / 2)* -1) + ret[1] *1

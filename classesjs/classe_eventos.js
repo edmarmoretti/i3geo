@@ -303,7 +303,7 @@ i3GEO.eventos = {
 		//
 		var teladd,teladms,container,targ,pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
 		try{
-			//verifica se o richdraw está sendo usaado
+			//verifica se o richdraw está sendo usado
 			container = e.target.parentNode.id;
 		}
 		catch(erro){

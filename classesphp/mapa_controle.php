@@ -164,10 +164,12 @@ if ($funcao == "criaMapa")
 	//é necessário mudar o diretório em função dos includes que são feitos pelo ms_criamapa.php
 	//
 	chdir($locaplic);
+	$interfaceTemp = $interface;
 	$interface = "mashup";
 	include_once("ms_criamapa.php");
 	//$cp->set_data(session_id());
 	//$cp->return_data();
+	$_SESSION["interface"] = $interfaceTemp;
 	cpjson(session_id());
 	return;
 }
@@ -523,19 +525,9 @@ Valor: OPENLAYERS
 Prepara o mapa atual para funcionar na interface openlayers.
 */
 	case "OPENLAYERS":
-		$map = ms_newMapObj($map_file);
-		$mapext = ($map->extent->minx).",".($map->extent->miny).",".($map->extent->maxx).",".($map->extent->maxy);
-		$eb = $map->scalebar;
-		$eb->set("status",MS_OFF);
-		$map->setProjection("init=epsg:4326");
-		$cr = $map->getlayerbyname("copyright");
-		$cr->set("status",MS_OFF);
-		if (connection_aborted()){exit();}
-		$map->save($map_file);
-		include_once("classe_mapa.php");
-		$m = New Mapa($map_file);
-		$par = $m->parametrosTemas();
-		$retorno = array("mapfile"=>$map_file,"mapext"=>$mapext,"locmapserv"=>$locmapserv,"parametros"=>$par);
+		$interface = "openlayers";
+		include_once("mapa_inicia.php");
+		iniciaMapa();
 	break;
 /*
 Section: Mapa
@@ -892,12 +884,12 @@ Adiciona um novo tema ao mapa.
 		if($salvar)
 		$m->salva();
 		$retorno = "ok";
-		$teste = testaMapa($map_file,$postgis_mapa);
-		if ($teste == "ok")
-		{$retorno = "ok";}
-		else
-		{
-			$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);	
+		if($interface != "openlayers"){
+			$teste = testaMapa($map_file,$postgis_mapa);
+			if ($teste == "ok")
+			{$retorno = "ok";}
+			else
+			{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);}
 		}
 	break;
 /*
@@ -1888,7 +1880,7 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 	case "LISTAVALORESITENS":
 		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
-		$m = new Atributos($map_file,$tema);
+		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
 	break;
 /*
@@ -1919,7 +1911,9 @@ Identifica elementos no mapa.
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
-		$retorno = $m->identifica2($opcao,$xy,$resolucao);
+		if(!isset($ext))
+		{$ext = "";}		
+		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
 	break;
 
 /*
@@ -1969,13 +1963,12 @@ Pega todos os valores dos itens de uma tabela de um tema.
 */	
 	case "LISTAREGISTROS":
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
+		$m = new Atributos($map_file,$tema,"",$ext);
 		if(!isset($tipo)){$tipo = "";}
 		if(!isset($inicio)){$inicio = 0;}
 		if(!isset($fim)){$fim = "";}
 		if(!isset($tipolista)){$tipolista = "";}
 		if(!isset($itemtema)){$itemtema = "";}
-		//$cp->set_data($m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista));
 		$retorno = $m->listaRegistros($itemtema,$tipo,"",$inicio,$fim,$tipolista);
 	break;
 /*
@@ -2376,7 +2369,8 @@ Seleciona elementos utilizando um ponto.
 			$m = new Selecao($map_file,$tema);
 			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
 		}
-		$retorno = implode(",",$ok);
+		//$retorno = implode(",",$ok);
+		redesenhaMapa();
 	break;
 /*
 Valor: SELECAOEXT
@@ -2394,7 +2388,8 @@ Seleciona elementos utilizando a extensão do mapa.
 			$m = new Selecao($map_file,$tema);
 			$ok[] = $m->selecaoEXT($tipo);
 		}
-		$retorno = implode(",",$ok);
+		//$retorno = implode(",",$ok);
+		redesenhaMapa();
 	break;
 /*
 Valor: SELECAOBOX
@@ -2412,7 +2407,7 @@ Seleciona elementos utilizando um retângulo.
 			$m = new Selecao($map_file,$tema);
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
-		$retorno = implode(",",$ok);		
+		redesenhaMapa();		
 	break;
 
 /*
@@ -2427,6 +2422,7 @@ Seleciona elementos com base nos atributos.
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecaoAtributos($tipo,$item,$operador,$valor);
+		redesenhaMapa();
 	break;
 /*
 Valor: SELECAOATRIB2
@@ -2440,6 +2436,7 @@ Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecaoAtributos2($filtro,$tipo);
+		redesenhaMapa();
 	break;
 /*
 Valor: SELECAOTEMA
@@ -2457,7 +2454,8 @@ Sleciona elementos de um tema com base em outro tema.
 			$m = new Selecao($map_file,$tema);
 			$ok[] = $m->selecaoTema($temao,$tipo);
 		}
-		$retorno = implode(",",$ok);		
+		$retorno = implode(",",$ok);
+		redesenhaMapa();
 	break;
 /*
 Valor: SELECAOPOLI
@@ -2471,7 +2469,8 @@ Seleção por poligono (chamado via POST).
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
 		$retorno = selecaoPoli($xs,$ys,$tema,$tipo);
-		restauraCon($map_file,$postgis_mapa);
+		redesenhaMapa();
+		//restauraCon($map_file,$postgis_mapa);
 	break;
 /*
 Valor: LIMPASEL
@@ -2484,6 +2483,10 @@ Limpa a seleção existente em um tema.
 		include_once("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->selecaoLimpa();
+		//
+		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
+		//
+		redesenhaMapa();		
 	break;
 /*
 Valor: INCLUISEL
@@ -2496,6 +2499,10 @@ Incluí elementos em uma seleção.
 		include_once("classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
 		$retorno = $m->incluiSel($ids);
+		//
+		//é necessário obter os parâmetros do mapa para remontar a árvore de camadas 
+		//
+		redesenhaMapa();
 	break;
 /*
 Valor: CRIATEMASEL
@@ -2716,7 +2723,11 @@ function redesenhaMapa()
 	//na interface googlemaps não é necessário gerar a imagem
 	//
 	if (isset($interface) && ($interface == "googlemaps" || $interface == "openlayers" || $interface == "googleearth"))
-	{$imagem = "var erro = '';var mapimagem='';var mapexten='';var mapres = ''";}
+	{
+		$e = $m->mapa->extent;
+		$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
+		$imagem = "var erro = '';var mapimagem='';var mapexten='".$ext."';var mapres = ''";
+	}
 	else{
 		$imagem = $m->redesenhaCorpo($locsistemas,$locidentifica,$tipoimagem,$utilizacgi,$locmapserv);
 		if ($imagem == "erro")

@@ -2,7 +2,7 @@
 /*
 Title: parse_cgi.php
 
-Faz o porcessamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
+Faz o processamento de um mapfile segundo as necessidades do i3geo, como por exemplo, fazendo a substituição
 das variáveis de conexão com banco e outras operações específicas do i3Geo.
 
 Pode ser utilizado na tag IMG de um arquivo HTML ao invés de ser utilizado o Mapserver em modo CGI.

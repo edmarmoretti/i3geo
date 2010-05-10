@@ -467,6 +467,7 @@ i3GEOF.inserexy = {
 			}
 			x = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
 			y = i3GEO.calculo.dms2dd(ygv,ymv,ysv);
+			g_tipoacao = "inserexy";
 			i3GEOF.inserexy.adiciona(x+" "+y);
 		}
 		catch(e){alert("Erro: "+e);}
@@ -515,7 +516,7 @@ i3GEOF.inserexy = {
 	adiciona: function(xy){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
 		{return;}
-		if (g_tipoacao === "inserexy"){
+		if(g_tipoacao === "inserexy"){
 			i3GEOF.inserexy.aguarde.visibility = "visible";
 			var doc,
 				tema = $i("i3GEOinserexytemasLocais").value,
@@ -541,8 +542,9 @@ i3GEOF.inserexy = {
 			if (tema === "")
 			{alert("Nenhum tema definido para editar");}
 			else{
-				temp = function(){
+				temp = function(retorno){
 					i3GEO.atualiza();
+					i3GEO.Interface.openlayers.atualizaTema(retorno,tema);
 					i3GEOF.inserexy.aguarde.visibility = "hidden"
 				};
 				i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,i3GEOF.inserexy.pegaProjecao());

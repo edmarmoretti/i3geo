@@ -325,10 +325,11 @@ i3GEO = {
 						i3GEO.parametros.interfacePadrao = interfacePadrao;
 					}
 					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}					
+					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
+					
 					i3GEO.gadgets.quadros.inicia(10);
 					i3GEO.gadgets.quadros.grava("extensao",mapexten);
 					
-					i3GEO.arvoreDeCamadas.cria("",retorno.data.temas,i3GEO.configura.sid,i3GEO.configura.locaplic);
 					i3GEO.util.arvore("<b>"+$trad("p13")+"</b>","listaPropriedades",i3GEO.configura.listaDePropriedadesDoMapa);
 
 					i3GEO.gadgets.mostraBuscaRapida();
@@ -337,8 +338,14 @@ i3GEO = {
 					if($i("arvoreAdicionaTema"))
 					{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
 					
-					if($i("mst")){$i("mst").style.display="block";}
-					i3GEO.atualiza(retorno);
+					if($i("mst"))
+					{$i("mst").style.display="block";}
+					//
+					//na interface padrão é necessário executar a atualização pois a geração do mapa
+					//ainda não foi feita
+					//
+					if(i3GEO.Interface.ATUAL === "padrao")
+					{i3GEO.atualiza(retorno);}
 					//
 					//calcula (opcional) o tamanho correto da tabela onde fica o mapa
 					//se não for feito esse cálculo, o mapa fica ajustado à esquerda
@@ -393,6 +400,8 @@ i3GEO = {
 				i3GEO.configura.sid = retorno.data;
 				i3GEO.inicia();
 			};
+			if(i3GEO.Interface.ATUAL !== "padrao")
+			{i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;}
 			i3GEO.php.criamapa(mashup,i3GEO.configura.mashuppar);
 		}
 		else{
@@ -494,7 +503,8 @@ i3GEO = {
 			erro.call();
 			return;
 		}
-		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined){erro.call();return;}
+		if(arguments.length === 0 || retorno === "" || retorno.data.variaveis === undefined)
+		{erro.call();return;}
 		else{	
 			if(arguments.length === 0){return;}
 			i3GEO.mapa.verifica(retorno);
@@ -520,9 +530,8 @@ i3GEO = {
 				i3GEO.parametros.pixelsize = g_celula;
 				i3GEO.parametros.mapimagem = mapimagem;
 			}
-			catch(e){
-				if(typeof(console) !== 'undefined'){console.error(e);}
-			}
+			catch(e){}
+			i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 			i3GEO.Interface.redesenha();
 			//caso esteja na função de identificação
 			if($i("i3GEOidentificalistaTemas")){
@@ -531,11 +540,10 @@ i3GEO = {
 			}
 			else
 			{g_operacao = "";}
-			i3GEO.parametros.mapexten = mapexten;
+			//i3GEO.parametros.mapexten = mapexten;
 			if ($i("mensagemt"))
 			{$i("mensagemt").value = i3GEO.parametros.mapexten;}
 			
-			i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;
 			i3GEO.eventos.navegaMapa();
 			if (i3GEO.configura.entorno === "sim"){
 				i3GEO.navega.entorno.geraURL();

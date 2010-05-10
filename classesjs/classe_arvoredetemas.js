@@ -182,6 +182,18 @@ i3GEO.arvoreDeTemas = {
 	*/
 	ATIVATEMA: "",
 	/*
+	Propriedade: ATIVATEMAIMEDIATO
+	
+	Adiciona ao mapa o tema clicado imediatamente, sem a definição de um temporizador ou necessidade de se clicar no botao "aplicar".
+	
+	Tipo:
+	{boolean}
+	
+	Default:
+	{false}
+	*/
+	ATIVATEMAIMEDIATO: false,	
+	/*
 	Propriedade: IDSMENUS
 	
 	Array com a lista de ids que serão considerados na montagem da árvore. Por default é vazio, o que significa que todos os menus serão considerados.
@@ -647,7 +659,6 @@ i3GEO.arvoreDeTemas = {
 		{var tipoBotao = "";}
 		if(tipoBotao !== "")
 		{i3GEO.arvoreDeTemas.TIPOBOTAO = tipoBotao;}
-		
 		
 		i3GEO.arvoreDeTemas.LOCAPLIC = g_locaplic;
 		i3GEO.arvoreDeTemas.SID = g_sid;
@@ -1117,8 +1128,12 @@ i3GEO.arvoreDeTemas = {
 		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		if(i3GEO.arvoreDeTemas.ATIVATEMA !== "")
 		{html += "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
-		else
-		{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
+		else{
+			if(i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO === false)
+			{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
+			else
+			{html += "onclick='i3GEO.arvoreDeTemas.adicionaTemas()'";}
+		}
 		html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:middle;text-align:left;color:"+cor+";padding-left:3px;' >";
 		html += tema.nome;
 		html += "</td></span>";
@@ -1409,7 +1424,9 @@ i3GEO.arvoreDeTemas = {
 		//
 		//zera o contador de tempo
 		//
-		clearTimeout(tempoBotaoAplicar);
+		try{
+			clearTimeout(tempoBotaoAplicar);
+		}catch(e){}
 		tempoBotaoAplicar = "";
 		i3GEO.mapa.ativaTema("");
 		//

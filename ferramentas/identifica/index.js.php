@@ -31,7 +31,7 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Class: i3GEOF.identifica
 
-Obtém os atributos de um tema para uma coordenada.
+Obtém os atributos de um ou mais temas para uma coordenada.
 
 Abre uma janela com várias opções e lista de temas disponíveis no mapa atual.
 
@@ -414,7 +414,7 @@ i3GEOF.identifica = {
 	Obtém os dados de um tema para o ponto de coordenadas clicado no mapa
 	*/	
 	buscaDadosTema: function(tema){
-		var res,opcao,resolucao;
+		var res,opcao,resolucao,listaDeTemas="";
 		$i("i3GEOidentificaocorrencia").innerHTML = "<img src='"+i3GEO.configura.locaplic+"/imagens/aguarde.gif' />";
 		res = $i("i3GEOidentificaresolucao");
 		if(res)
@@ -427,7 +427,12 @@ i3GEOF.identifica = {
 		{opcao = "ligados";}
 		else
 		{opcao = "tema";}
-		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema);
+		if(i3GEO.Interface.ATUAL === "openlayers"){
+			if(opcao === "ligados")
+			{opcao = "lista";}
+			listaDeTemas = i3GEO.Interface.openlayers.LIGADOS.join(",");
+		}
+		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
 	},
 	/*
 	Function: mostraDadosSistema

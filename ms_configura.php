@@ -50,7 +50,7 @@ Arquivo: ms_configura.php
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Vers&atilde;o 4.4 - Revis&atilde;o SVN 1631';
+$mensagemInicia = 'Vers&atilde;o 4.4 beta - Revis&atilde;o SVN 1660';
 /*
 	Variable: tituloInstituicao
 	
@@ -372,7 +372,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 Tipo:
 	 {string}
 	*/
-	$interfacePadrao = "geral.htm";
+	$interfacePadrao = "geral.htm";//"openlayers.htm";
 }
 else //se for linux
 {

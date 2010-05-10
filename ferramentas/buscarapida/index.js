@@ -136,7 +136,7 @@ i3GEObuscaRapida = {
 		{var resultado = i3GEObuscaRapida.montaResultado;}
 		aguarde("block")
 		$i("resultado").innerHTML = "Aguarde..."
-		var palavra = removeAcentos(palavra);
+		var palavra = i3GEO.util.removeAcentos(palavra);
 		i3GEObuscaRapida.palavra = palavra;
 		i3GEObuscaRapida.locaplic = locaplic;
 		i3GEO.php.buscaRapida(resultado,locaplic,i3GEObuscaRapida.servico,palavra);
@@ -168,6 +168,7 @@ i3GEObuscaRapida = {
 							var nm = retorno.data.geonames[i].lugares[j].nome;
 							ins += nm;
 							var wkt = retorno.data.geonames[i].lugares[j].limite
+							ins += " "+retorno.data.geonames[i].lugares[j].centroide;
 							var gid = retorno.data.geonames[i].lugares[j].gid
 							ins += "</td><td onclick=\""+i3GEObuscaRapida.funcaozoom+"('"+wkt+"','"+layer+"','"+gid+"','"+nm+"')\" onmouseover=\"i3GEObuscaRapida.mostraxy('"+wkt+"')\" onmouseout='i3GEObuscaRapida.escondexy()' style='color:blue;cursor:pointer'><img title='localizar' src='../../imagens/branco.gif' class='tic' /></td></tr>"
 						}
@@ -246,7 +247,7 @@ i3GEObuscaRapida = {
 			}
 			if(window.parent.i3GEO.Interface.ATUAL == "openlayers"){
 				window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
-			}		
+			}
 		};
 		var ext = i3GEO.util.wkt2ext(wkt,"polygon");
 		if(ext == false){alert("wkt invalido");return;}

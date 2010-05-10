@@ -1,22 +1,33 @@
 MAP
+  FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
+  SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\geodados\brasil\vegetacao\biomas.shp"
     GROUP "Grupo 1"
     METADATA
+      "ltempoitemimagem"	""
+      "ltempoitemdescricao"	""
       "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
       "palletestep"	""
+      "ltempoitemtip"	""
       "permitekmz"	"sim"
+      "ltempoitemtitulo"	""
       "description_template"	""
+      "ltempoitemlink"	""
       "palletefile"	""
+      "ltempoformatodata"	""
       "permitedownload"	"sim"
+      "ltempoitemicone"	""
       "download"	"SIM"
       "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
       "permiteogc"	""
       "permitekml"	"sim"
-      "TEMA"	"Biomas shapefile"
+      "TEMA"	"Biomas shapefile x"
       "editorsql"	""
       "identifica"	"NAO"
+      "ltempoitemfim"	""
     END
     NAME "biomashp"
     STATUS OFF
@@ -29,9 +40,9 @@ MAP
       EXPRESSION ('[ID]'eq'2.00')
       STYLE
         ANGLE 360
-        COLOR 24 214 111
+        COLOR 215 84 223
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
     CLASS
@@ -39,9 +50,9 @@ MAP
       EXPRESSION ('[ID]'eq'5.00')
       STYLE
         ANGLE 360
-        COLOR 208 90 180
+        COLOR 123 237 180
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
     CLASS
@@ -49,9 +60,9 @@ MAP
       EXPRESSION ('[ID]'eq'3.00')
       STYLE
         ANGLE 360
-        COLOR 165 220 169
+        COLOR 247 156 142
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
     CLASS
@@ -59,9 +70,9 @@ MAP
       EXPRESSION ('[ID]'eq'6.00')
       STYLE
         ANGLE 360
-        COLOR 182 86 205
+        COLOR 48 115 235
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
     CLASS
@@ -69,9 +80,9 @@ MAP
       EXPRESSION ('[ID]'eq'1.00')
       STYLE
         ANGLE 360
-        COLOR 98 126 232
+        COLOR 167 153 179
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
     CLASS
@@ -79,11 +90,12 @@ MAP
       EXPRESSION ('[ID]'eq'4.00')
       STYLE
         ANGLE 360
-        COLOR 94 171 18
+        COLOR 255 102 70
+        OPACITY 100
         SYMBOL 0
-        WIDTH 1
       END
     END
   END
+
 END
 

@@ -101,10 +101,10 @@ i3GEO.mapa = {
 			noAtualArvoreCamadas = $i("arrastar_"+i3GEO.temaAtivo);
 		i3GEO.temaAtivo = codigo;
 		if(noAtualArvoreCamadas){
-			noAtualArvoreCamadas.style.textDecoration = "";
+			noAtualArvoreCamadas.style.color = "";
 		}
 		if(noArvoreCamadas){
-			noArvoreCamadas.style.textDecoration = "underline";
+			noArvoreCamadas.style.color = "brown";
 		}			
 	},
 	/*
@@ -731,11 +731,12 @@ i3GEO.mapa = {
 							}
 						}
 					}
-					if(i3GEO.Interface.ATUAL==="padrao"){
-						temp = "zoom";
+					if($i(i3GEO.Interface.IDMAPA)){
+						$i(i3GEO.Interface.IDMAPA).title = "";
+						temp = "identifica";
 						if(i3GEO.Interface.ATIVAMENUCONTEXTO)
 						{temp = "identifica_contexto";}
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,"img",i3GEO.configura.locaplic);
+						i3GEO.util.mudaCursor(i3GEO.configura.cursores,temp,i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 					}
 				}
 				catch(e){
@@ -748,7 +749,10 @@ i3GEO.mapa = {
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
 			};
-			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");
+			if(i3GEO.Interface.ATUAL !== "openlayers")
+			{i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");}
+			else
+			{i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5","tip",i3GEO.configura.locaplic,i3GEO.configura.sid,"ligados",i3GEO.parametros.mapexten,i3GEO.Interface.openlayers.LIGADOS.join(","));}
 		}
 	}
 };

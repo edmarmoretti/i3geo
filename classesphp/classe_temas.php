@@ -971,6 +971,7 @@ Retorna o SLD correspondente à legenda do tema.
 	function sld()
 	{
 		if(!$this->layer){return "erro";}
+		$this->layer->set("status",MS_DEFAULT);
 		return $this->layer->generateSLD();
 	}
 /*

@@ -49,16 +49,13 @@ i3GEOF.wiki = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.wiki.html();
 			i3GEOF.wiki.ativaFoco();
-			if(i3GEO.Interface.ATUAL === "padrao"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
    				wikiDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.wiki.lista();});
    				wikiZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.wiki.lista();});						
 			}
-			if(i3GEO.Interface.ATUAL === "openlayers"){
-   				i3geoOL.events.register("moveend",i3geoOL,function(e){i3GEOF.wiki.lista();});
-			}			
 			i3GEOF.wiki.lista();
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
@@ -110,7 +107,7 @@ i3GEOF.wiki = {
 		i3GEOF.wiki.aguarde = $i("i3GEOF.wiki_imagemCabecalho").style;
 		i3GEOF.wiki.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL === "padrao"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.wiki.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){

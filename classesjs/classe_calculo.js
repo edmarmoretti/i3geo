@@ -258,10 +258,8 @@ i3GEO.calculo = {
 				$array_length = pontos.xpt.length;
 				pontos.xtela.push(pontos.xtela[0]);
 				pontos.ytela.push(pontos.ytela[0]);
-				pontos.xtela.push(pontos.xtela[0]);
-				pontos.ytela.push(pontos.ytela[1]);
 				$polygon_area = 0;
-				for ($i=0;$i <= $array_length;$i++)
+				for ($i=0;$i < $array_length;$i++)
 				{$polygon_area += ((pontos.xtela[$i] * pontos.ytela[$i+1])-(pontos.ytela[$i] * pontos.xtela[$i+1]));}
 				$polygon_area = Math.abs($polygon_area) / 2;
 			}

@@ -797,6 +797,5 @@ $ext - coordenadas separadas por espaços no estilo xmin ymin xmax ymax
 		if ($tipo == "retira")
 		{return($this->selecaoRetira($shpi,$shp_atual));}
 	}
-
 }
 ?>

@@ -160,9 +160,19 @@ i3GEO.php = {
 	<Mapa->excluiTemas>	
 	*/
 	excluitema: function(funcao,tema){
+		var layer;
 		i3GEO.php.verifica();
+		var retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				layers = i3geoOL.getLayersByName(tema);
+				if(layers.length > 0)
+				{i3geoOL.removeLayer(layers[0]);}
+				i3GEO.Interface.openlayers.LIGADOS.remove(tema);
+			}
+			funcao.call(retorno);
+		};
 		var p = i3GEO.arvoreDeCamadas.LOCAPLIC+"/classesphp/mapa_controle.php?funcao=excluitema&temas="+tema+"&g_sid="+i3GEO.arvoreDeCamadas.SID;
-		cpJSON.call(p,"excluitema",funcao);	
+		cpJSON.call(p,"excluitema",retorno);	
 	},
 	/*
 	Function: reordenatemas
@@ -195,7 +205,6 @@ i3GEO.php = {
 		}
 		if(arguments.length === 2)
 		{template = "legenda2.htm";}
-		
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaLegendaHTML&tema="+tema+"&templateLegenda="+template+"&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"criaLegendaHTML",funcao);	
 	},
@@ -569,8 +578,15 @@ i3GEO.php = {
 	*/
 	zoomponto: function(funcao,x,y){
 		i3GEO.php.verifica();
+		var retorno = function(retorno){
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				i3GEO.Interface.openlayers.pan2ponto(x,y);
+    			i3GEO.janela.fechaAguarde();			
+			}
+			funcao.call(retorno);
+		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+i3GEO.configura.sid;
-		cpJSON.call(p,"zoomponto",funcao);	
+		cpJSON.call(p,"zoomponto",retorno);	
 	},
 	/*
 	Function: localizaIP
@@ -613,8 +629,9 @@ i3GEO.php = {
 				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
 			}
-			if(i3GEO.Interface.ATUAL === "padrao")
-			{i3GEO.atualiza(retorno);}
+			//if(i3GEO.Interface.ATUAL === "padrao")
+			//{funcao.call(retorno);}
+			funcao.call(retorno);
 		};
 		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	
@@ -922,17 +939,21 @@ i3GEO.php = {
 	
 	<Atributos->identifica2>	
 	*/
-	identifica2: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema){
+	identifica2: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema,ext,listaDeTemas){
 		if(arguments.length === 4){
 			opcao = "tip";
 			locaplic = i3GEO.configura.locaplic;
-			sid = i3GEO.configura.sid;		
+			sid = i3GEO.configura.sid;
+			ext = "";
+			listaDeTemas = "";
 		}
 		if(arguments.length === 5){
 			locaplic = i3GEO.configura.locaplic;
-			sid = i3GEO.configura.sid;		
+			sid = i3GEO.configura.sid;
+			ext = "";
+			listaDeTemas = "";
 		}
-		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
+		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
 		if(opcao !== "tip")
 		{p += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao);	

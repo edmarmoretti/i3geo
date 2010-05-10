@@ -58,6 +58,10 @@ i3GEO.tema = {
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.mapa.ativaTema("");
+		if(i3GEO.Interface.ATUAL === "openlayers"){
+			var layer = i3geoOL.getLayersByName(tema)[0];
+			i3geoOL.removeLayer(layer);
+		}
 	},
 	/*
 	Function: fonte
@@ -91,9 +95,19 @@ i3GEO.tema = {
 	*/
 	sobe: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.sobe()");}
+		var temp = function(retorno){
+			//
+			//atualiza apenas remonta a árvore
+			//no caso de interfaces como openlayers
+			//é necessário mover o DIV tbm
+			//
+			i3GEO.atualiza(retorno);
+			if(i3GEO.Interface.ATUAL === "openlayers")
+			{i3GEO.Interface.openlayers.ordenaLayers();}
+		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
-		i3GEO.php.sobetema(i3GEO.atualiza,tema);
+		i3GEO.php.sobetema(temp,tema);
 	},
 	/*
 	Function: desce
@@ -106,9 +120,19 @@ i3GEO.tema = {
 	*/
 	desce: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.desce()");}
+		var temp = function(retorno){
+			//
+			//atualiza apenas remonta a árvore
+			//no caso de interfaces como openlayers
+			//é necessário mover o DIV tbm
+			//
+			i3GEO.atualiza(retorno);
+			if(i3GEO.Interface.ATUAL === "openlayers")
+			{i3GEO.Interface.openlayers.ordenaLayers();}
+		};
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
-		i3GEO.php.descetema(i3GEO.atualiza,tema);
+		i3GEO.php.descetema(temp,tema);
 	},
 	/*
 	Function: zoom
@@ -154,7 +178,11 @@ i3GEO.tema = {
 		g_operacao = "limpasel";
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
-		i3GEO.php.limpasel(i3GEO.atualiza,tema);
+		var temp = function(retorno){
+			i3GEO.atualiza(retorno);
+			i3GEO.Interface.atualizaTema(retorno,tema);
+		};
+		i3GEO.php.limpasel(temp,tema);
 	},
 	/*
 	Function: mudatransp
@@ -168,7 +196,11 @@ i3GEO.tema = {
 	mudatransp: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
 		g_operacao = "transparencia";
-		var valor;
+		var valor,
+			temp = function(retorno){
+				i3GEO.atualiza(retorno);
+				i3GEO.Interface.atualizaTema(retorno,idtema);
+			};
 		//o campo input com o valor possui o prefixo 'tr' seguido pelo código do tema
 		if ($i("tr"+idtema))
 		{valor = $i("tr"+idtema).value;}
@@ -177,7 +209,7 @@ i3GEO.tema = {
 		if (valor !== ""){
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.contadorAtualiza++;
-			i3GEO.php.mudatransp(i3GEO.atualiza,idtema,valor);
+			i3GEO.php.mudatransp(temp,idtema,valor);
 		}
 		else
 		{alert("Valor não definido.");}

@@ -20,8 +20,8 @@ MAP
 	FONTSET "c:\ms4w\apache\htdocs\i3geo/symbols/fontes.txt"
 	SYMBOLSET "c:\ms4w\apache\htdocs\i3geo/symbols/simbolos.sym"
 	#DEBUG OFF
-	#DEBUG 5
-	#CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
+	DEBUG 5
+	CONFIG "MS_ERRORFILE" "/ms4w/tmp/ms_error.txt"
 
 	SHAPEPATH "c:\ms4w\apache\htdocs\geodados"
 	IMAGECOLOR 157 211 255
@@ -32,7 +32,7 @@ MAP
 	UNITS DD
 	NAME "GERAL"
 	DEBUG OFF
-
+		
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
  		DRIVER AGG/PNG
@@ -275,11 +275,11 @@ MAP
       "TEMA"	"Base cartográfica"
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
-	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
+	  #"MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
     END
     NAME "baserasterwms"
     OFFSITE 255 255 255
-    STATUS OFF
+    STATUS off
     TOLERANCE 0
     TRANSFORM FALSE
     TYPE RASTER
@@ -325,7 +325,6 @@ LAYER
 	
 	LAYER
 		METADATA
-		
 			"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
 		END

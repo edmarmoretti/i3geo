@@ -27,7 +27,7 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Class: i3GEOF.tipoimagem
 
-Abre janela de opções para impressão do mapa atual
+Abre janela de opções para definição do tipo de filtro de imagem que será aplicado ao mapa. 
 */
 i3GEOF.tipoimagem = {
 	/*

@@ -282,8 +282,10 @@ i3GEO.gadgets = {
 							if(typeof(console) !== 'undefined'){console.error(m);}
 						}
 					};
-					if($i(i3GEO.Interface.IDMAPA))
-					{YAHOO.util.Event.addListener($i(i3GEO.Interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
+					//if($i(i3GEO.Interface.IDMAPA))
+					//{YAHOO.util.Event.addListener($i(i3GEO.Interface.IDMAPA),"mousemove", atualizaLocalizarxy);}
+					if(i3GEO.eventos.MOUSEMOVE.toString().search("atualizaLocalizarxy()") < 0)
+					{i3GEO.eventos.MOUSEMOVE.push("atualizaLocalizarxy()");}
 				}
 			}
 		}

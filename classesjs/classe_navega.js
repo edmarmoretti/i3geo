@@ -587,8 +587,12 @@ i3GEO.navega = {
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.autoRedesenho.redesenha()");}
 			clearTimeout(i3GEO.navega.tempoRedesenho);
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
-			i3GEO.contadorAtualiza++;
-			i3GEO.atualiza("");
+			if(i3GEO.Interface.ATUAL === "openlayers")
+			{i3GEO.Interface.openlayers.atualizaMapa();}
+			else{
+				i3GEO.contadorAtualiza++;
+				i3GEO.atualiza("");
+			}
 			i3GEO.navega.autoRedesenho.ativa(i3GEO.navega.autoRedesenho.ID);
 		},
 		/*
