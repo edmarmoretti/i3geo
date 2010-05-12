@@ -16,29 +16,30 @@ function montaTabela_M(dados)
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
-            elCell.innerHTML = "<pre ><p>" + oData + "</pre>";
+            elCell.innerHTML = "<pre ><p style=cursor:pointer title='clique para editar'>" + oData + "</pre>";
         };
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div class=aplicar title='salva' style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
+            elCell.innerHTML = "<div class=excluir title='exclui' style='text-align:center' ></div>";//onclick='excluiLinha_M(\""+oRecord.getData("id_menu")+"\",\""+oRecord.getId()+"\")'></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
             {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_menu", formatter:formatTexto},
-			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto, editor:"textbox"},
-			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:"textbox"},
-			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:"textbox"},
-			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:"textbox"},
-			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox"},
-			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false}},
-			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto, editor:"textbox"}
+			{label:"nome",resizeable:true,key:"nome_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"en",resizeable:true,key:"en", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"es",resizeable:true,key:"es", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"it",resizeable:true,key:"it", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"publicado?",key:"publicado_menu",editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
+			{label:"perfis",resizeable:true,key:"perfil_menu", formatter:formatTexto,editor:"textbox",editorOptions:{LABEL_SAVE:"OK"}},
+			{label:"aberto?",key:"aberto", editor:"radio" ,editorOptions:{radioOptions:["SIM","NAO"],disableBtns:false,LABEL_SAVE:"OK"}},
+			{label:"descrição",resizeable:true,key:"desc_menu", formatter:formatTexto,editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
         ];
+		//YAHOO.widget.CellEditor.LABEL_SAVE = "Aplicar";
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
         myDataSource.responseSchema =
@@ -125,7 +126,6 @@ function gravaLinha_M(row)
 	var en = r.getData("en");
 	var es = r.getData("es");
 	var it = r.getData("it");
-
 	core_carregando("ativa");
 	var sUrl = "../php/menutemas.php?funcao=alteraMenus&publicado_menu="+publicado_menu+"&perfil="+perfil_menu+"&nome="+nome_menu+"&desc="+desc_menu+"&id="+id_menu+"&aberto="+aberto+"&en="+en+"&es="+es+"&it="+it+"";
 	var mensagem = " gravando registro "+id_menu

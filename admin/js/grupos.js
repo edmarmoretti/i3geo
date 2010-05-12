@@ -16,30 +16,29 @@ function montaTabela_G(dados)
         // Custom formatter for "address" column to preserve line breaks
         var formatTexto = function(elCell, oRecord, oColumn, oData)
         {
-            elCell.innerHTML = "<p style=width:250px >" + oData + "</p>";
+            elCell.innerHTML = "<p style=width:250px;cursor:pointer title='clique para editar'>" + oData + "</p>";
         };
         var formatTextoId = function(elCell, oRecord, oColumn, oData)
         {
             elCell.innerHTML = "<p style=width:20px >" + oData + "</p>";
         };
-
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=aplicar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div title='salva' class=aplicar style='text-align:center' onclick='gravaLinha_G(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=excluir style='text-align:center' ></div>";
+            elCell.innerHTML = "<div title='exclui' class=excluir style='text-align:center' ></div>";
         };
         var myColumnDefs = [
             {key:"excluir",label:"excluir",formatter:formatExclui},
             {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_grupo", formatter:formatTextoId},
-			{label:"nome",resizeable:true,key:"nome_grupo", formatter:formatTexto, editor:"textbox"},
-			{label:"descrição",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:"textbox"},
-			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:"textbox"},
-			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:"textbox"},
-			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:"textbox"}
+			{label:"nome",resizeable:true,key:"nome_grupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"descrição",resizeable:true,key:"desc_grupo", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"en",resizeable:true,key:"en", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"es",resizeable:true,key:"es", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{label:"it",resizeable:true,key:"it", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
         ];
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;

@@ -36,7 +36,7 @@ function montaTabela(dados)
             {key:"excluir",label:"excluir",formatter:formatExclui},
             {label:"salvar",formatter:formatSalva},
             {label:"id",key:"id_tag", formatter:formatTextoId},
-			{label:"nome",resizeable:true,key:"nome", formatter:formatTexto, editor:"textbox"}
+			{label:"nome",resizeable:true,key:"nome", formatter:formatTexto, editor:new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
         ];
         myDataSource = new YAHOO.util.DataSource(dados);
         myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
