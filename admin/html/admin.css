@@ -30,6 +30,15 @@ input
 	width: 20px;
 	height: 20px;
 }
+.salvar
+{
+	background-image:URL('../imagens/save1.png');
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	cursor:pointer;
+	width: 20px;
+	height: 20px;
+}
 .excluir
 {
 	background-image:URL('../imagens/01.png');

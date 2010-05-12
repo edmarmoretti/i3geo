@@ -25,7 +25,7 @@ function montaTabela_S(dados)
 
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div title='salva' class=aplicar style='text-align:center' onclick='gravaLinha_S(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div title='salva' class=salvar style='text-align:center' onclick='gravaLinha_S(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {

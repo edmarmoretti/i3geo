@@ -20,7 +20,7 @@ function montaTabela_M(dados)
         };
         var formatSalva = function(elCell, oRecord, oColumn)
         {
-            elCell.innerHTML = "<div class=aplicar title='salva' style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
+            elCell.innerHTML = "<div class=salvar title='salva' style='text-align:center' onclick='gravaLinha_M(\""+oRecord._sId+"\")'></div>";
         };
         var formatExclui = function(elCell, oRecord, oColumn)
         {
