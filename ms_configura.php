@@ -369,10 +369,12 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	 
 	 O arquivo deve estar armazenado em i3geo/aplicmap
 	 
+	 A interface padrão é utilizada quando não é definida nenhuma interface via URL.
+	 
 	 Tipo:
 	 {string}
 	*/
-	$interfacePadrao = "geral.htm";//"openlayers.htm";
+	$interfacePadrao = "openlayers.htm";
 }
 else //se for linux
 {

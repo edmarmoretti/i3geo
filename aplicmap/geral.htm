@@ -178,7 +178,6 @@ vc pode optar por colocar mensagens de ajuda em algum lugar
 	</td>
 </tr>
 </table>
-<!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
 /*
 Title: Interface normal
@@ -191,40 +190,21 @@ Exemplo:
 
 http://<host>/i3geo/ms_criamapa.php
 
+Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
+
 */
 /*
-	Indica a localização correta do i3geo.
+i3GEO.configura.locaplic indica a localização correta do i3geo.
 	
-	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
+Se vc instalou o i3geo em um diretório diferente do normal, altere o valor da variável abaixo.
+
+Por exemplo, se vc instalou no diretório "i3geoteste", modifique para:
+
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geoteste";
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 
-
-//i3GEO.arvoreDeTemas.INCLUISISTEMAS = false;
-//i3GEO.idioma.MOSTRASELETOR = false;
-//function tempi(){alert("oi")}
-//i3GEO.configura.funcaoIdentifica = "tempi()"
 i3GEO.cria()
-//Log
-/*
-var myContainer = document.body.appendChild(document.createElement("div")); 
-myContainer.style.textAlign="left";
-i3geoLog = new YAHOO.widget.LogReader(myContainer);
-i3geoLog.show();
-*/
-
-/*
-	Inicializa o mapa
-*/
-//i3GEO.guias.ATUAL = "legenda"
-//i3GEO.idioma.alteraDicionario("t18a","teste");
-
-/*
-i3GEO.configura.grupoLayers = [
-	{nome:"Grupo 1",layers:["zee","estadosl"]},
-	{nome:"Grupo 2",layers:["mundo"]}
-]
-*/
 
 i3GEO.barraDeBotoes.AUTOALTURA = false
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = true
@@ -232,7 +212,6 @@ i3GEO.barraDeBotoes.PERMITEFECHAR = true
 i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 i3GEO.barraDeBotoes.AUTO = true //as barras de botões serão construídas automaticamente
-//i3GEO.configura.embedLegenda = "sim"
 
 i3GEO.idioma.IDSELETOR = "seletorIdiomas"
 i3GEO.interface.ATIVAMENUCONTEXTO = true;

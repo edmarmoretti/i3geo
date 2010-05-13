@@ -15,6 +15,7 @@ MAP
       "permitekmz"	"sim"
       "ltempoitemtitulo"	""
       "description_template"	""
+      "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
       "ltempoitemlink"	""
       "palletefile"	""
       "ltempoformatodata"	""

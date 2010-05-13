@@ -247,7 +247,8 @@ string - javascript com os parametros
 					"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
 					"editorsql"=>$editorsql,
 					"linhadotempo"=>$ltempo,
-					"escondido"=>strtolower($escondido)
+					"escondido"=>strtolower($escondido),
+					"iconetema"=>($oLayer->getmetadata("iconetema"))
 				);
 			//}
 		}

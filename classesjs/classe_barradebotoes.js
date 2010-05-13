@@ -159,6 +159,12 @@ i3GEO.barraDeBotoes = {
 	
 	INCLUIBOTAO: {
 	
+		zoomli: false,
+
+		pan: false,
+
+		zoomtot:false,
+
 		identifica: true,
 		
 		identificaBalao: true,
@@ -202,6 +208,9 @@ i3GEO.barraDeBotoes = {
 	{JSON}
 	*/
 	INCLUIBOTAO: {
+		zoomli: false,
+		pan: false,
+		zoomtot:false,
 		identifica: true,
 		identificaBalao: true,
 		mede: true,
@@ -303,8 +312,7 @@ i3GEO.barraDeBotoes = {
 			try
 			{OLzoom.deactivate();}
 			catch(e){
-				if(typeof(console) !== 'undefined')
-				{console.error(e);}
+				if(typeof(console) !== 'undefined'){console.error(e);}
 			}
 		}
 		var estilo,temp,ist,cor,ko;
@@ -506,7 +514,7 @@ i3GEO.barraDeBotoes = {
 					novoel.id = "barraDeBotoes2";
 					novoel.innerHTML = "<table style='width:100%'><caption style='text-align:center'>&nbsp;</caption>"+
 						"<tr><td style='background-color:rgb(250,250,250);'><img title='' alt='sobe' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='sobeferramentas'/></td></tr>"+
-						"</table>" +temp,
+						"</table>" +temp+
 						"<table style='width:100%;'><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:2px;'>&nbsp;</p><img title='desce' alt='' src='"+i3GEO.configura.locaplic+"/imagens/branco.gif' id='desceferramentas'/></td></tr></table>";
 					document.body.appendChild(novoel);
 				}
@@ -519,7 +527,6 @@ i3GEO.barraDeBotoes = {
 		else{
 			if(idconteudo === "barraDeBotoes2" && onde != undefined){
 				$i(onde).innerHTML = $i(idconteudo);
-				
 			}
 		}
 		wj = "36px";
@@ -630,8 +637,6 @@ i3GEO.barraDeBotoes = {
 				nelementos = elementos.length;
 				if(elementos[0].style.display == "inline" && elementos[0].id === "")
 				{return;}
-				//if(elementos[1].style.display == "inline" && elementos[1].id === "")
-				//{return;}
 				if(nelementos > 0){
 					mostra = elementos[0];
 					i = 0;

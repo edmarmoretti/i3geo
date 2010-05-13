@@ -794,6 +794,8 @@ function montaEditorMetadados(dados)
 		"linhas":[
 		{ajuda:"Nome que será utilizado na legenda do mapa e na guia 'Temas'",
 		titulo:"Tema (METADATA: TEMA)",id:"tema",value:dados.tema,tipo:"text"},
+		{ajuda:"Ícone que será mostrado na árvore de camadas. A imagem deve existir na web e deve ser incluído o caminho completo ou relativo em relação ao local da interface HTML do mapa.",
+		titulo:"Ícone (METADATA: ICONETEMA)",id:"iconetema",value:dados.iconetema,tipo:"text"},
 		{ajuda:"Denominador da escala da fonte dos dados utilizado pelo tema. É utilizado para apresentar a indicação de compatibilidade entre a escala do tema e a escala do mapa que está sendo visto.",
 		titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
 		{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
@@ -1197,7 +1199,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}

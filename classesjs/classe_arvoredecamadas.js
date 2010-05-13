@@ -184,12 +184,26 @@ i3GEO.arvoreDeCamadas = {
 	Ativa a opção de aguarde para mostrar a legenda de um tema quando o usuário estaciona o mouse sobre o nome de um tema.
 	
 	Default:
-	{true}
+	{false}
 	
 	Tipo:
 	{Boolean}
 	*/
 	AGUARDALEGENDA: false,
+	/*
+	Propriedade: ICONETEMA
+	
+	Mostra ou não o ícone do tema caso exista.
+	
+	O ícone é definido no METADATA ICONETEMA no mapfile correspondente ao tema
+	
+	Default:
+	{true}
+	
+	Tipo:
+	{Boolean}
+	*/
+	ICONETEMA: true,	
 	/*
 	Variavel: CAMADAS
 	
@@ -933,6 +947,11 @@ i3GEO.arvoreDeCamadas = {
 		else
 		{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeCamadas.aplicaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicarCamadas\",this)'";}
 		html += " />";
+		//
+		//inclui icone do tema
+		//
+		if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true)
+		{html += "&nbsp;<img src='"+tema.iconetema+"' />";}		
 		//
 		//inclui icone indicando que o tema muda conforme a escala
 		//

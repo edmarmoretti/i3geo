@@ -549,11 +549,12 @@ function pegaMetadados()
 	$dados["ltempoitemimagem"] = $layer->getmetadata("ltempoitemimagem");
 	$dados["ltempoitemicone"] = $layer->getmetadata("ltempoitemicone");
 	$dados["ltempoitemlink"] = $layer->getmetadata("ltempoitemlink");
+	$dados["iconetema"] = $layer->getmetadata("iconetema");
 	return $dados;
 }
 function alterarMetadados()
 {
-	global $ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -591,6 +592,7 @@ function alterarMetadados()
 	$layer->setmetadata("ltempoitemimagem",$ltempoitemimagem);
 	$layer->setmetadata("ltempoitemicone",$ltempoitemicone);
 	$layer->setmetadata("ltempoitemlink",$ltempoitemlink);
+	$layer->setmetadata("iconetema",$iconetema);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
