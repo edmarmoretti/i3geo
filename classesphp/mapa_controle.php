@@ -1032,7 +1032,7 @@ Gera uma imagem que será utilizada para destacar um determinado tema.
 */
 	case "GERADESTAQUE":
 		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$tema,"",$ext);
 		$retorno = $m->geraDestaque();
 	break;
 /*

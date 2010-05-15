@@ -302,6 +302,23 @@ i3GEO.tema = {
 	*/
 	dialogo:{
 		/*
+		Function: cortina
+
+		Abre a janela de diálogo da ferramenta cortina, que atua sobre um tema.
+		
+		Parametros:
+
+		tema - código do tema escolhido
+		
+		*/
+		cortina: function(tema){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.cortina()");}
+			if(typeof(i3GEOF.cortina) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/cortina/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.cortina.criaJanelaFlutuante('"+tema+"')","i3GEOF.cortina_script");
+			}
+		},
+		/*
 		Function: abreKml
 
 		Abre a janela para mostrar o link de acesso a um tema via kml.

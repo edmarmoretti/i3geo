@@ -160,6 +160,7 @@ $cssfiles = array(
 "../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
 "../pacotes/yui270/build/carousel/assets/skins/sam/carousel.css",
+"../pacotes/yui270/build/slider/assets/skins/sam/slider.css",
 "../css/corrigeyui_geral.css"
 ); 
 

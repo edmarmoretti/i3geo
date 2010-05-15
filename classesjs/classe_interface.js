@@ -787,8 +787,8 @@ i3GEO.Interface = {
 				i3GEO.eventos.navegaMapa();
 			});
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
-				//pega as coordenadas do cursor
-				var p,lonlat,d,dc;
+				//i3GEO.eventos.mousemoveMapa();
+				var p,lonlat,d,dc,imgp,targ,pos,mousex,mousey;
 				if (navm)
 				{p = new OpenLayers.Pixel(e.x,e.y);}
 				else
@@ -811,6 +811,9 @@ i3GEO.Interface = {
 						objposicaocursor.telax = objposicaocursor.telax + dc.offsetLeft;
 						objposicaocursor.telay = objposicaocursor.telay + dc.offsetTop;
 					}
+					d = i3geoOL.getViewPortPxFromLonLat(lonlat);
+					objposicaocursor.imgx = d.x;
+					objposicaocursor.imgy = d.y;
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}

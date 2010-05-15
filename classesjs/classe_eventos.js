@@ -310,7 +310,7 @@ i3GEO.eventos = {
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
 		if (container !== "divGeometriasTemp"){
-			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "openlayers") || (i3GEO.Interface.ATUAL === "googleearth"))
+			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "googleearth") || (i3GEO.Interface.ATUAL === "openlayers"))
 			{return;}
 		}
 		if (!e){e = window.event;}

@@ -111,6 +111,7 @@ Group: API PHP  {
    File: graficos.php  (classesphp\graficos.php)
    File: mapa_controle.php  (classesphp\mapa_controle.php)
    File: mapa_inicia.php  (classesphp\mapa_inicia.php)
+   File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
    File: parse_cgi.php  (classesphp\parse_cgi.php)
    File: pega_variaveis.php  (classesphp\pega_variaveis.php)
    File: wmswfs.php  (classesphp\wmswfs.php)

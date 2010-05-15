@@ -79,6 +79,10 @@ parameters:
 $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
+
+$locaplic - (opcional) endereço do i3geo
+
+$ext - (opcional) extensão geográfica que será aplicada ao mapa
 */
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{

@@ -80,6 +80,7 @@ var cssfiles = new Array(
 "../pacotes/yui270/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui270/build/treeview/assets/skins/sam/treeview.css",
 "../pacotes/yui270/build/button/assets/skins/sam/button.css",
+"../pacotes/yui270/build/slider/assets/skins/sam/slider.css",
 "../css/corrigeyui_geral.css"
 );
 for (i = 0; i < cssfiles.length; i++)

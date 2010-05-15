@@ -1070,15 +1070,16 @@ i3GEO.navega = {
 		*/
 		inicia: function(tema){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.destacaTema.inicia()");}
-			var novoel,novoeli,janela;
+			var novoel,novoeli,janela,pos;
 			if (!$i("img_d")){
+				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
 				novoel = document.createElement("div");
 				novoel.id = "div_d";
 				novoel.style.zIndex = 5000;
 				document.body.appendChild(novoel);
 				$i("div_d").innerHTML = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d' />";
-				$i("div_d").style.left = parseInt($i("corpoMapa").style.left,10);
-				$i("div_d").style.top = parseInt($i("corpoMapa").style.top,10);
+				$i("div_d").style.left = parseInt(pos[0],10);
+				$i("div_d").style.top = parseInt(pos[1],10);
 				$i("img_d").style.left = 0;
 				$i("img_d").style.top = 0;
 				$i("img_d").style.width = i3GEO.parametros.w;
@@ -1092,7 +1093,7 @@ i3GEO.navega = {
 			i3GEO.navega.destacaTema.TEMA = tema;
 			i3GEO.navega.destacaTema.ESTAATIVO = "sim";
 			i3GEO.navega.destacaTema.atualiza();
-			janela = i3GEO.janela.cria(150,0,"","center","center","Parar destaque&nbsp;&nbsp;","ativadesativaDestaque");
+			janela = i3GEO.janela.cria(160,0,"","center","center","Feche para parar destaque&nbsp;&nbsp;","ativadesativaDestaque");
 			YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.navega.destacaTema.desativa);
 			if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.navega.destacaTema.atualiza()") < 0)
 			{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.navega.destacaTema.atualiza()");}

@@ -95,8 +95,12 @@ parameters:
 $map_file - Endereço do mapfile no servidor. 
 
 $tema - nome do tema que será processado
+
+$locaplic - (opcional) endereço do i3geo
+
+$ext - (opcional) extensão geográfica que será aplicada ao mapa
 */
-	function __construct($map_file,$tema=null,$locaplic="")
+	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -125,6 +129,11 @@ $tema - nome do tema que será processado
 				$this->indices[] = $t->index;
 			}
   		}
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		}
 	}
 /*
 function: salva

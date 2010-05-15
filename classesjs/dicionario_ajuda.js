@@ -761,6 +761,15 @@ g_traducao_ajuda = {
 			complemento:"Modifica o parâmetro OUTPUTFORMAT do mapa em uso permitindo-se escolher entre PNG e JPEG com tecnologia de geração AGG ou GD.",
 			tela:"",
 			apijs:"i3GEO.mapa.dialogo.outputformat()"
+		},
+		"90": {
+			titulo: "Cortina",
+			diretorio:"i3geo/ferramentas/outputformat",
+			categoria:"5",
+			pt:"Permite mostrar e esconder uma camada existente no mapa em um movimento contínuo. O efeito 'cortina' permite comparar um tema com outro.",
+			complemento:"",
+			tela:"",
+			apijs:"i3GEO.tema.dialogo.cortina()"
 		}
 	}
 };

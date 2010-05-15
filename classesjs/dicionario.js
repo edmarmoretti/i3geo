@@ -698,6 +698,13 @@ en:"SQL...",
 es:"SQL...",
 it:"SQL..."
 }],
+"t42":[
+{
+pt:"Cortina...",
+en:"Curtain...",
+es:"Cortina...",
+it:"Tenda..."
+}],
 //guia adiciona
 "a1":[
 {
