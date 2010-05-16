@@ -560,6 +560,16 @@ i3GEO.Interface = {
 		{[-180, -90, 180, 90]}
 		*/		
 		MAXEXTENT: [-180, -90, 180, 90],
+		/*
+		Propriedades: LAYERSADICIONAIS
+		
+		Array com objetos do tipo LAYER que serão adicionados após a crioação de todos os layers default.
+		
+		Tipo:
+		{array}
+		
+		*/
+		LAYERSADICIONAIS: [],
 		redesenha: function(){
 			//
 			//são criados apenas os layers que ainda não existirem no mapa
@@ -571,7 +581,10 @@ i3GEO.Interface = {
 			i3GEO.janela.fechaAguarde();
 		},
 		cria: function(w,h){
-			var i,f,ins;
+			var i,f,ins,
+				mi = i3GEO.Interface.openlayers.MINEXTENT,
+				ma = i3GEO.Interface.openlayers.MAXEXTENT
+			;
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
 				f = $i("openlayers");
@@ -587,23 +600,22 @@ i3GEO.Interface = {
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = true;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = true;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;
+			i3geoOL = new OpenLayers.Map('openlayers', {
+				controls: [],
+				fractionalZoom: true,
+				minResolution: "auto",
+				minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
+				maxResolution: "auto",
+				maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
+			});
+
 		},
 		inicia: function(){
 			//
 			//monta o mapa após receber o resultado da criação do mapfile temporário
 			//
-			var mi = i3GEO.Interface.openlayers.MINEXTENT,
-				ma = i3GEO.Interface.openlayers.MAXEXTENT,
-				montaMapa = function(){
+			var montaMapa = function(){
 				var pz,pos;
-				i3geoOL = new OpenLayers.Map('openlayers', {
-					controls: [],
-					fractionalZoom: true,
-                    minResolution: "auto",
-                    minExtent: new OpenLayers.Bounds(mi[0],mi[1],mi[2],mi[3]),
-                    maxResolution: "auto",
-                    maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
-				});
 				i3GEO.Interface.openlayers.criaLayers();
 				i3GEO.Interface.openlayers.registraEventos();
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
@@ -657,6 +669,9 @@ i3GEO.Interface = {
 				urllayer,
 				opcoes,
 				i;
+
+
+
 			if(i3geoOL.getLayersByName("Fundo").length == 0){
 				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1});
 				i3geoOL.addLayer(layer);
@@ -664,6 +679,7 @@ i3GEO.Interface = {
 			opcoes = {
 				gutter:0,
 				isBaseLayer:false,
+				displayInLayerSwitcher:false,
 				opacity: 1,
 				singleTile:!(i3GEO.Interface.openlayers.TILES),
 				ratio:1,
@@ -693,6 +709,8 @@ i3GEO.Interface = {
 				else
 				{layer.setVisibility(true);}				
 			}
+			i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);
+
 		},
 		loadStartLayer: function(event){
 			var i = $i("arrastar_"+event.object.name);

@@ -162,12 +162,15 @@ i3GEO.configura.diminuixN = 20
 i3GEO.Interface.openlayers.GADGETS = {
 		PanZoomBar:true,
 		PanZoom:false,
-		LayerSwitcher:false,
+		LayerSwitcher:true,
 		ScaleLine:true,
 		OverviewMap:true	
 	};
-
-i3GEO.cria()
+/*
+Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
+Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
+*/
+i3GEO.cria();
 /*
 	Inicializa o mapa
 	
@@ -180,21 +183,33 @@ i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
 i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 
-i3GEO.interface.BARRABOTOESLEFT = 50
-i3GEO.interface.BARRABOTOESTOP = 10
+i3GEO.Interface.BARRABOTOESLEFT = 50
+i3GEO.Interface.BARRABOTOESTOP = 10
 
 i3GEO.idioma.IDSELETOR = "seletorIdiomas"
-i3GEO.interface.ATIVAMENUCONTEXTO = true
+i3GEO.Interface.ATIVAMENUCONTEXTO = true
 i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
 i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true
 //
 //esta é uma variável interna do OpenLayers que define o endereço do diretório onde estão as imagens usadas nos ícones
 //
 OpenLayers.ImgPath = "../pacotes/openlayers/img/"
-/*
-Após a inicialização, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
-Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
-*/
+//
+//adiciona camadas que podem ser ativadas como fundo do mapa
+//
+var ims = new OpenLayers.Layer.ArcGIS93Rest( 
+	"ESRI Imagery World 2D",
+    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export"
+);
+var wsm = new OpenLayers.Layer.ArcGIS93Rest( 
+	"ESRI World Street Map",
+    "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export"
+);
+i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm];
+
+//
+//inicia o mapa
+//
 i3GEO.inicia();
 </script>
 </body>
