@@ -35,7 +35,7 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 if (!function_exists('ms_GetVersion'))
 {
 	$s = PHP_SHLIB_SUFFIX;
@@ -52,11 +52,13 @@ if(isset($_GET["BBOX"]))
 
 if (($postgis_mapa != "") || ($postgis_mapa != " "))
 {substituiCon($_GET["map"],$postgis_mapa);}
+
 $mapa = ms_newMapObj($_GET["map"]);
 $qyfile = str_replace(".map",".qy",$_GET["map"]);
 $qy = file_exists($qyfile);
 if($qy)
 {$mapa->loadquery($qyfile);}
+
 $layersNames = $mapa->getalllayernames();
 foreach ($layersNames as $layerName)
 {
@@ -74,18 +76,46 @@ foreach ($layersNames as $layerName)
 }
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
+
 $mapext = explode(" ",$_GET["mapext"]);
 $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
+
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
+
 if(!$qy)
 {$img = $mapa->draw();}
 else
 {$img = $mapa->drawQuery();}
+
 if (($postgis_mapa != "") || ($postgis_mapa != " "))
 {restauraCon($_GET["map"],$postgis_mapa);}
-echo header("Content-type: " . $o->mimetype  . "\n\n");
-$img->saveImage("");
+
+if (!function_exists('imagepng'))
+{
+	$s = PHP_SHLIB_SUFFIX;
+	@dl( 'php_gd.'.$s );
+	if (!function_exists('imagepng'))
+	{@dl( 'php_gd2.'.$s );}
+	if (!function_exists('imagepng'))
+	{$_GET["TIPOIMAGEM"] = "";}
+}
+
+if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
+{
+	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
+	$img->saveImage($nomer);
+	filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
+	$img = imagecreatefrompng($nomer);
+	imagealphablending($img, false);
+	imagesavealpha($img, true);	
+	echo header("Content-type: " . $o->mimetype  . "\n\n");
+	imagepng($img);
+}
+else{
+	echo header("Content-type: " . $o->mimetype  . "\n\n");
+	$img->saveImage("");
+}
 function nomeRandomico($n=10)
 {
 	$nomes = "";
@@ -160,4 +190,32 @@ function restauraCon($map_file,$postgis_mapa)
 	}
 }
 
+function filtraImagem($nomer,$tipoimagem)
+{
+	include_once("classe_imagem.php");
+	$tiposImagem = explode(" ",$tipoimagem);
+	foreach ($tiposImagem as $tipoimagem){
+		$m = new Imagem($nomer);
+		if ($tipoimagem == "cinza")
+		{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepiaclara")
+		{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepianormal")
+		{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "negativo")
+		{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "detectaBordas")
+		{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "embassa")
+		{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "gaussian_blur")
+		{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "selective_blur")
+		{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "mean_removal")
+		{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "pixelate")
+		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
+	}
+}
 ?>

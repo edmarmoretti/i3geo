@@ -181,7 +181,8 @@ i3GEOF.tipoimagem = {
 		{filtro = 'nenhum';}
 		i3GEO.configura.tipoimagem = filtro;
 		g_operacao = "outras";
-		i3GEO.atualiza();
+		//i3GEO.atualiza();
+		i3GEO.Interface.alteraParametroLayers("tipoimagem",filtro);
 	},
 	/*
 	Function: adicionar

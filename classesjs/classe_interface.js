@@ -226,6 +226,25 @@ i3GEO.Interface = {
 		{i3GEO.Interface.flamingo.inicia();}
 	},
 	/*
+	Function: alteraLayers
+	
+	Altera todos os layers do mapa modificando um determinado parâmetro
+	*/
+	alteraParametroLayers: function(parametro,valor){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.Interface.inicia()");}
+		if(i3GEO.Interface.ATUAL === "padrao")
+		{i3GEO.atualiza();}
+		if(i3GEO.Interface.ATUAL === "openlayers")
+		{i3GEO.Interface.openlayers.alteraParametroLayers(parametro,valor);}
+		if(i3GEO.Interface.ATUAL === "googlemaps")
+		{i3GEO.atualiza();}
+		if(i3GEO.Interface.ATUAL === "googleearth")
+		{i3GEO.atualiza();}
+		if(i3GEO.Interface.ATUAL === "flamingo")
+		{i3GEO.atualiza();}
+	},
+
+	/*
 	Function: ativaBotoes
 	
 	Ativa os botões de ferramentas
@@ -660,17 +679,14 @@ i3GEO.Interface = {
 			i3GEO.arvoreDeCamadas.cria("",i3GEO.arvoreDeCamadas.CAMADAS,i3GEO.configura.sid,i3GEO.configura.locaplic);
 		},
 		criaLayers: function(){
-			//var url = window.location.protocol+"//"+window.location.host+i3GEO.parametros.cgi+"?map="+i3GEO.parametros.mapfile+"&mode=map",
-			var url = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?map="+i3GEO.parametros.mapfile,
-				urlfundo = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?layer=&map="+i3GEO.parametros.mapfile.replace(".map","fundo.map"),
+			var url = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?map="+i3GEO.parametros.mapfile+"&tipoimagem="+i3GEO.configura.tipoimagem,
+				urlfundo = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?layer=&map="+i3GEO.parametros.mapfile.replace(".map","fundo.map")+"&tipoimagem="+i3GEO.configura.tipoimagem,
 				nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				layer,
 				camada,
 				urllayer,
 				opcoes,
 				i;
-
-
 
 			if(i3geoOL.getLayersByName("Fundo").length == 0){
 				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1});
@@ -710,7 +726,20 @@ i3GEO.Interface = {
 				{layer.setVisibility(true);}				
 			}
 			i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);
-
+		},
+		alteraParametroLayers: function(parametro,valor){
+			var layers = i3geoOL.layers,
+				nlayers = layers.length,
+				i,
+				url,
+				reg;
+			for(i=0;i<nlayers;i++){
+				url = layers[i].url;
+				reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
+				layers[i].url = url.replace(reg,"")
+				eval("layers[i].mergeNewParams({"+parametro+":valor})");
+				layers[i].redraw();
+			}
 		},
 		loadStartLayer: function(event){
 			var i = $i("arrastar_"+event.object.name);
@@ -720,14 +749,6 @@ i3GEO.Interface = {
 		},
 		loadStopLayer: function(event){
 			var i = $i("arrastar_"+event.object.name);
-			/*
-				e = i3geoOL.getLayersByName(event.object.name)[0].div.firstChild.firstChild.id,
-				attributes = { 
-					left: { from: 0, to: i3GEO.parametros.w*-1 } 
-				},
-				anim = new YAHOO.util.Anim(e, attributes);
-			anim.animate();
-			*/
 			if(i){
 				i.style.backgroundColor = "";
 			}

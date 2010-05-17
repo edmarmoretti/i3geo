@@ -66,6 +66,8 @@ $arquivo - Nome completo da imagem em disco.
   		{
   			$this->arquivoimg = $arquivo;
   			$this->img = imagecreatefrompng($arquivo);
+			imagealphablending($this->img, false);
+			imagesavealpha($this->img, true);				
   		}
   		else
   		{return null;}

@@ -19,7 +19,14 @@ http://localhost/i3geo/ms_criamapa.php?temasa=estadosl bioma&layers=estadosl bio
 Caso a inicialização do i3geo ocorra por um outro programa PHP, o ms_criamapa.php deve ser executado via include. Nesse caso, os parâmetros devem ser especificados como variáveis, p.e.,
 
 $temasa=bioma;
+
 include("ms_criamapa.php");
+
+Os cookies passados ao servidor são eliminados com a linha:
+
+$_COOKIE = array();
+
+Se a sua aplicação precisa de cookies, comente essa linha do programa.
 
 Link:
 
@@ -110,6 +117,8 @@ Indica onde está o diretório i3geo para que os includes seguintes possam ser loc
 $caminho é sempre colocada antes do nome dos arquivos que serão incçuídos, p.e., 
 require_once ($caminho."classesphp/carrega_ext.php");
 */
+$_COOKIE = array();
+
 if (!isset($caminho)){$caminho = "";}
 if (!file_exists($caminho."classesphp/carrega_ext.php"))
 {echo "<b> Nao foi possivel localizar o diretório classephp. Provavelmente vc precisara definir a variavel $camino";exit;}

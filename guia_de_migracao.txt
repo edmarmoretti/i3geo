@@ -7,7 +7,12 @@ Para a versão 4.4
 	allow_call_time_pass_reference = On
 	
 	Foi acrescentado um novo LAYER em i3geo/aplicmpa/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
-	queira que essas camadas novas apareçam, basta removê-las desses arquivos.
+	queira que essa camada nova apareça, basta removê-las desses arquivos.
+	
+	Foi incluida a remoção de cookies no ms_criamapa.php, que inicializa o i3geo ($_COOKIE = array();). Se vc precisa definir cookies,
+	considere a necessidade de comentar a linha de código do ms_criamapa.php.
+	
+	Por default, o i3Geo passou a usar a interface openlayers.htm. Se vc quiser modificar isso, altere o ms_configura.php.
 -------------------------------------------------------------------------------------------------
 Para a versão 4.3
 

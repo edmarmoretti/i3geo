@@ -187,8 +187,8 @@ string - javascript com os parametros
 			$escondido = $oLayer->getmetadata("escondido");
 			if($escondido == "")
 			{$escondido = "nao";}
-			//if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") )
-			//{
+			if ( (strtoupper($oLayer->getmetadata("tema")) != "NAO") )
+			{
 				$escala = $oLayer->getmetadata("escala");
 				if ($escala == ""){$escala = 0;}
 				$down = $oLayer->getmetadata("download");
@@ -250,7 +250,7 @@ string - javascript com os parametros
 					"escondido"=>strtolower($escondido),
 					"iconetema"=>($oLayer->getmetadata("iconetema"))
 				);
-			//}
+			}
 		}
 		//apaga o arquivo qy se não for necessário
 		//if (!$existesel && $qy)
