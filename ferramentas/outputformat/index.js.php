@@ -129,8 +129,12 @@ i3GEOF.outputformat = {
 				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mudaOutputFormat&tipo="+tipo,
 				temp = function(retorno){
 					i3GEOF.outputformat.aguarde.visibility = "hidden";
-					if(retorno.data != "erro")
-					{i3GEO.atualiza();}
+					if(retorno.data != "erro"){
+						if(i3GEO.Interface.ATUAL === "openlayers")
+						{i3GEO.Interface.openlayers.atualizaMapa();}
+						else
+						{i3GEO.atualiza();}
+					}
 					else
 					{alert("Nao foi possivel alterar o tipo");}
 				};

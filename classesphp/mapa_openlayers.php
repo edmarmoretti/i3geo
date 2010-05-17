@@ -60,6 +60,7 @@ if($qy)
 {$mapa->loadquery($qyfile);}
 
 $layersNames = $mapa->getalllayernames();
+$fundo = true;
 foreach ($layersNames as $layerName)
 {
 	$l = $mapa->getLayerByname($layerName);
@@ -71,7 +72,10 @@ foreach ($layersNames as $layerName)
 	if($layerName != $_GET["layer"])
 	{$l->set("status",MS_OFF);}
 	if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
-	{$l->set("status",MS_DEFAULT);}
+	{
+		$l->set("status",MS_DEFAULT);
+		$fundo = false;
+	}
 	$l->set("template","none.htm");
 }
 $map_size = explode(" ",$_GET["map_size"]);
@@ -82,6 +86,11 @@ $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
+//
+//não se aplica nos mapas que não desenham layers
+//
+if($fundo == false)
+{$o->set("transparent",MS_TRUE);}
 
 if(!$qy)
 {$img = $mapa->draw();}
