@@ -61,6 +61,8 @@ i3GEOF.opcoesLegenda = {
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 		}
 		catch(erro){if(typeof(console) !== 'undefined'){console.error(erro);}}
+		if(i3GEO.Interface.atual !== "padrao")
+		{alert("Essa operacao afeta apenas a legenda utilizada na ferramenta de impressao do mapa");}
 	},
 	/*
 	Function: html
@@ -181,13 +183,14 @@ i3GEOF.opcoesLegenda = {
 		i3GEOF.opcoesLegenda.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
-				i3GEO.atualiza();
+				if(i3GEO.Interface.atual === "padrao")
+				{i3GEO.atualiza();}
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=aplicaParametrosLegImg"+par,
 			cp = new cpaint();
 		cp.set_response_type("JSON");
-		cp.call(p,"mudaEscalaGrafica",temp);
+		cp.call(p,"void",temp);
 	},
 	/*
 	Function: parametrosAtuais

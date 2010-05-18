@@ -680,7 +680,7 @@ i3GEO.Interface = {
 		},
 		criaLayers: function(){
 			var url = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?map="+i3GEO.parametros.mapfile+"&tipoimagem="+i3GEO.configura.tipoimagem,
-				urlfundo = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?layer=&map="+i3GEO.parametros.mapfile.replace(".map","fundo.map")+"&tipoimagem="+i3GEO.configura.tipoimagem,
+				urlfundo = i3GEO.configura.locaplic+"/classesphp/mapa_openlayers.php?layer=&tipolayer=fundo&map="+i3GEO.parametros.mapfile.replace(".map","fundo.map")+"&tipoimagem="+i3GEO.configura.tipoimagem,
 				nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
 				layer,
 				camada,
@@ -692,6 +692,7 @@ i3GEO.Interface = {
 				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1});
 				i3geoOL.addLayer(layer);
 			}
+
 			opcoes = {
 				gutter:0,
 				isBaseLayer:false,

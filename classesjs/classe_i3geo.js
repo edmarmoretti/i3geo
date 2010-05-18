@@ -110,6 +110,8 @@ i3GEO = {
 	mensagemInicia {String} - mensagem definida em ms_configura.php indicando a versão atual do i3Geo.
 	
 	interfacePadrao {String} - interface padrão definida em ms_configura
+	
+	embedLegenda {String} - sim|nao indica se na inicialização a legenda foi inserida no conteúdo do mapa ou não
 	*/
 	parametros: {
 		mapexten: "",
@@ -135,7 +137,8 @@ i3GEO = {
 		celularef:"",
 		kmlurl:"",
 		mensageminicia:"",
-		interfacePadrao:"geral.htm"
+		interfacePadrao:"geral.htm",
+		embedLegenda:"nao"
 	},
 	/*
 	Propriedade: finaliza
@@ -243,7 +246,8 @@ i3GEO = {
 			extentref:"",
 			kmlurl:"",
 			mensageminicia:"",
-			interfacePadrao:"geral.htm"
+			interfacePadrao:"geral.htm",
+			embedLegenda:"nao"
 		};
 		if(tamanho[0] < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);
@@ -323,6 +327,7 @@ i3GEO = {
 						i3GEO.parametros.kmlurl = kmlurl;
 						i3GEO.parametros.mensageminicia = mensagemInicia;
 						i3GEO.parametros.interfacePadrao = interfacePadrao;
+						i3GEO.parametros.embedLegenda = embedLegenda;
 					}
 					catch(e){alert("Erro durante a definicao de i3GEO.parametros "+e);}					
 					i3GEO.arvoreDeCamadas.CAMADAS = retorno.data.temas;

@@ -60,7 +60,7 @@ if($qy)
 {$mapa->loadquery($qyfile);}
 
 $layersNames = $mapa->getalllayernames();
-$fundo = true;
+
 foreach ($layersNames as $layerName)
 {
 	$l = $mapa->getLayerByname($layerName);
@@ -74,7 +74,6 @@ foreach ($layersNames as $layerName)
 	if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
 	{
 		$l->set("status",MS_DEFAULT);
-		$fundo = false;
 	}
 	$l->set("template","none.htm");
 }
@@ -86,10 +85,12 @@ $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
+$legenda = $mapa->legend;
+$legenda->set("status",MS_OFF);
 //
-//não se aplica nos mapas que não desenham layers
+//se o layer não for do tipo fundo
 //
-if($fundo == false)
+if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
 
 if(!$qy)
