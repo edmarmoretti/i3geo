@@ -16,6 +16,7 @@ LAYER
 		TEMA "Limite Estadual"
 		ESCALA "250000"
 		CLASSE "SIM"
+		"cache" "sim"
 	END
   TRANSPARENCY 100
   CLASS

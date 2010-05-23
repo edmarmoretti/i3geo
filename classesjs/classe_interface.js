@@ -123,10 +123,28 @@ i3GEO.Interface = {
 	ATIVAMENUCONTEXTO: false,
 	/*
 	Variavel: IDMAPA
+	
 	ID do elemento HTML criado para conter o mapa
+	
 	Esse elemento normalmente é criado dentro de IDCORPO dependendo da interface
 	*/
 	IDMAPA: "",
+	/*
+	Variavel: STATUS
+	
+	Indica o status atual do mapa.
+	
+	É utilizado para verificar o status do mapa e bloquear ou não determinadas funções.
+	
+	Por exemplo, na interface OpenLayers, identifica se as camadas estão sendo atualizadas
+	
+	STATUS = {
+		atualizando: new Array() //guarda os códigos dos layers que estão sendo redesenhados
+	}
+	*/
+	STATUS: {
+		atualizando: new Array(),
+	},
 	/*
 	Function: redesenha
 	
@@ -627,7 +645,6 @@ i3GEO.Interface = {
 				maxResolution: "auto",
 				maxExtent: new OpenLayers.Bounds(ma[0],ma[1],ma[2],ma[3])
 			});
-
 		},
 		inicia: function(){
 			//
@@ -692,7 +709,6 @@ i3GEO.Interface = {
 				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1});
 				i3geoOL.addLayer(layer);
 			}
-
 			opcoes = {
 				gutter:0,
 				isBaseLayer:false,
@@ -700,6 +716,7 @@ i3GEO.Interface = {
 				opacity: 1,
 				singleTile:!(i3GEO.Interface.openlayers.TILES),
 				ratio:1,
+				buffer:0,
 				wrapDateLine:true,
 				eventListeners:{
 					"loadstart": i3GEO.Interface.openlayers.loadStartLayer,
@@ -714,6 +731,10 @@ i3GEO.Interface = {
 					{opcoes.singleTile = true;}
 					else
 					{opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);}
+					if(camada.type === 0)
+					{opcoes.gutter = 20;}
+					else
+					{opcoes.gutter = 0;}
 					layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
 					if(camada.escondido !== "sim")
 					{layer.transitionEffect ="resize";}
@@ -728,6 +749,28 @@ i3GEO.Interface = {
 			}
 			i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);
 		},
+		inverteModoTile: function(){
+			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
+				layer,
+				i,
+				camada;
+			if(i3GEO.Interface.openlayers.TILES === true)
+			{i3GEO.Interface.openlayers.TILES = false;}
+			else
+			{i3GEO.Interface.openlayers.TILES = true;}
+			for(i=nlayers-1;i>=0;i--){
+				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				try{
+					layer = i3geoOL.getLayersByName(camada.name)[0];
+					if(camada.escondido !== "sim"){
+						layer.singleTile = !i3GEO.Interface.openlayers.TILES;
+						if(i3GEO.Interface.openlayers.TILES === true){
+							layer.setTileSize(new OpenLayers.Size(256,256));
+						}
+					}
+				}catch(e){}
+			}
+		},
 		alteraParametroLayers: function(parametro,valor){
 			var layers = i3geoOL.layers,
 				nlayers = layers.length,
@@ -737,18 +780,20 @@ i3GEO.Interface = {
 			for(i=0;i<nlayers;i++){
 				url = layers[i].url;
 				reg = new RegExp(parametro+"([=])+([a-zA-Z0-9_]*)");
-				layers[i].url = url.replace(reg,"")
+				layers[i].url = url.replace(reg,"");
 				eval("layers[i].mergeNewParams({"+parametro+":valor})");
 				layers[i].redraw();
 			}
 		},
 		loadStartLayer: function(event){
+			i3GEO.Interface.STATUS.atualizando.push(event.object.name);
 			var i = $i("arrastar_"+event.object.name);
 			if(i){
 				i.style.backgroundColor = "RGB(240,240,240)";
 			}
 		},
 		loadStopLayer: function(event){
+			i3GEO.Interface.STATUS.atualizando.remove(event.object.name);
 			var i = $i("arrastar_"+event.object.name);
 			if(i){
 				i.style.backgroundColor = "";

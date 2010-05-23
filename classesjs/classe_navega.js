@@ -788,6 +788,8 @@ i3GEO.navega = {
 		Ao ser chamada, essa função muda o modo atual, ativando ou desativando o entorno
 		*/
 		ativaDesativa: function(){
+			if(i3GEO.Interface.ATUAL === "openlayers")
+			{i3GEO.Interface.openlayers.inverteModoTile();return;}
 			var letras,l;
 			if(i3GEO.parametros.mapfile === "")
 			{alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");return;}

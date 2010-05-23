@@ -161,7 +161,11 @@ $lista - lista de processos separados por |
 		//$lista = str_replace('"',"",$lista);
 		$lista = explode("|",$lista);
 		foreach ($lista as $processo)
-		{$this->layer->setprocessing($processo);}
+		{
+			$this->layer->setprocessing($processo);
+			$this->layer->removeMetaData("cache");
+		}
+		
 		return("ok");
 	}
 /*
@@ -217,6 +221,7 @@ A mudança é feita apenas na representação do layer.
 			{$l->set("type",MS_LAYER_LINE);}
 			if (($l->type < 1) || ($l->type > 2))
 			{$retorno = "erro. O tipo desse tema nao pode ser alterado";}
+			$l->removeMetaData("cache");
 		}
 		return $retorno;
 	}
@@ -456,13 +461,16 @@ $testa - Testa o filtro e retorna uma imagem.
 		{
 			$img = $this->mapa->prepareimage();
 			if ($this->layer->draw($img) == 0)
-			{return ("ok");}
+			{
+				$this->layer->removeMetaData("cache");
+				return ("ok");
+			}
 			else
 			{return ("erro. Problemas com o filtro."." ".$filtro);}
 		}
 		else
 		{
-	 		$i = gravaImagemMapa($this->mapa);
+			$i = gravaImagemMapa($this->mapa);
 			return ($i["url"]);
 		}
 	}
@@ -481,6 +489,7 @@ $valor - Novo valor da transparência
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
 			$v["principal"] == "4" ? $ll->set("transparency",$valor) : $ll->set("opacity",$valor);
+			$ll->removeMetaData("cache");
 		}
 		return("ok");
 	}
@@ -1014,6 +1023,7 @@ Altera o valor do elemento DATA
 		if(strtolower($metadata) != "nao")
 		{
 			$this->layer->set("data",$data);
+			$this->layer->removeMetaData("cache");
 			return $data;
 		}
 		else

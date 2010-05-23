@@ -165,6 +165,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		ScaleLine:true,
 		OverviewMap:true	
 	};
+i3GEO.Interface.openlayers.TILES = true;
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
@@ -204,7 +205,17 @@ var wsm = new OpenLayers.Layer.ArcGIS93Rest(
 	"ESRI World Street Map",
     "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export"
 );
-i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm];
+var bra = new OpenLayers.Layer.WMS( 
+	"Base carto MMA",
+    "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map",
+	{layers:"baseraster",srs:"EPSG:4291",format:"image/png"}
+);
+var osm = new OpenLayers.Layer.WMS( 
+	"Open Street Map",
+    "http://data1.vizure.net/server/services/request.php?jname=/wms"
+);
+
+i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ims,wsm,bra,osm];
 
 //
 //inicia o mapa

@@ -162,6 +162,7 @@ MAP
 			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
 			"TEMA"	"Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
 			"IDENTIFICA" "nao"
+			"cache" "sim"
 		END
 		NAME "zee"
 		SIZEUNITS PIXELS
@@ -185,6 +186,7 @@ MAP
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+			"cache" "sim"
 		END
 		NAME "mundo"
 		SIZEUNITS PIXELS
@@ -235,6 +237,7 @@ MAP
 			"TEMA"	"Brasil"
 			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
 			"IDENTIFICA" "nao"
+			"cache" "sim"
 		END
 		NAME "estados"
 		SIZEUNITS PIXELS
@@ -275,7 +278,7 @@ MAP
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
 	  "MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
-
+	  "cache" "sim"
     END
     NAME "baserasterwms"
     OFFSITE 255 255 255
@@ -314,6 +317,7 @@ LAYER
       "permiteogc"	"nao"
       "permitekml"	"nao"
       "TEMA"	"Open Street Map - Rodovias"
+	  "cache" "sim"
       END
       STATUS OFF
       CONNECTIONTYPE WMS
@@ -324,8 +328,9 @@ LAYER
    END	
 	LAYER
 		METADATA
-			"TEMA"	"NAO"
+			#"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
+			"cache" "sim"
 		END
 		NAME "copyright"
 		SIZEUNITS PIXELS

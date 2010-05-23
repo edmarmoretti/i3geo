@@ -188,12 +188,17 @@ i3GEO.gadgets = {
 		if (!$i(id)){return;}
 		atualizaCoordenadasUTM = function()
 		{
+			if(i3GEO.Interface.STATUS.atualizando.length > 0)
+			{return;}
 			if(typeof(console) !== 'undefined'){console.info("atualizaCoordenadasUTM()");}
 			//if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasUTM.idhtml).style.display == "block"){return;}
 			if(objposicaocursor.imgx < 10 || objposicaocursor.imgy < 10)
 			{return;}
 			if($i("wdoca")){return;}
 			var tempUtm,s,n,i,t;
+			//
+			//cancela se existir alguma ferramenta ativa
+			//
 			s = document.getElementsByTagName("script");
 			n = s.length;
 			for (i=0;i < n;i++){

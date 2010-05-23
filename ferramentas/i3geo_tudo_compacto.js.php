@@ -5632,7 +5632,6 @@ i3GEO.php = {
 				layers = i3geoOL.getLayersByName(tema);
 				if(layers.length > 0)
 				{i3geoOL.removeLayer(layers[0]);}
-				i3GEO.Interface.openlayers.LIGADOS.remove(tema);
 			}
 			funcao.call(retorno);
 		};

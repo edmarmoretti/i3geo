@@ -123,6 +123,7 @@ Todos os elementos passarão a ser desenhados conforme essa primeira classe, uma 
 				$classe->set("status",MS_DELETE);
 			}
 		}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -185,6 +186,7 @@ $exps - lista com as novas expressões
 				$classe->setexpression($e);
 			}
 		}
+		$this->layer->removeMetaData("cache");
 	}
 /*
 function: intervalosiguais
@@ -241,6 +243,7 @@ $ignorar - valor que será ignorado na listagem final
 				$classe->set("name",$nomeclasse);
 				$classe->set("title",($this->layer->name)."+".$i);
 			}
+			$this->layer->removeMetaData("cache");
 			return ("ok");
 		}
 		else
@@ -301,6 +304,7 @@ Include:
 				$ncor = $novoestilo->color;
 				$ncor->setrgb(255,$vcor[$i],$vcor[$i]);
 			}
+			$this->layer->removeMetaData("cache");
 			return ("ok");
 		}
 		else
@@ -385,6 +389,7 @@ $itemNome - item que será usado para definir os nomes das classes (por default s
 			}
 			//$c->set("title",$tema."+".$i);
 		}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -401,6 +406,7 @@ A nova classe será uma cópia da classe 0.
 		$c = ms_newClassObj($this->layer, $classe);
 		//$classe = $this->layer->getclass(0);
 		//$nova = $classe->clone;
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -441,6 +447,7 @@ Include:
 			$cor = $estilo->color;
 			$cor->setrgb($corpaleta[0],$corpaleta[1],$corpaleta[2]);
 		}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -467,6 +474,7 @@ Inverte as cores da legenda de um tema.
 			$ncor->setrgb($cor[$c]->red,$cor[$c]->green,$cor[$c]->blue);
 			$c++;
 		}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -493,6 +501,7 @@ Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 				{$estilo->set("symbolname","p4");}
 			}
 		}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 /*
@@ -514,6 +523,7 @@ $classe - id da classe
 		{$classe->set("status",MS_ON);}
 		else
 		{$classe->set("status",MS_OFF);}
+		$this->layer->removeMetaData("cache");
 		return("ok");
 	}
 }

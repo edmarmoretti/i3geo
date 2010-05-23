@@ -2441,7 +2441,8 @@ function criaDirMapa($dir_tmp)
 		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0777);
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
-		@mkdir($dir_tmp."/".comum,0777);
+		@mkdir($dir_tmp."/comum",0777);
+		@mkdir($dir_tmp."/cache",0777);
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);
 		else

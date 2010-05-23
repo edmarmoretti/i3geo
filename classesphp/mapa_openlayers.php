@@ -50,8 +50,8 @@ if(isset($_GET["BBOX"]))
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
 
-if (($postgis_mapa != "") || ($postgis_mapa != " "))
-{substituiCon($_GET["map"],$postgis_mapa);}
+//if (($postgis_mapa != "") && ($postgis_mapa != " "))
+//{substituiCon($_GET["map"],$postgis_mapa);}
 
 $mapa = ms_newMapObj($_GET["map"]);
 $qyfile = str_replace(".map",".qy",$_GET["map"]);
@@ -60,7 +60,7 @@ if($qy)
 {$mapa->loadquery($qyfile);}
 
 $layersNames = $mapa->getalllayernames();
-
+$cache = false;
 foreach ($layersNames as $layerName)
 {
 	$l = $mapa->getLayerByname($layerName);
@@ -75,8 +75,27 @@ foreach ($layersNames as $layerName)
 	{
 		$l->set("status",MS_DEFAULT);
 	}
+	if($layerName == $_GET["layer"])
+	{
+		if($l->getmetadata("cache") == "sim")
+		{
+			$cache = true;
+			$nomecache = $l->getmetadata("nomeoriginal");
+			if($nomecache == "")
+			{$nomecache = $layerName;}
+		}
+	}
 	$l->set("template","none.htm");
 }
+if($qy || $_GET["HEIGHT"] != 256 )
+{$cache = false;}
+if($_GET["layer"] == "")
+{$cache = true;}
+if($_GET == false)
+{$cache = false;}
+if($cache == true)
+{carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
+
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
 
@@ -87,6 +106,9 @@ $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
 $legenda = $mapa->legend;
 $legenda->set("status",MS_OFF);
+$escala = $mapa->scalebar;
+$escala->set("status",MS_OFF);
+
 //
 //se o layer não for do tipo fundo
 //
@@ -96,10 +118,15 @@ if($_GET["tipolayer"] != "fundo")
 if(!$qy)
 {$img = $mapa->draw();}
 else
-{$img = $mapa->drawQuery();}
+{
+	$qm = $mapa->querymap;
+	$qm->set("width",$map_size[0]);
+	$qm->set("height",$map_size[1]);
+	$img = $mapa->drawQuery();
+}
 
-if (($postgis_mapa != "") || ($postgis_mapa != " "))
-{restauraCon($_GET["map"],$postgis_mapa);}
+//if (($postgis_mapa != "") && ($postgis_mapa != " "))
+//{restauraCon($_GET["map"],$postgis_mapa);}
 
 if (!function_exists('imagepng'))
 {
@@ -118,13 +145,83 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
 	filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
-	imagesavealpha($img, true);	
-	echo header("Content-type: " . $o->mimetype  . "\n\n");
+	imagesavealpha($img, true);
+	ob_clean();
+	echo header("Content-type: image/png \n\n");
 	imagepng($img);
 }
 else{
-	echo header("Content-type: " . $o->mimetype  . "\n\n");
-	$img->saveImage("");
+	if($cache == true)
+	{salvaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
+	ob_clean();
+	$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
+	$img->saveImage($nomer);
+	$img = imagecreatefrompng($nomer);
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
+	ob_clean();
+	echo header("Content-type: image/png \n\n");
+	imagepng($img);
+}
+function salvaCacheImagem($bbox,$layer,$map,$w,$h){
+	global $img,$map_size;
+	//layers que são sempre iguais
+	if($layer == "copyright" || $layer == "")
+	{$bbox = "";}
+	if($layer == "")
+	{$layer = "fundo";}
+	
+	$nomedir = dirname(dirname($map))."/cache/".$layer;
+	@mkdir($nomedir,0777);
+	$nome = $nomedir."/".$w.$h.$bbox;
+	if(!file_exists($nome))
+	{
+		$img->saveImage($nome);
+	}
+}
+function carregaCacheImagem($bbox,$layer,$map,$w,$h){
+	if($layer == "copyright" || $layer == "")
+	{$bbox = "";}
+	if($layer == "")
+	{$layer = "fundo";}
+	$nome = $w.$h.$bbox;
+	$nome = dirname(dirname($map))."/cache/".$layer."/".$nome;
+	if(file_exists($nome))
+	{
+		if (!function_exists('imagepng'))
+		{
+			$s = PHP_SHLIB_SUFFIX;
+			@dl( 'php_gd.'.$s );
+			if (!function_exists('imagepng'))
+			{@dl( 'php_gd2.'.$s );}
+		}
+		@$img = imagecreatefrompng($nome);
+		if(!$img)
+		{
+			/* Create a blank image */
+			$img  = imagecreatetruecolor($w, $h);
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+			
+			$bgc = imagecolorallocatealpha($img, 255, 255, 255,127);
+			$tc  = imagecolorallocate($img, 255, 0, 0);
+			
+			imagefilledrectangle($img, 0, 0, $w, $h, $bgc);
+			/* Output an error message */
+			imagestring($img, 3, 5, 5, 'Erro ao ler ' . $nome, $tc);
+		}
+		else
+		{
+			imagealphablending($img, false);
+			imagesavealpha($img, true);
+		}
+		ob_clean();
+		error_reporting(0);
+		echo header("Content-type: image/png \n\n");
+		imagepng($img);
+		imagedestroy($img);
+		exit;
+	}
 }
 function nomeRandomico($n=10)
 {

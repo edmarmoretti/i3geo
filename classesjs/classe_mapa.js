@@ -749,10 +749,14 @@ i3GEO.mapa = {
 					if(typeof(console) !== 'undefined'){console.error(e);}
 				}
 			};
+			/*
 			if(i3GEO.Interface.ATUAL !== "openlayers")
 			{i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5");}
 			else
 			{i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5","tip",i3GEO.configura.locaplic,i3GEO.configura.sid,"ligados",i3GEO.parametros.mapexten,i3GEO.Interface.openlayers.LIGADOS.join(","));}
+			*/
+			i3GEO.php.identifica2(retorna,objposicaocursor.ddx,objposicaocursor.ddy,"5","tip",i3GEO.configura.locaplic,i3GEO.configura.sid,"ligados",i3GEO.parametros.mapexten);
+
 		}
 	}
 };

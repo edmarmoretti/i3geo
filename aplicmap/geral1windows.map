@@ -31,7 +31,6 @@ MAP
 	STATUS ON
 	UNITS DD
 	NAME "GERAL"
-	DEBUG OFF
 		
 	OUTPUTFORMAT
 		NAME 'AGG_Q'
@@ -158,6 +157,7 @@ MAP
 			"CLASSE"	"SIM" #o simbolo nao sera mostrado na legenda
 			"TEMA" "Zona Econômica Exclusiva Marinha" #o tema nao sera mostrado na legenda
 			"IDENTIFICA" "nao"
+			"cache" "sim"
 			#"MENSAGEM" "Isto é um teste de mensagem"
 		END
 		NAME "zee"
@@ -184,6 +184,7 @@ MAP
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
 			#"ESCONDIDO" "sim"
+			"cache" "sim"
 		END
 		NAME "mundo"
 		SIZEUNITS PIXELS
@@ -237,6 +238,7 @@ MAP
 			"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
 			"IDENTIFICA" "nao"
 			#"ESCONDIDO" "sim"
+			"cache" "sim"
 		END
 		NAME "estados"
 		SIZEUNITS PIXELS
@@ -275,6 +277,7 @@ MAP
       "TEMA"	"Base cartográfica"
       "wms_server_version"	"1.1.1"
       "wms_style"	"default"
+	  "cache" "sim"
 	  #"MENSAGEM" "As cartas RASTER são mostradas apenas em determinadas escalas. Aproxime o mapa até a escala 1:250.000 para que os dados sejam mostrados."
     END
     NAME "baserasterwms"
@@ -304,6 +307,7 @@ LAYER
          "wms_name"            "osm"
          "wms_server_version"  "1.1.1"
          "wms_transparent"     "true"
+		 "cache" "sim"
       "CLASSE"	"SIM"
       "palletestep"	""
       "permitekmz"	"nao"
@@ -325,8 +329,9 @@ LAYER
 	
 	LAYER
 		METADATA
-			"TEMA"	"NAO"
+			#"TEMA"	"NAO"
 			"ESCONDIDO" "SIM"
+			"cache" "sim"
 		END
 		NAME "copyright"
 		SIZEUNITS PIXELS

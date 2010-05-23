@@ -382,6 +382,7 @@ Exclui um estilo de uma classe.
 		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->deletestyle($estilo);
+		$this->layer->removeMetaData("cache");
 	}
 /*
 function: adicionaEstilo
@@ -397,6 +398,7 @@ objeto estilo
 		$classe = $this->layer->getclass($classe);
 		$estilo = $classe->getstyle($estilo);
 		$e = ms_newStyleObj($classe,$estilo);
+		$this->layer->removeMetaData("cache");
 		return($e);
 	}
 /*
@@ -414,6 +416,7 @@ $estilo - Índice do estilo de uma classe que será clonado.
 		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyleup($estilo);
+		$this->layer->removeMetaData("cache");
 	}
 /*
 function: desceEstilo
@@ -430,6 +433,7 @@ $estilo - Índice do estilo de uma classe que será clonado.
 		if(!$this->layer){return "erro";}
 		$classe = $this->layer->getclass($classe);
 		$classe->movestyledown($estilo);
+		$this->layer->removeMetaData("cache");
 	}
 /*
 function: listaSimbolos
@@ -585,6 +589,7 @@ $size - Tamanho que será aplicado ao símbolo.
 			$sld = $this->layer->getmetadata("sld");
 			reSLD($this->arquivo,$this->nome,$sld);
 		}
+		$this->layer->removeMetaData("cache");
 		return "ok";
 	}
 /*
