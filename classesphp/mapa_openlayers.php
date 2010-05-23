@@ -49,10 +49,6 @@ if(isset($_GET["BBOX"]))
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 	$_GET["map_size"] = $_GET["WIDTH"]." ".$_GET["HEIGHT"];
 }
-
-//if (($postgis_mapa != "") && ($postgis_mapa != " "))
-//{substituiCon($_GET["map"],$postgis_mapa);}
-
 $mapa = ms_newMapObj($_GET["map"]);
 $qyfile = str_replace(".map",".qy",$_GET["map"]);
 $qy = file_exists($qyfile);
@@ -74,10 +70,25 @@ foreach ($layersNames as $layerName)
 	if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
 	{
 		$l->set("status",MS_DEFAULT);
+		if (($postgis_mapa != "") && ($postgis_mapa != " "))
+		{
+			if ($l->connectiontype == MS_POSTGIS)
+			{
+				$lcon = $l->connection;
+				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+				{
+					if(($lcon == " ") || ($lcon == ""))
+					{$l->set("connection",$postgis_mapa);}
+					else
+					{$l->set("connection",$postgis_mapa[$lcon]);}					
+				}
+			}
+
+		}
 	}
 	if($layerName == $_GET["layer"])
 	{
-		if($l->getmetadata("cache") == "sim")
+		if(strtolower($l->getmetadata("cache")) == "sim")
 		{
 			$cache = true;
 			$nomecache = $l->getmetadata("nomeoriginal");
@@ -87,6 +98,7 @@ foreach ($layersNames as $layerName)
 	}
 	$l->set("template","none.htm");
 }
+
 if($qy || $_GET["HEIGHT"] != 256 )
 {$cache = false;}
 if($_GET["layer"] == "")
@@ -124,9 +136,6 @@ else
 	$qm->set("height",$map_size[1]);
 	$img = $mapa->drawQuery();
 }
-
-//if (($postgis_mapa != "") && ($postgis_mapa != " "))
-//{restauraCon($_GET["map"],$postgis_mapa);}
 
 if (!function_exists('imagepng'))
 {
@@ -231,98 +240,5 @@ function nomeRandomico($n=10)
 	for($i=0; $i < $n; ++$i)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
-}
-
-function substituiCon($map_file,$postgis_mapa)
-{
-	if ((isset($postgis_mapa)) && (file_exists($map_file)))
-	{
-		if (($postgis_mapa != "") || ($postgis_mapa != " "))
-		{
-			if(!@ms_newMapObj($map_file)){return false;}
-			$objMap = ms_newMapObj($map_file);
-			$numlayers = $objMap->numlayers;
-			for ($i=0;$i < $numlayers;++$i)
-			{
-				$layer = $objMap->getlayer($i);
-				if ($layer->connectiontype == MS_POSTGIS)
-				{
-					$lcon = $layer->connection;
-					if(isset($postgis_mapa) && $postgis_mapa != "")
-					{
-						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
-						{
-							//
-							//o metadata CONEXAOORIGINAL guarda o valor original para posterior substituição
-							//			
-							if(($lcon == " ") || ($lcon == ""))
-							{
-								$layer->set("connection",$postgis_mapa);
-								$layer->setmetadata("CONEXAOORIGINAL",$lcon);
-							}
-							else
-							{
-								$layer->set("connection",$postgis_mapa[$lcon]);
-								$layer->setmetadata("CONEXAOORIGINAL",$lcon);
-							}					
-						}
-					}
-				}
-			}
-			$objMap->save($map_file);
-		}
-	}
-	return true;
-}
-
-function restauraCon($map_file,$postgis_mapa)
-{
-	if(!@ms_newMapObj($map_file)){return;}
-	if(isset($postgis_mapa) && $postgis_mapa != "")
-	{
-		$objMap = ms_newMapObj($map_file);
-		$numlayers = $objMap->numlayers;
-		for ($i=0;$i < $numlayers;++$i)
-		{
-			$layer = $objMap->getlayer($i);
-			if ($layer->connectiontype == MS_POSTGIS)
-			{
-				if (!is_array($postgis_mapa) && $layer->connection == $postgis_mapa)
-				{$layer->set("connection"," ");}
-				if($layer->getmetadata("conexaooriginal") != "")
-				{$layer->set("connection",$layer->getmetadata("conexaooriginal"));}
-			}
-		}
-		$objMap->save($map_file);
-	}
-}
-
-function filtraImagem($nomer,$tipoimagem)
-{
-	include_once("classe_imagem.php");
-	$tiposImagem = explode(" ",$tipoimagem);
-	foreach ($tiposImagem as $tipoimagem){
-		$m = new Imagem($nomer);
-		if ($tipoimagem == "cinza")
-		{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "sepiaclara")
-		{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "sepianormal")
-		{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "negativo")
-		{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "detectaBordas")
-		{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "embassa")
-		{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "gaussian_blur")
-		{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "selective_blur")
-		{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "mean_removal")
-		{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
-		if ($tipoimagem == "pixelate")
-		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
-	}
 }
 ?>

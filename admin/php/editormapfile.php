@@ -537,6 +537,7 @@ function pegaMetadados()
 	$dados["palletestep"] = $layer->getmetadata("palletestep");
 	$dados["description_template"] = $layer->getmetadata("description_template");
 	$dados["editorsql"] = $layer->getmetadata("editorsql");
+	$dados["cache"] = $layer->getmetadata("cache");
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
@@ -554,7 +555,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $iconetema,$ltempoformatodata,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$arquivodownload,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$identifica,$extensao,$escondido,$download,$escala,$tema,$classe,$tip,$itenslink,$itens,$itensdesc,$editorsql,$cache;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -582,6 +583,7 @@ function alterarMetadados()
 	$layer->setmetadata("palletestep",$palletestep);
 	$layer->setmetadata("description_template",$description_template);
 	$layer->setmetadata("editorsql",$editorsql);
+	$layer->setmetadata("cache",$cache);
 
 	$layer->setmetadata("ltempoformatodata",$ltempoformatodata);
 	$layer->setmetadata("ltempoiteminicio",$ltempoiteminicio);

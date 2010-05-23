@@ -1,14 +1,30 @@
 MAP
-SYMBOLSET ../symbols/simbolos.sym
-FONTSET   "../symbols/fontes.txt"
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION "teste"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom FROM (select * FROM biomas) as foo USING UNIQUE gid USING SRID=4291"
     METADATA
+      "ltempoitemimagem"	""
+      "cache"	"SIM"
+      "ltempoitemdescricao"	""
       "CLASSE"	"SIM"
+      "ltempoiteminicio"	""
+      "palletestep"	""
+      "ltempoitemtip"	""
+      "iconetema"	""
+      "ltempoitemtitulo"	""
+      "description_template"	""
+      "ltempoitemlink"	""
+      "palletefile"	""
+      "ltempoformatodata"	""
+      "ltempoitemicone"	""
       "download"	"SIM"
+      "arquivodownload"	""
       "TEMA"	"Teste de substituição de string"
+      "editorsql"	""
+      "ltempoitemfim"	""
     END
     NAME "testesubsstring"
     STATUS OFF
@@ -24,7 +40,7 @@ FONTSET   "../symbols/fontes.txt"
         SYMBOL 0
       END
     END
-   END
+  END
 
 END
 

@@ -800,6 +800,8 @@ function montaEditorMetadados(dados)
 		titulo:"Escala (ESCALA)",id:"escala",value:dados.escala,tipo:"text"},
 		{ajuda:"Extensão geográfica máxima do tema, no formato xmin ymin xmax ymax. É utilizado na opção de 'zoom para o tema'. Quando o tema é baseado em shapefile, esse metadata não é necessário, pois o mapserver consegue calcular a extensão. Já em outros tipos de dados, como Postgis, o parâmetro é necessário. Nesse caso, se não for indicado, o botão de zoom para o tema não será visível para o usuário",
 		titulo:"Extensao (EXTENSAO)",id:"extensao",value:dados.extensao,tipo:"text"},
+		{ajuda:"Ativa ou não a manutenção de um cache para armazenar as imagens geradas para montar o mapa. Essa opção afeta apenas as interfaces do i3Geo que utilizam o modo TILE (como a interface OpenLayers). O cache é mantido no diretório temporário utilizado pelo i3Geo, na pasta chamada cache. Para cada camada é criada uma sub-pasta específica",
+		titulo:"Cache de mapas (CACHE)",id:"",value:dados.cache,tipo:"text",div:"<div id=cCache ></div>"},
 		{ajuda:"Indica se a extensão geográfica do mapa deve ser alterada quando o tema for adicionado ao mapa",
 		titulo:"Aplica extensao (APLICAEXTENSAO)",id:"",value:dados.aplicaextensao,tipo:"text",div:"<div id=cAplicaextensao ></div>"},
 		{ajuda:"Indica se o usuário pode abrir o editor de SQL para poder alterar o elemento DATA do Mapfile.",
@@ -876,6 +878,10 @@ function montaEditorMetadados(dados)
 	temp += core_combosimnao(dados.aplicaextensao)
 	temp += "</select>"
 	$i("cAplicaextensao").innerHTML = temp
+	temp = "<select id='cache' >"
+	temp += core_combosimnao(dados.cache)
+	temp += "</select>"
+	$i("cCache").innerHTML = temp
 	temp = "<select id='editorsql' >"
 	temp += core_combosimnao(dados.editorsql)
 	temp += "</select>"
@@ -1199,7 +1205,7 @@ function salvarDadosEditor(tipo,codigoMap,codigoLayer,indiceClasse,indiceEstilo,
 			else
 			{alert("Valor de escala incorreto");return;}
 		}
-		var campos = new Array("iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
+		var campos = new Array("cache","iconetema","ltempoformatodata","ltempoiteminicio","ltempoitemfim","ltempoitemtitulo","ltempoitemdescricao","ltempoitemtip","ltempoitemimagem","ltempoitemicone","ltempoitemlink","editorsql","description_template","palletefile","palletestep","arquivodownload","aplicaextensao","classestamanho","classessimbolo","classescor","classesnome","classesitem","mensagem","identifica","extensao","escondido","download","escala","tema","classe","tip","itenslink","itens","itensdesc")
 		var par = "&codigoMap="+codigoMap+"&codigoLayer="+codigoLayer
 		var prog = "../php/editormapfile.php?funcao=alterarMetadados"
 	}
