@@ -1125,7 +1125,13 @@ i3GEO.arvoreDeTemas = {
 	{String} - texto formatado
 	*/
 	montaTextoTema: function(cor,tema){
-		var html = "<td style='vertical-align:top;padding-top:5px;'><span ><input style='cursor:pointer;border:solid 0 white;' ";
+		var html,
+			estilo;
+		
+		estilo = "vertical-align:top;padding-top:5px;";
+		if(navm)
+		{estilo = "vertical-align:top;padding-top:2px;";}
+		html = "<td style='"+estilo+"'><span ><input style='cursor:pointer;border:solid 0 white;' ";
 		if(i3GEO.arvoreDeTemas.ATIVATEMA !== "")
 		{html += "onclick=\""+i3GEO.arvoreDeTemas.ATIVATEMA+"\"";}
 		else{

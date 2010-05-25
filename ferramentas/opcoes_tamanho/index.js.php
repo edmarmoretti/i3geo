@@ -46,12 +46,26 @@ i3GEOF.opcoesTamanho = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		var box;
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesTamanho.html();
+			new YAHOO.widget.Button(
+				"i3GEOopcoesTamanhobotao2",
+				{onclick:{fn: i3GEOF.opcoesTamanho.atualizaBox}}
+			);
 			new YAHOO.widget.Button(
 				"i3GEOopcoesTamanhobotao1",
 				{onclick:{fn: i3GEOF.opcoesTamanho.executa}}
 			);
+			i3GEO.util.criaBox("boxg");
+			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+			box = $i("boxg");
+			box.style.left = pos[0];
+			box.style.top = pos[1];
+			box.style.width = i3GEO.parametros.w;
+			box.style.height = i3GEO.parametros.h;
+			box.style.display = "block";
+			box.style.zIndex = 6000;
 		}
 		catch(erro){alert(erro);}
 	},
@@ -75,7 +89,8 @@ i3GEOF.opcoesTamanho = {
 		'	</td></tr><tr><td>&nbsp;</td><td></td></tr>'+
 		'</table>' +
 		'<p class=paragrafo >Valores em pixels.</p>' +
-	  	'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="Aplicar"/>';
+		'<p class=paragrafo ><input id=i3GEOopcoesTamanhobotao2 size=16  type=button value="Testa"/>' +
+	  	'<input id=i3GEOopcoesTamanhobotao1 size=16  type=button value="Aplicar"/>';
 		return ins;
 	},
 	/*
@@ -109,6 +124,11 @@ i3GEOF.opcoesTamanho = {
 		$i("i3GEOF.opcoesTamanho_corpo").style.textAlign = "left";
 		i3GEOF.opcoesTamanho.aguarde = $i("i3GEOF.opcoesTamanho_imagemCabecalho").style;
 		i3GEOF.opcoesTamanho.inicia(divid);
+		temp = function(){
+			i3GEO.util.escondeBox();
+		};
+		YAHOO.util.Event.addListener(janela[0].close, "click", temp);		
+
 	},
 	/*
 	Function: executa
@@ -153,6 +173,19 @@ i3GEOF.opcoesTamanho = {
 			cp.set_response_type("JSON");
 			cp.call(p,"mudatamanho",temp);
 		}
+	},
+	/*
+	Function: atualizaBox
+	
+	Atualiza o tamanho do box que mostra previamente o tamanho do mapa
+	*/
+	atualizaBox: function(){
+		var box = $i("boxg");
+			l = $i("i3GEOopcoesTamanhol").value,
+			a = $i("i3GEOopcoesTamanhoa").value;
+		box.style.width = l+"px";
+		box.style.height = a+"px";
 	}
+	
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

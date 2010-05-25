@@ -143,7 +143,7 @@ i3GEO.Interface = {
 	}
 	*/
 	STATUS: {
-		atualizando: new Array(),
+		atualizando: []
 	},
 	/*
 	Function: redesenha
@@ -727,14 +727,17 @@ i3GEO.Interface = {
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				if(i3geoOL.getLayersByName(camada.name).length == 0){
 					urllayer = url+"&layer="+camada.name;
-					if(camada.escondido === "sim")
-					{opcoes.singleTile = true;}
-					else
-					{opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);}
-					if(camada.type === 0)
-					{opcoes.gutter = 20;}
-					else
-					{opcoes.gutter = 0;}
+					try{
+						if(camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 4 || camada.type === 8 )
+						{opcoes.singleTile = true;}
+						else
+						{opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);}
+						if(camada.type === 0)
+						{opcoes.gutter = 20;}
+						else
+						{opcoes.gutter = 0;}
+					}
+					catch(e){}
 					layer = new OpenLayers.Layer.WMS(camada.name, urllayer,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},opcoes);
 					if(camada.escondido !== "sim")
 					{layer.transitionEffect ="resize";}
