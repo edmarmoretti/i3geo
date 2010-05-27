@@ -112,7 +112,7 @@ function carregaDados(){
 		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the 
 		tl.layout(); // display the Timeline	
 	}
-	var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=dadosLinhaDoTempo&g_sid="+window.parent.i3GEO.configura.sid+"&tema="+$i("tema").value;
+	var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=dadosLinhaDoTempo&g_sid="+window.parent.i3GEO.configura.sid+"&tema="+$i("tema").value+"&ext="+window.parent.i3GEO.parametros.mapexten;
 	cpJSON.call(p,"void",retorna);
 }
 function tituloover(wkt){

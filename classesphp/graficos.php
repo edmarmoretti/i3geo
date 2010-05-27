@@ -423,9 +423,14 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	}
 	return array("dados"=>$nnval,"ndados"=>$nval,"max"=>$max);
 }
-function dadosLinhaDoTempo($map_file,$tema)
+function dadosLinhaDoTempo($map_file,$tema,$ext="")
 {
 	$map = ms_newMapObj($map_file);
+	if($ext && $ext != ""){
+		$e = explode(" ",$ext);
+		$extatual = $map->extent;
+		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+	}
 	$selecionados = "sim";
 	$qyfile = str_replace(".map",".qy",$map_file);
 	if (file_exists($qyfile))

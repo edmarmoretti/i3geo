@@ -1594,7 +1594,9 @@ Pega os dados de um tema para geração do gráfico de linha do tempo.
 */
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
-		$retorno = dadosLinhaDoTempo($map_file,$tema);
+		if(!isset($ext))
+		{$ext = "";}
+		$retorno = dadosLinhaDoTempo($map_file,$tema,$ext);
 	break;
 /*
 Section: Menu de temas
