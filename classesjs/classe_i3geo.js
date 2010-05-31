@@ -340,6 +340,7 @@ i3GEO = {
 					i3GEO.gadgets.mostraBuscaRapida();
 					i3GEO.gadgets.mostraVersao();
 					i3GEO.guias.cria();
+					
 					if($i("arvoreAdicionaTema"))
 					{i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid,i3GEO.configura.locaplic,"arvoreAdicionaTema");}
 					

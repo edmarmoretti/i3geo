@@ -189,7 +189,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	/*
 	Variable: locidentifica 
 	
-	Onde fica o xml que será utilizado para complementar a lista de temas dispponíveis na ferramenta de identificação.
+	Onde fica o xml que será utilizado para complementar a lista de temas disponíveis na ferramenta de identificação.
 	
 	Se for "" será utilizado o sistema de administração do i3geo (veja i3geo/admin).		
 	

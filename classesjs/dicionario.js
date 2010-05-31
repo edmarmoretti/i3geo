@@ -106,6 +106,13 @@ en:"Image map format",
 es:"Formato de la imagen del mapa",
 it:"Image map format"
 }],
+"p16": [
+{
+pt: "Camadas de fundo",
+en:"Base layers",
+es:"Base layers",
+it:"Base layers"
+}],
 //itens do menu suspenso
 "s1": [
 {

@@ -540,7 +540,9 @@ i3GEO.Interface = {
 	
 	i3GEO.Interface.ATUAL = "openlayers"
 	
-	Cria o objeto i3geoOL que pode receber os métodos da API
+	Cria o objeto i3geoOL que pode receber os métodos da API do OpenLayers
+	
+	Para detalhes sobre a configuração da interface, veja i3geo/aplicmap/openlayers.htm
 	*/
 	openlayers:{
 		/*
@@ -651,7 +653,7 @@ i3GEO.Interface = {
 			//monta o mapa após receber o resultado da criação do mapfile temporário
 			//
 			var montaMapa = function(){
-				var pz,pos;
+				var pz,pos,temp,propriedades,layers,nlayers,i,texto,estilo;
 				i3GEO.Interface.openlayers.criaLayers();
 				i3GEO.Interface.openlayers.registraEventos();
 				i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
@@ -665,8 +667,27 @@ i3GEO.Interface = {
 					i3geoOL.addControl(pz);
 					pz.div.style.zIndex = 5000;
 				}
-				if(i3GEO.Interface.openlayers.GADGETS.LayerSwitcher == true)
-				{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
+				//
+				//insere a lista de layers de fundo
+				//
+				temp = $i("listaLayersBase");
+				if(temp){
+					estilo = "cursor:pointer;vertical-align:top;padding-top:5px;";
+					if(navm)
+					{estilo = "cursor:pointer;vertical-align:top;padding-top:2px;";}
+					temp = {"propriedades": []};
+					layers = i3geoOL.getLayersBy("isBaseLayer",true);
+					layersn = layers.length;
+					for(i=0;i<layersn;i++){
+						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].id+"' /> "+layers[i].name;
+						temp.propriedades.push({ text: texto, url: ""});
+					}
+					i3GEO.util.arvore("<b>"+$trad("p16")+"</b>","listaLayersBase",temp);
+				}
+				else{
+					if(i3GEO.Interface.openlayers.GADGETS.LayerSwitcher == true)
+					{i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());}
+				}
 				if(i3GEO.Interface.openlayers.GADGETS.ScaleLine == true)
 				{i3geoOL.addControl(new OpenLayers.Control.ScaleLine());}
 				if(i3GEO.Interface.openlayers.GADGETS.OverviewMap == true)
@@ -839,6 +860,10 @@ i3GEO.Interface = {
 				{desligar = obj.value;}
 				i3GEO.php.ligatemas(temp,desligar,ligar);
 			}
+		},
+		ativaFundo: function(id){
+			var layer = i3geoOL.getLayer(id);
+			i3geoOL.setBaseLayer(layer);
 		},
 		atualizaMapa:function(){
 			var layers = i3geoOL.layers,

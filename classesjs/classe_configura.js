@@ -521,11 +521,14 @@ i3GEO.configura = {
 	*/
 	liberaGuias: "nao",
 	/*
-	Propriedade: entorno
+	Propriedade: entorno (depreciado)
 	
 	Define se o entorno do mapa será desenhado também
 	
 	O desenho do entorno permite a navegação no mapa no estilo "tiles"
+	
+	Observação - A navegação no estilo TILES, para  a interface padrão, foi depreciada na versão 4.4.
+	Se vc desejar essa forma de navegação, utilize a interface "openlayers" (veja i3geo/aplicmap/openlayers.htm
 	
 	Tipo:
 	{string}
