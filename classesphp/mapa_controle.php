@@ -933,7 +933,9 @@ Gera a imagem do mapa de referência.
 	case "REFERENCIA":
 		$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
-		$retorno = retornaReferencia();
+		if(!isset($ext))
+		{$ext = "";}
+		$retorno = retornaReferencia($ext);
 	break;
 /*
 Valor: REFERENCIADINAMICA
@@ -943,7 +945,9 @@ Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do 
 	case "REFERENCIADINAMICA":
 		//$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
-		$retorno = retornaReferenciaDinamica();
+		if(!isset($ext))
+		{$ext = "";}
+		$retorno = retornaReferenciaDinamica($ext);
 	break;
 /*
 Valor: MUDAOUTPUTFORMAT

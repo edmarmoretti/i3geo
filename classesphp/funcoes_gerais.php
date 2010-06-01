@@ -769,13 +769,22 @@ $locmapserv	{string} - locallização do mapserver CGI
 
 $map_file {string} - mapfile que será processado
 
+Parametros:
+
+$ext {string} - (opcional) extensão geográfica do mapa
+
 Retorno:
 
 string contendo variáveis no formato javascript
 */
-function retornaReferencia()
+function retornaReferencia($ext="")
 {
 	global $nomeImagem,$objMapa,$utilizacgi,$locmapserv,$map_file;
+	if($ext && $ext != ""){
+		$e = explode(" ",$ext);
+		$extatual = $objMapa->extent;
+		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+	}
 	//
 	//pega a extensao original caso ela tenha sido registrada no modo dinamico
 	//
@@ -789,9 +798,9 @@ function retornaReferencia()
 		$em->set("miny",$original[1]);
 		$em->set("maxx",$original[2]);
 		$em->set("maxy",$original[3]);
-		$objMapa->setmetadata("referenciaextentoriginal","");
+		//$objMapa->setmetadata("referenciaextentoriginal","");
 	}
-	$objMapa->save($map_file);
+	//$objMapa->save($map_file);
 	$objMapa->preparequery();
 	$objImagem = $objMapa->drawreferencemap();
 	$nomer = ($objImagem->imagepath)."ref".$nomeImagem.".png";
@@ -828,17 +837,27 @@ $zoom - fator de zoom
 
 $tipo - tipo de referência dinamico|mapa
 
+Parametros:
+
+$ext {string} - (opcional) extensão geográfica do mapa
+
 Retorno:
 
 String contendo variáveis no formato javascript
 */
-function retornaReferenciaDinamica()
+function retornaReferenciaDinamica($ext="")
 {
 	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
 	$objMapa = ms_newMapObj($map_file);
+	if($ext && $ext != ""){
+		$e = explode(" ",$ext);
+		$extatual = $objMapa->extent;
+		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+	}
+
 	$numlayers = $objMapa->numlayers;
 	for ($i=0;$i < $numlayers;++$i)
 	{
@@ -900,7 +919,7 @@ function retornaReferenciaDinamica()
 	$r->set("miny",$emt->miny);
 	$r->set("maxx",$emt->maxx);
 	$r->set("maxy",$emt->maxy);
-	$mapa->save($map_file);
+	//$mapa->save($map_file);
 	return($s);
 }
 /*

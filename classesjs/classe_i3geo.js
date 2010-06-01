@@ -112,6 +112,8 @@ i3GEO = {
 	interfacePadrao {String} - interface padrão definida em ms_configura
 	
 	embedLegenda {String} - sim|nao indica se na inicialização a legenda foi inserida no conteúdo do mapa ou não
+	
+	celularef {Numeric} - tamanho da célula do mapa de referência
 	*/
 	parametros: {
 		mapexten: "",
@@ -138,7 +140,8 @@ i3GEO = {
 		kmlurl:"",
 		mensageminicia:"",
 		interfacePadrao:"geral.htm",
-		embedLegenda:"nao"
+		embedLegenda:"nao",
+		celularef:""
 	},
 	/*
 	Propriedade: finaliza
@@ -247,7 +250,8 @@ i3GEO = {
 			kmlurl:"",
 			mensageminicia:"",
 			interfacePadrao:"geral.htm",
-			embedLegenda:"nao"
+			embedLegenda:"nao",
+			celularef: ""
 		};
 		if(tamanho[0] < 550){
 			i = $i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml);

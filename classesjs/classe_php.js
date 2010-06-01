@@ -512,8 +512,8 @@ i3GEO.php = {
 		i3GEO.php.verifica();
 		if(arguments.length === 2)
 		{tipo = "dinamico";}
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo;
-		cpJSON.call(p,"retornaReferenciaDinamica",funcao);	
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referenciadinamica&g_sid="+i3GEO.configura.sid+"&zoom="+zoom+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
+		cpJSON.call(p,"retornaReferenciaDinamica",funcao);
 	},
 	/*
 	Function: referencia
@@ -525,7 +525,7 @@ i3GEO.php = {
 	*/
 	referencia: function(funcao){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=referencia&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"retornaReferencia",funcao);	
 	},
 	/*

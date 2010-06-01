@@ -108,7 +108,7 @@ i3GEO.calculo = {
 				xy = [];
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}
-			if(i3GEO.Interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL == "openlayers" && docmapa.id != "mapaReferencia"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				xy = i3geoOL.getViewPortPxFromLonLat(new OpenLayers.LonLat(vx,vy));
 				return [(xy.x)+pos[0],(xy.y)+pos[1]];

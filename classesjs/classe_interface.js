@@ -573,7 +573,7 @@ i3GEO.Interface = {
 			PanZoom:false,
 			LayerSwitcher:true,
 			ScaleLine:true,
-			OverviewMap:true	
+			OverviewMap:false	
 		},
 		/*
 		Propriedade: MINEXTENT
@@ -702,6 +702,13 @@ i3GEO.Interface = {
 				OLpanel.addControls([OLpan,OLzoom]);
 				i3geoOL.addControl(OLpanel);
 				i3GEO.Interface.openlayers.ativaBotoes();
+				if (i3GEO.configura.mapaRefDisplay !== "none"){
+					if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay"))
+					{i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
+					if (i3GEO.configura.mapaRefDisplay === "block")
+					{i3GEO.maparef.inicia();}
+				}
+
 			};
 			i3GEO.php.openlayers(montaMapa);
 			i3GEO.gadgets.mostraMenuSuspenso();
