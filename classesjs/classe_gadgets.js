@@ -989,6 +989,13 @@ i3GEO.gadgets = {
  				if(typeof(console) !== 'undefined'){console.warning("i3GEO.gadgets.mostraMenuSuspenso() "+ e);}
  			}
 			//
+			//desabilita opções em interfaces específicas
+			//
+			if(i3GEO.Interface.ATUAL !== "padrao" && $i("omenudataArquivos3")){
+				YAHOO.widget.MenuManager.getMenuItem("omenudataArquivos3").cfg.setProperty("disabled", true);
+			}
+			
+			//
 			//corrige problemas de estilo
 			//
 			temp = objid.style;

@@ -950,8 +950,8 @@ i3GEO.Interface = {
 			}
 			if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true)
 			{i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2","i3geo_barra2",false,x2,y2);}
-			if(i3GEO.Interface.ATIVAMENUCONTEXTO)
-			{i3GEO.Interface.padrao.ativaMenuContexto();}
+			//if(i3GEO.Interface.ATIVAMENUCONTEXTO)
+			//{i3GEO.Interface.padrao.ativaMenuContexto();}
 			if(i3GEO.configura.visual !== "default")
 			{i3GEO.gadgets.visual.troca(i3GEO.configura.visual);}
 			i3GEO.barraDeBotoes.ativaBotoes();

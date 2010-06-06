@@ -87,7 +87,10 @@ i3GEO.navega = {
 	*/
 	zoomin: function(locaplic,sid){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomin()");}
-		//YAHOO.log("zoomin", "i3geo");
+		if(i3GEO.Interface.ATUAL === "openlayers"){
+			i3geoOL.zoomIn();
+			return;
+		}
 		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
 			i3GEO.configura.sid = sid;
@@ -109,7 +112,10 @@ i3GEO.navega = {
 	*/
 	zoomout: function(locaplic,sid){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.zoomout()");}
-		//YAHOO.log("zoomout", "i3geo");
+		if(i3GEO.Interface.ATUAL === "openlayers"){
+			i3geoOL.zoomOut();
+			return;
+		}
 		if(arguments.length === 2){
 			i3GEO.configura.locaplic = locaplic;
 			i3GEO.configura.sid = sid;
@@ -400,6 +406,10 @@ i3GEO.navega = {
 		if (direcao === "sudoeste"){
 			y = h - (h / 6);
 			x = w / 6;
+		}
+		if(i3GEO.Interface.ATUAL === "openlayers"){
+			i3geoOL.pan(x,y);
+			return;
 		}
 		f = "i3GEO.navega.timerNavega = null;i3GEO.janela.abreAguarde('i3GEO.atualiza','"+$trad('o1')+"');"+
 			"i3GEO.contadorAtualiza++;"+

@@ -954,7 +954,7 @@ i3GEO.arvoreDeCamadas = {
 		//
 		//inclui icone do tema
 		//
-		estilo = "cursor:pointer;vertical-align:top;padding-top:4px;";
+		estilo = "cursor:pointer;vertical-align:top;padding-top:0px;";
 		if(navm)
 		{estilo = "cursor:pointer;position:relative;top:-4px;";}
 		if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true)
