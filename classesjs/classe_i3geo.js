@@ -57,7 +57,7 @@ i3GEO = {
 	Exemplos:
 	
 	alert(i3GEO.parametros.mapexten);
-	i3GEO.mapscale = 25000;
+	i3GEO.parametros.mapscale = 25000;
 	
 	Parametros:
 	

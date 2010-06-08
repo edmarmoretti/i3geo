@@ -341,6 +341,8 @@ i3GEO.arvoreDeCamadas = {
 		{return;}
 		if(!$i(this.IDHTML))
 		{return;}
+		if(temas == undefined)
+		{return;}
 		this.atualiza(temas);
 		if(this.finaliza != ""){
 			eval(this.finaliza);
@@ -362,8 +364,8 @@ i3GEO.arvoreDeCamadas = {
 	atualiza: function(temas){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.atualiza()");}
 		if(arguments.length === 0){
-			temas = this.CAMADAS;
-			this.CAMADAS = "";
+			temas = i3GEO.arvoreDeCamadas.CAMADAS;
+			i3GEO.arvoreDeCamadas.CAMADAS = "";
 		}
 		var temp,currentIconMode,newVal,root,tempNode,titulo,d,c,ltema,temaNode,i,j,n,nk,k,incluidos=[];
 		//
@@ -372,7 +374,7 @@ i3GEO.arvoreDeCamadas = {
 		temp = $i(i3GEO.arvoreDeCamadas.IDHTML);
 		if(temp){
 			if(temp.innerHTML !== ""){
-				if(this.comparaTemas(temas,this.CAMADAS)){
+				if(i3GEO.arvoreDeCamadas.comparaTemas(temas,i3GEO.arvoreDeCamadas.CAMADAS)){
 					if(typeof(console) !== 'undefined'){console.info("Nao é necessario atualizar arvoreDeCamadas - return");}
 					return;
 				}
@@ -381,7 +383,7 @@ i3GEO.arvoreDeCamadas = {
 		else
 		{return;}
 		document.getElementById(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
-		this.CAMADAS = temas;
+		i3GEO.arvoreDeCamadas.CAMADAS = temas;
 		YAHOO.example.treeExample = function(){
 			function changeIconMode(){
 				newVal = parseInt(this.value,10);

@@ -127,36 +127,10 @@
 <tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br</td></tr>
 
 </table>
-<center>
-<br><br>
-<table>
-<tr>
-	<td><center><h1><div id=versaoi3geo ></div><h2>Software livre para criação de mapas interativos e geoprocessamento<h3>Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></h2></h1></td>
-</tr>
-<tr>
-	<td style="padding:10px;"><center><img alt="logomarca" src='../imagens/logo_inicio.png'></td>
-</tr>
-<tr>
-	<td><center>
-		<script type="text/javascript" src="http://www.ohloh.net/p/150688/widgets/project_users.js?style=red"></script>
-	</td>
-</tr>
-</table>
+
+<!-- Variáveis globais e inicialização do mapa-->
 <script type="text/javascript">
-/*
-Title: Interface normal
 
-Abre o i3geo com todas as suas funcionalidades.
-
-File: i3geo/aplicmap/geral.htm
-
-Exemplo:
-
-http://<host>/i3geo/ms_criamapa.php
-
-Para definir quais botões das barras de ferramentas serão incluídos no mapa, veja: <classe_barradebotoes.js> i3GEO.barraDeBotoes.INCLUIBOTAO
-
-*/
 /*
 	Indica a localização correta do i3geo.
 	
@@ -176,7 +150,9 @@ i3GEO.Interface.openlayers.GADGETS = {
 		ScaleLine:true,
 		OverviewMap:false	
 	};
-i3GEO.Interface.openlayers.TILES = false;
+i3GEO.Interface.openlayers.TILES = true;
+//número de tiles fora do mapa
+i3GEO.Interface.openlayers.BUFFER = 1;
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers

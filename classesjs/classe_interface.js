@@ -558,6 +558,18 @@ i3GEO.Interface = {
 		*/
 		TILES: false,
 		/*
+		Propriedade: BUFFER
+		
+		Número de TILES na área não visível do mapa
+		
+		Tipo:
+		{integer}
+		
+		Default:
+		{0}
+		*/
+		BUFFER: 0,
+		/*
 		Propriedade: GADGETS
 		
 		Lista dos controles específicos da API do OpenLayers que serão inseridos ou não no mapa
@@ -731,10 +743,22 @@ i3GEO.Interface = {
 				camada,
 				urllayer,
 				opcoes,
-				i;
-
-			if(i3geoOL.getLayersByName("Fundo").length == 0){
-				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1});
+				i,
+				fundoIsBase = true,
+				temp;
+			//
+			//verifica se algum layer adicional é do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
+			//
+			try{
+				temp = i3GEO.Interface.openlayers.LAYERSADICIONAIS.length;
+				for(i=0;i<temp;i++){
+					if(i3GEO.Interface.openlayers.LAYERSADICIONAIS[i].isBaseLayer === true && i3GEO.Interface.openlayers.LAYERSADICIONAIS[i].visibility === true)
+					{fundoIsBase = false;}
+				}
+			}
+			catch(e){}
+			if(i3geoOL.getLayersByName("Fundo").length == 0 && fundoIsBase === true){
+				layer = new OpenLayers.Layer.WMS( "Fundo", urlfundo,{map_imagetype:i3GEO.Interface.OUTPUTFORMAT},{ratio: 1,singleTile:true,isBaseLayer:true, opacity: 1,visibility:true});
 				i3geoOL.addLayer(layer);
 			}
 			opcoes = {
@@ -744,7 +768,7 @@ i3GEO.Interface = {
 				opacity: 1,
 				singleTile:!(i3GEO.Interface.openlayers.TILES),
 				ratio:1,
-				buffer:0,
+				buffer:i3GEO.Interface.openlayers.BUFFER,
 				wrapDateLine:true,
 				eventListeners:{
 					"loadstart": i3GEO.Interface.openlayers.loadStartLayer,
@@ -778,7 +802,9 @@ i3GEO.Interface = {
 				else
 				{layer.setVisibility(true);}				
 			}
-			i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);
+			try
+			{i3geoOL.addLayers(i3GEO.Interface.openlayers.LAYERSADICIONAIS);}
+			catch(e){}
 		},
 		inverteModoTile: function(){
 			var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length,
@@ -908,7 +934,7 @@ i3GEO.Interface = {
 			});
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
 				//i3GEO.eventos.mousemoveMapa();
-				var p,lonlat,d,dc,imgp,targ,pos,mousex,mousey;
+				var p,lonlat,d,dc,imgp,targ,pos,mousex,mousey,pos;
 				if (navm)
 				{p = new OpenLayers.Pixel(e.x,e.y);}
 				else
@@ -923,6 +949,7 @@ i3GEO.Interface = {
 					objposicaocursor.telay = p.y;
 					objposicaocursor.dmsx = d[0];
 					objposicaocursor.dmsy = d[1];
+					/*
 					dc = $i("i3geo");
 					if ($i("openlayers_OpenLayers_Container"))
 					{dc = $i("openlayers_OpenLayers_Container");}
@@ -931,6 +958,11 @@ i3GEO.Interface = {
 						objposicaocursor.telax = objposicaocursor.telax + dc.offsetLeft;
 						objposicaocursor.telay = objposicaocursor.telay + dc.offsetTop;
 					}
+					*/
+					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
+					objposicaocursor.telax = objposicaocursor.telax + pos[0];
+					objposicaocursor.telay = objposicaocursor.telay + pos[1];
+					
 					d = i3geoOL.getViewPortPxFromLonLat(lonlat);
 					objposicaocursor.imgx = d.x;
 					objposicaocursor.imgy = d.y;

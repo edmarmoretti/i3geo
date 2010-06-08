@@ -670,6 +670,8 @@ i3GEO.gadgets = {
 		*/
 		inicia: function(qs,lugarquadros){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.gadgets.quadros.inicia()");}
+			if(i3GEO.Interface.ATUAL !== "padrao")
+			{return;}
 			if(arguments.length === 1)
 			{lugarquadros = i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml;}
 			var q,i,temp,p;
@@ -709,6 +711,8 @@ i3GEO.gadgets = {
 		valor - {String} valor que será aplicado.
 		*/
 		grava: function(variavel,valor){
+			if(i3GEO.Interface.ATUAL !== "padrao")
+			{return;}
 			eval("i3GEO.gadgets.quadros.quadrosfilme["+i3GEO.gadgets.quadros.quadroatual+"]."+variavel+" = '"+valor+"'");
 			if($i(i3GEO.gadgets.PARAMETROS.mostraQuadros.idhtml))
 			{$i("quadro"+i3GEO.gadgets.quadros.quadroatual).className = "quadro1";}
@@ -719,6 +723,8 @@ i3GEO.gadgets = {
 		Avança um quadro na lista de quadros, mudando a imagem utilizada na sua representação.
 		*/		
 		avanca: function(){
+			if(i3GEO.Interface.ATUAL !== "padrao")
+			{return;}
 			try{
 				var nquadros = i3GEO.gadgets.quadros.quadrosfilme.length;
 				if ((nquadros - 1) === (i3GEO.gadgets.quadros.quadroatual))

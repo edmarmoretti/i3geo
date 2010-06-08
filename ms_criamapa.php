@@ -64,6 +64,8 @@ temasa - lista, separada por espaços, com os nomes dos arquivos map que serão ad
 
 layers - lista, separada por espaços, com os nomes dos layers que serão ligados. A lista deve conter os nomes dos layers e não os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers serão adicionados ao mapa. Para que esses dois layers fiquem visíveis no mapa deve-se utilizar &layers=estradas ferrovias.
 
+desligar - lista com os nomes dos temas que serão forçados a inicializar desligados, ou seja, com STATUS OFF
+
 mapext - extensao geografica que será utilizada. Por padrão, a extensão geográfica é definida para abranger o Brasil todo. Para alterar o padrão deve-se utilizar o parâmetro mapext para especificar a nova abrangência. Essa abrangência deve ser definida em coordenadas no formato décimos de grau e na projeção geográfica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores são xmin ymin xmax ymax
 
 executa - programa ou função em php que será executado via include. O include é feito no final do processo de inicialização quando a variável $tmpfname já está definida. Essa variável guarda o nome do arquivo mapfile que será utilizado pelo i3geo.
@@ -318,6 +320,8 @@ incluiTemasIniciais();
 
 if(isset($layers))
 {ligaTemas();}
+if(isset($desligar))
+{desligaTemasIniciais();}
 
 if (isset($map_reference_image))
 {$mapn->reference->set("image",$map_reference_image);}
@@ -387,6 +391,7 @@ if(isset($url_wms))
 {incluiTemaWms();}
 
 adaptaLayers();
+
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 {require_once($caminho."ms_registraip.php");}
 
@@ -452,6 +457,35 @@ function abreInterface(){
 		else
 		{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
 	}	
+}
+/*
+Desliga os temas definidos na variável $desligar
+*/
+function desligaTemasIniciais()
+{
+	global $desligar,$mapn;
+	$layers = str_replace(','," ",$desligar);
+	$lista = explode(" ", $layers);
+	foreach ($lista as $l)
+	{
+		if ($l == "")
+		{continue;}
+		if(@$mapn->getLayerByName($l))
+		{$layern = $mapn->getLayerByName($l);$layern->set("status",MS_OFF);}
+		$grupos = $mapn->getLayersIndexByGroup($l);
+		if(count($grupos) > 0)
+		{
+			for ($i = 0;$i < count($grupos);++$i)
+			{
+				$layern = $mapn->getLayer($grupos[$i]);
+				if(strtolower($layern->group) == strtolower($l))
+				{
+					$layern->set("status",MS_OFF);
+				}
+			}
+		}
+	}
+	erroCriacao();
 }
 /*
 Liga os temas definidos na variável $layers

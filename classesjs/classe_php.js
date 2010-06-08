@@ -952,6 +952,8 @@ i3GEO.php = {
 			ext = "";
 			listaDeTemas = "";
 		}
+		if(listaDeTemas === undefined)
+		{listaDeTemas = "";}
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica2&opcao="+opcao+"&xy="+x+","+y+"&resolucao=5&g_sid="+sid+"&ext="+ext+"&listaDeTemas="+listaDeTemas;
 		if(opcao !== "tip")
 		{p += "&tema="+tema;}

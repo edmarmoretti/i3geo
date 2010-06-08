@@ -50,7 +50,7 @@ Arquivo: ms_configura.php
 	Tipo:
 	{string}
 */
-$mensagemInicia = 'Vers&atilde;o 4.4 beta - Revis&atilde;o SVN 1660';
+$mensagemInicia = 'Vers&atilde;o 4.4 beta - Revis&atilde;o SVN 1678';
 /*
 	Variable: tituloInstituicao
 	

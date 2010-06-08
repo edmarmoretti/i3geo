@@ -11,7 +11,9 @@
 	Para depurar o código sem ter de compactá-los, substitua na linha abaixo 
 	o arquivo i3geo.js por i3geo.js
 -->
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
+<script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
+
 	<style> 
 	.yui-log .i3geo {background-color:yellow;} /* customize a color */
 	.yui-log .redesenho {background-color:yellow;} /* customize a color */
@@ -184,12 +186,33 @@
 </table>
 <script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+
+i3GEO.Interface.ATUAL = "openlayers";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.configura.diminuixN = 20
+
+i3GEO.Interface.openlayers.GADGETS = {
+		PanZoomBar:true,
+		PanZoom:false,
+		LayerSwitcher:true,
+		ScaleLine:true,
+		OverviewMap:false	
+	};
+i3GEO.Interface.openlayers.TILES = false;
+
 i3GEO.cria()
-i3GEO.barraDeBotoes.AUTOALTURA = true
-i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = true
-i3GEO.barraDeBotoes.PERMITEFECHAR = true
-i3GEO.barraDeBotoes.PERMITEDESLOCAR = true
+
+
+i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = true;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
+i3GEO.barraDeBotoes.AUTO = true;
 i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
+
+i3GEO.Interface.BARRABOTOESLEFT = 50
+i3GEO.Interface.BARRABOTOESTOP = 10
+
 i3GEO.idioma.IDSELETOR = "seletorIdiomas";
 i3GEO.guias.CONFIGURA.adiciona.titulo = "Mais temas";
 //as barras de botoes serão construidas automaticamente, sem precisar de eleemntos HTML

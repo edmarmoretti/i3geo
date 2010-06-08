@@ -4,40 +4,40 @@ C:\ms4w\Apache\htdocs\i3geo\geradordelinks.htm	1263817552	1	geradordelinks.htm
 C:\ms4w\Apache\htdocs\i3geo\index.htm	1272586008	1	Redirecionador para o ms_criamapa.php com extensão HTM
 C:\ms4w\Apache\htdocs\i3geo\mobile\adicionatema.php	1265327811	1	adicionatema.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\ativatexto.php	1265328422	1	ativatexto.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js	1273718193	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js	1276089345	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js
 C:\ms4w\Apache\htdocs\i3geo\datadownload.htm	1263828005	1	datadownload.htm
 C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js	1232966495	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\redesenho.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\qrcode.htm	1265324365	1	qrcode.htm
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_configura.js	1273461242	1	Configurações gerais
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_configura.js	1275393607	1	Configurações gerais
 C:\ms4w\Apache\htdocs\i3geo\classesjs\atlas.js	1264442023	1	Atlas
 C:\ms4w\Apache\htdocs\i3geo\mobile\desligar.php	1268329113	1	desligar.php
 C:\ms4w\Apache\htdocs\i3geo\ogc.htm	1267840067	1	ogc.htm
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendagrupos.htm	1268057284	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendagrupos.htm
 C:\ms4w\Apache\htdocs\i3geo\mobile\identifica.php	1265329064	1	identifica.php
-C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt	1271631371	0	C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt
+C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt	1274202202	0	C:\ms4w\Apache\htdocs\i3geo\guia_de_migracao.txt
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendaseminput.htm	1268057297	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legendaseminput.htm
 C:\ms4w\Apache\htdocs\i3geo\wscliente.htm	1241539501	1	wscliente.htm
-C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1273538775	1	Variáveis de inicialização ms_configura.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredecamadas.js	1273802631	1	Árvore de camadas
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_analise.js	1273461163	1	Análise geográfica
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_imagem.php	1257770280	1	classe_imagem.php
+C:\ms4w\Apache\htdocs\i3geo\ms_configura.php	1275335579	1	Variáveis de inicialização ms_configura.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredecamadas.js	1276019102	1	Árvore de camadas
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_analise.js	1275922099	1	Análise geográfica
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_imagem.php	1274214610	1	classe_imagem.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_desenho.js	1273113047	1	Desenho de elementos gráficos
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples.php	1272076931	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\flamingo.htm	1272077034	1	Flamingo (experimental)
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples2.htm	1272078635	1	Interface simples 2
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.htm	1265326376	1	index.htm
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda.htm	1268057362	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda.htm
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_calculo.js	1273111039	1	Cálculos
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_calculo.js	1275448789	1	Cálculos
 C:\ms4w\Apache\htdocs\i3geo\classesphp\parse_cgi.php	1272423411	1	parse_cgi.php
 C:\ms4w\Apache\htdocs\i3geo\testamapfile.php	1271427373	1	Testa um mapfile
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_selecao.js	1268223064	1	Seleção de elementos (depreciado)
-C:\ms4w\Apache\htdocs\i3geo\classesphp\funcoes_gerais.php	1272307171	1	funcoes_gerais.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\funcoes_gerais.php	1275502929	1	funcoes_gerais.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\ligar.php	1268329073	1	ligar.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\flamingoogc.php	1265247102	1	flamingoogc.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_alteraclasse.php	1265144852	1	classe_alteraclasse.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_alteraclasse.php	1274710810	1	classe_alteraclasse.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\index.html	1268065007	1	Redirecionador para o ms_criamapa.php com extensão HTML
 C:\ms4w\Apache\htdocs\i3geo\atlas\index.html	1221405676	1	index.html
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_openlayers.php	1273372911	1	mapa_openlayers.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_openlayers.php	1274726025	1	mapa_openlayers.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\index.htm	1196776285	1	Redirecionador para o ms_criamapa.php com extensão HTM
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_estatistica.php	1249045767	1	classe_estatistica.php
 C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php	1189442126	0	C:\ms4w\Apache\htdocs\i3geo\sobearquivo.php
@@ -52,12 +52,12 @@ C:\ms4w\Apache\htdocs\i3geo\aplicmap\zerocal.htm	1272078635	1	Interface zerocal
 C:\ms4w\Apache\htdocs\i3geo\ogc.php	1265928152	1	ogc.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda3.htm	1268057241	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda3.htm
 C:\ms4w\Apache\htdocs\i3geo\ms_registraip.php	1265367394	1	ms_registraip.php
-C:\ms4w\Apache\htdocs\i3geo\aplicmap\openlayers.htm	1273959871	1	Interface normal
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_barradebotoes.js	1273542447	1	Barra de botões
+C:\ms4w\Apache\htdocs\i3geo\aplicmap\openlayers.htm	1276029266	1	Interface normal
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_barradebotoes.js	1276034057	1	Barra de botões
 C:\ms4w\Apache\htdocs\i3geo\mashups\index.html	1268311171	1	Mashups
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\simples1.htm	1272078635	1	Interface simples 1
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_menutemas.php	1264516605	1	classe_menutemas.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1273801417	1	mapa_controle.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_controle.php	1275503355	1	mapa_controle.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_ajuda.js	1256165009	1	Ajuda
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atributos.php	1273801325	1	classe_atributos
 C:\ms4w\Apache\htdocs\i3geo\mobile\inicia.php	1265327571	1	inicia.php
@@ -69,31 +69,31 @@ C:\ms4w\Apache\htdocs\i3geo\aplicmap\debug.htm	1272078353	1	Interface normal
 C:\ms4w\Apache\htdocs\i3geo\licenca.txt	1266421174	0	C:\ms4w\Apache\htdocs\i3geo\licenca.txt
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_atlas.php	1263810333	1	classe_atlas.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_toponimia.php	1251375255	1	classe_toponimia.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1273717546	1	classe_mapa.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_mapa.php	1274711089	1	classe_mapa.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\geradordelinks.js	1261269974	1	Gerador de links
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\minima.htm	1272078635	1	Interface minima
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_guias.js	1268231073	1	Guias
 C:\ms4w\Apache\htdocs\i3geo\classesphp\wscliente.php	1265242627	1	wscliente.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\legenda.php	1265329629	1	legenda.php
 C:\ms4w\Apache\htdocs\i3geo\zerocal\index.htm	1196777193	1	Redirecionador HTM para o ms_criamapa.php com interface zerocal
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_legenda.php	1268058272	1	classe_legenda.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_legenda.php	1274710692	1	classe_legenda.php
 C:\ms4w\Apache\htdocs\i3geo\geraminiatura.php	1265367724	1	geraminiatura.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\localizarxy.php	1265329317	1	localizarxy.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_gadgets.js	1273112126	1	Gadgets (objetos marginais do mapa)
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_gadgets.js	1276021562	1	Gadgets (objetos marginais do mapa)
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_idioma.js	1261098366	1	Idioma
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredetemas.js	1273261510	1	Árvore de temas
-C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1272726032	1	Inicializa o I3Geo via URL ms_criamapa.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_arvoredetemas.js	1274878762	1	Árvore de temas
+C:\ms4w\Apache\htdocs\i3geo\ms_criamapa.php	1276007631	1	Inicializa o I3Geo via URL ms_criamapa.php
 C:\ms4w\Apache\htdocs\i3geo\zerocal\index.html	1196777214	1	Redirecionador HTML para o ms_criamapa.php com interface zerocal
-C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php	1273718193	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php	1276089345	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\i3geo_tudo_compacto.js.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\graficopizza.php	1265310285	1	graficopizza.php
-C:\ms4w\Apache\htdocs\i3geo\classesphp\graficos.php	1270560305	1	graficos.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_interface.js	1273771622	1	Interface
+C:\ms4w\Apache\htdocs\i3geo\classesphp\graficos.php	1275015264	1	graficos.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_interface.js	1276029864	1	Interface
 C:\ms4w\Apache\htdocs\i3geo\classesphp\carrega_ext.php	1272467576	1	carrega_ext.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_eventos.js	1273771978	1	Eventos
 C:\ms4w\Apache\htdocs\i3geo\principal.htm	1265677922	1	Página principal com a lista de aplicativos do i3geo
 C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php	1272492443	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_selecao.php	1273071856	1	classe_selecao.php
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_i3geo.js	1273461383	1	i3Geo
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_i3geo.js	1276006617	1	i3Geo
 C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js	1273803582	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario_ajuda.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\mobile.php	1265327022	1	mobile.php
 C:\ms4w\Apache\htdocs\i3geo\mobile\index.php	1265326743	1	index.php
@@ -101,11 +101,11 @@ C:\ms4w\Apache\htdocs\i3geo\admin.htm	1189442126	0	C:\ms4w\Apache\htdocs\i3geo\a
 C:\ms4w\Apache\htdocs\i3geo\classesjs\datadownload.js	1267824257	1	Data download
 C:\ms4w\Apache\htdocs\i3geo\classesjs\compactajs.php	1273885076	1	Compactador de javascript
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_util.js	1273353043	1	Utilitários
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_maparef.js	1270095303	1	Mapa de referência
-C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js	1273759696	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_maparef.js	1275503812	1	Mapa de referência
+C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js	1275394738	0	C:\ms4w\Apache\htdocs\i3geo\classesjs\dicionario.js
 C:\ms4w\Apache\htdocs\i3geo\mobile\localizar.php	1265329526	1	localizar.php
 C:\ms4w\Apache\htdocs\i3geo\kml.php	1265367691	1	kml.php
-C:\ms4w\Apache\htdocs\i3geo\aplicmap\geral.htm	1273959815	1	Interface normal
+C:\ms4w\Apache\htdocs\i3geo\aplicmap\geral.htm	1276029241	1	Interface normal
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_analise.php	1270497239	1	classe_analise.php
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\meumapa.htm	1272078353	1	Interface normal
 C:\ms4w\Apache\htdocs\i3geo\classesphp\flamingo.inc	1265236946	1	flamingo.inc
@@ -122,13 +122,13 @@ C:\ms4w\Apache\htdocs\i3geo\testainstal.php	1265367291	1	Testa a instalação do I
 C:\ms4w\Apache\htdocs\i3geo\index.html	1255824734	1	Redirecionador para o ms_criamapa.php com extensão HTML
 C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm	1268056911	0	C:\ms4w\Apache\htdocs\i3geo\aplicmap\legenda2.htm
 C:\ms4w\Apache\htdocs\i3geo\atlas\geral.htm	1272076886	1	geral.htm
-C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_temas.php	1273801467	1	classe_temas.php
+C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_temas.php	1274711746	1	classe_temas.php
 C:\ms4w\Apache\htdocs\i3geo\classesphp\classe_navegacao.php	1249045690	1	classe_navegacao.php
 C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_janela.js	1271810562	1	Janelas
 C:\ms4w\Apache\htdocs\i3geo\classesphp\wmswfs.php	1265243963	1	wmswfs.php
 C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php	1272304972	0	C:\ms4w\Apache\htdocs\i3geo\mashups\openlayers.js.php
 C:\ms4w\Apache\htdocs\i3geo\leiame.txt	1261484776	0	C:\ms4w\Apache\htdocs\i3geo\leiame.txt
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_navega.js	1273802285	1	Navegação sobre o mapa
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_mapa.js	1273193367	1	Mapa
-C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_php.js	1273801166	1	PHP
-C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1273184657	1	mapa_inicia.php
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_navega.js	1275925259	1	Navegação sobre o mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_mapa.js	1276028937	1	Mapa
+C:\ms4w\Apache\htdocs\i3geo\classesjs\classe_php.js	1276029058	1	PHP
+C:\ms4w\Apache\htdocs\i3geo\classesphp\mapa_inicia.php	1274317630	1	mapa_inicia.php
