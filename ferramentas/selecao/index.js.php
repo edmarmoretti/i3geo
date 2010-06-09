@@ -56,7 +56,9 @@ i3GEOF.selecao = {
 			};
 			$i("i3GEOselecaoguia2").onclick = function(){
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia2","i3GEOselecaoguia");
-				$i("i3GEOselecaoparametros").innerHTML = "";
+				try
+				{$i("i3GEOselecaoparametros").innerHTML = "";}
+				catch(e){}
 				i3GEOF.selecao.adicionaLinhaFiltro();
 			};
 			$i("i3GEOselecaoguia3").onclick = function(){
