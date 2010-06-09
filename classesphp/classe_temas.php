@@ -436,7 +436,7 @@ $testa - Testa o filtro e retorna uma imagem.
 	function insereFiltro($filtro,$testa="")
 	{
 		if(!$this->layer){return "erro";}
-		$fil = $this->layer->getfilter();
+		$fil = $this->layer->getFilterString();
 		$filtro = str_replace("|","'",$filtro);
 		if ($this->layer->connectiontype == MS_POSTGIS)
 		{

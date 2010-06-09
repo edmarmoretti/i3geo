@@ -103,7 +103,7 @@ function legendaValorUnico($layername)
 	$valor = array();
 	//
 	$classe = $layer->getclass(0);
-	$expressao = $classe->getExpression();
+	$expressao = $classe->getExpressionString();
 	$item = preg_replace('/.*\[|\].*/i','\1', $expressao);
 	for($i=0;$i<$nclasses;++$i)
 	{

@@ -629,7 +629,7 @@ class LayerServer {
                 $style['icon']              = $this->get_icon_url($layer, $class->name,$i);
                 $style['icon_width']        = $_style->size; // Points
             }
-            $style['expression']        = $class->getExpression();
+            $style['expression']        = $class->getExpressionString();
             // Set description_template if any
             $style['description_template'] = $description_template;
             // Get icon for lines if any
