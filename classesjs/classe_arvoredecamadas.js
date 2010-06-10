@@ -946,7 +946,11 @@ i3GEO.arvoreDeCamadas = {
 		if(tema.status === 2){ck = ' CHECKED ';}
 		else
 		{ck = "";}
-		estilo = "text-align:left;font-size:11px;vertical-align:top;padding-top:3px;";
+		if(navm)
+		{estilo = "text-align:left;font-size:11px;vertical-align:middle;display:table-cell;";}
+		else
+		{estilo = "text-align:left;font-size:11px;vertical-align:vertical-align:top;padding-top:4px;";}
+		
 		html = "<p onclick='i3GEO.mapa.ativaTema(\""+tema.name+"\")' id='arrastar_"+tema.name+"' style='"+estilo+"' ><input class=inputsb style='cursor:pointer;' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t3")+"','ligadesliga')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" type='checkbox' name=\"layer\" value='"+tema.name+"' "+ ck ;
 		if(i3GEO.arvoreDeCamadas.ATIVATEMA !== "")
 		{html += "onclick=\""+i3GEO.arvoreDeCamadas.ATIVATEMA+"\"";}
@@ -956,9 +960,11 @@ i3GEO.arvoreDeCamadas = {
 		//
 		//inclui icone do tema
 		//
-		estilo = "cursor:pointer;vertical-align:top;padding-top:0px;";
 		if(navm)
-		{estilo = "cursor:pointer;position:relative;top:-4px;";}
+		{estilo = "cursor:pointer;vertical-align:35%;padding-top:0px;";}
+		else
+		{estilo = "cursor:pointer;vertical-align:top;";}
+
 		if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true)
 		{html += "&nbsp;<img style='"+estilo+"' src='"+tema.iconetema+"' />";}		
 		//
@@ -972,9 +978,11 @@ i3GEO.arvoreDeCamadas = {
 		}
 		if ((tema.download === "sim") || (tema.download === "SIM"))
 		{html += "&nbsp;<img style='"+estilo+"' src="+i3GEO.util.$im("down1.gif") +" title='download' onclick='i3GEO.tema.dialogo.download(\""+tema.name+"\")' onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t6")+"','download')\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('')\" />";}
-		estilo = "vertical-align:top;cursor:move";
 		if(navm)
-		{estilo = "cursor:move;position:relative;top:-4px;";}
+		{estilo = "cursor:move;vertical-align:35%;padding-top:0px;";}
+		else
+		{estilo = "cursor:move;vertical-align:top;";}
+		
 		if(i3GEO.arvoreDeCamadas.AGUARDALEGENDA)
 		{html += "&nbsp;<span style='"+estilo+"' onclick=\"i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','abrejanela');\" onmouseover=\"javascript:i3GEO.ajuda.mostraJanela('"+$trad("t7a")+"','');i3GEO.tema.mostralegendajanela('"+tema.name+"','"+tema.tema+"','ativatimer');\" onmouseout=\"javascript:i3GEO.ajuda.mostraJanela('');i3GEO.tema.mostralegendajanela('"+tema.name+"','','desativatimer');\" >"+tema.tema+"</span>";}
 		else

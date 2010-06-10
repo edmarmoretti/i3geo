@@ -686,12 +686,12 @@ i3GEO.Interface = {
 				if(temp){
 					estilo = "cursor:pointer;vertical-align:top;padding-top:5px;";
 					if(navm)
-					{estilo = "cursor:pointer;vertical-align:top;padding-top:2px;";}
+					{estilo = "border:0px solid white;cursor:pointer;vertical-align:middle;padding-top:0px;";}
 					temp = {"propriedades": []};
 					layers = i3geoOL.getLayersBy("isBaseLayer",true);
 					layersn = layers.length;
 					for(i=0;i<layersn;i++){
-						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].id+"' /> "+layers[i].name;
+						texto = "<input type=radio style='"+estilo+"' onclick='i3GEO.Interface.openlayers.ativaFundo(this.value)' name=i3GEObaseLayer value='"+layers[i].id+"' />"+layers[i].name;
 						temp.propriedades.push({ text: texto, url: ""});
 					}
 					i3GEO.util.arvore("<b>"+$trad("p16")+"</b>","listaLayersBase",temp);

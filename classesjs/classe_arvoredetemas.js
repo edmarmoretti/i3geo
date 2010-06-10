@@ -1138,9 +1138,12 @@ i3GEO.arvoreDeTemas = {
 			if(i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO === false)
 			{html += "onclick='i3GEO.util.criaBotaoAplicar(\"i3GEO.arvoreDeTemas.adicionaTemas\",\""+$trad("p14")+"\",\"i3geoBotaoAplicar\",this)'";}
 			else
-			{html += "onclick='i3GEO.arvoreDeTemas.adicionaTemas()'";}
+			{html += "onclick='i3GEO.arvoreDeTemas.adicionaTemas([\""+tema.tid+"\"])'";}
 		}
-		html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:middle;text-align:left;color:"+cor+";padding-left:3px;' >";
+		if(navm)
+		{html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:2px;vertical-align:middle;text-align:left;color:"+cor+";padding-left:0px;' >";}		
+		else
+		{html += " type='"+i3GEO.arvoreDeTemas.TIPOBOTAO+"' value='"+tema.tid+"' /></td><td style='padding-top:4px;vertical-align:middle;text-align:left;color:"+cor+";padding-left:1px;' >";}
 		html += tema.nome;
 		html += "</td></span>";
 		return(html);
@@ -1423,10 +1426,14 @@ i3GEO.arvoreDeTemas = {
 	Function: adicionaTemas
 	
 	Adiciona ao mapa os temas selecionados na árvore
+	
+	Parametro:
+	
+	tsl {array} - (opcional) código do tema que será adicionado ao mapa. Se não for especificado, a lista de códigos será obtida da árvore de temas
 	*/
-	adicionaTemas: function(){
+	adicionaTemas: function(tsl){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.adicionaTemas()");}
-		var tsl,temp;
+		var temp;
 		//
 		//zera o contador de tempo
 		//
@@ -1438,7 +1445,8 @@ i3GEO.arvoreDeTemas = {
 		//
 		//pega os temas ativados na árvore de menus
 		//
-		tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();
+		if(arguments.length !== 1)
+		{tsl = i3GEO.arvoreDeTemas.listaTemasAtivos();}
 		i3GEO.arvoreDeTemas.desativaCheckbox();
 		//
 		//se forem encontrados temas ativos na árvore de menus, o mapa é redesenhado com a adição de novos temas
