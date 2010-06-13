@@ -2,7 +2,15 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-About: Licença
+Title: Dissolve elementos de um tema
+
+Arquivo:
+
+i3geo/ferramentas/dissolve/index.js.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

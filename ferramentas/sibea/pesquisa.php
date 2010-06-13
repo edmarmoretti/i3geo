@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Executa a consulta aos dados do SIBEA-MMA.
+Title: SIBEA-MMA.
 
 Acessa os web services do MMA para recuperar dados sobre educadores ambientais.
 

@@ -1,7 +1,9 @@
 /*
 Title: Busca rápida
 
-File: i3geo/ferramentas/buscarapida/index.js
+Arquivo:
+
+i3geo/ferramentas/buscarapida/index.js
 
 About: Licença
 

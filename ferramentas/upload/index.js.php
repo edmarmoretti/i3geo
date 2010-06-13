@@ -3,7 +3,7 @@
 /*
 Title: Upload de arquivo shapefile
 
-File: i3geo/ferramentas/upload/index.js.php
+Arquivo: i3geo/ferramentas/upload/index.js.php
 
 About: Licença
 

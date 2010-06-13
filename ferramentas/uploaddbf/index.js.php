@@ -3,7 +3,7 @@
 /*
 Title: Upload de arquivo dbf
 
-File: i3geo/ferramentas/uploaddbf/index.js.php
+Arquivo: i3geo/ferramentas/uploaddbf/index.js.php
 
 About: Licença
 

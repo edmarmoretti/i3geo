@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Executa a consulta aos planos de manejo do IBAMA.
+Title: Planos de manejo do IBAMA.
 
 Acessa os web services do IBAMA para recuperar dados sobre planos de manejo florestal.
 

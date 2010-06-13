@@ -1,9 +1,11 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Ferramenta de busca de dados em um tema
+Title: Busca de dados nos atributos de um tema
 
-File: i3geo/ferramentas/busca/index.js.php
+Arquivo:
+
+i3geo/ferramentas/busca/index.js.php
 
 About: Licença
 

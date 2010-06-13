@@ -1,9 +1,9 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Ferramenta carrega mapa salvo
+Title: Carrega mapa salvo
 
-File: i3geo/ferramentas/carregamapa/index.js.php
+Arquivo: i3geo/ferramentas/carregamapa/index.js.php
 
 About: Licença
 

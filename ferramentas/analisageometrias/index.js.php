@@ -1,9 +1,12 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-/*
-Title: Ferramenta análise de geometrias
 
-File: i3geo/ferramentas/analisageometrias/index.js.php
+/*
+Title: Geometrias
+
+Arquivo: 
+
+i3geo/ferramentas/analisageometrias/index.js.php
 
 About: Licença
 

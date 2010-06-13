@@ -1,9 +1,9 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Ferramenta Insere gráfico interativo
+Title: Insere gráfico interativo
 
-File: i3geo/ferramentas/inseregrafico/index.js.php
+Arquivo: i3geo/ferramentas/inseregrafico/index.js.php
 
 About: Licença
 

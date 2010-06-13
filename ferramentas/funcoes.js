@@ -1,5 +1,13 @@
 /*
-About: Licença
+Title: Funções gerais
+
+Arquivo:
+
+i3geo/ferramentas/funcoes.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

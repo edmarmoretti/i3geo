@@ -2,7 +2,15 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-About: Licença
+Title: Ponto em polígono
+
+Arquivo:
+
+i3geo/ferramentas/pontoempoligono/index.js.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

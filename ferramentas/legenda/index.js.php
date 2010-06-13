@@ -1,8 +1,15 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
-About: Licença
+Title: Editor de legenda
+
+Arquivo:
+
+i3geo/ferramentas/legenda/index.js.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -22,6 +29,8 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+
+
 if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }

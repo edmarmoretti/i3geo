@@ -1,5 +1,13 @@
 /*
-About: Licença
+Title: Conexão com georss
+
+Arquivo:
+
+i3geo/ferramentas/conectargeorss/index.js
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -19,6 +27,7 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+
 parametrosURL()
 ativaGuias("")
 mostraGuia("guia1")
