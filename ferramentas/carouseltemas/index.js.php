@@ -4,6 +4,14 @@
 /*
 Title: Carrosel de temas
 
+Apresenta uma lista de temas que podem ser adicionados ao mapa em um layout do tipo 'carrousel'.
+São mostradas as imagens miniatura dos temas, que devem estar armazenadas em i3geo/temas/miniaturas.
+As miniaturas podem ser geradas com geraminiaturas.php.
+
+Veja:
+
+<carouselTemas>
+
 Arquivo:
 
 i3geo/ferramentas/carrouseltemas/index.js.php
@@ -35,8 +43,6 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
 Class: i3GEOF.carouseltemas
-
-Altera as propriedades da barra de escala do mapa.
 */
 i3GEOF.carouseltemas = {
 	/*
@@ -161,7 +167,11 @@ i3GEOF.carouseltemas = {
 	/*
 	Function: insereTema
 	
-	Insere o tema escolhido no mapa atual.
+	Insere no mapa o tema escolhido
+	
+	Veja:
+	
+	<adtema>
 	*/
 	insereTema: function(codigotema){
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));

@@ -3,6 +3,13 @@
 /*
 Title: Agrupa elementos
 
+Faz o agrupamento dos elementos selecionados de um tema gerando um novo shapefile que é adicionado ao mapa.
+Essa não é uma operação do tipo "dissolve", sendo utilizadas as funções "union" e "convexhull". Os elementos podem ser descontínuos.
+
+Veja:
+
+<agrupaElementos>
+
 Arquivo:
 
 i3geo/ferramentas/agrupaelementos/index.js.php
@@ -33,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.agrupaElementos
-
-Agrupa elementos selecionados de um tema e gera um novo tema.
+Classe: i3GEOF.agrupaElementos
 */
 i3GEOF.agrupaElementos = {
 	/*
@@ -138,9 +143,13 @@ i3GEOF.agrupaElementos = {
 		);		
 	},
 	/*
-	Function: criaBuffer
+	Function: criaAgrupamento
 	
-	Cria a grade e adiciona um novo tema ao mapa
+	Executa a operação de agrupamento
+	
+	Veja:
+	
+	<AGRUPAELEMENTOS>
 	*/
 	criaAgrupamento: function(){
 		try{
@@ -175,6 +184,10 @@ i3GEOF.agrupaElementos = {
 	Function: comboTemasSel
 	
 	Cria um combo com a lista de temas com elementos selecionados
+	
+	Veja:
+	
+	<comboTemas>
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(
@@ -202,6 +215,10 @@ i3GEOF.agrupaElementos = {
 	Function: comboItensSel
 	
 	Cria um combo para selecionar os itens do tema escolhido
+	
+	Veja:
+	
+	<comboItens>
 	*/
 	comboItensSel: function(){
 		var tema = $i("i3GEOagrupaelementostemasComSel").value;

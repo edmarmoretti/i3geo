@@ -192,8 +192,8 @@ $jsfiles = array(
 "../pacotes/yui270/build/utilities/utilities.js",
 "../pacotes/yui270/build/treeview/treeview.js",
 "../pacotes/yui270/build/button/button-min.js",
-"classe_php.js",
-"classe_util.js"
+"compactados/classe_php_compacto.js",
+"compactados/classe_util_compacto.js"
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";
 salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js","js");

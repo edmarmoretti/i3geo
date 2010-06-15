@@ -1,6 +1,15 @@
 /*
 Title: Busca rápida
 
+Procura um lugar
+
+Busca em um serviço de busca, na árvore de temas do i3geo e no serviço do Google.
+O resultado é mostrado como uma listagem, permitindo adicionar um novo tema ao mapa conforme o que foi encontrado.
+
+Veja:
+
+<mostraBuscaRapida>
+
 Arquivo:
 
 i3geo/ferramentas/buscarapida/index.js
@@ -25,14 +34,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
+
 /*
-Class: i3GEObuscaRapida
-
-Procura a ocorrência de uma palavra em um serviço de busca, na árvore de temas do i3geo e no serviço do Google.
-
-O resultado é mostrado como uma listagem, permitindo-se adicionar um novo tema ao mapa conforme o que foi encontrado.
-
-Essa classe depende da classe i3geo/classesjs/classe_php.php
+Classe: i3GEObuscaRapida
 */
 i3GEObuscaRapida = {
 	/*
@@ -125,7 +129,11 @@ i3GEObuscaRapida = {
 	
 	Inicia a busca de uma palavra e mostra o resultado na tela
 	
-	Parameters:
+	Veja:
+	
+	<buscaRapida>
+	
+	Parametros:
 	
 	palavra {String} - palavra que será procurada
 	
@@ -151,7 +159,7 @@ i3GEObuscaRapida = {
 	
 	Após o resultado ser mostrado, é feita a busca na base de temas, executando-se o método buscaemtemas 
 	
-	Parameters:
+	Parametro:
 	
 	retorno {JSON} - resultado da função i3GEO.php.buscaRapida
 	*/
@@ -230,6 +238,10 @@ i3GEObuscaRapida = {
 	
 	Além de enquadrar o mapa à uma extensão geográfica específica, uma nova camada é adicionada, mostrando o limite da ocorrência desejada.
 	
+	Veja:
+	
+	<mudaext>
+	
 	Parameters:
 	
 	wkt {String} - string no formato wkt que será usado para definir a abrangência do zoom
@@ -262,6 +274,10 @@ i3GEObuscaRapida = {
 	Adiciona um tema ao mapa quando a busca localiza uma ocorrência nos menus de camadas
 	
 	Nesse caso, o tema é adicionado ao mapa
+	
+	Veja:
+	
+	<adtema>
 	
 	Parameters:
 	

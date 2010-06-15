@@ -4,6 +4,14 @@
 /*
 Title: Buffer
 
+Realiza o cálculo de "buffer" (região de entorno) dos elementos selecionados de um tema e adiciona uma nova
+camada ao mapa.
+Utiliza a função buffer do Mapserver.
+
+Veja:
+
+<buffer>
+
 Arquivo:
 
 i3geo/ferramentas/buffer/index.js.php
@@ -35,14 +43,12 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
 Class: i3GEOF.buffer
-
-Cria e adiciona um novo tema ao mapa contendo o polígono de entorno (buffer).
 */
 i3GEOF.buffer = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -139,7 +145,11 @@ i3GEOF.buffer = {
 	/*
 	Function: criaBuffer
 	
-	Cria a grade e adiciona um novo tema ao mapa
+	Executa a operação de geração do buffer
+	
+	Veja:
+	
+	<CRIABUFFER>
 	*/
 	criaBuffer: function(){
 		try{
@@ -174,6 +184,10 @@ i3GEOF.buffer = {
 	Function: comboTemasSel
 	
 	Cria um combo com a lista de temas com elementos selecionados
+	
+	Veja:
+	
+	<comboTemas>
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(

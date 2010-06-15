@@ -3,6 +3,12 @@
 /*
 Title: Busca de dados nos atributos de um tema
 
+O tema alvo é o definido na variável i3GEO.temaAtivo
+
+Veja:
+
+<procuraratrib>
+
 Arquivo:
 
 i3geo/ferramentas/busca/index.js.php
@@ -32,10 +38,6 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
 Class: i3GEOF.busca
-
-Realiza a busca de elementos em um tema tendo como base a tabela de atributos do tema.
-
-O tema que será utilizado na inicialização é o que estiver armazenado na variável global i3GEO.temaAtivo
 */
 i3GEOF.busca = {
 	/*
@@ -47,7 +49,7 @@ i3GEOF.busca = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -183,6 +185,15 @@ i3GEOF.busca = {
 		catch(e)
 		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >Ocorreu um erro<br>"+e;}	
 	},
+	/*
+	Function: procurar
+	
+	Executa a operação de busca
+	
+	Veja:
+	
+	<LISTAVALORESITENS>
+	
 	procurar: function(){
 		if(i3GEOF.busca.aguarde.visibility === "visible")
 		{return;}

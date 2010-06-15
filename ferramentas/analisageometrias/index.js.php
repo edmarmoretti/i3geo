@@ -2,7 +2,18 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Geometrias
+Title: Análise de Geometrias
+
+Permite capturar geometrias de uma ou mais camadas e executar operações de análise.
+Após o usuário selecionar elementos de um tema, a geometria pode ser capturada, ou seja, ela é armazenada no servidor para
+poder receber operações de análise. As operações envolvem cálculos, como área e perímetro, além de processos de cruzamento
+entre geometrias. Após realizar uma operação, o resultado é listado ou pode ser adicionado ao mapa como uma nova camada.
+
+As geometrias armazenadas ficam disponíveis temporariamente, assim como o mapfile do mapa atual.
+
+Veja:
+
+<analisaGeometrias>
 
 Arquivo: 
 
@@ -32,19 +43,13 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.analisaGeometrias
-
-Inclui gráficos em cada elemento de um tema tendo como fonte a tabela de atributos.
-
-Abre uma janela com várias opções e lista de itens para os gráficos.
-
-O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
+Classe: i3GEOF.analisaGeometrias
 */
 i3GEOF.analisaGeometrias = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -255,7 +260,11 @@ i3GEOF.analisaGeometrias = {
 	
 	Seleciona um elemento do tema ativo quando o usuário clica no mapa
 	
-	É executado no evento de clique no mapa
+	É executado no evento de clique no mapa, definido na inicialização da ferramenta.
+	
+	Veja:
+	
+	<selecaopt>
 	*/
 	selecionaElemento: function(){
 		if(g_tipoacao === 'analisageometrias'){
@@ -270,7 +279,11 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: comboTemas
 	
-	Cria o combo com os temas disponíveis (temas ligados) para adição dos gráficos.
+	Cria o combo com os temas disponíveis (temas ligados) para seleção.
+	
+	Veja:
+	
+	<comboTemas>
 	*/
 	comboTemas: function(){
 		i3GEO.util.comboTemas(
@@ -297,7 +310,12 @@ i3GEOF.analisaGeometrias = {
 	Function: capturaGeo
 	
 	Captura as geometrias selecionadas. As geometrias capturadas são armazenadas como objetos
-	serializados no servidor, e podem ser utilizadas nas operações de análise
+	serializados no servidor, e podem ser utilizadas nas operações de análise. A captura é feita sob o tema ativo e os
+	elementos selecionados.
+	
+	Veja:
+	
+	<CAPTURAGEOMETRIAS>
 	*/
 	capturageo:function(){
 		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
@@ -328,7 +346,11 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: listaGeo
 	
-	Obtém a lista de geometrias armazenadas
+	Obtém a lista de geometrias já capturadas e monta a lista que é apresentada ao usuário.
+	
+	Veja:
+	
+	<LISTAGEOMETRIAS>
 	*/
 	listaGeo: function(){
 		var montalistageometrias,
@@ -386,7 +408,11 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: excluirGeo
 	
-	Exclui do servidor as geometrias marcadas na lista de geometrias
+	Exclui do servidor as geometrias marcadas na lista de geometrias.
+	
+	Veja:
+	
+	<REMOVERGEOMETRIAS>
 	*/
 	excluirGeo: function(){
 
@@ -410,7 +436,11 @@ i3GEOF.analisaGeometrias = {
 	/*
 	Function: incluirNoMapa
 	
-	Inclui no mapa as geometrias marcadas na lista de geometrias
+	Inclui no mapa as geometrias marcadas na lista de geometrias.
+
+	Veja:
+	
+	<INCMAPAGEOMETRIAS>
 	*/
 	incluirNoMapa:function(){
 		if(i3GEOF.analisaGeometrias.aguarde.visibility === "visible")
@@ -453,6 +483,9 @@ i3GEOF.analisaGeometrias = {
 	
 	Realiza cálculos do tipo área e perímetro sobre as geometrias marcadas
 	
+	Veja:
+	
+	<CALCULAGEOMETRIAS>
 	*/
 	calculo: function(){
 		var lista,
@@ -484,6 +517,10 @@ i3GEOF.analisaGeometrias = {
 	Function: funcoes
 	
 	Realiza operações geométricas de cruzamento entre geometrias
+	
+	Veja:
+	
+	<FUNCOESGEOMETRIAS>
 	*/
 	funcoes: function(){
 		var lista,
@@ -517,6 +554,10 @@ i3GEOF.analisaGeometrias = {
 	Function: funcoes1
 	
 	Realiza operações geométricas em uma única geometria
+	
+	Veja:
+	
+	<FUNCOESGEOMETRIAS>
 	*/
 	funcoes1: function(){
 		var lista,

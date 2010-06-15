@@ -3,6 +3,16 @@
 /*
 Title: Busca fotos
 
+Busca fotos em serviços como Panoramio e Flicker na região mostrada no mapa.
+
+As fotos obtidas são mostradas e o usuário pode passar o mouse sobre elas para ver a posição no mapa.
+O código para realizar a busca depende das APIs de cada serviço. Quando necessário, utiliza-se
+buscafotos/funcoes.php para realizar a busca.
+
+Veja:
+
+<i3GEO.configura>
+
 Arquivo:
 
 i3geo/ferramentas/buscafotos/index.js.php
@@ -32,16 +42,12 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
 Class: i3GEOF.buscaFotos
-
-Realiza a busca de elementos em um tema tendo como base a tabela de atributos do tema.
-
-O tema que será utilizado na inicialização é o que estiver armazenado na variável global i3GEO.temaAtivo
 */
 i3GEOF.buscaFotos = {
 	/*
 	Variavel: aguarde
 	
-	Estilo do objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
+	Objeto DOM com a imagem de aguarde existente no cabeçalho da janela.
 	*/
 	aguarde: "",
 	/*
@@ -192,7 +198,11 @@ i3GEOF.buscaFotos = {
 	/*
 	Function: esconde
 	
-	Esconde as opções de busca dos servidores de fotos e mostra as opções do obj
+	Esconde as opções de busca dos servidores de fotos e mostra as opções do objeto especificado
+	
+	Parametro:
+	
+	obj - objeto que terá o estilo modificado para display = none
 	*/
 	esconde: function (obj){
 		$i("i3GEObuscafotosf").style.display="none";
@@ -207,6 +217,7 @@ i3GEOF.buscaFotos = {
 	Function: busca
 	
 	Procura as fotos no servidor escolhido e chama a função correta de apresentação das fotos.
+	
 	*/
 	busca: function(pagina){
 		i3GEOF.buscaFotos.aguarde.visibility = "visible";
