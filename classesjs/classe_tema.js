@@ -304,7 +304,7 @@ i3GEO.tema = {
 		/*
 		Function: cortina
 
-		Abre a janela de diálogo da ferramenta cortina, que atua sobre um tema.
+		Abre a janela de diálogo da ferramenta cortina
 		
 		Parametros:
 
@@ -321,9 +321,7 @@ i3GEO.tema = {
 		/*
 		Function: abreKml
 
-		Abre a janela para mostrar o link de acesso a um tema via kml.
-		
-		O tema em questão é um dos que constam na árvore de temas
+		Abre a janela de diálogo da ferramenta convertekml
 
 		Parametros:
 
@@ -343,7 +341,7 @@ i3GEO.tema = {
 		/*
 		Function: graficotema
 
-		Adiciona gráficos automaticamente nos elementos de um tema
+		Abre a janela de diálogo da ferramenta graficotema
 
 		Parametros:
 
@@ -360,7 +358,7 @@ i3GEO.tema = {
 		/*
 		Function: toponimia
 
-		Opções de toponímia de um tema.
+		Abre a janela de diálogo da ferramenta toponimia
 
 		Parametros:
 
@@ -377,7 +375,7 @@ i3GEO.tema = {
 		/*
 		Function: filtro
 
-		Opções de filtragem de um tema.
+		Abre a janela de diálogo da ferramenta filtro
 
 		Parametros:
 
@@ -394,7 +392,7 @@ i3GEO.tema = {
 		/*
 		Function: procuraratrib
 
-		Abre a janela com a opção de procurar elementos baseados nos atributos da tabela do tema
+		Abre a janela de diálogo da ferramenta busca
 
 		Parametros:
 
@@ -411,7 +409,7 @@ i3GEO.tema = {
 		/*
 		Function: tabela
 
-		Abre a tabela com os atributos de um tema.
+		Abre a janela de diálogo da ferramenta tabela
 
 		Parametros:
 
@@ -428,7 +426,7 @@ i3GEO.tema = {
 		/*
 		Function: etiquetas
 
-		Abre a janela de configuração das etiquetas
+		Abre a janela de diálogo da ferramenta etiqueta
 
 		Parametros:
 
@@ -445,7 +443,7 @@ i3GEO.tema = {
 		/*
 		Function: editaLegenda
 
-		Abre a janela do editor de legenda de um tema
+		Abre a janela de diálogo da ferramenta legenda
 
 		Parametros:
 
@@ -462,7 +460,7 @@ i3GEO.tema = {
 		/*
 		Function: download
 
-		Abre a janela que faz o download de um tema
+		Abre a janela de diálogo da ferramenta download
 
 		Parametros:
 
@@ -492,7 +490,7 @@ i3GEO.tema = {
 		/*
 		Function: editorsql
 
-		Abre a janela que permite editar o sql de acesso aos dados utilizado no layer
+		Abre a janela de diálogo da ferramenta editorsql
 
 		Parametros:
 

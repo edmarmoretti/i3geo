@@ -383,7 +383,7 @@ i3GEO.mapa = {
 		/*
 		Function: outputformat
 
-		Altera o formato utilizado na geração da imagem do mapa.
+		Abre a janela de diálogo da ferramenta outputformat
 		*/
 		outputformat: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.outputformat()");}
@@ -395,7 +395,7 @@ i3GEO.mapa = {
 		/*
 		Function: autoredesenha
 
-		Abre a janela para definição do intervalo de tempo para redesenho automático do mapa.
+		Abre a janela de diálogo da ferramenta opcoes_autoredesenha
 		*/
 		autoredesenha: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.autoredesenha()");}
@@ -407,7 +407,7 @@ i3GEO.mapa = {
 		/*
 		Function: salvaMapa
 
-		Abre a janela para salvar localmente o mapfile utilizado no mapa atual
+		Abre a janela de diálogo da ferramenta salvamapa
 		*/
 		salvaMapa: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.salvaMapa()");}
@@ -421,7 +421,7 @@ i3GEO.mapa = {
 		/*
 		Function: carregaMapa
 
-		Abre a janela para a carga de um mapfile salvo localmente na máquina dousuário.
+		Abre a janela de diálogo da ferramenta carregamapa
 		*/
 		carregaMapa: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.carregaMapa()");}
@@ -433,7 +433,7 @@ i3GEO.mapa = {
 		/*
 		Function: convertews
 
-		Abre a janela para converter o mapa atual em web service WMS
+		Abre a janela de diálogo da ferramenta convertews
 		*/
 		convertews: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.convertews()");}
@@ -447,7 +447,7 @@ i3GEO.mapa = {
 		/*
 		Function: convertekml
 
-		Abre a janela para converter o mapa atual em KML
+		Abre a janela de diálogo da ferramenta convertemapakml
 		*/
 		convertekml: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.convertekml()");}
@@ -461,7 +461,7 @@ i3GEO.mapa = {
 		/*
 		Function: queryMap
 
-		Abre a janela que altera as propriedades da exibição dos elementos selecionados.
+		Abre a janela de diálogo da ferramenta opcoes_querymap
 		*/
 		queryMap: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.queryMap()");}
@@ -473,14 +473,14 @@ i3GEO.mapa = {
 		/*
 		Function: template
 
-		Abre a janela que muda o template do mapa atual.
+		Abre a janela de diálogo da ferramenta template
 		*/
 		template: function()
 		{i3GEO.janela.cria("300px","400px",i3GEO.configura.locaplic+"/ferramentas/template/index.htm","","","Template <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=1&idajuda=8' >&nbsp;&nbsp;&nbsp;</a>");},
 		/*
 		Function: tamanho
 
-		Abre a janela que muda o tamanho do mapa
+		Abre a janela de diálogo da ferramenta opcoes_tamanho
 		*/
 		tamanho: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.tamanho()");}
@@ -492,7 +492,7 @@ i3GEO.mapa = {
 		/*
 		Function: tipoimagem
 
-		Abre a janela que define um filtro gráfico (sépia por exemplo) sobre a imagem gerada alterando suas características
+		Abre a janela de diálogo da ferramenta tipoimagem
 		*/
 		tipoimagem: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.tipoimagem()");}
@@ -504,7 +504,7 @@ i3GEO.mapa = {
 		/*
 		Function: corFundo
 
-		Abre a janela que altera a cor do fundo do mapa atual.
+		Abre a janela de diálogo da ferramenta opcoes_fundo
 		*/
 		corFundo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.corFundo()");}
@@ -516,7 +516,7 @@ i3GEO.mapa = {
 		/*
 		Function: opcoesEscala
 
-		Abre a janela para definição das opções da barra de escala.
+		Abre a janela de diálogo da ferramenta opcoes_escala
 		*/
 		opcoesEscala: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.opcoesEscala()");}
@@ -528,7 +528,7 @@ i3GEO.mapa = {
 		/*
 		Function: opcoesLegenda
 
-		Abre a janela de configuração da legenda do mapa
+		Abre a janela de diálogo da ferramenta opcoes_legenda
 		*/
 		opcoesLegenda: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.opcoesLegenda()");}
@@ -540,7 +540,7 @@ i3GEO.mapa = {
 		/*
 		Function: gradeCoord
 
-		Abre a janela que gera grade de coordenadas
+		Abre a janela de diálogo da ferramenta gradecoord
 		*/
 		gradeCoord: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.gradeCoord()");}
@@ -552,9 +552,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueTexto
 		
-		Abre o diálogo para inclusão de textos diretamente no mapa
-		
-		Registra os eventos que controlam o clique sobre o mapa
+		Abre a janela de diálogo da ferramenta inseretxt
 		*/
 		cliqueTexto: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueTexto()");}
@@ -566,7 +564,7 @@ i3GEO.mapa = {
 		/*
 		Function: selecao
 		
-		Abre o diálogo para seleção de elementos
+		Abre a janela de diálogo da ferramenta selecao
 		*/
 		selecao: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.selecao()");}
@@ -578,9 +576,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliquePonto
 		
-		Abre o diálogo para inclusão de pontos diretamente no mapa
-		
-		Registra os eventos que controlam o clique sobre o mapa
+		Abre a janela de diálogo da ferramenta inserexy2
 		*/
 		cliquePonto: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliquePonto()");}
@@ -592,9 +588,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueGrafico
 		
-		Abre o diálogo para inclusão de gráficos diretamente no mapa
-		
-		Registra os eventos que controlam o clique sobre o mapa
+		Abre a janela de diálogo da ferramenta inseregrafico
 		*/
 		cliqueGrafico: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueGrafico()");}
@@ -606,9 +600,7 @@ i3GEO.mapa = {
 		/*
 		Function: cliqueIdentificaDefault
 		
-		Abre o diálogo para obtenção de informações quando o usuário clica no mapa.
-		
-		Essa é a função padrão definida em i3GEO.configura		
+		Abre a janela de diálogo da ferramenta identifica		
 		*/
 		cliqueIdentificaDefault: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");}

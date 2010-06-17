@@ -223,7 +223,7 @@ Valor: INICIA
 
 Inicia o mapa, pegando os parâmetros necessários para a montagem inicial.
 
-<iniciaMapa()>
+<iniciaMapa>
 */
 	case "INICIA":
 		include_once("mapa_inicia.php");
@@ -244,6 +244,17 @@ Esse gerador, recebe como parâmetro o id da seção atual e transforma o mapfile a
 	$retorno = $host."/ms_tmp/".basename(dirname($map_file))."/flamingo.xml";
 	break;
 /*
+Valor: OPENLAYERS
+
+Prepara o mapa atual para funcionar na interface openlayers.
+*/
+	case "OPENLAYERS":
+		$interface = "openlayers";
+		include_once("mapa_inicia.php");
+		iniciaMapa();
+	break;
+	
+/*
 Section: Análise
 
 Análise de dados.
@@ -257,7 +268,7 @@ Inclui geometrias, armazenadas no formato I3Geo, como um tema no mapa atual.
 
 O mapfile é alterado e salvo novamente com os novos layers.
 
-<incmapageometrias()>
+<Analise->incmapageometrias>
 */
 	case "INCMAPAGEOMETRIAS":
 		include_once("classe_analise.php");
@@ -270,7 +281,7 @@ Valor: FUNCOESGEOMETRIAS
 Processa geometrias, armazenadas no formato I3Geo, gerando uma nova geometria.
 União, intersecção, etc.
 
-<funcoesGeometrias()>
+<Analise->funcoesGeometrias>
 */
 	case "FUNCOESGEOMETRIAS":
 		include_once("classe_analise.php");
@@ -287,7 +298,7 @@ Valor: CALCULAGEOMETRIAS
 Processa geometrias, armazenadas no formato I3Geo, gerando cálculos.
 Área, perímetro, etc.
 
-<calculaGeometrias()>
+<Analise->calculaGeometrias>
 */
 	case "CALCULAGEOMETRIAS":
 		include_once("classe_analise.php");
@@ -301,7 +312,7 @@ Gera a lista de geometrias disponíveis para o mapa atual.
 
 As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
 
-<listaGeometrias()>
+<Temas->listaGeometrias>
 */
 	case "LISTAGEOMETRIAS":
 		include_once("classe_temas.php");
@@ -316,7 +327,7 @@ Gera um arquivo de geometrias, no formato I3Geo, para um tema, considerando os e
 
 As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
 
-<capturaGeometrias()>
+<Temas->capturaGeometrias>
 */	
 	case "CAPTURAGEOMETRIAS":
 		include_once("classe_temas.php");
@@ -330,7 +341,7 @@ Elimina divisas entre polígonos com o mesmo atributo.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
-<dissolvePoligono()>
+<Analise->dissolvePoligono>
 */
 	case "DISSOLVEPOLIGONO":
 		include_once("classe_analise.php");
@@ -346,7 +357,7 @@ Agrupa elementos em um polígono.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
-<agrupaElementos()>
+<Analise->agrupaElementos>
 
 */
 	case "AGRUPAELEMENTOS":
@@ -363,7 +374,7 @@ Cruza um tema pontual com temas poligonais ou raster.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
-<pontoEmPoligono()>
+<Analise->pontoEmPoligono>
 */
 	case "PONTOEMPOLIGONO":
 		include_once("classe_analise.php");
@@ -379,7 +390,7 @@ Conta o número de pontos em polígono cruzando dois temas.
 
 Salva o mapa acrescentando um novo layer com o resultado.
 
-<nptPol()>
+<Analise->nptPol>
 */
 	case "NPTPOL":
 		include_once("classe_analise.php");
@@ -389,13 +400,13 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		$m->salva();
 	break;
 /*
-Property - CRIABUFFER
+Valor: CRIABUFFER
 
 Gera entorno (buffer) nos elementos selecionados de um tema.
 
 Salva o mapa acrescentando um novo layer com o buffer.
 
-<criaBuffer()>
+<Analise->criaBuffer>
 */	
 	case "CRIABUFFER":
 		include_once("classe_analise.php");
@@ -409,15 +420,13 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		{unlink ($qyfile);}
 	break;
 /*
-Property - DISTANCIAPTPT
+Valor: DISTANCIAPTPT
 
 Calcula a distancia entre um ponto de origem e os pontos em um tema.
 
 São considerados apenas os pontos próximos definidos por um buffer.
 
-<criaBuffer()>
-
-<distanciaptpt()>
+<Analise->distanciaptpt>
 */	
 	case "DISTANCIAPTPT":
 		include_once("classe_analise.php");
@@ -428,13 +437,13 @@ São considerados apenas os pontos próximos definidos por um buffer.
 		$m->salva();
 	break;
 /*
-Property - CRIACENTROIDE
+Valor: CRIACENTROIDE
 
 Gera centroide dos elementos selecionados de um tema.
 
 Salva o mapa acrescentando um novo layer com os pontos.
 
-<criaCentroide()>
+<Analise->criaCentroide>
 */	
 	case "CRIACENTROIDE":
 		include_once("classe_analise.php");
@@ -450,7 +459,7 @@ Gera análise de distribuição de pontos.
 
 Executa script R para gerar a imagem.
 
-<analiseDistriPt()>
+<Analise->analiseDistriPt>
 */	
 	case "ANALISEDISTRIPT":
 		include_once("classe_analise.php");
@@ -470,7 +479,7 @@ Gera uma grade de pontos com espaçamento regular definido em décimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 
-<gradeDePontos()>
+<Analise->gradeDePontos>
 */	
 	case "GRADEDEPONTOS":
 		include_once("classe_analise.php");
@@ -487,7 +496,7 @@ Gera uma grade de polígonos com espaçamento regular definido em décimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
-<gradeDePol()>
+<Analise->gradeDePol>
 */	
 	case "GRADEDEPOL":
 		include_once("classe_analise.php");
@@ -504,7 +513,7 @@ Gera uma grade de polígonos hexagonais definido em décimos de grau.
 
 Salva o mapa acrescentando um novo layer com a grade.
 
-<gradeDeHex()>
+<Analise->gradeDeHex>
 */	
 	case "GRADEDEHEX":
 		include_once("classe_analise.php");
@@ -513,21 +522,6 @@ Salva o mapa acrescentando um novo layer com a grade.
 		if(!isset($tema)){$tema = "";}
 		$retorno = $m->gradeDeHex($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty);
 		$m->salva();
-	break;
-/*
-Section: Open Layers
-
-Funções específicas da interface OpenLayers utilizadas por aplicmap/openlayers.htm
-*/
-/*
-Valor: OPENLAYERS
-
-Prepara o mapa atual para funcionar na interface openlayers.
-*/
-	case "OPENLAYERS":
-		$interface = "openlayers";
-		include_once("mapa_inicia.php");
-		iniciaMapa();
 	break;
 /*
 Section: Mapa
@@ -539,7 +533,7 @@ Valor: PEGAMENSAGENS
 
 Pega as mensagens do metadata 'mensagem'.
 
-<pegaMensagens()>
+<Mapa->pegaMensagens>
 */
 	case "PEGAMENSAGENS":
 		include_once("classe_mapa.php");
@@ -588,7 +582,7 @@ Valor: ATIVALOGO
 
 Ativa ou desativa a marca de logo no mapa.
 
-<ativalogo()>
+<Mapa->ativalogo>
 */
 	case "ATIVALOGO":
 		include_once("classe_mapa.php");
@@ -603,7 +597,7 @@ Valor: ATIVALEGENDA
 
 Ativa ou desativa a legenda inserida no mapa.
 
-<ativalegenda()>
+<Mapa->ativalegenda>
 */
 	case "ATIVALEGENDA":
 		include_once("classe_mapa.php");
@@ -618,7 +612,7 @@ Valor: MUDATAMANHO
 
 Muda o tamanho da imagem do mapa atual.
 
-<mudaQS()>
+<Mapa->mudaQS>
 */
 	case "MUDATAMANHO":
 		copiaSeguranca($map_file);
@@ -636,7 +630,7 @@ Valor: GRADECOORD
 
 Inclui um tema com a grade de coordenadas.
 
-<gradeCoord()>
+<Mapa->gradeCoord>
 */
 	case "GRADECOORD":
 		include_once("classe_mapa.php");
@@ -651,7 +645,7 @@ Valor: CONVERTEWS
 
 Converte o mapa atual em um wms.
 
-<converteWS()>
+<Mapa->converteWS>
 */
 	case "CONVERTEWS":
 		include_once("classe_mapa.php");
@@ -664,7 +658,7 @@ Valor: CONVERTEWMSWMC
 
 Converte o mapa atual em um wms e wmc.
 
-<converteWMC()>
+<Mapa->converteWMC>
 */
 	case "CONVERTEWMSWMC":
 		include_once("classe_mapa.php");
@@ -679,7 +673,7 @@ Valor: QUERYMAPCOR
 
 Altera a cor de seleção.
 
-<corQM()>
+<Mapa->corQM>
 */
 	case "QUERYMAPCOR":
 		include_once("classe_mapa.php");
@@ -694,7 +688,7 @@ Valor: PEGAQUERYMAPCOR
 
 Pega a cor de seleção atual.
 
-<corQM()>
+<Mapa->corQM>
 */
 	case "PEGAQUERYMAPCOR":
 		include_once("classe_mapa.php");
@@ -706,7 +700,7 @@ Valor: CORFUNDO
 
 Altera a cor do fundo do mapa.
 
-<corfundo()>
+<Mapa->corfundo>
 */
 	case "CORFUNDO":
 		include_once("classe_mapa.php");
@@ -721,7 +715,7 @@ Valor: PEGACORFUNDO
 
 Pega a cor do fundo do mapa atual.
 
-<corfundo()>
+<Mapa->corfundo>
 */
 	case "PEGACORFUNDO":
 		include_once("classe_mapa.php");
@@ -741,7 +735,7 @@ Valor: CORPOENTORNO
 
 Desenha as imagens do entorno do mapa.
 
-<redesenhaEntorno()>
+<Mapa->redesenhaEntorno>
 */
 	case "CORPOENTORNO":
 		include_once("classe_mapa.php");
@@ -753,7 +747,7 @@ Valor: ADICIONATEMAGEORSS
 
 Adiciona um tema baseado em um RSS.
 
-<adicionaTemaGeoRSS()>
+<Mapa->adicionaTemaGeoRSS>
 */
 	case "ADICIONATEMAGEORSS":
 		include_once("classe_mapa.php");
@@ -772,7 +766,7 @@ Valor: ADICIONATEMASHP
 
 Adiciona um tema baseado em um arquivo shape file.
 
-<adicionaTemaSHP()>
+<Mapa->adicionaTemaSHP>
 */
 	case "ADICIONATEMASHP":
 		include_once("classe_mapa.php");
@@ -791,7 +785,7 @@ Valor: ADICIONATEMAIMG
 
 Adiciona um tema baseado em um arquivo de imagem.
 
-<adicionaTemaIMG()>
+<Mapa->adicionaTemaIMG>
 */
 	case "ADICIONATEMAIMG":
 		include_once("classe_mapa.php");
@@ -810,7 +804,7 @@ Valor: LISTATEMAS
 
 Lista os temas existentes em um mapa.
 
-<listaTemas()>
+<Mapa->listaTemas>
 */	
 	case "LISTATEMAS":
 		include_once("classe_mapa.php");
@@ -823,7 +817,7 @@ Valor: LISTATEMASLOCAIS
 
 Lista os temas existentes no diretório temporário do mapa atual.
 
-<listaTemasLocais()>
+<Mapa->listaTemasLocais>
 */		
 	case "LISTATEMASLOCAIS":
 		include_once("classe_mapa.php");
@@ -835,7 +829,7 @@ Valor: LISTATEMASTIPO
 
 Lista os temas existentes por tipo.
 
-<listaTemasTipo()>
+<Mapa->listaTemasTipo>
 */	
 	case "LISTATEMASTIPO":
 		include_once("classe_mapa.php");
@@ -848,7 +842,7 @@ Valor: LISTATEMASCOMSEL
 
 Lista os temas que possuem seleção.
 
-<listaTemasComSel()>
+<Mapa->listaTemasComSel>
 */	
 	case "LISTATEMASCOMSEL":
 		include_once("classe_mapa.php");
@@ -860,7 +854,7 @@ Valor: LIGATEMAS
 
 Liga e desliga temas no mapa atual.
 
-<ligaDesligaTemas()>
+<Mapa->ligaDesligaTemas>
 */		
 	case "LIGATEMAS":
   		include_once("classe_mapa.php");
@@ -874,7 +868,7 @@ Valor: ADTEMA
 
 Adiciona um novo tema ao mapa.
 
-<adicionaTema()>
+<Mapa->adicionaTema>
 */	
 	case "ADTEMA":
 		include_once("classe_mapa.php");
@@ -897,7 +891,7 @@ Valor: EXCLUITEMA
 
 Exclui um tema do mapa.
 
-<excluiTemas()>
+<Mapa->excluiTemas>
 */
 	case "EXCLUITEMA":
 		include_once("classe_mapa.php");
@@ -912,7 +906,7 @@ Valor: ADICIONATEMAWMS
 
 Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
 
-<adicionatemawms()>
+<Mapa->adicionatemawms>
 */	
 	case "ADICIONATEMAWMS":
 		include_once("classe_mapa.php");
@@ -953,6 +947,8 @@ Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do 
 Valor: MUDAOUTPUTFORMAT
 
 Muda o OUTPUTFORMAT.
+
+<Mapa->mudaoutputformat>
 */	
 	case "MUDAOUTPUTFORMAT":
 		include_once("classe_mapa.php");
@@ -977,7 +973,7 @@ Valor: PEGADATA
 
 Obtém o valor definido no elemento DATA de um LAYER.
 
-<pegadata()>
+<Temas->pegadata>
 */	
 	case "PEGADATA":
 		include_once("classe_temas.php");
@@ -989,7 +985,7 @@ Valor: ALTERADATA
 
 Altera o valor definido no elemento DATA de um LAYER.
 
-<alteradata()>
+<Temas->alteradata>
 */	
 	case "ALTERADATA":
 		include_once("classe_temas.php");
@@ -1004,7 +1000,7 @@ Remove geometrias do diretório temporário.
 
 As geometrias são armazenadas no diretório temporário do usuário, utilizando um formato próprio do I3Geo.
 
-<removerGeometrias()>
+<Temas->removerGeometrias>
 */	
 	case "REMOVERGEOMETRIAS":
 		include_once("classe_temas.php");
@@ -1017,7 +1013,7 @@ Valor: ALTERAREPRESENTACAO
 
 Altera o tipo de representação cartográfica do tema.
 
-<alteraRepresentacao()>
+<Temas->alteraRepresentacao>
 */
 	case "ALTERAREPRESENTACAO":
 		include_once("classe_temas.php");
@@ -1032,7 +1028,7 @@ Valor: GERADESTAQUE
 
 Gera uma imagem que será utilizada para destacar um determinado tema.
 
-<geraDestaque()>
+<Temas->geraDestaque>
 */
 	case "GERADESTAQUE":
 		include_once("classe_temas.php");
@@ -1059,7 +1055,7 @@ function: INSEREFEATURE
 
 Insere elemento gráfico em um tema.
 
-<insereFeature()>
+<Temas->insereFeature>
 */
 	case "INSEREFEATURE":
 		include_once("classe_temas.php");
@@ -1075,7 +1071,7 @@ Valor: SOBETEMA
 
 Sobe um tema na ordem de desenho.
 
-<sobeTema()>
+<Temas->sobeTema>
 */
 	case "SOBETEMA":
 		include_once("classe_temas.php");
@@ -1090,7 +1086,7 @@ Valor: DESCETEMA
 
 Desce um tema na ordem de desenho.
 
-<desceTema()>
+<Temas->desceTema>
 */
 	case "DESCETEMA":
 		include_once("classe_temas.php");
@@ -1105,7 +1101,7 @@ Valor: FONTETEMA
 
 Busca o link para a fonte do tema
 
-<fonteTema()>
+<Temas->fonteTema>
 */
 	case "FONTETEMA":
 		include_once("classe_temas.php");
@@ -1117,7 +1113,7 @@ Valor: REORDENATEMAS
 
 Reordena os temas baseados na localização de um segundo tema no mapa.
 
-<reordenatemas()>
+<Temas->reordenatemas>
 */
 	case "REORDENATEMAS":
 		include_once("classe_temas.php");
@@ -1132,7 +1128,7 @@ Valor: ZOOMTEMA
 
 Muda a extensão geográfica do mapa de acordo com a abrangência de um tema.
 
-<zoomTema()>
+<Temas->zoomTema>
 */
 	case "ZOOMTEMA":
 		include_once("classe_temas.php");
@@ -1147,7 +1143,7 @@ Valor: ZOOMSEL
 
 Muda a extensão geográfica do mapa de acordo com a abrangência dos elementos selecionados de um tema.
 
-<zoomSel()>
+<Temas->zoomSel>
 */
 	case "ZOOMSEL":
 		include_once("classe_temas.php");
@@ -1162,7 +1158,7 @@ Valor: INSEREFILTRO
 
 Inclui um filtro no tema.
 
-<insereFiltro()>
+<Temas->insereFiltro>
 */
 	case "INSEREFILTRO":
 		include_once("classe_temas.php");
@@ -1181,7 +1177,7 @@ Valor: PEGAFILTRO
 
 Pega a string do filtro de um tema.
 
-<pegaFiltro()>
+<Temas->pegaFiltro>
 */
 	case "PEGAFILTRO":
 		include_once("classe_temas.php");
@@ -1193,7 +1189,7 @@ Valor: APLICAPROCESSOS
 
 Aplica processos em um tema do tipo imagem
 
-<aplicaProcessos()>
+<Temas->aplicaProcessos>
 */					
 	case "APLICAPROCESSOS":
 		include_once("classe_temas.php");
@@ -1208,7 +1204,7 @@ Valor: MUDATRANSP
 
 Altera a transparência de um tema
 
-<mudaTransparencia()>
+<Temas->mudaTransparencia>
 */					
 	case "MUDATRANSP":
 		include_once("classe_temas.php");
@@ -1223,7 +1219,7 @@ Valor: MUDANOME
 
 Altera o nome do tema
 
-<mudaNome()>
+<Temas->mudaNome>
 */					
 	case "MUDANOME":
 		include_once("classe_temas.php");
@@ -1238,7 +1234,7 @@ Valor: TEMA2SLD
 
 Mostra na tela o SLD de um tema
 
-<sld()>
+<Temas->sld>
 */
 	case "TEMA2SLD":
 		include_once("classe_temas.php");
@@ -1253,7 +1249,7 @@ Valor: GRAFICOTEMA
 
 Gera graficos automaticamente para os elementos de um tema
 
-<graficotema()>
+<Temas->graficotema>
 */					
 	case "GRAFICOTEMA":
 		include_once("classe_temas.php");
@@ -1304,7 +1300,7 @@ Valor: INVERTECORESCLASSES
 
 Inverte a ordem das cores das classes de um tema.
 
-<inverteCoresClasses()>
+<Alteraclasse->inverteCoresClasses>
 */	
 	case "INVERTECORESCLASSES":
 		include_once("classe_alteraclasse.php");
@@ -1318,7 +1314,7 @@ Valor: CALCULATAMANHOCLASSES
 
 Calcula o tamanho dos estilos das classes, alterando o tamanho do símbolo.
 
-<calculaTamanhoClasses()>
+<Alteraclasse->calculaTamanhoClasses>
 */	
 	case "CALCULATAMANHOCLASSES":
 		include_once("classe_alteraclasse.php");
@@ -1332,7 +1328,7 @@ Valor: ALTERACORESCLASSES
 
 Altera as cores das classes de um tema conforme uma cor inicial e uma final.
 
-<alteraCoresClasses()>
+<Alteraclasse->alteraCoresClasses>
 */	
 	case "ALTERACORESCLASSES":
 		include_once("classe_alteraclasse.php");
@@ -1346,7 +1342,7 @@ Valor: INVERTESTATUSCLASSE
 
 Altera o status de desenho de uma classe, tornando-a vi´sivel ou não.
 
-<statusClasse()>
+<Alteraclasse->statusClasse>
 */
 	case "INVERTESTATUSCLASSE":
 		include_once("classe_alteraclasse.php");
@@ -1388,7 +1384,7 @@ Converte os elementos de um tema em um arquivo shp.
 
 Acrescenta um novo tema ao mapa.
 
-<shpPT2shp()>
+<SHP->shpPT2shp>
 */
 	case "SPHPT2SHP":
 		include_once("classe_shp.php");
@@ -1401,7 +1397,7 @@ Valor: LISTAPONTOSSHAPE
 
 Lista os pontos dos elementos de um arquivo shp.
 
-<listaPontosShape()>
+<SHP->listaPontosShape>
 */
 	case "LISTAPONTOSSHAPE":
 		include_once("classe_shp.php");
@@ -1413,7 +1409,7 @@ Valor: CRIASHPVAZIO
 
 Cria um shapefile vazio e acrescenta como tema ao mapa.
 
-<criaSHPvazio()>
+<SHP->criaSHPvazio>
 */
 	case "CRIASHPVAZIO":
 		include_once("classe_shp.php");
@@ -1428,7 +1424,7 @@ Valor: INSERESHP
 
 Insere um ponto em um shape file existente.
 
-<insereSHP()>
+<SHP->insereSHP>
 */
 	case "INSERESHP":
 		include_once("classe_shp.php");
@@ -1443,7 +1439,7 @@ Valor: PEGAXYULTIMOPONTO
 
 Insere um ponto em um shape file tendo como referência o último ponto existente no tema, a direção e a distância.
 
-<ultimoXY()>
+<SHP->ultimoXY>
 */
 	case "PEGAXYULTIMOPONTO":
 		include_once("classe_shp.php");
@@ -1458,7 +1454,7 @@ Cria um gráfico e insere no mapa em um local clicado no mapa.
 
 Os valores para o gráfico são obtidos do tema indicado na classe. Para cada novo gráfico é criado um tema no mapa.
 
-<insereSHPgrafico()>
+<SHP->insereSHPgrafico>
 */
 	case "INSERESHPGRAFICO":
 		include_once("classe_shp.php");
@@ -1487,7 +1483,7 @@ Valor: GRAFICOSELECAO
 
 Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 
-<iniciaDadosGrafico()>
+<iniciaDadosGrafico>
 */					
 	case "GRAFICOSELECAO":
 		include_once("graficos.php");
@@ -1503,7 +1499,7 @@ Valor: FUSAOGRAFICO
 
 Faz a fusão da imagem de um gráfico com a imagem do mapa atual.
 
-<fusaoGrafico()>
+<fusaoGrafico>
 */	
 	case "FUSAOGRAFICO":
 		include_once("graficos.php");
@@ -1517,7 +1513,7 @@ Valor: GRAFICOESTRELA
 
 Cria um gráfico do tipo estrela.
 
-<graficoEstrela()>
+<graficoEstrela>
 */	
 	case "GRAFICOESTRELA":
 		include_once("graficos.php");
@@ -1528,7 +1524,7 @@ Valor: GRAFICOSCATTER
 
 Cria um gráfico de distribuição de pontos.
 
-<graficoScatter()>
+<graficoScatter>
 */	
 	case "GRAFICOSCATTER":
 		include_once("graficos.php");
@@ -1539,7 +1535,7 @@ Valor: GRAFICOSCATTERBINS
 
 Cria um gráfico de distribuição de pontos com agrupamento em pixels (bins).
 
-<graficoScatterBins()>
+<graficoScatterBins>
 */	
 	case "GRAFICOSCATTERBINS":
 		include_once("graficos.php");
@@ -1550,7 +1546,7 @@ Valor: GRAFICOLINHAS
 
 Cria um gráfico de linhas.
 
-<graficoLinhas()>
+<graficoLinhas>
 */
 	case "GRAFICOLINHAS":
 		include_once("graficos.php");
@@ -1561,7 +1557,7 @@ Valor: GRAFICOHIST
 
 Cria um gráfico de histograma.
 
-<graficoHist()>
+<graficoHist>
 */
 	case "GRAFICOHIST":
 		include_once("graficos.php");
@@ -1572,7 +1568,7 @@ Valor: GRAFICOBARRAS
 
 Cria um gráfico de barras.
 
-<graficoBarras()>
+<graficoBarras>
 */
 	case "GRAFICOBARRAS":
 		include_once("graficos.php");
@@ -1583,7 +1579,7 @@ Valor: GRAFICOPIZZA
 
 Cria um gráfico de pizza.
 
-<graficoPizza()>
+<graficoPizza>
 */
 	case "GRAFICOPIZZA":
 		include_once("graficos.php");
@@ -1594,7 +1590,7 @@ Valor: DADOSLINHADOTEMPO
 
 Pega os dados de um tema para geração do gráfico de linha do tempo.
 
-<graficoPizza()>
+<graficoPizza>
 */
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
@@ -1614,7 +1610,7 @@ Valor: LISTATAGS
 
 Pega a lista de tags registrados nos menus de temas.
 
-<listatags()>
+<Menutemas->listatags>
 */
 	case "LISTATAGS":
 		if(!isset($menutemas))
@@ -1633,7 +1629,7 @@ Valor: PEGALISTADEMENUS
 
 Pega a lista de menus para incluir na guia adiciona.
 
-<pegaListaDeMenus()>
+<Menutemas->pegaListaDeMenus>
 */
 	case "PEGALISTADEMENUS":
 		if(!isset($menutemas) || !isset($editores))
@@ -1652,7 +1648,7 @@ Valor: PEGALISTADEGRUPOS
 
 Pega a lista de grupos do menu.
 
-<pegaListaDeGrupos()>
+<Menutemas->pegaListaDeGrupos>
 */
 	case "PEGALISTADEGRUPOS":
 		if(!isset($menutemas) || !isset($editores))
@@ -1676,7 +1672,7 @@ Valor: PEGASISTEMAS
 
 Pega a lista de sistemas.
 
-<pegaSistemas()>
+<Menutemas->pegaSistemas>
 */
 	case "PEGASISTEMAS":
 		if(!isset($locsistemas) || !isset($editores))
@@ -1696,7 +1692,7 @@ Valor: PEGALISTADESUBGRUPOS
 
 Pega a lista de subgrupos de um grupo do menu.
 
-<pegaListaDeSubGrupos()>
+<Menutemas->pegaListaDeSubGrupos>
 */
 	case "PEGALISTADESUBGRUPOS":
 		if(!isset($menutemas) || !isset($editores))
@@ -1716,7 +1712,7 @@ Valor: PEGALISTADETEMAS
 
 Pega a lista de temas do menu.
 
-<pegaListaDeTemas()>
+<Menutemas->pegaListaDeTemas>
 */
 	case "PEGALISTADETEMAS":
 		if(!isset($menutemas) || !isset($editores))
@@ -1736,7 +1732,7 @@ Valor: PROCURARTEMAS
 
 Procura um tema no menu.
 
-<procurartemas()>
+<Menutemas->procurartemas>
 */
 	case "PROCURARTEMAS":
 		if(!isset($menutemas) || !isset($editores))
@@ -1757,7 +1753,7 @@ Pega a lista de links para outros mapas.
 
 Utilizado no preenchimento da guia mapas
 
-<pegaListaDeMapas()>
+<Menutemas->pegaListaDeMapas>
 */
 	case "PEGAMAPAS":
 		include_once("classe_menutemas.php");
@@ -1783,7 +1779,7 @@ Valor: GEORSSCANAIS
 
 Lista os canais de um georss.
 
-<georssCanais()>
+<georssCanais>
 */
 	case "GEORSSCANAIS":
 		$retorno = georssCanais($servico,$map_file,$dir_tmp,$locaplic);
@@ -1793,7 +1789,7 @@ Valor: GETCAPABILITIES
 
 Chama a função getcapabilities e retorna o resultado.
 
-<getcapabilities()>
+<getcapabilities>
 */
 	case "GETCAPABILITIES":
 		include_once("wmswfs.php");
@@ -1805,7 +1801,7 @@ Valor: GETCAPABILITIES2
 
 Chama a função getcapabilities e retorna o resultado formatado (WMS).
 
-<getcapabilities2()>
+<getcapabilities2>
 */
 	case "GETCAPABILITIES2":
 		include_once("wmswfs.php");
@@ -1817,7 +1813,7 @@ Valor: GETCAPABILITIES3
 
 Chama a função getcapabilities e retorna o resultado formatado (WFS).
 
-<getcapabilities3()>
+<getcapabilities3>
 */
 	case "GETCAPABILITIES3":
 		include_once("wmswfs.php");
@@ -1829,7 +1825,7 @@ Valor: TEMASWMS
 
 Retorna a lista de camadas de um WMS formatado em HTML.
 
-<temaswms()>
+<temaswms>
 */	
 	case "TEMASWMS":
 		include_once("wmswfs.php");
@@ -1841,7 +1837,7 @@ Valor: LISTALAYERSWMS
 
 Retorna a lista de layers de um WMS.
 
-<listaLayersWMS()>
+<listaLayersWMS>
 */	
 	case "LISTALAYERSWMS":
 		include_once("wmswfs.php");
@@ -1859,7 +1855,7 @@ Valor: BUSCARAPIDA
 
 Acessa dados de um serviço de geonames.
 
-<buscaRapida()>
+<buscaRapida>
 */
 	case "BUSCARAPIDA":
 		$retorno = buscaRapida($servico,$palavra);
@@ -1869,7 +1865,7 @@ Valor: LISTAITENS
 
 Lista os itens de um tema.
 
-<listaItens()>
+<Atributos->listaItens>
 */
 	case "LISTAITENS":
 		include_once("classe_atributos.php");
@@ -1881,7 +1877,7 @@ Valor: LISTAVALORESITENS
 
 Procura valores em uma tabela que aderem a uma palavra de busca.
 
-<buscaRegistros()>
+<Atributos->buscaRegistros>
 */	
 	case "LISTAVALORESITENS":
 		include_once("classe_atributos.php");
@@ -1896,7 +1892,7 @@ Depreciado na versão 4.2 (utilize "identifica2")
 
 Identifica elementos no mapa.
 
-<identifica()>
+<Atributos->identifica>
 */
 	case "IDENTIFICA":
 		if (!isset($tema)){$tema = "";}
@@ -1910,7 +1906,7 @@ Valor: IDENTIFICA2
 
 Identifica elementos no mapa.
 
-<identifica2()>
+<Atributos->identifica2>
 */
 	case "IDENTIFICA2":
 		if (!isset($tema)){$tema = "";}
@@ -1927,7 +1923,7 @@ Valor: IDENTIFICAUNICO
 
 Identifica elementos no mapa retornando apenas o valor de um único item.
 
-<identificaQBP()>
+<Atributos->identificaQBP>
 */
 	case "IDENTIFICAUNICO":
 		if (!isset($resolucao)){$resolucao = 5;}
@@ -1941,7 +1937,7 @@ Valor: ESTATISTICA
 
 Calcula estatísticas básicas de uma tabela de um tema.
 
-<estatDescritivas()>
+<Atributos->estatDescritivas>
 */	
 	case "ESTATISTICA":
 		include_once("classe_atributos.php");
@@ -1953,7 +1949,7 @@ Valor: LISTATEXTO
 
 Pega todos os valores dos itens de uma tabela de um tema.
 
-<itensTexto()>
+<Atributos->itensTexto>
 */	
 	case "LISTATEXTO":
 		include_once("classe_atributos.php");
@@ -1965,7 +1961,7 @@ Valor: LISTAREGISTROS
 
 Pega todos os valores dos itens de uma tabela de um tema.
 
-<listaRegistros()>
+<Atributos->listaRegistros>
 */	
 	case "LISTAREGISTROS":
 		include_once("classe_atributos.php");
@@ -1982,7 +1978,7 @@ Valor: EXTREGISTROS
 
 Pega a extensão geográfica de um registro na tabela de atributos de um tema.
 
-<extensaoRegistro()>
+<Atributos->extensaoRegistro>
 */		
 	case "EXTREGISTROS":
 		include_once("classe_atributos.php");
@@ -2010,7 +2006,6 @@ Retorna coordenadas utm a partir de coordenadas geo
 Valor: DESATIVACGI
 
 Desativa o modo cgi.
-
 */
 	case "DESATIVACGI":
 		$_SESSION["utilizacgi"] = "nao";
@@ -2022,7 +2017,7 @@ Valor: MUDAEXT
 
 Muda a extensão geográfica do mapa.
 
-<mudaExtensao()>
+<Navegacao->mudaExtensao>
 */
 	case "MUDAEXT":
 		include_once("classe_navegacao.php");
@@ -2038,7 +2033,7 @@ Valor: MUDAESCALA
 
 Muda a escala do mapa.
 
-<mudaEscala()>
+<Navegacao->mudaEscala>
 */
 	case "MUDAESCALA":
 		include_once("classe_navegacao.php");
@@ -2053,7 +2048,7 @@ Valor: PAN
 
 Desloca a visualização de um mapa (pan).
 
-<pan()>
+<Navegacao->pan>
 */
 	case "PAN":
 		include_once("classe_navegacao.php");
@@ -2069,7 +2064,7 @@ Valor: APROXIMA
 
 Aproxima a visualização de um mapa (zoom in)
 
-<aproxima()>
+<Navegacao->aproxima>
 */
 	case "APROXIMA":
 		include_once("classe_navegacao.php");
@@ -2084,7 +2079,7 @@ Valor: AFASTA
 
 Afasta a visualização de um mapa (zoom out)
 
-<afasta()>
+<Navegacao->afasta>
 */
 	case "AFASTA":
 		include_once("classe_navegacao.php");
@@ -2099,7 +2094,7 @@ Valor: CRIALENTE
 
 Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
 
-<aplicaResolucao()>
+<Navegacao->aplicaResolucao>
 */
 	case "CRIALENTE":
 		include_once("classe_navegacao.php");
@@ -2131,7 +2126,7 @@ Valor: ZOOMPONTO
 
 Desloca o centro do mapa para um ponto específico.
 
-<zoomPonto()>
+<Navegacao->zoomPonto>
 */
 	case "ZOOMPONTO":
 		include_once("classe_navegacao.php");
@@ -2197,7 +2192,7 @@ Valor: EDITALEGENDA
 
 Cria elementos para construir uma legenda no formato de tabela em HTML.
 
-<tabelaLegenda()>
+<Legenda->tabelaLegenda>
 */
 	case "EDITALEGENDA":
 		include_once("classe_legenda.php");
@@ -2211,7 +2206,7 @@ Valor: CRIALEGENDAHTML
 
 Gera a legenda processando o template HTML.
 
-<criaLegenda()>
+<Legenda->criaLegenda>
 */
 	case "CRIALEGENDAHTML":
 		include_once("classe_legenda.php");
@@ -2227,7 +2222,7 @@ Valor: TESTALEGENDA
 
 Testa os parâmetros de definição da legenda inserida no mapa.
 
-<aplicaParametrosLegImg()>
+<Legenda->aplicaParametrosLegImg>
 */
 	case "TESTALEGENDA":
 		include_once("classe_legenda.php");
@@ -2241,7 +2236,7 @@ Valor: CONTAGEMCLASSE
 
 Acrescenta a contagem de elementos em cada classe.
 
-<tabelaLegenda()>
+<Legenda->tabelaLegenda>
 */
 	case "CONTAGEMCLASSE":
 		include_once("classe_legenda.php");
@@ -2255,7 +2250,7 @@ Valor: CRIALEGENDAIMAGEM
 
 Desenha a imagem da legenda.
 
-<legendaGrafica()>
+<Legenda->legendaGrafica>
 */
 	case "CRIALEGENDAIMAGEM":
 		include_once("classe_legenda.php");
@@ -2267,7 +2262,7 @@ Valor: PEGAPARAMETROSLEGIMG
 
 Pega os parâmetros da legenda embebida no mapa.
 
-<pegaParametrosLegImg()>
+<Legenda->pegaParametrosLegImg>
 */
 	case "PEGAPARAMETROSLEGIMG":
 		include_once("classe_legenda.php");
@@ -2279,7 +2274,7 @@ Valor: APLICAPARAMETROSLEGIMG
 
 Aplica um parâmetro em um estilo de uma classe.
 
-<aplicaParametrosLegImg()>
+<Legenda->aplicaParametrosLegImg>
 */
 	case "APLICAPARAMETROSLEGIMG":
 		include_once("classe_legenda.php");
@@ -2307,7 +2302,7 @@ Valor: ESCALAGRAFICA
 
 Gera a imagem da barra de escala.
 
-<retornaBarraEscala()>
+<Escala->retornaBarraEscala>
 */
 	case "ESCALAGRAFICA":
 		include_once("classe_escala.php");
@@ -2319,7 +2314,7 @@ Valor: TESTAESCALAGRAFICA
 
 Testa os novos parâmetros de uma barra de escala.
 
-<testaescalagrafica()>
+<Escala->testaescalagrafica>
 */
 	case "TESTAESCALAGRAFICA":
 		include_once("classe_escala.php");
@@ -2331,7 +2326,7 @@ Valor: ESCALAPARAMETROS
 
 Pega os parâmetros da barra de escala atual.
 
-<parametrosBarraEscala()>
+<Escala->parametrosBarraEscala>
 */
 	case "ESCALAPARAMETROS":
 		include_once("classe_escala.php");
@@ -2343,7 +2338,7 @@ Valor: MUDAESCALAGRAFICA
 
 Aplica novos parâmetros na barra de escala atual.
 
-<mudaEscalaGrafica()>
+<Escala->mudaEscalaGrafica>
 */
 	case "MUDAESCALAGRAFICA":
 		include_once("classe_escala.php");
@@ -2363,7 +2358,7 @@ Valor: SELECAOPT
 
 Seleciona elementos utilizando um ponto.
 
-<selecaoPT()>
+<Selecao->selecaoPT>
 */	
 	case "SELECAOPT":
 		include_once("classe_selecao.php");
@@ -2383,7 +2378,7 @@ Valor: SELECAOEXT
 
 Seleciona elementos utilizando a extensão do mapa.
 
-<selecaoEXT()>
+<Selecao->selecaoEXT>
 */	
 	case "SELECAOEXT":
 		include_once("classe_selecao.php");
@@ -2402,7 +2397,7 @@ Valor: SELECAOBOX
 
 Seleciona elementos utilizando um retângulo.
 
-<selecaoBOX()>
+<Selecao->selecaoBOX>
 */	
 	case "SELECAOBOX":
 		include_once("classe_selecao.php");
@@ -2421,7 +2416,7 @@ Valor: SELECAOATRIB
 
 Seleciona elementos com base nos atributos.
 
-<selecaoAtributos()>
+<Selecao->selecaoAtributos>
 */
 	case "SELECAOATRIB":
 		include_once("classe_selecao.php");
@@ -2435,7 +2430,7 @@ Valor: SELECAOATRIB2
 
 Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 
-<selecaoAtributos2()>
+<Selecao->selecaoAtributos2>
 */
 	case "SELECAOATRIB2":
 		include_once("classe_selecao.php");
@@ -2449,7 +2444,7 @@ Valor: SELECAOTEMA
 
 Sleciona elementos de um tema com base em outro tema.
 
-<selecaoTema()>
+<Selecao->selecaoTema>
 */
 	case "SELECAOTEMA":
 		include_once("classe_selecao.php");
@@ -2468,7 +2463,7 @@ Valor: SELECAOPOLI
 
 Seleção por poligono (chamado via POST).
 
-<selecaoPoli()>
+<Selecao->selecaoPoli>
 */	
 	case "SELECAOPOLI":
 		//esta operação é chamada com POST via cpaint
@@ -2483,7 +2478,7 @@ Valor: LIMPASEL
 
 Limpa a seleção existente em um tema.
 
-<selecaoLimpa()>
+<Selecao->selecaoLimpa>
 */
 	case "LIMPASEL":
 		include_once("classe_selecao.php");
@@ -2499,7 +2494,7 @@ Valor: INCLUISEL
 
 Incluí elementos em uma seleção.
 
-<incluiSel()>
+<Selecao->incluiSel>
 */
 	case "INCLUISEL":
 		include_once("classe_selecao.php");
@@ -2515,7 +2510,7 @@ Valor: CRIATEMASEL
 
 Cria um novo tema com a seleção atual.
 
-<selecao2tema()>
+<Selecao->selecao2tema>
 */
 	case "CRIATEMASEL":
 		include_once("classe_selecao.php");
@@ -2536,7 +2531,7 @@ Valor: CRIATOPONIMIA
 
 Cria um novo tema com a toponímia do tema atual.
 
-<criaToponimia()>
+<Toponimia->criaToponimia>
 */	
 	case "CRIATOPONIMIA":
 		include_once("classe_toponimia.php");
@@ -2552,7 +2547,7 @@ Valor: ATIVAETIQUETAS
 
 Ativa as etiquetas de um tema.
 
-<ativaEtiquetas()>
+<Toponimia->ativaEtiquetas>
 */
 	case "ATIVAETIQUETAS":
 		include_once("classe_toponimia.php");
@@ -2566,7 +2561,7 @@ Valor: REMOVEETIQUETAS
 
 Desativa as etiquetas de um tema.
 
-<removeEtiquetas()>
+<Toponimia->removeEtiquetas>
 */
 	case "REMOVEETIQUETAS":
 		include_once("classe_toponimia.php");

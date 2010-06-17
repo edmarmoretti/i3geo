@@ -55,7 +55,7 @@ i3GEO.analise = {
 		/*
 		Function: graficoInterativo
 
-		Abre a janela para criação de gráficos interativos
+		Abre a janela de diálogo da ferramenta graficointerativo
 		*/
 		graficoInterativo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.graficoInterativo()");}
@@ -67,7 +67,7 @@ i3GEO.analise = {
 		/*
 		Function: linhaDoTempo
 
-		Abre a janela para criação de gráficos do tipo linha do tempo
+		Abre a janela de diálogo da ferramenta linhadotempo
 		*/
 		linhaDoTempo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.linhaDoTempo()");}
@@ -100,7 +100,7 @@ i3GEO.analise = {
 		/*
 		Function: gradePontos
 
-		Abre a janela que gera grade de pontos
+		Abre a janela de diálogo da ferramenta gradepontos
 		*/
 		gradePontos: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePontos()");}
@@ -112,7 +112,7 @@ i3GEO.analise = {
 		/*
 		Function: gradePol
 
-		Abre a janela que gera grade de poligonos
+		Abre a janela de diálogo da ferramenta gradepol
 		*/
 		gradePol: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePol()");}
@@ -124,7 +124,7 @@ i3GEO.analise = {
 		/*
 		Function: gradeHex
 
-		Abre a janela que gera grade de hexágonos
+		Abre a janela de diálogo da ferramenta gradehex
 		*/
 		gradeHex: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradeHex()");}
@@ -136,7 +136,7 @@ i3GEO.analise = {
 		/*
 		Function: analisaGeometrias
 
-		Abre a janela com o sistema de análise de geometrias
+		Abre a janela de diálogo da ferramenta analisageometrias
 		*/
 		analisaGeometrias: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.analisaGeometrias()");}
@@ -148,7 +148,7 @@ i3GEO.analise = {
 		/*
 		Function: pontosdistri
 
-		Abre a janela para executar análises de distribuição de pontos
+		Abre a janela de diálogo da ferramenta pontosdistri
 		*/
 		pontosdistri: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontosdistri()");}
@@ -164,7 +164,7 @@ i3GEO.analise = {
 		/*
 		Function: pontoempoligono
 
-		Abre a janela para cruzar um tema de pontos com um ou mais temas poligonais e gerar um novo tema
+		Abre a janela de diálogo da ferramenta pontoempoligono
 		*/
 		pontoempoligono: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontoempoligono()");}
@@ -176,7 +176,7 @@ i3GEO.analise = {
 		/*
 		Function: nptPol
 
-		Abre a janela para cruzar um tema de pontos com um ou tema poligona e gerar um novo tema com o número de pontos em cada polígono
+		Abre a janela de diálogo da ferramenta nptpol
 		*/
 		nptPol: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.nptpol()");}
@@ -188,7 +188,7 @@ i3GEO.analise = {
 		/*
 		Function: buffer
 
-		Gera um buffer em elementos selecionados
+		Abre a janela de diálogo da ferramenta buffer
 		*/
 		buffer: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.buffer()");}
@@ -200,7 +200,7 @@ i3GEO.analise = {
 		/*
 		Function: distanciaptpt
 
-		Abre a janela para calcular a distância entre um ponto e outros pontos próximos
+		Abre a janela de diálogo da ferramenta distanciaptpt
 		*/
 		distanciaptpt: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.distanciaptpt()");}
@@ -212,7 +212,7 @@ i3GEO.analise = {
 		/*
 		Function: centroide
 
-		Abre a janela que gera um tema com os centroides dos elementos selecionados
+		Abre a janela de diálogo da ferramenta centroide
 		*/
 		centroide: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.centroide()");}
@@ -224,11 +224,11 @@ i3GEO.analise = {
 		/*
 		Function: dissolve
 
-		Abre a janela que gera um tema dissolvendo as divisas entre polígonos.
+		Abre a janela de diálogo da ferramenta dissolve
 		*/
 		dissolve: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.dissolve()");}
-			if(typeof(i3GEOF.agrupaElementos) === 'undefined'){
+			if(typeof(i3GEOF.dissolve) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/dissolve/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.dissolve.criaJanelaFlutuante()","i3GEOF.dissolve_script");
 			}
@@ -236,7 +236,7 @@ i3GEO.analise = {
 		/*
 		Function: agrupaElementos
 
-		Abre a janela que gera um tema poligonal agrupando elementos de um tema.
+		Abre a janela de diálogo da ferramenta agrupaelementos
 		*/
 		agrupaElementos: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.agrupaElementos()");}

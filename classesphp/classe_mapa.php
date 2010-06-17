@@ -1357,6 +1357,7 @@ Method: adicionaTemaGeoRSS
 Adiciona um canal GeoRSS como um tema no mapa.
 
 Parametros:
+
 $servico - Endereço do RSS.
 $dir_tmp - Diretório onde o arquivo será criado.
 $locaplic - Localização do I3geo

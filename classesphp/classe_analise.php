@@ -1198,7 +1198,7 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	return($nomeshp.".shp");	
 }
 /*
-function: criaBuffer
+Function: criaBuffer
 
 Gera entorno (buffer) nos elementos selecionados de um tema.
 
@@ -1318,7 +1318,7 @@ nome do layer criado com o buffer.
 		return($novolayer->name);
 	}
 /*
-function - criaCentroide
+function: criaCentroide
 
 Gera centroide dos elementos selecionados de um tema.
 

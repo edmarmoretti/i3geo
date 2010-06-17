@@ -98,12 +98,7 @@ i3GEO.php = {
 	/*
 	Function: insereSHPgrafico
 	
-	PHP:
-	classesphp/classe_shp.php
-	
-	<SHP->__construct>
-	
-	<SHP->insereSHPgrafico>
+	<INSERESHPGRAFICO>
 	*/
 	insereSHPgrafico: function(funcao,tema,x,y,itens,shadow_height,width,inclinacao){
 		i3GEO.php.verifica();
@@ -113,12 +108,7 @@ i3GEO.php = {
 	/*
 	Function: insereSHP
 	
-	PHP:
-	classesphp/classe_shp.php
-	
-	<SHP->__construct>
-	
-	<SHP->insereSHP>
+	<INSERESHP>
 	*/
 	insereSHP: function(funcao,tema,item,valoritem,xy,projecao){
 		i3GEO.php.verifica();
@@ -128,10 +118,7 @@ i3GEO.php = {
 	/*
 	Function: pegaMensagens
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->pegaMensagens>	
+	<PEGAMENSAGENS>	
 	*/
 	pegaMensagens: function(funcao){
 		i3GEO.php.verifica();
@@ -141,10 +128,7 @@ i3GEO.php = {
 	/*
 	Function: areaPixel
 
-	PHP:
-	classesphp/funcoes_gerais.php
-	
-	<calculaAreaPixel>	
+	<AREAPIXEL>	
 	*/
 	areaPixel: function(funcao,g_celula){
 		i3GEO.php.verifica();
@@ -154,10 +138,7 @@ i3GEO.php = {
 	/*
 	Function: excluitema
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->excluiTemas>	
+	<EXCLUITEMA>	
 	*/
 	excluitema: function(funcao,tema){
 		var layer;
@@ -176,10 +157,7 @@ i3GEO.php = {
 	/*
 	Function: reordenatemas
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->reordenatemas>	
+	<REORDENATEMAS>	
 	*/
 	reordenatemas: function(funcao,lista){
 		i3GEO.php.verifica();
@@ -189,12 +167,7 @@ i3GEO.php = {
 	/*
 	Function: criaLegendaHTML
 
-	PHP:
-	classesphp/classe_legenda.php
-	
-	<Legenda->__construct>
-	
-	<Legenda->criaLegenda>	
+	<CRIALEGENDAHTML>	
 	*/
 	criaLegendaHTML: function(funcao,tema,template){
 		i3GEO.php.verifica();
@@ -210,12 +183,7 @@ i3GEO.php = {
 	/*
 	Function: inverteStatusClasse
 
-	PHP:
-	classesphp/classe_alteraclasse.php
-	
-	<Alteraclasse->__construct>
-	
-	<Alteraclasse->inverteStatusClasse>	
+	<INVERTESTATUSCLASSE>	
 	*/
 	inverteStatusClasse: function(funcao,tema,classe){
 		i3GEO.php.verifica();
@@ -225,10 +193,7 @@ i3GEO.php = {
 	/*
 	Function: ligatemas
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->ligaDesligaTemas>	
+	<LIGATEMAS>	
 	*/
 	ligatemas: function(funcao,desligar,ligar,adicionar){
 		i3GEO.php.verifica();
@@ -240,10 +205,7 @@ i3GEO.php = {
 	/*
 	Function: pegalistademenus
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaListaDeMenus>	
+	<PEGALISTADEMENUS>	
 	*/
 	pegalistademenus: function(funcao){
 		i3GEO.php.verifica();
@@ -253,10 +215,7 @@ i3GEO.php = {
 	/*
 	Function: pegalistadegrupos
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaListaDeGrupos>	
+	<PEGALISTADEGRUPOS>	
 	*/
 	pegalistadegrupos: function(funcao,id_menu,listasgrupos){
 		i3GEO.php.verifica();
@@ -266,10 +225,7 @@ i3GEO.php = {
 	/*
 	Function: pegalistadeSubgrupos
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaListaDeSubGrupos>	
+	<PEGALISTADESUBGRUPOS>	
 	*/
 	pegalistadeSubgrupos: function(funcao,id_menu,id_grupo){
 		i3GEO.php.verifica();
@@ -279,10 +235,7 @@ i3GEO.php = {
 	/*
 	Function: pegalistadetemas
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaListaDeTemas>	
+	<PEGALISTADETEMAS>	
 	*/
 	pegalistadetemas: function(funcao,id_menu,id_grupo,id_subgrupo){
 		i3GEO.php.verifica();
@@ -292,10 +245,7 @@ i3GEO.php = {
 	/*
 	Function: listaTemas
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->listaTemas>	
+	<LISTATEMAS>	
 	*/
 	listaTemas: function(funcao,tipo,locaplic,sid){
 		if(arguments.length === 2){
@@ -308,10 +258,7 @@ i3GEO.php = {
 	/*
 	Function: listaTemasEditaveis
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->listaTemasLocais>	
+	<LISTATEMASLOCAIS>	
 	*/
 	listaTemasEditaveis: function(funcao,locaplic,sid){
 		if(arguments.length === 1){
@@ -325,10 +272,7 @@ i3GEO.php = {
 	/*
 	Function: listaTemasComSel
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->listaTemasComSel>	
+	<LISTATEMASCOMSEL>	
 	*/
 	listaTemasComSel: function(funcao,locaplic,sid){
 		if(arguments.length === 1){
@@ -341,10 +285,7 @@ i3GEO.php = {
 	/*
 	Function: listatemasTipo
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->listatemasTipo>	
+	<LISTATEMASTIPO>	
 	*/
 	listatemasTipo: function(funcao,tipo,locaplic,sid){
 		if(arguments.length === 2){
@@ -357,10 +298,7 @@ i3GEO.php = {
 	/*
 	Function: pegaSistemas
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaSistemas>	
+	<PEGASISTEMAS>	
 	*/
 	pegaSistemas: function(funcao){
 		i3GEO.php.verifica();
@@ -370,7 +308,7 @@ i3GEO.php = {
 	/*
 	Function: listadrives
 
-	<listaDrives>	
+	<LISTADRIVES>	
 	*/
 	listadrives: function(funcao){
 		i3GEO.php.verifica();
@@ -380,7 +318,7 @@ i3GEO.php = {
 	/*
 	Function: listaarquivos
 
-	<listaArquivos>	
+	<LISTAARQUIVOS>	
 	*/
 	listaarquivos: function(funcao,caminho){
 		i3GEO.php.verifica();
@@ -390,7 +328,7 @@ i3GEO.php = {
 	/*
 	Function: geo2utm
 
-	<geo2utm>	
+	<GEO2UTM>	
 	*/
 	geo2utm: function(funcao,x,y){
 		i3GEO.php.verifica();
@@ -402,7 +340,7 @@ i3GEO.php = {
 	/*
 	Function: desativacgi
 
-	<desativacgi>
+	<DESATIVACGI>
 	*/
 	desativacgi: function(funcao){
 		i3GEO.php.verifica();
@@ -412,10 +350,7 @@ i3GEO.php = {
 	/*
 	Function: pegaMapas
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->pegaListaDeMapas>
+	<PEGALISTADEMAPAS>
 	*/
 	pegaMapas: function(funcao){
 		i3GEO.php.verifica();
@@ -425,10 +360,7 @@ i3GEO.php = {
 	/*
 	Function: mudatamanho
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->mudaQS>
+	<MUDATAMANHO>
 	*/
 	mudatamanho: function(funcao,altura,largura){
 		i3GEO.php.verifica();
@@ -438,10 +370,7 @@ i3GEO.php = {
 	/*
 	Function: ativalogo
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->ativalogo>
+	<ATIVALOGO>
 	*/
 	ativalogo: function(funcao,altura,largura){
 		i3GEO.php.verifica();
@@ -451,10 +380,7 @@ i3GEO.php = {
 	/*
 	Function: insereAnnotation
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->insereFeature>
+	<INSEREFEATURE>
 	*/
 	insereAnnotation: function(funcao,pin,xy,texto,position,partials,offsetx,offsety,minfeaturesize,mindistance,force,shadowcolor,shadowsizex,shadowsizey,outlinecolor,cor,sombray,sombrax,sombra,fundo,angulo,tamanho,fonte){
 		i3GEO.php.verifica();
@@ -464,10 +390,7 @@ i3GEO.php = {
 	/*
 	Function: identificaunico
 
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<Atributos->identificaQBP>
+	<IDENTIFICAUNICO>
 	*/
 	identificaunico: function(funcao,xy,tema,item){
 		i3GEO.php.verifica();
@@ -477,10 +400,7 @@ i3GEO.php = {
 	/*
 	Function: recuperamapa
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<recuperamapa>
+	<RECUPERAMAPA>
 	*/
 	recuperamapa: function(funcao){
 		i3GEO.php.verifica();
@@ -490,10 +410,7 @@ i3GEO.php = {
 	/*
 	Function: criaLegendaImagem
 
-	PHP:
-	classesphp/classe_legenda.php
-	
-	<Atributos->legendaGrafica>
+	<CRIALEGENDAIMAGEM>
 	*/
 	criaLegendaImagem: function(funcao){
 		i3GEO.php.verifica();
@@ -503,10 +420,7 @@ i3GEO.php = {
 	/*
 	Function: referenciadinamica
 
-	PHP:
-	classesphp/funcoes_gerais.php
-	
-	<retornaReferenciaDinamica>
+	<REFERENCIADINAMICA>
 	*/
 	referenciadinamica: function(funcao,zoom,tipo){
 		i3GEO.php.verifica();
@@ -518,10 +432,7 @@ i3GEO.php = {
 	/*
 	Function: referencia
 
-	PHP:
-	classesphp/funcoes_gerais.php
-	
-	<retornaReferencia>	
+	<REFERENCIA>	
 	*/
 	referencia: function(funcao){
 		i3GEO.php.verifica();
@@ -531,10 +442,7 @@ i3GEO.php = {
 	/*
 	Function: pan
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->pan>
+	<PAN>
 	*/
 	pan: function(funcao,escala,tipo,x,y){
 		i3GEO.php.verifica();
@@ -544,10 +452,7 @@ i3GEO.php = {
 	/*
 	Function: aproxima
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->aproxima>	
+	<APROXIMA>	
 	*/
 	aproxima: function(funcao,nivel){
 		i3GEO.php.verifica();
@@ -557,10 +462,7 @@ i3GEO.php = {
 	/*
 	Function: afasta
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->afasta>	
+	<AFASTA>	
 	*/
 	afasta: function(funcao,nivel){
 		i3GEO.php.verifica();
@@ -570,10 +472,7 @@ i3GEO.php = {
 	/*
 	Function: zoomponto
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->zoomponto>	
+	<ZOOMPONTO>	
 	*/
 	zoomponto: function(funcao,x,y){
 		i3GEO.php.verifica();
@@ -590,8 +489,7 @@ i3GEO.php = {
 	/*
 	Function: localizaIP
 
-	PHP:
-	classesphp/funccoes_gerais.php
+	<LOCALIZAIP>
 	*/
 	localizaIP: function(funcao){
 		i3GEO.php.verifica();
@@ -601,10 +499,7 @@ i3GEO.php = {
 	/*
 	Function: mudaext
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->mudaExtensao>	
+	<MUDAEXT>	
 	*/
 	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
 		var retorno,p;
@@ -638,10 +533,7 @@ i3GEO.php = {
 	/*
 	Function: mudaescala
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->mudaEscala>	
+	<MUDAESCALA>	
 	*/
 	mudaescala: function(funcao,escala){
 		i3GEO.php.verifica();
@@ -651,10 +543,7 @@ i3GEO.php = {
 	/*
 	Function: aplicaResolucao
 
-	PHP:
-	classesphp/classe_navegacao.php
-	
-	<Navegacao->aplicaResolucao>	
+	<crialente>	
 	*/
 	aplicaResolucao: function(funcao,resolucao){
 		i3GEO.php.verifica();
@@ -664,10 +553,7 @@ i3GEO.php = {
 	/*
 	Function: geradestaque
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->geraDestaque>	
+	<GERADESTAQUE>	
 	*/
 	geradestaque: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -677,10 +563,7 @@ i3GEO.php = {
 	/*
 	Function: selecaopt
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoPT>	
+	<SELECAOPT>	
 	*/
 	selecaopt: function(funcao,tema,xy,tipo,tolerancia){
 		i3GEO.php.verifica();
@@ -690,10 +573,7 @@ i3GEO.php = {
 	/*
 	Function: selecaobox
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoBOX>	
+	<SELECAOBOX>	
 	*/
 	selecaobox: function(funcao,tema,tipo,box){
 		i3GEO.php.verifica();
@@ -703,10 +583,7 @@ i3GEO.php = {
 	/*
 	Function: selecaoext
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoEXT>	
+	<SELECAOEXT>	
 	*/
 	selecaoext: function(funcao,tema,tipo){
 		i3GEO.php.verifica();
@@ -716,10 +593,7 @@ i3GEO.php = {
 	/*
 	Function: selecaoatrib2
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoAtributos2>	
+	<SELECAOATRIB2>	
 	*/
 	selecaoatrib2: function(funcao,tema,filtro,tipo){
 		i3GEO.php.verifica();
@@ -729,10 +603,7 @@ i3GEO.php = {
 	/*
 	Function: selecaotema
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoTema>	
+	<SELECAOTEMA>	
 	*/
 	selecaotema: function(funcao,temao,tema,tipo){
 		i3GEO.php.verifica();
@@ -742,10 +613,7 @@ i3GEO.php = {
 	/*
 	Function: sobetema
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->sobeTema>	
+	<SOBETEMA>	
 	*/
 	sobetema: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -755,10 +623,7 @@ i3GEO.php = {
 	/*
 	Function: descetema
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->desceTema>
+	<DESCETEMA>
 	*/
 	descetema: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -768,10 +633,7 @@ i3GEO.php = {
 	/*
 	Function: fontetema
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->fonteTema>	
+	<FONTETEMA>	
 	*/
 	fontetema: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -781,10 +643,7 @@ i3GEO.php = {
 	/*
 	Function: zoomtema
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->zoomTema>	
+	<ZOOMTEMA>	
 	*/
 	zoomtema: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -809,10 +668,7 @@ i3GEO.php = {
 	/*
 	Function: zoomsel
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->zoomSel>	
+	<ZOOMSEL>	
 	*/
 	zoomsel: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -837,10 +693,7 @@ i3GEO.php = {
 	/*
 	Function: limpasel
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->selecaoLimpa>	
+	<LIMPASEL>	
 	*/
 	limpasel: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -850,10 +703,7 @@ i3GEO.php = {
 	/*
 	Function: mudatransp
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->mudaTransparencia>	
+	<MUDATRANSP>	
 	*/
 	mudatransp: function(funcao,tema,valor){
 		i3GEO.php.verifica();
@@ -863,10 +713,7 @@ i3GEO.php = {
 	/*
 	Function: mudanome
 
-	PHP:
-	classesphp/classe_temas.php
-	
-	<Temas->mudaTransparencia>	
+	<MUDANOME>	
 	*/
 	mudanome: function(funcao,tema,valor){
 		i3GEO.php.verifica();
@@ -876,10 +723,7 @@ i3GEO.php = {
 	/*
 	Function: adicionaTemaWMS
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->adicionatemawms>	
+	<ADICIONATEMAWMS>	
 	*/
 	adicionaTemaWMS: function(funcao,servico,tema,nome,proj,formato,versao,nomecamada,tiporep,suportasld,formatosinfo,locaplic,sid){
 		if(arguments.length === 11){
@@ -893,10 +737,7 @@ i3GEO.php = {
 	/*
 	Function: adicionaTemaSHP
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->adicionaTemaSHP>	
+	<ADICIONATEMASHP>	
 	*/
 	adicionaTemaSHP: function(funcao,path){
 		i3GEO.php.verifica();
@@ -906,10 +747,7 @@ i3GEO.php = {
 	/*
 	Function: adicionaTemaIMG
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->adicionaTemaIMG>	
+	<ADICIONATEMAIMG>	
 	*/
 	adicionaTemaIMG: function(funcao,path){
 		i3GEO.php.verifica();
@@ -919,12 +757,7 @@ i3GEO.php = {
 	/*
 	Function: identifica
 	
-	Depreciado na versão 4.2 (utilize "identifica2")
-	
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<Atributos->identifica>	
+	Depreciado na versão 4.2 (utilize "identifica2")	
 	*/
 	identifica: function(funcao,x,y,resolucao,locaplic,sid){
 		var p = locaplic+"/classesphp/mapa_controle.php?funcao=identifica&opcao=tip&xy="+x+","+y+"&resolucao=5&g_sid="+sid;
@@ -933,10 +766,7 @@ i3GEO.php = {
 	/*
 	Function: identifica2
 
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<Atributos->identifica2>	
+	<IDENTIFICA2>	
 	*/
 	identifica2: function(funcao,x,y,resolucao,opcao,locaplic,sid,tema,ext,listaDeTemas){
 		if(arguments.length === 4){
@@ -963,8 +793,7 @@ i3GEO.php = {
 	/*
 	Function: reiniciaMapa
 
-	PHP:
-	classesphp/mapa_controle.php
+	<REINICIAMAPA>
 	*/
 	reiniciaMapa: function(funcao){
 		i3GEO.php.verifica();
@@ -974,10 +803,7 @@ i3GEO.php = {
 	/*
 	Function: procurartemas
 
-	PHP:
-	classesphp/classe_menutemas.php
-	
-	<Menutemas->procurartemas>	
+	<PROCURARTEMAS>	
 	*/
 	procurartemas: function(funcao,procurar,locaplic){
 		if(arguments.length === 2)
@@ -990,10 +816,7 @@ i3GEO.php = {
 	/*
 	Function: adtema
 
-	PHP:
-	classesphp/classe_mapa.php
-	
-	<Mapa->adicionaTema>	
+	<ADTEMA>	
 	*/
 	adtema: function(funcao,temas,locaplic,sid){
 		if(arguments.length === 2){
@@ -1007,10 +830,7 @@ i3GEO.php = {
 	/*
 	Function: escalagrafica
 
-	PHP:
-	classesphp/classe_escala.php
-	
-	<Escala->retornaBarraEscala>	
+	<ESCALAGRAFICA>	
 	*/
 	escalagrafica: function(funcao){
 		i3GEO.php.verifica();
@@ -1020,10 +840,7 @@ i3GEO.php = {
 	/*
 	Function: flamingo
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<montaFlamingo>	
+	<MONTAFLAMINGO>	
 	*/
 	flamingo: function(funcao){
 		i3GEO.php.verifica();
@@ -1033,10 +850,7 @@ i3GEO.php = {
 	/*
 	Function: openlayers
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<openlayers>	
+	<OPENLAYERS>	
 	*/
 	openlayers: function(funcao){
 		i3GEO.php.verifica();
@@ -1046,10 +860,7 @@ i3GEO.php = {
 	/*
 	Function: corpo
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<redesenhaMapa>	
+	<CORPO>	
 	*/
 	corpo: function(funcao,tipoimagem){
 		i3GEO.php.verifica();
@@ -1064,10 +875,7 @@ i3GEO.php = {
 	/*
 	Function: criamapa
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<criaMapa>	
+	<CRIAMAPA>	
 	*/
 	criamapa: function(funcao,parametros){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=criaMapa&"+parametros;
@@ -1076,10 +884,7 @@ i3GEO.php = {
 	/*
 	Function: inicia
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<iniciaMapa>	
+	<INICIA>	
 	*/
 	inicia: function(funcao,embedLegenda,w,h){
 		i3GEO.php.verifica();
@@ -1089,10 +894,7 @@ i3GEO.php = {
 	/*
 	Function: chaveGoogle
 
-	PHP:
-	classesphp/mapa_controle.php
-	
-	<chavegoogle>	
+	<CHAVEGOOGLE>	
 	*/
 	chaveGoogle: function(funcao){
 		i3GEO.php.verifica();
@@ -1102,10 +904,7 @@ i3GEO.php = {
 	/*
 	Function: listaRSSwsARRAY
 
-	PHP:
-	classesphp/wscliente.php
-	
-	<listaRSSwsARRAY>	
+	<LISTARSSWSARRAY>	
 	*/
 	listaRSSwsARRAY: function(funcao,tipo){
 		var p = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+["|"]+"&tipo="+tipo;
@@ -1114,10 +913,7 @@ i3GEO.php = {
 	/*
 	Function: listaLayersWMS
 
-	PHP:
-	classesphp/wmswfs.php
-	
-	<listaLayersWMS>	
+	<LISTALAYERSWMS>	
 	*/
 	listaLayersWMS: function(funcao,servico,nivel,id_ws,nomelayer){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=listaLayersWMS&servico="+servico+"&nivel="+nivel+"&id_ws="+id_ws+"&nomelayer="+nomelayer;
@@ -1126,10 +922,7 @@ i3GEO.php = {
 	/*
 	Function: buscaRapida
 
-	PHP:
-	classesphp/funcoes_gerais.php
-	
-	<buscaRapida>	
+	<BUSCARAPIDA>	
 	*/
 	buscaRapida: function(funcao,locaplic,servico,palavra){
 		var p = locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=buscaRapida&palavra="+palavra+"&servico="+servico;
@@ -1138,10 +931,7 @@ i3GEO.php = {
 	/*
 	Function: listaItensTema
 
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<listaItens>	
+	<LISTAITENS>	
 	*/
 	listaItensTema: function(funcao,tema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaitens&tema="+tema;
@@ -1150,10 +940,7 @@ i3GEO.php = {
 	/*
 	Function: listaValoresItensTema
 
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<listaRegistros>	
+	<LISTAREGISTROS>	
 	*/
 	listaValoresItensTema: function(funcao,tema,itemTema){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaregistros&unico=sim&tema="+tema+"&itemtema="+itemTema;
@@ -1162,10 +949,7 @@ i3GEO.php = {
 	/*
 	Function: extRegistros
 
-	PHP:
-	classesphp/classe_atributos.php
-	
-	<extensaoRegistro>	
+	<EXTREGISTROS>	
 	*/
 	extRegistros: function(funcao,tema,reg){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=extregistros&registro="+reg+"&tema="+tema;
@@ -1174,7 +958,7 @@ i3GEO.php = {
 	/*
 	Function: listaFontesTexto
 	
-	<listaTrueType>	
+	<LISTATRUETYPE>	
 	*/
 	listaFontesTexto: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listatruetype";
@@ -1183,7 +967,7 @@ i3GEO.php = {
 	/*
 	Function: listaEpsg
 	
-	<listaEpsg>	
+	<LISTAEPSG>	
 	*/
 	listaEpsg: function(funcao){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaEpsg";
@@ -1192,10 +976,7 @@ i3GEO.php = {
 	/*
 	Function: criatemasel
 
-	PHP:
-	classesphp/classe_selecao.php
-	
-	<Selecao->criatemaSel>	
+	<CRIATEMASEL>	
 	*/
 	criatemaSel: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -1205,10 +986,7 @@ i3GEO.php = {
 	/*
 	Function: pegaData
 
-	PHP:
-	classesphp/classe_tema.php
-	
-	<Tema->pegadata>	
+	<PEGADATA>	
 	*/
 	pegaData: function(funcao,tema){
 		i3GEO.php.verifica();
@@ -1218,10 +996,7 @@ i3GEO.php = {
 	/*
 	Function: alteraData
 
-	PHP:
-	classesphp/classe_tema.php
-	
-	<Tema->alteradata>	
+	<ALTERADATA>	
 	*/
 	alteraData: function(funcao,tema,data){
 		i3GEO.php.verifica();
@@ -1229,8 +1004,3 @@ i3GEO.php = {
 		cpJSON.call(p,"alteradata",funcao);	
 	}
 };
-//incluisel - tabela
-//estatistica - tabela
-//verPaleta - pontosdistri
-//analisedistri - pontosdistri
-//download - download
