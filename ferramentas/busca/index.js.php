@@ -7,7 +7,7 @@ O tema alvo é o definido na variável i3GEO.temaAtivo
 
 Veja:
 
-<procuraratrib>
+<i3GEO.tema.dialogo.procuraratrib>
 
 Arquivo:
 

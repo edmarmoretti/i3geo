@@ -10,7 +10,7 @@ Utiliza a função buffer do Mapserver.
 
 Veja:
 
-<buffer>
+<i3GEO.analise.dialogo.buffer>
 
 Arquivo:
 
@@ -187,7 +187,7 @@ i3GEOF.buffer = {
 	
 	Veja:
 	
-	<comboTemas>
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(

@@ -4,6 +4,13 @@
 /*
 Title: Distância entre pontos
 
+Calcula a distância entre os pontos de um tema e os pontos de outro tema criando uma nova camada.
+Além da distância, podem ser escolhidos itens dos temas de origem e de destino que irão ser mantidos na nova camada.
+
+Veja:
+
+<i3GEO.analise.dialogo.distanciaptpt>
+
 Arquivo:
 
 i3geo/ferramentas/distanciaptpt/index.js.php
@@ -34,9 +41,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.distanciaptpt
-
-Calcula a distância entre os pontos de um tema e os pontos de outro tema.
+Classe: i3GEOF.distanciaptpt
 */
 i3GEOF.distanciaptpt = {
 	/*
@@ -148,7 +153,11 @@ i3GEOF.distanciaptpt = {
 	/*
 	Function: calcula
 	
-	Calcula a distância entre os temas
+	Executa a operação de cálculo das distâncias
+	
+	Veja:
+	
+	<DISTANCIAPTPT>
 	*/
 	calcula: function(){
 		try{
@@ -183,6 +192,11 @@ i3GEOF.distanciaptpt = {
 	Function: comboTemasOrigem
 	
 	Cria um combo com a lista de temas pontuais com elementos selecionados
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
+	
 	*/
 	comboTemasOrigem: function(){
 		i3GEO.util.comboTemas(
@@ -209,6 +223,11 @@ i3GEOF.distanciaptpt = {
 	Function: comboTemasDestino
 	
 	Cria um combo com a lista de temas pontuais com elementos destino
+
+	Veja:
+	
+	<i3GEO.util.comboTemas>
+
 	*/
 	comboTemasDestino: function(){
 		i3GEO.util.comboTemas(
@@ -235,6 +254,11 @@ i3GEOF.distanciaptpt = {
 	Function: comboItensOrigem
 	
 	Cria um combo para escolha de um item do tema de origem
+
+	Veja:
+	
+	<i3GEO.util.comboItens>
+
 	*/
 	comboItensOrigem: function(){
 		i3GEO.util.comboItens(
@@ -251,6 +275,11 @@ i3GEOF.distanciaptpt = {
 	Function: comboItensDestino
 	
 	Cria um combo para escolha de um item do tema de destino
+
+	Veja:
+	
+	<i3GEO.util.comboItens>
+
 	*/
 	comboItensDestino: function(){
 		i3GEO.util.comboItens(

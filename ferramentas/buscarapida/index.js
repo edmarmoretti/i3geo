@@ -8,7 +8,7 @@ O resultado é mostrado como uma listagem, permitindo adicionar um novo tema ao m
 
 Veja:
 
-<mostraBuscaRapida>
+<i3GEO.gadgets.mostraBuscaRapida>
 
 Arquivo:
 
@@ -131,7 +131,7 @@ i3GEObuscaRapida = {
 	
 	Veja:
 	
-	<buscaRapida>
+	<i3GEO.php.buscaRapida>
 	
 	Parametros:
 	
@@ -240,7 +240,7 @@ i3GEObuscaRapida = {
 	
 	Veja:
 	
-	<mudaext>
+	<i3GEO.php.mudaext>
 	
 	Parameters:
 	
@@ -277,7 +277,7 @@ i3GEObuscaRapida = {
 	
 	Veja:
 	
-	<adtema>
+	<i3GEO.php.adtema>
 	
 	Parameters:
 	

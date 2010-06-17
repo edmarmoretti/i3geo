@@ -1,6 +1,16 @@
 /*
 Title: Conexão com georss
 
+Acrescenta ao mapa um novo tema com base em um endereço de GEORSS
+
+GEORSS é um serviço de notícias que traz a coordenada geográfica da ocorrência (ou envelope).
+O usuário pode indicar o endereço ou escolher de uma lista. A lista é pré-definida por meio do sistema de administração
+do i3Geo.
+
+Veja:
+
+<ADICIONATEMAGEORSS>
+
 Arquivo:
 
 i3geo/ferramentas/conectargeorss/index.js
@@ -44,6 +54,15 @@ $i("guia1").onclick = function()
 }
 $i("guia2").onclick = function(){clickGuia2();}
 
+/*
+Function: clickGuia2
+
+Faz a busca dos RSS cadastrados no sistema de administração do i3Geo
+
+Veja:
+
+<GEORSSCANAIS>
+*/
 function clickGuia2()
 {
 	mostraGuia("guia2")
@@ -69,6 +88,15 @@ function registraws(nome,id_ws)
 	g_idws = ""
 	clickGuia2()
 }
+/*
+Function: listaCanais
+
+Monta a lista com os canais existentes no RSS escolhido
+
+Parametro:
+
+retorno {JSON} - retorno da função clickGuia2
+*/
 function listaCanais(retorno)
 {
 	var ins = "Clique no bot&atilde;o 'mapa' para incluir os dados do canal desejado<br>"
@@ -90,6 +118,19 @@ function listaCanais(retorno)
 	}
 	aguarde("none")
 }
+/*
+Function: adicionatema
+
+Adiciona ao mapa um tema com base no canal RSS escolhido
+
+Veja:
+
+<ADICIONATEMAGEORSS>
+
+Parametro:
+
+id {string} - id do canal (conforme a ordem que aparece no RSS
+*/
 function adicionatema(id)
 {
 	aguarde("block")

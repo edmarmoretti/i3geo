@@ -3,6 +3,11 @@
 /*
 Title: Confluencias
 
+Mostra os pontos de confluência de coordenadas geográficas de 1 por 1 grau.
+
+Em cada confluência é mostrado um link para o site www.confluence.org.
+Os pontos são mostrados conforme a extensão geográfica vista no mapa.
+
 File: i3geo/ferramentas/confluence/index.js.php
 
 About: Licença
@@ -29,13 +34,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.confluence
-
-Mostra os pontos de confluência de coordenadas geográficas de 1 po 1 grau.
-
-Em cada confluência é mostrado um link para o site www.confluence.org
-
-Os pontos são mostrados conforme a extensão geográfica vista no mapa.
+Classe: i3GEOF.confluence
 */
 i3GEOF.confluence = {
 	/*

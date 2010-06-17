@@ -4,6 +4,13 @@
 /*
 Title: Filtra tema
 
+Adiciona ou modifica o filtro de um tema. O filtro restringe quais elementos são renderizados e baseiam-se em regras
+aplicadas sobre a tabela de atributos
+
+Veja:
+
+<i3GEO.tema.dialogo.filtro>
+
 Arquivo:
 
 i3geo/ferramentas/filtro/index.js.php
@@ -36,9 +43,7 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.filtro
-
-Adiciona ou modifica um filtro de um tema.
+Classe: i3GEOF.filtro
 */
 i3GEOF.filtro = {
 	/*
@@ -277,6 +282,10 @@ i3GEOF.filtro = {
 	Function: pegaFiltro
 	
 	Pega o filtro atual de um tema
+	
+	Veja:
+	
+	<PEGAFILTRO>
 	*/
 	pegaFiltro: function(){
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=pegafiltro&tema="+i3GEO.temaAtivo,
@@ -293,6 +302,9 @@ i3GEOF.filtro = {
 	
 	Limpa o filtro de um tema
 	
+	Veja:
+	
+	<INSEREFILTRO>
 	*/
 	limpaFiltro: function(){
 		try{
@@ -315,6 +327,10 @@ i3GEOF.filtro = {
 	Function: aplicaFiltro
 	
 	Aplica um filtro ao tema
+	
+	Veja:
+	
+	<INSEREFILTRO>
 	
 	Parametro:
 	

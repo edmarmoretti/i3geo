@@ -3,6 +3,13 @@
 /*
 Title: Converte um mapa em kml
 
+Converte o mapa atual em KML. A conversão é baseada na geração de um KML com a imagem do mapa sendo mostrada como um WMS.
+O Kml contém o elemento GroundOverlay.
+
+Veja:
+
+<i3GEO.mapa.convertekml>
+
 Arquivo:
 
 i3geo/ferramentas/convertemapakml/index.js.php
@@ -33,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.converteMapaKml
-
-Converte um mapa em KML
+Classe: i3GEOF.converteMapaKml
 */
 i3GEOF.converteMapaKml = {
 	/*

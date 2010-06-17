@@ -3,6 +3,12 @@
 /*
 Title: Download de um tema
 
+Faz o download de um tema existente na árvore de camadas.
+
+Veja:
+
+<i3GEO.tema.dialogo.download>
+
 Arquivo:
 
 i3geo/ferramentas/download/index.js.php
@@ -33,15 +39,17 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.download
-
-Faz o download de um tema existente na árvore de camadas.
+Classe: i3GEOF.download
 */
 i3GEOF.download = {
 	/*
 	Function: html
 	
 	Gera o código html para apresentação das opções da ferramenta
+	
+	Veja:
+	
+	<DOWNLOAD2>
 
 	Parametros:
 	
@@ -76,8 +84,6 @@ i3GEOF.download = {
 			$i("i3GEOdownloadResultado").innerHTML = ins;
 			i3GEOF.download.aguarde.visibility = "hidden";
 		}
-		
-		
 		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
 		cp = new cpaint();
 		cp.set_response_type("JSON");

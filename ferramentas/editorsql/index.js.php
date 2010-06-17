@@ -4,6 +4,14 @@
 /*
 Title: Editor de SQL
 
+Permite alterar os parâmetros de conexão com banco de dados do tema.
+
+Opera apenas em temas baseados em conexões com bancos de dados.
+
+Veja:
+
+<i3GEO.tema.dialogo.editorsql>
+
 Arquivo:
 
 i3geo/ferramentas/editorsql/index.js.php
@@ -34,9 +42,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.editorsql
-
-Altera as propriedades do fundo do mapa.
+Classe: i3GEOF.editorsql
 */
 i3GEOF.editorsql = {
 	/*
@@ -135,6 +141,10 @@ i3GEOF.editorsql = {
 	Function: pega
 	
 	Pega o SQL
+	
+	Veja:
+	
+	<i3GEO.php.pegaData>
 	*/
 	pega: function(){
 		if(i3GEOF.editorsql.aguarde.visibility === "visible")
@@ -150,6 +160,10 @@ i3GEOF.editorsql = {
 	Function: altera
 	
 	Altera o SQL
+	
+	Veja:
+	
+	<i3GEO.php.alteraData>
 	*/
 	altera: function(){
 		if(i3GEOF.editorsql.aguarde.visibility === "visible")

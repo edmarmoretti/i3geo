@@ -4,6 +4,12 @@
 /*
 Title: Dissolve elementos de um tema
 
+Elimina divisas entre polígonos de um tema.
+
+Veja:
+
+<i3GEO.analise.dialogo.dissolve>
+
 Arquivo:
 
 i3geo/ferramentas/dissolve/index.js.php
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.dissolve
-
-Elimina divisas entre polígonos de um tema.
+Classe: i3GEOF.dissolve
 */
 i3GEOF.dissolve = {
 	/*
@@ -140,7 +144,11 @@ i3GEOF.dissolve = {
 	/*
 	Function: criadissolve
 	
-	Cria a grade e adiciona um novo tema ao mapa
+	Executa a operação de dissolve
+	
+	Veja:
+	
+	<DISSOLVEPOLIGONO>
 	*/
 	criadissolve: function(){
 		try{
@@ -170,6 +178,11 @@ i3GEOF.dissolve = {
 	Function: comboTemasSel
 	
 	Cria um combo com a lista de temas com elementos selecionados
+
+	Veja:
+	
+	<i3GEO.util.comboTemas>
+
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(
@@ -196,6 +209,11 @@ i3GEOF.dissolve = {
 	Function: comboItem
 	
 	Cria um combo para escolha de um item do tema de origem
+
+	Veja:
+	
+	<i3GEO.util.comboItens>
+
 	*/
 	comboItem: function(){
 		i3GEO.util.comboItens(

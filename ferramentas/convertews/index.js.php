@@ -3,6 +3,13 @@
 /*
 Title: Converte um mapa em WMS
 
+Transforma o mapfile atual em um WMS permitindo que o usuário acesse o mapa de outras aplicações.
+O WMS é armazenado no diretório temporário do i3Geo.
+
+Veja:
+
+<i3GEO.mapa.dialogo.convertews>
+
 Arquivo:
 
 i3geo/ferramentas/convertews/index.js.php
@@ -33,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.converteMapaWS
-
-Converte um mapa em WMS
+Classe: i3GEOF.converteMapaWS
 */
 i3GEOF.converteMapaWS = {
 	/*
@@ -73,6 +78,10 @@ i3GEOF.converteMapaWS = {
 	Function: criaJanelaFlutuante
 	
 	Cria a janela flutuante para controle da ferramenta.
+	
+	Veja:
+	
+	<CONVERTEWMSWMC>
 	*/	
 	criaJanelaFlutuante: function(){
 		var janela,divid,temp,titulo,p,cp;

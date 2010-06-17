@@ -10,7 +10,7 @@ As miniaturas podem ser geradas com geraminiaturas.php.
 
 Veja:
 
-<carouselTemas>
+<i3GEO.arvoreDeTemas.dialogo.carouselTemas>
 
 Arquivo:
 

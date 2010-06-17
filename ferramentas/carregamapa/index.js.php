@@ -3,6 +3,15 @@
 /*
 Title: Carrega mapa salvo
 
+Envia um mapfile armazenado localmente para o servidor do i3Geo. O mapa deve ter sido salvo com a ferramenta
+de salvar mapa.
+Ao enviar o arquivo, um novo diretório temporário é criado e o mapa é iniciado. Ao reiniciar o mapa, os layers locais são eliminados.
+O envio e processamento do mapa é feito pelo programa i3geo/ferramentas/carregamapa/upload.php
+
+Veja:
+
+<i3GEO.mapa.dialogo.carregaMapa>
+
 Arquivo: i3geo/ferramentas/carregamapa/index.js.php
 
 About: Licença
@@ -29,9 +38,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.carregaMapa
-
-Envia para o servidor um arquivo mapfile armazenado localmente
+Classe: i3GEOF.carregaMapa
 */
 i3GEOF.carregaMapa = {
 	/*
@@ -106,6 +113,11 @@ i3GEOF.carregaMapa = {
 		i3GEOF.carregaMapa.aguarde = $i("i3GEOF.carregaMapa_imagemCabecalho").style;
 		i3GEOF.carregaMapa.inicia(divid);
 	},
+	/*
+	Function: submete
+	
+	Envia o arquivo para o servidor
+	*/
 	submete: function(){
 		i3GEOF.carregaMapa.aguarde.visibility="visible";
 		$i("i3GEOcarregamapanomearq").value = $i("i3GEOcarregamapafilemap").value;

@@ -4,6 +4,13 @@
 /*
 Title: Cortina
 
+Aplica um efeito de cortina a um tema, permitindo mostrá-lo ou escondê-lo de forma controlada por um botão deslizante.
+Funciona apenas nas interfaces que utilizam camadas múltiplas, como a interface openlayers
+
+Veja:
+
+<i3GEO.tema.dialogo.cortina>
+
 Arquivo:
 
 i3geo/ferramentas/cortina/index.js.php
@@ -35,9 +42,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.cortina
-
-Aplica um efeito de cortina a um tema, permitindo mostr-a-lo ou escondê-lo de forma controlada por um botão deslizante.
+Classe: i3GEOF.cortina
 */
 i3GEOF.cortina = {
 	/*
@@ -118,6 +123,11 @@ i3GEOF.cortina = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
+	/*
+	Function: criaslide
+	
+	Cria a barra deslizante com base em YAHOO.widget.Slider
+	*/
 	criaslide: function(){
 		var slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0),
 			layer,

@@ -3,6 +3,13 @@
 /*
 Title: Converte um tema em kml
 
+Mostra os endereços que permitem acessar o tema no formato KML. Essa ferramenta não processa os dados, apenas constrói
+os links para os programas que fazem a conversão ou visualização dos dados em KML vetorial ou do tipo GroundOverlay (via WMS)
+
+Veja:
+
+<i3GEO.tema.dialogo.abreKml>
+
 Arquivo:
 
 i3geo/ferramentas/convertekml/index.js.php
@@ -33,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.converteKml
-
-Converte um tema em KML
+Classe: i3GEOF.converteKml
 */
 i3GEOF.converteKml = {
 	/*

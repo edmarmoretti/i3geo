@@ -13,7 +13,7 @@ As geometrias armazenadas ficam disponíveis temporariamente, assim como o mapfil
 
 Veja:
 
-<analisaGeometrias>
+<i3GEO.analise.dialogo.analisaGeometrias>
 
 Arquivo: 
 
@@ -264,7 +264,7 @@ i3GEOF.analisaGeometrias = {
 	
 	Veja:
 	
-	<selecaopt>
+	<i3GEO.php.selecaopt>
 	*/
 	selecionaElemento: function(){
 		if(g_tipoacao === 'analisageometrias'){
@@ -283,7 +283,7 @@ i3GEOF.analisaGeometrias = {
 	
 	Veja:
 	
-	<comboTemas>
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
 		i3GEO.util.comboTemas(

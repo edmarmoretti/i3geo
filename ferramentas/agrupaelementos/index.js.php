@@ -8,7 +8,7 @@ Essa não é uma operação do tipo "dissolve", sendo utilizadas as funções "union" 
 
 Veja:
 
-<agrupaElementos>
+<i3GEO.analise.dialogo.agrupaElementos>
 
 Arquivo:
 
@@ -187,7 +187,7 @@ i3GEOF.agrupaElementos = {
 	
 	Veja:
 	
-	<comboTemas>
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(
@@ -218,7 +218,7 @@ i3GEOF.agrupaElementos = {
 	
 	Veja:
 	
-	<comboItens>
+	<i3GEO.util.comboItens>
 	*/
 	comboItensSel: function(){
 		var tema = $i("i3GEOagrupaelementostemasComSel").value;

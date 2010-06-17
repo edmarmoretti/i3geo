@@ -118,6 +118,7 @@ Topic Type: Opcao
 Topic Type: Classe
 
    Plural: Classe
+   Scope: Start
    Class Hierarchy: Yes
    Page Title If First: Yes
    Can Group With: Classes

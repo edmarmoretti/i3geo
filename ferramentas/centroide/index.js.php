@@ -3,6 +3,12 @@
 /*
 Title: Centróide
 
+Calcula os centróides dos elementos de um tema e adiciona ao mapa um novo tema com os pontos.
+
+Veja:
+
+<i3GEO.analise.dialogo.centroide>
+
 Arquivo:
 
 i3geo/ferramentas/centroide/index.js.php
@@ -34,8 +40,6 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 /*
 Class: i3GEOF.centroide
-
-Cria e adiciona um novo tema ao mapa contendo o centróide dos elementos de uma outra camada.
 */
 i3GEOF.centroide = {
 	/*
@@ -131,7 +135,11 @@ i3GEOF.centroide = {
 	/*
 	Function: criacentroide
 	
-	Cria a grade e adiciona um novo tema ao mapa
+	Executa a operação de cálculo dos centróides
+	
+	Veja:
+	
+	<CRIACENTROIDE>
 	*/
 	criacentroide: function(){
 		try{
@@ -160,6 +168,10 @@ i3GEOF.centroide = {
 	Function: comboTemasSel
 	
 	Cria um combo com a lista de temas com elementos selecionados
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSel: function(){
 		i3GEO.util.comboTemas(

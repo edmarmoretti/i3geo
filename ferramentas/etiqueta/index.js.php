@@ -4,6 +4,10 @@
 /*
 Title: Etiqueta
 
+Ativa um determinado campo na tabela de atributos para ser utilizado na ferramenta de identificação do tipo "balão".
+
+<i3GEO.tema.dialogo.etiquetas>
+
 Arquivo:
 
 i3geo/ferramentas/etiqueta/index.js.php
@@ -35,9 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.etiqueta
-
-Ativa um determinado campo na tabela de atributos para ser utilizado na ferramenta de identificação.
+Classe: i3GEOF.etiqueta
 */
 i3GEOF.etiqueta = {
 	/*
@@ -190,6 +192,10 @@ i3GEOF.etiqueta = {
 	Function: ativa
 	
 	Ativa a etiqueta com os itens marcados
+	
+	Veja:
+	
+	<ATIVAETIQUETAS>
 	*/
 	ativa: function(){
 		try{
@@ -215,6 +221,10 @@ i3GEOF.etiqueta = {
 	Function: desativa
 	
 	Desativa as etiqueta do tema ativo
+	
+	Veja:
+	
+	<REMOVEETIQUETAS>
 	*/
 	desativa: function(){
 		try{
