@@ -3,6 +3,12 @@
 /*
 Title: Editor de legenda
 
+Define a forma de representação de um tema, modificando o tipo de classificação e os símbolos utilizados em cada classe
+
+Veja:
+
+<i3GEO.tema.dialogo.editaLegenda>
+
 Arquivo:
 
 i3geo/ferramentas/legenda/index.js.php
@@ -30,15 +36,12 @@ Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-
 if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 
 /*
-Class: i3GEOF.legenda
-
-Ativa um determinado campo na tabela de atributos para ser utilizado na ferramenta de identificação.
+Classe: i3GEOF.legenda
 */
 i3GEOF.legenda = {
 	/*
@@ -280,6 +283,10 @@ i3GEOF.legenda = {
 	Function: mostralegenda
 	
 	Pega os dados da legenda do mapa atual e mostra na tela
+	
+	Veja:
+	
+	<EDITALEGENDA>
 	*/
 	mostralegenda: function(){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -374,6 +381,10 @@ i3GEOF.legenda = {
 	Function: mudaLegenda
 	
 	Altera a legenda conforme os valores existentes na tabela de propriedades (expressão e nome da classe)
+	
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	mudaLegenda: function(){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -432,6 +443,10 @@ i3GEOF.legenda = {
 	Function: adicionaConta
 	
 	Adiciona ao nome de cada classe o número de ocorrências em cada uma
+	
+	Veja:
+	
+	<CONTAGEMCLASSE>
 	*/
 	adicionaConta: function(){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -447,6 +462,10 @@ i3GEOF.legenda = {
 	Function: adicionaClasse
 	
 	Adiciona uma nova classe ao tema
+	
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	adicionaClasse: function(){
 		if(i3GEOF.legenda.aguarde.visibility === "visible")
@@ -460,6 +479,10 @@ i3GEOF.legenda = {
 	Function: paleta
 	
 	Gera as cores para as classes considerando um RGB inicial e um final
+	
+	Veja:
+	
+	<ALTERACORESCLASSES>
 	*/
 	paleta: function(){
 		try{
@@ -486,6 +509,10 @@ i3GEOF.legenda = {
 	Function: inverteCores
 	
 	Inverte as cores utilizadas nos símbolos das classes
+	
+	Veja:
+	
+	<INVERTECORESCLASSES>
 	*/
 	inverteCores: function(){
 		try{
@@ -510,6 +537,10 @@ i3GEOF.legenda = {
 	Function: calculaTamanho
 	
 	Muda o símbolo de cada classe aplicando tamanhos diferentes e lineares
+	
+	Veja:
+	
+	<CALCULATAMANHOCLASSES>
 	*/
 	calculaTamanho: function(){
 		try{
@@ -547,6 +578,10 @@ i3GEOF.legenda = {
 	Function: editaSimbolo
 	
 	Abre o editor de símbolos
+	
+	Veja:
+	
+	<EDITASIMBOLO>
 	*/
 	editaSimbolo: function(id){
 		try{
@@ -567,6 +602,10 @@ i3GEOF.legenda = {
 	Function: simbU
 	
 	Altera a leganda do tema para o tipo símbolo único
+	
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	simbU: function(){
 		try{
@@ -590,6 +629,10 @@ i3GEOF.legenda = {
 	Function: valorU
 	
 	Altera a leganda do tema para o tipo valor único
+	
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	valorU: function(){
 		try{
@@ -617,6 +660,10 @@ i3GEOF.legenda = {
 	Function: valorC
 	
 	Altera a leganda do tema com um número específico de classes
+
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	valorC: function(){
 		try{
@@ -644,6 +691,10 @@ i3GEOF.legenda = {
 	Function: valorQ
 	
 	Altera a leganda do tema claculando as classes pelo método quartil
+
+	Veja:
+	
+	<ALTERACLASSE>
 	*/
 	valorQ: function(){
 		try{
@@ -671,6 +722,11 @@ i3GEOF.legenda = {
 	Function: representacao
 	
 	Altera o tipo de representação do tema (linear ou poligonoal)
+	
+	Veja:
+	
+	<ALTERAREPRESENTACAO>
+
 	*/
 	representacao: function(){
 		try{
@@ -853,6 +909,10 @@ i3GEOF.legenda = {
 	Function: aplicaEstilo
 	
 	Aplica ao estilo as propriedades definidas
+	
+	Veja:
+	
+	<EDITASIMBOLO>
 	*/
 	aplicaEstilo: function(){
 		try{
@@ -904,6 +964,10 @@ i3GEOF.legenda = {
 	Function: mostraGrafico
 	
 	Mostra um gráfico com a contegem de elementos em caada classe
+	
+	Veja:
+	
+	<CONTAGEMCLASSE>
 	*/
 	mostraGrafico: function(){
 		try{
@@ -942,8 +1006,8 @@ i3GEOF.legenda = {
 						}}
 					);				
 				},
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=contagemclasse&tema="+i3GEOF.legenda.tema,
-				cp = new cpaint();
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=contagemclasse&tema="+i3GEOF.legenda.tema,
+			cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
 			cp.call(p,"cocontagemclasse",monta);
@@ -964,6 +1028,10 @@ i3GEOF.legenda = {
 	Function: aplicaProcessos
 	
 	Aplica processos de ajuste em imagens de satélite
+	
+	Veja:
+	
+	<APLICAPROCESSOS>
 	*/
 	aplicaProcessos: function(){
 		try{

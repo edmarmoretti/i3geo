@@ -4,6 +4,10 @@
 /*
 Title: Gráfico tema
 
+Inclui gráficos em cada elemento de um tema tendo como fonte a tabela de atributos. É criado um novo tema no mapa com
+os gráficos. Abre uma janela com várias opções e lista de itens para os gráficos.
+O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
+
 Arquivo:
 
 i3geo/ferramentas/graficotema/index.js.php
@@ -35,13 +39,8 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.graficoTema
+Classe: i3GEOF.graficoTema
 
-Inclui gráficos em cada elemento de um tema tendo como fonte a tabela de atributos.
-
-Abre uma janela com várias opções e lista de itens para os gráficos.
-
-O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
 */
 i3GEOF.graficoTema = {
 	/*
@@ -227,6 +226,10 @@ i3GEOF.graficoTema = {
 	Function: criaNovoTema
 	
 	Cria um novo tema que irá conter os gráficos e adiciona ao mapa.
+	
+	Veja:
+	
+	<GRAFICOTEMA>
 	*/
 	criaNovoTema: function(){
 		try{

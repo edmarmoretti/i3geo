@@ -3,6 +3,13 @@
 /*
 Title: Identifica
 
+Obtém os atributos de um ou mais temas para uma coordenada.
+Abre uma janela com várias opções e lista de temas disponíveis no mapa atual.
+
+Veja:
+
+<i3GEO.mapa.dialogo.cliqueIdentificaDefault>
+
 File: i3geo/ferramentas/identifica/index.js.php
 
 About: Licença
@@ -29,13 +36,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.identifica
+Classe: i3GEOF.identifica
 
-Obtém os atributos de um ou mais temas para uma coordenada.
-
-Abre uma janela com várias opções e lista de temas disponíveis no mapa atual.
-
-Essa classe depende da classe i3geo/classesjs/classe_php.php
 */
 i3GEOF.identifica = {
 	/*
@@ -252,6 +254,10 @@ i3GEOF.identifica = {
 	
 	Incluí a lista de temas para o usuário escolher
 	
+	Veja:
+	
+	<i3GEO.php.listaTemas>
+	
 	Parametros:
 	
 	tipo {String} - ligados|todos lista apenas os temas que estão visíveis no mapa ou todos os temas
@@ -412,6 +418,10 @@ i3GEOF.identifica = {
 	Function: buscaDadosTema
 	
 	Obtém os dados de um tema para o ponto de coordenadas clicado no mapa
+	
+	Veja:
+	
+	<i3GEO.php.identifica2>
 	*/	
 	buscaDadosTema: function(tema){
 		var res,opcao,resolucao,listaDeTemas="";

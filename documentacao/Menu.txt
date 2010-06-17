@@ -161,7 +161,7 @@ Group: Ferramentas  {
 
    Group: Imprimir  {
 
-      File: index.js.php  (ferramentas\imprimir\index.js.php)
+      File: Imprimir  (ferramentas\imprimir\index.js.php)
       File: Licença  (ferramentas\imprimir\geotif.php)
       File: Licença  (ferramentas\imprimir\aggpng.php)
       File: Licença  (ferramentas\imprimir\svg.php)
@@ -170,10 +170,11 @@ Group: Ferramentas  {
    File: Insere gráfico interativo  (ferramentas\inseregrafico\index.js.php)
    File: Insere ponto  (ferramentas\inserexy2\index.js.php)
    File: Insere textos  (ferramentas\inseretxt\index.js.php)
+   File: Linha do tempo  (ferramentas\linhadotempo\index.php)
 
    Group: Metar  {
 
-      File: index.js.php  (ferramentas\metar\index.js.php)
+      File: i3GEOF.metar  (ferramentas\metar\index.js.php)
       File: metarextensao  (ferramentas\metar\metarextensao.php)
       File: metarproxima  (ferramentas\metar\metarproxima.php)
       }  # Group: Metar

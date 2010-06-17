@@ -4,6 +4,12 @@
 /*
 Title: Grade de hexágonos
 
+Cria e adiciona um novo tema ao mapa contendo uma grade de hexágonos com espaçamento regular.
+
+Veja:
+
+<i3GEO.analise.dialogo.gradeHex>
+
 Arquivo:
 
 i3geo/ferramentas/gradehex/index.js.php
@@ -35,9 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.gradeDeHex
+Classe: i3GEOF.gradeDeHex
 
-cria e adiciona um novo tema ao mapa contendo uma grade de heságonos com espaçamento regular.
 */
 i3GEOF.gradeDeHex = {
 	/*
@@ -170,6 +175,10 @@ i3GEOF.gradeDeHex = {
 	Function: criaGrade
 	
 	Cria a grade e adiciona um novo tema ao mapa
+	
+	Veja:
+	
+	<GRADEDEHEX>
 	*/
 	criaGrade: function(){
 		try{

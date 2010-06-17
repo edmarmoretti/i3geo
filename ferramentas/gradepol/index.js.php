@@ -4,6 +4,12 @@
 /*
 Title: Grade de polígonos
 
+Cria e adiciona um novo tema ao mapa contendo uma grade de polígonos com espaçamento regular.
+
+Veja:
+
+<i3GEO.analise.dialogo.gradePol>
+
 Arquivo:
 
 i3geo/ferramentas/gradepol/index.js.php
@@ -35,9 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.gradeDePoligonos
+Classe: i3GEOF.gradeDePoligonos
 
-Cria e adiciona um novo tema ao mapa contendo uma grade de polígonos com espaçamento regular.
 */
 i3GEOF.gradeDePoligonos = {
 	/*
@@ -170,6 +175,10 @@ i3GEOF.gradeDePoligonos = {
 	Function: criaGrade
 	
 	Cria a grade e adiciona um novo tema ao mapa
+	
+	Veja:
+	
+	<GRADEDEPOL>
 	*/
 	criaGrade: function(){
 		try{

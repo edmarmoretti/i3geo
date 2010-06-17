@@ -3,6 +3,12 @@
 /*
 Title: Insere textos
 
+Inclui um texto no mapa no ponto clicado pelo usuário
+
+Veja:
+
+<i3GEO.mapa.dialogo.cliqueTexto>
+
 Arquivo:
 
 i3geo/ferramentas/inseretxt/index.js.php
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.inseretxt
-
-Inclui um texto no mapa
+Classe: i3GEOF.inseretxt
 */
 i3GEOF.inseretxt = {
 	/*
@@ -338,6 +342,10 @@ i3GEOF.inseretxt = {
 	Function: cria
 	
 	Cria um tema e insere o texto
+	
+	Veja:
+	
+	<i3GEO.php.identificaunico>
 	*/
 	cria: function(){
 		try{
@@ -376,6 +384,10 @@ i3GEOF.inseretxt = {
 	Function: insere
 	
 	Insere um texto no mapa
+	
+	Veja:
+	
+	<INSEREFEATURE>
 	
 	Parametro:
 	

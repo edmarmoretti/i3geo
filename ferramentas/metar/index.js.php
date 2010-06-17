@@ -1,7 +1,24 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-About: Licença
+/*
+Title: Metar
+
+Busca as estações meteorológicas da rede METAR na extensão geográfica do mapa atual.
+
+Veja:
+
+<metarextensao>
+
+<metarproxima>
+
+Arquivo:
+
+i3geo/ferramentas/metar/index.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
@@ -25,9 +42,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.metar
+Classe: i3GEOF.metar
 
-Busca as estações meteorológicas da rede METAR na extensão geográfica do mapa atual.
 */
 i3GEOF.metar = {
 	/*
@@ -127,7 +143,7 @@ i3GEOF.metar = {
 	/*
 	Function: lista
 	
-	Lista as estações
+	Lista as estações consultando o webservice http://ws.geonames.org/weatherJSON
 	*/
 	lista: function(){
 		$i("i3GEOmetarLista").innerHTML = "";
@@ -175,6 +191,17 @@ i3GEOF.metar = {
 		p = i3GEO.configura.locaplic+"/ferramentas/metar/metarextensao.php?ret="+ext;
 		var request = YAHOO.util.Connect.asyncRequest("GET", p, montaResultado);		
 	},
+	/*
+	Function: mostraxy
+	
+	Indica no mapa a localização de uma estação
+	
+	Parametros:
+	
+	x {Numero} - longitude em dd
+	
+	y {Numero} - latitude em dd
+	*/
 	mostraxy: function(x,y){
 		i3GEO.util.criaBox("boxpin");
 		xy = i3GEO.calculo.dd2tela(x*1,y*1,$i(i3GEO.Interface.IDCORPO),i3GEO.parametros.mapexten,i3GEO.parametros.pixelsize);
@@ -188,6 +215,5 @@ i3GEOF.metar = {
 		box.style.border = "solid 2px red"
 		box.style.zIndex = 5000
 	}
-
 };
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_end_flush();}?>

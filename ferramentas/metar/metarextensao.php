@@ -2,7 +2,7 @@
 /*
 Title: metarextensao
 
-Acessa o Web Service do Geonames que busca estações da rede Metar, retornando o resultado no formato HTML.
+Acessa o Web Service http://ws.geonames.org/weatherJSON do Geonames que busca estações da rede Metar, retornando o resultado no formato HTML.
 
 Licenca:
 

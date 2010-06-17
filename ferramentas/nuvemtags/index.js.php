@@ -4,6 +4,15 @@
 /*
 Title: Nuvem de tags
 
+Mostra uma nuvem de tags baseado nos tags de cada tema, definido no sistema de administração do i3Geo.
+Ao escolher um tag, é feita a busca dos temas que os contém, sendo mostrados na árvore de temas. Opcionalmente, o
+usuário pode escolher um RSS para que seja feito o cruzamento entre os tags encontrados. Dessa forma, são apresentadas as notícias
+referentes aos tags de cada tema.
+
+Veja:
+
+<i3GEO.arvoreDeTemas.dialogo.nuvemTags>
+
 Arquivo:
 
 i3geo/ferramentas/nuvemtags/index.js.php
@@ -35,9 +44,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.nuvemtags
-
-Mostra nuvem de tag localização de temas na árvore de temas
+Classe: i3GEOF.nuvemtags
 */
 i3GEOF.nuvemtags = {
 	/*
@@ -274,6 +281,10 @@ i3GEOF.nuvemtags = {
 	Function: pegaDados
 	
 	Pega a lista de tags existentes
+	
+	Veja:
+	
+	<LISTATAGS>
 	*/
 	pegaDados: function(){
 		var cp = new cpaint(),
@@ -289,6 +300,10 @@ i3GEOF.nuvemtags = {
 	Function: procurar
 	
 	Faz a busca de temas
+	
+	Veja:
+	
+	<i3GEO.arvoreDeTemas.buscaTema>
 	*/
 	procurar: function(texto){
 		i3GEO.arvoreDeTemas.buscaTema(texto);

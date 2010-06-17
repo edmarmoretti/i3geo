@@ -4,6 +4,12 @@
 /*
 Title: Grade de coordenadas
 
+Cria um tema contendo a grade de coordenadas
+
+Veja:
+
+<i3GEO.mapa.dialogo.gradeCoord>
+
 Arquivo:
 
 i3geo/ferramentas/gradecoord/index.js.php
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.gradeCoord
-
-Cria um tema contendo uma grade de coordenadas.
+Classe: i3GEOF.gradeCoord
 */
 i3GEOF.gradeCoord = {
 	/*
@@ -172,6 +176,10 @@ i3GEOF.gradeCoord = {
 	Function: executa
 	
 	Insere a grade no mapa
+	
+	Veja:
+	
+	<GRADECOORD>
 	*/
 	executa: function(){
 		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == ""))

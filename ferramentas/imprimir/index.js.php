@@ -1,6 +1,10 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
+Title: Imprimir
+
+Abre janela de opções para impressão do mapa atual
+
 About: Licença
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
@@ -25,9 +29,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.imprimir
+Classe: i3GEOF.imprimir
 
-Abre janela de opções para impressão do mapa atual
 */
 i3GEOF.imprimir = {
 	/*
@@ -135,7 +138,6 @@ i3GEOF.imprimir = {
 	Abre uma nova janela com o resultado da impressão.
 	*/
 	abreI: function(obj){
-		
 		window.open(i3GEO.configura.locaplic+"/ferramentas/imprimir/"+obj.value+"?g_sid="+i3GEO.configura.sid+"&interface="+i3GEO.Interface.ATUAL+"&mapexten="+i3GEO.parametros.mapexten);
 	}
 };

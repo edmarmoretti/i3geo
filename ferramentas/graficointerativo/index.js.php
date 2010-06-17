@@ -3,6 +3,16 @@
 /*
 Title: Gráfico interativo
 
+Representação gráfica de dados. O gráfico é construído tendo como base os atributos de um tema e é modificado
+conforme o usuário navega pelo mapa. A renderização do gráfico é feito pelo navegador por meio do aplicativo openflashchart.
+Os dados que serão utilizados no gráfico são baseados em um elemento TABLE. Esse elemento pode ser montado com base na tabela
+de atributos e editada pelo usuário. Os dados podem também ser inseridos como parâmetros na inicialização da ferramenta,
+permitindo que o gráfico seja utilizado por outras ferramentas.
+
+Veja:
+
+<i3GEO.analise.dialogo.graficoInterativo>
+
 Arquivo:
 
 i3geo/ferramentas/graficointerativo/index.js.php
@@ -34,9 +44,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.graficointerativo
+Classe: i3GEOF.graficointerativo
 
-Representação gráfica de dados
 */
 i3GEOF.graficointerativo = {
 	/*
@@ -381,6 +390,10 @@ i3GEOF.graficointerativo = {
 	Function: comboItensSel
 	
 	Cria um combo para selecionar os itens do tema escolhido
+	
+	Veja:
+	
+	<i3GEO.util.comboItens>
 	*/
 	comboItensSel: function(){
 		var tema = $i("i3GEOgraficointerativoComboTemasId").value;
@@ -407,6 +420,10 @@ i3GEOF.graficointerativo = {
 	Function: obterDados
 	
 	Obtém os dados que serão utilizados no gráfico
+	
+	Veja:
+	
+	<GRAFICOSELECAO>
 	*/
 	obterDados: function(){
 		if(i3GEOF.graficointerativo.aguarde.visibility === "visible")

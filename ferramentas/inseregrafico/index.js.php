@@ -3,6 +3,14 @@
 /*
 Title: Insere gráfico interativo
 
+Inclui gráficos em elementos indicados pelo usuário tendo como fonte a tabela de atributos de um tema.
+Abre uma janela com várias opções e lista de itens para os gráficos.
+O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
+
+Veja:
+
+<i3GEO.mapa.dialogo.cliqueGrafico>
+
 Arquivo: i3geo/ferramentas/inseregrafico/index.js.php
 
 About: Licença
@@ -29,13 +37,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.insereGrafico
+Classe: i3GEOF.insereGrafico
 
-Inclui gráficos em cada elemento de um tema tendo como fonte a tabela de atributos.
-
-Abre uma janela com várias opções e lista de itens para os gráficos.
-
-O tema que será utilizado é o que estiver armazenado na variável global i3GEO.temaAtivo
 */
 i3GEOF.insereGrafico = {
 	/*
@@ -186,6 +189,10 @@ i3GEOF.insereGrafico = {
 	Insere um grafico no mapa na posição clicada
 
 	O ponto é obtidos do objeto objposicaocursor e os demais parâmetros da janela interna aberta no iframe "wdocai"
+	
+	Veja:
+	
+	<i3GEO.php.insereSHPgrafico>
 	*/
 	insere: function(){
 		if (g_tipoacao === "inseregrafico"){
@@ -216,6 +223,10 @@ i3GEOF.insereGrafico = {
 	Function: comboTemas
 	
 	Cria o combo com os temas disponíveis (temas ligados) para adição dos gráficos.
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemas: function(){
 		i3GEO.util.comboTemas(

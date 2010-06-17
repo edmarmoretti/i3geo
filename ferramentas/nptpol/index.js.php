@@ -3,6 +3,12 @@
 /*
 Title: Número de pontos em polígonos
 
+Calcula quantos pontos existem em cada polígono cruzando dois temas.
+
+Veja:
+
+<i3GEO.analise.nptPol>
+
 Arquivo:
 
 i3geo/ferramentas/nptpol/index.js.php
@@ -33,9 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.nptpol
-
-Calcula quantos pontos existeme em cada polígonos cruzando-se dois temas.
+Classe: i3GEOF.nptpol
 */
 i3GEOF.nptpol = {
 	/*
@@ -136,6 +140,10 @@ i3GEOF.nptpol = {
 	Function: calcula
 	
 	Faz o cruzamento entre os temas
+	
+	Veja:
+	
+	<NPTPOL>
 	*/
 	calcula: function(){
 		try{
@@ -162,6 +170,10 @@ i3GEOF.nptpol = {
 	Function: comboTemasPontos
 	
 	Cria um combo com a lista de temas pontuais
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasPontos: function(){
 		i3GEO.util.comboTemas(
@@ -188,6 +200,10 @@ i3GEOF.nptpol = {
 	Function: comboTemasPoligonos
 	
 	Cria um combo com a lista de temas poligonais
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasPoligonos: function(){
 		i3GEO.util.comboTemas(

@@ -4,6 +4,12 @@
 /*
 Title: Mostra extensão
 
+Mostra a extensão geográfica atual do mapa permitindo também alterá-la digitando-se os valores de lat e long
+
+Veja:
+
+<i3GEO.configura>
+
 Arquivo:
 
 i3geo/ferramentas/mostraexten/index.js.php
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.mostraExten
-
-Mostra a extensão geográfica atual do mapa
+Classe: i3GEOF.mostraExten
 */
 i3GEOF.mostraExten = {
 	/*
@@ -160,7 +164,11 @@ i3GEOF.mostraExten = {
 	/*
 	Function: executa
 	
-	Altera a legenda
+	Altera a extensão atual
+	
+	Veja:
+	
+	<i3GEO.navega.zoomExt>
 	*/
 	executa: function(){
 		try{

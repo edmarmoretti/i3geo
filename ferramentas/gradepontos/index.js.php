@@ -4,6 +4,12 @@
 /*
 Title: Grade de pontos
 
+Cria e adiciona um novo tema ao mapa contendo uma grade de pontos com espaçamento regular.
+
+Veja:
+
+<i3GEO.analise.dialogo.gradePontos>
+
 Arquivo:
 
 i3geo/ferramentas/gradepontos/index.js.php
@@ -35,9 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.gradeDePontos
+Classe: i3GEOF.gradeDePontos
 
-cria e adiciona um novo tema ao mapa contendo uma grade de pontos com espaçamento regular.
 */
 i3GEOF.gradeDePontos = {
 	/*
@@ -170,6 +175,10 @@ i3GEOF.gradeDePontos = {
 	Function: criaGrade
 	
 	Cria a grade e adiciona um novo tema ao mapa
+	
+	Veja:
+	
+	<GRADEDEPONTOS>
 	*/
 	criaGrade: function(){
 		try{

@@ -4,6 +4,12 @@
 /*
 Title: Insere ponto
 
+Inclui pontos no mapa no local clicado pelo usuário
+
+Veja:
+
+<i3GEO.mapa.dialogo.cliquePonto>
+
 Arquivo:
 
 i3geo/ferramentas/inserexy2/index.js.php
@@ -35,9 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.inserexy
+Classe: i3GEOF.inserexy
 
-Inclui pontos no mapa
 */
 i3GEOF.inserexy = {
 	/*
@@ -302,7 +307,11 @@ i3GEOF.inserexy = {
 	/*
 	Function: montaComboLocal
 	
-	Monta o combo com a lista de temas que podem ser editados
+	Monta o combo com a lista de temas que podem ser editados (temas armazenados no diretório temporário do i3Geo)
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	montaComboLocal: function(){
 		i3GEO.util.comboTemas(
@@ -331,6 +340,10 @@ i3GEOF.inserexy = {
 	Function: criatemaeditavel
 	
 	Cria um novo tema local para receber os pontos
+	
+	Veja:
+	
+	<CRIASHPVAZIO>
 	*/
 	criatemaeditavel: function(){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
@@ -364,6 +377,10 @@ i3GEOF.inserexy = {
 	Function: listaPontos
 	
 	Lista os pontos existentes no tema escolhido
+	
+	Veja:
+	
+	<LISTAPONTOSSHAPE>
 	*/
 	listaPontos: function(){
 		var cp,p,temp;
@@ -386,6 +403,10 @@ i3GEOF.inserexy = {
 	Function: listaItens
 	
 	Lista os itens do tema escolhido para receber os pontos
+	
+	Veja:
+	
+	<i3GEO.util.comboItens>
 	*/
 	listaItens: function(){
 		i3GEO.util.comboItens(
@@ -520,6 +541,10 @@ i3GEOF.inserexy = {
 	Function: adiciona
 	
 	Adiciona um ponto no mapa
+	
+	Veja:
+	
+	<i3GEO.php.insereSHP>
 	*/
 	adiciona: function(xy){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
@@ -563,6 +588,10 @@ i3GEOF.inserexy = {
 	Function: criaLin
 	
 	Converte os pontos de um tema em linhas
+	
+	Veja:
+	
+	<SPHPT2SHP>
 	*/
 	criaLin: function(){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
@@ -581,6 +610,10 @@ i3GEOF.inserexy = {
 	Function: criaPol
 	
 	Converte os pontos de um tema em poligonos
+	
+	Veja:
+	
+	<SPHPT2SHP>
 	*/
 	criaPol: function(){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
@@ -599,6 +632,10 @@ i3GEOF.inserexy = {
 	Function: wkt
 	
 	Converte os pontos em WKT
+	
+	Veja:
+	
+	<MOSTRAWKT>
 	*/
 	wkt: function(){
 		if(i3GEOF.inserexy.aguarde.visibility === "visible")
