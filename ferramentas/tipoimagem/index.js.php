@@ -3,6 +3,12 @@
 /*
 Title: Opções de filtro de imagem
 
+Abre janela de opções para definição do tipo de filtro de imagem que será aplicado ao mapa. 
+
+Veja:
+
+<i3GEO.mapa.dialogo.tipoimagem>
+
 Arquivo:
 
 i3geo/ferramentas/tipoimagem/index.js.php
@@ -33,9 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.tipoimagem
-
-Abre janela de opções para definição do tipo de filtro de imagem que será aplicado ao mapa. 
+Classe: i3GEOF.tipoimagem
 */
 i3GEOF.tipoimagem = {
 	/*

@@ -120,89 +120,107 @@ Group: API PHP  {
 
 Group: Ferramentas  {
 
-   File: 3d  (ferramentas\3d\index.js.php)
-   File: Agrupa elementos  (ferramentas\agrupaelementos\index.js.php)
-   File: Análise de Geometrias  (ferramentas\analisageometrias\index.js.php)
-   File: Auto redesenho  (ferramentas\opcoes_autoredesenha\index.js.php)
-   File: Buffer  (ferramentas\buffer\index.js.php)
-   File: Busca de dados nos atributos de um tema  (ferramentas\busca\index.js.php)
-   File: Busca fotos  (ferramentas\buscafotos\index.js.php)
-   File: Busca rápida  (ferramentas\buscarapida\index.js)
-   File: Carrega mapa salvo  (ferramentas\carregamapa\index.js.php)
-   File: Carrosel de temas  (ferramentas\carouseltemas\index.js.php)
-   File: Centróide  (ferramentas\centroide\index.js.php)
-   File: Conexão com georss  (ferramentas\conectargeorss\index.js)
-   File: Conexão com WMS  (ferramentas\conectarwms\index.js)
-   File: Confluencias  (ferramentas\confluence\index.js.php)
-   File: Converte um mapa em kml  (ferramentas\convertemapakml\index.js.php)
-   File: Converte um mapa em WMS  (ferramentas\convertews\index.js.php)
-   File: Converte um tema em kml  (ferramentas\convertekml\index.js.php)
-   File: Cortina  (ferramentas\cortina\index.js.php)
-   File: Dissolve elementos de um tema  (ferramentas\dissolve\index.js.php)
-   File: Distância entre pontos  (ferramentas\distanciaptpt\index.js.php)
-   File: Distribuição de pontos  (ferramentas\pontosdistri\index.js.php)
-   File: Download de um tema  (ferramentas\download\index.js.php)
-   File: Editor de legenda  (ferramentas\legenda\index.js.php)
-   File: Editor de SQL  (ferramentas\editorsql\index.js.php)
-   File: Espécies  (ferramentas\especies\pesquisa.php)
-   File: especies\pesquisa.htm  (ferramentas\especies\pesquisa.htm)
-   File: Etiqueta  (ferramentas\etiqueta\index.js.php)
-   File: Filtra tema  (ferramentas\filtro\index.js.php)
+   Group: Análise  {
+
+      File: 3d  (ferramentas\3d\index.js.php)
+      File: Agrupa elementos  (ferramentas\agrupaelementos\index.js.php)
+      File: Análise de Geometrias  (ferramentas\analisageometrias\index.js.php)
+      File: Buffer  (ferramentas\buffer\index.js.php)
+      File: Centróide  (ferramentas\centroide\index.js.php)
+      File: Dissolve elementos de um tema  (ferramentas\dissolve\index.js.php)
+      File: Distância entre pontos  (ferramentas\distanciaptpt\index.js.php)
+      File: Distribuição de pontos  (ferramentas\pontosdistri\index.js.php)
+      File: Gráfico interativo  (ferramentas\graficointerativo\index.js.php)
+      File: Número de pontos em polígonos  (ferramentas\nptpol\index.js.php)
+      File: Ponto em polígono  (ferramentas\pontoempoligono\index.js.php)
+      File: Seleção  (ferramentas\selecao\index.js.php)
+      }  # Group: Análise
+
+   Group: Adição de dados  {
+
+      File: Carrosel de temas  (ferramentas\carouseltemas\index.js.php)
+      File: Conexão com georss  (ferramentas\conectargeorss\index.js)
+      File: Conexão com WMS  (ferramentas\conectarwms\index.js)
+      File: GPX  (ferramentas\uploadgpx\index.js.php)
+      File: Grade de coordenadas  (ferramentas\gradecoord\index.js.php)
+      File: Grade de hexágonos  (ferramentas\gradehex\index.js.php)
+      File: Grade de polígonos  (ferramentas\gradepol\index.js.php)
+      File: Grade de pontos  (ferramentas\gradepontos\index.js.php)
+      File: Insere gráfico interativo  (ferramentas\inseregrafico\index.js.php)
+      File: Insere ponto  (ferramentas\inserexy2\index.js.php)
+      File: Insere textos  (ferramentas\inseretxt\index.js.php)
+      File: Linha do tempo  (ferramentas\linhadotempo\index.php)
+      File: Nuvem de tags  (ferramentas\nuvemtags\index.js.php)
+      File: Upload de arquivo dbf  (ferramentas\uploaddbf\index.js.php)
+      File: Upload de arquivo shapefile  (ferramentas\upload\index.js.php)
+      File: WMS Time  (ferramentas\wmstime\index.js)
+      }  # Group: Adição de dados
+
+   Group: Consulta e navegação  {
+
+      File: Busca de dados nos atributos de um tema  (ferramentas\busca\index.js.php)
+      File: Busca fotos  (ferramentas\buscafotos\index.js.php)
+      File: Busca rápida  (ferramentas\buscarapida\index.js)
+      File: Confluencias  (ferramentas\confluence\index.js.php)
+      File: Espécies &lparen;JavaScript&rparen;  (ferramentas\especies\pesquisa.htm)
+      File: Espécies &lparen;PHP&rparen;  (ferramentas\especies\pesquisa.php)
+      File: Google Maps  (ferramentas\googlemaps\index.php)
+      File: Identifica  (ferramentas\identifica\index.js.php)
+
+      Group: Metar  {
+
+         File: i3GEOF.metar  (ferramentas\metar\index.js.php)
+         File: metarextensao  (ferramentas\metar\metarextensao.php)
+         File: metarproxima  (ferramentas\metar\metarproxima.php)
+         }  # Group: Metar
+
+      File: Mostra extensão  (ferramentas\mostraexten\index.js.php)
+      File: SIBEA-MMA &lparen;JavaScript&rparen;  (ferramentas\sibea\pesquisa.htm)
+      File: SIBEA-MMA &lparen;PHP&rparen;  (ferramentas\sibea\pesquisa.php)
+      File: Wikipédia  (ferramentas\wiki\index.js.php)
+      }  # Group: Consulta e navegação
+
+   Group: Mapa  {
+
+      File: Auto redesenho  (ferramentas\opcoes_autoredesenha\index.js.php)
+      File: Barra de escala  (ferramentas\opcoes_escala\index.js.php)
+      File: Carrega mapa salvo  (ferramentas\carregamapa\index.js.php)
+      File: Converte um mapa em kml  (ferramentas\convertemapakml\index.js.php)
+      File: Converte um mapa em WMS  (ferramentas\convertews\index.js.php)
+      File: Cor da seleção  (ferramentas\opcoes_querymap\index.js.php)
+      File: Cor do fundo do mapa  (ferramentas\opcoes_fundo\index.js.php)
+      File: Cortina  (ferramentas\cortina\index.js.php)
+      File: Formato de imagem  (ferramentas\outputformat\index.js.php)
+      File: Legenda gráfica do mapa  (ferramentas\opcoes_legenda\index.js.php)
+
+      Group: Imprimir  {
+
+         File: Imprimir  (ferramentas\imprimir\index.js.php)
+         File: Licença  (ferramentas\imprimir\geotif.php)
+         File: Licença  (ferramentas\imprimir\aggpng.php)
+         File: Licença  (ferramentas\imprimir\svg.php)
+         }  # Group: Imprimir
+
+      File: Opções de filtro de imagem  (ferramentas\tipoimagem\index.js.php)
+      File: Quadros de animação  (ferramentas\opcoes_quadros\index.js.php)
+      File: Salva mapa  (ferramentas\salvamapa\index.js.php)
+      File: Tamanho do mapa  (ferramentas\opcoes_tamanho\index.js.php)
+      }  # Group: Mapa
+
+   Group: Tema  {
+
+      File: Converte um tema em kml  (ferramentas\convertekml\index.js.php)
+      File: Download de um tema  (ferramentas\download\index.js.php)
+      File: Editor de legenda  (ferramentas\legenda\index.js.php)
+      File: Editor de SQL  (ferramentas\editorsql\index.js.php)
+      File: Etiqueta  (ferramentas\etiqueta\index.js.php)
+      File: Filtra tema  (ferramentas\filtro\index.js.php)
+      File: Gráfico tema  (ferramentas\graficotema\index.js.php)
+      File: Tabela de atributos  (ferramentas\tabela\index.js.php)
+      File: Toponímia de um tema  (ferramentas\toponimia\index.js.php)
+      }  # Group: Tema
+
    File: Funções gerais  (ferramentas\funcoes.js)
-   File: Google Maps  (ferramentas\googlemaps\index.php)
-   File: GPX  (ferramentas\uploadgpx\index.js.php)
-   File: Gráfico interativo  (ferramentas\graficointerativo\index.js.php)
-   File: Gráfico tema  (ferramentas\graficotema\index.js.php)
-   File: Grade de coordenadas  (ferramentas\gradecoord\index.js.php)
-   File: Grade de hexágonos  (ferramentas\gradehex\index.js.php)
-   File: Grade de polígonos  (ferramentas\gradepol\index.js.php)
-   File: Grade de pontos  (ferramentas\gradepontos\index.js.php)
-   File: Identifica  (ferramentas\identifica\index.js.php)
-
-   Group: Imprimir  {
-
-      File: Imprimir  (ferramentas\imprimir\index.js.php)
-      File: Licença  (ferramentas\imprimir\geotif.php)
-      File: Licença  (ferramentas\imprimir\aggpng.php)
-      File: Licença  (ferramentas\imprimir\svg.php)
-      }  # Group: Imprimir
-
-   File: Insere gráfico interativo  (ferramentas\inseregrafico\index.js.php)
-   File: Insere ponto  (ferramentas\inserexy2\index.js.php)
-   File: Insere textos  (ferramentas\inseretxt\index.js.php)
-   File: Linha do tempo  (ferramentas\linhadotempo\index.php)
-
-   Group: Metar  {
-
-      File: i3GEOF.metar  (ferramentas\metar\index.js.php)
-      File: metarextensao  (ferramentas\metar\metarextensao.php)
-      File: metarproxima  (ferramentas\metar\metarproxima.php)
-      }  # Group: Metar
-
-   File: Mostra extensão  (ferramentas\mostraexten\index.js.php)
-   File: Nuvem de tags  (ferramentas\nuvemtags\index.js.php)
-   File: Número de pontos em polígonos  (ferramentas\nptpol\index.js.php)
-   File: Opções da barra de escala  (ferramentas\opcoes_escala\index.js.php)
-   File: Opções da legenda  (ferramentas\opcoes_legenda\index.js.php)
-   File: Opções de cor da seleção  (ferramentas\opcoes_querymap\index.js.php)
-   File: Opções de filtro de imagem  (ferramentas\tipoimagem\index.js.php)
-   File: Opções de formato de imagem  (ferramentas\outputformat\index.js.php)
-   File: Opções de tamanho do mapa  (ferramentas\opcoes_tamanho\index.js.php)
-   File: Opções do fundo do mapa  (ferramentas\opcoes_fundo\index.js.php)
-   File: Opções quadros  (ferramentas\opcoes_quadros\index.js.php)
-   File: Planos de manejo do IBAMA.  (ferramentas\planosmanejoflorestal\pesquisa.php)
-   File: planosmanejoflorestal\pesquisa.htm  (ferramentas\planosmanejoflorestal\pesquisa.htm)
-   File: Ponto em polígono  (ferramentas\pontoempoligono\index.js.php)
-   File: Salva mapa  (ferramentas\salvamapa\index.js.php)
-   File: Seleção  (ferramentas\selecao\index.js.php)
-   File: SIBEA-MMA.  (ferramentas\sibea\pesquisa.php)
-   File: sibea\pesquisa.htm  (ferramentas\sibea\pesquisa.htm)
-   File: Tabela de atributos  (ferramentas\tabela\index.js.php)
-   File: Toponímia de um tema  (ferramentas\toponimia\index.js.php)
-   File: Upload de arquivo dbf  (ferramentas\uploaddbf\index.js.php)
-   File: Upload de arquivo shapefile  (ferramentas\upload\index.js.php)
-   File: Wikipédia  (ferramentas\wiki\index.js.php)
-   File: WMS Time  (ferramentas\wmstime\index.js)
    }  # Group: Ferramentas
 
 Group: Redirecionadores  {
@@ -278,6 +296,5 @@ Group: Index  {
    Function Index: Functions
    Arquivo Index: Arquivos
    Classe Index: Classe
-   File Index: Files
    }  # Group: Index
 

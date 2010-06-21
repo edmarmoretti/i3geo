@@ -1,8 +1,15 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
-
 /*
 Title: Auto redesenho
+
+Inicia ou altera o temporizador de redesenho do mapa.
+
+Ao ativar o temporizador, é mostrado um contador de tempo no mapa. Após o tempo decorrido, o mapa é redesenhado.
+
+Veja:
+
+<i3GEO.mapa.dialogo.autoredesenha>
 
 Arquivo:
 
@@ -34,9 +41,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesTempo
-
-Inicia ou altera o temporizador de redesenho do mapa.
+Classe: i3GEOF.opcoesTempo
 */
 i3GEOF.opcoesTempo = {
 	/*
@@ -122,7 +127,7 @@ i3GEOF.opcoesTempo = {
 	/*
 	Function: executa
 	
-	Altera a legenda
+	Ativa ou desativa o temporizador. Se o valor de tempo for igual a 0, o temporizador é desativado.
 	*/
 	executa: function(){
 		i3GEO.navega.autoRedesenho.desativa();

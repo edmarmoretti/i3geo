@@ -1,6 +1,13 @@
 /*
 Title: WMS Time
 
+Acessa um serviço WMS-T, baseado em uma lista pré-definida, e monta as imagens em uma sequência temporal.
+As imagens podem ser apresentadas em sequência, simulando uma animação.
+
+Veja:
+
+<i3GEO.arvoreDeTemas.conectarwmst>
+
 Arquivo:
 
 i3geo/ferramentas/wmstime/index.js.php
@@ -173,7 +180,15 @@ ins += "</div>"
 $i("parametros").innerHTML = ins
 
 //new YAHOO.widget.Button("botao1");
+/*
+Function: escolheuServico
 
+Monta a tela de parâmetros após um serviço ter sido escolhido
+
+Parametro:
+
+idWMS {String} - id do serviço escolhido
+*/
 function escolheuServico(idWMS){
 	tipoServico = wms_configura[idWMS].tipo
 	servico = wms_configura[idWMS].servico+"&VERSION=1.1.1&REQUEST=GetMap&layers="+wms_configura[idWMS].layers+"&styles="+wms_configura[idWMS].styles+"&srs="+wms_configura[idWMS].srs+"&format="+wms_configura[idWMS].format
@@ -205,6 +220,11 @@ function escolheuServico(idWMS){
 	}
 	$i("umaImagemPor").innerHTML = ins;
 }
+/*
+Function: iniciaImagens
+
+Inicia a tela de apresentação das imagens
+*/
 function iniciaImagens(){
 	$i("imagens").innerHTML = "";
 	$i("imagensLidas").innerHTML = "";
@@ -295,6 +315,17 @@ function iniciaImagens(){
 		}
 	}
 }
+/*
+function: criaImg
+
+Cria um elemento do tipo IMG com base no serviço escolhido e nos parâmetros de tempo
+
+Parametros:
+
+tempo {string} - data da imagem que será requisitada
+
+id {string} - id que será definido para a imagem
+*/
 function criaImg(tempo,id){
 	var novoel = document.createElement("img");
 	var p = "absolute"
@@ -315,6 +346,17 @@ function criaImg(tempo,id){
 	}
 	onde.appendChild(novoel);
 }
+/*
+Function: criaImgStatus
+
+Cria um ícone que permite parar a apresentação da animação em uma determinada imagem
+
+Parametros:
+
+tempo {string} - data da imagem
+
+id {string} - id da imagem
+*/
 function criaImgStatus(tempo,id){
 	var novoel = document.createElement("div");
 	novoel.id = "lida"+id;
@@ -322,6 +364,15 @@ function criaImgStatus(tempo,id){
 	novoel.innerHTML = "Imagem: "+tempo+"...<span style=cursor:pointer;color:blue onclick='pararImagem(\""+id+"\")' id='status"+id+"' >parar</span>"
 	ondeContador.appendChild(novoel);
 }
+/*
+Function: pararImagem
+
+Parar a apresentação da animação em uma determinada imagem
+
+Parametro:
+
+id {string} - id da imagem
+*/
 function pararImagem(id){
 	if($i(id)){
 		$i(id).src = "";
@@ -335,6 +386,11 @@ function pararImagem(id){
 	else
 	{alert("Imagem excluída")}
 }
+/*
+Function: pararStatus
+
+Para o gráfico que mostra o status das imagens
+*/
 function pararStatus(){
 	ondeContador.style.display = "none"
 	ondeControle.style.display="block"
@@ -351,6 +407,12 @@ function pararStatus(){
 function ajustaIds(){
 
 }
+/*
+Function: criaMarcadorTempo
+
+Cria o gráfico que mostra as imagens disponíveis. Serve de base para indicar qual imagem está sendo mostrada
+*/
+*/
 function criaMarcadorTempo(){
 	var nmarcas = ids.length
 	distanciaMarcas = parseInt(dw / nmarcas)
@@ -370,6 +432,15 @@ function criaMarcadorTempo(){
 	pararFilme()
 	iniciarFilme()
 }
+/*
+Function: mostraI
+
+Mostra uma imagem específica
+
+Parametro:
+
+obj {dom} - objeto contendo a imagem
+*/
 function mostraI(obj){
 	$i(obj).style.display="block";
 	ondeData.innerHTML = "YYMMDD: "+idsTempo[obj-1]
@@ -378,6 +449,15 @@ function mostraI(obj){
 	else
 	$i("1").style.display = "none"
 }
+/*
+Function: escondeI
+
+Esconde uma imagem
+
+Parametro:
+
+obj {dom} - objeto contendo a imagem
+*/
 function escondeI(obj){
 	$i(obj).style.display="none";
 	ondeData.innerHTML = ""
@@ -386,6 +466,12 @@ function escondeI(obj){
 	else
 	$i("1").style.display = "block"
 }
+/*
+Function: adicionaMapa
+
+Adiciona uma camada ao mapa baseado na imagem vista na tela
+
+*/
 function adicionaMapa(obj){
 	aguarde("block")
 	var serv = wms_configura[obj-1]
@@ -485,4 +571,3 @@ function maisrapido(){
 function maislento(){
 	tempoGranulo = tempoGranulo + 10
 }
-

@@ -1,7 +1,13 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Opções de formato de imagem
+Title: Formato de imagem
+
+Define qual o formato de imagem será utilizado escolhendo o OUTPUTFORMAT existente no mapfile atual
+
+Veja:
+
+<i3GEO.mapa.dialogo.outputformat>
 
 Arquivo:
 
@@ -33,9 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.outputformat
-
-Abre janela de opções para escolha do formato de imagem utilizada na geração do mapa
+Classe: i3GEOF.outputformat
 */
 i3GEOF.outputformat = {
 	/*
@@ -126,7 +130,11 @@ i3GEOF.outputformat = {
 	/*
 	Function: aplicar
 	
-	Aplica o filtro de imagem escolhido
+	Aplica tipo de imagem
+	
+	Veja:
+	
+	<mudaOutputFormat>
 	*/
 	aplicar: function(tipo){
 		if(i3GEOF.outputformat.aguarde.visibility === "visible")

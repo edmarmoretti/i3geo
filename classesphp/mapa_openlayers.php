@@ -105,6 +105,8 @@ if($_GET["layer"] == "")
 {$cache = true;}
 if($_GET == false)
 {$cache = false;}
+if($_GET["DESLIGACACHE"] == "sim")
+{$cache = false;}
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
 

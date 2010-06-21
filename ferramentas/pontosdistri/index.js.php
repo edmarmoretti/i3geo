@@ -3,6 +3,13 @@
 /*
 Title: Distribuição de pontos
 
+Adiciona um novo tema ao mapa em função da análise de distribuição de pontos.
+O tema com os pontos deve existir no mapa atual.
+
+Veja:
+
+<i3GEO.analise.dialogo.pontosdistri>
+
 Arquivo: i3geo/ferramentas/pontosdistri/index.js.php
 
 About: Licença
@@ -29,11 +36,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.pontosDistri
-
-Adiciona um novo tema ao mapa em função da análise de distribuição de pontos.
-
-O tema com os pontos deve existir no mapa atual.
+Classe: i3GEOF.pontosDistri
 */
 i3GEOF.pontosDistri = {
 	/*
@@ -228,6 +231,10 @@ i3GEOF.pontosDistri = {
 	Function: verCores
 	
 	Mostra as cores definidas nos intervalos de definição da paleta
+	
+	Veja:
+	
+	<VERPALETA>
 	*/
 	verCores: function(){
 		try{
@@ -256,7 +263,11 @@ i3GEOF.pontosDistri = {
 	/*
 	Function: analiseDistancia
 	
-	Executa a análise de distância
+	Executa a análise de distribuição de pontos
+	
+	Veja:
+	
+	<ANALISEDISTRIPT>
 	*/
 	analiseDistancia: function(){
 		if(!$i("i3GEOpontosDistritemasComSel"))
@@ -289,6 +300,10 @@ i3GEOF.pontosDistri = {
 	Function: analiseDensidade
 	
 	Executa a análise de densidade
+	
+	Veja:
+	
+	<ANALISEDISTRIPT>
 	*/
 	analiseDensidade: function(){
 		if(!$i("i3GEOpontosDistritemasComSel"))
@@ -321,6 +336,10 @@ i3GEOF.pontosDistri = {
 	Function: analiseKernel
 	
 	Executa a análise de kernel
+
+	Veja:
+	
+	<ANALISEDISTRIPT>
 	*/
 	analiseKernel: function(){
 		if(!$i("i3GEOpontosDistritemasComSel"))
@@ -353,6 +372,11 @@ i3GEOF.pontosDistri = {
 	Function: analiseDeldir
 	
 	Executa a análise de triangulação
+
+	Veja:
+	
+	<ANALISEDISTRIPT>
+
 	*/
 	analiseDeldir: function(){
 		if(!$i("i3GEOpontosDistritemasComSel"))
@@ -382,6 +406,11 @@ i3GEOF.pontosDistri = {
 	Function: analiseRelatorio
 	
 	Abre o relatório de análise
+
+	Veja:
+	
+	<ANALISEDISTRIPT>
+
 	*/
 	analiseRelatorio: function(){
 		if(!$i("i3GEOpontosDistritemasComSel"))

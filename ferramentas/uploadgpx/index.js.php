@@ -3,6 +3,12 @@
 /*
 Title: GPX
 
+Envia para o servidor um arquivo no formato GPX local e insere como novas camadas no mapa.
+
+Veja:
+
+<i3GEO.arvoreDeTemas.dialogo.uploadgpx>
+
 Arquivo:
 
 i3geo/ferramentas/uploadgpx/index.js.php
@@ -35,9 +41,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.uploadgpx
-
-Envia para o servidor um arquivo shapefile local e insere como uma camada no mapa.
+Classe: i3GEOF.uploadgpx
 */
 i3GEOF.uploadgpx = {
 	/*
@@ -122,6 +126,11 @@ i3GEOF.uploadgpx = {
 		i3GEOF.uploadgpx.aguarde = $i("i3GEOF.uploadgpx_imagemCabecalho").style;
 		i3GEOF.uploadgpx.inicia(divid);
 	},
+	/*
+	Function: submete
+	
+	Submete o arquivo ao servidor.
+	*/
 	submete: function(){
 		if(i3GEOF.uploadgpx.aguarde.visibility==="visible")
 		{return;}

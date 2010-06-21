@@ -3,6 +3,12 @@
 /*
 Title: Upload de arquivo shapefile
 
+Envia para o servidor um arquivo shapefile local e insere como uma camada no mapa.
+
+Veja:
+
+<i3GEO.arvoreDeTemas.dialogo.upload>
+
 Arquivo: i3geo/ferramentas/upload/index.js.php
 
 About: Licença
@@ -29,9 +35,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.upload
-
-Envia para o servidor um arquivo shapefile local e insere como uma camada no mapa.
+Classe: i3GEOF.upload
 */
 i3GEOF.upload = {
 	/*
@@ -118,6 +122,11 @@ i3GEOF.upload = {
 		i3GEOF.upload.aguarde = $i("i3GEOF.upload_imagemCabecalho").style;
 		i3GEOF.upload.inicia(divid);
 	},
+	/*
+	Function: submete
+	
+	Submete o arquivo ao servidor
+	*/
 	submete: function(){
 		if(i3GEOF.upload.aguarde.visibility==="visible")
 		{return;}

@@ -508,7 +508,7 @@ i3GEO.mapa = {
 		*/
 		corFundo: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.dialogo.corFundo()");}
-			if(typeof(i3GEOF.gradeCoord) === 'undefined'){
+			if(typeof(i3GEOF.opcoesFundo) === 'undefined'){
 				var js = i3GEO.configura.locaplic+"/ferramentas/opcoes_fundo/index.js.php";
 				i3GEO.util.scriptTag(js,"i3GEOF.opcoesFundo.criaJanelaFlutuante()","i3GEOF.opcoesFundo_script");
 			}

@@ -46,33 +46,7 @@
 <script language="JavaScript" type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../pacotes/wpcumulus/swfobject.js"></script>
 <script>
-YAHOO.example.linksRSS = [ 
-	    "http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
-	    "http://www.estadao.com.br/rss/ultimas.xml",
-	    "http://www.estadao.com.br/rss/vidae.xml",
-	    "http://feeds.folha.uol.com.br/folha/emcimadahora/rss091.xml"
-	];
-	
-	YAHOO.example.ACJSArray = new function() {
-    // Instantiate first JS Array DataSource
-    this.oACDS = new YAHOO.widget.DS_JSArray(YAHOO.example.linksRSS);
-
-    // Instantiate first AutoComplete
-    this.oAutoComp = new YAHOO.widget.AutoComplete('texto','textocontainer', this.oACDS);
-    this.oAutoComp.prehighlightClassName = "yui-ac-prehighlight";
-    this.oAutoComp.typeAhead = true;
-    this.oAutoComp.useShadow = true;
-    this.oAutoComp.minQueryLength = 0;
-    this.oAutoComp.textboxFocusEvent.subscribe(function(){
-        var sInputValue = YAHOO.util.Dom.get('texto').value;
-        if(sInputValue.length === 0) {
-            var oSelf = this;
-            setTimeout(function(){oSelf.sendQuery(sInputValue);},0);
-        }
-    });
-};
-
-	
+iniciaNuvem()
 </script>
 </body>
 </html>

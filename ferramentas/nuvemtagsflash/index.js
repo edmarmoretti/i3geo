@@ -1,25 +1,53 @@
 //inicializa
-YAHOO.example.init = function ()
-{
-	function onPushButtonsMarkupReady()
+function iniciaNuvem(){
+	YAHOO.example.linksRSS = [ 
+			"http://www.mma.gov.br/webservice/noticias/rss_noticias.php", 
+			"http://www.estadao.com.br/rss/ultimas.xml",
+			"http://www.estadao.com.br/rss/vidae.xml",
+			"http://feeds.folha.uol.com.br/folha/emcimadahora/rss091.xml"
+		];
+		
+		YAHOO.example.ACJSArray = new function() {
+		// Instantiate first JS Array DataSource
+		this.oACDS = new YAHOO.widget.DS_JSArray(YAHOO.example.linksRSS);
+
+		// Instantiate first AutoComplete
+		this.oAutoComp = new YAHOO.widget.AutoComplete('texto','textocontainer', this.oACDS);
+		this.oAutoComp.prehighlightClassName = "yui-ac-prehighlight";
+		this.oAutoComp.typeAhead = true;
+		this.oAutoComp.useShadow = true;
+		this.oAutoComp.minQueryLength = 0;
+		this.oAutoComp.textboxFocusEvent.subscribe(function(){
+			var sInputValue = YAHOO.util.Dom.get('texto').value;
+			if(sInputValue.length === 0) {
+				var oSelf = this;
+				setTimeout(function(){oSelf.sendQuery(sInputValue);},0);
+			}
+		});
+	};
+
+	YAHOO.example.init = function ()
 	{
-		botao1 = new YAHOO.widget.Button("botao1");
-		botao1.on("click", buscarss);
-	}
-   	YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-   	
-   	
-}()	
-aguarde("block")
-parametrosURL()
-inicio = 0;
-var tagsFlash;
-var palavra = "";
-var temp = (window.location.href).split("palavra=");
-if (temp[1])
-{palavra = (temp[1].split("&"))[0];}
-if(palavra != "")
-procurar(palavra)
+		function onPushButtonsMarkupReady()
+		{
+			botao1 = new YAHOO.widget.Button("botao1");
+			botao1.on("click", buscarss);
+		}
+		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
+		
+		
+	}()	
+	aguarde("block")
+	parametrosURL()
+	inicio = 0;
+	tagsFlash;
+	palavra = "";
+	var temp = (window.location.href).split("palavra=");
+	if (temp[1])
+	{palavra = (temp[1].split("&"))[0];}
+	if(palavra != "")
+	procurar(palavra)
+}
 function montaNuvem(r)
 {
 	retorno = r;

@@ -730,11 +730,10 @@ $cor - RGB separado por vírgula. Se a cor for vazia, retorna a cor atual.
 			$cores = explode(",",$cor);
 			$c->setrgb($cores[0],$cores[1],$cores[2]);
 			$retorno = "ok";
+			$this->mapa->setmetadata("cache","");
 		}
 		else
-		{
-			$retorno = $c->red.",".$c->green.",".$c->blue;
-		}
+		{$retorno = $c->red.",".$c->green.",".$c->blue;}
 		return ($retorno);
 	}
 /*

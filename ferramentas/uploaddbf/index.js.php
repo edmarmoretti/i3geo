@@ -3,6 +3,12 @@
 /*
 Title: Upload de arquivo dbf
 
+Envia para o servidor um arquivo local (dbf ou csv) e insere como uma camada no mapa.
+
+Veja:
+
+<i3GEO.arvoreDeTemas.dialogo.uploaddbf>
+
 Arquivo: i3geo/ferramentas/uploaddbf/index.js.php
 
 About: Licença
@@ -29,9 +35,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.uploaddbf
-
-Envia para o servidor um arquivo local (dbf ou csv) e insere como uma camada no mapa.
+Classe: i3GEOF.uploaddbf
 */
 i3GEOF.uploaddbf = {
 	/*
@@ -126,6 +130,11 @@ i3GEOF.uploaddbf = {
 		i3GEOF.uploaddbf.aguarde = $i("i3GEOF.uploaddbf_imagemCabecalho").style;
 		i3GEOF.uploaddbf.inicia(divid);
 	},
+	/*
+	Function: submete
+	
+	Envia o arquivo ao servidor
+	*/
 	submete: function(){
 		if(i3GEOF.uploaddbf.aguarde.visibility==="visible")
 		{return;}

@@ -4,6 +4,12 @@
 /*
 Title: Seleção
 
+Operações de seleção de elementos no mapa.
+
+Veja:
+
+<i3GEO.mapa.dialogo.selecao>
+
 Arquivo:
 
 i3geo/ferramentas/selecao/index.js.php
@@ -35,9 +41,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.selecao
-
-Inclui pontos no mapa
+Classe: i3GEOF.selecao
 */
 i3GEOF.selecao = {
 	/*
@@ -275,6 +279,10 @@ i3GEOF.selecao = {
 	
 	Executa uma operação sobre o conjunto de elementos selecionados
 	
+	Veja:
+	
+	<i3GEO.php.selecaopt>
+	
 	Parametro:
 	
 	tipo {String} - tipo de operação inverte|limpa
@@ -350,7 +358,7 @@ i3GEOF.selecao = {
 	/*
 	Classe: i3GEOF.selecao.box
 	
-	Controla o desenho do box para a seleção e executa a função de seleção
+	Controla o desenho do box para a seleção e executa a operação de seleção
 	*/
 	box:{
 		/*

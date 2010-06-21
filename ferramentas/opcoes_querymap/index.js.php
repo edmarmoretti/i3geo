@@ -2,7 +2,13 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Opções de cor da seleção
+Title: Cor da seleção
+
+Altera a cor que destaca os elementos selecionados.
+
+Veja:
+
+<i3GEO.mapa.dialogo.queryMap>
 
 Arquivo:
 
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesQuery
-
-Altera a cor de destaque dos elementos selecionados.
+Classe: i3GEOF.opcoesQuery
 */
 i3GEOF.opcoesQuery = {
 	/*
@@ -132,7 +136,11 @@ i3GEOF.opcoesQuery = {
 	/*
 	Function: executa
 	
-	Insere a grade no mapa
+	Aplica os parâmetros definidos
+	
+	Veja:
+	
+	<QUERYMAPCOR>
 	*/
 	executa: function(){
 		if(i3GEOF.opcoesQuery.aguarde.visibility === "visible")

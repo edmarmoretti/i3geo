@@ -1,38 +1,4 @@
 <?php
-/*
-Title: Planos de manejo do IBAMA.
-
-Acessa os web services do IBAMA para recuperar dados sobre planos de manejo florestal.
-
-Por ser executado dentro do I3Geo, boa parte dos parâmetros são obtidos da variável de seção.
-
-See:
-
-<pesquisa.htm>
-
-File: pesquisa.php
-
-19/6/2007
-
-Include:
-
-<"../../classesjs/cpaint/cpaint2.inc.php">, <"../../classesphp/pega_variaveis.php">
-
-Parameters:
-
-uf - unidade da federação
-
-categoria - categoria do plano de manejo
-
-ano - ano de busca
-
-situação - situação do plano
-
-mes - mes de busca
-
-cnpj - cnpj do empreendimento
-
-*/
 require_once("../../pacotes/cpaint/cpaint2.inc.php");
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");
@@ -48,13 +14,6 @@ $cp = new cpaint();
 $cp->register('pesquisa');
 $cp->start();
 $cp->return_data();
-/*
-Function: pesquisa
-
-Chama o web service do ibama e recupera os planos de manejo desejados.
-
-Acrescenta uma nova camada ao mapfile atual (definido na variável de seção).
-*/
 function pesquisa()
 {
 	global $cp,$map_file,$dir_tmp,$imgdir,$uf,$categoria,$ano,$situacao,$mes,$cnpj;
@@ -94,27 +53,6 @@ function pesquisa()
 	else
 	{$cp->set_data("erro");}
 }
-/*
-Function: adicionatema
-
-Cria um arquivo shapefile com os dados dos planos de manejo.
-
-Adiciona o shape file como uma nova camada no mapa.
-
-Parameters:
-
-map_file - arquivo map file atual
-
-dir_tmp - diretório temporário do Mapserver
-
-imgdir - diretório temporário para guardar as imagens do mapa atual
-
-nometemapontos - nome da nova camada
-
-itens - array com os itens que serão acrescentados ao shapefile, inclusive o item com as coordenadas
-
-valores - array com os valores de cada registro, obtidos do web service
-*/
 function adicionatema($map_file,$dir_tmp,$imgdir,$nometemapontos,$itens,$valores)
 {
 	//$valores é um array com os valores

@@ -20,7 +20,7 @@ MAP
 	FONTSET "/opt/www/html/i3geo/symbols/fontes.txt"
 	SYMBOLSET "/opt/www/html/i3geo/symbols/simbolos.sym"
 	SHAPEPATH "/opt/www/html/geodados"
-	IMAGECOLOR 157 211 255
+	IMAGECOLOR 104 171 195
 	#
 	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
 	#Esse tipo não é adequado para imagens raster, mas o i3geo muda automaticamente

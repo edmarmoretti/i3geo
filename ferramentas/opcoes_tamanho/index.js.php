@@ -1,7 +1,11 @@
 <?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/javascript"); ?>
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 /*
-Title: Opções de tamanho do mapa
+Title: Tamanho do mapa
+
+Veja:
+
+<i3GEO.mapa.dialogo.tamanho>
 
 Arquivo:
 
@@ -33,9 +37,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesTamanho
+Classe: i3GEOF.opcoesTamanho
 
-Altera o tamanho do mapa.
 */
 i3GEOF.opcoesTamanho = {
 	/*
@@ -141,7 +144,11 @@ i3GEOF.opcoesTamanho = {
 	/*
 	Function: executa
 	
-	Altera a legenda
+	Altera o tamanho do mapa
+	
+	Veja:
+	
+	<MUDATAMANHO>
 	*/
 	executa: function(){
 		if(i3GEOF.opcoesTamanho.aguarde.visibility === "visible")

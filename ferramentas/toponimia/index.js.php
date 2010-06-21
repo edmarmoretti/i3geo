@@ -4,6 +4,13 @@
 /*
 Title: Toponímia de um tema
 
+Ativa a apresentação da toponímia de um tema.
+A toponímia é definida em função das colunas existentes na tabela de atributos.
+
+Veja:
+
+<i3GEO.tema.dialogo.toponimia>
+
 Arquivo:
 
 i3geo/ferramentas/toponimia/index.js.php
@@ -35,11 +42,8 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.toponimia
+Classe: i3GEOF.toponimia
 
-Ativa a apresentação da toponímia de um tema.
-
-A toponímia é definida em função das colunas existentes na tabela de atributos.
 */
 i3GEOF.toponimia = {
 	/*
@@ -294,6 +298,10 @@ i3GEOF.toponimia = {
 	Function: cria
 	
 	Cria a toponímia no tema selecionado
+	
+	Veja:
+	
+	<CRIATOPONIMIA>
 	*/
 	cria: function(){
 		try{
@@ -320,6 +328,10 @@ i3GEOF.toponimia = {
 	Function:
 	
 	Testa a criação da toponímia gerando uma imagem temporária
+	
+	Veja:
+	
+	<CRIATOPONIMIA>
 	*/
 	testa: function(){
 		if(i3GEOF.toponimia.aguarde.visibility === "visible")

@@ -3,6 +3,12 @@
 /*
 Title: Wikipédia
 
+Busca na Wikipédia artigos relacionados à extensão geográfica do mapa atual.
+
+Veja:
+
+<i3GEO.configura>
+
 Arquivo:
 
 i3geo/ferramentas/wiki/index.js.php
@@ -33,9 +39,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.wiki
-
-Busca na Wikipédia artigos relacionados à extensão geográfica do mapa atual.
+Classe: i3GEOF.wiki
 */
 i3GEOF.wiki = {
 	/*
@@ -140,6 +144,10 @@ i3GEOF.wiki = {
 	Function: lista
 	
 	Lista os artigos
+	
+	Veja:
+	
+	<LISTAARTIGOS>
 	*/
 	lista: function(){
 		if(i3GEOF.wiki.aguarde.visibility === "visible")

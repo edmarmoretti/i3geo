@@ -4,6 +4,13 @@
 /*
 Title: Tabela de atributos
 
+Mostra a tabela de atributos de um tema com opções de seleção, estatística, gráficos e relatórios.
+O tema utilizado é o que estiver definido em i3GEO.temaAtivo
+
+Veja:
+
+<i3GEO.tema.dialogo.tabela>
+
 Arquivo:
 
 i3geo/ferramentas/tabela/index.js.php
@@ -36,11 +43,7 @@ if(typeof(i3GEOF) === 'undefined'){
 }
 
 /*
-Class: i3GEOF.tabela
-
-Mostra a tabela de atributos de um tema com opções de seleção, estatística, gráficos e relatórios.
-
-O tema utilizado é o que estiver definido em i3GEO.temaAtivo
+Classe: i3GEOF.tabela
 */
 i3GEOF.tabela = {
 	/*
@@ -368,6 +371,10 @@ i3GEOF.tabela = {
 	Function: pegaRegistros
 	
 	Pega os registros da tabela de atributos do tema
+	
+	Veja:
+	
+	<LISTAREGISTROS>
 	*/
 	pegaRegistros: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")
@@ -598,6 +605,10 @@ i3GEOF.tabela = {
 	Function: ativaSelecao
 	
 	Seleciona no mapa os elementos que estiverem marcados na guia 2
+	
+	Veja:
+	
+	<INCLUISEL>
 	*/
 	ativaSelecao: function(){
 		if(i3GEOF.tabela.aguarde.visibility === "visible")

@@ -4,6 +4,13 @@
 /*
 Title: Ponto em polígono
 
+Gera o cruzamento entre um tema de pontos e um tema de polígonos ou raster.
+Um novo tema do tipo poligonal é criado contendo os atributos do tema cruzado.
+
+Veja:
+
+<i3GEO.analise.dialogo.pontoempoligono>
+
 Arquivo:
 
 i3geo/ferramentas/pontoempoligono/index.js.php
@@ -34,9 +41,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.pontoEmPoligono
+Classe: i3GEOF.pontoEmPoligono
 
-Gera o cruzamento entre um tema de pontos e um tema de polígonos ou raster.
 */
 i3GEOF.pontoEmPoligono = {
 	/*
@@ -152,6 +158,12 @@ i3GEOF.pontoEmPoligono = {
 	},
 	/*
 	Function: executa
+	
+	Executa a operação de cruzamento
+	
+	Veja:
+	
+	<PONTOEMPOLIGONO>
 	*/
 	executa: function(){
 		try{
@@ -191,6 +203,10 @@ i3GEOF.pontoEmPoligono = {
 	Function: comboTemasSelPt
 	
 	Cria um combo com a lista de temas do tipo pontos
+	
+	Veja:
+	
+	<i3GEO.util.comboTemas>
 	*/
 	comboTemasSelPt: function(){
 		i3GEO.util.comboTemas(
@@ -218,6 +234,10 @@ i3GEOF.pontoEmPoligono = {
 	Function: comboTemasSelPo
 	
 	Cria uma lista de temas do tipo poligonal ou raster
+	
+	Veja:
+	
+	<i3GEO.util.checkTemas>
 	*/
 	comboTemasSelPo: function(){
 		i3GEO.util.checkTemas(

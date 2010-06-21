@@ -3,6 +3,12 @@
 /*
 Title: Salva mapa
 
+Faz o download do mapfile atualmente em uso. Posteriormente, o mapfile pode ser enviado de volta ao servidor para restaurar o mapa
+
+Veja:
+
+<i3GEO.mapa.dialogo.salvaMapa>
+
 Arquivo: i3geo/ferramentas/salvamapa/index.js.php
 
 About: Licença
@@ -29,9 +35,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.carregaMapa
-
-Envia para o servidor um arquivo mapfile armazenado localmente
+Classe: i3GEOF.carregaMapa
 */
 i3GEOF.salvaMapa = {
 	/*

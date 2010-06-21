@@ -2,7 +2,13 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Opções quadros
+Title: Quadros de animação
+
+Configura e executa a animação do mapa, sobrepondo em sequência as imagens já produzidas pelo mapa
+
+Veja:
+
+<i3GEO.gadgets.quados.opcoes>
 
 Arquivo:
 
@@ -34,9 +40,7 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesQuadros
-
-Executa a animação do gadget quadros.
+Classe: i3GEOF.opcoesQuadros
 */
 i3GEOF.opcoesQuadros = {
 	/*
@@ -129,7 +133,11 @@ i3GEOF.opcoesQuadros = {
 	/*
 	Function: executa
 	
-	Altera a legenda
+	Executa a animação
+	
+	Veja:
+	
+	<i3GEO.gadgets.quadros.anima>
 	*/
 	executa: function(){
 		i3GEO.gadgets.quadros.anima(0,$i("i3GEOopcoesQuadrostempoanima").value);

@@ -2,7 +2,13 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Opções da legenda
+Title: Legenda gráfica do mapa
+
+Edita a legenda que é mostrada no corpo do mapa, controlando o tamanho, posição, fontes, etc.
+
+Veja:
+
+<i3GEO.mapa.dialogo.opcoesLegenda>
 
 Arquivo:
 
@@ -34,9 +40,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesLegenda
+Classe: i3GEOF.opcoesLegenda
 
-Altera as propriedades da legenda do mapa.
 */
 i3GEOF.opcoesLegenda = {
 	/*
@@ -184,6 +189,10 @@ i3GEOF.opcoesLegenda = {
 	Function: executa
 	
 	Altera a legenda
+	
+	Veja:
+	
+	<APLICAPARAMETROSLEGIMG>
 	*/
 	executa: function(){
 		if(i3GEOF.opcoesLegenda.aguarde.visibility === "visible")
@@ -204,6 +213,10 @@ i3GEOF.opcoesLegenda = {
 	Function: parametrosAtuais
 	
 	Pega os parâmetros atuais da legenda
+	
+	Veja:
+	
+	<PEGAPARAMETROSLEGIMG>
 	*/
 	parametrosAtuais: function(){
 		i3GEOF.opcoesLegenda.aguarde.visibility = "visible";
@@ -263,6 +276,10 @@ i3GEOF.opcoesLegenda = {
 	Function: testa
 	
 	Testa a legenda, mostrando uma imagem temporária
+	
+	Veja:
+	
+	<TESTALEGENDA>
 	*/
 	testa: function(){
 		if(i3GEOF.opcoesLegenda.aguarde.visibility === "visible")

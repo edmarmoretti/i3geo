@@ -96,11 +96,6 @@ Planos de manejo florestal cadastrados no IBAMA. <a href="http://www.mma.gov.br/
 <DIV id=ResultadoPesquisa></DIV>
 <script type="text/javascript" >
 g_sid = window.parent.g_sid
-/*
-Function: executa
-
-Chama a função Ajax para realizar a consulta e adicionar a nova camada ao mapa atual.
-*/
 function executa()
 {
 	parametros = "&uf="+document.frmPlanoDeManejo.cboEstado[document.frmPlanoDeManejo.cboEstado.selectedIndex].value; 
@@ -116,11 +111,6 @@ function executa()
 	cp.set_response_type("JSON");
 	cp.call(p,"pesquisa",listaretornof);
 }
-/*
-Function: listaretornof
-
-Recebe os dados da função "executa" e redesenha o mapa atual.
-*/
 function listaretornof(retorno)
 {
 	document.getElementById("ResultadoPesquisa").style.color="red"

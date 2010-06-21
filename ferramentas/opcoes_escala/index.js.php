@@ -2,7 +2,13 @@
 /*jslint plusplus:false,white:false,undef: false, rhino: true, onevar: true, evil: true */
 
 /*
-Title: Opções da barra de escala
+Title: Barra de escala
+
+Altera as propriedades da barra de escala do mapa.
+
+Veja:
+
+<i3GEO.mapa.dialogo.opcoesEscala>
 
 Arquivo:
 
@@ -34,9 +40,8 @@ if(typeof(i3GEOF) === 'undefined'){
 	i3GEOF = [];
 }
 /*
-Class: i3GEOF.opcoesEscala
+Classe: i3GEOF.opcoesEscala
 
-Altera as propriedades da barra de escala do mapa.
 */
 i3GEOF.opcoesEscala = {
 	/*
@@ -172,7 +177,11 @@ i3GEOF.opcoesEscala = {
 	/*
 	Function: executa
 	
-	Altera a legenda
+	Aplica os parâmetros definidos
+	
+	Veja:
+	
+	<MUDAESCALAGRAFICA>
 	*/
 	executa: function(){
 		if(i3GEOF.opcoesEscala.aguarde.visibility === "visible")
@@ -192,7 +201,11 @@ i3GEOF.opcoesEscala = {
 	/*
 	Function: parametrosAtuais
 	
-	Pega os parâmetros atuais da legenda
+	Pega os parâmetros atuais da barra de escala
+	
+	Veja:
+	
+	<ESCALAPARAMETROS>
 	*/
 	parametrosAtuais: function(){
 		i3GEOF.opcoesEscala.aguarde.visibility = "visible";
@@ -240,7 +253,11 @@ i3GEOF.opcoesEscala = {
 	/*
 	Function: testa
 	
-	Testa a legenda, mostrando uma imagem temporária
+	Testa a barra, mostrando uma imagem temporária
+	
+	Veja:
+	
+	<TESTAESCALAGRAFICA>
 	*/
 	testa: function(){
 		if(i3GEOF.opcoesEscala.aguarde.visibility === "visible")
