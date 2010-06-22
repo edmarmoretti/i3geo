@@ -484,12 +484,13 @@ $valor - Novo valor da transparência
 */
 	function mudaTransparencia($valor)
 	{
-        $v = versao();
+        //error_reporting(E_ALL);
+		$v = versao();
 		foreach ($this->grupo as $lg)
 		{
 			$ll = $this->mapa->getlayerbyname($lg);
 			$v["principal"] == "4" ? $ll->set("transparency",$valor) : $ll->set("opacity",$valor);
-			$ll->removeMetaData("cache");
+			$ll->setmetaData("cache","");
 		}
 		return("ok");
 	}
