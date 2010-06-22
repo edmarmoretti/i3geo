@@ -163,7 +163,7 @@ $lista - lista de processos separados por |
 		foreach ($lista as $processo)
 		{
 			$this->layer->setprocessing($processo);
-			$this->layer->removeMetaData("cache");
+			$this->layer->setMetaData("cache","");
 		}
 		
 		return("ok");
@@ -221,7 +221,7 @@ A mudança é feita apenas na representação do layer.
 			{$l->set("type",MS_LAYER_LINE);}
 			if (($l->type < 1) || ($l->type > 2))
 			{$retorno = "erro. O tipo desse tema nao pode ser alterado";}
-			$l->removeMetaData("cache");
+			$this->layer->setMetaData("cache","");
 		}
 		return $retorno;
 	}
@@ -462,7 +462,7 @@ $testa - Testa o filtro e retorna uma imagem.
 			$img = $this->mapa->prepareimage();
 			if ($this->layer->draw($img) == 0)
 			{
-				$this->layer->removeMetaData("cache");
+				$this->layer->setMetaData("cache","");
 				return ("ok");
 			}
 			else
@@ -1024,7 +1024,7 @@ Altera o valor do elemento DATA
 		if(strtolower($metadata) != "nao")
 		{
 			$this->layer->set("data",$data);
-			$this->layer->removeMetaData("cache");
+			$this->layer->setMetaData("cache","");
 			return $data;
 		}
 		else
