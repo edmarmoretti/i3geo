@@ -1,6 +1,5 @@
 //inicializa
-parametrosURL()
 function muda(template)
 {
-	window.parent.location = window.parent.g_locaplic+"/aplicmap/"+template+"?"+g_sid
+	window.parent.location = window.parent.i3GEO.configura.locaplic+"/aplicmap/"+template+"?"+window.parent.i3GEO.configura.sid
 }
