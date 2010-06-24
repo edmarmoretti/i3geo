@@ -220,7 +220,6 @@ Group: Ferramentas  {
       File: Toponímia de um tema  (ferramentas\toponimia\index.js.php)
       }  # Group: Tema
 
-   File: Funções gerais  (ferramentas\funcoes.js)
    }  # Group: Ferramentas
 
 Group: Redirecionadores  {

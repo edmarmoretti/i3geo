@@ -79,7 +79,7 @@ packer("classe_php.js","compactados/classe_php_compacto.js","Normal");
 packer("classe_interface.js","compactados/classe_interface_compacto.js","Normal");
 packer("classe_i3geo.js","compactados/classe_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
-packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
+//packer("../ferramentas/funcoes.js","../ferramentas/funcoes_compacto.js","Normal");
 packer("../pacotes/yui270/build/container/container.js","../pacotes/yui270/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui270/build/container/container_core.js","../pacotes/yui270/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui270/build/utilities/utilities.js","../pacotes/yui270/build/utilities/utilities_compacto.js","Normal");
@@ -170,6 +170,7 @@ salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 //
 //compacta o ferramentas/funcoes.js
 //
+/*
 $s = inicia("../ferramentas/funcoes.js");
 $abre = fopen("../ferramentas/funcoes_compacto.js", "wt");
 $escreve = fwrite ($abre,$s);
@@ -197,7 +198,7 @@ $jsfiles = array(
 );
 $buffer = "\$i = function(id){return document.getElementById(id);}\n";
 salvatudojs($jsfiles,$buffer,"../ferramentas/i3geo_tudo_compacto.js","js");
-
+*/
 //css das ferramentas
 $cssfiles = array(
 "../css/button.css",
