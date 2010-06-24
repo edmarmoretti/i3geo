@@ -1,5 +1,4 @@
-parametrosURL()
-var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=pegalistacompleta"
+var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=pegalistacompleta"
 var cp = new cpaint();
 //cp.set_debug(2)
 cp.set_response_type("JSON");
@@ -30,21 +29,20 @@ function processaTemas(retorno)
 					if ( temp[2] != "")
 					{var lk = "<a href="+temp[2]+" target=blank>&nbsp;fonte</a>"}
 					var tid = temp[0]
-					var inp = "<input style='text-align:left' onclick='mudaboxnf()' class=inputsb style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"
+					var inp = ""; //"<input style='text-align:left' onclick='mudaboxnf()' class=inputsb style='cursor:pointer' type=\"checkbox\" value="+tid+" onmouseover=\"javascript:mostradicasf(this,'Clique para ligar ou desligar esse tema','ligadesliga')\" onmouseout=\"javascript:mostradicasf(this,'')\" />"
 					nomeTema = inp+nome+lk
 					if (temp[3] == "sim")
 					{
-						var inp = "<p><img src="+g_locaplic+"/imagens/down1.gif style='cursor:pointer;text-align:left' onclick='window.parent.download(\""+tid+"\")' />&nbsp;"
+						var inp = "<p><img src="+window.parent.i3GEO.configura.locaplic+"/imagens/down1.gif style='cursor:pointer;text-align:left' onclick='window.parent.download(\""+tid+"\")' />&nbsp;"
 						ins += inp+nome+" <span style='color:gray'> ("+nomeGrupo+"->"+nomeSgrupo+")</span><br><br>"
 					}
 				}
 			}
 		}
-		$i("resultado").innerHTML = ins
+		document.getElementById("resultado").innerHTML = ins
 	}
 	else
 	{
-		aguarde("none")
-		$i("resultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
+		document.getElementById("resultado").innerHTML = "<p style=color:red >Ocorreu um erro<br>"
 	}
 }
