@@ -11,7 +11,7 @@ A obtenção do valor de Z é feita com base no valor de cor do píxel do LAYER e nã
 
 Veja:
 
-<i3GEO.configura>
+<i3GEO.mapa.dialogo.t3d>
 
 Arquivo:
 

@@ -58,11 +58,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta graficointerativo
 		*/
 		graficoInterativo: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.graficoInterativo()");}
-			if(typeof(i3GEOF.graficointerativo) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.graficointerativo.criaJanelaFlutuante()","i3GEOF.graficointerativo_script");
-			}
+			if(typeof(i3GEOF.graficointerativo) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.graficoInterativo()","graficointerativo","graficointerativo");}
 		},
 		/*
 		Function: linhaDoTempo
@@ -103,11 +100,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta gradepontos
 		*/
 		gradePontos: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePontos()");}
-			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/gradepontos/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePontos.criaJanelaFlutuante()","i3GEOF.gradeDePontos_script");
-			}
+			if(typeof(i3GEOF.gradeDePontos) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradePontos()","gradepontos","gradeDePontos");}
 		},
 		/*
 		Function: gradePol
@@ -115,11 +109,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta gradepol
 		*/
 		gradePol: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradePol()");}
-			if(typeof(i3GEOF.gradeDePontos) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/gradepol/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.gradeDePoligonos.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
-			}
+			if(typeof(i3GEOF.gradeDePontos) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradePol()","gradepol","gradeDePoligonos");}
 		},
 		/*
 		Function: gradeHex
@@ -127,11 +118,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta gradehex
 		*/
 		gradeHex: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.gradeHex()");}
-			if(typeof(i3GEOF.gradeDeHex) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/gradehex/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.gradeDeHex.criaJanelaFlutuante()","i3GEOF.gradeDePoligonos_script");
-			}
+			if(typeof(i3GEOF.gradeDeHex) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradeHex()","gradehex","gradeDeHex");}
 		},
 		/*
 		Function: analisaGeometrias
@@ -139,11 +127,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta analisageometrias
 		*/
 		analisaGeometrias: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.analisaGeometrias()");}
-			if(typeof(i3GEOF.analisaGeometrias) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/analisageometrias/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.analisaGeometrias.criaJanelaFlutuante()","i3GEOF.analisaGeometrias_script");
-			}
+			if(typeof(i3GEOF.analisaGeometrias) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.analisaGeometrias()","analisageometrias","analisaGeometrias");}
 		},
 		/*
 		Function: pontosdistri
@@ -151,14 +136,11 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta pontosdistri
 		*/
 		pontosdistri: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontosdistri()");}
 			if (i3GEO.parametros.r == "nao")
 			{alert("Opção não disponível");}
 			else{
-				if(typeof(i3GEOF.pontosDistri) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.pontosDistri.criaJanelaFlutuante()","i3GEOF.pontosDistri_script");
-				}
+				if(typeof(i3GEOF.pontosDistri) === 'undefined')
+				{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontosdistri()","pontosdistri","pontosDistri");}
 			}
 		},
 		/*
@@ -167,11 +149,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta pontoempoligono
 		*/
 		pontoempoligono: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.pontoempoligono()");}
-			if(typeof(i3GEOF.pontoEmPoligono) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/pontoempoligono/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.pontoEmPoligono.criaJanelaFlutuante()","i3GEOF.pontoEmPoligono_script");
-			}
+			if(typeof(i3GEOF.pontoEmPoligono) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.pontoempoligono()","pontoempoligono","pontoEmPoligono");}
 		},
 		/*
 		Function: nptPol
@@ -179,11 +158,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta nptpol
 		*/
 		nptPol: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.nptpol()");}
-			if(typeof(i3GEOF.nptpol) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/nptpol/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.nptpol.criaJanelaFlutuante()","i3GEOF.nptpol_script");
-			}
+			if(typeof(i3GEOF.nptpol) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.nptPol()","nptpol","nptpol");}
 		},
 		/*
 		Function: buffer
@@ -191,11 +167,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta buffer
 		*/
 		buffer: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.buffer()");}
-			if(typeof(i3GEOF.buffer) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/buffer/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.buffer.criaJanelaFlutuante()","i3GEOF.buffer_script");
-			}
+			if(typeof(i3GEOF.buffer) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.buffer()","buffer","buffer");}
 		},
 		/*
 		Function: distanciaptpt
@@ -203,11 +176,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta distanciaptpt
 		*/
 		distanciaptpt: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.distanciaptpt()");}
-			if(typeof(i3GEOF.distanciaptpt) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.distanciaptpt.criaJanelaFlutuante()","i3GEOF.distanciaptpt_script");
-			}
+			if(typeof(i3GEOF.distanciaptpt) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.distanciaptpt()","distanciaptpt","distanciaptpt");}
 		},
 		/*
 		Function: centroide
@@ -215,11 +185,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta centroide
 		*/
 		centroide: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.centroide()");}
-			if(typeof(i3GEOF.centroide) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/centroide/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.centroide.criaJanelaFlutuante()","i3GEOF.centroide_script");
-			}
+			if(typeof(i3GEOF.centroide) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.centroide()","centroide","centroide");}
 		},
 		/*
 		Function: dissolve
@@ -227,11 +194,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta dissolve
 		*/
 		dissolve: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.dissolve()");}
-			if(typeof(i3GEOF.dissolve) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/dissolve/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.dissolve.criaJanelaFlutuante()","i3GEOF.dissolve_script");
-			}
+			if(typeof(i3GEOF.dissolve) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.dissolve()","dissolve","dissolve");}
 		},
 		/*
 		Function: agrupaElementos
@@ -239,11 +203,8 @@ i3GEO.analise = {
 		Abre a janela de diálogo da ferramenta agrupaelementos
 		*/
 		agrupaElementos: function(){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.dialogo.agrupaElementos()");}
-			if(typeof(i3GEOF.agrupaElementos) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/agrupaelementos/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.agrupaElementos.criaJanelaFlutuante()","i3GEOF.agrupaElementos_script");
-			}
+			if(typeof(i3GEOF.agrupaElementos) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.agrupaElementos()","agrupaelementos","agrupaElementos");}
 		}
 	},
 	/*

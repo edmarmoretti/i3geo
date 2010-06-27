@@ -8,6 +8,8 @@ Busca as estações meteorológicas da rede METAR na extensão geográfica do mapa at
 
 Veja:
 
+<i3GEO.navega.dialogo.metar>
+
 <metarextensao>
 
 <metarproxima>

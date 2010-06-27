@@ -37,7 +37,7 @@ Classe: i3GEO.configura
 
 Configuração do i3geo
 
-Define os parâmetros variáveis do i3geo. Vc pode alterar com esta classe a maioria dos parâmetros que controlam
+Vc pode alterar com esta classe a maioria dos parâmetros que controlam
 o funcionamento do i3geo.
 
 Exemplo:
@@ -65,7 +65,7 @@ i3GEO.configura = {
 	]
 	
 	Type:
-	{JASON}
+	{JSON}
 	
 	Default:
 	""
@@ -399,8 +399,8 @@ i3GEO.configura = {
 	
 	A manipulação dos cursores é feita com i3GEO.util.mudaCursor
 	
-	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text
-
+	É possível utilizar também um dos tipos default, pointer, crosshair, help, move, text	
+	
 	Tipo:
 	{JSON}
 	*/
@@ -820,12 +820,8 @@ i3GEO.configura = {
 			iddiv:"exten",
 			tipo:"",
 			dica:$trad("d8"),
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.mostraExten) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/mostraexten/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.mostraExten.criaJanelaFlutuante()","i3GEOF.mostraExten_script");
-				}			
-			}
+			funcaoonclick:function()
+			{i3GEO.mapa.dialogo.mostraExten();}
 		},
 		{
 			//botão que abre a janela com o mapa de referência
@@ -840,48 +836,32 @@ i3GEO.configura = {
 			iddiv:"wiki",
 			tipo:"",
 			dica:$trad("d11"),
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.wiki) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/wiki/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.wiki.criaJanelaFlutuante()","i3GEOF.wiki_script");
-				}
-			}
+			funcaoonclick:function()
+			{i3GEO.navega.dialogo.wiki();}
 		},
 		{
 			//botão de busca na rede metar
 			iddiv:"metar",
 			tipo:"",
 			dica:$trad("d29"),
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.metar) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/metar/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.metar.criaJanelaFlutuante()","i3GEOF.metar_script");
-				}
-			}
+			funcaoonclick:function()
+			{i3GEO.navega.dialogo.wiki();}
 		},
 		{
 			//botão de busca de fotos
 			iddiv:"buscafotos",
 			tipo:"",
 			dica:"Fotos",
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.buscaFotos) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/buscafotos/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.buscaFotos.criaJanelaFlutuante()","i3GEOF.buscaFotos_script");
-				}
-			}
+			funcaoonclick:function()
+			{i3GEO.navega.dialogo.buscaFotos();}
 		},
 		{
 			//botão de impressão
 			iddiv:"imprimir",
 			tipo:"",
 			dica:$trad("d12"),
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.imprimir) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/imprimir/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.imprimir.criaJanelaFlutuante()","i3GEOF.imprimir_script");
-				}			
-			}
+			funcaoonclick:function()
+			{i3GEO.mapa.dialogo.imprimir();}
 		},
 		{
 			//botão de localização do usuário pelo IP
@@ -896,53 +876,19 @@ i3GEO.configura = {
 			iddiv:"v3d",
 			tipo:"",
 			dica:$trad("d14"),
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.t3d) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/3d/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.t3d.criaJanelaFlutuante()","i3GEOF.t3d_script");
-				}
-			}
+			funcaoonclick:function()
+			{i3GEO.mapa.dialogo.t3d();}
 		},
 		{
 			iddiv:"google",
 			tipo:"",
 			dica:$trad("d15"),
-			funcaoonclick:function(){
-				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") > 0)
-				{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
-				i3GEO.util.criaBox();
-				g_operacao = "navega";
-				var idgoogle = "googlemaps"+Math.random();
-				if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+25+"px",(i3GEO.parametros.h/2)+18+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
-				else
-				{i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
-				atualizagoogle = function(){
-					try{
-						parent.frames[idgoogle+"i"].panTogoogle();
-					}
-					catch(e){
-						i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
-						if(typeof(console) !== 'undefined'){console.error(e);}
-					}
-				};
-				if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
-				{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
-				/*
-				if(i3GEO.Interface.ATUAL === "openlayers"){
-					i3geoOL.events.register("moveend",i3geoOL,function(e){
-						try{parent.frames[idgoogle+"i"].panTogoogle();}
-						catch(x){
-							i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
-							
-							if(typeof(console) !== 'undefined'){console.error(x);}
-						}
-					});
-				}
-				*/
-			}
+			funcaoonclick:function()
+			{i3GEO.navega.dialogo.google();}
 		},
 		{
 			//Ativa o botão que realiza a operação de de busca no site Scielo
+			//depreciado
 			iddiv:"scielo",
 			tipo:"",
 			dica:$trad("d16"),
@@ -980,20 +926,15 @@ i3GEO.configura = {
 			iddiv:"confluence",
 			tipo:"",
 			dica:$trad("d17"),	
-			funcaoonclick:function(){
-				if(typeof(i3GEOF.confluence) === 'undefined'){
-					var js = i3GEO.configura.locaplic+"/ferramentas/confluence/index.js.php";
-					i3GEO.util.scriptTag(js,"i3GEOF.confluence.criaJanelaFlutuante()","i3GEOF.confluence_script");
-				}
-			}
+			funcaoonclick:function()
+			{i3GEO.navega.dialogo.confluence();}
 		},
 		{
 			//Ativa o botão que abre a lente de aumento
 			iddiv:"lentei",
 			tipo:"",
 			dica:$trad("d18"),
-			funcaoonclick:function()
-			{
+			funcaoonclick:function(){
 				if (i3GEO.navega.lente.ESTAATIVA === "nao")
 				{i3GEO.navega.lente.inicia();}
 				else

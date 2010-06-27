@@ -8,9 +8,15 @@ Mostra os pontos de confluência de coordenadas geográficas de 1 por 1 grau.
 Em cada confluência é mostrado um link para o site www.confluence.org.
 Os pontos são mostrados conforme a extensão geográfica vista no mapa.
 
-File: i3geo/ferramentas/confluence/index.js.php
+Veja:
 
-About: Licença
+<i3GEO.navega.dialogo.confluence>
+
+Arquivo: i3geo/ferramentas/confluence/index.js.php
+
+Licenca:
+
+GPL2
 
 I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 

@@ -8,7 +8,7 @@ Mostra a extensão geográfica atual do mapa permitindo também alterá-la digitando
 
 Veja:
 
-<i3GEO.configura>
+<i3GEO.mapa.dialogo.mostraExten>
 
 Arquivo:
 

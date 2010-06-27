@@ -312,11 +312,8 @@ i3GEO.tema = {
 		
 		*/
 		cortina: function(tema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.cortina()");}
-			if(typeof(i3GEOF.cortina) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/cortina/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.cortina.criaJanelaFlutuante('"+tema+"')","i3GEOF.cortina_script");
-			}
+			if(typeof(i3GEOF.cortina) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina");}
 		},
 		/*
 		Function: abreKml
@@ -330,13 +327,10 @@ i3GEO.tema = {
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.abreKml()");}
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
-			if(typeof(i3GEOF.converteKml) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js.php";
-				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
-			}
+			if(typeof(i3GEOF.converteKml) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.abreKml()","convertekml","converteKml");}
 		},
 		/*
 		Function: graficotema
@@ -348,12 +342,8 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		graficotema: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.graficotema()");}
-			if(typeof(i3GEOF.graficoTema) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/graficotema/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.graficoTema.criaJanelaFlutuante()","i3GEOF.graficoTema_script");
-			}
+			if(typeof(i3GEOF.graficoTema) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema");}
 		},
 		/*
 		Function: toponimia
@@ -365,12 +355,8 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		toponimia: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.toponimia()");}
-			if(typeof(i3GEOF.toponimia) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/toponimia/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.toponimia.criaJanelaFlutuante()","i3GEOF.toponimia_script");
-			}		
+			if(typeof(i3GEOF.toponimia) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia");}
 		},
 		/*
 		Function: filtro
@@ -382,12 +368,8 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		filtro: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.filtro()");}
-			if(typeof(i3GEOF.filtro) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/filtro/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.filtro.criaJanelaFlutuante()","i3GEOF.filtro_script");
-			}		
+			if(typeof(i3GEOF.filtro) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro");}
 		},
 		/*
 		Function: procuraratrib
@@ -399,12 +381,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.procuraratrib()");}
-			if(typeof(i3GEOF.busca) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/busca/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.busca.criaJanelaFlutuante()","i3GEOF.busca_script");
-			}
+			if(typeof(i3GEOF.busca) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca");}
 		},
 		/*
 		Function: tabela
@@ -416,12 +394,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		tabela: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.tabela()");}
-			if(typeof(i3GEOF.tabela) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/tabela/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.tabela.criaJanelaFlutuante()","i3GEOF.tabela_script");
-			}
+			if(typeof(i3GEOF.tabela) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tabela()","tabela","tabela");}
 		},
 		/*
 		Function: etiquetas
@@ -433,12 +407,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		etiquetas: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.etiqueta()");}
-			if(typeof(i3GEOF.etiqueta) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/etiqueta/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.etiqueta.criaJanelaFlutuante()","i3GEOF.etiqueta_script");
-			}
+			if(typeof(i3GEOF.etiqueta) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiquetas","etiquetas");}
 		},
 		/*
 		Function: editaLegenda
@@ -450,12 +420,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		editaLegenda: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.editaLegenda()");}
-			if(typeof(i3GEOF.legenda) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/legenda/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.legenda.criaJanelaFlutuante()","i3GEOF.legenda_script");
-			}
+			if(typeof(i3GEOF.legenda) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda");}
 		},
 		/*
 		Function: download
@@ -467,12 +433,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema no map file.
 		*/
 		download: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.download()");}
-			if(typeof(i3GEOF.download) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/download/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.download.criaJanelaFlutuante('"+idtema+"')","i3GEOF.download_script");
-			}
+			if(typeof(i3GEOF.download) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()","download","download");}
 		},
 		/*
 		Function: sld
@@ -497,12 +459,8 @@ i3GEO.tema = {
 		idtema - id que identifica o tema no map file.
 		*/
 		editorsql: function(idtema){
-			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.editorsql()");}
-			if(typeof(i3GEOF.editorsql) === 'undefined'){
-				var js = i3GEO.configura.locaplic+"/ferramentas/editorsql/index.js.php";
-				i3GEO.mapa.ativaTema(idtema);
-				i3GEO.util.scriptTag(js,"i3GEOF.editorsql.criaJanelaFlutuante('"+idtema+"')","i3GEOF.editorsql_script");
-			}		
+			if(typeof(i3GEOF.editorsql) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");}
 		}
 	}
 };

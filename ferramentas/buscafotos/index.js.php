@@ -11,7 +11,7 @@ buscafotos/funcoes.php para realizar a busca.
 
 Veja:
 
-<i3GEO.configura>
+<i3GEO.navega.dialogo.buscaFotos>
 
 Arquivo:
 

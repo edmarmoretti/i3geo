@@ -1906,6 +1906,24 @@ i3GEO.util = {
 			temp[i].style.display="none";
 		}
 		$i(idatual).style.display="block";
+	},
+	/*
+	Function: dialogoFerramenta
+	
+	Atalho para abrir a janela de diálogo de uma ferramenta padrão
+	
+	Parametros:
+	
+	mensagem {string} - mensagem que será enviada ao console no caso do Firefox
+	
+	dir {string} - diretório em i3geo/ferramentas
+	
+	nome {string} - nome da classe da ferramenta
+	*/
+	dialogoFerramenta: function(mensagem,dir,nome){
+		if(typeof(console) !== 'undefined'){console.info(mensagem);}
+		var js = i3GEO.configura.locaplic+"/ferramentas/"+dir+"/index.js.php";
+		i3GEO.util.scriptTag(js,"i3GEOF."+nome+".criaJanelaFlutuante()","i3GEOF."+nome+"_script");
 	}
 };
 

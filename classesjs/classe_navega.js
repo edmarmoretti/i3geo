@@ -1359,6 +1359,76 @@ i3GEO.navega = {
 				};
 			}		
 		}
+	},
+	/*
+	Classe: i3GEO.navega.dialogo
+	
+	Abre as telas de diálogo das opções de navegação no mapa atual
+	*/
+	dialogo:{
+		/*
+		Function: wiki
+
+		Abre a janela de diálogo da ferramenta wiki permitindo a navegação integrada com a Wikipédia
+		*/
+		wiki: function(){
+			if(typeof(i3GEOF.wiki) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.wiki()","wiki","wiki");}
+		},
+		/*
+		Function: metar
+
+		Abre a janela de diálogo da ferramenta metar permitindo a navegação integrada com a rede de dados meteorológicos
+		*/
+		metar: function(){
+			if(typeof(i3GEOF.metar) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.metar()","metar","metar");}
+		},
+		/*
+		Function: buscaFotos
+
+		Abre a janela de diálogo da ferramenta metar permitindo a navegação integrada com serviços de armazenamento de fotografias
+		*/
+		buscaFotos: function(){
+			if(typeof(i3GEOF.buscaFotos) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.buscaFotos()","buscafotos","buscaFotos");}
+		},
+		/*
+		Function: google
+
+		Abre a janela de diálogo da ferramenta google permitindo a navegação integrada com o GoogleMaps
+		*/
+		google: function(){
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.navega.dialogo.google()");}
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") > 0)
+			{i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");}
+			i3GEO.util.criaBox();
+			g_operacao = "navega";
+			var idgoogle = "googlemaps"+Math.random();
+			if(navn){i3GEO.janela.cria((i3GEO.parametros.w/2)+25+"px",(i3GEO.parametros.h/2)+18+"px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
+			else
+			{i3GEO.janela.cria("530px","330px",i3GEO.configura.locaplic+"/ferramentas/googlemaps/index.php","","","Google maps <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=7&idajuda=68' >&nbsp;&nbsp;&nbsp;</a>",idgoogle);}
+			atualizagoogle = function(){
+				try{
+					parent.frames[idgoogle+"i"].panTogoogle();
+				}
+				catch(e){
+					i3GEO.eventos.NAVEGAMAPA.remove("atualizagoogle()");
+					if(typeof(console) !== 'undefined'){console.error(e);}
+				}
+			};
+			if(i3GEO.eventos.NAVEGAMAPA.toString().search("atualizagoogle()") < 0)
+			{i3GEO.eventos.NAVEGAMAPA.push("atualizagoogle()");}
+		},
+		/*
+		Function: confluence
+
+		Abre a janela de diálogo da ferramenta confluence permitindo a navegação integrada com a localização de confluências
+		*/
+		confluence: function(){
+			if(typeof(i3GEOF.confluence) === 'undefined')
+			{i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.confluence()","confluence","confluence");}
+		}
 	}
 };
 //YAHOO.log("carregou classe navega", "Classes i3geo");

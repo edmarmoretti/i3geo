@@ -15,7 +15,7 @@ O código da API do Google Maps é armazenada em i3geo/ms_configura.php
 
 Veja:
 
-<i3GEO.configura>
+<i3GEO.navega.google>
 
 Arquivo:
 

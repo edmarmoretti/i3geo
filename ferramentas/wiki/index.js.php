@@ -7,7 +7,7 @@ Busca na Wikipédia artigos relacionados à extensão geográfica do mapa atual.
 
 Veja:
 
-<i3GEO.configura>
+<i3GEO.navega.dialogo.wiki>
 
 Arquivo:
 
