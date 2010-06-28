@@ -1198,14 +1198,20 @@ i3GEO.Interface = {
 		},
 		criaTile: function(){
 		   	var cgi,parametros;
-		   	cgi = i3GEO.util.protocolo()+"://"+window.location.host+i3GEO.parametros.cgi+"?";
+		   	/*
+			cgi = i3GEO.util.protocolo()+"://"+window.location.host+i3GEO.parametros.cgi+"?";
     		parametros = "map="+i3GEO.parametros.mapfile;
         	parametros += '&mode=tile';
         	parametros += '&tilemode=gmap';
         	parametros += '&tile={X}+{Y}+{Z}';
         	parametros += '&map_imagetype='+i3GEO.Interface.OUTPUTFORMAT;
-    		//alert(cgi+parametros)
-    		return(cgi+parametros);		
+    		return(cgi+parametros);
+			*/
+			parametros = i3GEO.configura.locaplic+"/classesphp/mapa_googlemaps.php?";
+    		parametros += "map="+i3GEO.parametros.mapfile;
+        	parametros += '&X={X}&Y={Y}&Z={Z}';
+			//window.open(parametros)
+    		return(parametros);
 		},
 		ativaBotoes: function(){
 			var imagemxy,x2,y2;

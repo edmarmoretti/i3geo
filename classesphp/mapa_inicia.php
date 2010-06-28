@@ -113,6 +113,11 @@ function iniciaMapa()
 	if($interface == "googlemaps" || $interface == "googleearth")
 	{
 		$m = ms_newMapObj($map_file);
+		if($interface == "googlemaps"){
+			$m->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+			//$m->setProjection("init=epsg:900913"); //900913
+			//$m->setProjection("+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+		}
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)
 		{
