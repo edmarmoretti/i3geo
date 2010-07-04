@@ -61,6 +61,10 @@ i3GEO.guias = {
 	
 	Define os parâmetros de cada guia que será mostrada no mapa, como título, conteúdo, etc.
 
+	Você pode modificar o nome de uma guia como no exemplo
+	
+	i3GEO.guias.CONFIGURA.legenda.titulo = "nome diferente";
+	
 	Exemplo
 	
 	i3GEO.guias.CONFIGURA.legenda = {

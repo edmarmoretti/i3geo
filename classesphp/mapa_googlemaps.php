@@ -67,10 +67,6 @@ $poPoint2->project($projInObj, $projOutObj);
 
 $_GET["BBOX"] = $poPoint1->x." ".$poPoint1->y." ".$poPoint2->x." ".$poPoint2->y;
 
-
-
-
-
 //echo $_GET["BBOX"];
 $_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 $_GET["map_size"] = "256 256";
@@ -93,8 +89,8 @@ foreach ($layersNames as $layerName)
 		include_once("funcoes_gerais.php");
 		autoClasses(&$l,$mapa);
 	}
-	//if($layerName != $_GET["layer"])
-	//{$l->set("status",MS_OFF);}
+	if($layerName != $_GET["layer"])
+	{$l->set("status",MS_OFF);}
 	if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "")
 	{
 		$l->set("status",MS_DEFAULT);
@@ -111,8 +107,9 @@ foreach ($layersNames as $layerName)
 					{$l->set("connection",$postgis_mapa[$lcon]);}					
 				}
 			}
-
 		}
+		if($l->getProjection() == MS_FALSE)
+		{$l->setProjection("init=epsg:4291");}		
 	}
 	if($layerName == $_GET["layer"])
 	{
@@ -126,8 +123,8 @@ foreach ($layersNames as $layerName)
 	}
 	$l->set("template","none.htm");
 }
-//if($_GET["layer"] == "")
-//{$cache = true;}
+if($_GET["layer"] == "")
+{$cache = true;}
 if($_GET == false)
 {$cache = false;}
 if($_GET["DESLIGACACHE"] == "sim")

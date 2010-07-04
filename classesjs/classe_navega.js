@@ -599,6 +599,9 @@ i3GEO.navega = {
 			clearTimeout(i3GEO.navega.contaTempoRedesenho);
 			if(i3GEO.Interface.ATUAL === "openlayers")
 			{i3GEO.Interface.openlayers.atualizaMapa();}
+			if(i3GEO.Interface.ATUAL === "googlemaps")
+			{i3GEO.Interface.googlemaps.redesenha();}
+			
 			else{
 				i3GEO.contadorAtualiza++;
 				i3GEO.atualiza("");
@@ -798,6 +801,8 @@ i3GEO.navega = {
 		Ao ser chamada, essa função muda o modo atual, ativando ou desativando o entorno
 		*/
 		ativaDesativa: function(){
+			if(i3GEO.Interface.ATUAL === "googlemaps")
+			{alert("Essa operação não funciona nessa interface");return;}
 			if(i3GEO.Interface.ATUAL === "openlayers")
 			{i3GEO.Interface.openlayers.inverteModoTile();return;}
 			var letras,l;

@@ -142,7 +142,7 @@ i3GEO.mapa = {
 			i3GEO.mapa.recupera.TENTATIVA = 0;
 		}
 		catch(e){
-			if(i3GEO.Interface.ATUAL === "openlayers"){
+			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps"){
 				i3GEO.janela.fechaAguarde();
 				return;
 			}

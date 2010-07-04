@@ -253,6 +253,16 @@ Prepara o mapa atual para funcionar na interface openlayers.
 		include_once("mapa_inicia.php");
 		iniciaMapa();
 	break;
+/*
+Valor: GOOGLEMAPS
+
+Prepara o mapa atual para funcionar na interface googlemaps.
+*/
+	case "GOOGLEMAPS":
+		$interface = "googlemaps";
+		include_once("mapa_inicia.php");
+		iniciaMapa();
+	break;
 	
 /*
 Section: Análise

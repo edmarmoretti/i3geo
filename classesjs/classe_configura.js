@@ -572,6 +572,10 @@ i3GEO.configura = {
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.extentTotal);
 					return;
 				}
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.extentTotal);
+					return;
+				}
 				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.configura.tipoimagem,i3GEO.parametros.extentTotal);
 				marcadorZoom = "";
 			}

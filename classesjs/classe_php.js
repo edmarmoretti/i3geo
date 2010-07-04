@@ -481,6 +481,10 @@ i3GEO.php = {
 				i3GEO.Interface.openlayers.pan2ponto(x,y);
     			i3GEO.janela.fechaAguarde();			
 			}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				i3GEO.Interface.googlemaps.pan2ponto(x,y);
+    			i3GEO.janela.fechaAguarde();			
+			}
 			funcao.call(retorno);
 		};
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=zoomponto&pin=pin&xy="+x+" "+y+"&g_sid="+i3GEO.configura.sid;
@@ -847,6 +851,17 @@ i3GEO.php = {
 		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=montaFlamingo&g_sid="+i3GEO.configura.sid;
 		cpJSON.call(p,"montaFlamingo",funcao);	
 	},
+	/*
+	Function: googlemaps
+
+	<GOOGLEMAPS>	
+	*/
+	googlemaps: function(funcao){
+		i3GEO.php.verifica();
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=googlemaps&g_sid="+i3GEO.configura.sid;
+		cpJSON.call(p,"googlemaps",funcao);	
+	},
+
 	/*
 	Function: openlayers
 

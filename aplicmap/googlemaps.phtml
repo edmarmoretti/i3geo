@@ -15,7 +15,10 @@ include_once("../ms_configura.php");
         }
 </style>
 <title>MMA - Mapa interativo</title>
+<!---
 <script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=3&amp;sensor=false&amp;key=<?php echo $googleApiKey; ?>"></script>
+--->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 
 </head>
@@ -74,13 +77,15 @@ include_once("../ms_configura.php");
   <td class=tdbranca ></td>
   <td class=tdbranca style=text-align:center >
   	<div id=localizarxy >
-  	Aguarde...
   	</div>
   </td>
   <td class=tdbranca >
     	<div id=inserirKml ></div>
   </td>
-  <td class=tdbranca ><div id=ondeestou ></div></td>
+  <td class=tdbranca >
+  	<!-- aqui será incluída a escala numérica -->
+  	<div id=escala ></div>
+  </td>
   </tr>
   <tr><td></td><td class="tdbranca"><div style="text-align:left;font-size:10px;background-color:white;display:none;" id=mostraUTM ></div></td><td></td></tr>
   </table>
@@ -89,148 +94,44 @@ include_once("../ms_configura.php");
 <tr style="border:0px"><td colspan=3 id="barraInferior" style="background-image:url('../imagens/visual/default/rodape.png');height:10px"></td></tr>
 <tr style="border:0px"><td colspan=3 style=background-color:black ><input style="border:0px none; background-color:black;color:white;font-size:12pt;" type="text" size="1" id="i3geo_letreiro" ></td></tr>
 <tr style="border:0px"><td colspan=3 style=background-color:black;color:white >geoprocessamento@mma.gov.br</td></tr>
-
 </table>
 </center>
-<div id=barraDeBotoes2 style='display:none'>
-	<table style="width:100%"><caption style="text-align:center">&nbsp;</caption>
-	<tr><td style='background-color:rgb(250,250,250);'><img title="" alt="" src="../imagens/branco.gif" id='sobeferramentas'/></td></tr>
-	</table>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="identifica" alt="" src="../imagens/branco.gif" id='identifica'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:4px;'>&nbsp;</p>
-		<img title="info" alt="" src="../imagens/branco.gif" id='identificaBalao'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="extensao" alt="" src="../imagens/branco.gif" id='exten'/>
-	</div>                
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="insere xy" alt="" src="../imagens/branco.gif" id='inserexy'/>
-	</div> 
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="texto" alt="" src="../imagens/branco.gif" id='textofid'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="selecao" alt="" src="../imagens/branco.gif" id='selecao'/>
-	</div>
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="rota" alt="" src="../imagens/branco.gif" id='rota'/>
-	</div>
-
-	<div style='display:inline;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img title="insere grafico" alt="" src="../imagens/branco.gif" id='inseregrafico'/>
-	</div> 
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="scielo" alt="" src="../imagens/branco.gif" id='scielo'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="confluencias" alt="" src="../imagens/branco.gif" id='confluence'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="busca na wikipedia" alt="" src="../imagens/branco.gif" id='wiki'/>
-	</div>
-	<div style='display:none;background-color:rgb(250,250,250);'>
-		<p style='font-size:6px;'>&nbsp;</p>
-		<img  title="fotos" alt="" src="../imagens/branco.gif" id='buscafotos'/>
-	</div>
-   <table style="width:100%;"><tr><td style='background-color:rgb(250,250,250);'><p style='font-size:6px;'>&nbsp;</p><img title="" alt="" src="../imagens/branco.gif" id='desceferramentas'/></td></tr></table>
-</div>
 <script type="text/javascript">
 /*
-Title: Google Maps (experimental)
+Title: Google Maps 
 
 Abre o i3geo com a navegação controlada pelo Google Maps.
 
-File: i3geo/aplicmap/googlemaps.htm
+Arquivo: i3geo/aplicmap/googlemaps.phtml
 
 Exemplo:
 
-http://localhost/i3geo/ms_criamapa.php?interface=googlemaps.phtml
+http://localhost/i3geo/aplicmap/googlemaps.phtml
 
 */
-g_locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-g_barraFerramentas1 = "nao"
-g_barraFerramentas2 = "sim"
-g_mapaRefDisplay = "none"
-g_janelaMen = "nao";
-g_mostraRosa = "nao"
-g_opcoesTemas = "sim";
-;
-i3GEO.interface.ATUAL = "googlemaps";
-i3GEO.interface.IDCORPO = "contemImg";
-i3GEO.Interface.OUTPUTFORMAT = "png2";
-i3GEO.barraDeBotoes.BOTAOPADRAO = "identifica";
-i3GEO.configura.diminuixN = 20
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 
-i3GEO.configura.listaDePropriedadesDoMapa = {
-	"propriedades": [
-		{ text: "p10", url: "javascript:i3GEO.mapa.dialogo.gradeCoord()"},
-		{ text: "p12", url: "javascript:i3GEO.mapa.dialogo.autoredesenha()"}
-	]
-}
+i3GEO.Interface.ATUAL = "googlemaps";
+i3GEO.Interface.IDCORPO = "contemImg";
+i3GEO.configura.diminuixN = 20;
 
-i3GEO.configura.oMenuData = {
-	menu:[
-		{nome:$trad("s1"),id:"ajudaMenu"},	
-		{nome:$trad("s2"),id:"analise"},
-		{nome:$trad("s4"),id:"arquivos"},
-		{nome:$trad("d27"),id:"interface"}
-	],
-	submenus:{
-		"ajudaMenu": [ 
-			{ text: $trad("u1"), url: "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332", target:"_blank" },
-			{ text: $trad("u2"), url: "javascript:i3GEO.ajuda.abreDoc()" },
-			{ text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
-			{ text: $trad("u4"), url: "http://mapas.mma.gov.br/wikibooki3geo", target:"_blank" },
-			{ text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
-			{ text: "i3Geo Blog", url: "http://sistemas.mma.gov.br/blogs/index.php?blog=6", target:"_blank" },
-			{ text: "Lista de funções", url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" }
-		],
-		"analise": [
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u22")+'</b></span>',url: "#"}, 
-			{ text: $trad("u7"), url: "javascript:i3GEO.analise.dialogo.gradePol()"},
-			{ text: $trad("u8"), url: "javascript:i3GEO.analise.dialogo.gradePontos()" },
-			{ text: $trad("u9"), url: "javascript:i3GEO.analise.dialogo.gradeHex()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u23")+'</b></span>',url: "#"}, 
-			{ text: $trad("u11a"), url: "javascript:i3GEO.analise.dialogo.distanciaptpt()" },
-			{ text: $trad("u12"), url: "javascript:i3GEO.analise.dialogo.nptPol()" },
-			{ text: $trad("u13"), url: "javascript:i3GEO.analise.dialogo.pontoempoligono()" },
-			{ text: $trad("u14"), url: "javascript:i3GEO.analise.dialogo.pontosdistri()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u24")+'</b></span>',url: "#"}, 
-			{ text: $trad("u11"), url: "javascript:i3GEO.analise.dialogo.centroide()" },
-			{ text: $trad("u25"), url: "javascript:i3GEO.analise.dialogo.dissolve()" },
-    		{ text: '<span style=color:gray;text-decoration:underline; ><b>'+$trad("u27")+'</b></span>',url: "#"}, 
-			{ text: $trad("u6"), url: "javascript:i3GEO.analise.dialogo.analisaGeometrias()" },
-			{ text: $trad("u10"), url: "javascript:i3GEO.analise.dialogo.buffer()" },
-			{ text: $trad("u26"), url: "javascript:i3GEO.analise.dialogo.agrupaElementos()" }
-		],
-		"arquivos": [
-			{ text: $trad("u17"), url: "javascript:i3GEO.mapa.dialogo.salvaMapa()" },
-			{ text: $trad("u18"), url: "javascript:i3GEO.mapa.dialogo.carregaMapa()" },
-			{ text: $trad("u20"), url: "javascript:i3GEO.mapa.dialogo.convertews()" },
-			{ text: $trad("u20a"), url: "javascript:i3GEO.mapa.dialogo.convertekml()" },
-			{ text: $trad("u21"), url: "../geradordelinks.htm" }
-		],
-		"interface": [
-			{ text: "Normal", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/geral.htm?'+i3GEO.configura.sid" },
-			{ text: "Google Earth", url: "javascript:window.location = i3GEO.configura.locaplic+'/aplicmap/googleearth.phtml?'+i3GEO.configura.sid" }
-		]
-	}
-}
-i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja"
 i3GEO.cria();
+
+i3GEO.barraDeBotoes.AUTOALTURA = false;
+i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
+i3GEO.barraDeBotoes.PERMITEFECHAR = true;
+i3GEO.barraDeBotoes.PERMITEDESLOCAR = true;
+i3GEO.barraDeBotoes.AUTO = true;
+i3GEO.barraDeBotoes.COMPORTAMENTO = "laranja";
+
+i3GEO.Interface.BARRABOTOESLEFT = 80;
+i3GEO.Interface.BARRABOTOESTOP = 20;
+
+i3GEO.idioma.IDSELETOR = "seletorIdiomas";
+i3GEO.Interface.ATIVAMENUCONTEXTO = true;
+i3GEO.arvoreDeTemas.TIPOBOTAO = "radio";
+i3GEO.arvoreDeTemas.ATIVATEMAIMEDIATO = true;
+
 i3GEO.inicia();
 </script>
 </body>

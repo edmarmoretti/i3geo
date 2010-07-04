@@ -1046,11 +1046,13 @@ i3GEO.arvoreDeCamadas = {
 		{t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("mantem");}
 		if(tipo === "ligartodos"){
 			t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("marca");
-			if(i3GEO.Interface.ATUAL === "openlayers"){return;}
+			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
+			{return;}
 		}
 		if(tipo === "desligartodos"){
 			t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("desmarca");
-			if(i3GEO.Interface.ATUAL === "openlayers"){return;}
+			if(i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps")
+			{return;}
 		}
 		//
 		//zera o contador de tempo
@@ -1123,13 +1125,18 @@ i3GEO.arvoreDeCamadas = {
 						if(tipo === "marca"){
 							c.checked = true;
 							if(i3GEO.Interface.ATUAL === "openlayers"){
-								i3geoOL.getLayersByName(c.value)[0].setVisibility(true);
+								i3GEO.Interface.openlayers.ligaDesliga(c);
+							}
+							if(i3GEO.Interface.ATUAL === "googlemaps"){
+								i3GEO.Interface.googlemaps.ligaDesliga(c);
 							}
 						}
 						if(tipo === "desmarca"){
 							c.checked = false;
 							if(i3GEO.Interface.ATUAL === "openlayers")
-							{i3geoOL.getLayersByName(c.value)[0].setVisibility(false);}
+							{i3GEO.Interface.openlayers.ligaDesliga(c);}
+							if(i3GEO.Interface.ATUAL === "googlemaps")
+							{i3GEO.Interface.googlemaps.ligaDesliga(c);}
 						}
 					}
 				}

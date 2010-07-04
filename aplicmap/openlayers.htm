@@ -4,7 +4,7 @@
 <meta http-equiv="Category" content="I3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <title>i3Geo - Mapa interativo</title>
-<script type="text/javascript" src="../classesjs/i3geo.js"></script>
+<script type="text/javascript" src="../classesjs/i3geonaocompacto.js"></script>
 <script type="text/javascript" src="../pacotes/openlayers/OpenLayers29.js.php"></script>
 </head>
 <body id="i3geo">
@@ -163,7 +163,6 @@ Para definir quais botões das barras de ferramentas serão incluídos no mapa, vej
 	É utilizada para identificar o local correto onde estão os programas em php que são utilizados.
 */
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
-var g_localimg = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo/imagens";
 
 i3GEO.Interface.ATUAL = "openlayers";
 i3GEO.Interface.IDCORPO = "contemImg";
@@ -176,7 +175,7 @@ i3GEO.Interface.openlayers.GADGETS = {
 		ScaleLine:true,
 		OverviewMap:false	
 	};
-i3GEO.Interface.openlayers.TILES = false;
+i3GEO.Interface.openlayers.TILES = true;
 /*
 Após a criação, é criado o objeto i3geoOL que corresponde ao objeto map da API do OpenLayers.
 Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API do OpenLayers
@@ -184,7 +183,6 @@ Vc pode usar i3geoOL para aplicar os métodos e verificar as propriedades da API 
 i3GEO.cria();
 /*
 	Inicializa o mapa
-	
 */
 i3GEO.barraDeBotoes.AUTOALTURA = false;
 i3GEO.barraDeBotoes.ATIVAMENUCONTEXTO = false;
