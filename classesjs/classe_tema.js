@@ -48,7 +48,8 @@ i3GEO.tema = {
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.exclui()");}
 		g_operacao = "excluitema";
 		//remove o tema do DOM e seus filhos
-		var p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
+		var layer,
+			p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 		do
 		{p.removeChild(p.childNodes[0]);}
 		while
@@ -59,7 +60,7 @@ i3GEO.tema = {
 		i3GEO.php.excluitema(i3GEO.atualiza,tema);
 		i3GEO.mapa.ativaTema("");
 		if(i3GEO.Interface.ATUAL === "openlayers"){
-			var layer = i3geoOL.getLayersByName(tema)[0];
+			layer = i3geoOL.getLayersByName(tema)[0];
 			i3geoOL.removeLayer(layer);
 		}
 	},
@@ -75,6 +76,7 @@ i3GEO.tema = {
 	fonte: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.fonte()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
+		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			i3GEO.janela.fechaAguarde();
 			if(retorno.data !== "erro")
@@ -95,6 +97,7 @@ i3GEO.tema = {
 	*/
 	sobe: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.sobe()");}
+		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			//
 			//atualiza apenas remonta a árvore
@@ -120,6 +123,7 @@ i3GEO.tema = {
 	*/
 	desce: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.desce()");}
+		i3GEO.mapa.ativaTema(tema);
 		var temp = function(retorno){
 			//
 			//atualiza apenas remonta a árvore
@@ -144,6 +148,7 @@ i3GEO.tema = {
 	tema - código do tema
 	*/
 	zoom: function(tema){
+		i3GEO.mapa.ativaTema(tema);
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.zoom()");}
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
@@ -160,6 +165,7 @@ i3GEO.tema = {
 	*/
 	zoomsel: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.zoomsel()");}
+		i3GEO.mapa.ativaTema(tema);
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.zoomsel(i3GEO.atualiza,tema);
@@ -175,6 +181,7 @@ i3GEO.tema = {
 	*/
 	limpasel: function(tema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.limpasel()");}
+		i3GEO.mapa.ativaTema(tema);
 		g_operacao = "limpasel";
 		i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 		i3GEO.contadorAtualiza++;
@@ -195,6 +202,7 @@ i3GEO.tema = {
 	*/
 	mudatransp: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
+		i3GEO.mapa.ativaTema(tema);
 		g_operacao = "transparencia";
 		var valor,
 			temp = function(retorno){
@@ -225,6 +233,7 @@ i3GEO.tema = {
 	*/
 	mudanome: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudanome()");}
+		i3GEO.mapa.ativaTema(tema);
 		g_operacao = "mudanome";
 		var valor;
 		if($i("nn"+idtema))
@@ -312,6 +321,7 @@ i3GEO.tema = {
 		
 		*/
 		cortina: function(tema){
+			i3GEO.mapa.ativaTema(tema);
 			if(typeof(i3GEOF.cortina) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.cortina()","cortina","cortina");}
 		},
@@ -327,6 +337,7 @@ i3GEO.tema = {
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
+			i3GEO.mapa.ativaTema(tema);
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
 			if(typeof(i3GEOF.converteKml) === 'undefined')
@@ -342,6 +353,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		graficotema: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.graficoTema) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.graficotema()","graficotema","graficoTema");}
 		},
@@ -355,6 +367,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		toponimia: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.toponimia) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.toponimia()","toponimia","toponimia");}
 		},
@@ -368,6 +381,7 @@ i3GEO.tema = {
 		idtema - código do tema
 		*/
 		filtro: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.filtro) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.filtro()","filtro","filtro");}
 		},
@@ -381,6 +395,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		procuraratrib: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.busca) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.procuraratrib()","busca","busca");}
 		},
@@ -394,6 +409,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		tabela: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.tabela) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.tabela()","tabela","tabela");}
 		},
@@ -407,6 +423,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		etiquetas: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.etiqueta) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiquetas","etiquetas");}
 		},
@@ -420,6 +437,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema conforme definido no map file
 		*/
 		editaLegenda: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.legenda) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editaLegenda()","legenda","legenda");}
 		},
@@ -433,6 +451,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema no map file.
 		*/
 		download: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.download) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()","download","download");}
 		},
@@ -447,8 +466,10 @@ i3GEO.tema = {
 
 		idtema - id ue identifica o tema no map file.
 		*/
-		sld: function(idtema)
-		{i3GEO.janela.cria("500px","350px",i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+idtema+"&g_sid="+i3GEO.configura.sid,"","","SLD <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");},
+		sld: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
+			i3GEO.janela.cria("500px","350px",i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=tema2sld&tema="+idtema+"&g_sid="+i3GEO.configura.sid,"","","SLD <a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=5&idajuda=41' >&nbsp;&nbsp;&nbsp;</a>");
+		},
 		/*
 		Function: editorsql
 
@@ -459,6 +480,7 @@ i3GEO.tema = {
 		idtema - id que identifica o tema no map file.
 		*/
 		editorsql: function(idtema){
+			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.editorsql) === 'undefined')
 			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.editorsql()","editorsql","editorsql");}
 		}

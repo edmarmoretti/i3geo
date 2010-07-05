@@ -1205,7 +1205,7 @@ i3GEO.Interface = {
 					if(elemento.name == nomeLayer)
 					{i = number;}
 				}
-			)
+			);
 			return i;
 		},
 		ligaDesliga:function(obj){
