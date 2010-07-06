@@ -65,6 +65,8 @@ i3GEO.guias = {
 	
 	i3GEO.guias.CONFIGURA.legenda.titulo = "nome diferente";
 	
+	Por padrão são definidas as guias legenda, temas, adiciona e mapas (links)
+	
 	Exemplo
 	
 	i3GEO.guias.CONFIGURA.legenda = {

@@ -411,7 +411,7 @@ i3GEOF.legenda = {
 							if (isn[0] != undefined){
 								if(isn[0].name == "nome"){
 									nomes.push(isn[0].value);
-									temp = (isn[0].id).split("_");
+									temp = (isn[0].id).split("i3GEOlegendaid_");
 									ids.push(temp[1]);
 								}
 								if(isn[0].name == "expressao")
@@ -572,7 +572,7 @@ i3GEOF.legenda = {
 			p.removeChild(p.childNodes[0]);
 		} while (p.childNodes.length > 0);
 		p.parentNode.removeChild(p);
-		i3GEOF.legenda.mudaLegenda();
+		//i3GEOF.legenda.mudaLegenda();
 	},
 	/*
 	Function: editaSimbolo

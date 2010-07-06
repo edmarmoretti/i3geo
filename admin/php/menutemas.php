@@ -1156,11 +1156,11 @@ function removeCabecalho($arq,$symbolset=true)
         	$linha = fgets($handle);
         	if($symbolset)
         	{
-        		if(strtoupper(trim($linha)) == "SYMBOLSET")
+        		if(strpos(strtoupper($linha),"SYMBOLSET") !== false)
         		{$cabeca[] = $linha;}
-        		if(strtoupper(trim($linha)) == "FONTSET")
+        		if(strpos(strtoupper($linha),"FONTSET") !== false)
         		{$cabeca[] = $linha;}
-        	}
+        	}			
         	if(strtoupper(trim($linha)) == "LAYER")
         	{$grava = true;}
         	if($grava)

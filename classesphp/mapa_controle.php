@@ -1306,7 +1306,7 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		if ($opcao == "alteraclasses")
 		{
 			//esta operação é chamada com POST via cpaint
-			//por isso precisa ser executada com start
+			error_reporting(E_ALL);
 			alteraclassesPost($ids,$nomes,$exps);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");
