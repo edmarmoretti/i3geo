@@ -21,6 +21,7 @@ MAP
       "TEMA"	"Localidades"
       "editorsql"	""
       "LTEMPOITEMFIM"	""
+	  "TIP" "TIPO,ANOCRIA,NOMELOC"
     END
     NAME "locali"
     STATUS OFF

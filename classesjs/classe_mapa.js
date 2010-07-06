@@ -639,31 +639,32 @@ i3GEO.mapa = {
 							tips = (temas[j].resultado.tips).split(",");
 							ntips = tips.length;
 							ins = "";
-							for(r=0;r<ntips;r++){
+							ds = temas[j].resultado.dados;
+							if(ds !== " "){
 								try{
-								ds = temas[j].resultado.dados;
-								if(ds !== " "){
-									nds = ds.length;	
+									nds = ds.length;
 									for(s=0;s<nds;s++){
-										eval("var alias = ds[s]."+tips[r]+".alias");
-										eval("var valor = ds[s]."+tips[r]+".valor");
-										eval("var link = ds[s]."+tips[r]+".link");
-										eval("var img = ds[s]."+tips[r]+".img");
-										if (i3GEO.configura.tipotip === "completo" || i3GEO.configura.tipotip === "balao"){
-											if(valor !== "" && link === "") 
-											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
-											if(valor !== "" && link !== "") 
-											{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
-											if(img !== "")
-											{ins += img+"<br>";}
-											mostra = true;
-										}
-										else{
-											ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
-											mostra = true;
+										for(r=0;r<ntips;r++){
+											eval("var alias = ds[s]."+tips[r]+".alias");
+											eval("var valor = ds[s]."+tips[r]+".valor");
+											eval("var link = ds[s]."+tips[r]+".link");
+											eval("var img = ds[s]."+tips[r]+".img");
+											if (i3GEO.configura.tipotip === "completo" || i3GEO.configura.tipotip === "balao"){
+												if(valor !== "" && link === "") 
+												{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " :" + valor + "</span><br>";}
+												if(valor !== "" && link !== "") 
+												{ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + alias + " : <a style='color:blue;cursor:pointer' target=_blanck href='"+link+"' >" + valor + "</a></span><br>";}
+												if(img !== "")
+												{ins += img+"<br>";}
+												ins += "<nl>";
+												mostra = true;
+											}
+											else{
+												ins += "<span class='tiptexto' style='text-align:left;font-size:8pt'>" + valor + "</span><br>";
+												mostra = true;
+											}
 										}
 									}
-								}
 								}
 								catch(e){
 									if(typeof(console) !== 'undefined'){console.error(e);}
@@ -692,7 +693,7 @@ i3GEO.mapa = {
 									i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 									balloon = new Balloon();
 									balloon.delayTime = 0;
-									res = "<div style=text-align:left >"+res+"</div>";
+									res = "<div style=text-align:left;overflow:auto;height:"+i3GEO.configura.alturatip+"; >"+res+"</div>";
 									balloon.showTooltip($i("marcaIdentifica"),res);
 									$i('marcaIdentifica').onclick = $i("closeButton").onclick;
 								}

@@ -453,10 +453,13 @@ $imgdir - Diretório temporário das imagens.
 
 $onclick - Função que será incluída no HTML no evento onclick sobre o símbolo
 
+$tamanho - Tamanho (size) do símbolo
+
 return:
+
 String no formato HTML com as imagens dos símbolos
 */
-	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=16)
+	function listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,$tamanho=8,$width=1)
 	{
 		if ($tipo == 3){$tipo = 2;} //tipo raster
 		if (!file_exists($dir_tmp."/".$imgdir."/simbolos".$tipo.".inc"))
@@ -488,6 +491,7 @@ String no formato HTML com as imagens dos símbolos
 				$e = $c->getstyle(0);
 				$e->set("symbolname",$nomes);
 				$e->set("size",$tamanho);
+				$e->set("width",$width);
 				$ico = $c->createLegendIcon(40,40);
 				$nimg = $ico->saveWebImage();
 				$pat = $this->mapa->web->imageurl;
