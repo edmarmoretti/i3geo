@@ -100,11 +100,11 @@ i3GEO.calculo = {
 	*/
 	dd2tela: function (vx,vy,docmapa,ext,cellsize){
 		try{
-			var pos,latlng,xyn,dc,imgext,c,xy;
+			var pos,latlng,xyn,dc,imgext,c,xy,mapType;
 			if(i3GEO.Interface.ATUAL == "googlemaps"){
 				pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-				latlng = new GLatLng(vy,vx);
-				xyn = i3GeoMap.fromLatLngToContainerPixel(latlng);
+				mapType = i3GeoMap.mapTypes[i3GeoMap.getMapTypeId()];
+				xyn = mapType.projection.fromLatLngToPoint(new google.maps.LatLng(vy,vx));
 				xy = [];
 				return [(xyn.x)+pos[0],(xyn.y)+pos[1]];
 			}

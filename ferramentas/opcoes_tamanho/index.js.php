@@ -172,8 +172,8 @@ i3GEOF.opcoesTamanho = {
 			{calc += parseInt($i("ferramentas").style.width,10);}
 			if ($i("contemFerramentas"))
 			{calc += parseInt($i("contemFerramentas").style.width,10);}		
-			if($i("mst"))
-			{$i("mst").style.width = (l * 1) + calc + "px";}
+			//if($i("mst"))
+			//{$i("mst").style.width = (l * 1) + calc + "px";}
 			if($i("contemImg")){
 				$i("contemImg").style.height= a+"px";
 				$i("contemImg").style.width= l+"px";

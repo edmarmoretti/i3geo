@@ -334,6 +334,8 @@ i3GEO.maparef = {
 	
 	Atualiza o tamanho e a posição do box que indica a extensão geográfica do mapa atual
 	
+	O box é um div com id = "boxref".
+	
 	*/
 	atualizaBox: function(){
 		var box = $i("boxref"),
@@ -345,10 +347,14 @@ i3GEO.maparef = {
 			novoel.style.position = 'absolute';
 			novoel.style.cursor = "move";
 			novoel.style.backgroundColor = "RGB(120,220,220)";
+			novoel.style.borderWidth = "3px";
 			if (navm){novoel.style.filter='alpha(opacity=40)';}
 			else{novoel.style.opacity= 0.4;}
 			$i("mapaReferencia").appendChild(novoel);
 			boxrefdd = new YAHOO.util.DD("boxref");
+			//
+			//atualiza o mapa principal quando o box é modificado manualmente
+			//
 			novoel.onmouseup = function(){
 				var rect,telaminx,telaminxy,telamaxx,telaminy,m,x,ext;
 				rect = $i("boxref");
@@ -363,20 +369,25 @@ i3GEO.maparef = {
 			};
 			box = $i("boxref");
 		}
+		//
+		//aplica ao box um novo tamanho
+		//
 		i3GEO.calculo.ext2rect("boxref",i3GEO.parametros.extentref,i3GEO.parametros.mapexten,i3GEO.parametros.celularef,$i("mapaReferencia"));
 		w = parseInt(box.style.width,10);
-		if(w > 120 || w < 10)
-		{box.style.display = "none";}
-		else{
-			box.style.display = "block";
-			box.style.top = parseInt(box.style.top,10)+4;
-			box.style.left = parseInt(box.style.left,10)+4;
+		if(w > 120)
+		{box.style.display = "none";return;}
+		box.style.display = "block";
+		box.style.top = parseInt(box.style.top,10)+4;
+		box.style.left = parseInt(box.style.left,10)+4;
+		if(w < 10){
+			box.style.width = "10px";
+			box.style.height = "10px";
 		}
 	},
 	/*
 	Function: click
 	
-	Ocorre quando o usuário clica sobre o mapa de referência, alterando a extensão geográfica do mapa principal
+	Ocorre quando o usuário clica sobre o mapa de referência, deslocando o mapa principal
 	*/
 	click: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.click()");}

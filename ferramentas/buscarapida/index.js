@@ -317,9 +317,9 @@ i3GEObuscaRapida = {
 		var xMax = ext[2];
 		var yMin = ext[1];
 		var yMax = ext[3];
-
- 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
- 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+		var docmapa = window.parent.document.getElementById(window.parent.i3GEO.Interface.IDCORPO)
+ 		var xyMin = window.parent.i3GEO.calculo.dd2tela(xMin,yMin,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+ 		var xyMax = window.parent.i3GEO.calculo.dd2tela(xMax,yMax,docmapa,window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 
 		window.parent.i3GEO.util.criaBox("boxg");
 		var box = window.parent.$i("boxg");

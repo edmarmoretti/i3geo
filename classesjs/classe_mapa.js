@@ -114,6 +114,8 @@ i3GEO.mapa = {
 	*/
 	ativaLogo: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.mapa.ativaLogo()");}
+		if(i3GEO.Interface.ATUAL === "googlemaps")
+		{alert("Essa operação não funciona nessa interface");return;}
 		i3GEO.contadorAtualiza++;
 		i3GEO.php.ativalogo(i3GEO.atualiza);
 	},

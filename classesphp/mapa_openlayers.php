@@ -107,6 +107,9 @@ if($_GET == false)
 {$cache = false;}
 if($_GET["DESLIGACACHE"] == "sim")
 {$cache = false;}
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
+{$cache = false;}
+
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
 
@@ -149,7 +152,7 @@ if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
 
-if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
 	$img->saveImage($nomer);
@@ -242,5 +245,32 @@ function nomeRandomico($n=10)
 	for($i=0; $i < $n; ++$i)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
+}
+function filtraImagem($nomer,$tipoimagem){
+	include_once("classe_imagem.php");
+	$tiposImagem = explode(" ",$tipoimagem);
+	foreach ($tiposImagem as $tipoimagem){
+		$m = new Imagem($nomer);
+		if ($tipoimagem == "cinza")
+		{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepiaclara")
+		{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepianormal")
+		{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "negativo")
+		{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "detectaBordas")
+		{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "embassa")
+		{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "gaussian_blur")
+		{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "selective_blur")
+		{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "mean_removal")
+		{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "pixelate")
+		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
+	}
 }
 ?>

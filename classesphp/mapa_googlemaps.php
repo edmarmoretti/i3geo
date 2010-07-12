@@ -46,6 +46,8 @@ include_once("../ms_configura.php");
 //converte a requisição do tile em coordenadas geo
 //http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
 //
+
+
 $x = $_GET["X"];
 $y = $_GET["Y"];
 $n = pow(2, $_GET["Z"]);
@@ -129,8 +131,13 @@ if($_GET == false)
 {$cache = false;}
 if($_GET["DESLIGACACHE"] == "sim")
 {$cache = false;}
+
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
+{$cache = false;}
+
 if($cache == true)
 {carregaCacheImagem($_GET["BBOX"],$nomecache,$_GET["map"],$_GET["WIDTH"],$_GET["HEIGHT"]);}
+
 $map_size = explode(" ",$_GET["map_size"]);
 $mapa->setsize($map_size[0],$map_size[1]);
 $mapext = explode(" ",$_GET["mapext"]);
@@ -138,6 +145,7 @@ $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
+
 $legenda = $mapa->legend;
 $legenda->set("status",MS_OFF);
 $escala = $mapa->scalebar;
@@ -148,7 +156,8 @@ $escala->set("status",MS_OFF);
 //
 if($_GET["tipolayer"] != "fundo")
 {$o->set("transparent",MS_TRUE);}
-
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
+{$o->setOption("QUANTIZE_FORCE","OFF");}
 if(!$qy)
 {$img = $mapa->draw();}
 else
@@ -168,12 +177,11 @@ if (!function_exists('imagepng'))
 	if (!function_exists('imagepng'))
 	{$_GET["TIPOIMAGEM"] = "";}
 }
-
-if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum")
+if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum")
 {
 	$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
 	$img->saveImage($nomer);
-	filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
+	filtraImagem($nomer,trim($_GET["TIPOIMAGEM"]));
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
@@ -263,5 +271,32 @@ function nomeRandomico($n=10)
 	for($i=0; $i < $n; ++$i)
 	{$nomes .= $a{mt_rand(0, $max)};}
 	return $nomes;
+}
+function filtraImagem($nomer,$tipoimagem){
+	include_once("classe_imagem.php");
+	$tiposImagem = explode(" ",$tipoimagem);
+	foreach ($tiposImagem as $tipoimagem){
+		$m = new Imagem($nomer);
+		if ($tipoimagem == "cinza")
+		{imagepng($m->cinzaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepiaclara")
+		{imagepng($m->sepiaClara(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "sepianormal")
+		{imagepng($m->sepiaNormal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "negativo")
+		{imagepng($m->negativo(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "detectaBordas")
+		{imagepng($m->detectaBordas(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "embassa")
+		{imagepng($m->embassa(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "gaussian_blur")
+		{imagepng($m->gaussian_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "selective_blur")
+		{imagepng($m->selective_blur(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "mean_removal")
+		{imagepng($m->mean_removal(),str_replace("\\","/",$nomer));}
+		if ($tipoimagem == "pixelate")
+		{imagepng($m->pixelate(),str_replace("\\","/",$nomer));}
+	}
 }
 ?>

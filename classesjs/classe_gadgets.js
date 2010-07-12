@@ -438,7 +438,7 @@ i3GEO.gadgets = {
 				{alert ("Digite uma palavra para busca!");return;}
 				wdocaf("300px","280px",i3GEO.configura.locaplic+"/ferramentas/buscarapida/index.htm","","","Busca rapida");
 			};
-			i = $inputText(id,"200","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
+			i = $inputText(id,"210","valorBuscaRapida","digite o texto para busca","30",$trad("o2"));
 			ins = "<table><tr><td><a class=ajuda_usuario target=_blank href='"+i3GEO.configura.locaplic+"/ajuda_usuario.php?idcategoria=8&idajuda=71' >&nbsp;&nbsp;&nbsp;</a></td><td>"+i;
 			ins += "</td><td><img src='"+i3GEO.util.$im("branco.gif")+"' class='tic' onclick='i3geo_buscaRapida()' /></td></tr></table>";
 			temp = $i(id);

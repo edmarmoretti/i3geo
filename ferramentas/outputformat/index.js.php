@@ -146,10 +146,7 @@ i3GEOF.outputformat = {
 				temp = function(retorno){
 					i3GEOF.outputformat.aguarde.visibility = "hidden";
 					if(retorno.data != "erro"){
-						if(i3GEO.Interface.ATUAL === "openlayers")
-						{i3GEO.Interface.openlayers.atualizaMapa();}
-						else
-						{i3GEO.atualiza();}
+						i3GEO.Interface.atualizaMapa();
 					}
 					else
 					{alert("Nao foi possivel alterar o tipo");}

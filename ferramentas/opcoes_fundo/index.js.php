@@ -75,6 +75,8 @@ i3GEOF.opcoesFundo = {
 			cp.call(p,"corQM",retorno);
 		}
 		catch(erro){alert(erro);}
+		if(i3GEO.Interface.atual !== "googlemaps")
+		{alert("Essa operacao afeta apenas a ferramenta de impressao do mapa");}
 	},
 	/*
 	Function: html
@@ -146,8 +148,6 @@ i3GEOF.opcoesFundo = {
 					var layer = i3geoOL.getLayersByName("Fundo")[0];
 					layer.mergeNewParams({"DESLIGACACHE":"sim"});
 					layer.mergeNewParams({r:Math.random()});
-			//layer.redraw();
-
 				}
 				i3GEO.atualiza();
 			},

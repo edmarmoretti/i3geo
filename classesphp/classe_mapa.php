@@ -114,7 +114,8 @@ tipo {string} - OUTPUTFORMAT que será aplicado. deve existir no mapfile básico q
 */	
  	function mudaoutputformat($tipo)
  	{
-		//error_reporting(E_ALL);
+		foreach($this->layers as $l)
+		{$l->setMetaData("cache","");}
 		return $this->mapa->selectOutputFormat($tipo);
 	}
 /*
