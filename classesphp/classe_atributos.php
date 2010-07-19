@@ -129,13 +129,19 @@ xmin ymin xmax ymax separados por espaço.
 		$prjMapa = $this->mapa->getProjection();
 		$prjTema = $this->layer->getProjection();
 		$ret = $shape->bounds;
-		//reprojeta o retangulo
-		if (($prjTema != "") && ($prjMapa != $prjTema))
+		//
+		//verifica se o retangulo está ou não em coordenadas geográficas
+		//
+		if($ret->minx > 180 ||  $ret->minx < -180)
 		{
-			$projInObj = ms_newprojectionobj($prjTema);
-			$projOutObj = ms_newprojectionobj($prjMapa);
-			$ret->project($projInObj, $projOutObj);
-		}		
+			//reprojeta o retangulo
+			if (($prjTema != "") && ($prjMapa != $prjTema))
+			{
+				$projInObj = ms_newprojectionobj($prjTema);
+				$projOutObj = ms_newprojectionobj($prjMapa);
+				$ret->project($projInObj, $projOutObj);
+			}		
+		}
 		$ext = $ret->minx." ".$ret->miny." ".$ret->maxx." ".$ret->maxy;
 		if (($shape->type == MS_SHP_POINT) || ($shape->type == 0))
 		{

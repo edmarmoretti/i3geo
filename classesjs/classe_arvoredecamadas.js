@@ -1272,7 +1272,7 @@ i3GEO.arvoreDeCamadas = {
 				if(ltema.escondido !== "sim"){
 					temp = eval("ltema."+propriedade);
 					if(operador === "igual"){
-						if(temp === valor)
+						if(temp == valor)
 						{resultado.push(ltema);}
 					}
 					if(operador === "diferente"){
@@ -1285,5 +1285,36 @@ i3GEO.arvoreDeCamadas = {
    			while(i < nelementos);
    		}
    		return resultado;
-	}
+	},
+	/*
+	Function: alteraPropCamadas
+	
+	Altera o valor de uma propriedade de um tema do objeto i3GEO.arvoreDeCamadas.CAMADAS
+	
+	Parameters:
+	
+	propriedade {string} - propriedade que será modificada
+	
+	valor - novo valor
+	
+	camada {string} - código da camada
+	*/
+	alteraPropCamadas: function(propriedade,valor,camada){
+    	if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeCamadas.alteraPropCamadas()");}
+    	var resultado = [],
+    		i = 0,
+    		temp,
+    		nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length,
+    		ltema;
+    	if (nelementos > 0){
+	 		do{
+	   			ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
+				if(ltema.name == camada){
+					eval("ltema."+propriedade+"='"+valor+"';");
+				}
+           		i++;        		
+      		}
+   			while(i < nelementos);
+   		}
+	}	
 };

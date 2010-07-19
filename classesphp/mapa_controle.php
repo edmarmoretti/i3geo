@@ -1052,6 +1052,8 @@ Gera uma imagem que será utilizada para destacar um determinado tema.
 */
 	case "GERADESTAQUE":
 		include_once("classe_temas.php");
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}		
 		$m = new Temas($map_file,$tema,"",$ext);
 		$retorno = $m->geraDestaque();
 	break;
@@ -1294,7 +1296,9 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 	case "ALTERACLASSE":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}
+		$m = new Alteraclasse($map_file,$tema,"",$ext);
 		if ($opcao == "adicionaclasse")
 		{$retorno = $m->adicionaclasse();}
 		if ($opcao == "valorunico")
@@ -1507,11 +1511,13 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 */					
 	case "GRAFICOSELECAO":
 		include_once("graficos.php");
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}		
 		if(!isset($exclui))
 		{$exclui = "";}
 		if(!isset($tipo))
 		{$tipo = "nenhum";}
-		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false);
+		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext);
 	break;
 
 /*
@@ -1614,6 +1620,8 @@ Pega os dados de um tema para geração do gráfico de linha do tempo.
 */
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}		
 		if(!isset($ext))
 		{$ext = "";}
 		$retorno = dadosLinhaDoTempo($map_file,$tema,$ext);
@@ -1902,6 +1910,8 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 	case "LISTAVALORESITENS":
 		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}		
 		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
 	break;
@@ -1934,7 +1944,9 @@ Identifica elementos no mapa.
 		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema);
 		if(!isset($ext))
-		{$ext = "";}		
+		{$ext = "";}
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
 	break;
 
@@ -1984,6 +1996,8 @@ Pega todos os valores dos itens de uma tabela de um tema.
 <Atributos->listaRegistros>
 */	
 	case "LISTAREGISTROS":
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}
 		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema,"",$ext);
 		if(!isset($tipo)){$tipo = "";}
@@ -2044,6 +2058,8 @@ Muda a extensão geográfica do mapa.
 		copiaSeguranca($map_file);
 		if (!isset($ext) || $ext == "" || $ext == " "){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
 		$m = new Navegacao($map_file);
+		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		{$ext = projetaExt($map_file,$ext);}
 		$m->mudaExtensao($ext);
 		$m->salva();
 		redesenhaMapa();
@@ -2426,6 +2442,8 @@ Seleciona elementos utilizando um retângulo.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema);
+			if(isset($ext) && $ext != "" && $interface == "googlemaps")
+			{$ext = projetaExt($map_file,$ext);}
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
 		redesenhaMapa();		
@@ -2677,6 +2695,37 @@ if (!connection_aborted())
 }
 else
 {exit();}
+/*
+Function: projetaExt
+
+Projeta uma string com coordenadas geográficas para coordenadas métricas
+
+Parametros:
+
+$map_file {string}
+
+$ext {string} - extensão geográfica com valores separados por espaço
+
+Return:
+
+{string}
+*/
+function projetaExt($map_file,$ext)
+{
+	$extA = explode(" ",$ext);
+	$mapa = ms_newMapObj($map_file);
+	if($extA[0] < 180 &&  $extA[0] > -180)
+	{
+		$rect = ms_newRectObj();
+		$rect->setextent($extA[0],$extA[1],$extA[2],$extA[3]);
+		$prjMapa = $mapa->getProjection();
+		$projInObj = ms_newprojectionobj("proj=latlong");
+		$projOutObj = ms_newprojectionobj($prjMapa);
+		$rect->project($projInObj, $projOutObj);
+		$ext = $rect->minx." ".$rect->miny." ".$rect->maxx." ".$rect->maxy;
+	}
+	return $ext;	
+}
 /*
 Function: alteraclassesPost
 

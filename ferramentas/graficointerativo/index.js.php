@@ -191,7 +191,7 @@ i3GEOF.graficointerativo = {
 				"",
 				false,
 				"ligados"
-			);	
+			);
 			new YAHOO.widget.Button(
 				"i3GEOgraficointerativobotao1",
 				{onclick:{fn: i3GEOF.graficointerativo.obterDados}}
@@ -331,9 +331,9 @@ i3GEOF.graficointerativo = {
 			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.graficointerativo.obterDados()");
 			}
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				GEvent.removeListener(graficointerativoDragend);
-				GEvent.removeListener(graficointerativoZoomend);
+			if(i3GEO.Interface.ATUAL == "googlemaps"){
+				google.maps.event.removeListener(graficointerativoDragend);
+				google.maps.event.removeListener(graficointerativoZoomend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -432,7 +432,7 @@ i3GEOF.graficointerativo = {
 			x = $i("i3GEOgraficointerativoComboXid").value,
 			y = $i("i3GEOgraficointerativoComboYid").value,
 			excluir = $i("i3GEOgraficointerativoexcluir").value,
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir,
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=graficoSelecao&tema="+tema+"&itemclasses="+x+"&itemvalores="+y+"&exclui="+excluir+"&ext="+i3GEO.parametros.mapexten,
 			cp = new cpaint(),
 			tipo = "soma",
 			monta;

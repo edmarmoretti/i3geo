@@ -559,9 +559,9 @@ i3GEO.php = {
 
 	<GERADESTAQUE>	
 	*/
-	geradestaque: function(funcao,tema){
+	geradestaque: function(funcao,tema,ext){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=geradestaque&tema="+tema+"&g_sid="+i3GEO.configura.sid+"&ext="+ext;
 		cpJSON.call(p,"geradestaque",funcao);	
 	},
 	/*

@@ -1185,12 +1185,11 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 		}
 		$layer->close();
 	}
-	$valores = array();	
+	$valores = array();
 	if (@$layer->queryByrect($mapa->extent) == MS_SUCCESS)
 	{
 		$sopen = $layer->open();
 		if($sopen == MS_FAILURE){return "erro";}
-
 		$res_count = $layer->getNumresults();
 		for ($i=0;$i<$res_count;++$i)
 		{

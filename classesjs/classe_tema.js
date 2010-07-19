@@ -49,6 +49,7 @@ i3GEO.tema = {
 		g_operacao = "excluitema";
 		//remove o tema do DOM e seus filhos
 		var layer,
+			indice,
 			p = document.getElementById("idx"+tema).parentNode.parentNode.parentNode;
 		do
 		{p.removeChild(p.childNodes[0]);}
@@ -62,6 +63,10 @@ i3GEO.tema = {
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(tema)[0];
 			i3geoOL.removeLayer(layer);
+		}
+		if(i3GEO.Interface.ATUAL === "googlemaps"){
+			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema);
+			i3GeoMap.overlayMapTypes.removeAt(indice);
 		}
 	},
 	/*
@@ -202,7 +207,7 @@ i3GEO.tema = {
 	*/
 	mudatransp: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudatransp()");}
-		i3GEO.mapa.ativaTema(tema);
+		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "transparencia";
 		var valor,
 			temp = function(retorno){
@@ -233,7 +238,7 @@ i3GEO.tema = {
 	*/
 	mudanome: function(idtema){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.mudanome()");}
-		i3GEO.mapa.ativaTema(tema);
+		i3GEO.mapa.ativaTema(idtema);
 		g_operacao = "mudanome";
 		var valor;
 		if($i("nn"+idtema))

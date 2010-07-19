@@ -324,8 +324,8 @@ i3GEOF.tabela = {
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				GEvent.removeListener(tabelaDragend);
-				GEvent.removeListener(tabelaZoomend);
+				google.maps.event.removeListener(tabelaDragend);
+				google.maps.event.removeListener(tabelaZoomend);
 			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -353,8 +353,8 @@ i3GEOF.tabela = {
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-   				tabelaDragend = GEvent.addListener(i3GeoMap, "dragend", function() {i3GEOF.tabela.pegaRegistros();});
-   				tabelaZoomend = GEvent.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});						
+   				tabelaDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.tabela.pegaRegistros();});
+   				tabelaZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.tebela.pegaRegistros();});						
 			}
 		}
 		else{
@@ -362,8 +362,8 @@ i3GEOF.tabela = {
 				i3GEO.eventos.NAVEGAMAPA.remove("i3GEOF.tabela.pegaRegistros()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				GEvent.removeListener(tabelaDragend);
-				GEvent.removeListener(tabelaZoomend);
+				google.maps.event.removeListener(tabelaDragend);
+				google.maps.event.removeListener(tabelaZoomend);
 			}
 		}
 	},
@@ -741,7 +741,6 @@ i3GEOF.tabela = {
 			{onclick:{fn: function(){
 					i3GEO.mapa.ativaTema(i3GEOF.tabela.tema);
 					i3GEO.analise.dialogo.graficoInterativo();
-					
 				}
 			}}
 		);				

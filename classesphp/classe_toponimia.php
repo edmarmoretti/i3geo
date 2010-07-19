@@ -158,6 +158,7 @@ $tipo Tipo teste|
 			$novolayer->set("name",$nomer);
 			$novolayer->set("group","");
 			$novolayer->set("type",MS_LAYER_ANNOTATION);
+			$novolayer->setmetadata("cache","");
 			$nclasses = $novolayer->numclasses;
 			for ($i=0; $i < $nclasses; ++$i)
 			{

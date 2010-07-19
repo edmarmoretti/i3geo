@@ -371,10 +371,15 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 	$rcode[] = 'screen(1, new=FALSE)';
 	return $rcode;	
 }
-function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual)
+function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="")
 {
 	//pega os valores
 	$map = ms_newMapObj($map_file);
+	if($ext && $ext != ""){
+		$e = explode(" ",$ext);
+		$extatual = $map->extent;
+		$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+	}
 	$selecionados = "sim";
 	$qyfile = str_replace(".map",".qy",$map_file);
 	if (file_exists($qyfile))

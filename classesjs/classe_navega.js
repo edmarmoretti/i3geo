@@ -1147,7 +1147,7 @@ i3GEO.navega = {
 				i3GEO.janela.fechaAguarde("ajaxdestaca");	
 			};
 			i3GEO.janela.abreAguarde("ajaxdestaca","Aguarde...gerando imagem");
-			i3GEO.php.geradestaque(temp,i3GEO.navega.destacaTema.TEMA);
+			i3GEO.php.geradestaque(temp,i3GEO.navega.destacaTema.TEMA,i3GEO.parametros.mapexten);
 		},
 		/*
 		Function: desativa

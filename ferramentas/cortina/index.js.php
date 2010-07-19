@@ -98,6 +98,8 @@ i3GEOF.cortina = {
 	tema {string} - codigo do tema
 	*/	
 	criaJanelaFlutuante: function(tema){
+		if(arguments.length == 0)
+		{tema = i3GEO.temaAtivo;}
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;
 		//cria a janela flutuante
@@ -119,7 +121,13 @@ i3GEOF.cortina = {
 		i3GEOF.cortina.aguarde = $i("i3GEOF.cortina_imagemCabecalho").style;
 		i3GEOF.cortina.inicia(divid);
 		temp = function(){
-			i3geoOL.getLayersByName(tema)[0].div.style.clip = "";
+			if(i3GEO.Interface.ATUAL === "openlayers")
+			{i3geoOL.getLayersByName(tema)[0].div.style.clip = "";}
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				var divlayer = i3GEO.Interface.googlemaps.retornaDivLayer(tema);
+				divlayer.style.clip = "";
+			}
+			
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -136,6 +144,10 @@ i3GEOF.cortina = {
 			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
 			estilo = layer.div.style;
 			//rect (top, right, bottom, left)
+		}
+		if(i3GEO.Interface.ATUAL === "googlemaps"){
+			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);
+			estilo = layer.style;
 		}
 		estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
 		slider.setValue(0,false);
