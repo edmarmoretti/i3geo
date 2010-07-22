@@ -254,8 +254,7 @@ $tipo - Tipo de busca brasil|null
 				$shp_index  = $result->shapeindex;
 				$shape = $this->layer->getfeature($shp_index,-1);
 				$v = trim($shape->values[$item]);
-				if (function_exists("mb_convert_encoding"))
-				{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
+				$v = $this->converte($v);
 				$valitem[] = $v;
 			}
 			$registros[] = implode(";",$valitem);
@@ -328,8 +327,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 					$shp_index  = $result->shapeindex;
 					$shape = $this->layer->getfeature($shp_index,-1);
 					$valori = trim($shape->values[$item]);
-					if (function_exists("mb_convert_encoding"))
-					{$valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");}
+					$valori = $this->converte($valori);
 					$valitem[] = array("item"=>$item,"valor"=>$valori);
 				}
 				$registros[] = array("indice"=>$shp_index,"valores"=>$valitem,"status"=>$chk);
@@ -370,7 +368,7 @@ $tipolista - Indica se serão mostrados todos os registros ou apenas os seleciona
 						{
 							$valori = ($shape->values[$item]);
 						}
-						$valori = $valori = mb_convert_encoding($valori,"UTF-8","ISO-8859-1");
+						$valori = $this->converte($valori);
 						$valitem[] = array("item"=>$item,"valor"=>$valori);
 					}
 					//if (in_array($shp_index,$shp_atual))
@@ -436,7 +434,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){$l->setfilter("");}
 			$buscas = "ÁÃÓÕÔáàãâóòôõúûíéêç";
-			$buscasUTF = mb_convert_encoding($buscas,"UTF-8","ISO-8859-1");
+			$buscaUTF = $this->converte($buscas);
 			$trocas = "AAOOOaaaaoooouuieecAAOOOaaaaoooouuieec";
 			$buscas = $buscas.$buscasUTF;
 			$sopen = $l->open();
@@ -454,8 +452,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 					{
 						if (strtr($v,$buscas,$trocas) == strtr($palavra,$buscas,$trocas))
 						{
-							if (function_exists("mb_convert_encoding"))
-							{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}	
+							$v = $this->converte($v);
 							$r[] = array("item" => $item,"valor" => $v);
 							$encontrado = "sim";
   						}
@@ -464,8 +461,7 @@ $onde - Tipo de abrangência espacial (brasil ou mapa)
 					{
 						if (stristr(strtr($v,$buscas,$trocas),strtr($palavra,$buscas,$trocas)))
 						{
-							if (function_exists("mb_convert_encoding"))
-							{$v = mb_convert_encoding($v,"UTF-8","ISO-8859-1");}
+							$v = $this->converte($v);
 							$r[] = array("item" => $item,"valor" => $v);
 							$encontrado = "sim";
 						}
@@ -676,10 +672,7 @@ $resolucao - Resolucao de busca.
 		}
 		if (count($resultados) > 0)
 		{
-			if (function_exists("mb_convert_encoding"))
-			{$res = mb_convert_encoding($this->retornaI($listatemas,$resultados,$this->mapa),"UTF-8","ISO-8859-1");}
-			else
-			{$res = $this->retornaI($listatemas,$resultados,$this->mapa);}
+			$res = $this->converte($this->retornaI($listatemas,$resultados,$this->mapa));
 			return($res);
 		}
 		else
@@ -847,7 +840,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			{$nometmp = $layer->getMetaData("TEMA");}
 			else if ($layer->getMetaData("ALTTEMA") != "")
 			{$nometmp = $layer->getMetaData("ALTTEMA");}
-			$nometmp = mb_convert_encoding($nometmp,"UTF-8","ISO-8859-1");
+			$nometmp = $this->converte($nometmp);
 			$final[] = array("nome"=>$nometmp,"resultado"=>$resultados[$tema]);
 		}
 		return $final;
@@ -1216,7 +1209,7 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				if(trim($v) != "")
 				{
 					$va = trim($v);
-					$va = mb_convert_encoding($va,"UTF-8","ISO-8859-1");
+					$va = $this->converte($va);
 					$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
 				}
 			}
@@ -1328,8 +1321,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					{$img = "<img src='".$shape->values[$itemimg[$conta]]."' //>";}
 					
 					$arraytemp = array(
-						"alias"=>mb_convert_encoding($itensdesc[$conta],"UTF-8","ISO-8859-1"),
-						"valor"=>mb_convert_encoding($val,"UTF-8","ISO-8859-1"),
+						"alias"=>$this->converte($itensdesc[$conta]),
+						"valor"=>$this->converte($val),
 						"link"=>$link,
 						"img"=>$img
 					);
@@ -1346,6 +1339,28 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 		else
 		{$resultado[] = " ";}
 		return $resultado;
+	}
+	/*
+	Function: converte
+	
+	Converte uma string de ISO-8859-1 para UTF-8
+	
+	Parametro:
+	
+	$texto - string que será convertida
+	
+	Return:
+	
+	{string}
+	*/
+	function converte($texto)
+	{
+		if (function_exists("mb_convert_encoding"))
+		{
+			if (!mb_detect_encoding($texto,"UTF-8",true))
+			{$texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");}
+		}
+		return $texto;
 	}
 }
 ?>
