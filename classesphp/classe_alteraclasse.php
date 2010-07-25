@@ -271,6 +271,7 @@ Include:
 	function quartis($item,$ignorar)
 	{
 		if(!$this->layer){return "erro";}
+
 		$valores = pegaValores($this->mapa,$this->layer,$item,true,$ignorar);
 		if (count($valores) > 0)
 		{

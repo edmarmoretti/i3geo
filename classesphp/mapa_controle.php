@@ -1306,7 +1306,7 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 		if ($opcao == "intervalosiguais")
 		{$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);}
 		if ($opcao == "quartis")
-		{$cp->set_data($m->quartis($item,$ignorar));}
+		{$retorno = $m->quartis($item,$ignorar);}
 		if ($opcao == "alteraclasses")
 		{
 			//esta operação é chamada com POST via cpaint

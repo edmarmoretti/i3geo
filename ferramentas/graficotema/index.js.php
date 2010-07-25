@@ -236,6 +236,7 @@ i3GEOF.graficoTema = {
 			if(i3GEOF.graficoTema.aguarde.visibility === "visible")
 			{return;}
 			var lista = i3GEOF.graficoTema.pegaItensMarcados(),
+				nlista = lista.split("*").length,
 				outlinecolor = $i("i3GEOgraficotemaoutlinecolor").value,
 				offset = $i("i3GEOgraficotemaoffset").value,
 				tipo = $i("i3GEOgraficotematipo").value,
@@ -243,8 +244,11 @@ i3GEOF.graficoTema = {
 				temp,
 				cp = new cpaint(),
 				p;
-			if (tipo === "PIE")
-			{tamanho = $i("i3GEOgraficotemalargura").value;}
+			if(nlista < 2){
+				alert("Pelo menos dois itens devem ser escolhidos");
+				return;
+			}			
+			if (tipo === "PIE"){tamanho = $i("i3GEOgraficotemalargura").value;}
 			else
 			{tamanho = $i("i3GEOgraficotemalargura").value+" "+$i("i3GEOgraficotemaaltura").value;}
 			if(lista === "")
