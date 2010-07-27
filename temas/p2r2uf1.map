@@ -1,0 +1,64 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+
+  LAYER
+    CONNECTION "user=postgres password=postgres dbname=pgutf8 host=localhost port=5432 options='-c client_encoding=LATIN1'"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom FROM (select the_geom, sig_uf, totacidentes, gid FROM geo_br_estados as estados,(select comple,count(comple) as totacidentes FROM acidentes.acidente as a, acidentes.regiao as r	WHERE r.tipo = 1 AND r.regiao = a.regiao	group by comple )as contagem WHERE estados.sig_uf = contagem.comple) as foo USING UNIQUE gid USING SRID=4291"
+    METADATA
+      "CLASSE"	"SIM"
+      "download"	"SIM"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"Total de acidentes por UF"
+    END
+    NAME "p2r2uf1"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "Quartil 1 (<=3)"
+      EXPRESSION ([totacidentes]<=3)
+      STYLE
+        ANGLE 360
+        COLOR 255 240 240
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Quartil 2 (>3 e <=20)"
+      EXPRESSION (([totacidentes]>3)and([totacidentes]<=20))
+      STYLE
+        ANGLE 360
+        COLOR 255 230 230
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Quartil 3 (>20 e <=89)"
+      EXPRESSION (([totacidentes]>20)and([totacidentes]<=89))
+      STYLE
+        ANGLE 360
+        COLOR 255 150 150
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+    CLASS
+      NAME "Quartil 4 (>89)"
+      EXPRESSION ([totacidentes]>89)
+      STYLE
+        ANGLE 360
+        COLOR 255 0 0
+        OPACITY 100
+        SYMBOL 0
+      END
+    END
+
+  END
+END
+

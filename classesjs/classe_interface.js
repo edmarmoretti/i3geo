@@ -1136,7 +1136,7 @@ i3GEO.Interface = {
 			i3GEO.Interface.googlemaps.criaLayers();
 		},
 		cria: function(w,h){
-			var i,f,ins;
+			var i,f,ins,js;
 			posfixo = "&";
 			i = $i(i3GEO.Interface.IDCORPO);
 			if(i){
@@ -1153,7 +1153,12 @@ i3GEO.Interface = {
 			i3GEO.Interface.IDMAPA = "googlemapsdiv";
 			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomli = true;
 			i3GEO.barraDeBotoes.INCLUIBOTAO.pan = true;
-			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;
+			i3GEO.barraDeBotoes.INCLUIBOTAO.zoomtot = true;			
+		},
+		ativaZoomBox: function(){
+			i3GeoMap.enableKeyDragZoom({
+				key: 'ctrl'
+			});		
 		},
 		inicia: function(){
     		var pol,ret,pt1,pt2,bottomLeft,bottomRight,i3GEOTile;
@@ -1162,6 +1167,12 @@ i3GEO.Interface = {
 			function montaMapa(retorno){
 				var pos, sw,ne,z,myMapType;
 				i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA),{scaleControl:true});
+				//
+				//carrega o javascript que permite fazer o zoom por box
+				//
+				js = i3GEO.configura.locaplic+"/pacotes/google/keydragzoom.js.php";
+				i3GEO.util.scriptTag(js,"i3GEO.Interface.googlemaps.ativaZoomBox()","keydragzoom_script");
+				
 				i3GeoMap.setMapTypeId(i3GEO.Interface.googlemaps.TIPOMAPA);
 				sw = new google.maps.LatLng(ret[1],ret[0]);
 				ne = new google.maps.LatLng(ret[3],ret[2]);

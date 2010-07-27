@@ -110,8 +110,8 @@ foreach ($layersNames as $layerName)
 				}
 			}
 		}
-		if($l->getProjection() == MS_FALSE)
-		{$l->setProjection("init=epsg:4291");}		
+		if($l->getProjection() == MS_FALSE || $l->getProjection() == "" )
+		{$l->setProjection("init=epsg:4291");}
 	}
 	if($layerName == $_GET["layer"])
 	{

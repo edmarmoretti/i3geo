@@ -442,7 +442,7 @@ i3GEO.analise = {
 		*/
 		inicia: function(){
 			if(typeof(console) !== 'undefined'){console.info("i3GEO.analise.medeArea.inicia()");}
-			var temp;
+			var temp,x,y,ll1,ll2,d;
 			pontosdistobj = [];
 			i3GEO.analise.medeArea.criaJanela();
 			if (g_tipoacao != "area"){
@@ -470,8 +470,18 @@ i3GEO.analise = {
 					i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 					i3GEO.php.areaPixel(temp,i3GEO.parametros.pixelsize);
 				}
-				else
-				{alert("Operacao nao disponivel");}
+				if(i3GEO.Interface.ATUAL == "googlemaps"){
+					x = parseInt(i3GEO.parametros.w / 2,10);
+					y = parseInt(i3GEO.parametros.h / 2,10);
+					ll1 = i3GEO.calculo.tela2dd(x,y,"","");
+					ll2 = i3GEO.calculo.tela2dd(x + 1,y,"","");
+					d = i3GEO.calculo.distancia(ll1[0],ll1[1],ll2[0],ll2[1]);
+					d = d * 1000;
+					d = d * d;
+					temp({data:d});
+				}
+				//else
+				//{alert("Operacao nao disponivel");}
 			}
 			else{i3GEO.desenho.richdraw.fecha();}
 		},

@@ -437,13 +437,6 @@ i3GEOF.identifica = {
 		{opcao = "ligados";}
 		else
 		{opcao = "tema";}
-		/*
-		if(i3GEO.Interface.ATUAL === "openlayers"){
-			if(opcao === "ligados")
-			{opcao = "lista";}
-			listaDeTemas = i3GEO.Interface.openlayers.LIGADOS.join(",");
-		}
-		*/
 		i3GEO.php.identifica2(i3GEOF.identifica.mostraDadosTema,i3GEOF.identifica.x,i3GEOF.identifica.y,resolucao,opcao,i3GEO.configura.locaplic,i3GEO.configura.sid,tema,i3GEO.parametros.mapexten,listaDeTemas);
 	},
 	/*

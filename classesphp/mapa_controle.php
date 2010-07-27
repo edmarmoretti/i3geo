@@ -1942,11 +1942,14 @@ Identifica elementos no mapa.
 		if (!isset($tema)){$tema = "";}
 		if (!isset($resolucao)){$resolucao = 5;}
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
 		if(!isset($ext))
 		{$ext = "";}
 		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}
+		{
+			$ext = projetaExt($map_file,$ext);
+			$xy = projetaExt($map_file,$xy,",");
+		}
+		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->identifica2($opcao,$xy,$resolucao,$ext,$listaDeTemas);
 	break;
 
@@ -2704,26 +2707,39 @@ Parametros:
 
 $map_file {string}
 
-$ext {string} - extensão geográfica com valores separados por espaço
+$ext {string} - extensão geográfica com valores separados por espaço ou um par de coordenadas x y
 
 Return:
 
 {string}
 */
-function projetaExt($map_file,$ext)
+function projetaExt($map_file,$ext,$separador=" ")
 {
+	$ext = str_replace($separador," ",$ext);
+	
 	$extA = explode(" ",$ext);
 	$mapa = ms_newMapObj($map_file);
+	$ponto = false;
 	if($extA[0] < 180 &&  $extA[0] > -180)
 	{
+		if(count($extA) == 2)
+		{
+			$ponto = true;
+			$extA[] = $extA[0] + 1;
+			$extA[] = $extA[1] + 1;
+		}
 		$rect = ms_newRectObj();
 		$rect->setextent($extA[0],$extA[1],$extA[2],$extA[3]);
 		$prjMapa = $mapa->getProjection();
 		$projInObj = ms_newprojectionobj("proj=latlong");
 		$projOutObj = ms_newprojectionobj($prjMapa);
 		$rect->project($projInObj, $projOutObj);
-		$ext = $rect->minx." ".$rect->miny." ".$rect->maxx." ".$rect->maxy;
+		if($ponto == false)
+		{$ext = $rect->minx." ".$rect->miny." ".$rect->maxx." ".$rect->maxy;}
+		else
+		{$ext = $rect->minx." ".$rect->miny;}
 	}
+	$ext = str_replace(" ",$separador,$ext);
 	return $ext;	
 }
 /*

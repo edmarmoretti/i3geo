@@ -599,6 +599,8 @@ i3GEO.configura = {
 			tipo:"dinamico",
 			dica:$trad("d3"),
 			funcaoonclick:function(){
+				if(i3GEO.Interface.ATUAL === "googlemaps")
+				{alert("Pressione a tecla CTRL junto com o botão esquerdo do mouse");return;}				
 				var temp;
 				temp = "zoom";
 				if(i3GEO.Interface.ATIVAMENUCONTEXTO)
@@ -632,6 +634,10 @@ i3GEO.configura = {
 				g_operacao='navega';
 				i3GEO.barraDeBotoes.ativaIcone("pan");
 				i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					i3GeoMap.setOptions({draggable:true});
+					return;
+				}
 				if($i(i3GEO.Interface.IDMAPA)){
 					$i(i3GEO.Interface.IDMAPA).title = "";
 					temp = "pan";
@@ -1003,9 +1009,9 @@ i3GEO.configura = {
 			dica:$trad("d21a"),
 			funcaoonclick:function(){
 				i3GEO.barraDeBotoes.ativaIcone("area");
-				if($i("img")){
-					$i("img").title = "";
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area","img",i3GEO.configura.locaplic);
+				if($i(i3GEO.Interface.IDMAPA)){
+					$i(i3GEO.Interface.IDMAPA).title = "";
+					i3GEO.util.mudaCursor(i3GEO.configura.cursores,"area",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 				}
 				g_tipoacao = "";
 				g_operacao="";

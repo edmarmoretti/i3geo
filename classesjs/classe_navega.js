@@ -779,6 +779,11 @@ i3GEO.navega = {
 				limpa.call();
 				i3GEO.eventos.MOUSEMOVE.remove("i3GEO.navega.zoomBox.desloca()");
 				i3GEO.eventos.MOUSEUP.remove("i3GEO.navega.zoomBox.termina()");
+				if(i3GEO.Interface.ATUAL === "googlemaps"){
+					i3GEO.Interface.googlemaps.zoom2extent(v);
+					return;
+				}
+
 				f = "i3GEO.navega.timerNavega = null;i3GEO.navega.zoomExt('"+i3GEO.configura.locaplic+"','"+i3GEO.configura.sid+"','"+i3GEO.configura.tipoimagem+"','"+v+"')";
 				if(i3GEO.navega.timerNavega !== undefined)
 				{clearTimeout(i3GEO.navega.timerNavega);}
