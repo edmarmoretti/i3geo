@@ -294,9 +294,9 @@ i3GEO.ajuda = {
 		}
 	},
 	/*
-	Private: mostraLetreiro
+	Function: mostraLetreiro
 	
-	Preenche o elemento INPUT com a mesnagem de texto e faz a movimentação das letras.
+	Preenche o elemento INPUT com a mensagem de texto e faz a movimentação das letras.
 	
 	O aparecimento das letras é controlado por um temporizador e asmensagens são mostradas apenas duas vezes,
 	desde o início do redesenho do mapa.
@@ -315,6 +315,16 @@ i3GEO.ajuda = {
 		BPos-=BSpeed;
 		if (BQuantas < 2)
 		{i3GEO.ajuda.tempoLetreiro = setTimeout('i3GEO.ajuda.mostraLetreiro();', 140);}
+	},
+	/*
+	Function: redesSociais
+	
+	Abre uma janela com informações sobre a presença do i3Geo em redes sociais
+	*/
+	redesSociais: function(){
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.ajuda.redesSociais()");}
+		var id = "redes"+Math.random();
+		i3GEO.janela.cria("400px","400px",i3GEO.configura.locaplic+"/ferramentas/redessociais/index.php","","",$trad("u5c"),id);
 	}
 };
 //

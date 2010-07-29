@@ -138,7 +138,7 @@ function iniciaMapa()
 				}
 			}
 			//echo $l->getProjection();exit;
-			if($layer->getProjection() == MS_FALSE || $layer->getProjection() == "" )
+			if($layer->getProjection() == "" )
 			{$layer->setProjection("init=epsg:4291");}
 		}
 		$temp = $m->scalebar;

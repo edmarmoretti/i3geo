@@ -159,10 +159,10 @@ it:"Informazioni WebGis"
 }],
 "u2": [
 {
-pt: "Sistema",
-en:"System",
-es:"Sistema",
-it:"Sistema"
+pt: "Documenta&ccedil;&atilde;o dos c&oacute;digos",
+en:"Documentation of the codes",
+es:"Documentaci&oacute;n de los c&oacute;digos",
+it:"Documentazione dei codici"
 }],
 "u3": [
 {
@@ -191,6 +191,20 @@ pt: "Portal do software p&uacute;blico",
 en:"Portal do software p&uacute;blico",
 es:"Portal do software p&uacute;blico",
 it:"Portale del software pubblico"
+}],
+"u5b": [
+{
+pt: "Lista de fun&ccedil;&otilde;es",
+en:"Function list",
+es:"Lista de funciones",
+it:"Lista delle funzioni"
+}],
+"u5c": [
+{
+pt: "Redes sociais",
+en:"Social networks",
+es:"Redes sociales",
+it:"Reti sociali"
 }],
 "u6": [
 {
