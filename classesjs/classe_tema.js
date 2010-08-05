@@ -430,7 +430,7 @@ i3GEO.tema = {
 		etiquetas: function(idtema){
 			i3GEO.mapa.ativaTema(idtema);
 			if(typeof(i3GEOF.etiqueta) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiquetas","etiquetas");}
+			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.etiquetas()","etiqueta","etiqueta");}
 		},
 		/*
 		Function: editaLegenda
