@@ -60,6 +60,8 @@ function RichDrawEditor(elem, renderer) {
   	{mudaiconf("pan");}
   	if(document.getElementById("mostradistancia"))
   	{document.getElementById("mostradistancia").style.display="none";}
+	if(document.getElementById("mostraarea"))
+  	{document.getElementById("mostraarea").style.display="none";}	
   }
 
 /*

@@ -217,19 +217,21 @@ i3GEO.calculo = {
 				amext = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(xfign,yfign));
 				return [amext.lng(),amext.lat()];
 			}
-			else{
-				if (navm){
-					xfign = xfign - 2.2;
-					yfign = yfign - 2.7;
-				}
-				else{
-					xfign = xfign - 0.12;
-					yfign = yfign - 1.05;
-				}
-				amext = imgext.split(" ");
-				longdd = (amext[0] * 1) + (g_celula * xfign);
-				latdd = (amext[3] * 1) - (g_celula * yfign);
+			if(i3GEO.Interface.ATUAL == "openlayers"){
+				amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign,yfign));
+				return [amext.lon,amext.lat];
 			}
+			if (navm){
+				xfign = xfign - 2.2;
+				yfign = yfign - 2.7;
+			}
+			else{
+				xfign = xfign - 0.12;
+				yfign = yfign - 1.05;
+			}
+			amext = imgext.split(" ");
+			longdd = (amext[0] * 1) + (g_celula * xfign);
+			latdd = (amext[3] * 1) - (g_celula * yfign);
 			return [longdd,latdd];
 		}
 		catch(e){return(0);}
@@ -270,7 +272,7 @@ i3GEO.calculo = {
 				$polygon_area = Math.abs($polygon_area) / 2;
 			}
 			else
-			{$polygon_area = "Sao necessarios pelo menos tres pontos para o calculo";}
+			{$polygon_area = 0;}
 			return $polygon_area*pixel;
 		}
 		catch(e){return (0);}

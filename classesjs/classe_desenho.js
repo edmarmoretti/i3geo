@@ -122,7 +122,6 @@ i3GEO.desenho = {
 			//para funcionarem sobre o container
 			//
 			i3GEO.eventos.ativa(divgeo);
-			
 		}
 		catch(erro){alert("Erro ao tentar criar container richdraw");}
 	},
