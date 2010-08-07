@@ -33,11 +33,18 @@ if (array_search( "MapScript", $exts) != TRUE)
 }
 require("../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
+//
+//substitui a string de conexão com o banco em cada layer se for necessário
+//
 substituiCon($map_file,$postgis_mapa);
 $map = ms_newMapObj($map_file);
+
 $w = $map->width;
 $h = $map->height;
 
+//
+//modifica o nome das classes em cada layer para que a legenda do mapa fique correta
+//
 $temas = $map->getalllayernames();
 foreach ($temas as $tema)
 {
@@ -60,8 +67,9 @@ if($interface == "openlayers"){
 	}
 	$legenda = $map->legend;
 	$legenda->set("status",MS_EMBED);
+	$o = $map->outputformat;
+	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
-
 $imgo = $map->draw();
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);

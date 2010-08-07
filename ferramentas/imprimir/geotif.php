@@ -86,6 +86,8 @@ if($interface == "openlayers"){
 
 	$legenda = $map->legend;
 	$legenda->set("status",MS_EMBED);
+	$o = $map->outputformat;
+	$o->set("imagemode",MS_IMAGEMODE_RGB);
 }
 
 
