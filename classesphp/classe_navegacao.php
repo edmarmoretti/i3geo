@@ -159,11 +159,19 @@ Aplica uma resolução nova ao mapa atual
 Utilizado para gerar imagens ampliadas do mapa atual
 
 parameter:
+
 $resolucao - Resolução a ser aplicada
+
+$ext - extensão geográfica que será aplicada ao mapa
 */
-	function aplicaResolucao($resolucao)
+	function aplicaResolucao($resolucao,$ext="")
 	{
-	 	$this->mapa->setsize(($this->mapa->width) * $resolucao,($this->mapa->height) * $resolucao);
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		}	 	
+		$this->mapa->setsize(($this->mapa->width) * $resolucao,($this->mapa->height) * $resolucao);
 	}
 /*
 function: pan

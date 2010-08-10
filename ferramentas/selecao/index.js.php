@@ -84,7 +84,7 @@ i3GEOF.selecao = {
 					"i3GEOselecaooverlay",
 					"",
 					false,
-					"selecionados"
+					"naolinearSelecionados"
 				);
 			};
 			i3GEO.util.comboTemas(
@@ -172,7 +172,7 @@ i3GEOF.selecao = {
 		'	<div id=i3GEOselecaomen2 style=top:15px;left:0px; ><p class=paragrafo >Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.</div>'+
 		'</div> '+
 		'<div class=guiaobj id="i3GEOselecaoguia3obj" style="left:1px;display:none;">' +
-		'	<p class=paragrafo >Tema que ser&aacute; utilizado para selecionar o definido na guia Mapa (esse tema deve possuir elementos j&aacute; selecionados):</p>'+
+		'	<p class=paragrafo >Tema que ser&aacute; utilizado para selecionar o tema definido na guia Mapa (esse tema deve ser do tipo pontual ou poligonal e deve possuir elementos j&aacute; selecionados):</p>'+
 		'	<div id="i3GEOselecaooverlay" style="text-align:left;left:0px">' +
 		'	</div>' +
 		'	<br><p class=paragrafo ><input id=i3GEOselecaobotao2 size=10 type=button value="Aplicar">' +
@@ -896,7 +896,7 @@ i3GEOF.selecao = {
 	 		var temp = function(retorno){
 		 		i3GEO.atualiza(retorno);
 		 		i3GEOF.selecao.aguarde.visibility = "hidden";
-				i3GEO.Interface.atualizaTema(retorno,tema);
+				i3GEO.Interface.atualizaTema(retorno,i3GEO.temaAtivo);
 		 	};
 			g_operacao = "selecao";
 			i3GEO.php.selecaotema(temp,$i("i3GEOselecaoTemaoverlay").value,i3GEO.temaAtivo,$i("i3GEOselecaotipoOperacao").value);

@@ -1452,6 +1452,14 @@ i3GEO.util = {
 			else
 			{alert("Arvore de camadas não encontrada");}			
 		}
+		if(tipoCombo === "naolinearSelecionados"){
+			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
+				temp = i3GEO.arvoreDeCamadas.filtraCamadas("type",1,"diferente",i3GEO.arvoreDeCamadas.CAMADAS);
+				monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel","sim","igual",temp));
+			}
+			else
+			{alert("Arvore de camadas não encontrada");}			
+		}		
 		if(tipoCombo === "linhaDoTempo"){
 			if(i3GEO.arvoreDeCamadas.CAMADAS !== ""){
 				monta(i3GEO.arvoreDeCamadas.filtraCamadas("linhadotempo","sim","igual",i3GEO.arvoreDeCamadas.CAMADAS));

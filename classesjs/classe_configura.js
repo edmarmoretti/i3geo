@@ -868,7 +868,7 @@ i3GEO.configura = {
 			tipo:"",
 			dica:$trad("d29"),
 			funcaoonclick:function()
-			{i3GEO.navega.dialogo.wiki();}
+			{i3GEO.navega.dialogo.metar();}
 		},
 		{
 			//botão de busca de fotos
@@ -1037,10 +1037,7 @@ i3GEO.configura = {
 			funcaoonclick:function(){
 				g_tipoacao = "";
 				i3GEO.mapa.dialogo.cliqueGrafico();
-				if($i("img")){
-					$i("img").title = "clique para incluir o gráfico";
-					$i("img").style.cursor="pointer";
-				}		
+				i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 			}
 		},
 		{

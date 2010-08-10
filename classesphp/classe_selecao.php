@@ -184,7 +184,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		if ($tipo == "inverte")
 		{return($this->selecaoInverte());}
 		$layero = $this->mapa->getlayerbyname($temao);
-		if ($layero->type == MS_LAYER_LINE)
+		if ($layero->type == MS_LAYER_LINE || $layero->type == 1)
 		{return("erro. O tema de sobreposicao nao pode ser do tipo linear.");}
 		$tipoLayer = $this->layer->type;
 		$tipoLayero = $layero->type;
@@ -196,7 +196,7 @@ $tipo - Tipo de operação adiciona|retira|inverte|limpa
 		$res_count = $this->layer->getNumresults();
 		$res_counto = $layero->getNumresults();
 		if ($res_counto == 0)
-		{return("erro. O tema de sobreposicao nao possui selecao.");}
+		{return false;}
 		$shp_atual = array();
 		for ($i = 0; $i < $res_count;++$i)
 		{

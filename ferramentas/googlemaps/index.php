@@ -174,8 +174,8 @@ function ondegoogle()
 	var bd = map.getBounds();
 	var so = bd.getSouthWest();
 	var ne = bd.getNorthEast();
-	var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
-	var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+	var xyMin = window.parent.i3GEO.calculo.dd2tela(so.lng(),so.lat(),window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
+	var xyMax = window.parent.i3GEO.calculo.dd2tela(ne.lng(),ne.lat(),window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize);
 	
 	var box = window.parent.$i("boxg")
 	var w = xyMax[0]-xyMin[0]
@@ -284,6 +284,7 @@ function parametrosRota(overlay,latlng)
 	}
 	if(counterClick == 2)
 	{
+		cursor("wait");
 		pontoRota2 = latlng
 		counterClick = 0;
 		GEvent.removeListener(rotaEvento)
@@ -303,6 +304,7 @@ function constroiRota()
 	{
 		if (!response || response.Status.code != 200) {
 			alert("Status Code:" + response.Status.code);
+			cursor("default");
 		} else {
 			place = response.Placemark[0];
 			point = new GLatLng(place.Point.coordinates[1],place.Point.coordinates[0]);
@@ -396,21 +398,26 @@ function montaRota()
 				//cp.set_debug(2) 
 				var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+temaNovo;
 				cp.call(p,"sphPT2shp",window.parent.i3GEO.atualiza);
+				cursor("default");
 			}
-			var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=insereSHP&tema="+retorno.data+"&xy="+pontos.join(" ");
+			var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid+"&funcao=insereSHP&tema="+retorno.data;
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
-			cp.call(p,"insereSHP",converteParaLinha);
+			cp.set_transfer_mode('POST');
+			cp.call(p,"insereSHP",converteParaLinha,"&xy="+pontos.join(" "));
 		}
 		var cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.set_transfer_mode("POST");
 		var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+window.parent.i3GEO.configura.sid;
 		cp.call(p,"criaSHPvazio",ativanovotema,"&funcao=criashpvazio");
-		
 	});
-}    
+}
+function cursor(c){
+	var d = document.getElementById("mapa");
+	d.firstChild.style.cursor = c;
+}
     </script>
   </head>
   <body name="ancora" onload="inicializa()">

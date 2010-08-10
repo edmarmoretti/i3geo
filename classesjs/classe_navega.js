@@ -986,11 +986,11 @@ i3GEO.navega = {
 					olente.style.zIndex=1000;
 					olenteimg.style.zIndex=1000;
 					oboxlente.style.zIndex=1000;
-					pos = i3GEO.util.pegaPosicaoObjeto($i("corpoMapa"));
-					eval ("olente.style." + g_tipoleft + " = pos[0] + i3GEO.navega.lente.POSICAOX + g_postpx");
-					eval ("olente.style." + g_tipotop + " = pos[1] + i3GEO.navega.lente.POSICAOY + g_postpx");
-					eval ("oboxlente.style." + g_tipoleft + " = pos[0] + i3GEO.navega.lente.POSICAOX + g_postpx");
-					eval ("oboxlente.style." + g_tipotop + " = pos[1] + i3GEO.navega.lente.POSICAOY + g_postpx");
+					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
+					olente.style.left = pos[0] + i3GEO.navega.lente.POSICAOX + "px";
+					olente.style.top = pos[1] + i3GEO.navega.lente.POSICAOY + "px";
+					oboxlente.style.left = pos[0] + i3GEO.navega.lente.POSICAOX + "px";
+					oboxlente.style.top = pos[1] + i3GEO.navega.lente.POSICAOY + "px";
 					oboxlente.style.display='block';
 					oboxlente.style.visibility='visible';
 					olente.style.display='block';
@@ -1034,7 +1034,7 @@ i3GEO.navega = {
 				if(i3GEO.navega.lente.ESTAATIVA === "sim"){
 					var pos,esq,topo,clipt,i;
 					if ($i("lente").style.visibility === "visible")
-					{pos = i3GEO.util.pegaPosicaoObjeto($i("img"));}
+					{pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));}
 					esq = (objposicaocursor.telax - pos[0]) * 2.25;
 					topo = (objposicaocursor.telay - pos[1]) * 2.25;
 					clipt = "rect("+ (topo - 40) + " " + (esq + 40) + " " + (topo + 40) + " " + (esq - 40) +")";

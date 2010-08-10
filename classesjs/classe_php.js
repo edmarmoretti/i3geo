@@ -551,7 +551,7 @@ i3GEO.php = {
 	*/
 	aplicaResolucao: function(funcao,resolucao){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao="+resolucao+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=crialente&resolucao="+resolucao+"&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"crialente",funcao);	
 	},
 	/*

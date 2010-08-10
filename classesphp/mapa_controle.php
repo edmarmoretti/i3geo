@@ -2138,7 +2138,9 @@ Aplica uma resolução nova ao mapa atual e gera uma imagem para a lente.
 	case "CRIALENTE":
 		include_once("classe_navegacao.php");
 		$m = new Navegacao($map_file);
-		$m->aplicaResolucao($resolucao);
+		if(!isset($ext))
+		{$ext = "";}
+		$m->aplicaResolucao($resolucao,$ext);
 		//$m->desabilitaRASTER();
 		$retorno = ($m->mapa->width).",".($m->mapa->height).",".$m->gravaImagemCorpo();
 	break;

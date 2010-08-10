@@ -45,6 +45,12 @@ if ($temaz=="")
 	if ($maptemp == ""){echo "Arquivo com o relevo não foi encontrado";return;}
 }
 $mapa = ms_newMapObj($map_file);
+if(isset($ext) && $ext != "")
+{
+	$e = explode(" ",$ext);
+	$extatual = $mapa->extent;
+	$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+}
 if ($mapa->width > 500)
 {
 	$mapa->setsize(500,500);
