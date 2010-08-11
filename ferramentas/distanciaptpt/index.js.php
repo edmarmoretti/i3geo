@@ -134,9 +134,9 @@ i3GEOF.distanciaptpt = {
 	t2: function(){
 		var ins = "<p class='paragrafo' >Escolha os itens das tabelas de atributos dos temas de origem e de destino que ser&atilde;o acrescentados ao novo tema que ser&aacute; criado com o resultado do c&aacute;lculo.</p>";
 		ins += "<p class='paragrafo' >Para o tema de origem:</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' ></div>";
+		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaOrigem' >Aguarde...</div>";
 		ins += "<br><p class='paragrafo' >Para o tema de destino:</p>";
-		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' ></div>";
+		ins += "<div style='text-align:left;' id='i3GEOondeItensTemaDestino' >Aguarde...</div>";
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t1()","i3GEOF.distanciaptpt.t3()",ins,"i3GEOF.distanciaptpt.t2","i3GEOdistanciaptptresultado");
 		i3GEOF.distanciaptpt.comboItensOrigem();
 		i3GEOF.distanciaptpt.comboItensDestino();
@@ -178,7 +178,7 @@ i3GEOF.distanciaptpt = {
 					{i3GEO.atualiza();}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
 				};
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value;
+				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value+"&ext="+i3GEO.parametros.mapexten;
 				cp = new cpaint();
 				cp.set_response_type("JSON");
 				cp.call(p,"distanciaptpt",fim);

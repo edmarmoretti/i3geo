@@ -118,7 +118,7 @@ i3GEO.configura = {
 			{ id:"omenudataAjudamenu3",text: $trad("u3"), url: "http://pt.wikibooks.org/wiki/I3geo", target:"_blank" },
 			{ id:"omenudataAjudamenu4",text: $trad("u4"), url: "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525", target:"_blank" },
 			{ id:"omenudataAjudamenu5",text: $trad("u5a"), url: "http://www.softwarepublico.gov.br", target:"_blank" },
-			{ id:"omenudataAjudamenu7",text: $trad("u5b"), url:"http://mapas.mma.gov.br/i3geo/ajuda_usuario.php", target:"_blank" },
+			{ id:"omenudataAjudamenu7",text: $trad("u5b"), url: "../ajuda_usuario.php", target:"_blank" },
 			{ id:"omenudataAjudamenu8",text: $trad("u5c"), url: "javascript:i3GEO.ajuda.redesSociais()" }
 			],
 			"analise": [

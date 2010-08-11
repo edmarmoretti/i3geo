@@ -654,15 +654,13 @@ Array
 		}
 		return $sistemas;		
 	}
-
 /*
 function: procurartemas
 
-Procura um tema no menu de temas.
-
-Le o arquivo de temas xml e retorna o nome do mapfile correspondente.
+Procura um tema no menu de temas considerando apenas os subgrupos.
 
 parameters:
+
 $procurar - String que será procurada.
 */
 	function procurartemas($procurar)
@@ -783,6 +781,24 @@ $procurar - String que será procurada.
 		}
 		return ($resultado);
 	}
+/*
+function: procurartemas2
+
+Procura um tema no menu de temas.
+
+parameters:
+
+$procurar - String que será procurada.
+*/
+	function procurartemas2($procurar)
+	{
+		include_once("../admin/php/classe_arvore.php");
+		$arvore = new Arvore($this->locaplic,$this->idioma);
+		$temas = $arvore->procuraTemas($procurar,$this->perfil);
+		unset($arvore);
+		return($temas);
+	}
+
 /*
 function: listaTags
 

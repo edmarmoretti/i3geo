@@ -710,7 +710,7 @@ i3GEO.arvoreDeTemas = {
 			if(navm){insp += "style='top:0px;'";}
 			else
 			{insp += "style='top:4px;'";}
-			insp += " title='"+$trad("a1")+"' src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema(document.getElementById(\"i3geo_buscatema\").value)' style='cursor:pointer;top:2px;position:relative;' /></td>";
+			insp += " title='"+$trad("a1")+"' src='"+i3GEO.util.$im("branco.gif")+"' onclick='i3GEO.arvoreDeTemas.buscaTema2(document.getElementById(\"i3geo_buscatema\").value)' style='cursor:pointer;top:2px;position:relative;' /></td>";
 			insp += "</tr></table>&nbsp;";
 			tempNode = new YAHOO.widget.HTMLNode(
 				{html:insp},
@@ -1332,7 +1332,7 @@ i3GEO.arvoreDeTemas = {
 		return (lista);
 	},
 	/*
-	Function: buscaTema
+	Depreciado na versão 4.4
 	
 	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
 	
@@ -1367,7 +1367,6 @@ i3GEO.arvoreDeTemas = {
 									{mostra = false;}
 									if(i3GEO.arvoreDeTemas.FILTRAOGC && ngTema[st].ogc == "nao")
 									{mostra = false;}
-
 									if(mostra){
 										d = i3GEO.arvoreDeTemas.montaTextoTema("gray",ngTema[st]);
 										if ( ngTema[st].link != " ")
@@ -1397,7 +1396,108 @@ i3GEO.arvoreDeTemas = {
 		//funcao que será executada para buscar os temas
 		//
 		busca = function(){
-			i3GEO.php.procurartemas(resultadoProcurar,i3GEO.util.removeAcentos(palavra));
+			i3GEO.php.procurartemas2(resultadoProcurar,i3GEO.util.removeAcentos(palavra));
+		};
+		//
+		//recolhe todos os nós e acrescenta um novo
+		//
+		i3GEO.arvoreDeTemas.ARVORE.collapseAll();
+		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
+		if(!i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id","temasEncontrados")){
+			tempNode = new YAHOO.widget.HTMLNode(
+				{html:"Temas encontrados",id:"temasEncontrados"},
+				root,
+				false,
+				true
+			);
+			tempNode.enableHighlight = false;
+		}
+		else
+		{tempNode = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id","temasEncontrados");}
+		nodePalavra = new YAHOO.widget.HTMLNode({html:palavra}, tempNode, false,true);
+		nodePalavra.enableHighlight = false;
+		i3GEO.arvoreDeTemas.ARVORE.draw();
+		tempNode.expand();
+		nodePalavra.setDynamicLoad(busca, 1);
+		nodePalavra.expand();
+	},
+	/*
+	Function: buscaTema2
+	
+	Procura temas na árvore de temas (a busca é feita no servidor e não na árvore atual).
+	
+	Parametro:
+	
+	palavra {String}
+	*/
+	buscaTema2: function(palavra){
+		if(palavra === ""){return;}
+		if(typeof(console) !== 'undefined'){console.info("i3GEO.arvoreDeTemas.buscaTema()");}
+		var busca,root,nodePalavra;
+		resultadoProcurar = function(retorno)
+		{
+			var mostra,tempNode,d,ig,
+				montaTexto = function(ngSgrupo){
+					var tempn,ngTema,tempng,mostra,d,lk,tempNode,st,sg;
+					tempn = ngSgrupo.length;
+					for(sg=0;sg<tempn;sg++){
+						ngTema = ngSgrupo[sg].temas;
+						tempng = ngTema.length;
+						for (st=0;st<tempng;st++){
+							mostra = true;
+							try{
+								if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD && ngTema[st].download == "nao")
+								{mostra = false;}
+								if(i3GEO.arvoreDeTemas.FILTRAOGC && ngTema[st].ogc == "nao")
+								{mostra = false;}
+							}
+							catch(e){}
+							if(mostra){
+								d = i3GEO.arvoreDeTemas.montaTextoTema("gray",ngTema[st]);
+								if ( ngTema[st].link != " ")
+								{lk = "<a href='"+ngTema[st].link+"' target='blank'>&nbsp;fonte</a>";}
+								if(ngSgrupo[sg].subgrupo)
+								{d += "<td style='text-allign:left'> ("+(ngSgrupo[sg].subgrupo)+") "+lk+"</td>";}
+								else
+								{d += "<td style='text-allign:left'> ("+(ngSgrupo[sg].grupo)+")"+lk+"</td>";}
+								tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra, false,true);
+								tempNode.isLeaf = true;
+								tempNode.enableHighlight = false;
+							}
+							conta++;
+						}
+					}
+				};
+			if(!retorno.data)
+			{alert("Ocorreu um erro");}
+			else{
+				retorno = retorno.data;
+				conta = 0;
+				if ((retorno != "erro") && (retorno !== undefined)){
+					ig = retorno.length-1;
+					if(ig >= 0){
+						do{
+							montaTexto([retorno[ig]]);
+							montaTexto(retorno[ig].subgrupos);
+						}
+						while(ig--);
+					}
+					else{
+						d = "<span style='color:red'>Nada encontrado<br><br></span>";
+						tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra, false,true);
+						tempNode.isLeaf = true;
+						tempNode.enableHighlight = false;
+					}
+				}
+			}
+			nodePalavra.loadComplete();
+		};
+		
+		//
+		//funcao que será executada para buscar os temas
+		//
+		busca = function(){
+			i3GEO.php.procurartemas2(resultadoProcurar,i3GEO.util.removeAcentos(palavra));
 		};
 		//
 		//recolhe todos os nós e acrescenta um novo

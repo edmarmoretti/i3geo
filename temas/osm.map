@@ -26,7 +26,8 @@ SYMBOLSET "../symbols/simbolos.sym"
       END
       STATUS OFF
       CONNECTIONTYPE WMS
-      CONNECTION "http://data1.vizure.net/server/services/request.php?jname=/wms"
+      CONNECTION "http://full.wms.geofabrik.de/std/demo_key?"
+	  #"http://data1.vizure.net/server/services/request.php?jname=/wms"
       PROJECTION
          "init=epsg:4326"
       END

@@ -33,12 +33,11 @@ class Arvore
 		{$coluna = "nome_tema";}
 		else
 		{$coluna = $idioma;}
-		$this->sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
+		$this->sql_temasraiz = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,perfil FROM i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.$coluna as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
 		$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
 
-		
 		$this->locaplic = $locaplic;
 		$dbh = "";
 		error_reporting(0);
@@ -95,7 +94,7 @@ class Arvore
 		}
 		return $resultado;
 	}
-	//procura um tema tendo como base uma palavra
+	//procura um tema tendo como base uma palavra.
 	function procuraTemas ($procurar,$perfil)
 	{
 		if($procurar != "")
@@ -114,6 +113,41 @@ class Arvore
 				if($this->verificaOcorrencia($perfil,explode(",",$a)))
 				{
 					$sgrupos = $this->pegaSubgruposGrupo($menu["idmenu"],$grupo["id_n1"]);
+					$temasRaizGrupo = array();
+					$temasR = $this->pegaTemasRaizGrupo($menu["idmenu"],$grupo["id_n1"]);
+					foreach($temasR as $tema)
+					{
+						$a = $tema["perfil"];
+						$a = str_replace(" ",",",$a);								
+						if($this->verificaOcorrencia($perfil,explode(",",$a)))
+						{
+							$t = $this->pegaTema($tema["id_tema"]);
+							$t = $t[0];
+							$nome = $this->removeAcentos($tema["nome_tema"]);
+							$tags = $this->removeAcentos($tema["tags_tema"]);
+							$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+							$miniatura = "nao";
+							if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
+							{$miniatura = "sim";}
+							$down = "sim";
+							if (strtolower($t["download_tema"]) == "nao")
+							{$down = "nao";}
+							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+							if($procurar == "")
+							{$resultado[] = $texto;}
+							else
+							{
+								if (stristr($nome,$procurar) || stristr($nome1,$procurar))
+								{$temasRaizGrupo[] = $texto;}
+								else
+								{
+									if (stristr($tags,$procurar) || stristr($tags1,$procurar))
+									{$temasRaizGrupo[] = $texto;}
+								}
+							}
+						}
+					}				
 					foreach($sgrupos["subgrupos"] as $sgrupo)
 					{
 						$a = $sgrupo["n2_perfil"];
@@ -160,8 +194,8 @@ class Arvore
 						$resultado = array();
 					}	
 				}
-				if (count($subgrupo) > 0)
-				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"subgrupos"=>$subgrupo);}
+				if (count($subgrupo) > 0 || count($temasRaizGrupo) > 0)
+				{$final[] = array("grupo"=>$this->converte($grupo["nome_grupo"]),"temas"=>$temasRaizGrupo,"subgrupos"=>$subgrupo);}
 				$subgrupo = array();				
 			}
 		}

@@ -571,7 +571,7 @@ i3GEO.php = {
 	*/
 	selecaopt: function(funcao,tema,xy,tipo,tolerancia){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+tema+"&tipo="+tipo+"&xy="+xy+"&tolerancia="+tolerancia+"&g_sid="+i3GEO.configura.sid;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaopt&tema="+tema+"&tipo="+tipo+"&xy="+xy+"&tolerancia="+tolerancia+"&g_sid="+i3GEO.configura.sid+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"selecaoPT",funcao);	
 	},
 	/*
@@ -581,7 +581,7 @@ i3GEO.php = {
 	*/
 	selecaobox: function(funcao,tema,tipo,box){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+box+"&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+tema;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=selecaobox&ext="+box+"&g_sid="+i3GEO.configura.sid+"&tipo="+tipo+"&tema="+tema+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"selecaobox",funcao);	
 	},
 	/*
@@ -591,7 +591,7 @@ i3GEO.php = {
 	*/
 	selecaoext: function(funcao,tema,tipo){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoext&tema="+tema+"&tipo="+tipo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoext&tema="+tema+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"selecaobox",funcao);	
 	},
 	/*
@@ -601,7 +601,7 @@ i3GEO.php = {
 	*/
 	selecaoatrib2: function(funcao,tema,filtro,tipo){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoatrib2&tema="+tema+"&filtro="+filtro+"&tipo="+tipo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaoatrib2&tema="+tema+"&filtro="+filtro+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"selecaoatrib2",funcao);	
 	},
 	/*
@@ -611,7 +611,7 @@ i3GEO.php = {
 	*/
 	selecaotema: function(funcao,temao,tema,tipo){
 		i3GEO.php.verifica();
-		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaotema&temao="+temao+"&tema="+tema+"&tipo="+tipo;
+		var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=selecaotema&temao="+temao+"&tema="+tema+"&tipo="+tipo+"&ext="+i3GEO.parametros.mapexten;
 		cpJSON.call(p,"selecaotema",funcao);	
 	},
 	/*
@@ -793,7 +793,6 @@ i3GEO.php = {
 		{p += "&tema="+tema;}
 		cpJSON.call(p,"identifica",funcao);	
 	},
-
 	/*
 	Function: reiniciaMapa
 
@@ -805,15 +804,26 @@ i3GEO.php = {
 		cpJSON.call(p,"reiniciaMapa",funcao);	
 	},
 	/*
-	Function: procurartemas
-
-	<PROCURARTEMAS>	
+	Depreciado na versão 4.4	
 	*/
 	procurartemas: function(funcao,procurar,locaplic){
 		if(arguments.length === 2)
 		{locaplic = i3GEO.configura.locaplic;}
 		try{
 			var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas&map_file=&procurar="+procurar+"&idioma="+i3GEO.idioma.ATUAL;
+			cpJSON.call(p,"procurartemas",funcao);
+		}catch(e){}
+	},
+	/*
+	Function: procurartemas2
+
+	<PROCURARTEMAS2>	
+	*/
+	procurartemas2: function(funcao,procurar,locaplic){
+		if(arguments.length === 2)
+		{locaplic = i3GEO.configura.locaplic;}
+		try{
+			var p = locaplic+"/classesphp/mapa_controle.php?funcao=procurartemas2&map_file=&procurar="+procurar+"&idioma="+i3GEO.idioma.ATUAL;
 			cpJSON.call(p,"procurartemas",funcao);
 		}catch(e){}
 	},

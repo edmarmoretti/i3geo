@@ -96,7 +96,7 @@ i3GEOF.nptpol = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"200px",
+			"220px",
 			"",
 			"",
 			"",
@@ -113,7 +113,7 @@ i3GEOF.nptpol = {
 	},
 	t0: function()
 	{
-		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gonos.</p>";
+		var ins = "<p class='paragrafo'>Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outro com pol&iacute;gonos considerando-se a extensão geográfica do mapa atual.</p>";
 		ins += "<p class='paragrafo'>O resultado será um novo tema do tipo poligonal, sendo que a tabela de atributos conterá o total de pontos que se sobrepõem ao polígono.</p>";
 		ins += "<p class='paragrafo'>Para gerar o cruzamento &eacute; necess&aacute;rio que no mapa exista pelo menos um tema poligonal e um com os pontos.</p>";
 		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()",ins,"i3GEOFgradeDePontost0","i3GEOnptpolresultado");
@@ -159,7 +159,7 @@ i3GEOF.nptpol = {
 				{i3GEO.atualiza();}
 				i3GEOF.nptpol.aguarde.visibility = "hidden";
 			};			
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+i3GEO.parametros.mapexten;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"nptpol",fim);

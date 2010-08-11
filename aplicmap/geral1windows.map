@@ -302,10 +302,10 @@ LAYER
       TYPE RASTER
       METADATA
          "wms_title"           "Open Street Map"
-         "wms_group_title"     "Roads & Highways"
+         #"wms_group_title"     "Roads & Highways"
          "wms_format"          "image/png"
          "wms_srs"             "EPSG:4326"
-         "wms_name"            "osm"
+         "wms_name"            ""
          "wms_server_version"  "1.1.1"
          "wms_transparent"     "true"
 		 "cache" "sim"
@@ -322,7 +322,7 @@ LAYER
       END
       STATUS OFF
       CONNECTIONTYPE WMS
-      CONNECTION "http://data1.vizure.net/server/services/request.php?jname=/wms"
+      CONNECTION "http://full.wms.geofabrik.de/std/demo_key?"
       #PROJECTION
       #   "init=epsg:4326"
       #END

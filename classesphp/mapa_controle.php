@@ -389,7 +389,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 	case "PONTOEMPOLIGONO":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->pontoEmPoligono($temaPt,$temasPo,$locaplic);
 		$m->salva();
 	break;
@@ -405,7 +405,7 @@ Salva o mapa acrescentando um novo layer com o resultado.
 	case "NPTPOL":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->nptPol($temaPt,$temaPo,$locaplic);
 		$m->salva();
 	break;
@@ -421,7 +421,7 @@ Salva o mapa acrescentando um novo layer com o buffer.
 	case "CRIABUFFER":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->criaBuffer($distancia,$locaplic,$unir);
 		$m->salva();
 		//limpa selecao
@@ -441,7 +441,7 @@ São considerados apenas os pontos próximos definidos por um buffer.
 	case "DISTANCIAPTPT":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$temaorigem);
+		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
 		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
 		$m->salva();
@@ -478,7 +478,7 @@ Executa script R para gerar a imagem.
 		{$tema2 = "";}
 		if(!isset($limitepontos))
 		{$limitepontos = "";}
-		$m = new Analise($map_file,$tema);
+		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
 		$m->salva();
 	break;
@@ -1412,7 +1412,7 @@ Acrescenta um novo tema ao mapa.
 */
 	case "SPHPT2SHP":
 		include_once("classe_shp.php");
-		$m = new SHP($map_file,$tema);
+		$m = new SHP($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->shpPT2shp($locaplic,$para);
 		$m->salva();
 	break;
@@ -1758,7 +1758,7 @@ Pega a lista de temas do menu.
 /*
 Valor: PROCURARTEMAS
 
-Procura um tema no menu.
+Procura um tema no menu considerando apenas os existentes em subgruppos.
 
 <Menutemas->procurartemas>
 */
@@ -1774,6 +1774,25 @@ Procura um tema no menu.
 		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas($procurar);
 	break;
+/*
+Valor: PROCURARTEMAS2
+
+Procura um tema no menu considerando todos os níveis.
+
+<Menutemas->procurartemas2>
+*/
+	case "PROCURARTEMAS2":
+		if(!isset($menutemas) || !isset($editores))
+		{
+			if (file_exists("../ms_configura.php"))
+			{include_once("../ms_configura.php");}
+			else
+			{include_once($locaplic."/ms_configura.php");}
+		}
+		include_once("classe_menutemas.php");
+		$m = new Menutemas($map_file,$perfil,$locsistemas,$locaplic,$menutemas,$urli3geo,$editores,$idioma);
+		$retorno = $m->procurartemas2($procurar);
+	break;	
 /*
 Valor: PEGAMAPAS
 
@@ -2408,7 +2427,7 @@ Seleciona elementos utilizando um ponto.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
-			$m = new Selecao($map_file,$tema);
+			$m = new Selecao($map_file,$tema,$ext);
 			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
 		}
 		//$retorno = implode(",",$ok);

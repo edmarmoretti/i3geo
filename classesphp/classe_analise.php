@@ -83,8 +83,10 @@ parameters:
 $map_file - Endereço do mapfile no servidor.
 
 $tema - Nome do tema que será processado
+
+$ext - Extensão geográfica do mapa
 */  
-	function __construct($map_file,$tema="",$locaplic="")
+	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -99,6 +101,11 @@ $tema - Nome do tema que será processado
  		$this->layer = $this->mapa->getlayerbyname($tema);
   		$this->nome = $tema;
   		$this->diretorio = dirname($this->arquivo);
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		}
 	}
 /*
 Method: salva

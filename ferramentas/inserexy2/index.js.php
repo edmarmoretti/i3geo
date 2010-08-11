@@ -598,7 +598,7 @@ i3GEOF.inserexy = {
 		{return;}
 		i3GEOF.inserexy.aguarde.visibility = "visible";
 		var cp = new cpaint(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+$i("i3GEOinserexytemasLocais").value,
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+$i("i3GEOinserexytemasLocais").value+"&ext="+i3GEO.parametros.mapexten,
 			temp = function(){
 				i3GEOF.inserexy.aguarde.visibility = "hidden";
 				i3GEO.atualiza();
@@ -620,7 +620,7 @@ i3GEOF.inserexy = {
 		{return;}
 		i3GEOF.inserexy.aguarde.visibility = "visible";
 		var cp = new cpaint(),
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=poligono&tema="+$i("i3GEOinserexytemasLocais").value,
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=poligono&tema="+$i("i3GEOinserexytemasLocais").value+"&ext="+i3GEO.parametros.mapexten,
 			temp = function(){
 				i3GEOF.inserexy.aguarde.visibility = "hidden";
 				i3GEO.atualiza();

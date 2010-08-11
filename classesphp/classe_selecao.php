@@ -78,9 +78,11 @@ parameters:
 $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
+
+$ext - extensão geográfica do mapa
 */
 
-	function __construct($map_file,$tema="")
+	function __construct($map_file,$tema="",$ext="")
 	{
   		//error_reporting(E_ALL);
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -94,6 +96,11 @@ $tema - nome do tema
 		{
 			$l = $this->mapa->getlayer($i);
 			$l->set("template","none.htm");
+		}
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 		}
 	}
 /*

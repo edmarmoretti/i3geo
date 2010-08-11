@@ -70,8 +70,10 @@ parameters:
 $map_file - Endereço do mapfile no servidor.
 
 $tema - nome do tema
+
+$ext - extensao geográfica que será aplicada ao mapa
 */
-	function __construct($map_file,$tema="",$locaplic="")
+	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
   		//error_reporting(E_ALL);
   		$this->locaplic = $locaplic;
@@ -83,6 +85,11 @@ $tema - nome do tema
   			$this->layer = $this->mapa->getlayerbyname($tema);
   		}
   		$this->nome = $tema;
+		if($ext && $ext != ""){
+			$e = explode(" ",$ext);
+			$extatual = $this->mapa->extent;
+			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+		}		
 	}
 /*
 function: salva

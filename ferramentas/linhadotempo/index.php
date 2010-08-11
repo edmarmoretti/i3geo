@@ -198,7 +198,7 @@ function tituloover(wkt){
 	wkt = wkt.split("(")[1].split(")")[0];
 	wkt = wkt.split(" ");
 
-	var xy = window.parent.i3GEO.calculo.dd2tela(wkt[0],wkt[1],window.parent.document.getElementById("img"),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
+	var xy = window.parent.i3GEO.calculo.dd2tela(wkt[0],wkt[1],window.parent.document.getElementById(window.parent.i3GEO.Interface.IDMAPA),window.parent.i3GEO.parametros.mapexten,window.parent.i3GEO.parametros.pixelsize)
 
 	window.parent.i3GEO.util.criaPin('marcaIdentifica',window.parent.i3GEO.configura.locaplic+"/imagens/marker.png","21px","25px");
 	var i = window.parent.document.getElementById('marcaIdentifica')
@@ -227,11 +227,13 @@ function tituloclique(wkt){
 	wkt = wkt.split("(")[1].split(")")[0];
 	wkt = wkt.split(" ");
 	var retorna = function(retorno)
-	{window.parent.i3GEO.atualiza(retorno);};
+	{
+		window.parent.i3GEO.atualiza(retorno);
+		window.parent.i3GEO.Interface.atualizaTema(retorno,$i("tema").value);
+	};
 	
 	window.parent.i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 	window.parent.i3GEO.php.selecaopt(retorna,$i("tema").value,wkt[0]+" "+wkt[1],"adiciona",0);
-
 }
 /*
 Function: tituloout
