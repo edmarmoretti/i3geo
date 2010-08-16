@@ -314,6 +314,7 @@ i3GEO.analise = {
 			YAHOO.util.Event.removeListener(YAHOO.janelaDocamede.xp.panel.close, "click");
 			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeDistancia.clique()");
 			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeDistancia.movimento()");
+			if($i("mostradistancia_c")){document.body.removeChild($i("mostradistancia_c"));}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*
@@ -530,6 +531,7 @@ i3GEO.analise = {
 			YAHOO.janelaDocaarea.xp.panel.render();
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 			YAHOO.janelaDocaarea.xp.panel.moveTo(imagemxy[0]+150,imagemxy[1]);
+			YAHOO.util.Event.addListener(YAHOO.janelaDocaarea.xp.panel.close, "click", i3GEO.analise.medeArea.fechaJanela);
 		},
 		/*
 		Function: fechaJanela
@@ -539,8 +541,10 @@ i3GEO.analise = {
 		fechaJanela: function(){
 			i3GEO.desenho.richdraw.fecha();
 			if($i("pontosArea")){document.body.removeChild($i("pontosArea"));}
-			i3GEO.eventos.MOUSECLIQUE.remove("cliqueArea()");
-			i3GEO.eventos.MOUSEMOVE.remove("moveArea()");
+			YAHOO.util.Event.removeListener(YAHOO.janelaDocaarea.xp.panel.close, "click");
+			i3GEO.eventos.MOUSECLIQUE.remove("i3GEO.analise.medeArea.clique()");
+			i3GEO.eventos.MOUSEMOVE.remove("i3GEO.analise.medeArea.movimento()");
+			if($i("mostraarea_c")){document.body.removeChild($i("mostraarea_c"));}
 			i3GEO.barraDeBotoes.ativaBotoes();
 		},
 		/*

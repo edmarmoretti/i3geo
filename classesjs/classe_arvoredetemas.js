@@ -1248,7 +1248,7 @@ i3GEO.arvoreDeTemas = {
 			t += 20;
 		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploadgpx === true){
-			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title=''/><td>";
+			ins += "<td><img class='uploadgpx' onclick='i3GEO.arvoreDeTemas.dialogo.uploadgpx()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='upload GPX'/><td>";
 			t += 20;
 		}		
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.uploaddbf === true){
@@ -1284,7 +1284,7 @@ i3GEO.arvoreDeTemas = {
 			t += 20;
 		}
 		if(i3GEO.arvoreDeTemas.OPCOESADICIONAIS.carousel === true){
-			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title=''/><td>";
+			ins += "<td><img class='carouselTemas' onclick='i3GEO.arvoreDeTemas.dialogo.carouselTemas()' src='"+i3GEO.util.$im("branco.gif")+"' style='cursor:pointer;text-align:left'  title='Miniaturas'/><td>";
 			t += 20;
 		}
 		return("<table width='"+t+"px' ><tr>"+ins+"</tr></table>");

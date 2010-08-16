@@ -251,13 +251,17 @@ i3GEO.eventos = {
 			if (eventos.length > 0){
 				f = eventos.length-1;
 				if (f >= 0){
-					do{eval(eventos[f]);}
+					do{
+						if(eventos[f] !== "")
+						{eval(eventos[f]);}
+					}
 					while(f--);
 				}
 			}
 		}
 		catch(e){
 			if(typeof(console) !== 'undefined'){console.error(e);}
+			eventos[f] = "";
 		}
 	},
 	/*
@@ -309,7 +313,7 @@ i3GEO.eventos = {
 		catch(erro){
 			if(typeof(console) !== 'undefined'){console.error(erro);}
 		}
-		if (container !== "divGeometriasTemp"){
+		if (container !== "divGeometriasTemp" && container !== "mapaReferencia"){
 			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "googleearth") || (i3GEO.Interface.ATUAL === "openlayers"))
 			{return;}
 		}
@@ -378,7 +382,8 @@ i3GEO.eventos = {
 			}
 		}
 		catch(e){i3GEO.parametros.celularef = 0;}
-		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex);
+		//if(typeof(console) !== 'undefined'){console.error(xfig);}
+		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex,targ.id);
 		teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
 		objposicaocursor = {
 			ddx: teladd[0],

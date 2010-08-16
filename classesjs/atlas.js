@@ -84,7 +84,8 @@ function iniciaAtlas()
 		}
 		if (pai)
 		{
-			pai.className = "yui-navset";
+			if(pai.className == "")
+			{pai.className = "yui-navset";}
 			var i = 0;
 			do
 			{
@@ -236,7 +237,9 @@ function abrePrancha(id)
 		{
 			wdocaf(retorno.data.w+"px",retorno.data.h+"px",retorno.data.link,"center","","Info");
 		}
-		remapaf();
+		if(retorno.data.mapexten != "")
+		{i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"nenhum",retorno.data.mapexten);}
+		i3GEO.atualiza();
 	}
 	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);

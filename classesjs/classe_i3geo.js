@@ -274,7 +274,7 @@ i3GEO = {
 	
 	Após a inicialização é executado <i3GEO.Interface.inicia>
 	*/
-	inicia:function(){
+	inicia:function(retorno){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.inicia()");}
 		var montaMapa,mashup,tamanho;
 		if(typeof("i3GEOmantemCompatibilidade") === 'function')
@@ -408,7 +408,7 @@ i3GEO = {
 		if(i3GEO.configura.sid===""){
 			mashup = function (retorno){
 				i3GEO.configura.sid = retorno.data;
-				i3GEO.inicia();
+				i3GEO.inicia(retorno);
 			};
 			if(i3GEO.Interface.ATUAL !== "padrao")
 			{i3GEO.configura.mashuppar += "&interface="+i3GEO.Interface.ATUAL;}

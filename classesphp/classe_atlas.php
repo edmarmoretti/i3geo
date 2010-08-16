@@ -221,6 +221,7 @@ locaplic - localização do i3geo no servidor
 			$mapa->save($map_file);
 		}
 		//verifica extensão geográfica
+		$newext = array();
 		if ($mp != "")
 		{
 			$ext = $mapa->extent;
@@ -237,7 +238,7 @@ locaplic - localização do i3geo no servidor
 		}
 		if ($w == ""){$w = 300;}
 		if($h == ""){$h = 300;}
-		return (array("link"=>$link,"w"=>$w,"h"=>$h));
+		return (array("link"=>$link,"w"=>$w,"h"=>$h,"mapexten"=>implode(" ",$newext)));
 	}
 }
 ?>

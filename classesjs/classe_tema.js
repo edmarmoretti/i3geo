@@ -342,11 +342,13 @@ i3GEO.tema = {
 		tipo - tipo de kml - kml|kmz , o tipo kmz permite acessar os dados via kml (por meio de um WMS) e via kml vetorial.
 		*/
 		abreKml: function(tema,tipo){
-			i3GEO.mapa.ativaTema(tema);
+			if(typeof(console) !== 'undefined'){console.info("i3GEO.tema.dialogo.abreKml()");}
 			if(arguments.lenght === 1)
 			{tipo = "kml";}
-			if(typeof(i3GEOF.converteKml) === 'undefined')
-			{i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.abreKml()","convertekml","converteKml");}
+			if(typeof(i3GEOF.converteKml) === 'undefined'){
+				var js = i3GEO.configura.locaplic+"/ferramentas/convertekml/index.js.php";
+				i3GEO.util.scriptTag(js,"i3GEOF.converteKml.criaJanelaFlutuante('"+tema+"','"+tipo+"')","i3GEOF.converteKml_script");
+			}
 		},
 		/*
 		Function: graficotema

@@ -577,7 +577,7 @@ i3GEOF.inserexy = {
 			else{
 				temp = function(retorno){
 					i3GEO.atualiza();
-					i3GEO.Interface.openlayers.atualizaTema(retorno,tema);
+					i3GEO.Interface.atualizaTema(retorno,tema);
 					i3GEOF.inserexy.aguarde.visibility = "hidden"
 				};
 				i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,i3GEOF.inserexy.pegaProjecao());

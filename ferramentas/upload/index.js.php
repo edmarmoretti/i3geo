@@ -105,8 +105,8 @@ i3GEOF.upload = {
 		};
 		titulo = "Upload de shapefile <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"300px",
-			"350px",
+			"320px",
+			"360px",
 			"",
 			"",
 			"",

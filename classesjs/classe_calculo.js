@@ -204,20 +204,22 @@ i3GEO.calculo = {
 	g_celula {Numeric} - tamanho no terreno do pixel da imagem em dd.
 
 	imgext {String} - extensão geográfica do mapa.
+	
+	idorigem {string} - (opcional) id do objeto que originou o cálculo (é usado para identificar se o cálculo está sendo feito sobr o mapa de referência ou não)
 
 	Returns:
 
 	{Array} - Coordena em dd x[0] e y[1].
 	*/
-	tela2dd: function(xfign,yfign,g_celula,imgext){
+	tela2dd: function(xfign,yfign,g_celula,imgext,idorigem){
 		try
 		{
 			var amext,longdd,latdd;
-			if(i3GEO.Interface.ATUAL == "googlemaps"){
+			if(i3GEO.Interface.ATUAL == "googlemaps" && arguments.length == 4){
 				amext = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(xfign,yfign));
 				return [amext.lng(),amext.lat()];
 			}
-			if(i3GEO.Interface.ATUAL == "openlayers"){
+			if(i3GEO.Interface.ATUAL == "openlayers" && arguments.length == 4){
 				amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign,yfign));
 				return [amext.lon,amext.lat];
 			}

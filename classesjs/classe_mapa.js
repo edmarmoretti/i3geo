@@ -333,11 +333,11 @@ i3GEO.mapa = {
 					novoel.id = "moveLegi";
 					novoel.style.display="block";
 					temp = '<div class="hd">Legenda</div>';
-					temp += '<div id="wlegenda" style="text-align:left;background-color:white" ></div>';
+					temp += '<div id="wlegenda" style="text-align:left;background-color:white;height:300px;width:300px;overflow:auto" ></div>';
 					novoel.innerHTML = temp;
 					document.body.appendChild(novoel);
 					YAHOO.namespace("moveLegi.xp");
-					YAHOO.moveLegi.xp.panel = new YAHOO.widget.Panel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
+					YAHOO.moveLegi.xp.panel = new YAHOO.widget.ResizePanel("moveLegi", {width:"300px", fixedcenter: true, constraintoviewport: false, underlay:"none", close:true, visible:true, draggable:true, modal:false,iframe:false } );
 					YAHOO.moveLegi.xp.panel.render();
 				}
 				$i("wlegenda").innerHTML = retorno.data.legenda;
@@ -346,7 +346,8 @@ i3GEO.mapa = {
 				for(i=0;i<n;i++){
 					temp[i].style.display = "none";
 				}
-				YAHOO.moveLegi.xp.panel.show();				
+				YAHOO.moveLegi.xp.panel.show();
+				$i("moveLegi_c").style.zIndex = 10000;
 			};
 			i3GEO.mapa.legendaHTML.obtem(temp);
 		}

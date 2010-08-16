@@ -215,27 +215,27 @@ function iniciaMapa()
 	$arqsel = (file_exists($qyfile)) ? true : false;
 	$m = New Mapa($map_file);
 	$temas = $m->parametrosTemas();
-	if($interface == "openlayers"){
-		//$m->ligaDesligaTemas("",implode(",",$m->nomes),"nao");
-		//
-		//é necessário um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
-		//
-		$nomefundo = str_replace(".map","fundo.map",$map_file);
-		$m->mapa->save($nomefundo);
-		$mf = ms_newMapObj($nomefundo);
-		$of = $mf->outputformat;
-		$of->set("driver","GD/PNG");
-		$temp = $mf->scalebar;
-		$temp->set("status",MS_OFF);
-		$mf->save($nomefundo);
-		$temp = $m->mapa->scalebar;
-		$temp->set("status",MS_OFF);		
-		$of = $m->mapa->outputformat;
-		$of->set("imagemode",MS_IMAGEMODE_RGBA);
-		$of->setOption("QUANTIZE_FORCE","OFF");
-		$of->set("driver","AGG/PNG");		
-		$m->salva();
-	}
+	//$m->ligaDesligaTemas("",implode(",",$m->nomes),"nao");
+	//
+	//é necessário um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
+	//utilizado em algumas interfaces
+	//
+	$nomefundo = str_replace(".map","fundo.map",$map_file);
+	$m->mapa->save($nomefundo);
+	$mf = ms_newMapObj($nomefundo);
+	$of = $mf->outputformat;
+	$of->set("driver","GD/PNG");
+	$temp = $mf->scalebar;
+	$temp->set("status",MS_OFF);
+	$mf->save($nomefundo);
+	$temp = $m->mapa->scalebar;
+	$temp->set("status",MS_OFF);		
+	$of = $m->mapa->outputformat;
+	$of->set("imagemode",MS_IMAGEMODE_RGBA);
+	$of->setOption("QUANTIZE_FORCE","OFF");
+	$of->set("driver","AGG/PNG");		
+	$m->salva();
+
 	$nomes = nomeRandomico(12);
 	$nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 	$imgo->saveImage($nomer);

@@ -240,8 +240,8 @@ Esse gerador, recebe como parâmetro o id da seção atual e transforma o mapfile a
 <flamingo.inc>
 */
 	case "MONTAFLAMINGO":
-	include("flamingo.inc");
-	$retorno = $host."/ms_tmp/".basename(dirname($map_file))."/flamingo.xml";
+		include("flamingo.inc");
+		$retorno = $host."/ms_tmp/".basename(dirname($map_file))."/flamingo.xml";
 	break;
 /*
 Valor: OPENLAYERS
@@ -1330,8 +1330,9 @@ Inverte a ordem das cores das classes de um tema.
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
 		$m = new Alteraclasse($map_file,$tema);
-		$retorno = $m->inverteCoresClasses();
+		$m->inverteCoresClasses();
 		$m->salva();
+		redesenhaMapa();
 	break;
 /*
 Valor: CALCULATAMANHOCLASSES

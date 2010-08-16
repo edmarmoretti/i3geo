@@ -95,22 +95,23 @@
  	<div id=tempoRedesenho style=color:green;background-color:black;width:50px;display:none ></div>
  </td>
  <td class=tdbranca >
-  <table width=100% ><tr>
-  <td class=tdbranca ></td>
-  <td class=tdbranca style=text-align:center >
-  	<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
-  	<div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div>
-  </td>
-  <td class=tdbranca >
-  	<!-- aqui será incluída a escala numérica -->
-  	<div id=escala ></div>
-  </td>
-  <!--
-  	A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
-  	que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
-  	SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
-  -->
-  <td class=tdbranca ><div id=ondeestou ></div></td>
+  <table width=100% >
+  <tr>
+	  <td class=tdbranca >
+		<!-- aqui será incluída a escala numérica -->
+		<div id=escala style="text-align:right;" ></div>
+	  </td>
+	  <td class=tdbranca  >
+		<!-- aqui será incluído o gadget que mostra a coordenada geográfica da posição do mouse -->
+		<div id=localizarxy style="text-align:left;font-size:10px;">Aguarde...</div>
+	  </td>
+
+	  <!--
+		A opção de localização 'onde estou?' baseia-se na identificação do IP do usuário. Para
+		que esta opção funcione corretamente, deve estar instalado no I3Geo o pacote geoIP. Veja no
+		SVN do portal do software público o diretório arquivos_versões/pacotes para maiores informações
+	  -->
+	  <td class=tdbranca  ><div id=ondeestou ></div></td>
   </tr>
   <!-- esta div recebe o cálculo do posicionamento do mouse em coordenadas UTM
   As coordenadas UTM apenas serão mostradas nessa div se o parâmetro

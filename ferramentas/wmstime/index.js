@@ -412,7 +412,6 @@ Function: criaMarcadorTempo
 
 Cria o gráfico que mostra as imagens disponíveis. Serve de base para indicar qual imagem está sendo mostrada
 */
-*/
 function criaMarcadorTempo(){
 	var nmarcas = ids.length
 	distanciaMarcas = parseInt(dw / nmarcas)

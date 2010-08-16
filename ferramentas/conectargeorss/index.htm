@@ -38,8 +38,44 @@ body {
 
 <script type="text/javascript" >
 aguarde("block");
-g_RSS = new Array("")
-listaRSS(g_RSS,"RSS")
+g_RSS = new Array("");
+
+if (document.getElementById("RSS"))
+{
+	if (g_RSS.length > 0)
+	{
+		var p = "../../classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+g_RSS.join("|")+"&tipo=GEORSS";
+		var cp = new cpaint();
+		//cp.set_debug(2)
+		cp.set_response_type("JSON");
+		cp.call(p,"listaRSSwsARRAY",mostraRetornoRSS);
+	}
+}
+function mostraRetornoRSS(retorno)
+{
+	aguarde("none")
+	var reg = /Erro/gi;
+	if (retorno.data.rss.search(reg) != -1)
+	{
+		alert("OOps! Ocorreu um erro\n"+retorno.data);
+		return;
+	}
+	var canais = retorno.data.canais
+	var ncanais = canais.length
+	var ins = "<br>"+retorno.data.rss
+	for (i=0;i<ncanais; i++)
+	{
+		var caso = canais[i]
+		ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+		if(caso.nacessos > 0)
+		{
+			var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+			ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
+		}
+	}
+	document.getElementById("RSS").innerHTML = ins+"<br><br>"
+}
+
 </script>
 </body>
 </html>

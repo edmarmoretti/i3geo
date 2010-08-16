@@ -137,7 +137,7 @@ function adicionatema(id)
 	var redesenha = function()
 	{
 		aguarde("none")
-		window.parent.i3GEO.atualiza("")
+		window.parent.i3GEO.atualiza()
 	}
 	var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value
 	var cp = new cpaint();

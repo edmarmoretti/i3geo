@@ -542,7 +542,8 @@ i3GEO.Interface = {
 			i3GEO.maparef.atualiza();
 			if (i3GEO.configura.mapaRefDisplay !== "none")
 			{
-				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")){i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
+				if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay"))
+				{i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");}
 				if (i3GEO.configura.mapaRefDisplay === "block"){i3GEO.maparef.inicia();}
 			}
 			//
@@ -744,12 +745,13 @@ i3GEO.Interface = {
 				}
 
 			};
-			i3GEO.php.openlayers(montaMapa);
+			i3GEO.gadgets.mostraCoordenadasGEO();
+			i3GEO.gadgets.mostraCoordenadasUTM();
+			montaMapa();
+			//i3GEO.php.openlayers(montaMapa);
 			i3GEO.gadgets.mostraMenuSuspenso();
 			i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 			i3GEO.idioma.mostraSeletor();
-			i3GEO.gadgets.mostraCoordenadasGEO();
-			i3GEO.gadgets.mostraCoordenadasUTM();
 			i3GEO.gadgets.mostraEscalaNumerica();
 			i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.openlayers.ligaDesliga(this)";
 			//

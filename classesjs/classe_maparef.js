@@ -202,7 +202,6 @@ i3GEO.maparef = {
 			{temp = "shadow";}
 			YAHOO.janelaRef.xp.panel = new YAHOO.widget.Panel("i3geo_winRef", { height:"177px", width:"156px", fixedcenter: false, constraintoviewport: true, underlay:temp, close:i3GEO.maparef.PERMITEFECHAR, visible:true, draggable:i3GEO.maparef.PERMITEDESLOCAR, modal:false,iframe:false } );
 			YAHOO.janelaRef.xp.panel.render();
-			
 			r = $i("i3geo_winRef_c");
 			if(r){
 				r.style.clip = "rect(0px, 160px, 182px, 0px)";
@@ -222,7 +221,7 @@ i3GEO.maparef = {
 			YAHOO.util.Event.addListener(YAHOO.janelaRef.xp.panel.close, "click", escondeRef);	
 			i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","block");
 			if(typeof(atualizaLocalizarxy) === "function"){
-				if(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml)
+				if($i(i3GEO.gadgets.PARAMETROS.mostraCoordenadasGEO.idhtml))
 				{YAHOO.util.Event.addListener($i("imagemReferencia"),"mousemove", atualizaLocalizarxy);}
 			}
 		}
@@ -362,8 +361,8 @@ i3GEO.maparef = {
 				telamaxy = parseInt(rect.style.top,10);
 				telamaxx = telaminx + parseInt(rect.style.width,10);
 				telaminy = telamaxy + parseInt(rect.style.height,10);
-				m = i3GEO.calculo.tela2dd(telaminx,telaminy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
-				x = i3GEO.calculo.tela2dd(telamaxx,telamaxy,i3GEO.parametros.celularef,i3GEO.parametros.extentref);
+				m = i3GEO.calculo.tela2dd(telaminx,telaminy,i3GEO.parametros.celularef,i3GEO.parametros.extentref,"imagemReferencia");
+				x = i3GEO.calculo.tela2dd(telamaxx,telamaxy,i3GEO.parametros.celularef,i3GEO.parametros.extentref,"imagemReferencia");
 				ext = m[0]+" "+m[1]+" "+x[0]+" "+x[1];
 				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"",ext);
 			};
@@ -391,6 +390,10 @@ i3GEO.maparef = {
 	*/
 	click: function(){
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.click()");}
+		if(i3GEO.Interface.ATUAL==="openlayers"){
+			i3GEO.Interface.openlayers.pan2ponto(objposicaocursor.ddx,objposicaocursor.ddy);
+			return;
+		}
 		try{
 			i3GEO.janela.abreAguarde("i3GEO.atualiza",$trad("o1"));
 			i3GEO.contadorAtualiza++;

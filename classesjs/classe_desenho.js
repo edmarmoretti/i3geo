@@ -106,7 +106,6 @@ i3GEO.desenho = {
 			catch(erro){
 				renderer = new SVGRenderer();
 				i3GEO.desenho.richdraw = new RichDrawEditor(divgeo, renderer);
-				if(typeof(console) !== 'undefined'){console.error(erro);}
 			}
 			//
 			//definição dos símbolos default para os elementos gráficos

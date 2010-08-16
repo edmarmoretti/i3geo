@@ -146,7 +146,7 @@ i3GEOF.carouseltemas = {
 		//cria a janela flutuante
 		titulo = "Miniaturas <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=6&idajuda=85' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"192px",
+			"205px",
 			"340px",
 			"",
 			"",

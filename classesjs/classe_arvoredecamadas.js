@@ -923,8 +923,10 @@ i3GEO.arvoreDeCamadas = {
 	leg {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
 	*/
 	inverteStatusClasse: function (leg){
-		var temp = function()
-		{i3GEO.atualiza("");};
+		var temp = function(retorno){
+			i3GEO.atualiza();
+			i3GEO.Interface.atualizaTema(retorno,leg.name);
+		};
 		i3GEO.php.inverteStatusClasse(temp,leg.name,leg.value);
 	},	
 	/*

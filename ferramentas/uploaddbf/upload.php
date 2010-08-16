@@ -50,6 +50,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				$csv = new CSVHandler($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$separador,"record");
 				$dados = $csv->ReadCSV();
 				$conta = 0;
+				$xy = array();
 				foreach($csv->HeaderData as $i)
 				{	
 					$i = strtoupper($i);
@@ -62,7 +63,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 						$def[] = array($i.$conta,"C","255");
 					}
 					else
-					$def[] = array($i,"C","255");
+					{$def[] = array($i,"C","255");}
 					$conta++;
 				}
 				if(!function_exists("dbase_create"))
@@ -77,22 +78,34 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 					xbase_add_record($db,$reg);	
 				}
 				xbase_close($db);
-				$_FILES['i3GEOuploaddbffile']['name'] = $nome.".dbf";
 			}
 			echo "<p>Arquivo enviado. Criando shape file...</p>";
-			require_once("../../pacotes/phpxbase/api_conversion.php");
-			$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
-			$records = xbase_numrecords($dbf);
-			$record = array();
+
 			$novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POINT);
 			$novoshpf->free();
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
-			for($x = 1; $x <= $records; $x++)
+			if($i3GEOuploaddbftipoarquivo != "dbf")
 			{
-    			$record = xbase_get_record_with_names($dbf, $x);
-     			$poPoint = ms_newpointobj();
-    			$poPoint->setXY($record[$nomex],$record[$nomey]);
-    			$shapefileObj->addpoint($poPoint);
+				foreach($dados as $d)
+				{
+					$poPoint = ms_newpointobj();
+					$poPoint->setXY($d[$i3GEOuploaddbfnomex],$d[$i3GEOuploaddbfnomey]);
+					$shapefileObj->addpoint($poPoint);
+				}
+			}
+			else
+			{
+				require_once("../../pacotes/phpxbase/api_conversion.php");
+				$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
+				$records = xbase_numrecords($dbf);
+				$record = array();
+				for($x = 1; $x <= $records; $x++)
+				{
+					$record = xbase_get_record_with_names($dbf, $x);
+					$poPoint = ms_newpointobj();
+					$poPoint->setXY($record[$nomex],$record[$nomey]);
+					$shapefileObj->addpoint($poPoint);
+				}
 			}
 			$shapefileObj->free();	
 			$mapt = ms_newMapObj($temasaplic."/novotema.map");
@@ -126,26 +139,6 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 			$salvo = $mapa->save($map_file);
 			echo "Tema criado!!!";
 			echo "<script>window.parent.i3GEO.atualiza()</script>";
-		}
-		else //join com um tema
-		{
-			//$layer = $mapa->getlayerbyname($tema);
-			//essa funcao ainda não está implementada
-			//
-			$dbf = $dirmap."/".$_FILES['filedbf']['name'];
-			$string = 'JOIN '."\n".' NAME "'.$_FILES['i3GEOuploaddbffile']['name'].'"'."\n";
-			$string .= 'TABLE "'.$dbf.'"'."\n";
-			$string .= 'FROM "'.$item.'"'."\n";
-			$string .= 'TO "'.$colunadbf.'"'."\n";
-			$string .= 'TYPE ONE-TO-ONE'."\n"." END"."\n";
-			$string .= 'TEMPLATE "none.htm"'."\n";
-
-			//$layer->updatefromstring($string);
-			//$salvo = $mapa->save($map_file);
-			include_once("../../classesphp/classe_mapa.php");
-			$m = new Mapa($map_file,$locaplic);
-			$m->insereJOIN($string,$tema);
-			echo "Junção concluida!!!";			
 		}
 	}
 	else

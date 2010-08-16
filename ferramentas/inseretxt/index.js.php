@@ -128,7 +128,7 @@ i3GEOF.inseretxt = {
 		$inputText("","","i3GEOinseretxttexto","",60,"") +
 		'		<br><br>' +
 		'		<div id=i3GEOinseretxtmen1 style="text-align:left;" >'+
-		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades.' +
+		'			<p class="paragrafo" >Digite o texto e clique no mapa no ponto de inclus&atilde;o. Para definir os par&acirc;metros de fonte, tamanho, etc, utilize a guia de propriedades. Se o texto contiver acentuação, não use a fonte padrão (bitmap).' +
 		'		</div>' +
 		'	</div>' +
 		'	<div class=guiaobj id="i3GEOinseretxtguia2obj" style="left:1px;display:none;">' +
