@@ -454,7 +454,7 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 }
 function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 {
-	$q = "select * from i3geoadmin_atlasp as p where p.id_atlas = $id_atlas ";
+	$q = "select * from i3geoadmin_atlasp as p where p.id_atlas = $id_atlas order by ordem_prancha";
 	$qpranchas = $dbh->query($q);
 	foreach($qpranchas as $row)
 	{
@@ -475,7 +475,7 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 }
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
-	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = '$id_prancha'";
+	$q = "select t.codigo_tema,t.ligado_tema from i3geoadmin_atlast as t where t.id_prancha = '$id_prancha' order by ordem_tema";
 	//echo $q;
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)

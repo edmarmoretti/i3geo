@@ -200,6 +200,12 @@ function alterarAtlas()
 	try 
 	{
     	include("conexao.php");
+    	if($h_atlas == "")
+		{$h_atlas = 0;}
+		if($h_atlas == "")
+		{$w_atlas = 0;}
+		if($ordem_atlas == "")
+		{$ordem_atlas = 0;}
 		if($convUTF)
 		{
 			$desc_atlas = utf8_encode($desc_atlas);
@@ -236,6 +242,13 @@ function alterarPrancha()
 	try 
 	{
     	include("conexao.php");
+    	if($h_prancha == "")
+		{$h_prancha = 0;}
+		if($h_prancha == "")
+		{$w_prancha = 0;}
+		if($ordem_prancha == "")
+		{$ordem_prancha = 0;}
+		
 		if($convUTF)
 		{
 			$desc_prancha = utf8_encode($desc_prancha);
