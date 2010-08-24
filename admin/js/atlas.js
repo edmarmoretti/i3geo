@@ -246,7 +246,7 @@ function montaDivPrancha(i)
 		{titulo:"Largura da janela do texto inicial:",id:"Ew_prancha",size:"5",value:i.w_prancha,tipo:"text",div:""},
 		{titulo:"Altura:",id:"Eh_prancha",size:"5",value:i.h_prancha,tipo:"text",div:""},
 		{titulo:"(opcional) Ícone que será utilizado na apresentação da prancha:",id:"Eicone_prancha",size:"50",value:i.icone_prancha,tipo:"text",div:""},
-		{titulo:"Extensão geográfica:",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
+		{titulo:"Extensão geográfica (xmin ymin xmax ymax):",id:"Emapext_prancha",size:"30",value:i.mapext_prancha,tipo:"text",div:""}
 		]
 	}
 	var ins = ""

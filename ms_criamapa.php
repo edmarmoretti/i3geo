@@ -671,7 +671,9 @@ function insereWKTUrl()
 	$mapa = ms_newMapObj($tmpfname);
 	$layer = ms_newLayerObj($mapa);
 	$layer->set("name","wktins");
-	$layer->set("data",$nomeshp);
+	$layer->set("data",$nomeshp.".shp");
+	$layer->setmetadata("DOWNLOAD","sim");
+	
 	$layer->setmetadata("tema",$nometemawkt);
 	$layer->setmetadata("classe","sim");
 	$layer->set("type",$shape->type);
@@ -748,7 +750,8 @@ function inserePontosUrl()
 	$mapa = ms_newMapObj($tmpfname);
 	$layer = ms_newLayerObj($mapa);
 	$layer->set("name","pontoins");
-	$layer->set("data",$nomeshp);
+	$layer->set("data",$nomeshp.".shp");
+	$layer->setmetadata("DOWNLOAD","sim");
 	$layer->setmetadata("tema",$nometemapontos);
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
@@ -826,7 +829,9 @@ function insereLinhasUrl()
 	$mapa = ms_newMapObj($tmpfname);
 	$layer = ms_newLayerObj($mapa);
 	$layer->set("name","linhains");
-	$layer->set("data",$nomeshp);
+	$layer->set("data",$nomeshp.".shp");
+	$layer->setmetadata("DOWNLOAD","sim");
+
 	$layer->setmetadata("tema",$nometemalinhas);
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
@@ -904,7 +909,9 @@ function inserePoligonosUrl()
 	$mapa = ms_newMapObj($tmpfname);
 	$layer = ms_newLayerObj($mapa);
 	$layer->set("name","linhains");
-	$layer->set("data",$nomeshp);
+	$layer->set("data",$nomeshp.".shp");
+	$layer->setmetadata("DOWNLOAD","sim");
+
 	$layer->setmetadata("tema",$nometemapoligonos);
 	$layer->setmetadata("classe","sim");
 	$layer->setmetadata("ATLAS","nao");
@@ -935,6 +942,7 @@ function incluiTemaWms()
 	$m = new Mapa($tmpfname);
  	$m->adicionatemawms($layer_wms,$url_wms,$style_wms,$srs_wms,$image_wms,$locaplic,"",$versao_wms,$nome,"","","","","nao","text/plain","");
 	$salvo = $m->salva($tmpfname);
+	//echo $tmpfname;exit;
 	erroCriacao();
 }
 /*

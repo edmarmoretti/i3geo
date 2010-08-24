@@ -72,13 +72,17 @@ class Arvore
 		{$coluna = "nome_menu";}
 		else
 		{$coluna = $this->idioma;}
-		if($this->editor)
-		$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu";
+		if($this->editor == true)
+		{
+			$perfil = "";
+			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu";
+		}
 		else
 		$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu isnull order by nome_menu";
-
+		
 		$regs = $this->execSQL($sql);
-   		$resultado = array();
+	
+		$resultado = array();
 		foreach($regs as $reg)
 		{
 			$a = $reg["perfil_menu"];
@@ -244,8 +248,8 @@ class Arvore
 		foreach($dados["grupos"] as $grupo)
 		{
 			$a = $grupo["n1_perfil"];
-			$a = str_replace(" ",",",$a);								
-			if($this->verificaOcorrencia($perfil,explode(",",$a)))
+			$a = str_replace(" ",",",$a);
+			if($this->verificaOcorrencia($perfil,explode(",",$a)) == true)
 			{
 				$temas = array();
 				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"]);
@@ -289,8 +293,8 @@ class Arvore
 						}
 					}
 				}
+				$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 			}
-			$grupos[] = array("publicado"=>($grupo["publicado"]),"id_n1"=>($grupo["id_n1"]),"nome"=>$this->converte($grupo["nome_grupo"]),"ogc"=>$grupoogc,"download"=>$grupodown,"subgrupos"=>$subgrupos,"temasgrupo"=>$temas);
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
 		//pega os sistemas checando os perfis
@@ -380,9 +384,13 @@ class Arvore
 	}
 	function verificaOcorrencia($procurar,$em)
 	{
+		if(count($em) == 1 && $em[0] == "")
+		{$em = "";}
 		if($procurar == "" && $em == "")
-		{return TRUE;}
-		$resultado = FALSE;
+		{return true;}
+		if($em == "")
+		{return true;}		
+		$resultado = false;
 		if($procurar != "" && $em != "")
 		{
 			foreach($em as $e)
@@ -392,7 +400,7 @@ class Arvore
 				{
 					$p = trim($p);
 					if($p == $e)
-					{$resultado = TRUE;}
+					{$resultado = true;}
 				}
 			}
 		}

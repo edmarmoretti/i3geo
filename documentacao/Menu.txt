@@ -110,6 +110,7 @@ Group: API PHP  {
    File: graficopizza.php  (classesphp\graficopizza.php)
    File: graficos.php  (classesphp\graficos.php)
    File: mapa_controle.php  (classesphp\mapa_controle.php)
+   File: mapa_googlemaps.php  (classesphp\mapa_googlemaps.php)
    File: mapa_inicia.php  (classesphp\mapa_inicia.php)
    File: mapa_openlayers.php  (classesphp\mapa_openlayers.php)
    File: parse_cgi.php  (classesphp\parse_cgi.php)
@@ -269,13 +270,14 @@ Group: Aplicativos adicionais  {
       }  # Group: Mobile
 
    File: Mashups  (mashups\index.html)
+   File: Redes sociais  (ferramentas\redessociais\index.php)
    }  # Group: Aplicativos adicionais
 
 Group: Interfaces HTML e mapfiles de inicialização e configuração  {
 
    File: Flamingo &lparen;experimental&rparen;  (aplicmap\flamingo.htm)
    File: Google Earth &lparen;experimental&rparen;  (aplicmap\googleearth.phtml)
-   File: Google Maps &lparen;experimental&rparen;  (aplicmap\googlemaps.phtml)
+   File: Google Maps  (aplicmap\googlemaps.phtml)
    File: Interface minima  (aplicmap\minima.htm)
    File: Interface normal  (aplicmap\geral.htm)
    File: Interface normal  (aplicmap\openlayers.htm)

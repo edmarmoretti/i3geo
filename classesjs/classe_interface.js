@@ -577,9 +577,9 @@ i3GEO.Interface = {
 		{boolean}
 		
 		Default:
-		{true}
+		{false}
 		*/
-		TILES: false,
+		TILES: false,	
 		/*
 		Propriedade: BUFFER
 		
@@ -768,8 +768,8 @@ i3GEO.Interface = {
 				urllayer,
 				opcoes,
 				i,
-				fundoIsBase = true,
-				temp;
+				temp,
+				fundoIsBase = true;
 			//
 			//verifica se algum layer adicional é do tipo baselayer. Se for, adiciona o layer fundo, mas não como base
 			//
@@ -806,8 +806,12 @@ i3GEO.Interface = {
 					try{
 						if(camada.escondido === "sim" || camada.connectiontype === 10 || camada.type === 4 || camada.type === 8 )
 						{opcoes.singleTile = true;}
-						else
-						{opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);}
+						else{
+							if(camada.type === 3) //raster
+							{opcoes.singleTile = false;}
+							else
+							{opcoes.singleTile = !(i3GEO.Interface.openlayers.TILES);}
+						}
 						if(camada.type === 0)
 						{opcoes.gutter = 20;}
 						else
@@ -1160,7 +1164,7 @@ i3GEO.Interface = {
 		ativaZoomBox: function(){
 			i3GeoMap.enableKeyDragZoom({
 				key: 'ctrl'
-			});		
+			});
 		},
 		inicia: function(){
     		var pol,ret,pt1,pt2,bottomLeft,bottomRight,i3GEOTile;

@@ -100,6 +100,8 @@ i3GEOF.download = {
 	*/	
 	criaJanelaFlutuante: function(tema){
 		var janela,divid,temp,titulo;
+		if(arguments.length == 0)
+		{tema = i3GEO.temaAtivo;}
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.download");

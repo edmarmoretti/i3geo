@@ -527,9 +527,11 @@ i3GEO.php = {
 				i3GEO.Interface.openlayers.zoom2ext(ext);
     			i3GEO.janela.fechaAguarde();			
 			}
-			//if(i3GEO.Interface.ATUAL === "padrao")
-			//{funcao.call(retorno);}
-			funcao.call(retorno);
+			//
+			//o try é necessario para não dar erro
+			//
+			try{funcao.call(retorno);}
+			catch(e){}
 		};
 		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
 		cpJSON.call(p,"mudaext",retorno);	

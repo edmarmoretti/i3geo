@@ -98,6 +98,7 @@ if($lista == "temas")
 include("classesphp/funcoes_gerais.php");
 $req = ms_newowsrequestobj();
 $tipo = "";
+$_GET = array_merge($_GET,$_POST);
 foreach ($_GET as $k=>$v)
 {
 	$req->setParameter($k, $v);
@@ -108,7 +109,6 @@ foreach ($_GET as $k=>$v)
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
 }
-//$filter = html_entity_decode($filter);
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");

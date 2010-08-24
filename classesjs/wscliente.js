@@ -157,8 +157,8 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicoswms()'>Escolher serviço</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listatemas()'>Escolher um tema</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WMS\")'>Resposta XML (WMS)</span><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WFS\")'>Resposta XML (WFS)</span><br><br>";
-
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.getcapabilities(\"WFS\")'>Resposta XML (WFS)</span><br>";
+/*
 		ins += "<b>&nbsp;Dados</b><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.servicosws()'>Escolher serviço</span><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listafuncoes()'>Escolher fun&ccedil;&atilde;o</span><br>";
@@ -166,7 +166,8 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 
 		ins += "<b>&nbsp;RSS</b><br>";
 		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listaLinkServicos(\"ws\")'>Dados</span><br>";
-		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listaLinkServicos(\"wms\")'>Mapas</span><br>";
+*/
+		ins += i+"<span "+ii+"  class=clique onclick='$i3geo_wscliente.listaLinkServicos(\"wms\")'>RSS</span><br>";
 		$i("arvoreMenu").innerHTML = ins;
 		/*
 			pega parametros pela url
@@ -267,11 +268,11 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		if (this.rssws.length > 0)
 		{
 			aguardeTotal("block");
-			var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+this.rssws.join("|")+"&g_sid=";
+			var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss="+this.rssws.join("|")+"&g_sid=";
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
-			cp.call(p,"listaRSSws",monta);
+			cp.call(p,"listaRSSwsARRAY",monta);
 		}	
 	}
 	/*
@@ -286,12 +287,21 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	{
 		var mostraRetornowmsRSS = function(retorno)
 		{
-			var linhas = retorno.data.split("|")
-			var ins = ""
-			if(linhas.length == 1)
-			{var ins = "<br><span style=color:red>"+retorno.data+"</span>"}
-			else
-			{
+			var reg = /Erro/gi;
+			try{
+				if (retorno.data.rss.search(reg) != -1)
+				{
+					alert("OOps! Ocorreu um erro\n"+retorno.data);
+					aguardeTotal("none");
+					return;
+				}
+			}
+			catch(e){alert(e);}
+			
+			var canais = retorno.data.canais
+			var ncanais = canais.length
+			var ins = "<br>"+retorno.data.rss
+			/*
 				for (i=0;i<linhas.length; i++)
 				{
 					var caso = linhas[i].split("#")
@@ -306,21 +316,35 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 					else
 					{{ins += ""}}
 				}
+			*/
+			for (i=0;i<ncanais; i++){
+				var caso = canais[i]
+				var clique = "javascript:document.getElementById(\""+$i3geo_wscliente.enderecowms+"\").value='"+caso.link+"';document.getElementById('"+$i3geo_wscliente.enderecowms+"').value='"+caso.link+"'"
+				ins += "<p class=clique onclick="+clique+" ><b>"+caso.title+"</b>"
+
+				//ins += "\<p class=clique onclick=\"registraws('"+caso.link+"','"+caso.id_ws+"')\" \>\<b\>"+caso.title+"\<\/b\>&nbsp;"+caso.description+"&nbsp;("+caso.author+")"
+				if(caso.nacessos > 0)
+				{
+					var pc = (parseInt(caso.nacessosok) * 100) / parseInt(caso.nacessos)
+					ins += " \<span style=color:gray \>(disponibilidade: "+pc+"%, acessos considerados: "+caso.nacessos+")\<\/span>\<\/p\>";
+				}
 			}
-			$i("resultadoRSSwms").innerHTML = ins
+
+			$i("resultadoRSSwms").innerHTML = ins+"<br.<br>";
 			$i($i3geo_wscliente.corpo).style.display="none"
 			$i("RSSws").style.display="none"
 			$i("RSSwms").style.display="block"
+		
 			aguardeTotal("none");
 		}
 		if ($i("RSSwms"))
 		{
 			aguardeTotal("block");
-			var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=listaRSSws&rss="+this.rsswms.join("|")+"&g_sid=";
+			var p = this.loc_i3geo+"/classesphp/wscliente.php?tipo=WMS&funcao=listaRSSwsARRAY&rss=&g_sid=";
 			var cp = new cpaint();
 			//cp.set_debug(2)
 			cp.set_response_type("JSON");
-			cp.call(p,"listaRSSws",mostraRetornowmsRSS);
+			cp.call(p,"listaRSSwsARRAY",mostraRetornowmsRSS);
 		}
 	}
 	/*
