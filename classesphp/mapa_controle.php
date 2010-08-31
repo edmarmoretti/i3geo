@@ -1996,7 +1996,7 @@ Calcula estatísticas básicas de uma tabela de um tema.
 */	
 	case "ESTATISTICA":
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
+		$m = new Atributos($map_file,$tema,$locaplic,$ext);
 		$retorno = $m->estatDescritivas($item,$exclui);
 	break;
 /*

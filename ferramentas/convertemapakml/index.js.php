@@ -81,7 +81,7 @@ i3GEOF.converteMapaKml = {
 		titulo = "Kml <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=13' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"440px",
-			"280px",
+			"305px",
 			"",
 			"",
 			"",

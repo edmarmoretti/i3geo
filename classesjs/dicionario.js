@@ -116,7 +116,7 @@ it:"Base layers"
 //itens do menu suspenso
 "s1": [
 {
-pt: "Ajuda?",
+pt: "Ajuda",
 en:"Help",
 es:"Ayuda",
 it:"Aiuto?"
@@ -159,10 +159,10 @@ it:"Informazioni WebGis"
 }],
 "u2": [
 {
-pt: "Documenta&ccedil;&atilde;o dos c&oacute;digos",
-en:"Documentation of the codes",
-es:"Documentaci&oacute;n de los c&oacute;digos",
-it:"Documentazione dei codici"
+pt: "Doc. dos c&oacute;digos",
+en:"Doc. of the codes",
+es:"Doc. de los c&oacute;digos",
+it:"Doc. dei codici"
 }],
 "u3": [
 {
@@ -187,10 +187,10 @@ it:"Blog"
 }],
 "u5a": [
 {
-pt: "Portal do software p&uacute;blico",
-en:"Portal do software p&uacute;blico",
-es:"Portal do software p&uacute;blico",
-it:"Portale del software pubblico"
+pt: "Software p&uacute;blico",
+en:"Software p&uacute;blico",
+es:"Software p&uacute;blico",
+it:"Software pubblico"
 }],
 "u5b": [
 {

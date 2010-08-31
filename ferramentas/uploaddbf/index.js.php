@@ -90,14 +90,14 @@ i3GEOF.uploaddbf = {
 		'<p class="paragrafo" >nome da coluna x: <br><input class=digitar type="text" size=42 name="i3GEOuploaddbfnomex" style="top:0px;left:0px"></p>' +
 		'<p class="paragrafo" >nome da coluna y: <br><input class=digitar type="text" size=42 name="i3GEOuploaddbfnomey" style="top:0px;left:0px"></p>' +
 
-		'<p class="paragrafo" >arquivo: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbffile" style="top:0px;left:0px"></p>' +
+		'<p class="paragrafo" >arquivo: <br><input class=digitar type="file" size=42 name="i3GEOuploaddbffile" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class=paragrafo >Proje&ccedil;&atilde;o:</p>' +
-		'<div id=i3GEOuploaddbfListaepsg style="border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
+		'<div id=i3GEOuploaddbfListaepsg width="98%" style="border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
 		'<br><p class="paragrafo" ><input id=i3GEOuploaddbfbotao1 type="button" value="Criar camada" size=12 name="submit">' +
 		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
 		'<input type="hidden" name="MAX_FILE_SIZE" value="100000">' +
 		'</form>' +
-		'<iframe name=i3GEOuploaddbfiframe style="text-align:left;" width="280px" height="60px"></iframe>';
+		'<br><iframe name=i3GEOuploaddbfiframe style="text-align:left;" width="98%" height="60px"></iframe>';
 		return ins;
 	},
 	/*
@@ -114,7 +114,7 @@ i3GEOF.uploaddbf = {
 		titulo = "Upload de arquivo de dados <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
-			"380px",
+			"390px",
 			"",
 			"",
 			"",

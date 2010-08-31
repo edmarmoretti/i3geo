@@ -306,9 +306,14 @@ i3GEO.eventos = {
 		//deve ser controlado pelo i3geo
 		//
 		var teladd,teladms,container,targ,pos,mousex,mousey,xfig,yfig,xreffig,yreffig,xtela,ytela,c,ex,r;
+		if (!e){e = window.event;}
 		try{
-			//verifica se o richdraw está sendo usado
-			container = e.target.parentNode.id;
+			if (e.target)
+			{targ = e.target;}
+			else
+			if (e.srcElement)
+			{targ = e.srcElement;}
+			container = targ.parentNode.id;
 		}
 		catch(erro){
 			if(typeof(console) !== 'undefined'){console.error(erro);}
@@ -317,7 +322,7 @@ i3GEO.eventos = {
 			if((i3GEO.Interface.ATUAL === "googlemaps") || (i3GEO.Interface.ATUAL === "googleearth") || (i3GEO.Interface.ATUAL === "openlayers"))
 			{return;}
 		}
-		if (!e){e = window.event;}
+		
 		//
 		//verifica sob qual objeto o mouse está se movendo
 		//
@@ -385,6 +390,7 @@ i3GEO.eventos = {
 		//if(typeof(console) !== 'undefined'){console.error(xfig);}
 		teladd = i3GEO.calculo.tela2dd(xfig,yfig,c,ex,targ.id);
 		teladms = i3GEO.calculo.dd2dms(teladd[0],teladd[1]);
+		
 		objposicaocursor = {
 			ddx: teladd[0],
 			ddy: teladd[1],

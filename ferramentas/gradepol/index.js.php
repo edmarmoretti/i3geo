@@ -62,7 +62,7 @@ i3GEOF.gradeDePoligonos = {
 	*/
 	inicia: function(iddiv){
 		try{
-			
+			i3GEO.util.mudaCursor(i3GEO.configura.cursores,"default",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 			$i(iddiv).innerHTML += i3GEOF.gradeDePoligonos.html();
 			i3GEOF.gradeDePoligonos.t0();
 		}

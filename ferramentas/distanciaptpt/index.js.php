@@ -98,7 +98,7 @@ i3GEOF.distanciaptpt = {
 		};	
 		janela = i3GEO.janela.cria(
 			"400px",
-			"220px",
+			"230px",
 			"",
 			"",
 			"",

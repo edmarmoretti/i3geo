@@ -718,7 +718,7 @@ i3GEOF.tabela = {
 				p;
 			if ($i("i3GEOtabelafiltro1").value !== "")
 			{exclui = $i("i3GEOtabelafiltro1").value;}
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=estatistica&item="+$i("i3GEOtabelaComboItensGuia3").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+exclui;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=estatistica&item="+$i("i3GEOtabelaComboItensGuia3").value+"&tema="+i3GEOF.tabela.tema+"&exclui="+exclui+"&ext="+i3GEO.parametros.mapexten;
 			cp.set_response_type("JSON");
 			cp.call(p,"estatDescritivas",monta);
 		}catch(e){
@@ -1339,6 +1339,7 @@ i3GEOF.tabela = {
 			}
 			$i("i3GEOtabelanomesrelh").value=listanomes;
 			$i("i3GEOtabelaitensrelh").value=listai;
+			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
 		}catch(e){alert(e);}
 	},
@@ -1373,6 +1374,7 @@ i3GEOF.tabela = {
 			}
 			$i("i3GEOtabelanomesrelh").value=listanomes;
 			$i("i3GEOtabelaitensrelh").value=listai;
+			$i("i3GEOtabelarelatorio").action += "?ext="+i3GEO.parametros.mapexten;
 			$i("i3GEOtabelarelatorio").submit();
 		}catch(e){alert(e);}
 	}

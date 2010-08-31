@@ -205,7 +205,18 @@ i3GEO.configura = {
 	{"200px"}
 	*/
 	alturatip: "200px",
-
+	/*
+	Propriedade: larguratip
+	
+	Largura em pixel do tip que é mostrado na função de identificação quando o usuário estaciona o mouse sobre o mapa
+	
+	Tipo:
+	{string}
+	
+	Default:
+	{"200px"}
+	*/
+	larguratip: "200px",
 	/*
 	Propriedade: funcaoTip
 	

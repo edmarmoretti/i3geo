@@ -172,8 +172,8 @@ ins += "<td style='text-align:left'>Dia final: </td><td><input onclick='javascri
 ins += "</table>"
 //ins += "<div style='position:absolute;left:120px;top:180px'>"
 ins += "<p>Obter uma imagem por: "
-ins += "<select id='umaImagemPor' style='border:1px solid gray'>"
-ins += "<option value='' >---</option></select>" 
+ins += "<div id='divumaImagemPor'></div>"
+
 
 ins += "<div onclick='iniciaImagens()' style='text-align:left;left:0px;top:20px;'><input id='botao1' size=18 type='button' value='Continuar' /></div>"
 ins += "</div>"
@@ -206,19 +206,20 @@ function escolheuServico(idWMS){
 	//if(tipoServico > 2)
 	$i("WMS_diafim").value = wms_configura[idWMS].diaFim
 
+	var ins = "<select id='umaImagemPor' style='border:1px solid gray'>"
 	if(tipoServico == 1){
-		var ins = "<option value='ano' selected >Ano</option>"
+		ins += "<option value='ano' selected >Ano</option></select>"
 	}
 	if(tipoServico == 2){
-		var ins = "<option value='ano' >Ano</option>"
-		ins += "<option value='mes' selected >Mês</option>"
+		ins += "<option value='ano' >Ano</option>"
+		ins += "<option value='mes' selected >Mês</option></select>"
 	}
 	if(tipoServico == 3){
-		var ins = "<option value='ano'  >Ano</option>"
+		ins += "<option value='ano'  >Ano</option>"
 		ins += "<option value='mes' >Mês</option>"
-		ins += "<option value='dia' selected >Dia</option>"
+		ins += "<option value='dia' selected >Dia</option></select>"
 	}
-	$i("umaImagemPor").innerHTML = ins;
+	$i("divumaImagemPor").innerHTML = ins;
 }
 /*
 Function: iniciaImagens

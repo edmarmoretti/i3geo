@@ -370,10 +370,10 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 	this.buscageo_init = function() 
 	{
 		var ins = "<div style=margin:10px;text-align:left; >"
-		ins += "<p><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>"
+		ins += "<p class=paragrafo ><b>Utilize o mapa abaixo para definir as coordenadas geográficas do seu mapa, ou digite os valores desejados (opcional):</b></p>"
 		ins += "<div id=i3geo_gl_mapa1 style='width:250px;height:250px;border:1px solid blue;display:none'></div>"
 		ins += "<div style=position:absolute;top:40px;left:270px;text-align:left; >"
-		ins += "Coordenadas geográficas em décimos de grau:<br><br>"
+		ins += "Coordenadas geográficas:<br><br>"
 		ins += "<table style=text-align:left >";
 		ins += "<tr><td style=text-align:left >Longitude mínima:</td>"
 		ins += "<td><div style=padding:5px;width:80px; id=paiXmin >"
@@ -391,7 +391,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		ins += "<td><div style=padding:5px;width:80px; id=paiYmax >"
 		ins += "<input onchange='$i3geo_gl.crialink()' type=text size=10 value='' id=i3geo_gl_ymax />"
 		ins += "</div></td></tr></table>"
-		ins += "<input class=executar size='20' type='button' value='capturar   ' onclick='$i3geo_gl.OL.capturageo()' />"
+		ins += "<input style='position:relative;top:10px;left:-10px' class=aplicar size='20' type='button' value='capturar' onclick='$i3geo_gl.OL.capturageo()' />"
 		ins += "</div></div>"
 		document.getElementById(this.buscageo).innerHTML = ins
 		$i("i3geo_gl_mapa1").style.display = "block";
@@ -438,10 +438,12 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 			$i("i3geo_gl_ymax").value = b.top
 			$i3geo_gl.crialink()
 		}
+		/*
 		$inputText("paiXmin","","i3geo_gl_xmin","","","")
 		$inputText("paiXmax","","i3geo_gl_xmax","","","")
 		$inputText("paiYmin","","i3geo_gl_ymin","","","")
 		$inputText("paiYmax","","i3geo_gl_ymax","","","")
+		*/
 	}
 }
 
@@ -467,8 +469,9 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
 	$i3geo_gl.buscageo_init()
 	$i3geo_gl.seltema($i3geo_gl.nomeseltema)
 	i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","")
-	
+	/*
 	$inputText("paiPontos","","pontos","","","")
 	$inputText("paiNometemapontos","","nometemapontos","","","")
 	$inputText("paiPerfil","","perfil","","","")
+	*/
 }

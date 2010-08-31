@@ -22,7 +22,7 @@ MAP
       "permitedownload"	"sim"
       "ltempoitemicone"	""
       "download"	"SIM"
-      "arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
+      #"arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
       "permiteogc"	""
       "permitekml"	"sim"
       "TEMA"	"Biomas shapefile x"

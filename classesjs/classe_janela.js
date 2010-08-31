@@ -217,6 +217,7 @@ i3GEO.janela = {
 		novoel = document.createElement("div");
 		novoel.id = id;
 		novoel.style.display="block";
+		novoel.style.border = "1px solid rgb(120 120 120)";
 		novoel.innerHTML = ins;
 		if($i("i3geo"))
 		{$i("i3geo").appendChild(novoel);}
@@ -236,7 +237,7 @@ i3GEO.janela = {
 			if(navn)
 			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-10;}
 			else
-			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-4;}
+			{$i(id+'_corpo').style.width=parseInt(wlargura,10)-2;}
 		}
 		fix = false;
 		if(nx === "" || nx === "center")

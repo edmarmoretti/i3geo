@@ -33,6 +33,12 @@ if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 {$itensrel[] = $itemagruparel;}
 
 $mapa = ms_newMapObj($map_file);
+if($ext && $ext != ""){
+	$e = explode(" ",$ext);
+	$extatual = $mapa->extent;
+	$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+}
+
 $layer = $mapa->getlayerbyname($temarel);
 $layer->set("template","none.html");
 $existesel = "nao";
@@ -79,6 +85,7 @@ restauraCon($map_file,$postgis_mapa);
 
 if(isset($tiporel) && $tiporel == "csv")
 {
+	echo "<pre>";
 	echo implode(";",explode(",",$nomesrel));
 	if($arearel == "true")
 	{echo ";&aacute;rea em ha \n";}

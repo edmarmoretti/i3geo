@@ -62,7 +62,7 @@ i3GEOF.carregaMapa = {
 			new YAHOO.widget.Button(
 				"i3GEOcarregamapabotao1",
 				{onclick:{fn: i3GEOF.carregaMapa.submete}}
-			);
+			);			
 		}
 		catch(erro){alert(erro);}
 	},
@@ -80,14 +80,14 @@ i3GEOF.carregaMapa = {
 		ins += '<p class="paragrafo" >Digite o nome do arquivo .map (não utilize espaço em branco ou caracteres acentuados) ou busque com o navegador de arquivos:';
 		ins += '<br><br>';
 		ins += '<form id=i3GEOcarregamapaf target="i3GEOcarregamaiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/carregamapa/upload.php" method="post" ENCTYPE="multipart/form-data">';
-		ins += '<p class="paragrafo" ><input id="i3GEOcarregamapafilemap" class=digitar type="file" size=42 name="i3GEOcarregamapafilemap" style="top:0px;left:0px">';
+		ins += '<p class="paragrafo" ><input id="i3GEOcarregamapafilemap" type="file" size=32 name="i3GEOcarregamapafilemap" style="top:0px;left:0px;cursor:pointer;">';
 		ins += '<br><br>';
 		ins += '<p class="paragrafo" ><input id=i3GEOcarregamapabotao1 type="button" value="Carregar arquivo" size=12 name="submit">';
 		ins += '<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >';
 		ins += '<input type="hidden" name="MAX_FILE_SIZE" value="10000">';
 		ins += '<input type=hidden id=i3GEOcarregamapanomearq name=i3GEOcarregamapanomearq value="" >';
 		ins += '</form>';
-		ins += '<iframe name=i3GEOcarregamaiframe width="280px" height="60px"></iframe>';
+		ins += '<br><iframe name=i3GEOcarregamaiframe width="98%" height="70px"></iframe>';
 		return ins;
 	},
 	/*

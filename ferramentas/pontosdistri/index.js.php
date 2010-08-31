@@ -174,7 +174,7 @@ i3GEOF.pontosDistri = {
 		titulo = "Distribui&ccedil;&atilde;o de pontos <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=20' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"300px",
+			"310px",
 			"",
 			"",
 			"",

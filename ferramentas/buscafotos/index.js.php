@@ -126,9 +126,9 @@ i3GEOF.buscaFotos = {
 		ins += '	</div>';
 		ins += '	<div>';
 		ins += '	<p class="paragrafo" >Servidores:';
-		ins += '	<input type=radio style="cursor:pointer" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=flickr id=i3GEObuscafotosbuscaflickr  /><a href="http://www.flickr.com" target="_blank" >Flickr</a>';
-		ins += '	<input type=radio style="cursor:pointer" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=panoramio id=i3GEObuscafotosbuscapanoramio /><a href="http://www.panoramio.com" target="_blank" >Panoramio</a>';
-		ins += '	<input type=radio style="cursor:pointer" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>';
+		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;none;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=flickr id=i3GEObuscafotosbuscaflickr  /><a href="http://www.flickr.com" target="_blank" >Flickr</a>';
+		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=panoramio id=i3GEObuscafotosbuscapanoramio /><a href="http://www.panoramio.com" target="_blank" >Panoramio</a>';
+		ins += '	<input type=radio style="top:2px;background-color:#f2f2f2;border:0px solid white;cursor:pointer;position:relative;" onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><a href="http://www.locr.com" target="_blank" >Locr</a>';
 		ins += '	</div>';
 		ins += '	<div id="i3GEObuscafotospaginas" style="top:10px;"></div><br>';
 		ins += '	<div style="top:0px;left:5px;display:block;width:99%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div>';

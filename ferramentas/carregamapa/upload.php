@@ -71,8 +71,12 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 			}
 		}
 		$map->save($map_file);
+		$e = $mapt->extent;
+		$extatual = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		echo "<p class='paragrafo' >Ok. redesenhando.";
 		echo "<script>window.parent.i3GEO.atualiza();</script>";
+		echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
+		
 	}
 	else
 	{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}

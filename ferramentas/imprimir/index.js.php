@@ -114,8 +114,8 @@ i3GEOF.imprimir = {
 		//cria a janela flutuante
 		titulo = "Imprimir <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
-			"130px",
+			"220px",
+			"140px",
 			"",
 			"",
 			"",

@@ -97,7 +97,7 @@ i3GEOF.dissolve = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"230px",
+			"260px",
 			"",
 			"",
 			"",

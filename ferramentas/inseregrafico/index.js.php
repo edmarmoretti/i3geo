@@ -141,7 +141,7 @@ i3GEOF.insereGrafico = {
 		titulo = "Insere grafico <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=80' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
-			"300px",
+			"320px",
 			"",
 			"",
 			"",

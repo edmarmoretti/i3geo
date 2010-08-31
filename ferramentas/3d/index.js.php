@@ -95,7 +95,7 @@ i3GEOF.t3d = {
 	String com o código html
 	*/
 	html:function(){
-		var ins =	'<div style="top:0px;left:0px;display:block;width:98%;" id="i3GEO3dresultado" >';
+		var ins =	'<div style="background-color:#F2F2F2;top:0px;left:0px;display:block;width:98%;" id="i3GEO3dresultado" >';
 		ins +=	'</div>';
 		ins +=	'<div style="top:10px;left:0px;display:block;width:98%;color:red" id="i3GEO3dfim" >';
 		ins +=	'</div>';
@@ -116,7 +116,7 @@ i3GEOF.t3d = {
 		};
 		janela = i3GEO.janela.cria(
 			"300px",
-			"190px",
+			"220px",
 			"",
 			"",
 			"",

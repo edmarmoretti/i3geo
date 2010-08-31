@@ -132,8 +132,8 @@ i3GEOF.busca = {
 		//cria a janela flutuante
 		titulo = "Procurar <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
-			"280px",
-			"300px",
+			"290px",
+			"330px",
 			"",
 			"",
 			"",

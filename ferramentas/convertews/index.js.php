@@ -67,9 +67,8 @@ i3GEOF.converteMapaWS = {
 			'<p class="paragrafo" ><b>WMS: </b></p>' +
 			'<p class="paragrafo" > <textarea cols="65" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
 			enderecowms + '</textarea></p>' +
-			'<p class="paragrafo" >Para testar, utilize: ' +
-			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >' +
-			enderecowms + '&request=getcapabilities&version=1.1.0&service=wms';
+			'<p class="paragrafo" >' +
+			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >Clique para testar<br>';
 			$i(divid).innerHTML += ins;
 			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
 		}catch(e){alert(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}

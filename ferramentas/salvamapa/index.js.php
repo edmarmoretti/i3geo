@@ -54,13 +54,16 @@ i3GEOF.salvaMapa = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			var map_file = i3GEO.parametros.mapfile,
-				local = map_file.split("ms_tmp");
-			local = window.location.protocol+"//"+window.location.host+"/ms_tmp"+local[1];
-			$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a>";
-		}
-		catch(erro){alert(erro);}
+		var temp = function(){
+			try{
+				var map_file = i3GEO.parametros.mapfile,
+					local = map_file.split("ms_tmp");
+				local = window.location.protocol+"//"+window.location.host+"/ms_tmp"+local[1];
+				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a>";
+			}
+			catch(erro){alert(erro);}
+		};
+		i3GEO.php.mudaext(temp,"nenhum",i3GEO.parametros.mapexten);
 	},
 	/*
 	Function: html

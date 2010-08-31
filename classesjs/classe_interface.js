@@ -843,18 +843,17 @@ i3GEO.Interface = {
 			{i3GEO.Interface.openlayers.TILES = false;}
 			else
 			{i3GEO.Interface.openlayers.TILES = true;}
+			
 			for(i=nlayers-1;i>=0;i--){
 				camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
 				try{
 					layer = i3geoOL.getLayersByName(camada.name)[0];
 					if(camada.escondido !== "sim"){
 						layer.singleTile = !i3GEO.Interface.openlayers.TILES;
-						if(i3GEO.Interface.openlayers.TILES === true){
-							layer.setTileSize(new OpenLayers.Size(256,256));
-						}
 					}
 				}catch(e){}
 			}
+			i3GEO.Interface.openlayers.atualizaMapa();
 		},
 		alteraParametroLayers: function(parametro,valor){
 			var layers = i3geoOL.layers,
@@ -969,37 +968,25 @@ i3GEO.Interface = {
 			i3geoOL.events.register("mousemove", i3geoOL, function(e){
 				//i3GEO.eventos.mousemoveMapa();
 				var p,lonlat,d,dc,imgp,targ,pos,mousex,mousey,pos;
-				if (navm)
-				{p = new OpenLayers.Pixel(e.x,e.y);}
-				else
-				{p = e.xy;}
+				p = e.xy;
 				//altera o indicador de localizacao
 				lonlat = i3geoOL.getLonLatFromPixel(p);
 				d = i3GEO.calculo.dd2dms(lonlat.lon,lonlat.lat);
 				try{
 					objposicaocursor.ddx = lonlat.lon;
 					objposicaocursor.ddy = lonlat.lat;
-					objposicaocursor.telax = p.x;
-					objposicaocursor.telay = p.y;
 					objposicaocursor.dmsx = d[0];
 					objposicaocursor.dmsy = d[1];
-					/*
-					dc = $i("i3geo");
-					if ($i("openlayers_OpenLayers_Container"))
-					{dc = $i("openlayers_OpenLayers_Container");}
-					while (dc.offsetParent){
-						dc = dc.offsetParent;
-						objposicaocursor.telax = objposicaocursor.telax + dc.offsetLeft;
-						objposicaocursor.telay = objposicaocursor.telay + dc.offsetTop;
-					}
-					*/
+
+					//d = i3geoOL.getViewPortPxFromLonLat(lonlat);
+					objposicaocursor.imgx = p.x;
+					objposicaocursor.imgy = p.y;
+
 					pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-					objposicaocursor.telax = objposicaocursor.telax + pos[0];
-					objposicaocursor.telay = objposicaocursor.telay + pos[1];
-					
-					d = i3geoOL.getViewPortPxFromLonLat(lonlat);
-					objposicaocursor.imgx = d.x;
-					objposicaocursor.imgy = d.y;
+					objposicaocursor.telax = p.x + pos[0];
+					objposicaocursor.telay = p.y + pos[1];
+					//i3GEO.ajuda.mostraJanela(p.x+" "+p.y);
+					//console.error(objposicaocursor.telax+" "+objposicaocursor.telay);
 				}
 				catch(e){
 					if(typeof(console) !== 'undefined'){console.error(e);}

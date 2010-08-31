@@ -170,7 +170,7 @@ i3GEO.maparef = {
 				ins += "</div>";
 			}
 			ins += '<div class="bd" style="text-align:left;padding:3px;height: 150px;" id="mapaReferencia" onmouseover="this.onmousemove=function(exy){i3GEO.eventos.posicaoMouseMapa(exy)}"  >';
-			ins += '<img style="cursor:pointer;" id=imagemReferencia src="" onclick="javascript:i3GEO.maparef.click()">';
+			ins += '<img style="cursor:pointer;" id="imagemReferencia" src="" onclick="javascript:i3GEO.maparef.click()">';
 			ins += '</div>';
 			novoel.innerHTML = ins;
 			document.body.appendChild(novoel);
@@ -215,6 +215,7 @@ i3GEO.maparef = {
 			YAHOO.janelaRef.xp.panel.moveTo(moveX,moveY);
 			escondeRef = function(){
 				YAHOO.util.Event.removeListener(YAHOO.janelaRef.xp.panel.close, "click");
+				$i("imagemReferencia").src = "";
 				YAHOO.janelaRef.xp.panel.destroy();	
 				i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay","none");
 			};
@@ -228,7 +229,7 @@ i3GEO.maparef = {
 		//YAHOO.log("Fim initJanelaRef", "i3geo");
 		if(i3GEO.eventos.NAVEGAMAPA.toString().search("i3GEO.maparef.atualiza()") < 0)
 		{i3GEO.eventos.NAVEGAMAPA.push("i3GEO.maparef.atualiza()");}
-		this.atualiza();
+		this.atualiza(true);
 		$i("i3geo_winRef_h").className = "hd2";
 		if(navm)
 		{$i("i3geo_winRef_h").style.width = "156px";}
@@ -246,7 +247,9 @@ i3GEO.maparef = {
 	
 	Se houve alteração na extensão, é preciso refazer o mapa de referência se não, a imagem atual é armazenada no quado de animação
 	*/
-	atualiza: function(){
+	atualiza: function(forca){
+		if(arguments.length == 0)
+		{forca = false;}
 		if(typeof(console) !== 'undefined'){console.info("i3GEO.maparef.atualiza()");}
 		var dinamico,tiporef,temp,re;
 		dinamico = false;
@@ -264,11 +267,11 @@ i3GEO.maparef = {
 				//
 				//no modo cgi ativado, a obtenção da imagem é feita de forma diferente do modo normal do mapa
 				//
-				if(($i("imagemReferencia").src === "") || (i3GEO.parametros.utilizacgi !== "sim")){
+				if($i("imagemReferencia").src == "" || i3GEO.parametros.utilizacgi !== "sim"){
 					//
 					//se o valor do tamanho da celula já existir, não é necessário redesenhar a imagem
 					//
-					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src === "")
+					if(i3GEO.parametros.celularef === "" || $i("imagemReferencia").src == "" || forca == true)
 					{i3GEO.php.referencia(i3GEO.maparef.processaImagem);}
 					else
 					{i3GEO.maparef.atualizaBox();}
@@ -378,9 +381,9 @@ i3GEO.maparef = {
 		box.style.display = "block";
 		box.style.top = parseInt(box.style.top,10)+4;
 		box.style.left = parseInt(box.style.left,10)+4;
-		if(w < 10){
-			box.style.width = "10px";
-			box.style.height = "10px";
+		if(w < 3){
+			box.style.width = "3px";
+			box.style.height = "3px";
 		}
 	},
 	/*

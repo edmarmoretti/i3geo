@@ -1143,20 +1143,8 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			$mapa = desligatemas($mapa);
 			$mapa = desligamargem($mapa);
 			$imgo = $mapa->draw();
-	/*
-			$resultado = array();
-			$res = $layer->connection;
-			$res .= "&request=getfeatureinfo&service=wms";
-			$res .= "&version=1.1.0";//.($layer->getmetadata("wms_version"));
-			$res .= "&QUERY_LAYERS=".($layer->getmetadata("wms_name"));
-			$res .= "&LAYERS=".($layer->getmetadata("wms_name"));
-			$bb = $mapa->extent;
-			$res .= "&BBOX=".($bb->minx).",".($bb->miny).",".($bb->maxx).",".($bb->maxy);
-			$res .= "&X=".round($ptimg->x);
-			$res .= "&Y=".round($ptimg->y);
-			$res .= "&WIDTH=".$mapa->width;
-			$res .= "&HEIGHT=".$mapa->height;
-			$formatoinfo = "text/plain";
+
+			$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
 			if ($formatosinfo != "")
 			{
@@ -1166,9 +1154,9 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 				{
 					if(strtoupper($f) == "TEXT/PLAIN")
 					{$formatoinfo = "text/plain";}
-				}
-						
+				}						
 			}
+			/*
 			$srs = $layer->getmetadata("wms_srs");
 			$srss = explode(" ",$srs);
 			$srs = "EPSG:4326";
@@ -1179,8 +1167,11 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 			}
 			$res .= "&SRS=".$srs;
 			$resposta = file($res."&FORMAT=".$formatoinfo);
-	*/
-			$res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
+			*/
+			$res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,$formatoinfo);
+			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
+			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
+			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
 			$resposta = file($res);
 	/*		
 			$resposta = str_ireplace('<?xml version="1.0" encoding="UTF-8"?>',"",$resposta);
@@ -1213,7 +1204,25 @@ $listaDeTemas - (opcional) Lista com os códigos dos temas que serão identificado
 					$n[] = array("alias"=>trim($t[0]),"valor"=>$va,"link"=>"","img"=>"");
 				}
 			}
-			return array($n);		
+			//caso esri
+			if($n[0] == "")
+			{
+				//error_reporting(E_ALL);
+				$resposta = file($res);
+				$cabecalho = str_replace('"   "','"|"',$resposta[0]);
+				$cabecalho = explode("|",$cabecalho);
+				
+				$linha = str_replace('"  "','"|"',$resposta[1]);
+				$linha = explode("|",$linha);
+				for($i=0;$i < count($cabecalho);++$i)
+				{
+					$va = $this->converte($linha[$i]);
+					$n[] = array("alias"=>$cabecalho[$i],"valor"=>$va,"link"=>"","img"=>"");
+				}
+			}
+			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"");
+			$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo padr&atilde;o do servi&ccedil;o","link"=>$res2,"img"=>"");
+			return array($n);
 		}
 		if(($layer->connectiontype != MS_WMS) && ($layer->type == MS_LAYER_RASTER))
 		{

@@ -97,7 +97,7 @@ i3GEOF.agrupaElementos = {
 		};	
 		janela = i3GEO.janela.cria(
 			"400px",
-			"240px",
+			"270px",
 			"",
 			"",
 			"",

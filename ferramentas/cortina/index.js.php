@@ -67,6 +67,8 @@ i3GEOF.cortina = {
 	iddiv {String} - id do div que receberá o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(navm)
+		{alert("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.cortina.html();
 		}
@@ -121,13 +123,24 @@ i3GEOF.cortina = {
 		i3GEOF.cortina.aguarde = $i("i3GEOF.cortina_imagemCabecalho").style;
 		i3GEOF.cortina.inicia(divid);
 		temp = function(){
-			if(i3GEO.Interface.ATUAL === "openlayers")
-			{i3geoOL.getLayersByName(tema)[0].div.style.clip = "";}
-			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				var divlayer = i3GEO.Interface.googlemaps.retornaDivLayer(tema);
-				divlayer.style.clip = "";
+			if(i3GEO.Interface.ATUAL === "openlayers"){
+				try{
+					var divlayer = i3geoOL.getLayersByName(i3GEO.temaAtivo);
+					var estilo = divlayer[0].div.style;
+					if(navm)
+					{estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
+					else
+					{estilo.clip = "";}
+				}
+				catch(e){}
 			}
-			
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				var divlayer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEO.temaAtivo);
+				if(navm)
+				{estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
+				else
+				{estilo.clip = "";}
+			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -143,7 +156,6 @@ i3GEOF.cortina = {
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
 			estilo = layer.div.style;
-			//rect (top, right, bottom, left)
 		}
 		if(i3GEO.Interface.ATUAL === "googlemaps"){
 			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);

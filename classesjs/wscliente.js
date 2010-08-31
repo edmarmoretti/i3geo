@@ -628,7 +628,7 @@ function i3geo_wscliente_inicia(objeto_i3geo_wscliente_configura)
 		function onPushButtonsMarkupReady()
 		{new YAHOO.widget.Button("botao1");new YAHOO.widget.Button("botao2");}
    		YAHOO.util.Event.onContentReady("botao1", onPushButtonsMarkupReady);
-	}()
+	}();
 }
 
 /*

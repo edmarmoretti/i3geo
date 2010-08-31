@@ -1748,7 +1748,7 @@ $nomeRand {boleano} - Gera um nome randomico para o shapefile (TRUE) ou utiliza 
 
 Retorno:
 
-{string} - nome do arquivo criado
+{string} - nome do arquivo criado ou false se ocorrer erro
 */
 function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 {
@@ -1764,13 +1764,10 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$tipol = MS_SHP_POINT;
 	if ($layer->type == MS_LAYER_LINE){$tipol = MS_SHP_ARC;}
 	if ($layer->type == MS_LAYER_POLYGON){$tipol = MS_SHP_POLYGON;}
-	if ($nomeRand)
-	$novonomelayer = nomeRandomico(20);
+	if ($nomeRand == true)
+	{$novonomelayer = nomeRandomico(20);}
 	else
-	$novonomelayer = $tema;
-	
-	//$novonomelayer = str_replace("_","",$novonomelayer);
-	
+	{$novonomelayer = $tema;}
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 	if(file_exists($nomeshp.".shp"))
 	{return $nomeshp;}
@@ -1782,6 +1779,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 	$novoshpf->free();
 	//se for do tipo features
 	$data = $layer->data;
+	$resultadoFinal = true;
 	if ($data == "")
 	{
 		$def[] = array("ID","C","50");
@@ -1803,6 +1801,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
 		$novoshpf->free();
+		$resultadoFinal = true;
 	}
 	else
 	{
@@ -1827,19 +1826,19 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$existesel = "nao";
-		$qyfile = str_replace(".map",".qy",$map_file);
-		if (file_exists($qyfile))
-		{$map->loadquery($qyfile);}
+		if (file_exists($map_file."qy"))
+		{$map->loadquery($map_file."qy");}
 		if ($layer->getNumresults() > 0)
 		{$existesel = "sim";}
 
 		if ($existesel == "nao")
-		{
-			@$layer->queryByrect($map->extent);
-		}
+		{@$layer->queryByrect($map->extent);}
+		
 		//pega cada registro
 		$res_count = $layer->getNumresults();
-
+		
+		//echo $res_count;exit;
+		
 		if ($res_count > 0)
 		{
 			$sopen = $layer->open();
@@ -1870,9 +1869,29 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE)
 			dbase_close($db);
 			$novoshpf->free();
 			$layer->close();
+			//
+			//verifica a quantidade de registros no final
+			//
+			$db = dbase_open($nomeshp.".dbf", 0);
+			$record_numbers = dbase_numrecords($db);
+			dbase_close($db);
+			if($record_numbers != $res_count){
+				if(file_exists($nomeshp.".dbf"))
+				{unlink($nomeshp.".dbf");}
+				if(file_exists($nomeshp.".shp"))
+				{unlink($nomeshp.".shp");}
+				if(file_exists($nomeshp.".shx"))
+				{unlink($nomeshp.".shx");}
+				$resultadoFinal = false;
+			}
 		}
+		else
+		{$resultadoFinal = false;}
 	}
-	return $nomeshp;
+	if($resultadoFinal == false)
+	{return false;}
+	else
+	{return $nomeshp;}
 }
 /*
 Function: downloadTema (depreciado)
@@ -1918,6 +1937,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//
 	//cria o arquivo mapfile, caso ele não exista, que servirá de base para obtenção dos dados
 	//
+	$nomeRand = true;
 	if (($map_file == "") || (!@ms_newMapObj($map_file))) //a funcao foi chamada do aplicativo datadownload
 	{
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -1926,6 +1946,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		{$map_tmp = ms_newMapObj($locaplic."/aplicmap/geral1.map");}
 		$map_file = $dir_tmp."/".nomerandomico(20).".map";
 		$map_tmp->save($map_file);
+		$nomeRand = false;
 	}
 	//
 	//verifica se o tema existe no mapfile
@@ -1994,6 +2015,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$novonomelayer = $tema;
 		$nomeshp = $dir_tmp."/".$novonomelayer;
 		if(file_exists($nomeshp.".dbf")){
+			//
+			//verifica se o arquivo está vazio ou não
+			//
 			$verificaDBF = verificaDBF($nomeshp.".dbf");
 			if($verificaDBF == false){
 				unlink($nomeshp.".dbf");
@@ -2001,9 +2025,15 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				unlink($nomeshp.".shx");
 			}
 		}
+		//
+		//se existir um arquivo já pronto, definido no metadata arquivodownload, irá ser utilizado
+		//
 		$meta = $l->getmetadata("arquivodownload");
 		if($meta != "")
 		{
+			//
+			//se o arquivo não tiver sido copiado
+			//
 			$nomecopia = $dir_tmp."/".basename($meta);
 			if(file_exists($meta))
 			{
@@ -2012,9 +2042,12 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			}
 			$resultado[] = basename($dir_tmp)."/".basename($nomecopia);
 		}
-		else
+		else //se não existir arquivo definido
 		{
 			$dados = $l->data;
+			//
+			//se for imagem, copia o arquivo
+			//
 			if($l->type == MS_LAYER_RASTER)
 			{
 				if (file_exists($dados))
@@ -2035,8 +2068,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				else
 				{return "erro";}
 			}
-			else
+			else //se for vetorial, extrai o arquivo
 			{
+				//define o nome correto do arquivo final
 				$sp = $map->shapepath;
 				$arq = "";			
 				if (file_exists($dados))
@@ -2047,6 +2081,10 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				{$arq = $sp.$dados.".shp";}
 				if (file_exists($sp.$dados))
 				{$arq = $sp.$dados;}
+				//
+				//se o tema usa um arquivo shapefile, apenas faz a cópia
+				//
+				/*
 				if ($arq != "")
 				{
 					$arq = explode(".shp",$arq);
@@ -2060,14 +2098,13 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".dbf";
 					$resultado[] = basename($dir_tmp)."/".$novonomelayer.".shx";
 				}
-				else
-				{
-					
-					$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,FALSE);
-					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
-					$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
-					$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
-				}
+				*/
+				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand);
+				if($nomeshp == false)
+				{return array("arquivos"=>"<span style=color:red >Ocorreu um erro, tente novamente","nreg"=>0);}
+				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shp";
+				$resultado[] = str_replace($radtmp."/","",$nomeshp).".shx";
+				$resultado[] = str_replace($radtmp."/","",$nomeshp).".dbf"; 
 			}
 		}
 	}
@@ -2075,10 +2112,11 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	if(count($resultado) == 3){
 		$arq = $radtmp."/".$resultado[2];
 		$db = dbase_open($arq, 0);
-		if ($db) {$nreg = dbase_numrecords($db);}
+		if($db){$nreg = dbase_numrecords($db);}
 	}
 	return array("arquivos"=>implode(",",$resultado),"nreg"=>$nreg);
 }
+
 /*
 Function: verificaDBF
 

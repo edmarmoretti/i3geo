@@ -696,7 +696,7 @@ i3GEO.mapa = {
 									i3GEO.util.posicionaImagemNoMapa("marcaIdentifica");
 									balloon = new Balloon();
 									balloon.delayTime = 0;
-									res = "<div style=text-align:left;overflow:auto;height:"+i3GEO.configura.alturatip+"; >"+res+"</div>";
+									res = "<div style=text-align:left;overflow:auto;height:"+i3GEO.configura.alturatip+";width:"+i3GEO.configura.larguratip+"; >"+res+"</div>";
 									balloon.showTooltip($i("marcaIdentifica"),res);
 									$i('marcaIdentifica').onclick = $i("closeButton").onclick;
 								}

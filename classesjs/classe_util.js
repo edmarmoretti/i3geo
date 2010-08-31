@@ -502,10 +502,10 @@ i3GEO.util = {
 		n = os.length;
 		for(i=0;i<n;i++){
 			o = os[i];
-			c = eval("cursores."+tipo+".ie");
-			if(c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text")
-			{o.style.cursor = c;}
+			if(tipo === "default" || tipo === "pointer" || tipo === "crosshair" || tipo === "help" || tipo === "move" || tipo === "text")
+			{o.style.cursor = tipo;}
 			else{
+				c = eval("cursores."+tipo+".ie");
 				if(o){
 					if(navm){
 						o.style.cursor = "URL(\""+locaplic+eval("cursores."+tipo+".ie")+"\"),auto";
@@ -807,19 +807,19 @@ i3GEO.util = {
 				i = novoel.style;
 				i.position = "absolute";
 				i.zIndex=2000;
-				i.top=(yi - 4)+"px";
-				i.left=(xi - 4)+"px";
-				i.width="4px";
-				i.height="4px";
+				i.top=(yi - 2)+"px";
+				i.left=(xi - 2)+"px";
+				i.width="5px";
+				i.height="5px";
 				novoimg = document.createElement("img");
 				if (funcaoOnclick !== "")
 				{novoimg.onclick = funcaoOnclick;}
 				else
 				{novoimg.onclick=function(){i3GEO.util.insereMarca.limpa();};}
-				novoimg.src=i3GEO.configura.locaplic+"/imagens/dot1.gif";
+				novoimg.src=i3GEO.configura.locaplic+"/imagens/dot2.gif";
 				temp = novoimg.style;
-				temp.width="6px";
-				temp.height="6px";
+				temp.width="5px";
+				temp.height="5px";
 				temp.zIndex=2000;
 				novoel.appendChild(novoimg);
 				container.appendChild(novoel);
