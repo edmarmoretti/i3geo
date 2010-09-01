@@ -67,7 +67,6 @@ $idioma - (opcional) pt|en|es|it
 */  	
 	function __construct($map_file="",$perfil="",$locsistemas="",$locaplic="",$menutemas="",$urli3geo="",$editores="",$idioma="pt")
 	{
-		error_reporting(0);
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locsistemas = $locsistemas;

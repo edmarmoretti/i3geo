@@ -1071,7 +1071,14 @@ Gera os arquivos para download de um tema.
 	case "DOWNLOAD2":
 		$retorno = downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
 	break;
+/*
+Valor: DOWNLOAD3
 
+Gera os arquivos para download de um tema forçando um mapfile vazio.
+*/
+	case "DOWNLOAD3":
+		$retorno = downloadTema2("",$tema,$locaplic,$dir_tmp,$postgis_mapa);
+	break;
 /*
 function: INSEREFEATURE
 

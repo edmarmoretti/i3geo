@@ -303,7 +303,7 @@ function datadownload_download(tema)
 	YAHOO.datadownloadLista.panel.setBody($trad("d28"));
 	YAHOO.datadownloadLista.panel.show();
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
-	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download2&tema="+tema;
+	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+tema;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");

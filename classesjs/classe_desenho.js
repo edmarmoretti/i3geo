@@ -138,7 +138,7 @@ i3GEO.desenho = {
 	*/
 	criaDivContainer: function(){
 		desenhoUltimaLinha = "";
-		desenhoUltimaLinhaPol = ""
+		desenhoUltimaLinhaPol = "";
 		if (!$i("divGeometriasTemp")){
 			var pos,novoel,ne;
 			//

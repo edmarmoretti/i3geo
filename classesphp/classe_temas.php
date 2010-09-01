@@ -109,30 +109,33 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
   		else
   		include_once("funcoes_gerais.php");
   		$this->locaplic = $locaplic;
-  		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
-  		if($tema != "" && @$this->mapa->getlayerbyname($tema))
-  		{
-  			$this->layer = $this->mapa->getlayerbyname($tema);
-  			$this->nome = $tema;
-			$vermultilayer = new vermultilayer();
-			$vermultilayer->verifica($map_file,$tema);
-			if ($vermultilayer->resultado == 1) // o tema e multi layer
-			{$ls = $vermultilayer->temas;}
-			else
-			{$ls[] = $tema;}
-			$this->grupo = $ls;
-			$this->visiveis = $vermultilayer->temasvisiveis;
-			foreach ($ls as $l)
+  		if($map_file != "")
+		{
+			$this->mapa = ms_newMapObj($map_file);
+			$this->arquivo = $map_file;
+			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
-				$t = $this->mapa->getlayerbyname($l);
-				$this->indices[] = $t->index;
+				$this->layer = $this->mapa->getlayerbyname($tema);
+				$this->nome = $tema;
+				$vermultilayer = new vermultilayer();
+				$vermultilayer->verifica($map_file,$tema);
+				if ($vermultilayer->resultado == 1) // o tema e multi layer
+				{$ls = $vermultilayer->temas;}
+				else
+				{$ls[] = $tema;}
+				$this->grupo = $ls;
+				$this->visiveis = $vermultilayer->temasvisiveis;
+				foreach ($ls as $l)
+				{
+					$t = $this->mapa->getlayerbyname($l);
+					$this->indices[] = $t->index;
+				}
 			}
-  		}
-		if($ext && $ext != ""){
-			$e = explode(" ",$ext);
-			$extatual = $this->mapa->extent;
-			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			if($ext && $ext != ""){
+				$e = explode(" ",$ext);
+				$extatual = $this->mapa->extent;
+				$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
+			}
 		}
 	}
 /*
@@ -921,10 +924,10 @@ tema - código do tema
 							foreach($sgrupo->TEMA as $t)
 							{
 									
-									$link = ixml($t,"TLINK");
-									$tid = ixml($t,"TID");
-									if($tid == $tema)
-									{$linkfonte = $link;}
+								$link = ixml($t,"TLINK");
+								$tid = ixml($t,"TID");
+								if($tid == $tema)
+								{$linkfonte = $link;}
 							}
 					}
 			}

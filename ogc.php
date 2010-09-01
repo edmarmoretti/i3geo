@@ -65,7 +65,6 @@ require_once("classesphp/carrega_ext.php");
 include("ms_configura.php");
 include("classesphp/pega_variaveis.php");
 include("classesphp/classe_menutemas.php");
-
 error_reporting(0);
 //
 //pega os endereços para compor a url de chamada do gerador de web services
@@ -109,6 +108,7 @@ foreach ($_GET as $k=>$v)
 	if(strtolower($k) == "layer")
 	{$tema = $v;}
 }
+$listaepsg = $srs." EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
 if(count($_GET) == 0){
 	$tipo="intervalo";
 	$req->setParameter("REQUEST", "getCapabilities");
@@ -131,9 +131,23 @@ $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVE
 $or = $proto.$server.$_SERVER['PHP_SELF'];
 if((isset($tema)) && ($tema != "") && ($tipo=="metadados"))
 {$or = $or."?tema=".$tema."&";}
-
+//
+//parametros no nível maior
+//
 $oMap->setmetadata("ows_onlineresource",$or);
-$oMap->setmetadata("ows_title",$tituloInstituicao." - i3geo");
+$oMap->setmetadata("wms_title",$tituloInstituicao." - i3geo");
+$oMap->setmetadata("wfs_title",$tituloInstituicao." - i3geo");
+$oMap->setmetadata("ows_srs",$listaepsg);
+$oMap->setmetadata("wms_attribution_logourl_format","image/png");
+$oMap->setmetadata("wms_attribution_logourl_height","56");
+$oMap->setmetadata("wms_attribution_logourl_width","85");
+$oMap->setmetadata("wms_attribution_logourl_href",$proto.$server.dirname($_SERVER['PHP_SELF'])."/imagens/i3geo.png");
+$oMap->setmetadata("wms_attribution_onlineresource",$proto.$server.dirname($_SERVER['PHP_SELF']));
+$oMap->setmetadata("wms_attribution_title",$tituloInstituicao);
+
+$e = $oMap->extent;
+$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
+
 if (!isset($intervalo))
 {$intervalo = "0,5000";}
 else
@@ -154,7 +168,7 @@ if ($tipo == "" || $tipo == "metadados")
 		{
 			$l = $nmap->getlayerbyname($t);
 			$l->setmetadata("ows_title",pegaNome($l));
-			$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
+			$l->setmetadata("ows_srs",$listaepsg);
 			//essa linha é necessária pq as vezes no mapfile não tem nenhum layer com o nome igual ao nome do mapfile
 			if(count($ts)==1)
 			{
@@ -164,23 +178,25 @@ if ($tipo == "" || $tipo == "metadados")
 			$l->set("dump",MS_TRUE);
 			$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 			$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+			if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
+			{
+				$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
+				$l->setmetadata("wms_attribution_logourl_format","image/png");
+				$l->setmetadata("wms_attribution_logourl_height","50");
+				$l->setmetadata("wms_attribution_logourl_width","50");
+				$l->setmetadata("wms_attribution_logourl_href",$mini);
+			}
 			if($l->type == MS_LAYER_RASTER)
 			{
 				$c = $l->getclass(0);
 				if ($c->name == "")
 				{$c->name = " ";}
 			}
-			if ($l->connectiontype == MS_POSTGIS)
-			{
-				//inclui extensao geografica
-				$extensao = $l->getmetadata("EXTENSAO");
-				if($extensao == "")
-				{
-					$e = $oMap->extent;
-					$extensao = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-				}
-				$l->setmetadata("wms_extent",$extensao);
-			}
+			//inclui extensao geografica
+			$extensao = $l->getmetadata("EXTENSAO");
+			if($extensao == "")
+			{$extensao = $extensaoMap;}
+			$l->setmetadata("wms_extent",$extensao);
 			if (isset($postgis_mapa))
 			{			
 				if ($postgis_mapa != "")
@@ -264,17 +280,11 @@ else
 							if (($conta >= $int[0]) && ($conta <= $int[1]))
 							{
 								$l = $nmap->getlayerbyname($t);
-								if ($l->connectiontype == MS_POSTGIS)
-								{
-									//inclui extensao geografica
-									$extensao = $l->getmetadata("EXTENSAO");
-									if($extensao == "")
-									{
-										$e = $oMap->extent;
-										$extensao = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-									}
-									$l->setmetadata("wms_extent",$extensao);
-								}
+								$extensao = $l->getmetadata("EXTENSAO");
+								if($extensao == "")
+								{$extensao = $extensaoMap;}
+								$l->setmetadata("wms_extent",$extensao);
+
 								$l->setmetadata("ows_title",pegaNome($l));
 								$l->setmetadata("ows_srs","EPSG:4291 EPSG:4326");
 								$l->set("status",MS_OFF);
@@ -285,6 +295,14 @@ else
 								$l->setmetadata("ows_metadataurl_href",$c["fonte"]);
 								$l->setmetadata("ows_metadataurl_type","TC211");
 								$l->setmetadata("ows_metadataurl_format","text/html");
+								if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png"))
+								{
+									$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
+									$l->setmetadata("wms_attribution_logourl_format","image/png");
+									$l->setmetadata("wms_attribution_logourl_height","50");
+									$l->setmetadata("wms_attribution_logourl_width","50");
+									$l->setmetadata("wms_attribution_logourl_href",$mini);
+								}
 								ms_newLayerObj($oMap, $l);
 							}
 						}
@@ -380,3 +398,6 @@ function ogc_imprimeListaDeTemas()
 	echo $imprimir."</body></html>";
 }
 ?>
+
+
+

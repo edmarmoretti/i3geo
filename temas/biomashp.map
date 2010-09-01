@@ -7,27 +7,26 @@ MAP
     GROUP "Grupo 1"
     METADATA
       "ltempoitemimagem"	""
-      "ltempoitemdescricao"	""
       "CLASSE"	"SIM"
-      "ltempoiteminicio"	""
+      "ltempoitemdescricao"	""
       "palletestep"	""
-      "ltempoitemtip"	""
+      "ltempoiteminicio"	""
       "permitekmz"	"sim"
-      "ltempoitemtitulo"	""
-      "description_template"	""
+      "ltempoitemtip"	""
       "iconetema"	"http://www.gpsdrive.de/development/map-icons/square.small/leisure/park.png"
+      "description_template"	""
+      "ltempoitemtitulo"	""
       "ltempoitemlink"	""
       "palletefile"	""
-      "ltempoformatodata"	""
       "permitedownload"	"sim"
+      "ltempoformatodata"	""
       "ltempoitemicone"	""
       "download"	"SIM"
-      #"arquivodownload"	"C:\ms4w\Apache\htdocs\geodados\brasil\vegetacao\vegetacao.zip"
-      "permiteogc"	""
       "permitekml"	"sim"
+      "permiteogc"	""
       "TEMA"	"Biomas shapefile x"
-      "editorsql"	""
       "identifica"	"NAO"
+      "editorsql"	""
       "ltempoitemfim"	""
     END
     NAME "biomashp"
@@ -99,3 +98,4 @@ MAP
   END
 
 END
+
