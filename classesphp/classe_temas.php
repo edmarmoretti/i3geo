@@ -43,7 +43,7 @@ class Temas
 	
 	Objeto mapa
 	*/
-	protected $mapa;
+	public $mapa;
 	/*
 	Variavel: $arquivo
 	

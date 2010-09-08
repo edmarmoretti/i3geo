@@ -42,7 +42,7 @@ class Analise
 	
 	Objeto mapa
 	*/
-	protected $mapa;
+	public $mapa;
 	/*
 	Variavel: $arquivo
 	
@@ -966,13 +966,13 @@ $locaplic - Localização do I3geo.
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
 		{
+			if($layerPt->getProjection() == "" )
+			{
+				if($layerPt->getProjection() == "" )
+				{$layerPt->setProjection("init=epsg:4291");}
+				$layerPt->setProjection("init=epsg:4291");
+			}
 			$layerPt->queryByrect($this->mapa->extent);
-			//$qstring = "/.*/";
-			//if($layerPt->connectiontype == MS_POSTGIS)
-			//{$layerPt->queryByrect($this->mapa->extent);}
-			//$qstring = $itemspt[0].' ~* \'^.\'  ';
-			//else
-			//{$layerPt->queryByAttributes($itemspt[0], $qstring, 1);}
 		}
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
@@ -1130,6 +1130,8 @@ function distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorig
 	$layerorigem->close();
 	$layeroverlay->set("tolerance",0);
 	$layerdestino->set("tolerance",0);
+	if($layeroverlay->getProjection() == "" )
+	{$layeroverlay->setProjection("init=epsg:4291");}	
 	$layeroverlay->queryByrect($this->mapa->extent);
 	$layerdestino->queryByFeatures($layeroverlay->index);
 	$sopen = $layerdestino->open();
@@ -1861,22 +1863,36 @@ $locaplic - Localização do I3geo
 		{$db = xbase_create($nomeshp.".dbf", $def);xbase_close($db);}
 		else
 		{$db = dbase_create($nomeshp.".dbf", $def);dbase_close($db);}
+
+		if($layerPo->getProjection() == "" )
+		{$layerPo->setProjection("init=epsg:4291");}		
+		if($layerPt->getProjection() == "" )
+		{$layerPt->setProjection("init=epsg:4291");}		
+
 		//acrescenta os pontos no novo shapefile
 		$dbname = $nomeshp.".dbf";
 		$db=xbase_open($dbname,2);
 		$sopen = $layerPo->open();
 		if($sopen == MS_FAILURE){return "erro";}
-		$layerPo->whichShapes($this->mapa->extent);
-		while ($shape = $layerPo->nextShape())
+				
+		$layerPo->querybyrect($this->mapa->extent);
+		$sopen = $layerPo->open();
+		$res_count = $layerPo->getNumresults();
+		for ($i = 0; $i < $res_count; ++$i)
 		{
+			$result = $layerPo->getResult($i);
+			$shp_index  = $result->shapeindex;
+			$shape = $layerPo->getfeature($shp_index,-1);
 			$novoreg = array();
 			foreach($itenspo as $ipo)
 			{$novoreg[] = $shape->values[$ipo];}
 			$layerPt->querybyshape($shape);
+			//echo $layerPt->getNumresults();
 			$novoreg[] = $layerPt->getNumresults();
 			$novoshpf->addShape($shape);
 			xbase_add_record($db,$novoreg);
 		}
+		$fechou = $layerPo->close();
 		$novoshpf->free();
 		xbase_close($db);
 		//adiciona o novo tema no mapa
@@ -2424,7 +2440,11 @@ function gravaCoordenadasPt($tema,$limitepontos="TRUE",$extendelimite)
 		{$this->mapa->loadquery($this->qyfile);}
 		if ($layerPt->getNumresults() > 0){$existesel = "sim";}
 		if ($existesel == "nao")
-		{$layerPt->queryByrect($this->mapa->extent);}
+		{
+			if($layerPt->getProjection() == "" )
+			{$layerPt->setProjection("init=epsg:4291");}
+			$layerPt->queryByrect($this->mapa->extent);
+		}
 		$res_count = $layerPt->getNumresults();
 		$pontos = array();
 		//pega um shape especifico

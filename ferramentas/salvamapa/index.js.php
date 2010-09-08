@@ -58,12 +58,18 @@ i3GEOF.salvaMapa = {
 			try{
 				var map_file = i3GEO.parametros.mapfile,
 					local = map_file.split("ms_tmp");
-				local = window.location.protocol+"//"+window.location.host+"/ms_tmp"+local[1];
+				local = i3GEO.util.protocolo()+"://"+window.location.host+"/ms_tmp"+local[1];
 				$i(iddiv).innerHTML += i3GEOF.salvaMapa.html()+"<a href='"+local+"' target='_blank' >Clique aqui para baixar o arquivo</a>";
 			}
 			catch(erro){alert(erro);}
-		};
-		i3GEO.php.mudaext(temp,"nenhum",i3GEO.parametros.mapexten);
+		},
+		atualiza = true,
+		geo = false;
+		if(i3GEO.Interface.ATUAL === "googlemaps"){
+			atualiza = false;
+			geo = true;
+		}
+		i3GEO.php.mudaext(temp,"nenhum",i3GEO.parametros.mapexten,i3GEO.configura.locaplic,i3GEO.configura.sid,atualiza,geo);
 	},
 	/*
 	Function: html

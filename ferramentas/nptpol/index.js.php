@@ -158,8 +158,13 @@ i3GEOF.nptpol = {
 				else
 				{i3GEO.atualiza();}
 				i3GEOF.nptpol.aguarde.visibility = "hidden";
-			};			
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+i3GEO.parametros.mapexten;
+			},
+			ext;
+			if(i3GEO.Interface.ATUAL === "googlemaps")
+			{ext = i3GEO.Interface.googlemaps.bbox();}
+			else
+			{ext = i3GEO.parametros.mapexten;}
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"nptpol",fim);

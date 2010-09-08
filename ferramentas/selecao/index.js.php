@@ -241,6 +241,8 @@ i3GEOF.selecao = {
 		var i = $i("i3GEOF.selecao_c").style;
 		i3GEO.janela.ULTIMOZINDEX++;
 		i.zIndex = 10000 + i3GEO.janela.ULTIMOZINDEX;
+		if(i3GEO.Interface.ATUAL == "googlemaps")
+		{i3GEO.Interface.googlemaps.recalcPar();}
 	},
 	/*
 	Function: mudaicone

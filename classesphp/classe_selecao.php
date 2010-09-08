@@ -43,7 +43,7 @@ class Selecao
 	
 	Objeto mapa
 	*/
-	protected $mapa;
+	public $mapa;
 	/*
 	Variavel: $arquivo
 	

@@ -304,6 +304,7 @@ function datadownload_download(tema)
 	YAHOO.datadownloadLista.panel.show();
 	//document.getElementById("corpo").innerHTML = "Aguarde. Gerando arquivos..."
 	var p = g_locaplic+"/classesphp/mapa_controle.php?map_file=&funcao=download3&tema="+tema;
+	temaEscolhidoDownload = tema;
 	var cp = new cpaint();
 	//cp.set_debug(2)
 	cp.set_response_type("JSON");
@@ -330,8 +331,10 @@ function mostraDownload(retorno)
 			{
 				ins += "<a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a><br>"
 			}
+			ins += "<br><a href='"+g_locaplic+"/fontetema.php?tema="+temaEscolhidoDownload+"' target=blank >Fonte</a>";
 			if(retorno.nreg)
 			{ins += "<br><br>N&uacute;mero de registros ="+retorno.nreg;}
+			
 		}
 	}
 	else

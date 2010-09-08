@@ -388,9 +388,16 @@ Salva o mapa acrescentando um novo layer com o resultado.
 */
 	case "PONTOEMPOLIGONO":
 		include_once("classe_analise.php");
-		copiaSeguranca($map_file);
+		copiaSeguranca($map_file);	
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
 		$retorno = $m->pontoEmPoligono($temaPt,$temasPo,$locaplic);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -406,7 +413,14 @@ Salva o mapa acrescentando um novo layer com o resultado.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}	
 		$retorno = $m->nptPol($temaPt,$temaPo,$locaplic);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -442,8 +456,15 @@ São considerados apenas os pontos próximos definidos por um buffer.
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
 		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
 		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -458,8 +479,15 @@ Salva o mapa acrescentando um novo layer com os pontos.
 	case "CRIACENTROIDE":
 		include_once("classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$tema);
+		$m = new Analise($map_file,$tema,$locaplic);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
 		$retorno = $m->criaCentroide($locaplic);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -477,9 +505,16 @@ Executa script R para gerar a imagem.
 		if(!isset($tema2))
 		{$tema2 = "";}
 		if(!isset($limitepontos))
-		{$limitepontos = "";}
+		{$limitepontos = "";}	
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}			
 		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	break;
 /*
@@ -559,7 +594,6 @@ Reinicia um mapa restaurando a cópia de segurança.
 		$qyfile = str_replace(".map",".qy",$map_file);
 		if (file_exists($qyfile))
 		{unlink ($qyfile);}
-
 		unlink($map_file);
 		copy(str_replace(".map","reinc.map",$map_file),$map_file);
 		$retorno = "ok";
@@ -573,13 +607,10 @@ Recupera o mapfile de segurança.
 		$qyfile = str_replace(".map",".qy",$map_file);
 		if (file_exists($qyfile))
 		{unlink ($qyfile);}
-
 		unlink($map_file);
 		$nmf = str_replace(".map","seguranca.map",$map_file);
 		if(file_exists($nmf))
-		{
-			copy($nmf,$map_file);
-		}
+		{copy($nmf,$map_file);}
 		else
 		{
 			$nmf = str_replace(".map","reinc.map",$map_file);
@@ -948,7 +979,7 @@ Gera a imagem do mapa de referência.
 		$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
 		if(!isset($ext))
-		{$ext = "";}
+		{$ext = "";}		
 		$retorno = retornaReferencia($ext);
 	break;
 /*
@@ -960,7 +991,7 @@ Gera a imagem do mapa de referência de forma dinâmica, variando com a escala do 
 		//$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
 		if(!isset($ext))
-		{$ext = "";}
+		{$ext = "";}	
 		$retorno = retornaReferenciaDinamica($ext);
 	break;
 /*
@@ -1051,9 +1082,7 @@ Gera uma imagem que será utilizada para destacar um determinado tema.
 <Temas->geraDestaque>
 */
 	case "GERADESTAQUE":
-		include_once("classe_temas.php");
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}		
+		include_once("classe_temas.php");		
 		$m = new Temas($map_file,$tema,"",$ext);
 		$retorno = $m->geraDestaque();
 	break;
@@ -1283,8 +1312,15 @@ Gera graficos automaticamente para os elementos de um tema
 	case "GRAFICOTEMA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$tema,$locaplic);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}
 		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 		redesenhaMapa();
 	break;
@@ -1303,8 +1339,6 @@ Altera uma classe de um tema, aplicando uma nova classificação ou modificando pa
 	case "ALTERACLASSE":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}
 		$m = new Alteraclasse($map_file,$tema,"",$ext);
 		if ($opcao == "adicionaclasse")
 		{$retorno = $m->adicionaclasse();}
@@ -1519,8 +1553,6 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 */					
 	case "GRAFICOSELECAO":
 		include_once("graficos.php");
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}		
 		if(!isset($exclui))
 		{$exclui = "";}
 		if(!isset($tipo))
@@ -1628,8 +1660,6 @@ Pega os dados de um tema para geração do gráfico de linha do tempo.
 */
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}		
 		if(!isset($ext))
 		{$ext = "";}
 		$retorno = dadosLinhaDoTempo($map_file,$tema,$ext);
@@ -1937,8 +1967,6 @@ Procura valores em uma tabela que aderem a uma palavra de busca.
 	case "LISTAVALORESITENS":
 		include_once("classe_atributos.php");
 		if(!isset($tema)){$tema = "";}
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}		
 		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
 	break;
@@ -2026,9 +2054,9 @@ Pega todos os valores dos itens de uma tabela de um tema.
 <Atributos->listaRegistros>
 */	
 	case "LISTAREGISTROS":
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
-		{$ext = projetaExt($map_file,$ext);}
 		include_once("classe_atributos.php");
+		if(isset($ext) && $ext != "" && $interface == "googlemaps" && $geo == false)
+		{$ext = projetaExt($map_file,$ext);}		
 		$m = new Atributos($map_file,$tema,"",$ext);
 		if(!isset($tipo)){$tipo = "";}
 		if(!isset($inicio)){$inicio = 0;}
@@ -2086,9 +2114,12 @@ Muda a extensão geográfica do mapa.
 	case "MUDAEXT":
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
-		if (!isset($ext) || $ext == "" || $ext == " "){$ext="-76.512593 -39.392568 -29.585185 9.490149";}
+		if (!isset($ext) || $ext == "" || $ext == " ")
+		{$ext="-76.512593 -39.392568 -29.585185 9.490149";}
+		if(!isset($geo))
+		{$geo = false;}
 		$m = new Navegacao($map_file);
-		if(isset($ext) && $ext != "" && $interface == "googlemaps")
+		if(isset($ext) && $ext != "" && $interface == "googlemaps" && $geo == false)
 		{$ext = projetaExt($map_file,$ext);}
 		$m->mudaExtensao($ext);
 		$m->salva();
@@ -2436,9 +2467,13 @@ Seleciona elementos utilizando um ponto.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
+			if($interface == "googlemaps")
+			{
+				$projMapa = $m->mapa->getProjection();
+				$m->mapa->setProjection("init=epsg:4291");
+			}
 			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
 		}
-		//$retorno = implode(",",$ok);
 		redesenhaMapa();
 	break;
 /*
@@ -2454,7 +2489,12 @@ Seleciona elementos utilizando a extensão do mapa.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
-			$m = new Selecao($map_file,$tema);
+			$m = new Selecao($map_file,$tema,$ext);
+			if($interface == "googlemaps")
+			{
+				$projMapa = $m->mapa->getProjection();
+				$m->mapa->setProjection("init=epsg:4291");
+			}
 			$ok[] = $m->selecaoEXT($tipo);
 		}
 		//$retorno = implode(",",$ok);
@@ -2474,10 +2514,14 @@ Seleciona elementos utilizando um retângulo.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema);
-			if(isset($ext) && $ext != "" && $interface == "googlemaps")
-			{$ext = projetaExt($map_file,$ext);}
+			if($interface == "googlemaps")
+			{
+				$projMapa = $m->mapa->getProjection();
+				$m->mapa->setProjection("init=epsg:4291");
+			}			
 			$ok[] = $m->selecaoBOX($tipo,$ext);
 		}
+		
 		redesenhaMapa();		
 	break;
 
@@ -2491,7 +2535,7 @@ Seleciona elementos com base nos atributos.
 	case "SELECAOATRIB":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
+		$m = new Selecao($map_file,$tema,$ext);
 		$retorno = $m->selecaoAtributos($tipo,$item,$operador,$valor);
 		redesenhaMapa();
 	break;
@@ -2505,7 +2549,7 @@ Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 	case "SELECAOATRIB2":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema);
+		$m = new Selecao($map_file,$tema,$ext);
 		$retorno = $m->selecaoAtributos2($filtro,$tipo);
 		redesenhaMapa();
 	break;
@@ -2523,6 +2567,11 @@ Sleciona elementos de um tema com base em outro tema.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema);
+			if($interface == "googlemaps")
+			{
+				$projMapa = $m->mapa->getProjection();
+				$m->mapa->setProjection("init=epsg:4291");
+			}			
 			$ok[] = $m->selecaoTema($temao,$tipo);
 		}
 		$retorno = implode(",",$ok);
@@ -2745,7 +2794,6 @@ Return:
 function projetaExt($map_file,$ext,$separador=" ")
 {
 	$ext = str_replace($separador," ",$ext);
-	
 	$extA = explode(" ",$ext);
 	$mapa = ms_newMapObj($map_file);
 	$ponto = false;
@@ -2802,7 +2850,14 @@ function selecaoPoli($xs,$ys,$tema,$tipo)
 	foreach($temas as $tema)
 	{
 		$m = new Selecao($map_file,$tema);
+		if($interface == "googlemaps")
+		{
+			$projMapa = $m->mapa->getProjection();
+			$m->mapa->setProjection("init=epsg:4291");
+		}		
 		$ok[] = $m->selecaoPorPoligono($tipo,$xs,$ys);
+		if($interface == "googlemaps")
+		{$m->mapa->setProjection($projMapa);}
 		$m->salva();
 	}
 	return implode(",",$ok);

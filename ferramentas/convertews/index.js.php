@@ -91,7 +91,7 @@ i3GEOF.converteMapaWS = {
 		titulo = "WMS <a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=12' >&nbsp;&nbsp;&nbsp;</a>";
 		janela = i3GEO.janela.cria(
 			"440px",
-			"280px",
+			"290px",
 			"",
 			"",
 			"",

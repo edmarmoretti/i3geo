@@ -503,37 +503,46 @@ i3GEO.php = {
 	/*
 	Function: mudaext
 
+	O parâmetro "atualiza" é do tipo booleano e indica se o redesenho do mapa será feito ou não.
+	
+	O parâmetro "geo" é do tipo booleano e indica se as coordenadas deverão ser convertidas para geográficas ao serem salvas no mapfile
+	
 	<MUDAEXT>	
 	*/
-	mudaext: function(funcao,tipoimagem,ext,locaplic,sid){
+	mudaext: function(funcao,tipoimagem,ext,locaplic,sid,atualiza,geo){
 		var retorno,p;
 		if(arguments.length === 3){
 			i3GEO.php.verifica();
 			locaplic = i3GEO.configura.locaplic;
 			sid = i3GEO.configura.sid;
+			atualiza = true;
+			geo = false;
 		}
+		if(geo === 'undefined')
+		{geo = false;}
+		if(atualiza === 'undefined')
+		{atualiza = true;}
 		if(ext === 'undefined')
 		{alert("extensao nao definida");return;}
 		retorno = function(retorno){
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
-				i3GEO.Interface.googlemaps.zoom2extent(ext);
-    			i3GEO.janela.fechaAguarde();
+				if(atualiza === true)
+				{i3GEO.Interface.googlemaps.zoom2extent(ext);}
 			}
 			if(i3GEO.Interface.ATUAL === "googleearth"){
 				i3GEO.Interface.googleearth.redesenha();
-    			i3GEO.janela.fechaAguarde();
 			}
 			if(i3GEO.Interface.ATUAL === "openlayers"){
-				i3GEO.Interface.openlayers.zoom2ext(ext);
-    			i3GEO.janela.fechaAguarde();			
+				i3GEO.Interface.openlayers.zoom2ext(ext);			
 			}
+			i3GEO.janela.fechaAguarde();
 			//
 			//o try é necessario para não dar erro
 			//
 			try{funcao.call(retorno);}
 			catch(e){}
 		};
-		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid;
+		p = locaplic+"/classesphp/mapa_controle.php?funcao=mudaext&tipoimagem="+tipoimagem+"&ext="+ext+"&g_sid="+sid+"&geo="+geo;
 		cpJSON.call(p,"mudaext",retorno);	
 	},
 	/*

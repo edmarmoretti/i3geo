@@ -373,8 +373,14 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 }
 function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="")
 {
+	global $interface;
 	//pega os valores
 	$map = ms_newMapObj($map_file);
+	if($interface == "googlemaps")
+	{
+		$projMapa = $map->getProjection();
+		$map->setProjection("init=epsg:4291");
+	}
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $map->extent;

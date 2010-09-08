@@ -93,6 +93,8 @@ $ext - (opcional) extensão geográfica que será aplicada ao mapa
   		$this->arquivo = $map_file;
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
+		if($this->layer->getProjection() == "" )
+		{$this->layer->setProjection("init=epsg:4291");}		
   		$this->nome = $tema;
 		if($ext && $ext != ""){
 			$e = explode(" ",$ext);
