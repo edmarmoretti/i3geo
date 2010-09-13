@@ -1,4 +1,49 @@
 <?php
+/*
+Title: hiperbolica
+
+Cria um arquivo no formato XML para o aplicativo árvore hiperbólica.
+
+A árvore hiperbólica é montada por um applet que carrega um XML contendo a estrutura de nós.
+
+Esse programa lê o banco de administração e monta o XML contendo os menus, grupos, subgrupos e temas.
+
+A hierarquia dos nós é codificada com os elementos armazenados em "tipo".
+
+O elemento "familia" armazena dados que podem ser utilizados e funções javascript da árvore. Por exemplo, quando o nó
+for um tema, o código do tema é guardado nesse elemento.
+
+Para ver o XML utilize <http://localhost/i3geo/admin/hiperbolica.php>
+
+Para ver a árvore, utilize <http://localhost/i3geo/pacotes/arvorehiper/index.php>
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/hiperbolica.php
+*/
+
 error_reporting(0);
 include("../ms_configura.php");
 include("$locaplic/admin/php/admin.php");
@@ -130,8 +175,6 @@ foreach ($tipos as $tipo)
 		$xml .= '<item cor="#33CCFF" id="'.$contador.'" tipo="TE3" nome="'.$nome.'" familia="'.$tipo["tipo_ws"].",".$link.'" />  '."\n";		
 	}
 }
-
-
 $xml .= "</termo>";
 $xml .= "</capa>";
 //header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -141,7 +184,9 @@ $xml .= "</capa>";
 header("Content-type: application/xml");
 
 echo $xml;
-
+/*
+Converte o encoding conforme definido em $i
+*/
 function h_converteTexto($i)
 {
 	global $encoding;

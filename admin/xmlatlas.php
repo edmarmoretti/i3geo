@@ -1,4 +1,5 @@
 <?php
+/*DEPRECIADO*/
 error_reporting(0);
 if(!isset($locaplic) || !isset($editores))
 {

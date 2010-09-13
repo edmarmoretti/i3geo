@@ -1,4 +1,53 @@
 <?php
+/*
+Title: xml
+
+Conjunto de funções que geram arquivos na estrutura XML conforme os dados cadastrados no sistema de administração.
+
+Permite a geração de XML no padrão RSS e outros. É utilizado por funções internas do i3Geo e por programas
+utilitários que fornecem dados no formato RSS para outros fins.
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/php/xml.php
+*/
+/*
+Function: geraXmlSistemas (depreciado)
+
+Parametros:
+
+perfil {string} - perfil que será considerado na geração do XML
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+editores {array} - lista de editores cadastrados em ms_configura.php
+
+Retorno:
+
+String na estrutura XML
+*/
 function geraXmlSistemas($perfil,$locaplic,$editores)
 {
 	$editor = verificaEditores($editores);
@@ -42,17 +91,59 @@ function geraXmlSistemas($perfil,$locaplic,$editores)
 	$dbhw = null;
 	return $xml;	
 }
+/*
+Function: geraRSStemas
+
+RSS com os temas cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+id_n2 {string} - código do subgrupo do sistema de administração
+
+Retorno:
+
+RSS
+*/
 function geraRSStemas($locaplic,$id_n2)
 {
 	$sql = "select t.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||t.codigo_tema as link_ws,t.link_tema as autor_ws from i3geoadmin_n3 as n3,i3geoadmin_temas as t where t.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de temas");
 }
+/*
+Function: geraRSSsubgrupos
+
+RSS com os subgrupos cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+id_n1 {string} - código do grupo do sistema de administração
+
+Retorno:
+
+RSS
+*/
 function geraRSSsubgrupos($locaplic,$id_n1)
 {
 	$sql = "select g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from i3geoadmin_n2 as n2,i3geoadmin_subgrupos as g where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' order by nome_ws"; 
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos");
 }
+/*
+Function: geraRSSgrupos
 
+RSS com os grupos cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraRSSgrupos($locaplic)
 {
 	$sql = "select g.nome_grupo as nome_ws,'' as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws "; 
@@ -60,32 +151,109 @@ function geraRSSgrupos($locaplic)
 	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' group by nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de grupos");
 }
+/*
+Function: geraXmlDownload
 
+RSS com os links para sistemas de download
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraXmlDownload($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'DOWNLOAD' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Enderecos para download");
 }
+/*
+Function: geraXmlWS
+
+RSS com a lista de WS cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraXmlWS($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Web services");
 }
+/*
+Function: geraXmlKmlrss
+
+RSS com a lista de KML cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraXmlKmlrss($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'KML' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Web services");
 }
+/*
+Function: geraXmlWMS
+
+RSS com a lista de WMS cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraXmlWMS($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'WMS' and nome_ws <> '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC");
 }
+/*
+Function: geraXmlGeorss
+
+RSS com a lista de GEORSS cadastrados
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraXmlGeorss($locaplic)
 {
 	$sql = "select * from i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Georss");
 }
+/*
+Function: geraRSStemasDownload
+
+RSS com a lista de temas para download
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraRSStemasDownload($locaplic)
 {
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -108,6 +276,19 @@ function geraRSStemasDownload($locaplic)
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas para download");
 }
+/*
+Function: geraRSStemasKml
+
+RSS com a lista de temas que permitem KML
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraRSStemasKml($locaplic)
 {
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -129,6 +310,19 @@ function geraRSStemasKml($locaplic)
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas em KML");
 }
+/*
+Function: geraRSStemasOgc
+
+RSS com a lista de temas que permitem serviços OGC
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+Retorno:
+
+RSS
+*/
 function geraRSStemasOgc($locaplic)
 {
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -151,7 +345,24 @@ function geraRSStemasOgc($locaplic)
 	//echo $sql;exit;
 	return geraXmlRSS($locaplic,$sql,"Temas em KML");
 }
+/*
+Function: geraXmlRSS
 
+Gera um RSS com base em um SQL compatível com o sistema de administração.
+
+O SQL deverá retornar os itens nome_ws desc_ws e link_ws
+
+Parametros:
+
+locaplic {string} - localização do i3Geo no sistema de arquivos
+
+sql {string} - SQL que será aplicado ao sistema de administração
+
+descricao {string} - descrição que será inserida no canal RSS
+Retorno:
+
+RSS
+*/
 function geraXmlRSS($locaplic,$sql,$descricao)
 {
 	$dbh = "";
