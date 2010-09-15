@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Inclui tag MAP
+Title: incluiMAP.php
 
-About: Licença
+Ajusta mapfiles antigos incluindo a palavra MAP na primeira linha.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Esse ajuste é necessário em versões do Mapserver posteriores à 5.2
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,8 +28,9 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-19/6/2007
+Arquivo:
 
+i3geo/admin/php/incluiMAP.php
 */
 
 include_once("admin.php");

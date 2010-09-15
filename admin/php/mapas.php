@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do menu de mapas
+Title: mapas.php
 
-About: Licença
+Funções utilizadas pelo editor do cadastro de mapas (links).
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição dos links para mapas
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,28 +28,94 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/mapas.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/mapas.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, mapas.php?funcao=pegamapas.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 include_once("admin.php");
 error_reporting(0);
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaMapas":
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAMAPAS
+	
+	Lista os links existentes
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAMAPAS":
 	retornaJSON(pegaDados('SELECT id_mapa,nome_mapa,ordem_mapa from i3geoadmin_mapas order by ordem_mapa'));
 	exit;
 	break;
-
-	case "pegaDadosMapa":
+	/*
+	Valor: PEGADADOSMAPA
+	
+	Lista os dados de um link
+	
+	Parametro:
+	
+	id_mapa {string}
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGADADOSMAPA":
 	$dadosMapa = pegaDados('SELECT * from i3geoadmin_mapas where id_mapa ='.$id_mapa);
 	retornaJSON($dadosMapa);
 	exit;
 	break;
-
-	case "alterarMapa":
+	/*
+	Valor: ALTERARMAPA
+	
+	Altera os dados de um link
+	
+	Parametro:
+	
+	publicado_mapa
+	
+	ordem_mapa
+	
+	id_mapa
+	
+	desc_mapa
+	
+	ext_mapa
+	
+	imagem_mapa
+	
+	outros_mapa
+	
+	nome_mapa
+	
+	linkdireto_mapa
+	
+	temas_mapa
+	
+	ligados_mapa
+	
+	perfil_mapa
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARMAPA":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	$novo = alterarMapa();
@@ -51,15 +123,27 @@ switch ($funcao)
 	retornaJSON(pegaDados($sql));
 	exit;
 	break;
+	/*
+	Valor: EXCLUIRMAPA
 	
-	case "excluirMapa":
+	Exclui um link
+	
+	Parametro:
+	
+	id {string}
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRMAPA":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(excluirMapa());
 	exit;
 	break;
 	
-	case "importarXmlMapas":
+	case "IMPORTARXMLMAPAS":
 	if(verificaEditores($editores) == "nao")
 	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 	retornaJSON(importarXmlMapas());
@@ -67,8 +151,6 @@ switch ($funcao)
 	break;
 }
 /*
-Function: alterarMapas
-
 Altera o registro de um mapa
 */
 function alterarMapa()

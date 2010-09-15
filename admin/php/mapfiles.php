@@ -1,10 +1,18 @@
 <?php
 /*
-Title: Administração dos mapfiles principais
+Title: mapfiles.php
 
-About: Licença
+Funções utilizadas pelo editor dos mapfiles de inicialização
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição que permite alterar os mapfiles geral1.map ou geral1windows.map
+
+O mapfile que deve ser editado é obtido por meio do programa <admin.php>
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,79 +30,102 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/mapfiles.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/mapfiles.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 require_once("admin.php");
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	//pega os parâmetros do ms_configura
-	case "pegaParametrosConfigura":
-	$vs = array(
-		"FONTSET ",
-		"SYMBOLSET ",
-		"SHAPEPATH ",
-		"EXTENT ",
-		"IMAGE ",
-		"IMAGEPATH ",
-		"IMAGEURL "
-	);
-	$par = array();
-	foreach ($vs as $v)
-	{
-		$handle = fopen ($temasaplic."/".$mapfile.".map", "r");
-		while (!feof ($handle)) {
-    		$buffer = fgets($handle);
-			if(!(stristr($buffer, $v) === FALSE))
-			{
-    			$temp = explode(trim($v),$buffer);
-    			if(trim($temp[0]) != "#")
-    			{
-    				$temp = trim($temp[1]);
-    				$par[trim($v)] = $temp;
-    				fclose ($handle);
-    				break;
-    			}
-  			}    		
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAPARAMETROSCONFIGURA
+	
+	Pega os parâmetros principais de configuração do mapfile
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAPARAMETROSCONFIGURA":
+		$vs = array(
+			"FONTSET ",
+			"SYMBOLSET ",
+			"SHAPEPATH ",
+			"EXTENT ",
+			"IMAGE ",
+			"IMAGEPATH ",
+			"IMAGEURL "
+		);
+		$par = array();
+		foreach ($vs as $v)
+		{
+			$handle = fopen ($temasaplic."/".$mapfile.".map", "r");
+			while (!feof ($handle)) {
+				$buffer = fgets($handle);
+				if(!(stristr($buffer, $v) === FALSE))
+				{
+					$temp = explode(trim($v),$buffer);
+					if(trim($temp[0]) != "#")
+					{
+						$temp = trim($temp[1]);
+						$par[trim($v)] = $temp;
+						fclose ($handle);
+						break;
+					}
+				}    		
+			}
 		}
-	}
-	retornaJSON($par);
-	exit;
+		retornaJSON($par);
+		exit;
 	break;
-	
-	//retorna o mapfile atual como texto
-	case "restauraConfigura":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$cp->register('restauraConfigura');
-	unlink($temasaplic."/".$mapfile.".map");
-	copy ($temasaplic."/".$mapfile.".default",$temasaplic."/".$mapfile.".map");
-	$cp->set_data("ok");
-	$cp->return_data();
+	//depreciado
+	case "RESTAURACONFIGURA":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$cp->register('restauraConfigura');
+		unlink($temasaplic."/".$mapfile.".map");
+		copy ($temasaplic."/".$mapfile.".default",$temasaplic."/".$mapfile.".map");
+		$cp->set_data("ok");
+		$cp->return_data();
 	break;
+	/*
+	Valor: SALVACONFIGURA
 	
-	//salva um novo valor para uma variável do ms_configura
-	case "salvaConfigura":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	salvaConfigura($variavel,$valor,$mapfile,$temasaplic);
-	retornaJSON("ok");
-	exit;
+	Salva o valor de um parâmetro no mapfile em edição
+	
+	Parametros:
+	
+	variavel
+	
+	valor
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "SALVACONFIGURA":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		salvaConfigura($variavel,$valor,$mapfile,$temasaplic);
+		retornaJSON("ok");
+		exit;
 	break;
 }
 /*
-Function: salvaConfigura
-
 Salva um novo valor de uma variável no ms_configura.php
-
-Parameters:
-
-variavel - nome da variável
-
-valor - novo valor
 */
 function salvaConfigura($variavel,$valor,$mapfile,$temasaplic)
 {

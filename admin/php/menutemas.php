@@ -1,10 +1,18 @@
 <?php
 /*
-Title: Administração dos mapfiles principais
+Title: menutemas.php
 
-About: Licença
+Funções utilizadas nas operações de manutenção de menus, grupo, subgrupos e temas
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição da árvore de menus para edição de cada um de seus componentes
+
+Essas funções complementam <arvore.php>
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,9 +30,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/mapfiles.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/menutemas.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaMenus.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 include_once("admin.php");
@@ -35,261 +49,261 @@ if(!isset($idioma))
 if($idioma == "")
 {$idioma = "pt";}
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
 	//verifica os editores
-	case "verificaEditores":
-	retornaJSON(verificaEditores($editores));
-	exit;
+	case "VERIFICAEDITORES":
+		retornaJSON(verificaEditores($editores));
+		exit;
 	break;
 	
-	case "importarXmlMenu":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(importarXmlMenu());
-	exit;
+	case "IMPORTARXMLMENU":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(importarXmlMenu());
+		exit;
 	break;
 	
-	case "pegaMenus":
-	if($idioma == "pt")
-	{$coluna = "nome_tema";}
-	else
-	{$coluna = $idioma;}
-	$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
-	retornaJSON($dados);
-	exit;
+	case "PEGAMENUS":
+		if($idioma == "pt")
+		{$coluna = "nome_tema";}
+		else
+		{$coluna = $idioma;}
+		$dados = pegaDados('SELECT * from i3geoadmin_menus order by nome_menu');
+		retornaJSON($dados);
+		exit;
 	break;
 
-	case "pegaMenus2":
-	if($idioma == "pt")
-	{$coluna = "nome_menu";}
-	else
-	{$coluna = $idioma;}
-	$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu");
-	retornaJSON($dados);
-	exit;
+	case "PEGAMENUS2":
+		if($idioma == "pt")
+		{$coluna = "nome_menu";}
+		else
+		{$coluna = $idioma;}
+		$dados = pegaDados("SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,$coluna as nome_menu from i3geoadmin_menus order by nome_menu");
+		retornaJSON($dados);
+		exit;
 	break;
 
-	case "pegaTags":
-	$sql = "SELECT * from i3geoadmin_tags order by nome";
-	retornaJSON(pegaDados($sql));
-	exit;
-	break;
-	
-	case "pegaTagsPorMapfile":
-	if($idioma == "pt")
-	{$coluna = "nome_tema";}
-	else
-	{$coluna = $idioma;}
+	case "PEGATAGS":
+		$sql = "SELECT * from i3geoadmin_tags order by nome";
+		retornaJSON(pegaDados($sql));
+		exit;
+		break;
+		
+		case "PEGATAGSPORMAPFILE":
+		if($idioma == "pt")
+		{$coluna = "nome_tema";}
+		else
+		{$coluna = $idioma;}
 
-    $q = pegaDados("select link_tema,tags_tema,codigo_tema,$coluna as nome_tema from i3geoadmin_temas");
-    $temas = array();
-    $temaExiste = array();
-    foreach($q as $row)
-	{
-		$ts = html_entity_decode($row['tags_tema']);
-		$i = $row['codigo_tema'];
-		$nome = $row['nome_tema'];
-		$link = $row['link_tema'];
-		$tags = explode(" ",$ts);
-		foreach($tags as $t)
+		$q = pegaDados("select link_tema,tags_tema,codigo_tema,$coluna as nome_tema from i3geoadmin_temas");
+		$temas = array();
+		$temaExiste = array();
+		foreach($q as $row)
 		{
-			if (removeAcentos($t) == $tag)
+			$ts = html_entity_decode($row['tags_tema']);
+			$i = $row['codigo_tema'];
+			$nome = $row['nome_tema'];
+			$link = $row['link_tema'];
+			$tags = explode(" ",$ts);
+			foreach($tags as $t)
 			{
-				if(!isset($temaExiste[$i]))
+				if (removeAcentos($t) == $tag)
 				{
-					$temas[] = array("codigoMap"=>$i,"nome"=>$nome,"link"=>$link);
-					$temaExiste[$i] = 0;
+					if(!isset($temaExiste[$i]))
+					{
+						$temas[] = array("codigoMap"=>$i,"nome"=>$nome,"link"=>$link);
+						$temaExiste[$i] = 0;
+					}
 				}
 			}
 		}
-	}
-	retornaJSON($temas);
-	exit;
+		retornaJSON($temas);
+		exit;
 	break;	
 	
-	case "pegaPerfis":
-	$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
-	if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
-	retornaJSON($dados);
-	exit;
+	case "PEGAPERFIS":
+		$dados = pegaDados('SELECT * from i3geoadmin_perfis order by perfil');
+		if(count($dados) == 0){$dados = array("id_perfil"=>"","perfil"=>"");}
+		retornaJSON($dados);
+		exit;
 	break;
 
-	case "alteraMenus":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(alteraMenus());
-	exit;
+	case "ALTERAMENUS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(alteraMenus());
+		exit;
 	break;
 
-	case "pegaGrupos":
-	$nome = "nome_grupo";
-	if($idioma != "pt")
-	{$nome = $idioma;}
-	$dados = pegaDados("SELECT * from i3geoadmin_grupos order by $nome");
-	retornaJSON($dados);
-	exit;
+	case "PEGAGRUPOS":
+		$nome = "nome_grupo";
+		if($idioma != "pt")
+		{$nome = $idioma;}
+		$dados = pegaDados("SELECT * from i3geoadmin_grupos order by $nome");
+		retornaJSON($dados);
+		exit;
 	break;
 
-	case "pegaGrupos2":
-	$nome = "nome_grupo";
-	if($idioma != "pt")
-	{$nome = $idioma;}
-	$dados = pegaDados("SELECT desc_grupo,id_grupo,$nome as 'nome_grupo' from i3geoadmin_grupos order by $nome");
-	retornaJSON($dados);
-	exit;
+	case "PEGAGRUPOS2":
+		$nome = "nome_grupo";
+		if($idioma != "pt")
+		{$nome = $idioma;}
+		$dados = pegaDados("SELECT desc_grupo,id_grupo,$nome as 'nome_grupo' from i3geoadmin_grupos order by $nome");
+		retornaJSON($dados);
+		exit;
 	break;
 
-	case "alteraGrupos":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(alteraGrupos());
-	exit;
+	case "ALTERAGRUPOS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(alteraGrupos());
+		exit;
 	break;
 
-	case "pegaSubGrupos":
-	$dados = pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo');
-	retornaJSON($dados);
-	exit;
+	case "PEGASUBGRUPOS":
+		$dados = pegaDados('SELECT * from i3geoadmin_subgrupos order by nome_subgrupo');
+		retornaJSON($dados);
+		exit;
 	break;
 	
-	case "pegaSubGrupos2":
-	$nome = "nome_subgrupo";
-	if($idioma != "pt")
-	{$nome = $idioma;}
-	$dados = pegaDados("SELECT desc_subgrupo,id_subgrupo,$nome as 'nome_subgrupo' from i3geoadmin_subgrupos order by nome_subgrupo");
-	retornaJSON($dados);
-	exit;
+	case "PEGASUBGRUPOS2":
+		$nome = "nome_subgrupo";
+		if($idioma != "pt")
+		{$nome = $idioma;}
+		$dados = pegaDados("SELECT desc_subgrupo,id_subgrupo,$nome as 'nome_subgrupo' from i3geoadmin_subgrupos order by nome_subgrupo");
+		retornaJSON($dados);
+		exit;
 	break;
 	
-	case "alteraSubGrupos":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	retornaJSON(alteraSubGrupos());
-	exit;
+	case "ALTERASUBGRUPOS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		retornaJSON(alteraSubGrupos());
+		exit;
 	break;
 
-	case "pegaTemas":
-	$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id_tema'";
-	retornaJSON(pegaDados($sql));
-	exit;
+	case "PEGATEMAS":
+		$sql = "SELECT * from i3geoadmin_temas where id_tema = '$id_tema'";
+		retornaJSON(pegaDados($sql));
+		exit;
 	break;
 	
-	case "pegaTemaPorMapfile":
-	$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
-	$dados = pegaDados($sql);
-	if(is_array($dados) && count($dados) == 0)
-	{
-		registraTema();
+	case "PEGATEMAPORMAPFILE":
+		$sql = "SELECT * from i3geoadmin_temas where codigo_tema = '$codigo_tema'";
 		$dados = pegaDados($sql);
-	}
-	if(is_array($dados) && count($dados) > 1)
-	{$dados = "erro. Mais de um mapfile com mesmo código registrado no banco";}
-	retornaJSON($dados);
-	exit;
+		if(is_array($dados) && count($dados) == 0)
+		{
+			registraTema();
+			$dados = pegaDados($sql);
+		}
+		if(is_array($dados) && count($dados) > 1)
+		{$dados = "erro. Mais de um mapfile com mesmo código registrado no banco";}
+		retornaJSON($dados);
+		exit;
 	break;	
 	
-	case "pegaTemas2":
-	retornaJSON(pegaTemas2());
-	exit;
+	case "PEGATEMAS2":
+		retornaJSON(pegaTemas2());
+		exit;
 	break;
 	
-	case "alteraTemas":
-	//$r será igual ao novo id criado, no caso de inserção de um novo tema
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$r = alteraTemas();
-	if($id == "")
-	retornaJSON($r);
-	else
-	retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = '$id'"));
-	exit;
+	case "ALTERATEMAS":
+		//$r será igual ao novo id criado, no caso de inserção de um novo tema
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$r = alteraTemas();
+		if($id == "")
+		retornaJSON($r);
+		else
+		retornaJSON(pegaDados("select * from i3geoadmin_temas where id_tema = '$id'"));
+		exit;
 	break;
 	
-	case "alteraTags":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alteraTags();
-	$sql = "SELECT * from i3geoadmin_tags WHERE id_tag = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
+	case "ALTERATAGS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alteraTags();
+		$sql = "SELECT * from i3geoadmin_tags WHERE id_tag = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
 	break;
 	
-	case "alteraPerfis":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	$novo = alteraPerfis();
-	$sql = "SELECT * from i3geoadmin_perfis WHERE id_perfil = '".$novo."'";
-	retornaJSON(pegaDados($sql));
-	exit;
+	case "ALTERAPERFIS":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		$novo = alteraPerfis();
+		$sql = "SELECT * from i3geoadmin_perfis WHERE id_perfil = '".$novo."'";
+		retornaJSON(pegaDados($sql));
+		exit;
 	break;
 	
-	case "excluirRegistro":
-	if(verificaEditores($editores) == "nao")
-	{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
-	if($tabela == "grupos")
-	{
-		$tabela = "i3geoadmin_grupos";
-		$coluna = "id_grupo";
-		$filhos = verificaFilhos();
-		if($filhos)
+	case "EXCLUIRREGISTRO":
+		if(verificaEditores($editores) == "nao")
+		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
+		if($tabela == "grupos")
 		{
-			retornaJSON("erro");
-			exit;
-		}	
-	}
-	if($tabela == "tags")
-	{
-		$tabela = "i3geoadmin_tags";
-		$coluna = "id_tag";
-		//excluiTagTemas($id);
-	}
-	if($tabela == "perfis")
-	{
-		$tabela = "i3geoadmin_perfis";
-		$coluna = "id_perfil";
-		excluiPerfil($id);
-	}
-	if($tabela == "subgrupos")
-	{
-		$tabela = "i3geoadmin_subgrupos";
-		$coluna = "id_subgrupo";
-		$filhos = verificaFilhos();
-		if($filhos)
-		{
-			retornaJSON("erro");
-			exit;
+			$tabela = "i3geoadmin_grupos";
+			$coluna = "id_grupo";
+			$filhos = verificaFilhos();
+			if($filhos)
+			{
+				retornaJSON("erro");
+				exit;
+			}	
 		}
-	}
-	if($tabela == "temas")
-	{
-		$tabela = "i3geoadmin_temas";
-		$coluna = "id_tema";
-		$filhos = verificaFilhos();
-		if($filhos)
+		if($tabela == "tags")
 		{
-			retornaJSON("erro");
-			exit;
+			$tabela = "i3geoadmin_tags";
+			$coluna = "id_tag";
+			//excluiTagTemas($id);
 		}
-	}
-	if($tabela == "menus")
-	{
-		$tabela = "i3geoadmin_menus";
-		$coluna = "id_menu";
-		$filhos = verificaFilhos();
-		if($filhos)
+		if($tabela == "perfis")
 		{
-			retornaJSON("erro");
-			exit;
+			$tabela = "i3geoadmin_perfis";
+			$coluna = "id_perfil";
+			excluiPerfil($id);
 		}
-	}
-	retornaJSON(exclui());
-	exit;
-	break;
-	
-	case "listaMapsTemas":
-	retornaJSON(listaMapsTemas());
-	exit;
+		if($tabela == "subgrupos")
+		{
+			$tabela = "i3geoadmin_subgrupos";
+			$coluna = "id_subgrupo";
+			$filhos = verificaFilhos();
+			if($filhos)
+			{
+				retornaJSON("erro");
+				exit;
+			}
+		}
+		if($tabela == "temas")
+		{
+			$tabela = "i3geoadmin_temas";
+			$coluna = "id_tema";
+			$filhos = verificaFilhos();
+			if($filhos)
+			{
+				retornaJSON("erro");
+				exit;
+			}
+		}
+		if($tabela == "menus")
+		{
+			$tabela = "i3geoadmin_menus";
+			$coluna = "id_menu";
+			$filhos = verificaFilhos();
+			if($filhos)
+			{
+				retornaJSON("erro");
+				exit;
+			}
+		}
+		retornaJSON(exclui());
+		exit;
+		break;
+		
+		case "listaMapsTemas":
+		retornaJSON(listaMapsTemas());
+		exit;
 	break;
 }
 function excluiPerfil($id)
@@ -382,8 +396,6 @@ function excluiTagTemas($id)
    	}			
 }
 /*
-Function: pegaTemas
-
 Pega a lista de temas
 
 Parameters:
@@ -473,8 +485,6 @@ function pegaTemas2()
 	}
 }
 /*
-Function: alteraMenus
-
 Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
@@ -672,8 +682,6 @@ function alteraTags()
 	}
 }
 /*
-Function: alteraGrupos
-
 Altera o registro de um grupo. Se id for vazio acrescenta o registro
 */
 function alteraGrupos()
@@ -705,8 +713,6 @@ function alteraGrupos()
 	}
 }
 /*
-Function: alteraSubGrupos
-
 Altera o registro de um sub-grupo. Se id for vazio acrescenta o registro
 */
 function alteraSubGrupos()
@@ -739,8 +745,6 @@ function alteraSubGrupos()
 	}
 }
 /*
-Function: registraTema
-
 Registra um mapfile na tabela de temas
 */
 function registraTema()
@@ -763,10 +767,7 @@ function registraTema()
     	return "Error!: " . $e->getMessage();
 	}
 }
-
 /*
-Function: alteraTemas
-
 Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
@@ -845,15 +846,8 @@ function alteraTemas()
 	}
 }
 /*
-Function: listaMapsTemas
-
 Retorna a lista de mapfiles do diretorio i3geo/temas
 
-Parameters:
-
-cp - objeto CPAINT
-
-locaplic - localização da instalação do I3Geo
 */
 function listaMapsTemas()
 {
@@ -885,9 +879,6 @@ function listaMapsTemas()
  	return $arquivos;
 }
 /*
-/*
-Function importarXmlMenu
-
 Importa um arquivo xml do tipo "menutemas" para o banco de dados
 */
 function importarXmlMenu()

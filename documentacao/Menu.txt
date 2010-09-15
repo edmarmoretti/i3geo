@@ -291,6 +291,86 @@ Group: Interfaces HTML e mapfiles de inicialização e configuração  {
    File: Redirecionador para o ms_criamapa.php com extensão HTML  (aplicmap\index.html)
    }  # Group: Interfaces HTML e mapfiles de inicialização e configuração
 
+Group: Administração  {
+
+   File: Menu principal  (admin\index.html)
+
+   Group: Utilitários  {
+      File: Estatísticas do banco de dados de administração  (admin\php\estatisticas.php)
+      File: Inclui tag MAP  (admin\php\incluiMAP.php)
+      File: abrefontemapfile  (admin\abrefontemapfile.php)
+      File: hiperbolica  (admin\hiperbolica.php)
+      File: rssgrupos  (admin\rssgrupos.php)
+      File: rsssubgrupos  (admin\rsssubgrupos.php)
+      File: rsstemas  (admin\rsstemas.php)
+      File: rsstemasdownload  (admin\rsstemasdownload.php)
+      File: rsstemaskml  (admin\rsstemaskml.php)
+      File: rsstemasogc  (admin\rsstemasogc.php)
+      File: xmlgeorss  (admin\xmlgeorss.php)
+      File: xmlidentifica  (admin\xmlidentifica.php)
+      File: xmlkmlrss  (admin\xmlkmlrss.php)
+      File: xmllinksdownload  (admin\xmllinksdownload.php)
+      File: xmlmapas  (admin\xmlmapas.php)
+      File: xmlservicoswms  (admin\xmlservicoswms.php)
+      File: xmlservicosws  (admin\xmlservicosws.php)
+      File: xmlsistemas  (admin\xmlsistemas.php)
+      }  # Group: Utilitários
+
+   Group: Js  {
+
+      File: Admin  (admin\js\admin.js)
+      File: Admin  (admin\js\ms_configura.js)
+      File: Arvore  (admin\js\temas.js)
+      File: core.js  (admin\js\core.js)
+      File: mapfiles  (admin\js\mapfiles.js)
+      File: Menutemas  (admin\js\menutemas.js)
+      }  # Group: Js
+
+   Group: Php  {
+
+      File: Administração do cadastro de funções da ferramenta identifica  (admin\php\identifica.php)
+      File: Administração do cadastro de sistemas  (admin\php\sistemas.php)
+      File: Administração do cadastro de sistemas  (admin\php\temas.php)
+      File: Administração do cadastro de web services  (admin\php\webservices.php)
+      File: Administração do menu de mapas  (admin\php\mapas.php)
+      File: Administração do ms_configura.php  (admin\php\ms_configura.php)
+      File: Administração dos mapfiles principais  (admin\php\menutemas.php)
+      File: Administração dos mapfiles principais  (admin\php\mapfiles.php)
+      File: arvore.php  (admin\php\arvore.php)
+      File: atlas.php  (admin\php\atlas.php)
+      File: classe_arvore.php  (admin\php\classe_arvore.php)
+      File: conexao.php  (admin\php\conexao.php)
+      File: criabanco.php  (admin\php\criabanco.php)
+      File: editormapfile.php  (admin\php\editormapfile.php)
+      File: Exemplo de arquivo de conexão alternativo  (admin\php\conexaomma.php)
+      File: Funções de uso geral  (admin\php\admin.php)
+      File: xml  (admin\php\xml.php)
+      }  # Group: Php
+
+   Group: Html  {
+
+      File: Ajuste de mapfiles  (admin\html\incluimap.html)
+      File: Editor da árvore de menus  (admin\html\arvore.html)
+      File: Editor da interface Atlas  (admin\html\atlas.html)
+      File: Editor de mapfiles  (admin\html\editormapfile.html)
+      File: Editor de mapfiles de inicialização  (admin\html\mapfiles.html)
+      File: Editor do ms_configura  (admin\html\ms_configura.html)
+      File: Importador da lista de Atlas  (admin\html\atlas_importar.html)
+      File: Importador da lista de mapas  (admin\html\mapas_importar.html)
+      File: Importador da lista de sistemas da ferramenta de identificação  (admin\html\identifica_importar.html)
+      File: Importador da lista de sistemas especiais de adição de temas  (admin\html\sistemas_importar.html)
+      File: Importador da lista de Web Services  (admin\html\webservices_importar.html)
+      File: Importador do xml menutemas.xml  (admin\html\importarmenu.html)
+      File: Mapas  (admin\html\mapas.html)
+      File: Opções da ferramenta identifica  (admin\html\identifica.html)
+      File: Perfis  (admin\html\perfis.html)
+      File: Sistemas de adição de temas  (admin\html\sistemas.html)
+      File: Tags  (admin\html\tags.html)
+      File: Web Services  (admin\html\webservices.html)
+      }  # Group: Html
+
+   }  # Group: Administração
+
 Group: Index  {
 
    Index: Everything

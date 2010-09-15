@@ -1,20 +1,26 @@
 <?php
 /*
-Title: Conexão
+Title: conexao.php
 
-Define a conexão com o banco de dados com as tabelas de administração dos menus do i3geo.
+Define a conexão com o banco de dados que contém as tabelas do sistema de administração do i3geo.
 
 Verifique se sua instalação do PHP suporta o uso da biblioteca PDO com sqlite
 
+Por padrão, a conexão é feita com o banco de dados SQLITE i3geo/menutemas/admin.db mas vc pode usar outro banco de dados
+
 Você pode alterar a conexão PDO modificando a variável de configuaração $conexaoadmin no i3geo/ms_configura.php
 
-Return:
+O programa define duas variáveis que são usadas no acesso ao banco
 
-$dbh - objeto PDO com a conexão para leitura e escrita
+dbhw - objeto PDO com a conexão para leitura e escrita
 
-About: Licença
+dbh - objeto PDO com a conexão para leitura
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Licença:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -31,6 +37,8 @@ Você deve ter recebido uma cópia da Licença Pública Geral do
 GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo: i3geo/admin/php/conexao.php
 
 */
 if(isset($locaplic) && $locaplic != "")

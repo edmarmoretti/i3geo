@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do cadastro de sistemas
+Title: editormapfile.php
 
-About: Licença
+Funções utilizadas pelo editor de arquivos mapfile.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição de mapfiles
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,36 +28,106 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/sistemas.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/editormapfile.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, editormapfile.php?funcao=pegaMapfiles
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
-
 include_once("admin.php");
 error_reporting(0);
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaMapfiles":
-		retornaJSON(pegaLayers());
-		exit;
-	break;
-	case "criarNovoMap":
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: CRIARNOVOMAP
+	
+	Cria um novo mapfile
+	
+	Parametros:
+	
+	nome - título do novo tema
+	
+	codigo - texto que será usado como nome do arquivo mapfile
+	
+	it - {opcional} título em italiano
+	
+	en - {opcional} título em inglês
+	
+	es - {opcional} título em espanhol
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "CRIARNOVOMAP":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoMap());
 		exit;
 	break;
-	case "pegaLayers":
+	/*
+	Valor: PEGALAYERS
+	
+	Lista os layers existentes em um mapfile
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGALAYERS":
 		retornaJSON(pegaLayers());
 		exit;
 	break;
-	case "pegaItensLayer":
+	/*
+	Valor: PEGAITENSLAYER
+	
+	Lista os itens da tabela de atributos de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGAITENSLAYER":
 		retornaJSON(pegaItensLayer());
 		exit;
 	break;
-	case "excluirMapfile":
+	/*
+	Valor: EXCLUIRMAPFILE
+	
+	Exclui um mapfile.
+	
+	Só é possível excluir se o mapfile não estiver vinculado a nenhum tema ou nó da árvore de temas
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRMAPFILE":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		//pega oid do tema
@@ -74,77 +150,332 @@ switch ($funcao)
 			exit;
 		}
 	break;
-	case "criarNovoLayer":
+	/*
+	Valor: CRIARNOVOLAYER
+	
+	Cria um novo layer em um mapfile
+	
+	O novo layer receberá um nome aleatório, que pode ser modificado posteriormente. Por default, esse novo layer será do tipo linear
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "CRIARNOVOLAYER":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoLayer());
 		exit;
 	break;
-	case "excluirLayer":
+	/*
+	Valor: EXCLUIRLAYER
+	
+	Exclui um layer de um mapfile
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "EXCLUIRLAYER":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirLayer());
 		exit;
-	break;	
-	case "listaClasses":
+	break;
+	/*
+	Valor: LISTACLASSES
+	
+	Lista as classes da legenda de um layer em um mapfile
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "LISTACLASSES":
 		retornaJSON(listaClasses());
 		exit;
 	break;
-	case "autoClassesLayer":
+	/*
+	Valor: AUTOCLASSESLAYER
+	
+	Cria classes em um layer com base na tabela de atributos
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	itemExpressao - item da tabela de atributos que contém os valores únicos para as classes
+	
+	itemNome - item da tabela de atributos que contém os nomes de cada classe
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "AUTOCLASSESLAYER":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		autoClassesLayer();
 		retornaJSON(listaClasses());
 		exit;
 	break;
-	case "criarNovaClasse":
+	/*
+	Valor: CRIARNOVACLASSE
+	
+	Cria uma nova classe em um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "CRIARNOVACLASSE":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovaClasse());
 		exit;
 	break;
-	case "excluirClasse":
+	/*
+	Valor: EXCLUIRCLASSE
+	
+	Cria uma nova classe em um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRCLASSE":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		excluirClasse();
 		retornaJSON(listaClasses());
 		exit;
 	break;
-	case "listaEstilos":
+	/*
+	Valor: LISTAESTILOS
+	
+	Lista de estilos existentes em uma classe de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "LISTAESTILOS":
 		retornaJSON(listaEstilos());
 		exit;
-	break;	
-	case "criarNovoEstilo":
+	break;
+	/*
+	Valor: CRIARNOVOESTILO
+	
+	Adiciona um novo estilo em uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "CRIARNOVOESTILO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(criarNovoEstilo());
 		exit;
-	break;	
-	case "excluirEstilo":
+	break;
+	/*
+	Valor: EXCLUIRESTILO
+	
+	Exclui um estilo de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	indiceEstilo {numerico} - índice do estilo (de 0 até número de estilos-1)
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRESTILO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		excluirEstilo();
 		retornaJSON(listaEstilos());
 		exit;
 	break;
-	case "pegaEstilo":
+	/*
+	Valor: PEGAESTILO
+	
+	Obtém os dados de um estilo de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	indiceEstilo {numerico} - índice do estilo (de 0 até número de estilos-1)
+		
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGAESTILO":
 		retornaJSON(pegaEstilo());
 		exit;
 	break;
-	case "alterarEstilo":
+	/*
+	Valor: ALTERARESTILO
+	
+	Altera um estilo de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	indiceEstilo {numerico} - índice do estilo (de 0 até número de estilos-1)
+	
+	angle
+	
+	maxwidth
+	
+	minwidth
+	
+	width
+	
+	outlinecolor
+	
+	backgroundcolor
+	
+	antialias
+	
+	offsety
+	
+	offsetx
+	
+	maxsize
+	
+	minsize
+	
+	size
+	
+	color
+	
+	symbolname
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARESTILO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarEstilo();
 		retornaJSON(pegaEstilo());
 		exit;
 	break;
-	case "pegaConexao":
+	/*
+	Valor: PEGACONEXAO
+	
+	Obtém os valores dos elementos de conexão com uma base de dados de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGACONEXAO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(pegaConexao());
 		exit;
-	break;	
-	case "alterarConexao":
+	break;
+	/*
+	Valor: ALTERARCONEXAO
+	
+	Altera os valores dos elementos de conexão com uma base de dados de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	connection
+	
+	connectiontype
+	
+	data
+	
+	tileitem
+	
+	tileindex
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARCONEXAO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$retorno = alterarConexao();
@@ -154,22 +485,190 @@ switch ($funcao)
 		retornaJSON(array("url"=>$retorno));
 		exit;
 	break;
-	case "pegaMetadados":
+	/*
+	Valor: PEGAMETADADOS
+	
+	Obtém os valores dos elementos de metadados de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGAMETADADOS":
 		retornaJSON(pegaMetadados());
 		exit;
 	break;
-	case "alterarMetadados":
+	/*
+	Valor: ALTERARMETADADOS
+	
+	Altera os valores dos elementos de metadados de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	iconetema
+	
+	ltempoformatodata
+	
+	ltempoiteminicio
+	
+	ltempoitemfim
+	
+	ltempoitemtitulo
+	
+	ltempoitemdescricao
+	
+	ltempoitemtip
+	
+	ltempoitemimagem
+	
+	ltempoitemicone
+	
+	ltempoitemlink
+	
+	description_template
+	
+	palletestep
+	
+	palletefile
+	
+	arquivodownload
+	
+	aplicaextensao
+	
+	classestamanho
+	
+	classessimbolo
+	
+	classescor
+	
+	classesnome
+	
+	classesitem
+	
+	mensagem
+	
+	identifica
+	
+	extensao
+	
+	escondido
+	
+	download
+	
+	escala
+	
+	tema
+	
+	classe
+	
+	tip
+	
+	itenslink
+	
+	itens
+	
+	itensdesc
+	
+	editorsql
+	
+	cache
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARMETADADOS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarMetadados();
 		retornaJSON(pegaMetadados());
 		exit;
 	break;
-	case "pegaGeral":
+	/*
+	Valor: PEGAGERAL
+	
+	Obtém os valores dos elementos de configuração geral de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGAGERAL":
 		retornaJSON(pegaGeral());
 		exit;
 	break;
-	case "alterarGeral":
+	/*
+	Valor: ALTERARGERAL
+	
+	Modifica os valores dos elementos de configuração geral de um layer
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	testar
+	
+	name
+	
+	projection
+	
+	sizeunits
+	
+	status
+	
+	toleranceunits
+	
+	tolerance
+	
+	symbolscale
+	
+	opacity
+	
+	offsite
+	
+	minscale
+	
+	maxscale
+	
+	labelsizeitem
+	
+	labelminscale
+	
+	labelmaxscale
+	
+	labelitem
+	
+	group
+	
+	filteritem
+	
+	type
+	
+	filter
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARGERAL":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		
@@ -184,29 +683,165 @@ switch ($funcao)
 		retornaJSON(array("url"=>$retorno));		
 		exit;
 	break;
-	case "pegaClasseGeral":
+	/*
+	Valor: PEGACLASSEGERAL
+	
+	Obtém os valores dos elementos de configuração geral de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGACLASSEGERAL":
 		retornaJSON(pegaClasseGeral());
 		exit;
 	break;
-	case "alterarClasseGeral":
+	/*
+	Valor: ALTERARCLASSEGERAL
+	
+	Altera os valores dos elementos de configuração geral de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	status
+	
+	minscale
+	
+	maxscale
+	
+	name
+	
+	expression
+	
+	keyimage
+	
+	title
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARCLASSEGERAL":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarClasseGeral();
 		retornaJSON(pegaClasseGeral());
 		exit;
 	break;
-	case "pegaClasseLabel":
+	/*
+	Valor: PEGACLASSELABEL
+	
+	Obtém os valores dos elementos de configuração da toponímia de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGACLASSELABEL":
 		retornaJSON(pegaClasseLabel());
 		exit;
 	break;
-	case "alterarClasseLabel":
+	/*
+	Valor: ALTERARCLASSELABEL
+	
+	Altera os valores dos elementos de configuração da toponímia de uma classe
+	
+	Parametros:
+	
+	codigoMap {string} - nome do mapfile (sem .map)
+	
+	codigoLayer {string} - 'name' do layer existente no mapfile
+	
+	indiceClasse {numerico} - índice da classe (de 0 até número de classes-1)
+	
+	autoangle
+	
+	encoding
+	
+	force
+	
+	partials
+	
+	mindistance
+	
+	minfeaturesize
+	
+	wrap
+	
+	antialias
+	
+	buffer
+	
+	angle
+	
+	offsety
+	
+	offsetx
+	
+	position
+	
+	maxsize
+	
+	minsize
+	
+	size
+	
+	backgroundshadowsizey
+	
+	backgroundshadowsizex
+	
+	shadowsizey
+	
+	shadowsizex
+	
+	shadowcolor
+	
+	outlinecolor
+	
+	color
+	
+	backgroundshadowcolor
+	
+	backgroundcolor
+	
+	type
+	
+	font
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARCLASSELABEL":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		alterarClasseLabel();
 		retornaJSON(pegaClasseLabel());
 		exit;
 	break;
-	case "movimentaNo":
+	case "MOVIMENTANO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$res = sobeDesce();

@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do cadastro de funções da ferramenta identifica
+Title: identifica.php
 
-About: Licença
+Funções utilizadas pelo editor das opções de identificação
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+Essas opções são utilizadas na ferramenta de identificação de elementos do mapa
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,29 +28,68 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/identifica.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/identifica.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, identifica.php?funcao=pegafuncoes
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 include_once("admin.php");
 error_reporting(0);
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
 	//verifica os editores
-	case "verificaEditores":
+	case "VERIFICAEDITORES":
 		retornaJSON(verificaEditores($editores));
 		exit;
 	break;
+	/*
+	Note:
 	
-	case "pegaFuncoes":
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAFUNCOES
+	
+	Lista de operações cadastradas
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGAFUNCOES":
 		$dados = pegaDados('SELECT * from i3geoadmin_identifica');
-	retornaJSON($dados);
+		retornaJSON($dados);
 		exit;
 	break;
+	/*
+	Valor: ALTERARFUNCOES
 	
-	case "alterarFuncoes":
+	Altera uma operação cadastrada
+	
+	Parametros:
+	
+	id_i - id da opção
+	
+	abrir_i
+	
+	nome_i
+	
+	target_i
+	
+	publicado_i
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARFUNCOES":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarFuncoes();
@@ -52,15 +97,27 @@ switch ($funcao)
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
+	/*
+	Valor: EXCLUIR
 	
-	case "excluir":
+	Exclui uma operação cadastrada
+	
+	Parametros:
+	
+	id - id da opção
+
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIR":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirFuncoes());
 		exit;
 	break;
 	
-	case "importarXmlI":
+	case "IMPORTARXMLI":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(importarXmlI());
@@ -68,8 +125,6 @@ switch ($funcao)
 	break;
 }
 /*
-Function: alterarFuncoes
-
 Altera o registro de um WS
 */
 function alterarFuncoes()

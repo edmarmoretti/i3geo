@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Administração do cadastro de sistemas
+Title: atlas.php
 
-About: Licença
+Funções utilizadas pelo editor de Atlas.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição dos Atlas
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,40 +28,162 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/sistemas.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/atlas.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, atlas.php?funcao=pegaAtlas
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 include_once("admin.php");
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaAtlas":
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAATLAS
+	
+	Lista todos os Atlas
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAATLAS":
 		retornaJSON(pegaDados('SELECT id_atlas,titulo_atlas from i3geoadmin_atlas order by ordem_atlas'));
 		exit;
 	break;
-	case "pegaPranchas":
+	/*
+	Valor: PEGAPRANCHAS
+	
+	Lista de pranchas de um Atlas
+	
+	Parametros:
+	
+	id_atlas
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAPRANCHAS":
 		retornaJSON(pegaDados("SELECT id_prancha,titulo_prancha from i3geoadmin_atlasp where id_atlas='$id_atlas' order by ordem_prancha"));
 		exit;
 	break;
-	case "pegaTemas":
+	/*
+	Valor: PEGATEMAS
+	
+	Lista os temas de uma prancha
+	
+	Parametros:
+	
+	id_prancha
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGATEMAS":
 		retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_prancha = '$id_prancha' order by ordem_tema"));
 		exit;
 	break;
-	case "pegaDadosAtlas":
+	/*
+	Valor: PEGADADOSATLAS
+	
+	Lista os dados de um atlas
+	
+	Parametros:
+	
+	id_atlas
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOSATLAS":
 		retornaJSON(pegaDados('SELECT * from i3geoadmin_atlas where id_atlas ='.$id_atlas));
 		exit;
 	break;
-	case "pegaDadosPrancha":
+	/*
+	Valor: PEGADADOSPRANCHA
+	
+	Lista os dados de uma prancha
+	
+	Parametros:
+	
+	id_prancha
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOSPRANCHA":
 		retornaJSON(pegaDados('SELECT * from i3geoadmin_atlasp where id_prancha ='.$id_prancha));
 		exit;
 	break;
-	case "pegaDadosTema":
+	/*
+	Valor: PEGADADOSTEMA
+	
+	Lista os dados de um tema
+	
+	Parametros:
+	
+	id_tema
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOSTEMA":
 		retornaJSON(pegaDados("SELECT * from i3geoadmin_atlast where id_tema = '$id_tema'"));
 		exit;
 	break;
-	case "alterarAtlas":
+	/*
+	Valor: ALTERARATLAS
+	
+	Altera os dados de um atlas
+	
+	Parametros:
+	
+	publicado_atlas
+	
+	id_atlas
+	
+	basemapfile_atlas
+	
+	desc_atlas
+	
+	h_atlas
+	
+	w_atlas
+	
+	icone_atlas
+	
+	link_atlas
+	
+	pranchadefault_atlas
+	
+	template_atlas
+	
+	tipoguias_atlas
+	
+	titulo_atlas
+	
+	ordem_atlas
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ALTERARATLAS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarAtlas();
@@ -63,7 +191,38 @@ switch ($funcao)
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
-	case "alterarPrancha":
+	/*
+	Valor: ALTERARPRANCHA
+	
+	Altera os dados de uma prancha
+	
+	Parametros:
+	
+	mapext_prancha
+	
+	id_atlas
+	
+	id_prancha
+	
+	desc_prancha
+	
+	h_prancha
+	
+	w_prancha
+	
+	icone_prancha
+	
+	link_prancha
+	
+	titulo_prancha
+	
+	ordem_prancha
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARPRANCHA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarPrancha();
@@ -71,14 +230,48 @@ switch ($funcao)
 		retornaJSON(pegaDados($sql));
 		exit;
 	break;
-	case "alterarTema":
+	/*
+	Valor: ALTERARTEMA
+	
+	Altera os dados de um tema
+	
+	Parametros:
+
+	id_tema
+	
+	id_prancha
+	
+	codigo_tema
+	
+	ligado_tema
+	
+	ordem_tema	
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARTEMA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$novo = alterarTema();
 		$sql = "SELECT * from i3geoadmin_atlast WHERE id_tema = '".$novo."'";
 		retornaJSON(pegaDados($sql));
 	break;
-	case "excluirAtlas":
+	/*
+	Valor: EXCLUIRATLAS
+	
+	Exclui um Atlas
+	
+	Parametros:
+
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRATLAS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$tabela = "i3geoadmin_atlas";
@@ -89,7 +282,20 @@ switch ($funcao)
 		retornaJSON("erro");	
 		exit;
 	break;
-	case "excluirPrancha":
+	/*
+	Valor: EXCLUIRPRANCHA
+	
+	Exclui uma prancha
+	
+	Parametros:
+
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "EXCLUIRPRANCHA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$tabela = "i3geoadmin_atlasp";	
@@ -100,20 +306,50 @@ switch ($funcao)
 		retornaJSON("erro");	
 		exit;
 	break;
-	case "excluirTema":
+	/*
+	Valor: EXCLUIRTEMA
+	
+	Exclui um tema de uma prancha
+	
+	Parametros:
+
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "EXCLUIRTEMA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(excluirTema());
 		exit;
 	break;
-	case "movimentaNo":
+	/*
+	Valor: MOVIMENTANO
+	
+	Muda a ordem de um nó
+	
+	Parametros:
+	
+	tipo - tipo de nó tema|prancha|atlas
+	
+	movimento - sobe|desce
+	
+	id- id do nó
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "MOVIMENTANO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		movimentaNo();	
 		retornaJSON("ok");
 		exit;
 	break;
-	case "importarXmlAtlas":
+	case "IMPORTARXMLATLAS":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(importarXmlAtlas());

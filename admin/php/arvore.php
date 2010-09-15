@@ -1,10 +1,18 @@
 <?php
 /*
-Title: Arvore
+Title: arvore.php
 
-About: Licença
+Funções utilizadas pelo editor da árvore de menus para processar os nós
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+É utilizado nas funções em AJAX da interface de edição da árvore de menus
+
+Processa os relacionamentos entre menus, grupos, subgrupos e temas necessário para a hierarquisação dos nós da árvore
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,9 +30,15 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/arvore.php
+Arquivo:
 
-19/6/2007
+i3geo/admin/php/arvore.php
+
+Parametros:
+
+O parâmetro principal é "funcao", que define qual operação será executada, por exemplo, arvore.php?funcao=pegaGrupos.
+
+Cada operação possuí seus próprios parâmetros, que devem ser enviados também na requisição da operação.
 
 */
 require_once("admin.php");
@@ -34,9 +48,27 @@ if($idioma == "")
 {$idioma = "pt";}
 error_reporting(0);
 //faz a busca da função que deve ser executada
-switch ($funcao)
+switch (strtoupper($funcao))
 {
-	case "pegaGrupos":
+	/*
+	Note:
+	
+	Valores que o parâmetro &funcao pode receber. Os parâmetros devem ser enviados na requisição em AJAX.
+	*/
+	/*
+	Valor: PEGAGRUPOS
+	
+	Grupos de um menu
+	
+	Parametro:
+	
+	id_menu {string}
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGAGRUPOS":
 		require_once("classe_arvore.php");
 		$arvore = new Arvore($locaplic,$idioma);
 		$grupos = $arvore->pegaGruposMenu($id_menu);
@@ -44,7 +76,22 @@ switch ($funcao)
 		retornaJSON($grupos);
 		exit;
 	break;
-	case "pegaSubGrupos":
+	/*
+	Valor: PEGASUBGRUPOS
+	
+	Subgrupos de um grupo
+	
+	Parametros:
+	
+	id_menu {string}
+	
+	id_n1 {string} - id do gupo
+	
+	Retorno:
+	
+	[JSON}
+	*/
+	case "PEGASUBGRUPOS":
 		require_once("classe_arvore.php");
 		$arvore = new Arvore($locaplic,$idioma);
 		$sgrupos = $arvore->pegaSubgruposGrupo($id_menu,$id_n1);
@@ -52,7 +99,20 @@ switch ($funcao)
 		retornaJSON($sgrupos);
 		exit;		
 	break;
-	case "pegaTemas":
+	/*
+	Valor: PEGATEMAS
+	
+	Temas de um subgrupo
+	
+	Parametro:
+	
+	id_n2 {string} - id do subgupo
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGATEMAS":
 		require_once("classe_arvore.php");
 		$arvore = new Arvore($locaplic,$idioma);
 		$temas = $arvore->pegaTemasSubGrupo($id_n2);
@@ -60,26 +120,84 @@ switch ($funcao)
 		retornaJSON($temas);
 		exit;
 	break;
-
-	case "pegaDadosGrupo":
+	/*
+	Valor: PEGADADOSGRUPO
+	
+	Dados de um grupo
+	
+	Parametro:
+	
+	id {string} - id do grupo
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "PEGADADOSGRUPO":
 		retornaJSON(pegaDados("select * from i3geoadmin_n1 LEFT JOIN i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id"));
 		exit;
 	break;
-	case "pegaDadosSubGrupo":
+	/*
+	Valor: PEGADADOSSUBGRUPO
+	
+	Dados de um subgrupo
+	
+	Parametro:
+	
+	id {string} - id do subgrupo
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOSSUBGRUPO":
 		retornaJSON(pegaDados("select * from i3geoadmin_n2 LEFT JOIN i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id"));
 		exit;
 	break;
-	case "pegaDadosTema":
+	/*
+	Valor: PEGADADOSTEMA
+	
+	Dados de um tema
+	
+	Parametro:
+	
+	id {string} - id do tema
+	
+	Retorno:
+	
+	{JSON}
+	*/		
+	case "PEGADADOSTEMA":
 		retornaJSON(pegaDados("select * from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = $id"));
 		exit;
 	break;
-	case "pegaDadosRaiz":
+	/*
+	Valor: PEGADADOSRAIZ
+	
+	Dados dos temas registrados em uma raiz (grupo ou menu)
+	
+	Parametro:
+	
+	id {string} - id da raiz
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "PEGADADOSRAIZ":
 		retornaJSON(pegaDados("select * from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON i3geoadmin_raiz.id_tema = i3geoadmin_temas.id_tema where id_raiz = $id"));
 		exit;
 	break;
-
-
-	case "adicionarTemaRaiz":
+	/*
+	Valor: ADICIONARTEMARAIZ
+	
+	Adiciona tema na raiz de um nó menu
+	
+	Retorno:
+	
+	{JSON}
+	*/		
+	case "ADICIONARTEMARAIZ":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_nivel = 0;
@@ -93,7 +211,20 @@ switch ($funcao)
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
 	break;
-	case "adicionarTemaRaizGrupo":
+	/*
+	Valor: ADICIONARTEMARAIZGRUPO
+	
+	Adiciona tema na raiz de um nó grupo
+	
+	Parametros:
+	
+	id_n1 - id do grupo
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ADICIONARTEMARAIZGRUPO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_nivel = $id_n1;
@@ -106,8 +237,21 @@ switch ($funcao)
 		$raiz = pegaDados("select i3geoadmin_raiz.id_raiz,$coluna as nome_tema from i3geoadmin_raiz LEFT JOIN i3geoadmin_temas ON  i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where i3geoadmin_raiz.id_raiz = '$id_raiz'");
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>array()));
 		exit;
-	break;	
-	case "adicionarGrupo":
+	break;
+	/*
+	Valor: ADICIONARGRUPO
+	
+	Adiciona um novo grupo em um nó
+	
+	Parametros:
+	
+	id_menu - id do menu
+	
+	Retorno:
+	
+	{JSON}
+	*/	
+	case "ADICIONARGRUPO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n1 = alteraN1();
@@ -119,8 +263,21 @@ switch ($funcao)
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"grupos"=>$grupos));
 		exit;
-	break;	
-	case "adicionarSubGrupo":
+	break;
+	/*
+	Valor: ADICIONARSUBGRUPO
+	
+	Adiciona um novo subgrupo em um nó
+	
+	Parametros:
+	
+	id_n2 - id do nó
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ADICIONARSUBGRUPO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n2 = alteraN2();
@@ -132,8 +289,21 @@ switch ($funcao)
 		$raiz = array();
 		retornaJSON(array("raiz"=>$raiz,"subgrupos"=>$subgrupos));
 		exit;
-	break;	
-	case "adicionarTema":
+	break;
+	/*
+	Valor: ADICIONARTEMA
+	
+	Adiciona um novo tema em um nó de um subgrupo
+	
+	Parametros:
+	
+	id_n3 - id do nó
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ADICIONARTEMA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		$id_n3 = alteraN3();
@@ -146,38 +316,162 @@ switch ($funcao)
 		retornaJSON($temas);
 		exit;
 	break;	
-	case "alterarGrupo":
+	/*
+	Valor: ALTERARGRUPO
+	
+	Altera o registro de um grupo
+	
+	Parametros:
+	
+	publicado - status do grupo
+	
+	n1_perfil
+	
+	id_grupo
+	
+	id - código do nó (id_n1)
+	
+	id_menu
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARGRUPO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraN1());
 		exit;
 	break;
-	case "alterarSubGrupo":
+	/*
+	Valor: ALTERARSUBGRUPO
+	
+	Altera o registro de um subgrupo
+	
+	Parametros:
+	
+	publicado - status do subgrupo
+	
+	n2_perfil
+	
+	id_subgrupo
+	
+	id - código do nó (id_n2)
+	
+	id_n1 - código do nó (id_n1)
+		
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARSUBGRUPO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraN2());
 		exit;
 	break;
-	case "alterarTema":
+	/*
+	Valor: ALTERARTEMA
+	
+	Altera o registro de um tema
+	
+	Parametros:
+	
+	publicado - status do tema
+	
+	n3_perfil
+	
+	id_tema
+	
+	id - código do nó (id_n3)
+	
+	id_n2 - código do nó (id_n2)
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARTEMA":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alteraN3());
 		exit;
 	break;
-	case "alterarRaiz":
+	/*
+	Valor: ALTERARRAIZ
+	
+	Altera o registro de um tema na raiz de um menu ou grupo
+	
+	Parametros:
+	
+	publicado - status do tema
+	
+	perfil
+	
+	id_tema
+	
+	id_menu
+	
+	id - código do nó (id_raiz)
+	
+	id_nivel
+	
+	nivel - nível da raiz
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "ALTERARRAIZ":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		retornaJSON(alterarRaiz());
 		exit;
 	break;
-	case "movimentaNo":
+	/*
+	Valor: MOVIMENTANO
+	
+	Muda a ordem de um nó
+	
+	Parametros:
+	
+	tipo - tipo de nó grupo|subgrupo|tema|raizgrupo
+	
+	movimento - sobe|desce
+	
+	id- id do nó
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "MOVIMENTANO":
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		movimentaNo();	
 		retornaJSON("ok");
 		exit;
 	break;
-	case "excluir";
+	/*
+	Valor: EXCLUIR
+	
+	Exclui um registro
+	
+	<exclui>
+	
+	Parametros:
+	
+	tabela
+	
+	coluna
+	
+	id
+	
+	Retorno:
+	
+	{JSON}
+	*/
+	case "EXCLUIR";
 		if(verificaEditores($editores) == "nao")
 		{echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php podem acessar o sistema de administracao.";exit;}
 		if($tabela == "i3geoadmin_raiz")
@@ -213,8 +507,6 @@ switch ($funcao)
 		break;
 }
 /*
-Function: alteraN3
-
 Altera o registro de um nível 3 (temas)
 */
 function alteraN3()
@@ -248,8 +540,6 @@ function alteraN3()
 	{return "Error!: " . $e->getMessage();}
 }
 /*
-Function: alteraN2
-
 Altera o registro de um nível 2
 */
 function alteraN2()
@@ -285,8 +575,6 @@ function alteraN2()
 	}
 }
 /*
-Function: alteraN1
-
 Altera o registro de um nível 1 (grupos)
 */
 function alteraN1()
@@ -322,8 +610,6 @@ function alteraN1()
 	}
 }
 /*
-Function: alterarRaiz
-
 Altera o registro na raiz de um nível
 */
 function alterarRaiz()
@@ -427,5 +713,4 @@ function movimentaNo()
    	$dbh = null;
    	return "ok";
 }
-
 ?>

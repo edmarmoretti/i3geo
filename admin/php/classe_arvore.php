@@ -1,4 +1,42 @@
 <?php
+/*
+Title: classe_arvore.php
+
+Funções para montagem da árvore de temas
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+
+Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
+Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
+
+Este programa é software livre; você pode redistribuí-lo
+e/ou modificá-lo sob os termos da Licença Pública Geral
+GNU conforme publicada pela Free Software Foundation;
+tanto a versão 2 da Licença.
+Este programa é distribuído na expectativa de que seja útil,
+porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
+de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
+Consulte a Licença Pública Geral do GNU para mais detalhes.
+Você deve ter recebido uma cópia da Licença Pública Geral do
+GNU junto com este programa; se não, escreva para a
+Free Software Foundation, Inc., no endereço
+59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
+
+Arquivo:
+
+i3geo/admin/php/classe_arvore.php
+*/
+/*
+Classe: Arvore
+
+Classe utilizada para compor a árvore de temas ou obter dados específicos da árvore.
+
+É utilizada por várias operações do i3Geo, principalmente pela <classe_menutemas>
+*/
 class Arvore
 {
 	protected $locaplic;
@@ -14,6 +52,17 @@ class Arvore
 	//public $sql_temas = "select * from i3geoadmin_temas ";
 	//temas de um subgrupo
 	//public $sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from i3geoadmin_n3 LEFT JOIN i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
+/*
+Function: __construct
+
+Cria um objeto Arvore 
+
+Parametros:
+
+locaplic {string} - localização do i3geo no sistema de arquivos
+
+idioma {string} - default = "pt"
+*/ 
 	function __construct($locaplic,$idioma="pt")
 	{
 		$this->idioma = $idioma;
@@ -65,7 +114,19 @@ class Arvore
 		$this->dbh = null;
 		$this->dbhw = null;
 	}
-	//pega a lista de menus
+/*
+Function: pegaListaDeMenus
+
+Retorna a lista de menus
+
+Parametros:
+
+perfil {string} - considera apenas esse perfil
+
+Return:
+
+{array}
+*/
 	function pegaListaDeMenus($perfil)
 	{
 		if($this->idioma == "pt")
@@ -98,7 +159,21 @@ class Arvore
 		}
 		return $resultado;
 	}
-	//procura um tema tendo como base uma palavra.
+/*
+Function: procuraTemas
+
+Localiza temas conforme uma palavra de busca
+
+Parametros:
+
+procurar {string} - palavra de busca
+
+perfil {string} - considera apenas esse perfil
+
+Return:
+
+{array}
+*/
 	function procuraTemas ($procurar,$perfil)
 	{
 		if($procurar != "")
@@ -205,36 +280,116 @@ class Arvore
 		}
 		return $final;
 	}
-	//pega os grupos de um menu específico e os temas na raiz do menu
+/*
+Function: pegaGruposMenu
+
+Retorna a lista de grupos de um menu
+
+Parametros:
+
+id_menu {string}
+
+Return:
+
+{array}
+*/	
 	function pegaGruposMenu($id_menu)
 	{
 		$grupos = $this->execSQL($this->sql_grupos."where ".$this->pubsql." id_menu='$id_menu' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 order by ordem");
 		return array("raiz"=>$raiz,"grupos"=>$grupos);		
 	}
-	//pega os subgrupos de um grupo e os temas na raiz de um grupo
+/*
+Function: pegaSubgruposGrupo
+
+Retorna a lista de subgrupos de um grupo
+
+Parametros:
+
+id_menu {string}
+
+id_n1 {string} - id do grupo
+
+Return:
+
+{array}
+*/
 	function pegaSubgruposGrupo($id_menu,$id_n1)
 	{
 		$subgrupos = $this->execSQL($this->sql_subgrupos."where ".$this->pubsql." i3geoadmin_n2.id_n1='$id_n1' order by ordem");
 		$raiz = $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 		return array("raiz"=>$raiz,"subgrupos"=>$subgrupos);		
 	}
-	//pega os temas na raiz de um grupo
+/*
+Function: pegaTemasRaizGrupo
+
+Retorna a lista de temas da raiz de um grupo
+
+Parametros:
+
+id_menu {string}
+
+id_n1 {string} - id do grupo
+
+Return:
+
+{array}
+*/
 	function pegaTemasRaizGrupo($id_menu,$id_n1)
 	{
 		return $this->execSQL($this->sql_temasraiz."where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
 	}
-	//pega os dados de um tema
+/*
+Function: pegaTema
+
+Retorna os dados de um tema
+
+Parametros:
+
+id_tema {string}
+
+Return:
+
+{array}
+*/
 	function pegaTema($id_tema)
 	{
 		return $this->execSQL($this->sql_temas."where id_tema = '$id_tema' ");
 	}
-	//pega os temas de um subgrupo
+/*
+Function: pegaTemasSubGrupo
+
+Retorna os temas de um subgrupo
+
+Parametros:
+
+id_n2 {string} - id do subgrupo
+
+Return:
+
+{array}
+*/
 	function pegaTemasSubGrupo($id_n2)
 	{
 		return $this->execSQL($this->sql_temasSubgrupo."where ".$this->pubsql." i3geoadmin_n3.id_n2='$id_n2' order by ordem");
 	}
-	//formata os dados com grupos e temas na raiz do menu
+/*
+Function: formataGruposMenu
+
+Retorna os grupos e temas na raiz de um menu, formatados no padrão da árvore
+
+Parametros:
+
+id_menu {string}
+
+perfil {string}
+
+listasgrupos {string} - sim|nao
+
+Return:
+
+{array}
+*/
 	function formataGruposMenu ($id_menu,$perfil,$listasgrupos)
 	{
 		//error_reporting(E_ALL);
@@ -303,7 +458,23 @@ class Arvore
 		$grupos[] = array("sistemas"=>"");
 		return($grupos);		
 	}
-	//formata os dados com subgrupos de um grupo e temas na raiz do grupo
+/*
+Function: formataSubgruposGrupo
+
+Retorna os subgrupos e temas na raiz de um grupo, formatados no padrão da árvore
+
+Parametros:
+
+id_menu {string}
+
+id_n1 {string} - id do grupo
+
+perfil {string}
+
+Return:
+
+{array}
+*/
 	function formataSubgruposGrupo ($id_menu,$id_n1,$perfil)
 	{
 		$dados = $this->pegaSubgruposGrupo($id_menu,$id_n1);
@@ -339,7 +510,21 @@ class Arvore
 		}
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temasraiz));
 	}
-	//formata os temas de um subgrupo
+/*
+Function: formataTemasSubgrupo
+
+Retorna os temas de um subgrupo, formatados no padrão da árvore
+
+Parametros:
+
+id_n2 {string} - id do subgrupo
+
+perfil {string}
+
+Return:
+
+{array}
+*/
 	function formataTemasSubgrupo($id_n2,$perfil)
 	{
 		$dados = $this->pegaTemasSubGrupo($id_n2);
@@ -353,7 +538,21 @@ class Arvore
 		}
 		return $temas;
 	}
-	//formata os dados de um tema
+/*
+Function: formataTema
+
+Retorna os dados de um tema, formatados no padrão da árvore
+
+Parametros:
+
+id_tema {string}
+
+publicado {string} - SIM|NAO valor do índice "publicado" que será incluído no array de retorno
+
+Return:
+
+{array}
+*/
 	function formataTema($id_tema,$publicado="SIM")
 	{
 		$recordset = $this->pegaTema($id_tema);
@@ -374,7 +573,19 @@ class Arvore
 		{$kmz = "sim";}
 		return array("publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);		
 	}
-	//executa o sql
+/*
+Function: execSQL
+
+Executa um SQL no banco de administração
+
+Parametros:
+
+sql {string}
+
+Return:
+
+{array}
+*/
 	function execSQL($sql)
 	{
     	//echo "<br>".$sql;
@@ -382,6 +593,9 @@ class Arvore
 		$q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
     	return $q->fetchAll();
 	}
+/*
+Verifica se uma string ocorre em um array
+*/	
 	function verificaOcorrencia($procurar,$em)
 	{
 		if(count($em) == 1 && $em[0] == "")

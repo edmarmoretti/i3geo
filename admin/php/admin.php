@@ -1,10 +1,16 @@
 <?php
 /*
-Title: Funções gerais
+Title: Funções de uso geral
 
-About: Licença
+Funções utilizadas por outros programas do sistema de administração.
 
-I3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
+No início do programa é feita a inclusão do i3geo/ms_configura.php e i3geo/classesphp/funcoes_gerais.php
+
+Licenca:
+
+GPL2
+
+i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
 Direitos Autorais Reservados (c) 2006 Ministério do Meio Ambiente Brasil
 Desenvolvedor: Edmar Moretti edmar.moretti@mma.gov.br
@@ -22,11 +28,11 @@ GNU junto com este programa; se não, escreva para a
 Free Software Foundation, Inc., no endereço
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-File: i3geo/admin/mapfiles.php
+Arquivo:
 
-19/6/2007
-
+i3geo/admin/php/admin.php
 */
+
 if(!isset($locaplic))
 {
 	$locaplic = "";
@@ -57,66 +63,55 @@ include_once ($locaplic."/classesphp/funcoes_gerais.php");
 //verifica se o cliente pode editar
 //se funcao for verificaEditores vai para case específico
 //
-//if(isset($funcao) && $funcao != "verificaEditores")
-//{if(verificaEditores($editores) == "nao"){echo "Vc nao e um editor cadastrado. Apenas os editores definidos em i3geo/ms_configura.php (variavel \$editores) podem acessar o sistema de administracao.";exit;}}
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{
-	$mapfile = "geral1windows";
-}
+{$mapfile = "geral1windows";}
 else
-{
-	$mapfile = "geral1";
-}
-if(isset($funcao) && $funcao == "limpar")
-{
-	$tabelas = array("i3geoadmin_atlas","i3geoadmin_atlasp","i3geoadmin_atlast","i3geoadmin_grupos","i3geoadmin_identifica","i3geoadmin_mapas","i3geoadmin_menus","i3geoadmin_n1","i3geoadmin_n2","i3geoadmin_n3","i3geoadmin_raiz","i3geoadmin_sistemas","i3geoadmin_sistemasf","i3geoadmin_subgrupos","i3geoadmin_tags","i3geoadmin_temas","i3geoadmin_ws");
-	include("conexao.php");
-	foreach($tabelas as $t)
-	{
-    	$dbhw->query("DELETE from $t");
-	}
-    $dbhw = null;
-    $dbh = null;
-    exit;
-}
+{$mapfile = "geral1";}
+/*
+Function: retornaJSON
+
+Converte um array em um objeto do tipo JSON utilizando a biblioteca CPAINT
+
+Parametro:
+
+obj {array}
+
+Retorno:
+
+Imprime na saída a string JSON
+*/
 function retornaJSON($obj)
 {
 	global $locaplic;
-	//
-	//para os casos em que json não está habilitado
-	//
-	//if (!function_exists("json_encode"))
-	//{
-		include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
-		error_reporting(0);
-		$j = new Services_JSON();
-		$texto = $j->encode($obj);
-		if (!mb_detect_encoding($texto,"UTF-8",true))
-		$texto = utf8_encode($texto);
-		header("Content-type: text/ascii; charset=UTF-8");
-		header('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
-		header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-		header('Cache-Control: no-cache, must-revalidate');
-		header('Pragma: no-cache');
-		echo $texto;
-	/*
-	}
-	else
-	{
-		if(extension_loaded('zlib')){ob_start('ob_gzhandler');}
-		$texto = json_encode($obj);
-		if (mb_detect_encoding($texto,"UTF-8",false)!="UTF-8")
-		{
-			$texto = utf8_encode($texto);
-		}
-		//header("Content-type: application/ascii");
-		//header("Content-type: text/ascii; charset=UTF-8");
-		echo $texto;
-		if(extension_loaded('zlib')){ob_end_flush();}
-	}
-	*/
+	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
+	error_reporting(0);
+	$j = new Services_JSON();
+	$texto = $j->encode($obj);
+	if (!mb_detect_encoding($texto,"UTF-8",true))
+	$texto = utf8_encode($texto);
+	header("Content-type: text/ascii; charset=UTF-8");
+	header('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
+	header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+	header('Cache-Control: no-cache, must-revalidate');
+	header('Pragma: no-cache');
+	echo $texto;
 	exit;
 }
+/*
+Function: verificaDuplicados
+
+Verifica se o resultado de um SQL retoena mais de um registro
+
+Parametros:
+
+sql {string} - sql que será executado
+
+dbh {PDO} - objeto PDO de conexão com o banco
+
+Retorno:
+
+{boolean}
+*/
 function verificaDuplicados($sql,$dbh)
 {
 	$res = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -130,13 +125,13 @@ Function: verificaEditores
 
 Verifica se o usuário atual está cadastrado como editor
 
-Parameters:
+Parametros:
 
-editores - array com a lista de editores obtido do ms_configura.php
+editores - array com a lista de editores
 
 Return:
 
-string - sim|nao
+{string} - sim|nao
 */
 function verificaEditores($editores)
 {
@@ -159,7 +154,17 @@ function verificaEditores($editores)
 /*
 Function: exclui
 
-Exlcui um registro de uma tabela
+Exlcui um registro de uma tabela do banco de dados de administração
+
+Utiliza variáveis globais para fazer a consulta ao banco
+
+Globals:
+
+tabela - nome da tabela
+
+coluna - nome da coluna
+
+id - valor
 */
 function exclui()
 {
@@ -181,6 +186,16 @@ function exclui()
 Function: pegaDados
 
 Executa um sql de busca de dados
+
+Parametros:
+
+sql {string} - sql que será executado
+
+locaplic {string} - endereço do i3Geo no sistema de arquivos
+
+Retorno:
+
+Array originada de fetchAll
 */
 function pegaDados($sql,$locaplic="")
 {
@@ -211,7 +226,19 @@ function pegaDados($sql,$locaplic="")
 /*
 Function: verificaFilhos
 
-Verifica se o pai tem filhos
+Verifica se o pai tem filhos nos componentes hierárquicos do banco de administração
+
+Por exemplo, pode-se verificar se um grupo possuí subgrupos, indicando-se como tabela i3geoadmin_grupos e o id do grupo
+
+Variáveis globais:
+
+tabela {string} - tabela do banco de dados
+
+id {string} - valor a ser procurado
+
+Retorno:
+
+{booleano}
 */
 function verificaFilhos()
 {
@@ -301,6 +328,21 @@ function verificaFilhos()
     	return "Error!: " . $e->getMessage();
 	}
 }
+/*
+Function: resolveAcentos
+
+Converte uma string para uma codificação de caracteres determinada
+
+Parametros:
+
+palavra {string} - palavra a ser convertida
+
+tipo {string} - ISO|UTF
+
+Retorno:
+
+{string}
+*/
 function resolveAcentos($palavra,$tipo)
 {
 	if($tipo == "ISO")
